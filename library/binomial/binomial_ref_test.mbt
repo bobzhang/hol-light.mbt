@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/binomial matches Library/binomial.ml" {
+  @binomial.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for

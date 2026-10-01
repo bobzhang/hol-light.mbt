@@ -899,3 +899,10 @@ pub fn parse_term(s : String) -> Term raise {
 pub fn pgenvar_counter() -> Int {
   pgen_counter.val
 }
+
+///|
+/// The theories loaded so far, in the order they were loaded (MoonBit
+/// initializes packages in its own order where the imports allow several).
+pub fn loaded_theories() -> Array[String] {
+  theory_traces.keys().collect()
+}

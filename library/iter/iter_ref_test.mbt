@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/iter matches Library/iter.ml" {
+  @iter.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for

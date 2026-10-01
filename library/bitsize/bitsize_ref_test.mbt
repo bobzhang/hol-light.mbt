@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/bitsize matches Library/bitsize.ml" {
+  @bitsize.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for

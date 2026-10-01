@@ -1,13 +1,20 @@
 // Library/pocklington.ml: the load steps are generated (pocklington.mbt).
 
 ///|
-fn init {
+let loaded : Ref[Bool] = Ref::{ val: false }
+
+///|
+/// Load Library/pocklington.ml (once), after the files it needs.
+pub fn load() -> Unit {
+  if loaded.val {
+    return
+  }
+  loaded.val = true
+  @iter.load()
+  @prime.load()
   @parser.begin_theory("Library/pocklington")
   load_steps() catch {
-    e =>
-      abort(
-        "HOL Light: loading Library/pocklington.ml failed: " + e.to_string(),
-      )
+    e => abort("HOL Light: loading Library/pocklington.ml failed: " + e.to_string())
   }
   @parser.end_theory()
 }

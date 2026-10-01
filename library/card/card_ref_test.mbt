@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/card matches Library/card.ml" {
+  @card.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for

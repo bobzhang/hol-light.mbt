@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/prime matches Library/prime.ml" {
+  @prime.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for

@@ -20,7 +20,7 @@ test "impconv matches impconv.ml" {
   for
     th in [
       "simp", "theorems", "ind_defs", "class", "trivia", "canon", "meson", "firstorder",
-      "quot", "impconv",
+      "metis", "thecops", "quot", "impconv",
     ] {
     log.show_theory_output(th)
   }

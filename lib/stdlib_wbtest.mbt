@@ -149,3 +149,28 @@ test "num hashes like OCaml" {
     content="-1",
   )
 }
+
+///|
+/// gp's factorint output (values from PARI/GP 2.x).
+test "gp factorint emulation" {
+  let f = (s : String) => gp_factorint(@bigint.BigInt::from_string(s))
+  inspect(f("12000000084"), content="[2, 2; 3, 1; 1000000007, 1]")
+  inspect(f("65535"), content="[3, 1; 5, 1; 17, 1; 257, 1]")
+  inspect(f("2"), content="Mat([2, 1])")
+  inspect(
+    f("1180591620717411303423"),
+    content="[3, 1; 11, 1; 31, 1; 43, 1; 71, 1; 127, 1; 281, 1; 86171, 1; 122921, 1]",
+  )
+  inspect(
+    sys_command(
+      "echo 'print(factorint(65537))  \n quit' | gp >/tmp/x.out 2>/dev/null",
+    ),
+    content="0",
+  )
+  inspect(string_of_file("/tmp/x.out"), content="Mat([65537, 1])\n")
+  sys_remove("/tmp/x.out") catch {
+    _ => ()
+  }
+  inspect(sys_file_exists("/tmp/x.out"), content="false")
+  inspect(sys_command("ls"), content="127")
+}

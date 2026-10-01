@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/rstc matches Library/rstc.ml" {
+  @rstc.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for

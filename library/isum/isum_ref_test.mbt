@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/isum matches Library/isum.ml" {
+  @isum.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for

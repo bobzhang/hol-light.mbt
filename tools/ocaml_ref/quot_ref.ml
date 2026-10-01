@@ -1,5 +1,5 @@
 (* Load-fidelity and behaviour test for quot.ml (translated by
-   tools/translator; metis.ml and thecops.ml are not loaded yet). Keep in
+   tools/translator). Keep in
    sync with quot/quot_ref_test.mbt. *)
 #use "bool.ml";;
 #use "drule.ml";;
@@ -13,6 +13,8 @@
 #use "canon.ml";;
 #use "meson.ml";;
 #use "firstorder.ml";;
+#use "metis.ml";;
+#use "thecops.ml";;
 start_trace ();;
 #use "quot.ml";;
 show_trace "quot";;

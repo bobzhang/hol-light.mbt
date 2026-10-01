@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/q matches Library/q.ml" {
+  @q.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for

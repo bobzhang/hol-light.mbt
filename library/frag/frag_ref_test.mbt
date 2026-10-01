@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/frag matches Library/frag.ml" {
+  @frag.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for

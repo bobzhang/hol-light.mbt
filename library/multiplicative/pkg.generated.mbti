@@ -1,0 +1,91 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/multiplicative"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn divisorsum_mobius() -> @kernel.Thm
+
+pub fn mobius() -> @kernel.Thm
+
+pub fn mobius_0() -> @kernel.Thm
+
+pub fn mobius_1() -> @kernel.Thm
+
+pub fn mobius_alt() -> @kernel.Thm
+
+pub fn mobius_inversion() -> @kernel.Thm
+
+pub fn mobius_mult() -> @kernel.Thm
+
+pub fn mobius_prime() -> @kernel.Thm
+
+pub fn mobius_primepow() -> @kernel.Thm
+
+pub fn multiplicative() -> @kernel.Thm
+
+pub fn multiplicative_1() -> @kernel.Thm
+
+pub fn multiplicative_const() -> @kernel.Thm
+
+pub fn multiplicative_convolution() -> @kernel.Thm
+
+pub fn multiplicative_delta() -> @kernel.Thm
+
+pub fn multiplicative_divisorsum() -> @kernel.Thm
+
+pub fn multiplicative_expand() -> @kernel.Thm
+
+pub fn multiplicative_gcd() -> @kernel.Thm
+
+pub fn multiplicative_id() -> @kernel.Thm
+
+pub fn multiplicative_ignorezero() -> @kernel.Thm
+
+pub fn multiplicative_phi() -> @kernel.Thm
+
+pub fn multiplicative_powersum() -> @kernel.Thm
+
+pub fn multiplicative_sigma() -> @kernel.Thm
+
+pub fn multiplicative_tau() -> @kernel.Thm
+
+pub fn multiplicative_unique() -> @kernel.Thm
+
+pub fn multiplicative_v1() -> @kernel.Thm
+
+pub fn phi_divisorsum() -> @kernel.Thm
+
+pub fn phi_expand() -> @kernel.Thm
+
+pub fn real_abs_mobius() -> @kernel.Thm
+
+pub fn real_multiplicative() -> @kernel.Thm
+
+pub fn real_multiplicative_const() -> @kernel.Thm
+
+pub fn real_multiplicative_convolution() -> @kernel.Thm
+
+pub fn real_multiplicative_delta() -> @kernel.Thm
+
+pub fn real_multiplicative_divisorsum() -> @kernel.Thm
+
+pub fn real_multiplicative_ignorezero() -> @kernel.Thm
+
+pub fn real_multiplicative_mobius() -> @kernel.Thm
+
+pub fn real_multiplicative_v1() -> @kernel.Thm
+
+pub fn sigma() -> @kernel.Thm
+
+pub fn tau() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

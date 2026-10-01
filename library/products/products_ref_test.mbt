@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/products matches Library/products.ml" {
+  @products.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for

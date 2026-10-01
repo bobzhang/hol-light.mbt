@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/permutations matches Library/permutations.ml" {
+  @permutations.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for

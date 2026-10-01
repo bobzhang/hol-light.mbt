@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/binary matches Library/binary.ml" {
+  @binary.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for

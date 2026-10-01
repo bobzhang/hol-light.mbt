@@ -1,5 +1,5 @@
 (* Load-fidelity and behaviour test for impconv.ml (translated by
-   tools/translator; metis.ml and thecops.ml are not loaded yet). Keep in
+   tools/translator). Keep in
    sync with impconv/impconv_ref_test.mbt. *)
 #use "bool.ml";;
 #use "drule.ml";;
@@ -13,6 +13,8 @@
 #use "canon.ml";;
 #use "meson.ml";;
 #use "firstorder.ml";;
+#use "metis.ml";;
+#use "thecops.ml";;
 #use "quot.ml";;
 start_trace ();;
 #use "impconv.ml";;

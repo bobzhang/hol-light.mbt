@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/agm matches Library/agm.ml" {
+  @agm.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for

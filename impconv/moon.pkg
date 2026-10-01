@@ -20,6 +20,10 @@ import {
   "bobzhang/hol_light/meson",
   "bobzhang/hol_light/firstorder",
   "bobzhang/hol_light/quot",
+  "bobzhang/hol_light/omap",
+  "bobzhang/hol_light/oset",
+  "bobzhang/hol_light/metis",
+  "bobzhang/hol_light/thecops",
   "moonbitlang/core/list",
 }
 

@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/floor matches Library/floor.ml" {
+  @floor.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for

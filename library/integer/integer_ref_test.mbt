@@ -7,6 +7,7 @@ using @testkit {stm, sthm}
 
 ///|
 test "Library/integer matches Library/integer.ml" {
+  @integer.load()
   let log = @testkit.Log::new()
   log.capture_reports()
   for
