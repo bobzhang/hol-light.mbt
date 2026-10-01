@@ -35,7 +35,9 @@ fn step_1() -> Unit raise {
     @tactics.then_tac(
       @tactics.gen_tac,
       @simp.gen_rewrite_tac(
-        (x11 : (@kernel.Term) -> @kernel.Thm raise) => {
+        fn(
+          x11 : (@kernel.Term) -> @kernel.Thm raise,
+        ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
           (fn(
             x5 : (@kernel.Term) -> @kernel.Thm raise,
           ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -84,17 +86,19 @@ fn step_1() -> Unit raise {
         fn(x18 : @kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise {
           let wth = x18
           let wtm = @lib.repeat(
-            (x20 : @kernel.Term) => {
-              ((x19 : (@kernel.Term, @kernel.Term)) => x19.1)(
-                @basics.dest_forall(x20),
-              )
+            fn(x20 : @kernel.Term) -> @kernel.Term raise {
+              (fn(x19 : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
+                x19.1
+              })(@basics.dest_forall(x20))
             },
             @kernel.concl(wth),
           )
           let wfvs = @kernel.frees(wtm)
           let (hyps, con) = try {
             let t23 = @basics.dest_imp(wtm)
-            let t24 = ((x22 : @kernel.Term) => x22)(t23.1)
+            let t24 = (fn(x22 : @kernel.Term) -> @kernel.Term raise { x22 })(
+              t23.1,
+            )
             (
               (fn(x21 : @kernel.Term) -> @list.List[@kernel.Term] raise {
                 @basics.conjuncts(x21)
@@ -214,9 +218,11 @@ fn step_1() -> Unit raise {
                   let v_4 = x39
                   let t40 = @equal.lhand(v_4)
                   @lib.find(
-                    (x44 : @kernel.Thm) => {
-                      ((x42 : @kernel.Term) => {
-                        ((x41 : @kernel.Term) => t40 == x41)(@equal.lhand(x42))
+                    fn(x44 : @kernel.Thm) -> Bool raise {
+                      (fn(x42 : @kernel.Term) -> Bool raise {
+                        (fn(x41 : @kernel.Term) -> Bool raise { t40 == x41 })(
+                          @equal.lhand(x42),
+                        )
                       })(
                         (fn(x43 : @kernel.Thm) -> @kernel.Term raise {
                           @kernel.concl(x43)
@@ -243,7 +249,7 @@ fn step_1() -> Unit raise {
           let th4 = @lib.end_itlist(
             @bool.conj,
             @lib.map(
-              (x48 : @kernel.Term) => {
+              fn(x48 : @kernel.Term) -> @kernel.Thm raise {
                 (fn(
                   x46 : @kernel.Term,
                 ) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
@@ -329,12 +335,18 @@ fn step_2() -> Unit raise {
   ) raise) raise {
     let th_1 = x75
     @simp.gen_rewrite_tac(
-      (x77 : (@kernel.Term) -> @kernel.Thm raise) => x77,
+      fn(
+        x77 : (@kernel.Term) -> @kernel.Thm raise,
+      ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
+        x77
+      },
       @list.List([th_1]),
     )
   })
   let t74 = @simp.gen_rewrite_tac(
-    (x73 : (@kernel.Term) -> @kernel.Thm raise) => {
+    fn(
+      x73 : (@kernel.Term) -> @kernel.Thm raise,
+    ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       (fn(
         x67 : (@kernel.Term) -> @kernel.Thm raise,
       ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {

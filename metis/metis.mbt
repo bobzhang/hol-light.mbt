@@ -261,7 +261,7 @@ pub fn[TA, TB] sortmap(
         xs,
       )
       let nys = @lib.list_sort((x50, x51) => ncmp_l(cmp, x50, x51), nxs)
-      @lib.map((x53 : (TB, TA)) => x53.1, nys)
+      @lib.map(fn(x53 : (TB, TA)) -> TA raise { x53.1 }, nys)
     }
   }
 }
@@ -594,7 +594,7 @@ pub type Priority = Word
 ///|
 /// randomPriority
 fn step_4() -> Unit raise {
-  randompriority_c.set((x111 : Unit) => @lib.random_bits())
+  randompriority_c.set(fn(x111 : Unit) -> Int raise { @lib.random_bits() })
 }
 
 ///|
@@ -2895,7 +2895,13 @@ pub fn[TA, TB] equaldomain(
 ) -> Bool raise {
   let m1 = x419
   let m2 = x420
-  equal((x422 : TB) => (x421 : TB) => true, m1, m2)
+  equal(
+    fn(x422 : TB) -> ((TB) -> Bool raise) raise {
+      fn(x421 : TB) -> Bool raise { true }
+    },
+    m1,
+    m2,
+  )
 }
 
 ///|
@@ -5877,8 +5883,8 @@ pub type Name = String
 ///|
 /// compare
 fn step_6() -> Unit raise {
-  compare_v10_c.set((x935 : String) => {
-    (x936 : String) => @lib.compare(x935, x936)
+  compare_v10_c.set(fn(x935 : String) -> ((String) -> Int raise) raise {
+    fn(x936 : String) -> Int raise { @lib.compare(x935, x936) }
   })
 }
 
@@ -20674,7 +20680,11 @@ pub fn reconstruct(
       }
     }
     (InferenceType::Refl, Empty) =>
-      match findl_v7((x3036 : (Bool, (String, @list.List[Term]))) => true, cl) {
+      match
+        findl_v7(
+          fn(x3036 : (Bool, (String, @list.List[Term]))) -> Bool raise { true },
+          cl,
+        ) {
         Some(lit) => Inference1::Refl(destrefl_v2(lit))
         None => raise Bug::Bug("malformed Refl inference")
       }
@@ -22904,7 +22914,11 @@ pub(all) struct Fixed {
 ///|
 /// uselessFixedFunction
 fn step_141() -> Unit raise {
-  uselessfixedfunction_c.set((x3329 : Size) => (x3328 : @list.List[Int]) => None)
+  uselessfixedfunction_c.set(fn(
+    x3329 : Size,
+  ) -> ((@list.List[Int]) -> Int? raise) raise {
+    fn(x3328 : @list.List[Int]) -> Int? raise { None }
+  })
 }
 
 ///|
@@ -22923,7 +22937,11 @@ pub fn uselessfixedfunction(
 ///|
 /// uselessFixedRelation
 fn step_142() -> Unit raise {
-  uselessfixedrelation_c.set((x3331 : Size) => (x3330 : @list.List[Int]) => None)
+  uselessfixedrelation_c.set(fn(
+    x3331 : Size,
+  ) -> ((@list.List[Int]) -> Bool? raise) raise {
+    fn(x3330 : @list.List[Int]) -> Bool? raise { None }
+  })
 }
 
 ///|
@@ -28148,7 +28166,7 @@ pub fn[TA] finally(
 ) -> @list.List[TA] raise {
   let parm = x4114
   let l = x4115
-  @lib.map((x4116 : (Int, TA)) => x4116.1, fifoize(parm)(l))
+  @lib.map(fn(x4116 : (Int, TA)) -> TA raise { x4116.1 }, fifoize(parm)(l))
 }
 
 ///|
@@ -29522,7 +29540,11 @@ pub fn[TA] issubsumed(
   let cl = x4284
   is_some(
     subsumes(
-      (x4285 : (@oset.T[(Bool, (String, @list.List[Term]))], Subst, TA)) => true,
+      fn(
+        x4285 : (@oset.T[(Bool, (String, @list.List[Term]))], Subst, TA),
+      ) -> Bool raise {
+        true
+      },
       subs,
       cl,
     ),
@@ -29539,7 +29561,11 @@ pub fn[TA] isstrictlysubsumed(
   let cl = x4287
   is_some(
     strictlysubsumes(
-      (x4288 : (@oset.T[(Bool, (String, @list.List[Term]))], Subst, TA)) => true,
+      fn(
+        x4288 : (@oset.T[(Bool, (String, @list.List[Term]))], Subst, TA),
+      ) -> Bool raise {
+        true
+      },
       subs,
       cl,
     ),
@@ -29558,7 +29584,9 @@ pub fn clausesubsumes(
   let lits = clausesym(tolist_v16(cl))
   match
     genclausesubsumes(
-      (x4291 : (@oset.T[(Bool, (String, @list.List[Term]))], Subst, Unit)) => {
+      fn(
+        x4291 : (@oset.T[(Bool, (String, @list.List[Term]))], Subst, Unit),
+      ) -> Bool raise {
         true
       },
       cl_p,
@@ -29622,7 +29650,7 @@ pub(all) struct Kbo {
 ///|
 /// uniformWeight
 fn step_207() -> Unit raise {
-  uniformweight_c.set((x4300 : (String, Int)) => 1)
+  uniformweight_c.set(fn(x4300 : (String, Int)) -> Int raise { 1 })
 }
 
 ///|
@@ -32101,7 +32129,9 @@ pub fn islargerliteral(
         let lits = x4662
         match orderliterals {
           LiteralOrder::No_literal_order =>
-            (x4664 : (Bool, (String, @list.List[Term]))) => true
+            fn(x4664 : (Bool, (String, @list.List[Term]))) -> Bool raise {
+              true
+            }
           LiteralOrder::Unsigned_literal_order => {
             let tms = foldl_v16(fn(
               x4667 : ((Bool, (String, @list.List[Term])), @list.List[Term]),
@@ -32116,10 +32146,15 @@ pub fn islargerliteral(
           LiteralOrder::Positive_literal_order =>
             match
               findl_v7(
-                (x4669 : (Bool, (String, @list.List[Term]))) => true,
+                fn(x4669 : (Bool, (String, @list.List[Term]))) -> Bool raise {
+                  true
+                },
                 lits,
               ) {
-              None => (x4670 : (Bool, (String, @list.List[Term]))) => true
+              None =>
+                fn(x4670 : (Bool, (String, @list.List[Term]))) -> Bool raise {
+                  true
+                }
               Some((pol, _)) => {
                 let addlit : (
                   ((Bool, (String, @list.List[Term])), @list.List[Term]),
@@ -33943,7 +33978,7 @@ pub fn perturbmodel(
   let vm = x4869
   let cls = x4870
   if null(cls) {
-    (x4872 : Int) => ()
+    fn(x4872 : Int) -> Unit raise { () }
   } else {
     let vn = Size::{ size: msize(vm), }
     let perturbclause_1 : (
@@ -34688,8 +34723,10 @@ pub fn env_of_preterm(
 ///|
 /// env_of_th
 fn step_226() -> Unit raise {
-  env_of_th_c.set((x4957 : @kernel.Thm) => {
-    ((x4955 : @kernel.Term) => {
+  env_of_th_c.set(fn(
+    x4957 : @kernel.Thm,
+  ) -> @list.List[(String, @preterm.Pretype)] raise {
+    (fn(x4955 : @kernel.Term) -> @list.List[(String, @preterm.Pretype)] raise {
       env_of_preterm(
         (fn(x4954 : @kernel.Term) -> @preterm.Preterm raise {
           @preterm.preterm_of_term(x4954)
@@ -34719,7 +34756,9 @@ pub fn env_of_th(
 ///|
 /// env_of_ths
 fn step_227() -> Unit raise {
-  env_of_ths_c.set((x4960 : @list.List[@kernel.Thm]) => {
+  env_of_ths_c.set(fn(
+    x4960 : @list.List[@kernel.Thm],
+  ) -> @list.List[(String, @preterm.Pretype)] raise {
     (fn(
       x4958 : @list.List[@list.List[(String, @preterm.Pretype)]],
     ) -> @list.List[(String, @preterm.Pretype)] raise {
@@ -34788,12 +34827,12 @@ fn step_228() -> Unit raise {
 ///|
 /// preterm_of_const
 fn step_229() -> Unit raise {
-  preterm_of_const_c.set((x4964 : String) => {
-    ((x4962 : Int) => {
+  preterm_of_const_c.set(fn(x4964 : String) -> @preterm.Preterm raise {
+    (fn(x4962 : Int) -> @preterm.Preterm raise {
       (fn(x4961 : @kernel.Term) -> @preterm.Preterm raise {
         @preterm.preterm_of_term(x4961)
       })(hol_of_const(x4962))
-    })(((x4963 : String) => @lib.int_of_string(x4963))(x4964))
+    })((fn(x4963 : String) -> Int raise { @lib.int_of_string(x4963) })(x4964))
   })
 }
 
@@ -34879,8 +34918,8 @@ pub fn typecheck(
   x4976 : @list.List[(String, @preterm.Pretype)],
 ) -> ((@preterm.Preterm) -> @kernel.Term raise) raise {
   let env = x4976
-  (x4980 : @preterm.Preterm) => {
-    ((x4979 : @preterm.Preterm) => {
+  fn(x4980 : @preterm.Preterm) -> @kernel.Term raise {
+    (fn(x4979 : @preterm.Preterm) -> @kernel.Term raise {
       @preterm.term_of_preterm(
         ((x4978 : @preterm.Preterm) => @preterm.retypecheck(env, x4978))(x4979),
       )
@@ -34915,7 +34954,7 @@ pub fn hol_of_term(
 ) -> ((Term) -> @kernel.Term raise) raise {
   let env = x4985
   let t4987 = typecheck(env)
-  (x4988 : Term) => t4987(preterm_of_fol_term(x4988))
+  fn(x4988 : Term) -> @kernel.Term raise { t4987(preterm_of_fol_term(x4988)) }
 }
 
 ///|
@@ -34925,7 +34964,7 @@ pub fn hol_of_atom(
 ) -> (((String, @list.List[Term])) -> @kernel.Term raise) raise {
   let env = x4989
   let t4992 = typecheck(env)
-  (x4993 : (String, @list.List[Term])) => {
+  fn(x4993 : (String, @list.List[Term])) -> @kernel.Term raise {
     t4992(
       (fn(x4991 : (String, @list.List[Term])) -> @preterm.Preterm raise {
         preterm_of_atom(x4991.0, x4991.1)
@@ -34941,7 +34980,7 @@ pub fn hol_of_literal(
 ) -> (((Bool, (String, @list.List[Term]))) -> @kernel.Term raise) raise {
   let env = x4994
   let t4997 = typecheck(env)
-  (x4998 : (Bool, (String, @list.List[Term]))) => {
+  fn(x4998 : (Bool, (String, @list.List[Term]))) -> @kernel.Term raise {
     t4997(
       (fn(
         x4996 : (Bool, (String, @list.List[Term])),
@@ -34959,8 +34998,12 @@ pub fn hol_of_clause(
 ) -> ((@list.List[(Bool, (String, @list.List[Term]))]) -> @kernel.Term raise) raise {
   let env = x4999
   let t5001 = typecheck(env)
-  (x5005 : @list.List[(Bool, (String, @list.List[Term]))]) => {
-    ((x5002 : @list.List[@preterm.Preterm]) => t5001(list_mk_disjp(x5002)))(
+  fn(
+    x5005 : @list.List[(Bool, (String, @list.List[Term]))],
+  ) -> @kernel.Term raise {
+    (fn(x5002 : @list.List[@preterm.Preterm]) -> @kernel.Term raise {
+      t5001(list_mk_disjp(x5002))
+    })(
       ((x5004 : @list.List[(Bool, (String, @list.List[Term]))]) => {
         @lib.map(
           fn(
@@ -34981,8 +35024,12 @@ pub fn hol_of_substitution(
   x5006 : @list.List[(String, @preterm.Pretype)],
 ) -> ((@list.List[(Term, Term)]) -> @list.List[(@kernel.Term, @kernel.Term)] raise) raise {
   let env = x5006
-  (x5013 : @list.List[(Term, Term)]) => {
-    ((x5010 : @list.List[@preterm.Preterm]) => {
+  fn(
+    x5013 : @list.List[(Term, Term)],
+  ) -> @list.List[(@kernel.Term, @kernel.Term)] raise {
+    (fn(
+      x5010 : @list.List[@preterm.Preterm],
+    ) -> @list.List[(@kernel.Term, @kernel.Term)] raise {
       ((x5008 : @list.List[@kernel.Term]) => @lib.map(@kernel.dest_eq, x5008))(
         ((x5009 : @list.List[@preterm.Preterm]) => typecheckl(env, x5009))(
           x5010,
@@ -35468,7 +35515,7 @@ pub fn[TA, TB, TC] match_elems(
                   (
                     xs,
                     @lib.list_filter(
-                      (x5068 : TB) => !physical_equal(y, x5068),
+                      fn(x5068 : TB) -> Bool raise { !physical_equal(y, x5068) },
                       ys,
                     ),
                   ),
@@ -35532,8 +35579,12 @@ pub fn match_fo_ho_clause(
 ///|
 /// string_of_tminst
 fn step_233() -> Unit raise {
-  string_of_tminst_c.set((x5080 : @list.List[(@kernel.Term, @kernel.Term)]) => {
-    ((x5076 : @list.List[String]) => @lib.string_concat(", ", x5076))(
+  string_of_tminst_c.set(fn(
+    x5080 : @list.List[(@kernel.Term, @kernel.Term)],
+  ) -> String raise {
+    (fn(x5076 : @list.List[String]) -> String raise {
+      @lib.string_concat(", ", x5076)
+    })(
       ((x5079 : @list.List[(@kernel.Term, @kernel.Term)]) => {
         @lib.map(
           fn(x5077 : (@kernel.Term, @kernel.Term)) -> String raise {
@@ -35564,10 +35615,12 @@ pub fn string_of_tminst(
 ///|
 /// string_of_tyinst
 fn step_234() -> Unit raise {
-  string_of_tyinst_c.set((
+  string_of_tyinst_c.set(fn(
     x5085 : @list.List[(@kernel.HolType, @kernel.HolType)],
-  ) => {
-    ((x5081 : @list.List[String]) => @lib.string_concat(", ", x5081))(
+  ) -> String raise {
+    (fn(x5081 : @list.List[String]) -> String raise {
+      @lib.string_concat(", ", x5081)
+    })(
       ((x5084 : @list.List[(@kernel.HolType, @kernel.HolType)]) => {
         @lib.map(
           fn(x5082 : (@kernel.HolType, @kernel.HolType)) -> String raise {
@@ -35870,8 +35923,8 @@ pub fn hol_of_thm(
         @lib.striplist(@basics.dest_disj, @kernel.concl(th1_1)),
         x5118 => {
           @lib.list_filter(
-            (x5117 : @kernel.Term) => {
-              ((x5115 : Bool) => !x5115)(
+            fn(x5117 : @kernel.Term) -> Bool raise {
+              (fn(x5115 : Bool) -> Bool raise { !x5115 })(
                 (fn(x5116 : @kernel.Term) -> Bool raise {
                   @basics.is_neg(x5116)
                 })(x5117),
@@ -35892,7 +35945,7 @@ pub fn hol_of_thm(
       )
       if metisverb().val {
         @lib.do_list(
-          (x5123 : @kernel.Term) => {
+          fn(x5123 : @kernel.Term) -> Unit raise {
             ((x5122 : String) => {
               @pp.std_formatter.print_string("tm1: " + x5122 + "\n")
               @pp.std_formatter.print_flush()
@@ -35906,7 +35959,7 @@ pub fn hol_of_thm(
       }
       if metisverb().val {
         @lib.do_list(
-          (x5125 : @kernel.Term) => {
+          fn(x5125 : @kernel.Term) -> Unit raise {
             ((x5124 : String) => {
               @pp.std_formatter.print_string("tm2: " + x5124 + "\n")
               @pp.std_formatter.print_flush()
@@ -35965,7 +36018,11 @@ pub fn hol_of_thm(
       }
       let h = @lib.hd(cands)
       if @lib.forall(
-          (x5128 : @list.List[(@kernel.HolType, @kernel.HolType)]) => h == x5128,
+          fn(
+            x5128 : @list.List[(@kernel.HolType, @kernel.HolType)],
+          ) -> Bool raise {
+            h == x5128
+          },
           cands,
         ) {
         ()
@@ -36125,7 +36182,7 @@ pub fn hol_of_thm(
 ///|
 /// metis_name
 fn step_235() -> Unit raise {
-  metis_name_c.set((x5145 : Int) => @lib.string_of_int(x5145))
+  metis_name_c.set(fn(x5145 : Int) -> String raise { @lib.string_of_int(x5145) })
 }
 
 ///|
@@ -36528,22 +36585,163 @@ pub fn fol_prepare_tac(
                                 }),
                                 t5170,
                               ),
-                              (
+                              fn(
                                 x5181 : (
                                   @list.List[(String, @kernel.Thm)],
                                   @kernel.Term,
                                 ),
-                              ) => {
-                                ((
+                              ) -> (
+                                (
+                                  @list.List[@kernel.Term],
+                                  (
+                                    @list.List[(Int, @kernel.Term)],
+                                    @list.List[(@kernel.Term, @kernel.Term)],
+                                    @list.List[
+                                      (@kernel.HolType, @kernel.HolType),
+                                    ],
+                                  ),
+                                ),
+                                @list.List[
+                                  (
+                                    @list.List[(String, @kernel.Thm)],
+                                    @kernel.Term,
+                                  ),
+                                ],
+                                (
+                                  (
+                                    @list.List[(Int, @kernel.Term)],
+                                    @list.List[(@kernel.Term, @kernel.Term)],
+                                    @list.List[
+                                      (@kernel.HolType, @kernel.HolType),
+                                    ],
+                                  ),
+                                  @list.List[@kernel.Thm],
+                                ) -> @kernel.Thm raise,
+                              ) raise {
+                                (fn(
                                   x5180 : (
                                     @list.List[(String, @kernel.Thm)],
                                     @kernel.Term,
                                   ),
-                                ) => {
+                                ) -> ((
+                                  (
+                                    @list.List[(String, @kernel.Thm)],
+                                    @kernel.Term,
+                                  ),
+                                ) -> (
+                                  (
+                                    @list.List[@kernel.Term],
+                                    (
+                                      @list.List[(Int, @kernel.Term)],
+                                      @list.List[(@kernel.Term, @kernel.Term)],
+                                      @list.List[
+                                        (@kernel.HolType, @kernel.HolType),
+                                      ],
+                                    ),
+                                  ),
+                                  @list.List[
+                                    (
+                                      @list.List[(String, @kernel.Thm)],
+                                      @kernel.Term,
+                                    ),
+                                  ],
+                                  (
+                                    (
+                                      @list.List[(Int, @kernel.Term)],
+                                      @list.List[(@kernel.Term, @kernel.Term)],
+                                      @list.List[
+                                        (@kernel.HolType, @kernel.HolType),
+                                      ],
+                                    ),
+                                    @list.List[@kernel.Thm],
+                                  ) -> @kernel.Thm raise,
+                                ) raise) raise {
                                   ((x5178 : @list.List[(String, @kernel.Thm)]) => {
                                     @tactics.map_every(
-                                      (x5177 : (String, @kernel.Thm)) => {
-                                        ((x5175 : @kernel.Thm) => {
+                                      fn(
+                                        x5177 : (String, @kernel.Thm),
+                                      ) -> ((
+                                        (
+                                          @list.List[(String, @kernel.Thm)],
+                                          @kernel.Term,
+                                        ),
+                                      ) -> (
+                                        (
+                                          @list.List[@kernel.Term],
+                                          (
+                                            @list.List[(Int, @kernel.Term)],
+                                            @list.List[
+                                              (@kernel.Term, @kernel.Term),
+                                            ],
+                                            @list.List[
+                                              (@kernel.HolType, @kernel.HolType),
+                                            ],
+                                          ),
+                                        ),
+                                        @list.List[
+                                          (
+                                            @list.List[(String, @kernel.Thm)],
+                                            @kernel.Term,
+                                          ),
+                                        ],
+                                        (
+                                          (
+                                            @list.List[(Int, @kernel.Term)],
+                                            @list.List[
+                                              (@kernel.Term, @kernel.Term),
+                                            ],
+                                            @list.List[
+                                              (@kernel.HolType, @kernel.HolType),
+                                            ],
+                                          ),
+                                          @list.List[@kernel.Thm],
+                                        ) -> @kernel.Thm raise,
+                                      ) raise) raise {
+                                        (fn(
+                                          x5175 : @kernel.Thm,
+                                        ) -> ((
+                                          (
+                                            @list.List[(String, @kernel.Thm)],
+                                            @kernel.Term,
+                                          ),
+                                        ) -> (
+                                          (
+                                            @list.List[@kernel.Term],
+                                            (
+                                              @list.List[(Int, @kernel.Term)],
+                                              @list.List[
+                                                (@kernel.Term, @kernel.Term),
+                                              ],
+                                              @list.List[
+                                                (
+                                                  @kernel.HolType,
+                                                  @kernel.HolType,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          @list.List[
+                                            (
+                                              @list.List[(String, @kernel.Thm)],
+                                              @kernel.Term,
+                                            ),
+                                          ],
+                                          (
+                                            (
+                                              @list.List[(Int, @kernel.Term)],
+                                              @list.List[
+                                                (@kernel.Term, @kernel.Term),
+                                              ],
+                                              @list.List[
+                                                (
+                                                  @kernel.HolType,
+                                                  @kernel.HolType,
+                                                ),
+                                              ],
+                                            ),
+                                            @list.List[@kernel.Thm],
+                                          ) -> @kernel.Thm raise,
+                                        ) raise) raise {
                                           (fn(
                                             x5171 : @kernel.Term,
                                           ) -> ((
@@ -36655,7 +36853,9 @@ pub fn fol_prepare_tac(
                                             })(x5175),
                                           )
                                         })(
-                                          ((x5176 : (String, @kernel.Thm)) => {
+                                          (fn(
+                                            x5176 : (String, @kernel.Thm),
+                                          ) -> @kernel.Thm raise {
                                             x5176.1
                                           })(x5177),
                                         )
@@ -36663,24 +36863,46 @@ pub fn fol_prepare_tac(
                                       x5178,
                                     )
                                   })(
-                                    ((
+                                    (fn(
                                       x5179 : (
                                         @list.List[(String, @kernel.Thm)],
                                         @kernel.Term,
                                       ),
-                                    ) => x5179.0)(x5180),
+                                    ) -> @list.List[(String, @kernel.Thm)] raise {
+                                      x5179.0
+                                    })(x5180),
                                   )
                                 })(x5181)(x5181)
                               },
                             ),
                             @canon.select_elim_tac,
                           ),
-                          (
+                          fn(
                             x5186 : (
                               @list.List[(String, @kernel.Thm)],
                               @kernel.Term,
                             ),
-                          ) => {
+                          ) -> (
+                            (
+                              @list.List[@kernel.Term],
+                              (
+                                @list.List[(Int, @kernel.Term)],
+                                @list.List[(@kernel.Term, @kernel.Term)],
+                                @list.List[(@kernel.HolType, @kernel.HolType)],
+                              ),
+                            ),
+                            @list.List[
+                              (@list.List[(String, @kernel.Thm)], @kernel.Term),
+                            ],
+                            (
+                              (
+                                @list.List[(Int, @kernel.Term)],
+                                @list.List[(@kernel.Term, @kernel.Term)],
+                                @list.List[(@kernel.HolType, @kernel.HolType)],
+                              ),
+                              @list.List[@kernel.Thm],
+                            ) -> @kernel.Thm raise,
+                          ) raise {
                             (fn(
                               x5182 : (
                                 @list.List[(String, @kernel.Thm)],
@@ -36825,7 +37047,7 @@ pub fn simple_metis_refute(
       ()
     }
     @lib.do_list(
-      (x5217 : @kernel.Thm) => {
+      fn(x5217 : @kernel.Thm) -> Unit raise {
         ((x5216 : String) => {
           @pp.std_formatter.print_string(x5216 + "\n")
           @pp.std_formatter.print_flush()
@@ -36962,10 +37184,90 @@ pub fn pure_metis_tac(
         s5226(x5227)
       }
     }),
-    (x5237 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
-      ((x5236 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
-        ((x5234 : @list.List[(String, @kernel.Thm)]) => {
-          ((x5231 : @list.List[@kernel.Thm]) => {
+    fn(
+      x5237 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+    ) -> (
+      (
+        @list.List[@kernel.Term],
+        (
+          @list.List[(Int, @kernel.Term)],
+          @list.List[(@kernel.Term, @kernel.Term)],
+          @list.List[(@kernel.HolType, @kernel.HolType)],
+        ),
+      ),
+      @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+      (
+        (
+          @list.List[(Int, @kernel.Term)],
+          @list.List[(@kernel.Term, @kernel.Term)],
+          @list.List[(@kernel.HolType, @kernel.HolType)],
+        ),
+        @list.List[@kernel.Thm],
+      ) -> @kernel.Thm raise,
+    ) raise {
+      (fn(
+        x5236 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+      ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+        (
+          @list.List[@kernel.Term],
+          (
+            @list.List[(Int, @kernel.Term)],
+            @list.List[(@kernel.Term, @kernel.Term)],
+            @list.List[(@kernel.HolType, @kernel.HolType)],
+          ),
+        ),
+        @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+        (
+          (
+            @list.List[(Int, @kernel.Term)],
+            @list.List[(@kernel.Term, @kernel.Term)],
+            @list.List[(@kernel.HolType, @kernel.HolType)],
+          ),
+          @list.List[@kernel.Thm],
+        ) -> @kernel.Thm raise,
+      ) raise) raise {
+        (fn(
+          x5234 : @list.List[(String, @kernel.Thm)],
+        ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+          (
+            @list.List[@kernel.Term],
+            (
+              @list.List[(Int, @kernel.Term)],
+              @list.List[(@kernel.Term, @kernel.Term)],
+              @list.List[(@kernel.HolType, @kernel.HolType)],
+            ),
+          ),
+          @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+          (
+            (
+              @list.List[(Int, @kernel.Term)],
+              @list.List[(@kernel.Term, @kernel.Term)],
+              @list.List[(@kernel.HolType, @kernel.HolType)],
+            ),
+            @list.List[@kernel.Thm],
+          ) -> @kernel.Thm raise,
+        ) raise) raise {
+          (fn(
+            x5231 : @list.List[@kernel.Thm],
+          ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+            (
+              @list.List[@kernel.Term],
+              (
+                @list.List[(Int, @kernel.Term)],
+                @list.List[(@kernel.Term, @kernel.Term)],
+                @list.List[(@kernel.HolType, @kernel.HolType)],
+              ),
+            ),
+            @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+            (
+              (
+                @list.List[(Int, @kernel.Term)],
+                @list.List[(@kernel.Term, @kernel.Term)],
+                @list.List[(@kernel.HolType, @kernel.HolType)],
+              ),
+              @list.List[@kernel.Thm],
+            ) -> @kernel.Thm raise,
+          ) raise) raise {
             (fn(
               x5228 : @kernel.Thm,
             ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -37014,11 +37316,18 @@ pub fn pure_metis_tac(
             })(simple_metis_refute(x5231))
           })(
             ((x5233 : @list.List[(String, @kernel.Thm)]) => {
-              @lib.map((x5232 : (String, @kernel.Thm)) => x5232.1, x5233)
+              @lib.map(
+                fn(x5232 : (String, @kernel.Thm)) -> @kernel.Thm raise {
+                  x5232.1
+                },
+                x5233,
+              )
             })(x5234),
           )
         })(
-          ((x5235 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+          (fn(
+            x5235 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+          ) -> @list.List[(String, @kernel.Thm)] raise {
             x5235.0
           })(x5236),
         )
@@ -37057,7 +37366,27 @@ pub fn metis_tac(x5240 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
   let ths = x5240
   let t5243 = asm_metis_tac(ths)
   @tactics.then_tac(
-    @tactics.pop_assum_list((x5242 : @list.List[@kernel.Thm]) => {
+    @tactics.pop_assum_list(fn(
+      x5242 : @list.List[@kernel.Thm],
+    ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+      (
+        @list.List[@kernel.Term],
+        (
+          @list.List[(Int, @kernel.Term)],
+          @list.List[(@kernel.Term, @kernel.Term)],
+          @list.List[(@kernel.HolType, @kernel.HolType)],
+        ),
+      ),
+      @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+      (
+        (
+          @list.List[(Int, @kernel.Term)],
+          @list.List[(@kernel.Term, @kernel.Term)],
+          @list.List[(@kernel.HolType, @kernel.HolType)],
+        ),
+        @list.List[@kernel.Thm],
+      ) -> @kernel.Thm raise,
+    ) raise) raise {
       @tactics.all_tac
     }),
     t5243,

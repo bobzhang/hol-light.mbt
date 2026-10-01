@@ -1628,11 +1628,16 @@ module Lower = struct
       in
       let body = mk (supplied @ missing_args) (arg_tys @ List.filteri (fun i _ -> i >= List.length args) tys) in
       let missing_tys = List.filteri (fun i _ -> i >= List.length args) tys in
-      let rec curry ns ts = match ns, ts with
+      (* typed closures (they may not raise): each one's result is the
+         rest of the partial application's curried type *)
+      let rec curry ns ts cur = match ns, ts with
         | [], _ -> body
-        | n :: ns, t :: ts -> Lam ([ param n (mty_of t) ], ([], curry ns ts))
-        | n :: ns, [] -> Lam ([ n ], ([], curry ns [])) in
-      let curry ns = curry ns missing_tys in
+        | n :: ns, t :: ts ->
+            (match cur with
+             | M.Fun ([ _ ], r, _) -> typed_lam [ param n (mty_of t) ] r ([], curry ns ts r)
+             | _ -> Lam ([ param n (mty_of t) ], ([], curry ns ts cur)))
+        | n :: ns, [] -> Lam ([ n ], ([], curry ns [] cur)) in
+      let curry ns = curry ns missing_tys (mty_of whole.exp_type) in
       adapt_to ?expect (stmts, curry missing, mty_of whole.exp_type)
     end
 
@@ -1767,7 +1772,8 @@ module Lower = struct
             | [] -> unsupported loc "combinator %s needs %d more arguments" name needed
             | g :: gs ->
                 let ps = List.map (fun t -> (fresh "x", t)) g in
-                ([], Lam (List.map (fun (x, t) -> param x t) ps, go gs (got @ ps)))
+                let ret = List.fold_right (fun g acc -> M.Fun (g, acc, true)) gs (snd (groups want)) in
+                ([], typed_lam (List.map (fun (x, t) -> param x t) ps) ret (go gs (got @ ps)))
         in
         let wgs, _ = groups want in
         let ss, lam = go wgs [] in

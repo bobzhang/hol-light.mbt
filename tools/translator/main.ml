@@ -26,6 +26,7 @@ module Main = struct
     | "arith.ml" -> ("arith/arith.mbt", [])
     | "wf.ml" -> ("wf/wf.mbt", [])
     | "calc_num.ml" -> ("calc_num/calc_num.mbt", [])
+    | "normalizer.ml" -> ("normalizer/normalizer.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =

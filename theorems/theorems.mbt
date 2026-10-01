@@ -41,7 +41,27 @@ pub fn refl_clause() -> @kernel.Thm {
 ///|
 /// EQ_SYM
 fn step_3() -> Unit raise {
-  let t7 = @tactics.disch_then((x6 : @kernel.Thm) => {
+  let t7 = @tactics.disch_then(fn(
+    x6 : @kernel.Thm,
+  ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+    (
+      @list.List[@kernel.Term],
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+    ),
+    @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+    (
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+      @list.List[@kernel.Thm],
+    ) -> @kernel.Thm raise,
+  ) raise) raise {
     (fn(
       x3 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -156,7 +176,7 @@ pub fn eq_trans() -> @kernel.Thm {
 pub fn ac(x13 : @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
   let acsuite = x13
   let t15 = @simp.pure_rewrite_conv(@list.List([acsuite, refl_clause()]))
-  (x16 : @kernel.Term) => @bool.eqt_elim(t15(x16))
+  fn(x16 : @kernel.Term) -> @kernel.Thm raise { @bool.eqt_elim(t15(x16)) }
 }
 
 ///|
@@ -986,7 +1006,27 @@ fn step_34() -> Unit raise {
   let t46 = @parser.parse_term("a:A")
   let t56 = @list.List([
     @tactics.then_tac(
-      @tactics.disch_then((x48 : @kernel.Thm) => {
+      @tactics.disch_then(fn(
+        x48 : @kernel.Thm,
+      ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+        (
+          @list.List[@kernel.Term],
+          (
+            @list.List[(Int, @kernel.Term)],
+            @list.List[(@kernel.Term, @kernel.Term)],
+            @list.List[(@kernel.HolType, @kernel.HolType)],
+          ),
+        ),
+        @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+        (
+          (
+            @list.List[(Int, @kernel.Term)],
+            @list.List[(@kernel.Term, @kernel.Term)],
+            @list.List[(@kernel.HolType, @kernel.HolType)],
+          ),
+          @list.List[@kernel.Thm],
+        ) -> @kernel.Thm raise,
+      ) raise) raise {
         (fn(
           x43 : @kernel.Thm,
         ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1942,7 +1982,27 @@ pub fn wlog_relation() -> @kernel.Thm {
 /// EXISTS_UNIQUE_ALT
 fn step_67() -> Unit raise {
   let t108 = @tactics.disch_then(
-    @tactics.conjuncts_then((x107 : @kernel.Thm) => {
+    @tactics.conjuncts_then(fn(
+      x107 : @kernel.Thm,
+    ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+      (
+        @list.List[@kernel.Term],
+        (
+          @list.List[(Int, @kernel.Term)],
+          @list.List[(@kernel.Term, @kernel.Term)],
+          @list.List[(@kernel.HolType, @kernel.HolType)],
+        ),
+      ),
+      @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+      (
+        (
+          @list.List[(Int, @kernel.Term)],
+          @list.List[(@kernel.Term, @kernel.Term)],
+          @list.List[(@kernel.HolType, @kernel.HolType)],
+        ),
+        @list.List[@kernel.Thm],
+      ) -> @kernel.Thm raise,
+    ) raise) raise {
       (fn(
         x104 : @kernel.Thm,
       ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2056,7 +2116,27 @@ fn step_67() -> Unit raise {
     }
   })
   let t98 = @tactics.then_tac(
-    @tactics.disch_then((x93 : @kernel.Thm) => {
+    @tactics.disch_then(fn(
+      x93 : @kernel.Thm,
+    ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+      (
+        @list.List[@kernel.Term],
+        (
+          @list.List[(Int, @kernel.Term)],
+          @list.List[(@kernel.Term, @kernel.Term)],
+          @list.List[(@kernel.HolType, @kernel.HolType)],
+        ),
+      ),
+      @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+      (
+        (
+          @list.List[(Int, @kernel.Term)],
+          @list.List[(@kernel.Term, @kernel.Term)],
+          @list.List[(@kernel.HolType, @kernel.HolType)],
+        ),
+        @list.List[@kernel.Thm],
+      ) -> @kernel.Thm raise,
+    ) raise) raise {
       (fn(
         x90 : @kernel.Thm,
       ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2226,7 +2306,9 @@ fn step_68() -> Unit raise {
   let t129 = @simp.simp_tac(@list.empty())
   let t128 = @simp.rewrite_tac(@list.List([forall_and_thm()]))
   let t127 = @simp.gen_rewrite_tac(
-    (x126 : (@kernel.Term) -> @kernel.Thm raise) => {
+    fn(
+      x126 : (@kernel.Term) -> @kernel.Thm raise,
+    ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       (fn(
         x120 : (@kernel.Term) -> @kernel.Thm raise,
       ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -2244,7 +2326,9 @@ fn step_68() -> Unit raise {
     @list.List([eq_sym_eq()]),
   )
   let t119 = @simp.gen_rewrite_tac(
-    (x118 : (@kernel.Term) -> @kernel.Thm raise) => {
+    fn(
+      x118 : (@kernel.Term) -> @kernel.Thm raise,
+    ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       (fn(
         x112 : (@kernel.Term) -> @kernel.Thm raise,
       ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {

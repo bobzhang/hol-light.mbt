@@ -12,8 +12,12 @@ fn step_1() -> Unit raise {
       let tm = x2
       let rawcls = @basics.conjuncts(tm)
       let spcls = @lib.map(
-        (x5 : @kernel.Term) => {
-          ((x3 : (@list.List[@kernel.Term], @kernel.Term)) => x3.1)(
+        fn(x5 : @kernel.Term) -> @kernel.Term raise {
+          (fn(
+            x3 : (@list.List[@kernel.Term], @kernel.Term),
+          ) -> @kernel.Term raise {
+            x3.1
+          })(
             (fn(
               x4 : @kernel.Term,
             ) -> (@list.List[@kernel.Term], @kernel.Term) raise {
@@ -24,7 +28,9 @@ fn step_1() -> Unit raise {
         rawcls,
       )
       let lpats = @lib.map(
-        (x7 : @kernel.Term) => {
+        fn(
+          x7 : @kernel.Term,
+        ) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
           (fn(
             x6 : @kernel.Term,
           ) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
@@ -34,10 +40,10 @@ fn step_1() -> Unit raise {
         spcls,
       )
       let ufns = @lib.itlist(
-        (
+        fn(
           x11 : (@kernel.Term, @list.List[@kernel.Term]),
           x12 : @list.List[@kernel.Term],
-        ) => {
+        ) -> @list.List[@kernel.Term] raise {
           (fn(
             x8 : @kernel.Term,
           ) -> ((@list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise) raise {
@@ -46,9 +52,13 @@ fn step_1() -> Unit raise {
             ) -> @list.List[@kernel.Term] raise {
               @lib.insert(x8, x9)
             }
-          })(((x10 : (@kernel.Term, @list.List[@kernel.Term])) => x10.0)(x11))(
-            x12,
-          )
+          })(
+            (fn(
+              x10 : (@kernel.Term, @list.List[@kernel.Term]),
+            ) -> @kernel.Term raise {
+              x10.0
+            })(x11),
+          )(x12)
         },
         lpats,
         @list.empty(),
@@ -56,13 +66,15 @@ fn step_1() -> Unit raise {
       let axth = @bool.spec_all(ax)
       let (exvs, axbody) = @basics.strip_exists(@kernel.concl(axth))
       let axcls = @basics.conjuncts(axbody)
-      let f : (@kernel.Term) -> String raise = (x22 : @kernel.Term) => {
-        ((x20 : (@list.List[@kernel.Term], @kernel.Term)) => {
-          ((x18 : @kernel.Term) => {
-            ((x17 : @kernel.Term) => {
-              ((x16 : @kernel.Term) => {
-                ((x14 : @kernel.Term) => {
-                  ((x13 : (String, @kernel.HolType)) => x13.0)(
+      let f : (@kernel.Term) -> String raise = fn(
+        x22 : @kernel.Term,
+      ) -> String raise {
+        (fn(x20 : (@list.List[@kernel.Term], @kernel.Term)) -> String raise {
+          (fn(x18 : @kernel.Term) -> String raise {
+            (fn(x17 : @kernel.Term) -> String raise {
+              (fn(x16 : @kernel.Term) -> String raise {
+                (fn(x14 : @kernel.Term) -> String raise {
+                  (fn(x13 : (String, @kernel.HolType)) -> String raise { x13.0 })(
                     @kernel.dest_const(x14),
                   )
                 })(
@@ -70,7 +82,13 @@ fn step_1() -> Unit raise {
                 )
               })(@kernel.rand(x17))
             })(@equal.lhand(x18))
-          })(((x19 : (@list.List[@kernel.Term], @kernel.Term)) => x19.1)(x20))
+          })(
+            (fn(
+              x19 : (@list.List[@kernel.Term], @kernel.Term),
+            ) -> @kernel.Term raise {
+              x19.1
+            })(x20),
+          )
         })(
           (fn(
             x21 : @kernel.Term,
@@ -86,7 +104,9 @@ fn step_1() -> Unit raise {
         },
         axcls,
       )
-      let findax : (String) -> @kernel.Term raise = (x27 : String) => {
+      let findax : (String) -> @kernel.Term raise = fn(
+        x27 : String,
+      ) -> @kernel.Term raise {
         (fn(
           x23 : String,
         ) -> ((@list.List[(String, @kernel.Term)]) -> @kernel.Term raise) raise {
@@ -96,27 +116,47 @@ fn step_1() -> Unit raise {
         })(x27)(t26)
       }
       let raxs = @lib.map(
-        (x35 : (@kernel.Term, @list.List[@kernel.Term])) => {
-          ((x33 : @list.List[@kernel.Term]) => {
-            ((x32 : @kernel.Term) => {
-              ((x30 : @kernel.Term) => {
-                ((x29 : (String, @kernel.HolType)) => {
-                  findax(((x28 : (String, @kernel.HolType)) => x28.0)(x29))
+        fn(
+          x35 : (@kernel.Term, @list.List[@kernel.Term]),
+        ) -> @kernel.Term raise {
+          (fn(x33 : @list.List[@kernel.Term]) -> @kernel.Term raise {
+            (fn(x32 : @kernel.Term) -> @kernel.Term raise {
+              (fn(x30 : @kernel.Term) -> @kernel.Term raise {
+                (fn(x29 : (String, @kernel.HolType)) -> @kernel.Term raise {
+                  findax(
+                    (fn(x28 : (String, @kernel.HolType)) -> String raise {
+                      x28.0
+                    })(x29),
+                  )
                 })(@kernel.dest_const(x30))
               })(((x31 : @kernel.Term) => @lib.repeat(@kernel.rator, x31))(x32))
             })(@lib.hd(x33))
-          })(((x34 : (@kernel.Term, @list.List[@kernel.Term])) => x34.1)(x35))
+          })(
+            (fn(
+              x34 : (@kernel.Term, @list.List[@kernel.Term]),
+            ) -> @list.List[@kernel.Term] raise {
+              x34.1
+            })(x35),
+          )
         },
         lpats,
       )
       let axfns = @lib.map(
-        (x41 : @kernel.Term) => {
-          ((x39 : (@list.List[@kernel.Term], @kernel.Term)) => {
-            ((x37 : @kernel.Term) => {
+        fn(x41 : @kernel.Term) -> @kernel.Term raise {
+          (fn(
+            x39 : (@list.List[@kernel.Term], @kernel.Term),
+          ) -> @kernel.Term raise {
+            (fn(x37 : @kernel.Term) -> @kernel.Term raise {
               ((x36 : @kernel.Term) => @lib.repeat(@kernel.rator, x36))(
                 @equal.lhand(x37),
               )
-            })(((x38 : (@list.List[@kernel.Term], @kernel.Term)) => x38.1)(x39))
+            })(
+              (fn(
+                x38 : (@list.List[@kernel.Term], @kernel.Term),
+              ) -> @kernel.Term raise {
+                x38.1
+              })(x39),
+            )
           })(
             (fn(
               x40 : @kernel.Term,
@@ -136,7 +176,11 @@ fn step_1() -> Unit raise {
               @lib.zip(
                 axfns,
                 @lib.map(
-                  (x43 : (@kernel.Term, @list.List[@kernel.Term])) => x43.0,
+                  fn(
+                    x43 : (@kernel.Term, @list.List[@kernel.Term]),
+                  ) -> @kernel.Term raise {
+                    x43.0
+                  },
                   lpats,
                 ),
               ),
@@ -157,7 +201,7 @@ fn step_1() -> Unit raise {
         fn(x44 : @kernel.Term) -> @kernel.Thm raise {
           let t_1 = x44
           @lib.find(
-            (x48 : @kernel.Thm) => {
+            fn(x48 : @kernel.Thm) -> Bool raise {
               (fn(x46 : @kernel.Term) -> Bool raise {
                 ((x45 : @kernel.Term) => @basics.aconv(t_1, x45))(x46)
               })(
@@ -206,7 +250,7 @@ fn step_1() -> Unit raise {
       let ths = @lib.map(canonize, @basics.conjuncts(tm_1))
       let atm = @bool.list_mk_conj(
         @lib.map(
-          (x54 : @kernel.Thm) => {
+          fn(x54 : @kernel.Thm) -> @kernel.Term raise {
             @lib.hd(
               (fn(x53 : @kernel.Thm) -> @list.List[@kernel.Term] raise {
                 @kernel.hyp(x53)
@@ -248,9 +292,18 @@ fn step_1() -> Unit raise {
       fn(x57 : @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise {
         let acc = x57
         let args_p = @lib.uncurry(
-          (x60 : @list.List[@kernel.Term], x61 : @list.List[@kernel.Term]) => {
-            ((x58 : @list.List[@kernel.Term]) => {
-              (x59 : @list.List[@kernel.Term]) => x58.concat(x59)
+          fn(
+            x60 : @list.List[@kernel.Term],
+            x61 : @list.List[@kernel.Term],
+          ) -> @list.List[@kernel.Term] raise {
+            (fn(
+              x58 : @list.List[@kernel.Term],
+            ) -> ((@list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise) raise {
+              fn(
+                x59 : @list.List[@kernel.Term],
+              ) -> @list.List[@kernel.Term] raise {
+                x58.concat(x59)
+              }
             })(x61)(x60)
           },
           @lib.partition(
@@ -262,7 +315,7 @@ fn step_1() -> Unit raise {
           acc
         } else {
           let gvs = @lib.map(
-            (x65 : @kernel.Term) => {
+            fn(x65 : @kernel.Term) -> @kernel.Term raise {
               (fn(x63 : @kernel.HolType) -> @kernel.Term raise {
                 @basics.genvar(x63)
               })(
@@ -275,7 +328,7 @@ fn step_1() -> Unit raise {
           )
           let t68 = @lib.zip(args_1, gvs)
           let gvs_p = @lib.map(
-            (x69 : @kernel.Term) => {
+            fn(x69 : @kernel.Term) -> @kernel.Term raise {
               (fn(
                 x66 : @kernel.Term,
               ) -> ((@list.List[(@kernel.Term, @kernel.Term)]) -> @kernel.Term raise) raise {
@@ -290,7 +343,10 @@ fn step_1() -> Unit raise {
           )
           let t79 = @kernel.type_of(fn__1)
           let lty = @lib.itlist(
-            (x73 : @kernel.Term, x74 : @kernel.HolType) => {
+            fn(
+              x73 : @kernel.Term,
+              x74 : @kernel.HolType,
+            ) -> @kernel.HolType raise {
               (fn(
                 x70 : @kernel.HolType,
               ) -> ((@kernel.HolType) -> @kernel.HolType raise) raise {
@@ -306,12 +362,20 @@ fn step_1() -> Unit raise {
             gvs_p,
             @lib.funpow(
               @lib.length(gvs),
-              (x78 : @kernel.HolType) => {
-                ((x77 : (String, @list.List[@kernel.HolType])) => {
-                  ((x75 : @list.List[@kernel.HolType]) => @lib.hd(@lib.tl(x75)))(
-                    ((x76 : (String, @list.List[@kernel.HolType])) => x76.1)(
-                      x77,
-                    ),
+              fn(x78 : @kernel.HolType) -> @kernel.HolType raise {
+                (fn(
+                  x77 : (String, @list.List[@kernel.HolType]),
+                ) -> @kernel.HolType raise {
+                  (fn(
+                    x75 : @list.List[@kernel.HolType],
+                  ) -> @kernel.HolType raise {
+                    @lib.hd(@lib.tl(x75))
+                  })(
+                    (fn(
+                      x76 : (String, @list.List[@kernel.HolType]),
+                    ) -> @list.List[@kernel.HolType] raise {
+                      x76.1
+                    })(x77),
                   )
                 })(@kernel.dest_type(x78))
               },
@@ -350,8 +414,12 @@ fn step_1() -> Unit raise {
       let tm_2 = x84
       let rawcls_1 = @basics.conjuncts(tm_2)
       let spcls_1 = @lib.map(
-        (x87 : @kernel.Term) => {
-          ((x85 : (@list.List[@kernel.Term], @kernel.Term)) => x85.1)(
+        fn(x87 : @kernel.Term) -> @kernel.Term raise {
+          (fn(
+            x85 : (@list.List[@kernel.Term], @kernel.Term),
+          ) -> @kernel.Term raise {
+            x85.1
+          })(
             (fn(
               x86 : @kernel.Term,
             ) -> (@list.List[@kernel.Term], @kernel.Term) raise {
@@ -362,7 +430,9 @@ fn step_1() -> Unit raise {
         rawcls_1,
       )
       let lpats_1 = @lib.map(
-        (x89 : @kernel.Term) => {
+        fn(
+          x89 : @kernel.Term,
+        ) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
           (fn(
             x88 : @kernel.Term,
           ) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
@@ -372,10 +442,10 @@ fn step_1() -> Unit raise {
         spcls_1,
       )
       let ufns_1 = @lib.itlist(
-        (
+        fn(
           x93 : (@kernel.Term, @list.List[@kernel.Term]),
           x94 : @list.List[@kernel.Term],
-        ) => {
+        ) -> @list.List[@kernel.Term] raise {
           (fn(
             x90 : @kernel.Term,
           ) -> ((@list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise) raise {
@@ -384,15 +454,19 @@ fn step_1() -> Unit raise {
             ) -> @list.List[@kernel.Term] raise {
               @lib.insert(x90, x91)
             }
-          })(((x92 : (@kernel.Term, @list.List[@kernel.Term])) => x92.0)(x93))(
-            x94,
-          )
+          })(
+            (fn(
+              x92 : (@kernel.Term, @list.List[@kernel.Term]),
+            ) -> @kernel.Term raise {
+              x92.0
+            })(x93),
+          )(x94)
         },
         lpats_1,
         @list.empty(),
       )
       let uxargs = @lib.map(
-        (x97 : @kernel.Term) => {
+        fn(x97 : @kernel.Term) -> @list.List[@kernel.Term] raise {
           (fn(
             x95 : @kernel.Term,
           ) -> ((@list.List[(@kernel.Term, @list.List[@kernel.Term])]) -> @list.List[
@@ -478,9 +552,17 @@ fn step_2() -> Unit raise {
     let tm = x112
     fn(x113 : @kernel.Thm) -> @kernel.Thm raise {
       let th = x113
-      let th_p = @drule.part_match((x114 : @kernel.Term) => x114, th)(tm)
+      let th_p = @drule.part_match(
+        fn(x114 : @kernel.Term) -> @kernel.Term raise { x114 },
+        th,
+      )(tm)
       let t116 = @kernel.concl(th)
-      ignore(@drule.part_match((x115 : @kernel.Term) => x115, th_p)(t116))
+      ignore(
+        @drule.part_match(
+          fn(x115 : @kernel.Term) -> @kernel.Term raise { x115 },
+          th_p,
+        )(t116),
+      )
       th_p
     }
   }
@@ -499,8 +581,12 @@ fn step_2() -> Unit raise {
         Failure(_) => {
           let rawcls = @basics.conjuncts(tm_1)
           let spcls = @lib.map(
-            (x122 : @kernel.Term) => {
-              ((x120 : (@list.List[@kernel.Term], @kernel.Term)) => x120.1)(
+            fn(x122 : @kernel.Term) -> @kernel.Term raise {
+              (fn(
+                x120 : (@list.List[@kernel.Term], @kernel.Term),
+              ) -> @kernel.Term raise {
+                x120.1
+              })(
                 (fn(
                   x121 : @kernel.Term,
                 ) -> (@list.List[@kernel.Term], @kernel.Term) raise {
@@ -511,7 +597,9 @@ fn step_2() -> Unit raise {
             rawcls,
           )
           let lpats = @lib.map(
-            (x124 : @kernel.Term) => {
+            fn(
+              x124 : @kernel.Term,
+            ) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
               (fn(
                 x123 : @kernel.Term,
               ) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
@@ -521,10 +609,10 @@ fn step_2() -> Unit raise {
             spcls,
           )
           let ufns = @lib.itlist(
-            (
+            fn(
               x128 : (@kernel.Term, @list.List[@kernel.Term]),
               x129 : @list.List[@kernel.Term],
-            ) => {
+            ) -> @list.List[@kernel.Term] raise {
               (fn(
                 x125 : @kernel.Term,
               ) -> ((@list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise) raise {
@@ -534,9 +622,11 @@ fn step_2() -> Unit raise {
                   @lib.insert(x125, x126)
                 }
               })(
-                ((x127 : (@kernel.Term, @list.List[@kernel.Term])) => x127.0)(
-                  x128,
-                ),
+                (fn(
+                  x127 : (@kernel.Term, @list.List[@kernel.Term]),
+                ) -> @kernel.Term raise {
+                  x127.0
+                })(x128),
               )(x129)
             },
             lpats,
@@ -569,8 +659,8 @@ fn step_2() -> Unit raise {
           let (evs, bod) = @basics.strip_exists(@kernel.concl(eth))
           let dth = @nums.new_specification(
             @lib.map(
-              (x136 : @kernel.Term) => {
-                ((x135 : (String, @kernel.HolType)) => x135.0)(
+              fn(x136 : @kernel.Term) -> String raise {
+                (fn(x135 : (String, @kernel.HolType)) -> String raise { x135.0 })(
                   @kernel.dest_var(x136),
                 )
               },

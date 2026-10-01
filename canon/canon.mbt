@@ -288,7 +288,9 @@ fn step_4() -> Unit raise {
     ]),
   )
   let t34 = @simp.gen_rewrite_tac(
-    (x33 : (@kernel.Term) -> @kernel.Thm raise) => {
+    fn(
+      x33 : (@kernel.Term) -> @kernel.Thm raise,
+    ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       (fn(
         x26 : (@kernel.Term) -> @kernel.Thm raise,
       ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -368,7 +370,9 @@ fn step_4() -> Unit raise {
         let t48 = @tactics.then_tac(
           @tactics.then_tac(
             @simp.gen_rewrite_tac(
-              (x45 : (@kernel.Term) -> @kernel.Thm raise) => {
+              fn(
+                x45 : (@kernel.Term) -> @kernel.Thm raise,
+              ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
                 (fn(
                   x39 : (@kernel.Term) -> @kernel.Thm raise,
                 ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -1923,7 +1927,7 @@ fn step_11() -> Unit raise {
     let th2_1 = @bool.disch_all(@bool.mp(@kernel.assume_rule(itm), th1_1))
     let fvs_1 = @kernel.frees(t)
     let fty = @lib.itlist(
-      (x153 : @kernel.Term, x154 : @kernel.HolType) => {
+      fn(x153 : @kernel.Term, x154 : @kernel.HolType) -> @kernel.HolType raise {
         (fn(
           x150 : @kernel.HolType,
         ) -> ((@kernel.HolType) -> @kernel.HolType raise) raise {
@@ -1969,16 +1973,76 @@ fn step_11() -> Unit raise {
   }
   let select_elim_iconv_1 : (@kernel.Term) -> @kernel.Thm raise = select_elims_iconv
   select_elim_tac_c.set(
-    @tactics.then_tac(@tactics.conv_tac(select_elim_conv), (
+    @tactics.then_tac(@tactics.conv_tac(select_elim_conv), fn(
       x163 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
-    ) => {
-      ((x162 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
-        ((x160 : @kernel.Term) => {
+    ) -> (
+      (
+        @list.List[@kernel.Term],
+        (
+          @list.List[(Int, @kernel.Term)],
+          @list.List[(@kernel.Term, @kernel.Term)],
+          @list.List[(@kernel.HolType, @kernel.HolType)],
+        ),
+      ),
+      @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+      (
+        (
+          @list.List[(Int, @kernel.Term)],
+          @list.List[(@kernel.Term, @kernel.Term)],
+          @list.List[(@kernel.HolType, @kernel.HolType)],
+        ),
+        @list.List[@kernel.Thm],
+      ) -> @kernel.Thm raise,
+    ) raise {
+      (fn(
+        x162 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+      ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+        (
+          @list.List[@kernel.Term],
+          (
+            @list.List[(Int, @kernel.Term)],
+            @list.List[(@kernel.Term, @kernel.Term)],
+            @list.List[(@kernel.HolType, @kernel.HolType)],
+          ),
+        ),
+        @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+        (
+          (
+            @list.List[(Int, @kernel.Term)],
+            @list.List[(@kernel.Term, @kernel.Term)],
+            @list.List[(@kernel.HolType, @kernel.HolType)],
+          ),
+          @list.List[@kernel.Thm],
+        ) -> @kernel.Thm raise,
+      ) raise) raise {
+        (fn(
+          x160 : @kernel.Term,
+        ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+          (
+            @list.List[@kernel.Term],
+            (
+              @list.List[(Int, @kernel.Term)],
+              @list.List[(@kernel.Term, @kernel.Term)],
+              @list.List[(@kernel.HolType, @kernel.HolType)],
+            ),
+          ),
+          @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+          (
+            (
+              @list.List[(Int, @kernel.Term)],
+              @list.List[(@kernel.Term, @kernel.Term)],
+              @list.List[(@kernel.HolType, @kernel.HolType)],
+            ),
+            @list.List[@kernel.Thm],
+          ) -> @kernel.Thm raise,
+        ) raise) raise {
           @tactics.match_mp_tac(select_elim_iconv_1(x160))
         })(
-          ((x161 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => x161.1)(
-            x162,
-          ),
+          (fn(
+            x161 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+          ) -> @kernel.Term raise {
+            x161.1
+          })(x162),
         )
       })(x163)(x163)
     }),
@@ -2084,7 +2148,11 @@ fn step_12() -> Unit raise {
     let th1 = @equal.sym(@ind_defs.right_betas(vs_1)(t181))
     let th2 = elim_lambda(
       @simp.gen_rewrite_conv(
-        (x182 : (@kernel.Term) -> @kernel.Thm raise) => x182,
+        fn(
+          x182 : (@kernel.Term) -> @kernel.Thm raise,
+        ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
+          x182
+        },
         @list.List([th1]),
       ),
       tm_3,
@@ -2136,7 +2204,11 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash] conv_l(
     let t170 = @equal.binder_conv((x169 : @kernel.Term) => conv(t168, x169))
     @equal.thenc(
       @simp.gen_rewrite_conv(
-        (x167 : (@kernel.Term) -> @kernel.Thm raise) => x167,
+        fn(
+          x167 : (@kernel.Term) -> @kernel.Thm raise,
+        ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
+          x167
+        },
         @list.List([pth]),
       ),
       t170,
@@ -2413,7 +2485,7 @@ fn step_14() -> Unit raise {
       let (op, args_1) = @basics.strip_comb(tm_2)
       let t226 = @kernel.refl(op)
       let th_2 = @lib.rev_itlist(
-        (x223 : @kernel.Thm, x224 : @kernel.Thm) => {
+        fn(x223 : @kernel.Thm, x224 : @kernel.Thm) -> @kernel.Thm raise {
           (fn(
             x221 : @kernel.Thm,
           ) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
@@ -2456,7 +2528,10 @@ fn step_14() -> Unit raise {
     let (cheads_1, vheads_1) = x228
     let hddata_1 = if vheads_1 == @list.empty() {
       let hops = @lib.setify(
-        @lib.map((x230 : (@kernel.Term, Int)) => x230.0, cheads_1),
+        @lib.map(
+          fn(x230 : (@kernel.Term, Int)) -> @kernel.Term raise { x230.0 },
+          cheads_1,
+        ),
       )
       let getmin : (@kernel.Term) -> (@kernel.Term, Int) raise = fn(
         x231 : @kernel.Term,
@@ -2480,8 +2555,14 @@ fn step_14() -> Unit raise {
             h,
             @lib.end_itlist(
               fn(x235 : Int, x236 : Int) -> Int raise {
-                let s237 = ((x233 : Int) => {
-                  (x234 : Int) => if x233 <= x234 { x233 } else { x234 }
+                let s237 = (fn(x233 : Int) -> ((Int) -> Int raise) raise {
+                  fn(x234 : Int) -> Int raise {
+                    if x233 <= x234 {
+                      x233
+                    } else {
+                      x234
+                    }
+                  }
                 })(x235)
                 s237(x236)
               },
@@ -2503,7 +2584,7 @@ fn step_14() -> Unit raise {
         },
         @lib.setify(
           @lib.map(
-            (x239 : (@kernel.Term, Int)) => x239.0,
+            fn(x239 : (@kernel.Term, Int)) -> @kernel.Term raise { x239.0 },
             vheads_1.concat(cheads_1),
           ),
         ),
@@ -2534,13 +2615,19 @@ fn step_14() -> Unit raise {
   ) raise {
     let (asl, w) as gl = x241
     let headsp = @lib.itlist(
-      (
+      fn(
         x243 : (String, @kernel.Thm),
         x244 : (
           @list.List[(@kernel.Term, Int)],
           @list.List[(@kernel.Term, Int)],
         ),
-      ) => get_thm_heads(((x242 : (String, @kernel.Thm)) => x242.1)(x243))(x244),
+      ) -> (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]) raise {
+        get_thm_heads(
+          (fn(x242 : (String, @kernel.Thm)) -> @kernel.Thm raise { x242.1 })(
+            x243,
+          ),
+        )(x244)
+      },
       asl,
       (@list.empty(), @list.empty()),
     )

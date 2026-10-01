@@ -195,7 +195,7 @@ pub(all) suberror Dead_code {
 ///|
 /// rhs_concl
 fn step_1() -> Unit raise {
-  rhs_concl_c.set((x15 : @kernel.Thm) => {
+  rhs_concl_c.set(fn(x15 : @kernel.Thm) -> @kernel.Term raise {
     @kernel.rand(
       (fn(x14 : @kernel.Thm) -> @kernel.Term raise { @kernel.concl(x14) })(x15),
     )
@@ -357,7 +357,9 @@ pub fn[TA, TB, TC, TD] push_skip_stk(
     tha,
     Stack::Zrand(
       (
-        (x27 : @kernel.Thm) => (x28 : @kernel.Thm) => mka(x28)(x27),
+        fn(x27 : @kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+          fn(x28 : @kernel.Thm) -> @kernel.Thm raise { mka(x28)(x27) }
+        },
         true,
         (thb, f(arg)),
       ),
@@ -374,7 +376,13 @@ pub fn[TA, TB] push_lam_in_stk(
 ) -> (@kernel.Thm, Stack[TA, TB, (@kernel.Thm) -> @kernel.Thm raise]) raise {
   let (th, stk) = (x29, x30)
   let (_, thb, mkl) = mk_abs(th)
-  (thb, Stack::Zabs((x31 : @kernel.Thm) => try_eta(mkl(x31)), stk))
+  (
+    thb,
+    Stack::Zabs(
+      fn(x31 : @kernel.Thm) -> @kernel.Thm raise { try_eta(mkl(x31)) },
+      stk,
+    ),
+  )
 }
 
 ///|
@@ -1124,7 +1132,7 @@ pub fn add_thms(x82 : @list.List[@kernel.Thm], x83 : Compset) -> Unit raise {
   let lthm = x82
   let rws = x83
   @lib.do_list(
-    (x86 : @kernel.Thm) => {
+    fn(x86 : @kernel.Thm) -> Unit raise {
       (x85 => @lib.do_list((x84 : @kernel.Thm) => enter_thm(rws, x84), x85))(
         body_conjuncts(x86),
       )
@@ -1169,8 +1177,8 @@ pub fn scrub_thms(x91 : @list.List[@kernel.Thm], x92 : Compset) -> Unit raise {
   let lthm = x91
   let rws = x92
   let tmlist = @lib.map(
-    (x95 : @kernel.Thm) => {
-      ((x94 : @list.List[@kernel.Thm]) => {
+    fn(x95 : @kernel.Thm) -> @kernel.Term raise {
+      (fn(x94 : @list.List[@kernel.Thm]) -> @kernel.Term raise {
         (fn(x93 : @kernel.Thm) -> @kernel.Term raise { @kernel.concl(x93) })(
           @lib.hd(x94),
         )
@@ -1179,11 +1187,17 @@ pub fn scrub_thms(x91 : @list.List[@kernel.Thm], x92 : Compset) -> Unit raise {
     lthm,
   )
   let clist = @lib.map(
-    (x103 : @kernel.Term) => {
-      ((x101 : (@list.List[@kernel.Term], @kernel.Term)) => {
-        ((x99 : @kernel.Term) => {
-          ((x98 : @kernel.Term) => {
-            ((x96 : (@kernel.Term, @list.List[@kernel.Term])) => x96.0)(
+    fn(x103 : @kernel.Term) -> @kernel.Term raise {
+      (fn(
+        x101 : (@list.List[@kernel.Term], @kernel.Term),
+      ) -> @kernel.Term raise {
+        (fn(x99 : @kernel.Term) -> @kernel.Term raise {
+          (fn(x98 : @kernel.Term) -> @kernel.Term raise {
+            (fn(
+              x96 : (@kernel.Term, @list.List[@kernel.Term]),
+            ) -> @kernel.Term raise {
+              x96.0
+            })(
               (fn(
                 x97 : @kernel.Term,
               ) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
@@ -1191,7 +1205,13 @@ pub fn scrub_thms(x91 : @list.List[@kernel.Thm], x92 : Compset) -> Unit raise {
               })(x98),
             )
           })(@equal.lhs(x99))
-        })(((x100 : (@list.List[@kernel.Term], @kernel.Term)) => x100.1)(x101))
+        })(
+          (fn(
+            x100 : (@list.List[@kernel.Term], @kernel.Term),
+          ) -> @kernel.Term raise {
+            x100.1
+          })(x101),
+        )
       })(
         (fn(
           x102 : @kernel.Term,
@@ -1962,7 +1982,7 @@ pub fn strong(
           ),
         ) => {
           push_skip_stk(
-            (x161 : (@kernel.Term, Fterm[Db])) => x161.1,
+            fn(x161 : (@kernel.Term, Fterm[Db])) -> Fterm[Db] raise { x161.1 },
             x162,
             x163,
           )
@@ -1989,7 +2009,11 @@ pub fn strong(
             ],
           ),
         ) => {
-          push_in_stk((x164 : (@kernel.Term, Fterm[Db])) => x164.1, x165, x166)
+          push_in_stk(
+            fn(x164 : (@kernel.Term, Fterm[Db])) -> Fterm[Db] raise { x164.1 },
+            x165,
+            x166,
+          )
         },
         argsrd,
         (th_p, stk_p_1),
@@ -2041,8 +2065,8 @@ pub fn strong_up(
 /// `CBV_CONV`
 pub fn cbv_conv(x168 : Compset) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
   let rws = x168
-  (x173 : @kernel.Term) => {
-    ((
+  fn(x173 : @kernel.Term) -> @kernel.Thm raise {
+    (fn(
       x171 : (
         (@kernel.Thm, Fterm[Db]),
         Stack[
@@ -2058,8 +2082,8 @@ pub fn cbv_conv(x168 : Compset) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
           (@kernel.Thm) -> @kernel.Thm raise,
         ],
       ),
-    ) => {
-      ((
+    ) -> @kernel.Thm raise {
+      (fn(
         x170 : (
           (@kernel.Thm, Fterm[Db]),
           Stack[
@@ -2075,7 +2099,9 @@ pub fn cbv_conv(x168 : Compset) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
             (@kernel.Thm) -> @kernel.Thm raise,
           ],
         ),
-      ) => evaluate(strong(x170)))(cbv_wk(x171))
+      ) -> @kernel.Thm raise {
+        evaluate(strong(x170))
+      })(cbv_wk(x171))
     })(((x172 : @kernel.Term) => initial_state(rws, x172))(x173))
   }
 }
@@ -2086,8 +2112,8 @@ pub fn weak_cbv_conv(
   x174 : Compset,
 ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
   let rws = x174
-  (x180 : @kernel.Term) => {
-    ((
+  fn(x180 : @kernel.Term) -> @kernel.Thm raise {
+    (fn(
       x178 : (
         (@kernel.Thm, Fterm[Db]),
         Stack[
@@ -2103,8 +2129,8 @@ pub fn weak_cbv_conv(
           (@kernel.Thm) -> @kernel.Thm raise,
         ],
       ),
-    ) => {
-      ((
+    ) -> @kernel.Thm raise {
+      (fn(
         x177 : (
           (@kernel.Thm, Fterm[Db]),
           Stack[
@@ -2120,7 +2146,7 @@ pub fn weak_cbv_conv(
             (@kernel.Thm) -> @kernel.Thm raise,
           ],
         ),
-      ) => {
+      ) -> @kernel.Thm raise {
         evaluate(
           (fn(
             x176 : (
@@ -2289,7 +2315,7 @@ pub fn the_compset() -> Compset {
 ///|
 /// add_funs
 fn step_14() -> Unit raise {
-  add_funs_c.set((x197 : @list.List[@kernel.Thm]) => {
+  add_funs_c.set(fn(x197 : @list.List[@kernel.Thm]) -> Unit raise {
     (fn(x195 : @list.List[@kernel.Thm]) -> ((Compset) -> Unit raise) raise {
       fn(x196 : Compset) -> Unit raise { add_thms(x195, x196) }
     })(x197)(the_compset())
@@ -2312,7 +2338,9 @@ pub fn add_funs(x : @list.List[@kernel.Thm]) -> Unit raise {
 fn step_15() -> Unit raise {
   add_convs_c.set(x201 => {
     @lib.do_list(
-      (x200 : (@kernel.Term, Int, (@kernel.Term) -> @kernel.Thm raise)) => {
+      fn(
+        x200 : (@kernel.Term, Int, (@kernel.Term) -> @kernel.Thm raise),
+      ) -> Unit raise {
         (fn(
           x198 : (@kernel.Term, Int, (@kernel.Term) -> @kernel.Thm raise),
         ) -> ((Compset) -> Unit raise) raise {
@@ -2358,7 +2386,7 @@ pub fn del_consts(x : @list.List[@kernel.Term]) -> Unit raise {
 ///|
 /// del_funs
 fn step_17() -> Unit raise {
-  del_funs_c.set((x206 : @list.List[@kernel.Thm]) => {
+  del_funs_c.set(fn(x206 : @list.List[@kernel.Thm]) -> Unit raise {
     (fn(x204 : @list.List[@kernel.Thm]) -> ((Compset) -> Unit raise) raise {
       fn(x205 : Compset) -> Unit raise { scrub_thms(x204, x205) }
     })(x206)(the_compset())
@@ -2438,7 +2466,7 @@ pub fn or(
   x211 : @list.List[@kernel.Term],
 ) -> ((@kernel.Term) -> Bool raise) raise {
   match x211 {
-    Empty => (x213 : @kernel.Term) => false
+    Empty => fn(x213 : @kernel.Term) -> Bool raise { false }
     More(x, tail=Empty) => (x215 : @kernel.Term) => same_const(x, x215)
     More(h, tail=t) =>
       fn(x216 : @kernel.Term) -> Bool raise {
@@ -2461,7 +2489,27 @@ pub fn restr_eval_conv(
 ///|
 /// RESTR_EVAL_TAC
 fn step_21() -> Unit raise {
-  restr_eval_tac_c.set((x224 : @list.List[@kernel.Term]) => {
+  restr_eval_tac_c.set(fn(
+    x224 : @list.List[@kernel.Term],
+  ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+    (
+      @list.List[@kernel.Term],
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+    ),
+    @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+    (
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+      @list.List[@kernel.Thm],
+    ) -> @kernel.Thm raise,
+  ) raise) raise {
     (fn(
       x221 : (@kernel.Term) -> @kernel.Thm raise,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2525,7 +2573,9 @@ pub fn restr_eval_tac(x : @list.List[@kernel.Term]) -> @tactics.Tactic raise {
 ///|
 /// RESTR_EVAL_RULE
 fn step_22() -> Unit raise {
-  restr_eval_rule_c.set((x227 : @list.List[@kernel.Term]) => {
+  restr_eval_rule_c.set(fn(
+    x227 : @list.List[@kernel.Term],
+  ) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     (fn(
       x225 : (@kernel.Term) -> @kernel.Thm raise,
     ) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {

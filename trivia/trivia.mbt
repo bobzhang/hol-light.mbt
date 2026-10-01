@@ -418,7 +418,11 @@ fn step_17() -> Unit raise {
   )
   let t35 = @tactics.then_tac(
     @simp.gen_rewrite_tac(
-      (x33 : (@kernel.Term) -> @kernel.Thm raise) => x33,
+      fn(
+        x33 : (@kernel.Term) -> @kernel.Thm raise,
+      ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
+        x33
+      },
       @list.List([@class.taut(@parser.parse_term("(p <=> q) <=> (~p <=> ~q)"))]),
     ),
     t34,

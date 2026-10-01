@@ -213,7 +213,9 @@ fn step_2() -> Unit raise {
   fsum_c.set(x49 => {
     @lib.fold_left(
       fn(x46 : Double, x47 : Double) -> Double raise {
-        let s48 = ((x44 : Double) => (x45 : Double) => x44 + x45)(x46)
+        let s48 = (fn(x44 : Double) -> ((Double) -> Double raise) raise {
+          fn(x45 : Double) -> Double raise { x44 + x45 }
+        })(x46)
         s48(x47)
       },
       0.0,
@@ -796,7 +798,7 @@ fn step_5() -> Unit raise {
   ] raise {
     let thms = x117
     let rawrules = @lib.itlist(
-      (
+      fn(
         x122 : @kernel.Thm,
         x123 : @list.List[
           (
@@ -807,7 +809,15 @@ fn step_5() -> Unit raise {
             (Int, @kernel.Thm),
           ),
         ],
-      ) => {
+      ) -> @list.List[
+        (
+          (
+            @list.List[(Int, @list.List[@meson.FolTerm])],
+            (Int, @list.List[@meson.FolTerm]),
+          ),
+          (Int, @kernel.Thm),
+        ),
+      ] raise {
         (fn(
           x120 : @list.List[
             (
@@ -884,7 +894,7 @@ fn step_5() -> Unit raise {
     )
     let prs = @lib.setify(
       @lib.map(
-        (
+        fn(
           x128 : (
             (
               @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -892,23 +902,27 @@ fn step_5() -> Unit raise {
             ),
             (Int, @kernel.Thm),
           ),
-        ) => {
-          ((
+        ) -> Int raise {
+          (fn(
             x126 : (
               @list.List[(Int, @list.List[@meson.FolTerm])],
               (Int, @list.List[@meson.FolTerm]),
             ),
-          ) => {
-            ((x124 : (Int, @list.List[@meson.FolTerm])) => x124.0)(
-              ((
+          ) -> Int raise {
+            (fn(x124 : (Int, @list.List[@meson.FolTerm])) -> Int raise {
+              x124.0
+            })(
+              (fn(
                 x125 : (
                   @list.List[(Int, @list.List[@meson.FolTerm])],
                   (Int, @list.List[@meson.FolTerm]),
                 ),
-              ) => x125.1)(x126),
+              ) -> (Int, @list.List[@meson.FolTerm]) raise {
+                x125.1
+              })(x126),
             )
           })(
-            ((
+            (fn(
               x127 : (
                 (
                   @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -916,7 +930,12 @@ fn step_5() -> Unit raise {
                 ),
                 (Int, @kernel.Thm),
               ),
-            ) => x127.0)(x128),
+            ) -> (
+              @list.List[(Int, @list.List[@meson.FolTerm])],
+              (Int, @list.List[@meson.FolTerm]),
+            ) raise {
+              x127.0
+            })(x128),
           )
         },
         rawrules,
@@ -941,7 +960,7 @@ fn step_5() -> Unit raise {
         (
           t_1,
           @lib.filter(
-            (
+            fn(
               x136 : (
                 (
                   @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -949,27 +968,31 @@ fn step_5() -> Unit raise {
                 ),
                 (Int, @kernel.Thm),
               ),
-            ) => {
-              ((
+            ) -> Bool raise {
+              (fn(
                 x134 : (
                   @list.List[(Int, @list.List[@meson.FolTerm])],
                   (Int, @list.List[@meson.FolTerm]),
                 ),
-              ) => {
-                ((x132 : (Int, @list.List[@meson.FolTerm])) => {
-                  ((x130 : Int) => t_1 == x130)(
-                    ((x131 : (Int, @list.List[@meson.FolTerm])) => x131.0)(x132),
+              ) -> Bool raise {
+                (fn(x132 : (Int, @list.List[@meson.FolTerm])) -> Bool raise {
+                  (fn(x130 : Int) -> Bool raise { t_1 == x130 })(
+                    (fn(x131 : (Int, @list.List[@meson.FolTerm])) -> Int raise {
+                      x131.0
+                    })(x132),
                   )
                 })(
-                  ((
+                  (fn(
                     x133 : (
                       @list.List[(Int, @list.List[@meson.FolTerm])],
                       (Int, @list.List[@meson.FolTerm]),
                     ),
-                  ) => x133.1)(x134),
+                  ) -> (Int, @list.List[@meson.FolTerm]) raise {
+                    x133.1
+                  })(x134),
                 )
               })(
-                ((
+                (fn(
                   x135 : (
                     (
                       @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -977,7 +1000,12 @@ fn step_5() -> Unit raise {
                     ),
                     (Int, @kernel.Thm),
                   ),
-                ) => x135.0)(x136),
+                ) -> (
+                  @list.List[(Int, @list.List[@meson.FolTerm])],
+                  (Int, @list.List[@meson.FolTerm]),
+                ) raise {
+                  x135.0
+                })(x136),
               )
             },
             rawrules,
