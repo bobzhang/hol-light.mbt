@@ -1,0 +1,585 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/thecops"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/meson",
+  "bobzhang/hol_light/pp",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn add_subst(@list.List[(Int, @meson.FolTerm)], Int, @meson.FolTerm) -> @list.List[(Int, @meson.FolTerm)] raise
+
+pub fn add_subst_v1(((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int, @meson.FolTerm) -> ((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]) raise
+
+pub fn[TA] append((Unit) -> TA raise, (Unit) -> TA raise) -> ((Unit) -> TA raise) raise
+
+pub fn assert_iclause((@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), ((Int, @list.List[Int]), @list.List[Litmat[Int]])) -> @list.List[((Int, @list.List[@meson.FolTerm]), ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))] raise
+
+pub fn assert_imatrix((@list.List[Litmat[Int]], @list.List[Litmat[Int]]), (Int, @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])])) -> @list.List[((Int, @list.List[@meson.FolTerm]), LitmatExt[Int])] raise
+
+pub fn assert_matrix(@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]) -> @list.List[((Int, @list.List[@meson.FolTerm]), ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))] raise
+
+pub fn axioms2db(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] bot_of_clause_ext(ReconData, ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]), (@list.List[(@kernel.Term, @kernel.Thm)], @list.List[(Litmat[TA], Proof1[Litmat[TA], @list.List[Litmat[TA]], ((Int, TB), @list.List[Int]), (@list.List[((Int, @list.List[Int]), Int)], ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))])]), @kernel.Thm) -> ((@list.List[(@kernel.Term, @kernel.Thm)], @list.List[(Litmat[TA], Proof1[Litmat[TA], @list.List[Litmat[TA]], ((Int, TB), @list.List[Int]), (@list.List[((Int, @list.List[Int]), Int)], ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))])]), @kernel.Thm) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] bot_of_litmat_ext(ReconData, (@list.List[(@kernel.Term, @kernel.Thm)], @list.List[(Litmat[TA], Proof1[Litmat[TA], @list.List[Litmat[TA]], ((Int, TB), @list.List[Int]), (@list.List[((Int, @list.List[Int]), Int)], ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))])]), @kernel.Thm, LitmatExt[Int]) -> ((@list.List[(@kernel.Term, @kernel.Thm)], @list.List[(Litmat[TA], Proof1[Litmat[TA], @list.List[Litmat[TA]], ((Int, TB), @list.List[Int]), (@list.List[((Int, @list.List[Int]), Int)], ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))])]), @kernel.Thm) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] bot_of_proof(ReconData, @list.List[(@kernel.Term, @kernel.Thm)], @kernel.Thm, (Litmat[TA], Proof1[Litmat[TA], @list.List[Litmat[TA]], ((Int, TB), @list.List[Int]), (@list.List[((Int, @list.List[Int]), Int)], ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))])) -> @kernel.Thm raise
+
+pub fn[TA, TB] break_map((TB) -> TA? raise, @list.List[TB]) -> @list.List[TA]? raise
+
+pub fn[TA] cache((Unit) -> ((Unit) -> TA raise) raise) -> ((Unit) -> TA raise) raise
+
+pub fn clabc_of_litmat_ext(LitmatExt[Int]) -> (@list.List[Litmat[Int]], @list.List[Litmat[Int]]) raise
+
+pub fn[TA] clause_ground(@list.List[Litmat[TA]]) -> Bool raise
+
+pub fn[TA] clause_index_mapping(@list.List[Litmat[TA]]) -> @list.List[(TA, Int)] raise
+
+pub fn[TA] clause_lits(@list.List[Litmat[TA]]) -> @list.List[(Int, @list.List[@meson.FolTerm])] raise
+
+pub fn[TA] clause_max_var(@list.List[(TA, @list.List[@meson.FolTerm])]) -> Int raise
+
+pub fn[TA] clause_max_var_v1(Int, @list.List[Litmat[TA]]) -> Int raise
+
+pub fn clause_of_form(@meson.FolForm) -> @list.List[Litmat[Unit]] raise
+
+pub fn clause_of_matrix(@list.List[((Unit, @list.List[Int]), @list.List[Litmat[Unit]])]) -> @list.List[Litmat[Unit]] raise
+
+pub fn[TA] clause_offset(@list.List[Litmat[TA]]) -> Int raise
+
+pub fn[TA] clause_positive(@list.List[Litmat[TA]]) -> @list.List[Litmat[TA]]? raise
+
+pub fn[TA] concat((Unit) -> ((Unit) -> TA raise) raise) -> ((Unit) -> TA raise) raise
+
+pub fn[TA, TB] concat_map((TB) -> ((Unit) -> TA raise) raise, (Unit) -> TB raise) -> ((Unit) -> TA raise) raise
+
+pub fn[TA] cons(TA, (Unit) -> TA raise) -> ((Unit) -> TA raise) raise
+
+pub fn contradiction(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn[TA, TB] copy_clause(TB) -> ((@list.List[Litmat[TA]]) -> @list.List[Litmat[(TA, TB)]] raise) raise
+
+pub fn[TA, TB] copy_matrix(TB) -> ((@list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) -> @list.List[(((TA, TB), @list.List[Int]), @list.List[Litmat[(TA, TB)]])] raise) raise
+
+pub fn create_eq_axs(Bool) -> ((@list.List[@kernel.Term]) -> @list.List[@kernel.Thm] raise) raise
+
+pub fn create_equality_axioms(@list.List[@kernel.Term]) -> @list.List[@kernel.Thm] raise
+
+pub fn[TA] cut((Unit) -> TA raise, (Unit) -> TA raise) -> ((Unit) -> TA raise) raise
+
+pub fn[TA] cut_v1(Bool, (Unit) -> TA raise, (Unit) -> TA raise) -> ((Unit) -> TA raise) raise
+
+pub fn[TA] cut_v2(Bool, (Unit) -> TA raise, (Unit) -> TA raise) -> ((Unit) -> TA raise) raise
+
+pub fn db() -> @lib.OHashtbl[Int, @list.List[(@list.List[@meson.FolTerm], @list.List[(Int, @list.List[@meson.FolTerm])], Int, (Int, @kernel.Thm))]]
+
+pub fn[TA] db_entries((Int, TA)) -> @list.List[(@list.List[@meson.FolTerm], @list.List[(Int, @list.List[@meson.FolTerm])], Int, (Int, @kernel.Thm))] raise
+
+pub fn[TA] db_entries_v1((Int, TA)) -> @list.List[(((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]), @list.List[@meson.FolTerm], Bool, Int)] raise
+
+pub fn db_v1() -> @lib.OHashtbl[Int, @list.List[(((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]), @list.List[@meson.FolTerm], Bool, Int)]]
+
+pub fn[TA] deepen((Int) -> TA? raise, Int) -> TA raise
+
+pub fn[TA] deepen_to(Int, (Int) -> TA? raise, Int) -> TA? raise
+
+pub fn disj_cases_list(@kernel.Thm, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] eat_proofs(ReconData) -> (((@list.List[(@kernel.Term, @kernel.Thm)], @list.List[(Litmat[TA], Proof1[Litmat[TA], @list.List[Litmat[TA]], ((Int, TB), @list.List[Int]), (@list.List[((Int, @list.List[Int]), Int)], ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))])])) -> ((@list.List[@kernel.Thm]) -> ((@list.List[(@kernel.Term, @kernel.Thm)], @list.List[(Litmat[TA], Proof1[Litmat[TA], @list.List[Litmat[TA]], ((Int, TB), @list.List[Int]), (@list.List[((Int, @list.List[Int]), Int)], ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))])]), @list.List[@kernel.Thm]) raise) raise) raise
+
+pub fn[TA, TB] empty(TB) -> @list.List[TA] raise
+
+pub fn[TA, TB] empty_v1(Int) -> ((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[TA]]), @list.List[TB]) raise
+
+pub fn[TA] eq((((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), TA), (Int, @list.List[@meson.FolTerm]), (Int, @list.List[@meson.FolTerm])) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] eq_lit(@list.List[(Int, @meson.FolTerm)], (TA, @list.List[@meson.FolTerm]), (TA, @list.List[@meson.FolTerm])) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] eq_lit_v1(((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), (TA, @list.List[@meson.FolTerm]), (TA, @list.List[@meson.FolTerm])) -> Bool raise
+
+pub fn eq_term(@list.List[(Int, @meson.FolTerm)], @meson.FolTerm, @meson.FolTerm) -> Bool raise
+
+pub fn eq_terms(@list.List[(Int, @meson.FolTerm)]) -> ((@list.List[@meson.FolTerm]) -> ((@list.List[@meson.FolTerm]) -> Bool raise) raise) raise
+
+pub fn eq_tm(FixedArray[@meson.FolTerm?], @meson.FolTerm, @meson.FolTerm) -> Bool raise
+
+pub fn eq_var_tm(@list.List[(Int, @meson.FolTerm)], Int, @meson.FolTerm) -> Bool raise
+
+pub fn eq_var_tm_v1(FixedArray[@meson.FolTerm?], Int, @meson.FolTerm) -> Bool raise
+
+pub fn[TA] filter((TA) -> Bool raise, (Unit) -> TA raise, Unit) -> TA raise
+
+pub fn[TA, TB] filter_map((TB) -> TA? raise, (Unit) -> TB raise, Unit) -> TA raise
+
+pub fn flip_neg(@kernel.Term) -> @kernel.Term raise
+
+pub fn fol_of_thm(@kernel.Thm) -> @meson.FolForm raise
+
+pub fn gen_leancop_tac(SearchOpts, @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn gen_nanocop_tac(SearchOpts, @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn[TA] ground_lit(@list.List[(Int, @meson.FolTerm)], (TA, @list.List[@meson.FolTerm])) -> Bool raise
+
+pub fn[TA] ground_lit_v1(((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), (TA, @list.List[@meson.FolTerm])) -> Bool raise
+
+pub fn ground_tm(@list.List[(Int, @meson.FolTerm)], @meson.FolTerm) -> Bool raise
+
+pub fn ground_tm_v1(FixedArray[@meson.FolTerm?], @meson.FolTerm) -> Bool raise
+
+pub fn hashek_def() -> @kernel.Thm
+
+pub fn hashek_eq() -> @kernel.Thm
+
+pub fn hashek_of_proof(((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), @list.List[@kernel.Thm], (Int, @list.List[@meson.FolTerm])) -> ((Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)]) -> @kernel.Thm raise) raise
+
+pub fn hashek_prop() -> @kernel.Thm
+
+pub fn hashek_thm() -> @kernel.Thm
+
+pub fn hashek_tm() -> @kernel.Term
+
+pub fn hol_negate(@kernel.Term) -> @kernel.Term raise
+
+pub fn[TA] iclause_max_var(Int, ((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> Int raise
+
+pub fn iclause_of_form(@meson.FolForm) -> ((Unit, @list.List[Int]), @list.List[Litmat[Unit]]) raise
+
+pub fn[TA] iclause_offset(((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> Int raise
+
+pub fn[TA] iclause_positive((TA, @list.List[Int]), @list.List[Litmat[TA]]) -> ((TA, @list.List[Int]), @list.List[Litmat[TA]])? raise
+
+pub fn[TA] imatrix_max_var(Int, (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])])) -> Int raise
+
+pub fn[TA] imatrix_positive(TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) -> Litmat[TA]? raise
+
+pub fn[TA] index_clause(Int, @list.List[Litmat[TA]]) -> (Int, @list.List[Litmat[Int]]) raise
+
+pub fn[TA] index_iclause(Int, ((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> (Int, ((Int, @list.List[Int]), @list.List[Litmat[Int]])) raise
+
+pub fn[TA] index_imatrix(Int, (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])])) -> (Int, (Int, @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])])) raise
+
+pub fn[TA] index_litmat(Int, Litmat[TA]) -> (Int, Litmat[Int]) raise
+
+pub fn[TA] index_matrix(Int, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) -> (Int, @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]) raise
+
+pub fn[TA] index_matrix_v1(@list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) -> @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] insert_db(@lib.OHashtbl[TA, @list.List[(((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]), TB, Bool, Int)]], ((TA, TB), ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))) -> Unit raise
+
+pub fn[TA] inst_lit(@list.List[(Int, @meson.FolTerm)], (TA, @list.List[@meson.FolTerm])) -> (TA, @list.List[@meson.FolTerm]) raise
+
+pub fn[TA] inst_lit_v1(((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), (TA, @list.List[@meson.FolTerm])) -> (TA, @list.List[@meson.FolTerm]) raise
+
+pub fn inst_term(FixedArray[@meson.FolTerm?], @meson.FolTerm) -> @meson.FolTerm raise
+
+pub fn inst_tm(@list.List[(Int, @meson.FolTerm)], @meson.FolTerm) -> @meson.FolTerm raise
+
+pub fn inst_tm_v1(((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), @meson.FolTerm) -> @meson.FolTerm raise
+
+pub fn inst_var(((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), @kernel.HolType, Int) -> @kernel.Term raise
+
+pub fn integers_from(Int) -> ((Unit) -> Int raise) raise
+
+pub fn istriv(@list.List[(Int, @meson.FolTerm)], Int, @meson.FolTerm) -> Bool raise
+
+pub fn istriv_v1(FixedArray[@meson.FolTerm?], Int, @meson.FolTerm) -> Bool raise
+
+pub fn[TA, TB] iter((TB) -> TA raise, (Unit) -> TB raise) -> Unit raise
+
+pub fn leancop(@list.List[@kernel.Thm], @kernel.Term) -> @kernel.Thm raise
+
+pub fn leancop_deepen(SearchOpts, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn leancop_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn leancop_tac_v1(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn leancop_v1(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn[TA] lit((Int, @list.List[@meson.FolTerm])) -> Litmat[TA] raise
+
+pub fn lit_ground(Int, @list.List[@meson.FolTerm]) -> Bool raise
+
+pub fn[TA] lit_max_var(Int, (TA, @list.List[@meson.FolTerm])) -> Int raise
+
+pub fn[TA] lit_of_litmat(Litmat[TA]) -> (Int, @list.List[@meson.FolTerm])? raise
+
+pub fn[TA] lit_positive(Int, @list.List[@meson.FolTerm]) -> Litmat[TA]? raise
+
+pub fn[TA] litext_of_clause_ext((Int, @list.List[TA]), (@list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])], @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]), LitmatExt[TA]) -> ((@list.List[Litmat[TA]], @list.List[Litmat[TA]]), @list.List[Litmat[TA]]) raise
+
+pub fn[TA] litext_of_litmat_ext(LitmatExt[TA]) -> ((@list.List[Litmat[TA]], @list.List[Litmat[TA]]), @list.List[Litmat[TA]]) raise
+
+pub fn[TA] litmat_max_var(Int) -> ((Litmat[TA]) -> Int raise) raise
+
+pub fn litmat_of_form(@meson.FolForm) -> Litmat[Unit] raise
+
+pub fn[TA] litmat_positive(Litmat[TA]) -> Litmat[TA]? raise
+
+pub fn[TA, TB] map((TB) -> TA raise, (Unit) -> TB raise, Unit) -> TA raise
+
+pub fn[TA, TB] map_clause((TB) -> TA raise) -> ((@list.List[Litmat[TB]]) -> @list.List[Litmat[TA]] raise) raise
+
+pub fn[TA] map_clause_vars((Int) -> Int raise, @list.List[Litmat[TA]]) -> @list.List[Litmat[TA]] raise
+
+pub fn[TA, TB] map_iclause((TB) -> TA raise, ((TB, @list.List[Int]), @list.List[Litmat[TB]])) -> ((TA, @list.List[Int]), @list.List[Litmat[TA]]) raise
+
+pub fn[TA] map_iclause_vars((Int) -> Int raise, ((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> ((TA, @list.List[Int]), @list.List[Litmat[TA]]) raise
+
+pub fn[TA, TB] map_imatrix((TB) -> TA raise, (TB, @list.List[((TB, @list.List[Int]), @list.List[Litmat[TB]])])) -> (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) raise
+
+pub fn[TA] map_imatrix_vars((Int) -> Int raise, (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])])) -> (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) raise
+
+pub fn[TA] map_lit_vars((Int) -> @meson.FolTerm raise, (TA, @list.List[@meson.FolTerm])) -> (TA, @list.List[@meson.FolTerm]) raise
+
+pub fn[TA, TB] map_litmat(((Int, @list.List[@meson.FolTerm])) -> TA raise, ((TB, @list.List[((TB, @list.List[Int]), @list.List[Litmat[TB]])])) -> TA raise, Litmat[TB]) -> TA raise
+
+pub fn[TA] map_litmat_vars((Int) -> Int raise) -> ((Litmat[TA]) -> Litmat[TA] raise) raise
+
+pub fn[TA, TB] map_matrix((TB) -> TA raise) -> ((@list.List[((TB, @list.List[Int]), @list.List[Litmat[TB]])]) -> @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])] raise) raise
+
+pub fn[TA] map_matrix_vars((Int) -> Int raise, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) -> @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])] raise
+
+pub fn[TA] map_term((Int) -> TA raise, ((Int, @list.List[@meson.FolTerm])) -> TA raise, @meson.FolTerm) -> TA raise
+
+pub fn map_term_vars((Int) -> @meson.FolTerm raise, @meson.FolTerm) -> @meson.FolTerm raise
+
+pub fn[TA, TB] mapentry((@list.List[(TA, @list.List[@meson.FolTerm])], (TA, @list.List[@meson.FolTerm])), TB) -> (@list.List[@meson.FolTerm], @list.List[(TA, @list.List[@meson.FolTerm])], Int, TB) raise
+
+pub fn[TA, TB] mapi((Int) -> ((TB) -> TA raise) raise, (Unit) -> TB raise) -> ((Unit) -> TA raise) raise
+
+pub fn mark_assums((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn mark_concl(String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn[TA] mat((TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])])) -> Litmat[TA] raise
+
+pub fn matbc_of_clause_ext((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]) -> (@list.List[Litmat[Int]], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]) raise
+
+pub fn matrix2db(@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]) -> Unit raise
+
+pub fn[TA] matrix_index_mapping(@list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) -> @list.List[(TA, Int)] raise
+
+pub fn[TA] matrix_max_var(Int, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) -> Int raise
+
+pub fn matrix_of_form(@meson.FolForm) -> @list.List[((Unit, @list.List[Int]), @list.List[Litmat[Unit]])] raise
+
+pub fn[TA] matrix_positive(@list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) -> @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])] raise
+
+pub fn mk_recon_data(@kernel.Thm, @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], ((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int])) -> ReconData raise
+
+pub fn nanocop(@list.List[@kernel.Thm], @kernel.Term) -> @kernel.Thm raise
+
+pub fn nanocop_deepen(SearchOpts, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn nanocop_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn nanocop_tac_v1(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn nanocop_v1(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn[TA] negate_lit(Int, TA) -> (Int, TA) raise
+
+pub fn[TA] next_opt((Unit) -> TA raise) -> TA? raise
+
+pub fn[TA] nil(Unit) -> TA raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB, TC, TD] nth_clause(TA, (((TA, TB), TC), TD)) -> (((TA, TB), TC), TD)? raise
+
+pub fn nth_conj(Int, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn nth_disj(Int, @kernel.Thm) -> (@kernel.Thm, (@list.List[@kernel.Thm], @list.List[@kernel.Thm])) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] nth_matrix(TA, Litmat[(TA, TB)]) -> ((TA, TB), @list.List[(((TA, TB), @list.List[Int]), @list.List[Litmat[(TA, TB)]])])? raise
+
+pub fn[TA] of_list(@list.List[TA]) -> ((Unit) -> TA raise) raise
+
+pub fn[TA] offset_clause(Int) -> ((@list.List[Litmat[TA]]) -> @list.List[Litmat[TA]] raise) raise
+
+pub fn offset_clause_ext(Int, ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int])) -> ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]) raise
+
+pub fn[TA] offset_iclause(Int) -> ((((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> ((TA, @list.List[Int]), @list.List[Litmat[TA]]) raise) raise
+
+pub fn[TA] offset_iv(Int, (TA, @list.List[Int])) -> (TA, @list.List[Int]) raise
+
+pub fn[TA] offset_lit(Int, (TA, @list.List[@meson.FolTerm])) -> (TA, @list.List[@meson.FolTerm]) raise
+
+pub fn offset_litmat_ext(Int, LitmatExt[Int]) -> LitmatExt[Int] raise
+
+pub fn[TA] offset_matrix(Int) -> ((@list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) -> @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])] raise) raise
+
+pub fn offset_term(Int, @meson.FolTerm) -> @meson.FolTerm raise
+
+pub fn offset_vars(Int, @meson.FolTerm) -> @meson.FolTerm raise
+
+pub fn[TA, TB] pick((TB) -> TA? raise, @list.List[TB]) -> (TA, (TB) -> @list.List[TB] raise) raise
+
+pub fn[TA, TB] pp_enclose(String, String, (@pp.Formatter) -> ((TB) -> TA raise) raise, @pp.Formatter, TB) -> Unit raise
+
+pub fn[TA, TB] pp_enclose_cut(String, String, (@pp.Formatter) -> ((TA) -> TB raise) raise) -> ((@pp.Formatter) -> ((TA) -> Unit raise) raise) raise
+
+pub fn[TA] pp_enum(String, String, String, (@pp.Formatter) -> ((TA) -> Unit raise) raise) -> ((@pp.Formatter) -> ((@list.List[TA]) -> Unit raise) raise) raise
+
+pub fn[TA, TB, TC] pp_interleave((TB) -> TA raise, (TB) -> ((TC) -> Unit raise) raise, TB, @list.List[TC]) -> Unit raise
+
+pub fn[TA] pp_iter(String) -> (((@pp.Formatter) -> ((TA) -> Unit raise) raise) -> ((@pp.Formatter) -> ((@list.List[TA]) -> Unit raise) raise) raise) raise
+
+pub fn[TA] pp_iter_sp(String, (@pp.Formatter) -> ((TA) -> Unit raise) raise) -> ((@pp.Formatter) -> ((@list.List[TA]) -> Unit raise) raise) raise
+
+pub fn[TA, TB] pp_nl((@pp.Formatter) -> ((TB) -> TA raise) raise, @pp.Formatter, TB) -> Unit raise
+
+pub fn pp_print_fterm(@pp.Formatter, @meson.FolTerm) -> Unit raise
+
+pub fn[TA, TB] pp_print_iclause((@pp.Formatter) -> ((TB) -> TA raise) raise, @pp.Formatter, ((TB, @list.List[Int]), @list.List[Litmat[TB]])) -> Unit raise
+
+pub fn[TA, TB] pp_print_imatrix((@pp.Formatter) -> ((TB) -> TA raise) raise, @pp.Formatter, (TB, @list.List[((TB, @list.List[Int]), @list.List[Litmat[TB]])])) -> Unit raise
+
+pub fn pp_print_index(@pp.Formatter) -> ((Int) -> Unit raise) raise
+
+pub fn pp_print_lit(@pp.Formatter, (Int, @list.List[@meson.FolTerm])) -> Unit raise
+
+pub fn[TA, TB] pp_print_litmat((@pp.Formatter) -> ((TB) -> TA raise) raise, @pp.Formatter, Litmat[TB]) -> Unit raise
+
+pub fn[TA, TB] pp_print_matrix((@pp.Formatter) -> ((TA) -> TB raise) raise) -> ((@pp.Formatter) -> ((@list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) -> Unit raise) raise) raise
+
+pub fn[TA] pp_print_matrix_ni(@pp.Formatter, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) -> Unit raise
+
+pub fn[TA, TB] pp_print_nclause((@pp.Formatter) -> ((TA) -> TB raise) raise) -> ((@pp.Formatter) -> ((@list.List[Litmat[TA]]) -> Unit raise) raise) raise
+
+pub fn[TA, TB] pp_print_null(TA, TB) -> Unit raise
+
+pub fn[TA, TB, TC, TD, TE] pp_print_prf(((TB) -> ((TA) -> String raise) raise, (TC) -> String raise), TB, @pp.Formatter, Proof1[TA, TC, TD, TE]) -> Unit raise
+
+pub fn[TA, TB, TC, TD, TE] pp_print_proof(((TB) -> ((TA) -> String raise) raise, (TC) -> String raise), TB, @pp.Formatter, (TA, Proof1[TA, TC, TD, TE])) -> Unit raise
+
+pub fn[TA, TB, TC, TD, TE] pp_print_proofs(((TE) -> ((TA) -> String raise) raise, (TB) -> String raise), TE, @pp.Formatter) -> ((@list.List[(TA, Proof1[TA, TB, TC, TD])]) -> Unit raise) raise
+
+pub fn pp_print_var(@pp.Formatter, Int) -> Unit raise
+
+pub fn[TA, TB] pp_with_box(Int, (@pp.Formatter) -> ((TB) -> TA raise) raise, @pp.Formatter, TB) -> Unit raise
+
+pub fn prefix_problem(ReconData) -> ((@list.List[((Int, @list.List[Int]), Int)]) -> @kernel.Thm raise) raise
+
+pub fn prepare_cop_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn prepare_lean_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn prepare_nanocop_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn[TA] print_iclause(((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> Unit raise
+
+pub fn print_iclause_i(((Int, @list.List[Int]), @list.List[Litmat[Int]])) -> Unit raise
+
+pub fn print_id_tac(String, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn print_matrix_i(@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]) -> Unit raise
+
+pub fn[TA] print_nclause(@list.List[Litmat[TA]]) -> Unit raise
+
+pub fn[TA, TB, TC, TD, TE] print_proof_def(TA, (Litmat[TB], Proof1[Litmat[TB], @list.List[Litmat[TC]], TD, TE])) -> Unit raise
+
+pub fn[TA, TB, TC, TD, TE] print_proofa(((TB) -> ((TA) -> String raise) raise, (TC) -> String raise), TB, (TA, Proof1[TA, TC, TD, TE])) -> Unit raise
+
+pub fn print_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn prove_clause(SearchOpts, (((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), (@list.List[(Int, @list.List[@meson.FolTerm])], @list.List[(Int, @list.List[@meson.FolTerm])], Int), (@list.List[(Int, @list.List[@meson.FolTerm])], (Int, @kernel.Thm))) -> ((Unit) -> ((((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), @list.List[((Int, @list.List[@meson.FolTerm]), Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)])]) raise) raise
+
+pub fn prove_clause_v1(SearchOpts, (((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), (@list.List[(((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])], @list.List[(Int, @list.List[@meson.FolTerm])], @list.List[(Int, Int)], @list.List[(Int, @list.List[@meson.FolTerm])], Int), @list.List[Litmat[(Int, Int)]]) -> ((Unit) -> ((((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), @list.List[(Litmat[(Int, Int)], Proof1[Litmat[(Int, Int)], @list.List[Litmat[(Int, Int)]], ((Int, Int), @list.List[Int]), (@list.List[((Int, @list.List[Int]), Int)], ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))])]) raise) raise
+
+pub fn[TA] prove_ec(Int, (((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), TA), ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]), @list.List[(((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])], @list.List[(Int, Int)]) -> ((Unit) -> ((((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), TA), (@list.List[((Int, @list.List[Int]), Int)], ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int])), (((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]]), @list.List[(((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])]) raise) raise
+
+pub fn prove_lit(SearchOpts, (((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), (@list.List[(Int, @list.List[@meson.FolTerm])], @list.List[(Int, @list.List[@meson.FolTerm])], Int), (Int, @list.List[@meson.FolTerm])) -> ((Unit) -> ((((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), @list.List[(Int, @list.List[@meson.FolTerm])], Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)]) raise) raise
+
+pub fn prove_lit_v1(SearchOpts, (((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), (@list.List[(((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])], @list.List[(Int, @list.List[@meson.FolTerm])], @list.List[(Int, Int)], @list.List[(Int, @list.List[@meson.FolTerm])], Int), (Int, @list.List[@meson.FolTerm])) -> ((Unit) -> ((((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), @list.List[(Int, @list.List[@meson.FolTerm])], (Litmat[(Int, Int)], Proof1[Litmat[(Int, Int)], @list.List[Litmat[(Int, Int)]], ((Int, Int), @list.List[Int]), (@list.List[((Int, @list.List[Int]), Int)], ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))])) raise) raise
+
+pub fn prove_litmat(SearchOpts, (((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), (@list.List[(((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])], @list.List[(Int, @list.List[@meson.FolTerm])], @list.List[(Int, Int)], @list.List[(Int, @list.List[@meson.FolTerm])], Int)) -> ((Litmat[(Int, Int)]) -> ((Unit) -> ((((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), @list.List[(Int, @list.List[@meson.FolTerm])], (Litmat[(Int, Int)], Proof1[Litmat[(Int, Int)], @list.List[Litmat[(Int, Int)]], ((Int, Int), @list.List[Int]), (@list.List[((Int, @list.List[Int]), Int)], ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))])) raise) raise) raise
+
+pub fn prove_mat(SearchOpts, (((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), (@list.List[(((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])], @list.List[(Int, @list.List[@meson.FolTerm])], @list.List[(Int, Int)], @list.List[(Int, @list.List[@meson.FolTerm])], Int), ((Int, Int), @list.List[(((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])])) -> ((Unit) -> ((((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), @list.List[(Int, @list.List[@meson.FolTerm])], (Litmat[(Int, Int)], Proof1[Litmat[(Int, Int)], @list.List[Litmat[(Int, Int)]], ((Int, Int), @list.List[Int]), (@list.List[((Int, @list.List[Int]), Int)], ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))])) raise) raise
+
+pub fn pure_leancop(SearchOpts, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn pure_nanocop(SearchOpts, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn[TA] restore_subst((FixedArray[TA?], @ref.Ref[@list.List[Int]]), @list.List[Int]) -> Unit raise
+
+pub fn search_opts() -> SearchOpts
+
+pub fn spec_vars(((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), @list.List[Int], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn start(SearchOpts, Int) -> (((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)])? raise
+
+pub fn start_v1(@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], SearchOpts, Int) -> (((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), (Litmat[(Int, Int)], Proof1[Litmat[(Int, Int)], @list.List[Litmat[(Int, Int)]], ((Int, Int), @list.List[Int]), (@list.List[((Int, @list.List[Int]), Int)], ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))]))? raise
+
+pub fn[TA] strategy(SearchOpts, (SearchOpts) -> ((Int) -> TA? raise) raise) -> TA raise
+
+pub fn string_of_fterm(@meson.FolTerm) -> String raise
+
+pub fn[TA] string_of_iclause(((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> String raise
+
+pub fn string_of_iclause_i(((Int, @list.List[Int]), @list.List[Litmat[Int]])) -> String raise
+
+pub fn[TA, TB] string_of_inst_litmat(TA, Litmat[TB]) -> String raise
+
+pub fn string_of_lit((Int, @list.List[@meson.FolTerm])) -> String raise
+
+pub fn[TA] string_of_litmat(Litmat[TA]) -> String raise
+
+pub fn string_of_lits(@list.List[(Int, @list.List[@meson.FolTerm])]) -> String raise
+
+pub fn[TA] string_of_matrix(@list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) -> String raise
+
+pub fn[TA] string_of_nclause(@list.List[Litmat[TA]]) -> String raise
+
+pub fn strip_conj(@meson.FolForm) -> @list.List[@meson.FolForm] raise
+
+pub fn strip_disj(@meson.FolForm) -> @list.List[@meson.FolForm] raise
+
+pub fn strip_forallq(@list.List[Int], @meson.FolForm) -> (@list.List[Int], @meson.FolForm) raise
+
+pub fn[TA] take(Int, (Unit) -> TA raise) -> ((Unit) -> TA raise) raise
+
+pub fn[TA] take_while((TA) -> Bool raise, (Unit) -> TA raise, Unit) -> TA raise
+
+pub fn term_ground(@meson.FolTerm) -> Bool raise
+
+pub fn term_max_var(Int, @meson.FolTerm) -> Int raise
+
+pub fn[TA] to_list((Unit) -> TA raise) -> @list.List[TA] raise
+
+pub fn[TA] to_list_v1(TA) -> TA raise
+
+pub fn[TA, TB] to_list_v2((FixedArray[TA?], TB), @list.List[Int]) -> @list.List[(Int, TA)] raise
+
+pub fn[TA] unify((((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), TA), (Int, @list.List[@meson.FolTerm]), (Int, @list.List[@meson.FolTerm])) -> (((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), TA)? raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] unify_lit(@list.List[(Int, @meson.FolTerm)], (TA, @list.List[@meson.FolTerm]), (TA, @list.List[@meson.FolTerm])) -> @list.List[(Int, @meson.FolTerm)] raise
+
+pub fn unify_lit_v1(((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), (Int, @list.List[@meson.FolTerm]), (Int, @list.List[@meson.FolTerm])) -> ((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]) raise
+
+pub fn[TA, TB] unify_rename((((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), @list.List[@meson.FolTerm], (@list.List[@meson.FolTerm], @list.List[(TA, @list.List[@meson.FolTerm])], Int, TB)) -> ((((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), @list.List[(TA, @list.List[@meson.FolTerm])])? raise
+
+pub fn[TA] unify_rename_subst(Int, @list.List[@meson.FolTerm], @list.List[@meson.FolTerm], ((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), @list.List[(TA, @list.List[@meson.FolTerm])]) -> (((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), @list.List[(TA, @list.List[@meson.FolTerm])]) raise
+
+pub fn[TA] unify_rename_v1((((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), @list.List[@meson.FolTerm], (((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]), @list.List[@meson.FolTerm], TA, Int)) -> ((((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), Int), ((Int, @list.List[Int]), (@list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])], @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]), LitmatExt[Int]))? raise
+
+pub fn unify_tm(@list.List[(Int, @meson.FolTerm)], @meson.FolTerm, @meson.FolTerm) -> @list.List[(Int, @meson.FolTerm)] raise
+
+pub fn unify_tm_off(Int, @list.List[(Int, @meson.FolTerm)], @meson.FolTerm, @meson.FolTerm) -> @list.List[(Int, @meson.FolTerm)] raise
+
+pub fn unify_tm_off_v1(Int, ((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), @meson.FolTerm, @meson.FolTerm) -> ((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]) raise
+
+pub fn unify_tm_v1(((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), @meson.FolTerm, @meson.FolTerm) -> ((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]) raise
+
+pub fn unify_tms(@list.List[(Int, @meson.FolTerm)], @list.List[@meson.FolTerm], @list.List[@meson.FolTerm]) -> @list.List[(Int, @meson.FolTerm)] raise
+
+pub fn unify_tms_off(Int) -> ((@list.List[(Int, @meson.FolTerm)]) -> ((@list.List[@meson.FolTerm]) -> ((@list.List[@meson.FolTerm]) -> @list.List[(Int, @meson.FolTerm)] raise) raise) raise) raise
+
+pub fn unify_tms_off_v1(Int, ((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), @list.List[@meson.FolTerm], @list.List[@meson.FolTerm]) -> ((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]) raise
+
+pub fn unify_tms_v1(((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), @list.List[@meson.FolTerm], @list.List[@meson.FolTerm]) -> ((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]) raise
+
+pub fn[TA] unify_vars((((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), TA), @list.List[Int], @list.List[Int]) -> (((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int]), TA)? raise
+
+pub fn[TA, TB] unique((TB) -> TA? raise, @list.List[TB]) -> Bool raise
+
+pub fn var_(Int) -> @meson.FolTerm raise
+
+// Errors
+pub(all) suberror End_of_strom {
+  End_of_strom
+}
+
+pub(all) suberror Unify {
+  Unify
+}
+
+pub(all) suberror Unify1 {
+  Unify
+}
+
+// Types and methods
+pub(all) enum Litmat[TA] {
+  Lit((Int, @list.List[@meson.FolTerm]))
+  Mat((TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]))
+} derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare] @lib.OCompare for Litmat[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for Litmat[TA]
+
+pub(all) enum LitmatExt[TA] {
+  Litext((@list.List[Litmat[TA]], @list.List[Litmat[TA]]), @list.List[Litmat[TA]])
+  Matext(Int, (@list.List[Litmat[TA]], @list.List[Litmat[TA]]), ((Int, @list.List[TA]), (@list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])], @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]), LitmatExt[TA]))
+} derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare] @lib.OCompare for LitmatExt[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for LitmatExt[TA]
+
+pub(all) enum Proof[TA, TB] {
+  Lemma
+  Reduction
+  Extension(TB, @list.List[(TA, Proof[TA, TB])])
+} derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare, TB : @lib.OCompare] @lib.OCompare for Proof[TA, TB]
+pub impl[TA : @lib.OHash, TB : @lib.OHash] @lib.OHash for Proof[TA, TB]
+
+pub(all) enum Proof1[TA, TB, TC, TD] {
+  Lemma
+  Reduction
+  Decomposition(TB, TC, @list.List[(TA, Proof1[TA, TB, TC, TD])])
+  Extension(TB, TD, @list.List[(TA, Proof1[TA, TB, TC, TD])])
+} derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare, TB : @lib.OCompare, TC : @lib.OCompare, TD : @lib.OCompare] @lib.OCompare for Proof1[TA, TB, TC, TD]
+pub impl[TA : @lib.OHash, TB : @lib.OHash, TC : @lib.OHash, TD : @lib.OHash] @lib.OHash for Proof1[TA, TB, TC, TD]
+
+pub(all) struct ReconData {
+  problem : @kernel.Thm
+  mapping : @list.List[(Int, Int)]
+  sub : ((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int])
+}
+pub impl @lib.OCompare for ReconData
+pub impl @lib.OHash for ReconData
+
+pub(all) struct SearchOpts {
+  cut1 : Bool
+  cut2 : Bool
+  cut3 : Bool
+  comp : Int
+  improved_lemmas : Bool
+  improved_regularity : Bool
+  add_eq_symmetry : Bool
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for SearchOpts
+pub impl @lib.OHash for SearchOpts
+
+// Type aliases
+pub type Clause[TA] = @list.List[Litmat[TA]]
+
+pub type ClauseExt[TA] = ((Int, @list.List[TA]), (@list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])], @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]), LitmatExt[TA])
+
+pub type Contrapositive = (@list.List[@meson.FolTerm], @list.List[(Int, @list.List[@meson.FolTerm])], Int, (Int, @kernel.Thm))
+
+pub type Contrapositive1[TA] = (((Int, @list.List[TA]), (@list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])], @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]), LitmatExt[TA]), @list.List[@meson.FolTerm], Bool, Int)
+
+pub type Iclause[TA] = ((TA, @list.List[Int]), @list.List[Litmat[TA]])
+
+pub type Imatrix[TA] = (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])])
+
+pub using @meson {type FolTerm as Iterm}
+
+pub type Lit = (Int, @list.List[@meson.FolTerm])
+
+pub type Matrix[TA] = @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]
+
+pub type Strom[TA] = (Unit) -> TA raise
+
+pub type T = @list.List[(Int, @meson.FolTerm)]
+
+pub type T1 = ((FixedArray[@meson.FolTerm?], @ref.Ref[@list.List[Int]]), @list.List[Int])
+
+// Traits

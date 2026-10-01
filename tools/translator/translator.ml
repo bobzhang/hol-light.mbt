@@ -199,6 +199,67 @@ module Functors = struct
     it.structure it str;
     (!heads, !vals)
 
+  (* the variables a pattern binds *)
+  let pat_vars (p : pattern) =
+    let acc = ref [] in
+    let open Ast_iterator in
+    let it =
+      { default_iterator with
+        pat = (fun self p ->
+          (match p.ppat_desc with
+           | Ppat_var { txt; _ } | Ppat_alias (_, { txt; _ }) -> acc := txt :: !acc
+           | _ -> ());
+          default_iterator.pat self p) }
+    in
+    it.pat it p;
+    !acc
+
+  (* The unqualified value names a structure uses free, with OCaml's
+     scoping (let, let rec, fun, match/try cases, for, structure items).
+     A local `open`/`include` could bind any name: everything under it
+     counts as free (the conservative direction). *)
+  let free_vals (str : structure) =
+    let free = ref [] in
+    let env = ref [] in
+    let open Ast_iterator in
+    let with_names names f = let saved = !env in env := names @ !env; f (); env := saved in
+    let rec case self (c : case) =
+      with_names (pat_vars c.pc_lhs) (fun () ->
+          Option.iter (self.expr self) c.pc_guard;
+          self.expr self c.pc_rhs)
+    and expr self (e : expression) =
+      match e.pexp_desc with
+      | Pexp_ident { txt = Longident.Lident n; _ } ->
+          if not (List.mem n !env) && not (List.mem n !free) then free := n :: !free
+      | Pexp_let (rf, vbs, body) ->
+          let names = List.concat_map (fun vb -> pat_vars vb.pvb_pat) vbs in
+          if rf = Asttypes.Recursive then with_names names (fun () -> List.iter (fun vb -> self.expr self vb.pvb_expr) vbs)
+          else List.iter (fun vb -> self.expr self vb.pvb_expr) vbs;
+          with_names names (fun () -> self.expr self body)
+      | Pexp_fun (_, default, p, body) ->
+          Option.iter (self.expr self) default;
+          with_names (pat_vars p) (fun () -> self.expr self body)
+      | Pexp_function cases -> List.iter (case self) cases
+      | Pexp_match (x, cases) | Pexp_try (x, cases) -> self.expr self x; List.iter (case self) cases
+      | Pexp_for (p, a, b, _, body) ->
+          self.expr self a; self.expr self b;
+          with_names (pat_vars p) (fun () -> self.expr self body)
+      | _ -> default_iterator.expr self e
+    in
+    let structure_item self (si : structure_item) =
+      match si.pstr_desc with
+      | Pstr_value (rf, vbs) ->
+          let names = List.concat_map (fun vb -> pat_vars vb.pvb_pat) vbs in
+          if rf = Asttypes.Recursive then with_names names (fun () -> List.iter (fun vb -> self.expr self vb.pvb_expr) vbs)
+          else List.iter (fun vb -> self.expr self vb.pvb_expr) vbs;
+          (* later items see them *)
+          env := names @ !env
+      | _ -> default_iterator.structure_item self si
+    in
+    let it = { default_iterator with expr; case; structure_item } in
+    it.structure it str;
+    !free
+
   (* what is visible: the first binding of each name, innermost first *)
   let visible frames =
     let mods = Hashtbl.create 64 and vals = Hashtbl.create 256 in
@@ -246,8 +307,9 @@ module Functors = struct
               Hashtbl.replace applied (fid, a.id) ()
           | None -> ())
      | _ -> ());
-    let inner_mods, inner_vals = bound_names body in
-    let heads, free_vals = free_names body in
+    let inner_mods, _ = bound_names body in
+    let heads, _ = free_names body in
+    let free_vals = free_vals body in
     let lib_of h = function None -> Some h | Some { lib = Some l; _ } -> Some l | Some _ -> None in
     let hygiene =
       List.filter_map
@@ -271,10 +333,9 @@ module Functors = struct
     in
     List.iter
       (fun v ->
-        if not (List.mem v inner_vals) then
-          let at_def = match List.assoc_opt v def_vals with Some i -> i | None -> None in
-          if at_def <> lookup_val frames v then
-            raise (Unsupported_functor ("value " ^ v ^ " is rebound where the functor is applied")))
+        let at_def = match List.assoc_opt v def_vals with Some i -> i | None -> None in
+        if at_def <> lookup_val frames v then
+          raise (Unsupported_functor ("value " ^ v ^ " is rebound where the functor is applied")))
       free_vals;
     (* the argument first: a hygiene alias must not capture it *)
     module_item param arg :: (hygiene @ body)

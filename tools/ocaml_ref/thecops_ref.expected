@@ -1,0 +1,228 @@
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Warning: inventing type variables
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Warning: inventing type variables
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 5
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 5
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+thecops quotations (21):
+  hashek = T
+  hashek
+  hashek
+  ((x /\\ hashek) ==> (y /\\ hashek)) ==> (x ==> y)
+  ~ hashek <=> F
+  hashek
+  x:A = y
+  (x:A = x) /\\ (~(x = y) \\/ y = x) /\\\n     (~(x:A = y) \\/ ~(x = z) \\/ (y = z))
+  (a ==> b) <=> ~a \\/ b
+  (a <=> b) ==> b \\/ ~a
+  c \\/ b \\/ a
+  c ==> c \\/ b \\/ a
+  b ==> c \\/ b \\/ a
+  a ==> c \\/ b \\/ a
+  a \\/ b \\/ c
+  F
+  p:bool
+  ~p
+  F
+  ~p
+  p:bool
+lean_refl =  |- (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) x:'A))))
+lean_drinker =  |- (#?:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#!:fun(fun('A,bool),bool) (\y:'A. (P:fun('A,bool) y:'A))))))
+lean_trans =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) x:'A))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. (#!:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) z:'A))) ((R:fun('A,fun('A,bool)) x:'A) z:'A))))))))) (#!:fun(fun('A,bool),bool) (\x:'A. (#?:fun(fun('A,bool),bool) (\y:'A. ((R:fun('A,fun('A,bool)) x:'A) y:'A)))))))) (#!:fun(fun('A,bool),bool) (\x:'A. ((R:fun('A,fun('A,bool)) x:'A) x:'A))))
+lean_lemma =  |- (#!:fun(fun(bool,bool),bool) (\p:bool. (#!:fun(fun(bool,bool),bool) (\q:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#/\:fun(bool,fun(bool,bool)) q:bool) p:bool))))))
+nano_refl =  |- (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) x:'A))))
+nano_drinker =  |- (#?:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#!:fun(fun('A,bool),bool) (\y:'A. (P:fun('A,bool) y:'A))))))
+nano_trans =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) x:'A))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. (#!:fun(fun('A,bool),bool) (\z:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((R:fun('A,fun('A,bool)) x:'A) y:'A)) ((R:fun('A,fun('A,bool)) y:'A) z:'A))) ((R:fun('A,fun('A,bool)) x:'A) z:'A))))))))) (#!:fun(fun('A,bool),bool) (\x:'A. (#?:fun(fun('A,bool),bool) (\y:'A. ((R:fun('A,fun('A,bool)) x:'A) y:'A)))))))) (#!:fun(fun('A,bool),bool) (\x:'A. ((R:fun('A,fun('A,bool)) x:'A) x:'A))))
+nano_lemma =  |- (#!:fun(fun(bool,bool),bool) (\p:bool. (#!:fun(fun(bool,bool),bool) (\q:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#/\:fun(bool,fun(bool,bool)) q:bool) p:bool))))))

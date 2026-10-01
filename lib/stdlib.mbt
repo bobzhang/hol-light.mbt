@@ -137,3 +137,209 @@ pub fn[A] array_length(a : FixedArray[A]) -> Int {
 pub fn[A, B] op_bar_gt(x : A, f : (A) -> B raise) -> B raise {
   f(x)
 }
+
+///|
+/// `List.fold_left2`: raises `Invalid_argument` on a length mismatch,
+/// after folding the common prefix.
+pub fn[A, B, C] list_fold_left2(
+  f : (A, B, C) -> A raise?,
+  acc : A,
+  l1 : @list.List[B],
+  l2 : @list.List[C],
+) -> A raise {
+  let mut acc = acc
+  let mut a = l1
+  let mut b = l2
+  while true {
+    match (a, b) {
+      (Empty, Empty) => return acc
+      (More(x, tail=xs), More(y, tail=ys)) => {
+        acc = f(acc, x, y)
+        a = xs
+        b = ys
+      }
+      _ => raise @num.InvalidArgument("List.fold_left2")
+    }
+  }
+  acc
+}
+
+///|
+/// OCaml's `Hashtbl.t` with structural keys: each key holds its bindings,
+/// newest first (`add` shadows, `remove` uncovers). Bucket iteration order
+/// is not modelled (no iteration functions).
+pub struct OHashtbl[K, V] {
+  priv buckets : Map[Int, Array[(K, @list.List[V])]]
+}
+
+///|
+/// `Hashtbl.create n`
+pub fn[K, V] hashtbl_create(_n : Int) -> OHashtbl[K, V] {
+  { buckets: Map([]), }
+}
+
+///|
+fn[K : OCompare + OHash, V] OHashtbl::slot(
+  self : OHashtbl[K, V],
+  k : K,
+) -> (Array[(K, @list.List[V])], Int) {
+  let h = hash(k)
+  let b = match self.buckets.get(h) {
+    Some(b) => b
+    None => {
+      let b = []
+      self.buckets[h] = b
+      b
+    }
+  }
+  for i, e in b {
+    if compare(e.0, k) == 0 {
+      return (b, i)
+    }
+  }
+  (b, -1)
+}
+
+///|
+/// `Hashtbl.clear`
+pub fn[K, V] hashtbl_clear(t : OHashtbl[K, V]) -> Unit {
+  t.buckets.clear()
+}
+
+///|
+/// `Hashtbl.add t k v`: shadows the previous binding of `k`.
+pub fn[K : OCompare + OHash, V] hashtbl_add(
+  t : OHashtbl[K, V],
+  k : K,
+  v : V,
+) -> Unit {
+  let (b, i) = t.slot(k)
+  if i < 0 {
+    b.push((k, @list.singleton(v)))
+  } else {
+    b[i] = (b[i].0, b[i].1.prepend(v))
+  }
+}
+
+///|
+/// `Hashtbl.replace t k v`: replaces the newest binding of `k`.
+pub fn[K : OCompare + OHash, V] hashtbl_replace(
+  t : OHashtbl[K, V],
+  k : K,
+  v : V,
+) -> Unit {
+  let (b, i) = t.slot(k)
+  if i < 0 {
+    b.push((k, @list.singleton(v)))
+  } else {
+    match b[i].1 {
+      More(_, tail=rest) => b[i] = (b[i].0, rest.prepend(v))
+      Empty => b[i] = (b[i].0, @list.singleton(v))
+    }
+  }
+}
+
+///|
+/// `Hashtbl.find`: the newest binding; raises `Not_found`.
+pub fn[K : OCompare + OHash, V] hashtbl_find(
+  t : OHashtbl[K, V],
+  k : K,
+) -> V raise {
+  let (b, i) = t.slot(k)
+  if i >= 0 {
+    match b[i].1 {
+      More(v, ..) => return v
+      Empty => ()
+    }
+  }
+  raise NotFound
+}
+
+///|
+/// `Hashtbl.find_opt`
+pub fn[K : OCompare + OHash, V] hashtbl_find_opt(
+  t : OHashtbl[K, V],
+  k : K,
+) -> V? {
+  try hashtbl_find(t, k) catch {
+    _ => None
+  } noraise {
+    v => Some(v)
+  }
+}
+
+///|
+/// `Hashtbl.mem`
+pub fn[K : OCompare + OHash, V] hashtbl_mem(t : OHashtbl[K, V], k : K) -> Bool {
+  hashtbl_find_opt(t, k) is Some(_)
+}
+
+///|
+/// `Hashtbl.remove`: removes the newest binding of `k`.
+pub fn[K : OCompare + OHash, V] hashtbl_remove(
+  t : OHashtbl[K, V],
+  k : K,
+) -> Unit {
+  let (b, i) = t.slot(k)
+  if i >= 0 {
+    match b[i].1 {
+      More(_, tail=rest) => b[i] = (b[i].0, rest)
+      Empty => ()
+    }
+  }
+}
+
+///|
+/// OCaml's `Lazy.t`: forced at most once; an exception raised while
+/// forcing is raised again by every later force.
+pub struct OLazy[T] {
+  priv mut state : LazyState[T]
+}
+
+///|
+priv enum LazyState[T] {
+  Pending(() -> T raise)
+  Forcing
+  Done(T)
+  Failed(Error)
+}
+
+///|
+/// OCaml's `Lazy.Undefined` (a lazy value forced while being forced).
+pub(all) suberror LazyUndefined derive(Debug)
+
+///|
+/// `lazy e`
+pub fn[T] lazy_new(f : () -> T raise) -> OLazy[T] {
+  { state: Pending(f), }
+}
+
+///|
+/// `Lazy.force`
+pub fn[T] lazy_force(l : OLazy[T]) -> T raise {
+  match l.state {
+    Done(v) => v
+    Failed(e) => raise e
+    Forcing => raise LazyUndefined
+    Pending(f) => {
+      l.state = Forcing
+      let v = f() catch {
+        e => {
+          l.state = Failed(e)
+          raise e
+        }
+      }
+      l.state = Done(v)
+      v
+    }
+  }
+}
+
+///|
+/// `Char.chr`: raises `Invalid_argument` outside 0..255.
+pub fn char_chr(n : Int) -> Char raise {
+  if n < 0 || n > 255 {
+    raise @num.InvalidArgument("Char.chr")
+  }
+  n.unsafe_to_char()
+}

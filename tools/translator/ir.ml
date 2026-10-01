@@ -28,6 +28,7 @@ module Ir = struct
     | LetTyped of string * string * exp
     | Do of exp
     | Assign of exp * exp                 (* r.val = e *)
+    | While of block * block              (* while cond do body done *)
     | SetField of exp * string * exp      (* r.f = e *)
     | LetFn of string * (string * string) list * string * block
                                           (* local recursive function *)
@@ -111,7 +112,8 @@ module Ir = struct
   (* An expression in function or receiver position. *)
   and pfun e =
     match e with
-    | Atom _ | Call _ | Field _ | Tuple _ | Deref _ | Proj _ | Record _ -> pexp e
+    (* `r.val(x)` / `t.0(x)` would be method calls *)
+    | Atom _ | Call _ | Tuple _ | Record _ -> pexp e
     | _ -> p "("; pexp e; p ")"
 
   (* an operand of a binary operator or `!` *)
@@ -143,6 +145,10 @@ module Ir = struct
     | LetTyped (x, t, e) -> nl (); p "let "; p x; p " : "; p t; p " = "; pexp e
     | Do e -> nl (); pexp e
     | Assign (r, e) -> nl (); pfun r; p ".val = "; pexp e
+    | While ((cs, cx), body) ->
+        (* the condition may need statements: test it inside the loop *)
+        nl (); p "while true ";
+        pblock (cs @ [ Do (If (cx, ([], Atom "()"), ([], Atom "break"))) ] @ fst body, snd body)
     | SetField (r, f, e) -> nl (); pfun r; p "."; p f; p " = "; pexp e
     | LetFn (name, params, ret, b) ->
         nl (); p "fn "; p name; p "(";

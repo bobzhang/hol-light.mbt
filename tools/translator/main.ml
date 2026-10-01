@@ -16,6 +16,7 @@ module Main = struct
     | "quot.ml" -> ("quot/quot.mbt", [])
     | "impconv.ml" -> ("impconv/impconv.mbt", [])
     | "metis.ml" -> ("metis/metis.mbt", [])
+    | "thecops.ml" -> ("thecops/thecops.mbt", [])
     | "ocaml_map.ml" -> ("omap/omap.mbt", [])
     | "ocaml_set.ml" -> ("oset/oset.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)

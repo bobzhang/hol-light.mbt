@@ -1021,3 +1021,24 @@ pub fn string_of_term(tm : Term) -> String raise {
 pub fn string_of_thm(th : @kernel.Thm) -> String raise {
   thm_printer.run(pp_print_thm, th)
 }
+
+///|
+/// printer.ml's `print_to_string printer`: a buffer formatter (at most 100
+/// boxes) made now, and `printer fmt` applied now; each call prints at the
+/// current margin and returns the text.
+pub fn[T] print_to_string(
+  printer : (Formatter) -> ((T) -> Unit raise) raise,
+) -> ((T) -> String raise) raise {
+  let buf = StringBuilder()
+  let fmt = @pp.formatter_of_buffer(buf)
+  fmt.set_max_boxes(100)
+  let print = printer(fmt)
+  x => {
+    fmt.set_margin(@pp.std_formatter.get_margin())
+    print(x)
+    fmt.print_flush()
+    let s = buf.to_string()
+    buf.reset()
+    s
+  }
+}

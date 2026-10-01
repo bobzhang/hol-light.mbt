@@ -333,4 +333,11 @@ definitions register constants, quotations advance the type-variable and
   seeding `Random.init` uses) and List.sort are ported exactly; module
   members resolve through recorded module paths; exceptions get distinct
   suberrors; lambdas with known types are annotated raising `fn`s.
-  Next: `thecops`, then the theory files.
+  `thecops/` is done, entirely translated, and matches upstream on
+  LEANCOP_TAC and NANOCOP_TAC proofs (it needed while loops, lazy values,
+  Hashtbl with OCaml's shadowing semantics, local opens, `include` of a
+  translated module, and fixpoint bounds for recursive groups). Known
+  limitation: Hashtbl.hash of float arrays is that of an ordinary block.
+  The core (everything hol.ml loads before the theory files) is now
+  ported. Next: the theory files (pair, compute, nums, recursion, arith,
+  ...).

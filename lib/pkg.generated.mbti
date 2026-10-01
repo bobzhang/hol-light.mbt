@@ -37,6 +37,8 @@ pub fn[A] butlast(@list.List[A]) -> @list.List[A] raise
 
 pub fn[A, B] can((A) -> B raise, A) -> Bool raise
 
+pub fn char_chr(Int) -> Char raise
+
 pub fn[A] check((A) -> Bool raise?, A) -> A raise
 
 pub fn[K, V] choose(Func[K, V]) -> (K, V) raise
@@ -111,6 +113,22 @@ pub fn[K : OCompare, V : OCompare] graph(Func[K, V]) -> @list.List[(K, V)]
 
 pub fn[T : OHash] hash(T) -> Int
 
+pub fn[K : OCompare + OHash, V] hashtbl_add(OHashtbl[K, V], K, V) -> Unit
+
+pub fn[K, V] hashtbl_clear(OHashtbl[K, V]) -> Unit
+
+pub fn[K, V] hashtbl_create(Int) -> OHashtbl[K, V]
+
+pub fn[K : OCompare + OHash, V] hashtbl_find(OHashtbl[K, V], K) -> V raise
+
+pub fn[K : OCompare + OHash, V] hashtbl_find_opt(OHashtbl[K, V], K) -> V?
+
+pub fn[K : OCompare + OHash, V] hashtbl_mem(OHashtbl[K, V], K) -> Bool
+
+pub fn[K : OCompare + OHash, V] hashtbl_remove(OHashtbl[K, V], K) -> Unit
+
+pub fn[K : OCompare + OHash, V] hashtbl_replace(OHashtbl[K, V], K, V) -> Unit
+
 pub fn[A] hd(@list.List[A]) -> A raise
 
 pub fn[A] id(A) -> A
@@ -139,6 +157,10 @@ pub fn[A, B] konst(A, B) -> A
 
 pub fn[A] last(@list.List[A]) -> A raise
 
+pub fn[T] lazy_force(OLazy[T]) -> T raise
+
+pub fn[T] lazy_new(() -> T raise) -> OLazy[T]
+
 pub fn[A] length(@list.List[A]) -> Int
 
 pub fn[A] list_append(@list.List[A], @list.List[A]) -> @list.List[A]
@@ -158,6 +180,8 @@ pub fn[A, B] list_filter_map((A) -> B? raise?, @list.List[A]) -> @list.List[B] r
 pub fn[A] list_find((A) -> Bool raise?, @list.List[A]) -> A raise
 
 pub fn[A] list_find_opt((A) -> Bool raise?, @list.List[A]) -> A? raise?
+
+pub fn[A, B, C] list_fold_left2((A, B, C) -> A raise?, A, @list.List[B], @list.List[C]) -> A raise
 
 pub fn[A, B] list_for_all2((A, B) -> Bool raise?, @list.List[A], @list.List[B]) -> Bool raise
 
@@ -334,6 +358,8 @@ pub(all) suberror AssertFailure {
   AssertFailure(String)
 } derive(@debug.Debug)
 
+pub(all) suberror LazyUndefined derive(@debug.Debug)
+
 pub(all) suberror MatchFailure {
   MatchFailure(String)
 } derive(@debug.Debug)
@@ -368,6 +394,14 @@ pub fn OHasher::double(Self, Double) -> Unit
 pub fn[T : OHash] OHasher::field(Self, T) -> Unit
 pub fn OHasher::int(Self, Int64) -> Unit
 pub fn OHasher::string(Self, String) -> Unit
+
+pub struct OHashtbl[K, V] {
+  // private fields
+}
+
+pub struct OLazy[T] {
+  // private fields
+}
 
 // Type aliases
 

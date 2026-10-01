@@ -87,6 +87,8 @@ pub fn print_term(@kernel.Term) -> Unit raise
 
 pub fn print_thm(@kernel.Thm) -> Unit raise
 
+pub fn[T] print_to_string((@pp.Formatter) -> ((T) -> Unit raise) raise) -> ((T) -> String raise) raise
+
 pub fn print_type(@kernel.HolType) -> Unit raise
 
 pub let print_types_of_subterms : @ref.Ref[Int]

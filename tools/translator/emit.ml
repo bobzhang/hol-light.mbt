@@ -92,8 +92,13 @@ module Emit = struct
         let body_text = Ir.to_string (fun () -> Ir.pblock (stmts, result)) in
         let tvs = tyvars_of_text (sig_params ^ " " ^ ret) in
         Hashtbl.replace fn_bounds mname (List.filter (Hashtbl.mem bound_tyvars) tvs, want);
-        let text = Printf.sprintf "\n///|\n/// `%s`\npub fn%s %s(%s) -> %s raise %s\n" oname (generics_of ~body:body_text (sig_params ^ " " ^ ret)) mname sig_params ret body_text in
-        add_decl (fun () -> text)
+        (* the bounds of a recursive group's function may still grow (see
+           group_bounds): the generics are printed at output time *)
+        let bset = Hashtbl.copy bound_tyvars in
+        Hashtbl.replace fn_bound_sets mname (bset, tvs, want);
+        add_decl (fun () ->
+            let gens = bounded_in bset tvs in
+            Printf.sprintf "\n///|\n/// `%s`\npub fn%s %s(%s) -> %s raise %s\n" oname gens mname sig_params ret body_text)
     | _ -> failwith "emit_function: not a lambda"
 
   let paren_fn t = if String.length t > 0 && t.[0] = '(' then "(" ^ t ^ ")" else t
@@ -159,6 +164,17 @@ module Emit = struct
     | Texp_tuple es -> List.for_all syntactic_value es
     | _ -> false
 
+  (* An expression that can be evaluated again without changing the
+     program: a syntactic value, a function, or `let`s of such (OCaml's
+     non-expansiveness is weaker: `(incr c; fun x -> x)` qualifies). *)
+  let rec pure_value (e : expression) =
+    match e.exp_desc with
+    | Texp_ident _ | Texp_constant _ | Texp_function _ -> true
+    | Texp_construct (_, _, args) -> List.for_all pure_value args
+    | Texp_tuple es -> List.for_all pure_value es
+    | Texp_let (_, vbs, body) -> List.for_all (fun vb -> pure_value vb.vb_expr) vbs && pure_value body
+    | _ -> false
+
   (* A polymorphic value (`let empty = Empty`, `let choose = min_binding`):
      MoonBit globals are monomorphic, so it becomes a generic accessor, or
      for a function a generic wrapper (eta-expansion is safe: no effects). *)
@@ -194,7 +210,7 @@ module Emit = struct
   let emit_value ?id oname (e : expression) =
     Hashtbl.reset tyvar_names;
     let mname = fresh_top oname in
-    if (syntactic_value e || Typecore.is_nonexpansive e) && tyvars_of_text (show_ty e.exp_type) <> [] then
+    if pure_value e && tyvars_of_text (show_ty e.exp_type) <> [] then
       emit_poly_value ?id oname mname e
     else
     let mty = mty_of e.exp_type in
@@ -579,6 +595,10 @@ module Emit = struct
                         | None -> ())
                    | Types.Sig_module (id, _, _, _, _) ->
                        Hashtbl.replace module_paths (Ident.unique_name id) (List.rev !module_prefix @ [ Ident.name id ])
+                   | Types.Sig_typext (id, _, _, _) ->
+                       (match Hashtbl.find_opt own_exns (qual (Ident.name id)) with
+                        | Some e -> Hashtbl.replace own_exns ("#" ^ Ident.unique_name id) e
+                        | None -> ())
                    | _ -> ())
                  incl_type
            | Tstr_include { incl_mod = { mod_desc = (Tmod_ident (p, _) | Tmod_constraint ({ mod_desc = Tmod_ident (p, _); _ }, _, _, _)); _ }; incl_type; _ } ->
@@ -609,7 +629,9 @@ module Emit = struct
                                  Hashtbl.replace own_exns (here (Ident.name id)) e
                              | None -> ())
                         | Types.Sig_module (id, _, _, _, _) ->
-                            Hashtbl.replace module_paths (Ident.unique_name id) (src @ [ Ident.name id ])
+                            Hashtbl.replace module_paths (Ident.unique_name id) (src @ [ Ident.name id ]);
+                            Hashtbl.replace module_aliases
+                              (String.concat "." (List.rev !module_prefix @ [ Ident.name id ])) (src @ [ Ident.name id ])
                         | _ -> ())
                       incl_type
                 | None -> ())
@@ -621,6 +643,10 @@ module Emit = struct
                let saved = !module_prefix in
                let name = match mb_id with Some id -> Ident.name id | None -> "_" in
                module_prefix := name :: saved;
+               (* a new module of this name: aliases under the old one go *)
+               let full = String.concat "." (List.rev !module_prefix) in
+               let stale = Hashtbl.fold (fun k _ acc -> if k = full || (String.length k > String.length full && String.sub k 0 (String.length full + 1) = full ^ ".") then k :: acc else acc) module_aliases [] in
+               List.iter (Hashtbl.remove module_aliases) stale;
                (match mb_id with
                 | Some id -> Hashtbl.replace module_paths (Ident.unique_name id) (List.rev !module_prefix)
                 | None -> ());
@@ -628,6 +654,9 @@ module Emit = struct
                  (fun () -> List.iter (fun it -> item ~hand it) str.str_items)
            | Tstr_module { mb_id = Some id; mb_expr = { mod_desc = Tmod_ident (p, _); _ }; _ } ->
                (* a module alias (e.g. a specialized functor's parameter) *)
+               let full = String.concat "." (List.rev !module_prefix @ [ Ident.name id ]) in
+               let stale = Hashtbl.fold (fun k _ acc -> if k = full || (String.length k > String.length full && String.sub k 0 (String.length full + 1) = full ^ ".") then k :: acc else acc) module_aliases [] in
+               List.iter (Hashtbl.remove module_aliases) stale;
                (match module_path p with
                 | Some path ->
                     Hashtbl.replace module_paths (Ident.unique_name id) path;
@@ -657,7 +686,40 @@ module Emit = struct
                      | _ -> unsupported vb.vb_loc "recursive value")
                    vbs
                in
-               List.iter (fun (mname, id, vb) -> emit_function ~mname (Ident.name id) id vb.vb_expr) named
+               group_members := List.map (fun (m, _, _) -> m) named;
+               pending_calls := [];
+               List.iter
+                 (fun (mname, id, vb) -> current_fn := mname; emit_function ~mname (Ident.name id) id vb.vb_expr)
+                 named;
+               current_fn := "";
+               group_members := [];
+               (* a caller bounds what it instantiates a callee's bounded
+                  generics with, until nothing changes *)
+               let changed = ref true in
+               while !changed do
+                 changed := false;
+                 List.iter
+                   (fun (caller, callee, inst) ->
+                     match Hashtbl.find_opt fn_bound_sets caller, Hashtbl.find_opt fn_bound_sets callee with
+                     | Some (cset, _, _), Some (eset, _, decl) ->
+                         let pairs = inst_pairs decl inst [] in
+                         List.iter
+                           (fun (v, t) ->
+                             if Hashtbl.mem eset v then
+                               List.iter
+                                 (fun w -> if not (Hashtbl.mem cset w) then (Hashtbl.replace cset w (); changed := true))
+                                 (mty_tyvars t []))
+                           pairs
+                     | _ -> ())
+                   !pending_calls
+               done;
+               List.iter
+                 (fun (m, _, _) ->
+                   match Hashtbl.find_opt fn_bound_sets m with
+                   | Some (set, tvs, want) -> Hashtbl.replace fn_bounds m (List.filter (Hashtbl.mem set) tvs, want)
+                   | None -> ())
+                 named;
+               pending_calls := []
            | Tstr_eval (e, _) -> emit_eval e
            | _ -> unsupported it.str_loc "structure item"
          with Unsupported (msg, loc) ->

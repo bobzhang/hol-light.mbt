@@ -188,6 +188,8 @@ module Lower = struct
     | "float" -> Some "Double"
     | "Stdlib.ref" -> Some "Ref"
     | "array" -> Some "FixedArray"
+    | "Hashtbl.t" | "Stdlib.Hashtbl.t" | "Stdlib__Hashtbl.t" -> Some "@lib.OHashtbl"
+    | "Lazy.t" | "lazy_t" | "Stdlib.Lazy.t" | "CamlinternalLazy.t" -> Some "@lib.OLazy"
     | "Format.formatter" | "Stdlib__Format.formatter" | "Stdlib.Format.formatter" | "formatter" -> Some "@pp.Formatter"
     | "net" -> Some "@nets.Net"
     | "gconv" -> Some "@simp.Gconv"
@@ -367,7 +369,8 @@ module Lower = struct
   (* ---------------------------------------------------------------- *)
 
   let keywords =
-    [ "as"; "break"; "catch"; "const"; "continue"; "else"; "enum"; "extern";
+    [ "as"; "break"; "catch"; "const"; "continue"; "else"; "enum"; "extern"; "var"; "traitalias";
+      "enumview"; "lexmatch"; "derive"; "declare"; "fnalias"; "region"; "entry"; "recur"; "spawn"; "loopify";
       "false"; "fn"; "for"; "guard"; "if"; "impl"; "in"; "is"; "let"; "loop";
       "match"; "mut"; "priv"; "pub"; "raise"; "return"; "self"; "struct";
       "suberror"; "test"; "trait"; "true"; "try"; "type"; "typealias";
@@ -484,6 +487,13 @@ module Lower = struct
      hashing: those in the argument types of comparison primitives and of
      interface functions with bounded generics *)
   let bound_tyvars : (string, unit) Hashtbl.t = Hashtbl.create 16
+
+  (* a group function's declared type by MoonBit name *)
+  let own_by_name_m : (string, M.ty) Hashtbl.t = Hashtbl.create 64
+
+  let bounded_in set gens =
+    if gens = [] then ""
+    else "[" ^ String.concat ", " (List.map (fun g -> if Hashtbl.mem set g then g ^ " : Eq + @lib.OCompare + @lib.OHash" else g) gens) ^ "]"
 
   let bounded gens _text =
     if gens = [] then ""
@@ -791,6 +801,16 @@ module Lower = struct
      bounds whatever the caller instantiates those generics with. *)
   let fn_bounds : (string, string list * M.ty) Hashtbl.t = Hashtbl.create 64
 
+  (* top-level functions: their bounded set (mutable while their recursive
+     group is emitted), generics and declared type *)
+  let fn_bound_sets : (string, (string, unit) Hashtbl.t * string list * M.ty) Hashtbl.t = Hashtbl.create 64
+
+  (* the recursive group being emitted, the function being emitted, and
+     the calls between the group's functions (caller, callee, instances) *)
+  let group_members : string list ref = ref []
+  let current_fn = ref ""
+  let pending_calls : (string * string * M.ty) list ref = ref []
+
   (* the instances of a declared type's variables in an instance type *)
   let rec inst_pairs (d : M.ty) (i : M.ty) acc =
     match d, i with
@@ -878,7 +898,11 @@ module Lower = struct
          | ("true" | "false" | "None"), [] -> cd.Types.cstr_name
          | name, [] -> ctor_name ~cd name
          | name, ps -> ctor_name ~cd name ^ "(" ^ String.concat ", " (List.map (fun q -> pattern q) ps) ^ ")")
-    | Tpat_or (a, b, _) -> pattern ?mty a ^ " | " ^ pattern ?mty b
+    | Tpat_or (a, b, _) ->
+        (* an alternative binding with `as` needs parentheses *)
+        let has_as t = let n = String.length t in let rec at i = i + 4 <= n && (String.sub t i 4 = " as " || at (i + 1)) in at 0 in
+        let paren t = if has_as t then "(" ^ t ^ ")" else t in
+        paren (pattern ?mty a) ^ " | " ^ paren (pattern ?mty b)
     | Tpat_record (fields, _) ->
         "{ "
         ^ String.concat ", "
@@ -917,10 +941,7 @@ module Lower = struct
     in
     let short =
       match String.rindex_opt n '.' with
-      | Some i
-        when String.length n > 5
-             && (String.sub n 0 5 = "List." || (String.length n > 12 && String.sub n 0 12 = "Stdlib.List."))
-             && from_stdlib ->
+      | Some i when from_stdlib ->
           Some (String.sub n (i + 1) (String.length n - i - 1))
       | _ -> None
     in
@@ -931,7 +952,7 @@ module Lower = struct
     | Some ("sort" | "stable_sort") -> Some "list_sort"
     | Some ("rev_map" | "nth" | "iter2" | "mapi" | "iteri" | "find" | "find_opt" | "filter_map"
            | "concat_map" | "mem_assoc" | "remove_assoc" | "split" | "init" | "append"
-           | "for_all2" | "exists2" | "filter" | "partition" | "map2" | "combine" as f) -> Some ("list_" ^ f)
+           | "for_all2" | "exists2" | "filter" | "partition" | "map2" | "combine" | "fold_left2" as f) -> Some ("list_" ^ f)
     | Some "for_all" -> Some "forall"
     | Some "iter" -> Some "do_list"
     | Some ("concat" | "flatten") -> Some "flat"
@@ -974,12 +995,33 @@ module Lower = struct
     | Texp_apply (f, args) ->
         (* the typed arguments are in the callee's parameter order, so a
            labelled argument is positional (none may be omitted) *)
+        (* a Stdlib function's omitted optional arguments (`?random` of
+           Hashtbl.create) take their defaults *)
+        let omitted = function
+          | (Asttypes.Optional _, None) -> true
+          | (Asttypes.Optional _, Some { exp_desc = Texp_construct (_, cd, []); _ }) -> cd.Types.cstr_name = "None"
+          | _ -> false
+        in
+        let args =
+          match f.exp_desc with
+          | Texp_ident (p, _, _) when stdlib_name p <> None -> List.filter (fun a -> not (omitted a)) args
+          | _ -> args
+        in
         let args =
           List.map (function
-              | ((Asttypes.Nolabel | Asttypes.Labelled _), Some a) -> a
-              | _ -> unsupported loc "optional or omitted argument") args
+              | ((Asttypes.Nolabel | Asttypes.Labelled _ | Asttypes.Optional _), Some a) -> a
+              | _ -> unsupported loc "omitted argument") args
         in
         lower_apply ?expect e f args
+    | Texp_while (c, body) ->
+        let cs, cx, _ = lower c in
+        let bs, bx, _ = lower body in
+        ([ While ((cs, cx), (bs @ (if ordered bx then [ Do bx ] else []), Atom "()")) ], Atom "()", M.Named ("Unit", []))
+    | Texp_lazy body ->
+        (* evaluated (once) when forced *)
+        let bb = lower_block body in
+        ([], Call (Atom "@lib.lazy_new", [ Lam ([], bb) ]), mty_of e.exp_type)
+    | Texp_open (_, body) -> lower ?expect body
     | Texp_function _ -> lower_function ?expect e
     | Texp_let (Asttypes.Nonrecursive, vbs, body) -> lower_let ?expect vbs body
     | Texp_tuple es ->
@@ -1117,7 +1159,7 @@ module Lower = struct
     | Texp_ident (p, _, _) when (match stdlib_name p with Some ("Format.printf" | "Printf.printf" | "Printf.sprintf" | "Format.sprintf") -> true | _ -> false) ->
         lower_printf ?expect whole (Option.get (stdlib_name p)) args
     | Texp_ident (p, _, _)
-      when (match Prov.lookup p with Some ("printer.ml", ("pp_print_string" | "pp_print_int" | "pp_print_newline" | "pp_print_space" | "pp_print_cut" | "pp_print_break" | "pp_open_box" | "pp_close_box" | "pp_open_hvbox" | "pp_open_vbox" | "pp_print_flush")) -> true | _ -> false) ->
+      when (match Prov.lookup p with Some ("printer.ml", ("pp_print_string" | "pp_print_char" | "pp_print_int" | "pp_print_newline" | "pp_print_space" | "pp_print_cut" | "pp_print_break" | "pp_open_box" | "pp_close_box" | "pp_open_hvbox" | "pp_open_vbox" | "pp_print_flush")) -> true | _ -> false) ->
         (* printer.ml includes Format *)
         (match Prov.lookup p with
          | Some (_, n) -> lower_prim ?expect whole ("Format." ^ n) f args
@@ -1151,6 +1193,11 @@ module Lower = struct
     List.iter (fun a -> List.iter (fun v -> Hashtbl.replace bound_tyvars v ()) (tyvars_of_text (show_ty a.exp_type))) args
 
   and apply_head ?expect ?res loc h args =
+    (match h.hexp with
+     | Atom q when List.mem q !group_members && !current_fn <> "" ->
+         (* a call within a recursive group: resolved after the group *)
+         pending_calls := (!current_fn, q, h.hmty) :: !pending_calls
+     | _ -> ());
     (match h.hexp with
      | Atom q when Hashtbl.mem fn_bounds q ->
          let bs, decl = Hashtbl.find fn_bounds q in
@@ -1402,6 +1449,21 @@ module Lower = struct
       | "Random.int" -> (1, fun [ a ] _ -> Call (Atom "@lib.random_int", [ a ]))
       | "Random.init" -> (1, fun [ a ] _ -> Call (Atom "@lib.random_init", [ a ]))
       | "Random.bits" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@lib.random_bits", [])))
+      | "incr" -> (1, fun [ a ] _ -> Blk ([ Assign (a, Binop ("+", Deref a, Atom "1")) ], Atom "()"))
+      | "decr" -> (1, fun [ a ] _ -> Blk ([ Assign (a, Binop ("-", Deref a, Atom "1")) ], Atom "()"))
+      | "Char.chr" -> (1, fun [ a ] _ -> Call (Atom "@lib.char_chr", [ a ]))
+      | "Char.code" -> (1, fun [ a ] _ -> Call (Atom "Char::to_int", [ a ]))
+      | "Format.std_formatter" -> (0, fun [] _ -> Atom "@pp.std_formatter")
+      | "Lazy.force" -> (1, fun [ a ] _ -> Call (Atom "@lib.lazy_force", [ a ]))
+      | "Hashtbl.create" -> (1, fun [ a ] _ -> Call (Atom "@lib.hashtbl_create", [ a ]))
+      | "Hashtbl.clear" | "Hashtbl.reset" -> (1, fun [ a ] _ -> Call (Atom "@lib.hashtbl_clear", [ a ]))
+      | "Hashtbl.add" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.hashtbl_add", [ a; b; c ]))
+      | "Hashtbl.replace" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.hashtbl_replace", [ a; b; c ]))
+      | "Hashtbl.find" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.hashtbl_find", [ a; b ]))
+      | "Hashtbl.find_opt" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.hashtbl_find_opt", [ a; b ]))
+      | "Hashtbl.mem" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.hashtbl_mem", [ a; b ]))
+      | "Hashtbl.remove" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.hashtbl_remove", [ a; b ]))
+      | "Format.pp_print_char" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::print_string", [ a; Call (Atom "Char::to_string", [ b ]) ]))
       | "Format.pp_print_string" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::print_string", [ a; b ]))
       | "Format.pp_print_int" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::print_int", [ a; b ]))
       | "Format.pp_print_space" -> (2, fun [ a; b ] _ -> Blk ((if ordered b then [ Do b ] else []), Call (Atom "@pp.Formatter::print_space", [ a ])))
@@ -1427,6 +1489,8 @@ module Lower = struct
     in
     let arg_tys = List.map (fun a -> a.exp_type) args in
     (match name with
+     | "Hashtbl.add" | "Hashtbl.replace" | "Hashtbl.find" | "Hashtbl.find_opt" | "Hashtbl.mem" | "Hashtbl.remove" ->
+         (match args with _ :: k :: _ -> note_bounds [ k ] | _ -> ())
      | "=" | "<>" | "compare" | "<" | ">" | "<=" | ">=" | "min" | "max" ->
          note_bounds args;
          (* a partial application: the parameter types of its instance *)
