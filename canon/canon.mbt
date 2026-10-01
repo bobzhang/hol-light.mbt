@@ -1767,27 +1767,10 @@ fn step_12() -> Unit raise {
     @parser.parse_term("(s = \\x. t x) <=> (!x. s x = t x)"),
     t153,
   )
-  fn conv(
-    x154 : @list.List[@kernel.Term],
-    x155 : @kernel.Term,
-  ) -> @kernel.Thm raise {
-    let vs = x154
-    let tm = x155
-    if vs == @list.empty() {
-      @kernel.refl(tm)
-    } else {
-      let t157 = @lib.tl(vs)
-      let t159 = @equal.binder_conv((x158 : @kernel.Term) => conv(t157, x158))
-      @equal.thenc(
-        @simp.gen_rewrite_conv(
-          (x156 : (@kernel.Term) -> @kernel.Thm raise) => x156,
-          @list.List([pth]),
-        ),
-        t159,
-      )(tm)
-    }
-  }
-  let half_mk_abs_conv : (@list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise = conv
+  let half_mk_abs_conv : (@list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise = (
+    x154,
+    x155,
+  ) => conv_l(pth, x154, x155)
   fn find_lambda(x160 : @kernel.Term) -> @kernel.Term raise {
     let tm_1 = x160
     if @kernel.is_abs(tm_1) {
@@ -1893,6 +1876,32 @@ let lambda_elim_conv_c : @lib.Cell[@equal.Conv] = @lib.Cell::new(
 /// `LAMBDA_ELIM_CONV`
 pub fn lambda_elim_conv(x : @kernel.Term) -> @kernel.Thm raise {
   lambda_elim_conv_c.get()(x)
+}
+
+///|
+fn[TA : Eq + @lib.OCompare + @lib.OHash] conv_l(
+  pth : @kernel.Thm,
+  x154 : @list.List[TA],
+  x155 : @kernel.Term,
+) -> @kernel.Thm raise {
+  let conv = (x154 : @list.List[TA], x155 : @kernel.Term) => {
+    conv_l(pth, x154, x155)
+  }
+  let vs = x154
+  let tm = x155
+  if vs == @list.empty() {
+    @kernel.refl(tm)
+  } else {
+    let t157 = @lib.tl(vs)
+    let t159 = @equal.binder_conv((x158 : @kernel.Term) => conv(t157, x158))
+    @equal.thenc(
+      @simp.gen_rewrite_conv(
+        (x156 : (@kernel.Term) -> @kernel.Thm raise) => x156,
+        @list.List([pth]),
+      ),
+      t159,
+    )(tm)
+  }
 }
 
 ///|

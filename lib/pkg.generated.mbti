@@ -181,6 +181,8 @@ pub fn[A, B] mapfilter((A) -> B raise, @list.List[A]) -> @list.List[B] raise
 
 pub fn[A, B] mapi((Int, A) -> B raise?, @list.List[A]) -> @list.List[B] raise?
 
+pub fn md5(Bytes) -> Bytes
+
 pub fn[A : OCompare] mem(A, @list.List[A]) -> Bool
 
 pub fn[A] mem_eq((A, A) -> Bool raise?, A, @list.List[A]) -> Bool raise?
@@ -200,6 +202,14 @@ pub fn[A] qmap((A) -> A raise?, @list.List[A]) -> @list.List[A] raise?
 pub fn[T] raise_error(Error) -> T raise
 
 pub fn[K, V : OCompare] ran(Func[K, V]) -> @list.List[V]
+
+pub fn random_bits() -> Int
+
+pub fn random_full_init(Array[Int]) -> Unit
+
+pub fn random_init(Int) -> Unit
+
+pub fn random_int(Int) -> Int raise
 
 pub fn range(Int, Int) -> @list.List[Int]
 

@@ -5,4 +5,5 @@ import {
   "moonbitlang/core/debug",
   "moonbitlang/core/encoding/utf8",
   "moonbitlang/core/bigint",
+  "moonbitlang/core/buffer",
 }

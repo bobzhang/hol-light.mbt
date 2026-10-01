@@ -1456,57 +1456,161 @@ pub fn[A] rev_append(l1 : @list.List[A], l2 : @list.List[A]) -> @list.List[A] {
 }
 
 ///|
-/// `List.sort` / `List.stable_sort`: a stable sort by an OCaml-style
-/// comparison (negative, zero, positive).
+/// `List.sort` / `List.stable_sort`: OCaml 4.14's merge sort, so the
+/// comparison is called on the same pairs in the same order.
 pub fn[A] list_sort(
   cmp : (A, A) -> Int raise?,
   l : @list.List[A],
 ) -> @list.List[A] raise? {
-  let a = l.to_array()
-  let n = a.length()
-  if n < 2 {
-    return l
+  let len = l.length()
+  if len < 2 {
+    l
+  } else {
+    sort_run(cmp, len, l).0
   }
-  // bottom-up merge sort (stable)
-  let mut src = a
-  let mut dst = Array::make(n, a[0])
-  let mut width = 1
-  while width < n {
-    let mut lo = 0
-    while lo < n {
-      let mid = if lo + width < n { lo + width } else { n }
-      let hi = if lo + 2 * width < n { lo + 2 * width } else { n }
-      let mut i = lo
-      let mut j = mid
-      let mut k = lo
-      while i < mid && j < hi {
-        if cmp(src[j], src[i]) < 0 {
-          dst[k] = src[j]
-          j += 1
+}
+
+///|
+fn[A] sort_rev_merge(
+  cmp : (A, A) -> Int raise?,
+  l1 : @list.List[A],
+  l2 : @list.List[A],
+  accu : @list.List[A],
+) -> @list.List[A] raise? {
+  let mut l1 = l1
+  let mut l2 = l2
+  let mut accu = accu
+  while true {
+    match (l1, l2) {
+      (Empty, l2) => return rev_append(l2, accu)
+      (l1, Empty) => return rev_append(l1, accu)
+      (More(h1, tail=t1), More(h2, tail=t2)) =>
+        if cmp(h1, h2) <= 0 {
+          accu = accu.prepend(h1)
+          l1 = t1
         } else {
-          dst[k] = src[i]
-          i += 1
+          accu = accu.prepend(h2)
+          l2 = t2
         }
-        k += 1
-      }
-      while i < mid {
-        dst[k] = src[i]
-        i += 1
-        k += 1
-      }
-      while j < hi {
-        dst[k] = src[j]
-        j += 1
-        k += 1
-      }
-      lo += 2 * width
     }
-    let t = src
-    src = dst
-    dst = t
-    width *= 2
   }
-  @list.List(src)
+  accu
+}
+
+///|
+fn[A] sort_rev_merge_rev(
+  cmp : (A, A) -> Int raise?,
+  l1 : @list.List[A],
+  l2 : @list.List[A],
+  accu : @list.List[A],
+) -> @list.List[A] raise? {
+  let mut l1 = l1
+  let mut l2 = l2
+  let mut accu = accu
+  while true {
+    match (l1, l2) {
+      (Empty, l2) => return rev_append(l2, accu)
+      (l1, Empty) => return rev_append(l1, accu)
+      (More(h1, tail=t1), More(h2, tail=t2)) =>
+        if cmp(h1, h2) > 0 {
+          accu = accu.prepend(h1)
+          l1 = t1
+        } else {
+          accu = accu.prepend(h2)
+          l2 = t2
+        }
+    }
+  }
+  accu
+}
+
+///|
+/// `sort n l` of OCaml's `stable_sort`: the first `n` elements sorted, and
+/// the rest of the list.
+fn[A] sort_run(
+  cmp : (A, A) -> Int raise?,
+  n : Int,
+  l : @list.List[A],
+) -> (@list.List[A], @list.List[A]) raise? {
+  match (n, l) {
+    (2, More(x1, tail=More(x2, tail=tl))) => {
+      let s = if cmp(x1, x2) <= 0 {
+        @list.from_array([x1, x2])
+      } else {
+        @list.from_array([x2, x1])
+      }
+      (s, tl)
+    }
+    (3, More(x1, tail=More(x2, tail=More(x3, tail=tl)))) => {
+      let s = if cmp(x1, x2) <= 0 {
+        if cmp(x2, x3) <= 0 {
+          [x1, x2, x3]
+        } else if cmp(x1, x3) <= 0 {
+          [x1, x3, x2]
+        } else {
+          [x3, x1, x2]
+        }
+      } else if cmp(x1, x3) <= 0 {
+        [x2, x1, x3]
+      } else if cmp(x2, x3) <= 0 {
+        [x2, x3, x1]
+      } else {
+        [x3, x2, x1]
+      }
+      (@list.from_array(s), tl)
+    }
+    (n, l) => {
+      let n1 = n >> 1
+      let n2 = n - n1
+      let (s1, l2) = sort_run_rev(cmp, n1, l)
+      let (s2, tl) = sort_run_rev(cmp, n2, l2)
+      (sort_rev_merge_rev(cmp, s1, s2, @list.empty()), tl)
+    }
+  }
+}
+
+///|
+/// `rev_sort n l` of OCaml's `stable_sort` (descending).
+fn[A] sort_run_rev(
+  cmp : (A, A) -> Int raise?,
+  n : Int,
+  l : @list.List[A],
+) -> (@list.List[A], @list.List[A]) raise? {
+  match (n, l) {
+    (2, More(x1, tail=More(x2, tail=tl))) => {
+      let s = if cmp(x1, x2) > 0 {
+        @list.from_array([x1, x2])
+      } else {
+        @list.from_array([x2, x1])
+      }
+      (s, tl)
+    }
+    (3, More(x1, tail=More(x2, tail=More(x3, tail=tl)))) => {
+      let s = if cmp(x1, x2) > 0 {
+        if cmp(x2, x3) > 0 {
+          [x1, x2, x3]
+        } else if cmp(x1, x3) > 0 {
+          [x1, x3, x2]
+        } else {
+          [x3, x1, x2]
+        }
+      } else if cmp(x1, x3) > 0 {
+        [x2, x1, x3]
+      } else if cmp(x2, x3) > 0 {
+        [x2, x3, x1]
+      } else {
+        [x3, x2, x1]
+      }
+      (@list.from_array(s), tl)
+    }
+    (n, l) => {
+      let n1 = n >> 1
+      let n2 = n - n1
+      let (s1, l2) = sort_run(cmp, n1, l)
+      let (s2, tl) = sort_run(cmp, n2, l2)
+      (sort_rev_merge(cmp, s1, s2, @list.empty()), tl)
+    }
+  }
 }
 
 ///|

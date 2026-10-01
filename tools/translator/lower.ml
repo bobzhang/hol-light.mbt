@@ -67,6 +67,9 @@ module Lower = struct
     | "goalstate" -> Some "@tactics.Goalstate"
     | "justification" -> Some "@tactics.Justification"
     | "instantiation" -> Some "@drule.Instantiation"
+    | "refinement" -> Some "@tactics.Refinement"
+    | "goalstack" -> Some "@tactics.Goalstack"
+    | "strategy" -> Some "@simp.Strategy"
     | _ -> None
 
   (* Types and constructors defined by translated files: OCaml type name ->
@@ -116,6 +119,12 @@ module Lower = struct
     | "func" -> Some "@lib.Func"
     | "float" -> Some "Double"
     | "Stdlib.ref" -> Some "Ref"
+    | "net" -> Some "@nets.Net"
+    | "gconv" -> Some "@simp.Gconv"
+    | "prover" -> Some "@simp.Prover"
+    | "simpset" -> Some "@simp.Simpset"
+    | "preterm" -> Some "@preterm.Preterm"
+    | "pretype" -> Some "@preterm.Pretype"
     | _ -> None
 
   let base_type n = match own_type n with Some t -> Some t | None -> base_type0 n
@@ -418,11 +427,17 @@ module Lower = struct
      unique name *)
   let local_module_members : (string, string) Hashtbl.t = Hashtbl.create 16
 
+  (* polymorphic local functions used through fresh lambdas: their
+     captured variables (unique name, OCaml type) *)
+  let poly_caps : (string, (string * Types.type_expr) list) Hashtbl.t = Hashtbl.create 16
+
   let captures_typed (e : Typedtree.expression) =
     let acc = ref [] in
     let open Tast_iterator in
     let expr sub e =
       (match e.Typedtree.exp_desc with
+       | Typedtree.Texp_ident (Path.Pident id, _, _) when Hashtbl.mem poly_caps (Ident.unique_name id) ->
+           List.iter (fun (u, t) -> if not (List.mem_assoc u !acc) then acc := (u, t) :: !acc) (Hashtbl.find poly_caps (Ident.unique_name id))
        | Typedtree.Texp_ident (Path.Pident id, _, _) when Hashtbl.mem locals (Ident.unique_name id) ->
            if not (List.mem_assoc (Ident.unique_name id) !acc) then
              acc := (Ident.unique_name id, e.Typedtree.exp_type) :: !acc
@@ -673,6 +688,27 @@ module Lower = struct
     | M.Named (n, ws), M.Named (_, cs) when List.length ws = List.length cs && ws <> [] ->
         M.Named (n, List.map2 refine ws cs)
     | _ -> want
+
+  (* Generated generic functions of this package: MoonBit callee text ->
+     (its generics that need Eq/OCompare/OHash, its declared type). A call
+     bounds whatever the caller instantiates those generics with. *)
+  let fn_bounds : (string, string list * M.ty) Hashtbl.t = Hashtbl.create 64
+
+  (* the instances of a declared type's variables in an instance type *)
+  let rec inst_pairs (d : M.ty) (i : M.ty) acc =
+    match d, i with
+    | M.Named (v, []), _ when is_tyvar v -> (v, i) :: acc
+    | M.Named (_, ds), M.Named (_, is) when List.length ds = List.length is -> List.fold_left2 (fun acc d i -> inst_pairs d i acc) acc ds is
+    | M.Tuple ds, M.Tuple is when List.length ds = List.length is -> List.fold_left2 (fun acc d i -> inst_pairs d i acc) acc ds is
+    | M.Fun (dps, dr, _), M.Fun (ips, ir, _) when List.length dps = List.length ips ->
+        inst_pairs dr ir (List.fold_left2 (fun acc d i -> inst_pairs d i acc) acc dps ips)
+    | _ -> acc
+
+  let rec mty_tyvars (t : M.ty) acc =
+    match t with
+    | M.Named (v, []) when is_tyvar v -> if List.mem v acc then acc else v :: acc
+    | M.Named (_, ts) | M.Tuple ts -> List.fold_left (fun acc t -> mty_tyvars t acc) acc ts
+    | M.Fun (ps, r, _) -> mty_tyvars r (List.fold_left (fun acc t -> mty_tyvars t acc) acc ps)
 
   let adapt_to ?expect (stmts, e, have) =
     match expect with
@@ -1000,6 +1036,11 @@ module Lower = struct
 
   and apply_head ?expect loc h args =
     (match h.hexp with
+     | Atom q when Hashtbl.mem fn_bounds q ->
+         let bs, decl = Hashtbl.find fn_bounds q in
+         List.iter
+           (fun (v, t) -> if List.mem v bs then List.iter (fun w -> Hashtbl.replace bound_tyvars w ()) (mty_tyvars t []))
+           (inst_pairs decl h.hmty [])
      | Atom q when String.length q > 1 && q.[0] = '@' ->
          let q = match String.index_opt q '(' with Some i -> String.sub q 0 i | None -> q in
          let fq = String.sub q 1 (String.length q - 1) in
@@ -1706,36 +1747,6 @@ module Lower = struct
     let foreign = List.filter (fun v -> not (List.mem v !scope_tyvars)) (tyvars_of_text (String.concat " " (List.map sig_text fns))) in
     let lift = foreign <> [] && captured = [] in
     let saved_subst = Hashtbl.copy tyvar_subst in
-    (* otherwise, monomorphise at the instance the rest of the code uses *)
-    if foreign <> [] && not lift then begin
-      let uses = ref [] in
-      let open Tast_iterator in
-      let ids = List.map (fun (id, _, _, _, _) -> Ident.unique_name id) fns in
-      let expr sub e =
-        (match e.exp_desc with
-         | Texp_ident (Path.Pident id, _, _) when List.mem (Ident.unique_name id) ids ->
-             uses := (Ident.unique_name id, e.exp_type) :: !uses
-         | _ -> ());
-        default_iterator.expr sub e
-      in
-      let it = { default_iterator with expr } in
-      it.expr it body;
-      let rec unify g i =
-        match Types.get_desc g, Types.get_desc i with
-        | (Types.Tvar _ | Types.Tunivar _), _ ->
-            if not (Hashtbl.mem tyvar_subst (Types.get_id g)) then Hashtbl.replace tyvar_subst (Types.get_id g) i
-        | Types.Tarrow (_, a1, b1, _), Types.Tarrow (_, a2, b2, _) -> unify a1 a2; unify b1 b2
-        | Types.Ttuple ts1, Types.Ttuple ts2 when List.length ts1 = List.length ts2 -> List.iter2 unify ts1 ts2
-        | Types.Tconstr (_, as1, _), Types.Tconstr (_, as2, _) when List.length as1 = List.length as2 -> List.iter2 unify as1 as2
-        | _ -> ()
-      in
-      List.iter
-        (fun (id, e, _, _, _) ->
-          match List.assoc_opt (Ident.unique_name id) !uses with
-          | Some inst -> unify e.exp_type inst
-          | None -> ())
-        fns
-    end;
     let foreign =
       if lift then foreign
       else List.filter (fun v -> not (List.mem v !scope_tyvars)) (tyvars_of_text (String.concat " " (List.map sig_text fns)))
@@ -1790,14 +1801,16 @@ module Lower = struct
     Hashtbl.iter (Hashtbl.replace tyvar_subst) saved_subst;
     let paren r = if String.length r > 0 && r.[0] = '(' then "(" ^ r ^ ")" else r in
     if lift then begin
-      List.iter
-        (fun (name, ps, ret, b) ->
+      List.iter2
+        (fun (name, ps, ret, b) (_, _, _, _, want) ->
           let body_text = Ir.to_string (fun () -> Ir.pblock b) in
-          let gens = bounded (tyvars_of_text (String.concat " " (ret :: ps))) body_text in
+          let tvs = tyvars_of_text (String.concat " " (ret :: ps)) in
+          let gens = bounded tvs body_text in
+          Hashtbl.replace fn_bounds name (List.filter (Hashtbl.mem bound_tyvars) tvs, want);
           lifted :=
             Printf.sprintf "\n///|\nfn%s %s(%s) -> %s raise %s\n" gens name (String.concat ", " ps) (paren ret) body_text
             :: !lifted)
-        lowered;
+        lowered fns;
       restore_bounds ();
       lower ?expect body
     end else begin
@@ -1825,7 +1838,33 @@ module Lower = struct
                 Let (name, Lam (lam_params, ([], Call (Atom lname, List.map (fun (c, _) -> Atom c) caps @ List.map (fun x -> Atom x) xs)))))
               lowered lifted_names
           in
-          let closures = closures_in !scope_tyvars in
+          (* A polymorphic group (MoonBit closures are monomorphic) gets no
+             closures here: each use is a fresh lambda calling the generic
+             lifted function with the captured variables, and an enclosing
+             function that uses it captures those variables instead. *)
+          let poly_lambdas = ref [] in
+          let closures =
+            if foreign = [] then closures_in !scope_tyvars
+            else begin
+              let cap_ids =
+                List.fold_left
+                  (fun acc (u, t) -> if List.mem u (List.map (fun (id, _, _, _, _) -> Ident.unique_name id) fns) || List.mem_assoc u acc then acc else acc @ [ (u, t) ])
+                  [] captured_typed
+              in
+              poly_lambdas :=
+                List.map2
+                  (fun ((id, _, _, _, want), (_, ps, _, _)) lname ->
+                    let xs = List.map (fun p -> fst (split p)) ps in
+                    let lam =
+                      Printf.sprintf "((%s) => %s(%s))" (String.concat ", " xs) lname
+                        (String.concat ", " (List.map fst caps @ xs))
+                    in
+                    (Ident.unique_name id, lam, lname, want))
+                  (List.combine fns lowered) lifted_names;
+              List.iter (fun (u, _, _, _) -> Hashtbl.replace poly_caps u cap_ids) !poly_lambdas;
+              []
+            end
+          in
           List.iter2
             (fun (_, ps, ret, (bss, bx)) lname ->
               let all_ps = List.map (fun (c, t) -> c ^ " : " ^ t) caps @ ps in
@@ -1844,11 +1883,18 @@ module Lower = struct
               in
               let own = List.filter (function Let (n, _) -> mentions n | _ -> true) own in
               let body_text = Ir.to_string (fun () -> Ir.pblock (own @ bss, bx)) in
-              let gens = bounded (tyvars_of_text (String.concat " " (ret :: all_ps))) body_text in
+              let tvs = tyvars_of_text (String.concat " " (ret :: all_ps)) in
+              let gens = bounded tvs body_text in
+              (match List.find_opt (fun (_, _, l, _) -> l = lname) !poly_lambdas with
+               | Some (_, lam, _, want) -> Hashtbl.replace fn_bounds lam (List.filter (Hashtbl.mem bound_tyvars) tvs, want)
+               | None -> ());
               lifted :=
                 Printf.sprintf "\n///|\nfn%s %s(%s) -> %s raise %s\n" gens lname (String.concat ", " all_ps) (paren ret) body_text
                 :: !lifted)
             lowered lifted_names;
+          List.iter
+            (fun (u, lam, _, _) -> let l = Hashtbl.find locals u in Hashtbl.replace locals u { l with name = lam })
+            !poly_lambdas;
           restore_bounds ();
           let ss, y, ty = lower ?expect body in
           (closures @ ss, y, ty)

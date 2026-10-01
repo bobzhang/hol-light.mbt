@@ -89,6 +89,8 @@ module Emit = struct
         let ret = show_ty body.exp_type in
         let ret = if String.length ret > 0 && ret.[0] = '(' then "(" ^ ret ^ ")" else ret in
         let body_text = Ir.to_string (fun () -> Ir.pblock (stmts, result)) in
+        let tvs = tyvars_of_text (sig_params ^ " " ^ ret) in
+        Hashtbl.replace fn_bounds mname (List.filter (Hashtbl.mem bound_tyvars) tvs, want);
         let text = Printf.sprintf "\n///|\n/// `%s`\npub fn%s %s(%s) -> %s raise %s\n" oname (generics_of ~body:body_text (sig_params ^ " " ^ ret)) mname sig_params ret body_text in
         add_decl (fun () -> text)
     | _ -> failwith "emit_function: not a lambda"
@@ -162,8 +164,24 @@ module Emit = struct
     String.concat "" (List.map String.capitalize_ascii (String.split_on_char '_' s))
 
   (* `type t = C1 of a * b | ...` -> an enum; `type t = u` -> an alias *)
+  (* MoonBit names of the types emitted so far (distinct local modules may
+     declare types of the same name) *)
+  let type_names : (string, unit) Hashtbl.t = Hashtbl.create 64
+
   let emit_types ?(prefix = "") (decls : type_declaration list) =
-    let mname d = camel ((if prefix = "" then "" else prefix ^ "_") ^ Ident.name d.typ_id) in
+    let chosen = Hashtbl.create 4 in
+    List.iter
+      (fun d ->
+        let base = camel ((if prefix = "" then "" else prefix ^ "_") ^ Ident.name d.typ_id) in
+        let rec go i =
+          let n = if i = 0 then base else base ^ string_of_int i in
+          if Hashtbl.mem type_names n then go (i + 1) else n
+        in
+        let n = go 0 in
+        Hashtbl.replace type_names n ();
+        Hashtbl.replace chosen (Ident.unique_name d.typ_id) n)
+      decls;
+    let mname d = Hashtbl.find chosen (Ident.unique_name d.typ_id) in
     (* register every name first: the types may be mutually recursive *)
     List.iter
       (fun d ->
@@ -353,7 +371,14 @@ module Emit = struct
     | Tstr_module { mb_expr = { mod_desc = Tmod_structure str; _ }; _ } -> List.iter (register pkg) str.str_items
     | _ -> ()
 
-  let () = emit_types_hook := fun prefix decls -> emit_types ~prefix decls
+  let () =
+    emit_types_hook :=
+      fun prefix decls ->
+        (* emitted in the middle of a function: keep its type variable names *)
+        let saved = Hashtbl.copy tyvar_names in
+        Fun.protect
+          ~finally:(fun () -> Hashtbl.reset tyvar_names; Hashtbl.iter (Hashtbl.replace tyvar_names) saved)
+          (fun () -> emit_types ~prefix decls)
 
   let rec item ~(hand : hand list) (it : structure_item) =
     item_env := Some it.str_env;

@@ -1380,56 +1380,6 @@ pub fn[TA, TB] expand_goal(
   ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
 ) -> TA raise) raise) raise) raise) raise {
   let rules = x117
-  let expand_goal = (
-    x119 : Int,
-    x120 : (
-      (
-        (Int, @list.List[FolTerm]),
-        @list.List[
-          (
-            Int,
-            @list.List[
-              (
-                (
-                  @list.List[(Int, @list.List[FolTerm])],
-                  (Int, @list.List[FolTerm]),
-                ),
-                (Int, @kernel.Thm),
-              ),
-            ],
-          ),
-        ],
-      ),
-      (@list.List[(FolTerm, Int)], Int, Int),
-    ),
-    x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
-  ) => expand_goal_l(rules, x119, x120, x121)
-  let expand_goals = (
-    x126 : Int,
-    x127 : (
-      @list.List[
-        (
-          (Int, @list.List[FolTerm]),
-          @list.List[
-            (
-              Int,
-              @list.List[
-                (
-                  (
-                    @list.List[(Int, @list.List[FolTerm])],
-                    (Int, @list.List[FolTerm]),
-                  ),
-                  (Int, @kernel.Thm),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-      (@list.List[(FolTerm, Int)], Int, Int),
-    ),
-    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
-  ) => expand_goals_l(rules, x126, x127, x128)
   (
     x139 : (
       (Int, @list.List[FolTerm]),
@@ -1456,7 +1406,7 @@ pub fn[TA, TB] expand_goal(
         let maxinf = x141
         (x142 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise) => {
           let cont_2 = x142
-          expand_goal(
+          ((x119, x120, x121) => expand_goal_l(rules, x119, x120, x121))(
             maxdep,
             (g_3, (@list.empty(), 2 * offinc(), maxinf)),
             cont_2,
@@ -1468,7 +1418,7 @@ pub fn[TA, TB] expand_goal(
 }
 
 ///|
-fn[TA, TB] expand_goal_l(
+fn[TB, TC] expand_goal_l(
   rules : @list.List[
     (
       Int,
@@ -1501,8 +1451,8 @@ fn[TA, TB] expand_goal_l(
     ),
     (@list.List[(FolTerm, Int)], Int, Int),
   ),
-  x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
-) -> TA raise {
+  x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TC raise,
+) -> TC raise {
   let expand_goal = (
     x119 : Int,
     x120 : (
@@ -1525,7 +1475,7 @@ fn[TA, TB] expand_goal_l(
       ),
       (@list.List[(FolTerm, Int)], Int, Int),
     ),
-    x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
+    x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TC raise,
   ) => expand_goal_l(rules, x119, x120, x121)
   let expand_goals = (
     x126 : Int,
@@ -1551,7 +1501,7 @@ fn[TA, TB] expand_goal_l(
       ],
       (@list.List[(FolTerm, Int)], Int, Int),
     ),
-    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
+    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> TC raise,
   ) => expand_goals_l(rules, x126, x127, x128)
   let depth = x119
   let ((g, _), (insts, offset, size)) as state = x120
@@ -1612,7 +1562,7 @@ fn[TA, TB] expand_goal_l(
 }
 
 ///|
-fn[TA, TB] expand_goals_l(
+fn[TB, TC] expand_goals_l(
   rules : @list.List[
     (
       Int,
@@ -1647,8 +1597,8 @@ fn[TA, TB] expand_goals_l(
     ],
     (@list.List[(FolTerm, Int)], Int, Int),
   ),
-  x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
-) -> TA raise {
+  x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> TC raise,
+) -> TC raise {
   let expand_goal = (
     x119 : Int,
     x120 : (
@@ -1671,7 +1621,7 @@ fn[TA, TB] expand_goals_l(
       ),
       (@list.List[(FolTerm, Int)], Int, Int),
     ),
-    x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
+    x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TC raise,
   ) => expand_goal_l(rules, x119, x120, x121)
   let expand_goals = (
     x126 : Int,
@@ -1697,7 +1647,7 @@ fn[TA, TB] expand_goals_l(
       ],
       (@list.List[(FolTerm, Int)], Int, Int),
     ),
-    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
+    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> TC raise,
   ) => expand_goals_l(rules, x126, x127, x128)
   let depth_1 = x126
   let (gl, (insts_1, offset_1, size_1) as tup) = x127
@@ -2521,20 +2471,6 @@ fn step_17() -> Unit raise {
     @class.taut(@parser.parse_term("(a <=> b) ==> b \\/ ~a")),
   )
   let veq_tm = @kernel.rator(@kernel.rator(@kernel.concl(@lib.hd(eq_thms))))
-  fn create_equivalence_axioms(
-    x226 : @kernel.Term,
-    x227 : Int,
-  ) -> @list.List[@kernel.Thm] raise {
-    let (eq, _) = (x226, x227)
-    let t228 = @kernel.type_of(eq)
-    let tyins = @basics.type_match(@kernel.type_of(veq_tm), t228, @list.empty())
-    @lib.map(
-      (x230 : @kernel.Thm) => {
-        ((x229 : @kernel.Thm) => @kernel.inst_type(tyins, x229))(x230)
-      },
-      eq_thms,
-    )
-  }
   fn tm_consts(
     x231 : @kernel.Term,
     x232 : @list.List[(@kernel.Term, Int)],
@@ -2713,7 +2649,9 @@ fn step_17() -> Unit raise {
       let eqs = @lib.union(eqs0, eqs1)
       let equivs = @lib.itlist(
         (x259 : (@kernel.Term, Int), x260 : @list.List[@kernel.Thm]) => {
-          let t261 = create_equivalence_axioms(x259.0, x259.1)
+          let t261 = ((x226, x227) => {
+            create_equivalence_axioms_l(veq_tm, eq_thms, x226, x227)
+          })(x259.0, x259.1)
           ((x262 : @list.List[@kernel.Thm]) => {
             ((x257 : @list.List[@kernel.Thm], x258 : @list.List[@kernel.Thm]) => {
               @lib.union_eq(
@@ -2745,6 +2683,24 @@ pub fn create_equality_axioms(
   x : @list.List[@kernel.Term],
 ) -> @list.List[@kernel.Thm] raise {
   create_equality_axioms_c.get()(x)
+}
+
+///|
+fn[TA] create_equivalence_axioms_l(
+  veq_tm : @kernel.Term,
+  eq_thms : @list.List[@kernel.Thm],
+  x226 : @kernel.Term,
+  x227 : TA,
+) -> @list.List[@kernel.Thm] raise {
+  let (eq, _) = (x226, x227)
+  let t228 = @kernel.type_of(eq)
+  let tyins = @basics.type_match(@kernel.type_of(veq_tm), t228, @list.empty())
+  @lib.map(
+    (x230 : @kernel.Thm) => {
+      ((x229 : @kernel.Thm) => @kernel.inst_type(tyins, x229))(x230)
+    },
+    eq_thms,
+  )
 }
 
 ///|
