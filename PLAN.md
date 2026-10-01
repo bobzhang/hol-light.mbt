@@ -130,3 +130,9 @@ functions, never through top-level side effects, so callers control loading.
   (`vsubst_rec` overflows first). `moonrun --stack-size 4000` makes depth
   3000+ work. Mitigations, if real theories need them: run the CLI through
   `moonrun --stack-size`, or rewrite the hot paths with explicit stacks.
+  The Codex review found no soundness issues; the sharing fixes for `qmap`,
+  `filter` and `term_image` are applied.
+- [ ] Phase 2: `num/` is done (it matches OCaml `Num` and the `lib.ml` num
+  helpers on 270 differential checks; `int_of_num` is limited to 32 bits by
+  design, and `int64_of_num` covers wider values). Next: `lib/` with
+  OCaml-compatible compare/hash (`OValue`) and Patricia `func`.

@@ -16,4 +16,6 @@ let sthm th = let asl,c = dest_thm th in
   String.concat ", " (map stm asl) ^ " |- " ^ stm c;;
 let slist f l = "[" ^ String.concat "; " (map f l) ^ "]";;
 let out s = print_string s; print_newline();;
-let attempt name f = try out (name ^ " = " ^ f ()) with Failure s -> out (name ^ " ! " ^ s);;
+let attempt name f = try out (name ^ " = " ^ f ()) with
+    Failure s -> out (name ^ " ! " ^ s)
+  | e -> out (name ^ " !! " ^ Printexc.to_string e);;

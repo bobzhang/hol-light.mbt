@@ -14,7 +14,11 @@ body = "\n".join("      #|" + l for l in lines + [""])
 call = ("inspect(\n    log.buf.to_string(),\n    content=(\n" + body +
         "\n    ),\n  )")
 src = open(test).read()
-src, n = re.subn(r"inspect\(\s*log\.buf\.to_string\(\)(?:.|\n)*?\n  \)|inspect\(log\.buf\.to_string\(\)\)",
-                 lambda m: call, src, count=1)
+# Either the bare call or a previously embedded one (which ends with the
+# `    ),\n  )` produced above; `#|` lines never contain that sequence).
+pattern = (r"inspect\(log\.buf\.to_string\(\)\)"
+           r"|inspect\(\n    log\.buf\.to_string\(\),\n    content=\(\n"
+           r"(?:      #\|[^\n]*\n)*    \),\n  \)")
+src, n = re.subn(pattern, lambda m: call, src, count=1)
 assert n == 1, "no inspect(log.buf.to_string()) call found"
 open(test, "w").write(src)

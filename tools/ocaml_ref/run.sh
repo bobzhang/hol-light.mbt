@@ -14,5 +14,5 @@ if [ ! -f _build/pa_j.cmo ]; then
     -I "$(camlp5 -where)" -I "$(ocamlfind query camlp-streams)" pa_j.ml)
 fi
 cat prelude.ml "$1" > _build/body.ml
-{ cat boot.ml; echo "#use \"$PWD/_build/body.ml\";;"; } > _build/script.ml
-exec ocaml -w -a -alert -all -I "$H" -I _build _build/script.ml
+{ cat boot.ml; echo "let _ = Toploop.use_silently Format.std_formatter (Toploop.File \"$PWD/_build/body.ml\");;"; } > _build/script.ml
+ocaml -w -a -alert -all -I "$H" -I _build _build/script.ml | grep -v "HOL-Light syntax in effect" | sed "/^$/d"

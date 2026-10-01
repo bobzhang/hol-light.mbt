@@ -29,13 +29,54 @@ fn[A : Eq] union(l1 : @list.List[A], l2 : @list.List[A]) -> @list.List[A] {
 }
 
 ///|
-/// `filter` that returns the original list when nothing is removed.
-fn[A] filter_share(p : (A) -> Bool, l : @list.List[A]) -> @list.List[A] {
-  if l.all(p) {
-    l
-  } else {
-    l.filter(p)
+/// Suffixes of a list: `suffixes(l)[i]` is `l` with its first `i` cells
+/// dropped (physically the same cells), for `i` in `0..=length`.
+fn[A] suffixes(l : @list.List[A]) -> Array[@list.List[A]] {
+  let out = [l]
+  let mut rest = l
+  while true {
+    match rest {
+      More(_, tail=t) => {
+        out.push(t)
+        rest = t
+      }
+      Empty => break
+    }
   }
+  out
+}
+
+///|
+/// `lib.ml`'s `filter`: keeps the original cells after the last removed
+/// element, and returns `l` itself when nothing is removed. As in OCaml, the
+/// predicate is applied from the last element to the first.
+fn[A] filter_share(p : (A) -> Bool, l : @list.List[A]) -> @list.List[A] {
+  let suf = suffixes(l)
+  let n = suf.length() - 1
+  let keep = Array::make(n, false)
+  for i = n - 1; i >= 0; i = i - 1 {
+    match suf[i] {
+      More(h, tail=_) => keep[i] = p(h)
+      Empty => ()
+    }
+  }
+  // Index after the last removed element: everything from there is shared.
+  let mut last_removed = -1
+  for i in 0..<n {
+    if !keep[i] {
+      last_removed = i
+    }
+  }
+  let mut acc = suf[last_removed + 1]
+  for i = last_removed - 1; i >= 0; i = i - 1 {
+    if keep[i] {
+      match suf[i] {
+        More(h, tail=_) => acc = acc.prepend(h)
+        Empty => ()
+      }
+    }
+  }
+  acc
 }
 
 ///|
@@ -60,24 +101,31 @@ fn[A, B : Eq] rev_assocd(a : B, l : @list.List[(A, B)], d : A) -> A {
 }
 
 ///|
-/// Map that returns the original list when every element is unchanged
-/// (physically).
+/// `lib.ml`'s `qmap`: map that keeps the original cells after the last
+/// (physically) changed element, and returns `l` itself if nothing changed.
+/// `f` is applied from the head of the list, as in OCaml.
 fn[A] qmap(f : (A) -> A raise?, l : @list.List[A]) -> @list.List[A] raise? {
-  let arr = l.to_array()
-  let out = Array(capacity=arr.length())
-  let mut changed = false
-  for x in arr {
-    let y = f(x)
-    if !physical_equal(x, y) {
-      changed = true
+  let suf = suffixes(l)
+  let n = suf.length() - 1
+  let images = Array(capacity=n)
+  let mut last_changed = -1
+  for i in 0..<n {
+    match suf[i] {
+      More(x, tail=_) => {
+        let y = f(x)
+        if !physical_equal(x, y) {
+          last_changed = i
+        }
+        images.push(y)
+      }
+      Empty => ()
     }
-    out.push(y)
   }
-  if changed {
-    @list.List(out)
-  } else {
-    l
+  let mut acc = suf[last_changed + 1]
+  for i = last_changed; i >= 0; i = i - 1 {
+    acc = acc.prepend(images[i])
   }
+  acc
 }
 
 // ---------------------------------------------------------------------------
@@ -708,38 +756,38 @@ fn term_remove(t : Term, l : @list.List[Term]) -> @list.List[Term] {
 }
 
 ///|
-/// Apply `f` to every element of a sorted list and re-sort.
+/// Apply `f` to every element of a sorted list and re-sort. Keeps the
+/// original cells of the longest unchanged suffix, as upstream does.
 fn term_image(
   f : (Term) -> Term raise?,
   l : @list.List[Term],
 ) -> @list.List[Term] raise? {
   // OCaml: `let h' = f h and t' = term_image f t in ...`, evaluated
   // left to right, so `f` is applied from the head of the list.
-  let arr = l.to_array()
-  let images = Array(capacity=arr.length())
-  for x in arr {
-    images.push(f(x))
-  }
-  let mut acc = @list.empty()
-  let mut same = true
-  for i = arr.length() - 1; i >= 0; i = i - 1 {
-    let h = arr[i]
-    let h1 = images[i]
-    if same && physical_equal(h1, h) {
-      // The suffix is still physically the original one.
-      acc = acc.prepend(h)
-    } else {
-      if same {
-        same = false
+  let suf = suffixes(l)
+  let n = suf.length() - 1
+  let heads = Array(capacity=n)
+  let images = Array(capacity=n)
+  for i in 0..<n {
+    match suf[i] {
+      More(x, tail=_) => {
+        heads.push(x)
+        images.push(f(x))
       }
-      acc = term_union(@list.singleton(h1), acc)
+      Empty => ()
     }
   }
-  if same {
-    l
-  } else {
-    acc
+  let mut acc = suf[n]
+  let mut same = true
+  for i = n - 1; i >= 0; i = i - 1 {
+    if same && physical_equal(images[i], heads[i]) {
+      acc = suf[i]
+    } else {
+      same = false
+      acc = term_union(@list.singleton(images[i]), acc)
+    }
   }
+  acc
 }
 
 // ---------------------------------------------------------------------------

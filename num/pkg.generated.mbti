@@ -1,0 +1,148 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/num"
+
+import {
+  "moonbitlang/core/bigint",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn abs_num(Num) -> Num
+
+pub fn add_num(Num, Num) -> Num
+
+pub fn big_gcd(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt
+
+pub fn big_int_of_num(Num) -> @bigint.BigInt raise Failure
+
+pub fn ceiling_num(Num) -> Num
+
+pub fn compare_num(Num, Num) -> Int
+
+pub fn denominator(Num) -> Num
+
+pub fn div_num(Num, Num) -> Num raise Failure
+
+pub fn eq_num(Num, Num) -> Bool
+
+pub fn float_of_num(Num) -> Double
+
+pub fn floor_num(Num) -> Num
+
+pub fn gcd_num(Num, Num) -> Num raise Failure
+
+pub fn ge_num(Num, Num) -> Bool
+
+pub fn gt_num(Num, Num) -> Bool
+
+pub fn int64_of_num(Num) -> Int64 raise Failure
+
+pub fn int_of_num(Num) -> Int raise Failure
+
+pub fn integer_num(Num) -> Num
+
+pub fn is_integer_num(Num) -> Bool
+
+pub fn lcm_num(Num, Num) -> Num raise Failure
+
+pub fn le_num(Num, Num) -> Bool
+
+pub fn lt_num(Num, Num) -> Bool
+
+pub fn max_num(Num, Num) -> Num
+
+pub fn min_num(Num, Num) -> Num
+
+pub fn minus_num(Num) -> Num
+
+pub fn mod_num(Num, Num) -> Num raise DivisionByZero
+
+pub fn mult_num(Num, Num) -> Num
+
+pub fn ne_num(Num, Num) -> Bool
+
+pub let num_0 : Num
+
+pub let num_1 : Num
+
+pub let num_10 : Num
+
+pub let num_2 : Num
+
+pub fn num_of_big_int(@bigint.BigInt) -> Num
+
+pub fn num_of_decimal(String) -> Num raise Failure
+
+pub fn num_of_int(Int) -> Num
+
+pub fn num_of_int64(Int64) -> Num
+
+pub fn num_of_string(String) -> Num raise Failure
+
+pub fn numdom(Num) -> (Num, Num)
+
+pub fn numerator(Num) -> Num
+
+pub fn pow10(Int) -> Num raise Failure
+
+pub fn pow2(Int) -> Num raise Failure
+
+pub fn power_num(Num, Num) -> Num raise Failure
+
+pub fn pred_num(Num) -> Num
+
+pub fn quo_num(Num, Num) -> Num raise DivisionByZero
+
+pub fn round_num(Num) -> Num
+
+pub fn sign_num(Num) -> Int
+
+pub fn string_of_num(Num) -> String
+
+pub fn string_of_num_hex(Num) -> String raise
+
+pub fn string_of_num_nary(Int, Num) -> String raise
+
+pub fn sub_num(Num, Num) -> Num
+
+pub fn succ_num(Num) -> Num
+
+// Errors
+pub suberror DivisionByZero derive(@debug.Debug)
+pub fn DivisionByZero::output(Self, &Logger) -> Unit
+pub fn DivisionByZero::to_repr(Self) -> @debug.Repr
+pub fn DivisionByZero::to_string(Self) -> String
+pub impl Show for DivisionByZero
+
+// Types and methods
+pub struct Num {
+  // private fields
+} derive(Eq, Hash)
+pub fn Num::add(Self, Self) -> Self
+pub fn Num::compare(Self, Self) -> Int
+pub fn Num::equal(Self, Self) -> Bool
+pub fn Num::hash(Self) -> Int
+pub fn Num::hash_combine(Self, Hasher) -> Unit
+pub fn Num::is_integer(Self) -> Bool
+pub fn Num::mul(Self, Self) -> Self
+pub fn Num::neg(Self) -> Self
+pub fn Num::not_equal(Self, Self) -> Bool
+pub fn Num::op_ge(Self, Self) -> Bool
+pub fn Num::op_gt(Self, Self) -> Bool
+pub fn Num::op_le(Self, Self) -> Bool
+pub fn Num::op_lt(Self, Self) -> Bool
+pub fn Num::output(Self, &Logger) -> Unit
+pub fn Num::sub(Self, Self) -> Self
+pub fn Num::to_repr(Self) -> @debug.Repr
+pub fn Num::to_string(Self) -> String
+pub impl Add for Num
+pub impl Compare for Num
+pub impl Mul for Num
+pub impl Neg for Num
+pub impl Show for Num
+pub impl Sub for Num
+pub impl @debug.Debug for Num
+
+// Type aliases
+
+// Traits

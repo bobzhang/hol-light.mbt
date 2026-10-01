@@ -56,4 +56,3 @@ tydef =  |- ((#=:fun(t1('A,'B),fun(t1('A,'B),bool)) (#mk:fun(fun('B,'A),t1('A,'B
 types = [t1/2; ind/0; bool/0; fun/2]
 constants = [dest:fun(t1('A,'B),fun('B,'A)); mk:fun(fun('B,'A),t1('A,'B)); ID:fun('A,'A); =:fun('A,fun('A,bool))]
 definitions = [ |- ((#=:fun(fun('A,'A),fun(fun('A,'A),bool)) #ID:fun('A,'A)) (\x:'A. x:'A))]
-
