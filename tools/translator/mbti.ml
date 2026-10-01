@@ -178,7 +178,30 @@ module Mbti = struct
         Hashtbl.replace packages pkg t;
         t
 
-  let find ~root pkg name = Hashtbl.find_opt (load ~root pkg) name
+  let builtin =
+    [ "Int"; "Int64"; "UInt"; "UInt64"; "Int16"; "UInt16"; "Byte"; "Bool"; "Char";
+      "String"; "Unit"; "Double"; "Float"; "Bytes"; "Array"; "FixedArray"; "Map";
+      "Ref"; "Option"; "Result"; "Error"; "Self"; "StringBuilder"; "ArrayView";
+      "BytesView"; "StringView"; "Json"; "Iter" ]
+
+  (* Types a package's interface names without qualification are its own. *)
+  let rec qualify pkg = function
+    | Named (n, args) ->
+        let n =
+          if String.contains n '@' || List.mem n builtin || String.length n = 1 then n
+          else "@" ^ pkg ^ "." ^ n
+        in
+        Named (n, List.map (qualify pkg) args)
+    | Tuple ts -> Tuple (List.map (qualify pkg) ts)
+    | Fun (ps, r, raises) -> Fun (List.map (qualify pkg) ps, qualify pkg r, raises)
+
+  let qualify_decl pkg = function
+    | Func (g, ps, r, raises) -> Func (g, List.map (qualify pkg) ps, qualify pkg r, raises)
+    | Value t -> Value (qualify pkg t)
+    | Alias t -> Alias (qualify pkg t)
+
+  let find ~root pkg name =
+    Option.map (qualify_decl pkg) (Hashtbl.find_opt (load ~root pkg) name)
 
   (* The parameter groups a value of this declaration is applied to, in
      order: `f(a, b)(c)` is [[a; b]; [c]]. A value of function type has

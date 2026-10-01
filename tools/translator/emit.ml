@@ -24,11 +24,19 @@ module Emit = struct
 
   let used_names : (string, unit) Hashtbl.t = Hashtbl.create 256
 
+  (* OCaml name -> number of its top-level definitions not yet translated
+     (from a pre-scan of the file): the last definition of a name gets the
+     plain MoonBit name, earlier ones a numbered one. *)
+  let remaining_defs : (string, int) Hashtbl.t = Hashtbl.create 64
+
   let fresh_top oname =
     let base = sanitize oname in
+    let left = try Hashtbl.find remaining_defs oname with Not_found -> 1 in
+    Hashtbl.replace remaining_defs oname (left - 1);
     let rec go i =
-      let n = if i = 0 then base else Printf.sprintf "%s_%d" base i in
-      if Hashtbl.mem used_names n then go (i + 1) else (Hashtbl.add used_names n (); n)
+      let n = if i = 0 then base else Printf.sprintf "%s_v%d" base i in
+      if Hashtbl.mem used_names n || (i = 0 && left > 1) then go (i + 1)
+      else (Hashtbl.add used_names n (); n)
     in
     go 0
 

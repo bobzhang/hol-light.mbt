@@ -660,29 +660,59 @@ module Lower = struct
 
   (* Apply a head to OCaml arguments (source order). *)
   and apply_head ?expect loc h args =
-    (* plan the stages *)
+    (* Plan the stages. A MoonBit group of k parameters takes the fewest
+       OCaml arguments whose units sum to k: an argument is one unit, or a
+       tuple spread into its components (spreading left to right as
+       needed). The declared OCaml type gives the argument types. *)
+    let rec oparams t n =
+      if n = 0 then []
+      else match t with
+        | Some t -> (match arrow t with Some (a, b) -> Some a :: oparams (Some b) (n - 1) | None -> List.init n (fun _ -> None))
+        | None -> List.init n (fun _ -> None)
+    in
+    let rec advance n t = if n = 0 then t else match t with Some t -> (match arrow t with Some (_, b) -> advance (n - 1) (Some b) | None -> None) | None -> None in
+    (* the unit count of each OCaml argument of a group of MoonBit
+       parameters `ps`, decided from the declared argument types: exactly k
+       units; a tuple argument is spread unless the MoonBit parameter at its
+       position is a tuple of that size *)
+    let align ps otys =
+      let k = List.length ps in
+      let rec go pos otys acc =
+        if pos = k then Some (List.rev acc)
+        else
+          match otys with
+          | [] -> None
+          | o :: rest ->
+              let sz = match o with Some a -> tuple_size a | None -> 0 in
+              let tuple_param = match List.nth ps pos with M.Tuple ts -> List.length ts = sz | _ -> false in
+              let options = if sz > 1 && not tuple_param then [ sz; 1 ] else if sz > 1 then [ 1; sz ] else [ 1 ] in
+              List.fold_left
+                (fun found u -> match found with Some _ -> found | None -> if pos + u <= k then go (pos + u) rest (u :: acc) else None)
+                None options
+      in
+      go 0 otys []
+    in
     let rec plan mty oty args acc =
       match args with
       | [] -> (List.rev acc, mty)
       | _ ->
           (match mty with
+           | M.Fun ([], r, _) -> plan r (advance 1 oty) (List.tl args) (`Unit (List.hd args) :: acc)
            | M.Fun (ps, r, raises) ->
                let k = List.length ps in
-               let tuple_mode =
-                 k > 1
-                 && (match oty with
-                     | Some t -> (match arrow t with Some (a, _) -> tuple_size a = k | None -> false)
-                     | None -> false)
+               let units =
+                 match align ps (oparams oty k) with
+                 | Some u -> u
+                 | None -> List.init k (fun _ -> 1)
                in
-               let need = if k = 0 || tuple_mode then 1 else k in
+               let n = List.length units in
                let rec take n l = if n = 0 then ([], l) else match l with [] -> ([], []) | x :: xs -> let a, b = take (n - 1) xs in (x :: a, b) in
-               let now, rest = take need args in
-               let rec advance n t = if n = 0 then t else match t with Some t -> (match arrow t with Some (_, b) -> advance (n - 1) (Some b) | None -> None) | None -> None in
-               if List.length now < need then
-                 (List.rev ((`Partial (ps, r, raises, now)) :: acc), M.Fun (List.filteri (fun i _ -> i >= List.length now) ps, r, raises))
-               else
-                 plan r (advance need oty) rest
-                   ((if k = 0 then `Unit (List.hd now) else if tuple_mode then `Tuple (ps, List.hd now) else `Curried (ps, now)) :: acc)
+               let now, rest = take n args in
+               let items = List.mapi (fun i a -> (a, List.nth units i)) now in
+               if List.length now < n then
+                 let used = List.fold_left (fun acc (_, u) -> acc + u) 0 items in
+                 (List.rev (`Partial (ps, items) :: acc), M.Fun (List.filteri (fun i _ -> i >= used) ps, r, raises))
+               else plan r (advance n oty) rest (`Units (ps, items) :: acc)
            | _ -> unsupported loc "too many arguments for %s" (M.show mty))
     in
     let stages, result_mty = plan h.hmty h.hoty args [] in
@@ -693,6 +723,20 @@ module Lower = struct
     let slots = Hashtbl.create 8 in   (* id -> (stage, (stmts, exp)) *)
     let slot si (ss, x) = let id = !next in incr next; Hashtbl.replace slots id (si, (ss, x)); id in
     let low p a = let ss, x, _ = lower ~expect:(refine p (mty_of a.exp_type)) a in (ss, x) in
+    let lower_items si ps items =
+      let pos = ref 0 in
+      List.map
+        (fun (a, u) ->
+          let mine = List.filteri (fun i _ -> i >= !pos && i < !pos + u) ps in
+          pos := !pos + u;
+          if u = 1 then `One (slot si (low (List.hd mine) a))
+          else
+            match a.exp_desc with
+            | Texp_tuple comps when List.length comps = u ->
+                `Comps (List.map2 (fun p c -> slot si (low p c)) mine comps)
+            | _ -> `Whole (u, slot si (low (M.Tuple mine) a)))
+        items
+    in
     let stage_args =
       List.mapi
         (fun si st ->
@@ -700,31 +744,30 @@ module Lower = struct
           | `Unit a ->
               (* the argument is evaluated for its effects only *)
               let ss, x, _ = lower a in
-              `Unit (slot si (ss @ (if ordered x then [ Do x ] else []), Atom "()"))
-          | `Curried (ps, now) -> `Curried (List.map2 (fun p a -> slot si (low p a)) (List.filteri (fun i _ -> i < List.length now) ps) now)
-          | `Partial (ps, _, _, now) ->
-              `Partial (ps, List.map2 (fun p a -> slot si (low p a)) (List.filteri (fun i _ -> i < List.length now) ps) now)
-          | `Tuple (ps, a) ->
-              (match a.exp_desc with
-               | Texp_tuple comps when List.length comps = List.length ps ->
-                   `Spread (List.map2 (fun p c -> slot si (low p c)) ps comps)
-               | _ -> `Whole (List.length ps, slot si (low (M.Tuple ps) a))))
+              `LUnit (slot si (ss @ (if ordered x then [ Do x ] else []), Atom "()"))
+          | `Units (ps, items) -> `LUnits (lower_items si ps items)
+          | `Partial (ps, items) -> `LPartial (ps, lower_items si ps items))
         stages
     in
+    let item_ids = function `One id -> [ id ] | `Comps ids -> List.rev ids | `Whole (_, id) -> [ id ] in
     let per_arg =
       List.concat_map
         (function
-          | `Unit id -> [ [ id ] ]
-          | `Curried ids | `Partial (_, ids) -> List.map (fun id -> [ id ]) ids
-          | `Spread ids -> [ List.rev ids ]
-          | `Whole (_, id) -> [ [ id ] ])
+          | `LUnit id -> [ [ id ] ]
+          | `LUnits items | `LPartial (_, items) -> List.map item_ids items)
         stage_args
     in
     let head_id = slot (-1) (h.hstmts, h.hexp) in
     let order = List.concat (List.rev per_arg) @ [ head_id ] in
-    let first_full = match stages with (`Curried _ | `Tuple _ | `Unit _) :: _ -> true | _ -> false in
+    let first_full = match stages with (`Units _ | `Unit _) :: _ -> true | _ -> false in
     (* a whole-tuple argument is projected several times: never inline *)
-    let whole_ids = List.filter_map (function `Whole (_, id) -> Some id | _ -> None) stage_args in
+    let whole_ids =
+      List.concat_map
+        (function
+          | `LUnits items | `LPartial (_, items) -> List.filter_map (function `Whole (_, id) -> Some id | _ -> None) items
+          | _ -> [])
+        stage_args
+    in
     let inline_ok i =
       let id = List.nth order i in
       let si, _ = Hashtbl.find slots id in
@@ -734,19 +777,22 @@ module Lower = struct
     let value = Hashtbl.create 8 in
     List.iter2 (fun id x -> Hashtbl.replace value id x) order exps;
     let get id = Hashtbl.find value id in
+    let item_exps = function
+      | `One id -> [ get id ]
+      | `Comps ids -> List.map get ids
+      | `Whole (k, id) -> let t = get id in List.init k (fun i -> Field (t, i))
+    in
     let rec build v = function
       | [] -> ([], v)
-      | `Unit _ :: rest -> build (Call (v, [])) rest
-      | (`Curried ids | `Spread ids) :: rest -> build (Call (v, List.map get ids)) rest
-      | `Whole (k, id) :: rest ->
-          let t = get id in
-          build (Call (v, List.init k (fun i -> Field (t, i)))) rest
-      | `Partial (ps, ids) :: _ ->
+      | `LUnit _ :: rest -> build (Call (v, [])) rest
+      | `LUnits items :: rest -> build (Call (v, List.concat_map item_exps items)) rest
+      | `LPartial (ps, items) :: _ ->
           (* the completed stages run now, not when the closure is called *)
           let ss, v = hoist ([], v) in
-          let missing = List.filteri (fun i _ -> i >= List.length ids) ps in
+          let supplied = List.concat_map item_exps items in
+          let missing = List.filteri (fun i _ -> i >= List.length supplied) ps in
           let names = List.map (fun _ -> fresh "x") missing in
-          (ss, Lam (List.map2 param names missing, ([], Call (v, List.map get ids @ List.map (fun n -> Atom n) names))))
+          (ss, Lam (List.map2 param names missing, ([], Call (v, supplied @ List.map (fun n -> Atom n) names))))
     in
     let ss, e = build (get head_id) stage_args in
     adapt_to ?expect (stmts @ ss, e, result_mty)

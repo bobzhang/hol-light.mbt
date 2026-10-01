@@ -1,0 +1,145 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/class"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn asm_cases_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn bool_cases_ax() -> @kernel.Thm
+
+pub fn bool_cases_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn bool_induct() -> @kernel.Thm
+
+pub fn bool_recursion() -> @kernel.Thm
+
+pub fn ccontr(@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn cond_abs() -> @kernel.Thm
+
+pub fn cond_cases_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn cond_clauses() -> @kernel.Thm
+
+pub fn cond_def() -> @kernel.Thm
+
+pub fn cond_elim_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn cond_elim_thm() -> @kernel.Thm
+
+pub fn cond_expand() -> @kernel.Thm
+
+pub fn cond_id() -> @kernel.Thm
+
+pub fn cond_rand() -> @kernel.Thm
+
+pub fn cond_rator() -> @kernel.Thm
+
+pub fn cond_swap() -> @kernel.Thm
+
+pub fn contrapos_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn contrapos_thm() -> @kernel.Thm
+
+pub fn de_morgan_thm() -> @kernel.Thm
+
+pub fn dest_cond(@kernel.Term) -> (@kernel.Term, (@kernel.Term, @kernel.Term)) raise
+
+pub fn dest_select(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn eq_ext() -> @kernel.Thm
+
+pub fn eta_ax() -> @kernel.Thm
+
+pub fn eta_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn excluded_middle() -> @kernel.Thm
+
+pub fn exists_bool_thm() -> @kernel.Thm
+
+pub fn exists_not_thm() -> @kernel.Thm
+
+pub fn exists_thm() -> @kernel.Thm
+
+pub fn forall_bool_thm() -> @kernel.Thm
+
+pub fn forall_not_thm() -> @kernel.Thm
+
+pub fn fun_eq_thm() -> @kernel.Thm
+
+pub fn inductive_type_store() -> @ref.Ref[@list.List[(String, (Int, @kernel.Thm, @kernel.Thm))]]
+
+pub fn is_cond(@kernel.Term) -> Bool raise
+
+pub fn is_select(@kernel.Term) -> Bool raise
+
+pub fn left_exists_imp_thm() -> @kernel.Thm
+
+pub fn left_forall_or_thm() -> @kernel.Thm
+
+pub fn left_imp_forall_thm() -> @kernel.Thm
+
+pub fn left_or_forall_thm() -> @kernel.Thm
+
+pub fn mk_cond(@kernel.Term, @kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_select((@kernel.Term, @kernel.Term)) -> @kernel.Term raise
+
+pub fn mono_cond() -> @kernel.Thm
+
+pub fn new_type_definition(String, (String, String), @kernel.Thm) -> @kernel.Thm raise
+
+pub fn not_clauses() -> @kernel.Thm
+
+pub fn not_exists_thm() -> @kernel.Thm
+
+pub fn not_forall_thm() -> @kernel.Thm
+
+pub fn not_imp() -> @kernel.Thm
+
+pub fn refute_then((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn right_exists_imp_thm() -> @kernel.Thm
+
+pub fn right_forall_or_thm() -> @kernel.Thm
+
+pub fn right_imp_exists_thm() -> @kernel.Thm
+
+pub fn right_or_forall_thm() -> @kernel.Thm
+
+pub fn select_ax() -> @kernel.Thm
+
+pub fn select_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn select_refl() -> @kernel.Thm
+
+pub fn select_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn select_unique() -> @kernel.Thm
+
+pub fn skolem_thm() -> @kernel.Thm
+
+pub fn skolem_thm_gen() -> @kernel.Thm
+
+pub fn taut(@kernel.Term) -> @kernel.Thm raise
+
+pub fn taut_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn the_type_definitions() -> @ref.Ref[@list.List[((String, String, String), (@kernel.Thm, @kernel.Thm))]]
+
+pub fn unique_skolem_alt() -> @kernel.Thm
+
+pub fn unique_skolem_thm() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

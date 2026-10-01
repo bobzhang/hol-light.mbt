@@ -282,4 +282,10 @@ definitions register constants, quotations advance the type-variable and
   generic top-level functions, tuple bindings of closures, refs); it
   matches ind_defs.ml on inductive definitions (schematic, mutual, nested
   quantifiers, redefinition), strong induction, the helpers, registries
-  and counters. Next: `class`, `trivia`, `canon`, …
+  and counters. `class/` is done, entirely translated (43 theorems,
+  SELECT/ETA/TAUT/COND tools, new_type_definition); it matches class.ml
+  exactly. Translator additions on the way: a MoonBit group aligns with
+  OCaml arguments by exact unit counts (spreading tuple arguments, e.g.
+  `new_basic_type_definition tyname (abs, rep) th`), a package's own
+  unqualified types are qualified, and the last definition of a redefined
+  name (TAUT) gets the plain MoonBit name. Next: `trivia`, `canon`, …
