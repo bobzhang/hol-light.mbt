@@ -1,0 +1,1140 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/int"
+
+import {
+  "bobzhang/hol_light/compute",
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn arith_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn asm_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn asm_int_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn asm_int_arith_tac_v1((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn binary_induct() -> @kernel.Thm
+
+pub fn cong() -> @kernel.Thm
+
+pub fn cong_div2() -> @kernel.Thm
+
+pub fn cong_lmod() -> @kernel.Thm
+
+pub fn cong_rmod() -> @kernel.Thm
+
+pub fn cong_v1() -> @kernel.Thm
+
+pub fn coprime() -> @kernel.Thm
+
+pub fn coprime_lmod() -> @kernel.Thm
+
+pub fn coprime_rmod() -> @kernel.Thm
+
+pub fn dest_int_rep() -> @kernel.Thm
+
+pub fn dest_intconst(@kernel.Term) -> @num.Num raise
+
+pub fn div_add() -> @kernel.Thm
+
+pub fn div_by_div() -> @kernel.Thm
+
+pub fn divides() -> @kernel.Thm
+
+pub fn divides_antisym() -> @kernel.Thm
+
+pub fn divides_div_divides() -> @kernel.Thm
+
+pub fn divides_div_mult() -> @kernel.Thm
+
+pub fn divides_div_self() -> @kernel.Thm
+
+pub fn divides_divides_div() -> @kernel.Thm
+
+pub fn divides_divides_div_eq() -> @kernel.Thm
+
+pub fn divides_divides_div_imp() -> @kernel.Thm
+
+pub fn divides_le() -> @kernel.Thm
+
+pub fn divides_le_imp() -> @kernel.Thm
+
+pub fn divides_le_strong() -> @kernel.Thm
+
+pub fn divides_mod() -> @kernel.Thm
+
+pub fn divides_one() -> @kernel.Thm
+
+pub fn exists_int_cases() -> @kernel.Thm
+
+pub fn forall_int_cases() -> @kernel.Thm
+
+pub fn gcd() -> @kernel.Thm
+
+pub fn int_2_divides_add() -> @kernel.Thm
+
+pub fn int_2_divides_mul() -> @kernel.Thm
+
+pub fn int_2_divides_pow() -> @kernel.Thm
+
+pub fn int_2_divides_sub() -> @kernel.Thm
+
+pub fn int_abs() -> @kernel.Thm
+
+pub fn int_abs_0() -> @kernel.Thm
+
+pub fn int_abs_1() -> @kernel.Thm
+
+pub fn int_abs_abs() -> @kernel.Thm
+
+pub fn int_abs_between() -> @kernel.Thm
+
+pub fn int_abs_between1() -> @kernel.Thm
+
+pub fn int_abs_between2() -> @kernel.Thm
+
+pub fn int_abs_bound() -> @kernel.Thm
+
+pub fn int_abs_bounds() -> @kernel.Thm
+
+pub fn int_abs_cases() -> @kernel.Thm
+
+pub fn int_abs_circle() -> @kernel.Thm
+
+pub fn int_abs_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_abs_le() -> @kernel.Thm
+
+pub fn int_abs_mul() -> @kernel.Thm
+
+pub fn int_abs_mul_1() -> @kernel.Thm
+
+pub fn int_abs_neg() -> @kernel.Thm
+
+pub fn int_abs_num() -> @kernel.Thm
+
+pub fn int_abs_nz() -> @kernel.Thm
+
+pub fn int_abs_pos() -> @kernel.Thm
+
+pub fn int_abs_pow() -> @kernel.Thm
+
+pub fn int_abs_refl() -> @kernel.Thm
+
+pub fn int_abs_sgn() -> @kernel.Thm
+
+pub fn int_abs_sign() -> @kernel.Thm
+
+pub fn int_abs_sign2() -> @kernel.Thm
+
+pub fn int_abs_stillnz() -> @kernel.Thm
+
+pub fn int_abs_sub() -> @kernel.Thm
+
+pub fn int_abs_sub_abs() -> @kernel.Thm
+
+pub fn int_abs_th() -> @kernel.Thm
+
+pub fn int_abs_triangle() -> @kernel.Thm
+
+pub fn int_abs_v1() -> @kernel.Thm
+
+pub fn int_abs_zero() -> @kernel.Thm
+
+pub fn int_abstr() -> @kernel.Thm
+
+pub fn int_add() -> @kernel.Thm
+
+pub fn int_add2_sub2() -> @kernel.Thm
+
+pub fn int_add_ac() -> @kernel.Thm
+
+pub fn int_add_assoc() -> @kernel.Thm
+
+pub fn int_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_add_ldistrib() -> @kernel.Thm
+
+pub fn int_add_lid() -> @kernel.Thm
+
+pub fn int_add_linv() -> @kernel.Thm
+
+pub fn int_add_rdistrib() -> @kernel.Thm
+
+pub fn int_add_rem() -> @kernel.Thm
+
+pub fn int_add_rid() -> @kernel.Thm
+
+pub fn int_add_rinv() -> @kernel.Thm
+
+pub fn int_add_sub() -> @kernel.Thm
+
+pub fn int_add_sub2() -> @kernel.Thm
+
+pub fn int_add_sym() -> @kernel.Thm
+
+pub fn int_add_th() -> @kernel.Thm
+
+pub fn int_arch() -> @kernel.Thm
+
+pub fn int_arith(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn int_arith_tac_v1((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn int_arith_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_bounds_le() -> @kernel.Thm
+
+pub fn int_bounds_lt() -> @kernel.Thm
+
+pub fn int_compute_add_convs(@compute.Compset) -> Unit raise
+
+pub fn int_compute_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_cong_div2() -> @kernel.Thm
+
+pub fn int_cong_imp_eq() -> @kernel.Thm
+
+pub fn int_cong_lrem() -> @kernel.Thm
+
+pub fn int_cong_num_exists() -> @kernel.Thm
+
+pub fn int_cong_rrem() -> @kernel.Thm
+
+pub fn int_cong_solve_bounds() -> @kernel.Thm
+
+pub fn int_congruent() -> @kernel.Thm
+
+pub fn int_coprime() -> @kernel.Thm
+
+pub fn int_diffsq() -> @kernel.Thm
+
+pub fn int_div_0() -> @kernel.Thm
+
+pub fn int_div_1() -> @kernel.Thm
+
+pub fn int_div_by_div() -> @kernel.Thm
+
+pub fn int_div_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_div_div() -> @kernel.Thm
+
+pub fn int_div_eq_0() -> @kernel.Thm
+
+pub fn int_div_le() -> @kernel.Thm
+
+pub fn int_div_le_eq() -> @kernel.Thm
+
+pub fn int_div_lneg() -> @kernel.Thm
+
+pub fn int_div_lt() -> @kernel.Thm
+
+pub fn int_div_lt_eq() -> @kernel.Thm
+
+pub fn int_div_mul() -> @kernel.Thm
+
+pub fn int_div_mul_add() -> @kernel.Thm
+
+pub fn int_div_neg2() -> @kernel.Thm
+
+pub fn int_div_refl() -> @kernel.Thm
+
+pub fn int_div_rem() -> @kernel.Thm
+
+pub fn int_div_rneg() -> @kernel.Thm
+
+pub fn int_div_uniq() -> @kernel.Thm
+
+pub fn int_div_zero() -> @kernel.Thm
+
+pub fn int_divides() -> @kernel.Thm
+
+pub fn int_divides_abs() -> @kernel.Thm
+
+pub fn int_divides_div_divides() -> @kernel.Thm
+
+pub fn int_divides_div_self() -> @kernel.Thm
+
+pub fn int_divides_divides_div() -> @kernel.Thm
+
+pub fn int_divides_divides_div_eq() -> @kernel.Thm
+
+pub fn int_divides_labs() -> @kernel.Thm
+
+pub fn int_divides_lcm_gcd() -> @kernel.Thm
+
+pub fn int_divides_le() -> @kernel.Thm
+
+pub fn int_divides_rabs() -> @kernel.Thm
+
+pub fn int_division() -> @kernel.Thm
+
+pub fn int_division_0() -> @kernel.Thm
+
+pub fn int_division_simp() -> @kernel.Thm
+
+pub fn int_divmod_exist_0() -> @kernel.Thm
+
+pub fn int_divmod_uniq() -> @kernel.Thm
+
+pub fn int_entire() -> @kernel.Thm
+
+pub fn int_eq() -> @kernel.Thm
+
+pub fn int_eq_add_lcancel() -> @kernel.Thm
+
+pub fn int_eq_add_lcancel_0() -> @kernel.Thm
+
+pub fn int_eq_add_rcancel() -> @kernel.Thm
+
+pub fn int_eq_add_rcancel_0() -> @kernel.Thm
+
+pub fn int_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_eq_imp_le() -> @kernel.Thm
+
+pub fn int_eq_lcancel_imp() -> @kernel.Thm
+
+pub fn int_eq_mul_lcancel() -> @kernel.Thm
+
+pub fn int_eq_mul_rcancel() -> @kernel.Thm
+
+pub fn int_eq_neg2() -> @kernel.Thm
+
+pub fn int_eq_rcancel_imp() -> @kernel.Thm
+
+pub fn int_eq_sgn_abs() -> @kernel.Thm
+
+pub fn int_eq_square_abs() -> @kernel.Thm
+
+pub fn int_eq_sub_ladd() -> @kernel.Thm
+
+pub fn int_eq_sub_radd() -> @kernel.Thm
+
+pub fn int_evenpow_abs() -> @kernel.Thm
+
+pub fn int_exists_abs() -> @kernel.Thm
+
+pub fn int_exists_pos() -> @kernel.Thm
+
+pub fn int_forall_abs() -> @kernel.Thm
+
+pub fn int_forall_pos() -> @kernel.Thm
+
+pub fn int_gcd() -> @kernel.Thm
+
+pub fn int_gcd_exists() -> @kernel.Thm
+
+pub fn int_gcd_exists_pos() -> @kernel.Thm
+
+pub fn int_ge() -> @kernel.Thm
+
+pub fn int_ge_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_ge_v1() -> @kernel.Thm
+
+pub fn int_gt() -> @kernel.Thm
+
+pub fn int_gt_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_gt_discrete() -> @kernel.Thm
+
+pub fn int_gt_v1() -> @kernel.Thm
+
+pub fn int_ideal_cofactors(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @list.List[@kernel.Term] raise) raise
+
+pub fn int_image() -> @kernel.Thm
+
+pub fn int_lcm() -> @kernel.Thm
+
+pub fn int_lcm_divides() -> @kernel.Thm
+
+pub fn int_lcm_pos() -> @kernel.Thm
+
+pub fn int_lcm_v1() -> @kernel.Thm
+
+pub fn int_le() -> @kernel.Thm
+
+pub fn int_le_01() -> @kernel.Thm
+
+pub fn int_le_add() -> @kernel.Thm
+
+pub fn int_le_add2() -> @kernel.Thm
+
+pub fn int_le_addl() -> @kernel.Thm
+
+pub fn int_le_addr() -> @kernel.Thm
+
+pub fn int_le_antisym() -> @kernel.Thm
+
+pub fn int_le_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_le_discrete() -> @kernel.Thm
+
+pub fn int_le_div() -> @kernel.Thm
+
+pub fn int_le_div_eq() -> @kernel.Thm
+
+pub fn int_le_double() -> @kernel.Thm
+
+pub fn int_le_ladd() -> @kernel.Thm
+
+pub fn int_le_ladd_imp() -> @kernel.Thm
+
+pub fn int_le_lcancel_imp() -> @kernel.Thm
+
+pub fn int_le_lmul() -> @kernel.Thm
+
+pub fn int_le_lmul_eq() -> @kernel.Thm
+
+pub fn int_le_lneg() -> @kernel.Thm
+
+pub fn int_le_lt() -> @kernel.Thm
+
+pub fn int_le_max() -> @kernel.Thm
+
+pub fn int_le_min() -> @kernel.Thm
+
+pub fn int_le_mul() -> @kernel.Thm
+
+pub fn int_le_mul2() -> @kernel.Thm
+
+pub fn int_le_mul_eq() -> @kernel.Thm
+
+pub fn int_le_neg2() -> @kernel.Thm
+
+pub fn int_le_negl() -> @kernel.Thm
+
+pub fn int_le_negr() -> @kernel.Thm
+
+pub fn int_le_negtotal() -> @kernel.Thm
+
+pub fn int_le_pow2() -> @kernel.Thm
+
+pub fn int_le_pow_2() -> @kernel.Thm
+
+pub fn int_le_radd() -> @kernel.Thm
+
+pub fn int_le_rcancel_imp() -> @kernel.Thm
+
+pub fn int_le_refl() -> @kernel.Thm
+
+pub fn int_le_rmul() -> @kernel.Thm
+
+pub fn int_le_rmul_eq() -> @kernel.Thm
+
+pub fn int_le_rneg() -> @kernel.Thm
+
+pub fn int_le_square() -> @kernel.Thm
+
+pub fn int_le_square_abs() -> @kernel.Thm
+
+pub fn int_le_sub_ladd() -> @kernel.Thm
+
+pub fn int_le_sub_radd() -> @kernel.Thm
+
+pub fn int_le_total() -> @kernel.Thm
+
+pub fn int_le_trans() -> @kernel.Thm
+
+pub fn int_le_trans_le() -> @kernel.Thm
+
+pub fn int_le_trans_lt() -> @kernel.Thm
+
+pub fn int_let_add() -> @kernel.Thm
+
+pub fn int_let_add2() -> @kernel.Thm
+
+pub fn int_let_antisym() -> @kernel.Thm
+
+pub fn int_let_total() -> @kernel.Thm
+
+pub fn int_let_trans() -> @kernel.Thm
+
+pub fn int_lneg_uniq() -> @kernel.Thm
+
+pub fn int_lt() -> @kernel.Thm
+
+pub fn int_lt_01() -> @kernel.Thm
+
+pub fn int_lt_add() -> @kernel.Thm
+
+pub fn int_lt_add1() -> @kernel.Thm
+
+pub fn int_lt_add2() -> @kernel.Thm
+
+pub fn int_lt_add_sub() -> @kernel.Thm
+
+pub fn int_lt_addl() -> @kernel.Thm
+
+pub fn int_lt_addneg() -> @kernel.Thm
+
+pub fn int_lt_addneg2() -> @kernel.Thm
+
+pub fn int_lt_addr() -> @kernel.Thm
+
+pub fn int_lt_antisym() -> @kernel.Thm
+
+pub fn int_lt_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_lt_discrete() -> @kernel.Thm
+
+pub fn int_lt_div() -> @kernel.Thm
+
+pub fn int_lt_div_eq() -> @kernel.Thm
+
+pub fn int_lt_gt() -> @kernel.Thm
+
+pub fn int_lt_imp_le() -> @kernel.Thm
+
+pub fn int_lt_imp_ne() -> @kernel.Thm
+
+pub fn int_lt_ladd() -> @kernel.Thm
+
+pub fn int_lt_ladd_imp() -> @kernel.Thm
+
+pub fn int_lt_lcancel_imp() -> @kernel.Thm
+
+pub fn int_lt_le() -> @kernel.Thm
+
+pub fn int_lt_lmul() -> @kernel.Thm
+
+pub fn int_lt_lmul_eq() -> @kernel.Thm
+
+pub fn int_lt_lneg() -> @kernel.Thm
+
+pub fn int_lt_max() -> @kernel.Thm
+
+pub fn int_lt_min() -> @kernel.Thm
+
+pub fn int_lt_mul() -> @kernel.Thm
+
+pub fn int_lt_mul2() -> @kernel.Thm
+
+pub fn int_lt_mul_eq() -> @kernel.Thm
+
+pub fn int_lt_neg2() -> @kernel.Thm
+
+pub fn int_lt_negtotal() -> @kernel.Thm
+
+pub fn int_lt_pow2() -> @kernel.Thm
+
+pub fn int_lt_pow_2() -> @kernel.Thm
+
+pub fn int_lt_radd() -> @kernel.Thm
+
+pub fn int_lt_rcancel_imp() -> @kernel.Thm
+
+pub fn int_lt_refl() -> @kernel.Thm
+
+pub fn int_lt_rem() -> @kernel.Thm
+
+pub fn int_lt_rem_eq() -> @kernel.Thm
+
+pub fn int_lt_rmul() -> @kernel.Thm
+
+pub fn int_lt_rmul_eq() -> @kernel.Thm
+
+pub fn int_lt_rneg() -> @kernel.Thm
+
+pub fn int_lt_square() -> @kernel.Thm
+
+pub fn int_lt_square_abs() -> @kernel.Thm
+
+pub fn int_lt_sub_ladd() -> @kernel.Thm
+
+pub fn int_lt_sub_radd() -> @kernel.Thm
+
+pub fn int_lt_total() -> @kernel.Thm
+
+pub fn int_lt_trans() -> @kernel.Thm
+
+pub fn int_lt_v1() -> @kernel.Thm
+
+pub fn int_lte_add() -> @kernel.Thm
+
+pub fn int_lte_add2() -> @kernel.Thm
+
+pub fn int_lte_antisym() -> @kernel.Thm
+
+pub fn int_lte_total() -> @kernel.Thm
+
+pub fn int_lte_trans() -> @kernel.Thm
+
+pub fn int_max() -> @kernel.Thm
+
+pub fn int_max_aci() -> @kernel.Thm
+
+pub fn int_max_assoc() -> @kernel.Thm
+
+pub fn int_max_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_max_le() -> @kernel.Thm
+
+pub fn int_max_lt() -> @kernel.Thm
+
+pub fn int_max_max() -> @kernel.Thm
+
+pub fn int_max_min() -> @kernel.Thm
+
+pub fn int_max_sym() -> @kernel.Thm
+
+pub fn int_max_th() -> @kernel.Thm
+
+pub fn int_max_v1() -> @kernel.Thm
+
+pub fn int_min() -> @kernel.Thm
+
+pub fn int_min_aci() -> @kernel.Thm
+
+pub fn int_min_assoc() -> @kernel.Thm
+
+pub fn int_min_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_min_le() -> @kernel.Thm
+
+pub fn int_min_lt() -> @kernel.Thm
+
+pub fn int_min_max() -> @kernel.Thm
+
+pub fn int_min_min() -> @kernel.Thm
+
+pub fn int_min_sym() -> @kernel.Thm
+
+pub fn int_min_th() -> @kernel.Thm
+
+pub fn int_min_v1() -> @kernel.Thm
+
+pub fn int_mod() -> @kernel.Thm
+
+pub fn int_mul() -> @kernel.Thm
+
+pub fn int_mul_2() -> @kernel.Thm
+
+pub fn int_mul_ac() -> @kernel.Thm
+
+pub fn int_mul_assoc() -> @kernel.Thm
+
+pub fn int_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_mul_div_eq() -> @kernel.Thm
+
+pub fn int_mul_eq_1() -> @kernel.Thm
+
+pub fn int_mul_gcd_lcm() -> @kernel.Thm
+
+pub fn int_mul_lcm_gcd() -> @kernel.Thm
+
+pub fn int_mul_lid() -> @kernel.Thm
+
+pub fn int_mul_lneg() -> @kernel.Thm
+
+pub fn int_mul_lzero() -> @kernel.Thm
+
+pub fn int_mul_pos_le() -> @kernel.Thm
+
+pub fn int_mul_pos_lt() -> @kernel.Thm
+
+pub fn int_mul_rem() -> @kernel.Thm
+
+pub fn int_mul_rid() -> @kernel.Thm
+
+pub fn int_mul_rneg() -> @kernel.Thm
+
+pub fn int_mul_rzero() -> @kernel.Thm
+
+pub fn int_mul_sym() -> @kernel.Thm
+
+pub fn int_mul_th() -> @kernel.Thm
+
+pub fn int_neg() -> @kernel.Thm
+
+pub fn int_neg_0() -> @kernel.Thm
+
+pub fn int_neg_add() -> @kernel.Thm
+
+pub fn int_neg_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_neg_eq() -> @kernel.Thm
+
+pub fn int_neg_eq_0() -> @kernel.Thm
+
+pub fn int_neg_ge0() -> @kernel.Thm
+
+pub fn int_neg_gt0() -> @kernel.Thm
+
+pub fn int_neg_le0() -> @kernel.Thm
+
+pub fn int_neg_lmul() -> @kernel.Thm
+
+pub fn int_neg_lt0() -> @kernel.Thm
+
+pub fn int_neg_minus1() -> @kernel.Thm
+
+pub fn int_neg_mul2() -> @kernel.Thm
+
+pub fn int_neg_neg() -> @kernel.Thm
+
+pub fn int_neg_rem() -> @kernel.Thm
+
+pub fn int_neg_rmul() -> @kernel.Thm
+
+pub fn int_neg_sub() -> @kernel.Thm
+
+pub fn int_neg_th() -> @kernel.Thm
+
+pub fn int_not_eq() -> @kernel.Thm
+
+pub fn int_not_le() -> @kernel.Thm
+
+pub fn int_not_lt() -> @kernel.Thm
+
+pub fn int_of_num() -> @kernel.Thm
+
+pub fn int_of_num_add() -> @kernel.Thm
+
+pub fn int_of_num_clauses() -> @kernel.Thm
+
+pub fn int_of_num_div() -> @kernel.Thm
+
+pub fn int_of_num_eq() -> @kernel.Thm
+
+pub fn int_of_num_exists() -> @kernel.Thm
+
+pub fn int_of_num_ge() -> @kernel.Thm
+
+pub fn int_of_num_gt() -> @kernel.Thm
+
+pub fn int_of_num_le() -> @kernel.Thm
+
+pub fn int_of_num_lt() -> @kernel.Thm
+
+pub fn int_of_num_max() -> @kernel.Thm
+
+pub fn int_of_num_min() -> @kernel.Thm
+
+pub fn int_of_num_mod() -> @kernel.Thm
+
+pub fn int_of_num_mul() -> @kernel.Thm
+
+pub fn int_of_num_of_int() -> @kernel.Thm
+
+pub fn int_of_num_pow() -> @kernel.Thm
+
+pub fn int_of_num_rem() -> @kernel.Thm
+
+pub fn int_of_num_sub() -> @kernel.Thm
+
+pub fn int_of_num_sub_cases() -> @kernel.Thm
+
+pub fn int_of_num_suc() -> @kernel.Thm
+
+pub fn int_of_num_th() -> @kernel.Thm
+
+pub fn int_of_real_thm(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn int_poly_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_pos() -> @kernel.Thm
+
+pub fn int_pos_eq_square() -> @kernel.Thm
+
+pub fn int_pos_nz() -> @kernel.Thm
+
+pub fn int_pow() -> @kernel.Thm
+
+pub fn int_pow2_abs() -> @kernel.Thm
+
+pub fn int_pow_1() -> @kernel.Thm
+
+pub fn int_pow_1_le() -> @kernel.Thm
+
+pub fn int_pow_1_lt() -> @kernel.Thm
+
+pub fn int_pow_2() -> @kernel.Thm
+
+pub fn int_pow_add() -> @kernel.Thm
+
+pub fn int_pow_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_pow_eq() -> @kernel.Thm
+
+pub fn int_pow_eq_0() -> @kernel.Thm
+
+pub fn int_pow_eq_1() -> @kernel.Thm
+
+pub fn int_pow_eq_1_imp() -> @kernel.Thm
+
+pub fn int_pow_eq_abs() -> @kernel.Thm
+
+pub fn int_pow_eq_eq() -> @kernel.Thm
+
+pub fn int_pow_eq_odd() -> @kernel.Thm
+
+pub fn int_pow_eq_odd_eq() -> @kernel.Thm
+
+pub fn int_pow_lbound() -> @kernel.Thm
+
+pub fn int_pow_le() -> @kernel.Thm
+
+pub fn int_pow_le2() -> @kernel.Thm
+
+pub fn int_pow_le2_odd() -> @kernel.Thm
+
+pub fn int_pow_le2_odd_eq() -> @kernel.Thm
+
+pub fn int_pow_le2_rev() -> @kernel.Thm
+
+pub fn int_pow_le_1() -> @kernel.Thm
+
+pub fn int_pow_lt() -> @kernel.Thm
+
+pub fn int_pow_lt2() -> @kernel.Thm
+
+pub fn int_pow_lt2_odd() -> @kernel.Thm
+
+pub fn int_pow_lt2_odd_eq() -> @kernel.Thm
+
+pub fn int_pow_lt2_rev() -> @kernel.Thm
+
+pub fn int_pow_lt_1() -> @kernel.Thm
+
+pub fn int_pow_mono() -> @kernel.Thm
+
+pub fn int_pow_mono_lt() -> @kernel.Thm
+
+pub fn int_pow_mul() -> @kernel.Thm
+
+pub fn int_pow_neg() -> @kernel.Thm
+
+pub fn int_pow_nz() -> @kernel.Thm
+
+pub fn int_pow_one() -> @kernel.Thm
+
+pub fn int_pow_pow() -> @kernel.Thm
+
+pub fn int_pow_rem() -> @kernel.Thm
+
+pub fn int_pow_rem_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_pow_th() -> @kernel.Thm
+
+pub fn int_pow_v1() -> @kernel.Thm
+
+pub fn int_pow_zero() -> @kernel.Thm
+
+pub fn int_red_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_red_conv_list() -> @list.List[(@kernel.Term, (@kernel.Term) -> @kernel.Thm raise)]
+
+pub fn int_reduce_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_rem_0() -> @kernel.Thm
+
+pub fn int_rem_1() -> @kernel.Thm
+
+pub fn int_rem_2_cases() -> @kernel.Thm
+
+pub fn int_rem_2_divides() -> @kernel.Thm
+
+pub fn int_rem_2_expand() -> @kernel.Thm
+
+pub fn int_rem_2_neg() -> @kernel.Thm
+
+pub fn int_rem_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_rem_div() -> @kernel.Thm
+
+pub fn int_rem_down_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_rem_eq() -> @kernel.Thm
+
+pub fn int_rem_eq_0() -> @kernel.Thm
+
+pub fn int_rem_eq_self() -> @kernel.Thm
+
+pub fn int_rem_le() -> @kernel.Thm
+
+pub fn int_rem_le_eq() -> @kernel.Thm
+
+pub fn int_rem_lneg() -> @kernel.Thm
+
+pub fn int_rem_lt() -> @kernel.Thm
+
+pub fn int_rem_mod_self() -> @kernel.Thm
+
+pub fn int_rem_mul() -> @kernel.Thm
+
+pub fn int_rem_mul_add() -> @kernel.Thm
+
+pub fn int_rem_mul_rem() -> @kernel.Thm
+
+pub fn int_rem_neg2() -> @kernel.Thm
+
+pub fn int_rem_pos() -> @kernel.Thm
+
+pub fn int_rem_pos_eq() -> @kernel.Thm
+
+pub fn int_rem_rabs() -> @kernel.Thm
+
+pub fn int_rem_refl() -> @kernel.Thm
+
+pub fn int_rem_rem() -> @kernel.Thm
+
+pub fn int_rem_rem_le() -> @kernel.Thm
+
+pub fn int_rem_rem_mul() -> @kernel.Thm
+
+pub fn int_rem_rem_pow_min() -> @kernel.Thm
+
+pub fn int_rem_rneg() -> @kernel.Thm
+
+pub fn int_rem_uniq() -> @kernel.Thm
+
+pub fn int_rem_unique() -> @kernel.Thm
+
+pub fn int_rem_zero() -> @kernel.Thm
+
+pub fn int_rep() -> @kernel.Thm
+
+pub fn int_ring(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_rneg_uniq() -> @kernel.Thm
+
+pub fn int_sgn() -> @kernel.Thm
+
+pub fn int_sgn_0() -> @kernel.Thm
+
+pub fn int_sgn_abs() -> @kernel.Thm
+
+pub fn int_sgn_abs_alt() -> @kernel.Thm
+
+pub fn int_sgn_cases() -> @kernel.Thm
+
+pub fn int_sgn_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_sgn_eq() -> @kernel.Thm
+
+pub fn int_sgn_eq_ineq() -> @kernel.Thm
+
+pub fn int_sgn_ineqs() -> @kernel.Thm
+
+pub fn int_sgn_int_sgn() -> @kernel.Thm
+
+pub fn int_sgn_mul() -> @kernel.Thm
+
+pub fn int_sgn_neg() -> @kernel.Thm
+
+pub fn int_sgn_pow() -> @kernel.Thm
+
+pub fn int_sgn_pow_2() -> @kernel.Thm
+
+pub fn int_sgn_th() -> @kernel.Thm
+
+pub fn int_sgn_v1() -> @kernel.Thm
+
+pub fn int_sgns_eq() -> @kernel.Thm
+
+pub fn int_sgns_eq_alt() -> @kernel.Thm
+
+pub fn int_sos_eq_0() -> @kernel.Thm
+
+pub fn int_sub() -> @kernel.Thm
+
+pub fn int_sub_0() -> @kernel.Thm
+
+pub fn int_sub_abs() -> @kernel.Thm
+
+pub fn int_sub_add() -> @kernel.Thm
+
+pub fn int_sub_add2() -> @kernel.Thm
+
+pub fn int_sub_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_sub_ldistrib() -> @kernel.Thm
+
+pub fn int_sub_le() -> @kernel.Thm
+
+pub fn int_sub_lneg() -> @kernel.Thm
+
+pub fn int_sub_lt() -> @kernel.Thm
+
+pub fn int_sub_lzero() -> @kernel.Thm
+
+pub fn int_sub_neg2() -> @kernel.Thm
+
+pub fn int_sub_rdistrib() -> @kernel.Thm
+
+pub fn int_sub_refl() -> @kernel.Thm
+
+pub fn int_sub_rem() -> @kernel.Thm
+
+pub fn int_sub_rneg() -> @kernel.Thm
+
+pub fn int_sub_rzero() -> @kernel.Thm
+
+pub fn int_sub_sub() -> @kernel.Thm
+
+pub fn int_sub_sub2() -> @kernel.Thm
+
+pub fn int_sub_th() -> @kernel.Thm
+
+pub fn int_sub_triangle() -> @kernel.Thm
+
+pub fn int_sub_v1() -> @kernel.Thm
+
+pub fn int_tybij() -> @kernel.Thm
+
+pub fn int_wlog_le() -> @kernel.Thm
+
+pub fn int_wlog_le_3() -> @kernel.Thm
+
+pub fn int_wlog_lt() -> @kernel.Thm
+
+pub fn int_wop() -> @kernel.Thm
+
+pub fn integer() -> @kernel.Thm
+
+pub fn integer_real_of_int() -> @kernel.Thm
+
+pub fn integer_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn integer_rule_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn integer_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn integer_tac_v1((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn is_int() -> @kernel.Thm
+
+pub fn is_intconst(@kernel.Term) -> Bool raise
+
+pub fn mk_intconst(@num.Num) -> @kernel.Term raise
+
+pub fn mult_div() -> @kernel.Thm
+
+pub fn not_int_rem_2() -> @kernel.Thm
+
+pub fn num_cases_binary() -> @kernel.Thm
+
+pub fn num_congruent() -> @kernel.Thm
+
+pub fn num_coprime() -> @kernel.Thm
+
+pub fn num_divides() -> @kernel.Thm
+
+pub fn num_gcd() -> @kernel.Thm
+
+pub fn num_gcd_v1() -> @kernel.Thm
+
+pub fn num_lcm() -> @kernel.Thm
+
+pub fn num_lcm_v1() -> @kernel.Thm
+
+pub fn num_mod() -> @kernel.Thm
+
+pub fn num_of_int() -> @kernel.Thm
+
+pub fn num_of_int_add() -> @kernel.Thm
+
+pub fn num_of_int_mul() -> @kernel.Thm
+
+pub fn num_of_int_of_num() -> @kernel.Thm
+
+pub fn num_of_int_pow() -> @kernel.Thm
+
+pub fn num_of_int_v1() -> @kernel.Thm
+
+pub fn num_to_int_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_wf_down() -> @kernel.Thm
+
+pub fn number_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn number_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn one_or_prime() -> @kernel.Thm
+
+pub fn one_or_prime_divides_or_coprime() -> @kernel.Thm
+
+pub fn prime() -> @kernel.Thm
+
+pub fn prime_coprime_eq_nondivisible() -> @kernel.Thm
+
+pub fn prioritize_int(Unit) -> Unit raise
+
+pub fn properly_divides_le_imp() -> @kernel.Thm
+
+pub fn real_abs_zpow() -> @kernel.Thm
+
+pub fn real_inv_zpow() -> @kernel.Thm
+
+pub fn real_mod() -> @kernel.Thm
+
+pub fn real_of_int_clauses() -> @kernel.Thm
+
+pub fn real_pow_zpow() -> @kernel.Thm
+
+pub fn real_sgn_zpow() -> @kernel.Thm
+
+pub fn real_zpow() -> @kernel.Thm
+
+pub fn real_zpow_0() -> @kernel.Thm
+
+pub fn real_zpow_1() -> @kernel.Thm
+
+pub fn real_zpow_2() -> @kernel.Thm
+
+pub fn real_zpow_add() -> @kernel.Thm
+
+pub fn real_zpow_div() -> @kernel.Thm
+
+pub fn real_zpow_eq_0() -> @kernel.Thm
+
+pub fn real_zpow_inv() -> @kernel.Thm
+
+pub fn real_zpow_le() -> @kernel.Thm
+
+pub fn real_zpow_lt() -> @kernel.Thm
+
+pub fn real_zpow_minus1() -> @kernel.Thm
+
+pub fn real_zpow_mul() -> @kernel.Thm
+
+pub fn real_zpow_neg() -> @kernel.Thm
+
+pub fn real_zpow_num() -> @kernel.Thm
+
+pub fn real_zpow_one() -> @kernel.Thm
+
+pub fn real_zpow_pow() -> @kernel.Thm
+
+pub fn real_zpow_sub() -> @kernel.Thm
+
+pub fn real_zpow_zero() -> @kernel.Thm
+
+pub fn real_zpow_zpow() -> @kernel.Thm
+
+pub fn wf_int_measure() -> @kernel.Thm
+
+pub fn wf_int_measure_2() -> @kernel.Thm
+
+pub fn zero_one_or_prime() -> @kernel.Thm
+
+pub fn zero_one_or_prime_divprod() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
