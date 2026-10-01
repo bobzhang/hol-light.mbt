@@ -20,6 +20,12 @@ module Prov = struct
     | (p, vd) -> Hashtbl.replace table (Path.name p) (file, name); !on_record name vd
     | exception Not_found -> ()
 
+  (* a member of a toplevel module: `Meson.x` *)
+  let record_dotted file modname name =
+    match Env.find_value_by_name (Longident.Ldot (Longident.Lident modname, name)) !Toploop.toplevel_env with
+    | (p, vd) -> Hashtbl.replace table (Path.name p) (file, name); !on_record name vd
+    | exception Not_found -> ()
+
   let lookup path =
     match path with
     | Path.Pident id -> Hashtbl.find_opt table (Ident.unique_name id)
@@ -68,7 +74,19 @@ module Loader = struct
             if not (Toploop.execute_phrase false Format.err_formatter p) then
               failwith ("phrase failed in " ^ base);
             List.iter
-              (fun item -> List.iter (Prov.record base) (bound_names item))
+              (fun item ->
+                List.iter (Prov.record base) (bound_names item);
+                match item.Typedtree.str_desc with
+                | Typedtree.Tstr_module { Typedtree.mb_id = Some mid; mb_expr; _ } ->
+                    (match mb_expr.Typedtree.mod_type with
+                     | Types.Mty_signature sg ->
+                         List.iter
+                           (function
+                             | Types.Sig_value (id, _, _) -> Prov.record_dotted base (Ident.name mid) (Ident.name id)
+                             | _ -> ())
+                           sg
+                     | _ -> ())
+                | _ -> ())
               tstr.Typedtree.str_items
         | Parsetree.Ptop_dir _ ->
             ignore (Toploop.execute_phrase false Format.err_formatter p))
@@ -96,6 +114,8 @@ module Names = struct
     | "class.ml" -> Some "class"
     | "trivia.ml" -> Some "trivia"
     | "canon.ml" -> Some "canon"
+    | "meson.ml" -> Some "meson"
+    | "firstorder.ml" -> Some "firstorder"
     | "bignum_num.ml" -> Some "num"
     | _ -> None
 

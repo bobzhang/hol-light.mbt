@@ -296,4 +296,9 @@ definitions register constants, quotations advance the type-variable and
   closures hit a MoonBit compiler bug (native ICE "unbound scalar", bad
   pointer at run time on debug wasm). Polymorphic local functions are
   lifted when they capture nothing, else monomorphised at their instance.
-  Next: `meson`, `firstorder`, `metis`, …
+  `meson/` is done, entirely translated (the translator now handles type
+  declarations as `pub(all) enum ... derive(Eq, Debug)` with generated
+  OCaml-order `OCompare`/`OHash` impls, exceptions as `suberror`s, and
+  modules flattened into the package with `Module.x` provenance); MESON
+  proofs and their progress output match upstream. Next: `firstorder`,
+  `metis`, …

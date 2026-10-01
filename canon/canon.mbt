@@ -42,21 +42,21 @@ pub fn presimp_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// CONJ_ACI_RULE
 fn step_2() -> Unit raise {
   let mk_fun = (x4 : @kernel.Thm, x5 : @lib.Func[@kernel.Term, @kernel.Thm]) => {
-    mk_fun_l9(x4, x5)
+    mk_fun_l(x4, x5)
   }
   let use_fun = (x6 : @lib.Func[@kernel.Term, @kernel.Thm], x7 : @kernel.Term) => {
-    use_fun_l10(x6, x7)
+    use_fun_l(x6, x7)
   }
-  conj_aci_rule_c.set((x11 : @kernel.Term) => {
-    let fm = x11
+  conj_aci_rule_c.set((x9 : @kernel.Term) => {
+    let fm = x9
     let (p, p_p) = @kernel.dest_eq(fm)
     if p == p_p {
       @kernel.refl(p)
     } else {
       let th_1 = use_fun(mk_fun(@kernel.assume_rule(p), @lib.undefined()), p_p)
       let th_p = use_fun(mk_fun(@kernel.assume_rule(p_p), @lib.undefined()), p)
-      let t12 = @bool.disch_all(th_p)
-      @bool.imp_antisym_rule(@bool.disch_all(th_1), t12)
+      let t10 = @bool.disch_all(th_p)
+      @bool.imp_antisym_rule(@bool.disch_all(th_1), t10)
     }
   })
 }
@@ -73,15 +73,15 @@ pub fn conj_aci_rule(x : @kernel.Term) -> @kernel.Thm raise {
 }
 
 ///|
-fn mk_fun_l9(
+fn mk_fun_l(
   x4 : @kernel.Thm,
   x5 : @lib.Func[@kernel.Term, @kernel.Thm],
 ) -> @lib.Func[@kernel.Term, @kernel.Thm] raise {
   let mk_fun = (x4 : @kernel.Thm, x5 : @lib.Func[@kernel.Term, @kernel.Thm]) => {
-    mk_fun_l9(x4, x5)
+    mk_fun_l(x4, x5)
   }
   let use_fun = (x6 : @lib.Func[@kernel.Term, @kernel.Thm], x7 : @kernel.Term) => {
-    use_fun_l10(x6, x7)
+    use_fun_l(x6, x7)
   }
   let th = x4
   let fn_ = x5
@@ -95,15 +95,15 @@ fn mk_fun_l9(
 }
 
 ///|
-fn use_fun_l10(
+fn use_fun_l(
   x6 : @lib.Func[@kernel.Term, @kernel.Thm],
   x7 : @kernel.Term,
 ) -> @kernel.Thm raise {
   let mk_fun = (x4 : @kernel.Thm, x5 : @lib.Func[@kernel.Term, @kernel.Thm]) => {
-    mk_fun_l9(x4, x5)
+    mk_fun_l(x4, x5)
   }
   let use_fun = (x6 : @lib.Func[@kernel.Term, @kernel.Thm], x7 : @kernel.Term) => {
-    use_fun_l10(x6, x7)
+    use_fun_l(x6, x7)
   }
   let fn__1 = x6
   let tm_1 = x7
@@ -135,36 +135,36 @@ fn step_3() -> Unit raise {
   let a_tm = @parser.parse_term("a:bool")
   let b_tm = @parser.parse_term("b:bool")
   let not_disj_pair : (@kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise = (
-    x13 : @kernel.Thm,
+    x11 : @kernel.Thm,
   ) => {
-    let th = x13
+    let th = x11
     let (p, q) = @basics.dest_disj(@kernel.rand(@kernel.concl(th)))
     let ilist = @list.List([(p, a_tm), (q, b_tm)])
-    let t14 = @bool.prove_hyp(th, @kernel.inst_rule(ilist, pth_right))
-    (@bool.prove_hyp(th, @kernel.inst_rule(ilist, pth_left)), t14)
+    let t12 = @bool.prove_hyp(th, @kernel.inst_rule(ilist, pth_right))
+    (@bool.prove_hyp(th, @kernel.inst_rule(ilist, pth_left)), t12)
   }
   let not_disj : (@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = (
-    x15 : @kernel.Thm,
+    x13 : @kernel.Thm,
   ) => {
-    let th1 = x15
-    (x16 : @kernel.Thm) => {
-      let th2 = x16
-      let t17 = (@kernel.rand(@kernel.concl(th2)), b_tm)
+    let th1 = x13
+    (x14 : @kernel.Thm) => {
+      let th2 = x14
+      let t15 = (@kernel.rand(@kernel.concl(th2)), b_tm)
       let th3 = @kernel.inst_rule(
-        @list.List([(@kernel.rand(@kernel.concl(th1)), a_tm), t17]),
+        @list.List([(@kernel.rand(@kernel.concl(th1)), a_tm), t15]),
         pth,
       )
       @bool.prove_hyp(th1, @bool.prove_hyp(th2, th3))
     }
   }
-  let mk_fun = (x18 : @kernel.Thm, x19 : @lib.Func[@kernel.Term, @kernel.Thm]) => {
-    mk_fun_l23(not_disj_pair, not_disj, x18, x19)
+  let mk_fun = (x16 : @kernel.Thm, x17 : @lib.Func[@kernel.Term, @kernel.Thm]) => {
+    mk_fun_l_1(not_disj_pair, not_disj, x16, x17)
   }
-  let use_fun = (x20 : @lib.Func[@kernel.Term, @kernel.Thm], x21 : @kernel.Term) => {
-    use_fun_l24(not_disj_pair, not_disj, x20, x21)
+  let use_fun = (x18 : @lib.Func[@kernel.Term, @kernel.Thm], x19 : @kernel.Term) => {
+    use_fun_l_1(not_disj_pair, not_disj, x18, x19)
   }
-  disj_aci_rule_c.set((x25 : @kernel.Term) => {
-    let fm = x25
+  disj_aci_rule_c.set((x21 : @kernel.Term) => {
+    let fm = x21
     let (p_1, p_p) = @kernel.dest_eq(fm)
     if p_1 == p_p {
       @kernel.refl(p_1)
@@ -177,8 +177,8 @@ fn step_3() -> Unit raise {
         mk_fun(@kernel.assume_rule(@bool.mk_neg(p_p)), @lib.undefined()),
         p_1,
       )
-      let t26 = @bool.disch_all(th_p)
-      let th1_2 = @bool.imp_antisym_rule(@bool.disch_all(th_2), t26)
+      let t22 = @bool.disch_all(th_p)
+      let th1_2 = @bool.imp_antisym_rule(@bool.disch_all(th_2), t22)
       @bool.prove_hyp(
         th1_2,
         @kernel.inst_rule(@list.List([(p_1, a_tm), (p_p, b_tm)]), pth_neg),
@@ -199,20 +199,20 @@ pub fn disj_aci_rule(x : @kernel.Term) -> @kernel.Thm raise {
 }
 
 ///|
-fn mk_fun_l23(
+fn mk_fun_l_1(
   not_disj_pair : (@kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise,
   not_disj : (@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise,
-  x18 : @kernel.Thm,
-  x19 : @lib.Func[@kernel.Term, @kernel.Thm],
+  x16 : @kernel.Thm,
+  x17 : @lib.Func[@kernel.Term, @kernel.Thm],
 ) -> @lib.Func[@kernel.Term, @kernel.Thm] raise {
-  let mk_fun = (x18 : @kernel.Thm, x19 : @lib.Func[@kernel.Term, @kernel.Thm]) => {
-    mk_fun_l23(not_disj_pair, not_disj, x18, x19)
+  let mk_fun = (x16 : @kernel.Thm, x17 : @lib.Func[@kernel.Term, @kernel.Thm]) => {
+    mk_fun_l_1(not_disj_pair, not_disj, x16, x17)
   }
-  let use_fun = (x20 : @lib.Func[@kernel.Term, @kernel.Thm], x21 : @kernel.Term) => {
-    use_fun_l24(not_disj_pair, not_disj, x20, x21)
+  let use_fun = (x18 : @lib.Func[@kernel.Term, @kernel.Thm], x19 : @kernel.Term) => {
+    use_fun_l_1(not_disj_pair, not_disj, x18, x19)
   }
-  let th_1 = x18
-  let fn_ = x19
+  let th_1 = x16
+  let fn_ = x17
   let tm = @kernel.rand(@kernel.concl(th_1))
   if @basics.is_disj(tm) {
     let (th1_1, th2_1) = not_disj_pair(th_1)
@@ -223,24 +223,24 @@ fn mk_fun_l23(
 }
 
 ///|
-fn use_fun_l24(
+fn use_fun_l_1(
   not_disj_pair : (@kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise,
   not_disj : (@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise,
-  x20 : @lib.Func[@kernel.Term, @kernel.Thm],
-  x21 : @kernel.Term,
+  x18 : @lib.Func[@kernel.Term, @kernel.Thm],
+  x19 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let mk_fun = (x18 : @kernel.Thm, x19 : @lib.Func[@kernel.Term, @kernel.Thm]) => {
-    mk_fun_l23(not_disj_pair, not_disj, x18, x19)
+  let mk_fun = (x16 : @kernel.Thm, x17 : @lib.Func[@kernel.Term, @kernel.Thm]) => {
+    mk_fun_l_1(not_disj_pair, not_disj, x16, x17)
   }
-  let use_fun = (x20 : @lib.Func[@kernel.Term, @kernel.Thm], x21 : @kernel.Term) => {
-    use_fun_l24(not_disj_pair, not_disj, x20, x21)
+  let use_fun = (x18 : @lib.Func[@kernel.Term, @kernel.Thm], x19 : @kernel.Term) => {
+    use_fun_l_1(not_disj_pair, not_disj, x18, x19)
   }
-  let fn__1 = x20
-  let tm_1 = x21
+  let fn__1 = x18
+  let tm_1 = x19
   if @basics.is_disj(tm_1) {
     let (l, r) = @basics.dest_disj(tm_1)
-    let t22 = use_fun(fn__1, r)
-    not_disj(use_fun(fn__1, l))(t22)
+    let t20 = use_fun(fn__1, r)
+    not_disj(use_fun(fn__1, l))(t20)
   } else {
     @lib.apply(fn__1, tm_1)
   }
@@ -248,16 +248,16 @@ fn use_fun_l24(
 
 ///|
 /// `CONJ_CANON_CONV`
-pub fn conj_canon_conv(x27 : @kernel.Term) -> @kernel.Thm raise {
-  let tm = x27
+pub fn conj_canon_conv(x23 : @kernel.Term) -> @kernel.Thm raise {
+  let tm = x23
   let tm_p = @bool.list_mk_conj(@lib.setify(@basics.conjuncts(tm)))
   conj_aci_rule(@basics.mk_eq(tm, tm_p))
 }
 
 ///|
 /// `DISJ_CANON_CONV`
-pub fn disj_canon_conv(x28 : @kernel.Term) -> @kernel.Thm raise {
-  let tm = x28
+pub fn disj_canon_conv(x24 : @kernel.Term) -> @kernel.Thm raise {
+  let tm = x24
   let tm_p = @bool.list_mk_disj(@lib.setify(@basics.disjuncts(tm)))
   disj_aci_rule(@basics.mk_eq(tm, tm_p))
 }
@@ -285,10 +285,10 @@ fn step_4() -> Unit raise {
   let pth_not_eq_p = @class.taut(
     @parser.parse_term("~(p <=> q) <=> (p \\/ q) /\\ (~p \\/ ~q)"),
   )
-  let t36 = @simp.rewrite_tac(
+  let t32 = @simp.rewrite_tac(
     @list.List([@theorems.conj_assoc(), @theorems.eq_sym_eq()]),
   )
-  let t35 = @simp.rewrite_tac(
+  let t31 = @simp.rewrite_tac(
     @list.List([
       @class.not_exists_thm(),
       @class.not_forall_thm(),
@@ -297,128 +297,128 @@ fn step_4() -> Unit raise {
       @class.not_imp(),
     ]),
   )
-  let t34 = @simp.gen_rewrite_tac(
-    (x33 : (@kernel.Term) -> @kernel.Thm raise) => {
+  let t30 = @simp.gen_rewrite_tac(
+    (x29 : (@kernel.Term) -> @kernel.Thm raise) => {
       @equal.land_conv(
-        (x32 => {
+        (x28 => {
           @lib.funpow(
             2,
-            (x29 : (@kernel.Term) -> @kernel.Thm raise) => {
-              let s30 = @equal.rand_conv(x29)
-              (x31 : @kernel.Term) => s30(x31)
+            (x25 : (@kernel.Term) -> @kernel.Thm raise) => {
+              let s26 = @equal.rand_conv(x25)
+              (x27 : @kernel.Term) => s26(x27)
             },
-            x32,
+            x28,
           )
-        })(x33),
+        })(x29),
       )
     },
     @list.List([@equal.gsym(@class.eta_ax())]),
   )
-  let t37 = @tactics.then_tac(
+  let t33 = @tactics.then_tac(
     @tactics.then_tac(
-      @tactics.then_tac(@tactics.repeat_tac(@tactics.conj_tac), t34),
-      t35,
+      @tactics.then_tac(@tactics.repeat_tac(@tactics.conj_tac), t30),
+      t31,
     ),
-    t36,
+    t32,
   )
-  let t38 = (
+  let t34 = (
     @parser.parse_term(
       "(~((!) P) <=> ?x:A. ~(P x)) /\\\n     (~((?) P) <=> !x:A. ~(P x)) /\\\n     (~((?!) P) <=> (!x:A. ~(P x)) \\/ ?x y. P x /\\ P y /\\ ~(y = x))",
     ),
-    t37,
+    t33,
   )
   gen_nnf_conv_c.set(
-    match @bool.conjuncts_rule(@tactics.prove(t38.0, t38.1)) {
+    match @bool.conjuncts_rule(@tactics.prove(t34.0, t34.1)) {
       More(
         pth_not_forall,
         tail=More(pth_not_exists, tail=More(pth_not_exu, tail=Empty))
       ) => {
-        let t41 = @simp.rewrite_tac(@list.List([@theorems.eq_sym_eq()]))
-        let t40 = @simp.rewrite_tac(
+        let t37 = @simp.rewrite_tac(@list.List([@theorems.eq_sym_eq()]))
+        let t36 = @simp.rewrite_tac(
           @list.List([
             @bool.exists_unique_def(),
             @class.taut(@parser.parse_term("a /\\ b ==> c <=> ~a \\/ ~b \\/ c")),
           ]),
         )
-        let t42 = @tactics.then_tac(
+        let t38 = @tactics.then_tac(
           @tactics.then_tac(
             @simp.gen_rewrite_tac(
-              (x39 : (@kernel.Term) -> @kernel.Thm raise) => {
-                @equal.land_conv(@equal.rand_conv(x39))
+              (x35 : (@kernel.Term) -> @kernel.Thm raise) => {
+                @equal.land_conv(@equal.rand_conv(x35))
               },
               @list.List([@equal.gsym(@class.eta_ax())]),
             ),
-            t40,
+            t36,
           ),
-          t41,
+          t37,
         )
         let pth_exu = @tactics.prove(
           @parser.parse_term(
             "((?!) P) <=> (?x:A. P x) /\\ !x y. ~(P x) \\/ ~(P y) \\/ (y = x)",
           ),
-          t42,
+          t38,
         )
         let p_tm = @parser.parse_term("p:bool")
         let q_tm = @parser.parse_term("q:bool")
         fn nnf_dconv(
-          x43 : Bool,
-          x44 : (@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise,
-          x45 : @kernel.Term,
+          x39 : Bool,
+          x40 : (@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise,
+          x41 : @kernel.Term,
         ) -> (@kernel.Thm, @kernel.Thm) raise {
-          let cf = x43
-          let baseconvs = x44
-          let tm = x45
+          let cf = x39
+          let baseconvs = x40
+          let tm = x41
           match tm {
             Comb(Comb(Const("/\\", _), l), r) => {
               let (th_lp, th_ln) = nnf_dconv(cf, baseconvs, l)
               let (th_rp, th_rn) = nnf_dconv(cf, baseconvs, r)
-              let t46 = @kernel.mk_comb_rule(
+              let t42 = @kernel.mk_comb_rule(
                 @equal.ap_term(or_tm, th_ln),
                 th_rn,
               )
-              let t47 = @kernel.trans(
+              let t43 = @kernel.trans(
                 @kernel.inst_rule(
                   @list.List([(l, p_tm), (r, q_tm)]),
                   pth_not_and,
                 ),
-                t46,
+                t42,
               )
-              (@kernel.mk_comb_rule(@equal.ap_term(and_tm, th_lp), th_rp), t47)
+              (@kernel.mk_comb_rule(@equal.ap_term(and_tm, th_lp), th_rp), t43)
             }
             Comb(Comb(Const("\\/", _), l_1), r_1) => {
               let (th_lp_1, th_ln_1) = nnf_dconv(cf, baseconvs, l_1)
               let (th_rp_1, th_rn_1) = nnf_dconv(cf, baseconvs, r_1)
-              let t48 = @kernel.mk_comb_rule(
+              let t44 = @kernel.mk_comb_rule(
                 @equal.ap_term(and_tm, th_ln_1),
                 th_rn_1,
               )
-              let t49 = @kernel.trans(
+              let t45 = @kernel.trans(
                 @kernel.inst_rule(
                   @list.List([(l_1, p_tm), (r_1, q_tm)]),
                   pth_not_or,
                 ),
-                t48,
+                t44,
               )
               (
                 @kernel.mk_comb_rule(@equal.ap_term(or_tm, th_lp_1), th_rp_1),
-                t49,
+                t45,
               )
             }
             Comb(Comb(Const("==>", _), l_2), r_2) => {
               let (th_lp_2, th_ln_2) = nnf_dconv(cf, baseconvs, l_2)
               let (th_rp_2, th_rn_2) = nnf_dconv(cf, baseconvs, r_2)
-              let t51 = @kernel.mk_comb_rule(
+              let t47 = @kernel.mk_comb_rule(
                 @equal.ap_term(and_tm, th_lp_2),
                 th_rn_2,
               )
-              let t52 = @kernel.trans(
+              let t48 = @kernel.trans(
                 @kernel.inst_rule(
                   @list.List([(l_2, p_tm), (r_2, q_tm)]),
                   pth_not_imp,
                 ),
-                t51,
+                t47,
               )
-              let t50 = @kernel.mk_comb_rule(
+              let t46 = @kernel.mk_comb_rule(
                 @equal.ap_term(or_tm, th_ln_2),
                 th_rp_2,
               )
@@ -428,9 +428,9 @@ fn step_4() -> Unit raise {
                     @list.List([(l_2, p_tm), (r_2, q_tm)]),
                     pth_imp,
                   ),
-                  t50,
+                  t46,
                 ),
-                t52,
+                t48,
               )
             }
             Comb(
@@ -443,11 +443,11 @@ fn step_4() -> Unit raise {
               let (th_lp_3, th_ln_3) = nnf_dconv(cf, baseconvs, l_3)
               let (th_rp_3, th_rn_3) = nnf_dconv(cf, baseconvs, r_3)
               if cf {
-                let t55 = @kernel.mk_comb_rule(
+                let t51 = @kernel.mk_comb_rule(
                   @equal.ap_term(or_tm, th_ln_3),
                   th_rn_3,
                 )
-                let t56 = @kernel.mk_comb_rule(
+                let t52 = @kernel.mk_comb_rule(
                   @equal.ap_term(
                     and_tm,
                     @kernel.mk_comb_rule(
@@ -455,20 +455,20 @@ fn step_4() -> Unit raise {
                       th_rp_3,
                     ),
                   ),
-                  t55,
+                  t51,
                 )
-                let t57 = @kernel.trans(
+                let t53 = @kernel.trans(
                   @kernel.inst_rule(
                     @list.List([(l_3, p_tm), (r_3, q_tm)]),
                     pth_not_eq_p,
                   ),
-                  t56,
+                  t52,
                 )
-                let t53 = @kernel.mk_comb_rule(
+                let t49 = @kernel.mk_comb_rule(
                   @equal.ap_term(or_tm, th_ln_3),
                   th_rp_3,
                 )
-                let t54 = @kernel.mk_comb_rule(
+                let t50 = @kernel.mk_comb_rule(
                   @equal.ap_term(
                     and_tm,
                     @kernel.mk_comb_rule(
@@ -476,7 +476,7 @@ fn step_4() -> Unit raise {
                       th_rn_3,
                     ),
                   ),
-                  t53,
+                  t49,
                 )
                 (
                   @kernel.trans(
@@ -484,16 +484,16 @@ fn step_4() -> Unit raise {
                       @list.List([(l_3, p_tm), (r_3, q_tm)]),
                       pth_eq_p,
                     ),
-                    t54,
+                    t50,
                   ),
-                  t57,
+                  t53,
                 )
               } else {
-                let t60 = @kernel.mk_comb_rule(
+                let t56 = @kernel.mk_comb_rule(
                   @equal.ap_term(and_tm, th_ln_3),
                   th_rp_3,
                 )
-                let t61 = @kernel.mk_comb_rule(
+                let t57 = @kernel.mk_comb_rule(
                   @equal.ap_term(
                     or_tm,
                     @kernel.mk_comb_rule(
@@ -501,20 +501,20 @@ fn step_4() -> Unit raise {
                       th_rn_3,
                     ),
                   ),
-                  t60,
+                  t56,
                 )
-                let t62 = @kernel.trans(
+                let t58 = @kernel.trans(
                   @kernel.inst_rule(
                     @list.List([(l_3, p_tm), (r_3, q_tm)]),
                     pth_not_eq,
                   ),
-                  t61,
+                  t57,
                 )
-                let t58 = @kernel.mk_comb_rule(
+                let t54 = @kernel.mk_comb_rule(
                   @equal.ap_term(and_tm, th_ln_3),
                   th_rn_3,
                 )
-                let t59 = @kernel.mk_comb_rule(
+                let t55 = @kernel.mk_comb_rule(
                   @equal.ap_term(
                     or_tm,
                     @kernel.mk_comb_rule(
@@ -522,7 +522,7 @@ fn step_4() -> Unit raise {
                       th_rp_3,
                     ),
                   ),
-                  t58,
+                  t54,
                 )
                 (
                   @kernel.trans(
@@ -530,9 +530,9 @@ fn step_4() -> Unit raise {
                       @list.List([(l_3, p_tm), (r_3, q_tm)]),
                       pth_eq,
                     ),
-                    t59,
+                    t55,
                   ),
-                  t62,
+                  t58,
                 )
               }
             }
@@ -544,7 +544,7 @@ fn step_4() -> Unit raise {
               Abs(x, t) as bod
             ) => {
               let (th_p, th_n) = nnf_dconv(true, baseconvs, t)
-              let t63 = @kernel.inst_type(
+              let t59 = @kernel.inst_type(
                 @list.List([(ty, @kernel.aty)]),
                 pth_not_forall,
               )
@@ -555,14 +555,14 @@ fn step_4() -> Unit raise {
                     @kernel.mk_var("P", @basics.mk_fun_ty(ty, @kernel.bool_ty)),
                   ),
                 ]),
-                t63,
+                t59,
               )
               let th2 = @kernel.trans(
                 @equal.ap_term(not_tm, @kernel.beta(@kernel.mk_comb(bod, x))),
                 th_n,
               )
-              let t64 = @kernel.trans(th1, @drule.mk_exists_rule(x, th2))
-              (@equal.ap_term(q, @kernel.abs_rule(x, th_p)), t64)
+              let t60 = @kernel.trans(th1, @drule.mk_exists_rule(x, th2))
+              (@equal.ap_term(q, @kernel.abs_rule(x, th_p)), t60)
             }
             Comb(
               Const(
@@ -572,7 +572,7 @@ fn step_4() -> Unit raise {
               Abs(x_1, t_1) as bod_1
             ) => {
               let (th_p_1, th_n_1) = nnf_dconv(cf, baseconvs, t_1)
-              let t65 = @kernel.inst_type(
+              let t61 = @kernel.inst_type(
                 @list.List([(ty_1, @kernel.aty)]),
                 pth_not_exists,
               )
@@ -586,7 +586,7 @@ fn step_4() -> Unit raise {
                     ),
                   ),
                 ]),
-                t65,
+                t61,
               )
               let th2_1 = @kernel.trans(
                 @equal.ap_term(
@@ -595,8 +595,8 @@ fn step_4() -> Unit raise {
                 ),
                 th_n_1,
               )
-              let t66 = @kernel.trans(th1_1, @drule.mk_forall_rule(x_1, th2_1))
-              (@equal.ap_term(q_1, @kernel.abs_rule(x_1, th_p_1)), t66)
+              let t62 = @kernel.trans(th1_1, @drule.mk_forall_rule(x_1, th2_1))
+              (@equal.ap_term(q_1, @kernel.abs_rule(x_1, th_p_1)), t62)
             }
             Comb(
               Const(
@@ -613,7 +613,7 @@ fn step_4() -> Unit raise {
               let bth_p = @equal.beta_conv(@kernel.mk_comb(bod_2, y))
               let th_p_p = @kernel.inst_rule(@list.List([(y, x_2)]), th_p_2)
               let th_n_p = @kernel.inst_rule(@list.List([(y, x_2)]), th_n_2)
-              let t67 = @kernel.inst_type(
+              let t63 = @kernel.inst_type(
                 @list.List([(ty_2, @kernel.aty)]),
                 pth_exu,
               )
@@ -627,9 +627,9 @@ fn step_4() -> Unit raise {
                     ),
                   ),
                 ]),
-                t67,
+                t63,
               )
-              let t68 = @kernel.inst_type(
+              let t64 = @kernel.inst_type(
                 @list.List([(ty_2, @kernel.aty)]),
                 pth_not_exu,
               )
@@ -643,16 +643,16 @@ fn step_4() -> Unit raise {
                     ),
                   ),
                 ]),
-                t68,
+                t64,
               )
-              let t69 = @kernel.mk_comb_rule(
+              let t65 = @kernel.mk_comb_rule(
                 @equal.ap_term(
                   or_tm,
                   @kernel.trans(@equal.ap_term(not_tm, bth_p), th_n_p),
                 ),
                 eth_p,
               )
-              let t70 = @drule.mk_forall_rule(
+              let t66 = @drule.mk_forall_rule(
                 x_2,
                 @drule.mk_forall_rule(
                   y,
@@ -661,7 +661,7 @@ fn step_4() -> Unit raise {
                       or_tm,
                       @kernel.trans(@equal.ap_term(not_tm, bth), th_n_2),
                     ),
-                    t69,
+                    t65,
                   ),
                 ),
               )
@@ -670,19 +670,19 @@ fn step_4() -> Unit raise {
                   and_tm,
                   @drule.mk_exists_rule(x_2, @kernel.trans(bth, th_p_2)),
                 ),
-                t70,
+                t66,
               )
-              let t71 = @kernel.mk_comb_rule(
+              let t67 = @kernel.mk_comb_rule(
                 @equal.ap_term(and_tm, @kernel.trans(bth_p, th_p_p)),
                 eth_n,
               )
-              let t72 = @drule.mk_exists_rule(
+              let t68 = @drule.mk_exists_rule(
                 x_2,
                 @drule.mk_exists_rule(
                   y,
                   @kernel.mk_comb_rule(
                     @equal.ap_term(and_tm, @kernel.trans(bth, th_p_2)),
-                    t71,
+                    t67,
                   ),
                 ),
               )
@@ -694,10 +694,10 @@ fn step_4() -> Unit raise {
                     @kernel.trans(@equal.ap_term(not_tm, bth), th_n_2),
                   ),
                 ),
-                t72,
+                t68,
               )
-              let t73 = @kernel.trans(th1_p, th2_p)
-              (@kernel.trans(th1_2, th2_2), t73)
+              let t69 = @kernel.trans(th1_p, th2_p)
+              (@kernel.trans(th1_2, th2_2), t69)
             }
             Comb(Const("~", _), t_3) => {
               let (th1_3, th2_3) = nnf_dconv(cf, baseconvs, t_3)
@@ -712,48 +712,48 @@ fn step_4() -> Unit raise {
             _ =>
               baseconvs(tm) catch {
                 Failure(_) => {
-                  let t74 = @kernel.refl(@bool.mk_neg(tm))
-                  (@kernel.refl(tm), t74)
+                  let t70 = @kernel.refl(@bool.mk_neg(tm))
+                  (@kernel.refl(tm), t70)
                 }
                 e => raise e
               }
           }
         }
         let nnf_conv = (
-          x75 : Bool,
-          x76 : (
+          x71 : Bool,
+          x72 : (
             (@kernel.Term) -> @kernel.Thm raise,
             (@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise,
           ),
-          x77 : @kernel.Term,
+          x73 : @kernel.Term,
         ) => {
-          nnf_conv_l101(
+          nnf_conv_l(
             and_tm, or_tm, p_tm, q_tm, pth_imp, nnf_dconv, pth_eq_p, pth_eq, pth_exu,
             not_tm, pth_not_and, pth_not_or, pth_not_imp, pth_not_eq_p, pth_not_eq,
-            pth_not_forall, pth_not_exists, pth_not_exu, pth_not_not, x75, x76, x77,
+            pth_not_forall, pth_not_exists, pth_not_exu, pth_not_not, x71, x72, x73,
           )
         }
         let nnf_conv_p = (
-          x86 : Bool,
-          x87 : (
+          x82 : Bool,
+          x83 : (
             (@kernel.Term) -> @kernel.Thm raise,
             (@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise,
           ),
-          x88 : @kernel.Term,
+          x84 : @kernel.Term,
         ) => {
-          nnf_conv_p_l102(
+          nnf_conv_p_l(
             and_tm, or_tm, p_tm, q_tm, pth_imp, nnf_dconv, pth_eq_p, pth_eq, pth_exu,
             not_tm, pth_not_and, pth_not_or, pth_not_imp, pth_not_eq_p, pth_not_eq,
-            pth_not_forall, pth_not_exists, pth_not_exu, pth_not_not, x86, x87, x88,
+            pth_not_forall, pth_not_exists, pth_not_exu, pth_not_not, x82, x83, x84,
           )
         }
-        (x103 : Bool) => {
+        (x97 : Bool) => {
           (
-            x104 : (
+            x98 : (
               (@kernel.Term) -> @kernel.Thm raise,
               (@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise,
             ),
-          ) => (x105 : @kernel.Term) => nnf_conv(x103, x104, x105)
+          ) => (x99 : @kernel.Term) => nnf_conv(x97, x98, x99)
         }
       }
       _ => raise @lib.MatchFailure("tscript.ml:117")
@@ -775,7 +775,7 @@ pub fn gen_nnf_conv(
 }
 
 ///|
-fn nnf_conv_l101(
+fn nnf_conv_l(
   and_tm : @kernel.Term,
   or_tm : @kernel.Term,
   p_tm : @kernel.Term,
@@ -799,44 +799,44 @@ fn nnf_conv_l101(
   pth_not_exists : @kernel.Thm,
   pth_not_exu : @kernel.Thm,
   pth_not_not : @kernel.Thm,
-  x75 : Bool,
-  x76 : (
+  x71 : Bool,
+  x72 : (
     (@kernel.Term) -> @kernel.Thm raise,
     (@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise,
   ),
-  x77 : @kernel.Term,
+  x73 : @kernel.Term,
 ) -> @kernel.Thm raise {
   let nnf_conv = (
-    x75 : Bool,
-    x76 : (
+    x71 : Bool,
+    x72 : (
       (@kernel.Term) -> @kernel.Thm raise,
       (@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise,
     ),
-    x77 : @kernel.Term,
+    x73 : @kernel.Term,
   ) => {
-    nnf_conv_l101(
+    nnf_conv_l(
       and_tm, or_tm, p_tm, q_tm, pth_imp, nnf_dconv, pth_eq_p, pth_eq, pth_exu, not_tm,
       pth_not_and, pth_not_or, pth_not_imp, pth_not_eq_p, pth_not_eq, pth_not_forall,
-      pth_not_exists, pth_not_exu, pth_not_not, x75, x76, x77,
+      pth_not_exists, pth_not_exu, pth_not_not, x71, x72, x73,
     )
   }
   let nnf_conv_p = (
-    x86 : Bool,
-    x87 : (
+    x82 : Bool,
+    x83 : (
       (@kernel.Term) -> @kernel.Thm raise,
       (@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise,
     ),
-    x88 : @kernel.Term,
+    x84 : @kernel.Term,
   ) => {
-    nnf_conv_p_l102(
+    nnf_conv_p_l(
       and_tm, or_tm, p_tm, q_tm, pth_imp, nnf_dconv, pth_eq_p, pth_eq, pth_exu, not_tm,
       pth_not_and, pth_not_or, pth_not_imp, pth_not_eq_p, pth_not_eq, pth_not_forall,
-      pth_not_exists, pth_not_exu, pth_not_not, x86, x87, x88,
+      pth_not_exists, pth_not_exu, pth_not_not, x82, x83, x84,
     )
   }
-  let cf_1 = x75
-  let (base1, base2) as baseconvs_1 = x76
-  let tm_1 = x77
+  let cf_1 = x71
+  let (base1, base2) as baseconvs_1 = x72
+  let tm_1 = x73
   match tm_1 {
     Comb(Comb(Const("/\\", _), l_4), r_4) => {
       let th_lp_4 = nnf_conv(cf_1, baseconvs_1, l_4)
@@ -851,10 +851,10 @@ fn nnf_conv_l101(
     Comb(Comb(Const("==>", _), l_6), r_6) => {
       let th_ln_4 = nnf_conv_p(cf_1, baseconvs_1, l_6)
       let th_rp_6 = nnf_conv(cf_1, baseconvs_1, r_6)
-      let t78 = @kernel.mk_comb_rule(@equal.ap_term(or_tm, th_ln_4), th_rp_6)
+      let t74 = @kernel.mk_comb_rule(@equal.ap_term(or_tm, th_ln_4), th_rp_6)
       @kernel.trans(
         @kernel.inst_rule(@list.List([(l_6, p_tm), (r_6, q_tm)]), pth_imp),
-        t78,
+        t74,
       )
     }
     Comb(
@@ -864,30 +864,30 @@ fn nnf_conv_l101(
       let (th_lp_6, th_ln_5) = nnf_dconv(cf_1, base2, l_7)
       let (th_rp_7, th_rn_4) = nnf_dconv(cf_1, base2, r_7)
       if cf_1 {
-        let t79 = @kernel.mk_comb_rule(@equal.ap_term(or_tm, th_ln_5), th_rp_7)
-        let t80 = @kernel.mk_comb_rule(
+        let t75 = @kernel.mk_comb_rule(@equal.ap_term(or_tm, th_ln_5), th_rp_7)
+        let t76 = @kernel.mk_comb_rule(
           @equal.ap_term(
             and_tm,
             @kernel.mk_comb_rule(@equal.ap_term(or_tm, th_lp_6), th_rn_4),
           ),
-          t79,
+          t75,
         )
         @kernel.trans(
           @kernel.inst_rule(@list.List([(l_7, p_tm), (r_7, q_tm)]), pth_eq_p),
-          t80,
+          t76,
         )
       } else {
-        let t81 = @kernel.mk_comb_rule(@equal.ap_term(and_tm, th_ln_5), th_rn_4)
-        let t82 = @kernel.mk_comb_rule(
+        let t77 = @kernel.mk_comb_rule(@equal.ap_term(and_tm, th_ln_5), th_rn_4)
+        let t78 = @kernel.mk_comb_rule(
           @equal.ap_term(
             or_tm,
             @kernel.mk_comb_rule(@equal.ap_term(and_tm, th_lp_6), th_rp_7),
           ),
-          t81,
+          t77,
         )
         @kernel.trans(
           @kernel.inst_rule(@list.List([(l_7, p_tm), (r_7, q_tm)]), pth_eq),
-          t82,
+          t78,
         )
       }
     }
@@ -916,21 +916,21 @@ fn nnf_conv_l101(
       let bth_1 = @kernel.beta(@kernel.mk_comb(bod_3, x_5))
       let bth_p_1 = @equal.beta_conv(@kernel.mk_comb(bod_3, y_1))
       let th_n_p_1 = @kernel.inst_rule(@list.List([(y_1, x_5)]), th_n_3)
-      let t83 = @kernel.inst_type(@list.List([(ty_5, @kernel.aty)]), pth_exu)
+      let t79 = @kernel.inst_type(@list.List([(ty_5, @kernel.aty)]), pth_exu)
       let th1_4 = @kernel.inst_rule(
         @list.List([
           (bod_3, @kernel.mk_var("P", @basics.mk_fun_ty(ty_5, @kernel.bool_ty))),
         ]),
-        t83,
+        t79,
       )
-      let t84 = @kernel.mk_comb_rule(
+      let t80 = @kernel.mk_comb_rule(
         @equal.ap_term(
           or_tm,
           @kernel.trans(@equal.ap_term(not_tm, bth_p_1), th_n_p_1),
         ),
         eth_p_1,
       )
-      let t85 = @drule.mk_forall_rule(
+      let t81 = @drule.mk_forall_rule(
         x_5,
         @drule.mk_forall_rule(
           y_1,
@@ -939,7 +939,7 @@ fn nnf_conv_l101(
               or_tm,
               @kernel.trans(@equal.ap_term(not_tm, bth_1), th_n_3),
             ),
-            t84,
+            t80,
           ),
         ),
       )
@@ -948,7 +948,7 @@ fn nnf_conv_l101(
           and_tm,
           @drule.mk_exists_rule(x_5, @kernel.trans(bth_1, th_p_5)),
         ),
-        t85,
+        t81,
       )
       @kernel.trans(th1_4, th2_4)
     }
@@ -962,7 +962,7 @@ fn nnf_conv_l101(
 }
 
 ///|
-fn nnf_conv_p_l102(
+fn nnf_conv_p_l(
   and_tm : @kernel.Term,
   or_tm : @kernel.Term,
   p_tm : @kernel.Term,
@@ -986,70 +986,70 @@ fn nnf_conv_p_l102(
   pth_not_exists : @kernel.Thm,
   pth_not_exu : @kernel.Thm,
   pth_not_not : @kernel.Thm,
-  x86 : Bool,
-  x87 : (
+  x82 : Bool,
+  x83 : (
     (@kernel.Term) -> @kernel.Thm raise,
     (@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise,
   ),
-  x88 : @kernel.Term,
+  x84 : @kernel.Term,
 ) -> @kernel.Thm raise {
   let nnf_conv = (
-    x75 : Bool,
-    x76 : (
+    x71 : Bool,
+    x72 : (
       (@kernel.Term) -> @kernel.Thm raise,
       (@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise,
     ),
-    x77 : @kernel.Term,
+    x73 : @kernel.Term,
   ) => {
-    nnf_conv_l101(
+    nnf_conv_l(
       and_tm, or_tm, p_tm, q_tm, pth_imp, nnf_dconv, pth_eq_p, pth_eq, pth_exu, not_tm,
       pth_not_and, pth_not_or, pth_not_imp, pth_not_eq_p, pth_not_eq, pth_not_forall,
-      pth_not_exists, pth_not_exu, pth_not_not, x75, x76, x77,
+      pth_not_exists, pth_not_exu, pth_not_not, x71, x72, x73,
     )
   }
   let nnf_conv_p = (
-    x86 : Bool,
-    x87 : (
+    x82 : Bool,
+    x83 : (
       (@kernel.Term) -> @kernel.Thm raise,
       (@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise,
     ),
-    x88 : @kernel.Term,
+    x84 : @kernel.Term,
   ) => {
-    nnf_conv_p_l102(
+    nnf_conv_p_l(
       and_tm, or_tm, p_tm, q_tm, pth_imp, nnf_dconv, pth_eq_p, pth_eq, pth_exu, not_tm,
       pth_not_and, pth_not_or, pth_not_imp, pth_not_eq_p, pth_not_eq, pth_not_forall,
-      pth_not_exists, pth_not_exu, pth_not_not, x86, x87, x88,
+      pth_not_exists, pth_not_exu, pth_not_not, x82, x83, x84,
     )
   }
-  let cf_2 = x86
-  let (base1_1, base2_1) as baseconvs_2 = x87
-  let tm_2 = x88
+  let cf_2 = x82
+  let (base1_1, base2_1) as baseconvs_2 = x83
+  let tm_2 = x84
   match tm_2 {
     Comb(Comb(Const("/\\", _), l_8), r_8) => {
       let th_ln_6 = nnf_conv_p(cf_2, baseconvs_2, l_8)
       let th_rn_5 = nnf_conv_p(cf_2, baseconvs_2, r_8)
-      let t89 = @kernel.mk_comb_rule(@equal.ap_term(or_tm, th_ln_6), th_rn_5)
+      let t85 = @kernel.mk_comb_rule(@equal.ap_term(or_tm, th_ln_6), th_rn_5)
       @kernel.trans(
         @kernel.inst_rule(@list.List([(l_8, p_tm), (r_8, q_tm)]), pth_not_and),
-        t89,
+        t85,
       )
     }
     Comb(Comb(Const("\\/", _), l_9), r_9) => {
       let th_ln_7 = nnf_conv_p(cf_2, baseconvs_2, l_9)
       let th_rn_6 = nnf_conv_p(cf_2, baseconvs_2, r_9)
-      let t90 = @kernel.mk_comb_rule(@equal.ap_term(and_tm, th_ln_7), th_rn_6)
+      let t86 = @kernel.mk_comb_rule(@equal.ap_term(and_tm, th_ln_7), th_rn_6)
       @kernel.trans(
         @kernel.inst_rule(@list.List([(l_9, p_tm), (r_9, q_tm)]), pth_not_or),
-        t90,
+        t86,
       )
     }
     Comb(Comb(Const("==>", _), l_10), r_10) => {
       let th_lp_7 = nnf_conv(cf_2, baseconvs_2, l_10)
       let th_rn_7 = nnf_conv_p(cf_2, baseconvs_2, r_10)
-      let t91 = @kernel.mk_comb_rule(@equal.ap_term(and_tm, th_lp_7), th_rn_7)
+      let t87 = @kernel.mk_comb_rule(@equal.ap_term(and_tm, th_lp_7), th_rn_7)
       @kernel.trans(
         @kernel.inst_rule(@list.List([(l_10, p_tm), (r_10, q_tm)]), pth_not_imp),
-        t91,
+        t87,
       )
     }
     Comb(
@@ -1059,36 +1059,36 @@ fn nnf_conv_p_l102(
       let (th_lp_8, th_ln_8) = nnf_dconv(cf_2, base2_1, l_11)
       let (th_rp_8, th_rn_8) = nnf_dconv(cf_2, base2_1, r_11)
       if cf_2 {
-        let t92 = @kernel.mk_comb_rule(@equal.ap_term(or_tm, th_ln_8), th_rn_8)
-        let t93 = @kernel.mk_comb_rule(
+        let t88 = @kernel.mk_comb_rule(@equal.ap_term(or_tm, th_ln_8), th_rn_8)
+        let t89 = @kernel.mk_comb_rule(
           @equal.ap_term(
             and_tm,
             @kernel.mk_comb_rule(@equal.ap_term(or_tm, th_lp_8), th_rp_8),
           ),
-          t92,
+          t88,
         )
         @kernel.trans(
           @kernel.inst_rule(
             @list.List([(l_11, p_tm), (r_11, q_tm)]),
             pth_not_eq_p,
           ),
-          t93,
+          t89,
         )
       } else {
-        let t94 = @kernel.mk_comb_rule(@equal.ap_term(and_tm, th_ln_8), th_rp_8)
-        let t95 = @kernel.mk_comb_rule(
+        let t90 = @kernel.mk_comb_rule(@equal.ap_term(and_tm, th_ln_8), th_rp_8)
+        let t91 = @kernel.mk_comb_rule(
           @equal.ap_term(
             or_tm,
             @kernel.mk_comb_rule(@equal.ap_term(and_tm, th_lp_8), th_rn_8),
           ),
-          t94,
+          t90,
         )
         @kernel.trans(
           @kernel.inst_rule(
             @list.List([(l_11, p_tm), (r_11, q_tm)]),
             pth_not_eq,
           ),
-          t95,
+          t91,
         )
       }
     }
@@ -1097,7 +1097,7 @@ fn nnf_conv_p_l102(
       Abs(x_6, t_8) as bod_4
     ) => {
       let th_n_4 = nnf_conv_p(cf_2, baseconvs_2, t_8)
-      let t96 = @kernel.inst_type(
+      let t92 = @kernel.inst_type(
         @list.List([(ty_6, @kernel.aty)]),
         pth_not_forall,
       )
@@ -1105,7 +1105,7 @@ fn nnf_conv_p_l102(
         @list.List([
           (bod_4, @kernel.mk_var("P", @basics.mk_fun_ty(ty_6, @kernel.bool_ty))),
         ]),
-        t96,
+        t92,
       )
       let th2_5 = @kernel.trans(
         @equal.ap_term(not_tm, @kernel.beta(@kernel.mk_comb(bod_4, x_6))),
@@ -1118,7 +1118,7 @@ fn nnf_conv_p_l102(
       Abs(x_7, t_9) as bod_5
     ) => {
       let th_n_5 = nnf_conv_p(true, baseconvs_2, t_9)
-      let t97 = @kernel.inst_type(
+      let t93 = @kernel.inst_type(
         @list.List([(ty_7, @kernel.aty)]),
         pth_not_exists,
       )
@@ -1126,7 +1126,7 @@ fn nnf_conv_p_l102(
         @list.List([
           (bod_5, @kernel.mk_var("P", @basics.mk_fun_ty(ty_7, @kernel.bool_ty))),
         ]),
-        t97,
+        t93,
       )
       let th2_6 = @kernel.trans(
         @equal.ap_term(not_tm, @kernel.beta(@kernel.mk_comb(bod_5, x_7))),
@@ -1145,7 +1145,7 @@ fn nnf_conv_p_l102(
       let bth_2 = @kernel.beta(@kernel.mk_comb(bod_6, x_8))
       let bth_p_2 = @equal.beta_conv(@kernel.mk_comb(bod_6, y_2))
       let th_p_p_1 = @kernel.inst_rule(@list.List([(y_2, x_8)]), th_p_6)
-      let t98 = @kernel.inst_type(
+      let t94 = @kernel.inst_type(
         @list.List([(ty_8, @kernel.aty)]),
         pth_not_exu,
       )
@@ -1153,19 +1153,19 @@ fn nnf_conv_p_l102(
         @list.List([
           (bod_6, @kernel.mk_var("P", @basics.mk_fun_ty(ty_8, @kernel.bool_ty))),
         ]),
-        t98,
+        t94,
       )
-      let t99 = @kernel.mk_comb_rule(
+      let t95 = @kernel.mk_comb_rule(
         @equal.ap_term(and_tm, @kernel.trans(bth_p_2, th_p_p_1)),
         eth_n_2,
       )
-      let t100 = @drule.mk_exists_rule(
+      let t96 = @drule.mk_exists_rule(
         x_8,
         @drule.mk_exists_rule(
           y_2,
           @kernel.mk_comb_rule(
             @equal.ap_term(and_tm, @kernel.trans(bth_2, th_p_6)),
-            t99,
+            t95,
           ),
         ),
       )
@@ -1177,7 +1177,7 @@ fn nnf_conv_p_l102(
             @kernel.trans(@equal.ap_term(not_tm, bth_2), th_n_6),
           ),
         ),
-        t100,
+        t96,
       )
       @kernel.trans(th1_p_1, th2_p_1)
     }
@@ -1205,10 +1205,10 @@ fn step_5() -> Unit raise {
     gen_nnf_conv(false)(
       (
         @equal.all_conv,
-        (x106 : @kernel.Term) => {
-          let t = x106
-          let t107 = @kernel.refl(@bool.mk_neg(t))
-          (@kernel.refl(t), t107)
+        (x100 : @kernel.Term) => {
+          let t = x100
+          let t101 = @kernel.refl(@bool.mk_neg(t))
+          (@kernel.refl(t), t101)
         },
       ),
     ),
@@ -1231,10 +1231,10 @@ fn step_6() -> Unit raise {
     gen_nnf_conv(true)(
       (
         @equal.all_conv,
-        (x108 : @kernel.Term) => {
-          let t = x108
-          let t109 = @kernel.refl(@bool.mk_neg(t))
-          (@kernel.refl(t), t109)
+        (x102 : @kernel.Term) => {
+          let t = x102
+          let t103 = @kernel.refl(@bool.mk_neg(t))
+          (@kernel.refl(t), t103)
         },
       ),
     ),
@@ -1253,10 +1253,10 @@ pub fn nnfc_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// SKOLEM_CONV
 fn step_7() -> Unit raise {
-  let t116 = @simp.gen_rewrite_conv(
-    (x113 : (@kernel.Term) -> @kernel.Thm raise) => {
-      let s114 = @equal.redepth_conv(x113)
-      (x115 : @kernel.Term) => s114(x115)
+  let t110 = @simp.gen_rewrite_conv(
+    (x107 : (@kernel.Term) -> @kernel.Thm raise) => {
+      let s108 = @equal.redepth_conv(x107)
+      (x109 : @kernel.Term) => s108(x109)
     },
     @list.List([
       @theorems.right_and_exists_thm(),
@@ -1270,9 +1270,9 @@ fn step_7() -> Unit raise {
   skolem_conv_c.set(
     @equal.thenc(
       @simp.gen_rewrite_conv(
-        (x110 : (@kernel.Term) -> @kernel.Thm raise) => {
-          let s111 = @equal.top_depth_conv(x110)
-          (x112 : @kernel.Term) => s111(x112)
+        (x104 : (@kernel.Term) -> @kernel.Thm raise) => {
+          let s105 = @equal.top_depth_conv(x104)
+          (x106 : @kernel.Term) => s105(x106)
         },
         @list.List([
           @theorems.exists_or_thm(),
@@ -1285,7 +1285,7 @@ fn step_7() -> Unit raise {
           @theorems.exists_simp(),
         ]),
       ),
-      t116,
+      t110,
     ),
   )
 }
@@ -1304,9 +1304,9 @@ pub fn skolem_conv(x : @kernel.Term) -> @kernel.Thm raise {
 fn step_8() -> Unit raise {
   prenex_conv_c.set(
     @simp.gen_rewrite_conv(
-      (x117 : (@kernel.Term) -> @kernel.Thm raise) => {
-        let s118 = @equal.redepth_conv(x117)
-        (x119 : @kernel.Term) => s118(x119)
+      (x111 : (@kernel.Term) -> @kernel.Thm raise) => {
+        let s112 = @equal.redepth_conv(x111)
+        (x113 : @kernel.Term) => s112(x113)
       },
       @list.List([
         @theorems.and_forall_thm(),
@@ -1363,24 +1363,24 @@ fn step_9() -> Unit raise {
   let a_tm = @parser.parse_term("a:bool")
   let b_tm = @parser.parse_term("b:bool")
   let c_tm = @parser.parse_term("c:bool")
-  fn distribute(x120 : @kernel.Term) -> @kernel.Thm raise {
-    let tm = x120
+  fn distribute(x114 : @kernel.Term) -> @kernel.Thm raise {
+    let tm = x114
     match tm {
       Comb(Comb(Const("/\\", _), a), Comb(Comb(Const("\\/", _), b), c)) => {
         let th = @kernel.inst_rule(
           @list.List([(a, a_tm), (b, b_tm), (c, c_tm)]),
           pth1,
         )
-        let t121 = @kernel.rand(@kernel.concl(th))
-        @kernel.trans(th, @equal.binop_conv(distribute)(t121))
+        let t115 = @kernel.rand(@kernel.concl(th))
+        @kernel.trans(th, @equal.binop_conv(distribute)(t115))
       }
       Comb(Comb(Const("/\\", _), Comb(Comb(Const("\\/", _), a_1), b_1)), c_1) => {
         let th_1 = @kernel.inst_rule(
           @list.List([(a_1, a_tm), (b_1, b_tm), (c_1, c_tm)]),
           pth2,
         )
-        let t122 = @kernel.rand(@kernel.concl(th_1))
-        @kernel.trans(th_1, @equal.binop_conv(distribute)(t122))
+        let t116 = @kernel.rand(@kernel.concl(th_1))
+        @kernel.trans(th_1, @equal.binop_conv(distribute)(t116))
       }
       _ => @kernel.refl(tm)
     }
@@ -1389,14 +1389,12 @@ fn step_9() -> Unit raise {
     @equal.depth_binop_conv(@parser.parse_term("(\\/)"), conj_canon_conv),
     disj_canon_conv,
   )
-  let weakdnf = (x123 : @kernel.Term) => {
-    weakdnf_l128(distribute, strengthen, x123)
+  let weakdnf = (x117 : @kernel.Term) => weakdnf_l(distribute, strengthen, x117)
+  let substrongdnf = (x119 : @kernel.Term) => {
+    substrongdnf_l(distribute, strengthen, x119)
   }
-  let substrongdnf = (x125 : @kernel.Term) => {
-    substrongdnf_l129(distribute, strengthen, x125)
-  }
-  let strongdnf = (x127 : @kernel.Term) => {
-    strongdnf_l130(distribute, strengthen, x127)
+  let strongdnf = (x121 : @kernel.Term) => {
+    strongdnf_l(distribute, strengthen, x121)
   }
   let (weak_dnf_conv, dnf_conv) = (weakdnf, strongdnf)
   weak_dnf_conv_c.set(weak_dnf_conv)
@@ -1404,28 +1402,26 @@ fn step_9() -> Unit raise {
 }
 
 ///|
-fn weakdnf_l128(
+fn weakdnf_l(
   distribute : (@kernel.Term) -> @kernel.Thm raise,
   strengthen : (@kernel.Term) -> @kernel.Thm raise,
-  x123 : @kernel.Term,
+  x117 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let weakdnf = (x123 : @kernel.Term) => {
-    weakdnf_l128(distribute, strengthen, x123)
+  let weakdnf = (x117 : @kernel.Term) => weakdnf_l(distribute, strengthen, x117)
+  let substrongdnf = (x119 : @kernel.Term) => {
+    substrongdnf_l(distribute, strengthen, x119)
   }
-  let substrongdnf = (x125 : @kernel.Term) => {
-    substrongdnf_l129(distribute, strengthen, x125)
+  let strongdnf = (x121 : @kernel.Term) => {
+    strongdnf_l(distribute, strengthen, x121)
   }
-  let strongdnf = (x127 : @kernel.Term) => {
-    strongdnf_l130(distribute, strengthen, x127)
-  }
-  let tm_1 = x123
+  let tm_1 = x117
   match tm_1 {
     Comb(Const("!", _), Abs(_, _)) | Comb(Const("?", _), Abs(_, _)) =>
       @equal.binder_conv(weakdnf)(tm_1)
     Comb(Comb(Const("\\/", _), _), _) => @equal.binop_conv(weakdnf)(tm_1)
     Comb(Comb(Const("/\\", _) as op, l), r) => {
-      let t124 = weakdnf(r)
-      let th_2 = @kernel.mk_comb_rule(@equal.ap_term(op, weakdnf(l)), t124)
+      let t118 = weakdnf(r)
+      let th_2 = @kernel.mk_comb_rule(@equal.ap_term(op, weakdnf(l)), t118)
       @kernel.trans(th_2, distribute(@kernel.rand(@kernel.concl(th_2))))
     }
     _ => @kernel.refl(tm_1)
@@ -1433,30 +1429,28 @@ fn weakdnf_l128(
 }
 
 ///|
-fn substrongdnf_l129(
+fn substrongdnf_l(
   distribute : (@kernel.Term) -> @kernel.Thm raise,
   strengthen : (@kernel.Term) -> @kernel.Thm raise,
-  x125 : @kernel.Term,
+  x119 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let weakdnf = (x123 : @kernel.Term) => {
-    weakdnf_l128(distribute, strengthen, x123)
+  let weakdnf = (x117 : @kernel.Term) => weakdnf_l(distribute, strengthen, x117)
+  let substrongdnf = (x119 : @kernel.Term) => {
+    substrongdnf_l(distribute, strengthen, x119)
   }
-  let substrongdnf = (x125 : @kernel.Term) => {
-    substrongdnf_l129(distribute, strengthen, x125)
+  let strongdnf = (x121 : @kernel.Term) => {
+    strongdnf_l(distribute, strengthen, x121)
   }
-  let strongdnf = (x127 : @kernel.Term) => {
-    strongdnf_l130(distribute, strengthen, x127)
-  }
-  let tm_2 = x125
+  let tm_2 = x119
   match tm_2 {
     Comb(Const("!", _), Abs(_, _)) | Comb(Const("?", _), Abs(_, _)) =>
       @equal.binder_conv(strongdnf)(tm_2)
     Comb(Comb(Const("\\/", _), _), _) => @equal.binop_conv(substrongdnf)(tm_2)
     Comb(Comb(Const("/\\", _) as op_1, l_1), r_1) => {
-      let t126 = substrongdnf(r_1)
+      let t120 = substrongdnf(r_1)
       let th_3 = @kernel.mk_comb_rule(
         @equal.ap_term(op_1, substrongdnf(l_1)),
-        t126,
+        t120,
       )
       @kernel.trans(th_3, distribute(@kernel.rand(@kernel.concl(th_3))))
     }
@@ -1465,21 +1459,19 @@ fn substrongdnf_l129(
 }
 
 ///|
-fn strongdnf_l130(
+fn strongdnf_l(
   distribute : (@kernel.Term) -> @kernel.Thm raise,
   strengthen : (@kernel.Term) -> @kernel.Thm raise,
-  x127 : @kernel.Term,
+  x121 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let weakdnf = (x123 : @kernel.Term) => {
-    weakdnf_l128(distribute, strengthen, x123)
+  let weakdnf = (x117 : @kernel.Term) => weakdnf_l(distribute, strengthen, x117)
+  let substrongdnf = (x119 : @kernel.Term) => {
+    substrongdnf_l(distribute, strengthen, x119)
   }
-  let substrongdnf = (x125 : @kernel.Term) => {
-    substrongdnf_l129(distribute, strengthen, x125)
+  let strongdnf = (x121 : @kernel.Term) => {
+    strongdnf_l(distribute, strengthen, x121)
   }
-  let strongdnf = (x127 : @kernel.Term) => {
-    strongdnf_l130(distribute, strengthen, x127)
-  }
-  let tm_3 = x127
+  let tm_3 = x121
   let th_4 = substrongdnf(tm_3)
   @kernel.trans(th_4, strengthen(@kernel.rand(@kernel.concl(th_4))))
 }
@@ -1514,24 +1506,24 @@ fn step_10() -> Unit raise {
   let a_tm = @parser.parse_term("a:bool")
   let b_tm = @parser.parse_term("b:bool")
   let c_tm = @parser.parse_term("c:bool")
-  fn distribute(x131 : @kernel.Term) -> @kernel.Thm raise {
-    let tm = x131
+  fn distribute(x122 : @kernel.Term) -> @kernel.Thm raise {
+    let tm = x122
     match tm {
       Comb(Comb(Const("\\/", _), a), Comb(Comb(Const("/\\", _), b), c)) => {
         let th = @kernel.inst_rule(
           @list.List([(a, a_tm), (b, b_tm), (c, c_tm)]),
           pth1,
         )
-        let t132 = @kernel.rand(@kernel.concl(th))
-        @kernel.trans(th, @equal.binop_conv(distribute)(t132))
+        let t123 = @kernel.rand(@kernel.concl(th))
+        @kernel.trans(th, @equal.binop_conv(distribute)(t123))
       }
       Comb(Comb(Const("\\/", _), Comb(Comb(Const("/\\", _), a_1), b_1)), c_1) => {
         let th_1 = @kernel.inst_rule(
           @list.List([(a_1, a_tm), (b_1, b_tm), (c_1, c_tm)]),
           pth2,
         )
-        let t133 = @kernel.rand(@kernel.concl(th_1))
-        @kernel.trans(th_1, @equal.binop_conv(distribute)(t133))
+        let t124 = @kernel.rand(@kernel.concl(th_1))
+        @kernel.trans(th_1, @equal.binop_conv(distribute)(t124))
       }
       _ => @kernel.refl(tm)
     }
@@ -1540,14 +1532,12 @@ fn step_10() -> Unit raise {
     @equal.depth_binop_conv(@parser.parse_term("(/\\)"), disj_canon_conv),
     conj_canon_conv,
   )
-  let weakcnf = (x134 : @kernel.Term) => {
-    weakcnf_l139(distribute, strengthen, x134)
+  let weakcnf = (x125 : @kernel.Term) => weakcnf_l(distribute, strengthen, x125)
+  let substrongcnf = (x127 : @kernel.Term) => {
+    substrongcnf_l(distribute, strengthen, x127)
   }
-  let substrongcnf = (x136 : @kernel.Term) => {
-    substrongcnf_l140(distribute, strengthen, x136)
-  }
-  let strongcnf = (x138 : @kernel.Term) => {
-    strongcnf_l141(distribute, strengthen, x138)
+  let strongcnf = (x129 : @kernel.Term) => {
+    strongcnf_l(distribute, strengthen, x129)
   }
   let (weak_cnf_conv, cnf_conv) = (weakcnf, strongcnf)
   weak_cnf_conv_c.set(weak_cnf_conv)
@@ -1555,28 +1545,26 @@ fn step_10() -> Unit raise {
 }
 
 ///|
-fn weakcnf_l139(
+fn weakcnf_l(
   distribute : (@kernel.Term) -> @kernel.Thm raise,
   strengthen : (@kernel.Term) -> @kernel.Thm raise,
-  x134 : @kernel.Term,
+  x125 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let weakcnf = (x134 : @kernel.Term) => {
-    weakcnf_l139(distribute, strengthen, x134)
+  let weakcnf = (x125 : @kernel.Term) => weakcnf_l(distribute, strengthen, x125)
+  let substrongcnf = (x127 : @kernel.Term) => {
+    substrongcnf_l(distribute, strengthen, x127)
   }
-  let substrongcnf = (x136 : @kernel.Term) => {
-    substrongcnf_l140(distribute, strengthen, x136)
+  let strongcnf = (x129 : @kernel.Term) => {
+    strongcnf_l(distribute, strengthen, x129)
   }
-  let strongcnf = (x138 : @kernel.Term) => {
-    strongcnf_l141(distribute, strengthen, x138)
-  }
-  let tm_1 = x134
+  let tm_1 = x125
   match tm_1 {
     Comb(Const("!", _), Abs(_, _)) | Comb(Const("?", _), Abs(_, _)) =>
       @equal.binder_conv(weakcnf)(tm_1)
     Comb(Comb(Const("/\\", _), _), _) => @equal.binop_conv(weakcnf)(tm_1)
     Comb(Comb(Const("\\/", _) as op, l), r) => {
-      let t135 = weakcnf(r)
-      let th_2 = @kernel.mk_comb_rule(@equal.ap_term(op, weakcnf(l)), t135)
+      let t126 = weakcnf(r)
+      let th_2 = @kernel.mk_comb_rule(@equal.ap_term(op, weakcnf(l)), t126)
       @kernel.trans(th_2, distribute(@kernel.rand(@kernel.concl(th_2))))
     }
     _ => @kernel.refl(tm_1)
@@ -1584,30 +1572,28 @@ fn weakcnf_l139(
 }
 
 ///|
-fn substrongcnf_l140(
+fn substrongcnf_l(
   distribute : (@kernel.Term) -> @kernel.Thm raise,
   strengthen : (@kernel.Term) -> @kernel.Thm raise,
-  x136 : @kernel.Term,
+  x127 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let weakcnf = (x134 : @kernel.Term) => {
-    weakcnf_l139(distribute, strengthen, x134)
+  let weakcnf = (x125 : @kernel.Term) => weakcnf_l(distribute, strengthen, x125)
+  let substrongcnf = (x127 : @kernel.Term) => {
+    substrongcnf_l(distribute, strengthen, x127)
   }
-  let substrongcnf = (x136 : @kernel.Term) => {
-    substrongcnf_l140(distribute, strengthen, x136)
+  let strongcnf = (x129 : @kernel.Term) => {
+    strongcnf_l(distribute, strengthen, x129)
   }
-  let strongcnf = (x138 : @kernel.Term) => {
-    strongcnf_l141(distribute, strengthen, x138)
-  }
-  let tm_2 = x136
+  let tm_2 = x127
   match tm_2 {
     Comb(Const("!", _), Abs(_, _)) | Comb(Const("?", _), Abs(_, _)) =>
       @equal.binder_conv(strongcnf)(tm_2)
     Comb(Comb(Const("/\\", _), _), _) => @equal.binop_conv(substrongcnf)(tm_2)
     Comb(Comb(Const("\\/", _) as op_1, l_1), r_1) => {
-      let t137 = substrongcnf(r_1)
+      let t128 = substrongcnf(r_1)
       let th_3 = @kernel.mk_comb_rule(
         @equal.ap_term(op_1, substrongcnf(l_1)),
-        t137,
+        t128,
       )
       @kernel.trans(th_3, distribute(@kernel.rand(@kernel.concl(th_3))))
     }
@@ -1616,21 +1602,19 @@ fn substrongcnf_l140(
 }
 
 ///|
-fn strongcnf_l141(
+fn strongcnf_l(
   distribute : (@kernel.Term) -> @kernel.Thm raise,
   strengthen : (@kernel.Term) -> @kernel.Thm raise,
-  x138 : @kernel.Term,
+  x129 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let weakcnf = (x134 : @kernel.Term) => {
-    weakcnf_l139(distribute, strengthen, x134)
+  let weakcnf = (x125 : @kernel.Term) => weakcnf_l(distribute, strengthen, x125)
+  let substrongcnf = (x127 : @kernel.Term) => {
+    substrongcnf_l(distribute, strengthen, x127)
   }
-  let substrongcnf = (x136 : @kernel.Term) => {
-    substrongcnf_l140(distribute, strengthen, x136)
+  let strongcnf = (x129 : @kernel.Term) => {
+    strongcnf_l(distribute, strengthen, x129)
   }
-  let strongcnf = (x138 : @kernel.Term) => {
-    strongcnf_l141(distribute, strengthen, x138)
-  }
-  let tm_3 = x138
+  let tm_3 = x129
   let th_4 = substrongcnf(tm_3)
   @kernel.trans(th_4, strengthen(@kernel.rand(@kernel.concl(th_4))))
 }
@@ -1638,16 +1622,16 @@ fn strongcnf_l141(
 ///|
 /// `ASSOC_CONV`
 pub fn assoc_conv(
-  x142 : @kernel.Thm,
+  x130 : @kernel.Thm,
 ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
-  let th = x142
+  let th = x130
   let th_p = @equal.sym(@bool.spec_all(th))
   let (opx, yopz) = @kernel.dest_comb(@equal.rhs(@kernel.concl(th_p)))
   let (op, x) = @kernel.dest_comb(opx)
   let y = @equal.lhand(yopz)
   let z = @kernel.rand(yopz)
-  fn distrib(x144 : @kernel.Term) -> @kernel.Thm raise {
-    let tm = x144
+  fn distrib(x132 : @kernel.Term) -> @kernel.Thm raise {
+    let tm = x132
     match tm {
       Comb(Comb(op_p, Comb(Comb(op_p_p, p), q)), r) if op_p == op &&
         op_p_p == op => {
@@ -1660,8 +1644,8 @@ pub fn assoc_conv(
       _ => @kernel.refl(tm)
     }
   }
-  fn assoc(x145 : @kernel.Term) -> @kernel.Thm raise {
-    let tm_1 = x145
+  fn assoc(x133 : @kernel.Term) -> @kernel.Thm raise {
+    let tm_1 = x133
     match tm_1 {
       Comb(Comb(op_p_1, p_1) as l_1, q_1) if op_p_1 == op => {
         let th_1 = @equal.ap_term(l_1, assoc(q_1))
@@ -1676,7 +1660,7 @@ pub fn assoc_conv(
 ///|
 /// SELECT_ELIM_TAC
 fn step_11() -> Unit raise {
-  let t146 = @tactics.then_tac(
+  let t134 = @tactics.then_tac(
     @tactics.then_tac(
       @simp.rewrite_tac(@list.List([@class.exists_thm()])),
       @tactics.beta_tac,
@@ -1685,29 +1669,29 @@ fn step_11() -> Unit raise {
   )
   let pth = @tactics.prove(
     @parser.parse_term("(P:A->bool)((@) P) <=> (?) P"),
-    t146,
+    t134,
   )
   let ptm = @parser.parse_term("P:A->bool")
   let select_elim_thm : (@kernel.Term) -> @kernel.Thm raise = (
-    x147 : @kernel.Term,
+    x135 : @kernel.Term,
   ) => {
-    let tm = x147
+    let tm = x135
     let (stm, atm) = @kernel.dest_comb(tm)
     if @kernel.is_const(stm) && @kernel.dest_const(stm).0 == "@" {
-      let t148 = @bool.pinst(
+      let t136 = @bool.pinst(
         @list.List([(@kernel.type_of(@basics.bndvar(atm)), @kernel.aty)]),
         @list.List([(atm, ptm)]),
         pth,
       )
-      @equal.conv_rule(@equal.land_conv(@equal.beta_conv), t148)
+      @equal.conv_rule(@equal.land_conv(@equal.beta_conv), t136)
     } else {
       raise Failure("SELECT_ELIM_THM: not a select-term")
     }
   }
   let select_elim_conv : (@kernel.Term) -> @kernel.Thm raise = (
-    x149 : @kernel.Term,
+    x137 : @kernel.Term,
   ) => {
-    let tm_1 = x149
+    let tm_1 = x137
     @simp.pure_rewrite_conv(
       @lib.map(select_elim_thm, @basics.find_terms(@class.is_select, tm_1)),
     )(tm_1)
@@ -1715,9 +1699,9 @@ fn step_11() -> Unit raise {
   let pth_1 = @bool.ispec(@parser.parse_term("P:A->bool"), @class.select_ax())
   let ptm_1 = @parser.parse_term("P:A->bool")
   let select_ax_thm : (@kernel.Term) -> @kernel.Thm raise = (
-    x150 : @kernel.Term,
+    x138 : @kernel.Term,
   ) => {
-    let tm_2 = x150
+    let tm_2 = x138
     let (stm_1, atm_1) = @kernel.dest_comb(tm_2)
     if @kernel.is_const(stm_1) && @kernel.dest_const(stm_1).0 == "@" {
       let fvs = @kernel.frees(atm_1)
@@ -1736,18 +1720,18 @@ fn step_11() -> Unit raise {
     }
   }
   let select_elim_iconv : (@kernel.Term) -> @kernel.Thm raise = (
-    x151 : @kernel.Term,
+    x139 : @kernel.Term,
   ) => {
-    let tm_3 = x151
+    let tm_3 = x139
     let t = @basics.find_term(@class.is_select, tm_3)
     let th1_1 = select_ax_thm(t)
     let itm = @bool.mk_imp(@kernel.concl(th1_1), tm_3)
     let th2_1 = @bool.disch_all(@bool.mp(@kernel.assume_rule(itm), th1_1))
     let fvs_1 = @kernel.frees(t)
     let fty = @lib.itlist(
-      (x152 : @kernel.Term, x153 : @kernel.HolType) => {
-        let t154 = @kernel.type_of(x152)
-        ((x155 : @kernel.HolType) => @basics.mk_fun_ty(t154, x155))(x153)
+      (x140 : @kernel.Term, x141 : @kernel.HolType) => {
+        let t142 = @kernel.type_of(x140)
+        ((x143 : @kernel.HolType) => @basics.mk_fun_ty(t142, x143))(x141)
       },
       fvs_1,
       @kernel.type_of(t),
@@ -1755,22 +1739,22 @@ fn step_11() -> Unit raise {
     let fn_ = @basics.genvar(fty)
     let atm_2 = @basics.list_mk_abs(fvs_1, t)
     let rawdef = @basics.mk_eq(fn_, atm_2)
-    let t156 = @kernel.assume_rule(rawdef)
-    let def = @bool.genl(fvs_1, @equal.sym(@ind_defs.right_betas(fvs_1)(t156)))
-    let t157 = @equal.lhand(@kernel.concl(th2_1))
-    let th3 = @simp.pure_rewrite_conv(@list.List([def]))(t157)
+    let t144 = @kernel.assume_rule(rawdef)
+    let def = @bool.genl(fvs_1, @equal.sym(@ind_defs.right_betas(fvs_1)(t144)))
+    let t145 = @equal.lhand(@kernel.concl(th2_1))
+    let th3 = @simp.pure_rewrite_conv(@list.List([def]))(t145)
     let gtm = @bool.mk_forall(fn_, @kernel.rand(@kernel.concl(th3)))
-    let t158 = @bool.spec(fn_, @kernel.assume_rule(gtm))
-    let th4 = @kernel.eq_mp(@equal.sym(th3), t158)
+    let t146 = @bool.spec(fn_, @kernel.assume_rule(gtm))
+    let th4 = @kernel.eq_mp(@equal.sym(th3), t146)
     let th5 = @bool.imp_trans(@bool.disch(gtm, th4), th2_1)
-    let t159 = @kernel.refl(atm_2)
+    let t147 = @kernel.refl(atm_2)
     @bool.mp(
       @kernel.inst_rule(@list.List([(atm_2, fn_)]), @bool.disch(rawdef, th5)),
-      t159,
+      t147,
     )
   }
-  fn select_elims_iconv(x160 : @kernel.Term) -> @kernel.Thm raise {
-    let tm_4 = x160
+  fn select_elims_iconv(x148 : @kernel.Term) -> @kernel.Thm raise {
+    let tm_4 = x148
     try {
       let th = select_elim_iconv(tm_4)
       let tm_p = @equal.lhand(@kernel.concl(th))
@@ -1783,17 +1767,17 @@ fn step_11() -> Unit raise {
   let select_elim_iconv_1 : (@kernel.Term) -> @kernel.Thm raise = select_elims_iconv
   select_elim_tac_c.set(
     @tactics.then_tac(@tactics.conv_tac(select_elim_conv), (
-      x164 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+      x152 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
     ) => {
-      ((x163 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
-        ((x161 : @kernel.Term) => {
-          @tactics.match_mp_tac(select_elim_iconv_1(x161))
+      ((x151 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+        ((x149 : @kernel.Term) => {
+          @tactics.match_mp_tac(select_elim_iconv_1(x149))
         })(
-          ((x162 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => x162.1)(
-            x163,
+          ((x150 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => x150.1)(
+            x151,
           ),
         )
-      })(x164)(x164)
+      })(x152)(x152)
     }),
   )
 }
@@ -1812,34 +1796,34 @@ pub fn select_elim_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 ///|
 /// LAMBDA_ELIM_CONV
 fn step_12() -> Unit raise {
-  let t165 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
+  let t153 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let pth = @tactics.prove(
     @parser.parse_term("(s = \\x. t x) <=> (!x. s x = t x)"),
-    t165,
+    t153,
   )
   fn conv(
-    x166 : @list.List[@kernel.Term],
-    x167 : @kernel.Term,
+    x154 : @list.List[@kernel.Term],
+    x155 : @kernel.Term,
   ) -> @kernel.Thm raise {
-    let vs = x166
-    let tm = x167
+    let vs = x154
+    let tm = x155
     if vs == @list.empty() {
       @kernel.refl(tm)
     } else {
-      let t169 = @lib.tl(vs)
-      let t171 = @equal.binder_conv((x170 : @kernel.Term) => conv(t169, x170))
+      let t157 = @lib.tl(vs)
+      let t159 = @equal.binder_conv((x158 : @kernel.Term) => conv(t157, x158))
       @equal.thenc(
         @simp.gen_rewrite_conv(
-          (x168 : (@kernel.Term) -> @kernel.Thm raise) => x168,
+          (x156 : (@kernel.Term) -> @kernel.Thm raise) => x156,
           @list.List([pth]),
         ),
-        t171,
+        t159,
       )(tm)
     }
   }
   let half_mk_abs_conv = conv
-  fn find_lambda(x172 : @kernel.Term) -> @kernel.Term raise {
-    let tm_1 = x172
+  fn find_lambda(x160 : @kernel.Term) -> @kernel.Term raise {
+    let tm_1 = x160
     if @kernel.is_abs(tm_1) {
       tm_1
     } else if @kernel.is_var(tm_1) || @kernel.is_const(tm_1) {
@@ -1859,15 +1843,15 @@ fn step_12() -> Unit raise {
     }
   }
   fn elim_lambda(
-    x173 : (@kernel.Term) -> @kernel.Thm raise,
-    x174 : @kernel.Term,
+    x161 : (@kernel.Term) -> @kernel.Thm raise,
+    x162 : @kernel.Term,
   ) -> @kernel.Thm raise {
-    let conv_1 = x173
-    let tm_2 = x174
+    let conv_1 = x161
+    let tm_2 = x162
     conv_1(tm_2) catch {
       Failure(_) =>
         if @kernel.is_abs(tm_2) {
-          @equal.abs_conv((x175 : @kernel.Term) => elim_lambda(conv_1, x175))(
+          @equal.abs_conv((x163 : @kernel.Term) => elim_lambda(conv_1, x163))(
             tm_2,
           )
         } else if @kernel.is_var(tm_2) || @kernel.is_const(tm_2) {
@@ -1875,29 +1859,29 @@ fn step_12() -> Unit raise {
         } else if @basics.is_forall(tm_2) ||
           @basics.is_exists(tm_2) ||
           @basics.is_uexists(tm_2) {
-          @equal.binder_conv((x176 : @kernel.Term) => elim_lambda(conv_1, x176))(
+          @equal.binder_conv((x164 : @kernel.Term) => elim_lambda(conv_1, x164))(
             tm_2,
           )
         } else {
-          @equal.comb_conv((x177 : @kernel.Term) => elim_lambda(conv_1, x177))(
+          @equal.comb_conv((x165 : @kernel.Term) => elim_lambda(conv_1, x165))(
             tm_2,
           )
         }
       e => raise e
     }
   }
-  let t178 = @simp.simp_tac(
+  let t166 = @simp.simp_tac(
     @list.List([@theorems.left_forall_imp_thm(), @theorems.exists_refl()]),
   )
   let pth_1 = @tactics.prove(
     @parser.parse_term(
       "(!a. (a = c) ==> (P = Q a)) ==> (P <=> !a. (a = c) ==> Q a)",
     ),
-    t178,
+    t166,
   )
   let apply_pth : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(pth_1)
-  let lamb1_conv : (@kernel.Term) -> @kernel.Thm raise = (x179 : @kernel.Term) => {
-    let tm_3 = x179
+  let lamb1_conv : (@kernel.Term) -> @kernel.Thm raise = (x167 : @kernel.Term) => {
+    let tm_3 = x167
     let atm = find_lambda(tm_3)
     let (v, bod) = @kernel.dest_abs(atm)
     let vs_1 = @kernel.frees(atm)
@@ -1905,11 +1889,11 @@ fn step_12() -> Unit raise {
     let aatm = @basics.list_mk_abs(vs_1, atm)
     let f = @basics.genvar(@kernel.type_of(aatm))
     let eq = @basics.mk_eq(f, aatm)
-    let t180 = @kernel.assume_rule(eq)
-    let th1 = @equal.sym(@ind_defs.right_betas(vs_1)(t180))
+    let t168 = @kernel.assume_rule(eq)
+    let th1 = @equal.sym(@ind_defs.right_betas(vs_1)(t168))
     let th2 = elim_lambda(
       @simp.gen_rewrite_conv(
-        (x181 : (@kernel.Term) -> @kernel.Thm raise) => x181,
+        (x169 : (@kernel.Term) -> @kernel.Thm raise) => x169,
         @list.List([th1]),
       ),
       tm_3,
@@ -1918,14 +1902,14 @@ fn step_12() -> Unit raise {
     @equal.conv_rule(
       @equal.rand_conv(
         @equal.binder_conv(
-          @equal.land_conv((x182 : @kernel.Term) => half_mk_abs_conv(vs_p, x182)),
+          @equal.land_conv((x170 : @kernel.Term) => half_mk_abs_conv(vs_p, x170)),
         ),
       ),
       th3,
     )
   }
-  fn conv_2(x183 : @kernel.Term) -> @kernel.Thm raise {
-    let tm_4 = x183
+  fn conv_2(x171 : @kernel.Term) -> @kernel.Thm raise {
+    let tm_4 = x171
     @equal.thenc(lamb1_conv, conv_2)(tm_4) catch {
       Failure(_) => @kernel.refl(tm_4)
       e => raise e
@@ -1970,27 +1954,27 @@ pub fn conds_celim_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// CONDS_ELIM_CONV, CONDS_CELIM_CONV
 fn step_13() -> Unit raise {
-  let t184 = @simp.asm_rewrite_tac(@list.empty())
-  let t185 = @tactics.then_tac(
+  let t172 = @simp.asm_rewrite_tac(@list.empty())
+  let t173 = @tactics.then_tac(
     @class.bool_cases_tac(@parser.parse_term("b:bool")),
-    t184,
+    t172,
   )
   let th_cond = @tactics.prove(
     @parser.parse_term(
       "((b <=> F) ==> x = x0) /\\ ((b <=> T) ==> x = x1)\n     ==> x = (b /\\ x1 \\/ ~b /\\ x0)",
     ),
-    t185,
+    t173,
   )
-  let t186 = @simp.asm_rewrite_tac(@list.empty())
-  let t187 = @tactics.then_tac(
+  let t174 = @simp.asm_rewrite_tac(@list.empty())
+  let t175 = @tactics.then_tac(
     @class.bool_cases_tac(@parser.parse_term("b:bool")),
-    t186,
+    t174,
   )
   let th_cond_p = @tactics.prove(
     @parser.parse_term(
       "((b <=> F) ==> x = x0) /\\ ((b <=> T) ==> x = x1)\n     ==> x = ((~b \\/ x1) /\\ (b \\/ x0))",
     ),
-    t187,
+    t175,
   )
   let propsimps = @simp.basic_net()
   let false_tm = @parser.parse_term("F")
@@ -2010,11 +1994,11 @@ fn step_13() -> Unit raise {
     cnv,
   )
   fn find_conditional(
-    x188 : @list.List[@kernel.Term],
-    x189 : @kernel.Term,
+    x176 : @list.List[@kernel.Term],
+    x177 : @kernel.Term,
   ) -> @kernel.Term raise {
-    let fvs = x188
-    let tm = x189
+    let fvs = x176
+    let tm = x177
     match tm {
       Comb(s, t) =>
         if @class.is_cond(tm) &&
@@ -2030,9 +2014,9 @@ fn step_13() -> Unit raise {
       _ => raise Failure("find_conditional")
     }
   }
-  fn conds_elim_conv(x190 : Bool, x191 : @kernel.Term) -> @kernel.Thm raise {
-    let dfl = x190
-    let tm_1 = x191
+  fn conds_elim_conv(x178 : Bool, x179 : @kernel.Term) -> @kernel.Thm raise {
+    let dfl = x178
+    let tm_1 = x179
     try {
       let t_2 = find_conditional(@list.empty(), tm_1)
       let p = @equal.lhand(@kernel.rator(t_2))
@@ -2064,33 +2048,33 @@ fn step_13() -> Unit raise {
         @kernel.trans(th_3, proptsimp_conv(@kernel.rand(@kernel.concl(th_3))))
       }
       @equal.conv_rule(
-        @equal.rand_conv((x192 : @kernel.Term) => conds_elim_conv(dfl, x192)),
+        @equal.rand_conv((x180 : @kernel.Term) => conds_elim_conv(dfl, x180)),
         th_new,
       )
     } catch {
       Failure(_) =>
         if @basics.is_neg(tm_1) {
-          @equal.rand_conv((x193 : @kernel.Term) => conds_elim_conv(!dfl, x193))(
+          @equal.rand_conv((x181 : @kernel.Term) => conds_elim_conv(!dfl, x181))(
             tm_1,
           )
         } else if @basics.is_conj(tm_1) || @basics.is_disj(tm_1) {
-          @equal.binop_conv((x194 : @kernel.Term) => conds_elim_conv(dfl, x194))(
+          @equal.binop_conv((x182 : @kernel.Term) => conds_elim_conv(dfl, x182))(
             tm_1,
           )
         } else if @basics.is_imp(tm_1) || @bool.is_iff(tm_1) {
           @equal.comb2_conv(
-            @equal.rand_conv((x195 : @kernel.Term) => {
-              conds_elim_conv(!dfl, x195)
+            @equal.rand_conv((x183 : @kernel.Term) => {
+              conds_elim_conv(!dfl, x183)
             }),
-            (x196 : @kernel.Term) => conds_elim_conv(dfl, x196),
+            (x184 : @kernel.Term) => conds_elim_conv(dfl, x184),
           )(tm_1)
         } else if @basics.is_forall(tm_1) {
-          @equal.binder_conv((x197 : @kernel.Term) => {
-            conds_elim_conv(false, x197)
+          @equal.binder_conv((x185 : @kernel.Term) => {
+            conds_elim_conv(false, x185)
           })(tm_1)
         } else if @basics.is_exists(tm_1) || @basics.is_uexists(tm_1) {
-          @equal.binder_conv((x198 : @kernel.Term) => {
-            conds_elim_conv(true, x198)
+          @equal.binder_conv((x186 : @kernel.Term) => {
+            conds_elim_conv(true, x186)
           })(tm_1)
         } else {
           @kernel.refl(tm_1)
@@ -2099,8 +2083,8 @@ fn step_13() -> Unit raise {
     }
   }
   let (conds_elim_conv_1, conds_celim_conv) = (
-    (x199 : @kernel.Term) => conds_elim_conv(true, x199),
-    (x200 : @kernel.Term) => conds_elim_conv(false, x200),
+    (x187 : @kernel.Term) => conds_elim_conv(true, x187),
+    (x188 : @kernel.Term) => conds_elim_conv(false, x188),
   )
   conds_elim_conv_c.set(conds_elim_conv_1)
   conds_celim_conv_c.set(conds_celim_conv)
@@ -2110,13 +2094,13 @@ fn step_13() -> Unit raise {
 /// ASM_FOL_TAC
 fn step_14() -> Unit raise {
   fn get_heads(
-    x201 : @list.List[@kernel.Term],
-    x202 : @kernel.Term,
-    x203 : (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]),
+    x189 : @list.List[@kernel.Term],
+    x190 : @kernel.Term,
+    x191 : (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]),
   ) -> (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]) raise {
-    let lconsts = x201
-    let tm = x202
-    let (cheads, vheads) as sofar = x203
+    let lconsts = x189
+    let tm = x190
+    let (cheads, vheads) as sofar = x191
     try {
       let (v, bod) = @basics.dest_forall(tm)
       get_heads(@lib.subtract(lconsts, @list.List([v])), bod, sofar)
@@ -2147,12 +2131,12 @@ fn step_14() -> Unit raise {
                 }
                 @lib.itlist(
                   (
-                    x204 : @kernel.Term,
-                    x205 : (
+                    x192 : @kernel.Term,
+                    x193 : (
                       @list.List[(@kernel.Term, Int)],
                       @list.List[(@kernel.Term, Int)],
                     ),
-                  ) => get_heads(lconsts, x204, x205),
+                  ) => get_heads(lconsts, x192, x193),
                   args,
                   newheads,
                 )
@@ -2167,66 +2151,66 @@ fn step_14() -> Unit raise {
   let get_thm_heads : (@kernel.Thm) -> ((
     (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]),
   ) -> (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]) raise) raise = (
-    x206 : @kernel.Thm,
+    x194 : @kernel.Thm,
   ) => {
-    let th = x206
-    (x207 : (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)])) => {
-      let sofar_1 = x207
-      let t208 = @kernel.concl(th)
-      get_heads(@kernel.freesl(@kernel.hyp(th)), t208, sofar_1)
+    let th = x194
+    (x195 : (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)])) => {
+      let sofar_1 = x195
+      let t196 = @kernel.concl(th)
+      get_heads(@kernel.freesl(@kernel.hyp(th)), t196, sofar_1)
     }
   }
-  let t209 = @simp.rewrite_tac(@list.List([@trivia.i_thm()]))
+  let t197 = @simp.rewrite_tac(@list.List([@trivia.i_thm()]))
   let th_1 = @tactics.prove(
     @parser.parse_term("!(f:A->B) x. f x = I f x"),
-    t209,
+    t197,
   )
   let app_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(th_1)
-  fn app_n_conv(x210 : Int, x211 : @kernel.Term) -> @kernel.Thm raise {
-    let n = x210
-    let tm_1 = x211
+  fn app_n_conv(x198 : Int, x199 : @kernel.Term) -> @kernel.Thm raise {
+    let n = x198
+    let tm_1 = x199
     if n == 1 {
       app_conv(tm_1)
     } else {
-      let t212 = n - 1
+      let t200 = n - 1
       @equal.thenc(
-        @equal.rator_conv((x213 : @kernel.Term) => app_n_conv(t212, x213)),
+        @equal.rator_conv((x201 : @kernel.Term) => app_n_conv(t200, x201)),
         app_conv,
       )(tm_1)
     }
   }
   fn fol_conv(
-    x214 : @list.List[(@kernel.Term, Int)],
-    x215 : @kernel.Term,
+    x202 : @list.List[(@kernel.Term, Int)],
+    x203 : @kernel.Term,
   ) -> @kernel.Thm raise {
-    let hddata = x214
-    let tm_2 = x215
+    let hddata = x202
+    let tm_2 = x203
     if @basics.is_forall(tm_2) {
-      @equal.binder_conv((x216 : @kernel.Term) => fol_conv(hddata, x216))(tm_2)
+      @equal.binder_conv((x204 : @kernel.Term) => fol_conv(hddata, x204))(tm_2)
     } else if @basics.is_conj(tm_2) || @basics.is_disj(tm_2) {
-      @equal.binop_conv((x217 : @kernel.Term) => fol_conv(hddata, x217))(tm_2)
+      @equal.binop_conv((x205 : @kernel.Term) => fol_conv(hddata, x205))(tm_2)
     } else {
       let (op, args_1) = @basics.strip_comb(tm_2)
-      let t224 = @kernel.refl(op)
+      let t212 = @kernel.refl(op)
       let th_2 = @lib.rev_itlist(
-        (x221 : @kernel.Thm, x222 : @kernel.Thm) => {
-          ((x219, x220) => {
+        (x209 : @kernel.Thm, x210 : @kernel.Thm) => {
+          ((x207, x208) => {
             @lib.curry(
-              (x218 : (@kernel.Thm, @kernel.Thm)) => {
-                @kernel.mk_comb_rule(x218.0, x218.1)
+              (x206 : (@kernel.Thm, @kernel.Thm)) => {
+                @kernel.mk_comb_rule(x206.0, x206.1)
               },
-              x219,
-              x220,
+              x207,
+              x208,
             )
-          })(x222, x221)
+          })(x210, x209)
         },
-        @lib.map((x223 : @kernel.Term) => fol_conv(hddata, x223), args_1),
-        t224,
+        @lib.map((x211 : @kernel.Term) => fol_conv(hddata, x211), args_1),
+        t212,
       )
       let tm_p_1 = @kernel.rand(@kernel.concl(th_2))
       let n_1 = try {
-        let t225 = @lib.assoc(op, hddata)
-        @lib.length(args_1) - t225
+        let t213 = @lib.assoc(op, hddata)
+        @lib.length(args_1) - t213
       } catch {
         Failure(_) => 0
         e => raise e
@@ -2241,20 +2225,20 @@ fn step_14() -> Unit raise {
   let gen_fol_conv : (
     (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]),
   ) -> ((@kernel.Term) -> @kernel.Thm raise) raise = (
-    x226 : (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]),
+    x214 : (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]),
   ) => {
-    let (cheads_1, vheads_1) = x226
+    let (cheads_1, vheads_1) = x214
     let hddata_1 = if vheads_1 == @list.empty() {
       let hops = @lib.setify(
-        @lib.map((x228 : (@kernel.Term, Int)) => x228.0, cheads_1),
+        @lib.map((x216 : (@kernel.Term, Int)) => x216.0, cheads_1),
       )
       let getmin : (@kernel.Term) -> (@kernel.Term, Int) raise = (
-        x229 : @kernel.Term,
+        x217 : @kernel.Term,
       ) => {
-        let h = x229
+        let h = x217
         let ns = @lib.mapfilter(
-          (x230 : (@kernel.Term, Int)) => {
-            let (k, n_2) = x230
+          (x218 : (@kernel.Term, Int)) => {
+            let (k, n_2) = x218
             if k == h {
               n_2
             } else {
@@ -2269,11 +2253,11 @@ fn step_14() -> Unit raise {
           (
             h,
             @lib.end_itlist(
-              (x233 : Int, x234 : Int) => {
-                let s235 = ((x231 : Int) => {
-                  (x232 : Int) => if x231 <= x232 { x231 } else { x232 }
-                })(x233)
-                s235(x234)
+              (x221 : Int, x222 : Int) => {
+                let s223 = ((x219 : Int) => {
+                  (x220 : Int) => if x219 <= x220 { x219 } else { x220 }
+                })(x221)
+                s223(x222)
               },
               ns,
             ),
@@ -2283,8 +2267,8 @@ fn step_14() -> Unit raise {
       @lib.mapfilter(getmin, hops)
     } else {
       @lib.map(
-        (x236 : @kernel.Term) => {
-          let t = x236
+        (x224 : @kernel.Term) => {
+          let t = x224
           if @kernel.is_const(t) && @kernel.dest_const(t).0 == "=" {
             (t, 2)
           } else {
@@ -2293,29 +2277,29 @@ fn step_14() -> Unit raise {
         },
         @lib.setify(
           @lib.map(
-            (x237 : (@kernel.Term, Int)) => x237.0,
+            (x225 : (@kernel.Term, Int)) => x225.0,
             vheads_1.concat(cheads_1),
           ),
         ),
       )
     }
-    (x238 : @kernel.Term) => fol_conv(hddata_1, x238)
+    (x226 : @kernel.Term) => fol_conv(hddata_1, x226)
   }
-  asm_fol_tac_c.set((x239 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
-    let (asl, w) as gl = x239
+  asm_fol_tac_c.set((x227 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+    let (asl, w) as gl = x227
     let headsp = @lib.itlist(
       (
-        x241 : (String, @kernel.Thm),
-        x242 : (
+        x229 : (String, @kernel.Thm),
+        x230 : (
           @list.List[(@kernel.Term, Int)],
           @list.List[(@kernel.Term, Int)],
         ),
-      ) => get_thm_heads(((x240 : (String, @kernel.Thm)) => x240.1)(x241))(x242),
+      ) => get_thm_heads(((x228 : (String, @kernel.Thm)) => x228.1)(x229))(x230),
       asl,
       (@list.empty(), @list.empty()),
     )
-    let t243 = gen_fol_conv(headsp)
-    @tactics.rule_assum_tac((x244 : @kernel.Thm) => @equal.conv_rule(t243, x244))(
+    let t231 = gen_fol_conv(headsp)
+    @tactics.rule_assum_tac((x232 : @kernel.Thm) => @equal.conv_rule(t231, x232))(
       gl,
     )
   })
@@ -2337,14 +2321,14 @@ pub fn asm_fol_tac(
 ///|
 /// `PROP_ATOM_CONV`
 pub fn prop_atom_conv(
-  x245 : (@kernel.Term) -> @kernel.Thm raise,
-  x246 : @kernel.Term,
+  x233 : (@kernel.Term) -> @kernel.Thm raise,
+  x234 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let conv = x245
-  let tm = x246
+  let conv = x233
+  let tm = x234
   match tm {
     Comb(Const("!", _) | Const("?", _) | Const("?!", _), Abs(_, _)) =>
-      @equal.binder_conv((x247 : @kernel.Term) => prop_atom_conv(conv, x247))(
+      @equal.binder_conv((x235 : @kernel.Term) => prop_atom_conv(conv, x235))(
         tm,
       )
     Comb(
@@ -2360,9 +2344,9 @@ pub fn prop_atom_conv(
       ),
       _
     ) =>
-      @equal.binop_conv((x248 : @kernel.Term) => prop_atom_conv(conv, x248))(tm)
+      @equal.binop_conv((x236 : @kernel.Term) => prop_atom_conv(conv, x236))(tm)
     Comb(Const("~", _), _) =>
-      @equal.rand_conv((x249 : @kernel.Term) => prop_atom_conv(conv, x249))(tm)
+      @equal.rand_conv((x237 : @kernel.Term) => prop_atom_conv(conv, x237))(tm)
     _ => @equal.try_conv(conv)(tm)
   }
 }

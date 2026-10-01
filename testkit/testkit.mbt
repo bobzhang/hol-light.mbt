@@ -38,16 +38,22 @@ pub fn sthm(th : Thm) -> String {
 /// A line-oriented log of results, as upstream's `attempt`.
 pub struct Log {
   priv buf : StringBuilder
+  priv mut via_stdout : Bool
 }
 
 ///|
 pub fn Log::new() -> Log {
-  { buf: StringBuilder(), }
+  { buf: StringBuilder(), via_stdout: false, }
 }
 
 ///|
 pub fn Log::out(self : Log, s : String) -> Unit {
-  self.buf.write_string(s + "\n")
+  if self.via_stdout {
+    // share the stdout channel, so a pending partial line comes first
+    @pp.print_string(s + "\n")
+  } else {
+    self.buf.write_string(s + "\n")
+  }
 }
 
 ///|
@@ -68,6 +74,9 @@ pub fn Log::attempt(self : Log, name : String, f : () -> String raise) -> Unit {
 
 ///|
 pub fn Log::contents(self : Log) -> String {
+  if self.via_stdout {
+    @pp.flush_stdout_partial()
+  }
   self.buf.to_string()
 }
 
@@ -83,7 +92,8 @@ pub fn Log::capture_reports(self : Log) -> Unit {
 pub fn Log::capture_stdout(self : Log) -> Unit {
   // Load-time output belongs before anything the test prints.
   @pp.flush_stdout_backlog()
-  @pp.stdout_sink.val = s => self.out(s)
+  @pp.stdout_sink.val = s => self.buf.write_string(s + "\n")
+  self.via_stdout = true
 }
 
 ///|

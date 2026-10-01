@@ -1351,3 +1351,25 @@ pub fn int_of_string(s : String) -> Int raise {
   }
   v.to_int()
 }
+
+///|
+/// OCaml's `abs` on ints (`abs min_int = min_int`).
+pub fn abs_int(n : Int) -> Int {
+  if n < 0 {
+    -n
+  } else {
+    n
+  }
+}
+
+///|
+/// OCaml's `string_of_int`.
+pub fn string_of_int(n : Int) -> String {
+  n.to_string()
+}
+
+///|
+/// Raise `e` as an expression of any type (for translated code).
+pub fn[T] raise_error(e : Error) -> T raise {
+  raise e
+}

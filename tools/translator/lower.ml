@@ -55,7 +55,22 @@ module Lower = struct
     | "instantiation" -> Some "@drule.Instantiation"
     | _ -> None
 
-  let base_type = function
+  (* Types and constructors defined by translated files: OCaml type name ->
+     (package, MoonBit name); constructor name -> package. *)
+  let own_types : (string, string * string) Hashtbl.t = Hashtbl.create 32
+  let own_ctors : (string, string) Hashtbl.t = Hashtbl.create 64
+  let current_pkg = ref ""
+
+  let qualified (pkg, name) = if pkg = !current_pkg then name else "@" ^ pkg ^ "." ^ name
+
+  let own_type name = Option.map qualified (Hashtbl.find_opt own_types name)
+
+  let ctor_name name =
+    match Hashtbl.find_opt own_ctors name with
+    | Some pkg -> qualified (pkg, name)
+    | None -> name
+
+  let base_type0 = function
     | "thm" -> Some "@kernel.Thm"
     | "term" -> Some "@kernel.Term"
     | "hol_type" -> Some "@kernel.HolType"
@@ -72,6 +87,8 @@ module Lower = struct
     | "func" -> Some "@lib.Func"
     | "Stdlib.ref" -> Some "Ref"
     | _ -> None
+
+  let base_type n = match own_type n with Some t -> Some t | None -> base_type0 n
 
   (* The MoonBit type behind an aliased OCaml abbreviation (e.g. the
      uncurried `@tactics.Justification`), read from the package interface. *)
@@ -276,6 +293,16 @@ module Lower = struct
      generic local functions): their source text. *)
   let lifted : string list ref = ref []
 
+  (* MoonBit top-level names of the package being generated *)
+  let top_names : (string, unit) Hashtbl.t = Hashtbl.create 256
+
+  let reserve_top base =
+    let rec go i =
+      let n = if i = 0 then base else Printf.sprintf "%s_%d" base i in
+      if Hashtbl.mem top_names n then go (i + 1) else (Hashtbl.add top_names n (); n)
+    in
+    go 0
+
   let tyvars_of_text s =
     let acc = ref [] in
     let n = String.length s in
@@ -327,6 +354,15 @@ module Lower = struct
   (* A global value: package declaration resolved from provenance. *)
   let global_head loc path (vd : Types.value_description) =
     let oty = vd.Types.val_type in
+    let own_unique =
+      match path with
+      | Path.Pident id -> Hashtbl.find_opt own_values (Ident.unique_name id)
+      | _ -> None
+    in
+    match own_unique with
+    | Some (mname, Accessor t) -> { hstmts = []; hexp = Atom (mname ^ "()"); hmty = t; hoty = Some oty }
+    | Some (mname, Function t) -> { hstmts = []; hexp = Atom mname; hmty = t; hoty = Some oty }
+    | None ->
     match Prov.lookup path with
     | Some (file, name) when file = !current_file ->
         (match Hashtbl.find_opt own_by_name name with
@@ -587,9 +623,10 @@ module Lower = struct
          | "::", [ h; t ] ->
              let h = pattern ~mty:(sub_mty h) h in
              "More(" ^ h ^ ", tail=" ^ pattern ?mty t ^ ")"
-         | ("true" | "false" | "()" | "None"), [] -> cd.Types.cstr_name
-         | name, [] -> name
-         | name, ps -> name ^ "(" ^ String.concat ", " (List.map (fun q -> pattern q) ps) ^ ")")
+         | "()", [] -> "_"
+         | ("true" | "false" | "None"), [] -> cd.Types.cstr_name
+         | name, [] -> ctor_name name
+         | name, ps -> ctor_name name ^ "(" ^ String.concat ", " (List.map (fun q -> pattern q) ps) ^ ")")
     | Tpat_or (a, b, _) -> pattern ?mty a ^ " | " ^ pattern ?mty b
     | Tpat_value v -> pattern ?mty (v :> value general_pattern)
     | Tpat_exception q -> pattern q
@@ -616,8 +653,13 @@ module Lower = struct
     | Some ("lib.ml", (("o" | "I" | "K" | "C" | "W" | "f_f_") as n)) -> Some n
     | _ -> None
 
+  let depth = ref 0
+
   let rec lower ?expect (e : expression) : stmt list * exp * M.ty =
     let loc = e.exp_loc in
+    incr depth;
+    if !depth > 3000 then unsupported loc "lowering recursion too deep";
+    Fun.protect ~finally:(fun () -> decr depth) @@ fun () ->
     match e.exp_desc with
     | Texp_ident (path, _, vd) -> lower_apply ?expect e e [] |> fun r -> ignore vd; ignore path; r
     | Texp_constant c -> ([], Atom (const loc c), mty_of e.exp_type)
@@ -692,7 +734,7 @@ module Lower = struct
     let rec oparams t n =
       if n = 0 then []
       else match t with
-        | Some t -> (match arrow t with Some (a, b) -> Some a :: oparams (Some b) (n - 1) | None -> List.init n (fun _ -> None))
+        | Some t -> (match arrow t with Some (a, b) -> Some a :: oparams (Some b) (n - 1) | None -> [])
         | None -> List.init n (fun _ -> None)
     in
     let rec advance n t = if n = 0 then t else match t with Some t -> (match arrow t with Some (_, b) -> advance (n - 1) (Some b) | None -> None) | None -> None in
@@ -847,8 +889,18 @@ module Lower = struct
                if is_int (List.hd tys) then Binop ("<=", a, b)
                else Binop ("<=", Call (Atom "@lib.compare", [ a; b ]), Atom "0")
              in
-             if op = "min" then If (le, ([], a), ([], b)) else If (le, ([], b), ([], a)))
+             if op = "min" then If (le, ([], a), ([], b))
+             else
+               (* `let max a b = if a >= b then a else b` *)
+               let ge =
+                 if is_int (List.hd tys) then Binop (">=", a, b)
+                 else Binop (">=", Call (Atom "@lib.compare", [ a; b ]), Atom "0")
+               in
+               If (ge, ([], a), ([], b)))
       | "~-" -> (1, fun [ a ] _ -> Binop ("-", Atom "0", a))
+      | "abs" -> (1, fun [ a ] _ -> Call (Atom "@lib.abs_int", [ a ]))
+      | "succ" -> (1, fun [ a ] _ -> Binop ("+", a, Atom "1"))
+      | "pred" -> (1, fun [ a ] _ -> Binop ("-", a, Atom "1"))
       | "^" -> (2, fun [ a; b ] _ -> Binop ("+", a, b))
       | "not" -> (1, fun [ a ] _ -> Not a)
       | "@" -> (2, fun [ a; b ] _ -> Concat (a, b))
@@ -859,6 +911,11 @@ module Lower = struct
       | "!" -> (1, fun [ a ] _ -> Deref a)
       | "ref" -> (1, fun [ a ] _ -> RefNew a)
       | ":=" -> (2, fun [ a; b ] _ -> Blk ([ Assign (a, b) ], Atom "()"))
+      | "Format.print_string" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_string", [ a ]))
+      | "Format.print_newline" -> (1, fun [ _ ] _ -> Call (Atom "@pp.std_formatter.print_newline", []))
+      | "Format.print_flush" -> (1, fun [ _ ] _ -> Call (Atom "@pp.std_formatter.print_flush", []))
+      | "Format.print_int" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_int", [ a ]))
+      | "print_string" -> (1, fun [ a ] _ -> Call (Atom "@pp.print_string", [ a ]))
       | "&&" | "||" -> (2, fun _ _ -> assert false)
       | _ -> unsupported loc "Stdlib.%s" name
     in
@@ -1032,6 +1089,13 @@ module Lower = struct
     | "Some", [ a ] -> let ss, x, _ = lower a in (ss, Call (Atom "Some", [ x ]), mty_of e.exp_type)
     | "Failure", [ a ] -> let ss, x, _ = lower a in (ss, Call (Atom "Failure", [ x ]), mty_of e.exp_type)
     | "Noparse", [] -> ([], Atom "@parser.Noparse", mty_of e.exp_type)
+    | "Unchanged", [] -> ([], Atom "@lib.Unchanged", mty_of e.exp_type)
+    | name, [] when Hashtbl.mem own_ctors name -> ([], Atom (ctor_name name), mty_of e.exp_type)
+    | name, args when Hashtbl.mem own_ctors name ->
+        (* constructor arguments are evaluated right to left *)
+        let lowered = List.map (fun a -> let ss, x, _ = lower a in (ss, x)) args in
+        let stmts, xs = schedule (List.rev lowered) in
+        (stmts, Call (Atom (ctor_name name), List.rev xs), mty_of e.exp_type)
     | name, _ -> unsupported loc "constructor %s" name
 
   (* --- Functions --- *)
@@ -1055,7 +1119,13 @@ module Lower = struct
           (match fn with
            | Some ({ exp_desc = Texp_function { cases; partial; _ }; _ } as f) ->
                let oty_param = match arrow f.exp_type with Some (a, _) -> Some a | None -> None in
-               let tuple_mode = k > 1 && (match oty_param with Some a -> tuple_size a = k | None -> false) in
+               (* one tuple parameter spread over the group only when the
+                  OCaml function does not take k curried parameters *)
+               let rec arity t n = if n = 0 then 0 else match arrow t with Some (_, b) -> 1 + arity b (n - 1) | None -> 0 in
+               let tuple_mode =
+                 k > 1 && arity f.exp_type k < k
+                 && (match oty_param with Some a -> tuple_size a = k | None -> false)
+               in
                if tuple_mode || k <= 1 then begin
                  (* one OCaml parameter *)
                  let arg, arg_mty =
@@ -1223,6 +1293,7 @@ module Lower = struct
     in
     let foreign = List.filter (fun v -> not (List.mem v !scope_tyvars)) (tyvars_of_text (String.concat " " (List.map sig_text fns))) in
     let lift = foreign <> [] && captured = [] in
+    let saved_subst = Hashtbl.copy tyvar_subst in
     (* otherwise, monomorphise at the instance the rest of the code uses *)
     if foreign <> [] && not lift then begin
       let uses = ref [] in
@@ -1260,7 +1331,7 @@ module Lower = struct
     let names =
       List.map
         (fun (id, e, _, _, want) ->
-          let name = if lift then fresh (sanitize (Ident.name id) ^ "_") else unique_local (sanitize (Ident.name id)) in
+          let name = if lift then reserve_top (sanitize (Ident.name id) ^ "_l") else unique_local (sanitize (Ident.name id)) in
           Hashtbl.replace locals (Ident.unique_name id) { name; mty = want; loty = Some e.exp_type };
           name)
         fns
@@ -1283,6 +1354,7 @@ module Lower = struct
     in
     scope_tyvars := saved_scope;
     Hashtbl.reset tyvar_subst;
+    Hashtbl.iter (Hashtbl.replace tyvar_subst) saved_subst;
     let paren r = if String.length r > 0 && r.[0] = '(' then "(" ^ r ^ ")" else r in
     if lift then begin
       List.iter
@@ -1328,7 +1400,7 @@ module Lower = struct
                 (l.name, ty))
               caps
           in
-          let lifted_names = List.map (fun (name, _, _, _) -> fresh (name ^ "_l")) lowered in
+          let lifted_names = List.map (fun (name, _, _, _) -> reserve_top (name ^ "_l")) lowered in
           let closures =
             List.map2
               (fun (name, ps, _, _) lname ->
@@ -1390,19 +1462,30 @@ module Lower = struct
     let want = match expect with Some t -> Some t | None -> Some (mty_of e.exp_type) in
     let b = lower_block ?expect:want body in
     let catch_all = ref false in
+    (* exception patterns *)
+    let rec exn_pattern : type k. k general_pattern -> string = fun p ->
+      match p.pat_desc with
+      | Tpat_any -> catch_all := true; "_"
+      | Tpat_var (id, _) -> catch_all := true; bind_local id (M.Named ("Error", []))
+      | Tpat_alias (q, id, _) -> exn_pattern q ^ " as " ^ bind_local id (M.Named ("Error", []))
+      | Tpat_or (a, b, _) -> exn_pattern a ^ " | " ^ exn_pattern b
+      | Tpat_value v -> exn_pattern (v :> value general_pattern)
+      | Tpat_construct (_, cd, args, _) ->
+          (match cd.Types.cstr_name, args with
+           | "Failure", [ a ] -> "Failure(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
+           | "Noparse", [] -> "@parser.Noparse"
+           | "Unchanged", [] -> "@lib.Unchanged"
+           | "Match_failure", _ -> "@lib.MatchFailure(_)"
+           | name, [] when Hashtbl.mem own_ctors name -> ctor_name name
+           | name, args when Hashtbl.mem own_ctors name ->
+               ctor_name name ^ "(" ^ String.concat ", " (List.map (fun a -> pattern a) args) ^ ")"
+           | name, _ -> unsupported p.pat_loc "exception pattern %s" name)
+      | _ -> unsupported p.pat_loc "exception pattern"
+    in
     let arms =
       List.map
         (fun c ->
-          let pat =
-            match c.c_lhs.pat_desc with
-            | Tpat_any -> catch_all := true; "_"
-            | Tpat_var (id, _) -> catch_all := true; bind_local id (M.Named ("Error", []))
-            | Tpat_construct (_, cd, [], _) when cd.Types.cstr_name = "Noparse" -> "@parser.Noparse"
-            | Tpat_construct (_, cd, [ { pat_desc = Tpat_any; _ } ], _) when cd.Types.cstr_name = "Failure" -> "Failure(_)"
-            | Tpat_construct (_, cd, [ { pat_desc = Tpat_var (id, _); _ } ], _) when cd.Types.cstr_name = "Failure" ->
-                "Failure(" ^ bind_local id (M.Named ("String", [])) ^ ")"
-            | _ -> unsupported c.c_lhs.pat_loc "exception pattern"
-          in
+          let pat = exn_pattern c.c_lhs in
           let guard =
             match c.c_guard with
             | None -> ""

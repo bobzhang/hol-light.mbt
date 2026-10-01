@@ -716,9 +716,16 @@ fn stdout_write(s : String) -> Unit {
 }
 
 ///|
-/// Emit a pending partial line. Standard output is line-based here
-/// (`println`), so unlike OCaml the partial text ends with a newline.
+/// Flush standard output. Output is line-based (`println`), so a partial
+/// line stays pending until its newline arrives (OCaml would show it now);
+/// `flush_stdout_partial` forces it out.
 fn stdout_flush() -> Unit {
+  flush_stdout_backlog()
+}
+
+///|
+/// Emit a pending partial line of standard output (with a newline).
+pub fn flush_stdout_partial() -> Unit {
   flush_stdout_backlog()
   if !stdout_pending.is_empty() {
     emit_stdout_line(stdout_pending.to_string())
@@ -735,8 +742,8 @@ pub fn print_string(s : String) -> Unit {
 
 ///|
 /// The formatter on standard output (OCaml's `std_formatter`). Output is
-/// emitted line by line; `print_flush` also emits a pending partial line
-/// (followed by a newline, see `stdout_flush`).
+/// emitted line by line: a partial line waits for its newline (see
+/// `stdout_flush` and `flush_stdout_partial`).
 pub let std_formatter : Formatter = Formatter::new(
   stdout_write,
   out_flush=stdout_flush,

@@ -9,6 +9,8 @@ import {
 }
 
 // Values
+pub fn abs_int(Int) -> Int
+
 pub fn[A, B, C] allpairs((A, B) -> C raise?, @list.List[A], @list.List[B]) -> @list.List[C] raise?
 
 pub fn[K : OCompare + OHash, V] apply(Func[K, V], K) -> V raise
@@ -145,6 +147,8 @@ pub fn[A] partition((A) -> Bool raise?, @list.List[A]) -> (@list.List[A], @list.
 
 pub fn[A] qmap((A) -> A raise?, @list.List[A]) -> @list.List[A] raise?
 
+pub fn[T] raise_error(Error) -> T raise
+
 pub fn[K, V : OCompare] ran(Func[K, V]) -> @list.List[V]
 
 pub fn range(Int, Int) -> @list.List[Int]
@@ -188,6 +192,8 @@ pub fn[A] sort((A, A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
 pub fn[A, B] splitlist((A) -> (B, A) raise, A) -> (@list.List[B], A) raise
 
 pub fn string_of_float(Double) -> String
+
+pub fn string_of_int(Int) -> String
 
 pub fn[A] striplist((A) -> (A, A) raise, A) -> @list.List[A] raise
 

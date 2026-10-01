@@ -81,7 +81,7 @@ module Ir = struct
     | Not e -> p "!"; pfun e
     | Deref e -> pfun e; p ".val"
     | RefNew e -> p "Ref::{ val: "; pexp e; p " }"
-    | Binop (op, a, b) -> p "("; pexp a; p " "; p op; p " "; pexp b; p ")"
+    | Binop (op, a, b) -> p "("; poperand a; p " "; p op; p " "; poperand b; p ")"
     | Blk b -> pblock b
 
   (* An expression in function or receiver position. *)
@@ -89,6 +89,13 @@ module Ir = struct
     match e with
     | Atom _ | Call _ | Field _ | Tuple _ | Deref _ -> pexp e
     | _ -> p "("; pexp e; p ")"
+
+  (* an operand of a binary operator or `!` *)
+  and poperand e =
+    match e with
+    | Raise x -> p "@lib.raise_error("; pexp x; p ")"
+    | Try _ | Match _ | If _ | Blk _ | Lam _ -> p "("; pexp e; p ")"
+    | _ -> pexp e
 
   and plist es =
     List.iteri (fun i e -> if i > 0 then p ", "; pexp e) es

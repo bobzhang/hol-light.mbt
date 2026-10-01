@@ -11,12 +11,14 @@ module Main = struct
     | "class.ml" -> ("class/class.mbt", [])
     | "trivia.ml" -> ("trivia/trivia.mbt", [])
     | "canon.ml" -> ("canon/canon.mbt", [])
+    | "meson.ml" -> ("meson/meson.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =
     let out, hand = manifest target in
     Names.root := root;
     Lower.current_file := target;
+    Lower.current_pkg := Filename.remove_extension (Filename.basename out);
     List.iter (Loader.load_file ~hol) (Translator.upto target Translator.prefix);
     (* count the top-level definitions of each name *)
     List.iter

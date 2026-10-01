@@ -10,6 +10,8 @@ pub let defer_stdout : @ref.Ref[Bool]
 
 pub fn flush_stdout_backlog() -> Unit
 
+pub fn flush_stdout_partial() -> Unit
+
 pub fn formatter_of_buffer(StringBuilder) -> Formatter
 
 pub fn print_string(String) -> Unit

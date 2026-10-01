@@ -1,0 +1,164 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/meson"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn asm_meson_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash, C : Eq + @lib.OCompare + @lib.OHash, D : Eq + @lib.OCompare + @lib.OHash, E : Eq + @lib.OCompare + @lib.OHash] cacheconts(((B, (C, D, E))) -> A raise) -> (((B, (C, D, E))) -> A raise) raise
+
+pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] checkan(@list.List[(FolTerm, Int)], (Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((A, (Int, @list.List[FolTerm])), B)])]) -> @list.List[(Int, @list.List[((A, (Int, @list.List[FolTerm])), B)])] raise
+
+pub fn clear_contrapos_cache(Unit) -> Unit raise
+
+pub fn conjuncts_then_p((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise, @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn create_equality_axioms(@list.List[@kernel.Term]) -> @list.List[@kernel.Thm] raise
+
+pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] expand_goal(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (B, @list.List[FolTerm])), (Int, @kernel.Thm))])]) -> ((((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])])) -> ((Int) -> ((Int) -> ((((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> A raise) -> A raise) raise) raise) raise) raise
+
+pub fn finish_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn[A : Eq + @lib.OCompare + @lib.OHash] fol_atom_eq(@list.List[(FolTerm, Int)], (A, @list.List[FolTerm]), (A, @list.List[FolTerm])) -> Bool raise
+
+pub fn fol_eq(@list.List[(FolTerm, Int)], FolTerm, FolTerm) -> Bool raise
+
+pub fn fol_free_in(Int, FolTerm) -> Bool raise
+
+pub fn fol_inst(@list.List[(FolTerm, Int)], (Int, @list.List[FolTerm])) -> (Int, @list.List[FolTerm]) raise
+
+pub fn fol_inst_bump(Int, @list.List[(FolTerm, Int)], (Int, @list.List[FolTerm])) -> (Int, @list.List[FolTerm]) raise
+
+pub fn fol_of_atom(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> (Int, @list.List[FolTerm]) raise
+
+pub fn fol_of_const(@kernel.Term) -> Int raise
+
+pub fn fol_of_form(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> FolForm raise
+
+pub fn fol_of_hol_clauses(@list.List[@kernel.Thm]) -> @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])] raise
+
+pub fn fol_of_literal(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> (Int, @list.List[FolTerm]) raise
+
+pub fn fol_of_term(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> FolTerm raise
+
+pub fn fol_of_var(@kernel.Term) -> Int raise
+
+pub fn fol_subst(@list.List[(FolTerm, Int)], FolTerm) -> FolTerm raise
+
+pub fn fol_subst_bump(Int, @list.List[(FolTerm, Int)], FolTerm) -> FolTerm raise
+
+pub fn fol_subst_partial(@list.List[(FolTerm, Int)], FolTerm) -> FolTerm raise
+
+pub fn fol_unify(Int, FolTerm, FolTerm, @list.List[(FolTerm, Int)]) -> @list.List[(FolTerm, Int)] raise
+
+pub fn gen_meson_tac(Int, Int, Int, @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn hol_of_atom(Int, @list.List[FolTerm]) -> @kernel.Term raise
+
+pub fn hol_of_const(Int) -> @kernel.Term raise
+
+pub fn hol_of_literal(Int, @list.List[FolTerm]) -> @kernel.Term raise
+
+pub fn hol_of_term(FolTerm) -> @kernel.Term raise
+
+pub fn hol_of_var(Int) -> @kernel.Term raise
+
+pub fn inferences() -> @ref.Ref[Int]
+
+pub fn[A : Eq + @lib.OCompare + @lib.OHash] insertan(@list.List[(FolTerm, Int)], (Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[A], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])]) -> @list.List[(Int, @list.List[((@list.List[A], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])] raise
+
+pub fn istriv(@list.List[(FolTerm, Int)], Int, FolTerm) -> Bool raise
+
+pub fn make_hol_contrapos((Int, @kernel.Thm)) -> @kernel.Thm raise
+
+pub fn meson(@list.List[@kernel.Thm], @kernel.Term) -> @kernel.Thm raise
+
+pub fn meson_brand() -> @ref.Ref[Bool]
+
+pub fn meson_chatty() -> @ref.Ref[Bool]
+
+pub fn meson_dcutin() -> @ref.Ref[Int]
+
+pub fn meson_depth() -> @ref.Ref[Bool]
+
+pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] meson_expand(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (B, @list.List[FolTerm])), (Int, @kernel.Thm))])], (((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])]), (@list.List[(FolTerm, Int)], Int, Int)), ((Int, @kernel.Thm)) -> (((@list.List[((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])])], (@list.List[(FolTerm, Int)], Int, Int))) -> A raise) raise) -> A raise
+
+pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash, C : Eq + @lib.OCompare + @lib.OHash, D : Eq + @lib.OCompare + @lib.OHash, E : Eq + @lib.OCompare + @lib.OHash, F : Eq + @lib.OCompare + @lib.OHash] meson_expand_cont(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (B, @list.List[FolTerm])), C)], (((D, @list.List[FolTerm]), @list.List[(Int, @list.List[((E, (Int, @list.List[FolTerm])), F)])]), (@list.List[(FolTerm, Int)], Int, Int)), (C) -> (((@list.List[((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((E, (Int, @list.List[FolTerm])), F)])])], (@list.List[(FolTerm, Int)], Int, Int))) -> A raise) raise) -> A raise
+
+pub fn meson_prefine() -> @ref.Ref[Bool]
+
+pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash, C : Eq + @lib.OCompare + @lib.OHash, D : Eq + @lib.OCompare + @lib.OHash, E : Eq + @lib.OCompare + @lib.OHash] meson_single_expand(Int, ((@list.List[(Int, @list.List[FolTerm])], (C, @list.List[FolTerm])), D), (((E, @list.List[FolTerm]), @list.List[(Int, @list.List[((A, (Int, @list.List[FolTerm])), B)])]), (@list.List[(FolTerm, Int)], Int, Int))) -> (@list.List[((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((A, (Int, @list.List[FolTerm])), B)])])], (@list.List[(FolTerm, Int)], Int, Int)) raise
+
+pub fn meson_skew() -> @ref.Ref[Int]
+
+pub fn meson_split_limit() -> @ref.Ref[Int]
+
+pub fn meson_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn meson_to_hol(@list.List[(FolTerm, Int)]) -> ((FolGoal) -> @kernel.Thm raise) raise
+
+pub fn[A : Eq + @lib.OCompare + @lib.OHash] mk_negated(Int, A) -> (Int, A) raise
+
+pub fn offinc() -> Int
+
+pub fn optimize_rules(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])]) -> @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])] raise
+
+pub fn perform_brand_modification(@list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise
+
+pub fn poly_assume_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn pure_meson_tac(Int, Int, Int, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn[A : Eq + @lib.OCompare + @lib.OHash] qpartition((A) -> Bool raise, @list.List[A]) -> ((@list.List[A]) -> (@list.List[A], @list.List[A]) raise) raise
+
+pub fn quant_bool_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn reset_consts(Unit) -> Unit raise
+
+pub fn reset_vars(Unit) -> Unit raise
+
+pub fn separate_insts(Int, @list.List[(FolTerm, Int)], @list.List[(FolTerm, Int)]) -> (@list.List[(FolTerm, Int)], @list.List[(FolTerm, Int)]) raise
+
+pub fn simple_meson_refute(Int, Int, Int, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn[A : Eq + @lib.OCompare + @lib.OHash] solve_goal(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (A, @list.List[FolTerm])), (Int, @kernel.Thm))])], Bool, Int, Int, Int) -> (((Int, @list.List[FolTerm])) -> (FolGoal, (@list.List[(FolTerm, Int)], Int, Int)) raise) raise
+
+pub fn split_tac(Int, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+// Errors
+pub(all) suberror Cut
+
+// Types and methods
+pub(all) enum FolForm {
+  Atom((Int, @list.List[FolTerm]))
+  Conj(FolForm, FolForm)
+  Disj(FolForm, FolForm)
+  Forallq(Int, FolForm)
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for FolForm
+pub impl @lib.OHash for FolForm
+
+pub(all) enum FolGoal {
+  Subgoal((Int, @list.List[FolTerm]), @list.List[FolGoal], (Int, @kernel.Thm), Int, @list.List[(FolTerm, Int)])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for FolGoal
+pub impl @lib.OHash for FolGoal
+
+pub(all) enum FolTerm {
+  Fvar(Int)
+  Fnapp(Int, @list.List[FolTerm])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for FolTerm
+pub impl @lib.OHash for FolTerm
+
+// Type aliases
+pub type FolAtom = (Int, @list.List[FolTerm])
+
+// Traits
