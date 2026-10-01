@@ -132,7 +132,9 @@ test "num hashes like OCaml" {
     content="62429635",
   )
   inspect(
-    hash(@num.div_num(@num.num_of_int(7), @num.power_num(two, @num.num_of_int(40)))),
+    hash(
+      @num.div_num(@num.num_of_int(7), @num.power_num(two, @num.num_of_int(40))),
+    ),
     content="890408135",
   )
   inspect(hash(@num.power_num(two, @num.num_of_int(100))), content="924931919")
@@ -142,5 +144,8 @@ test "num hashes like OCaml" {
     content="191741208",
   )
   // compare follows the representation: an Int is below any Ratio
-  inspect(compare(@num.num_of_int(0), @num.div_num(@num.num_of_int(-1), two)), content="-1")
+  inspect(
+    compare(@num.num_of_int(0), @num.div_num(@num.num_of_int(-1), two)),
+    content="-1",
+  )
 }

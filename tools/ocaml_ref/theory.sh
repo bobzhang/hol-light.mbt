@@ -5,6 +5,13 @@ set -e -o pipefail
 cd "$(dirname "$0")/../.."
 name=$1; shift
 python3 tools/ocaml_ref/new_theory_pkg.py "$name" "$@"
+# refresh the other packages' interfaces (the translator reads them) while
+# this package's previous output, which may not compile, is set aside
+mkdir -p tools/ocaml_ref/_build
+rm -rf "tools/ocaml_ref/_build/pkg_$name"
+mv "$name" "tools/ocaml_ref/_build/pkg_$name"
+moon info >/dev/null 2>&1 || true
+mv "tools/ocaml_ref/_build/pkg_$name" "$name"
 tools/ocaml_ref/translate.sh translate "$name.ml" | grep "unsupported\|wrote\|Exception" | tee /dev/stderr | grep -q " 0 unsupported" || { echo "UNSUPPORTED ITEMS in $name.ml" >&2; exit 1; }
 moon fmt >/dev/null 2>&1 || true
 moon check 2>&1 | grep -E "^Error" -A9 | head -60 || true

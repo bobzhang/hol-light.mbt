@@ -1,0 +1,312 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/lists"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn all() -> @kernel.Thm
+
+pub fn all2() -> @kernel.Thm
+
+pub fn all2_all() -> @kernel.Thm
+
+pub fn all2_and_right() -> @kernel.Thm
+
+pub fn all2_def() -> @kernel.Thm
+
+pub fn all2_map() -> @kernel.Thm
+
+pub fn all2_map2() -> @kernel.Thm
+
+pub fn all_append() -> @kernel.Thm
+
+pub fn all_el() -> @kernel.Thm
+
+pub fn all_eq() -> @kernel.Thm
+
+pub fn all_filter() -> @kernel.Thm
+
+pub fn all_imp() -> @kernel.Thm
+
+pub fn all_map() -> @kernel.Thm
+
+pub fn all_mem() -> @kernel.Thm
+
+pub fn all_mp() -> @kernel.Thm
+
+pub fn all_t() -> @kernel.Thm
+
+pub fn allpairs() -> @kernel.Thm
+
+pub fn allpairs_eq() -> @kernel.Thm
+
+pub fn allpairs_map() -> @kernel.Thm
+
+pub fn allpairs_mem() -> @kernel.Thm
+
+pub fn allpairs_sym() -> @kernel.Thm
+
+pub fn and_all() -> @kernel.Thm
+
+pub fn and_all2() -> @kernel.Thm
+
+pub fn append() -> @kernel.Thm
+
+pub fn append_assoc() -> @kernel.Thm
+
+pub fn append_butlast_last() -> @kernel.Thm
+
+pub fn append_eq_nil() -> @kernel.Thm
+
+pub fn append_lcancel() -> @kernel.Thm
+
+pub fn append_nil() -> @kernel.Thm
+
+pub fn append_rcancel() -> @kernel.Thm
+
+pub fn append_sing() -> @kernel.Thm
+
+pub fn assoc() -> @kernel.Thm
+
+pub fn butlast() -> @kernel.Thm
+
+pub fn butlast_append() -> @kernel.Thm
+
+pub fn butlast_clauses() -> @kernel.Thm
+
+pub fn char_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn char_induct() -> @kernel.Thm
+
+pub fn char_recursion() -> @kernel.Thm
+
+pub fn cons_11() -> @kernel.Thm
+
+pub fn cons_hd_tl() -> @kernel.Thm
+
+pub fn dest_char(@kernel.Term) -> Char raise
+
+pub fn dest_string(@kernel.Term) -> String raise
+
+pub fn el() -> @kernel.Thm
+
+pub fn el_append() -> @kernel.Thm
+
+pub fn el_cons() -> @kernel.Thm
+
+pub fn el_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn el_list_of_seq() -> @kernel.Thm
+
+pub fn el_map() -> @kernel.Thm
+
+pub fn el_map2() -> @kernel.Thm
+
+pub fn el_tl() -> @kernel.Thm
+
+pub fn ex() -> @kernel.Thm
+
+pub fn ex_imp() -> @kernel.Thm
+
+pub fn ex_map() -> @kernel.Thm
+
+pub fn ex_mem() -> @kernel.Thm
+
+pub fn exists_ex() -> @kernel.Thm
+
+pub fn filter() -> @kernel.Thm
+
+pub fn filter_append() -> @kernel.Thm
+
+pub fn filter_map() -> @kernel.Thm
+
+pub fn forall_all() -> @kernel.Thm
+
+pub fn hd() -> @kernel.Thm
+
+pub fn hd_append() -> @kernel.Thm
+
+pub fn hd_reverse() -> @kernel.Thm
+
+pub fn injective_map() -> @kernel.Thm
+
+pub fn itlist() -> @kernel.Thm
+
+pub fn itlist2() -> @kernel.Thm
+
+pub fn itlist2_def() -> @kernel.Thm
+
+pub fn itlist_append() -> @kernel.Thm
+
+pub fn itlist_extra() -> @kernel.Thm
+
+pub fn last() -> @kernel.Thm
+
+pub fn last_append() -> @kernel.Thm
+
+pub fn last_clauses() -> @kernel.Thm
+
+pub fn last_el() -> @kernel.Thm
+
+pub fn last_reverse() -> @kernel.Thm
+
+pub fn length() -> @kernel.Thm
+
+pub fn length_append() -> @kernel.Thm
+
+pub fn length_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn length_eq_cons() -> @kernel.Thm
+
+pub fn length_eq_list_of_seq() -> @kernel.Thm
+
+pub fn length_eq_nil() -> @kernel.Thm
+
+pub fn length_filter() -> @kernel.Thm
+
+pub fn length_list_of_seq() -> @kernel.Thm
+
+pub fn length_map() -> @kernel.Thm
+
+pub fn length_map2() -> @kernel.Thm
+
+pub fn length_replicate() -> @kernel.Thm
+
+pub fn length_reverse() -> @kernel.Thm
+
+pub fn length_tl() -> @kernel.Thm
+
+pub fn length_zip() -> @kernel.Thm
+
+pub fn list_cases() -> @kernel.Thm
+
+pub fn list_conv((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn list_eq() -> @kernel.Thm
+
+pub fn list_induct_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn list_of_seq() -> @kernel.Thm
+
+pub fn list_of_seq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn list_of_seq_eq_nil() -> @kernel.Thm
+
+pub fn list_of_seq_eq_self() -> @kernel.Thm
+
+pub fn list_of_seq_v1() -> @kernel.Thm
+
+pub fn map() -> @kernel.Thm
+
+pub fn map2() -> @kernel.Thm
+
+pub fn map2_def() -> @kernel.Thm
+
+pub fn map_append() -> @kernel.Thm
+
+pub fn map_eq() -> @kernel.Thm
+
+pub fn map_eq_all2() -> @kernel.Thm
+
+pub fn map_eq_degen() -> @kernel.Thm
+
+pub fn map_eq_nil() -> @kernel.Thm
+
+pub fn map_fst_zip() -> @kernel.Thm
+
+pub fn map_i() -> @kernel.Thm
+
+pub fn map_id() -> @kernel.Thm
+
+pub fn map_list_of_seq() -> @kernel.Thm
+
+pub fn map_o() -> @kernel.Thm
+
+pub fn map_reverse() -> @kernel.Thm
+
+pub fn map_snd_zip() -> @kernel.Thm
+
+pub fn mem() -> @kernel.Thm
+
+pub fn mem_append() -> @kernel.Thm
+
+pub fn mem_append_decompose() -> @kernel.Thm
+
+pub fn mem_append_decompose_left() -> @kernel.Thm
+
+pub fn mem_assoc() -> @kernel.Thm
+
+pub fn mem_el() -> @kernel.Thm
+
+pub fn mem_exists_el() -> @kernel.Thm
+
+pub fn mem_filter() -> @kernel.Thm
+
+pub fn mem_map() -> @kernel.Thm
+
+pub fn mem_replicate() -> @kernel.Thm
+
+pub fn mk_char(Char) -> @kernel.Term raise
+
+pub fn mk_cons(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_flist(@list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn mk_list(@list.List[@kernel.Term], @kernel.HolType) -> @kernel.Term raise
+
+pub fn mk_string(String) -> @kernel.Term raise
+
+pub fn mono_all() -> @kernel.Thm
+
+pub fn mono_all2() -> @kernel.Thm
+
+pub fn not_all() -> @kernel.Thm
+
+pub fn not_cons_nil() -> @kernel.Thm
+
+pub fn not_ex() -> @kernel.Thm
+
+pub fn null() -> @kernel.Thm
+
+pub fn pairwise() -> @kernel.Thm
+
+pub fn pairwise_append() -> @kernel.Thm
+
+pub fn pairwise_implies() -> @kernel.Thm
+
+pub fn pairwise_map() -> @kernel.Thm
+
+pub fn pairwise_transitive() -> @kernel.Thm
+
+pub fn replicate() -> @kernel.Thm
+
+pub fn reverse() -> @kernel.Thm
+
+pub fn reverse_append() -> @kernel.Thm
+
+pub fn reverse_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn reverse_eq_empty() -> @kernel.Thm
+
+pub fn reverse_reverse() -> @kernel.Thm
+
+pub fn string_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn surjective_map() -> @kernel.Thm
+
+pub fn tl() -> @kernel.Thm
+
+pub fn zip() -> @kernel.Thm
+
+pub fn zip_def() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

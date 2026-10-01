@@ -485,3 +485,46 @@ pub fn[A] array_of_list(l : @list.List[A]) -> FixedArray[A] {
 pub fn[A] array_to_list(a : FixedArray[A]) -> @list.List[A] {
   @list.from_iter(a.iter())
 }
+
+///|
+/// `String.escaped` (on the UTF-8 bytes, as OCaml).
+pub fn string_escaped(s : String) -> String {
+  let buf = StringBuilder()
+  for b in @utf8.encode(s) {
+    let c = b.to_int()
+    match c {
+      0x22 => buf.write_string("\\\"")
+      0x5C => buf.write_string("\\\\")
+      0x0A => buf.write_string("\\n")
+      0x09 => buf.write_string("\\t")
+      0x0D => buf.write_string("\\r")
+      0x08 => buf.write_string("\\b")
+      _ =>
+        if c >= 32 && c <= 126 {
+          buf.write_char(c.unsafe_to_char())
+        } else {
+          buf.write_string("\\")
+          buf.write_string((c / 100).to_string())
+          buf.write_string((c / 10 % 10).to_string())
+          buf.write_string((c % 10).to_string())
+        }
+    }
+  }
+  buf.to_string()
+}
+
+///|
+/// `Array.map f a` (applies `f` left to right)
+pub fn[A, B] array_map(
+  f : (A) -> B raise?,
+  a : FixedArray[A],
+) -> FixedArray[B] raise? {
+  if a.length() == 0 {
+    return []
+  }
+  let out = FixedArray::make(a.length(), f(a[0]))
+  for i in 1..<a.length() {
+    out[i] = f(a[i])
+  }
+  out
+}

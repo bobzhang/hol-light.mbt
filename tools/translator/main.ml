@@ -29,6 +29,7 @@ module Main = struct
     | "normalizer.ml" -> ("normalizer/normalizer.mbt", [])
     | "grobner.ml" -> ("grobner/grobner.mbt", [])
     | "ind_types.ml" -> ("ind_types/ind_types.mbt", [])
+    | "lists.ml" -> ("lists/lists.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =

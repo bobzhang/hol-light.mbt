@@ -545,7 +545,7 @@ pub impl OCompare for @num.Num with fn ocompare(self, other) {
 priv struct OInt(Int64)
 
 ///|
-impl OHash for OInt with ohash_visit(self, h) {
+impl OHash for OInt with fn ohash_visit(self, h) {
   h.int(self.0)
 }
 
@@ -557,8 +557,8 @@ impl OHash for OInt with ohash_visit(self, h) {
 priv struct NatDigits(@bigint.BigInt)
 
 ///|
-impl OHash for NatDigits with ohash_visit(self, h) {
-  let digits : OHasher = { queue: [], h: 0U, num: 0 }
+impl OHash for NatDigits with fn ohash_visit(self, h) {
+  let digits : OHasher = { queue: [], h: 0U, num: 0, }
   let base = @bigint.BigInt::from_int64(0x100000000L)
   let mut m = self.0
   let zero = @bigint.BigInt::from_int(0)
@@ -576,7 +576,7 @@ impl OHash for NatDigits with ohash_visit(self, h) {
 priv struct BigIntRecord((Int, @bigint.BigInt))
 
 ///|
-impl OHash for BigIntRecord with ohash_visit(self, h) {
+impl OHash for BigIntRecord with fn ohash_visit(self, h) {
   h.block(0, 2)
   h.field(OInt(self.0.0.to_int64()))
   h.field(NatDigits(self.0.1))
@@ -584,7 +584,9 @@ impl OHash for BigIntRecord with ohash_visit(self, h) {
 
 ///|
 fn big_record(n : @num.Num) -> BigIntRecord {
-  let b = @num.big_int_of_num(@num.abs_num(n)) catch { _ => @bigint.BigInt::from_int(0) }
+  let b = @num.big_int_of_num(@num.abs_num(n)) catch {
+    _ => @bigint.BigInt::from_int(0)
+  }
   BigIntRecord((@num.sign_num(n), b))
 }
 
@@ -593,7 +595,7 @@ fn big_record(n : @num.Num) -> BigIntRecord {
 priv struct RatioRecord(@num.Num)
 
 ///|
-impl OHash for RatioRecord with ohash_visit(self, h) {
+impl OHash for RatioRecord with fn ohash_visit(self, h) {
   h.block(0, 3)
   h.field(big_record(@num.numerator(self.0)))
   h.field(big_record(@num.denominator(self.0)))

@@ -28,6 +28,8 @@ pub fn[A] array_length(FixedArray[A]) -> Int
 
 pub fn[A] array_make(Int, A) -> FixedArray[A] raise
 
+pub fn[A, B] array_map((A) -> B raise?, FixedArray[A]) -> FixedArray[B] raise?
+
 pub fn[A] array_of_list(@list.List[A]) -> FixedArray[A]
 
 pub fn[A] array_set(FixedArray[A], Int, A) -> Unit raise
@@ -319,6 +321,8 @@ pub fn[A] sort((A, A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
 pub fn[A, B] splitlist((A) -> (B, A) raise, A) -> (@list.List[B], A) raise
 
 pub fn string_concat(String, @list.List[String]) -> String
+
+pub fn string_escaped(String) -> String
 
 pub fn string_get(String, Int) -> Char raise
 
