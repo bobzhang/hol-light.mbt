@@ -25,6 +25,7 @@ module Main = struct
     | "recursion.ml" -> ("recursion/recursion.mbt", [])
     | "arith.ml" -> ("arith/arith.mbt", [])
     | "wf.ml" -> ("wf/wf.mbt", [])
+    | "calc_num.ml" -> ("calc_num/calc_num.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =

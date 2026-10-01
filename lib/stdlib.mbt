@@ -473,3 +473,15 @@ pub fn incr(r : Ref[Int]) -> Unit {
 pub fn decr(r : Ref[Int]) -> Unit {
   r.val = r.val - 1
 }
+
+///|
+/// `Array.of_list`
+pub fn[A] array_of_list(l : @list.List[A]) -> FixedArray[A] {
+  FixedArray::from_array(l.to_array())
+}
+
+///|
+/// `Array.to_list`
+pub fn[A] array_to_list(a : FixedArray[A]) -> @list.List[A] {
+  @list.from_iter(a.iter())
+}

@@ -456,7 +456,8 @@ module Loader = struct
                 List.iter (Prov.record base) (bound_names item);
                 match item.Typedtree.str_desc with
                 | Typedtree.Tstr_module { Typedtree.mb_id = Some mid; mb_expr; _ } ->
-                    (match mb_expr.Typedtree.mod_type with
+                    (* a sealed module's type may be a signature's name *)
+                    (match Mtype.scrape !Toploop.toplevel_env mb_expr.Typedtree.mod_type with
                      | Types.Mty_signature sg -> Prov.record_module base (Longident.Lident (Ident.name mid)) sg
                      | _ -> ())
                 | _ -> ())

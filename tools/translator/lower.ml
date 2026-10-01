@@ -1536,6 +1536,8 @@ module Lower = struct
       | "Hashtbl.fold" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.hashtbl_fold", [ a; b; c ]))
       | "Hashtbl.iter" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.hashtbl_iter", [ a; b ]))
       | "Array.fold_left" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.array_fold_left", [ a; b; c ]))
+      | "Array.of_list" -> (1, fun [ a ] _ -> Call (Atom "@lib.array_of_list", [ a ]))
+      | "Array.to_list" -> (1, fun [ a ] _ -> Call (Atom "@lib.array_to_list", [ a ]))
       | "Hashtbl.add" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.hashtbl_add", [ a; b; c ]))
       | "Hashtbl.replace" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.hashtbl_replace", [ a; b; c ]))
       | "Hashtbl.find" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.hashtbl_find", [ a; b ]))

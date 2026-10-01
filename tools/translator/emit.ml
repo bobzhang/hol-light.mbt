@@ -771,7 +771,9 @@ module Emit = struct
     close_out oc;
     (* module members' MoonBit names, for packages translated later
        (`A.f` and `B.f` cannot both be `f`) *)
-    let members = Hashtbl.fold (fun k (m, _) acc -> if String.contains k '.' then (k, m) :: acc else acc) own_by_name [] in
+    (* every top-level and module member name: dependent packages resolve
+       exactly (`EXP` is `exp` although OCaml's Stdlib has an `exp`) *)
+    let members = Hashtbl.fold (fun k (m, _) acc -> (k, m) :: acc) own_by_name [] in
     (* the names chosen for this package's types (`T1` for a second `t`) *)
     let members =
       Hashtbl.fold (fun k (pkg, m) acc -> if pkg = !current_pkg then ("type:" ^ k, m) :: acc else acc) own_types members

@@ -1,0 +1,111 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/calc_num"
+
+import {
+  "bobzhang/hol_light/compute",
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn arith() -> @kernel.Thm
+
+pub fn arith_add() -> @kernel.Thm
+
+pub fn arith_eq() -> @kernel.Thm
+
+pub fn arith_even() -> @kernel.Thm
+
+pub fn arith_exp() -> @kernel.Thm
+
+pub fn arith_ge() -> @kernel.Thm
+
+pub fn arith_gt() -> @kernel.Thm
+
+pub fn arith_le() -> @kernel.Thm
+
+pub fn arith_lt() -> @kernel.Thm
+
+pub fn arith_mult() -> @kernel.Thm
+
+pub fn arith_odd() -> @kernel.Thm
+
+pub fn arith_pre() -> @kernel.Thm
+
+pub fn arith_sub() -> @kernel.Thm
+
+pub fn arith_suc() -> @kernel.Thm
+
+pub fn arith_zero() -> @kernel.Thm
+
+pub fn bit0_0() -> @kernel.Thm
+
+pub fn bit1_0() -> @kernel.Thm
+
+pub fn denumeral(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn exp_2_ne_0() -> @kernel.Thm
+
+pub fn exp_mod_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn expand_cases_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_compute_add_convs(@compute.Compset) -> Unit raise
+
+pub fn num_compute_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_div_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_even_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_exp_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_fact_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_ge_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_gt_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_le_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_lt_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_max_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_min_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_mod_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_mult_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_odd_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_pre_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_red_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_red_conv_list() -> @list.List[(@kernel.Term, (@kernel.Term) -> @kernel.Thm raise)]
+
+pub fn num_reduce_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_reduce_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn num_rel_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_sub_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_suc_conv(@kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

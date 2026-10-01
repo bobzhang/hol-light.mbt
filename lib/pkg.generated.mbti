@@ -27,7 +27,11 @@ pub fn[A] array_length(FixedArray[A]) -> Int
 
 pub fn[A] array_make(Int, A) -> FixedArray[A] raise
 
+pub fn[A] array_of_list(@list.List[A]) -> FixedArray[A]
+
 pub fn[A] array_set(FixedArray[A], Int, A) -> Unit raise
+
+pub fn[A] array_to_list(FixedArray[A]) -> @list.List[A]
 
 pub fn asr(Int, Int) -> Int
 

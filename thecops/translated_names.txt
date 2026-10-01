@@ -49,6 +49,8 @@ Hashek.hashek_eq hashek_eq
 Hashek.hashek_prop hashek_prop
 Hashek.hashek_thm hashek_thm
 Hashek.hashek_tm hashek_tm
+LEANCOP leancop_v1
+LEANCOP_TAC leancop_tac_v1
 Leancop.GEN_LEANCOP_TAC gen_leancop_tac
 Leancop.LEANCOP leancop
 Leancop.LEANCOP_DEEPEN leancop_deepen
@@ -56,6 +58,8 @@ Leancop.LEANCOP_TAC leancop_tac
 Leancop.PREPARE_LEAN_TAC prepare_lean_tac
 Leancop.PURE_LEANCOP pure_leancop
 Leancop.start start
+NANOCOP nanocop_v1
+NANOCOP_TAC nanocop_tac_v1
 Nanocop.GEN_NANOCOP_TAC gen_nanocop_tac
 Nanocop.NANOCOP nanocop
 Nanocop.NANOCOP_DEEPEN nanocop_deepen
@@ -245,6 +249,8 @@ exn:Cop.Subst.Unify Unify1
 exn:Strom.End_of_strom End_of_strom
 exn:Substarray.Unify Unify1
 exn:Substlist.Unify Unify
+offset_lit offset_lit
+offset_term offset_term
 type:Cop.Subst.t T1
 type:Cop.search_opts SearchOpts
 type:Database.contrapositive Contrapositive

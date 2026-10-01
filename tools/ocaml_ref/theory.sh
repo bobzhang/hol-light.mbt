@@ -5,7 +5,7 @@ set -e
 cd "$(dirname "$0")/../.."
 name=$1; shift
 python3 tools/ocaml_ref/new_theory_pkg.py "$name" "$@"
-tools/ocaml_ref/translate.sh translate "$name.ml" | grep "unsupported\|wrote\|Exception"
+tools/ocaml_ref/translate.sh translate "$name.ml" | grep "unsupported\|wrote\|Exception" | tee /dev/stderr | grep -q " 0 unsupported" || { echo "UNSUPPORTED ITEMS in $name.ml" >&2; exit 1; }
 moon fmt >/dev/null 2>&1 || true
 moon check 2>&1 | grep -E "^Error" -A9 | head -60 || true
 [ -f "$name/${name}_ref_test.mbt" ] || python3 tools/ocaml_ref/theory_test.py "$name"
