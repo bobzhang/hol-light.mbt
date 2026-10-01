@@ -83,11 +83,11 @@ pub fn numdom(Num) -> (Num, Num)
 
 pub fn numerator(Num) -> Num
 
-pub fn pow10(Int) -> Num raise Failure
+pub fn pow10(Int) -> Num raise
 
-pub fn pow2(Int) -> Num raise Failure
+pub fn pow2(Int) -> Num raise
 
-pub fn power_num(Num, Num) -> Num raise Failure
+pub fn power_num(Num, Num) -> Num raise
 
 pub fn pred_num(Num) -> Num
 
@@ -113,6 +113,14 @@ pub fn DivisionByZero::output(Self, &Logger) -> Unit
 pub fn DivisionByZero::to_repr(Self) -> @debug.Repr
 pub fn DivisionByZero::to_string(Self) -> String
 pub impl Show for DivisionByZero
+
+pub suberror InvalidArgument {
+  InvalidArgument(String)
+} derive(@debug.Debug)
+pub fn InvalidArgument::output(Self, &Logger) -> Unit
+pub fn InvalidArgument::to_repr(Self) -> @debug.Repr
+pub fn InvalidArgument::to_string(Self) -> String
+pub impl Show for InvalidArgument
 
 // Types and methods
 pub struct Num {

@@ -429,3 +429,43 @@ test "int64_of_num" {
     _ => fail("expected int_of_num to fail")
   }
 }
+
+///|
+/// Bit-exact `float_of_num` results from OCaml (tools/ocaml_ref/float_ref.ml).
+test "float_of_num matches OCaml bit for bit" {
+  let n = @num.num_of_int
+  let check = (name : String, x : @num.Num, bits : UInt64) => {
+    @test.assert_eq(
+      @num.float_of_num(x).reinterpret_as_uint64(),
+      bits,
+      msg=name,
+    )
+  }
+  check("pow2_-1022", @num.pow2(-1022), 0x0010000000000000UL)
+  check("pow2_-1074", @num.pow2(-1074), 0x0000000000000001UL)
+  check("pow2_1023", @num.pow2(1023), 0x7FE0000000000000UL)
+  check("pow2_1024", @num.pow2(1024), 0x7FF0000000000000UL)
+  check("neg_pow2_1024", @num.minus_num(@num.pow2(1024)), 0xFFF0000000000000UL)
+  check("third", @num.div_num(n(1), n(3)), 0x3FD5555555555555UL)
+  check("tenth", @num.div_num(n(1), n(10)), 0x3FB999999999999AUL)
+  check("big_ratio", @num.div_num(@num.pow10(400), n(3)), 0x7FF0000000000000UL)
+  check(
+    "near_half",
+    @num.div_num(@num.pow2(53) + n(1), @num.pow2(54)),
+    0x3FE0000000000000UL,
+  )
+  check("int_round", @num.pow2(53) + n(1), 0x4340000000000000UL)
+  check("int_round_up", @num.pow2(53) + n(3), 0x4340000000000002UL)
+  check("tiny_ratio", @num.div_num(n(1), @num.pow10(320)), 0x00000000000007E8UL)
+}
+
+///|
+test "power_num with a fractional exponent raises Invalid_argument" {
+  let n = @num.num_of_int
+  try @num.power_num(n(4), @num.div_num(n(1), n(2))) catch {
+    @num.InvalidArgument(msg) => inspect(msg, content="power_num")
+    e => fail("unexpected error \{e}")
+  } noraise {
+    _ => fail("expected power_num to fail")
+  }
+}

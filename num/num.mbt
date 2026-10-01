@@ -19,6 +19,24 @@ pub struct Num {
 } derive(Eq, Hash)
 
 ///|
+/// OCaml's `Invalid_argument` exception (not a `Failure`).
+pub suberror InvalidArgument {
+  InvalidArgument(String)
+} derive(Debug)
+
+///|
+pub impl Show for InvalidArgument with fn output(self, logger) {
+  let InvalidArgument(msg) = self
+  logger.write_string("Invalid_argument(\"" + msg + "\")")
+}
+
+///|
+pub extend InvalidArgument with Show::{output, to_string}
+
+///|
+pub extend InvalidArgument with @debug.Debug::{to_repr}
+
+///|
 /// OCaml's `Division_by_zero` exception (not a `Failure`).
 pub suberror DivisionByZero derive(Debug)
 
@@ -412,9 +430,10 @@ pub fn mod_num(a : Num, b : Num) -> Num raise DivisionByZero {
 
 ///|
 /// `power_num a n` for an integer exponent `n` (negative allowed).
-pub fn power_num(a : Num, n : Num) -> Num raise Failure {
+/// A non-integer exponent raises `InvalidArgument`, as in OCaml.
+pub fn power_num(a : Num, n : Num) -> Num raise {
   if !n.is_integer() {
-    raise Failure("power_num: non-integer exponent")
+    raise InvalidArgument("power_num")
   }
   let e = n.num
   if e.is_zero() {
@@ -512,21 +531,41 @@ pub fn int64_of_num(a : Num) -> Int64 raise Failure {
 }
 
 ///|
-/// Approximate conversion to a double.
+/// `x * 2^e`, scaling in steps so intermediate results neither overflow
+/// nor underflow before the final multiplication.
+fn ldexp(x : Double, e : Int) -> Double {
+  let mut x = x
+  let mut e = e
+  while e > 1000 {
+    x = x * @math.pow(2.0, 1000.0)
+    e = e - 1000
+  }
+  while e < -1000 {
+    x = x * @math.pow(2.0, -1000.0)
+    e = e + 1000
+  }
+  x * @math.pow(2.0, e.to_double())
+}
+
+///|
+/// Conversion to the nearest double (correctly rounded outside the
+/// subnormal range; overflow gives an infinity).
 pub fn float_of_num(a : Num) -> Double {
-  let parse = (b : @bigint.BigInt) => {
-    @string.parse_double(b.to_string()) catch {
-      _ => 0.0
-    }
+  if a.num.is_zero() {
+    return 0.0
   }
-  if a.is_integer() {
-    return parse(a.num)
+  let n = big_abs(a.num)
+  // Choose `shift` so that q = floor(n * 2^shift / den) has 63 or 64 bits.
+  let shift = 63 - (n.bit_length() - a.den.bit_length())
+  let scaled = if shift >= 0 { n << shift } else { n }
+  let divisor = if shift >= 0 { a.den } else { a.den << -shift }
+  let mut q = scaled / divisor
+  // Sticky bit: any discarded remainder makes the conversion round
+  // correctly from 64 bits to 53.
+  if !(scaled % divisor).is_zero() {
+    q = q | big_one
   }
-  // Scale so the quotient has at least 64 significant bits.
-  let shift = a.den.bit_length() - a.num.bit_length() + 64
-  let shift = if shift < 0 { 0 } else { shift }
-  let q = (big_abs(a.num) << shift) / a.den
-  let mag = parse(q) * @math.pow(2.0, (-shift).to_double())
+  let mag = ldexp(q.to_uint64().to_double(), -shift)
   if a.num < big_zero {
     -mag
   } else {
@@ -556,13 +595,13 @@ pub fn string_of_num(a : Num) -> String {
 
 ///|
 /// `2^n`
-pub fn pow2(n : Int) -> Num raise Failure {
+pub fn pow2(n : Int) -> Num raise {
   power_num(num_2, num_of_int(n))
 }
 
 ///|
 /// `10^n`
-pub fn pow10(n : Int) -> Num raise Failure {
+pub fn pow10(n : Int) -> Num raise {
   power_num(num_10, num_of_int(n))
 }
 
