@@ -64,7 +64,7 @@ Upstream: `.repos/hol-light` (jrh13/hol-light @ `cba9198`), not tracked in this 
 | OCaml `list` and physical-equality sharing (`==`) in `qmap`, `vsubst`, `inst`, `term_image` | Use the immutable `@list.List[T]` and `physical_equal`. Lists keep their order exactly as in OCaml (for example `constants()` returns the newest first). |
 | `Failure`, `try … with Failure _`, `can`, `Unchanged` | `failure/` defines `suberror Failure String` and `failwith`. Fallible functions are declared `raise`, and `can f x` becomes `try`. |
 | Deep recursion. Both wasm and wasm-gc overflow somewhere between 10K and 30K frames. | List utilities use loops or `@list` builtins. Recursion over terms is **not** assumed safe: there are stress tests for deep combinations, binders and long lists, and explicit work stacks are added where needed. |
-| Evaluation order. OCaml 4.14 evaluates tuples, function arguments, list literals and binary operators right to left, but `let … and …` left to right. MoonBit is always left to right. | Whenever the parts have effects (fresh names, registration, exceptions), write the order out explicitly. Library callback order follows `lib.ml` exactly: `map` runs head-first, `filter`/`mapfilter` tail-first. |
+| Evaluation order. OCaml 4.14 evaluates tuples, function arguments, constructor arguments, list literals and binary operators right to left. But `let … and …` and `match (e1, e2) with` (where the tuple is never built) go left to right. MoonBit is always left to right. | Whenever the parts have effects (fresh names, registration, exceptions), write the order out explicitly. Library callback order follows `lib.ml` exactly: `map` runs head-first, `filter`/`mapfilter` tail-first. |
 | OCaml 63-bit `int` vs MoonBit 32-bit `Int` | Use `Int` only where the range is clearly small (indexes, arities, counters). Use `Int64` where values can grow (hash values, user-visible numbers), with an audit at each port. |
 | `Hashtbl.hash` decides the tree shape of the `lib.ml` Patricia maps (`func`, `\|->`), and so their fold and `choose` order | Implement an OCaml-compatible `caml_hash` (MurmurHash3, limits 10/256) for the key types used (strings, ints, terms, types, tuples) and test it against OCaml values. Keep `Hashtbl` duplicate-binding semantics. |
 | Physical equality `==` | Use `physical_equal` only as a sharing optimization. Results must be structurally identical whether it returns true or false. |
@@ -162,6 +162,11 @@ functions, never through top-level side effects, so callers control loading.
   The Codex review found no soundness issues; the sharing fixes for `qmap`,
   `filter` and `term_image` are applied.
 - [ ] Phase 2: `num/` is done (it matches OCaml `Num` and the `lib.ml` num
-  helpers on 270 differential checks; `int_of_num` is limited to 32 bits by
-  design, and `int64_of_num` covers wider values). Next: `lib/` with
-  OCaml-compatible compare/hash (`OValue`) and Patricia `func`.
+  helpers on 270 differential checks plus 12 bit-exact `float_of_num`
+  cases; `int_of_num` is limited to 32 bits by design, and `int64_of_num`
+  covers wider values). `lib/` is done: `OCompare`/`OHash` reproduce OCaml
+  `compare` and `Hashtbl.hash` (35 hash values match), and `lib.ml`
+  including the Patricia `func` matches on 68 differential checks that also
+  compare callback order. Not yet ported: `time` (needs a clock and OCaml
+  float formatting) and the file helpers (`strings_of_file` etc.), which
+  wait for an I/O package.
