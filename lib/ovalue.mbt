@@ -18,14 +18,14 @@
 
 ///|
 /// OCaml's polymorphic `compare`.
-pub trait OCompare {
+pub(open) trait OCompare {
   fn ocompare(Self, Self) -> Int
 }
 
 ///|
 /// OCaml's polymorphic hash (`Hashtbl.hash`): visits a value in the
 /// breadth-first order of `caml_hash`.
-pub trait OHash {
+pub(open) trait OHash {
   fn ohash_visit(Self, OHasher) -> Unit
 }
 

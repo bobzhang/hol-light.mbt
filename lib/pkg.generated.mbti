@@ -249,7 +249,7 @@ pub fn OHasher::string(Self, String) -> Unit
 // Type aliases
 
 // Traits
-pub trait OCompare {
+pub(open) trait OCompare {
   fn ocompare(Self, Self) -> Int
 }
 pub impl OCompare for Unit
@@ -267,7 +267,7 @@ pub impl[A : OCompare, B : OCompare] OCompare for (A, B)
 pub impl[A : OCompare, B : OCompare, C : OCompare] OCompare for (A, B, C)
 pub impl[A : OCompare, B : OCompare, C : OCompare, D : OCompare] OCompare for (A, B, C, D)
 
-pub trait OHash {
+pub(open) trait OHash {
   fn ohash_visit(Self, OHasher) -> Unit
 }
 pub impl OHash for Unit

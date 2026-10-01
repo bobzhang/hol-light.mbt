@@ -260,25 +260,28 @@ fn debruijn(tm : @kernel.Term) -> String {
 test "alphaorder is a total order whose zero is alpha-equivalence" {
   let g = { seed: 4242U, }
   let terms = []
-  for _ in 0..<60 {
-    terms.push(g.term(@kernel.bool_ty, 4))
-  }
-  // Alpha-variants of some of the terms, built by renaming binders.
-  for i in 0..<20 {
-    let t = terms[i]
+  for i in 0..<60 {
+    let t = g.term(@kernel.bool_ty, 4)
+    // Half of the terms are abstractions, so binders are common.
     terms.push(
-      match t {
-        Abs(Var(_, vt) as v, b) => {
-          let fresh = @kernel.variant(
-            @list.singleton(t),
-            @kernel.mk_var("u", vt),
-          )
-          @kernel.mk_abs(fresh, @kernel.vsubst(@list.List([(fresh, v)]), b))
-        }
-        _ => t
+      if i % 2 == 0 {
+        t
+      } else {
+        @kernel.mk_abs(@kernel.mk_var(["x", "y", "z"][i % 3], ty("A")), t)
       },
     )
   }
+  // Alpha-variants: every binder renamed (recursively), so they are
+  // structurally different but alpha-equivalent.
+  let mut renamed = 0
+  for i in 0..<60 {
+    let v = rename_binders(terms[i])
+    if v != terms[i] {
+      renamed += 1
+      terms.push(v)
+    }
+  }
+  @test.assert_eq(renamed > 10, true)
   let mut distinct = 0
   let mut equivalent = 0
   for a in terms {
@@ -302,6 +305,33 @@ test "alphaorder is a total order whose zero is alpha-equivalence" {
   // The properties are not vacuous: both outcomes occur often.
   @test.assert_eq(distinct > 1000, true)
   @test.assert_eq(equivalent > terms.length(), true)
+  // Structurally different alpha-equivalent pairs are compared as equal.
+  let mut alpha_pairs = 0
+  for a in terms {
+    for b in terms {
+      if a != b && @kernel.alphaorder(a, b) == 0 {
+        alpha_pairs += 1
+      }
+    }
+  }
+  @test.assert_eq(alpha_pairs >= 2 * renamed, true)
+}
+
+///|
+/// Rename every bound variable of `tm` (innermost first) to a fresh name.
+fn rename_binders(tm : @kernel.Term) -> @kernel.Term raise {
+  match tm {
+    Comb(f, x) => @kernel.mk_comb(rename_binders(f), rename_binders(x))
+    Abs(Var(name, vt) as v, b) => {
+      let b1 = rename_binders(b)
+      let fresh = @kernel.variant(
+        @list.List([@kernel.mk_abs(v, b1), b1]),
+        @kernel.mk_var(name + "_r", vt),
+      )
+      @kernel.mk_abs(fresh, @kernel.vsubst(@list.List([(fresh, v)]), b1))
+    }
+    _ => tm
+  }
 }
 
 ///|
@@ -370,8 +400,8 @@ fn binder_chain(
   prefix : String,
   n : Int,
   z : @kernel.Term,
+  a? : @kernel.HolType = ty("A"),
 ) -> @kernel.Term raise {
-  let a = ty("A")
   let f = @kernel.mk_var("f", fn_ty(a, fn_ty(a, a)))
   let vars = [ for i in 0..<n => @kernel.mk_var(prefix + i.to_string(), a) ]
   let mut body = @kernel.mk_comb(@kernel.mk_comb(f, vars[0]), z)
@@ -411,6 +441,9 @@ test "deep binders, operator spines and types" {
   @test.assert_eq(@kernel.type_vars_in_term(i1), @list.singleton(b))
   let fb = @kernel.mk_var("f", fn_ty(b, fn_ty(b, b)))
   @test.assert_eq(@kernel.frees(i1), @list.List([fb, zb]))
+  // The binding structure survives: compare with an independently built
+  // B-typed chain.
+  @test.assert_eq(debruijn(i1), debruijn(binder_chain("v", n, zb, a=b)))
   // f a1 a2 ... an (left-nested operator spine) over a curried type.
   let vars = [ for i in 0..<n => @kernel.mk_var("x" + i.to_string(), a) ]
   let mut fty = a
