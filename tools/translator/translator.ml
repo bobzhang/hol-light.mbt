@@ -126,6 +126,7 @@ module Names = struct
     | "canon.ml" -> Some "canon"
     | "meson.ml" -> Some "meson"
     | "firstorder.ml" -> Some "firstorder"
+    | "metis.ml" -> Some "metis"
     | "bignum_num.ml" -> Some "num"
     | _ -> None
 

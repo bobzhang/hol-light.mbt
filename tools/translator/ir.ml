@@ -16,6 +16,9 @@ module Ir = struct
     | Field of exp * int
     | Not of exp
     | Deref of exp                   (* r.val *)
+    | Proj of exp * string           (* record field *)
+    | Record of string * exp option * (string * exp) list
+                                     (* T::{ ..base, f: e } *)
     | RefNew of exp                  (* Ref::{ val: e } *)
     | Binop of string * exp * exp
     | Blk of block
@@ -25,6 +28,7 @@ module Ir = struct
     | LetTyped of string * string * exp
     | Do of exp
     | Assign of exp * exp                 (* r.val = e *)
+    | SetField of exp * string * exp      (* r.f = e *)
     | LetFn of string * (string * string) list * string * block
                                           (* local recursive function *)
     | LetRec of (string * (string * string) list * string option * block) list
@@ -42,6 +46,8 @@ module Ir = struct
     | Field (e, _) | Not e -> ordered e
     | RefNew _ -> true (* a fresh mutable cell: its identity matters *)
     | Deref _ -> true (* reads mutable state *)
+    | Proj _ -> true (* the field may be mutable *)
+    | Record (_, b, fs) -> (match b with Some b -> ordered b | None -> false) || List.exists (fun (_, e) -> ordered e) fs
     | Binop (("==" | "!=" | "&&" | "||"), a, b) -> ordered a || ordered b
     | Binop _ -> true (* arithmetic can overflow/divide by zero *)
     | Call _ | If _ | Match _ | Try _ | Raise _ | Blk _ -> true
@@ -80,6 +86,12 @@ module Ir = struct
     | Field (e, i) -> pfun e; p "."; p (string_of_int i)
     | Not e -> p "!"; pfun e
     | Deref e -> pfun e; p ".val"
+    | Proj (e, f) -> pfun e; p "."; p f
+    | Record (t, base, fs) ->
+        p t; p "::{ ";
+        (match base with Some b -> p ".."; pexp b; if fs <> [] then p ", " | None -> ());
+        List.iteri (fun i (f, e) -> if i > 0 then p ", "; p f; p ": "; pexp e) fs;
+        p " }"
     | RefNew e -> p "Ref::{ val: "; pexp e; p " }"
     | Binop (op, a, b) -> p "("; poperand a; p " "; p op; p " "; poperand b; p ")"
     | Blk b -> pblock b
@@ -87,7 +99,7 @@ module Ir = struct
   (* An expression in function or receiver position. *)
   and pfun e =
     match e with
-    | Atom _ | Call _ | Field _ | Tuple _ | Deref _ -> pexp e
+    | Atom _ | Call _ | Field _ | Tuple _ | Deref _ | Proj _ | Record _ -> pexp e
     | _ -> p "("; pexp e; p ")"
 
   (* an operand of a binary operator or `!` *)
@@ -119,6 +131,7 @@ module Ir = struct
     | LetTyped (x, t, e) -> nl (); p "let "; p x; p " : "; p t; p " = "; pexp e
     | Do e -> nl (); pexp e
     | Assign (r, e) -> nl (); pfun r; p ".val = "; pexp e
+    | SetField (r, f, e) -> nl (); pfun r; p "."; p f; p " = "; pexp e
     | LetFn (name, params, ret, b) ->
         nl (); p "fn "; p name; p "(";
         p (String.concat ", " (List.map (fun (x, t) -> x ^ " : " ^ t) params));

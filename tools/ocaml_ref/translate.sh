@@ -21,6 +21,7 @@ grep -v 'pa_j.cmo' boot.ml > _build/tboot.ml
   done
   echo '#load "pa_j.cmo";;'
   echo 'let needs (_:string) = ();;'
+  echo 'let float_sqrt = sqrt;; let float_fabs = abs_float;;'
   echo "let _ = Main.$1 ~hol:\"$H\" ~root:\"$ROOT\" \"$2\";;"
 } > _build/tscript.ml
 _build/holtop -w -a -alert -all -I "$H" -I _build _build/tscript.ml 2>&1 | grep -v "HOL-Light syntax in effect"

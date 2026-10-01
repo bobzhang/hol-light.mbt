@@ -244,6 +244,31 @@ module Emit = struct
                     "\n///|\nfn ocaml_rank_%s(x : %s) -> Int {\n  match x {\n%s\n  }\n}\n\n///|\npub impl @lib.OCompare for %s with fn ocompare(self, other) {\n  match (self, other) {\n%s\n    _ => ocaml_rank_%s(self).compare(ocaml_rank_%s(other))\n  }\n}\n\n///|\npub impl @lib.OHash for %s with fn ohash_visit(self, h) {\n  match self {\n%s\n  }\n}\n"
                     name name (String.concat "\n" rank_arms) name (String.concat "\n" cmp_arms) name name name
                     (String.concat "\n" hash_arms))
+        | Ttype_record lds, _ ->
+            let fields =
+              List.map
+                (fun ld ->
+                  (Asttypes.(ld.ld_mutable = Mutable), field_name (Ident.name ld.ld_id), ld.ld_type.ctyp_type))
+                lds
+            in
+            add_decl (fun () ->
+                Printf.sprintf "\n///|\n/// `%s`\npub(all) struct %s%s {\n  %s\n} derive(Eq, Debug)\n"
+                  (Ident.name d.typ_id) name gens
+                  (String.concat "\n  "
+                     (List.map (fun (m, f, t) -> (if m then "mut " else "") ^ f ^ " : " ^ show_ty t) fields)));
+            if params = [] then
+              (* a record is a block with tag 0 and its fields in order *)
+              add_decl (fun () ->
+                  let n = List.length fields in
+                  let names = List.map (fun (_, f, _) -> f) fields in
+                  let steps =
+                    List.filteri (fun i _ -> i < n - 1) names
+                    |> List.map (fun f -> Printf.sprintf "let c = @lib.compare(self.%s, other.%s)\n  if c != 0 {\n    return c\n  }" f f)
+                  in
+                  Printf.sprintf
+                    "\n///|\npub impl @lib.OCompare for %s with fn ocompare(self, other) {\n  %s\n  @lib.compare(self.%s, other.%s)\n}\n\n///|\npub impl @lib.OHash for %s with fn ohash_visit(self, h) {\n  h.block(0, %d)\n  %s\n}\n"
+                    name (String.concat "\n  " steps) (List.nth names (n - 1)) (List.nth names (n - 1)) name n
+                    (String.concat "\n  " (List.map (fun f -> "h.field(self." ^ f ^ ")") names)))
         | Ttype_abstract, Some ct ->
             let t = show_ty ct.ctyp_type in
             add_decl (fun () -> Printf.sprintf "\n///|\n/// `%s`\npub type %s%s = %s\n" (Ident.name d.typ_id) name gens t)

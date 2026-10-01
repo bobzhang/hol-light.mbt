@@ -13,6 +13,7 @@ module Main = struct
     | "canon.ml" -> ("canon/canon.mbt", [])
     | "meson.ml" -> ("meson/meson.mbt", [])
     | "firstorder.ml" -> ("firstorder/firstorder.mbt", [])
+    | "metis.ml" -> ("metis/metis.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =

@@ -647,6 +647,11 @@ module Lower = struct
          | name, [] -> ctor_name name
          | name, ps -> ctor_name name ^ "(" ^ String.concat ", " (List.map (fun q -> pattern q) ps) ^ ")")
     | Tpat_or (a, b, _) -> pattern ?mty a ^ " | " ^ pattern ?mty b
+    | Tpat_record (fields, _) ->
+        "{ "
+        ^ String.concat ", "
+            (List.map (fun (_, ld, q) -> sanitize ld.Types.lbl_name ^ ": " ^ pattern q) fields)
+        ^ ", .. }"
     | Tpat_value v -> pattern ?mty (v :> value general_pattern)
     | Tpat_exception q -> pattern q
     | _ -> unsupported loc "pattern"
@@ -692,6 +697,17 @@ module Lower = struct
     match Prov.lookup p with
     | Some ("lib.ml", (("o" | "I" | "K" | "C" | "W" | "f_f_") as n)) -> Some n
     | _ -> None
+
+  let field_name n = sanitize n
+
+  (* the MoonBit name of a record type, for `T::{ ... }` *)
+  let record_type_name ty =
+    match Types.get_desc (expand ty) with
+    | Types.Tconstr (p, _, _) ->
+        (match own_type (Path.last p) with
+         | Some t -> t
+         | None -> unsupported Location.none "record type %s" (Path.name p))
+    | _ -> unsupported Location.none "record type"
 
   let depth = ref 0
 
@@ -740,6 +756,33 @@ module Lower = struct
     | Texp_match (scrut, cases, partial) -> lower_match ?expect e scrut cases partial
     | Texp_try (body, cases) -> lower_try ?expect e body cases
     | Texp_let (Asttypes.Recursive, vbs, body) -> lower_letrec ?expect loc vbs body
+    | Texp_record { fields; extended_expression; _ } ->
+        (* the base first, then the given fields right to left in
+           definition order *)
+        let tname = record_type_name e.exp_type in
+        let base = Option.map (fun b -> let ss, x, _ = lower b in (ss, x)) extended_expression in
+        let given =
+          Array.to_list fields
+          |> List.filter_map (fun (ld, def) ->
+                 match def with
+                 | Overridden (_, fe) -> Some (field_name ld.Types.lbl_name, fe)
+                 | Kept _ -> None)
+        in
+        let lowered = List.map (fun (n, fe) -> let ss, x, _ = lower ~expect:(mty_of fe.exp_type) fe in (n, (ss, x))) given in
+        let sibs = (match base with Some b -> [ b ] | None -> []) @ List.rev_map snd lowered in
+        let stmts, xs = schedule sibs in
+        let base_x, xs = match base with Some _ -> (Some (List.hd xs), List.tl xs) | None -> (None, xs) in
+        let fields_x = List.combine (List.map fst lowered) (List.rev xs) in
+        (stmts, Record (tname, base_x, fields_x), mty_of e.exp_type)
+    | Texp_field (r, _, ld) ->
+        let ss, x, _ = lower r in
+        (ss, Proj (x, field_name ld.Types.lbl_name), mty_of e.exp_type)
+    | Texp_setfield (r, _, ld, v) ->
+        (* `r.f <- v`: v first *)
+        let vl = lower_block ~expect:(mty_of v.exp_type) v in
+        let rl = lower_block r in
+        let stmts, xs = schedule [ vl; rl ] in
+        (stmts, Blk ([ SetField (List.nth xs 1, field_name ld.Types.lbl_name, List.nth xs 0) ], Atom "()"), M.Named ("Unit", []))
     | Texp_assert c ->
         let file, line, col = Location.get_pos_info loc.Location.loc_start in
         let fail = Raise (Call (Atom "@lib.AssertFailure", [ Atom (string_lit (Printf.sprintf "%s:%d:%d" (Filename.basename file) line col)) ])) in
@@ -770,6 +813,8 @@ module Lower = struct
         lower_printf ?expect whole (Option.get (stdlib_name p)) args
     | Texp_ident (p, _, _) when stdlib_name p <> None ->
         lower_prim ?expect whole (Option.get (stdlib_name p)) f args
+    | Texp_ident (p, _, _) when (match path_name p with "float_sqrt" | "float_fabs" -> Prov.lookup p = None | _ -> false) ->
+        lower_prim ?expect whole (path_name p) f args
     | Texp_ident (p, _, _) when lib_combinator p <> None ->
         lower_combinator ?expect whole (Option.get (lib_combinator p)) f args
     | Texp_ident (Path.Pident id, _, _) when Hashtbl.mem locals (Ident.unique_name id) ->
@@ -942,6 +987,12 @@ module Lower = struct
       | ("+." | "-." | "*." | "/.") as op -> (2, fun [ a; b ] _ -> Binop (String.sub op 0 1, a, b))
       | "~-." -> (1, fun [ a ] _ -> Binop ("-", Atom "0.0", a))
       | "float_of_int" -> (1, fun [ a ] _ -> Call (Atom "Int::to_double", [ a ]))
+      | "sqrt" | "float_sqrt" -> (1, fun [ a ] _ -> Call (Atom "Double::sqrt", [ a ]))
+      | "floor" -> (1, fun [ a ] _ -> Call (Atom "Double::floor", [ a ]))
+      | "abs_float" | "float_fabs" -> (1, fun [ a ] _ -> Call (Atom "Double::abs", [ a ]))
+      (* MoonBit's Int is 32-bit (OCaml's int is 63-bit) *)
+      | "max_int" -> (0, fun [] _ -> Atom "2147483647")
+      | "min_int" -> (0, fun [] _ -> Atom "(-2147483648)")
       | "int_of_float" | "truncate" -> (1, fun [ a ] _ -> Call (Atom "Double::to_int", [ a ]))
       | ("min" | "max") as op ->
           (* `let min a b = if a <= b then a else b` (polymorphic compare) *)

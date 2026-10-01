@@ -1,5 +1,7 @@
 (* Loads the upstream lib.ml + fusion.ml into a plain OCaml toplevel. *)
 let needs (_:string) = ();;
+let float_sqrt = sqrt;;
+let float_fabs = abs_float;;
 #use "lib.ml";;
 #use "fusion.ml";;
 #use "basics.ml";;

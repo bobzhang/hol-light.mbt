@@ -303,4 +303,13 @@ definitions register constants, quotations advance the type-variable and
   proofs and their progress output match upstream. `firstorder/` is done,
   entirely translated (nested modules, `include List`, Stdlib `List.*`
   mapped to lib functions with Stdlib semantics, printf with literal
-  formats, `assert`, floats, operators named `op_...`). Next: `metis`, …
+  formats, `assert`, floats, operators named `op_...`). Records are
+  supported (structs, OCaml's right-to-left field order, patterns,
+  `{r with ...}`, mutable fields, generated OCompare/OHash).
+  **Deferred: `metis.ml` and `thecops.ml`.** They are module-heavy programs
+  (functors `Mmap.Make`/`Mset.Make` over OCaml's `Map.Make`/`Set.Make`,
+  `include`/`open` of applications); they need functor instantiation in the
+  translator and an ordered Map/Set in MoonBit. METIS is first used in
+  arith.ml (3 times), so they come before that file. Until then later
+  packages and their reference scripts skip both. Next: `quot`, `impconv`,
+  then the theory files.
