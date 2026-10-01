@@ -103,6 +103,8 @@ pub fn[A : OCompare] insert(A, @list.List[A]) -> @list.List[A]
 
 pub fn[A] insert_eq((A, A) -> Bool raise?, A, @list.List[A]) -> @list.List[A] raise?
 
+pub fn int_of_string(String) -> Int raise
+
 pub fn[A : OCompare] intersect(@list.List[A], @list.List[A]) -> @list.List[A]
 
 pub fn[K, V] is_undefined(Func[K, V]) -> Bool

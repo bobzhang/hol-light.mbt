@@ -1245,3 +1245,68 @@ pub(all) suberror MatchFailure {
 
 ///|
 pub extend MatchFailure with @debug.Debug::{to_repr}
+
+///|
+/// OCaml's `int_of_string` (a sign, then decimal digits or a `0x`/`0o`/`0b`
+/// prefix, with `_` allowed after the first digit). Fails with
+/// `int_of_string` on bad syntax or when the value does not fit in an `Int`.
+pub fn int_of_string(s : String) -> Int raise {
+  let n = s.length()
+  let mut i = 0
+  let mut neg = false
+  if i < n && (s[i] == '-' || s[i] == '+') {
+    neg = s[i] == '-'
+    i += 1
+  }
+  let mut base = 10
+  if i + 1 < n && s[i] == '0' {
+    match s[i + 1] {
+      'x' | 'X' => {
+        base = 16
+        i += 2
+      }
+      'o' | 'O' => {
+        base = 8
+        i += 2
+      }
+      'b' | 'B' => {
+        base = 2
+        i += 2
+      }
+      'u' | 'U' => i += 2
+      _ => ()
+    }
+  }
+  if i >= n || s[i] == '_' {
+    raise Failure("int_of_string")
+  }
+  let mut acc = 0L
+  while i < n {
+    let c = s[i]
+    i += 1
+    if c == '_' {
+      continue
+    }
+    let d = if c >= '0' && c <= '9' {
+      c.to_int() - '0'.to_int()
+    } else if c >= 'a' && c <= 'f' {
+      c.to_int() - 'a'.to_int() + 10
+    } else if c >= 'A' && c <= 'F' {
+      c.to_int() - 'A'.to_int() + 10
+    } else {
+      raise Failure("int_of_string")
+    }
+    if d >= base {
+      raise Failure("int_of_string")
+    }
+    acc = acc * base.to_int64() + d.to_int64()
+    if acc > 2147483648L {
+      raise Failure("int_of_string")
+    }
+  }
+  let v = if neg { -acc } else { acc }
+  if v > 2147483647L || v < -2147483648L {
+    raise Failure("int_of_string")
+  }
+  v.to_int()
+}

@@ -1,0 +1,160 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/theorems"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn abs_simp() -> @kernel.Thm
+
+pub fn ac(@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn and_clauses() -> @kernel.Thm
+
+pub fn and_forall_thm() -> @kernel.Thm
+
+pub fn beta_thm() -> @kernel.Thm
+
+pub fn claim_tac(String, @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn conj_aci() -> @kernel.Thm
+
+pub fn conj_assoc() -> @kernel.Thm
+
+pub fn conj_sym() -> @kernel.Thm
+
+pub fn destruct_tac(String) -> ((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn disj_aci() -> @kernel.Thm
+
+pub fn disj_assoc() -> @kernel.Thm
+
+pub fn disj_sym() -> @kernel.Thm
+
+pub fn eq_clauses() -> @kernel.Thm
+
+pub fn eq_imp() -> @kernel.Thm
+
+pub fn eq_refl() -> @kernel.Thm
+
+pub fn eq_sym() -> @kernel.Thm
+
+pub fn eq_sym_eq() -> @kernel.Thm
+
+pub fn eq_trans() -> @kernel.Thm
+
+pub fn exists_or_thm() -> @kernel.Thm
+
+pub fn exists_refl() -> @kernel.Thm
+
+pub fn exists_simp() -> @kernel.Thm
+
+pub fn exists_unique() -> @kernel.Thm
+
+pub fn exists_unique_alt() -> @kernel.Thm
+
+pub fn exists_unique_refl() -> @kernel.Thm
+
+pub fn exists_unique_thm() -> @kernel.Thm
+
+pub fn fix_tac(String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn forall_and_thm() -> @kernel.Thm
+
+pub fn forall_simp() -> @kernel.Thm
+
+pub fn forall_unwind_thm1() -> @kernel.Thm
+
+pub fn forall_unwind_thm2() -> @kernel.Thm
+
+pub fn hyp_tac(String, (@kernel.Thm) -> @kernel.Thm raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn imp_clauses() -> @kernel.Thm
+
+pub fn imp_conj() -> @kernel.Thm
+
+pub fn imp_conj_alt() -> @kernel.Thm
+
+pub fn imp_imp() -> @kernel.Thm
+
+pub fn intro_tac(String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn left_and_exists_thm() -> @kernel.Thm
+
+pub fn left_and_forall_thm() -> @kernel.Thm
+
+pub fn left_exists_and_thm() -> @kernel.Thm
+
+pub fn left_forall_imp_thm() -> @kernel.Thm
+
+pub fn left_imp_exists_thm() -> @kernel.Thm
+
+pub fn left_or_distrib() -> @kernel.Thm
+
+pub fn left_or_exists_thm() -> @kernel.Thm
+
+pub fn mono_and() -> @kernel.Thm
+
+pub fn mono_exists() -> @kernel.Thm
+
+pub fn mono_forall() -> @kernel.Thm
+
+pub fn mono_imp() -> @kernel.Thm
+
+pub fn mono_not() -> @kernel.Thm
+
+pub fn mono_or() -> @kernel.Thm
+
+pub fn not_clauses_weak() -> @kernel.Thm
+
+pub fn or_clauses() -> @kernel.Thm
+
+pub fn or_exists_thm() -> @kernel.Thm
+
+pub fn refl_clause() -> @kernel.Thm
+
+pub fn right_and_exists_thm() -> @kernel.Thm
+
+pub fn right_and_forall_thm() -> @kernel.Thm
+
+pub fn right_exists_and_thm() -> @kernel.Thm
+
+pub fn right_forall_imp_thm() -> @kernel.Thm
+
+pub fn right_imp_forall_thm() -> @kernel.Thm
+
+pub fn right_or_distrib() -> @kernel.Thm
+
+pub fn right_or_exists_thm() -> @kernel.Thm
+
+pub fn swap_exists_thm() -> @kernel.Thm
+
+pub fn swap_forall_thm() -> @kernel.Thm
+
+pub fn triv_and_exists_thm() -> @kernel.Thm
+
+pub fn triv_exists_and_thm() -> @kernel.Thm
+
+pub fn triv_exists_imp_thm() -> @kernel.Thm
+
+pub fn triv_forall_imp_thm() -> @kernel.Thm
+
+pub fn triv_forall_or_thm() -> @kernel.Thm
+
+pub fn triv_or_forall_thm() -> @kernel.Thm
+
+pub fn unwind_thm1() -> @kernel.Thm
+
+pub fn unwind_thm2() -> @kernel.Thm
+
+pub fn wlog_relation() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

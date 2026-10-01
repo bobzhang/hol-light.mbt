@@ -147,8 +147,28 @@ definitions register constants, quotations advance the type-variable and
    translator in OCaml using `compiler-libs`. It works on the camlp5-expanded,
    type-checked AST, so it has full type information (MoonBit needs types on
    top-level functions). It emits MoonBit; the output is spot-checked and
-   fixed by hand where needed. Decide on the translator after a spike on
-   `pair.ml` and `nums.ml` (phase 5).
+   fixed by hand where needed. **Built for theorems.ml** (tools/translator,
+   driven by tools/ocaml_ref/translate.sh):
+   - Upstream files load phrase by phrase in a live toplevel (camlp5 +
+     pa_j + compiler-libs). Each phrase is typechecked, translated, then
+     executed; the installed stamps record which file defined each value
+     (provenance), which resolves to a MoonBit package and declaration read
+     from its `pkg.generated.mbti` (names: lowercase plus `_rule`/`_thm`/
+     `_conv`/`_tac`/`_tcl` on clashes).
+   - Lowering keeps OCaml 4.14's evaluation order: all ordered siblings
+     but the last (in OCaml order) are bound to temporaries; arguments are
+     evaluated before any stage call; tuple-scrutinee matches go left to
+     right.
+   - Calls are aligned with MoonBit parameter groups from the declared
+     OCaml type: a group of k > 1 takes k curried arguments or one k-tuple.
+     Function values are adapted to the expected MoonBit type by
+     eta-expansion that applies each stage as soon as its arguments arrive,
+     so staging is preserved. `o`/`I`/`K`/`C`/`W`/`F_F` are expanded inline.
+   - Theorems and other values become write-once cells with accessors; set
+     in `load_steps()` in source order. Syntactic functions become `pub fn`.
+   - Engine phrases are ported by hand and named in the manifest
+     (tools/translator/main.ml), which calls their setup at the upstream
+     position.
 3. Optionally later: a small ML-subset interpreter or REPL for interactive use.
 
 ## Verification
@@ -252,4 +272,9 @@ definitions register constants, quotations advance the type-variable and
   compares closures), mk_rewrites, the simpset strategies with upstream's
   try scopes, basic rewrites, convs and congruences, staged
   REWRITE/SIMP rules and tactics, ABBREV_TAC and EXPAND_TAC. It matches
-  simp.ml on 60 checks, including the load output. Next: `theorems`, …
+  simp.ml on 60 checks, including the load output. `theorems/` is done:
+  the first file produced by the translator (66 theorems, AC, CLAIM_TAC,
+  the basic rewrites and congruences), with the DESTRUCT/FIX/INTRO/HYP_TAC
+  block ported by hand. It matches theorems.ml exactly: every theorem, the
+  77-quotation load trace, load output, rewrite registries, the pattern
+  tactics on goals, and the counters. Next: `ind_defs`, …
