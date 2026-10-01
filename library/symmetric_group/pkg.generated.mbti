@@ -1,0 +1,69 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/symmetric_group"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn all_transpositions_generate_symmetric() -> @kernel.Thm
+
+pub fn card_symmetric_group() -> @kernel.Thm
+
+pub fn cayley_theorem() -> @kernel.Thm
+
+pub fn cayley_theorem_explicit() -> @kernel.Thm
+
+pub fn chain_step_three_cycles_gen() -> @kernel.Thm
+
+pub fn finite_symmetric_group() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn not_solvable_symmetric_group() -> @kernel.Thm
+
+pub fn point_transpositions_generate_all() -> @kernel.Thm
+
+pub fn prime_order_perm_no_fixpoint() -> @kernel.Thm
+
+pub fn prime_order_perm_orbit() -> @kernel.Thm
+
+pub fn prime_order_pow_perm() -> @kernel.Thm
+
+pub fn restrict_symmetric_group_homomorphism() -> @kernel.Thm
+
+pub fn subgroup_restrict_permutes() -> @kernel.Thm
+
+pub fn swap_conjugate_in_subgroup() -> @kernel.Thm
+
+pub fn swap_in_symmetric_group() -> @kernel.Thm
+
+pub fn symmetric_group() -> @kernel.Thm
+
+pub fn symmetric_group_action() -> @kernel.Thm
+
+pub fn symmetric_group_id() -> @kernel.Thm
+
+pub fn symmetric_group_inv() -> @kernel.Thm
+
+pub fn symmetric_group_mul() -> @kernel.Thm
+
+pub fn symmetric_group_pow() -> @kernel.Thm
+
+pub fn symmetric_group_pow_in() -> @kernel.Thm
+
+pub fn symmetric_group_v1() -> @kernel.Thm
+
+pub fn three_cycle_in_symmetric() -> @kernel.Thm
+
+pub fn transitive_transposition_generates_symmetric() -> @kernel.Thm
+
+pub fn transposition_pcycle_generates() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
