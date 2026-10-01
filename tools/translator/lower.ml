@@ -18,6 +18,12 @@ module Lower = struct
   module M = Mbti
   open Ir
 
+  (* MoonBit rejects a bare `match`/`if`/block expression as a pattern guard *)
+  let guard_str g =
+    match g with
+    | If _ | Match _ | Blk _ | Try _ -> " if (" ^ string_of_exp g ^ ")"
+    | _ -> " if " ^ string_of_exp g
+
   exception Unsupported of string * Location.t
 
   let unsupported loc fmt = Printf.ksprintf (fun s -> raise (Unsupported (s, loc))) fmt
@@ -1232,8 +1238,11 @@ module Lower = struct
          | None -> unsupported loc "List.%s" name)
     | Texp_ident (p, _, _) when (match stdlib_name p with Some ("Format.printf" | "Printf.printf" | "Printf.sprintf" | "Format.sprintf") -> true | _ -> false) ->
         lower_printf ?expect whole (Option.get (stdlib_name p)) args
+    | Texp_ident (p, _, _) when (match Prov.lookup p with Some ("printer.ml", ("printf" | "sprintf")) -> true | _ -> false) ->
+        (* printer.ml includes Format *)
+        lower_printf ?expect whole ("Format." ^ snd (Option.get (Prov.lookup p))) args
     | Texp_ident (p, _, _)
-      when (match Prov.lookup p with Some ("printer.ml", ("pp_print_string" | "pp_print_char" | "pp_print_int" | "pp_print_newline" | "pp_print_space" | "pp_print_cut" | "pp_print_break" | "pp_open_box" | "pp_close_box" | "pp_open_hvbox" | "pp_open_vbox" | "pp_print_flush")) -> true | _ -> false) ->
+      when (match Prov.lookup p with Some ("printer.ml", ("std_formatter" | "pp_print_string" | "pp_print_char" | "pp_print_int" | "pp_print_newline" | "pp_print_space" | "pp_print_cut" | "pp_print_break" | "pp_open_box" | "pp_close_box" | "pp_open_hvbox" | "pp_open_vbox" | "pp_print_flush")) -> true | _ -> false) ->
         (* printer.ml includes Format *)
         (match Prov.lookup p with
          | Some (_, n) -> lower_prim ?expect whole ("Format." ^ n) f args
@@ -1459,6 +1468,7 @@ module Lower = struct
     match name, i with
     | "Hashtbl.fold", 0 -> 3
     | ("Hashtbl.iter" | "Array.fold_left"), 0 -> 2
+    | "Array.iteri", 0 -> 2
     | _ -> 0
 
   and uncurry_mty k t =
@@ -1585,6 +1595,10 @@ module Lower = struct
       | "Hashtbl.fold" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.hashtbl_fold", [ a; b; c ]))
       | "Hashtbl.iter" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.hashtbl_iter", [ a; b ]))
       | "Array.fold_left" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.array_fold_left", [ a; b; c ]))
+      | "Array.init" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_init", [ a; b ]))
+      | "Array.iteri" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_iteri", [ a; b ]))
+      | "Array.iter" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_iter", [ a; b ]))
+      | "Array.fill" -> (4, fun [ a; b; c; d ] _ -> Call (Atom "@lib.array_fill", [ a; b; c; d ]))
       | "Array.map" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_map", [ a; b ]))
       | "Array.of_list" -> (1, fun [ a ] _ -> Call (Atom "@lib.array_of_list", [ a ]))
       | "Array.to_list" -> (1, fun [ a ] _ -> Call (Atom "@lib.array_to_list", [ a ]))
@@ -1892,6 +1906,7 @@ module Lower = struct
     | ("()" | "true" | "false" | "None"), [] -> ([], Atom cd.Types.cstr_name, mty_of e.exp_type)
     | "Some", [ a ] -> let ss, x, _ = lower a in (ss, Call (Atom "Some", [ x ]), mty_of e.exp_type)
     | "Failure", [ a ] -> let ss, x, _ = lower a in (ss, Call (Atom "Failure", [ x ]), mty_of e.exp_type)
+    | "Invalid_argument", [ a ] -> let ss, x, _ = lower a in (ss, Call (Atom "@num.InvalidArgument", [ x ]), mty_of e.exp_type)
     | "Noparse", [] -> ([], Atom "@parser.Noparse", mty_of e.exp_type)
     | "Unchanged", [] -> ([], Atom "@lib.Unchanged", mty_of e.exp_type)
     | "Not_found", [] -> ([], Atom "@lib.NotFound", mty_of e.exp_type)
@@ -2019,7 +2034,7 @@ module Lower = struct
                 | None -> ""
                 | Some g ->
                     let ss, gx = lower_block g in
-                    if ss <> [] then " if " ^ string_of_exp (Blk (ss, gx)) else " if " ^ string_of_exp gx
+                    guard_str (if ss <> [] then Blk (ss, gx) else gx)
               in
               (pat ^ guard, k c.c_rhs))
             cases
@@ -2356,7 +2371,7 @@ module Lower = struct
           let guard =
             match c.c_guard with
             | None -> ""
-            | Some g -> let gs, gx = lower_block g in " if " ^ string_of_exp (if gs = [] then gx else Blk (gs, gx))
+            | Some g -> let gs, gx = lower_block g in guard_str (if gs = [] then gx else Blk (gs, gx))
           in
           (pat ^ guard, lower_block ?expect:want c.c_rhs))
         cases
@@ -2379,6 +2394,7 @@ module Lower = struct
       | Tpat_construct (_, cd, args, _) ->
           (match cd.Types.cstr_name, args with
            | "Failure", [ a ] -> "Failure(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
+           | "Invalid_argument", [ a ] -> "@num.InvalidArgument(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
            | "Noparse", [] -> "@parser.Noparse"
            | "Unchanged", [] -> "@lib.Unchanged"
            | "Not_found", [] -> "@lib.NotFound"
@@ -2396,7 +2412,7 @@ module Lower = struct
           let guard =
             match c.c_guard with
             | None -> ""
-            | Some g -> let gs, gx = lower_block g in " if " ^ string_of_exp (if gs = [] then gx else Blk (gs, gx))
+            | Some g -> let gs, gx = lower_block g in guard_str (if gs = [] then gx else Blk (gs, gx))
           in
           (pat ^ guard, lower_block ?expect:want c.c_rhs))
         cases

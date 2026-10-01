@@ -538,3 +538,9 @@ fn init {
     @pp.std_formatter.print_newline()
   }
 }
+
+///|
+/// printer.ml's `pp_print_colored_tyvar`
+pub fn pp_print_colored_tyvar(fmt : Formatter, s : String) -> Unit {
+  print_colored_tyvar(fmt, s)
+}

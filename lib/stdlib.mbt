@@ -540,3 +540,54 @@ pub(all) suberror SysError {
 pub fn temp_file(prefix : String, suffix : String) -> String {
   "/tmp/" + prefix + "000000" + suffix
 }
+
+///|
+/// `Array.init n f` (applies `f` to 0, 1, ... in order)
+pub fn[A] array_init(n : Int, f : (Int) -> A raise?) -> FixedArray[A] raise {
+  if n < 0 {
+    raise @num.InvalidArgument("Array.init")
+  }
+  if n == 0 {
+    return []
+  }
+  let out = FixedArray::make(n, f(0))
+  for i in 1..<n {
+    out[i] = f(i)
+  }
+  out
+}
+
+///|
+/// `Array.iteri f a`
+pub fn[A] array_iteri(
+  f : (Int, A) -> Unit raise?,
+  a : FixedArray[A],
+) -> Unit raise? {
+  for i, x in a {
+    f(i, x)
+  }
+}
+
+///|
+/// `Array.iter f a`
+pub fn[A] array_iter(f : (A) -> Unit raise?, a : FixedArray[A]) -> Unit raise? {
+  for x in a {
+    f(x)
+  }
+}
+
+///|
+/// `Array.fill a ofs len x`
+pub fn[A] array_fill(
+  a : FixedArray[A],
+  ofs : Int,
+  len : Int,
+  x : A,
+) -> Unit raise {
+  if ofs < 0 || len < 0 || ofs > a.length() - len {
+    raise @num.InvalidArgument("Array.fill")
+  }
+  for i in ofs..<(ofs + len) {
+    a[i] = x
+  }
+}

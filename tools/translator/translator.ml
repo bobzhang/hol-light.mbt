@@ -538,7 +538,7 @@ module Names = struct
     | "then_tcl_" -> Some "then_tcl" | "orelse_tcl_" -> Some "orelse_tcl"
     | "_FALSITY_" -> Some "falsity"
     (* parser.ml's combinators *)
-    | ">>" -> Some "map" | "++" -> Some "seq" | "||" -> Some "alt"
+    | ">>" -> Some "map" | "++" -> Some "seq" | "|||" -> Some "alt"
     | "lex" -> Some "lex_list"
     | _ -> None
 

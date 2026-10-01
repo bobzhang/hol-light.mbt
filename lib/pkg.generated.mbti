@@ -21,9 +21,17 @@ pub fn[K : OCompare + OHash, V] apply_opt(Func[K, V], K) -> V?
 
 pub fn[K : OCompare + OHash, V] applyd(Func[K, V], (K) -> V raise?, K) -> V raise?
 
+pub fn[A] array_fill(FixedArray[A], Int, Int, A) -> Unit raise
+
 pub fn[A, B] array_fold_left((A, B) -> A raise?, A, FixedArray[B]) -> A raise?
 
 pub fn[A] array_get(FixedArray[A], Int) -> A raise
+
+pub fn[A] array_init(Int, (Int) -> A raise?) -> FixedArray[A] raise
+
+pub fn[A] array_iter((A) -> Unit raise?, FixedArray[A]) -> Unit raise?
+
+pub fn[A] array_iteri((Int, A) -> Unit raise?, FixedArray[A]) -> Unit raise?
 
 pub fn[A] array_length(FixedArray[A]) -> Int
 

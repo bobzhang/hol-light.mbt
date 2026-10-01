@@ -51,9 +51,19 @@ pub fn parse_as_prefix(String) -> Unit
 
 pub fn parses_as_binder(String) -> Bool
 
+pub fn pp_print_colored_binder(@pp.Formatter, String) -> Unit
+
+pub fn pp_print_colored_const(@pp.Formatter, String) -> Unit
+
+pub fn pp_print_colored_infix(@pp.Formatter, String) -> Unit
+
+pub fn pp_print_colored_prefix(@pp.Formatter, String) -> Unit
+
 pub fn pp_print_colored_qterm(@pp.Formatter, @kernel.Term) -> Unit raise
 
 pub fn pp_print_colored_qtype(@pp.Formatter, @kernel.HolType) -> Unit raise
+
+pub fn pp_print_colored_resword(@pp.Formatter, String) -> Unit
 
 pub fn pp_print_colored_string(String?, @pp.Formatter, String) -> Unit
 
@@ -62,6 +72,8 @@ pub fn pp_print_colored_term(@pp.Formatter, @kernel.Term) -> Unit raise
 pub fn pp_print_colored_thm(@pp.Formatter, @kernel.Thm) -> Unit raise
 
 pub fn pp_print_colored_type(@pp.Formatter, @kernel.HolType) -> Unit raise
+
+pub fn pp_print_colored_tyvar(@pp.Formatter, String) -> Unit
 
 pub fn pp_print_qterm(@pp.Formatter, @kernel.Term) -> Unit raise
 

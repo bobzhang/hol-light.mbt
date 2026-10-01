@@ -1042,3 +1042,33 @@ pub fn[T] print_to_string(
     s
   }
 }
+
+///|
+/// printer.ml's `pp_print_colored_const`
+pub fn pp_print_colored_const(fmt : Formatter, s : String) -> Unit {
+  colored_const(fmt, s)
+}
+
+///|
+/// printer.ml's `pp_print_colored_resword`
+pub fn pp_print_colored_resword(fmt : Formatter, s : String) -> Unit {
+  colored_resword(fmt, s)
+}
+
+///|
+/// printer.ml's `pp_print_colored_binder`
+pub fn pp_print_colored_binder(fmt : Formatter, s : String) -> Unit {
+  colored_binder(fmt, s)
+}
+
+///|
+/// printer.ml's `pp_print_colored_infix`
+pub fn pp_print_colored_infix(fmt : Formatter, s : String) -> Unit {
+  colored_infix(fmt, s)
+}
+
+///|
+/// printer.ml's `pp_print_colored_prefix`
+pub fn pp_print_colored_prefix(fmt : Formatter, s : String) -> Unit {
+  colored_prefix(fmt, s)
+}
