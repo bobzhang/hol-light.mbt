@@ -6,3 +6,7 @@ import {
   "bobzhang/hol_light/pp",
   "moonbitlang/core/list",
 }
+
+import {
+  "moonbitlang/core/test",
+} for "test"

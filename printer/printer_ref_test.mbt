@@ -416,3 +416,8 @@ test "printer matches printer.ml" {
     ),
   )
 }
+
+///|
+test "std_formatter has upstream's 100-box limit" {
+  @test.assert_eq(@pp.std_formatter.get_max_boxes(), 100)
+}

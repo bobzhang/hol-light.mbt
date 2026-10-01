@@ -526,3 +526,15 @@ pub fn try_user_printer(fmt : Formatter, tm : Term) -> Unit raise {
 pub fn try_user_color_printer(fmt : Formatter, tm : Term) -> Unit raise {
   @lib.tryfind((p : UserPrinter) => (p.1)(fmt, tm), user_color_printers.val)
 }
+
+///|
+/// As upstream's `set_max_boxes 100` (printer.ml), and route `report`
+/// through the standard formatter (lib.ml's `report` uses Format), so all
+/// output is ordered.
+fn init {
+  @pp.std_formatter.set_max_boxes(100)
+  @lib.report_sink.val = s => {
+    @pp.std_formatter.print_string(s)
+    @pp.std_formatter.print_newline()
+  }
+}

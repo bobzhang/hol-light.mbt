@@ -13,6 +13,8 @@ pub fn[A, B, C] allpairs((A, B) -> C raise?, @list.List[A], @list.List[B]) -> @l
 
 pub fn[K : OCompare + OHash, V] apply(Func[K, V], K) -> V raise
 
+pub fn[K : OCompare + OHash, V] apply_opt(Func[K, V], K) -> V?
+
 pub fn[K : OCompare + OHash, V] applyd(Func[K, V], (K) -> V raise?, K) -> V raise?
 
 pub fn[A : OCompare, B] assoc(A, @list.List[(A, B)]) -> B raise

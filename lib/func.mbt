@@ -111,6 +111,13 @@ pub fn[K, V : OCompare] ran(f : Func[K, V]) -> @list.List[V] {
 }
 
 ///|
+/// The value of `f` at `x`, if defined (an extension: upstream uses
+/// `defined` followed by `apply`).
+pub fn[K : OCompare + OHash, V] apply_opt(f : Func[K, V], x : K) -> V? {
+  lookup(f, x)
+}
+
+///|
 /// The value of `f` at `x`, if defined.
 fn[K : OCompare + OHash, V] lookup(f : Func[K, V], x : K) -> V? {
   let k = hash(x)
