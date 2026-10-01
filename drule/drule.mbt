@@ -1208,7 +1208,7 @@ pub fn higher_rewrite_conv(ths : List[Thm]) -> ((Bool) -> Conv) raise {
         @lib.hd(@lib.sort(@basics.free_in, @basics.find_terms(pred, tm)))
       }
       let pat = @lib.hd(look_fn(stm))
-      let (_, tmin, tyin) = term_match(@list.empty(), pat, stm)
+      let (_, tmin, _tyin) = term_match(@list.empty(), pat, stm)
       let (pred1, (th, beta_fn)) = @lib.assoc(pat, ass_list)
       let gv = @basics.genvar(@kernel.type_of(stm))
       let abs = @kernel.mk_abs(
