@@ -1,0 +1,596 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/card"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn add_c() -> @kernel.Thm
+
+pub fn bijective_injective_surjective() -> @kernel.Thm
+
+pub fn bijective_inverses() -> @kernel.Thm
+
+pub fn cantor_thm() -> @kernel.Thm
+
+pub fn cantor_thm_univ() -> @kernel.Thm
+
+pub fn card_add2_absorb_le() -> @kernel.Thm
+
+pub fn card_add2_absorb_lt() -> @kernel.Thm
+
+pub fn card_add_absorb_le() -> @kernel.Thm
+
+pub fn card_add_absorb_left() -> @kernel.Thm
+
+pub fn card_add_absorb_right() -> @kernel.Thm
+
+pub fn card_add_assoc() -> @kernel.Thm
+
+pub fn card_add_c() -> @kernel.Thm
+
+pub fn card_add_cong() -> @kernel.Thm
+
+pub fn card_add_finite() -> @kernel.Thm
+
+pub fn card_add_finite_eq() -> @kernel.Thm
+
+pub fn card_add_le_mul_infinite() -> @kernel.Thm
+
+pub fn card_add_sym() -> @kernel.Thm
+
+pub fn card_countable_cong() -> @kernel.Thm
+
+pub fn card_diff_absorb() -> @kernel.Thm
+
+pub fn card_diff_cong() -> @kernel.Thm
+
+pub fn card_disjoint_union() -> @kernel.Thm
+
+pub fn card_empty_le() -> @kernel.Thm
+
+pub fn card_eq_add_lcancel() -> @kernel.Thm
+
+pub fn card_eq_add_lcancel_eq() -> @kernel.Thm
+
+pub fn card_eq_add_rcancel() -> @kernel.Thm
+
+pub fn card_eq_add_rcancel_eq() -> @kernel.Thm
+
+pub fn card_eq_card() -> @kernel.Thm
+
+pub fn card_eq_card_imp() -> @kernel.Thm
+
+pub fn card_eq_cart() -> @kernel.Thm
+
+pub fn card_eq_cartesian_product() -> @kernel.Thm
+
+pub fn card_eq_cartesian_product_disjoint_union() -> @kernel.Thm
+
+pub fn card_eq_cong() -> @kernel.Thm
+
+pub fn card_eq_countable() -> @kernel.Thm
+
+pub fn card_eq_countable_subsets_real() -> @kernel.Thm
+
+pub fn card_eq_countable_subsets_subreal() -> @kernel.Thm
+
+pub fn card_eq_disjoint_unions() -> @kernel.Thm
+
+pub fn card_eq_empty() -> @kernel.Thm
+
+pub fn card_eq_exp_infinite_finite() -> @kernel.Thm
+
+pub fn card_eq_finite() -> @kernel.Thm
+
+pub fn card_eq_finite_subsets() -> @kernel.Thm
+
+pub fn card_eq_fullsize_powerset() -> @kernel.Thm
+
+pub fn card_eq_funspace() -> @kernel.Thm
+
+pub fn card_eq_image() -> @kernel.Thm
+
+pub fn card_eq_image_mul_fibres() -> @kernel.Thm
+
+pub fn card_eq_images() -> @kernel.Thm
+
+pub fn card_eq_imp_le() -> @kernel.Thm
+
+pub fn card_eq_infinite() -> @kernel.Thm
+
+pub fn card_eq_int_num() -> @kernel.Thm
+
+pub fn card_eq_limited_powerset() -> @kernel.Thm
+
+pub fn card_eq_list() -> @kernel.Thm
+
+pub fn card_eq_list_gen() -> @kernel.Thm
+
+pub fn card_eq_ordinal_exists() -> @kernel.Thm
+
+pub fn card_eq_pcross() -> @kernel.Thm
+
+pub fn card_eq_preimage() -> @kernel.Thm
+
+pub fn card_eq_real() -> @kernel.Thm
+
+pub fn card_eq_real_imp_uncountable() -> @kernel.Thm
+
+pub fn card_eq_real_sequences() -> @kernel.Thm
+
+pub fn card_eq_real_subset() -> @kernel.Thm
+
+pub fn card_eq_refl() -> @kernel.Thm
+
+pub fn card_eq_refl_imp() -> @kernel.Thm
+
+pub fn card_eq_restricted_funspace_infinite() -> @kernel.Thm
+
+pub fn card_eq_restricted_powerset() -> @kernel.Thm
+
+pub fn card_eq_sym() -> @kernel.Thm
+
+pub fn card_eq_trans() -> @kernel.Thm
+
+pub fn card_exp_0() -> @kernel.Thm
+
+pub fn card_exp_absorb() -> @kernel.Thm
+
+pub fn card_exp_add() -> @kernel.Thm
+
+pub fn card_exp_c() -> @kernel.Thm
+
+pub fn card_exp_cantor() -> @kernel.Thm
+
+pub fn card_exp_cong() -> @kernel.Thm
+
+pub fn card_exp_eq_real() -> @kernel.Thm
+
+pub fn card_exp_finite() -> @kernel.Thm
+
+pub fn card_exp_finite_eq() -> @kernel.Thm
+
+pub fn card_exp_graph() -> @kernel.Thm
+
+pub fn card_exp_graph_paired() -> @kernel.Thm
+
+pub fn card_exp_le_real() -> @kernel.Thm
+
+pub fn card_exp_mul() -> @kernel.Thm
+
+pub fn card_exp_powerset() -> @kernel.Thm
+
+pub fn card_exp_sing() -> @kernel.Thm
+
+pub fn card_exp_univ() -> @kernel.Thm
+
+pub fn card_exp_zero() -> @kernel.Thm
+
+pub fn card_finite_cong() -> @kernel.Thm
+
+pub fn card_funspace_cong() -> @kernel.Thm
+
+pub fn card_funspace_curry() -> @kernel.Thm
+
+pub fn card_funspace_le() -> @kernel.Thm
+
+pub fn card_ge_preimage() -> @kernel.Thm
+
+pub fn card_has_size_cong() -> @kernel.Thm
+
+pub fn card_infinite_cong() -> @kernel.Thm
+
+pub fn card_ldistrib() -> @kernel.Thm
+
+pub fn card_le_add() -> @kernel.Thm
+
+pub fn card_le_add_lcancel() -> @kernel.Thm
+
+pub fn card_le_add_lcancel_eq() -> @kernel.Thm
+
+pub fn card_le_add_rcancel() -> @kernel.Thm
+
+pub fn card_le_add_rcancel_eq() -> @kernel.Thm
+
+pub fn card_le_addl() -> @kernel.Thm
+
+pub fn card_le_addr() -> @kernel.Thm
+
+pub fn card_le_antisym() -> @kernel.Thm
+
+pub fn card_le_card() -> @kernel.Thm
+
+pub fn card_le_card_imp() -> @kernel.Thm
+
+pub fn card_le_cartesian_product() -> @kernel.Thm
+
+pub fn card_le_cartesian_product_subindex() -> @kernel.Thm
+
+pub fn card_le_cong() -> @kernel.Thm
+
+pub fn card_le_countable() -> @kernel.Thm
+
+pub fn card_le_countable_infinite() -> @kernel.Thm
+
+pub fn card_le_countable_subsets() -> @kernel.Thm
+
+pub fn card_le_disjoint_unions() -> @kernel.Thm
+
+pub fn card_le_empty() -> @kernel.Thm
+
+pub fn card_le_eq_subset() -> @kernel.Thm
+
+pub fn card_le_eq_subset_univ() -> @kernel.Thm
+
+pub fn card_le_exists() -> @kernel.Thm
+
+pub fn card_le_exp() -> @kernel.Thm
+
+pub fn card_le_exp_left() -> @kernel.Thm
+
+pub fn card_le_exp_right() -> @kernel.Thm
+
+pub fn card_le_finite() -> @kernel.Thm
+
+pub fn card_le_finite_infinite() -> @kernel.Thm
+
+pub fn card_le_finite_subsets() -> @kernel.Thm
+
+pub fn card_le_image() -> @kernel.Thm
+
+pub fn card_le_image_gen() -> @kernel.Thm
+
+pub fn card_le_images() -> @kernel.Thm
+
+pub fn card_le_infinite() -> @kernel.Thm
+
+pub fn card_le_list() -> @kernel.Thm
+
+pub fn card_le_lt() -> @kernel.Thm
+
+pub fn card_le_mul() -> @kernel.Thm
+
+pub fn card_le_powerset() -> @kernel.Thm
+
+pub fn card_le_preimage() -> @kernel.Thm
+
+pub fn card_le_refl() -> @kernel.Thm
+
+pub fn card_le_relational() -> @kernel.Thm
+
+pub fn card_le_relational_full() -> @kernel.Thm
+
+pub fn card_le_restricted_funspace() -> @kernel.Thm
+
+pub fn card_le_restricted_funspace_infinite() -> @kernel.Thm
+
+pub fn card_le_sing() -> @kernel.Thm
+
+pub fn card_le_square() -> @kernel.Thm
+
+pub fn card_le_subpowerset() -> @kernel.Thm
+
+pub fn card_le_subset() -> @kernel.Thm
+
+pub fn card_le_total() -> @kernel.Thm
+
+pub fn card_le_trans() -> @kernel.Thm
+
+pub fn card_le_unions() -> @kernel.Thm
+
+pub fn card_le_unions2() -> @kernel.Thm
+
+pub fn card_le_univ() -> @kernel.Thm
+
+pub fn card_let_total() -> @kernel.Thm
+
+pub fn card_let_trans() -> @kernel.Thm
+
+pub fn card_lt_add() -> @kernel.Thm
+
+pub fn card_lt_card() -> @kernel.Thm
+
+pub fn card_lt_cong() -> @kernel.Thm
+
+pub fn card_lt_countable_uncountable() -> @kernel.Thm
+
+pub fn card_lt_finite_infinite() -> @kernel.Thm
+
+pub fn card_lt_imp_le() -> @kernel.Thm
+
+pub fn card_lt_imp_suc_le() -> @kernel.Thm
+
+pub fn card_lt_le() -> @kernel.Thm
+
+pub fn card_lt_num_real() -> @kernel.Thm
+
+pub fn card_lt_refl() -> @kernel.Thm
+
+pub fn card_lt_total() -> @kernel.Thm
+
+pub fn card_lt_trans() -> @kernel.Thm
+
+pub fn card_lte_total() -> @kernel.Thm
+
+pub fn card_lte_trans() -> @kernel.Thm
+
+pub fn card_mul2_absorb_le() -> @kernel.Thm
+
+pub fn card_mul2_absorb_le_alt() -> @kernel.Thm
+
+pub fn card_mul_absorb() -> @kernel.Thm
+
+pub fn card_mul_absorb_le() -> @kernel.Thm
+
+pub fn card_mul_assoc() -> @kernel.Thm
+
+pub fn card_mul_c() -> @kernel.Thm
+
+pub fn card_mul_cong() -> @kernel.Thm
+
+pub fn card_mul_exp() -> @kernel.Thm
+
+pub fn card_mul_finite() -> @kernel.Thm
+
+pub fn card_mul_finite_eq() -> @kernel.Thm
+
+pub fn card_mul_lid() -> @kernel.Thm
+
+pub fn card_mul_lt_infinite() -> @kernel.Thm
+
+pub fn card_mul_lt_lemma() -> @kernel.Thm
+
+pub fn card_mul_rid() -> @kernel.Thm
+
+pub fn card_mul_sym() -> @kernel.Thm
+
+pub fn card_not_le() -> @kernel.Thm
+
+pub fn card_not_lt() -> @kernel.Thm
+
+pub fn card_powerset_cong() -> @kernel.Thm
+
+pub fn card_rdistrib() -> @kernel.Thm
+
+pub fn card_sing_le() -> @kernel.Thm
+
+pub fn card_square_infinite() -> @kernel.Thm
+
+pub fn card_square_num() -> @kernel.Thm
+
+pub fn card_union_absorb_left() -> @kernel.Thm
+
+pub fn card_union_absorb_right() -> @kernel.Thm
+
+pub fn cartesian_product_const() -> @kernel.Thm
+
+pub fn countable_alt() -> @kernel.Thm
+
+pub fn countable_as_image() -> @kernel.Thm
+
+pub fn countable_as_image_num_subset() -> @kernel.Thm
+
+pub fn countable_as_image_subset() -> @kernel.Thm
+
+pub fn countable_as_image_subset_eq() -> @kernel.Thm
+
+pub fn countable_as_injective_image() -> @kernel.Thm
+
+pub fn countable_as_injective_image_subset() -> @kernel.Thm
+
+pub fn countable_ascending_chain() -> @kernel.Thm
+
+pub fn countable_card_add() -> @kernel.Thm
+
+pub fn countable_card_add_eq() -> @kernel.Thm
+
+pub fn countable_card_mul() -> @kernel.Thm
+
+pub fn countable_card_mul_eq() -> @kernel.Thm
+
+pub fn countable_cart() -> @kernel.Thm
+
+pub fn countable_cartesian_product() -> @kernel.Thm
+
+pub fn countable_cases() -> @kernel.Thm
+
+pub fn countable_cross() -> @kernel.Thm
+
+pub fn countable_delete() -> @kernel.Thm
+
+pub fn countable_descending_chain() -> @kernel.Thm
+
+pub fn countable_diff() -> @kernel.Thm
+
+pub fn countable_diff_finite() -> @kernel.Thm
+
+pub fn countable_disjoint_union_of_idempot() -> @kernel.Thm
+
+pub fn countable_empty() -> @kernel.Thm
+
+pub fn countable_finite_subsets() -> @kernel.Thm
+
+pub fn countable_fld() -> @kernel.Thm
+
+pub fn countable_image() -> @kernel.Thm
+
+pub fn countable_image_eq() -> @kernel.Thm
+
+pub fn countable_image_eq_inj() -> @kernel.Thm
+
+pub fn countable_image_inj() -> @kernel.Thm
+
+pub fn countable_image_inj_eq() -> @kernel.Thm
+
+pub fn countable_image_inj_general() -> @kernel.Thm
+
+pub fn countable_imp_card_lt_real() -> @kernel.Thm
+
+pub fn countable_insert() -> @kernel.Thm
+
+pub fn countable_inter() -> @kernel.Thm
+
+pub fn countable_intersection_of_complement() -> @kernel.Thm
+
+pub fn countable_intersection_of_empty() -> @kernel.Thm
+
+pub fn countable_intersection_of_idempot() -> @kernel.Thm
+
+pub fn countable_intersection_of_inc() -> @kernel.Thm
+
+pub fn countable_intersection_of_inter() -> @kernel.Thm
+
+pub fn countable_intersection_of_inters() -> @kernel.Thm
+
+pub fn countable_intersection_of_union() -> @kernel.Thm
+
+pub fn countable_intersection_of_union_eq() -> @kernel.Thm
+
+pub fn countable_intersection_of_unions() -> @kernel.Thm
+
+pub fn countable_intersection_of_unions_nonempty() -> @kernel.Thm
+
+pub fn countable_list() -> @kernel.Thm
+
+pub fn countable_list_gen() -> @kernel.Thm
+
+pub fn countable_pcross() -> @kernel.Thm
+
+pub fn countable_pcross_eq() -> @kernel.Thm
+
+pub fn countable_product_dependent() -> @kernel.Thm
+
+pub fn countable_restrict() -> @kernel.Thm
+
+pub fn countable_restricted_funspace() -> @kernel.Thm
+
+pub fn countable_sing() -> @kernel.Thm
+
+pub fn countable_subset() -> @kernel.Thm
+
+pub fn countable_subset_image() -> @kernel.Thm
+
+pub fn countable_subset_num() -> @kernel.Thm
+
+pub fn countable_union() -> @kernel.Thm
+
+pub fn countable_union_imp() -> @kernel.Thm
+
+pub fn countable_union_of_ascending() -> @kernel.Thm
+
+pub fn countable_union_of_complement() -> @kernel.Thm
+
+pub fn countable_union_of_empty() -> @kernel.Thm
+
+pub fn countable_union_of_explicit() -> @kernel.Thm
+
+pub fn countable_union_of_idempot() -> @kernel.Thm
+
+pub fn countable_union_of_inc() -> @kernel.Thm
+
+pub fn countable_union_of_inter() -> @kernel.Thm
+
+pub fn countable_union_of_inter_eq() -> @kernel.Thm
+
+pub fn countable_union_of_inters() -> @kernel.Thm
+
+pub fn countable_union_of_inters_nonempty() -> @kernel.Thm
+
+pub fn countable_union_of_union() -> @kernel.Thm
+
+pub fn countable_union_of_unions() -> @kernel.Thm
+
+pub fn countable_unions() -> @kernel.Thm
+
+pub fn eq_c() -> @kernel.Thm
+
+pub fn eq_c_alt() -> @kernel.Thm
+
+pub fn eq_c_bijections() -> @kernel.Thm
+
+pub fn eq_c_bijections_disjoint() -> @kernel.Thm
+
+pub fn eq_c_bijections_extend() -> @kernel.Thm
+
+pub fn eq_c_bijections_subsets() -> @kernel.Thm
+
+pub fn eq_c_bijections_subsets_lt() -> @kernel.Thm
+
+pub fn eq_c_involution() -> @kernel.Thm
+
+pub fn exists_countable_subset_image() -> @kernel.Thm
+
+pub fn exists_countable_subset_image_inj() -> @kernel.Thm
+
+pub fn exists_sum_thm() -> @kernel.Thm
+
+pub fn exp_c() -> @kernel.Thm
+
+pub fn exp_c_v1() -> @kernel.Thm
+
+pub fn finite_card_lt() -> @kernel.Thm
+
+pub fn finite_cartesian_product() -> @kernel.Thm
+
+pub fn finite_imp_countable() -> @kernel.Thm
+
+pub fn flatten_lemma() -> @kernel.Thm
+
+pub fn forall_countable_as_image() -> @kernel.Thm
+
+pub fn forall_countable_subset_image() -> @kernel.Thm
+
+pub fn forall_countable_subset_image_inj() -> @kernel.Thm
+
+pub fn forall_sum_thm() -> @kernel.Thm
+
+pub fn in_card_add() -> @kernel.Thm
+
+pub fn in_card_mul() -> @kernel.Thm
+
+pub fn infinite_card_le() -> @kernel.Thm
+
+pub fn injective_left_inverse_nonempty() -> @kernel.Thm
+
+pub fn int_countable() -> @kernel.Thm
+
+pub fn int_infinite() -> @kernel.Thm
+
+pub fn le_c_image() -> @kernel.Thm
+
+pub fn le_c_image_subset() -> @kernel.Thm
+
+pub fn mul_c() -> @kernel.Thm
+
+pub fn mul_c_univ() -> @kernel.Thm
+
+pub fn num_countable() -> @kernel.Thm
+
+pub fn numseg_card_le() -> @kernel.Thm
+
+pub fn sum_cases() -> @kernel.Thm
+
+pub fn sum_distinct() -> @kernel.Thm
+
+pub fn sum_injective() -> @kernel.Thm
+
+pub fn tarski_set() -> @kernel.Thm
+
+pub fn trans_chain_tac(@kernel.Thm) -> ((@list.List[@kernel.Term]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn uncountable_real() -> @kernel.Thm
+
+pub fn union_le_add_c() -> @kernel.Thm
+
+pub fn wf_card_lt() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
