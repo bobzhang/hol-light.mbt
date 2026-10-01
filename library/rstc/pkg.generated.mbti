@@ -1,0 +1,286 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/rstc"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn inv() -> @kernel.Thm
+
+pub fn rc_cases() -> @kernel.Thm
+
+pub fn rc_closed() -> @kernel.Thm
+
+pub fn rc_explicit() -> @kernel.Thm
+
+pub fn rc_idemp() -> @kernel.Thm
+
+pub fn rc_inc() -> @kernel.Thm
+
+pub fn rc_induct() -> @kernel.Thm
+
+pub fn rc_inv() -> @kernel.Thm
+
+pub fn rc_mono() -> @kernel.Thm
+
+pub fn rc_refl() -> @kernel.Thm
+
+pub fn rc_rules() -> @kernel.Thm
+
+pub fn rc_sc() -> @kernel.Thm
+
+pub fn rc_sym() -> @kernel.Thm
+
+pub fn rc_tc() -> @kernel.Thm
+
+pub fn rc_trans() -> @kernel.Thm
+
+pub fn relpow() -> @kernel.Thm
+
+pub fn relpow_m() -> @kernel.Thm
+
+pub fn relpow_r() -> @kernel.Thm
+
+pub fn relpow_sequence() -> @kernel.Thm
+
+pub fn rsc() -> @kernel.Thm
+
+pub fn rsc_cases() -> @kernel.Thm
+
+pub fn rsc_closed() -> @kernel.Thm
+
+pub fn rsc_idemp() -> @kernel.Thm
+
+pub fn rsc_inc() -> @kernel.Thm
+
+pub fn rsc_inc_rc() -> @kernel.Thm
+
+pub fn rsc_inc_sc() -> @kernel.Thm
+
+pub fn rsc_induct() -> @kernel.Thm
+
+pub fn rsc_inv() -> @kernel.Thm
+
+pub fn rsc_mono() -> @kernel.Thm
+
+pub fn rsc_refl() -> @kernel.Thm
+
+pub fn rsc_sym() -> @kernel.Thm
+
+pub fn rstc() -> @kernel.Thm
+
+pub fn rstc_cases() -> @kernel.Thm
+
+pub fn rstc_cases_l() -> @kernel.Thm
+
+pub fn rstc_cases_r() -> @kernel.Thm
+
+pub fn rstc_closed() -> @kernel.Thm
+
+pub fn rstc_idemp() -> @kernel.Thm
+
+pub fn rstc_inc() -> @kernel.Thm
+
+pub fn rstc_inc_rc() -> @kernel.Thm
+
+pub fn rstc_inc_rsc() -> @kernel.Thm
+
+pub fn rstc_inc_rtc() -> @kernel.Thm
+
+pub fn rstc_inc_sc() -> @kernel.Thm
+
+pub fn rstc_inc_stc() -> @kernel.Thm
+
+pub fn rstc_inc_tc() -> @kernel.Thm
+
+pub fn rstc_induct() -> @kernel.Thm
+
+pub fn rstc_inv() -> @kernel.Thm
+
+pub fn rstc_mono() -> @kernel.Thm
+
+pub fn rstc_refl() -> @kernel.Thm
+
+pub fn rstc_rules() -> @kernel.Thm
+
+pub fn rstc_sym() -> @kernel.Thm
+
+pub fn rstc_trans() -> @kernel.Thm
+
+pub fn rstc_trans_l() -> @kernel.Thm
+
+pub fn rstc_trans_r() -> @kernel.Thm
+
+pub fn rtc() -> @kernel.Thm
+
+pub fn rtc_cases() -> @kernel.Thm
+
+pub fn rtc_cases_l() -> @kernel.Thm
+
+pub fn rtc_cases_r() -> @kernel.Thm
+
+pub fn rtc_closed() -> @kernel.Thm
+
+pub fn rtc_idemp() -> @kernel.Thm
+
+pub fn rtc_inc() -> @kernel.Thm
+
+pub fn rtc_inc_rc() -> @kernel.Thm
+
+pub fn rtc_inc_tc() -> @kernel.Thm
+
+pub fn rtc_induct() -> @kernel.Thm
+
+pub fn rtc_induct_l() -> @kernel.Thm
+
+pub fn rtc_induct_r() -> @kernel.Thm
+
+pub fn rtc_inv() -> @kernel.Thm
+
+pub fn rtc_mono() -> @kernel.Thm
+
+pub fn rtc_ne_imp_tc() -> @kernel.Thm
+
+pub fn rtc_refl() -> @kernel.Thm
+
+pub fn rtc_relpow() -> @kernel.Thm
+
+pub fn rtc_rules() -> @kernel.Thm
+
+pub fn rtc_stutter() -> @kernel.Thm
+
+pub fn rtc_sym() -> @kernel.Thm
+
+pub fn rtc_trans() -> @kernel.Thm
+
+pub fn rtc_trans_l() -> @kernel.Thm
+
+pub fn rtc_trans_r() -> @kernel.Thm
+
+pub fn rule_induct_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn sc_cases() -> @kernel.Thm
+
+pub fn sc_closed() -> @kernel.Thm
+
+pub fn sc_explicit() -> @kernel.Thm
+
+pub fn sc_idemp() -> @kernel.Thm
+
+pub fn sc_inc() -> @kernel.Thm
+
+pub fn sc_induct() -> @kernel.Thm
+
+pub fn sc_inv() -> @kernel.Thm
+
+pub fn sc_inv_strong() -> @kernel.Thm
+
+pub fn sc_mono() -> @kernel.Thm
+
+pub fn sc_rc() -> @kernel.Thm
+
+pub fn sc_refl() -> @kernel.Thm
+
+pub fn sc_rules() -> @kernel.Thm
+
+pub fn sc_sym() -> @kernel.Thm
+
+pub fn sc_tc() -> @kernel.Thm
+
+pub fn stc() -> @kernel.Thm
+
+pub fn stc_cases() -> @kernel.Thm
+
+pub fn stc_cases_l() -> @kernel.Thm
+
+pub fn stc_cases_r() -> @kernel.Thm
+
+pub fn stc_closed() -> @kernel.Thm
+
+pub fn stc_idemp() -> @kernel.Thm
+
+pub fn stc_inc() -> @kernel.Thm
+
+pub fn stc_inc_sc() -> @kernel.Thm
+
+pub fn stc_inc_tc() -> @kernel.Thm
+
+pub fn stc_induct() -> @kernel.Thm
+
+pub fn stc_inv() -> @kernel.Thm
+
+pub fn stc_mono() -> @kernel.Thm
+
+pub fn stc_refl() -> @kernel.Thm
+
+pub fn stc_sym() -> @kernel.Thm
+
+pub fn stc_trans() -> @kernel.Thm
+
+pub fn stc_trans_l() -> @kernel.Thm
+
+pub fn stc_trans_r() -> @kernel.Thm
+
+pub fn sym_alt() -> @kernel.Thm
+
+pub fn tc_cases() -> @kernel.Thm
+
+pub fn tc_cases_l() -> @kernel.Thm
+
+pub fn tc_cases_r() -> @kernel.Thm
+
+pub fn tc_closed() -> @kernel.Thm
+
+pub fn tc_idemp() -> @kernel.Thm
+
+pub fn tc_inc() -> @kernel.Thm
+
+pub fn tc_induct() -> @kernel.Thm
+
+pub fn tc_induct_l() -> @kernel.Thm
+
+pub fn tc_induct_r() -> @kernel.Thm
+
+pub fn tc_inv() -> @kernel.Thm
+
+pub fn tc_mono() -> @kernel.Thm
+
+pub fn tc_rc() -> @kernel.Thm
+
+pub fn tc_refl() -> @kernel.Thm
+
+pub fn tc_relpow() -> @kernel.Thm
+
+pub fn tc_rtc_cases_l() -> @kernel.Thm
+
+pub fn tc_rtc_cases_r() -> @kernel.Thm
+
+pub fn tc_rtc_tc_cases() -> @kernel.Thm
+
+pub fn tc_rules() -> @kernel.Thm
+
+pub fn tc_sc() -> @kernel.Thm
+
+pub fn tc_sym() -> @kernel.Thm
+
+pub fn tc_tc_rtc_cases() -> @kernel.Thm
+
+pub fn tc_trans() -> @kernel.Thm
+
+pub fn tc_trans_l() -> @kernel.Thm
+
+pub fn tc_trans_r() -> @kernel.Thm
+
+pub fn trans_alt() -> @kernel.Thm
+
+pub fn wf_tc() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
