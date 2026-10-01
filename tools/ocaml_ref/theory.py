@@ -27,6 +27,9 @@ CORE = ["theorems", "ind_defs", "class", "trivia", "canon", "meson", "firstorder
         "realarith", "real", "calc_rat", "int", "sets", "iterate", "cart", "define"]
 # the reference scripts load these (the prelude loads lib.ml .. equal.ml)
 USE_BEFORE = ["bool", "drule", "tactics", "itab", "simp"]
+# hol.ml's hand-ported files (loaded by the prelude or the scripts)
+LOADED = ["lib", "fusion", "basics", "nets", "printer", "preterm", "parser", "equal",
+          "bool", "drule", "tactics", "itab", "simp"]
 HAND = ["kernel", "lib", "num", "basics", "nets", "printer", "preterm", "parser", "pp",
         "equal", "bool", "drule", "tactics", "itab", "simp"]
 
@@ -44,18 +47,52 @@ def pkg_of(f):
     return s
 
 
+def strip_comments(text):
+    """OCaml text without (nested) comments; string literals kept."""
+    out, depth, i, in_str = [], 0, 0, False
+    while i < len(text):
+        c = text[i]
+        if in_str:
+            if depth == 0:
+                out.append(c)
+            if c == "\\" and i + 1 < len(text):
+                if depth == 0:
+                    out.append(text[i + 1])
+                i += 2
+                continue
+            if c == '"':
+                in_str = False
+            i += 1
+        elif text.startswith("(*", i):
+            depth += 1
+            i += 2
+        elif depth > 0 and text.startswith("*)", i):
+            depth -= 1
+            i += 2
+        else:
+            if c == '"':
+                in_str = True
+            if depth == 0:
+                out.append(c)
+            i += 1
+    return "".join(out)
+
+
 def needs(f):
     path = os.path.join(HOL, f if f.endswith(".ml") else f + ".ml")
-    return re.findall(r'needs\s+"([^"]+)"', open(path).read())
+    # the same rule as the translator's Translator.needs_of
+    return re.findall(r'(?<![A-Za-z0-9_\'])needs\s+"([^"]+)"', strip_comments(open(path).read()))
 
 
 def deps(f):
     """The files `f` needs outside hol.ml's list, dependencies first."""
-    seen = []
+    seen, visiting = [], [f]
 
     def visit(g):
-        if stem(g) in CORE or g in seen:
+        # hol.ml's files (hand-ported or translated) are already loaded
+        if stem(g) in CORE or stem(g) in LOADED or g in seen or g in visiting:
             return
+        visiting.append(g)
         for h in needs(g):
             visit(h)
         seen.append(g)
@@ -77,6 +114,11 @@ def setup(f):
     before = CORE[:CORE.index(name)] if name in CORE else CORE
     # translated packages, including the Stdlib replacements
     imports = HAND + ["omap", "oset"] + before + [pkg_of(d) for d in deps(f)]
+    # MoonBit imports packages by their last path component: no clashes
+    aliases = [os.path.basename(p) for p in imports + [pkg]] + ["list", "testkit"]
+    dup = sorted({a for a in aliases if aliases.count(a) > 1})
+    if dup:
+        sys.exit(f"package aliases collide for {f}: {dup}")
     text = "import {\n" + "".join(f'  "bobzhang/hol_light/{p}",\n' for p in imports)
     text += '  "moonbitlang/core/list",\n}\n\nimport {\n  "bobzhang/hol_light/testkit",\n} for "test"\n\n'
     text += 'warnings = "-unused_value-unused_trait_bound-unused_package-unused_error_type"\n'
@@ -154,7 +196,7 @@ def main():
     if not f.endswith(".ml"):
         f += ".ml"
     pkg0 = pkg_of(f)
-    aside = os.path.join(REF, "_build", "pkg_" + os.path.basename(pkg0))
+    aside = os.path.join(REF, "_build", "pkg_" + pkg0.replace("/", "__"))
     # an interrupted earlier run left the package aside: put it back
     if os.path.exists(aside):
         if os.path.exists(os.path.join(ROOT, pkg0)):

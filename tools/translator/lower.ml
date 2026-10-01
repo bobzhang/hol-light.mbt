@@ -1007,7 +1007,8 @@ module Lower = struct
     (* the Stdlib function (perhaps included into a module of the source),
        not one the source defines *)
     let from_stdlib =
-      match Filename.basename vd.Types.val_loc.Location.loc_start.Lexing.pos_fname with
+      (* the Stdlib's own file (no directory), not a source file of that name *)
+      match vd.Types.val_loc.Location.loc_start.Lexing.pos_fname with
       | "list.ml" | "list.mli" -> true
       | _ -> false
     in

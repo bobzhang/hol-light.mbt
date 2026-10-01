@@ -688,18 +688,39 @@ module Translator = struct
       let ic = open_in path in
       let text = really_input_string ic (in_channel_length ic) in
       close_in ic;
-      let acc = ref [] and i = ref 0 in
+      (* drop (nested) comments, keeping string literals intact *)
+      let buf = Buffer.create (String.length text) in
       let n = String.length text in
-      while !i < n - 6 do
-        if String.sub text !i 6 = "needs " then begin
-          let j = ref (!i + 6) in
-          while !j < n && text.[!j] = ' ' do incr j done;
-          if !j < n && text.[!j] = '"' then begin
-            let k = String.index_from text (!j + 1) '"' in
-            acc := String.sub text (!j + 1) (k - !j - 1) :: !acc;
-            i := k
-          end else i := !j
-        end else incr i
+      let depth = ref 0 and i = ref 0 and in_str = ref false in
+      while !i < n do
+        let c = text.[!i] in
+        if !in_str then begin
+          if !depth = 0 then Buffer.add_char buf c;
+          if c = '\\' && !i + 1 < n then (if !depth = 0 then Buffer.add_char buf text.[!i + 1]; i := !i + 2)
+          else (if c = '"' then in_str := false; incr i)
+        end
+        else if c = '(' && !i + 1 < n && text.[!i + 1] = '*' then (incr depth; i := !i + 2)
+        else if c = '*' && !i + 1 < n && text.[!i + 1] = ')' && !depth > 0 then (decr depth; i := !i + 2)
+        else begin
+          if c = '"' then in_str := true;
+          if !depth = 0 then Buffer.add_char buf (if c = '\t' || c = '\n' || c = '\r' then ' ' else c);
+          incr i
+        end
+      done;
+      let t = Buffer.contents buf in
+      let m = String.length t in
+      let ident ch = (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') || ch = '_' || ch = '\'' in
+      let acc = ref [] and k = ref 0 in
+      while !k + 5 < m do
+        if String.sub t !k 5 = "needs" && (!k = 0 || not (ident t.[!k - 1])) && not (ident t.[!k + 5]) then begin
+          let j = ref (!k + 5) in
+          while !j < m && t.[!j] = ' ' do incr j done;
+          if !j < m && t.[!j] = '"' then begin
+            let e = String.index_from t (!j + 1) '"' in
+            acc := String.sub t (!j + 1) (e - !j - 1) :: !acc;
+            k := e
+          end else k := !j
+        end else incr k
       done;
       List.rev !acc
     end
@@ -717,8 +738,10 @@ module Translator = struct
     if List.mem target list then upto_in target list
     else begin
       let seen = ref [] in
+      let visiting = ref [ target ] in
       let rec visit f =
-        if not (List.mem f !seen) && not (List.mem f list) then begin
+        if not (List.mem f !seen) && not (List.mem f list) && not (List.mem f !visiting) then begin
+          visiting := f :: !visiting;
           List.iter visit (needs_of ~hol:!hol_dir f);
           seen := !seen @ [ f ]
         end
