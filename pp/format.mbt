@@ -123,6 +123,13 @@ fn Formatter::queue_take(self : Formatter) -> QueueElem? {
     if self.queue_head == self.queue.length() {
       self.queue.clear()
       self.queue_head = 0
+    } else if self.queue_head >= 1024 &&
+      self.queue_head * 2 >= self.queue.length() {
+      // Release consumed entries so long streams do not accumulate them.
+      let rest = self.queue[self.queue_head:].to_owned()
+      self.queue.clear()
+      self.queue.append(rest)
+      self.queue_head = 0
     }
     Some(e)
   } else {
@@ -658,5 +665,27 @@ fn stdout_write(s : String) -> Unit {
 }
 
 ///|
-/// The formatter on standard output (OCaml's `std_formatter`).
-pub let std_formatter : Formatter = Formatter::new(stdout_write)
+/// Emit a pending partial line. Standard output is line-based here
+/// (`println`), so unlike OCaml the partial text ends with a newline.
+fn stdout_flush() -> Unit {
+  if !stdout_pending.is_empty() {
+    println(stdout_pending.to_string())
+    stdout_pending.reset()
+  }
+}
+
+///|
+/// The formatter on standard output (OCaml's `std_formatter`). Output is
+/// emitted line by line; `print_flush` also emits a pending partial line
+/// (followed by a newline, see `stdout_flush`).
+pub let std_formatter : Formatter = Formatter::new(
+  stdout_write,
+  out_flush=stdout_flush,
+)
+
+///|
+/// Number of entries held by the token queue (consumed or pending); for
+/// tests.
+pub fn Formatter::queue_length(self : Formatter) -> Int {
+  self.queue.length()
+}

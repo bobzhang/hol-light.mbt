@@ -179,4 +179,10 @@ functions, never through top-level side effects, so callers control loading.
   including closure-ordered tips and merges). `pp/` is done: a port of
   OCaml 4.14's Format engine; 300 random box/break documents at several
   margins and max-box limits match OCaml byte for byte (5,766 lines).
-  Next: `printer`, `preterm`, `parser`.
+  `printer/` is done: printer.ml plus the parse-status tables; it matches
+  upstream on 73 hand-built cases (types, infix precedence and
+  associativity, binders, sets, comprehensions, let, conditionals,
+  character strings, decimals, interface reversal, theorems, wrapping at
+  margins 78 and 30). Known difference: standard output is line-based, so
+  `print_flush` on `std_formatter` ends a partial line with a newline.
+  Next: `preterm`, `parser`, then large parse/print round-trip tests.

@@ -4,6 +4,7 @@ let needs (_:string) = ();;
 #use "fusion.ml";;
 #use "basics.ml";;
 #use "nets.ml";;
+#use "printer.ml";;
 
 let rec sty ty = match ty with
     Tyvar s -> "'" ^ s

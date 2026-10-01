@@ -6139,3 +6139,18 @@ test "Format engine matches OCaml's Format" {
     ),
   )
 }
+
+///|
+test "the queue does not retain consumed entries" {
+  let buf = StringBuilder()
+  let fmt = @pp.formatter_of_buffer(buf)
+  for _ in 0..<10000 {
+    fmt.open_vbox(0)
+    fmt.print_string(".")
+    fmt.print_space()
+    fmt.close_box()
+  }
+  @test.assert_eq(fmt.queue_length() < 4096, true)
+  fmt.print_flush()
+  @test.assert_eq(buf.to_string().length() > 10000, true)
+}

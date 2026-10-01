@@ -1,0 +1,151 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/printer"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/pp",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn binders() -> @list.List[String]
+
+pub fn delete_user_color_printer(String) -> Unit raise
+
+pub fn delete_user_printer(String) -> Unit raise
+
+pub fn get_infix_status(String) -> (Int, String) raise
+
+pub fn infixes() -> @list.List[(String, (Int, String))]
+
+pub fn install_user_color_printer(String, (@pp.Formatter, @kernel.Term) -> Unit raise) -> Unit
+
+pub fn install_user_printer(String, (@pp.Formatter, @kernel.Term) -> Unit raise) -> Unit
+
+pub fn is_prefix(String) -> Bool
+
+pub fn is_reserved_word(String) -> Bool
+
+pub fn isalnum(String) -> Bool
+
+pub fn isalpha(String) -> Bool
+
+pub fn isbra(String) -> Bool
+
+pub fn isnum(String) -> Bool
+
+pub fn issep(String) -> Bool
+
+pub fn isspace(String) -> Bool
+
+pub fn issymb(String) -> Bool
+
+pub fn name_of(@kernel.Term) -> String
+
+pub fn parse_as_binder(String) -> Unit
+
+pub fn parse_as_infix(String, (Int, String)) -> Unit
+
+pub fn parse_as_prefix(String) -> Unit
+
+pub fn parses_as_binder(String) -> Bool
+
+pub fn pp_print_colored_qterm(@pp.Formatter, @kernel.Term) -> Unit raise
+
+pub fn pp_print_colored_qtype(@pp.Formatter, @kernel.HolType) -> Unit raise
+
+pub fn pp_print_colored_string(String?, @pp.Formatter, String) -> Unit
+
+pub fn pp_print_colored_term(@pp.Formatter, @kernel.Term) -> Unit raise
+
+pub fn pp_print_colored_thm(@pp.Formatter, @kernel.Thm) -> Unit raise
+
+pub fn pp_print_colored_type(@pp.Formatter, @kernel.HolType) -> Unit raise
+
+pub fn pp_print_qterm(@pp.Formatter, @kernel.Term) -> Unit raise
+
+pub fn pp_print_qtype(@pp.Formatter, @kernel.HolType) -> Unit raise
+
+pub fn pp_print_term(@pp.Formatter, @kernel.Term) -> Unit raise
+
+pub fn pp_print_thm(@pp.Formatter, @kernel.Thm) -> Unit raise
+
+pub fn pp_print_type(@pp.Formatter, @kernel.HolType) -> Unit raise
+
+pub let prebroken_binops : @ref.Ref[@list.List[String]]
+
+pub fn prefixes() -> @list.List[String]
+
+pub let print_all_thm : @ref.Ref[Bool]
+
+pub fn print_qterm(@kernel.Term) -> Unit raise
+
+pub fn print_qtype(@kernel.HolType) -> Unit raise
+
+pub fn print_term(@kernel.Term) -> Unit raise
+
+pub fn print_thm(@kernel.Thm) -> Unit raise
+
+pub fn print_type(@kernel.HolType) -> Unit raise
+
+pub let print_types_of_subterms : @ref.Ref[Int]
+
+pub let print_unambiguous_comprehensions : @ref.Ref[Bool]
+
+pub let printer_color_binder : @ref.Ref[String?]
+
+pub let printer_color_const : @ref.Ref[String?]
+
+pub let printer_color_infix : @ref.Ref[String?]
+
+pub let printer_color_itypevar : @ref.Ref[String?]
+
+pub let printer_color_prefix : @ref.Ref[String?]
+
+pub let printer_color_resword : @ref.Ref[String?]
+
+pub let printer_color_type : @ref.Ref[String?]
+
+pub let printer_color_typevar : @ref.Ref[String?]
+
+pub fn reserve_words(@list.List[String]) -> Unit
+
+pub fn reserved_words() -> @list.List[String]
+
+pub let reverse_interface_mapping : @ref.Ref[Bool]
+
+pub fn string_of_term(@kernel.Term) -> String raise
+
+pub fn string_of_thm(@kernel.Thm) -> String raise
+
+pub fn string_of_type(@kernel.HolType) -> String raise
+
+pub let the_interface : @ref.Ref[@list.List[(String, (String, @kernel.HolType))]]
+
+pub let the_overload_skeletons : @ref.Ref[@list.List[(String, @kernel.HolType)]]
+
+pub fn try_user_color_printer(@pp.Formatter, @kernel.Term) -> Unit raise
+
+pub fn try_user_printer(@pp.Formatter, @kernel.Term) -> Unit raise
+
+pub let typify_universal_set : @ref.Ref[Bool]
+
+pub fn unparse_as_binder(String) -> Unit
+
+pub fn unparse_as_infix(String) -> Unit
+
+pub fn unparse_as_prefix(String) -> Unit
+
+pub fn unreserve_words(@list.List[String]) -> Unit
+
+pub let unspaced_binops : @ref.Ref[@list.List[String]]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+pub type UserPrinter = (String, (@pp.Formatter, @kernel.Term) -> Unit raise)
+
+// Traits

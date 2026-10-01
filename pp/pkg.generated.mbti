@@ -32,6 +32,7 @@ pub fn Formatter::print_int(Self, Int) -> Unit
 pub fn Formatter::print_newline(Self) -> Unit
 pub fn Formatter::print_space(Self) -> Unit
 pub fn Formatter::print_string(Self, String) -> Unit
+pub fn Formatter::queue_length(Self) -> Int
 pub fn Formatter::set_ellipsis_text(Self, String) -> Unit
 pub fn Formatter::set_margin(Self, Int) -> Unit
 pub fn Formatter::set_max_boxes(Self, Int) -> Unit

@@ -1,0 +1,103 @@
+A->B->A
+(A->B)->A
+A#B#A
+(A#B)#A
+A+B#num
+A+B->A#B
+num^3
+((A)list)list
+(A->B)#(num)list
+12
+A^B^num
+A^(B^num)
+?123
+infixes = ==>/4right =/12right ,/14right +/16right \//16right -/18left */20right /\/20right
+plus_assoc = x + y + z
+plus_left = (x + y) + z
+minus_left = x - y - z
+minus_right = x - (y - z)
+prec = (x + y) * (y + z * x)
+imp_chain = p ==> q ==> r \/ p /\ q
+neg = ~ ~(p /\ q)
+neg_atom = ~p
+eq = x + y = 42
+forall = !x y. x = y
+exists = ?p. p \/ ~p
+lambda = \x y. x + y
+app_lambda = (\x. x + x) 3
+suc = SUC (SUC (x + y))
+numerals = 0 + 1 + 123456789
+cond = if p then x else y
+cond_long = if c6 then 6
+ else if c5 then 5
+ else if c4 then 4
+ else if c3 then 3
+ else if c2 then 2
+ else if c1 then 1
+ else x
+pair = x,y,p
+finite_set = {x, y, 2}
+empty = {}
+univ = (:num)
+list = [x; y]
+string = "hi \"there\"\n\t\\"
+string_empty_is_list = ""
+decimal = #123.45
+decimal_int = #7
+decimal_bad = DECIMAL 7 3
+comprehension = {x + 1 | p ==> x = y}
+gabs = \(x,y). x + y
+let = let x = 1 and y = x + x in x * y
+wrap = long_variable_name_12 * y +
+long_variable_name_11 * y +
+long_variable_name_10 * y +
+long_variable_name_9 * y +
+long_variable_name_8 * y +
+long_variable_name_7 * y +
+long_variable_name_6 * y +
+long_variable_name_5 * y +
+long_variable_name_4 * y +
+long_variable_name_3 * y +
+long_variable_name_2 * y +
+long_variable_name_1 * y +
+x
+wrap_imp = hypothesis_1 = 1
+==> hypothesis_2 = 2
+==> hypothesis_3 = 3
+==> hypothesis_4 = 4
+==> hypothesis_5 = 5
+==> hypothesis_6 = 6
+==> hypothesis_7 = 7
+==> hypothesis_8 = 8
+==> p
+invented = (v:?7) = (v:?7)
+types_all = (x:num) + 1
+infix_atom = (+)
+binder_atom = (!) P
+interface = x ++ y
+thm = p /\ q
+|- p /\ q
+thm2 = p, q
+|- p = q
+wrap_30 = long_variable_name_5 * y +
+long_variable_name_4 * y +
+long_variable_name_3 * y +
+long_variable_name_2 * y +
+long_variable_name_1 * y +
+x
+thm_30 = q,
+long_variable_name_2 * y +
+long_variable_name_1 * y +
+x =
+x
+|- (long_variable_name_2 * y +
+    long_variable_name_1 * y +
+    x =
+    x) =
+   q
+wrap_78_again = long_variable_name_5 * y +
+long_variable_name_4 * y +
+long_variable_name_3 * y +
+long_variable_name_2 * y +
+long_variable_name_1 * y +
+x
