@@ -487,8 +487,15 @@ module Emit = struct
     in
     (* from now on these are top-level values, not locals *)
     List.iter (fun (id, _, _) -> Hashtbl.remove locals (Ident.unique_name id)) ids;
-    add_step (String.concat ", " (List.map (fun (id, _, _) -> Ident.name id) ids))
-      (stmts @ [ Let (pat, x) ] @ sets)
+    let bind =
+      if irrefutable vb.vb_pat then [ Let (pat, x) ] @ sets
+      else
+        (* `let [a; b] = e`: Match_failure unless the pattern matches *)
+        let file, line, col = Location.get_pos_info vb.vb_pat.pat_loc.Location.loc_start in
+        let fail = Raise (Call (Atom "@lib.MatchFailure", [ Atom (string_lit (Printf.sprintf "%s:%d:%d" (Filename.basename file) line col)) ])) in
+        [ Do (Match (x, [ (pat, (sets, Atom "()")); ("_", ([], fail)) ])) ]
+    in
+    add_step (String.concat ", " (List.map (fun (id, _, _) -> Ident.name id) ids)) (stmts @ bind)
 
   let emit_eval (e : expression) =
     match e.exp_desc with
@@ -594,8 +601,7 @@ module Emit = struct
                    | Tpat_var (id, _) ->
                        if is_function vb.vb_expr then emit_function (Ident.name id) id vb.vb_expr
                        else emit_value ~id (Ident.name id) vb.vb_expr
-                   | _ when irrefutable vb.vb_pat -> emit_pattern vb
-                   | _ -> unsupported vb.vb_loc "refutable top-level binding")
+                   | _ -> emit_pattern vb)
                  vbs
            | Tstr_type (_, decls) -> emit_types decls
            | Tstr_include { incl_mod = { mod_desc = (Tmod_structure str | Tmod_constraint ({ mod_desc = Tmod_structure str; _ }, _, _, _)); _ }; incl_type; _ } ->
@@ -691,7 +697,7 @@ module Emit = struct
            | Tstr_module { mb_expr = { mod_desc = (Tmod_functor _ | Tmod_constraint ({ mod_desc = Tmod_functor _; _ }, _, _, _)); _ }; _ } ->
                (* applications are specialized (Functors) *)
                ()
-           | Tstr_value (Asttypes.Nonrecursive, [ vb ]) when irrefutable vb.vb_pat -> emit_pattern vb
+           | Tstr_value (Asttypes.Nonrecursive, [ vb ]) -> emit_pattern vb
            | Tstr_value (Asttypes.Recursive, vbs) ->
                (* name and register every function first: they may call
                   each other (and themselves, through local identifiers) *)

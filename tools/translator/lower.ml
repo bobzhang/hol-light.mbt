@@ -619,7 +619,27 @@ module Lower = struct
                   (* an accessor: `pub fn x() -> T` for an OCaml value *)
                   { hstmts = []; hexp = Atom (q ^ "()"); hmty = r; hoty = Some oty }
               | _ -> { hstmts = []; hexp = Atom q; hmty = mty_of_decl decl; hoty = Some oty }))
-    | None -> unsupported loc "no provenance for %s" (Path.name path)
+    | None ->
+        (* the Num library (nums): the num package *)
+        (match String.split_on_char '.' (Path.name path) with
+         | [ "Num"; n ] ->
+             (match M.find ~root:!Names.root "num" n with
+              | Some decl -> { hstmts = []; hexp = Atom ("@num." ^ n); hmty = mty_of_decl decl; hoty = Some oty }
+              | None -> unsupported loc "no MoonBit declaration for Num.%s" n)
+         | [ n ] ->
+             (* bignum_num.ml (loaded before HOL Light): the num package *)
+             let n' =
+               match n with
+               | "num" -> "num_of_int"
+               | "=/" -> "eq_num" | "</" -> "lt_num" | "<=/" -> "le_num" | ">/" -> "gt_num" | ">=/" -> "ge_num"
+               | "<>/" -> "neq_num" | "+/" -> "add_num" | "-/" -> "sub_num" | "*/" -> "mult_num" | "//" -> "div_num"
+               | "**/" -> "power_num" | "quo_num" | "mod_num" -> n
+               | _ -> n
+             in
+             (match M.find ~root:!Names.root "num" n' with
+              | Some decl -> { hstmts = []; hexp = Atom ("@num." ^ n'); hmty = mty_of_decl decl; hoty = Some oty }
+              | None -> unsupported loc "no provenance for %s" n)
+         | _ -> unsupported loc "no provenance for %s" (Path.name path))
 
   (* ---------------------------------------------------------------- *)
   (* Scheduling                                                         *)

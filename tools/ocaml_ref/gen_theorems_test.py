@@ -13,6 +13,9 @@ import sys
 pkg = sys.argv[1] if len(sys.argv) > 1 else 'theorems'
 src = open(f'{pkg}/{pkg}.mbt').read()
 pairs = re.findall(r'/// `([A-Za-z0-9_\']+)`\npub fn ([a-z0-9_]+)\(\) -> @kernel\.Thm', src)
+# a redefined name: OCaml's scripts see only the last definition
+last = {o: i for i, (o, _) in enumerate(pairs)}
+pairs = [p for i, p in enumerate(pairs) if last[p[0]] == i]
 
 
 def splice(path, begin, end, lines):

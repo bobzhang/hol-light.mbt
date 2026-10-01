@@ -1,0 +1,82 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/nums"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn bit0_def() -> @kernel.Thm
+
+pub fn bit1_def() -> @kernel.Thm
+
+pub fn dest_small_numeral(@kernel.Term) -> Int raise
+
+pub fn ind_suc_0() -> @kernel.Thm
+
+pub fn ind_suc_0_exists() -> @kernel.Thm
+
+pub fn ind_suc_inj() -> @kernel.Thm
+
+pub fn ind_suc_spec() -> @kernel.Thm
+
+pub fn induct_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn infinity_ax() -> @kernel.Thm
+
+pub fn is_numeral(@kernel.Term) -> Bool raise
+
+pub fn mk_numeral(@num.Num) -> @kernel.Term raise
+
+pub fn mk_small_numeral(Int) -> @kernel.Term raise
+
+pub fn new_specification(@list.List[String]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn not_suc() -> @kernel.Thm
+
+pub fn not_suc_v1() -> @kernel.Thm
+
+pub fn num_axiom() -> @kernel.Thm
+
+pub fn num_axiom_v1() -> @kernel.Thm
+
+pub fn num_cases() -> @kernel.Thm
+
+pub fn num_induction() -> @kernel.Thm
+
+pub fn num_induction_v1() -> @kernel.Thm
+
+pub fn num_recursion() -> @kernel.Thm
+
+pub fn num_rep_cases() -> @kernel.Thm
+
+pub fn num_rep_induct() -> @kernel.Thm
+
+pub fn num_rep_rules() -> @kernel.Thm
+
+pub fn num_tydef() -> (@kernel.Thm, @kernel.Thm)
+
+pub fn numeral() -> @kernel.Thm
+
+pub fn one_one() -> @kernel.Thm
+
+pub fn onto() -> @kernel.Thm
+
+pub fn suc_def() -> @kernel.Thm
+
+pub fn suc_inj() -> @kernel.Thm
+
+pub fn the_specifications() -> @ref.Ref[@list.List[((@list.List[String], @kernel.Thm), @kernel.Thm)]]
+
+pub fn zero_def() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

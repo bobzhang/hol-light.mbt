@@ -61,6 +61,8 @@ pub fn mult_num(Num, Num) -> Num
 
 pub fn ne_num(Num, Num) -> Bool
 
+pub fn neq_num(Num, Num) -> Bool
+
 pub let num_0 : Num
 
 pub let num_1 : Num

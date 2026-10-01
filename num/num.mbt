@@ -668,3 +668,9 @@ pub fn num_of_string(s : String) -> Num raise {
   }
   of_big(acc)
 }
+
+///|
+/// `( <>/ )`
+pub fn neq_num(a : Num, b : Num) -> Bool {
+  !eq_num(a, b)
+}

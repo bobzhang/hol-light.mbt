@@ -571,6 +571,7 @@ module Names = struct
     match package_of_file file with
     | None -> []
     | Some "kernel" -> [ "kernel"; "basics" ]
+    | Some "lib" -> [ "lib"; "num" ] (* lib.ml's num functions *)
     | Some p -> [ p ]
 
   (* The MoonBit package and declaration for an upstream value (a module
