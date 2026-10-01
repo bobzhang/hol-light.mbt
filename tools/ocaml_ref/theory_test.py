@@ -53,6 +53,7 @@ test "{name} matches {name}.ml" {{
     log.show_theory_output(th)
   }}
   log.show_theory_trace("{name}")
+  log.capture_stdout()
   // BEGIN generated theorem list
   // END generated theorem list
   let tm = @parser.parse_term

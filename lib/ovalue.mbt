@@ -498,3 +498,31 @@ pub impl OCompare for Double with fn ocompare(self, other) {
 pub impl OHash for Double with fn ohash_visit(self, h) {
   h.double(self)
 }
+
+///|
+/// `compare` on `num`: numeric order (see the num package: OCaml's
+/// structural order depends on the representation and fails on big
+/// integers).
+pub impl OCompare for @num.Num with fn ocompare(self, other) {
+  @num.compare_num(self, other)
+}
+
+///|
+/// `Hashtbl.hash` on `num`: an `Int n` block for integers that fit OCaml's
+/// immediate ints (as upstream); other values hash their sign and
+/// constructor only (upstream ignores the custom blocks of big integers).
+pub impl OHash for @num.Num with fn ohash_visit(self, h) {
+  if @num.is_integer_num(self) {
+    let n = @num.int64_of_num(self) catch { _ => 0x4000000000000000L }
+    if n >= -0x4000000000000000L && n < 0x4000000000000000L {
+      h.block(0, 1)
+      h.int(n)
+      return
+    }
+    h.block(1, 2)
+    h.int(@num.sign_num(self).to_int64())
+  } else {
+    h.block(2, 2)
+    h.int(@num.sign_num(self).to_int64())
+  }
+}

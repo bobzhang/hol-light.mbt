@@ -1,0 +1,36 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/grobner"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn ideal_cofactors(((@kernel.Term) -> @num.Num raise, (@num.Num) -> @kernel.Term raise, (@kernel.Term) -> @kernel.Thm raise, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Thm, @kernel.Thm, (@kernel.Term) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term]) -> ((@kernel.Term) -> @list.List[@kernel.Term] raise) raise) raise
+
+pub fn num_ring(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_simplify_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ring(((@kernel.Term) -> @num.Num raise, (@num.Num) -> @kernel.Term raise, (@kernel.Term) -> @kernel.Thm raise, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Thm, @kernel.Thm, (@kernel.Term) -> @kernel.Thm raise)) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn ring_and_ideal_conv(((@kernel.Term) -> @num.Num raise, (@num.Num) -> @kernel.Term raise, (@kernel.Term) -> @kernel.Thm raise, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Thm, @kernel.Thm, (@kernel.Term) -> @kernel.Thm raise)) -> ((@kernel.Term) -> @kernel.Thm raise, (@list.List[@kernel.Term]) -> ((@kernel.Term) -> @list.List[@kernel.Term] raise) raise) raise
+
+// Errors
+
+// Types and methods
+pub(all) enum History {
+  Start(Int)
+  Mmul((@num.Num, @list.List[Int]), History)
+  Add(History, History)
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for History
+pub impl @lib.OHash for History
+
+// Type aliases
+
+// Traits

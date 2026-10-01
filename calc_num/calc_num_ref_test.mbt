@@ -18,6 +18,7 @@ test "calc_num matches calc_num.ml" {
     log.show_theory_output(th)
   }
   log.show_theory_trace("calc_num")
+  log.capture_stdout()
   // BEGIN generated theorem list
   log.attempt("ARITH_ZERO", () => sthm(@calc_num.arith_zero()))
   log.attempt("BIT0_0", () => sthm(@calc_num.bit0_0()))

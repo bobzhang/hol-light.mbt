@@ -18,6 +18,7 @@ test "wf matches wf.ml" {
     log.show_theory_output(th)
   }
   log.show_theory_trace("wf")
+  log.capture_stdout()
   // BEGIN generated theorem list
   log.attempt("WF", () => sthm(@wf.wf()))
   log.attempt("WF_EQ", () => sthm(@wf.wf_eq()))

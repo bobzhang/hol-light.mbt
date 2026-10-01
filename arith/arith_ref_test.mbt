@@ -18,6 +18,7 @@ test "arith matches arith.ml" {
     log.show_theory_output(th)
   }
   log.show_theory_trace("arith")
+  log.capture_stdout()
   // BEGIN generated theorem list
   log.attempt("PRE", () => sthm(@arith.pre()))
   log.attempt("ADD", () => sthm(@arith.add()))

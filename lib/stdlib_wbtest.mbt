@@ -116,3 +116,10 @@ test "hashtbl folds like OCaml" {
     content="delta=5 beta=4 x=1 beta=4 alpha=5 gamma=5",
   )
 }
+
+///|
+/// Hashtbl.hash of small nums (values from OCaml 4.14 with nums).
+test "num hashes like OCaml" {
+  inspect(hash(@num.num_of_int(5)), content="448001807")
+  inspect(hash(@num.num_of_int(123456)), content="63828017")
+}
