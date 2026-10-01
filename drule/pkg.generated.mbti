@@ -1,0 +1,59 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/drule"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn betas_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn deep_alpha(@list.List[(String, String)], @kernel.Term) -> @kernel.Term raise
+
+pub fn gen_part_match((@kernel.Term) -> @kernel.Term raise, @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn higher_rewrite_conv(@list.List[@kernel.Thm]) -> ((Bool) -> ((@kernel.Term) -> @kernel.Thm raise)) raise
+
+pub fn instantiate((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @kernel.Term) -> @kernel.Term raise
+
+pub fn instantiate_all((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @kernel.Thm) -> @kernel.Thm raise
+
+pub fn instantiate_rule((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @kernel.Thm) -> @kernel.Thm raise
+
+pub fn load() -> Unit raise
+
+pub fn match_mp(@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn mk_conj_rule(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn mk_disj_rule(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn mk_exists_rule(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn mk_forall_rule(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn mk_thm(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise
+
+pub fn mp_conv((@kernel.Term) -> @kernel.Thm raise, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn new_definition(@kernel.Term) -> @kernel.Thm raise
+
+pub fn part_match((@kernel.Term) -> @kernel.Term raise, @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn term_match(@list.List[@kernel.Term], @kernel.Term, @kernel.Term) -> (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise
+
+pub fn term_type_unify(@kernel.Term, @kernel.Term, (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise
+
+pub fn term_unify(@list.List[@kernel.Term], @kernel.Term, @kernel.Term) -> (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise
+
+pub fn type_unify(@kernel.HolType, @kernel.HolType, @list.List[(@kernel.HolType, @kernel.HolType)]) -> @list.List[(@kernel.HolType, @kernel.HolType)] raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+pub type Instantiation = (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])
+
+// Traits

@@ -6,6 +6,10 @@ import {
 }
 
 // Values
+pub fn ocaml_escaped(String) -> String
+
+pub fn start_trace() -> Unit
+
 pub fn sthm(@kernel.Thm) -> String
 
 pub fn stm(@kernel.Term) -> String
@@ -23,6 +27,7 @@ pub fn Log::capture_reports(Self) -> Unit
 pub fn Log::contents(Self) -> String
 pub fn Log::new() -> Self
 pub fn Log::out(Self, String) -> Unit
+pub fn Log::show_trace(Self, String) -> Unit
 
 // Type aliases
 

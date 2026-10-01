@@ -224,5 +224,10 @@ definitions register constants, quotations advance the type-variable and
   theorems are in write-once cells, quotations are parsed in OCaml's
   evaluation order, and it matches bool.ml on 79 checks, including the
   constants, definitions, parse tables, interface and all three counters
-  after loading. `testkit/` holds the shared test helpers. Next: `drule`,
-  `tactics`, …
+  after loading. `testkit/` holds the shared test helpers. `drule/` is done
+  (matching, unification, instantiation, PART_MATCH/MATCH_MP with
+  upstream's staging, which return closures, and new_definition; it
+  matches drule.ml including the load trace and counters).
+  Test-writing rule: the OCaml reference scripts bind effectful arguments
+  with explicit `let`s, because OCaml evaluates the script's own arguments
+  right to left. Next: `tactics`, …
