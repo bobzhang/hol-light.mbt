@@ -469,6 +469,27 @@ module Names = struct
   let package_of_file = function
     | "lib.ml" -> Some "lib"
     | "ocaml_map.ml" -> Some "omap"
+    | "define.ml" -> Some "define"
+    | "cart.ml" -> Some "cart"
+    | "iterate.ml" -> Some "iterate"
+    | "sets.ml" -> Some "sets"
+    | "int.ml" -> Some "int"
+    | "calc_rat.ml" -> Some "calc_rat"
+    | "real.ml" -> Some "real"
+    | "realarith.ml" -> Some "realarith"
+    | "calc_int.ml" -> Some "calc_int"
+    | "realax.ml" -> Some "realax"
+    | "lists.ml" -> Some "lists"
+    | "ind_types.ml" -> Some "ind_types"
+    | "grobner.ml" -> Some "grobner"
+    | "normalizer.ml" -> Some "normalizer"
+    | "calc_num.ml" -> Some "calc_num"
+    | "wf.ml" -> Some "wf"
+    | "arith.ml" -> Some "arith"
+    | "recursion.ml" -> Some "recursion"
+    | "nums.ml" -> Some "nums"
+    | "compute.ml" -> Some "compute"
+    | "pair.ml" -> Some "pair"
     | "ocaml_set.ml" -> Some "oset"
     | "fusion.ml" -> Some "kernel"
     | "basics.ml" -> Some "basics"
@@ -506,6 +527,7 @@ module Names = struct
     | "thenl_" -> Some "thenl" | "then1_" -> Some "then1"
     | "thenc_" -> Some "thenc" | "orelsec_" -> Some "orelsec"
     | "then_tcl_" -> Some "then_tcl" | "orelse_tcl_" -> Some "orelse_tcl"
+    | "_FALSITY_" -> Some "falsity"
     | _ -> None
 
   (* An uppercase name whose lowercase form is itself an OCaml value (e.g.
@@ -638,7 +660,12 @@ module Translator = struct
                  "tactics.ml"; "itab.ml"; "simp.ml"; "theorems.ml";
                  "ind_defs.ml"; "class.ml"; "trivia.ml"; "canon.ml";
                  "meson.ml"; "firstorder.ml"; "metis.ml"; "thecops.ml";
-                 "quot.ml"; "impconv.ml" ]
+                 "quot.ml"; "impconv.ml"; "pair.ml"; "compute.ml"; "nums.ml";
+                 "recursion.ml"; "arith.ml"; "wf.ml"; "calc_num.ml";
+                 "normalizer.ml"; "grobner.ml"; "ind_types.ml"; "lists.ml";
+                 "realax.ml"; "calc_int.ml"; "realarith.ml"; "real.ml";
+                 "calc_rat.ml"; "int.ml"; "sets.ml"; "iterate.ml"; "cart.ml";
+                 "define.ml" ]
 
   let rec upto target = function
     | [] -> []

@@ -15,6 +15,7 @@ module Main = struct
     | "firstorder.ml" -> ("firstorder/firstorder.mbt", [])
     | "quot.ml" -> ("quot/quot.mbt", [])
     | "impconv.ml" -> ("impconv/impconv.mbt", [])
+    | "pair.ml" -> ("pair/pair.mbt", [])
     | "metis.ml" -> ("metis/metis.mbt", [])
     | "thecops.ml" -> ("thecops/thecops.mbt", [])
     | "ocaml_map.ml" -> ("omap/omap.mbt", [])

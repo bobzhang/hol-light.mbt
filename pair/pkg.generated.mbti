@@ -1,0 +1,137 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/pair"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn _function() -> @kernel.Thm
+
+pub fn _guarded_pattern() -> @kernel.Thm
+
+pub fn _match() -> @kernel.Thm
+
+pub fn _seqpattern() -> @kernel.Thm
+
+pub fn _unguarded_pattern() -> @kernel.Thm
+
+pub fn choice_paired_thm() -> @kernel.Thm
+
+pub fn choice_unpair_thm() -> @kernel.Thm
+
+pub fn comma_def() -> @kernel.Thm
+
+pub fn curry_def() -> @kernel.Thm
+
+pub fn dest_pair(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn exists_curry() -> @kernel.Thm
+
+pub fn exists_pair_fun_thm() -> @kernel.Thm
+
+pub fn exists_pair_thm() -> @kernel.Thm
+
+pub fn exists_paired_thm() -> @kernel.Thm
+
+pub fn exists_swap_fun_thm() -> @kernel.Thm
+
+pub fn exists_tripled_thm() -> @kernel.Thm
+
+pub fn exists_uncurry() -> @kernel.Thm
+
+pub fn exists_unpair_fun_thm() -> @kernel.Thm
+
+pub fn exists_unpair_thm() -> @kernel.Thm
+
+pub fn forall_curry() -> @kernel.Thm
+
+pub fn forall_pair_fun_thm() -> @kernel.Thm
+
+pub fn forall_pair_thm() -> @kernel.Thm
+
+pub fn forall_paired_thm() -> @kernel.Thm
+
+pub fn forall_tripled_thm() -> @kernel.Thm
+
+pub fn forall_uncurry() -> @kernel.Thm
+
+pub fn forall_unpair_fun_thm() -> @kernel.Thm
+
+pub fn forall_unpair_thm() -> @kernel.Thm
+
+pub fn fst() -> @kernel.Thm
+
+pub fn fst_def() -> @kernel.Thm
+
+pub fn gabs_conv((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn gabs_def() -> @kernel.Thm
+
+pub fn gen_beta_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn geq_def() -> @kernel.Thm
+
+pub fn is_pair(@kernel.Term) -> Bool raise
+
+pub fn lambda_pair() -> @kernel.Thm
+
+pub fn lambda_pair_thm() -> @kernel.Thm
+
+pub fn lambda_triple() -> @kernel.Thm
+
+pub fn lambda_triple_thm() -> @kernel.Thm
+
+pub fn let_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn let_def() -> @kernel.Thm
+
+pub fn let_end_def() -> @kernel.Thm
+
+pub fn let_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn mk_pair((@kernel.Term, @kernel.Term)) -> @kernel.Term raise
+
+pub fn mk_pair_def() -> @kernel.Thm
+
+pub fn new_definition(@kernel.Term) -> @kernel.Thm raise
+
+pub fn pair() -> @kernel.Thm
+
+pub fn pair_eq() -> @kernel.Thm
+
+pub fn pair_exists_thm() -> @kernel.Thm
+
+pub fn pair_induct() -> @kernel.Thm
+
+pub fn pair_recursion() -> @kernel.Thm
+
+pub fn pair_surjective() -> @kernel.Thm
+
+pub fn paired_eta_thm() -> @kernel.Thm
+
+pub fn passoc_def() -> @kernel.Thm
+
+pub fn prod_tybij() -> @kernel.Thm
+
+pub fn rep_abs_pair() -> @kernel.Thm
+
+pub fn snd() -> @kernel.Thm
+
+pub fn snd_def() -> @kernel.Thm
+
+pub fn sublet_conv((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn the_definitions() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn uncurry_def() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
