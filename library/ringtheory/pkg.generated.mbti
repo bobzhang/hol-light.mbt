@@ -1,0 +1,4358 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/ringtheory"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn accp_domain_atomic() -> @kernel.Thm
+
+pub fn accp_domain_irreducible_factor_exists() -> @kernel.Thm
+
+pub fn accp_ring_proper_divisor_induct() -> @kernel.Thm
+
+pub fn bezout_domain_irreducible_eq_prime() -> @kernel.Thm
+
+pub fn bezout_integer_ring() -> @kernel.Thm
+
+pub fn bezout_quotient_ring() -> @kernel.Thm
+
+pub fn bezout_ring() -> @kernel.Thm
+
+pub fn bezout_ring_2() -> @kernel.Thm
+
+pub fn bezout_ring_comaximal_coprime() -> @kernel.Thm
+
+pub fn bezout_ring_coprime() -> @kernel.Thm
+
+pub fn bezout_ring_coprime_comaximal() -> @kernel.Thm
+
+pub fn bezout_ring_epimorphic_image() -> @kernel.Thm
+
+pub fn bezout_ring_finitely_generated_eq_principal_ideal() -> @kernel.Thm
+
+pub fn bezout_ring_imp_bezout() -> @kernel.Thm
+
+pub fn bezout_ring_imp_gcd() -> @kernel.Thm
+
+pub fn bezout_ring_irreducible_imp_prime() -> @kernel.Thm
+
+pub fn bezout_ring_localization() -> @kernel.Thm
+
+pub fn bezout_ring_setadd() -> @kernel.Thm
+
+pub fn bezout_ring_v1() -> @kernel.Thm
+
+pub fn bool_ring() -> @kernel.Thm
+
+pub fn bool_ring_carrier_has_size_2() -> @kernel.Thm
+
+pub fn bool_ring_v1() -> @kernel.Thm
+
+pub fn boolean_imp_bezout_ring() -> @kernel.Thm
+
+pub fn boolean_imp_vnregular_ring() -> @kernel.Thm
+
+pub fn boolean_integral_domain() -> @kernel.Thm
+
+pub fn boolean_prod_ring() -> @kernel.Thm
+
+pub fn boolean_product_ring() -> @kernel.Thm
+
+pub fn boolean_proper_ideal_complement() -> @kernel.Thm
+
+pub fn boolean_quotient_ring() -> @kernel.Thm
+
+pub fn boolean_ring() -> @kernel.Thm
+
+pub fn boolean_ring_10() -> @kernel.Thm
+
+pub fn boolean_ring_2() -> @kernel.Thm
+
+pub fn boolean_ring_bool_ring() -> @kernel.Thm
+
+pub fn boolean_ring_char() -> @kernel.Thm
+
+pub fn boolean_ring_divides() -> @kernel.Thm
+
+pub fn boolean_ring_double() -> @kernel.Thm
+
+pub fn boolean_ring_epimorphic_image() -> @kernel.Thm
+
+pub fn boolean_ring_irreducible() -> @kernel.Thm
+
+pub fn boolean_ring_maximal_eq_prime_ideal() -> @kernel.Thm
+
+pub fn boolean_ring_monomorphic_preimage() -> @kernel.Thm
+
+pub fn boolean_ring_multsys() -> @kernel.Thm
+
+pub fn boolean_ring_neg() -> @kernel.Thm
+
+pub fn boolean_ring_nilpotent() -> @kernel.Thm
+
+pub fn boolean_ring_of_num() -> @kernel.Thm
+
+pub fn boolean_ring_pow() -> @kernel.Thm
+
+pub fn boolean_ring_radical() -> @kernel.Thm
+
+pub fn boolean_ring_regular() -> @kernel.Thm
+
+pub fn boolean_ring_square() -> @kernel.Thm
+
+pub fn boolean_ring_subring_generated() -> @kernel.Thm
+
+pub fn boolean_ring_unit() -> @kernel.Thm
+
+pub fn boolean_ring_zerodivisor() -> @kernel.Thm
+
+pub fn card_divides_ring_epimorphic_image() -> @kernel.Thm
+
+pub fn card_divides_ring_monomorphic_image() -> @kernel.Thm
+
+pub fn card_eq_monomials_countable() -> @kernel.Thm
+
+pub fn card_eq_monomials_finite() -> @kernel.Thm
+
+pub fn card_eq_monomials_infinite() -> @kernel.Thm
+
+pub fn card_eq_poly_ring_countable() -> @kernel.Thm
+
+pub fn card_eq_poly_ring_finite() -> @kernel.Thm
+
+pub fn card_eq_poly_ring_infinite() -> @kernel.Thm
+
+pub fn card_eq_powser_ring_countable() -> @kernel.Thm
+
+pub fn card_eq_powser_ring_finite() -> @kernel.Thm
+
+pub fn card_eq_powser_ring_infinite() -> @kernel.Thm
+
+pub fn card_eq_ring_coset_ideal() -> @kernel.Thm
+
+pub fn card_eq_ring_cosets() -> @kernel.Thm
+
+pub fn card_eq_ring_image_kernel() -> @kernel.Thm
+
+pub fn card_eq_ring_isomorphic_image() -> @kernel.Thm
+
+pub fn card_eq_ring_monomorphic_image() -> @kernel.Thm
+
+pub fn card_integer_mod_ring() -> @kernel.Thm
+
+pub fn card_le_quotient_ring() -> @kernel.Thm
+
+pub fn card_le_ring_epimorphic_image() -> @kernel.Thm
+
+pub fn card_le_ring_monomorphic_image() -> @kernel.Thm
+
+pub fn card_prime_subring() -> @kernel.Thm
+
+pub fn card_quotient_ring_divides() -> @kernel.Thm
+
+pub fn card_ring_cosets_divides() -> @kernel.Thm
+
+pub fn carrier_subring_generated_subring() -> @kernel.Thm
+
+pub fn carrier_subring_of() -> @kernel.Thm
+
+pub fn cartesian_product_subring_of_product_ring() -> @kernel.Thm
+
+pub fn coeff() -> @kernel.Thm
+
+pub fn coeff_0() -> @kernel.Thm
+
+pub fn coeff_0_poly_recip_eq_0() -> @kernel.Thm
+
+pub fn coeff_above_deg() -> @kernel.Thm
+
+pub fn coeff_compose() -> @kernel.Thm
+
+pub fn coeff_in_carrier() -> @kernel.Thm
+
+pub fn coeff_in_carrier_alt() -> @kernel.Thm
+
+pub fn coeff_nonzero_le() -> @kernel.Thm
+
+pub fn coeff_nonzero_le_deg() -> @kernel.Thm
+
+pub fn coeff_poly_0() -> @kernel.Thm
+
+pub fn coeff_poly_1() -> @kernel.Thm
+
+pub fn coeff_poly_add() -> @kernel.Thm
+
+pub fn coeff_poly_const() -> @kernel.Thm
+
+pub fn coeff_poly_deriv() -> @kernel.Thm
+
+pub fn coeff_poly_lmul() -> @kernel.Thm
+
+pub fn coeff_poly_mul() -> @kernel.Thm
+
+pub fn coeff_poly_mul_alt() -> @kernel.Thm
+
+pub fn coeff_poly_mul_var() -> @kernel.Thm
+
+pub fn coeff_poly_mul_varpow() -> @kernel.Thm
+
+pub fn coeff_poly_neg() -> @kernel.Thm
+
+pub fn coeff_poly_recip() -> @kernel.Thm
+
+pub fn coeff_poly_rmul() -> @kernel.Thm
+
+pub fn coeff_poly_sub() -> @kernel.Thm
+
+pub fn coeff_poly_sum() -> @kernel.Thm
+
+pub fn coeff_poly_var() -> @kernel.Thm
+
+pub fn coeff_poly_var_mul() -> @kernel.Thm
+
+pub fn coeff_poly_varpow() -> @kernel.Thm
+
+pub fn coeff_poly_varpow_mul() -> @kernel.Thm
+
+pub fn coeff_powser_sum() -> @kernel.Thm
+
+pub fn coeff_v1() -> @kernel.Thm
+
+pub fn comaximal_radicals() -> @kernel.Thm
+
+pub fn compatible_monomial_order() -> @kernel.Thm
+
+pub fn cross_subring_of_prod_ring() -> @kernel.Thm
+
+pub fn disjoint_ring_cosets() -> @kernel.Thm
+
+pub fn eisenstein_irreducibility() -> @kernel.Thm
+
+pub fn eisenstein_irreducibility_fraction_ring() -> @kernel.Thm
+
+pub fn eisenstein_irreducibility_gen() -> @kernel.Thm
+
+pub fn euclidean_domain_imp_pid() -> @kernel.Thm
+
+pub fn euclidean_imp_principal_ideal_ring() -> @kernel.Thm
+
+pub fn euclidean_integer_ring() -> @kernel.Thm
+
+pub fn euclidean_poly_ring() -> @kernel.Thm
+
+pub fn euclidean_quotient_ring() -> @kernel.Thm
+
+pub fn euclidean_ring() -> @kernel.Thm
+
+pub fn euclidean_ring_alt() -> @kernel.Thm
+
+pub fn euclidean_ring_epimorphic_image() -> @kernel.Thm
+
+pub fn euclidean_ring_universal_side_divisor() -> @kernel.Thm
+
+pub fn euclidean_ring_v1() -> @kernel.Thm
+
+pub fn exists_fun_from_1() -> @kernel.Thm
+
+pub fn field() -> @kernel.Thm
+
+pub fn field_10() -> @kernel.Thm
+
+pub fn field_associates() -> @kernel.Thm
+
+pub fn field_bool_ring() -> @kernel.Thm
+
+pub fn field_coprime() -> @kernel.Thm
+
+pub fn field_div_eq_0() -> @kernel.Thm
+
+pub fn field_divides() -> @kernel.Thm
+
+pub fn field_epimorphic_image() -> @kernel.Thm
+
+pub fn field_epimorphism_imp_isomorphism() -> @kernel.Thm
+
+pub fn field_eq_all_divide_1() -> @kernel.Thm
+
+pub fn field_eq_all_units() -> @kernel.Thm
+
+pub fn field_eq_no_proper_ideals() -> @kernel.Thm
+
+pub fn field_eq_no_proper_ideals_eq() -> @kernel.Thm
+
+pub fn field_eq_proper_imp_maximal_ideal() -> @kernel.Thm
+
+pub fn field_eq_proper_imp_prime_ideal() -> @kernel.Thm
+
+pub fn field_eq_trivial_ideals() -> @kernel.Thm
+
+pub fn field_eq_trivial_ideals_eq() -> @kernel.Thm
+
+pub fn field_gcd() -> @kernel.Thm
+
+pub fn field_homomorphism_div() -> @kernel.Thm
+
+pub fn field_homomorphism_imp_monomorphism() -> @kernel.Thm
+
+pub fn field_homomorphism_inv() -> @kernel.Thm
+
+pub fn field_imp_bezout_ring() -> @kernel.Thm
+
+pub fn field_imp_integral_domain() -> @kernel.Thm
+
+pub fn field_imp_local_ring() -> @kernel.Thm
+
+pub fn field_imp_noetherian_ring() -> @kernel.Thm
+
+pub fn field_imp_nontrivial_ring() -> @kernel.Thm
+
+pub fn field_imp_pid() -> @kernel.Thm
+
+pub fn field_imp_ufd() -> @kernel.Thm
+
+pub fn field_imp_vnregular_ring() -> @kernel.Thm
+
+pub fn field_integer_mod_ring() -> @kernel.Thm
+
+pub fn field_inv_eq_0() -> @kernel.Thm
+
+pub fn field_irreducible() -> @kernel.Thm
+
+pub fn field_monic_associate() -> @kernel.Thm
+
+pub fn field_monic_irreducible_associate() -> @kernel.Thm
+
+pub fn field_mul_eq_0() -> @kernel.Thm
+
+pub fn field_mul_linv() -> @kernel.Thm
+
+pub fn field_mul_rinv() -> @kernel.Thm
+
+pub fn field_nilpotent() -> @kernel.Thm
+
+pub fn field_nilradical() -> @kernel.Thm
+
+pub fn field_nontrivial() -> @kernel.Thm
+
+pub fn field_poly_ring() -> @kernel.Thm
+
+pub fn field_pow_eq_0() -> @kernel.Thm
+
+pub fn field_prime() -> @kernel.Thm
+
+pub fn field_prime_subring() -> @kernel.Thm
+
+pub fn field_product_eq_0() -> @kernel.Thm
+
+pub fn field_quotient_ring() -> @kernel.Thm
+
+pub fn field_real_ring() -> @kernel.Thm
+
+pub fn field_regular() -> @kernel.Thm
+
+pub fn field_ring_homomorphism_monomorphism() -> @kernel.Thm
+
+pub fn field_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn field_unit() -> @kernel.Thm
+
+pub fn field_zerodivisor() -> @kernel.Thm
+
+pub fn finite_coeff_support() -> @kernel.Thm
+
+pub fn finite_fun_from_1() -> @kernel.Thm
+
+pub fn finite_ideal_generated() -> @kernel.Thm
+
+pub fn finite_integer_mod_ring() -> @kernel.Thm
+
+pub fn finite_integral_domain_char() -> @kernel.Thm
+
+pub fn finite_integral_domain_eq_field() -> @kernel.Thm
+
+pub fn finite_integral_domain_imp_field() -> @kernel.Thm
+
+pub fn finite_monomial_vars() -> @kernel.Thm
+
+pub fn finite_monomial_vars_1() -> @kernel.Thm
+
+pub fn finite_poly_vars() -> @kernel.Thm
+
+pub fn finite_polynomial_vars() -> @kernel.Thm
+
+pub fn finite_prime_subring() -> @kernel.Thm
+
+pub fn finite_prod_ring() -> @kernel.Thm
+
+pub fn finite_product_ring() -> @kernel.Thm
+
+pub fn finite_ring_epimorphic_image() -> @kernel.Thm
+
+pub fn finite_ring_monomorphic_preimage() -> @kernel.Thm
+
+pub fn finite_singleton_ring() -> @kernel.Thm
+
+pub fn finite_subring_generated() -> @kernel.Thm
+
+pub fn finitely_generated_ideal() -> @kernel.Thm
+
+pub fn finitely_generated_ideal_0() -> @kernel.Thm
+
+pub fn finitely_generated_ideal_alt() -> @kernel.Thm
+
+pub fn finitely_generated_ideal_carrier() -> @kernel.Thm
+
+pub fn finitely_generated_ideal_epimorphic_image() -> @kernel.Thm
+
+pub fn finitely_generated_ideal_generated() -> @kernel.Thm
+
+pub fn finitely_generated_ideal_imp_subset() -> @kernel.Thm
+
+pub fn finitely_generated_ideal_localization() -> @kernel.Thm
+
+pub fn finitely_generated_ideal_setadd() -> @kernel.Thm
+
+pub fn finitely_generated_ideal_subset() -> @kernel.Thm
+
+pub fn finitely_generated_imp_ring_ideal() -> @kernel.Thm
+
+pub fn first_ring_epimorphism_theorem() -> @kernel.Thm
+
+pub fn first_ring_isomorphism_theorem() -> @kernel.Thm
+
+pub fn first_ring_isomorphism_theorem_gen() -> @kernel.Thm
+
+pub fn first_ring_isomorphism_theorem_gen_alt() -> @kernel.Thm
+
+pub fn fld_monomial_divides() -> @kernel.Thm
+
+pub fn fld_monomial_le() -> @kernel.Thm
+
+pub fn forall_fun_from_1() -> @kernel.Thm
+
+pub fn fraction_domain() -> @kernel.Thm
+
+pub fn fraction_field() -> @kernel.Thm
+
+pub fn fraction_ring() -> @kernel.Thm
+
+pub fn fraction_ring_unit_eq_regular() -> @kernel.Thm
+
+pub fn fraction_ring_unit_or_zerodivisor() -> @kernel.Thm
+
+pub fn fraction_ring_universal() -> @kernel.Thm
+
+pub fn frobenius_fixed() -> @kernel.Thm
+
+pub fn fun_eq_coeff() -> @kernel.Thm
+
+pub fn fun_one_eq_one() -> @kernel.Thm
+
+pub fn fun_one_num_eq() -> @kernel.Thm
+
+pub fn has_size_prime_subring() -> @kernel.Thm
+
+pub fn ideal_generated() -> @kernel.Thm
+
+pub fn ideal_generated_0() -> @kernel.Thm
+
+pub fn ideal_generated_2() -> @kernel.Thm
+
+pub fn ideal_generated_by_epimorphic_image() -> @kernel.Thm
+
+pub fn ideal_generated_by_homomorphic_image() -> @kernel.Thm
+
+pub fn ideal_generated_by_ideal_generated() -> @kernel.Thm
+
+pub fn ideal_generated_cartesian_product() -> @kernel.Thm
+
+pub fn ideal_generated_componentwise() -> @kernel.Thm
+
+pub fn ideal_generated_cross() -> @kernel.Thm
+
+pub fn ideal_generated_empty() -> @kernel.Thm
+
+pub fn ideal_generated_eq_0() -> @kernel.Thm
+
+pub fn ideal_generated_explicit() -> @kernel.Thm
+
+pub fn ideal_generated_finitary() -> @kernel.Thm
+
+pub fn ideal_generated_finitary_alt() -> @kernel.Thm
+
+pub fn ideal_generated_finite() -> @kernel.Thm
+
+pub fn ideal_generated_finite_image() -> @kernel.Thm
+
+pub fn ideal_generated_inc() -> @kernel.Thm
+
+pub fn ideal_generated_inc_gen() -> @kernel.Thm
+
+pub fn ideal_generated_induct() -> @kernel.Thm
+
+pub fn ideal_generated_induct_strong() -> @kernel.Thm
+
+pub fn ideal_generated_insert() -> @kernel.Thm
+
+pub fn ideal_generated_insert_zero() -> @kernel.Thm
+
+pub fn ideal_generated_minimal() -> @kernel.Thm
+
+pub fn ideal_generated_minimal_eq() -> @kernel.Thm
+
+pub fn ideal_generated_mono() -> @kernel.Thm
+
+pub fn ideal_generated_nonempty() -> @kernel.Thm
+
+pub fn ideal_generated_pairwise() -> @kernel.Thm
+
+pub fn ideal_generated_refl() -> @kernel.Thm
+
+pub fn ideal_generated_restrict() -> @kernel.Thm
+
+pub fn ideal_generated_ring_carrier() -> @kernel.Thm
+
+pub fn ideal_generated_ring_ideal() -> @kernel.Thm
+
+pub fn ideal_generated_ring_ideal_eq() -> @kernel.Thm
+
+pub fn ideal_generated_ring_localization() -> @kernel.Thm
+
+pub fn ideal_generated_scale() -> @kernel.Thm
+
+pub fn ideal_generated_setadd_subset() -> @kernel.Thm
+
+pub fn ideal_generated_sing() -> @kernel.Thm
+
+pub fn ideal_generated_sing_alt() -> @kernel.Thm
+
+pub fn ideal_generated_sing_eq_carrier() -> @kernel.Thm
+
+pub fn ideal_generated_sing_setmul_left() -> @kernel.Thm
+
+pub fn ideal_generated_sing_setmul_right() -> @kernel.Thm
+
+pub fn ideal_generated_subset() -> @kernel.Thm
+
+pub fn ideal_generated_subset_carrier() -> @kernel.Thm
+
+pub fn ideal_generated_subset_carrier_subset() -> @kernel.Thm
+
+pub fn ideal_generated_union() -> @kernel.Thm
+
+pub fn ideal_localization_contraction() -> @kernel.Thm
+
+pub fn ideals_generated_sing_eq() -> @kernel.Thm
+
+pub fn ideals_generated_subset() -> @kernel.Thm
+
+pub fn image_poly_eval() -> @kernel.Thm
+
+pub fn image_poly_extend() -> @kernel.Thm
+
+pub fn image_poly_extend_1() -> @kernel.Thm
+
+pub fn image_ring_coset_switch() -> @kernel.Thm
+
+pub fn in_ideal_generated_self() -> @kernel.Thm
+
+pub fn in_ideal_generated_sing() -> @kernel.Thm
+
+pub fn in_ideal_generated_sing_eq() -> @kernel.Thm
+
+pub fn in_integer_mod_ring_carrier() -> @kernel.Thm
+
+pub fn in_poly_ring_carrier() -> @kernel.Thm
+
+pub fn in_poly_ring_subring_generated_finitary() -> @kernel.Thm
+
+pub fn in_ring_coset() -> @kernel.Thm
+
+pub fn in_ring_coset_self() -> @kernel.Thm
+
+pub fn in_ring_ideal_0() -> @kernel.Thm
+
+pub fn in_ring_ideal_add() -> @kernel.Thm
+
+pub fn in_ring_ideal_lmul() -> @kernel.Thm
+
+pub fn in_ring_ideal_mul() -> @kernel.Thm
+
+pub fn in_ring_ideal_neg() -> @kernel.Thm
+
+pub fn in_ring_ideal_rmul() -> @kernel.Thm
+
+pub fn in_ring_ideal_sub() -> @kernel.Thm
+
+pub fn in_ring_ideal_sum() -> @kernel.Thm
+
+pub fn in_ring_polynomial_carrier_compose() -> @kernel.Thm
+
+pub fn in_ring_powerseries_carrier_compose() -> @kernel.Thm
+
+pub fn in_subring_0() -> @kernel.Thm
+
+pub fn in_subring_1() -> @kernel.Thm
+
+pub fn in_subring_add() -> @kernel.Thm
+
+pub fn in_subring_generated_finitary() -> @kernel.Thm
+
+pub fn in_subring_int() -> @kernel.Thm
+
+pub fn in_subring_mul() -> @kernel.Thm
+
+pub fn in_subring_neg() -> @kernel.Thm
+
+pub fn in_subring_num() -> @kernel.Thm
+
+pub fn in_subring_pow() -> @kernel.Thm
+
+pub fn in_subring_product() -> @kernel.Thm
+
+pub fn in_subring_sub() -> @kernel.Thm
+
+pub fn in_subring_sum() -> @kernel.Thm
+
+pub fn infinite_integral_domain_poly_eval_all_zero() -> @kernel.Thm
+
+pub fn integer_mod_ring() -> @kernel.Thm
+
+pub fn integer_mod_ring_associates() -> @kernel.Thm
+
+pub fn integer_mod_ring_carrier_rem() -> @kernel.Thm
+
+pub fn integer_mod_ring_char() -> @kernel.Thm
+
+pub fn integer_mod_ring_clauses() -> @kernel.Thm
+
+pub fn integer_mod_ring_divides() -> @kernel.Thm
+
+pub fn integer_mod_ring_of_int() -> @kernel.Thm
+
+pub fn integer_mod_ring_of_num() -> @kernel.Thm
+
+pub fn integer_mod_ring_pow() -> @kernel.Thm
+
+pub fn integer_mod_ring_red_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn integer_mod_ring_sub() -> @kernel.Thm
+
+pub fn integer_mod_ring_trivial() -> @kernel.Thm
+
+pub fn integer_mod_ring_unit() -> @kernel.Thm
+
+pub fn integer_mod_ring_v1() -> @kernel.Thm
+
+pub fn integer_quotient_ring_isomorphic_mod() -> @kernel.Thm
+
+pub fn integer_ring() -> @kernel.Thm
+
+pub fn integer_ring_associates() -> @kernel.Thm
+
+pub fn integer_ring_char() -> @kernel.Thm
+
+pub fn integer_ring_coprime() -> @kernel.Thm
+
+pub fn integer_ring_coset_ideal_generated_sing() -> @kernel.Thm
+
+pub fn integer_ring_divides() -> @kernel.Thm
+
+pub fn integer_ring_gcd() -> @kernel.Thm
+
+pub fn integer_ring_ideal_generated_sing() -> @kernel.Thm
+
+pub fn integer_ring_of_int() -> @kernel.Thm
+
+pub fn integer_ring_of_num() -> @kernel.Thm
+
+pub fn integer_ring_pow() -> @kernel.Thm
+
+pub fn integer_ring_unit() -> @kernel.Thm
+
+pub fn integer_ring_v1() -> @kernel.Thm
+
+pub fn integral_domain() -> @kernel.Thm
+
+pub fn integral_domain_10() -> @kernel.Thm
+
+pub fn integral_domain_associates() -> @kernel.Thm
+
+pub fn integral_domain_associates_lmul2() -> @kernel.Thm
+
+pub fn integral_domain_associates_rmul2() -> @kernel.Thm
+
+pub fn integral_domain_bool_ring() -> @kernel.Thm
+
+pub fn integral_domain_char() -> @kernel.Thm
+
+pub fn integral_domain_divides_associates_mul_self() -> @kernel.Thm
+
+pub fn integral_domain_divides_lmul2() -> @kernel.Thm
+
+pub fn integral_domain_divides_mul_self() -> @kernel.Thm
+
+pub fn integral_domain_divides_prime_lmul() -> @kernel.Thm
+
+pub fn integral_domain_divides_prime_rmul() -> @kernel.Thm
+
+pub fn integral_domain_divides_rmul2() -> @kernel.Thm
+
+pub fn integral_domain_eq_all_regular() -> @kernel.Thm
+
+pub fn integral_domain_eq_no_zerodivisors() -> @kernel.Thm
+
+pub fn integral_domain_imp_nontrivial_ring() -> @kernel.Thm
+
+pub fn integral_domain_integer_mod_ring() -> @kernel.Thm
+
+pub fn integral_domain_integer_ring() -> @kernel.Thm
+
+pub fn integral_domain_irreducible() -> @kernel.Thm
+
+pub fn integral_domain_irreducible_alt() -> @kernel.Thm
+
+pub fn integral_domain_irreducible_divisors() -> @kernel.Thm
+
+pub fn integral_domain_localization() -> @kernel.Thm
+
+pub fn integral_domain_monomorphic_preimage() -> @kernel.Thm
+
+pub fn integral_domain_mul_eq_0() -> @kernel.Thm
+
+pub fn integral_domain_mul_eq_self() -> @kernel.Thm
+
+pub fn integral_domain_mul_lcancel() -> @kernel.Thm
+
+pub fn integral_domain_mul_lcancel_eq() -> @kernel.Thm
+
+pub fn integral_domain_mul_rcancel() -> @kernel.Thm
+
+pub fn integral_domain_mul_rcancel_eq() -> @kernel.Thm
+
+pub fn integral_domain_nilpotent() -> @kernel.Thm
+
+pub fn integral_domain_nilradical() -> @kernel.Thm
+
+pub fn integral_domain_nontrivial() -> @kernel.Thm
+
+pub fn integral_domain_poly_ring() -> @kernel.Thm
+
+pub fn integral_domain_pow_eq_0() -> @kernel.Thm
+
+pub fn integral_domain_powser_ring() -> @kernel.Thm
+
+pub fn integral_domain_prime_coprime_eq() -> @kernel.Thm
+
+pub fn integral_domain_prime_divides_or_coprime() -> @kernel.Thm
+
+pub fn integral_domain_prime_imp_irreducible() -> @kernel.Thm
+
+pub fn integral_domain_prime_product_divides() -> @kernel.Thm
+
+pub fn integral_domain_primes_coprime_or_associates() -> @kernel.Thm
+
+pub fn integral_domain_primes_divides_eq_associates() -> @kernel.Thm
+
+pub fn integral_domain_product_eq_0() -> @kernel.Thm
+
+pub fn integral_domain_quotient_ring() -> @kernel.Thm
+
+pub fn integral_domain_real_ring() -> @kernel.Thm
+
+pub fn integral_domain_regular() -> @kernel.Thm
+
+pub fn integral_domain_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn integral_domain_subring_generated() -> @kernel.Thm
+
+pub fn integral_domain_zerodivisor() -> @kernel.Thm
+
+pub fn inters_prime_ideals() -> @kernel.Thm
+
+pub fn irreducible_imp_poly_deg_nz() -> @kernel.Thm
+
+pub fn irreducible_primitive_poly_fraction_ring() -> @kernel.Thm
+
+pub fn isomorphic_copy_of_ring() -> @kernel.Thm
+
+pub fn isomorphic_poly_ring_trivial() -> @kernel.Thm
+
+pub fn isomorphic_poly_rings() -> @kernel.Thm
+
+pub fn isomorphic_powser_ring_trivial() -> @kernel.Thm
+
+pub fn isomorphic_powser_rings() -> @kernel.Thm
+
+pub fn isomorphic_prime_subring() -> @kernel.Thm
+
+pub fn isomorphic_prod_integer_mod_ring() -> @kernel.Thm
+
+pub fn isomorphic_prod_trivial_ring() -> @kernel.Thm
+
+pub fn isomorphic_product_ring_bijections() -> @kernel.Thm
+
+pub fn isomorphic_product_ring_disjoint_union() -> @kernel.Thm
+
+pub fn isomorphic_product_ring_insert() -> @kernel.Thm
+
+pub fn isomorphic_product_ring_sing() -> @kernel.Thm
+
+pub fn isomorphic_product_ring_support() -> @kernel.Thm
+
+pub fn isomorphic_product_ring_symdiff() -> @kernel.Thm
+
+pub fn isomorphic_ring() -> @kernel.Thm
+
+pub fn isomorphic_ring_bezoutness() -> @kernel.Thm
+
+pub fn isomorphic_ring_bool_ring() -> @kernel.Thm
+
+pub fn isomorphic_ring_booleanness() -> @kernel.Thm
+
+pub fn isomorphic_ring_card() -> @kernel.Thm
+
+pub fn isomorphic_ring_card_eq() -> @kernel.Thm
+
+pub fn isomorphic_ring_char() -> @kernel.Thm
+
+pub fn isomorphic_ring_eq() -> @kernel.Thm
+
+pub fn isomorphic_ring_euclideanness() -> @kernel.Thm
+
+pub fn isomorphic_ring_fieldness() -> @kernel.Thm
+
+pub fn isomorphic_ring_finiteness() -> @kernel.Thm
+
+pub fn isomorphic_ring_infiniteness() -> @kernel.Thm
+
+pub fn isomorphic_ring_integral_domainness() -> @kernel.Thm
+
+pub fn isomorphic_ring_locality() -> @kernel.Thm
+
+pub fn isomorphic_ring_noetherianness() -> @kernel.Thm
+
+pub fn isomorphic_ring_pidness() -> @kernel.Thm
+
+pub fn isomorphic_ring_poly_poly() -> @kernel.Thm
+
+pub fn isomorphic_ring_poly_poly_gen() -> @kernel.Thm
+
+pub fn isomorphic_ring_powser_powser() -> @kernel.Thm
+
+pub fn isomorphic_ring_powser_powser_gen() -> @kernel.Thm
+
+pub fn isomorphic_ring_prod_ring_swap_left() -> @kernel.Thm
+
+pub fn isomorphic_ring_prod_ring_swap_right() -> @kernel.Thm
+
+pub fn isomorphic_ring_prod_ring_sym() -> @kernel.Thm
+
+pub fn isomorphic_ring_prod_rings() -> @kernel.Thm
+
+pub fn isomorphic_ring_product_ring() -> @kernel.Thm
+
+pub fn isomorphic_ring_refl() -> @kernel.Thm
+
+pub fn isomorphic_ring_singleton_ring() -> @kernel.Thm
+
+pub fn isomorphic_ring_size() -> @kernel.Thm
+
+pub fn isomorphic_ring_sym() -> @kernel.Thm
+
+pub fn isomorphic_ring_trans() -> @kernel.Thm
+
+pub fn isomorphic_ring_triviality() -> @kernel.Thm
+
+pub fn isomorphic_ring_ufdness() -> @kernel.Thm
+
+pub fn isomorphic_ring_vnregularity() -> @kernel.Thm
+
+pub fn isomorphic_rings_poly_subring_generated() -> @kernel.Thm
+
+pub fn isomorphic_rings_powser_subring_generated() -> @kernel.Thm
+
+pub fn isomorphic_subcopy_of_ring() -> @kernel.Thm
+
+pub fn isomorphic_to_trivial_ring() -> @kernel.Thm
+
+pub fn isomorphic_transport_of_ring() -> @kernel.Thm
+
+pub fn isomorphic_trivial_rings() -> @kernel.Thm
+
+pub fn kaplansky_lemma() -> @kernel.Thm
+
+pub fn lagrange_theorem_ring() -> @kernel.Thm
+
+pub fn lagrange_theorem_ring_explicit() -> @kernel.Thm
+
+pub fn lambda_1_eq() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn local_imp_nontrivial_ring() -> @kernel.Thm
+
+pub fn local_powser_ring() -> @kernel.Thm
+
+pub fn local_quotient_ring() -> @kernel.Thm
+
+pub fn local_ring() -> @kernel.Thm
+
+pub fn local_ring_epimorphic_image() -> @kernel.Thm
+
+pub fn local_ring_ideal_nonunits() -> @kernel.Thm
+
+pub fn local_ring_localization() -> @kernel.Thm
+
+pub fn localequiv_mul_lcancel() -> @kernel.Thm
+
+pub fn localequiv_mul_rcancel() -> @kernel.Thm
+
+pub fn make_primitive_in_ideal() -> @kernel.Thm
+
+pub fn maximal_among_prime_ideals() -> @kernel.Thm
+
+pub fn maximal_containing_ideal_exists() -> @kernel.Thm
+
+pub fn maximal_excluding_imp_prime_ideal() -> @kernel.Thm
+
+pub fn maximal_ideal() -> @kernel.Thm
+
+pub fn maximal_ideal_0() -> @kernel.Thm
+
+pub fn maximal_ideal_correspondence() -> @kernel.Thm
+
+pub fn maximal_ideal_epimorphic_preimage() -> @kernel.Thm
+
+pub fn maximal_ideal_exists() -> @kernel.Thm
+
+pub fn maximal_ideal_imp_psubset() -> @kernel.Thm
+
+pub fn maximal_ideal_imp_subset() -> @kernel.Thm
+
+pub fn maximal_ideal_isomorphic_image_eq() -> @kernel.Thm
+
+pub fn maximal_ideal_nonunits() -> @kernel.Thm
+
+pub fn maximal_ideal_sing() -> @kernel.Thm
+
+pub fn maximal_ideal_sing_imp_irreducible() -> @kernel.Thm
+
+pub fn maximal_imp_prime_ideal() -> @kernel.Thm
+
+pub fn maximal_imp_proper_ideal() -> @kernel.Thm
+
+pub fn maximal_imp_ring_ideal() -> @kernel.Thm
+
+pub fn maximal_nonfg_imp_prime_ideal() -> @kernel.Thm
+
+pub fn maximal_superideal_exists() -> @kernel.Thm
+
+pub fn monic() -> @kernel.Thm
+
+pub fn monic_associates_eq() -> @kernel.Thm
+
+pub fn monic_cmul() -> @kernel.Thm
+
+pub fn monic_deg_0() -> @kernel.Thm
+
+pub fn monic_imp_nonzero() -> @kernel.Thm
+
+pub fn monic_in_trivial_ring() -> @kernel.Thm
+
+pub fn monic_poly_0() -> @kernel.Thm
+
+pub fn monic_poly_1() -> @kernel.Thm
+
+pub fn monic_poly_const() -> @kernel.Thm
+
+pub fn monic_poly_mul() -> @kernel.Thm
+
+pub fn monic_poly_pow() -> @kernel.Thm
+
+pub fn monic_poly_product() -> @kernel.Thm
+
+pub fn monic_poly_var() -> @kernel.Thm
+
+pub fn monic_subring_generated() -> @kernel.Thm
+
+pub fn monoidal_ring_add() -> @kernel.Thm
+
+pub fn monoidal_ring_mul() -> @kernel.Thm
+
+pub fn monomial() -> @kernel.Thm
+
+pub fn monomial_1() -> @kernel.Thm
+
+pub fn monomial_1_v1() -> @kernel.Thm
+
+pub fn monomial_deg() -> @kernel.Thm
+
+pub fn monomial_deg_1() -> @kernel.Thm
+
+pub fn monomial_deg_eq_0() -> @kernel.Thm
+
+pub fn monomial_deg_eq_0_alt() -> @kernel.Thm
+
+pub fn monomial_deg_le() -> @kernel.Thm
+
+pub fn monomial_deg_le_poly_deg() -> @kernel.Thm
+
+pub fn monomial_deg_mul() -> @kernel.Thm
+
+pub fn monomial_deg_one() -> @kernel.Thm
+
+pub fn monomial_deg_univariate() -> @kernel.Thm
+
+pub fn monomial_deg_v1() -> @kernel.Thm
+
+pub fn monomial_deg_var() -> @kernel.Thm
+
+pub fn monomial_div() -> @kernel.Thm
+
+pub fn monomial_div_divides() -> @kernel.Thm
+
+pub fn monomial_div_lmul() -> @kernel.Thm
+
+pub fn monomial_div_lmul_eq() -> @kernel.Thm
+
+pub fn monomial_div_rmul() -> @kernel.Thm
+
+pub fn monomial_div_rmul_eq() -> @kernel.Thm
+
+pub fn monomial_div_v1() -> @kernel.Thm
+
+pub fn monomial_divides() -> @kernel.Thm
+
+pub fn monomial_divides_1() -> @kernel.Thm
+
+pub fn monomial_divides_antisym() -> @kernel.Thm
+
+pub fn monomial_divides_exists() -> @kernel.Thm
+
+pub fn monomial_divides_lmul() -> @kernel.Thm
+
+pub fn monomial_divides_refl() -> @kernel.Thm
+
+pub fn monomial_divides_rmul() -> @kernel.Thm
+
+pub fn monomial_divides_trans() -> @kernel.Thm
+
+pub fn monomial_divisor() -> @kernel.Thm
+
+pub fn monomial_divisors_1() -> @kernel.Thm
+
+pub fn monomial_finite_divisorpairs() -> @kernel.Thm
+
+pub fn monomial_finite_divisors() -> @kernel.Thm
+
+pub fn monomial_ge_1() -> @kernel.Thm
+
+pub fn monomial_induct() -> @kernel.Thm
+
+pub fn monomial_le() -> @kernel.Thm
+
+pub fn monomial_le_antisym() -> @kernel.Thm
+
+pub fn monomial_le_divisor() -> @kernel.Thm
+
+pub fn monomial_le_improperly() -> @kernel.Thm
+
+pub fn monomial_le_lmul() -> @kernel.Thm
+
+pub fn monomial_le_lt() -> @kernel.Thm
+
+pub fn monomial_le_mono() -> @kernel.Thm
+
+pub fn monomial_le_mul2() -> @kernel.Thm
+
+pub fn monomial_le_poset() -> @kernel.Thm
+
+pub fn monomial_le_properly() -> @kernel.Thm
+
+pub fn monomial_le_refl() -> @kernel.Thm
+
+pub fn monomial_le_rmul() -> @kernel.Thm
+
+pub fn monomial_le_toset() -> @kernel.Thm
+
+pub fn monomial_le_trans() -> @kernel.Thm
+
+pub fn monomial_le_vars() -> @kernel.Thm
+
+pub fn monomial_le_vars_eq() -> @kernel.Thm
+
+pub fn monomial_let_antisym() -> @kernel.Thm
+
+pub fn monomial_let_mul2() -> @kernel.Thm
+
+pub fn monomial_let_trans() -> @kernel.Thm
+
+pub fn monomial_lt() -> @kernel.Thm
+
+pub fn monomial_lt_antisym() -> @kernel.Thm
+
+pub fn monomial_lt_imp_le() -> @kernel.Thm
+
+pub fn monomial_lt_improperly() -> @kernel.Thm
+
+pub fn monomial_lt_lmul() -> @kernel.Thm
+
+pub fn monomial_lt_mono() -> @kernel.Thm
+
+pub fn monomial_lt_mul2() -> @kernel.Thm
+
+pub fn monomial_lt_properly() -> @kernel.Thm
+
+pub fn monomial_lt_refl() -> @kernel.Thm
+
+pub fn monomial_lt_rmul() -> @kernel.Thm
+
+pub fn monomial_lt_toset() -> @kernel.Thm
+
+pub fn monomial_lt_trans() -> @kernel.Thm
+
+pub fn monomial_lt_vars() -> @kernel.Thm
+
+pub fn monomial_lt_vars_eq() -> @kernel.Thm
+
+pub fn monomial_lte_antisym() -> @kernel.Thm
+
+pub fn monomial_lte_mul2() -> @kernel.Thm
+
+pub fn monomial_lte_trans() -> @kernel.Thm
+
+pub fn monomial_mono() -> @kernel.Thm
+
+pub fn monomial_mul() -> @kernel.Thm
+
+pub fn monomial_mul_ac() -> @kernel.Thm
+
+pub fn monomial_mul_assoc() -> @kernel.Thm
+
+pub fn monomial_mul_eq_1() -> @kernel.Thm
+
+pub fn monomial_mul_eq_var() -> @kernel.Thm
+
+pub fn monomial_mul_lcancel() -> @kernel.Thm
+
+pub fn monomial_mul_lid() -> @kernel.Thm
+
+pub fn monomial_mul_rcancel() -> @kernel.Thm
+
+pub fn monomial_mul_restrict() -> @kernel.Thm
+
+pub fn monomial_mul_rid() -> @kernel.Thm
+
+pub fn monomial_mul_sym() -> @kernel.Thm
+
+pub fn monomial_mul_v1() -> @kernel.Thm
+
+pub fn monomial_mul_var_one() -> @kernel.Thm
+
+pub fn monomial_pointwise_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn monomial_restrict() -> @kernel.Thm
+
+pub fn monomial_restrict_eq() -> @kernel.Thm
+
+pub fn monomial_restrict_mul() -> @kernel.Thm
+
+pub fn monomial_restrict_refl() -> @kernel.Thm
+
+pub fn monomial_restrict_v1() -> @kernel.Thm
+
+pub fn monomial_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn monomial_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn monomial_univ() -> @kernel.Thm
+
+pub fn monomial_univ_1() -> @kernel.Thm
+
+pub fn monomial_v1() -> @kernel.Thm
+
+pub fn monomial_var() -> @kernel.Thm
+
+pub fn monomial_var_1() -> @kernel.Thm
+
+pub fn monomial_var_divides() -> @kernel.Thm
+
+pub fn monomial_var_divides_mul() -> @kernel.Thm
+
+pub fn monomial_var_eq() -> @kernel.Thm
+
+pub fn monomial_var_v1() -> @kernel.Thm
+
+pub fn monomial_vars() -> @kernel.Thm
+
+pub fn monomial_vars_1() -> @kernel.Thm
+
+pub fn monomial_vars_divisor() -> @kernel.Thm
+
+pub fn monomial_vars_eq_empty() -> @kernel.Thm
+
+pub fn monomial_vars_mul() -> @kernel.Thm
+
+pub fn monomial_vars_restrict() -> @kernel.Thm
+
+pub fn monomial_vars_univariate() -> @kernel.Thm
+
+pub fn monomial_vars_var() -> @kernel.Thm
+
+pub fn monomials_poly_reindex() -> @kernel.Thm
+
+pub fn neutral_ring_add() -> @kernel.Thm
+
+pub fn neutral_ring_mul() -> @kernel.Thm
+
+pub fn noetherian_domain_atomic() -> @kernel.Thm
+
+pub fn noetherian_domain_irreducible_factor_exists() -> @kernel.Thm
+
+pub fn noetherian_local_ring_localization() -> @kernel.Thm
+
+pub fn noetherian_poly_ring() -> @kernel.Thm
+
+pub fn noetherian_poly_ring_1() -> @kernel.Thm
+
+pub fn noetherian_powser_ring() -> @kernel.Thm
+
+pub fn noetherian_powser_ring_1() -> @kernel.Thm
+
+pub fn noetherian_prod_ring() -> @kernel.Thm
+
+pub fn noetherian_product_ring() -> @kernel.Thm
+
+pub fn noetherian_quotient_ring() -> @kernel.Thm
+
+pub fn noetherian_ring() -> @kernel.Thm
+
+pub fn noetherian_ring_epimorphic_image() -> @kernel.Thm
+
+pub fn noetherian_ring_eq_acc() -> @kernel.Thm
+
+pub fn noetherian_ring_eq_fg_prime_ideals() -> @kernel.Thm
+
+pub fn noetherian_ring_eq_maximal() -> @kernel.Thm
+
+pub fn noetherian_ring_localization() -> @kernel.Thm
+
+pub fn noetherian_ring_v1() -> @kernel.Thm
+
+pub fn nonfinitely_generated_imp_proper_ideal() -> @kernel.Thm
+
+pub fn nonprincipal_imp_proper_ideal() -> @kernel.Thm
+
+pub fn not_field_integer_ring() -> @kernel.Thm
+
+pub fn not_trivial_bool_ring() -> @kernel.Thm
+
+pub fn not_trivial_integer_ring() -> @kernel.Thm
+
+pub fn pairwise_disjoint_ring_cosets() -> @kernel.Thm
+
+pub fn pid() -> @kernel.Thm
+
+pub fn pid_eq_accp_bezout_domain() -> @kernel.Thm
+
+pub fn pid_eq_bezout_atomic() -> @kernel.Thm
+
+pub fn pid_eq_integral_domain_prime_principal() -> @kernel.Thm
+
+pub fn pid_eq_noetherian_bezout_domain() -> @kernel.Thm
+
+pub fn pid_eq_ufd_bezout_ring() -> @kernel.Thm
+
+pub fn pid_eq_ufd_prime_maximal() -> @kernel.Thm
+
+pub fn pid_imp_bezout_ring() -> @kernel.Thm
+
+pub fn pid_imp_integral_domain() -> @kernel.Thm
+
+pub fn pid_imp_noetherian_ring() -> @kernel.Thm
+
+pub fn pid_imp_ufd() -> @kernel.Thm
+
+pub fn pid_integer_ring() -> @kernel.Thm
+
+pub fn pid_irreducible_eq_prime() -> @kernel.Thm
+
+pub fn pid_maximal_eq_prime_ideal() -> @kernel.Thm
+
+pub fn pid_poly_ring() -> @kernel.Thm
+
+pub fn pid_ring_localization() -> @kernel.Thm
+
+pub fn poly_0() -> @kernel.Thm
+
+pub fn poly_0_v1() -> @kernel.Thm
+
+pub fn poly_1() -> @kernel.Thm
+
+pub fn poly_add() -> @kernel.Thm
+
+pub fn poly_add_assoc() -> @kernel.Thm
+
+pub fn poly_add_ldistrib() -> @kernel.Thm
+
+pub fn poly_add_lneg() -> @kernel.Thm
+
+pub fn poly_add_lzero() -> @kernel.Thm
+
+pub fn poly_add_rzero() -> @kernel.Thm
+
+pub fn poly_add_sym() -> @kernel.Thm
+
+pub fn poly_carrier_subring_of_powser_ring() -> @kernel.Thm
+
+pub fn poly_clauses() -> @kernel.Thm
+
+pub fn poly_clear_denominators() -> @kernel.Thm
+
+pub fn poly_compose_homomorphism_add() -> @kernel.Thm
+
+pub fn poly_compose_homomorphism_const() -> @kernel.Thm
+
+pub fn poly_compose_homomorphism_mul() -> @kernel.Thm
+
+pub fn poly_compose_homomorphism_neg() -> @kernel.Thm
+
+pub fn poly_compose_homomorphism_pow() -> @kernel.Thm
+
+pub fn poly_compose_homomorphism_sub() -> @kernel.Thm
+
+pub fn poly_compose_homomorphism_var() -> @kernel.Thm
+
+pub fn poly_const() -> @kernel.Thm
+
+pub fn poly_const_0() -> @kernel.Thm
+
+pub fn poly_const_1() -> @kernel.Thm
+
+pub fn poly_const_add() -> @kernel.Thm
+
+pub fn poly_const_divides_coeffs() -> @kernel.Thm
+
+pub fn poly_const_divides_coeffs_eq() -> @kernel.Thm
+
+pub fn poly_const_divides_coeffs_rev() -> @kernel.Thm
+
+pub fn poly_const_divides_const() -> @kernel.Thm
+
+pub fn poly_const_eq() -> @kernel.Thm
+
+pub fn poly_const_eq_0() -> @kernel.Thm
+
+pub fn poly_const_eq_1() -> @kernel.Thm
+
+pub fn poly_const_mul() -> @kernel.Thm
+
+pub fn poly_const_neg() -> @kernel.Thm
+
+pub fn poly_const_of_num() -> @kernel.Thm
+
+pub fn poly_const_subring_generated() -> @kernel.Thm
+
+pub fn poly_const_v1() -> @kernel.Thm
+
+pub fn poly_deg() -> @kernel.Thm
+
+pub fn poly_deg_0() -> @kernel.Thm
+
+pub fn poly_deg_1() -> @kernel.Thm
+
+pub fn poly_deg_1_imp_irreducible() -> @kernel.Thm
+
+pub fn poly_deg_1_root() -> @kernel.Thm
+
+pub fn poly_deg_add() -> @kernel.Thm
+
+pub fn poly_deg_add_le() -> @kernel.Thm
+
+pub fn poly_deg_cmul() -> @kernel.Thm
+
+pub fn poly_deg_const() -> @kernel.Thm
+
+pub fn poly_deg_deriv() -> @kernel.Thm
+
+pub fn poly_deg_deriv_le() -> @kernel.Thm
+
+pub fn poly_deg_divides_le() -> @kernel.Thm
+
+pub fn poly_deg_divides_le_monic() -> @kernel.Thm
+
+pub fn poly_deg_divides_le_univariate() -> @kernel.Thm
+
+pub fn poly_deg_eq() -> @kernel.Thm
+
+pub fn poly_deg_eq_0() -> @kernel.Thm
+
+pub fn poly_deg_eq_0_alt() -> @kernel.Thm
+
+pub fn poly_deg_eq_0_unit() -> @kernel.Thm
+
+pub fn poly_deg_eq_coeff() -> @kernel.Thm
+
+pub fn poly_deg_eq_coeff_eq() -> @kernel.Thm
+
+pub fn poly_deg_eq_from_le() -> @kernel.Thm
+
+pub fn poly_deg_ge() -> @kernel.Thm
+
+pub fn poly_deg_ge_coeff() -> @kernel.Thm
+
+pub fn poly_deg_ge_coeff_eq() -> @kernel.Thm
+
+pub fn poly_deg_ge_eq() -> @kernel.Thm
+
+pub fn poly_deg_homomorphic_image() -> @kernel.Thm
+
+pub fn poly_deg_le() -> @kernel.Thm
+
+pub fn poly_deg_le_coeff() -> @kernel.Thm
+
+pub fn poly_deg_le_coeff_eq() -> @kernel.Thm
+
+pub fn poly_deg_le_eq() -> @kernel.Thm
+
+pub fn poly_deg_lt_from_le() -> @kernel.Thm
+
+pub fn poly_deg_monomial_exists() -> @kernel.Thm
+
+pub fn poly_deg_monomorphic_image() -> @kernel.Thm
+
+pub fn poly_deg_mul() -> @kernel.Thm
+
+pub fn poly_deg_mul_le() -> @kernel.Thm
+
+pub fn poly_deg_mul_monic() -> @kernel.Thm
+
+pub fn poly_deg_mul_univariate() -> @kernel.Thm
+
+pub fn poly_deg_mul_var() -> @kernel.Thm
+
+pub fn poly_deg_mul_varpow() -> @kernel.Thm
+
+pub fn poly_deg_mul_x_minus_a() -> @kernel.Thm
+
+pub fn poly_deg_neg() -> @kernel.Thm
+
+pub fn poly_deg_pow() -> @kernel.Thm
+
+pub fn poly_deg_pow_le() -> @kernel.Thm
+
+pub fn poly_deg_recip() -> @kernel.Thm
+
+pub fn poly_deg_recip_le() -> @kernel.Thm
+
+pub fn poly_deg_rem() -> @kernel.Thm
+
+pub fn poly_deg_rem_alt() -> @kernel.Thm
+
+pub fn poly_deg_ring_add_le() -> @kernel.Thm
+
+pub fn poly_deg_ring_sub_le() -> @kernel.Thm
+
+pub fn poly_deg_ring_sum_le() -> @kernel.Thm
+
+pub fn poly_deg_sub() -> @kernel.Thm
+
+pub fn poly_deg_sub_le() -> @kernel.Thm
+
+pub fn poly_deg_subring_generated() -> @kernel.Thm
+
+pub fn poly_deg_unique() -> @kernel.Thm
+
+pub fn poly_deg_unit() -> @kernel.Thm
+
+pub fn poly_deg_var() -> @kernel.Thm
+
+pub fn poly_deg_var_mul() -> @kernel.Thm
+
+pub fn poly_deg_var_pow() -> @kernel.Thm
+
+pub fn poly_deg_varpow_mul() -> @kernel.Thm
+
+pub fn poly_deg_x_minus_a() -> @kernel.Thm
+
+pub fn poly_deriv() -> @kernel.Thm
+
+pub fn poly_deriv_0() -> @kernel.Thm
+
+pub fn poly_deriv_1() -> @kernel.Thm
+
+pub fn poly_deriv_add() -> @kernel.Thm
+
+pub fn poly_deriv_cmul() -> @kernel.Thm
+
+pub fn poly_deriv_const() -> @kernel.Thm
+
+pub fn poly_deriv_homomorphic_image() -> @kernel.Thm
+
+pub fn poly_deriv_in_carrier() -> @kernel.Thm
+
+pub fn poly_deriv_mul() -> @kernel.Thm
+
+pub fn poly_deriv_neg() -> @kernel.Thm
+
+pub fn poly_deriv_nonzero_char0() -> @kernel.Thm
+
+pub fn poly_deriv_pow() -> @kernel.Thm
+
+pub fn poly_deriv_product() -> @kernel.Thm
+
+pub fn poly_deriv_sub() -> @kernel.Thm
+
+pub fn poly_deriv_subring_generated() -> @kernel.Thm
+
+pub fn poly_deriv_sum() -> @kernel.Thm
+
+pub fn poly_deriv_var() -> @kernel.Thm
+
+pub fn poly_deriv_var_pow() -> @kernel.Thm
+
+pub fn poly_div() -> @kernel.Thm
+
+pub fn poly_div_rem() -> @kernel.Thm
+
+pub fn poly_div_rem_simp() -> @kernel.Thm
+
+pub fn poly_div_v1() -> @kernel.Thm
+
+pub fn poly_divides_recip() -> @kernel.Thm
+
+pub fn poly_divides_recip_eq() -> @kernel.Thm
+
+pub fn poly_divides_recip_galois() -> @kernel.Thm
+
+pub fn poly_divides_recip_recip() -> @kernel.Thm
+
+pub fn poly_divides_rem() -> @kernel.Thm
+
+pub fn poly_divides_x_minus_a() -> @kernel.Thm
+
+pub fn poly_divides_x_minus_root() -> @kernel.Thm
+
+pub fn poly_divides_x_minus_root_eq() -> @kernel.Thm
+
+pub fn poly_division() -> @kernel.Thm
+
+pub fn poly_division_gen() -> @kernel.Thm
+
+pub fn poly_eq_0_monomorphic_image() -> @kernel.Thm
+
+pub fn poly_eval() -> @kernel.Thm
+
+pub fn poly_eval_0() -> @kernel.Thm
+
+pub fn poly_eval_1() -> @kernel.Thm
+
+pub fn poly_eval_add() -> @kernel.Thm
+
+pub fn poly_eval_at_0() -> @kernel.Thm
+
+pub fn poly_eval_coeff() -> @kernel.Thm
+
+pub fn poly_eval_const() -> @kernel.Thm
+
+pub fn poly_eval_expand() -> @kernel.Thm
+
+pub fn poly_eval_homomorphic_image() -> @kernel.Thm
+
+pub fn poly_eval_mul() -> @kernel.Thm
+
+pub fn poly_eval_pow() -> @kernel.Thm
+
+pub fn poly_eval_recip() -> @kernel.Thm
+
+pub fn poly_eval_ring_product() -> @kernel.Thm
+
+pub fn poly_eval_ring_sum() -> @kernel.Thm
+
+pub fn poly_eval_sub() -> @kernel.Thm
+
+pub fn poly_eval_v1() -> @kernel.Thm
+
+pub fn poly_eval_var() -> @kernel.Thm
+
+pub fn poly_evaluate() -> @kernel.Thm
+
+pub fn poly_evaluate_0() -> @kernel.Thm
+
+pub fn poly_evaluate_1() -> @kernel.Thm
+
+pub fn poly_evaluate_add() -> @kernel.Thm
+
+pub fn poly_evaluate_at_0() -> @kernel.Thm
+
+pub fn poly_evaluate_const() -> @kernel.Thm
+
+pub fn poly_evaluate_eq() -> @kernel.Thm
+
+pub fn poly_evaluate_homomorphic_image() -> @kernel.Thm
+
+pub fn poly_evaluate_mul() -> @kernel.Thm
+
+pub fn poly_evaluate_pow() -> @kernel.Thm
+
+pub fn poly_evaluate_reindex() -> @kernel.Thm
+
+pub fn poly_evaluate_ring_product() -> @kernel.Thm
+
+pub fn poly_evaluate_ring_sum() -> @kernel.Thm
+
+pub fn poly_evaluate_sub() -> @kernel.Thm
+
+pub fn poly_evaluate_v1() -> @kernel.Thm
+
+pub fn poly_evaluate_var() -> @kernel.Thm
+
+pub fn poly_expand() -> @kernel.Thm
+
+pub fn poly_extend() -> @kernel.Thm
+
+pub fn poly_extend_0() -> @kernel.Thm
+
+pub fn poly_extend_1() -> @kernel.Thm
+
+pub fn poly_extend_add() -> @kernel.Thm
+
+pub fn poly_extend_at_0() -> @kernel.Thm
+
+pub fn poly_extend_compose() -> @kernel.Thm
+
+pub fn poly_extend_const() -> @kernel.Thm
+
+pub fn poly_extend_eq() -> @kernel.Thm
+
+pub fn poly_extend_evaluate() -> @kernel.Thm
+
+pub fn poly_extend_extend() -> @kernel.Thm
+
+pub fn poly_extend_from_subring_generated() -> @kernel.Thm
+
+pub fn poly_extend_homomorphic_image() -> @kernel.Thm
+
+pub fn poly_extend_id() -> @kernel.Thm
+
+pub fn poly_extend_into_subring_generated() -> @kernel.Thm
+
+pub fn poly_extend_mul() -> @kernel.Thm
+
+pub fn poly_extend_neg() -> @kernel.Thm
+
+pub fn poly_extend_polynomial() -> @kernel.Thm
+
+pub fn poly_extend_pow() -> @kernel.Thm
+
+pub fn poly_extend_reindex() -> @kernel.Thm
+
+pub fn poly_extend_ring_product() -> @kernel.Thm
+
+pub fn poly_extend_ring_sum() -> @kernel.Thm
+
+pub fn poly_extend_sub() -> @kernel.Thm
+
+pub fn poly_extend_superset() -> @kernel.Thm
+
+pub fn poly_extend_unique() -> @kernel.Thm
+
+pub fn poly_extend_univariate() -> @kernel.Thm
+
+pub fn poly_extend_v1() -> @kernel.Thm
+
+pub fn poly_extend_var() -> @kernel.Thm
+
+pub fn poly_in_powser_ring() -> @kernel.Thm
+
+pub fn poly_irreducible_imp_separable() -> @kernel.Thm
+
+pub fn poly_make_primitive() -> @kernel.Thm
+
+pub fn poly_monomial_in_carrier() -> @kernel.Thm
+
+pub fn poly_monomials() -> @kernel.Thm
+
+pub fn poly_monomials_alt() -> @kernel.Thm
+
+pub fn poly_monomials_finite() -> @kernel.Thm
+
+pub fn poly_mul() -> @kernel.Thm
+
+pub fn poly_mul_0() -> @kernel.Thm
+
+pub fn poly_mul_assoc() -> @kernel.Thm
+
+pub fn poly_mul_const() -> @kernel.Thm
+
+pub fn poly_mul_leading_coeff() -> @kernel.Thm
+
+pub fn poly_mul_lid() -> @kernel.Thm
+
+pub fn poly_mul_monomial_1() -> @kernel.Thm
+
+pub fn poly_mul_rid() -> @kernel.Thm
+
+pub fn poly_mul_sym() -> @kernel.Thm
+
+pub fn poly_mul_univariate() -> @kernel.Thm
+
+pub fn poly_mul_var() -> @kernel.Thm
+
+pub fn poly_neg() -> @kernel.Thm
+
+pub fn poly_nonconstant_irreducible_imp_separable() -> @kernel.Thm
+
+pub fn poly_poly_deg_eq_0() -> @kernel.Thm
+
+pub fn poly_pow() -> @kernel.Thm
+
+pub fn poly_pow_0() -> @kernel.Thm
+
+pub fn poly_pow_1() -> @kernel.Thm
+
+pub fn poly_pow_alt() -> @kernel.Thm
+
+pub fn poly_pow_v1() -> @kernel.Thm
+
+pub fn poly_primitive_const_cancel() -> @kernel.Thm
+
+pub fn poly_recip() -> @kernel.Thm
+
+pub fn poly_recip_0() -> @kernel.Thm
+
+pub fn poly_recip_1() -> @kernel.Thm
+
+pub fn poly_recip_const() -> @kernel.Thm
+
+pub fn poly_recip_eq_0() -> @kernel.Thm
+
+pub fn poly_recip_in_carrier() -> @kernel.Thm
+
+pub fn poly_recip_mul() -> @kernel.Thm
+
+pub fn poly_recip_mul_gen() -> @kernel.Thm
+
+pub fn poly_recip_neg() -> @kernel.Thm
+
+pub fn poly_recip_recip() -> @kernel.Thm
+
+pub fn poly_recip_recip_eq() -> @kernel.Thm
+
+pub fn poly_reindex() -> @kernel.Thm
+
+pub fn poly_reindex_const() -> @kernel.Thm
+
+pub fn poly_reindex_var() -> @kernel.Thm
+
+pub fn poly_rem() -> @kernel.Thm
+
+pub fn poly_rem_unique() -> @kernel.Thm
+
+pub fn poly_rem_v1() -> @kernel.Thm
+
+pub fn poly_ring() -> @kernel.Thm
+
+pub fn poly_ring_as_subring() -> @kernel.Thm
+
+pub fn poly_ring_as_subring_alt() -> @kernel.Thm
+
+pub fn poly_ring_as_subring_finite() -> @kernel.Thm
+
+pub fn poly_ring_clauses() -> @kernel.Thm
+
+pub fn poly_ring_epimorphism_coeff_0() -> @kernel.Thm
+
+pub fn poly_ring_eq() -> @kernel.Thm
+
+pub fn poly_ring_eq_imp() -> @kernel.Thm
+
+pub fn poly_ring_expand() -> @kernel.Thm
+
+pub fn poly_ring_homomorphism_coeff_0() -> @kernel.Thm
+
+pub fn poly_ring_homomorphism_i() -> @kernel.Thm
+
+pub fn poly_ring_homomorphism_unique() -> @kernel.Thm
+
+pub fn poly_ring_in_finite_variables() -> @kernel.Thm
+
+pub fn poly_ring_in_poly_vars() -> @kernel.Thm
+
+pub fn poly_ring_induct() -> @kernel.Thm
+
+pub fn poly_ring_induct_strong() -> @kernel.Thm
+
+pub fn poly_ring_mono() -> @kernel.Thm
+
+pub fn poly_ring_poly_vars() -> @kernel.Thm
+
+pub fn poly_ring_product_var() -> @kernel.Thm
+
+pub fn poly_ring_product_var_pow() -> @kernel.Thm
+
+pub fn poly_ring_subring_of_powser_ring() -> @kernel.Thm
+
+pub fn poly_ring_v1() -> @kernel.Thm
+
+pub fn poly_ring_var_pow() -> @kernel.Thm
+
+pub fn poly_root_bound() -> @kernel.Thm
+
+pub fn poly_root_count_imp_squarefree() -> @kernel.Thm
+
+pub fn poly_separable_eq_squarefree() -> @kernel.Thm
+
+pub fn poly_separable_imp_squarefree() -> @kernel.Thm
+
+pub fn poly_square_divides_deriv() -> @kernel.Thm
+
+pub fn poly_square_divides_deriv_eq() -> @kernel.Thm
+
+pub fn poly_squarefree_imp_separable() -> @kernel.Thm
+
+pub fn poly_sub() -> @kernel.Thm
+
+pub fn poly_sub_v1() -> @kernel.Thm
+
+pub fn poly_subring_generated() -> @kernel.Thm
+
+pub fn poly_subring_generated_1() -> @kernel.Thm
+
+pub fn poly_subring_generated_clauses() -> @kernel.Thm
+
+pub fn poly_sum() -> @kernel.Thm
+
+pub fn poly_top_eq_0() -> @kernel.Thm
+
+pub fn poly_top_monomial_le() -> @kernel.Thm
+
+pub fn poly_top_monomial_lt() -> @kernel.Thm
+
+pub fn poly_top_nonzero() -> @kernel.Thm
+
+pub fn poly_top_tail() -> @kernel.Thm
+
+pub fn poly_var() -> @kernel.Thm
+
+pub fn poly_var_divides_univariate() -> @kernel.Thm
+
+pub fn poly_var_eq_const() -> @kernel.Thm
+
+pub fn poly_var_monomial_1() -> @kernel.Thm
+
+pub fn poly_var_mul() -> @kernel.Thm
+
+pub fn poly_var_univ() -> @kernel.Thm
+
+pub fn poly_var_v1() -> @kernel.Thm
+
+pub fn poly_varpow_recip_recip() -> @kernel.Thm
+
+pub fn poly_vars() -> @kernel.Thm
+
+pub fn poly_vars_0() -> @kernel.Thm
+
+pub fn poly_vars_1() -> @kernel.Thm
+
+pub fn poly_vars_add() -> @kernel.Thm
+
+pub fn poly_vars_const() -> @kernel.Thm
+
+pub fn poly_vars_mul() -> @kernel.Thm
+
+pub fn poly_vars_mul_eq() -> @kernel.Thm
+
+pub fn poly_vars_neg() -> @kernel.Thm
+
+pub fn poly_vars_pow() -> @kernel.Thm
+
+pub fn poly_vars_pow_eq() -> @kernel.Thm
+
+pub fn poly_vars_reindex() -> @kernel.Thm
+
+pub fn poly_vars_var() -> @kernel.Thm
+
+pub fn poly_x_minus_a_in_carrier() -> @kernel.Thm
+
+pub fn poly_x_minus_a_nonzero() -> @kernel.Thm
+
+pub fn poset_monomial_divides() -> @kernel.Thm
+
+pub fn poset_monomial_le() -> @kernel.Thm
+
+pub fn powser_clauses() -> @kernel.Thm
+
+pub fn powser_const() -> @kernel.Thm
+
+pub fn powser_deriv_in_carrier() -> @kernel.Thm
+
+pub fn powser_eval_at_0() -> @kernel.Thm
+
+pub fn powser_evaluate_at_0() -> @kernel.Thm
+
+pub fn powser_extend_at_0() -> @kernel.Thm
+
+pub fn powser_monomial_in_carrier() -> @kernel.Thm
+
+pub fn powser_monomials() -> @kernel.Thm
+
+pub fn powser_mul_0() -> @kernel.Thm
+
+pub fn powser_mul_const() -> @kernel.Thm
+
+pub fn powser_mul_monomial_1() -> @kernel.Thm
+
+pub fn powser_mul_var() -> @kernel.Thm
+
+pub fn powser_ring() -> @kernel.Thm
+
+pub fn powser_ring_clauses() -> @kernel.Thm
+
+pub fn powser_ring_epimorphism_coeff_0() -> @kernel.Thm
+
+pub fn powser_ring_eq() -> @kernel.Thm
+
+pub fn powser_ring_eq_imp() -> @kernel.Thm
+
+pub fn powser_ring_homomorphism_coeff_0() -> @kernel.Thm
+
+pub fn powser_ring_mono() -> @kernel.Thm
+
+pub fn powser_ring_v1() -> @kernel.Thm
+
+pub fn powser_sum() -> @kernel.Thm
+
+pub fn powser_var() -> @kernel.Thm
+
+pub fn powser_var_mul() -> @kernel.Thm
+
+pub fn powser_var_mul_eq_0() -> @kernel.Thm
+
+pub fn powser_var_univ() -> @kernel.Thm
+
+pub fn powser_varpow_mul_eq_0() -> @kernel.Thm
+
+pub fn prime_ideal() -> @kernel.Thm
+
+pub fn prime_ideal_0() -> @kernel.Thm
+
+pub fn prime_ideal_contains_nilpotents() -> @kernel.Thm
+
+pub fn prime_ideal_correspondence() -> @kernel.Thm
+
+pub fn prime_ideal_excluding_exists() -> @kernel.Thm
+
+pub fn prime_ideal_exists() -> @kernel.Thm
+
+pub fn prime_ideal_homomorphic_preimage() -> @kernel.Thm
+
+pub fn prime_ideal_imp_psubset() -> @kernel.Thm
+
+pub fn prime_ideal_imp_subset() -> @kernel.Thm
+
+pub fn prime_ideal_isomorphic_image_eq() -> @kernel.Thm
+
+pub fn prime_ideal_localization() -> @kernel.Thm
+
+pub fn prime_ideal_localization_contraction() -> @kernel.Thm
+
+pub fn prime_ideal_localization_exists() -> @kernel.Thm
+
+pub fn prime_ideal_nonunits() -> @kernel.Thm
+
+pub fn prime_ideal_sing() -> @kernel.Thm
+
+pub fn prime_imp_proper_ideal() -> @kernel.Thm
+
+pub fn prime_imp_ring_ideal() -> @kernel.Thm
+
+pub fn prime_subring() -> @kernel.Thm
+
+pub fn prime_subring_finite() -> @kernel.Thm
+
+pub fn prime_subring_minimal() -> @kernel.Thm
+
+pub fn prime_superideal_excluding_exists() -> @kernel.Thm
+
+pub fn prime_superideal_exists() -> @kernel.Thm
+
+pub fn principal_ideal() -> @kernel.Thm
+
+pub fn principal_ideal_0() -> @kernel.Thm
+
+pub fn principal_ideal_alt() -> @kernel.Thm
+
+pub fn principal_ideal_carrier() -> @kernel.Thm
+
+pub fn principal_ideal_epimorphic_image() -> @kernel.Thm
+
+pub fn principal_ideal_ideal_generated_sing() -> @kernel.Thm
+
+pub fn principal_ideal_imp_subset() -> @kernel.Thm
+
+pub fn principal_ideal_localization() -> @kernel.Thm
+
+pub fn principal_imp_finitely_generated_ideal() -> @kernel.Thm
+
+pub fn principal_imp_ring_ideal() -> @kernel.Thm
+
+pub fn prod_ring() -> @kernel.Thm
+
+pub fn prod_ring_subring_generated() -> @kernel.Thm
+
+pub fn prod_ring_v1() -> @kernel.Thm
+
+pub fn product_ring() -> @kernel.Thm
+
+pub fn product_ring_subring_generated() -> @kernel.Thm
+
+pub fn product_ring_v1() -> @kernel.Thm
+
+pub fn proper_ideal() -> @kernel.Thm
+
+pub fn proper_ideal_0() -> @kernel.Thm
+
+pub fn proper_ideal_alt() -> @kernel.Thm
+
+pub fn proper_ideal_correspondence() -> @kernel.Thm
+
+pub fn proper_ideal_exists() -> @kernel.Thm
+
+pub fn proper_ideal_homomorphic_preimage() -> @kernel.Thm
+
+pub fn proper_ideal_ideal_generated_sing() -> @kernel.Thm
+
+pub fn proper_ideal_imp_psubset() -> @kernel.Thm
+
+pub fn proper_ideal_imp_subset() -> @kernel.Thm
+
+pub fn proper_ideal_isomorphic_image_eq() -> @kernel.Thm
+
+pub fn proper_ideal_localization() -> @kernel.Thm
+
+pub fn proper_ideal_nonunits() -> @kernel.Thm
+
+pub fn proper_ideal_subset_nonunits() -> @kernel.Thm
+
+pub fn proper_ideal_unions() -> @kernel.Thm
+
+pub fn proper_ideal_unit() -> @kernel.Thm
+
+pub fn proper_ideal_v1() -> @kernel.Thm
+
+pub fn proper_imp_ring_ideal() -> @kernel.Thm
+
+pub fn proper_radical() -> @kernel.Thm
+
+pub fn properly_monomial_le() -> @kernel.Thm
+
+pub fn psubset_ideals_generated_sing() -> @kernel.Thm
+
+pub fn qoset_monomial_le() -> @kernel.Thm
+
+pub fn quotient_ring() -> @kernel.Thm
+
+pub fn quotient_ring_0() -> @kernel.Thm
+
+pub fn quotient_ring_1() -> @kernel.Thm
+
+pub fn quotient_ring_add() -> @kernel.Thm
+
+pub fn quotient_ring_carrier() -> @kernel.Thm
+
+pub fn quotient_ring_ideal_correspondence() -> @kernel.Thm
+
+pub fn quotient_ring_mul() -> @kernel.Thm
+
+pub fn quotient_ring_neg() -> @kernel.Thm
+
+pub fn quotient_ring_subring_correspondence() -> @kernel.Thm
+
+pub fn quotient_ring_universal() -> @kernel.Thm
+
+pub fn quotient_ring_universal_epimorphism() -> @kernel.Thm
+
+pub fn quotient_ring_universal_explicit() -> @kernel.Thm
+
+pub fn quotient_ring_v1() -> @kernel.Thm
+
+pub fn radical() -> @kernel.Thm
+
+pub fn radical_0() -> @kernel.Thm
+
+pub fn radical_alt() -> @kernel.Thm
+
+pub fn radical_eq_carrier() -> @kernel.Thm
+
+pub fn radical_ideal_prime_ideal_eq() -> @kernel.Thm
+
+pub fn radical_inter() -> @kernel.Thm
+
+pub fn radical_mono() -> @kernel.Thm
+
+pub fn radical_prime_ideal() -> @kernel.Thm
+
+pub fn radical_radical() -> @kernel.Thm
+
+pub fn radical_ring_carrier() -> @kernel.Thm
+
+pub fn radical_setadd() -> @kernel.Thm
+
+pub fn radical_subset() -> @kernel.Thm
+
+pub fn radical_subset_prime_ideal_eq() -> @kernel.Thm
+
+pub fn radical_union() -> @kernel.Thm
+
+pub fn radical_unions() -> @kernel.Thm
+
+pub fn radical_v1() -> @kernel.Thm
+
+pub fn real_field_clauses() -> @kernel.Thm
+
+pub fn real_ring() -> @kernel.Thm
+
+pub fn real_ring_char() -> @kernel.Thm
+
+pub fn real_ring_clauses() -> @kernel.Thm
+
+pub fn real_ring_div() -> @kernel.Thm
+
+pub fn real_ring_inv() -> @kernel.Thm
+
+pub fn real_ring_of_int() -> @kernel.Thm
+
+pub fn real_ring_of_num() -> @kernel.Thm
+
+pub fn real_ring_pow() -> @kernel.Thm
+
+pub fn real_ring_sub() -> @kernel.Thm
+
+pub fn repeated_root_poly_deriv_zero() -> @kernel.Thm
+
+pub fn ring_0() -> @kernel.Thm
+
+pub fn ring_0_in_subring_generated() -> @kernel.Thm
+
+pub fn ring_0_v1() -> @kernel.Thm
+
+pub fn ring_1() -> @kernel.Thm
+
+pub fn ring_1_div() -> @kernel.Thm
+
+pub fn ring_1_in_subring_generated() -> @kernel.Thm
+
+pub fn ring_1_not_in_prime_ideal() -> @kernel.Thm
+
+pub fn ring_1_v1() -> @kernel.Thm
+
+pub fn ring_accp() -> @kernel.Thm
+
+pub fn ring_add() -> @kernel.Thm
+
+pub fn ring_add_ac() -> @kernel.Thm
+
+pub fn ring_add_assoc() -> @kernel.Thm
+
+pub fn ring_add_eq_0() -> @kernel.Thm
+
+pub fn ring_add_eq_left() -> @kernel.Thm
+
+pub fn ring_add_eq_right() -> @kernel.Thm
+
+pub fn ring_add_in_setadd() -> @kernel.Thm
+
+pub fn ring_add_in_subring_generated() -> @kernel.Thm
+
+pub fn ring_add_lcancel() -> @kernel.Thm
+
+pub fn ring_add_lcancel_imp() -> @kernel.Thm
+
+pub fn ring_add_ldistrib() -> @kernel.Thm
+
+pub fn ring_add_lneg() -> @kernel.Thm
+
+pub fn ring_add_lzero() -> @kernel.Thm
+
+pub fn ring_add_rcancel() -> @kernel.Thm
+
+pub fn ring_add_rcancel_imp() -> @kernel.Thm
+
+pub fn ring_add_rdistrib() -> @kernel.Thm
+
+pub fn ring_add_rneg() -> @kernel.Thm
+
+pub fn ring_add_rzero() -> @kernel.Thm
+
+pub fn ring_add_sym() -> @kernel.Thm
+
+pub fn ring_add_v1() -> @kernel.Thm
+
+pub fn ring_associates() -> @kernel.Thm
+
+pub fn ring_associates_0() -> @kernel.Thm
+
+pub fn ring_associates_1() -> @kernel.Thm
+
+pub fn ring_associates_associates() -> @kernel.Thm
+
+pub fn ring_associates_coprime() -> @kernel.Thm
+
+pub fn ring_associates_divides() -> @kernel.Thm
+
+pub fn ring_associates_eq_0() -> @kernel.Thm
+
+pub fn ring_associates_homomorphic_image() -> @kernel.Thm
+
+pub fn ring_associates_in_carrier() -> @kernel.Thm
+
+pub fn ring_associates_in_ideal() -> @kernel.Thm
+
+pub fn ring_associates_irreducible() -> @kernel.Thm
+
+pub fn ring_associates_isomorphic_image_eq() -> @kernel.Thm
+
+pub fn ring_associates_lmul() -> @kernel.Thm
+
+pub fn ring_associates_lneg() -> @kernel.Thm
+
+pub fn ring_associates_mul() -> @kernel.Thm
+
+pub fn ring_associates_neg() -> @kernel.Thm
+
+pub fn ring_associates_neg_eq() -> @kernel.Thm
+
+pub fn ring_associates_nilpotent() -> @kernel.Thm
+
+pub fn ring_associates_pow() -> @kernel.Thm
+
+pub fn ring_associates_prime() -> @kernel.Thm
+
+pub fn ring_associates_primefacts_bijection() -> @kernel.Thm
+
+pub fn ring_associates_primefacts_bijection_eq() -> @kernel.Thm
+
+pub fn ring_associates_primefacts_bijections() -> @kernel.Thm
+
+pub fn ring_associates_primefacts_bijections_eq() -> @kernel.Thm
+
+pub fn ring_associates_primefacts_eq() -> @kernel.Thm
+
+pub fn ring_associates_prod_ring() -> @kernel.Thm
+
+pub fn ring_associates_product() -> @kernel.Thm
+
+pub fn ring_associates_product_ring() -> @kernel.Thm
+
+pub fn ring_associates_refl() -> @kernel.Thm
+
+pub fn ring_associates_regular() -> @kernel.Thm
+
+pub fn ring_associates_rmul() -> @kernel.Thm
+
+pub fn ring_associates_same_divisors() -> @kernel.Thm
+
+pub fn ring_associates_sym() -> @kernel.Thm
+
+pub fn ring_associates_trans() -> @kernel.Thm
+
+pub fn ring_associates_unit() -> @kernel.Thm
+
+pub fn ring_associates_zerodivisor() -> @kernel.Thm
+
+pub fn ring_automorphism() -> @kernel.Thm
+
+pub fn ring_automorphism_eq() -> @kernel.Thm
+
+pub fn ring_automorphism_frobenius() -> @kernel.Thm
+
+pub fn ring_automorphism_i() -> @kernel.Thm
+
+pub fn ring_automorphism_id() -> @kernel.Thm
+
+pub fn ring_automorphism_imp_endomorphism() -> @kernel.Thm
+
+pub fn ring_binomial_freshman() -> @kernel.Thm
+
+pub fn ring_binomial_theorem() -> @kernel.Thm
+
+pub fn ring_carrier() -> @kernel.Thm
+
+pub fn ring_carrier_has_size_1() -> @kernel.Thm
+
+pub fn ring_carrier_has_size_2() -> @kernel.Thm
+
+pub fn ring_carrier_integer_mod_ring() -> @kernel.Thm
+
+pub fn ring_carrier_nonempty() -> @kernel.Thm
+
+pub fn ring_carrier_poly_ring() -> @kernel.Thm
+
+pub fn ring_carrier_poly_ring_finite() -> @kernel.Thm
+
+pub fn ring_carrier_poly_subring_generated() -> @kernel.Thm
+
+pub fn ring_carrier_poly_subring_generated_mono() -> @kernel.Thm
+
+pub fn ring_carrier_poly_subring_generated_subset() -> @kernel.Thm
+
+pub fn ring_carrier_powser_ring() -> @kernel.Thm
+
+pub fn ring_carrier_powser_subring_generated() -> @kernel.Thm
+
+pub fn ring_carrier_powser_subring_generated_mono() -> @kernel.Thm
+
+pub fn ring_carrier_powser_subring_generated_subset() -> @kernel.Thm
+
+pub fn ring_carrier_rule(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn ring_carrier_subring_generated_0() -> @kernel.Thm
+
+pub fn ring_carrier_subring_generated_mono() -> @kernel.Thm
+
+pub fn ring_carrier_subring_generated_subset() -> @kernel.Thm
+
+pub fn ring_carrier_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn ring_char_divides_mul() -> @kernel.Thm
+
+pub fn ring_char_divides_order() -> @kernel.Thm
+
+pub fn ring_char_divides_prime() -> @kernel.Thm
+
+pub fn ring_char_eq_0() -> @kernel.Thm
+
+pub fn ring_char_eq_1() -> @kernel.Thm
+
+pub fn ring_char_finite() -> @kernel.Thm
+
+pub fn ring_char_homomorphic_image() -> @kernel.Thm
+
+pub fn ring_char_infinite() -> @kernel.Thm
+
+pub fn ring_char_monomorphic_image() -> @kernel.Thm
+
+pub fn ring_char_subring_generated() -> @kernel.Thm
+
+pub fn ring_char_unique() -> @kernel.Thm
+
+pub fn ring_clauses() -> @kernel.Thm
+
+pub fn ring_comaximal() -> @kernel.Thm
+
+pub fn ring_coprime() -> @kernel.Thm
+
+pub fn ring_coprime_0() -> @kernel.Thm
+
+pub fn ring_coprime_00() -> @kernel.Thm
+
+pub fn ring_coprime_distinct_monic_irreducibles() -> @kernel.Thm
+
+pub fn ring_coprime_divisors() -> @kernel.Thm
+
+pub fn ring_coprime_divprod_left() -> @kernel.Thm
+
+pub fn ring_coprime_divprod_right() -> @kernel.Thm
+
+pub fn ring_coprime_homomorphic_image() -> @kernel.Thm
+
+pub fn ring_coprime_in_carrier() -> @kernel.Thm
+
+pub fn ring_coprime_lmul() -> @kernel.Thm
+
+pub fn ring_coprime_lpow() -> @kernel.Thm
+
+pub fn ring_coprime_product() -> @kernel.Thm
+
+pub fn ring_coprime_product_divides() -> @kernel.Thm
+
+pub fn ring_coprime_product_divides_alt() -> @kernel.Thm
+
+pub fn ring_coprime_product_eq() -> @kernel.Thm
+
+pub fn ring_coprime_refl() -> @kernel.Thm
+
+pub fn ring_coprime_rmul() -> @kernel.Thm
+
+pub fn ring_coprime_rpow() -> @kernel.Thm
+
+pub fn ring_coprime_sym() -> @kernel.Thm
+
+pub fn ring_coprime_unit() -> @kernel.Thm
+
+pub fn ring_coset() -> @kernel.Thm
+
+pub fn ring_coset_0() -> @kernel.Thm
+
+pub fn ring_coset_carrier() -> @kernel.Thm
+
+pub fn ring_coset_eq() -> @kernel.Thm
+
+pub fn ring_coset_eq_empty() -> @kernel.Thm
+
+pub fn ring_coset_eq_ideal() -> @kernel.Thm
+
+pub fn ring_coset_ideal_generated_sing() -> @kernel.Thm
+
+pub fn ring_coset_ideal_generated_sing_eq() -> @kernel.Thm
+
+pub fn ring_coset_nonempty() -> @kernel.Thm
+
+pub fn ring_coset_prod_ring() -> @kernel.Thm
+
+pub fn ring_coset_product_ring() -> @kernel.Thm
+
+pub fn ring_coset_relational() -> @kernel.Thm
+
+pub fn ring_coset_setadd() -> @kernel.Thm
+
+pub fn ring_coset_trivial() -> @kernel.Thm
+
+pub fn ring_coset_v1() -> @kernel.Thm
+
+pub fn ring_cosets_eq() -> @kernel.Thm
+
+pub fn ring_direct_limit() -> @kernel.Thm
+
+pub fn ring_div() -> @kernel.Thm
+
+pub fn ring_div_1() -> @kernel.Thm
+
+pub fn ring_div_v1() -> @kernel.Thm
+
+pub fn ring_divides() -> @kernel.Thm
+
+pub fn ring_divides_0() -> @kernel.Thm
+
+pub fn ring_divides_1() -> @kernel.Thm
+
+pub fn ring_divides_add() -> @kernel.Thm
+
+pub fn ring_divides_alt() -> @kernel.Thm
+
+pub fn ring_divides_antisym() -> @kernel.Thm
+
+pub fn ring_divides_associates() -> @kernel.Thm
+
+pub fn ring_divides_gcd() -> @kernel.Thm
+
+pub fn ring_divides_gcd_eq() -> @kernel.Thm
+
+pub fn ring_divides_homomorphic_image() -> @kernel.Thm
+
+pub fn ring_divides_in_carrier() -> @kernel.Thm
+
+pub fn ring_divides_isomorphic_image_eq() -> @kernel.Thm
+
+pub fn ring_divides_lmul() -> @kernel.Thm
+
+pub fn ring_divides_lmul2() -> @kernel.Thm
+
+pub fn ring_divides_lmul_rev() -> @kernel.Thm
+
+pub fn ring_divides_lneg() -> @kernel.Thm
+
+pub fn ring_divides_localequiv() -> @kernel.Thm
+
+pub fn ring_divides_more_divisors() -> @kernel.Thm
+
+pub fn ring_divides_mul() -> @kernel.Thm
+
+pub fn ring_divides_mul2() -> @kernel.Thm
+
+pub fn ring_divides_mul_eq() -> @kernel.Thm
+
+pub fn ring_divides_neg() -> @kernel.Thm
+
+pub fn ring_divides_neg_eq() -> @kernel.Thm
+
+pub fn ring_divides_one() -> @kernel.Thm
+
+pub fn ring_divides_primefacts_injection() -> @kernel.Thm
+
+pub fn ring_divides_primefacts_injection_eq() -> @kernel.Thm
+
+pub fn ring_divides_primefacts_le() -> @kernel.Thm
+
+pub fn ring_divides_primefacts_lt() -> @kernel.Thm
+
+pub fn ring_divides_prod_ring() -> @kernel.Thm
+
+pub fn ring_divides_product_ring() -> @kernel.Thm
+
+pub fn ring_divides_product_subset() -> @kernel.Thm
+
+pub fn ring_divides_products() -> @kernel.Thm
+
+pub fn ring_divides_refl() -> @kernel.Thm
+
+pub fn ring_divides_rmul() -> @kernel.Thm
+
+pub fn ring_divides_rmul2() -> @kernel.Thm
+
+pub fn ring_divides_rmul_rev() -> @kernel.Thm
+
+pub fn ring_divides_sub() -> @kernel.Thm
+
+pub fn ring_divides_sub_pow() -> @kernel.Thm
+
+pub fn ring_divides_trans() -> @kernel.Thm
+
+pub fn ring_divides_unit() -> @kernel.Thm
+
+pub fn ring_divides_wf() -> @kernel.Thm
+
+pub fn ring_divides_zero() -> @kernel.Thm
+
+pub fn ring_endomorphism() -> @kernel.Thm
+
+pub fn ring_endomorphism_eq() -> @kernel.Thm
+
+pub fn ring_endomorphism_frobenius() -> @kernel.Thm
+
+pub fn ring_epimorphism() -> @kernel.Thm
+
+pub fn ring_epimorphism_alt() -> @kernel.Thm
+
+pub fn ring_epimorphism_between_subrings() -> @kernel.Thm
+
+pub fn ring_epimorphism_compose() -> @kernel.Thm
+
+pub fn ring_epimorphism_compose_rev() -> @kernel.Thm
+
+pub fn ring_epimorphism_eq() -> @kernel.Thm
+
+pub fn ring_epimorphism_from_trivial_ring() -> @kernel.Thm
+
+pub fn ring_epimorphism_fst() -> @kernel.Thm
+
+pub fn ring_epimorphism_i() -> @kernel.Thm
+
+pub fn ring_epimorphism_id() -> @kernel.Thm
+
+pub fn ring_epimorphism_ideal_correspondence() -> @kernel.Thm
+
+pub fn ring_epimorphism_ideal_correspondence_alt() -> @kernel.Thm
+
+pub fn ring_epimorphism_imp_homomorphism() -> @kernel.Thm
+
+pub fn ring_epimorphism_isomorphism_compose_rev() -> @kernel.Thm
+
+pub fn ring_epimorphism_of_fst() -> @kernel.Thm
+
+pub fn ring_epimorphism_of_snd() -> @kernel.Thm
+
+pub fn ring_epimorphism_onto_field_exists() -> @kernel.Thm
+
+pub fn ring_epimorphism_poly_eval() -> @kernel.Thm
+
+pub fn ring_epimorphism_poly_evaluate() -> @kernel.Thm
+
+pub fn ring_epimorphism_poly_rings() -> @kernel.Thm
+
+pub fn ring_epimorphism_powser_eval_at_0() -> @kernel.Thm
+
+pub fn ring_epimorphism_powser_evaluate_at_0() -> @kernel.Thm
+
+pub fn ring_epimorphism_powser_rings() -> @kernel.Thm
+
+pub fn ring_epimorphism_product_projection() -> @kernel.Thm
+
+pub fn ring_epimorphism_right_invertible() -> @kernel.Thm
+
+pub fn ring_epimorphism_ring_coset() -> @kernel.Thm
+
+pub fn ring_epimorphism_snd() -> @kernel.Thm
+
+pub fn ring_epimorphism_subring_correspondence() -> @kernel.Thm
+
+pub fn ring_epimorphism_subring_correspondence_alt() -> @kernel.Thm
+
+pub fn ring_epimorphism_to_trivial_ring() -> @kernel.Thm
+
+pub fn ring_epimorphism_v1() -> @kernel.Thm
+
+pub fn ring_eq_sub_ladd() -> @kernel.Thm
+
+pub fn ring_eq_sub_radd() -> @kernel.Thm
+
+pub fn ring_fractionate() -> @kernel.Thm
+
+pub fn ring_fractionate_eq_0() -> @kernel.Thm
+
+pub fn ring_fractionate_eq_0_gen() -> @kernel.Thm
+
+pub fn ring_fractionate_in_carrier() -> @kernel.Thm
+
+pub fn ring_gcd() -> @kernel.Thm
+
+pub fn ring_gcd_00() -> @kernel.Thm
+
+pub fn ring_gcd_divides() -> @kernel.Thm
+
+pub fn ring_gcd_eq() -> @kernel.Thm
+
+pub fn ring_gcd_eq_1() -> @kernel.Thm
+
+pub fn ring_gcd_lmul() -> @kernel.Thm
+
+pub fn ring_gcd_refl() -> @kernel.Thm
+
+pub fn ring_gcd_rmul() -> @kernel.Thm
+
+pub fn ring_gcd_sym() -> @kernel.Thm
+
+pub fn ring_gcd_unique() -> @kernel.Thm
+
+pub fn ring_gcd_v1() -> @kernel.Thm
+
+pub fn ring_gcd_works() -> @kernel.Thm
+
+pub fn ring_geom_series() -> @kernel.Thm
+
+pub fn ring_geom_series_gen() -> @kernel.Thm
+
+pub fn ring_homomorphism() -> @kernel.Thm
+
+pub fn ring_homomorphism_0() -> @kernel.Thm
+
+pub fn ring_homomorphism_1() -> @kernel.Thm
+
+pub fn ring_homomorphism_add() -> @kernel.Thm
+
+pub fn ring_homomorphism_between_subrings() -> @kernel.Thm
+
+pub fn ring_homomorphism_between_subrings_alt() -> @kernel.Thm
+
+pub fn ring_homomorphism_componentwise() -> @kernel.Thm
+
+pub fn ring_homomorphism_componentwise_univ() -> @kernel.Thm
+
+pub fn ring_homomorphism_compose() -> @kernel.Thm
+
+pub fn ring_homomorphism_diag() -> @kernel.Thm
+
+pub fn ring_homomorphism_diagonal() -> @kernel.Thm
+
+pub fn ring_homomorphism_diagonal_univ() -> @kernel.Thm
+
+pub fn ring_homomorphism_epimorphism_factor() -> @kernel.Thm
+
+pub fn ring_homomorphism_eq() -> @kernel.Thm
+
+pub fn ring_homomorphism_fractionate() -> @kernel.Thm
+
+pub fn ring_homomorphism_from_integer_mod_ring() -> @kernel.Thm
+
+pub fn ring_homomorphism_from_subring_generated() -> @kernel.Thm
+
+pub fn ring_homomorphism_from_trivial_ring() -> @kernel.Thm
+
+pub fn ring_homomorphism_fst() -> @kernel.Thm
+
+pub fn ring_homomorphism_i() -> @kernel.Thm
+
+pub fn ring_homomorphism_id() -> @kernel.Thm
+
+pub fn ring_homomorphism_image_preimage() -> @kernel.Thm
+
+pub fn ring_homomorphism_image_preimage_eq() -> @kernel.Thm
+
+pub fn ring_homomorphism_in_carrier() -> @kernel.Thm
+
+pub fn ring_homomorphism_inclusion() -> @kernel.Thm
+
+pub fn ring_homomorphism_integer_mod_ring_of_int() -> @kernel.Thm
+
+pub fn ring_homomorphism_integer_mod_rings() -> @kernel.Thm
+
+pub fn ring_homomorphism_integer_mod_rings_pow() -> @kernel.Thm
+
+pub fn ring_homomorphism_integer_ring_of_int() -> @kernel.Thm
+
+pub fn ring_homomorphism_into_subring() -> @kernel.Thm
+
+pub fn ring_homomorphism_into_subring_eq() -> @kernel.Thm
+
+pub fn ring_homomorphism_into_subring_eq_gen() -> @kernel.Thm
+
+pub fn ring_homomorphism_inv() -> @kernel.Thm
+
+pub fn ring_homomorphism_monomial_1() -> @kernel.Thm
+
+pub fn ring_homomorphism_mul() -> @kernel.Thm
+
+pub fn ring_homomorphism_neg() -> @kernel.Thm
+
+pub fn ring_homomorphism_of_fst() -> @kernel.Thm
+
+pub fn ring_homomorphism_of_snd() -> @kernel.Thm
+
+pub fn ring_homomorphism_paired() -> @kernel.Thm
+
+pub fn ring_homomorphism_paired2() -> @kernel.Thm
+
+pub fn ring_homomorphism_pairwise() -> @kernel.Thm
+
+pub fn ring_homomorphism_poly_const() -> @kernel.Thm
+
+pub fn ring_homomorphism_poly_eval() -> @kernel.Thm
+
+pub fn ring_homomorphism_poly_evaluate() -> @kernel.Thm
+
+pub fn ring_homomorphism_poly_extend() -> @kernel.Thm
+
+pub fn ring_homomorphism_poly_rings() -> @kernel.Thm
+
+pub fn ring_homomorphism_pow() -> @kernel.Thm
+
+pub fn ring_homomorphism_powser_const() -> @kernel.Thm
+
+pub fn ring_homomorphism_powser_eval_at_0() -> @kernel.Thm
+
+pub fn ring_homomorphism_powser_evaluate_at_0() -> @kernel.Thm
+
+pub fn ring_homomorphism_powser_extend_at_0() -> @kernel.Thm
+
+pub fn ring_homomorphism_powser_rings() -> @kernel.Thm
+
+pub fn ring_homomorphism_preimage_image() -> @kernel.Thm
+
+pub fn ring_homomorphism_preimage_image_gen() -> @kernel.Thm
+
+pub fn ring_homomorphism_prod_integer_mod_ring() -> @kernel.Thm
+
+pub fn ring_homomorphism_product() -> @kernel.Thm
+
+pub fn ring_homomorphism_product_projection() -> @kernel.Thm
+
+pub fn ring_homomorphism_ring_coset() -> @kernel.Thm
+
+pub fn ring_homomorphism_ring_of_int() -> @kernel.Thm
+
+pub fn ring_homomorphism_ring_of_num() -> @kernel.Thm
+
+pub fn ring_homomorphism_snd() -> @kernel.Thm
+
+pub fn ring_homomorphism_sub() -> @kernel.Thm
+
+pub fn ring_homomorphism_sum() -> @kernel.Thm
+
+pub fn ring_homomorphism_v1() -> @kernel.Thm
+
+pub fn ring_homomorphisms_eq_from_poly_ring() -> @kernel.Thm
+
+pub fn ring_homomorphisms_eq_from_subring_generated() -> @kernel.Thm
+
+pub fn ring_ideal() -> @kernel.Thm
+
+pub fn ring_ideal_0() -> @kernel.Thm
+
+pub fn ring_ideal_carrier() -> @kernel.Thm
+
+pub fn ring_ideal_cartesian_product() -> @kernel.Thm
+
+pub fn ring_ideal_cross() -> @kernel.Thm
+
+pub fn ring_ideal_epimorphic_image() -> @kernel.Thm
+
+pub fn ring_ideal_eq_carrier() -> @kernel.Thm
+
+pub fn ring_ideal_eq_carrier_unit() -> @kernel.Thm
+
+pub fn ring_ideal_homomorphic_preimage() -> @kernel.Thm
+
+pub fn ring_ideal_ideal_generated() -> @kernel.Thm
+
+pub fn ring_ideal_imp_nonempty() -> @kernel.Thm
+
+pub fn ring_ideal_imp_subset() -> @kernel.Thm
+
+pub fn ring_ideal_inter() -> @kernel.Thm
+
+pub fn ring_ideal_inter_subring() -> @kernel.Thm
+
+pub fn ring_ideal_inters() -> @kernel.Thm
+
+pub fn ring_ideal_isomorphic_image_eq() -> @kernel.Thm
+
+pub fn ring_ideal_localization() -> @kernel.Thm
+
+pub fn ring_ideal_nonunits() -> @kernel.Thm
+
+pub fn ring_ideal_prod_ring() -> @kernel.Thm
+
+pub fn ring_ideal_product_ring() -> @kernel.Thm
+
+pub fn ring_ideal_quotient() -> @kernel.Thm
+
+pub fn ring_ideal_quotient_lmul() -> @kernel.Thm
+
+pub fn ring_ideal_quotient_rmul() -> @kernel.Thm
+
+pub fn ring_ideal_radical() -> @kernel.Thm
+
+pub fn ring_ideal_ring_kernel() -> @kernel.Thm
+
+pub fn ring_ideal_scale() -> @kernel.Thm
+
+pub fn ring_ideal_setadd() -> @kernel.Thm
+
+pub fn ring_ideal_setwise() -> @kernel.Thm
+
+pub fn ring_ideal_subring_generated() -> @kernel.Thm
+
+pub fn ring_ideal_subring_generated_eq() -> @kernel.Thm
+
+pub fn ring_ideal_unions() -> @kernel.Thm
+
+pub fn ring_ideal_v1() -> @kernel.Thm
+
+pub fn ring_image() -> @kernel.Thm
+
+pub fn ring_image_from_subring_generated() -> @kernel.Thm
+
+pub fn ring_image_from_trivial_ring() -> @kernel.Thm
+
+pub fn ring_image_to_subring_generated() -> @kernel.Thm
+
+pub fn ring_image_to_trivial_ring() -> @kernel.Thm
+
+pub fn ring_imp_gcd_exists() -> @kernel.Thm
+
+pub fn ring_integral_domain_universal(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ring_inv() -> @kernel.Thm
+
+pub fn ring_inv_0() -> @kernel.Thm
+
+pub fn ring_inv_1() -> @kernel.Thm
+
+pub fn ring_inv_integer_mod_ring() -> @kernel.Thm
+
+pub fn ring_inv_inv() -> @kernel.Thm
+
+pub fn ring_inv_mul() -> @kernel.Thm
+
+pub fn ring_inv_pow() -> @kernel.Thm
+
+pub fn ring_inv_v1() -> @kernel.Thm
+
+pub fn ring_inv_zero() -> @kernel.Thm
+
+pub fn ring_irreducible() -> @kernel.Thm
+
+pub fn ring_irreducible_coprime_eq() -> @kernel.Thm
+
+pub fn ring_irreducible_divides_or_coprime() -> @kernel.Thm
+
+pub fn ring_irreducible_eq_maximal_ideal() -> @kernel.Thm
+
+pub fn ring_irreducible_eq_maximal_principal_ideal() -> @kernel.Thm
+
+pub fn ring_irreducible_imp_maximal_principal_ideal() -> @kernel.Thm
+
+pub fn ring_irreducible_imp_nontrivial_ring() -> @kernel.Thm
+
+pub fn ring_irreducible_imp_squarefree() -> @kernel.Thm
+
+pub fn ring_irreducible_in_carrier() -> @kernel.Thm
+
+pub fn ring_irreducible_isomorphic_image_eq() -> @kernel.Thm
+
+pub fn ring_irreducible_neg() -> @kernel.Thm
+
+pub fn ring_irreducible_poly_const() -> @kernel.Thm
+
+pub fn ring_irreducible_poly_recip() -> @kernel.Thm
+
+pub fn ring_irreducible_poly_recip_eq() -> @kernel.Thm
+
+pub fn ring_irreducible_poly_var() -> @kernel.Thm
+
+pub fn ring_irreducibles_coprime_or_associates() -> @kernel.Thm
+
+pub fn ring_isomorphism() -> @kernel.Thm
+
+pub fn ring_isomorphism_alt() -> @kernel.Thm
+
+pub fn ring_isomorphism_between_subrings() -> @kernel.Thm
+
+pub fn ring_isomorphism_compose() -> @kernel.Thm
+
+pub fn ring_isomorphism_compose_rev() -> @kernel.Thm
+
+pub fn ring_isomorphism_epimorphism() -> @kernel.Thm
+
+pub fn ring_isomorphism_eq() -> @kernel.Thm
+
+pub fn ring_isomorphism_eq_epimorphism_finite() -> @kernel.Thm
+
+pub fn ring_isomorphism_eq_monomorphism_finite() -> @kernel.Thm
+
+pub fn ring_isomorphism_fractionate_gen() -> @kernel.Thm
+
+pub fn ring_isomorphism_fst() -> @kernel.Thm
+
+pub fn ring_isomorphism_i() -> @kernel.Thm
+
+pub fn ring_isomorphism_id() -> @kernel.Thm
+
+pub fn ring_isomorphism_imp_epimorphism() -> @kernel.Thm
+
+pub fn ring_isomorphism_imp_homomorphism() -> @kernel.Thm
+
+pub fn ring_isomorphism_imp_isomorphic() -> @kernel.Thm
+
+pub fn ring_isomorphism_imp_monomorphism() -> @kernel.Thm
+
+pub fn ring_isomorphism_inverse() -> @kernel.Thm
+
+pub fn ring_isomorphism_monomorphism() -> @kernel.Thm
+
+pub fn ring_isomorphism_monomorphism_alt() -> @kernel.Thm
+
+pub fn ring_isomorphism_onto_image() -> @kernel.Thm
+
+pub fn ring_isomorphism_paired2() -> @kernel.Thm
+
+pub fn ring_isomorphism_poly_reindex() -> @kernel.Thm
+
+pub fn ring_isomorphism_poly_ring_trivial() -> @kernel.Thm
+
+pub fn ring_isomorphism_poly_rings() -> @kernel.Thm
+
+pub fn ring_isomorphism_powser_reindex() -> @kernel.Thm
+
+pub fn ring_isomorphism_powser_ring_trivial() -> @kernel.Thm
+
+pub fn ring_isomorphism_powser_rings() -> @kernel.Thm
+
+pub fn ring_isomorphism_prime_subring() -> @kernel.Thm
+
+pub fn ring_isomorphism_prod_integer_mod_ring() -> @kernel.Thm
+
+pub fn ring_isomorphism_product_projection() -> @kernel.Thm
+
+pub fn ring_isomorphism_product_ring_disjoint_union() -> @kernel.Thm
+
+pub fn ring_isomorphism_ring_kernel_ring_image() -> @kernel.Thm
+
+pub fn ring_isomorphism_snd() -> @kernel.Thm
+
+pub fn ring_isomorphism_subset() -> @kernel.Thm
+
+pub fn ring_isomorphism_v1() -> @kernel.Thm
+
+pub fn ring_isomorphisms() -> @kernel.Thm
+
+pub fn ring_isomorphisms_between_subrings() -> @kernel.Thm
+
+pub fn ring_isomorphisms_between_subrings_alt() -> @kernel.Thm
+
+pub fn ring_isomorphisms_compose() -> @kernel.Thm
+
+pub fn ring_isomorphisms_eq() -> @kernel.Thm
+
+pub fn ring_isomorphisms_i() -> @kernel.Thm
+
+pub fn ring_isomorphisms_id() -> @kernel.Thm
+
+pub fn ring_isomorphisms_imp_isomorphism() -> @kernel.Thm
+
+pub fn ring_isomorphisms_imp_isomorphism_alt() -> @kernel.Thm
+
+pub fn ring_isomorphisms_isomorphism() -> @kernel.Thm
+
+pub fn ring_isomorphisms_paired2() -> @kernel.Thm
+
+pub fn ring_isomorphisms_poly_poly_ring() -> @kernel.Thm
+
+pub fn ring_isomorphisms_poly_reindex() -> @kernel.Thm
+
+pub fn ring_isomorphisms_poly_rings() -> @kernel.Thm
+
+pub fn ring_isomorphisms_poly_subring_generated() -> @kernel.Thm
+
+pub fn ring_isomorphisms_powser_powser_ring() -> @kernel.Thm
+
+pub fn ring_isomorphisms_powser_reindex() -> @kernel.Thm
+
+pub fn ring_isomorphisms_powser_rings() -> @kernel.Thm
+
+pub fn ring_isomorphisms_powser_subring_generated() -> @kernel.Thm
+
+pub fn ring_isomorphisms_prod_ring_swap() -> @kernel.Thm
+
+pub fn ring_isomorphisms_product_ring_disjoint_union() -> @kernel.Thm
+
+pub fn ring_isomorphisms_sym() -> @kernel.Thm
+
+pub fn ring_isomorphisms_v1() -> @kernel.Thm
+
+pub fn ring_kernel() -> @kernel.Thm
+
+pub fn ring_kernel_0() -> @kernel.Thm
+
+pub fn ring_kernel_from_subring_generated() -> @kernel.Thm
+
+pub fn ring_kernel_from_trivial_ring() -> @kernel.Thm
+
+pub fn ring_kernel_nonempty() -> @kernel.Thm
+
+pub fn ring_kernel_ring_coset() -> @kernel.Thm
+
+pub fn ring_kernel_subset_carrier() -> @kernel.Thm
+
+pub fn ring_kernel_to_subring_generated() -> @kernel.Thm
+
+pub fn ring_kernel_to_trivial_ring() -> @kernel.Thm
+
+pub fn ring_linv_unique() -> @kernel.Thm
+
+pub fn ring_lneg_unique() -> @kernel.Thm
+
+pub fn ring_localequiv() -> @kernel.Thm
+
+pub fn ring_localequiv_add() -> @kernel.Thm
+
+pub fn ring_localequiv_eq_0() -> @kernel.Thm
+
+pub fn ring_localequiv_eq_0_gen() -> @kernel.Thm
+
+pub fn ring_localequiv_equiv() -> @kernel.Thm
+
+pub fn ring_localequiv_in_carrier() -> @kernel.Thm
+
+pub fn ring_localequiv_in_localized_ideal() -> @kernel.Thm
+
+pub fn ring_localequiv_mul() -> @kernel.Thm
+
+pub fn ring_localequiv_neg() -> @kernel.Thm
+
+pub fn ring_localequiv_refl() -> @kernel.Thm
+
+pub fn ring_localequiv_refl_v1() -> @kernel.Thm
+
+pub fn ring_localequiv_split() -> @kernel.Thm
+
+pub fn ring_localequiv_split_explicit() -> @kernel.Thm
+
+pub fn ring_localequiv_sym() -> @kernel.Thm
+
+pub fn ring_localequiv_trans() -> @kernel.Thm
+
+pub fn ring_localequiv_v1() -> @kernel.Thm
+
+pub fn ring_localization() -> @kernel.Thm
+
+pub fn ring_localization_0() -> @kernel.Thm
+
+pub fn ring_localization_1() -> @kernel.Thm
+
+pub fn ring_localization_add() -> @kernel.Thm
+
+pub fn ring_localization_carrier() -> @kernel.Thm
+
+pub fn ring_localization_homomorphism_unique() -> @kernel.Thm
+
+pub fn ring_localization_mul() -> @kernel.Thm
+
+pub fn ring_localization_neg() -> @kernel.Thm
+
+pub fn ring_localization_prime_ideal_correspondence() -> @kernel.Thm
+
+pub fn ring_localization_unchanged() -> @kernel.Thm
+
+pub fn ring_localization_unique() -> @kernel.Thm
+
+pub fn ring_localization_universal() -> @kernel.Thm
+
+pub fn ring_localization_v1() -> @kernel.Thm
+
+pub fn ring_lzero_unique() -> @kernel.Thm
+
+pub fn ring_monomorphic_image_rule(@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn ring_monomorphism() -> @kernel.Thm
+
+pub fn ring_monomorphism_alt() -> @kernel.Thm
+
+pub fn ring_monomorphism_alt_eq() -> @kernel.Thm
+
+pub fn ring_monomorphism_between_subrings() -> @kernel.Thm
+
+pub fn ring_monomorphism_compose() -> @kernel.Thm
+
+pub fn ring_monomorphism_compose_rev() -> @kernel.Thm
+
+pub fn ring_monomorphism_diag() -> @kernel.Thm
+
+pub fn ring_monomorphism_diagonal() -> @kernel.Thm
+
+pub fn ring_monomorphism_diagonal_univ() -> @kernel.Thm
+
+pub fn ring_monomorphism_epimorphism() -> @kernel.Thm
+
+pub fn ring_monomorphism_eq() -> @kernel.Thm
+
+pub fn ring_monomorphism_eq_0() -> @kernel.Thm
+
+pub fn ring_monomorphism_fractionate() -> @kernel.Thm
+
+pub fn ring_monomorphism_fractionate_gen() -> @kernel.Thm
+
+pub fn ring_monomorphism_frobenius() -> @kernel.Thm
+
+pub fn ring_monomorphism_frobenius_gen() -> @kernel.Thm
+
+pub fn ring_monomorphism_from_integer_mod_ring() -> @kernel.Thm
+
+pub fn ring_monomorphism_from_subring_generated() -> @kernel.Thm
+
+pub fn ring_monomorphism_from_trivial_ring() -> @kernel.Thm
+
+pub fn ring_monomorphism_i() -> @kernel.Thm
+
+pub fn ring_monomorphism_id() -> @kernel.Thm
+
+pub fn ring_monomorphism_imp_homomorphism() -> @kernel.Thm
+
+pub fn ring_monomorphism_inclusion() -> @kernel.Thm
+
+pub fn ring_monomorphism_injective_eq() -> @kernel.Thm
+
+pub fn ring_monomorphism_integer_mod_ring_of_int() -> @kernel.Thm
+
+pub fn ring_monomorphism_integer_ring_of_int() -> @kernel.Thm
+
+pub fn ring_monomorphism_into_subring() -> @kernel.Thm
+
+pub fn ring_monomorphism_into_superring() -> @kernel.Thm
+
+pub fn ring_monomorphism_isomorphism_compose_rev() -> @kernel.Thm
+
+pub fn ring_monomorphism_left_invertible() -> @kernel.Thm
+
+pub fn ring_monomorphism_poly_const() -> @kernel.Thm
+
+pub fn ring_monomorphism_poly_powser() -> @kernel.Thm
+
+pub fn ring_monomorphism_poly_rings() -> @kernel.Thm
+
+pub fn ring_monomorphism_powser_const() -> @kernel.Thm
+
+pub fn ring_monomorphism_powser_rings() -> @kernel.Thm
+
+pub fn ring_monomorphism_product() -> @kernel.Thm
+
+pub fn ring_monomorphism_product_gen() -> @kernel.Thm
+
+pub fn ring_monomorphism_sum() -> @kernel.Thm
+
+pub fn ring_monomorphism_sum_gen() -> @kernel.Thm
+
+pub fn ring_monomorphism_to_trivial_ring() -> @kernel.Thm
+
+pub fn ring_monomorphism_v1() -> @kernel.Thm
+
+pub fn ring_mul() -> @kernel.Thm
+
+pub fn ring_mul_ac() -> @kernel.Thm
+
+pub fn ring_mul_assoc() -> @kernel.Thm
+
+pub fn ring_mul_imp_units() -> @kernel.Thm
+
+pub fn ring_mul_in_prime_ideal() -> @kernel.Thm
+
+pub fn ring_mul_in_setmul() -> @kernel.Thm
+
+pub fn ring_mul_in_subring_generated() -> @kernel.Thm
+
+pub fn ring_mul_lcancel() -> @kernel.Thm
+
+pub fn ring_mul_lid() -> @kernel.Thm
+
+pub fn ring_mul_linv() -> @kernel.Thm
+
+pub fn ring_mul_linv_eq() -> @kernel.Thm
+
+pub fn ring_mul_lneg() -> @kernel.Thm
+
+pub fn ring_mul_lzero() -> @kernel.Thm
+
+pub fn ring_mul_pow() -> @kernel.Thm
+
+pub fn ring_mul_rcancel() -> @kernel.Thm
+
+pub fn ring_mul_rid() -> @kernel.Thm
+
+pub fn ring_mul_rinv() -> @kernel.Thm
+
+pub fn ring_mul_rinv_eq() -> @kernel.Thm
+
+pub fn ring_mul_rneg() -> @kernel.Thm
+
+pub fn ring_mul_rzero() -> @kernel.Thm
+
+pub fn ring_mul_sym() -> @kernel.Thm
+
+pub fn ring_mul_v1() -> @kernel.Thm
+
+pub fn ring_multiple_in_ideal() -> @kernel.Thm
+
+pub fn ring_multsys() -> @kernel.Thm
+
+pub fn ring_multsys_idempot() -> @kernel.Thm
+
+pub fn ring_multsys_imp_nonempty() -> @kernel.Thm
+
+pub fn ring_multsys_imp_subset() -> @kernel.Thm
+
+pub fn ring_multsys_inter() -> @kernel.Thm
+
+pub fn ring_multsys_inters() -> @kernel.Thm
+
+pub fn ring_multsys_nilpotent_exists() -> @kernel.Thm
+
+pub fn ring_multsys_nonprime() -> @kernel.Thm
+
+pub fn ring_multsys_nonprime_eq() -> @kernel.Thm
+
+pub fn ring_multsys_nonzero() -> @kernel.Thm
+
+pub fn ring_multsys_powers() -> @kernel.Thm
+
+pub fn ring_multsys_regular() -> @kernel.Thm
+
+pub fn ring_multsys_units() -> @kernel.Thm
+
+pub fn ring_multsys_v1() -> @kernel.Thm
+
+pub fn ring_mulysys_1() -> @kernel.Thm
+
+pub fn ring_mulysys_carrier() -> @kernel.Thm
+
+pub fn ring_neg() -> @kernel.Thm
+
+pub fn ring_neg_0() -> @kernel.Thm
+
+pub fn ring_neg_add() -> @kernel.Thm
+
+pub fn ring_neg_eq() -> @kernel.Thm
+
+pub fn ring_neg_eq_0() -> @kernel.Thm
+
+pub fn ring_neg_eq_swap() -> @kernel.Thm
+
+pub fn ring_neg_in_setneg() -> @kernel.Thm
+
+pub fn ring_neg_in_subring_generated() -> @kernel.Thm
+
+pub fn ring_neg_neg() -> @kernel.Thm
+
+pub fn ring_neg_sub() -> @kernel.Thm
+
+pub fn ring_neg_v1() -> @kernel.Thm
+
+pub fn ring_nilpotent() -> @kernel.Thm
+
+pub fn ring_nilpotent_0() -> @kernel.Thm
+
+pub fn ring_nilpotent_1() -> @kernel.Thm
+
+pub fn ring_nilpotent_add() -> @kernel.Thm
+
+pub fn ring_nilpotent_homomorphic_image() -> @kernel.Thm
+
+pub fn ring_nilpotent_imp_zerodivisor() -> @kernel.Thm
+
+pub fn ring_nilpotent_in_carrier() -> @kernel.Thm
+
+pub fn ring_nilpotent_lmul() -> @kernel.Thm
+
+pub fn ring_nilpotent_monomorphic_image_eq() -> @kernel.Thm
+
+pub fn ring_nilpotent_neg() -> @kernel.Thm
+
+pub fn ring_nilpotent_neg_eq() -> @kernel.Thm
+
+pub fn ring_nilpotent_poly_ring() -> @kernel.Thm
+
+pub fn ring_nilpotent_pow() -> @kernel.Thm
+
+pub fn ring_nilpotent_prod_ring() -> @kernel.Thm
+
+pub fn ring_nilpotent_product_ring() -> @kernel.Thm
+
+pub fn ring_nilpotent_product_ring_gen() -> @kernel.Thm
+
+pub fn ring_nilpotent_rmul() -> @kernel.Thm
+
+pub fn ring_nilpotent_sub() -> @kernel.Thm
+
+pub fn ring_nilpotent_sum() -> @kernel.Thm
+
+pub fn ring_nilpotent_unit() -> @kernel.Thm
+
+pub fn ring_nilpotent_v1() -> @kernel.Thm
+
+pub fn ring_nilradical() -> @kernel.Thm
+
+pub fn ring_nonunit_divides_irreducible() -> @kernel.Thm
+
+pub fn ring_of_int() -> @kernel.Thm
+
+pub fn ring_of_int_0() -> @kernel.Thm
+
+pub fn ring_of_int_1() -> @kernel.Thm
+
+pub fn ring_of_int_add() -> @kernel.Thm
+
+pub fn ring_of_int_cases() -> @kernel.Thm
+
+pub fn ring_of_int_clauses() -> @kernel.Thm
+
+pub fn ring_of_int_eq() -> @kernel.Thm
+
+pub fn ring_of_int_eq_0() -> @kernel.Thm
+
+pub fn ring_of_int_mul() -> @kernel.Thm
+
+pub fn ring_of_int_neg() -> @kernel.Thm
+
+pub fn ring_of_int_of_num() -> @kernel.Thm
+
+pub fn ring_of_int_pow() -> @kernel.Thm
+
+pub fn ring_of_int_prod_ring() -> @kernel.Thm
+
+pub fn ring_of_int_rem() -> @kernel.Thm
+
+pub fn ring_of_int_sub() -> @kernel.Thm
+
+pub fn ring_of_int_subring_generated() -> @kernel.Thm
+
+pub fn ring_of_int_v1() -> @kernel.Thm
+
+pub fn ring_of_num() -> @kernel.Thm
+
+pub fn ring_of_num_0() -> @kernel.Thm
+
+pub fn ring_of_num_1() -> @kernel.Thm
+
+pub fn ring_of_num_add() -> @kernel.Thm
+
+pub fn ring_of_num_char() -> @kernel.Thm
+
+pub fn ring_of_num_clauses() -> @kernel.Thm
+
+pub fn ring_of_num_eq() -> @kernel.Thm
+
+pub fn ring_of_num_eq_0() -> @kernel.Thm
+
+pub fn ring_of_num_exp() -> @kernel.Thm
+
+pub fn ring_of_num_mod() -> @kernel.Thm
+
+pub fn ring_of_num_mul() -> @kernel.Thm
+
+pub fn ring_of_num_poly_ring() -> @kernel.Thm
+
+pub fn ring_of_num_powser_ring() -> @kernel.Thm
+
+pub fn ring_of_num_prod_ring() -> @kernel.Thm
+
+pub fn ring_of_num_subring_generated() -> @kernel.Thm
+
+pub fn ring_of_num_v1() -> @kernel.Thm
+
+pub fn ring_order_1() -> @kernel.Thm
+
+pub fn ring_order_divides() -> @kernel.Thm
+
+pub fn ring_order_eq_0() -> @kernel.Thm
+
+pub fn ring_order_eq_1() -> @kernel.Thm
+
+pub fn ring_order_mul() -> @kernel.Thm
+
+pub fn ring_order_mul_divides() -> @kernel.Thm
+
+pub fn ring_order_mul_divides_gen() -> @kernel.Thm
+
+pub fn ring_order_mul_divides_lcm() -> @kernel.Thm
+
+pub fn ring_order_pow() -> @kernel.Thm
+
+pub fn ring_order_pow_divides() -> @kernel.Thm
+
+pub fn ring_order_pow_gen() -> @kernel.Thm
+
+pub fn ring_order_unique() -> @kernel.Thm
+
+pub fn ring_order_unique_prime() -> @kernel.Thm
+
+pub fn ring_poly_universal_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ring_polynomial() -> @kernel.Thm
+
+pub fn ring_polynomial_0() -> @kernel.Thm
+
+pub fn ring_polynomial_1() -> @kernel.Thm
+
+pub fn ring_polynomial_add() -> @kernel.Thm
+
+pub fn ring_polynomial_carrier() -> @kernel.Thm
+
+pub fn ring_polynomial_carrier_gen() -> @kernel.Thm
+
+pub fn ring_polynomial_coeff() -> @kernel.Thm
+
+pub fn ring_polynomial_coeff_bound() -> @kernel.Thm
+
+pub fn ring_polynomial_coeff_zero_from() -> @kernel.Thm
+
+pub fn ring_polynomial_compose() -> @kernel.Thm
+
+pub fn ring_polynomial_const() -> @kernel.Thm
+
+pub fn ring_polynomial_div() -> @kernel.Thm
+
+pub fn ring_polynomial_imp_powerseries() -> @kernel.Thm
+
+pub fn ring_polynomial_monomial() -> @kernel.Thm
+
+pub fn ring_polynomial_mul() -> @kernel.Thm
+
+pub fn ring_polynomial_neg() -> @kernel.Thm
+
+pub fn ring_polynomial_poly_deriv() -> @kernel.Thm
+
+pub fn ring_polynomial_pow() -> @kernel.Thm
+
+pub fn ring_polynomial_powerseries_coeff() -> @kernel.Thm
+
+pub fn ring_polynomial_recip() -> @kernel.Thm
+
+pub fn ring_polynomial_rem() -> @kernel.Thm
+
+pub fn ring_polynomial_sub() -> @kernel.Thm
+
+pub fn ring_polynomial_subring_coeff() -> @kernel.Thm
+
+pub fn ring_polynomial_v1() -> @kernel.Thm
+
+pub fn ring_polynomial_var() -> @kernel.Thm
+
+pub fn ring_pow() -> @kernel.Thm
+
+pub fn ring_pow_0() -> @kernel.Thm
+
+pub fn ring_pow_1() -> @kernel.Thm
+
+pub fn ring_pow_2() -> @kernel.Thm
+
+pub fn ring_pow_add() -> @kernel.Thm
+
+pub fn ring_pow_coprime_eq_1() -> @kernel.Thm
+
+pub fn ring_pow_eq_1() -> @kernel.Thm
+
+pub fn ring_pow_gcd_eq_1() -> @kernel.Thm
+
+pub fn ring_pow_idempotent() -> @kernel.Thm
+
+pub fn ring_pow_in_ideal() -> @kernel.Thm
+
+pub fn ring_pow_in_multsys() -> @kernel.Thm
+
+pub fn ring_pow_in_prime_ideal() -> @kernel.Thm
+
+pub fn ring_pow_in_radical() -> @kernel.Thm
+
+pub fn ring_pow_in_subring_generated() -> @kernel.Thm
+
+pub fn ring_pow_inv() -> @kernel.Thm
+
+pub fn ring_pow_mod_order() -> @kernel.Thm
+
+pub fn ring_pow_mod_order_gen() -> @kernel.Thm
+
+pub fn ring_pow_mul() -> @kernel.Thm
+
+pub fn ring_pow_neg() -> @kernel.Thm
+
+pub fn ring_pow_one() -> @kernel.Thm
+
+pub fn ring_pow_pow() -> @kernel.Thm
+
+pub fn ring_pow_prod_ring() -> @kernel.Thm
+
+pub fn ring_pow_product_ring() -> @kernel.Thm
+
+pub fn ring_pow_ring_order() -> @kernel.Thm
+
+pub fn ring_pow_subring_generated() -> @kernel.Thm
+
+pub fn ring_pow_v1() -> @kernel.Thm
+
+pub fn ring_pow_zero() -> @kernel.Thm
+
+pub fn ring_powerseries() -> @kernel.Thm
+
+pub fn ring_powerseries_0() -> @kernel.Thm
+
+pub fn ring_powerseries_1() -> @kernel.Thm
+
+pub fn ring_powerseries_add() -> @kernel.Thm
+
+pub fn ring_powerseries_coeff() -> @kernel.Thm
+
+pub fn ring_powerseries_compose() -> @kernel.Thm
+
+pub fn ring_powerseries_const() -> @kernel.Thm
+
+pub fn ring_powerseries_monomial() -> @kernel.Thm
+
+pub fn ring_powerseries_mul() -> @kernel.Thm
+
+pub fn ring_powerseries_neg() -> @kernel.Thm
+
+pub fn ring_powerseries_poly_deriv() -> @kernel.Thm
+
+pub fn ring_powerseries_pow() -> @kernel.Thm
+
+pub fn ring_powerseries_recip() -> @kernel.Thm
+
+pub fn ring_powerseries_reindex() -> @kernel.Thm
+
+pub fn ring_powerseries_sub() -> @kernel.Thm
+
+pub fn ring_powerseries_v1() -> @kernel.Thm
+
+pub fn ring_powerseries_var() -> @kernel.Thm
+
+pub fn ring_prime() -> @kernel.Thm
+
+pub fn ring_prime_divides_irreducible() -> @kernel.Thm
+
+pub fn ring_prime_divides_mul() -> @kernel.Thm
+
+pub fn ring_prime_divides_pow() -> @kernel.Thm
+
+pub fn ring_prime_divides_product() -> @kernel.Thm
+
+pub fn ring_prime_ideal() -> @kernel.Thm
+
+pub fn ring_prime_imp_nontrivial_ring() -> @kernel.Thm
+
+pub fn ring_prime_imp_squarefree() -> @kernel.Thm
+
+pub fn ring_prime_in_carrier() -> @kernel.Thm
+
+pub fn ring_prime_isomorphic_image_eq() -> @kernel.Thm
+
+pub fn ring_prime_mul_divides() -> @kernel.Thm
+
+pub fn ring_prime_mul_divides_eq() -> @kernel.Thm
+
+pub fn ring_prime_neg() -> @kernel.Thm
+
+pub fn ring_prime_poly_const() -> @kernel.Thm
+
+pub fn ring_prime_poly_recip() -> @kernel.Thm
+
+pub fn ring_prime_poly_recip_eq() -> @kernel.Thm
+
+pub fn ring_prime_poly_ring_mono() -> @kernel.Thm
+
+pub fn ring_prime_poly_var() -> @kernel.Thm
+
+pub fn ring_prime_poly_var_univariate() -> @kernel.Thm
+
+pub fn ring_prime_product_divides() -> @kernel.Thm
+
+pub fn ring_principal_ideals_wf() -> @kernel.Thm
+
+pub fn ring_product() -> @kernel.Thm
+
+pub fn ring_product_0() -> @kernel.Thm
+
+pub fn ring_product_1() -> @kernel.Thm
+
+pub fn ring_product_cases() -> @kernel.Thm
+
+pub fn ring_product_clauses() -> @kernel.Thm
+
+pub fn ring_product_clauses_left() -> @kernel.Thm
+
+pub fn ring_product_clauses_numseg() -> @kernel.Thm
+
+pub fn ring_product_clauses_numseg_alt() -> @kernel.Thm
+
+pub fn ring_product_closed() -> @kernel.Thm
+
+pub fn ring_product_const() -> @kernel.Thm
+
+pub fn ring_product_delta() -> @kernel.Thm
+
+pub fn ring_product_eq() -> @kernel.Thm
+
+pub fn ring_product_eq_1() -> @kernel.Thm
+
+pub fn ring_product_eq_general_inverses() -> @kernel.Thm
+
+pub fn ring_product_image() -> @kernel.Thm
+
+pub fn ring_product_image_gen() -> @kernel.Thm
+
+pub fn ring_product_incl_excl() -> @kernel.Thm
+
+pub fn ring_product_injection() -> @kernel.Thm
+
+pub fn ring_product_lmul() -> @kernel.Thm
+
+pub fn ring_product_mul() -> @kernel.Thm
+
+pub fn ring_product_nsum() -> @kernel.Thm
+
+pub fn ring_product_offset() -> @kernel.Thm
+
+pub fn ring_product_reflect() -> @kernel.Thm
+
+pub fn ring_product_related() -> @kernel.Thm
+
+pub fn ring_product_restrict() -> @kernel.Thm
+
+pub fn ring_product_restrict_set() -> @kernel.Thm
+
+pub fn ring_product_sing() -> @kernel.Thm
+
+pub fn ring_product_subring_generated() -> @kernel.Thm
+
+pub fn ring_product_subring_generated_gen() -> @kernel.Thm
+
+pub fn ring_product_superset() -> @kernel.Thm
+
+pub fn ring_product_support() -> @kernel.Thm
+
+pub fn ring_product_swap() -> @kernel.Thm
+
+pub fn ring_product_trivial() -> @kernel.Thm
+
+pub fn ring_product_union() -> @kernel.Thm
+
+pub fn ring_product_v1() -> @kernel.Thm
+
+pub fn ring_proper_divisor_induct() -> @kernel.Thm
+
+pub fn ring_properties() -> @kernel.Thm
+
+pub fn ring_pull_div() -> @kernel.Thm
+
+pub fn ring_pull_div_conv(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn ring_pull_div_tac(@list.List[(String, @kernel.Thm)], @kernel.Term) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn ring_regular() -> @kernel.Thm
+
+pub fn ring_regular_0() -> @kernel.Thm
+
+pub fn ring_regular_1() -> @kernel.Thm
+
+pub fn ring_regular_in_carrier() -> @kernel.Thm
+
+pub fn ring_regular_isomorphic_image_eq() -> @kernel.Thm
+
+pub fn ring_regular_mul() -> @kernel.Thm
+
+pub fn ring_regular_mul_eq() -> @kernel.Thm
+
+pub fn ring_regular_neg() -> @kernel.Thm
+
+pub fn ring_regular_neg_eq() -> @kernel.Thm
+
+pub fn ring_regular_nilpotent_clauses() -> @kernel.Thm
+
+pub fn ring_regular_pow() -> @kernel.Thm
+
+pub fn ring_regular_prod_ring() -> @kernel.Thm
+
+pub fn ring_regular_product_ring() -> @kernel.Thm
+
+pub fn ring_ring_cofactors_universal(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @list.List[@kernel.Term] raise) raise
+
+pub fn ring_rinv_unique() -> @kernel.Thm
+
+pub fn ring_rneg_unique() -> @kernel.Thm
+
+pub fn ring_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ring_rzero_unique() -> @kernel.Thm
+
+pub fn ring_saturated_multsys_nonprime() -> @kernel.Thm
+
+pub fn ring_scale_setmul() -> @kernel.Thm
+
+pub fn ring_setadd() -> @kernel.Thm
+
+pub fn ring_setadd_ac() -> @kernel.Thm
+
+pub fn ring_setadd_assoc() -> @kernel.Thm
+
+pub fn ring_setadd_cosets() -> @kernel.Thm
+
+pub fn ring_setadd_eq_empty() -> @kernel.Thm
+
+pub fn ring_setadd_ideal_left() -> @kernel.Thm
+
+pub fn ring_setadd_ideal_right() -> @kernel.Thm
+
+pub fn ring_setadd_lcancel() -> @kernel.Thm
+
+pub fn ring_setadd_lcancel_set() -> @kernel.Thm
+
+pub fn ring_setadd_ldistrib() -> @kernel.Thm
+
+pub fn ring_setadd_lsubset() -> @kernel.Thm
+
+pub fn ring_setadd_lsubset_eq() -> @kernel.Thm
+
+pub fn ring_setadd_lzero() -> @kernel.Thm
+
+pub fn ring_setadd_mono() -> @kernel.Thm
+
+pub fn ring_setadd_prod_ring() -> @kernel.Thm
+
+pub fn ring_setadd_product_ring() -> @kernel.Thm
+
+pub fn ring_setadd_rcancel() -> @kernel.Thm
+
+pub fn ring_setadd_rcancel_set() -> @kernel.Thm
+
+pub fn ring_setadd_rdistrib() -> @kernel.Thm
+
+pub fn ring_setadd_rsubset() -> @kernel.Thm
+
+pub fn ring_setadd_rsubset_eq() -> @kernel.Thm
+
+pub fn ring_setadd_rzero() -> @kernel.Thm
+
+pub fn ring_setadd_sing() -> @kernel.Thm
+
+pub fn ring_setadd_subring() -> @kernel.Thm
+
+pub fn ring_setadd_subring_generated() -> @kernel.Thm
+
+pub fn ring_setadd_subset_ideal() -> @kernel.Thm
+
+pub fn ring_setadd_superset_left() -> @kernel.Thm
+
+pub fn ring_setadd_superset_right() -> @kernel.Thm
+
+pub fn ring_setadd_sym() -> @kernel.Thm
+
+pub fn ring_setadd_v1() -> @kernel.Thm
+
+pub fn ring_setmul() -> @kernel.Thm
+
+pub fn ring_setmul_ac() -> @kernel.Thm
+
+pub fn ring_setmul_assoc() -> @kernel.Thm
+
+pub fn ring_setmul_cosets() -> @kernel.Thm
+
+pub fn ring_setmul_eq_empty() -> @kernel.Thm
+
+pub fn ring_setmul_ideal_generated_sing() -> @kernel.Thm
+
+pub fn ring_setmul_ideal_left() -> @kernel.Thm
+
+pub fn ring_setmul_ideal_right() -> @kernel.Thm
+
+pub fn ring_setmul_lid() -> @kernel.Thm
+
+pub fn ring_setmul_mono() -> @kernel.Thm
+
+pub fn ring_setmul_rid() -> @kernel.Thm
+
+pub fn ring_setmul_sing() -> @kernel.Thm
+
+pub fn ring_setmul_subring() -> @kernel.Thm
+
+pub fn ring_setmul_subset_ideal() -> @kernel.Thm
+
+pub fn ring_setmul_sym() -> @kernel.Thm
+
+pub fn ring_setmul_v1() -> @kernel.Thm
+
+pub fn ring_setneg() -> @kernel.Thm
+
+pub fn ring_setneg_coset() -> @kernel.Thm
+
+pub fn ring_setneg_eq_empty() -> @kernel.Thm
+
+pub fn ring_setneg_ideal() -> @kernel.Thm
+
+pub fn ring_setneg_mono() -> @kernel.Thm
+
+pub fn ring_setneg_setadd() -> @kernel.Thm
+
+pub fn ring_setneg_sing() -> @kernel.Thm
+
+pub fn ring_setneg_subring() -> @kernel.Thm
+
+pub fn ring_setneg_subring_generated() -> @kernel.Thm
+
+pub fn ring_setneg_v1() -> @kernel.Thm
+
+pub fn ring_squarefree() -> @kernel.Thm
+
+pub fn ring_squarefree_0() -> @kernel.Thm
+
+pub fn ring_squarefree_1() -> @kernel.Thm
+
+pub fn ring_squarefree_alt() -> @kernel.Thm
+
+pub fn ring_squarefree_associates() -> @kernel.Thm
+
+pub fn ring_squarefree_coprime() -> @kernel.Thm
+
+pub fn ring_squarefree_coprime_divisors() -> @kernel.Thm
+
+pub fn ring_squarefree_decomposition() -> @kernel.Thm
+
+pub fn ring_squarefree_divides() -> @kernel.Thm
+
+pub fn ring_squarefree_divides_square() -> @kernel.Thm
+
+pub fn ring_squarefree_divisor() -> @kernel.Thm
+
+pub fn ring_squarefree_divpow() -> @kernel.Thm
+
+pub fn ring_squarefree_divpow_eq() -> @kernel.Thm
+
+pub fn ring_squarefree_gcd() -> @kernel.Thm
+
+pub fn ring_squarefree_imp_no_prime_square() -> @kernel.Thm
+
+pub fn ring_squarefree_imp_nonzero() -> @kernel.Thm
+
+pub fn ring_squarefree_in_carrier() -> @kernel.Thm
+
+pub fn ring_squarefree_mul_eq() -> @kernel.Thm
+
+pub fn ring_squarefree_mul_imp() -> @kernel.Thm
+
+pub fn ring_squarefree_pow() -> @kernel.Thm
+
+pub fn ring_squarefree_prime_divisor_eq() -> @kernel.Thm
+
+pub fn ring_squarefree_prime_eq() -> @kernel.Thm
+
+pub fn ring_squarefree_product() -> @kernel.Thm
+
+pub fn ring_squarefree_v1() -> @kernel.Thm
+
+pub fn ring_sub() -> @kernel.Thm
+
+pub fn ring_sub_eq_0() -> @kernel.Thm
+
+pub fn ring_sub_ldistrib() -> @kernel.Thm
+
+pub fn ring_sub_lzero() -> @kernel.Thm
+
+pub fn ring_sub_rdistrib() -> @kernel.Thm
+
+pub fn ring_sub_refl() -> @kernel.Thm
+
+pub fn ring_sub_rzero() -> @kernel.Thm
+
+pub fn ring_sub_subring_generated() -> @kernel.Thm
+
+pub fn ring_sub_telescope() -> @kernel.Thm
+
+pub fn ring_sub_v1() -> @kernel.Thm
+
+pub fn ring_subring_inter_ideal() -> @kernel.Thm
+
+pub fn ring_sum() -> @kernel.Thm
+
+pub fn ring_sum_0() -> @kernel.Thm
+
+pub fn ring_sum_add() -> @kernel.Thm
+
+pub fn ring_sum_cases() -> @kernel.Thm
+
+pub fn ring_sum_clauses() -> @kernel.Thm
+
+pub fn ring_sum_clauses_left() -> @kernel.Thm
+
+pub fn ring_sum_clauses_numseg() -> @kernel.Thm
+
+pub fn ring_sum_clauses_numseg_alt() -> @kernel.Thm
+
+pub fn ring_sum_clauses_right() -> @kernel.Thm
+
+pub fn ring_sum_closed() -> @kernel.Thm
+
+pub fn ring_sum_const() -> @kernel.Thm
+
+pub fn ring_sum_delete() -> @kernel.Thm
+
+pub fn ring_sum_delta() -> @kernel.Thm
+
+pub fn ring_sum_diff() -> @kernel.Thm
+
+pub fn ring_sum_diffs() -> @kernel.Thm
+
+pub fn ring_sum_diffs_alt() -> @kernel.Thm
+
+pub fn ring_sum_eq() -> @kernel.Thm
+
+pub fn ring_sum_eq_0() -> @kernel.Thm
+
+pub fn ring_sum_eq_general_inverses() -> @kernel.Thm
+
+pub fn ring_sum_image() -> @kernel.Thm
+
+pub fn ring_sum_image_gen() -> @kernel.Thm
+
+pub fn ring_sum_incl_excl() -> @kernel.Thm
+
+pub fn ring_sum_lmul() -> @kernel.Thm
+
+pub fn ring_sum_neg() -> @kernel.Thm
+
+pub fn ring_sum_offset() -> @kernel.Thm
+
+pub fn ring_sum_product_ring() -> @kernel.Thm
+
+pub fn ring_sum_reflect() -> @kernel.Thm
+
+pub fn ring_sum_related() -> @kernel.Thm
+
+pub fn ring_sum_restrict() -> @kernel.Thm
+
+pub fn ring_sum_restrict_set() -> @kernel.Thm
+
+pub fn ring_sum_rmul() -> @kernel.Thm
+
+pub fn ring_sum_sing() -> @kernel.Thm
+
+pub fn ring_sum_sub() -> @kernel.Thm
+
+pub fn ring_sum_subring_generated() -> @kernel.Thm
+
+pub fn ring_sum_subring_generated_gen() -> @kernel.Thm
+
+pub fn ring_sum_sum_product() -> @kernel.Thm
+
+pub fn ring_sum_superset() -> @kernel.Thm
+
+pub fn ring_sum_support() -> @kernel.Thm
+
+pub fn ring_sum_swap() -> @kernel.Thm
+
+pub fn ring_sum_trivial() -> @kernel.Thm
+
+pub fn ring_sum_union() -> @kernel.Thm
+
+pub fn ring_sum_v1() -> @kernel.Thm
+
+pub fn ring_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn ring_tybij() -> @kernel.Thm
+
+pub fn ring_unit() -> @kernel.Thm
+
+pub fn ring_unit_0() -> @kernel.Thm
+
+pub fn ring_unit_1() -> @kernel.Thm
+
+pub fn ring_unit_div() -> @kernel.Thm
+
+pub fn ring_unit_divides() -> @kernel.Thm
+
+pub fn ring_unit_divides_all() -> @kernel.Thm
+
+pub fn ring_unit_divides_any() -> @kernel.Thm
+
+pub fn ring_unit_divisor() -> @kernel.Thm
+
+pub fn ring_unit_fraction_ring() -> @kernel.Thm
+
+pub fn ring_unit_fractionate() -> @kernel.Thm
+
+pub fn ring_unit_gcd() -> @kernel.Thm
+
+pub fn ring_unit_homomorphic_image() -> @kernel.Thm
+
+pub fn ring_unit_idempotent_eq_1() -> @kernel.Thm
+
+pub fn ring_unit_imp_regular() -> @kernel.Thm
+
+pub fn ring_unit_imp_squarefree() -> @kernel.Thm
+
+pub fn ring_unit_in_carrier() -> @kernel.Thm
+
+pub fn ring_unit_inv() -> @kernel.Thm
+
+pub fn ring_unit_isomorphic_image_eq() -> @kernel.Thm
+
+pub fn ring_unit_localequiv() -> @kernel.Thm
+
+pub fn ring_unit_localequiv_eq() -> @kernel.Thm
+
+pub fn ring_unit_localization() -> @kernel.Thm
+
+pub fn ring_unit_mul() -> @kernel.Thm
+
+pub fn ring_unit_mul_eq() -> @kernel.Thm
+
+pub fn ring_unit_neg() -> @kernel.Thm
+
+pub fn ring_unit_neg_eq() -> @kernel.Thm
+
+pub fn ring_unit_nilpotent_clauses() -> @kernel.Thm
+
+pub fn ring_unit_nilpotent_clauses_1() -> @kernel.Thm
+
+pub fn ring_unit_not_in_prime_ideal() -> @kernel.Thm
+
+pub fn ring_unit_poly_const() -> @kernel.Thm
+
+pub fn ring_unit_poly_domain() -> @kernel.Thm
+
+pub fn ring_unit_poly_recip() -> @kernel.Thm
+
+pub fn ring_unit_poly_recip_eq() -> @kernel.Thm
+
+pub fn ring_unit_poly_ring() -> @kernel.Thm
+
+pub fn ring_unit_poly_ring_1() -> @kernel.Thm
+
+pub fn ring_unit_poly_var() -> @kernel.Thm
+
+pub fn ring_unit_pow() -> @kernel.Thm
+
+pub fn ring_unit_pow_eq() -> @kernel.Thm
+
+pub fn ring_unit_powser_ring() -> @kernel.Thm
+
+pub fn ring_unit_product() -> @kernel.Thm
+
+pub fn ring_zerodivisor() -> @kernel.Thm
+
+pub fn ring_zerodivisor_0() -> @kernel.Thm
+
+pub fn ring_zerodivisor_1() -> @kernel.Thm
+
+pub fn ring_zerodivisor_fraction_ring() -> @kernel.Thm
+
+pub fn ring_zerodivisor_imp_nonunit() -> @kernel.Thm
+
+pub fn ring_zerodivisor_in_carrier() -> @kernel.Thm
+
+pub fn ring_zerodivisor_isomorphic_image_eq() -> @kernel.Thm
+
+pub fn ring_zerodivisor_lmul() -> @kernel.Thm
+
+pub fn ring_zerodivisor_monomorphic_image() -> @kernel.Thm
+
+pub fn ring_zerodivisor_mul() -> @kernel.Thm
+
+pub fn ring_zerodivisor_neg() -> @kernel.Thm
+
+pub fn ring_zerodivisor_neg_eq() -> @kernel.Thm
+
+pub fn ring_zerodivisor_nilpotent_clauses() -> @kernel.Thm
+
+pub fn ring_zerodivisor_pow() -> @kernel.Thm
+
+pub fn ring_zerodivisor_prod_ring() -> @kernel.Thm
+
+pub fn ring_zerodivisor_product_ring() -> @kernel.Thm
+
+pub fn ring_zerodivisor_rmul() -> @kernel.Thm
+
+pub fn rings_eq() -> @kernel.Thm
+
+pub fn second_ring_isomorphism_theorem() -> @kernel.Thm
+
+pub fn singleton_ring() -> @kernel.Thm
+
+pub fn singleton_ring_v1() -> @kernel.Thm
+
+pub fn subring_generated() -> @kernel.Thm
+
+pub fn subring_generated_by_homomorphic_image() -> @kernel.Thm
+
+pub fn subring_generated_by_subring_generated() -> @kernel.Thm
+
+pub fn subring_generated_by_subring_generated_idempot() -> @kernel.Thm
+
+pub fn subring_generated_eq() -> @kernel.Thm
+
+pub fn subring_generated_finitary() -> @kernel.Thm
+
+pub fn subring_generated_idempot() -> @kernel.Thm
+
+pub fn subring_generated_idempot_gen() -> @kernel.Thm
+
+pub fn subring_generated_inc() -> @kernel.Thm
+
+pub fn subring_generated_inc_gen() -> @kernel.Thm
+
+pub fn subring_generated_induct() -> @kernel.Thm
+
+pub fn subring_generated_induct_strong() -> @kernel.Thm
+
+pub fn subring_generated_insert_zero() -> @kernel.Thm
+
+pub fn subring_generated_minimal() -> @kernel.Thm
+
+pub fn subring_generated_minimal_eq() -> @kernel.Thm
+
+pub fn subring_generated_mono() -> @kernel.Thm
+
+pub fn subring_generated_prime_subring() -> @kernel.Thm
+
+pub fn subring_generated_refl() -> @kernel.Thm
+
+pub fn subring_generated_restrict() -> @kernel.Thm
+
+pub fn subring_generated_ring_carrier() -> @kernel.Thm
+
+pub fn subring_generated_subring_generated() -> @kernel.Thm
+
+pub fn subring_generated_subset_carrier() -> @kernel.Thm
+
+pub fn subring_generated_subset_carrier_subset() -> @kernel.Thm
+
+pub fn subring_generated_superset() -> @kernel.Thm
+
+pub fn subring_generated_union() -> @kernel.Thm
+
+pub fn subring_generated_union_left() -> @kernel.Thm
+
+pub fn subring_generated_union_right() -> @kernel.Thm
+
+pub fn subring_generated_v1() -> @kernel.Thm
+
+pub fn subring_imp_monomorphic_property() -> @kernel.Thm
+
+pub fn subring_monomorphism_epimorphism() -> @kernel.Thm
+
+pub fn subring_of() -> @kernel.Thm
+
+pub fn subring_of_epimorphic_preimage() -> @kernel.Thm
+
+pub fn subring_of_fixpoints() -> @kernel.Thm
+
+pub fn subring_of_homomorphic_equalities() -> @kernel.Thm
+
+pub fn subring_of_homomorphic_image() -> @kernel.Thm
+
+pub fn subring_of_homomorphic_preimage() -> @kernel.Thm
+
+pub fn subring_of_imp_nonempty() -> @kernel.Thm
+
+pub fn subring_of_imp_subset() -> @kernel.Thm
+
+pub fn subring_of_inter() -> @kernel.Thm
+
+pub fn subring_of_inters() -> @kernel.Thm
+
+pub fn subring_of_setwise() -> @kernel.Thm
+
+pub fn subring_of_subring_generated() -> @kernel.Thm
+
+pub fn subring_of_subring_generated_eq() -> @kernel.Thm
+
+pub fn subring_of_subring_generated_rev() -> @kernel.Thm
+
+pub fn subring_of_subring_generated_subring_eq() -> @kernel.Thm
+
+pub fn subring_of_unions() -> @kernel.Thm
+
+pub fn subring_poly_into_subring() -> @kernel.Thm
+
+pub fn subring_powser_into_subring() -> @kernel.Thm
+
+pub fn subring_ring_image() -> @kernel.Thm
+
+pub fn subring_setadd_left() -> @kernel.Thm
+
+pub fn subring_setadd_right() -> @kernel.Thm
+
+pub fn subring_subring_generated() -> @kernel.Thm
+
+pub fn subrings_generated_eq() -> @kernel.Thm
+
+pub fn subset_carrier_subring_generated() -> @kernel.Thm
+
+pub fn subset_ideals_generated_sing() -> @kernel.Thm
+
+pub fn subset_subring_generated_finitary() -> @kernel.Thm
+
+pub fn third_ring_isomorphism_theorem() -> @kernel.Thm
+
+pub fn toset_monomial_le() -> @kernel.Thm
+
+pub fn trivial_fraction_ring() -> @kernel.Thm
+
+pub fn trivial_imp_boolean_ring() -> @kernel.Thm
+
+pub fn trivial_imp_finite_ring() -> @kernel.Thm
+
+pub fn trivial_integer_mod_ring() -> @kernel.Thm
+
+pub fn trivial_poly_ring() -> @kernel.Thm
+
+pub fn trivial_powser_ring() -> @kernel.Thm
+
+pub fn trivial_prod_ring() -> @kernel.Thm
+
+pub fn trivial_product_ring() -> @kernel.Thm
+
+pub fn trivial_quotient_ring() -> @kernel.Thm
+
+pub fn trivial_ring() -> @kernel.Thm
+
+pub fn trivial_ring_10() -> @kernel.Thm
+
+pub fn trivial_ring_alt() -> @kernel.Thm
+
+pub fn trivial_ring_has_size_1() -> @kernel.Thm
+
+pub fn trivial_ring_homomorphic_image() -> @kernel.Thm
+
+pub fn trivial_ring_ideal() -> @kernel.Thm
+
+pub fn trivial_ring_localization() -> @kernel.Thm
+
+pub fn trivial_ring_monomorphic_image_eq() -> @kernel.Thm
+
+pub fn trivial_ring_monomorphic_preimage() -> @kernel.Thm
+
+pub fn trivial_ring_poly_0() -> @kernel.Thm
+
+pub fn trivial_ring_powser_0() -> @kernel.Thm
+
+pub fn trivial_ring_singleton_ring() -> @kernel.Thm
+
+pub fn trivial_ring_subring_generated() -> @kernel.Thm
+
+pub fn trivial_ring_subset() -> @kernel.Thm
+
+pub fn trivial_ring_v1() -> @kernel.Thm
+
+pub fn ufd() -> @kernel.Thm
+
+pub fn ufd_coprime() -> @kernel.Thm
+
+pub fn ufd_divides_gcd() -> @kernel.Thm
+
+pub fn ufd_divides_gcd_eq() -> @kernel.Thm
+
+pub fn ufd_eq_accp() -> @kernel.Thm
+
+pub fn ufd_eq_atomic() -> @kernel.Thm
+
+pub fn ufd_eq_atomic_nonunit() -> @kernel.Thm
+
+pub fn ufd_eq_primefact() -> @kernel.Thm
+
+pub fn ufd_eq_primefact_nonunit() -> @kernel.Thm
+
+pub fn ufd_eq_unique_factorization() -> @kernel.Thm
+
+pub fn ufd_imp_gcd_exists() -> @kernel.Thm
+
+pub fn ufd_imp_integral_domain() -> @kernel.Thm
+
+pub fn ufd_integer_ring() -> @kernel.Thm
+
+pub fn ufd_irreducible_eq_prime() -> @kernel.Thm
+
+pub fn ufd_localization() -> @kernel.Thm
+
+pub fn ufd_poly_ring() -> @kernel.Thm
+
+pub fn ufd_prime_factor_exists() -> @kernel.Thm
+
+pub fn ufd_prime_factor_induct() -> @kernel.Thm
+
+pub fn unions_maximal_ideals() -> @kernel.Thm
+
+pub fn unions_prime_ideals() -> @kernel.Thm
+
+pub fn unions_proper_ideals() -> @kernel.Thm
+
+pub fn unions_ring_cosets() -> @kernel.Thm
+
+pub fn unique_prime_ideal() -> @kernel.Thm
+
+pub fn unique_prime_ideal_imp_local_ring() -> @kernel.Thm
+
+pub fn vnregular_domain() -> @kernel.Thm
+
+pub fn vnregular_fraction_ring() -> @kernel.Thm
+
+pub fn vnregular_imp_bezout_ring() -> @kernel.Thm
+
+pub fn vnregular_imp_reduced_ring() -> @kernel.Thm
+
+pub fn vnregular_integer_mod_ring() -> @kernel.Thm
+
+pub fn vnregular_prod_ring() -> @kernel.Thm
+
+pub fn vnregular_product_ring() -> @kernel.Thm
+
+pub fn vnregular_quotient_ring() -> @kernel.Thm
+
+pub fn vnregular_ring() -> @kernel.Thm
+
+pub fn vnregular_ring_alt() -> @kernel.Thm
+
+pub fn vnregular_ring_epimorphic_image() -> @kernel.Thm
+
+pub fn vnregular_ring_finitely_generated_ideals() -> @kernel.Thm
+
+pub fn vnregular_ring_ideal_idempot() -> @kernel.Thm
+
+pub fn vnregular_ring_localization() -> @kernel.Thm
+
+pub fn vnregular_ring_nilpotent() -> @kernel.Thm
+
+pub fn vnregular_ring_principal_ideals() -> @kernel.Thm
+
+pub fn vnregular_ring_regular() -> @kernel.Thm
+
+pub fn vnregular_ring_v1() -> @kernel.Thm
+
+pub fn wf_compatible_monomial_order() -> @kernel.Thm
+
+pub fn wf_monomial_lt() -> @kernel.Thm
+
+pub fn woset_compatible_monomial_order() -> @kernel.Thm
+
+pub fn woset_monomial_le() -> @kernel.Thm
+
+pub fn wqoset_compatible_monomial_order() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
