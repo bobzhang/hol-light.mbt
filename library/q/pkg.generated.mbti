@@ -1,0 +1,73 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/q"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/preterm",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn abbrev_tac(String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn arith_rule(String) -> @kernel.Thm raise
+
+pub fn asm_cases_tac(String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn bool_cases_tac(String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn[TA, TB] bool_context_tac((@kernel.Term) -> (((@list.List[(TB, @kernel.Thm)], @kernel.Term)) -> TA raise) raise, String) -> (((@list.List[(TB, @kernel.Thm)], @kernel.Term)) -> TA raise) raise
+
+pub fn[TA, TB] call_with_interface((Unit) -> TB raise, (@kernel.Term) -> TA raise, String) -> TA raise
+
+pub fn[TA, TB] context_common((@list.List[(String, @preterm.Pretype)]) -> ((TB) -> TA raise) raise, @list.List[@kernel.Term], @kernel.Term, TB) -> TA raise
+
+pub fn[TA] context_rule((@list.List[(String, @preterm.Pretype)]) -> ((@kernel.Thm) -> TA raise) raise, @kernel.Thm) -> TA raise
+
+pub fn[TA, TB] context_tac((@list.List[(String, @preterm.Pretype)]) -> (((@list.List[(TB, @kernel.Thm)], @kernel.Term)) -> TA raise) raise, (@list.List[(TB, @kernel.Thm)], @kernel.Term)) -> TA raise
+
+pub fn exists_tac(String, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn force_type(@list.List[(String, @preterm.Pretype)]?) -> ((String) -> ((@kernel.HolType) -> @kernel.Term raise) raise) raise
+
+pub fn gen(String, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn genl(@list.List[String]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn int_arith(String) -> @kernel.Thm raise
+
+pub fn num_ring(String) -> @kernel.Thm raise
+
+pub fn[TA, TB] parse_in_context((@kernel.Term) -> (((@list.List[(TB, @kernel.Thm)], @kernel.Term)) -> TA raise) raise, String) -> (((@list.List[(TB, @kernel.Thm)], @kernel.Term)) -> TA raise) raise
+
+pub fn parse_preterm(String) -> @preterm.Preterm raise
+
+pub fn[TA, TB] parses_in_context((@list.List[@kernel.Term]) -> (((@list.List[(TB, @kernel.Thm)], @kernel.Term)) -> TA raise) raise, @list.List[String]) -> (((@list.List[(TB, @kernel.Thm)], @kernel.Term)) -> TA raise) raise
+
+pub fn real_arith(String) -> @kernel.Thm raise
+
+pub fn real_field(String) -> @kernel.Thm raise
+
+pub fn real_ring(String) -> @kernel.Thm raise
+
+pub fn spec(String, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn spec_tac(String, String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn specl(@list.List[String], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn subgoal_tac(String, String, @list.List[((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn subgoal_then(String, (@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn type_of_forall(@kernel.Term) -> @kernel.HolType raise
+
+pub fn x_gen_tac(String, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
