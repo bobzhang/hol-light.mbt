@@ -1,0 +1,1925 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/words"
+
+import {
+  "bobzhang/hol_light/compute",
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn add_word_sizes(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn aligned() -> @kernel.Thm
+
+pub fn aligned_iword() -> @kernel.Thm
+
+pub fn aligned_v1() -> @kernel.Thm
+
+pub fn aligned_word() -> @kernel.Thm
+
+pub fn aligned_word_0() -> @kernel.Thm
+
+pub fn aligned_word_add() -> @kernel.Thm
+
+pub fn aligned_word_add_eq() -> @kernel.Thm
+
+pub fn aligned_word_mul() -> @kernel.Thm
+
+pub fn aligned_word_neg() -> @kernel.Thm
+
+pub fn aligned_word_sub() -> @kernel.Thm
+
+pub fn aligned_word_sub_eq() -> @kernel.Thm
+
+pub fn binary_digitsum_bound() -> @kernel.Thm
+
+pub fn binary_digitsum_div() -> @kernel.Thm
+
+pub fn binary_digitsum_mod() -> @kernel.Thm
+
+pub fn binary_digitsum_split() -> @kernel.Thm
+
+pub fn bint_poly_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn bit() -> @kernel.Thm
+
+pub fn bit_bitwise1() -> @kernel.Thm
+
+pub fn bit_bitwise2() -> @kernel.Thm
+
+pub fn bit_guard() -> @kernel.Thm
+
+pub fn bit_ival() -> @kernel.Thm
+
+pub fn bit_iword() -> @kernel.Thm
+
+pub fn bit_lsb() -> @kernel.Thm
+
+pub fn bit_lsb_iword() -> @kernel.Thm
+
+pub fn bit_lsb_word() -> @kernel.Thm
+
+pub fn bit_mask_word() -> @kernel.Thm
+
+pub fn bit_pred(@kernel.Term) -> (@kernel.Term?, @kernel.Thm) raise
+
+pub fn bit_reversefields_1() -> @kernel.Thm
+
+pub fn bit_trivial() -> @kernel.Thm
+
+pub fn bit_val() -> @kernel.Thm
+
+pub fn bit_val_mod() -> @kernel.Thm
+
+pub fn bit_word() -> @kernel.Thm
+
+pub fn bit_word_0() -> @kernel.Thm
+
+pub fn bit_word_1() -> @kernel.Thm
+
+pub fn bit_word_add() -> @kernel.Thm
+
+pub fn bit_word_add_1_cases() -> @kernel.Thm
+
+pub fn bit_word_add_clauses() -> @kernel.Thm
+
+pub fn bit_word_and() -> @kernel.Thm
+
+pub fn bit_word_and_add_1() -> @kernel.Thm
+
+pub fn bit_word_and_alt() -> @kernel.Thm
+
+pub fn bit_word_and_neg() -> @kernel.Thm
+
+pub fn bit_word_and_not_add_1() -> @kernel.Thm
+
+pub fn bit_word_and_not_sub_1() -> @kernel.Thm
+
+pub fn bit_word_and_sub_1() -> @kernel.Thm
+
+pub fn bit_word_bitval() -> @kernel.Thm
+
+pub fn bit_word_bytereverse() -> @kernel.Thm
+
+pub fn bit_word_cand() -> @kernel.Thm
+
+pub fn bit_word_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn bit_word_cor() -> @kernel.Thm
+
+pub fn bit_word_duplicate() -> @kernel.Thm
+
+pub fn bit_word_insert() -> @kernel.Thm
+
+pub fn bit_word_int_min() -> @kernel.Thm
+
+pub fn bit_word_ishr() -> @kernel.Thm
+
+pub fn bit_word_join() -> @kernel.Thm
+
+pub fn bit_word_join_gen() -> @kernel.Thm
+
+pub fn bit_word_mask() -> @kernel.Thm
+
+pub fn bit_word_neg() -> @kernel.Thm
+
+pub fn bit_word_neg_cases() -> @kernel.Thm
+
+pub fn bit_word_neg_clauses() -> @kernel.Thm
+
+pub fn bit_word_not() -> @kernel.Thm
+
+pub fn bit_word_of_bits() -> @kernel.Thm
+
+pub fn bit_word_of_bits_sing() -> @kernel.Thm
+
+pub fn bit_word_or() -> @kernel.Thm
+
+pub fn bit_word_or_add_1() -> @kernel.Thm
+
+pub fn bit_word_or_alt() -> @kernel.Thm
+
+pub fn bit_word_or_neg() -> @kernel.Thm
+
+pub fn bit_word_or_sub_1() -> @kernel.Thm
+
+pub fn bit_word_pmul() -> @kernel.Thm
+
+pub fn bit_word_pmul_alt() -> @kernel.Thm
+
+pub fn bit_word_pmul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn bit_word_pow2() -> @kernel.Thm
+
+pub fn bit_word_reversefields() -> @kernel.Thm
+
+pub fn bit_word_rol() -> @kernel.Thm
+
+pub fn bit_word_ror() -> @kernel.Thm
+
+pub fn bit_word_shl() -> @kernel.Thm
+
+pub fn bit_word_sub() -> @kernel.Thm
+
+pub fn bit_word_sub_1_cases() -> @kernel.Thm
+
+pub fn bit_word_sub_clauses() -> @kernel.Thm
+
+pub fn bit_word_subword() -> @kernel.Thm
+
+pub fn bit_word_sx() -> @kernel.Thm
+
+pub fn bit_word_sxfrom() -> @kernel.Thm
+
+pub fn bit_word_ushr() -> @kernel.Thm
+
+pub fn bit_word_xor() -> @kernel.Thm
+
+pub fn bit_word_xor_add_1() -> @kernel.Thm
+
+pub fn bit_word_xor_alt() -> @kernel.Thm
+
+pub fn bit_word_xor_neg() -> @kernel.Thm
+
+pub fn bit_word_xor_sub_1() -> @kernel.Thm
+
+pub fn bit_word_zx() -> @kernel.Thm
+
+pub fn bitblast_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn bitblast_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn bitblast_then((@list.List[@kernel.Term]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn bits_of_num() -> @kernel.Thm
+
+pub fn bits_of_num_0() -> @kernel.Thm
+
+pub fn bits_of_num_1() -> @kernel.Thm
+
+pub fn bits_of_num_add() -> @kernel.Thm
+
+pub fn bits_of_num_disjoint_numseg_eq() -> @kernel.Thm
+
+pub fn bits_of_num_div() -> @kernel.Thm
+
+pub fn bits_of_num_eq() -> @kernel.Thm
+
+pub fn bits_of_num_galois() -> @kernel.Thm
+
+pub fn bits_of_num_mod() -> @kernel.Thm
+
+pub fn bits_of_num_mul() -> @kernel.Thm
+
+pub fn bits_of_num_mul_alt() -> @kernel.Thm
+
+pub fn bits_of_num_nsum() -> @kernel.Thm
+
+pub fn bits_of_num_pow2() -> @kernel.Thm
+
+pub fn bits_of_num_subset_numseg_eq() -> @kernel.Thm
+
+pub fn bits_of_num_subset_numseg_lt() -> @kernel.Thm
+
+pub fn bits_of_num_val() -> @kernel.Thm
+
+pub fn bits_of_word() -> @kernel.Thm
+
+pub fn bits_of_word_0() -> @kernel.Thm
+
+pub fn bits_of_word_1() -> @kernel.Thm
+
+pub fn bits_of_word_and() -> @kernel.Thm
+
+pub fn bits_of_word_eq() -> @kernel.Thm
+
+pub fn bits_of_word_eq_empty() -> @kernel.Thm
+
+pub fn bits_of_word_not() -> @kernel.Thm
+
+pub fn bits_of_word_of_bits() -> @kernel.Thm
+
+pub fn bits_of_word_or() -> @kernel.Thm
+
+pub fn bits_of_word_subset() -> @kernel.Thm
+
+pub fn bits_of_word_subset_alt() -> @kernel.Thm
+
+pub fn bits_of_word_subset_numseg() -> @kernel.Thm
+
+pub fn bits_of_word_word() -> @kernel.Thm
+
+pub fn bitsum_bound() -> @kernel.Thm
+
+pub fn bitsum_divides() -> @kernel.Thm
+
+pub fn bitval() -> @kernel.Thm
+
+pub fn bitval_and() -> @kernel.Thm
+
+pub fn bitval_bit_word() -> @kernel.Thm
+
+pub fn bitval_bit_word_pmul() -> @kernel.Thm
+
+pub fn bitval_bound() -> @kernel.Thm
+
+pub fn bitval_bound_alt() -> @kernel.Thm
+
+pub fn bitval_clauses() -> @kernel.Thm
+
+pub fn bitval_eq_0() -> @kernel.Thm
+
+pub fn bitval_eq_1() -> @kernel.Thm
+
+pub fn bitval_exp() -> @kernel.Thm
+
+pub fn bitval_iff() -> @kernel.Thm
+
+pub fn bitval_msb() -> @kernel.Thm
+
+pub fn bitval_not() -> @kernel.Thm
+
+pub fn bitval_odd() -> @kernel.Thm
+
+pub fn bitval_or() -> @kernel.Thm
+
+pub fn bitval_pos() -> @kernel.Thm
+
+pub fn bitval_xor() -> @kernel.Thm
+
+pub fn bitwise1() -> @kernel.Thm
+
+pub fn bitwise2() -> @kernel.Thm
+
+pub fn block_bits_zero() -> @kernel.Thm
+
+pub fn block_bits_zero_alt() -> @kernel.Thm
+
+pub fn cong_imodular() -> @kernel.Thm
+
+pub fn cong_modular() -> @kernel.Thm
+
+pub fn cong_word_add() -> @kernel.Thm
+
+pub fn cong_word_mul() -> @kernel.Thm
+
+pub fn cong_word_neg() -> @kernel.Thm
+
+pub fn cong_word_shl() -> @kernel.Thm
+
+pub fn cong_word_sub() -> @kernel.Thm
+
+pub fn dest_word_ty(@kernel.HolType) -> @num.Num raise
+
+pub fn digitsum_bound() -> @kernel.Thm
+
+pub fn digitsum_div() -> @kernel.Thm
+
+pub fn digitsum_div_mod() -> @kernel.Thm
+
+pub fn digitsum_div_numseg() -> @kernel.Thm
+
+pub fn digitsum_mod() -> @kernel.Thm
+
+pub fn digitsum_mod_numseg() -> @kernel.Thm
+
+pub fn digitsum_split() -> @kernel.Thm
+
+pub fn digitsum_unique() -> @kernel.Thm
+
+pub fn digitsum_works() -> @kernel.Thm
+
+pub fn digitsum_works_gen() -> @kernel.Thm
+
+pub fn dimindex_128() -> @kernel.Thm
+
+pub fn dimindex_16() -> @kernel.Thm
+
+pub fn dimindex_256() -> @kernel.Thm
+
+pub fn dimindex_32() -> @kernel.Thm
+
+pub fn dimindex_512() -> @kernel.Thm
+
+pub fn dimindex_64() -> @kernel.Thm
+
+pub fn dimindex_8() -> @kernel.Thm
+
+pub fn disjoint_bits_clauses() -> @kernel.Thm
+
+pub fn disjoint_bits_hilo() -> @kernel.Thm
+
+pub fn div_mod_disjoint_bits() -> @kernel.Thm
+
+pub fn divides_val_word() -> @kernel.Thm
+
+pub fn divides_val_word_eq() -> @kernel.Thm
+
+pub fn empower_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn eq_bitval() -> @kernel.Thm
+
+pub fn even_bitval() -> @kernel.Thm
+
+pub fn even_val_word() -> @kernel.Thm
+
+pub fn even_val_word_add() -> @kernel.Thm
+
+pub fn even_val_word_mul() -> @kernel.Thm
+
+pub fn even_val_word_neg() -> @kernel.Thm
+
+pub fn even_val_word_sub() -> @kernel.Thm
+
+pub fn exists_iword() -> @kernel.Thm
+
+pub fn exists_word() -> @kernel.Thm
+
+pub fn exp_2_mod_lt() -> @kernel.Thm
+
+pub fn expand_nsum_balance_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn finite_bits_of_num() -> @kernel.Thm
+
+pub fn finite_bits_of_word() -> @kernel.Thm
+
+pub fn forall_ival() -> @kernel.Thm
+
+pub fn forall_ival_gen() -> @kernel.Thm
+
+pub fn forall_iword() -> @kernel.Thm
+
+pub fn forall_val() -> @kernel.Thm
+
+pub fn forall_val_gen() -> @kernel.Thm
+
+pub fn forall_word() -> @kernel.Thm
+
+pub fn has_size_128() -> @kernel.Thm
+
+pub fn has_size_16() -> @kernel.Thm
+
+pub fn has_size_256() -> @kernel.Thm
+
+pub fn has_size_32() -> @kernel.Thm
+
+pub fn has_size_512() -> @kernel.Thm
+
+pub fn has_size_64() -> @kernel.Thm
+
+pub fn has_size_8() -> @kernel.Thm
+
+pub fn has_size_bits_of_word_popcount() -> @kernel.Thm
+
+pub fn icong_word_add() -> @kernel.Thm
+
+pub fn icong_word_mul() -> @kernel.Thm
+
+pub fn icong_word_neg() -> @kernel.Thm
+
+pub fn icong_word_shl() -> @kernel.Thm
+
+pub fn icong_word_sub() -> @kernel.Thm
+
+pub fn imodular() -> @kernel.Thm
+
+pub fn in_bits_of_num() -> @kernel.Thm
+
+pub fn in_bits_of_word() -> @kernel.Thm
+
+pub fn int_bitval_and() -> @kernel.Thm
+
+pub fn int_bitval_iff() -> @kernel.Thm
+
+pub fn int_bitval_imp() -> @kernel.Thm
+
+pub fn int_bitval_not() -> @kernel.Thm
+
+pub fn int_bitval_or() -> @kernel.Thm
+
+pub fn int_bitval_pow() -> @kernel.Thm
+
+pub fn int_cong_word_add() -> @kernel.Thm
+
+pub fn int_cong_word_mul() -> @kernel.Thm
+
+pub fn int_cong_word_neg() -> @kernel.Thm
+
+pub fn int_cong_word_sub() -> @kernel.Thm
+
+pub fn int_divides_ival_iword() -> @kernel.Thm
+
+pub fn int_eq_bitval() -> @kernel.Thm
+
+pub fn int_ival() -> @kernel.Thm
+
+pub fn int_le_bitval() -> @kernel.Thm
+
+pub fn int_rem_ival() -> @kernel.Thm
+
+pub fn int_rem_ival_iword() -> @kernel.Thm
+
+pub fn int_val_bound() -> @kernel.Thm
+
+pub fn int_val_iword() -> @kernel.Thm
+
+pub fn int_val_iword_eq() -> @kernel.Thm
+
+pub fn int_val_word_add_cases() -> @kernel.Thm
+
+pub fn int_val_word_int_min() -> @kernel.Thm
+
+pub fn int_val_word_mask() -> @kernel.Thm
+
+pub fn int_val_word_neg() -> @kernel.Thm
+
+pub fn int_val_word_neg_cases() -> @kernel.Thm
+
+pub fn int_val_word_not() -> @kernel.Thm
+
+pub fn int_val_word_sub() -> @kernel.Thm
+
+pub fn int_val_word_sub_cases() -> @kernel.Thm
+
+pub fn irelational2() -> @kernel.Thm
+
+pub fn ival() -> @kernel.Thm
+
+pub fn ival_bound() -> @kernel.Thm
+
+pub fn ival_bound_alt() -> @kernel.Thm
+
+pub fn ival_cong() -> @kernel.Thm
+
+pub fn ival_eq() -> @kernel.Thm
+
+pub fn ival_eq_0() -> @kernel.Thm
+
+pub fn ival_eq_1() -> @kernel.Thm
+
+pub fn ival_eq_minus1() -> @kernel.Thm
+
+pub fn ival_eq_val() -> @kernel.Thm
+
+pub fn ival_iword() -> @kernel.Thm
+
+pub fn ival_iword_cong() -> @kernel.Thm
+
+pub fn ival_iword_galois() -> @kernel.Thm
+
+pub fn ival_rem_2() -> @kernel.Thm
+
+pub fn ival_topflip_val() -> @kernel.Thm
+
+pub fn ival_val() -> @kernel.Thm
+
+pub fn ival_val_cong() -> @kernel.Thm
+
+pub fn ival_word_0() -> @kernel.Thm
+
+pub fn ival_word_1() -> @kernel.Thm
+
+pub fn ival_word_adjust_binop_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ival_word_adjust_conv(@num.Num) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn ival_word_and_mask() -> @kernel.Thm
+
+pub fn ival_word_cong() -> @kernel.Thm
+
+pub fn ival_word_imax() -> @kernel.Thm
+
+pub fn ival_word_imin() -> @kernel.Thm
+
+pub fn ival_word_int_max() -> @kernel.Thm
+
+pub fn ival_word_int_min() -> @kernel.Thm
+
+pub fn ival_word_ishr() -> @kernel.Thm
+
+pub fn ival_word_ishr_shl_unique() -> @kernel.Thm
+
+pub fn ival_word_mask() -> @kernel.Thm
+
+pub fn ival_word_neg_1() -> @kernel.Thm
+
+pub fn ival_word_not() -> @kernel.Thm
+
+pub fn ival_word_sx() -> @kernel.Thm
+
+pub fn ival_word_sxfrom_unique() -> @kernel.Thm
+
+pub fn iword() -> @kernel.Thm
+
+pub fn iword_eq() -> @kernel.Thm
+
+pub fn iword_int_add() -> @kernel.Thm
+
+pub fn iword_int_mul() -> @kernel.Thm
+
+pub fn iword_int_neg() -> @kernel.Thm
+
+pub fn iword_int_sub() -> @kernel.Thm
+
+pub fn iword_ival() -> @kernel.Thm
+
+pub fn iword_rem_size() -> @kernel.Thm
+
+pub fn iword_saturate() -> @kernel.Thm
+
+pub fn iword_saturate_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn iwordify_atom_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn iwordify_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn le_bitval() -> @kernel.Thm
+
+pub fn le_val_mod_step() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn lower_bits_zero() -> @kernel.Thm
+
+pub fn lt_val_mod_step() -> @kernel.Thm
+
+pub fn mask_word_sub() -> @kernel.Thm
+
+pub fn mk_word_ty(@num.Num) -> @kernel.HolType raise
+
+pub fn mod_val_word() -> @kernel.Thm
+
+pub fn modular() -> @kernel.Thm
+
+pub fn msb_int_val() -> @kernel.Thm
+
+pub fn msb_ival() -> @kernel.Thm
+
+pub fn msb_val() -> @kernel.Thm
+
+pub fn not_word_evenparity() -> @kernel.Thm
+
+pub fn not_word_oddparity() -> @kernel.Thm
+
+pub fn nsum_bits_div() -> @kernel.Thm
+
+pub fn nsum_bits_eq() -> @kernel.Thm
+
+pub fn nsum_bits_mod() -> @kernel.Thm
+
+pub fn nsum_bits_of_num() -> @kernel.Thm
+
+pub fn num_as_bitval() -> @kernel.Thm
+
+pub fn num_as_bitval_alt() -> @kernel.Thm
+
+pub fn num_shift_add() -> @kernel.Thm
+
+pub fn num_shift_add_0() -> @kernel.Thm
+
+pub fn num_shift_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_shift_add_core(@kernel.Term) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn num_shift_add_lt() -> @kernel.Thm
+
+pub fn num_shift_add_mod() -> @kernel.Thm
+
+pub fn num_shift_add_suc() -> @kernel.Thm
+
+pub fn numbit() -> @kernel.Thm
+
+pub fn numbit_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn numbit_val() -> @kernel.Thm
+
+pub fn odd_bitval() -> @kernel.Thm
+
+pub fn odd_mod_pow2() -> @kernel.Thm
+
+pub fn odd_val_word() -> @kernel.Thm
+
+pub fn odd_val_word_add() -> @kernel.Thm
+
+pub fn odd_val_word_mul() -> @kernel.Thm
+
+pub fn odd_val_word_neg() -> @kernel.Thm
+
+pub fn odd_val_word_sub() -> @kernel.Thm
+
+pub fn real_bitval_not() -> @kernel.Thm
+
+pub fn real_eq_bitval() -> @kernel.Thm
+
+pub fn real_le_bitval() -> @kernel.Thm
+
+pub fn real_val_word_mask() -> @kernel.Thm
+
+pub fn real_val_word_neg() -> @kernel.Thm
+
+pub fn real_val_word_neg_cases() -> @kernel.Thm
+
+pub fn real_val_word_not() -> @kernel.Thm
+
+pub fn real_val_word_xor() -> @kernel.Thm
+
+pub fn relational2() -> @kernel.Thm
+
+pub fn simd16() -> @kernel.Thm
+
+pub fn simd2() -> @kernel.Thm
+
+pub fn simd2_v1() -> @kernel.Thm
+
+pub fn simd4() -> @kernel.Thm
+
+pub fn simd8() -> @kernel.Thm
+
+pub fn twice_msb() -> @kernel.Thm
+
+pub fn twos_complement() -> @kernel.Thm
+
+pub fn twos_complement_gen() -> @kernel.Thm
+
+pub fn upper_bits_zero() -> @kernel.Thm
+
+pub fn upper_bits_zero_alt() -> @kernel.Thm
+
+pub fn usimd16() -> @kernel.Thm
+
+pub fn usimd2() -> @kernel.Thm
+
+pub fn usimd2_v1() -> @kernel.Thm
+
+pub fn usimd4() -> @kernel.Thm
+
+pub fn usimd8() -> @kernel.Thm
+
+pub fn val() -> @kernel.Thm
+
+pub fn val_bound() -> @kernel.Thm
+
+pub fn val_bound_alt() -> @kernel.Thm
+
+pub fn val_bound_clz() -> @kernel.Thm
+
+pub fn val_cong() -> @kernel.Thm
+
+pub fn val_def() -> @kernel.Thm
+
+pub fn val_div() -> @kernel.Thm
+
+pub fn val_div_alt() -> @kernel.Thm
+
+pub fn val_eq() -> @kernel.Thm
+
+pub fn val_eq_0() -> @kernel.Thm
+
+pub fn val_eq_1() -> @kernel.Thm
+
+pub fn val_eq_bitval() -> @kernel.Thm
+
+pub fn val_eq_max() -> @kernel.Thm
+
+pub fn val_eq_max_alt() -> @kernel.Thm
+
+pub fn val_eq_max_mask() -> @kernel.Thm
+
+pub fn val_expand_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn val_expand_subwords() -> @kernel.Thm
+
+pub fn val_ival() -> @kernel.Thm
+
+pub fn val_ival_rem() -> @kernel.Thm
+
+pub fn val_iword_cong() -> @kernel.Thm
+
+pub fn val_le_bits() -> @kernel.Thm
+
+pub fn val_le_subset() -> @kernel.Thm
+
+pub fn val_mod() -> @kernel.Thm
+
+pub fn val_mod_2() -> @kernel.Thm
+
+pub fn val_mod_or_div_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn val_mod_refl() -> @kernel.Thm
+
+pub fn val_mod_step() -> @kernel.Thm
+
+pub fn val_modular() -> @kernel.Thm
+
+pub fn val_subwords_eq() -> @kernel.Thm
+
+pub fn val_word() -> @kernel.Thm
+
+pub fn val_word_0() -> @kernel.Thm
+
+pub fn val_word_1() -> @kernel.Thm
+
+pub fn val_word_adc_cases() -> @kernel.Thm
+
+pub fn val_word_add() -> @kernel.Thm
+
+pub fn val_word_add_and_or() -> @kernel.Thm
+
+pub fn val_word_add_and_xor() -> @kernel.Thm
+
+pub fn val_word_add_cases() -> @kernel.Thm
+
+pub fn val_word_adjust_binop_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn val_word_adjust_conv(@num.Num) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn val_word_and_eq_max() -> @kernel.Thm
+
+pub fn val_word_and_le() -> @kernel.Thm
+
+pub fn val_word_and_le_min() -> @kernel.Thm
+
+pub fn val_word_and_mask() -> @kernel.Thm
+
+pub fn val_word_and_mask_word() -> @kernel.Thm
+
+pub fn val_word_and_not_mask_word() -> @kernel.Thm
+
+pub fn val_word_and_pow2() -> @kernel.Thm
+
+pub fn val_word_and_pow2_bitval() -> @kernel.Thm
+
+pub fn val_word_and_word_le() -> @kernel.Thm
+
+pub fn val_word_bitval() -> @kernel.Thm
+
+pub fn val_word_cand() -> @kernel.Thm
+
+pub fn val_word_cong() -> @kernel.Thm
+
+pub fn val_word_cor() -> @kernel.Thm
+
+pub fn val_word_duplicate() -> @kernel.Thm
+
+pub fn val_word_eq() -> @kernel.Thm
+
+pub fn val_word_eq_eq() -> @kernel.Thm
+
+pub fn val_word_galois() -> @kernel.Thm
+
+pub fn val_word_int_min() -> @kernel.Thm
+
+pub fn val_word_join() -> @kernel.Thm
+
+pub fn val_word_join_simple() -> @kernel.Thm
+
+pub fn val_word_le() -> @kernel.Thm
+
+pub fn val_word_lt() -> @kernel.Thm
+
+pub fn val_word_mask() -> @kernel.Thm
+
+pub fn val_word_mul() -> @kernel.Thm
+
+pub fn val_word_neg() -> @kernel.Thm
+
+pub fn val_word_neg_1() -> @kernel.Thm
+
+pub fn val_word_neg_cases() -> @kernel.Thm
+
+pub fn val_word_neg_mod_dimindex() -> @kernel.Thm
+
+pub fn val_word_not() -> @kernel.Thm
+
+pub fn val_word_of_bits() -> @kernel.Thm
+
+pub fn val_word_of_bits_sing() -> @kernel.Thm
+
+pub fn val_word_or_and_xor() -> @kernel.Thm
+
+pub fn val_word_or_disjoint() -> @kernel.Thm
+
+pub fn val_word_or_eq_0() -> @kernel.Thm
+
+pub fn val_word_or_le() -> @kernel.Thm
+
+pub fn val_word_or_le_max() -> @kernel.Thm
+
+pub fn val_word_rol() -> @kernel.Thm
+
+pub fn val_word_ror() -> @kernel.Thm
+
+pub fn val_word_shl() -> @kernel.Thm
+
+pub fn val_word_sub() -> @kernel.Thm
+
+pub fn val_word_sub_cases() -> @kernel.Thm
+
+pub fn val_word_sub_eq_0() -> @kernel.Thm
+
+pub fn val_word_subword() -> @kernel.Thm
+
+pub fn val_word_subword_dimindex() -> @kernel.Thm
+
+pub fn val_word_subword_join() -> @kernel.Thm
+
+pub fn val_word_subword_join_full() -> @kernel.Thm
+
+pub fn val_word_subword_simple() -> @kernel.Thm
+
+pub fn val_word_udiv() -> @kernel.Thm
+
+pub fn val_word_uint_max() -> @kernel.Thm
+
+pub fn val_word_umax() -> @kernel.Thm
+
+pub fn val_word_umin() -> @kernel.Thm
+
+pub fn val_word_umod() -> @kernel.Thm
+
+pub fn val_word_ushr() -> @kernel.Thm
+
+pub fn val_word_zx() -> @kernel.Thm
+
+pub fn val_word_zx_gen() -> @kernel.Thm
+
+pub fn word() -> @kernel.Thm
+
+pub fn word_adc_le_exact() -> @kernel.Thm
+
+pub fn word_adc_le_inexact() -> @kernel.Thm
+
+pub fn word_add() -> @kernel.Thm
+
+pub fn word_add_0() -> @kernel.Thm
+
+pub fn word_add_ac() -> @kernel.Thm
+
+pub fn word_add_assoc() -> @kernel.Thm
+
+pub fn word_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_add_imodular() -> @kernel.Thm
+
+pub fn word_add_lt_exact() -> @kernel.Thm
+
+pub fn word_add_lt_inexact() -> @kernel.Thm
+
+pub fn word_add_or() -> @kernel.Thm
+
+pub fn word_add_or_eq() -> @kernel.Thm
+
+pub fn word_add_or_gen() -> @kernel.Thm
+
+pub fn word_add_shl_ushr() -> @kernel.Thm
+
+pub fn word_add_sym() -> @kernel.Thm
+
+pub fn word_add_ushr_shl() -> @kernel.Thm
+
+pub fn word_add_v1() -> @kernel.Thm
+
+pub fn word_add_xor() -> @kernel.Thm
+
+pub fn word_add_xor_gen() -> @kernel.Thm
+
+pub fn word_and() -> @kernel.Thm
+
+pub fn word_and_0() -> @kernel.Thm
+
+pub fn word_and_1() -> @kernel.Thm
+
+pub fn word_and_1_bitval() -> @kernel.Thm
+
+pub fn word_and_assoc() -> @kernel.Thm
+
+pub fn word_and_conditions() -> @kernel.Thm
+
+pub fn word_and_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_and_eq_0() -> @kernel.Thm
+
+pub fn word_and_mask() -> @kernel.Thm
+
+pub fn word_and_mask_word() -> @kernel.Thm
+
+pub fn word_and_mask_words() -> @kernel.Thm
+
+pub fn word_and_masks() -> @kernel.Thm
+
+pub fn word_and_neg_ctz() -> @kernel.Thm
+
+pub fn word_and_not0() -> @kernel.Thm
+
+pub fn word_and_not_mask_word() -> @kernel.Thm
+
+pub fn word_and_not_sub_1_ctz() -> @kernel.Thm
+
+pub fn word_and_pow2() -> @kernel.Thm
+
+pub fn word_and_pow2_bitval() -> @kernel.Thm
+
+pub fn word_and_refl() -> @kernel.Thm
+
+pub fn word_and_sym() -> @kernel.Thm
+
+pub fn word_and_word_of_bits_sing() -> @kernel.Thm
+
+pub fn word_arith(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn word_arith_tac_v1((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn word_bit_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_bitmask() -> @kernel.Thm
+
+pub fn word_bits_of_word_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_bitval() -> @kernel.Thm
+
+pub fn word_bitval_eq_0() -> @kernel.Thm
+
+pub fn word_bitval_eq_1() -> @kernel.Thm
+
+pub fn word_bitval_not() -> @kernel.Thm
+
+pub fn word_bitwise_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_bitwise_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn word_bitwise_tac_v1((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn word_blast(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_bytereverse() -> @kernel.Thm
+
+pub fn word_bytereverse_bytereverse() -> @kernel.Thm
+
+pub fn word_bytereverse_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_bytereverse_reversefields() -> @kernel.Thm
+
+pub fn word_cand() -> @kernel.Thm
+
+pub fn word_cand_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_cand_eq_0() -> @kernel.Thm
+
+pub fn word_cand_ne_0() -> @kernel.Thm
+
+pub fn word_cand_v1() -> @kernel.Thm
+
+pub fn word_clz() -> @kernel.Thm
+
+pub fn word_clz_0() -> @kernel.Thm
+
+pub fn word_clz_bit() -> @kernel.Thm
+
+pub fn word_clz_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_clz_decomp() -> @kernel.Thm
+
+pub fn word_clz_eq_0() -> @kernel.Thm
+
+pub fn word_clz_eq_dimindex() -> @kernel.Thm
+
+pub fn word_clz_imp() -> @kernel.Thm
+
+pub fn word_clz_lbound() -> @kernel.Thm
+
+pub fn word_clz_lbound_alt() -> @kernel.Thm
+
+pub fn word_clz_le() -> @kernel.Thm
+
+pub fn word_clz_le_dimindex() -> @kernel.Thm
+
+pub fn word_clz_lt_dimindex() -> @kernel.Thm
+
+pub fn word_clz_mask_word() -> @kernel.Thm
+
+pub fn word_clz_mono() -> @kernel.Thm
+
+pub fn word_clz_or() -> @kernel.Thm
+
+pub fn word_clz_reversefields() -> @kernel.Thm
+
+pub fn word_clz_unique() -> @kernel.Thm
+
+pub fn word_clz_unique_gen() -> @kernel.Thm
+
+pub fn word_clz_unique_val() -> @kernel.Thm
+
+pub fn word_clz_ushr() -> @kernel.Thm
+
+pub fn word_clz_v1() -> @kernel.Thm
+
+pub fn word_comparison_eq() -> @kernel.Thm
+
+pub fn word_comparison_ile() -> @kernel.Thm
+
+pub fn word_comparison_ilt() -> @kernel.Thm
+
+pub fn word_comparison_ne() -> @kernel.Thm
+
+pub fn word_comparison_ule() -> @kernel.Thm
+
+pub fn word_comparison_ult() -> @kernel.Thm
+
+pub fn word_compute_add_convs(@compute.Compset) -> Unit raise
+
+pub fn word_compute_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_cor() -> @kernel.Thm
+
+pub fn word_cor_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_cor_eq_0() -> @kernel.Thm
+
+pub fn word_cor_ne_0() -> @kernel.Thm
+
+pub fn word_cor_v1() -> @kernel.Thm
+
+pub fn word_ctz() -> @kernel.Thm
+
+pub fn word_ctz_0() -> @kernel.Thm
+
+pub fn word_ctz_bit() -> @kernel.Thm
+
+pub fn word_ctz_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_ctz_emulation() -> @kernel.Thm
+
+pub fn word_ctz_emulation_and_neg() -> @kernel.Thm
+
+pub fn word_ctz_emulation_and_neg_rev() -> @kernel.Thm
+
+pub fn word_ctz_emulation_popcount() -> @kernel.Thm
+
+pub fn word_ctz_emulation_rev() -> @kernel.Thm
+
+pub fn word_ctz_emulation_xor_sub_1() -> @kernel.Thm
+
+pub fn word_ctz_emulation_xor_sub_1_rev() -> @kernel.Thm
+
+pub fn word_ctz_eq_0() -> @kernel.Thm
+
+pub fn word_ctz_eq_dimindex() -> @kernel.Thm
+
+pub fn word_ctz_imp() -> @kernel.Thm
+
+pub fn word_ctz_lbound() -> @kernel.Thm
+
+pub fn word_ctz_le() -> @kernel.Thm
+
+pub fn word_ctz_le_dimindex() -> @kernel.Thm
+
+pub fn word_ctz_lt_dimindex() -> @kernel.Thm
+
+pub fn word_ctz_mask_word() -> @kernel.Thm
+
+pub fn word_ctz_or() -> @kernel.Thm
+
+pub fn word_ctz_reversefields() -> @kernel.Thm
+
+pub fn word_ctz_shl() -> @kernel.Thm
+
+pub fn word_ctz_unique() -> @kernel.Thm
+
+pub fn word_ctz_unique_gen() -> @kernel.Thm
+
+pub fn word_ctz_unique_val() -> @kernel.Thm
+
+pub fn word_duplicate() -> @kernel.Thm
+
+pub fn word_duplicate_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_duplicate_double() -> @kernel.Thm
+
+pub fn word_duplicate_refl() -> @kernel.Thm
+
+pub fn word_duplicate_v1() -> @kernel.Thm
+
+pub fn word_eq() -> @kernel.Thm
+
+pub fn word_eq_0() -> @kernel.Thm
+
+pub fn word_eq_bits() -> @kernel.Thm
+
+pub fn word_eq_bits_alt() -> @kernel.Thm
+
+pub fn word_eq_bitvector() -> @kernel.Thm
+
+pub fn word_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_eq_imp() -> @kernel.Thm
+
+pub fn word_evenparity() -> @kernel.Thm
+
+pub fn word_evenparity_0() -> @kernel.Thm
+
+pub fn word_evenparity_1() -> @kernel.Thm
+
+pub fn word_evenparity_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_evenparity_popcount() -> @kernel.Thm
+
+pub fn word_ige() -> @kernel.Thm
+
+pub fn word_ige_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_ige_topflip() -> @kernel.Thm
+
+pub fn word_ige_v1() -> @kernel.Thm
+
+pub fn word_igt() -> @kernel.Thm
+
+pub fn word_igt_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_igt_topflip() -> @kernel.Thm
+
+pub fn word_igt_v1() -> @kernel.Thm
+
+pub fn word_ile() -> @kernel.Thm
+
+pub fn word_ile_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_ile_topflip() -> @kernel.Thm
+
+pub fn word_ile_v1() -> @kernel.Thm
+
+pub fn word_ilt() -> @kernel.Thm
+
+pub fn word_ilt_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_ilt_topflip() -> @kernel.Thm
+
+pub fn word_ilt_v1() -> @kernel.Thm
+
+pub fn word_imax() -> @kernel.Thm
+
+pub fn word_imax_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_imin() -> @kernel.Thm
+
+pub fn word_imin_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_ineq_relation_expand_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_insert() -> @kernel.Thm
+
+pub fn word_insert_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_int_max() -> @kernel.Thm
+
+pub fn word_int_max_v1() -> @kernel.Thm
+
+pub fn word_int_min() -> @kernel.Thm
+
+pub fn word_int_min_alt() -> @kernel.Thm
+
+pub fn word_int_min_v1() -> @kernel.Thm
+
+pub fn word_ireduce_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_ishr() -> @kernel.Thm
+
+pub fn word_ishr_0() -> @kernel.Thm
+
+pub fn word_ishr_compose() -> @kernel.Thm
+
+pub fn word_ishr_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_ishr_eq_0() -> @kernel.Thm
+
+pub fn word_ishr_msb() -> @kernel.Thm
+
+pub fn word_ishr_unique() -> @kernel.Thm
+
+pub fn word_ishr_word_of_bits() -> @kernel.Thm
+
+pub fn word_ishr_zero() -> @kernel.Thm
+
+pub fn word_ival_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_iword() -> @kernel.Thm
+
+pub fn word_iword_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_jdiv() -> @kernel.Thm
+
+pub fn word_jdiv_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_join() -> @kernel.Thm
+
+pub fn word_join_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_join_not() -> @kernel.Thm
+
+pub fn word_jrem() -> @kernel.Thm
+
+pub fn word_jrem_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_jrol() -> @kernel.Thm
+
+pub fn word_jrol_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_jrol_jror() -> @kernel.Thm
+
+pub fn word_jrol_v1() -> @kernel.Thm
+
+pub fn word_jror() -> @kernel.Thm
+
+pub fn word_jror_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_jror_jrol() -> @kernel.Thm
+
+pub fn word_jror_v1() -> @kernel.Thm
+
+pub fn word_jshl() -> @kernel.Thm
+
+pub fn word_jshl_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_jshl_neg() -> @kernel.Thm
+
+pub fn word_jshr() -> @kernel.Thm
+
+pub fn word_jshr_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_jushr() -> @kernel.Thm
+
+pub fn word_jushr_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_jushr_neg() -> @kernel.Thm
+
+pub fn word_le_add_exact() -> @kernel.Thm
+
+pub fn word_le_clz() -> @kernel.Thm
+
+pub fn word_le_clz_val() -> @kernel.Thm
+
+pub fn word_le_clz_val_div() -> @kernel.Thm
+
+pub fn word_le_clz_val_mult() -> @kernel.Thm
+
+pub fn word_le_ctz() -> @kernel.Thm
+
+pub fn word_le_ctz_val() -> @kernel.Thm
+
+pub fn word_le_ctz_val_mod() -> @kernel.Thm
+
+pub fn word_lt_adc_exact() -> @kernel.Thm
+
+pub fn word_mask() -> @kernel.Thm
+
+pub fn word_mask_alt() -> @kernel.Thm
+
+pub fn word_mod_size() -> @kernel.Thm
+
+pub fn word_mul() -> @kernel.Thm
+
+pub fn word_mul_0() -> @kernel.Thm
+
+pub fn word_mul_ac() -> @kernel.Thm
+
+pub fn word_mul_assoc() -> @kernel.Thm
+
+pub fn word_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_mul_expand() -> @kernel.Thm
+
+pub fn word_mul_expand_alt() -> @kernel.Thm
+
+pub fn word_mul_expand_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_mul_imodular() -> @kernel.Thm
+
+pub fn word_mul_sym() -> @kernel.Thm
+
+pub fn word_mul_v1() -> @kernel.Thm
+
+pub fn word_ne_10() -> @kernel.Thm
+
+pub fn word_neg() -> @kernel.Thm
+
+pub fn word_neg_0() -> @kernel.Thm
+
+pub fn word_neg_1() -> @kernel.Thm
+
+pub fn word_neg_and_mask() -> @kernel.Thm
+
+pub fn word_neg_as_add() -> @kernel.Thm
+
+pub fn word_neg_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_neg_eq_0() -> @kernel.Thm
+
+pub fn word_neg_neg() -> @kernel.Thm
+
+pub fn word_neg_sub() -> @kernel.Thm
+
+pub fn word_not() -> @kernel.Thm
+
+pub fn word_not_add() -> @kernel.Thm
+
+pub fn word_not_and() -> @kernel.Thm
+
+pub fn word_not_as_sub() -> @kernel.Thm
+
+pub fn word_not_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_not_mask() -> @kernel.Thm
+
+pub fn word_not_neg() -> @kernel.Thm
+
+pub fn word_not_not() -> @kernel.Thm
+
+pub fn word_not_or() -> @kernel.Thm
+
+pub fn word_not_sub() -> @kernel.Thm
+
+pub fn word_oddparity() -> @kernel.Thm
+
+pub fn word_oddparity_0() -> @kernel.Thm
+
+pub fn word_oddparity_1() -> @kernel.Thm
+
+pub fn word_oddparity_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_oddparity_popcount() -> @kernel.Thm
+
+pub fn word_of_bits() -> @kernel.Thm
+
+pub fn word_of_bits_alt() -> @kernel.Thm
+
+pub fn word_of_bits_as_word() -> @kernel.Thm
+
+pub fn word_of_bits_as_word_finite() -> @kernel.Thm
+
+pub fn word_of_bits_diff() -> @kernel.Thm
+
+pub fn word_of_bits_empty() -> @kernel.Thm
+
+pub fn word_of_bits_eq() -> @kernel.Thm
+
+pub fn word_of_bits_inter() -> @kernel.Thm
+
+pub fn word_of_bits_mask() -> @kernel.Thm
+
+pub fn word_of_bits_of_word() -> @kernel.Thm
+
+pub fn word_of_bits_sing_and_word() -> @kernel.Thm
+
+pub fn word_of_bits_sing_as_word() -> @kernel.Thm
+
+pub fn word_of_bits_sing_as_word_1() -> @kernel.Thm
+
+pub fn word_of_bits_union() -> @kernel.Thm
+
+pub fn word_of_bits_v1() -> @kernel.Thm
+
+pub fn word_or() -> @kernel.Thm
+
+pub fn word_or_0() -> @kernel.Thm
+
+pub fn word_or_assoc() -> @kernel.Thm
+
+pub fn word_or_conditions() -> @kernel.Thm
+
+pub fn word_or_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_or_eq_0() -> @kernel.Thm
+
+pub fn word_or_mask() -> @kernel.Thm
+
+pub fn word_or_mask_words() -> @kernel.Thm
+
+pub fn word_or_masks() -> @kernel.Thm
+
+pub fn word_or_not0() -> @kernel.Thm
+
+pub fn word_or_refl() -> @kernel.Thm
+
+pub fn word_or_shl_ushr() -> @kernel.Thm
+
+pub fn word_or_sym() -> @kernel.Thm
+
+pub fn word_or_ushr_shl() -> @kernel.Thm
+
+pub fn word_or_xor() -> @kernel.Thm
+
+pub fn word_or_xor_eq() -> @kernel.Thm
+
+pub fn word_or_xor_gen() -> @kernel.Thm
+
+pub fn word_pmul() -> @kernel.Thm
+
+pub fn word_pmul_0() -> @kernel.Thm
+
+pub fn word_pmul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_pmul_pow2() -> @kernel.Thm
+
+pub fn word_pmul_step() -> @kernel.Thm
+
+pub fn word_pmul_sym() -> @kernel.Thm
+
+pub fn word_pmul_xor() -> @kernel.Thm
+
+pub fn word_pmul_zx() -> @kernel.Thm
+
+pub fn word_popcount() -> @kernel.Thm
+
+pub fn word_popcount_0() -> @kernel.Thm
+
+pub fn word_popcount_1() -> @kernel.Thm
+
+pub fn word_popcount_add() -> @kernel.Thm
+
+pub fn word_popcount_add_disjoint() -> @kernel.Thm
+
+pub fn word_popcount_add_or() -> @kernel.Thm
+
+pub fn word_popcount_and() -> @kernel.Thm
+
+pub fn word_popcount_bitval() -> @kernel.Thm
+
+pub fn word_popcount_bound() -> @kernel.Thm
+
+pub fn word_popcount_bound_size() -> @kernel.Thm
+
+pub fn word_popcount_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_popcount_eq_0() -> @kernel.Thm
+
+pub fn word_popcount_expand_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_popcount_le_bits() -> @kernel.Thm
+
+pub fn word_popcount_mul() -> @kernel.Thm
+
+pub fn word_popcount_not() -> @kernel.Thm
+
+pub fn word_popcount_nsum() -> @kernel.Thm
+
+pub fn word_popcount_or() -> @kernel.Thm
+
+pub fn word_popcount_or_and() -> @kernel.Thm
+
+pub fn word_popcount_or_disjoint() -> @kernel.Thm
+
+pub fn word_popcount_shl() -> @kernel.Thm
+
+pub fn word_popcount_ushr() -> @kernel.Thm
+
+pub fn word_popcount_word_of_bits() -> @kernel.Thm
+
+pub fn word_popcount_word_of_bits_gen() -> @kernel.Thm
+
+pub fn word_popcount_xor() -> @kernel.Thm
+
+pub fn word_popcount_xor_and() -> @kernel.Thm
+
+pub fn word_popcount_xor_and2() -> @kernel.Thm
+
+pub fn word_pow2size_conv() -> @ref.Ref[(@kernel.Term) -> @kernel.Thm raise]
+
+pub fn word_pow2sizes() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn word_red_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_red_conv_list() -> @list.List[(@kernel.Term, (@kernel.Term) -> @kernel.Thm raise)]
+
+pub fn word_reduce_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_reversefields() -> @kernel.Thm
+
+pub fn word_reversefields_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_reversefields_reversefields() -> @kernel.Thm
+
+pub fn word_rol() -> @kernel.Thm
+
+pub fn word_rol_compose() -> @kernel.Thm
+
+pub fn word_rol_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_rol_eq_self() -> @kernel.Thm
+
+pub fn word_rol_mod() -> @kernel.Thm
+
+pub fn word_rol_periodic() -> @kernel.Thm
+
+pub fn word_rol_ror() -> @kernel.Thm
+
+pub fn word_rol_ror_gen() -> @kernel.Thm
+
+pub fn word_rol_shifts() -> @kernel.Thm
+
+pub fn word_rol_zero() -> @kernel.Thm
+
+pub fn word_ror() -> @kernel.Thm
+
+pub fn word_ror_compose() -> @kernel.Thm
+
+pub fn word_ror_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_ror_eq_self() -> @kernel.Thm
+
+pub fn word_ror_mod() -> @kernel.Thm
+
+pub fn word_ror_periodic() -> @kernel.Thm
+
+pub fn word_ror_rol() -> @kernel.Thm
+
+pub fn word_ror_rol_gen() -> @kernel.Thm
+
+pub fn word_ror_shifts() -> @kernel.Thm
+
+pub fn word_ror_zero() -> @kernel.Thm
+
+pub fn word_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_saturate() -> @kernel.Thm
+
+pub fn word_saturate_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_sgn() -> @kernel.Thm
+
+pub fn word_shl() -> @kernel.Thm
+
+pub fn word_shl_0() -> @kernel.Thm
+
+pub fn word_shl_and() -> @kernel.Thm
+
+pub fn word_shl_as_iword() -> @kernel.Thm
+
+pub fn word_shl_as_ushr() -> @kernel.Thm
+
+pub fn word_shl_compose() -> @kernel.Thm
+
+pub fn word_shl_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_shl_iword() -> @kernel.Thm
+
+pub fn word_shl_lsb() -> @kernel.Thm
+
+pub fn word_shl_lsb_alt() -> @kernel.Thm
+
+pub fn word_shl_or() -> @kernel.Thm
+
+pub fn word_shl_subword() -> @kernel.Thm
+
+pub fn word_shl_trivial() -> @kernel.Thm
+
+pub fn word_shl_word() -> @kernel.Thm
+
+pub fn word_shl_word_of_bits() -> @kernel.Thm
+
+pub fn word_shl_xor() -> @kernel.Thm
+
+pub fn word_shl_zero() -> @kernel.Thm
+
+pub fn word_simple_subword_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_size_conv() -> @ref.Ref[(@kernel.Term) -> @kernel.Thm raise]
+
+pub fn word_size_sub_clz() -> @kernel.Thm
+
+pub fn word_sizes() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn word_sub() -> @kernel.Thm
+
+pub fn word_sub_0() -> @kernel.Thm
+
+pub fn word_sub_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_sub_eq_0() -> @kernel.Thm
+
+pub fn word_sub_imodular() -> @kernel.Thm
+
+pub fn word_sub_lzero() -> @kernel.Thm
+
+pub fn word_sub_mask_word() -> @kernel.Thm
+
+pub fn word_sub_refl() -> @kernel.Thm
+
+pub fn word_sub_v1() -> @kernel.Thm
+
+pub fn word_sub_xor() -> @kernel.Thm
+
+pub fn word_subword() -> @kernel.Thm
+
+pub fn word_subword_0() -> @kernel.Thm
+
+pub fn word_subword_add() -> @kernel.Thm
+
+pub fn word_subword_and() -> @kernel.Thm
+
+pub fn word_subword_as_iword() -> @kernel.Thm
+
+pub fn word_subword_as_ushr() -> @kernel.Thm
+
+pub fn word_subword_as_ushr_shl() -> @kernel.Thm
+
+pub fn word_subword_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_subword_dimindex() -> @kernel.Thm
+
+pub fn word_subword_duplicate() -> @kernel.Thm
+
+pub fn word_subword_duplicate_duplicate() -> @kernel.Thm
+
+pub fn word_subword_insert_inner() -> @kernel.Thm
+
+pub fn word_subword_insert_outer() -> @kernel.Thm
+
+pub fn word_subword_iword() -> @kernel.Thm
+
+pub fn word_subword_iword_v1() -> @kernel.Thm
+
+pub fn word_subword_join_as_shl() -> @kernel.Thm
+
+pub fn word_subword_join_as_ushr() -> @kernel.Thm
+
+pub fn word_subword_join_lower() -> @kernel.Thm
+
+pub fn word_subword_join_self() -> @kernel.Thm
+
+pub fn word_subword_join_upper() -> @kernel.Thm
+
+pub fn word_subword_not() -> @kernel.Thm
+
+pub fn word_subword_or() -> @kernel.Thm
+
+pub fn word_subword_subword() -> @kernel.Thm
+
+pub fn word_subword_trivial() -> @kernel.Thm
+
+pub fn word_subword_word() -> @kernel.Thm
+
+pub fn word_subword_xor() -> @kernel.Thm
+
+pub fn word_subword_zx() -> @kernel.Thm
+
+pub fn word_subword_zx_trivial() -> @kernel.Thm
+
+pub fn word_subwords_eq() -> @kernel.Thm
+
+pub fn word_sx() -> @kernel.Thm
+
+pub fn word_sx_0() -> @kernel.Thm
+
+pub fn word_sx_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_sx_sx() -> @kernel.Thm
+
+pub fn word_sx_trivial() -> @kernel.Thm
+
+pub fn word_sx_zx() -> @kernel.Thm
+
+pub fn word_sx_zx_gen() -> @kernel.Thm
+
+pub fn word_sxfrom() -> @kernel.Thm
+
+pub fn word_sxfrom_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_sxfrom_subword_as_ishr_shl() -> @kernel.Thm
+
+pub fn word_to_iword_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_tybij() -> @kernel.Thm
+
+pub fn word_udiv() -> @kernel.Thm
+
+pub fn word_udiv_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_uge() -> @kernel.Thm
+
+pub fn word_uge_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_uge_topflip() -> @kernel.Thm
+
+pub fn word_uge_v1() -> @kernel.Thm
+
+pub fn word_ugt() -> @kernel.Thm
+
+pub fn word_ugt_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_ugt_topflip() -> @kernel.Thm
+
+pub fn word_ugt_v1() -> @kernel.Thm
+
+pub fn word_uint_max() -> @kernel.Thm
+
+pub fn word_ule() -> @kernel.Thm
+
+pub fn word_ule_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_ule_topflip() -> @kernel.Thm
+
+pub fn word_ule_v1() -> @kernel.Thm
+
+pub fn word_ult() -> @kernel.Thm
+
+pub fn word_ult_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_ult_topflip() -> @kernel.Thm
+
+pub fn word_ult_v1() -> @kernel.Thm
+
+pub fn word_umax() -> @kernel.Thm
+
+pub fn word_umax_assoc() -> @kernel.Thm
+
+pub fn word_umax_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_umax_sym() -> @kernel.Thm
+
+pub fn word_umax_v1() -> @kernel.Thm
+
+pub fn word_umin() -> @kernel.Thm
+
+pub fn word_umin_assoc() -> @kernel.Thm
+
+pub fn word_umin_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_umin_sym() -> @kernel.Thm
+
+pub fn word_umin_v1() -> @kernel.Thm
+
+pub fn word_umod() -> @kernel.Thm
+
+pub fn word_umod_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_ushr() -> @kernel.Thm
+
+pub fn word_ushr_0() -> @kernel.Thm
+
+pub fn word_ushr_and() -> @kernel.Thm
+
+pub fn word_ushr_as_shl() -> @kernel.Thm
+
+pub fn word_ushr_as_subword() -> @kernel.Thm
+
+pub fn word_ushr_compose() -> @kernel.Thm
+
+pub fn word_ushr_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_ushr_eq_0() -> @kernel.Thm
+
+pub fn word_ushr_mask_word() -> @kernel.Thm
+
+pub fn word_ushr_msb() -> @kernel.Thm
+
+pub fn word_ushr_msb_alt() -> @kernel.Thm
+
+pub fn word_ushr_msb_eq() -> @kernel.Thm
+
+pub fn word_ushr_or() -> @kernel.Thm
+
+pub fn word_ushr_word_of_bits() -> @kernel.Thm
+
+pub fn word_ushr_xor() -> @kernel.Thm
+
+pub fn word_ushr_zero() -> @kernel.Thm
+
+pub fn word_val() -> @kernel.Thm
+
+pub fn word_val_cong_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_val_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_val_galois() -> @kernel.Thm
+
+pub fn word_word_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_word_operation_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_xor() -> @kernel.Thm
+
+pub fn word_xor_0() -> @kernel.Thm
+
+pub fn word_xor_assoc() -> @kernel.Thm
+
+pub fn word_xor_conditions() -> @kernel.Thm
+
+pub fn word_xor_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_xor_eq_0() -> @kernel.Thm
+
+pub fn word_xor_int_min() -> @kernel.Thm
+
+pub fn word_xor_mask() -> @kernel.Thm
+
+pub fn word_xor_mask_word() -> @kernel.Thm
+
+pub fn word_xor_masks() -> @kernel.Thm
+
+pub fn word_xor_not() -> @kernel.Thm
+
+pub fn word_xor_not0() -> @kernel.Thm
+
+pub fn word_xor_refl() -> @kernel.Thm
+
+pub fn word_xor_sub() -> @kernel.Thm
+
+pub fn word_xor_sub_1_ctz() -> @kernel.Thm
+
+pub fn word_xor_sym() -> @kernel.Thm
+
+pub fn word_zx() -> @kernel.Thm
+
+pub fn word_zx_0() -> @kernel.Thm
+
+pub fn word_zx_1() -> @kernel.Thm
+
+pub fn word_zx_add() -> @kernel.Thm
+
+pub fn word_zx_and() -> @kernel.Thm
+
+pub fn word_zx_bitval() -> @kernel.Thm
+
+pub fn word_zx_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn word_zx_mul() -> @kernel.Thm
+
+pub fn word_zx_neg() -> @kernel.Thm
+
+pub fn word_zx_not() -> @kernel.Thm
+
+pub fn word_zx_or() -> @kernel.Thm
+
+pub fn word_zx_shl() -> @kernel.Thm
+
+pub fn word_zx_sub() -> @kernel.Thm
+
+pub fn word_zx_subword() -> @kernel.Thm
+
+pub fn word_zx_trivial() -> @kernel.Thm
+
+pub fn word_zx_word() -> @kernel.Thm
+
+pub fn word_zx_word_simple() -> @kernel.Thm
+
+pub fn word_zx_xor() -> @kernel.Thm
+
+pub fn word_zx_zx() -> @kernel.Thm
+
+pub fn wordify_atom_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn wordify_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn wordify_word_conv(@kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
