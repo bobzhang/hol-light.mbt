@@ -2,7 +2,7 @@
 // file system. One command is emulated: Library/pocklington.ml and
 // Library/pratt.ml ask PARI/GP to factor a number,
 //   echo 'print(factorint(N))  \n quit' | gp >FILE 2>/dev/null
-// and read FILE back. The factorization is computed here (Miller-Rabin and
+// and read FILE back. The factorization is computed here (Baillie-PSW and
 // Pollard rho) and printed as gp prints it ("[p1, e1; p2, e2]", or
 // "Mat([p, e])" for one factor) into an in-memory file. It only guides the
 // construction of primality certificates, which the kernel checks.
@@ -82,14 +82,148 @@ let big1 : @bigint.BigInt = @bigint.BigInt::from_int(1)
 let big2 : @bigint.BigInt = @bigint.BigInt::from_int(2)
 
 ///|
-/// Deterministic Miller-Rabin for n < 3.3e24, a strong probable-prime test
-/// beyond (as gp's factorint, which returns probable primes).
+/// `a mod n` in [0, n) for n > 0.
+fn big_modp(a : @bigint.BigInt, n : @bigint.BigInt) -> @bigint.BigInt {
+  let r = a % n
+  if r < big0 {
+    r + n
+  } else {
+    r
+  }
+}
+
+///|
+/// floor(sqrt(n)) for n >= 0 (Newton's method).
+fn big_isqrt(n : @bigint.BigInt) -> @bigint.BigInt {
+  if n < big2 {
+    return n
+  }
+  let mut x = big1.shl((n.bit_length() + 1) / 2)
+  while true {
+    let y = (x + n / x).shr(1)
+    if y >= x {
+      return x
+    }
+    x = y
+  }
+  x
+}
+
+///|
+/// The Jacobi symbol (a/n) for odd n > 0.
+fn big_jacobi(a : @bigint.BigInt, n : @bigint.BigInt) -> Int {
+  let big3 = @bigint.BigInt::from_int(3)
+  let big4 = @bigint.BigInt::from_int(4)
+  let big5 = @bigint.BigInt::from_int(5)
+  let big8 = @bigint.BigInt::from_int(8)
+  let mut a = big_modp(a, n)
+  let mut n = n
+  let mut t = 1
+  while !a.is_zero() {
+    while (a % big2).is_zero() {
+      a = a.shr(1)
+      let r = n % big8
+      if r == big3 || r == big5 {
+        t = -t
+      }
+    }
+    let tmp = a
+    a = n
+    n = tmp
+    if a % big4 == big3 && n % big4 == big3 {
+      t = -t
+    }
+    a = a % n
+  }
+  if n == big1 {
+    t
+  } else {
+    0
+  }
+}
+
+///|
+/// Strong Fermat test to base `a` for odd n > 2.
+fn strong_fermat(n : @bigint.BigInt, a : @bigint.BigInt) -> Bool {
+  let nm1 = n - big1
+  let s = nm1.ctz()
+  let d = nm1.shr(s)
+  let mut x = a.pow(d, modulus=n)
+  if x == big1 || x == nm1 {
+    return true
+  }
+  for _ in 1..<s {
+    x = x * x % n
+    if x == nm1 {
+      return true
+    }
+  }
+  false
+}
+
+///|
+/// Strong Lucas probable-prime test with Selfridge's parameters (D the
+/// first of 5, -7, 9, -11, ... with (D/n) = -1; P = 1, Q = (1 - D) / 4), for
+/// odd n > 47 that is not a perfect square.
+fn strong_lucas(n : @bigint.BigInt) -> Bool {
+  let mut dd = 5
+  while true {
+    let j = big_jacobi(@bigint.BigInt::from_int(dd), n)
+    if j == -1 {
+      break
+    }
+    if j == 0 {
+      return false
+    }
+    dd = if dd > 0 { -(dd + 2) } else { -dd + 2 }
+  }
+  let d = @bigint.BigInt::from_int(dd)
+  let q = big_modp(@bigint.BigInt::from_int((1 - dd) / 4), n)
+  let np1 = n + big1
+  let s = np1.ctz()
+  let k = np1.shr(s)
+  // x / 2 mod n
+  let half = (x : @bigint.BigInt) => {
+    let x = if (x % big2).is_zero() { x } else { x + n }
+    big_modp(x.shr(1), n)
+  }
+  // U_k, V_k and Q^k, from the top bit of k down (P = 1)
+  let mut u = big1
+  let mut v = big1
+  let mut qk = q
+  for i = k.bit_length() - 2; i >= 0; i = i - 1 {
+    u = u * v % n
+    v = big_modp(v * v - qk - qk, n)
+    qk = qk * qk % n
+    if !(k.shr(i) % big2).is_zero() {
+      let u1 = half(u + v)
+      let v1 = half(big_modp(d * u, n) + v)
+      u = u1
+      v = v1
+      qk = qk * q % n
+    }
+  }
+  if u.is_zero() || v.is_zero() {
+    return true
+  }
+  for _ in 1..<s {
+    v = big_modp(v * v - qk - qk, n)
+    qk = qk * qk % n
+    if v.is_zero() {
+      return true
+    }
+  }
+  false
+}
+
+///|
+/// Baillie-PSW probable-prime test, as PARI's (no BPSW pseudoprime is
+/// known), so the factors agree with gp's.
 fn is_probable_prime(n : @bigint.BigInt) -> Bool {
   if n < big2 {
     return false
   }
-  let small = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41]
-  for p in small {
+  for p in [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47] {
     let bp = @bigint.BigInt::from_int(p)
     if n == bp {
       return true
@@ -98,27 +232,14 @@ fn is_probable_prime(n : @bigint.BigInt) -> Bool {
       return false
     }
   }
-  let nm1 = n - big1
-  let s = nm1.ctz()
-  let d = nm1.shr(s)
-  for a in small {
-    let mut x = @bigint.BigInt::from_int(a).pow(d, modulus=n)
-    if x == big1 || x == nm1 {
-      continue
-    }
-    let mut composite = true
-    for _ in 1..<s {
-      x = x * x % n
-      if x == nm1 {
-        composite = false
-        break
-      }
-    }
-    if composite {
-      return false
-    }
+  if !strong_fermat(n, big2) {
+    return false
   }
-  true
+  let r = big_isqrt(n)
+  if r * r == n {
+    return false
+  }
+  strong_lucas(n)
 }
 
 ///|
@@ -134,25 +255,79 @@ fn big_gcd_(a : @bigint.BigInt, b : @bigint.BigInt) -> @bigint.BigInt {
 }
 
 ///|
-/// A nontrivial factor of composite `n` (Pollard rho, Brent's variant).
-fn rho_factor(n : @bigint.BigInt) -> @bigint.BigInt {
-  if (n % big2).is_zero() {
-    return big2
+/// floor(n^(1/k)) for n >= 0, k >= 1 (Newton's method).
+fn big_iroot(n : @bigint.BigInt, k : Int) -> @bigint.BigInt {
+  if n < big2 || k == 1 {
+    return n
   }
+  let bk = @bigint.BigInt::from_int(k)
+  let bk1 = @bigint.BigInt::from_int(k - 1)
+  let mut x = big1.shl(n.bit_length() / k + 1)
+  while true {
+    let y = (bk1 * x + n / x.pow(bk1)) / bk
+    if y >= x {
+      return x
+    }
+    x = y
+  }
+  x
+}
+
+///|
+/// `Some((r, k))` with n = r^k, k >= 2 maximal-first, for n >= 2.
+fn perfect_power(n : @bigint.BigInt) -> (@bigint.BigInt, Int)? {
+  for k = n.bit_length(); k >= 2; k = k - 1 {
+    let r = big_iroot(n, k)
+    if r >= big2 && r.pow(@bigint.BigInt::from_int(k)) == n {
+      return Some((r, k))
+    }
+  }
+  None
+}
+
+///|
+/// A nontrivial factor of odd composite `n` that is not a perfect power
+/// (Pollard rho, Brent's variant with batched gcds).
+fn rho_factor(n : @bigint.BigInt) -> @bigint.BigInt {
   let mut c = big1
   while true {
     let f = (x : @bigint.BigInt) => (x * x + c) % n
-    let mut x = big2
     let mut y = big2
-    let mut d = big1
-    while d == big1 {
-      x = f(x)
-      y = f(f(y))
-      let diff = if x > y { x - y } else { y - x }
-      d = big_gcd_(diff, n)
+    let mut x = big2
+    let mut ys = big2
+    let mut g = big1
+    let mut q = big1
+    let mut r = 1
+    let m = 128
+    while g == big1 {
+      x = y
+      for _ in 0..<r {
+        y = f(y)
+      }
+      let mut k = 0
+      while k < r && g == big1 {
+        ys = y
+        for _ in 0..<(if m < r - k { m } else { r - k }) {
+          y = f(y)
+          let diff = if x > y { x - y } else { y - x }
+          q = q * diff % n
+        }
+        g = big_gcd_(q, n)
+        k = k + m
+      }
+      r = r * 2
     }
-    if d != n {
-      return d
+    if g == n {
+      // backtrack one step at a time from the last batch
+      g = big1
+      while g == big1 {
+        ys = f(ys)
+        let diff = if x > ys { x - ys } else { ys - x }
+        g = big_gcd_(diff, n)
+      }
+    }
+    if g != n {
+      return g
     }
     c = c + big1
   }
@@ -178,14 +353,28 @@ fn prime_factors(n : @bigint.BigInt, acc : Array[@bigint.BigInt]) -> Unit {
       return
     }
   }
-  let d = rho_factor(n)
-  prime_factors(d, acc)
-  prime_factors(n / d, acc)
+  match perfect_power(n) {
+    Some((r, k)) =>
+      for _ in 0..<k {
+        prime_factors(r, acc)
+      }
+    None => {
+      let d = rho_factor(n)
+      prime_factors(d, acc)
+      prime_factors(n / d, acc)
+    }
+  }
 }
 
 ///|
-/// gp's `print(factorint(n))` for n >= 2.
+/// gp's `print(factorint(n))` for n >= 0.
 pub fn gp_factorint(n : @bigint.BigInt) -> String {
+  if n.is_zero() {
+    return "Mat([0, 1])"
+  }
+  if n == big1 {
+    return "matrix(0,2)"
+  }
   let fs = []
   prime_factors(n, fs)
   fs.sort_by((a, b) => a.compare(b))
