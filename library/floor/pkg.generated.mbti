@@ -1,0 +1,222 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/floor"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn card_intseg_int() -> @kernel.Thm
+
+pub fn finite_intseg() -> @kernel.Thm
+
+pub fn floor() -> @kernel.Thm
+
+pub fn floor_div_div() -> @kernel.Thm
+
+pub fn floor_double() -> @kernel.Thm
+
+pub fn floor_eq_0() -> @kernel.Thm
+
+pub fn floor_frac() -> @kernel.Thm
+
+pub fn floor_mono() -> @kernel.Thm
+
+pub fn floor_num() -> @kernel.Thm
+
+pub fn floor_pos() -> @kernel.Thm
+
+pub fn floor_pos_le() -> @kernel.Thm
+
+pub fn floor_unique() -> @kernel.Thm
+
+pub fn forall_integer() -> @kernel.Thm
+
+pub fn frac_div_mod() -> @kernel.Thm
+
+pub fn frac_floor() -> @kernel.Thm
+
+pub fn frac_neg() -> @kernel.Thm
+
+pub fn frac_num() -> @kernel.Thm
+
+pub fn frac_unique() -> @kernel.Thm
+
+pub fn has_size_intseg_int() -> @kernel.Thm
+
+pub fn has_size_intseg_num() -> @kernel.Thm
+
+pub fn image_real_of_int_univ() -> @kernel.Thm
+
+pub fn infinite_integer() -> @kernel.Thm
+
+pub fn infinite_rational() -> @kernel.Thm
+
+pub fn infinite_rational_in_range() -> @kernel.Thm
+
+pub fn integer_abs() -> @kernel.Thm
+
+pub fn integer_abs_mul_eq_1() -> @kernel.Thm
+
+pub fn integer_add() -> @kernel.Thm
+
+pub fn integer_add_eq() -> @kernel.Thm
+
+pub fn integer_cases() -> @kernel.Thm
+
+pub fn integer_closed() -> @kernel.Thm
+
+pub fn integer_div() -> @kernel.Thm
+
+pub fn integer_exists_between() -> @kernel.Thm
+
+pub fn integer_exists_between_abs() -> @kernel.Thm
+
+pub fn integer_exists_between_abs_lt() -> @kernel.Thm
+
+pub fn integer_exists_between_alt() -> @kernel.Thm
+
+pub fn integer_exists_between_lt() -> @kernel.Thm
+
+pub fn integer_mul() -> @kernel.Thm
+
+pub fn integer_neg() -> @kernel.Thm
+
+pub fn integer_pos() -> @kernel.Thm
+
+pub fn integer_pow() -> @kernel.Thm
+
+pub fn integer_round() -> @kernel.Thm
+
+pub fn integer_sub() -> @kernel.Thm
+
+pub fn integer_sub_eq() -> @kernel.Thm
+
+pub fn integer_sum() -> @kernel.Thm
+
+pub fn nonnegative_integer() -> @kernel.Thm
+
+pub fn nonpositive_integer() -> @kernel.Thm
+
+pub fn nonpositive_integer_alt() -> @kernel.Thm
+
+pub fn padic_rational_approximation_straddle() -> @kernel.Thm
+
+pub fn padic_rational_approximation_straddle_pos() -> @kernel.Thm
+
+pub fn padic_rational_approximation_straddle_pos_le() -> @kernel.Thm
+
+pub fn rational() -> @kernel.Thm
+
+pub fn rational_abs() -> @kernel.Thm
+
+pub fn rational_abs_eq() -> @kernel.Thm
+
+pub fn rational_add() -> @kernel.Thm
+
+pub fn rational_alt() -> @kernel.Thm
+
+pub fn rational_approximation() -> @kernel.Thm
+
+pub fn rational_approximation_above() -> @kernel.Thm
+
+pub fn rational_approximation_below() -> @kernel.Thm
+
+pub fn rational_approximation_straddle() -> @kernel.Thm
+
+pub fn rational_between() -> @kernel.Thm
+
+pub fn rational_between_eq() -> @kernel.Thm
+
+pub fn rational_closed() -> @kernel.Thm
+
+pub fn rational_div() -> @kernel.Thm
+
+pub fn rational_integer() -> @kernel.Thm
+
+pub fn rational_inv() -> @kernel.Thm
+
+pub fn rational_inv_eq() -> @kernel.Thm
+
+pub fn rational_mul() -> @kernel.Thm
+
+pub fn rational_neg() -> @kernel.Thm
+
+pub fn rational_neg_eq() -> @kernel.Thm
+
+pub fn rational_num() -> @kernel.Thm
+
+pub fn rational_pow() -> @kernel.Thm
+
+pub fn rational_sub() -> @kernel.Thm
+
+pub fn rational_sum() -> @kernel.Thm
+
+pub fn real_abs_integer_lemma() -> @kernel.Thm
+
+pub fn real_card_intseg_int() -> @kernel.Thm
+
+pub fn real_congruence() -> @kernel.Thm
+
+pub fn real_eq_integers() -> @kernel.Thm
+
+pub fn real_eq_integers_imp() -> @kernel.Thm
+
+pub fn real_floor_add() -> @kernel.Thm
+
+pub fn real_floor_eq() -> @kernel.Thm
+
+pub fn real_floor_floor_div() -> @kernel.Thm
+
+pub fn real_floor_le() -> @kernel.Thm
+
+pub fn real_floor_lt() -> @kernel.Thm
+
+pub fn real_floor_lt_refl() -> @kernel.Thm
+
+pub fn real_floor_neg() -> @kernel.Thm
+
+pub fn real_floor_refl() -> @kernel.Thm
+
+pub fn real_floor_triangle() -> @kernel.Thm
+
+pub fn real_frac_add() -> @kernel.Thm
+
+pub fn real_frac_eq() -> @kernel.Thm
+
+pub fn real_frac_eq_0() -> @kernel.Thm
+
+pub fn real_frac_pos_lt() -> @kernel.Thm
+
+pub fn real_frac_zero() -> @kernel.Thm
+
+pub fn real_int_congruence() -> @kernel.Thm
+
+pub fn real_integer_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn real_le_cases_integers() -> @kernel.Thm
+
+pub fn real_le_floor() -> @kernel.Thm
+
+pub fn real_le_integers() -> @kernel.Thm
+
+pub fn real_le_reverse_integers() -> @kernel.Thm
+
+pub fn real_lt_floor() -> @kernel.Thm
+
+pub fn real_lt_integers() -> @kernel.Thm
+
+pub fn real_of_int_of_real() -> @kernel.Thm
+
+pub fn real_truncate() -> @kernel.Thm
+
+pub fn real_truncate_pos() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
