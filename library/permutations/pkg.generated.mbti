@@ -1,0 +1,315 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/permutations"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn card_even_permutations() -> @kernel.Thm
+
+pub fn card_permutations() -> @kernel.Thm
+
+pub fn evenperm() -> @kernel.Thm
+
+pub fn evenperm_compose() -> @kernel.Thm
+
+pub fn evenperm_cyclic() -> @kernel.Thm
+
+pub fn evenperm_cyclic_n() -> @kernel.Thm
+
+pub fn evenperm_i() -> @kernel.Thm
+
+pub fn evenperm_id() -> @kernel.Thm
+
+pub fn evenperm_inverse() -> @kernel.Thm
+
+pub fn evenperm_swap() -> @kernel.Thm
+
+pub fn evenperm_transfer() -> @kernel.Thm
+
+pub fn evenperm_unique() -> @kernel.Thm
+
+pub fn finite_permutations() -> @kernel.Thm
+
+pub fn fixing_swapseq_decrease() -> @kernel.Thm
+
+pub fn has_size_permutations() -> @kernel.Thm
+
+pub fn image_compose_permutations_l() -> @kernel.Thm
+
+pub fn image_compose_permutations_r() -> @kernel.Thm
+
+pub fn image_inverse_permutations() -> @kernel.Thm
+
+pub fn injective_inverse() -> @kernel.Thm
+
+pub fn injective_inverse_o() -> @kernel.Thm
+
+pub fn inverse() -> @kernel.Thm
+
+pub fn inverse_i() -> @kernel.Thm
+
+pub fn inverse_swap() -> @kernel.Thm
+
+pub fn inverse_unique_alt() -> @kernel.Thm
+
+pub fn inverse_unique_o() -> @kernel.Thm
+
+pub fn involution_moves_2_is_swap() -> @kernel.Thm
+
+pub fn involution_size_2_is_swap() -> @kernel.Thm
+
+pub fn iterate_permute() -> @kernel.Thm
+
+pub fn nsum_permute() -> @kernel.Thm
+
+pub fn nsum_permute_numseg() -> @kernel.Thm
+
+pub fn permset_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn permutation() -> @kernel.Thm
+
+pub fn permutation_bijective() -> @kernel.Thm
+
+pub fn permutation_compose() -> @kernel.Thm
+
+pub fn permutation_compose_eq() -> @kernel.Thm
+
+pub fn permutation_compose_swap() -> @kernel.Thm
+
+pub fn permutation_cyclic() -> @kernel.Thm
+
+pub fn permutation_cyclic_n() -> @kernel.Thm
+
+pub fn permutation_finite_support() -> @kernel.Thm
+
+pub fn permutation_i() -> @kernel.Thm
+
+pub fn permutation_inverse() -> @kernel.Thm
+
+pub fn permutation_inverse_compose() -> @kernel.Thm
+
+pub fn permutation_inverse_works() -> @kernel.Thm
+
+pub fn permutation_lemma() -> @kernel.Thm
+
+pub fn permutation_permutes() -> @kernel.Thm
+
+pub fn permutation_restrict() -> @kernel.Thm
+
+pub fn permutation_swap() -> @kernel.Thm
+
+pub fn permutation_v1() -> @kernel.Thm
+
+pub fn permutes() -> @kernel.Thm
+
+pub fn permutes_alt() -> @kernel.Thm
+
+pub fn permutes_bijections() -> @kernel.Thm
+
+pub fn permutes_cartesian_product() -> @kernel.Thm
+
+pub fn permutes_compose() -> @kernel.Thm
+
+pub fn permutes_cyclic() -> @kernel.Thm
+
+pub fn permutes_cyclic_n() -> @kernel.Thm
+
+pub fn permutes_empty() -> @kernel.Thm
+
+pub fn permutes_finite_injective() -> @kernel.Thm
+
+pub fn permutes_finite_surjective() -> @kernel.Thm
+
+pub fn permutes_i() -> @kernel.Thm
+
+pub fn permutes_id() -> @kernel.Thm
+
+pub fn permutes_image() -> @kernel.Thm
+
+pub fn permutes_in_image() -> @kernel.Thm
+
+pub fn permutes_in_numseg() -> @kernel.Thm
+
+pub fn permutes_induct() -> @kernel.Thm
+
+pub fn permutes_induct_strong() -> @kernel.Thm
+
+pub fn permutes_injective() -> @kernel.Thm
+
+pub fn permutes_insert() -> @kernel.Thm
+
+pub fn permutes_insert_lemma() -> @kernel.Thm
+
+pub fn permutes_inverse() -> @kernel.Thm
+
+pub fn permutes_inverse_eq() -> @kernel.Thm
+
+pub fn permutes_inverse_function() -> @kernel.Thm
+
+pub fn permutes_inverse_inverse() -> @kernel.Thm
+
+pub fn permutes_inverses() -> @kernel.Thm
+
+pub fn permutes_inverses_o() -> @kernel.Thm
+
+pub fn permutes_involution() -> @kernel.Thm
+
+pub fn permutes_numset_ge() -> @kernel.Thm
+
+pub fn permutes_numset_le() -> @kernel.Thm
+
+pub fn permutes_restrict() -> @kernel.Thm
+
+pub fn permutes_restrict_set() -> @kernel.Thm
+
+pub fn permutes_sing() -> @kernel.Thm
+
+pub fn permutes_subset() -> @kernel.Thm
+
+pub fn permutes_superset() -> @kernel.Thm
+
+pub fn permutes_surjective() -> @kernel.Thm
+
+pub fn permutes_swap() -> @kernel.Thm
+
+pub fn permutes_three_cycle() -> @kernel.Thm
+
+pub fn permutes_transfer() -> @kernel.Thm
+
+pub fn permutes_transfer_bijections() -> @kernel.Thm
+
+pub fn permutes_univ() -> @kernel.Thm
+
+pub fn real_abs_sign() -> @kernel.Thm
+
+pub fn real_sgn_sign() -> @kernel.Thm
+
+pub fn restrict_compose() -> @kernel.Thm
+
+pub fn restrict_i() -> @kernel.Thm
+
+pub fn restrict_inverse() -> @kernel.Thm
+
+pub fn restrict_permutes_subset() -> @kernel.Thm
+
+pub fn restrict_swap() -> @kernel.Thm
+
+pub fn sign() -> @kernel.Thm
+
+pub fn sign_cartesian_product() -> @kernel.Thm
+
+pub fn sign_compose() -> @kernel.Thm
+
+pub fn sign_cyclic() -> @kernel.Thm
+
+pub fn sign_cyclic_n() -> @kernel.Thm
+
+pub fn sign_i() -> @kernel.Thm
+
+pub fn sign_id() -> @kernel.Thm
+
+pub fn sign_idempotent() -> @kernel.Thm
+
+pub fn sign_inverse() -> @kernel.Thm
+
+pub fn sign_involution() -> @kernel.Thm
+
+pub fn sign_nz() -> @kernel.Thm
+
+pub fn sign_swap() -> @kernel.Thm
+
+pub fn sign_transfer() -> @kernel.Thm
+
+pub fn sum_over_permutations_insert() -> @kernel.Thm
+
+pub fn sum_over_permutations_numseg() -> @kernel.Thm
+
+pub fn sum_permutations_compose_l() -> @kernel.Thm
+
+pub fn sum_permutations_compose_r() -> @kernel.Thm
+
+pub fn sum_permutations_inverse() -> @kernel.Thm
+
+pub fn sum_permute() -> @kernel.Thm
+
+pub fn sum_permute_numseg() -> @kernel.Thm
+
+pub fn surjective_inverse() -> @kernel.Thm
+
+pub fn surjective_inverse_o() -> @kernel.Thm
+
+pub fn swap() -> @kernel.Thm
+
+pub fn swap_common() -> @kernel.Thm
+
+pub fn swap_common_p() -> @kernel.Thm
+
+pub fn swap_conjugate() -> @kernel.Thm
+
+pub fn swap_galois() -> @kernel.Thm
+
+pub fn swap_general() -> @kernel.Thm
+
+pub fn swap_idempotent() -> @kernel.Thm
+
+pub fn swap_independent() -> @kernel.Thm
+
+pub fn swap_left() -> @kernel.Thm
+
+pub fn swap_other() -> @kernel.Thm
+
+pub fn swap_refl() -> @kernel.Thm
+
+pub fn swap_right() -> @kernel.Thm
+
+pub fn swap_sym() -> @kernel.Thm
+
+pub fn swap_triple() -> @kernel.Thm
+
+pub fn swap_triple_alt() -> @kernel.Thm
+
+pub fn swapseq_cases() -> @kernel.Thm
+
+pub fn swapseq_compose() -> @kernel.Thm
+
+pub fn swapseq_endswap() -> @kernel.Thm
+
+pub fn swapseq_even_even() -> @kernel.Thm
+
+pub fn swapseq_i() -> @kernel.Thm
+
+pub fn swapseq_identity_even() -> @kernel.Thm
+
+pub fn swapseq_induct() -> @kernel.Thm
+
+pub fn swapseq_inverse() -> @kernel.Thm
+
+pub fn swapseq_inverse_exists() -> @kernel.Thm
+
+pub fn swapseq_rules() -> @kernel.Thm
+
+pub fn swapseq_swap() -> @kernel.Thm
+
+pub fn symmetry_lemma() -> @kernel.Thm
+
+pub fn three_cycle() -> @kernel.Thm
+
+pub fn three_cycle_as_commutator() -> @kernel.Thm
+
+pub fn three_cycle_commutator() -> @kernel.Thm
+
+pub fn three_cycle_compose_reverse() -> @kernel.Thm
+
+pub fn three_cycle_inverse() -> @kernel.Thm
+
+pub fn three_cycle_not_i() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
