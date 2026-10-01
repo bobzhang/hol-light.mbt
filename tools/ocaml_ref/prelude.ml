@@ -26,3 +26,13 @@ let attempt name f = try out (name ^ " = " ^ f ()) with
     Failure s -> out (name ^ " ! " ^ s)
   | Match_failure _ -> out (name ^ " !! Match_failure")
   | e -> out (name ^ " !! " ^ Printexc.to_string e);;
+(* Quotation trace: quotations expand to calls of whatever parse_term and
+   parse_type are bound when a file loads, so these wrappers record the
+   order in which a theory parses its quotations. *)
+let quotation_trace = ref ([] : string list);;
+let parse_type s = quotation_trace := (":" ^ s) :: !quotation_trace; parse_type s;;
+let parse_term s = quotation_trace := s :: !quotation_trace; parse_term s;;
+let start_trace () = quotation_trace := [];;
+let show_trace name =
+  out (name ^ " quotations (" ^ string_of_int (length !quotation_trace) ^ "):");
+  List.iter (fun s -> out ("  " ^ String.escaped s)) (rev !quotation_trace);;

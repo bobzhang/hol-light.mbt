@@ -77,3 +77,47 @@ pub fn Log::contents(self : Log) -> String {
 pub fn Log::capture_reports(self : Log) -> Unit {
   @lib.report_sink.val = s => self.out(s)
 }
+
+///|
+/// OCaml's `String.escaped` on the UTF-8 bytes of `s`.
+pub fn ocaml_escaped(s : String) -> String {
+  let buf = StringBuilder()
+  for b in @utf8.encode(s) {
+    let c = b.to_int()
+    match c {
+      0x22 => buf.write_string("\\\"")
+      0x5C => buf.write_string("\\\\")
+      0x0A => buf.write_string("\\n")
+      0x09 => buf.write_string("\\t")
+      0x0D => buf.write_string("\\r")
+      0x08 => buf.write_string("\\b")
+      _ =>
+        if c >= 32 && c <= 126 {
+          buf.write_char(c.unsafe_to_char())
+        } else {
+          buf.write_string("\\")
+          buf.write_string((c / 100).to_string())
+          buf.write_string((c / 10 % 10).to_string())
+          buf.write_string((c % 10).to_string())
+        }
+    }
+  }
+  buf.to_string()
+}
+
+///|
+/// Start recording the quotations parsed (see `@parser.quotation_trace`).
+pub fn start_trace() -> Unit {
+  @parser.quotation_trace.val = Some([])
+}
+
+///|
+/// Log the recorded quotations as tools/ocaml_ref/prelude.ml's `show_trace`.
+pub fn Log::show_trace(self : Log, name : String) -> Unit {
+  let t = @parser.quotation_trace.val.unwrap_or([])
+  self.out(name + " quotations (" + t.length().to_string() + "):")
+  for s in t {
+    self.out("  " + ocaml_escaped(s))
+  }
+  @parser.quotation_trace.val = None
+}

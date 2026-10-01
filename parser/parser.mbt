@@ -803,8 +803,23 @@ pub fn parse_preterm(inp : Toks) -> (Preterm, Toks) raise {
 }
 
 ///|
+/// When set, every `parse_type`/`parse_term` input is recorded (prefixed
+/// with `:` for types), so tests can compare the order in which a theory
+/// parses its quotations with upstream.
+pub let quotation_trace : Ref[Array[String]?] = Ref::{ val: None, }
+
+///|
+fn trace(s : String) -> Unit {
+  match quotation_trace.val {
+    Some(t) => t.push(s)
+    None => ()
+  }
+}
+
+///|
 /// Parse a HOL type.
 pub fn parse_type(s : String) -> HolType raise {
+  trace(":" + s)
   let (pty, l) = parse_pretype(lex(s))
   if l.is_empty() {
     @preterm.type_of_pretype(pty)
@@ -816,6 +831,7 @@ pub fn parse_type(s : String) -> HolType raise {
 ///|
 /// Parse and typecheck a HOL term.
 pub fn parse_term(s : String) -> Term raise {
+  trace(s)
   let (ptm, l) = parse_preterm(lex(s))
   if l.is_empty() {
     @preterm.term_of_preterm(@preterm.retypecheck(@list.empty(), ptm))

@@ -1,6 +1,8 @@
 (* Load-fidelity and behaviour test for bool.ml. Keep in sync with
    bool/bool_ref_test.mbt. *)
+start_trace ();;
 #use "bool.ml";;
+show_trace "bool";;
 let th name f = attempt name (fun () -> sthm (f ()));;
 let tm s = parse_term s;;
 out ("constants = " ^ String.concat " " (map fst (constants())));;

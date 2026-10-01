@@ -9,8 +9,10 @@ using @testkit {sty, stm, sthm}
 
 ///|
 test "bool matches bool.ml" {
-  @bool.load()
   let log = @testkit.Log::new()
+  @testkit.start_trace()
+  @bool.load()
+  log.show_trace("bool")
   log.capture_reports()
   let th = (name : String, f : () -> @kernel.Thm raise) => {
     log.attempt(name, () => sthm(f()))
@@ -189,6 +191,102 @@ test "bool matches bool.ml" {
   inspect(
     log.contents(),
     content=(
+      #|bool quotations (95):
+      #|  (=):bool->bool->bool
+      #|  (<=>)
+      #|  T = ((\\p:bool. p) = (\\p:bool. p))
+      #|  \\p:bool. p
+      #|  t:bool
+      #|  (/\\) = \\p q. (\\f:bool->bool->bool. f p q) = (\\f. f T T)
+      #|  f:bool->bool->bool
+      #|  p:bool
+      #|  q:bool
+      #|  \\(p:bool) (q:bool). q
+      #|  P:bool
+      #|  Q:bool
+      #|  \\(p:bool) (q:bool). p
+      #|  P:bool
+      #|  Q:bool
+      #|  \\(p:bool) (q:bool). q
+      #|  (==>) = \\p q. p /\\ q <=> p
+      #|  p:bool
+      #|  q:bool
+      #|  p:bool
+      #|  q:bool
+      #|  p:bool
+      #|  q:bool
+      #|  (==>)
+      #|  p <=> q
+      #|  p ==> q
+      #|  q ==> r
+      #|  (!) = \\P:A->bool. P = \\x. T
+      #|  P:A->bool
+      #|  x:A
+      #|  (!)(P:A->bool)
+      #|  P:A->bool
+      #|  x:A
+      #|  P:A->bool
+      #|  (?) = \\P:A->bool. !q. (!x. P x ==> q) ==> q
+      #|  P:A->bool
+      #|  x:A
+      #|  !x:A. P x ==> Q
+      #|  x:A
+      #|  (P:A->bool) x
+      #|  !x:A. P x ==> Q
+      #|  Q:bool
+      #|  P:A->bool
+      #|  Q:bool
+      #|  Q:bool
+      #|  (?) (P:A->bool)
+      #|  (\\/) = \\p q. !r. (p ==> r) ==> (q ==> r) ==> r
+      #|  P:bool
+      #|  Q:bool
+      #|  P:bool
+      #|  Q:bool
+      #|  P:bool
+      #|  P ==> t
+      #|  Q ==> t
+      #|  P ==> t
+      #|  t:bool
+      #|  P:bool
+      #|  Q:bool
+      #|  P:bool
+      #|  Q:bool
+      #|  Q:bool
+      #|  Q ==> t
+      #|  Q ==> t
+      #|  P ==> t
+      #|  t:bool
+      #|  P:bool
+      #|  Q:bool
+      #|  R:bool
+      #|  P:bool
+      #|  Q:bool
+      #|  P \\/ Q
+      #|  R:bool
+      #|  F = !p:bool. p
+      #|  (~) = \\p. p ==> F
+      #|  (~)
+      #|  P:bool
+      #|  P:bool
+      #|  P:bool
+      #|  ~ P
+      #|  F
+      #|  F
+      #|  P:bool
+      #|  P:bool
+      #|  P = F
+      #|  F
+      #|  P:bool
+      #|  F
+      #|  F
+      #|  (?!) = \\P:A->bool. ((?) P) /\\ (!x y. P x /\\ P y ==> x = y)
+      #|  P:A->bool
+      #|  T
+      #|  F
+      #|  (!):(A->bool)->bool
+      #|  (?):(A->bool)->bool
+      #|  (?!):(A->bool)->bool
       #|constants = ?! ~ F \/ ? ! ==> /\ T =
       #|types = bool fun
       #|definitions =  |- ((#=:fun(fun(fun('A,bool),bool),fun(fun(fun('A,bool),bool),bool)) #?!:fun(fun('A,bool),bool)) (\P:fun('A,bool). ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) P:fun('A,bool))) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) y:'A))) ((#=:fun('A,fun('A,bool)) x:'A) y:'A))))))))) ;;  |- ((#=:fun(fun(bool,bool),fun(fun(bool,bool),bool)) #~:fun(bool,bool)) (\p:bool. ((#==>:fun(bool,fun(bool,bool)) p:bool) #F:bool))) ;;  |- ((#=:fun(bool,fun(bool,bool)) #F:bool) (#!:fun(fun(bool,bool),bool) (\p:bool. p:bool))) ;;  |- ((#=:fun(fun(bool,fun(bool,bool)),fun(fun(bool,fun(bool,bool)),bool)) #\/:fun(bool,fun(bool,bool))) (\p:bool. (\q:bool. (#!:fun(fun(bool,bool),bool) (\r:bool. ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) r:bool)) ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) q:bool) r:bool)) r:bool))))))) ;;  |- ((#=:fun(fun(fun('A,bool),bool),fun(fun(fun('A,bool),bool),bool)) #?:fun(fun('A,bool),bool)) (\P:fun('A,bool). (#!:fun(fun(bool,bool),bool) (\q:bool. ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) q:bool)))) q:bool))))) ;;  |- ((#=:fun(fun(fun('A,bool),bool),fun(fun(fun('A,bool),bool),bool)) #!:fun(fun('A,bool),bool)) (\P:fun('A,bool). ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) P:fun('A,bool)) (\x:'A. #T:bool)))) ;;  |- ((#=:fun(fun(bool,fun(bool,bool)),fun(fun(bool,fun(bool,bool)),bool)) #==>:fun(bool,fun(bool,bool))) (\p:bool. (\q:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) p:bool)))) ;;  |- ((#=:fun(fun(bool,fun(bool,bool)),fun(fun(bool,fun(bool,bool)),bool)) #/\:fun(bool,fun(bool,bool))) (\p:bool. (\q:bool. ((#=:fun(fun(fun(bool,fun(bool,bool)),bool),fun(fun(fun(bool,fun(bool,bool)),bool),bool)) (\f:fun(bool,fun(bool,bool)). ((f:fun(bool,fun(bool,bool)) p:bool) q:bool))) (\f:fun(bool,fun(bool,bool)). ((f:fun(bool,fun(bool,bool)) #T:bool) #T:bool)))))) ;;  |- ((#=:fun(bool,fun(bool,bool)) #T:bool) ((#=:fun(fun(bool,bool),fun(fun(bool,bool),bool)) (\p:bool. p:bool)) (\p:bool. p:bool)))
