@@ -102,8 +102,12 @@ module Lower = struct
      of its target. *)
   let module_paths : (string, string list) Hashtbl.t = Hashtbl.create 64
 
-  (* module aliases by full name (`Metis_prover.W.B`) -> target path *)
+  (* module aliases by full name (`Metis_prover.W.B`) -> target path, and
+     the generation of each registration *)
   let module_aliases : (string, string list) Hashtbl.t = Hashtbl.create 32
+  let alias_gen : (string, int) Hashtbl.t = Hashtbl.create 32
+  let alias_counter = ref 0
+  let set_alias k v = incr alias_counter; Hashtbl.replace module_aliases k v; Hashtbl.replace alias_gen k !alias_counter
 
   let rec module_path (p : Path.t) =
     match p with
@@ -404,7 +408,7 @@ module Lower = struct
   (* a record label's MoonBit field: OCaml's `ref` is MoonBit's Ref (`val`) *)
   let label_name (ld : Types.label_description) =
     match Types.get_desc ld.Types.lbl_res with
-    | Types.Tconstr (p, _, _) when ld.Types.lbl_name = "contents" && (match Path.name p with "Stdlib.ref" | "ref" -> true | _ -> false) -> "val"
+    | Types.Tconstr (p, _, _) when ld.Types.lbl_name = "contents" && Path.name p = "Stdlib.ref" -> "val"
     | _ -> sanitize ld.Types.lbl_name
 
   let counter = ref 0
@@ -1400,20 +1404,31 @@ module Lower = struct
 
   (* A function argument of a primitive implemented by a lib function
      taking a k-parameter closure (`Hashtbl.fold f`): its expected type. *)
-  and prim_fn_arg name i (a : expression) =
-    let k =
-      match name, i with
-      | "Hashtbl.fold", 0 -> 3
-      | ("Hashtbl.iter" | "Array.fold_left"), 0 -> 2
-      | _ -> 0
+  and prim_fn_arity name i =
+    match name, i with
+    | "Hashtbl.fold", 0 -> 3
+    | ("Hashtbl.iter" | "Array.fold_left"), 0 -> 2
+    | _ -> 0
+
+  and uncurry_mty k t =
+    let rec take n t acc =
+      if n = 0 then Some (M.Fun (List.rev acc, t, true))
+      else match t with M.Fun ([ p ], r, _) -> take (n - 1) r (p :: acc) | _ -> None
     in
-    if k = 0 then None
-    else
-      let rec take n t acc =
-        if n = 0 then Some (M.Fun (List.rev acc, t, true))
-        else match t with M.Fun ([ p ], r, _) -> take (n - 1) r (p :: acc) | _ -> None
-      in
-      take k (mty_of a.exp_type) []
+    take k t []
+
+  and prim_fn_arg name i (a : expression) =
+    let k = prim_fn_arity name i in
+    if k = 0 then None else uncurry_mty k (mty_of a.exp_type)
+
+  (* an argument of a primitive, adapted to the closure arity its lib
+     function takes (whatever expression produced it) *)
+  and prim_arg name i (a : expression) =
+    match prim_fn_arg name i a with
+    | Some want ->
+        let ss, x, t = lower ~expect:want a in
+        adapt (ss, x) t want
+    | None -> let ss, x, _ = lower a in (ss, x)
 
   and lower_prim ?expect whole name f args =
     let loc = whole.exp_loc in
@@ -1568,7 +1583,7 @@ module Lower = struct
       let now = List.filteri (fun i _ -> i < arity) args in
       let rest = List.filteri (fun i _ -> i >= arity) args in
       if rest <> [] then unsupported loc "over-applied primitive %s" name;
-      let lowered = List.mapi (fun i a -> let ss, x, _ = lower ?expect:(prim_fn_arg name i a) a in (ss, x)) now in
+      let lowered = List.mapi (fun i a -> prim_arg name i a) now in
       let stmts, xs =
         if name = "min" || name = "max" then
           (* each argument is used twice: evaluate both first *)
@@ -1581,12 +1596,24 @@ module Lower = struct
     end
     else begin
       (* partial application: evaluate the supplied arguments, then a closure *)
-      let lowered = List.mapi (fun i a -> let ss, x, _ = lower ?expect:(prim_fn_arg name i a) a in hoist (ss, x)) args in
+      let lowered = List.mapi (fun i a -> hoist (prim_arg name i a)) args in
       let stmts = List.concat_map fst (List.rev lowered) in
       let supplied = List.map snd lowered in
       let missing = List.init (arity - List.length args) (fun _ -> fresh "x") in
       let tys = (let rec params t n = if n = 0 then [] else match arrow t with Some (a, b) -> a :: params b (n - 1) | None -> [] in params f.exp_type arity) in
-      let body = mk (supplied @ List.map (fun n -> Atom n) missing) (arg_tys @ List.filteri (fun i _ -> i >= List.length args) tys) in
+      let missing_args =
+        List.mapi
+          (fun j n ->
+            let i = List.length args + j in
+            match List.nth_opt tys i |> Option.map (fun t -> (t, prim_fn_arity name i)) with
+            | Some (t, k) when k > 0 ->
+                (match uncurry_mty k (mty_of t) with
+                 | Some want -> snd (adapt ([], Atom n) (mty_of t) want)
+                 | None -> Atom n)
+            | _ -> Atom n)
+          missing
+      in
+      let body = mk (supplied @ missing_args) (arg_tys @ List.filteri (fun i _ -> i >= List.length args) tys) in
       let missing_tys = List.filteri (fun i _ -> i >= List.length args) tys in
       let rec curry ns ts = match ns, ts with
         | [], _ -> body

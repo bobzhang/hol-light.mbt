@@ -657,8 +657,7 @@ module Emit = struct
                              | None -> ())
                         | Types.Sig_module (id, _, _, _, _) ->
                             Hashtbl.replace module_paths (Ident.unique_name id) (src @ [ Ident.name id ]);
-                            Hashtbl.replace module_aliases
-                              (String.concat "." (List.rev !module_prefix @ [ Ident.name id ])) (src @ [ Ident.name id ])
+                            set_alias (String.concat "." (List.rev !module_prefix @ [ Ident.name id ])) (src @ [ Ident.name id ])
                         | _ -> ())
                       incl_type
                 | None -> ())
@@ -673,7 +672,7 @@ module Emit = struct
                (* a new module of this name: aliases under the old one go,
                   once its body (which may still refer to them) is done *)
                let full = String.concat "." (List.rev !module_prefix) in
-               let stale = Hashtbl.fold (fun k v acc -> if k = full || (String.length k > String.length full && String.sub k 0 (String.length full + 1) = full ^ ".") then (k, v) :: acc else acc) module_aliases [] in
+               let stale = Hashtbl.fold (fun k _ acc -> if k = full || (String.length k > String.length full && String.sub k 0 (String.length full + 1) = full ^ ".") then (k, Hashtbl.find_opt alias_gen k) :: acc else acc) module_aliases [] in
                (match mb_id with
                 | Some id -> Hashtbl.replace module_paths (Ident.unique_name id) (List.rev !module_prefix)
                 | None -> ());
@@ -681,7 +680,7 @@ module Emit = struct
                  ~finally:(fun () ->
                    module_prefix := saved;
                    (* stale entries the new body did not redefine *)
-                   List.iter (fun (k, v) -> if Hashtbl.find_opt module_aliases k = Some v then Hashtbl.remove module_aliases k) stale)
+                   List.iter (fun (k, g) -> if Hashtbl.find_opt alias_gen k = g then Hashtbl.remove module_aliases k) stale)
                  (fun () -> List.iter (fun it -> item ~hand it) str.str_items)
            | Tstr_module { mb_id = Some id; mb_expr = { mod_desc = Tmod_ident (p, _); _ }; _ } ->
                (* a module alias (e.g. a specialized functor's parameter) *)
@@ -692,7 +691,7 @@ module Emit = struct
                 | Some path ->
                     Hashtbl.replace module_paths (Ident.unique_name id) path;
                     (* also reached through dotted paths (`W.B`) *)
-                    Hashtbl.replace module_aliases (String.concat "." (List.rev !module_prefix @ [ Ident.name id ])) path
+                    set_alias (String.concat "." (List.rev !module_prefix @ [ Ident.name id ])) path
                 | None -> ())
            | Tstr_module { mb_expr = { mod_desc = (Tmod_functor _ | Tmod_constraint ({ mod_desc = Tmod_functor _; _ }, _, _, _)); _ }; _ } ->
                (* applications are specialized (Functors) *)
