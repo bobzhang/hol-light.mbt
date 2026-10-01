@@ -1,0 +1,59 @@
+tyvars = ['B; 'A]
+mk_type_bad ! mk_type: wrong number of arguments to fun
+mk_type_undef ! mk_type: type foo has not been defined
+new_type_dup ! new_type: type ind has already been declared
+type_subst = fun(ind,fun('A,ind))
+mk_comb_bad ! mk_comb: types do not agree
+mk_abs_bad = (\g:fun('A,'A). x:'A)
+mk_const_bad ! mk_const: not a constant name
+frees = [g:fun('A,'A); z:'A; f:fun('A,fun('A,'A)); y:'A]
+freesl = [z:'A; f:fun('A,fun('A,'A)); g:fun('A,'A); y:'A; x:'A]
+type_vars_in_term = ['B; 'A]
+variant = x''':'A
+vsubst_capture = (\y':'A. ((f:fun('A,fun('A,'A)) y:'A) y':'A))
+vsubst_bad ! vsubst: Bad substitution list
+vsubst_bound = (\x:'A. (g:fun('A,'A) x:'A))
+inst_clash = (\x':'B. ((f:fun('B,fun('B,'B)) x':'B) x:'B))
+inst_simple = (\x:ind. (g:fun(ind,ind) x:ind))
+alphaorder = [0; -1; 1; -1; -1; 1]
+compare = [1; -1; 1; -1; -1; -1; -1]
+REFL =  |- ((#=:fun('A,fun('A,bool)) ((f:fun('A,fun('A,'A)) x:'A) (g:fun('A,'A) y:'A))) ((f:fun('A,fun('A,'A)) x:'A) (g:fun('A,'A) y:'A)))
+ASSUME = p:bool |- p:bool
+ASSUME_bad ! ASSUME: not a proposition
+TRANS = ((#=:fun(bool,fun(bool,bool)) p:bool) q:bool), ((#=:fun(bool,fun(bool,bool)) q:bool) r:bool) |- ((#=:fun(bool,fun(bool,bool)) p:bool) r:bool)
+TRANS_bad ! TRANS
+MK_COMB = ((#=:fun('A,fun('A,bool)) x:'A) y:'A), ((#=:fun(fun('A,'A),fun(fun('A,'A),bool)) g:fun('A,'A)) g:fun('A,'A)) |- ((#=:fun('A,fun('A,bool)) (g:fun('A,'A) x:'A)) (g:fun('A,'A) y:'A))
+MK_COMB_bad ! MK_COMB: types do not agree
+ABS = ((#=:fun('A,fun('A,bool)) x:'A) y:'A) |- ((#=:fun(fun('A,'A),fun(fun('A,'A),bool)) (\z:'A. x:'A)) (\z:'A. y:'A))
+ABS_bad ! ABS
+BETA =  |- ((#=:fun('A,fun('A,bool)) ((\x:'A. (g:fun('A,'A) x:'A)) x:'A)) (g:fun('A,'A) x:'A))
+BETA_bad ! BETA: not a trivial beta-redex
+EQ_MP = p:bool, ((#=:fun(bool,fun(bool,bool)) p:bool) q:bool) |- q:bool
+EQ_MP_bad ! EQ_MP
+DEDUCT_ANTISYM = p:bool, r:bool, ((#=:fun(bool,fun(bool,bool)) p:bool) q:bool) |- ((#=:fun(bool,fun(bool,bool)) q:bool) r:bool)
+TRANS_alpha_mismatch ! TRANS
+hyp_alpha_dedup =  |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun(fun('A,'A),fun(fun('A,'A),bool)) (\x:'A. (g:fun('A,'A) x:'A))) g:fun('A,'A))) ((#=:fun(fun('A,'A),fun(fun('A,'A),bool)) (\y:'A. (g:fun('A,'A) y:'A))) g:fun('A,'A)))
+INST_TYPE = ((#=:fun(ind,fun(ind,bool)) (g:fun(ind,ind) x:ind)) y:ind) |- ((#=:fun(ind,fun(ind,bool)) (g:fun(ind,ind) x:ind)) y:ind)
+INST = ((#=:fun('A,fun('A,bool)) x:'A) z:'A), ((#=:fun('A,fun('A,bool)) z:'A) x:'A) |- ((#=:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) z:'A) x:'A)) ((#=:fun('A,fun('A,bool)) x:'A) z:'A))
+INST_bad ! vsubst: Bad substitution list
+INST_merge = ((#=:fun('A,fun('A,bool)) x:'A) x:'A) |- ((#=:fun('A,fun('A,bool)) x:'A) x:'A)
+new_axiom_bad ! new_axiom: Not a proposition
+new_axiom =  |- ((#=:fun(bool,fun(bool,bool)) p:bool) p:bool)
+axioms = [ |- ((#=:fun(bool,fun(bool,bool)) p:bool) p:bool)]
+def_not_closed ! new_definition: term not closed: g, x
+def_tyvars ! new_definition: Type variables not reflected in constant
+def =  |- ((#=:fun(fun('A,'A),fun(fun('A,'A),bool)) #ID:fun('A,'A)) (\x:'A. x:'A))
+def_again ! new_basic_definition: 'ID' is already defined
+def_dup_var ! new_constant: constant ID has already been declared
+definitions = [ |- ((#=:fun(fun('A,'A),fun(fun('A,'A),bool)) #ID:fun('A,'A)) (\x:'A. x:'A))]
+sym = ((#=:fun('A,fun('A,bool)) x:'A) y:'A) |- ((#=:fun('A,fun('A,bool)) y:'A) x:'A)
+tydef_hyp ! new_basic_type_definition: Assumptions in theorem
+tydef_noncomb ! new_basic_type_definition: Predicate is not closed
+tydef_const_used ! new_basic_type_definition: Constant(s) already in use
+tydef_open ! new_basic_type_definition: Assumptions in theorem
+tydef_type_used ! new_basic_type_definition: Type already defined
+tydef =  |- ((#=:fun(t1('A,'B),fun(t1('A,'B),bool)) (#mk:fun(fun('B,'A),t1('A,'B)) (#dest:fun(t1('A,'B),fun('B,'A)) a:t1('A,'B)))) a:t1('A,'B)) ;;  |- ((#=:fun(bool,fun(bool,bool)) ((\v:fun('B,'A). ((#=:fun(fun('B,'A),fun(fun('B,'A),bool)) v:fun('B,'A)) v:fun('B,'A))) r:fun('B,'A))) ((#=:fun(fun('B,'A),fun(fun('B,'A),bool)) (#dest:fun(t1('A,'B),fun('B,'A)) (#mk:fun(fun('B,'A),t1('A,'B)) r:fun('B,'A)))) r:fun('B,'A)))
+types = [t1/2; ind/0; bool/0; fun/2]
+constants = [dest:fun(t1('A,'B),fun('B,'A)); mk:fun(fun('B,'A),t1('A,'B)); ID:fun('A,'A); =:fun('A,fun('A,bool))]
+definitions = [ |- ((#=:fun(fun('A,'A),fun(fun('A,'A),bool)) #ID:fun('A,'A)) (\x:'A. x:'A))]
+

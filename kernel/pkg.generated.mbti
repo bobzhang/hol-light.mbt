@@ -1,0 +1,182 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/kernel"
+
+import {
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn abs_rule(Term, Thm) -> Thm raise Failure
+
+pub fn alphaorder(Term, Term) -> Int
+
+pub fn assume_rule(Term) -> Thm raise Failure
+
+pub let aty : HolType
+
+pub fn axioms() -> @list.List[Thm]
+
+pub fn beta(Term) -> Thm raise Failure
+
+pub let bool_ty : HolType
+
+pub fn compare_string(String, String) -> Int
+
+pub fn concl(Thm) -> Term
+
+pub fn constants() -> @list.List[(String, HolType)]
+
+pub fn deduct_antisym_rule(Thm, Thm) -> Thm
+
+pub fn definitions() -> @list.List[Thm]
+
+pub fn dest_abs(Term) -> (Term, Term) raise Failure
+
+pub fn dest_comb(Term) -> (Term, Term) raise Failure
+
+pub fn dest_const(Term) -> (String, HolType) raise Failure
+
+pub fn dest_eq(Term) -> (Term, Term) raise Failure
+
+pub fn dest_thm(Thm) -> (@list.List[Term], Term)
+
+pub fn dest_type(HolType) -> (String, @list.List[HolType]) raise Failure
+
+pub fn dest_var(Term) -> (String, HolType) raise Failure
+
+pub fn dest_vartype(HolType) -> String raise Failure
+
+pub fn eq_mp(Thm, Thm) -> Thm raise Failure
+
+pub fn frees(Term) -> @list.List[Term]
+
+pub fn freesin(@list.List[Term], Term) -> Bool
+
+pub fn freesl(@list.List[Term]) -> @list.List[Term]
+
+pub fn get_const_type(String) -> HolType raise Failure
+
+pub fn get_type_arity(String) -> Int raise Failure
+
+pub fn hyp(Thm) -> @list.List[Term]
+
+pub fn inst(@list.List[(HolType, HolType)], Term) -> Term
+
+pub fn inst_rule(@list.List[(Term, Term)], Thm) -> Thm raise Failure
+
+pub fn inst_type(@list.List[(HolType, HolType)], Thm) -> Thm
+
+pub fn is_abs(Term) -> Bool
+
+pub fn is_comb(Term) -> Bool
+
+pub fn is_const(Term) -> Bool
+
+pub fn is_type(HolType) -> Bool
+
+pub fn is_var(Term) -> Bool
+
+pub fn is_vartype(HolType) -> Bool
+
+pub fn mk_abs(Term, Term) -> Term raise Failure
+
+pub fn mk_comb(Term, Term) -> Term raise Failure
+
+pub fn mk_comb_rule(Thm, Thm) -> Thm raise Failure
+
+pub fn mk_const(String, @list.List[(HolType, HolType)]) -> Term raise Failure
+
+pub fn mk_type(String, @list.List[HolType]) -> HolType raise Failure
+
+pub fn mk_var(String, HolType) -> Term
+
+pub fn mk_vartype(String) -> HolType
+
+pub fn new_axiom(Term) -> Thm raise Failure
+
+pub fn new_basic_definition(Term) -> Thm raise Failure
+
+pub fn new_basic_type_definition(String, String, String, Thm) -> (Thm, Thm) raise Failure
+
+pub fn new_constant(String, HolType) -> Unit raise Failure
+
+pub fn new_type(String, Int) -> Unit raise Failure
+
+pub fn rand(Term) -> Term raise Failure
+
+pub fn rator(Term) -> Term raise Failure
+
+pub fn refl(Term) -> Thm
+
+pub fn trans(Thm, Thm) -> Thm raise Failure
+
+pub fn type_of(Term) -> HolType
+
+pub fn type_subst(@list.List[(HolType, HolType)], HolType) -> HolType
+
+pub fn type_vars_in_term(Term) -> @list.List[HolType]
+
+pub fn types() -> @list.List[(String, Int)]
+
+pub fn tyvars(HolType) -> @list.List[HolType]
+
+pub fn variant(@list.List[Term], Term) -> Term raise Failure
+
+pub fn vfree_in(Term, Term) -> Bool
+
+pub fn vsubst(@list.List[(Term, Term)], Term) -> Term raise Failure
+
+// Errors
+
+// Types and methods
+pub enum HolType {
+  Tyvar(String)
+  Tyapp(String, @list.List[HolType])
+} derive(Eq, Hash, @debug.Debug)
+pub fn HolType::compare(Self, Self) -> Int
+pub fn HolType::equal(Self, Self) -> Bool
+pub fn HolType::hash(Self) -> Int
+pub fn HolType::hash_combine(Self, Hasher) -> Unit
+pub fn HolType::not_equal(Self, Self) -> Bool
+pub fn HolType::op_ge(Self, Self) -> Bool
+pub fn HolType::op_gt(Self, Self) -> Bool
+pub fn HolType::op_le(Self, Self) -> Bool
+pub fn HolType::op_lt(Self, Self) -> Bool
+pub fn HolType::to_repr(Self) -> @debug.Repr
+pub impl Compare for HolType
+
+pub enum Term {
+  Var(String, HolType)
+  Const(String, HolType)
+  Comb(Term, Term)
+  Abs(Term, Term)
+} derive(Eq, Hash, @debug.Debug)
+pub fn Term::compare(Self, Self) -> Int
+pub fn Term::equal(Self, Self) -> Bool
+pub fn Term::hash(Self) -> Int
+pub fn Term::hash_combine(Self, Hasher) -> Unit
+pub fn Term::not_equal(Self, Self) -> Bool
+pub fn Term::op_ge(Self, Self) -> Bool
+pub fn Term::op_gt(Self, Self) -> Bool
+pub fn Term::op_le(Self, Self) -> Bool
+pub fn Term::op_lt(Self, Self) -> Bool
+pub fn Term::to_repr(Self) -> @debug.Repr
+pub impl Compare for Term
+
+pub struct Thm {
+  // private fields
+} derive(Eq, @debug.Debug)
+pub fn Thm::compare(Self, Self) -> Int
+pub fn Thm::equal(Self, Self) -> Bool
+pub fn Thm::not_equal(Self, Self) -> Bool
+pub fn Thm::op_ge(Self, Self) -> Bool
+pub fn Thm::op_gt(Self, Self) -> Bool
+pub fn Thm::op_le(Self, Self) -> Bool
+pub fn Thm::op_lt(Self, Self) -> Bool
+pub fn Thm::to_repr(Self) -> @debug.Repr
+pub impl Compare for Thm
+
+// Type aliases
+
+// Traits

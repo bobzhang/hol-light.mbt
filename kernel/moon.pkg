@@ -1,0 +1,9 @@
+import {
+  "moonbitlang/core/list",
+  "moonbitlang/core/debug",
+}
+
+import {
+  "moonbitlang/core/list",
+  "moonbitlang/core/test",
+} for "test"

@@ -8,7 +8,7 @@ repository = ""
 
 license = "BSD-2-Clause"
 
-keywords = ["theorem-prover", "hol", "logic"]
+keywords = [ "theorem-prover", "hol", "logic" ]
 
 preferred_target = "wasm"
 
