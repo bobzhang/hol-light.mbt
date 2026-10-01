@@ -338,6 +338,17 @@ definitions register constants, quotations advance the type-variable and
   Hashtbl with OCaml's shadowing semantics, local opens, `include` of a
   translated module, and fixpoint bounds for recursive groups). Known
   limitation: Hashtbl.hash of float arrays is that of an ordinary block.
+  Further known limits (each fails loudly or was checked not to matter
+  where used): OCaml's 63-bit `int` is MoonBit's 32-bit `Int` (e.g.
+  dest_small_numeral fails above 2^31 - 1 where upstream succeeds; metis'
+  multInt behaves identically); `num` keeps no representation history, so
+  OCaml's structural compare and Hashtbl.hash on nums are reproduced from
+  the canonical form (a non-normalized Big_int such as `minus_num (2^62)`
+  differs) and where OCaml's compare raises on big-integer digits the port
+  aborts; simp's generic net elements order equal-priority payloads by
+  physical identity only (upstream compares non-closure payloads
+  structurally; HOL's nets hold closures); byte-level string operations
+  abort on non-ASCII characters (e.g. dest_string of a char >= 128).
   The core (everything hol.ml loads before the theory files) is now
   ported. All theory files hol.ml loads are translated and match upstream
   in their differential tests: pair, compute, nums, recursion, arith, wf,
