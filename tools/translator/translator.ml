@@ -88,6 +88,10 @@ module Names = struct
     | "itab.ml" -> Some "itab"
     | "simp.ml" -> Some "simp"
     | "theorems.ml" -> Some "theorems"
+    | "ind_defs.ml" -> Some "ind_defs"
+    | "class.ml" -> Some "class"
+    | "trivia.ml" -> Some "trivia"
+    | "canon.ml" -> Some "canon"
     | "bignum_num.ml" -> Some "num"
     | _ -> None
 
@@ -105,29 +109,49 @@ module Names = struct
     | "then_tcl_" -> Some "then_tcl" | "orelse_tcl_" -> Some "orelse_tcl"
     | _ -> None
 
+  (* An uppercase name whose lowercase form is itself an OCaml value (e.g.
+     MK_COMB and mk_comb, INSTANTIATE and instantiate) cannot use the bare
+     lowercase name. *)
+  let lowercase_taken name =
+    let l = String.lowercase_ascii name in
+    l <> name
+    && (try ignore (Env.find_value_by_name (Longident.Lident l) !Toploop.toplevel_env); true
+        with Not_found -> false)
+
   let candidates name =
     let base =
       String.map (fun c -> if c = '\'' then '_' else c) (String.lowercase_ascii name)
     in
     (match special name with Some s -> [s] | None -> [])
-    @ [ base; base ^ "_rule"; base ^ "_thm"; base ^ "_conv"; base ^ "_tac";
+    @ (if lowercase_taken name then [] else [ base ])
+    @ [ base ^ "_rule"; base ^ "_thm"; base ^ "_conv"; base ^ "_tac";
         base ^ "_tcl"; base ^ "_" ]
 
   let root = ref "."
 
+  (* Packages holding an upstream file's values: fusion.ml's tail (after
+     the kernel module) lives in basics. *)
+  let packages_of_file file =
+    match package_of_file file with
+    | None -> []
+    | Some "kernel" -> [ "kernel"; "basics" ]
+    | Some p -> [ p ]
+
   (* The MoonBit package and declaration for an upstream value. *)
   let resolve file name =
-    match package_of_file file with
-    | None -> None
-    | Some pkg ->
-        let rec go = function
-          | [] -> None
-          | c :: cs ->
-              (match Mbti.find ~root:!root pkg c with
-               | Some d -> Some (pkg, c, d)
-               | None -> go cs)
-        in
-        go (candidates name)
+    let rec go_pkgs = function
+      | [] -> None
+      | pkg :: pkgs ->
+          let rec go = function
+            | [] -> go_pkgs pkgs
+            | c :: cs ->
+                (match Mbti.find ~root:!root pkg c with
+                 | Some d -> Some (pkg, c, d)
+                 | None -> go cs)
+          in
+          go (candidates name)
+    in
+    go_pkgs (packages_of_file file)
 end
 
 module Survey = struct
@@ -168,7 +192,10 @@ end
 module Translator = struct
   let prefix = [ "lib.ml"; "fusion.ml"; "basics.ml"; "nets.ml"; "printer.ml";
                  "preterm.ml"; "parser.ml"; "equal.ml"; "bool.ml"; "drule.ml";
-                 "tactics.ml"; "itab.ml"; "simp.ml"; "theorems.ml" ]
+                 "tactics.ml"; "itab.ml"; "simp.ml"; "theorems.ml";
+                 "ind_defs.ml"; "class.ml"; "trivia.ml"; "canon.ml";
+                 "meson.ml"; "firstorder.ml"; "metis.ml"; "thecops.ml";
+                 "quot.ml"; "impconv.ml" ]
 
   let rec upto target = function
     | [] -> []

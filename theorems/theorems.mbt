@@ -51,7 +51,7 @@ pub fn eq_trans() -> @kernel.Thm {
 pub fn ac(x10 : @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
   let acsuite = x10
   let t12 = @simp.pure_rewrite_conv(@list.List([acsuite, refl_clause()]))
-  x13 => @bool.eqt_elim(t12(x13))
+  (x13 : @kernel.Term) => @bool.eqt_elim(t12(x13))
 }
 
 ///|
@@ -681,7 +681,9 @@ fn load_steps() -> Unit raise {
     @tactics.prove(@parser.parse_term("!x:A. (x = x) <=> T"), t2),
   )
   // EQ_SYM
-  let t4 = @tactics.disch_then(x3 => @tactics.accept_tac(@equal.sym(x3)))
+  let t4 = @tactics.disch_then((x3 : @kernel.Thm) => {
+    @tactics.accept_tac(@equal.sym(x3))
+  })
   let t5 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4)
   eq_sym_c.set(
     @tactics.prove(@parser.parse_term("!(x:A) y. (x = y) ==> (y = x)"), t5),
@@ -931,9 +933,9 @@ fn load_steps() -> Unit raise {
   )
   // UNWIND_THM1
   let t33 = @tactics.try_tac(
-    @tactics.first_assum(x30 => {
+    @tactics.first_assum((x30 : @kernel.Thm) => {
       let s31 = @tactics.match_accept_tac(x30)
-      x32 => s31(x32)
+      (x32 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s31(x32)
     }),
   )
   let t34 = @tactics.then_tac(
@@ -953,13 +955,17 @@ fn load_steps() -> Unit raise {
     @tactics.disch_then(
       @tactics.choose_then(
         @tactics.conjuncts_then2(
-          x24 => {
+          (x24 : @kernel.Thm) => {
             let s25 = @tactics.subst1_tac(x24)
-            x26 => s25(x26)
+            (x26 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+              s25(x26)
+            }
           },
-          x27 => {
+          (x27 : @kernel.Thm) => {
             let s28 = @tactics.accept_tac(x27)
-            x29 => s28(x29)
+            (x29 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+              s28(x29)
+            }
           },
         ),
       ),
@@ -993,9 +999,9 @@ fn load_steps() -> Unit raise {
   )
   // FORALL_UNWIND_THM2
   let t48 = @simp.asm_rewrite_tac(@list.empty())
-  let t47 = @tactics.disch_then(x44 => {
+  let t47 = @tactics.disch_then((x44 : @kernel.Thm) => {
     let s45 = @tactics.subst1_tac(x44)
-    x46 => s45(x46)
+    (x46 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s45(x46)
   })
   let t49 = @tactics.then_tac(
     @tactics.then_tac(
@@ -1008,8 +1014,8 @@ fn load_steps() -> Unit raise {
   let t40 = @parser.parse_term("a:A")
   let t50 = @list.List([
     @tactics.then_tac(
-      @tactics.disch_then(x42 => {
-        @tactics.mp_tac((x41 => @bool.spec(t40, x41))(x42))
+      @tactics.disch_then((x42 : @kernel.Thm) => {
+        @tactics.mp_tac(((x41 : @kernel.Thm) => @bool.spec(t40, x41))(x42))
       }),
       t43,
     ),
@@ -1261,7 +1267,9 @@ fn load_steps() -> Unit raise {
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.disch_tac,
-          @tactics.disch_then(x59 => @tactics.x_choose_tac(t58, x59)),
+          @tactics.disch_then((x59 : @kernel.Thm) => {
+            @tactics.x_choose_tac(t58, x59)
+          }),
         ),
         t60,
       ),
@@ -1282,18 +1290,18 @@ fn load_steps() -> Unit raise {
   )
   let t73 = @tactics.disch_then(
     @tactics.conjuncts_then2(
-      x64 => {
+      (x64 : @kernel.Thm) => {
         let s65 = @tactics.assume_tac(x64)
-        x66 => s65(x66)
+        (x66 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s65(x66)
       },
       @tactics.conjuncts_then2(
-        x67 => {
+        (x67 : @kernel.Thm) => {
           let s68 = @tactics.mp_tac(x67)
-          x69 => s68(x69)
+          (x69 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s68(x69)
         },
-        x70 => {
+        (x70 : @kernel.Thm) => {
           let s71 = @tactics.assume_tac(x70)
-          x72 => s71(x72)
+          (x72 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s71(x72)
         },
       ),
     ),
@@ -1318,7 +1326,9 @@ fn load_steps() -> Unit raise {
   )
   // EXISTS_UNIQUE_ALT
   let t96 = @tactics.disch_then(
-    @tactics.conjuncts_then(x95 => @tactics.subst1_tac(@equal.sym(x95))),
+    @tactics.conjuncts_then((x95 : @kernel.Thm) => {
+      @tactics.subst1_tac(@equal.sym(x95))
+    }),
   )
   let t94 = @tactics.repeat_tac(@tactics.gen_tac)
   let t93 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(exists_refl())]))
@@ -1327,7 +1337,9 @@ fn load_steps() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
-          @tactics.disch_then(x92 => @tactics.x_choose_tac(t91, x92)),
+          @tactics.disch_then((x92 : @kernel.Thm) => {
+            @tactics.x_choose_tac(t91, x92)
+          }),
           t93,
         ),
         t94,
@@ -1336,12 +1348,14 @@ fn load_steps() -> Unit raise {
     ),
     @tactics.refl_tac,
   )
-  let t88 = @tactics.first_assum(x85 => {
+  let t88 = @tactics.first_assum((x85 : @kernel.Thm) => {
     let s86 = @tactics.match_accept_tac(x85)
-    x87 => s86(x87)
+    (x87 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s86(x87)
   })
   let t89 = @tactics.then_tac(
-    @tactics.disch_then(x84 => @tactics.subst1_tac(@equal.sym(x84))),
+    @tactics.disch_then((x84 : @kernel.Thm) => {
+      @tactics.subst1_tac(@equal.sym(x84))
+    }),
     t88,
   )
   let t83 = @simp.asm_rewrite_tac(@list.empty())
@@ -1363,10 +1377,15 @@ fn load_steps() -> Unit raise {
         @tactics.then_tac(
           @tactics.then_tac(
             @tactics.disch_then(
-              @tactics.conjuncts_then2(x78 => @tactics.x_choose_tac(t77, x78), x79 => {
-                let s80 = @tactics.assume_tac(x79)
-                x81 => s80(x81)
-              }),
+              @tactics.conjuncts_then2(
+                (x78 : @kernel.Thm) => @tactics.x_choose_tac(t77, x78),
+                (x79 : @kernel.Thm) => {
+                  let s80 = @tactics.assume_tac(x79)
+                  (x81 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+                    s80(x81)
+                  }
+                },
+              ),
             ),
             t82,
           ),
@@ -1402,11 +1421,15 @@ fn load_steps() -> Unit raise {
   let t105 = @simp.simp_tac(@list.empty())
   let t104 = @simp.rewrite_tac(@list.List([forall_and_thm()]))
   let t103 = @simp.gen_rewrite_tac(
-    x102 => @equal.land_conv(@equal.once_depth_conv(x102)),
+    (x102 : (@kernel.Term) -> @kernel.Thm raise) => {
+      @equal.land_conv(@equal.once_depth_conv(x102))
+    },
     @list.List([eq_sym_eq()]),
   )
   let t101 = @simp.gen_rewrite_tac(
-    x100 => @equal.land_conv(@equal.binder_conv(x100)),
+    (x100 : (@kernel.Term) -> @kernel.Thm raise) => {
+      @equal.land_conv(@equal.binder_conv(x100))
+    },
     @list.List([
       @itab.itaut(@parser.parse_term("(a <=> b) <=> (a ==> b) /\\ (b ==> a)")),
     ]),

@@ -11,6 +11,7 @@ module Mbti = struct
   type decl =
     | Func of string list * ty list * ty * bool  (* generics, params, result, raises *)
     | Value of ty
+    | Alias of ty                                (* pub type Name = ty *)
 
   (* --- Lexer ----------------------------------------------------------- *)
 
@@ -147,6 +148,9 @@ module Mbti = struct
     | Id "pub" :: Id "let" :: Id name :: Sym ":" :: rest ->
         let t, _ = parse_ty rest in
         Some (name, Value t)
+    | Id "pub" :: Id "type" :: Id name :: Sym "=" :: rest ->
+        let t, _ = parse_ty rest in
+        Some (name, Alias t)
     | _ -> None
 
   (* package name (e.g. "tactics") -> declarations *)
@@ -185,7 +189,7 @@ module Mbti = struct
 
   let groups = function
     | Func (_, ps, r, _) -> ps :: groups_of_ty r
-    | Value t -> groups_of_ty t
+    | Value t | Alias t -> groups_of_ty t
 
   let rec show = function
     | Named (n, []) -> n

@@ -113,8 +113,10 @@ test "theorems matches theorems.ml" {
       "[" + gls.map(sgoal).to_array().join("; ") + "]"
     })
   }
+  // `DISCH_THEN(DESTRUCT_TAC s)` parses the pattern when it is built
   let dt = (s : String) => {
-    @tactics.disch_then(th => @theorems.destruct_tac(s)(th))
+    let ttac = @theorems.destruct_tac(s)
+    @tactics.disch_then(th => ttac(th))
   }
   let lab = @tactics.disch_then(th => @tactics.label_tac("h", th))
   log.attempt("AC", () => {

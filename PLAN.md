@@ -277,4 +277,9 @@ definitions register constants, quotations advance the type-variable and
   the basic rewrites and congruences), with the DESTRUCT/FIX/INTRO/HYP_TAC
   block ported by hand. It matches theorems.ml exactly: every theorem, the
   77-quotation load trace, load output, rewrite registries, the pattern
-  tactics on goals, and the counters. Next: `ind_defs`, …
+  tactics on goals, and the counters. `ind_defs/` is done, entirely
+  translated (engine code: local `let rec`, polymorphic helpers lifted to
+  generic top-level functions, tuple bindings of closures, refs); it
+  matches ind_defs.ml on inductive definitions (schematic, mutual, nested
+  quantifiers, redefinition), strong induction, the helpers, registries
+  and counters. Next: `class`, `trivia`, `canon`, …

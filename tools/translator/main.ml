@@ -7,6 +7,7 @@ module Main = struct
           [ { Emit.line = 418; setup = Some "destruct_setup";
               names = [ ("DESTRUCT_TAC", "destruct_tac"); ("FIX_TAC", "fix_tac");
                         ("INTRO_TAC", "intro_tac"); ("HYP_TAC", "hyp_tac") ] } ] )
+    | "ind_defs.ml" -> ("ind_defs/ind_defs.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =

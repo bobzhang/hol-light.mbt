@@ -1,0 +1,20 @@
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/basics",
+  "bobzhang/hol_light/parser",
+  "bobzhang/hol_light/equal",
+  "bobzhang/hol_light/bool",
+  "bobzhang/hol_light/drule",
+  "bobzhang/hol_light/tactics",
+  "bobzhang/hol_light/itab",
+  "bobzhang/hol_light/simp",
+  "bobzhang/hol_light/theorems",
+  "moonbitlang/core/list",
+}
+
+import {
+  "bobzhang/hol_light/testkit",
+} for "test"
+
+warnings = "-unused_value-unused_trait_bound"

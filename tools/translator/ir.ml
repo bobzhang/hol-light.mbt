@@ -15,6 +15,8 @@ module Ir = struct
     | Raise of exp
     | Field of exp * int
     | Not of exp
+    | Deref of exp                   (* r.val *)
+    | RefNew of exp                  (* Ref::{ val: e } *)
     | Binop of string * exp * exp
     | Blk of block
 
@@ -22,6 +24,11 @@ module Ir = struct
     | Let of string * exp
     | LetTyped of string * string * exp
     | Do of exp
+    | Assign of exp * exp                 (* r.val = e *)
+    | LetFn of string * (string * string) list * string * block
+                                          (* local recursive function *)
+    | LetRec of (string * (string * string) list * block) list
+                                          (* mutually recursive closures *)
 
   and block = stmt list * exp
 
@@ -33,6 +40,8 @@ module Ir = struct
     | Tuple es | ListLit es -> List.exists ordered es
     | Prepend (a, b) | Concat (a, b) -> ordered a || ordered b
     | Field (e, _) | Not e -> ordered e
+    | RefNew e -> ordered e
+    | Deref _ -> true (* reads mutable state *)
     | Binop (("==" | "!=" | "&&" | "||"), a, b) -> ordered a || ordered b
     | Binop _ -> true (* arithmetic can overflow/divide by zero *)
     | Call _ | If _ | Match _ | Try _ | Raise _ | Blk _ -> true
@@ -48,9 +57,9 @@ module Ir = struct
         pfun f; p "("; plist args; p ")"
     | Lam (ps, b) ->
         (match ps with
-         | [x] -> p x
+         | [ x ] when not (String.contains x ':') -> p x
          | _ -> p "("; p (String.concat ", " ps); p ")");
-        p " => "; pblock b
+        p " => "; pbody b
     | Tuple es -> p "("; plist es; p ")"
     | ListLit [] -> p "@list.empty()"
     | ListLit es -> p "@list.List(["; plist es; p "])"
@@ -60,27 +69,36 @@ module Ir = struct
     | Match (e, arms) ->
         p "match "; pexp e; p " {";
         incr indent;
-        List.iter (fun (pat, b) -> nl (); p pat; p " => "; pblock b) arms;
+        List.iter (fun (pat, b) -> nl (); p pat; p " => "; pbody b) arms;
         decr indent; nl (); p "}"
     | Try (b, arms) ->
         p "try "; pblock b; p " catch {";
         incr indent;
-        List.iter (fun (pat, h) -> nl (); p pat; p " => "; pblock h) arms;
+        List.iter (fun (pat, h) -> nl (); p pat; p " => "; pbody h) arms;
         decr indent; nl (); p "}"
     | Raise e -> p "raise "; pfun e
     | Field (e, i) -> pfun e; p "."; p (string_of_int i)
     | Not e -> p "!"; pfun e
+    | Deref e -> pfun e; p ".val"
+    | RefNew e -> p "Ref::{ val: "; pexp e; p " }"
     | Binop (op, a, b) -> p "("; pexp a; p " "; p op; p " "; pexp b; p ")"
     | Blk b -> pblock b
 
   (* An expression in function or receiver position. *)
   and pfun e =
     match e with
-    | Atom _ | Call _ | Field _ | Tuple _ -> pexp e
+    | Atom _ | Call _ | Field _ | Tuple _ | Deref _ -> pexp e
     | _ -> p "("; pexp e; p ")"
 
   and plist es =
     List.iteri (fun i e -> if i > 0 then p ", "; pexp e) es
+
+  (* The body of an arm or a lambda: a bare expression when there are no
+     statements (`{ x }` would read as a struct literal). *)
+  and pbody (stmts, e) =
+    match stmts, e with
+    | [], (Atom _ | Call _ | Field _ | Tuple _ | ListLit _ | Prepend _ | Concat _ | Not _ | Binop _ | Raise _ | Lam _) -> pexp e
+    | _ -> pblock (stmts, e)
 
   and pblock (stmts, e) =
     p "{";
@@ -93,6 +111,18 @@ module Ir = struct
     | Let (x, e) -> nl (); p "let "; p x; p " = "; pexp e
     | LetTyped (x, t, e) -> nl (); p "let "; p x; p " : "; p t; p " = "; pexp e
     | Do e -> nl (); pexp e
+    | Assign (r, e) -> nl (); pfun r; p ".val = "; pexp e
+    | LetFn (name, params, ret, b) ->
+        nl (); p "fn "; p name; p "(";
+        p (String.concat ", " (List.map (fun (x, t) -> x ^ " : " ^ t) params));
+        p ") -> "; p ret; p " raise "; pblock b
+    | LetRec fns ->
+        List.iteri
+          (fun i (name, params, b) ->
+            nl (); p (if i = 0 then "letrec " else "and "); p name; p " = (";
+            p (String.concat ", " (List.map (fun (x, t) -> if t = "_" then x else x ^ " : " ^ t) params));
+            p ") => "; pblock b)
+          fns
 
   let to_string f =
     Buffer.clear buf; indent := 0; f (); Buffer.contents buf

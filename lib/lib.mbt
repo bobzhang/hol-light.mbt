@@ -1247,66 +1247,107 @@ pub(all) suberror MatchFailure {
 pub extend MatchFailure with @debug.Debug::{to_repr}
 
 ///|
-/// OCaml's `int_of_string` (a sign, then decimal digits or a `0x`/`0o`/`0b`
-/// prefix, with `_` allowed after the first digit). Fails with
-/// `int_of_string` on bad syntax or when the value does not fit in an `Int`.
+/// OCaml's `int_of_string`: OCaml 4.14's `parse_intnat` for 63-bit ints
+/// (a sign, then decimal digits or a `0x`/`0o`/`0b`/`0u` prefix, `_` allowed
+/// after the first digit; prefixed numbers are unsigned and wrap), with the
+/// result then required to fit in an `Int`. Fails with `int_of_string`.
 pub fn int_of_string(s : String) -> Int raise {
+  let fail = () => raise Failure("int_of_string")
+  let s : Array[Char] = s.to_array()
   let n = s.length()
   let mut i = 0
-  let mut neg = false
-  if i < n && (s[i] == '-' || s[i] == '+') {
-    neg = s[i] == '-'
+  let mut sign = 1
+  if i < n && s[i] == '-' {
+    sign = -1
+    i += 1
+  } else if i < n && s[i] == '+' {
     i += 1
   }
   let mut base = 10
+  let mut signed = true
   if i + 1 < n && s[i] == '0' {
     match s[i + 1] {
       'x' | 'X' => {
         base = 16
+        signed = false
         i += 2
       }
       'o' | 'O' => {
         base = 8
+        signed = false
         i += 2
       }
       'b' | 'B' => {
         base = 2
+        signed = false
         i += 2
       }
-      'u' | 'U' => i += 2
+      'u' | 'U' => {
+        signed = false
+        i += 2
+      }
       _ => ()
     }
   }
-  if i >= n || s[i] == '_' {
-    raise Failure("int_of_string")
-  }
-  let mut acc = 0L
-  while i < n {
-    let c = s[i]
-    i += 1
-    if c == '_' {
-      continue
-    }
-    let d = if c >= '0' && c <= '9' {
+  let digit = (c : Char) => {
+    if c >= '0' && c <= '9' {
       c.to_int() - '0'.to_int()
     } else if c >= 'a' && c <= 'f' {
       c.to_int() - 'a'.to_int() + 10
     } else if c >= 'A' && c <= 'F' {
       c.to_int() - 'A'.to_int() + 10
     } else {
-      raise Failure("int_of_string")
-    }
-    if d >= base {
-      raise Failure("int_of_string")
-    }
-    acc = acc * base.to_int64() + d.to_int64()
-    if acc > 2147483648L {
-      raise Failure("int_of_string")
+      -1
     }
   }
-  let v = if neg { -acc } else { acc }
+  let b = base.to_uint64()
+  let threshold = UInt64::lnot(0) / b
+  if i >= n {
+    fail()
+  }
+  let d0 = digit(s[i])
+  if d0 < 0 || d0 >= base {
+    fail()
+  }
+  let mut res = d0.to_uint64()
+  i += 1
+  while i < n {
+    let c = s[i]
+    if c == '_' {
+      i += 1
+      continue
+    }
+    let d = digit(c)
+    if d < 0 || d >= base {
+      break
+    }
+    if res > threshold {
+      fail()
+    }
+    res = b * res + d.to_uint64()
+    if res < d.to_uint64() {
+      fail()
+    }
+    i += 1
+  }
+  if i != n {
+    fail()
+  }
+  let limit : UInt64 = 1UL << 62
+  if signed {
+    if (sign >= 0 && res >= limit) || (sign < 0 && res > limit) {
+      fail()
+    }
+  } else if res >= 1UL << 63 {
+    fail()
+  }
+  if sign < 0 {
+    res = 0UL - res
+  }
+  // an OCaml int keeps the low 63 bits
+  let v = (res << 1).reinterpret_as_int64() >> 1
   if v > 2147483647L || v < -2147483648L {
-    raise Failure("int_of_string")
+    fail()
   }
   v.to_int()
 }
