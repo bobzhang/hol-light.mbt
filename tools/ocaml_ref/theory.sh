@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 # Translate a theory file, compile it, and run its standard differential
 # test (see theory_test.py):  tools/ocaml_ref/theory.sh <name> <deps...>
-set -e
+set -e -o pipefail
 cd "$(dirname "$0")/../.."
 name=$1; shift
 python3 tools/ocaml_ref/new_theory_pkg.py "$name" "$@"
@@ -20,4 +20,7 @@ open(p,'w').write(s)
 PY
 python3 tools/ocaml_ref/embed_golden.py "tools/ocaml_ref/${name}_ref.expected" "$name/${name}_ref_test.mbt"
 moon fmt >/dev/null 2>&1 || true
-moon test --target wasm -p "bobzhang/hol_light/$name" 2>&1 | grep -v "^ *#|" | grep -E "^Error|Total|failed|Diff|^[-+]" -A3 | head -40
+status=0
+moon test --target wasm -p "bobzhang/hol_light/$name" > "tools/ocaml_ref/_build/theory_$name.log" 2>&1 || status=$?
+grep -v "^ *#|" "tools/ocaml_ref/_build/theory_$name.log" | grep -E "^Error|Total|failed|Diff|^[-+]" -A3 | head -40 || true
+exit $status

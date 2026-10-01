@@ -2326,13 +2326,13 @@ fn step_15() -> Unit raise {
 
 ///|
 let add_convs_c : @lib.Cell[
-  (@list.List[(@kernel.Term, Int, (@kernel.Term) -> @kernel.Thm raise)]) -> Unit raise,
+  (@list.List[(@kernel.Term, Int, @equal.Conv)]) -> Unit raise,
 ] = @lib.Cell::new("add_convs")
 
 ///|
 /// `add_convs`
 pub fn add_convs(
-  x : @list.List[(@kernel.Term, Int, (@kernel.Term) -> @kernel.Thm raise)],
+  x : @list.List[(@kernel.Term, Int, @equal.Conv)],
 ) -> Unit raise {
   add_convs_c.get()(x)
 }
@@ -2383,9 +2383,7 @@ fn step_18() -> Unit raise {
 }
 
 ///|
-let eval_conv_c : @lib.Cell[(@kernel.Term) -> @kernel.Thm raise] = @lib.Cell::new(
-  "EVAL_CONV",
-)
+let eval_conv_c : @lib.Cell[@equal.Conv] = @lib.Cell::new("EVAL_CONV")
 
 ///|
 /// `EVAL_CONV`

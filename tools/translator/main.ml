@@ -69,7 +69,8 @@ module Main = struct
                                 default_iterator.pat self q) }
                           in
                           it.pat it p;
-                          List.rev !acc
+                          (* an or-pattern binds each name once *)
+                          List.sort_uniq compare !acc
                         in
                         List.iter
                           (fun n ->

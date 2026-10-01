@@ -637,6 +637,10 @@ module Lower = struct
              (match M.find ~root:!Names.root "num" n with
               | Some decl -> { hstmts = []; hexp = Atom ("@num." ^ n); hmty = mty_of_decl decl; hoty = Some oty }
               | None -> unsupported loc "no MoonBit declaration for Num.%s" n)
+         | [ "Num"; ("num_of_string" | "string_of_num") ] ->
+             (* the Num library's (rational) parser and printer differ from
+                HOL Light's replacements in the num package *)
+             unsupported loc "Num library's own %s" (Path.name path)
          | [ n ] ->
              (* bignum_num.ml (loaded before HOL Light): the num package *)
              let n' =
@@ -2079,7 +2083,10 @@ module Lower = struct
        `let` (making the group's closures has no effects) *)
     let is_fn vb = match vb.vb_expr.exp_desc with Texp_function _ -> true | _ -> false in
     let values, fns = List.partition (fun vb -> not (is_fn vb) && peel vb.vb_expr [] = None && not (mentions_group [ vb ])) vbs in
-    if values <> [] && fns <> [] then
+    (* only when every other binding is a plain closure: OCaml evaluates
+       the bindings in order, and a function's setup (`let x = e in fun`)
+       would otherwise run after the values *)
+    if values <> [] && fns <> [] && List.for_all is_fn fns then
       lower_let ?expect values { body with exp_desc = Texp_let (Asttypes.Recursive, fns, body) }
     else
     let peeled = List.map (fun vb -> (vb, peel vb.vb_expr [])) vbs in
