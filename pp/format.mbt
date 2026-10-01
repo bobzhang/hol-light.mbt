@@ -658,8 +658,10 @@ pub let stdout_sink : Ref[(String) -> Unit] = Ref::{ val: s => println(s), }
 ///|
 /// While set, lines of standard output are held back. On wasm, writing to
 /// standard output inside `fn init` traps, so theories hold their load-time
-/// output (remarks, warnings) while they load; it is printed, with
-/// `println`, before the next line of output after initialisation.
+/// output (remarks, warnings) while they load. The held-back lines go to
+/// `stdout_sink` before the next line of output or `print_flush` on
+/// `std_formatter`; a program that prints by other means first should call
+/// `flush_stdout_backlog()` at startup.
 pub let defer_stdout : Ref[Bool] = Ref::{ val: false, }
 
 ///|
@@ -678,13 +680,14 @@ pub fn stdout_backlog_since(start : Int) -> Array[String] {
 }
 
 ///|
-/// Print the held-back load-time output now.
+/// Send the held-back load-time output to `stdout_sink` now.
 pub fn flush_stdout_backlog() -> Unit {
   if !defer_stdout.val && !stdout_backlog.is_empty() {
-    for line in stdout_backlog {
-      println(line)
-    }
+    let lines = stdout_backlog.copy()
     stdout_backlog.clear()
+    for line in lines {
+      (stdout_sink.val)(line)
+    }
   }
 }
 
@@ -716,6 +719,7 @@ fn stdout_write(s : String) -> Unit {
 /// Emit a pending partial line. Standard output is line-based here
 /// (`println`), so unlike OCaml the partial text ends with a newline.
 fn stdout_flush() -> Unit {
+  flush_stdout_backlog()
   if !stdout_pending.is_empty() {
     emit_stdout_line(stdout_pending.to_string())
     stdout_pending.reset()

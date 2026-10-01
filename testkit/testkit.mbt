@@ -81,6 +81,8 @@ pub fn Log::capture_reports(self : Log) -> Unit {
 ///|
 /// Send complete lines of standard output to the log.
 pub fn Log::capture_stdout(self : Log) -> Unit {
+  // Load-time output belongs before anything the test prints.
+  @pp.flush_stdout_backlog()
   @pp.stdout_sink.val = s => self.out(s)
 }
 

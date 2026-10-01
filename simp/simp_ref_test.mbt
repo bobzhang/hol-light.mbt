@@ -127,7 +127,9 @@ test "simp matches simp.ml" {
   })
   cv("ASM_REWRITE_RULE", () => {
     let _th = hyp("(a:bool) = b")
-    let th2 = @bool.disch(tm("c:bool"), hyp("(a:bool) = b"))
+    // `DISCH (tm "c:bool") (ASSUME (tm "(a:bool) = b"))`: right to left.
+    let h = hyp("(a:bool) = b")
+    let th2 = @bool.disch(tm("c:bool"), h)
     @simp.asm_rewrite_rule(@list.empty(), @bool.undisch(th2))
   })
   cv("ONCE_ASM_REWRITE_RULE", () => {
