@@ -1,0 +1,76 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/bdd"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn bdd_0() -> Int
+
+pub fn bdd_1() -> Int
+
+pub fn bdd_and((FixedArray[@kernel.Term], (@ref.Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int, Int), Int]]), (@ref.Ref[@lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int), Int]]))) -> (((Int, Int)) -> (Int, Int) raise) raise
+
+pub fn bdd_and_v1(((FixedArray[@kernel.Term], @ref.Ref[Int], @lib.OHashtbl[@kernel.Term, Int]), (@ref.Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int, Int), Int]]), (@ref.Ref[@lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int), Int]]))) -> ((((Int, @kernel.Thm), (Int, @kernel.Thm))) -> (Int, @kernel.Thm) raise) raise
+
+pub fn bdd_deftaut(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn bdd_exists(((FixedArray[@kernel.Term], @ref.Ref[Int], @lib.OHashtbl[@kernel.Term, Int]), (@ref.Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int, Int), Int]]), (@ref.Ref[@lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int), Int]]))) -> ((@kernel.Term) -> (((Int, @kernel.Thm)) -> (Int, @kernel.Thm) raise) raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] bdd_expand(@ref.Ref[@lib.Func[Int, ((TA, Int, Int), TB)]], Int) -> (TA, Int, Int) raise
+
+pub fn bdd_expand_v1(@ref.Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]]) -> ((Int) -> @kernel.Thm raise) raise
+
+pub fn bdd_false() -> (Int, @kernel.Thm)
+
+pub fn bdd_iff(((FixedArray[@kernel.Term], @ref.Ref[Int], @lib.OHashtbl[@kernel.Term, Int]), (@ref.Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int, Int), Int]]), (@ref.Ref[@lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int), Int]]))) -> ((((Int, @kernel.Thm), (Int, @kernel.Thm))) -> (Int, @kernel.Thm) raise) raise
+
+pub fn bdd_imp(((FixedArray[@kernel.Term], @ref.Ref[Int], @lib.OHashtbl[@kernel.Term, Int]), (@ref.Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int, Int), Int]]), (@ref.Ref[@lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int), Int]]))) -> ((((Int, @kernel.Thm), (Int, @kernel.Thm))) -> (Int, @kernel.Thm) raise) raise
+
+pub fn bdd_lookup(FixedArray[@kernel.Term]) -> (((@ref.Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int, Int), Int]])) -> (((Int, Int, Int)) -> (@kernel.Thm, Int, Int) raise) raise) raise
+
+pub fn bdd_neg(((FixedArray[@kernel.Term], @ref.Ref[Int], @lib.OHashtbl[@kernel.Term, Int]), (@ref.Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int, Int), Int]]), (@ref.Ref[@lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int), Int]]))) -> (((Int, @kernel.Thm)) -> (Int, @kernel.Thm) raise) raise
+
+pub fn bdd_of_term(@lib.Func[@kernel.Term, (Int, @kernel.Thm)], ((FixedArray[@kernel.Term], @ref.Ref[Int], @lib.OHashtbl[@kernel.Term, Int]), (@ref.Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int, Int), Int]]), (@ref.Ref[@lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int), Int]])), @kernel.Term) -> (Int, @kernel.Thm) raise
+
+pub fn bdd_or(((FixedArray[@kernel.Term], @ref.Ref[Int], @lib.OHashtbl[@kernel.Term, Int]), (@ref.Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int, Int), Int]]), (@ref.Ref[@lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int), Int]]))) -> ((((Int, @kernel.Thm), (Int, @kernel.Thm))) -> (Int, @kernel.Thm) raise) raise
+
+pub fn[TA, TB, TC, TD, TE, TF] bdd_stats(Int, ((TA, @ref.Ref[Int], TB), (TC, @ref.Ref[Int], TD), (TE, @ref.Ref[Int], TF))) -> Unit raise
+
+pub fn bdd_taut(@kernel.Term) -> @kernel.Thm raise
+
+pub fn bdd_true() -> (Int, @kernel.Thm)
+
+pub fn bdd_var(((FixedArray[@kernel.Term], @ref.Ref[Int], @lib.OHashtbl[@kernel.Term, Int]), (@ref.Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int, Int), Int]]), (@ref.Ref[@lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int), Int]]))) -> ((@kernel.Term) -> (Int, @kernel.Thm) raise) raise
+
+pub fn btm_of_int(@ref.Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]]) -> ((Int) -> @kernel.Term raise) raise
+
+pub fn load() -> Unit
+
+pub fn lookup_triple(FixedArray[@kernel.Term], (@ref.Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]], @ref.Ref[Int], @ref.Ref[@lib.Func[(Int, Int, Int), Int]]), (Int, Int, Int)) -> Int raise
+
+pub fn[TA, TB, TC, TD] mk_ctable(Unit) -> (@ref.Ref[@lib.Func[TA, TB]], @ref.Ref[Int], @ref.Ref[@lib.Func[TC, TD]]) raise
+
+pub fn[TA, TB] mk_utable(Unit) -> (@ref.Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]], @ref.Ref[Int], @ref.Ref[@lib.Func[TA, TB]]) raise
+
+pub fn mk_vtable(Int) -> (FixedArray[@kernel.Term], @ref.Ref[Int], @lib.OHashtbl[@kernel.Term, Int]) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] num_of_var((FixedArray[TA], @ref.Ref[Int], @lib.OHashtbl[TA, Int]), TA) -> Int raise
+
+pub fn[TA, TB, TC] tfst(TA, TB, TC) -> TA raise
+
+pub fn[TA, TB, TC] tsnd(TB, TA, TC) -> TA raise
+
+pub fn[TA] var_of_num(FixedArray[TA], Int) -> TA raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
