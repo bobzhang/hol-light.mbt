@@ -1,0 +1,45 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/modmul_group"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abelian_modmul_group() -> @kernel.Thm
+
+pub fn cyclic_modmul_group() -> @kernel.Thm
+
+pub fn finite_modmul_group() -> @kernel.Thm
+
+pub fn group_element_order_modmul_group() -> @kernel.Thm
+
+pub fn group_homomorphism_prod_modmul_group() -> @kernel.Thm
+
+pub fn group_isomorphism_prod_modmul_group() -> @kernel.Thm
+
+pub fn group_pow_modmul_group() -> @kernel.Thm
+
+pub fn has_size_modmul_group() -> @kernel.Thm
+
+pub fn isomorphic_group_modmul_group() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn modmul_group() -> @kernel.Thm
+
+pub fn modmul_group_v1() -> @kernel.Thm
+
+pub fn mult_eq_2() -> @kernel.Thm
+
+pub fn order_modmul_group() -> @kernel.Thm
+
+pub fn trivial_modmul_group() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
