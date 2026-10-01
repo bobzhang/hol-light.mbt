@@ -45,40 +45,17 @@ fn[T] failwith(msg : String) -> T raise Failure {
 // compared first, then the fields from left to right; `[]` sorts before any
 // cons cell; and strings are compared byte by byte (the shorter one first on
 // a common prefix). MoonBit's `String::compare` puts shorter strings first,
-// so it must not be used here. Comparing by Unicode code point gives the
-// same order as OCaml's comparison of the UTF-8 bytes.
+// so it must not be used here.
 // ---------------------------------------------------------------------------
 
 ///|
-/// Maps a UTF-16 code unit so that unit order coincides with code point
-/// order (surrogates sort above all other BMP code units).
-fn code_unit_rank(u : Int) -> Int {
-  if u >= 0xE000 {
-    u - 0x800
-  } else if u >= 0xD800 {
-    u + 0x2000
-  } else {
-    u
-  }
-}
-
-///|
-/// OCaml `compare` on strings (lexicographic by code point / UTF-8 bytes).
+/// OCaml `compare` on strings: lexicographic, as `String::lexical_compare`
+/// (UTF-16 code units). This equals OCaml's byte order on UTF-8 for ASCII
+/// and almost all of Unicode; it differs only between a code point in
+/// U+E000..U+FFFF and one above U+FFFF at the same position, which HOL's
+/// ASCII identifiers never contain.
 pub fn compare_string(a : String, b : String) -> Int {
-  if physical_equal(a, b) {
-    return 0
-  }
-  let la = a.length()
-  let lb = b.length()
-  let n = if la < lb { la } else { lb }
-  for i in 0..<n {
-    let x = a.code_unit_at(i).to_int()
-    let y = b.code_unit_at(i).to_int()
-    if x != y {
-      return code_unit_rank(x).compare(code_unit_rank(y))
-    }
-  }
-  la.compare(lb)
+  a.lexical_compare(b)
 }
 
 ///|
