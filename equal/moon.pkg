@@ -1,0 +1,14 @@
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/basics",
+  "bobzhang/hol_light/nets",
+  "bobzhang/hol_light/pp",
+  "bobzhang/hol_light/printer",
+  "bobzhang/hol_light/preterm",
+  "moonbitlang/core/list",
+}
+
+import {
+  "bobzhang/hol_light/parser",
+} for "test"

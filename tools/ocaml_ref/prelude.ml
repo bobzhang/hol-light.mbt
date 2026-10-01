@@ -7,6 +7,7 @@ let needs (_:string) = ();;
 #use "printer.ml";;
 #use "preterm.ml";;
 #use "parser.ml";;
+#use "equal.ml";;
 
 let rec sty ty = match ty with
     Tyvar s -> "'" ^ s

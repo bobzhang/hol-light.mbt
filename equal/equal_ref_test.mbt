@@ -1,0 +1,210 @@
+// Differential test against equal.ml: replays
+// tools/ocaml_ref/equal_ref.ml (keep in sync).
+
+///|
+priv struct Log {
+  buf : StringBuilder
+}
+
+///|
+fn Log::attempt(self : Log, name : String, f : () -> String raise) -> Unit {
+  let line = try f() catch {
+    Failure(msg) => name + " ! " + msg
+    e => name + " !! " + e.to_string()
+  } noraise {
+    s => name + " = " + s
+  }
+  self.buf.write_string(line + "\n")
+}
+
+///|
+test "equal matches equal.ml" {
+  let log = { buf: StringBuilder(), }
+  @kernel.new_type("num", 0)
+  @kernel.new_constant("+", @parser.parse_type("num->num->num"))
+  @printer.parse_as_infix("+", (16, "right"))
+  @kernel.new_constant("!", @parser.parse_type("(A->bool)->bool"))
+  @printer.parse_as_binder("!")
+  @printer.parse_as_binder("\\")
+  @printer.parse_as_infix("=", (12, "right"))
+  @kernel.new_constant("c", @parser.parse_type("num"))
+  let tm = @parser.parse_term
+  let th = (name : String, f : () -> @kernel.Thm raise) => {
+    log.attempt(name, () => @printer.string_of_thm(f()))
+  }
+  let t = (name : String, f : () -> @kernel.Term raise) => {
+    log.attempt(name, () => @printer.string_of_term(f()))
+  }
+  let asm = (s : String) => @kernel.assume_rule(tm(s))
+  let beta = @equal.beta_conv
+  th("BETA_CONV", () => beta(tm("(\\x:num. x + x) c")))
+  th("BETA_CONV_var", () => beta(tm("(\\x:num. x + y) x")))
+  th("BETA_CONV_bad", () => beta(tm("(f:num->num) c")))
+  th("AP_TERM", () => @equal.ap_term(tm("f:num->num"), asm("(x:num) = y")))
+  th("AP_TERM_bad", () => @equal.ap_term(tm("f:bool->num"), asm("(x:num) = y")))
+  th("AP_THM", () => @equal.ap_thm(asm("(f:num->num) = g"), tm("c")))
+  th("SYM", () => @equal.sym(asm("(x:num) = y + c")))
+  th("ALPHA", () => {
+    @equal.alpha_rule(tm("\\x:num. x + c"), tm("\\y:num. y + c"))
+  })
+  th("ALPHA_bad", () => {
+    @equal.alpha_rule(tm("\\x:num. x + c"), tm("\\y:num. c + y"))
+  })
+  th("ALPHA_CONV", () => @equal.alpha_conv(tm("z:num"))(tm("\\x:num. x + c")))
+  th("GEN_ALPHA_CONV", () => {
+    @equal.gen_alpha_conv(tm("z:num"))(tm("!x:num. x + c = c"))
+  })
+  th("MK_BINOP", () => {
+    @equal.mk_binop_rule(tm("(+)"), asm("(a:num) = b"), asm("(c':num) = d"))
+  })
+  th("THENC", () => {
+    @equal.thenc(beta, beta)(tm("(\\x:num. (\\y:num. y + x) c) c"))
+  })
+  th("ORELSEC", () => @equal.orelsec(@equal.no_conv, beta)(tm("(\\x:num. x) c")))
+  th("REPEATC", () => @equal.repeatc(beta)(tm("(\\x:num. (\\y:num. y) x) c")))
+  th("CHANGED_CONV", () => @equal.changed_conv(@equal.all_conv)(tm("c")))
+  th("TRY_CONV", () => @equal.try_conv(beta)(tm("c")))
+  th("FIRST_CONV", () => {
+    @equal.first_conv(@list.List([@equal.no_conv, beta, @equal.all_conv]))(
+      tm("(\\x:num. x) c"),
+    )
+  })
+  th("EVERY_CONV", () => {
+    @equal.every_conv(@list.List([beta, @equal.all_conv]))(tm("(\\x:num. x) c"))
+  })
+  th("RATOR_CONV", () => {
+    @equal.rator_conv(@equal.rand_conv(beta))(tm("(\\x:num. x) c + c"))
+  })
+  th("LAND_CONV", () => @equal.land_conv(beta)(tm("(\\x:num. x) c + c")))
+  th("RAND_CONV_bad", () => @equal.rand_conv(beta)(tm("c")))
+  th("COMB_CONV", () => {
+    @equal.comb_conv(@equal.try_conv(beta))(tm("(f:num->num) ((\\x:num. x) c)"))
+  })
+  th("ABS_CONV", () => @equal.abs_conv(beta)(tm("\\y:num. (\\x:num. x + y) c")))
+  th("ABS_CONV_hyp", () => {
+    @equal.abs_conv(t => @kernel.assume_rule(@basics.mk_eq(t, tm("c"))))(
+      tm("\\x:num. x + c"),
+    )
+  })
+  th("BINDER_CONV", () => {
+    @equal.binder_conv(beta)(tm("!y:num. (\\x:num. x + y) c = c"))
+  })
+  th("SUB_CONV", () => {
+    @equal.sub_conv(@equal.try_conv(beta))(
+      tm("(\\x:num. x) c + (\\x:num. x) c"),
+    )
+  })
+  th("BINOP_CONV", () => {
+    @equal.binop_conv(beta)(tm("(\\x:num. x) c + (\\x:num. x) c"))
+  })
+  let nested = tm(
+    "(\\f:num->num. f ((\\x:num. x + x) c)) (\\y:num. (\\z:num. z) y)",
+  )
+  th("ONCE_DEPTH_CONV", () => @equal.once_depth_conv(beta)(nested))
+  th("DEPTH_CONV", () => @equal.depth_conv(beta)(nested))
+  th("REDEPTH_CONV", () => @equal.redepth_conv(beta)(nested))
+  th("TOP_DEPTH_CONV", () => @equal.top_depth_conv(beta)(nested))
+  th("TOP_SWEEP_CONV", () => @equal.top_sweep_conv(beta)(nested))
+  th("DEPTH_CONV_none", () => @equal.depth_conv(beta)(tm("c + c")))
+  th("DEPTH_BINOP_CONV", () => {
+    @equal.depth_binop_conv(tm("(+)"), @equal.try_conv(beta))(
+      tm("(\\x:num. x) c + c + (\\y:num. y + y) c"),
+    )
+  })
+  th("PATH_CONV", () => @equal.path_conv("lr", beta)(tm("(\\x:num. x) c + c")))
+  th("PAT_CONV", () => {
+    @equal.pat_conv(tm("\\x:num. x + c"), beta)(tm("(\\x:num. x) c + c"))
+  })
+  th("SYM_CONV", () => @equal.sym_conv(tm("(x:num) = y")))
+  th("CONV_RULE", () => {
+    @equal.conv_rule(@equal.rand_conv(beta), asm("(a:num) = (\\x:num. x) c"))
+  })
+  th("SUBS_CONV", () => {
+    @equal.subs_conv(@list.List([asm("(a:num) = b"), asm("(c:num) = d")]))(
+      tm("a + c + (\\a:num. a) b"),
+    )
+  })
+  th("SUBS", () => {
+    @equal.subs(@list.List([asm("(a:num) = b")]), asm("a + a = (c:num)"))
+  })
+  th("BETA_RULE", () => @equal.beta_rule(asm("(\\x:num. (\\y:num. y) x) c = c")))
+  th("GSYM", () => @equal.gsym(asm("!x:num. x = c")))
+  let cc = @equal.cache_conv(beta)
+  th("CACHE_CONV1", () => cc(tm("(\\x:num. x + x) c")))
+  th("CACHE_CONV2", () => cc(tm("(\\y:num. y + y) c")))
+  th("CACHE_CONV3", () => cc(tm("(\\x:num. x + x) c")))
+  t("mk_primed_var", () => {
+    @equal.mk_primed_var(@list.List([tm("x:num"), tm("x':num")]), tm("x:bool"))
+  })
+  t("mk_primed_var_const", () => {
+    let _ = @equal.mk_primed_var(@list.empty(), tm("c':bool"))
+    @equal.mk_primed_var(@list.empty(), @kernel.mk_var("c", @kernel.bool_ty))
+  })
+  t("lhand", () => @equal.lhand(tm("(a:num) + b")))
+  t("genvar_after", () => @basics.genvar(@kernel.bool_ty))
+  inspect(
+    log.buf.to_string(),
+    content=(
+      #|BETA_CONV = |- (\x. x + x) c = c + c
+      #|BETA_CONV_var = |- (\x. x + y) x = x + y
+      #|BETA_CONV_bad ! BETA_CONV: Not a beta-redex
+      #|AP_TERM = x = y
+      #||- f x = f y
+      #|AP_TERM_bad ! AP_TERM
+      #|AP_THM = f = g
+      #||- f c = g c
+      #|SYM = x = y + c
+      #||- y + c = x
+      #|ALPHA = |- (\x. x + c) = (\y. y + c)
+      #|ALPHA_bad ! ALPHA
+      #|ALPHA_CONV = |- (\x. x + c) = (\z. z + c)
+      #|GEN_ALPHA_CONV = |- (!x. x + c = c) = (!z. z + c = c)
+      #|MK_BINOP = a = b, c' = d
+      #||- a + c' = b + d
+      #|THENC = |- (\x. (\y. y + x) c) c = c + c
+      #|ORELSEC = |- (\x. x) c = c
+      #|REPEATC = |- (\x. (\y. y) x) c = c
+      #|CHANGED_CONV ! CHANGED_CONV
+      #|TRY_CONV = |- c = c
+      #|FIRST_CONV = |- (\x. x) c = c
+      #|EVERY_CONV = |- (\x. x) c = c
+      #|RATOR_CONV = |- (\x. x) c + c = c + c
+      #|LAND_CONV = |- (\x. x) c + c = c + c
+      #|RAND_CONV_bad ! RAND_CONV: Not a combination
+      #|COMB_CONV = |- f ((\x. x) c) = f c
+      #|ABS_CONV = |- (\y. (\x. x + y) c) = (\y. c + y)
+      #|ABS_CONV_hyp ! ABS
+      #|BINDER_CONV ! BETA_CONV: Not a beta-redex
+      #|SUB_CONV = |- (\x. x) c + (\x. x) c = (\x. x) c + c
+      #|BINOP_CONV = |- (\x. x) c + (\x. x) c = c + c
+      #|ONCE_DEPTH_CONV = |- (\f. f ((\x. x + x) c)) (\y. (\z. z) y) = (\y. (\z. z) y) ((\x. x + x) c)
+      #|DEPTH_CONV = |- (\f. f ((\x. x + x) c)) (\y. (\z. z) y) = c + c
+      #|REDEPTH_CONV = |- (\f. f ((\x. x + x) c)) (\y. (\z. z) y) = c + c
+      #|TOP_DEPTH_CONV = |- (\f. f ((\x. x + x) c)) (\y. (\z. z) y) = c + c
+      #|TOP_SWEEP_CONV = |- (\f. f ((\x. x + x) c)) (\y. (\z. z) y) = c + c
+      #|DEPTH_CONV_none = |- c + c = c + c
+      #|DEPTH_BINOP_CONV = |- (\x. x) c + c + (\y. y + y) c = c + c + c + c
+      #|PATH_CONV = |- (\x. x) c + c = c + c
+      #|PAT_CONV = |- (\x. x) c + c = c + c
+      #|SYM_CONV = |- (x = y) = y = x
+      #|CONV_RULE = a = (\x. x) c
+      #||- a = c
+      #|SUBS_CONV = c = d, a = b
+      #||- a + c + (\a. a) b = b + d + (\a. a) b
+      #|SUBS = a = b, a + a = c
+      #||- b + b = c
+      #|BETA_RULE = (\x. (\y. y) x) c = c
+      #||- c = c
+      #|GSYM = !x. x = c
+      #||- !x. c = x
+      #|CACHE_CONV1 = |- (\x. x + x) c = c + c
+      #|CACHE_CONV2 = |- (\y. y + y) c = c + c
+      #|CACHE_CONV3 = |- (\x. x + x) c = c + c
+      #|mk_primed_var = x''
+      #|mk_primed_var_const = c'
+      #|lhand = a
+      #|genvar_after = _7
+      #|
+    ),
+  )
+}

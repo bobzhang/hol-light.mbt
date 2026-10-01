@@ -1,0 +1,111 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/equal"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn abs_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn all_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn alpha_conv(@kernel.Term) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn alpha_rule(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn ap_term(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn ap_thm(@kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn beta_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn beta_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn binder_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn binop2_conv((@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn binop_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn cache_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn changed_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn comb2_conv((@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn comb_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn conv_rule((@kernel.Term) -> @kernel.Thm raise, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn depth_binop_conv(@kernel.Term, (@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn depth_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn every_conv(@list.List[(@kernel.Term) -> @kernel.Thm raise]) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn first_conv(@list.List[(@kernel.Term) -> @kernel.Thm raise]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn gen_alpha_conv(@kernel.Term) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn gsym(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn land_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn lhand(@kernel.Term) -> @kernel.Term raise
+
+pub fn lhs(@kernel.Term) -> @kernel.Term raise
+
+pub fn mk_binop_rule(@kernel.Term, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn mk_primed_var(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Term raise
+
+pub fn no_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn once_depth_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn orelsec((@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn pat_conv(@kernel.Term, (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn path_conv(String, (@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn print_term_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn rand_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn rator_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn redepth_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn repeatc((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn rhs(@kernel.Term) -> @kernel.Term raise
+
+pub fn sub_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn subs(@list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn subs_conv(@list.List[@kernel.Thm]) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn sym(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn sym_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn thenc((@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn top_depth_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn top_sweep_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn try_conv((@kernel.Term) -> @kernel.Thm raise) -> (@kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+pub type Conv = (@kernel.Term) -> @kernel.Thm raise
+
+// Traits

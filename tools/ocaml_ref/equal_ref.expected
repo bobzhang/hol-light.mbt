@@ -1,0 +1,59 @@
+BETA_CONV = |- (\x. x + x) c = c + c
+BETA_CONV_var = |- (\x. x + y) x = x + y
+BETA_CONV_bad ! BETA_CONV: Not a beta-redex
+AP_TERM = x = y
+|- f x = f y
+AP_TERM_bad ! AP_TERM
+AP_THM = f = g
+|- f c = g c
+SYM = x = y + c
+|- y + c = x
+ALPHA = |- (\x. x + c) = (\y. y + c)
+ALPHA_bad ! ALPHA
+ALPHA_CONV = |- (\x. x + c) = (\z. z + c)
+GEN_ALPHA_CONV = |- (!x. x + c = c) = (!z. z + c = c)
+MK_BINOP = a = b, c' = d
+|- a + c' = b + d
+THENC = |- (\x. (\y. y + x) c) c = c + c
+ORELSEC = |- (\x. x) c = c
+REPEATC = |- (\x. (\y. y) x) c = c
+CHANGED_CONV ! CHANGED_CONV
+TRY_CONV = |- c = c
+FIRST_CONV = |- (\x. x) c = c
+EVERY_CONV = |- (\x. x) c = c
+RATOR_CONV = |- (\x. x) c + c = c + c
+LAND_CONV = |- (\x. x) c + c = c + c
+RAND_CONV_bad ! RAND_CONV: Not a combination
+COMB_CONV = |- f ((\x. x) c) = f c
+ABS_CONV = |- (\y. (\x. x + y) c) = (\y. c + y)
+ABS_CONV_hyp ! ABS
+BINDER_CONV ! BETA_CONV: Not a beta-redex
+SUB_CONV = |- (\x. x) c + (\x. x) c = (\x. x) c + c
+BINOP_CONV = |- (\x. x) c + (\x. x) c = c + c
+ONCE_DEPTH_CONV = |- (\f. f ((\x. x + x) c)) (\y. (\z. z) y) = (\y. (\z. z) y) ((\x. x + x) c)
+DEPTH_CONV = |- (\f. f ((\x. x + x) c)) (\y. (\z. z) y) = c + c
+REDEPTH_CONV = |- (\f. f ((\x. x + x) c)) (\y. (\z. z) y) = c + c
+TOP_DEPTH_CONV = |- (\f. f ((\x. x + x) c)) (\y. (\z. z) y) = c + c
+TOP_SWEEP_CONV = |- (\f. f ((\x. x + x) c)) (\y. (\z. z) y) = c + c
+DEPTH_CONV_none = |- c + c = c + c
+DEPTH_BINOP_CONV = |- (\x. x) c + c + (\y. y + y) c = c + c + c + c
+PATH_CONV = |- (\x. x) c + c = c + c
+PAT_CONV = |- (\x. x) c + c = c + c
+SYM_CONV = |- (x = y) = y = x
+CONV_RULE = a = (\x. x) c
+|- a = c
+SUBS_CONV = c = d, a = b
+|- a + c + (\a. a) b = b + d + (\a. a) b
+SUBS = a = b, a + a = c
+|- b + b = c
+BETA_RULE = (\x. (\y. y) x) c = c
+|- c = c
+GSYM = !x. x = c
+|- !x. c = x
+CACHE_CONV1 = |- (\x. x + x) c = c + c
+CACHE_CONV2 = |- (\y. y + y) c = c + c
+CACHE_CONV3 = |- (\x. x + x) c = c + c
+mk_primed_var = x''
+mk_primed_var_const = c'
+lhand = a
+genvar_after = _7

@@ -192,5 +192,8 @@ functions, never through top-level side effects, so callers control loading.
   `tools/ocaml_ref/parse_cases.txt` (186 outputs: types, terms, structure
   with invented type-variable numbers, `GEN%PVAR` numbering, overloading
   across num/int/real, warnings and error messages, wrapping).
-  Phase 3 is complete. Next: phase 4 (`equal`, `bool`, `drule`, `tactics`, …)
-  and the translator spike.
+  Phase 3 is complete.
+- [ ] Phase 4: `equal/` is done (conversions as `Conv = (Term) -> Thm raise`
+  closures, conversionals, depth conversions with upstream's exact `try`
+  scopes, `CACHE_CONV` with OCaml closure-compare semantics in nets; it
+  matches equal.ml on 58 checks). Next: `bool`, `drule`, `tactics`, …
