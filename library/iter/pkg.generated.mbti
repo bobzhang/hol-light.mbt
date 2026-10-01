@@ -1,0 +1,41 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/iter"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn iter() -> @kernel.Thm
+
+pub fn iter_1() -> @kernel.Thm
+
+pub fn iter_add() -> @kernel.Thm
+
+pub fn iter_add_pointless() -> @kernel.Thm
+
+pub fn iter_alt() -> @kernel.Thm
+
+pub fn iter_alt_pointless() -> @kernel.Thm
+
+pub fn iter_fixpoint() -> @kernel.Thm
+
+pub fn iter_mul() -> @kernel.Thm
+
+pub fn iter_pointless() -> @kernel.Thm
+
+pub fn order_existence_card() -> @kernel.Thm
+
+pub fn order_existence_finite() -> @kernel.Thm
+
+pub fn order_existence_gen() -> @kernel.Thm
+
+pub fn order_existence_iter() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
