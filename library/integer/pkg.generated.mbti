@@ -1,0 +1,456 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/integer"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn even_square_mod4() -> @kernel.Thm
+
+pub fn int_abs_gcd() -> @kernel.Thm
+
+pub fn int_abs_lcm() -> @kernel.Thm
+
+pub fn int_bezout_prime() -> @kernel.Thm
+
+pub fn int_chinese_remainder() -> @kernel.Thm
+
+pub fn int_chinese_remainder_coprime() -> @kernel.Thm
+
+pub fn int_chinese_remainder_coprime_unique() -> @kernel.Thm
+
+pub fn int_chinese_remainder_usual() -> @kernel.Thm
+
+pub fn int_cong() -> @kernel.Thm
+
+pub fn int_cong_0_divides() -> @kernel.Thm
+
+pub fn int_cong_1_divides() -> @kernel.Thm
+
+pub fn int_cong_add() -> @kernel.Thm
+
+pub fn int_cong_add_lcancel() -> @kernel.Thm
+
+pub fn int_cong_add_lcancel_eq() -> @kernel.Thm
+
+pub fn int_cong_add_lcancel_eq_0() -> @kernel.Thm
+
+pub fn int_cong_add_rcancel() -> @kernel.Thm
+
+pub fn int_cong_add_rcancel_eq() -> @kernel.Thm
+
+pub fn int_cong_add_rcancel_eq_0() -> @kernel.Thm
+
+pub fn int_cong_chinese() -> @kernel.Thm
+
+pub fn int_cong_coprime() -> @kernel.Thm
+
+pub fn int_cong_div() -> @kernel.Thm
+
+pub fn int_cong_div_coprime() -> @kernel.Thm
+
+pub fn int_cong_divides() -> @kernel.Thm
+
+pub fn int_cong_gcd_left() -> @kernel.Thm
+
+pub fn int_cong_gcd_right() -> @kernel.Thm
+
+pub fn int_cong_imp_eq() -> @kernel.Thm
+
+pub fn int_cong_int_divides_modulus() -> @kernel.Thm
+
+pub fn int_cong_lmul() -> @kernel.Thm
+
+pub fn int_cong_mod_0() -> @kernel.Thm
+
+pub fn int_cong_mod_1() -> @kernel.Thm
+
+pub fn int_cong_mod_abs() -> @kernel.Thm
+
+pub fn int_cong_mul() -> @kernel.Thm
+
+pub fn int_cong_mul_1() -> @kernel.Thm
+
+pub fn int_cong_mul_lcancel() -> @kernel.Thm
+
+pub fn int_cong_mul_lcancel_eq() -> @kernel.Thm
+
+pub fn int_cong_mul_rcancel() -> @kernel.Thm
+
+pub fn int_cong_mul_rcancel_eq() -> @kernel.Thm
+
+pub fn int_cong_mult_lcancel_all() -> @kernel.Thm
+
+pub fn int_cong_pow() -> @kernel.Thm
+
+pub fn int_cong_pow_1() -> @kernel.Thm
+
+pub fn int_cong_refl() -> @kernel.Thm
+
+pub fn int_cong_rmul() -> @kernel.Thm
+
+pub fn int_cong_solve() -> @kernel.Thm
+
+pub fn int_cong_solve_eq() -> @kernel.Thm
+
+pub fn int_cong_solve_pos() -> @kernel.Thm
+
+pub fn int_cong_solve_unique() -> @kernel.Thm
+
+pub fn int_cong_sub() -> @kernel.Thm
+
+pub fn int_cong_sym() -> @kernel.Thm
+
+pub fn int_cong_to_1() -> @kernel.Thm
+
+pub fn int_cong_trans() -> @kernel.Thm
+
+pub fn int_coprime() -> @kernel.Thm
+
+pub fn int_coprime_0() -> @kernel.Thm
+
+pub fn int_coprime_1() -> @kernel.Thm
+
+pub fn int_coprime_abs() -> @kernel.Thm
+
+pub fn int_coprime_alt() -> @kernel.Thm
+
+pub fn int_coprime_bezout() -> @kernel.Thm
+
+pub fn int_coprime_bezout_alt() -> @kernel.Thm
+
+pub fn int_coprime_divisors() -> @kernel.Thm
+
+pub fn int_coprime_divprod() -> @kernel.Thm
+
+pub fn int_coprime_gcd() -> @kernel.Thm
+
+pub fn int_coprime_labs() -> @kernel.Thm
+
+pub fn int_coprime_lmul() -> @kernel.Thm
+
+pub fn int_coprime_lmul2() -> @kernel.Thm
+
+pub fn int_coprime_lneg() -> @kernel.Thm
+
+pub fn int_coprime_lpow() -> @kernel.Thm
+
+pub fn int_coprime_lrem() -> @kernel.Thm
+
+pub fn int_coprime_minus1() -> @kernel.Thm
+
+pub fn int_coprime_mul() -> @kernel.Thm
+
+pub fn int_coprime_neg() -> @kernel.Thm
+
+pub fn int_coprime_plus1() -> @kernel.Thm
+
+pub fn int_coprime_pow() -> @kernel.Thm
+
+pub fn int_coprime_pow2() -> @kernel.Thm
+
+pub fn int_coprime_pow_abs() -> @kernel.Thm
+
+pub fn int_coprime_pow_divprod() -> @kernel.Thm
+
+pub fn int_coprime_pow_imp() -> @kernel.Thm
+
+pub fn int_coprime_pow_odd() -> @kernel.Thm
+
+pub fn int_coprime_prime() -> @kernel.Thm
+
+pub fn int_coprime_prime_eq() -> @kernel.Thm
+
+pub fn int_coprime_primepow() -> @kernel.Thm
+
+pub fn int_coprime_rabs() -> @kernel.Thm
+
+pub fn int_coprime_refl() -> @kernel.Thm
+
+pub fn int_coprime_rmul() -> @kernel.Thm
+
+pub fn int_coprime_rmul2() -> @kernel.Thm
+
+pub fn int_coprime_rneg() -> @kernel.Thm
+
+pub fn int_coprime_rpow() -> @kernel.Thm
+
+pub fn int_coprime_rrem() -> @kernel.Thm
+
+pub fn int_coprime_sos() -> @kernel.Thm
+
+pub fn int_coprime_sym() -> @kernel.Thm
+
+pub fn int_crt_strong() -> @kernel.Thm
+
+pub fn int_crt_strong_iff() -> @kernel.Thm
+
+pub fn int_distinct_prime_coprime() -> @kernel.Thm
+
+pub fn int_divides_0() -> @kernel.Thm
+
+pub fn int_divides_1() -> @kernel.Thm
+
+pub fn int_divides_add() -> @kernel.Thm
+
+pub fn int_divides_add_revl() -> @kernel.Thm
+
+pub fn int_divides_add_revr() -> @kernel.Thm
+
+pub fn int_divides_antisym() -> @kernel.Thm
+
+pub fn int_divides_antisym_abs() -> @kernel.Thm
+
+pub fn int_divides_antisym_associated() -> @kernel.Thm
+
+pub fn int_divides_antisym_divisors() -> @kernel.Thm
+
+pub fn int_divides_antisym_multiples() -> @kernel.Thm
+
+pub fn int_divides_antisym_pos() -> @kernel.Thm
+
+pub fn int_divides_cmul2() -> @kernel.Thm
+
+pub fn int_divides_fact() -> @kernel.Thm
+
+pub fn int_divides_fact_prime() -> @kernel.Thm
+
+pub fn int_divides_gcd() -> @kernel.Thm
+
+pub fn int_divides_gcd_left() -> @kernel.Thm
+
+pub fn int_divides_gcd_right() -> @kernel.Thm
+
+pub fn int_divides_lcm() -> @kernel.Thm
+
+pub fn int_divides_le() -> @kernel.Thm
+
+pub fn int_divides_lmul() -> @kernel.Thm
+
+pub fn int_divides_lmul2() -> @kernel.Thm
+
+pub fn int_divides_lmul2_eq() -> @kernel.Thm
+
+pub fn int_divides_lneg() -> @kernel.Thm
+
+pub fn int_divides_mul() -> @kernel.Thm
+
+pub fn int_divides_mul2() -> @kernel.Thm
+
+pub fn int_divides_mul_l() -> @kernel.Thm
+
+pub fn int_divides_mul_r() -> @kernel.Thm
+
+pub fn int_divides_one() -> @kernel.Thm
+
+pub fn int_divides_one_abs() -> @kernel.Thm
+
+pub fn int_divides_one_pos() -> @kernel.Thm
+
+pub fn int_divides_pow() -> @kernel.Thm
+
+pub fn int_divides_pow2() -> @kernel.Thm
+
+pub fn int_divides_pow2_eq() -> @kernel.Thm
+
+pub fn int_divides_pow2_rev() -> @kernel.Thm
+
+pub fn int_divides_pow_le() -> @kernel.Thm
+
+pub fn int_divides_pow_le_imp() -> @kernel.Thm
+
+pub fn int_divides_prime_pow_le() -> @kernel.Thm
+
+pub fn int_divides_prime_prime() -> @kernel.Thm
+
+pub fn int_divides_refl() -> @kernel.Thm
+
+pub fn int_divides_rmul() -> @kernel.Thm
+
+pub fn int_divides_rmul2() -> @kernel.Thm
+
+pub fn int_divides_rmul2_eq() -> @kernel.Thm
+
+pub fn int_divides_rneg() -> @kernel.Thm
+
+pub fn int_divides_rpow() -> @kernel.Thm
+
+pub fn int_divides_rpow_suc() -> @kernel.Thm
+
+pub fn int_divides_sub() -> @kernel.Thm
+
+pub fn int_divides_trans() -> @kernel.Thm
+
+pub fn int_divides_zero() -> @kernel.Thm
+
+pub fn int_division_decomp() -> @kernel.Thm
+
+pub fn int_eq_imp_cong() -> @kernel.Thm
+
+pub fn int_eq_prime_pow_abs() -> @kernel.Thm
+
+pub fn int_eq_prime_pow_pos() -> @kernel.Thm
+
+pub fn int_euclid() -> @kernel.Thm
+
+pub fn int_euclid_bound() -> @kernel.Thm
+
+pub fn int_gcd() -> @kernel.Thm
+
+pub fn int_gcd_0() -> @kernel.Thm
+
+pub fn int_gcd_1() -> @kernel.Thm
+
+pub fn int_gcd_abs() -> @kernel.Thm
+
+pub fn int_gcd_abs_v1() -> @kernel.Thm
+
+pub fn int_gcd_add() -> @kernel.Thm
+
+pub fn int_gcd_assoc() -> @kernel.Thm
+
+pub fn int_gcd_bezout() -> @kernel.Thm
+
+pub fn int_gcd_coprime() -> @kernel.Thm
+
+pub fn int_gcd_coprime_divides_lmul() -> @kernel.Thm
+
+pub fn int_gcd_coprime_divides_rmul() -> @kernel.Thm
+
+pub fn int_gcd_coprime_exists() -> @kernel.Thm
+
+pub fn int_gcd_coprime_lmul() -> @kernel.Thm
+
+pub fn int_gcd_coprime_rmul() -> @kernel.Thm
+
+pub fn int_gcd_divides() -> @kernel.Thm
+
+pub fn int_gcd_eq() -> @kernel.Thm
+
+pub fn int_gcd_eq_0() -> @kernel.Thm
+
+pub fn int_gcd_labs() -> @kernel.Thm
+
+pub fn int_gcd_lmul() -> @kernel.Thm
+
+pub fn int_gcd_lneg() -> @kernel.Thm
+
+pub fn int_gcd_multiple() -> (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)
+
+pub fn int_gcd_neg() -> @kernel.Thm
+
+pub fn int_gcd_pos() -> @kernel.Thm
+
+pub fn int_gcd_pow() -> @kernel.Thm
+
+pub fn int_gcd_rabs() -> @kernel.Thm
+
+pub fn int_gcd_refl() -> @kernel.Thm
+
+pub fn int_gcd_rmul() -> @kernel.Thm
+
+pub fn int_gcd_rneg() -> @kernel.Thm
+
+pub fn int_gcd_sub() -> @kernel.Thm
+
+pub fn int_gcd_sym() -> @kernel.Thm
+
+pub fn int_gcd_unique() -> @kernel.Thm
+
+pub fn int_gcd_unique_abs() -> @kernel.Thm
+
+pub fn int_lcm_0() -> @kernel.Thm
+
+pub fn int_lcm_1() -> @kernel.Thm
+
+pub fn int_lcm_abs() -> @kernel.Thm
+
+pub fn int_lcm_assoc() -> @kernel.Thm
+
+pub fn int_lcm_eq() -> @kernel.Thm
+
+pub fn int_lcm_eq_0() -> @kernel.Thm
+
+pub fn int_lcm_labs() -> @kernel.Thm
+
+pub fn int_lcm_lmul() -> @kernel.Thm
+
+pub fn int_lcm_lneg() -> @kernel.Thm
+
+pub fn int_lcm_neg() -> @kernel.Thm
+
+pub fn int_lcm_pow() -> @kernel.Thm
+
+pub fn int_lcm_rabs() -> @kernel.Thm
+
+pub fn int_lcm_refl() -> @kernel.Thm
+
+pub fn int_lcm_rmul() -> @kernel.Thm
+
+pub fn int_lcm_rneg() -> @kernel.Thm
+
+pub fn int_lcm_sym() -> @kernel.Thm
+
+pub fn int_lcm_unique() -> @kernel.Thm
+
+pub fn int_lcm_unique_abs() -> @kernel.Thm
+
+pub fn int_linear_cong_pos() -> @kernel.Thm
+
+pub fn int_pow_mul_exists() -> @kernel.Thm
+
+pub fn int_prime() -> @kernel.Thm
+
+pub fn int_prime_0() -> @kernel.Thm
+
+pub fn int_prime_1() -> @kernel.Thm
+
+pub fn int_prime_2() -> @kernel.Thm
+
+pub fn int_prime_abs() -> @kernel.Thm
+
+pub fn int_prime_coprime() -> @kernel.Thm
+
+pub fn int_prime_coprime_cases() -> @kernel.Thm
+
+pub fn int_prime_coprime_eq() -> @kernel.Thm
+
+pub fn int_prime_coprime_lt() -> @kernel.Thm
+
+pub fn int_prime_divpow() -> @kernel.Thm
+
+pub fn int_prime_divpow_n() -> @kernel.Thm
+
+pub fn int_prime_divprod() -> @kernel.Thm
+
+pub fn int_prime_divprod_eq() -> @kernel.Thm
+
+pub fn int_prime_divprod_pow() -> @kernel.Thm
+
+pub fn int_prime_factor() -> @kernel.Thm
+
+pub fn int_prime_factor_induct() -> @kernel.Thm
+
+pub fn int_prime_factor_lt() -> @kernel.Thm
+
+pub fn int_prime_ge_2() -> @kernel.Thm
+
+pub fn int_prime_imp_nz() -> @kernel.Thm
+
+pub fn int_prime_neg() -> @kernel.Thm
+
+pub fn int_primes_infinite() -> @kernel.Thm
+
+pub fn odd_square_mod4() -> @kernel.Thm
+
+pub fn solvable_gcd() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
