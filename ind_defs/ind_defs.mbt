@@ -804,10 +804,10 @@ pub fn derive_nonschematic_inductive_relations(
 }
 
 ///|
-fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] getequs_l(
-  x40 : @list.List[B],
-  x41 : @list.List[(A, B)],
-) -> @list.List[(A, B)] raise {
+fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] getequs_l(
+  x40 : @list.List[TB],
+  x41 : @list.List[(TA, TB)],
+) -> @list.List[(TA, TB)] raise {
   let (avs_1, plis) = (x40, x41)
   if plis == @list.empty() {
     @list.empty()
@@ -819,8 +819,8 @@ fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] get
           getequs_l(
             avs_1,
             @lib.filter(
-              (x44 : (A, B)) => {
-                ((x42 : B) => r_1 != x42)(((x43 : (A, B)) => x43.1)(x44))
+              (x44 : (TA, TB)) => {
+                ((x42 : TB) => r_1 != x42)(((x43 : (TA, TB)) => x43.1)(x44))
               },
               t_1,
             ),

@@ -14,6 +14,17 @@ module Emit = struct
   (* declarations are printed at output time, when later phrases have
      resolved weak type variables (e.g. of `ref []`) *)
   let decls : (unit -> string) list ref = ref []
+
+  (* the module path of the item being translated (`Meson.` ...) *)
+  let module_prefix : string list ref = ref []
+
+  (* registrations waiting until a `let ... and ...` is fully lowered *)
+  let deferred : (unit -> unit) list option ref = ref None
+
+  let register_own oname entry =
+    let key = String.concat "" (List.rev_map (fun m -> m ^ ".") !module_prefix) ^ oname in
+    let doit () = Hashtbl.replace own_by_name key entry in
+    match !deferred with Some l -> deferred := Some (doit :: l) | None -> doit ()
   let add_decl f = decls := f :: !decls
   let steps = Buffer.create 65536
   let errors = ref 0
@@ -69,7 +80,7 @@ module Emit = struct
     scope_tyvars := [];
     (* registered after its body: a non-recursive redefinition refers to
        the previous binding *)
-    Hashtbl.replace own_by_name oname (mname, Function want);
+    register_own oname (mname, Function want);
     Hashtbl.replace own_values (Ident.unique_name id) (mname, Function want);
     match lam with
     | Lam (names, (stmts, result)) ->
@@ -132,7 +143,7 @@ module Emit = struct
              Printf.sprintf
                "\n///|\nlet %s_c : @lib.Cell[%s] = @lib.Cell::new(%s)\n\n///|\n/// `%s`\npub fn%s %s() -> %s {\n  %s_c.get()\n}\n"
                mname ty (string_lit oname) oname (generics_of ty) mname ty mname));
-    Hashtbl.replace own_by_name oname
+    register_own oname
       (mname, match mty with M.Fun _ -> Function mty | _ -> Accessor mty)
 
   (* `let x = e` -> a cell, an accessor (or wrapper) and a load step *)
@@ -291,7 +302,24 @@ module Emit = struct
 
   let trace = Sys.getenv_opt "TRANSLATOR_TRACE" <> None
 
+  (* register the types, constructors and exceptions of an already
+     translated file being loaded as a prefix *)
+  let rec register pkg (it : structure_item) =
+    match it.str_desc with
+    | Tstr_type (_, decls) ->
+        List.iter
+          (fun d ->
+            Hashtbl.replace own_types (Ident.name d.typ_id) (pkg, camel (Ident.name d.typ_id));
+            match d.typ_kind with
+            | Ttype_variant cds -> List.iter (fun cd -> Hashtbl.replace own_ctors (Ident.name cd.cd_id) pkg) cds
+            | _ -> ())
+          decls
+    | Tstr_exception te -> Hashtbl.replace own_ctors (Ident.name te.tyexn_constructor.ext_id) pkg
+    | Tstr_module { mb_expr = { mod_desc = Tmod_structure str; _ }; _ } -> List.iter (register pkg) str.str_items
+    | _ -> ()
+
   let rec item ~(hand : hand list) (it : structure_item) =
+    item_env := Some it.str_env;
     let _, line, _ = Location.get_pos_info it.str_loc.Location.loc_start in
     if trace then Printf.eprintf "item at line %d\n%!" line;
     match List.find_opt (fun h -> h.line = line) hand with
@@ -304,7 +332,7 @@ module Emit = struct
             let oname = Ident.name id in
             let mname = try List.assoc oname h.names with Not_found -> sanitize oname in
             Hashtbl.replace used_names mname ();
-            Hashtbl.replace own_by_name oname (mname, Function (mty_of ty)))
+            register_own oname (mname, Function (mty_of ty)))
           (match it.str_desc with
            | Tstr_value (_, vbs) -> List.concat_map (fun vb -> pat_bound_idents_full vb.vb_pat) vbs
            | _ -> [])
@@ -316,6 +344,13 @@ module Emit = struct
                if is_function vb_expr then emit_function (Ident.name id) id vb_expr
                else emit_value ~id (Ident.name id) vb_expr
            | Tstr_value (Asttypes.Nonrecursive, (_ :: _ :: _ as vbs)) ->
+               (* every right-hand side sees the bindings before this phrase *)
+               deferred := Some [];
+               Fun.protect ~finally:(fun () ->
+                   let l = match !deferred with Some l -> l | None -> [] in
+                   deferred := None;
+                   List.iter (fun f -> f ()) (List.rev l))
+               @@ fun () ->
                List.iter
                  (fun vb ->
                    match vb.vb_pat.pat_desc with
@@ -326,10 +361,15 @@ module Emit = struct
                    | _ -> unsupported vb.vb_loc "refutable top-level binding")
                  vbs
            | Tstr_type (_, decls) -> emit_types decls
+           | Tstr_include _ -> () (* e.g. `include List` in a module *)
+           | Tstr_open _ -> ()
            | Tstr_exception te -> emit_exception te.tyexn_constructor
-           | Tstr_module { mb_expr = { mod_desc = Tmod_structure str; _ }; _ } ->
+           | Tstr_module { mb_id; mb_expr = { mod_desc = (Tmod_structure str | Tmod_constraint ({ mod_desc = Tmod_structure str; _ }, _, _, _)); _ }; _ } ->
                (* a module's members are flattened into the package *)
-               List.iter (fun it -> item ~hand it) str.str_items
+               let saved = !module_prefix in
+               module_prefix := (match mb_id with Some id -> Ident.name id | None -> "_") :: saved;
+               Fun.protect ~finally:(fun () -> module_prefix := saved)
+                 (fun () -> List.iter (fun it -> item ~hand it) str.str_items)
            | Tstr_value (Asttypes.Nonrecursive, [ vb ]) when irrefutable vb.vb_pat -> emit_pattern vb
            | Tstr_value (Asttypes.Recursive, vbs) ->
                (* name and register every function first: they may call
@@ -343,7 +383,7 @@ module Emit = struct
                          let want = M.Fun (List.map mty_of param_tys, mty_of body.exp_type, true) in
                          let mname = fresh_top (Ident.name id) in
                          Hashtbl.replace local_names mname ();
-                         Hashtbl.replace own_by_name (Ident.name id) (mname, Function want);
+                         register_own (Ident.name id) (mname, Function want);
                          Hashtbl.replace locals (Ident.unique_name id)
                            { name = mname; mty = want; loty = Some vb.vb_expr.exp_type };
                          (mname, id, vb)

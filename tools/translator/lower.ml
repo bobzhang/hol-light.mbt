@@ -26,7 +26,11 @@ module Lower = struct
   (* Types                                                              *)
   (* ---------------------------------------------------------------- *)
 
-  let env () = !Toploop.toplevel_env
+  (* the typing environment of the item being translated (inside a module
+     it includes the module's earlier items) *)
+  let item_env : Env.t option ref = ref None
+
+  let env () = match !item_env with Some e -> e | None -> !Toploop.toplevel_env
 
   let tyvar_names : (int, string) Hashtbl.t = Hashtbl.create 16
 
@@ -39,7 +43,9 @@ module Lower = struct
     match Hashtbl.find_opt tyvar_names id with
     | Some n -> n
     | None ->
-        let n = String.make 1 (Char.chr (Char.code 'A' + Hashtbl.length tyvar_names)) in
+        (* `TA`, `TB`, ...: distinct from the one-letter generics of the
+           package interfaces *)
+        let n = "T" ^ String.make 1 (Char.chr (Char.code 'A' + Hashtbl.length tyvar_names)) in
         Hashtbl.add tyvar_names id n;
         n
 
@@ -85,6 +91,7 @@ module Lower = struct
     | "num" | "Num.num" -> Some "@num.Num"
     | "lexcode" -> Some "@parser.Lexcode"
     | "func" -> Some "@lib.Func"
+    | "float" -> Some "Double"
     | "Stdlib.ref" -> Some "Ref"
     | _ -> None
 
@@ -167,7 +174,8 @@ module Lower = struct
   let rec show_mty (t : M.ty) : string option =
     let all l = List.fold_right (fun x acc -> match x, acc with Some a, Some b -> Some (a :: b) | _ -> None) l (Some []) in
     match t with
-    | M.Named (v, []) when String.length v = 1 && v.[0] >= 'A' && v.[0] <= 'Z' ->
+    | M.Named (v, []) when String.length v = 1 && v.[0] >= 'A' && v.[0] <= 'Z' -> None
+    | M.Named (v, []) when String.length v = 2 && v.[0] = 'T' && v.[1] >= 'A' && v.[1] <= 'Z' ->
         if List.mem v !scope_tyvars_fwd then Some v else None
     | M.Named (n, _) when String.length n > 0 && n.[0] = '?' -> None
     | M.Named ("Option", [ a ]) -> Option.map (fun a -> a ^ "?") (show_mty a)
@@ -225,7 +233,10 @@ module Lower = struct
       "sizeof"; "virtual"; "yield"; "init"; "main"; "lazy"; "pure"; "drop";
       "readonly"; "enumview"; "Self" ]
 
-  let sanitize name =
+  let rec sanitize name =
+    match Names.op_name name with
+    | Some n -> n
+    | None ->
     let b = Buffer.create (String.length name) in
     String.iter
       (fun c ->
@@ -306,13 +317,15 @@ module Lower = struct
   let tyvars_of_text s =
     let acc = ref [] in
     let n = String.length s in
-    String.iteri
-      (fun i c ->
-        if c >= 'A' && c <= 'Z'
-           && (i = 0 || not (let d = s.[i - 1] in (d >= 'a' && d <= 'z') || (d >= 'A' && d <= 'Z') || (d >= '0' && d <= '9') || d = '_' || d = '.' || d = '@'))
-           && (i + 1 >= n || not (let d = s.[i + 1] in (d >= 'a' && d <= 'z') || (d >= 'A' && d <= 'Z') || (d >= '0' && d <= '9') || d = '_'))
-        then if not (List.mem (String.make 1 c) !acc) then acc := String.make 1 c :: !acc)
-      s;
+    let ident c = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c = '_' in
+    for i = 0 to n - 2 do
+      if s.[i] = 'T' && s.[i + 1] >= 'A' && s.[i + 1] <= 'Z'
+         && (i = 0 || not (ident s.[i - 1] || s.[i - 1] = '.' || s.[i - 1] = '@'))
+         && (i + 2 >= n || not (ident s.[i + 2]))
+      then
+        let v = String.sub s i 2 in
+        if not (List.mem v !acc) then acc := v :: !acc
+    done;
     List.sort compare !acc
 
   (* The local variables (already bound outside) that an expression uses,
@@ -546,7 +559,9 @@ module Lower = struct
 
   (* Replace the type variables of an expected MoonBit type (from a generic
      signature) by the corresponding parts of the OCaml type at the use. *)
-  let is_tyvar v = String.length v = 1 && v.[0] >= 'A' && v.[0] <= 'Z'
+  let is_tyvar v =
+    (String.length v = 1 && v.[0] >= 'A' && v.[0] <= 'Z')
+    || (String.length v = 2 && v.[0] = 'T' && v.[1] >= 'A' && v.[1] <= 'Z')
 
   let rec refine (want : M.ty) (canon : M.ty) =
     match want, canon with
@@ -581,6 +596,10 @@ module Lower = struct
   let const loc = function
     | Asttypes.Const_int n -> if n < 0 then "(" ^ string_of_int n ^ ")" else string_of_int n
     | Asttypes.Const_string (s, _, _) -> string_lit s
+    | Asttypes.Const_float f ->
+        let f = if String.contains f '.' || String.contains f 'e' then f else f ^ ".0" in
+        let f = if f.[String.length f - 1] = '.' then f ^ "0" else f in
+        if f.[0] = '-' then "(" ^ f ^ ")" else f
     | Asttypes.Const_char c ->
         if c = '\'' then "'\\''" else if c = '\\' then "'\\\\'"
         else if Char.code c >= 32 && Char.code c < 127 then Printf.sprintf "'%c'" c
@@ -648,6 +667,27 @@ module Lower = struct
       Some (String.sub n 7 (String.length n - 7))
     else None
 
+  (* Stdlib (or a module including it) `List.f` with the same meaning as
+     lib.ml's function (`List.iter` is `do_list`, ...) *)
+  let list_alias p =
+    let n = path_name p in
+    let short =
+      match String.rindex_opt n '.' with
+      | Some i when String.length n > 5 && (String.sub n 0 5 = "List." || (String.length n > 12 && String.sub n 0 12 = "Stdlib.List.")) ->
+          Some (String.sub n (i + 1) (String.length n - i - 1))
+      | _ -> None
+    in
+    match short with
+    | Some ("map" | "rev" | "length" | "exists" | "filter" | "mem" | "hd" | "tl" | "partition" | "map2"
+           | "fold_left" | "fold_left_map" | "rev_append" as f) -> Some f
+    | Some "assoc" -> Some "list_assoc"
+    | Some "for_all" -> Some "forall"
+    | Some "iter" -> Some "do_list"
+    | Some ("concat" | "flatten") -> Some "flat"
+    | Some "combine" -> Some "zip"
+    | Some "fold_right" -> Some "itlist"
+    | _ -> None
+
   let lib_combinator p =
     match Prov.lookup p with
     | Some ("lib.ml", (("o" | "I" | "K" | "C" | "W" | "f_f_") as n)) -> Some n
@@ -700,6 +740,14 @@ module Lower = struct
     | Texp_match (scrut, cases, partial) -> lower_match ?expect e scrut cases partial
     | Texp_try (body, cases) -> lower_try ?expect e body cases
     | Texp_let (Asttypes.Recursive, vbs, body) -> lower_letrec ?expect loc vbs body
+    | Texp_assert c ->
+        let file, line, col = Location.get_pos_info loc.Location.loc_start in
+        let fail = Raise (Call (Atom "@lib.AssertFailure", [ Atom (string_lit (Printf.sprintf "%s:%d:%d" (Filename.basename file) line col)) ])) in
+        (match c.exp_desc with
+         | Texp_construct (_, cd, []) when cd.Types.cstr_name = "false" -> ([], fail, mty_of e.exp_type)
+         | _ ->
+             let ss, x, _ = lower c in
+             (ss, If (x, ([], Atom "()"), ([], fail)), M.Named ("Unit", [])))
     | _ -> unsupported loc "expression"
 
   and lower_block ?expect e : block =
@@ -711,6 +759,15 @@ module Lower = struct
   and lower_apply ?expect whole f args =
     let loc = whole.exp_loc in
     match f.exp_desc with
+    | Texp_ident (p, _, vd) when list_alias p <> None ->
+        let name = Option.get (list_alias p) in
+        (match Names.resolve "lib.ml" name with
+         | Some (pkg, mname, decl) ->
+             let h = { hstmts = []; hexp = Atom ("@" ^ pkg ^ "." ^ mname); hmty = mty_of_decl decl; hoty = Some vd.Types.val_type } in
+             apply_head ?expect loc h args
+         | None -> unsupported loc "List.%s" name)
+    | Texp_ident (p, _, _) when (match stdlib_name p with Some ("Format.printf" | "Printf.printf" | "Printf.sprintf" | "Format.sprintf") -> true | _ -> false) ->
+        lower_printf ?expect whole (Option.get (stdlib_name p)) args
     | Texp_ident (p, _, _) when stdlib_name p <> None ->
         lower_prim ?expect whole (Option.get (stdlib_name p)) f args
     | Texp_ident (p, _, _) when lib_combinator p <> None ->
@@ -882,6 +939,10 @@ module Lower = struct
              else Binop (op, Call (Atom "@lib.compare", [ a; b ]), Atom "0"))
       | ("+" | "-" | "*" | "/") as op -> (2, fun [ a; b ] _ -> Binop (op, a, b))
       | "mod" -> (2, fun [ a; b ] _ -> Binop ("%", a, b))
+      | ("+." | "-." | "*." | "/.") as op -> (2, fun [ a; b ] _ -> Binop (String.sub op 0 1, a, b))
+      | "~-." -> (1, fun [ a ] _ -> Binop ("-", Atom "0.0", a))
+      | "float_of_int" -> (1, fun [ a ] _ -> Call (Atom "Int::to_double", [ a ]))
+      | "int_of_float" | "truncate" -> (1, fun [ a ] _ -> Call (Atom "Double::to_int", [ a ]))
       | ("min" | "max") as op ->
           (* `let min a b = if a <= b then a else b` (polymorphic compare) *)
           (2, fun [ a; b ] tys ->
@@ -912,8 +973,8 @@ module Lower = struct
       | "ref" -> (1, fun [ a ] _ -> RefNew a)
       | ":=" -> (2, fun [ a; b ] _ -> Blk ([ Assign (a, b) ], Atom "()"))
       | "Format.print_string" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_string", [ a ]))
-      | "Format.print_newline" -> (1, fun [ _ ] _ -> Call (Atom "@pp.std_formatter.print_newline", []))
-      | "Format.print_flush" -> (1, fun [ _ ] _ -> Call (Atom "@pp.std_formatter.print_flush", []))
+      | "Format.print_newline" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_newline", [])))
+      | "Format.print_flush" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_flush", [])))
       | "Format.print_int" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_int", [ a ]))
       | "print_string" -> (1, fun [ a ] _ -> Call (Atom "@pp.print_string", [ a ]))
       | "&&" | "||" -> (2, fun _ _ -> assert false)
@@ -961,6 +1022,50 @@ module Lower = struct
       let curry ns = curry ns missing_tys in
       adapt_to ?expect (stmts, curry missing, mty_of whole.exp_type)
     end
+
+  (* --- printf with a literal format: %s, %d, %i, %!, %% --- *)
+
+  and lower_printf ?expect whole name args =
+    let loc = whole.exp_loc in
+    match args with
+    | fmt :: rest ->
+        let text =
+          let rec find e =
+            match e.exp_desc with
+            | Texp_construct (_, cd, [ _; s ]) when cd.Types.cstr_name = "Format" ->
+                (match s.exp_desc with Texp_constant (Asttypes.Const_string (t, _, _)) -> t | _ -> find s)
+            | _ -> unsupported loc "printf format"
+          in
+          find fmt
+        in
+        (* the arguments are evaluated right to left *)
+        let lowered = List.map (fun a -> let ss, x, _ = lower a in (ss, x)) rest in
+        let stmts, xs = schedule (List.rev lowered) in
+        let xs = ref (List.rev xs) in
+        let next () = match !xs with x :: r -> xs := r; x | [] -> unsupported loc "printf arguments" in
+        let pieces = ref [] and buf = Buffer.create 16 and flush = ref false in
+        let lit () = if Buffer.length buf > 0 then (pieces := Atom (string_lit (Buffer.contents buf)) :: !pieces; Buffer.clear buf) in
+        let n = String.length text in
+        let i = ref 0 in
+        while !i < n do
+          (if text.[!i] = '%' && !i + 1 < n then begin
+             (match text.[!i + 1] with
+              | 's' -> lit (); pieces := next () :: !pieces
+              | 'd' | 'i' -> lit (); pieces := Call (Atom "@lib.string_of_int", [ next () ]) :: !pieces
+              | '!' -> flush := true
+              | '%' -> Buffer.add_char buf '%'
+              | c -> unsupported loc "printf conversion %%%c" c);
+             i := !i + 2
+           end else (Buffer.add_char buf text.[!i]; incr i))
+        done;
+        lit ();
+        let str = match List.rev !pieces with [] -> Atom "\"\"" | p :: ps -> List.fold_left (fun a b -> Binop ("+", a, b)) p ps in
+        if name = "Printf.sprintf" || name = "Format.sprintf" then adapt_to ?expect (stmts, str, M.Named ("String", []))
+        else
+          let out = if name = "Printf.printf" then "@pp.print_string" else "@pp.std_formatter.print_string" in
+          let calls = [ Do (Call (Atom out, [ str ])) ] @ (if !flush then [ Do (Call (Atom (if name = "Printf.printf" then "@pp.flush_stdout_backlog" else "@pp.std_formatter.print_flush"), [])) ] else []) in
+          (stmts, Blk (calls, Atom "()"), M.Named ("Unit", []))
+    | [] -> unsupported loc "printf"
 
   (* --- lib.ml combinators: o, I, K, C, W, F_F --- *)
 
@@ -1090,6 +1195,7 @@ module Lower = struct
     | "Failure", [ a ] -> let ss, x, _ = lower a in (ss, Call (Atom "Failure", [ x ]), mty_of e.exp_type)
     | "Noparse", [] -> ([], Atom "@parser.Noparse", mty_of e.exp_type)
     | "Unchanged", [] -> ([], Atom "@lib.Unchanged", mty_of e.exp_type)
+    | "Not_found", [] -> ([], Atom "@lib.NotFound", mty_of e.exp_type)
     | name, [] when Hashtbl.mem own_ctors name -> ([], Atom (ctor_name name), mty_of e.exp_type)
     | name, args when Hashtbl.mem own_ctors name ->
         (* constructor arguments are evaluated right to left *)
@@ -1122,9 +1228,13 @@ module Lower = struct
                (* one tuple parameter spread over the group only when the
                   OCaml function does not take k curried parameters *)
                let rec arity t n = if n = 0 then 0 else match arrow t with Some (_, b) -> 1 + arity b (n - 1) | None -> 0 in
+               (* spread when the OCaml parameter is a k-tuple and the
+                  first MoonBit parameter is not itself such a tuple *)
+               ignore arity;
                let tuple_mode =
-                 k > 1 && arity f.exp_type k < k
+                 k > 1
                  && (match oty_param with Some a -> tuple_size a = k | None -> false)
+                 && (match List.hd g with M.Tuple ts -> List.length ts <> k | _ -> true)
                in
                if tuple_mode || k <= 1 then begin
                  (* one OCaml parameter *)
@@ -1475,7 +1585,8 @@ module Lower = struct
            | "Failure", [ a ] -> "Failure(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
            | "Noparse", [] -> "@parser.Noparse"
            | "Unchanged", [] -> "@lib.Unchanged"
-           | "Match_failure", _ -> "@lib.MatchFailure(_)"
+           | "Not_found", [] -> "@lib.NotFound"
+           | "Match_failure", [ { pat_desc = Tpat_any; _ } ] -> "@lib.MatchFailure(_)"
            | name, [] when Hashtbl.mem own_ctors name -> ctor_name name
            | name, args when Hashtbl.mem own_ctors name ->
                ctor_name name ^ "(" ^ String.concat ", " (List.map (fun a -> pattern a) args) ^ ")"

@@ -20,11 +20,26 @@ module Prov = struct
     | (p, vd) -> Hashtbl.replace table (Path.name p) (file, name); !on_record name vd
     | exception Not_found -> ()
 
-  (* a member of a toplevel module: `Meson.x` *)
-  let record_dotted file modname name =
-    match Env.find_value_by_name (Longident.Ldot (Longident.Lident modname, name)) !Toploop.toplevel_env with
-    | (p, vd) -> Hashtbl.replace table (Path.name p) (file, name); !on_record name vd
+  (* a member of a toplevel (possibly nested) module: `Meson.x`,
+     `Utils.List.take` *)
+  let record_dotted_lid file lid name =
+    match Env.find_value_by_name (Longident.Ldot (lid, name)) !Toploop.toplevel_env with
+    | (p, vd) ->
+        (* the qualified name, e.g. `Utils.List.take` *)
+        let qname = String.concat "." (Longident.flatten lid) ^ "." ^ name in
+        Hashtbl.replace table (Path.name p) (file, qname); !on_record name vd
     | exception Not_found -> ()
+
+  let rec record_module file lid (sg : Types.signature) =
+    List.iter
+      (function
+        | Types.Sig_value (id, _, _) -> record_dotted_lid file lid (Ident.name id)
+        | Types.Sig_module (mid, _, { Types.md_type = Types.Mty_signature sg'; _ }, _, _) ->
+            record_module file (Longident.Ldot (lid, Ident.name mid)) sg'
+        | _ -> ())
+      sg
+
+  let record_dotted file modname name = record_dotted_lid file (Longident.Lident modname) name
 
   let lookup path =
     match path with
@@ -79,12 +94,7 @@ module Loader = struct
                 match item.Typedtree.str_desc with
                 | Typedtree.Tstr_module { Typedtree.mb_id = Some mid; mb_expr; _ } ->
                     (match mb_expr.Typedtree.mod_type with
-                     | Types.Mty_signature sg ->
-                         List.iter
-                           (function
-                             | Types.Sig_value (id, _, _) -> Prov.record_dotted base (Ident.name mid) (Ident.name id)
-                             | _ -> ())
-                           sg
+                     | Types.Mty_signature sg -> Prov.record_module base (Longident.Lident (Ident.name mid)) sg
                      | _ -> ())
                 | _ -> ())
               tstr.Typedtree.str_items
@@ -142,11 +152,24 @@ module Names = struct
     && (try ignore (Env.find_value_by_name (Longident.Lident l) !Toploop.toplevel_env); true
         with Not_found -> false)
 
+  (* An operator's MoonBit name: `%>` is `op_percent_gt`. *)
+  let op_name name =
+    let word = function
+      | '%' -> "percent" | '>' -> "gt" | '<' -> "lt" | '=' -> "eq" | '|' -> "bar"
+      | '&' -> "amp" | '+' -> "plus" | '-' -> "minus" | '*' -> "star" | '/' -> "slash"
+      | '@' -> "at" | '^' -> "caret" | '!' -> "bang" | '?' -> "q" | '~' -> "tilde"
+      | '.' -> "dot" | ':' -> "colon" | '$' -> "dollar" | '#' -> "hash" | c -> String.make 1 c
+    in
+    let is_op = name <> "" && String.for_all (fun c -> not ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c = '_' || c = '\'')) name in
+    if is_op then Some ("op_" ^ String.concat "_" (List.map word (List.init (String.length name) (String.get name))))
+    else None
+
   let candidates name =
     let base =
       String.map (fun c -> if c = '\'' then '_' else c) (String.lowercase_ascii name)
     in
     (match special name with Some s -> [s] | None -> [])
+    @ (match op_name name with Some s -> [ s ] | None -> [])
     @ (if lowercase_taken name then [] else [ base ])
     @ [ base ^ "_rule"; base ^ "_thm"; base ^ "_conv"; base ^ "_tac";
         base ^ "_tcl"; base ^ "_" ]
@@ -161,8 +184,10 @@ module Names = struct
     | Some "kernel" -> [ "kernel"; "basics" ]
     | Some p -> [ p ]
 
-  (* The MoonBit package and declaration for an upstream value. *)
+  (* The MoonBit package and declaration for an upstream value (a module
+     member's qualified name resolves by its last component). *)
   let resolve file name =
+    let name = match String.rindex_opt name '.' with Some i when i > 0 && i < String.length name - 1 -> String.sub name (i + 1) (String.length name - i - 1) | _ -> name in
     let rec go_pkgs = function
       | [] -> None
       | pkg :: pkgs ->

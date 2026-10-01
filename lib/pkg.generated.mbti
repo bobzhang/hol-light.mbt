@@ -75,6 +75,10 @@ pub fn[A] flat(@list.List[@list.List[A]]) -> @list.List[A]
 
 pub fn[A, B, C] flip((A, B) -> C raise?, B, A) -> C raise?
 
+pub fn[A, B] fold_left((A, B) -> A raise?, A, @list.List[B]) -> A raise?
+
+pub fn[A, B, C] fold_left_map((A, B) -> (A, C) raise?, A, @list.List[B]) -> (A, @list.List[C]) raise?
+
 pub fn[K, V, A] foldl((A, K, V) -> A raise?, A, Func[K, V]) -> A raise?
 
 pub fn[K, V, A] foldr((K, V, A) -> A raise?, Func[K, V], A) -> A raise?
@@ -120,6 +124,8 @@ pub fn[A, B] konst(A, B) -> A
 pub fn[A] last(@list.List[A]) -> A raise
 
 pub fn[A] length(@list.List[A]) -> Int
+
+pub fn[A : OCompare, B] list_assoc(A, @list.List[(A, B)]) -> B raise
 
 pub fn[A, B] map((A) -> B raise?, @list.List[A]) -> @list.List[B] raise?
 
@@ -168,6 +174,8 @@ pub let report_sink : @ref.Ref[(String) -> Unit]
 pub let report_timing : @ref.Ref[Bool]
 
 pub fn[A] rev(@list.List[A]) -> @list.List[A]
+
+pub fn[A] rev_append(@list.List[A], @list.List[A]) -> @list.List[A]
 
 pub fn[A, B : OCompare] rev_assoc(B, @list.List[(A, B)]) -> A raise
 
@@ -238,10 +246,16 @@ pub fn warn(Bool, String) -> Unit
 pub fn[A, B] zip(@list.List[A], @list.List[B]) -> @list.List[(A, B)] raise
 
 // Errors
+pub(all) suberror AssertFailure {
+  AssertFailure(String)
+} derive(@debug.Debug)
+
 pub(all) suberror MatchFailure {
   MatchFailure(String)
 } derive(@debug.Debug)
 pub fn MatchFailure::to_repr(Self) -> @debug.Repr
+
+pub(all) suberror NotFound derive(@debug.Debug)
 
 pub(all) suberror Unchanged derive(@debug.Debug)
 pub fn Unchanged::to_repr(Self) -> @debug.Repr

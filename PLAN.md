@@ -300,5 +300,7 @@ definitions register constants, quotations advance the type-variable and
   declarations as `pub(all) enum ... derive(Eq, Debug)` with generated
   OCaml-order `OCompare`/`OHash` impls, exceptions as `suberror`s, and
   modules flattened into the package with `Module.x` provenance); MESON
-  proofs and their progress output match upstream. Next: `firstorder`,
-  `metis`, …
+  proofs and their progress output match upstream. `firstorder/` is done,
+  entirely translated (nested modules, `include List`, Stdlib `List.*`
+  mapped to lib functions with Stdlib semantics, printf with literal
+  formats, `assert`, floats, operators named `op_...`). Next: `metis`, …

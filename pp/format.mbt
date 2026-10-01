@@ -718,7 +718,9 @@ fn stdout_write(s : String) -> Unit {
 ///|
 /// Flush standard output. Output is line-based (`println`), so a partial
 /// line stays pending until its newline arrives (OCaml would show it now);
-/// `flush_stdout_partial` forces it out.
+/// `flush_stdout_partial` forces it out. Known differences: a pending
+/// partial line is lost if the program ends without printing a newline or
+/// calling `flush_stdout_partial`, and a direct `println` overtakes it.
 fn stdout_flush() -> Unit {
   flush_stdout_backlog()
 }

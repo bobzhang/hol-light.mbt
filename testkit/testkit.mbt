@@ -39,16 +39,25 @@ pub fn sthm(th : Thm) -> String {
 pub struct Log {
   priv buf : StringBuilder
   priv mut via_stdout : Bool
+  priv id : Int
 }
 
 ///|
+let log_ids : Ref[Int] = Ref::{ val: 0, }
+
+///|
+/// The log that currently captures standard output.
+let stdout_owner : Ref[Int] = Ref::{ val: -1, }
+
+///|
 pub fn Log::new() -> Log {
-  { buf: StringBuilder(), via_stdout: false, }
+  log_ids.val += 1
+  { buf: StringBuilder(), via_stdout: false, id: log_ids.val, }
 }
 
 ///|
 pub fn Log::out(self : Log, s : String) -> Unit {
-  if self.via_stdout {
+  if self.via_stdout && stdout_owner.val == self.id {
     // share the stdout channel, so a pending partial line comes first
     @pp.print_string(s + "\n")
   } else {
@@ -74,7 +83,7 @@ pub fn Log::attempt(self : Log, name : String, f : () -> String raise) -> Unit {
 
 ///|
 pub fn Log::contents(self : Log) -> String {
-  if self.via_stdout {
+  if self.via_stdout && stdout_owner.val == self.id {
     @pp.flush_stdout_partial()
   }
   self.buf.to_string()
@@ -94,6 +103,7 @@ pub fn Log::capture_stdout(self : Log) -> Unit {
   @pp.flush_stdout_backlog()
   @pp.stdout_sink.val = s => self.buf.write_string(s + "\n")
   self.via_stdout = true
+  stdout_owner.val = self.id
 }
 
 ///|

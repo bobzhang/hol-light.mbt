@@ -12,6 +12,7 @@ module Main = struct
     | "trivia.ml" -> ("trivia/trivia.mbt", [])
     | "canon.ml" -> ("canon/canon.mbt", [])
     | "meson.ml" -> ("meson/meson.mbt", [])
+    | "firstorder.ml" -> ("firstorder/firstorder.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =
@@ -19,7 +20,17 @@ module Main = struct
     Names.root := root;
     Lower.current_file := target;
     Lower.current_pkg := Filename.remove_extension (Filename.basename out);
-    List.iter (Loader.load_file ~hol) (Translator.upto target Translator.prefix);
+    List.iter
+      (fun f ->
+        (* translated packages: their types are generated with these names *)
+        let translated = (try ignore (manifest f); true with Failure _ -> false) in
+        let on_item =
+          match Names.package_of_file f with
+          | Some pkg when translated -> Emit.register pkg
+          | _ -> fun _ -> ()
+        in
+        Loader.load_file ~hol ~on_item f)
+      (Translator.upto target Translator.prefix);
     (* count the top-level definitions of each name *)
     List.iter
       (function

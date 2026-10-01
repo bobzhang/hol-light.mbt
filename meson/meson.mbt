@@ -325,23 +325,23 @@ pub fn inferences() -> Ref[Int] {
 
 ///|
 /// `mk_negated`
-pub fn[A : Eq + @lib.OCompare + @lib.OHash] mk_negated(
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] mk_negated(
   x1 : Int,
-  x2 : A,
-) -> (Int, A) raise {
+  x2 : TA,
+) -> (Int, TA) raise {
   let (p, a) = (x1, x2)
   (0 - p, a)
 }
 
 ///|
 /// `qpartition`
-pub fn[A : Eq + @lib.OCompare + @lib.OHash] qpartition(
-  x3 : (A) -> Bool raise,
-  x4 : @list.List[A],
-) -> ((@list.List[A]) -> (@list.List[A], @list.List[A]) raise) raise {
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] qpartition(
+  x3 : (TA) -> Bool raise,
+  x4 : @list.List[TA],
+) -> ((@list.List[TA]) -> (@list.List[TA], @list.List[TA]) raise) raise {
   let p = x3
   let m = x4
-  fn qpartition(x6 : @list.List[A]) -> (@list.List[A], @list.List[A]) raise {
+  fn qpartition(x6 : @list.List[TA]) -> (@list.List[TA], @list.List[TA]) raise {
     let l = x6
     if physical_equal(l, m) {
       raise @lib.Unchanged
@@ -364,7 +364,7 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash] qpartition(
       }
     }
   }
-  (x7 : @list.List[A]) => {
+  (x7 : @list.List[TA]) => {
     let l_1 = x7
     qpartition(l_1) catch {
       @lib.Unchanged => (@list.empty(), l_1)
@@ -941,10 +941,10 @@ pub fn fol_eq(
 
 ///|
 /// `fol_atom_eq`
-pub fn[A : Eq + @lib.OCompare + @lib.OHash] fol_atom_eq(
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] fol_atom_eq(
   x70 : @list.List[(FolTerm, Int)],
-  x71 : (A, @list.List[FolTerm]),
-  x72 : (A, @list.List[FolTerm]),
+  x71 : (TA, @list.List[FolTerm]),
+  x72 : (TA, @list.List[FolTerm]),
 ) -> Bool raise {
   let insts = x70
   let (p1, args1) = x71
@@ -960,20 +960,20 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash] fol_atom_eq(
 ///|
 /// `cacheconts`
 pub fn[
-  A : Eq + @lib.OCompare + @lib.OHash,
-  B : Eq + @lib.OCompare + @lib.OHash,
-  C : Eq + @lib.OCompare + @lib.OHash,
-  D : Eq + @lib.OCompare + @lib.OHash,
-  E : Eq + @lib.OCompare + @lib.OHash,
+  TA : Eq + @lib.OCompare + @lib.OHash,
+  TB : Eq + @lib.OCompare + @lib.OHash,
+  TC : Eq + @lib.OCompare + @lib.OHash,
+  TD : Eq + @lib.OCompare + @lib.OHash,
+  TE : Eq + @lib.OCompare + @lib.OHash,
 ] cacheconts(
-  x75 : ((B, (C, D, E))) -> A raise,
-) -> (((B, (C, D, E))) -> A raise) raise {
+  x75 : ((TB, (TC, TD, TE))) -> TA raise,
+) -> (((TB, (TC, TD, TE))) -> TA raise) raise {
   let f = x75
   let memory = Ref::{ val: @list.empty(), }
-  (x77 : (B, (C, D, E))) => {
+  (x77 : (TB, (TC, TD, TE))) => {
     let (gg, (insts, offset, size)) as input = x77
     if @lib.exists(
-        (x78 : (B, (C, D, E))) => {
+        (x78 : (TB, (TC, TD, TE))) => {
           let (_, (insts_p, _, size_p)) = x78
           insts == insts_p &&
           (@lib.compare(size, size_p) <= 0 || meson_depth().val)
@@ -991,11 +991,14 @@ pub fn[
 
 ///|
 /// `checkan`
-pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] checkan(
+pub fn[
+  TA : Eq + @lib.OCompare + @lib.OHash,
+  TB : Eq + @lib.OCompare + @lib.OHash,
+] checkan(
   x79 : @list.List[(FolTerm, Int)],
   x80 : (Int, @list.List[FolTerm]),
-  x81 : @list.List[(Int, @list.List[((A, (Int, @list.List[FolTerm])), B)])],
-) -> @list.List[(Int, @list.List[((A, (Int, @list.List[FolTerm])), B)])] raise {
+  x81 : @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])],
+) -> @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])] raise {
   let insts = x79
   let (p, a) = x80
   let ancestors = x81
@@ -1004,7 +1007,7 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash]
   try {
     let ours = @lib.assoc(p_p, ancestors)
     if @lib.exists(
-        (x82 : ((A, (Int, @list.List[FolTerm])), B)) => {
+        (x82 : ((TA, (Int, @list.List[FolTerm])), TB)) => {
           let u = x82
           fol_atom_eq(insts, t_p, u.0.1)
         },
@@ -1022,14 +1025,14 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash]
 
 ///|
 /// `insertan`
-pub fn[A : Eq + @lib.OCompare + @lib.OHash] insertan(
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] insertan(
   x83 : @list.List[(FolTerm, Int)],
   x84 : (Int, @list.List[FolTerm]),
   x85 : @list.List[
     (
       Int,
       @list.List[
-        ((@list.List[A], (Int, @list.List[FolTerm])), (Int, @kernel.Thm)),
+        ((@list.List[TA], (Int, @list.List[FolTerm])), (Int, @kernel.Thm)),
       ],
     ),
   ],
@@ -1037,7 +1040,7 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash] insertan(
   (
     Int,
     @list.List[
-      ((@list.List[A], (Int, @list.List[FolTerm])), (Int, @kernel.Thm)),
+      ((@list.List[TA], (Int, @list.List[FolTerm])), (Int, @kernel.Thm)),
     ],
   ),
 ] raise {
@@ -1051,7 +1054,7 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash] insertan(
       x86 : (
         Int,
         @list.List[
-          ((@list.List[A], (Int, @list.List[FolTerm])), (Int, @kernel.Thm)),
+          ((@list.List[TA], (Int, @list.List[FolTerm])), (Int, @kernel.Thm)),
         ],
       ),
     ) => {
@@ -1065,7 +1068,7 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash] insertan(
   }
   let ouranc = ourancp.1
   if @lib.exists(
-      (x87 : ((@list.List[A], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))) => {
+      (x87 : ((@list.List[TA], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))) => {
         let u = x87
         fol_atom_eq(insts, t_p, u.0.1)
       },
@@ -1153,18 +1156,18 @@ pub fn separate_insts(
 ///|
 /// `meson_single_expand`
 pub fn[
-  A : Eq + @lib.OCompare + @lib.OHash,
-  B : Eq + @lib.OCompare + @lib.OHash,
-  C : Eq + @lib.OCompare + @lib.OHash,
-  D : Eq + @lib.OCompare + @lib.OHash,
-  E : Eq + @lib.OCompare + @lib.OHash,
+  TA : Eq + @lib.OCompare + @lib.OHash,
+  TB : Eq + @lib.OCompare + @lib.OHash,
+  TC : Eq + @lib.OCompare + @lib.OHash,
+  TD : Eq + @lib.OCompare + @lib.OHash,
+  TE : Eq + @lib.OCompare + @lib.OHash,
 ] meson_single_expand(
   x99 : Int,
-  x100 : ((@list.List[FolAtom], (C, @list.List[FolTerm])), D),
+  x100 : ((@list.List[FolAtom], (TC, @list.List[FolTerm])), TD),
   x101 : (
     (
-      (E, @list.List[FolTerm]),
-      @list.List[(Int, @list.List[((A, (Int, @list.List[FolTerm])), B)])],
+      (TE, @list.List[FolTerm]),
+      @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])],
     ),
     (@list.List[(FolTerm, Int)], Int, Int),
   ),
@@ -1172,7 +1175,7 @@ pub fn[
   @list.List[
     (
       (Int, @list.List[FolTerm]),
-      @list.List[(Int, @list.List[((A, (Int, @list.List[FolTerm])), B)])],
+      @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])],
     ),
   ],
   (@list.List[(FolTerm, Int)], Int, Int),
@@ -1192,7 +1195,7 @@ pub fn[
   let (locin, globin) = separate_insts(offset, insts, allins)
   let mk_ihyp : (FolAtom) -> (
     (Int, @list.List[FolTerm]),
-    @list.List[(Int, @list.List[((A, (Int, @list.List[FolTerm])), B)])],
+    @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])],
   ) raise = (x105 : FolAtom) => {
     let h = x105
     let h_p = fol_inst_bump(offset, locin, h)
@@ -1210,40 +1213,40 @@ pub fn[
 ///|
 /// `meson_expand_cont`
 pub fn[
-  A : Eq + @lib.OCompare + @lib.OHash,
-  B : Eq + @lib.OCompare + @lib.OHash,
-  C : Eq + @lib.OCompare + @lib.OHash,
-  D : Eq + @lib.OCompare + @lib.OHash,
-  E : Eq + @lib.OCompare + @lib.OHash,
-  F : Eq + @lib.OCompare + @lib.OHash,
+  TA : Eq + @lib.OCompare + @lib.OHash,
+  TB : Eq + @lib.OCompare + @lib.OHash,
+  TC : Eq + @lib.OCompare + @lib.OHash,
+  TD : Eq + @lib.OCompare + @lib.OHash,
+  TE : Eq + @lib.OCompare + @lib.OHash,
+  TF : Eq + @lib.OCompare + @lib.OHash,
 ] meson_expand_cont(
   x107 : Int,
-  x108 : @list.List[((@list.List[FolAtom], (B, @list.List[FolTerm])), C)],
+  x108 : @list.List[((@list.List[FolAtom], (TB, @list.List[FolTerm])), TC)],
   x109 : (
     (
-      (D, @list.List[FolTerm]),
-      @list.List[(Int, @list.List[((E, (Int, @list.List[FolTerm])), F)])],
+      (TD, @list.List[FolTerm]),
+      @list.List[(Int, @list.List[((TE, (Int, @list.List[FolTerm])), TF)])],
     ),
     (@list.List[(FolTerm, Int)], Int, Int),
   ),
-  x110 : (C) -> ((
+  x110 : (TC) -> ((
     (
       @list.List[
         (
           (Int, @list.List[FolTerm]),
-          @list.List[(Int, @list.List[((E, (Int, @list.List[FolTerm])), F)])],
+          @list.List[(Int, @list.List[((TE, (Int, @list.List[FolTerm])), TF)])],
         ),
       ],
       (@list.List[(FolTerm, Int)], Int, Int),
     ),
-  ) -> A raise) raise,
-) -> A raise {
+  ) -> TA raise) raise,
+) -> TA raise {
   let loffset = x107
   let rules = x108
   let state = x109
   let cont = x110
   @lib.tryfind(
-    (x111 : ((@list.List[FolAtom], (B, @list.List[FolTerm])), C)) => {
+    (x111 : ((@list.List[FolAtom], (TB, @list.List[FolTerm])), TC)) => {
       let r = x111
       let t112 = meson_single_expand(loffset, r, state)
       cont(r.1)(t112)
@@ -1254,12 +1257,15 @@ pub fn[
 
 ///|
 /// `meson_expand`
-pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] meson_expand(
+pub fn[
+  TA : Eq + @lib.OCompare + @lib.OHash,
+  TB : Eq + @lib.OCompare + @lib.OHash,
+] meson_expand(
   x113 : @list.List[
     (
       Int,
       @list.List[
-        ((@list.List[FolAtom], (B, @list.List[FolTerm])), (Int, @kernel.Thm)),
+        ((@list.List[FolAtom], (TB, @list.List[FolTerm])), (Int, @kernel.Thm)),
       ],
     ),
   ],
@@ -1300,8 +1306,8 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash]
       ],
       (@list.List[(FolTerm, Int)], Int, Int),
     ),
-  ) -> A raise) raise,
-) -> A raise {
+  ) -> TA raise) raise,
+) -> TA raise {
   let rules = x113
   let ((g, ancestors), (insts, offset, size) as tup) = x114
   let cont = x115
@@ -1322,7 +1328,7 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash]
         let crules = @lib.filter(
           (
             x116 : (
-              (@list.List[FolAtom], (B, @list.List[FolTerm])),
+              (@list.List[FolAtom], (TB, @list.List[FolTerm])),
               (Int, @kernel.Thm),
             ),
           ) => {
@@ -1343,12 +1349,15 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash]
 
 ///|
 /// `expand_goal`
-pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] expand_goal(
+pub fn[
+  TA : Eq + @lib.OCompare + @lib.OHash,
+  TB : Eq + @lib.OCompare + @lib.OHash,
+] expand_goal(
   x117 : @list.List[
     (
       Int,
       @list.List[
-        ((@list.List[FolAtom], (B, @list.List[FolTerm])), (Int, @kernel.Thm)),
+        ((@list.List[FolAtom], (TB, @list.List[FolTerm])), (Int, @kernel.Thm)),
       ],
     ),
   ],
@@ -1368,8 +1377,8 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash]
     ],
   ),
 ) -> ((Int) -> ((Int) -> ((
-  ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> A raise,
-) -> A raise) raise) raise) raise) raise {
+  ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
+) -> TA raise) raise) raise) raise) raise {
   let rules = x117
   let expand_goal = (
     x119 : Int,
@@ -1390,7 +1399,7 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash]
       ),
       (@list.List[(FolTerm, Int)], Int, Int),
     ),
-    x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> A raise,
+    x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
   ) => expand_goal_l(rules, x119, x120, x121)
   let expand_goals = (
     x126 : Int,
@@ -1413,7 +1422,7 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash]
       ],
       (@list.List[(FolTerm, Int)], Int, Int),
     ),
-    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> A raise,
+    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
   ) => expand_goals_l(rules, x126, x127, x128)
   (
     x139 : (
@@ -1436,7 +1445,7 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash]
       let maxdep = x140
       (x141 : Int) => {
         let maxinf = x141
-        (x142 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> A raise) => {
+        (x142 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise) => {
           let cont_2 = x142
           expand_goal(
             maxdep,
@@ -1450,12 +1459,12 @@ pub fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash]
 }
 
 ///|
-fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] expand_goal_l(
+fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] expand_goal_l(
   rules : @list.List[
     (
       Int,
       @list.List[
-        ((@list.List[FolAtom], (B, @list.List[FolTerm])), (Int, @kernel.Thm)),
+        ((@list.List[FolAtom], (TB, @list.List[FolTerm])), (Int, @kernel.Thm)),
       ],
     ),
   ],
@@ -1477,8 +1486,8 @@ fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] exp
     ),
     (@list.List[(FolTerm, Int)], Int, Int),
   ),
-  x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> A raise,
-) -> A raise {
+  x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
+) -> TA raise {
   let expand_goal = (
     x119 : Int,
     x120 : (
@@ -1498,7 +1507,7 @@ fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] exp
       ),
       (@list.List[(FolTerm, Int)], Int, Int),
     ),
-    x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> A raise,
+    x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
   ) => expand_goal_l(rules, x119, x120, x121)
   let expand_goals = (
     x126 : Int,
@@ -1521,7 +1530,7 @@ fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] exp
       ],
       (@list.List[(FolTerm, Int)], Int, Int),
     ),
-    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> A raise,
+    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
   ) => expand_goals_l(rules, x126, x127, x128)
   let depth = x119
   let ((g, _), (insts, offset, size)) as state = x120
@@ -1579,12 +1588,12 @@ fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] exp
 }
 
 ///|
-fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] expand_goals_l(
+fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] expand_goals_l(
   rules : @list.List[
     (
       Int,
       @list.List[
-        ((@list.List[FolAtom], (B, @list.List[FolTerm])), (Int, @kernel.Thm)),
+        ((@list.List[FolAtom], (TB, @list.List[FolTerm])), (Int, @kernel.Thm)),
       ],
     ),
   ],
@@ -1608,8 +1617,8 @@ fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] exp
     ],
     (@list.List[(FolTerm, Int)], Int, Int),
   ),
-  x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> A raise,
-) -> A raise {
+  x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
+) -> TA raise {
   let expand_goal = (
     x119 : Int,
     x120 : (
@@ -1629,7 +1638,7 @@ fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] exp
       ),
       (@list.List[(FolTerm, Int)], Int, Int),
     ),
-    x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> A raise,
+    x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
   ) => expand_goal_l(rules, x119, x120, x121)
   let expand_goals = (
     x126 : Int,
@@ -1652,7 +1661,7 @@ fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] exp
       ],
       (@list.List[(FolTerm, Int)], Int, Int),
     ),
-    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> A raise,
+    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
   ) => expand_goals_l(rules, x126, x127, x128)
   let depth_1 = x126
   let (gl, (insts_1, offset_1, size_1) as tup) = x127
@@ -1753,12 +1762,12 @@ fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] exp
 
 ///|
 /// `solve_goal`
-pub fn[A : Eq + @lib.OCompare + @lib.OHash] solve_goal(
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] solve_goal(
   x143 : @list.List[
     (
       Int,
       @list.List[
-        ((@list.List[FolAtom], (A, @list.List[FolTerm])), (Int, @kernel.Thm)),
+        ((@list.List[FolAtom], (TA, @list.List[FolTerm])), (Int, @kernel.Thm)),
       ],
     ),
   ],
@@ -2102,13 +2111,13 @@ pub fn fol_of_hol_clauses(
 }
 
 ///|
-fn[C : Eq + @lib.OCompare + @lib.OHash, D : Eq + @lib.OCompare + @lib.OHash] mk_contraposes_l(
+fn[TC : Eq + @lib.OCompare + @lib.OHash, TD : Eq + @lib.OCompare + @lib.OHash] mk_contraposes_l(
   x157 : Int,
-  x158 : D,
-  x159 : @list.List[(Int, C)],
-  x160 : @list.List[(Int, C)],
-  x161 : @list.List[((@list.List[(Int, C)], (Int, C)), (Int, D))],
-) -> @list.List[((@list.List[(Int, C)], (Int, C)), (Int, D))] raise {
+  x158 : TD,
+  x159 : @list.List[(Int, TC)],
+  x160 : @list.List[(Int, TC)],
+  x161 : @list.List[((@list.List[(Int, TC)], (Int, TC)), (Int, TD))],
+) -> @list.List[((@list.List[(Int, TC)], (Int, TC)), (Int, TD))] raise {
   let n = x157
   let th = x158
   let used = x159
@@ -2120,7 +2129,7 @@ fn[C : Eq + @lib.OCompare + @lib.OHash, D : Eq + @lib.OCompare + @lib.OHash] mk_
       let nw = (
         (
           @lib.map(
-            (x162 : (Int, C)) => mk_negated(x162.0, x162.1),
+            (x162 : (Int, TC)) => mk_negated(x162.0, x162.1),
             used.concat(t),
           ),
           h,
@@ -3209,10 +3218,10 @@ pub fn poly_assume_tac(
 }
 
 ///|
-fn[A : Eq + @lib.OCompare + @lib.OHash] uniq_p_l(
-  x344 : (A) -> ((A) -> Bool raise) raise,
-  x345 : @list.List[A],
-) -> @list.List[A] raise {
+fn[TA : Eq + @lib.OCompare + @lib.OHash] uniq_p_l(
+  x344 : (TA) -> ((TA) -> Bool raise) raise,
+  x345 : @list.List[TA],
+) -> @list.List[TA] raise {
   let eq = x344
   let l = x345
   match l {

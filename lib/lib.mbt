@@ -1373,3 +1373,84 @@ pub fn string_of_int(n : Int) -> String {
 pub fn[T] raise_error(e : Error) -> T raise {
   raise e
 }
+
+///|
+/// OCaml's `Assert_failure` (raised by translated `assert`), with the
+/// source position.
+pub(all) suberror AssertFailure {
+  AssertFailure(String)
+} derive(Debug)
+
+// ---------------------------------------------------------------------------
+// Stdlib List functions with OCaml's semantics (for translated code).
+// ---------------------------------------------------------------------------
+
+///|
+/// OCaml's `Not_found`.
+pub(all) suberror NotFound derive(Debug)
+
+///|
+/// `List.assoc`: raises `Not_found` (HOL's `assoc` fails instead).
+pub fn[A : OCompare, B] list_assoc(a : A, l : @list.List[(A, B)]) -> B raise {
+  let mut l = l
+  while true {
+    match l {
+      Empty => raise NotFound
+      More((k, v), tail=t) => {
+        if k.ocompare(a) == 0 {
+          return v
+        }
+        l = t
+      }
+    }
+  }
+  raise NotFound
+}
+
+///|
+/// `List.fold_left f acc l`
+pub fn[A, B] fold_left(
+  f : (A, B) -> A raise?,
+  acc : A,
+  l : @list.List[B],
+) -> A raise? {
+  let mut acc = acc
+  let mut l = l
+  while true {
+    match l {
+      Empty => return acc
+      More(x, tail=t) => {
+        acc = f(acc, x)
+        l = t
+      }
+    }
+  }
+  acc
+}
+
+///|
+/// `List.fold_left_map f acc l`
+pub fn[A, B, C] fold_left_map(
+  f : (A, B) -> (A, C) raise?,
+  acc : A,
+  l : @list.List[B],
+) -> (A, @list.List[C]) raise? {
+  let mut acc = acc
+  let out = []
+  for x in l {
+    let (acc1, y) = f(acc, x)
+    acc = acc1
+    out.push(y)
+  }
+  (acc, @list.List(out))
+}
+
+///|
+/// `List.rev_append l1 l2`
+pub fn[A] rev_append(l1 : @list.List[A], l2 : @list.List[A]) -> @list.List[A] {
+  let mut acc = l2
+  for x in l1 {
+    acc = acc.prepend(x)
+  }
+  acc
+}

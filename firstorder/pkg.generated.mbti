@@ -1,0 +1,95 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/firstorder"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/meson",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] concat_map((TB) -> @list.List[TA] raise, @list.List[TB]) -> @list.List[TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] cons(TA, @list.List[TA]) -> @list.List[TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] const_(TA, TB) -> TA raise
+
+pub fn copverb() -> @ref.Ref[Bool]
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] exists_unique((TA) -> Bool raise, @list.List[TA]) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] filter_map((TB) -> TA? raise, @list.List[TB]) -> @list.List[TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] findi((Int) -> ((TA) -> Bool raise) raise, @list.List[TA]) -> (Int, TA) raise
+
+pub fn fol_of_atom(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> (Int, @list.List[@meson.FolTerm]) raise
+
+pub fn fol_of_const(@kernel.Term) -> Int raise
+
+pub fn fol_of_form(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> @meson.FolForm raise
+
+pub fn fol_of_hol_clauses(@list.List[@kernel.Thm]) -> @list.List[(Int, @list.List[((@list.List[(Int, @list.List[@meson.FolTerm])], (Int, @list.List[@meson.FolTerm])), (Int, @kernel.Thm))])] raise
+
+pub fn fol_of_literal(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> (Int, @list.List[@meson.FolTerm]) raise
+
+pub fn fol_of_term(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> @meson.FolTerm raise
+
+pub fn fol_of_var(@kernel.Term) -> Int raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash, TC : Eq + @lib.OCompare + @lib.OHash] fold_left_map((TA) -> ((TC) -> (TA, TB) raise) raise, TA) -> ((@list.List[TC]) -> (TA, @list.List[TB]) raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash, TC : Eq + @lib.OCompare + @lib.OHash] fold_map((TA) -> ((TC) -> (TA, TB) raise) raise, TA, @list.List[TC]) -> (TA, @list.List[TB]) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] fold_right1((TA) -> ((TA) -> TA raise) raise, @list.List[TA]) -> TA raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash, TC : Eq + @lib.OCompare + @lib.OHash] fold_right_map((TA) -> ((TC) -> (TA, TB) raise) raise, TA, @list.List[TC]) -> (TA, @list.List[TB]) raise
+
+pub fn fsum(@list.List[Double]) -> Double raise
+
+pub fn hol_of_atom(Int, @list.List[@meson.FolTerm]) -> @kernel.Term raise
+
+pub fn hol_of_const(Int) -> @kernel.Term raise
+
+pub fn hol_of_literal(Int, @list.List[@meson.FolTerm]) -> @kernel.Term raise
+
+pub fn hol_of_term(@kernel.HolType, @meson.FolTerm) -> @kernel.Term raise
+
+pub fn hol_of_var(Int) -> ((@kernel.HolType) -> @kernel.Term raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] insert_at(Int, TA, @list.List[TA]) -> @list.List[TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] last(@list.List[TA]) -> TA raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] list_rest(@list.List[TA]) -> @list.List[(TA, (@list.List[TA], @list.List[TA]))] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] mapn((TB) -> TA raise, (TB, TB)) -> (TA, TA) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] nth_rest(Int) -> ((@list.List[TA]) -> (TA, (@list.List[TA], @list.List[TA])) raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] op_gt_gt_eq(TB?, (TB) -> TA? raise) -> TA? raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash, TC : Eq + @lib.OCompare + @lib.OHash] op_percent((TB) -> TA raise, (TC) -> TB raise, TC) -> TA raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash, TC : Eq + @lib.OCompare + @lib.OHash] op_percent_gt((TC) -> TB raise, (TB) -> TA raise, TC) -> TA raise
+
+pub fn reset_consts(Unit) -> Unit raise
+
+pub fn reset_vars(Unit) -> Unit raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] take(Int, @list.List[TA]) -> @list.List[TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] take_drop(Int) -> ((@list.List[TA]) -> (@list.List[TA], @list.List[TA]) raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] union1(@list.List[TA], @list.List[TA]) -> @list.List[TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] union2(@list.List[TA], @list.List[TA]) -> @list.List[TA] raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
