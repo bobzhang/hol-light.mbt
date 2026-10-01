@@ -1,0 +1,66 @@
+genvar = [_1:'A; _0:bool]
+dest_fun_ty = 'Abool
+dest_fun_ty_bad ! dest_fun_ty
+occurs_in = truefalse
+tysubst = fun(num,fun('B,bool))
+list_mk_comb = ((f:fun('A,fun('A,'A)) x:'A) y:'A)
+list_mk_comb_bad ! mk_comb: types do not agree
+list_mk_abs = (\x:'A. (\y:'A. ((f:fun('A,fun('A,'A)) x:'A) y:'A)))
+strip_comb = f:fun('A,fun('A,'A))[x:'A; y:'A]
+strip_abs = [x:'A; y:'A]x:'A
+variants = [x'':'A; x''':'A; y:'A]
+variables = [y:'A; g:fun('A,'A); x:'A; f:fun('A,fun('A,'A)); z:'A]
+subst = (\y':'A. ((f:fun('A,fun('A,'A)) y:'A) y':'A))
+subst_capture = (\y':'A. ((f:fun('A,fun('A,'A)) (g:fun('A,'A) (g:fun('A,'A) y:'A))) y':'A))
+subst_noop = (\y:'A. ((f:fun('A,fun('A,'A)) (g:fun('A,'A) x:'A)) y:'A))
+alpha = (\z:'A. (g:fun('A,'A) z:'A))
+alpha_bad ! alpha: Invalid new variable
+type_match = [bool/'B; num/'A]
+type_match_bad ! type_match
+type_match_bad2 ! type_match
+mk_mconst = #!:fun(fun(num,bool),bool)
+mk_mconst_bad ! mk_const: generic type cannot be instantiated
+mk_icomb = (#!:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) p:bool)))
+mk_icomb_nonfun !! Match_failure
+list_mk_icomb = ((#CONS:fun(num,fun(fun(num,num),fun(num,num))) n:num) #NIL:fun(num,num))
+thm_frees = [g:fun('A,'A); x:'A; y:'A]
+free_in = true,false,false
+find_term = f:fun('A,fun('A,'A))
+find_term_bad ! find_term
+find_terms = [y:'A; x:'A; g:fun('A,'A); (g:fun('A,'A) x:'A); f:fun('A,fun('A,'A)); (f:fun('A,fun('A,'A)) (g:fun('A,'A) x:'A)); ((f:fun('A,fun('A,'A)) (g:fun('A,'A) x:'A)) y:'A)]
+conjuncts = [((#==>:fun(bool,fun(bool,bool)) p:bool) q:bool); ((#\/:fun(bool,fun(bool,bool)) q:bool) r:bool); (#~:fun(bool,bool) p:bool)]
+disjuncts = [p:bool; q:bool; r:bool; p:bool]
+binops = [((#==>:fun(bool,fun(bool,bool)) p:bool) q:bool); ((#\/:fun(bool,fun(bool,bool)) q:bool) r:bool); (#~:fun(bool,bool) p:bool)]
+dest_imp = p:boolq:bool
+dest_imp_bad ! dest_binary
+dest_neg = p:bool
+dest_neg_bad ! dest_neg
+strip_forall = [x:'A](#?:fun(fun('A,bool),bool) (\y:'A. ((#=:fun('A,fun('A,bool)) x:'A) y:'A)))
+strip_exists = [y:'A]((#=:fun('A,fun('A,bool)) x:'A) y:'A)
+is_forall = truefalse
+dest_numeral = 0,1,2,5,1000000
+dest_numeral_bad ! dest_numeral
+dest_list = [n:num; m:num]
+dest_list_bad ! dest_list
+is_list = truefalse
+mk_gabs_var = (\x:'A. ((f:fun('A,fun('A,'A)) x:'A) y:'A))
+mk_gabs = (#GABS:fun(fun(fun('A,'A),bool),fun('A,'A)) (\f:fun('A,'A). (#!:fun(fun(fun('A,'A),bool),bool) (\g:fun('A,'A). (#!:fun(fun('A,bool),bool) (\x:'A. ((#GEQ:fun('A,fun('A,bool)) (f:fun('A,'A) (g:fun('A,'A) x:'A))) ((f:fun('A,fun('A,'A)) x:'A) y:'A))))))))
+dest_gabs = (g:fun('A,'A) x:'A) | ((f:fun('A,fun('A,'A)) x:'A) y:'A)
+dest_gabs_bad ! dest_gabs: Not a generalized abstraction
+strip_gabs = [(g:fun('A,'A) x:'A); y:'A] | ((f:fun('A,fun('A,'A)) x:'A) y:'A)
+mk_let = (((#LET:fun(fun('A,fun('A,'A)),fun('A,fun('A,'A))) (\x:'A. (\y:'A. (#LET_END:fun('A,'A) ((f:fun('A,fun('A,'A)) x:'A) y:'A))))) (g:fun('A,'A) z:'A)) z:'A)
+dest_let = [x:'A=(g:fun('A,'A) z:'A); y:'A=z:'A] in ((f:fun('A,fun('A,'A)) x:'A) y:'A)
+dest_let_bad ! dest_let: not a let-term
+mk_finty_needs_types ! mk_type: type 1 has not been defined
+mk_finty = 1,tybit0(1),tybit0(tybit1(1)),tybit1(tybit0(tybit1(1)))
+mk_finty_bad ! mk_finty
+dest_finty = 1,2,6,13
+make_args = [x0:'A; x1:bool; x2:'A][x':'A]
+find_path = br
+find_path_bad ! rator: Not a combination
+follow_path = y:'A
+atoms = [r:bool; ((#=:fun('A,fun('A,bool)) x:'A) y:'A); p:bool; q:bool]
+atoms_bad ! atoms: not Boolean
+mk_eq_bad ! mk_eq
+aconv = true
+genvar_after = _4:'A

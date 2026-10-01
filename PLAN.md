@@ -67,6 +67,7 @@ Upstream: `.repos/hol-light` (jrh13/hol-light @ `cba9198`), not tracked in this 
 | Evaluation order. OCaml 4.14 evaluates tuples, function arguments, constructor arguments, list literals and binary operators right to left. But `let … and …` and `match (e1, e2) with` (where the tuple is never built) go left to right. MoonBit is always left to right. | Whenever the parts have effects (fresh names, registration, exceptions), write the order out explicitly. Library callback order follows `lib.ml` exactly: `map` runs head-first, `filter`/`mapfilter` tail-first. |
 | OCaml 63-bit `int` vs MoonBit 32-bit `Int` | Use `Int` only where the range is clearly small (indexes, arities, counters). Use `Int64` where values can grow (hash values, user-visible numbers), with an audit at each port. |
 | `Hashtbl.hash` decides the tree shape of the `lib.ml` Patricia maps (`func`, `\|->`), and so their fold and `choose` order | Implement an OCaml-compatible `caml_hash` (MurmurHash3, limits 10/256) for the key types used (strings, ints, terms, types, tuples) and test it against OCaml values. Keep `Hashtbl` duplicate-binding semantics. |
+| Callback effect types | Combinators that only propagate errors take `raise?` callbacks, which accept any function value. Combinators that catch `Failure` (`can`, `repeat`, `tryfind`, `splitlist`, `find_term`, …) take `raise` callbacks, and a named non-raising function must be passed as a lambda (`t => is_var(t)`). The translator always eta-expands function arguments. |
 | Physical equality `==` | Use `physical_equal` only as a sharing optimization. Results must be structurally identical whether it returns true or false. |
 | Alpha order vs structural order | They are kept separate: `alphaorder` puts `Const < Var < Comb < Abs`, while structural `compare` uses the constructor order `Var < Const < Comb < Abs`. |
 | `Lazy` (thecops), exceptions other than `Failure` (`Unchanged`, `Noparse`, `Not_found`) | Port to `Lazy`-like explicit cells and separate `suberror`s. `can`/`try … with Failure _` catch only `Failure`. `abort` is used only for states the kernel makes impossible. |
@@ -170,3 +171,7 @@ functions, never through top-level side effects, so callers control loading.
   compare callback order. Not yet ported: `time` (needs a clock and OCaml
   float formatting) and the file helpers (`strings_of_file` etc.), which
   wait for an I/O package.
+- [ ] Phase 3: `basics/` is done (basics.ml plus the untrusted tail of
+  fusion.ml; it matches basics.ml on 79 differential checks, including
+  hash-ordered `atoms`, `genvar` counters and capture-avoiding `subst`).
+  Next: `nets`, the Format subset, `printer`, `preterm`, `parser`.

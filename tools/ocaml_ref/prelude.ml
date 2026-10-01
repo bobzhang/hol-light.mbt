@@ -2,6 +2,7 @@
 let needs (_:string) = ();;
 #use "lib.ml";;
 #use "fusion.ml";;
+#use "basics.ml";;
 
 let rec sty ty = match ty with
     Tyvar s -> "'" ^ s
@@ -18,4 +19,5 @@ let slist f l = "[" ^ String.concat "; " (map f l) ^ "]";;
 let out s = print_string s; print_newline();;
 let attempt name f = try out (name ^ " = " ^ f ()) with
     Failure s -> out (name ^ " ! " ^ s)
+  | Match_failure _ -> out (name ^ " !! Match_failure")
   | e -> out (name ^ " !! " ^ Printexc.to_string e);;

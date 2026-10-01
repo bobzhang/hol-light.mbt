@@ -1,0 +1,169 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/basics"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn aconv(@kernel.Term, @kernel.Term) -> Bool
+
+pub fn alpha(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn atoms(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn binops(@kernel.Term, @kernel.Term) -> @list.List[@kernel.Term]
+
+pub fn bndvar(@kernel.Term) -> @kernel.Term raise
+
+pub fn body(@kernel.Term) -> @kernel.Term raise
+
+pub let bty : @kernel.HolType
+
+pub fn conjuncts(@kernel.Term) -> @list.List[@kernel.Term]
+
+pub fn dest_binary(String, @kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_binder(String, @kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_binop(@kernel.Term, @kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_conj(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_cons(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_disj(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_exists(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_finty(@kernel.HolType) -> @num.Num raise
+
+pub fn dest_forall(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_fun_ty(@kernel.HolType) -> (@kernel.HolType, @kernel.HolType) raise
+
+pub fn dest_gabs(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_imp(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_let(@kernel.Term) -> (@list.List[(@kernel.Term, @kernel.Term)], @kernel.Term) raise
+
+pub fn dest_list(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn dest_neg(@kernel.Term) -> @kernel.Term raise
+
+pub fn dest_numeral(@kernel.Term) -> @num.Num raise
+
+pub fn dest_uexists(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn disjuncts(@kernel.Term) -> @list.List[@kernel.Term]
+
+pub fn equals_thm(@kernel.Thm, @kernel.Thm) -> Bool
+
+pub fn find_path((@kernel.Term) -> Bool raise, @kernel.Term) -> String raise
+
+pub fn find_term((@kernel.Term) -> Bool raise, @kernel.Term) -> @kernel.Term raise
+
+pub fn find_terms((@kernel.Term) -> Bool raise?, @kernel.Term) -> @list.List[@kernel.Term] raise?
+
+pub fn follow_path(String, @kernel.Term) -> @kernel.Term raise
+
+pub fn free_in(@kernel.Term, @kernel.Term) -> Bool
+
+pub fn genvar(@kernel.HolType) -> @kernel.Term
+
+pub fn is_binary(String, @kernel.Term) -> Bool
+
+pub fn is_binder(String, @kernel.Term) -> Bool
+
+pub fn is_binop(@kernel.Term, @kernel.Term) -> Bool
+
+pub fn is_conj(@kernel.Term) -> Bool
+
+pub fn is_cons(@kernel.Term) -> Bool
+
+pub fn is_disj(@kernel.Term) -> Bool
+
+pub fn is_eq(@kernel.Term) -> Bool
+
+pub fn is_exists(@kernel.Term) -> Bool
+
+pub fn is_forall(@kernel.Term) -> Bool
+
+pub fn is_gabs(@kernel.Term) -> Bool
+
+pub fn is_imp(@kernel.Term) -> Bool
+
+pub fn is_let(@kernel.Term) -> Bool
+
+pub fn is_list(@kernel.Term) -> Bool
+
+pub fn is_neg(@kernel.Term) -> Bool
+
+pub fn is_uexists(@kernel.Term) -> Bool
+
+pub fn list_mk_abs(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Term raise
+
+pub fn list_mk_binop(@kernel.Term, @list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn list_mk_comb(@kernel.Term, @list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn list_mk_gabs(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Term raise
+
+pub fn list_mk_icomb(String, @list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn make_args(String, @list.List[@kernel.Term], @list.List[@kernel.HolType]) -> @list.List[@kernel.Term] raise
+
+pub fn mk_binary(String, @kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_binder(String, @kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_binop(@kernel.Term, @kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_eq(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_finty(@num.Num) -> @kernel.HolType raise
+
+pub fn mk_fun_ty(@kernel.HolType, @kernel.HolType) -> @kernel.HolType raise
+
+pub fn mk_gabs(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_icomb(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_let(@list.List[(@kernel.Term, @kernel.Term)], @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_mconst(String, @kernel.HolType) -> @kernel.Term raise
+
+pub fn occurs_in(@kernel.HolType, @kernel.HolType) -> Bool
+
+pub fn strip_abs(@kernel.Term) -> (@list.List[@kernel.Term], @kernel.Term)
+
+pub fn strip_comb(@kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term])
+
+pub fn strip_exists(@kernel.Term) -> (@list.List[@kernel.Term], @kernel.Term)
+
+pub fn strip_forall(@kernel.Term) -> (@list.List[@kernel.Term], @kernel.Term)
+
+pub fn strip_gabs(@kernel.Term) -> (@list.List[@kernel.Term], @kernel.Term)
+
+pub fn subst(@list.List[(@kernel.Term, @kernel.Term)], @kernel.Term) -> @kernel.Term raise
+
+pub fn thm_frees(@kernel.Thm) -> @list.List[@kernel.Term]
+
+pub fn type_match(@kernel.HolType, @kernel.HolType, @list.List[(@kernel.HolType, @kernel.HolType)]) -> @list.List[(@kernel.HolType, @kernel.HolType)] raise
+
+pub fn tysubst(@list.List[(@kernel.HolType, @kernel.HolType)], @kernel.HolType) -> @kernel.HolType raise
+
+pub fn variables(@kernel.Term) -> @list.List[@kernel.Term]
+
+pub fn variants(@list.List[@kernel.Term], @list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
