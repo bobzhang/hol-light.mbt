@@ -1,0 +1,205 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/isum"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn admissible_isum() -> @kernel.Thm
+
+pub fn card_eq_isum() -> @kernel.Thm
+
+pub fn expand_isum_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_isum() -> @kernel.Thm
+
+pub fn int_of_real_thm(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn int_sub_pow() -> @kernel.Thm
+
+pub fn int_sub_pow_l1() -> @kernel.Thm
+
+pub fn int_sub_pow_r1() -> @kernel.Thm
+
+pub fn isum_0() -> @kernel.Thm
+
+pub fn isum_abs() -> @kernel.Thm
+
+pub fn isum_abs_bound() -> @kernel.Thm
+
+pub fn isum_abs_le() -> @kernel.Thm
+
+pub fn isum_abs_numseg() -> @kernel.Thm
+
+pub fn isum_add() -> @kernel.Thm
+
+pub fn isum_add_numseg() -> @kernel.Thm
+
+pub fn isum_add_split() -> @kernel.Thm
+
+pub fn isum_bijection() -> @kernel.Thm
+
+pub fn isum_bound() -> @kernel.Thm
+
+pub fn isum_bound_lt() -> @kernel.Thm
+
+pub fn isum_bound_lt_all() -> @kernel.Thm
+
+pub fn isum_cases() -> @kernel.Thm
+
+pub fn isum_clauses_left() -> @kernel.Thm
+
+pub fn isum_clauses_numseg() -> @kernel.Thm
+
+pub fn isum_clauses_right() -> @kernel.Thm
+
+pub fn isum_closed() -> @kernel.Thm
+
+pub fn isum_closed_nonempty() -> @kernel.Thm
+
+pub fn isum_combine_l() -> @kernel.Thm
+
+pub fn isum_combine_r() -> @kernel.Thm
+
+pub fn isum_const() -> @kernel.Thm
+
+pub fn isum_const_numseg() -> @kernel.Thm
+
+pub fn isum_delete() -> @kernel.Thm
+
+pub fn isum_delete_cases() -> @kernel.Thm
+
+pub fn isum_delta() -> @kernel.Thm
+
+pub fn isum_diff() -> @kernel.Thm
+
+pub fn isum_diffs() -> @kernel.Thm
+
+pub fn isum_eq() -> @kernel.Thm
+
+pub fn isum_eq_0() -> @kernel.Thm
+
+pub fn isum_eq_0_numseg() -> @kernel.Thm
+
+pub fn isum_eq_general() -> @kernel.Thm
+
+pub fn isum_eq_general_inverses() -> @kernel.Thm
+
+pub fn isum_eq_numseg() -> @kernel.Thm
+
+pub fn isum_eq_superset() -> @kernel.Thm
+
+pub fn isum_group() -> @kernel.Thm
+
+pub fn isum_image() -> @kernel.Thm
+
+pub fn isum_image_gen() -> @kernel.Thm
+
+pub fn isum_image_le() -> @kernel.Thm
+
+pub fn isum_image_nonzero() -> @kernel.Thm
+
+pub fn isum_incl_excl() -> @kernel.Thm
+
+pub fn isum_injection() -> @kernel.Thm
+
+pub fn isum_isum_product() -> @kernel.Thm
+
+pub fn isum_isum_restrict() -> @kernel.Thm
+
+pub fn isum_le() -> @kernel.Thm
+
+pub fn isum_le_included() -> @kernel.Thm
+
+pub fn isum_le_numseg() -> @kernel.Thm
+
+pub fn isum_lmul() -> @kernel.Thm
+
+pub fn isum_lt() -> @kernel.Thm
+
+pub fn isum_lt_all() -> @kernel.Thm
+
+pub fn isum_multicount() -> @kernel.Thm
+
+pub fn isum_multicount_gen() -> @kernel.Thm
+
+pub fn isum_neg() -> @kernel.Thm
+
+pub fn isum_offset() -> @kernel.Thm
+
+pub fn isum_offset_0() -> @kernel.Thm
+
+pub fn isum_partial_pre() -> @kernel.Thm
+
+pub fn isum_partial_suc() -> @kernel.Thm
+
+pub fn isum_pos_bound() -> @kernel.Thm
+
+pub fn isum_pos_eq_0() -> @kernel.Thm
+
+pub fn isum_pos_eq_0_numseg() -> @kernel.Thm
+
+pub fn isum_pos_le() -> @kernel.Thm
+
+pub fn isum_pos_le_numseg() -> @kernel.Thm
+
+pub fn isum_related() -> @kernel.Thm
+
+pub fn isum_related_nonempty() -> @kernel.Thm
+
+pub fn isum_restrict() -> @kernel.Thm
+
+pub fn isum_restrict_set() -> @kernel.Thm
+
+pub fn isum_rmul() -> @kernel.Thm
+
+pub fn isum_sing() -> @kernel.Thm
+
+pub fn isum_sing_numseg() -> @kernel.Thm
+
+pub fn isum_sub() -> @kernel.Thm
+
+pub fn isum_sub_numseg() -> @kernel.Thm
+
+pub fn isum_subset() -> @kernel.Thm
+
+pub fn isum_subset_simple() -> @kernel.Thm
+
+pub fn isum_superset() -> @kernel.Thm
+
+pub fn isum_support() -> @kernel.Thm
+
+pub fn isum_swap() -> @kernel.Thm
+
+pub fn isum_swap_numseg() -> @kernel.Thm
+
+pub fn isum_triv_numseg() -> @kernel.Thm
+
+pub fn isum_union() -> @kernel.Thm
+
+pub fn isum_union_eq() -> @kernel.Thm
+
+pub fn isum_union_lzero() -> @kernel.Thm
+
+pub fn isum_union_nonzero() -> @kernel.Thm
+
+pub fn isum_union_rzero() -> @kernel.Thm
+
+pub fn isum_unions_nonzero() -> @kernel.Thm
+
+pub fn isum_univ() -> @kernel.Thm
+
+pub fn isum_zero_exists() -> @kernel.Thm
+
+pub fn real_of_num_isum() -> @kernel.Thm
+
+pub fn real_of_num_isum_numseg() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
