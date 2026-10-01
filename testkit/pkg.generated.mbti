@@ -1,0 +1,29 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/testkit"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn sthm(@kernel.Thm) -> String
+
+pub fn stm(@kernel.Term) -> String
+
+pub fn sty(@kernel.HolType) -> String
+
+// Errors
+
+// Types and methods
+pub struct Log {
+  // private fields
+}
+pub fn Log::attempt(Self, String, () -> String raise) -> Unit
+pub fn Log::capture_reports(Self) -> Unit
+pub fn Log::contents(Self) -> String
+pub fn Log::new() -> Self
+pub fn Log::out(Self, String) -> Unit
+
+// Type aliases
+
+// Traits

@@ -219,5 +219,10 @@ definitions register constants, quotations advance the type-variable and
 - [ ] Phase 4: `equal/` is done (conversions as `Conv = (Term) -> Thm raise`
   closures, conversionals, depth conversions with upstream's exact `try`
   scopes, `CACHE_CONV` with OCaml closure-compare semantics in nets; it
-  matches equal.ml on 62 checks, including callback order). Next: `bool`,
-  `drule`, `tactics`, …
+  matches equal.ml on 62 checks, including callback order). `bool/` is done:
+  the first theory with `load()`. Definitions and the precomputed rule
+  theorems are in write-once cells, quotations are parsed in OCaml's
+  evaluation order, and it matches bool.ml on 79 checks, including the
+  constants, definitions, parse tables, interface and all three counters
+  after loading. `testkit/` holds the shared test helpers. Next: `drule`,
+  `tactics`, …

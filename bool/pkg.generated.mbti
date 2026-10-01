@@ -1,0 +1,152 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/bool"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn add_assum(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn and_def() -> @kernel.Thm
+
+pub fn choose_rule(@kernel.Term, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn conj(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn conj_pair(@kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn conjunct1(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn conjunct2(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn conjuncts_rule(@kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn contr(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn dest_iff(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn disch(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn disch_all(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn disj1(@kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn disj2(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn disj_cases(@kernel.Thm, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eq_imp_rule(@kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn eqf_elim(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn eqf_intro(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn eqt_elim(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn eqt_intro(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn existence(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn exists_def() -> @kernel.Thm
+
+pub fn exists_rule(@kernel.Term, @kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn exists_unique_def() -> @kernel.Thm
+
+pub fn f_def() -> @kernel.Thm
+
+pub fn forall_def() -> @kernel.Thm
+
+pub fn gen(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn gen_all(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn genl(@list.List[@kernel.Term], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn imp_antisym_rule(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn imp_def() -> @kernel.Thm
+
+pub fn imp_trans(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn is_iff(@kernel.Term) -> Bool
+
+pub fn ispec(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn ispecl(@list.List[@kernel.Term], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn list_mk_conj(@list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn list_mk_disj(@list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn list_mk_exists(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Term raise
+
+pub fn list_mk_forall(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Term raise
+
+pub fn load() -> Unit raise
+
+pub fn mk_conj(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_disj(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_exists(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_forall(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_iff(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_imp(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_neg(@kernel.Term) -> @kernel.Term raise
+
+pub fn mk_uexists(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mp(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn not_def() -> @kernel.Thm
+
+pub fn not_elim(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn not_intro(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn or_def() -> @kernel.Thm
+
+pub fn pinst(@list.List[(@kernel.HolType, @kernel.HolType)], @list.List[(@kernel.Term, @kernel.Term)], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn prove_hyp(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn set_verbose_symbols() -> Unit raise
+
+pub fn simple_choose(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn simple_disj_cases(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn simple_exists(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn spec(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn spec_all(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn spec_var(@kernel.Thm) -> (@kernel.Term, @kernel.Thm) raise
+
+pub fn specl(@list.List[@kernel.Term], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn t_def() -> @kernel.Thm
+
+pub fn truth() -> @kernel.Thm
+
+pub fn undisch(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn undisch_all(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn unset_verbose_symbols() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
