@@ -36,6 +36,7 @@ module Main = struct
     | "real.ml" -> ("real/real.mbt", [])
     | "calc_rat.ml" -> ("calc_rat/calc_rat.mbt", [])
     | "int.ml" -> ("int/int.mbt", [])
+    | "sets.ml" -> ("sets/sets.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =

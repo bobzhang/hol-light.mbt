@@ -1,0 +1,1358 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/sets"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn absorption() -> @kernel.Thm
+
+pub fn arb() -> @kernel.Thm
+
+pub fn arbitrary() -> @kernel.Thm
+
+pub fn arbitrary_intersection_of_complement() -> @kernel.Thm
+
+pub fn arbitrary_intersection_of_empty() -> @kernel.Thm
+
+pub fn arbitrary_intersection_of_idempot() -> @kernel.Thm
+
+pub fn arbitrary_intersection_of_inc() -> @kernel.Thm
+
+pub fn arbitrary_intersection_of_inter() -> @kernel.Thm
+
+pub fn arbitrary_intersection_of_inters() -> @kernel.Thm
+
+pub fn arbitrary_intersection_of_union() -> @kernel.Thm
+
+pub fn arbitrary_intersection_of_union_eq() -> @kernel.Thm
+
+pub fn arbitrary_union_of_alt() -> @kernel.Thm
+
+pub fn arbitrary_union_of_complement() -> @kernel.Thm
+
+pub fn arbitrary_union_of_empty() -> @kernel.Thm
+
+pub fn arbitrary_union_of_idempot() -> @kernel.Thm
+
+pub fn arbitrary_union_of_inc() -> @kernel.Thm
+
+pub fn arbitrary_union_of_inter() -> @kernel.Thm
+
+pub fn arbitrary_union_of_inter_eq() -> @kernel.Thm
+
+pub fn arbitrary_union_of_union() -> @kernel.Thm
+
+pub fn arbitrary_union_of_unions() -> @kernel.Thm
+
+pub fn bij() -> @kernel.Thm
+
+pub fn bijections_card_eq() -> @kernel.Thm
+
+pub fn bijections_has_size() -> @kernel.Thm
+
+pub fn bijections_has_size_eq() -> @kernel.Thm
+
+pub fn bijective_left_right_inverse() -> @kernel.Thm
+
+pub fn bijective_on_left_right_inverse() -> @kernel.Thm
+
+pub fn card() -> @kernel.Thm
+
+pub fn card_bool() -> @kernel.Thm
+
+pub fn card_clauses() -> @kernel.Thm
+
+pub fn card_cross() -> @kernel.Thm
+
+pub fn card_delete() -> @kernel.Thm
+
+pub fn card_diff() -> @kernel.Thm
+
+pub fn card_eq_0() -> @kernel.Thm
+
+pub fn card_eq_bijection() -> @kernel.Thm
+
+pub fn card_eq_bijections() -> @kernel.Thm
+
+pub fn card_eq_bijections_special() -> @kernel.Thm
+
+pub fn card_funspace() -> @kernel.Thm
+
+pub fn card_funspace_univ() -> @kernel.Thm
+
+pub fn card_image_eq_inj() -> @kernel.Thm
+
+pub fn card_image_inj() -> @kernel.Thm
+
+pub fn card_image_inj_eq() -> @kernel.Thm
+
+pub fn card_image_le() -> @kernel.Thm
+
+pub fn card_image_le2() -> @kernel.Thm
+
+pub fn card_image_lt2() -> @kernel.Thm
+
+pub fn card_le_1() -> @kernel.Thm
+
+pub fn card_le_2() -> @kernel.Thm
+
+pub fn card_le_3() -> @kernel.Thm
+
+pub fn card_le_4() -> @kernel.Thm
+
+pub fn card_le_inj() -> @kernel.Thm
+
+pub fn card_le_unions_chain() -> @kernel.Thm
+
+pub fn card_numseg_le() -> @kernel.Thm
+
+pub fn card_numseg_lt() -> @kernel.Thm
+
+pub fn card_powerset() -> @kernel.Thm
+
+pub fn card_product() -> @kernel.Thm
+
+pub fn card_psubset() -> @kernel.Thm
+
+pub fn card_psubset_eq() -> @kernel.Thm
+
+pub fn card_psubset_imp() -> @kernel.Thm
+
+pub fn card_set_of_list_le() -> @kernel.Thm
+
+pub fn card_sing() -> @kernel.Thm
+
+pub fn card_subset() -> @kernel.Thm
+
+pub fn card_subset_eq() -> @kernel.Thm
+
+pub fn card_subset_image() -> @kernel.Thm
+
+pub fn card_subset_le() -> @kernel.Thm
+
+pub fn card_union() -> @kernel.Thm
+
+pub fn card_union_eq() -> @kernel.Thm
+
+pub fn card_union_gen() -> @kernel.Thm
+
+pub fn card_union_le() -> @kernel.Thm
+
+pub fn card_union_overlap() -> @kernel.Thm
+
+pub fn card_union_overlap_eq() -> @kernel.Thm
+
+pub fn card_unions_le() -> @kernel.Thm
+
+pub fn cartesian_product() -> @kernel.Thm
+
+pub fn cartesian_product_as_restrictions() -> @kernel.Thm
+
+pub fn cartesian_product_empty() -> @kernel.Thm
+
+pub fn cartesian_product_eq() -> @kernel.Thm
+
+pub fn cartesian_product_eq_empty() -> @kernel.Thm
+
+pub fn cartesian_product_eq_members() -> @kernel.Thm
+
+pub fn cartesian_product_eq_members_eq() -> @kernel.Thm
+
+pub fn cartesian_product_sings() -> @kernel.Thm
+
+pub fn cartesian_product_sings_gen() -> @kernel.Thm
+
+pub fn cartesian_product_univ() -> @kernel.Thm
+
+pub fn cartesian_product_v1() -> @kernel.Thm
+
+pub fn choice() -> @kernel.Thm
+
+pub fn choice_def() -> @kernel.Thm
+
+pub fn choose_subset() -> @kernel.Thm
+
+pub fn choose_subset_between() -> @kernel.Thm
+
+pub fn choose_subset_eq() -> @kernel.Thm
+
+pub fn choose_subset_strong() -> @kernel.Thm
+
+pub fn compl_compl() -> @kernel.Thm
+
+pub fn component() -> @kernel.Thm
+
+pub fn countable() -> @kernel.Thm
+
+pub fn cross() -> @kernel.Thm
+
+pub fn cross_diff() -> @kernel.Thm
+
+pub fn cross_empty() -> @kernel.Thm
+
+pub fn cross_eq() -> @kernel.Thm
+
+pub fn cross_eq_empty() -> @kernel.Thm
+
+pub fn cross_inter() -> @kernel.Thm
+
+pub fn cross_inters() -> @kernel.Thm
+
+pub fn cross_inters_inters() -> @kernel.Thm
+
+pub fn cross_mono() -> @kernel.Thm
+
+pub fn cross_sing() -> @kernel.Thm
+
+pub fn cross_union() -> @kernel.Thm
+
+pub fn cross_unions() -> @kernel.Thm
+
+pub fn cross_unions_unions() -> @kernel.Thm
+
+pub fn cross_univ() -> @kernel.Thm
+
+pub fn decomposition() -> @kernel.Thm
+
+pub fn delete() -> @kernel.Thm
+
+pub fn delete_comm() -> @kernel.Thm
+
+pub fn delete_delete() -> @kernel.Thm
+
+pub fn delete_insert() -> @kernel.Thm
+
+pub fn delete_inter() -> @kernel.Thm
+
+pub fn delete_non_element() -> @kernel.Thm
+
+pub fn delete_subset() -> @kernel.Thm
+
+pub fn dest_setenum(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn diff() -> @kernel.Thm
+
+pub fn diff_diff() -> @kernel.Thm
+
+pub fn diff_empty() -> @kernel.Thm
+
+pub fn diff_eq_empty() -> @kernel.Thm
+
+pub fn diff_insert() -> @kernel.Thm
+
+pub fn diff_inters() -> @kernel.Thm
+
+pub fn diff_restrict() -> @kernel.Thm
+
+pub fn diff_unions() -> @kernel.Thm
+
+pub fn diff_unions_nonempty() -> @kernel.Thm
+
+pub fn diff_unions_pairwise_disjoint() -> @kernel.Thm
+
+pub fn diff_univ() -> @kernel.Thm
+
+pub fn disjoint() -> @kernel.Thm
+
+pub fn disjoint_cross() -> @kernel.Thm
+
+pub fn disjoint_delete_sym() -> @kernel.Thm
+
+pub fn disjoint_disjoint_union() -> @kernel.Thm
+
+pub fn disjoint_empty() -> @kernel.Thm
+
+pub fn disjoint_empty_refl() -> @kernel.Thm
+
+pub fn disjoint_insert() -> @kernel.Thm
+
+pub fn disjoint_sing() -> @kernel.Thm
+
+pub fn disjoint_sym() -> @kernel.Thm
+
+pub fn disjoint_union() -> @kernel.Thm
+
+pub fn disjoint_union_eq() -> @kernel.Thm
+
+pub fn disjoint_union_eq_empty() -> @kernel.Thm
+
+pub fn disjoint_union_v1() -> @kernel.Thm
+
+pub fn element_le_sup() -> @kernel.Thm
+
+pub fn empty() -> @kernel.Thm
+
+pub fn empty_delete() -> @kernel.Thm
+
+pub fn empty_diff() -> @kernel.Thm
+
+pub fn empty_gspec() -> @kernel.Thm
+
+pub fn empty_not_univ() -> @kernel.Thm
+
+pub fn empty_subset() -> @kernel.Thm
+
+pub fn empty_union() -> @kernel.Thm
+
+pub fn empty_unions() -> @kernel.Thm
+
+pub fn eq_c() -> @kernel.Thm
+
+pub fn eq_univ() -> @kernel.Thm
+
+pub fn exists_cartesian_product_element() -> @kernel.Thm
+
+pub fn exists_finite_subset_image() -> @kernel.Thm
+
+pub fn exists_finite_subset_image_inj() -> @kernel.Thm
+
+pub fn exists_in_clauses() -> @kernel.Thm
+
+pub fn exists_in_cross() -> @kernel.Thm
+
+pub fn exists_in_gspec() -> @kernel.Thm
+
+pub fn exists_in_image() -> @kernel.Thm
+
+pub fn exists_in_insert() -> @kernel.Thm
+
+pub fn exists_in_union() -> @kernel.Thm
+
+pub fn exists_in_unions() -> @kernel.Thm
+
+pub fn exists_small_subset_image() -> @kernel.Thm
+
+pub fn exists_small_subset_image_inj() -> @kernel.Thm
+
+pub fn exists_subset_image() -> @kernel.Thm
+
+pub fn exists_subset_image_inj() -> @kernel.Thm
+
+pub fn exists_subset_insert() -> @kernel.Thm
+
+pub fn exists_subset_union() -> @kernel.Thm
+
+pub fn exists_unique_unions_inters() -> @kernel.Thm
+
+pub fn extension() -> @kernel.Thm
+
+pub fn extensional() -> @kernel.Thm
+
+pub fn extensional_empty() -> @kernel.Thm
+
+pub fn extensional_eq() -> @kernel.Thm
+
+pub fn extensional_univ() -> @kernel.Thm
+
+pub fn finite_bool() -> @kernel.Thm
+
+pub fn finite_card_le_image() -> @kernel.Thm
+
+pub fn finite_card_le_subset() -> @kernel.Thm
+
+pub fn finite_card_le_union() -> @kernel.Thm
+
+pub fn finite_card_le_unions() -> @kernel.Thm
+
+pub fn finite_cases() -> @kernel.Thm
+
+pub fn finite_cross() -> @kernel.Thm
+
+pub fn finite_cross_eq() -> @kernel.Thm
+
+pub fn finite_cross_univ() -> @kernel.Thm
+
+pub fn finite_delete() -> @kernel.Thm
+
+pub fn finite_delete_imp() -> @kernel.Thm
+
+pub fn finite_diff() -> @kernel.Thm
+
+pub fn finite_empty() -> @kernel.Thm
+
+pub fn finite_finite_preimage() -> @kernel.Thm
+
+pub fn finite_finite_preimage_general() -> @kernel.Thm
+
+pub fn finite_finite_unions() -> @kernel.Thm
+
+pub fn finite_funspace() -> @kernel.Thm
+
+pub fn finite_funspace_univ() -> @kernel.Thm
+
+pub fn finite_has_size() -> @kernel.Thm
+
+pub fn finite_image() -> @kernel.Thm
+
+pub fn finite_image_eq() -> @kernel.Thm
+
+pub fn finite_image_eq_inj() -> @kernel.Thm
+
+pub fn finite_image_expand() -> @kernel.Thm
+
+pub fn finite_image_gen() -> @kernel.Thm
+
+pub fn finite_image_infinite() -> @kernel.Thm
+
+pub fn finite_image_inj() -> @kernel.Thm
+
+pub fn finite_image_inj_eq() -> @kernel.Thm
+
+pub fn finite_image_inj_general() -> @kernel.Thm
+
+pub fn finite_induct() -> @kernel.Thm
+
+pub fn finite_induct_delete() -> @kernel.Thm
+
+pub fn finite_induct_strong() -> @kernel.Thm
+
+pub fn finite_insert() -> @kernel.Thm
+
+pub fn finite_inter() -> @kernel.Thm
+
+pub fn finite_intersection_of_complement() -> @kernel.Thm
+
+pub fn finite_intersection_of_empty() -> @kernel.Thm
+
+pub fn finite_intersection_of_idempot() -> @kernel.Thm
+
+pub fn finite_intersection_of_inc() -> @kernel.Thm
+
+pub fn finite_intersection_of_inter() -> @kernel.Thm
+
+pub fn finite_intersection_of_inters() -> @kernel.Thm
+
+pub fn finite_intersection_of_union() -> @kernel.Thm
+
+pub fn finite_intersection_of_union_eq() -> @kernel.Thm
+
+pub fn finite_numseg_le() -> @kernel.Thm
+
+pub fn finite_numseg_lt() -> @kernel.Thm
+
+pub fn finite_powerset() -> @kernel.Thm
+
+pub fn finite_powerset_eq() -> @kernel.Thm
+
+pub fn finite_product() -> @kernel.Thm
+
+pub fn finite_product_dependent() -> @kernel.Thm
+
+pub fn finite_real_interval() -> @kernel.Thm
+
+pub fn finite_recursion() -> @kernel.Thm
+
+pub fn finite_recursion_delete() -> @kernel.Thm
+
+pub fn finite_restrict() -> @kernel.Thm
+
+pub fn finite_restricted_funspace() -> @kernel.Thm
+
+pub fn finite_restricted_powerset() -> @kernel.Thm
+
+pub fn finite_restricted_subsets() -> @kernel.Thm
+
+pub fn finite_rules() -> @kernel.Thm
+
+pub fn finite_set_of_list() -> @kernel.Thm
+
+pub fn finite_sing() -> @kernel.Thm
+
+pub fn finite_subset() -> @kernel.Thm
+
+pub fn finite_subset_image() -> @kernel.Thm
+
+pub fn finite_subset_image_imp() -> @kernel.Thm
+
+pub fn finite_subset_unions() -> @kernel.Thm
+
+pub fn finite_subset_unions_chain() -> @kernel.Thm
+
+pub fn finite_subset_unions_chain_eq() -> @kernel.Thm
+
+pub fn finite_subset_unions_directed_eq() -> @kernel.Thm
+
+pub fn finite_transitivity_chain() -> @kernel.Thm
+
+pub fn finite_union() -> @kernel.Thm
+
+pub fn finite_union_imp() -> @kernel.Thm
+
+pub fn finite_union_of_complement() -> @kernel.Thm
+
+pub fn finite_union_of_empty() -> @kernel.Thm
+
+pub fn finite_union_of_idempot() -> @kernel.Thm
+
+pub fn finite_union_of_inc() -> @kernel.Thm
+
+pub fn finite_union_of_inter() -> @kernel.Thm
+
+pub fn finite_union_of_inter_eq() -> @kernel.Thm
+
+pub fn finite_union_of_union() -> @kernel.Thm
+
+pub fn finite_union_of_unions() -> @kernel.Thm
+
+pub fn finite_unions() -> @kernel.Thm
+
+pub fn finite_univ_pair() -> @kernel.Thm
+
+pub fn finrec() -> @kernel.Thm
+
+pub fn finrec_1_lemma() -> @kernel.Thm
+
+pub fn finrec_exists_lemma() -> @kernel.Thm
+
+pub fn finrec_fun() -> @kernel.Thm
+
+pub fn finrec_fun_lemma() -> @kernel.Thm
+
+pub fn finrec_suc_lemma() -> @kernel.Thm
+
+pub fn finrec_unique_lemma() -> @kernel.Thm
+
+pub fn forall_cartesian_product_elements() -> @kernel.Thm
+
+pub fn forall_cartesian_product_elements_eq() -> @kernel.Thm
+
+pub fn forall_finite_subset_image() -> @kernel.Thm
+
+pub fn forall_finite_subset_image_inj() -> @kernel.Thm
+
+pub fn forall_in_clauses() -> @kernel.Thm
+
+pub fn forall_in_cross() -> @kernel.Thm
+
+pub fn forall_in_gspec() -> @kernel.Thm
+
+pub fn forall_in_image() -> @kernel.Thm
+
+pub fn forall_in_image_2() -> @kernel.Thm
+
+pub fn forall_in_insert() -> @kernel.Thm
+
+pub fn forall_in_union() -> @kernel.Thm
+
+pub fn forall_in_unions() -> @kernel.Thm
+
+pub fn forall_intersection_of() -> @kernel.Thm
+
+pub fn forall_small_subset_image() -> @kernel.Thm
+
+pub fn forall_small_subset_image_inj() -> @kernel.Thm
+
+pub fn forall_subset_image() -> @kernel.Thm
+
+pub fn forall_subset_image_inj() -> @kernel.Thm
+
+pub fn forall_subset_insert() -> @kernel.Thm
+
+pub fn forall_subset_union() -> @kernel.Thm
+
+pub fn forall_union_of() -> @kernel.Thm
+
+pub fn fun_in_image() -> @kernel.Thm
+
+pub fn function_factors_left() -> @kernel.Thm
+
+pub fn function_factors_left_gen() -> @kernel.Thm
+
+pub fn function_factors_right() -> @kernel.Thm
+
+pub fn function_factors_right_gen() -> @kernel.Thm
+
+pub fn ge_c() -> @kernel.Thm
+
+pub fn ge_c_v1() -> @kernel.Thm
+
+pub fn gspec() -> @kernel.Thm
+
+pub fn gt_c() -> @kernel.Thm
+
+pub fn has_inf() -> @kernel.Thm
+
+pub fn has_inf_approach() -> @kernel.Thm
+
+pub fn has_inf_inf() -> @kernel.Thm
+
+pub fn has_inf_lbound() -> @kernel.Thm
+
+pub fn has_inf_le() -> @kernel.Thm
+
+pub fn has_inf_v1() -> @kernel.Thm
+
+pub fn has_size() -> @kernel.Thm
+
+pub fn has_size_0() -> @kernel.Thm
+
+pub fn has_size_bool() -> @kernel.Thm
+
+pub fn has_size_card() -> @kernel.Thm
+
+pub fn has_size_clauses() -> @kernel.Thm
+
+pub fn has_size_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn has_size_cross() -> @kernel.Thm
+
+pub fn has_size_diff() -> @kernel.Thm
+
+pub fn has_size_funspace() -> @kernel.Thm
+
+pub fn has_size_funspace_univ() -> @kernel.Thm
+
+pub fn has_size_image_inj() -> @kernel.Thm
+
+pub fn has_size_image_inj_eq() -> @kernel.Thm
+
+pub fn has_size_image_inj_restrict() -> @kernel.Thm
+
+pub fn has_size_index() -> @kernel.Thm
+
+pub fn has_size_numseg_le() -> @kernel.Thm
+
+pub fn has_size_numseg_lt() -> @kernel.Thm
+
+pub fn has_size_powerset() -> @kernel.Thm
+
+pub fn has_size_product() -> @kernel.Thm
+
+pub fn has_size_product_dependent() -> @kernel.Thm
+
+pub fn has_size_set_of_list() -> @kernel.Thm
+
+pub fn has_size_suc() -> @kernel.Thm
+
+pub fn has_size_union() -> @kernel.Thm
+
+pub fn has_size_unions() -> @kernel.Thm
+
+pub fn has_sup() -> @kernel.Thm
+
+pub fn has_sup_approach() -> @kernel.Thm
+
+pub fn has_sup_le() -> @kernel.Thm
+
+pub fn has_sup_sup() -> @kernel.Thm
+
+pub fn has_sup_ubound() -> @kernel.Thm
+
+pub fn has_sup_v1() -> @kernel.Thm
+
+pub fn image() -> @kernel.Thm
+
+pub fn image_clauses() -> @kernel.Thm
+
+pub fn image_const() -> @kernel.Thm
+
+pub fn image_delete_inj() -> @kernel.Thm
+
+pub fn image_delete_inj_alt() -> @kernel.Thm
+
+pub fn image_diff_inj() -> @kernel.Thm
+
+pub fn image_diff_inj_alt() -> @kernel.Thm
+
+pub fn image_eq() -> @kernel.Thm
+
+pub fn image_eq_empty() -> @kernel.Thm
+
+pub fn image_fst_cross() -> @kernel.Thm
+
+pub fn image_i() -> @kernel.Thm
+
+pub fn image_id() -> @kernel.Thm
+
+pub fn image_imp_injective() -> @kernel.Thm
+
+pub fn image_imp_injective_gen() -> @kernel.Thm
+
+pub fn image_injective_image_of_subset() -> @kernel.Thm
+
+pub fn image_inter_inj() -> @kernel.Thm
+
+pub fn image_inter_saturated() -> @kernel.Thm
+
+pub fn image_inter_saturated_gen() -> @kernel.Thm
+
+pub fn image_inter_subset() -> @kernel.Thm
+
+pub fn image_inters() -> @kernel.Thm
+
+pub fn image_inters_saturated() -> @kernel.Thm
+
+pub fn image_inters_saturated_gen() -> @kernel.Thm
+
+pub fn image_inters_subset() -> @kernel.Thm
+
+pub fn image_o() -> @kernel.Thm
+
+pub fn image_paired_cross() -> @kernel.Thm
+
+pub fn image_product_map() -> @kernel.Thm
+
+pub fn image_projection_cartesian_product() -> @kernel.Thm
+
+pub fn image_restriction() -> @kernel.Thm
+
+pub fn image_snd_cross() -> @kernel.Thm
+
+pub fn image_subset() -> @kernel.Thm
+
+pub fn image_union() -> @kernel.Thm
+
+pub fn image_unions() -> @kernel.Thm
+
+pub fn in_() -> @kernel.Thm
+
+pub fn in_cartesian_product() -> @kernel.Thm
+
+pub fn in_cross() -> @kernel.Thm
+
+pub fn in_delete() -> @kernel.Thm
+
+pub fn in_delete_eq() -> @kernel.Thm
+
+pub fn in_diff() -> @kernel.Thm
+
+pub fn in_disjoint() -> @kernel.Thm
+
+pub fn in_elim_pair_thm() -> @kernel.Thm
+
+pub fn in_elim_quad_thm() -> @kernel.Thm
+
+pub fn in_elim_thm() -> @kernel.Thm
+
+pub fn in_elim_triple_thm() -> @kernel.Thm
+
+pub fn in_extensional() -> @kernel.Thm
+
+pub fn in_extensional_undefined() -> @kernel.Thm
+
+pub fn in_gspec() -> @kernel.Thm
+
+pub fn in_image() -> @kernel.Thm
+
+pub fn in_insert() -> @kernel.Thm
+
+pub fn in_inter() -> @kernel.Thm
+
+pub fn in_inters() -> @kernel.Thm
+
+pub fn in_rest() -> @kernel.Thm
+
+pub fn in_set_of_list() -> @kernel.Thm
+
+pub fn in_sing() -> @kernel.Thm
+
+pub fn in_union() -> @kernel.Thm
+
+pub fn in_unions() -> @kernel.Thm
+
+pub fn in_univ() -> @kernel.Thm
+
+pub fn inf() -> @kernel.Thm
+
+pub fn inf_approach() -> @kernel.Thm
+
+pub fn inf_eq() -> @kernel.Thm
+
+pub fn inf_exists() -> @kernel.Thm
+
+pub fn inf_finite() -> @kernel.Thm
+
+pub fn inf_finite_lemma() -> @kernel.Thm
+
+pub fn inf_insert_finite() -> @kernel.Thm
+
+pub fn inf_insert_insert() -> @kernel.Thm
+
+pub fn inf_le_element() -> @kernel.Thm
+
+pub fn inf_sing() -> @kernel.Thm
+
+pub fn inf_union() -> @kernel.Thm
+
+pub fn inf_unique() -> @kernel.Thm
+
+pub fn inf_unique_finite() -> @kernel.Thm
+
+pub fn inf_v1() -> @kernel.Thm
+
+pub fn infinite() -> @kernel.Thm
+
+pub fn infinite_cross_eq() -> @kernel.Thm
+
+pub fn infinite_cross_univ() -> @kernel.Thm
+
+pub fn infinite_diff_finite() -> @kernel.Thm
+
+pub fn infinite_enumerate() -> @kernel.Thm
+
+pub fn infinite_enumerate_eq() -> @kernel.Thm
+
+pub fn infinite_enumerate_subset() -> @kernel.Thm
+
+pub fn infinite_image() -> @kernel.Thm
+
+pub fn infinite_image_inj() -> @kernel.Thm
+
+pub fn infinite_nonempty() -> @kernel.Thm
+
+pub fn infinite_superset() -> @kernel.Thm
+
+pub fn infinite_univ_pair() -> @kernel.Thm
+
+pub fn inj() -> @kernel.Thm
+
+pub fn injective_alt() -> @kernel.Thm
+
+pub fn injective_image() -> @kernel.Thm
+
+pub fn injective_left_inverse() -> @kernel.Thm
+
+pub fn injective_on_alt() -> @kernel.Thm
+
+pub fn injective_on_image() -> @kernel.Thm
+
+pub fn injective_on_left_inverse() -> @kernel.Thm
+
+pub fn injective_on_preimage() -> @kernel.Thm
+
+pub fn injective_preimage() -> @kernel.Thm
+
+pub fn insert() -> @kernel.Thm
+
+pub fn insert_ac() -> @kernel.Thm
+
+pub fn insert_comm() -> @kernel.Thm
+
+pub fn insert_def() -> @kernel.Thm
+
+pub fn insert_delete() -> @kernel.Thm
+
+pub fn insert_diff() -> @kernel.Thm
+
+pub fn insert_insert() -> @kernel.Thm
+
+pub fn insert_inter() -> @kernel.Thm
+
+pub fn insert_restrict() -> @kernel.Thm
+
+pub fn insert_subset() -> @kernel.Thm
+
+pub fn insert_union() -> @kernel.Thm
+
+pub fn insert_union_eq() -> @kernel.Thm
+
+pub fn insert_univ() -> @kernel.Thm
+
+pub fn inter() -> @kernel.Thm
+
+pub fn inter_aci() -> @kernel.Thm
+
+pub fn inter_assoc() -> @kernel.Thm
+
+pub fn inter_cartesian_product() -> @kernel.Thm
+
+pub fn inter_comm() -> @kernel.Thm
+
+pub fn inter_cross() -> @kernel.Thm
+
+pub fn inter_disjoint_union() -> @kernel.Thm
+
+pub fn inter_empty() -> @kernel.Thm
+
+pub fn inter_idempot() -> @kernel.Thm
+
+pub fn inter_inters() -> @kernel.Thm
+
+pub fn inter_over_union() -> @kernel.Thm
+
+pub fn inter_restrict() -> @kernel.Thm
+
+pub fn inter_subset() -> @kernel.Thm
+
+pub fn inter_unions() -> @kernel.Thm
+
+pub fn inter_unions_pairwise_disjoint() -> @kernel.Thm
+
+pub fn inter_univ() -> @kernel.Thm
+
+pub fn inters() -> @kernel.Thm
+
+pub fn inters_0() -> @kernel.Thm
+
+pub fn inters_1() -> @kernel.Thm
+
+pub fn inters_2() -> @kernel.Thm
+
+pub fn inters_antimono() -> @kernel.Thm
+
+pub fn inters_antimono_gen() -> @kernel.Thm
+
+pub fn inters_eq_univ() -> @kernel.Thm
+
+pub fn inters_gspec() -> @kernel.Thm
+
+pub fn inters_image() -> @kernel.Thm
+
+pub fn inters_in_chain() -> @kernel.Thm
+
+pub fn inters_insert() -> @kernel.Thm
+
+pub fn inters_over_unions() -> @kernel.Thm
+
+pub fn inters_subset() -> @kernel.Thm
+
+pub fn inters_subset_strong() -> @kernel.Thm
+
+pub fn inters_union() -> @kernel.Thm
+
+pub fn inters_unions() -> @kernel.Thm
+
+pub fn intersection_of() -> @kernel.Thm
+
+pub fn intersection_of_empty() -> @kernel.Thm
+
+pub fn intersection_of_inc() -> @kernel.Thm
+
+pub fn intersection_of_mono() -> @kernel.Thm
+
+pub fn involution_even_fixpoints() -> @kernel.Thm
+
+pub fn involution_even_nofixpoints() -> @kernel.Thm
+
+pub fn is_setenum(@kernel.Term) -> Bool raise
+
+pub fn itset() -> @kernel.Thm
+
+pub fn itset_eq() -> @kernel.Thm
+
+pub fn le_c() -> @kernel.Thm
+
+pub fn le_c_v1() -> @kernel.Thm
+
+pub fn length_list_of_set() -> @kernel.Thm
+
+pub fn list_of_set() -> @kernel.Thm
+
+pub fn list_of_set_empty() -> @kernel.Thm
+
+pub fn list_of_set_properties() -> @kernel.Thm
+
+pub fn list_of_set_sing() -> @kernel.Thm
+
+pub fn lt_c() -> @kernel.Thm
+
+pub fn mem_list_of_set() -> @kernel.Thm
+
+pub fn member_not_empty() -> @kernel.Thm
+
+pub fn mk_fset(@list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn mk_setenum((@list.List[@kernel.Term], @kernel.HolType)) -> @kernel.Term raise
+
+pub fn new_inductive_set(@kernel.Term) -> (@kernel.Thm, @kernel.Thm, @kernel.Thm) raise
+
+pub fn not_empty_insert() -> @kernel.Thm
+
+pub fn not_equal_sets() -> @kernel.Thm
+
+pub fn not_in_empty() -> @kernel.Thm
+
+pub fn not_insert_empty() -> @kernel.Thm
+
+pub fn not_psubset_empty() -> @kernel.Thm
+
+pub fn not_univ_psubset() -> @kernel.Thm
+
+pub fn num_finite() -> @kernel.Thm
+
+pub fn num_finite_avoid() -> @kernel.Thm
+
+pub fn num_infinite() -> @kernel.Thm
+
+pub fn num_infinite_eq() -> @kernel.Thm
+
+pub fn numseg_clauses_le() -> @kernel.Thm
+
+pub fn numseg_clauses_lt() -> @kernel.Thm
+
+pub fn pairwise() -> @kernel.Thm
+
+pub fn pairwise_and() -> @kernel.Thm
+
+pub fn pairwise_chain_unions() -> @kernel.Thm
+
+pub fn pairwise_empty() -> @kernel.Thm
+
+pub fn pairwise_image() -> @kernel.Thm
+
+pub fn pairwise_imp() -> @kernel.Thm
+
+pub fn pairwise_insert() -> @kernel.Thm
+
+pub fn pairwise_insert_symmetric() -> @kernel.Thm
+
+pub fn pairwise_mono() -> @kernel.Thm
+
+pub fn pairwise_sing() -> @kernel.Thm
+
+pub fn pairwise_union() -> @kernel.Thm
+
+pub fn powerset_clauses() -> @kernel.Thm
+
+pub fn product_map() -> @kernel.Thm
+
+pub fn product_map_restriction() -> @kernel.Thm
+
+pub fn psubset() -> @kernel.Thm
+
+pub fn psubset_alt() -> @kernel.Thm
+
+pub fn psubset_insert_subset() -> @kernel.Thm
+
+pub fn psubset_irrefl() -> @kernel.Thm
+
+pub fn psubset_subset_trans() -> @kernel.Thm
+
+pub fn psubset_trans() -> @kernel.Thm
+
+pub fn psubset_unions_pairwise_disjoint() -> @kernel.Thm
+
+pub fn psubset_univ() -> @kernel.Thm
+
+pub fn real_abs_inf_le() -> @kernel.Thm
+
+pub fn real_abs_sup_le() -> @kernel.Thm
+
+pub fn real_inf_asclose() -> @kernel.Thm
+
+pub fn real_inf_bounds() -> @kernel.Thm
+
+pub fn real_inf_le() -> @kernel.Thm
+
+pub fn real_inf_le_finite() -> @kernel.Thm
+
+pub fn real_inf_lt_finite() -> @kernel.Thm
+
+pub fn real_inf_unique() -> @kernel.Thm
+
+pub fn real_infinite() -> @kernel.Thm
+
+pub fn real_le_inf() -> @kernel.Thm
+
+pub fn real_le_inf_eq() -> @kernel.Thm
+
+pub fn real_le_inf_finite() -> @kernel.Thm
+
+pub fn real_le_inf_subset() -> @kernel.Thm
+
+pub fn real_le_sup() -> @kernel.Thm
+
+pub fn real_le_sup_finite() -> @kernel.Thm
+
+pub fn real_lt_inf_finite() -> @kernel.Thm
+
+pub fn real_lt_sup_finite() -> @kernel.Thm
+
+pub fn real_max_sup() -> @kernel.Thm
+
+pub fn real_min_inf() -> @kernel.Thm
+
+pub fn real_sup_asclose() -> @kernel.Thm
+
+pub fn real_sup_bounds() -> @kernel.Thm
+
+pub fn real_sup_eq_inf() -> @kernel.Thm
+
+pub fn real_sup_le() -> @kernel.Thm
+
+pub fn real_sup_le_eq() -> @kernel.Thm
+
+pub fn real_sup_le_finite() -> @kernel.Thm
+
+pub fn real_sup_le_subset() -> @kernel.Thm
+
+pub fn real_sup_lt_finite() -> @kernel.Thm
+
+pub fn real_sup_unique() -> @kernel.Thm
+
+pub fn rest() -> @kernel.Thm
+
+pub fn restriction() -> @kernel.Thm
+
+pub fn restriction_compose() -> @kernel.Thm
+
+pub fn restriction_compose_left() -> @kernel.Thm
+
+pub fn restriction_compose_right() -> @kernel.Thm
+
+pub fn restriction_defined() -> @kernel.Thm
+
+pub fn restriction_eq() -> @kernel.Thm
+
+pub fn restriction_extension() -> @kernel.Thm
+
+pub fn restriction_fixpoint() -> @kernel.Thm
+
+pub fn restriction_idemp() -> @kernel.Thm
+
+pub fn restriction_in_cartesian_product() -> @kernel.Thm
+
+pub fn restriction_in_extensional() -> @kernel.Thm
+
+pub fn restriction_restriction() -> @kernel.Thm
+
+pub fn restriction_thm() -> @kernel.Thm
+
+pub fn restriction_undefined() -> @kernel.Thm
+
+pub fn restriction_unique() -> @kernel.Thm
+
+pub fn restriction_unique_alt() -> @kernel.Thm
+
+pub fn restriction_univ() -> @kernel.Thm
+
+pub fn set_cases() -> @kernel.Thm
+
+pub fn set_of_list() -> @kernel.Thm
+
+pub fn set_of_list_append() -> @kernel.Thm
+
+pub fn set_of_list_eq_empty() -> @kernel.Thm
+
+pub fn set_of_list_map() -> @kernel.Thm
+
+pub fn set_of_list_of_set() -> @kernel.Thm
+
+pub fn set_pair_thm() -> @kernel.Thm
+
+pub fn set_prove_cases() -> @kernel.Thm
+
+pub fn set_recursion_lemma() -> @kernel.Thm
+
+pub fn set_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn set_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn setspec() -> @kernel.Thm
+
+pub fn simple_image() -> @kernel.Thm
+
+pub fn simple_image_gen() -> @kernel.Thm
+
+pub fn sing() -> @kernel.Thm
+
+pub fn sing_alt() -> @kernel.Thm
+
+pub fn sing_gspec() -> @kernel.Thm
+
+pub fn sing_subset() -> @kernel.Thm
+
+pub fn string_infinite() -> @kernel.Thm
+
+pub fn subset() -> @kernel.Thm
+
+pub fn subset_antisym() -> @kernel.Thm
+
+pub fn subset_antisym_eq() -> @kernel.Thm
+
+pub fn subset_card_eq() -> @kernel.Thm
+
+pub fn subset_cartesian_product() -> @kernel.Thm
+
+pub fn subset_cross() -> @kernel.Thm
+
+pub fn subset_delete() -> @kernel.Thm
+
+pub fn subset_diff() -> @kernel.Thm
+
+pub fn subset_disjoint_union() -> @kernel.Thm
+
+pub fn subset_disjoint_union_exists() -> @kernel.Thm
+
+pub fn subset_empty() -> @kernel.Thm
+
+pub fn subset_image() -> @kernel.Thm
+
+pub fn subset_image_inj() -> @kernel.Thm
+
+pub fn subset_insert() -> @kernel.Thm
+
+pub fn subset_insert_delete() -> @kernel.Thm
+
+pub fn subset_inter() -> @kernel.Thm
+
+pub fn subset_inter_absorption() -> @kernel.Thm
+
+pub fn subset_inters() -> @kernel.Thm
+
+pub fn subset_psubset_trans() -> @kernel.Thm
+
+pub fn subset_refl() -> @kernel.Thm
+
+pub fn subset_restrict() -> @kernel.Thm
+
+pub fn subset_trans() -> @kernel.Thm
+
+pub fn subset_union() -> @kernel.Thm
+
+pub fn subset_union_absorption() -> @kernel.Thm
+
+pub fn subset_unions() -> @kernel.Thm
+
+pub fn subset_univ() -> @kernel.Thm
+
+pub fn sup() -> @kernel.Thm
+
+pub fn sup_approach() -> @kernel.Thm
+
+pub fn sup_eq() -> @kernel.Thm
+
+pub fn sup_exists() -> @kernel.Thm
+
+pub fn sup_finite() -> @kernel.Thm
+
+pub fn sup_finite_lemma() -> @kernel.Thm
+
+pub fn sup_insert_finite() -> @kernel.Thm
+
+pub fn sup_insert_insert() -> @kernel.Thm
+
+pub fn sup_sing() -> @kernel.Thm
+
+pub fn sup_union() -> @kernel.Thm
+
+pub fn sup_unique() -> @kernel.Thm
+
+pub fn sup_unique_finite() -> @kernel.Thm
+
+pub fn sup_v1() -> @kernel.Thm
+
+pub fn surj() -> @kernel.Thm
+
+pub fn surjective_exists_thm() -> @kernel.Thm
+
+pub fn surjective_forall_thm() -> @kernel.Thm
+
+pub fn surjective_iff_injective() -> @kernel.Thm
+
+pub fn surjective_iff_injective_gen() -> @kernel.Thm
+
+pub fn surjective_image() -> @kernel.Thm
+
+pub fn surjective_image_eq() -> @kernel.Thm
+
+pub fn surjective_image_thm() -> @kernel.Thm
+
+pub fn surjective_on_image() -> @kernel.Thm
+
+pub fn surjective_on_preimage() -> @kernel.Thm
+
+pub fn surjective_on_right_inverse() -> @kernel.Thm
+
+pub fn surjective_preimage() -> @kernel.Thm
+
+pub fn surjective_right_inverse() -> @kernel.Thm
+
+pub fn union() -> @kernel.Thm
+
+pub fn union_aci() -> @kernel.Thm
+
+pub fn union_assoc() -> @kernel.Thm
+
+pub fn union_comm() -> @kernel.Thm
+
+pub fn union_disjoint_union() -> @kernel.Thm
+
+pub fn union_empty() -> @kernel.Thm
+
+pub fn union_idempot() -> @kernel.Thm
+
+pub fn union_of() -> @kernel.Thm
+
+pub fn union_of_empty() -> @kernel.Thm
+
+pub fn union_of_inc() -> @kernel.Thm
+
+pub fn union_of_mono() -> @kernel.Thm
+
+pub fn union_over_inter() -> @kernel.Thm
+
+pub fn union_restrict() -> @kernel.Thm
+
+pub fn union_subset() -> @kernel.Thm
+
+pub fn union_univ() -> @kernel.Thm
+
+pub fn unions() -> @kernel.Thm
+
+pub fn unions_0() -> @kernel.Thm
+
+pub fn unions_1() -> @kernel.Thm
+
+pub fn unions_2() -> @kernel.Thm
+
+pub fn unions_delete_empty() -> @kernel.Thm
+
+pub fn unions_diff() -> @kernel.Thm
+
+pub fn unions_eq_inters() -> @kernel.Thm
+
+pub fn unions_gspec() -> @kernel.Thm
+
+pub fn unions_image() -> @kernel.Thm
+
+pub fn unions_in_chain() -> @kernel.Thm
+
+pub fn unions_insert() -> @kernel.Thm
+
+pub fn unions_insert_empty() -> @kernel.Thm
+
+pub fn unions_inters() -> @kernel.Thm
+
+pub fn unions_maximal_sets() -> @kernel.Thm
+
+pub fn unions_mono() -> @kernel.Thm
+
+pub fn unions_mono_image() -> @kernel.Thm
+
+pub fn unions_over_inters() -> @kernel.Thm
+
+pub fn unions_sings() -> @kernel.Thm
+
+pub fn unions_sings_gen() -> @kernel.Thm
+
+pub fn unions_subset() -> @kernel.Thm
+
+pub fn unions_union() -> @kernel.Thm
+
+pub fn unions_univ() -> @kernel.Thm
+
+pub fn univ() -> @kernel.Thm
+
+pub fn univ_1() -> @kernel.Thm
+
+pub fn univ_gspec() -> @kernel.Thm
+
+pub fn univ_not_empty() -> @kernel.Thm
+
+pub fn univ_subset() -> @kernel.Thm
+
+pub fn wf_finite() -> @kernel.Thm
+
+pub fn wf_psubset() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
