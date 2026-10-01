@@ -62,18 +62,30 @@ module Ir = struct
     | Call (f, args) ->
         pfun f; p "("; plist args; p ")"
     | Lam (ps, b) ->
-        (match ps with
-         | [ x ] when not (String.contains x ':') -> p x
-         | _ -> p "("; p (String.concat ", " ps); p ")");
-        p " => "; pbody b
+        (* a last "-> R" parameter: the result type, as an annotated `fn`
+           (raising: MoonBit infers a non-raising arrow function otherwise) *)
+        (match List.rev ps with
+         | r :: rps when String.length r > 3 && String.sub r 0 3 = "-> " ->
+             p "fn("; p (String.concat ", " (List.rev rps)); p ") "; p r; p " raise "; pblock b
+         | _ ->
+             (match ps with
+              | [ x ] when not (String.contains x ':') -> p x
+              | _ -> p "("; p (String.concat ", " ps); p ")");
+             p " => "; pbody b)
     | Tuple es -> p "("; plist es; p ")"
     | ListLit [] -> p "@list.empty()"
     | ListLit es -> p "@list.List(["; plist es; p "])"
     | Prepend (tl, hd) -> pfun tl; p ".prepend("; pexp hd; p ")"
     | Concat (a, b) -> pfun a; p ".concat("; pexp b; p ")"
-    | If (c, a, b) -> p "if "; pexp c; p " "; pblock a; p " else "; pblock b
+    | If (c, a, b) ->
+        p "if ";
+        (* an `if`/`match` condition needs parentheses *)
+        (match c with If _ | Match _ | Blk _ | Try _ -> p "("; pexp c; p ")" | _ -> pexp c);
+        p " "; pblock a; p " else "; pblock b
     | Match (e, arms) ->
-        p "match "; pexp e; p " {";
+        p "match ";
+        (match e with If _ | Match _ | Blk _ | Try _ -> p "("; pexp e; p ")" | _ -> pexp e);
+        p " {";
         incr indent;
         List.iter (fun (pat, b) -> nl (); p pat; p " => "; pbody b) arms;
         decr indent; nl (); p "}"

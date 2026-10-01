@@ -467,7 +467,7 @@ pub fn[TA, TB] split_bis(
   let x = x55
   match x56 {
     T::Empty =>
-      SplitBis::Split_absent(T::Empty, (x57 : Unit) => {
+      SplitBis::Split_absent(T::Empty, fn(x57 : Unit) -> T[TA] raise {
         let _ = x57
         T::Empty
       })
@@ -479,7 +479,7 @@ pub fn[TA, TB] split_bis(
         match split_bis(ord, x, l) {
           SplitBis::Split_found => SplitBis::Split_found
           SplitBis::Split_absent(ll, rl) =>
-            SplitBis::Split_absent(ll, (x58 : Unit) => {
+            SplitBis::Split_absent(ll, fn(x58 : Unit) -> T[TA] raise {
               let _ = x58
               join(rl(()), v, r)
             })
@@ -827,13 +827,15 @@ pub fn[TA] elements(x103 : T[TA]) -> @list.List[TA] raise {
 ///|
 /// `choose`
 pub fn[TA] choose(x : T[TA]) -> TA raise {
-  min_elt(x)
+  let f : (T[TA]) -> TA raise = min_elt
+  f(x)
 }
 
 ///|
 /// `choose_opt`
 pub fn[TA] choose_opt(x : T[TA]) -> TA? raise {
-  min_elt_opt(x)
+  let f : (T[TA]) -> TA? raise = min_elt_opt
+  f(x)
 }
 
 ///|

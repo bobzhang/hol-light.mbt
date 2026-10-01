@@ -211,6 +211,8 @@ pub fn[A] mergesort((A, A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise
 
 pub fn[A, B, C] nsplit((A) -> (B, A) raise?, @list.List[C], A) -> (@list.List[B], A) raise?
 
+pub fn[A, B] op_bar_gt(A, (A) -> B raise) -> B raise
+
 pub fn[A, B, C, D] pair_map((A) -> C raise?, (B) -> D raise?, (A, B)) -> (C, D) raise?
 
 pub fn[A] partition((A) -> Bool raise?, @list.List[A]) -> (@list.List[A], @list.List[A]) raise?
@@ -362,6 +364,7 @@ pub struct OHasher {
 }
 pub fn OHasher::block(Self, Int, Int) -> Unit
 pub fn OHasher::bytes(Self, Bytes) -> Unit
+pub fn OHasher::double(Self, Double) -> Unit
 pub fn[T : OHash] OHasher::field(Self, T) -> Unit
 pub fn OHasher::int(Self, Int64) -> Unit
 pub fn OHasher::string(Self, String) -> Unit
@@ -377,12 +380,15 @@ pub impl OCompare for Bool
 pub impl OCompare for Char
 pub impl OCompare for Int
 pub impl OCompare for Int64
+pub impl OCompare for Double
 pub impl OCompare for String
 pub impl[A : OCompare] OCompare for A?
+pub impl[A : OCompare] OCompare for FixedArray[A]
 pub impl OCompare for @kernel.HolType
 pub impl OCompare for @kernel.Term
 pub impl OCompare for @kernel.Thm
 pub impl[A : OCompare] OCompare for @list.List[A]
+pub impl[A : OCompare] OCompare for @ref.Ref[A]
 pub impl[A : OCompare, B : OCompare] OCompare for (A, B)
 pub impl[A : OCompare, B : OCompare, C : OCompare] OCompare for (A, B, C)
 pub impl[A : OCompare, B : OCompare, C : OCompare, D : OCompare] OCompare for (A, B, C, D)
@@ -395,12 +401,15 @@ pub impl OHash for Bool
 pub impl OHash for Char
 pub impl OHash for Int
 pub impl OHash for Int64
+pub impl OHash for Double
 pub impl OHash for String
 pub impl[A : OHash] OHash for A?
+pub impl[A : OHash] OHash for FixedArray[A]
 pub impl OHash for @kernel.HolType
 pub impl OHash for @kernel.Term
 pub impl OHash for @kernel.Thm
 pub impl[A : OHash] OHash for @list.List[A]
+pub impl[A : OHash] OHash for @ref.Ref[A]
 pub impl[A : OHash, B : OHash] OHash for (A, B)
 pub impl[A : OHash, B : OHash, C : OHash] OHash for (A, B, C)
 pub impl[A : OHash, B : OHash, C : OHash, D : OHash] OHash for (A, B, C, D)

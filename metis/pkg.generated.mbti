@@ -1,0 +1,4845 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/metis"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/omap",
+  "bobzhang/hol_light/oset",
+  "bobzhang/hol_light/pp",
+  "bobzhang/hol_light/preterm",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn active(Resolution) -> Active raise
+
+pub fn[TA] add(Set[TA]) -> ((TA) -> Set[TA] raise) raise
+
+pub fn add_asms(@list.List[Formula], Formula) -> Formula raise
+
+pub fn add_p(Waiting, Double, @list.List[(@oset.T[String], @oset.T[(Bool, (String, @list.List[Term]))])], @list.List[Clause1]) -> Waiting raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] add_v1(TA, TB, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn add_v10((String, Int), @oset.T[(String, Int)]) -> @oset.T[(String, Int)] raise
+
+pub fn add_v11(@oset.T[(String, Int)], (String, Int)) -> @oset.T[(String, Int)] raise
+
+pub fn[TA] add_v12(Term, TA, @omap.T[Term, TA]) -> @omap.T[Term, TA] raise
+
+pub fn add_v13(Term, @oset.T[Term]) -> @oset.T[Term] raise
+
+pub fn[TA] add_v14((String, @list.List[Term]), TA, @omap.T[(String, @list.List[Term]), TA]) -> @omap.T[(String, @list.List[Term]), TA] raise
+
+pub fn add_v15((String, @list.List[Term]), @oset.T[(String, @list.List[Term])]) -> @oset.T[(String, @list.List[Term])] raise
+
+pub fn add_v16(@oset.T[(String, @list.List[Term])], (String, @list.List[Term])) -> @oset.T[(String, @list.List[Term])] raise
+
+pub fn add_v17(Formula, @oset.T[String]) -> @oset.T[String] raise
+
+pub fn[TA] add_v18(Formula, TA, @omap.T[Formula, TA]) -> @omap.T[Formula, TA] raise
+
+pub fn add_v19(Formula, @oset.T[Formula]) -> @oset.T[Formula] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] add_v2(TA, TB, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn add_v20(@oset.T[Formula], Formula) -> @oset.T[Formula] raise
+
+pub fn[TA] add_v21((Bool, (String, @list.List[Term])), TA, @omap.T[(Bool, (String, @list.List[Term])), TA]) -> @omap.T[(Bool, (String, @list.List[Term])), TA] raise
+
+pub fn add_v22((Bool, (String, @list.List[Term])), @oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn add_v23(@oset.T[(Bool, (String, @list.List[Term]))], (Bool, (String, @list.List[Term]))) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn[TA] add_v24(@oset.T[(Bool, (String, @list.List[Term]))], TA, @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]) -> @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA] raise
+
+pub fn add_v25(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]] raise
+
+pub fn add_v26(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]], @oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]] raise
+
+pub fn[TA] add_v27(Net[TA], @list.List[Qterm], Net[TA]) -> Net[TA] raise
+
+pub fn[TA, TB] add_v28((TA, Int), (TB, Int)) -> Int? raise
+
+pub fn add_v29(Rewrite) -> (((Int, ((Term, Term), Thm))) -> Rewrite raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] add_v3(TA, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn add_v30(Units) -> ((((Bool, (String, @list.List[Term])), Thm)) -> Units raise) raise
+
+pub fn add_v31(Active, Clause1) -> (Active, @list.List[Clause1]) raise
+
+pub fn add_v32(Waiting, (Double, @list.List[Clause1])) -> Waiting raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] add_v4(@oset.T[TA], TA) -> @oset.T[TA] raise
+
+pub fn[TA] add_v5(Heap[TA]) -> ((TA) -> Heap[TA] raise) raise
+
+pub fn[TA] add_v6(String, TA, @omap.T[String, TA]) -> @omap.T[String, TA] raise
+
+pub fn add_v7(String, @oset.T[String]) -> @oset.T[String] raise
+
+pub fn add_v8(@oset.T[String], String) -> @oset.T[String] raise
+
+pub fn[TA] add_v9((String, Int), TA, @omap.T[(String, Int), TA]) -> @omap.T[(String, Int), TA] raise
+
+pub fn add_var_asms(@list.List[Formula], String, Formula) -> Formula raise
+
+pub fn addallsubterms(TermNet[(Clause1, Term)], Clause1) -> TermNet[(Clause1, Term)] raise
+
+pub fn addclause(Active, Clause1) -> Active raise
+
+pub fn addeqn((Int, ((Term, Term), Thm)), Rewrite) -> Rewrite raise
+
+pub fn addequations(TermNet[(Clause1, (Bool, (String, @list.List[Term])), Orient, Term)], Clause1) -> TermNet[(Clause1, (Bool, (String, @list.List[Term])), Orient, Term)] raise
+
+pub fn addfactorclause(Active, Clause1) -> Active raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] addfactoredge((TA, (String, @list.List[Term])), ((TA, (String, @list.List[Term])), @list.List[(Subst, Edge)])) -> @list.List[(Subst, Edge)] raise
+
+pub fn addfn(Size, Int, Int) -> Int? raise
+
+pub fn addfn_v1(Size, Int, Int) -> Int? raise
+
+pub fn addfn_v2((String, Int), (@list.List[Int], @list.List[(String, Int)], @list.List[Qterm])) -> (@list.List[Int], @list.List[(String, Int)], @list.List[Qterm]) raise
+
+pub fn addirrefledge(((Bool, (String, @list.List[Term])), @list.List[(Subst, Edge)])) -> @list.List[(Subst, Edge)] raise
+
+pub fn addirrefledge_v1((Bool, (String, @list.List[Term]))) -> ((@list.List[(Subst, Edge)]) -> @list.List[(Subst, Edge)] raise) raise
+
+pub fn[TA, TB] addlefttorightiterator(@list.List[Node[TA, TB]], Tree[TA, TB]) -> Iterator[TA, TB]? raise
+
+pub fn[TA] addlist(Set[TA]) -> ((@list.List[TA]) -> Set[TA] raise) raise
+
+pub fn addlist_v1(Rewrite) -> ((@list.List[(Int, ((Term, Term), Thm))]) -> Rewrite raise) raise
+
+pub fn addlist_v2(Units) -> ((@list.List[((Bool, (String, @list.List[Term])), Thm)]) -> Units raise) raise
+
+pub fn addlit((Bool, (String, @list.List[Term])), @list.List[((Bool, (String, @list.List[Term])), @list.List[Int], Term)]) -> @list.List[((Bool, (String, @list.List[Term])), @list.List[Int], Term)] raise
+
+pub fn addliterals(LiteralNet[(Clause1, (Bool, (String, @list.List[Term])))], Clause1) -> LiteralNet[(Clause1, (Bool, (String, @list.List[Term])))] raise
+
+pub fn addname() -> String
+
+pub fn addqterm(Qterm, (@list.List[Int], @list.List[(String, Int)], @list.List[Qterm])) -> (@list.List[Int], @list.List[(String, Int)], @list.List[Qterm]) raise
+
+pub fn[TA, TB] addredexes(TA, (((Term, Term), TB), Orient?), TermNet[(TA, Orient)]) -> TermNet[(TA, Orient)] raise
+
+pub fn addrefledge(((Bool, (String, @list.List[Term])), @list.List[Edge])) -> @list.List[Edge] raise
+
+pub fn addrefledge_v1((Bool, (String, @list.List[Term]))) -> ((@list.List[Edge]) -> @list.List[Edge] raise) raise
+
+pub fn addrewrite(Rewrite, Clause1) -> Rewrite raise
+
+pub fn[TA, TB] addrighttoleftiterator(@list.List[Node[TA, TB]], Tree[TA, TB]) -> Iterator[TA, TB]? raise
+
+pub fn[TA, TB] addsidepath((Bool, Node[TA, TB]), (Tree[TA, TB], Tree[TA, TB])) -> (Tree[TA, TB], Tree[TA, TB]) raise
+
+pub fn[TA, TB] addsidespath((Tree[TA, TB], Tree[TA, TB])) -> ((@list.List[(Bool, Node[TA, TB])]) -> (Tree[TA, TB], Tree[TA, TB]) raise) raise
+
+pub fn addsubsume(Subsume[Clause1], Clause1) -> Subsume[Clause1] raise
+
+pub fn[TA] addsubterms(TA, ((Term, Term), Thm), TermNet[(TA, Bool, @list.List[Int])]) -> TermNet[(TA, Bool, @list.List[Int])] raise
+
+pub fn addsubterms_v1(TermNet[(Clause1, (Bool, (String, @list.List[Term])), @list.List[Int], Term)], Clause1) -> TermNet[(Clause1, (Bool, (String, @list.List[Term])), @list.List[Int], Term)] raise
+
+pub fn addsym((Bool, (String, @list.List[Term])), @list.List[(Bool, (String, @list.List[Term]))]) -> @list.List[(Bool, (String, @list.List[Term]))] raise
+
+pub fn addunit(Units, Clause1) -> Units raise
+
+pub fn[TA, TB] advanceiterator(Iterator[TA, TB]) -> Iterator[TA, TB]? raise
+
+pub fn[TA, TB] advanceiterator_v1(Iterator[TA, TB]) -> Iterator[TA, TB]? raise
+
+pub fn[TA, TB] all(((TA, TB)) -> Bool raise) -> ((Map[TA, TB]) -> Bool raise) raise
+
+pub fn[TA] all_v1((TA) -> Bool raise) -> ((Set[TA]) -> Bool raise) raise
+
+pub fn[TA] all_v2((TA) -> Bool raise) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn[TA] all_v3((TA) -> Bool raise) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn[TA] all_v4((TA) -> Bool raise) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn[TA] all_v5((TA) -> Bool raise) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn[TA] all_v6((TA) -> Bool raise) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn[TA] all_v7((TA) -> Bool raise) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn[TA] all_v8((TA) -> Bool raise) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn allargumentsliterule((Term) -> (Term, Thm) raise, (Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise
+
+pub fn allconv(Term) -> (Term, Thm) raise
+
+pub fn allliteralsrule(((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise, Thm) -> Thm raise
+
+pub fn allliterule((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise
+
+pub fn allnullary(@oset.T[(String, Int)]) -> Bool raise
+
+pub fn allrule(Thm) -> Thm raise
+
+pub fn allsubterms(Clause1) -> @list.List[((Bool, (String, @list.List[Term])), @list.List[Int], Term)] raise
+
+pub fn andb(Int, Int) -> Int raise
+
+pub fn anonymousname() -> String
+
+pub fn anonymousvar() -> Term
+
+pub fn[TA, TB] app(((TA, TB)) -> Unit raise, Map[TA, TB]) -> Unit raise
+
+pub fn[TA] app_v1((TA) -> Unit raise) -> ((Set[TA]) -> Unit raise) raise
+
+pub fn[TA, TB] app_v2((TA) -> TB raise) -> ((Heap[TA]) -> Unit raise) raise
+
+pub fn appendname() -> String
+
+pub fn appname() -> String
+
+pub fn argumentliterule((Term) -> (Term, Thm) raise, Int) -> (((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise) raise
+
+pub fn arguments(String, @list.List[Term]) -> @list.List[Term] raise
+
+pub fn arguments_v1((Bool, (String, @list.List[Term]))) -> @list.List[Term] raise
+
+pub fn arity(String, Int) -> Int raise
+
+pub fn arity_v1((String, @list.List[Term])) -> Int raise
+
+pub fn arity_v2((Bool, (String, @list.List[Term]))) -> Int raise
+
+pub fn arityprecedence((String, Int), (String, Int)) -> Int raise
+
+pub fn arityprojectionfixed(Int) -> Fixed raise
+
+pub fn asm_metis_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn assume((Bool, (String, @list.List[Term]))) -> Thm raise
+
+pub fn atom(Bool, (String, @list.List[Term])) -> (String, @list.List[Term]) raise
+
+pub fn atomtoterm((String, @list.List[Term])) -> Term raise
+
+pub fn atomtoterms((String, @list.List[Term])) -> @list.List[Term] raise
+
+pub fn avoid(@oset.T[String], String) -> Bool raise
+
+pub fn axiom(@oset.T[(Bool, (String, @list.List[Term]))]) -> Thm raise
+
+pub fn basefix() -> Fixed
+
+pub fn basicfixed() -> Fixed
+
+pub fn binary((String, Int)) -> Bool raise
+
+pub fn[TA, TB] bind(TB?, (TB) -> TA? raise) -> TA? raise
+
+pub fn[TA, TB] bindings(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA, TB] bindings_v1(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA, TB] bindings_v2(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA, TB] bindings_v3(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA, TB] bindings_v4(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA, TB] bindings_v5(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA, TB] bindings_v6(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA, TB] bindings_v7(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA, TB] bindings_v8(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn boolcompare(Bool, Bool) -> Int raise
+
+pub fn booltoint(Bool) -> Int raise
+
+pub fn bottomupconv((Term) -> (Term, Thm) raise, Term) -> (Term, Thm) raise
+
+pub fn cardfn(Size, Int) -> Int? raise
+
+pub fn[TA, TB] cardinal(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA, TB] cardinal_v1(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] cardinal_v10(@oset.T[TA]) -> Int raise
+
+pub fn[TA, TB] cardinal_v11(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] cardinal_v12(@oset.T[TA]) -> Int raise
+
+pub fn[TA, TB] cardinal_v13(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] cardinal_v14(@oset.T[TA]) -> Int raise
+
+pub fn[TA, TB] cardinal_v15(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] cardinal_v16(@oset.T[TA]) -> Int raise
+
+pub fn[TA] cardinal_v2(@oset.T[TA]) -> Int raise
+
+pub fn[TA, TB] cardinal_v3(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] cardinal_v4(@oset.T[TA]) -> Int raise
+
+pub fn[TA, TB] cardinal_v5(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] cardinal_v6(@oset.T[TA]) -> Int raise
+
+pub fn[TA, TB] cardinal_v7(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] cardinal_v8(@oset.T[TA]) -> Int raise
+
+pub fn[TA, TB] cardinal_v9(@omap.T[TA, TB]) -> Int raise
+
+pub fn cardname() -> String
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] changedconv((TA) -> (TA, TB) raise, TA) -> (TA, TB) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] changedliterule((TA) -> (TA, TB) raise, TA) -> (TA, TB) raise
+
+pub fn changedrule((Thm) -> Thm raise, Thm) -> Thm raise
+
+pub fn[TA] check((Model) -> ((Valuation) -> ((TA) -> Bool raise) raise) raise, Int?, Model, @oset.T[String], TA) -> (Int, Int) raise
+
+pub fn checkatom(Int?, Model, (String, @list.List[Term])) -> (Int, Int) raise
+
+pub fn checkclause(Int?, Model, @oset.T[(Bool, (String, @list.List[Term]))]) -> (Int, Int) raise
+
+pub fn checkformula(Int?, Model, Formula) -> (Int, Int) raise
+
+pub fn checkliteral(Int?, Model, (Bool, (String, @list.List[Term]))) -> (Int, Int) raise
+
+pub fn checkmodels(@list.List[ModelParameters], @list.List[Model], (@oset.T[String], @oset.T[(Bool, (String, @list.List[Term]))])) -> Double raise
+
+pub fn[TA, TB] choose(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] choose_clause_rewritables(Active, @list.List[TA]) -> Bool raise
+
+pub fn[TA, TB] choose_opt(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] choose_opt_v1(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] choose_opt_v10(@oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] choose_opt_v11(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] choose_opt_v12(@oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] choose_opt_v13(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] choose_opt_v14(@oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] choose_opt_v15(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] choose_opt_v16(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] choose_opt_v2(@oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] choose_opt_v3(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] choose_opt_v4(@oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] choose_opt_v5(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] choose_opt_v6(@oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] choose_opt_v7(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] choose_opt_v8(@oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] choose_opt_v9(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] choose_v1(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] choose_v10(@oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] choose_v11(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] choose_v12(@oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] choose_v13(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] choose_v14(@oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] choose_v15(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] choose_v16(@oset.T[TA]) -> TA raise
+
+pub fn[TA] choose_v2(@oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] choose_v3(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] choose_v4(@oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] choose_v5(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] choose_v6(@oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] choose_v7(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] choose_v8(@oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] choose_v9(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn clause(Thm) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn clause_rewritables(Active) -> @oset.T[Int] raise
+
+pub fn[TA] clauseliterals(@oset.T[TA]) -> Double raise
+
+pub fn clausepriority(Clause1) -> Double raise
+
+pub fn clauses(Active) -> @list.List[Clause1] raise
+
+pub fn clausestrictlysubsumes(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[(Bool, (String, @list.List[Term]))]) -> Subst? raise
+
+pub fn clausesubsumes(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[(Bool, (String, @list.List[Term]))]) -> Subst? raise
+
+pub fn clausesym(@list.List[(Bool, (String, @list.List[Term]))]) -> @list.List[(Bool, (String, @list.List[Term]))] raise
+
+pub fn clausesymbols(@oset.T[(Bool, (String, @list.List[Term]))]) -> Double raise
+
+pub fn clausevariables(@oset.T[(Bool, (String, @list.List[Term]))]) -> Double raise
+
+pub fn clauseweight(Parameters6, @list.List[Model], Double, (@oset.T[String], @oset.T[(Bool, (String, @list.List[Term]))]), Clause1) -> Double raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] cleanredexes(@omap.T[TA, (((Term, Term), TB), Orient?)], TermNet[(TA, Orient)], @oset.T[TA]) -> TermNet[(TA, Orient)] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] cleansubterms(@omap.T[TA, (((Term, Term), Thm), TB)], TermNet[(TA, Bool, @list.List[Int])], @oset.T[TA]) -> TermNet[(TA, Bool, @list.List[Int])] raise
+
+pub fn cmp(@list.List[(Qterm, Qterm)]) -> Int raise
+
+pub fn[TA, TB] cmp_v1((Double, TA), (Double, TB)) -> Int raise
+
+pub fn compare(Int, Int) -> Int raise
+
+pub fn[TA, TB] compare_v1((TA) -> ((TA) -> Int raise) raise, Map[TB, TA], Map[TB, TA]) -> Int raise
+
+pub fn compare_v10(String) -> ((String) -> Int raise) raise
+
+pub fn compare_v11(String) -> ((String) -> Int raise) raise
+
+pub fn[TA, TB] compare_v12((TB) -> ((TA) -> Int raise) raise, @omap.T[String, TB], @omap.T[String, TA]) -> Int raise
+
+pub fn compare_v13(@oset.T[String], @oset.T[String]) -> Int raise
+
+pub fn compare_v14(@oset.T[String]) -> ((@oset.T[String]) -> Int raise) raise
+
+pub fn compare_v15((String, Int), (String, Int)) -> Int raise
+
+pub fn compare_v16((String, Int)) -> (((String, Int)) -> Int raise) raise
+
+pub fn[TA, TB] compare_v17((TB) -> ((TA) -> Int raise) raise, @omap.T[(String, Int), TB], @omap.T[(String, Int), TA]) -> Int raise
+
+pub fn compare_v18(@oset.T[(String, Int)], @oset.T[(String, Int)]) -> Int raise
+
+pub fn compare_v19(@oset.T[(String, Int)]) -> ((@oset.T[(String, Int)]) -> Int raise) raise
+
+pub fn[TA] compare_v2(Set[TA]) -> ((Set[TA]) -> Int raise) raise
+
+pub fn compare_v20(Term, Term) -> Int raise
+
+pub fn compare_v21(Term) -> ((Term) -> Int raise) raise
+
+pub fn[TA, TB] compare_v22((TB) -> ((TA) -> Int raise) raise, @omap.T[Term, TB], @omap.T[Term, TA]) -> Int raise
+
+pub fn compare_v23(@oset.T[Term], @oset.T[Term]) -> Int raise
+
+pub fn compare_v24((String, @list.List[Term]), (String, @list.List[Term])) -> Int raise
+
+pub fn compare_v25((String, @list.List[Term])) -> (((String, @list.List[Term])) -> Int raise) raise
+
+pub fn[TA, TB] compare_v26((TB) -> ((TA) -> Int raise) raise, @omap.T[(String, @list.List[Term]), TB], @omap.T[(String, @list.List[Term]), TA]) -> Int raise
+
+pub fn compare_v27(@oset.T[(String, @list.List[Term])], @oset.T[(String, @list.List[Term])]) -> Int raise
+
+pub fn compare_v28(@oset.T[(String, @list.List[Term])]) -> ((@oset.T[(String, @list.List[Term])]) -> Int raise) raise
+
+pub fn compare_v29(Formula, Formula) -> Int raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] compare_v3(TA) -> ((TA) -> Int raise) raise
+
+pub fn compare_v30(Formula) -> ((Formula) -> Int raise) raise
+
+pub fn[TA, TB] compare_v31((TB) -> ((TA) -> Int raise) raise, @omap.T[Formula, TB], @omap.T[Formula, TA]) -> Int raise
+
+pub fn compare_v32(@oset.T[Formula], @oset.T[Formula]) -> Int raise
+
+pub fn compare_v33(@oset.T[Formula]) -> ((@oset.T[Formula]) -> Int raise) raise
+
+pub fn compare_v34((Bool, (String, @list.List[Term]))) -> (((Bool, (String, @list.List[Term]))) -> Int raise) raise
+
+pub fn compare_v35((Bool, (String, @list.List[Term]))) -> (((Bool, (String, @list.List[Term]))) -> Int raise) raise
+
+pub fn[TA, TB] compare_v36((TB) -> ((TA) -> Int raise) raise, @omap.T[(Bool, (String, @list.List[Term])), TB], @omap.T[(Bool, (String, @list.List[Term])), TA]) -> Int raise
+
+pub fn compare_v37(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[(Bool, (String, @list.List[Term]))]) -> Int raise
+
+pub fn compare_v38(@oset.T[(Bool, (String, @list.List[Term]))]) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> Int raise) raise
+
+pub fn compare_v39(@oset.T[(Bool, (String, @list.List[Term]))]) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> Int raise) raise
+
+pub fn[TA, TB, TC : Eq + @lib.OCompare + @lib.OHash] compare_v4((TB) -> ((TA) -> Int raise) raise, @omap.T[TC, TB], @omap.T[TC, TA]) -> Int raise
+
+pub fn[TA, TB] compare_v40((TB) -> ((TA) -> Int raise) raise, @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TB], @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]) -> Int raise
+
+pub fn compare_v41(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]], @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> Int raise
+
+pub fn compare_v42(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> ((@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> Int raise) raise
+
+pub fn compare_v43(Thm, Thm) -> Int raise
+
+pub fn compare_v44(Kbo) -> ((Term) -> ((Term) -> Int? raise) raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] compare_v5(TA) -> ((TA) -> Int raise) raise
+
+pub fn[TA, TB, TC : Eq + @lib.OCompare + @lib.OHash] compare_v6((TB) -> ((TA) -> Int raise) raise, @omap.T[TC, TB], @omap.T[TC, TA]) -> Int raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] compare_v7(TA) -> ((TA) -> Int raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] compare_v8(@oset.T[TA], @oset.T[TA]) -> Int raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] compare_v9(@oset.T[TA]) -> ((@oset.T[TA]) -> Int raise) raise
+
+pub fn comparefnqterm(((String, Int), @list.List[Qterm]), ((String, Int), @list.List[Qterm])) -> Int raise
+
+pub fn[TA, TB, TC, TD] compareiterator((TB) -> ((TA) -> Int raise) raise, (TD) -> ((TC) -> Int raise) raise, Iterator[TB, TD]?, Iterator[TA, TC]?) -> Int raise
+
+pub fn comparepriority(Int) -> ((Int) -> Int raise) raise
+
+pub fn compareqterm(Qterm, Qterm) -> Int raise
+
+pub fn comparevalue(Unit, Unit) -> Int raise
+
+pub fn complementfn(Size, Int) -> Int? raise
+
+pub fn complementname() -> String
+
+pub fn[TA] compose(@omap.T[(String, Int), String], @omap.T[(String, Int), TA]) -> @omap.T[(String, Int), TA] raise
+
+pub fn compose_v1(Subst) -> ((Subst) -> Subst raise) raise
+
+pub fn[TA] computesize(Net[TA]) -> Int raise
+
+pub fn conjoin(@oset.T[(Bool, (String, @list.List[Term]))]) -> Formula raise
+
+pub fn conjunctionname() -> String
+
+pub fn consname() -> String
+
+pub fn constantvaluation(Int) -> ((@oset.T[String]) -> Valuation raise) raise
+
+pub fn convrule((Term) -> (Term, Thm) raise) -> ((Thm) -> Thm raise) raise
+
+pub fn[TA, TB] count(((TA, TB)) -> Bool raise) -> ((Map[TA, TB]) -> Int raise) raise
+
+pub fn[TA] count_v1((TA) -> Bool raise) -> ((Set[TA]) -> Int raise) raise
+
+pub fn[TA] count_v2((TA) -> Bool raise, @oset.T[TA]) -> Int raise
+
+pub fn[TA] count_v3((TA) -> Bool raise, @oset.T[TA]) -> Int raise
+
+pub fn[TA] count_v4((TA) -> Bool raise, @oset.T[TA]) -> Int raise
+
+pub fn[TA] count_v5((TA) -> Bool raise, @oset.T[TA]) -> Int raise
+
+pub fn[TA] count_v6((TA) -> Bool raise, @oset.T[TA]) -> Int raise
+
+pub fn[TA] count_v7((TA) -> Bool raise, @oset.T[TA]) -> Int raise
+
+pub fn[TA] count_v8((TA) -> Bool raise, @oset.T[TA]) -> Int raise
+
+pub fn[TA] critical(TA) -> TA raise
+
+pub fn cunknown() -> Int
+
+pub fn cutn(Size) -> ((Int) -> Int raise) raise
+
+pub fn deduce(Active, Clause1) -> @list.List[Clause1] raise
+
+pub fn deduceparamodulationinto(TermNet[(Clause1, (Bool, (String, @list.List[Term])), Orient, Term)], Clause1, (((Bool, (String, @list.List[Term])), @list.List[Int], Term), @list.List[Clause1])) -> @list.List[Clause1] raise
+
+pub fn deduceparamodulationwith(TermNet[(Clause1, (Bool, (String, @list.List[Term])), @list.List[Int], Term)], Clause1, (((Bool, (String, @list.List[Term])), Orient, Term), @list.List[Clause1])) -> @list.List[Clause1] raise
+
+pub fn deduceresolution(LiteralNet[(Clause1, (Bool, (String, @list.List[Term])))], Clause1, ((Bool, (String, @list.List[Term])), @list.List[Clause1])) -> @list.List[Clause1] raise
+
+pub fn default() -> Parameters
+
+pub fn default_v1() -> Kbo
+
+pub fn default_v2() -> Parameters4
+
+pub fn default_v3() -> Parameters5
+
+pub fn default_v4() -> Parameters6
+
+pub fn default_v5() -> Parameters7
+
+pub fn defaultfixed() -> Fixed
+
+pub fn defaultmodels() -> @list.List[ModelParameters]
+
+pub fn defaultsize() -> Int
+
+pub fn[TA, TB] delete(Map[TA, TB]) -> ((TA) -> Map[TA, TB] raise) raise
+
+pub fn[TA] delete_v1(Set[TA]) -> ((TA) -> Set[TA] raise) raise
+
+pub fn delete_v10(@oset.T[(String, @list.List[Term])], (String, @list.List[Term])) -> @oset.T[(String, @list.List[Term])] raise
+
+pub fn[TA] delete_v11(@omap.T[Formula, TA], Formula) -> @omap.T[Formula, TA] raise
+
+pub fn delete_v12(@oset.T[Formula], Formula) -> @oset.T[Formula] raise
+
+pub fn[TA] delete_v13(@omap.T[(Bool, (String, @list.List[Term])), TA], (Bool, (String, @list.List[Term]))) -> @omap.T[(Bool, (String, @list.List[Term])), TA] raise
+
+pub fn delete_v14(@oset.T[(Bool, (String, @list.List[Term]))], (Bool, (String, @list.List[Term]))) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn[TA] delete_v15(@omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA], @oset.T[(Bool, (String, @list.List[Term]))]) -> @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA] raise
+
+pub fn delete_v16(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]], @oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]] raise
+
+pub fn delete_v17(Active, @oset.T[Int]) -> Active raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] delete_v2(@omap.T[TA, TB], TA) -> @omap.T[TA, TB] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] delete_v3(@omap.T[TA, TB], TA) -> @omap.T[TA, TB] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] delete_v4(@oset.T[TA], TA) -> @oset.T[TA] raise
+
+pub fn[TA] delete_v5(@omap.T[String, TA], String) -> @omap.T[String, TA] raise
+
+pub fn delete_v6(@oset.T[String], String) -> @oset.T[String] raise
+
+pub fn[TA] delete_v7(@omap.T[(String, Int), TA], (String, Int)) -> @omap.T[(String, Int), TA] raise
+
+pub fn delete_v8(@oset.T[(String, Int)], (String, Int)) -> @oset.T[(String, Int)] raise
+
+pub fn[TA] delete_v9(@omap.T[(String, @list.List[Term]), TA], (String, @list.List[Term])) -> @omap.T[(String, @list.List[Term]), TA] raise
+
+pub fn[TA, TB] deletenth(Map[TA, TB]) -> ((Int) -> ((TA, TB), Map[TA, TB]) raise) raise
+
+pub fn[TA] deletenth_v1(Set[TA]) -> ((Int) -> (TA, Set[TA]) raise) raise
+
+pub fn[TA, TB] deletepick(Map[TA, TB]) -> ((TA, TB), Map[TA, TB]) raise
+
+pub fn[TA] deletepick_v1(Set[TA]) -> (TA, Set[TA]) raise
+
+pub fn[TA, TB] deleterandom(Map[TA, TB]) -> ((TA, TB), Map[TA, TB]) raise
+
+pub fn[TA] deleterandom_v1(Set[TA]) -> (TA, Set[TA]) raise
+
+pub fn deletewaiting(Rewrite) -> ((Int) -> Rewrite raise) raise
+
+pub fn demote(Formula) -> Term raise
+
+pub fn[TA] dest(Set[TA]) -> Map[TA, Unit] raise
+
+pub fn dest_v1(Clause1) -> ClauseInfo raise
+
+pub fn destapp(Term) -> (Term, Term) raise
+
+pub fn destatom(Formula) -> (String, @list.List[Term]) raise
+
+pub fn destbinop(String, Term) -> (Term, Term) raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] destbinop_v1(TB, (TB, @list.List[TA])) -> (TA, TA) raise
+
+pub fn destbinop_v2(String, (Bool, (String, @list.List[Term]))) -> (Bool, Term, Term) raise
+
+pub fn destboolean(Formula) -> Bool raise
+
+pub fn destconst(Term) -> String raise
+
+pub fn[TA] desteq((String, @list.List[TA])) -> (TA, TA) raise
+
+pub fn desteq_v1(Formula) -> (Term, Term) raise
+
+pub fn desteq_v2((Bool, (String, @list.List[Term]))) -> (Term, Term) raise
+
+pub fn destexists(Formula) -> (String, Formula) raise
+
+pub fn destfn(Term) -> (String, @list.List[Term]) raise
+
+pub fn destfnapp(String, @list.List[Term]) -> (Term, Term) raise
+
+pub fn destfnhastype(String, @list.List[Term]) -> (Term, Term) raise
+
+pub fn destforall(Formula) -> (String, Formula) raise
+
+pub fn destirrefl((Bool, (String, @list.List[Term]))) -> Term raise
+
+pub fn destneg(Formula) -> Formula raise
+
+pub fn destneq(Formula) -> (Term, Term) raise
+
+pub fn destneq_v1((Bool, (String, @list.List[Term]))) -> (Term, Term) raise
+
+pub fn destrefl((String, @list.List[Term])) -> Term raise
+
+pub fn destrefl_v1(Formula) -> Term raise
+
+pub fn destrefl_v2((Bool, (String, @list.List[Term]))) -> Term raise
+
+pub fn destterm(Term) -> Term raise
+
+pub fn destunit(Thm) -> (Bool, (String, @list.List[Term])) raise
+
+pub fn destuniteq(Thm) -> (Term, Term) raise
+
+pub fn destvar(Term) -> String raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] diff(@oset.T[TA], @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn diff_v1(@oset.T[String], @oset.T[String]) -> @oset.T[String] raise
+
+pub fn diff_v2(@oset.T[(String, Int)], @oset.T[(String, Int)]) -> @oset.T[(String, Int)] raise
+
+pub fn diff_v3(@oset.T[Term], @oset.T[Term]) -> @oset.T[Term] raise
+
+pub fn diff_v4(@oset.T[(String, @list.List[Term])], @oset.T[(String, @list.List[Term])]) -> @oset.T[(String, @list.List[Term])] raise
+
+pub fn diff_v5(@oset.T[Formula], @oset.T[Formula]) -> @oset.T[Formula] raise
+
+pub fn diff_v6(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn diff_v7(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]], @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]] raise
+
+pub fn[TA] difference(Set[TA]) -> ((Set[TA]) -> Set[TA] raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] difference_v1(@oset.T[TA]) -> ((@oset.T[TA]) -> @oset.T[TA] raise) raise
+
+pub fn difference_v2(@oset.T[String]) -> ((@oset.T[String]) -> @oset.T[String] raise) raise
+
+pub fn difference_v3(@oset.T[(String, Int)]) -> ((@oset.T[(String, Int)]) -> @oset.T[(String, Int)] raise) raise
+
+pub fn difference_v4(@oset.T[(String, @list.List[Term])]) -> ((@oset.T[(String, @list.List[Term])]) -> @oset.T[(String, @list.List[Term])] raise) raise
+
+pub fn difference_v5(@oset.T[Formula]) -> ((@oset.T[Formula]) -> @oset.T[Formula] raise) raise
+
+pub fn difference_v6(@oset.T[(Bool, (String, @list.List[Term]))]) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise) raise
+
+pub fn difference_v7(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> ((@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]] raise) raise
+
+pub fn[TA, TB] differencedomain(Map[TA, TB]) -> ((Map[TA, TB]) -> Map[TA, TB] raise) raise
+
+pub fn differencefn(Size, Int, Int) -> Int? raise
+
+pub fn differencename() -> String
+
+pub fn disch_disj(@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn disch_disjs(@list.List[@kernel.Term], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn disjoin(@oset.T[(Bool, (String, @list.List[Term]))]) -> Formula raise
+
+pub fn[TA] disjoint(Set[TA]) -> ((Set[TA]) -> Bool raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] disjoint_v1(@oset.T[TA], @oset.T[TA]) -> Bool raise
+
+pub fn disjoint_v2(@oset.T[String], @oset.T[String]) -> Bool raise
+
+pub fn disjoint_v3(@oset.T[(String, Int)], @oset.T[(String, Int)]) -> Bool raise
+
+pub fn disjoint_v4(@oset.T[Term], @oset.T[Term]) -> Bool raise
+
+pub fn disjoint_v5(@oset.T[(String, @list.List[Term])], @oset.T[(String, @list.List[Term])]) -> Bool raise
+
+pub fn disjoint_v6(@oset.T[Formula], @oset.T[Formula]) -> Bool raise
+
+pub fn disjoint_v7(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[(Bool, (String, @list.List[Term]))]) -> Bool raise
+
+pub fn disjoint_v8(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]], @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> Bool raise
+
+pub fn[TA, TB] disjointdomain(Map[TA, TB], Map[TA, TB]) -> Bool raise
+
+pub fn disjunctionname() -> String
+
+pub fn divfn(Size) -> ((Int) -> ((Int) -> Int? raise) raise) raise
+
+pub fn[TA] divfn_v1(TA, Int, Int) -> Int? raise
+
+pub fn divides((Int, Int)) -> Bool raise
+
+pub fn divides_v1(Int) -> ((Int) -> Bool raise) raise
+
+pub fn dividesname() -> String
+
+pub fn[TA] dividesrel(TA, Int, Int) -> Bool? raise
+
+pub fn dividesrel_v1(Size) -> ((Int) -> ((Int) -> Bool? raise) raise) raise
+
+pub fn divname() -> String
+
+pub fn[TA, TB] domain(Map[TA, TB]) -> Set[TA] raise
+
+pub fn elementlistindex(Size) -> ((@list.List[Int]) -> Int raise) raise
+
+pub fn elementlistspace(Size) -> ((Int) -> Int? raise) raise
+
+pub fn[TA] elements(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA] elements_v1(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA] elements_v2(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA] elements_v3(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA] elements_v4(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA] elements_v5(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA] elements_v6(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA] elements_v7(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn eltn(Size) -> Int raise
+
+pub fn[TA] empty((TA) -> ((TA) -> Int raise) raise) -> Set[TA] raise
+
+pub fn[TA, TB] empty_v1() -> @omap.T[TA, TB]
+
+pub fn[TA] empty_v10() -> @oset.T[TA]
+
+pub fn[TA, TB] empty_v11() -> @omap.T[TA, TB]
+
+pub fn[TA] empty_v12() -> @oset.T[TA]
+
+pub fn empty_v13() -> Subst
+
+pub fn[TA, TB] empty_v14() -> @omap.T[TA, TB]
+
+pub fn[TA] empty_v15() -> @oset.T[TA]
+
+pub fn[TA] empty_v16() -> @oset.T[TA]
+
+pub fn[TA, TB] empty_v17() -> @omap.T[TA, TB]
+
+pub fn[TA] empty_v18() -> @oset.T[TA]
+
+pub fn[TA] empty_v19() -> @oset.T[TA]
+
+pub fn[TA, TB] empty_v2() -> @omap.T[TA, TB]
+
+pub fn[TA, TB] empty_v20() -> @omap.T[TA, TB]
+
+pub fn[TA] empty_v21() -> @oset.T[TA]
+
+pub fn[TA] empty_v22() -> @oset.T[TA]
+
+pub fn[TA, TB] empty_v23() -> @omap.T[TA, TB]
+
+pub fn[TA] empty_v24() -> @oset.T[TA]
+
+pub fn[TA] empty_v25() -> @oset.T[TA]
+
+pub fn empty_v26() -> Units
+
+pub fn empty_v27(Parameters5) -> Active raise
+
+pub fn empty_v28(Parameters6, @list.List[(@oset.T[String], @oset.T[(Bool, (String, @list.List[Term]))])], @list.List[(@oset.T[String], @oset.T[(Bool, (String, @list.List[Term]))])]) -> Waiting raise
+
+pub fn[TA] empty_v3() -> @oset.T[TA]
+
+pub fn[TA] empty_v4() -> @oset.T[TA]
+
+pub fn[TA, TB] empty_v5() -> @omap.T[TA, TB]
+
+pub fn[TA] empty_v6() -> @oset.T[TA]
+
+pub fn[TA] empty_v7() -> @oset.T[TA]
+
+pub fn[TA, TB] empty_v8() -> @omap.T[TA, TB]
+
+pub fn[TA] empty_v9() -> @oset.T[TA]
+
+pub fn emptyfixed() -> Fixed
+
+pub fn[TA] emptyfn(TA) -> Int? raise
+
+pub fn emptyfunctions() -> @omap.T[(String, Int), (Size) -> ((@list.List[Int]) -> Int? raise) raise]
+
+pub fn emptyname() -> String
+
+pub fn emptyrelations() -> @omap.T[(String, Int), (Size) -> ((@list.List[Int]) -> Bool? raise) raise]
+
+pub fn[TA] emptysubsumes((TA) -> Bool raise, @list.List[TA]) -> TA? raise
+
+pub fn emptyvaluation() -> Valuation
+
+pub fn[TA] enumerate(@list.List[TA]) -> @list.List[(Int, TA)] raise
+
+pub fn env_of_preterm(@preterm.Preterm) -> @list.List[(String, @preterm.Pretype)] raise
+
+pub fn env_of_th(@kernel.Thm) -> @list.List[(String, @preterm.Pretype)] raise
+
+pub fn env_of_ths(@list.List[@kernel.Thm]) -> @list.List[(String, @preterm.Pretype)] raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] eqrel(TA, @list.List[TB]) -> Bool? raise
+
+pub fn eqrelation() -> (String, Int)
+
+pub fn eqrelationarity() -> Int
+
+pub fn eqrelationname() -> String
+
+pub fn[TA, TB] equal((TA) -> ((TA) -> Bool raise) raise, Map[TB, TA], Map[TB, TA]) -> Bool raise
+
+pub fn[TA] equal_v1(Set[TA]) -> ((Set[TA]) -> Bool raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] equal_v10((TA, TB), (TA, TB)) -> Bool raise
+
+pub fn[TA, TB] equal_v11((TB) -> ((TA) -> Bool raise) raise, @omap.T[(String, Int), TB], @omap.T[(String, Int), TA]) -> Bool raise
+
+pub fn equal_v12(@oset.T[(String, Int)], @oset.T[(String, Int)]) -> Bool raise
+
+pub fn equal_v13(@oset.T[(String, Int)]) -> ((@oset.T[(String, Int)]) -> Bool raise) raise
+
+pub fn equal_v14(Term, Term) -> Bool raise
+
+pub fn[TA, TB] equal_v15((TB) -> ((TA) -> Bool raise) raise, @omap.T[Term, TB], @omap.T[Term, TA]) -> Bool raise
+
+pub fn equal_v16(@oset.T[Term], @oset.T[Term]) -> Bool raise
+
+pub fn equal_v17((String, @list.List[Term]), (String, @list.List[Term])) -> Bool raise
+
+pub fn[TA, TB] equal_v18((TB) -> ((TA) -> Bool raise) raise, @omap.T[(String, @list.List[Term]), TB], @omap.T[(String, @list.List[Term]), TA]) -> Bool raise
+
+pub fn equal_v19(@oset.T[(String, @list.List[Term])], @oset.T[(String, @list.List[Term])]) -> Bool raise
+
+pub fn[TA, TB, TC : Eq + @lib.OCompare + @lib.OHash] equal_v2((TB) -> ((TA) -> Bool raise) raise, @omap.T[TC, TB], @omap.T[TC, TA]) -> Bool raise
+
+pub fn equal_v20(@oset.T[(String, @list.List[Term])]) -> ((@oset.T[(String, @list.List[Term])]) -> Bool raise) raise
+
+pub fn equal_v21(Formula, Formula) -> Bool raise
+
+pub fn[TA, TB] equal_v22((TB) -> ((TA) -> Bool raise) raise, @omap.T[Formula, TB], @omap.T[Formula, TA]) -> Bool raise
+
+pub fn equal_v23(@oset.T[Formula], @oset.T[Formula]) -> Bool raise
+
+pub fn equal_v24(@oset.T[Formula]) -> ((@oset.T[Formula]) -> Bool raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] equal_v25((TA, (String, @list.List[Term])), (TA, (String, @list.List[Term]))) -> Bool raise
+
+pub fn[TA, TB] equal_v26((TB) -> ((TA) -> Bool raise) raise, @omap.T[(Bool, (String, @list.List[Term])), TB], @omap.T[(Bool, (String, @list.List[Term])), TA]) -> Bool raise
+
+pub fn equal_v27(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[(Bool, (String, @list.List[Term]))]) -> Bool raise
+
+pub fn equal_v28(@oset.T[(Bool, (String, @list.List[Term]))]) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> Bool raise) raise
+
+pub fn[TA, TB] equal_v29((TB) -> ((TA) -> Bool raise) raise, @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TB], @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]) -> Bool raise
+
+pub fn[TA, TB, TC : Eq + @lib.OCompare + @lib.OHash] equal_v3((TB) -> ((TA) -> Bool raise) raise, @omap.T[TC, TB], @omap.T[TC, TA]) -> Bool raise
+
+pub fn equal_v30(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]], @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> Bool raise
+
+pub fn equal_v31(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> ((@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> Bool raise) raise
+
+pub fn equal_v32(Thm, Thm) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] equal_v4(@oset.T[TA], @oset.T[TA]) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] equal_v5(@oset.T[TA]) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] equal_v6(TA, TA) -> Bool raise
+
+pub fn[TA, TB] equal_v7((TB) -> ((TA) -> Bool raise) raise, @omap.T[String, TB], @omap.T[String, TA]) -> Bool raise
+
+pub fn equal_v8(@oset.T[String], @oset.T[String]) -> Bool raise
+
+pub fn equal_v9(@oset.T[String]) -> ((@oset.T[String]) -> Bool raise) raise
+
+pub fn[TA, TB] equaldomain(Map[TA, TB], Map[TA, TB]) -> Bool raise
+
+pub fn equalfnqterm(((String, Int), @list.List[Qterm]), ((String, Int), @list.List[Qterm])) -> Bool raise
+
+pub fn[TA, TB, TC, TD] equaliterator((TB) -> ((TA) -> Bool raise) raise, (TD) -> ((TC) -> Bool raise) raise, Iterator[TB, TD]?, Iterator[TA, TC]?) -> Bool raise
+
+pub fn equality((Bool, (String, @list.List[Term])), @list.List[Int], Term) -> Thm raise
+
+pub fn[TA, TB] equalkey((TB) -> ((TA) -> Int raise) raise, TB, TA) -> Bool raise
+
+pub fn equalqterm(Qterm, Qterm) -> Bool raise
+
+pub fn equalthms(Clause1, Clause1) -> Bool raise
+
+pub fn equalvalue(Unit, Unit) -> Bool raise
+
+pub fn equalvar(String, Term) -> Bool raise
+
+pub fn equationliteral((Term, Term), Thm) -> (Bool, (String, @list.List[Term]))? raise
+
+pub fn equations(Rewrite) -> @list.List[((Term, Term), Thm)] raise
+
+pub fn equivalencename() -> String
+
+pub fn evenname() -> String
+
+pub fn[TA] evenrel(TA, Int) -> Bool? raise
+
+pub fn evenrel_v1(Size) -> ((Int) -> Bool? raise) raise
+
+pub fn everyconv(Term, @list.List[(Term) -> (Term, Thm) raise]) -> (Term, Thm) raise
+
+pub fn everyconv_v1(@list.List[(Term) -> (Term, Thm) raise], Term) -> (Term, Thm) raise
+
+pub fn everyliterule((Bool, (String, @list.List[Term])), @list.List[((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise]) -> ((Bool, (String, @list.List[Term])), Thm) raise
+
+pub fn everyliterule_v1(@list.List[((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise], (Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise
+
+pub fn everyrule(Thm, @list.List[(Thm) -> Thm raise]) -> Thm raise
+
+pub fn everyrule_v1(@list.List[(Thm) -> Thm raise], Thm) -> Thm raise
+
+pub fn existentialname() -> String
+
+pub fn[TA, TB] exists(((TA, TB)) -> Bool raise, Map[TA, TB]) -> Bool raise
+
+pub fn[TA] exists_v1((TA) -> Bool raise) -> ((Set[TA]) -> Bool raise) raise
+
+pub fn[TA] exists_v10((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA] exists_v11((TA) -> Bool raise) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn[TA, TB] exists_v12((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA, TB] exists_v13(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> Bool raise) raise
+
+pub fn[TA] exists_v14((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA] exists_v15((TA) -> Bool raise) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn[TA, TB] exists_v16((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA] exists_v17((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] exists_v18((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA, TB] exists_v19(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> Bool raise) raise
+
+pub fn[TA, TB] exists_v2((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA] exists_v20((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA] exists_v21((TA) -> Bool raise) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn[TA, TB] exists_v22((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA, TB] exists_v23(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> Bool raise) raise
+
+pub fn[TA] exists_v24((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA] exists_v25((TA) -> Bool raise) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn[TA, TB] exists_v26((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA, TB] exists_v27(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> Bool raise) raise
+
+pub fn[TA] exists_v28((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA] exists_v29((TA) -> Bool raise) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn[TA, TB] exists_v3(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> Bool raise) raise
+
+pub fn[TA, TB] exists_v30((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA, TB] exists_v31(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> Bool raise) raise
+
+pub fn[TA] exists_v32((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA] exists_v33((TA) -> Bool raise) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn[TA, TB] exists_v4((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA, TB] exists_v5(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> Bool raise) raise
+
+pub fn[TA] exists_v6((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA] exists_v7((TA) -> Bool raise) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn[TA, TB] exists_v8((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA, TB] exists_v9(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> Bool raise) raise
+
+pub fn[TA] exp(((TA, TA)) -> TA raise) -> ((TA) -> ((Int) -> ((TA) -> TA raise) raise) raise) raise
+
+pub fn expandabbrevs(Thm) -> Thm raise
+
+pub fn expfn(Size, Int, Int) -> Int? raise
+
+pub fn expfn_v1(Size, Int, Int) -> Int? raise
+
+pub fn expint(Int, Int) -> Int? raise
+
+pub fn expname() -> String
+
+pub fn extract_rewritables(Active) -> (Active, @list.List[Clause1]) raise
+
+pub fn fact(@list.List[Subst], @list.List[(@list.List[Edge], Subst, @list.List[Edge])]) -> @list.List[Subst] raise
+
+pub fn factor(Thm) -> @list.List[Thm] raise
+
+pub fn factor1(Clause1, (Active, Subsume[Clause1], @list.List[Clause1])) -> (Active, Subsume[Clause1], @list.List[Clause1]) raise
+
+pub fn factor_p(@oset.T[(Bool, (String, @list.List[Term]))]) -> @list.List[Subst] raise
+
+pub fn factor_p_v1(Active, @list.List[Clause1], @list.List[Clause1]) -> (Active, @list.List[Clause1]) raise
+
+pub fn factor_v1(Clause1) -> @list.List[Clause1] raise
+
+pub fn factor_v2(Active, @list.List[Clause1]) -> (Active, @list.List[Clause1]) raise
+
+pub fn falsityname() -> String
+
+pub fn[TA] fifoize(Parameters1) -> ((@list.List[(Int, TA)]) -> @list.List[(Int, TA)] raise) raise
+
+pub fn[TA, TB] filter(((TA, TB)) -> Bool raise) -> ((Map[TA, TB]) -> Map[TA, TB] raise) raise
+
+pub fn[TA, TB, TC] filter_map((TA) -> ((TC) -> TB? raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB, TC] filter_map_v1((TA) -> ((TC) -> TB? raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn filter_map_v10(((String, @list.List[Term])) -> (String, @list.List[Term])? raise, @oset.T[(String, @list.List[Term])]) -> @oset.T[(String, @list.List[Term])] raise
+
+pub fn[TA, TB, TC] filter_map_v11((TA) -> ((TC) -> TB? raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn filter_map_v12((Formula) -> Formula? raise, @oset.T[Formula]) -> @oset.T[Formula] raise
+
+pub fn[TA, TB, TC] filter_map_v13((TA) -> ((TC) -> TB? raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn filter_map_v14(((Bool, (String, @list.List[Term]))) -> (Bool, (String, @list.List[Term]))? raise, @oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn[TA, TB, TC] filter_map_v15((TA) -> ((TC) -> TB? raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn filter_map_v16((@oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))]? raise, @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] filter_map_v2((TA) -> TA? raise, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA, TB, TC] filter_map_v3((TA) -> ((TC) -> TB? raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn filter_map_v4((String) -> String? raise, @oset.T[String]) -> @oset.T[String] raise
+
+pub fn[TA, TB, TC] filter_map_v5((TA) -> ((TC) -> TB? raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn filter_map_v6(((String, Int)) -> (String, Int)? raise, @oset.T[(String, Int)]) -> @oset.T[(String, Int)] raise
+
+pub fn[TA, TB, TC] filter_map_v7((TA) -> ((TC) -> TB? raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn filter_map_v8((Term) -> Term? raise, @oset.T[Term]) -> @oset.T[Term] raise
+
+pub fn[TA, TB, TC] filter_map_v9((TA) -> ((TC) -> TB? raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA] filter_v1((TA) -> Bool raise) -> ((Set[TA]) -> Set[TA] raise) raise
+
+pub fn[TA, TB] filter_v10((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] filter_v11(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA] filter_v12((TA) -> Bool raise, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA, TB] filter_v13((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA] filter_v14((TA) -> Bool raise, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA, TB] filter_v15((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] filter_v16(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA] filter_v17((TA) -> Bool raise, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA, TB] filter_v18((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] filter_v19(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA, TB] filter_v2((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA] filter_v20((TA) -> Bool raise, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA, TB] filter_v21((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] filter_v22(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA] filter_v23((TA) -> Bool raise, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA, TB] filter_v24((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] filter_v25(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA] filter_v26((TA) -> Bool raise, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA] filter_v27((TA) -> Bool raise) -> ((TermNet[TA]) -> TermNet[TA] raise) raise
+
+pub fn[TA] filter_v28((TA) -> Bool raise) -> ((TermNet[TA]) -> TermNet[TA] raise) raise
+
+pub fn[TA] filter_v29((TA) -> Bool raise, LiteralNet[TA]) -> LiteralNet[TA] raise
+
+pub fn[TA, TB] filter_v3(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA] filter_v30((TA) -> Bool raise, Subsume[TA]) -> Subsume[TA] raise
+
+pub fn[TA, TB] filter_v4((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] filter_v5(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA] filter_v6((TA) -> Bool raise, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA, TB] filter_v7((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] filter_v8(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA] filter_v9((TA) -> Bool raise, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA] finally(Parameters1, @list.List[(Int, TA)]) -> @list.List[TA] raise
+
+pub fn[TA] find((TA) -> Bool raise, @list.List[TA]) -> TA? raise
+
+pub fn[TA, TB] find_first((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] find_first_opt((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] find_first_opt_v1((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_first_opt_v10((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] find_first_opt_v11((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_first_opt_v12((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] find_first_opt_v13((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_first_opt_v14((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] find_first_opt_v15((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_first_opt_v16((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA] find_first_opt_v2((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] find_first_opt_v3((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_first_opt_v4((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] find_first_opt_v5((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_first_opt_v6((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] find_first_opt_v7((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_first_opt_v8((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] find_first_opt_v9((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] find_first_v1((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] find_first_v10((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_first_v11((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] find_first_v12((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_first_v13((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] find_first_v14((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_first_v15((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] find_first_v16((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA] find_first_v2((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_first_v3((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] find_first_v4((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_first_v5((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] find_first_v6((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_first_v7((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] find_first_v8((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_first_v9((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] find_last((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] find_last_opt((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] find_last_opt_v1((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_last_opt_v10((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] find_last_opt_v11((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_last_opt_v12((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] find_last_opt_v13((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_last_opt_v14((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] find_last_opt_v15((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_last_opt_v16((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA] find_last_opt_v2((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] find_last_opt_v3((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_last_opt_v4((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] find_last_opt_v5((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_last_opt_v6((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] find_last_opt_v7((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_last_opt_v8((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] find_last_opt_v9((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] find_last_v1((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] find_last_v10((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_last_v11((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] find_last_v12((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_last_v13((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] find_last_v14((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_last_v15((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] find_last_v16((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA] find_last_v2((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_last_v3((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] find_last_v4((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_last_v5((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] find_last_v6((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_last_v7((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] find_last_v8((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_last_v9((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] find_opt(TB, @omap.T[TB, TA]) -> TA? raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] find_opt_v1(TB, @omap.T[TB, TA]) -> TA? raise
+
+pub fn find_opt_v10((String, @list.List[Term]), @oset.T[(String, @list.List[Term])]) -> (String, @list.List[Term])? raise
+
+pub fn[TA] find_opt_v11(Formula, @omap.T[Formula, TA]) -> TA? raise
+
+pub fn find_opt_v12(Formula, @oset.T[Formula]) -> Formula? raise
+
+pub fn[TA] find_opt_v13((Bool, (String, @list.List[Term])), @omap.T[(Bool, (String, @list.List[Term])), TA]) -> TA? raise
+
+pub fn find_opt_v14((Bool, (String, @list.List[Term])), @oset.T[(Bool, (String, @list.List[Term]))]) -> (Bool, (String, @list.List[Term]))? raise
+
+pub fn[TA] find_opt_v15(@oset.T[(Bool, (String, @list.List[Term]))], @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]) -> TA? raise
+
+pub fn find_opt_v16(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[(Bool, (String, @list.List[Term]))]? raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] find_opt_v2(TA, @oset.T[TA]) -> TA? raise
+
+pub fn[TA] find_opt_v3(String, @omap.T[String, TA]) -> TA? raise
+
+pub fn find_opt_v4(String, @oset.T[String]) -> String? raise
+
+pub fn[TA] find_opt_v5((String, Int), @omap.T[(String, Int), TA]) -> TA? raise
+
+pub fn find_opt_v6((String, Int), @oset.T[(String, Int)]) -> (String, Int)? raise
+
+pub fn[TA] find_opt_v7(Term, @omap.T[Term, TA]) -> TA? raise
+
+pub fn find_opt_v8(Term, @oset.T[Term]) -> Term? raise
+
+pub fn[TA] find_opt_v9((String, @list.List[Term]), @omap.T[(String, @list.List[Term]), TA]) -> TA? raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] find_v1(TB, @omap.T[TB, TA]) -> TA raise
+
+pub fn find_v10(Term, @oset.T[Term]) -> Term raise
+
+pub fn[TA] find_v11((Term) -> Bool raise) -> (((TA, @list.List[Term])) -> @list.List[Int]? raise) raise
+
+pub fn[TA] find_v12((String, @list.List[Term]), @omap.T[(String, @list.List[Term]), TA]) -> TA raise
+
+pub fn find_v13((String, @list.List[Term]), @oset.T[(String, @list.List[Term])]) -> (String, @list.List[Term]) raise
+
+pub fn[TA] find_v14(Formula, @omap.T[Formula, TA]) -> TA raise
+
+pub fn find_v15(Formula, @oset.T[Formula]) -> Formula raise
+
+pub fn[TA] find_v16((Bool, (String, @list.List[Term])), @omap.T[(Bool, (String, @list.List[Term])), TA]) -> TA raise
+
+pub fn find_v17((Bool, (String, @list.List[Term])), @oset.T[(Bool, (String, @list.List[Term]))]) -> (Bool, (String, @list.List[Term])) raise
+
+pub fn[TA] find_v18(@oset.T[(Bool, (String, @list.List[Term]))], @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]) -> TA raise
+
+pub fn find_v19(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] find_v2(TB, @omap.T[TB, TA]) -> TA raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] find_v3(TA, @oset.T[TA]) -> TA raise
+
+pub fn[TA] find_v4(String, @omap.T[String, TA]) -> TA raise
+
+pub fn find_v5(String, @oset.T[String]) -> String raise
+
+pub fn[TA] find_v6((String, Int), @omap.T[(String, Int), TA]) -> TA raise
+
+pub fn find_v7((String, Int), @oset.T[(String, Int)]) -> (String, Int) raise
+
+pub fn find_v8((Term) -> Bool raise) -> ((Term) -> @list.List[Int]? raise) raise
+
+pub fn[TA] find_v9(Term, @omap.T[Term, TA]) -> TA raise
+
+pub fn[TA, TB] finditerator(((TA, TB)) -> Bool raise, Iterator[TA, TB]?) -> (TA, TB)? raise
+
+pub fn[TA, TB] findl(((TA, TB)) -> Bool raise, Map[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] findl_v1((TA) -> Bool raise) -> ((Set[TA]) -> TA? raise) raise
+
+pub fn[TA] findl_v2((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA] findl_v3((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA] findl_v4((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA] findl_v5((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA] findl_v6((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA] findl_v7((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA] findl_v8((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] findr(((TA, TB)) -> Bool raise, Map[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] findr_v1((TA) -> Bool raise) -> ((Set[TA]) -> TA? raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB, TC] findreducibles((Term) -> ((Term) -> Int? raise) raise, @omap.T[TA, (((Term, Term), TB), TC)], TermNet[(TA, Bool, @list.List[Int])], TA) -> ((@oset.T[TA]) -> ((@list.List[(Term, Term, Bool)]) -> @oset.T[TA] raise) raise) raise
+
+pub fn[TA] findrest((TA) -> Bool raise) -> ((@list.List[TA]) -> (TA, @list.List[TA])? raise) raise
+
+pub fn[TA, TB] first((TB) -> TA? raise, @list.List[TB]) -> TA? raise
+
+pub fn firstconv(Term, @list.List[(Term) -> (Term, Thm) raise]) -> (Term, Thm) raise
+
+pub fn firstconv_v1(@list.List[(Term) -> (Term, Thm) raise], Term) -> (Term, Thm) raise
+
+pub fn[TA, TB, TC] firstiterator(((TB, TC)) -> TA? raise, Iterator[TB, TC]?) -> TA? raise
+
+pub fn[TA, TB, TC] firstl(((TB, TC)) -> TA? raise, Map[TB, TC]) -> TA? raise
+
+pub fn[TA, TB] firstl_v1((TB) -> TA? raise) -> ((Set[TB]) -> TA? raise) raise
+
+pub fn[TA, TB] firstl_v2((TB) -> TA? raise, @oset.T[TB]) -> TA? raise
+
+pub fn[TA, TB] firstl_v3((TB) -> TA? raise, @oset.T[TB]) -> TA? raise
+
+pub fn[TA, TB] firstl_v4((TB) -> TA? raise, @oset.T[TB]) -> TA? raise
+
+pub fn[TA, TB] firstl_v5((TB) -> TA? raise, @oset.T[TB]) -> TA? raise
+
+pub fn[TA, TB] firstl_v6((TB) -> TA? raise, @oset.T[TB]) -> TA? raise
+
+pub fn[TA, TB] firstl_v7((TB) -> TA? raise, @oset.T[TB]) -> TA? raise
+
+pub fn[TA, TB] firstl_v8((TB) -> TA? raise, @oset.T[TB]) -> TA? raise
+
+pub fn firstliterule((Bool, (String, @list.List[Term])), @list.List[((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise]) -> ((Bool, (String, @list.List[Term])), Thm) raise
+
+pub fn firstliterule_v1(@list.List[((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise], (Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise
+
+pub fn[TA] firstnotequalterm((Term) -> ((Term) -> TA raise) raise, @list.List[(Term, Term)]) -> TA raise
+
+pub fn[TA, TB, TC] firstr(((TB, TC)) -> TA? raise, Map[TB, TC]) -> TA? raise
+
+pub fn[TA, TB] firstr_v1((TB) -> TA? raise) -> ((Set[TB]) -> TA? raise) raise
+
+pub fn firstrule(Thm, @list.List[(Thm) -> Thm raise]) -> Thm raise
+
+pub fn firstrule_v1(@list.List[(Thm) -> Thm raise], Thm) -> Thm raise
+
+pub fn[TA, TB, TC] fixed0((TB) -> TA raise, TB, @list.List[TC]) -> TA raise
+
+pub fn[TA, TB, TC] fixed1((TC) -> ((TB) -> TA raise) raise, TC, @list.List[TB]) -> TA raise
+
+pub fn[TA, TB, TC] fixed2((TC) -> ((TB) -> ((TB) -> TA raise) raise) raise, TC, @list.List[TB]) -> TA raise
+
+pub fn fixmap() -> FixedMap
+
+pub fn flattenconj(Formula) -> @list.List[Formula] raise
+
+pub fn flattendisj(Formula) -> @list.List[Formula] raise
+
+pub fn flattenequiv(Formula) -> @list.List[Formula] raise
+
+pub fn[TA, TB, TC] flip((TC) -> ((TB) -> TA raise) raise, TB, TC) -> TA raise
+
+pub fn fn_symbols() -> Int
+
+pub fn fnarguments(Term) -> @list.List[Term] raise
+
+pub fn fnarity(Term) -> Int raise
+
+pub fn fncmp(((String, Int), @list.List[Qterm]), ((String, Int), @list.List[Qterm]), @list.List[(Qterm, Qterm)]) -> Int raise
+
+pub fn fnfunction(Term) -> (String, Int) raise
+
+pub fn fnname(Term) -> String raise
+
+pub fn fol_of_const(@kernel.Term) -> Int raise
+
+pub fn fol_prepare_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn[TA, TB, TC] fold((TC) -> ((TB) -> ((TA) -> TA raise) raise) raise, @omap.T[TC, TB], TA) -> TA raise
+
+pub fn[TA, TB, TC] fold_v1((TC) -> ((TB) -> ((TA) -> TA raise) raise) raise, @omap.T[TC, TB], TA) -> TA raise
+
+pub fn[TA, TB] fold_v10((TB) -> ((TA) -> TA raise) raise, @oset.T[TB], TA) -> TA raise
+
+pub fn[TA, TB, TC] fold_v11((TC) -> ((TB) -> ((TA) -> TA raise) raise) raise, @omap.T[TC, TB], TA) -> TA raise
+
+pub fn[TA, TB] fold_v12((TB) -> ((TA) -> TA raise) raise, @oset.T[TB], TA) -> TA raise
+
+pub fn[TA, TB, TC] fold_v13((TC) -> ((TB) -> ((TA) -> TA raise) raise) raise, @omap.T[TC, TB], TA) -> TA raise
+
+pub fn[TA, TB] fold_v14((TB) -> ((TA) -> TA raise) raise, @oset.T[TB], TA) -> TA raise
+
+pub fn[TA, TB, TC] fold_v15((TC) -> ((TB) -> ((TA) -> TA raise) raise) raise, @omap.T[TC, TB], TA) -> TA raise
+
+pub fn[TA, TB] fold_v16((TB) -> ((TA) -> TA raise) raise, @oset.T[TB], TA) -> TA raise
+
+pub fn[TA, TB] fold_v17(((Qterm, Net[TB], TA)) -> TA raise, TA, @list.List[(Int, (@list.List[Int], @list.List[(String, Int)], @list.List[Qterm]), Net[TB])]) -> TA raise
+
+pub fn[TA, TB] fold_v18(((Qterm, Net[TB], TA)) -> TA raise, TA, @list.List[(@list.List[Qterm], (@list.List[Int], @list.List[(String, Int)], @list.List[Qterm]), Net[TB])]) -> TA raise
+
+pub fn[TA, TB] fold_v2((TB) -> ((TA) -> TA raise) raise, @oset.T[TB], TA) -> TA raise
+
+pub fn[TA, TB, TC] fold_v3((TC) -> ((TB) -> ((TA) -> TA raise) raise) raise, @omap.T[TC, TB], TA) -> TA raise
+
+pub fn[TA, TB] fold_v4((TB) -> ((TA) -> TA raise) raise, @oset.T[TB], TA) -> TA raise
+
+pub fn[TA, TB, TC] fold_v5((TC) -> ((TB) -> ((TA) -> TA raise) raise) raise, @omap.T[TC, TB], TA) -> TA raise
+
+pub fn[TA, TB] fold_v6((TB) -> ((TA) -> TA raise) raise, @oset.T[TB], TA) -> TA raise
+
+pub fn[TA, TB, TC] fold_v7((TC) -> ((TB) -> ((TA) -> TA raise) raise) raise, @omap.T[TC, TB], TA) -> TA raise
+
+pub fn[TA, TB] fold_v8((TB) -> ((TA) -> TA raise) raise, @oset.T[TB], TA) -> TA raise
+
+pub fn[TA, TB, TC] fold_v9((TC) -> ((TB) -> ((TA) -> TA raise) raise) raise, @omap.T[TC, TB], TA) -> TA raise
+
+pub fn[TA, TB] foldequalterms(Qterm, ((Qterm, Net[TB], TA)) -> TA raise, TA) -> ((Net[TB]) -> TA raise) raise
+
+pub fn[TA, TB, TC] folditerator(((TB, TC, TA)) -> TA raise, TA, Iterator[TB, TC]?) -> TA raise
+
+pub fn[TA, TB] foldl(((TB, TA)) -> TA raise, TA, @list.List[TB]) -> TA raise
+
+pub fn[TA, TB, TC] foldl_v1(((TB, TC, TA)) -> TA raise, TA, Map[TB, TC]) -> TA raise
+
+pub fn[TA] foldl_v10(((String, Term, TA)) -> TA raise, TA, Subst) -> TA raise
+
+pub fn[TA, TB, TC] foldl_v11(((TB, TC, TA)) -> TA raise, TA, @omap.T[TB, TC]) -> TA raise
+
+pub fn[TA, TB] foldl_v12(((TB, TA)) -> TA raise) -> ((TA) -> ((@oset.T[TB]) -> TA raise) raise) raise
+
+pub fn[TA, TB, TC] foldl_v13(((TB, TC, TA)) -> TA raise, TA, @omap.T[TB, TC]) -> TA raise
+
+pub fn[TA, TB] foldl_v14(((TB, TA)) -> TA raise) -> ((TA) -> ((@oset.T[TB]) -> TA raise) raise) raise
+
+pub fn[TA, TB, TC] foldl_v15(((TB, TC, TA)) -> TA raise, TA, @omap.T[TB, TC]) -> TA raise
+
+pub fn[TA, TB] foldl_v16(((TB, TA)) -> TA raise) -> ((TA) -> ((@oset.T[TB]) -> TA raise) raise) raise
+
+pub fn[TA, TB, TC] foldl_v17(((TB, TC, TA)) -> TA raise, TA, @omap.T[TB, TC]) -> TA raise
+
+pub fn[TA, TB] foldl_v18(((TB, TA)) -> TA raise) -> ((TA) -> ((@oset.T[TB]) -> TA raise) raise) raise
+
+pub fn[TA, TB] foldl_v2(((TB, TA)) -> TA raise) -> ((TA) -> ((Set[TB]) -> TA raise) raise) raise
+
+pub fn[TA, TB, TC] foldl_v3(((TB, TC, TA)) -> TA raise, TA, @omap.T[TB, TC]) -> TA raise
+
+pub fn[TA, TB, TC] foldl_v4(((TB, TC, TA)) -> TA raise, TA, @omap.T[TB, TC]) -> TA raise
+
+pub fn[TA, TB] foldl_v5(((TB, TA)) -> TA raise) -> ((TA) -> ((@oset.T[TB]) -> TA raise) raise) raise
+
+pub fn[TA, TB, TC] foldl_v6(((TB, TC, TA)) -> TA raise, TA, @omap.T[TB, TC]) -> TA raise
+
+pub fn[TA, TB] foldl_v7(((TB, TA)) -> TA raise) -> ((TA) -> ((@oset.T[TB]) -> TA raise) raise) raise
+
+pub fn[TA, TB, TC] foldl_v8(((TB, TC, TA)) -> TA raise, TA, @omap.T[TB, TC]) -> TA raise
+
+pub fn[TA, TB] foldl_v9(((TB, TA)) -> TA raise) -> ((TA) -> ((@oset.T[TB]) -> TA raise) raise) raise
+
+pub fn[TA, TB] foldr(((TB, TA)) -> TA raise, TA, @list.List[TB]) -> TA raise
+
+pub fn[TA, TB, TC] foldr_v1(((TB, TC, TA)) -> TA raise, TA, Map[TB, TC]) -> TA raise
+
+pub fn[TA] foldr_v10(((String, Term, TA)) -> TA raise, TA, Subst) -> TA raise
+
+pub fn[TA, TB, TC] foldr_v11(((TB, TC, TA)) -> TA raise) -> ((TA) -> ((@omap.T[TB, TC]) -> TA raise) raise) raise
+
+pub fn[TA, TB] foldr_v12(((TB, TA)) -> TA raise, TA, @oset.T[TB]) -> TA raise
+
+pub fn[TA, TB, TC] foldr_v13(((TB, TC, TA)) -> TA raise) -> ((TA) -> ((@omap.T[TB, TC]) -> TA raise) raise) raise
+
+pub fn[TA, TB] foldr_v14(((TB, TA)) -> TA raise, TA, @oset.T[TB]) -> TA raise
+
+pub fn[TA, TB, TC] foldr_v15(((TB, TC, TA)) -> TA raise) -> ((TA) -> ((@omap.T[TB, TC]) -> TA raise) raise) raise
+
+pub fn[TA, TB] foldr_v16(((TB, TA)) -> TA raise, TA, @oset.T[TB]) -> TA raise
+
+pub fn[TA, TB, TC] foldr_v17(((TB, TC, TA)) -> TA raise) -> ((TA) -> ((@omap.T[TB, TC]) -> TA raise) raise) raise
+
+pub fn[TA, TB] foldr_v18(((TB, TA)) -> TA raise, TA, @oset.T[TB]) -> TA raise
+
+pub fn[TA, TB] foldr_v2(((TB, TA)) -> TA raise) -> ((TA) -> ((Set[TB]) -> TA raise) raise) raise
+
+pub fn[TA, TB, TC] foldr_v3(((TB, TC, TA)) -> TA raise) -> ((TA) -> ((@omap.T[TB, TC]) -> TA raise) raise) raise
+
+pub fn[TA, TB, TC] foldr_v4(((TB, TC, TA)) -> TA raise) -> ((TA) -> ((@omap.T[TB, TC]) -> TA raise) raise) raise
+
+pub fn[TA, TB] foldr_v5(((TB, TA)) -> TA raise, TA, @oset.T[TB]) -> TA raise
+
+pub fn[TA, TB, TC] foldr_v6(((TB, TC, TA)) -> TA raise) -> ((TA) -> ((@omap.T[TB, TC]) -> TA raise) raise) raise
+
+pub fn[TA, TB] foldr_v7(((TB, TA)) -> TA raise, TA, @oset.T[TB]) -> TA raise
+
+pub fn[TA, TB, TC] foldr_v8(((TB, TC, TA)) -> TA raise) -> ((TA) -> ((@omap.T[TB, TC]) -> TA raise) raise) raise
+
+pub fn[TA, TB] foldr_v9(((TB, TA)) -> TA raise, TA, @oset.T[TB]) -> TA raise
+
+pub fn[TA, TB] foldterms(((Qterm, Net[TB], TA)) -> TA raise, TA, Net[TB]) -> TA raise
+
+pub fn[TA, TB] foldunifiableterms(Qterm, ((Qterm, Net[TB], TA)) -> TA raise, TA, Net[TB]) -> TA raise
+
+pub fn[TA] foldvaluation(Size, @oset.T[String], ((Valuation, TA)) -> TA raise) -> ((TA) -> TA raise) raise
+
+pub fn[TA, TB] for_all((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA, TB] for_all_v1((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA] for_all_v10((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] for_all_v11((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA] for_all_v12((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] for_all_v13((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA] for_all_v14((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] for_all_v15((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA] for_all_v16((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA] for_all_v2((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] for_all_v3((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA] for_all_v4((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] for_all_v5((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA] for_all_v6((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] for_all_v7((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA] for_all_v8((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] for_all_v9((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn freein(String, Term) -> Bool raise
+
+pub fn freein_v1(String, (String, @list.List[Term])) -> Bool raise
+
+pub fn freein_v2(String) -> ((Formula) -> Bool raise) raise
+
+pub fn freein_v3(String, (Bool, (String, @list.List[Term]))) -> Bool raise
+
+pub fn freein_v4(String) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> Bool raise) raise
+
+pub fn freein_v5(String, Thm) -> Bool raise
+
+pub fn freein_v6(String) -> ((@list.List[(Thm, Inference1)]) -> Bool raise) raise
+
+pub fn freevars(Term) -> @oset.T[String] raise
+
+pub fn freevars_v1(Subst) -> @oset.T[String] raise
+
+pub fn freevars_v2((String, @list.List[Term])) -> @oset.T[String] raise
+
+pub fn freevars_v3(Formula) -> @oset.T[String] raise
+
+pub fn freevars_v4((Bool, (String, @list.List[Term]))) -> @oset.T[String] raise
+
+pub fn freevars_v5(@oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[String] raise
+
+pub fn freevars_v6(Thm) -> @oset.T[String] raise
+
+pub fn freevars_v7(@list.List[(Thm, Inference1)]) -> @oset.T[String] raise
+
+pub fn freevarslist(@list.List[Term]) -> @oset.T[String] raise
+
+pub fn freevarslist_v1(@list.List[Formula]) -> @oset.T[String] raise
+
+pub fn freevarslist_v2(@list.List[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[String] raise
+
+pub fn freshvars(@oset.T[String]) -> Subst raise
+
+pub fn freshvars_v1(Thm) -> Thm raise
+
+pub fn freshvars_v2(Clause1) -> Clause1 raise
+
+pub fn fromformula(Formula) -> (Bool, (String, @list.List[Term])) raise
+
+pub fn[TA] fromint(TA) -> TA raise
+
+pub fn[TA, TB] fromlist((TA) -> ((TA) -> Int raise) raise, @list.List[(TA, TB)]) -> Map[TA, TB] raise
+
+pub fn[TA] fromlist_v1((TA) -> ((TA) -> Int raise) raise, @list.List[TA]) -> Set[TA] raise
+
+pub fn[TA] fromlist_v10(@list.List[((String, @list.List[Term]), TA)]) -> @omap.T[(String, @list.List[Term]), TA] raise
+
+pub fn fromlist_v11(@list.List[(String, @list.List[Term])]) -> @oset.T[(String, @list.List[Term])] raise
+
+pub fn[TA] fromlist_v12(@list.List[(Formula, TA)]) -> @omap.T[Formula, TA] raise
+
+pub fn fromlist_v13(@list.List[Formula]) -> @oset.T[Formula] raise
+
+pub fn[TA] fromlist_v14(@list.List[((Bool, (String, @list.List[Term])), TA)]) -> @omap.T[(Bool, (String, @list.List[Term])), TA] raise
+
+pub fn fromlist_v15(@list.List[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn[TA] fromlist_v16(@list.List[(@oset.T[(Bool, (String, @list.List[Term]))], TA)]) -> @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA] raise
+
+pub fn fromlist_v17(@list.List[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]] raise
+
+pub fn[TA] fromlist_v18(Parameters1, @list.List[(Term, TA)]) -> TermNet[TA] raise
+
+pub fn[TA] fromlist_v19(Parameters1, @list.List[((String, @list.List[Term]), TA)]) -> TermNet[TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] fromlist_v2(@list.List[(TA, TB)]) -> @omap.T[TA, TB] raise
+
+pub fn[TA] fromlist_v20(Parameters1, @list.List[((Bool, (String, @list.List[Term])), TA)]) -> LiteralNet[TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] fromlist_v3(@list.List[(TA, TB)]) -> @omap.T[TA, TB] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] fromlist_v4(@list.List[TA]) -> @oset.T[TA] raise
+
+pub fn[TA] fromlist_v5(@list.List[(String, TA)]) -> @omap.T[String, TA] raise
+
+pub fn fromlist_v6(@list.List[String]) -> @oset.T[String] raise
+
+pub fn[TA] fromlist_v7(@list.List[((String, Int), TA)]) -> @omap.T[(String, Int), TA] raise
+
+pub fn fromlist_v8(@list.List[(String, Int)]) -> @oset.T[(String, Int)] raise
+
+pub fn fromlist_v9(@list.List[(String, Term)]) -> Subst raise
+
+pub fn[TA, TB] fromspinelefttorightiterator(@list.List[Node[TA, TB]]) -> Iterator[TA, TB]? raise
+
+pub fn[TA, TB] fromspinerighttoleftiterator(@list.List[Node[TA, TB]]) -> Iterator[TA, TB]? raise
+
+pub fn fromstring(String) -> String raise
+
+pub fn front(@kernel.Term, @kernel.Thm) -> (@kernel.Thm, @list.List[@kernel.Term]) raise
+
+pub fn functioncongruence(String, Int) -> Thm raise
+
+pub fn functionnames(Term) -> @oset.T[String] raise
+
+pub fn functionnames_v1((String, @list.List[Term])) -> @oset.T[String] raise
+
+pub fn functionnames_v2(Formula) -> @oset.T[String] raise
+
+pub fn functionnames_v3((Bool, (String, @list.List[Term]))) -> @oset.T[String] raise
+
+pub fn functions(Term) -> @oset.T[(String, Int)] raise
+
+pub fn functions_v1(Subst) -> @oset.T[(String, Int)] raise
+
+pub fn functions_v2((String, @list.List[Term])) -> @oset.T[(String, Int)] raise
+
+pub fn functions_v3(Formula) -> @oset.T[(String, Int)] raise
+
+pub fn functions_v4((Bool, (String, @list.List[Term]))) -> @oset.T[(String, Int)] raise
+
+pub fn functions_v5(@oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(String, Int)] raise
+
+pub fn gen_metis_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn gename() -> String
+
+pub fn[TA, TB] genclausesubsumes(((TA, Subst, TB)) -> Bool raise, TA, @list.List[(Bool, (String, @list.List[Term]))], @list.List[(Bool, (String, @list.List[Term]))], TB) -> (TA, Subst, TB)? raise
+
+pub fn generalize(Formula) -> Formula raise
+
+pub fn generator() -> @ref.Ref[Int]
+
+pub fn[TA] gensubsumes(((@oset.T[(Bool, (String, @list.List[Term]))], Subst, TA)) -> Bool raise, Subsume[TA]) -> ((Int?) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> (@oset.T[(Bool, (String, @list.List[Term]))], Subst, TA)? raise) raise) raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] gerel(TA, TB, TB) -> Bool? raise
+
+pub fn gerel_v1(Size) -> ((Int) -> ((Int) -> Bool? raise) raise) raise
+
+pub fn[TA, TB] get(Map[TB, TA], TB) -> TA raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] get_v1(@omap.T[TB, TA], TB) -> TA raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] get_v2(@omap.T[TB, TA], TB) -> TA raise
+
+pub fn[TA] get_v3(@omap.T[String, TA], String) -> TA raise
+
+pub fn[TA] get_v4(@omap.T[(String, Int), TA], (String, Int)) -> TA raise
+
+pub fn[TA] get_v5(@omap.T[(String, @list.List[Term]), TA], (String, @list.List[Term])) -> TA raise
+
+pub fn[TA] get_v6(@omap.T[Formula, TA], Formula) -> TA raise
+
+pub fn[TA] get_v7(@omap.T[(Bool, (String, @list.List[Term])), TA], (Bool, (String, @list.List[Term]))) -> TA raise
+
+pub fn[TA] get_v8(@omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA], @oset.T[(Bool, (String, @list.List[Term]))]) -> TA raise
+
+pub fn getfunctionfixed(Fixed, (String, Int)) -> ((Size) -> ((@list.List[Int]) -> Int? raise) raise) raise
+
+pub fn getrelationfixed(Fixed, (String, Int)) -> ((Size) -> ((@list.List[Int]) -> Bool? raise) raise) raise
+
+pub fn getsubsume(Active) -> Subsume[Clause1] raise
+
+pub fn gettables(Tables, (String, Int)) -> Table raise
+
+pub fn getvaluation(Valuation, String) -> Int raise
+
+pub fn gtname() -> String
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] gtrel(TA, TB, TB) -> Bool? raise
+
+pub fn gtrel_v1(Size) -> ((Int) -> ((Int) -> Bool? raise) raise) raise
+
+pub fn[TA, TB] hastypefn(TB, @list.List[TA]) -> TA? raise
+
+pub fn hastypefunction() -> (String, Int)
+
+pub fn hastypefunctionname() -> String
+
+pub fn hide_types(Unit) -> Unit raise
+
+pub fn hol_of_atom(@list.List[(String, @preterm.Pretype)]) -> (((String, @list.List[Term])) -> @kernel.Term raise) raise
+
+pub fn hol_of_atom_path(String, @list.List[Term]) -> ((@list.List[Int]) -> (Term, String) raise) raise
+
+pub fn hol_of_clause(@list.List[(String, @preterm.Pretype)]) -> ((@list.List[(Bool, (String, @list.List[Term]))]) -> @kernel.Term raise) raise
+
+pub fn hol_of_const(Int) -> @kernel.Term raise
+
+pub fn hol_of_literal(@list.List[(String, @preterm.Pretype)]) -> (((Bool, (String, @list.List[Term]))) -> @kernel.Term raise) raise
+
+pub fn hol_of_literal_path((Bool, (String, @list.List[Term])), @list.List[Int]) -> (Term, String) raise
+
+pub fn hol_of_substitution(@list.List[(String, @preterm.Pretype)]) -> ((@list.List[(Term, Term)]) -> @list.List[(@kernel.Term, @kernel.Term)] raise) raise
+
+pub fn hol_of_term(@list.List[(String, @preterm.Pretype)]) -> ((Term) -> @kernel.Term raise) raise
+
+pub fn hol_of_term_path(Term, @list.List[Int]) -> (Term, String) raise
+
+pub fn hol_of_thm(@list.List[@kernel.Thm], Thm) -> @kernel.Thm raise
+
+pub fn id(Clause1) -> Int raise
+
+pub fn idcompare((Int, Int), (Int, Int)) -> Int raise
+
+pub fn idsetadd((Int, Int), Set[(Int, Int)]) -> Set[(Int, Int)] raise
+
+pub fn idsetaddmax(Int, ((Int, Int), Set[(Int, Int)])) -> Set[(Int, Int)] raise
+
+pub fn idsetempty() -> Set[(Int, Int)]
+
+pub fn idsetintersect(Set[(Int, Int)], Set[(Int, Int)]) -> Set[(Int, Int)] raise
+
+pub fn[TA, TB] idwise((Int, TA), (Int, TB)) -> Int raise
+
+pub fn iexp(Int, Int, Int) -> Int? raise
+
+pub fn iexp_p(Int, Int, Int) -> Int? raise
+
+pub fn implicationname() -> String
+
+pub fn[TA, TB, TC] inc(@omap.T[String, TA], String, TC, (TA, TB, @list.List[(@omap.T[String, TA], TB, TC)])) -> @list.List[(@omap.T[String, TA], TB, TC)] raise
+
+pub fn incompatible((Bool, (String, @list.List[Term]))) -> (((Bool, (String, @list.List[Term]))) -> Bool raise) raise
+
+pub fn incrementelement(Size) -> ((Int) -> Int? raise) raise
+
+pub fn incrementvaluation(Size, @oset.T[String]) -> ((Valuation) -> Valuation? raise) raise
+
+pub fn[TA, TB] indomain(TA, Map[TA, TB]) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] indomain_v1(TA) -> ((@omap.T[TA, TB]) -> Bool raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] indomain_v2(TA) -> ((@omap.T[TA, TB]) -> Bool raise) raise
+
+pub fn[TA] indomain_v3(String) -> ((@omap.T[String, TA]) -> Bool raise) raise
+
+pub fn[TA] indomain_v4((String, Int)) -> ((@omap.T[(String, Int), TA]) -> Bool raise) raise
+
+pub fn[TA] indomain_v5((String, @list.List[Term])) -> ((@omap.T[(String, @list.List[Term]), TA]) -> Bool raise) raise
+
+pub fn[TA] indomain_v6(Formula) -> ((@omap.T[Formula, TA]) -> Bool raise) raise
+
+pub fn[TA] indomain_v7((Bool, (String, @list.List[Term]))) -> ((@omap.T[(Bool, (String, @list.List[Term])), TA]) -> Bool raise) raise
+
+pub fn[TA] indomain_v8(@oset.T[(Bool, (String, @list.List[Term]))]) -> ((@omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]) -> Bool raise) raise
+
+pub fn inference(Thm) -> (InferenceType, @list.List[Thm]) raise
+
+pub fn inferencetothm(Inference1) -> Thm raise
+
+pub fn inferencetypetostring(InferenceType) -> String raise
+
+pub fn init_edges(@list.List[(@list.List[Edge], Subst, Edge)], @list.List[Edge], @list.List[(Subst, Edge)]) -> @list.List[(@list.List[Edge], Subst, @list.List[Edge])] raise
+
+pub fn initialmodel(@list.List[(@oset.T[String], @oset.T[(Bool, (String, @list.List[Term]))])], @list.List[(@oset.T[String], @oset.T[(Bool, (String, @list.List[Term]))])], ModelParameters) -> Model raise
+
+pub fn[TA] ins(TA, Qterm, (Int, Net[TA]?)) -> (Int, Net[TA])? raise
+
+pub fn[TA, TB] ins_v1(TermNet[(TA, TB)], Term, TA, TB) -> TermNet[(TA, TB)] raise
+
+pub fn[TA, TB] insert(Map[TA, TB]) -> (((TA, TB)) -> Map[TA, TB] raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] insert_v1(@omap.T[TA, TB], (TA, TB)) -> @omap.T[TA, TB] raise
+
+pub fn[TA] insert_v10(TermNet[TA]) -> (((Term, TA)) -> TermNet[TA] raise) raise
+
+pub fn[TA] insert_v11(TermNet[TA], ((String, @list.List[Term]), TA)) -> TermNet[TA] raise
+
+pub fn[TA] insert_v12(LiteralNet[TA]) -> ((((Bool, (String, @list.List[Term])), TA)) -> LiteralNet[TA] raise) raise
+
+pub fn[TA] insert_v13(Subsume[TA]) -> (((@oset.T[(Bool, (String, @list.List[Term]))], TA)) -> Subsume[TA] raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] insert_v2(@omap.T[TA, TB], (TA, TB)) -> @omap.T[TA, TB] raise
+
+pub fn[TA] insert_v3(@omap.T[String, TA], (String, TA)) -> @omap.T[String, TA] raise
+
+pub fn[TA] insert_v4(@omap.T[(String, Int), TA], ((String, Int), TA)) -> @omap.T[(String, Int), TA] raise
+
+pub fn insert_v5(Subst) -> (((String, Term)) -> Subst raise) raise
+
+pub fn[TA] insert_v6(@omap.T[(String, @list.List[Term]), TA], ((String, @list.List[Term]), TA)) -> @omap.T[(String, @list.List[Term]), TA] raise
+
+pub fn[TA] insert_v7(@omap.T[Formula, TA], (Formula, TA)) -> @omap.T[Formula, TA] raise
+
+pub fn[TA] insert_v8(@omap.T[(Bool, (String, @list.List[Term])), TA], ((Bool, (String, @list.List[Term])), TA)) -> @omap.T[(Bool, (String, @list.List[Term])), TA] raise
+
+pub fn[TA] insert_v9(@omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA], (@oset.T[(Bool, (String, @list.List[Term]))], TA)) -> @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA] raise
+
+pub fn insertfn(Size, Int, Int) -> Int? raise
+
+pub fn insertfunctionfixed(Fixed, ((String, Int), (Size) -> ((@list.List[Int]) -> Int? raise) raise)) -> Fixed raise
+
+pub fn[TA, TB] insertlist(Map[TA, TB]) -> ((@list.List[(TA, TB)]) -> Map[TA, TB] raise) raise
+
+pub fn insertname() -> String
+
+pub fn[TA, TB] insertnodepath(Node[TA, TB]) -> ((@list.List[(Bool, Node[TA, TB])]) -> Tree[TA, TB] raise) raise
+
+pub fn insertrelationfixed(Fixed, ((String, Int), (Size) -> ((@list.List[Int]) -> Bool? raise) raise)) -> Fixed raise
+
+pub fn insertvaluation(Valuation) -> (((String, Int)) -> Valuation raise) raise
+
+pub fn intcompare(Int, Int) -> Int raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] inter(@oset.T[TA], @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn inter_v1(@oset.T[String], @oset.T[String]) -> @oset.T[String] raise
+
+pub fn inter_v2(@oset.T[(String, Int)], @oset.T[(String, Int)]) -> @oset.T[(String, Int)] raise
+
+pub fn inter_v3(@oset.T[Term], @oset.T[Term]) -> @oset.T[Term] raise
+
+pub fn inter_v4(@oset.T[(String, @list.List[Term])], @oset.T[(String, @list.List[Term])]) -> @oset.T[(String, @list.List[Term])] raise
+
+pub fn inter_v5(@oset.T[Formula], @oset.T[Formula]) -> @oset.T[Formula] raise
+
+pub fn inter_v6(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn inter_v7(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]], @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]] raise
+
+pub fn interpretatom(Model, Valuation, (String, @list.List[Term])) -> Bool raise
+
+pub fn interpretclause(Model, Valuation, @oset.T[(Bool, (String, @list.List[Term]))]) -> Bool raise
+
+pub fn interpretformula(Model) -> ((Valuation) -> ((Formula) -> Bool raise) raise) raise
+
+pub fn interpretfunction(Model, (String, @list.List[Int])) -> Int raise
+
+pub fn interpretliteral(Model, Valuation, (Bool, (String, @list.List[Term]))) -> Bool raise
+
+pub fn interpretrelation(Model, (String, @list.List[Int])) -> Bool raise
+
+pub fn interpretterm(Model, Valuation) -> ((Term) -> Int raise) raise
+
+pub fn[TA, TB, TC, TD] intersect((((TA, TD), (TA, TC))) -> TB? raise, Map[TA, TD]) -> ((Map[TA, TC]) -> Map[TA, TB] raise) raise
+
+pub fn[TA] intersect_v1(Set[TA]) -> ((Set[TA]) -> Set[TA] raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] intersect_v2(@oset.T[TA]) -> ((@oset.T[TA]) -> @oset.T[TA] raise) raise
+
+pub fn intersect_v3(@oset.T[String]) -> ((@oset.T[String]) -> @oset.T[String] raise) raise
+
+pub fn intersect_v4(@oset.T[(String, Int)]) -> ((@oset.T[(String, Int)]) -> @oset.T[(String, Int)] raise) raise
+
+pub fn intersect_v5(@oset.T[(String, @list.List[Term])]) -> ((@oset.T[(String, @list.List[Term])]) -> @oset.T[(String, @list.List[Term])] raise) raise
+
+pub fn intersect_v6(@oset.T[Formula]) -> ((@oset.T[Formula]) -> @oset.T[Formula] raise) raise
+
+pub fn intersect_v7(@oset.T[(Bool, (String, @list.List[Term]))]) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise) raise
+
+pub fn intersect_v8(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> ((@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]] raise) raise
+
+pub fn[TA, TB] intersectdomain(Map[TA, TB]) -> ((Map[TA, TB]) -> Map[TA, TB] raise) raise
+
+pub fn intersectfn(Size, Int, Int) -> Int? raise
+
+pub fn[TA] intersectlist(@list.List[Set[TA]]) -> Set[TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] intersectlist_v1(@list.List[@oset.T[TA]]) -> @oset.T[TA] raise
+
+pub fn intersectlist_v2(@list.List[@oset.T[String]]) -> @oset.T[String] raise
+
+pub fn intersectlist_v3(@list.List[@oset.T[(String, Int)]]) -> @oset.T[(String, Int)] raise
+
+pub fn intersectlist_v4(@list.List[@oset.T[(String, @list.List[Term])]]) -> @oset.T[(String, @list.List[Term])] raise
+
+pub fn intersectlist_v5(@list.List[@oset.T[Formula]]) -> @oset.T[Formula] raise
+
+pub fn intersectlist_v6(@list.List[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn intersectlist_v7(@list.List[@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]]) -> @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]] raise
+
+pub fn[TA, TB] intersectlistdomain(@list.List[Map[TA, TB]]) -> Map[TA, TB] raise
+
+pub fn intersectname() -> String
+
+pub fn interval(Int, Int) -> @list.List[Int] raise
+
+pub fn inttobool(Int) -> Bool raise
+
+pub fn invert(Subst) -> Subst raise
+
+pub fn[TA, TB] is_empty(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA, TB] is_empty_v1(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] is_empty_v10(@oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] is_empty_v11(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] is_empty_v12(@oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] is_empty_v13(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] is_empty_v14(@oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] is_empty_v15(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] is_empty_v16(@oset.T[TA]) -> Bool raise
+
+pub fn[TA] is_empty_v2(@oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] is_empty_v3(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] is_empty_v4(@oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] is_empty_v5(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] is_empty_v6(@oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] is_empty_v7(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] is_empty_v8(@oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] is_empty_v9(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] is_some(TA?) -> Bool raise
+
+pub fn isapp(Term) -> Bool raise
+
+pub fn isatom(Formula) -> Bool raise
+
+pub fn isbinop(String) -> ((Term) -> Bool raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] isbinop_v1(TA) -> (((TA, @list.List[TB])) -> Bool raise) raise
+
+pub fn isbinop_v2(String) -> (((Bool, (String, @list.List[Term]))) -> Bool raise) raise
+
+pub fn isboolean(Formula) -> Bool raise
+
+pub fn isconst(Term) -> Bool raise
+
+pub fn iscontradiction(Thm) -> Bool raise
+
+pub fn iscontradiction_v1(Clause1) -> Bool raise
+
+pub fn isdigit(Char) -> Bool raise
+
+pub fn[TA] iseq((String, @list.List[TA])) -> Bool raise
+
+pub fn iseq_v1(Formula) -> Bool raise
+
+pub fn iseq_v2((Bool, (String, @list.List[Term]))) -> Bool raise
+
+pub fn isexists(Formula) -> Bool raise
+
+pub fn isfalse(Formula) -> Bool raise
+
+pub fn isfixedfunction(Model, (String, @list.List[Int])) -> Bool raise
+
+pub fn isfixedrelation(Model, (String, @list.List[Int])) -> Bool raise
+
+pub fn isfn(Term) -> Bool raise
+
+pub fn isfnapp((String, @list.List[Term])) -> Bool raise
+
+pub fn isfnhastype((String, @list.List[Term])) -> Bool raise
+
+pub fn isforall(Formula) -> Bool raise
+
+pub fn isirrefl((Bool, (String, @list.List[Term]))) -> Bool raise
+
+pub fn islargerliteral(Parameters4) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> (((Bool, (String, @list.List[Term]))) -> Bool raise) raise) raise
+
+pub fn islargerterm(Parameters4) -> (((Term, Term)) -> Bool raise) raise
+
+pub fn isneg(Formula) -> Bool raise
+
+pub fn isneq(Formula) -> Bool raise
+
+pub fn isneq_v1((Bool, (String, @list.List[Term]))) -> Bool raise
+
+pub fn isreduced(Rewrite) -> Bool raise
+
+pub fn isrefl((String, @list.List[Term])) -> Bool raise
+
+pub fn isrefl_v1(Formula) -> Bool raise
+
+pub fn isrefl_v2((Bool, (String, @list.List[Term]))) -> Bool raise
+
+pub fn isrenaming(Subst) -> Bool raise
+
+pub fn[TA] isstrictlysubsumed(Subsume[TA], @oset.T[(Bool, (String, @list.List[Term]))]) -> Bool raise
+
+pub fn[TA] issubsumed(Subsume[TA], @oset.T[(Bool, (String, @list.List[Term]))]) -> Bool raise
+
+pub fn istautology(Thm) -> Bool raise
+
+pub fn istautology_v1(Clause1) -> Bool raise
+
+pub fn istrue(Formula) -> Bool raise
+
+pub fn istypedvar(Term) -> Bool raise
+
+pub fn isunit(Thm) -> Bool raise
+
+pub fn isuniteq(Thm) -> Bool raise
+
+pub fn isvar(Term) -> Bool raise
+
+pub fn iszeroname() -> String
+
+pub fn[TA] iszerorel(TA, Int) -> Bool? raise
+
+pub fn[TA] iszerorel_v1(TA, Int) -> Bool? raise
+
+pub fn[TA, TB, TC] iter((TC) -> ((TB) -> TA raise) raise, @omap.T[TC, TB]) -> Unit raise
+
+pub fn[TA, TB, TC] iter_v1((TC) -> ((TB) -> TA raise) raise, @omap.T[TC, TB]) -> Unit raise
+
+pub fn[TA, TB] iter_v10((TB) -> TA raise, @oset.T[TB]) -> Unit raise
+
+pub fn[TA, TB, TC] iter_v11((TC) -> ((TB) -> TA raise) raise, @omap.T[TC, TB]) -> Unit raise
+
+pub fn[TA, TB] iter_v12((TB) -> TA raise, @oset.T[TB]) -> Unit raise
+
+pub fn[TA, TB, TC] iter_v13((TC) -> ((TB) -> TA raise) raise, @omap.T[TC, TB]) -> Unit raise
+
+pub fn[TA, TB] iter_v14((TB) -> TA raise, @oset.T[TB]) -> Unit raise
+
+pub fn[TA, TB, TC] iter_v15((TC) -> ((TB) -> TA raise) raise, @omap.T[TC, TB]) -> Unit raise
+
+pub fn[TA, TB] iter_v16((TB) -> TA raise, @oset.T[TB]) -> Unit raise
+
+pub fn[TA, TB] iter_v2((TB) -> TA raise, @oset.T[TB]) -> Unit raise
+
+pub fn[TA, TB, TC] iter_v3((TC) -> ((TB) -> TA raise) raise, @omap.T[TC, TB]) -> Unit raise
+
+pub fn[TA, TB] iter_v4((TB) -> TA raise, @oset.T[TB]) -> Unit raise
+
+pub fn[TA, TB, TC] iter_v5((TC) -> ((TB) -> TA raise) raise, @omap.T[TC, TB]) -> Unit raise
+
+pub fn[TA, TB] iter_v6((TB) -> TA raise, @oset.T[TB]) -> Unit raise
+
+pub fn[TA, TB, TC] iter_v7((TC) -> ((TB) -> TA raise) raise, @omap.T[TC, TB]) -> Unit raise
+
+pub fn[TA, TB] iter_v8((TB) -> TA raise, @oset.T[TB]) -> Unit raise
+
+pub fn[TA, TB, TC] iter_v9((TC) -> ((TB) -> TA raise) raise, @omap.T[TC, TB]) -> Unit raise
+
+pub fn iterate(Resolution) -> State raise
+
+pub fn joinedge(Subst, Edge) -> JoinStatus raise
+
+pub fn[TA, TB] keys(Map[TA, TB]) -> @list.List[TA] raise
+
+pub fn largestequations(Clause1) -> @list.List[((Bool, (String, @list.List[Term])), Orient, Term)] raise
+
+pub fn largestliterals(Clause1) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn largestsubterms(Clause1) -> @list.List[((Bool, (String, @list.List[Term])), @list.List[Int], Term)] raise
+
+pub fn lename() -> String
+
+pub fn lengthname() -> String
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] lerel(TA, TB, TB) -> Bool? raise
+
+pub fn lerel_v1(Size) -> ((Int) -> ((Int) -> Bool? raise) raise) raise
+
+pub fn[TA, TB] lexcompare((TB) -> ((TA) -> Int raise) raise) -> ((@list.List[TB]) -> ((@list.List[TA]) -> Int raise) raise) raise
+
+pub fn[TA] lhs((String, @list.List[TA])) -> TA raise
+
+pub fn lhs_v1(Formula) -> Term raise
+
+pub fn lhs_v2(Bool, (String, @list.List[Term])) -> Term raise
+
+pub fn list_mk_combp(@preterm.Preterm, @list.List[@preterm.Preterm]) -> @preterm.Preterm raise
+
+pub fn list_mk_disjp(@list.List[@preterm.Preterm]) -> @preterm.Preterm raise
+
+pub fn listfixed() -> Fixed
+
+pub fn listmkapp(Term, @list.List[Term]) -> Term raise
+
+pub fn listmkconj(@list.List[Formula]) -> Formula raise
+
+pub fn listmkdisj(@list.List[Formula]) -> Formula raise
+
+pub fn listmkequiv(@list.List[Formula]) -> Formula raise
+
+pub fn listmkexists((@list.List[String], Formula)) -> Formula raise
+
+pub fn listmkforall((@list.List[String], Formula)) -> Formula raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] literalreducible((Term) -> ((Term) -> Int? raise) raise, @omap.T[TA, (((Term, Term), Thm), Orient?)], TA, (Bool, (String, @list.List[Term]))) -> Bool raise
+
+pub fn literalrule(((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise, (Bool, (String, @list.List[Term])), Thm) -> Thm raise
+
+pub fn literals(Clause1) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] literalsreducible((Term) -> ((Term) -> Int? raise) raise, @omap.T[TA, (((Term, Term), Thm), Orient?)], TA, @oset.T[(Bool, (String, @list.List[Term]))]) -> Bool raise
+
+pub fn literalsrule(((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> ((Thm) -> Thm raise) raise) raise
+
+pub fn lookuptable(Int, Int, Table, @list.List[Int]) -> Int raise
+
+pub fn lookuptables(Tables, (String, @list.List[Int])) -> Int raise
+
+pub fn loop_(Resolution) -> Decision raise
+
+pub fn loop__v1(Resolution) -> Decision? raise
+
+pub fn[TA, TB, TC, TD] lowerprioritynode(Node[TA, TB], Node[TC, TD]) -> Bool raise
+
+pub fn ltname() -> String
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] ltrel(TA, TB, TB) -> Bool? raise
+
+pub fn ltrel_v1(Size) -> ((Int) -> ((Int) -> Bool? raise) raise) raise
+
+pub fn[TA] maket(TA, Node1[TA], Node1[TA]) -> Node1[TA] raise
+
+pub fn[TA, TB, TC] map(((TA, TC)) -> TB raise, Map[TA, TC]) -> Map[TA, TB] raise
+
+pub fn[TA, TB] map_v1((TA) -> TB raise) -> ((Set[TA]) -> Map[TA, TB] raise) raise
+
+pub fn map_v10((Term) -> Term raise, @oset.T[Term]) -> @oset.T[Term] raise
+
+pub fn[TA, TB, TC] map_v11((TC) -> TB raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn map_v12(((String, @list.List[Term])) -> (String, @list.List[Term]) raise, @oset.T[(String, @list.List[Term])]) -> @oset.T[(String, @list.List[Term])] raise
+
+pub fn[TA, TB, TC] map_v13((TC) -> TB raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn map_v14((Formula) -> Formula raise, @oset.T[Formula]) -> @oset.T[Formula] raise
+
+pub fn[TA, TB, TC] map_v15((TC) -> TB raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn map_v16(((Bool, (String, @list.List[Term]))) -> (Bool, (String, @list.List[Term])) raise, @oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn[TA, TB, TC] map_v17((TC) -> TB raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn map_v18((@oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise, @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]] raise
+
+pub fn[TA, TB, TC] map_v2((TC) -> TB raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB, TC] map_v3((TC) -> TB raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] map_v4((TA) -> TA raise, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA, TB, TC] map_v5((TC) -> TB raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn map_v6((String) -> String raise, @oset.T[String]) -> @oset.T[String] raise
+
+pub fn[TA, TB, TC] map_v7((TC) -> TB raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn map_v8(((String, Int)) -> (String, Int) raise, @oset.T[(String, Int)]) -> @oset.T[(String, Int)] raise
+
+pub fn[TA, TB, TC] map_v9((TC) -> TB raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn mapfixed(FixedMap, Fixed) -> Fixed raise
+
+pub fn[TA, TB, TC] mapi((TA) -> ((TC) -> TB raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB, TC] mapi_v1((TA) -> ((TC) -> TB raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB, TC] mapi_v2((TA) -> ((TC) -> TB raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB, TC] mapi_v3((TA) -> ((TC) -> TB raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB, TC] mapi_v4((TA) -> ((TC) -> TB raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB, TC] mapi_v5((TA) -> ((TC) -> TB raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB, TC] mapi_v6((TA) -> ((TC) -> TB raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB, TC] mapi_v7((TA) -> ((TC) -> TB raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB, TC] mapi_v8((TA) -> ((TC) -> TB raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB, TC] mappartial(((TA, TC)) -> TB? raise, Map[TA, TC]) -> Map[TA, TB] raise
+
+pub fn[TA, TB] mappartial_v1((TA) -> TB? raise) -> ((Set[TA]) -> Map[TA, TB] raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB, TC] mappartial_v2(((TA, TC)) -> TB? raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB, TC] mappartial_v3(((TA, TC)) -> TB? raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] mappartial_v4(((String, TB)) -> TA? raise, @omap.T[String, TB]) -> @omap.T[String, TA] raise
+
+pub fn[TA, TB] mappartial_v5((((String, Int), TB)) -> TA? raise, @omap.T[(String, Int), TB]) -> @omap.T[(String, Int), TA] raise
+
+pub fn[TA, TB] mappartial_v6((((String, @list.List[Term]), TB)) -> TA? raise, @omap.T[(String, @list.List[Term]), TB]) -> @omap.T[(String, @list.List[Term]), TA] raise
+
+pub fn[TA, TB] mappartial_v7(((Formula, TB)) -> TA? raise, @omap.T[Formula, TB]) -> @omap.T[Formula, TA] raise
+
+pub fn[TA, TB] mappartial_v8((((Bool, (String, @list.List[Term])), TB)) -> TA? raise, @omap.T[(Bool, (String, @list.List[Term])), TB]) -> @omap.T[(Bool, (String, @list.List[Term])), TA] raise
+
+pub fn[TA, TB] mappartial_v9(((@oset.T[(Bool, (String, @list.List[Term]))], TB)) -> TA? raise, @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TB]) -> @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA] raise
+
+pub fn[TA] mat(@list.List[TA], @list.List[(Net[TA], @list.List[Term])]) -> @list.List[TA] raise
+
+pub fn[TA] mat_v1(@list.List[TA], @list.List[(@omap.T[String, Qterm], Net[TA], @list.List[Term])]) -> @list.List[TA] raise
+
+pub fn[TA] mat_v2(@list.List[TA], @list.List[(@omap.T[String, Qterm], Net[TA], @list.List[Term])]) -> @list.List[TA] raise
+
+pub fn[TA, TB, TC] match_elems((TC) -> ((TB) -> ((TA) -> TA? raise) raise) raise, TA, (@list.List[TC], @list.List[TB])) -> @list.List[TA] raise
+
+pub fn match_fo_ho_clause(@list.List[@kernel.Term]) -> (((@list.List[(Bool, (String, @list.List[Term]))], @list.List[@kernel.Term])) -> @list.List[@list.List[(String, @kernel.Term)]] raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] matchatoms(Subst, (TA, @list.List[Term]), (TA, @list.List[Term])) -> Subst raise
+
+pub fn[TA] matched(TermNet[TA], Term) -> @list.List[TA] raise
+
+pub fn[TA] matched_v1(TermNet[TA], (String, @list.List[Term])) -> @list.List[TA] raise
+
+pub fn[TA] matched_v2(LiteralNet[TA]) -> (((Bool, (String, @list.List[Term]))) -> @list.List[TA] raise) raise
+
+pub fn[TA] matchingredexes(TermNet[(Int, TA)], Term) -> @list.List[(Int, TA)] raise
+
+pub fn matchlit((Bool, (String, @list.List[Term])), ((Bool, (String, @list.List[Term])), @list.List[Subst])) -> @list.List[Subst] raise
+
+pub fn matchliterals(Subst, (Bool, (String, @list.List[Term])), (Bool, (String, @list.List[Term]))) -> Subst raise
+
+pub fn[TA] matchnet(TermNet[TA], Term) -> @list.List[TA] raise
+
+pub fn[TA] matchnet_v1(TermNet[TA], (String, @list.List[Term])) -> @list.List[TA] raise
+
+pub fn[TA] matchnet_v2(LiteralNet[TA]) -> (((Bool, (String, @list.List[Term]))) -> @list.List[TA] raise) raise
+
+pub fn matchqtermqterm(Qterm, Qterm) -> Bool raise
+
+pub fn matchqtermterm(Qterm, Term) -> Bool raise
+
+pub fn matchtermqterm(@omap.T[String, Qterm], Term, Qterm) -> @omap.T[String, Qterm]? raise
+
+pub fn matchterms(Subst, Term, Term) -> Subst raise
+
+pub fn matchunits(Units) -> (((Bool, (String, @list.List[Term]))) -> (((Bool, (String, @list.List[Term])), Thm), Subst)? raise) raise
+
+pub fn[TA, TB] max_binding(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] max_binding_opt(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] max_binding_opt_v1(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] max_binding_opt_v2(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] max_binding_opt_v3(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] max_binding_opt_v4(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] max_binding_opt_v5(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] max_binding_opt_v6(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] max_binding_opt_v7(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] max_binding_opt_v8(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] max_binding_v1(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] max_binding_v2(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] max_binding_v3(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] max_binding_v4(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] max_binding_v5(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] max_binding_v6(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] max_binding_v7(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] max_binding_v8(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] max_elt(@oset.T[TA]) -> TA raise
+
+pub fn[TA] max_elt_opt(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] max_elt_opt_v1(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] max_elt_opt_v2(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] max_elt_opt_v3(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] max_elt_opt_v4(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] max_elt_opt_v5(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] max_elt_opt_v6(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] max_elt_opt_v7(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] max_elt_v1(@oset.T[TA]) -> TA raise
+
+pub fn[TA] max_elt_v2(@oset.T[TA]) -> TA raise
+
+pub fn[TA] max_elt_v3(@oset.T[TA]) -> TA raise
+
+pub fn[TA] max_elt_v4(@oset.T[TA]) -> TA raise
+
+pub fn[TA] max_elt_v5(@oset.T[TA]) -> TA raise
+
+pub fn[TA] max_elt_v6(@oset.T[TA]) -> TA raise
+
+pub fn[TA] max_elt_v7(@oset.T[TA]) -> TA raise
+
+pub fn maxsimplify() -> Simplify
+
+pub fn maxspace() -> Int
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] mem(TA, @omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] mem_v1(TA, @omap.T[TA, TB]) -> Bool raise
+
+pub fn mem_v10((String, @list.List[Term]), @oset.T[(String, @list.List[Term])]) -> Bool raise
+
+pub fn[TA] mem_v11(Formula, @omap.T[Formula, TA]) -> Bool raise
+
+pub fn mem_v12(Formula, @oset.T[Formula]) -> Bool raise
+
+pub fn[TA] mem_v13((Bool, (String, @list.List[Term])), @omap.T[(Bool, (String, @list.List[Term])), TA]) -> Bool raise
+
+pub fn mem_v14((Bool, (String, @list.List[Term])), @oset.T[(Bool, (String, @list.List[Term]))]) -> Bool raise
+
+pub fn[TA] mem_v15(@oset.T[(Bool, (String, @list.List[Term]))], @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]) -> Bool raise
+
+pub fn mem_v16(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] mem_v2(TA, @oset.T[TA]) -> Bool raise
+
+pub fn[TA] mem_v3(String, @omap.T[String, TA]) -> Bool raise
+
+pub fn mem_v4(String, @oset.T[String]) -> Bool raise
+
+pub fn[TA] mem_v5((String, Int), @omap.T[(String, Int), TA]) -> Bool raise
+
+pub fn mem_v6((String, Int), @oset.T[(String, Int)]) -> Bool raise
+
+pub fn[TA] mem_v7(Term, @omap.T[Term, TA]) -> Bool raise
+
+pub fn mem_v8(Term, @oset.T[Term]) -> Bool raise
+
+pub fn[TA] mem_v9((String, @list.List[Term]), @omap.T[(String, @list.List[Term]), TA]) -> Bool raise
+
+pub fn[TA] member(TA, Set[TA]) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] member_v1(TA) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn member_v2(String) -> ((@oset.T[String]) -> Bool raise) raise
+
+pub fn member_v3((String, Int)) -> ((@oset.T[(String, Int)]) -> Bool raise) raise
+
+pub fn member_v4((String, @list.List[Term])) -> ((@oset.T[(String, @list.List[Term])]) -> Bool raise) raise
+
+pub fn member_v5(Formula) -> ((@oset.T[Formula]) -> Bool raise) raise
+
+pub fn member_v6((Bool, (String, @list.List[Term]))) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> Bool raise) raise
+
+pub fn member_v7(@oset.T[(Bool, (String, @list.List[Term]))]) -> ((@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> Bool raise) raise
+
+pub fn member_v8((Bool, (String, @list.List[Term])), Thm) -> Bool raise
+
+pub fn membername() -> String
+
+pub fn memberrel(Size, Int, Int) -> Bool? raise
+
+pub fn[TA, TB, TC, TD] merge((((TA, TD)) -> TB? raise, ((TA, TC)) -> TB? raise, (((TA, TD), (TA, TC))) -> TB? raise), Map[TA, TD]) -> ((Map[TA, TC]) -> Map[TA, TB] raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB, TC, TD] merge_v1((TA) -> ((TD?) -> ((TC?) -> TB? raise) raise) raise, @omap.T[TA, TD], @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB, TC] merge_v10((@oset.T[(Bool, (String, @list.List[Term]))]) -> ((TC?) -> ((TB?) -> TA? raise) raise) raise, @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TC], @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TB]) -> @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB, TC, TD] merge_v2((TA) -> ((TD?) -> ((TC?) -> TB? raise) raise) raise, @omap.T[TA, TD], @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA] merge_v3((TA) -> ((TA) -> Int raise) raise) -> (((Node1[TA], Node1[TA])) -> Node1[TA] raise) raise
+
+pub fn[TA, TB, TC] merge_v4((String) -> ((TC?) -> ((TB?) -> TA? raise) raise) raise, @omap.T[String, TC], @omap.T[String, TB]) -> @omap.T[String, TA] raise
+
+pub fn[TA, TB, TC] merge_v5(((String, Int)) -> ((TC?) -> ((TB?) -> TA? raise) raise) raise, @omap.T[(String, Int), TC], @omap.T[(String, Int), TB]) -> @omap.T[(String, Int), TA] raise
+
+pub fn[TA, TB, TC] merge_v6((Term) -> ((TC?) -> ((TB?) -> TA? raise) raise) raise, @omap.T[Term, TC], @omap.T[Term, TB]) -> @omap.T[Term, TA] raise
+
+pub fn[TA, TB, TC] merge_v7(((String, @list.List[Term])) -> ((TC?) -> ((TB?) -> TA? raise) raise) raise, @omap.T[(String, @list.List[Term]), TC], @omap.T[(String, @list.List[Term]), TB]) -> @omap.T[(String, @list.List[Term]), TA] raise
+
+pub fn[TA, TB, TC] merge_v8((Formula) -> ((TC?) -> ((TB?) -> TA? raise) raise) raise, @omap.T[Formula, TC], @omap.T[Formula, TB]) -> @omap.T[Formula, TA] raise
+
+pub fn[TA, TB, TC] merge_v9(((Bool, (String, @list.List[Term]))) -> ((TC?) -> ((TB?) -> TA? raise) raise) raise, @omap.T[(Bool, (String, @list.List[Term])), TC], @omap.T[(Bool, (String, @list.List[Term])), TB]) -> @omap.T[(Bool, (String, @list.List[Term])), TA] raise
+
+pub fn metis(@list.List[@kernel.Thm], @kernel.Term) -> @kernel.Thm raise
+
+pub fn metis_name(Int) -> String raise
+
+pub fn metis_of_atom(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> (String, @list.List[Term]) raise
+
+pub fn metis_of_clause(@kernel.Thm) -> Thm raise
+
+pub fn metis_of_clauses(@list.List[@kernel.Thm]) -> @list.List[Thm] raise
+
+pub fn metis_of_literal(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> (Bool, (String, @list.List[Term])) raise
+
+pub fn metis_of_term(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> Term raise
+
+pub fn metis_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn metisverb() -> @ref.Ref[Bool]
+
+pub fn[TA, TB] min_binding(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] min_binding_opt(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] min_binding_opt_v1(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] min_binding_opt_v2(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] min_binding_opt_v3(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] min_binding_opt_v4(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] min_binding_opt_v5(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] min_binding_opt_v6(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] min_binding_opt_v7(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] min_binding_opt_v8(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB] min_binding_v1(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] min_binding_v2(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] min_binding_v3(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] min_binding_v4(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] min_binding_v5(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] min_binding_v6(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] min_binding_v7(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] min_binding_v8(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] min_elt(@oset.T[TA]) -> TA raise
+
+pub fn[TA] min_elt_opt(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] min_elt_opt_v1(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] min_elt_opt_v2(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] min_elt_opt_v3(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] min_elt_opt_v4(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] min_elt_opt_v5(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] min_elt_opt_v6(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] min_elt_opt_v7(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] min_elt_v1(@oset.T[TA]) -> TA raise
+
+pub fn[TA] min_elt_v2(@oset.T[TA]) -> TA raise
+
+pub fn[TA] min_elt_v3(@oset.T[TA]) -> TA raise
+
+pub fn[TA] min_elt_v4(@oset.T[TA]) -> TA raise
+
+pub fn[TA] min_elt_v5(@oset.T[TA]) -> TA raise
+
+pub fn[TA] min_elt_v6(@oset.T[TA]) -> TA raise
+
+pub fn[TA] min_elt_v7(@oset.T[TA]) -> TA raise
+
+pub fn minmaxinterval(Int, Int) -> @list.List[Int] raise
+
+pub fn minus(Int, Int) -> Int raise
+
+pub fn mk(ClauseInfo) -> Clause1 raise
+
+pub fn mk_clause(Parameters4, Thm) -> Clause1 raise
+
+pub fn mk_conjp(@preterm.Preterm, @preterm.Preterm) -> @preterm.Preterm raise
+
+pub fn mk_disjp(@preterm.Preterm, @preterm.Preterm) -> @preterm.Preterm raise
+
+pub fn mk_edges(@list.List[Edge], @list.List[(Subst, Edge)], @list.List[(Bool, (String, @list.List[Term]))]) -> @list.List[(@list.List[Edge], Subst, @list.List[Edge])] raise
+
+pub fn mk_eqp(@preterm.Preterm, @preterm.Preterm) -> @preterm.Preterm raise
+
+pub fn mk_negp(@preterm.Preterm) -> @preterm.Preterm raise
+
+pub fn mkapp((Term, Term)) -> Term raise
+
+pub fn mkbinop(String, (Term, Term)) -> Term raise
+
+pub fn mkbinop_v1(String, (Term, Term)) -> (String, @list.List[Term]) raise
+
+pub fn mkbinop_v2(String, (Bool, Term, Term)) -> (Bool, (String, @list.List[Term])) raise
+
+pub fn mkboolean(Bool) -> Formula raise
+
+pub fn mkconst(String) -> Term raise
+
+pub fn mkeq((Term, Term)) -> (String, @list.List[Term]) raise
+
+pub fn mkeq_v1((Term, Term)) -> Formula raise
+
+pub fn mkeq_v2((Term, Term)) -> (Bool, (String, @list.List[Term])) raise
+
+pub fn[TA] mkfnapp(TA, TA) -> (String, @list.List[TA]) raise
+
+pub fn mkirrefl(Term) -> (Bool, (String, @list.List[Term])) raise
+
+pub fn[TA, TB] mkiterator(Map[TA, TB]) -> Iterator[TA, TB]? raise
+
+pub fn[TA] mkiterator_v1(Set[TA]) -> Iterator[TA, Unit]? raise
+
+pub fn mkmodelclause(Clause1) -> (@oset.T[String], @oset.T[(Bool, (String, @list.List[Term]))]) raise
+
+pub fn mkmodelclauses(@list.List[Clause1]) -> @list.List[(@oset.T[String], @oset.T[(Bool, (String, @list.List[Term]))])] raise
+
+pub fn mkneq((Term, Term)) -> Formula raise
+
+pub fn mkneq_v1((Term, Term)) -> (Bool, (String, @list.List[Term])) raise
+
+pub fn mkneqconv((Term) -> ((Term) -> Int? raise) raise, (Bool, (String, @list.List[Term]))) -> ((Term) -> (Term, Thm) raise) raise
+
+pub fn mkneqconvs((Term) -> ((Term) -> Int? raise) raise) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> (NeqConvs, @oset.T[(Bool, (String, @list.List[Term]))]) raise) raise
+
+pub fn[TA, TB] mknode(Int, Tree[TA, TB], TA, TB, Tree[TA, TB]) -> Node[TA, TB] raise
+
+pub fn[TA, TB] mknodesingleton(Int, TA, TB) -> Node[TA, TB] raise
+
+pub fn mkprefix(String, String) -> String raise
+
+pub fn mkrefl(Term) -> (String, @list.List[Term]) raise
+
+pub fn mkrefl_v1(Term) -> Formula raise
+
+pub fn mkrefl_v2(Term) -> (Bool, (String, @list.List[Term])) raise
+
+pub fn[TA, TB] mkreviterator(Map[TA, TB]) -> Iterator[TA, TB]? raise
+
+pub fn[TA] mkreviterator_v1(Set[TA]) -> Iterator[TA, Unit]? raise
+
+pub fn[TA, TB] mksidespath(@list.List[(Bool, Node[TA, TB])]) -> (Tree[TA, TB], Tree[TA, TB]) raise
+
+pub fn[TA, TB] mktree(Int, Tree[TA, TB], TA, TB, Tree[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn modelterm(Model, Valuation) -> ((Term) -> (ModelTerm, Int) raise) raise
+
+pub fn modfn(Size) -> ((Int) -> ((Int) -> Int? raise) raise) raise
+
+pub fn modfn_v1(Size) -> ((Int) -> ((Int) -> Int? raise) raise) raise
+
+pub fn modn(Size) -> ((Int) -> Int raise) raise
+
+pub fn modname() -> String
+
+pub fn modularfixed() -> Fixed
+
+pub fn msize(Model) -> Int raise
+
+pub fn multfn(Size, Int, Int) -> Int? raise
+
+pub fn multfn_v1(Size, Int, Int) -> Int? raise
+
+pub fn multint(Int, Int) -> Int? raise
+
+pub fn multn(Size, (Int, Int)) -> Int raise
+
+pub fn multn_v1(Size, (Int, Int)) -> Int raise
+
+pub fn multname() -> String
+
+pub fn name(String, Int) -> String raise
+
+pub fn name_v1(String, @list.List[Term]) -> String raise
+
+pub fn name_v2((Bool, (String, @list.List[Term]))) -> String raise
+
+pub fn nary(Int, (String, Int)) -> Bool raise
+
+pub fn[TA] neg(LiteralNet[TA]) -> Int raise
+
+pub fn negate(Bool, (String, @list.List[Term])) -> (Bool, (String, @list.List[Term])) raise
+
+pub fn negate_v1(@oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn negatemember((Bool, (String, @list.List[Term])), @oset.T[(Bool, (String, @list.List[Term]))]) -> Bool raise
+
+pub fn negatemember_v1((Bool, (String, @list.List[Term])), Thm) -> Bool raise
+
+pub fn negative((Bool, (String, @list.List[Term]))) -> Bool raise
+
+pub fn negfn(Size) -> ((Int) -> Int? raise) raise
+
+pub fn[TA] negfn_v1(TA, Int) -> Int? raise
+
+pub fn negname() -> String
+
+pub fn neqconvsadd((Term) -> ((Term) -> Int? raise) raise, NeqConvs) -> (((Bool, (String, @list.List[Term]))) -> NeqConvs? raise) raise
+
+pub fn neqconvsdelete(NeqConvs) -> (((Bool, (String, @list.List[Term]))) -> NeqConvs raise) raise
+
+pub fn neqconvsempty() -> NeqConvs
+
+pub fn[TA] neqconvsfoldl((((Bool, (String, @list.List[Term])), TA)) -> TA raise, TA, NeqConvs) -> TA raise
+
+pub fn neqconvsnull(NeqConvs) -> Bool raise
+
+pub fn neqconvsrewridliterule((Term) -> ((Term) -> Int? raise) raise, @omap.T[Int, (((Term, Term), Thm), Orient?)], TermNet[(Int, Orient)], Int, NeqConvs) -> (((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise) raise
+
+pub fn neqconvstoconv(NeqConvs) -> ((Term) -> (Term, Thm) raise) raise
+
+pub fn[TA] netsize(Net[TA]?) -> (Int, Net[TA])? raise
+
+pub fn newactive(Parameters5, AxCjThm) -> (Active, AxCjCl) raise
+
+pub fn newclause(Parameters4, Thm) -> Clause1 raise
+
+pub fn[TA] newheap((TA) -> ((TA) -> Int raise) raise) -> Heap[TA] raise
+
+pub fn newid(Unit) -> Int raise
+
+pub fn newint(Unit) -> Int raise
+
+pub fn newints(Int) -> @list.List[Int] raise
+
+pub fn newintsthunk(Int, Unit) -> @list.List[Int] raise
+
+pub fn newintthunk(Unit) -> Int raise
+
+pub fn[TA, TB] newmap((TA) -> ((TA) -> Int raise) raise) -> Map[TA, TB] raise
+
+pub fn[TA, TB] newmap_v1(Unit) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] newmap_v2(Unit) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] newmap_v3(Unit) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] newmap_v4(Unit) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] newmap_v5(Unit) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] newmap_v6(Unit) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] newmap_v7(Unit) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] newmap_v8(Unit) -> @omap.T[TA, TB] raise
+
+pub fn newmodel(Parameters) -> Model raise
+
+pub fn newname(Unit) -> String raise
+
+pub fn newnames(Int) -> @list.List[String] raise
+
+pub fn[TA] newnet(Parameters1) -> TermNet[TA] raise
+
+pub fn[TA] newnet_v1(Parameters1) -> TermNet[TA] raise
+
+pub fn[TA] newnet_v2(Parameters1) -> LiteralNet[TA] raise
+
+pub fn newresolution(Parameters7, AxCjThm) -> Resolution raise
+
+pub fn newrewrite((Term) -> ((Term) -> Int? raise) raise) -> Rewrite raise
+
+pub fn[TA] newsubsume(Unit) -> Subsume[TA] raise
+
+pub fn newtable(Int, Int) -> Table raise
+
+pub fn newtables(Int, Int) -> Tables raise
+
+pub fn newvar(Unit) -> Term raise
+
+pub fn newvars(Int) -> @list.List[Term] raise
+
+pub fn newwaiting(Parameters6, AxCjCl) -> Waiting raise
+
+pub fn nilname() -> String
+
+pub fn noconv(Term) -> (Term, Thm) raise
+
+pub fn[TA, TB, TC] nodedelete((TC) -> ((TA) -> Int raise) raise, TC, Node[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] nodedeletenth(Int, Node[TA, TB]) -> ((TA, TB), Tree[TA, TB]) raise
+
+pub fn[TA, TB] nodedeletepick(Node[TA, TB]) -> ((TA, TB), Tree[TA, TB]) raise
+
+pub fn[TA, TB] nodedifferencedomain((TA) -> ((TA) -> Int raise) raise, Node[TA, TB], Node[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB, TC, TD, TE] nodeintersect((TA) -> ((TC) -> Int raise) raise, (((TC, TD), (TA, TE))) -> TB? raise, Node[TC, TD], Node[TA, TE]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] nodeintersectdomain((TA) -> ((TA) -> Int raise) raise, Node[TA, TB], Node[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] nodeleftspine(@list.List[Node[TA, TB]], Node[TA, TB]) -> @list.List[Node[TA, TB]] raise
+
+pub fn[TA, TB, TC] nodemap(((TA, TC)) -> TB raise, Node[TA, TC]) -> Node[TA, TB] raise
+
+pub fn[TA, TB, TC] nodemappartial(((TA, TC)) -> TB? raise, Node[TA, TC]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB, TC, TD] nodemerge((TA) -> ((TA) -> Int raise) raise, ((TA, TC)) -> TB? raise, ((TA, TD)) -> TB? raise, (((TA, TC), (TA, TD))) -> TB? raise, Node[TA, TC], Node[TA, TD]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] nodenth(Int, Node[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB, TC] nodepartition((TC) -> ((TA) -> Int raise) raise, TC, Node[TA, TB]) -> (Tree[TA, TB], (TA, TB)?, Tree[TA, TB]) raise
+
+pub fn[TA, TB, TC] nodepeek((TC) -> ((TB) -> Int raise) raise, TC, Node[TB, TA]) -> TA? raise
+
+pub fn[TA, TB, TC] nodepeekkey((TC) -> ((TA) -> Int raise) raise, TC, Node[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB, TC] nodepeekpath((TC) -> ((TA) -> Int raise) raise, TC, @list.List[(Bool, Node[TA, TB])], Node[TA, TB]) -> (@list.List[(Bool, Node[TA, TB])], Node[TA, TB]?) raise
+
+pub fn[TA, TB] nodepick(Node[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] noderightspine(@list.List[Node[TA, TB]], Node[TA, TB]) -> @list.List[Node[TA, TB]] raise
+
+pub fn[TA, TB] nodesingleton(TA, TB) -> Node[TA, TB] raise
+
+pub fn[TA, TB] nodesize(Node[TA, TB]) -> Int raise
+
+pub fn[TA, TB] nodesubsetdomain((TA) -> ((TA) -> Int raise) raise, Node[TA, TB], Node[TA, TB]) -> Bool raise
+
+pub fn[TA, TB] nodeunion((TA) -> ((TA) -> Int raise) raise, (((TA, TB), (TA, TB))) -> TB? raise, ((TA, TB)) -> TB? raise, Node[TA, TB], Node[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] nodeuniondomain((TA) -> ((TA) -> Int raise) raise, Node[TA, TB], Node[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn noliterule((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise
+
+pub fn[TA] nonunitsubsumes(((@oset.T[(Bool, (String, @list.List[Term]))], Subst, TA)) -> Bool raise, NonunitT[TA], Int?, @list.List[(Bool, (String, @list.List[Term]))]) -> (@oset.T[(Bool, (String, @list.List[Term]))], Subst, TA)? raise
+
+pub fn nonvartypedsubterms(Term) -> @list.List[(@list.List[Int], Term)] raise
+
+pub fn[TA] nonvartypedsubterms_v1(TA, @list.List[Term]) -> @list.List[(@list.List[Int], Term)] raise
+
+pub fn nonvartypedsubterms_v2(Bool, (String, @list.List[Term])) -> @list.List[(@list.List[Int], Term)] raise
+
+pub fn norm((@list.List[Int], @list.List[(String, Int)], @list.List[Qterm])) -> (@list.List[Int], @list.List[(String, Int)], @list.List[Qterm]) raise
+
+pub fn normalize(Subst) -> Subst raise
+
+pub fn norule(Thm) -> Thm raise
+
+pub fn notb(Int) -> Int raise
+
+pub fn notequalterm(Term, Term) -> Bool raise
+
+pub fn notstrictlyless(Kbo, (@list.List[Term], @list.List[Term])) -> Bool raise
+
+pub fn[TA, TB] nth(Map[TA, TB]) -> ((Int) -> (TA, TB) raise) raise
+
+pub fn[TA] nth_v1(Set[TA]) -> ((Int) -> TA raise) raise
+
+pub fn[TA] null(@list.List[TA]) -> Bool raise
+
+pub fn[TA, TB] null_v1(Map[TA, TB]) -> Bool raise
+
+pub fn[TA] null_v10(@oset.T[TA]) -> Bool raise
+
+pub fn null_v11(Subst) -> Bool raise
+
+pub fn[TA, TB] null_v12(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] null_v13(@oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] null_v14(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] null_v15(@oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] null_v16(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] null_v17(@oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] null_v18(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] null_v19(@oset.T[TA]) -> Bool raise
+
+pub fn[TA] null_v2(Set[TA]) -> Bool raise
+
+pub fn[TA] null_v20(TermNet[TA]) -> Bool raise
+
+pub fn[TA, TB] null_v3(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA, TB] null_v4(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] null_v5(@oset.T[TA]) -> Bool raise
+
+pub fn[TA] null_v6(Heap[TA]) -> Bool raise
+
+pub fn[TA, TB] null_v7(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] null_v8(@oset.T[TA]) -> Bool raise
+
+pub fn[TA, TB] null_v9(@omap.T[TA, TB]) -> Bool raise
+
+pub fn nullary((String, Int)) -> Bool raise
+
+pub fn nullname() -> String
+
+pub fn numeralfn(Int, Size) -> Int? raise
+
+pub fn numeralfn_v1(Int, Size) -> Int? raise
+
+pub fn numerallist() -> @list.List[Int]
+
+pub fn numeralmax() -> Int
+
+pub fn numeralmin() -> Int
+
+pub fn numeralname(Int) -> String raise
+
+pub fn numname(Int) -> String raise
+
+pub fn[TA] oadd(Net[TA], @list.List[Qterm], Net[TA]?) -> Net[TA] raise
+
+pub fn oddname() -> String
+
+pub fn[TA] oddrel(TA, Int) -> Bool? raise
+
+pub fn oddrel_v1(Size) -> ((Int) -> Bool? raise) raise
+
+pub fn onen(Size) -> Int raise
+
+pub fn onen_v1(Size) -> Int raise
+
+pub fn orb(Int, Int) -> Int raise
+
+pub fn order(Term, Term) -> Int? raise
+
+pub fn[TA, TB] orderedredexresidues(((TA, TA), TB), Orient?) -> @list.List[(TA, TA, Bool)] raise
+
+pub fn orderedrewrite((Term) -> ((Term) -> Int? raise) raise, @list.List[((Term, Term), Thm)]) -> ((Thm) -> Thm raise) raise
+
+pub fn ordertoorient(Int?) -> Orient? raise
+
+pub fn orelseconv((Term) -> (Term, Thm) raise, (Term) -> (Term, Thm) raise, Term) -> (Term, Thm) raise
+
+pub fn orelseliterule(((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise, ((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise, (Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise
+
+pub fn orelserule((Thm) -> Thm raise, (Thm) -> Thm raise, Thm) -> Thm raise
+
+pub fn orientedequation(Orient, ((Term, Term), Thm)) -> ((Term, Term), Thm) raise
+
+pub fn overflowfixed() -> Fixed
+
+pub fn paramodulate((Clause1, (Bool, (String, @list.List[Term])), Orient, Term), (Clause1, (Bool, (String, @list.List[Term])), @list.List[Int], Term)) -> Clause1 raise
+
+pub fn parents(Inference1) -> @list.List[Thm] raise
+
+pub fn[TA, TB] partition(((TA, TB)) -> Bool raise) -> ((Map[TA, TB]) -> (Map[TA, TB], Map[TA, TB]) raise) raise
+
+pub fn[TA] partition_v1((TA) -> Bool raise) -> ((Set[TA]) -> (Set[TA], Set[TA]) raise) raise
+
+pub fn[TA] partition_v10((TA) -> Bool raise, @oset.T[TA]) -> (@oset.T[TA], @oset.T[TA]) raise
+
+pub fn[TA, TB] partition_v11((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> (@omap.T[TA, TB], @omap.T[TA, TB]) raise
+
+pub fn[TA] partition_v12((TA) -> Bool raise, @oset.T[TA]) -> (@oset.T[TA], @oset.T[TA]) raise
+
+pub fn[TA, TB] partition_v13((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> (@omap.T[TA, TB], @omap.T[TA, TB]) raise
+
+pub fn[TA] partition_v14((TA) -> Bool raise, @oset.T[TA]) -> (@oset.T[TA], @oset.T[TA]) raise
+
+pub fn[TA, TB] partition_v15((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> (@omap.T[TA, TB], @omap.T[TA, TB]) raise
+
+pub fn[TA] partition_v16((TA) -> Bool raise, @oset.T[TA]) -> (@oset.T[TA], @oset.T[TA]) raise
+
+pub fn[TA, TB] partition_v17((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> (@omap.T[TA, TB], @omap.T[TA, TB]) raise
+
+pub fn[TA] partition_v18((TA) -> Bool raise, @oset.T[TA]) -> (@oset.T[TA], @oset.T[TA]) raise
+
+pub fn[TA, TB] partition_v2((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> (@omap.T[TA, TB], @omap.T[TA, TB]) raise
+
+pub fn[TA, TB] partition_v3((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> (@omap.T[TA, TB], @omap.T[TA, TB]) raise
+
+pub fn[TA] partition_v4((TA) -> Bool raise, @oset.T[TA]) -> (@oset.T[TA], @oset.T[TA]) raise
+
+pub fn[TA, TB] partition_v5((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> (@omap.T[TA, TB], @omap.T[TA, TB]) raise
+
+pub fn[TA] partition_v6((TA) -> Bool raise, @oset.T[TA]) -> (@oset.T[TA], @oset.T[TA]) raise
+
+pub fn[TA, TB] partition_v7((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> (@omap.T[TA, TB], @omap.T[TA, TB]) raise
+
+pub fn[TA] partition_v8((TA) -> Bool raise, @oset.T[TA]) -> (@oset.T[TA], @oset.T[TA]) raise
+
+pub fn[TA, TB] partition_v9((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> (@omap.T[TA, TB], @omap.T[TA, TB]) raise
+
+pub fn pathconv((Term) -> (Term, Thm) raise, @list.List[Int], Term) -> (Term, Thm) raise
+
+pub fn pathliterule((Term) -> (Term, Thm) raise, @list.List[Int], (Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise
+
+pub fn pathrule((Term) -> (Term, Thm) raise, (Bool, (String, @list.List[Term])), @list.List[Int]) -> ((Thm) -> Thm raise) raise
+
+pub fn[TA, TB] peek(Map[TB, TA]) -> ((TB) -> TA? raise) raise
+
+pub fn[TA] peek_v1(Set[TA]) -> ((TA) -> TA? raise) raise
+
+pub fn[TA] peek_v10(@omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA], @oset.T[(Bool, (String, @list.List[Term]))]) -> TA? raise
+
+pub fn peek_v11(Rewrite) -> ((Int) -> (((Term, Term), Thm), Orient?)? raise) raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] peek_v2(@omap.T[TB, TA], TB) -> TA? raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] peek_v3(@omap.T[TB, TA], TB) -> TA? raise
+
+pub fn[TA] peek_v4(@omap.T[String, TA], String) -> TA? raise
+
+pub fn[TA] peek_v5(@omap.T[(String, Int), TA], (String, Int)) -> TA? raise
+
+pub fn peek_v6(Subst) -> ((String) -> Term? raise) raise
+
+pub fn[TA] peek_v7(@omap.T[(String, @list.List[Term]), TA], (String, @list.List[Term])) -> TA? raise
+
+pub fn[TA] peek_v8(@omap.T[Formula, TA], Formula) -> TA? raise
+
+pub fn[TA] peek_v9(@omap.T[(Bool, (String, @list.List[Term])), TA], (Bool, (String, @list.List[Term]))) -> TA? raise
+
+pub fn peekfixedfunction(Model, (String, @list.List[Int])) -> Int? raise
+
+pub fn peekfixedrelation(Model, (String, @list.List[Int])) -> Bool? raise
+
+pub fn peekfunctionfixed(Fixed, (String, Int)) -> ((Size) -> ((@list.List[Int]) -> Int? raise) raise)? raise
+
+pub fn[TA, TB] peekkey(Map[TA, TB]) -> ((TA) -> (TA, TB)? raise) raise
+
+pub fn peekrelationfixed(Fixed, (String, Int)) -> ((Size) -> ((@list.List[Int]) -> Bool? raise) raise)? raise
+
+pub fn peekvaluation(Valuation) -> ((String) -> Int? raise) raise
+
+pub fn pertatom(Model, Valuation, Bool, (String, @list.List[Term]), @list.List[Perturbation]) -> @list.List[Perturbation] raise
+
+pub fn pertclause(Model, Valuation, @oset.T[(Bool, (String, @list.List[Term]))], @list.List[Perturbation]) -> @list.List[Perturbation] raise
+
+pub fn pertliteral(Model, Valuation, ((Bool, (String, @list.List[Term])), @list.List[Perturbation])) -> @list.List[Perturbation] raise
+
+pub fn pertterm(Model, @list.List[Int], ModelTerm, @list.List[Perturbation]) -> @list.List[Perturbation] raise
+
+pub fn pertterms(Model, (@list.List[Int]) -> Bool raise) -> ((@list.List[ModelTerm]) -> ((@list.List[Int]) -> ((@list.List[Perturbation]) -> @list.List[Perturbation] raise) raise) raise) raise
+
+pub fn perturb(Model, Perturbation) -> Unit raise
+
+pub fn perturbatom(Model, Valuation, ((String, @list.List[Term]), Bool)) -> Unit raise
+
+pub fn perturbclause(Model, Valuation, @oset.T[(Bool, (String, @list.List[Term]))]) -> Unit raise
+
+pub fn perturbliteral(Model, Valuation, (Bool, (String, @list.List[Term]))) -> Unit raise
+
+pub fn perturbmodel(Model, @list.List[(@oset.T[String], @oset.T[(Bool, (String, @list.List[Term]))])]) -> ((Int) -> Unit raise) raise
+
+pub fn perturbmodels(@list.List[ModelParameters], @list.List[Model], @list.List[(@oset.T[String], @oset.T[(Bool, (String, @list.List[Term]))])]) -> Unit raise
+
+pub fn perturbterm(Model, Valuation, (Term, @list.List[Int])) -> Unit raise
+
+pub fn[TA, TB] pick(Map[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] pick_v1(Set[TA]) -> TA raise
+
+pub fn[TA] pick_v2(@oset.T[TA]) -> TA raise
+
+pub fn[TA] pick_v3(@oset.T[TA]) -> TA raise
+
+pub fn[TA] pick_v4(@oset.T[TA]) -> TA raise
+
+pub fn[TA] pick_v5(@oset.T[TA]) -> TA raise
+
+pub fn[TA] pick_v6(@oset.T[TA]) -> TA raise
+
+pub fn[TA] pick_v7(@oset.T[TA]) -> TA raise
+
+pub fn[TA] pick_v8(@oset.T[TA]) -> TA raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB, TC] pick_v9(@omap.T[TA, (TB, TC?)], @oset.T[TA]) -> (TA, (TB, TC?))? raise
+
+pub fn pickperturb(Model, @list.List[Perturbation]) -> Unit raise
+
+pub fn polarity(Bool, (String, @list.List[Term])) -> Bool raise
+
+pub fn[TA] pos(LiteralNet[TA]) -> Int raise
+
+pub fn positive((Bool, (String, @list.List[Term]))) -> Bool raise
+
+pub fn posn(Int) -> Int raise
+
+pub fn post_factor(Clause1, (Active, Subsume[Clause1], @list.List[Clause1])) -> (Active, Subsume[Clause1], @list.List[Clause1]) raise
+
+pub fn postfactor_simplify(Active, Subsume[Clause1]) -> ((Clause1) -> Clause1? raise) raise
+
+pub fn[TA] pre((Int, TA)?) -> (Int, TA?) raise
+
+pub fn pre_factor(Clause1, (Active, Subsume[Clause1], @list.List[Clause1])) -> (Active, Subsume[Clause1], @list.List[Clause1]) raise
+
+pub fn prefactor_simplify(Active, Subsume[Clause1]) -> ((Clause1) -> Clause1? raise) raise
+
+pub fn prefix() -> String
+
+pub fn prefix_v1(String) -> String raise
+
+pub fn prefn(Size) -> ((Int) -> Int? raise) raise
+
+pub fn[TA] prefn_v1(TA, Int) -> Int? raise
+
+pub fn prename() -> String
+
+pub fn preterm_of_atom(String, @list.List[Term]) -> @preterm.Preterm raise
+
+pub fn preterm_of_const(String) -> @preterm.Preterm raise
+
+pub fn preterm_of_eq(Term, Term) -> @preterm.Preterm raise
+
+pub fn preterm_of_fol_term(Term) -> @preterm.Preterm raise
+
+pub fn preterm_of_literal(Bool, (String, @list.List[Term])) -> @preterm.Preterm raise
+
+pub fn preterm_of_predicate(String) -> @preterm.Preterm raise
+
+pub fn print_id_tac(String, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn print_proof(Thm) -> Unit raise
+
+pub fn print_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn print_varandtype(@pp.Formatter, @kernel.Term) -> Unit raise
+
+pub fn[TA, TB, TC, TD] prodcompare((TB) -> ((TA) -> Int raise) raise, (TD) -> ((TC) -> Int raise) raise, (TB, TD), (TA, TC)) -> Int raise
+
+pub fn projectionfixed() -> Fixed
+
+pub fn[TA, TB] projectionfn(Int, TB, @list.List[TA]) -> TA? raise
+
+pub fn projectionlist() -> @list.List[Int]
+
+pub fn projectionmax() -> Int
+
+pub fn projectionmin() -> Int
+
+pub fn projectionname(Int) -> String raise
+
+pub fn proof(Thm) -> @list.List[(Thm, Inference1)] raise
+
+pub fn psize(Parameters) -> Int raise
+
+pub fn pure_metis_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn qm(@list.List[(Qterm, Qterm)]) -> Bool raise
+
+pub fn qm_v1(@list.List[(Qterm, Term)]) -> Bool raise
+
+pub fn qn(@omap.T[String, Qterm], @list.List[(Term, Qterm)]) -> @omap.T[String, Qterm]? raise
+
+pub fn qtermtoterm(Qterm) -> Term raise
+
+pub fn qu(@omap.T[String, Qterm], @list.List[(Qterm, Term)]) -> @omap.T[String, Qterm] raise
+
+pub fn qv(Qterm, Qterm) -> Qterm raise
+
+pub fn[TA, TB] random(Map[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] random_v1(Set[TA]) -> TA raise
+
+pub fn randompriority(Unit) -> Int raise
+
+pub fn randomresult(Int) -> Int raise
+
+pub fn randomvaluation(Size) -> ((@oset.T[String]) -> Valuation raise) raise
+
+pub fn[TA] rank(Node1[TA]) -> Int raise
+
+pub fn[TA, TB] readiterator(Iterator[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA] readiterator_v1(Iterator[TA, Unit]) -> TA raise
+
+pub fn rebuild(@oset.T[Int], @oset.T[Int], Rewrite) -> Rewrite raise
+
+pub fn reconstruct(@oset.T[(Bool, (String, @list.List[Term]))], (InferenceType, @list.List[Thm])) -> Inference1 raise
+
+pub fn reconstructequality(@oset.T[(Bool, (String, @list.List[Term]))]) -> ((Bool, (String, @list.List[Term])), @list.List[Int], Term) raise
+
+pub fn reconstructresolvant(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[(Bool, (String, @list.List[Term]))], @oset.T[(Bool, (String, @list.List[Term]))]) -> (Bool, (String, @list.List[Term])) raise
+
+pub fn reconstructsubst(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[(Bool, (String, @list.List[Term]))]) -> Subst raise
+
+pub fn redexes(Subst) -> @oset.T[String] raise
+
+pub fn redexresidue(Orient, ((Term, Term), Thm)) -> (Term, Term) raise
+
+pub fn[TA] redexresidues(Orient?, (TA, TA)) -> @list.List[(TA, TA, Bool)] raise
+
+pub fn reduce(Rewrite) -> Rewrite raise
+
+pub fn reduce1(Bool, Int, (((Term, Term), Thm), Orient?), (@oset.T[Int], @oset.T[Int], @oset.T[Int], Rewrite, @oset.T[Int])) -> (@oset.T[Int], @oset.T[Int], @oset.T[Int], Rewrite, @oset.T[Int]) raise
+
+pub fn reduce_p(Rewrite) -> (Rewrite, @list.List[Int]) raise
+
+pub fn reduce_v1(Units) -> ((Thm) -> Thm raise) raise
+
+pub fn reduce_v2(Units, Clause1) -> Clause1 raise
+
+pub fn reduceacc(@oset.T[Int], @oset.T[Int], @oset.T[Int], Rewrite, @oset.T[Int]) -> (Rewrite, @list.List[Int]) raise
+
+pub fn refl(Term) -> Thm raise
+
+pub fn refleqn(Term) -> ((Term, Term), Thm) raise
+
+pub fn reflexivity() -> Thm
+
+pub fn reflexivityrule(Term) -> Thm raise
+
+pub fn relation((String, @list.List[Term])) -> (String, Int) raise
+
+pub fn relation_v1((Bool, (String, @list.List[Term]))) -> (String, Int) raise
+
+pub fn relationcongruence(String, Int) -> Thm raise
+
+pub fn relationnames(Formula) -> @oset.T[String] raise
+
+pub fn relations(Formula) -> @oset.T[(String, Int)] raise
+
+pub fn relations_v1(@oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(String, Int)] raise
+
+pub fn[TA, TB] remove(Map[TA, TB], TA) -> Map[TA, TB] raise
+
+pub fn[TA] remove_v1(Set[TA]) -> ((TA) -> Set[TA] raise) raise
+
+pub fn[TA] remove_v10(Term, @omap.T[Term, TA]) -> @omap.T[Term, TA] raise
+
+pub fn remove_v11(Term, @oset.T[Term]) -> @oset.T[Term] raise
+
+pub fn remove_v12(Subst) -> ((@oset.T[String]) -> Subst raise) raise
+
+pub fn[TA] remove_v13((String, @list.List[Term]), @omap.T[(String, @list.List[Term]), TA]) -> @omap.T[(String, @list.List[Term]), TA] raise
+
+pub fn remove_v14((String, @list.List[Term]), @oset.T[(String, @list.List[Term])]) -> @oset.T[(String, @list.List[Term])] raise
+
+pub fn[TA] remove_v15(Formula, @omap.T[Formula, TA]) -> @omap.T[Formula, TA] raise
+
+pub fn remove_v16(Formula, @oset.T[Formula]) -> @oset.T[Formula] raise
+
+pub fn[TA] remove_v17((Bool, (String, @list.List[Term])), @omap.T[(Bool, (String, @list.List[Term])), TA]) -> @omap.T[(Bool, (String, @list.List[Term])), TA] raise
+
+pub fn remove_v18((Bool, (String, @list.List[Term])), @oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn[TA] remove_v19(@oset.T[(Bool, (String, @list.List[Term]))], @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]) -> @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] remove_v2(TA, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn remove_v20(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]] raise
+
+pub fn remove_v21(Waiting) -> ((Double, Clause1), Waiting)? raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] remove_v3(TA, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] remove_v4(TA, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA] remove_v5(Heap[TA]) -> (TA, Heap[TA]) raise
+
+pub fn[TA] remove_v6(String, @omap.T[String, TA]) -> @omap.T[String, TA] raise
+
+pub fn remove_v7(String, @oset.T[String]) -> @oset.T[String] raise
+
+pub fn[TA] remove_v8((String, Int), @omap.T[(String, Int), TA]) -> @omap.T[(String, Int), TA] raise
+
+pub fn remove_v9((String, Int), @oset.T[(String, Int)]) -> @oset.T[(String, Int)] raise
+
+pub fn removeirrefl(Thm) -> Thm raise
+
+pub fn removesym(Thm) -> Thm raise
+
+pub fn[TA, TB] reorder((Int, TA), (Int, TB)) -> Int raise
+
+pub fn reorient_tysubst(@list.List[@kernel.HolType], @list.List[(@kernel.HolType, @kernel.HolType)]) -> @list.List[(@kernel.HolType, @kernel.HolType)] raise
+
+pub fn repeatconv((Term) -> (Term, Thm) raise, Term) -> (Term, Thm) raise
+
+pub fn repeatliterule(((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise, (Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise
+
+pub fn repeatrule((Thm) -> Thm raise, Thm) -> Thm raise
+
+pub fn repeattopdownconv((Term) -> (Term, Thm) raise) -> ((Term) -> (Term, Thm) raise) raise
+
+pub fn replace(Term, (@list.List[Int], Term)) -> Term raise
+
+pub fn[TA] replace_v1((TA, @list.List[Term]), (@list.List[Int], Term)) -> (TA, @list.List[Term]) raise
+
+pub fn[TA, TB] replace_v2((TA, (TB, @list.List[Term])), (@list.List[Int], Term)) -> (TA, (TB, @list.List[Term])) raise
+
+pub fn reset_consts(Unit) -> Unit raise
+
+pub fn residuefreevars(Subst) -> @oset.T[String] raise
+
+pub fn resolve((Bool, (String, @list.List[Term])), Thm) -> ((Thm) -> Thm raise) raise
+
+pub fn resolve_n(@kernel.Term) -> (((@list.List[@kernel.Term], @list.List[@kernel.Term])) -> @kernel.Thm raise) raise
+
+pub fn resolve_v1((Clause1, (Bool, (String, @list.List[Term]))), (Clause1, (Bool, (String, @list.List[Term])))) -> Clause1 raise
+
+pub fn resolve_v2(@kernel.Term, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn restrict(Subst) -> ((@oset.T[String]) -> Subst raise) raise
+
+pub fn[TA, TB, TC] revcompare((TC) -> ((TB) -> TA raise) raise, TB, TC) -> TA raise
+
+pub fn[TA] revdivide(@list.List[TA]) -> ((Int) -> (@list.List[TA], @list.List[TA]) raise) raise
+
+pub fn rewrconv(((Term, Term), Thm), @list.List[Int], Term) -> (Term, Thm) raise
+
+pub fn rewrconv_v1(Rewrite, (Term) -> ((Term) -> Int? raise) raise) -> ((Term) -> (Term, Thm) raise) raise
+
+pub fn rewridconv(Rewrite) -> (((Term) -> ((Term) -> Int? raise) raise) -> ((Int) -> ((Term) -> (Term, Thm) raise) raise) raise) raise
+
+pub fn rewridconv_p((Term) -> ((Term) -> Int? raise) raise, @omap.T[Int, (((Term, Term), Thm), Orient?)], TermNet[(Int, Orient)], Int, Term) -> (Term, Thm) raise
+
+pub fn rewritables(Active, @list.List[Int]) -> @oset.T[Int] raise
+
+pub fn rewrite(@list.List[((Term, Term), Thm)]) -> ((Thm) -> Thm raise) raise
+
+pub fn rewrite_rewritables(Active, @list.List[Int]) -> @oset.T[Int] raise
+
+pub fn rewrite_v1(Rewrite, Clause1) -> Clause1 raise
+
+pub fn rewriteconv(Rewrite, (Term) -> ((Term) -> Int? raise) raise) -> ((Term) -> (Term, Thm) raise) raise
+
+pub fn rewriteidconv(Rewrite) -> (((Term) -> ((Term) -> Int? raise) raise) -> ((Int) -> ((Term) -> (Term, Thm) raise) raise) raise) raise
+
+pub fn rewriteidconv_p((Term) -> ((Term) -> Int? raise) raise, @omap.T[Int, (((Term, Term), Thm), Orient?)], TermNet[(Int, Orient)], Int) -> ((Term) -> (Term, Thm) raise) raise
+
+pub fn rewriteideqn_p((Term) -> ((Term) -> Int? raise) raise, @omap.T[Int, (((Term, Term), Thm), Orient?)], TermNet[(Int, Orient)], Int, ((Term, Term), Thm)) -> ((Term, Term), Thm) raise
+
+pub fn rewriteidliteralsrule(Rewrite) -> (((Term) -> ((Term) -> Int? raise) raise) -> ((Int) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> ((Thm) -> Thm raise) raise) raise) raise) raise
+
+pub fn rewriteidliteralsrule_p((Term) -> ((Term) -> Int? raise) raise, @omap.T[Int, (((Term, Term), Thm), Orient?)], TermNet[(Int, Orient)], Int, @oset.T[(Bool, (String, @list.List[Term]))], Thm) -> Thm raise
+
+pub fn rewriteidrule(Rewrite) -> (((Term) -> ((Term) -> Int? raise) raise) -> ((Int) -> ((Thm) -> Thm raise) raise) raise) raise
+
+pub fn rewriteidrule_p((Term) -> ((Term) -> Int? raise) raise, @omap.T[Int, (((Term, Term), Thm), Orient?)], TermNet[(Int, Orient)], Int, Thm) -> Thm raise
+
+pub fn rewriteliteralsrule(Rewrite, (Term) -> ((Term) -> Int? raise) raise) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> ((Thm) -> Thm raise) raise) raise
+
+pub fn rewriterule(Rewrite, (Term) -> ((Term) -> Int? raise) raise) -> ((Thm) -> Thm raise) raise
+
+pub fn rewrliterule(((Term, Term), Thm), @list.List[Int], (Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise
+
+pub fn rewrrule(((Term, Term), Thm), (Bool, (String, @list.List[Term])), @list.List[Int]) -> ((Thm) -> Thm raise) raise
+
+pub fn[TA] rhs((String, @list.List[TA])) -> TA raise
+
+pub fn rhs_v1(Formula) -> Term raise
+
+pub fn rhs_v2(Bool, (String, @list.List[Term])) -> Term raise
+
+pub fn run(@list.List[Thm]) -> Thm raise
+
+pub fn sameredexes(Orient?, (Term, Term), (Term, Term)) -> Bool raise
+
+pub fn saturation(Active) -> @list.List[Clause1] raise
+
+pub fn[TA, TB, TC, TD] seeninc(TA, TC, (TD, TB, @list.List[(TA, TB, TC)])) -> @list.List[(TA, TB, TC)] raise
+
+pub fn setfixed() -> Fixed
+
+pub fn setmkexists(@oset.T[String], Formula) -> Formula raise
+
+pub fn setmkforall(@oset.T[String], Formula) -> Formula raise
+
+pub fn setn(Size, Int) -> Int raise
+
+pub fn setrewrite(Active, Rewrite) -> Active raise
+
+pub fn shiftleft(Int, Int) -> Int raise
+
+pub fn shiftright(Int, Int) -> Int raise
+
+pub fn show_types(Unit) -> Unit raise
+
+pub fn simple_metis_refute(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn simplify(Thm) -> Thm? raise
+
+pub fn simplify_v1(Clause1) -> Clause1? raise
+
+pub fn simplify_v2(Simplify, Units, Rewrite, Subsume[Clause1]) -> ((Clause1) -> Clause1? raise) raise
+
+pub fn simplifyactive(Simplify, Active) -> ((Clause1) -> Clause1? raise) raise
+
+pub fn[TA] singles(@list.List[Qterm], Net[TA]) -> Net[TA] raise
+
+pub fn[TA, TB] singleton((TA) -> ((TA) -> Int raise) raise, (TA, TB)) -> Map[TA, TB] raise
+
+pub fn[TA] singleton_v1((TA) -> ((TA) -> Int raise) raise, TA) -> Set[TA] raise
+
+pub fn[TA] singleton_v10(TA) -> @oset.T[TA] raise
+
+pub fn[TA] singleton_v11(TA) -> @oset.T[TA] raise
+
+pub fn[TA, TB] singleton_v12(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] singleton_v13(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA] singleton_v14(TA) -> @oset.T[TA] raise
+
+pub fn[TA] singleton_v15(TA) -> @oset.T[TA] raise
+
+pub fn[TA, TB] singleton_v16(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA] singleton_v17(TA) -> @oset.T[TA] raise
+
+pub fn singleton_v18((String, Term)) -> Subst raise
+
+pub fn[TA, TB] singleton_v19(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] singleton_v2(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] singleton_v20(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA] singleton_v21(TA) -> @oset.T[TA] raise
+
+pub fn[TA] singleton_v22(TA) -> @oset.T[TA] raise
+
+pub fn[TA, TB] singleton_v23(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] singleton_v24(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA] singleton_v25(TA) -> @oset.T[TA] raise
+
+pub fn[TA] singleton_v26(TA) -> @oset.T[TA] raise
+
+pub fn[TA, TB] singleton_v27(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] singleton_v28(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA] singleton_v29(TA) -> @oset.T[TA] raise
+
+pub fn[TA, TB] singleton_v3(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA] singleton_v30(TA) -> @oset.T[TA] raise
+
+pub fn[TA, TB] singleton_v31(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] singleton_v32(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA] singleton_v33(TA) -> @oset.T[TA] raise
+
+pub fn[TA] singleton_v34(TA) -> @oset.T[TA] raise
+
+pub fn[TA, TB] singleton_v4(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] singleton_v5(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA] singleton_v6(TA) -> @oset.T[TA] raise
+
+pub fn[TA] singleton_v7(TA) -> @oset.T[TA] raise
+
+pub fn[TA, TB] singleton_v8(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] singleton_v9(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn singletonfn(Size, Int) -> Int? raise
+
+pub fn singletonname() -> String
+
+pub fn[TA, TB] size(Map[TA, TB]) -> Int raise
+
+pub fn[TA] size_v1(Set[TA]) -> Int raise
+
+pub fn size_v10(Subst) -> Int raise
+
+pub fn[TA, TB] size_v11(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] size_v12(@oset.T[TA]) -> Int raise
+
+pub fn[TA, TB] size_v13(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] size_v14(@oset.T[TA]) -> Int raise
+
+pub fn[TA, TB] size_v15(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] size_v16(@oset.T[TA]) -> Int raise
+
+pub fn[TA, TB] size_v17(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] size_v18(@oset.T[TA]) -> Int raise
+
+pub fn[TA] size_v19(TermNet[TA]) -> Int raise
+
+pub fn[TA, TB] size_v2(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] size_v20(TermNet[TA]) -> Int raise
+
+pub fn[TA] size_v21(LiteralNet[TA]) -> Int raise
+
+pub fn[TA] size_v22(Subsume[TA]) -> Int raise
+
+pub fn size_v23(Rewrite) -> Int raise
+
+pub fn size_v24(Units) -> Int raise
+
+pub fn size_v25(Active) -> Int raise
+
+pub fn size_v26(Waiting) -> Int raise
+
+pub fn[TA, TB] size_v3(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] size_v4(@oset.T[TA]) -> Int raise
+
+pub fn[TA] size_v5(Heap[TA]) -> Int raise
+
+pub fn[TA, TB] size_v6(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] size_v7(@oset.T[TA]) -> Int raise
+
+pub fn[TA, TB] size_v8(@omap.T[TA, TB]) -> Int raise
+
+pub fn[TA] size_v9(@oset.T[TA]) -> Int raise
+
+pub fn sort_utilitywise(@list.List[Clause1]) -> @list.List[Clause1] raise
+
+pub fn sortclause(@oset.T[(Bool, (String, @list.List[Term]))]) -> @list.List[(Bool, (String, @list.List[Term]))] raise
+
+pub fn[TA, TB] sortmap((TA) -> TB raise, (TB) -> ((TB) -> Int raise) raise, @list.List[TA]) -> @list.List[TA] raise
+
+pub fn specialize(Formula) -> Formula raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] split(TA, @omap.T[TA, TB]) -> (@omap.T[TA, TB], TB?, @omap.T[TA, TB]) raise
+
+pub fn split_limit() -> @ref.Ref[Int]
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] split_v1(TA, @omap.T[TA, TB]) -> (@omap.T[TA, TB], TB?, @omap.T[TA, TB]) raise
+
+pub fn split_v10((String, @list.List[Term]), @oset.T[(String, @list.List[Term])]) -> (@oset.T[(String, @list.List[Term])], Bool, @oset.T[(String, @list.List[Term])]) raise
+
+pub fn split_v11(@list.List[Formula], Bool, Formula) -> @list.List[Formula] raise
+
+pub fn[TA] split_v12(Formula, @omap.T[Formula, TA]) -> (@omap.T[Formula, TA], TA?, @omap.T[Formula, TA]) raise
+
+pub fn split_v13(Formula, @oset.T[Formula]) -> (@oset.T[Formula], Bool, @oset.T[Formula]) raise
+
+pub fn[TA] split_v14((Bool, (String, @list.List[Term])), @omap.T[(Bool, (String, @list.List[Term])), TA]) -> (@omap.T[(Bool, (String, @list.List[Term])), TA], TA?, @omap.T[(Bool, (String, @list.List[Term])), TA]) raise
+
+pub fn split_v15((Bool, (String, @list.List[Term])), @oset.T[(Bool, (String, @list.List[Term]))]) -> (@oset.T[(Bool, (String, @list.List[Term]))], Bool, @oset.T[(Bool, (String, @list.List[Term]))]) raise
+
+pub fn[TA] split_v16(@oset.T[(Bool, (String, @list.List[Term]))], @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]) -> (@omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA], TA?, @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]) raise
+
+pub fn split_v17(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> (@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]], Bool, @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] split_v2(TA, @oset.T[TA]) -> (@oset.T[TA], Bool, @oset.T[TA]) raise
+
+pub fn[TA] split_v3(String, @omap.T[String, TA]) -> (@omap.T[String, TA], TA?, @omap.T[String, TA]) raise
+
+pub fn split_v4(String, @oset.T[String]) -> (@oset.T[String], Bool, @oset.T[String]) raise
+
+pub fn[TA] split_v5((String, Int), @omap.T[(String, Int), TA]) -> (@omap.T[(String, Int), TA], TA?, @omap.T[(String, Int), TA]) raise
+
+pub fn split_v6((String, Int), @oset.T[(String, Int)]) -> (@oset.T[(String, Int)], Bool, @oset.T[(String, Int)]) raise
+
+pub fn[TA] split_v7(Term, @omap.T[Term, TA]) -> (@omap.T[Term, TA], TA?, @omap.T[Term, TA]) raise
+
+pub fn split_v8(Term, @oset.T[Term]) -> (@oset.T[Term], Bool, @oset.T[Term]) raise
+
+pub fn[TA] split_v9((String, @list.List[Term]), @omap.T[(String, @list.List[Term]), TA]) -> (@omap.T[(String, @list.List[Term]), TA], TA?, @omap.T[(String, @list.List[Term]), TA]) raise
+
+pub fn splitgoal(Formula) -> @list.List[Formula] raise
+
+pub fn stackaddfn((String, Int)) -> (((@list.List[Int], @list.List[(String, Int)], @list.List[Qterm])) -> (@list.List[Int], @list.List[(String, Int)], @list.List[Qterm]) raise) raise
+
+pub fn stackaddqterm(Qterm) -> (((@list.List[Int], @list.List[(String, Int)], @list.List[Qterm])) -> (@list.List[Int], @list.List[(String, Int)], @list.List[Qterm]) raise) raise
+
+pub fn[TA, TB, TC] stackempty() -> (@list.List[TA], @list.List[TB], @list.List[TC])
+
+pub fn[TA, TB, TC] stackvalue((@list.List[TB], @list.List[TC], @list.List[TA])) -> TA raise
+
+pub fn strictlyless(Kbo, Term, Term) -> Bool raise
+
+pub fn[TA] strictlysubsumes(((@oset.T[(Bool, (String, @list.List[Term]))], Subst, TA)) -> Bool raise, Subsume[TA], @oset.T[(Bool, (String, @list.List[Term]))]) -> (@oset.T[(Bool, (String, @list.List[Term]))], Subst, TA)? raise
+
+pub fn[TA] string_of_instantiation(TA, @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) -> String raise
+
+pub fn string_of_tminst(@list.List[(@kernel.Term, @kernel.Term)]) -> String raise
+
+pub fn string_of_tyinst(@list.List[(@kernel.HolType, @kernel.HolType)]) -> String raise
+
+pub fn stripapp(Term) -> (Term, @list.List[Term]) raise
+
+pub fn stripconj(Formula) -> @list.List[Formula] raise
+
+pub fn stripdisj(Formula) -> @list.List[Formula] raise
+
+pub fn stripequiv(Formula) -> @list.List[Formula] raise
+
+pub fn stripexists(Formula) -> (@list.List[String], Formula) raise
+
+pub fn stripforall(Formula) -> (@list.List[String], Formula) raise
+
+pub fn stripneg(Formula) -> (Int, Formula) raise
+
+pub fn stripsuffix((Char) -> Bool raise, String) -> String raise
+
+pub fn subfn(Size) -> ((Int) -> ((Int) -> Int? raise) raise) raise
+
+pub fn subfn_v1(Size) -> ((Int) -> ((Int) -> Int? raise) raise) raise
+
+pub fn subname() -> String
+
+pub fn[TA] subset(Set[TA]) -> ((Set[TA]) -> Bool raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] subset_v1(@oset.T[TA], @oset.T[TA]) -> Bool raise
+
+pub fn subset_v10(@oset.T[Formula], @oset.T[Formula]) -> Bool raise
+
+pub fn subset_v11(@oset.T[Formula]) -> ((@oset.T[Formula]) -> Bool raise) raise
+
+pub fn subset_v12(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[(Bool, (String, @list.List[Term]))]) -> Bool raise
+
+pub fn subset_v13(@oset.T[(Bool, (String, @list.List[Term]))]) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> Bool raise) raise
+
+pub fn subset_v14(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]], @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> Bool raise
+
+pub fn subset_v15(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> ((@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> Bool raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] subset_v2(@oset.T[TA]) -> ((@oset.T[TA]) -> Bool raise) raise
+
+pub fn subset_v3(@oset.T[String], @oset.T[String]) -> Bool raise
+
+pub fn subset_v4(@oset.T[String]) -> ((@oset.T[String]) -> Bool raise) raise
+
+pub fn subset_v5(@oset.T[(String, Int)], @oset.T[(String, Int)]) -> Bool raise
+
+pub fn subset_v6(@oset.T[(String, Int)]) -> ((@oset.T[(String, Int)]) -> Bool raise) raise
+
+pub fn subset_v7(@oset.T[Term], @oset.T[Term]) -> Bool raise
+
+pub fn subset_v8(@oset.T[(String, @list.List[Term])], @oset.T[(String, @list.List[Term])]) -> Bool raise
+
+pub fn subset_v9(@oset.T[(String, @list.List[Term])]) -> ((@oset.T[(String, @list.List[Term])]) -> Bool raise) raise
+
+pub fn[TA, TB] subsetdomain(Map[TA, TB]) -> ((Map[TA, TB]) -> Bool raise) raise
+
+pub fn subsetname() -> String
+
+pub fn subsetrel(Size, Int, Int) -> Bool? raise
+
+pub fn subst(Subst) -> ((Term) -> Term raise) raise
+
+pub fn subst_v1(Subst, (String, @list.List[Term])) -> (String, @list.List[Term]) raise
+
+pub fn subst_v2(Subst) -> ((Formula) -> Formula raise) raise
+
+pub fn subst_v3(Subst, (Bool, (String, @list.List[Term]))) -> (Bool, (String, @list.List[Term])) raise
+
+pub fn subst_v4(Subst, @oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn subst_v5(Subst, Thm) -> Thm raise
+
+pub fn substcheck(Subst, Formula) -> Formula raise
+
+pub fn substconn(Subst, Formula, ((Formula, Formula)) -> Formula raise, Formula, Formula) -> Formula raise
+
+pub fn substfm(Subst, Formula) -> Formula raise
+
+pub fn substquant(Subst, Formula, ((String, Formula)) -> Formula raise, String, Formula) -> Formula raise
+
+pub fn[TA] subsumes(((@oset.T[(Bool, (String, @list.List[Term]))], Subst, TA)) -> Bool raise, Subsume[TA], @oset.T[(Bool, (String, @list.List[Term]))]) -> (@oset.T[(Bool, (String, @list.List[Term]))], Subst, TA)? raise
+
+pub fn subsumes_v1(Subsume[Clause1], Clause1) -> Bool raise
+
+pub fn subterm(Term, @list.List[Int]) -> Term raise
+
+pub fn subterm_p((Term, @list.List[Int])) -> Term raise
+
+pub fn[TA] subterm_v1((TA, @list.List[Term])) -> ((@list.List[Int]) -> Term raise) raise
+
+pub fn subterm_v2((Bool, (String, @list.List[Term])), @list.List[Int]) -> Term raise
+
+pub fn subtermconv((Term) -> (Term, Thm) raise, Int) -> ((Term) -> (Term, Thm) raise) raise
+
+pub fn subterms(Term) -> @list.List[(@list.List[Int], Term)] raise
+
+pub fn subterms_v1(String, @list.List[Term]) -> @list.List[(@list.List[Int], Term)] raise
+
+pub fn subterms_v2((Bool, (String, @list.List[Term]))) -> @list.List[(@list.List[Int], Term)] raise
+
+pub fn subtermsconv((Term) -> (Term, Thm) raise, Term) -> (Term, Thm) raise
+
+pub fn sucfn(Size) -> ((Int) -> Int? raise) raise
+
+pub fn sucfn_v1(Size, Int) -> Int? raise
+
+pub fn sucname() -> String
+
+pub fn sym((String, @list.List[Term])) -> (String, @list.List[Term]) raise
+
+pub fn sym_v1(Formula) -> Formula raise
+
+pub fn sym_v2(Bool, (String, @list.List[Term])) -> (Bool, (String, @list.List[Term])) raise
+
+pub fn sym_v3((Bool, (String, @list.List[Term])), Thm) -> Thm raise
+
+pub fn symbols(Term) -> Int raise
+
+pub fn symbols_v1((String, @list.List[Term])) -> Int raise
+
+pub fn symbols_v2(Formula) -> Int raise
+
+pub fn symbols_v3(Bool, (String, @list.List[Term])) -> Int raise
+
+pub fn symbols_v4(@oset.T[(Bool, (String, @list.List[Term]))]) -> Int raise
+
+pub fn symeq((Bool, (String, @list.List[Term])), Thm) -> Thm raise
+
+pub fn symeqn(((Term, Term), Thm)) -> ((Term, Term), Thm) raise
+
+pub fn[TA] symmetricdifference(Set[TA]) -> ((Set[TA]) -> Set[TA] raise) raise
+
+pub fn[TA, TB] symmetricdifferencedomain(Map[TA, TB], Map[TA, TB]) -> Map[TA, TB] raise
+
+pub fn symmetricdifferencefn(Size, Int, Int) -> Int? raise
+
+pub fn symmetricdifferencename() -> String
+
+pub fn symmetry() -> Thm
+
+pub fn symmetryrule(Term, Term) -> Thm raise
+
+pub fn symneq((Bool, (String, @list.List[Term])), Thm) -> Thm raise
+
+pub fn[TA] tabulate(Int, (Int) -> TA raise) -> @list.List[TA] raise
+
+pub fn tailname() -> String
+
+pub fn term_eq_mod_type(@kernel.Term, @kernel.Term, @list.List[(@kernel.HolType, @kernel.HolType)]) -> @list.List[(@kernel.HolType, @kernel.HolType)]? raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] termreducible((Term) -> ((Term) -> Int? raise) raise, @omap.T[TA, (((Term, Term), Thm), Orient?)], TA) -> ((Term) -> Bool raise) raise
+
+pub fn termtoatom(Term) -> (String, @list.List[Term]) raise
+
+pub fn termtoqterm(Term) -> Qterm raise
+
+pub fn ternary((String, Int)) -> Bool raise
+
+pub fn thenconv((Term) -> (Term, Thm) raise, (Term) -> (Term, Thm) raise, Term) -> (Term, Thm) raise
+
+pub fn thenconvtrans(Term, (Term, Thm), (Term, Thm)) -> (Term, Thm) raise
+
+pub fn thenliterule(((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise, ((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise, (Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise
+
+pub fn thenrule((Thm) -> Thm raise, (Thm) -> Thm raise, Thm) -> Thm raise
+
+pub fn thm(Clause1) -> Thm raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] thmreducible((Term) -> ((Term) -> Int? raise) raise, @omap.T[TA, (((Term, Term), Thm), Orient?)], TA, Thm) -> Bool raise
+
+pub fn thmtoinference(Thm) -> Inference1 raise
+
+pub fn toformula((Bool, (String, @list.List[Term]))) -> Formula raise
+
+pub fn[TA] toint(TA) -> TA raise
+
+pub fn[TA, TB] tolist(Map[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA] tolist_v1(Set[TA]) -> @list.List[TA] raise
+
+pub fn tolist_v10(Subst) -> @list.List[(String, Term)] raise
+
+pub fn[TA, TB] tolist_v11(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA] tolist_v12(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA, TB] tolist_v13(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA] tolist_v14(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA, TB] tolist_v15(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA] tolist_v16(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA, TB] tolist_v17(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA] tolist_v18(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA, TB] tolist_v2(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA, TB] tolist_v3(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA] tolist_v4(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA] tolist_v5(Heap[TA]) -> @list.List[TA] raise
+
+pub fn[TA, TB] tolist_v6(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA] tolist_v7(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA, TB] tolist_v8(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA] tolist_v9(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA] top(Heap[TA]) -> TA raise
+
+pub fn topdownconv((Term) -> (Term, Thm) raise, Term) -> (Term, Thm) raise
+
+pub fn[TA, TB] tostring(Map[TA, TB]) -> String raise
+
+pub fn[TA] tostring_v1(Set[TA]) -> String raise
+
+pub fn[TA] tostring_v10(TermNet[TA]) -> String raise
+
+pub fn[TA] tostring_v11(LiteralNet[TA]) -> String raise
+
+pub fn[TA] tostring_v12(Subsume[TA]) -> String raise
+
+pub fn tostring_v13(Units) -> String raise
+
+pub fn tostring_v14(Clause1) -> String raise
+
+pub fn tostring_v15(Active) -> String raise
+
+pub fn tostring_v16(Waiting) -> String raise
+
+pub fn[TA] tostring_v2(Heap[TA]) -> String raise
+
+pub fn tostring_v3(String) -> String raise
+
+pub fn tostring_v4(Term) -> String raise
+
+pub fn tostring_v5(Formula) -> String raise
+
+pub fn tostring_v6((Bool, (String, @list.List[Term]))) -> String raise
+
+pub fn tostring_v7(@oset.T[(Bool, (String, @list.List[Term]))]) -> String raise
+
+pub fn tostring_v8(Thm) -> String raise
+
+pub fn[TA] tostring_v9(TermNet[TA]) -> String raise
+
+pub fn tostringorient(Orient) -> String raise
+
+pub fn tostringorientoption(Orient?) -> String raise
+
+pub fn[TA, TB] total((TB) -> TA raise, TB) -> TA? raise
+
+pub fn transeqn(((Term, Term), Thm), ((Term, Term), Thm)) -> ((Term, Term), Thm) raise
+
+pub fn[TA, TB, TC] transform((TC) -> TB raise) -> ((Map[TA, TC]) -> Map[TA, TB] raise) raise
+
+pub fn[TA, TB] transform_v1((TB) -> TA raise) -> ((Set[TB]) -> @list.List[TA] raise) raise
+
+pub fn[TA, TB] transform_v10((TB) -> TA raise, @oset.T[TB]) -> @list.List[TA] raise
+
+pub fn[TA, TB, TC] transform_v11((TC) -> TB raise) -> ((@omap.T[TA, TC]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA, TB] transform_v12((TB) -> TA raise, @oset.T[TB]) -> @list.List[TA] raise
+
+pub fn[TA, TB, TC] transform_v13((TC) -> TB raise) -> ((@omap.T[TA, TC]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA, TB] transform_v14((TB) -> TA raise, @oset.T[TB]) -> @list.List[TA] raise
+
+pub fn[TA, TB, TC] transform_v15((TC) -> TB raise) -> ((@omap.T[TA, TC]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA, TB] transform_v16((TB) -> TA raise, @oset.T[TB]) -> @list.List[TA] raise
+
+pub fn[TA, TB, TC] transform_v2((TC) -> TB raise) -> ((@omap.T[TA, TC]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA, TB, TC] transform_v3((TC) -> TB raise) -> ((@omap.T[TA, TC]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA, TB] transform_v4((TB) -> TA raise, @oset.T[TB]) -> @list.List[TA] raise
+
+pub fn[TA, TB, TC] transform_v5((TC) -> TB raise) -> ((@omap.T[TA, TC]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA, TB] transform_v6((TB) -> TA raise, @oset.T[TB]) -> @list.List[TA] raise
+
+pub fn[TA, TB, TC] transform_v7((TC) -> TB raise) -> ((@omap.T[TA, TC]) -> @omap.T[TA, TB] raise) raise
+
+pub fn[TA, TB] transform_v8((TB) -> TA raise, @oset.T[TB]) -> @list.List[TA] raise
+
+pub fn[TA, TB, TC] transform_v9((TC) -> TB raise) -> ((@omap.T[TA, TC]) -> @omap.T[TA, TB] raise) raise
+
+pub fn transitivity() -> Thm
+
+pub fn[TA, TB] treeappend(Tree[TA, TB], Tree[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] treecombine(Tree[TA, TB], Node[TA, TB], Tree[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB, TC] treedelete((TC) -> ((TA) -> Int raise) raise, TC, Tree[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] treedeletenth(Int, Tree[TA, TB]) -> ((TA, TB), Tree[TA, TB]) raise
+
+pub fn[TA, TB] treedeletepick(Tree[TA, TB]) -> ((TA, TB), Tree[TA, TB]) raise
+
+pub fn[TA, TB] treedifferencedomain((TA) -> ((TA) -> Int raise) raise, Tree[TA, TB], Tree[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] treeinsert((TA) -> ((TA) -> Int raise) raise, (TA, TB), Tree[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB, TC, TD, TE] treeintersect((TA) -> ((TC) -> Int raise) raise, (((TC, TD), (TA, TE))) -> TB? raise, Tree[TC, TD], Tree[TA, TE]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] treeintersectdomain((TA) -> ((TA) -> Int raise) raise, Tree[TA, TB], Tree[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] treeleftspine(@list.List[Node[TA, TB]], Tree[TA, TB]) -> @list.List[Node[TA, TB]] raise
+
+pub fn[TA, TB, TC] treemap(((TA, TC)) -> TB raise, Tree[TA, TC]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB, TC] treemappartial(((TA, TC)) -> TB? raise, Tree[TA, TC]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB, TC, TD] treemerge((TA) -> ((TA) -> Int raise) raise, ((TA, TC)) -> TB? raise, ((TA, TD)) -> TB? raise, (((TA, TC), (TA, TD))) -> TB? raise, Tree[TA, TC], Tree[TA, TD]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] treemkiterator(Tree[TA, TB]) -> Iterator[TA, TB]? raise
+
+pub fn[TA, TB] treemkreviterator(Tree[TA, TB]) -> Iterator[TA, TB]? raise
+
+pub fn[TA, TB] treenew(Unit) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] treenth(Int, Tree[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB, TC] treepeek((TC) -> ((TB) -> Int raise) raise, TC, Tree[TB, TA]) -> TA? raise
+
+pub fn[TA, TB, TC] treepeekkey((TC) -> ((TA) -> Int raise) raise, TC, Tree[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA, TB, TC] treepeekpath((TC) -> ((TA) -> Int raise) raise, TC, @list.List[(Bool, Node[TA, TB])], Tree[TA, TB]) -> (@list.List[(Bool, Node[TA, TB])], Node[TA, TB]?) raise
+
+pub fn[TA, TB] treepick(Tree[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] treerightspine(@list.List[Node[TA, TB]], Tree[TA, TB]) -> @list.List[Node[TA, TB]] raise
+
+pub fn[TA, TB] treesingleton((TA, TB)) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] treesize(Tree[TA, TB]) -> Int raise
+
+pub fn[TA, TB] treesubsetdomain((TA) -> ((TA) -> Int raise) raise, Tree[TA, TB], Tree[TA, TB]) -> Bool raise
+
+pub fn[TA, TB] treeunion((TA) -> ((TA) -> Int raise) raise, (((TA, TB), (TA, TB))) -> TB? raise, ((TA, TB)) -> TB? raise, Tree[TA, TB], Tree[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] treeuniondomain((TA) -> ((TA) -> Int raise) raise, Tree[TA, TB], Tree[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn truthname() -> String
+
+pub fn tryconv((Term) -> (Term, Thm) raise) -> ((Term) -> (Term, Thm) raise) raise
+
+pub fn tryliterule(((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise) -> (((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise) raise
+
+pub fn tryrule((Thm) -> Thm raise) -> ((Thm) -> Thm raise) raise
+
+pub fn typecheck(@list.List[(String, @preterm.Pretype)]) -> ((@preterm.Preterm) -> @kernel.Term raise) raise
+
+pub fn typecheckl(@list.List[(String, @preterm.Pretype)], @list.List[@preterm.Preterm]) -> @list.List[@kernel.Term] raise
+
+pub fn typedsymbols(Term) -> Int raise
+
+pub fn typedsymbols_v1(String, @list.List[Term]) -> Int raise
+
+pub fn typedsymbols_v2(Bool, (String, @list.List[Term])) -> Int raise
+
+pub fn typedsymbols_v3(@oset.T[(Bool, (String, @list.List[Term]))]) -> Int raise
+
+pub fn unary((String, Int)) -> Bool raise
+
+pub fn unconst_preterm(@preterm.Preterm) -> @preterm.Preterm raise
+
+pub fn[TA] uncurriedadd(TA, Set[TA]) -> Set[TA] raise
+
+pub fn uncurriedadd_v1((Int, ((Term, Term), Thm)), Rewrite) -> Rewrite raise
+
+pub fn[TA, TB] uncurriedintersectdomain(Map[TA, TB], Map[TA, TB]) -> Map[TA, TB] raise
+
+pub fn[TA, TB] uncurrieduniondomain(Map[TA, TB], Map[TA, TB]) -> Map[TA, TB] raise
+
+pub fn uniformweight((String, Int)) -> Int raise
+
+pub fn unify(Subst, Term, Term) -> Subst raise
+
+pub fn unify_fo_ho_atom(@list.List[@kernel.Term], (String, @list.List[Term]), @kernel.Term, @list.List[(String, @kernel.Term)]) -> @list.List[(String, @kernel.Term)] raise
+
+pub fn unify_fo_ho_literal(@list.List[@kernel.Term], (Bool, (String, @list.List[Term])), @kernel.Term, @list.List[(String, @kernel.Term)]) -> @list.List[(String, @kernel.Term)] raise
+
+pub fn unify_fo_ho_term(@list.List[@kernel.Term], Term, @kernel.Term, @list.List[(String, @kernel.Term)]) -> @list.List[(String, @kernel.Term)] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] unify_v1(Subst, (TA, @list.List[Term]), (TA, @list.List[Term])) -> Subst raise
+
+pub fn unify_v2(Subst, (Bool, (String, @list.List[Term])), (Bool, (String, @list.List[Term]))) -> Subst raise
+
+pub fn[TA] unify_v3(TermNet[TA], Term) -> @list.List[TA] raise
+
+pub fn[TA] unify_v4(TermNet[TA], (String, @list.List[Term])) -> @list.List[TA] raise
+
+pub fn[TA] unify_v5(LiteralNet[TA]) -> (((Bool, (String, @list.List[Term]))) -> @list.List[TA] raise) raise
+
+pub fn unifyqtermqterm(Qterm, Qterm) -> Qterm? raise
+
+pub fn unifyqtermterm(@omap.T[String, Qterm], Qterm, Term) -> @omap.T[String, Qterm]? raise
+
+pub fn[TA, TB] union((((TA, TB), (TA, TB))) -> TB? raise, Map[TA, TB]) -> ((Map[TA, TB]) -> Map[TA, TB] raise) raise
+
+pub fn[TA] union_v1(Set[TA]) -> ((Set[TA]) -> Set[TA] raise) raise
+
+pub fn union_v10(@oset.T[String], @oset.T[String]) -> @oset.T[String] raise
+
+pub fn union_v11(@oset.T[String]) -> ((@oset.T[String]) -> @oset.T[String] raise) raise
+
+pub fn[TA] union_v12(((String, Int)) -> ((TA) -> ((TA) -> TA? raise) raise) raise, @omap.T[(String, Int), TA], @omap.T[(String, Int), TA]) -> @omap.T[(String, Int), TA] raise
+
+pub fn[TA] union_v13(((((String, Int), TA), ((String, Int), TA))) -> TA? raise, @omap.T[(String, Int), TA], @omap.T[(String, Int), TA]) -> @omap.T[(String, Int), TA] raise
+
+pub fn union_v14(@oset.T[(String, Int)], @oset.T[(String, Int)]) -> @oset.T[(String, Int)] raise
+
+pub fn union_v15(@oset.T[(String, Int)]) -> ((@oset.T[(String, Int)]) -> @oset.T[(String, Int)] raise) raise
+
+pub fn[TA] union_v16((Term) -> ((TA) -> ((TA) -> TA? raise) raise) raise, @omap.T[Term, TA], @omap.T[Term, TA]) -> @omap.T[Term, TA] raise
+
+pub fn union_v17(@oset.T[Term], @oset.T[Term]) -> @oset.T[Term] raise
+
+pub fn union_v18(Subst) -> ((Subst) -> Subst raise) raise
+
+pub fn[TA] union_v19(((String, @list.List[Term])) -> ((TA) -> ((TA) -> TA? raise) raise) raise, @omap.T[(String, @list.List[Term]), TA], @omap.T[(String, @list.List[Term]), TA]) -> @omap.T[(String, @list.List[Term]), TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] union_v2((TA) -> ((TB) -> ((TB) -> TB? raise) raise) raise, @omap.T[TA, TB], @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA] union_v20(((((String, @list.List[Term]), TA), ((String, @list.List[Term]), TA))) -> TA? raise, @omap.T[(String, @list.List[Term]), TA], @omap.T[(String, @list.List[Term]), TA]) -> @omap.T[(String, @list.List[Term]), TA] raise
+
+pub fn union_v21(@oset.T[(String, @list.List[Term])], @oset.T[(String, @list.List[Term])]) -> @oset.T[(String, @list.List[Term])] raise
+
+pub fn union_v22(@oset.T[(String, @list.List[Term])]) -> ((@oset.T[(String, @list.List[Term])]) -> @oset.T[(String, @list.List[Term])] raise) raise
+
+pub fn[TA] union_v23((Formula) -> ((TA) -> ((TA) -> TA? raise) raise) raise, @omap.T[Formula, TA], @omap.T[Formula, TA]) -> @omap.T[Formula, TA] raise
+
+pub fn[TA] union_v24((((Formula, TA), (Formula, TA))) -> TA? raise, @omap.T[Formula, TA], @omap.T[Formula, TA]) -> @omap.T[Formula, TA] raise
+
+pub fn union_v25(@oset.T[Formula], @oset.T[Formula]) -> @oset.T[Formula] raise
+
+pub fn union_v26(@oset.T[Formula]) -> ((@oset.T[Formula]) -> @oset.T[Formula] raise) raise
+
+pub fn[TA] union_v27(((Bool, (String, @list.List[Term]))) -> ((TA) -> ((TA) -> TA? raise) raise) raise, @omap.T[(Bool, (String, @list.List[Term])), TA], @omap.T[(Bool, (String, @list.List[Term])), TA]) -> @omap.T[(Bool, (String, @list.List[Term])), TA] raise
+
+pub fn[TA] union_v28(((((Bool, (String, @list.List[Term])), TA), ((Bool, (String, @list.List[Term])), TA))) -> TA? raise, @omap.T[(Bool, (String, @list.List[Term])), TA], @omap.T[(Bool, (String, @list.List[Term])), TA]) -> @omap.T[(Bool, (String, @list.List[Term])), TA] raise
+
+pub fn union_v29(@oset.T[(Bool, (String, @list.List[Term]))], @oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] union_v3((((TA, TB), (TA, TB))) -> TB? raise, @omap.T[TA, TB], @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn union_v30(@oset.T[(Bool, (String, @list.List[Term]))]) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> @oset.T[(Bool, (String, @list.List[Term]))] raise) raise
+
+pub fn[TA] union_v31((@oset.T[(Bool, (String, @list.List[Term]))]) -> ((TA) -> ((TA) -> TA? raise) raise) raise, @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA], @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]) -> @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA] raise
+
+pub fn[TA] union_v32((((@oset.T[(Bool, (String, @list.List[Term]))], TA), (@oset.T[(Bool, (String, @list.List[Term]))], TA))) -> TA? raise, @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA], @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]) -> @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA] raise
+
+pub fn union_v33(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]], @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]] raise
+
+pub fn union_v34(@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> ((@oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]) -> @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]] raise) raise
+
+pub fn[TA, TB] union_v35(TB) -> TA raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] union_v4((TA) -> ((TB) -> ((TB) -> TB? raise) raise) raise, @omap.T[TA, TB], @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] union_v5((((TA, TB), (TA, TB))) -> TB? raise, @omap.T[TA, TB], @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] union_v6(@oset.T[TA], @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] union_v7(@oset.T[TA]) -> ((@oset.T[TA]) -> @oset.T[TA] raise) raise
+
+pub fn[TA] union_v8((String) -> ((TA) -> ((TA) -> TA? raise) raise) raise, @omap.T[String, TA], @omap.T[String, TA]) -> @omap.T[String, TA] raise
+
+pub fn[TA] union_v9((((String, TA), (String, TA))) -> TA? raise, @omap.T[String, TA], @omap.T[String, TA]) -> @omap.T[String, TA] raise
+
+pub fn[TA, TB] uniondomain(Map[TA, TB]) -> ((Map[TA, TB]) -> Map[TA, TB] raise) raise
+
+pub fn unionfixed(Fixed, Fixed) -> Fixed raise
+
+pub fn unionfn(Size, Int, Int) -> Int? raise
+
+pub fn[TA] unionlist(@list.List[Set[TA]]) -> Set[TA] raise
+
+pub fn[TA, TB] unionlistdomain(@list.List[Map[TA, TB]]) -> Map[TA, TB] raise
+
+pub fn unionlistfixed(@list.List[Fixed]) -> Fixed raise
+
+pub fn unionname() -> String
+
+pub fn[TA, TB] unitsubsumes(((TA, Subst, TB)) -> Bool raise, LiteralNet[((Bool, (String, @list.List[Term])), TA, TB)]) -> ((@list.List[(Bool, (String, @list.List[Term]))]) -> (TA, Subst, TB)? raise) raise
+
+pub fn universalname() -> String
+
+pub fn universefn(Size) -> Int? raise
+
+pub fn universename() -> String
+
+pub fn univn(Size) -> Int raise
+
+pub fn[TA, TB, TC] unorderedredexresidues(((TA, TA), TB), TC?) -> @list.List[(TA, TA, Bool)] raise
+
+pub fn[TA, TB, TC] unseeninc(@omap.T[String, TA], String, TC, (TA, TB, @list.List[(@omap.T[String, TA], TB, TC)])) -> @list.List[(@omap.T[String, TA], TB, TC)] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] update(TA, (TB?) -> TB? raise, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] update_v1(TA, (TB?) -> TB? raise, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA] update_v2(String, (TA?) -> TA? raise, @omap.T[String, TA]) -> @omap.T[String, TA] raise
+
+pub fn[TA] update_v3((String, Int), (TA?) -> TA? raise, @omap.T[(String, Int), TA]) -> @omap.T[(String, Int), TA] raise
+
+pub fn[TA] update_v4(Term, (TA?) -> TA? raise, @omap.T[Term, TA]) -> @omap.T[Term, TA] raise
+
+pub fn[TA] update_v5((String, @list.List[Term]), (TA?) -> TA? raise, @omap.T[(String, @list.List[Term]), TA]) -> @omap.T[(String, @list.List[Term]), TA] raise
+
+pub fn[TA] update_v6(Formula, (TA?) -> TA? raise, @omap.T[Formula, TA]) -> @omap.T[Formula, TA] raise
+
+pub fn[TA] update_v7((Bool, (String, @list.List[Term])), (TA?) -> TA? raise, @omap.T[(Bool, (String, @list.List[Term])), TA]) -> @omap.T[(Bool, (String, @list.List[Term])), TA] raise
+
+pub fn[TA] update_v8(@oset.T[(Bool, (String, @list.List[Term]))], (TA?) -> TA? raise, @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]) -> @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA] raise
+
+pub fn updateapart(Subst) -> ((@list.List[Edge]) -> @list.List[Edge]? raise) raise
+
+pub fn updatefunction(Model, ((String, @list.List[Int]), Int)) -> Unit raise
+
+pub fn[TA] updatenth((Int, TA), @list.List[TA]) -> @list.List[TA] raise
+
+pub fn updaterelation(Model, ((String, @list.List[Int]), Bool)) -> Unit raise
+
+pub fn updatetable(Int, Table, (@list.List[Int], Int)) -> Unit raise
+
+pub fn updatetables(Tables, ((String, @list.List[Int]), Int)) -> Unit raise
+
+pub fn[TA, TB] updatetree((Bool, Node[TA, TB]), Tree[TA, TB]) -> Tree[TA, TB] raise
+
+pub fn[TA, TB] updatetreepath(Tree[TA, TB]) -> ((@list.List[(Bool, Node[TA, TB])]) -> Tree[TA, TB] raise) raise
+
+pub fn updatewaiting(Rewrite, @oset.T[Int]) -> Rewrite raise
+
+pub fn uselessfixedfunction(Size) -> ((@list.List[Int]) -> Int? raise) raise
+
+pub fn uselessfixedrelation(Size) -> ((@list.List[Int]) -> Bool? raise) raise
+
+pub fn[TA] value(TA?, TA) -> TA raise
+
+pub fn[TA, TB] values(Map[TB, TA]) -> @list.List[TA] raise
+
+pub fn var_symbols() -> Int
+
+pub fn variantnum((String) -> Bool raise, String) -> String raise
+
+pub fn variantnum_v1(@oset.T[String]) -> ((String) -> String raise) raise
+
+pub fn variantprime((String) -> Bool raise) -> ((String) -> String raise) raise
+
+pub fn variantprime_v1(@oset.T[String]) -> ((String) -> String raise) raise
+
+pub fn verb() -> @ref.Ref[Bool]
+
+pub fn waiting(Resolution) -> Waiting raise
+
+pub fn weightadd(Weight) -> ((Weight) -> Weight raise) raise
+
+pub fn weightempty() -> @omap.T[String, Int]
+
+pub fn weightiszero(Weight) -> Bool raise
+
+pub fn weightlowerbound(Weight) -> Int? raise
+
+pub fn weightneg(Weight) -> Weight raise
+
+pub fn weightsubtract(Weight, Weight) -> Weight raise
+
+pub fn weightterm(((String, Int)) -> Int raise) -> ((Term) -> Weight raise) raise
+
+pub fn weightzero() -> Weight
+
+pub fn welloriented(Orient?, Orient) -> Bool raise
+
+pub fn[TA] without_warnings((Unit) -> TA raise) -> TA raise
+
+pub fn xivar(Int) -> Term raise
+
+pub fn xivarname(Int) -> String raise
+
+pub fn xorb(Int, Int) -> Int raise
+
+pub fn xvar() -> Term
+
+pub fn xvarname() -> String
+
+pub fn yivar(Int) -> Term raise
+
+pub fn yivarname(Int) -> String raise
+
+pub fn yvar() -> Term
+
+pub fn yvarname() -> String
+
+pub fn zeroelement() -> Int
+
+pub fn zerovaluation(@oset.T[String]) -> Valuation raise
+
+pub fn zvar() -> Term
+
+pub fn zvarname() -> String
+
+// Errors
+pub(all) suberror Bug {
+  Bug(String)
+}
+
+pub(all) suberror Empty {
+  Empty
+}
+
+pub(all) suberror Unify {
+  Unify
+}
+
+// Types and methods
+pub(all) enum Active {
+  Active(ActiveT)
+}
+
+pub(all) struct ActiveT {
+  parameters : Parameters5
+  clauses : @omap.T[Int, Clause1]
+  units : Units
+  rewrite : Rewrite
+  subsume : Subsume[Clause1]
+  literals : LiteralNet[(Clause1, (Bool, (String, @list.List[Term])))]
+  equations : TermNet[(Clause1, (Bool, (String, @list.List[Term])), Orient, Term)]
+  subterms : TermNet[(Clause1, (Bool, (String, @list.List[Term])), @list.List[Int], Term)]
+  allsubterms : TermNet[(Clause1, Term)]
+}
+
+pub(all) struct AxCjCl {
+  axioms_cl : @list.List[Clause1]
+  conjecture_cl : @list.List[Clause1]
+}
+
+pub(all) struct AxCjThm {
+  axioms_thm : @list.List[Thm]
+  conjecture_thm : @list.List[Thm]
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for AxCjThm
+pub impl @lib.OHash for AxCjThm
+
+pub(all) enum Clause1 {
+  Clause(ClauseInfo)
+}
+
+pub(all) struct ClauseInfo {
+  parameters : Parameters4
+  id : Int
+  thm : Thm
+}
+
+pub(all) enum Decision {
+  Contradiction(Thm)
+  Satisfiable(@list.List[Thm])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Decision
+pub impl @lib.OHash for Decision
+
+pub(all) enum Edge {
+  Factor_edge((String, @list.List[Term]), (String, @list.List[Term]))
+  Refl_edge(Term, Term)
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Edge
+pub impl @lib.OHash for Edge
+
+pub(all) struct Fixed {
+  functions : @omap.T[(String, Int), (Size) -> ((@list.List[Int]) -> Int? raise) raise]
+  relations : @omap.T[(String, Int), (Size) -> ((@list.List[Int]) -> Bool? raise) raise]
+}
+
+pub(all) struct FixedMap {
+  functionmap : @omap.T[(String, Int), String]
+  relationmap : @omap.T[(String, Int), String]
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for FixedMap
+pub impl @lib.OHash for FixedMap
+
+#alias(Elt5)
+#alias(Key6)
+#alias(T18)
+pub(all) enum Formula {
+  True
+  False
+  Atom((String, @list.List[Term]))
+  Not(Formula)
+  And(Formula, Formula)
+  Or(Formula, Formula)
+  Imp(Formula, Formula)
+  Iff(Formula, Formula)
+  Forall(String, Formula)
+  Exists(String, Formula)
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Formula
+pub impl @lib.OHash for Formula
+
+pub(all) enum Heap[TA] {
+  Heap((TA) -> ((TA) -> Int raise) raise, Int, Node1[TA])
+}
+
+pub(all) enum Inference1 {
+  Axiom(@oset.T[(Bool, (String, @list.List[Term]))])
+  Assume((String, @list.List[Term]))
+  Subst(Subst, Thm)
+  Resolve((String, @list.List[Term]), Thm, Thm)
+  Refl(Term)
+  Equality((Bool, (String, @list.List[Term])), @list.List[Int], Term)
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Inference1
+pub impl @lib.OHash for Inference1
+
+pub(all) enum InferenceType {
+  Axiom
+  Assume
+  Subst
+  Factor
+  Resolve
+  Refl
+  Equality
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for InferenceType
+pub impl @lib.OHash for InferenceType
+
+pub(all) enum Iterator[TA, TB] {
+  Left_to_right_iterator((TA, TB), Tree[TA, TB], @list.List[Node[TA, TB]])
+  Right_to_left_iterator((TA, TB), Tree[TA, TB], @list.List[Node[TA, TB]])
+} derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare, TB : @lib.OCompare] @lib.OCompare for Iterator[TA, TB]
+pub impl[TA : @lib.OHash, TB : @lib.OHash] @lib.OHash for Iterator[TA, TB]
+
+pub(all) enum JoinStatus {
+  Joined
+  Joinable(Subst)
+  Apart
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for JoinStatus
+pub impl @lib.OHash for JoinStatus
+
+pub(all) struct Kbo {
+  weight : ((String, Int)) -> Int raise
+  precedence : ((String, Int)) -> (((String, Int)) -> Int raise) raise
+}
+
+pub(all) struct LiteralNet[TA] {
+  positive : TermNet[TA]
+  negative : TermNet[TA]
+} derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare] @lib.OCompare for LiteralNet[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for LiteralNet[TA]
+
+pub(all) enum LiteralOrder {
+  No_literal_order
+  Unsigned_literal_order
+  Positive_literal_order
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for LiteralOrder
+pub impl @lib.OHash for LiteralOrder
+
+#alias(Map1)
+pub(all) enum Map[TA, TB] {
+  Map((TA) -> ((TA) -> Int raise) raise, Tree[TA, TB])
+}
+
+pub(all) struct Model {
+  sizem : Int
+  fixedfunctions : @omap.T[(String, Int), (@list.List[Int]) -> Int? raise]
+  fixedrelations : @omap.T[(String, Int), (@list.List[Int]) -> Bool? raise]
+  randomfunctions : Tables
+  randomrelations : Tables
+}
+
+pub(all) struct ModelParameters {
+  model : Parameters
+  initialperturbations : Int
+  maxchecks : Int?
+  perturbations : Int
+  weight : Double
+}
+
+pub(all) enum ModelTerm {
+  Model_var
+  Model_fn(String, @list.List[ModelTerm], @list.List[Int])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for ModelTerm
+pub impl @lib.OHash for ModelTerm
+
+pub(all) enum NeqConvs {
+  Neq_convs(@omap.T[(Bool, (String, @list.List[Term])), (Term) -> (Term, Thm) raise])
+}
+
+pub(all) enum Net[TA] {
+  Result(@list.List[TA])
+  Single(Qterm, Net[TA])
+  Multiple(Net[TA]?, @omap.T[(String, Int), Net[TA]])
+} derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare] @lib.OCompare for Net[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for Net[TA]
+
+pub(all) struct Node[TA, TB] {
+  size : Int
+  priority : Int
+  left : Tree[TA, TB]
+  key : TA
+  value : TB
+  right : Tree[TA, TB]
+} derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare, TB : @lib.OCompare] @lib.OCompare for Node[TA, TB]
+pub impl[TA : @lib.OHash, TB : @lib.OHash] @lib.OHash for Node[TA, TB]
+
+pub(all) enum Node1[TA] {
+  Em
+  Tr(Int, TA, Node1[TA], Node1[TA])
+} derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare] @lib.OCompare for Node1[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for Node1[TA]
+
+pub(all) struct NonunitT[TA] {
+  nextid : Int
+  clauses : @omap.T[Int, (@list.List[(Bool, (String, @list.List[Term]))], @oset.T[(Bool, (String, @list.List[Term]))], TA)]
+  fstlits : LiteralNet[(Int, Int)]
+  sndlits : LiteralNet[(Int, Int)]
+} derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare] @lib.OCompare for NonunitT[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for NonunitT[TA]
+
+pub(all) enum Orient {
+  Left_to_right
+  Right_to_left
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Orient
+pub impl @lib.OHash for Orient
+
+pub(all) struct Parameters {
+  sizep : Int
+  fixed : Fixed
+}
+
+#alias(Parameters2)
+#alias(Parameters3)
+pub(all) struct Parameters1 {
+  fifo : Bool
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Parameters1
+pub impl @lib.OHash for Parameters1
+
+pub(all) struct Parameters4 {
+  ordering : Kbo
+  orderliterals : LiteralOrder
+  orderterms : Bool
+}
+
+pub(all) struct Parameters5 {
+  clause : Parameters4
+  prefactor : Simplify
+  postfactor : Simplify
+}
+
+pub(all) struct Parameters6 {
+  symbolsweight : Double
+  variablesweight : Double
+  literalsweight : Double
+  modelsp : @list.List[ModelParameters]
+}
+
+pub(all) struct Parameters7 {
+  activep : Parameters5
+  waitingp : Parameters6
+}
+
+pub(all) enum Perturbation {
+  Function_perturbation((String, @list.List[Int]), Int)
+  Relation_perturbation((String, @list.List[Int]), Bool)
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Perturbation
+pub impl @lib.OHash for Perturbation
+
+pub(all) enum Qterm {
+  Var
+  Fn((String, Int), @list.List[Qterm])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Qterm
+pub impl @lib.OHash for Qterm
+
+pub(all) enum Resolution {
+  Resolution(ResolutionT)
+}
+
+pub(all) struct ResolutionT {
+  parameters : Parameters7
+  active : Active
+  waiting : Waiting
+}
+
+pub(all) enum Rewrite {
+  Rewrite(RewriteT)
+}
+
+pub(all) struct RewriteT {
+  order : (Term) -> ((Term) -> Int? raise) raise
+  known : @omap.T[Int, (((Term, Term), Thm), Orient?)]
+  redexes : TermNet[(Int, Orient)]
+  subterms : TermNet[(Int, Bool, @list.List[Int])]
+  waiting : @oset.T[Int]
+}
+
+pub(all) enum Set[TA] {
+  Set(Map[TA, Unit])
+}
+
+pub(all) struct Simplify {
+  subsumes : Bool
+  reduce : Bool
+  rewrites : Bool
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Simplify
+pub impl @lib.OHash for Simplify
+
+pub(all) struct Size {
+  size : Int
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Size
+pub impl @lib.OHash for Size
+
+pub(all) enum State {
+  Decided(Decision)
+  Undecided(Resolution)
+}
+
+pub(all) enum Subst {
+  Subst(@omap.T[String, Term])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Subst
+pub impl @lib.OHash for Subst
+
+pub(all) struct Subsume[TA] {
+  empty : @list.List[(@oset.T[(Bool, (String, @list.List[Term]))], Subst, TA)]
+  unitn : LiteralNet[((Bool, (String, @list.List[Term])), @oset.T[(Bool, (String, @list.List[Term]))], TA)]
+  nonunit : NonunitT[TA]
+} derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare] @lib.OCompare for Subsume[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for Subsume[TA]
+
+pub(all) enum Table {
+  Forgetful_table
+  Array_table(FixedArray[Int])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Table
+pub impl @lib.OHash for Table
+
+pub(all) struct Tables {
+  domainsize : Int
+  rangesize : Int
+  tablemap : @ref.Ref[@omap.T[(String, Int), Table]]
+}
+pub impl @lib.OCompare for Tables
+pub impl @lib.OHash for Tables
+
+#alias(Elt3)
+#alias(Key4)
+#alias(T12)
+pub(all) enum Term {
+  Var(String)
+  Fn((String, @list.List[Term]))
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Term
+pub impl @lib.OHash for Term
+
+#alias(AtomNet)
+pub(all) enum TermNet[TA] {
+  Net(Parameters1, Int, (Int, Net[(Int, TA)])?)
+} derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare] @lib.OCompare for TermNet[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for TermNet[TA]
+
+pub(all) enum Thm {
+  Thm(@oset.T[(Bool, (String, @list.List[Term]))], (InferenceType, @list.List[Thm]))
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Thm
+pub impl @lib.OHash for Thm
+
+pub(all) enum Tree[TA, TB] {
+  Empty
+  Tree(Node[TA, TB])
+} derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare, TB : @lib.OCompare] @lib.OCompare for Tree[TA, TB]
+pub impl[TA : @lib.OHash, TB : @lib.OHash] @lib.OHash for Tree[TA, TB]
+
+pub(all) enum Units {
+  Units(LiteralNet[((Bool, (String, @list.List[Term])), Thm)])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Units
+pub impl @lib.OHash for Units
+
+pub(all) enum Valuation {
+  Valuation(@omap.T[String, Int])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Valuation
+pub impl @lib.OHash for Valuation
+
+pub(all) enum Waiting {
+  Waiting(WaitingT)
+}
+
+pub(all) struct WaitingT {
+  parameters : Parameters6
+  clauses : Heap[(Double, (Double, Clause1))]
+  models : @list.List[Model]
+}
+
+pub(all) enum Weight {
+  Weight(@omap.T[String, Int], Int)
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Weight
+pub impl @lib.OHash for Weight
+
+// Type aliases
+pub type Atom = (String, @list.List[Term])
+
+pub type Clause = @oset.T[(Bool, (String, @list.List[Term]))]
+
+pub type ClauseId = Int
+
+pub type ClauseId1 = Int
+
+pub type ClauseLength = Int
+
+pub type Const = String
+
+pub type Conv = (Term) -> (Term, Thm) raise
+
+pub type Distance = Double
+
+pub type Element = Int
+
+pub type Elt = Int
+
+pub type Elt1 = String
+
+pub type Elt2 = (String, Int)
+
+pub type Elt4 = (String, @list.List[Term])
+
+pub type Elt6 = (Bool, (String, @list.List[Term]))
+
+pub type Elt7 = @oset.T[(Bool, (String, @list.List[Term]))]
+
+pub type Equation = ((Term, Term), Thm)
+
+pub type Equation1 = ((Term, Term), Thm)
+
+pub type EquationId = Int
+
+pub type FixedFunction = (Size) -> ((@list.List[Int]) -> Int? raise) raise
+
+pub type FixedRelation = (Size) -> ((@list.List[Int]) -> Bool? raise) raise
+
+pub type FunctionName = String
+
+pub type FunctionT = (String, Int)
+
+pub type IdSet = Set[(Int, Int)]
+
+pub type Inference = (InferenceType, @list.List[Thm])
+
+pub type Iterator1[TA] = Iterator[TA, Unit]
+
+pub type Key = Int
+
+pub type Key1 = String
+
+pub type Key2 = String
+
+pub type Key3 = (String, Int)
+
+pub type Key5 = (String, @list.List[Term])
+
+pub type Key7 = (Bool, (String, @list.List[Term]))
+
+pub type Key8 = @oset.T[(Bool, (String, @list.List[Term]))]
+
+pub type Literal = (Bool, (String, @list.List[Term]))
+
+pub type Literule = ((Bool, (String, @list.List[Term]))) -> ((Bool, (String, @list.List[Term])), Thm) raise
+
+pub type Map2[TA] = @omap.T[Int, TA]
+
+pub type Map3[TA] = @omap.T[String, TA]
+
+pub type Map4[TA] = @omap.T[String, TA]
+
+pub type Map5[TA] = @omap.T[(String, Int), TA]
+
+pub type Map6[TA] = @omap.T[(String, @list.List[Term]), TA]
+
+pub type Map7[TA] = @omap.T[Formula, TA]
+
+pub type Map8[TA] = @omap.T[(Bool, (String, @list.List[Term])), TA]
+
+pub type Map9[TA] = @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]
+
+pub type ModelClause = (@oset.T[String], @oset.T[(Bool, (String, @list.List[Term]))])
+
+pub type Name = String
+
+pub type NameArity = (String, Int)
+
+pub type Path = @list.List[Int]
+
+pub type Polarity = Bool
+
+pub type Priority = Int
+
+pub type Proof = @list.List[(Thm, Inference1)]
+
+pub type ReductionOrder = (Term) -> ((Term) -> Int? raise) raise
+
+pub type Relation = (String, Int)
+
+pub type RelationName = String
+
+pub type Rule = (Thm) -> Thm raise
+
+pub type Set1 = @oset.T[Int]
+
+pub type Set2 = @oset.T[String]
+
+pub type Set3 = @oset.T[(String, Int)]
+
+pub type Set4 = @oset.T[(String, @list.List[Term])]
+
+pub type Set5 = @oset.T[Formula]
+
+pub type Set6 = @oset.T[(Bool, (String, @list.List[Term]))]
+
+pub type Set7 = @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]
+
+pub type T = Int
+
+pub type T1[TA] = @omap.T[Int, TA]
+
+pub type T10[TA] = @omap.T[(String, Int), TA]
+
+pub type T11 = @oset.T[(String, Int)]
+
+pub type T13[TA] = @omap.T[Term, TA]
+
+pub type T14 = @oset.T[Term]
+
+pub type T15 = (String, @list.List[Term])
+
+pub type T16[TA] = @omap.T[(String, @list.List[Term]), TA]
+
+pub type T17 = @oset.T[(String, @list.List[Term])]
+
+pub type T19[TA] = @omap.T[Formula, TA]
+
+pub type T2 = String
+
+pub type T20 = @oset.T[Formula]
+
+pub type T21 = (Bool, (String, @list.List[Term]))
+
+pub type T22[TA] = @omap.T[(Bool, (String, @list.List[Term])), TA]
+
+pub type T23 = @oset.T[(Bool, (String, @list.List[Term]))]
+
+pub type T24 = @oset.T[(Bool, (String, @list.List[Term]))]
+
+pub type T25[TA] = @omap.T[@oset.T[(Bool, (String, @list.List[Term]))], TA]
+
+pub type T26 = @oset.T[@oset.T[(Bool, (String, @list.List[Term]))]]
+
+pub type T3[TA] = @omap.T[String, TA]
+
+pub type T4 = Int
+
+pub type T5 = @oset.T[Int]
+
+pub type T6 = String
+
+pub type T7[TA] = @omap.T[String, TA]
+
+pub type T8 = @oset.T[String]
+
+pub type T9 = (String, Int)
+
+pub type UnitThm = ((Bool, (String, @list.List[Term])), Thm)
+
+pub type Var = String
+
+pub type Weight1 = Double
+
+pub type Word = Int
+
+// Traits

@@ -133,7 +133,9 @@ pub fn[TA] solve_goal(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[
 pub fn split_tac(Int, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
 
 // Errors
-pub(all) suberror Cut
+pub(all) suberror Cut {
+  Cut
+}
 
 // Types and methods
 pub(all) enum FolForm {

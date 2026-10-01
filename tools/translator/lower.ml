@@ -128,8 +128,13 @@ module Lower = struct
          | Some t -> Some t
          | None -> own_type (Path.name p))
 
+  (* Exceptions of translated files: Ident.unique_name or qualified name
+     (`Metis_prover.Heap.Empty`) -> (package, suberror name) *)
+  let own_exns : (string, string * string) Hashtbl.t = Hashtbl.create 32
+
   (* A constructor of a translated variant type is qualified by its type
-     (`@pkg.Type::Ctor`): packages and types may share constructor names. *)
+     (`@pkg.Type::Ctor`): packages and types may share constructor names.
+     An exception is `Suberror::Name`. *)
   let ctor_name ?cd name =
     let by_type =
       match cd with
@@ -137,6 +142,18 @@ module Lower = struct
           (match Types.get_desc cd.Types.cstr_res, cd.Types.cstr_tag with
            | Types.Tconstr (p, _, _), (Types.Cstr_constant _ | Types.Cstr_block _ | Types.Cstr_unboxed) ->
                Option.map (fun t -> t ^ "::" ^ name) (own_type_path p)
+           | _, Types.Cstr_extension (p, _) ->
+               let key =
+                 match p with
+                 | Path.Pident id -> Some ("#" ^ Ident.unique_name id)
+                 | _ -> member_name p
+               in
+               (match Option.bind key (Hashtbl.find_opt own_exns) with
+                | Some (pkg, m) -> Some (qualified (pkg, m) ^ "::" ^ name)
+                | None ->
+                    (match Hashtbl.find_opt own_exns (Path.name p) with
+                     | Some (pkg, m) -> Some (qualified (pkg, m) ^ "::" ^ name)
+                     | None -> None))
            | _ -> None)
       | None -> None
     in
@@ -165,6 +182,7 @@ module Lower = struct
     | "float" -> Some "Double"
     | "Stdlib.ref" -> Some "Ref"
     | "array" -> Some "FixedArray"
+    | "Format.formatter" | "Stdlib__Format.formatter" | "Stdlib.Format.formatter" | "formatter" -> Some "@pp.Formatter"
     | "net" -> Some "@nets.Net"
     | "gconv" -> Some "@simp.Gconv"
     | "prover" -> Some "@simp.Prover"
@@ -202,8 +220,15 @@ module Lower = struct
     | Types.Ttuple ts -> M.Tuple (List.map mty_of ts)
     | Types.Tconstr (p, args, _) ->
         let own = match own_type_path p with Some t -> Some t | None -> base_type0 (Path.name p) in
-        let is_alias = Hashtbl.mem own_aliases (Path.name p) || (match p with Path.Pident id -> Hashtbl.mem own_aliases (Ident.unique_name id) | _ -> false) in
-        (match alias_mty (Path.name p), (if is_alias then None else own) with
+        let is_alias =
+          Hashtbl.mem own_aliases (Path.name p)
+          || (match p with Path.Pident id -> Hashtbl.mem own_aliases (Ident.unique_name id) | _ -> false)
+          || (match own with Some n -> Hashtbl.mem own_aliases ("=" ^ n) | None -> false)
+        in
+        (* a translated type of the same name (metis's `conv`) is not the
+           hand-ported alias *)
+        let hand_alias = if own_type_path p <> None then None else alias_mty (Path.name p) in
+        (match hand_alias, (if is_alias then None else own) with
          | Some t, _ -> t
          | None, Some n -> M.Named (n, List.map mty_of args)
          | None, None ->
@@ -250,7 +275,7 @@ module Lower = struct
     | Types.Tconstr (p, args, _) ->
         let name = Path.name p in
         let own = match own_type_path p with Some t -> Some t | None -> base_type0 name in
-        (match alias name, own with
+        (match (if own_type_path p <> None then None else alias name), own with
          | Some a, _ -> a
          | None, Some "Option" -> show_ty (List.hd args) ^ "?"
          | None, Some n ->
@@ -294,6 +319,17 @@ module Lower = struct
 
   (* A lambda parameter, annotated when its type is concrete. *)
   let param x t = match show_mty t with Some s -> x ^ " : " ^ s | None -> x
+
+  (* the parameters of a lowered lambda, without its "-> R" annotation *)
+  let lam_params ps = List.filter (fun x -> not (String.length x > 3 && String.sub x 0 3 = "-> ")) ps
+
+  (* a lambda with fully known parameter and result types is an annotated
+     raising `fn` (Ir: a last "-> R" parameter) *)
+  let typed_lam ps (ret : M.ty) body =
+    let ps' = if List.for_all (fun x -> String.contains x ':') ps then
+        (match show_mty ret with Some r -> ps @ [ "-> " ^ (match ret with M.Fun _ -> "(" ^ r ^ ")" | _ -> r) ] | None -> ps)
+      else ps in
+    Ir.Lam (ps', body)
 
   (* The parameters of a declared OCaml function type, expanding
      abbreviations (e.g. `tactic`) only when more parameters are needed. *)
@@ -372,6 +408,9 @@ module Lower = struct
   (* Ident.unique_name -> local *)
   let locals : (string, local) Hashtbl.t = Hashtbl.create 64
 
+  (* MoonBit top-level names of the package being generated *)
+  let top_names : (string, unit) Hashtbl.t = Hashtbl.create 256
+
   (* MoonBit names of the locals of the current item: each binding gets a
      distinct name, since lowering flattens nested scopes. *)
   let local_names = taken_names
@@ -379,7 +418,8 @@ module Lower = struct
   let unique_local base =
     let rec go i =
       let n = if i = 0 then base else Printf.sprintf "%s_%d" base i in
-      if Hashtbl.mem local_names n then go (i + 1) else (Hashtbl.add local_names n (); n)
+      (* nor a top-level name the body may call *)
+      if Hashtbl.mem local_names n || Hashtbl.mem top_names n then go (i + 1) else (Hashtbl.add local_names n (); n)
     in
     go 0
 
@@ -410,8 +450,6 @@ module Lower = struct
   (* unique names of the local functions lifted to top-level functions *)
   let lifted_ids : (string, unit) Hashtbl.t = Hashtbl.create 16
 
-  (* MoonBit top-level names of the package being generated *)
-  let top_names : (string, unit) Hashtbl.t = Hashtbl.create 256
 
   let reserve_top base =
     let rec go i =
@@ -709,7 +747,9 @@ module Lower = struct
                      g
                  in
                  let body = go cur hps (pending @ List.concat_map snd params) wrest in
-                 ([], Lam (List.map fst params, body)))
+                 let ptype = function `Plain t -> t | `Split ts -> M.Tuple ts in
+                 let ret = List.fold_right (fun g acc -> M.Fun (List.map ptype g, acc, true)) wrest wres in
+                 ([], typed_lam (List.map fst params) ret body))
       in
       let ss, e' = go e hps [] wps in
       (stmts @ ss, e')
@@ -774,8 +814,17 @@ module Lower = struct
     | Asttypes.Const_int n -> if n < 0 then "(" ^ string_of_int n ^ ")" else string_of_int n
     | Asttypes.Const_string (s, _, _) -> string_lit s
     | Asttypes.Const_float f ->
-        let f = if String.contains f '.' || String.contains f 'e' then f else f ^ ".0" in
-        let f = if f.[String.length f - 1] = '.' then f ^ "0" else f in
+        (* MoonBit wants digits after the point and a point before `e`
+           (`1e-12` -> `1.0e-12`, `2.` -> `2.0`, `1.e5` -> `1.0e5`) *)
+        let f = String.concat "" (String.split_on_char '_' f) in
+        let mant, exp =
+          match String.index_opt (String.lowercase_ascii f) 'e' with
+          | Some i -> (String.sub f 0 i, String.sub f i (String.length f - i))
+          | None -> (f, "")
+        in
+        let mant = if String.contains mant '.' then mant else mant ^ ".0" in
+        let mant = if mant.[String.length mant - 1] = '.' then mant ^ "0" else mant in
+        let f = mant ^ exp in
         if f.[0] = '-' then "(" ^ f ^ ")" else f
     | Asttypes.Const_char c ->
         if c = '\'' then "'\\''" else if c = '\\' then "'\\\\'"
@@ -917,10 +966,12 @@ module Lower = struct
     | Texp_ident (path, _, vd) -> lower_apply ?expect e e [] |> fun r -> ignore vd; ignore path; r
     | Texp_constant c -> ([], Atom (const loc c), mty_of e.exp_type)
     | Texp_apply (f, args) ->
+        (* the typed arguments are in the callee's parameter order, so a
+           labelled argument is positional (none may be omitted) *)
         let args =
           List.map (function
-              | (Asttypes.Nolabel, Some a) -> a
-              | _ -> unsupported loc "labelled or omitted argument") args
+              | ((Asttypes.Nolabel | Asttypes.Labelled _), Some a) -> a
+              | _ -> unsupported loc "optional or omitted argument") args
         in
         lower_apply ?expect e f args
     | Texp_function _ -> lower_function ?expect e
@@ -1055,10 +1106,16 @@ module Lower = struct
         (match Names.resolve "lib.ml" name with
          | Some (pkg, mname, decl) ->
              let h = { hstmts = []; hexp = Atom ("@" ^ pkg ^ "." ^ mname); hmty = mty_of_decl decl; hoty = Some vd.Types.val_type } in
-             apply_head ?expect loc h args
+             apply_head ?expect ~res:whole.exp_type loc h args
          | None -> unsupported loc "List.%s" name)
     | Texp_ident (p, _, _) when (match stdlib_name p with Some ("Format.printf" | "Printf.printf" | "Printf.sprintf" | "Format.sprintf") -> true | _ -> false) ->
         lower_printf ?expect whole (Option.get (stdlib_name p)) args
+    | Texp_ident (p, _, _)
+      when (match Prov.lookup p with Some ("printer.ml", ("pp_print_string" | "pp_print_int" | "pp_print_newline" | "pp_print_space" | "pp_print_cut" | "pp_print_break" | "pp_open_box" | "pp_close_box" | "pp_open_hvbox" | "pp_open_vbox" | "pp_print_flush")) -> true | _ -> false) ->
+        (* printer.ml includes Format *)
+        (match Prov.lookup p with
+         | Some (_, n) -> lower_prim ?expect whole ("Format." ^ n) f args
+         | None -> assert false)
     | Texp_ident (p, _, _) when stdlib_name p <> None ->
         lower_prim ?expect whole (Option.get (stdlib_name p)) f args
     | Texp_ident (p, _, _) when (match path_name p with "float_sqrt" | "float_fabs" -> Prov.lookup p = None | _ -> false) ->
@@ -1069,25 +1126,25 @@ module Lower = struct
       when Hashtbl.mem local_module_members (Ident.unique_name mid ^ "." ^ name) ->
         let u = Hashtbl.find local_module_members (Ident.unique_name mid ^ "." ^ name) in
         let l = Hashtbl.find locals u in
-        apply_head ?expect loc { hstmts = []; hexp = Atom l.name; hmty = l.mty; hoty = l.loty } args
+        apply_head ?expect ~res:whole.exp_type loc { hstmts = []; hexp = Atom l.name; hmty = l.mty; hoty = l.loty } args
     | Texp_ident (Path.Pident id, _, _) when Hashtbl.mem locals (Ident.unique_name id) ->
         let l = Hashtbl.find locals (Ident.unique_name id) in
         (* a polymorphic local is used at an instance of its type *)
         let hmty = refine l.mty (mty_of f.exp_type) in
-        apply_head ?expect loc { hstmts = []; hexp = Atom l.name; hmty; hoty = l.loty } args
+        apply_head ?expect ~res:whole.exp_type loc { hstmts = []; hexp = Atom l.name; hmty; hoty = l.loty } args
     | Texp_ident (p, _, vd) ->
         let h = global_head loc p vd in
-        apply_head ?expect loc { h with hmty = refine h.hmty (mty_of f.exp_type) } args
+        apply_head ?expect ~res:whole.exp_type loc { h with hmty = refine h.hmty (mty_of f.exp_type) } args
     | _ ->
         if args = [] then unsupported loc "value";
         let ss, x, ty = lower f in
-        apply_head ?expect loc { hstmts = ss; hexp = x; hmty = ty; hoty = Some f.exp_type } args
+        apply_head ?expect ~res:whole.exp_type loc { hstmts = ss; hexp = x; hmty = ty; hoty = Some f.exp_type } args
 
   (* Apply a head to OCaml arguments (source order). *)
   and note_bounds (args : expression list) =
     List.iter (fun a -> List.iter (fun v -> Hashtbl.replace bound_tyvars v ()) (tyvars_of_text (show_ty a.exp_type))) args
 
-  and apply_head ?expect loc h args =
+  and apply_head ?expect ?res loc h args =
     (match h.hexp with
      | Atom q when Hashtbl.mem fn_bounds q ->
          let bs, decl = Hashtbl.find fn_bounds q in
@@ -1242,6 +1299,14 @@ module Lower = struct
           (ss, Lam (List.map2 param names missing, ([], Call (v, supplied @ List.map (fun n -> Atom n) names))))
     in
     let ss, e = build (get head_id) stage_args in
+    (* a function result with no expected type takes the canonical
+       (curried) type of its OCaml type *)
+    let expect =
+      match expect, result_mty with
+      | Some _, _ -> expect
+      | None, M.Fun _ -> Option.map mty_of res
+      | None, _ -> None
+    in
     adapt_to ?expect (stmts @ ss, e, result_mty)
 
   (* --- Stdlib primitives --- *)
@@ -1331,6 +1396,17 @@ module Lower = struct
       | "Random.int" -> (1, fun [ a ] _ -> Call (Atom "@lib.random_int", [ a ]))
       | "Random.init" -> (1, fun [ a ] _ -> Call (Atom "@lib.random_init", [ a ]))
       | "Random.bits" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@lib.random_bits", [])))
+      | "Format.pp_print_string" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::print_string", [ a; b ]))
+      | "Format.pp_print_int" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::print_int", [ a; b ]))
+      | "Format.pp_print_space" -> (2, fun [ a; b ] _ -> Blk ((if ordered b then [ Do b ] else []), Call (Atom "@pp.Formatter::print_space", [ a ])))
+      | "Format.pp_print_cut" -> (2, fun [ a; b ] _ -> Blk ((if ordered b then [ Do b ] else []), Call (Atom "@pp.Formatter::print_cut", [ a ])))
+      | "Format.pp_print_newline" -> (2, fun [ a; b ] _ -> Blk ((if ordered b then [ Do b ] else []), Call (Atom "@pp.Formatter::print_newline", [ a ])))
+      | "Format.pp_print_flush" -> (2, fun [ a; b ] _ -> Blk ((if ordered b then [ Do b ] else []), Call (Atom "@pp.Formatter::print_flush", [ a ])))
+      | "Format.pp_print_break" -> (3, fun [ a; b; c ] _ -> Call (Atom "@pp.Formatter::print_break", [ a; b; c ]))
+      | "Format.pp_open_box" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::open_box", [ a; b ]))
+      | "Format.pp_open_hvbox" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::open_hvbox", [ a; b ]))
+      | "Format.pp_open_vbox" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::open_vbox", [ a; b ]))
+      | "Format.pp_close_box" -> (2, fun [ a; b ] _ -> Blk ((if ordered b then [ Do b ] else []), Call (Atom "@pp.Formatter::close_box", [ a ])))
       | "Format.print_break" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.std_formatter.print_break", [ a; b ]))
       | "Format.print_space" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_space", [])))
       | "Format.print_cut" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_cut", [])))
@@ -1345,7 +1421,11 @@ module Lower = struct
     in
     let arg_tys = List.map (fun a -> a.exp_type) args in
     (match name with
-     | "=" | "<>" | "compare" | "<" | ">" | "<=" | ">=" | "min" | "max" -> note_bounds args
+     | "=" | "<>" | "compare" | "<" | ">" | "<=" | ">=" | "min" | "max" ->
+         note_bounds args;
+         (* a partial application: the parameter types of its instance *)
+         if List.length args < arity then
+           List.iter (fun v -> Hashtbl.replace bound_tyvars v ()) (tyvars_of_text (show_ty f.exp_type))
      | _ -> ());
     if (name = "&&" || name = "||") && List.length args = 2 then begin
       let a, b = (List.nth args 0, List.nth args 1) in
@@ -1404,10 +1484,29 @@ module Lower = struct
           in
           find fmt
         in
+        (* the conversions taking an argument *)
+        let convs =
+          let acc = ref [] and i = ref 0 in
+          while !i < String.length text - 1 do
+            if text.[!i] = '%' then begin
+              (match text.[!i + 1] with 's' -> acc := "String" :: !acc | 'd' | 'i' -> acc := "Int" :: !acc | _ -> ());
+              i := !i + 2
+            end else incr i
+          done;
+          List.rev !acc
+        in
         (* the arguments are evaluated right to left *)
         let lowered = List.map (fun a -> let ss, x, _ = lower a in (ss, x)) rest in
-        let stmts, xs = schedule (List.rev lowered) in
-        let xs = ref (List.rev xs) in
+        let partial = List.length rest < List.length convs in
+        let stmts, xs =
+          if partial then
+            (* a partial application: the given arguments are evaluated now *)
+            let hs = List.map hoist (List.rev lowered) in
+            (List.concat_map fst hs, List.map snd hs)
+          else schedule (List.rev lowered)
+        in
+        let missing = List.filteri (fun i _ -> i >= List.length rest) convs |> List.map (fun t -> (fresh "x", t)) in
+        let xs = ref (List.rev xs @ List.map (fun (n, _) -> Atom n) missing) in
         let next () = match !xs with x :: r -> xs := r; x | [] -> unsupported loc "printf arguments" in
         let pieces = ref [] and buf = Buffer.create 16 and flush = ref false in
         let lit () = if Buffer.length buf > 0 then (pieces := Atom (string_lit (Buffer.contents buf)) :: !pieces; Buffer.clear buf) in
@@ -1430,11 +1529,19 @@ module Lower = struct
         done;
         lit ();
         let str = match List.rev !pieces with [] -> Atom "\"\"" | p :: ps -> List.fold_left (fun a b -> Binop ("+", a, b)) p ps in
-        if name = "Printf.sprintf" || name = "Format.sprintf" then adapt_to ?expect (stmts, str, M.Named ("String", []))
+        let curry (body, ty) =
+          List.fold_right
+            (fun (n, t) (b, ty) -> (Lam ([ n ^ " : " ^ t ], ([], b)), M.Fun ([ M.Named (t, []) ], ty, true)))
+            missing (body, ty)
+        in
+        if name = "Printf.sprintf" || name = "Format.sprintf" then
+          if missing = [] then adapt_to ?expect (stmts, str, M.Named ("String", []))
+          else let e, t = curry (str, M.Named ("String", [])) in adapt_to ?expect (stmts, e, t)
         else
           let out = if name = "Printf.printf" then "@pp.print_string" else "@pp.std_formatter.print_string" in
           let calls = [ Do (Call (Atom out, [ str ])) ] @ (if !flush then [ Do (Call (Atom (if name = "Printf.printf" then "@pp.flush_stdout_backlog" else "@pp.std_formatter.print_flush"), [])) ] else []) in
-          (stmts, Blk (calls, Atom "()"), M.Named ("Unit", []))
+          if missing = [] then (stmts, Blk (calls, Atom "()"), M.Named ("Unit", []))
+          else let e, t = curry (Blk (calls, Atom "()"), M.Named ("Unit", [])) in adapt_to ?expect (stmts, e, t)
     | [] -> unsupported loc "printf"
 
   (* --- lib.ml combinators: o, I, K, C, W, F_F --- *)
@@ -1625,7 +1732,7 @@ module Lower = struct
                    else (Atom (List.hd names), List.hd g)
                  in
                  let body = bind_cases loc arg arg_mty cases partial (fun rhs -> go (Some rhs) None gs) in
-                 ([], Lam (List.map2 param names g, body))
+                 ([], typed_lam (List.map2 param names g) (List.fold_right (fun g acc -> M.Fun (g, acc, true)) gs res) body)
                end else begin
                  (* k curried OCaml parameters in one MoonBit group *)
                  let rec consume f i =
@@ -1646,7 +1753,7 @@ module Lower = struct
                            let ss', b = go None (Some (v2, vt2)) gs in
                            (ss @ ssa @ ss', b))
                  in
-                 ([], Lam (List.map2 param names g, consume f 0 ()))
+                 ([], typed_lam (List.map2 param names g) (List.fold_right (fun g acc -> M.Fun (g, acc, true)) gs res) (consume f 0 ()))
                end
            | Some f ->
                (* a function-valued body: its value, at the remaining type *)
@@ -1867,6 +1974,7 @@ module Lower = struct
         (fun name (_, e, param_tys, fbody, want) ->
           match lower ~expect:want e with
           | _, Lam (ps, b), _ ->
+              let ps = lam_params ps in
               let annot p t =
                 if String.contains p ':' then p
                 else p ^ " : " ^ show_ty t
@@ -2045,9 +2153,9 @@ module Lower = struct
            | "Unchanged", [] -> "@lib.Unchanged"
            | "Not_found", [] -> "@lib.NotFound"
            | "Match_failure", [ { pat_desc = Tpat_any; _ } ] -> "@lib.MatchFailure(_)"
-           | name, [] when Hashtbl.mem own_ctors name -> ctor_name name
+           | name, [] when Hashtbl.mem own_ctors name -> ctor_name ~cd name
            | name, args when Hashtbl.mem own_ctors name ->
-               ctor_name name ^ "(" ^ String.concat ", " (List.map (fun a -> pattern a) args) ^ ")"
+               ctor_name ~cd name ^ "(" ^ String.concat ", " (List.map (fun a -> pattern a) args) ^ ")"
            | name, _ -> unsupported p.pat_loc "exception pattern %s" name)
       | _ -> unsupported p.pat_loc "exception pattern"
     in

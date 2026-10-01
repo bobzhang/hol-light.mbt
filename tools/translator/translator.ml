@@ -27,7 +27,7 @@ module Prov = struct
     | (p, vd) ->
         (* the qualified name, e.g. `Utils.List.take` *)
         let qname = String.concat "." (Longident.flatten lid) ^ "." ^ name in
-        Hashtbl.replace table (Path.name p) (file, qname); !on_record name vd
+        Hashtbl.replace table (Path.name p) (file, qname); !on_record qname vd
     | exception Not_found -> ()
 
   let rec record_module file lid (sg : Types.signature) =

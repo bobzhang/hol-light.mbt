@@ -417,3 +417,84 @@ pub impl OHash for @kernel.Thm with fn ohash_visit(self, h) {
   h.block(0, 1)
   h.field(@kernel.dest_thm(self))
 }
+
+///|
+/// An array is a block of its elements: shorter first, then elementwise.
+pub impl[A : OCompare] OCompare for FixedArray[A] with fn ocompare(self, other) {
+  if self.length() != other.length() {
+    return self.length().compare(other.length())
+  }
+  for i in 0..<self.length() {
+    let c = self[i].ocompare(other[i])
+    if c != 0 {
+      return c
+    }
+  }
+  0
+}
+
+///|
+pub impl[A : OHash] OHash for FixedArray[A] with fn ohash_visit(self, h) {
+  h.block(0, self.length())
+  for x in self {
+    h.field(x)
+  }
+}
+
+///|
+/// A `ref` is a one-field record.
+pub impl[A : OCompare] OCompare for Ref[A] with fn ocompare(self, other) {
+  self.val.ocompare(other.val)
+}
+
+///|
+pub impl[A : OHash] OHash for Ref[A] with fn ohash_visit(self, h) {
+  h.block(0, 1)
+  h.field(self.val)
+}
+
+///|
+/// Mix an OCaml float (caml_hash_mix_double; counts as a meaningful
+/// value): NaNs are normalized, and -0.0 hashes as +0.0.
+pub fn OHasher::double(self : OHasher, x : Double) -> Unit {
+  let bits = x.reinterpret_as_int64().reinterpret_as_uint64()
+  let mut h = (bits >> 32).to_uint()
+  let mut l = bits.to_uint()
+  if (h & 0x7FF00000U) == 0x7FF00000U && (l | (h & 0xFFFFFU)) != 0U {
+    h = 0x7FF00000U
+    l = 0x00000001U
+  } else if h == 0x80000000U && l == 0U {
+    h = 0U
+  }
+  self.mix(l)
+  self.mix(h)
+  self.num -= 1
+}
+
+///|
+/// OCaml's `compare` on floats: a total order in which NaN equals itself
+/// and is below every other float.
+pub impl OCompare for Double with fn ocompare(self, other) {
+  if self < other {
+    -1
+  } else if self > other {
+    1
+  } else if self == other {
+    0
+  } else {
+    let a = self.is_nan()
+    let b = other.is_nan()
+    if a && b {
+      0
+    } else if a {
+      -1
+    } else {
+      1
+    }
+  }
+}
+
+///|
+pub impl OHash for Double with fn ohash_visit(self, h) {
+  h.double(self)
+}

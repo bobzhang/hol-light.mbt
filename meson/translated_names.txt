@@ -49,6 +49,7 @@ Meson.reset_consts reset_consts
 Meson.reset_vars reset_vars
 Meson.separate_insts separate_insts
 Meson.solve_goal solve_goal
+exn:Cut Cut
 type:fol_atom FolAtom
 type:fol_form FolForm
 type:fol_goal FolGoal

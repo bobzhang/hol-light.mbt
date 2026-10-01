@@ -1118,11 +1118,13 @@ pub fn[TA, TB] bindings(x145 : T[TA, TB]) -> @list.List[(TA, TB)] raise {
 ///|
 /// `choose`
 pub fn[TA, TB] choose(x : T[TA, TB]) -> (TA, TB) raise {
-  min_binding(x)
+  let f : (T[TA, TB]) -> (TA, TB) raise = min_binding
+  f(x)
 }
 
 ///|
 /// `choose_opt`
 pub fn[TA, TB] choose_opt(x : T[TA, TB]) -> (TA, TB)? raise {
-  min_binding_opt(x)
+  let f : (T[TA, TB]) -> (TA, TB)? raise = min_binding_opt
+  f(x)
 }

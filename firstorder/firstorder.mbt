@@ -212,7 +212,7 @@ pub fn[TA, TB] concat_map(
 fn step_2() -> Unit raise {
   fsum_c.set(x49 => {
     @lib.fold_left(
-      (x46 : Double, x47 : Double) => {
+      fn(x46 : Double, x47 : Double) -> Double raise {
         let s48 = ((x44 : Double) => (x45 : Double) => x44 + x45)(x46)
         s48(x47)
       },
@@ -308,7 +308,7 @@ pub fn[TA, TB, TC] fold_left_map(
   let acc = x59
   x63 => {
     @lib.fold_left(
-      (x61 : (TA, @list.List[TB]), x62 : TC) => {
+      fn(x61 : (TA, @list.List[TB]), x62 : TC) -> (TA, @list.List[TB]) raise {
         let (acc_1, ys) = x61
         let x = x62
         let (acc_p, y) = f(acc_1)(x)
@@ -331,7 +331,7 @@ pub fn[TA, TB, TC] fold_right_map(
   let acc = x65
   let xs = x66
   @lib.itlist(
-    (x67 : TC, x68 : (TA, @list.List[TB])) => {
+    fn(x67 : TC, x68 : (TA, @list.List[TB])) -> (TA, @list.List[TB]) raise {
       let x = x67
       let (acc_1, ys) = x68
       let (acc_p, y) = f(acc_1)(x)
@@ -439,7 +439,7 @@ fn step_3() -> Unit raise {
   let vstore = Ref::{ val: @list.empty(), }
   let gstore = Ref::{ val: @list.empty(), }
   let vcounter = Ref::{ val: 0, }
-  let inc_vcounter : (Unit) -> Int raise = (x78 : Unit) => {
+  let inc_vcounter : (Unit) -> Int raise = fn(x78 : Unit) -> Int raise {
     let _ = x78
     let n = vcounter.val
     let m = n + 1
@@ -449,7 +449,7 @@ fn step_3() -> Unit raise {
     }
     n
   }
-  let reset_vars : (Unit) -> Unit raise = (x79 : Unit) => {
+  let reset_vars : (Unit) -> Unit raise = fn(x79 : Unit) -> Unit raise {
     let _ = x79
     {
       vstore.val = @list.empty()
@@ -462,7 +462,9 @@ fn step_3() -> Unit raise {
     vcounter.val = 0
     ()
   }
-  let fol_of_var : (@kernel.Term) -> Int raise = (x80 : @kernel.Term) => {
+  let fol_of_var : (@kernel.Term) -> Int raise = fn(
+    x80 : @kernel.Term,
+  ) -> Int raise {
     let v = x80
     @lib.assoc(v, vstore.val) catch {
       Failure(_) => {
@@ -492,11 +494,11 @@ fn step_3() -> Unit raise {
       e => raise e
     }
   }
-  let hol_of_var : (Int) -> ((@kernel.HolType) -> @kernel.Term raise) raise = (
+  let hol_of_var : (Int) -> ((@kernel.HolType) -> @kernel.Term raise) raise = fn(
     x82 : Int,
-  ) => {
+  ) -> ((@kernel.HolType) -> @kernel.Term raise) raise {
     let v_1 = x82
-    (x83 : @kernel.HolType) => {
+    fn(x83 : @kernel.HolType) -> @kernel.Term raise {
       let ty = x83
       @lib.rev_assoc(v_1, gstore.val) catch {
         Failure(_) => {
@@ -729,7 +731,17 @@ fn step_5() -> Unit raise {
       ),
       (Int, @kernel.Thm),
     ),
-  ] raise = (x113 : @kernel.Thm) => {
+  ] raise = fn(
+    x113 : @kernel.Thm,
+  ) -> @list.List[
+    (
+      (
+        @list.List[(Int, @list.List[@meson.FolTerm])],
+        (Int, @list.List[@meson.FolTerm]),
+      ),
+      (Int, @kernel.Thm),
+    ),
+  ] raise {
     let th_1 = x113
     let lconsts = @kernel.freesl(@kernel.hyp(th_1))
     let tm = @kernel.concl(th_1)
@@ -740,7 +752,7 @@ fn step_5() -> Unit raise {
     )
     let basics = mk_contraposes_l(0, th_1, @list.empty(), flits, @list.empty())
     if @lib.forall(
-        (x115 : (Int, @list.List[@meson.FolTerm])) => {
+        fn(x115 : (Int, @list.List[@meson.FolTerm])) -> Bool raise {
           let (p, _) = x115
           p < 0
         },
@@ -750,7 +762,9 @@ fn step_5() -> Unit raise {
         (
           (
             @lib.map(
-              (x116 : (Int, @list.List[@meson.FolTerm])) => {
+              fn(
+                x116 : (Int, @list.List[@meson.FolTerm]),
+              ) -> (Int, @list.List[@meson.FolTerm]) raise {
                 @meson.mk_negated(x116.0, x116.1)
               },
               flits,
@@ -764,12 +778,27 @@ fn step_5() -> Unit raise {
       basics
     }
   }
-  fol_of_hol_clauses_c.set((x117 : @list.List[@kernel.Thm]) => {
+  fol_of_hol_clauses_c.set(fn(
+    x117 : @list.List[@kernel.Thm],
+  ) -> @list.List[
+    (
+      Int,
+      @list.List[
+        (
+          (
+            @list.List[(Int, @list.List[@meson.FolTerm])],
+            (Int, @list.List[@meson.FolTerm]),
+          ),
+          (Int, @kernel.Thm),
+        ),
+      ],
+    ),
+  ] raise {
     let thms = x117
     let rawrules = @lib.itlist(
       (
-        x120 : @kernel.Thm,
-        x121 : @list.List[
+        x122 : @kernel.Thm,
+        x123 : @list.List[
           (
             (
               @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -779,9 +808,8 @@ fn step_5() -> Unit raise {
           ),
         ],
       ) => {
-        let t122 = fol_of_hol_clause(x120)
-        ((
-          x123 : @list.List[
+        (fn(
+          x120 : @list.List[
             (
               (
                 @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -790,9 +818,27 @@ fn step_5() -> Unit raise {
               (Int, @kernel.Thm),
             ),
           ],
-        ) => {
-          ((
-            x118 : @list.List[
+        ) -> ((
+          @list.List[
+            (
+              (
+                @list.List[(Int, @list.List[@meson.FolTerm])],
+                (Int, @list.List[@meson.FolTerm]),
+              ),
+              (Int, @kernel.Thm),
+            ),
+          ],
+        ) -> @list.List[
+          (
+            (
+              @list.List[(Int, @list.List[@meson.FolTerm])],
+              (Int, @list.List[@meson.FolTerm]),
+            ),
+            (Int, @kernel.Thm),
+          ),
+        ] raise) raise {
+          fn(
+            x121 : @list.List[
               (
                 (
                   @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -801,17 +847,37 @@ fn step_5() -> Unit raise {
                 (Int, @kernel.Thm),
               ),
             ],
-            x119 : @list.List[
+          ) -> @list.List[
+            (
               (
-                (
-                  @list.List[(Int, @list.List[@meson.FolTerm])],
-                  (Int, @list.List[@meson.FolTerm]),
-                ),
-                (Int, @kernel.Thm),
+                @list.List[(Int, @list.List[@meson.FolTerm])],
+                (Int, @list.List[@meson.FolTerm]),
               ),
-            ],
-          ) => @lib.union_eq(eqt_l, x118, x119))(t122, x123)
-        })(x121)
+              (Int, @kernel.Thm),
+            ),
+          ] raise {
+            ((
+              x118 : @list.List[
+                (
+                  (
+                    @list.List[(Int, @list.List[@meson.FolTerm])],
+                    (Int, @list.List[@meson.FolTerm]),
+                  ),
+                  (Int, @kernel.Thm),
+                ),
+              ],
+              x119 : @list.List[
+                (
+                  (
+                    @list.List[(Int, @list.List[@meson.FolTerm])],
+                    (Int, @list.List[@meson.FolTerm]),
+                  ),
+                  (Int, @kernel.Thm),
+                ),
+              ],
+            ) => @lib.union_eq(eqt_l, x118, x119))(x120, x121)
+          }
+        })(fol_of_hol_clause(x122))(x123)
       },
       thms,
       @list.empty(),
@@ -857,7 +923,20 @@ fn step_5() -> Unit raise {
       ),
     )
     let prules = @lib.map(
-      (x129 : Int) => {
+      fn(
+        x129 : Int,
+      ) -> (
+        Int,
+        @list.List[
+          (
+            (
+              @list.List[(Int, @list.List[@meson.FolTerm])],
+              (Int, @list.List[@meson.FolTerm]),
+            ),
+            (Int, @kernel.Thm),
+          ),
+        ],
+      ) raise {
         let t_1 = x129
         (
           t_1,
@@ -908,7 +987,7 @@ fn step_5() -> Unit raise {
       prs,
     )
     let srules = @lib.sort(
-      (
+      fn(
         x137 : (
           Int,
           @list.List[
@@ -933,7 +1012,7 @@ fn step_5() -> Unit raise {
             ),
           ],
         ),
-      ) => {
+      ) -> Bool raise {
         let (p_1, _) = x137
         let (q, _) = x138
         let t139 = @lib.abs_int(q)
@@ -1013,7 +1092,9 @@ fn[TC, TD] mk_contraposes_l(
       let nw = (
         (
           @lib.map(
-            (x112 : (Int, TC)) => @meson.mk_negated(x112.0, x112.1),
+            fn(x112 : (Int, TC)) -> (Int, TC) raise {
+              @meson.mk_negated(x112.0, x112.1)
+            },
             used.concat(t),
           ),
           h,

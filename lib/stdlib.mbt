@@ -131,3 +131,9 @@ pub fn[A] array_set(a : FixedArray[A], i : Int, x : A) -> Unit raise {
 pub fn[A] array_length(a : FixedArray[A]) -> Int {
   a.length()
 }
+
+///|
+/// lib.ml's `(|>)`: `x |> f` is `f x`.
+pub fn[A, B] op_bar_gt(x : A, f : (A) -> B raise) -> B raise {
+  f(x)
+}

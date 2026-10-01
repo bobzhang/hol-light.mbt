@@ -62,3 +62,16 @@ test "shifts like OCaml" {
   inspect(asr(-8, 40), content="-1")
   inspect(lsl(3, 4), content="48")
 }
+
+///|
+/// Hashtbl.hash and compare on floats (values from OCaml 4.14).
+test "floats hash and compare like OCaml" {
+  inspect(hash(1.5), content="819188451")
+  inspect(hash(-0.0), content="256347020")
+  inspect(hash(@double.not_a_number), content="841516429")
+  inspect(hash((2.0, 3)), content="928673522")
+  inspect(compare(@double.not_a_number, 1.0), content="-1")
+  inspect(compare(1.0, @double.not_a_number), content="1")
+  inspect(compare(@double.not_a_number, @double.not_a_number), content="0")
+  inspect(compare(2.0, 1.5), content="1")
+}

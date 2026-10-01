@@ -82,6 +82,7 @@ module Emit = struct
     Hashtbl.replace own_values (Ident.unique_name id) (mname, Function want);
     match lam with
     | Lam (names, (stmts, result)) ->
+        let names = lam_params names in
         let sig_params =
           String.concat ", "
             (List.map2 (fun n t -> if String.contains n ':' then n else n ^ " : " ^ show_ty t) names param_tys)
@@ -113,8 +114,10 @@ module Emit = struct
         | None -> ()
 
   let install_slot oname =
+    (* keyed by the qualified name: modules may define the same name *)
+    let key = String.concat "" (List.rev_map (fun m -> m ^ ".") !module_prefix) ^ oname in
     let slot = ref None in
-    pending_installs := (oname, slot) :: List.remove_assoc oname !pending_installs;
+    pending_installs := (key, slot) :: List.remove_assoc key !pending_installs;
     slot
 
   let installed_type slot (oty : Types.type_expr) =
@@ -172,9 +175,10 @@ module Emit = struct
     Hashtbl.replace fn_bounds (mname ^ "()") (List.filter (Hashtbl.mem bound_tyvars) tvs, mty);
     (match arrow e.exp_type with
      | Some (a, b) ->
+         (* typed: a lambda's inner closures may not raise *)
          let text =
-           Printf.sprintf "\n///|\n/// `%s`\npub fn%s %s(x : %s) -> %s raise {\n  (%s)(x)\n}\n" oname
-             (generics_of ~body:body_text ty) mname (show_ty a) (paren_fn (show_ty b)) body_text
+           Printf.sprintf "\n///|\n/// `%s`\npub fn%s %s(x : %s) -> %s raise {\n  let f : %s = %s\n  f(x)\n}\n" oname
+             (generics_of ~body:body_text ty) mname (show_ty a) (paren_fn (show_ty b)) ty body_text
          in
          add_decl (fun () -> text)
      | None ->
@@ -190,7 +194,8 @@ module Emit = struct
   let emit_value ?id oname (e : expression) =
     Hashtbl.reset tyvar_names;
     let mname = fresh_top oname in
-    if syntactic_value e && tyvars_of_text (show_ty e.exp_type) <> [] then emit_poly_value ?id oname mname e
+    if (syntactic_value e || Typecore.is_nonexpansive e) && tyvars_of_text (show_ty e.exp_type) <> [] then
+      emit_poly_value ?id oname mname e
     else
     let mty = mty_of e.exp_type in
     let stmts, x, _ = lower ~expect:mty e in
@@ -214,12 +219,20 @@ module Emit = struct
      compare and hashing raise on them): they get no Eq/OCompare/OHash *)
   let fun_types : (string, unit) Hashtbl.t = Hashtbl.create 32
 
-  let carries_fun text =
-    String.contains text '>'
-    || Hashtbl.fold (fun n () acc -> acc || (let ln = String.length n and lt = String.length text in
-                                             let ident c = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c = '_' in
-                                             let rec at i = i + ln <= lt && ((String.sub text i ln = n && (i = 0 || not (ident text.[i - 1])) && (i + ln = lt || not (ident text.[i + ln]))) || at (i + 1)) in
-                                             at 0)) fun_types false
+  let mentions_any table text =
+    Hashtbl.fold (fun n () acc -> acc || (let ln = String.length n and lt = String.length text in
+                                          let ident c = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c = '_' in
+                                          let rec at i = i + ln <= lt && ((String.sub text i ln = n && (i = 0 || not (ident text.[i - 1])) && (i + ln = lt || not (ident text.[i + ln]))) || at (i + 1)) in
+                                          at 0)) table false
+
+  let carries_fun text = String.contains text '>' || mentions_any fun_types text
+
+  (* types holding a `Ref` (MoonBit's Ref has no Eq): no derive *)
+  let noeq_types : (string, unit) Hashtbl.t = Hashtbl.create 32
+
+  let has_ref text =
+    let rec at i = i + 4 <= String.length text && (String.sub text i 4 = "Ref[" || at (i + 1)) in
+    at 0 || mentions_any noeq_types text
 
   (* `pub impl[TA : T, ...] T for Name[TA, ...]` *)
   let impl_head trait name params =
@@ -281,10 +294,12 @@ module Emit = struct
             (* OCaml's equality raises on closures: such types derive nothing *)
             let has_fun = carries_fun (String.concat " " ctors) in
             if has_fun then Hashtbl.replace fun_types name ();
+            let noeq = has_ref (String.concat " " ctors) in
+            if noeq then Hashtbl.replace noeq_types name ();
             add_decl (fun () ->
                 Printf.sprintf "\n///|\n/// `%s`\npub(all) enum %s%s {\n  %s\n}%s\n"
                   (Ident.name d.typ_id) name gens (String.concat "\n  " ctors)
-                  (if has_fun then "" else " derive(Eq, Debug)"));
+                  (if has_fun || noeq then "" else " derive(Eq, Debug)"));
             (* OCaml's structural compare and Hashtbl.hash: constant
                constructors are immediates (their index), the others blocks
                (tag = index among the non-constant ones) *)
@@ -352,10 +367,12 @@ module Emit = struct
             let field_lines = List.map (fun (m, f, t) -> (if m then "mut " else "") ^ f ^ " : " ^ show_ty t) fields in
             let has_fun = carries_fun (String.concat " " field_lines) in
             if has_fun then Hashtbl.replace fun_types name ();
+            let noeq = has_ref (String.concat " " field_lines) in
+            if noeq then Hashtbl.replace noeq_types name ();
             let text =
               Printf.sprintf "\n///|\n/// `%s`\npub(all) struct %s%s {\n  %s\n}%s\n"
                 (Ident.name d.typ_id) name gens (String.concat "\n  " field_lines)
-                (if has_fun then "" else " derive(Eq, Debug)")
+                (if has_fun || noeq then "" else " derive(Eq, Debug)")
             in
             add_decl (fun () -> text);
             if not has_fun then
@@ -374,24 +391,36 @@ module Emit = struct
                     (String.concat "\n  " (List.map (fun f -> "h.field(self." ^ f ^ ")") names)))
         | Ttype_abstract, Some ct ->
             Hashtbl.replace own_aliases (Ident.unique_name d.typ_id) ();
-            if prefix = "" then Hashtbl.replace own_aliases (Ident.name d.typ_id) ();
+            (* also by MoonBit name: qualified references (`Literal.literal`) *)
+            Hashtbl.replace own_aliases ("=" ^ name) ();
+            if prefix = "" && !module_prefix = [] then Hashtbl.replace own_aliases (Ident.name d.typ_id) ();
             if prefix <> "" then Hashtbl.replace own_aliases (prefix ^ "." ^ Ident.name d.typ_id) ();
             let t = show_ty ct.ctyp_type in
+            if carries_fun t then Hashtbl.replace fun_types name ();
+            if has_ref t then Hashtbl.replace noeq_types name ();
             add_decl (fun () -> Printf.sprintf "\n///|\n/// `%s`\npub type %s%s = %s\n" (Ident.name d.typ_id) name gens t)
         | _ -> unsupported d.typ_loc "type declaration")
       decls
 
   (* `exception E` / `exception E of t` -> a suberror *)
   let emit_exception (ext : extension_constructor) =
-    let name = Ident.name ext.ext_id in
-    Hashtbl.replace own_ctors name !current_pkg;
+    let oname = Ident.name ext.ext_id in
+    Hashtbl.replace own_ctors oname !current_pkg;
+    (* a distinct suberror per exception (`Substlist.Unify` and
+       `Substarray.Unify` are different exceptions) *)
+    let rec go i = let n = if i = 0 then oname else oname ^ string_of_int i in if Hashtbl.mem type_names n then go (i + 1) else n in
+    let sname = go 0 in
+    Hashtbl.replace type_names sname ();
+    Hashtbl.replace own_exns ("#" ^ Ident.unique_name ext.ext_id) (!current_pkg, sname);
+    Hashtbl.replace own_exns (String.concat "" (List.rev_map (fun m -> m ^ ".") !module_prefix) ^ oname) (!current_pkg, sname);
     match ext.ext_kind with
     | Text_decl (_, Cstr_tuple [], _) ->
-        add_decl (fun () -> Printf.sprintf "\n///|\n/// `exception %s`\npub(all) suberror %s\n" name name)
-    | Text_decl (_, Cstr_tuple cts, _) ->
         add_decl (fun () ->
-            Printf.sprintf "\n///|\n/// `exception %s`\npub(all) suberror %s {\n  %s(%s)\n}\n" name name name
-              (String.concat ", " (List.map (fun ct -> show_ty ct.ctyp_type) cts)))
+            Printf.sprintf "\n///|\n/// `exception %s`\npub(all) suberror %s {\n  %s\n}\n" oname sname oname)
+    | Text_decl (_, Cstr_tuple cts, _) ->
+        let args = String.concat ", " (List.map (fun ct -> show_ty ct.ctyp_type) cts) in
+        add_decl (fun () ->
+            Printf.sprintf "\n///|\n/// `exception %s`\npub(all) suberror %s {\n  %s(%s)\n}\n" oname sname oname args)
     | _ -> unsupported ext.ext_loc "exception"
 
   (* `let p = e` for an irrefutable pattern binding several values *)
@@ -458,7 +487,15 @@ module Emit = struct
             | Ttype_variant cds -> List.iter (fun cd -> Hashtbl.replace own_ctors (Ident.name cd.cd_id) pkg) cds
             | _ -> ())
           decls
-    | Tstr_exception te -> Hashtbl.replace own_ctors (Ident.name te.tyexn_constructor.ext_id) pkg
+    | Tstr_exception te ->
+        let n = Ident.name te.tyexn_constructor.ext_id in
+        Hashtbl.replace own_ctors n pkg;
+        let full = String.concat "." (List.rev !register_path @ [ n ]) in
+        let m = match Hashtbl.find_opt (Names.members pkg) ("exn:" ^ full) with Some m -> m | None -> n in
+        let rec suffixes = function [] -> [] | _ :: rest as l -> l :: suffixes rest in
+        List.iter
+          (fun mods -> Hashtbl.replace own_exns (String.concat "." (mods @ [ n ])) (pkg, m))
+          (suffixes (List.rev !register_path))
     | Tstr_module { mb_id; mb_expr = { mod_desc = (Tmod_structure str | Tmod_constraint ({ mod_desc = Tmod_structure str; _ }, _, _, _)); _ }; _ } ->
         let saved = !register_path in
         register_path := (match mb_id with Some id -> Ident.name id | None -> "_") :: saved;
@@ -518,9 +555,26 @@ module Emit = struct
                    | _ -> unsupported vb.vb_loc "refutable top-level binding")
                  vbs
            | Tstr_type (_, decls) -> emit_types decls
-           | Tstr_include { incl_mod = { mod_desc = (Tmod_structure str | Tmod_constraint ({ mod_desc = Tmod_structure str; _ }, _, _, _)); _ }; _ } ->
+           | Tstr_include { incl_mod = { mod_desc = (Tmod_structure str | Tmod_constraint ({ mod_desc = Tmod_structure str; _ }, _, _, _)); _ }; incl_type; _ } ->
                (* the members of an included structure are this module's *)
-               List.iter (fun it -> item ~hand it) str.str_items
+               List.iter (fun it -> item ~hand it) str.str_items;
+               (* later items refer to them through the include's own
+                  (fresh) identifiers *)
+               let qual n = String.concat "" (List.rev_map (fun m -> m ^ ".") !module_prefix) ^ n in
+               List.iter
+                 (function
+                   | Types.Sig_value (id, _, _) ->
+                       (match Hashtbl.find_opt own_by_name (qual (Ident.name id)) with
+                        | Some entry -> Hashtbl.replace own_values (Ident.unique_name id) entry
+                        | None -> ())
+                   | Types.Sig_type (id, _, _, _) ->
+                       (match Hashtbl.find_opt own_types (qual (Ident.name id)) with
+                        | Some t -> Hashtbl.replace own_types_id (Ident.unique_name id) t
+                        | None -> ())
+                   | Types.Sig_module (id, _, _, _, _) ->
+                       Hashtbl.replace module_paths (Ident.unique_name id) (List.rev !module_prefix @ [ Ident.name id ])
+                   | _ -> ())
+                 incl_type
            | Tstr_include _ -> () (* e.g. `include List` in a module *)
            | Tstr_open _ | Tstr_modtype _ -> ()
            | Tstr_exception te -> emit_exception te.tyexn_constructor
@@ -587,6 +641,11 @@ module Emit = struct
     (* the names chosen for this package's types (`T1` for a second `t`) *)
     let members =
       Hashtbl.fold (fun k (pkg, m) acc -> if pkg = !current_pkg then ("type:" ^ k, m) :: acc else acc) own_types members
+    in
+    let members =
+      Hashtbl.fold
+        (fun k (pkg, m) acc -> if pkg = !current_pkg && k <> "" && k.[0] <> '#' then ("exn:" ^ k, m) :: acc else acc)
+        own_exns members
     in
     let oc = open_out (Filename.concat (Filename.dirname out) "translated_names.txt") in
     output_string oc "# Generated by tools/translator: qualified upstream name -> MoonBit name.\n";
