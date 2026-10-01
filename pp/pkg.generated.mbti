@@ -1,10 +1,18 @@
 // Generated using `moon info`, DON'T EDIT IT
 package "bobzhang/hol_light/pp"
 
+import {
+  "moonbitlang/core/ref",
+}
+
 // Values
 pub fn formatter_of_buffer(StringBuilder) -> Formatter
 
+pub fn print_string(String) -> Unit
+
 pub let std_formatter : Formatter
+
+pub let stdout_sink : @ref.Ref[(String) -> Unit]
 
 // Errors
 

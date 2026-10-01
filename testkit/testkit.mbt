@@ -79,6 +79,12 @@ pub fn Log::capture_reports(self : Log) -> Unit {
 }
 
 ///|
+/// Send complete lines of standard output to the log.
+pub fn Log::capture_stdout(self : Log) -> Unit {
+  @pp.stdout_sink.val = s => self.out(s)
+}
+
+///|
 /// OCaml's `String.escaped` on the UTF-8 bytes of `s`.
 pub fn ocaml_escaped(s : String) -> String {
   let buf = StringBuilder()

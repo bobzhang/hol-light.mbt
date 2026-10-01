@@ -17,6 +17,7 @@ fn sgs(gs : @tactics.Goalstack) -> String raise {
 test "itab matches itab.ml" {
   let log = @testkit.Log::new()
   log.capture_reports()
+  log.capture_stdout()
   let tm = @parser.parse_term
   let it = (name : String, s : String) => {
     log.attempt(name, () => {

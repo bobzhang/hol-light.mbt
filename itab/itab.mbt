@@ -59,15 +59,17 @@ pub let unify_refl_tac : Tactic = gl => {
       )
     }
     // Replace the non-variable arguments of the right-hand side's function
-    // with fresh variables. Upstream prints the warning with `printf`.
+    // with fresh variables. Upstream prints the warning with `printf`, on
+    // the standard output channel but not through the formatter.
     let rargs_vars = @lib.map(
       v => {
         if @kernel.is_var(v) {
           v
         } else {
-          @lib.report(
+          @pp.print_string(
             "UNIFY_REFL_TAC: warning: this isn't var: " +
-            @printer.string_of_term(v),
+            @printer.string_of_term(v) +
+            "\n",
           )
           @basics.genvar(@kernel.type_of(v))
         }

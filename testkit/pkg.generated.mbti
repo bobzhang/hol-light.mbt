@@ -24,6 +24,7 @@ pub struct Log {
 }
 pub fn Log::attempt(Self, String, () -> String raise) -> Unit
 pub fn Log::capture_reports(Self) -> Unit
+pub fn Log::capture_stdout(Self) -> Unit
 pub fn Log::contents(Self) -> String
 pub fn Log::new() -> Self
 pub fn Log::out(Self, String) -> Unit

@@ -651,12 +651,17 @@ pub fn formatter_of_buffer(buf : StringBuilder) -> Formatter {
 let stdout_pending : StringBuilder = StringBuilder()
 
 ///|
+/// Where complete lines of standard output go (`println` by default; tests
+/// capture them).
+pub let stdout_sink : Ref[(String) -> Unit] = Ref::{ val: s => println(s), }
+
+///|
 /// Standard output can only be written line by line (`println`), so
 /// complete lines are emitted as soon as they are formatted.
 fn stdout_write(s : String) -> Unit {
   for c in s {
     if c == '\n' {
-      println(stdout_pending.to_string())
+      (stdout_sink.val)(stdout_pending.to_string())
       stdout_pending.reset()
     } else {
       stdout_pending.write_char(c)
@@ -669,9 +674,16 @@ fn stdout_write(s : String) -> Unit {
 /// (`println`), so unlike OCaml the partial text ends with a newline.
 fn stdout_flush() -> Unit {
   if !stdout_pending.is_empty() {
-    println(stdout_pending.to_string())
+    (stdout_sink.val)(stdout_pending.to_string())
     stdout_pending.reset()
   }
+}
+
+///|
+/// OCaml's `print_string`: write to the standard output channel, which
+/// `std_formatter` also writes to, without going through the formatter.
+pub fn print_string(s : String) -> Unit {
+  stdout_write(s)
 }
 
 ///|
