@@ -13,7 +13,7 @@ pub fn add_num(Num, Num) -> Num
 
 pub fn big_gcd(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt
 
-pub fn big_int_of_num(Num) -> @bigint.BigInt raise Failure
+pub fn big_int_of_num(Num) -> @bigint.BigInt raise
 
 pub fn ceiling_num(Num) -> Num
 
@@ -21,7 +21,7 @@ pub fn compare_num(Num, Num) -> Int
 
 pub fn denominator(Num) -> Num
 
-pub fn div_num(Num, Num) -> Num raise Failure
+pub fn div_num(Num, Num) -> Num raise
 
 pub fn eq_num(Num, Num) -> Bool
 
@@ -29,21 +29,21 @@ pub fn float_of_num(Num) -> Double
 
 pub fn floor_num(Num) -> Num
 
-pub fn gcd_num(Num, Num) -> Num raise Failure
+pub fn gcd_num(Num, Num) -> Num raise
 
 pub fn ge_num(Num, Num) -> Bool
 
 pub fn gt_num(Num, Num) -> Bool
 
-pub fn int64_of_num(Num) -> Int64 raise Failure
+pub fn int64_of_num(Num) -> Int64 raise
 
-pub fn int_of_num(Num) -> Int raise Failure
+pub fn int_of_num(Num) -> Int raise
 
 pub fn integer_num(Num) -> Num
 
 pub fn is_integer_num(Num) -> Bool
 
-pub fn lcm_num(Num, Num) -> Num raise Failure
+pub fn lcm_num(Num, Num) -> Num raise
 
 pub fn le_num(Num, Num) -> Bool
 
@@ -55,7 +55,7 @@ pub fn min_num(Num, Num) -> Num
 
 pub fn minus_num(Num) -> Num
 
-pub fn mod_num(Num, Num) -> Num raise DivisionByZero
+pub fn mod_num(Num, Num) -> Num raise
 
 pub fn mult_num(Num, Num) -> Num
 
@@ -71,13 +71,13 @@ pub let num_2 : Num
 
 pub fn num_of_big_int(@bigint.BigInt) -> Num
 
-pub fn num_of_decimal(String) -> Num raise Failure
+pub fn num_of_decimal(String) -> Num raise
 
 pub fn num_of_int(Int) -> Num
 
 pub fn num_of_int64(Int64) -> Num
 
-pub fn num_of_string(String) -> Num raise Failure
+pub fn num_of_string(String) -> Num raise
 
 pub fn numdom(Num) -> (Num, Num)
 
@@ -91,7 +91,7 @@ pub fn power_num(Num, Num) -> Num raise
 
 pub fn pred_num(Num) -> Num
 
-pub fn quo_num(Num, Num) -> Num raise DivisionByZero
+pub fn quo_num(Num, Num) -> Num raise
 
 pub fn round_num(Num) -> Num
 
@@ -108,13 +108,13 @@ pub fn sub_num(Num, Num) -> Num
 pub fn succ_num(Num) -> Num
 
 // Errors
-pub suberror DivisionByZero derive(@debug.Debug)
+pub(all) suberror DivisionByZero derive(@debug.Debug)
 pub fn DivisionByZero::output(Self, &Logger) -> Unit
 pub fn DivisionByZero::to_repr(Self) -> @debug.Repr
 pub fn DivisionByZero::to_string(Self) -> String
 pub impl Show for DivisionByZero
 
-pub suberror InvalidArgument {
+pub(all) suberror InvalidArgument {
   InvalidArgument(String)
 } derive(@debug.Debug)
 pub fn InvalidArgument::output(Self, &Logger) -> Unit

@@ -235,16 +235,62 @@ test "type instantiation is capture-avoiding and type-preserving" {
 }
 
 ///|
-test "alphaorder is a total order modulo alpha" {
+/// Independent alpha-equivalence oracle: a de Bruijn rendering, where bound
+/// variables become indices and free variables keep their name and type.
+fn debruijn(tm : @kernel.Term) -> String {
+  fn go(env : @list.List[@kernel.Term], tm : @kernel.Term) -> String {
+    match tm {
+      Var(s, t) =>
+        match env.find_index(v => v == tm) {
+          Some(i) => "#" + i.to_string()
+          None => s + ":" + sty(t)
+        }
+      Const(s, t) => "$" + s + ":" + sty(t)
+      Comb(f, x) => "(" + go(env, f) + " " + go(env, x) + ")"
+      Abs(Var(_, t) as v, b) =>
+        "(\\:" + sty(t) + ". " + go(env.prepend(v), b) + ")"
+      Abs(_) => abort("binder is not a variable")
+    }
+  }
+
+  go(@list.empty(), tm)
+}
+
+///|
+test "alphaorder is a total order whose zero is alpha-equivalence" {
   let g = { seed: 4242U, }
   let terms = []
   for _ in 0..<60 {
     terms.push(g.term(@kernel.bool_ty, 4))
   }
+  // Alpha-variants of some of the terms, built by renaming binders.
+  for i in 0..<20 {
+    let t = terms[i]
+    terms.push(
+      match t {
+        Abs(Var(_, vt) as v, b) => {
+          let fresh = @kernel.variant(
+            @list.singleton(t),
+            @kernel.mk_var("u", vt),
+          )
+          @kernel.mk_abs(fresh, @kernel.vsubst(@list.List([(fresh, v)]), b))
+        }
+        _ => t
+      },
+    )
+  }
+  let mut distinct = 0
+  let mut equivalent = 0
   for a in terms {
     @test.assert_eq(@kernel.alphaorder(a, a), 0)
     for b in terms {
       let ab = sign(@kernel.alphaorder(a, b))
+      @test.assert_eq(ab == 0, debruijn(a) == debruijn(b))
+      if ab == 0 {
+        equivalent += 1
+      } else {
+        distinct += 1
+      }
       @test.assert_eq(ab, -sign(@kernel.alphaorder(b, a)))
       for c in terms {
         if ab <= 0 && sign(@kernel.alphaorder(b, c)) <= 0 {
@@ -253,17 +299,9 @@ test "alphaorder is a total order modulo alpha" {
       }
     }
   }
-  // Renaming a bound variable gives an alpha-equivalent term.
-  let x = @kernel.mk_var("x", ty("A"))
-  let y = @kernel.mk_var("y", ty("A"))
-  let f = @kernel.mk_var("f", fn_ty(ty("A"), ty("A")))
-  @test.assert_eq(
-    @kernel.alphaorder(
-      @kernel.mk_abs(x, @kernel.mk_comb(f, x)),
-      @kernel.mk_abs(y, @kernel.mk_comb(f, y)),
-    ),
-    0,
-  )
+  // The properties are not vacuous: both outcomes occur often.
+  @test.assert_eq(distinct > 1000, true)
+  @test.assert_eq(equivalent > terms.length(), true)
 }
 
 ///|
@@ -278,18 +316,46 @@ fn strictly_sorted(l : @list.List[@kernel.Term]) -> Bool {
 }
 
 ///|
-test "hypotheses stay alpha-sorted and duplicate-free" {
+fn db_set(l : @list.List[@kernel.Term]) -> Array[String] {
+  let out = []
+  for t in l {
+    let d = debruijn(t)
+    if !out.contains(d) {
+      out.push(d)
+    }
+  }
+  out.sort()
+  out
+}
+
+///|
+test "hypotheses are exactly the expected alpha-sorted set" {
   let g = { seed: 99U, }
   let mut th = @kernel.refl(@kernel.mk_var("p", @kernel.bool_ty))
+  let mut expected : Array[String] = []
   for _ in 0..<200 {
     let p = g.term(@kernel.bool_ty, 3)
-    let h = @kernel.assume_rule(p)
-    th = @kernel.deduct_antisym_rule(th, h)
+    // DEDUCT_ANTISYM_RULE th (ASSUME p): (A - {p}) u ({p} - {concl th}).
+    let dp = debruijn(p)
+    let next = expected.filter(d => d != dp)
+    if dp != debruijn(@kernel.concl(th)) {
+      next.push(dp)
+    }
+    next.sort()
+    th = @kernel.deduct_antisym_rule(th, @kernel.assume_rule(p))
+    expected = next
     @test.assert_eq(strictly_sorted(@kernel.hyp(th)), true)
+    @test.assert_eq(@kernel.hyp(th).length(), expected.length())
+    @test.assert_eq(db_set(@kernel.hyp(th)), expected)
     @test.assert_eq(@kernel.type_of(@kernel.concl(th)), @kernel.bool_ty)
     if g.next(4) == 0 {
-      th = @kernel.inst_type(@list.List([(@kernel.bool_ty, ty("A"))]), th)
+      let tyin = @list.List([(@kernel.bool_ty, ty("A"))])
+      let image = db_set(@kernel.hyp(th).map(h => @kernel.inst(tyin, h)))
+      th = @kernel.inst_type(tyin, th)
+      expected = image
       @test.assert_eq(strictly_sorted(@kernel.hyp(th)), true)
+      @test.assert_eq(db_set(@kernel.hyp(th)), expected)
+      @test.assert_eq(@kernel.hyp(th).length(), expected.length())
     }
   }
 }
@@ -299,25 +365,54 @@ test "hypotheses stay alpha-sorted and duplicate-free" {
 // ---------------------------------------------------------------------------
 
 ///|
-test "deep binders, operator spines and types" {
+/// `\v0. \v1. ... \v(n-1). f v0 z` with binder names `prefix0..`.
+fn binder_chain(
+  prefix : String,
+  n : Int,
+  z : @kernel.Term,
+) -> @kernel.Term raise {
   let a = ty("A")
-  let n = 1000
-  // \x0. \x1. ... \x(n-1). x0
-  let vars = [ for i in 0..<n => @kernel.mk_var("x" + i.to_string(), a) ]
-  let mut body = vars[0]
+  let f = @kernel.mk_var("f", fn_ty(a, fn_ty(a, a)))
+  let vars = [ for i in 0..<n => @kernel.mk_var(prefix + i.to_string(), a) ]
+  let mut body = @kernel.mk_comb(@kernel.mk_comb(f, vars[0]), z)
   for i = n - 1; i >= 0; i = i - 1 {
     body = @kernel.mk_abs(vars[i], body)
   }
+  body
+}
+
+///|
+test "deep binders, operator spines and types" {
+  let a = ty("A")
   let b = ty("B")
-  let t = @kernel.inst(@list.List([(b, a)]), body)
-  @test.assert_eq(@kernel.alphaorder(t, t), 0)
-  @test.assert_eq(@kernel.frees(t).length(), 0)
+  let n = 1000
   let z = @kernel.mk_var("z", a)
+  let t1 = binder_chain("x", n, z)
+  let t2 = binder_chain("y", n, z)
+  // Independently built alpha-equivalent chains (no physical sharing).
+  @test.assert_eq(physical_equal(t1, t2), false)
+  @test.assert_eq(@kernel.alphaorder(t1, t2), 0)
+  @test.assert_eq(debruijn(t1) == debruijn(t2), true)
+  // Substituting the variable free beneath every binder.
+  let w = @kernel.mk_var("w", a)
+  let s1 = @kernel.vsubst(@list.List([(w, z)]), t1)
+  @test.assert_eq(debruijn(s1), debruijn(binder_chain("x", n, w)))
+  // Substituting a term that would be captured by the outermost binder.
+  let x0 = @kernel.mk_var("x0", a)
+  let s2 = @kernel.vsubst(@list.List([(x0, z)]), t1)
   @test.assert_eq(
-    @kernel.vsubst(@list.List([(z, vars[0])]), body) == body,
+    @kernel.frees(s2).map(v => @kernel.dest_var(v).0).contains("x0"),
     true,
   )
+  @test.assert_eq(debruijn(s2), debruijn(binder_chain("y", n, x0)))
+  // Type instantiation through every binder.
+  let i1 = @kernel.inst(@list.List([(b, a)]), t1)
+  let zb = @kernel.mk_var("z", b)
+  @test.assert_eq(@kernel.type_vars_in_term(i1), @list.singleton(b))
+  let fb = @kernel.mk_var("f", fn_ty(b, fn_ty(b, b)))
+  @test.assert_eq(@kernel.frees(i1), @list.List([fb, zb]))
   // f a1 a2 ... an (left-nested operator spine) over a curried type.
+  let vars = [ for i in 0..<n => @kernel.mk_var("x" + i.to_string(), a) ]
   let mut fty = a
   for _ in 0..<n {
     fty = fn_ty(a, fty)
@@ -333,4 +428,5 @@ test "deep binders, operator spines and types" {
   @test.assert_eq(@kernel.tyvars(fty).length(), 1)
   let th = @kernel.inst_type(@list.List([(b, a)]), @kernel.refl(spine))
   @test.assert_eq(@kernel.hyp(th).length(), 0)
+  @test.assert_eq(@kernel.type_of(@kernel.rand(@kernel.concl(th))), b)
 }

@@ -425,6 +425,7 @@ test "int64_of_num" {
   )
   try @num.int_of_num(@num.num_of_string("4611686018427387903")) catch {
     Failure(msg) => inspect(msg, content="int_of_big_int")
+    e => fail("unexpected error \{e}")
   } noraise {
     _ => fail("expected int_of_num to fail")
   }

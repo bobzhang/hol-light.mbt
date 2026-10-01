@@ -150,7 +150,7 @@ pub fn[K : OCompare + OHash, V] applyd(
 }
 
 ///|
-pub fn[K : OCompare + OHash, V] apply(f : Func[K, V], x : K) -> V raise Failure {
+pub fn[K : OCompare + OHash, V] apply(f : Func[K, V], x : K) -> V raise {
   applyd(f, _ => raise Failure("apply"), x)
 }
 
@@ -436,7 +436,7 @@ pub fn[K : OCompare, V] combine(
 
 ///|
 /// An arbitrary element of the graph.
-pub fn[K, V] choose(t : Func[K, V]) -> (K, V) raise Failure {
+pub fn[K, V] choose(t : Func[K, V]) -> (K, V) raise {
   let mut t = t
   while true {
     match t {

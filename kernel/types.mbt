@@ -34,7 +34,7 @@ pub struct Thm {
 } derive(Eq, Debug)
 
 ///|
-fn[T] failwith(msg : String) -> T raise Failure {
+fn[T] failwith(msg : String) -> T raise {
   raise Failure(msg)
 }
 

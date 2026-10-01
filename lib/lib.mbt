@@ -19,19 +19,19 @@
 
 ///|
 /// `failwith`: raise `Failure(msg)`.
-pub fn[T] failwith(msg : String) -> T raise Failure {
+pub fn[T] failwith(msg : String) -> T raise {
   raise Failure(msg)
 }
 
 ///|
 /// `fail()`: `failwith ""`.
-pub fn[T] failure() -> T raise Failure {
+pub fn[T] failure() -> T raise {
   raise Failure("")
 }
 
 ///|
 /// Raised to signal "no change" and avoid consing (lib.ml's `Unchanged`).
-pub suberror Unchanged derive(Debug)
+pub(all) suberror Unchanged derive(Debug)
 
 ///|
 pub extend Unchanged with @debug.Debug::{to_repr}
@@ -101,7 +101,7 @@ pub fn[A, B, C, D] pair_map(
 // ---------------------------------------------------------------------------
 
 ///|
-pub fn[A] hd(l : @list.List[A]) -> A raise Failure {
+pub fn[A] hd(l : @list.List[A]) -> A raise {
   match l {
     More(h, tail=_) => h
     Empty => failwith("hd")
@@ -109,7 +109,7 @@ pub fn[A] hd(l : @list.List[A]) -> A raise Failure {
 }
 
 ///|
-pub fn[A] tl(l : @list.List[A]) -> @list.List[A] raise Failure {
+pub fn[A] tl(l : @list.List[A]) -> @list.List[A] raise {
   match l {
     More(_, tail=t) => t
     Empty => failwith("tl")
@@ -140,7 +140,7 @@ pub fn[A, B] map(
 }
 
 ///|
-pub fn[A] last(l : @list.List[A]) -> A raise Failure {
+pub fn[A] last(l : @list.List[A]) -> A raise {
   match l.last() {
     Some(x) => x
     None => failwith("last")
@@ -148,7 +148,7 @@ pub fn[A] last(l : @list.List[A]) -> A raise Failure {
 }
 
 ///|
-pub fn[A] butlast(l : @list.List[A]) -> @list.List[A] raise Failure {
+pub fn[A] butlast(l : @list.List[A]) -> @list.List[A] raise {
   if l.is_empty() {
     failwith("butlast")
   }
@@ -158,7 +158,7 @@ pub fn[A] butlast(l : @list.List[A]) -> @list.List[A] raise Failure {
 
 ///|
 /// `el n l`: the `n`th element (from 0).
-pub fn[A] el(n : Int, l : @list.List[A]) -> A raise Failure {
+pub fn[A] el(n : Int, l : @list.List[A]) -> A raise {
   let mut n = n
   let mut l = l
   while n != 0 {
@@ -664,7 +664,7 @@ pub fn[A] remove(
 pub fn[A] chop_list(
   n : Int,
   l : @list.List[A],
-) -> (@list.List[A], @list.List[A]) raise Failure {
+) -> (@list.List[A], @list.List[A]) raise {
   if n < 0 {
     failwith("chop_list")
   }
@@ -695,7 +695,7 @@ pub fn[A] find_index(p : (A) -> Bool raise?, l : @list.List[A]) -> Int? raise? {
 }
 
 ///|
-pub fn[A : OCompare] index(x : A, l : @list.List[A]) -> Int raise Failure {
+pub fn[A : OCompare] index(x : A, l : @list.List[A]) -> Int raise {
   match find_index(y => x.ocompare(y) == 0, l) {
     Some(n) => n
     None => failwith("index")
@@ -770,7 +770,7 @@ pub fn[A : OCompare] set_eq(l1 : @list.List[A], l2 : @list.List[A]) -> Bool {
 // ---------------------------------------------------------------------------
 
 ///|
-pub fn[A : OCompare, B] assoc(a : A, l : @list.List[(A, B)]) -> B raise Failure {
+pub fn[A : OCompare, B] assoc(a : A, l : @list.List[(A, B)]) -> B raise {
   for p in l {
     if p.0.ocompare(a) == 0 {
       return p.1
@@ -780,10 +780,7 @@ pub fn[A : OCompare, B] assoc(a : A, l : @list.List[(A, B)]) -> B raise Failure 
 }
 
 ///|
-pub fn[A, B : OCompare] rev_assoc(
-  a : B,
-  l : @list.List[(A, B)],
-) -> A raise Failure {
+pub fn[A, B : OCompare] rev_assoc(a : B, l : @list.List[(A, B)]) -> A raise {
   for p in l {
     if p.1.ocompare(a) == 0 {
       return p.0
@@ -820,7 +817,7 @@ pub fn[A, B : OCompare] rev_assocd(a : B, l : @list.List[(A, B)], d : A) -> A {
 pub fn[A, B] zip(
   l1 : @list.List[A],
   l2 : @list.List[B],
-) -> @list.List[(A, B)] raise Failure {
+) -> @list.List[(A, B)] raise {
   let a1 = l1.to_array()
   let a2 = l2.to_array()
   if a1.length() != a2.length() {
@@ -850,7 +847,7 @@ pub fn[A, B] unzip(l : @list.List[(A, B)]) -> (@list.List[A], @list.List[B]) {
 pub fn[A, B] shareout(
   pat : @list.List[@list.List[A]],
   all : @list.List[B],
-) -> @list.List[@list.List[B]] raise Failure {
+) -> @list.List[@list.List[B]] raise {
   let out = []
   let mut rest = all
   for p in pat {
@@ -1207,3 +1204,13 @@ pub fn[A] subtract_eq(
 ) -> @list.List[A] raise? {
   filter(x => !mem_eq(eq, x, l2), l1)
 }
+
+///|
+/// OCaml's `Match_failure`, raised by irrefutable patterns that do not
+/// match (not a `Failure`, so `can` does not catch it).
+pub(all) suberror MatchFailure {
+  MatchFailure(String)
+} derive(Debug)
+
+///|
+pub extend MatchFailure with @debug.Debug::{to_repr}

@@ -125,7 +125,7 @@ pub fn types() -> @list.List[(String, Int)] {
 
 ///|
 /// Arity of a type constant.
-pub fn get_type_arity(s : String) -> Int raise Failure {
+pub fn get_type_arity(s : String) -> Int raise {
   for entry in the_type_constants.val {
     if entry.0 == s {
       return entry.1
@@ -135,7 +135,7 @@ pub fn get_type_arity(s : String) -> Int raise Failure {
 }
 
 ///|
-fn check_new_type(name : String) -> Unit raise Failure {
+fn check_new_type(name : String) -> Unit raise {
   if the_type_constants.val.any(entry => entry.0 == name) {
     failwith("new_type: type " + name + " has already been declared")
   }
@@ -143,16 +143,13 @@ fn check_new_type(name : String) -> Unit raise Failure {
 
 ///|
 /// Declare a new type constant.
-pub fn new_type(name : String, arity : Int) -> Unit raise Failure {
+pub fn new_type(name : String, arity : Int) -> Unit raise {
   check_new_type(name)
   the_type_constants.val = the_type_constants.val.prepend((name, arity))
 }
 
 ///|
-pub fn mk_type(
-  tyop : String,
-  args : @list.List[HolType],
-) -> HolType raise Failure {
+pub fn mk_type(tyop : String, args : @list.List[HolType]) -> HolType raise {
   let arity = get_type_arity(tyop) catch {
     _ => failwith("mk_type: type " + tyop + " has not been defined")
   }
@@ -169,7 +166,7 @@ pub fn mk_vartype(v : String) -> HolType {
 }
 
 ///|
-pub fn dest_type(ty : HolType) -> (String, @list.List[HolType]) raise Failure {
+pub fn dest_type(ty : HolType) -> (String, @list.List[HolType]) raise {
   match ty {
     Tyapp(s, args) => (s, args)
     Tyvar(_) => failwith("dest_type: type variable not a constructor")
@@ -177,7 +174,7 @@ pub fn dest_type(ty : HolType) -> (String, @list.List[HolType]) raise Failure {
 }
 
 ///|
-pub fn dest_vartype(ty : HolType) -> String raise Failure {
+pub fn dest_vartype(ty : HolType) -> String raise {
   match ty {
     Tyapp(_) => failwith("dest_vartype: type constructor not a variable")
     Tyvar(s) => s
@@ -250,7 +247,7 @@ pub fn constants() -> @list.List[(String, HolType)] {
 
 ///|
 /// Generic type of a constant.
-pub fn get_const_type(s : String) -> HolType raise Failure {
+pub fn get_const_type(s : String) -> HolType raise {
   for entry in the_term_constants.val {
     if entry.0 == s {
       return entry.1
@@ -260,7 +257,7 @@ pub fn get_const_type(s : String) -> HolType raise Failure {
 }
 
 ///|
-fn check_new_constant(name : String) -> Unit raise Failure {
+fn check_new_constant(name : String) -> Unit raise {
   if the_term_constants.val.any(entry => entry.0 == name) {
     failwith("new_constant: constant " + name + " has already been declared")
   }
@@ -268,7 +265,7 @@ fn check_new_constant(name : String) -> Unit raise Failure {
 
 ///|
 /// Declare a new constant.
-pub fn new_constant(name : String, ty : HolType) -> Unit raise Failure {
+pub fn new_constant(name : String, ty : HolType) -> Unit raise {
   check_new_constant(name)
   the_term_constants.val = the_term_constants.val.prepend((name, ty))
 }
@@ -318,7 +315,7 @@ pub fn mk_var(v : String, ty : HolType) -> Term {
 pub fn mk_const(
   name : String,
   theta : @list.List[(HolType, HolType)],
-) -> Term raise Failure {
+) -> Term raise {
   let uty = get_const_type(name) catch {
     _ => failwith("mk_const: not a constant name")
   }
@@ -326,7 +323,7 @@ pub fn mk_const(
 }
 
 ///|
-pub fn mk_abs(bvar : Term, bod : Term) -> Term raise Failure {
+pub fn mk_abs(bvar : Term, bod : Term) -> Term raise {
   match bvar {
     Var(_) => Abs(bvar, bod)
     _ => failwith("mk_abs: not a variable")
@@ -334,7 +331,7 @@ pub fn mk_abs(bvar : Term, bod : Term) -> Term raise Failure {
 }
 
 ///|
-pub fn mk_comb(f : Term, a : Term) -> Term raise Failure {
+pub fn mk_comb(f : Term, a : Term) -> Term raise {
   match type_of(f) {
     Tyapp("fun", More(ty, tail=More(_, tail=Empty))) if ty == type_of(a) =>
       Comb(f, a)
@@ -343,7 +340,7 @@ pub fn mk_comb(f : Term, a : Term) -> Term raise Failure {
 }
 
 ///|
-pub fn dest_var(tm : Term) -> (String, HolType) raise Failure {
+pub fn dest_var(tm : Term) -> (String, HolType) raise {
   match tm {
     Var(s, ty) => (s, ty)
     _ => failwith("dest_var: not a variable")
@@ -351,7 +348,7 @@ pub fn dest_var(tm : Term) -> (String, HolType) raise Failure {
 }
 
 ///|
-pub fn dest_const(tm : Term) -> (String, HolType) raise Failure {
+pub fn dest_const(tm : Term) -> (String, HolType) raise {
   match tm {
     Const(s, ty) => (s, ty)
     _ => failwith("dest_const: not a constant")
@@ -359,7 +356,7 @@ pub fn dest_const(tm : Term) -> (String, HolType) raise Failure {
 }
 
 ///|
-pub fn dest_comb(tm : Term) -> (Term, Term) raise Failure {
+pub fn dest_comb(tm : Term) -> (Term, Term) raise {
   match tm {
     Comb(f, x) => (f, x)
     _ => failwith("dest_comb: not a combination")
@@ -367,7 +364,7 @@ pub fn dest_comb(tm : Term) -> (Term, Term) raise Failure {
 }
 
 ///|
-pub fn dest_abs(tm : Term) -> (Term, Term) raise Failure {
+pub fn dest_abs(tm : Term) -> (Term, Term) raise {
   match tm {
     Abs(v, b) => (v, b)
     _ => failwith("dest_abs: not an abstraction")
@@ -425,7 +422,7 @@ pub fn type_vars_in_term(tm : Term) -> @list.List[HolType] {
 
 ///|
 /// Rename variable `v` by priming it until it is not free in `avoid`.
-pub fn variant(avoid : @list.List[Term], v : Term) -> Term raise Failure {
+pub fn variant(avoid : @list.List[Term], v : Term) -> Term raise {
   let mut v = v
   while avoid.any(t => vfree_in(v, t)) {
     match v {
@@ -478,10 +475,7 @@ fn vsubst_rec(ilist : @list.List[(Term, Term)], tm : Term) -> Term {
 ///|
 /// Substitute terms for variables: `theta` is a list of `(term, var)`
 /// pairs, each term having the type of its variable.
-pub fn vsubst(
-  theta : @list.List[(Term, Term)],
-  tm : Term,
-) -> Term raise Failure {
+pub fn vsubst(theta : @list.List[(Term, Term)], tm : Term) -> Term raise {
   if theta.is_empty() {
     return tm
   }
@@ -591,7 +585,7 @@ pub fn inst(tyin : @list.List[(HolType, HolType)], tm : Term) -> Term {
 // ---------------------------------------------------------------------------
 
 ///|
-pub fn rator(tm : Term) -> Term raise Failure {
+pub fn rator(tm : Term) -> Term raise {
   match tm {
     Comb(l, _) => l
     _ => failwith("rator: Not a combination")
@@ -599,7 +593,7 @@ pub fn rator(tm : Term) -> Term raise Failure {
 }
 
 ///|
-pub fn rand(tm : Term) -> Term raise Failure {
+pub fn rand(tm : Term) -> Term raise {
   match tm {
     Comb(_, r) => r
     _ => failwith("rand: Not a combination")
@@ -613,7 +607,7 @@ fn safe_mk_eq(l : Term, r : Term) -> Term {
 }
 
 ///|
-pub fn dest_eq(tm : Term) -> (Term, Term) raise Failure {
+pub fn dest_eq(tm : Term) -> (Term, Term) raise {
   match tm {
     Comb(Comb(Const("=", _), l), r) => (l, r)
     _ => failwith("dest_eq")
@@ -813,7 +807,7 @@ pub fn refl(tm : Term) -> Thm {
 ///|
 /// `TRANS`: `A1 |- a = b`, `A2 |- b' = c` (b, b' alpha-equivalent) gives
 /// `A1 u A2 |- a = c`.
-pub fn trans(th1 : Thm, th2 : Thm) -> Thm raise Failure {
+pub fn trans(th1 : Thm, th2 : Thm) -> Thm raise {
   match (th1.concl, th2.concl) {
     (Comb(Comb(Const("=", _), _) as eql, m1), Comb(Comb(Const("=", _), m2), r)) if alphaorder(
         m1, m2,
@@ -825,7 +819,7 @@ pub fn trans(th1 : Thm, th2 : Thm) -> Thm raise Failure {
 
 ///|
 /// `MK_COMB`: `A1 |- f = g`, `A2 |- x = y` gives `A1 u A2 |- f x = g y`.
-pub fn mk_comb_rule(th1 : Thm, th2 : Thm) -> Thm raise Failure {
+pub fn mk_comb_rule(th1 : Thm, th2 : Thm) -> Thm raise {
   match (th1.concl, th2.concl) {
     (Comb(Comb(Const("=", _), l1), r1), Comb(Comb(Const("=", _), l2), r2)) =>
       match type_of(r1) {
@@ -842,7 +836,7 @@ pub fn mk_comb_rule(th1 : Thm, th2 : Thm) -> Thm raise Failure {
 
 ///|
 /// `ABS`: `A |- l = r` gives `A |- (\v. l) = (\v. r)` if `v` is not free in `A`.
-pub fn abs_rule(v : Term, th : Thm) -> Thm raise Failure {
+pub fn abs_rule(v : Term, th : Thm) -> Thm raise {
   match (v, th.concl) {
     (Var(_), Comb(Comb(Const("=", _), l), r)) if !th.hyps.any(h => {
         vfree_in(v, h)
@@ -853,7 +847,7 @@ pub fn abs_rule(v : Term, th : Thm) -> Thm raise Failure {
 
 ///|
 /// `BETA`: `|- (\x. t) x = t`
-pub fn beta(tm : Term) -> Thm raise Failure {
+pub fn beta(tm : Term) -> Thm raise {
   match tm {
     Comb(Abs(v, bod), arg) if arg == v =>
       { hyps: @list.empty(), concl: safe_mk_eq(tm, bod), }
@@ -863,7 +857,7 @@ pub fn beta(tm : Term) -> Thm raise Failure {
 
 ///|
 /// `ASSUME`: `p |- p`
-pub fn assume_rule(tm : Term) -> Thm raise Failure {
+pub fn assume_rule(tm : Term) -> Thm raise {
   if type_of(tm) == bool_ty {
     { hyps: @list.singleton(tm), concl: tm, }
   } else {
@@ -873,7 +867,7 @@ pub fn assume_rule(tm : Term) -> Thm raise Failure {
 
 ///|
 /// `EQ_MP`: `A1 |- p = q`, `A2 |- p'` (p, p' alpha-equivalent) gives `A1 u A2 |- q`.
-pub fn eq_mp(th1 : Thm, th2 : Thm) -> Thm raise Failure {
+pub fn eq_mp(th1 : Thm, th2 : Thm) -> Thm raise {
   match th1.concl {
     Comb(Comb(Const("=", _), l), r) if alphaorder(l, th2.concl) == 0 =>
       { hyps: term_union(th1.hyps, th2.hyps), concl: r, }
@@ -900,10 +894,7 @@ pub fn inst_type(theta : @list.List[(HolType, HolType)], th : Thm) -> Thm {
 
 ///|
 /// `INST`: Instantiate free variables throughout a theorem.
-pub fn inst_rule(
-  theta : @list.List[(Term, Term)],
-  th : Thm,
-) -> Thm raise Failure {
+pub fn inst_rule(theta : @list.List[(Term, Term)], th : Thm) -> Thm raise {
   let hyps = term_image(t => vsubst(theta, t), th.hyps)
   { hyps, concl: vsubst(theta, th.concl), }
 }
@@ -921,7 +912,7 @@ pub fn axioms() -> @list.List[Thm] {
 }
 
 ///|
-pub fn new_axiom(tm : Term) -> Thm raise Failure {
+pub fn new_axiom(tm : Term) -> Thm raise {
   if type_of(tm) == bool_ty {
     let th = { hyps: @list.empty(), concl: tm, }
     the_axioms.val = the_axioms.val.prepend(th)
@@ -946,7 +937,7 @@ pub fn definitions() -> @list.List[Thm] {
 ///|
 /// Define a new constant `c` by `c = r`, where `r` is closed and its type
 /// variables all occur in the type of `c`.
-pub fn new_basic_definition(tm : Term) -> Thm raise Failure {
+pub fn new_basic_definition(tm : Term) -> Thm raise {
   match tm {
     Comb(Comb(Const("=", _), Var(cname, ty)), r) => {
       if !freesin(@list.empty(), r) {
@@ -964,9 +955,11 @@ pub fn new_basic_definition(tm : Term) -> Thm raise Failure {
       if !subset(type_vars_in_term(r), tyvars(ty)) {
         failwith("new_definition: Type variables not reflected in constant")
       }
-      new_constant(cname, ty)
+      check_new_constant(cname)
       let c = Const(cname, ty)
       let dth = { hyps: @list.empty(), concl: safe_mk_eq(c, r), }
+      // Publish only after every check has passed and the theorem exists.
+      the_term_constants.val = the_term_constants.val.prepend((cname, ty))
       the_definitions.val = the_definitions.val.prepend(dth)
       dth
     }
@@ -1000,7 +993,7 @@ pub fn new_basic_type_definition(
   absname : String,
   repname : String,
   th : Thm,
-) -> (Thm, Thm) raise Failure {
+) -> (Thm, Thm) raise {
   let in_use = name => the_term_constants.val.any(e => e.0 == name)
   if in_use(absname) || in_use(repname) {
     failwith("new_basic_type_definition: Constant(s) already in use")

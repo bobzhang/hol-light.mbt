@@ -7,17 +7,17 @@ import {
 }
 
 // Values
-pub fn abs_rule(Term, Thm) -> Thm raise Failure
+pub fn abs_rule(Term, Thm) -> Thm raise
 
 pub fn alphaorder(Term, Term) -> Int
 
-pub fn assume_rule(Term) -> Thm raise Failure
+pub fn assume_rule(Term) -> Thm raise
 
 pub let aty : HolType
 
 pub fn axioms() -> @list.List[Thm]
 
-pub fn beta(Term) -> Thm raise Failure
+pub fn beta(Term) -> Thm raise
 
 pub let bool_ty : HolType
 
@@ -31,23 +31,23 @@ pub fn deduct_antisym_rule(Thm, Thm) -> Thm
 
 pub fn definitions() -> @list.List[Thm]
 
-pub fn dest_abs(Term) -> (Term, Term) raise Failure
+pub fn dest_abs(Term) -> (Term, Term) raise
 
-pub fn dest_comb(Term) -> (Term, Term) raise Failure
+pub fn dest_comb(Term) -> (Term, Term) raise
 
-pub fn dest_const(Term) -> (String, HolType) raise Failure
+pub fn dest_const(Term) -> (String, HolType) raise
 
-pub fn dest_eq(Term) -> (Term, Term) raise Failure
+pub fn dest_eq(Term) -> (Term, Term) raise
 
 pub fn dest_thm(Thm) -> (@list.List[Term], Term)
 
-pub fn dest_type(HolType) -> (String, @list.List[HolType]) raise Failure
+pub fn dest_type(HolType) -> (String, @list.List[HolType]) raise
 
-pub fn dest_var(Term) -> (String, HolType) raise Failure
+pub fn dest_var(Term) -> (String, HolType) raise
 
-pub fn dest_vartype(HolType) -> String raise Failure
+pub fn dest_vartype(HolType) -> String raise
 
-pub fn eq_mp(Thm, Thm) -> Thm raise Failure
+pub fn eq_mp(Thm, Thm) -> Thm raise
 
 pub fn frees(Term) -> @list.List[Term]
 
@@ -55,15 +55,15 @@ pub fn freesin(@list.List[Term], Term) -> Bool
 
 pub fn freesl(@list.List[Term]) -> @list.List[Term]
 
-pub fn get_const_type(String) -> HolType raise Failure
+pub fn get_const_type(String) -> HolType raise
 
-pub fn get_type_arity(String) -> Int raise Failure
+pub fn get_type_arity(String) -> Int raise
 
 pub fn hyp(Thm) -> @list.List[Term]
 
 pub fn inst(@list.List[(HolType, HolType)], Term) -> Term
 
-pub fn inst_rule(@list.List[(Term, Term)], Thm) -> Thm raise Failure
+pub fn inst_rule(@list.List[(Term, Term)], Thm) -> Thm raise
 
 pub fn inst_type(@list.List[(HolType, HolType)], Thm) -> Thm
 
@@ -79,37 +79,37 @@ pub fn is_var(Term) -> Bool
 
 pub fn is_vartype(HolType) -> Bool
 
-pub fn mk_abs(Term, Term) -> Term raise Failure
+pub fn mk_abs(Term, Term) -> Term raise
 
-pub fn mk_comb(Term, Term) -> Term raise Failure
+pub fn mk_comb(Term, Term) -> Term raise
 
-pub fn mk_comb_rule(Thm, Thm) -> Thm raise Failure
+pub fn mk_comb_rule(Thm, Thm) -> Thm raise
 
-pub fn mk_const(String, @list.List[(HolType, HolType)]) -> Term raise Failure
+pub fn mk_const(String, @list.List[(HolType, HolType)]) -> Term raise
 
-pub fn mk_type(String, @list.List[HolType]) -> HolType raise Failure
+pub fn mk_type(String, @list.List[HolType]) -> HolType raise
 
 pub fn mk_var(String, HolType) -> Term
 
 pub fn mk_vartype(String) -> HolType
 
-pub fn new_axiom(Term) -> Thm raise Failure
+pub fn new_axiom(Term) -> Thm raise
 
-pub fn new_basic_definition(Term) -> Thm raise Failure
+pub fn new_basic_definition(Term) -> Thm raise
 
-pub fn new_basic_type_definition(String, String, String, Thm) -> (Thm, Thm) raise Failure
+pub fn new_basic_type_definition(String, String, String, Thm) -> (Thm, Thm) raise
 
-pub fn new_constant(String, HolType) -> Unit raise Failure
+pub fn new_constant(String, HolType) -> Unit raise
 
-pub fn new_type(String, Int) -> Unit raise Failure
+pub fn new_type(String, Int) -> Unit raise
 
-pub fn rand(Term) -> Term raise Failure
+pub fn rand(Term) -> Term raise
 
-pub fn rator(Term) -> Term raise Failure
+pub fn rator(Term) -> Term raise
 
 pub fn refl(Term) -> Thm
 
-pub fn trans(Thm, Thm) -> Thm raise Failure
+pub fn trans(Thm, Thm) -> Thm raise
 
 pub fn type_of(Term) -> HolType
 
@@ -121,11 +121,11 @@ pub fn types() -> @list.List[(String, Int)]
 
 pub fn tyvars(HolType) -> @list.List[HolType]
 
-pub fn variant(@list.List[Term], Term) -> Term raise Failure
+pub fn variant(@list.List[Term], Term) -> Term raise
 
 pub fn vfree_in(Term, Term) -> Bool
 
-pub fn vsubst(@list.List[(Term, Term)], Term) -> Term raise Failure
+pub fn vsubst(@list.List[(Term, Term)], Term) -> Term raise
 
 // Errors
 

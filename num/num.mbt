@@ -20,7 +20,7 @@ pub struct Num {
 
 ///|
 /// OCaml's `Invalid_argument` exception (not a `Failure`).
-pub suberror InvalidArgument {
+pub(all) suberror InvalidArgument {
   InvalidArgument(String)
 } derive(Debug)
 
@@ -38,7 +38,7 @@ pub extend InvalidArgument with @debug.Debug::{to_repr}
 
 ///|
 /// OCaml's `Division_by_zero` exception (not a `Failure`).
-pub suberror DivisionByZero derive(Debug)
+pub(all) suberror DivisionByZero derive(Debug)
 
 ///|
 pub impl Show for DivisionByZero with fn output(_, logger) {
@@ -131,7 +131,7 @@ pub fn num_of_big_int(n : @bigint.BigInt) -> Num {
 
 ///|
 /// Parse a decimal integer, optionally negative.
-pub fn num_of_decimal(s : String) -> Num raise Failure {
+pub fn num_of_decimal(s : String) -> Num raise {
   let chars : Array[Char] = s.iter().collect()
   let mut ok = chars.length() > 0
   for i, c in chars {
@@ -263,7 +263,7 @@ pub fn mult_num(a : Num, b : Num) -> Num {
 
 ///|
 /// `//`: exact division.
-pub fn div_num(a : Num, b : Num) -> Num raise Failure {
+pub fn div_num(a : Num, b : Num) -> Num raise {
   if b.num.is_zero() {
     raise Failure("create_ratio infinite or undefined rational number")
   }
@@ -408,7 +408,7 @@ pub fn round_num(a : Num) -> Num {
 ///|
 /// Euclidean quotient: `quo_num a b = q` with `a = q * b + r`,
 /// `0 <= r < |b|`.
-pub fn quo_num(a : Num, b : Num) -> Num raise DivisionByZero {
+pub fn quo_num(a : Num, b : Num) -> Num raise {
   if b.num.is_zero() {
     raise DivisionByZero
   }
@@ -424,7 +424,7 @@ pub fn quo_num(a : Num, b : Num) -> Num raise DivisionByZero {
 
 ///|
 /// Euclidean remainder, always in `[0, |b|)`.
-pub fn mod_num(a : Num, b : Num) -> Num raise DivisionByZero {
+pub fn mod_num(a : Num, b : Num) -> Num raise {
   a - quo_num(a, b) * b
 }
 
@@ -470,7 +470,7 @@ pub fn denominator(a : Num) -> Num {
 
 ///|
 /// The integer value as a big integer.
-pub fn big_int_of_num(a : Num) -> @bigint.BigInt raise Failure {
+pub fn big_int_of_num(a : Num) -> @bigint.BigInt raise {
   if a.is_integer() {
     a.num
   } else {
@@ -480,13 +480,13 @@ pub fn big_int_of_num(a : Num) -> @bigint.BigInt raise Failure {
 
 ///|
 /// Greatest common divisor of two integers.
-pub fn gcd_num(a : Num, b : Num) -> Num raise Failure {
+pub fn gcd_num(a : Num, b : Num) -> Num raise {
   of_big(big_gcd(big_int_of_num(a), big_int_of_num(b)))
 }
 
 ///|
 /// Least common multiple (as in HOL Light's `lcm_num`).
-pub fn lcm_num(a : Num, b : Num) -> Num raise Failure {
+pub fn lcm_num(a : Num, b : Num) -> Num raise {
   if a == num_0 && b == num_0 {
     num_0
   } else {
@@ -502,7 +502,7 @@ let max_int : @bigint.BigInt = 2147483647N
 
 ///|
 /// Convert to a 32-bit `Int`. Fails on non-integers and out-of-range values.
-pub fn int_of_num(a : Num) -> Int raise Failure {
+pub fn int_of_num(a : Num) -> Int raise {
   if !a.is_integer() {
     raise Failure("integer argument required")
   }
@@ -520,7 +520,7 @@ let max_int64 : @bigint.BigInt = 9223372036854775807N
 
 ///|
 /// Convert to an `Int64`. Fails on non-integers and out-of-range values.
-pub fn int64_of_num(a : Num) -> Int64 raise Failure {
+pub fn int64_of_num(a : Num) -> Int64 raise {
   if !a.is_integer() {
     raise Failure("integer argument required")
   }
@@ -633,7 +633,7 @@ pub fn string_of_num_hex(n : Num) -> String raise {
 }
 
 ///|
-fn digit_value(c : Char) -> Int raise Failure {
+fn digit_value(c : Char) -> Int raise {
   match c {
     '0'..='9' => c.to_int() - '0'.to_int()
     'a'..='f' => c.to_int() - 'a'.to_int() + 10
@@ -645,7 +645,7 @@ fn digit_value(c : Char) -> Int raise Failure {
 
 ///|
 /// HOL Light's `num_of_string`: decimal, `0x` hex or `0b` binary numerals.
-pub fn num_of_string(s : String) -> Num raise Failure {
+pub fn num_of_string(s : String) -> Num raise {
   let chars = s.iter().collect()
   let (base, start) = match chars {
     [] => raise Failure("num_of_string: no digits")

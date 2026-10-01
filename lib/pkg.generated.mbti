@@ -11,23 +11,23 @@ import {
 // Values
 pub fn[A, B, C] allpairs((A, B) -> C raise?, @list.List[A], @list.List[B]) -> @list.List[C] raise?
 
-pub fn[K : OCompare + OHash, V] apply(Func[K, V], K) -> V raise Failure
+pub fn[K : OCompare + OHash, V] apply(Func[K, V], K) -> V raise
 
 pub fn[K : OCompare + OHash, V] applyd(Func[K, V], (K) -> V raise?, K) -> V raise?
 
-pub fn[A : OCompare, B] assoc(A, @list.List[(A, B)]) -> B raise Failure
+pub fn[A : OCompare, B] assoc(A, @list.List[(A, B)]) -> B raise
 
 pub fn[A : OCompare, B] assocd(A, @list.List[(A, B)], B) -> B
 
-pub fn[A] butlast(@list.List[A]) -> @list.List[A] raise Failure
+pub fn[A] butlast(@list.List[A]) -> @list.List[A] raise
 
 pub fn[A, B] can((A) -> B raise, A) -> Bool raise
 
 pub fn[A] check((A) -> Bool raise?, A) -> A raise
 
-pub fn[K, V] choose(Func[K, V]) -> (K, V) raise Failure
+pub fn[K, V] choose(Func[K, V]) -> (K, V) raise
 
-pub fn[A] chop_list(Int, @list.List[A]) -> (@list.List[A], @list.List[A]) raise Failure
+pub fn[A] chop_list(Int, @list.List[A]) -> (@list.List[A], @list.List[A]) raise
 
 pub fn[K : OCompare, V] combine((V, V) -> V raise?, (V) -> Bool raise?, Func[K, V], Func[K, V]) -> Func[K, V] raise?
 
@@ -47,7 +47,7 @@ pub fn[K : OCompare, V] dom(Func[K, V]) -> @list.List[K]
 
 pub fn[A, B] dup((A, A) -> B raise?, A) -> B raise?
 
-pub fn[A] el(Int, @list.List[A]) -> A raise Failure
+pub fn[A] el(Int, @list.List[A]) -> A raise
 
 pub fn[A] end_itlist((A, A) -> A raise?, @list.List[A]) -> A raise
 
@@ -55,9 +55,9 @@ pub fn[A] exists((A) -> Bool raise?, @list.List[A]) -> Bool raise?
 
 pub fn explode(String) -> @list.List[String]
 
-pub fn[T] failure() -> T raise Failure
+pub fn[T] failure() -> T raise
 
-pub fn[T] failwith(String) -> T raise Failure
+pub fn[T] failwith(String) -> T raise
 
 pub fn[A] filter((A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
 
@@ -85,7 +85,7 @@ pub fn[K : OCompare, V : OCompare] graph(Func[K, V]) -> @list.List[(K, V)]
 
 pub fn[T : OHash] hash(T) -> Int
 
-pub fn[A] hd(@list.List[A]) -> A raise Failure
+pub fn[A] hd(@list.List[A]) -> A raise
 
 pub fn[A] id(A) -> A
 
@@ -93,7 +93,7 @@ pub fn implode(@list.List[String]) -> String
 
 pub fn[A, B : OCompare] increasing((A) -> B raise?, A, A) -> Bool raise?
 
-pub fn[A : OCompare] index(A, @list.List[A]) -> Int raise Failure
+pub fn[A : OCompare] index(A, @list.List[A]) -> Int raise
 
 pub fn[A : OCompare] insert(A, @list.List[A]) -> @list.List[A]
 
@@ -109,7 +109,7 @@ pub fn[A, B, C] itlist2((A, B, C) -> C raise?, @list.List[A], @list.List[B], C) 
 
 pub fn[A, B] konst(A, B) -> A
 
-pub fn[A] last(@list.List[A]) -> A raise Failure
+pub fn[A] last(@list.List[A]) -> A raise
 
 pub fn[A] length(@list.List[A]) -> Int
 
@@ -159,7 +159,7 @@ pub let report_timing : @ref.Ref[Bool]
 
 pub fn[A] rev(@list.List[A]) -> @list.List[A]
 
-pub fn[A, B : OCompare] rev_assoc(B, @list.List[(A, B)]) -> A raise Failure
+pub fn[A, B : OCompare] rev_assoc(B, @list.List[(A, B)]) -> A raise
 
 pub fn[A, B : OCompare] rev_assocd(B, @list.List[(A, B)], A) -> A
 
@@ -173,7 +173,7 @@ pub fn[A : OCompare] set_eq(@list.List[A], @list.List[A]) -> Bool
 
 pub fn[A : OCompare] setify(@list.List[A]) -> @list.List[A]
 
-pub fn[A, B] shareout(@list.List[@list.List[A]], @list.List[B]) -> @list.List[@list.List[B]] raise Failure
+pub fn[A, B] shareout(@list.List[@list.List[A]], @list.List[B]) -> @list.List[@list.List[B]] raise
 
 pub fn[K : OCompare + OHash, V] single(K, V) -> Func[K, V]
 
@@ -189,7 +189,7 @@ pub fn[A : OCompare] subtract(@list.List[A], @list.List[A]) -> @list.List[A]
 
 pub fn[A] subtract_eq((A, A) -> Bool raise?, @list.List[A], @list.List[A]) -> @list.List[A] raise?
 
-pub fn[A] tl(@list.List[A]) -> @list.List[A] raise Failure
+pub fn[A] tl(@list.List[A]) -> @list.List[A] raise
 
 pub fn[K : OCompare + OHash, V] tryapplyd(Func[K, V], K, V) -> V
 
@@ -219,10 +219,15 @@ pub let verbose : @ref.Ref[Bool]
 
 pub fn warn(Bool, String) -> Unit
 
-pub fn[A, B] zip(@list.List[A], @list.List[B]) -> @list.List[(A, B)] raise Failure
+pub fn[A, B] zip(@list.List[A], @list.List[B]) -> @list.List[(A, B)] raise
 
 // Errors
-pub suberror Unchanged derive(@debug.Debug)
+pub(all) suberror MatchFailure {
+  MatchFailure(String)
+} derive(@debug.Debug)
+pub fn MatchFailure::to_repr(Self) -> @debug.Repr
+
+pub(all) suberror Unchanged derive(@debug.Debug)
 pub fn Unchanged::to_repr(Self) -> @debug.Repr
 
 // Types and methods
