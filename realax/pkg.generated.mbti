@@ -1,0 +1,493 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/realax"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn bounds_divided() -> @kernel.Thm
+
+pub fn bounds_ignore() -> @kernel.Thm
+
+pub fn bounds_linear() -> @kernel.Thm
+
+pub fn bounds_linear_0() -> @kernel.Thm
+
+pub fn bounds_notzero() -> @kernel.Thm
+
+pub fn dist() -> @kernel.Thm
+
+pub fn dist_add2() -> @kernel.Thm
+
+pub fn dist_add2_rev() -> @kernel.Thm
+
+pub fn dist_addbound() -> @kernel.Thm
+
+pub fn dist_elim_thm() -> @kernel.Thm
+
+pub fn dist_eq_0() -> @kernel.Thm
+
+pub fn dist_ladd() -> @kernel.Thm
+
+pub fn dist_ladd_0() -> @kernel.Thm
+
+pub fn dist_le_cases() -> @kernel.Thm
+
+pub fn dist_lmul() -> @kernel.Thm
+
+pub fn dist_lzero() -> @kernel.Thm
+
+pub fn dist_radd() -> @kernel.Thm
+
+pub fn dist_radd_0() -> @kernel.Thm
+
+pub fn dist_refl() -> @kernel.Thm
+
+pub fn dist_rmul() -> @kernel.Thm
+
+pub fn dist_rzero() -> @kernel.Thm
+
+pub fn dist_sym() -> @kernel.Thm
+
+pub fn dist_triangle() -> @kernel.Thm
+
+pub fn dist_triangle_le() -> @kernel.Thm
+
+pub fn dist_triangles_le() -> @kernel.Thm
+
+pub fn hreal_add() -> @kernel.Thm
+
+pub fn hreal_add_ac() -> @kernel.Thm
+
+pub fn hreal_add_assoc() -> @kernel.Thm
+
+pub fn hreal_add_lcancel() -> @kernel.Thm
+
+pub fn hreal_add_ldistrib() -> @kernel.Thm
+
+pub fn hreal_add_lid() -> @kernel.Thm
+
+pub fn hreal_add_rdistrib() -> @kernel.Thm
+
+pub fn hreal_add_rid() -> @kernel.Thm
+
+pub fn hreal_add_sym() -> @kernel.Thm
+
+pub fn hreal_add_th() -> @kernel.Thm
+
+pub fn hreal_arch() -> @kernel.Thm
+
+pub fn hreal_complete() -> @kernel.Thm
+
+pub fn hreal_eq_add_lcancel() -> @kernel.Thm
+
+pub fn hreal_eq_add_rcancel() -> @kernel.Thm
+
+pub fn hreal_inv() -> @kernel.Thm
+
+pub fn hreal_inv_0() -> @kernel.Thm
+
+pub fn hreal_inv_th() -> @kernel.Thm
+
+pub fn hreal_le() -> @kernel.Thm
+
+pub fn hreal_le_add() -> @kernel.Thm
+
+pub fn hreal_le_add2() -> @kernel.Thm
+
+pub fn hreal_le_add_lcancel() -> @kernel.Thm
+
+pub fn hreal_le_add_rcancel() -> @kernel.Thm
+
+pub fn hreal_le_antisym() -> @kernel.Thm
+
+pub fn hreal_le_exists() -> @kernel.Thm
+
+pub fn hreal_le_exists_def() -> @kernel.Thm
+
+pub fn hreal_le_mul_rcancel_imp() -> @kernel.Thm
+
+pub fn hreal_le_refl() -> @kernel.Thm
+
+pub fn hreal_le_th() -> @kernel.Thm
+
+pub fn hreal_le_total() -> @kernel.Thm
+
+pub fn hreal_le_trans() -> @kernel.Thm
+
+pub fn hreal_mul() -> @kernel.Thm
+
+pub fn hreal_mul_assoc() -> @kernel.Thm
+
+pub fn hreal_mul_lid() -> @kernel.Thm
+
+pub fn hreal_mul_linv() -> @kernel.Thm
+
+pub fn hreal_mul_lzero() -> @kernel.Thm
+
+pub fn hreal_mul_rzero() -> @kernel.Thm
+
+pub fn hreal_mul_sym() -> @kernel.Thm
+
+pub fn hreal_mul_th() -> @kernel.Thm
+
+pub fn hreal_of_num() -> @kernel.Thm
+
+pub fn hreal_of_num_add() -> @kernel.Thm
+
+pub fn hreal_of_num_eq() -> @kernel.Thm
+
+pub fn hreal_of_num_le() -> @kernel.Thm
+
+pub fn hreal_of_num_mul() -> @kernel.Thm
+
+pub fn hreal_of_num_th() -> @kernel.Thm
+
+pub fn hreal_tybij() -> (@kernel.Thm, @kernel.Thm)
+
+pub fn is_nadd() -> @kernel.Thm
+
+pub fn is_nadd_0() -> @kernel.Thm
+
+pub fn nadd_abs() -> @kernel.Thm
+
+pub fn nadd_add() -> @kernel.Thm
+
+pub fn nadd_add_assoc() -> @kernel.Thm
+
+pub fn nadd_add_lcancel() -> @kernel.Thm
+
+pub fn nadd_add_lid() -> @kernel.Thm
+
+pub fn nadd_add_sym() -> @kernel.Thm
+
+pub fn nadd_add_v1() -> @kernel.Thm
+
+pub fn nadd_add_welldef() -> @kernel.Thm
+
+pub fn nadd_additive() -> @kernel.Thm
+
+pub fn nadd_altmul() -> @kernel.Thm
+
+pub fn nadd_arch() -> @kernel.Thm
+
+pub fn nadd_arch_lemma() -> @kernel.Thm
+
+pub fn nadd_arch_mult() -> @kernel.Thm
+
+pub fn nadd_arch_zero() -> @kernel.Thm
+
+pub fn nadd_bound() -> @kernel.Thm
+
+pub fn nadd_cauchy() -> @kernel.Thm
+
+pub fn nadd_complete() -> @kernel.Thm
+
+pub fn nadd_dist() -> @kernel.Thm
+
+pub fn nadd_dist_lemma() -> @kernel.Thm
+
+pub fn nadd_eq() -> @kernel.Thm
+
+pub fn nadd_eq_imp_le() -> @kernel.Thm
+
+pub fn nadd_eq_refl() -> @kernel.Thm
+
+pub fn nadd_eq_sym() -> @kernel.Thm
+
+pub fn nadd_eq_trans() -> @kernel.Thm
+
+pub fn nadd_inv() -> @kernel.Thm
+
+pub fn nadd_inv_0() -> @kernel.Thm
+
+pub fn nadd_inv_v1() -> @kernel.Thm
+
+pub fn nadd_inv_welldef() -> @kernel.Thm
+
+pub fn nadd_lbound() -> @kernel.Thm
+
+pub fn nadd_ldistrib() -> @kernel.Thm
+
+pub fn nadd_le() -> @kernel.Thm
+
+pub fn nadd_le_0() -> @kernel.Thm
+
+pub fn nadd_le_add() -> @kernel.Thm
+
+pub fn nadd_le_antisym() -> @kernel.Thm
+
+pub fn nadd_le_exists() -> @kernel.Thm
+
+pub fn nadd_le_ladd() -> @kernel.Thm
+
+pub fn nadd_le_lmul() -> @kernel.Thm
+
+pub fn nadd_le_radd() -> @kernel.Thm
+
+pub fn nadd_le_refl() -> @kernel.Thm
+
+pub fn nadd_le_rmul() -> @kernel.Thm
+
+pub fn nadd_le_total() -> @kernel.Thm
+
+pub fn nadd_le_total_lemma() -> @kernel.Thm
+
+pub fn nadd_le_trans() -> @kernel.Thm
+
+pub fn nadd_le_welldef() -> @kernel.Thm
+
+pub fn nadd_le_welldef_lemma() -> @kernel.Thm
+
+pub fn nadd_mul() -> @kernel.Thm
+
+pub fn nadd_mul_assoc() -> @kernel.Thm
+
+pub fn nadd_mul_lid() -> @kernel.Thm
+
+pub fn nadd_mul_linv() -> @kernel.Thm
+
+pub fn nadd_mul_linv_lemma0() -> @kernel.Thm
+
+pub fn nadd_mul_linv_lemma1() -> @kernel.Thm
+
+pub fn nadd_mul_linv_lemma2() -> @kernel.Thm
+
+pub fn nadd_mul_linv_lemma3() -> @kernel.Thm
+
+pub fn nadd_mul_linv_lemma4() -> @kernel.Thm
+
+pub fn nadd_mul_linv_lemma5() -> @kernel.Thm
+
+pub fn nadd_mul_linv_lemma6() -> @kernel.Thm
+
+pub fn nadd_mul_linv_lemma7() -> @kernel.Thm
+
+pub fn nadd_mul_linv_lemma7a() -> @kernel.Thm
+
+pub fn nadd_mul_linv_lemma8() -> @kernel.Thm
+
+pub fn nadd_mul_sym() -> @kernel.Thm
+
+pub fn nadd_mul_v1() -> @kernel.Thm
+
+pub fn nadd_mul_welldef() -> @kernel.Thm
+
+pub fn nadd_mul_welldef_lemma() -> @kernel.Thm
+
+pub fn nadd_multiplicative() -> @kernel.Thm
+
+pub fn nadd_nonzero() -> @kernel.Thm
+
+pub fn nadd_of_num() -> @kernel.Thm
+
+pub fn nadd_of_num_add() -> @kernel.Thm
+
+pub fn nadd_of_num_eq() -> @kernel.Thm
+
+pub fn nadd_of_num_le() -> @kernel.Thm
+
+pub fn nadd_of_num_mul() -> @kernel.Thm
+
+pub fn nadd_of_num_v1() -> @kernel.Thm
+
+pub fn nadd_of_num_welldef() -> @kernel.Thm
+
+pub fn nadd_rdistrib() -> @kernel.Thm
+
+pub fn nadd_rep() -> @kernel.Thm
+
+pub fn nadd_rinv() -> @kernel.Thm
+
+pub fn nadd_suc() -> @kernel.Thm
+
+pub fn nadd_ubound() -> @kernel.Thm
+
+pub fn prioritize_num(Unit) -> Unit raise
+
+pub fn prioritize_real(Unit) -> Unit raise
+
+pub fn real_abs() -> @kernel.Thm
+
+pub fn real_add() -> @kernel.Thm
+
+pub fn real_add_assoc() -> @kernel.Thm
+
+pub fn real_add_ldistrib() -> @kernel.Thm
+
+pub fn real_add_lid() -> @kernel.Thm
+
+pub fn real_add_linv() -> @kernel.Thm
+
+pub fn real_add_sym() -> @kernel.Thm
+
+pub fn real_add_th() -> @kernel.Thm
+
+pub fn real_complete() -> @kernel.Thm
+
+pub fn real_complete_somepos() -> @kernel.Thm
+
+pub fn real_div() -> @kernel.Thm
+
+pub fn real_ge() -> @kernel.Thm
+
+pub fn real_gt() -> @kernel.Thm
+
+pub fn real_hreal_lemma1() -> @kernel.Thm
+
+pub fn real_hreal_lemma2() -> @kernel.Thm
+
+pub fn real_inv() -> @kernel.Thm
+
+pub fn real_inv_0() -> @kernel.Thm
+
+pub fn real_inv_th() -> @kernel.Thm
+
+pub fn real_le() -> @kernel.Thm
+
+pub fn real_le_antisym() -> @kernel.Thm
+
+pub fn real_le_ladd_imp() -> @kernel.Thm
+
+pub fn real_le_mul() -> @kernel.Thm
+
+pub fn real_le_refl() -> @kernel.Thm
+
+pub fn real_le_th() -> @kernel.Thm
+
+pub fn real_le_total() -> @kernel.Thm
+
+pub fn real_le_trans() -> @kernel.Thm
+
+pub fn real_lt() -> @kernel.Thm
+
+pub fn real_max() -> @kernel.Thm
+
+pub fn real_min() -> @kernel.Thm
+
+pub fn real_mul() -> @kernel.Thm
+
+pub fn real_mul_assoc() -> @kernel.Thm
+
+pub fn real_mul_lid() -> @kernel.Thm
+
+pub fn real_mul_linv() -> @kernel.Thm
+
+pub fn real_mul_sym() -> @kernel.Thm
+
+pub fn real_mul_th() -> @kernel.Thm
+
+pub fn real_neg() -> @kernel.Thm
+
+pub fn real_neg_th() -> @kernel.Thm
+
+pub fn real_of_num() -> @kernel.Thm
+
+pub fn real_of_num_add() -> @kernel.Thm
+
+pub fn real_of_num_eq() -> @kernel.Thm
+
+pub fn real_of_num_le() -> @kernel.Thm
+
+pub fn real_of_num_mul() -> @kernel.Thm
+
+pub fn real_of_num_th() -> @kernel.Thm
+
+pub fn real_pow() -> @kernel.Thm
+
+pub fn real_sub() -> @kernel.Thm
+
+pub fn real_tybij() -> (@kernel.Thm, @kernel.Thm)
+
+pub fn treal_add() -> @kernel.Thm
+
+pub fn treal_add_assoc() -> @kernel.Thm
+
+pub fn treal_add_ldistrib() -> @kernel.Thm
+
+pub fn treal_add_lid() -> @kernel.Thm
+
+pub fn treal_add_linv() -> @kernel.Thm
+
+pub fn treal_add_sym() -> @kernel.Thm
+
+pub fn treal_add_sym_eq() -> @kernel.Thm
+
+pub fn treal_add_welldef() -> @kernel.Thm
+
+pub fn treal_add_welldefr() -> @kernel.Thm
+
+pub fn treal_eq() -> @kernel.Thm
+
+pub fn treal_eq_ap() -> @kernel.Thm
+
+pub fn treal_eq_imp_le() -> @kernel.Thm
+
+pub fn treal_eq_refl() -> @kernel.Thm
+
+pub fn treal_eq_sym() -> @kernel.Thm
+
+pub fn treal_eq_trans() -> @kernel.Thm
+
+pub fn treal_inv() -> @kernel.Thm
+
+pub fn treal_inv_0() -> @kernel.Thm
+
+pub fn treal_inv_welldef() -> @kernel.Thm
+
+pub fn treal_le() -> @kernel.Thm
+
+pub fn treal_le_antisym() -> @kernel.Thm
+
+pub fn treal_le_ladd_imp() -> @kernel.Thm
+
+pub fn treal_le_mul() -> @kernel.Thm
+
+pub fn treal_le_refl() -> @kernel.Thm
+
+pub fn treal_le_total() -> @kernel.Thm
+
+pub fn treal_le_trans() -> @kernel.Thm
+
+pub fn treal_le_welldef() -> @kernel.Thm
+
+pub fn treal_mul() -> @kernel.Thm
+
+pub fn treal_mul_assoc() -> @kernel.Thm
+
+pub fn treal_mul_lid() -> @kernel.Thm
+
+pub fn treal_mul_linv() -> @kernel.Thm
+
+pub fn treal_mul_sym() -> @kernel.Thm
+
+pub fn treal_mul_sym_eq() -> @kernel.Thm
+
+pub fn treal_mul_welldef() -> @kernel.Thm
+
+pub fn treal_mul_welldefr() -> @kernel.Thm
+
+pub fn treal_neg() -> @kernel.Thm
+
+pub fn treal_neg_welldef() -> @kernel.Thm
+
+pub fn treal_of_num() -> @kernel.Thm
+
+pub fn treal_of_num_add() -> @kernel.Thm
+
+pub fn treal_of_num_eq() -> @kernel.Thm
+
+pub fn treal_of_num_le() -> @kernel.Thm
+
+pub fn treal_of_num_mul() -> @kernel.Thm
+
+pub fn treal_of_num_welldef() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

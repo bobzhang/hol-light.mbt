@@ -30,6 +30,7 @@ module Main = struct
     | "grobner.ml" -> ("grobner/grobner.mbt", [])
     | "ind_types.ml" -> ("ind_types/ind_types.mbt", [])
     | "lists.ml" -> ("lists/lists.mbt", [])
+    | "realax.ml" -> ("realax/realax.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =
