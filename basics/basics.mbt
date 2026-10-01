@@ -895,3 +895,9 @@ pub fn atoms(tm : Term) -> List[Term] raise {
 
   @lib.foldl((a, x, _) => a.prepend(x), @list.empty(), go(@lib.undefined(), tm))
 }
+
+///|
+/// The `genvar` counter (for differential tests of load order).
+pub fn genvar_counter() -> Int {
+  gcounter.val
+}

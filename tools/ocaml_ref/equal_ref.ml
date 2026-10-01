@@ -63,3 +63,7 @@ t "mk_primed_var" (fun () -> mk_primed_var [tm "x:num"; tm "x':num"] (tm "x:bool
 t "mk_primed_var_const" (fun () -> mk_primed_var [] (tm "c':bool") |> fun v -> mk_primed_var [] (mk_var("c", bool_ty)));;
 t "lhand" (fun () -> lhand (tm "(a:num) + b"));;
 t "genvar_after" (fun () -> genvar bool_ty);;
+th "COMB2_CONV_order" (fun () -> COMB2_CONV (fun _ -> failwith "left") (fun _ -> failwith "right") (tm "(f:num->num) c"));;
+th "BINOP_CONV_order" (fun () -> BINOP_CONV (fun t -> failwith (string_of_term t)) (tm "a + (b:num)"));;
+th "BINOP2_CONV_order" (fun () -> BINOP2_CONV (fun _ -> failwith "left") (fun _ -> failwith "right") (tm "a + (b:num)"));;
+th "COMB_CONV_genvar" (fun () -> COMB_CONV (fun t -> let v = genvar (type_of t) in failwith (fst(dest_var v))) (tm "(f:num->num) c"));;

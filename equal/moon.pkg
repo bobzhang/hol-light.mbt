@@ -7,6 +7,7 @@ import {
   "bobzhang/hol_light/printer",
   "bobzhang/hol_light/preterm",
   "moonbitlang/core/list",
+  "moonbitlang/core/encoding/utf8",
 }
 
 import {

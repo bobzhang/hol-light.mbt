@@ -255,7 +255,11 @@ pub fn land_conv(conv : Conv) -> Conv {
 pub fn comb2_conv(lconv : Conv, rconv : Conv) -> Conv {
   tm => {
     match tm {
-      Comb(l, r) => @kernel.mk_comb_rule(lconv(l), rconv(r))
+      Comb(l, r) => {
+        // `MK_COMB(lconv l, rconv r)`: OCaml evaluates the right one first.
+        let rth = rconv(r)
+        @kernel.mk_comb_rule(lconv(l), rth)
+      }
       _ => raise Failure("COMB2_CONV: Not a combination")
     }
   }
@@ -321,7 +325,9 @@ pub fn binop_conv(conv : Conv) -> Conv {
   tm => {
     let (lop, r) = @kernel.dest_comb(tm)
     let (op, l) = @kernel.dest_comb(lop)
-    @kernel.mk_comb_rule(ap_term(op, conv(l)), conv(r))
+    // OCaml evaluates the right argument of `MK_COMB(_, _)` first.
+    let rth = conv(r)
+    @kernel.mk_comb_rule(ap_term(op, conv(l)), rth)
   }
 }
 
@@ -331,7 +337,8 @@ pub fn binop2_conv(conv1 : Conv, conv2 : Conv) -> Conv {
   tm => {
     let (lop, r) = @kernel.dest_comb(tm)
     let (op, l) = @kernel.dest_comb(lop)
-    @kernel.mk_comb_rule(ap_term(op, conv1(l)), conv2(r))
+    let rth = conv2(r)
+    @kernel.mk_comb_rule(ap_term(op, conv1(l)), rth)
   }
 }
 
@@ -505,12 +512,13 @@ pub fn depth_binop_conv(op : Term, conv : Conv) -> Conv {
 ///|
 /// `PATH_CONV`: follow a path (`l` = rator, `r` = rand, otherwise body).
 pub fn path_conv(s : String, cnv : Conv) -> Conv {
-  let steps : Array[Char] = s.iter().collect()
+  // As upstream's `explode`, one step per byte of the path.
+  let steps = @utf8.encode(s)
   let mut c = cnv
   for i = steps.length() - 1; i >= 0; i = i - 1 {
     c = match steps[i] {
-      'l' => rator_conv(c)
-      'r' => rand_conv(c)
+      b'l' => rator_conv(c)
+      b'r' => rand_conv(c)
       _ => abs_conv(c)
     }
   }
@@ -671,6 +679,7 @@ pub fn cache_conv(conv : Conv) -> Conv {
 /// `PRINT_TERM_CONV`: print the term and return `|- t = t`.
 pub fn print_term_conv(t : Term) -> Thm raise {
   @printer.pp_print_qterm(@pp.std_formatter, t)
-  @pp.std_formatter.force_newline()
+  // `Format.printf "%a\n"` prints the newline as literal text.
+  @pp.std_formatter.print_string("\n")
   all_conv(t)
 }

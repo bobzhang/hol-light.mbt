@@ -57,3 +57,7 @@ mk_primed_var = x''
 mk_primed_var_const = c'
 lhand = a
 genvar_after = _7
+COMB2_CONV_order ! right
+BINOP_CONV_order ! b
+BINOP2_CONV_order ! right
+COMB_CONV_genvar ! _8

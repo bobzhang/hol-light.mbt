@@ -150,6 +150,27 @@ test "equal matches equal.ml" {
   })
   t("lhand", () => @equal.lhand(tm("(a:num) + b")))
   t("genvar_after", () => @basics.genvar(@kernel.bool_ty))
+  th("COMB2_CONV_order", () => {
+    @equal.comb2_conv(_ => raise Failure("left"), _ => raise Failure("right"))(
+      tm("(f:num->num) c"),
+    )
+  })
+  th("BINOP_CONV_order", () => {
+    @equal.binop_conv(t => raise Failure(@printer.string_of_term(t)))(
+      tm("a + (b:num)"),
+    )
+  })
+  th("BINOP2_CONV_order", () => {
+    @equal.binop2_conv(_ => raise Failure("left"), _ => raise Failure("right"))(
+      tm("a + (b:num)"),
+    )
+  })
+  th("COMB_CONV_genvar", () => {
+    @equal.comb_conv(t => {
+      let v = @basics.genvar(@kernel.type_of(t))
+      raise Failure(@kernel.dest_var(v).0)
+    })(tm("(f:num->num) c"))
+  })
   inspect(
     log.buf.to_string(),
     content=(
@@ -212,6 +233,10 @@ test "equal matches equal.ml" {
       #|mk_primed_var_const = c'
       #|lhand = a
       #|genvar_after = _7
+      #|COMB2_CONV_order ! right
+      #|BINOP_CONV_order ! b
+      #|BINOP2_CONV_order ! right
+      #|COMB_CONV_genvar ! _8
       #|
     ),
   )

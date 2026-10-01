@@ -50,6 +50,8 @@ pub fn parse_term(String) -> @kernel.Term raise
 
 pub fn parse_type(String) -> @kernel.HolType raise
 
+pub fn pgenvar_counter() -> Int
+
 pub fn[I, A] possibly((@list.List[I]) -> (A, @list.List[I]) raise) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise
 
 pub fn[I, A, S] rightbin((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) -> (S, @list.List[I]) raise, (S, A, A) -> A raise?, String) -> (@list.List[I]) -> (A, @list.List[I]) raise

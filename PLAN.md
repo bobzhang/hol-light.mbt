@@ -102,8 +102,31 @@ equal/ … drule/ tactics/ simp/ …   one package per layer, in hol.ml load ord
 theories/… generated or hand-ported theory scripts
 ```
 
-Theories register themselves in order through explicit `load_*()`
-functions, never through top-level side effects, so callers control loading.
+### Theory loading (decided with Codex guidance)
+
+MoonBit does not reliably evaluate side-effecting top-level `let`s (unused
+globals are dropped), and upstream's load-time effects are ordered:
+definitions register constants, quotations advance the type-variable and
+`GEN%PVAR` counters, and partially applied rules precompute theorems. So:
+
+- Each theory package has an idempotent `pub fn load() -> Unit raise`
+  with a state machine (`Unloaded`, `Loading`, `Loaded`, `Failed`). It loads
+  its dependencies at the same points as upstream's `needs`, then runs every
+  eager upstream computation in order: definitions, quotations, syntax
+  changes, closure set-up, and discarded results too. A failed load is
+  terminal: the environment is discarded, not retried.
+- Theorems and precomputed proof steps are stored in write-once
+  `@lib.Cell`s, exposed as typed accessors (`@bool.t_def()`). Rules are
+  plain functions that read those cells.
+- Effectful expressions are lowered to explicit temporaries in the pinned
+  OCaml 4.14 evaluation order: arguments and tuples right to left,
+  `let … and …` and `match (…)` left to right.
+- Load-fidelity tests compare, after loading each file in a fresh process:
+  the three counters (types, `GEN%PVAR`, `genvar`), `types()`,
+  `constants()`, `definitions()`, `axioms()`, warnings, and structural
+  theorem representations.
+- Startup optimization (proof-DAG replay through the kernel, never raw
+  theorem deserialization) comes after the eager baseline is measured.
 
 ## Proof scripts strategy
 
@@ -196,4 +219,5 @@ functions, never through top-level side effects, so callers control loading.
 - [ ] Phase 4: `equal/` is done (conversions as `Conv = (Term) -> Thm raise`
   closures, conversionals, depth conversions with upstream's exact `try`
   scopes, `CACHE_CONV` with OCaml closure-compare semantics in nets; it
-  matches equal.ml on 58 checks). Next: `bool`, `drule`, `tactics`, …
+  matches equal.ml on 62 checks, including callback order). Next: `bool`,
+  `drule`, `tactics`, …

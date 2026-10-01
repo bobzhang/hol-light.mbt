@@ -823,3 +823,9 @@ pub fn parse_term(s : String) -> Term raise {
     raise Failure("Unparsed input following term")
   }
 }
+
+///|
+/// The `GEN%PVAR` counter (for differential tests of load order).
+pub fn pgenvar_counter() -> Int {
+  pgen_counter.val
+}

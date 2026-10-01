@@ -52,6 +52,8 @@ pub let type_invention_warning : @ref.Ref[Bool]
 
 pub fn type_of_pretype(Pretype) -> @kernel.HolType raise
 
+pub fn type_var_counter() -> Int
+
 pub fn unhide_constant(String) -> Unit
 
 // Errors

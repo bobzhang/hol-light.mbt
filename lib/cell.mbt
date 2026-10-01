@@ -30,7 +30,12 @@ pub fn[T] Cell::get(self : Cell[T]) -> T {
 }
 
 ///|
+/// Set the value; aborts if it was already set (each load-time value is
+/// computed exactly once).
 pub fn[T] Cell::set(self : Cell[T], v : T) -> Unit {
+  if self.value is Some(_) {
+    abort("HOL Light: " + self.name + " set twice")
+  }
   self.value = Some(v)
 }
 

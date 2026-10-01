@@ -811,3 +811,9 @@ pub impl @lib.OCompare for Preterm with fn ocompare(self, other) {
 
 ///|
 pub extend Preterm with @lib.OCompare::{ocompare}
+
+///|
+/// The type-variable counter (for differential tests of load order).
+pub fn type_var_counter() -> Int {
+  tyv_num.val
+}
