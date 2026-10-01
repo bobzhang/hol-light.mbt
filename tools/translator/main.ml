@@ -31,6 +31,7 @@ module Main = struct
     | "ind_types.ml" -> ("ind_types/ind_types.mbt", [])
     | "lists.ml" -> ("lists/lists.mbt", [])
     | "realax.ml" -> ("realax/realax.mbt", [])
+    | "calc_int.ml" -> ("calc_int/calc_int.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =

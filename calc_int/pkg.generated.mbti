@@ -1,0 +1,100 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/calc_int"
+
+import {
+  "bobzhang/hol_light/compute",
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn dest_realintconst(@kernel.Term) -> @num.Num raise
+
+pub fn is_ratconst(@kernel.Term) -> Bool raise
+
+pub fn is_realintconst(@kernel.Term) -> Bool raise
+
+pub fn mk_realintconst(@num.Num) -> @kernel.Term raise
+
+pub fn rat_of_term(@kernel.Term) -> @num.Num raise
+
+pub fn real_abs_neg() -> @kernel.Thm
+
+pub fn real_abs_num() -> @kernel.Thm
+
+pub fn real_add_ac() -> @kernel.Thm
+
+pub fn real_add_rid() -> @kernel.Thm
+
+pub fn real_add_rinv() -> @kernel.Thm
+
+pub fn real_eq_add_lcancel() -> @kernel.Thm
+
+pub fn real_eq_add_rcancel() -> @kernel.Thm
+
+pub fn real_int_abs_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_int_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_int_compute_add_convs(@compute.Compset) -> Unit raise
+
+pub fn real_int_compute_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_int_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_int_ge_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_int_gt_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_int_le_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_int_lt_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_int_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_int_neg_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_int_pow_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_int_red_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_int_red_conv_list() -> @list.List[(@kernel.Term, (@kernel.Term) -> @kernel.Thm raise)]
+
+pub fn real_int_reduce_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_int_sub_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_le_lneg() -> @kernel.Thm
+
+pub fn real_le_neg2() -> @kernel.Thm
+
+pub fn real_le_rneg() -> @kernel.Thm
+
+pub fn real_mul_lneg() -> @kernel.Thm
+
+pub fn real_mul_lzero() -> @kernel.Thm
+
+pub fn real_mul_rneg() -> @kernel.Thm
+
+pub fn real_mul_rzero() -> @kernel.Thm
+
+pub fn real_neg_0() -> @kernel.Thm
+
+pub fn real_neg_add() -> @kernel.Thm
+
+pub fn real_neg_neg() -> @kernel.Thm
+
+pub fn real_of_num_pow() -> @kernel.Thm
+
+pub fn real_pow_neg() -> @kernel.Thm
+
+pub fn term_of_rat(@num.Num) -> @kernel.Term raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
