@@ -1,0 +1,39 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/records"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn define_auto_record_type(String) -> (@kernel.Thm, @kernel.Thm, @kernel.Thm) raise
+
+pub fn define_record_type(String) -> (@kernel.Thm, @kernel.Thm, @kernel.Thm) raise
+
+pub fn get_record_components(@kernel.Thm) -> @list.List[@kernel.Term] raise
+
+pub fn parse_record_specification(String) -> (String, @list.List[(String, @kernel.HolType)]) raise
+
+pub fn record_extensionally_valid_component_thms(@kernel.Thm, @kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn record_orthogonality_thms(@kernel.Thm, @kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn record_read_write_thms(@kernel.Thm, @kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn record_strongly_valid_component_thms(@kernel.Thm, @kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn record_valid_component_thms(@kernel.Thm, @kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn record_weakly_valid_component_thms(@kernel.Thm, @kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn the_record_types() -> @ref.Ref[@list.List[(String, (@list.List[(String, @kernel.HolType)], (@kernel.Thm, @kernel.Thm, @kernel.Thm)))]]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
