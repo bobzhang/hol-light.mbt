@@ -1,0 +1,309 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/products"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn card_cart() -> @kernel.Thm
+
+pub fn cong_nproduct() -> @kernel.Thm
+
+pub fn exp_nsum() -> @kernel.Thm
+
+pub fn has_size_cart() -> @kernel.Thm
+
+pub fn int_of_num_nproduct() -> @kernel.Thm
+
+pub fn int_pow_nsum() -> @kernel.Thm
+
+pub fn iproduct_abs() -> @kernel.Thm
+
+pub fn iproduct_add_split() -> @kernel.Thm
+
+pub fn iproduct_clauses_left() -> @kernel.Thm
+
+pub fn iproduct_clauses_numseg() -> @kernel.Thm
+
+pub fn iproduct_clauses_right() -> @kernel.Thm
+
+pub fn iproduct_closed() -> @kernel.Thm
+
+pub fn iproduct_closed_nonempty() -> @kernel.Thm
+
+pub fn iproduct_const() -> @kernel.Thm
+
+pub fn iproduct_const_numseg() -> @kernel.Thm
+
+pub fn iproduct_const_numseg_1() -> @kernel.Thm
+
+pub fn iproduct_delete() -> @kernel.Thm
+
+pub fn iproduct_delta() -> @kernel.Thm
+
+pub fn iproduct_eq() -> @kernel.Thm
+
+pub fn iproduct_eq_0() -> @kernel.Thm
+
+pub fn iproduct_eq_0_numseg() -> @kernel.Thm
+
+pub fn iproduct_eq_1() -> @kernel.Thm
+
+pub fn iproduct_eq_1_numseg() -> @kernel.Thm
+
+pub fn iproduct_eq_numseg() -> @kernel.Thm
+
+pub fn iproduct_image() -> @kernel.Thm
+
+pub fn iproduct_injection() -> @kernel.Thm
+
+pub fn iproduct_le() -> @kernel.Thm
+
+pub fn iproduct_le_1() -> @kernel.Thm
+
+pub fn iproduct_le_numseg() -> @kernel.Thm
+
+pub fn iproduct_mul() -> @kernel.Thm
+
+pub fn iproduct_mul_gen() -> @kernel.Thm
+
+pub fn iproduct_mul_numseg() -> @kernel.Thm
+
+pub fn iproduct_neg() -> @kernel.Thm
+
+pub fn iproduct_neg_numseg() -> @kernel.Thm
+
+pub fn iproduct_neg_numseg_1() -> @kernel.Thm
+
+pub fn iproduct_offset() -> @kernel.Thm
+
+pub fn iproduct_one() -> @kernel.Thm
+
+pub fn iproduct_pair() -> @kernel.Thm
+
+pub fn iproduct_pos_le() -> @kernel.Thm
+
+pub fn iproduct_pos_le_numseg() -> @kernel.Thm
+
+pub fn iproduct_pos_lt() -> @kernel.Thm
+
+pub fn iproduct_pos_lt_numseg() -> @kernel.Thm
+
+pub fn iproduct_reflect() -> @kernel.Thm
+
+pub fn iproduct_related() -> @kernel.Thm
+
+pub fn iproduct_related_nonempty() -> @kernel.Thm
+
+pub fn iproduct_restrict() -> @kernel.Thm
+
+pub fn iproduct_restrict_set() -> @kernel.Thm
+
+pub fn iproduct_sing() -> @kernel.Thm
+
+pub fn iproduct_sing_numseg() -> @kernel.Thm
+
+pub fn iproduct_superset() -> @kernel.Thm
+
+pub fn iproduct_support() -> @kernel.Thm
+
+pub fn iproduct_union() -> @kernel.Thm
+
+pub fn iproduct_univ() -> @kernel.Thm
+
+pub fn nproduct_add_split() -> @kernel.Thm
+
+pub fn nproduct_clauses_left() -> @kernel.Thm
+
+pub fn nproduct_clauses_numseg() -> @kernel.Thm
+
+pub fn nproduct_clauses_right() -> @kernel.Thm
+
+pub fn nproduct_closed() -> @kernel.Thm
+
+pub fn nproduct_closed_nonempty() -> @kernel.Thm
+
+pub fn nproduct_const() -> @kernel.Thm
+
+pub fn nproduct_const_numseg() -> @kernel.Thm
+
+pub fn nproduct_const_numseg_1() -> @kernel.Thm
+
+pub fn nproduct_delete() -> @kernel.Thm
+
+pub fn nproduct_delta() -> @kernel.Thm
+
+pub fn nproduct_eq() -> @kernel.Thm
+
+pub fn nproduct_eq_0() -> @kernel.Thm
+
+pub fn nproduct_eq_0_numseg() -> @kernel.Thm
+
+pub fn nproduct_eq_1() -> @kernel.Thm
+
+pub fn nproduct_eq_1_numseg() -> @kernel.Thm
+
+pub fn nproduct_eq_numseg() -> @kernel.Thm
+
+pub fn nproduct_fact() -> @kernel.Thm
+
+pub fn nproduct_image() -> @kernel.Thm
+
+pub fn nproduct_injection() -> @kernel.Thm
+
+pub fn nproduct_le() -> @kernel.Thm
+
+pub fn nproduct_le_numseg() -> @kernel.Thm
+
+pub fn nproduct_mul() -> @kernel.Thm
+
+pub fn nproduct_mul_gen() -> @kernel.Thm
+
+pub fn nproduct_mul_numseg() -> @kernel.Thm
+
+pub fn nproduct_offset() -> @kernel.Thm
+
+pub fn nproduct_one() -> @kernel.Thm
+
+pub fn nproduct_pair() -> @kernel.Thm
+
+pub fn nproduct_pos_lt() -> @kernel.Thm
+
+pub fn nproduct_pos_lt_numseg() -> @kernel.Thm
+
+pub fn nproduct_reflect() -> @kernel.Thm
+
+pub fn nproduct_related() -> @kernel.Thm
+
+pub fn nproduct_related_nonempty() -> @kernel.Thm
+
+pub fn nproduct_restrict() -> @kernel.Thm
+
+pub fn nproduct_restrict_set() -> @kernel.Thm
+
+pub fn nproduct_sing() -> @kernel.Thm
+
+pub fn nproduct_sing_numseg() -> @kernel.Thm
+
+pub fn nproduct_superset() -> @kernel.Thm
+
+pub fn nproduct_support() -> @kernel.Thm
+
+pub fn nproduct_union() -> @kernel.Thm
+
+pub fn nproduct_univ() -> @kernel.Thm
+
+pub fn polynomial_function_product() -> @kernel.Thm
+
+pub fn product_abs() -> @kernel.Thm
+
+pub fn product_add_split() -> @kernel.Thm
+
+pub fn product_clauses_left() -> @kernel.Thm
+
+pub fn product_clauses_numseg() -> @kernel.Thm
+
+pub fn product_clauses_right() -> @kernel.Thm
+
+pub fn product_closed() -> @kernel.Thm
+
+pub fn product_closed_nonempty() -> @kernel.Thm
+
+pub fn product_const() -> @kernel.Thm
+
+pub fn product_const_numseg() -> @kernel.Thm
+
+pub fn product_const_numseg_1() -> @kernel.Thm
+
+pub fn product_delete() -> @kernel.Thm
+
+pub fn product_delta() -> @kernel.Thm
+
+pub fn product_div() -> @kernel.Thm
+
+pub fn product_div_numseg() -> @kernel.Thm
+
+pub fn product_eq() -> @kernel.Thm
+
+pub fn product_eq_0() -> @kernel.Thm
+
+pub fn product_eq_0_numseg() -> @kernel.Thm
+
+pub fn product_eq_1() -> @kernel.Thm
+
+pub fn product_eq_1_numseg() -> @kernel.Thm
+
+pub fn product_eq_numseg() -> @kernel.Thm
+
+pub fn product_image() -> @kernel.Thm
+
+pub fn product_injection() -> @kernel.Thm
+
+pub fn product_inv() -> @kernel.Thm
+
+pub fn product_le() -> @kernel.Thm
+
+pub fn product_le_1() -> @kernel.Thm
+
+pub fn product_le_numseg() -> @kernel.Thm
+
+pub fn product_mul() -> @kernel.Thm
+
+pub fn product_mul_gen() -> @kernel.Thm
+
+pub fn product_mul_numseg() -> @kernel.Thm
+
+pub fn product_neg() -> @kernel.Thm
+
+pub fn product_neg_numseg() -> @kernel.Thm
+
+pub fn product_neg_numseg_1() -> @kernel.Thm
+
+pub fn product_offset() -> @kernel.Thm
+
+pub fn product_one() -> @kernel.Thm
+
+pub fn product_pair() -> @kernel.Thm
+
+pub fn product_pos_le() -> @kernel.Thm
+
+pub fn product_pos_le_numseg() -> @kernel.Thm
+
+pub fn product_pos_lt() -> @kernel.Thm
+
+pub fn product_pos_lt_numseg() -> @kernel.Thm
+
+pub fn product_reflect() -> @kernel.Thm
+
+pub fn product_related() -> @kernel.Thm
+
+pub fn product_related_nonempty() -> @kernel.Thm
+
+pub fn product_restrict() -> @kernel.Thm
+
+pub fn product_restrict_set() -> @kernel.Thm
+
+pub fn product_sing() -> @kernel.Thm
+
+pub fn product_sing_numseg() -> @kernel.Thm
+
+pub fn product_superset() -> @kernel.Thm
+
+pub fn product_support() -> @kernel.Thm
+
+pub fn product_union() -> @kernel.Thm
+
+pub fn product_univ() -> @kernel.Thm
+
+pub fn real_of_num_nproduct() -> @kernel.Thm
+
+pub fn real_pow_nsum() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
