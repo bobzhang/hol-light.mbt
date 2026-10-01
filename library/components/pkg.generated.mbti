@@ -1,0 +1,119 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/components"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn add_component_orthogonality_thms(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn add_component_read_write_thms(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn add_extensionally_valid_component_thms(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn add_strongly_valid_component_thms(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn add_valid_component_thms(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn add_weakly_valid_component_thms(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn component_alias_thms() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn component_compose() -> @kernel.Thm
+
+pub fn component_compose_assoc() -> @kernel.Thm
+
+pub fn component_eq() -> @kernel.Thm
+
+pub fn component_inj() -> @kernel.Thm
+
+pub fn component_orthogonality_thms() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn component_read_write_thms() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn component_tybij() -> @kernel.Thm
+
+pub fn compose_entirety() -> @kernel.Thm
+
+pub fn entirety() -> @kernel.Thm
+
+pub fn exists_component() -> @kernel.Thm
+
+pub fn extensionally_valid_component() -> @kernel.Thm
+
+pub fn extensionally_valid_component_entirety() -> @kernel.Thm
+
+pub fn extensionally_valid_component_thms() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn forall_component() -> @kernel.Thm
+
+pub fn orthogonal_components() -> @kernel.Thm
+
+pub fn orthogonal_components_sym() -> @kernel.Thm
+
+pub fn read() -> @kernel.Thm
+
+pub fn read_component_compose() -> @kernel.Thm
+
+pub fn read_def() -> @kernel.Thm
+
+pub fn read_entirety() -> @kernel.Thm
+
+pub fn read_over_write() -> @kernel.Thm
+
+pub fn read_write_component_compose() -> @kernel.Thm
+
+pub fn read_write_entirety() -> @kernel.Thm
+
+pub fn strongly_valid_component() -> @kernel.Thm
+
+pub fn strongly_valid_component_compose() -> @kernel.Thm
+
+pub fn strongly_valid_component_entirety() -> @kernel.Thm
+
+pub fn strongly_valid_component_thms() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn strongly_valid_imp_extensionally_valid_component() -> @kernel.Thm
+
+pub fn strongly_valid_imp_valid_component() -> @kernel.Thm
+
+pub fn valid_component() -> @kernel.Thm
+
+pub fn valid_component_compose() -> @kernel.Thm
+
+pub fn valid_component_entirety() -> @kernel.Thm
+
+pub fn valid_component_thms() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn valid_imp_weakly_valid_component() -> @kernel.Thm
+
+pub fn weak_read_over_write() -> @kernel.Thm
+
+pub fn weakly_valid_component() -> @kernel.Thm
+
+pub fn weakly_valid_component_entirety() -> @kernel.Thm
+
+pub fn weakly_valid_component_thms() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn write() -> @kernel.Thm
+
+pub fn write_component_compose() -> @kernel.Thm
+
+pub fn write_def() -> @kernel.Thm
+
+pub fn write_entirety() -> @kernel.Thm
+
+pub fn write_over_read() -> @kernel.Thm
+
+pub fn write_over_write() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
