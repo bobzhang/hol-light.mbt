@@ -26,6 +26,35 @@ Upstream: `.repos/hol-light` (jrh13/hol-light @ `cba9198`), not tracked in this 
   `gpt-6-astra`, reasoning effort high). Valid findings
   are fixed in a follow-up commit, and disagreements are escalated.
 
+## Trust boundary (kernel hardening)
+
+- **Encapsulation:** `HolType`/`Term` are read-only enums and `Thm` has
+  private fields. `tools/check_kernel_encapsulation.sh` checks that outside
+  code cannot construct or update them. Never add `FromJson`, `Default`,
+  arbitrary generators or deserializers for kernel types, because derives
+  run with kernel privileges. The trusted base also includes the MoonBit
+  compiler, `moonbitlang/core` and the absence of `%identity`/FFI casts
+  in linked code.
+- **Atomic extensions:** `new_basic_definition` and
+  `new_basic_type_definition` run every check and build their theorems
+  before publishing anything. Upstream can leave a registered type behind
+  when `absname == repname`; the port cannot.
+- **Fail closed:** the kernel's `abort` calls cover invariants that
+  well-typed terms guarantee (operators have function types, binders are
+  variables, clashes do not escape `inst`). None of them silently continues.
+- **Axioms:** as upstream, `new_axiom` is unrestricted (`mk_thm` relies on
+  it). `axioms()` is the audit trail, and `check_axioms` (only `INFINITY_AX`,
+  `SELECT_AX` and `ETA_AX` allowed) runs at the end of every theory-load
+  test.
+- **Traps:** a wasm trap (for example a stack overflow) during an extension
+  leaves the store as it was at the trap. A trapped instance must be
+  discarded, not resumed. Inference rules have no side effects, so a trap
+  there produces no theorem.
+- **Tests:** OCaml differential suite; failed-extension state snapshots;
+  property tests on generated well-typed terms (capture avoidance, type
+  preservation, alpha-order laws, sorted duplicate-free hypotheses); deep
+  binders, operator spines and types.
+
 ## Semantic hazards (OCaml → MoonBit)
 
 | Hazard | Decision |

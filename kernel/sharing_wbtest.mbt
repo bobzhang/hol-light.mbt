@@ -13,25 +13,10 @@ test "qmap keeps the unchanged suffix" {
 }
 
 ///|
-test "filter_share keeps the suffix after the last removed element" {
+test "filter_share returns the original list when nothing is removed" {
   let l = @list.List([1, 2, 3, 4])
-  let l1 = filter_share(x => x != 2, l)
-  @test.assert_eq(l1.to_array(), [1, 3, 4])
-  @test.assert_eq(physical_equal(suffixes(l1)[1], suffixes(l)[2]), true)
+  @test.assert_eq(filter_share(x => x != 2, l).to_array(), [1, 3, 4])
   @test.assert_eq(physical_equal(filter_share(_ => true, l), l), true)
-}
-
-///|
-test "filter_share applies the predicate from the last element" {
-  let seen = []
-  let _ = filter_share(
-    x => {
-      seen.push(x)
-      true
-    },
-    @list.List([1, 2, 3]),
-  )
-  @test.assert_eq(seen, [3, 2, 1])
 }
 
 ///|

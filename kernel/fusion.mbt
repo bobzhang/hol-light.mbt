@@ -47,36 +47,15 @@ fn[A] suffixes(l : @list.List[A]) -> Array[@list.List[A]] {
 }
 
 ///|
-/// `lib.ml`'s `filter`: keeps the original cells after the last removed
-/// element, and returns `l` itself when nothing is removed. As in OCaml, the
-/// predicate is applied from the last element to the first.
+/// `filter` that returns the original list when nothing is removed. Only
+/// used with pure predicates, so evaluation order and partial sharing are
+/// unobservable.
 fn[A] filter_share(p : (A) -> Bool, l : @list.List[A]) -> @list.List[A] {
-  let suf = suffixes(l)
-  let n = suf.length() - 1
-  let keep = Array::make(n, false)
-  for i = n - 1; i >= 0; i = i - 1 {
-    match suf[i] {
-      More(h, tail=_) => keep[i] = p(h)
-      Empty => ()
-    }
+  if l.all(p) {
+    l
+  } else {
+    l.filter(p)
   }
-  // Index after the last removed element: everything from there is shared.
-  let mut last_removed = -1
-  for i in 0..<n {
-    if !keep[i] {
-      last_removed = i
-    }
-  }
-  let mut acc = suf[last_removed + 1]
-  for i = last_removed - 1; i >= 0; i = i - 1 {
-    if keep[i] {
-      match suf[i] {
-        More(h, tail=_) => acc = acc.prepend(h)
-        Empty => ()
-      }
-    }
-  }
-  acc
 }
 
 ///|
@@ -156,11 +135,16 @@ pub fn get_type_arity(s : String) -> Int raise Failure {
 }
 
 ///|
-/// Declare a new type constant.
-pub fn new_type(name : String, arity : Int) -> Unit raise Failure {
+fn check_new_type(name : String) -> Unit raise Failure {
   if the_type_constants.val.any(entry => entry.0 == name) {
     failwith("new_type: type " + name + " has already been declared")
   }
+}
+
+///|
+/// Declare a new type constant.
+pub fn new_type(name : String, arity : Int) -> Unit raise Failure {
+  check_new_type(name)
   the_type_constants.val = the_type_constants.val.prepend((name, arity))
 }
 
@@ -276,11 +260,16 @@ pub fn get_const_type(s : String) -> HolType raise Failure {
 }
 
 ///|
-/// Declare a new constant.
-pub fn new_constant(name : String, ty : HolType) -> Unit raise Failure {
+fn check_new_constant(name : String) -> Unit raise Failure {
   if the_term_constants.val.any(entry => entry.0 == name) {
     failwith("new_constant: constant " + name + " has already been declared")
   }
+}
+
+///|
+/// Declare a new constant.
+pub fn new_constant(name : String, ty : HolType) -> Unit raise Failure {
+  check_new_constant(name)
   the_term_constants.val = the_term_constants.val.prepend((name, ty))
 }
 
@@ -474,8 +463,10 @@ fn vsubst_rec(ilist : @list.List[(Term, Term)], tm : Term) -> Term {
       if physical_equal(s1, s) {
         tm
       } else if ilist1.any(p => vfree_in(v, p.0) && vfree_in(p.1, s)) {
-        // `variant` cannot fail: `v` is a variable.
-        let v1 = variant(@list.singleton(s1), v) catch { _ => v }
+        // `variant` only fails on non-variables, and `v` is a binder.
+        let v1 = variant(@list.singleton(s1), v) catch {
+          _ => abort("vsubst: variant of a non-variable")
+        }
         Abs(v1, vsubst_rec(ilist1.prepend((v1, v)), s))
       } else {
         Abs(v, s1)
@@ -1025,24 +1016,37 @@ pub fn new_basic_type_definition(
     failwith("new_basic_type_definition: Predicate is not closed")
   }
   let tyvars = sort_types(type_vars_in_term(p))
-  new_type(tyname, tyvars.length()) catch {
+  check_new_type(tyname) catch {
     _ => failwith("new_basic_type_definition: Type already defined")
+  }
+  // Upstream registers the type and the abstraction constant before
+  // discovering that the two constant names coincide, and then fails with
+  // this message. Here it fails before any state changes.
+  if absname == repname {
+    failwith("new_constant: constant " + repname + " has already been declared")
   }
   let aty = Tyapp(tyname, tyvars)
   let rty = type_of(x)
   let absty = fun_ty(rty, aty)
   let repty = fun_ty(aty, rty)
-  new_constant(absname, absty)
   let abs = Const(absname, absty)
-  new_constant(repname, repty)
   let rep = Const(repname, repty)
   let a = Var("a", aty)
   let r = Var("r", rty)
-  (
-    { hyps: @list.empty(), concl: safe_mk_eq(Comb(abs, Comb(rep, a)), a), },
-    {
-      hyps: @list.empty(),
-      concl: safe_mk_eq(Comb(p, r), safe_mk_eq(Comb(rep, Comb(abs, r)), r)),
-    },
+  let th1 = {
+    hyps: @list.empty(),
+    concl: safe_mk_eq(Comb(abs, Comb(rep, a)), a),
+  }
+  let th2 = {
+    hyps: @list.empty(),
+    concl: safe_mk_eq(Comb(p, r), safe_mk_eq(Comb(rep, Comb(abs, r)), r)),
+  }
+  // Publish only after every check has passed and both theorems exist.
+  the_type_constants.val = the_type_constants.val.prepend(
+    (tyname, tyvars.length()),
   )
+  the_term_constants.val = the_term_constants.val
+    .prepend((absname, absty))
+    .prepend((repname, repty))
+  (th1, th2)
 }
