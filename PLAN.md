@@ -321,5 +321,16 @@ definitions register constants, quotations advance the type-variable and
   types (`_` for unknown parts), and type variable names past `TZ`.
   Generated packages also write `translated_names.txt` (a module member's
   qualified name -> its MoonBit name), which later translations consult,
-  so `A.f` and `B.f` stay distinct across packages. Next: `metis` and
-  `thecops`, then the theory files.
+  so `A.f` and `B.f` stay distinct across packages. `metis/` is done,
+  entirely translated (28k lines of MoonBit) and matches upstream on
+  METIS_TAC proofs (first-order, equality, lemmas, ASM_METIS_TAC). On the
+  way: functor applications are specialized before typechecking (each
+  `F (A)` becomes a structure aliasing the parameter to A followed by F's
+  body, with hygiene for free modules and values); Stdlib Map.Make and
+  Set.Make become wrappers over `omap`/`oset`, OCaml 4.14's Map/Set code
+  with an explicit comparison (checked to build Stdlib's exact trees and
+  call callbacks in the same order); OCaml 4.14's Random (with the MD5
+  seeding `Random.init` uses) and List.sort are ported exactly; module
+  members resolve through recorded module paths; exceptions get distinct
+  suberrors; lambdas with known types are annotated raising `fn`s.
+  Next: `thecops`, then the theory files.
