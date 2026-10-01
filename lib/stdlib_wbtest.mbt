@@ -52,3 +52,13 @@ test "list_sort compares like OCaml" {
     content="5,3 3,8 5,8 1,9 2,7 1,2 9,2 9,7 8,9 8,7 5,7 5,2 3,2",
   )
 }
+
+///|
+/// Shifts on OCaml's 63-bit ints (values from OCaml 4.14, 64-bit).
+test "shifts like OCaml" {
+  inspect(lsr(-1, 32), content="2147483647")
+  inspect(lsr(-8, 1), content="-4")
+  inspect(lsr(12, 2), content="3")
+  inspect(asr(-8, 40), content="-1")
+  inspect(lsl(3, 4), content="48")
+}

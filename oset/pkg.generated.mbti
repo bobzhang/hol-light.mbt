@@ -125,6 +125,8 @@ pub(all) enum Enumeration[TA] {
   End
   More(TA, T[TA], Enumeration[TA])
 } derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare] @lib.OCompare for Enumeration[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for Enumeration[TA]
 
 pub(all) enum SplitBis[TA] {
   Split_found
@@ -135,6 +137,8 @@ pub(all) enum T[TA] {
   Empty
   Node(T[TA], TA, T[TA], Int)
 } derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare] @lib.OCompare for T[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for T[TA]
 
 // Type aliases
 

@@ -97,13 +97,36 @@ module Lower = struct
      each have their own `t`) *)
   let own_types_id : (string, string * string) Hashtbl.t = Hashtbl.create 32
 
+  (* Modules of the file being translated: Ident.unique_name -> the full
+     module path (`["Metis_prover"; "Intmap"]`); an alias maps to the path
+     of its target. *)
+  let module_paths : (string, string list) Hashtbl.t = Hashtbl.create 64
+
+  let rec module_path (p : Path.t) =
+    match p with
+    | Path.Pident id ->
+        (match Hashtbl.find_opt module_paths (Ident.unique_name id) with
+         | Some l -> Some l
+         | None -> Some [ Ident.name id ] (* a module of an earlier phrase *))
+    | Path.Pdot (q, n) -> Option.map (fun l -> l @ [ n ]) (module_path q)
+    | Path.Papply _ -> None
+
+  (* the full name of a module member (`Metis_prover.Intmap.add`) *)
+  let member_name (p : Path.t) =
+    match p with
+    | Path.Pdot (q, n) -> Option.map (fun l -> String.concat "." (l @ [ n ])) (module_path q)
+    | _ -> None
+
   let own_type_path p =
     match p with
     | Path.Pident id ->
         (match Hashtbl.find_opt own_types_id (Ident.unique_name id) with
          | Some t -> Some (qualified t)
          | None -> own_type (Path.name p))
-    | _ -> own_type (Path.name p)
+    | _ ->
+        (match Option.bind (member_name p) own_type with
+         | Some t -> Some t
+         | None -> own_type (Path.name p))
 
   (* A constructor of a translated variant type is qualified by its type
      (`@pkg.Type::Ctor`): packages and types may share constructor names. *)
@@ -502,6 +525,11 @@ module Lower = struct
       | Path.Pident id -> Hashtbl.find_opt own_values (Ident.unique_name id)
       | _ -> None
     in
+    let own_unique =
+      match own_unique with
+      | Some _ -> own_unique
+      | None -> Option.bind (member_name path) (Hashtbl.find_opt own_by_name)
+    in
     match own_unique with
     | Some (mname, Accessor t) -> { hstmts = []; hexp = Atom (mname ^ "()"); hmty = t; hoty = Some oty }
     | Some (mname, Function t) -> { hstmts = []; hexp = Atom mname; hmty = t; hoty = Some oty }
@@ -866,7 +894,7 @@ module Lower = struct
   let record_type_name ty =
     match Types.get_desc (expand ty) with
     | Types.Tconstr (p, _, _) ->
-        (match own_type (Path.last p) with
+        (match own_type_path p with
          | Some t -> t
          | None -> unsupported Location.none "record type %s" (Path.name p))
     | _ -> unsupported Location.none "record type"
@@ -1281,8 +1309,8 @@ module Lower = struct
       | "print_string" -> (1, fun [ a ] _ -> Call (Atom "@pp.print_string", [ a ]))
       | "print_endline" -> (1, fun [ a ] _ -> Call (Atom "@pp.print_string", [ Binop ("+", a, Atom "\"\\n\"") ]))
       | "invalid_arg" -> (1, fun [ a ] _ -> Raise (Call (Atom "@num.InvalidArgument", [ a ])))
-      | "lsl" -> (2, fun [ a; b ] _ -> Binop ("<<", a, b))
-      | "asr" -> (2, fun [ a; b ] _ -> Binop (">>", a, b))
+      | "lsl" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.lsl", [ a; b ]))
+      | "asr" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.asr", [ a; b ]))
       | "lsr" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.lsr", [ a; b ]))
       | "land" -> (2, fun [ a; b ] _ -> Binop ("&", a, b))
       | "lor" -> (2, fun [ a; b ] _ -> Binop ("|", a, b))
@@ -1503,7 +1531,10 @@ module Lower = struct
                   ( ss,
                     Lam (List.map2 param names missing, ([], Call (v, List.map fst xs @ List.map (fun n -> Atom n) names))),
                     M.Fun (missing, r, raises) ))
-         | _ -> unsupported loc "applying a non-function value")
+         | _ ->
+             if Sys.getenv_opt "TRANSLATOR_DEBUG" <> None then
+               Printf.eprintf "non-function %s : %s\n%!" (string_of_exp v) (match show_mty t with Some s -> s | None -> "?");
+             unsupported loc "applying a non-function value")
 
   (* --- Constructors --- *)
 
@@ -1575,10 +1606,16 @@ module Lower = struct
                (* spread when the OCaml parameter is a k-tuple and the
                   first MoonBit parameter is not itself such a tuple *)
                ignore arity;
+               (* one tuple parameter spread over the group: the group is
+                  exactly the tuple's components, or (for instances) the
+                  first MoonBit parameter is not itself a k-tuple *)
                let tuple_mode =
                  k > 1
-                 && (match oty_param with Some a -> tuple_size a = k | None -> false)
-                 && (match List.hd g with M.Tuple ts -> List.length ts <> k | _ -> true)
+                 && (match oty_param with
+                     | Some a when tuple_size a = k ->
+                         (match mty_of (expand a) with M.Tuple cs when cs = g -> true | _ -> false)
+                         || (match List.hd g with M.Tuple ts -> List.length ts <> k | _ -> true)
+                     | _ -> false)
                in
                if tuple_mode || k <= 1 then begin
                  (* one OCaml parameter *)

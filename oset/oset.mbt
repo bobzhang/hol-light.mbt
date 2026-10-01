@@ -9,6 +9,53 @@ pub(all) enum T[TA] {
 } derive(Eq, Debug)
 
 ///|
+fn[TA] ocaml_rank_T(x : T[TA]) -> Int {
+  match x {
+    Empty => 0
+    Node(_, _, _, _) => 1000000
+  }
+}
+
+///|
+pub impl[TA : @lib.OCompare] @lib.OCompare for T[TA] with fn ocompare(
+  self,
+  other,
+) {
+  match (self, other) {
+    (Node(a0, a1, a2, a3), Node(b0, b1, b2, b3)) => {
+      let c = @lib.compare(a0, b0)
+      if c != 0 {
+        return c
+      }
+      let c = @lib.compare(a1, b1)
+      if c != 0 {
+        return c
+      }
+      let c = @lib.compare(a2, b2)
+      if c != 0 {
+        return c
+      }
+      @lib.compare(a3, b3)
+    }
+    _ => ocaml_rank_T(self).compare(ocaml_rank_T(other))
+  }
+}
+
+///|
+pub impl[TA : @lib.OHash] @lib.OHash for T[TA] with fn ohash_visit(self, h) {
+  match self {
+    Empty => h.int(0L)
+    Node(a0, a1, a2, a3) => {
+      h.block(0, 4)
+      h.field(a0)
+      h.field(a1)
+      h.field(a2)
+      h.field(a3)
+    }
+  }
+}
+
+///|
 /// `height`
 pub fn[TA] height(x1 : T[TA]) -> Int raise {
   match x1 {
@@ -506,6 +553,51 @@ pub(all) enum Enumeration[TA] {
   End
   More(TA, T[TA], Enumeration[TA])
 } derive(Eq, Debug)
+
+///|
+fn[TA] ocaml_rank_Enumeration(x : Enumeration[TA]) -> Int {
+  match x {
+    End => 0
+    More(_, _, _) => 1000000
+  }
+}
+
+///|
+pub impl[TA : @lib.OCompare] @lib.OCompare for Enumeration[TA] with fn ocompare(
+  self,
+  other,
+) {
+  match (self, other) {
+    (More(a0, a1, a2), More(b0, b1, b2)) => {
+      let c = @lib.compare(a0, b0)
+      if c != 0 {
+        return c
+      }
+      let c = @lib.compare(a1, b1)
+      if c != 0 {
+        return c
+      }
+      @lib.compare(a2, b2)
+    }
+    _ => ocaml_rank_Enumeration(self).compare(ocaml_rank_Enumeration(other))
+  }
+}
+
+///|
+pub impl[TA : @lib.OHash] @lib.OHash for Enumeration[TA] with fn ohash_visit(
+  self,
+  h,
+) {
+  match self {
+    End => h.int(0L)
+    More(a0, a1, a2) => {
+      h.block(0, 3)
+      h.field(a0)
+      h.field(a1)
+      h.field(a2)
+    }
+  }
+}
 
 ///|
 /// `cons_enum`

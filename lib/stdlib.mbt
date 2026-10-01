@@ -2,9 +2,25 @@
 // (strings as UTF-8 byte sequences, Invalid_argument on bad indices).
 
 ///|
-/// `lsr`: logical shift right.
+/// `lsl` on OCaml's 63-bit ints (truncated to 32 bits; MoonBit would mask
+/// the shift count instead).
+pub fn lsl(x : Int, n : Int) -> Int {
+  (x.to_int64() << n).to_int()
+}
+
+///|
+/// `lsr`: logical shift right of the 63-bit value (`(-1) lsr 32` is
+/// `2147483647`, as in OCaml).
 pub fn lsr(x : Int, n : Int) -> Int {
-  (x.reinterpret_as_uint() >> n).reinterpret_as_int()
+  ((x.to_int64() & 0x7FFFFFFFFFFFFFFFL).reinterpret_as_uint64() >> n)
+  .reinterpret_as_int64()
+  .to_int()
+}
+
+///|
+/// `asr` on OCaml's 63-bit ints.
+pub fn asr(x : Int, n : Int) -> Int {
+  (x.to_int64() >> n).to_int()
 }
 
 ///|
@@ -26,28 +42,42 @@ pub fn string_length(s : String) -> Int {
 }
 
 ///|
-/// `String.get s i`: the byte at `i`.
-pub fn string_get(s : String, i : Int) -> Char raise {
-  let b = @utf8.encode(s)
-  if i < 0 || i >= b.length() {
-    raise @num.InvalidArgument("index out of bounds")
+/// OCaml strings are bytes, ours Unicode text: byte-level operations are
+/// exact on ASCII and refuse (loudly) to split or build other characters.
+fn ascii_only(s : String, what : String) -> Unit {
+  for c in s {
+    if c.to_int() >= 128 {
+      abort("\{what}: byte-level operation on a non-ASCII string")
+    }
   }
-  b[i].to_int().unsafe_to_char()
 }
 
 ///|
-/// `String.sub s start len` on UTF-8 bytes.
+/// `String.get s i`: the byte at `i`.
+pub fn string_get(s : String, i : Int) -> Char raise {
+  ascii_only(s, "String.get")
+  if i < 0 || i >= s.length() {
+    raise @num.InvalidArgument("index out of bounds")
+  }
+  s[i].unsafe_to_char()
+}
+
+///|
+/// `String.sub s start len`
 pub fn string_sub(s : String, start : Int, len : Int) -> String raise {
-  let b = @utf8.encode(s)
-  if start < 0 || len < 0 || start > b.length() - len {
+  ascii_only(s, "String.sub")
+  if start < 0 || len < 0 || start > s.length() - len {
     raise @num.InvalidArgument("String.sub / Bytes.sub")
   }
-  @utf8.decode_lossy(b[start:start + len])
+  s.view(start_offset=start, end_offset=start + len).to_string()
 }
 
 ///|
 /// `String.make n c`
 pub fn string_make(n : Int, c : Char) -> String raise {
+  if c.to_int() >= 128 {
+    abort("String.make: non-ASCII byte")
+  }
   if n < 0 {
     raise @num.InvalidArgument("Bytes.create")
   }

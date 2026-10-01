@@ -9,6 +9,61 @@ pub(all) enum T[TA, TB] {
 } derive(Eq, Debug)
 
 ///|
+fn[TA, TB] ocaml_rank_T(x : T[TA, TB]) -> Int {
+  match x {
+    Empty => 0
+    Node(_, _, _, _, _) => 1000000
+  }
+}
+
+///|
+pub impl[TA : @lib.OCompare, TB : @lib.OCompare] @lib.OCompare for T[TA, TB] with fn ocompare(
+  self,
+  other,
+) {
+  match (self, other) {
+    (Node(a0, a1, a2, a3, a4), Node(b0, b1, b2, b3, b4)) => {
+      let c = @lib.compare(a0, b0)
+      if c != 0 {
+        return c
+      }
+      let c = @lib.compare(a1, b1)
+      if c != 0 {
+        return c
+      }
+      let c = @lib.compare(a2, b2)
+      if c != 0 {
+        return c
+      }
+      let c = @lib.compare(a3, b3)
+      if c != 0 {
+        return c
+      }
+      @lib.compare(a4, b4)
+    }
+    _ => ocaml_rank_T(self).compare(ocaml_rank_T(other))
+  }
+}
+
+///|
+pub impl[TA : @lib.OHash, TB : @lib.OHash] @lib.OHash for T[TA, TB] with fn ohash_visit(
+  self,
+  h,
+) {
+  match self {
+    Empty => h.int(0L)
+    Node(a0, a1, a2, a3, a4) => {
+      h.block(0, 5)
+      h.field(a0)
+      h.field(a1)
+      h.field(a2)
+      h.field(a3)
+      h.field(a4)
+    }
+  }
+}
+
+///|
 /// `height`
 pub fn[TA, TB] height(x1 : T[TA, TB]) -> Int raise {
   match x1 {
@@ -884,6 +939,56 @@ pub(all) enum Enumeration[TA, TB] {
   End
   More(TA, TB, T[TA, TB], Enumeration[TA, TB])
 } derive(Eq, Debug)
+
+///|
+fn[TA, TB] ocaml_rank_Enumeration(x : Enumeration[TA, TB]) -> Int {
+  match x {
+    End => 0
+    More(_, _, _, _) => 1000000
+  }
+}
+
+///|
+pub impl[TA : @lib.OCompare, TB : @lib.OCompare] @lib.OCompare for Enumeration[
+  TA,
+  TB,
+] with fn ocompare(self, other) {
+  match (self, other) {
+    (More(a0, a1, a2, a3), More(b0, b1, b2, b3)) => {
+      let c = @lib.compare(a0, b0)
+      if c != 0 {
+        return c
+      }
+      let c = @lib.compare(a1, b1)
+      if c != 0 {
+        return c
+      }
+      let c = @lib.compare(a2, b2)
+      if c != 0 {
+        return c
+      }
+      @lib.compare(a3, b3)
+    }
+    _ => ocaml_rank_Enumeration(self).compare(ocaml_rank_Enumeration(other))
+  }
+}
+
+///|
+pub impl[TA : @lib.OHash, TB : @lib.OHash] @lib.OHash for Enumeration[TA, TB] with fn ohash_visit(
+  self,
+  h,
+) {
+  match self {
+    End => h.int(0L)
+    More(a0, a1, a2, a3) => {
+      h.block(0, 4)
+      h.field(a0)
+      h.field(a1)
+      h.field(a2)
+      h.field(a3)
+    }
+  }
+}
 
 ///|
 /// `cons_enum`

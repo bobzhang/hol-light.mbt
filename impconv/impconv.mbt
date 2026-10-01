@@ -179,6 +179,44 @@ pub(all) enum FoNetsT[TA] {
 } derive(Eq, Debug)
 
 ///|
+fn[TA] ocaml_rank_FoNetsT(x : FoNetsT[TA]) -> Int {
+  match x {
+    Netnode(_, _) => 1000000
+  }
+}
+
+///|
+pub impl[TA : @lib.OCompare] @lib.OCompare for FoNetsT[TA] with fn ocompare(
+  self,
+  other,
+) {
+  match (self, other) {
+    (Netnode(a0, a1), Netnode(b0, b1)) => {
+      let c = @lib.compare(a0, b0)
+      if c != 0 {
+        return c
+      }
+      @lib.compare(a1, b1)
+    }
+    _ => ocaml_rank_FoNetsT(self).compare(ocaml_rank_FoNetsT(other))
+  }
+}
+
+///|
+pub impl[TA : @lib.OHash] @lib.OHash for FoNetsT[TA] with fn ohash_visit(
+  self,
+  h,
+) {
+  match self {
+    Netnode(a0, a1) => {
+      h.block(0, 2)
+      h.field(a0)
+      h.field(a1)
+    }
+  }
+}
+
+///|
 /// `t`
 pub(all) enum VarianceT {
   Co

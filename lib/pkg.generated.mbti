@@ -27,6 +27,8 @@ pub fn[A] array_make(Int, A) -> FixedArray[A] raise
 
 pub fn[A] array_set(FixedArray[A], Int, A) -> Unit raise
 
+pub fn asr(Int, Int) -> Int
+
 pub fn[A : OCompare, B] assoc(A, @list.List[(A, B)]) -> B raise
 
 pub fn[A : OCompare, B] assocd(A, @list.List[(A, B)], B) -> B
@@ -182,6 +184,8 @@ pub fn[A, B] list_rev_map((A) -> B raise?, @list.List[A]) -> @list.List[B] raise
 pub fn[A] list_sort((A, A) -> Int raise?, @list.List[A]) -> @list.List[A] raise?
 
 pub fn[A, B] list_split(@list.List[(A, B)]) -> (@list.List[A], @list.List[B])
+
+pub fn lsl(Int, Int) -> Int
 
 pub fn lsr(Int, Int) -> Int
 

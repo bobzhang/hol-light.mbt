@@ -24,6 +24,7 @@ module Main = struct
     let out, hand = manifest target in
     Names.root := root;
     Loader.stdlib_dir := Filename.concat root "tools/translator/stdlib";
+    Functors.stdlib_dir := !Loader.stdlib_dir;
     Lower.current_file := target;
     Lower.current_pkg := Filename.remove_extension (Filename.basename out);
     List.iter

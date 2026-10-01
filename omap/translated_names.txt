@@ -50,3 +50,5 @@ Ocaml_map.singleton singleton
 Ocaml_map.split split
 Ocaml_map.union union
 Ocaml_map.update update
+type:Ocaml_map.enumeration Enumeration
+type:Ocaml_map.t T

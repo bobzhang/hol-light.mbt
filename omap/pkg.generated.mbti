@@ -2,6 +2,7 @@
 package "bobzhang/hol_light/omap"
 
 import {
+  "bobzhang/hol_light/lib",
   "moonbitlang/core/debug",
   "moonbitlang/core/list",
 }
@@ -116,11 +117,15 @@ pub(all) enum Enumeration[TA, TB] {
   End
   More(TA, TB, T[TA, TB], Enumeration[TA, TB])
 } derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare, TB : @lib.OCompare] @lib.OCompare for Enumeration[TA, TB]
+pub impl[TA : @lib.OHash, TB : @lib.OHash] @lib.OHash for Enumeration[TA, TB]
 
 pub(all) enum T[TA, TB] {
   Empty
   Node(T[TA, TB], TA, TB, T[TA, TB], Int)
 } derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare, TB : @lib.OCompare] @lib.OCompare for T[TA, TB]
+pub impl[TA : @lib.OHash, TB : @lib.OHash] @lib.OHash for T[TA, TB]
 
 // Type aliases
 

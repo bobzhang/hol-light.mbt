@@ -25,6 +25,8 @@ pub fn target_rewrite_tac(@list.List[@kernel.Thm]) -> ((@kernel.Thm) -> (((@list
 pub(all) enum FoNetsT[TA] {
   Netnode(@list.List[(FoNetsTermLabel, FoNetsT[TA])], @list.List[TA])
 } derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare] @lib.OCompare for FoNetsT[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for FoNetsT[TA]
 
 pub(all) enum FoNetsTermLabel {
   Vnet(Int)

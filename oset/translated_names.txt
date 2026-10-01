@@ -54,3 +54,6 @@ Ocaml_set.subset subset
 Ocaml_set.try_concat try_concat
 Ocaml_set.try_join try_join
 Ocaml_set.union union
+type:Ocaml_set.enumeration Enumeration
+type:Ocaml_set.split_bis SplitBis
+type:Ocaml_set.t T
