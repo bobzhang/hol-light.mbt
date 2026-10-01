@@ -48,6 +48,14 @@ module Prov = struct
 end
 
 module Loader = struct
+  (* OCaml Stdlib replacements (e.g. ocaml_map.ml) live in this directory
+     instead of the HOL Light tree *)
+  let stdlib_dir = ref ""
+
+  let source ~hol file =
+    if String.length file > 6 && String.sub file 0 6 = "ocaml_" then Filename.concat !stdlib_dir file
+    else Filename.concat hol file
+
   let phrases file =
     let ic = open_in file in
     let lb = Lexing.from_channel ic in
@@ -100,13 +108,15 @@ module Loader = struct
               tstr.Typedtree.str_items
         | Parsetree.Ptop_dir _ ->
             ignore (Toploop.execute_phrase false Format.err_formatter p))
-      (phrases (Filename.concat hol file))
+      (phrases (source ~hol file))
 end
 
 module Names = struct
   (* Upstream file -> MoonBit package. *)
   let package_of_file = function
     | "lib.ml" -> Some "lib"
+    | "ocaml_map.ml" -> Some "omap"
+    | "ocaml_set.ml" -> Some "oset"
     | "fusion.ml" -> Some "kernel"
     | "basics.ml" -> Some "basics"
     | "nets.ml" -> Some "nets"
@@ -270,7 +280,7 @@ module Survey = struct
 end
 
 module Translator = struct
-  let prefix = [ "lib.ml"; "fusion.ml"; "basics.ml"; "nets.ml"; "printer.ml";
+  let prefix = [ "ocaml_map.ml"; "ocaml_set.ml"; "lib.ml"; "fusion.ml"; "basics.ml"; "nets.ml"; "printer.ml";
                  "preterm.ml"; "parser.ml"; "equal.ml"; "bool.ml"; "drule.ml";
                  "tactics.ml"; "itab.ml"; "simp.ml"; "theorems.ml";
                  "ind_defs.ml"; "class.ml"; "trivia.ml"; "canon.ml";

@@ -19,6 +19,14 @@ pub fn[K : OCompare + OHash, V] apply_opt(Func[K, V], K) -> V?
 
 pub fn[K : OCompare + OHash, V] applyd(Func[K, V], (K) -> V raise?, K) -> V raise?
 
+pub fn[A] array_get(FixedArray[A], Int) -> A raise
+
+pub fn[A] array_length(FixedArray[A]) -> Int
+
+pub fn[A] array_make(Int, A) -> FixedArray[A] raise
+
+pub fn[A] array_set(FixedArray[A], Int, A) -> Unit raise
+
 pub fn[A : OCompare, B] assoc(A, @list.List[(A, B)]) -> B raise
 
 pub fn[A : OCompare, B] assocd(A, @list.List[(A, B)], B) -> B
@@ -75,7 +83,11 @@ pub fn[A] flat(@list.List[@list.List[A]]) -> @list.List[A]
 
 pub fn[A, B, C] flip((A, B) -> C raise?, B, A) -> C raise?
 
+pub fn float_log(Double) -> Double
+
 pub fn float_neg(Double) -> Double
+
+pub fn float_pow(Double, Double) -> Double
 
 pub fn[A, B] fold_left((A, B) -> A raise?, A, @list.List[B]) -> A raise?
 
@@ -171,6 +183,8 @@ pub fn[A] list_sort((A, A) -> Int raise?, @list.List[A]) -> @list.List[A] raise?
 
 pub fn[A, B] list_split(@list.List[(A, B)]) -> (@list.List[A], @list.List[B])
 
+pub fn lsr(Int, Int) -> Int
+
 pub fn[A, B] map((A) -> B raise?, @list.List[A]) -> @list.List[B] raise?
 
 pub fn[A, B, C] map2((A, B) -> C raise?, @list.List[A], @list.List[B]) -> @list.List[C] raise
@@ -253,9 +267,19 @@ pub fn[A] sort((A, A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
 
 pub fn[A, B] splitlist((A) -> (B, A) raise, A) -> (@list.List[B], A) raise
 
+pub fn string_concat(String, @list.List[String]) -> String
+
+pub fn string_get(String, Int) -> Char raise
+
+pub fn string_length(String) -> Int
+
+pub fn string_make(Int, Char) -> String raise
+
 pub fn string_of_float(Double) -> String
 
 pub fn string_of_int(Int) -> String
+
+pub fn string_sub(String, Int, Int) -> String raise
 
 pub fn[A] striplist((A) -> (A, A) raise, A) -> @list.List[A] raise
 

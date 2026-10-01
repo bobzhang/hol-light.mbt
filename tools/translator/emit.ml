@@ -147,9 +147,46 @@ module Emit = struct
       (mname, match mty with M.Fun _ -> Function mty | _ -> Accessor mty)
 
   (* `let x = e` -> a cell, an accessor (or wrapper) and a load step *)
+  (* An expression OCaml generalizes (no effects, nothing allocated that
+     identity could observe): a path, constant, or constructor of such. *)
+  let rec syntactic_value (e : expression) =
+    match e.exp_desc with
+    | Texp_ident _ | Texp_constant _ -> true
+    | Texp_construct (_, _, args) -> List.for_all syntactic_value args
+    | Texp_tuple es -> List.for_all syntactic_value es
+    | _ -> false
+
+  (* A polymorphic value (`let empty = Empty`, `let choose = min_binding`):
+     MoonBit globals are monomorphic, so it becomes a generic accessor, or
+     for a function a generic wrapper (eta-expansion is safe: no effects). *)
+  let emit_poly_value ?id oname mname (e : expression) =
+    let mty = mty_of e.exp_type in
+    let stmts, x, _ = lower ~expect:mty e in
+    if stmts <> [] then unsupported e.exp_loc "polymorphic value with effects";
+    let ty = show_ty e.exp_type in
+    let body_text = string_of_exp x in
+    (match arrow e.exp_type with
+     | Some (a, b) ->
+         let text =
+           Printf.sprintf "\n///|\n/// `%s`\npub fn%s %s(x : %s) -> %s raise {\n  (%s)(x)\n}\n" oname
+             (generics_of ~body:body_text ty) mname (show_ty a) (paren_fn (show_ty b)) body_text
+         in
+         add_decl (fun () -> text)
+     | None ->
+         let text =
+           Printf.sprintf "\n///|\n/// `%s`\npub fn%s %s() -> %s {\n  %s\n}\n" oname
+             (generics_of ~body:body_text ty) mname ty body_text
+         in
+         add_decl (fun () -> text));
+    let entry = (mname, match mty with M.Fun _ -> Function mty | _ -> Accessor mty) in
+    register_own oname entry;
+    match id with Some id -> Hashtbl.replace own_values (Ident.unique_name id) entry | None -> ()
+
   let emit_value ?id oname (e : expression) =
     Hashtbl.reset tyvar_names;
     let mname = fresh_top oname in
+    if syntactic_value e && tyvars_of_text (show_ty e.exp_type) <> [] then emit_poly_value ?id oname mname e
+    else
     let mty = mty_of e.exp_type in
     let stmts, x, _ = lower ~expect:mty e in
     add_step oname (stmts @ [ Do (Call (Atom (mname ^ "_c.set"), [ x ])) ]);
@@ -186,7 +223,17 @@ module Emit = struct
     List.iter
       (fun d ->
         Hashtbl.replace own_types_id (Ident.unique_name d.typ_id) (!current_pkg, mname d);
-        if prefix = "" then Hashtbl.replace own_types (Ident.name d.typ_id) (!current_pkg, mname d)
+        if prefix = "" then begin
+          (* a module's types are known by qualified names only (a bare `t`
+             would capture every other `t`) *)
+          if !module_prefix = [] then Hashtbl.replace own_types (Ident.name d.typ_id) (!current_pkg, mname d);
+          (* in a module: also by every qualified form (`Term.term` inside
+             `Metis_prover`, `Metis_prover.Term.term` outside) *)
+          let rec suffixes = function [] -> [] | _ :: rest as l -> l :: suffixes rest in
+          List.iter
+            (fun mods -> Hashtbl.replace own_types (String.concat "." (mods @ [ Ident.name d.typ_id ])) (!current_pkg, mname d))
+            (suffixes (List.rev !module_prefix))
+        end
         else Hashtbl.replace own_types (prefix ^ "." ^ Ident.name d.typ_id) (!current_pkg, mname d))
       decls;
     List.iter
@@ -357,18 +404,27 @@ module Emit = struct
 
   (* register the types, constructors and exceptions of an already
      translated file being loaded as a prefix *)
+  let register_path : string list ref = ref []
+
   let rec register pkg (it : structure_item) =
     match it.str_desc with
     | Tstr_type (_, decls) ->
         List.iter
           (fun d ->
-            Hashtbl.replace own_types (Ident.name d.typ_id) (pkg, camel (Ident.name d.typ_id));
+            if !register_path = [] then Hashtbl.replace own_types (Ident.name d.typ_id) (pkg, camel (Ident.name d.typ_id));
+            let rec suffixes = function [] -> [] | _ :: rest as l -> l :: suffixes rest in
+            List.iter
+              (fun mods -> Hashtbl.replace own_types (String.concat "." (mods @ [ Ident.name d.typ_id ])) (pkg, camel (Ident.name d.typ_id)))
+              (suffixes (List.rev !register_path));
             match d.typ_kind with
             | Ttype_variant cds -> List.iter (fun cd -> Hashtbl.replace own_ctors (Ident.name cd.cd_id) pkg) cds
             | _ -> ())
           decls
     | Tstr_exception te -> Hashtbl.replace own_ctors (Ident.name te.tyexn_constructor.ext_id) pkg
-    | Tstr_module { mb_expr = { mod_desc = Tmod_structure str; _ }; _ } -> List.iter (register pkg) str.str_items
+    | Tstr_module { mb_id; mb_expr = { mod_desc = (Tmod_structure str | Tmod_constraint ({ mod_desc = Tmod_structure str; _ }, _, _, _)); _ }; _ } ->
+        let saved = !register_path in
+        register_path := (match mb_id with Some id -> Ident.name id | None -> "_") :: saved;
+        Fun.protect ~finally:(fun () -> register_path := saved) (fun () -> List.iter (register pkg) str.str_items)
     | _ -> ()
 
   let () =
@@ -466,8 +522,11 @@ module Emit = struct
   let output ~source ~out =
     let oc = open_out out in
     Printf.fprintf oc
-      "// Generated by tools/translator from %s; do not edit.\n// Regenerate with tools/ocaml_ref/translate.sh translate %s.\n%s\n///|\nfn load_steps() -> Unit raise {%s\n}\n"
-      source source (String.concat "" (List.rev_map (fun f -> f ()) !decls)) (Buffer.contents steps);
+      "// Generated by tools/translator from %s; do not edit.\n// Regenerate with tools/ocaml_ref/translate.sh translate %s.\n%s%s"
+      source source (String.concat "" (List.rev_map (fun f -> f ()) !decls))
+      (* a file of definitions only has nothing to load *)
+      (if Buffer.length steps = 0 then ""
+       else Printf.sprintf "\n///|\nfn load_steps() -> Unit raise {%s\n}\n" (Buffer.contents steps));
     close_out oc;
     (* module members' MoonBit names, for packages translated later
        (`A.f` and `B.f` cannot both be `f`) *)

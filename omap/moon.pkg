@@ -1,0 +1,11 @@
+import {
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+}
+
+warnings = "-unused_value-unused_trait_bound-unused_package-unused_error_type"
+
+import {
+  "bobzhang/hol_light/oset",
+} for "test"

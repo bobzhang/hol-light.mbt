@@ -572,14 +572,14 @@ pub fn fol_of_term(
   let consts = x17
   let tm = x18
   if @kernel.is_var(tm) && !@lib.mem(tm, consts) {
-    Fvar(fol_of_var(tm))
+    FolTerm::Fvar(fol_of_var(tm))
   } else {
     let (f, args) = @basics.strip_comb(tm)
     if @lib.mem(f, env) {
       raise Failure("fol_of_term: higher order")
     } else {
       let ff = fol_of_const(f)
-      Fnapp(
+      FolTerm::Fnapp(
         ff,
         @lib.map((x19 : @kernel.Term) => fol_of_term(env, consts, x19), args),
       )
@@ -644,23 +644,23 @@ pub fn fol_of_form(
       @lib.subtract(consts, @list.List([v])),
       bod,
     )
-    Forallq(fv, fbod)
+    FolForm::Forallq(fv, fbod)
   } catch {
     Failure(_) =>
       try {
         let (l, r) = @basics.dest_conj(tm)
         let fl = fol_of_form(env, consts, l)
         let fr = fol_of_form(env, consts, r)
-        Conj(fl, fr)
+        FolForm::Conj(fl, fr)
       } catch {
         Failure(_) =>
           try {
             let (l_1, r_1) = @basics.dest_disj(tm)
             let fl_1 = fol_of_form(env, consts, l_1)
             let fr_1 = fol_of_form(env, consts, r_1)
-            Disj(fl_1, fr_1)
+            FolForm::Disj(fl_1, fr_1)
           } catch {
-            Failure(_) => Atom(fol_of_literal(env, consts, tm))
+            Failure(_) => FolForm::Atom(fol_of_literal(env, consts, tm))
             e => raise e
           }
         e => raise e
@@ -674,8 +674,8 @@ pub fn fol_of_form(
 pub fn hol_of_term(x30 : FolTerm) -> @kernel.Term raise {
   let tm = x30
   match tm {
-    Fvar(v) => hol_of_var(v)
-    Fnapp(f, args) => {
+    FolTerm::Fvar(v) => hol_of_var(v)
+    FolTerm::Fnapp(f, args) => {
       let t31 = @lib.map(hol_of_term, args)
       @basics.list_mk_comb(hol_of_const(f), t31)
     }
@@ -710,8 +710,9 @@ pub fn fol_free_in(x37 : Int, x38 : FolTerm) -> Bool raise {
   let v = x37
   let tm = x38
   match tm {
-    Fvar(x) => x == v
-    Fnapp(_, lis) => @lib.exists((x39 : FolTerm) => fol_free_in(v, x39), lis)
+    FolTerm::Fvar(x) => x == v
+    FolTerm::Fnapp(_, lis) =>
+      @lib.exists((x39 : FolTerm) => fol_free_in(v, x39), lis)
   }
 }
 
@@ -724,13 +725,13 @@ pub fn fol_subst(
   let theta = x40
   let tm = x41
   match tm {
-    Fvar(v) => @lib.rev_assocd(v, theta, tm)
-    Fnapp(f, args) => {
+    FolTerm::Fvar(v) => @lib.rev_assocd(v, theta, tm)
+    FolTerm::Fnapp(f, args) => {
       let args_p = @lib.qmap((x42 : FolTerm) => fol_subst(theta, x42), args)
       if physical_equal(args_p, args) {
         tm
       } else {
-        Fnapp(f, args_p)
+        FolTerm::Fnapp(f, args_p)
       }
     }
   }
@@ -763,14 +764,14 @@ pub fn fol_subst_bump(
   let theta = x47
   let tm = x48
   match tm {
-    Fvar(v) =>
+    FolTerm::Fvar(v) =>
       if v < offinc() {
         let v_p = v + offset
-        @lib.rev_assocd(v_p, theta, Fvar(v_p))
+        @lib.rev_assocd(v_p, theta, FolTerm::Fvar(v_p))
       } else {
         @lib.rev_assocd(v, theta, tm)
       }
-    Fnapp(f, args) => {
+    FolTerm::Fnapp(f, args) => {
       let args_p = @lib.qmap(
         (x49 : FolTerm) => fol_subst_bump(offset, theta, x49),
         args,
@@ -778,7 +779,7 @@ pub fn fol_subst_bump(
       if physical_equal(args_p, args) {
         tm
       } else {
-        Fnapp(f, args_p)
+        FolTerm::Fnapp(f, args_p)
       }
     }
   }
@@ -816,7 +817,7 @@ pub fn istriv(
   let x = x55
   let t = x56
   match t {
-    Fvar(y) =>
+    FolTerm::Fvar(y) =>
       y == x ||
       (try {
         let t_p = @lib.rev_assoc(y, env)
@@ -825,7 +826,7 @@ pub fn istriv(
         Failure("find") => false
         e => raise e
       })
-    Fnapp(f, args) =>
+    FolTerm::Fnapp(f, args) =>
       @lib.exists((x57 : FolTerm) => istriv(env, x, x57), args) &&
       @lib.raise_error(Failure("cyclic"))
   }
@@ -844,7 +845,7 @@ pub fn fol_unify(
   let tm2 = x60
   let sofar = x61
   match (tm1, tm2) {
-    (Fnapp(f, fargs), Fnapp(g, gargs)) =>
+    (FolTerm::Fnapp(f, fargs), FolTerm::Fnapp(g, gargs)) =>
       if f != g {
         raise Failure("")
       } else {
@@ -857,7 +858,7 @@ pub fn fol_unify(
           sofar,
         )
       }
-    (_, Fvar(x)) => {
+    (_, FolTerm::Fvar(x)) => {
       let x_p = x + offset
       try {
         let tm2_p = @lib.rev_assoc(x_p, sofar)
@@ -872,7 +873,7 @@ pub fn fol_unify(
         e => raise e
       }
     }
-    (Fvar(x_1), _) =>
+    (FolTerm::Fvar(x_1), _) =>
       try {
         let tm1_p = @lib.rev_assoc(x_1, sofar)
         fol_unify(offset, tm1_p, tm2, sofar)
@@ -902,14 +903,14 @@ pub fn fol_eq(
   let tm2 = x67
   physical_equal(tm1, tm2) ||
   (match (tm1, tm2) {
-    (Fnapp(f, fargs), Fnapp(g, gargs)) =>
+    (FolTerm::Fnapp(f, fargs), FolTerm::Fnapp(g, gargs)) =>
       f == g &&
       @lib.forall2(
         (x68 : FolTerm, x69 : FolTerm) => fol_eq(insts, x68, x69),
         fargs,
         gargs,
       )
-    (_, Fvar(x)) =>
+    (_, FolTerm::Fvar(x)) =>
       try {
         let tm2_p = @lib.rev_assoc(x, insts)
         fol_eq(insts, tm1, tm2_p)
@@ -921,7 +922,7 @@ pub fn fol_eq(
           }
         e => raise e
       }
-    (Fvar(x_1), _) =>
+    (FolTerm::Fvar(x_1), _) =>
       try {
         let tm1_p = @lib.rev_assoc(x_1, insts)
         fol_eq(insts, tm1_p, tm2)
@@ -1085,7 +1086,7 @@ pub fn fol_subst_partial(
   let insts = x88
   let tm = x89
   match tm {
-    Fvar(v) =>
+    FolTerm::Fvar(v) =>
       try {
         let t = @lib.rev_assoc(v, insts)
         fol_subst_partial(insts, t)
@@ -1093,8 +1094,11 @@ pub fn fol_subst_partial(
         Failure("find") => tm
         e => raise e
       }
-    Fnapp(f, args) =>
-      Fnapp(f, @lib.map((x90 : FolTerm) => fol_subst_partial(insts, x90), args))
+    FolTerm::Fnapp(f, args) =>
+      FolTerm::Fnapp(
+        f,
+        @lib.map((x90 : FolTerm) => fol_subst_partial(insts, x90), args),
+      )
   }
 }
 
@@ -1541,7 +1545,7 @@ fn[TB, TC] expand_goal_l(
         ) => {
           let (gs, (newinsts, newoffset, newsize)) = x124
           let (locin, globin) = separate_insts(offset, pinsts, newinsts)
-          let g_p = Subgoal(g, gs, apprule, offset, locin)
+          let g_p = FolGoal::Subgoal(g, gs, apprule, offset, locin)
           if globin == insts && gs == @list.empty() {
             cont((g_p, (globin, newoffset, size))) catch {
               Failure(_) => raise Cut
@@ -2398,7 +2402,7 @@ fn step_16() -> Unit raise {
   ) -> @kernel.Thm raise {
     let insts = x211
     match x212 {
-      Subgoal(g, gs, (n, th), offset, locin) => {
+      FolGoal::Subgoal(g, gs, (n, th), offset, locin) => {
         let newins = @lib.itlist(
           (x213 : (FolTerm, Int), x214 : @list.List[(FolTerm, Int)]) => {
             let s215 = merge_inst(x213)

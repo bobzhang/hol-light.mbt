@@ -825,26 +825,30 @@ fn step_1() -> Unit raise {
     x133 : TypeAnnotedTermT,
   ) => {
     match x133 {
-      Var_(_, ty) => ty
-      Const_(_, ty_1, _) => ty_1
-      Comb_(_, _, ty_2) => ty_2
-      Abs_(_, _, ty_3) => ty_3
+      TypeAnnotedTermT::Var_(_, ty) => ty
+      TypeAnnotedTermT::Const_(_, ty_1, _) => ty_1
+      TypeAnnotedTermT::Comb_(_, _, ty_2) => ty_2
+      TypeAnnotedTermT::Abs_(_, _, ty_3) => ty_3
     }
   }
   fn of_term(x134 : @kernel.Term) -> TypeAnnotedTermT raise {
     match x134 {
-      Var(s, ty_4) => Var_(s, ty_4)
-      Const(s_1, ty_5) as t_11 => Const_(s_1, ty_5, t_11)
+      Var(s, ty_4) => TypeAnnotedTermT::Var_(s, ty_4)
+      Const(s_1, ty_5) as t_11 => TypeAnnotedTermT::Const_(s_1, ty_5, t_11)
       Comb(u_2, v_3) => {
         let u_p = of_term(u_2)
         let v_p = of_term(v_3)
-        Comb_(u_p, v_p, @basics.dest_fun_ty(type_of(u_p)).1)
+        TypeAnnotedTermT::Comb_(u_p, v_p, @basics.dest_fun_ty(type_of(u_p)).1)
       }
       Abs(x_17, b_1) => {
         let x_p_2 = of_term(x_17)
         let b_p = of_term(b_1)
         let t135 = type_of(b_p)
-        Abs_(x_p_2, b_p, @basics.mk_fun_ty(type_of(x_p_2), t135))
+        TypeAnnotedTermT::Abs_(
+          x_p_2,
+          b_p,
+          @basics.mk_fun_ty(type_of(x_p_2), t135),
+        )
       }
     }
   }
@@ -852,29 +856,33 @@ fn step_1() -> Unit raise {
     let t1_3 = x136
     let t2_5 = x137
     match (t1_3, t2_5) {
-      (Var_(s1, ty1), Var_(s2, ty2))
-      | (Const_(s1, ty1, _), Const_(s2, ty2, _)) => s1 == s2 && ty1 == ty2
-      (Comb_(u1, v1, _), Comb_(u2, v2, _)) => equal(u1, u2) && equal(v1, v2)
-      (Abs_(v1_1, b1, _), Abs_(v2_1, b2, _)) =>
+      (TypeAnnotedTermT::Var_(s1, ty1), TypeAnnotedTermT::Var_(s2, ty2))
+      | (
+        TypeAnnotedTermT::Const_(s1, ty1, _),
+        TypeAnnotedTermT::Const_(s2, ty2, _),
+      ) => s1 == s2 && ty1 == ty2
+      (TypeAnnotedTermT::Comb_(u1, v1, _), TypeAnnotedTermT::Comb_(u2, v2, _)) =>
+        equal(u1, u2) && equal(v1, v2)
+      (TypeAnnotedTermT::Abs_(v1_1, b1, _), TypeAnnotedTermT::Abs_(v2_1, b2, _)) =>
         equal(v1_1, v2_1) && equal(b1, b2)
       _ => false
     }
   }
   fn to_term(x138 : TypeAnnotedTermT) -> @kernel.Term raise {
     match x138 {
-      Var_(s_2, ty_6) => @kernel.mk_var(s_2, ty_6)
-      Const_(_, _, t_12) => t_12
-      Comb_(u_3, v_4, _) => {
+      TypeAnnotedTermT::Var_(s_2, ty_6) => @kernel.mk_var(s_2, ty_6)
+      TypeAnnotedTermT::Const_(_, _, t_12) => t_12
+      TypeAnnotedTermT::Comb_(u_3, v_4, _) => {
         let t139 = to_term(v_4)
         @kernel.mk_comb(to_term(u_3), t139)
       }
-      Abs_(v_5, b_2, _) => {
+      TypeAnnotedTermT::Abs_(v_5, b_2, _) => {
         let t140 = to_term(b_2)
         @kernel.mk_abs(to_term(v_5), t140)
       }
     }
   }
-  let dummy = Var_("", @kernel.aty)
+  let dummy = TypeAnnotedTermT::Var_("", @kernel.aty)
   fn find_term(
     x141 : (TypeAnnotedTermT) -> Bool raise,
     x142 : TypeAnnotedTermT,
@@ -885,8 +893,8 @@ fn step_1() -> Unit raise {
       t_13
     } else {
       match t_13 {
-        Abs_(_, b_3, _) => find_term(p_2, b_3)
-        Comb_(u_4, v_6, _) =>
+        TypeAnnotedTermT::Abs_(_, b_3, _) => find_term(p_2, b_3)
+        TypeAnnotedTermT::Comb_(u_4, v_6, _) =>
           find_term(p_2, u_4) catch {
             Failure(_) => find_term(p_2, v_6)
             _ => raise Failure("Annot.find_term")
@@ -923,9 +931,9 @@ fn step_1() -> Unit raise {
           let p_4 = x149
           let t_15 = x150
           match (p_4, t_15) {
-            (Comb(p1, p2), Comb_(t1_4, t2_6, _)) =>
+            (Comb(p1, p2), TypeAnnotedTermT::Comb_(t1_4, t2_6, _)) =>
               self__7(bnds, self__7(bnds, env, p1, t1_4), p2, t2_6)
-            (Abs(v_7, p_5), Abs_(v_p_1, t_16, _)) => {
+            (Abs(v_7, p_5), TypeAnnotedTermT::Abs_(v_p_1, t_16, _)) => {
               let t151 = type_of(v_p_1)
               let tyenv_p = @basics.type_match(
                 @kernel.type_of(v_7),
@@ -934,7 +942,7 @@ fn step_1() -> Unit raise {
               )
               self__7(bnds.prepend((v_p_1, v_7)), (tenv, tyenv_p), p_5, t_16)
             }
-            (Const(n, ty_7), Const_(n_p, ty_p, _)) =>
+            (Const(n, ty_7), TypeAnnotedTermT::Const_(n_p, ty_p, _)) =>
               if n != n_p {
                 fail_l(())
               } else {
@@ -952,8 +960,8 @@ fn step_1() -> Unit raise {
                 Failure(_) =>
                   if @lib.mem(v_8, lcs) {
                     match t_17 {
-                      Var_(n_p_1, ty_p_1) if n_p_1 == n_1 && ty_p_1 == ty_8 =>
-                        env
+                      TypeAnnotedTermT::Var_(n_p_1, ty_p_1) if n_p_1 == n_1 &&
+                        ty_p_1 == ty_8 => env
                       _ => fail_l(())
                     }
                   } else {
@@ -1079,7 +1087,7 @@ fn step_1() -> Unit raise {
       }
     }
   }
-  let empty_net = Netnode(@list.empty(), @list.empty())
+  let empty_net = FoNetsT::Netnode(@list.empty(), @list.empty())
   let label_to_store : (@list.List[@kernel.Term]) -> ((@kernel.Term) -> (
     FoNetsTermLabel,
     @list.List[@kernel.Term],
@@ -1090,7 +1098,7 @@ fn step_1() -> Unit raise {
       let (op, args) = @basics.strip_comb(t_19)
       let nargs = @lib.length(args)
       match op {
-        Const(n_2, _) => (Cnet(n_2, nargs), args)
+        Const(n_2, _) => (FoNetsTermLabel::Cnet(n_2, nargs), args)
         Abs(v_11, b_4) => {
           let b_p_1 = if @lib.mem(v_11, lcs_2) {
             @kernel.vsubst(
@@ -1100,10 +1108,11 @@ fn step_1() -> Unit raise {
           } else {
             b_4
           }
-          (Lnet(nargs), args.prepend(b_p_1))
+          (FoNetsTermLabel::Lnet(nargs), args.prepend(b_p_1))
         }
-        Var(n_3, _) if @lib.mem(op, lcs_2) => (Lcnet(n_3, nargs), args)
-        Var(_, _) => (Vnet(nargs), args)
+        Var(n_3, _) if @lib.mem(op, lcs_2) =>
+          (FoNetsTermLabel::Lcnet(n_3, nargs), args)
+        Var(_, _) => (FoNetsTermLabel::Vnet(nargs), args)
         _ => raise @lib.AssertFailure("tscript.ml:425:14")
       }
     }
@@ -1130,9 +1139,9 @@ fn step_1() -> Unit raise {
     let (op_1, args_1) = @basics.strip_comb(t_22)
     let nargs_1 = @lib.length(args_1)
     match op_1 {
-      Const(n_4, _) => (Cnet(n_4, nargs_1), args_1)
-      Abs(_, b_5) => (Lnet(nargs_1), args_1.prepend(b_5))
-      Var(n_5, _) => (Lcnet(n_5, nargs_1), args_1)
+      Const(n_4, _) => (FoNetsTermLabel::Cnet(n_4, nargs_1), args_1)
+      Abs(_, b_5) => (FoNetsTermLabel::Lnet(nargs_1), args_1.prepend(b_5))
+      Var(n_5, _) => (FoNetsTermLabel::Lcnet(n_5, nargs_1), args_1)
       Comb(_, _) => raise @lib.AssertFailure("tscript.ml:447:19")
     }
   }
@@ -1147,8 +1156,8 @@ fn step_1() -> Unit raise {
   }
   let neg : (VarianceT) -> VarianceT raise = (x191 : VarianceT) => {
     match x191 {
-      Co => Contra
-      Contra => Co
+      VarianceT::Co => VarianceT::Contra
+      VarianceT::Contra => VarianceT::Co
     }
   }
   let mkimp_common : (@kernel.Thm) -> ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise = (
@@ -1627,8 +1636,8 @@ fn step_1() -> Unit raise {
         let t_29 = x252
         let (th1_13, th2_12) = @bool.eq_imp_rule(c_18(t_29))
         match v_12 {
-          Co => th2_12
-          Contra => th1_13
+          VarianceT::Co => th2_12
+          VarianceT::Contra => th1_13
         }
       }
     }
@@ -1641,8 +1650,8 @@ fn step_1() -> Unit raise {
       let v_13 = x254
       let (t1_6, t2_8) = dest_binary_blind(@kernel.concl(th_26))
       match v_13 {
-        Co => t1_6
-        Contra => t2_8
+        VarianceT::Co => t1_6
+        VarianceT::Contra => t2_8
       }
     }
   }
@@ -1664,8 +1673,8 @@ fn step_1() -> Unit raise {
         let th_27 = x261
         let (t1_7, t2_9) = @basics.dest_imp(@kernel.concl(th_27))
         match v_14 {
-          Co => @bool.imp_trans(c_19(v_14)(t1_7), th_27)
-          Contra => @bool.imp_trans(th_27, c_19(v_14)(t2_9))
+          VarianceT::Co => @bool.imp_trans(c_19(v_14)(t1_7), th_27)
+          VarianceT::Contra => @bool.imp_trans(th_27, c_19(v_14)(t2_9))
         }
       }
     }
@@ -1696,8 +1705,8 @@ fn step_1() -> Unit raise {
     let th_28 = x267
     (x268 : VarianceT) => {
       match x268 {
-        Co => @drule.gen_part_match(@kernel.rand, th_28)
-        Contra => @drule.gen_part_match(@equal.lhand, th_28)
+        VarianceT::Co => @drule.gen_part_match(@kernel.rand, th_28)
+        VarianceT::Contra => @drule.gen_part_match(@equal.lhand, th_28)
       }
     }
   }
@@ -1710,7 +1719,7 @@ fn step_1() -> Unit raise {
     (x272 : @kernel.Thm) => {
       let th_29 = x272
       let t_31 = @kernel.concl(th_29)
-      @drule.match_mp(c_20(Contra)(t_31))(th_29)
+      @drule.match_mp(c_20(VarianceT::Contra)(t_31))(th_29)
     }
   }
   let impconv_tac : ((VarianceT) -> ((@kernel.Term) -> @kernel.Thm raise) raise) -> ((
@@ -1740,7 +1749,9 @@ fn step_1() -> Unit raise {
     (x274 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
       let (_, c_21) as g = x274
       let t275 = @tactics.try_tac(@tactics.accept_tac(@bool.truth()))
-      @tactics.then_tac(@tactics.match_mp_tac(cnv(Co)(c_21)), t275)(g)
+      @tactics.then_tac(@tactics.match_mp_tac(cnv(VarianceT::Co)(c_21)), t275)(
+        g,
+      )
     }
   }
   let imp_conv_of_ctx_imp_conv : (
@@ -1754,23 +1765,23 @@ fn step_1() -> Unit raise {
     let _ as c_24 = x286
     let t292 = diminish_l(c_24)
     let t290 = augment_l(c_24)
-    With_context(
+    ImpconvWithContext::With_context(
       (x287 : VarianceT) => {
         let v_17 = x287
         (x288 : @kernel.Term) => {
           let t_33 = x288
           let (t1_8, t2_10) = @basics.dest_conj(t_33)
           match v_17 {
-            Co =>
+            VarianceT::Co =>
               try {
-                let th1_14 = apply_l(c_24)(Co)(t1_8)
+                let th1_14 = apply_l(c_24)(VarianceT::Co)(t1_8)
                 try {
-                  let t1_p = imp_conv_outcome(th1_14)(Co)
+                  let t1_p = imp_conv_outcome(th1_14)(VarianceT::Co)
                   let t289 = ((x281, x282, x283, x284) => {
                     apply_with_context_l(
                       disch_conj, strip_conj_1, x281, x282, x283, x284,
                     )
-                  })(c_24, t1_p, Co, t2_10)
+                  })(c_24, t1_p, VarianceT::Co, t2_10)
                   mkimp_conj_co_ctxt(th1_14)(t289)
                 } catch {
                   Failure(_) => mkimpl_conj_co_ctxt(th1_14)(t2_10)
@@ -1783,20 +1794,24 @@ fn step_1() -> Unit raise {
                       apply_with_context_l(
                         disch_conj, strip_conj_1, x281, x282, x283, x284,
                       )
-                    })(c_24, t1_8, Co, t2_10),
+                    })(c_24, t1_8, VarianceT::Co, t2_10),
                   )
                 e => raise e
               }
-            Contra =>
+            VarianceT::Contra =>
               try {
                 let t2s = remove(strip_conj_1(t2_10))(t1_8)
-                let th1_15 = apply_l(augment_l(c_24)(t2s))(Contra)(t1_8)
+                let th1_15 = apply_l(augment_l(c_24)(t2s))(VarianceT::Contra)(
+                  t1_8,
+                )
                 try {
-                  let t1_p_1 = imp_conv_outcome(th1_15)(Contra)
+                  let t1_p_1 = imp_conv_outcome(th1_15)(VarianceT::Contra)
                   let t1s = strip_conj_1(t1_8)
                   let t1s_p = strip_conj_1(t1_p_1)
                   let t1s_p_p = union(t1s, t1s_p)
-                  let th2_13 = apply_l(augment_l(c_24)(t1s_p_p))(Contra)(t2_10)
+                  let th2_13 = apply_l(augment_l(c_24)(t1s_p_p))(
+                    VarianceT::Contra,
+                  )(t2_10)
                   let th2_p = disch_conj(t1_8, disch_conj(t1_p_1, th2_13))
                   mkimp_conj_contra_ctxt(disch_conj(t2_10, th1_15))(th2_p)
                 } catch {
@@ -1811,7 +1826,7 @@ fn step_1() -> Unit raise {
                       apply_with_context_l(
                         disch_conj, strip_conj_1, x281, x282, x283, x284,
                       )
-                    })(c_24, t1_8, Contra, t2_10),
+                    })(c_24, t1_8, VarianceT::Contra, t2_10),
                   )
                 e => raise e
               }
@@ -1828,7 +1843,7 @@ fn step_1() -> Unit raise {
     let _ as c_25 = x294
     let t301 = diminish_l(c_25)
     let t299 = augment_l(c_25)
-    With_context(
+    ImpconvWithContext::With_context(
       (x295 : VarianceT) => {
         let v_18 = x295
         (x296 : @kernel.Term) => {
@@ -1862,7 +1877,7 @@ fn step_1() -> Unit raise {
     let _ as c_26 = x303
     let t310 = diminish_l(c_26)
     let t308 = augment_l(c_26)
-    With_context(
+    ImpconvWithContext::With_context(
       (x304 : VarianceT) => {
         let v_19 = x304
         (x305 : @kernel.Term) => {
@@ -1877,8 +1892,8 @@ fn step_1() -> Unit raise {
             let c_p = augment_l(c_26)(t1s_1)
             let mk : (@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = match
               v_19 {
-              Co => mkimp_imp_co_ctxt
-              Contra => mkimp_imp_contra_ctxt
+              VarianceT::Co => mkimp_imp_co_ctxt
+              VarianceT::Contra => mkimp_imp_contra_ctxt
             }
             try {
               let t307 = disch_conj(
@@ -1913,15 +1928,16 @@ fn step_1() -> Unit raise {
     let _ as c_27 = x312
     let t320 = diminish_l(c_27)
     let t318 = augment_l(c_27)
-    With_context(
+    ImpconvWithContext::With_context(
       (x313 : VarianceT) => {
         let v_20 = x313
         (x314 : @kernel.Term) => {
           let t_36 = x314
           let (t1_11, t2_13) = @bool.dest_iff(t_36)
           let (lr, l_2, r_1) = match v_20 {
-            Co => (mkimp_co_iff, mkimpl_co_iff, mkimpr_co_iff)
-            Contra => (mkimp_contra_iff, mkimpl_contra_iff, mkimpr_contra_iff)
+            VarianceT::Co => (mkimp_co_iff, mkimpl_co_iff, mkimpr_co_iff)
+            VarianceT::Contra =>
+              (mkimp_contra_iff, mkimpl_contra_iff, mkimpr_contra_iff)
           }
           try {
             let t315 = @bool.mk_imp(t1_11, t2_13)
@@ -1956,7 +1972,7 @@ fn step_1() -> Unit raise {
     let _ as c_28 = x322
     let t329 = diminish_l(c_28)
     let t327 = augment_l(c_28)
-    With_context(
+    ImpconvWithContext::With_context(
       (x323 : VarianceT) => {
         let v_21 = x323
         (x324 : @kernel.Term) => {
@@ -1980,7 +1996,7 @@ fn step_1() -> Unit raise {
     let _ as c_29 = x333
     let t341 = diminish_l(c_29)
     let t338 = augment_l(c_29)
-    With_context(
+    ImpconvWithContext::With_context(
       (x334 : VarianceT) => {
         let v_22 = x334
         (x335 : @kernel.Term) => {
@@ -2020,7 +2036,7 @@ fn step_1() -> Unit raise {
     let c_30 = x345
     let t350 = diminish_l(c_30)
     let t348 = augment_l(c_30)
-    With_context(
+    ImpconvWithContext::With_context(
       (x346 : VarianceT) => {
         let v_23 = x346
         (x347 : @kernel.Term) => {
@@ -2060,8 +2076,9 @@ fn step_1() -> Unit raise {
         let th_30 = x354
         let (t1_12, t2_14) = @basics.dest_imp(@kernel.concl(th_30))
         match v_24 {
-          Co => @bool.imp_trans(apply_l(c_31)(v_24)(t1_12), th_30)
-          Contra => @bool.imp_trans(th_30, apply_l(c_31)(v_24)(t2_14))
+          VarianceT::Co => @bool.imp_trans(apply_l(c_31)(v_24)(t1_12), th_30)
+          VarianceT::Contra =>
+            @bool.imp_trans(th_30, apply_l(c_31)(v_24)(t2_14))
         }
       }
     }
@@ -2074,7 +2091,7 @@ fn step_1() -> Unit raise {
     let _ as c_32 = x355
     let t360 = diminish_l(c_32)
     let t358 = augment_l(c_32)
-    With_context(
+    ImpconvWithContext::With_context(
       (x356 : VarianceT) => {
         let v_25 = x356
         (x357 : @kernel.Thm) => {
@@ -2092,7 +2109,7 @@ fn step_1() -> Unit raise {
   ) -> ImpconvWithContext[ImpconvImpConv] raise {
     let _ as c1_1 = x362
     let _ as c2_1 = x363
-    With_context(
+    ImpconvWithContext::With_context(
       (x364 : VarianceT) => {
         let v_26 = x364
         (x365 : @kernel.Term) => {
@@ -2119,7 +2136,7 @@ fn step_1() -> Unit raise {
     let _ as c_33 = x371
     let t376 = diminish_l(c_33)
     let t374 = augment_l(c_33)
-    With_context(
+    ImpconvWithContext::With_context(
       (x372 : VarianceT) => {
         let v_27 = x372
         (x373 : @kernel.Term) => {
@@ -2140,7 +2157,7 @@ fn step_1() -> Unit raise {
   ) -> ImpconvWithContext[ImpconvImpConv] raise {
     let _ as c1_2 = x378
     let _ as c2_2 = x379
-    With_context(
+    ImpconvWithContext::With_context(
       (x380 : VarianceT) => {
         let v_28 = x380
         (x381 : @kernel.Term) => {
@@ -2169,7 +2186,7 @@ fn step_1() -> Unit raise {
     let _ as c_34 = x386
     let t391 = diminish_l(c_34)
     let t389 = augment_l(c_34)
-    With_context(
+    ImpconvWithContext::With_context(
       (x387 : VarianceT) => {
         let v_29 = x387
         (x388 : @kernel.Term) => {
@@ -2193,7 +2210,7 @@ fn step_1() -> Unit raise {
     let _ as c_35 = x393
     let t398 = diminish_l(c_35)
     let t396 = augment_l(c_35)
-    With_context(
+    ImpconvWithContext::With_context(
       (x394 : VarianceT) => {
         let v_30 = x394
         (x395 : @kernel.Term) => {
@@ -2214,7 +2231,7 @@ fn step_1() -> Unit raise {
     x404 : @list.List[ImpconvWithContext[ImpconvImpConv]],
   ) -> ImpconvWithContext[ImpconvImpConv] raise {
     let _ as cs = x404
-    With_context(
+    ImpconvWithContext::With_context(
       (x405 : VarianceT) => {
         let v_31 = x405
         (x406 : @kernel.Term) => {
@@ -2268,26 +2285,26 @@ fn step_1() -> Unit raise {
     let _ as c_38 = x418
     let t423 = diminish_l(c_38)
     let t421 = augment_l(c_38)
-    With_context(
+    ImpconvWithContext::With_context(
       (x419 : VarianceT) => {
         let v_33 = x419
         (x420 : @kernel.Term) => {
           let t_46 = x420
           try {
             let th1_19 = apply_l(sub_ctximpconv(self__8(c_38)))(v_33)(t_46)
-            bind_l(c_38, Non_atomic, v_33, th1_19) catch {
+            bind_l(c_38, ImpconvAtomic::Non_atomic, v_33, th1_19) catch {
               Failure(_) => th1_19
               e => raise e
             }
           } catch {
             Failure("SUB_CTXIMPCONV") => {
-              let th1_20 = apply_l(c_38)(Atomic)(v_33)(t_46)
+              let th1_20 = apply_l(c_38)(ImpconvAtomic::Atomic)(v_33)(t_46)
               bind_ctximpconv(self__8(c_38))(v_33)(th1_20) catch {
                 Failure(_) => th1_20
                 e => raise e
               }
             }
-            Failure(_) => apply_l(c_38)(Non_atomic)(v_33)(t_46)
+            Failure(_) => apply_l(c_38)(ImpconvAtomic::Non_atomic)(v_33)(t_46)
             e => raise e
           }
         }
@@ -2315,7 +2332,7 @@ fn step_1() -> Unit raise {
     let _ as c_39 = x426
     let t431 = diminish_l(c_39)
     let t429 = augment_l(c_39)
-    With_context(
+    ImpconvWithContext::With_context(
       (x427 : VarianceT) => {
         let v_34 = x427
         (x428 : @kernel.Term) => {
@@ -2355,14 +2372,15 @@ fn step_1() -> Unit raise {
     let _ as c_40 = x434
     let t439 = diminish_l(c_40)
     let t437 = augment_l(c_40)
-    With_context(
+    ImpconvWithContext::With_context(
       (x435 : VarianceT) => {
         let v_35 = x435
         (x436 : @kernel.Term) => {
           let t_48 = x436
           apply_l(sub_ctximpconv(self__10(c_40)))(v_35)(t_48) catch {
-            Failure("SUB_CTXIMPCONV") => apply_l(c_40)(Atomic)(v_35)(t_48)
-            Failure(_) => apply_l(c_40)(Non_atomic)(v_35)(t_48)
+            Failure("SUB_CTXIMPCONV") =>
+              apply_l(c_40)(ImpconvAtomic::Atomic)(v_35)(t_48)
+            Failure(_) => apply_l(c_40)(ImpconvAtomic::Non_atomic)(v_35)(t_48)
             e => raise e
           }
         }
@@ -2395,7 +2413,7 @@ fn step_1() -> Unit raise {
     (x443 : @kernel.Thm) => {
       let th_35 = x443
       let t444 = @kernel.concl(th_35)
-      @drule.match_mp(apply_l(c_41)(Contra)(t444))(th_35)
+      @drule.match_mp(apply_l(c_41)(VarianceT::Contra)(t444))(th_35)
     }
   }
   let ctximpconv_tac : (
@@ -2436,9 +2454,10 @@ fn step_1() -> Unit raise {
       )
       let cnv_p = augment_l(cnv_1)(t449)
       let t450 = @tactics.try_tac(@tactics.accept_tac(@bool.truth()))
-      @tactics.then_tac(@tactics.match_mp_tac(apply_l(cnv_p)(Co)(c_42)), t450)(
-        g_1,
-      )
+      @tactics.then_tac(
+        @tactics.match_mp_tac(apply_l(cnv_p)(VarianceT::Co)(c_42)),
+        t450,
+      )(g_1)
     }
   }
   let indep_vars : (@kernel.Thm) -> @list.List[@kernel.Term] raise = (
@@ -2819,7 +2838,7 @@ fn step_1() -> Unit raise {
         }
       }
     }
-    With_context(
+    ImpconvWithContext::With_context(
       (x581 : ImpconvAtomic) => {
         let a_22 = x581
         (x582 : @kernel.Term) => {
@@ -2835,7 +2854,7 @@ fn step_1() -> Unit raise {
             _?,
             @list.List[@kernel.Term],
           ) raise) raise) raise = match a_22 {
-            Atomic =>
+            ImpconvAtomic::Atomic =>
               x583 => {
                 (x584 : @list.List[@kernel.Term]) => {
                   (x585 : @kernel.Term) => {
@@ -2845,7 +2864,7 @@ fn step_1() -> Unit raise {
                   }
                 }
               }
-            Non_atomic => i_l
+            ImpconvAtomic::Non_atomic => i_l
           }
           let t586 = union(frees_1(t_65), avs_10)
           f_15(cnv_3)(t586)(t_65)
@@ -2963,7 +2982,7 @@ fn step_1() -> Unit raise {
     let _ as c_53 = x603
     let t615 = diminish_l(c_53)
     let t613 = augment_l(c_53)
-    With_context(
+    ImpconvWithContext::With_context(
       (x604 : ImpconvAtomic) => {
         let a_23 = x604
         (x605 : VarianceT) => {
@@ -2973,7 +2992,7 @@ fn step_1() -> Unit raise {
             let (th_48, ho_2, new_vars_1) = apply_l(c_53)(a_23)(t_66)
             let (th1_23, th2_18) = @bool.eq_imp_rule(th_48)
             let res_3 = match v_39 {
-              Co => {
+              VarianceT::Co => {
                 let (p_12, th2_p_1) = undisch_term(th2_18)
                 fn exists_intro(
                   x607 : @list.List[@kernel.Term],
@@ -2997,7 +3016,7 @@ fn step_1() -> Unit raise {
                 }
                 exists_intro(new_vars_1)
               }
-              Contra => {
+              VarianceT::Contra => {
                 let th1_p_1 = match ho_2 {
                   None => th1_23
                   Some(h_3) => imp_sym(@bool.disch(h_3, th1_23))
@@ -3154,7 +3173,7 @@ fn step_1() -> Unit raise {
     let _ as c_54 = x631
     let t637 = diminish_l(c_54)
     let t635 = augment_l(c_54)
-    With_context(
+    ImpconvWithContext::With_context(
       (x632 : ImpconvAtomic) => {
         let a_24 = x632
         (x633 : VarianceT) => {
@@ -3230,15 +3249,16 @@ fn step_1() -> Unit raise {
     let _ as c_56 = x650
     let t655 = diminish_l(c_56)
     let t653 = augment_l(c_56)
-    With_context(
+    ImpconvWithContext::With_context(
       (x651 : VarianceT) => {
         let v_43 = x651
         (x652 : @kernel.Term) => {
           let t_69 = x652
           let (t1_15, t2_17) = @basics.dest_conj(t_69)
           let (left, right) = match v_43 {
-            Co => (mkimpl_conj_co2_ctxt, mkimpr_conj_co_ctxt)
-            Contra => (mkimpl_conj_contra_ctxt, mkimpr_conj_contra_ctxt)
+            VarianceT::Co => (mkimpl_conj_co2_ctxt, mkimpr_conj_co_ctxt)
+            VarianceT::Contra =>
+              (mkimpl_conj_contra_ctxt, mkimpr_conj_contra_ctxt)
           }
           let th1s = @lib.map(
             left,
@@ -3269,7 +3289,7 @@ fn step_1() -> Unit raise {
     let _ as c_57 = x657
     let t664 = diminish_l(c_57)
     let t662 = augment_l(c_57)
-    With_context(
+    ImpconvWithContext::With_context(
       (x658 : VarianceT) => {
         let v_44 = x658
         (x659 : @kernel.Term) => {
@@ -3294,7 +3314,7 @@ fn step_1() -> Unit raise {
     let _ as c_58 = x666
     let t673 = diminish_l(c_58)
     let t671 = augment_l(c_58)
-    With_context(
+    ImpconvWithContext::With_context(
       (x667 : VarianceT) => {
         let v_45 = x667
         (x668 : @kernel.Term) => {
@@ -3326,15 +3346,15 @@ fn step_1() -> Unit raise {
     let _ as c_59 = x675
     let t682 = diminish_l(c_59)
     let t680 = augment_l(c_59)
-    With_context(
+    ImpconvWithContext::With_context(
       (x676 : VarianceT) => {
         let v_46 = x676
         (x677 : @kernel.Term) => {
           let t_72 = x677
           let (t1_18, t2_20) = @bool.dest_iff(t_72)
           let (left_1, right_1) = match v_46 {
-            Co => (mkimpl_co_iff, mkimpr_co_iff)
-            Contra => (mkimpl_contra_iff, mkimpr_contra_iff)
+            VarianceT::Co => (mkimpl_co_iff, mkimpr_co_iff)
+            VarianceT::Contra => (mkimpl_contra_iff, mkimpr_contra_iff)
           }
           let t678 = @bool.mk_imp(t1_18, t2_20)
           let th1s_3 = @lib.map(left_1, apply_l(c_59)(v_46)(t678))
@@ -3353,7 +3373,7 @@ fn step_1() -> Unit raise {
     let _ as c_60 = x684
     let t691 = diminish_l(c_60)
     let t689 = augment_l(c_60)
-    With_context(
+    ImpconvWithContext::With_context(
       (x685 : VarianceT) => {
         let v_47 = x685
         (x686 : @kernel.Term) => {
@@ -3377,7 +3397,7 @@ fn step_1() -> Unit raise {
     let _ as c_61 = x695
     let t703 = diminish_l(c_61)
     let t700 = augment_l(c_61)
-    With_context(
+    ImpconvWithContext::With_context(
       (x696 : VarianceT) => {
         let v_48 = x696
         (x697 : @kernel.Term) => {
@@ -3417,7 +3437,7 @@ fn step_1() -> Unit raise {
     let c_62 = x707
     let t712 = diminish_l(c_62)
     let t710 = augment_l(c_62)
-    With_context(
+    ImpconvWithContext::With_context(
       (x708 : VarianceT) => {
         let v_49 = x708
         (x709 : @kernel.Term) => {
@@ -3447,7 +3467,7 @@ fn step_1() -> Unit raise {
     let _ as c_63 = x714
     let t719 = diminish_l(c_63)
     let t717 = augment_l(c_63)
-    With_context(
+    ImpconvWithContext::With_context(
       (x715 : VarianceT) => {
         let v_50 = x715
         (x716 : @kernel.Term) => {
@@ -3456,9 +3476,10 @@ fn step_1() -> Unit raise {
             let ths_5 = apply_l(sub_ctximpmconv(depth_ctximpmconv(c_63)))(v_50)(
               t_76,
             )
-            apply_l(c_63)(Non_atomic)(v_50)(t_76).concat(ths_5)
+            apply_l(c_63)(ImpconvAtomic::Non_atomic)(v_50)(t_76).concat(ths_5)
           } catch {
-            Failure("SUB_CTXIMPMCONV") => apply_l(c_63)(Atomic)(v_50)(t_76)
+            Failure("SUB_CTXIMPMCONV") =>
+              apply_l(c_63)(ImpconvAtomic::Atomic)(v_50)(t_76)
             e => raise e
           }
         }
@@ -3658,7 +3679,7 @@ fn step_1() -> Unit raise {
     let avs_13 = (x118 => flat_revmap_l(union, x118))((x768 : @kernel.Thm) => {
       freesl(@kernel.hyp(x768))
     })(ths_7)
-    With_context(
+    ImpconvWithContext::With_context(
       (x769 : ImpconvAtomic) => {
         let a_25 = x769
         (x770 : @kernel.Term) => {
@@ -3673,8 +3694,9 @@ fn step_1() -> Unit raise {
           let f_19 : ((@kernel.Term) -> @list.List[(@kernel.Thm, _, _)] raise) -> ((
             @kernel.Term,
           ) -> @list.List[(@kernel.Thm, _, _)] raise) raise = match a_25 {
-            Atomic => x772 => (x773 : @kernel.Term) => top_depth_l_1(x772, x773)
-            Non_atomic =>
+            ImpconvAtomic::Atomic =>
+              x772 => (x773 : @kernel.Term) => top_depth_l_1(x772, x773)
+            ImpconvAtomic::Non_atomic =>
               x774 => {
                 let cnv_6 = x774
                 (x775 : @kernel.Term) => {
@@ -3767,7 +3789,7 @@ fn step_1() -> Unit raise {
     let _ as c_71 = x788
     let t801 = diminish_l(c_71)
     let t799 = augment_l(c_71)
-    With_context(
+    ImpconvWithContext::With_context(
       (x789 : ImpconvAtomic) => {
         let a_26 = x789
         (x790 : VarianceT) => {
@@ -3780,7 +3802,7 @@ fn step_1() -> Unit raise {
               let (th_58, ho_4, new_vars_2) = x792
               let (th1_24, th2_19) = @bool.eq_imp_rule(th_58)
               match v_55 {
-                Co => {
+                VarianceT::Co => {
                   let (p_14, th2_p_2) = undisch_term(th2_19)
                   fn exists_intro_1(
                     x793 : @list.List[@kernel.Term],
@@ -3804,7 +3826,7 @@ fn step_1() -> Unit raise {
                   }
                   exists_intro_1(new_vars_2)
                 }
-                Contra => {
+                VarianceT::Contra => {
                   let th1_p_2 = match ho_4 {
                     None => th1_24
                     Some(h_5) => imp_sym_1(@bool.disch(h_5, th1_24))
@@ -3887,13 +3909,13 @@ fn step_1() -> Unit raise {
     (VarianceT) -> ((@kernel.Term) -> @kernel.Thm raise) raise,
   ] raise {
     let ts_7 = x813
-    With_context(
+    ImpconvWithContext::With_context(
       (x814 : VarianceT) => {
         let v_57 = x814
         (x815 : @kernel.Term) => {
           let t_82 = x815
           match (v_57, t_82) {
-            (Co, Comb(Const("?", _), _)) => {
+            (VarianceT::Co, Comb(Const("?", _), _)) => {
               let (vs_14, b_29) = @basics.strip_exists(t_82)
               let bs = strip_conj(b_29)
               let (s_3, n_10) = tryfind_fun_l(
@@ -4007,12 +4029,12 @@ fn step_1() -> Unit raise {
         let th_62 = x847
         let (t1_19, t2_21) = @basics.dest_imp(@kernel.concl(th_62))
         match v_60 {
-          Co =>
+          VarianceT::Co =>
             @lib.map(
               (x848 : @kernel.Thm) => @bool.imp_trans(x848, th_62),
               c_72(v_60)(t1_19),
             )
-          Contra =>
+          VarianceT::Contra =>
             @lib.map(
               (x849 : @kernel.Thm) => @bool.imp_trans(th_62, x849),
               c_72(v_60)(t2_21),
@@ -4400,10 +4422,10 @@ fn[TQ] net_update_l(
   let lcs_3 = x169
   let elem = x170
   match x171 {
-    Netnode(edges, tips) =>
+    FoNetsT::Netnode(edges, tips) =>
       (x172 : @list.List[@kernel.Term]) => {
         match x172 {
-          Empty => Netnode(edges, tips.prepend(elem))
+          Empty => FoNetsT::Netnode(edges, tips.prepend(elem))
           More(t_20, tail=rts) => {
             let (label, nts) = label_to_store(lcs_3)(t_20)
             let (child, others) = try {
@@ -4424,7 +4446,7 @@ fn[TQ] net_update_l(
               e => raise e
             }
             let new_child = net_update(lcs_3, elem, child)(nts.concat(rts))
-            Netnode(others.prepend((label, new_child)), tips)
+            FoNetsT::Netnode(others.prepend((label, new_child)), tips)
           }
         }
       }
@@ -4441,7 +4463,7 @@ fn[TS] follow_l(
 ) -> ((@list.List[@kernel.Term]) -> @list.List[TS] raise) raise {
   let follow = (x181 : FoNetsT[TS]) => follow_l(label_for_lookup, x181)
   match x181 {
-    Netnode(edges_1, tips_1) =>
+    FoNetsT::Netnode(edges_1, tips_1) =>
       (x182 : @list.List[@kernel.Term]) => {
         match x182 {
           Empty => tips_1
@@ -4470,7 +4492,7 @@ fn[TS] follow_l(
               x184 : (Int, @list.List[@kernel.Term]),
             ) => {
               let (k_1, nts_2) = x184
-              follow(@lib.assoc(Vnet(k_1), edges_1))(nts_2) catch {
+              follow(@lib.assoc(FoNetsTermLabel::Vnet(k_1), edges_1))(nts_2) catch {
                 Failure(_) => @list.empty()
                 e => raise e
               }
@@ -4490,9 +4512,9 @@ fn[TU] filter_l(
 ) -> FoNetsT[TU] raise {
   let p_6 = x187
   match x188 {
-    Netnode(edges_2, tips_2) => {
+    FoNetsT::Netnode(edges_2, tips_2) => {
       let t190 = @lib.list_filter(p_6, tips_2)
-      Netnode(
+      FoNetsT::Netnode(
         @lib.map(
           (x189 : (FoNetsTermLabel, FoNetsT[TU])) => {
             let (l_1, n_6) = x189
@@ -4509,7 +4531,7 @@ fn[TU] filter_l(
 ///|
 fn[TV] apply_l(x276 : ImpconvWithContext[TV]) -> TV raise {
   match x276 {
-    With_context(c_22, _, _) => c_22
+    ImpconvWithContext::With_context(c_22, _, _) => c_22
   }
 }
 
@@ -4518,7 +4540,7 @@ fn[TW] augment_l(
   x277 : ImpconvWithContext[TW],
 ) -> ((TsetT) -> ImpconvWithContext[TW] raise) raise {
   match x277 {
-    With_context(_, a_21, _) => a_21
+    ImpconvWithContext::With_context(_, a_21, _) => a_21
   }
 }
 
@@ -4527,7 +4549,7 @@ fn[TX] diminish_l(
   x279 : ImpconvWithContext[TX],
 ) -> ((@kernel.Term) -> ImpconvWithContext[TX] raise) raise {
   match x279 {
-    With_context(_, _, d_14) => d_14
+    ImpconvWithContext::With_context(_, _, d_14) => d_14
   }
 }
 
@@ -4581,8 +4603,8 @@ fn[TBD] bind_l(
   let th_33 = x417
   let (t1_13, t2_15) = @basics.dest_imp(@kernel.concl(th_33))
   match v_32 {
-    Co => @bool.imp_trans(apply_l(c_37)(na)(v_32)(t1_13), th_33)
-    Contra => @bool.imp_trans(th_33, apply_l(c_37)(na)(v_32)(t2_15))
+    VarianceT::Co => @bool.imp_trans(apply_l(c_37)(na)(v_32)(t1_13), th_33)
+    VarianceT::Contra => @bool.imp_trans(th_33, apply_l(c_37)(na)(v_32)(t2_15))
   }
 }
 

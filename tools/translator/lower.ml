@@ -79,6 +79,14 @@ module Lower = struct
   (* type abbreviations: printed by name, but expanded for shapes *)
   let own_aliases : (string, unit) Hashtbl.t = Hashtbl.create 32
   let own_ctors : (string, string) Hashtbl.t = Hashtbl.create 64
+
+  (* constructors of hand-ported packages *)
+  let () =
+    List.iter
+      (fun (c, p) -> Hashtbl.replace own_ctors c p)
+      [ ("Varp", "preterm"); ("Constp", "preterm"); ("Combp", "preterm"); ("Absp", "preterm");
+        ("Typing", "preterm"); ("Utv", "preterm"); ("Ptycon", "preterm"); ("Stv", "preterm");
+        ("Ident", "parser"); ("Resword", "parser") ]
   let current_pkg = ref ""
 
   let qualified (pkg, name) = if pkg = !current_pkg then name else "@" ^ pkg ^ "." ^ name
@@ -97,7 +105,21 @@ module Lower = struct
          | None -> own_type (Path.name p))
     | _ -> own_type (Path.name p)
 
-  let ctor_name name =
+  (* A constructor of a translated variant type is qualified by its type
+     (`@pkg.Type::Ctor`): packages and types may share constructor names. *)
+  let ctor_name ?cd name =
+    let by_type =
+      match cd with
+      | Some cd ->
+          (match Types.get_desc cd.Types.cstr_res, cd.Types.cstr_tag with
+           | Types.Tconstr (p, _, _), (Types.Cstr_constant _ | Types.Cstr_block _ | Types.Cstr_unboxed) ->
+               Option.map (fun t -> t ^ "::" ^ name) (own_type_path p)
+           | _ -> None)
+      | None -> None
+    in
+    match by_type with
+    | Some n -> n
+    | None ->
     match Hashtbl.find_opt own_ctors name with
     | Some pkg -> qualified (pkg, name)
     | None -> name
@@ -119,6 +141,7 @@ module Lower = struct
     | "func" -> Some "@lib.Func"
     | "float" -> Some "Double"
     | "Stdlib.ref" -> Some "Ref"
+    | "array" -> Some "FixedArray"
     | "net" -> Some "@nets.Net"
     | "gconv" -> Some "@simp.Gconv"
     | "prover" -> Some "@simp.Prover"
@@ -770,8 +793,8 @@ module Lower = struct
              "More(" ^ h ^ ", tail=" ^ pattern ?mty t ^ ")"
          | "()", [] -> "_"
          | ("true" | "false" | "None"), [] -> cd.Types.cstr_name
-         | name, [] -> ctor_name name
-         | name, ps -> ctor_name name ^ "(" ^ String.concat ", " (List.map (fun q -> pattern q) ps) ^ ")")
+         | name, [] -> ctor_name ~cd name
+         | name, ps -> ctor_name ~cd name ^ "(" ^ String.concat ", " (List.map (fun q -> pattern q) ps) ^ ")")
     | Tpat_or (a, b, _) -> pattern ?mty a ^ " | " ^ pattern ?mty b
     | Tpat_record (fields, _) ->
         "{ "
@@ -898,7 +921,9 @@ module Lower = struct
     | Texp_sequence (a, b) ->
         let ss, x, _ = lower a in
         let ss2, y, t = lower ?expect b in
-        (ss @ (if ordered x then [ Do x ] else []) @ ss2, y, t)
+        (* OCaml only warns when a non-unit value is discarded *)
+        let discard = if is_unit a.exp_type then x else Call (Atom "ignore", [ x ]) in
+        (ss @ (if ordered x then [ Do discard ] else []) @ ss2, y, t)
     | Texp_match (scrut, cases, partial) -> lower_match ?expect e scrut cases partial
     | Texp_try (body, cases) -> lower_try ?expect e body cases
     | Texp_let (Asttypes.Recursive, vbs, body) -> lower_letrec ?expect loc vbs body
@@ -1254,6 +1279,39 @@ module Lower = struct
       | "Format.print_flush" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_flush", [])))
       | "Format.print_int" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_int", [ a ]))
       | "print_string" -> (1, fun [ a ] _ -> Call (Atom "@pp.print_string", [ a ]))
+      | "print_endline" -> (1, fun [ a ] _ -> Call (Atom "@pp.print_string", [ Binop ("+", a, Atom "\"\\n\"") ]))
+      | "invalid_arg" -> (1, fun [ a ] _ -> Raise (Call (Atom "@num.InvalidArgument", [ a ])))
+      | "lsl" -> (2, fun [ a; b ] _ -> Binop ("<<", a, b))
+      | "asr" -> (2, fun [ a; b ] _ -> Binop (">>", a, b))
+      | "lsr" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.lsr", [ a; b ]))
+      | "land" -> (2, fun [ a; b ] _ -> Binop ("&", a, b))
+      | "lor" -> (2, fun [ a; b ] _ -> Binop ("|", a, b))
+      | "lxor" -> (2, fun [ a; b ] _ -> Binop ("^", a, b))
+      | "lnot" -> (1, fun [ a ] _ -> Call (Atom "Int::lnot", [ a ]))
+      | "log" -> (1, fun [ a ] _ -> Call (Atom "@lib.float_log", [ a ]))
+      | "**" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.float_pow", [ a; b ]))
+      | "int_of_string" -> (1, fun [ a ] _ -> Call (Atom "@lib.int_of_string", [ a ]))
+      | "String.length" -> (1, fun [ a ] _ -> Call (Atom "@lib.string_length", [ a ]))
+      | "String.get" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_get", [ a; b ]))
+      | "String.sub" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.string_sub", [ a; b; c ]))
+      | "String.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_make", [ a; b ]))
+      | "String.concat" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_concat", [ a; b ]))
+      | "Array.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_make", [ a; b ]))
+      | "Array.get" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_get", [ a; b ]))
+      | "Array.set" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.array_set", [ a; b; c ]))
+      | "Array.length" -> (1, fun [ a ] _ -> Call (Atom "@lib.array_length", [ a ]))
+      | "Random.int" -> (1, fun [ a ] _ -> Call (Atom "@lib.random_int", [ a ]))
+      | "Random.init" -> (1, fun [ a ] _ -> Call (Atom "@lib.random_init", [ a ]))
+      | "Random.bits" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@lib.random_bits", [])))
+      | "Format.print_break" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.std_formatter.print_break", [ a; b ]))
+      | "Format.print_space" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_space", [])))
+      | "Format.print_cut" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_cut", [])))
+      | "Format.open_box" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.open_box", [ a ]))
+      | "Format.open_vbox" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.open_vbox", [ a ]))
+      | "Format.open_hvbox" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.open_hvbox", [ a ]))
+      | "Format.open_hovbox" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.open_hovbox", [ a ]))
+      | "Format.open_hbox" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.open_hbox", [])))
+      | "Format.close_box" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.close_box", [])))
       | "&&" | "||" -> (2, fun _ _ -> assert false)
       | _ -> unsupported loc "Stdlib.%s" name
     in
@@ -1480,12 +1538,12 @@ module Lower = struct
     | "Noparse", [] -> ([], Atom "@parser.Noparse", mty_of e.exp_type)
     | "Unchanged", [] -> ([], Atom "@lib.Unchanged", mty_of e.exp_type)
     | "Not_found", [] -> ([], Atom "@lib.NotFound", mty_of e.exp_type)
-    | name, [] when Hashtbl.mem own_ctors name -> ([], Atom (ctor_name name), mty_of e.exp_type)
+    | name, [] when Hashtbl.mem own_ctors name -> ([], Atom (ctor_name ~cd name), mty_of e.exp_type)
     | name, args when Hashtbl.mem own_ctors name ->
         (* constructor arguments are evaluated right to left *)
         let lowered = List.map (fun a -> let ss, x, _ = lower a in (ss, x)) args in
         let stmts, xs = schedule (List.rev lowered) in
-        (stmts, Call (Atom (ctor_name name), List.rev xs), mty_of e.exp_type)
+        (stmts, Call (Atom (ctor_name ~cd name), List.rev xs), mty_of e.exp_type)
     | name, _ -> unsupported loc "constructor %s" name
 
   (* --- Functions --- *)

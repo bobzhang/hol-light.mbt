@@ -574,14 +574,14 @@ pub fn fol_of_term(
   let consts = x85
   let tm = x86
   if @kernel.is_var(tm) && !@lib.mem(tm, consts) {
-    @meson.Fvar(fol_of_var(tm))
+    @meson.FolTerm::Fvar(fol_of_var(tm))
   } else {
     let (f, args) = @basics.strip_comb(tm)
     if @lib.mem(f, env) {
       raise Failure("fol_of_term: higher order")
     } else {
       let ff = fol_of_const(f)
-      @meson.Fnapp(
+      @meson.FolTerm::Fnapp(
         ff,
         @lib.map((x87 : @kernel.Term) => fol_of_term(env, consts, x87), args),
       )
@@ -646,23 +646,23 @@ pub fn fol_of_form(
       @lib.subtract(consts, @list.List([v])),
       bod,
     )
-    @meson.Forallq(fv, fbod)
+    @meson.FolForm::Forallq(fv, fbod)
   } catch {
     Failure(_) =>
       try {
         let (l, r) = @basics.dest_conj(tm)
         let fl = fol_of_form(env, consts, l)
         let fr = fol_of_form(env, consts, r)
-        @meson.Conj(fl, fr)
+        @meson.FolForm::Conj(fl, fr)
       } catch {
         Failure(_) =>
           try {
             let (l_1, r_1) = @basics.dest_disj(tm)
             let fl_1 = fol_of_form(env, consts, l_1)
             let fr_1 = fol_of_form(env, consts, r_1)
-            @meson.Disj(fl_1, fr_1)
+            @meson.FolForm::Disj(fl_1, fr_1)
           } catch {
-            Failure(_) => @meson.Atom(fol_of_literal(env, consts, tm))
+            Failure(_) => @meson.FolForm::Atom(fol_of_literal(env, consts, tm))
             e => raise e
           }
         e => raise e
@@ -680,8 +680,8 @@ pub fn hol_of_term(
   let ty = x98
   let tm = x99
   match tm {
-    @meson.Fvar(v) => hol_of_var(v)(ty)
-    @meson.Fnapp(f, args) => hol_of_atom(f, args)
+    @meson.FolTerm::Fvar(v) => hol_of_var(v)(ty)
+    @meson.FolTerm::Fnapp(f, args) => hol_of_atom(f, args)
   }
 }
 

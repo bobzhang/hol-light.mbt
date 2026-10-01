@@ -15,11 +15,15 @@ module Main = struct
     | "firstorder.ml" -> ("firstorder/firstorder.mbt", [])
     | "quot.ml" -> ("quot/quot.mbt", [])
     | "impconv.ml" -> ("impconv/impconv.mbt", [])
+    | "metis.ml" -> ("metis/metis.mbt", [])
+    | "ocaml_map.ml" -> ("omap/omap.mbt", [])
+    | "ocaml_set.ml" -> ("oset/oset.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =
     let out, hand = manifest target in
     Names.root := root;
+    Loader.stdlib_dir := Filename.concat root "tools/translator/stdlib";
     Lower.current_file := target;
     Lower.current_pkg := Filename.remove_extension (Filename.basename out);
     List.iter
@@ -59,7 +63,7 @@ module Main = struct
                 | _ -> ())
               str
         | _ -> ())
-      (Loader.phrases (Filename.concat hol target));
+      (Loader.phrases (Loader.source ~hol target));
     Loader.load_file ~hol ~on_item:(Emit.item ~hand) target;
     Emit.output ~source:target ~out:(Filename.concat root out);
     Printf.printf "wrote %s; %d unsupported items\n" out !Emit.errors
