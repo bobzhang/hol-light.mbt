@@ -102,13 +102,19 @@ module Lower = struct
      of its target. *)
   let module_paths : (string, string list) Hashtbl.t = Hashtbl.create 64
 
+  (* module aliases by full name (`Metis_prover.W.B`) -> target path *)
+  let module_aliases : (string, string list) Hashtbl.t = Hashtbl.create 32
+
   let rec module_path (p : Path.t) =
     match p with
     | Path.Pident id ->
         (match Hashtbl.find_opt module_paths (Ident.unique_name id) with
          | Some l -> Some l
          | None -> Some [ Ident.name id ] (* a module of an earlier phrase *))
-    | Path.Pdot (q, n) -> Option.map (fun l -> l @ [ n ]) (module_path q)
+    | Path.Pdot (q, n) ->
+        Option.map
+          (fun l -> let l = l @ [ n ] in match Hashtbl.find_opt module_aliases (String.concat "." l) with Some t -> t | None -> l)
+          (module_path q)
     | Path.Papply _ -> None
 
   (* the full name of a module member (`Metis_prover.Intmap.add`) *)

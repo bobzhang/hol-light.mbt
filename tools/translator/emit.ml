@@ -292,9 +292,14 @@ module Emit = struct
                 cds
             in
             (* OCaml's equality raises on closures: such types derive nothing *)
-            let has_fun = carries_fun (String.concat " " ctors) in
+            (* the argument types only (a constructor may be spelled like a type) *)
+            let arg_text =
+              String.concat " "
+                (List.concat_map (fun cd -> match cd.cd_args with Cstr_tuple cts -> List.map (fun ct -> show_ty ct.ctyp_type) cts | _ -> []) cds)
+            in
+            let has_fun = carries_fun arg_text in
             if has_fun then Hashtbl.replace fun_types name ();
-            let noeq = has_ref (String.concat " " ctors) in
+            let noeq = has_ref arg_text in
             if noeq then Hashtbl.replace noeq_types name ();
             add_decl (fun () ->
                 Printf.sprintf "\n///|\n/// `%s`\npub(all) enum %s%s {\n  %s\n}%s\n"
@@ -365,9 +370,10 @@ module Emit = struct
             in
             (* printed now: the type variable names are this declaration's *)
             let field_lines = List.map (fun (m, f, t) -> (if m then "mut " else "") ^ f ^ " : " ^ show_ty t) fields in
-            let has_fun = carries_fun (String.concat " " field_lines) in
+            let types_text = String.concat " " (List.map (fun (_, _, t) -> show_ty t) fields) in
+            let has_fun = carries_fun types_text in
             if has_fun then Hashtbl.replace fun_types name ();
-            let noeq = has_ref (String.concat " " field_lines) in
+            let noeq = has_ref types_text in
             if noeq then Hashtbl.replace noeq_types name ();
             let text =
               Printf.sprintf "\n///|\n/// `%s`\npub(all) struct %s%s {\n  %s\n}%s\n"
@@ -575,6 +581,38 @@ module Emit = struct
                        Hashtbl.replace module_paths (Ident.unique_name id) (List.rev !module_prefix @ [ Ident.name id ])
                    | _ -> ())
                  incl_type
+           | Tstr_include { incl_mod = { mod_desc = (Tmod_ident (p, _) | Tmod_constraint ({ mod_desc = Tmod_ident (p, _); _ }, _, _, _)); _ }; incl_type; _ } ->
+               (* `include M` of a translated module re-exports its members
+                  (e.g. `include Sub` in a specialized functor) *)
+               (match module_path p with
+                | Some src ->
+                    let skey n = String.concat "." (src @ [ n ]) in
+                    let here n = String.concat "" (List.rev_map (fun m -> m ^ ".") !module_prefix) ^ n in
+                    List.iter
+                      (function
+                        | Types.Sig_value (id, _, _) ->
+                            (match Hashtbl.find_opt own_by_name (skey (Ident.name id)) with
+                             | Some entry ->
+                                 Hashtbl.replace own_values (Ident.unique_name id) entry;
+                                 Hashtbl.replace own_by_name (here (Ident.name id)) entry
+                             | None -> ())
+                        | Types.Sig_type (id, _, _, _) ->
+                            (match Hashtbl.find_opt own_types (skey (Ident.name id)) with
+                             | Some t ->
+                                 Hashtbl.replace own_types_id (Ident.unique_name id) t;
+                                 Hashtbl.replace own_types (String.concat "." (List.rev !module_prefix @ [ Ident.name id ])) t
+                             | None -> ())
+                        | Types.Sig_typext (id, _, _, _) ->
+                            (match Hashtbl.find_opt own_exns (skey (Ident.name id)) with
+                             | Some e ->
+                                 Hashtbl.replace own_exns ("#" ^ Ident.unique_name id) e;
+                                 Hashtbl.replace own_exns (here (Ident.name id)) e
+                             | None -> ())
+                        | Types.Sig_module (id, _, _, _, _) ->
+                            Hashtbl.replace module_paths (Ident.unique_name id) (src @ [ Ident.name id ])
+                        | _ -> ())
+                      incl_type
+                | None -> ())
            | Tstr_include _ -> () (* e.g. `include List` in a module *)
            | Tstr_open _ | Tstr_modtype _ -> ()
            | Tstr_exception te -> emit_exception te.tyexn_constructor
@@ -591,7 +629,10 @@ module Emit = struct
            | Tstr_module { mb_id = Some id; mb_expr = { mod_desc = Tmod_ident (p, _); _ }; _ } ->
                (* a module alias (e.g. a specialized functor's parameter) *)
                (match module_path p with
-                | Some path -> Hashtbl.replace module_paths (Ident.unique_name id) path
+                | Some path ->
+                    Hashtbl.replace module_paths (Ident.unique_name id) path;
+                    (* also reached through dotted paths (`W.B`) *)
+                    Hashtbl.replace module_aliases (String.concat "." (List.rev !module_prefix @ [ Ident.name id ])) path
                 | None -> ())
            | Tstr_module { mb_expr = { mod_desc = (Tmod_functor _ | Tmod_constraint ({ mod_desc = Tmod_functor _; _ }, _, _, _)); _ }; _ } ->
                (* applications are specialized (Functors) *)

@@ -51,10 +51,12 @@ end
    `F (A)` becomes `struct module P = A <F's body> end`, so each
    application is translated as an ordinary module (OCaml executes a
    functor's body at each application too). The parameter is a module
-   alias of the argument. A free module name of the body must mean what it
-   meant where the functor was defined: a library module that is shadowed
-   at the application gets an alias to it first; a shadowed user module is
-   rejected. `Map.Make` and `Set.Make` of the Stdlib have the bodies in
+   alias of the argument. Free names of the body must mean what they meant
+   where the functor was defined: a library module that is shadowed at the
+   application gets an alias to it (after the parameter); a shadowed user
+   module or value is rejected, as is a second application of a functor to
+   the same argument (OCaml would give both results the same types).
+   `Map.Make` and `Set.Make` of the Stdlib have the bodies in
    tools/translator/stdlib/{map,set}_make.ml (over Ocaml_map/Ocaml_set). *)
 module Functors = struct
   open Parsetree
@@ -62,39 +64,53 @@ module Functors = struct
   type mdef = {
     id : int;
     lib : string option;  (* an alias of this library module (`Stdlib.Map`) *)
-    members : (string, mdef) Hashtbl.t;
-    mutable functor_ : (string * structure * (string * mdef option) list) option;
-        (* parameter, body, the visible modules where it was defined *)
+    mods : (string, mdef) Hashtbl.t;  (* exported modules *)
+    vals : (string, int) Hashtbl.t;  (* exported values: name -> definition id *)
+    mutable functor_ : (string * structure * (string * mdef option) list * (string * int option) list) option;
+        (* parameter, body, the modules and values visible at its definition *)
   }
 
+  (* a structure being defined: its exports, and what is visible in it
+     (exports and opened modules; the latest binding wins) *)
+  type scope = { def : mdef; see_mods : (string, mdef) Hashtbl.t; see_vals : (string, int) Hashtbl.t }
+
   let counter = ref 0
+  let fresh_id () = incr counter; !counter
+  let fresh ?lib () = { id = fresh_id (); lib; mods = Hashtbl.create 8; vals = Hashtbl.create 8; functor_ = None }
+  let new_scope d = { def = d; see_mods = Hashtbl.create 8; see_vals = Hashtbl.create 8 }
 
-  let rec lookup_fwd frames name =
+  let toplevel = new_scope (fresh ())
+
+  let rec lookup (frames : scope list) name =
     match frames with
     | [] -> None
-    | f :: rest -> (match Hashtbl.find_opt f name with Some d -> Some d | None -> lookup_fwd rest name)
-  let fresh ?lib () = incr counter; { id = !counter; lib; members = Hashtbl.create 8; functor_ = None }
+    | f :: rest -> (match Hashtbl.find_opt f.see_mods name with Some d -> Some d | None -> lookup rest name)
 
-  (* the library module a name denotes, if it is not a user module *)
-  let library_of frames name =
-    match lookup_fwd frames name with
-    | None -> Some name
-    | Some { lib = Some l; _ } -> Some l
-    | Some _ -> None
-
-  (* innermost frame first; the last frame is the toplevel *)
-  let toplevel : (string, mdef) Hashtbl.t = Hashtbl.create 64
-
-  let rec lookup frames name =
+  let rec lookup_val (frames : scope list) name =
     match frames with
     | [] -> None
-    | f :: rest -> (match Hashtbl.find_opt f name with Some d -> Some d | None -> lookup rest name)
+    | f :: rest -> (match Hashtbl.find_opt f.see_vals name with Some d -> Some d | None -> lookup_val rest name)
 
   let rec resolve frames (lid : Longident.t) =
     match lid with
     | Longident.Lident n -> lookup frames n
-    | Longident.Ldot (l, n) -> (match resolve frames l with Some d -> Hashtbl.find_opt d.members n | None -> None)
+    | Longident.Ldot (l, n) -> (match resolve frames l with Some d -> Hashtbl.find_opt d.mods n | None -> None)
     | Longident.Lapply _ -> None
+
+  (* the library module a name denotes, if it is not a user module *)
+  let library_of frames name =
+    match lookup frames name with
+    | None -> Some name
+    | Some { lib = Some l; _ } -> Some l
+    | Some _ -> None
+
+  let define_mod (f : scope) name d = Hashtbl.replace f.def.mods name d; Hashtbl.replace f.see_mods name d
+  let define_val (f : scope) name = let i = fresh_id () in Hashtbl.replace f.def.vals name i; Hashtbl.replace f.see_vals name i
+
+  (* the members of `d` become visible (open) or also exported (include) *)
+  let bring (f : scope) ~export (d : mdef) =
+    Hashtbl.iter (fun n m -> Hashtbl.replace f.see_mods n m; if export then Hashtbl.replace f.def.mods n m) d.mods;
+    Hashtbl.iter (fun n i -> Hashtbl.replace f.see_vals n i; if export then Hashtbl.replace f.def.vals n i) d.vals
 
   let stdlib_dir = ref ""
 
@@ -117,41 +133,48 @@ module Functors = struct
          | _ -> None)
     | _ -> None
 
-  (* module names a structure binds anywhere inside it *)
-  let bound_modules (str : structure) =
-    let acc = ref [] in
+  (* module names and value names a structure binds anywhere inside it *)
+  let bound_names (str : structure) =
+    let mods = ref [] and vals = ref [] in
     let open Ast_iterator in
     let it =
       { default_iterator with
         structure_item = (fun self si ->
           (match si.pstr_desc with
-           | Pstr_module { pmb_name = { txt = Some n; _ }; _ } -> acc := n :: !acc
-           | Pstr_recmodule mbs -> List.iter (function { pmb_name = { txt = Some n; _ }; _ } -> acc := n :: !acc | _ -> ()) mbs
+           | Pstr_module { pmb_name = { txt = Some n; _ }; _ } -> mods := n :: !mods
+           | Pstr_recmodule mbs -> List.iter (function { pmb_name = { txt = Some n; _ }; _ } -> mods := n :: !mods | _ -> ()) mbs
            | _ -> ());
           default_iterator.structure_item self si);
         expr = (fun self e ->
-          (match e.pexp_desc with Pexp_letmodule ({ txt = Some n; _ }, _, _) -> acc := n :: !acc | _ -> ());
-          default_iterator.expr self e) }
+          (match e.pexp_desc with Pexp_letmodule ({ txt = Some n; _ }, _, _) -> mods := n :: !mods | _ -> ());
+          default_iterator.expr self e);
+        pat = (fun self p ->
+          (match p.ppat_desc with
+           | Ppat_var { txt; _ } | Ppat_alias (_, { txt; _ }) -> vals := txt :: !vals
+           | _ -> ());
+          default_iterator.pat self p) }
     in
     it.structure it str;
-    !acc
+    (!mods, !vals)
 
-  (* the head module names of the qualified names a structure uses *)
-  let free_heads (str : structure) =
-    let acc = ref [] in
+  (* the head module names of the qualified names a structure uses, and
+     its unqualified value names *)
+  let free_names (str : structure) =
+    let heads = ref [] and vals = ref [] in
     let add (lid : Longident.t) =
       match Longident.flatten lid with
-      | h :: _ :: _ -> if not (List.mem h !acc) then acc := h :: !acc
+      | h :: _ :: _ -> if not (List.mem h !heads) then heads := h :: !heads
       | _ -> ()
     in
     let add_mod (lid : Longident.t) =
-      match Longident.flatten lid with h :: _ -> if not (List.mem h !acc) then acc := h :: !acc | [] -> ()
+      match Longident.flatten lid with h :: _ -> if not (List.mem h !heads) then heads := h :: !heads | [] -> ()
     in
     let open Ast_iterator in
     let it =
       { default_iterator with
         expr = (fun self e ->
           (match e.pexp_desc with
+           | Pexp_ident { txt = Longident.Lident n; _ } -> if not (List.mem n !vals) then vals := n :: !vals
            | Pexp_ident { txt; _ } | Pexp_construct ({ txt; _ }, _) | Pexp_field (_, { txt; _ })
            | Pexp_setfield (_, { txt; _ }, _) | Pexp_new { txt; _ } -> add txt
            | Pexp_record (fs, _) -> List.iter (fun ({ Location.txt; _ }, _) -> add txt) fs
@@ -174,12 +197,17 @@ module Functors = struct
           default_iterator.module_type self m) }
     in
     it.structure it str;
-    !acc
+    (!heads, !vals)
 
+  (* what is visible: the first binding of each name, innermost first *)
   let visible frames =
-    let seen = Hashtbl.create 64 in
-    List.iter (fun f -> Hashtbl.iter (fun n d -> if not (Hashtbl.mem seen n) then Hashtbl.replace seen n d) f) frames;
-    Hashtbl.fold (fun n d acc -> (n, Some d) :: acc) seen []
+    let mods = Hashtbl.create 64 and vals = Hashtbl.create 256 in
+    List.iter
+      (fun f ->
+        Hashtbl.iter (fun n d -> if not (Hashtbl.mem mods n) then Hashtbl.replace mods n d) f.see_mods;
+        Hashtbl.iter (fun n i -> if not (Hashtbl.mem vals n) then Hashtbl.replace vals n i) f.see_vals)
+      frames;
+    (Hashtbl.fold (fun n d acc -> (n, Some d) :: acc) mods [], Hashtbl.fold (fun n i acc -> (n, Some i) :: acc) vals [])
 
   let loc = Location.none
   let mk_lid s = { Location.txt = Longident.parse s; loc }
@@ -190,45 +218,76 @@ module Functors = struct
 
   exception Unsupported_functor of string
 
+  let stdlib_modules =
+    [ "List"; "Map"; "Set"; "String"; "Array"; "Hashtbl"; "Format"; "Printf"; "Random"; "Option"; "Char";
+      "Bytes"; "Buffer"; "Stack"; "Queue"; "Lazy"; "Int"; "Float"; "Seq"; "Fun"; "Bool"; "Result" ]
+
+  (* applications seen: (functor id, argument id) *)
+  let applied : (int * int, unit) Hashtbl.t = Hashtbl.create 16
+
   (* `F (A)` -> the items of the specialized structure *)
   let specialize frames (f : Longident.t) (arg : module_expr) : structure =
-    let param, body, def_scope =
+    let fid, param, body, def_mods, def_vals =
       match builtin f frames with
       | Some file ->
-          ("Ord", template file, List.map (fun m -> (m, Hashtbl.find_opt toplevel m)) [ "Ocaml_map"; "Ocaml_set" ])
+          (* the templates only use Ord and Ocaml_map/Ocaml_set *)
+          (-1, "Ord", template file, List.map (fun m -> (m, Hashtbl.find_opt toplevel.see_mods m)) [ "Ocaml_map"; "Ocaml_set" ], [])
       | None ->
           (match resolve frames f with
-           | Some { functor_ = Some fn; _ } -> fn
+           | Some ({ functor_ = Some (p, b, dm, dv); _ } as d) -> (d.id, p, b, dm, dv)
            | _ -> raise (Unsupported_functor (String.concat "." (Longident.flatten f))))
     in
-    let inner = bound_modules body in
+    (match arg.pmod_desc with
+     | Pmod_ident { txt; _ } when fid >= 0 ->
+         (match resolve frames txt with
+          | Some a ->
+              if Hashtbl.mem applied (fid, a.id) then
+                raise (Unsupported_functor (String.concat "." (Longident.flatten f) ^ " applied twice to one module"));
+              Hashtbl.replace applied (fid, a.id) ()
+          | None -> ())
+     | _ -> ());
+    let inner_mods, inner_vals = bound_names body in
+    let heads, free_vals = free_names body in
+    let lib_of h = function None -> Some h | Some { lib = Some l; _ } -> Some l | Some _ -> None in
     let hygiene =
       List.filter_map
         (fun h ->
-          if h = param || List.mem h inner || h = "Stdlib" then None
+          if h = param || List.mem h inner_mods || h = "Stdlib" then None
           else
-            let at_def = match List.assoc_opt h def_scope with Some d -> d | None -> None in
+            let at_def = match List.assoc_opt h def_mods with Some d -> d | None -> None in
             let at_app = lookup frames h in
-            let lib_of = function None -> Some h | Some { lib = Some l; _ } -> Some l | Some _ -> None in
             match at_def, at_app with
-            | _ when lib_of at_def <> None && lib_of at_def = lib_of at_app -> None
+            | _ when lib_of h at_def <> None && lib_of h at_def = lib_of h at_app -> None
             | Some d, Some a when d.id = a.id -> None
-            | None, Some _ -> Some (module_item h { pmod_desc = Pmod_ident (mk_lid ("Stdlib." ^ h)); pmod_loc = loc; pmod_attributes = [] })
-            | _ -> raise (Unsupported_functor ("module " ^ h ^ " is shadowed where the functor is applied")))
-        (free_heads body)
+            | _ ->
+                (match lib_of h at_def with
+                 | Some l ->
+                     let l = if String.length l > 7 && String.sub l 0 7 = "Stdlib." then l
+                       else if List.mem l stdlib_modules then "Stdlib." ^ l
+                       else raise (Unsupported_functor ("library module " ^ l ^ " is shadowed where the functor is applied")) in
+                     Some (module_item h { pmod_desc = Pmod_ident (mk_lid l); pmod_loc = loc; pmod_attributes = [] })
+                 | None -> raise (Unsupported_functor ("module " ^ h ^ " is shadowed where the functor is applied"))))
+        heads
     in
-    hygiene @ (module_item param arg :: body)
+    List.iter
+      (fun v ->
+        if not (List.mem v inner_vals) then
+          let at_def = match List.assoc_opt v def_vals with Some i -> i | None -> None in
+          if at_def <> lookup_val frames v then
+            raise (Unsupported_functor ("value " ^ v ^ " is rebound where the functor is applied")))
+      free_vals;
+    (* the argument first: a hygiene alias must not capture it *)
+    module_item param arg :: (hygiene @ body)
 
   let rec rewrite_items frames (items : structure) : structure =
-    let frame = List.hd frames in
-    List.concat_map (fun it -> rewrite_item frames frame it) items
+    List.concat_map (fun it -> rewrite_item frames (List.hd frames) it) items
 
   (* a module expression -> (rewritten, its definition) *)
   and rewrite_mexpr frames (me : module_expr) : module_expr * mdef option =
     match me.pmod_desc with
     | Pmod_structure items ->
         let d = fresh () in
-        let items = rewrite_items (d.members :: frames) items in
+        let items = rewrite_items (new_scope d :: frames) items in
         ({ me with pmod_desc = Pmod_structure items }, Some d)
     | Pmod_apply ({ pmod_desc = Pmod_ident { txt = f; _ }; _ }, ({ pmod_desc = Pmod_ident _; _ } as arg)) ->
         let items = specialize frames f arg in
@@ -238,8 +297,9 @@ module Functors = struct
          | Some d -> (me, Some d)
          | None ->
              (* an alias of a library module *)
-             let path = String.concat "." (Longident.flatten txt) in
-             let path = match Longident.flatten txt with h :: rest -> (match library_of frames h with Some l -> String.concat "." (l :: rest) | None -> path) | [] -> path in
+             let path = match Longident.flatten txt with
+               | h :: rest -> (match library_of frames h with Some l -> String.concat "." (l :: rest) | None -> String.concat "." (h :: rest))
+               | [] -> "" in
              (me, Some (fresh ~lib:path ())))
     | Pmod_constraint (inner, mty) ->
         let inner, d = rewrite_mexpr frames inner in
@@ -248,7 +308,8 @@ module Functors = struct
         let d = fresh () in
         (match body.pmod_desc with
          | Pmod_structure items | Pmod_constraint ({ pmod_desc = Pmod_structure items; _ }, _) ->
-             d.functor_ <- Some (p, items, visible frames)
+             let vm, vv = visible frames in
+             d.functor_ <- Some (p, items, vm, vv)
          | _ -> ());
         (me, Some d)
     | _ -> (me, None)
@@ -257,18 +318,20 @@ module Functors = struct
     match it.pstr_desc with
     | Pstr_module ({ pmb_name = { txt = Some name; _ }; pmb_expr; _ } as mb) ->
         let me, d = rewrite_mexpr frames pmb_expr in
-        (match d with Some d -> Hashtbl.replace frame name d | None -> Hashtbl.replace frame name (fresh ()));
+        define_mod frame name (match d with Some d -> d | None -> fresh ());
         [ { it with pstr_desc = Pstr_module { mb with pmb_expr = me } } ]
     | Pstr_include ({ pincl_mod; _ } as incl) ->
         let me, d = rewrite_mexpr frames pincl_mod in
-        (* the included modules become members of this one *)
-        (match d with Some d -> Hashtbl.iter (fun n m -> Hashtbl.replace frame n m) d.members | None -> ());
+        (match d with Some d -> bring frame ~export:true d | None -> ());
         [ { it with pstr_desc = Pstr_include { incl with pincl_mod = me } } ]
-    | Pstr_open ({ popen_expr = { pmod_desc = Pmod_ident { txt; _ }; _ }; _ }) ->
-        (match resolve frames txt with
-         | Some d -> Hashtbl.iter (fun n m -> Hashtbl.replace frame n m) d.members
-         | None -> ());
+    | Pstr_open { popen_expr = { pmod_desc = Pmod_ident { txt; _ }; _ }; _ } ->
+        (match resolve frames txt with Some d -> bring frame ~export:false d | None -> ());
         [ it ]
+    | Pstr_value (_, vbs) ->
+        let _, vals = bound_names [ { it with pstr_desc = Pstr_value (Asttypes.Nonrecursive, List.map (fun vb -> { vb with pvb_expr = { vb.pvb_expr with pexp_desc = Pexp_unreachable } }) vbs) } ] in
+        List.iter (define_val frame) vals;
+        [ it ]
+    | Pstr_primitive vd -> define_val frame vd.pval_name.txt; [ it ]
     | _ -> [ it ]
 
   let rewrite (str : structure) : structure = rewrite_items [ toplevel ] str
