@@ -8193,15 +8193,21 @@ fn step_31() -> Unit raise {
   let gconv_net = @lib.itlist(
     fn(
       x751 : (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise),
-      x752 : @nets.Net[@simp.Gconv],
-    ) -> @nets.Net[@simp.Gconv] raise {
+      x752 : @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]],
+    ) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise {
       let s753 = ((x750 : (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise)) => {
         @lib.uncurry(
           fn(
             x747 : @kernel.Term,
             x748 : (@kernel.Term) -> @kernel.Thm raise,
-          ) -> ((@nets.Net[@simp.Gconv]) -> @nets.Net[@simp.Gconv] raise) raise {
-            fn(x749 : @nets.Net[@simp.Gconv]) -> @nets.Net[@simp.Gconv] raise {
+          ) -> ((@nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]) -> @nets.Net[
+            @simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise],
+          ] raise) raise {
+            fn(
+              x749 : @nets.Net[
+                @simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise],
+              ],
+            ) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise {
               @simp.net_of_conv(x747, x748, x749)
             }
           },
@@ -8294,15 +8300,21 @@ fn step_33() -> Unit raise {
   let gconv_net = @lib.itlist(
     fn(
       x780 : (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise),
-      x781 : @nets.Net[@simp.Gconv],
-    ) -> @nets.Net[@simp.Gconv] raise {
+      x781 : @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]],
+    ) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise {
       let s782 = ((x779 : (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise)) => {
         @lib.uncurry(
           fn(
             x776 : @kernel.Term,
             x777 : (@kernel.Term) -> @kernel.Thm raise,
-          ) -> ((@nets.Net[@simp.Gconv]) -> @nets.Net[@simp.Gconv] raise) raise {
-            fn(x778 : @nets.Net[@simp.Gconv]) -> @nets.Net[@simp.Gconv] raise {
+          ) -> ((@nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]) -> @nets.Net[
+            @simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise],
+          ] raise) raise {
+            fn(
+              x778 : @nets.Net[
+                @simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise],
+              ],
+            ) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise {
               @simp.net_of_conv(x776, x777, x778)
             }
           },

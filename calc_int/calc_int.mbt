@@ -2218,15 +2218,21 @@ fn step_30() -> Unit raise {
   let gconv_net = @lib.itlist(
     fn(
       x209 : (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise),
-      x210 : @nets.Net[@simp.Gconv],
-    ) -> @nets.Net[@simp.Gconv] raise {
+      x210 : @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]],
+    ) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise {
       let s211 = ((x208 : (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise)) => {
         @lib.uncurry(
           fn(
             x205 : @kernel.Term,
             x206 : (@kernel.Term) -> @kernel.Thm raise,
-          ) -> ((@nets.Net[@simp.Gconv]) -> @nets.Net[@simp.Gconv] raise) raise {
-            fn(x207 : @nets.Net[@simp.Gconv]) -> @nets.Net[@simp.Gconv] raise {
+          ) -> ((@nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]) -> @nets.Net[
+            @simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise],
+          ] raise) raise {
+            fn(
+              x207 : @nets.Net[
+                @simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise],
+              ],
+            ) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise {
               @simp.net_of_conv(x205, x206, x207)
             }
           },
