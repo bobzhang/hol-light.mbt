@@ -1,0 +1,353 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/matroids"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn finite_imp_matroid_finite_dim() -> @kernel.Thm
+
+pub fn finite_imp_matroid_finite_dim_span() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn matroid_bases_card_eq() -> @kernel.Thm
+
+pub fn matroid_bases_finite() -> @kernel.Thm
+
+pub fn matroid_bases_size() -> @kernel.Thm
+
+pub fn matroid_basis() -> @kernel.Thm
+
+pub fn matroid_basis_eq_maximal_independent() -> @kernel.Thm
+
+pub fn matroid_basis_eq_minimal_spanning() -> @kernel.Thm
+
+pub fn matroid_basis_exists() -> @kernel.Thm
+
+pub fn matroid_basis_exists_dim() -> @kernel.Thm
+
+pub fn matroid_basis_exists_dimension() -> @kernel.Thm
+
+pub fn matroid_basis_imp_subset() -> @kernel.Thm
+
+pub fn matroid_basis_submatroid() -> @kernel.Thm
+
+pub fn matroid_choose_subset() -> @kernel.Thm
+
+pub fn matroid_choose_subspace() -> @kernel.Thm
+
+pub fn matroid_contains_basis_dim() -> @kernel.Thm
+
+pub fn matroid_dependent() -> @kernel.Thm
+
+pub fn matroid_dependent_finitary() -> @kernel.Thm
+
+pub fn matroid_dependent_finitary_minimal() -> @kernel.Thm
+
+pub fn matroid_dependent_imp_subset() -> @kernel.Thm
+
+pub fn matroid_dependent_v1() -> @kernel.Thm
+
+pub fn matroid_dim() -> @kernel.Thm
+
+pub fn matroid_dim_alt() -> @kernel.Thm
+
+pub fn matroid_dim_basis() -> @kernel.Thm
+
+pub fn matroid_dim_empty() -> @kernel.Thm
+
+pub fn matroid_dim_eq_card() -> @kernel.Thm
+
+pub fn matroid_dim_eq_card_gen() -> @kernel.Thm
+
+pub fn matroid_dim_eq_finite_card_eq() -> @kernel.Thm
+
+pub fn matroid_dim_eq_span() -> @kernel.Thm
+
+pub fn matroid_dim_finite_le() -> @kernel.Thm
+
+pub fn matroid_dim_ge() -> @kernel.Thm
+
+pub fn matroid_dim_ge_card() -> @kernel.Thm
+
+pub fn matroid_dim_ge_card_gen() -> @kernel.Thm
+
+pub fn matroid_dim_ge_finite_card() -> @kernel.Thm
+
+pub fn matroid_dim_ge_finite_card_eq() -> @kernel.Thm
+
+pub fn matroid_dim_insert() -> @kernel.Thm
+
+pub fn matroid_dim_le() -> @kernel.Thm
+
+pub fn matroid_dim_le_card() -> @kernel.Thm
+
+pub fn matroid_dim_le_card_gen() -> @kernel.Thm
+
+pub fn matroid_dim_set() -> @kernel.Thm
+
+pub fn matroid_dim_span() -> @kernel.Thm
+
+pub fn matroid_dim_span_eq() -> @kernel.Thm
+
+pub fn matroid_dim_span_eq_gen() -> @kernel.Thm
+
+pub fn matroid_dim_span_psubset() -> @kernel.Thm
+
+pub fn matroid_dim_span_subset() -> @kernel.Thm
+
+pub fn matroid_dim_subset() -> @kernel.Thm
+
+pub fn matroid_dim_subset_alt() -> @kernel.Thm
+
+pub fn matroid_dim_unique() -> @kernel.Thm
+
+pub fn matroid_dim_unique_alt() -> @kernel.Thm
+
+pub fn matroid_dimension() -> @kernel.Thm
+
+pub fn matroid_dimension_alt() -> @kernel.Thm
+
+pub fn matroid_dimension_eq_card() -> @kernel.Thm
+
+pub fn matroid_dimension_finite_le() -> @kernel.Thm
+
+pub fn matroid_dimension_ge() -> @kernel.Thm
+
+pub fn matroid_dimension_ge_card() -> @kernel.Thm
+
+pub fn matroid_dimension_ge_finite_card() -> @kernel.Thm
+
+pub fn matroid_dimension_le() -> @kernel.Thm
+
+pub fn matroid_dimension_unique() -> @kernel.Thm
+
+pub fn matroid_eq_spans_card_eq() -> @kernel.Thm
+
+pub fn matroid_eq_spans_finite() -> @kernel.Thm
+
+pub fn matroid_eq_spans_size() -> @kernel.Thm
+
+pub fn matroid_finite_dim() -> @kernel.Thm
+
+pub fn matroid_finite_dim_basis() -> @kernel.Thm
+
+pub fn matroid_finite_dim_empty() -> @kernel.Thm
+
+pub fn matroid_finite_dim_finite() -> @kernel.Thm
+
+pub fn matroid_finite_dim_imp_subset() -> @kernel.Thm
+
+pub fn matroid_finite_dim_insert() -> @kernel.Thm
+
+pub fn matroid_finite_dim_mono() -> @kernel.Thm
+
+pub fn matroid_finite_dim_set() -> @kernel.Thm
+
+pub fn matroid_finite_dim_span() -> @kernel.Thm
+
+pub fn matroid_finite_dim_span_eq() -> @kernel.Thm
+
+pub fn matroid_finite_dim_subset() -> @kernel.Thm
+
+pub fn matroid_finite_dim_union() -> @kernel.Thm
+
+pub fn matroid_finite_dim_v1() -> @kernel.Thm
+
+pub fn matroid_finite_dimensional() -> @kernel.Thm
+
+pub fn matroid_finite_dimensional_any() -> @kernel.Thm
+
+pub fn matroid_finite_dimensional_basis() -> @kernel.Thm
+
+pub fn matroid_finite_dimensional_contains_basis() -> @kernel.Thm
+
+pub fn matroid_finite_dimensional_dim() -> @kernel.Thm
+
+pub fn matroid_finite_dimensional_v1() -> @kernel.Thm
+
+pub fn matroid_independent() -> @kernel.Thm
+
+pub fn matroid_independent_card_le_span() -> @kernel.Thm
+
+pub fn matroid_independent_card_le_span_finite() -> @kernel.Thm
+
+pub fn matroid_independent_card_le_spanning() -> @kernel.Thm
+
+pub fn matroid_independent_chain() -> @kernel.Thm
+
+pub fn matroid_independent_empty() -> @kernel.Thm
+
+pub fn matroid_independent_extends_to_basis() -> @kernel.Thm
+
+pub fn matroid_independent_finitary() -> @kernel.Thm
+
+pub fn matroid_independent_imp_finite() -> @kernel.Thm
+
+pub fn matroid_independent_imp_subset() -> @kernel.Thm
+
+pub fn matroid_independent_insert() -> @kernel.Thm
+
+pub fn matroid_independent_mono() -> @kernel.Thm
+
+pub fn matroid_independent_spanning_finite() -> @kernel.Thm
+
+pub fn matroid_independent_submatroid() -> @kernel.Thm
+
+pub fn matroid_independent_v1() -> @kernel.Thm
+
+pub fn matroid_intermediate_basis() -> @kernel.Thm
+
+pub fn matroid_intermediate_span() -> @kernel.Thm
+
+pub fn matroid_lowdim_expand_basis() -> @kernel.Thm
+
+pub fn matroid_lowdim_expand_dimension() -> @kernel.Thm
+
+pub fn matroid_maximal_independent_subset_span() -> @kernel.Thm
+
+pub fn matroid_minimally_dependent() -> @kernel.Thm
+
+pub fn matroid_minimally_dependent_subset() -> @kernel.Thm
+
+pub fn matroid_set() -> @kernel.Thm
+
+pub fn matroid_span() -> @kernel.Thm
+
+pub fn matroid_span_chain() -> @kernel.Thm
+
+pub fn matroid_span_delete_eq() -> @kernel.Thm
+
+pub fn matroid_span_dependence() -> @kernel.Thm
+
+pub fn matroid_span_dim_eq() -> @kernel.Thm
+
+pub fn matroid_span_eq() -> @kernel.Thm
+
+pub fn matroid_span_eq_self() -> @kernel.Thm
+
+pub fn matroid_span_eq_set() -> @kernel.Thm
+
+pub fn matroid_span_exchange() -> @kernel.Thm
+
+pub fn matroid_span_exchange_delete() -> @kernel.Thm
+
+pub fn matroid_span_finitary() -> @kernel.Thm
+
+pub fn matroid_span_finitary_gen() -> @kernel.Thm
+
+pub fn matroid_span_finitary_minimal() -> @kernel.Thm
+
+pub fn matroid_span_inc() -> @kernel.Thm
+
+pub fn matroid_span_insert_eq() -> @kernel.Thm
+
+pub fn matroid_span_insert_refl() -> @kernel.Thm
+
+pub fn matroid_span_inter_spans() -> @kernel.Thm
+
+pub fn matroid_span_inter_subset() -> @kernel.Thm
+
+pub fn matroid_span_minimal() -> @kernel.Thm
+
+pub fn matroid_span_mono() -> @kernel.Thm
+
+pub fn matroid_span_of_subspace() -> @kernel.Thm
+
+pub fn matroid_span_psubset_explicit() -> @kernel.Thm
+
+pub fn matroid_span_psubset_independent() -> @kernel.Thm
+
+pub fn matroid_span_set() -> @kernel.Thm
+
+pub fn matroid_span_span() -> @kernel.Thm
+
+pub fn matroid_span_subset() -> @kernel.Thm
+
+pub fn matroid_span_subset_eq() -> @kernel.Thm
+
+pub fn matroid_span_subset_subspace() -> @kernel.Thm
+
+pub fn matroid_span_subspace() -> @kernel.Thm
+
+pub fn matroid_span_superset() -> @kernel.Thm
+
+pub fn matroid_span_trans() -> @kernel.Thm
+
+pub fn matroid_span_union() -> @kernel.Thm
+
+pub fn matroid_span_union_eq() -> @kernel.Thm
+
+pub fn matroid_span_union_left() -> @kernel.Thm
+
+pub fn matroid_span_union_right() -> @kernel.Thm
+
+pub fn matroid_span_union_subset() -> @kernel.Thm
+
+pub fn matroid_spanning() -> @kernel.Thm
+
+pub fn matroid_spanning_alt() -> @kernel.Thm
+
+pub fn matroid_spanning_contains_basis() -> @kernel.Thm
+
+pub fn matroid_spanning_imp_subset() -> @kernel.Thm
+
+pub fn matroid_spanning_psubset_independent() -> @kernel.Thm
+
+pub fn matroid_spanning_set() -> @kernel.Thm
+
+pub fn matroid_spanning_submatroid() -> @kernel.Thm
+
+pub fn matroid_spanning_submatroid_self() -> @kernel.Thm
+
+pub fn matroid_spanning_subset_independent() -> @kernel.Thm
+
+pub fn matroid_steinitz_exchange() -> @kernel.Thm
+
+pub fn matroid_steinitz_exchange_alt() -> @kernel.Thm
+
+pub fn matroid_steinitz_exchange_finite() -> @kernel.Thm
+
+pub fn matroid_subset_contains_basis() -> @kernel.Thm
+
+pub fn matroid_subspace() -> @kernel.Thm
+
+pub fn matroid_subspace_chain() -> @kernel.Thm
+
+pub fn matroid_subspace_imp_subset() -> @kernel.Thm
+
+pub fn matroid_subspace_inter() -> @kernel.Thm
+
+pub fn matroid_subspace_inters() -> @kernel.Thm
+
+pub fn matroid_subspace_set() -> @kernel.Thm
+
+pub fn matroid_subspace_span() -> @kernel.Thm
+
+pub fn matroid_subspace_v1() -> @kernel.Thm
+
+pub fn matroid_tybij() -> @kernel.Thm
+
+pub fn submatroid() -> @kernel.Thm
+
+pub fn submatroid_gen() -> @kernel.Thm
+
+pub fn submatroid_set() -> @kernel.Thm
+
+pub fn submatroid_span() -> @kernel.Thm
+
+pub fn submatroid_subset() -> @kernel.Thm
+
+pub fn submatroid_v1() -> @kernel.Thm
+
+pub fn subset_matroid_span() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
