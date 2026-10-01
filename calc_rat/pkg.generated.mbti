@@ -1,0 +1,126 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/calc_rat"
+
+import {
+  "bobzhang/hol_light/compute",
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/realarith",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn asm_real_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn decimal() -> @kernel.Thm
+
+pub fn gen_real_arith((((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> ((@realarith.Positivstellensatz) -> @kernel.Thm raise) raise) -> (((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> @kernel.Thm raise) raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn rat_lemma1() -> @kernel.Thm
+
+pub fn rat_lemma2() -> @kernel.Thm
+
+pub fn rat_lemma3() -> @kernel.Thm
+
+pub fn rat_lemma4() -> @kernel.Thm
+
+pub fn rat_lemma5() -> @kernel.Thm
+
+pub fn real_arith(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn real_field(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_grow_shrink() -> @kernel.Thm
+
+pub fn real_ideal_cofactors(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @list.List[@kernel.Term] raise) raise
+
+pub fn real_ideal_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn real_int_rat_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_le_trans_le() -> @kernel.Thm
+
+pub fn real_le_trans_lt() -> @kernel.Thm
+
+pub fn real_le_trans_lte() -> @kernel.Thm
+
+pub fn real_poly_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_poly_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_poly_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_poly_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_poly_neg_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_poly_pow_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_poly_sub_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_abs_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_compute_add_convs(@compute.Compset) -> Unit raise
+
+pub fn real_rat_compute_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_div_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_ge_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_gt_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_inv_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_le_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_lt_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_max_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_min_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_neg_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_pow_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_red_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_red_conv_list() -> @list.List[(@kernel.Term, (@kernel.Term) -> @kernel.Thm raise)]
+
+pub fn real_rat_reduce_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_sgn_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_sub_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_ring(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_shrink_eq() -> @kernel.Thm
+
+pub fn real_shrink_galois() -> @kernel.Thm
+
+pub fn real_shrink_grow() -> @kernel.Thm
+
+pub fn real_shrink_grow_eq() -> @kernel.Thm
+
+pub fn real_shrink_le() -> @kernel.Thm
+
+pub fn real_shrink_lt() -> @kernel.Thm
+
+pub fn real_shrink_range() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
