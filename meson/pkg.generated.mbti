@@ -12,9 +12,9 @@ import {
 // Values
 pub fn asm_meson_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
 
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash, TC : Eq + @lib.OCompare + @lib.OHash, TD : Eq + @lib.OCompare + @lib.OHash, TE : Eq + @lib.OCompare + @lib.OHash] cacheconts(((TB, (TC, TD, TE))) -> TA raise) -> (((TB, (TC, TD, TE))) -> TA raise) raise
+pub fn[TA, TB, TC : Eq + @lib.OCompare + @lib.OHash, TD, TE : Eq + @lib.OCompare + @lib.OHash] cacheconts(((TB, (TC, TD, TE))) -> TA raise) -> (((TB, (TC, TD, TE))) -> TA raise) raise
 
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] checkan(@list.List[(FolTerm, Int)], (Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])]) -> @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])] raise
+pub fn[TA, TB] checkan(@list.List[(FolTerm, Int)], (Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])]) -> @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])] raise
 
 pub fn clear_contrapos_cache(Unit) -> Unit raise
 
@@ -22,7 +22,7 @@ pub fn conjuncts_then_p((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @
 
 pub fn create_equality_axioms(@list.List[@kernel.Term]) -> @list.List[@kernel.Thm] raise
 
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] expand_goal(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])), (Int, @kernel.Thm))])]) -> ((((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])])) -> ((Int) -> ((Int) -> ((((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise) -> TA raise) raise) raise) raise) raise
+pub fn[TA, TB] expand_goal(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])), (Int, @kernel.Thm))])]) -> ((((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])])) -> ((Int) -> ((Int) -> ((((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise) -> TA raise) raise) raise) raise) raise
 
 pub fn finish_rule(@kernel.Thm) -> @kernel.Thm raise
 
@@ -72,7 +72,7 @@ pub fn hol_of_var(Int) -> @kernel.Term raise
 
 pub fn inferences() -> @ref.Ref[Int]
 
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] insertan(@list.List[(FolTerm, Int)], (Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[TA], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])]) -> @list.List[(Int, @list.List[((@list.List[TA], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])] raise
+pub fn[TA] insertan(@list.List[(FolTerm, Int)], (Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[TA], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])]) -> @list.List[(Int, @list.List[((@list.List[TA], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])] raise
 
 pub fn istriv(@list.List[(FolTerm, Int)], Int, FolTerm) -> Bool raise
 
@@ -88,13 +88,13 @@ pub fn meson_dcutin() -> @ref.Ref[Int]
 
 pub fn meson_depth() -> @ref.Ref[Bool]
 
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] meson_expand(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])), (Int, @kernel.Thm))])], (((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])]), (@list.List[(FolTerm, Int)], Int, Int)), ((Int, @kernel.Thm)) -> (((@list.List[((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])])], (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise) raise) -> TA raise
+pub fn[TA, TB] meson_expand(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])), (Int, @kernel.Thm))])], (((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])]), (@list.List[(FolTerm, Int)], Int, Int)), ((Int, @kernel.Thm)) -> (((@list.List[((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])])], (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise) raise) -> TA raise
 
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash, TC : Eq + @lib.OCompare + @lib.OHash, TD : Eq + @lib.OCompare + @lib.OHash, TE : Eq + @lib.OCompare + @lib.OHash, TF : Eq + @lib.OCompare + @lib.OHash] meson_expand_cont(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])), TC)], (((TD, @list.List[FolTerm]), @list.List[(Int, @list.List[((TE, (Int, @list.List[FolTerm])), TF)])]), (@list.List[(FolTerm, Int)], Int, Int)), (TC) -> (((@list.List[((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((TE, (Int, @list.List[FolTerm])), TF)])])], (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise) raise) -> TA raise
+pub fn[TA, TB, TC, TD, TE, TF] meson_expand_cont(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])), TC)], (((TD, @list.List[FolTerm]), @list.List[(Int, @list.List[((TE, (Int, @list.List[FolTerm])), TF)])]), (@list.List[(FolTerm, Int)], Int, Int)), (TC) -> (((@list.List[((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((TE, (Int, @list.List[FolTerm])), TF)])])], (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise) raise) -> TA raise
 
 pub fn meson_prefine() -> @ref.Ref[Bool]
 
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash, TC : Eq + @lib.OCompare + @lib.OHash, TD : Eq + @lib.OCompare + @lib.OHash, TE : Eq + @lib.OCompare + @lib.OHash] meson_single_expand(Int, ((@list.List[(Int, @list.List[FolTerm])], (TC, @list.List[FolTerm])), TD), (((TE, @list.List[FolTerm]), @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])]), (@list.List[(FolTerm, Int)], Int, Int))) -> (@list.List[((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])])], (@list.List[(FolTerm, Int)], Int, Int)) raise
+pub fn[TA, TB, TC, TD, TE] meson_single_expand(Int, ((@list.List[(Int, @list.List[FolTerm])], (TC, @list.List[FolTerm])), TD), (((TE, @list.List[FolTerm]), @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])]), (@list.List[(FolTerm, Int)], Int, Int))) -> (@list.List[((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])])], (@list.List[(FolTerm, Int)], Int, Int)) raise
 
 pub fn meson_skew() -> @ref.Ref[Int]
 
@@ -104,7 +104,7 @@ pub fn meson_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)
 
 pub fn meson_to_hol(@list.List[(FolTerm, Int)]) -> ((FolGoal) -> @kernel.Thm raise) raise
 
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] mk_negated(Int, TA) -> (Int, TA) raise
+pub fn[TA] mk_negated(Int, TA) -> (Int, TA) raise
 
 pub fn offinc() -> Int
 
@@ -116,7 +116,7 @@ pub fn poly_assume_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kerne
 
 pub fn pure_meson_tac(Int, Int, Int, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
 
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] qpartition((TA) -> Bool raise, @list.List[TA]) -> ((@list.List[TA]) -> (@list.List[TA], @list.List[TA]) raise) raise
+pub fn[TA] qpartition((TA) -> Bool raise, @list.List[TA]) -> ((@list.List[TA]) -> (@list.List[TA], @list.List[TA]) raise) raise
 
 pub fn quant_bool_conv(@kernel.Term) -> @kernel.Thm raise
 
@@ -128,7 +128,7 @@ pub fn separate_insts(Int, @list.List[(FolTerm, Int)], @list.List[(FolTerm, Int)
 
 pub fn simple_meson_refute(Int, Int, Int, @list.List[@kernel.Thm]) -> @kernel.Thm raise
 
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] solve_goal(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (TA, @list.List[FolTerm])), (Int, @kernel.Thm))])], Bool, Int, Int, Int) -> (((Int, @list.List[FolTerm])) -> (FolGoal, (@list.List[(FolTerm, Int)], Int, Int)) raise) raise
+pub fn[TA] solve_goal(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (TA, @list.List[FolTerm])), (Int, @kernel.Thm))])], Bool, Int, Int, Int) -> (((Int, @list.List[FolTerm])) -> (FolGoal, (@list.List[(FolTerm, Int)], Int, Int)) raise) raise
 
 pub fn split_tac(Int, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
 

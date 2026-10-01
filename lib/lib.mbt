@@ -1454,3 +1454,372 @@ pub fn[A] rev_append(l1 : @list.List[A], l2 : @list.List[A]) -> @list.List[A] {
   }
   acc
 }
+
+///|
+/// `List.sort` / `List.stable_sort`: a stable sort by an OCaml-style
+/// comparison (negative, zero, positive).
+pub fn[A] list_sort(
+  cmp : (A, A) -> Int raise?,
+  l : @list.List[A],
+) -> @list.List[A] raise? {
+  let a = l.to_array()
+  let n = a.length()
+  if n < 2 {
+    return l
+  }
+  // bottom-up merge sort (stable)
+  let mut src = a
+  let mut dst = Array::make(n, a[0])
+  let mut width = 1
+  while width < n {
+    let mut lo = 0
+    while lo < n {
+      let mid = if lo + width < n { lo + width } else { n }
+      let hi = if lo + 2 * width < n { lo + 2 * width } else { n }
+      let mut i = lo
+      let mut j = mid
+      let mut k = lo
+      while i < mid && j < hi {
+        if cmp(src[j], src[i]) < 0 {
+          dst[k] = src[j]
+          j += 1
+        } else {
+          dst[k] = src[i]
+          i += 1
+        }
+        k += 1
+      }
+      while i < mid {
+        dst[k] = src[i]
+        i += 1
+        k += 1
+      }
+      while j < hi {
+        dst[k] = src[j]
+        j += 1
+        k += 1
+      }
+      lo += 2 * width
+    }
+    let t = src
+    src = dst
+    dst = t
+    width *= 2
+  }
+  @list.List(src)
+}
+
+///|
+/// `List.rev_map f l` (applies `f` from the head).
+pub fn[A, B] list_rev_map(
+  f : (A) -> B raise?,
+  l : @list.List[A],
+) -> @list.List[B] raise? {
+  let mut acc = @list.empty()
+  for x in l {
+    acc = acc.prepend(f(x))
+  }
+  acc
+}
+
+///|
+/// `List.nth l n`: fails with `nth` when too short; a negative index is
+/// `Invalid_argument "List.nth"` in OCaml (here a failure with that text).
+pub fn[A] list_nth(l : @list.List[A], n : Int) -> A raise {
+  if n < 0 {
+    raise @num.InvalidArgument("List.nth")
+  }
+  let mut l = l
+  let mut n = n
+  while true {
+    match l {
+      Empty => raise Failure("nth")
+      More(x, tail=t) => {
+        if n == 0 {
+          return x
+        }
+        l = t
+        n -= 1
+      }
+    }
+  }
+  raise Failure("nth")
+}
+
+///|
+/// `List.iter2 f l1 l2`
+pub fn[A, B] list_iter2(
+  f : (A, B) -> Unit raise?,
+  l1 : @list.List[A],
+  l2 : @list.List[B],
+) -> Unit raise {
+  let mut a = l1
+  let mut b = l2
+  while true {
+    match (a, b) {
+      (Empty, Empty) => return
+      (More(x, tail=xs), More(y, tail=ys)) => {
+        f(x, y)
+        a = xs
+        b = ys
+      }
+      _ => raise @num.InvalidArgument("List.iter2")
+    }
+  }
+}
+
+///|
+/// `List.mapi f l`
+pub fn[A, B] list_mapi(
+  f : (Int, A) -> B raise?,
+  l : @list.List[A],
+) -> @list.List[B] raise? {
+  let out = []
+  let mut i = 0
+  for x in l {
+    out.push(f(i, x))
+    i += 1
+  }
+  @list.List(out)
+}
+
+///|
+/// `List.iteri f l`
+pub fn[A] list_iteri(
+  f : (Int, A) -> Unit raise?,
+  l : @list.List[A],
+) -> Unit raise? {
+  let mut i = 0
+  for x in l {
+    f(i, x)
+    i += 1
+  }
+}
+
+///|
+/// `List.find p l`: raises `Not_found`.
+pub fn[A] list_find(p : (A) -> Bool raise?, l : @list.List[A]) -> A raise {
+  for x in l {
+    if p(x) {
+      return x
+    }
+  }
+  raise NotFound
+}
+
+///|
+/// `List.find_opt p l`
+pub fn[A] list_find_opt(p : (A) -> Bool raise?, l : @list.List[A]) -> A? raise? {
+  for x in l {
+    if p(x) {
+      return Some(x)
+    }
+  }
+  None
+}
+
+///|
+/// `List.filter_map f l`
+pub fn[A, B] list_filter_map(
+  f : (A) -> B? raise?,
+  l : @list.List[A],
+) -> @list.List[B] raise? {
+  let out = []
+  for x in l {
+    match f(x) {
+      Some(y) => out.push(y)
+      None => ()
+    }
+  }
+  @list.List(out)
+}
+
+///|
+/// `List.concat_map f l`
+pub fn[A, B] list_concat_map(
+  f : (A) -> @list.List[B] raise?,
+  l : @list.List[A],
+) -> @list.List[B] raise? {
+  let out = []
+  for x in l {
+    for y in f(x) {
+      out.push(y)
+    }
+  }
+  @list.List(out)
+}
+
+///|
+/// `List.mem_assoc a l`
+pub fn[A : OCompare, B] list_mem_assoc(a : A, l : @list.List[(A, B)]) -> Bool {
+  l.iter().any(p => p.0.ocompare(a) == 0)
+}
+
+///|
+/// `List.remove_assoc a l`: removes the first binding of `a`.
+pub fn[A : OCompare, B] list_remove_assoc(
+  a : A,
+  l : @list.List[(A, B)],
+) -> @list.List[(A, B)] {
+  match l {
+    Empty => @list.empty()
+    More(p, tail=t) =>
+      if p.0.ocompare(a) == 0 {
+        t
+      } else {
+        list_remove_assoc(a, t).prepend(p)
+      }
+  }
+}
+
+///|
+/// `List.split l`
+pub fn[A, B] list_split(
+  l : @list.List[(A, B)],
+) -> (@list.List[A], @list.List[B]) {
+  (l.map(p => p.0), l.map(p => p.1))
+}
+
+///|
+/// `List.init n f` (OCaml applies `f` in index order for short lists).
+pub fn[A] list_init(n : Int, f : (Int) -> A raise?) -> @list.List[A] raise {
+  if n < 0 {
+    raise @num.InvalidArgument("List.init")
+  }
+  let out = []
+  for i in 0..<n {
+    out.push(f(i))
+  }
+  @list.List(out)
+}
+
+///|
+/// `List.append l1 l2` (`l1 @ l2`)
+pub fn[A] list_append(l1 : @list.List[A], l2 : @list.List[A]) -> @list.List[A] {
+  l1.concat(l2)
+}
+
+///|
+/// `List.for_all2 p l1 l2`
+pub fn[A, B] list_for_all2(
+  p : (A, B) -> Bool raise?,
+  l1 : @list.List[A],
+  l2 : @list.List[B],
+) -> Bool raise {
+  let mut a = l1
+  let mut b = l2
+  while true {
+    match (a, b) {
+      (Empty, Empty) => return true
+      (More(x, tail=xs), More(y, tail=ys)) => {
+        if !p(x, y) {
+          return false
+        }
+        a = xs
+        b = ys
+      }
+      _ => raise @num.InvalidArgument("List.for_all2")
+    }
+  }
+  true
+}
+
+///|
+/// `List.exists2 p l1 l2`
+pub fn[A, B] list_exists2(
+  p : (A, B) -> Bool raise?,
+  l1 : @list.List[A],
+  l2 : @list.List[B],
+) -> Bool raise {
+  let mut a = l1
+  let mut b = l2
+  while true {
+    match (a, b) {
+      (Empty, Empty) => return false
+      (More(x, tail=xs), More(y, tail=ys)) => {
+        if p(x, y) {
+          return true
+        }
+        a = xs
+        b = ys
+      }
+      _ => raise @num.InvalidArgument("List.exists2")
+    }
+  }
+  false
+}
+
+///|
+/// `List.filter p l` (Stdlib order: the predicate runs head to tail).
+pub fn[A] list_filter(
+  p : (A) -> Bool raise?,
+  l : @list.List[A],
+) -> @list.List[A] raise? {
+  let acc = []
+  for x in l {
+    if p(x) {
+      acc.push(x)
+    }
+  }
+  @list.from_array(acc)
+}
+
+///|
+/// `List.partition p l` (Stdlib order: the predicate runs head to tail).
+pub fn[A] list_partition(
+  p : (A) -> Bool raise?,
+  l : @list.List[A],
+) -> (@list.List[A], @list.List[A]) raise? {
+  let yes = []
+  let no = []
+  for x in l {
+    if p(x) {
+      yes.push(x)
+    } else {
+      no.push(x)
+    }
+  }
+  (@list.from_array(yes), @list.from_array(no))
+}
+
+///|
+/// `List.map2 f l1 l2`: raises `Invalid_argument` on a length mismatch,
+/// after applying `f` to the common prefix.
+pub fn[A, B, C] list_map2(
+  f : (A, B) -> C raise?,
+  l1 : @list.List[A],
+  l2 : @list.List[B],
+) -> @list.List[C] raise {
+  let acc = []
+  let mut a = l1
+  let mut b = l2
+  while true {
+    match (a, b) {
+      (Empty, Empty) => break
+      (More(x, tail=xs), More(y, tail=ys)) => {
+        acc.push(f(x, y))
+        a = xs
+        b = ys
+      }
+      _ => raise @num.InvalidArgument("List.map2")
+    }
+  }
+  @list.from_array(acc)
+}
+
+///|
+/// `List.combine l1 l2`: raises `Invalid_argument` on a length mismatch.
+pub fn[A, B] list_combine(
+  l1 : @list.List[A],
+  l2 : @list.List[B],
+) -> @list.List[(A, B)] raise {
+  list_map2((x, y) => (x, y), l1, l2) catch {
+    _ => raise @num.InvalidArgument("List.combine")
+  }
+}
+
+///|
+/// OCaml's `~-.`: negation keeps the sign of zero (`0.0 - x` would not).
+pub fn float_neg(x : Double) -> Double {
+  -x
+}

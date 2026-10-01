@@ -75,6 +75,8 @@ pub fn[A] flat(@list.List[@list.List[A]]) -> @list.List[A]
 
 pub fn[A, B, C] flip((A, B) -> C raise?, B, A) -> C raise?
 
+pub fn float_neg(Double) -> Double
+
 pub fn[A, B] fold_left((A, B) -> A raise?, A, @list.List[B]) -> A raise?
 
 pub fn[A, B, C] fold_left_map((A, B) -> (A, C) raise?, A, @list.List[B]) -> (A, @list.List[C]) raise?
@@ -125,7 +127,49 @@ pub fn[A] last(@list.List[A]) -> A raise
 
 pub fn[A] length(@list.List[A]) -> Int
 
+pub fn[A] list_append(@list.List[A], @list.List[A]) -> @list.List[A]
+
 pub fn[A : OCompare, B] list_assoc(A, @list.List[(A, B)]) -> B raise
+
+pub fn[A, B] list_combine(@list.List[A], @list.List[B]) -> @list.List[(A, B)] raise
+
+pub fn[A, B] list_concat_map((A) -> @list.List[B] raise?, @list.List[A]) -> @list.List[B] raise?
+
+pub fn[A, B] list_exists2((A, B) -> Bool raise?, @list.List[A], @list.List[B]) -> Bool raise
+
+pub fn[A] list_filter((A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
+
+pub fn[A, B] list_filter_map((A) -> B? raise?, @list.List[A]) -> @list.List[B] raise?
+
+pub fn[A] list_find((A) -> Bool raise?, @list.List[A]) -> A raise
+
+pub fn[A] list_find_opt((A) -> Bool raise?, @list.List[A]) -> A? raise?
+
+pub fn[A, B] list_for_all2((A, B) -> Bool raise?, @list.List[A], @list.List[B]) -> Bool raise
+
+pub fn[A] list_init(Int, (Int) -> A raise?) -> @list.List[A] raise
+
+pub fn[A, B] list_iter2((A, B) -> Unit raise?, @list.List[A], @list.List[B]) -> Unit raise
+
+pub fn[A] list_iteri((Int, A) -> Unit raise?, @list.List[A]) -> Unit raise?
+
+pub fn[A, B, C] list_map2((A, B) -> C raise?, @list.List[A], @list.List[B]) -> @list.List[C] raise
+
+pub fn[A, B] list_mapi((Int, A) -> B raise?, @list.List[A]) -> @list.List[B] raise?
+
+pub fn[A : OCompare, B] list_mem_assoc(A, @list.List[(A, B)]) -> Bool
+
+pub fn[A] list_nth(@list.List[A], Int) -> A raise
+
+pub fn[A] list_partition((A) -> Bool raise?, @list.List[A]) -> (@list.List[A], @list.List[A]) raise?
+
+pub fn[A : OCompare, B] list_remove_assoc(A, @list.List[(A, B)]) -> @list.List[(A, B)]
+
+pub fn[A, B] list_rev_map((A) -> B raise?, @list.List[A]) -> @list.List[B] raise?
+
+pub fn[A] list_sort((A, A) -> Int raise?, @list.List[A]) -> @list.List[A] raise?
+
+pub fn[A, B] list_split(@list.List[(A, B)]) -> (@list.List[A], @list.List[B])
 
 pub fn[A, B] map((A) -> B raise?, @list.List[A]) -> @list.List[B] raise?
 

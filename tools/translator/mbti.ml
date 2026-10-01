@@ -110,8 +110,13 @@ module Mbti = struct
          | Sym ")" :: rest -> ([t], rest)
          | _ -> raise (Parse_error "parameter list"))
 
+  (* functions whose generics carry trait bounds: "pkg.name" *)
+  let bounded_fns : (string, unit) Hashtbl.t = Hashtbl.create 64
+  let last_bounded = ref false
+
   let parse_decl line =
     let toks = lex line in
+    last_bounded := false;
     match toks with
     | Id "pub" :: Id "fn" :: rest ->
         let generics, rest =
@@ -120,6 +125,7 @@ module Mbti = struct
               let rec go acc = function
                 | Id g :: Sym "," :: rest -> go (g :: acc) rest
                 | Id g :: Sym ":" :: rest ->
+                    last_bounded := true;
                     (* bounds: skip to , or ] *)
                     let rec skip = function
                       | Sym "," :: rest -> go (g :: acc) rest
@@ -170,7 +176,9 @@ module Mbti = struct
              (* methods `pub fn T::m(...)` do not parse as declarations *)
              match (try parse_decl line with Parse_error m ->
                         prerr_endline ("mbti: " ^ m ^ ": " ^ line); None) with
-               | Some (name, d) -> Hashtbl.replace t name d
+               | Some (name, d) ->
+                   Hashtbl.replace t name d;
+                   if !last_bounded then Hashtbl.replace bounded_fns (pkg ^ "." ^ name) ()
                | None -> ()
            done
          with End_of_file -> close_in ic)
@@ -185,18 +193,21 @@ module Mbti = struct
       "BytesView"; "StringView"; "Json"; "Iter" ]
 
   (* Types a package's interface names without qualification are its own. *)
-  let rec qualify pkg = function
+  (* `generics`: the declaration's own type parameters (`fn[TA, B] ...`) *)
+  let rec qualify ?(generics = []) pkg = function
     | Named (n, args) ->
         let n =
-          if String.contains n '@' || List.mem n builtin || String.length n = 1 then n
+          if String.contains n '@' || List.mem n builtin || String.length n = 1 || List.mem n generics then n
           else "@" ^ pkg ^ "." ^ n
         in
-        Named (n, List.map (qualify pkg) args)
-    | Tuple ts -> Tuple (List.map (qualify pkg) ts)
-    | Fun (ps, r, raises) -> Fun (List.map (qualify pkg) ps, qualify pkg r, raises)
+        Named (n, List.map (qualify ~generics pkg) args)
+    | Tuple ts -> Tuple (List.map (qualify ~generics pkg) ts)
+    | Fun (ps, r, raises) -> Fun (List.map (qualify ~generics pkg) ps, qualify ~generics pkg r, raises)
 
   let qualify_decl pkg = function
-    | Func (g, ps, r, raises) -> Func (g, List.map (qualify pkg) ps, qualify pkg r, raises)
+    | Func (g, ps, r, raises) ->
+        let generics = List.map (fun v -> String.trim (match String.index_opt v ':' with Some i -> String.sub v 0 i | None -> v)) g in
+        Func (g, List.map (qualify ~generics pkg) ps, qualify ~generics pkg r, raises)
     | Value t -> Value (qualify pkg t)
     | Alias t -> Alias (qualify pkg t)
 

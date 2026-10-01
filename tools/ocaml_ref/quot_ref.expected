@@ -1,0 +1,227 @@
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Warning: inventing type variables
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Warning: inventing type variables
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 5
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 5
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+0..0..1..3..7..15..26..54..86..136..solved at 208
+0..0..1..solved at 4
+0..0..solved at 2
+0..0..1..4..solved at 10
+0..0..1..4..9..solved at 21
+0..0..solved at 2
+0..0..1..solved at 4
+0..0..1..2..6..11..22..38..70..solved at 116
+0..0..solved at 2
+0..0..solved at 2
+0..0..1..2..6..11..22..41..76..solved at 108
+0..0..1..solved at 4
+0..0..solved at 2
+quot quotations (6):
+  !x:A. (@y. x = y) = x
+  dest(mk((R:Repty->Repty->bool) x):Absty) = R x
+  x:Repty
+  (a /\\ b /\\ c) /\\ (b ==> a ==> d)\n                       ==> a /\\ b /\\ c /\\ d
+  !x y. (mk((R:Repty->Repty->bool) x):Absty = mk(R y)) <=> (R x = R y)
+  (!x:Repty. R x x) /\\\n     (!x y. R x y <=> R y x) /\\\n     (!x y z. R x y /\\ R y z ==> R x z) /\\\n     (!a. mk(dest a) = a) /\\\n     (!r. (?x. r = R x) <=> (dest(mk r) = r))\n     ==> (!x y. R x y <=> (mk(R x) = mk(R y))) /\\\n         (!P. (!x. P(mk(R x))) <=> (!x. P x)) /\\\n         (!P. (?x. P(mk(R x))) <=> (?x. P x)) /\\\n         (!x:Absty. mk(R((@)(dest x))) = x)
+define =  |- ((#=:fun(qbool,fun(qbool,bool)) (#mk_qbool:fun(fun(bool,bool),qbool) (#dest_qbool:fun(qbool,fun(bool,bool)) a:qbool))) a:qbool) ;;  |- ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(bool,bool),bool) (\x:bool. ((#=:fun(fun(bool,bool),fun(fun(bool,bool),bool)) r:fun(bool,bool)) (#BEQ:fun(bool,fun(bool,bool)) x:bool))))) ((#=:fun(fun(bool,bool),fun(fun(bool,bool),bool)) (#dest_qbool:fun(qbool,fun(bool,bool)) (#mk_qbool:fun(fun(bool,bool),qbool) r:fun(bool,bool)))) r:fun(bool,bool)))
+lift_function =  |- ((#=:fun(qbool,fun(qbool,bool)) (#qnot:fun(qbool,qbool) x:qbool)) (#mk_qbool:fun(fun(bool,bool),qbool) (\u:bool. (#?:fun(fun(bool,bool),bool) (\x:bool. ((#/\:fun(bool,fun(bool,bool)) ((#BEQ:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) x:bool)) u:bool)) ((#dest_qbool:fun(qbool,fun(bool,bool)) x:qbool) x:bool))))))) ;;  |- ((#=:fun(qbool,fun(qbool,bool)) (#mk_qbool:fun(fun(bool,bool),qbool) (#BEQ:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) x:bool)))) (#qnot:fun(qbool,qbool) (#mk_qbool:fun(fun(bool,bool),qbool) (#BEQ:fun(bool,fun(bool,bool)) x:bool))))
+lift_theorem =  |- (#!:fun(fun(qbool,bool),bool) (\x:qbool. ((#=:fun(qbool,fun(qbool,bool)) (#qnot:fun(qbool,qbool) (#qnot:fun(qbool,qbool) x:qbool))) x:qbool)))
+define_again ! new_basic_type_definition: Constant(s) already in use
+types = qbool 1 bool fun
+constants = qnot dest_qbool mk_qbool BEQ one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? ! ==> /\ T =
+Warning: inventing type variables
+counter_tyvar = zz_counter:'?4207
+counter_genvar = _1025:bool

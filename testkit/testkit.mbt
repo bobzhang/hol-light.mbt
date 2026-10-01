@@ -72,6 +72,7 @@ pub fn Log::attempt(self : Log, name : String, f : () -> String raise) -> Unit {
   let line = try f() catch {
     Failure(msg) => name + " ! " + msg
     @parser.Noparse => name + " !! Noparse"
+    @lib.Unchanged => name + " !! Unchanged"
     @lib.MatchFailure(_) => name + " !! Match_failure"
     @num.InvalidArgument(m) => name + " !! Invalid_argument(\"" + m + "\")"
     e => name + " !! " + e.to_string()

@@ -1,0 +1,262 @@
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Warning: inventing type variables
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Warning: inventing type variables
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 5
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 5
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+0..0..1..3..7..15..26..54..86..136..solved at 208
+0..0..1..solved at 4
+0..0..solved at 2
+0..0..1..4..solved at 10
+0..0..1..4..9..solved at 21
+0..0..solved at 2
+0..0..1..solved at 4
+0..0..1..2..6..11..22..38..70..solved at 116
+0..0..solved at 2
+0..0..solved at 2
+0..0..1..2..6..11..22..41..76..solved at 108
+0..0..1..solved at 4
+0..0..solved at 2
+impconv quotations (31):
+  (/\\)
+  A:bool
+  B:bool
+  C:bool
+  D:bool
+  T:bool
+  A ==> A
+  (x ==> y /\\ z) <=> (x==>y) /\\(x==>z)
+  (p==>q==>r) <=> (q==>p==>r)
+  ((A ==> B) ==> (C ==> D)) /\\ ((B ==> A) ==> (D ==> C)) ==> (A <=> B)\n      ==> (C <=> D)
+  ((A ==> B) ==> C) /\\ ((B ==> A) ==> D) ==> (A <=> B) ==> C /\\ D
+  ((A ==> B) ==> C) ==> (A <=> B) ==> C /\\ (B ==> A)
+  ((B ==> A) ==> D) ==> (A <=> B) ==> (A ==> B) /\\ D
+  (C ==> A ==> B) /\\ (D ==> B ==> A) ==> C /\\ D ==> (A <=> B)
+  (C ==> A ==> B) ==> C /\\ (B ==> A) ==> (A <=> B)
+  (D ==> B ==> A) ==> (A ==> B) /\\ D ==> (A <=> B)
+  (B==>A) /\\ (A==>B==>C==>D) ==> (A==>C) ==> (B==>D)
+  (A==>B) /\\ (A==>B==>D==>C) ==> (B==>D) ==> (A==>C)
+  (A==>C==>D) ==> (A==>C) ==> (A==>D)
+  (C==>A==>B) /\\ (A==>B==>C==>D) ==> (A/\\C==>B/\\D)
+  (C==>A==>B) ==> (A/\\C==>B/\\C)
+  (A==>C==>D) ==> (A/\\C==>A/\\D)
+  (B==>A) /\\ (B==>D==>C) ==> (B/\\D==>A/\\C)
+  (B==>A) ==> (B/\\C==>A/\\C)
+  (C==>B==>A) ==> (B/\\C==>A/\\C)
+  :bool->bool->bool
+  A==>B==>C <=> B==>A==>C
+  (~P ==> Q = R) ==> (Q <=> (~P ==> R) /\\ (P ==> Q))
+  (P ==> Q = R) ==> (Q <=> (P ==> R) /\\ (~P ==> Q))
+  :bool->bool->bool
+  A==>B==>C <=> B==>A==>C
+imp_rewrite = []
+imp_rewrite_seq = [[] ?- ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (h:fun(bool,bool) a:bool)) (Q:fun(bool,bool) a:bool))) (P:fun(bool,bool) a:bool))) ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (h:fun(bool,bool) b:bool)) (Q:fun(bool,bool) b:bool))) (P:fun(bool,bool) b:bool)))]
+imp_rewrite_two = [[] ?- ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (P:fun(bool,bool) a:bool)) (g:fun(bool,bool) a:bool))) ((#/\:fun(bool,fun(bool,bool)) #T:bool) (P:fun(bool,bool) a:bool)))]
+imp_rewrite_eq = []
+imp_rewrite_unchanged ! Unchanged
+Warning: inventing type variables
+imp_rewrite_hyp ! Unchanged
+Warning: inventing type variables
+case_rewrite !! Unchanged
+Warning: inventing type variables
+target_rewrite ! vsubst: Bad substitution list
+hint_exists = []
+hint_exists_none ! Unchanged
+imp_rewrite_forall = [[] ?- (#!:fun(fun(bool,bool),bool) (\y:bool. ((#==>:fun(bool,fun(bool,bool)) (P:fun(bool,bool) y:bool)) (g:fun(bool,bool) y:bool))))]
+imp_rewrite_exists = [[] ?- (#?:fun(fun(bool,bool),bool) (\y:bool. ((#/\:fun(bool,fun(bool,bool)) (g:fun(bool,bool) y:bool)) (P:fun(bool,bool) y:bool))))]
+prove_imp_rewrite =  |- ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(bool,bool),bool) (\x:bool. ((#==>:fun(bool,fun(bool,bool)) (P:fun(bool,bool) x:bool)) ((#=:fun(bool,fun(bool,bool)) (f:fun(bool,bool) x:bool)) (g:fun(bool,bool) x:bool)))))) ((#==>:fun(bool,fun(bool,bool)) (P:fun(bool,bool) a:bool)) ((#==>:fun(bool,fun(bool,bool)) (g:fun(bool,bool) a:bool)) (f:fun(bool,bool) a:bool))))
+case_rewrite_conj = [[] ?- ((#==>:fun(bool,fun(bool,bool)) q:bool) ((#/\:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (P:fun(bool,bool) a:bool)) (g:fun(bool,bool) a:bool))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (P:fun(bool,bool) a:bool))) (f:fun(bool,bool) a:bool))))]
+Warning: inventing type variables
+target_rewrite_hyp ! vsubst: Bad substitution list

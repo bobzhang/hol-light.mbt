@@ -736,7 +736,7 @@ fn step_20() -> Unit raise {
             ((x88 : @list.List[@kernel.Term]) => {
               ((x87 : @kernel.Term) => t86(bool_cases_tac(x87)))(@lib.hd(x88))
             })(
-              (x91 => {
+              ((x91 : @list.List[@kernel.Term]) => {
                 @lib.sort(
                   (x89 : @kernel.Term, x90 : @kernel.Term) => {
                     @basics.free_in(x89, x90)
@@ -1794,7 +1794,7 @@ fn step_52() -> Unit raise {
                 @lib.hd(x180),
               )
             })(
-              (x183 => {
+              ((x183 : @list.List[@kernel.Term]) => {
                 @lib.sort(
                   (x181 : @kernel.Term, x182 : @kernel.Term) => {
                     @basics.free_in(x181, x182)

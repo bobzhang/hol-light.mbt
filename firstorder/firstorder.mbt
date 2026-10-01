@@ -18,11 +18,7 @@ pub fn copverb() -> Ref[Bool] {
 
 ///|
 /// `%>`
-pub fn[
-  TA : Eq + @lib.OCompare + @lib.OHash,
-  TB : Eq + @lib.OCompare + @lib.OHash,
-  TC : Eq + @lib.OCompare + @lib.OHash,
-] op_percent_gt(
+pub fn[TA, TB, TC] op_percent_gt(
   x1 : (TC) -> TB raise,
   x2 : (TB) -> TA raise,
   x3 : TC,
@@ -35,11 +31,7 @@ pub fn[
 
 ///|
 /// `%`
-pub fn[
-  TA : Eq + @lib.OCompare + @lib.OHash,
-  TB : Eq + @lib.OCompare + @lib.OHash,
-  TC : Eq + @lib.OCompare + @lib.OHash,
-] op_percent(
+pub fn[TA, TB, TC] op_percent(
   x4 : (TB) -> TA raise,
   x5 : (TC) -> TB raise,
   x6 : TC,
@@ -52,26 +44,14 @@ pub fn[
 
 ///|
 /// `const`
-pub fn[
-  TA : Eq + @lib.OCompare + @lib.OHash,
-  TB : Eq + @lib.OCompare + @lib.OHash,
-] const_(
-  x7 : TA,
-  x8 : TB,
-) -> TA raise {
+pub fn[TA, TB] const_(x7 : TA, x8 : TB) -> TA raise {
   let x = x7
   x
 }
 
 ///|
 /// `>>=`
-pub fn[
-  TA : Eq + @lib.OCompare + @lib.OHash,
-  TB : Eq + @lib.OCompare + @lib.OHash,
-] op_gt_gt_eq(
-  x9 : TB?,
-  x10 : (TB) -> TA? raise,
-) -> TA? raise {
+pub fn[TA, TB] op_gt_gt_eq(x9 : TB?, x10 : (TB) -> TA? raise) -> TA? raise {
   let x = x9
   let f = x10
   match x {
@@ -82,13 +62,7 @@ pub fn[
 
 ///|
 /// `mapn`
-pub fn[
-  TA : Eq + @lib.OCompare + @lib.OHash,
-  TB : Eq + @lib.OCompare + @lib.OHash,
-] mapn(
-  x11 : (TB) -> TA raise,
-  x12 : (TB, TB),
-) -> (TA, TA) raise {
+pub fn[TA, TB] mapn(x11 : (TB) -> TA raise, x12 : (TB, TB)) -> (TA, TA) raise {
   let f = x11
   let (x, y) = x12
   let t13 = f(y)
@@ -97,10 +71,7 @@ pub fn[
 
 ///|
 /// `cons`
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] cons(
-  x14 : TA,
-  x15 : @list.List[TA],
-) -> @list.List[TA] raise {
+pub fn[TA] cons(x14 : TA, x15 : @list.List[TA]) -> @list.List[TA] raise {
   let x = x14
   let l = x15
   l.prepend(x)
@@ -108,7 +79,7 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] cons(
 
 ///|
 /// `list_rest`
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] list_rest(
+pub fn[TA] list_rest(
   x16 : @list.List[TA],
 ) -> @list.List[(TA, (@list.List[TA], @list.List[TA]))] raise {
   let l = x16
@@ -116,7 +87,7 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] list_rest(
 }
 
 ///|
-fn[TB : Eq + @lib.OCompare + @lib.OHash] go_l(
+fn[TB] go_l(
   x17 : @list.List[TB],
   x18 : @list.List[TB],
 ) -> @list.List[(TB, (@list.List[TB], @list.List[TB]))] raise {
@@ -129,15 +100,15 @@ fn[TB : Eq + @lib.OCompare + @lib.OHash] go_l(
 
 ///|
 /// `nth_rest`
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] nth_rest(
+pub fn[TA] nth_rest(
   x19 : Int,
 ) -> ((@list.List[TA]) -> (TA, (@list.List[TA], @list.List[TA])) raise) raise {
   let n = x19
-  x24 => go_l_1(@list.empty(), n, x24)
+  (x24 : @list.List[TA]) => go_l_1(@list.empty(), n, x24)
 }
 
 ///|
-fn[TB : Eq + @lib.OCompare + @lib.OHash] go_l_1(
+fn[TB] go_l_1(
   x21 : @list.List[TB],
   x22 : Int,
   x23 : @list.List[TB],
@@ -153,7 +124,7 @@ fn[TB : Eq + @lib.OCompare + @lib.OHash] go_l_1(
 
 ///|
 /// `insert_at`
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] insert_at(
+pub fn[TA] insert_at(
   x25 : Int,
   x26 : TA,
   x27 : @list.List[TA],
@@ -177,15 +148,15 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] insert_at(
 
 ///|
 /// `take_drop`
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] take_drop(
+pub fn[TA] take_drop(
   x30 : Int,
 ) -> ((@list.List[TA]) -> (@list.List[TA], @list.List[TA]) raise) raise {
   let n = x30
-  x35 => go_l_2(@list.empty(), n, x35)
+  (x35 : @list.List[TA]) => go_l_2(@list.empty(), n, x35)
 }
 
 ///|
-fn[TB : Eq + @lib.OCompare + @lib.OHash] go_l_2(
+fn[TB] go_l_2(
   x32 : @list.List[TB],
   x33 : Int,
   x34 : @list.List[TB],
@@ -201,10 +172,7 @@ fn[TB : Eq + @lib.OCompare + @lib.OHash] go_l_2(
 
 ///|
 /// `take`
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] take(
-  x36 : Int,
-  x37 : @list.List[TA],
-) -> @list.List[TA] raise {
+pub fn[TA] take(x36 : Int, x37 : @list.List[TA]) -> @list.List[TA] raise {
   let n = x36
   let l = x37
   take_drop(n)(l).0
@@ -212,7 +180,7 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] take(
 
 ///|
 /// `findi`
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] findi(
+pub fn[TA] findi(
   x38 : (Int) -> ((TA) -> Bool raise) raise,
   x39 : @list.List[TA],
 ) -> (Int, TA) raise {
@@ -230,10 +198,7 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] findi(
 
 ///|
 /// `concat_map`
-pub fn[
-  TA : Eq + @lib.OCompare + @lib.OHash,
-  TB : Eq + @lib.OCompare + @lib.OHash,
-] concat_map(
+pub fn[TA, TB] concat_map(
   x42 : (TB) -> @list.List[TA] raise,
   x43 : @list.List[TB],
 ) -> @list.List[TA] raise {
@@ -270,9 +235,7 @@ pub fn fsum(x : @list.List[Double]) -> Double raise {
 
 ///|
 /// `last`
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] last(
-  x50 : @list.List[TA],
-) -> TA raise {
+pub fn[TA] last(x50 : @list.List[TA]) -> TA raise {
   match x50 {
     Empty => raise Failure("last")
     More(h, tail=Empty) => h
@@ -320,7 +283,7 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] union2(
 
 ///|
 /// `fold_right1`
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] fold_right1(
+pub fn[TA] fold_right1(
   x55 : (TA) -> ((TA) -> TA raise) raise,
   x56 : @list.List[TA],
 ) -> TA raise {
@@ -337,11 +300,7 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] fold_right1(
 
 ///|
 /// `fold_left_map`
-pub fn[
-  TA : Eq + @lib.OCompare + @lib.OHash,
-  TB : Eq + @lib.OCompare + @lib.OHash,
-  TC : Eq + @lib.OCompare + @lib.OHash,
-] fold_left_map(
+pub fn[TA, TB, TC] fold_left_map(
   x58 : (TA) -> ((TC) -> (TA, TB) raise) raise,
   x59 : TA,
 ) -> ((@list.List[TC]) -> (TA, @list.List[TB]) raise) raise {
@@ -363,11 +322,7 @@ pub fn[
 
 ///|
 /// `fold_right_map`
-pub fn[
-  TA : Eq + @lib.OCompare + @lib.OHash,
-  TB : Eq + @lib.OCompare + @lib.OHash,
-  TC : Eq + @lib.OCompare + @lib.OHash,
-] fold_right_map(
+pub fn[TA, TB, TC] fold_right_map(
   x64 : (TA) -> ((TC) -> (TA, TB) raise) raise,
   x65 : TA,
   x66 : @list.List[TC],
@@ -389,11 +344,7 @@ pub fn[
 
 ///|
 /// `fold_map`
-pub fn[
-  TA : Eq + @lib.OCompare + @lib.OHash,
-  TB : Eq + @lib.OCompare + @lib.OHash,
-  TC : Eq + @lib.OCompare + @lib.OHash,
-] fold_map(
+pub fn[TA, TB, TC] fold_map(
   x69 : (TA) -> ((TC) -> (TA, TB) raise) raise,
   x70 : TA,
   x71 : @list.List[TC],
@@ -407,10 +358,7 @@ pub fn[
 
 ///|
 /// `filter_map`
-pub fn[
-  TA : Eq + @lib.OCompare + @lib.OHash,
-  TB : Eq + @lib.OCompare + @lib.OHash,
-] filter_map(
+pub fn[TA, TB] filter_map(
   x72 : (TB) -> TA? raise,
   x73 : @list.List[TB],
 ) -> @list.List[TA] raise {
@@ -427,7 +375,7 @@ pub fn[
 
 ///|
 /// `exists_unique`
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] exists_unique(
+pub fn[TA] exists_unique(
   x74 : (TA) -> Bool raise,
   x75 : @list.List[TA],
 ) -> Bool raise {
@@ -753,7 +701,7 @@ pub fn hol_of_atom(
     raise @lib.AssertFailure("tscript.ml:217:4")
   }
   let tys_p = take(@lib.length(args_1), tys)
-  @basics.list_mk_comb(f_p, @lib.map2(hol_of_term, tys_p, args_1))
+  @basics.list_mk_comb(f_p, @lib.list_map2(hol_of_term, tys_p, args_1))
 }
 
 ///|
@@ -773,13 +721,6 @@ pub fn hol_of_literal(
 ///|
 /// fol_of_hol_clauses
 fn step_5() -> Unit raise {
-  let eqt = x105 => {
-    let (a1, (b1, c1)) = x105
-    x106 => {
-      let (a2, (b2, c2)) = x106
-      a1 == a2 && b1 == b2 && @basics.equals_thm(c1, c2)
-    }
-  }
   let fol_of_hol_clause : (@kernel.Thm) -> @list.List[
     (
       (
@@ -827,8 +768,8 @@ fn step_5() -> Unit raise {
     let thms = x117
     let rawrules = @lib.itlist(
       (
-        x123 : @kernel.Thm,
-        x124 : @list.List[
+        x120 : @kernel.Thm,
+        x121 : @list.List[
           (
             (
               @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -838,34 +779,39 @@ fn step_5() -> Unit raise {
           ),
         ],
       ) => {
-        let t125 = fol_of_hol_clause(x123)
-        (x126 => {
-          ((x121, x122) => {
-            @lib.union_eq(
+        let t122 = fol_of_hol_clause(x120)
+        ((
+          x123 : @list.List[
+            (
               (
-                x118 : (
-                  (
-                    @list.List[(Int, @list.List[@meson.FolTerm])],
-                    (Int, @list.List[@meson.FolTerm]),
-                  ),
-                  (Int, @kernel.Thm),
+                @list.List[(Int, @list.List[@meson.FolTerm])],
+                (Int, @list.List[@meson.FolTerm]),
+              ),
+              (Int, @kernel.Thm),
+            ),
+          ],
+        ) => {
+          ((
+            x118 : @list.List[
+              (
+                (
+                  @list.List[(Int, @list.List[@meson.FolTerm])],
+                  (Int, @list.List[@meson.FolTerm]),
                 ),
-                x119 : (
-                  (
-                    @list.List[(Int, @list.List[@meson.FolTerm])],
-                    (Int, @list.List[@meson.FolTerm]),
-                  ),
-                  (Int, @kernel.Thm),
+                (Int, @kernel.Thm),
+              ),
+            ],
+            x119 : @list.List[
+              (
+                (
+                  @list.List[(Int, @list.List[@meson.FolTerm])],
+                  (Int, @list.List[@meson.FolTerm]),
                 ),
-              ) => {
-                let s120 = eqt(x118)
-                s120(x119)
-              },
-              x121,
-              x122,
-            )
-          })(t125, x126)
-        })(x124)
+                (Int, @kernel.Thm),
+              ),
+            ],
+          ) => @lib.union_eq(eqt_l, x118, x119))(t122, x123)
+        })(x121)
       },
       thms,
       @list.empty(),
@@ -873,7 +819,7 @@ fn step_5() -> Unit raise {
     let prs = @lib.setify(
       @lib.map(
         (
-          x131 : (
+          x128 : (
             (
               @list.List[(Int, @list.List[@meson.FolTerm])],
               (Int, @list.List[@meson.FolTerm]),
@@ -882,42 +828,42 @@ fn step_5() -> Unit raise {
           ),
         ) => {
           ((
-            x129 : (
+            x126 : (
               @list.List[(Int, @list.List[@meson.FolTerm])],
               (Int, @list.List[@meson.FolTerm]),
             ),
           ) => {
-            ((x127 : (Int, @list.List[@meson.FolTerm])) => x127.0)(
+            ((x124 : (Int, @list.List[@meson.FolTerm])) => x124.0)(
               ((
-                x128 : (
+                x125 : (
                   @list.List[(Int, @list.List[@meson.FolTerm])],
                   (Int, @list.List[@meson.FolTerm]),
                 ),
-              ) => x128.1)(x129),
+              ) => x125.1)(x126),
             )
           })(
             ((
-              x130 : (
+              x127 : (
                 (
                   @list.List[(Int, @list.List[@meson.FolTerm])],
                   (Int, @list.List[@meson.FolTerm]),
                 ),
                 (Int, @kernel.Thm),
               ),
-            ) => x130.0)(x131),
+            ) => x127.0)(x128),
           )
         },
         rawrules,
       ),
     )
     let prules = @lib.map(
-      (x132 : Int) => {
-        let t_1 = x132
+      (x129 : Int) => {
+        let t_1 = x129
         (
           t_1,
           @lib.filter(
             (
-              x139 : (
+              x136 : (
                 (
                   @list.List[(Int, @list.List[@meson.FolTerm])],
                   (Int, @list.List[@meson.FolTerm]),
@@ -926,33 +872,33 @@ fn step_5() -> Unit raise {
               ),
             ) => {
               ((
-                x137 : (
+                x134 : (
                   @list.List[(Int, @list.List[@meson.FolTerm])],
                   (Int, @list.List[@meson.FolTerm]),
                 ),
               ) => {
-                ((x135 : (Int, @list.List[@meson.FolTerm])) => {
-                  ((x133 : Int) => t_1 == x133)(
-                    ((x134 : (Int, @list.List[@meson.FolTerm])) => x134.0)(x135),
+                ((x132 : (Int, @list.List[@meson.FolTerm])) => {
+                  ((x130 : Int) => t_1 == x130)(
+                    ((x131 : (Int, @list.List[@meson.FolTerm])) => x131.0)(x132),
                   )
                 })(
                   ((
-                    x136 : (
+                    x133 : (
                       @list.List[(Int, @list.List[@meson.FolTerm])],
                       (Int, @list.List[@meson.FolTerm]),
                     ),
-                  ) => x136.1)(x137),
+                  ) => x133.1)(x134),
                 )
               })(
                 ((
-                  x138 : (
+                  x135 : (
                     (
                       @list.List[(Int, @list.List[@meson.FolTerm])],
                       (Int, @list.List[@meson.FolTerm]),
                     ),
                     (Int, @kernel.Thm),
                   ),
-                ) => x138.0)(x139),
+                ) => x135.0)(x136),
               )
             },
             rawrules,
@@ -963,7 +909,7 @@ fn step_5() -> Unit raise {
     )
     let srules = @lib.sort(
       (
-        x140 : (
+        x137 : (
           Int,
           @list.List[
             (
@@ -975,7 +921,7 @@ fn step_5() -> Unit raise {
             ),
           ],
         ),
-        x141 : (
+        x138 : (
           Int,
           @list.List[
             (
@@ -988,10 +934,10 @@ fn step_5() -> Unit raise {
           ],
         ),
       ) => {
-        let (p_1, _) = x140
-        let (q, _) = x141
-        let t142 = @lib.abs_int(q)
-        @lib.abs_int(p_1) <= t142
+        let (p_1, _) = x137
+        let (q, _) = x138
+        let t139 = @lib.abs_int(q)
+        @lib.abs_int(p_1) <= t139
       },
       prules,
     )
@@ -1039,7 +985,17 @@ pub fn fol_of_hol_clauses(
 }
 
 ///|
-fn[TC : Eq + @lib.OCompare + @lib.OHash, TD : Eq + @lib.OCompare + @lib.OHash] mk_contraposes_l(
+fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] eqt_l(
+  x105 : (TA, (TB, @kernel.Thm)),
+  x106 : (TA, (TB, @kernel.Thm)),
+) -> Bool raise {
+  let (a1, (b1, c1)) = x105
+  let (a2, (b2, c2)) = x106
+  a1 == a2 && b1 == b2 && @basics.equals_thm(c1, c2)
+}
+
+///|
+fn[TC, TD] mk_contraposes_l(
   x107 : Int,
   x108 : TD,
   x109 : @list.List[(Int, TC)],

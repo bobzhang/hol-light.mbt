@@ -311,5 +311,15 @@ definitions register constants, quotations advance the type-variable and
   `include`/`open` of applications); they need functor instantiation in the
   translator and an ordered Map/Set in MoonBit. METIS is first used in
   arith.ml (3 times), so they come before that file. Until then later
-  packages and their reference scripts skip both. Next: `quot`, `impconv`,
-  then the theory files.
+  packages and their reference scripts skip both. `quot/` and `impconv/`
+  are done, entirely translated, and match upstream (quotient types,
+  lifted functions and theorems; IMP_REWRITE_TAC, SEQ_/CASE_/TARGET_
+  rewriting, HINT_EXISTS_TAC). impconv needed local modules and module
+  aliases, types declared in local modules, polymorphic local functions
+  lifted to generic top-level functions (captured locals are passed at
+  the instance used), local function-valued lets annotated with partial
+  types (`_` for unknown parts), and type variable names past `TZ`.
+  Generated packages also write `translated_names.txt` (a module member's
+  qualified name -> its MoonBit name), which later translations consult,
+  so `A.f` and `B.f` stay distinct across packages. Next: `metis` and
+  `thecops`, then the theory files.

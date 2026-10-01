@@ -63,10 +63,7 @@ module Emit = struct
 
   (* the type parameters a signature mentions, with OCaml's polymorphic
      equality, comparison and hashing *)
-  let generics_of text =
-    match tyvars_of_text text with
-    | [] -> ""
-    | ns -> "[" ^ String.concat ", " (List.map (fun g -> g ^ " : Eq + @lib.OCompare + @lib.OHash") ns) ^ "]"
+  let generics_of ?(body = "==") text = bounded (tyvars_of_text text) body
 
   (* `let f p1 ... pn = body` -> `pub fn f(...) -> R raise { ... }` *)
   let emit_function ?mname oname id (e : expression) =
@@ -76,6 +73,7 @@ module Emit = struct
     let want = M.Fun (List.map mty_of param_tys, mty_of body.exp_type, true) in
     ignore id;
     scope_tyvars := tyvars_of_text (String.concat " " (List.map show_ty (body.exp_type :: param_tys)));
+    Hashtbl.reset bound_tyvars;
     let _, lam, _ = lower ~expect:want e in
     scope_tyvars := [];
     (* registered after its body: a non-recursive redefinition refers to
@@ -91,7 +89,7 @@ module Emit = struct
         let ret = show_ty body.exp_type in
         let ret = if String.length ret > 0 && ret.[0] = '(' then "(" ^ ret ^ ")" else ret in
         let body_text = Ir.to_string (fun () -> Ir.pblock (stmts, result)) in
-        let text = Printf.sprintf "\n///|\n/// `%s`\npub fn%s %s(%s) -> %s raise %s\n" oname (generics_of (sig_params ^ " " ^ ret)) mname sig_params ret body_text in
+        let text = Printf.sprintf "\n///|\n/// `%s`\npub fn%s %s(%s) -> %s raise %s\n" oname (generics_of ~body:body_text (sig_params ^ " " ^ ret)) mname sig_params ret body_text in
         add_decl (fun () -> text)
     | _ -> failwith "emit_function: not a lambda"
 
@@ -164,13 +162,19 @@ module Emit = struct
     String.concat "" (List.map String.capitalize_ascii (String.split_on_char '_' s))
 
   (* `type t = C1 of a * b | ...` -> an enum; `type t = u` -> an alias *)
-  let emit_types (decls : type_declaration list) =
+  let emit_types ?(prefix = "") (decls : type_declaration list) =
+    let mname d = camel ((if prefix = "" then "" else prefix ^ "_") ^ Ident.name d.typ_id) in
     (* register every name first: the types may be mutually recursive *)
-    List.iter (fun d -> Hashtbl.replace own_types (Ident.name d.typ_id) (!current_pkg, camel (Ident.name d.typ_id))) decls;
+    List.iter
+      (fun d ->
+        Hashtbl.replace own_types_id (Ident.unique_name d.typ_id) (!current_pkg, mname d);
+        if prefix = "" then Hashtbl.replace own_types (Ident.name d.typ_id) (!current_pkg, mname d)
+        else Hashtbl.replace own_types (prefix ^ "." ^ Ident.name d.typ_id) (!current_pkg, mname d))
+      decls;
     List.iter
       (fun d ->
         Hashtbl.reset tyvar_names;
-        let name = camel (Ident.name d.typ_id) in
+        let name = mname d in
         let params = List.map (fun (ct, _) -> show_ty ct.ctyp_type) d.typ_params in
         let gens = if params = [] then "" else "[" ^ String.concat ", " params ^ "]" in
         match d.typ_kind, d.typ_manifest with
@@ -186,9 +190,12 @@ module Emit = struct
                   | Cstr_record _ -> unsupported d.typ_loc "record constructor")
                 cds
             in
+            (* OCaml's equality raises on closures: such types derive nothing *)
+            let has_fun = List.exists (fun c -> String.contains c '>' ) ctors in
             add_decl (fun () ->
-                Printf.sprintf "\n///|\n/// `%s`\npub(all) enum %s%s {\n  %s\n} derive(Eq, Debug)\n"
-                  (Ident.name d.typ_id) name gens (String.concat "\n  " ctors));
+                Printf.sprintf "\n///|\n/// `%s`\npub(all) enum %s%s {\n  %s\n}%s\n"
+                  (Ident.name d.typ_id) name gens (String.concat "\n  " ctors)
+                  (if has_fun then "" else " derive(Eq, Debug)"));
             (* OCaml's structural compare and Hashtbl.hash: constant
                constructors are immediates (their index), the others blocks
                (tag = index among the non-constant ones) *)
@@ -270,6 +277,9 @@ module Emit = struct
                     name (String.concat "\n  " steps) (List.nth names (n - 1)) (List.nth names (n - 1)) name n
                     (String.concat "\n  " (List.map (fun f -> "h.field(self." ^ f ^ ")") names)))
         | Ttype_abstract, Some ct ->
+            Hashtbl.replace own_aliases (Ident.unique_name d.typ_id) ();
+            if prefix = "" then Hashtbl.replace own_aliases (Ident.name d.typ_id) ();
+            if prefix <> "" then Hashtbl.replace own_aliases (prefix ^ "." ^ Ident.name d.typ_id) ();
             let t = show_ty ct.ctyp_type in
             add_decl (fun () -> Printf.sprintf "\n///|\n/// `%s`\npub type %s%s = %s\n" (Ident.name d.typ_id) name gens t)
         | _ -> unsupported d.typ_loc "type declaration")
@@ -343,8 +353,11 @@ module Emit = struct
     | Tstr_module { mb_expr = { mod_desc = Tmod_structure str; _ }; _ } -> List.iter (register pkg) str.str_items
     | _ -> ()
 
+  let () = emit_types_hook := fun prefix decls -> emit_types ~prefix decls
+
   let rec item ~(hand : hand list) (it : structure_item) =
     item_env := Some it.str_env;
+    Hashtbl.reset bound_tyvars;
     let _, line, _ = Location.get_pos_info it.str_loc.Location.loc_start in
     if trace then Printf.eprintf "item at line %d\n%!" line;
     match List.find_opt (fun h -> h.line = line) hand with
@@ -430,5 +443,12 @@ module Emit = struct
     Printf.fprintf oc
       "// Generated by tools/translator from %s; do not edit.\n// Regenerate with tools/ocaml_ref/translate.sh translate %s.\n%s\n///|\nfn load_steps() -> Unit raise {%s\n}\n"
       source source (String.concat "" (List.rev_map (fun f -> f ()) !decls)) (Buffer.contents steps);
+    close_out oc;
+    (* module members' MoonBit names, for packages translated later
+       (`A.f` and `B.f` cannot both be `f`) *)
+    let members = Hashtbl.fold (fun k (m, _) acc -> if String.contains k '.' then (k, m) :: acc else acc) own_by_name [] in
+    let oc = open_out (Filename.concat (Filename.dirname out) "translated_names.txt") in
+    output_string oc "# Generated by tools/translator: qualified upstream name -> MoonBit name.\n";
+    List.iter (fun (k, m) -> Printf.fprintf oc "%s %s\n" k m) (List.sort compare members);
     close_out oc
 end

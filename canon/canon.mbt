@@ -80,9 +80,6 @@ fn mk_fun_l(
   let mk_fun = (x4 : @kernel.Thm, x5 : @lib.Func[@kernel.Term, @kernel.Thm]) => {
     mk_fun_l(x4, x5)
   }
-  let use_fun = (x6 : @lib.Func[@kernel.Term, @kernel.Thm], x7 : @kernel.Term) => {
-    use_fun_l(x6, x7)
-  }
   let th = x4
   let fn_ = x5
   let tm = @kernel.concl(th)
@@ -99,9 +96,6 @@ fn use_fun_l(
   x6 : @lib.Func[@kernel.Term, @kernel.Thm],
   x7 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let mk_fun = (x4 : @kernel.Thm, x5 : @lib.Func[@kernel.Term, @kernel.Thm]) => {
-    mk_fun_l(x4, x5)
-  }
   let use_fun = (x6 : @lib.Func[@kernel.Term, @kernel.Thm], x7 : @kernel.Term) => {
     use_fun_l(x6, x7)
   }
@@ -208,9 +202,6 @@ fn mk_fun_l_1(
   let mk_fun = (x16 : @kernel.Thm, x17 : @lib.Func[@kernel.Term, @kernel.Thm]) => {
     mk_fun_l_1(not_disj_pair, not_disj, x16, x17)
   }
-  let use_fun = (x18 : @lib.Func[@kernel.Term, @kernel.Thm], x19 : @kernel.Term) => {
-    use_fun_l_1(not_disj_pair, not_disj, x18, x19)
-  }
   let th_1 = x16
   let fn_ = x17
   let tm = @kernel.rand(@kernel.concl(th_1))
@@ -229,9 +220,6 @@ fn use_fun_l_1(
   x18 : @lib.Func[@kernel.Term, @kernel.Thm],
   x19 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let mk_fun = (x16 : @kernel.Thm, x17 : @lib.Func[@kernel.Term, @kernel.Thm]) => {
-    mk_fun_l_1(not_disj_pair, not_disj, x16, x17)
-  }
   let use_fun = (x18 : @lib.Func[@kernel.Term, @kernel.Thm], x19 : @kernel.Term) => {
     use_fun_l_1(not_disj_pair, not_disj, x18, x19)
   }
@@ -300,7 +288,7 @@ fn step_4() -> Unit raise {
   let t30 = @simp.gen_rewrite_tac(
     (x29 : (@kernel.Term) -> @kernel.Thm raise) => {
       @equal.land_conv(
-        (x28 => {
+        ((x28 : (@kernel.Term) -> @kernel.Thm raise) => {
           @lib.funpow(
             2,
             (x25 : (@kernel.Term) -> @kernel.Thm raise) => {
@@ -1408,12 +1396,6 @@ fn weakdnf_l(
   x117 : @kernel.Term,
 ) -> @kernel.Thm raise {
   let weakdnf = (x117 : @kernel.Term) => weakdnf_l(distribute, strengthen, x117)
-  let substrongdnf = (x119 : @kernel.Term) => {
-    substrongdnf_l(distribute, strengthen, x119)
-  }
-  let strongdnf = (x121 : @kernel.Term) => {
-    strongdnf_l(distribute, strengthen, x121)
-  }
   let tm_1 = x117
   match tm_1 {
     Comb(Const("!", _), Abs(_, _)) | Comb(Const("?", _), Abs(_, _)) =>
@@ -1434,7 +1416,6 @@ fn substrongdnf_l(
   strengthen : (@kernel.Term) -> @kernel.Thm raise,
   x119 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let weakdnf = (x117 : @kernel.Term) => weakdnf_l(distribute, strengthen, x117)
   let substrongdnf = (x119 : @kernel.Term) => {
     substrongdnf_l(distribute, strengthen, x119)
   }
@@ -1464,12 +1445,8 @@ fn strongdnf_l(
   strengthen : (@kernel.Term) -> @kernel.Thm raise,
   x121 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let weakdnf = (x117 : @kernel.Term) => weakdnf_l(distribute, strengthen, x117)
   let substrongdnf = (x119 : @kernel.Term) => {
     substrongdnf_l(distribute, strengthen, x119)
-  }
-  let strongdnf = (x121 : @kernel.Term) => {
-    strongdnf_l(distribute, strengthen, x121)
   }
   let tm_3 = x121
   let th_4 = substrongdnf(tm_3)
@@ -1551,12 +1528,6 @@ fn weakcnf_l(
   x125 : @kernel.Term,
 ) -> @kernel.Thm raise {
   let weakcnf = (x125 : @kernel.Term) => weakcnf_l(distribute, strengthen, x125)
-  let substrongcnf = (x127 : @kernel.Term) => {
-    substrongcnf_l(distribute, strengthen, x127)
-  }
-  let strongcnf = (x129 : @kernel.Term) => {
-    strongcnf_l(distribute, strengthen, x129)
-  }
   let tm_1 = x125
   match tm_1 {
     Comb(Const("!", _), Abs(_, _)) | Comb(Const("?", _), Abs(_, _)) =>
@@ -1577,7 +1548,6 @@ fn substrongcnf_l(
   strengthen : (@kernel.Term) -> @kernel.Thm raise,
   x127 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let weakcnf = (x125 : @kernel.Term) => weakcnf_l(distribute, strengthen, x125)
   let substrongcnf = (x127 : @kernel.Term) => {
     substrongcnf_l(distribute, strengthen, x127)
   }
@@ -1607,12 +1577,8 @@ fn strongcnf_l(
   strengthen : (@kernel.Term) -> @kernel.Thm raise,
   x129 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let weakcnf = (x125 : @kernel.Term) => weakcnf_l(distribute, strengthen, x125)
   let substrongcnf = (x127 : @kernel.Term) => {
     substrongcnf_l(distribute, strengthen, x127)
-  }
-  let strongcnf = (x129 : @kernel.Term) => {
-    strongcnf_l(distribute, strengthen, x129)
   }
   let tm_3 = x129
   let th_4 = substrongcnf(tm_3)
@@ -1821,7 +1787,7 @@ fn step_12() -> Unit raise {
       )(tm)
     }
   }
-  let half_mk_abs_conv = conv
+  let half_mk_abs_conv : (@list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise = conv
   fn find_lambda(x160 : @kernel.Term) -> @kernel.Term raise {
     let tm_1 = x160
     if @kernel.is_abs(tm_1) {
@@ -2194,7 +2160,7 @@ fn step_14() -> Unit raise {
       let t212 = @kernel.refl(op)
       let th_2 = @lib.rev_itlist(
         (x209 : @kernel.Thm, x210 : @kernel.Thm) => {
-          ((x207, x208) => {
+          ((x207 : @kernel.Thm, x208 : @kernel.Thm) => {
             @lib.curry(
               (x206 : (@kernel.Thm, @kernel.Thm)) => {
                 @kernel.mk_comb_rule(x206.0, x206.1)

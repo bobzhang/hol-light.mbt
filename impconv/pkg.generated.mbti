@@ -1,0 +1,76 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/impconv"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn case_rewrite_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn hint_exists_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn imp_rewrite_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn seq_imp_rewrite_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn target_rewrite_tac(@list.List[@kernel.Thm]) -> ((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise
+
+// Errors
+
+// Types and methods
+pub(all) enum FoNetsT[TA] {
+  Netnode(@list.List[(FoNetsTermLabel, FoNetsT[TA])], @list.List[TA])
+} derive(Eq, @debug.Debug)
+
+pub(all) enum FoNetsTermLabel {
+  Vnet(Int)
+  Lcnet(String, Int)
+  Cnet(String, Int)
+  Lnet(Int)
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for FoNetsTermLabel
+pub impl @lib.OHash for FoNetsTermLabel
+
+pub(all) enum ImpconvAtomic {
+  Atomic
+  Non_atomic
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for ImpconvAtomic
+pub impl @lib.OHash for ImpconvAtomic
+
+pub(all) enum ImpconvWithContext[TA] {
+  With_context(TA, (@list.List[@kernel.Term]) -> ImpconvWithContext[TA] raise, (@kernel.Term) -> ImpconvWithContext[TA] raise)
+}
+
+pub(all) enum TypeAnnotedTermT {
+  Var_(String, @kernel.HolType)
+  Const_(String, @kernel.HolType, @kernel.Term)
+  Comb_(TypeAnnotedTermT, TypeAnnotedTermT, @kernel.HolType)
+  Abs_(TypeAnnotedTermT, TypeAnnotedTermT, @kernel.HolType)
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for TypeAnnotedTermT
+pub impl @lib.OHash for TypeAnnotedTermT
+
+pub(all) enum VarianceT {
+  Co
+  Contra
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for VarianceT
+pub impl @lib.OHash for VarianceT
+
+// Type aliases
+pub type ImpconvAnnotConv = (@kernel.Term) -> (@kernel.Thm, @kernel.Term?, @list.List[@kernel.Term]) raise
+
+pub type ImpconvAnnotMconv = (@kernel.Term) -> @list.List[(@kernel.Thm, @kernel.Term?, @list.List[@kernel.Term])] raise
+
+pub type ImpconvImpConv = (VarianceT) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub type ImpconvImpMconv = (VarianceT) -> ((@kernel.Term) -> @list.List[@kernel.Thm] raise) raise
+
+pub type TsetT = @list.List[@kernel.Term]
+
+// Traits

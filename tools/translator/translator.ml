@@ -126,7 +126,8 @@ module Names = struct
     | "canon.ml" -> Some "canon"
     | "meson.ml" -> Some "meson"
     | "firstorder.ml" -> Some "firstorder"
-    | "metis.ml" -> Some "metis"
+    | "quot.ml" -> Some "quot"
+    | "impconv.ml" -> Some "impconv"
     | "bignum_num.ml" -> Some "num"
     | _ -> None
 
@@ -187,11 +188,40 @@ module Names = struct
 
   (* The MoonBit package and declaration for an upstream value (a module
      member's qualified name resolves by its last component). *)
+  (* a generated package's module members: qualified name -> MoonBit name *)
+  let member_tables : (string, (string, string) Hashtbl.t) Hashtbl.t = Hashtbl.create 16
+
+  let members pkg =
+    match Hashtbl.find_opt member_tables pkg with
+    | Some t -> t
+    | None ->
+        let t = Hashtbl.create 16 in
+        let file = Filename.concat (Filename.concat !root pkg) "translated_names.txt" in
+        if Sys.file_exists file then begin
+          let ic = open_in file in
+          (try
+             while true do
+               let line = input_line ic in
+               if String.length line > 0 && line.[0] <> '#' then
+                 match String.split_on_char ' ' line with
+                 | [ k; m ] -> Hashtbl.replace t k m
+                 | _ -> ()
+             done
+           with End_of_file -> ());
+          close_in ic
+        end;
+        Hashtbl.replace member_tables pkg t;
+        t
+
   let resolve file name =
+    let qualified = name in
     let name = match String.rindex_opt name '.' with Some i when i > 0 && i < String.length name - 1 -> String.sub name (i + 1) (String.length name - i - 1) | _ -> name in
     let rec go_pkgs = function
       | [] -> None
       | pkg :: pkgs ->
+          match Hashtbl.find_opt (members pkg) qualified with
+          | Some m -> Option.map (fun d -> (pkg, m, d)) (Mbti.find ~root:!root pkg m)
+          | None ->
           let rec go = function
             | [] -> go_pkgs pkgs
             | c :: cs ->

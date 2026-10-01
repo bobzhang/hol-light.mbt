@@ -30,7 +30,14 @@ module Lower = struct
      it includes the module's earlier items) *)
   let item_env : Env.t option ref = ref None
 
-  let env () = match !item_env with Some e -> e | None -> !Toploop.toplevel_env
+  (* the environment of the expression being lowered (it knows types
+     declared locally, e.g. in a `let module`) *)
+  let exp_env : Env.t option ref = ref None
+
+  let env () =
+    match !exp_env with
+    | Some e -> e
+    | None -> (match !item_env with Some e -> e | None -> !Toploop.toplevel_env)
 
   let tyvar_names : (int, string) Hashtbl.t = Hashtbl.create 16
 
@@ -45,7 +52,8 @@ module Lower = struct
     | None ->
         (* `TA`, `TB`, ...: distinct from the one-letter generics of the
            package interfaces *)
-        let n = "T" ^ String.make 1 (Char.chr (Char.code 'A' + Hashtbl.length tyvar_names)) in
+        let rec letters k = if k < 26 then String.make 1 (Char.chr (Char.code 'A' + k)) else letters (k / 26) ^ String.make 1 (Char.chr (Char.code 'A' + k mod 26)) in
+        let n = "T" ^ letters (Hashtbl.length tyvar_names) in
         Hashtbl.add tyvar_names id n;
         n
 
@@ -64,12 +72,27 @@ module Lower = struct
   (* Types and constructors defined by translated files: OCaml type name ->
      (package, MoonBit name); constructor name -> package. *)
   let own_types : (string, string * string) Hashtbl.t = Hashtbl.create 32
+
+  (* type abbreviations: printed by name, but expanded for shapes *)
+  let own_aliases : (string, unit) Hashtbl.t = Hashtbl.create 32
   let own_ctors : (string, string) Hashtbl.t = Hashtbl.create 64
   let current_pkg = ref ""
 
   let qualified (pkg, name) = if pkg = !current_pkg then name else "@" ^ pkg ^ "." ^ name
 
   let own_type name = Option.map qualified (Hashtbl.find_opt own_types name)
+
+  (* types declared by translated items, by identifier (local modules may
+     each have their own `t`) *)
+  let own_types_id : (string, string * string) Hashtbl.t = Hashtbl.create 32
+
+  let own_type_path p =
+    match p with
+    | Path.Pident id ->
+        (match Hashtbl.find_opt own_types_id (Ident.unique_name id) with
+         | Some t -> Some (qualified t)
+         | None -> own_type (Path.name p))
+    | _ -> own_type (Path.name p)
 
   let ctor_name name =
     match Hashtbl.find_opt own_ctors name with
@@ -114,18 +137,36 @@ module Lower = struct
      (a tuple parameter stays one tuple parameter), every function raising. *)
   let rec mty_of ty =
     match Types.get_desc ty with
-    | Types.Tvar _ | Types.Tunivar _ -> M.Named (tyvar_name ty, [])
+    | Types.Tvar _ | Types.Tunivar _ ->
+        (match Hashtbl.find_opt tyvar_subst (Types.get_id ty) with
+         | Some inst -> Hashtbl.remove tyvar_subst (Types.get_id ty);
+             let r = mty_of inst in
+             Hashtbl.replace tyvar_subst (Types.get_id ty) inst; r
+         | None -> M.Named (tyvar_name ty, []))
     | Types.Tarrow (_, a, b, _) -> M.Fun ([ mty_of a ], mty_of b, true)
     | Types.Ttuple ts -> M.Tuple (List.map mty_of ts)
     | Types.Tconstr (p, args, _) ->
-        (match alias_mty (Path.name p), base_type (Path.name p) with
+        let own = match own_type_path p with Some t -> Some t | None -> base_type0 (Path.name p) in
+        let is_alias = Hashtbl.mem own_aliases (Path.name p) || (match p with Path.Pident id -> Hashtbl.mem own_aliases (Ident.unique_name id) | _ -> false) in
+        (match alias_mty (Path.name p), (if is_alias then None else own) with
          | Some t, _ -> t
          | None, Some n -> M.Named (n, List.map mty_of args)
          | None, None ->
+             let same ty' =
+               Types.get_id ty' = Types.get_id ty
+               || (match Types.get_desc ty' with Types.Tconstr (p', _, _) -> Path.same p p' | _ -> false)
+             in
              let ty' = Ctype.expand_head (env ()) ty in
-             if Types.get_id ty' = Types.get_id ty
-                || (match Types.get_desc ty' with Types.Tconstr (p', _, _) -> Path.same p p' | _ -> false)
-             then M.Named ("?" ^ Path.name p, List.map mty_of args)
+             let ty' = if same ty' then Ctype.expand_head !Toploop.toplevel_env ty else ty' in
+             if same ty' && own <> None then M.Named (Option.get own, List.map mty_of args)
+             else if same ty' then begin
+               if Sys.getenv_opt "TRANSLATOR_DEBUG" <> None then
+                 Printf.eprintf "cannot expand %s (unique %s): in item env %b, toplevel %b\n%!" (Path.name p)
+                   (match p with Path.Pident id -> Ident.unique_name id | _ -> "-")
+                   (try ignore (Env.find_type p (env ())); true with Not_found -> false)
+                   (try ignore (Env.find_type p !Toploop.toplevel_env); true with Not_found -> false);
+               M.Named ("?" ^ Path.name p, List.map mty_of args)
+             end
              else mty_of ty')
     | Types.Tpoly (t, _) -> mty_of t
     | _ -> M.Named ("?", [])
@@ -153,7 +194,8 @@ module Lower = struct
     | Types.Ttuple ts -> "(" ^ String.concat ", " (List.map show_ty ts) ^ ")"
     | Types.Tconstr (p, args, _) ->
         let name = Path.name p in
-        (match alias name, base_type name with
+        let own = match own_type_path p with Some t -> Some t | None -> base_type0 name in
+        (match alias name, own with
          | Some a, _ -> a
          | None, Some "Option" -> show_ty (List.hd args) ^ "?"
          | None, Some n ->
@@ -169,14 +211,20 @@ module Lower = struct
 
   let scope_tyvars_fwd : string list ref = ref []
 
+  (* print unknown parts of a type as `_` (for local annotations) *)
+  let partial_types = ref false
+
+  let is_our_tyvar v =
+    String.length v >= 2 && v.[0] = 'T' && String.for_all (fun c -> c >= 'A' && c <= 'Z') (String.sub v 1 (String.length v - 1))
+
   (* The MoonBit text of a type when it is concrete (no type variables
      except those in scope). *)
   let rec show_mty (t : M.ty) : string option =
     let all l = List.fold_right (fun x acc -> match x, acc with Some a, Some b -> Some (a :: b) | _ -> None) l (Some []) in
     match t with
-    | M.Named (v, []) when String.length v = 1 && v.[0] >= 'A' && v.[0] <= 'Z' -> None
-    | M.Named (v, []) when String.length v = 2 && v.[0] = 'T' && v.[1] >= 'A' && v.[1] <= 'Z' ->
-        if List.mem v !scope_tyvars_fwd then Some v else None
+    | M.Named (v, []) when String.length v = 1 && v.[0] >= 'A' && v.[0] <= 'Z' -> if !partial_types then Some "_" else None
+    | M.Named (v, []) when is_our_tyvar v ->
+        if List.mem v !scope_tyvars_fwd then Some v else if !partial_types then Some "_" else None
     | M.Named (n, _) when String.length n > 0 && n.[0] = '?' -> None
     | M.Named ("Option", [ a ]) -> Option.map (fun a -> a ^ "?") (show_mty a)
     | M.Named (n, []) -> Some n
@@ -304,6 +352,9 @@ module Lower = struct
      generic local functions): their source text. *)
   let lifted : string list ref = ref []
 
+  (* unique names of the local functions lifted to top-level functions *)
+  let lifted_ids : (string, unit) Hashtbl.t = Hashtbl.create 16
+
   (* MoonBit top-level names of the package being generated *)
   let top_names : (string, unit) Hashtbl.t = Hashtbl.create 256
 
@@ -314,22 +365,59 @@ module Lower = struct
     in
     go 0
 
+  (* Whether generated code needs OCaml's polymorphic equality,
+     comparison or hashing on its type parameters. *)
+  let needs_bounds text =
+    let has sub =
+      let n = String.length sub and m = String.length text in
+      let rec go i = i + n <= m && (String.sub text i n = sub || go (i + 1)) in
+      go 0
+    in
+    List.exists has
+      [ "=="; "!="; "@lib.compare"; "@lib.mem("; "@lib.assoc"; "@lib.rev_assoc"; "@lib.union";
+        "@lib.insert"; "@lib.subtract"; "@lib.setify"; "@lib.intersect"; "@lib.list_assoc";
+        "@lib.list_mem_assoc"; "@lib.list_remove_assoc"; "@lib.hash"; "@lib.uniq"; "@lib.subset";
+        "@lib.set_eq"; "@lib.apply"; "@lib.update"; "@lib.defined"; "@lib.undefine"; "@lib.sort";
+        "@lib.merge"; "@lib.mergesort"; "@lib.increasing"; "@lib.decreasing"; "@lib.list_sort";
+        "@lib.unions"; "@lib.list_mem"; "@lib.remove"; "@lib.do_list"; ".ocompare" ]
+
+  (* type variables that need OCaml's polymorphic equality, comparison or
+     hashing: those in the argument types of comparison primitives and of
+     interface functions with bounded generics *)
+  let bound_tyvars : (string, unit) Hashtbl.t = Hashtbl.create 16
+
+  let bounded gens _text =
+    if gens = [] then ""
+    else
+      "["
+      ^ String.concat ", "
+          (List.map (fun g -> if Hashtbl.mem bound_tyvars g then g ^ " : Eq + @lib.OCompare + @lib.OHash" else g) gens)
+      ^ "]"
+
   let tyvars_of_text s =
     let acc = ref [] in
     let n = String.length s in
     let ident c = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c = '_' in
-    for i = 0 to n - 2 do
-      if s.[i] = 'T' && s.[i + 1] >= 'A' && s.[i + 1] <= 'Z'
-         && (i = 0 || not (ident s.[i - 1] || s.[i - 1] = '.' || s.[i - 1] = '@'))
-         && (i + 2 >= n || not (ident s.[i + 2]))
-      then
-        let v = String.sub s i 2 in
-        if not (List.mem v !acc) then acc := v :: !acc
+    let i = ref 0 in
+    while !i < n do
+      if s.[!i] = 'T' && (!i = 0 || not (ident s.[!i - 1] || s.[!i - 1] = '.' || s.[!i - 1] = '@')) then begin
+        let j = ref (!i + 1) in
+        while !j < n && s.[!j] >= 'A' && s.[!j] <= 'Z' do incr j done;
+        if !j > !i + 1 && (!j >= n || not (ident s.[!j])) then begin
+          let v = String.sub s !i (!j - !i) in
+          if not (List.mem v !acc) then acc := v :: !acc
+        end;
+        i := !j
+      end else incr i
     done;
     List.sort compare !acc
 
   (* The local variables (already bound outside) that an expression uses,
      with their types. *)
+  (* members of local modules: "<module unique name>.<member>" -> member
+     unique name *)
+  let local_module_members : (string, string) Hashtbl.t = Hashtbl.create 16
+
   let captures_typed (e : Typedtree.expression) =
     let acc = ref [] in
     let open Tast_iterator in
@@ -338,6 +426,10 @@ module Lower = struct
        | Typedtree.Texp_ident (Path.Pident id, _, _) when Hashtbl.mem locals (Ident.unique_name id) ->
            if not (List.mem_assoc (Ident.unique_name id) !acc) then
              acc := (Ident.unique_name id, e.Typedtree.exp_type) :: !acc
+       | Typedtree.Texp_ident (Path.Pdot (Path.Pident mid, name), _, _)
+         when Hashtbl.mem local_module_members (Ident.unique_name mid ^ "." ^ name) ->
+           let u = Hashtbl.find local_module_members (Ident.unique_name mid ^ "." ^ name) in
+           if not (List.mem_assoc u !acc) then acc := (u, e.Typedtree.exp_type) :: !acc
        | _ -> ());
       default_iterator.expr sub e
     in
@@ -559,9 +651,7 @@ module Lower = struct
 
   (* Replace the type variables of an expected MoonBit type (from a generic
      signature) by the corresponding parts of the OCaml type at the use. *)
-  let is_tyvar v =
-    (String.length v = 1 && v.[0] >= 'A' && v.[0] <= 'Z')
-    || (String.length v = 2 && v.[0] = 'T' && v.[1] >= 'A' && v.[1] <= 'Z')
+  let is_tyvar v = (String.length v = 1 && v.[0] >= 'A' && v.[0] <= 'Z') || is_our_tyvar v
 
   let rec refine (want : M.ty) (canon : M.ty) =
     match want, canon with
@@ -674,22 +764,35 @@ module Lower = struct
 
   (* Stdlib (or a module including it) `List.f` with the same meaning as
      lib.ml's function (`List.iter` is `do_list`, ...) *)
-  let list_alias p =
+  let list_alias p (vd : Types.value_description) =
     let n = path_name p in
+    (* the Stdlib function (perhaps included into a module of the source),
+       not one the source defines *)
+    let from_stdlib =
+      match Filename.basename vd.Types.val_loc.Location.loc_start.Lexing.pos_fname with
+      | "list.ml" | "list.mli" -> true
+      | _ -> false
+    in
     let short =
       match String.rindex_opt n '.' with
-      | Some i when String.length n > 5 && (String.sub n 0 5 = "List." || (String.length n > 12 && String.sub n 0 12 = "Stdlib.List.")) ->
+      | Some i
+        when String.length n > 5
+             && (String.sub n 0 5 = "List." || (String.length n > 12 && String.sub n 0 12 = "Stdlib.List."))
+             && from_stdlib ->
           Some (String.sub n (i + 1) (String.length n - i - 1))
       | _ -> None
     in
     match short with
-    | Some ("map" | "rev" | "length" | "exists" | "filter" | "mem" | "hd" | "tl" | "partition" | "map2"
+    | Some ("map" | "rev" | "length" | "exists" | "mem" | "hd" | "tl"
            | "fold_left" | "fold_left_map" | "rev_append" as f) -> Some f
     | Some "assoc" -> Some "list_assoc"
+    | Some ("sort" | "stable_sort") -> Some "list_sort"
+    | Some ("rev_map" | "nth" | "iter2" | "mapi" | "iteri" | "find" | "find_opt" | "filter_map"
+           | "concat_map" | "mem_assoc" | "remove_assoc" | "split" | "init" | "append"
+           | "for_all2" | "exists2" | "filter" | "partition" | "map2" | "combine" as f) -> Some ("list_" ^ f)
     | Some "for_all" -> Some "forall"
     | Some "iter" -> Some "do_list"
     | Some ("concat" | "flatten") -> Some "flat"
-    | Some "combine" -> Some "zip"
     | Some "fold_right" -> Some "itlist"
     | _ -> None
 
@@ -709,13 +812,20 @@ module Lower = struct
          | None -> unsupported Location.none "record type %s" (Path.name p))
     | _ -> unsupported Location.none "record type"
 
+  (* emits type declarations at the top level (set by Emit): module name
+     prefix, declarations *)
+  let emit_types_hook : (string -> type_declaration list -> unit) ref = ref (fun _ _ -> ())
+
+
   let depth = ref 0
 
   let rec lower ?expect (e : expression) : stmt list * exp * M.ty =
     let loc = e.exp_loc in
     incr depth;
     if !depth > 3000 then unsupported loc "lowering recursion too deep";
-    Fun.protect ~finally:(fun () -> decr depth) @@ fun () ->
+    let saved_env = !exp_env in
+    exp_env := Some e.exp_env;
+    Fun.protect ~finally:(fun () -> decr depth; exp_env := saved_env) @@ fun () ->
     match e.exp_desc with
     | Texp_ident (path, _, vd) -> lower_apply ?expect e e [] |> fun r -> ignore vd; ignore path; r
     | Texp_constant c -> ([], Atom (const loc c), mty_of e.exp_type)
@@ -783,6 +893,55 @@ module Lower = struct
         let rl = lower_block r in
         let stmts, xs = schedule [ vl; rl ] in
         (stmts, Blk ([ SetField (List.nth xs 1, field_name ld.Types.lbl_name, List.nth xs 0) ], Atom "()"), M.Named ("Unit", []))
+    | Texp_letmodule (Some mid, _, _, { mod_desc = (Tmod_structure str | Tmod_constraint ({ mod_desc = Tmod_structure str; _ }, _, _, _)); _ }, body) ->
+        (* `let module M = struct ... end in body`: the module's values
+           become nested lets around the body; `M.x` refers to them *)
+        let items =
+          List.filter_map
+            (fun it ->
+              match it.str_desc with
+              | Tstr_value (rf, vbs) ->
+                  List.iter
+                    (fun vb ->
+                      List.iter
+                        (fun id ->
+                          Hashtbl.replace local_module_members
+                            (Ident.unique_name mid ^ "." ^ Ident.name id) (Ident.unique_name id))
+                        (pat_bound_idents vb.vb_pat))
+                    vbs;
+                  Some (rf, vbs)
+              | Tstr_type (_, decls) -> !emit_types_hook (Ident.name mid) decls; None
+              | Tstr_open _ -> None
+              | _ -> unsupported it.str_loc "local module item")
+            str.str_items
+        in
+        let nested =
+          List.fold_right (fun (rf, vbs) acc -> { body with exp_desc = Texp_let (rf, vbs, acc) }) items body
+        in
+        lower ?expect nested
+    | Texp_letmodule (Some mid, _, _, { mod_desc = Tmod_ident (Path.Pident src, _); _ }, body) ->
+        (* `let module A = B in body`: A's members are B's *)
+        let sp = Ident.unique_name src ^ "." and dp = Ident.unique_name mid ^ "." in
+        let copies =
+          Hashtbl.fold
+            (fun k v acc ->
+              if String.length k > String.length sp && String.sub k 0 (String.length sp) = sp then
+                (dp ^ String.sub k (String.length sp) (String.length k - String.length sp), v) :: acc
+              else acc)
+            local_module_members []
+        in
+        List.iter (fun (k, v) -> Hashtbl.replace local_module_members k v) copies;
+        let tp = Ident.name src ^ "." and tdp = Ident.name mid ^ "." in
+        let tcopies =
+          Hashtbl.fold
+            (fun k v acc ->
+              if String.length k > String.length tp && String.sub k 0 (String.length tp) = tp then
+                (tdp ^ String.sub k (String.length tp) (String.length k - String.length tp), v) :: acc
+              else acc)
+            own_types []
+        in
+        List.iter (fun (k, v) -> Hashtbl.replace own_types k v) tcopies;
+        lower ?expect body
     | Texp_assert c ->
         let file, line, col = Location.get_pos_info loc.Location.loc_start in
         let fail = Raise (Call (Atom "@lib.AssertFailure", [ Atom (string_lit (Printf.sprintf "%s:%d:%d" (Filename.basename file) line col)) ])) in
@@ -802,8 +961,8 @@ module Lower = struct
   and lower_apply ?expect whole f args =
     let loc = whole.exp_loc in
     match f.exp_desc with
-    | Texp_ident (p, _, vd) when list_alias p <> None ->
-        let name = Option.get (list_alias p) in
+    | Texp_ident (p, _, vd) when list_alias p vd <> None ->
+        let name = Option.get (list_alias p vd) in
         (match Names.resolve "lib.ml" name with
          | Some (pkg, mname, decl) ->
              let h = { hstmts = []; hexp = Atom ("@" ^ pkg ^ "." ^ mname); hmty = mty_of_decl decl; hoty = Some vd.Types.val_type } in
@@ -817,18 +976,43 @@ module Lower = struct
         lower_prim ?expect whole (path_name p) f args
     | Texp_ident (p, _, _) when lib_combinator p <> None ->
         lower_combinator ?expect whole (Option.get (lib_combinator p)) f args
+    | Texp_ident (Path.Pdot (Path.Pident mid, name), _, _)
+      when Hashtbl.mem local_module_members (Ident.unique_name mid ^ "." ^ name) ->
+        let u = Hashtbl.find local_module_members (Ident.unique_name mid ^ "." ^ name) in
+        let l = Hashtbl.find locals u in
+        apply_head ?expect loc { hstmts = []; hexp = Atom l.name; hmty = l.mty; hoty = l.loty } args
     | Texp_ident (Path.Pident id, _, _) when Hashtbl.mem locals (Ident.unique_name id) ->
         let l = Hashtbl.find locals (Ident.unique_name id) in
-        apply_head ?expect loc { hstmts = []; hexp = Atom l.name; hmty = l.mty; hoty = l.loty } args
+        (* a polymorphic local is used at an instance of its type *)
+        let hmty = refine l.mty (mty_of f.exp_type) in
+        apply_head ?expect loc { hstmts = []; hexp = Atom l.name; hmty; hoty = l.loty } args
     | Texp_ident (p, _, vd) ->
-        apply_head ?expect loc (global_head loc p vd) args
+        let h = global_head loc p vd in
+        apply_head ?expect loc { h with hmty = refine h.hmty (mty_of f.exp_type) } args
     | _ ->
         if args = [] then unsupported loc "value";
         let ss, x, ty = lower f in
         apply_head ?expect loc { hstmts = ss; hexp = x; hmty = ty; hoty = Some f.exp_type } args
 
   (* Apply a head to OCaml arguments (source order). *)
+  and note_bounds (args : expression list) =
+    List.iter (fun a -> List.iter (fun v -> Hashtbl.replace bound_tyvars v ()) (tyvars_of_text (show_ty a.exp_type))) args
+
   and apply_head ?expect loc h args =
+    (match h.hexp with
+     | Atom q when String.length q > 1 && q.[0] = '@' ->
+         let q = match String.index_opt q '(' with Some i -> String.sub q 0 i | None -> q in
+         let fq = String.sub q 1 (String.length q - 1) in
+         if Hashtbl.mem M.bounded_fns fq then begin
+           (* key-based functions bound only their key *)
+           match fq with
+           | "lib.assoc" | "lib.rev_assoc" | "lib.list_assoc" | "lib.list_mem_assoc" | "lib.list_remove_assoc"
+           | "lib.apply" | "lib.applyd" | "lib.defined" | "lib.undefine" | "lib.tryapplyd" | "lib.update"
+           | "lib.single" ->
+               (match args with a :: _ -> note_bounds [ a ] | [] -> ())
+           | _ -> note_bounds args
+         end
+     | _ -> ());
     (* Plan the stages. A MoonBit group of k parameters takes the fewest
        OCaml arguments whose units sum to k: an argument is one unit, or a
        tuple spread into its components (spreading left to right as
@@ -984,8 +1168,9 @@ module Lower = struct
              else Binop (op, Call (Atom "@lib.compare", [ a; b ]), Atom "0"))
       | ("+" | "-" | "*" | "/") as op -> (2, fun [ a; b ] _ -> Binop (op, a, b))
       | "mod" -> (2, fun [ a; b ] _ -> Binop ("%", a, b))
+      | "compare" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.compare", [ a; b ]))
       | ("+." | "-." | "*." | "/.") as op -> (2, fun [ a; b ] _ -> Binop (String.sub op 0 1, a, b))
-      | "~-." -> (1, fun [ a ] _ -> Binop ("-", Atom "0.0", a))
+      | "~-." -> (1, fun [ a ] _ -> Call (Atom "@lib.float_neg", [ a ]))
       | "float_of_int" -> (1, fun [ a ] _ -> Call (Atom "Int::to_double", [ a ]))
       | "sqrt" | "float_sqrt" -> (1, fun [ a ] _ -> Call (Atom "Double::sqrt", [ a ]))
       | "floor" -> (1, fun [ a ] _ -> Call (Atom "Double::floor", [ a ]))
@@ -1032,6 +1217,9 @@ module Lower = struct
       | _ -> unsupported loc "Stdlib.%s" name
     in
     let arg_tys = List.map (fun a -> a.exp_type) args in
+    (match name with
+     | "=" | "<>" | "compare" | "<" | ">" | "<=" | ">=" | "min" | "max" -> note_bounds args
+     | _ -> ());
     if (name = "&&" || name = "||") && List.length args = 2 then begin
       let a, b = (List.nth args 0, List.nth args 1) in
       let ss, x, _ = lower a in
@@ -1107,7 +1295,11 @@ module Lower = struct
               | '%' -> Buffer.add_char buf '%'
               | c -> unsupported loc "printf conversion %%%c" c);
              i := !i + 2
-           end else (Buffer.add_char buf text.[!i]; incr i))
+           end
+           else if text.[!i] = '@' && String.sub name 0 7 = "Format." then
+             (* pretty-printing directives need a formatter *)
+             unsupported loc "Format directive @"
+           else (Buffer.add_char buf text.[!i]; incr i))
         done;
         lit ();
         let str = match List.rev !pieces with [] -> Atom "\"\"" | p :: ps -> List.fold_left (fun a b -> Binop ("+", a, b)) p ps in
@@ -1266,6 +1458,8 @@ module Lower = struct
       match wgs with
       | [] ->
           (match fn, body_val with
+           | Some ({ exp_desc = Texp_function _; _ } as f), None when (match res with M.Fun _ -> false | _ -> true) ->
+               unsupported f.exp_loc "function where a %s is expected" (M.show res)
            | Some f, None -> lower_block ~expect:res f
            | None, Some (v, _) -> ([], v)
            | _ -> assert false)
@@ -1379,6 +1573,13 @@ module Lower = struct
   and lower_let ?expect vbs body =
     match vbs with
     | [] -> lower ?expect body
+    | ({ vb_pat = { pat_desc = Tpat_var _; _ }; vb_expr = { exp_desc = Texp_function _; _ }; _ } as vb) :: rest
+      when List.exists (fun v -> not (List.mem v !scope_tyvars)) (tyvars_of_text (show_ty vb.vb_expr.exp_type)) ->
+        (* a polymorphic local function: MoonBit closures are monomorphic,
+           so it is lifted (or monomorphised) like a recursive one; the
+           binding is not recursive, but its own name does not occur in
+           its body (another binding of that name has another identifier) *)
+        lower_letrec ?expect vb.vb_loc [ vb ] { body with exp_desc = Texp_let (Asttypes.Nonrecursive, rest, body) }
     | vb :: rest ->
         let ss, x, t = lower vb.vb_expr in
         (match vb.vb_pat.pat_desc with
@@ -1388,8 +1589,12 @@ module Lower = struct
              (* a function-valued local gets its recorded type, so that the
                 MoonBit value has exactly that type *)
              let bind =
-               match t, show_mty t with
-               | M.Fun _, Some ts -> LetTyped (name, ts, x)
+               match t with
+               | M.Fun _ ->
+                   partial_types := true;
+                   let ts = show_mty t in
+                   partial_types := false;
+                   (match ts with Some ts -> LetTyped (name, ts, x) | None -> Let (name, x))
                | _ -> Let (name, x)
              in
              (ss @ [ bind ] @ ss2, y, ty)
@@ -1435,6 +1640,45 @@ module Lower = struct
     (param_tys, body)
 
   and lower_letrec ?expect loc vbs body =
+    (* `let rec f = let x = e in fun ... -> ...`: the prefix runs once at
+       the definition, so it can be hoisted before the recursive group
+       (when it does not mention the group) *)
+    let rec peel e acc =
+      match e.exp_desc with
+      | Texp_let (rf, pvbs, inner) -> peel inner (acc @ [ (rf, pvbs) ])
+      | Texp_function _ -> Some (acc, e)
+      | _ -> None
+    in
+    let rec_ids =
+      List.concat_map (fun vb -> List.map Ident.unique_name (pat_bound_idents vb.vb_pat)) vbs
+    in
+    let mentions_group pvbs =
+      List.exists
+        (fun pvb ->
+          let found = ref false in
+          let open Tast_iterator in
+          let expr sub e =
+            (match e.exp_desc with
+             | Texp_ident (Path.Pident id, _, _) when List.mem (Ident.unique_name id) rec_ids -> found := true
+             | _ -> ());
+            default_iterator.expr sub e
+          in
+          let it = { default_iterator with expr } in
+          it.expr it pvb.vb_expr;
+          !found)
+        pvbs
+    in
+    let peeled = List.map (fun vb -> (vb, peel vb.vb_expr [])) vbs in
+    if List.exists (fun (_, p) -> match p with Some (pre, _) -> pre <> [] | None -> false) peeled then begin
+      let prefixes = List.concat_map (fun (_, p) -> match p with Some (pre, _) -> pre | None -> []) peeled in
+      if List.exists (fun (_, pvbs) -> mentions_group pvbs) prefixes then unsupported loc "recursive value whose set-up uses itself";
+      let vbs' =
+        List.map (fun (vb, p) -> match p with Some (_, f) -> { vb with vb_expr = f } | None -> vb) peeled
+      in
+      let inner = { body with exp_desc = Texp_let (Asttypes.Recursive, vbs', body) } in
+      let nested = List.fold_right (fun (rf, pvbs) acc -> { body with exp_desc = Texp_let (rf, pvbs, acc) }) prefixes inner in
+      lower ?expect nested
+    end else
     let fns =
       List.map
         (fun vb ->
@@ -1443,11 +1687,18 @@ module Lower = struct
               let param_tys, fbody = function_signature vb.vb_expr in
               let want = M.Fun (List.map mty_of param_tys, mty_of fbody.exp_type, true) in
               (id, vb.vb_expr, param_tys, fbody, want)
-          | _ -> unsupported loc "recursive value")
+          | _ ->
+              let _, l, _ = Location.get_pos_info vb.vb_loc.Location.loc_start in
+              let kind = match vb.vb_expr.exp_desc with Texp_let _ -> "let" | Texp_apply _ -> "application" | Texp_construct _ -> "constructor" | Texp_ident _ -> "identifier" | _ -> "other" in
+              unsupported loc "recursive value (line %d, %s)" l kind)
         vbs
     in
     (* captured outer locals, before binding the functions themselves *)
-    let captured_typed = List.concat_map (fun (_, e, _, _, _) -> captures_typed e) fns in
+    (* locals already lifted to the top level are reachable directly *)
+    let captured_typed =
+      List.filter (fun (u, _) -> not (Hashtbl.mem lifted_ids u))
+        (List.concat_map (fun (_, e, _, _, _) -> captures_typed e) fns)
+    in
     let captured = List.map fst captured_typed in
     let sig_text (_, _, param_tys, fbody, _) =
       String.concat " " (List.map show_ty (fbody.exp_type :: param_tys))
@@ -1493,12 +1744,18 @@ module Lower = struct
       List.map
         (fun (id, e, _, _, want) ->
           let name = if lift then reserve_top (sanitize (Ident.name id) ^ "_l") else unique_local (sanitize (Ident.name id)) in
+          if lift then Hashtbl.replace lifted_ids (Ident.unique_name id) ();
           Hashtbl.replace locals (Ident.unique_name id) { name; mty = want; loty = Some e.exp_type };
           name)
         fns
     in
     let saved_scope = !scope_tyvars in
-    if lift then scope_tyvars := saved_scope @ foreign;
+    (* polymorphic groups end up as generic top-level functions *)
+    if foreign <> [] then scope_tyvars := saved_scope @ foreign;
+    (* the bounds a lifted function needs come from its own body *)
+    let saved_bounds = Hashtbl.copy bound_tyvars in
+    Hashtbl.reset bound_tyvars;
+    let restore_bounds () = Hashtbl.iter (fun k () -> Hashtbl.replace bound_tyvars k ()) saved_bounds in
     let lowered =
       List.map2
         (fun name (_, e, param_tys, fbody, want) ->
@@ -1506,12 +1763,27 @@ module Lower = struct
           | _, Lam (ps, b), _ ->
               let annot p t =
                 if String.contains p ':' then p
-                else if foreign <> [] && not lift then p
                 else p ^ " : " ^ show_ty t
               in
               (name, List.map2 annot ps param_tys, show_ty fbody.exp_type, b)
           | _ -> unsupported loc "recursive function")
         names fns
+    in
+    (* captured outer locals, typed under the group's instantiation *)
+    let caps =
+      let rec_ids = List.map (fun (id, _, _, _, _) -> Ident.unique_name id) fns in
+      let caps =
+        List.fold_left
+          (fun acc (u, t) -> if List.mem u rec_ids || List.mem_assoc u acc then acc else acc @ [ (u, t) ])
+          [] captured_typed
+      in
+      List.map
+        (fun (u, oty) ->
+          let l = Hashtbl.find locals u in
+          (* a polymorphic local is passed at the instance used here *)
+          let ty = match show_mty (refine l.mty (mty_of oty)) with Some t -> t | None -> show_ty oty in
+          (l.name, ty))
+        caps
     in
     scope_tyvars := saved_scope;
     Hashtbl.reset tyvar_subst;
@@ -1520,70 +1792,64 @@ module Lower = struct
     if lift then begin
       List.iter
         (fun (name, ps, ret, b) ->
-          let gens = tyvars_of_text (String.concat " " (ret :: ps)) in
-          (* OCaml's polymorphic equality and comparison *)
-          let gens =
-            if gens = [] then ""
-            else "[" ^ String.concat ", " (List.map (fun g -> g ^ " : Eq + @lib.OCompare + @lib.OHash") gens) ^ "]"
-          in
+          let body_text = Ir.to_string (fun () -> Ir.pblock b) in
+          let gens = bounded (tyvars_of_text (String.concat " " (ret :: ps))) body_text in
           lifted :=
-            Printf.sprintf "\n///|\nfn%s %s(%s) -> %s raise %s\n" gens name (String.concat ", " ps) (paren ret)
-              (Ir.to_string (fun () -> Ir.pblock b))
+            Printf.sprintf "\n///|\nfn%s %s(%s) -> %s raise %s\n" gens name (String.concat ", " ps) (paren ret) body_text
             :: !lifted)
         lowered;
+      restore_bounds ();
       lower ?expect body
     end else begin
       let split p = match String.index_opt p ':' with Some i -> (String.trim (String.sub p 0 i), String.trim (String.sub p (i + 1) (String.length p - i - 1))) | None -> (p, "_") in
       match lowered with
-      | [ (name, ps, ret, b) ] when foreign = [] ->
+      | [ (name, ps, ret, b) ] when foreign = [] && not (List.exists (fun (_, ps, _, _) -> List.exists (fun p -> not (String.contains p ':')) ps) lowered) ->
+          restore_bounds ();
           let ss, y, ty = lower ?expect body in
           (LetFn (name, List.map split ps, paren ret, b) :: ss, y, ty)
-      | [ _ ] ->
-          let def = LetRec (List.map (fun (n, ps, _, b) -> (n, List.map split ps, None, b)) lowered) in
-          let ss, y, ty = lower ?expect body in
-          (def :: ss, y, ty)
       | _ ->
           (* Mutually recursive local functions are lifted to the top level
              (MoonBit's `letrec` of large closures miscompiles): captured
              variables become leading parameters, and each body, like the
              definition site, binds closures for the group's functions. *)
-          let rec_ids = List.map (fun (id, _, _, _, _) -> Ident.unique_name id) fns in
-          let caps =
-            List.fold_left
-              (fun acc (u, t) -> if List.mem u rec_ids || List.mem_assoc u acc then acc else acc @ [ (u, t) ])
-              [] captured_typed
-          in
-          let caps =
-            List.map
-              (fun (u, oty) ->
-                let l = Hashtbl.find locals u in
-                let ty = match show_mty l.mty with Some t -> t | None -> show_ty oty in
-                (l.name, ty))
-              caps
-          in
           let lifted_names = List.map (fun (name, _, _, _) -> reserve_top (name ^ "_l")) lowered in
-          let closures =
+          (* closures for the group's functions, annotated where the
+             types' variables are in scope *)
+          let closures_in scope =
             List.map2
               (fun (name, ps, _, _) lname ->
                 let params = List.map split ps in
                 let xs = List.map fst params in
-                let lam_params = List.map (fun (x, t) -> if t = "_" then x else x ^ " : " ^ t) params in
+                let in_scope t = List.for_all (fun v -> List.mem v scope) (tyvars_of_text t) in
+                let lam_params = List.map (fun (x, t) -> if t = "_" || not (in_scope t) then x else x ^ " : " ^ t) params in
                 Let (name, Lam (lam_params, ([], Call (Atom lname, List.map (fun (c, _) -> Atom c) caps @ List.map (fun x -> Atom x) xs)))))
               lowered lifted_names
           in
+          let closures = closures_in !scope_tyvars in
           List.iter2
             (fun (_, ps, ret, (bss, bx)) lname ->
               let all_ps = List.map (fun (c, t) -> c ^ " : " ^ t) caps @ ps in
-              let gens = tyvars_of_text (String.concat " " (ret :: all_ps)) in
-              let gens =
-                if gens = [] then ""
-                else "[" ^ String.concat ", " (List.map (fun g -> g ^ " : Eq + @lib.OCompare + @lib.OHash") gens) ^ "]"
+              let own = closures_in (tyvars_of_text (String.concat " " (ret :: all_ps))) in
+              (* only the closures the body uses *)
+              let used = Ir.to_string (fun () -> Ir.pblock (bss, bx)) in
+              let mentions n =
+                let ident c = (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || c = '_' in
+                let ln = String.length n and lu = String.length used in
+                let rec at i =
+                  i + ln <= lu
+                  && ((String.sub used i ln = n && (i = 0 || not (ident used.[i - 1])) && (i + ln = lu || not (ident used.[i + ln])))
+                      || at (i + 1))
+                in
+                at 0
               in
+              let own = List.filter (function Let (n, _) -> mentions n | _ -> true) own in
+              let body_text = Ir.to_string (fun () -> Ir.pblock (own @ bss, bx)) in
+              let gens = bounded (tyvars_of_text (String.concat " " (ret :: all_ps))) body_text in
               lifted :=
-                Printf.sprintf "\n///|\nfn%s %s(%s) -> %s raise %s\n" gens lname (String.concat ", " all_ps) (paren ret)
-                  (Ir.to_string (fun () -> Ir.pblock (closures @ bss, bx)))
+                Printf.sprintf "\n///|\nfn%s %s(%s) -> %s raise %s\n" gens lname (String.concat ", " all_ps) (paren ret) body_text
                 :: !lifted)
             lowered lifted_names;
+          restore_bounds ();
           let ss, y, ty = lower ?expect body in
           (closures @ ss, y, ty)
     end
