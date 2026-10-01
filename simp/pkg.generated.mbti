@@ -1,0 +1,194 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/simp"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/nets",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn abbrev_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn apply_prover(Prover, @kernel.Term) -> @kernel.Thm raise
+
+pub fn asm_rewrite_rule(@list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn asm_rewrite_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn asm_simp_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn augment(Prover, @list.List[@kernel.Thm]) -> Prover raise
+
+pub fn augment_simpset(@kernel.Thm, Simpset) -> Simpset raise
+
+pub fn basic_congs() -> @list.List[@kernel.Thm]
+
+pub fn basic_convs() -> @list.List[(String, (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise))]
+
+pub fn basic_net() -> @nets.Net[Gconv]
+
+pub fn basic_prover((Simpset, Int, @kernel.Term) -> @kernel.Thm raise) -> (Simpset, Int, @kernel.Term) -> @kernel.Thm raise
+
+pub fn basic_rewrites() -> @list.List[@kernel.Thm]
+
+pub fn basic_ss(@list.List[@kernel.Thm]) -> Simpset raise
+
+pub fn depth_sqconv(Simpset, Int, @kernel.Term) -> @kernel.Thm raise
+
+pub let empty_ss : Simpset
+
+pub fn expand_tac(String) -> ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn extend_basic_congs(@list.List[@kernel.Thm]) -> Unit
+
+pub fn extend_basic_convs(String, (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise)) -> Unit raise
+
+pub fn extend_basic_rewrites(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn gen_rewrite_conv(((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise?, @list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn gen_rewrite_rule(((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise?, @list.List[@kernel.Thm]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn gen_rewrite_tac(((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise?, @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn gen_simplify_conv((Simpset, Int, @kernel.Term) -> @kernel.Thm raise, Simpset, Int, @list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn general_rewrite_conv(Bool, ((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise?, @nets.Net[Gconv], @list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn imp_rewr_conv(@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn[S] mk_prover((S) -> ((@kernel.Term) -> @kernel.Thm raise) raise, (S, @list.List[@kernel.Thm]) -> S raise) -> (S) -> Prover raise
+
+pub fn mk_rewrites(Bool, @kernel.Thm, @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise
+
+pub fn net_of_cong(@kernel.Thm, @nets.Net[Gconv]) -> @nets.Net[Gconv] raise
+
+pub fn net_of_conv(@kernel.Term, (@kernel.Term) -> @kernel.Thm raise, @nets.Net[Gconv]) -> @nets.Net[Gconv]
+
+pub fn net_of_thm(Bool, @kernel.Thm, @nets.Net[Gconv]) -> @nets.Net[Gconv] raise
+
+pub fn once_asm_rewrite_rule(@list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn once_asm_rewrite_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn once_asm_simp_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn once_depth_sqconv(Simpset, Int, @kernel.Term) -> @kernel.Thm raise
+
+pub fn once_rewrite_conv(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn once_rewrite_rule(@list.List[@kernel.Thm]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn once_rewrite_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn once_simp_conv(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn once_simp_rule(@list.List[@kernel.Thm]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn once_simp_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn once_simplify_conv(Simpset, @list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn ordered_imp_rewr_conv((@kernel.Term, @kernel.Term) -> Bool raise, @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn ordered_rewr_conv((@kernel.Term, @kernel.Term) -> Bool raise, @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn pure_asm_rewrite_rule(@list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn pure_asm_rewrite_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn pure_asm_simp_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn pure_once_asm_rewrite_rule(@list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn pure_once_asm_rewrite_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn pure_once_rewrite_conv(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn pure_once_rewrite_rule(@list.List[@kernel.Thm]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn pure_once_rewrite_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn pure_rewrite_conv(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn pure_rewrite_rule(@list.List[@kernel.Thm]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn pure_rewrite_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn pure_simp_conv(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn pure_simp_rule(@list.List[@kernel.Thm]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn pure_simp_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn redepth_sqconv(Simpset, Int, @kernel.Term) -> @kernel.Thm raise
+
+pub fn rewr_conv(@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn rewrite_conv(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn rewrite_rule(@list.List[@kernel.Thm]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn rewrite_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn rewrites_conv(@nets.Net[Gconv]) -> (@kernel.Term) -> @kernel.Thm raise
+
+pub fn set_basic_congs(@list.List[@kernel.Thm]) -> Unit
+
+pub fn set_basic_convs(@list.List[(String, (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise))]) -> Unit raise
+
+pub fn set_basic_rewrites(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn simp_conv(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn simp_rule(@list.List[@kernel.Thm]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn simp_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn simplify_conv(Simpset, @list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn ss_of_congs(@list.List[@kernel.Thm], Simpset) -> Simpset raise
+
+pub fn ss_of_conv(@kernel.Term, (@kernel.Term) -> @kernel.Thm raise, Simpset) -> Simpset
+
+pub fn ss_of_maker((@kernel.Thm, @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise, Simpset) -> Simpset
+
+pub fn ss_of_prover(((Simpset, Int, @kernel.Term) -> @kernel.Thm raise) -> ((Simpset, Int, @kernel.Term) -> @kernel.Thm raise) raise, Simpset) -> Simpset
+
+pub fn ss_of_provers(@list.List[Prover], Simpset) -> Simpset
+
+pub fn ss_of_thms(@list.List[@kernel.Thm], Simpset) -> Simpset raise
+
+pub fn term_order(@kernel.Term, @kernel.Term) -> Bool
+
+pub fn top_depth_sqconv(Simpset, Int, @kernel.Term) -> @kernel.Thm raise
+
+pub fn top_sweep_sqconv(Simpset, Int, @kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+pub struct Gconv {
+  priority : Int
+  conv : (@kernel.Term) -> @kernel.Thm raise
+}
+pub fn Gconv::net_compare(Self, Self) -> Int?
+pub impl @nets.NetCompare for Gconv
+
+pub struct Prover {
+  apply : (@kernel.Term) -> @kernel.Thm raise
+  aug : (@list.List[@kernel.Thm]) -> Prover raise
+}
+
+pub struct Simpset {
+  net : @nets.Net[Gconv]
+  prover : ((Simpset, Int, @kernel.Term) -> @kernel.Thm raise) -> ((Simpset, Int, @kernel.Term) -> @kernel.Thm raise) raise
+  provers : @list.List[Prover]
+  rewmaker : (@kernel.Thm, @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise
+}
+
+// Type aliases
+pub type Strategy = (Simpset, Int, @kernel.Term) -> @kernel.Thm raise
+
+// Traits

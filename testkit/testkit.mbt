@@ -129,6 +129,15 @@ pub fn Log::show_trace(self : Log, name : String) -> Unit {
 }
 
 ///|
+/// Log what theory `name` printed while loading (upstream prints it as the
+/// file loads).
+pub fn Log::show_theory_output(self : Log, name : String) -> Unit {
+  for line in @parser.theory_output(name) {
+    self.out(line)
+  }
+}
+
+///|
 /// Log the quotations theory `name` parsed while loading, as
 /// tools/ocaml_ref/prelude.ml's `show_trace`.
 pub fn Log::show_theory_trace(self : Log, name : String) -> Unit {

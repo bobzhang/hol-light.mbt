@@ -6,11 +6,19 @@ import {
 }
 
 // Values
+pub let defer_stdout : @ref.Ref[Bool]
+
+pub fn flush_stdout_backlog() -> Unit
+
 pub fn formatter_of_buffer(StringBuilder) -> Formatter
 
 pub fn print_string(String) -> Unit
 
 pub let std_formatter : Formatter
+
+pub fn stdout_backlog_length() -> Int
+
+pub fn stdout_backlog_since(Int) -> Array[String]
 
 pub let stdout_sink : @ref.Ref[(String) -> Unit]
 

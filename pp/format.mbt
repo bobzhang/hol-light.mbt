@@ -656,12 +656,55 @@ let stdout_pending : StringBuilder = StringBuilder()
 pub let stdout_sink : Ref[(String) -> Unit] = Ref::{ val: s => println(s), }
 
 ///|
+/// While set, lines of standard output are held back. On wasm, writing to
+/// standard output inside `fn init` traps, so theories hold their load-time
+/// output (remarks, warnings) while they load; it is printed, with
+/// `println`, before the next line of output after initialisation.
+pub let defer_stdout : Ref[Bool] = Ref::{ val: false, }
+
+///|
+let stdout_backlog : Array[String] = []
+
+///|
+/// The number of lines held back so far.
+pub fn stdout_backlog_length() -> Int {
+  stdout_backlog.length()
+}
+
+///|
+/// The held-back lines from index `start` on.
+pub fn stdout_backlog_since(start : Int) -> Array[String] {
+  stdout_backlog[start:].to_owned()
+}
+
+///|
+/// Print the held-back load-time output now.
+pub fn flush_stdout_backlog() -> Unit {
+  if !defer_stdout.val && !stdout_backlog.is_empty() {
+    for line in stdout_backlog {
+      println(line)
+    }
+    stdout_backlog.clear()
+  }
+}
+
+///|
+fn emit_stdout_line(s : String) -> Unit {
+  if defer_stdout.val {
+    stdout_backlog.push(s)
+  } else {
+    flush_stdout_backlog()
+    (stdout_sink.val)(s)
+  }
+}
+
+///|
 /// Standard output can only be written line by line (`println`), so
 /// complete lines are emitted as soon as they are formatted.
 fn stdout_write(s : String) -> Unit {
   for c in s {
     if c == '\n' {
-      (stdout_sink.val)(stdout_pending.to_string())
+      emit_stdout_line(stdout_pending.to_string())
       stdout_pending.reset()
     } else {
       stdout_pending.write_char(c)
@@ -674,7 +717,7 @@ fn stdout_write(s : String) -> Unit {
 /// (`println`), so unlike OCaml the partial text ends with a newline.
 fn stdout_flush() -> Unit {
   if !stdout_pending.is_empty() {
-    (stdout_sink.val)(stdout_pending.to_string())
+    emit_stdout_line(stdout_pending.to_string())
     stdout_pending.reset()
   }
 }

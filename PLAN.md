@@ -125,6 +125,11 @@ definitions register constants, quotations advance the type-variable and
   `let … and …` and `match (…)` left to right.
 - The parser records the quotations each theory parses while loading
   (`@parser.theory_trace(name)`).
+- On wasm, writing to stdout inside `fn init` traps (native is fine). So
+  `begin_theory` holds stdout lines back (`@pp.defer_stdout`) until
+  `end_theory`. The held-back lines are printed before the next line of
+  output after initialisation (or by `@pp.flush_stdout_backlog()`), and are
+  kept per theory for tests (`@parser.theory_output(name)`).
 - Load-fidelity tests compare, after loading each file in a fresh process:
   the three counters (types, `GEN%PVAR`, `genvar`), `types()`,
   `constants()`, `definitions()`, `axioms()`, warnings, and structural
@@ -242,4 +247,9 @@ definitions register constants, quotations advance the type-variable and
   Infix tacticals that collide with keywords are `then_tac` and
   `orelse_tac`; `lib.time` reads a pluggable `cpu_time` clock (0 on wasm).
   `itab/` is done (ITAUT_TAC, UNIFY_ACCEPT_TAC, UNIFY_REFL_TAC; matches
-  itab.ml on ten ITAUT proofs and the metavariable goalstack). Next: `simp`, …
+  itab.ml on ten ITAUT proofs and the metavariable goalstack). `simp/` is
+  done: rewrite nets of `Gconv` (priority plus closure, compared as OCaml
+  compares closures), mk_rewrites, the simpset strategies with upstream's
+  try scopes, basic rewrites, convs and congruences, staged
+  REWRITE/SIMP rules and tactics, ABBREV_TAC and EXPAND_TAC. It matches
+  simp.ml on 60 checks, including the load output. Next: `theorems`, …

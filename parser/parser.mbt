@@ -820,11 +820,32 @@ let current_theory : Ref[String?] = Ref::{ val: None, }
 pub fn begin_theory(name : String) -> Unit {
   theory_traces[name] = []
   current_theory.val = Some(name)
+  // Theories load in `fn init`, where wasm cannot write to stdout yet.
+  @pp.defer_stdout.val = true
+  theory_output_start.val = @pp.stdout_backlog_length()
 }
 
 ///|
 pub fn end_theory() -> Unit {
+  match current_theory.val {
+    Some(name) =>
+      theory_outputs[name] = @pp.stdout_backlog_since(theory_output_start.val)
+    None => ()
+  }
   current_theory.val = None
+  @pp.defer_stdout.val = false
+}
+
+///|
+let theory_output_start : Ref[Int] = Ref::{ val: 0, }
+
+///|
+let theory_outputs : Map[String, Array[String]] = Map([])
+
+///|
+/// The lines theory `name` printed on stdout while loading.
+pub fn theory_output(name : String) -> Array[String] {
+  theory_outputs.get(name).unwrap_or([])
 }
 
 ///|
