@@ -357,5 +357,26 @@ definitions register constants, quotations advance the type-variable and
   lists plus behaviour checks: EVAL_CONV, NUM_REDUCE_CONV,
   NUM_NORMALIZE_CONV, NUM_RING, define_type, REAL_ARITH, REAL_FIELD,
   INT_ARITH, INT_RING, general recursive `define`). They are produced by
-  tools/ocaml_ref/theory.sh <file> <dependencies...>. Next: Library/ and
-  Multivariate/, then the native target.
+  tools/ocaml_ref/theory.sh <file> <dependencies...> (now
+  tools/ocaml_ref/theory.py <file>, which follows `needs`).
+  Library/ is translated and matches upstream file by file (each package
+  has `load()`, loading its `needs` first and itself once, so theories
+  load in upstream order). External programs: wasm has no shell or file
+  system, so `gp factorint` (pocklington, pratt) is emulated in
+  lib/gp.mbt (Baillie-PSW + Brent rho) over in-memory files. Not ported:
+  Library/tactician_light.ml, an interactive tool that evaluates OCaml
+  tactic strings at run time with `loadt` (it needs a tactic-expression
+  interpreter, a possible later addition).
+  Next: OCaml `int` as a 63-bit `Int64` (below), Multivariate/, then the
+  native target.
+
+  Planned: OCaml `int` becomes `Int64` with exact 63-bit semantics
+  (lib/int63.mbt: results normalized to [-2^62, 2^62 - 1], `lsl`/`lsr`/
+  `asr` as OCaml, division by zero raising), in the hand-ported APIs
+  (fusion arities and type tables, num's `int_of_num`/`num_of_int` with
+  63-bit bounds, lib list/index helpers, Random seeds, source-facing hash
+  results) and in the translator's type mapping; MoonBit `Int` stays for
+  storage indexes and bounded internals, with checked narrowing at array
+  and string boundaries. This removes the divergences where upstream
+  accepts and the port fails (bitmatch on 32-bit word numerals,
+  dest_small_numeral above 2^31 - 1).

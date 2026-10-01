@@ -3311,41 +3311,34 @@ pub fn prove_lit(
   let (path, lem, lim) = x442
   let lit = x443
   if @firstorder.copverb().val {
-    @pp.std_formatter.print_string(
-      "Lit: " + string_of_lit(inst_lit_v1(sub.0, lit)) + "\n",
-    )
+    let t445 = string_of_lit(inst_lit_v1(sub.0, lit))
+    @pp.std_formatter.print_string("Lit: " + t445 + "\n")
     @pp.std_formatter.print_flush()
     ()
   } else {
     ()
   }
   if @firstorder.copverb().val {
-    @pp.std_formatter.print_string(
-      "Path: " +
-      string_of_lits(
-        @lib.map(
-          (x445 : (Int, @list.List[@meson.FolTerm])) => inst_lit_v1(sub.0, x445),
-          path,
-        ),
-      ) +
-      "\n",
+    let t447 = string_of_lits(
+      @lib.map(
+        (x446 : (Int, @list.List[@meson.FolTerm])) => inst_lit_v1(sub.0, x446),
+        path,
+      ),
     )
+    @pp.std_formatter.print_string("Path: " + t447 + "\n")
     @pp.std_formatter.print_flush()
     ()
   } else {
     ()
   }
   if @firstorder.copverb().val {
-    @pp.std_formatter.print_string(
-      "Lemmas: " +
-      string_of_lits(
-        @lib.map(
-          (x446 : (Int, @list.List[@meson.FolTerm])) => inst_lit_v1(sub.0, x446),
-          lem,
-        ),
-      ) +
-      "\n",
+    let t449 = string_of_lits(
+      @lib.map(
+        (x448 : (Int, @list.List[@meson.FolTerm])) => inst_lit_v1(sub.0, x448),
+        lem,
+      ),
     )
+    @pp.std_formatter.print_string("Lemmas: " + t449 + "\n")
     @pp.std_formatter.print_flush()
     ()
   } else {
@@ -3358,7 +3351,7 @@ pub fn prove_lit(
     Proof[_, _],
   ) raise = if opt.improved_lemmas {
     if @lib.exists(
-        (x447 : (Int, @list.List[@meson.FolTerm])) => eq(sub, lit, x447),
+        (x450 : (Int, @list.List[@meson.FolTerm])) => eq(sub, lit, x450),
         lem,
       ) {
       if @firstorder.copverb().val {
@@ -3375,30 +3368,30 @@ pub fn prove_lit(
   } else {
     @lib.op_bar_gt(
       @lib.op_bar_gt(of_list(lem), fn(
-        x451 : (Unit) -> (Int, @list.List[@meson.FolTerm]) raise,
+        x454 : (Unit) -> (Int, @list.List[@meson.FolTerm]) raise,
       ) -> ((Unit) -> (Int, @list.List[@meson.FolTerm]) raise) raise {
-        fn(x452 : Unit) -> (Int, @list.List[@meson.FolTerm]) raise {
+        fn(x455 : Unit) -> (Int, @list.List[@meson.FolTerm]) raise {
           ((
-            x449 : (Unit) -> (Int, @list.List[@meson.FolTerm]) raise,
-            x450 : Unit,
+            x452 : (Unit) -> (Int, @list.List[@meson.FolTerm]) raise,
+            x453 : Unit,
           ) => {
             filter(
-              (x448 : (Int, @list.List[@meson.FolTerm])) => eq(sub, lit, x448),
-              x449,
-              x450,
+              (x451 : (Int, @list.List[@meson.FolTerm])) => eq(sub, lit, x451),
+              x452,
+              x453,
             )
-          })(x451, x452)
+          })(x454, x455)
         }
       }),
-      (x456 : (Unit) -> (Int, @list.List[@meson.FolTerm]) raise) => {
-        (x457 : Unit) => {
+      (x459 : (Unit) -> (Int, @list.List[@meson.FolTerm]) raise) => {
+        (x460 : Unit) => {
           ((
-            x454 : (Unit) -> (Int, @list.List[@meson.FolTerm]) raise,
-            x455 : Unit,
+            x457 : (Unit) -> (Int, @list.List[@meson.FolTerm]) raise,
+            x458 : Unit,
           ) => {
             map(
-              (x453 : (Int, @list.List[@meson.FolTerm])) => {
-                let l = x453
+              (x456 : (Int, @list.List[@meson.FolTerm])) => {
+                let l = x456
                 if @firstorder.copverb().val {
                   @pp.std_formatter.print_string("lemma\n")
                   @pp.std_formatter.print_flush()
@@ -3408,30 +3401,31 @@ pub fn prove_lit(
                 }
                 (sub, lem.prepend(lit), Proof::Lemma)
               },
-              x454,
-              x455,
+              x457,
+              x458,
             )
-          })(x456, x457)
+          })(x459, x460)
         }
       },
     )
   }
-  let t461 = of_list(path)
+  let t465 = of_list(path)
   let reductions : (Unit) -> (
     (T1, Int),
     @list.List[(Int, @list.List[@meson.FolTerm])],
     Proof[_, _],
-  ) raise = (x462 : Unit) => {
+  ) raise = (x466 : Unit) => {
     filter_map(
-      (x458 : (Int, @list.List[@meson.FolTerm])) => {
-        let p = x458
+      (x461 : (Int, @list.List[@meson.FolTerm])) => {
+        let p = x461
         if @firstorder.copverb().val {
-          let t459 = string_of_lit(inst_lit_v1(sub.0, lit))
+          let t462 = string_of_lit(inst_lit_v1(sub.0, lit))
+          let t463 = string_of_lit(p)
           @pp.std_formatter.print_string(
             "Reduction try " +
-            string_of_lit(p) +
+            t463 +
             " (for lit " +
-            t459 +
+            t462 +
             ", lim " +
             @lib.string_of_int(lim) +
             ")\n",
@@ -3441,8 +3435,8 @@ pub fn prove_lit(
         } else {
           ()
         }
-        @firstorder.op_gt_gt_eq(unify(sub, neglit, p), (x460 : (T1, Int)) => {
-          let sub1 = x460
+        @firstorder.op_gt_gt_eq(unify(sub, neglit, p), (x464 : (T1, Int)) => {
+          let sub1 = x464
           if @firstorder.copverb().val {
             @pp.std_formatter.print_string("Reduction works\n")
             @pp.std_formatter.print_flush()
@@ -3453,8 +3447,8 @@ pub fn prove_lit(
           Some((sub1, lem.prepend(lit), Proof::Reduction))
         })
       },
-      t461,
-      x462,
+      t465,
+      x466,
     )
   }
   let extensions : (Unit) -> (
@@ -3462,7 +3456,7 @@ pub fn prove_lit(
     @list.List[(Int, @list.List[@meson.FolTerm])],
     Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)],
   ) raise = @lib.op_bar_gt(@lib.op_bar_gt(db_entries(neglit), of_list), (
-    x470 : (Unit) -> (
+    x474 : (Unit) -> (
       @list.List[@meson.FolTerm],
       @list.List[@meson.FolAtom],
       Int,
@@ -3471,7 +3465,7 @@ pub fn prove_lit(
   ) => {
     concat_map(
       fn(
-        x463 : (
+        x467 : (
           @list.List[@meson.FolTerm],
           @list.List[@meson.FolAtom],
           Int,
@@ -3482,7 +3476,7 @@ pub fn prove_lit(
         @list.List[(Int, @list.List[@meson.FolTerm])],
         Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)],
       ) raise) raise {
-        let (_, _, vars, hsh) as contra = x463
+        let (_, _, vars, hsh) as contra = x467
         if lim < 0 && vars > 0 {
           nil
         } else {
@@ -3496,7 +3490,7 @@ pub fn prove_lit(
                   (cla1, hsh),
                 ),
                 fn(
-                  x468 : (Unit) -> (
+                  x472 : (Unit) -> (
                     (T1, Int),
                     @list.List[
                       (
@@ -3514,14 +3508,14 @@ pub fn prove_lit(
                   Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)],
                 ) raise) raise {
                   fn(
-                    x469 : Unit,
+                    x473 : Unit,
                   ) -> (
                     (T1, Int),
                     @list.List[(Int, @list.List[@meson.FolTerm])],
                     Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)],
                   ) raise {
                     ((
-                      x466 : (Unit) -> (
+                      x470 : (Unit) -> (
                         (T1, Int),
                         @list.List[
                           (
@@ -3533,11 +3527,11 @@ pub fn prove_lit(
                           ),
                         ],
                       ) raise,
-                      x467 : Unit,
+                      x471 : Unit,
                     ) => {
                       map(
                         fn(
-                          x465 : (
+                          x469 : (
                             (T1, Int),
                             @list.List[
                               (
@@ -3557,13 +3551,13 @@ pub fn prove_lit(
                             (Int, @kernel.Thm),
                           ],
                         ) raise {
-                          let (sub2, prfs) = x465
+                          let (sub2, prfs) = x469
                           (sub2, lem.prepend(lit), Proof::Extension(hsh, prfs))
                         },
-                        x466,
-                        x467,
+                        x470,
+                        x471,
                       )
-                    })(x468, x469)
+                    })(x472, x473)
                   }
                 },
               )
@@ -3571,25 +3565,25 @@ pub fn prove_lit(
           }
         }
       },
-      x470,
+      x474,
     )
   })
-  let t471 = cut_v1(opt.cut3, extensions, nil)
-  let t472 = cut_v1(opt.cut2, reductions, t471)
-  cut_v1(opt.cut1, lemmas, t472)
+  let t475 = cut_v1(opt.cut3, extensions, nil)
+  let t476 = cut_v1(opt.cut2, reductions, t475)
+  cut_v1(opt.cut1, lemmas, t476)
 }
 
 ///|
 /// `prove_clause`
 pub fn prove_clause(
-  x473 : SearchOpts,
-  x474 : (T1, Int),
-  x475 : (
+  x477 : SearchOpts,
+  x478 : (T1, Int),
+  x479 : (
     @list.List[(Int, @list.List[@meson.FolTerm])],
     @list.List[(Int, @list.List[@meson.FolTerm])],
     Int,
   ),
-  x476 : (@list.List[(Int, @list.List[@meson.FolTerm])], (Int, @kernel.Thm)),
+  x480 : (@list.List[(Int, @list.List[@meson.FolTerm])], (Int, @kernel.Thm)),
 ) -> Strom[
   (
     (T1, Int),
@@ -3601,17 +3595,17 @@ pub fn prove_clause(
     ],
   ),
 ] raise {
-  let opt_1 = x473
-  let sub_1 = x474
-  let (path_1, lem_1, lim_1) = x475
-  let (cl, cl_hsh) = x476
+  let opt_1 = x477
+  let sub_1 = x478
+  let (path_1, lem_1, lim_1) = x479
+  let (cl, cl_hsh) = x480
   match cl {
     More(lit_1, tail=lits) =>
       if @lib.exists(
-          fn(x478 : (Int, @list.List[@meson.FolTerm])) -> Bool raise {
-            let x = x478
+          fn(x482 : (Int, @list.List[@meson.FolTerm])) -> Bool raise {
+            let x = x482
             @lib.exists(
-              (x479 : (Int, @list.List[@meson.FolTerm])) => eq(sub_1, x, x479),
+              (x483 : (Int, @list.List[@meson.FolTerm])) => eq(sub_1, x, x483),
               path_1,
             )
           },
@@ -3627,7 +3621,7 @@ pub fn prove_clause(
         nil
       } else {
         @lib.op_bar_gt(prove_lit(opt_1, sub_1, (path_1, lem_1, lim_1), lit_1), (
-          x487 : (Unit) -> (
+          x491 : (Unit) -> (
             (T1, Int),
             @list.List[(Int, @list.List[@meson.FolTerm])],
             Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)],
@@ -3635,7 +3629,7 @@ pub fn prove_clause(
         ) => {
           concat_map(
             fn(
-              x480 : (
+              x484 : (
                 (T1, Int),
                 @list.List[(Int, @list.List[@meson.FolTerm])],
                 Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)],
@@ -3649,7 +3643,7 @@ pub fn prove_clause(
                 ),
               ],
             ) raise) raise {
-              let (sub1_2, lem1, prf1) = x480
+              let (sub1_2, lem1, prf1) = x484
               @lib.op_bar_gt(
                 prove_clause(
                   opt_1,
@@ -3658,7 +3652,7 @@ pub fn prove_clause(
                   (lits, cl_hsh),
                 ),
                 fn(
-                  x485 : (Unit) -> (
+                  x489 : (Unit) -> (
                     (T1, Int),
                     @list.List[
                       (
@@ -3683,7 +3677,7 @@ pub fn prove_clause(
                   ],
                 ) raise) raise {
                   fn(
-                    x486 : Unit,
+                    x490 : Unit,
                   ) -> (
                     (T1, Int),
                     @list.List[
@@ -3697,7 +3691,7 @@ pub fn prove_clause(
                     ],
                   ) raise {
                     ((
-                      x483 : (Unit) -> (
+                      x487 : (Unit) -> (
                         (T1, Int),
                         @list.List[
                           (
@@ -3709,11 +3703,11 @@ pub fn prove_clause(
                           ),
                         ],
                       ) raise,
-                      x484 : Unit,
+                      x488 : Unit,
                     ) => {
                       map(
                         fn(
-                          x482 : (
+                          x486 : (
                             (T1, Int),
                             @list.List[
                               (
@@ -3737,18 +3731,18 @@ pub fn prove_clause(
                             ),
                           ],
                         ) raise {
-                          let (sub2_1, prfs_1) = x482
+                          let (sub2_1, prfs_1) = x486
                           (sub2_1, prfs_1.prepend((lit_1, prf1)))
                         },
-                        x483,
-                        x484,
+                        x487,
+                        x488,
                       )
-                    })(x485, x486)
+                    })(x489, x490)
                   }
                 },
               )
             },
-            x487,
+            x491,
           )
         })
       }
@@ -3758,8 +3752,8 @@ pub fn prove_clause(
 
 ///|
 /// `hol_negate`
-pub fn hol_negate(x488 : @kernel.Term) -> @kernel.Term raise {
-  let tm = x488
+pub fn hol_negate(x492 : @kernel.Term) -> @kernel.Term raise {
+  let tm = x492
   @basics.dest_neg(tm) catch {
     Failure(_) => @bool.mk_neg(tm)
     e => raise e
@@ -3769,23 +3763,23 @@ pub fn hol_negate(x488 : @kernel.Term) -> @kernel.Term raise {
 ///|
 /// `hashek_of_proof`
 pub fn hashek_of_proof(
-  x489 : T1,
-  x490 : @list.List[@kernel.Thm],
-  x491 : (Int, @list.List[@meson.FolTerm]),
+  x493 : T1,
+  x494 : @list.List[@kernel.Thm],
+  x495 : (Int, @list.List[@meson.FolTerm]),
 ) -> ((Proof[Lit, (Int, @kernel.Thm)]) -> @kernel.Thm raise) raise {
-  let sub = x489
-  let lem = x490
-  let lit = x491
-  let t493 = inst_lit_v1(sub, lit)
-  let liti = @firstorder.hol_of_literal(t493.0, t493.1)
+  let sub = x493
+  let lem = x494
+  let lit = x495
+  let t497 = inst_lit_v1(sub, lit)
+  let liti = @firstorder.hol_of_literal(t497.0, t497.1)
   fn(
-    x494 : Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)],
+    x498 : Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)],
   ) -> @kernel.Thm raise {
-    match x494 {
+    match x498 {
       Proof::Lemma =>
         @lib.find(
-          fn(x495 : @kernel.Thm) -> Bool raise {
-            let x = x495
+          fn(x499 : @kernel.Thm) -> Bool raise {
+            let x = x499
             @kernel.concl(x) == liti
           },
           lem,
@@ -3794,21 +3788,21 @@ pub fn hashek_of_proof(
       Proof::Extension(contra, prfs) => {
         let (_, ths) = @firstorder.fold_map(
           fn(
-            x496 : @list.List[@kernel.Thm],
+            x500 : @list.List[@kernel.Thm],
           ) -> ((
             (
               (Int, @list.List[@meson.FolTerm]),
               Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)],
             ),
           ) -> (@list.List[@kernel.Thm], @kernel.Thm) raise) raise {
-            let lem_1 = x496
+            let lem_1 = x500
             fn(
-              x497 : (
+              x501 : (
                 (Int, @list.List[@meson.FolTerm]),
                 Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)],
               ),
             ) -> (@list.List[@kernel.Thm], @kernel.Thm) raise {
-              let (lit_1, prf) = x497
+              let (lit_1, prf) = x501
               let p = hashek_of_proof(sub, lem_1, lit_1)(prf)
               (lem_1.prepend(p), p)
             }
@@ -3820,11 +3814,11 @@ pub fn hashek_of_proof(
         let hth = if ths == @list.empty() {
           cth
         } else {
-          let t498 = @lib.end_itlist(@bool.conj, ths)
-          @drule.match_mp(cth)(t498)
+          let t502 = @lib.end_itlist(@bool.conj, ths)
+          @drule.match_mp(cth)(t502)
         }
         let ith = @drule.part_match(
-          fn(x499 : @kernel.Term) -> @kernel.Term raise { x499 },
+          fn(x503 : @kernel.Term) -> @kernel.Term raise { x503 },
           hth,
         )(liti)
         @meson.finish_rule(@bool.disch(hol_negate(@kernel.concl(ith)), ith))
@@ -3836,15 +3830,14 @@ pub fn hashek_of_proof(
 ///|
 /// `start`
 pub fn start(
-  x500 : SearchOpts,
-  x501 : Int,
+  x504 : SearchOpts,
+  x505 : Int,
 ) -> (T1, Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)])? raise {
-  let opt = x500
-  let lim = x501
+  let opt = x504
+  let lim = x505
   if @firstorder.copverb().val {
-    @pp.std_formatter.print_string(
-      "Start " + @lib.string_of_int(lim + 1) + "\n",
-    )
+    let t506 = lim + 1
+    @pp.std_formatter.print_string("Start " + @lib.string_of_int(t506) + "\n")
     @pp.std_formatter.print_flush()
     ()
   } else {
@@ -3876,30 +3869,30 @@ pub fn start(
 ///|
 /// `LEANCOP_DEEPEN`
 pub fn leancop_deepen(
-  x502 : SearchOpts,
-  x503 : @list.List[@kernel.Thm],
+  x507 : SearchOpts,
+  x508 : @list.List[@kernel.Thm],
 ) -> @kernel.Thm raise {
-  let opt = x502
-  let ths = x503
+  let opt = x507
+  let ths = x508
   @meson.clear_contrapos_cache(())
   @firstorder.reset_vars(())
   @firstorder.reset_consts(())
-  let t505 = @lib.map(
-    fn(x504 : @kernel.Thm) -> @kernel.Term raise { @kernel.concl(x504) },
+  let t510 = @lib.map(
+    fn(x509 : @kernel.Thm) -> @kernel.Term raise { @kernel.concl(x509) },
     ths,
   )
-  let ths_p = ths.concat(create_eq_axs(opt.add_eq_symmetry)(t505))
+  let ths_p = ths.concat(create_eq_axs(opt.add_eq_symmetry)(t510))
   axioms2db(ths_p)
   let (sub, prf) = strategy(opt, fn(
-    x506 : SearchOpts,
+    x511 : SearchOpts,
   ) -> ((Int) -> (
     T1,
     Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)],
   )? raise) raise {
     fn(
-      x507 : Int,
+      x512 : Int,
     ) -> (T1, Proof[(Int, @list.List[@meson.FolTerm]), (Int, @kernel.Thm)])? raise {
-      start(x506, x507)
+      start(x511, x512)
     }
   })
   let hashek = @firstorder.fol_of_literal(
@@ -3915,19 +3908,19 @@ pub fn leancop_deepen(
 ///|
 /// `PREPARE_LEAN_TAC`
 pub fn prepare_lean_tac(
-  x508 : @list.List[@kernel.Thm],
+  x513 : @list.List[@kernel.Thm],
 ) -> @tactics.Tactic raise {
-  let ths = x508
-  let t524 = @tactics.repeat_tac(@tactics.first_x_assum(@tactics.subst_var_tac))
-  let t521 = @canon.assoc_conv(@theorems.disj_assoc())
-  let t523 = @tactics.rule_assum_tac((x522 : @kernel.Thm) => {
-    @equal.conv_rule(t521, x522)
+  let ths = x513
+  let t529 = @tactics.repeat_tac(@tactics.first_x_assum(@tactics.subst_var_tac))
+  let t526 = @canon.assoc_conv(@theorems.disj_assoc())
+  let t528 = @tactics.rule_assum_tac((x527 : @kernel.Thm) => {
+    @equal.conv_rule(t526, x527)
   })
-  let t520 = @tactics.repeat_tac(
-    @tactics.first_x_assum((x519 : @kernel.Thm) => {
+  let t525 = @tactics.repeat_tac(
+    @tactics.first_x_assum((x524 : @kernel.Thm) => {
       @meson.conjuncts_then_p(
         fn(
-          x516 : @kernel.Thm,
+          x521 : @kernel.Thm,
         ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
           (
             @list.List[@kernel.Term],
@@ -3947,9 +3940,9 @@ pub fn prepare_lean_tac(
             @list.List[@kernel.Thm],
           ) -> @kernel.Thm raise,
         ) raise) raise {
-          let s517 = @tactics.assume_tac(x516)
+          let s522 = @tactics.assume_tac(x521)
           fn(
-            x518 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+            x523 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
           ) -> (
             (
               @list.List[@kernel.Term],
@@ -3969,17 +3962,17 @@ pub fn prepare_lean_tac(
               @list.List[@kernel.Thm],
             ) -> @kernel.Thm raise,
           ) raise {
-            s517(x518)
+            s522(x523)
           }
         },
-        x519,
+        x524,
       )
     }),
   )
-  let t515 = @tactics.rule_assum_tac((x514 : @kernel.Thm) => {
+  let t520 = @tactics.rule_assum_tac((x519 : @kernel.Thm) => {
     @lib.repeat(
-      fn(x513 : @kernel.Thm) -> @kernel.Thm raise {
-        let th = x513
+      fn(x518 : @kernel.Thm) -> @kernel.Thm raise {
+        let th = x518
         @bool.spec(
           @basics.genvar(
             @kernel.type_of(@basics.dest_forall(@kernel.concl(th)).0),
@@ -3987,36 +3980,36 @@ pub fn prepare_lean_tac(
           th,
         )
       },
-      x514,
+      x519,
     )
   })
-  let t510 = @equal.thenc(@canon.prenex_conv, @canon.weak_cnf_conv)
-  let t512 = @tactics.rule_assum_tac((x511 : @kernel.Thm) => {
-    @equal.conv_rule(t510, x511)
+  let t515 = @equal.thenc(@canon.prenex_conv, @canon.weak_cnf_conv)
+  let t517 = @tactics.rule_assum_tac((x516 : @kernel.Thm) => {
+    @equal.conv_rule(t515, x516)
   })
   @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.then_tac(@tactics.then_tac(prepare_cop_tac(ths), t512), t515),
-        t520,
+        @tactics.then_tac(@tactics.then_tac(prepare_cop_tac(ths), t517), t520),
+        t525,
       ),
-      t523,
+      t528,
     ),
-    t524,
+    t529,
   )
 }
 
 ///|
 /// `PURE_LEANCOP`
 pub fn pure_leancop(
-  x525 : SearchOpts,
-  x526 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+  x530 : SearchOpts,
+  x531 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
 ) -> @tactics.Goalstate raise {
-  let opt = x525
-  let gl = x526
+  let opt = x530
+  let gl = x531
   @tactics.orelse_tac(
     @tactics.first_assum(fn(
-      x527 : @kernel.Thm,
+      x532 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
         @list.List[@kernel.Term],
@@ -4036,9 +4029,9 @@ pub fn pure_leancop(
         @list.List[@kernel.Thm],
       ) -> @kernel.Thm raise,
     ) raise) raise {
-      let s528 = @tactics.contr_tac(x527)
+      let s533 = @tactics.contr_tac(x532)
       fn(
-        x529 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+        x534 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
       ) -> (
         (
           @list.List[@kernel.Term],
@@ -4058,11 +4051,11 @@ pub fn pure_leancop(
           @list.List[@kernel.Thm],
         ) -> @kernel.Thm raise,
       ) raise {
-        s528(x529)
+        s533(x534)
       }
     }),
     fn(
-      x540 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+      x545 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
     ) -> (
       (
         @list.List[@kernel.Term],
@@ -4083,7 +4076,7 @@ pub fn pure_leancop(
       ) -> @kernel.Thm raise,
     ) raise {
       (fn(
-        x539 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+        x544 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
       ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
         (
           @list.List[@kernel.Term],
@@ -4104,7 +4097,7 @@ pub fn pure_leancop(
         ) -> @kernel.Thm raise,
       ) raise) raise {
         (fn(
-          x537 : @list.List[(String, @kernel.Thm)],
+          x542 : @list.List[(String, @kernel.Thm)],
         ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
           (
             @list.List[@kernel.Term],
@@ -4125,7 +4118,7 @@ pub fn pure_leancop(
           ) -> @kernel.Thm raise,
         ) raise) raise {
           (fn(
-            x534 : @list.List[@kernel.Thm],
+            x539 : @list.List[@kernel.Thm],
           ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
             (
               @list.List[@kernel.Term],
@@ -4146,7 +4139,7 @@ pub fn pure_leancop(
             ) -> @kernel.Thm raise,
           ) raise) raise {
             (fn(
-              x530 : @kernel.Thm,
+              x535 : @kernel.Thm,
             ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
               (
                 @list.List[@kernel.Term],
@@ -4166,9 +4159,9 @@ pub fn pure_leancop(
                 @list.List[@kernel.Thm],
               ) -> @kernel.Thm raise,
             ) raise) raise {
-              let s531 = @tactics.accept_tac(x530)
+              let s536 = @tactics.accept_tac(x535)
               fn(
-                x532 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+                x537 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
               ) -> (
                 (
                   @list.List[@kernel.Term],
@@ -4188,29 +4181,29 @@ pub fn pure_leancop(
                   @list.List[@kernel.Thm],
                 ) -> @kernel.Thm raise,
               ) raise {
-                s531(x532)
+                s536(x537)
               }
             })(
-              ((x533 : @list.List[@kernel.Thm]) => leancop_deepen(opt, x533))(
-                x534,
+              ((x538 : @list.List[@kernel.Thm]) => leancop_deepen(opt, x538))(
+                x539,
               ),
             )
           })(
-            ((x536 : @list.List[(String, @kernel.Thm)]) => {
+            ((x541 : @list.List[(String, @kernel.Thm)]) => {
               @lib.map(
-                fn(x535 : (String, @kernel.Thm)) -> @kernel.Thm raise { x535.1 },
-                x536,
+                fn(x540 : (String, @kernel.Thm)) -> @kernel.Thm raise { x540.1 },
+                x541,
               )
-            })(x537),
+            })(x542),
           )
         })(
           (fn(
-            x538 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+            x543 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
           ) -> @list.List[(String, @kernel.Thm)] raise {
-            x538.0
-          })(x539),
+            x543.0
+          })(x544),
         )
-      })(x540)(x540)
+      })(x545)(x545)
     },
   )(gl)
 }
@@ -4218,31 +4211,31 @@ pub fn pure_leancop(
 ///|
 /// `GEN_LEANCOP_TAC`
 pub fn gen_leancop_tac(
-  x541 : SearchOpts,
-  x542 : @list.List[@kernel.Thm],
+  x546 : SearchOpts,
+  x547 : @list.List[@kernel.Thm],
 ) -> @tactics.Tactic raise {
-  let opt = x541
-  let ths = x542
+  let opt = x546
+  let ths = x547
   @tactics.then_tac(prepare_lean_tac(ths), (
-    x544 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
-  ) => pure_leancop(opt, x544))
+    x549 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+  ) => pure_leancop(opt, x549))
 }
 
 ///|
 /// `LEANCOP_TAC`
-pub fn leancop_tac(x545 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
-  let ths = x545
+pub fn leancop_tac(x550 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
+  let ths = x550
   gen_leancop_tac(search_opts(), ths)
 }
 
 ///|
 /// `LEANCOP`
 pub fn leancop(
-  x547 : @list.List[@kernel.Thm],
-  x548 : @kernel.Term,
+  x552 : @list.List[@kernel.Thm],
+  x553 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let ths = x547
-  let tm = x548
+  let ths = x552
+  let tm = x553
   @tactics.prove(tm, leancop_tac(ths))
 }
 
@@ -4306,13 +4299,13 @@ pub type Clause[TA] = @list.List[Litmat[TA]]
 ///|
 /// `map_litmat`
 pub fn[TA, TB] map_litmat(
-  x549 : ((Int, @list.List[@meson.FolTerm])) -> TA raise,
-  x550 : ((TB, @list.List[((TB, @list.List[Int]), @list.List[Litmat[TB]])])) -> TA raise,
-  x551 : Litmat[TB],
+  x554 : ((Int, @list.List[@meson.FolTerm])) -> TA raise,
+  x555 : ((TB, @list.List[((TB, @list.List[Int]), @list.List[Litmat[TB]])])) -> TA raise,
+  x556 : Litmat[TB],
 ) -> TA raise {
-  let fl = x549
-  let fm = x550
-  match x551 {
+  let fl = x554
+  let fm = x555
+  match x556 {
     Litmat::Lit(lit) => fl(lit)
     Litmat::Mat(mat) => fm(mat)
   }
@@ -4320,24 +4313,24 @@ pub fn[TA, TB] map_litmat(
 
 ///|
 /// `lit`
-pub fn[TA] lit(x552 : (Int, @list.List[@meson.FolTerm])) -> Litmat[TA] raise {
-  let x = x552
+pub fn[TA] lit(x557 : (Int, @list.List[@meson.FolTerm])) -> Litmat[TA] raise {
+  let x = x557
   Litmat::Lit(x)
 }
 
 ///|
 /// `mat`
 pub fn[TA] mat(
-  x553 : (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]),
+  x558 : (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]),
 ) -> Litmat[TA] raise {
-  let x = x553
+  let x = x558
   Litmat::Mat(x)
 }
 
 ///|
 /// `lit_of_litmat`
-pub fn[TA] lit_of_litmat(x554 : Litmat[TA]) -> Lit? raise {
-  match x554 {
+pub fn[TA] lit_of_litmat(x559 : Litmat[TA]) -> Lit? raise {
+  match x559 {
     Litmat::Lit(l) => Some(l)
     Litmat::Mat(_) => None
   }
@@ -4345,17 +4338,17 @@ pub fn[TA] lit_of_litmat(x554 : Litmat[TA]) -> Lit? raise {
 
 ///|
 /// `clause_lits`
-pub fn[TA] clause_lits(x555 : @list.List[Litmat[TA]]) -> @list.List[Lit] raise {
-  let c = x555
+pub fn[TA] clause_lits(x560 : @list.List[Litmat[TA]]) -> @list.List[Lit] raise {
+  let c = x560
   @firstorder.filter_map(lit_of_litmat, c)
 }
 
 ///|
 /// `clause_of_matrix`
 pub fn clause_of_matrix(
-  x556 : @list.List[((Unit, @list.List[Int]), @list.List[Litmat[Unit]])],
+  x561 : @list.List[((Unit, @list.List[Int]), @list.List[Litmat[Unit]])],
 ) -> Clause[Unit] raise {
-  match x556 {
+  match x561 {
     More(((_, Empty), c), tail=Empty) => c
     lm => @list.List([Litmat::Mat(((), lm))])
   }
@@ -4363,11 +4356,11 @@ pub fn clause_of_matrix(
 
 ///|
 /// `strip_disj`
-pub fn strip_disj(x557 : @meson.FolForm) -> @list.List[@meson.FolForm] raise {
-  match x557 {
+pub fn strip_disj(x562 : @meson.FolForm) -> @list.List[@meson.FolForm] raise {
+  match x562 {
     @meson.FolForm::Disj(l, r) => {
-      let t558 = strip_disj(r)
-      strip_disj(l).concat(t558)
+      let t563 = strip_disj(r)
+      strip_disj(l).concat(t563)
     }
     x => @list.List([x])
   }
@@ -4375,11 +4368,11 @@ pub fn strip_disj(x557 : @meson.FolForm) -> @list.List[@meson.FolForm] raise {
 
 ///|
 /// `strip_conj`
-pub fn strip_conj(x559 : @meson.FolForm) -> @list.List[@meson.FolForm] raise {
-  match x559 {
+pub fn strip_conj(x564 : @meson.FolForm) -> @list.List[@meson.FolForm] raise {
+  match x564 {
     @meson.FolForm::Conj(l, r) => {
-      let t560 = strip_conj(r)
-      strip_conj(l).concat(t560)
+      let t565 = strip_conj(r)
+      strip_conj(l).concat(t565)
     }
     x => @list.List([x])
   }
@@ -4388,11 +4381,11 @@ pub fn strip_conj(x559 : @meson.FolForm) -> @list.List[@meson.FolForm] raise {
 ///|
 /// `strip_forallq`
 pub fn strip_forallq(
-  x561 : @list.List[Int],
-  x562 : @meson.FolForm,
+  x566 : @list.List[Int],
+  x567 : @meson.FolForm,
 ) -> (@list.List[Int], @meson.FolForm) raise {
-  let acc = x561
-  match x562 {
+  let acc = x566
+  match x567 {
     @meson.FolForm::Forallq(x, t) => strip_forallq(acc.prepend(x), t)
     t_1 => (@lib.rev(acc), t_1)
   }
@@ -4400,8 +4393,8 @@ pub fn strip_forallq(
 
 ///|
 /// `litmat_of_form`
-pub fn litmat_of_form(x563 : @meson.FolForm) -> Litmat[Unit] raise {
-  match x563 {
+pub fn litmat_of_form(x568 : @meson.FolForm) -> Litmat[Unit] raise {
+  match x568 {
     @meson.FolForm::Atom(t) => Litmat::Lit(t)
     (@meson.FolForm::Conj(_, _) as t_1)
     | (@meson.FolForm::Forallq(_, _) as t_1) =>
@@ -4412,37 +4405,37 @@ pub fn litmat_of_form(x563 : @meson.FolForm) -> Litmat[Unit] raise {
 
 ///|
 /// `matrix_of_form`
-pub fn matrix_of_form(x564 : @meson.FolForm) -> Matrix[Unit] raise {
-  let t_2 = x564
+pub fn matrix_of_form(x569 : @meson.FolForm) -> Matrix[Unit] raise {
+  let t_2 = x569
   @lib.map(iclause_of_form, strip_conj(t_2))
 }
 
 ///|
 /// `clause_of_form`
-pub fn clause_of_form(x565 : @meson.FolForm) -> Clause[Unit] raise {
-  let t_3 = x565
+pub fn clause_of_form(x570 : @meson.FolForm) -> Clause[Unit] raise {
+  let t_3 = x570
   @lib.map(litmat_of_form, strip_disj(t_3))
 }
 
 ///|
 /// `iclause_of_form`
-pub fn iclause_of_form(x566 : @meson.FolForm) -> Iclause[Unit] raise {
-  let t_4 = x566
+pub fn iclause_of_form(x571 : @meson.FolForm) -> Iclause[Unit] raise {
+  let t_4 = x571
   let (univ, t_p) = strip_forallq(@list.empty(), t_4)
   (((), univ), clause_of_form(t_p))
 }
 
 ///|
 /// `litmat_max_var`
-pub fn[TA] litmat_max_var(x567 : Int) -> ((Litmat[TA]) -> Int raise) raise {
-  let acc = x567
-  (x571 : Litmat[TA]) => {
+pub fn[TA] litmat_max_var(x572 : Int) -> ((Litmat[TA]) -> Int raise) raise {
+  let acc = x572
+  (x576 : Litmat[TA]) => {
     map_litmat(
-      (x569 : (Int, @list.List[@meson.FolTerm])) => lit_max_var(acc, x569),
-      (x570 : (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])])) => {
-        imatrix_max_var(acc, x570)
+      (x574 : (Int, @list.List[@meson.FolTerm])) => lit_max_var(acc, x574),
+      (x575 : (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])])) => {
+        imatrix_max_var(acc, x575)
       },
-      x571,
+      x576,
     )
   }
 }
@@ -4450,48 +4443,48 @@ pub fn[TA] litmat_max_var(x567 : Int) -> ((Litmat[TA]) -> Int raise) raise {
 ///|
 /// `imatrix_max_var`
 pub fn[TA] imatrix_max_var(
-  x572 : Int,
-  x573 : (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]),
+  x577 : Int,
+  x578 : (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]),
 ) -> Int raise {
-  let acc_1 = x572
-  let (_, m) = x573
+  let acc_1 = x577
+  let (_, m) = x578
   matrix_max_var(acc_1, m)
 }
 
 ///|
 /// `iclause_max_var`
 pub fn[TA] iclause_max_var(
-  x574 : Int,
-  x575 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
+  x579 : Int,
+  x580 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
 ) -> Int raise {
-  let acc_2 = x574
-  let (_, c) = x575
+  let acc_2 = x579
+  let (_, c) = x580
   clause_max_var_v1(acc_2, c)
 }
 
 ///|
 /// `matrix_max_var`
 pub fn[TA] matrix_max_var(
-  x576 : Int,
-  x577 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
+  x581 : Int,
+  x582 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
 ) -> Int raise {
-  let acc_3 = x576
-  let m_1 = x577
+  let acc_3 = x581
+  let m_1 = x582
   @lib.fold_left(iclause_max_var, acc_3, m_1)
 }
 
 ///|
 /// `clause_max_var`
 pub fn[TA] clause_max_var_v1(
-  x578 : Int,
-  x579 : @list.List[Litmat[TA]],
+  x583 : Int,
+  x584 : @list.List[Litmat[TA]],
 ) -> Int raise {
-  let acc_4 = x578
-  let c_1 = x579
+  let acc_4 = x583
+  let c_1 = x584
   @lib.fold_left(
-    fn(x580 : Int, x581 : Litmat[TA]) -> Int raise {
-      let s582 = litmat_max_var(x580)
-      s582(x581)
+    fn(x585 : Int, x586 : Litmat[TA]) -> Int raise {
+      let s587 = litmat_max_var(x585)
+      s587(x586)
     },
     acc_4,
     c_1,
@@ -4500,27 +4493,27 @@ pub fn[TA] clause_max_var_v1(
 
 ///|
 /// `clause_offset`
-pub fn[TA] clause_offset(x583 : @list.List[Litmat[TA]]) -> Int raise {
-  let c = x583
+pub fn[TA] clause_offset(x588 : @list.List[Litmat[TA]]) -> Int raise {
+  let c = x588
   1 + clause_max_var_v1(-1, c)
 }
 
 ///|
 /// `iclause_offset`
 pub fn[TA] iclause_offset(
-  x584 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
+  x589 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
 ) -> Int raise {
-  let c = x584
+  let c = x589
   1 + iclause_max_var(-1, c)
 }
 
 ///|
 /// `clause_ground`
-pub fn[TA] clause_ground(x585 : @list.List[Litmat[TA]]) -> Bool raise {
-  let c = x585
+pub fn[TA] clause_ground(x590 : @list.List[Litmat[TA]]) -> Bool raise {
+  let c = x590
   @lib.forall(
-    fn(x586 : Litmat[TA]) -> Bool raise {
-      match x586 {
+    fn(x591 : Litmat[TA]) -> Bool raise {
+      match x591 {
         Litmat::Lit(l) => lit_ground(l.0, l.1)
         Litmat::Mat(_) => false
       }
@@ -4532,11 +4525,11 @@ pub fn[TA] clause_ground(x585 : @list.List[Litmat[TA]]) -> Bool raise {
 ///|
 /// `index_imatrix`
 pub fn[TA] index_imatrix(
-  x587 : Int,
-  x588 : (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]),
+  x592 : Int,
+  x593 : (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]),
 ) -> (Int, Imatrix[Int]) raise {
-  let i = x587
-  let (_, m) = x588
+  let i = x592
+  let (_, m) = x593
   let (j, m_p) = index_matrix(i + 1, m)
   (j, (i, m_p))
 }
@@ -4544,22 +4537,22 @@ pub fn[TA] index_imatrix(
 ///|
 /// `index_matrix`
 pub fn[TA] index_matrix(
-  x589 : Int,
-  x590 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
+  x594 : Int,
+  x595 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
 ) -> (Int, Matrix[Int]) raise {
-  let i_1 = x589
-  let m_1 = x590
+  let i_1 = x594
+  let m_1 = x595
   @firstorder.fold_map(
     fn(
-      x591 : Int,
+      x596 : Int,
     ) -> ((((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> (
       Int,
       ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
     ) raise) raise {
       fn(
-        x592 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
+        x597 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
       ) -> (Int, ((Int, @list.List[Int]), @list.List[Litmat[Int]])) raise {
-        index_iclause(x591, x592)
+        index_iclause(x596, x597)
       }
     },
     i_1,
@@ -4570,11 +4563,11 @@ pub fn[TA] index_matrix(
 ///|
 /// `index_iclause`
 pub fn[TA] index_iclause(
-  x593 : Int,
-  x594 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
+  x598 : Int,
+  x599 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
 ) -> (Int, Iclause[Int]) raise {
-  let i_2 = x593
-  let ((_, v), c) = x594
+  let i_2 = x598
+  let ((_, v), c) = x599
   let (j_1, c_p) = index_clause(i_2 + 1, c)
   (j_1, ((i_2, v), c_p))
 }
@@ -4582,15 +4575,15 @@ pub fn[TA] index_iclause(
 ///|
 /// `index_clause`
 pub fn[TA] index_clause(
-  x595 : Int,
-  x596 : @list.List[Litmat[TA]],
+  x600 : Int,
+  x601 : @list.List[Litmat[TA]],
 ) -> (Int, Clause[Int]) raise {
-  let i_3 = x595
-  let c_1 = x596
+  let i_3 = x600
+  let c_1 = x601
   @firstorder.fold_map(
-    fn(x597 : Int) -> ((Litmat[TA]) -> (Int, Litmat[Int]) raise) raise {
-      fn(x598 : Litmat[TA]) -> (Int, Litmat[Int]) raise {
-        index_litmat(x597, x598)
+    fn(x602 : Int) -> ((Litmat[TA]) -> (Int, Litmat[Int]) raise) raise {
+      fn(x603 : Litmat[TA]) -> (Int, Litmat[Int]) raise {
+        index_litmat(x602, x603)
       }
     },
     i_3,
@@ -4601,11 +4594,11 @@ pub fn[TA] index_clause(
 ///|
 /// `index_litmat`
 pub fn[TA] index_litmat(
-  x599 : Int,
-  x600 : Litmat[TA],
+  x604 : Int,
+  x605 : Litmat[TA],
 ) -> (Int, Litmat[Int]) raise {
-  let i_4 = x599
-  match x600 {
+  let i_4 = x604
+  match x605 {
     Litmat::Lit(l) => (i_4, Litmat::Lit(l))
     Litmat::Mat(m_2) => {
       let (j_2, m_p_1) = index_imatrix(i_4, m_2)
@@ -4617,36 +4610,36 @@ pub fn[TA] index_litmat(
 ///|
 /// `index_matrix`
 pub fn[TA] index_matrix_v1(
-  x601 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
+  x606 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
 ) -> Matrix[Int] raise {
-  let m = x601
+  let m = x606
   index_matrix(0, m).1
 }
 
 ///|
 /// `map_imatrix`
 pub fn[TA, TB] map_imatrix(
-  x602 : (TB) -> TA raise,
-  x603 : (TB, @list.List[((TB, @list.List[Int]), @list.List[Litmat[TB]])]),
+  x607 : (TB) -> TA raise,
+  x608 : (TB, @list.List[((TB, @list.List[Int]), @list.List[Litmat[TB]])]),
 ) -> Imatrix[TA] raise {
-  let f = x602
-  let (t, m) = x603
-  let t604 = map_matrix(f)(m)
-  (f(t), t604)
+  let f = x607
+  let (t, m) = x608
+  let t609 = map_matrix(f)(m)
+  (f(t), t609)
 }
 
 ///|
 /// `map_matrix`
 pub fn[TA, TB] map_matrix(
-  x605 : (TB) -> TA raise,
+  x610 : (TB) -> TA raise,
 ) -> ((Matrix[TB]) -> Matrix[TA] raise) raise {
-  let f_1 = x605
-  x608 => {
+  let f_1 = x610
+  x613 => {
     @lib.map(
-      (x607 : ((TB, @list.List[Int]), @list.List[Litmat[TB]])) => {
-        map_iclause(f_1, x607)
+      (x612 : ((TB, @list.List[Int]), @list.List[Litmat[TB]])) => {
+        map_iclause(f_1, x612)
       },
-      x608,
+      x613,
     )
   }
 }
@@ -4654,28 +4647,28 @@ pub fn[TA, TB] map_matrix(
 ///|
 /// `map_iclause`
 pub fn[TA, TB] map_iclause(
-  x609 : (TB) -> TA raise,
-  x610 : ((TB, @list.List[Int]), @list.List[Litmat[TB]]),
+  x614 : (TB) -> TA raise,
+  x615 : ((TB, @list.List[Int]), @list.List[Litmat[TB]]),
 ) -> Iclause[TA] raise {
-  let f_2 = x609
-  let ((t_1, v), c) = x610
-  let t611 = map_clause(f_2)(c)
-  ((f_2(t_1), v), t611)
+  let f_2 = x614
+  let ((t_1, v), c) = x615
+  let t616 = map_clause(f_2)(c)
+  ((f_2(t_1), v), t616)
 }
 
 ///|
 /// `map_clause`
 pub fn[TA, TB] map_clause(
-  x612 : (TB) -> TA raise,
+  x617 : (TB) -> TA raise,
 ) -> ((Clause[TB]) -> Clause[TA] raise) raise {
-  let f_3 = x612
-  x617 => {
+  let f_3 = x617
+  x622 => {
     @lib.map(
-      (x616 : Litmat[TB]) => {
+      (x621 : Litmat[TB]) => {
         map_litmat(
           lit,
           (
-            x615 : (
+            x620 : (
               TB,
               @list.List[((TB, @list.List[Int]), @list.List[Litmat[TB]])],
             ),
@@ -4683,18 +4676,18 @@ pub fn[TA, TB] map_clause(
             @firstorder.op_percent(
               mat,
               (
-                x614 : (
+                x619 : (
                   TB,
                   @list.List[((TB, @list.List[Int]), @list.List[Litmat[TB]])],
                 ),
-              ) => map_imatrix(f_3, x614),
-              x615,
+              ) => map_imatrix(f_3, x619),
+              x620,
             )
           },
-          x616,
+          x621,
         )
       },
-      x617,
+      x622,
     )
   }
 }
@@ -4702,11 +4695,11 @@ pub fn[TA, TB] map_clause(
 ///|
 /// `copy_matrix`
 pub fn[TA, TB] copy_matrix(
-  x618 : TB,
+  x623 : TB,
 ) -> ((Matrix[TA]) -> Matrix[(TA, TB)] raise) raise {
-  let k = x618
-  map_matrix(fn(x620 : TA) -> (TA, TB) raise {
-    let i = x620
+  let k = x623
+  map_matrix(fn(x625 : TA) -> (TA, TB) raise {
+    let i = x625
     (i, k)
   })
 }
@@ -4714,11 +4707,11 @@ pub fn[TA, TB] copy_matrix(
 ///|
 /// `copy_clause`
 pub fn[TA, TB] copy_clause(
-  x621 : TB,
+  x626 : TB,
 ) -> ((Clause[TA]) -> Clause[(TA, TB)] raise) raise {
-  let k = x621
-  map_clause(fn(x623 : TA) -> (TA, TB) raise {
-    let i = x623
+  let k = x626
+  map_clause(fn(x628 : TA) -> (TA, TB) raise {
+    let i = x628
     (i, k)
   })
 }
@@ -4726,19 +4719,19 @@ pub fn[TA, TB] copy_clause(
 ///|
 /// `break_map`
 pub fn[TA, TB] break_map(
-  x624 : (TB) -> TA? raise,
-  x625 : @list.List[TB],
+  x629 : (TB) -> TA? raise,
+  x630 : @list.List[TB],
 ) -> @list.List[TA]? raise {
-  let f = x624
-  match x625 {
+  let f = x629
+  match x630 {
     Empty => Some(@list.empty())
     More(x, tail=xs) =>
-      @firstorder.op_gt_gt_eq(f(x), fn(x626 : TA) -> @list.List[TA]? raise {
-        let y = x626
+      @firstorder.op_gt_gt_eq(f(x), fn(x631 : TA) -> @list.List[TA]? raise {
+        let y = x631
         @firstorder.op_gt_gt_eq(break_map(f, xs), fn(
-          x627 : @list.List[TA],
+          x632 : @list.List[TA],
         ) -> @list.List[TA]? raise {
-          let ys = x627
+          let ys = x632
           Some(ys.prepend(y))
         })
       })
@@ -4747,16 +4740,16 @@ pub fn[TA, TB] break_map(
 
 ///|
 /// `litmat_positive`
-pub fn[TA] litmat_positive(x628 : Litmat[TA]) -> Litmat[TA]? raise {
-  let lm = x628
+pub fn[TA] litmat_positive(x633 : Litmat[TA]) -> Litmat[TA]? raise {
+  let lm = x633
   map_litmat(
-    fn(x629 : (Int, @list.List[@meson.FolTerm])) -> Litmat[TA]? raise {
-      lit_positive(x629.0, x629.1)
+    fn(x634 : (Int, @list.List[@meson.FolTerm])) -> Litmat[TA]? raise {
+      lit_positive(x634.0, x634.1)
     },
     fn(
-      x630 : (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]),
+      x635 : (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]),
     ) -> Litmat[TA]? raise {
-      imatrix_positive(x630.0, x630.1)
+      imatrix_positive(x635.0, x635.1)
     },
     lm,
   )
@@ -4765,10 +4758,10 @@ pub fn[TA] litmat_positive(x628 : Litmat[TA]) -> Litmat[TA]? raise {
 ///|
 /// `lit_positive`
 pub fn[TA] lit_positive(
-  x631 : Int,
-  x632 : @list.List[@meson.FolTerm],
+  x636 : Int,
+  x637 : @list.List[@meson.FolTerm],
 ) -> Litmat[TA]? raise {
-  let (p, a) = (x631, x632)
+  let (p, a) = (x636, x637)
   if p < 0 {
     Some(Litmat::Lit((p, a)))
   } else {
@@ -4779,10 +4772,10 @@ pub fn[TA] lit_positive(
 ///|
 /// `imatrix_positive`
 pub fn[TA] imatrix_positive(
-  x633 : TA,
-  x634 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
+  x638 : TA,
+  x639 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
 ) -> Litmat[TA]? raise {
-  let (i, m) = (x633, x634)
+  let (i, m) = (x638, x639)
   match matrix_positive(m) {
     Empty => None
     m_p => Some(Litmat::Mat((i, m_p)))
@@ -4792,14 +4785,14 @@ pub fn[TA] imatrix_positive(
 ///|
 /// `matrix_positive`
 pub fn[TA] matrix_positive(
-  x635 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
+  x640 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
 ) -> Matrix[TA] raise {
-  let m_1 = x635
+  let m_1 = x640
   @firstorder.filter_map(
     fn(
-      x636 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
+      x641 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
     ) -> ((TA, @list.List[Int]), @list.List[Litmat[TA]])? raise {
-      iclause_positive(x636.0, x636.1)
+      iclause_positive(x641.0, x641.1)
     },
     m_1,
   )
@@ -4808,58 +4801,58 @@ pub fn[TA] matrix_positive(
 ///|
 /// `iclause_positive`
 pub fn[TA] iclause_positive(
-  x637 : (TA, @list.List[Int]),
-  x638 : @list.List[Litmat[TA]],
+  x642 : (TA, @list.List[Int]),
+  x643 : @list.List[Litmat[TA]],
 ) -> Iclause[TA]? raise {
-  let (i_1, c) = (x637, x638)
+  let (i_1, c) = (x642, x643)
   @firstorder.op_gt_gt_eq(clause_positive(c), fn(
-    x639 : @list.List[Litmat[TA]],
+    x644 : @list.List[Litmat[TA]],
   ) -> ((TA, @list.List[Int]), @list.List[Litmat[TA]])? raise {
-    let c_p = x639
+    let c_p = x644
     Some((i_1, c_p))
   })
 }
 
 ///|
 /// `clause_positive`
-pub fn[TA] clause_positive(x640 : @list.List[Litmat[TA]]) -> Clause[TA]? raise {
-  let c_1 = x640
+pub fn[TA] clause_positive(x645 : @list.List[Litmat[TA]]) -> Clause[TA]? raise {
+  let c_1 = x645
   break_map(litmat_positive, c_1)
 }
 
 ///|
 /// `map_litmat_vars`
 pub fn[TA] map_litmat_vars(
-  x641 : (Int) -> Int raise,
+  x646 : (Int) -> Int raise,
 ) -> ((Litmat[TA]) -> Litmat[TA] raise) raise {
-  let f = x641
-  (x648 : Litmat[TA]) => {
+  let f = x646
+  (x653 : Litmat[TA]) => {
     map_litmat(
-      (x645 : (Int, @list.List[@meson.FolTerm])) => {
+      (x650 : (Int, @list.List[@meson.FolTerm])) => {
         @firstorder.op_percent(
           lit,
-          (x644 : (Int, @list.List[@meson.FolTerm])) => {
+          (x649 : (Int, @list.List[@meson.FolTerm])) => {
             map_lit_vars(
-              (x643 : Int) => @firstorder.op_percent(var_, f, x643),
-              x644,
+              (x648 : Int) => @firstorder.op_percent(var_, f, x648),
+              x649,
             )
           },
-          x645,
+          x650,
         )
       },
-      (x647 : (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])])) => {
+      (x652 : (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])])) => {
         @firstorder.op_percent(
           mat,
           (
-            x646 : (
+            x651 : (
               TA,
               @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
             ),
-          ) => map_imatrix_vars(f, x646),
-          x647,
+          ) => map_imatrix_vars(f, x651),
+          x652,
         )
       },
-      x648,
+      x653,
     )
   }
 }
@@ -4867,25 +4860,25 @@ pub fn[TA] map_litmat_vars(
 ///|
 /// `map_imatrix_vars`
 pub fn[TA] map_imatrix_vars(
-  x649 : (Int) -> Int raise,
-  x650 : (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]),
+  x654 : (Int) -> Int raise,
+  x655 : (TA, @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]),
 ) -> Imatrix[TA] raise {
-  let f_1 = x649
-  let (i, m) = x650
+  let f_1 = x654
+  let (i, m) = x655
   (i, map_matrix_vars(f_1, m))
 }
 
 ///|
 /// `map_matrix_vars`
 pub fn[TA] map_matrix_vars(
-  x651 : (Int) -> Int raise,
-  x652 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
+  x656 : (Int) -> Int raise,
+  x657 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
 ) -> Matrix[TA] raise {
-  let f_2 = x651
-  let m_1 = x652
+  let f_2 = x656
+  let m_1 = x657
   @lib.map(
-    (x653 : ((TA, @list.List[Int]), @list.List[Litmat[TA]])) => {
-      map_iclause_vars(f_2, x653)
+    (x658 : ((TA, @list.List[Int]), @list.List[Litmat[TA]])) => {
+      map_iclause_vars(f_2, x658)
     },
     m_1,
   )
@@ -4894,69 +4887,69 @@ pub fn[TA] map_matrix_vars(
 ///|
 /// `map_iclause_vars`
 pub fn[TA] map_iclause_vars(
-  x654 : (Int) -> Int raise,
-  x655 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
+  x659 : (Int) -> Int raise,
+  x660 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
 ) -> Iclause[TA] raise {
-  let f_3 = x654
-  let ((i_1, v), c) = x655
-  let t656 = map_clause_vars(f_3, c)
-  ((i_1, @lib.map(f_3, v)), t656)
+  let f_3 = x659
+  let ((i_1, v), c) = x660
+  let t661 = map_clause_vars(f_3, c)
+  ((i_1, @lib.map(f_3, v)), t661)
 }
 
 ///|
 /// `map_clause_vars`
 pub fn[TA] map_clause_vars(
-  x657 : (Int) -> Int raise,
-  x658 : @list.List[Litmat[TA]],
+  x662 : (Int) -> Int raise,
+  x663 : @list.List[Litmat[TA]],
 ) -> Clause[TA] raise {
-  let f_4 = x657
-  let c_1 = x658
+  let f_4 = x662
+  let c_1 = x663
   @lib.map(map_litmat_vars(f_4), c_1)
 }
 
 ///|
 /// `offset_iclause`
 pub fn[TA] offset_iclause(
-  x659 : Int,
+  x664 : Int,
 ) -> ((Iclause[TA]) -> Iclause[TA] raise) raise {
-  let off = x659
-  (x662 : ((TA, @list.List[Int]), @list.List[Litmat[TA]])) => {
-    map_iclause_vars(fn(x661 : Int) -> Int raise { off + x661 }, x662)
+  let off = x664
+  (x667 : ((TA, @list.List[Int]), @list.List[Litmat[TA]])) => {
+    map_iclause_vars(fn(x666 : Int) -> Int raise { off + x666 }, x667)
   }
 }
 
 ///|
 /// `offset_clause`
 pub fn[TA] offset_clause(
-  x663 : Int,
+  x668 : Int,
 ) -> ((Clause[TA]) -> Clause[TA] raise) raise {
-  let off = x663
-  (x666 : @list.List[Litmat[TA]]) => {
-    map_clause_vars(fn(x665 : Int) -> Int raise { off + x665 }, x666)
+  let off = x668
+  (x671 : @list.List[Litmat[TA]]) => {
+    map_clause_vars(fn(x670 : Int) -> Int raise { off + x670 }, x671)
   }
 }
 
 ///|
 /// `offset_matrix`
 pub fn[TA] offset_matrix(
-  x667 : Int,
+  x672 : Int,
 ) -> ((Matrix[TA]) -> Matrix[TA] raise) raise {
-  let off = x667
-  (x670 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) => {
-    map_matrix_vars(fn(x669 : Int) -> Int raise { off + x669 }, x670)
+  let off = x672
+  (x675 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) => {
+    map_matrix_vars(fn(x674 : Int) -> Int raise { off + x674 }, x675)
   }
 }
 
 ///|
 /// `pp_print_litmat`
 pub fn[TA, TB] pp_print_litmat(
-  x671 : (@pp.Formatter) -> ((TB) -> TA raise) raise,
-  x672 : @pp.Formatter,
-  x673 : Litmat[TB],
+  x676 : (@pp.Formatter) -> ((TB) -> TA raise) raise,
+  x677 : @pp.Formatter,
+  x678 : Litmat[TB],
 ) -> Unit raise {
-  let fi = x671
-  let f = x672
-  match x673 {
+  let fi = x676
+  let f = x677
+  match x678 {
     Litmat::Lit(l) => pp_print_lit(f, l)
     Litmat::Mat(m) => pp_print_imatrix(fi, f, m)
   }
@@ -4965,13 +4958,13 @@ pub fn[TA, TB] pp_print_litmat(
 ///|
 /// `pp_print_imatrix`
 pub fn[TA, TB] pp_print_imatrix(
-  x674 : (@pp.Formatter) -> ((TB) -> TA raise) raise,
-  x675 : @pp.Formatter,
-  x676 : (TB, @list.List[((TB, @list.List[Int]), @list.List[Litmat[TB]])]),
+  x679 : (@pp.Formatter) -> ((TB) -> TA raise) raise,
+  x680 : @pp.Formatter,
+  x681 : (TB, @list.List[((TB, @list.List[Int]), @list.List[Litmat[TB]])]),
 ) -> Unit raise {
-  let fi_1 = x674
-  let f_1 = x675
-  let (i, m_1) = x676
+  let fi_1 = x679
+  let f_1 = x680
+  let (i, m_1) = x681
   @pp.Formatter::open_box(f_1, 1)
   ignore(fi_1(f_1)(i))
   pp_print_matrix(fi_1)(f_1)(m_1)
@@ -4981,33 +4974,33 @@ pub fn[TA, TB] pp_print_imatrix(
 ///|
 /// `pp_print_matrix`
 pub fn[TA, TB] pp_print_matrix(
-  x677 : (@pp.Formatter) -> ((TA) -> TB raise) raise,
+  x682 : (@pp.Formatter) -> ((TA) -> TB raise) raise,
 ) -> ((@pp.Formatter) -> ((Matrix[TA]) -> Unit raise) raise) raise {
-  let fi_2 = x677
-  let t683 = pp_enclose_cut(
+  let fi_2 = x682
+  let t688 = pp_enclose_cut(
     "[",
     "]",
     pp_iter_sp("&", fn(
-      x681 : @pp.Formatter,
+      x686 : @pp.Formatter,
     ) -> ((((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> Unit raise) raise {
-      fn(x682 : ((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> Unit raise {
+      fn(x687 : ((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> Unit raise {
         ((
-          x679 : @pp.Formatter,
-          x680 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
-        ) => pp_print_iclause(fi_2, x679, x680))(x681, x682)
+          x684 : @pp.Formatter,
+          x685 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
+        ) => pp_print_iclause(fi_2, x684, x685))(x686, x687)
       }
     }),
   )
   fn(
-    x686 : @pp.Formatter,
+    x691 : @pp.Formatter,
   ) -> ((@list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])]) -> Unit raise) raise {
     fn(
-      x687 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
+      x692 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
     ) -> Unit raise {
       ((
-        x684 : @pp.Formatter,
-        x685 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
-      ) => pp_with_box(1, t683, x684, x685))(x686, x687)
+        x689 : @pp.Formatter,
+        x690 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
+      ) => pp_with_box(1, t688, x689, x690))(x691, x692)
     }
   }
 }
@@ -5015,19 +5008,19 @@ pub fn[TA, TB] pp_print_matrix(
 ///|
 /// `pp_print_iclause`
 pub fn[TA, TB] pp_print_iclause(
-  x688 : (@pp.Formatter) -> ((TB) -> TA raise) raise,
-  x689 : @pp.Formatter,
-  x690 : ((TB, @list.List[Int]), @list.List[Litmat[TB]]),
+  x693 : (@pp.Formatter) -> ((TB) -> TA raise) raise,
+  x694 : @pp.Formatter,
+  x695 : ((TB, @list.List[Int]), @list.List[Litmat[TB]]),
 ) -> Unit raise {
-  let fi_3 = x688
-  let f_2 = x689
-  let ((i_1, v), c) = x690
+  let fi_3 = x693
+  let f_2 = x694
+  let ((i_1, v), c) = x695
   @pp.Formatter::open_box(f_2, 1)
   ignore(fi_3(f_2)(i_1))
   pp_enum(",", "{", "}", fn(
-    x691 : @pp.Formatter,
+    x696 : @pp.Formatter,
   ) -> ((Int) -> Unit raise) raise {
-    fn(x692 : Int) -> Unit raise { pp_print_var(x691, x692) }
+    fn(x697 : Int) -> Unit raise { pp_print_var(x696, x697) }
   })(f_2)(v)
   @pp.Formatter::print_string(f_2, Char::to_string(':'))
   @pp.Formatter::print_space(f_2)
@@ -5038,27 +5031,27 @@ pub fn[TA, TB] pp_print_iclause(
 ///|
 /// `pp_print_nclause`
 pub fn[TA, TB] pp_print_nclause(
-  x693 : (@pp.Formatter) -> ((TA) -> TB raise) raise,
+  x698 : (@pp.Formatter) -> ((TA) -> TB raise) raise,
 ) -> ((@pp.Formatter) -> ((Clause[TA]) -> Unit raise) raise) raise {
-  let fi_4 = x693
-  let t699 = pp_enclose_cut(
+  let fi_4 = x698
+  let t704 = pp_enclose_cut(
     "[",
     "]",
     pp_iter_sp("|", fn(
-      x697 : @pp.Formatter,
+      x702 : @pp.Formatter,
     ) -> ((Litmat[TA]) -> Unit raise) raise {
-      fn(x698 : Litmat[TA]) -> Unit raise {
-        ((x695 : @pp.Formatter, x696 : Litmat[TA]) => {
-          pp_print_litmat(fi_4, x695, x696)
-        })(x697, x698)
+      fn(x703 : Litmat[TA]) -> Unit raise {
+        ((x700 : @pp.Formatter, x701 : Litmat[TA]) => {
+          pp_print_litmat(fi_4, x700, x701)
+        })(x702, x703)
       }
     }),
   )
-  fn(x702 : @pp.Formatter) -> ((@list.List[Litmat[TA]]) -> Unit raise) raise {
-    fn(x703 : @list.List[Litmat[TA]]) -> Unit raise {
-      ((x700 : @pp.Formatter, x701 : @list.List[Litmat[TA]]) => {
-        pp_with_box(1, t699, x700, x701)
-      })(x702, x703)
+  fn(x707 : @pp.Formatter) -> ((@list.List[Litmat[TA]]) -> Unit raise) raise {
+    fn(x708 : @list.List[Litmat[TA]]) -> Unit raise {
+      ((x705 : @pp.Formatter, x706 : @list.List[Litmat[TA]]) => {
+        pp_with_box(1, t704, x705, x706)
+      })(x707, x708)
     }
   }
 }
@@ -5066,21 +5059,21 @@ pub fn[TA, TB] pp_print_nclause(
 ///|
 /// pp_print_index
 fn step_13() -> Unit raise {
-  pp_print_index_c.set(fn(x708 : @pp.Formatter) -> ((Int) -> Unit raise) raise {
-    fn(x709 : Int) -> Unit raise {
-      ((x706 : @pp.Formatter, x707 : Int) => {
+  pp_print_index_c.set(fn(x713 : @pp.Formatter) -> ((Int) -> Unit raise) raise {
+    fn(x714 : Int) -> Unit raise {
+      ((x711 : @pp.Formatter, x712 : Int) => {
         pp_enclose(
           "<",
           ">",
-          fn(x704 : @pp.Formatter) -> ((Int) -> Unit raise) raise {
-            fn(x705 : Int) -> Unit raise {
-              @pp.Formatter::print_int(x704, x705)
+          fn(x709 : @pp.Formatter) -> ((Int) -> Unit raise) raise {
+            fn(x710 : Int) -> Unit raise {
+              @pp.Formatter::print_int(x709, x710)
             }
           },
-          x706,
-          x707,
+          x711,
+          x712,
         )
-      })(x708, x709)
+      })(x713, x714)
     }
   })
 }
@@ -5098,21 +5091,21 @@ pub fn pp_print_index(x : @pp.Formatter) -> ((Int) -> Unit raise) raise {
 
 ///|
 /// `string_of_litmat`
-pub fn[TA] string_of_litmat(x710 : Litmat[TA]) -> String raise {
-  let c = x710
+pub fn[TA] string_of_litmat(x715 : Litmat[TA]) -> String raise {
+  let c = x715
   @printer.print_to_string(fn(
-    x715 : @pp.Formatter,
+    x720 : @pp.Formatter,
   ) -> ((Litmat[TA]) -> Unit raise) raise {
-    fn(x716 : Litmat[TA]) -> Unit raise {
-      ((x713 : @pp.Formatter, x714 : Litmat[TA]) => {
+    fn(x721 : Litmat[TA]) -> Unit raise {
+      ((x718 : @pp.Formatter, x719 : Litmat[TA]) => {
         pp_print_litmat(
-          fn(x711 : @pp.Formatter) -> ((TA) -> Unit raise) raise {
-            fn(x712 : TA) -> Unit raise { pp_print_null(x711, x712) }
+          fn(x716 : @pp.Formatter) -> ((TA) -> Unit raise) raise {
+            fn(x717 : TA) -> Unit raise { pp_print_null(x716, x717) }
           },
-          x713,
-          x714,
+          x718,
+          x719,
         )
-      })(x715, x716)
+      })(x720, x721)
     }
   })(c)
 }
@@ -5120,25 +5113,25 @@ pub fn[TA] string_of_litmat(x710 : Litmat[TA]) -> String raise {
 ///|
 /// `string_of_iclause`
 pub fn[TA] string_of_iclause(
-  x717 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
+  x722 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
 ) -> String raise {
-  let c = x717
+  let c = x722
   @printer.print_to_string(fn(
-    x722 : @pp.Formatter,
+    x727 : @pp.Formatter,
   ) -> ((((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> Unit raise) raise {
-    fn(x723 : ((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> Unit raise {
+    fn(x728 : ((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> Unit raise {
       ((
-        x720 : @pp.Formatter,
-        x721 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
+        x725 : @pp.Formatter,
+        x726 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
       ) => {
         pp_print_iclause(
-          fn(x718 : @pp.Formatter) -> ((TA) -> Unit raise) raise {
-            fn(x719 : TA) -> Unit raise { pp_print_null(x718, x719) }
+          fn(x723 : @pp.Formatter) -> ((TA) -> Unit raise) raise {
+            fn(x724 : TA) -> Unit raise { pp_print_null(x723, x724) }
           },
-          x720,
-          x721,
+          x725,
+          x726,
         )
-      })(x722, x723)
+      })(x727, x728)
     }
   })(c)
 }
@@ -5148,15 +5141,15 @@ pub fn[TA] string_of_iclause(
 fn step_14() -> Unit raise {
   string_of_iclause_i_c.set(
     @printer.print_to_string(fn(
-      x726 : @pp.Formatter,
+      x731 : @pp.Formatter,
     ) -> ((((Int, @list.List[Int]), @list.List[Litmat[Int]])) -> Unit raise) raise {
       fn(
-        x727 : ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
+        x732 : ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
       ) -> Unit raise {
         ((
-          x724 : @pp.Formatter,
-          x725 : ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
-        ) => pp_print_iclause(pp_print_index, x724, x725))(x726, x727)
+          x729 : @pp.Formatter,
+          x730 : ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
+        ) => pp_print_iclause(pp_print_index, x729, x730))(x731, x732)
       }
     }),
   )
@@ -5175,11 +5168,11 @@ pub fn string_of_iclause_i(x : Iclause[Int]) -> String raise {
 
 ///|
 /// `string_of_nclause`
-pub fn[TA] string_of_nclause(x728 : @list.List[Litmat[TA]]) -> String raise {
-  let c = x728
+pub fn[TA] string_of_nclause(x733 : @list.List[Litmat[TA]]) -> String raise {
+  let c = x733
   @printer.print_to_string(
-    pp_print_nclause(fn(x729 : @pp.Formatter) -> ((TA) -> Unit raise) raise {
-      fn(x730 : TA) -> Unit raise { pp_print_null(x729, x730) }
+    pp_print_nclause(fn(x734 : @pp.Formatter) -> ((TA) -> Unit raise) raise {
+      fn(x735 : TA) -> Unit raise { pp_print_null(x734, x735) }
     }),
   )(c)
 }
@@ -5187,12 +5180,12 @@ pub fn[TA] string_of_nclause(x728 : @list.List[Litmat[TA]]) -> String raise {
 ///|
 /// `string_of_matrix`
 pub fn[TA] string_of_matrix(
-  x731 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
+  x736 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
 ) -> String raise {
-  let m = x731
+  let m = x736
   @printer.print_to_string(
-    pp_print_matrix(fn(x732 : @pp.Formatter) -> ((TA) -> Unit raise) raise {
-      fn(x733 : TA) -> Unit raise { pp_print_null(x732, x733) }
+    pp_print_matrix(fn(x737 : @pp.Formatter) -> ((TA) -> Unit raise) raise {
+      fn(x738 : TA) -> Unit raise { pp_print_null(x737, x738) }
     }),
   )(m)
 }
@@ -5200,39 +5193,39 @@ pub fn[TA] string_of_matrix(
 ///|
 /// `pp_print_matrix_ni`
 pub fn[TA] pp_print_matrix_ni(
-  x734 : @pp.Formatter,
-  x735 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
+  x739 : @pp.Formatter,
+  x740 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
 ) -> Unit raise {
-  let fmt = x734
-  let x = x735
-  pp_print_matrix(fn(x736 : @pp.Formatter) -> ((TA) -> Unit raise) raise {
-    fn(x737 : TA) -> Unit raise { pp_print_null(x736, x737) }
+  let fmt = x739
+  let x = x740
+  pp_print_matrix(fn(x741 : @pp.Formatter) -> ((TA) -> Unit raise) raise {
+    fn(x742 : TA) -> Unit raise { pp_print_null(x741, x742) }
   })(fmt)(x)
 }
 
 ///|
 /// `print_iclause`
 pub fn[TA] print_iclause(
-  x738 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
+  x743 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
 ) -> Unit raise {
-  let c = x738
+  let c = x743
   pp_nl(
     fn(
-      x743 : @pp.Formatter,
+      x748 : @pp.Formatter,
     ) -> ((((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> Unit raise) raise {
-      fn(x744 : ((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> Unit raise {
+      fn(x749 : ((TA, @list.List[Int]), @list.List[Litmat[TA]])) -> Unit raise {
         ((
-          x741 : @pp.Formatter,
-          x742 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
+          x746 : @pp.Formatter,
+          x747 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
         ) => {
           pp_print_iclause(
-            fn(x739 : @pp.Formatter) -> ((TA) -> Unit raise) raise {
-              fn(x740 : TA) -> Unit raise { pp_print_null(x739, x740) }
+            fn(x744 : @pp.Formatter) -> ((TA) -> Unit raise) raise {
+              fn(x745 : TA) -> Unit raise { pp_print_null(x744, x745) }
             },
-            x741,
-            x742,
+            x746,
+            x747,
           )
-        })(x743, x744)
+        })(x748, x749)
       }
     },
     @pp.std_formatter,
@@ -5244,23 +5237,23 @@ pub fn[TA] print_iclause(
 /// print_iclause_i
 fn step_15() -> Unit raise {
   print_iclause_i_c.set((
-    x749 : ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
+    x754 : ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
   ) => {
     pp_nl(
       fn(
-        x747 : @pp.Formatter,
+        x752 : @pp.Formatter,
       ) -> ((((Int, @list.List[Int]), @list.List[Litmat[Int]])) -> Unit raise) raise {
         fn(
-          x748 : ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
+          x753 : ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
         ) -> Unit raise {
           ((
-            x745 : @pp.Formatter,
-            x746 : ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
-          ) => pp_print_iclause(pp_print_index, x745, x746))(x747, x748)
+            x750 : @pp.Formatter,
+            x751 : ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
+          ) => pp_print_iclause(pp_print_index, x750, x751))(x752, x753)
         }
       },
       @pp.std_formatter,
-      x749,
+      x754,
     )
   })
 }
@@ -5278,11 +5271,11 @@ pub fn print_iclause_i(x : Iclause[Int]) -> Unit raise {
 
 ///|
 /// `print_nclause`
-pub fn[TA] print_nclause(x750 : @list.List[Litmat[TA]]) -> Unit raise {
-  let c = x750
+pub fn[TA] print_nclause(x755 : @list.List[Litmat[TA]]) -> Unit raise {
+  let c = x755
   pp_nl(
-    pp_print_nclause(fn(x751 : @pp.Formatter) -> ((TA) -> Unit raise) raise {
-      fn(x752 : TA) -> Unit raise { pp_print_null(x751, x752) }
+    pp_print_nclause(fn(x756 : @pp.Formatter) -> ((TA) -> Unit raise) raise {
+      fn(x757 : TA) -> Unit raise { pp_print_null(x756, x757) }
     }),
     @pp.std_formatter,
     c,
@@ -5292,10 +5285,10 @@ pub fn[TA] print_nclause(x750 : @list.List[Litmat[TA]]) -> Unit raise {
 ///|
 /// print_matrix_i
 fn step_16() -> Unit raise {
-  let t753 = pp_print_matrix(pp_print_index)
+  let t758 = pp_print_matrix(pp_print_index)
   print_matrix_i_c.set((
-    x754 : @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
-  ) => pp_nl(t753, @pp.std_formatter, x754))
+    x759 : @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
+  ) => pp_nl(t758, @pp.std_formatter, x759))
 }
 
 ///|
@@ -5390,15 +5383,15 @@ pub impl[TA : @lib.OHash, TB : @lib.OHash, TC : @lib.OHash, TD : @lib.OHash] @li
 ///|
 /// `pp_print_proof`
 pub fn[TA, TB, TC, TD, TE] pp_print_proof(
-  x755 : ((TB) -> ((TA) -> String raise) raise, (TC) -> String raise),
-  x756 : TB,
-  x757 : @pp.Formatter,
-  x758 : (TA, Proof1[TA, TC, TD, TE]),
+  x760 : ((TB) -> ((TA) -> String raise) raise, (TC) -> String raise),
+  x761 : TB,
+  x762 : @pp.Formatter,
+  x763 : (TA, Proof1[TA, TC, TD, TE]),
 ) -> Unit raise {
-  let (fl, fc) = x755
-  let sub = x756
-  let f = x757
-  let (lit_1, prf) = x758
+  let (fl, fc) = x760
+  let sub = x761
+  let f = x762
+  let (lit_1, prf) = x763
   @pp.Formatter::open_vbox(f, 2)
   @pp.Formatter::print_string(f, fl(sub)(lit_1))
   @pp.Formatter::print_string(f, Char::to_string(' '))
@@ -5409,15 +5402,15 @@ pub fn[TA, TB, TC, TD, TE] pp_print_proof(
 ///|
 /// `pp_print_prf`
 pub fn[TA, TB, TC, TD, TE] pp_print_prf(
-  x759 : ((TB) -> ((TA) -> String raise) raise, (TC) -> String raise),
-  x760 : TB,
-  x761 : @pp.Formatter,
-  x762 : Proof1[TA, TC, TD, TE],
+  x764 : ((TB) -> ((TA) -> String raise) raise, (TC) -> String raise),
+  x765 : TB,
+  x766 : @pp.Formatter,
+  x767 : Proof1[TA, TC, TD, TE],
 ) -> Unit raise {
-  let (fl_1, fc_1) = x759
-  let sub_1 = x760
-  let f_1 = x761
-  match x762 {
+  let (fl_1, fc_1) = x764
+  let sub_1 = x765
+  let f_1 = x766
+  match x767 {
     Proof1::Reduction => @pp.Formatter::print_string(f_1, "Red")
     Proof1::Lemma => @pp.Formatter::print_string(f_1, "Lem")
     Proof1::Decomposition(cl, recon, prfs) => {
@@ -5434,21 +5427,21 @@ pub fn[TA, TB, TC, TD, TE] pp_print_prf(
 ///|
 /// `pp_print_proofs`
 pub fn[TA, TB, TC, TD, TE] pp_print_proofs(
-  x763 : ((TE) -> ((TA) -> String raise) raise, (TB) -> String raise),
-  x764 : TE,
-  x765 : @pp.Formatter,
+  x768 : ((TE) -> ((TA) -> String raise) raise, (TB) -> String raise),
+  x769 : TE,
+  x770 : @pp.Formatter,
 ) -> ((@list.List[(TA, Proof1[TA, TB, TC, TD])]) -> Unit raise) raise {
-  let (fl_2, fc_2) = x763
-  let sub_2 = x764
-  let f_2 = x765
-  x768 => {
+  let (fl_2, fc_2) = x768
+  let sub_2 = x769
+  let f_2 = x770
+  x773 => {
     @lib.do_list(
-      fn(x767 : (TA, Proof1[TA, TB, TC, TD])) -> Unit raise {
-        let x = x767
+      fn(x772 : (TA, Proof1[TA, TB, TC, TD])) -> Unit raise {
+        let x = x772
         @pp.Formatter::print_cut(f_2)
         pp_print_proof((fl_2, fc_2), sub_2, f_2, x)
       },
-      x768,
+      x773,
     )
   }
 }
@@ -5456,32 +5449,32 @@ pub fn[TA, TB, TC, TD, TE] pp_print_proofs(
 ///|
 /// `string_of_inst_litmat`
 pub fn[TA, TB] string_of_inst_litmat(
-  x769 : TA,
-  x770 : Litmat[TB],
+  x774 : TA,
+  x775 : Litmat[TB],
 ) -> String raise {
-  let sub = x769
-  let litmat = x770
+  let sub = x774
+  let litmat = x775
   string_of_litmat(litmat)
 }
 
 ///|
 /// `print_proofa`
 pub fn[TA, TB, TC, TD, TE] print_proofa(
-  x771 : ((TB) -> ((TA) -> String raise) raise, (TC) -> String raise),
-  x772 : TB,
-  x773 : (TA, Proof1[TA, TC, TD, TE]),
+  x776 : ((TB) -> ((TA) -> String raise) raise, (TC) -> String raise),
+  x777 : TB,
+  x778 : (TA, Proof1[TA, TC, TD, TE]),
 ) -> Unit raise {
-  let (fl, fc) = x771
-  let sub = x772
-  let prf = x773
+  let (fl, fc) = x776
+  let sub = x777
+  let prf = x778
   pp_nl(
     fn(
-      x776 : @pp.Formatter,
+      x781 : @pp.Formatter,
     ) -> (((TA, Proof1[TA, TC, TD, TE])) -> Unit raise) raise {
-      fn(x777 : (TA, Proof1[TA, TC, TD, TE])) -> Unit raise {
-        ((x774 : @pp.Formatter, x775 : (TA, Proof1[TA, TC, TD, TE])) => {
-          pp_print_proof((fl, fc), sub, x774, x775)
-        })(x776, x777)
+      fn(x782 : (TA, Proof1[TA, TC, TD, TE])) -> Unit raise {
+        ((x779 : @pp.Formatter, x780 : (TA, Proof1[TA, TC, TD, TE])) => {
+          pp_print_proof((fl, fc), sub, x779, x780)
+        })(x781, x782)
       }
     },
     @pp.std_formatter,
@@ -5492,16 +5485,16 @@ pub fn[TA, TB, TC, TD, TE] print_proofa(
 ///|
 /// `print_proof_def`
 pub fn[TA, TB, TC, TD, TE] print_proof_def(
-  x778 : TA,
-  x779 : (Litmat[TB], Proof1[Litmat[TB], @list.List[Litmat[TC]], TD, TE]),
+  x783 : TA,
+  x784 : (Litmat[TB], Proof1[Litmat[TB], @list.List[Litmat[TC]], TD, TE]),
 ) -> Unit raise {
-  let sub = x778
-  let prf = x779
+  let sub = x783
+  let prf = x784
   print_proofa(
     (
-      fn(x780 : TA) -> ((Litmat[TB]) -> String raise) raise {
-        fn(x781 : Litmat[TB]) -> String raise {
-          string_of_inst_litmat(x780, x781)
+      fn(x785 : TA) -> ((Litmat[TB]) -> String raise) raise {
+        fn(x786 : Litmat[TB]) -> String raise {
+          string_of_inst_litmat(x785, x786)
         }
       },
       string_of_nclause,
@@ -5585,29 +5578,29 @@ pub type ClauseExt[TA] = (
 ///|
 /// `offset_iv`
 pub fn[TA] offset_iv(
-  x782 : Int,
-  x783 : (TA, @list.List[Int]),
+  x787 : Int,
+  x788 : (TA, @list.List[Int]),
 ) -> (TA, @list.List[Int]) raise {
-  let off = x782
-  let (i, v) = x783
-  (i, @lib.map(fn(x784 : Int) -> Int raise { off + x784 }, v))
+  let off = x787
+  let (i, v) = x788
+  (i, @lib.map(fn(x789 : Int) -> Int raise { off + x789 }, v))
 }
 
 ///|
 /// `offset_litmat_ext`
 pub fn offset_litmat_ext(
-  x785 : Int,
-  x786 : LitmatExt[Int],
+  x790 : Int,
+  x791 : LitmatExt[Int],
 ) -> LitmatExt[Int] raise {
-  let off = x785
-  match x786 {
+  let off = x790
+  match x791 {
     LitmatExt::Litext(clab, clac) => {
-      let t787 = offset_clause(off)(clac)
-      LitmatExt::Litext(@firstorder.mapn(offset_clause(off), clab), t787)
+      let t792 = offset_clause(off)(clac)
+      LitmatExt::Litext(@firstorder.mapn(offset_clause(off), clab), t792)
     }
     LitmatExt::Matext(j, clalr, clext) => {
-      let t788 = offset_clause_ext(off, clext)
-      LitmatExt::Matext(j, @firstorder.mapn(offset_clause(off), clalr), t788)
+      let t793 = offset_clause_ext(off, clext)
+      LitmatExt::Matext(j, @firstorder.mapn(offset_clause(off), clalr), t793)
     }
   }
 }
@@ -5615,8 +5608,8 @@ pub fn offset_litmat_ext(
 ///|
 /// `offset_clause_ext`
 pub fn offset_clause_ext(
-  x789 : Int,
-  x790 : (
+  x794 : Int,
+  x795 : (
     (Int, @list.List[Int]),
     (
       @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
@@ -5625,19 +5618,19 @@ pub fn offset_clause_ext(
     LitmatExt[Int],
   ),
 ) -> ClauseExt[Int] raise {
-  let off_1 = x789
-  let (iv, matlr, lmext) = x790
-  let t791 = offset_litmat_ext(off_1, lmext)
-  let t792 = @firstorder.mapn(offset_matrix(off_1), matlr)
-  (offset_iv(off_1, iv), t792, t791)
+  let off_1 = x794
+  let (iv, matlr, lmext) = x795
+  let t796 = offset_litmat_ext(off_1, lmext)
+  let t797 = @firstorder.mapn(offset_matrix(off_1), matlr)
+  (offset_iv(off_1, iv), t797, t796)
 }
 
 ///|
 /// `claBC_of_litmat_ext`
 pub fn clabc_of_litmat_ext(
-  x793 : LitmatExt[Int],
+  x798 : LitmatExt[Int],
 ) -> (@list.List[Litmat[Int]], Clause[Int]) raise {
-  match x793 {
+  match x798 {
     LitmatExt::Litext((clal, clar), clac) => (@lib.rev_append(clal, clar), clac)
     LitmatExt::Matext(j, (clal_1, clar_1), clext) => {
       let (matb, matc) = matbc_of_clause_ext(clext.0, clext.1, clext.2)
@@ -5650,14 +5643,14 @@ pub fn clabc_of_litmat_ext(
 ///|
 /// `matBC_of_clause_ext`
 pub fn matbc_of_clause_ext(
-  x794 : (Int, @list.List[Int]),
-  x795 : (
+  x799 : (Int, @list.List[Int]),
+  x800 : (
     @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
     @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
   ),
-  x796 : LitmatExt[Int],
+  x801 : LitmatExt[Int],
 ) -> (@list.List[Litmat[Int]], Matrix[Int]) raise {
-  let (iv, (matl, matr), lmext) = (x794, x795, x796)
+  let (iv, (matl, matr), lmext) = (x799, x800, x801)
   let (clab, clac_1) = clabc_of_litmat_ext(lmext)
   (clab, @lib.rev_append(matl, matr).prepend((iv, clac_1)))
 }
@@ -5665,9 +5658,9 @@ pub fn matbc_of_clause_ext(
 ///|
 /// `litext_of_litmat_ext`
 pub fn[TA] litext_of_litmat_ext(
-  x797 : LitmatExt[TA],
+  x802 : LitmatExt[TA],
 ) -> ((Clause[TA], Clause[TA]), Clause[TA]) raise {
-  match x797 {
+  match x802 {
     LitmatExt::Litext(clab, clac) => (clab, clac)
     LitmatExt::Matext(_, _, clext) =>
       litext_of_clause_ext(clext.0, clext.1, clext.2)
@@ -5677,65 +5670,65 @@ pub fn[TA] litext_of_litmat_ext(
 ///|
 /// `litext_of_clause_ext`
 pub fn[TA] litext_of_clause_ext(
-  x798 : (Int, @list.List[TA]),
-  x799 : (
+  x803 : (Int, @list.List[TA]),
+  x804 : (
     @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
     @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
   ),
-  x800 : LitmatExt[TA],
+  x805 : LitmatExt[TA],
 ) -> ((Clause[TA], Clause[TA]), Clause[TA]) raise {
-  let (_, _, lmext) = (x798, x799, x800)
+  let (_, _, lmext) = (x803, x804, x805)
   litext_of_litmat_ext(lmext)
 }
 
 ///|
 /// `assert_iclause`
 pub fn assert_iclause(
-  x801 : (
+  x806 : (
     @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
     @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
   ),
-  x802 : ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
+  x807 : ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
 ) -> @list.List[(Lit, ClauseExt[Int])] raise {
-  let matlr = x801
-  let (iv, _ as c) = x802
+  let matlr = x806
+  let (iv, _ as c) = x807
   @lib.op_bar_gt(
     @lib.op_bar_gt(@firstorder.list_rest(c), (
-      x806 : @list.List[
+      x811 : @list.List[
         (Litmat[Int], (@list.List[Litmat[Int]], @list.List[Litmat[Int]])),
       ],
     ) => {
       @firstorder.concat_map(
         fn(
-          x803 : (
+          x808 : (
             Litmat[Int],
             (@list.List[Litmat[Int]], @list.List[Litmat[Int]]),
           ),
         ) -> @list.List[((Int, @list.List[@meson.FolTerm]), LitmatExt[Int])] raise {
-          let (lm, clalr) = x803
+          let (lm, clalr) = x808
           map_litmat(
             fn(
-              x804 : (Int, @list.List[@meson.FolTerm]),
+              x809 : (Int, @list.List[@meson.FolTerm]),
             ) -> @list.List[((Int, @list.List[@meson.FolTerm]), LitmatExt[Int])] raise {
-              let lit_1 = x804
+              let lit_1 = x809
               @list.List([(lit_1, LitmatExt::Litext(clalr, c))])
             },
             (
-              x805 : (
+              x810 : (
                 Int,
                 @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
               ),
-            ) => assert_imatrix(clalr, x805),
+            ) => assert_imatrix(clalr, x810),
             lm,
           )
         },
-        x806,
+        x811,
       )
     }),
-    x808 => {
+    x813 => {
       @lib.map(
         fn(
-          x807 : ((Int, @list.List[@meson.FolTerm]), LitmatExt[Int]),
+          x812 : ((Int, @list.List[@meson.FolTerm]), LitmatExt[Int]),
         ) -> (
           (Int, @list.List[@meson.FolTerm]),
           (
@@ -5747,10 +5740,10 @@ pub fn assert_iclause(
             LitmatExt[Int],
           ),
         ) raise {
-          let (lit_2, lmext) = x807
+          let (lit_2, lmext) = x812
           (lit_2, (iv, matlr, lmext))
         },
-        x808,
+        x813,
       )
     },
   )
@@ -5759,14 +5752,14 @@ pub fn assert_iclause(
 ///|
 /// `assert_imatrix`
 pub fn assert_imatrix(
-  x809 : (@list.List[Litmat[Int]], @list.List[Litmat[Int]]),
-  x810 : (Int, @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]),
+  x814 : (@list.List[Litmat[Int]], @list.List[Litmat[Int]]),
+  x815 : (Int, @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])]),
 ) -> @list.List[(Lit, LitmatExt[Int])] raise {
-  let clalr_1 = x809
-  let (j, mat_1) = x810
+  let clalr_1 = x814
+  let (j, mat_1) = x815
   @lib.op_bar_gt(
     @lib.op_bar_gt(@firstorder.list_rest(mat_1), (
-      x812 : @list.List[
+      x817 : @list.List[
         (
           ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
           (
@@ -5778,7 +5771,7 @@ pub fn assert_imatrix(
     ) => {
       @firstorder.concat_map(
         fn(
-          x811 : (
+          x816 : (
             ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
             (
               @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
@@ -5798,16 +5791,16 @@ pub fn assert_imatrix(
             ),
           ),
         ] raise {
-          let (cla, matlr_1) = x811
+          let (cla, matlr_1) = x816
           assert_iclause(matlr_1, cla)
         },
-        x812,
+        x817,
       )
     }),
-    x814 => {
+    x819 => {
       @lib.map(
         fn(
-          x813 : (
+          x818 : (
             (Int, @list.List[@meson.FolTerm]),
             (
               (Int, @list.List[Int]),
@@ -5819,10 +5812,10 @@ pub fn assert_imatrix(
             ),
           ),
         ) -> ((Int, @list.List[@meson.FolTerm]), LitmatExt[Int]) raise {
-          let (lit_3, claext) = x813
+          let (lit_3, claext) = x818
           (lit_3, LitmatExt::Matext(j, clalr_1, claext))
         },
-        x814,
+        x819,
       )
     },
   )
@@ -5831,11 +5824,11 @@ pub fn assert_imatrix(
 ///|
 /// `assert_matrix`
 pub fn assert_matrix(
-  x815 : @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
+  x820 : @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
 ) -> @list.List[(Lit, ClauseExt[Int])] raise {
-  let mat_1 = x815
+  let mat_1 = x820
   @lib.op_bar_gt(@firstorder.list_rest(mat_1), (
-    x817 : @list.List[
+    x822 : @list.List[
       (
         ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
         (
@@ -5847,7 +5840,7 @@ pub fn assert_matrix(
   ) => {
     @firstorder.concat_map(
       fn(
-        x816 : (
+        x821 : (
           ((Int, @list.List[Int]), @list.List[Litmat[Int]]),
           (
             @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
@@ -5867,10 +5860,10 @@ pub fn assert_matrix(
           ),
         ),
       ] raise {
-        let (cla, matlr) = x816
+        let (cla, matlr) = x821
         assert_iclause(matlr, cla)
       },
-      x817,
+      x822,
     )
   })
 }
@@ -5904,7 +5897,7 @@ pub fn db_v1() -> @lib.OHashtbl[Int, @list.List[Contrapositive1[Int]]] {
 ///|
 /// `insert_db`
 pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] insert_db(
-  x818 : @lib.OHashtbl[
+  x823 : @lib.OHashtbl[
     TA,
     @list.List[
       (
@@ -5922,7 +5915,7 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] insert_db(
       ),
     ],
   ],
-  x819 : (
+  x824 : (
     (TA, TB),
     (
       (Int, @list.List[Int]),
@@ -5934,25 +5927,25 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] insert_db(
     ),
   ),
 ) -> Unit raise {
-  let db_1 = x818
-  let ((p, a), clext) = x819
+  let db_1 = x823
+  let ((p, a), clext) = x824
   let matc = matbc_of_clause_ext(clext.0, clext.1, clext.2).1
   let off = 1 + matrix_max_var(-1, matc)
   let ground = @lib.op_bar_gt(
     @lib.op_bar_gt(litext_of_clause_ext(clext.0, clext.1, clext.2), fn(
-      x820 : (
+      x825 : (
         (@list.List[Litmat[Int]], @list.List[Litmat[Int]]),
         @list.List[Litmat[Int]],
       ),
     ) -> @list.List[Litmat[Int]] raise {
-      x820.1
+      x825.1
     }),
     clause_ground,
   )
   let v = (clext, a, ground, off)
   @lib.op_bar_gt(
     @lib.op_bar_gt(@lib.hashtbl_find(db_1, p), fn(
-      x821 : @list.List[
+      x826 : @list.List[
         (
           (
             (Int, @list.List[Int]),
@@ -5982,11 +5975,11 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] insert_db(
         Int,
       ),
     ] raise {
-      let l = x821
+      let l = x826
       l.prepend(v)
     }),
     fn(
-      x822 : @list.List[
+      x827 : @list.List[
         (
           (
             (Int, @list.List[Int]),
@@ -6002,7 +5995,7 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] insert_db(
         ),
       ],
     ) -> Unit raise {
-      @lib.hashtbl_replace(db_1, p, x822)
+      @lib.hashtbl_replace(db_1, p, x827)
     },
   ) catch {
     @lib.NotFound => @lib.hashtbl_add(db_1, p, @list.List([v]))
@@ -6013,14 +6006,14 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] insert_db(
 ///|
 /// `matrix2db`
 pub fn matrix2db(
-  x823 : @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
+  x828 : @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
 ) -> Unit raise {
-  let m = x823
+  let m = x828
   let predb = assert_matrix(m)
   @lib.hashtbl_clear(db_v1())
   @lib.do_list(
     (
-      x824 : (
+      x829 : (
         (Int, @list.List[@meson.FolTerm]),
         (
           (Int, @list.List[Int]),
@@ -6031,7 +6024,7 @@ pub fn matrix2db(
           LitmatExt[Int],
         ),
       ),
-    ) => insert_db(db_v1(), x824),
+    ) => insert_db(db_v1(), x829),
     @lib.rev(predb),
   )
 }
@@ -6039,9 +6032,9 @@ pub fn matrix2db(
 ///|
 /// `db_entries`
 pub fn[TA] db_entries_v1(
-  x825 : (Int, TA),
+  x830 : (Int, TA),
 ) -> @list.List[Contrapositive1[Int]] raise {
-  let lit_1 = x825
+  let lit_1 = x830
   @lib.hashtbl_find(db_v1(), lit_1.0) catch {
     @lib.NotFound => @list.empty()
     e => raise e
@@ -6051,16 +6044,16 @@ pub fn[TA] db_entries_v1(
 ///|
 /// `unify_vars`
 pub fn[TA] unify_vars(
-  x826 : (T1, TA),
-  x827 : @list.List[Int],
-  x828 : @list.List[Int],
+  x831 : (T1, TA),
+  x832 : @list.List[Int],
+  x833 : @list.List[Int],
 ) -> (T1, TA)? raise {
-  let (sub, off) = x826
-  let l1 = x827
-  let l2 = x828
+  let (sub, off) = x831
+  let l1 = x832
+  let l2 = x833
   try {
-    let t829 = @lib.map(var_, l2)
-    Some((unify_tms_v1(sub, @lib.map(var_, l1), t829), off))
+    let t834 = @lib.map(var_, l2)
+    Some((unify_tms_v1(sub, @lib.map(var_, l1), t834), off))
   } catch {
     Unify1::Unify => None
     e => raise e
@@ -6070,9 +6063,9 @@ pub fn[TA] unify_vars(
 ///|
 /// `unify_rename`
 pub fn[TA] unify_rename_v1(
-  x830 : (T1, Int),
-  x831 : @list.List[@meson.FolTerm],
-  x832 : (
+  x835 : (T1, Int),
+  x836 : @list.List[@meson.FolTerm],
+  x837 : (
     (
       (Int, @list.List[Int]),
       (
@@ -6086,16 +6079,16 @@ pub fn[TA] unify_rename_v1(
     Int,
   ),
 ) -> ((T1, Int), ClauseExt[Int])? raise {
-  let (sub, off) = x830
-  let args1 = x831
-  let (clext, args2, _, vars) = x832
+  let (sub, off) = x835
+  let args1 = x836
+  let (clext, args2, _, vars) = x837
   Some(
     if vars == 0 {
       ((unify_tms_v1(sub, args1, args2), off), clext)
     } else {
-      let t834 = offset_clause_ext(off, clext)
-      let t833 = off + vars
-      ((unify_tms_off_v1(off, sub, args1, args2), t833), t834)
+      let t839 = offset_clause_ext(off, clext)
+      let t838 = off + vars
+      ((unify_tms_off_v1(off, sub, args1, args2), t838), t839)
     },
   ) catch {
     Unify1::Unify => None
@@ -6106,24 +6099,24 @@ pub fn[TA] unify_rename_v1(
 ///|
 /// `pick`
 pub fn[TA, TB] pick(
-  x835 : (TB) -> TA? raise,
-  x836 : @list.List[TB],
+  x840 : (TB) -> TA? raise,
+  x841 : @list.List[TB],
 ) -> (TA, (TB) -> @list.List[TB] raise) raise {
-  let f = x835
-  let l = x836
+  let f = x840
+  let l = x841
   fn go(
-    x837 : @list.List[TB],
-    x838 : @list.List[TB],
+    x842 : @list.List[TB],
+    x843 : @list.List[TB],
   ) -> (TA, (TB) -> @list.List[TB] raise) raise {
-    let acc = x837
-    match x838 {
+    let acc = x842
+    match x843 {
       More(x, tail=xs) =>
         match f(x) {
           Some(y) =>
             (
               y,
-              fn(x839 : TB) -> @list.List[TB] raise {
-                let z = x839
+              fn(x844 : TB) -> @list.List[TB] raise {
+                let z = x844
                 @lib.rev_append(acc, xs.prepend(z))
               },
             )
@@ -6138,11 +6131,11 @@ pub fn[TA, TB] pick(
 ///|
 /// `nth_clause`
 pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB, TC, TD] nth_clause(
-  x840 : TA,
-  x841 : (((TA, TB), TC), TD),
+  x845 : TA,
+  x846 : (((TA, TB), TC), TD),
 ) -> (((TA, TB), TC), TD)? raise {
-  let i = x840
-  let (((j, k), v), _) as c = x841
+  let i = x845
+  let (((j, k), v), _) as c = x846
   if i == j {
     Some(c)
   } else {
@@ -6153,11 +6146,11 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB, TC, TD] nth_clause(
 ///|
 /// `nth_matrix`
 pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] nth_matrix(
-  x842 : TA,
-  x843 : Litmat[(TA, TB)],
+  x847 : TA,
+  x848 : Litmat[(TA, TB)],
 ) -> ((TA, TB), Matrix[(TA, TB)])? raise {
-  let i = x842
-  match x843 {
+  let i = x847
+  match x848 {
     Litmat::Lit(_) => None
     Litmat::Mat(((j, k), _) as m) => if i == j { Some(m) } else { None }
   }
@@ -6166,20 +6159,20 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] nth_matrix(
 ///|
 /// `unique`
 pub fn[TA, TB] unique(
-  x844 : (TB) -> TA? raise,
-  x845 : @list.List[TB],
+  x849 : (TB) -> TA? raise,
+  x850 : @list.List[TB],
 ) -> Bool raise {
-  let f = x844
-  let l = x845
+  let f = x849
+  let l = x850
   @lib.length(@firstorder.filter_map(f, l)) == 1
 }
 
 ///|
 /// `prove_ec`
 pub fn[TA] prove_ec(
-  x846 : Int,
-  x847 : (T1, TA),
-  x848 : (
+  x851 : Int,
+  x852 : (T1, TA),
+  x853 : (
     (Int, @list.List[Int]),
     (
       @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
@@ -6187,10 +6180,10 @@ pub fn[TA] prove_ec(
     ),
     LitmatExt[Int],
   ),
-  x849 : @list.List[
+  x854 : @list.List[
     (((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]]),
   ],
-  x850 : @list.List[(Int, Int)],
+  x855 : @list.List[(Int, Int)],
 ) -> Strom[
   (
     (T1, TA),
@@ -6202,14 +6195,14 @@ pub fn[TA] prove_ec(
     Matrix[(Int, Int)],
   ),
 ] raise {
-  let k = x846
-  let sub = x847
-  let ((i, v), _, lmext) as clext = x848
-  let mi = x849
-  let pi = x850
+  let k = x851
+  let sub = x852
+  let ((i, v), _, lmext) as clext = x853
+  let mi = x854
+  let pi = x855
   if unique(
-      (x852 : (((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])) => {
-        nth_clause(i, x852)
+      (x857 : (((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])) => {
+        nth_clause(i, x857)
       },
       mi,
     ) {
@@ -6223,8 +6216,8 @@ pub fn[TA] prove_ec(
     raise @lib.AssertFailure("tscript.ml:1133:2")
   }
   let ((((i_1, k1), v1), cla1), miab) = pick(
-    (x853 : (((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])) => {
-      nth_clause(i, x853)
+    (x858 : (((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])) => {
+      nth_clause(i, x858)
     },
     mi,
   )
@@ -6244,7 +6237,7 @@ pub fn[TA] prove_ec(
     (((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]]),
     @list.List[(((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])],
   ) raise) raise = fn(
-    x854 : Unit,
+    x859 : Unit,
   ) -> ((Unit) -> (
     (T1, TA),
     (
@@ -6261,18 +6254,18 @@ pub fn[TA] prove_ec(
     (((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]]),
     @list.List[(((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])],
   ) raise) raise {
-    let _ = x854
+    let _ = x859
     match lmext {
       LitmatExt::Matext(j, _, clext_p) if @lib.mem((j, k1), pi) =>
         match unify_vars(sub, v, v1) {
           None => nil
           Some(sub2) => {
             let (((j_1, k1_p), mi2), clade) = pick(
-              (x856 : Litmat[(Int, Int)]) => nth_matrix(j, x856),
+              (x861 : Litmat[(Int, Int)]) => nth_matrix(j, x861),
               cla1,
             )
             if unique(
-                (x857 : Litmat[(Int, Int)]) => nth_matrix(j_1, x857),
+                (x862 : Litmat[(Int, Int)]) => nth_matrix(j_1, x862),
                 cla1,
               ) {
               ()
@@ -6285,7 +6278,7 @@ pub fn[TA] prove_ec(
               raise @lib.AssertFailure("tscript.ml:1141:8")
             }
             @lib.op_bar_gt(prove_ec(k, sub2, clext_p, mi2, pi), fn(
-              x861 : (Unit) -> (
+              x866 : (Unit) -> (
                 (T1, TA),
                 (
                   @list.List[((Int, @list.List[Int]), Int)],
@@ -6333,7 +6326,7 @@ pub fn[TA] prove_ec(
               ],
             ) raise) raise {
               fn(
-                x862 : Unit,
+                x867 : Unit,
               ) -> (
                 (T1, TA),
                 (
@@ -6360,7 +6353,7 @@ pub fn[TA] prove_ec(
                 ],
               ) raise {
                 ((
-                  x859 : (Unit) -> (
+                  x864 : (Unit) -> (
                     (T1, TA),
                     (
                       @list.List[((Int, @list.List[Int]), Int)],
@@ -6388,11 +6381,11 @@ pub fn[TA] prove_ec(
                       ),
                     ],
                   ) raise,
-                  x860 : Unit,
+                  x865 : Unit,
                 ) => {
                   map(
                     fn(
-                      x858 : (
+                      x863 : (
                         (T1, TA),
                         (
                           @list.List[((Int, @list.List[Int]), Int)],
@@ -6454,7 +6447,7 @@ pub fn[TA] prove_ec(
                         ),
                       ],
                     ) raise {
-                      let (sub3, (prefix, postfix), clab1, mi3) = x858
+                      let (sub3, (prefix, postfix), clab1, mi3) = x863
                       (
                         sub3,
                         (prefix.prepend(((i_1, v1), j_1)), postfix),
@@ -6467,10 +6460,10 @@ pub fn[TA] prove_ec(
                         ),
                       )
                     },
-                    x859,
-                    x860,
+                    x864,
+                    x865,
                   )
-                })(x861, x862)
+                })(x866, x867)
               }
             })
           }
@@ -6478,10 +6471,10 @@ pub fn[TA] prove_ec(
       _ => nil
     }
   }
-  let t867 = cache(x863 => {
-    alt2_l(i_1, k1, pi, v, lmext, k, sub, clext, miab, x863)
+  let t872 = cache(x868 => {
+    alt2_l(i_1, k1, pi, v, lmext, k, sub, clext, miab, x868)
   })
-  append(cache(alt1), t867)
+  append(cache(alt1), t872)
 }
 
 ///|
@@ -6489,9 +6482,9 @@ fn[TC] index_l(
   i_1 : Int,
   k : Int,
   v : @list.List[Int],
-  x865 : @list.List[Litmat[TC]],
+  x870 : @list.List[Litmat[TC]],
 ) -> (((Int, Int), @list.List[Int]), Clause[(TC, Int)]) raise {
-  let cla = x865
+  let cla = x870
   (((i_1, k), v), copy_clause(k)(cla))
 }
 
@@ -6515,7 +6508,7 @@ fn[TA, TB] alt2_l(
   miab : ((((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])) -> @list.List[
     (((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]]),
   ] raise,
-  x863 : Unit,
+  x868 : Unit,
 ) -> ((Unit) -> (
   (T1, TA),
   (
@@ -6525,18 +6518,18 @@ fn[TA, TB] alt2_l(
   (((Int, Int), @list.List[Int]), Clause[(Int, Int)]),
   @list.List[Iclause[(Int, Int)]],
 ) raise) raise {
-  let _ = x863
+  let _ = x868
   if @lib.mem((i_1, k1), pi) && v == @list.empty() {
     nil
   } else {
     let (clab, clac) = clabc_of_litmat_ext(lmext)
-    let t866 = miab((x865 => index_l(i_1, k, v, x865))(clac))
+    let t871 = miab((x870 => index_l(i_1, k, v, x870))(clac))
     cons(
       (
         sub,
         (@list.empty(), clext),
-        (x865 => index_l(i_1, k, v, x865))(clab),
-        t866,
+        (x870 => index_l(i_1, k, v, x870))(clab),
+        t871,
       ),
       nil,
     )
@@ -6546,13 +6539,13 @@ fn[TA, TB] alt2_l(
 ///|
 /// `cut`
 pub fn[TA] cut_v2(
-  x868 : Bool,
-  x869 : (Unit) -> TA raise,
-  x870 : (Unit) -> TA raise,
+  x873 : Bool,
+  x874 : (Unit) -> TA raise,
+  x875 : (Unit) -> TA raise,
 ) -> ((Unit) -> TA raise) raise {
-  let p = x868
-  let xs = x869
-  let ys = x870
+  let p = x873
+  let xs = x874
+  let ys = x875
   if p {
     cut(xs, ys)
   } else {
@@ -6563,16 +6556,16 @@ pub fn[TA] cut_v2(
 ///|
 /// `prove_lit`
 pub fn prove_lit_v1(
-  x872 : SearchOpts,
-  x873 : (T1, Int),
-  x874 : (
+  x877 : SearchOpts,
+  x878 : (T1, Int),
+  x879 : (
     @list.List[(((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])],
     @list.List[(Int, @list.List[@meson.FolTerm])],
     @list.List[(Int, Int)],
     @list.List[(Int, @list.List[@meson.FolTerm])],
     Int,
   ),
-  x875 : (Int, @list.List[@meson.FolTerm]),
+  x880 : (Int, @list.List[@meson.FolTerm]),
 ) -> Strom[
   (
     (T1, Int),
@@ -6591,28 +6584,29 @@ pub fn prove_lit_v1(
     ),
   ),
 ] raise {
-  let opt = x872
-  let sub = x873
-  let (mi, path, pi, lem, lim) = x874
-  let lit_1 = x875
+  let opt = x877
+  let sub = x878
+  let (mi, path, pi, lem, lim) = x879
+  let lit_1 = x880
   if @firstorder.copverb().val {
-    @pp.std_formatter.print_string(
-      "Lit: " + string_of_lit(inst_lit_v1(sub.0, lit_1)) + "\n",
-    )
+    let t882 = string_of_lit(inst_lit_v1(sub.0, lit_1))
+    @pp.std_formatter.print_string("Lit: " + t882 + "\n")
     @pp.std_formatter.print_flush()
     ()
   } else {
     ()
   }
   if @firstorder.copverb().val {
-    @pp.std_formatter.print_string("Path: " + string_of_lits(path) + "\n")
+    let t883 = string_of_lits(path)
+    @pp.std_formatter.print_string("Path: " + t883 + "\n")
     @pp.std_formatter.print_flush()
     ()
   } else {
     ()
   }
   if @firstorder.copverb().val {
-    @pp.std_formatter.print_string("Lemmas: " + string_of_lits(lem) + "\n")
+    let t884 = string_of_lits(lem)
+    @pp.std_formatter.print_string("Lemmas: " + t884 + "\n")
     @pp.std_formatter.print_flush()
     ()
   } else {
@@ -6625,7 +6619,7 @@ pub fn prove_lit_v1(
     @list.List[(Int, @list.List[@meson.FolTerm])],
     Proof1[_, _, _, _],
   ) raise = if @lib.exists(
-      (x877 : (Int, @list.List[@meson.FolTerm])) => eq(sub, lit_1, x877),
+      (x885 : (Int, @list.List[@meson.FolTerm])) => eq(sub, lit_1, x885),
       lem,
     ) {
     if @firstorder.copverb().val {
@@ -6644,17 +6638,16 @@ pub fn prove_lit_v1(
     @list.List[(Int, @list.List[@meson.FolTerm])],
     Proof1[_, _, _, _],
   ) raise = @lib.op_bar_gt(of_list(path), (
-    x881 : (Unit) -> (Int, @list.List[@meson.FolTerm]) raise,
+    x890 : (Unit) -> (Int, @list.List[@meson.FolTerm]) raise,
   ) => {
-    (x882 : Unit) => {
-      ((x879 : (Unit) -> (Int, @list.List[@meson.FolTerm]) raise, x880 : Unit) => {
+    (x891 : Unit) => {
+      ((x888 : (Unit) -> (Int, @list.List[@meson.FolTerm]) raise, x889 : Unit) => {
         filter_map(
-          (x878 : (Int, @list.List[@meson.FolTerm])) => {
-            let p = x878
+          (x886 : (Int, @list.List[@meson.FolTerm])) => {
+            let p = x886
             if @firstorder.copverb().val {
-              @pp.std_formatter.print_string(
-                "Reduction try " + string_of_lit(p) + "\n",
-              )
+              let t887 = string_of_lit(p)
+              @pp.std_formatter.print_string("Reduction try " + t887 + "\n")
               @pp.std_formatter.print_flush()
               ()
             } else {
@@ -6674,10 +6667,10 @@ pub fn prove_lit_v1(
               None => None
             }
           },
-          x879,
-          x880,
+          x888,
+          x889,
         )
-      })(x881, x882)
+      })(x890, x891)
     }
   })
   let extensions : (Unit) -> (
@@ -6700,7 +6693,7 @@ pub fn prove_lit_v1(
       ),
     ],
   ) raise = @lib.op_bar_gt(@lib.op_bar_gt(db_entries_v1(neglit), of_list), (
-    x894 : (Unit) -> (
+    x906 : (Unit) -> (
       (
         (Int, @list.List[Int]),
         (
@@ -6716,7 +6709,7 @@ pub fn prove_lit_v1(
   ) => {
     concat_map(
       fn(
-        x883 : (
+        x892 : (
           (
             (Int, @list.List[Int]),
             (
@@ -6749,14 +6742,15 @@ pub fn prove_lit_v1(
           ),
         ],
       ) raise) raise {
-        let (_, args, ground, vars) as contra = x883
+        let (_, args, ground, vars) as contra = x892
         if @firstorder.copverb().val {
-          let t885 = @lib.string_concat(",", @lib.map(string_of_fterm, args))
+          let t894 = @lib.string_concat(",", @lib.map(string_of_fterm, args))
+          let t895 = string_of_lit(inst_lit_v1(sub.0, lit_1))
           @pp.std_formatter.print_string(
             "Extension try (for lit " +
-            string_of_lit(inst_lit_v1(sub.0, lit_1)) +
+            t895 +
             ", args (" +
-            t885 +
+            t894 +
             "), lim " +
             @lib.string_of_int(lim) +
             ", vars " +
@@ -6774,9 +6768,10 @@ pub fn prove_lit_v1(
           match unify_rename_v1(sub, lit_1.1, contra) {
             Some((sub1_1, clext)) => {
               if @firstorder.copverb().val {
+                let t896 = string_of_lit(inst_lit_v1(sub1_1.0, lit_1))
                 @pp.std_formatter.print_string(
                   "Extension works (for lit " +
-                  string_of_lit(inst_lit_v1(sub1_1.0, lit_1)) +
+                  t896 +
                   ", lim " +
                   @lib.string_of_int(lim) +
                   ")\n",
@@ -6802,7 +6797,7 @@ pub fn prove_lit_v1(
               @lib.op_bar_gt(
                 prove_ec(@lib.lazy_force(k), sub1_1, clext, mi, pi),
                 (
-                  x893 : (Unit) -> (
+                  x905 : (Unit) -> (
                     (T1, Int),
                     (
                       @list.List[((Int, @list.List[Int]), Int)],
@@ -6833,7 +6828,7 @@ pub fn prove_lit_v1(
                 ) => {
                   concat_map(
                     fn(
-                      x886 : (
+                      x897 : (
                         (T1, Int),
                         (
                           @list.List[((Int, @list.List[Int]), Int)],
@@ -6897,12 +6892,11 @@ pub fn prove_lit_v1(
                         ),
                       ],
                     ) raise) raise {
-                      let (sub2, position, ((i, v), clab1), mi1) = x886
+                      let (sub2, position, ((i, v), clab1), mi1) = x897
                       if @firstorder.copverb().val {
+                        let t899 = string_of_nclause(clab1)
                         @pp.std_formatter.print_string(
-                          "Extension clause " +
-                          string_of_nclause(clab1) +
-                          " found\n",
+                          "Extension clause " + t899 + " found\n",
                         )
                         @pp.std_formatter.print_flush()
                         ()
@@ -6923,7 +6917,7 @@ pub fn prove_lit_v1(
                           clab1,
                         ),
                         fn(
-                          x891 : (Unit) -> (
+                          x903 : (Unit) -> (
                             (T1, Int),
                             @list.List[
                               (
@@ -6988,7 +6982,7 @@ pub fn prove_lit_v1(
                           ],
                         ) raise) raise {
                           fn(
-                            x892 : Unit,
+                            x904 : Unit,
                           ) -> (
                             (T1, Int),
                             @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -7020,7 +7014,7 @@ pub fn prove_lit_v1(
                             ],
                           ) raise {
                             ((
-                              x889 : (Unit) -> (
+                              x901 : (Unit) -> (
                                 (T1, Int),
                                 @list.List[
                                   (
@@ -7056,11 +7050,11 @@ pub fn prove_lit_v1(
                                   ),
                                 ],
                               ) raise,
-                              x890 : Unit,
+                              x902 : Unit,
                             ) => {
                               map(
                                 fn(
-                                  x888 : (
+                                  x900 : (
                                     (T1, Int),
                                     @list.List[
                                       (
@@ -7126,7 +7120,7 @@ pub fn prove_lit_v1(
                                     ),
                                   ],
                                 ) raise {
-                                  let (sub3, prfs) = x888
+                                  let (sub3, prfs) = x900
                                   (
                                     sub3,
                                     lem.prepend(lit_1),
@@ -7137,15 +7131,15 @@ pub fn prove_lit_v1(
                                     ),
                                   )
                                 },
-                                x889,
-                                x890,
+                                x901,
+                                x902,
                               )
-                            })(x891, x892)
+                            })(x903, x904)
                           }
                         },
                       )
                     },
-                    x893,
+                    x905,
                   )
                 },
               )
@@ -7154,14 +7148,14 @@ pub fn prove_lit_v1(
           }
         }
       },
-      x894,
+      x906,
     )
   })
-  let t895 = cut_v2(opt.cut3, extensions, nil)
-  let t896 = cut_v2(opt.cut2, reductions, t895)
-  let t897 = cut_v2(opt.cut1, lemmas, t896)
-  @lib.op_bar_gt(cut_v2(ground_lit_v1(sub.0, lit_1), t897, nil), fn(
-    x901 : (Unit) -> (
+  let t907 = cut_v2(opt.cut3, extensions, nil)
+  let t908 = cut_v2(opt.cut2, reductions, t907)
+  let t909 = cut_v2(opt.cut1, lemmas, t908)
+  @lib.op_bar_gt(cut_v2(ground_lit_v1(sub.0, lit_1), t909, nil), fn(
+    x913 : (Unit) -> (
       (T1, Int),
       @list.List[(Int, @list.List[@meson.FolTerm])],
       Proof1[
@@ -7205,7 +7199,7 @@ pub fn prove_lit_v1(
     ),
   ) raise) raise {
     fn(
-      x902 : Unit,
+      x914 : Unit,
     ) -> (
       (T1, Int),
       @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -7230,7 +7224,7 @@ pub fn prove_lit_v1(
       ),
     ) raise {
       ((
-        x899 : (Unit) -> (
+        x911 : (Unit) -> (
           (T1, Int),
           @list.List[(Int, @list.List[@meson.FolTerm])],
           Proof1[
@@ -7250,11 +7244,11 @@ pub fn prove_lit_v1(
             ),
           ],
         ) raise,
-        x900 : Unit,
+        x912 : Unit,
       ) => {
         map(
           fn(
-            x898 : (
+            x910 : (
               (T1, Int),
               @list.List[(Int, @list.List[@meson.FolTerm])],
               Proof1[
@@ -7305,13 +7299,13 @@ pub fn prove_lit_v1(
               ],
             ),
           ) raise {
-            let (sub1_2, lem1, prf1) = x898
+            let (sub1_2, lem1, prf1) = x910
             (sub1_2, lem1, (Litmat::Lit(lit_1), prf1))
           },
-          x899,
-          x900,
+          x911,
+          x912,
         )
-      })(x901, x902)
+      })(x913, x914)
     }
   })
 }
@@ -7319,16 +7313,16 @@ pub fn prove_lit_v1(
 ///|
 /// `prove_mat`
 pub fn prove_mat(
-  x903 : SearchOpts,
-  x904 : (T1, Int),
-  x905 : (
+  x915 : SearchOpts,
+  x916 : (T1, Int),
+  x917 : (
     @list.List[(((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])],
     @list.List[(Int, @list.List[@meson.FolTerm])],
     @list.List[(Int, Int)],
     @list.List[(Int, @list.List[@meson.FolTerm])],
     Int,
   ),
-  x906 : (
+  x918 : (
     (Int, Int),
     @list.List[(((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])],
   ),
@@ -7350,10 +7344,10 @@ pub fn prove_mat(
     ),
   ),
 ] raise {
-  let opt_1 = x903
-  let sub_1 = x904
-  let (mi_1, path_1, pi_1, lem_1, lim_1) = x905
-  let (j, mat1) = x906
+  let opt_1 = x915
+  let sub_1 = x916
+  let (mi_1, path_1, pi_1, lem_1, lim_1) = x917
+  let (j, mat1) = x918
   if @firstorder.copverb().val {
     @pp.std_formatter.print_string("prove_mat\n")
     @pp.std_formatter.print_flush()
@@ -7362,14 +7356,14 @@ pub fn prove_mat(
     ()
   }
   @lib.op_bar_gt(of_list(mat1), (
-    x916 : (Unit) -> (
+    x929 : (Unit) -> (
       ((Int, Int), @list.List[Int]),
       @list.List[Litmat[(Int, Int)]],
     ) raise,
   ) => {
     concat_map(
       fn(
-        x908 : (((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]]),
+        x920 : (((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]]),
       ) -> ((Unit) -> (
         (T1, Int),
         @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -7393,11 +7387,10 @@ pub fn prove_mat(
           ],
         ),
       ) raise) raise {
-        let ((i_1, _) as idx, cla1) = x908
+        let ((i_1, _) as idx, cla1) = x920
         if @firstorder.copverb().val {
-          @pp.std_formatter.print_string(
-            "Decomposition chose: " + string_of_nclause(cla1) + "\n",
-          )
+          let t922 = string_of_nclause(cla1)
+          @pp.std_formatter.print_string("Decomposition chose: " + t922 + "\n")
           @pp.std_formatter.print_flush()
           ()
         } else {
@@ -7411,7 +7404,7 @@ pub fn prove_mat(
             cla1,
           ),
           fn(
-            x914 : (Unit) -> (
+            x927 : (Unit) -> (
               (T1, Int),
               @list.List[
                 (
@@ -7467,7 +7460,7 @@ pub fn prove_mat(
             ),
           ) raise) raise {
             fn(
-              x915 : Unit,
+              x928 : Unit,
             ) -> (
               (T1, Int),
               @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -7496,7 +7489,7 @@ pub fn prove_mat(
               ),
             ) raise {
               ((
-                x912 : (Unit) -> (
+                x925 : (Unit) -> (
                   (T1, Int),
                   @list.List[
                     (
@@ -7530,11 +7523,11 @@ pub fn prove_mat(
                     ),
                   ],
                 ) raise,
-                x913 : Unit,
+                x926 : Unit,
               ) => {
                 map(
                   fn(
-                    x910 : (
+                    x923 : (
                       (T1, Int),
                       @list.List[
                         (
@@ -7601,19 +7594,19 @@ pub fn prove_mat(
                       ],
                     ),
                   ) raise {
-                    let (sub1_3, prf1_1) = x910
-                    let t911 = Proof1::Decomposition(cla1, idx, prf1_1)
-                    (sub1_3, lem_1, (Litmat::Mat((j, mat1)), t911))
+                    let (sub1_3, prf1_1) = x923
+                    let t924 = Proof1::Decomposition(cla1, idx, prf1_1)
+                    (sub1_3, lem_1, (Litmat::Mat((j, mat1)), t924))
                   },
-                  x912,
-                  x913,
+                  x925,
+                  x926,
                 )
-              })(x914, x915)
+              })(x927, x928)
             }
           },
         )
       },
-      x916,
+      x929,
     )
   })
 }
@@ -7621,9 +7614,9 @@ pub fn prove_mat(
 ///|
 /// `prove_litmat`
 pub fn prove_litmat(
-  x917 : SearchOpts,
-  x918 : (T1, Int),
-  x919 : (
+  x930 : SearchOpts,
+  x931 : (T1, Int),
+  x932 : (
     @list.List[(((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])],
     @list.List[(Int, @list.List[@meson.FolTerm])],
     @list.List[(Int, Int)],
@@ -7648,23 +7641,23 @@ pub fn prove_litmat(
     ),
   ),
 ] raise) raise {
-  let opt_2 = x917
-  let sub_2 = x918
-  let st = x919
-  (x923 : Litmat[(Int, Int)]) => {
+  let opt_2 = x930
+  let sub_2 = x931
+  let st = x932
+  (x936 : Litmat[(Int, Int)]) => {
     map_litmat(
-      (x921 : (Int, @list.List[@meson.FolTerm])) => {
-        prove_lit_v1(opt_2, sub_2, st, x921)
+      (x934 : (Int, @list.List[@meson.FolTerm])) => {
+        prove_lit_v1(opt_2, sub_2, st, x934)
       },
       (
-        x922 : (
+        x935 : (
           (Int, Int),
           @list.List[
             (((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]]),
           ],
         ),
-      ) => prove_mat(opt_2, sub_2, st, x922),
-      x923,
+      ) => prove_mat(opt_2, sub_2, st, x935),
+      x936,
     )
   }
 }
@@ -7672,16 +7665,16 @@ pub fn prove_litmat(
 ///|
 /// `prove_clause`
 pub fn prove_clause_v1(
-  x924 : SearchOpts,
-  x925 : (T1, Int),
-  x926 : (
+  x937 : SearchOpts,
+  x938 : (T1, Int),
+  x939 : (
     @list.List[(((Int, Int), @list.List[Int]), @list.List[Litmat[(Int, Int)]])],
     @list.List[(Int, @list.List[@meson.FolTerm])],
     @list.List[(Int, Int)],
     @list.List[(Int, @list.List[@meson.FolTerm])],
     Int,
   ),
-  x927 : @list.List[Litmat[(Int, Int)]],
+  x940 : @list.List[Litmat[(Int, Int)]],
 ) -> Strom[
   (
     (T1, Int),
@@ -7701,21 +7694,21 @@ pub fn prove_clause_v1(
     ],
   ),
 ] raise {
-  let opt_3 = x924
-  let sub_3 = x925
-  let (mi_2, path_2, pi_2, lem_2, lim_2) = x926
-  match x927 {
+  let opt_3 = x937
+  let sub_3 = x938
+  let (mi_2, path_2, pi_2, lem_2, lim_2) = x939
+  match x940 {
     More(lm, tail=cla) => {
-      let check : (@list.List[(Int, @list.List[@meson.FolTerm])]) -> Bool raise = x931 => {
+      let check : (@list.List[(Int, @list.List[@meson.FolTerm])]) -> Bool raise = x944 => {
         @lib.exists(
-          fn(x929 : (Int, @list.List[@meson.FolTerm])) -> Bool raise {
-            let x = x929
+          fn(x942 : (Int, @list.List[@meson.FolTerm])) -> Bool raise {
+            let x = x942
             @lib.exists(
-              (x930 : (Int, @list.List[@meson.FolTerm])) => eq(sub_3, x, x930),
+              (x943 : (Int, @list.List[@meson.FolTerm])) => eq(sub_3, x, x943),
               path_2,
             )
           },
-          x931,
+          x944,
         )
       }
       let regularity = if opt_3.improved_regularity {
@@ -7739,7 +7732,7 @@ pub fn prove_clause_v1(
         @lib.op_bar_gt(
           prove_litmat(opt_3, sub_3, (mi_2, path_2, pi_2, lem_2, lim_2))(lm),
           (
-            x939 : (Unit) -> (
+            x952 : (Unit) -> (
               (T1, Int),
               @list.List[(Int, @list.List[@meson.FolTerm])],
               (
@@ -7769,7 +7762,7 @@ pub fn prove_clause_v1(
           ) => {
             concat_map(
               fn(
-                x932 : (
+                x945 : (
                   (T1, Int),
                   @list.List[(Int, @list.List[@meson.FolTerm])],
                   (
@@ -7824,7 +7817,7 @@ pub fn prove_clause_v1(
                   ),
                 ],
               ) raise) raise {
-                let (sub1_4, lem1_1, prf1_2) = x932
+                let (sub1_4, lem1_1, prf1_2) = x945
                 @lib.op_bar_gt(
                   prove_clause_v1(
                     opt_3,
@@ -7833,7 +7826,7 @@ pub fn prove_clause_v1(
                     cla,
                   ),
                   fn(
-                    x937 : (Unit) -> (
+                    x950 : (Unit) -> (
                       (T1, Int),
                       @list.List[
                         (
@@ -7902,7 +7895,7 @@ pub fn prove_clause_v1(
                     ],
                   ) raise) raise {
                     fn(
-                      x938 : Unit,
+                      x951 : Unit,
                     ) -> (
                       (T1, Int),
                       @list.List[
@@ -7938,7 +7931,7 @@ pub fn prove_clause_v1(
                       ],
                     ) raise {
                       ((
-                        x935 : (Unit) -> (
+                        x948 : (Unit) -> (
                           (T1, Int),
                           @list.List[
                             (
@@ -7972,11 +7965,11 @@ pub fn prove_clause_v1(
                             ),
                           ],
                         ) raise,
-                        x936 : Unit,
+                        x949 : Unit,
                       ) => {
                         map(
                           fn(
-                            x934 : (
+                            x947 : (
                               (T1, Int),
                               @list.List[
                                 (
@@ -8044,18 +8037,18 @@ pub fn prove_clause_v1(
                               ),
                             ],
                           ) raise {
-                            let (sub2_1, prf2) = x934
+                            let (sub2_1, prf2) = x947
                             (sub2_1, prf2.prepend(prf1_2))
                           },
-                          x935,
-                          x936,
+                          x948,
+                          x949,
                         )
-                      })(x937, x938)
+                      })(x950, x951)
                     }
                   },
                 )
               },
-              x939,
+              x952,
             )
           },
         )
@@ -8077,29 +8070,29 @@ pub fn prove_clause_v1(
 ///|
 /// `DISJ_CASES_LIST`
 pub fn disj_cases_list(
-  x941 : @kernel.Thm,
-  x942 : @list.List[@kernel.Thm],
+  x954 : @kernel.Thm,
+  x955 : @list.List[@kernel.Thm],
 ) -> @kernel.Thm raise {
-  let th = x941
-  let prfs = x942
-  let t943 = @lib.length(@basics.disjuncts(@kernel.concl(th)))
-  if @lib.length(prfs) == t943 {
+  let th = x954
+  let prfs = x955
+  let t956 = @lib.length(@basics.disjuncts(@kernel.concl(th)))
+  if @lib.length(prfs) == t956 {
     ()
   } else {
     raise @lib.AssertFailure("tscript.ml:1245:2")
   }
-  let t947 = @lib.map(
-    fn(x946 : @kernel.Thm) -> @list.List[@kernel.Term] raise {
-      @kernel.hyp(x946)
+  let t960 = @lib.map(
+    fn(x959 : @kernel.Thm) -> @list.List[@kernel.Term] raise {
+      @kernel.hyp(x959)
     },
     prfs,
   )
   if @lib.list_for_all2(
-      fn(x944 : @kernel.Term, x945 : @list.List[@kernel.Term]) -> Bool raise {
-        @lib.mem(x944, x945)
+      fn(x957 : @kernel.Term, x958 : @list.List[@kernel.Term]) -> Bool raise {
+        @lib.mem(x957, x958)
       },
       @basics.disjuncts(@kernel.concl(th)),
-      t947,
+      t960,
     ) {
     ()
   } else {
@@ -8107,9 +8100,9 @@ pub fn disj_cases_list(
   }
   let c = @kernel.concl(@lib.hd(prfs))
   if @lib.fold_left(
-      fn(x948 : Bool, x949 : @kernel.Thm) -> Bool raise {
-        let acc = x948
-        let x = x949
+      fn(x961 : Bool, x962 : @kernel.Thm) -> Bool raise {
+        let acc = x961
+        let x = x962
         acc && @kernel.concl(x) == c
       },
       true,
@@ -8138,31 +8131,31 @@ pub fn disj_cases_list(
 ///|
 /// thecops.ml:1256
 fn step_18() -> Unit raise {
-  let t954 = @parser.parse_term("c \\/ b \\/ a")
-  let t950 = @lib.op_bar_gt(
+  let t967 = @parser.parse_term("c \\/ b \\/ a")
+  let t963 = @lib.op_bar_gt(
     @class.taut(@parser.parse_term("c ==> c \\/ b \\/ a")),
     @bool.undisch,
   )
-  let t951 = @lib.op_bar_gt(
+  let t964 = @lib.op_bar_gt(
     @class.taut(@parser.parse_term("b ==> c \\/ b \\/ a")),
     @bool.undisch,
   )
-  let t952 = @list.List([
+  let t965 = @list.List([
     @lib.op_bar_gt(
       @class.taut(@parser.parse_term("a ==> c \\/ b \\/ a")),
       @bool.undisch,
     ),
-    t951,
-    t950,
+    t964,
+    t963,
   ])
   if @lib.op_bar_gt(
       disj_cases_list(
         @kernel.assume_rule(@parser.parse_term("a \\/ b \\/ c")),
-        t952,
+        t965,
       ),
-      fn(x953 : @kernel.Thm) -> @kernel.Term raise { @kernel.concl(x953) },
+      fn(x966 : @kernel.Thm) -> @kernel.Term raise { @kernel.concl(x966) },
     ) ==
-    t954 {
+    t967 {
     ()
   } else {
     raise @lib.AssertFailure("tscript.ml:1256:0")
@@ -8172,18 +8165,17 @@ fn step_18() -> Unit raise {
 ///|
 /// `CONTRADICTION`
 pub fn contradiction(
-  x955 : @kernel.Thm,
-  x956 : @kernel.Thm,
+  x968 : @kernel.Thm,
+  x969 : @kernel.Thm,
 ) -> @kernel.Thm raise {
-  let x = x955
-  let y = x956
-  let t957 = @kernel.concl(y)
-  let (xc, yc) = (@kernel.concl(x), t957)
+  let x = x968
+  let y = x969
+  let t970 = @kernel.concl(y)
+  let (xc, yc) = (@kernel.concl(x), t970)
   if @firstorder.copverb().val {
-    let t958 = @printer.string_of_term(yc)
-    @pp.std_formatter.print_string(
-      "contra: " + @printer.string_of_term(xc) + " with " + t958 + "\n",
-    )
+    let t971 = @printer.string_of_term(yc)
+    let t972 = @printer.string_of_term(xc)
+    @pp.std_formatter.print_string("contra: " + t972 + " with " + t971 + "\n")
     @pp.std_formatter.print_flush()
     ()
   } else {
@@ -8201,12 +8193,12 @@ pub fn contradiction(
 ///|
 /// thecops.ml:1269
 fn step_19() -> Unit raise {
-  let t960 = @parser.parse_term("F")
-  let t959 = @kernel.assume_rule(@parser.parse_term("p:bool"))
+  let t974 = @parser.parse_term("F")
+  let t973 = @kernel.assume_rule(@parser.parse_term("p:bool"))
   if @kernel.concl(
-      contradiction(@kernel.assume_rule(@parser.parse_term("~p")), t959),
+      contradiction(@kernel.assume_rule(@parser.parse_term("~p")), t973),
     ) ==
-    t960 {
+    t974 {
     ()
   } else {
     raise @lib.AssertFailure("tscript.ml:1269:0")
@@ -8216,12 +8208,12 @@ fn step_19() -> Unit raise {
 ///|
 /// thecops.ml:1270
 fn step_20() -> Unit raise {
-  let t962 = @parser.parse_term("F")
-  let t961 = @kernel.assume_rule(@parser.parse_term("~p"))
+  let t976 = @parser.parse_term("F")
+  let t975 = @kernel.assume_rule(@parser.parse_term("~p"))
   if @kernel.concl(
-      contradiction(@kernel.assume_rule(@parser.parse_term("p:bool")), t961),
+      contradiction(@kernel.assume_rule(@parser.parse_term("p:bool")), t975),
     ) ==
-    t962 {
+    t976 {
     ()
   } else {
     raise @lib.AssertFailure("tscript.ml:1270:0")
@@ -8230,8 +8222,8 @@ fn step_20() -> Unit raise {
 
 ///|
 /// `flip_neg`
-pub fn flip_neg(x963 : @kernel.Term) -> @kernel.Term raise {
-  let tm = x963
+pub fn flip_neg(x977 : @kernel.Term) -> @kernel.Term raise {
+  let tm = x977
   if @basics.is_neg(tm) {
     @basics.dest_neg(tm)
   } else {
@@ -8242,50 +8234,44 @@ pub fn flip_neg(x963 : @kernel.Term) -> @kernel.Term raise {
 ///|
 /// `nth_disj`
 pub fn nth_disj(
-  x964 : Int,
-  x965 : @kernel.Thm,
+  x978 : Int,
+  x979 : @kernel.Thm,
 ) -> (@kernel.Thm, (@list.List[@kernel.Thm], @list.List[@kernel.Thm])) raise {
-  let j = x964
-  let th = x965
+  let j = x978
+  let th = x979
   if @firstorder.copverb().val {
+    let t980 = @printer.string_of_term(@kernel.concl(th))
     @pp.std_formatter.print_string(
-      "nth_disj " +
-      @lib.string_of_int(j) +
-      " " +
-      @printer.string_of_term(@kernel.concl(th)) +
-      "\n",
+      "nth_disj " + @lib.string_of_int(j) + " " + t980 + "\n",
     )
     @pp.std_formatter.print_flush()
     ()
   } else {
     ()
   }
-  let t968 = @firstorder.nth_rest(j)
+  let t983 = @firstorder.nth_rest(j)
   @lib.op_bar_gt(
     @lib.op_bar_gt(
       @lib.op_bar_gt(@kernel.concl(th), fn(
-        x966 : @kernel.Term,
+        x981 : @kernel.Term,
       ) -> @list.List[@kernel.Term] raise {
-        @basics.disjuncts(x966)
+        @basics.disjuncts(x981)
       }),
-      x967 => @lib.map(@kernel.assume_rule, x967),
+      x982 => @lib.map(@kernel.assume_rule, x982),
     ),
-    t968,
+    t983,
   )
 }
 
 ///|
 /// `nth_conj`
-pub fn nth_conj(x969 : Int, x970 : @kernel.Thm) -> @kernel.Thm raise {
-  let i = x969
-  let th = x970
+pub fn nth_conj(x984 : Int, x985 : @kernel.Thm) -> @kernel.Thm raise {
+  let i = x984
+  let th = x985
   if @firstorder.copverb().val {
+    let t986 = @printer.string_of_term(@kernel.concl(th))
     @pp.std_formatter.print_string(
-      "nth_conj " +
-      @lib.string_of_int(i) +
-      " " +
-      @printer.string_of_term(@kernel.concl(th)) +
-      "\n",
+      "nth_conj " + @lib.string_of_int(i) + " " + t986 + "\n",
     )
     @pp.std_formatter.print_flush()
     ()
@@ -8298,13 +8284,13 @@ pub fn nth_conj(x969 : Int, x970 : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// `inst_var`
 pub fn inst_var(
-  x971 : T1,
-  x972 : @kernel.HolType,
-  x973 : Int,
+  x987 : T1,
+  x988 : @kernel.HolType,
+  x989 : Int,
 ) -> @kernel.Term raise {
-  let sub = x971
-  let ty = x972
-  let v = x973
+  let sub = x987
+  let ty = x988
+  let v = x989
   let ftm = inst_tm_v1(sub, @meson.FolTerm::Fvar(v))
   @firstorder.hol_of_term(ty, ftm) catch {
     Failure(e) => raise Failure("inst_var: " + e)
@@ -8315,20 +8301,21 @@ pub fn inst_var(
 ///|
 /// `spec_vars`
 pub fn spec_vars(
-  x974 : T1,
-  x975 : @list.List[Int],
-  x976 : @kernel.Thm,
+  x990 : T1,
+  x991 : @list.List[Int],
+  x992 : @kernel.Thm,
 ) -> @kernel.Thm raise {
-  let sub = x974
-  let vs = x975
-  let th = x976
+  let sub = x990
+  let vs = x991
+  let th = x992
   if @firstorder.copverb().val {
-    let t977 = @printer.string_of_term(@kernel.concl(th))
+    let t993 = @printer.string_of_term(@kernel.concl(th))
+    let t994 = @lib.length(vs)
     @pp.std_formatter.print_string(
       "spec_vars: |vars| = " +
-      @lib.string_of_int(@lib.length(vs)) +
+      @lib.string_of_int(t994) +
       ", th = " +
-      t977 +
+      t993 +
       "\n",
     )
     @pp.std_formatter.print_flush()
@@ -8339,40 +8326,40 @@ pub fn spec_vars(
   let tys = @lib.op_bar_gt(
     @lib.op_bar_gt(
       @lib.op_bar_gt(@kernel.concl(th), fn(
-        x978 : @kernel.Term,
+        x995 : @kernel.Term,
       ) -> (@list.List[@kernel.Term], @kernel.Term) raise {
-        @basics.strip_forall(x978)
+        @basics.strip_forall(x995)
       }),
       fn(
-        x979 : (@list.List[@kernel.Term], @kernel.Term),
+        x996 : (@list.List[@kernel.Term], @kernel.Term),
       ) -> @list.List[@kernel.Term] raise {
-        x979.0
+        x996.0
       },
     ),
-    x981 => {
+    x998 => {
       @lib.map(
-        fn(x980 : @kernel.Term) -> @kernel.HolType raise {
-          @kernel.type_of(x980)
+        fn(x997 : @kernel.Term) -> @kernel.HolType raise {
+          @kernel.type_of(x997)
         },
-        x981,
+        x998,
       )
     },
   )
-  let t982 = @lib.length(vs)
-  if @lib.length(tys) == t982 {
+  let t999 = @lib.length(vs)
+  if @lib.length(tys) == t999 {
     ()
   } else {
     raise @lib.AssertFailure("tscript.ml:1295:2")
   }
   @lib.list_fold_left2(
     fn(
-      x983 : @kernel.Thm,
-      x984 : @kernel.HolType,
-      x985 : Int,
+      x1000 : @kernel.Thm,
+      x1001 : @kernel.HolType,
+      x1002 : Int,
     ) -> @kernel.Thm raise {
-      let th_1 = x983
-      let ty = x984
-      let v = x985
+      let th_1 = x1000
+      let ty = x1001
+      let v = x1002
       @bool.spec(inst_var(sub, ty, v), th_1)
     },
     th,
@@ -8413,27 +8400,27 @@ pub impl @lib.OHash for ReconData with fn ohash_visit(self, h) {
 ///|
 /// `clause_index_mapping`
 pub fn[TA] clause_index_mapping(
-  x986 : @list.List[Litmat[TA]],
+  x1003 : @list.List[Litmat[TA]],
 ) -> @list.List[(TA, Int)] raise {
-  let cl = x986
+  let cl = x1003
   @lib.op_bar_gt(
-    @lib.op_bar_gt(cl, x989 => {
+    @lib.op_bar_gt(cl, x1006 => {
       @lib.list_mapi(
-        fn(x987 : Int, x988 : Litmat[TA]) -> @list.List[(TA, Int)] raise {
-          let idx = x987
-          match x988 {
+        fn(x1004 : Int, x1005 : Litmat[TA]) -> @list.List[(TA, Int)] raise {
+          let idx = x1004
+          match x1005 {
             Litmat::Lit(_) => @list.empty()
             Litmat::Mat((j, mat_1)) =>
               matrix_index_mapping(mat_1).prepend((j, idx))
           }
         },
-        x989,
+        x1006,
       )
     }),
     fn(
-      x990 : @list.List[@list.List[(TA, Int)]],
+      x1007 : @list.List[@list.List[(TA, Int)]],
     ) -> @list.List[(TA, Int)] raise {
-      @lib.flat(x990)
+      @lib.flat(x1007)
     },
   )
 }
@@ -8441,27 +8428,27 @@ pub fn[TA] clause_index_mapping(
 ///|
 /// `matrix_index_mapping`
 pub fn[TA] matrix_index_mapping(
-  x991 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
+  x1008 : @list.List[((TA, @list.List[Int]), @list.List[Litmat[TA]])],
 ) -> @list.List[(TA, Int)] raise {
-  let mat_2 = x991
+  let mat_2 = x1008
   @lib.op_bar_gt(
-    @lib.op_bar_gt(mat_2, x994 => {
+    @lib.op_bar_gt(mat_2, x1011 => {
       @lib.list_mapi(
         fn(
-          x992 : Int,
-          x993 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
+          x1009 : Int,
+          x1010 : ((TA, @list.List[Int]), @list.List[Litmat[TA]]),
         ) -> @list.List[(TA, Int)] raise {
-          let idx_1 = x992
-          let ((i, v), cl_1) = x993
+          let idx_1 = x1009
+          let ((i, v), cl_1) = x1010
           clause_index_mapping(cl_1).prepend((i, idx_1))
         },
-        x994,
+        x1011,
       )
     }),
     fn(
-      x995 : @list.List[@list.List[(TA, Int)]],
+      x1012 : @list.List[@list.List[(TA, Int)]],
     ) -> @list.List[(TA, Int)] raise {
-      @lib.flat(x995)
+      @lib.flat(x1012)
     },
   )
 }
@@ -8469,56 +8456,56 @@ pub fn[TA] matrix_index_mapping(
 ///|
 /// `mk_recon_data`
 pub fn mk_recon_data(
-  x996 : @kernel.Thm,
-  x997 : @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
-  x998 : T1,
+  x1013 : @kernel.Thm,
+  x1014 : @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
+  x1015 : T1,
 ) -> ReconData raise {
-  let (problem, mat_1, sub) = (x996, x997, x998)
+  let (problem, mat_1, sub) = (x1013, x1014, x1015)
   ReconData::{ problem, mapping: matrix_index_mapping(mat_1), sub, }
 }
 
 ///|
 /// `prefix_problem`
 pub fn prefix_problem(
-  x999 : ReconData,
+  x1016 : ReconData,
 ) -> ((@list.List[((Int, @list.List[Int]), Int)]) -> @kernel.Thm raise) raise {
-  let data = x999
-  let rel : (Int) -> Int raise = fn(x1001 : Int) -> Int raise {
-    let i = x1001
+  let data = x1016
+  let rel : (Int) -> Int raise = fn(x1018 : Int) -> Int raise {
+    let i = x1018
     @lib.list_assoc(i, data.mapping)
   }
-  let t1011 = data.problem
-  x1012 => {
+  let t1028 = data.problem
+  x1029 => {
     @lib.fold_left(
       fn(
-        x1002 : @kernel.Thm,
-        x1003 : ((Int, @list.List[Int]), Int),
+        x1019 : @kernel.Thm,
+        x1020 : ((Int, @list.List[Int]), Int),
       ) -> @kernel.Thm raise {
-        let th = x1002
-        let ((i_1, v), j) = x1003
-        let t1008 = rel(j)
-        let t1006 = data.sub
-        let t1004 = rel(i_1)
+        let th = x1019
+        let ((i_1, v), j) = x1020
+        let t1025 = rel(j)
+        let t1023 = data.sub
+        let t1021 = rel(i_1)
         @lib.op_bar_gt(
           @lib.op_bar_gt(
             @lib.op_bar_gt(
-              @lib.op_bar_gt(th, (x1005 : @kernel.Thm) => nth_conj(t1004, x1005)),
-              (x1007 : @kernel.Thm) => spec_vars(t1006, v, x1007),
+              @lib.op_bar_gt(th, (x1022 : @kernel.Thm) => nth_conj(t1021, x1022)),
+              (x1024 : @kernel.Thm) => spec_vars(t1023, v, x1024),
             ),
-            (x1009 : @kernel.Thm) => nth_disj(t1008, x1009),
+            (x1026 : @kernel.Thm) => nth_disj(t1025, x1026),
           ),
           fn(
-            x1010 : (
+            x1027 : (
               @kernel.Thm,
               (@list.List[@kernel.Thm], @list.List[@kernel.Thm]),
             ),
           ) -> @kernel.Thm raise {
-            x1010.0
+            x1027.0
           },
         )
       },
-      t1011,
-      x1012,
+      t1028,
+      x1029,
     )
   }
 }
@@ -8529,7 +8516,7 @@ pub fn[
   TA : Eq + @lib.OCompare + @lib.OHash,
   TB : Eq + @lib.OCompare + @lib.OHash,
 ] eat_proofs(
-  x1013 : ReconData,
+  x1030 : ReconData,
 ) -> ((
   (
     @list.List[(@kernel.Term, @kernel.Thm)],
@@ -8562,9 +8549,9 @@ pub fn[
   ),
   @list.List[@kernel.Thm],
 ) raise) raise) raise {
-  let data = x1013
+  let data = x1030
   fn(
-    x1019 : (
+    x1036 : (
       @list.List[(@kernel.Term, @kernel.Thm)],
       @list.List[
         (
@@ -8616,7 +8603,7 @@ pub fn[
     @list.List[@kernel.Thm],
   ) raise) raise {
     fn(
-      x1020 : @list.List[@kernel.Thm],
+      x1037 : @list.List[@kernel.Thm],
     ) -> (
       (
         @list.List[(@kernel.Term, @kernel.Thm)],
@@ -8649,7 +8636,7 @@ pub fn[
       @list.List[@kernel.Thm],
     ) raise {
       ((
-        x1017 : (
+        x1034 : (
           @list.List[(@kernel.Term, @kernel.Thm)],
           @list.List[
             (
@@ -8677,11 +8664,11 @@ pub fn[
             ),
           ],
         ),
-        x1018 : @list.List[@kernel.Thm],
+        x1035 : @list.List[@kernel.Thm],
       ) => {
         @firstorder.fold_map(
           fn(
-            x1015 : (
+            x1032 : (
               @list.List[(@kernel.Term, @kernel.Thm)],
               @list.List[
                 (
@@ -8740,9 +8727,9 @@ pub fn[
             ),
             @kernel.Thm,
           ) raise) raise {
-            let (lem, prfs) = x1015
+            let (lem, prfs) = x1032
             fn(
-              x1016 : @kernel.Thm,
+              x1033 : @kernel.Thm,
             ) -> (
               (
                 @list.List[(@kernel.Term, @kernel.Thm)],
@@ -8774,7 +8761,7 @@ pub fn[
               ),
               @kernel.Thm,
             ) raise {
-              let th = x1016
+              let th = x1033
               match prfs {
                 More(prf, tail=prfs_1) => {
                   let bot = bot_of_proof(data, lem, th, prf)
@@ -8784,10 +8771,10 @@ pub fn[
               }
             }
           },
-          x1017,
-          x1018,
+          x1034,
+          x1035,
         )
-      })(x1019, x1020)
+      })(x1036, x1037)
     }
   }
 }
@@ -8798,8 +8785,8 @@ pub fn[
   TA : Eq + @lib.OCompare + @lib.OHash,
   TB : Eq + @lib.OCompare + @lib.OHash,
 ] bot_of_clause_ext(
-  x1021 : ReconData,
-  x1022 : (
+  x1038 : ReconData,
+  x1039 : (
     (Int, @list.List[Int]),
     (
       @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
@@ -8807,7 +8794,7 @@ pub fn[
     ),
     LitmatExt[Int],
   ),
-  x1023 : (
+  x1040 : (
     @list.List[(@kernel.Term, @kernel.Thm)],
     @list.List[
       (
@@ -8831,7 +8818,7 @@ pub fn[
       ),
     ],
   ),
-  x1024 : @kernel.Thm,
+  x1041 : @kernel.Thm,
 ) -> (
   (
     @list.List[(@kernel.Term, @kernel.Thm)],
@@ -8849,28 +8836,28 @@ pub fn[
   ),
   @kernel.Thm,
 ) raise {
-  let data_1 = x1021
-  let ((i, v), (matl, matr), lmext) = x1022
-  let acc = x1023
-  let th_1 = x1024
+  let data_1 = x1038
+  let ((i, v), (matl, matr), lmext) = x1039
+  let acc = x1040
+  let th_1 = x1041
   let i_p = @lib.list_assoc(i, data_1.mapping)
   if i_p == @lib.length(matl) {
     ()
   } else {
     raise @lib.AssertFailure("tscript.ml:1339:2")
   }
-  let t1025 = 1 + @lib.length(matl.concat(matr))
-  if @lib.length(@bool.conjuncts_rule(th_1)) == t1025 {
+  let t1042 = 1 + @lib.length(matl.concat(matr))
+  if @lib.length(@bool.conjuncts_rule(th_1)) == t1042 {
     ()
   } else {
     raise @lib.AssertFailure("tscript.ml:1340:2")
   }
-  let t1026 = data_1.sub
+  let t1043 = data_1.sub
   bot_of_litmat_ext(
     data_1,
     acc,
-    @lib.op_bar_gt(nth_conj(i_p, th_1), (x1027 : @kernel.Thm) => {
-      spec_vars(t1026, v, x1027)
+    @lib.op_bar_gt(nth_conj(i_p, th_1), (x1044 : @kernel.Thm) => {
+      spec_vars(t1043, v, x1044)
     }),
     lmext,
   )
@@ -8882,8 +8869,8 @@ pub fn[
   TA : Eq + @lib.OCompare + @lib.OHash,
   TB : Eq + @lib.OCompare + @lib.OHash,
 ] bot_of_litmat_ext(
-  x1028 : ReconData,
-  x1029 : (
+  x1045 : ReconData,
+  x1046 : (
     @list.List[(@kernel.Term, @kernel.Thm)],
     @list.List[
       (
@@ -8907,8 +8894,8 @@ pub fn[
       ),
     ],
   ),
-  x1030 : @kernel.Thm,
-  x1031 : LitmatExt[Int],
+  x1047 : @kernel.Thm,
+  x1048 : LitmatExt[Int],
 ) -> (
   (
     @list.List[(@kernel.Term, @kernel.Thm)],
@@ -8926,18 +8913,19 @@ pub fn[
   ),
   @kernel.Thm,
 ) raise {
-  let data_2 = x1028
-  let acc_1 = x1029
-  let thi = x1030
-  match x1031 {
+  let data_2 = x1045
+  let acc_1 = x1046
+  let thi = x1047
+  match x1048 {
     LitmatExt::Litext((clal, clar), clac) => {
       let j = @lib.length(clal)
       let (thj, (thl, thr)) = nth_disj(j, thi)
       let (acc1, botsl) = eat_proofs(data_2)(acc_1)(thl)
       let (acc2, botsr) = eat_proofs(data_2)(acc1)(thr)
       if @firstorder.copverb().val {
+        let t1049 = @printer.string_of_thm(thi)
         @pp.std_formatter.print_string(
-          "bot_of_litmat_ext: thi = " + @printer.string_of_thm(thi) + "\n",
+          "bot_of_litmat_ext: thi = " + t1049 + "\n",
         )
         @pp.std_formatter.print_flush()
         ()
@@ -8981,10 +8969,10 @@ pub fn[
   TA : Eq + @lib.OCompare + @lib.OHash,
   TB : Eq + @lib.OCompare + @lib.OHash,
 ] bot_of_proof(
-  x1032 : ReconData,
-  x1033 : @list.List[(@kernel.Term, @kernel.Thm)],
-  x1034 : @kernel.Thm,
-  x1035 : (
+  x1050 : ReconData,
+  x1051 : @list.List[(@kernel.Term, @kernel.Thm)],
+  x1052 : @kernel.Thm,
+  x1053 : (
     Litmat[TA],
     Proof1[
       Litmat[TA],
@@ -9004,10 +8992,10 @@ pub fn[
     ],
   ),
 ) -> @kernel.Thm raise {
-  let data_3 = x1032
-  let lem_1 = x1033
-  let th_2 = x1034
-  match x1035 {
+  let data_3 = x1050
+  let lem_1 = x1051
+  let th_2 = x1052
+  match x1053 {
     (
       Litmat::Mat((j_2, mat_1)),
       Proof1::Decomposition(cla, ((i_1, k), v_1), prfs_2),
@@ -9024,35 +9012,32 @@ pub fn[
         raise @lib.AssertFailure("tscript.ml:1366:6")
       }
       if @firstorder.copverb().val {
+        let t1054 = @printer.string_of_term(@kernel.concl(th_2))
         @pp.std_formatter.print_string(
-          "Decomposition " +
-          @lib.string_of_int(i_p_1) +
-          ": " +
-          @printer.string_of_term(@kernel.concl(th_2)) +
-          "\n",
+          "Decomposition " + @lib.string_of_int(i_p_1) + ": " + t1054 + "\n",
         )
         @pp.std_formatter.print_flush()
         ()
       } else {
         ()
       }
-      let t1036 = data_3.sub
-      let thi_1 = @lib.op_bar_gt(nth_conj(i_p_1, th_2), (x1037 : @kernel.Thm) => {
-        spec_vars(t1036, v_1, x1037)
+      let t1055 = data_3.sub
+      let thi_1 = @lib.op_bar_gt(nth_conj(i_p_1, th_2), (x1056 : @kernel.Thm) => {
+        spec_vars(t1055, v_1, x1056)
       })
       let djs = @basics.disjuncts(@kernel.concl(thi_1))
-      let t1038 = @lib.length(prfs_2)
-      if @lib.length(djs) == t1038 {
+      let t1057 = @lib.length(prfs_2)
+      if @lib.length(djs) == t1057 {
         ()
       } else {
         raise @lib.AssertFailure("tscript.ml:1371:6")
       }
-      let t1039 = eat_proofs(data_3)((lem_1, prfs_2))
+      let t1058 = eat_proofs(data_3)((lem_1, prfs_2))
       @lib.op_bar_gt(
         @lib.op_bar_gt(
-          @lib.op_bar_gt(@lib.map(@kernel.assume_rule, djs), t1039),
+          @lib.op_bar_gt(@lib.map(@kernel.assume_rule, djs), t1058),
           fn(
-            x1040 : (
+            x1059 : (
               (
                 @list.List[(@kernel.Term, @kernel.Thm)],
                 @list.List[
@@ -9084,19 +9069,18 @@ pub fn[
               @list.List[@kernel.Thm],
             ),
           ) -> @list.List[@kernel.Thm] raise {
-            x1040.1
+            x1059.1
           },
         ),
-        (x1041 : @list.List[@kernel.Thm]) => disj_cases_list(thi_1, x1041),
+        (x1060 : @list.List[@kernel.Thm]) => disj_cases_list(thi_1, x1060),
       )
     }
     (Litmat::Lit(lit_1), prf_1) => {
-      let t1042 = inst_lit_v1(data_3.sub, lit_1)
-      let liti = @firstorder.hol_of_literal(t1042.0, t1042.1)
+      let t1061 = inst_lit_v1(data_3.sub, lit_1)
+      let liti = @firstorder.hol_of_literal(t1061.0, t1061.1)
       if @firstorder.copverb().val {
-        @pp.std_formatter.print_string(
-          "bot_of_proof: lit = " + @printer.string_of_term(liti) + "\n",
-        )
+        let t1062 = @printer.string_of_term(liti)
+        @pp.std_formatter.print_string("bot_of_proof: lit = " + t1062 + "\n")
         @pp.std_formatter.print_flush()
         ()
       } else {
@@ -9110,8 +9094,8 @@ pub fn[
       match prf_1 {
         Proof1::Reduction =>
           @lib.op_bar_gt(@lib.op_bar_gt(flip_neg(liti), @kernel.assume_rule), (
-            x1043 : @kernel.Thm,
-          ) => contradiction(th_2, x1043))
+            x1063 : @kernel.Thm,
+          ) => contradiction(th_2, x1063))
         Proof1::Lemma => {
           if @lib.list_mem_assoc(liti, lem_1) {
             ()
@@ -9123,9 +9107,8 @@ pub fn[
         Proof1::Extension(_, (prefix, postfix), prfs_3) => {
           let prefix_th = prefix_problem(data_3)(prefix)
           if @firstorder.copverb().val {
-            @pp.std_formatter.print_string(
-              "prefix_th = " + @printer.string_of_thm(prefix_th) + "\n",
-            )
+            let t1064 = @printer.string_of_thm(prefix_th)
+            @pp.std_formatter.print_string("prefix_th = " + t1064 + "\n")
             @pp.std_formatter.print_flush()
             ()
           } else {
@@ -9142,8 +9125,8 @@ pub fn[
           } else {
             raise @lib.AssertFailure("tscript.ml:1388:10")
           }
-          let t1044 = @kernel.hyp(bot_1)
-          if @lib.mem(@kernel.concl(th_2), t1044) {
+          let t1065 = @kernel.hyp(bot_1)
+          if @lib.mem(@kernel.concl(th_2), t1065) {
             ()
           } else {
             raise @lib.AssertFailure("tscript.ml:1389:10")
@@ -9160,9 +9143,9 @@ pub fn[
 ///|
 /// `start`
 pub fn start_v1(
-  x1045 : @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
-  x1046 : SearchOpts,
-  x1047 : Int,
+  x1066 : @list.List[((Int, @list.List[Int]), @list.List[Litmat[Int]])],
+  x1067 : SearchOpts,
+  x1068 : Int,
 ) -> (
   T1,
   (
@@ -9178,13 +9161,12 @@ pub fn start_v1(
     ],
   ),
 )? raise {
-  let mat_1 = x1045
-  let opt = x1046
-  let lim = x1047
+  let mat_1 = x1066
+  let opt = x1067
+  let lim = x1068
   if @firstorder.copverb().val {
-    @pp.std_formatter.print_string(
-      "Start " + @lib.string_of_int(lim + 1) + "\n",
-    )
+    let t1069 = lim + 1
+    @pp.std_formatter.print_string("Start " + @lib.string_of_int(t1069) + "\n")
     @pp.std_formatter.print_flush()
     ()
   } else {
@@ -9200,7 +9182,7 @@ pub fn start_v1(
   @firstorder.op_gt_gt_eq(
     @lib.op_bar_gt(
       @lib.op_bar_gt(of_list(mati), fn(
-        x1052 : (Unit) -> (
+        x1074 : (Unit) -> (
           ((Int, Int), @list.List[Int]),
           @list.List[Litmat[(Int, Int)]],
         ) raise,
@@ -9224,7 +9206,7 @@ pub fn start_v1(
         ],
       ) raise) raise {
         fn(
-          x1053 : Unit,
+          x1075 : Unit,
         ) -> (
           (T1, Int),
           Proof1[
@@ -9245,15 +9227,15 @@ pub fn start_v1(
           ],
         ) raise {
           ((
-            x1050 : (Unit) -> (
+            x1072 : (Unit) -> (
               ((Int, Int), @list.List[Int]),
               @list.List[Litmat[(Int, Int)]],
             ) raise,
-            x1051 : Unit,
+            x1073 : Unit,
           ) => {
             filter_map(
               fn(
-                x1048 : (
+                x1070 : (
                   ((Int, Int), @list.List[Int]),
                   @list.List[Litmat[(Int, Int)]],
                 ),
@@ -9280,7 +9262,7 @@ pub fn start_v1(
                   ),
                 ],
               )? raise {
-                match x1048 {
+                match x1070 {
                   (
                     ((i, _), v) as idx,
                     More(Litmat::Lit(lit_1), tail=Empty) as cla,
@@ -9302,7 +9284,7 @@ pub fn start_v1(
                         next_opt,
                       ),
                       fn(
-                        x1049 : (
+                        x1071 : (
                           (T1, Int),
                           @list.List[
                             (
@@ -9365,23 +9347,23 @@ pub fn start_v1(
                           ),
                         ],
                       )? raise {
-                        let (sub, prfs) = x1049
+                        let (sub, prfs) = x1071
                         Some((sub, Proof1::Decomposition(cla, idx, prfs)))
                       },
                     )
                   _ => None
                 }
               },
-              x1050,
-              x1051,
+              x1072,
+              x1073,
             )
-          })(x1052, x1053)
+          })(x1074, x1075)
         }
       }),
       next_opt,
     ),
     fn(
-      x1054 : (
+      x1076 : (
         (T1, Int),
         Proof1[
           Litmat[(Int, Int)],
@@ -9422,7 +9404,7 @@ pub fn start_v1(
         ],
       ),
     )? raise {
-      let (sub_1, prf) = x1054
+      let (sub_1, prf) = x1076
       Some((sub_1.0, (Litmat::Mat(((-1, 0), mati)), prf)))
     },
   )
@@ -9430,13 +9412,13 @@ pub fn start_v1(
 
 ///|
 /// `fol_of_thm`
-pub fn fol_of_thm(x1055 : @kernel.Thm) -> @meson.FolForm raise {
-  let th = x1055
+pub fn fol_of_thm(x1077 : @kernel.Thm) -> @meson.FolForm raise {
+  let th = x1077
   let lconsts = @kernel.freesl(@kernel.hyp(th))
   let tm = @kernel.concl(th)
   if @lib.forall(
-      fn(x1056 : @kernel.Term) -> Bool raise {
-        let x = x1056
+      fn(x1078 : @kernel.Term) -> Bool raise {
+        let x = x1078
         @lib.mem(x, lconsts)
       },
       @kernel.frees(tm),
@@ -9451,11 +9433,11 @@ pub fn fol_of_thm(x1055 : @kernel.Thm) -> @meson.FolForm raise {
 ///|
 /// `NANOCOP_DEEPEN`
 pub fn nanocop_deepen(
-  x1057 : SearchOpts,
-  x1058 : @list.List[@kernel.Thm],
+  x1079 : SearchOpts,
+  x1080 : @list.List[@kernel.Thm],
 ) -> @kernel.Thm raise {
-  let opt = x1057
-  let ths = x1058
+  let opt = x1079
+  let ths = x1080
   if @firstorder.copverb().val {
     {
       @pp.std_formatter.print_string("NANOCOP_DEEPEN with ths:\n")
@@ -9463,12 +9445,12 @@ pub fn nanocop_deepen(
       ()
     }
     @lib.do_list(
-      fn(x1060 : @kernel.Thm) -> Unit raise {
-        ((x1059 : String) => {
-          @pp.std_formatter.print_string("  th: " + x1059 + "\n")
+      fn(x1082 : @kernel.Thm) -> Unit raise {
+        ((x1081 : String) => {
+          @pp.std_formatter.print_string("  th: " + x1081 + "\n")
           @pp.std_formatter.print_flush()
           ()
-        })(@printer.string_of_thm(x1060))
+        })(@printer.string_of_thm(x1082))
       },
       ths,
     )
@@ -9477,26 +9459,26 @@ pub fn nanocop_deepen(
   }
   @firstorder.reset_vars(())
   @firstorder.reset_consts(())
-  let t1062 = create_eq_axs(opt.add_eq_symmetry)
+  let t1084 = create_eq_axs(opt.add_eq_symmetry)
   let gen_eq : (@list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise = fn(
-    x1066 : @list.List[@kernel.Thm],
+    x1088 : @list.List[@kernel.Thm],
   ) -> @list.List[@kernel.Thm] raise {
-    (fn(x1063 : @list.List[@kernel.Term]) -> @list.List[@kernel.Thm] raise {
-      ((x1061 : @list.List[@kernel.Thm]) => @lib.map(@bool.gen_all, x1061))(
-        t1062(x1063),
+    (fn(x1085 : @list.List[@kernel.Term]) -> @list.List[@kernel.Thm] raise {
+      ((x1083 : @list.List[@kernel.Thm]) => @lib.map(@bool.gen_all, x1083))(
+        t1084(x1085),
       )
     })(
-      ((x1065 : @list.List[@kernel.Thm]) => {
+      ((x1087 : @list.List[@kernel.Thm]) => {
         @lib.map(
-          fn(x1064 : @kernel.Thm) -> @kernel.Term raise { @kernel.concl(x1064) },
-          x1065,
+          fn(x1086 : @kernel.Thm) -> @kernel.Term raise { @kernel.concl(x1086) },
+          x1087,
         )
-      })(x1066),
+      })(x1088),
     )
   }
   let ths_p = if @lib.exists(
-      fn(x1067 : @kernel.Thm) -> Bool raise {
-        let th = x1067
+      fn(x1089 : @kernel.Thm) -> Bool raise {
+        let th = x1089
         @kernel.concl(th) == hashek_tm()
       },
       ths,
@@ -9528,7 +9510,7 @@ pub fn nanocop_deepen(
     ()
   }
   let (sub, prfs) = strategy(opt, fn(
-    x1070 : SearchOpts,
+    x1092 : SearchOpts,
   ) -> ((Int) -> (
     T1,
     (
@@ -9552,7 +9534,7 @@ pub fn nanocop_deepen(
     ),
   )? raise) raise {
     fn(
-      x1071 : Int,
+      x1093 : Int,
     ) -> (
       T1,
       (
@@ -9575,8 +9557,8 @@ pub fn nanocop_deepen(
         ],
       ),
     )? raise {
-      ((x1068 : SearchOpts, x1069 : Int) => start_v1(mat_1, x1068, x1069))(
-        x1070, x1071,
+      ((x1090 : SearchOpts, x1091 : Int) => start_v1(mat_1, x1090, x1091))(
+        x1092, x1093,
       )
     }
   })
@@ -9602,14 +9584,14 @@ pub fn nanocop_deepen(
   } else {
     ()
   }
-  let t1072 = @kernel.hyp(th_1)
-  if @lib.set_eq(@kernel.hyp(bot), t1072) {
+  let t1094 = @kernel.hyp(th_1)
+  if @lib.set_eq(@kernel.hyp(bot), t1094) {
     ()
   } else {
     raise @lib.AssertFailure("tscript.ml:1456:2")
   }
-  let t1073 = @parser.parse_term("F")
-  if @kernel.concl(bot) == t1073 {
+  let t1095 = @parser.parse_term("F")
+  if @kernel.concl(bot) == t1095 {
     ()
   } else {
     raise @lib.AssertFailure("tscript.ml:1457:2")
@@ -9620,9 +9602,9 @@ pub fn nanocop_deepen(
 ///|
 /// `PRINT_TAC`
 pub fn print_tac(
-  x1074 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+  x1096 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
 ) -> @tactics.Goalstate raise {
-  let g = x1074
+  let g = x1096
   if @firstorder.copverb().val {
     @tactics.print_goal(g)
   } else {
@@ -9634,11 +9616,11 @@ pub fn print_tac(
 ///|
 /// `PRINT_ID_TAC`
 pub fn print_id_tac(
-  x1075 : String,
-  x1076 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+  x1097 : String,
+  x1098 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
 ) -> @tactics.Goalstate raise {
-  let s = x1075
-  let g = x1076
+  let s = x1097
+  let g = x1098
   if @firstorder.copverb().val {
     @pp.print_string(s + "\n")
   } else {
@@ -9650,41 +9632,41 @@ pub fn print_id_tac(
 ///|
 /// `PREPARE_NANOCOP_TAC`
 pub fn prepare_nanocop_tac(
-  x1077 : @list.List[@kernel.Thm],
+  x1099 : @list.List[@kernel.Thm],
 ) -> @tactics.Tactic raise {
-  let ths = x1077
-  let t1085 = @tactics.repeat_tac(
+  let ths = x1099
+  let t1107 = @tactics.repeat_tac(
     @tactics.first_x_assum(@tactics.subst_var_tac),
   )
-  let t1082 = @equal.depth_conv(
+  let t1104 = @equal.depth_conv(
     @equal.changed_conv(@canon.assoc_conv(@theorems.conj_assoc())),
   )
-  let t1084 = @tactics.rule_assum_tac((x1083 : @kernel.Thm) => {
-    @equal.conv_rule(t1082, x1083)
+  let t1106 = @tactics.rule_assum_tac((x1105 : @kernel.Thm) => {
+    @equal.conv_rule(t1104, x1105)
   })
-  let t1079 = @equal.depth_conv(
+  let t1101 = @equal.depth_conv(
     @equal.changed_conv(@canon.assoc_conv(@theorems.disj_assoc())),
   )
-  let t1081 = @tactics.rule_assum_tac((x1080 : @kernel.Thm) => {
-    @equal.conv_rule(t1079, x1080)
+  let t1103 = @tactics.rule_assum_tac((x1102 : @kernel.Thm) => {
+    @equal.conv_rule(t1101, x1102)
   })
   @tactics.then_tac(
-    @tactics.then_tac(@tactics.then_tac(prepare_cop_tac(ths), t1081), t1084),
-    t1085,
+    @tactics.then_tac(@tactics.then_tac(prepare_cop_tac(ths), t1103), t1106),
+    t1107,
   )
 }
 
 ///|
 /// `PURE_NANOCOP`
 pub fn pure_nanocop(
-  x1086 : SearchOpts,
-  x1087 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+  x1108 : SearchOpts,
+  x1109 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
 ) -> @tactics.Goalstate raise {
-  let opt = x1086
-  let gl = x1087
+  let opt = x1108
+  let gl = x1109
   @tactics.orelse_tac(
     @tactics.first_assum(fn(
-      x1088 : @kernel.Thm,
+      x1110 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
         @list.List[@kernel.Term],
@@ -9704,9 +9686,9 @@ pub fn pure_nanocop(
         @list.List[@kernel.Thm],
       ) -> @kernel.Thm raise,
     ) raise) raise {
-      let s1089 = @tactics.contr_tac(x1088)
+      let s1111 = @tactics.contr_tac(x1110)
       fn(
-        x1090 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+        x1112 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
       ) -> (
         (
           @list.List[@kernel.Term],
@@ -9726,11 +9708,11 @@ pub fn pure_nanocop(
           @list.List[@kernel.Thm],
         ) -> @kernel.Thm raise,
       ) raise {
-        s1089(x1090)
+        s1111(x1112)
       }
     }),
     fn(
-      x1101 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+      x1123 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
     ) -> (
       (
         @list.List[@kernel.Term],
@@ -9751,7 +9733,7 @@ pub fn pure_nanocop(
       ) -> @kernel.Thm raise,
     ) raise {
       (fn(
-        x1100 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+        x1122 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
       ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
         (
           @list.List[@kernel.Term],
@@ -9772,7 +9754,7 @@ pub fn pure_nanocop(
         ) -> @kernel.Thm raise,
       ) raise) raise {
         (fn(
-          x1098 : @list.List[(String, @kernel.Thm)],
+          x1120 : @list.List[(String, @kernel.Thm)],
         ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
           (
             @list.List[@kernel.Term],
@@ -9793,7 +9775,7 @@ pub fn pure_nanocop(
           ) -> @kernel.Thm raise,
         ) raise) raise {
           (fn(
-            x1095 : @list.List[@kernel.Thm],
+            x1117 : @list.List[@kernel.Thm],
           ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
             (
               @list.List[@kernel.Term],
@@ -9814,7 +9796,7 @@ pub fn pure_nanocop(
             ) -> @kernel.Thm raise,
           ) raise) raise {
             (fn(
-              x1091 : @kernel.Thm,
+              x1113 : @kernel.Thm,
             ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
               (
                 @list.List[@kernel.Term],
@@ -9834,9 +9816,9 @@ pub fn pure_nanocop(
                 @list.List[@kernel.Thm],
               ) -> @kernel.Thm raise,
             ) raise) raise {
-              let s1092 = @tactics.accept_tac(x1091)
+              let s1114 = @tactics.accept_tac(x1113)
               fn(
-                x1093 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+                x1115 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
               ) -> (
                 (
                   @list.List[@kernel.Term],
@@ -9856,31 +9838,31 @@ pub fn pure_nanocop(
                   @list.List[@kernel.Thm],
                 ) -> @kernel.Thm raise,
               ) raise {
-                s1092(x1093)
+                s1114(x1115)
               }
             })(
-              ((x1094 : @list.List[@kernel.Thm]) => nanocop_deepen(opt, x1094))(
-                x1095,
+              ((x1116 : @list.List[@kernel.Thm]) => nanocop_deepen(opt, x1116))(
+                x1117,
               ),
             )
           })(
-            ((x1097 : @list.List[(String, @kernel.Thm)]) => {
+            ((x1119 : @list.List[(String, @kernel.Thm)]) => {
               @lib.map(
-                fn(x1096 : (String, @kernel.Thm)) -> @kernel.Thm raise {
-                  x1096.1
+                fn(x1118 : (String, @kernel.Thm)) -> @kernel.Thm raise {
+                  x1118.1
                 },
-                x1097,
+                x1119,
               )
-            })(x1098),
+            })(x1120),
           )
         })(
           (fn(
-            x1099 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+            x1121 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
           ) -> @list.List[(String, @kernel.Thm)] raise {
-            x1099.0
-          })(x1100),
+            x1121.0
+          })(x1122),
         )
-      })(x1101)(x1101)
+      })(x1123)(x1123)
     },
   )(gl)
 }
@@ -9888,31 +9870,31 @@ pub fn pure_nanocop(
 ///|
 /// `GEN_NANOCOP_TAC`
 pub fn gen_nanocop_tac(
-  x1102 : SearchOpts,
-  x1103 : @list.List[@kernel.Thm],
+  x1124 : SearchOpts,
+  x1125 : @list.List[@kernel.Thm],
 ) -> @tactics.Tactic raise {
-  let opt = x1102
-  let ths = x1103
+  let opt = x1124
+  let ths = x1125
   @tactics.then_tac(prepare_nanocop_tac(ths), (
-    x1105 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
-  ) => pure_nanocop(opt, x1105))
+    x1127 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+  ) => pure_nanocop(opt, x1127))
 }
 
 ///|
 /// `NANOCOP_TAC`
-pub fn nanocop_tac(x1106 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
-  let ths = x1106
+pub fn nanocop_tac(x1128 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
+  let ths = x1128
   gen_nanocop_tac(search_opts(), ths)
 }
 
 ///|
 /// `NANOCOP`
 pub fn nanocop(
-  x1108 : @list.List[@kernel.Thm],
-  x1109 : @kernel.Term,
+  x1130 : @list.List[@kernel.Thm],
+  x1131 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let ths = x1108
-  let tm = x1109
+  let ths = x1130
+  let tm = x1131
   @tactics.prove(tm, nanocop_tac(ths))
 }
 
@@ -9937,9 +9919,9 @@ pub fn leancop_tac_v1(x : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
 /// LEANCOP
 fn step_22() -> Unit raise {
   leancop_v1_c.set(fn(
-    x1110 : @list.List[@kernel.Thm],
+    x1132 : @list.List[@kernel.Thm],
   ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
-    fn(x1111 : @kernel.Term) -> @kernel.Thm raise { leancop(x1110, x1111) }
+    fn(x1133 : @kernel.Term) -> @kernel.Thm raise { leancop(x1132, x1133) }
   })
 }
 
@@ -9977,9 +9959,9 @@ pub fn nanocop_tac_v1(x : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
 /// NANOCOP
 fn step_24() -> Unit raise {
   nanocop_v1_c.set(fn(
-    x1112 : @list.List[@kernel.Thm],
+    x1134 : @list.List[@kernel.Thm],
   ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
-    fn(x1113 : @kernel.Term) -> @kernel.Thm raise { nanocop(x1112, x1113) }
+    fn(x1135 : @kernel.Term) -> @kernel.Thm raise { nanocop(x1134, x1135) }
   })
 }
 

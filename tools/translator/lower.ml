@@ -1745,8 +1745,14 @@ module Lower = struct
         (* the arguments are evaluated right to left *)
         let lowered = List.map (fun a -> let ss, x, _ = lower a in (ss, x)) rest in
         let partial = List.length rest < List.length convs in
+        (* with a flush (`%!`) the output is several calls: every argument
+           is evaluated before the first *)
+        let flushes =
+          let rec go i = i < String.length text - 1 && (if text.[i] = '%' then text.[i + 1] = '!' || go (i + 2) else go (i + 1)) in
+          go 0
+        in
         let stmts, xs =
-          if partial then
+          if partial || flushes then
             (* a partial application: the given arguments are evaluated now *)
             let hs = List.map hoist (List.rev lowered) in
             (List.concat_map fst hs, List.map snd hs)
@@ -2181,14 +2187,11 @@ module Lower = struct
     if List.exists (fun (_, p) -> match p with Some (pre, _) -> pre <> [] | None -> false) peeled then begin
       let prefixes = List.concat_map (fun (_, p) -> match p with Some (pre, _) -> pre | None -> []) peeled in
       if List.exists (fun (_, pvbs) -> mentions_group pvbs) prefixes then unsupported loc "recursive value whose set-up uses itself";
-      (* the set-ups and the values outside the group, in binding order *)
+      (* OCaml evaluates the values outside the group (dynamic bindings)
+         first, then the closures' set-ups, each in binding order *)
       let steps =
-        List.concat_map
-          (fun (vb, p) ->
-            match p with
-            | Some (pre, _) -> pre
-            | None -> if List.memq vb values then [ (Asttypes.Nonrecursive, [ vb ]) ] else [])
-          peeled
+        List.filter_map (fun (vb, p) -> if p = None && List.memq vb values then Some (Asttypes.Nonrecursive, [ vb ]) else None) peeled
+        @ prefixes
       in
       let vbs' =
         List.filter_map

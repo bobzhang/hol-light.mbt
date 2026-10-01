@@ -473,9 +473,10 @@ fn step_3() -> Unit raise {
         let n_1 = inc_vcounter(())
         if copverb().val {
           let t81 = @printer.string_of_type(@kernel.type_of(v))
+          let t82 = @printer.string_of_term(v)
           @pp.std_formatter.print_string(
             "fol_of_var: " +
-            @printer.string_of_term(v) +
+            t82 +
             " (ty = " +
             t81 +
             ") <- " +
@@ -497,11 +498,11 @@ fn step_3() -> Unit raise {
     }
   }
   let hol_of_var : (Int) -> ((@kernel.HolType) -> @kernel.Term raise) raise = fn(
-    x82 : Int,
+    x83 : Int,
   ) -> ((@kernel.HolType) -> @kernel.Term raise) raise {
-    let v_1 = x82
-    fn(x83 : @kernel.HolType) -> @kernel.Term raise {
-      let ty = x83
+    let v_1 = x83
+    fn(x84 : @kernel.HolType) -> @kernel.Term raise {
+      let ty = x84
       @lib.rev_assoc(v_1, gstore.val) catch {
         Failure(_) => {
           let gv = @basics.genvar(ty)
@@ -570,13 +571,13 @@ fn step_4() -> Unit raise {
 ///|
 /// `fol_of_term`
 pub fn fol_of_term(
-  x84 : @list.List[@kernel.Term],
   x85 : @list.List[@kernel.Term],
-  x86 : @kernel.Term,
+  x86 : @list.List[@kernel.Term],
+  x87 : @kernel.Term,
 ) -> @meson.FolTerm raise {
-  let env = x84
-  let consts = x85
-  let tm = x86
+  let env = x85
+  let consts = x86
+  let tm = x87
   if @kernel.is_var(tm) && !@lib.mem(tm, consts) {
     @meson.FolTerm::Fvar(fol_of_var(tm))
   } else {
@@ -587,7 +588,7 @@ pub fn fol_of_term(
       let ff = fol_of_const(f)
       @meson.FolTerm::Fnapp(
         ff,
-        @lib.map((x87 : @kernel.Term) => fol_of_term(env, consts, x87), args),
+        @lib.map((x88 : @kernel.Term) => fol_of_term(env, consts, x88), args),
       )
     }
   }
@@ -596,32 +597,32 @@ pub fn fol_of_term(
 ///|
 /// `fol_of_atom`
 pub fn fol_of_atom(
-  x88 : @list.List[@kernel.Term],
   x89 : @list.List[@kernel.Term],
-  x90 : @kernel.Term,
+  x90 : @list.List[@kernel.Term],
+  x91 : @kernel.Term,
 ) -> (Int, @list.List[@meson.FolTerm]) raise {
-  let env = x88
-  let consts = x89
-  let tm = x90
+  let env = x89
+  let consts = x90
+  let tm = x91
   let (f, args) = @basics.strip_comb(tm)
   if @lib.mem(f, env) {
     raise Failure("fol_of_atom: higher order")
   } else {
     let ff = fol_of_const(f)
-    (ff, @lib.map((x91 : @kernel.Term) => fol_of_term(env, consts, x91), args))
+    (ff, @lib.map((x92 : @kernel.Term) => fol_of_term(env, consts, x92), args))
   }
 }
 
 ///|
 /// `fol_of_literal`
 pub fn fol_of_literal(
-  x92 : @list.List[@kernel.Term],
   x93 : @list.List[@kernel.Term],
-  x94 : @kernel.Term,
+  x94 : @list.List[@kernel.Term],
+  x95 : @kernel.Term,
 ) -> (Int, @list.List[@meson.FolTerm]) raise {
-  let env = x92
-  let consts = x93
-  let tm = x94
+  let env = x93
+  let consts = x94
+  let tm = x95
   try {
     let tm_p = @basics.dest_neg(tm)
     let (p, a) = fol_of_atom(env, consts, tm_p)
@@ -635,13 +636,13 @@ pub fn fol_of_literal(
 ///|
 /// `fol_of_form`
 pub fn fol_of_form(
-  x95 : @list.List[@kernel.Term],
   x96 : @list.List[@kernel.Term],
-  x97 : @kernel.Term,
+  x97 : @list.List[@kernel.Term],
+  x98 : @kernel.Term,
 ) -> @meson.FolForm raise {
-  let env = x95
-  let consts = x96
-  let tm = x97
+  let env = x96
+  let consts = x97
+  let tm = x98
   try {
     let (v, bod) = @basics.dest_forall(tm)
     let fv = fol_of_var(v)
@@ -678,11 +679,11 @@ pub fn fol_of_form(
 ///|
 /// `hol_of_term`
 pub fn hol_of_term(
-  x98 : @kernel.HolType,
-  x99 : @meson.FolTerm,
+  x99 : @kernel.HolType,
+  x100 : @meson.FolTerm,
 ) -> @kernel.Term raise {
-  let ty = x98
-  let tm = x99
+  let ty = x99
+  let tm = x100
   match tm {
     @meson.FolTerm::Fvar(v) => hol_of_var(v)(ty)
     @meson.FolTerm::Fnapp(f, args) => hol_of_atom(f, args)
@@ -692,14 +693,14 @@ pub fn hol_of_term(
 ///|
 /// `hol_of_atom`
 pub fn hol_of_atom(
-  x100 : Int,
-  x101 : @list.List[@meson.FolTerm],
+  x101 : Int,
+  x102 : @list.List[@meson.FolTerm],
 ) -> @kernel.Term raise {
-  let (f_1, args_1) = (x100, x101)
+  let (f_1, args_1) = (x101, x102)
   let f_p = hol_of_const(f_1)
   let tys = @lib.splitlist(@basics.dest_fun_ty, @kernel.type_of(f_p)).0
-  let t102 = @lib.length(tys)
-  if @lib.length(args_1) <= t102 {
+  let t103 = @lib.length(tys)
+  if @lib.length(args_1) <= t103 {
     ()
   } else {
     raise @lib.AssertFailure("tscript.ml:217:4")
@@ -711,10 +712,10 @@ pub fn hol_of_atom(
 ///|
 /// `hol_of_literal`
 pub fn hol_of_literal(
-  x103 : Int,
-  x104 : @list.List[@meson.FolTerm],
+  x104 : Int,
+  x105 : @list.List[@meson.FolTerm],
 ) -> @kernel.Term raise {
-  let (p, args) = (x103, x104)
+  let (p, args) = (x104, x105)
   if p < 0 {
     @bool.mk_neg(hol_of_atom(0 - p, args))
   } else {
@@ -734,7 +735,7 @@ fn step_5() -> Unit raise {
       (Int, @kernel.Thm),
     ),
   ] raise = fn(
-    x113 : @kernel.Thm,
+    x114 : @kernel.Thm,
   ) -> @list.List[
     (
       (
@@ -744,18 +745,18 @@ fn step_5() -> Unit raise {
       (Int, @kernel.Thm),
     ),
   ] raise {
-    let th_1 = x113
+    let th_1 = x114
     let lconsts = @kernel.freesl(@kernel.hyp(th_1))
     let tm = @kernel.concl(th_1)
     let hlits = @basics.disjuncts(tm)
     let flits = @lib.map(
-      (x114 : @kernel.Term) => fol_of_literal(@list.empty(), lconsts, x114),
+      (x115 : @kernel.Term) => fol_of_literal(@list.empty(), lconsts, x115),
       hlits,
     )
     let basics = mk_contraposes_l(0, th_1, @list.empty(), flits, @list.empty())
     if @lib.forall(
-        fn(x115 : (Int, @list.List[@meson.FolTerm])) -> Bool raise {
-          let (p, _) = x115
+        fn(x116 : (Int, @list.List[@meson.FolTerm])) -> Bool raise {
+          let (p, _) = x116
           p < 0
         },
         flits,
@@ -765,9 +766,9 @@ fn step_5() -> Unit raise {
           (
             @lib.map(
               fn(
-                x116 : (Int, @list.List[@meson.FolTerm]),
+                x117 : (Int, @list.List[@meson.FolTerm]),
               ) -> (Int, @list.List[@meson.FolTerm]) raise {
-                @meson.mk_negated(x116.0, x116.1)
+                @meson.mk_negated(x117.0, x117.1)
               },
               flits,
             ),
@@ -781,7 +782,7 @@ fn step_5() -> Unit raise {
     }
   }
   fol_of_hol_clauses_c.set(fn(
-    x117 : @list.List[@kernel.Thm],
+    x118 : @list.List[@kernel.Thm],
   ) -> @list.List[
     (
       Int,
@@ -796,11 +797,11 @@ fn step_5() -> Unit raise {
       ],
     ),
   ] raise {
-    let thms = x117
+    let thms = x118
     let rawrules = @lib.itlist(
       fn(
-        x122 : @kernel.Thm,
-        x123 : @list.List[
+        x123 : @kernel.Thm,
+        x124 : @list.List[
           (
             (
               @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -819,7 +820,7 @@ fn step_5() -> Unit raise {
         ),
       ] raise {
         (fn(
-          x120 : @list.List[
+          x121 : @list.List[
             (
               (
                 @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -848,7 +849,7 @@ fn step_5() -> Unit raise {
           ),
         ] raise) raise {
           fn(
-            x121 : @list.List[
+            x122 : @list.List[
               (
                 (
                   @list.List[(Int, @list.List[@meson.FolTerm])],
@@ -867,15 +868,6 @@ fn step_5() -> Unit raise {
             ),
           ] raise {
             ((
-              x118 : @list.List[
-                (
-                  (
-                    @list.List[(Int, @list.List[@meson.FolTerm])],
-                    (Int, @list.List[@meson.FolTerm]),
-                  ),
-                  (Int, @kernel.Thm),
-                ),
-              ],
               x119 : @list.List[
                 (
                   (
@@ -885,9 +877,18 @@ fn step_5() -> Unit raise {
                   (Int, @kernel.Thm),
                 ),
               ],
-            ) => @lib.union_eq(eqt_l, x118, x119))(x120, x121)
+              x120 : @list.List[
+                (
+                  (
+                    @list.List[(Int, @list.List[@meson.FolTerm])],
+                    (Int, @list.List[@meson.FolTerm]),
+                  ),
+                  (Int, @kernel.Thm),
+                ),
+              ],
+            ) => @lib.union_eq(eqt_l, x119, x120))(x121, x122)
           }
-        })(fol_of_hol_clause(x122))(x123)
+        })(fol_of_hol_clause(x123))(x124)
       },
       thms,
       @list.empty(),
@@ -895,7 +896,7 @@ fn step_5() -> Unit raise {
     let prs = @lib.setify(
       @lib.map(
         fn(
-          x128 : (
+          x129 : (
             (
               @list.List[(Int, @list.List[@meson.FolTerm])],
               (Int, @list.List[@meson.FolTerm]),
@@ -904,26 +905,26 @@ fn step_5() -> Unit raise {
           ),
         ) -> Int raise {
           (fn(
-            x126 : (
+            x127 : (
               @list.List[(Int, @list.List[@meson.FolTerm])],
               (Int, @list.List[@meson.FolTerm]),
             ),
           ) -> Int raise {
-            (fn(x124 : (Int, @list.List[@meson.FolTerm])) -> Int raise {
-              x124.0
+            (fn(x125 : (Int, @list.List[@meson.FolTerm])) -> Int raise {
+              x125.0
             })(
               (fn(
-                x125 : (
+                x126 : (
                   @list.List[(Int, @list.List[@meson.FolTerm])],
                   (Int, @list.List[@meson.FolTerm]),
                 ),
               ) -> (Int, @list.List[@meson.FolTerm]) raise {
-                x125.1
-              })(x126),
+                x126.1
+              })(x127),
             )
           })(
             (fn(
-              x127 : (
+              x128 : (
                 (
                   @list.List[(Int, @list.List[@meson.FolTerm])],
                   (Int, @list.List[@meson.FolTerm]),
@@ -934,8 +935,8 @@ fn step_5() -> Unit raise {
               @list.List[(Int, @list.List[@meson.FolTerm])],
               (Int, @list.List[@meson.FolTerm]),
             ) raise {
-              x127.0
-            })(x128),
+              x128.0
+            })(x129),
           )
         },
         rawrules,
@@ -943,7 +944,7 @@ fn step_5() -> Unit raise {
     )
     let prules = @lib.map(
       fn(
-        x129 : Int,
+        x130 : Int,
       ) -> (
         Int,
         @list.List[
@@ -956,12 +957,12 @@ fn step_5() -> Unit raise {
           ),
         ],
       ) raise {
-        let t_1 = x129
+        let t_1 = x130
         (
           t_1,
           @lib.filter(
             fn(
-              x136 : (
+              x137 : (
                 (
                   @list.List[(Int, @list.List[@meson.FolTerm])],
                   (Int, @list.List[@meson.FolTerm]),
@@ -970,30 +971,30 @@ fn step_5() -> Unit raise {
               ),
             ) -> Bool raise {
               (fn(
-                x134 : (
+                x135 : (
                   @list.List[(Int, @list.List[@meson.FolTerm])],
                   (Int, @list.List[@meson.FolTerm]),
                 ),
               ) -> Bool raise {
-                (fn(x132 : (Int, @list.List[@meson.FolTerm])) -> Bool raise {
-                  (fn(x130 : Int) -> Bool raise { t_1 == x130 })(
-                    (fn(x131 : (Int, @list.List[@meson.FolTerm])) -> Int raise {
-                      x131.0
-                    })(x132),
+                (fn(x133 : (Int, @list.List[@meson.FolTerm])) -> Bool raise {
+                  (fn(x131 : Int) -> Bool raise { t_1 == x131 })(
+                    (fn(x132 : (Int, @list.List[@meson.FolTerm])) -> Int raise {
+                      x132.0
+                    })(x133),
                   )
                 })(
                   (fn(
-                    x133 : (
+                    x134 : (
                       @list.List[(Int, @list.List[@meson.FolTerm])],
                       (Int, @list.List[@meson.FolTerm]),
                     ),
                   ) -> (Int, @list.List[@meson.FolTerm]) raise {
-                    x133.1
-                  })(x134),
+                    x134.1
+                  })(x135),
                 )
               })(
                 (fn(
-                  x135 : (
+                  x136 : (
                     (
                       @list.List[(Int, @list.List[@meson.FolTerm])],
                       (Int, @list.List[@meson.FolTerm]),
@@ -1004,8 +1005,8 @@ fn step_5() -> Unit raise {
                   @list.List[(Int, @list.List[@meson.FolTerm])],
                   (Int, @list.List[@meson.FolTerm]),
                 ) raise {
-                  x135.0
-                })(x136),
+                  x136.0
+                })(x137),
               )
             },
             rawrules,
@@ -1016,18 +1017,6 @@ fn step_5() -> Unit raise {
     )
     let srules = @lib.sort(
       fn(
-        x137 : (
-          Int,
-          @list.List[
-            (
-              (
-                @list.List[(Int, @list.List[@meson.FolTerm])],
-                (Int, @list.List[@meson.FolTerm]),
-              ),
-              (Int, @kernel.Thm),
-            ),
-          ],
-        ),
         x138 : (
           Int,
           @list.List[
@@ -1040,11 +1029,23 @@ fn step_5() -> Unit raise {
             ),
           ],
         ),
+        x139 : (
+          Int,
+          @list.List[
+            (
+              (
+                @list.List[(Int, @list.List[@meson.FolTerm])],
+                (Int, @list.List[@meson.FolTerm]),
+              ),
+              (Int, @kernel.Thm),
+            ),
+          ],
+        ),
       ) -> Bool raise {
-        let (p_1, _) = x137
-        let (q, _) = x138
-        let t139 = @lib.abs_int(q)
-        @lib.abs_int(p_1) <= t139
+        let (p_1, _) = x138
+        let (q, _) = x139
+        let t140 = @lib.abs_int(q)
+        @lib.abs_int(p_1) <= t140
       },
       prules,
     )
@@ -1093,35 +1094,35 @@ pub fn fol_of_hol_clauses(
 
 ///|
 fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] eqt_l(
-  x105 : (TA, (TB, @kernel.Thm)),
   x106 : (TA, (TB, @kernel.Thm)),
+  x107 : (TA, (TB, @kernel.Thm)),
 ) -> Bool raise {
-  let (a1, (b1, c1)) = x105
-  let (a2, (b2, c2)) = x106
+  let (a1, (b1, c1)) = x106
+  let (a2, (b2, c2)) = x107
   a1 == a2 && b1 == b2 && @basics.equals_thm(c1, c2)
 }
 
 ///|
 fn[TC, TD] mk_contraposes_l(
-  x107 : Int,
-  x108 : TD,
-  x109 : @list.List[(Int, TC)],
+  x108 : Int,
+  x109 : TD,
   x110 : @list.List[(Int, TC)],
-  x111 : @list.List[((@list.List[(Int, TC)], (Int, TC)), (Int, TD))],
+  x111 : @list.List[(Int, TC)],
+  x112 : @list.List[((@list.List[(Int, TC)], (Int, TC)), (Int, TD))],
 ) -> @list.List[((@list.List[(Int, TC)], (Int, TC)), (Int, TD))] raise {
-  let n = x107
-  let th = x108
-  let used = x109
-  let unused = x110
-  let sofar = x111
+  let n = x108
+  let th = x109
+  let used = x110
+  let unused = x111
+  let sofar = x112
   match unused {
     Empty => sofar
     More(h, tail=t) => {
       let nw = (
         (
           @lib.map(
-            fn(x112 : (Int, TC)) -> (Int, TC) raise {
-              @meson.mk_negated(x112.0, x112.1)
+            fn(x113 : (Int, TC)) -> (Int, TC) raise {
+              @meson.mk_negated(x113.0, x113.1)
             },
             used.concat(t),
           ),

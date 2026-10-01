@@ -35131,8 +35131,9 @@ pub fn unify_fo_ho_term(
   let m = x5027
   if verb().val {
     let t5028 = @printer.string_of_term(tm)
+    let t5029 = tostring_v4(fat)
     @pp.std_formatter.print_string(
-      "unify_fo_ho_term: fat = " + tostring_v4(fat) + ", tm = " + t5028 + "\n",
+      "unify_fo_ho_term: fat = " + t5029 + ", tm = " + t5028 + "\n",
     )
     @pp.std_formatter.print_flush()
     ()
@@ -35189,18 +35190,14 @@ pub fn unify_fo_ho_term(
         e => raise e
       }
       if verb().val {
+        let t5030 = @printer.string_of_term(hf)
         {
-          @pp.std_formatter.print_string(
-            "hf = " + @printer.string_of_term(hf) + "\n",
-          )
+          @pp.std_formatter.print_string("hf = " + t5030 + "\n")
           @pp.std_formatter.print_flush()
           ()
         }
-        @pp.std_formatter.print_string(
-          "is_var: " +
-          (if @kernel.is_var(hf) { "true" } else { "false" }) +
-          "\n",
-        )
+        let t5031 = if @kernel.is_var(hf) { "true" } else { "false" }
+        @pp.std_formatter.print_string("is_var: " + t5031 + "\n")
         @pp.std_formatter.print_flush()
         ()
       } else {
@@ -35214,10 +35211,10 @@ pub fn unify_fo_ho_term(
       if hf == hol_of_const(@lib.int_of_string(f)) {
         @lib.itlist2(
           (
-            x5029 : Term,
-            x5030 : @kernel.Term,
-            x5031 : @list.List[(String, @kernel.Term)],
-          ) => unify_fo_ho_term(vars, x5029, x5030, x5031),
+            x5032 : Term,
+            x5033 : @kernel.Term,
+            x5034 : @list.List[(String, @kernel.Term)],
+          ) => unify_fo_ho_term(vars, x5032, x5033, x5034),
           args,
           hargs,
           m,
@@ -35232,24 +35229,24 @@ pub fn unify_fo_ho_term(
 ///|
 /// `unify_fo_ho_atom`
 pub fn unify_fo_ho_atom(
-  x5032 : @list.List[@kernel.Term],
-  x5033 : (String, @list.List[Term]),
-  x5034 : @kernel.Term,
-  x5035 : @list.List[(String, @kernel.Term)],
+  x5035 : @list.List[@kernel.Term],
+  x5036 : (String, @list.List[Term]),
+  x5037 : @kernel.Term,
+  x5038 : @list.List[(String, @kernel.Term)],
 ) -> @list.List[(Name, @kernel.Term)] raise {
-  let vars = x5032
-  let (p, args) = x5033
-  let htm = x5034
-  let m = x5035
+  let vars = x5035
+  let (p, args) = x5036
+  let htm = x5037
+  let m = x5038
   if p == "=" {
     try {
       let (hl, hr) = @kernel.dest_eq(htm)
       @lib.itlist2(
         (
-          x5036 : Term,
-          x5037 : @kernel.Term,
-          x5038 : @list.List[(String, @kernel.Term)],
-        ) => unify_fo_ho_term(vars, x5036, x5037, x5038),
+          x5039 : Term,
+          x5040 : @kernel.Term,
+          x5041 : @list.List[(String, @kernel.Term)],
+        ) => unify_fo_ho_term(vars, x5039, x5040, x5041),
         args,
         @list.List([hl, hr]),
         m,
@@ -35266,15 +35263,15 @@ pub fn unify_fo_ho_atom(
 ///|
 /// `unify_fo_ho_literal`
 pub fn unify_fo_ho_literal(
-  x5039 : @list.List[@kernel.Term],
-  x5040 : (Bool, (String, @list.List[Term])),
-  x5041 : @kernel.Term,
-  x5042 : @list.List[(String, @kernel.Term)],
+  x5042 : @list.List[@kernel.Term],
+  x5043 : (Bool, (String, @list.List[Term])),
+  x5044 : @kernel.Term,
+  x5045 : @list.List[(String, @kernel.Term)],
 ) -> @list.List[(Name, @kernel.Term)] raise {
-  let vars = x5039
-  let (pol, atom_1) = x5040
-  let htm = x5041
-  let m = x5042
+  let vars = x5042
+  let (pol, atom_1) = x5043
+  let htm = x5044
+  let m = x5045
   let htm_p = if pol {
     htm
   } else {
@@ -35289,17 +35286,17 @@ pub fn unify_fo_ho_literal(
 ///|
 /// `FRONT`
 pub fn front(
-  x5043 : @kernel.Term,
-  x5044 : @kernel.Thm,
+  x5046 : @kernel.Term,
+  x5047 : @kernel.Thm,
 ) -> (@kernel.Thm, @list.List[@kernel.Term]) raise {
-  let lit = x5043
-  let thm_1 = x5044
+  let lit = x5046
+  let thm_1 = x5047
   let conc = @kernel.concl(thm_1)
   let disj = @basics.disjuncts(@kernel.concl(thm_1))
   let rest = match
     @lib.partition(
-      fn(x5045 : @kernel.Term) -> Bool raise {
-        let l = x5045
+      fn(x5048 : @kernel.Term) -> Bool raise {
+        let l = x5048
         l == lit
       },
       disj,
@@ -35323,22 +35320,22 @@ fn step_231() -> Unit raise {
     @parser.parse_term("!a b c. a \\/ b ==> ~a \\/ c ==> b \\/ c"),
   )
   resolve_n_c.set(fn(
-    x5046 : @kernel.Term,
+    x5049 : @kernel.Term,
   ) -> (((@list.List[@kernel.Term], @list.List[@kernel.Term])) -> @kernel.Thm raise) raise {
-    let atom_1 = x5046
+    let atom_1 = x5049
     fn(
-      x5047 : (@list.List[@kernel.Term], @list.List[@kernel.Term]),
+      x5050 : (@list.List[@kernel.Term], @list.List[@kernel.Term]),
     ) -> @kernel.Thm raise {
-      match x5047 {
+      match x5050 {
         (Empty, Empty) => @bool.spec(atom_1, resolve_1)
         (r1, Empty) =>
           @bool.specl(@list.List([atom_1, @bool.list_mk_disj(r1)]), resolve_2l)
         (Empty, r2) =>
           @bool.specl(@list.List([atom_1, @bool.list_mk_disj(r2)]), resolve_2r)
         (r1_1, r2_1) => {
-          let t5048 = @bool.list_mk_disj(r2_1)
+          let t5051 = @bool.list_mk_disj(r2_1)
           @bool.specl(
-            @list.List([atom_1, @bool.list_mk_disj(r1_1), t5048]),
+            @list.List([atom_1, @bool.list_mk_disj(r1_1), t5051]),
             resolve_3,
           )
         }
@@ -35363,13 +35360,13 @@ pub fn resolve_n(
 ///|
 /// `RESOLVE`
 pub fn resolve_v2(
-  x5049 : @kernel.Term,
-  x5050 : @kernel.Thm,
-  x5051 : @kernel.Thm,
+  x5052 : @kernel.Term,
+  x5053 : @kernel.Thm,
+  x5054 : @kernel.Thm,
 ) -> @kernel.Thm raise {
-  let atom_1 = x5049
-  let th1 = x5050
-  let th2 = x5051
+  let atom_1 = x5052
+  let th1 = x5053
+  let th2 = x5054
   try {
     let (th1_p, r1) = front(atom_1, th1)
     let (th2_p, r2) = front(@bool.mk_neg(atom_1), th2)
@@ -35391,11 +35388,11 @@ fn step_232() -> Unit raise {
     @parser.parse_term("!a b.  a ==> b <=> ~a \\/ b"),
   )
   disch_disj_c.set(fn(
-    x5052 : @kernel.Term,
+    x5055 : @kernel.Term,
   ) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
-    let tm = x5052
-    fn(x5053 : @kernel.Thm) -> @kernel.Thm raise {
-      let th = x5053
+    let tm = x5055
+    fn(x5056 : @kernel.Thm) -> @kernel.Thm raise {
+      let th = x5056
       let impl_ = @bool.disch(tm, th)
       let (tm_p, impl_not) = (@basics.dest_neg(tm), impl_not_l) catch {
         Failure(_) => (tm, impl_not_r)
@@ -35423,15 +35420,15 @@ pub fn disch_disj(
 ///|
 /// `DISCH_DISJS`
 pub fn disch_disjs(
-  x5054 : @list.List[@kernel.Term],
-  x5055 : @kernel.Thm,
+  x5057 : @list.List[@kernel.Term],
+  x5058 : @kernel.Thm,
 ) -> @kernel.Thm raise {
-  let tms = x5054
-  let th = x5055
+  let tms = x5057
+  let th = x5058
   @lib.itlist(
-    fn(x5056 : @kernel.Term, x5057 : @kernel.Thm) -> @kernel.Thm raise {
-      let s5058 = disch_disj(x5056)
-      s5058(x5057)
+    fn(x5059 : @kernel.Term, x5060 : @kernel.Thm) -> @kernel.Thm raise {
+      let s5061 = disch_disj(x5059)
+      s5061(x5060)
     },
     tms,
     th,
@@ -35441,13 +35438,13 @@ pub fn disch_disjs(
 ///|
 /// `term_eq_mod_type`
 pub fn term_eq_mod_type(
-  x5059 : @kernel.Term,
-  x5060 : @kernel.Term,
-  x5061 : @list.List[(@kernel.HolType, @kernel.HolType)],
+  x5062 : @kernel.Term,
+  x5063 : @kernel.Term,
+  x5064 : @list.List[(@kernel.HolType, @kernel.HolType)],
 ) -> @list.List[(@kernel.HolType, @kernel.HolType)]? raise {
-  let t1 = x5059
-  let t2 = x5060
-  let tyinsts = x5061
+  let t1 = x5062
+  let t2 = x5063
+  let tyinsts = x5064
   try {
     let (_, tminsts, tyinsts_1) = @drule.term_type_unify(
       t1,
@@ -35455,22 +35452,20 @@ pub fn term_eq_mod_type(
       (@list.empty(), @list.empty(), tyinsts),
     )
     if metisverb().val {
+      let t5065 = @lib.length(tminsts)
       {
         @pp.std_formatter.print_string(
-          "unified with |tminsts| = " +
-          @lib.string_of_int(@lib.length(tminsts)) +
-          "!\n",
+          "unified with |tminsts| = " + @lib.string_of_int(t5065) + "!\n",
         )
         @pp.std_formatter.print_flush()
         ()
       }
       @lib.do_list(
-        fn(x5062 : (@kernel.Term, @kernel.Term)) -> Unit raise {
-          let (t1_1, t2_1) = x5062
-          let t5063 = @printer.string_of_term(t2_1)
-          @pp.std_formatter.print_string(
-            @printer.string_of_term(t1_1) + " <- " + t5063 + "\n",
-          )
+        fn(x5066 : (@kernel.Term, @kernel.Term)) -> Unit raise {
+          let (t1_1, t2_1) = x5066
+          let t5067 = @printer.string_of_term(t2_1)
+          let t5068 = @printer.string_of_term(t1_1)
+          @pp.std_formatter.print_string(t5068 + " <- " + t5067 + "\n")
           @pp.std_formatter.print_flush()
           ()
         },
@@ -35493,20 +35488,20 @@ pub fn term_eq_mod_type(
 ///|
 /// `match_elems`
 pub fn[TA, TB, TC] match_elems(
-  x5064 : (TC) -> ((TB) -> ((TA) -> TA? raise) raise) raise,
-  x5065 : TA,
-  x5066 : (@list.List[TC], @list.List[TB]),
+  x5069 : (TC) -> ((TB) -> ((TA) -> TA? raise) raise) raise,
+  x5070 : TA,
+  x5071 : (@list.List[TC], @list.List[TB]),
 ) -> @list.List[TA] raise {
-  let f = x5064
-  let m = x5065
-  match x5066 {
+  let f = x5069
+  let m = x5070
+  match x5071 {
     (Empty, Empty) => @list.List([m])
     (Empty, _) => @list.empty()
     (More(x, tail=xs), ys) =>
       @lib.op_bar_gt(
         @lib.map(
-          fn(x5067 : TB) -> @list.List[TA] raise {
-            let y = x5067
+          fn(x5072 : TB) -> @list.List[TA] raise {
+            let y = x5072
             match f(x)(y)(m) {
               Some(m_p) =>
                 match_elems(
@@ -35515,7 +35510,7 @@ pub fn[TA, TB, TC] match_elems(
                   (
                     xs,
                     @lib.list_filter(
-                      fn(x5068 : TB) -> Bool raise { !physical_equal(y, x5068) },
+                      fn(x5073 : TB) -> Bool raise { !physical_equal(y, x5073) },
                       ys,
                     ),
                   ),
@@ -35525,8 +35520,8 @@ pub fn[TA, TB, TC] match_elems(
           },
           ys,
         ),
-        fn(x5069 : @list.List[@list.List[TA]]) -> @list.List[TA] raise {
-          @lib.flat(x5069)
+        fn(x5074 : @list.List[@list.List[TA]]) -> @list.List[TA] raise {
+          @lib.flat(x5074)
         },
       )
   }
@@ -35535,34 +35530,34 @@ pub fn[TA, TB, TC] match_elems(
 ///|
 /// `match_fo_ho_clause`
 pub fn match_fo_ho_clause(
-  x5070 : @list.List[@kernel.Term],
+  x5075 : @list.List[@kernel.Term],
 ) -> (((@list.List[(Bool, (Name, @list.List[Term]))], @list.List[@kernel.Term])) -> @list.List[
   @list.List[(Name, @kernel.Term)],
 ] raise) raise {
-  let vars = x5070
+  let vars = x5075
   (
-    x5075 : (
+    x5080 : (
       @list.List[(Bool, (String, @list.List[Term]))],
       @list.List[@kernel.Term],
     ),
   ) => {
     match_elems(
       fn(
-        x5072 : (Bool, (String, @list.List[Term])),
+        x5077 : (Bool, (String, @list.List[Term])),
       ) -> ((@kernel.Term) -> ((@list.List[(String, @kernel.Term)]) -> @list.List[
         (String, @kernel.Term),
       ]? raise) raise) raise {
-        let ft = x5072
+        let ft = x5077
         fn(
-          x5073 : @kernel.Term,
+          x5078 : @kernel.Term,
         ) -> ((@list.List[(String, @kernel.Term)]) -> @list.List[
           (String, @kernel.Term),
         ]? raise) raise {
-          let ht = x5073
+          let ht = x5078
           fn(
-            x5074 : @list.List[(String, @kernel.Term)],
+            x5079 : @list.List[(String, @kernel.Term)],
           ) -> @list.List[(String, @kernel.Term)]? raise {
-            let m = x5074
+            let m = x5079
             Some(unify_fo_ho_literal(vars, ft, ht, m)) catch {
               Unify::Unify => None
               e => raise e
@@ -35571,7 +35566,7 @@ pub fn match_fo_ho_clause(
         }
       },
       @list.empty(),
-      x5075,
+      x5080,
     )
   }
 }
@@ -35580,21 +35575,21 @@ pub fn match_fo_ho_clause(
 /// string_of_tminst
 fn step_233() -> Unit raise {
   string_of_tminst_c.set(fn(
-    x5080 : @list.List[(@kernel.Term, @kernel.Term)],
+    x5085 : @list.List[(@kernel.Term, @kernel.Term)],
   ) -> String raise {
-    (fn(x5076 : @list.List[String]) -> String raise {
-      @lib.string_concat(", ", x5076)
+    (fn(x5081 : @list.List[String]) -> String raise {
+      @lib.string_concat(", ", x5081)
     })(
-      ((x5079 : @list.List[(@kernel.Term, @kernel.Term)]) => {
+      ((x5084 : @list.List[(@kernel.Term, @kernel.Term)]) => {
         @lib.map(
-          fn(x5077 : (@kernel.Term, @kernel.Term)) -> String raise {
-            let (tm, v) = x5077
-            let t5078 = " <- " + @printer.string_of_term(v)
-            @printer.string_of_term(tm) + t5078
+          fn(x5082 : (@kernel.Term, @kernel.Term)) -> String raise {
+            let (tm, v) = x5082
+            let t5083 = " <- " + @printer.string_of_term(v)
+            @printer.string_of_term(tm) + t5083
           },
-          x5079,
+          x5084,
         )
-      })(x5080),
+      })(x5085),
     )
   })
 }
@@ -35616,21 +35611,21 @@ pub fn string_of_tminst(
 /// string_of_tyinst
 fn step_234() -> Unit raise {
   string_of_tyinst_c.set(fn(
-    x5085 : @list.List[(@kernel.HolType, @kernel.HolType)],
+    x5090 : @list.List[(@kernel.HolType, @kernel.HolType)],
   ) -> String raise {
-    (fn(x5081 : @list.List[String]) -> String raise {
-      @lib.string_concat(", ", x5081)
+    (fn(x5086 : @list.List[String]) -> String raise {
+      @lib.string_concat(", ", x5086)
     })(
-      ((x5084 : @list.List[(@kernel.HolType, @kernel.HolType)]) => {
+      ((x5089 : @list.List[(@kernel.HolType, @kernel.HolType)]) => {
         @lib.map(
-          fn(x5082 : (@kernel.HolType, @kernel.HolType)) -> String raise {
-            let (ty, v) = x5082
-            let t5083 = " <- " + @printer.string_of_type(v)
-            @printer.string_of_type(ty) + t5083
+          fn(x5087 : (@kernel.HolType, @kernel.HolType)) -> String raise {
+            let (ty, v) = x5087
+            let t5088 = " <- " + @printer.string_of_type(v)
+            @printer.string_of_type(ty) + t5088
           },
-          x5084,
+          x5089,
         )
-      })(x5085),
+      })(x5090),
     )
   })
 }
@@ -35651,28 +35646,28 @@ pub fn string_of_tyinst(
 ///|
 /// `string_of_instantiation`
 pub fn[TA] string_of_instantiation(
-  x5086 : TA,
-  x5087 : @list.List[(@kernel.Term, @kernel.Term)],
-  x5088 : @list.List[(@kernel.HolType, @kernel.HolType)],
+  x5091 : TA,
+  x5092 : @list.List[(@kernel.Term, @kernel.Term)],
+  x5093 : @list.List[(@kernel.HolType, @kernel.HolType)],
 ) -> String raise {
-  let (it, tminst, tyinst) = (x5086, x5087, x5088)
-  let t5089 = "], [" + (string_of_tyinst(tyinst) + "])")
-  "([" + (string_of_tminst(tminst) + t5089)
+  let (it, tminst, tyinst) = (x5091, x5092, x5093)
+  let t5094 = "], [" + (string_of_tyinst(tyinst) + "])")
+  "([" + (string_of_tminst(tminst) + t5094)
 }
 
 ///|
 /// `reorient_tysubst`
 pub fn reorient_tysubst(
-  x5090 : @list.List[@kernel.HolType],
-  x5091 : @list.List[(@kernel.HolType, @kernel.HolType)],
+  x5095 : @list.List[@kernel.HolType],
+  x5096 : @list.List[(@kernel.HolType, @kernel.HolType)],
 ) -> @list.List[(@kernel.HolType, @kernel.HolType)] raise {
-  let vars = x5090
-  let sub = x5091
+  let vars = x5095
+  let sub = x5096
   let sub_p = @lib.map(
     fn(
-      x5092 : (@kernel.HolType, @kernel.HolType),
+      x5097 : (@kernel.HolType, @kernel.HolType),
     ) -> (@kernel.HolType, @kernel.HolType) raise {
-      let (ty, v) = x5092
+      let (ty, v) = x5097
       if @lib.mem(v, vars) && @kernel.is_vartype(ty) {
         (v, ty)
       } else {
@@ -35683,9 +35678,9 @@ pub fn reorient_tysubst(
   )
   @lib.map(
     fn(
-      x5093 : (@kernel.HolType, @kernel.HolType),
+      x5098 : (@kernel.HolType, @kernel.HolType),
     ) -> (@kernel.HolType, @kernel.HolType) raise {
-      let (ty_1, v_1) = x5093
+      let (ty_1, v_1) = x5098
       (@basics.tysubst(sub_p, ty_1), v_1)
     },
     sub_p,
@@ -35695,13 +35690,14 @@ pub fn reorient_tysubst(
 ///|
 /// `hol_of_thm`
 pub fn hol_of_thm(
-  x5094 : @list.List[@kernel.Thm],
-  x5095 : Thm,
+  x5099 : @list.List[@kernel.Thm],
+  x5100 : Thm,
 ) -> @kernel.Thm raise {
-  let axioms = x5094
-  let fth = x5095
+  let axioms = x5099
+  let fth = x5100
   if metisverb().val {
-    @pp.std_formatter.print_string("hol_of_thm: " + tostring_v8(fth) + "\n")
+    let t5101 = tostring_v8(fth)
+    @pp.std_formatter.print_string("hol_of_thm: " + t5101 + "\n")
     @pp.std_formatter.print_flush()
     ()
   } else {
@@ -35713,19 +35709,19 @@ pub fn hol_of_thm(
       let clausel = tolist_v16(clause_1)
       let maxs = @firstorder.concat_map(
         fn(
-          x5096 : @kernel.Thm,
+          x5102 : @kernel.Thm,
         ) -> @list.List[(@list.List[(String, @kernel.Term)], @kernel.Thm)] raise {
-          let ax = x5096
-          let disjs = @lib.op_bar_gt(@kernel.concl(ax), (x5097 : @kernel.Term) => {
-            @lib.striplist(@basics.dest_disj, x5097)
+          let ax = x5102
+          let disjs = @lib.op_bar_gt(@kernel.concl(ax), (x5103 : @kernel.Term) => {
+            @lib.striplist(@basics.dest_disj, x5103)
           })
           let tmvars = @kernel.freesl(@kernel.hyp(ax))
           let ms = match_fo_ho_clause(tmvars)((clausel, disjs))
           @lib.map(
             fn(
-              x5098 : @list.List[(String, @kernel.Term)],
+              x5104 : @list.List[(String, @kernel.Term)],
             ) -> (@list.List[(String, @kernel.Term)], @kernel.Thm) raise {
-              let m = x5098
+              let m = x5104
               (m, ax)
             },
             ms,
@@ -35740,21 +35736,22 @@ pub fn hol_of_thm(
       }
       let tminst : (@list.List[(String, @kernel.Term)]) -> @list.List[
         (@kernel.Term, @kernel.Term),
-      ] raise = x5101 => {
+      ] raise = x5107 => {
         @lib.map(
           fn(
-            x5099 : (String, @kernel.Term),
+            x5105 : (String, @kernel.Term),
           ) -> (@kernel.Term, @kernel.Term) raise {
-            let (v, tm) = x5099
-            let t5100 = @kernel.type_of(tm)
-            (@kernel.mk_var(prefix_v1(v), t5100), tm)
+            let (v, tm) = x5105
+            let t5106 = @kernel.type_of(tm)
+            (@kernel.mk_var(prefix_v1(v), t5106), tm)
           },
-          x5101,
+          x5107,
         )
       }
       if metisverb().val {
+        let t5108 = @lib.length(maxs)
         @pp.std_formatter.print_string(
-          "length maxs = " + @lib.string_of_int(@lib.length(maxs)) + "\n",
+          "length maxs = " + @lib.string_of_int(t5108) + "\n",
         )
         @pp.std_formatter.print_flush()
         ()
@@ -35764,16 +35761,13 @@ pub fn hol_of_thm(
       if metisverb().val {
         @lib.do_list(
           fn(
-            x5102 : (@list.List[(String, @kernel.Term)], @kernel.Thm),
+            x5109 : (@list.List[(String, @kernel.Term)], @kernel.Thm),
           ) -> Unit raise {
-            let (m_1, ax_1) = x5102
-            let t5103 = string_of_tminst(tminst(m_1))
+            let (m_1, ax_1) = x5109
+            let t5110 = string_of_tminst(tminst(m_1))
+            let t5111 = @printer.string_of_thm(ax_1)
             @pp.std_formatter.print_string(
-              "max: " +
-              @printer.string_of_thm(ax_1) +
-              " with m = " +
-              t5103 +
-              "\n",
+              "max: " + t5111 + " with m = " + t5110 + "\n",
             )
             @pp.std_formatter.print_flush()
             ()
@@ -35789,9 +35783,8 @@ pub fn hol_of_thm(
     Inference1::Subst(fsub, fth1) => {
       let th1 = hol_of_thm(axioms, fth1)
       if metisverb().val {
-        @pp.std_formatter.print_string(
-          "subst with th1 = " + @printer.string_of_thm(th1) + "\n",
-        )
+        let t5112 = @printer.string_of_thm(th1)
+        @pp.std_formatter.print_string("subst with th1 = " + t5112 + "\n")
         @pp.std_formatter.print_flush()
         ()
       } else {
@@ -35805,21 +35798,20 @@ pub fn hol_of_thm(
       } else {
         ()
       }
-      let t5105 = hol_of_substitution(env)
+      let t5114 = hol_of_substitution(env)
       let hsub = @lib.op_bar_gt(
         @lib.map(
-          fn(x5104 : (String, Term)) -> (Term, Term) raise {
-            let (v_1, t) = x5104
+          fn(x5113 : (String, Term)) -> (Term, Term) raise {
+            let (v_1, t) = x5113
             (t, Term::Var(v_1))
           },
           fsubl,
         ),
-        t5105,
+        t5114,
       )
       if metisverb().val {
-        @pp.std_formatter.print_string(
-          "subst: " + string_of_tminst(hsub) + "\n",
-        )
+        let t5115 = string_of_tminst(hsub)
+        @pp.std_formatter.print_string("subst: " + t5115 + "\n")
         @pp.std_formatter.print_flush()
         ()
       } else {
@@ -35827,43 +35819,40 @@ pub fn hol_of_thm(
       }
       let tyinst = @lib.itlist(
         fn(
-          x5106 : (@kernel.Term, @kernel.Term),
-          x5107 : @list.List[(@kernel.HolType, @kernel.HolType)],
+          x5116 : (@kernel.Term, @kernel.Term),
+          x5117 : @list.List[(@kernel.HolType, @kernel.HolType)],
         ) -> @list.List[(@kernel.HolType, @kernel.HolType)] raise {
-          let (t_1, v_2) = x5106
-          let m_3 = x5107
+          let (t_1, v_2) = x5116
+          let m_3 = x5117
           let v_p_1 = @lib.find(
-            fn(x5108 : @kernel.Term) -> Bool raise {
-              let v_p = x5108
-              let t5109 = @printer.name_of(v_2)
-              @printer.name_of(v_p) == t5109
+            fn(x5118 : @kernel.Term) -> Bool raise {
+              let v_p = x5118
+              let t5119 = @printer.name_of(v_2)
+              @printer.name_of(v_p) == t5119
             },
             @kernel.frees(@kernel.concl(th1)),
           )
-          let t5110 = @kernel.type_of(v_p_1)
-          @drule.type_unify(@kernel.type_of(v_2), t5110, m_3)
+          let t5120 = @kernel.type_of(v_p_1)
+          @drule.type_unify(@kernel.type_of(v_2), t5120, m_3)
         },
         hsub,
         @list.empty(),
       )
       let tminst_1 = @lib.map(
         fn(
-          x5111 : (@kernel.Term, @kernel.Term),
+          x5121 : (@kernel.Term, @kernel.Term),
         ) -> (@kernel.Term, @kernel.Term) raise {
-          let (t_2, v_3) = x5111
-          let t5112 = @kernel.inst(tyinst, v_3)
-          (@kernel.inst(tyinst, t_2), t5112)
+          let (t_2, v_3) = x5121
+          let t5122 = @kernel.inst(tyinst, v_3)
+          (@kernel.inst(tyinst, t_2), t5122)
         },
         hsub,
       )
       if metisverb().val {
-        let t5113 = string_of_instantiation(@list.empty(), tminst_1, tyinst)
+        let t5123 = string_of_instantiation(@list.empty(), tminst_1, tyinst)
+        let t5124 = @printer.string_of_thm(th1)
         @pp.std_formatter.print_string(
-          "before instantiate of th1 = " +
-          @printer.string_of_thm(th1) +
-          " with " +
-          t5113 +
-          "\n",
+          "before instantiate of th1 = " + t5124 + " with " + t5123 + "\n",
         )
         @pp.std_formatter.print_flush()
         ()
@@ -35878,14 +35867,10 @@ pub fn hol_of_thm(
       let env_1 = env_of_ths(@list.List([th1_1, th2])).concat(env)
       if metisverb().val {
         @lib.do_list(
-          fn(x5114 : (String, @preterm.Pretype)) -> Unit raise {
-            let (s, pty) = x5114
-            @pp.std_formatter.print_string(
-              s +
-              " <- " +
-              @printer.string_of_type(@preterm.type_of_pretype(pty)) +
-              "\n",
-            )
+          fn(x5125 : (String, @preterm.Pretype)) -> Unit raise {
+            let (s, pty) = x5125
+            let t5126 = @printer.string_of_type(@preterm.type_of_pretype(pty))
+            @pp.std_formatter.print_string(s + " <- " + t5126 + "\n")
             @pp.std_formatter.print_flush()
             ()
           },
@@ -35902,18 +35887,16 @@ pub fn hol_of_thm(
         ()
       }
       if metisverb().val {
-        @pp.std_formatter.print_string(
-          "th1 = " + @printer.string_of_thm(th1_1) + "\n",
-        )
+        let t5127 = @printer.string_of_thm(th1_1)
+        @pp.std_formatter.print_string("th1 = " + t5127 + "\n")
         @pp.std_formatter.print_flush()
         ()
       } else {
         ()
       }
       if metisverb().val {
-        @pp.std_formatter.print_string(
-          "th2 = " + @printer.string_of_thm(th2) + "\n",
-        )
+        let t5128 = @printer.string_of_thm(th2)
+        @pp.std_formatter.print_string("th2 = " + t5128 + "\n")
         @pp.std_formatter.print_flush()
         ()
       } else {
@@ -35921,36 +35904,36 @@ pub fn hol_of_thm(
       }
       let tm1 = @lib.op_bar_gt(
         @lib.striplist(@basics.dest_disj, @kernel.concl(th1_1)),
-        x5118 => {
+        x5132 => {
           @lib.list_filter(
-            fn(x5117 : @kernel.Term) -> Bool raise {
-              (fn(x5115 : Bool) -> Bool raise { !x5115 })(
-                (fn(x5116 : @kernel.Term) -> Bool raise {
-                  @basics.is_neg(x5116)
-                })(x5117),
+            fn(x5131 : @kernel.Term) -> Bool raise {
+              (fn(x5129 : Bool) -> Bool raise { !x5129 })(
+                (fn(x5130 : @kernel.Term) -> Bool raise {
+                  @basics.is_neg(x5130)
+                })(x5131),
               )
             },
-            x5118,
+            x5132,
           )
         },
       )
       let tm2 = @lib.op_bar_gt(
-        @lib.op_bar_gt(@lib.striplist(@basics.dest_disj, @kernel.concl(th2)), x5120 => {
+        @lib.op_bar_gt(@lib.striplist(@basics.dest_disj, @kernel.concl(th2)), x5134 => {
           @lib.list_filter(
-            fn(x5119 : @kernel.Term) -> Bool raise { @basics.is_neg(x5119) },
-            x5120,
+            fn(x5133 : @kernel.Term) -> Bool raise { @basics.is_neg(x5133) },
+            x5134,
           )
         }),
-        x5121 => @lib.map(@basics.dest_neg, x5121),
+        x5135 => @lib.map(@basics.dest_neg, x5135),
       )
       if metisverb().val {
         @lib.do_list(
-          fn(x5123 : @kernel.Term) -> Unit raise {
-            ((x5122 : String) => {
-              @pp.std_formatter.print_string("tm1: " + x5122 + "\n")
+          fn(x5137 : @kernel.Term) -> Unit raise {
+            ((x5136 : String) => {
+              @pp.std_formatter.print_string("tm1: " + x5136 + "\n")
               @pp.std_formatter.print_flush()
               ()
-            })(@printer.string_of_term(x5123))
+            })(@printer.string_of_term(x5137))
           },
           tm1,
         )
@@ -35959,12 +35942,12 @@ pub fn hol_of_thm(
       }
       if metisverb().val {
         @lib.do_list(
-          fn(x5125 : @kernel.Term) -> Unit raise {
-            ((x5124 : String) => {
-              @pp.std_formatter.print_string("tm2: " + x5124 + "\n")
+          fn(x5139 : @kernel.Term) -> Unit raise {
+            ((x5138 : String) => {
+              @pp.std_formatter.print_string("tm2: " + x5138 + "\n")
               @pp.std_formatter.print_flush()
               ()
-            })(@printer.string_of_term(x5125))
+            })(@printer.string_of_term(x5139))
           },
           tm2,
         )
@@ -35973,9 +35956,8 @@ pub fn hol_of_thm(
       }
       let hatom = hol_of_atom(env_1)(atom_1)
       if metisverb().val {
-        @pp.std_formatter.print_string(
-          "hatom: " + @printer.string_of_term(hatom) + "\n",
-        )
+        let t5140 = @printer.string_of_term(hatom)
+        @pp.std_formatter.print_string("hatom: " + t5140 + "\n")
         @pp.std_formatter.print_flush()
         ()
       } else {
@@ -35983,17 +35965,17 @@ pub fn hol_of_thm(
       }
       let cands = @firstorder.concat_map(
         fn(
-          x5126 : @kernel.Term,
+          x5141 : @kernel.Term,
         ) -> @list.List[@list.List[(@kernel.HolType, @kernel.HolType)]] raise {
-          let x = x5126
+          let x = x5141
           match term_eq_mod_type(hatom, x, @list.empty()) {
             None => @list.empty()
             Some(m_4) =>
               @firstorder.filter_map(
                 fn(
-                  x5127 : @kernel.Term,
+                  x5142 : @kernel.Term,
                 ) -> @list.List[(@kernel.HolType, @kernel.HolType)]? raise {
-                  let y = x5127
+                  let y = x5142
                   term_eq_mod_type(hatom, y, m_4)
                 },
                 tm2,
@@ -36003,8 +35985,9 @@ pub fn hol_of_thm(
         tm1,
       )
       if metisverb().val {
+        let t5143 = @lib.length(cands)
         @pp.std_formatter.print_string(
-          @lib.string_of_int(@lib.length(cands)) + " candidates available\n",
+          @lib.string_of_int(t5143) + " candidates available\n",
         )
         @pp.std_formatter.print_flush()
         ()
@@ -36019,9 +36002,9 @@ pub fn hol_of_thm(
       let h = @lib.hd(cands)
       if @lib.forall(
           fn(
-            x5128 : @list.List[(@kernel.HolType, @kernel.HolType)],
+            x5144 : @list.List[(@kernel.HolType, @kernel.HolType)],
           ) -> Bool raise {
-            h == x5128
+            h == x5144
           },
           cands,
         ) {
@@ -36034,30 +36017,30 @@ pub fn hol_of_thm(
         @lib.op_bar_gt(
           @lib.op_bar_gt(
             @lib.map(
-              fn(x5129 : @kernel.Thm) -> @list.List[@kernel.Term] raise {
-                @kernel.hyp(x5129)
+              fn(x5145 : @kernel.Thm) -> @list.List[@kernel.Term] raise {
+                @kernel.hyp(x5145)
               },
               axioms,
             ),
             fn(
-              x5130 : @list.List[@list.List[@kernel.Term]],
+              x5146 : @list.List[@list.List[@kernel.Term]],
             ) -> @list.List[@kernel.Term] raise {
-              @lib.flat(x5130)
+              @lib.flat(x5146)
             },
           ),
-          (x5132 : @list.List[@kernel.Term]) => {
+          (x5148 : @list.List[@kernel.Term]) => {
             @lib.map(
-              fn(x5131 : @kernel.Term) -> @list.List[@kernel.HolType] raise {
-                @kernel.type_vars_in_term(x5131)
+              fn(x5147 : @kernel.Term) -> @list.List[@kernel.HolType] raise {
+                @kernel.type_vars_in_term(x5147)
               },
-              x5132,
+              x5148,
             )
           },
         ),
         fn(
-          x5133 : @list.List[@list.List[@kernel.HolType]],
+          x5149 : @list.List[@list.List[@kernel.HolType]],
         ) -> @list.List[@kernel.HolType] raise {
-          @lib.flat(x5133)
+          @lib.flat(x5149)
         },
       )
       if metisverb().val {
@@ -36075,9 +36058,9 @@ pub fn hol_of_thm(
       } else {
         ()
       }
-      let t5134 = @kernel.inst_type(tyinsts_1, th2)
-      let t5135 = @kernel.inst_type(tyinsts_1, th1_1)
-      resolve_v2(@kernel.inst(tyinsts_1, hatom), t5135, t5134)
+      let t5150 = @kernel.inst_type(tyinsts_1, th2)
+      let t5151 = @kernel.inst_type(tyinsts_1, th1_1)
+      resolve_v2(@kernel.inst(tyinsts_1, hatom), t5151, t5150)
     }
     Inference1::Refl(term) => @kernel.refl(hol_of_term(env)(term))
     Inference1::Assume(atom_2) =>
@@ -36087,33 +36070,33 @@ pub fn hol_of_thm(
       let (fs, hpath) = hol_of_literal_path(flit, fpath)
       let hs = @basics.follow_path(hpath, hlit)
       let ht = hol_of_term(env)(ft)
-      let t5136 = @kernel.type_of(hs)
-      let m_5 = @drule.type_unify(@kernel.type_of(ht), t5136, @list.empty())
-      let t5137 = @kernel.inst(m_5, ht)
-      let t5138 = @kernel.inst(m_5, hs)
-      let (hlit_1, hs_1, ht_1) = (@kernel.inst(m_5, hlit), t5138, t5137)
+      let t5152 = @kernel.type_of(hs)
+      let m_5 = @drule.type_unify(@kernel.type_of(ht), t5152, @list.empty())
+      let t5153 = @kernel.inst(m_5, ht)
+      let t5154 = @kernel.inst(m_5, hs)
+      let (hlit_1, hs_1, ht_1) = (@kernel.inst(m_5, hlit), t5154, t5153)
       if metisverb().val {
-        let t5139 = @printer.string_of_type(@kernel.type_of(ht_1))
-        let t5140 = @printer.string_of_term(ht_1)
-        let t5141 = @printer.string_of_type(@kernel.type_of(hs_1))
+        let t5155 = @printer.string_of_type(@kernel.type_of(ht_1))
+        let t5156 = @printer.string_of_term(ht_1)
+        let t5157 = @printer.string_of_type(@kernel.type_of(hs_1))
+        let t5158 = @printer.string_of_term(hs_1)
         {
           @pp.std_formatter.print_string(
             "Trying to replace " +
-            @printer.string_of_term(hs_1) +
+            t5158 +
             " : " +
-            t5141 +
+            t5157 +
             " with " +
-            t5140 +
+            t5156 +
             " : " +
-            t5139 +
+            t5155 +
             "\n",
           )
           @pp.std_formatter.print_flush()
           ()
         }
-        @pp.std_formatter.print_string(
-          "In " + @printer.string_of_term(hlit_1) + "\n",
-        )
+        let t5159 = @printer.string_of_term(hlit_1)
+        @pp.std_formatter.print_string("In " + t5159 + "\n")
         @pp.std_formatter.print_flush()
         ()
       } else {
@@ -36126,13 +36109,10 @@ pub fn hol_of_thm(
       )
       let hlit_p = @equal.conv_rule(conv, @kernel.assume_rule(hlit_1))
       if metisverb().val {
-        let t5142 = @printer.string_of_thm(hlit_p)
+        let t5160 = @printer.string_of_thm(hlit_p)
+        let t5161 = @printer.string_of_term(hlit_1)
         @pp.std_formatter.print_string(
-          "hlit = " +
-          @printer.string_of_term(hlit_1) +
-          ", hlit' = " +
-          t5142 +
-          "\n",
+          "hlit = " + t5161 + ", hlit' = " + t5160 + "\n",
         )
         @pp.std_formatter.print_flush()
         ()
@@ -36161,15 +36141,12 @@ pub fn hol_of_thm(
       @pp.std_formatter.print_flush()
       ()
     }
-    let t5143 = hol_of_clause(env)
-    let hth_p = @lib.op_bar_gt(@lib.op_bar_gt(clause(fth), tolist_v16), t5143)
-    let t5144 = @printer.string_of_term(hth_p)
+    let t5162 = hol_of_clause(env)
+    let hth_p = @lib.op_bar_gt(@lib.op_bar_gt(clause(fth), tolist_v16), t5162)
+    let t5163 = @printer.string_of_term(hth_p)
+    let t5164 = @printer.string_of_term(@kernel.concl(hth_1))
     @pp.std_formatter.print_string(
-      "hol_of_thm returned:\n" +
-      @printer.string_of_term(@kernel.concl(hth_1)) +
-      "\n for\n" +
-      t5144 +
-      "\n",
+      "hol_of_thm returned:\n" + t5164 + "\n for\n" + t5163 + "\n",
     )
     @pp.std_formatter.print_flush()
     ()
@@ -36182,7 +36159,7 @@ pub fn hol_of_thm(
 ///|
 /// metis_name
 fn step_235() -> Unit raise {
-  metis_name_c.set(fn(x5145 : Int) -> String raise { @lib.string_of_int(x5145) })
+  metis_name_c.set(fn(x5165 : Int) -> String raise { @lib.string_of_int(x5165) })
 }
 
 ///|
@@ -36199,13 +36176,13 @@ pub fn metis_name(x : Int) -> String raise {
 ///|
 /// `metis_of_term`
 pub fn metis_of_term(
-  x5146 : @list.List[@kernel.Term],
-  x5147 : @list.List[@kernel.Term],
-  x5148 : @kernel.Term,
+  x5166 : @list.List[@kernel.Term],
+  x5167 : @list.List[@kernel.Term],
+  x5168 : @kernel.Term,
 ) -> Term raise {
-  let env = x5146
-  let consts = x5147
-  let tm = x5148
+  let env = x5166
+  let consts = x5167
+  let tm = x5168
   if @kernel.is_var(tm) && !@lib.mem(tm, consts) {
     Term::Var(metis_name(@meson.fol_of_var(tm)))
   } else {
@@ -36214,11 +36191,11 @@ pub fn metis_of_term(
       raise Failure("metis_of_term: higher order")
     } else {
       let ff = @meson.fol_of_const(f)
-      let t5150 = @lib.map(
-        (x5149 : @kernel.Term) => metis_of_term(env, consts, x5149),
+      let t5170 = @lib.map(
+        (x5169 : @kernel.Term) => metis_of_term(env, consts, x5169),
         args,
       )
-      Term::Fn((metis_name(ff), t5150))
+      Term::Fn((metis_name(ff), t5170))
     }
   }
 }
@@ -36226,13 +36203,13 @@ pub fn metis_of_term(
 ///|
 /// `metis_of_atom`
 pub fn metis_of_atom(
-  x5151 : @list.List[@kernel.Term],
-  x5152 : @list.List[@kernel.Term],
-  x5153 : @kernel.Term,
+  x5171 : @list.List[@kernel.Term],
+  x5172 : @list.List[@kernel.Term],
+  x5173 : @kernel.Term,
 ) -> Atom raise {
-  let env = x5151
-  let consts = x5152
-  let tm = x5153
+  let env = x5171
+  let consts = x5172
+  let tm = x5173
   try {
     let (l, r) = @kernel.dest_eq(tm)
     let l_p = metis_of_term(env, consts, l)
@@ -36245,11 +36222,11 @@ pub fn metis_of_atom(
         raise Failure("metis_of_atom: higher order")
       } else {
         let ff = @meson.fol_of_const(f)
-        let t5155 = @lib.map(
-          (x5154 : @kernel.Term) => metis_of_term(env, consts, x5154),
+        let t5175 = @lib.map(
+          (x5174 : @kernel.Term) => metis_of_term(env, consts, x5174),
           args,
         )
-        (metis_name(ff), t5155)
+        (metis_name(ff), t5175)
       }
     }
     e => raise e
@@ -36259,13 +36236,13 @@ pub fn metis_of_atom(
 ///|
 /// `metis_of_literal`
 pub fn metis_of_literal(
-  x5156 : @list.List[@kernel.Term],
-  x5157 : @list.List[@kernel.Term],
-  x5158 : @kernel.Term,
+  x5176 : @list.List[@kernel.Term],
+  x5177 : @list.List[@kernel.Term],
+  x5178 : @kernel.Term,
 ) -> (Bool, Atom) raise {
-  let env = x5156
-  let consts = x5157
-  let tm = x5158
+  let env = x5176
+  let consts = x5177
+  let tm = x5178
   let (pol, tm_p) = (false, @basics.dest_neg(tm)) catch {
     Failure(_) => (true, tm)
     e => raise e
@@ -36275,13 +36252,13 @@ pub fn metis_of_literal(
 
 ///|
 /// `metis_of_clause`
-pub fn metis_of_clause(x5159 : @kernel.Thm) -> Thm raise {
-  let th = x5159
+pub fn metis_of_clause(x5179 : @kernel.Thm) -> Thm raise {
+  let th = x5179
   let lconsts = @kernel.freesl(@kernel.hyp(th))
   let tm = @kernel.concl(th)
   let hlits = @basics.disjuncts(tm)
   let flits = @lib.map(
-    (x5160 : @kernel.Term) => metis_of_literal(@list.empty(), lconsts, x5160),
+    (x5180 : @kernel.Term) => metis_of_literal(@list.empty(), lconsts, x5180),
     hlits,
   )
   let set = fromlist_v15(flits)
@@ -36291,8 +36268,8 @@ pub fn metis_of_clause(x5159 : @kernel.Thm) -> Thm raise {
 ///|
 /// metis_of_clauses
 fn step_236() -> Unit raise {
-  metis_of_clauses_c.set((x5161 : @list.List[@kernel.Thm]) => {
-    @lib.map(metis_of_clause, x5161)
+  metis_of_clauses_c.set((x5181 : @list.List[@kernel.Thm]) => {
+    @lib.map(metis_of_clause, x5181)
   })
 }
 
@@ -36325,9 +36302,9 @@ pub fn split_limit() -> Ref[Int] {
 ///|
 /// `PRINT_TAC`
 pub fn print_tac(
-  x5162 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+  x5182 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
 ) -> @tactics.Goalstate raise {
-  let g = x5162
+  let g = x5182
   @tactics.print_goal(g)
   @tactics.all_tac(g)
 }
@@ -36335,11 +36312,11 @@ pub fn print_tac(
 ///|
 /// `PRINT_ID_TAC`
 pub fn print_id_tac(
-  x5163 : String,
-  x5164 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+  x5183 : String,
+  x5184 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
 ) -> @tactics.Goalstate raise {
-  let s = x5163
-  let g = x5164
+  let s = x5183
+  let g = x5184
   @pp.print_string(s + "\n")
   print_tac(g)
 }
@@ -36347,18 +36324,18 @@ pub fn print_id_tac(
 ///|
 /// `FOL_PREPARE_TAC`
 pub fn fol_prepare_tac(
-  x5165 : @list.List[@kernel.Thm],
+  x5185 : @list.List[@kernel.Thm],
 ) -> @tactics.Tactic raise {
-  let ths = x5165
-  let t5210 = @canon.assoc_conv(@theorems.disj_assoc())
-  let t5212 = @tactics.rule_assum_tac((x5211 : @kernel.Thm) => {
-    @equal.conv_rule(t5210, x5211)
+  let ths = x5185
+  let t5230 = @canon.assoc_conv(@theorems.disj_assoc())
+  let t5232 = @tactics.rule_assum_tac((x5231 : @kernel.Thm) => {
+    @equal.conv_rule(t5230, x5231)
   })
-  let t5209 = @tactics.repeat_tac(
-    @tactics.first_x_assum((x5208 : @kernel.Thm) => {
+  let t5229 = @tactics.repeat_tac(
+    @tactics.first_x_assum((x5228 : @kernel.Thm) => {
       @meson.conjuncts_then_p(
         fn(
-          x5205 : @kernel.Thm,
+          x5225 : @kernel.Thm,
         ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
           (
             @list.List[@kernel.Term],
@@ -36378,9 +36355,9 @@ pub fn fol_prepare_tac(
             @list.List[@kernel.Thm],
           ) -> @kernel.Thm raise,
         ) raise) raise {
-          let s5206 = @tactics.assume_tac(x5205)
+          let s5226 = @tactics.assume_tac(x5225)
           fn(
-            x5207 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+            x5227 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
           ) -> (
             (
               @list.List[@kernel.Term],
@@ -36400,17 +36377,17 @@ pub fn fol_prepare_tac(
               @list.List[@kernel.Thm],
             ) -> @kernel.Thm raise,
           ) raise {
-            s5206(x5207)
+            s5226(x5227)
           }
         },
-        x5208,
+        x5228,
       )
     }),
   )
-  let t5204 = @tactics.rule_assum_tac((x5203 : @kernel.Thm) => {
+  let t5224 = @tactics.rule_assum_tac((x5223 : @kernel.Thm) => {
     @lib.repeat(
-      fn(x5202 : @kernel.Thm) -> @kernel.Thm raise {
-        let th = x5202
+      fn(x5222 : @kernel.Thm) -> @kernel.Thm raise {
+        let th = x5222
         @bool.spec(
           @basics.genvar(
             @kernel.type_of(@basics.dest_forall(@kernel.concl(th)).0),
@@ -36418,21 +36395,21 @@ pub fn fol_prepare_tac(
           th,
         )
       },
-      x5203,
+      x5223,
     )
   })
-  let t5199 = @equal.thenc(@canon.prenex_conv, @canon.weak_cnf_conv)
-  let t5201 = @tactics.rule_assum_tac((x5200 : @kernel.Thm) => {
-    @equal.conv_rule(t5199, x5200)
+  let t5219 = @equal.thenc(@canon.prenex_conv, @canon.weak_cnf_conv)
+  let t5221 = @tactics.rule_assum_tac((x5220 : @kernel.Thm) => {
+    @equal.conv_rule(t5219, x5220)
   })
-  let t5197 = split_limit().val
-  let t5196 = @tactics.repeat_tac(@tactics.first_x_assum(@tactics.choose_tac))
-  let t5193 = @equal.thenc(@canon.nnf_conv, @canon.skolem_conv)
-  let t5195 = @tactics.rule_assum_tac((x5194 : @kernel.Thm) => {
-    @equal.conv_rule(t5193, x5194)
+  let t5217 = split_limit().val
+  let t5216 = @tactics.repeat_tac(@tactics.first_x_assum(@tactics.choose_tac))
+  let t5213 = @equal.thenc(@canon.nnf_conv, @canon.skolem_conv)
+  let t5215 = @tactics.rule_assum_tac((x5214 : @kernel.Thm) => {
+    @equal.conv_rule(t5213, x5214)
   })
-  let t5192 = @class.refute_then(fn(
-    x5189 : @kernel.Thm,
+  let t5212 = @class.refute_then(fn(
+    x5209 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
       @list.List[@kernel.Term],
@@ -36452,9 +36429,9 @@ pub fn fol_prepare_tac(
       @list.List[@kernel.Thm],
     ) -> @kernel.Thm raise,
   ) raise) raise {
-    let s5190 = @tactics.assume_tac(x5189)
+    let s5210 = @tactics.assume_tac(x5209)
     fn(
-      x5191 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+      x5211 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
     ) -> (
       (
         @list.List[@kernel.Term],
@@ -36474,13 +36451,13 @@ pub fn fol_prepare_tac(
         @list.List[@kernel.Thm],
       ) -> @kernel.Thm raise,
     ) raise {
-      s5190(x5191)
+      s5210(x5211)
     }
   })
-  let t5188 = @tactics.repeat_tac(
+  let t5208 = @tactics.repeat_tac(
     @tactics.orelse_tac(@tactics.gen_tac, @tactics.disch_tac),
   )
-  let t5187 = @tactics.conv_tac(
+  let t5207 = @tactics.conv_tac(
     @equal.thenc(
       @equal.thenc(
         @equal.thenc(
@@ -36495,7 +36472,7 @@ pub fn fol_prepare_tac(
       @meson.quant_bool_conv,
     ),
   )
-  let t5170 = @meson.poly_assume_tac(@lib.map(@bool.gen_all, ths))
+  let t5190 = @meson.poly_assume_tac(@lib.map(@bool.gen_all, ths))
   @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -36512,7 +36489,7 @@ pub fn fol_prepare_tac(
                             @tactics.then_tac(
                               @tactics.then_tac(
                                 @class.refute_then(fn(
-                                  x5167 : @kernel.Thm,
+                                  x5187 : @kernel.Thm,
                                 ) -> ((
                                   (
                                     @list.List[(String, @kernel.Thm)],
@@ -36546,9 +36523,9 @@ pub fn fol_prepare_tac(
                                     @list.List[@kernel.Thm],
                                   ) -> @kernel.Thm raise,
                                 ) raise) raise {
-                                  let s5168 = @tactics.assume_tac(x5167)
+                                  let s5188 = @tactics.assume_tac(x5187)
                                   fn(
-                                    x5169 : (
+                                    x5189 : (
                                       @list.List[(String, @kernel.Thm)],
                                       @kernel.Term,
                                     ),
@@ -36580,13 +36557,13 @@ pub fn fol_prepare_tac(
                                       @list.List[@kernel.Thm],
                                     ) -> @kernel.Thm raise,
                                   ) raise {
-                                    s5168(x5169)
+                                    s5188(x5189)
                                   }
                                 }),
-                                t5170,
+                                t5190,
                               ),
                               fn(
-                                x5181 : (
+                                x5201 : (
                                   @list.List[(String, @kernel.Thm)],
                                   @kernel.Term,
                                 ),
@@ -36619,7 +36596,7 @@ pub fn fol_prepare_tac(
                                 ) -> @kernel.Thm raise,
                               ) raise {
                                 (fn(
-                                  x5180 : (
+                                  x5200 : (
                                     @list.List[(String, @kernel.Thm)],
                                     @kernel.Term,
                                   ),
@@ -36656,10 +36633,10 @@ pub fn fol_prepare_tac(
                                     @list.List[@kernel.Thm],
                                   ) -> @kernel.Thm raise,
                                 ) raise) raise {
-                                  ((x5178 : @list.List[(String, @kernel.Thm)]) => {
+                                  ((x5198 : @list.List[(String, @kernel.Thm)]) => {
                                     @tactics.map_every(
                                       fn(
-                                        x5177 : (String, @kernel.Thm),
+                                        x5197 : (String, @kernel.Thm),
                                       ) -> ((
                                         (
                                           @list.List[(String, @kernel.Thm)],
@@ -36698,7 +36675,7 @@ pub fn fol_prepare_tac(
                                         ) -> @kernel.Thm raise,
                                       ) raise) raise {
                                         (fn(
-                                          x5175 : @kernel.Thm,
+                                          x5195 : @kernel.Thm,
                                         ) -> ((
                                           (
                                             @list.List[(String, @kernel.Thm)],
@@ -36743,7 +36720,7 @@ pub fn fol_prepare_tac(
                                           ) -> @kernel.Thm raise,
                                         ) raise) raise {
                                           (fn(
-                                            x5171 : @kernel.Term,
+                                            x5191 : @kernel.Term,
                                           ) -> ((
                                             (
                                               @list.List[(String, @kernel.Thm)],
@@ -36789,11 +36766,11 @@ pub fn fol_prepare_tac(
                                               @list.List[@kernel.Thm],
                                             ) -> @kernel.Thm raise,
                                           ) raise) raise {
-                                            let s5172 = @tactics.undisch_tac(
-                                              x5171,
+                                            let s5192 = @tactics.undisch_tac(
+                                              x5191,
                                             )
                                             fn(
-                                              x5173 : (
+                                              x5193 : (
                                                 @list.List[
                                                   (String, @kernel.Thm),
                                                 ],
@@ -36843,42 +36820,42 @@ pub fn fol_prepare_tac(
                                                 @list.List[@kernel.Thm],
                                               ) -> @kernel.Thm raise,
                                             ) raise {
-                                              s5172(x5173)
+                                              s5192(x5193)
                                             }
                                           })(
                                             (fn(
-                                              x5174 : @kernel.Thm,
+                                              x5194 : @kernel.Thm,
                                             ) -> @kernel.Term raise {
-                                              @kernel.concl(x5174)
-                                            })(x5175),
+                                              @kernel.concl(x5194)
+                                            })(x5195),
                                           )
                                         })(
                                           (fn(
-                                            x5176 : (String, @kernel.Thm),
+                                            x5196 : (String, @kernel.Thm),
                                           ) -> @kernel.Thm raise {
-                                            x5176.1
-                                          })(x5177),
+                                            x5196.1
+                                          })(x5197),
                                         )
                                       },
-                                      x5178,
+                                      x5198,
                                     )
                                   })(
                                     (fn(
-                                      x5179 : (
+                                      x5199 : (
                                         @list.List[(String, @kernel.Thm)],
                                         @kernel.Term,
                                       ),
                                     ) -> @list.List[(String, @kernel.Thm)] raise {
-                                      x5179.0
-                                    })(x5180),
+                                      x5199.0
+                                    })(x5200),
                                   )
-                                })(x5181)(x5181)
+                                })(x5201)(x5201)
                               },
                             ),
                             @canon.select_elim_tac,
                           ),
                           fn(
-                            x5186 : (
+                            x5206 : (
                               @list.List[(String, @kernel.Thm)],
                               @kernel.Term,
                             ),
@@ -36904,7 +36881,7 @@ pub fn fol_prepare_tac(
                             ) -> @kernel.Thm raise,
                           ) raise {
                             (fn(
-                              x5182 : (
+                              x5202 : (
                                 @list.List[(String, @kernel.Thm)],
                                 @kernel.Term,
                               ),
@@ -36934,10 +36911,10 @@ pub fn fol_prepare_tac(
                                 @list.List[@kernel.Thm],
                               ) -> @kernel.Thm raise,
                             ) raise) raise {
-                              let (asl, w) = x5182
+                              let (asl, w) = x5202
                               @tactics.map_every(
                                 fn(
-                                  x5184 : @kernel.Term,
+                                  x5204 : @kernel.Term,
                                 ) -> ((
                                   (
                                     @list.List[(String, @kernel.Thm)],
@@ -36971,47 +36948,47 @@ pub fn fol_prepare_tac(
                                     @list.List[@kernel.Thm],
                                   ) -> @kernel.Thm raise,
                                 ) raise) raise {
-                                  let v = x5184
+                                  let v = x5204
                                   @tactics.spec_tac(v, v)
                                 },
                                 @kernel.frees(w),
                               )
-                            })(x5186)(x5186)
+                            })(x5206)(x5206)
                           },
                         ),
-                        t5187,
+                        t5207,
                       ),
-                      t5188,
+                      t5208,
                     ),
-                    t5192,
+                    t5212,
                   ),
-                  t5195,
+                  t5215,
                 ),
-                t5196,
+                t5216,
               ),
               @canon.asm_fol_tac,
             ),
-            (x5198 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
-              @meson.split_tac(t5197, x5198)
+            (x5218 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+              @meson.split_tac(t5217, x5218)
             },
           ),
-          t5201,
+          t5221,
         ),
-        t5204,
+        t5224,
       ),
-      t5209,
+      t5229,
     ),
-    t5212,
+    t5232,
   )
 }
 
 ///|
 /// `without_warnings`
-pub fn[TA] without_warnings(x5213 : (Unit) -> TA raise) -> TA raise {
-  let f = x5213
+pub fn[TA] without_warnings(x5233 : (Unit) -> TA raise) -> TA raise {
+  let f = x5233
   let tiv = @preterm.type_invention_warning.val
-  let reset : (Unit) -> Unit raise = fn(x5214 : Unit) -> Unit raise {
-    let _ = x5214
+  let reset : (Unit) -> Unit raise = fn(x5234 : Unit) -> Unit raise {
+    let _ = x5234
     @preterm.type_invention_warning.val = tiv
     ()
   }
@@ -37034,9 +37011,9 @@ pub fn[TA] without_warnings(x5213 : (Unit) -> TA raise) -> TA raise {
 ///|
 /// `SIMPLE_METIS_REFUTE`
 pub fn simple_metis_refute(
-  x5215 : @list.List[@kernel.Thm],
+  x5235 : @list.List[@kernel.Thm],
 ) -> @kernel.Thm raise {
-  let ths = x5215
+  let ths = x5235
   @meson.clear_contrapos_cache(())
   @lib.random_init(0)
   let rules = metis_of_clauses(ths)
@@ -37047,12 +37024,12 @@ pub fn simple_metis_refute(
       ()
     }
     @lib.do_list(
-      fn(x5217 : @kernel.Thm) -> Unit raise {
-        ((x5216 : String) => {
-          @pp.std_formatter.print_string(x5216 + "\n")
+      fn(x5237 : @kernel.Thm) -> Unit raise {
+        ((x5236 : String) => {
+          @pp.std_formatter.print_string(x5236 + "\n")
           @pp.std_formatter.print_flush()
           ()
-        })(@printer.string_of_thm(x5217))
+        })(@printer.string_of_thm(x5237))
       },
       ths,
     )
@@ -37066,11 +37043,11 @@ pub fn simple_metis_refute(
     ()
   }
   let ths_1 = @lib.map(
-    (x5218 : @kernel.Thm) => @equal.conv_rule(@canon.disj_canon_conv, x5218),
+    (x5238 : @kernel.Thm) => @equal.conv_rule(@canon.disj_canon_conv, x5238),
     ths,
   )
-  let proof_1 = without_warnings(fn(x5219 : Unit) -> @kernel.Thm raise {
-    let _ = x5219
+  let proof_1 = without_warnings(fn(x5239 : Unit) -> @kernel.Thm raise {
+    let _ = x5239
     hol_of_thm(ths_1, res)
   })
   if metisverb().val {
@@ -37080,8 +37057,8 @@ pub fn simple_metis_refute(
       ()
     }
     @lib.do_list(
-      fn(x5220 : @kernel.Thm) -> Unit raise {
-        let t = x5220
+      fn(x5240 : @kernel.Thm) -> Unit raise {
+        let t = x5240
         @printer.print_thm(t)
         @pp.std_formatter.print_string("\n")
         @pp.std_formatter.print_flush()
@@ -37103,15 +37080,15 @@ pub fn simple_metis_refute(
   }
   let allhyps = @lib.flat(
     @lib.map(
-      fn(x5221 : @kernel.Thm) -> @list.List[@kernel.Term] raise {
-        @kernel.hyp(x5221)
+      fn(x5241 : @kernel.Thm) -> @list.List[@kernel.Term] raise {
+        @kernel.hyp(x5241)
       },
       ths_1,
     ),
   )
   if @lib.forall(
-      fn(x5222 : @kernel.Term) -> Bool raise {
-        let h = x5222
+      fn(x5242 : @kernel.Term) -> Bool raise {
+        let h = x5242
         @lib.mem(h, allhyps)
       },
       @kernel.hyp(proof_1),
@@ -37120,8 +37097,8 @@ pub fn simple_metis_refute(
   } else {
     raise @lib.AssertFailure("tscript.ml:10071:2")
   }
-  let t5223 = @parser.parse_term("F")
-  if @kernel.concl(proof_1) == t5223 {
+  let t5243 = @parser.parse_term("F")
+  if @kernel.concl(proof_1) == t5243 {
     ()
   } else {
     raise @lib.AssertFailure("tscript.ml:10072:2")
@@ -37132,14 +37109,14 @@ pub fn simple_metis_refute(
 ///|
 /// `PURE_METIS_TAC`
 pub fn pure_metis_tac(
-  x5224 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+  x5244 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
 ) -> @tactics.Goalstate raise {
-  let g = x5224
+  let g = x5244
   @meson.reset_vars(())
   @meson.reset_consts(())
   @tactics.orelse_tac(
     @tactics.first_assum(fn(
-      x5225 : @kernel.Thm,
+      x5245 : @kernel.Thm,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
         @list.List[@kernel.Term],
@@ -37159,9 +37136,9 @@ pub fn pure_metis_tac(
         @list.List[@kernel.Thm],
       ) -> @kernel.Thm raise,
     ) raise) raise {
-      let s5226 = @tactics.contr_tac(x5225)
+      let s5246 = @tactics.contr_tac(x5245)
       fn(
-        x5227 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+        x5247 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
       ) -> (
         (
           @list.List[@kernel.Term],
@@ -37181,11 +37158,11 @@ pub fn pure_metis_tac(
           @list.List[@kernel.Thm],
         ) -> @kernel.Thm raise,
       ) raise {
-        s5226(x5227)
+        s5246(x5247)
       }
     }),
     fn(
-      x5237 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+      x5257 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
     ) -> (
       (
         @list.List[@kernel.Term],
@@ -37206,7 +37183,7 @@ pub fn pure_metis_tac(
       ) -> @kernel.Thm raise,
     ) raise {
       (fn(
-        x5236 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+        x5256 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
       ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
         (
           @list.List[@kernel.Term],
@@ -37227,7 +37204,7 @@ pub fn pure_metis_tac(
         ) -> @kernel.Thm raise,
       ) raise) raise {
         (fn(
-          x5234 : @list.List[(String, @kernel.Thm)],
+          x5254 : @list.List[(String, @kernel.Thm)],
         ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
           (
             @list.List[@kernel.Term],
@@ -37248,7 +37225,7 @@ pub fn pure_metis_tac(
           ) -> @kernel.Thm raise,
         ) raise) raise {
           (fn(
-            x5231 : @list.List[@kernel.Thm],
+            x5251 : @list.List[@kernel.Thm],
           ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
             (
               @list.List[@kernel.Term],
@@ -37269,7 +37246,7 @@ pub fn pure_metis_tac(
             ) -> @kernel.Thm raise,
           ) raise) raise {
             (fn(
-              x5228 : @kernel.Thm,
+              x5248 : @kernel.Thm,
             ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
               (
                 @list.List[@kernel.Term],
@@ -37289,9 +37266,9 @@ pub fn pure_metis_tac(
                 @list.List[@kernel.Thm],
               ) -> @kernel.Thm raise,
             ) raise) raise {
-              let s5229 = @tactics.accept_tac(x5228)
+              let s5249 = @tactics.accept_tac(x5248)
               fn(
-                x5230 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+                x5250 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
               ) -> (
                 (
                   @list.List[@kernel.Term],
@@ -37311,35 +37288,35 @@ pub fn pure_metis_tac(
                   @list.List[@kernel.Thm],
                 ) -> @kernel.Thm raise,
               ) raise {
-                s5229(x5230)
+                s5249(x5250)
               }
-            })(simple_metis_refute(x5231))
+            })(simple_metis_refute(x5251))
           })(
-            ((x5233 : @list.List[(String, @kernel.Thm)]) => {
+            ((x5253 : @list.List[(String, @kernel.Thm)]) => {
               @lib.map(
-                fn(x5232 : (String, @kernel.Thm)) -> @kernel.Thm raise {
-                  x5232.1
+                fn(x5252 : (String, @kernel.Thm)) -> @kernel.Thm raise {
+                  x5252.1
                 },
-                x5233,
+                x5253,
               )
-            })(x5234),
+            })(x5254),
           )
         })(
           (fn(
-            x5235 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+            x5255 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
           ) -> @list.List[(String, @kernel.Thm)] raise {
-            x5235.0
-          })(x5236),
+            x5255.0
+          })(x5256),
         )
-      })(x5237)(x5237)
+      })(x5257)(x5257)
     },
   )(g)
 }
 
 ///|
 /// `GEN_METIS_TAC`
-pub fn gen_metis_tac(x5238 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
-  let ths = x5238
+pub fn gen_metis_tac(x5258 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
+  let ths = x5258
   @tactics.then_tac(fol_prepare_tac(ths), pure_metis_tac)
 }
 
@@ -37362,12 +37339,12 @@ pub fn asm_metis_tac(x : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
 
 ///|
 /// `METIS_TAC`
-pub fn metis_tac(x5240 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
-  let ths = x5240
-  let t5243 = asm_metis_tac(ths)
+pub fn metis_tac(x5260 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
+  let ths = x5260
+  let t5263 = asm_metis_tac(ths)
   @tactics.then_tac(
     @tactics.pop_assum_list(fn(
-      x5242 : @list.List[@kernel.Thm],
+      x5262 : @list.List[@kernel.Thm],
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
         @list.List[@kernel.Term],
@@ -37389,18 +37366,18 @@ pub fn metis_tac(x5240 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
     ) raise) raise {
       @tactics.all_tac
     }),
-    t5243,
+    t5263,
   )
 }
 
 ///|
 /// `METIS`
 pub fn metis(
-  x5244 : @list.List[@kernel.Thm],
-  x5245 : @kernel.Term,
+  x5264 : @list.List[@kernel.Thm],
+  x5265 : @kernel.Term,
 ) -> @kernel.Thm raise {
-  let ths = x5244
-  let tm = x5245
+  let ths = x5264
+  let tm = x5265
   @tactics.prove(tm, metis_tac(ths))
 }
 
