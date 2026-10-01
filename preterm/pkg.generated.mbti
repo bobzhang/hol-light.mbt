@@ -1,0 +1,86 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/preterm"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub let dpty : Pretype
+
+pub fn hide_constant(String) -> Unit
+
+pub let ignore_constant_varstruct : @ref.Ref[Bool]
+
+pub fn is_hidden(String) -> Bool
+
+pub fn make_overloadable(String, @kernel.HolType) -> Unit raise
+
+pub fn new_type_abbrev(String, @kernel.HolType) -> Unit
+
+pub fn overload_interface(String, @kernel.Term) -> Unit raise
+
+pub fn override_interface(String, @kernel.Term) -> Unit raise
+
+pub fn preterm_of_term(@kernel.Term) -> Preterm
+
+pub fn pretype_of_type(@kernel.HolType) -> Pretype
+
+pub fn prioritize_overload(@kernel.HolType) -> Unit raise
+
+pub fn reduce_interface(String, @kernel.Term) -> Unit raise
+
+pub fn remove_interface(String) -> Unit
+
+pub fn remove_type_abbrev(String) -> Unit
+
+pub fn retypecheck(@list.List[(String, Pretype)], Preterm) -> Preterm raise
+
+pub fn term_of_preterm(Preterm) -> @kernel.Term raise
+
+pub let the_implicit_types : @ref.Ref[@list.List[(String, @kernel.HolType)]]
+
+pub fn type_abbrevs() -> @list.List[(String, @kernel.HolType)]
+
+pub let type_invention_error : @ref.Ref[Bool]
+
+pub let type_invention_warning : @ref.Ref[Bool]
+
+pub fn type_of_pretype(Pretype) -> @kernel.HolType raise
+
+pub fn unhide_constant(String) -> Unit
+
+// Errors
+
+// Types and methods
+pub(all) enum Preterm {
+  Varp(String, Pretype)
+  Constp(String, Pretype)
+  Combp(Preterm, Preterm)
+  Absp(Preterm, Preterm)
+  Typing(Preterm, Pretype)
+} derive(Eq, @debug.Debug)
+pub fn Preterm::equal(Self, Self) -> Bool
+pub fn Preterm::not_equal(Self, Self) -> Bool
+pub fn Preterm::ocompare(Self, Self) -> Int
+pub fn Preterm::to_repr(Self) -> @debug.Repr
+pub impl @lib.OCompare for Preterm
+
+pub(all) enum Pretype {
+  Utv(String)
+  Ptycon(String, @list.List[Pretype])
+  Stv(Int)
+} derive(Eq, @debug.Debug)
+pub fn Pretype::equal(Self, Self) -> Bool
+pub fn Pretype::not_equal(Self, Self) -> Bool
+pub fn Pretype::ocompare(Self, Self) -> Int
+pub fn Pretype::to_repr(Self) -> @debug.Repr
+pub impl @lib.OCompare for Pretype
+
+// Type aliases
+
+// Traits

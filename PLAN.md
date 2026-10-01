@@ -185,4 +185,12 @@ functions, never through top-level side effects, so callers control loading.
   character strings, decimals, interface reversal, theorems, wrapping at
   margins 78 and 30). Known difference: standard output is line-based, so
   `print_flush` on `std_formatter` ends a partial line with a newline.
-  Next: `preterm`, `parser`, then large parse/print round-trip tests.
+  `preterm/` and `parser/` are done: typechecking with overload
+  resolution, then the lexer and combinator grammar. The lexer is a loop,
+  and the grammar uses the same combinators as upstream so that
+  backtracking re-runs actions identically. They match upstream on
+  `tools/ocaml_ref/parse_cases.txt` (186 outputs: types, terms, structure
+  with invented type-variable numbers, `GEN%PVAR` numbering, overloading
+  across num/int/real, warnings and error messages, wrapping).
+  Phase 3 is complete. Next: phase 4 (`equal`, `bool`, `drule`, `tactics`, …)
+  and the translator spike.

@@ -1,0 +1,9 @@
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/num",
+  "bobzhang/hol_light/basics",
+  "bobzhang/hol_light/printer",
+  "moonbitlang/core/list",
+  "moonbitlang/core/debug",
+}

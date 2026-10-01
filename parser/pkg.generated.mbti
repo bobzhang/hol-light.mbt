@@ -1,0 +1,77 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/parser"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/preterm",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn[I : Eq] a(I) -> (@list.List[I]) -> (I, @list.List[I]) raise
+
+pub fn[I, A] alt((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) -> (A, @list.List[I]) raise) -> (@list.List[I]) -> (A, @list.List[I]) raise
+
+pub fn[I, A] atleast(Int, (@list.List[I]) -> (A, @list.List[I]) raise) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise
+
+pub let comment_token : @ref.Ref[Lexcode]
+
+pub fn delete_parser(String) -> Unit raise
+
+pub fn[I, A, S] elistof((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) -> (S, @list.List[I]) raise, String) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise
+
+pub fn[I] finished(@list.List[I]) -> (Int, @list.List[I]) raise
+
+pub fn[I, A] fix(String, (@list.List[I]) -> (A, @list.List[I]) raise) -> (@list.List[I]) -> (A, @list.List[I]) raise
+
+pub fn install_parser(String, (@list.List[Lexcode]) -> (@preterm.Preterm, @list.List[Lexcode]) raise) -> Unit
+
+pub fn installed_parsers() -> @list.List[(String, (@list.List[Lexcode]) -> (@preterm.Preterm, @list.List[Lexcode]) raise)]
+
+pub fn[I, A, S] leftbin((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) -> (S, @list.List[I]) raise, (S, A, A) -> A raise?, String) -> (@list.List[I]) -> (A, @list.List[I]) raise
+
+pub fn lex(String) -> @list.List[Lexcode] raise
+
+pub fn[I, A, S] listof((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) -> (S, @list.List[I]) raise, String) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise
+
+pub fn[I, A] many((@list.List[I]) -> (A, @list.List[I]) raise) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise
+
+pub fn[I, A, B] map((@list.List[I]) -> (A, @list.List[I]) raise, (A) -> B raise?) -> (@list.List[I]) -> (B, @list.List[I]) raise
+
+pub fn[I, A] nothing(@list.List[I]) -> (@list.List[A], @list.List[I])
+
+pub fn parse_preterm(@list.List[Lexcode]) -> (@preterm.Preterm, @list.List[Lexcode]) raise
+
+pub fn parse_pretype(@list.List[Lexcode]) -> (@preterm.Pretype, @list.List[Lexcode]) raise
+
+pub fn parse_term(String) -> @kernel.Term raise
+
+pub fn parse_type(String) -> @kernel.HolType raise
+
+pub fn[I, A] possibly((@list.List[I]) -> (A, @list.List[I]) raise) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise
+
+pub fn[I, A, S] rightbin((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) -> (S, @list.List[I]) raise, (S, A, A) -> A raise?, String) -> (@list.List[I]) -> (A, @list.List[I]) raise
+
+pub fn[I, A, B] seq((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) -> (B, @list.List[I]) raise) -> (@list.List[I]) -> ((A, B), @list.List[I]) raise
+
+pub fn[I] some((I) -> Bool raise?) -> (@list.List[I]) -> (I, @list.List[I]) raise
+
+// Errors
+pub(all) suberror Noparse derive(@debug.Debug)
+pub fn Noparse::to_repr(Self) -> @debug.Repr
+
+// Types and methods
+pub(all) enum Lexcode {
+  Ident(String)
+  Resword(String)
+} derive(Eq, @debug.Debug)
+pub fn Lexcode::equal(Self, Self) -> Bool
+pub fn Lexcode::not_equal(Self, Self) -> Bool
+pub fn Lexcode::to_repr(Self) -> @debug.Repr
+
+// Type aliases
+pub type UserParser = (String, (@list.List[Lexcode]) -> (@preterm.Preterm, @list.List[Lexcode]) raise)
+
+// Traits
