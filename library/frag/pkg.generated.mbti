@@ -1,0 +1,111 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/frag"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn dest_frag_0() -> @kernel.Thm
+
+pub fn dest_frag_add() -> @kernel.Thm
+
+pub fn dest_frag_cmul() -> @kernel.Thm
+
+pub fn dest_frag_neg() -> @kernel.Thm
+
+pub fn dest_frag_of() -> @kernel.Thm
+
+pub fn dest_frag_sub() -> @kernel.Thm
+
+pub fn finite_frag_support() -> @kernel.Thm
+
+pub fn frag_0() -> @kernel.Thm
+
+pub fn frag_add() -> @kernel.Thm
+
+pub fn frag_add_eq_0() -> @kernel.Thm
+
+pub fn frag_closure_sub_cmul() -> @kernel.Thm
+
+pub fn frag_cmul() -> @kernel.Thm
+
+pub fn frag_cmul_sum() -> @kernel.Thm
+
+pub fn frag_eq() -> @kernel.Thm
+
+pub fn frag_expansion() -> @kernel.Thm
+
+pub fn frag_extend() -> @kernel.Thm
+
+pub fn frag_extend_0() -> @kernel.Thm
+
+pub fn frag_extend_add() -> @kernel.Thm
+
+pub fn frag_extend_cmul() -> @kernel.Thm
+
+pub fn frag_extend_compose() -> @kernel.Thm
+
+pub fn frag_extend_eq() -> @kernel.Thm
+
+pub fn frag_extend_eq_0() -> @kernel.Thm
+
+pub fn frag_extend_neg() -> @kernel.Thm
+
+pub fn frag_extend_of() -> @kernel.Thm
+
+pub fn frag_extend_sub() -> @kernel.Thm
+
+pub fn frag_extend_sum() -> @kernel.Thm
+
+pub fn frag_extend_v1() -> @kernel.Thm
+
+pub fn frag_induction() -> @kernel.Thm
+
+pub fn frag_module(@kernel.Term) -> @kernel.Thm raise
+
+pub fn frag_neg() -> @kernel.Thm
+
+pub fn frag_of() -> @kernel.Thm
+
+pub fn frag_of_eq() -> @kernel.Thm
+
+pub fn frag_of_nonzero() -> @kernel.Thm
+
+pub fn frag_split() -> @kernel.Thm
+
+pub fn frag_sub() -> @kernel.Thm
+
+pub fn frag_support() -> @kernel.Thm
+
+pub fn frag_support_0() -> @kernel.Thm
+
+pub fn frag_support_add() -> @kernel.Thm
+
+pub fn frag_support_cmul() -> @kernel.Thm
+
+pub fn frag_support_eq_empty() -> @kernel.Thm
+
+pub fn frag_support_frag_extend() -> @kernel.Thm
+
+pub fn frag_support_neg() -> @kernel.Thm
+
+pub fn frag_support_of() -> @kernel.Thm
+
+pub fn frag_support_sub() -> @kernel.Thm
+
+pub fn frag_support_sum() -> @kernel.Thm
+
+pub fn frag_tybij() -> @kernel.Thm
+
+pub fn monoidal_frag_add() -> @kernel.Thm
+
+pub fn neutral_frag_add() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
