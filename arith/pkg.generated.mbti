@@ -1,0 +1,553 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/arith"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn add() -> @kernel.Thm
+
+pub fn add1() -> @kernel.Thm
+
+pub fn add_0() -> @kernel.Thm
+
+pub fn add_ac() -> @kernel.Thm
+
+pub fn add_assoc() -> @kernel.Thm
+
+pub fn add_clauses() -> @kernel.Thm
+
+pub fn add_eq_0() -> @kernel.Thm
+
+pub fn add_sub() -> @kernel.Thm
+
+pub fn add_sub2() -> @kernel.Thm
+
+pub fn add_subr() -> @kernel.Thm
+
+pub fn add_subr2() -> @kernel.Thm
+
+pub fn add_suc() -> @kernel.Thm
+
+pub fn add_sym() -> @kernel.Thm
+
+pub fn bit0() -> @kernel.Thm
+
+pub fn bit0_thm() -> @kernel.Thm
+
+pub fn bit1() -> @kernel.Thm
+
+pub fn bit1_thm() -> @kernel.Thm
+
+pub fn bits_elim_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn dependent_choice() -> @kernel.Thm
+
+pub fn dependent_choice_fixed() -> @kernel.Thm
+
+pub fn div_0() -> @kernel.Thm
+
+pub fn div_1() -> @kernel.Thm
+
+pub fn div_add_eq() -> @kernel.Thm
+
+pub fn div_add_eq_eq() -> @kernel.Thm
+
+pub fn div_add_mod() -> @kernel.Thm
+
+pub fn div_div() -> @kernel.Thm
+
+pub fn div_eq_0() -> @kernel.Thm
+
+pub fn div_eq_exclusion() -> @kernel.Thm
+
+pub fn div_eq_self() -> @kernel.Thm
+
+pub fn div_exp() -> @kernel.Thm
+
+pub fn div_le() -> @kernel.Thm
+
+pub fn div_le_exclusion() -> @kernel.Thm
+
+pub fn div_lt() -> @kernel.Thm
+
+pub fn div_mod() -> @kernel.Thm
+
+pub fn div_mono() -> @kernel.Thm
+
+pub fn div_mono2() -> @kernel.Thm
+
+pub fn div_mono_lt() -> @kernel.Thm
+
+pub fn div_mul_le() -> @kernel.Thm
+
+pub fn div_mult() -> @kernel.Thm
+
+pub fn div_mult2() -> @kernel.Thm
+
+pub fn div_mult_add() -> @kernel.Thm
+
+pub fn div_refl() -> @kernel.Thm
+
+pub fn div_uniq() -> @kernel.Thm
+
+pub fn div_zero() -> @kernel.Thm
+
+pub fn division() -> @kernel.Thm
+
+pub fn division_0() -> @kernel.Thm
+
+pub fn division_simp() -> @kernel.Thm
+
+pub fn divmod_elim_thm() -> @kernel.Thm
+
+pub fn divmod_elim_thm_p() -> @kernel.Thm
+
+pub fn divmod_exist() -> @kernel.Thm
+
+pub fn divmod_exist_0() -> @kernel.Thm
+
+pub fn divmod_uniq() -> @kernel.Thm
+
+pub fn divmod_uniq_lemma() -> @kernel.Thm
+
+pub fn double_half() -> @kernel.Thm
+
+pub fn eq_add_lcancel() -> @kernel.Thm
+
+pub fn eq_add_lcancel_0() -> @kernel.Thm
+
+pub fn eq_add_rcancel() -> @kernel.Thm
+
+pub fn eq_add_rcancel_0() -> @kernel.Thm
+
+pub fn eq_divmod() -> @kernel.Thm
+
+pub fn eq_exp() -> @kernel.Thm
+
+pub fn eq_imp_le() -> @kernel.Thm
+
+pub fn eq_mult_lcancel() -> @kernel.Thm
+
+pub fn eq_mult_rcancel() -> @kernel.Thm
+
+pub fn even() -> @kernel.Thm
+
+pub fn even_add() -> @kernel.Thm
+
+pub fn even_and_odd() -> @kernel.Thm
+
+pub fn even_double() -> @kernel.Thm
+
+pub fn even_exists() -> @kernel.Thm
+
+pub fn even_exists_lemma() -> @kernel.Thm
+
+pub fn even_exp() -> @kernel.Thm
+
+pub fn even_mod() -> @kernel.Thm
+
+pub fn even_mod_even() -> @kernel.Thm
+
+pub fn even_mult() -> @kernel.Thm
+
+pub fn even_odd_decomposition() -> @kernel.Thm
+
+pub fn even_or_odd() -> @kernel.Thm
+
+pub fn even_sub() -> @kernel.Thm
+
+pub fn exists_lt_mod_thm() -> @kernel.Thm
+
+pub fn exists_mod_thm() -> @kernel.Thm
+
+pub fn exp() -> @kernel.Thm
+
+pub fn exp_1() -> @kernel.Thm
+
+pub fn exp_2() -> @kernel.Thm
+
+pub fn exp_add() -> @kernel.Thm
+
+pub fn exp_eq_0() -> @kernel.Thm
+
+pub fn exp_eq_1() -> @kernel.Thm
+
+pub fn exp_exp() -> @kernel.Thm
+
+pub fn exp_lt_0() -> @kernel.Thm
+
+pub fn exp_mono_eq() -> @kernel.Thm
+
+pub fn exp_mono_le() -> @kernel.Thm
+
+pub fn exp_mono_le_imp() -> @kernel.Thm
+
+pub fn exp_mono_lt() -> @kernel.Thm
+
+pub fn exp_mono_lt_imp() -> @kernel.Thm
+
+pub fn exp_mult() -> @kernel.Thm
+
+pub fn exp_one() -> @kernel.Thm
+
+pub fn exp_zero() -> @kernel.Thm
+
+pub fn fact() -> @kernel.Thm
+
+pub fn fact_le() -> @kernel.Thm
+
+pub fn fact_lt() -> @kernel.Thm
+
+pub fn fact_mono() -> @kernel.Thm
+
+pub fn fact_nz() -> @kernel.Thm
+
+pub fn forall_lt_mod_thm() -> @kernel.Thm
+
+pub fn forall_mod_thm() -> @kernel.Thm
+
+pub fn ge() -> @kernel.Thm
+
+pub fn gt() -> @kernel.Thm
+
+pub fn half_double() -> @kernel.Thm
+
+pub fn ldiv_lt_eq() -> @kernel.Thm
+
+pub fn le() -> @kernel.Thm
+
+pub fn le_0() -> @kernel.Thm
+
+pub fn le_1() -> @kernel.Thm
+
+pub fn le_add() -> @kernel.Thm
+
+pub fn le_add2() -> @kernel.Thm
+
+pub fn le_add_lcancel() -> @kernel.Thm
+
+pub fn le_add_rcancel() -> @kernel.Thm
+
+pub fn le_addr() -> @kernel.Thm
+
+pub fn le_antisym() -> @kernel.Thm
+
+pub fn le_cases() -> @kernel.Thm
+
+pub fn le_exists() -> @kernel.Thm
+
+pub fn le_exp() -> @kernel.Thm
+
+pub fn le_imp(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn le_induct() -> @kernel.Thm
+
+pub fn le_ldiv() -> @kernel.Thm
+
+pub fn le_ldiv_eq() -> @kernel.Thm
+
+pub fn le_lt() -> @kernel.Thm
+
+pub fn le_minimal() -> @kernel.Thm
+
+pub fn le_mult2() -> @kernel.Thm
+
+pub fn le_mult_lcancel() -> @kernel.Thm
+
+pub fn le_mult_rcancel() -> @kernel.Thm
+
+pub fn le_rdiv_eq() -> @kernel.Thm
+
+pub fn le_refl() -> @kernel.Thm
+
+pub fn le_square_refl() -> @kernel.Thm
+
+pub fn le_suc() -> @kernel.Thm
+
+pub fn le_suc_lt() -> @kernel.Thm
+
+pub fn le_trans() -> @kernel.Thm
+
+pub fn left_add_distrib() -> @kernel.Thm
+
+pub fn left_sub_distrib() -> @kernel.Thm
+
+pub fn let_add2() -> @kernel.Thm
+
+pub fn let_antisym() -> @kernel.Thm
+
+pub fn let_cases() -> @kernel.Thm
+
+pub fn let_trans() -> @kernel.Thm
+
+pub fn lt() -> @kernel.Thm
+
+pub fn lt_0() -> @kernel.Thm
+
+pub fn lt_add() -> @kernel.Thm
+
+pub fn lt_add2() -> @kernel.Thm
+
+pub fn lt_add_lcancel() -> @kernel.Thm
+
+pub fn lt_add_rcancel() -> @kernel.Thm
+
+pub fn lt_addr() -> @kernel.Thm
+
+pub fn lt_antisym() -> @kernel.Thm
+
+pub fn lt_cases() -> @kernel.Thm
+
+pub fn lt_exists() -> @kernel.Thm
+
+pub fn lt_exp() -> @kernel.Thm
+
+pub fn lt_imp_le() -> @kernel.Thm
+
+pub fn lt_imp_ne() -> @kernel.Thm
+
+pub fn lt_le() -> @kernel.Thm
+
+pub fn lt_lmult() -> @kernel.Thm
+
+pub fn lt_mult() -> @kernel.Thm
+
+pub fn lt_mult2() -> @kernel.Thm
+
+pub fn lt_mult_lcancel() -> @kernel.Thm
+
+pub fn lt_mult_rcancel() -> @kernel.Thm
+
+pub fn lt_nz() -> @kernel.Thm
+
+pub fn lt_pow2_refl() -> @kernel.Thm
+
+pub fn lt_refl() -> @kernel.Thm
+
+pub fn lt_suc() -> @kernel.Thm
+
+pub fn lt_suc_le() -> @kernel.Thm
+
+pub fn lt_trans() -> @kernel.Thm
+
+pub fn lte_add2() -> @kernel.Thm
+
+pub fn lte_antisym() -> @kernel.Thm
+
+pub fn lte_cases() -> @kernel.Thm
+
+pub fn lte_trans() -> @kernel.Thm
+
+pub fn max() -> @kernel.Thm
+
+pub fn min() -> @kernel.Thm
+
+pub fn minimal() -> @kernel.Thm
+
+pub fn minimal_lbound() -> @kernel.Thm
+
+pub fn minimal_le() -> @kernel.Thm
+
+pub fn minimal_mono() -> @kernel.Thm
+
+pub fn minimal_ubound() -> @kernel.Thm
+
+pub fn minimal_unique() -> @kernel.Thm
+
+pub fn minimal_v1() -> @kernel.Thm
+
+pub fn mod_0() -> @kernel.Thm
+
+pub fn mod_1() -> @kernel.Thm
+
+pub fn mod_2_cases() -> @kernel.Thm
+
+pub fn mod_add_cases() -> @kernel.Thm
+
+pub fn mod_add_eq() -> @kernel.Thm
+
+pub fn mod_add_eq_eq() -> @kernel.Thm
+
+pub fn mod_add_mod() -> @kernel.Thm
+
+pub fn mod_cases() -> @kernel.Thm
+
+pub fn mod_div_eq_0() -> @kernel.Thm
+
+pub fn mod_down_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn mod_eq() -> @kernel.Thm
+
+pub fn mod_eq_0() -> @kernel.Thm
+
+pub fn mod_eq_self() -> @kernel.Thm
+
+pub fn mod_even_2() -> @kernel.Thm
+
+pub fn mod_exists() -> @kernel.Thm
+
+pub fn mod_exp() -> @kernel.Thm
+
+pub fn mod_exp_mod() -> @kernel.Thm
+
+pub fn mod_le() -> @kernel.Thm
+
+pub fn mod_le_twice() -> @kernel.Thm
+
+pub fn mod_lt() -> @kernel.Thm
+
+pub fn mod_lt_eq() -> @kernel.Thm
+
+pub fn mod_lt_eq_lt() -> @kernel.Thm
+
+pub fn mod_mod() -> @kernel.Thm
+
+pub fn mod_mod_exp_min() -> @kernel.Thm
+
+pub fn mod_mod_le() -> @kernel.Thm
+
+pub fn mod_mod_refl() -> @kernel.Thm
+
+pub fn mod_mult() -> @kernel.Thm
+
+pub fn mod_mult2() -> @kernel.Thm
+
+pub fn mod_mult_add() -> @kernel.Thm
+
+pub fn mod_mult_lmod() -> @kernel.Thm
+
+pub fn mod_mult_mod() -> @kernel.Thm
+
+pub fn mod_mult_mod2() -> @kernel.Thm
+
+pub fn mod_mult_rmod() -> @kernel.Thm
+
+pub fn mod_refl() -> @kernel.Thm
+
+pub fn mod_uniq() -> @kernel.Thm
+
+pub fn mod_zero() -> @kernel.Thm
+
+pub fn mult() -> @kernel.Thm
+
+pub fn mult_0() -> @kernel.Thm
+
+pub fn mult_2() -> @kernel.Thm
+
+pub fn mult_ac() -> @kernel.Thm
+
+pub fn mult_assoc() -> @kernel.Thm
+
+pub fn mult_clauses() -> @kernel.Thm
+
+pub fn mult_div_le() -> @kernel.Thm
+
+pub fn mult_eq_0() -> @kernel.Thm
+
+pub fn mult_eq_1() -> @kernel.Thm
+
+pub fn mult_exp() -> @kernel.Thm
+
+pub fn mult_suc() -> @kernel.Thm
+
+pub fn mult_sym() -> @kernel.Thm
+
+pub fn not_even() -> @kernel.Thm
+
+pub fn not_le() -> @kernel.Thm
+
+pub fn not_lt() -> @kernel.Thm
+
+pub fn not_odd() -> @kernel.Thm
+
+pub fn num_cancel_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_induction_down() -> @kernel.Thm
+
+pub fn num_max() -> @kernel.Thm
+
+pub fn num_wf() -> @kernel.Thm
+
+pub fn num_wop() -> @kernel.Thm
+
+pub fn odd() -> @kernel.Thm
+
+pub fn odd_add() -> @kernel.Thm
+
+pub fn odd_double() -> @kernel.Thm
+
+pub fn odd_exists() -> @kernel.Thm
+
+pub fn odd_exp() -> @kernel.Thm
+
+pub fn odd_mod() -> @kernel.Thm
+
+pub fn odd_mod_even() -> @kernel.Thm
+
+pub fn odd_mult() -> @kernel.Thm
+
+pub fn odd_sub() -> @kernel.Thm
+
+pub fn one() -> @kernel.Thm
+
+pub fn pre() -> @kernel.Thm
+
+pub fn pre_elim_thm() -> @kernel.Thm
+
+pub fn pre_elim_thm_p() -> @kernel.Thm
+
+pub fn rdiv_lt_eq() -> @kernel.Thm
+
+pub fn right_add_distrib() -> @kernel.Thm
+
+pub fn right_sub_distrib() -> @kernel.Thm
+
+pub fn sub() -> @kernel.Thm
+
+pub fn sub_0() -> @kernel.Thm
+
+pub fn sub_add() -> @kernel.Thm
+
+pub fn sub_add_lcancel() -> @kernel.Thm
+
+pub fn sub_add_rcancel() -> @kernel.Thm
+
+pub fn sub_elim_thm() -> @kernel.Thm
+
+pub fn sub_elim_thm_p() -> @kernel.Thm
+
+pub fn sub_eq_0() -> @kernel.Thm
+
+pub fn sub_presuc() -> @kernel.Thm
+
+pub fn sub_refl() -> @kernel.Thm
+
+pub fn sub_suc() -> @kernel.Thm
+
+pub fn suc_sub1() -> @kernel.Thm
+
+pub fn transitive_stepwise_le() -> @kernel.Thm
+
+pub fn transitive_stepwise_le_eq() -> @kernel.Thm
+
+pub fn transitive_stepwise_lt() -> @kernel.Thm
+
+pub fn transitive_stepwise_lt_eq() -> @kernel.Thm
+
+pub fn two() -> @kernel.Thm
+
+pub fn wlog_le() -> @kernel.Thm
+
+pub fn wlog_le_3() -> @kernel.Thm
+
+pub fn wlog_lt() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

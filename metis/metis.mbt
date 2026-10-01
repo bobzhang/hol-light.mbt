@@ -34530,7 +34530,7 @@ fn step_224() -> Unit raise {
 /// `mk_negp`
 pub fn mk_negp(x4930 : @preterm.Preterm) -> @preterm.Preterm raise {
   let pt = x4930
-  @preterm.Combp(@preterm.preterm_of_term(@parser.parse_term("~")), pt)
+  @preterm.Preterm::Combp(@preterm.preterm_of_term(@parser.parse_term("~")), pt)
 }
 
 ///|
@@ -34540,7 +34540,10 @@ pub fn mk_eqp(
   x4932 : @preterm.Preterm,
 ) -> @preterm.Preterm raise {
   let (ps, pt) = (x4931, x4932)
-  @preterm.Combp(@preterm.Combp(@preterm.Constp("=", @preterm.dpty), ps), pt)
+  @preterm.Preterm::Combp(
+    @preterm.Preterm::Combp(@preterm.Preterm::Constp("=", @preterm.dpty), ps),
+    pt,
+  )
 }
 
 ///|
@@ -34550,8 +34553,11 @@ pub fn mk_conjp(
   x4934 : @preterm.Preterm,
 ) -> @preterm.Preterm raise {
   let (ps, pt) = (x4933, x4934)
-  @preterm.Combp(
-    @preterm.Combp(@preterm.preterm_of_term(@parser.parse_term("/\\")), ps),
+  @preterm.Preterm::Combp(
+    @preterm.Preterm::Combp(
+      @preterm.preterm_of_term(@parser.parse_term("/\\")),
+      ps,
+    ),
     pt,
   )
 }
@@ -34563,8 +34569,11 @@ pub fn mk_disjp(
   x4936 : @preterm.Preterm,
 ) -> @preterm.Preterm raise {
   let (ps, pt) = (x4935, x4936)
-  @preterm.Combp(
-    @preterm.Combp(@preterm.preterm_of_term(@parser.parse_term("\\/")), ps),
+  @preterm.Preterm::Combp(
+    @preterm.Preterm::Combp(
+      @preterm.preterm_of_term(@parser.parse_term("\\/")),
+      ps,
+    ),
     pt,
   )
 }
@@ -34583,7 +34592,7 @@ pub fn list_mk_combp(
     ) -> @preterm.Preterm raise {
       let x = x4939
       let acc = x4940
-      @preterm.Combp(acc, x)
+      @preterm.Preterm::Combp(acc, x)
     },
     t,
     h,
@@ -34593,18 +34602,24 @@ pub fn list_mk_combp(
 ///|
 /// metis.ml:9519
 fn step_225() -> Unit raise {
-  let t4944 = @preterm.Varp("3", @preterm.Ptycon("", @list.empty()))
-  let t4943 = @preterm.Varp("2", @preterm.Ptycon("", @list.empty()))
-  let t4945 = @preterm.Combp(
-    @preterm.Combp(
-      @preterm.Varp("1", @preterm.Ptycon("", @list.empty())),
+  let t4944 = @preterm.Preterm::Varp(
+    "3",
+    @preterm.Pretype::Ptycon("", @list.empty()),
+  )
+  let t4943 = @preterm.Preterm::Varp(
+    "2",
+    @preterm.Pretype::Ptycon("", @list.empty()),
+  )
+  let t4945 = @preterm.Preterm::Combp(
+    @preterm.Preterm::Combp(
+      @preterm.Preterm::Varp("1", @preterm.Pretype::Ptycon("", @list.empty())),
       t4943,
     ),
     t4944,
   )
-  let t4941 = @preterm.Varp("3", @preterm.dpty)
-  let t4942 = @list.List([@preterm.Varp("2", @preterm.dpty), t4941])
-  if list_mk_combp(@preterm.Varp("1", @preterm.dpty), t4942) == t4945 {
+  let t4941 = @preterm.Preterm::Varp("3", @preterm.dpty)
+  let t4942 = @list.List([@preterm.Preterm::Varp("2", @preterm.dpty), t4941])
+  if list_mk_combp(@preterm.Preterm::Varp("1", @preterm.dpty), t4942) == t4945 {
     ()
   } else {
     raise @lib.AssertFailure("tscript.ml:9519:0")
@@ -34641,13 +34656,14 @@ pub fn list_mk_disjp(
 /// `unconst_preterm`
 pub fn unconst_preterm(x4950 : @preterm.Preterm) -> @preterm.Preterm raise {
   match x4950 {
-    @preterm.Varp(s, pty) => @preterm.Varp(s, pty)
-    @preterm.Constp(s_1, pty_1) => @preterm.Varp(s_1, pty_1)
-    @preterm.Combp(l, r) => {
+    @preterm.Preterm::Varp(s, pty) => @preterm.Preterm::Varp(s, pty)
+    @preterm.Preterm::Constp(s_1, pty_1) => @preterm.Preterm::Varp(s_1, pty_1)
+    @preterm.Preterm::Combp(l, r) => {
       let t4951 = unconst_preterm(r)
-      @preterm.Combp(unconst_preterm(l), t4951)
+      @preterm.Preterm::Combp(unconst_preterm(l), t4951)
     }
-    @preterm.Typing(ptm, pty_2) => @preterm.Typing(unconst_preterm(ptm), pty_2)
+    @preterm.Preterm::Typing(ptm, pty_2) =>
+      @preterm.Preterm::Typing(unconst_preterm(ptm), pty_2)
     _ => raise Failure("unconst_preterm")
   }
 }
@@ -34658,13 +34674,13 @@ pub fn env_of_preterm(
   x4952 : @preterm.Preterm,
 ) -> @list.List[(String, @preterm.Pretype)] raise {
   match x4952 {
-    @preterm.Varp(s, pty) => @list.List([(s, pty)])
-    @preterm.Constp(s_1, pty_1) => @list.empty()
-    @preterm.Combp(l, r) => {
+    @preterm.Preterm::Varp(s, pty) => @list.List([(s, pty)])
+    @preterm.Preterm::Constp(s_1, pty_1) => @list.empty()
+    @preterm.Preterm::Combp(l, r) => {
       let t4953 = env_of_preterm(r)
       env_of_preterm(l).concat(t4953)
     }
-    @preterm.Typing(ptm, pty_2) => env_of_preterm(ptm)
+    @preterm.Preterm::Typing(ptm, pty_2) => env_of_preterm(ptm)
     _ => raise Failure("env_of_preterm")
   }
 }
@@ -34803,7 +34819,7 @@ pub fn prefix_v1(x4965 : String) -> String raise {
 /// `preterm_of_fol_term`
 pub fn preterm_of_fol_term(x4966 : Term) -> @preterm.Preterm raise {
   match x4966 {
-    Term::Var(x) => @preterm.Varp(prefix_v1(x), @preterm.dpty)
+    Term::Var(x) => @preterm.Preterm::Varp(prefix_v1(x), @preterm.dpty)
     Term::Fn((f, args)) => {
       let pf = preterm_of_const(f)
       let pargs = @lib.map(preterm_of_fol_term, args)
@@ -34816,7 +34832,7 @@ pub fn preterm_of_fol_term(x4966 : Term) -> @preterm.Preterm raise {
 /// `preterm_of_predicate`
 pub fn preterm_of_predicate(x4967 : String) -> @preterm.Preterm raise {
   match x4967 {
-    "=" => @preterm.Constp("=", @preterm.dpty)
+    "=" => @preterm.Preterm::Constp("=", @preterm.dpty)
     p => preterm_of_const(p)
   }
 }
@@ -34831,7 +34847,7 @@ pub fn preterm_of_atom(
   let pp = preterm_of_predicate(p)
   let pargs = @lib.map(preterm_of_fol_term, args)
   let t4970 = @preterm.pretype_of_type(@kernel.bool_ty)
-  @preterm.Typing(list_mk_combp(pp, pargs), t4970)
+  @preterm.Preterm::Typing(list_mk_combp(pp, pargs), t4970)
 }
 
 ///|

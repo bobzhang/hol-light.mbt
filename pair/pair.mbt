@@ -2756,8 +2756,8 @@ pub fn sublet_conv(
   fn largconv(x285 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x285
     match tm {
-      Comb(Const("LET", _), _) => @kernel.refl(tm)
-      Comb(l, r) => @equal.comb2_conv(largconv, conv)(tm)
+      @kernel.Term::Comb(@kernel.Term::Const("LET", _), _) => @kernel.refl(tm)
+      @kernel.Term::Comb(l, r) => @equal.comb2_conv(largconv, conv)(tm)
       _ => raise Failure("SUBLET_CONV")
     }
   }

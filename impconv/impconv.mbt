@@ -559,7 +559,7 @@ fn step_1() -> Unit raise {
     x58 : @kernel.Term,
   ) -> (@kernel.Term, @kernel.Term) raise {
     match x58 {
-      Comb(Comb(_, l), r) => (l, r)
+      @kernel.Term::Comb(@kernel.Term::Comb(_, l), r) => (l, r)
       _ => raise Failure("dest_binary_blind")
     }
   }
@@ -879,10 +879,10 @@ fn step_1() -> Unit raise {
   ) -> @list.List[@kernel.Term] raise {
     let acc_4 = x133
     match x134 {
-      Var(_, _) as t_10 => insert_1(acc_4)(t_10)
-      Const(_, _) => acc_4
-      Abs(v_1, b) => remove(frees(acc_4, b))(v_1)
-      Comb(u_1, v_2) => frees(frees(acc_4, u_1), v_2)
+      @kernel.Term::Var(_, _) as t_10 => insert_1(acc_4)(t_10)
+      @kernel.Term::Const(_, _) => acc_4
+      @kernel.Term::Abs(v_1, b) => remove(frees(acc_4, b))(v_1)
+      @kernel.Term::Comb(u_1, v_2) => frees(frees(acc_4, u_1), v_2)
     }
   }
   let freesl : (@list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise = fn(
@@ -918,14 +918,15 @@ fn step_1() -> Unit raise {
   }
   fn of_term(x142 : @kernel.Term) -> TypeAnnotedTermT raise {
     match x142 {
-      Var(s, ty_4) => TypeAnnotedTermT::Var_(s, ty_4)
-      Const(s_1, ty_5) as t_11 => TypeAnnotedTermT::Const_(s_1, ty_5, t_11)
-      Comb(u_2, v_3) => {
+      @kernel.Term::Var(s, ty_4) => TypeAnnotedTermT::Var_(s, ty_4)
+      @kernel.Term::Const(s_1, ty_5) as t_11 =>
+        TypeAnnotedTermT::Const_(s_1, ty_5, t_11)
+      @kernel.Term::Comb(u_2, v_3) => {
         let u_p = of_term(u_2)
         let v_p = of_term(v_3)
         TypeAnnotedTermT::Comb_(u_p, v_p, @basics.dest_fun_ty(type_of(u_p)).1)
       }
-      Abs(x_17, b_1) => {
+      @kernel.Term::Abs(x_17, b_1) => {
         let x_p_2 = of_term(x_17)
         let b_p = of_term(b_1)
         let t143 = type_of(b_p)
@@ -1031,9 +1032,10 @@ fn step_1() -> Unit raise {
           let p_4 = x157
           let t_15 = x158
           match (p_4, t_15) {
-            (Comb(p1, p2), TypeAnnotedTermT::Comb_(t1_4, t2_6, _)) =>
+            (@kernel.Term::Comb(p1, p2), TypeAnnotedTermT::Comb_(t1_4, t2_6, _)) =>
               self__7(bnds, self__7(bnds, env, p1, t1_4), p2, t2_6)
-            (Abs(v_7, p_5), TypeAnnotedTermT::Abs_(v_p_1, t_16, _)) => {
+            (@kernel.Term::Abs(v_7, p_5), TypeAnnotedTermT::Abs_(v_p_1, t_16, _)
+            ) => {
               let t159 = type_of(v_p_1)
               let tyenv_p = @basics.type_match(
                 @kernel.type_of(v_7),
@@ -1042,14 +1044,17 @@ fn step_1() -> Unit raise {
               )
               self__7(bnds.prepend((v_p_1, v_7)), (tenv, tyenv_p), p_5, t_16)
             }
-            (Const(n, ty_7), TypeAnnotedTermT::Const_(n_p, ty_p, _)) =>
+            (
+              @kernel.Term::Const(n, ty_7),
+              TypeAnnotedTermT::Const_(n_p, ty_p, _),
+            ) =>
               if n != n_p {
                 fail_l(())
               } else {
                 let tyenv_p_1 = @basics.type_match(ty_7, ty_p, tyenv)
                 (tenv, tyenv_p_1)
               }
-            (Var(n_1, ty_8) as v_8, t_17) =>
+            (@kernel.Term::Var(n_1, ty_8) as v_8, t_17) =>
               try {
                 if equal(t_17, @lib.rev_assoc(v_8, bnds)) {
                   env
@@ -1206,8 +1211,8 @@ fn step_1() -> Unit raise {
       let (op, args) = @basics.strip_comb(t_19)
       let nargs = @lib.length(args)
       match op {
-        Const(n_2, _) => (FoNetsTermLabel::Cnet(n_2, nargs), args)
-        Abs(v_11, b_4) => {
+        @kernel.Term::Const(n_2, _) => (FoNetsTermLabel::Cnet(n_2, nargs), args)
+        @kernel.Term::Abs(v_11, b_4) => {
           let b_p_1 = if @lib.mem(v_11, lcs_2) {
             @kernel.vsubst(
               @list.List([(@basics.genvar(@kernel.type_of(v_11)), v_11)]),
@@ -1218,9 +1223,9 @@ fn step_1() -> Unit raise {
           }
           (FoNetsTermLabel::Lnet(nargs), args.prepend(b_p_1))
         }
-        Var(n_3, _) if @lib.mem(op, lcs_2) =>
+        @kernel.Term::Var(n_3, _) if @lib.mem(op, lcs_2) =>
           (FoNetsTermLabel::Lcnet(n_3, nargs), args)
-        Var(_, _) => (FoNetsTermLabel::Vnet(nargs), args)
+        @kernel.Term::Var(_, _) => (FoNetsTermLabel::Vnet(nargs), args)
         _ => raise @lib.AssertFailure("tscript.ml:425:14")
       }
     }
@@ -1249,10 +1254,13 @@ fn step_1() -> Unit raise {
     let (op_1, args_1) = @basics.strip_comb(t_22)
     let nargs_1 = @lib.length(args_1)
     match op_1 {
-      Const(n_4, _) => (FoNetsTermLabel::Cnet(n_4, nargs_1), args_1)
-      Abs(_, b_5) => (FoNetsTermLabel::Lnet(nargs_1), args_1.prepend(b_5))
-      Var(n_5, _) => (FoNetsTermLabel::Lcnet(n_5, nargs_1), args_1)
-      Comb(_, _) => raise @lib.AssertFailure("tscript.ml:447:19")
+      @kernel.Term::Const(n_4, _) =>
+        (FoNetsTermLabel::Cnet(n_4, nargs_1), args_1)
+      @kernel.Term::Abs(_, b_5) =>
+        (FoNetsTermLabel::Lnet(nargs_1), args_1.prepend(b_5))
+      @kernel.Term::Var(n_5, _) =>
+        (FoNetsTermLabel::Lcnet(n_5, nargs_1), args_1)
+      @kernel.Term::Comb(_, _) => raise @lib.AssertFailure("tscript.ml:447:19")
     }
   }
   let lookup : (@kernel.Term) -> ((FoNetsT[_]) -> @list.List[_] raise) raise = (
@@ -2797,7 +2805,10 @@ fn step_1() -> Unit raise {
     let lconsts = @kernel.freesl(@kernel.hyp(th_42))
     let c_45 = @kernel.concl(th_42)
     match c_45 {
-      Comb(Comb(Const("=", _), l_5), r_4) as t_54 => {
+      @kernel.Term::Comb(
+        @kernel.Term::Comb(@kernel.Term::Const("=", _), l_5),
+        r_4
+      ) as t_54 => {
         let matches : (@kernel.Term) -> ((@kernel.Term) -> Bool raise) raise = (
           x498 : @kernel.Term,
         ) => {
@@ -2902,7 +2913,10 @@ fn step_1() -> Unit raise {
           )
         }
       }
-      Comb(Comb(Const("==>", _), p_10), c_46) as t_55 => {
+      @kernel.Term::Comb(
+        @kernel.Term::Comb(@kernel.Term::Const("==>", _), p_10),
+        c_46
+      ) as t_55 => {
         let t511 = fo_term_match(lconsts)
         let matches_1 : (@kernel.Term) -> ((@kernel.Term) -> Bool raise) raise = (
           x513 : @kernel.Term,
@@ -2938,7 +2952,10 @@ fn step_1() -> Unit raise {
           (x518 : @list.List[@kernel.Term]) => imprewr_conv(x518)(t517)
         }
         match c_46 {
-          Comb(Comb(Const("=", _), l_6), r_5) =>
+          @kernel.Term::Comb(
+            @kernel.Term::Comb(@kernel.Term::Const("=", _), l_6),
+            r_5
+          ) =>
             if @basics.free_in(l_6, r_5) ||
               (matches_1(l_6)(r_5) && matches_1(r_5)(l_6)) ||
               @kernel.is_var(l_6) {
@@ -2988,11 +3005,12 @@ fn step_1() -> Unit raise {
                 (x524 : @list.List[@kernel.Term]) => imprewr_conv(x524)(th_42),
               )
             }
-          Comb(Const("~", _), l_7) => (l_7, imprewr_concl(@bool.eqf_intro))
+          @kernel.Term::Comb(@kernel.Term::Const("~", _), l_7) =>
+            (l_7, imprewr_concl(@bool.eqf_intro))
           l_8 => (l_8, imprewr_concl(@bool.eqt_intro))
         }
       }
-      Comb(Const("~", _), l_9) => {
+      @kernel.Term::Comb(@kernel.Term::Const("~", _), l_9) => {
         let t528 = @bool.eqf_intro(th_42)
         (
           l_9,
@@ -3026,7 +3044,7 @@ fn step_1() -> Unit raise {
           },
         )
       }
-      Const("T", bool_ty) => raise Failure("pat_cnv_of_thm")
+      @kernel.Term::Const("T", bool_ty) => raise Failure("pat_cnv_of_thm")
       l_10 => {
         let t533 = @bool.eqt_intro(th_42)
         (
@@ -4063,7 +4081,10 @@ fn step_1() -> Unit raise {
     let th_53 = x745
     let th_54 = @bool.spec_all(th_53)
     match @kernel.concl(th_54) {
-      Comb(Comb(Const("=", _), l_13), _) =>
+      @kernel.Term::Comb(
+        @kernel.Term::Comb(@kernel.Term::Const("=", _), l_13),
+        _
+      ) =>
         (
           l_13,
           (x749 : @list.List[@kernel.Term]) => {
@@ -4095,16 +4116,22 @@ fn step_1() -> Unit raise {
             })(x749)(th_54)
           },
         )
-      Comb(Comb(Const("==>", _), _), c_64) => {
+      @kernel.Term::Comb(
+        @kernel.Term::Comb(@kernel.Term::Const("==>", _), _),
+        c_64
+      ) => {
         let (pat, th_p_5) = match c_64 {
-          Comb(Comb(Const("=", _), l_14), _) => (l_14, th_54)
-          Comb(Const("~", _), l_15) =>
+          @kernel.Term::Comb(
+            @kernel.Term::Comb(@kernel.Term::Const("=", _), l_14),
+            _
+          ) => (l_14, th_54)
+          @kernel.Term::Comb(@kernel.Term::Const("~", _), l_15) =>
             (l_15, gen_map_conclusion(@bool.eqf_intro)(th_54))
           l_16 => (c_64, gen_map_conclusion(@bool.eqt_intro)(th_54))
         }
         (pat, (x750 : @list.List[@kernel.Term]) => imprewr_conv(x750)(th_p_5))
       }
-      Comb(Const("~", _), l_17) => {
+      @kernel.Term::Comb(@kernel.Term::Const("~", _), l_17) => {
         let t754 = @bool.eqf_intro(th_54)
         (
           l_17,
@@ -4138,7 +4165,8 @@ fn step_1() -> Unit raise {
           },
         )
       }
-      Const("T", bool_ty_1) => raise Failure("target_pat_cnv_of_thm")
+      @kernel.Term::Const("T", bool_ty_1) =>
+        raise Failure("target_pat_cnv_of_thm")
       l_18 => {
         let t759 = @bool.eqt_intro(th_54)
         (
@@ -4624,7 +4652,7 @@ fn step_1() -> Unit raise {
         fn(x848 : @kernel.Term) -> @kernel.Thm raise {
           let t_82 = x848
           match (v_57, t_82) {
-            (VarianceT::Co, Comb(Const("?", _), _)) => {
+            (VarianceT::Co, @kernel.Term::Comb(@kernel.Term::Const("?", _), _)) => {
               let (vs_14, b_29) = @basics.strip_exists(t_82)
               let bs = strip_conj(b_29)
               let (s_3, n_10) = tryfind_fun_l(
@@ -5638,11 +5666,11 @@ fn[TBM] sub_qconv_l(
   let avs_8 = x564
   let t_60 = x565
   match t_60 {
-    Comb(l_12, r_7) =>
+    @kernel.Term::Comb(l_12, r_7) =>
       ((x558, x559, x560, x561) => comb_qconv_l(union, x558, x559, x560, x561))(
         c_51, avs_8, l_12, r_7,
       )
-    Abs(v_36, _) => {
+    @kernel.Term::Abs(v_36, _) => {
       let ho_1 = Ref::{ val: None, }
       let vs_7 = Ref::{ val: @list.empty(), }
       let c_p_2 : (@kernel.Term) -> @kernel.Thm raise = fn(
@@ -5986,9 +6014,9 @@ fn[TCE, TCF] sub_mconv_l(
 ) -> @list.List[(@kernel.Thm, TCE, TCF)] raise {
   let c_68 = x788
   match x789 {
-    Comb(l_21, r_10) => comb_mconv_l(c_68, l_21, r_10)
-    Abs(v_52, b_28) => abs_mconv_l(c_68, v_52, b_28)
-    Const(_, _) | Var(_, _) => @list.empty()
+    @kernel.Term::Comb(l_21, r_10) => comb_mconv_l(c_68, l_21, r_10)
+    @kernel.Term::Abs(v_52, b_28) => abs_mconv_l(c_68, v_52, b_28)
+    @kernel.Term::Const(_, _) | @kernel.Term::Var(_, _) => @list.empty()
   }
 }
 

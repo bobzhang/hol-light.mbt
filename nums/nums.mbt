@@ -312,16 +312,16 @@ fn step_12() -> Unit raise {
     @simp.rewrite_tac(@list.List([suc_def(), zero_def()])),
     t11,
   )
-  not_suc_c.set(@tactics.prove(@parser.parse_term("!n. ~(SUC n = _0)"), t12))
+  not_suc_v1_c.set(@tactics.prove(@parser.parse_term("!n. ~(SUC n = _0)"), t12))
 }
 
 ///|
-let not_suc_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("NOT_SUC")
+let not_suc_v1_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("NOT_SUC")
 
 ///|
 /// `NOT_SUC`
-pub fn not_suc() -> @kernel.Thm {
-  not_suc_c.get()
+pub fn not_suc_v1() -> @kernel.Thm {
+  not_suc_v1_c.get()
 }
 
 ///|
@@ -933,7 +933,7 @@ fn step_14() -> Unit raise {
     ),
     t79,
   )
-  num_induction_c.set(
+  num_induction_v1_c.set(
     @tactics.prove(
       @parser.parse_term("!P. P(_0) /\\ (!n. P(n) ==> P(SUC n)) ==> !n. P n"),
       t80,
@@ -942,12 +942,14 @@ fn step_14() -> Unit raise {
 }
 
 ///|
-let num_induction_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("num_INDUCTION")
+let num_induction_v1_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "num_INDUCTION",
+)
 
 ///|
 /// `num_INDUCTION`
-pub fn num_induction() -> @kernel.Thm {
-  num_induction_c.get()
+pub fn num_induction_v1() -> @kernel.Thm {
+  num_induction_v1_c.get()
 }
 
 ///|
@@ -956,7 +958,7 @@ fn step_15() -> Unit raise {
   let t151 = @simp.asm_rewrite_tac(@list.empty())
   let t150 = @tactics.repeat_tac(@tactics.strip_tac)
   let t149 = @simp.asm_rewrite_tac(@list.empty())
-  let t148 = @tactics.match_mp_tac(num_induction())
+  let t148 = @tactics.match_mp_tac(num_induction_v1())
   let t147 = @simp.once_rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t152 = @tactics.then_tac(
     @tactics.then_tac(
@@ -1193,8 +1195,8 @@ fn step_15() -> Unit raise {
   let t113 = @simp.rewrite_tac(@list.List([@theorems.unwind_thm1()]))
   let t112 = @simp.rewrite_tac(
     @list.List([
-      @equal.gsym(not_suc()),
-      not_suc(),
+      @equal.gsym(not_suc_v1()),
+      not_suc_v1(),
       suc_inj(),
       @theorems.exists_unique_refl(),
     ]),
@@ -1244,7 +1246,7 @@ fn step_15() -> Unit raise {
                     @tactics.then_tac(
                       @tactics.then_tac(
                         @tactics.then_tac(
-                          @tactics.match_mp_tac(num_induction()),
+                          @tactics.match_mp_tac(num_induction_v1()),
                           t105,
                         ),
                         t111,
@@ -1586,7 +1588,7 @@ fn step_15() -> Unit raise {
     ),
     t153,
   )
-  num_axiom_c.set(
+  num_axiom_v1_c.set(
     @tactics.prove(
       @parser.parse_term(
         "!(e:A) f. ?!fn. (fn _0 = e) /\\\n                   (!n. fn (SUC n) = f (fn n) n)",
@@ -1597,12 +1599,12 @@ fn step_15() -> Unit raise {
 }
 
 ///|
-let num_axiom_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("num_Axiom")
+let num_axiom_v1_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("num_Axiom")
 
 ///|
 /// `num_Axiom`
-pub fn num_axiom() -> @kernel.Thm {
-  num_axiom_c.get()
+pub fn num_axiom_v1() -> @kernel.Thm {
+  num_axiom_v1_c.get()
 }
 
 ///|
@@ -1627,32 +1629,30 @@ pub fn numeral() -> @kernel.Thm {
 }
 
 ///|
-let not_suc_v1_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("NOT_SUC")
+let not_suc_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("NOT_SUC")
 
 ///|
 /// `NOT_SUC`
-pub fn not_suc_v1() -> @kernel.Thm {
-  not_suc_v1_c.get()
+pub fn not_suc() -> @kernel.Thm {
+  not_suc_c.get()
 }
 
 ///|
-let num_induction_v1_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "num_INDUCTION",
-)
+let num_induction_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("num_INDUCTION")
 
 ///|
 /// `num_INDUCTION`
-pub fn num_induction_v1() -> @kernel.Thm {
-  num_induction_v1_c.get()
+pub fn num_induction() -> @kernel.Thm {
+  num_induction_c.get()
 }
 
 ///|
-let num_axiom_v1_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("num_Axiom")
+let num_axiom_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("num_Axiom")
 
 ///|
 /// `num_Axiom`
-pub fn num_axiom_v1() -> @kernel.Thm {
-  num_axiom_v1_c.get()
+pub fn num_axiom() -> @kernel.Thm {
+  num_axiom_c.get()
 }
 
 ///|
@@ -1671,15 +1671,12 @@ fn step_17() -> Unit raise {
         },
         @list.List([th]),
       ),
-      @list.List([not_suc(), num_induction(), num_axiom()]),
+      @list.List([not_suc_v1(), num_induction_v1(), num_axiom_v1()]),
     ) {
-    More(
-      not_suc_1,
-      tail=More(num_induction_1, tail=More(num_axiom_1, tail=Empty))
-    ) => {
-      not_suc_v1_c.set(not_suc_1)
-      num_induction_v1_c.set(num_induction_1)
-      num_axiom_v1_c.set(num_axiom_1)
+    More(not_suc, tail=More(num_induction, tail=More(num_axiom, tail=Empty))) => {
+      not_suc_c.set(not_suc)
+      num_induction_c.set(num_induction)
+      num_axiom_c.set(num_axiom)
       ()
     }
     _ => raise @lib.MatchFailure("tscript.ml:156:4")
@@ -1696,7 +1693,7 @@ fn step_18() -> Unit raise {
   induct_tac_c.set(
     @tactics.thenl(
       @tactics.then_tac(
-        @tactics.match_mp_tac(num_induction_v1()),
+        @tactics.match_mp_tac(num_induction()),
         @tactics.conj_tac,
       ),
       t159,
@@ -1716,9 +1713,9 @@ pub fn induct_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 ///|
 /// num_RECURSION
 fn step_19() -> Unit raise {
-  let avs = @basics.strip_forall(@kernel.concl(num_axiom_v1())).0
+  let avs = @basics.strip_forall(@kernel.concl(num_axiom())).0
   num_recursion_c.set(
-    @bool.genl(avs, @bool.existence(@bool.specl(avs, num_axiom_v1()))),
+    @bool.genl(avs, @bool.existence(@bool.specl(avs, num_axiom()))),
   )
 }
 
@@ -1753,7 +1750,7 @@ pub fn num_cases() -> @kernel.Thm {
 /// nums.ml:185
 fn step_21() -> Unit raise {
   @class.inductive_type_store().val = @class.inductive_type_store().val.prepend(
-    ("num", (2, num_induction_v1(), num_recursion())),
+    ("num", (2, num_induction(), num_recursion())),
   )
   ()
 }
@@ -2043,7 +2040,7 @@ fn step_27() -> Unit raise {
             @lib.map(
               fn(x216 : @kernel.Term) -> String raise {
                 match x216 {
-                  Var(name_3, _) => name_3
+                  @kernel.Term::Var(name_3, _) => name_3
                   _ => raise @lib.MatchFailure("tscript.ml:286")
                 }
               },

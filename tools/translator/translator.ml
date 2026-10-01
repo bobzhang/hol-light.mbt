@@ -513,6 +513,8 @@ module Names = struct
     | "meson.ml" -> Some "meson"
     | "firstorder.ml" -> Some "firstorder"
     | "quot.ml" -> Some "quot"
+    | "metis.ml" -> Some "metis"
+    | "thecops.ml" -> Some "thecops"
     | "impconv.ml" -> Some "impconv"
     | "bignum_num.ml" -> Some "num"
     | _ -> None

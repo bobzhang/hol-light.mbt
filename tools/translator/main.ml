@@ -23,6 +23,7 @@ module Main = struct
     | "compute.ml" -> ("compute/compute.mbt", [])
     | "nums.ml" -> ("nums/nums.mbt", [])
     | "recursion.ml" -> ("recursion/recursion.mbt", [])
+    | "arith.ml" -> ("arith/arith.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =
@@ -53,12 +54,20 @@ module Main = struct
                 | Parsetree.Pstr_value (_, vbs) ->
                     List.iter
                       (fun vb ->
-                        let rec names p =
-                          match p.Parsetree.ppat_desc with
-                          | Parsetree.Ppat_var { txt; _ } -> [ txt ]
-                          | Parsetree.Ppat_tuple ps -> List.concat_map names ps
-                          | Parsetree.Ppat_constraint (p, _) | Parsetree.Ppat_alias (p, _) -> names p
-                          | _ -> []
+                        (* every variable of the pattern (`let [A; B] = ...` too) *)
+                        let names p =
+                          let acc = ref [] in
+                          let open Ast_iterator in
+                          let it =
+                            { default_iterator with
+                              pat = (fun self q ->
+                                (match q.Parsetree.ppat_desc with
+                                 | Parsetree.Ppat_var { txt; _ } | Parsetree.Ppat_alias (_, { txt; _ }) -> acc := txt :: !acc
+                                 | _ -> ());
+                                default_iterator.pat self q) }
+                          in
+                          it.pat it p;
+                          List.rev !acc
                         in
                         List.iter
                           (fun n ->

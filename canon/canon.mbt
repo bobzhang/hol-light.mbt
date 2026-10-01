@@ -406,7 +406,10 @@ fn step_4() -> Unit raise {
           let baseconvs = x50
           let tm = x51
           match tm {
-            Comb(Comb(Const("/\\", _), l), r) => {
+            @kernel.Term::Comb(
+              @kernel.Term::Comb(@kernel.Term::Const("/\\", _), l),
+              r
+            ) => {
               let (th_lp, th_ln) = nnf_dconv(cf, baseconvs, l)
               let (th_rp, th_rn) = nnf_dconv(cf, baseconvs, r)
               let t52 = @kernel.mk_comb_rule(
@@ -422,7 +425,10 @@ fn step_4() -> Unit raise {
               )
               (@kernel.mk_comb_rule(@equal.ap_term(and_tm, th_lp), th_rp), t53)
             }
-            Comb(Comb(Const("\\/", _), l_1), r_1) => {
+            @kernel.Term::Comb(
+              @kernel.Term::Comb(@kernel.Term::Const("\\/", _), l_1),
+              r_1
+            ) => {
               let (th_lp_1, th_ln_1) = nnf_dconv(cf, baseconvs, l_1)
               let (th_rp_1, th_rn_1) = nnf_dconv(cf, baseconvs, r_1)
               let t54 = @kernel.mk_comb_rule(
@@ -441,7 +447,10 @@ fn step_4() -> Unit raise {
                 t55,
               )
             }
-            Comb(Comb(Const("==>", _), l_2), r_2) => {
+            @kernel.Term::Comb(
+              @kernel.Term::Comb(@kernel.Term::Const("==>", _), l_2),
+              r_2
+            ) => {
               let (th_lp_2, th_ln_2) = nnf_dconv(cf, baseconvs, l_2)
               let (th_rp_2, th_rn_2) = nnf_dconv(cf, baseconvs, r_2)
               let t57 = @kernel.mk_comb_rule(
@@ -470,9 +479,15 @@ fn step_4() -> Unit raise {
                 t58,
               )
             }
-            Comb(
-              Comb(
-                Const("=", Tyapp("fun", More(Tyapp("bool", _), tail=_))),
+            @kernel.Term::Comb(
+              @kernel.Term::Comb(
+                @kernel.Term::Const(
+                  "=",
+                  @kernel.HolType::Tyapp(
+                    "fun",
+                    More(@kernel.HolType::Tyapp("bool", _), tail=_)
+                  )
+                ),
                 l_3
               ),
               r_3
@@ -573,12 +588,15 @@ fn step_4() -> Unit raise {
                 )
               }
             }
-            Comb(
-              Const(
+            @kernel.Term::Comb(
+              @kernel.Term::Const(
                 "!",
-                Tyapp("fun", More(Tyapp("fun", More(ty, tail=_)), tail=_))
+                @kernel.HolType::Tyapp(
+                  "fun",
+                  More(@kernel.HolType::Tyapp("fun", More(ty, tail=_)), tail=_)
+                )
               ) as q,
-              Abs(x, t) as bod
+              @kernel.Term::Abs(x, t) as bod
             ) => {
               let (th_p, th_n) = nnf_dconv(true, baseconvs, t)
               let t69 = @kernel.inst_type(
@@ -601,12 +619,18 @@ fn step_4() -> Unit raise {
               let t70 = @kernel.trans(th1, @drule.mk_exists_rule(x, th2))
               (@equal.ap_term(q, @kernel.abs_rule(x, th_p)), t70)
             }
-            Comb(
-              Const(
+            @kernel.Term::Comb(
+              @kernel.Term::Const(
                 "?",
-                Tyapp("fun", More(Tyapp("fun", More(ty_1, tail=_)), tail=_))
+                @kernel.HolType::Tyapp(
+                  "fun",
+                  More(
+                    @kernel.HolType::Tyapp("fun", More(ty_1, tail=_)),
+                    tail=_
+                  )
+                )
               ) as q_1,
-              Abs(x_1, t_1) as bod_1
+              @kernel.Term::Abs(x_1, t_1) as bod_1
             ) => {
               let (th_p_1, th_n_1) = nnf_dconv(cf, baseconvs, t_1)
               let t71 = @kernel.inst_type(
@@ -635,12 +659,18 @@ fn step_4() -> Unit raise {
               let t72 = @kernel.trans(th1_1, @drule.mk_forall_rule(x_1, th2_1))
               (@equal.ap_term(q_1, @kernel.abs_rule(x_1, th_p_1)), t72)
             }
-            Comb(
-              Const(
+            @kernel.Term::Comb(
+              @kernel.Term::Const(
                 "?!",
-                Tyapp("fun", More(Tyapp("fun", More(ty_2, tail=_)), tail=_))
+                @kernel.HolType::Tyapp(
+                  "fun",
+                  More(
+                    @kernel.HolType::Tyapp("fun", More(ty_2, tail=_)),
+                    tail=_
+                  )
+                )
               ),
-              Abs(x_2, t_2) as bod_2
+              @kernel.Term::Abs(x_2, t_2) as bod_2
             ) => {
               let y = @kernel.variant(@kernel.frees(t_2).prepend(x_2), x_2)
               let (th_p_2, th_n_2) = nnf_dconv(cf, baseconvs, t_2)
@@ -736,7 +766,7 @@ fn step_4() -> Unit raise {
               let t79 = @kernel.trans(th1_p, th2_p)
               (@kernel.trans(th1_2, th2_2), t79)
             }
-            Comb(Const("~", _), t_3) => {
+            @kernel.Term::Comb(@kernel.Term::Const("~", _), t_3) => {
               let (th1_3, th2_3) = nnf_dconv(cf, baseconvs, t_3)
               (
                 th2_3,
@@ -886,17 +916,26 @@ fn nnf_conv_l(
   let (base1, base2) as baseconvs_1 = x82
   let tm_1 = x83
   match tm_1 {
-    Comb(Comb(Const("/\\", _), l_4), r_4) => {
+    @kernel.Term::Comb(
+      @kernel.Term::Comb(@kernel.Term::Const("/\\", _), l_4),
+      r_4
+    ) => {
       let th_lp_4 = nnf_conv(cf_1, baseconvs_1, l_4)
       let th_rp_4 = nnf_conv(cf_1, baseconvs_1, r_4)
       @kernel.mk_comb_rule(@equal.ap_term(and_tm, th_lp_4), th_rp_4)
     }
-    Comb(Comb(Const("\\/", _), l_5), r_5) => {
+    @kernel.Term::Comb(
+      @kernel.Term::Comb(@kernel.Term::Const("\\/", _), l_5),
+      r_5
+    ) => {
       let th_lp_5 = nnf_conv(cf_1, baseconvs_1, l_5)
       let th_rp_5 = nnf_conv(cf_1, baseconvs_1, r_5)
       @kernel.mk_comb_rule(@equal.ap_term(or_tm, th_lp_5), th_rp_5)
     }
-    Comb(Comb(Const("==>", _), l_6), r_6) => {
+    @kernel.Term::Comb(
+      @kernel.Term::Comb(@kernel.Term::Const("==>", _), l_6),
+      r_6
+    ) => {
       let th_ln_4 = nnf_conv_p(cf_1, baseconvs_1, l_6)
       let th_rp_6 = nnf_conv(cf_1, baseconvs_1, r_6)
       let t84 = @kernel.mk_comb_rule(@equal.ap_term(or_tm, th_ln_4), th_rp_6)
@@ -905,8 +944,17 @@ fn nnf_conv_l(
         t84,
       )
     }
-    Comb(
-      Comb(Const("=", Tyapp("fun", More(Tyapp("bool", _), tail=_))), l_7),
+    @kernel.Term::Comb(
+      @kernel.Term::Comb(
+        @kernel.Term::Const(
+          "=",
+          @kernel.HolType::Tyapp(
+            "fun",
+            More(@kernel.HolType::Tyapp("bool", _), tail=_)
+          )
+        ),
+        l_7
+      ),
       r_7
     ) => {
       let (th_lp_6, th_ln_5) = nnf_dconv(cf_1, base2, l_7)
@@ -939,23 +987,41 @@ fn nnf_conv_l(
         )
       }
     }
-    Comb(
-      Const("!", Tyapp("fun", More(Tyapp("fun", More(ty_3, tail=_)), tail=_))) as q_2,
-      Abs(x_3, t_4)
+    @kernel.Term::Comb(
+      @kernel.Term::Const(
+        "!",
+        @kernel.HolType::Tyapp(
+          "fun",
+          More(@kernel.HolType::Tyapp("fun", More(ty_3, tail=_)), tail=_)
+        )
+      ) as q_2,
+      @kernel.Term::Abs(x_3, t_4)
     ) => {
       let th_p_3 = nnf_conv(true, baseconvs_1, t_4)
       @equal.ap_term(q_2, @kernel.abs_rule(x_3, th_p_3))
     }
-    Comb(
-      Const("?", Tyapp("fun", More(Tyapp("fun", More(ty_4, tail=_)), tail=_))) as q_3,
-      Abs(x_4, t_5)
+    @kernel.Term::Comb(
+      @kernel.Term::Const(
+        "?",
+        @kernel.HolType::Tyapp(
+          "fun",
+          More(@kernel.HolType::Tyapp("fun", More(ty_4, tail=_)), tail=_)
+        )
+      ) as q_3,
+      @kernel.Term::Abs(x_4, t_5)
     ) => {
       let th_p_4 = nnf_conv(cf_1, baseconvs_1, t_5)
       @equal.ap_term(q_3, @kernel.abs_rule(x_4, th_p_4))
     }
-    Comb(
-      Const("?!", Tyapp("fun", More(Tyapp("fun", More(ty_5, tail=_)), tail=_))),
-      Abs(x_5, t_6) as bod_3
+    @kernel.Term::Comb(
+      @kernel.Term::Const(
+        "?!",
+        @kernel.HolType::Tyapp(
+          "fun",
+          More(@kernel.HolType::Tyapp("fun", More(ty_5, tail=_)), tail=_)
+        )
+      ),
+      @kernel.Term::Abs(x_5, t_6) as bod_3
     ) => {
       let y_1 = @kernel.variant(@kernel.frees(t_6).prepend(x_5), x_5)
       let (th_p_5, th_n_3) = nnf_dconv(cf_1, base2, t_6)
@@ -1000,7 +1066,8 @@ fn nnf_conv_l(
       )
       @kernel.trans(th1_4, th2_4)
     }
-    Comb(Const("~", _), t_7) => nnf_conv_p(cf_1, baseconvs_1, t_7)
+    @kernel.Term::Comb(@kernel.Term::Const("~", _), t_7) =>
+      nnf_conv_p(cf_1, baseconvs_1, t_7)
     _ =>
       base1(tm_1) catch {
         Failure(_) => @kernel.refl(tm_1)
@@ -1073,7 +1140,10 @@ fn nnf_conv_p_l(
   let (base1_1, base2_1) as baseconvs_2 = x93
   let tm_2 = x94
   match tm_2 {
-    Comb(Comb(Const("/\\", _), l_8), r_8) => {
+    @kernel.Term::Comb(
+      @kernel.Term::Comb(@kernel.Term::Const("/\\", _), l_8),
+      r_8
+    ) => {
       let th_ln_6 = nnf_conv_p(cf_2, baseconvs_2, l_8)
       let th_rn_5 = nnf_conv_p(cf_2, baseconvs_2, r_8)
       let t95 = @kernel.mk_comb_rule(@equal.ap_term(or_tm, th_ln_6), th_rn_5)
@@ -1082,7 +1152,10 @@ fn nnf_conv_p_l(
         t95,
       )
     }
-    Comb(Comb(Const("\\/", _), l_9), r_9) => {
+    @kernel.Term::Comb(
+      @kernel.Term::Comb(@kernel.Term::Const("\\/", _), l_9),
+      r_9
+    ) => {
       let th_ln_7 = nnf_conv_p(cf_2, baseconvs_2, l_9)
       let th_rn_6 = nnf_conv_p(cf_2, baseconvs_2, r_9)
       let t96 = @kernel.mk_comb_rule(@equal.ap_term(and_tm, th_ln_7), th_rn_6)
@@ -1091,7 +1164,10 @@ fn nnf_conv_p_l(
         t96,
       )
     }
-    Comb(Comb(Const("==>", _), l_10), r_10) => {
+    @kernel.Term::Comb(
+      @kernel.Term::Comb(@kernel.Term::Const("==>", _), l_10),
+      r_10
+    ) => {
       let th_lp_7 = nnf_conv(cf_2, baseconvs_2, l_10)
       let th_rn_7 = nnf_conv_p(cf_2, baseconvs_2, r_10)
       let t97 = @kernel.mk_comb_rule(@equal.ap_term(and_tm, th_lp_7), th_rn_7)
@@ -1100,8 +1176,17 @@ fn nnf_conv_p_l(
         t97,
       )
     }
-    Comb(
-      Comb(Const("=", Tyapp("fun", More(Tyapp("bool", _), tail=_))), l_11),
+    @kernel.Term::Comb(
+      @kernel.Term::Comb(
+        @kernel.Term::Const(
+          "=",
+          @kernel.HolType::Tyapp(
+            "fun",
+            More(@kernel.HolType::Tyapp("bool", _), tail=_)
+          )
+        ),
+        l_11
+      ),
       r_11
     ) => {
       let (th_lp_8, th_ln_8) = nnf_dconv(cf_2, base2_1, l_11)
@@ -1143,9 +1228,15 @@ fn nnf_conv_p_l(
         )
       }
     }
-    Comb(
-      Const("!", Tyapp("fun", More(Tyapp("fun", More(ty_6, tail=_)), tail=_))),
-      Abs(x_6, t_8) as bod_4
+    @kernel.Term::Comb(
+      @kernel.Term::Const(
+        "!",
+        @kernel.HolType::Tyapp(
+          "fun",
+          More(@kernel.HolType::Tyapp("fun", More(ty_6, tail=_)), tail=_)
+        )
+      ),
+      @kernel.Term::Abs(x_6, t_8) as bod_4
     ) => {
       let th_n_4 = nnf_conv_p(cf_2, baseconvs_2, t_8)
       let t102 = @kernel.inst_type(
@@ -1164,9 +1255,15 @@ fn nnf_conv_p_l(
       )
       @kernel.trans(th1_5, @drule.mk_exists_rule(x_6, th2_5))
     }
-    Comb(
-      Const("?", Tyapp("fun", More(Tyapp("fun", More(ty_7, tail=_)), tail=_))),
-      Abs(x_7, t_9) as bod_5
+    @kernel.Term::Comb(
+      @kernel.Term::Const(
+        "?",
+        @kernel.HolType::Tyapp(
+          "fun",
+          More(@kernel.HolType::Tyapp("fun", More(ty_7, tail=_)), tail=_)
+        )
+      ),
+      @kernel.Term::Abs(x_7, t_9) as bod_5
     ) => {
       let th_n_5 = nnf_conv_p(true, baseconvs_2, t_9)
       let t103 = @kernel.inst_type(
@@ -1185,9 +1282,15 @@ fn nnf_conv_p_l(
       )
       @kernel.trans(th1_6, @drule.mk_forall_rule(x_7, th2_6))
     }
-    Comb(
-      Const("?!", Tyapp("fun", More(Tyapp("fun", More(ty_8, tail=_)), tail=_))),
-      Abs(x_8, t_10) as bod_6
+    @kernel.Term::Comb(
+      @kernel.Term::Const(
+        "?!",
+        @kernel.HolType::Tyapp(
+          "fun",
+          More(@kernel.HolType::Tyapp("fun", More(ty_8, tail=_)), tail=_)
+        )
+      ),
+      @kernel.Term::Abs(x_8, t_10) as bod_6
     ) => {
       let y_2 = @kernel.variant(@kernel.frees(t_10).prepend(x_8), x_8)
       let (th_p_6, th_n_6) = nnf_dconv(cf_2, base2_1, t_10)
@@ -1232,7 +1335,7 @@ fn nnf_conv_p_l(
       )
       @kernel.trans(th1_p_1, th2_p_1)
     }
-    Comb(Const("~", _), t_11) => {
+    @kernel.Term::Comb(@kernel.Term::Const("~", _), t_11) => {
       let th1_7 = nnf_conv(cf_2, baseconvs_2, t_11)
       @kernel.trans(
         @kernel.inst_rule(@list.List([(t_11, p_tm)]), pth_not_not),
@@ -1423,7 +1526,13 @@ fn step_9() -> Unit raise {
   fn distribute(x124 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x124
     match tm {
-      Comb(Comb(Const("/\\", _), a), Comb(Comb(Const("\\/", _), b), c)) => {
+      @kernel.Term::Comb(
+        @kernel.Term::Comb(@kernel.Term::Const("/\\", _), a),
+        @kernel.Term::Comb(
+          @kernel.Term::Comb(@kernel.Term::Const("\\/", _), b),
+          c
+        )
+      ) => {
         let th = @kernel.inst_rule(
           @list.List([(a, a_tm), (b, b_tm), (c, c_tm)]),
           pth1,
@@ -1431,7 +1540,16 @@ fn step_9() -> Unit raise {
         let t125 = @kernel.rand(@kernel.concl(th))
         @kernel.trans(th, @equal.binop_conv(distribute)(t125))
       }
-      Comb(Comb(Const("/\\", _), Comb(Comb(Const("\\/", _), a_1), b_1)), c_1) => {
+      @kernel.Term::Comb(
+        @kernel.Term::Comb(
+          @kernel.Term::Const("/\\", _),
+          @kernel.Term::Comb(
+            @kernel.Term::Comb(@kernel.Term::Const("\\/", _), a_1),
+            b_1
+          )
+        ),
+        c_1
+      ) => {
         let th_1 = @kernel.inst_rule(
           @list.List([(a_1, a_tm), (b_1, b_tm), (c_1, c_tm)]),
           pth2,
@@ -1467,10 +1585,15 @@ fn weakdnf_l(
   let weakdnf = (x127 : @kernel.Term) => weakdnf_l(distribute, strengthen, x127)
   let tm_1 = x127
   match tm_1 {
-    Comb(Const("!", _), Abs(_, _)) | Comb(Const("?", _), Abs(_, _)) =>
+    @kernel.Term::Comb(@kernel.Term::Const("!", _), @kernel.Term::Abs(_, _))
+    | @kernel.Term::Comb(@kernel.Term::Const("?", _), @kernel.Term::Abs(_, _)) =>
       @equal.binder_conv(weakdnf)(tm_1)
-    Comb(Comb(Const("\\/", _), _), _) => @equal.binop_conv(weakdnf)(tm_1)
-    Comb(Comb(Const("/\\", _) as op, l), r) => {
+    @kernel.Term::Comb(@kernel.Term::Comb(@kernel.Term::Const("\\/", _), _), _) =>
+      @equal.binop_conv(weakdnf)(tm_1)
+    @kernel.Term::Comb(
+      @kernel.Term::Comb(@kernel.Term::Const("/\\", _) as op, l),
+      r
+    ) => {
       let t128 = weakdnf(r)
       let th_2 = @kernel.mk_comb_rule(@equal.ap_term(op, weakdnf(l)), t128)
       @kernel.trans(th_2, distribute(@kernel.rand(@kernel.concl(th_2))))
@@ -1493,10 +1616,15 @@ fn substrongdnf_l(
   }
   let tm_2 = x129
   match tm_2 {
-    Comb(Const("!", _), Abs(_, _)) | Comb(Const("?", _), Abs(_, _)) =>
+    @kernel.Term::Comb(@kernel.Term::Const("!", _), @kernel.Term::Abs(_, _))
+    | @kernel.Term::Comb(@kernel.Term::Const("?", _), @kernel.Term::Abs(_, _)) =>
       @equal.binder_conv(strongdnf)(tm_2)
-    Comb(Comb(Const("\\/", _), _), _) => @equal.binop_conv(substrongdnf)(tm_2)
-    Comb(Comb(Const("/\\", _) as op_1, l_1), r_1) => {
+    @kernel.Term::Comb(@kernel.Term::Comb(@kernel.Term::Const("\\/", _), _), _) =>
+      @equal.binop_conv(substrongdnf)(tm_2)
+    @kernel.Term::Comb(
+      @kernel.Term::Comb(@kernel.Term::Const("/\\", _) as op_1, l_1),
+      r_1
+    ) => {
       let t130 = substrongdnf(r_1)
       let th_3 = @kernel.mk_comb_rule(
         @equal.ap_term(op_1, substrongdnf(l_1)),
@@ -1555,7 +1683,13 @@ fn step_10() -> Unit raise {
   fn distribute(x132 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x132
     match tm {
-      Comb(Comb(Const("\\/", _), a), Comb(Comb(Const("/\\", _), b), c)) => {
+      @kernel.Term::Comb(
+        @kernel.Term::Comb(@kernel.Term::Const("\\/", _), a),
+        @kernel.Term::Comb(
+          @kernel.Term::Comb(@kernel.Term::Const("/\\", _), b),
+          c
+        )
+      ) => {
         let th = @kernel.inst_rule(
           @list.List([(a, a_tm), (b, b_tm), (c, c_tm)]),
           pth1,
@@ -1563,7 +1697,16 @@ fn step_10() -> Unit raise {
         let t133 = @kernel.rand(@kernel.concl(th))
         @kernel.trans(th, @equal.binop_conv(distribute)(t133))
       }
-      Comb(Comb(Const("\\/", _), Comb(Comb(Const("/\\", _), a_1), b_1)), c_1) => {
+      @kernel.Term::Comb(
+        @kernel.Term::Comb(
+          @kernel.Term::Const("\\/", _),
+          @kernel.Term::Comb(
+            @kernel.Term::Comb(@kernel.Term::Const("/\\", _), a_1),
+            b_1
+          )
+        ),
+        c_1
+      ) => {
         let th_1 = @kernel.inst_rule(
           @list.List([(a_1, a_tm), (b_1, b_tm), (c_1, c_tm)]),
           pth2,
@@ -1599,10 +1742,15 @@ fn weakcnf_l(
   let weakcnf = (x135 : @kernel.Term) => weakcnf_l(distribute, strengthen, x135)
   let tm_1 = x135
   match tm_1 {
-    Comb(Const("!", _), Abs(_, _)) | Comb(Const("?", _), Abs(_, _)) =>
+    @kernel.Term::Comb(@kernel.Term::Const("!", _), @kernel.Term::Abs(_, _))
+    | @kernel.Term::Comb(@kernel.Term::Const("?", _), @kernel.Term::Abs(_, _)) =>
       @equal.binder_conv(weakcnf)(tm_1)
-    Comb(Comb(Const("/\\", _), _), _) => @equal.binop_conv(weakcnf)(tm_1)
-    Comb(Comb(Const("\\/", _) as op, l), r) => {
+    @kernel.Term::Comb(@kernel.Term::Comb(@kernel.Term::Const("/\\", _), _), _) =>
+      @equal.binop_conv(weakcnf)(tm_1)
+    @kernel.Term::Comb(
+      @kernel.Term::Comb(@kernel.Term::Const("\\/", _) as op, l),
+      r
+    ) => {
       let t136 = weakcnf(r)
       let th_2 = @kernel.mk_comb_rule(@equal.ap_term(op, weakcnf(l)), t136)
       @kernel.trans(th_2, distribute(@kernel.rand(@kernel.concl(th_2))))
@@ -1625,10 +1773,15 @@ fn substrongcnf_l(
   }
   let tm_2 = x137
   match tm_2 {
-    Comb(Const("!", _), Abs(_, _)) | Comb(Const("?", _), Abs(_, _)) =>
+    @kernel.Term::Comb(@kernel.Term::Const("!", _), @kernel.Term::Abs(_, _))
+    | @kernel.Term::Comb(@kernel.Term::Const("?", _), @kernel.Term::Abs(_, _)) =>
       @equal.binder_conv(strongcnf)(tm_2)
-    Comb(Comb(Const("/\\", _), _), _) => @equal.binop_conv(substrongcnf)(tm_2)
-    Comb(Comb(Const("\\/", _) as op_1, l_1), r_1) => {
+    @kernel.Term::Comb(@kernel.Term::Comb(@kernel.Term::Const("/\\", _), _), _) =>
+      @equal.binop_conv(substrongcnf)(tm_2)
+    @kernel.Term::Comb(
+      @kernel.Term::Comb(@kernel.Term::Const("\\/", _) as op_1, l_1),
+      r_1
+    ) => {
       let t138 = substrongcnf(r_1)
       let th_3 = @kernel.mk_comb_rule(
         @equal.ap_term(op_1, substrongcnf(l_1)),
@@ -1668,8 +1821,13 @@ pub fn assoc_conv(
   fn distrib(x142 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x142
     match tm {
-      Comb(Comb(op_p, Comb(Comb(op_p_p, p), q)), r) if op_p == op &&
-        op_p_p == op => {
+      @kernel.Term::Comb(
+        @kernel.Term::Comb(
+          op_p,
+          @kernel.Term::Comb(@kernel.Term::Comb(op_p_p, p), q)
+        ),
+        r
+      ) if op_p == op && op_p_p == op => {
         let th1 = @kernel.inst_rule(@list.List([(p, x), (q, y), (r, z)]), th_p)
         let (l, r_p) = @kernel.dest_comb(@kernel.rand(@kernel.concl(th1)))
         let th2 = @equal.ap_term(l, distrib(r_p))
@@ -1682,7 +1840,8 @@ pub fn assoc_conv(
   fn assoc(x143 : @kernel.Term) -> @kernel.Thm raise {
     let tm_1 = x143
     match tm_1 {
-      Comb(Comb(op_p_1, p_1) as l_1, q_1) if op_p_1 == op => {
+      @kernel.Term::Comb(@kernel.Term::Comb(op_p_1, p_1) as l_1, q_1) if op_p_1 ==
+        op => {
         let th_1 = @equal.ap_term(l_1, assoc(q_1))
         @kernel.trans(th_1, distrib(@kernel.rand(@kernel.concl(th_1))))
       }
@@ -2056,7 +2215,7 @@ fn step_13() -> Unit raise {
     let fvs = x188
     let tm = x189
     match tm {
-      Comb(s, t) =>
+      @kernel.Term::Comb(s, t) =>
         if @class.is_cond(tm) &&
           @lib.intersect(@kernel.frees(@equal.lhand(s)), fvs) == @list.empty() {
           tm
@@ -2066,7 +2225,7 @@ fn step_13() -> Unit raise {
             e => raise e
           }
         }
-      Abs(x, t_1) => find_conditional(fvs.prepend(x), t_1)
+      @kernel.Term::Abs(x, t_1) => find_conditional(fvs.prepend(x), t_1)
       _ => raise Failure("find_conditional")
     }
   }
@@ -2414,25 +2573,36 @@ pub fn prop_atom_conv(
   let conv = x247
   let tm = x248
   match tm {
-    Comb(Const("!", _) | Const("?", _) | Const("?!", _), Abs(_, _)) =>
+    @kernel.Term::Comb(
+      @kernel.Term::Const("!", _)
+      | @kernel.Term::Const("?", _)
+      | @kernel.Term::Const("?!", _),
+      @kernel.Term::Abs(_, _)
+    ) =>
       @equal.binder_conv((x249 : @kernel.Term) => prop_atom_conv(conv, x249))(
         tm,
       )
-    Comb(
-      Comb(
-        Const("/\\", _)
-        | Const("\\/", _)
-        | Const("==>", _)
-        | Const(
+    @kernel.Term::Comb(
+      @kernel.Term::Comb(
+        @kernel.Term::Const("/\\", _)
+        | @kernel.Term::Const("\\/", _)
+        | @kernel.Term::Const("==>", _)
+        | @kernel.Term::Const(
           "=",
-          Tyapp("fun", More(Tyapp("bool", Empty), tail=More(_, tail=Empty)))
+          @kernel.HolType::Tyapp(
+            "fun",
+            More(
+              @kernel.HolType::Tyapp("bool", Empty),
+              tail=More(_, tail=Empty)
+            )
+          )
         ),
         _
       ),
       _
     ) =>
       @equal.binop_conv((x250 : @kernel.Term) => prop_atom_conv(conv, x250))(tm)
-    Comb(Const("~", _), _) =>
+    @kernel.Term::Comb(@kernel.Term::Const("~", _), _) =>
       @equal.rand_conv((x251 : @kernel.Term) => prop_atom_conv(conv, x251))(tm)
     _ => @equal.try_conv(conv)(tm)
   }

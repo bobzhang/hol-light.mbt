@@ -138,42 +138,6 @@ module Lower = struct
          | Some t -> Some t
          | None -> own_type (Path.name p))
 
-  (* Exceptions of translated files: Ident.unique_name or qualified name
-     (`Metis_prover.Heap.Empty`) -> (package, suberror name) *)
-  let own_exns : (string, string * string) Hashtbl.t = Hashtbl.create 32
-
-  (* A constructor of a translated variant type is qualified by its type
-     (`@pkg.Type::Ctor`): packages and types may share constructor names.
-     An exception is `Suberror::Name`. *)
-  let ctor_name ?cd name =
-    let by_type =
-      match cd with
-      | Some cd ->
-          (match Types.get_desc cd.Types.cstr_res, cd.Types.cstr_tag with
-           | Types.Tconstr (p, _, _), (Types.Cstr_constant _ | Types.Cstr_block _ | Types.Cstr_unboxed) ->
-               Option.map (fun t -> t ^ "::" ^ name) (own_type_path p)
-           | _, Types.Cstr_extension (p, _) ->
-               let key =
-                 match p with
-                 | Path.Pident id -> Some ("#" ^ Ident.unique_name id)
-                 | _ -> member_name p
-               in
-               (match Option.bind key (Hashtbl.find_opt own_exns) with
-                | Some (pkg, m) -> Some (qualified (pkg, m) ^ "::" ^ name)
-                | None ->
-                    (match Hashtbl.find_opt own_exns (Path.name p) with
-                     | Some (pkg, m) -> Some (qualified (pkg, m) ^ "::" ^ name)
-                     | None -> None))
-           | _ -> None)
-      | None -> None
-    in
-    match by_type with
-    | Some n -> n
-    | None ->
-    match Hashtbl.find_opt own_ctors name with
-    | Some pkg -> qualified (pkg, name)
-    | None -> name
-
   let base_type0 = function
     | "thm" -> Some "@kernel.Thm"
     | "term" -> Some "@kernel.Term"
@@ -204,6 +168,49 @@ module Lower = struct
     | _ -> None
 
   let base_type n = match own_type n with Some t -> Some t | None -> base_type0 n
+
+  (* Exceptions of translated files: Ident.unique_name or qualified name
+     (`Metis_prover.Heap.Empty`) -> (package, suberror name) *)
+  let own_exns : (string, string * string) Hashtbl.t = Hashtbl.create 32
+
+  (* A constructor of a translated variant type is qualified by its type
+     (`@pkg.Type::Ctor`): packages and types may share constructor names.
+     An exception is `Suberror::Name`. *)
+  let ctor_name ?cd name =
+    let by_type =
+      match cd with
+      | Some cd ->
+          (match Types.get_desc cd.Types.cstr_res, cd.Types.cstr_tag with
+           | Types.Tconstr (p, _, _), (Types.Cstr_constant _ | Types.Cstr_block _ | Types.Cstr_unboxed) ->
+               (match own_type_path p with
+                | Some t -> Some (t ^ "::" ^ name)
+                | None ->
+                    (* a hand-ported type (term, hol_type, preterm, ...) *)
+                    (match base_type0 (Path.name p) with
+                     | Some t when String.length t > 1 && t.[0] = '@' && t <> "@list.List" -> Some (t ^ "::" ^ name)
+                     | _ -> None))
+           | _, Types.Cstr_extension (p, _) ->
+               let key =
+                 match p with
+                 | Path.Pident id -> Some ("#" ^ Ident.unique_name id)
+                 | _ -> member_name p
+               in
+               (match Option.bind key (Hashtbl.find_opt own_exns) with
+                | Some (pkg, m) -> Some (qualified (pkg, m) ^ "::" ^ name)
+                | None ->
+                    (match Hashtbl.find_opt own_exns (Path.name p) with
+                     | Some (pkg, m) -> Some (qualified (pkg, m) ^ "::" ^ name)
+                     | None -> None))
+           | _ -> None)
+      | None -> None
+    in
+    match by_type with
+    | Some n -> n
+    | None ->
+    match Hashtbl.find_opt own_ctors name with
+    | Some pkg -> qualified (pkg, name)
+    | None -> name
+
 
   (* The MoonBit type behind an aliased OCaml abbreviation (e.g. the
      uncurried `@tactics.Justification`), read from the package interface. *)
@@ -2065,6 +2072,14 @@ module Lower = struct
           !found)
         pvbs
     in
+    (* a non-function binding that does not mention the group
+       (`let rec f x = ... and v = e`): evaluated first, as an ordinary
+       `let` (making the group's closures has no effects) *)
+    let is_fn vb = match vb.vb_expr.exp_desc with Texp_function _ -> true | _ -> false in
+    let values, fns = List.partition (fun vb -> not (is_fn vb) && peel vb.vb_expr [] = None && not (mentions_group [ vb ])) vbs in
+    if values <> [] && fns <> [] then
+      lower_let ?expect values { body with exp_desc = Texp_let (Asttypes.Recursive, fns, body) }
+    else
     let peeled = List.map (fun vb -> (vb, peel vb.vb_expr [])) vbs in
     if List.exists (fun (_, p) -> match p with Some (pre, _) -> pre <> [] | None -> false) peeled then begin
       let prefixes = List.concat_map (fun (_, p) -> match p with Some (pre, _) -> pre | None -> []) peeled in

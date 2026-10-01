@@ -1038,11 +1038,14 @@ fn down_l(
   ) => up_l(rws, x74)
   let (env_1, t_1, c) = (x71, x72, x73)
   match t_1 {
-    Var(_, _) =>
+    @kernel.Term::Var(_, _) =>
       up((Dterm::Bv(@lib.index(t_1, env_1)) catch { _ => Dterm::Fv }, c))
-    Const(name, _) => up((Dterm::Cst(t_1, assoc_clause(rws)(name)), c))
-    Comb(rator, rand) => down(env_1, rator, Stack::Zrator((env_1, rand), c))
-    Abs(bvar, body) => down(env_1.prepend(bvar), body, Stack::Zabs((), c))
+    @kernel.Term::Const(name, _) =>
+      up((Dterm::Cst(t_1, assoc_clause(rws)(name)), c))
+    @kernel.Term::Comb(rator, rand) =>
+      down(env_1, rator, Stack::Zrator((env_1, rand), c))
+    @kernel.Term::Abs(bvar, body) =>
+      down(env_1.prepend(bvar), body, Stack::Zabs((), c))
   }
 }
 
