@@ -2,12 +2,31 @@
 // Regenerate with tools/ocaml_ref/translate.sh translate theorems.ml.
 
 ///|
+/// EQ_REFL
+fn step_1() -> Unit raise {
+  let t1 = @tactics.then_tac(@tactics.gen_tac, @tactics.refl_tac)
+  eq_refl_c.set(@tactics.prove(@parser.parse_term("!x:A. x = x"), t1))
+}
+
+///|
 let eq_refl_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EQ_REFL")
 
 ///|
 /// `EQ_REFL`
 pub fn eq_refl() -> @kernel.Thm {
   eq_refl_c.get()
+}
+
+///|
+/// REFL_CLAUSE
+fn step_2() -> Unit raise {
+  let t2 = @tactics.then_tac(
+    @tactics.gen_tac,
+    @tactics.match_accept_tac(@bool.eqt_intro(@bool.spec_all(eq_refl()))),
+  )
+  refl_clause_c.set(
+    @tactics.prove(@parser.parse_term("!x:A. (x = x) <=> T"), t2),
+  )
 }
 
 ///|
@@ -20,6 +39,18 @@ pub fn refl_clause() -> @kernel.Thm {
 }
 
 ///|
+/// EQ_SYM
+fn step_3() -> Unit raise {
+  let t4 = @tactics.disch_then((x3 : @kernel.Thm) => {
+    @tactics.accept_tac(@equal.sym(x3))
+  })
+  let t5 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4)
+  eq_sym_c.set(
+    @tactics.prove(@parser.parse_term("!(x:A) y. (x = y) ==> (y = x)"), t5),
+  )
+}
+
+///|
 let eq_sym_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EQ_SYM")
 
 ///|
@@ -29,12 +60,41 @@ pub fn eq_sym() -> @kernel.Thm {
 }
 
 ///|
+/// EQ_SYM_EQ
+fn step_4() -> Unit raise {
+  let t6 = @tactics.match_accept_tac(eq_sym())
+  let t7 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac),
+    t6,
+  )
+  eq_sym_eq_c.set(
+    @tactics.prove(@parser.parse_term("!(x:A) y. (x = y) <=> (y = x)"), t7),
+  )
+}
+
+///|
 let eq_sym_eq_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EQ_SYM_EQ")
 
 ///|
 /// `EQ_SYM_EQ`
 pub fn eq_sym_eq() -> @kernel.Thm {
   eq_sym_eq_c.get()
+}
+
+///|
+/// EQ_TRANS
+fn step_5() -> Unit raise {
+  let t8 = @simp.pure_asm_rewrite_tac(@list.empty())
+  let t9 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8),
+    @tactics.refl_tac,
+  )
+  eq_trans_c.set(
+    @tactics.prove(
+      @parser.parse_term("!(x:A) y z. (x = y) /\\ (y = z) ==> (x = z)"),
+      t9,
+    ),
+  )
 }
 
 ///|
@@ -55,12 +115,37 @@ pub fn ac(x10 : @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
 }
 
 ///|
+/// BETA_THM
+fn step_6() -> Unit raise {
+  let t14 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.beta_tac),
+    @tactics.refl_tac,
+  )
+  beta_thm_c.set(
+    @tactics.prove(
+      @parser.parse_term("!(f:A->B) y. (\\x. (f:A->B) x) y = f y"),
+      t14,
+    ),
+  )
+}
+
+///|
 let beta_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("BETA_THM")
 
 ///|
 /// `BETA_THM`
 pub fn beta_thm() -> @kernel.Thm {
   beta_thm_c.get()
+}
+
+///|
+/// ABS_SIMP
+fn step_7() -> Unit raise {
+  let t15 = @simp.rewrite_tac(@list.List([beta_thm(), refl_clause()]))
+  let t16 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t15)
+  abs_simp_c.set(
+    @tactics.prove(@parser.parse_term("!(t1:A) (t2:B). (\\x. t1) t2 = t1"), t16),
+  )
 }
 
 ///|
@@ -73,12 +158,34 @@ pub fn abs_simp() -> @kernel.Thm {
 }
 
 ///|
+/// CONJ_ASSOC
+fn step_8() -> Unit raise {
+  conj_assoc_c.set(
+    @tactics.prove(
+      @parser.parse_term("!t1 t2 t3. t1 /\\ t2 /\\ t3 <=> (t1 /\\ t2) /\\ t3"),
+      @itab.itaut_tac,
+    ),
+  )
+}
+
+///|
 let conj_assoc_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("CONJ_ASSOC")
 
 ///|
 /// `CONJ_ASSOC`
 pub fn conj_assoc() -> @kernel.Thm {
   conj_assoc_c.get()
+}
+
+///|
+/// CONJ_SYM
+fn step_9() -> Unit raise {
+  conj_sym_c.set(
+    @tactics.prove(
+      @parser.parse_term("!t1 t2. t1 /\\ t2 <=> t2 /\\ t1"),
+      @itab.itaut_tac,
+    ),
+  )
 }
 
 ///|
@@ -91,12 +198,36 @@ pub fn conj_sym() -> @kernel.Thm {
 }
 
 ///|
+/// CONJ_ACI
+fn step_10() -> Unit raise {
+  conj_aci_c.set(
+    @tactics.prove(
+      @parser.parse_term(
+        "(p /\\ q <=> q /\\ p) /\\\n   ((p /\\ q) /\\ r <=> p /\\ (q /\\ r)) /\\\n   (p /\\ (q /\\ r) <=> q /\\ (p /\\ r)) /\\\n   (p /\\ p <=> p) /\\\n   (p /\\ (p /\\ q) <=> p /\\ q)",
+      ),
+      @itab.itaut_tac,
+    ),
+  )
+}
+
+///|
 let conj_aci_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("CONJ_ACI")
 
 ///|
 /// `CONJ_ACI`
 pub fn conj_aci() -> @kernel.Thm {
   conj_aci_c.get()
+}
+
+///|
+/// DISJ_ASSOC
+fn step_11() -> Unit raise {
+  disj_assoc_c.set(
+    @tactics.prove(
+      @parser.parse_term("!t1 t2 t3. t1 \\/ t2 \\/ t3 <=> (t1 \\/ t2) \\/ t3"),
+      @itab.itaut_tac,
+    ),
+  )
 }
 
 ///|
@@ -109,12 +240,36 @@ pub fn disj_assoc() -> @kernel.Thm {
 }
 
 ///|
+/// DISJ_SYM
+fn step_12() -> Unit raise {
+  disj_sym_c.set(
+    @tactics.prove(
+      @parser.parse_term("!t1 t2. t1 \\/ t2 <=> t2 \\/ t1"),
+      @itab.itaut_tac,
+    ),
+  )
+}
+
+///|
 let disj_sym_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("DISJ_SYM")
 
 ///|
 /// `DISJ_SYM`
 pub fn disj_sym() -> @kernel.Thm {
   disj_sym_c.get()
+}
+
+///|
+/// DISJ_ACI
+fn step_13() -> Unit raise {
+  disj_aci_c.set(
+    @tactics.prove(
+      @parser.parse_term(
+        "(p \\/ q <=> q \\/ p) /\\\n   ((p \\/ q) \\/ r <=> p \\/ (q \\/ r)) /\\\n   (p \\/ (q \\/ r) <=> q \\/ (p \\/ r)) /\\\n   (p \\/ p <=> p) /\\\n   (p \\/ (p \\/ q) <=> p \\/ q)",
+      ),
+      @itab.itaut_tac,
+    ),
+  )
 }
 
 ///|
@@ -127,12 +282,29 @@ pub fn disj_aci() -> @kernel.Thm {
 }
 
 ///|
+/// IMP_CONJ
+fn step_14() -> Unit raise {
+  imp_conj_c.set(
+    @tactics.prove(
+      @parser.parse_term("p /\\ q ==> r <=> p ==> q ==> r"),
+      @itab.itaut_tac,
+    ),
+  )
+}
+
+///|
 let imp_conj_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("IMP_CONJ")
 
 ///|
 /// `IMP_CONJ`
 pub fn imp_conj() -> @kernel.Thm {
   imp_conj_c.get()
+}
+
+///|
+/// IMP_IMP
+fn step_15() -> Unit raise {
+  imp_imp_c.set(@equal.gsym(imp_conj()))
 }
 
 ///|
@@ -145,12 +317,34 @@ pub fn imp_imp() -> @kernel.Thm {
 }
 
 ///|
+/// IMP_CONJ_ALT
+fn step_16() -> Unit raise {
+  imp_conj_alt_c.set(
+    @tactics.prove(
+      @parser.parse_term("p /\\ q ==> r <=> q ==> p ==> r"),
+      @itab.itaut_tac,
+    ),
+  )
+}
+
+///|
 let imp_conj_alt_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("IMP_CONJ_ALT")
 
 ///|
 /// `IMP_CONJ_ALT`
 pub fn imp_conj_alt() -> @kernel.Thm {
   imp_conj_alt_c.get()
+}
+
+///|
+/// LEFT_OR_DISTRIB
+fn step_17() -> Unit raise {
+  left_or_distrib_c.set(
+    @tactics.prove(
+      @parser.parse_term("!p q r. p /\\ (q \\/ r) <=> p /\\ q \\/ p /\\ r"),
+      @itab.itaut_tac,
+    ),
+  )
 }
 
 ///|
@@ -165,6 +359,17 @@ pub fn left_or_distrib() -> @kernel.Thm {
 }
 
 ///|
+/// RIGHT_OR_DISTRIB
+fn step_18() -> Unit raise {
+  right_or_distrib_c.set(
+    @tactics.prove(
+      @parser.parse_term("!p q r. (p \\/ q) /\\ r <=> p /\\ r \\/ q /\\ r"),
+      @itab.itaut_tac,
+    ),
+  )
+}
+
+///|
 let right_or_distrib_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
   "RIGHT_OR_DISTRIB",
 )
@@ -173,6 +378,14 @@ let right_or_distrib_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
 /// `RIGHT_OR_DISTRIB`
 pub fn right_or_distrib() -> @kernel.Thm {
   right_or_distrib_c.get()
+}
+
+///|
+/// FORALL_SIMP
+fn step_19() -> Unit raise {
+  forall_simp_c.set(
+    @tactics.prove(@parser.parse_term("!t. (!x:A. t) = t"), @itab.itaut_tac),
+  )
 }
 
 ///|
@@ -185,12 +398,26 @@ pub fn forall_simp() -> @kernel.Thm {
 }
 
 ///|
+/// EXISTS_SIMP
+fn step_20() -> Unit raise {
+  exists_simp_c.set(
+    @tactics.prove(@parser.parse_term("!t. (?x:A. t) = t"), @itab.itaut_tac),
+  )
+}
+
+///|
 let exists_simp_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EXISTS_SIMP")
 
 ///|
 /// `EXISTS_SIMP`
 pub fn exists_simp() -> @kernel.Thm {
   exists_simp_c.get()
+}
+
+///|
+/// EQ_IMP
+fn step_21() -> Unit raise {
+  eq_imp_c.set(@itab.itaut(@parser.parse_term("(a <=> b) ==> a ==> b")))
 }
 
 ///|
@@ -203,12 +430,36 @@ pub fn eq_imp() -> @kernel.Thm {
 }
 
 ///|
+/// EQ_CLAUSES
+fn step_22() -> Unit raise {
+  eq_clauses_c.set(
+    @tactics.prove(
+      @parser.parse_term(
+        "!t. ((T <=> t) <=> t) /\\ ((t <=> T) <=> t) /\\\n       ((F <=> t) <=> ~t) /\\ ((t <=> F) <=> ~t)",
+      ),
+      @itab.itaut_tac,
+    ),
+  )
+}
+
+///|
 let eq_clauses_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EQ_CLAUSES")
 
 ///|
 /// `EQ_CLAUSES`
 pub fn eq_clauses() -> @kernel.Thm {
   eq_clauses_c.get()
+}
+
+///|
+/// NOT_CLAUSES_WEAK
+fn step_23() -> Unit raise {
+  not_clauses_weak_c.set(
+    @tactics.prove(
+      @parser.parse_term("(~T <=> F) /\\ (~F <=> T)"),
+      @itab.itaut_tac,
+    ),
+  )
 }
 
 ///|
@@ -223,12 +474,38 @@ pub fn not_clauses_weak() -> @kernel.Thm {
 }
 
 ///|
+/// AND_CLAUSES
+fn step_24() -> Unit raise {
+  and_clauses_c.set(
+    @tactics.prove(
+      @parser.parse_term(
+        "!t. (T /\\ t <=> t) /\\ (t /\\ T <=> t) /\\ (F /\\ t <=> F) /\\\n       (t /\\ F <=> F) /\\ (t /\\ t <=> t)",
+      ),
+      @itab.itaut_tac,
+    ),
+  )
+}
+
+///|
 let and_clauses_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("AND_CLAUSES")
 
 ///|
 /// `AND_CLAUSES`
 pub fn and_clauses() -> @kernel.Thm {
   and_clauses_c.get()
+}
+
+///|
+/// OR_CLAUSES
+fn step_25() -> Unit raise {
+  or_clauses_c.set(
+    @tactics.prove(
+      @parser.parse_term(
+        "!t. (T \\/ t <=> T) /\\ (t \\/ T <=> T) /\\ (F \\/ t <=> t) /\\\n       (t \\/ F <=> t) /\\ (t \\/ t <=> t)",
+      ),
+      @itab.itaut_tac,
+    ),
+  )
 }
 
 ///|
@@ -241,6 +518,19 @@ pub fn or_clauses() -> @kernel.Thm {
 }
 
 ///|
+/// IMP_CLAUSES
+fn step_26() -> Unit raise {
+  imp_clauses_c.set(
+    @tactics.prove(
+      @parser.parse_term(
+        "!t. (T ==> t <=> t) /\\ (t ==> T <=> T) /\\ (F ==> t <=> T) /\\\n       (t ==> t <=> T) /\\ (t ==> F <=> ~t)",
+      ),
+      @itab.itaut_tac,
+    ),
+  )
+}
+
+///|
 let imp_clauses_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("IMP_CLAUSES")
 
 ///|
@@ -250,612 +540,8 @@ pub fn imp_clauses() -> @kernel.Thm {
 }
 
 ///|
-let exists_unique_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "EXISTS_UNIQUE_THM",
-)
-
-///|
-/// `EXISTS_UNIQUE_THM`
-pub fn exists_unique_thm() -> @kernel.Thm {
-  exists_unique_thm_c.get()
-}
-
-///|
-let exists_refl_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EXISTS_REFL")
-
-///|
-/// `EXISTS_REFL`
-pub fn exists_refl() -> @kernel.Thm {
-  exists_refl_c.get()
-}
-
-///|
-let exists_unique_refl_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "EXISTS_UNIQUE_REFL",
-)
-
-///|
-/// `EXISTS_UNIQUE_REFL`
-pub fn exists_unique_refl() -> @kernel.Thm {
-  exists_unique_refl_c.get()
-}
-
-///|
-let unwind_thm1_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("UNWIND_THM1")
-
-///|
-/// `UNWIND_THM1`
-pub fn unwind_thm1() -> @kernel.Thm {
-  unwind_thm1_c.get()
-}
-
-///|
-let unwind_thm2_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("UNWIND_THM2")
-
-///|
-/// `UNWIND_THM2`
-pub fn unwind_thm2() -> @kernel.Thm {
-  unwind_thm2_c.get()
-}
-
-///|
-let forall_unwind_thm2_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "FORALL_UNWIND_THM2",
-)
-
-///|
-/// `FORALL_UNWIND_THM2`
-pub fn forall_unwind_thm2() -> @kernel.Thm {
-  forall_unwind_thm2_c.get()
-}
-
-///|
-let forall_unwind_thm1_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "FORALL_UNWIND_THM1",
-)
-
-///|
-/// `FORALL_UNWIND_THM1`
-pub fn forall_unwind_thm1() -> @kernel.Thm {
-  forall_unwind_thm1_c.get()
-}
-
-///|
-let swap_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "SWAP_FORALL_THM",
-)
-
-///|
-/// `SWAP_FORALL_THM`
-pub fn swap_forall_thm() -> @kernel.Thm {
-  swap_forall_thm_c.get()
-}
-
-///|
-let swap_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "SWAP_EXISTS_THM",
-)
-
-///|
-/// `SWAP_EXISTS_THM`
-pub fn swap_exists_thm() -> @kernel.Thm {
-  swap_exists_thm_c.get()
-}
-
-///|
-let forall_and_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("FORALL_AND_THM")
-
-///|
-/// `FORALL_AND_THM`
-pub fn forall_and_thm() -> @kernel.Thm {
-  forall_and_thm_c.get()
-}
-
-///|
-let and_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("AND_FORALL_THM")
-
-///|
-/// `AND_FORALL_THM`
-pub fn and_forall_thm() -> @kernel.Thm {
-  and_forall_thm_c.get()
-}
-
-///|
-let left_and_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "LEFT_AND_FORALL_THM",
-)
-
-///|
-/// `LEFT_AND_FORALL_THM`
-pub fn left_and_forall_thm() -> @kernel.Thm {
-  left_and_forall_thm_c.get()
-}
-
-///|
-let right_and_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "RIGHT_AND_FORALL_THM",
-)
-
-///|
-/// `RIGHT_AND_FORALL_THM`
-pub fn right_and_forall_thm() -> @kernel.Thm {
-  right_and_forall_thm_c.get()
-}
-
-///|
-let exists_or_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EXISTS_OR_THM")
-
-///|
-/// `EXISTS_OR_THM`
-pub fn exists_or_thm() -> @kernel.Thm {
-  exists_or_thm_c.get()
-}
-
-///|
-let or_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("OR_EXISTS_THM")
-
-///|
-/// `OR_EXISTS_THM`
-pub fn or_exists_thm() -> @kernel.Thm {
-  or_exists_thm_c.get()
-}
-
-///|
-let left_or_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "LEFT_OR_EXISTS_THM",
-)
-
-///|
-/// `LEFT_OR_EXISTS_THM`
-pub fn left_or_exists_thm() -> @kernel.Thm {
-  left_or_exists_thm_c.get()
-}
-
-///|
-let right_or_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "RIGHT_OR_EXISTS_THM",
-)
-
-///|
-/// `RIGHT_OR_EXISTS_THM`
-pub fn right_or_exists_thm() -> @kernel.Thm {
-  right_or_exists_thm_c.get()
-}
-
-///|
-let left_exists_and_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "LEFT_EXISTS_AND_THM",
-)
-
-///|
-/// `LEFT_EXISTS_AND_THM`
-pub fn left_exists_and_thm() -> @kernel.Thm {
-  left_exists_and_thm_c.get()
-}
-
-///|
-let right_exists_and_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "RIGHT_EXISTS_AND_THM",
-)
-
-///|
-/// `RIGHT_EXISTS_AND_THM`
-pub fn right_exists_and_thm() -> @kernel.Thm {
-  right_exists_and_thm_c.get()
-}
-
-///|
-let triv_exists_and_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "TRIV_EXISTS_AND_THM",
-)
-
-///|
-/// `TRIV_EXISTS_AND_THM`
-pub fn triv_exists_and_thm() -> @kernel.Thm {
-  triv_exists_and_thm_c.get()
-}
-
-///|
-let left_and_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "LEFT_AND_EXISTS_THM",
-)
-
-///|
-/// `LEFT_AND_EXISTS_THM`
-pub fn left_and_exists_thm() -> @kernel.Thm {
-  left_and_exists_thm_c.get()
-}
-
-///|
-let right_and_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "RIGHT_AND_EXISTS_THM",
-)
-
-///|
-/// `RIGHT_AND_EXISTS_THM`
-pub fn right_and_exists_thm() -> @kernel.Thm {
-  right_and_exists_thm_c.get()
-}
-
-///|
-let triv_and_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "TRIV_AND_EXISTS_THM",
-)
-
-///|
-/// `TRIV_AND_EXISTS_THM`
-pub fn triv_and_exists_thm() -> @kernel.Thm {
-  triv_and_exists_thm_c.get()
-}
-
-///|
-let triv_forall_or_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "TRIV_FORALL_OR_THM",
-)
-
-///|
-/// `TRIV_FORALL_OR_THM`
-pub fn triv_forall_or_thm() -> @kernel.Thm {
-  triv_forall_or_thm_c.get()
-}
-
-///|
-let triv_or_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "TRIV_OR_FORALL_THM",
-)
-
-///|
-/// `TRIV_OR_FORALL_THM`
-pub fn triv_or_forall_thm() -> @kernel.Thm {
-  triv_or_forall_thm_c.get()
-}
-
-///|
-let right_imp_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "RIGHT_IMP_FORALL_THM",
-)
-
-///|
-/// `RIGHT_IMP_FORALL_THM`
-pub fn right_imp_forall_thm() -> @kernel.Thm {
-  right_imp_forall_thm_c.get()
-}
-
-///|
-let right_forall_imp_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "RIGHT_FORALL_IMP_THM",
-)
-
-///|
-/// `RIGHT_FORALL_IMP_THM`
-pub fn right_forall_imp_thm() -> @kernel.Thm {
-  right_forall_imp_thm_c.get()
-}
-
-///|
-let left_imp_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "LEFT_IMP_EXISTS_THM",
-)
-
-///|
-/// `LEFT_IMP_EXISTS_THM`
-pub fn left_imp_exists_thm() -> @kernel.Thm {
-  left_imp_exists_thm_c.get()
-}
-
-///|
-let left_forall_imp_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "LEFT_FORALL_IMP_THM",
-)
-
-///|
-/// `LEFT_FORALL_IMP_THM`
-pub fn left_forall_imp_thm() -> @kernel.Thm {
-  left_forall_imp_thm_c.get()
-}
-
-///|
-let triv_forall_imp_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "TRIV_FORALL_IMP_THM",
-)
-
-///|
-/// `TRIV_FORALL_IMP_THM`
-pub fn triv_forall_imp_thm() -> @kernel.Thm {
-  triv_forall_imp_thm_c.get()
-}
-
-///|
-let triv_exists_imp_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "TRIV_EXISTS_IMP_THM",
-)
-
-///|
-/// `TRIV_EXISTS_IMP_THM`
-pub fn triv_exists_imp_thm() -> @kernel.Thm {
-  triv_exists_imp_thm_c.get()
-}
-
-///|
-let mono_and_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MONO_AND")
-
-///|
-/// `MONO_AND`
-pub fn mono_and() -> @kernel.Thm {
-  mono_and_c.get()
-}
-
-///|
-let mono_or_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MONO_OR")
-
-///|
-/// `MONO_OR`
-pub fn mono_or() -> @kernel.Thm {
-  mono_or_c.get()
-}
-
-///|
-let mono_imp_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MONO_IMP")
-
-///|
-/// `MONO_IMP`
-pub fn mono_imp() -> @kernel.Thm {
-  mono_imp_c.get()
-}
-
-///|
-let mono_not_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MONO_NOT")
-
-///|
-/// `MONO_NOT`
-pub fn mono_not() -> @kernel.Thm {
-  mono_not_c.get()
-}
-
-///|
-let mono_forall_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MONO_FORALL")
-
-///|
-/// `MONO_FORALL`
-pub fn mono_forall() -> @kernel.Thm {
-  mono_forall_c.get()
-}
-
-///|
-let mono_exists_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MONO_EXISTS")
-
-///|
-/// `MONO_EXISTS`
-pub fn mono_exists() -> @kernel.Thm {
-  mono_exists_c.get()
-}
-
-///|
-let wlog_relation_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("WLOG_RELATION")
-
-///|
-/// `WLOG_RELATION`
-pub fn wlog_relation() -> @kernel.Thm {
-  wlog_relation_c.get()
-}
-
-///|
-let exists_unique_alt_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "EXISTS_UNIQUE_ALT",
-)
-
-///|
-/// `EXISTS_UNIQUE_ALT`
-pub fn exists_unique_alt() -> @kernel.Thm {
-  exists_unique_alt_c.get()
-}
-
-///|
-let exists_unique_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EXISTS_UNIQUE")
-
-///|
-/// `EXISTS_UNIQUE`
-pub fn exists_unique() -> @kernel.Thm {
-  exists_unique_c.get()
-}
-
-///|
-/// `CLAIM_TAC`
-pub fn claim_tac(x109 : String, x110 : @kernel.Term) -> @tactics.Tactic raise {
-  let s = x109
-  let tm = x110
-  @tactics.subgoal_then(tm, destruct_tac(s))
-}
-
-///|
-fn load_steps() -> Unit raise {
-  // EQ_REFL
-  let t1 = @tactics.then_tac(@tactics.gen_tac, @tactics.refl_tac)
-  eq_refl_c.set(@tactics.prove(@parser.parse_term("!x:A. x = x"), t1))
-  // REFL_CLAUSE
-  let t2 = @tactics.then_tac(
-    @tactics.gen_tac,
-    @tactics.match_accept_tac(@bool.eqt_intro(@bool.spec_all(eq_refl()))),
-  )
-  refl_clause_c.set(
-    @tactics.prove(@parser.parse_term("!x:A. (x = x) <=> T"), t2),
-  )
-  // EQ_SYM
-  let t4 = @tactics.disch_then((x3 : @kernel.Thm) => {
-    @tactics.accept_tac(@equal.sym(x3))
-  })
-  let t5 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t4)
-  eq_sym_c.set(
-    @tactics.prove(@parser.parse_term("!(x:A) y. (x = y) ==> (y = x)"), t5),
-  )
-  // EQ_SYM_EQ
-  let t6 = @tactics.match_accept_tac(eq_sym())
-  let t7 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac),
-    t6,
-  )
-  eq_sym_eq_c.set(
-    @tactics.prove(@parser.parse_term("!(x:A) y. (x = y) <=> (y = x)"), t7),
-  )
-  // EQ_TRANS
-  let t8 = @simp.pure_asm_rewrite_tac(@list.empty())
-  let t9 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t8),
-    @tactics.refl_tac,
-  )
-  eq_trans_c.set(
-    @tactics.prove(
-      @parser.parse_term("!(x:A) y z. (x = y) /\\ (y = z) ==> (x = z)"),
-      t9,
-    ),
-  )
-  // BETA_THM
-  let t14 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.beta_tac),
-    @tactics.refl_tac,
-  )
-  beta_thm_c.set(
-    @tactics.prove(
-      @parser.parse_term("!(f:A->B) y. (\\x. (f:A->B) x) y = f y"),
-      t14,
-    ),
-  )
-  // ABS_SIMP
-  let t15 = @simp.rewrite_tac(@list.List([beta_thm(), refl_clause()]))
-  let t16 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t15)
-  abs_simp_c.set(
-    @tactics.prove(@parser.parse_term("!(t1:A) (t2:B). (\\x. t1) t2 = t1"), t16),
-  )
-  // CONJ_ASSOC
-  conj_assoc_c.set(
-    @tactics.prove(
-      @parser.parse_term("!t1 t2 t3. t1 /\\ t2 /\\ t3 <=> (t1 /\\ t2) /\\ t3"),
-      @itab.itaut_tac,
-    ),
-  )
-  // CONJ_SYM
-  conj_sym_c.set(
-    @tactics.prove(
-      @parser.parse_term("!t1 t2. t1 /\\ t2 <=> t2 /\\ t1"),
-      @itab.itaut_tac,
-    ),
-  )
-  // CONJ_ACI
-  conj_aci_c.set(
-    @tactics.prove(
-      @parser.parse_term(
-        "(p /\\ q <=> q /\\ p) /\\\n   ((p /\\ q) /\\ r <=> p /\\ (q /\\ r)) /\\\n   (p /\\ (q /\\ r) <=> q /\\ (p /\\ r)) /\\\n   (p /\\ p <=> p) /\\\n   (p /\\ (p /\\ q) <=> p /\\ q)",
-      ),
-      @itab.itaut_tac,
-    ),
-  )
-  // DISJ_ASSOC
-  disj_assoc_c.set(
-    @tactics.prove(
-      @parser.parse_term("!t1 t2 t3. t1 \\/ t2 \\/ t3 <=> (t1 \\/ t2) \\/ t3"),
-      @itab.itaut_tac,
-    ),
-  )
-  // DISJ_SYM
-  disj_sym_c.set(
-    @tactics.prove(
-      @parser.parse_term("!t1 t2. t1 \\/ t2 <=> t2 \\/ t1"),
-      @itab.itaut_tac,
-    ),
-  )
-  // DISJ_ACI
-  disj_aci_c.set(
-    @tactics.prove(
-      @parser.parse_term(
-        "(p \\/ q <=> q \\/ p) /\\\n   ((p \\/ q) \\/ r <=> p \\/ (q \\/ r)) /\\\n   (p \\/ (q \\/ r) <=> q \\/ (p \\/ r)) /\\\n   (p \\/ p <=> p) /\\\n   (p \\/ (p \\/ q) <=> p \\/ q)",
-      ),
-      @itab.itaut_tac,
-    ),
-  )
-  // IMP_CONJ
-  imp_conj_c.set(
-    @tactics.prove(
-      @parser.parse_term("p /\\ q ==> r <=> p ==> q ==> r"),
-      @itab.itaut_tac,
-    ),
-  )
-  // IMP_IMP
-  imp_imp_c.set(@equal.gsym(imp_conj()))
-  // IMP_CONJ_ALT
-  imp_conj_alt_c.set(
-    @tactics.prove(
-      @parser.parse_term("p /\\ q ==> r <=> q ==> p ==> r"),
-      @itab.itaut_tac,
-    ),
-  )
-  // LEFT_OR_DISTRIB
-  left_or_distrib_c.set(
-    @tactics.prove(
-      @parser.parse_term("!p q r. p /\\ (q \\/ r) <=> p /\\ q \\/ p /\\ r"),
-      @itab.itaut_tac,
-    ),
-  )
-  // RIGHT_OR_DISTRIB
-  right_or_distrib_c.set(
-    @tactics.prove(
-      @parser.parse_term("!p q r. (p \\/ q) /\\ r <=> p /\\ r \\/ q /\\ r"),
-      @itab.itaut_tac,
-    ),
-  )
-  // FORALL_SIMP
-  forall_simp_c.set(
-    @tactics.prove(@parser.parse_term("!t. (!x:A. t) = t"), @itab.itaut_tac),
-  )
-  // EXISTS_SIMP
-  exists_simp_c.set(
-    @tactics.prove(@parser.parse_term("!t. (?x:A. t) = t"), @itab.itaut_tac),
-  )
-  // EQ_IMP
-  eq_imp_c.set(@itab.itaut(@parser.parse_term("(a <=> b) ==> a ==> b")))
-  // EQ_CLAUSES
-  eq_clauses_c.set(
-    @tactics.prove(
-      @parser.parse_term(
-        "!t. ((T <=> t) <=> t) /\\ ((t <=> T) <=> t) /\\\n       ((F <=> t) <=> ~t) /\\ ((t <=> F) <=> ~t)",
-      ),
-      @itab.itaut_tac,
-    ),
-  )
-  // NOT_CLAUSES_WEAK
-  not_clauses_weak_c.set(
-    @tactics.prove(
-      @parser.parse_term("(~T <=> F) /\\ (~F <=> T)"),
-      @itab.itaut_tac,
-    ),
-  )
-  // AND_CLAUSES
-  and_clauses_c.set(
-    @tactics.prove(
-      @parser.parse_term(
-        "!t. (T /\\ t <=> t) /\\ (t /\\ T <=> t) /\\ (F /\\ t <=> F) /\\\n       (t /\\ F <=> F) /\\ (t /\\ t <=> t)",
-      ),
-      @itab.itaut_tac,
-    ),
-  )
-  // OR_CLAUSES
-  or_clauses_c.set(
-    @tactics.prove(
-      @parser.parse_term(
-        "!t. (T \\/ t <=> T) /\\ (t \\/ T <=> T) /\\ (F \\/ t <=> t) /\\\n       (t \\/ F <=> t) /\\ (t \\/ t <=> t)",
-      ),
-      @itab.itaut_tac,
-    ),
-  )
-  // IMP_CLAUSES
-  imp_clauses_c.set(
-    @tactics.prove(
-      @parser.parse_term(
-        "!t. (T ==> t <=> t) /\\ (t ==> T <=> T) /\\ (F ==> t <=> T) /\\\n       (t ==> t <=> T) /\\ (t ==> F <=> ~t)",
-      ),
-      @itab.itaut_tac,
-    ),
-  )
-  // theorems.ml:159
+/// theorems.ml:159
+fn step_27() -> Unit raise {
   let t17 = @simp.rewrite_tac(
     @list.List([@bool.eqt_intro(@bool.spec_all(eq_refl())), imp_clauses()]),
   )
@@ -877,7 +563,11 @@ fn load_steps() -> Unit raise {
       imp_eq_clause,
     ]),
   )
-  // theorems.ml:174
+}
+
+///|
+/// theorems.ml:174
+fn step_28() -> Unit raise {
   @simp.extend_basic_congs(
     @list.List([
       @itab.itaut(
@@ -887,7 +577,11 @@ fn load_steps() -> Unit raise {
       ),
     ]),
   )
-  // EXISTS_UNIQUE_THM
+}
+
+///|
+/// EXISTS_UNIQUE_THM
+fn step_29() -> Unit raise {
   let t18 = @tactics.then_tac(
     @tactics.gen_tac,
     @simp.rewrite_tac(@list.List([@bool.exists_unique_def()])),
@@ -900,7 +594,22 @@ fn load_steps() -> Unit raise {
       t18,
     ),
   )
-  // EXISTS_REFL
+}
+
+///|
+let exists_unique_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "EXISTS_UNIQUE_THM",
+)
+
+///|
+/// `EXISTS_UNIQUE_THM`
+pub fn exists_unique_thm() -> @kernel.Thm {
+  exists_unique_thm_c.get()
+}
+
+///|
+/// EXISTS_REFL
+fn step_30() -> Unit raise {
   let t19 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.gen_tac,
@@ -909,7 +618,20 @@ fn load_steps() -> Unit raise {
     @tactics.refl_tac,
   )
   exists_refl_c.set(@tactics.prove(@parser.parse_term("!a:A. ?x. x = a"), t19))
-  // EXISTS_UNIQUE_REFL
+}
+
+///|
+let exists_refl_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EXISTS_REFL")
+
+///|
+/// `EXISTS_REFL`
+pub fn exists_refl() -> @kernel.Thm {
+  exists_refl_c.get()
+}
+
+///|
+/// EXISTS_UNIQUE_REFL
+fn step_31() -> Unit raise {
   let t21 = @simp.asm_rewrite_tac(@list.empty())
   let t22 = @list.List([@tactics.exists_tac(@parser.parse_term("a:A")), t21])
   let t20 = @tactics.repeat_tac(
@@ -931,7 +653,22 @@ fn load_steps() -> Unit raise {
   exists_unique_refl_c.set(
     @tactics.prove(@parser.parse_term("!a:A. ?!x. x = a"), t23),
   )
-  // UNWIND_THM1
+}
+
+///|
+let exists_unique_refl_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "EXISTS_UNIQUE_REFL",
+)
+
+///|
+/// `EXISTS_UNIQUE_REFL`
+pub fn exists_unique_refl() -> @kernel.Thm {
+  exists_unique_refl_c.get()
+}
+
+///|
+/// UNWIND_THM1
+fn step_32() -> Unit raise {
   let t33 = @tactics.try_tac(
     @tactics.first_assum((x30 : @kernel.Thm) => {
       let s31 = @tactics.match_accept_tac(x30)
@@ -982,7 +719,20 @@ fn load_steps() -> Unit raise {
       t36,
     ),
   )
-  // UNWIND_THM2
+}
+
+///|
+let unwind_thm1_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("UNWIND_THM1")
+
+///|
+/// `UNWIND_THM1`
+pub fn unwind_thm1() -> @kernel.Thm {
+  unwind_thm1_c.get()
+}
+
+///|
+/// UNWIND_THM2
+fn step_33() -> Unit raise {
   let t38 = @tactics.match_accept_tac(unwind_thm1())
   let t37 = @tactics.conv_tac(
     @equal.land_conv(@equal.once_depth_conv(@equal.sym_conv)),
@@ -997,7 +747,20 @@ fn load_steps() -> Unit raise {
       t39,
     ),
   )
-  // FORALL_UNWIND_THM2
+}
+
+///|
+let unwind_thm2_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("UNWIND_THM2")
+
+///|
+/// `UNWIND_THM2`
+pub fn unwind_thm2() -> @kernel.Thm {
+  unwind_thm2_c.get()
+}
+
+///|
+/// FORALL_UNWIND_THM2
+fn step_34() -> Unit raise {
   let t48 = @simp.asm_rewrite_tac(@list.empty())
   let t47 = @tactics.disch_then((x44 : @kernel.Thm) => {
     let s45 = @tactics.subst1_tac(x44)
@@ -1031,7 +794,22 @@ fn load_steps() -> Unit raise {
       t51,
     ),
   )
-  // FORALL_UNWIND_THM1
+}
+
+///|
+let forall_unwind_thm2_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "FORALL_UNWIND_THM2",
+)
+
+///|
+/// `FORALL_UNWIND_THM2`
+pub fn forall_unwind_thm2() -> @kernel.Thm {
+  forall_unwind_thm2_c.get()
+}
+
+///|
+/// FORALL_UNWIND_THM1
+fn step_35() -> Unit raise {
   let t53 = @tactics.match_accept_tac(forall_unwind_thm2())
   let t52 = @tactics.conv_tac(
     @equal.land_conv(@equal.once_depth_conv(@equal.sym_conv)),
@@ -1046,21 +824,66 @@ fn load_steps() -> Unit raise {
       t54,
     ),
   )
-  // SWAP_FORALL_THM
+}
+
+///|
+let forall_unwind_thm1_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "FORALL_UNWIND_THM1",
+)
+
+///|
+/// `FORALL_UNWIND_THM1`
+pub fn forall_unwind_thm1() -> @kernel.Thm {
+  forall_unwind_thm1_c.get()
+}
+
+///|
+/// SWAP_FORALL_THM
+fn step_36() -> Unit raise {
   swap_forall_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P:A->B->bool. (!x y. P x y) <=> (!y x. P x y)"),
       @itab.itaut_tac,
     ),
   )
-  // SWAP_EXISTS_THM
+}
+
+///|
+let swap_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "SWAP_FORALL_THM",
+)
+
+///|
+/// `SWAP_FORALL_THM`
+pub fn swap_forall_thm() -> @kernel.Thm {
+  swap_forall_thm_c.get()
+}
+
+///|
+/// SWAP_EXISTS_THM
+fn step_37() -> Unit raise {
   swap_exists_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P:A->B->bool. (?x y. P x y) <=> (?y x. P x y)"),
       @itab.itaut_tac,
     ),
   )
-  // FORALL_AND_THM
+}
+
+///|
+let swap_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "SWAP_EXISTS_THM",
+)
+
+///|
+/// `SWAP_EXISTS_THM`
+pub fn swap_exists_thm() -> @kernel.Thm {
+  swap_exists_thm_c.get()
+}
+
+///|
+/// FORALL_AND_THM
+fn step_38() -> Unit raise {
   forall_and_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -1069,7 +892,20 @@ fn load_steps() -> Unit raise {
       @itab.itaut_tac,
     ),
   )
-  // AND_FORALL_THM
+}
+
+///|
+let forall_and_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("FORALL_AND_THM")
+
+///|
+/// `FORALL_AND_THM`
+pub fn forall_and_thm() -> @kernel.Thm {
+  forall_and_thm_c.get()
+}
+
+///|
+/// AND_FORALL_THM
+fn step_39() -> Unit raise {
   and_forall_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -1078,21 +914,64 @@ fn load_steps() -> Unit raise {
       @itab.itaut_tac,
     ),
   )
-  // LEFT_AND_FORALL_THM
+}
+
+///|
+let and_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("AND_FORALL_THM")
+
+///|
+/// `AND_FORALL_THM`
+pub fn and_forall_thm() -> @kernel.Thm {
+  and_forall_thm_c.get()
+}
+
+///|
+/// LEFT_AND_FORALL_THM
+fn step_40() -> Unit raise {
   left_and_forall_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (!x:A. P x) /\\ Q <=> (!x:A. P x /\\ Q)"),
       @itab.itaut_tac,
     ),
   )
-  // RIGHT_AND_FORALL_THM
+}
+
+///|
+let left_and_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "LEFT_AND_FORALL_THM",
+)
+
+///|
+/// `LEFT_AND_FORALL_THM`
+pub fn left_and_forall_thm() -> @kernel.Thm {
+  left_and_forall_thm_c.get()
+}
+
+///|
+/// RIGHT_AND_FORALL_THM
+fn step_41() -> Unit raise {
   right_and_forall_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. P /\\ (!x:A. Q x) <=> (!x. P /\\ Q x)"),
       @itab.itaut_tac,
     ),
   )
-  // EXISTS_OR_THM
+}
+
+///|
+let right_and_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "RIGHT_AND_FORALL_THM",
+)
+
+///|
+/// `RIGHT_AND_FORALL_THM`
+pub fn right_and_forall_thm() -> @kernel.Thm {
+  right_and_forall_thm_c.get()
+}
+
+///|
+/// EXISTS_OR_THM
+fn step_42() -> Unit raise {
   exists_or_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -1101,7 +980,20 @@ fn load_steps() -> Unit raise {
       @itab.itaut_tac,
     ),
   )
-  // OR_EXISTS_THM
+}
+
+///|
+let exists_or_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EXISTS_OR_THM")
+
+///|
+/// `EXISTS_OR_THM`
+pub fn exists_or_thm() -> @kernel.Thm {
+  exists_or_thm_c.get()
+}
+
+///|
+/// OR_EXISTS_THM
+fn step_43() -> Unit raise {
   or_exists_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -1110,131 +1002,410 @@ fn load_steps() -> Unit raise {
       @itab.itaut_tac,
     ),
   )
-  // LEFT_OR_EXISTS_THM
+}
+
+///|
+let or_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("OR_EXISTS_THM")
+
+///|
+/// `OR_EXISTS_THM`
+pub fn or_exists_thm() -> @kernel.Thm {
+  or_exists_thm_c.get()
+}
+
+///|
+/// LEFT_OR_EXISTS_THM
+fn step_44() -> Unit raise {
   left_or_exists_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (?x. P x) \\/ Q <=> (?x:A. P x \\/ Q)"),
       @itab.itaut_tac,
     ),
   )
-  // RIGHT_OR_EXISTS_THM
+}
+
+///|
+let left_or_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "LEFT_OR_EXISTS_THM",
+)
+
+///|
+/// `LEFT_OR_EXISTS_THM`
+pub fn left_or_exists_thm() -> @kernel.Thm {
+  left_or_exists_thm_c.get()
+}
+
+///|
+/// RIGHT_OR_EXISTS_THM
+fn step_45() -> Unit raise {
   right_or_exists_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. P \\/ (?x. Q x) <=> (?x:A. P \\/ Q x)"),
       @itab.itaut_tac,
     ),
   )
-  // LEFT_EXISTS_AND_THM
+}
+
+///|
+let right_or_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "RIGHT_OR_EXISTS_THM",
+)
+
+///|
+/// `RIGHT_OR_EXISTS_THM`
+pub fn right_or_exists_thm() -> @kernel.Thm {
+  right_or_exists_thm_c.get()
+}
+
+///|
+/// LEFT_EXISTS_AND_THM
+fn step_46() -> Unit raise {
   left_exists_and_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (?x:A. P x /\\ Q) <=> (?x:A. P x) /\\ Q"),
       @itab.itaut_tac,
     ),
   )
-  // RIGHT_EXISTS_AND_THM
+}
+
+///|
+let left_exists_and_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "LEFT_EXISTS_AND_THM",
+)
+
+///|
+/// `LEFT_EXISTS_AND_THM`
+pub fn left_exists_and_thm() -> @kernel.Thm {
+  left_exists_and_thm_c.get()
+}
+
+///|
+/// RIGHT_EXISTS_AND_THM
+fn step_47() -> Unit raise {
   right_exists_and_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (?x:A. P /\\ Q x) <=> P /\\ (?x:A. Q x)"),
       @itab.itaut_tac,
     ),
   )
-  // TRIV_EXISTS_AND_THM
+}
+
+///|
+let right_exists_and_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "RIGHT_EXISTS_AND_THM",
+)
+
+///|
+/// `RIGHT_EXISTS_AND_THM`
+pub fn right_exists_and_thm() -> @kernel.Thm {
+  right_exists_and_thm_c.get()
+}
+
+///|
+/// TRIV_EXISTS_AND_THM
+fn step_48() -> Unit raise {
   triv_exists_and_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (?x:A. P /\\ Q) <=> (?x:A. P) /\\ (?x:A. Q)"),
       @itab.itaut_tac,
     ),
   )
-  // LEFT_AND_EXISTS_THM
+}
+
+///|
+let triv_exists_and_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "TRIV_EXISTS_AND_THM",
+)
+
+///|
+/// `TRIV_EXISTS_AND_THM`
+pub fn triv_exists_and_thm() -> @kernel.Thm {
+  triv_exists_and_thm_c.get()
+}
+
+///|
+/// LEFT_AND_EXISTS_THM
+fn step_49() -> Unit raise {
   left_and_exists_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (?x:A. P x) /\\ Q <=> (?x:A. P x /\\ Q)"),
       @itab.itaut_tac,
     ),
   )
-  // RIGHT_AND_EXISTS_THM
+}
+
+///|
+let left_and_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "LEFT_AND_EXISTS_THM",
+)
+
+///|
+/// `LEFT_AND_EXISTS_THM`
+pub fn left_and_exists_thm() -> @kernel.Thm {
+  left_and_exists_thm_c.get()
+}
+
+///|
+/// RIGHT_AND_EXISTS_THM
+fn step_50() -> Unit raise {
   right_and_exists_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. P /\\ (?x:A. Q x) <=> (?x:A. P /\\ Q x)"),
       @itab.itaut_tac,
     ),
   )
-  // TRIV_AND_EXISTS_THM
+}
+
+///|
+let right_and_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "RIGHT_AND_EXISTS_THM",
+)
+
+///|
+/// `RIGHT_AND_EXISTS_THM`
+pub fn right_and_exists_thm() -> @kernel.Thm {
+  right_and_exists_thm_c.get()
+}
+
+///|
+/// TRIV_AND_EXISTS_THM
+fn step_51() -> Unit raise {
   triv_and_exists_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (?x:A. P) /\\ (?x:A. Q) <=> (?x:A. P /\\ Q)"),
       @itab.itaut_tac,
     ),
   )
-  // TRIV_FORALL_OR_THM
+}
+
+///|
+let triv_and_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "TRIV_AND_EXISTS_THM",
+)
+
+///|
+/// `TRIV_AND_EXISTS_THM`
+pub fn triv_and_exists_thm() -> @kernel.Thm {
+  triv_and_exists_thm_c.get()
+}
+
+///|
+/// TRIV_FORALL_OR_THM
+fn step_52() -> Unit raise {
   triv_forall_or_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (!x:A. P \\/ Q) <=> (!x:A. P) \\/ (!x:A. Q)"),
       @itab.itaut_tac,
     ),
   )
-  // TRIV_OR_FORALL_THM
+}
+
+///|
+let triv_forall_or_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "TRIV_FORALL_OR_THM",
+)
+
+///|
+/// `TRIV_FORALL_OR_THM`
+pub fn triv_forall_or_thm() -> @kernel.Thm {
+  triv_forall_or_thm_c.get()
+}
+
+///|
+/// TRIV_OR_FORALL_THM
+fn step_53() -> Unit raise {
   triv_or_forall_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (!x:A. P) \\/ (!x:A. Q) <=> (!x:A. P \\/ Q)"),
       @itab.itaut_tac,
     ),
   )
-  // RIGHT_IMP_FORALL_THM
+}
+
+///|
+let triv_or_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "TRIV_OR_FORALL_THM",
+)
+
+///|
+/// `TRIV_OR_FORALL_THM`
+pub fn triv_or_forall_thm() -> @kernel.Thm {
+  triv_or_forall_thm_c.get()
+}
+
+///|
+/// RIGHT_IMP_FORALL_THM
+fn step_54() -> Unit raise {
   right_imp_forall_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (P ==> !x:A. Q x) <=> (!x. P ==> Q x)"),
       @itab.itaut_tac,
     ),
   )
-  // RIGHT_FORALL_IMP_THM
+}
+
+///|
+let right_imp_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "RIGHT_IMP_FORALL_THM",
+)
+
+///|
+/// `RIGHT_IMP_FORALL_THM`
+pub fn right_imp_forall_thm() -> @kernel.Thm {
+  right_imp_forall_thm_c.get()
+}
+
+///|
+/// RIGHT_FORALL_IMP_THM
+fn step_55() -> Unit raise {
   right_forall_imp_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (!x. P ==> Q x) <=> (P ==> !x:A. Q x)"),
       @itab.itaut_tac,
     ),
   )
-  // LEFT_IMP_EXISTS_THM
+}
+
+///|
+let right_forall_imp_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "RIGHT_FORALL_IMP_THM",
+)
+
+///|
+/// `RIGHT_FORALL_IMP_THM`
+pub fn right_forall_imp_thm() -> @kernel.Thm {
+  right_forall_imp_thm_c.get()
+}
+
+///|
+/// LEFT_IMP_EXISTS_THM
+fn step_56() -> Unit raise {
   left_imp_exists_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. ((?x:A. P x) ==> Q) <=> (!x. P x ==> Q)"),
       @itab.itaut_tac,
     ),
   )
-  // LEFT_FORALL_IMP_THM
+}
+
+///|
+let left_imp_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "LEFT_IMP_EXISTS_THM",
+)
+
+///|
+/// `LEFT_IMP_EXISTS_THM`
+pub fn left_imp_exists_thm() -> @kernel.Thm {
+  left_imp_exists_thm_c.get()
+}
+
+///|
+/// LEFT_FORALL_IMP_THM
+fn step_57() -> Unit raise {
   left_forall_imp_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (!x. P x ==> Q) <=> ((?x:A. P x) ==> Q)"),
       @itab.itaut_tac,
     ),
   )
-  // TRIV_FORALL_IMP_THM
+}
+
+///|
+let left_forall_imp_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "LEFT_FORALL_IMP_THM",
+)
+
+///|
+/// `LEFT_FORALL_IMP_THM`
+pub fn left_forall_imp_thm() -> @kernel.Thm {
+  left_forall_imp_thm_c.get()
+}
+
+///|
+/// TRIV_FORALL_IMP_THM
+fn step_58() -> Unit raise {
   triv_forall_imp_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (!x:A. P ==> Q) <=> ((?x:A. P) ==> (!x:A. Q))"),
       @itab.itaut_tac,
     ),
   )
-  // TRIV_EXISTS_IMP_THM
+}
+
+///|
+let triv_forall_imp_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "TRIV_FORALL_IMP_THM",
+)
+
+///|
+/// `TRIV_FORALL_IMP_THM`
+pub fn triv_forall_imp_thm() -> @kernel.Thm {
+  triv_forall_imp_thm_c.get()
+}
+
+///|
+/// TRIV_EXISTS_IMP_THM
+fn step_59() -> Unit raise {
   triv_exists_imp_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (?x:A. P ==> Q) <=> ((!x:A. P) ==> (?x:A. Q))"),
       @itab.itaut_tac,
     ),
   )
-  // MONO_AND
+}
+
+///|
+let triv_exists_imp_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "TRIV_EXISTS_IMP_THM",
+)
+
+///|
+/// `TRIV_EXISTS_IMP_THM`
+pub fn triv_exists_imp_thm() -> @kernel.Thm {
+  triv_exists_imp_thm_c.get()
+}
+
+///|
+/// MONO_AND
+fn step_60() -> Unit raise {
   mono_and_c.set(
     @itab.itaut(
       @parser.parse_term("(A ==> B) /\\ (C ==> D) ==> (A /\\ C ==> B /\\ D)"),
     ),
   )
-  // MONO_OR
+}
+
+///|
+let mono_and_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MONO_AND")
+
+///|
+/// `MONO_AND`
+pub fn mono_and() -> @kernel.Thm {
+  mono_and_c.get()
+}
+
+///|
+/// MONO_OR
+fn step_61() -> Unit raise {
   mono_or_c.set(
     @itab.itaut(
       @parser.parse_term("(A ==> B) /\\ (C ==> D) ==> (A \\/ C ==> B \\/ D)"),
     ),
   )
-  // MONO_IMP
+}
+
+///|
+let mono_or_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MONO_OR")
+
+///|
+/// `MONO_OR`
+pub fn mono_or() -> @kernel.Thm {
+  mono_or_c.get()
+}
+
+///|
+/// MONO_IMP
+fn step_62() -> Unit raise {
   mono_imp_c.set(
     @itab.itaut(
       @parser.parse_term(
@@ -1242,9 +1413,35 @@ fn load_steps() -> Unit raise {
       ),
     ),
   )
-  // MONO_NOT
+}
+
+///|
+let mono_imp_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MONO_IMP")
+
+///|
+/// `MONO_IMP`
+pub fn mono_imp() -> @kernel.Thm {
+  mono_imp_c.get()
+}
+
+///|
+/// MONO_NOT
+fn step_63() -> Unit raise {
   mono_not_c.set(@itab.itaut(@parser.parse_term("(B ==> A) ==> (~A ==> ~B)")))
-  // MONO_FORALL
+}
+
+///|
+let mono_not_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MONO_NOT")
+
+///|
+/// `MONO_NOT`
+pub fn mono_not() -> @kernel.Thm {
+  mono_not_c.get()
+}
+
+///|
+/// MONO_FORALL
+fn step_64() -> Unit raise {
   let t56 = @simp.asm_rewrite_tac(@list.empty())
   let t55 = @tactics.first_assum(@tactics.match_mp_tac)
   let t57 = @tactics.then_tac(
@@ -1257,7 +1454,20 @@ fn load_steps() -> Unit raise {
       t57,
     ),
   )
-  // MONO_EXISTS
+}
+
+///|
+let mono_forall_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MONO_FORALL")
+
+///|
+/// `MONO_FORALL`
+pub fn mono_forall() -> @kernel.Thm {
+  mono_forall_c.get()
+}
+
+///|
+/// MONO_EXISTS
+fn step_65() -> Unit raise {
   let t62 = @simp.asm_rewrite_tac(@list.empty())
   let t61 = @tactics.first_assum(@tactics.match_mp_tac)
   let t60 = @tactics.exists_tac(@parser.parse_term("x:A"))
@@ -1283,7 +1493,20 @@ fn load_steps() -> Unit raise {
       t63,
     ),
   )
-  // WLOG_RELATION
+}
+
+///|
+let mono_exists_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MONO_EXISTS")
+
+///|
+/// `MONO_EXISTS`
+pub fn mono_exists() -> @kernel.Thm {
+  mono_exists_c.get()
+}
+
+///|
+/// WLOG_RELATION
+fn step_66() -> Unit raise {
   let t75 = @simp.asm_simp_tac(@list.empty())
   let t74 = @tactics.repeat_tac(
     @tactics.then_tac(@tactics.match_mp_tac(mono_forall()), @tactics.gen_tac),
@@ -1324,7 +1547,20 @@ fn load_steps() -> Unit raise {
       t76,
     ),
   )
-  // EXISTS_UNIQUE_ALT
+}
+
+///|
+let wlog_relation_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("WLOG_RELATION")
+
+///|
+/// `WLOG_RELATION`
+pub fn wlog_relation() -> @kernel.Thm {
+  wlog_relation_c.get()
+}
+
+///|
+/// EXISTS_UNIQUE_ALT
+fn step_67() -> Unit raise {
   let t96 = @tactics.disch_then(
     @tactics.conjuncts_then((x95 : @kernel.Thm) => {
       @tactics.subst1_tac(@equal.sym(x95))
@@ -1413,7 +1649,22 @@ fn load_steps() -> Unit raise {
       t99,
     ),
   )
-  // EXISTS_UNIQUE
+}
+
+///|
+let exists_unique_alt_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "EXISTS_UNIQUE_ALT",
+)
+
+///|
+/// `EXISTS_UNIQUE_ALT`
+pub fn exists_unique_alt() -> @kernel.Thm {
+  exists_unique_alt_c.get()
+}
+
+///|
+/// EXISTS_UNIQUE
+fn step_68() -> Unit raise {
   let t107 = @simp.rewrite_tac(@list.List([conj_aci()]))
   let t106 = @simp.rewrite_tac(
     @list.List([left_forall_imp_thm(), exists_refl()]),
@@ -1470,6 +1721,100 @@ fn load_steps() -> Unit raise {
       t108,
     ),
   )
-  // hand-ported (line 418)
+}
+
+///|
+let exists_unique_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EXISTS_UNIQUE")
+
+///|
+/// `EXISTS_UNIQUE`
+pub fn exists_unique() -> @kernel.Thm {
+  exists_unique_c.get()
+}
+
+///|
+/// hand-ported (line 418)
+fn step_69() -> Unit raise {
   destruct_setup()
+}
+
+///|
+/// `CLAIM_TAC`
+pub fn claim_tac(x109 : String, x110 : @kernel.Term) -> @tactics.Tactic raise {
+  let s = x109
+  let tm = x110
+  @tactics.subgoal_then(tm, destruct_tac(s))
+}
+
+///|
+fn load_steps() -> Unit raise {
+  step_1()
+  step_2()
+  step_3()
+  step_4()
+  step_5()
+  step_6()
+  step_7()
+  step_8()
+  step_9()
+  step_10()
+  step_11()
+  step_12()
+  step_13()
+  step_14()
+  step_15()
+  step_16()
+  step_17()
+  step_18()
+  step_19()
+  step_20()
+  step_21()
+  step_22()
+  step_23()
+  step_24()
+  step_25()
+  step_26()
+  step_27()
+  step_28()
+  step_29()
+  step_30()
+  step_31()
+  step_32()
+  step_33()
+  step_34()
+  step_35()
+  step_36()
+  step_37()
+  step_38()
+  step_39()
+  step_40()
+  step_41()
+  step_42()
+  step_43()
+  step_44()
+  step_45()
+  step_46()
+  step_47()
+  step_48()
+  step_49()
+  step_50()
+  step_51()
+  step_52()
+  step_53()
+  step_54()
+  step_55()
+  step_56()
+  step_57()
+  step_58()
+  step_59()
+  step_60()
+  step_61()
+  step_62()
+  step_63()
+  step_64()
+  step_65()
+  step_66()
+  step_67()
+  step_68()
+  step_69()
 }

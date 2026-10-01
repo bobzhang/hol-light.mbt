@@ -2,12 +2,47 @@
 // Regenerate with tools/ocaml_ref/translate.sh translate class.ml.
 
 ///|
+/// ETA_AX
+fn step_1() -> Unit raise {
+  eta_ax_c.set(@kernel.new_axiom(@parser.parse_term("!t:A->B. (\\x. t x) = t")))
+}
+
+///|
 let eta_ax_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("ETA_AX")
 
 ///|
 /// `ETA_AX`
 pub fn eta_ax() -> @kernel.Thm {
   eta_ax_c.get()
+}
+
+///|
+/// ETA_CONV
+fn step_2() -> Unit raise {
+  let t = @parser.parse_term("t:A->B")
+  let t1 = @tactics.match_accept_tac(eta_ax())
+  let pth = @tactics.prove(@parser.parse_term("(\\x. (t:A->B) x) = t"), t1)
+  eta_conv_c.set((x2 : @kernel.Term) => {
+    let tm = x2
+    try {
+      let (bv, bod) = @kernel.dest_abs(tm)
+      let (l, r) = @kernel.dest_comb(bod)
+      if r == bv && !@kernel.vfree_in(bv, l) {
+        let t3 = (@kernel.type_of(bod), @basics.bty)
+        let t4 = @bool.pinst(
+          @list.List([(@kernel.type_of(bv), @kernel.aty), t3]),
+          @list.List([(l, t)]),
+          pth,
+        )
+        @kernel.trans(@kernel.refl(tm), t4)
+      } else {
+        @lib.failure()
+      }
+    } catch {
+      Failure(_) => raise Failure("ETA_CONV")
+      e => raise e
+    }
+  })
 }
 
 ///|
@@ -22,6 +57,29 @@ pub fn eta_conv(x : @kernel.Term) -> @kernel.Thm raise {
 }
 
 ///|
+/// EQ_EXT
+fn step_3() -> Unit raise {
+  let t12 = @simp.rewrite_tac(@list.List([eta_ax()]))
+  let t8 = @parser.parse_term("x:A")
+  let t5 = @parser.parse_term("x:A")
+  let t11 = @tactics.disch_then((x10 : @kernel.Thm) => {
+    ((x7 : @kernel.Thm) => {
+      @tactics.mp_tac(((x6 : @kernel.Thm) => @kernel.abs_rule(t5, x6))(x7))
+    })(((x9 : @kernel.Thm) => @bool.spec(t8, x9))(x10))
+  })
+  let t13 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t11),
+    t12,
+  )
+  eq_ext_c.set(
+    @tactics.prove(
+      @parser.parse_term("!(f:A->B) g. (!x. f x = g x) ==> f = g"),
+      t13,
+    ),
+  )
+}
+
+///|
 let eq_ext_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EQ_EXT")
 
 ///|
@@ -31,12 +89,61 @@ pub fn eq_ext() -> @kernel.Thm {
 }
 
 ///|
+/// FUN_EQ_THM
+fn step_4() -> Unit raise {
+  let t17 = @tactics.match_accept_tac(eq_ext())
+  let t18 = @list.List([
+    @tactics.then_tac(
+      @tactics.then_tac(
+        @tactics.disch_then((x14 : @kernel.Thm) => {
+          let s15 = @tactics.subst1_tac(x14)
+          (x16 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s15(x16)
+        }),
+        @tactics.gen_tac,
+      ),
+      @tactics.refl_tac,
+    ),
+    t17,
+  ])
+  let t19 = @tactics.thenl(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac),
+    t18,
+  )
+  fun_eq_thm_c.set(
+    @tactics.prove(
+      @parser.parse_term("!(f:A->B) g. f = g <=> (!x. f x = g x)"),
+      t19,
+    ),
+  )
+}
+
+///|
 let fun_eq_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("FUN_EQ_THM")
 
 ///|
 /// `FUN_EQ_THM`
 pub fn fun_eq_thm() -> @kernel.Thm {
   fun_eq_thm_c.get()
+}
+
+///|
+/// class.ml:45
+fn step_5() -> Unit raise {
+  @kernel.new_constant("@", @parser.parse_type("(A->bool)->A"))
+}
+
+///|
+/// class.ml:47
+fn step_6() -> Unit raise {
+  @printer.parse_as_binder("@")
+}
+
+///|
+/// is_select
+fn step_7() -> Unit raise {
+  is_select_c.set((x21 : @kernel.Term) => {
+    ((x20 : @kernel.Term) => @basics.is_binder("@", x20))(x21)
+  })
 }
 
 ///|
@@ -51,6 +158,12 @@ pub fn is_select(x : @kernel.Term) -> Bool raise {
 }
 
 ///|
+/// dest_select
+fn step_8() -> Unit raise {
+  dest_select_c.set((x22 : @kernel.Term) => @basics.dest_binder("@", x22))
+}
+
+///|
 let dest_select_c : @lib.Cell[
   (@kernel.Term) -> (@kernel.Term, @kernel.Term) raise,
 ] = @lib.Cell::new("dest_select")
@@ -59,6 +172,16 @@ let dest_select_c : @lib.Cell[
 /// `dest_select`
 pub fn dest_select(x : @kernel.Term) -> (@kernel.Term, @kernel.Term) raise {
   dest_select_c.get()(x)
+}
+
+///|
+/// mk_select
+fn step_9() -> Unit raise {
+  mk_select_c.set((x25 : (@kernel.Term, @kernel.Term)) => {
+    ((x23 : @kernel.Term, x24 : @kernel.Term) => {
+      @basics.mk_binder("@", x23, x24)
+    })(x25.0, x25.1)
+  })
 }
 
 ///|
@@ -73,6 +196,14 @@ pub fn mk_select(x : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
 }
 
 ///|
+/// SELECT_AX
+fn step_10() -> Unit raise {
+  select_ax_c.set(
+    @kernel.new_axiom(@parser.parse_term("!P (x:A). P x ==> P((@) P)")),
+  )
+}
+
+///|
 let select_ax_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("SELECT_AX")
 
 ///|
@@ -82,12 +213,96 @@ pub fn select_ax() -> @kernel.Thm {
 }
 
 ///|
+/// EXISTS_THM
+fn step_11() -> Unit raise {
+  let t36 = @tactics.pop_assum((x33 : @kernel.Thm) => {
+    let s34 = @tactics.accept_tac(x33)
+    (x35 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s34(x35)
+  })
+  let t37 = @tactics.then_tac(
+    @tactics.then_tac(
+      @tactics.disch_tac,
+      @tactics.exists_tac(@parser.parse_term("((@) P):A")),
+    ),
+    t36,
+  )
+  let t32 = @tactics.match_accept_tac(select_ax())
+  let t38 = @list.List([
+    @tactics.then_tac(
+      @tactics.disch_then(
+        @tactics.choose_then((x29 : @kernel.Thm) => {
+          let s30 = @tactics.mp_tac(x29)
+          (x31 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s30(x31)
+        }),
+      ),
+      t32,
+    ),
+    t37,
+  ])
+  let t28 = @simp.gen_rewrite_tac(
+    (x27 : (@kernel.Term) -> @kernel.Thm raise) => {
+      @equal.land_conv(@equal.rand_conv(x27))
+    },
+    @list.List([@equal.gsym(eta_ax())]),
+  )
+  let t26 = @tactics.x_gen_tac(@parser.parse_term("P:A->bool"))
+  let t39 = @tactics.thenl(
+    @tactics.then_tac(
+      @tactics.then_tac(
+        @tactics.then_tac(
+          @tactics.then_tac(@tactics.match_mp_tac(eq_ext()), @tactics.beta_tac),
+          t26,
+        ),
+        t28,
+      ),
+      @tactics.eq_tac,
+    ),
+    t38,
+  )
+  exists_thm_c.set(
+    @tactics.prove(@parser.parse_term("(?) = \\P:A->bool. P ((@) P)"), t39),
+  )
+}
+
+///|
 let exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EXISTS_THM")
 
 ///|
 /// `EXISTS_THM`
 pub fn exists_thm() -> @kernel.Thm {
   exists_thm_c.get()
+}
+
+///|
+/// SELECT_RULE
+fn step_12() -> Unit raise {
+  let p = @parser.parse_term("P:A->bool")
+  let t40 = @simp.simp_tac(@list.List([select_ax(), eta_ax()]))
+  let pth = @tactics.prove(
+    @parser.parse_term("(?) (P:A->bool) ==> P((@) P)"),
+    t40,
+  )
+  select_rule_c.set((x41 : @kernel.Thm) => {
+    let th = x41
+    try {
+      let abs = @kernel.rand(@kernel.concl(th))
+      let ty = @kernel.type_of(@basics.bndvar(abs))
+      @equal.conv_rule(
+        @equal.beta_conv,
+        @bool.mp(
+          @bool.pinst(
+            @list.List([(ty, @kernel.aty)]),
+            @list.List([(abs, p)]),
+            pth,
+          ),
+          th,
+        ),
+      )
+    } catch {
+      Failure(_) => raise Failure("SELECT_RULE")
+      e => raise e
+    }
+  })
 }
 
 ///|
@@ -102,6 +317,49 @@ pub fn select_rule(x : @kernel.Thm) -> @kernel.Thm raise {
 }
 
 ///|
+/// SELECT_CONV
+fn step_13() -> Unit raise {
+  let p = @parser.parse_term("P:A->bool")
+  let t42 = @tactics.then_tac(
+    @tactics.then_tac(
+      @simp.rewrite_tac(@list.List([exists_thm()])),
+      @tactics.beta_tac,
+    ),
+    @tactics.refl_tac,
+  )
+  let pth = @tactics.prove(
+    @parser.parse_term("(P:A->bool)((@) P) = (?) P"),
+    t42,
+  )
+  select_conv_c.set((x43 : @kernel.Term) => {
+    let tm = x43
+    try {
+      let is_epsok : (@kernel.Term) -> Bool raise = (x44 : @kernel.Term) => {
+        let t = x44
+        if is_select(t) {
+          let (bv, bod) = dest_select(t)
+          @basics.aconv(tm, @kernel.vsubst(@list.List([(t, bv)]), bod))
+        } else {
+          false
+        }
+      }
+      let pickeps = @basics.find_term(is_epsok, tm)
+      let abs = @kernel.rand(pickeps)
+      let ty = @kernel.type_of(@basics.bndvar(abs))
+      let t45 = @bool.pinst(
+        @list.List([(ty, @kernel.aty)]),
+        @list.List([(abs, p)]),
+        pth,
+      )
+      @equal.conv_rule(@equal.land_conv(@equal.beta_conv), t45)
+    } catch {
+      Failure(_) => raise Failure("SELECT_CONV")
+      e => raise e
+    }
+  })
+}
+
+///|
 let select_conv_c : @lib.Cell[(@kernel.Term) -> @kernel.Thm raise] = @lib.Cell::new(
   "SELECT_CONV",
 )
@@ -110,6 +368,22 @@ let select_conv_c : @lib.Cell[(@kernel.Term) -> @kernel.Thm raise] = @lib.Cell::
 /// `SELECT_CONV`
 pub fn select_conv(x : @kernel.Term) -> @kernel.Thm raise {
   select_conv_c.get()(x)
+}
+
+///|
+/// SELECT_REFL
+fn step_14() -> Unit raise {
+  let t46 = @tactics.exists_tac(@parser.parse_term("x:A"))
+  let t47 = @tactics.then_tac(
+    @tactics.then_tac(
+      @tactics.then_tac(@tactics.gen_tac, @tactics.conv_tac(select_conv)),
+      t46,
+    ),
+    @tactics.refl_tac,
+  )
+  select_refl_c.set(
+    @tactics.prove(@parser.parse_term("!x:A. (@y. y = x) = x"), t47),
+  )
 }
 
 ///|
@@ -122,12 +396,46 @@ pub fn select_refl() -> @kernel.Thm {
 }
 
 ///|
+/// SELECT_UNIQUE
+fn step_15() -> Unit raise {
+  let t50 = @simp.asm_rewrite_tac(@list.List([select_refl()]))
+  let t49 = @simp.gen_rewrite_tac(
+    (x48 : (@kernel.Term) -> @kernel.Thm raise) => {
+      @equal.land_conv(@equal.rand_conv(x48))
+    },
+    @list.List([@equal.gsym(eta_ax())]),
+  )
+  let t51 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t49),
+    t50,
+  )
+  select_unique_c.set(
+    @tactics.prove(
+      @parser.parse_term("!P x. (!y:A. P y = (y = x)) ==> ((@) P = x)"),
+      t51,
+    ),
+  )
+}
+
+///|
 let select_unique_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("SELECT_UNIQUE")
 
 ///|
 /// `SELECT_UNIQUE`
 pub fn select_unique() -> @kernel.Thm {
   select_unique_c.get()
+}
+
+///|
+/// class.ml:113
+fn step_16() -> Unit raise {
+  @simp.extend_basic_rewrites(@list.List([select_refl()]))
+}
+
+///|
+/// the_type_definitions
+fn step_17() -> Unit raise {
+  the_type_definitions_c.set(Ref::{ val: @list.empty(), })
 }
 
 ///|
@@ -197,758 +505,8 @@ pub fn new_type_definition(
 }
 
 ///|
-let excluded_middle_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "EXCLUDED_MIDDLE",
-)
-
-///|
-/// `EXCLUDED_MIDDLE`
-pub fn excluded_middle() -> @kernel.Thm {
-  excluded_middle_c.get()
-}
-
-///|
-let bool_cases_ax_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("BOOL_CASES_AX")
-
-///|
-/// `BOOL_CASES_AX`
-pub fn bool_cases_ax() -> @kernel.Thm {
-  bool_cases_ax_c.get()
-}
-
-///|
-/// `BOOL_CASES_TAC`
-pub fn bool_cases_tac(x75 : @kernel.Term) -> @tactics.Tactic raise {
-  let p = x75
-  @tactics.struct_cases_tac(@bool.spec(p, bool_cases_ax()))
-}
-
-///|
-/// `ASM_CASES_TAC`
-pub fn asm_cases_tac(x77 : @kernel.Term) -> @tactics.Tactic raise {
-  let t = x77
-  @tactics.disj_cases_tac(@bool.spec(t, excluded_middle()))
-}
-
-///|
-let taut_v1_c : @lib.Cell[(@kernel.Term) -> @kernel.Thm raise] = @lib.Cell::new(
-  "TAUT",
-)
-
-///|
-/// `TAUT`
-pub fn taut_v1(x : @kernel.Term) -> @kernel.Thm raise {
-  taut_v1_c.get()(x)
-}
-
-///|
-let de_morgan_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("DE_MORGAN_THM")
-
-///|
-/// `DE_MORGAN_THM`
-pub fn de_morgan_thm() -> @kernel.Thm {
-  de_morgan_thm_c.get()
-}
-
-///|
-let not_clauses_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("NOT_CLAUSES")
-
-///|
-/// `NOT_CLAUSES`
-pub fn not_clauses() -> @kernel.Thm {
-  not_clauses_c.get()
-}
-
-///|
-let not_imp_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("NOT_IMP")
-
-///|
-/// `NOT_IMP`
-pub fn not_imp() -> @kernel.Thm {
-  not_imp_c.get()
-}
-
-///|
-let contrapos_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("CONTRAPOS_THM")
-
-///|
-/// `CONTRAPOS_THM`
-pub fn contrapos_thm() -> @kernel.Thm {
-  contrapos_thm_c.get()
-}
-
-///|
-let ccontr_c : @lib.Cell[
-  (@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise,
-] = @lib.Cell::new("CCONTR")
-
-///|
-/// `CCONTR`
-pub fn ccontr(x : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
-  ccontr_c.get()(x)
-}
-
-///|
-let contrapos_conv_c : @lib.Cell[(@kernel.Term) -> @kernel.Thm raise] = @lib.Cell::new(
-  "CONTRAPOS_CONV",
-)
-
-///|
-/// `CONTRAPOS_CONV`
-pub fn contrapos_conv(x : @kernel.Term) -> @kernel.Thm raise {
-  contrapos_conv_c.get()(x)
-}
-
-///|
-let refute_then_c : @lib.Cell[
-  (@tactics.ThmTactic) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @tactics.Goalstate raise) raise,
-] = @lib.Cell::new("REFUTE_THEN")
-
-///|
-/// `REFUTE_THEN`
-pub fn refute_then(
-  x : @tactics.ThmTactic,
-) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @tactics.Goalstate raise) raise {
-  refute_then_c.get()(x)
-}
-
-///|
-let not_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("NOT_EXISTS_THM")
-
-///|
-/// `NOT_EXISTS_THM`
-pub fn not_exists_thm() -> @kernel.Thm {
-  not_exists_thm_c.get()
-}
-
-///|
-let exists_not_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EXISTS_NOT_THM")
-
-///|
-/// `EXISTS_NOT_THM`
-pub fn exists_not_thm() -> @kernel.Thm {
-  exists_not_thm_c.get()
-}
-
-///|
-let not_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("NOT_FORALL_THM")
-
-///|
-/// `NOT_FORALL_THM`
-pub fn not_forall_thm() -> @kernel.Thm {
-  not_forall_thm_c.get()
-}
-
-///|
-let forall_not_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("FORALL_NOT_THM")
-
-///|
-/// `FORALL_NOT_THM`
-pub fn forall_not_thm() -> @kernel.Thm {
-  forall_not_thm_c.get()
-}
-
-///|
-let forall_bool_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "FORALL_BOOL_THM",
-)
-
-///|
-/// `FORALL_BOOL_THM`
-pub fn forall_bool_thm() -> @kernel.Thm {
-  forall_bool_thm_c.get()
-}
-
-///|
-let exists_bool_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "EXISTS_BOOL_THM",
-)
-
-///|
-/// `EXISTS_BOOL_THM`
-pub fn exists_bool_thm() -> @kernel.Thm {
-  exists_bool_thm_c.get()
-}
-
-///|
-let left_forall_or_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "LEFT_FORALL_OR_THM",
-)
-
-///|
-/// `LEFT_FORALL_OR_THM`
-pub fn left_forall_or_thm() -> @kernel.Thm {
-  left_forall_or_thm_c.get()
-}
-
-///|
-let right_forall_or_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "RIGHT_FORALL_OR_THM",
-)
-
-///|
-/// `RIGHT_FORALL_OR_THM`
-pub fn right_forall_or_thm() -> @kernel.Thm {
-  right_forall_or_thm_c.get()
-}
-
-///|
-let left_or_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "LEFT_OR_FORALL_THM",
-)
-
-///|
-/// `LEFT_OR_FORALL_THM`
-pub fn left_or_forall_thm() -> @kernel.Thm {
-  left_or_forall_thm_c.get()
-}
-
-///|
-let right_or_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "RIGHT_OR_FORALL_THM",
-)
-
-///|
-/// `RIGHT_OR_FORALL_THM`
-pub fn right_or_forall_thm() -> @kernel.Thm {
-  right_or_forall_thm_c.get()
-}
-
-///|
-let left_imp_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "LEFT_IMP_FORALL_THM",
-)
-
-///|
-/// `LEFT_IMP_FORALL_THM`
-pub fn left_imp_forall_thm() -> @kernel.Thm {
-  left_imp_forall_thm_c.get()
-}
-
-///|
-let left_exists_imp_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "LEFT_EXISTS_IMP_THM",
-)
-
-///|
-/// `LEFT_EXISTS_IMP_THM`
-pub fn left_exists_imp_thm() -> @kernel.Thm {
-  left_exists_imp_thm_c.get()
-}
-
-///|
-let right_imp_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "RIGHT_IMP_EXISTS_THM",
-)
-
-///|
-/// `RIGHT_IMP_EXISTS_THM`
-pub fn right_imp_exists_thm() -> @kernel.Thm {
-  right_imp_exists_thm_c.get()
-}
-
-///|
-let right_exists_imp_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "RIGHT_EXISTS_IMP_THM",
-)
-
-///|
-/// `RIGHT_EXISTS_IMP_THM`
-pub fn right_exists_imp_thm() -> @kernel.Thm {
-  right_exists_imp_thm_c.get()
-}
-
-///|
-let cond_def_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_DEF")
-
-///|
-/// `COND_DEF`
-pub fn cond_def() -> @kernel.Thm {
-  cond_def_c.get()
-}
-
-///|
-let cond_clauses_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_CLAUSES")
-
-///|
-/// `COND_CLAUSES`
-pub fn cond_clauses() -> @kernel.Thm {
-  cond_clauses_c.get()
-}
-
-///|
-/// `is_cond`
-pub fn is_cond(x152 : @kernel.Term) -> Bool raise {
-  let tm = x152
-  try
-    @kernel.dest_const(@kernel.rator(@kernel.rator(@kernel.rator(tm)))).0 ==
-    "COND"
-  catch {
-    Failure(_) => false
-    e => raise e
-  }
-}
-
-///|
-/// `mk_cond`
-pub fn mk_cond(
-  x153 : @kernel.Term,
-  x154 : @kernel.Term,
-  x155 : @kernel.Term,
-) -> @kernel.Term raise {
-  let (b, x, y) = (x153, x154, x155)
-  try {
-    let c = @kernel.mk_const(
-      "COND",
-      @list.List([(@kernel.type_of(x), @kernel.aty)]),
-    )
-    @kernel.mk_comb(@kernel.mk_comb(@kernel.mk_comb(c, b), x), y)
-  } catch {
-    Failure(_) => raise Failure("mk_cond")
-    e => raise e
-  }
-}
-
-///|
-/// `dest_cond`
-pub fn dest_cond(
-  x156 : @kernel.Term,
-) -> (@kernel.Term, (@kernel.Term, @kernel.Term)) raise {
-  let tm = x156
-  try {
-    let (tm1, y) = @kernel.dest_comb(tm)
-    let (tm2, x) = @kernel.dest_comb(tm1)
-    let (c, b) = @kernel.dest_comb(tm2)
-    if @kernel.dest_const(c).0 == "COND" {
-      (b, (x, y))
-    } else {
-      @lib.failure()
-    }
-  } catch {
-    Failure(_) => raise Failure("dest_cond")
-    e => raise e
-  }
-}
-
-///|
-let cond_expand_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_EXPAND")
-
-///|
-/// `COND_EXPAND`
-pub fn cond_expand() -> @kernel.Thm {
-  cond_expand_c.get()
-}
-
-///|
-let cond_id_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_ID")
-
-///|
-/// `COND_ID`
-pub fn cond_id() -> @kernel.Thm {
-  cond_id_c.get()
-}
-
-///|
-let cond_rand_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_RAND")
-
-///|
-/// `COND_RAND`
-pub fn cond_rand() -> @kernel.Thm {
-  cond_rand_c.get()
-}
-
-///|
-let cond_rator_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_RATOR")
-
-///|
-/// `COND_RATOR`
-pub fn cond_rator() -> @kernel.Thm {
-  cond_rator_c.get()
-}
-
-///|
-let cond_abs_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_ABS")
-
-///|
-/// `COND_ABS`
-pub fn cond_abs() -> @kernel.Thm {
-  cond_abs_c.get()
-}
-
-///|
-let cond_swap_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_SWAP")
-
-///|
-/// `COND_SWAP`
-pub fn cond_swap() -> @kernel.Thm {
-  cond_swap_c.get()
-}
-
-///|
-let taut_c : @lib.Cell[(@kernel.Term) -> @kernel.Thm raise] = @lib.Cell::new(
-  "TAUT",
-)
-
-///|
-/// `TAUT`
-pub fn taut(x : @kernel.Term) -> @kernel.Thm raise {
-  taut_c.get()(x)
-}
-
-///|
-let mono_cond_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MONO_COND")
-
-///|
-/// `MONO_COND`
-pub fn mono_cond() -> @kernel.Thm {
-  mono_cond_c.get()
-}
-
-///|
-let cond_elim_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_ELIM_THM")
-
-///|
-/// `COND_ELIM_THM`
-pub fn cond_elim_thm() -> @kernel.Thm {
-  cond_elim_thm_c.get()
-}
-
-///|
-let cond_elim_conv_c : @lib.Cell[(@kernel.Term) -> @kernel.Thm raise] = @lib.Cell::new(
-  "COND_ELIM_CONV",
-)
-
-///|
-/// `COND_ELIM_CONV`
-pub fn cond_elim_conv(x : @kernel.Term) -> @kernel.Thm raise {
-  cond_elim_conv_c.get()(x)
-}
-
-///|
-let cond_cases_tac_c : @lib.Cell[@tactics.Tactic] = @lib.Cell::new(
-  "COND_CASES_TAC",
-)
-
-///|
-/// `COND_CASES_TAC`
-pub fn cond_cases_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
-  cond_cases_tac_c.get()(x)
-}
-
-///|
-let skolem_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("SKOLEM_THM")
-
-///|
-/// `SKOLEM_THM`
-pub fn skolem_thm() -> @kernel.Thm {
-  skolem_thm_c.get()
-}
-
-///|
-let skolem_thm_gen_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("SKOLEM_THM_GEN")
-
-///|
-/// `SKOLEM_THM_GEN`
-pub fn skolem_thm_gen() -> @kernel.Thm {
-  skolem_thm_gen_c.get()
-}
-
-///|
-let unique_skolem_alt_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "UNIQUE_SKOLEM_ALT",
-)
-
-///|
-/// `UNIQUE_SKOLEM_ALT`
-pub fn unique_skolem_alt() -> @kernel.Thm {
-  unique_skolem_alt_c.get()
-}
-
-///|
-let unique_skolem_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
-  "UNIQUE_SKOLEM_THM",
-)
-
-///|
-/// `UNIQUE_SKOLEM_THM`
-pub fn unique_skolem_thm() -> @kernel.Thm {
-  unique_skolem_thm_c.get()
-}
-
-///|
-let bool_induct_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("bool_INDUCT")
-
-///|
-/// `bool_INDUCT`
-pub fn bool_induct() -> @kernel.Thm {
-  bool_induct_c.get()
-}
-
-///|
-let bool_recursion_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("bool_RECURSION")
-
-///|
-/// `bool_RECURSION`
-pub fn bool_recursion() -> @kernel.Thm {
-  bool_recursion_c.get()
-}
-
-///|
-let inductive_type_store_c : @lib.Cell[
-  Ref[@list.List[(String, (Int, @kernel.Thm, @kernel.Thm))]],
-] = @lib.Cell::new("inductive_type_store")
-
-///|
-/// `inductive_type_store`
-pub fn inductive_type_store() -> Ref[
-  @list.List[(String, (Int, @kernel.Thm, @kernel.Thm))],
-] {
-  inductive_type_store_c.get()
-}
-
-///|
-fn load_steps() -> Unit raise {
-  // ETA_AX
-  eta_ax_c.set(@kernel.new_axiom(@parser.parse_term("!t:A->B. (\\x. t x) = t")))
-  // ETA_CONV
-  let t = @parser.parse_term("t:A->B")
-  let t1 = @tactics.match_accept_tac(eta_ax())
-  let pth = @tactics.prove(@parser.parse_term("(\\x. (t:A->B) x) = t"), t1)
-  eta_conv_c.set((x2 : @kernel.Term) => {
-    let tm = x2
-    try {
-      let (bv, bod) = @kernel.dest_abs(tm)
-      let (l, r) = @kernel.dest_comb(bod)
-      if r == bv && !@kernel.vfree_in(bv, l) {
-        let t3 = (@kernel.type_of(bod), @basics.bty)
-        let t4 = @bool.pinst(
-          @list.List([(@kernel.type_of(bv), @kernel.aty), t3]),
-          @list.List([(l, t)]),
-          pth,
-        )
-        @kernel.trans(@kernel.refl(tm), t4)
-      } else {
-        @lib.failure()
-      }
-    } catch {
-      Failure(_) => raise Failure("ETA_CONV")
-      e => raise e
-    }
-  })
-  // EQ_EXT
-  let t12 = @simp.rewrite_tac(@list.List([eta_ax()]))
-  let t8 = @parser.parse_term("x:A")
-  let t5 = @parser.parse_term("x:A")
-  let t11 = @tactics.disch_then((x10 : @kernel.Thm) => {
-    ((x7 : @kernel.Thm) => {
-      @tactics.mp_tac(((x6 : @kernel.Thm) => @kernel.abs_rule(t5, x6))(x7))
-    })(((x9 : @kernel.Thm) => @bool.spec(t8, x9))(x10))
-  })
-  let t13 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t11),
-    t12,
-  )
-  eq_ext_c.set(
-    @tactics.prove(
-      @parser.parse_term("!(f:A->B) g. (!x. f x = g x) ==> f = g"),
-      t13,
-    ),
-  )
-  // FUN_EQ_THM
-  let t17 = @tactics.match_accept_tac(eq_ext())
-  let t18 = @list.List([
-    @tactics.then_tac(
-      @tactics.then_tac(
-        @tactics.disch_then((x14 : @kernel.Thm) => {
-          let s15 = @tactics.subst1_tac(x14)
-          (x16 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s15(x16)
-        }),
-        @tactics.gen_tac,
-      ),
-      @tactics.refl_tac,
-    ),
-    t17,
-  ])
-  let t19 = @tactics.thenl(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac),
-    t18,
-  )
-  fun_eq_thm_c.set(
-    @tactics.prove(
-      @parser.parse_term("!(f:A->B) g. f = g <=> (!x. f x = g x)"),
-      t19,
-    ),
-  )
-  // class.ml:45
-  @kernel.new_constant("@", @parser.parse_type("(A->bool)->A"))
-  // class.ml:47
-  @printer.parse_as_binder("@")
-  // is_select
-  is_select_c.set((x21 : @kernel.Term) => {
-    ((x20 : @kernel.Term) => @basics.is_binder("@", x20))(x21)
-  })
-  // dest_select
-  dest_select_c.set((x22 : @kernel.Term) => @basics.dest_binder("@", x22))
-  // mk_select
-  mk_select_c.set((x25 : (@kernel.Term, @kernel.Term)) => {
-    ((x23 : @kernel.Term, x24 : @kernel.Term) => {
-      @basics.mk_binder("@", x23, x24)
-    })(x25.0, x25.1)
-  })
-  // SELECT_AX
-  select_ax_c.set(
-    @kernel.new_axiom(@parser.parse_term("!P (x:A). P x ==> P((@) P)")),
-  )
-  // EXISTS_THM
-  let t36 = @tactics.pop_assum((x33 : @kernel.Thm) => {
-    let s34 = @tactics.accept_tac(x33)
-    (x35 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s34(x35)
-  })
-  let t37 = @tactics.then_tac(
-    @tactics.then_tac(
-      @tactics.disch_tac,
-      @tactics.exists_tac(@parser.parse_term("((@) P):A")),
-    ),
-    t36,
-  )
-  let t32 = @tactics.match_accept_tac(select_ax())
-  let t38 = @list.List([
-    @tactics.then_tac(
-      @tactics.disch_then(
-        @tactics.choose_then((x29 : @kernel.Thm) => {
-          let s30 = @tactics.mp_tac(x29)
-          (x31 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s30(x31)
-        }),
-      ),
-      t32,
-    ),
-    t37,
-  ])
-  let t28 = @simp.gen_rewrite_tac(
-    (x27 : (@kernel.Term) -> @kernel.Thm raise) => {
-      @equal.land_conv(@equal.rand_conv(x27))
-    },
-    @list.List([@equal.gsym(eta_ax())]),
-  )
-  let t26 = @tactics.x_gen_tac(@parser.parse_term("P:A->bool"))
-  let t39 = @tactics.thenl(
-    @tactics.then_tac(
-      @tactics.then_tac(
-        @tactics.then_tac(
-          @tactics.then_tac(@tactics.match_mp_tac(eq_ext()), @tactics.beta_tac),
-          t26,
-        ),
-        t28,
-      ),
-      @tactics.eq_tac,
-    ),
-    t38,
-  )
-  exists_thm_c.set(
-    @tactics.prove(@parser.parse_term("(?) = \\P:A->bool. P ((@) P)"), t39),
-  )
-  // SELECT_RULE
-  let p = @parser.parse_term("P:A->bool")
-  let t40 = @simp.simp_tac(@list.List([select_ax(), eta_ax()]))
-  let pth = @tactics.prove(
-    @parser.parse_term("(?) (P:A->bool) ==> P((@) P)"),
-    t40,
-  )
-  select_rule_c.set((x41 : @kernel.Thm) => {
-    let th = x41
-    try {
-      let abs = @kernel.rand(@kernel.concl(th))
-      let ty = @kernel.type_of(@basics.bndvar(abs))
-      @equal.conv_rule(
-        @equal.beta_conv,
-        @bool.mp(
-          @bool.pinst(
-            @list.List([(ty, @kernel.aty)]),
-            @list.List([(abs, p)]),
-            pth,
-          ),
-          th,
-        ),
-      )
-    } catch {
-      Failure(_) => raise Failure("SELECT_RULE")
-      e => raise e
-    }
-  })
-  // SELECT_CONV
-  let p = @parser.parse_term("P:A->bool")
-  let t42 = @tactics.then_tac(
-    @tactics.then_tac(
-      @simp.rewrite_tac(@list.List([exists_thm()])),
-      @tactics.beta_tac,
-    ),
-    @tactics.refl_tac,
-  )
-  let pth = @tactics.prove(
-    @parser.parse_term("(P:A->bool)((@) P) = (?) P"),
-    t42,
-  )
-  select_conv_c.set((x43 : @kernel.Term) => {
-    let tm = x43
-    try {
-      let is_epsok = (x44 : @kernel.Term) => {
-        let t = x44
-        if is_select(t) {
-          let (bv, bod) = dest_select(t)
-          @basics.aconv(tm, @kernel.vsubst(@list.List([(t, bv)]), bod))
-        } else {
-          false
-        }
-      }
-      let pickeps = @basics.find_term(is_epsok, tm)
-      let abs = @kernel.rand(pickeps)
-      let ty = @kernel.type_of(@basics.bndvar(abs))
-      let t45 = @bool.pinst(
-        @list.List([(ty, @kernel.aty)]),
-        @list.List([(abs, p)]),
-        pth,
-      )
-      @equal.conv_rule(@equal.land_conv(@equal.beta_conv), t45)
-    } catch {
-      Failure(_) => raise Failure("SELECT_CONV")
-      e => raise e
-    }
-  })
-  // SELECT_REFL
-  let t46 = @tactics.exists_tac(@parser.parse_term("x:A"))
-  let t47 = @tactics.then_tac(
-    @tactics.then_tac(
-      @tactics.then_tac(@tactics.gen_tac, @tactics.conv_tac(select_conv)),
-      t46,
-    ),
-    @tactics.refl_tac,
-  )
-  select_refl_c.set(
-    @tactics.prove(@parser.parse_term("!x:A. (@y. y = x) = x"), t47),
-  )
-  // SELECT_UNIQUE
-  let t50 = @simp.asm_rewrite_tac(@list.List([select_refl()]))
-  let t49 = @simp.gen_rewrite_tac(
-    (x48 : (@kernel.Term) -> @kernel.Thm raise) => {
-      @equal.land_conv(@equal.rand_conv(x48))
-    },
-    @list.List([@equal.gsym(eta_ax())]),
-  )
-  let t51 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t49),
-    t50,
-  )
-  select_unique_c.set(
-    @tactics.prove(
-      @parser.parse_term("!P x. (!y:A. P y = (y = x)) ==> ((@) P = x)"),
-      t51,
-    ),
-  )
-  // class.ml:113
-  @simp.extend_basic_rewrites(@list.List([select_refl()]))
-  // the_type_definitions
-  the_type_definitions_c.set(Ref::{ val: @list.empty(), })
-  // EXCLUDED_MIDDLE
+/// EXCLUDED_MIDDLE
+fn step_18() -> Unit raise {
   let t69 = @simp.asm_rewrite_tac(
     @list.List([@itab.itaut(@parser.parse_term("p \\/ T <=> T"))]),
   )
@@ -1015,7 +573,22 @@ fn load_steps() -> Unit raise {
     t71,
   )
   excluded_middle_c.set(@tactics.prove(@parser.parse_term("!t. t \\/ ~t"), t72))
-  // BOOL_CASES_AX
+}
+
+///|
+let excluded_middle_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "EXCLUDED_MIDDLE",
+)
+
+///|
+/// `EXCLUDED_MIDDLE`
+pub fn excluded_middle() -> @kernel.Thm {
+  excluded_middle_c.get()
+}
+
+///|
+/// BOOL_CASES_AX
+fn step_19() -> Unit raise {
   let t73 = @simp.asm_rewrite_tac(@list.empty())
   let t74 = @tactics.then_tac(
     @tactics.then_tac(
@@ -1029,11 +602,74 @@ fn load_steps() -> Unit raise {
   bool_cases_ax_c.set(
     @tactics.prove(@parser.parse_term("!t. (t <=> T) \\/ (t <=> F)"), t74),
   )
-  // TAUT
-  let prop_rewrite_tac = @simp.rewrite_tac(@list.empty())
-  let rtaut_tac = (x79 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+}
+
+///|
+let bool_cases_ax_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("BOOL_CASES_AX")
+
+///|
+/// `BOOL_CASES_AX`
+pub fn bool_cases_ax() -> @kernel.Thm {
+  bool_cases_ax_c.get()
+}
+
+///|
+/// `BOOL_CASES_TAC`
+pub fn bool_cases_tac(x75 : @kernel.Term) -> @tactics.Tactic raise {
+  let p = x75
+  @tactics.struct_cases_tac(@bool.spec(p, bool_cases_ax()))
+}
+
+///|
+/// `ASM_CASES_TAC`
+pub fn asm_cases_tac(x77 : @kernel.Term) -> @tactics.Tactic raise {
+  let t = x77
+  @tactics.disj_cases_tac(@bool.spec(t, excluded_middle()))
+}
+
+///|
+/// TAUT
+fn step_20() -> Unit raise {
+  let prop_rewrite_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+    (
+      @list.List[@kernel.Term],
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+    ),
+    @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+    (
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+      @list.List[@kernel.Thm],
+    ) -> @kernel.Thm raise,
+  ) raise = @simp.rewrite_tac(@list.empty())
+  let rtaut_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+    (
+      @list.List[@kernel.Term],
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+    ),
+    @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+    (
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+      @list.List[@kernel.Thm],
+    ) -> @kernel.Thm raise,
+  ) raise = (x79 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
     let (asl, w) = x79
-    let ok = (x80 : @kernel.Term) => {
+    let ok : (@kernel.Term) -> Bool raise = (x80 : @kernel.Term) => {
       let t = x80
       @kernel.type_of(t) == @kernel.bool_ty &&
       @lib.can(
@@ -1119,7 +755,25 @@ fn load_steps() -> Unit raise {
     })((asl, w))
   }
   let t98 = @tactics.repeat_tac(rtaut_tac)
-  let taut_tac = @tactics.then_tac(
+  let taut_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+    (
+      @list.List[@kernel.Term],
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+    ),
+    @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+    (
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+      @list.List[@kernel.Thm],
+    ) -> @kernel.Thm raise,
+  ) raise = @tactics.then_tac(
     @tactics.repeat_tac(
       @tactics.orelse_tac(@tactics.gen_tac, @tactics.conj_tac),
     ),
@@ -1129,7 +783,22 @@ fn load_steps() -> Unit raise {
     let tm = x99
     @tactics.prove(tm, taut_tac)
   })
-  // DE_MORGAN_THM
+}
+
+///|
+let taut_v1_c : @lib.Cell[(@kernel.Term) -> @kernel.Thm raise] = @lib.Cell::new(
+  "TAUT",
+)
+
+///|
+/// `TAUT`
+pub fn taut_v1(x : @kernel.Term) -> @kernel.Thm raise {
+  taut_v1_c.get()(x)
+}
+
+///|
+/// DE_MORGAN_THM
+fn step_21() -> Unit raise {
   de_morgan_thm_c.set(
     taut_v1(
       @parser.parse_term(
@@ -1137,23 +806,79 @@ fn load_steps() -> Unit raise {
       ),
     ),
   )
-  // NOT_CLAUSES
+}
+
+///|
+let de_morgan_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("DE_MORGAN_THM")
+
+///|
+/// `DE_MORGAN_THM`
+pub fn de_morgan_thm() -> @kernel.Thm {
+  de_morgan_thm_c.get()
+}
+
+///|
+/// NOT_CLAUSES
+fn step_22() -> Unit raise {
   not_clauses_c.set(
     taut_v1(
       @parser.parse_term("(!t. ~ ~t <=> t) /\\ (~T <=> F) /\\ (~F <=> T)"),
     ),
   )
-  // NOT_IMP
+}
+
+///|
+let not_clauses_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("NOT_CLAUSES")
+
+///|
+/// `NOT_CLAUSES`
+pub fn not_clauses() -> @kernel.Thm {
+  not_clauses_c.get()
+}
+
+///|
+/// NOT_IMP
+fn step_23() -> Unit raise {
   not_imp_c.set(
     taut_v1(@parser.parse_term("!t1 t2. ~(t1 ==> t2) <=> t1 /\\ ~t2")),
   )
-  // CONTRAPOS_THM
+}
+
+///|
+let not_imp_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("NOT_IMP")
+
+///|
+/// `NOT_IMP`
+pub fn not_imp() -> @kernel.Thm {
+  not_imp_c.get()
+}
+
+///|
+/// CONTRAPOS_THM
+fn step_24() -> Unit raise {
   contrapos_thm_c.set(
     taut_v1(@parser.parse_term("!t1 t2. (~t1 ==> ~t2) <=> (t2 ==> t1)")),
   )
-  // class.ml:195
+}
+
+///|
+let contrapos_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("CONTRAPOS_THM")
+
+///|
+/// `CONTRAPOS_THM`
+pub fn contrapos_thm() -> @kernel.Thm {
+  contrapos_thm_c.get()
+}
+
+///|
+/// class.ml:195
+fn step_25() -> Unit raise {
   @simp.extend_basic_rewrites(@list.List([@bool.conjunct1(not_clauses())]))
-  // CCONTR
+}
+
+///|
+/// CCONTR
+fn step_26() -> Unit raise {
   let p = @parser.parse_term("P:bool")
   let pth = taut_v1(@parser.parse_term("(~P ==> F) ==> P"))
   ccontr_c.set((x100 : @kernel.Term) => {
@@ -1170,14 +895,27 @@ fn load_steps() -> Unit raise {
       }
     }
   })
-  // CONTRAPOS_CONV
-  let t103 = @parser.parse_term("a:bool")
-  let t104 = @parser.parse_term("b:bool")
-  let a = t103
-  let b = t104
+}
+
+///|
+let ccontr_c : @lib.Cell[
+  (@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise,
+] = @lib.Cell::new("CCONTR")
+
+///|
+/// `CCONTR`
+pub fn ccontr(x : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+  ccontr_c.get()(x)
+}
+
+///|
+/// CONTRAPOS_CONV
+fn step_27() -> Unit raise {
+  let a = @parser.parse_term("a:bool")
+  let b = @parser.parse_term("b:bool")
   let pth = taut_v1(@parser.parse_term("(a ==> b) <=> (~b ==> ~a)"))
-  contrapos_conv_c.set((x105 : @kernel.Term) => {
-    let tm = x105
+  contrapos_conv_c.set((x103 : @kernel.Term) => {
+    let tm = x103
     try {
       let (p, q) = @basics.dest_imp(tm)
       @kernel.inst_rule(@list.List([(p, a), (q, b)]), pth)
@@ -1186,13 +924,28 @@ fn load_steps() -> Unit raise {
       e => raise e
     }
   })
-  // REFUTE_THEN
-  let t106 = @parser.parse_term("F")
-  let t107 = @simp.rewr_conv(taut_v1(@parser.parse_term("p <=> ~p ==> F")))
-  let f_tm = t106
-  let conv = t107
+}
+
+///|
+let contrapos_conv_c : @lib.Cell[(@kernel.Term) -> @kernel.Thm raise] = @lib.Cell::new(
+  "CONTRAPOS_CONV",
+)
+
+///|
+/// `CONTRAPOS_CONV`
+pub fn contrapos_conv(x : @kernel.Term) -> @kernel.Thm raise {
+  contrapos_conv_c.get()(x)
+}
+
+///|
+/// REFUTE_THEN
+fn step_28() -> Unit raise {
+  let f_tm = @parser.parse_term("F")
+  let conv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(
+    taut_v1(@parser.parse_term("p <=> ~p ==> F")),
+  )
   refute_then_c.set((
-    x108 : (@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+    x104 : (@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
         @list.List[@kernel.Term],
         (
@@ -1212,190 +965,404 @@ fn load_steps() -> Unit raise {
       ) -> @kernel.Thm raise,
     ) raise) raise,
   ) => {
-    let ttac = x108
-    (x109 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
-      let (asl, w) as gl = x109
+    let ttac = x104
+    (x105 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+      let (asl, w) as gl = x105
       if w == f_tm {
         @tactics.all_tac(gl)
       } else if @basics.is_neg(w) {
         @tactics.disch_then(ttac)(gl)
       } else {
-        let t110 = @tactics.disch_then(ttac)
-        @tactics.then_tac(@tactics.conv_tac(conv), t110)(gl)
+        let t106 = @tactics.disch_then(ttac)
+        @tactics.then_tac(@tactics.conv_tac(conv), t106)(gl)
       }
     }
   })
-  // NOT_EXISTS_THM
-  let t121 = @simp.asm_rewrite_tac(@list.empty())
-  let t122 = @tactics.then_tac(
+}
+
+///|
+let refute_then_c : @lib.Cell[
+  (@tactics.ThmTactic) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @tactics.Goalstate raise) raise,
+] = @lib.Cell::new("REFUTE_THEN")
+
+///|
+/// `REFUTE_THEN`
+pub fn refute_then(
+  x : @tactics.ThmTactic,
+) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @tactics.Goalstate raise) raise {
+  refute_then_c.get()(x)
+}
+
+///|
+/// NOT_EXISTS_THM
+fn step_29() -> Unit raise {
+  let t117 = @simp.asm_rewrite_tac(@list.empty())
+  let t118 = @tactics.then_tac(
     @tactics.disch_then(
-      @tactics.choose_then((x118 : @kernel.Thm) => {
-        let s119 = @tactics.mp_tac(x118)
-        (x120 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s119(x120)
+      @tactics.choose_then((x114 : @kernel.Thm) => {
+        let s115 = @tactics.mp_tac(x114)
+        (x116 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s115(x116)
       }),
     ),
-    t121,
+    t117,
   )
-  let t117 = @tactics.pop_assum((x114 : @kernel.Thm) => {
-    let s115 = @tactics.accept_tac(x114)
-    (x116 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s115(x116)
+  let t113 = @tactics.pop_assum((x110 : @kernel.Thm) => {
+    let s111 = @tactics.accept_tac(x110)
+    (x112 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s111(x112)
   })
-  let t113 = @tactics.exists_tac(@parser.parse_term("x:A"))
-  let t112 = @simp.rewrite_tac(@list.empty())
-  let t111 = @tactics.undisch_tac(@parser.parse_term("~(?x:A. P x)"))
-  let t123 = @list.List([
+  let t109 = @tactics.exists_tac(@parser.parse_term("x:A"))
+  let t108 = @simp.rewrite_tac(@list.empty())
+  let t107 = @tactics.undisch_tac(@parser.parse_term("~(?x:A. P x)"))
+  let t119 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.then_tac(
             @tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac),
-            t111,
+            t107,
           ),
-          t112,
+          t108,
         ),
-        t113,
+        t109,
       ),
-      t117,
+      t113,
     ),
-    t122,
+    t118,
   ])
-  let t124 = @tactics.thenl(
+  let t120 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac),
       @tactics.disch_tac,
     ),
-    t123,
+    t119,
   )
   not_exists_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P. ~(?x:A. P x) <=> (!x. ~(P x))"),
-      t124,
+      t120,
     ),
   )
-  // EXISTS_NOT_THM
-  let t125 = @simp.rewrite_tac(@list.List([not_exists_thm()]))
-  let t126 = @tactics.then_tac(
+}
+
+///|
+let not_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("NOT_EXISTS_THM")
+
+///|
+/// `NOT_EXISTS_THM`
+pub fn not_exists_thm() -> @kernel.Thm {
+  not_exists_thm_c.get()
+}
+
+///|
+/// EXISTS_NOT_THM
+fn step_30() -> Unit raise {
+  let t121 = @simp.rewrite_tac(@list.List([not_exists_thm()]))
+  let t122 = @tactics.then_tac(
     @simp.once_rewrite_tac(
       @list.List([taut_v1(@parser.parse_term("(a <=> ~b) <=> (~a <=> b)"))]),
     ),
-    t125,
+    t121,
   )
   exists_not_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P. (?x:A. ~(P x)) <=> ~(!x. P x)"),
-      t126,
+      t122,
     ),
   )
-  // NOT_FORALL_THM
-  let t127 = @tactics.match_accept_tac(@equal.gsym(exists_not_thm()))
+}
+
+///|
+let exists_not_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("EXISTS_NOT_THM")
+
+///|
+/// `EXISTS_NOT_THM`
+pub fn exists_not_thm() -> @kernel.Thm {
+  exists_not_thm_c.get()
+}
+
+///|
+/// NOT_FORALL_THM
+fn step_31() -> Unit raise {
+  let t123 = @tactics.match_accept_tac(@equal.gsym(exists_not_thm()))
   not_forall_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P. ~(!x. P x) <=> (?x:A. ~(P x))"),
-      t127,
+      t123,
     ),
   )
-  // FORALL_NOT_THM
-  let t128 = @tactics.match_accept_tac(@equal.gsym(not_exists_thm()))
+}
+
+///|
+let not_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("NOT_FORALL_THM")
+
+///|
+/// `NOT_FORALL_THM`
+pub fn not_forall_thm() -> @kernel.Thm {
+  not_forall_thm_c.get()
+}
+
+///|
+/// FORALL_NOT_THM
+fn step_32() -> Unit raise {
+  let t124 = @tactics.match_accept_tac(@equal.gsym(not_exists_thm()))
   forall_not_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P. (!x. ~(P x)) <=> ~(?x:A. P x)"),
-      t128,
+      t124,
     ),
   )
-  // FORALL_BOOL_THM
-  let t131 = @simp.asm_rewrite_tac(@list.empty())
-  let t130 = bool_cases_tac(@parser.parse_term("b:bool"))
-  let t129 = @simp.asm_rewrite_tac(@list.empty())
-  let t132 = @tactics.then_tac(
+}
+
+///|
+let forall_not_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("FORALL_NOT_THM")
+
+///|
+/// `FORALL_NOT_THM`
+pub fn forall_not_thm() -> @kernel.Thm {
+  forall_not_thm_c.get()
+}
+
+///|
+/// FORALL_BOOL_THM
+fn step_33() -> Unit raise {
+  let t127 = @simp.asm_rewrite_tac(@list.empty())
+  let t126 = bool_cases_tac(@parser.parse_term("b:bool"))
+  let t125 = @simp.asm_rewrite_tac(@list.empty())
+  let t128 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.then_tac(@tactics.eq_tac, @tactics.disch_tac),
-          t129,
+          t125,
         ),
         @tactics.gen_tac,
       ),
-      t130,
+      t126,
     ),
-    t131,
+    t127,
   )
   forall_bool_thm_c.set(
-    @tactics.prove(@parser.parse_term("(!b. P b) <=> P T /\\ P F"), t132),
+    @tactics.prove(@parser.parse_term("(!b. P b) <=> P T /\\ P F"), t128),
   )
-  // EXISTS_BOOL_THM
-  let t133 = @simp.rewrite_tac(
+}
+
+///|
+let forall_bool_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "FORALL_BOOL_THM",
+)
+
+///|
+/// `FORALL_BOOL_THM`
+pub fn forall_bool_thm() -> @kernel.Thm {
+  forall_bool_thm_c.get()
+}
+
+///|
+/// EXISTS_BOOL_THM
+fn step_34() -> Unit raise {
+  let t129 = @simp.rewrite_tac(
     @list.List([de_morgan_thm(), not_exists_thm(), forall_bool_thm()]),
   )
-  let t134 = @tactics.then_tac(
+  let t130 = @tactics.then_tac(
     @tactics.match_mp_tac(
       taut_v1(@parser.parse_term("(~p <=> ~q) ==> (p <=> q)")),
     ),
-    t133,
+    t129,
   )
   exists_bool_thm_c.set(
-    @tactics.prove(@parser.parse_term("(?b. P b) <=> P T \\/ P F"), t134),
+    @tactics.prove(@parser.parse_term("(?b. P b) <=> P T \\/ P F"), t130),
   )
-  // LEFT_FORALL_OR_THM
-  let t136 = @simp.rewrite_tac(
+}
+
+///|
+let exists_bool_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "EXISTS_BOOL_THM",
+)
+
+///|
+/// `EXISTS_BOOL_THM`
+pub fn exists_bool_thm() -> @kernel.Thm {
+  exists_bool_thm_c.get()
+}
+
+///|
+/// LEFT_FORALL_OR_THM
+fn step_35() -> Unit raise {
+  let t132 = @simp.rewrite_tac(
     @list.List([
       not_forall_thm(),
       de_morgan_thm(),
       @theorems.left_exists_and_thm(),
     ]),
   )
-  let t135 = @simp.once_rewrite_tac(
+  let t131 = @simp.once_rewrite_tac(
     @list.List([taut_v1(@parser.parse_term("(a <=> b) <=> (~a <=> ~b)"))]),
   )
-  let t137 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t135),
-    t136,
+  let t133 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t131),
+    t132,
   )
   left_forall_or_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (!x:A. P x \\/ Q) <=> (!x. P x) \\/ Q"),
-      t137,
+      t133,
     ),
   )
-  // RIGHT_FORALL_OR_THM
-  let t139 = @simp.rewrite_tac(
+}
+
+///|
+let left_forall_or_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "LEFT_FORALL_OR_THM",
+)
+
+///|
+/// `LEFT_FORALL_OR_THM`
+pub fn left_forall_or_thm() -> @kernel.Thm {
+  left_forall_or_thm_c.get()
+}
+
+///|
+/// RIGHT_FORALL_OR_THM
+fn step_36() -> Unit raise {
+  let t135 = @simp.rewrite_tac(
     @list.List([
       not_forall_thm(),
       de_morgan_thm(),
       @theorems.right_exists_and_thm(),
     ]),
   )
-  let t138 = @simp.once_rewrite_tac(
+  let t134 = @simp.once_rewrite_tac(
     @list.List([taut_v1(@parser.parse_term("(a <=> b) <=> (~a <=> ~b)"))]),
   )
-  let t140 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t138),
-    t139,
+  let t136 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t134),
+    t135,
   )
   right_forall_or_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (!x:A. P \\/ Q x) <=> P \\/ (!x. Q x)"),
-      t140,
+      t136,
     ),
   )
-  // LEFT_OR_FORALL_THM
-  let t141 = @tactics.match_accept_tac(@equal.gsym(left_forall_or_thm()))
+}
+
+///|
+let right_forall_or_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "RIGHT_FORALL_OR_THM",
+)
+
+///|
+/// `RIGHT_FORALL_OR_THM`
+pub fn right_forall_or_thm() -> @kernel.Thm {
+  right_forall_or_thm_c.get()
+}
+
+///|
+/// LEFT_OR_FORALL_THM
+fn step_37() -> Unit raise {
+  let t137 = @tactics.match_accept_tac(@equal.gsym(left_forall_or_thm()))
   left_or_forall_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (!x:A. P x) \\/ Q <=> (!x. P x \\/ Q)"),
-      t141,
+      t137,
     ),
   )
-  // RIGHT_OR_FORALL_THM
-  let t142 = @tactics.match_accept_tac(@equal.gsym(right_forall_or_thm()))
+}
+
+///|
+let left_or_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "LEFT_OR_FORALL_THM",
+)
+
+///|
+/// `LEFT_OR_FORALL_THM`
+pub fn left_or_forall_thm() -> @kernel.Thm {
+  left_or_forall_thm_c.get()
+}
+
+///|
+/// RIGHT_OR_FORALL_THM
+fn step_38() -> Unit raise {
+  let t138 = @tactics.match_accept_tac(@equal.gsym(right_forall_or_thm()))
   right_or_forall_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. P \\/ (!x:A. Q x) <=> (!x. P \\/ Q x)"),
+      t138,
+    ),
+  )
+}
+
+///|
+let right_or_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "RIGHT_OR_FORALL_THM",
+)
+
+///|
+/// `RIGHT_OR_FORALL_THM`
+pub fn right_or_forall_thm() -> @kernel.Thm {
+  right_or_forall_thm_c.get()
+}
+
+///|
+/// LEFT_IMP_FORALL_THM
+fn step_39() -> Unit raise {
+  let t140 = @simp.rewrite_tac(
+    @list.List([not_exists_thm(), not_imp(), @theorems.left_and_forall_thm()]),
+  )
+  let t139 = @simp.once_rewrite_tac(
+    @list.List([taut_v1(@parser.parse_term("(a <=> b) <=> (~a <=> ~b)"))]),
+  )
+  let t141 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t139),
+    t140,
+  )
+  left_imp_forall_thm_c.set(
+    @tactics.prove(
+      @parser.parse_term("!P Q. ((!x:A. P x) ==> Q) <=> (?x. P x ==> Q)"),
+      t141,
+    ),
+  )
+}
+
+///|
+let left_imp_forall_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "LEFT_IMP_FORALL_THM",
+)
+
+///|
+/// `LEFT_IMP_FORALL_THM`
+pub fn left_imp_forall_thm() -> @kernel.Thm {
+  left_imp_forall_thm_c.get()
+}
+
+///|
+/// LEFT_EXISTS_IMP_THM
+fn step_40() -> Unit raise {
+  let t142 = @tactics.match_accept_tac(@equal.gsym(left_imp_forall_thm()))
+  left_exists_imp_thm_c.set(
+    @tactics.prove(
+      @parser.parse_term("!P Q. (?x. P x ==> Q) <=> ((!x:A. P x) ==> Q)"),
       t142,
     ),
   )
-  // LEFT_IMP_FORALL_THM
+}
+
+///|
+let left_exists_imp_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "LEFT_EXISTS_IMP_THM",
+)
+
+///|
+/// `LEFT_EXISTS_IMP_THM`
+pub fn left_exists_imp_thm() -> @kernel.Thm {
+  left_exists_imp_thm_c.get()
+}
+
+///|
+/// RIGHT_IMP_EXISTS_THM
+fn step_41() -> Unit raise {
   let t144 = @simp.rewrite_tac(
-    @list.List([not_exists_thm(), not_imp(), @theorems.left_and_forall_thm()]),
+    @list.List([not_exists_thm(), not_imp(), @theorems.right_and_forall_thm()]),
   )
   let t143 = @simp.once_rewrite_tac(
     @list.List([taut_v1(@parser.parse_term("(a <=> b) <=> (~a <=> ~b)"))]),
@@ -1404,46 +1371,51 @@ fn load_steps() -> Unit raise {
     @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t143),
     t144,
   )
-  left_imp_forall_thm_c.set(
-    @tactics.prove(
-      @parser.parse_term("!P Q. ((!x:A. P x) ==> Q) <=> (?x. P x ==> Q)"),
-      t145,
-    ),
-  )
-  // LEFT_EXISTS_IMP_THM
-  let t146 = @tactics.match_accept_tac(@equal.gsym(left_imp_forall_thm()))
-  left_exists_imp_thm_c.set(
-    @tactics.prove(
-      @parser.parse_term("!P Q. (?x. P x ==> Q) <=> ((!x:A. P x) ==> Q)"),
-      t146,
-    ),
-  )
-  // RIGHT_IMP_EXISTS_THM
-  let t148 = @simp.rewrite_tac(
-    @list.List([not_exists_thm(), not_imp(), @theorems.right_and_forall_thm()]),
-  )
-  let t147 = @simp.once_rewrite_tac(
-    @list.List([taut_v1(@parser.parse_term("(a <=> b) <=> (~a <=> ~b)"))]),
-  )
-  let t149 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t147),
-    t148,
-  )
   right_imp_exists_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (P ==> ?x:A. Q x) <=> (?x:A. P ==> Q x)"),
-      t149,
+      t145,
     ),
   )
-  // RIGHT_EXISTS_IMP_THM
-  let t150 = @tactics.match_accept_tac(@equal.gsym(right_imp_exists_thm()))
+}
+
+///|
+let right_imp_exists_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "RIGHT_IMP_EXISTS_THM",
+)
+
+///|
+/// `RIGHT_IMP_EXISTS_THM`
+pub fn right_imp_exists_thm() -> @kernel.Thm {
+  right_imp_exists_thm_c.get()
+}
+
+///|
+/// RIGHT_EXISTS_IMP_THM
+fn step_42() -> Unit raise {
+  let t146 = @tactics.match_accept_tac(@equal.gsym(right_imp_exists_thm()))
   right_exists_imp_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P Q. (?x:A. P ==> Q x) <=> (P ==> ?x:A. Q x)"),
-      t150,
+      t146,
     ),
   )
-  // COND_DEF
+}
+
+///|
+let right_exists_imp_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "RIGHT_EXISTS_IMP_THM",
+)
+
+///|
+/// `RIGHT_EXISTS_IMP_THM`
+pub fn right_exists_imp_thm() -> @kernel.Thm {
+  right_exists_imp_thm_c.get()
+}
+
+///|
+/// COND_DEF
+fn step_43() -> Unit raise {
   cond_def_c.set(
     @drule.new_definition(
       @parser.parse_term(
@@ -1451,123 +1423,321 @@ fn load_steps() -> Unit raise {
       ),
     ),
   )
-  // COND_CLAUSES
-  let t151 = @simp.rewrite_tac(@list.List([cond_def()]))
+}
+
+///|
+let cond_def_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_DEF")
+
+///|
+/// `COND_DEF`
+pub fn cond_def() -> @kernel.Thm {
+  cond_def_c.get()
+}
+
+///|
+/// COND_CLAUSES
+fn step_44() -> Unit raise {
+  let t147 = @simp.rewrite_tac(@list.List([cond_def()]))
   cond_clauses_c.set(
     @tactics.prove(
       @parser.parse_term(
         "!(t1:A) t2. ((if T then t1 else t2) = t1) /\\\n               ((if F then t1 else t2) = t2)",
       ),
-      t151,
+      t147,
     ),
   )
-  // class.ml:340
+}
+
+///|
+let cond_clauses_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_CLAUSES")
+
+///|
+/// `COND_CLAUSES`
+pub fn cond_clauses() -> @kernel.Thm {
+  cond_clauses_c.get()
+}
+
+///|
+/// `is_cond`
+pub fn is_cond(x148 : @kernel.Term) -> Bool raise {
+  let tm = x148
+  try
+    @kernel.dest_const(@kernel.rator(@kernel.rator(@kernel.rator(tm)))).0 ==
+    "COND"
+  catch {
+    Failure(_) => false
+    e => raise e
+  }
+}
+
+///|
+/// `mk_cond`
+pub fn mk_cond(
+  x149 : @kernel.Term,
+  x150 : @kernel.Term,
+  x151 : @kernel.Term,
+) -> @kernel.Term raise {
+  let (b, x, y) = (x149, x150, x151)
+  try {
+    let c = @kernel.mk_const(
+      "COND",
+      @list.List([(@kernel.type_of(x), @kernel.aty)]),
+    )
+    @kernel.mk_comb(@kernel.mk_comb(@kernel.mk_comb(c, b), x), y)
+  } catch {
+    Failure(_) => raise Failure("mk_cond")
+    e => raise e
+  }
+}
+
+///|
+/// `dest_cond`
+pub fn dest_cond(
+  x152 : @kernel.Term,
+) -> (@kernel.Term, (@kernel.Term, @kernel.Term)) raise {
+  let tm = x152
+  try {
+    let (tm1, y) = @kernel.dest_comb(tm)
+    let (tm2, x) = @kernel.dest_comb(tm1)
+    let (c, b) = @kernel.dest_comb(tm2)
+    if @kernel.dest_const(c).0 == "COND" {
+      (b, (x, y))
+    } else {
+      @lib.failure()
+    }
+  } catch {
+    Failure(_) => raise Failure("dest_cond")
+    e => raise e
+  }
+}
+
+///|
+/// class.ml:340
+fn step_45() -> Unit raise {
   @simp.extend_basic_rewrites(@list.List([cond_clauses()]))
-  // COND_EXPAND
-  let t158 = @simp.rewrite_tac(@list.empty())
-  let t157 = bool_cases_tac(@parser.parse_term("b:bool"))
-  let t159 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t157),
-    t158,
+}
+
+///|
+/// COND_EXPAND
+fn step_46() -> Unit raise {
+  let t154 = @simp.rewrite_tac(@list.empty())
+  let t153 = bool_cases_tac(@parser.parse_term("b:bool"))
+  let t155 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t153),
+    t154,
   )
   cond_expand_c.set(
     @tactics.prove(
       @parser.parse_term(
         "!b t1 t2. (if b then t1 else t2) <=> (~b \\/ t1) /\\ (b \\/ t2)",
       ),
-      t159,
+      t155,
     ),
   )
-  // COND_ID
-  let t161 = @simp.rewrite_tac(@list.empty())
-  let t160 = bool_cases_tac(@parser.parse_term("b:bool"))
-  let t162 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t160),
-    t161,
+}
+
+///|
+let cond_expand_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_EXPAND")
+
+///|
+/// `COND_EXPAND`
+pub fn cond_expand() -> @kernel.Thm {
+  cond_expand_c.get()
+}
+
+///|
+/// COND_ID
+fn step_47() -> Unit raise {
+  let t157 = @simp.rewrite_tac(@list.empty())
+  let t156 = bool_cases_tac(@parser.parse_term("b:bool"))
+  let t158 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t156),
+    t157,
   )
   cond_id_c.set(
     @tactics.prove(
       @parser.parse_term("!b (t:A). (if b then t else t) = t"),
-      t162,
+      t158,
     ),
   )
-  // COND_RAND
-  let t164 = @simp.rewrite_tac(@list.empty())
-  let t163 = bool_cases_tac(@parser.parse_term("b:bool"))
-  let t165 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t163),
-    t164,
+}
+
+///|
+let cond_id_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_ID")
+
+///|
+/// `COND_ID`
+pub fn cond_id() -> @kernel.Thm {
+  cond_id_c.get()
+}
+
+///|
+/// COND_RAND
+fn step_48() -> Unit raise {
+  let t160 = @simp.rewrite_tac(@list.empty())
+  let t159 = bool_cases_tac(@parser.parse_term("b:bool"))
+  let t161 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t159),
+    t160,
   )
   cond_rand_c.set(
     @tactics.prove(
       @parser.parse_term(
         "!b (f:A->B) x y. f (if b then x else y) = (if b then f x else f y)",
       ),
-      t165,
+      t161,
     ),
   )
-  // COND_RATOR
-  let t167 = @simp.rewrite_tac(@list.empty())
-  let t166 = bool_cases_tac(@parser.parse_term("b:bool"))
-  let t168 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t166),
-    t167,
+}
+
+///|
+let cond_rand_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_RAND")
+
+///|
+/// `COND_RAND`
+pub fn cond_rand() -> @kernel.Thm {
+  cond_rand_c.get()
+}
+
+///|
+/// COND_RATOR
+fn step_49() -> Unit raise {
+  let t163 = @simp.rewrite_tac(@list.empty())
+  let t162 = bool_cases_tac(@parser.parse_term("b:bool"))
+  let t164 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t162),
+    t163,
   )
   cond_rator_c.set(
     @tactics.prove(
       @parser.parse_term(
         "!b (f:A->B) g x. (if b then f else g)(x) = (if b then f x else g x)",
       ),
-      t168,
+      t164,
     ),
   )
-  // COND_ABS
-  let t170 = @simp.rewrite_tac(@list.List([eta_ax()]))
-  let t169 = bool_cases_tac(@parser.parse_term("b:bool"))
-  let t171 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t169),
-    t170,
+}
+
+///|
+let cond_rator_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_RATOR")
+
+///|
+/// `COND_RATOR`
+pub fn cond_rator() -> @kernel.Thm {
+  cond_rator_c.get()
+}
+
+///|
+/// COND_ABS
+fn step_50() -> Unit raise {
+  let t166 = @simp.rewrite_tac(@list.List([eta_ax()]))
+  let t165 = bool_cases_tac(@parser.parse_term("b:bool"))
+  let t167 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t165),
+    t166,
   )
   cond_abs_c.set(
     @tactics.prove(
       @parser.parse_term(
         "!b (f:A->B) g. (\\x. if b then f x else g x) = (if b then f else g)",
       ),
-      t171,
+      t167,
     ),
   )
-  // COND_SWAP
-  let t173 = @simp.rewrite_tac(@list.empty())
-  let t172 = bool_cases_tac(@parser.parse_term("p:bool"))
-  let t174 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t172),
-    t173,
+}
+
+///|
+let cond_abs_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_ABS")
+
+///|
+/// `COND_ABS`
+pub fn cond_abs() -> @kernel.Thm {
+  cond_abs_c.get()
+}
+
+///|
+/// COND_SWAP
+fn step_51() -> Unit raise {
+  let t169 = @simp.rewrite_tac(@list.empty())
+  let t168 = bool_cases_tac(@parser.parse_term("p:bool"))
+  let t170 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t168),
+    t169,
   )
   cond_swap_c.set(
     @tactics.prove(
       @parser.parse_term(
         "!p x y:A. (if ~p then x else y) = (if p then y else x)",
       ),
-      t174,
+      t170,
     ),
   )
-  // TAUT
-  let prop_rewrite_tac = @simp.rewrite_tac(@list.empty())
-  let rtaut_tac = (x175 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
-    let (asl, w) = x175
-    let ok = (x176 : @kernel.Term) => {
-      let t = x176
+}
+
+///|
+let cond_swap_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_SWAP")
+
+///|
+/// `COND_SWAP`
+pub fn cond_swap() -> @kernel.Thm {
+  cond_swap_c.get()
+}
+
+///|
+/// TAUT
+fn step_52() -> Unit raise {
+  let prop_rewrite_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+    (
+      @list.List[@kernel.Term],
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+    ),
+    @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+    (
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+      @list.List[@kernel.Thm],
+    ) -> @kernel.Thm raise,
+  ) raise = @simp.rewrite_tac(@list.empty())
+  let rtaut_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+    (
+      @list.List[@kernel.Term],
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+    ),
+    @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+    (
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+      @list.List[@kernel.Thm],
+    ) -> @kernel.Thm raise,
+  ) raise = (x171 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+    let (asl, w) = x171
+    let ok : (@kernel.Term) -> Bool raise = (x172 : @kernel.Term) => {
+      let t = x172
       @kernel.type_of(t) == @kernel.bool_ty &&
       @lib.can(
-        (x178 : @kernel.Term) => {
-          @basics.find_term((x177 : @kernel.Term) => @kernel.is_var(x177), x178)
+        (x174 : @kernel.Term) => {
+          @basics.find_term((x173 : @kernel.Term) => @kernel.is_var(x173), x174)
         },
         t,
       ) &&
       @basics.free_in(t, w)
     }
-    let t182 = ((
-      x179 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+    let t178 = ((
+      x175 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
         (
           @list.List[@kernel.Term],
           (
@@ -1587,9 +1757,9 @@ fn load_steps() -> Unit raise {
         ) -> @kernel.Thm raise,
       ) raise,
     ) => {
-      let t1 = x179
+      let t1 = x175
       (
-        x180 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+        x176 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
           (
             @list.List[@kernel.Term],
             (
@@ -1609,48 +1779,66 @@ fn load_steps() -> Unit raise {
           ) -> @kernel.Thm raise,
         ) raise,
       ) => {
-        let t2 = x180
+        let t2 = x176
         @tactics.then_tac(t1, t2)
       }
     })(@simp.rewrite_tac(@list.empty()))
     @tactics.then_tac(prop_rewrite_tac, (
-      x193 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+      x189 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
     ) => {
-      ((x192 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
-        ((x190 : @kernel.Term) => {
-          ((x188 : @list.List[@kernel.Term]) => {
-            ((x184 : @list.List[@kernel.Term]) => {
-              ((x183 : @kernel.Term) => t182(bool_cases_tac(x183)))(
-                @lib.hd(x184),
+      ((x188 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+        ((x186 : @kernel.Term) => {
+          ((x184 : @list.List[@kernel.Term]) => {
+            ((x180 : @list.List[@kernel.Term]) => {
+              ((x179 : @kernel.Term) => t178(bool_cases_tac(x179)))(
+                @lib.hd(x180),
               )
             })(
-              (x187 => {
+              (x183 => {
                 @lib.sort(
-                  (x185 : @kernel.Term, x186 : @kernel.Term) => {
-                    @basics.free_in(x185, x186)
+                  (x181 : @kernel.Term, x182 : @kernel.Term) => {
+                    @basics.free_in(x181, x182)
                   },
-                  x187,
+                  x183,
                 )
-              })(x188),
+              })(x184),
             )
-          })(((x189 : @kernel.Term) => @basics.find_terms(ok, x189))(x190))
+          })(((x185 : @kernel.Term) => @basics.find_terms(ok, x185))(x186))
         })(
-          ((x191 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => x191.1)(
-            x192,
+          ((x187 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => x187.1)(
+            x188,
           ),
         )
-      })(x193)(x193)
+      })(x189)(x189)
     })((asl, w))
   }
-  let t194 = @tactics.repeat_tac(rtaut_tac)
-  let taut_tac = @tactics.then_tac(
+  let t190 = @tactics.repeat_tac(rtaut_tac)
+  let taut_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+    (
+      @list.List[@kernel.Term],
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+    ),
+    @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+    (
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+      @list.List[@kernel.Thm],
+    ) -> @kernel.Thm raise,
+  ) raise = @tactics.then_tac(
     @tactics.repeat_tac(
       @tactics.orelse_tac(@tactics.gen_tac, @tactics.conj_tac),
     ),
-    t194,
+    t190,
   )
-  taut_c.set((x195 : @kernel.Term) => {
-    let tm = x195
+  taut_c.set((x191 : @kernel.Term) => {
+    let tm = x191
     @tactics.prove(tm, taut_tac) catch {
       Failure(_) =>
         raise Failure(
@@ -1659,89 +1847,162 @@ fn load_steps() -> Unit raise {
       e => raise e
     }
   })
-  // MONO_COND
-  let t196 = @simp.asm_rewrite_tac(@list.empty())
-  let t197 = @tactics.then_tac(
+}
+
+///|
+let taut_c : @lib.Cell[(@kernel.Term) -> @kernel.Thm raise] = @lib.Cell::new(
+  "TAUT",
+)
+
+///|
+/// `TAUT`
+pub fn taut(x : @kernel.Term) -> @kernel.Thm raise {
+  taut_c.get()(x)
+}
+
+///|
+/// MONO_COND
+fn step_53() -> Unit raise {
+  let t192 = @simp.asm_rewrite_tac(@list.empty())
+  let t193 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.strip_tac,
       bool_cases_tac(@parser.parse_term("b:bool")),
     ),
-    t196,
+    t192,
   )
   mono_cond_c.set(
     @tactics.prove(
       @parser.parse_term(
         "(A ==> B) /\\ (C ==> D) ==> (if b then A else C) ==> (if b then B else D)",
       ),
-      t197,
+      t193,
     ),
   )
-  // class.ml:393
-  {
-    @ind_defs.monotonicity_theorems().val = @ind_defs.monotonicity_theorems().val.prepend(
-      mono_cond(),
-    )
-    ()
-  }
-  // COND_ELIM_THM
-  let t198 = @simp.rewrite_tac(@list.empty())
-  let t199 = @tactics.then_tac(
+}
+
+///|
+let mono_cond_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MONO_COND")
+
+///|
+/// `MONO_COND`
+pub fn mono_cond() -> @kernel.Thm {
+  mono_cond_c.get()
+}
+
+///|
+/// class.ml:393
+fn step_54() -> Unit raise {
+  @ind_defs.monotonicity_theorems().val = @ind_defs.monotonicity_theorems().val.prepend(
+    mono_cond(),
+  )
+  ()
+}
+
+///|
+/// COND_ELIM_THM
+fn step_55() -> Unit raise {
+  let t194 = @simp.rewrite_tac(@list.empty())
+  let t195 = @tactics.then_tac(
     bool_cases_tac(@parser.parse_term("c:bool")),
-    t198,
+    t194,
   )
   cond_elim_thm_c.set(
     @tactics.prove(
       @parser.parse_term(
         "(P:A->bool) (if c then x else y) <=> (c ==> P x) /\\ (~c ==> P y)",
       ),
-      t199,
+      t195,
     ),
   )
-  // COND_ELIM_CONV
+}
+
+///|
+let cond_elim_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("COND_ELIM_THM")
+
+///|
+/// `COND_ELIM_THM`
+pub fn cond_elim_thm() -> @kernel.Thm {
+  cond_elim_thm_c.get()
+}
+
+///|
+/// COND_ELIM_CONV
+fn step_56() -> Unit raise {
   cond_elim_conv_c.set(
     @drule.higher_rewrite_conv(@list.List([cond_elim_thm()]))(true),
   )
-  // COND_CASES_TAC
-  let deneg_rule = @simp.gen_rewrite_rule(
-    (x200 : (@kernel.Term) -> @kernel.Thm raise) => x200,
+}
+
+///|
+let cond_elim_conv_c : @lib.Cell[(@kernel.Term) -> @kernel.Thm raise] = @lib.Cell::new(
+  "COND_ELIM_CONV",
+)
+
+///|
+/// `COND_ELIM_CONV`
+pub fn cond_elim_conv(x : @kernel.Term) -> @kernel.Thm raise {
+  cond_elim_conv_c.get()(x)
+}
+
+///|
+/// COND_CASES_TAC
+fn step_57() -> Unit raise {
+  let deneg_rule : (@kernel.Thm) -> @kernel.Thm raise = @simp.gen_rewrite_rule(
+    (x196 : (@kernel.Term) -> @kernel.Thm raise) => x196,
     @list.List([taut(@parser.parse_term("~ ~ p <=> p"))]),
   )
-  let t208 = @tactics.disch_then((x204 : @kernel.Thm) => {
-    let th_1 = x204
+  let t204 = @tactics.disch_then((x200 : @kernel.Thm) => {
+    let th_1 = x200
     try {
       let th_p = deneg_rule(th_1)
-      let t206 = @tactics.subst1_tac(@bool.eqt_intro(th_p))
-      @tactics.then_tac(@tactics.assume_tac(th_p), t206)
+      let t202 = @tactics.subst1_tac(@bool.eqt_intro(th_p))
+      @tactics.then_tac(@tactics.assume_tac(th_p), t202)
     } catch {
       Failure(_) => {
-        let t207 = @tactics.subst1_tac(@bool.eqf_intro(th_1))
-        @tactics.then_tac(@tactics.assume_tac(th_1), t207)
+        let t203 = @tactics.subst1_tac(@bool.eqf_intro(th_1))
+        @tactics.then_tac(@tactics.assume_tac(th_1), t203)
       }
       e => raise e
     }
   })
-  let t209 = @list.List([
-    @tactics.disch_then((x201 : @kernel.Thm) => {
-      let th = x201
-      let t203 = @tactics.subst1_tac(@bool.eqt_intro(th))
-      @tactics.then_tac(@tactics.assume_tac(th), t203)
+  let t205 = @list.List([
+    @tactics.disch_then((x197 : @kernel.Thm) => {
+      let th = x197
+      let t199 = @tactics.subst1_tac(@bool.eqt_intro(th))
+      @tactics.then_tac(@tactics.assume_tac(th), t199)
     }),
-    t208,
+    t204,
   ])
   cond_cases_tac_c.set(
     @tactics.thenl(
       @tactics.then_tac(@tactics.conv_tac(cond_elim_conv), @tactics.conj_tac),
-      t209,
+      t205,
     ),
   )
-  // SKOLEM_THM
-  let t216 = @tactics.pop_assum((x213 : @kernel.Thm) => {
-    let s214 = @tactics.match_accept_tac(x213)
-    (x215 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s214(x215)
+}
+
+///|
+let cond_cases_tac_c : @lib.Cell[@tactics.Tactic] = @lib.Cell::new(
+  "COND_CASES_TAC",
+)
+
+///|
+/// `COND_CASES_TAC`
+pub fn cond_cases_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
+  cond_cases_tac_c.get()(x)
+}
+
+///|
+/// SKOLEM_THM
+fn step_58() -> Unit raise {
+  let t212 = @tactics.pop_assum((x209 : @kernel.Thm) => {
+    let s210 = @tactics.match_accept_tac(x209)
+    (x211 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s210(x211)
   })
-  let t211 = @tactics.exists_tac(@parser.parse_term("(y:A->B) x"))
-  let t210 = @tactics.conv_tac(select_conv)
-  let t212 = @list.List([
+  let t207 = @tactics.exists_tac(@parser.parse_term("(y:A->B) x"))
+  let t206 = @tactics.conv_tac(select_conv)
+  let t208 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
@@ -1750,27 +2011,40 @@ fn load_steps() -> Unit raise {
         ),
         @tactics.beta_tac,
       ),
-      t210,
+      t206,
     ),
-    t211,
+    t207,
   ])
-  let t217 = @tactics.then_tac(
+  let t213 = @tactics.then_tac(
     @tactics.thenl(
       @tactics.repeat_tac(
         @tactics.orelse_tac(@tactics.strip_tac, @tactics.eq_tac),
       ),
-      t212,
+      t208,
     ),
-    t216,
+    t212,
   )
   skolem_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P. (!x:A. ?y:B. P x y) <=> (?y. !x. P x (y x))"),
-      t217,
+      t213,
     ),
   )
-  // SKOLEM_THM_GEN
-  let t218 = @simp.rewrite_tac(
+}
+
+///|
+let skolem_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("SKOLEM_THM")
+
+///|
+/// `SKOLEM_THM`
+pub fn skolem_thm() -> @kernel.Thm {
+  skolem_thm_c.get()
+}
+
+///|
+/// SKOLEM_THM_GEN
+fn step_59() -> Unit raise {
+  let t214 = @simp.rewrite_tac(
     @list.List([right_imp_exists_thm(), skolem_thm()]),
   )
   skolem_thm_gen_c.set(
@@ -1778,11 +2052,24 @@ fn load_steps() -> Unit raise {
       @parser.parse_term(
         "!P R. (!x:A. P x ==> ?y:B. R x y) <=> (?f. !x. P x ==> R x (f x))",
       ),
-      t218,
+      t214,
     ),
   )
-  // UNIQUE_SKOLEM_ALT
-  let t219 = @tactics.then_tac(
+}
+
+///|
+let skolem_thm_gen_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("SKOLEM_THM_GEN")
+
+///|
+/// `SKOLEM_THM_GEN`
+pub fn skolem_thm_gen() -> @kernel.Thm {
+  skolem_thm_gen_c.get()
+}
+
+///|
+/// UNIQUE_SKOLEM_ALT
+fn step_60() -> Unit raise {
+  let t215 = @tactics.then_tac(
     @tactics.gen_tac,
     @simp.rewrite_tac(@list.List([@theorems.exists_unique_alt(), skolem_thm()])),
   )
@@ -1791,93 +2078,108 @@ fn load_steps() -> Unit raise {
       @parser.parse_term(
         "!P:A->B->bool. (!x. ?!y. P x y) <=> ?f. !x y. P x y <=> (f x = y)",
       ),
-      t219,
+      t215,
     ),
   )
-  // UNIQUE_SKOLEM_THM
-  let t244 = @simp.rewrite_tac(@list.empty())
-  let t241 = @parser.parse_term("x:A")
-  let t245 = @tactics.then_tac(
-    @tactics.disch_then((x243 : @kernel.Thm) => {
-      @tactics.mp_tac(((x242 : @kernel.Thm) => @equal.ap_thm(x242, t241))(x243))
+}
+
+///|
+let unique_skolem_alt_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "UNIQUE_SKOLEM_ALT",
+)
+
+///|
+/// `UNIQUE_SKOLEM_ALT`
+pub fn unique_skolem_alt() -> @kernel.Thm {
+  unique_skolem_alt_c.get()
+}
+
+///|
+/// UNIQUE_SKOLEM_THM
+fn step_61() -> Unit raise {
+  let t240 = @simp.rewrite_tac(@list.empty())
+  let t237 = @parser.parse_term("x:A")
+  let t241 = @tactics.then_tac(
+    @tactics.disch_then((x239 : @kernel.Thm) => {
+      @tactics.mp_tac(((x238 : @kernel.Thm) => @equal.ap_thm(x238, t237))(x239))
     }),
-    t244,
+    t240,
   )
-  let t240 = @simp.asm_rewrite_tac(@list.empty())
-  let t239 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t246 = @list.List([
+  let t236 = @simp.asm_rewrite_tac(@list.empty())
+  let t235 = @tactics.repeat_tac(@tactics.strip_tac)
+  let t242 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
-          @tactics.then_tac(@tactics.first_assum(@tactics.match_mp_tac), t239),
+          @tactics.then_tac(@tactics.first_assum(@tactics.match_mp_tac), t235),
           @tactics.beta_tac,
         ),
         cond_cases_tac,
       ),
-      t240,
+      t236,
     ),
-    t245,
+    t241,
   ])
-  let t238 = @tactics.subgoal_then(
+  let t234 = @tactics.subgoal_then(
     @parser.parse_term(
       "(\\z. if z = x then y1 else (f:A->B) z) =\n                  (\\z. if z = x then y2 else (f:A->B) z)",
     ),
-    (x235 : @kernel.Thm) => {
-      let s236 = @tactics.mp_tac(x235)
-      (x237 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s236(x237)
+    (x231 : @kernel.Thm) => {
+      let s232 = @tactics.mp_tac(x231)
+      (x233 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s232(x233)
     },
   )
-  let t232 = @parser.parse_term("f:A->B")
-  let t234 = @tactics.first_assum((x233 : @kernel.Thm) => {
-    @tactics.x_choose_tac(t232, x233)
+  let t228 = @parser.parse_term("f:A->B")
+  let t230 = @tactics.first_assum((x229 : @kernel.Thm) => {
+    @tactics.x_choose_tac(t228, x229)
   })
-  let t230 = @parser.parse_term("y2:B")
-  let t231 = @parser.parse_term("y1:B")
-  let t247 = @tactics.thenl(
+  let t226 = @parser.parse_term("y2:B")
+  let t227 = @parser.parse_term("y1:B")
+  let t243 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.map_every(
             @tactics.x_gen_tac,
-            @list.List([@parser.parse_term("x:A"), t231, t230]),
+            @list.List([@parser.parse_term("x:A"), t227, t226]),
           ),
           @tactics.strip_tac,
         ),
-        t234,
+        t230,
       ),
-      t238,
+      t234,
     ),
-    t246,
+    t242,
   )
-  let t229 = @simp.asm_rewrite_tac(@list.empty())
-  let t228 = @tactics.exists_tac(@parser.parse_term("x:A"))
-  let t227 = @tactics.first_assum(@tactics.match_mp_tac)
-  let t226 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
-  let t225 = @simp.once_rewrite_tac(@list.List([fun_eq_thm()]))
-  let t248 = @list.List([
+  let t225 = @simp.asm_rewrite_tac(@list.empty())
+  let t224 = @tactics.exists_tac(@parser.parse_term("x:A"))
+  let t223 = @tactics.first_assum(@tactics.match_mp_tac)
+  let t222 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
+  let t221 = @simp.once_rewrite_tac(@list.List([fun_eq_thm()]))
+  let t244 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
           @tactics.then_tac(
-            @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t225),
-            t226,
+            @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t221),
+            t222,
           ),
-          t227,
+          t223,
         ),
-        t228,
+        t224,
       ),
-      t229,
+      t225,
     ),
-    t247,
+    t243,
   ])
-  let t224 = @simp.asm_rewrite_tac(@list.empty())
-  let t223 = @tactics.disch_then(
-    @tactics.conjuncts_then((x220 : @kernel.Thm) => {
-      let s221 = @tactics.assume_tac(x220)
-      (x222 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s221(x222)
+  let t220 = @simp.asm_rewrite_tac(@list.empty())
+  let t219 = @tactics.disch_then(
+    @tactics.conjuncts_then((x216 : @kernel.Thm) => {
+      let s217 = @tactics.assume_tac(x216)
+      (x218 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s217(x218)
     }),
   )
-  let t249 = @tactics.thenl(
+  let t245 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
@@ -1893,58 +2195,190 @@ fn load_steps() -> Unit raise {
           ),
           @tactics.eq_tac,
         ),
-        t223,
+        t219,
       ),
-      t224,
+      t220,
     ),
-    t248,
+    t244,
   )
   unique_skolem_thm_c.set(
     @tactics.prove(
       @parser.parse_term("!P. (!x:A. ?!y:B. P x y) <=> (?!f. !x. P x (f x))"),
-      t249,
+      t245,
     ),
   )
-  // class.ml:463
+}
+
+///|
+let unique_skolem_thm_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new(
+  "UNIQUE_SKOLEM_THM",
+)
+
+///|
+/// `UNIQUE_SKOLEM_THM`
+pub fn unique_skolem_thm() -> @kernel.Thm {
+  unique_skolem_thm_c.get()
+}
+
+///|
+/// class.ml:463
+fn step_62() -> Unit raise {
   let cond_cong = taut(
     @parser.parse_term(
       "(g = g') ==>\n        (g' ==> (t = t')) ==>\n        (~g' ==> (e = e')) ==>\n        ((if g then t else e) = (if g' then t' else e'))",
     ),
   )
   @simp.extend_basic_congs(@list.List([cond_cong]))
-  // class.ml:470
-  let t250 = @simp.rewrite_tac(@list.empty())
+}
+
+///|
+/// class.ml:470
+fn step_63() -> Unit raise {
+  let t246 = @simp.rewrite_tac(@list.empty())
   let cond_eq_clause = @tactics.prove(
     @parser.parse_term("(if x = x then y else z) = y"),
-    t250,
+    t246,
   )
   @simp.extend_basic_rewrites(@list.List([cond_eq_clause]))
-  // bool_INDUCT
-  let t252 = @simp.asm_rewrite_tac(@list.empty())
-  let t251 = @tactics.disj_cases_tac(
+}
+
+///|
+/// bool_INDUCT
+fn step_64() -> Unit raise {
+  let t248 = @simp.asm_rewrite_tac(@list.empty())
+  let t247 = @tactics.disj_cases_tac(
     @bool.spec(@parser.parse_term("x:bool"), bool_cases_ax()),
   )
-  let t253 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t251),
-    t252,
+  let t249 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t247),
+    t248,
   )
   bool_induct_c.set(
-    @tactics.prove(@parser.parse_term("!P. P F /\\ P T ==> !x. P x"), t253),
+    @tactics.prove(@parser.parse_term("!P. P F /\\ P T ==> !x. P x"), t249),
   )
-  // bool_RECURSION
-  let t255 = @simp.rewrite_tac(@list.empty())
-  let t254 = @tactics.exists_tac(
+}
+
+///|
+let bool_induct_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("bool_INDUCT")
+
+///|
+/// `bool_INDUCT`
+pub fn bool_induct() -> @kernel.Thm {
+  bool_induct_c.get()
+}
+
+///|
+/// bool_RECURSION
+fn step_65() -> Unit raise {
+  let t251 = @simp.rewrite_tac(@list.empty())
+  let t250 = @tactics.exists_tac(
     @parser.parse_term("\\x. if x then b:A else a"),
   )
-  let t256 = @tactics.then_tac(
-    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t254),
-    t255,
+  let t252 = @tactics.then_tac(
+    @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t250),
+    t251,
   )
   bool_recursion_c.set(
-    @tactics.prove(@parser.parse_term("!a b:A. ?f. f F = a /\\ f T = b"), t256),
+    @tactics.prove(@parser.parse_term("!a b:A. ?f. f F = a /\\ f T = b"), t252),
   )
-  // inductive_type_store
+}
+
+///|
+let bool_recursion_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("bool_RECURSION")
+
+///|
+/// `bool_RECURSION`
+pub fn bool_recursion() -> @kernel.Thm {
+  bool_recursion_c.get()
+}
+
+///|
+/// inductive_type_store
+fn step_66() -> Unit raise {
   inductive_type_store_c.set(Ref::{
     val: @list.List([("bool", (2, bool_induct(), bool_recursion()))]),
   })
+}
+
+///|
+let inductive_type_store_c : @lib.Cell[
+  Ref[@list.List[(String, (Int, @kernel.Thm, @kernel.Thm))]],
+] = @lib.Cell::new("inductive_type_store")
+
+///|
+/// `inductive_type_store`
+pub fn inductive_type_store() -> Ref[
+  @list.List[(String, (Int, @kernel.Thm, @kernel.Thm))],
+] {
+  inductive_type_store_c.get()
+}
+
+///|
+fn load_steps() -> Unit raise {
+  step_1()
+  step_2()
+  step_3()
+  step_4()
+  step_5()
+  step_6()
+  step_7()
+  step_8()
+  step_9()
+  step_10()
+  step_11()
+  step_12()
+  step_13()
+  step_14()
+  step_15()
+  step_16()
+  step_17()
+  step_18()
+  step_19()
+  step_20()
+  step_21()
+  step_22()
+  step_23()
+  step_24()
+  step_25()
+  step_26()
+  step_27()
+  step_28()
+  step_29()
+  step_30()
+  step_31()
+  step_32()
+  step_33()
+  step_34()
+  step_35()
+  step_36()
+  step_37()
+  step_38()
+  step_39()
+  step_40()
+  step_41()
+  step_42()
+  step_43()
+  step_44()
+  step_45()
+  step_46()
+  step_47()
+  step_48()
+  step_49()
+  step_50()
+  step_51()
+  step_52()
+  step_53()
+  step_54()
+  step_55()
+  step_56()
+  step_57()
+  step_58()
+  step_59()
+  step_60()
+  step_61()
+  step_62()
+  step_63()
+  step_64()
+  step_65()
+  step_66()
 }

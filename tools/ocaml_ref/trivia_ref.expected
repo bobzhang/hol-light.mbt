@@ -1,0 +1,241 @@
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Warning: inventing type variables
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Warning: inventing type variables
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 5
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 5
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Warning: inventing type variables
+Warning: inventing type variables
+trivia quotations (20):
+  (o) (f:B->C) g = \\x:A. f(g(x))
+  I = \\x:A. x
+  !f:B->C. !g:A->B. !x:A. (f o g) x = f(g(x))
+  !f:C->D. !g:B->C. !h:A->B. f o (g o h) = (f o g) o h
+  !x:A. I x = x
+  !f:A->B. (I o f = f) /\\ (f o I = f)
+  T
+  ?b:bool. b
+  one = @x:1. T
+  one_REP a
+  !v:1. v = one
+  !f g. f = (g:A->1)
+  !P. P one ==> !x. P x
+  \\x:1. e:A
+  !e:A. ?fn. fn one = e
+  !e:A. ?!fn. fn one = e
+  (!x. P x) <=> P one
+  (p <=> q) <=> (~p <=> ~q)
+  (?x. P x) <=> P one
+  !f:1->A. (\\x. f one) = f
+o_DEF =  |- (#!:fun(fun(fun('B,'C),bool),bool) (\f:fun('B,'C). (#!:fun(fun(fun('A,'B),bool),bool) (\g:fun('A,'B). ((#=:fun(fun('A,'C),fun(fun('A,'C),bool)) ((#o:fun(fun('B,'C),fun(fun('A,'B),fun('A,'C))) f:fun('B,'C)) g:fun('A,'B))) (\x:'A. (f:fun('B,'C) (g:fun('A,'B) x:'A))))))))
+I_DEF =  |- ((#=:fun(fun('A,'A),fun(fun('A,'A),bool)) #I:fun('A,'A)) (\x:'A. x:'A))
+o_THM =  |- (#!:fun(fun(fun('B,'C),bool),bool) (\f:fun('B,'C). (#!:fun(fun(fun('A,'B),bool),bool) (\g:fun('A,'B). (#!:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('C,fun('C,bool)) (((#o:fun(fun('B,'C),fun(fun('A,'B),fun('A,'C))) f:fun('B,'C)) g:fun('A,'B)) x:'A)) (f:fun('B,'C) (g:fun('A,'B) x:'A)))))))))
+o_ASSOC =  |- (#!:fun(fun(fun('C,'D),bool),bool) (\f:fun('C,'D). (#!:fun(fun(fun('B,'C),bool),bool) (\g:fun('B,'C). (#!:fun(fun(fun('A,'B),bool),bool) (\h:fun('A,'B). ((#=:fun(fun('A,'D),fun(fun('A,'D),bool)) ((#o:fun(fun('C,'D),fun(fun('A,'C),fun('A,'D))) f:fun('C,'D)) ((#o:fun(fun('B,'C),fun(fun('A,'B),fun('A,'C))) g:fun('B,'C)) h:fun('A,'B)))) ((#o:fun(fun('B,'D),fun(fun('A,'B),fun('A,'D))) ((#o:fun(fun('C,'D),fun(fun('B,'C),fun('B,'D))) f:fun('C,'D)) g:fun('B,'C))) h:fun('A,'B)))))))))
+I_THM =  |- (#!:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('A,fun('A,bool)) (#I:fun('A,'A) x:'A)) x:'A)))
+I_O_ID =  |- (#!:fun(fun(fun('A,'B),bool),bool) (\f:fun('A,'B). ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) ((#o:fun(fun('B,'B),fun(fun('A,'B),fun('A,'B))) #I:fun('B,'B)) f:fun('A,'B))) f:fun('A,'B))) ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) ((#o:fun(fun('A,'B),fun(fun('A,'A),fun('A,'B))) f:fun('A,'B)) #I:fun('A,'A))) f:fun('A,'B)))))
+EXISTS_ONE_REP =  |- (#?:fun(fun(bool,bool),bool) (\b:bool. b:bool))
+one_tydef =  |- ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(1,bool),bool) (\a:1. ((#=:fun(1,fun(1,bool)) (#one_ABS:fun(bool,1) (#one_REP:fun(1,bool) a:1))) a:1)))) (#!:fun(fun(bool,bool),bool) (\r:bool. ((#=:fun(bool,fun(bool,bool)) r:bool) ((#=:fun(bool,fun(bool,bool)) (#one_REP:fun(1,bool) (#one_ABS:fun(bool,1) r:bool))) r:bool)))))
+one_DEF =  |- ((#=:fun(1,fun(1,bool)) #one:1) (#@:fun(fun(1,bool),1) (\x:1. #T:bool)))
+one =  |- (#!:fun(fun(1,bool),bool) (\v:1. ((#=:fun(1,fun(1,bool)) v:1) #one:1)))
+one_axiom =  |- (#!:fun(fun(fun('A,1),bool),bool) (\f:fun('A,1). (#!:fun(fun(fun('A,1),bool),bool) (\g:fun('A,1). ((#=:fun(fun('A,1),fun(fun('A,1),bool)) f:fun('A,1)) g:fun('A,1))))))
+one_INDUCT =  |- (#!:fun(fun(fun(1,bool),bool),bool) (\P:fun(1,bool). ((#==>:fun(bool,fun(bool,bool)) (P:fun(1,bool) #one:1)) (#!:fun(fun(1,bool),bool) (\x:1. (P:fun(1,bool) x:1))))))
+one_RECURSION =  |- (#!:fun(fun('A,bool),bool) (\e:'A. (#?:fun(fun(fun(1,'A),bool),bool) (\fn:fun(1,'A). ((#=:fun('A,fun('A,bool)) (fn:fun(1,'A) #one:1)) e:'A)))))
+one_Axiom =  |- (#!:fun(fun('A,bool),bool) (\e:'A. (#?!:fun(fun(fun(1,'A),bool),bool) (\fn:fun(1,'A). ((#=:fun('A,fun('A,bool)) (fn:fun(1,'A) #one:1)) e:'A)))))
+FORALL_ONE_THM =  |- ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun(1,bool),bool) (\x:1. (P:fun(1,bool) x:1)))) (P:fun(1,bool) #one:1))
+EXISTS_ONE_THM =  |- ((#=:fun(bool,fun(bool,bool)) (#?:fun(fun(1,bool),bool) (\x:1. (P:fun(1,bool) x:1)))) (P:fun(1,bool) #one:1))
+ETA_ONE =  |- (#!:fun(fun(fun(1,'A),bool),bool) (\f:fun(1,'A). ((#=:fun(fun(1,'A),fun(fun(1,'A),bool)) (\x:1. (f:fun(1,'A) #one:1))) f:fun(1,'A))))
+types = 1/0 bool/0 fun/2
+constants = one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? ! ==> /\ T =
+definitions = 14
+inductive_type_store = 1 bool
+Warning: inventing type variables
+counter_tyvar = zz_counter:'?3371
+counter_genvar = _510:bool

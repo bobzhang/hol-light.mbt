@@ -10,10 +10,14 @@ module Prov = struct
   (* Ident.unique_name of a toplevel value -> (upstream file, OCaml name) *)
   let table : (string, string * string) Hashtbl.t = Hashtbl.create 4096
 
+  (* called with each name a phrase binds and its installed value *)
+  let on_record : (string -> Types.value_description -> unit) ref = ref (fun _ _ -> ())
+
   let record file name =
     match Env.find_value_by_name (Longident.Lident name) !Toploop.toplevel_env with
-    | (Path.Pident id, _) -> Hashtbl.replace table (Ident.unique_name id) (file, name)
-    | (p, _) -> Hashtbl.replace table (Path.name p) (file, name)
+    | (Path.Pident id, vd) ->
+        Hashtbl.replace table (Ident.unique_name id) (file, name); !on_record name vd
+    | (p, vd) -> Hashtbl.replace table (Path.name p) (file, name); !on_record name vd
     | exception Not_found -> ()
 
   let lookup path =

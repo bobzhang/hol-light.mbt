@@ -1,0 +1,58 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/canon"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn asm_fol_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn assoc_conv(@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn cnf_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn conds_celim_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn conds_elim_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn conj_aci_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn conj_canon_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn disj_aci_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn disj_canon_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn dnf_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn gen_nnf_conv(Bool) -> ((((@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise)) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn lambda_elim_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn nnf_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn nnfc_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn prenex_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn presimp_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn prop_atom_conv((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn select_elim_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn skolem_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn weak_cnf_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn weak_dnf_conv(@kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

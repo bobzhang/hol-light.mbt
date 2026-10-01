@@ -288,4 +288,12 @@ definitions register constants, quotations advance the type-variable and
   OCaml arguments by exact unit counts (spreading tuple arguments, e.g.
   `new_basic_type_definition tyname (abs, rep) th`), a package's own
   unqualified types are qualified, and the last definition of a redefined
-  name (TAUT) gets the plain MoonBit name. Next: `trivia`, `canon`, …
+  name (TAUT) gets the plain MoonBit name. `trivia/` and `canon/` are
+  done, entirely translated, and match upstream (17 trivia theorems; NNF,
+  CNF/DNF, PRENEX, SKOLEM and friends). Each phrase's load work is its own
+  `step_N` function. Mutually recursive local functions are lambda-lifted
+  to top-level functions (captures become parameters): large `letrec`
+  closures hit a MoonBit compiler bug (native ICE "unbound scalar", bad
+  pointer at run time on debug wasm). Polymorphic local functions are
+  lifted when they capture nothing, else monomorphised at their instance.
+  Next: `meson`, `firstorder`, `metis`, …

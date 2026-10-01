@@ -2,174 +2,8 @@
 // Regenerate with tools/ocaml_ref/translate.sh translate ind_defs.ml.
 
 ///|
-let strip_ncomb_c : @lib.Cell[
-  (Int) -> ((@kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise) raise,
-] = @lib.Cell::new("strip_ncomb")
-
-///|
-/// `strip_ncomb`
-pub fn strip_ncomb(
-  x : Int,
-) -> ((@kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise) raise {
-  strip_ncomb_c.get()(x)
-}
-
-///|
-let right_betas_c : @lib.Cell[
-  (@list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise,
-] = @lib.Cell::new("RIGHT_BETAS")
-
-///|
-/// `RIGHT_BETAS`
-pub fn right_betas(
-  x : @list.List[@kernel.Term],
-) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
-  right_betas_c.get()(x)
-}
-
-///|
-let exists_equation_c : @lib.Cell[
-  (@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise,
-] = @lib.Cell::new("EXISTS_EQUATION")
-
-///|
-/// `EXISTS_EQUATION`
-pub fn exists_equation(
-  x : @kernel.Term,
-) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
-  exists_equation_c.get()(x)
-}
-
-///|
-let derive_nonschematic_inductive_relations_c : @lib.Cell[
-  (@kernel.Term) -> @kernel.Thm raise,
-] = @lib.Cell::new("derive_nonschematic_inductive_relations")
-
-///|
-/// `derive_nonschematic_inductive_relations`
-pub fn derive_nonschematic_inductive_relations(
-  x : @kernel.Term,
-) -> @kernel.Thm raise {
-  derive_nonschematic_inductive_relations_c.get()(x)
-}
-
-///|
-fn[A : Eq + @lib.OCompare, B : Eq + @lib.OCompare] getequs_44(
-  x45 : @list.List[B],
-  x46 : @list.List[(A, B)],
-) -> @list.List[(A, B)] raise {
-  let (avs_1, plis) = (x45, x46)
-  if plis == @list.empty() {
-    @list.empty()
-  } else {
-    match plis {
-      More(h, tail=t_1) => {
-        let r_1 = h.1
-        if @lib.mem(r_1, avs_1) {
-          getequs_44(
-            avs_1,
-            @lib.filter(
-              (x49 : (A, B)) => {
-                ((x47 : B) => r_1 != x47)(((x48 : (A, B)) => x48.1)(x49))
-              },
-              t_1,
-            ),
-          ).prepend(h)
-        } else {
-          getequs_44(avs_1, t_1)
-        }
-      }
-      _ => raise @lib.MatchFailure("tscript.ml:84")
-    }
-  }
-}
-
-///|
-let monotonicity_theorems_c : @lib.Cell[Ref[@list.List[@kernel.Thm]]] = @lib.Cell::new(
-  "monotonicity_theorems",
-)
-
-///|
-/// `monotonicity_theorems`
-pub fn monotonicity_theorems() -> Ref[@list.List[@kernel.Thm]] {
-  monotonicity_theorems_c.get()
-}
-
-///|
-let mono_tac_c : @lib.Cell[(@tactics.Goal) -> @tactics.Goalstate raise] = @lib.Cell::new(
-  "MONO_TAC",
-)
-
-///|
-/// `MONO_TAC`
-pub fn mono_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
-  mono_tac_c.get()(x)
-}
-
-///|
-let prove_monotonicity_hyps_c : @lib.Cell[(@kernel.Thm) -> @kernel.Thm raise] = @lib.Cell::new(
-  "prove_monotonicity_hyps",
-)
-
-///|
-/// `prove_monotonicity_hyps`
-pub fn prove_monotonicity_hyps(x : @kernel.Thm) -> @kernel.Thm raise {
-  prove_monotonicity_hyps_c.get()(x)
-}
-
-///|
-let the_inductive_definitions_c : @lib.Cell[
-  Ref[@list.List[(@kernel.Thm, @kernel.Thm, @kernel.Thm)]],
-] = @lib.Cell::new("the_inductive_definitions")
-
-///|
-/// `the_inductive_definitions`
-pub fn the_inductive_definitions() -> Ref[
-  @list.List[(@kernel.Thm, @kernel.Thm, @kernel.Thm)],
-] {
-  the_inductive_definitions_c.get()
-}
-
-///|
-let prove_inductive_relations_exist_c : @lib.Cell[
-  (@kernel.Term) -> @kernel.Thm raise,
-] = @lib.Cell::new("prove_inductive_relations_exist")
-
-///|
-/// `prove_inductive_relations_exist`
-pub fn prove_inductive_relations_exist(x : @kernel.Term) -> @kernel.Thm raise {
-  prove_inductive_relations_exist_c.get()(x)
-}
-
-///|
-let new_inductive_definition_c : @lib.Cell[
-  (@kernel.Term) -> (@kernel.Thm, @kernel.Thm, @kernel.Thm) raise,
-] = @lib.Cell::new("new_inductive_definition")
-
-///|
-/// `new_inductive_definition`
-pub fn new_inductive_definition(
-  x : @kernel.Term,
-) -> (@kernel.Thm, @kernel.Thm, @kernel.Thm) raise {
-  new_inductive_definition_c.get()(x)
-}
-
-///|
-let derive_strong_induction_c : @lib.Cell[
-  ((@kernel.Thm, @kernel.Thm)) -> @kernel.Thm raise,
-] = @lib.Cell::new("derive_strong_induction")
-
-///|
-/// `derive_strong_induction`
-pub fn derive_strong_induction(
-  x : (@kernel.Thm, @kernel.Thm),
-) -> @kernel.Thm raise {
-  derive_strong_induction_c.get()(x)
-}
-
-///|
-fn load_steps() -> Unit raise {
-  // strip_ncomb
+/// strip_ncomb
+fn step_1() -> Unit raise {
   fn strip(
     x1 : Int,
     x2 : @kernel.Term,
@@ -190,7 +24,24 @@ fn load_steps() -> Unit raise {
       strip(n_1, tm_1, @list.empty())
     }
   })
-  // RIGHT_BETAS
+}
+
+///|
+let strip_ncomb_c : @lib.Cell[
+  (Int) -> ((@kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise) raise,
+] = @lib.Cell::new("strip_ncomb")
+
+///|
+/// `strip_ncomb`
+pub fn strip_ncomb(
+  x : Int,
+) -> ((@kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise) raise {
+  strip_ncomb_c.get()(x)
+}
+
+///|
+/// RIGHT_BETAS
+fn step_2() -> Unit raise {
   right_betas_c.set((x14 : @list.List[@kernel.Term]) => {
     (x15 : @kernel.Thm) => {
       ((x12, x13) => {
@@ -210,7 +61,24 @@ fn load_steps() -> Unit raise {
       })(x14, x15)
     }
   })
-  // EXISTS_EQUATION
+}
+
+///|
+let right_betas_c : @lib.Cell[
+  (@list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise,
+] = @lib.Cell::new("RIGHT_BETAS")
+
+///|
+/// `RIGHT_BETAS`
+pub fn right_betas(
+  x : @list.List[@kernel.Term],
+) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+  right_betas_c.get()(x)
+}
+
+///|
+/// EXISTS_EQUATION
+fn step_3() -> Unit raise {
   let t19 = @tactics.first_assum(@tactics.match_mp_tac)
   let t18 = @tactics.exists_tac(@parser.parse_term("t:A"))
   let t17 = @tactics.first_assum(@tactics.match_mp_tac)
@@ -251,8 +119,25 @@ fn load_steps() -> Unit raise {
       @bool.mp(th2, th4)
     }
   })
-  // derive_nonschematic_inductive_relations
-  let t26 = (x23 : @kernel.Term) => {
+}
+
+///|
+let exists_equation_c : @lib.Cell[
+  (@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise,
+] = @lib.Cell::new("EXISTS_EQUATION")
+
+///|
+/// `EXISTS_EQUATION`
+pub fn exists_equation(
+  x : @kernel.Term,
+) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
+  exists_equation_c.get()(x)
+}
+
+///|
+/// derive_nonschematic_inductive_relations
+fn step_4() -> Unit raise {
+  let getconcl : (@kernel.Term) -> @kernel.Term raise = (x23 : @kernel.Term) => {
     let tm = x23
     let bod = @lib.repeat(
       (x25 : @kernel.Term) => {
@@ -267,33 +152,35 @@ fn load_steps() -> Unit raise {
       e => raise e
     }
   }
-  let t27 = @theorems.ac(@theorems.conj_aci())
-  let t30 = (x28 : @kernel.Thm) => {
-    let th = x28
+  let conj_aci_rule : (@kernel.Term) -> @kernel.Thm raise = @theorems.ac(
+    @theorems.conj_aci(),
+  )
+  let simple_disj_pair : (@kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise = (
+    x26 : @kernel.Thm,
+  ) => {
+    let th = x26
     let (l, r) = @basics.dest_disj(@lib.hd(@kernel.hyp(th)))
-    let t29 = @bool.prove_hyp(@bool.disj2(l, @kernel.assume_rule(r)), th)
-    (@bool.prove_hyp(@bool.disj1(@kernel.assume_rule(l), r), th), t29)
+    let t27 = @bool.prove_hyp(@bool.disj2(l, @kernel.assume_rule(r)), th)
+    (@bool.prove_hyp(@bool.disj1(@kernel.assume_rule(l), r), th), t27)
   }
-  let t33 = (x31 : @list.List[@kernel.Term]) => {
-    let args = x31
-    (x32 : @kernel.Thm) => {
-      let th_1 = x32
+  let half_beta_expand : (@list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = (
+    x28 : @list.List[@kernel.Term],
+  ) => {
+    let args = x28
+    (x29 : @kernel.Thm) => {
+      let th_1 = x29
       @bool.genl(args, right_betas(args)(th_1))
     }
   }
-  let getconcl = t26
-  let conj_aci_rule = t27
-  let simple_disj_pair = t30
-  let half_beta_expand = t33
-  let and_imps_conv = (x34 : @kernel.Term) => {
-    let tm_1 = x34
+  let and_imps_conv : (@kernel.Term) -> @kernel.Thm raise = (x30 : @kernel.Term) => {
+    let tm_1 = x30
     let ths = @bool.conjuncts_rule(@kernel.assume_rule(tm_1))
     let avs = @basics.strip_forall(@kernel.concl(@lib.hd(ths))).0
     let thl = @lib.map(
-      (x37 : @kernel.Thm) => {
-        ((x36 : @kernel.Thm) => {
-          ((x35 : @kernel.Thm) => @bool.disch(tm_1, x35))(@bool.undisch(x36))
-        })(@bool.spec_all(x37))
+      (x33 : @kernel.Thm) => {
+        ((x32 : @kernel.Thm) => {
+          ((x31 : @kernel.Thm) => @bool.disch(tm_1, x31))(@bool.undisch(x32))
+        })(@bool.spec_all(x33))
       },
       ths,
     )
@@ -306,33 +193,35 @@ fn load_steps() -> Unit raise {
       @bool.undisch(@bool.spec_all(@kernel.assume_rule(tm2))),
     )
     let (thts, tht) = @lib.nsplit(simple_disj_pair, @lib.tl(ths), th3)
-    let proc_fn = (x38 : @kernel.Thm) => {
-      let th_2 = x38
+    let proc_fn : (@kernel.Thm) -> @kernel.Thm raise = (x34 : @kernel.Thm) => {
+      let th_2 = x34
       let t = @lib.hd(@kernel.hyp(th_2))
       @bool.genl(avs, @bool.disch(t, @bool.undisch(th_2)))
     }
     let th4 = @lib.itlist(
-      (x39 : @kernel.Thm, x40 : @kernel.Thm) => {
-        let t41 = proc_fn(x39)
-        ((x42 : @kernel.Thm) => @bool.conj(t41, x42))(x40)
+      (x35 : @kernel.Thm, x36 : @kernel.Thm) => {
+        let t37 = proc_fn(x35)
+        ((x38 : @kernel.Thm) => @bool.conj(t37, x38))(x36)
       },
       thts,
       proc_fn(tht),
     )
-    let t43 = @bool.disch_all(th4)
-    @bool.imp_antisym_rule(@bool.disch_all(th2), t43)
+    let t39 = @bool.disch_all(th4)
+    @bool.imp_antisym_rule(@bool.disch_all(th2), t39)
   }
   let t_tm = @parser.parse_term("T")
-  let t52 = x50 => {
-    let avs_2 = x50
-    x51 => {
-      let plis_1 = x51
-      let oks = getequs_44(avs_2, plis_1)
+  let calculate_simp_sequence = x46 => {
+    let avs_2 = x46
+    x47 => {
+      let plis_1 = x47
+      let oks = getequs_40(avs_2, plis_1)
       (oks, @lib.subtract(plis_1, oks))
     }
   }
-  let t55 = (x53 : @kernel.Term) => {
-    let tm_2 = x53
+  let forall_imps_conv : (@kernel.Term) -> @kernel.Thm raise = (
+    x48 : @kernel.Term,
+  ) => {
+    let tm_2 = x48
     let (avs_3, bod_1) = @basics.strip_forall(tm_2)
     let th1_1 = @bool.disch(
       tm_2,
@@ -345,15 +234,15 @@ fn load_steps() -> Unit raise {
     let ant = @equal.lhand(bod_1)
     let th5 = @lib.itlist(@bool.simple_exists, avs_3, @kernel.assume_rule(ant))
     let th6 = @bool.genl(avs_3, @bool.disch(ant, @bool.mp(th4_1, th5)))
-    let t54 = @bool.disch_all(th6)
-    @bool.imp_antisym_rule(@bool.disch_all(th3_1), t54)
+    let t49 = @bool.disch_all(th6)
+    @bool.imp_antisym_rule(@bool.disch_all(th3_1), t49)
   }
-  let calculate_simp_sequence = t52
-  let forall_imps_conv = t55
-  let canonicalize_clause = (x56 : @kernel.Term) => {
-    let cls = x56
-    (x57 : @list.List[@kernel.Term]) => {
-      let args_1 = x57
+  let canonicalize_clause : (@kernel.Term) -> ((@list.List[@kernel.Term]) -> @kernel.Thm raise) raise = (
+    x50 : @kernel.Term,
+  ) => {
+    let cls = x50
+    (x51 : @list.List[@kernel.Term]) => {
+      let args_1 = x51
       let (avs_4, bimp) = @basics.strip_forall(cls)
       let (ant_1, con) = @basics.dest_imp(bimp) catch {
         Failure(_) => (t_tm, bimp)
@@ -362,30 +251,30 @@ fn load_steps() -> Unit raise {
       let (rel, xargs) = @basics.strip_comb(con)
       let plis_2 = @lib.zip(args_1, xargs)
       let (yes, no) = calculate_simp_sequence(avs_4)(plis_2)
-      let t60 = @lib.map((x59 : (@kernel.Term, @kernel.Term)) => x59.1, yes)
+      let t54 = @lib.map((x53 : (@kernel.Term, @kernel.Term)) => x53.1, yes)
       let nvs = @lib.filter(
-        (x62 : @kernel.Term) => {
-          ((x58 : Bool) => !x58)(
-            ((x61 : @kernel.Term) => @lib.mem(x61, t60))(x62),
+        (x56 : @kernel.Term) => {
+          ((x52 : Bool) => !x52)(
+            ((x55 : @kernel.Term) => @lib.mem(x55, t54))(x56),
           )
         },
         avs_4,
       )
       let eth = if @basics.is_imp(bimp) {
         let atm = @lib.itlist(
-          (x66 : (@kernel.Term, @kernel.Term), x67 : @kernel.Term) => {
-            let t68 = @basics.mk_eq(x66.0, x66.1)
-            (x69 => {
-              ((x64, x65) => {
+          (x60 : (@kernel.Term, @kernel.Term), x61 : @kernel.Term) => {
+            let t62 = @basics.mk_eq(x60.0, x60.1)
+            (x63 => {
+              ((x58, x59) => {
                 @lib.curry(
-                  (x63 : (@kernel.Term, @kernel.Term)) => {
-                    @bool.mk_conj(x63.0, x63.1)
+                  (x57 : (@kernel.Term, @kernel.Term)) => {
+                    @bool.mk_conj(x57.0, x57.1)
                   },
-                  x64,
-                  x65,
+                  x58,
+                  x59,
                 )
-              })(t68, x69)
-            })(x67)
+              })(t62, x63)
+            })(x61)
           },
           yes.concat(no),
           ant_1,
@@ -396,11 +285,11 @@ fn load_steps() -> Unit raise {
           @kernel.assume_rule(atm),
         )
         let thl_1 = @lib.map(
-          (x70 : @kernel.Term) => {
-            let t_2 = x70
+          (x64 : @kernel.Term) => {
+            let t_2 = x64
             @lib.find(
-              (x71 : @kernel.Thm) => {
-                let th_3 = x71
+              (x65 : @kernel.Thm) => {
+                let th_3 = x65
                 @equal.lhs(@kernel.concl(th_3)) == t_2
               },
               ths_1,
@@ -410,30 +299,30 @@ fn load_steps() -> Unit raise {
         )
         let th0 = @bool.mp(@bool.specl(avs_4, @kernel.assume_rule(cls)), tth)
         let th1_2 = @lib.rev_itlist(
-          (x75 : @kernel.Thm, x76 : @kernel.Thm) => {
-            ((x73, x74) => {
+          (x69 : @kernel.Thm, x70 : @kernel.Thm) => {
+            ((x67, x68) => {
               @lib.curry(
-                (x72 : (@kernel.Thm, @kernel.Thm)) => {
-                  @kernel.mk_comb_rule(x72.0, x72.1)
+                (x66 : (@kernel.Thm, @kernel.Thm)) => {
+                  @kernel.mk_comb_rule(x66.0, x66.1)
                 },
-                x73,
-                x74,
+                x67,
+                x68,
               )
-            })(x76, x75)
+            })(x70, x69)
           },
           thl_1,
           @kernel.refl(rel),
         )
         let th2_2 = @kernel.eq_mp(@equal.sym(th1_2), th0)
         let th3_2 = @kernel.inst_rule(yes, @bool.disch(atm, th2_2))
-        let t77 = @equal.lhand(@kernel.concl(th3_2))
-        let tm4 = @lib.funpow(@lib.length(yes), @kernel.rand, t77)
+        let t71 = @equal.lhand(@kernel.concl(th3_2))
+        let tm4 = @lib.funpow(@lib.length(yes), @kernel.rand, t71)
         let th4_2 = @lib.itlist(
-          (x82 : (@kernel.Term, @kernel.Term), x83 : @kernel.Thm) => {
-            ((x78 : @kernel.Term) => {
-              let t79 = @kernel.refl(x78)
-              (x80 : @kernel.Thm) => @bool.conj(t79, x80)
-            })(((x81 : (@kernel.Term, @kernel.Term)) => x81.0)(x82))(x83)
+          (x76 : (@kernel.Term, @kernel.Term), x77 : @kernel.Thm) => {
+            ((x72 : @kernel.Term) => {
+              let t73 = @kernel.refl(x72)
+              (x74 : @kernel.Thm) => @bool.conj(t73, x74)
+            })(((x75 : (@kernel.Term, @kernel.Term)) => x75.0)(x76))(x77)
           },
           yes,
           @kernel.assume_rule(tm4),
@@ -442,41 +331,41 @@ fn load_steps() -> Unit raise {
           args_1,
           @bool.genl(nvs, @bool.disch(tm4, @bool.mp(th3_2, th4_2))),
         )
-        let t85 = @kernel.assume_rule(@kernel.concl(th5_1))
+        let t79 = @kernel.assume_rule(@kernel.concl(th5_1))
         let th6_1 = @bool.specl(
           nvs,
           @bool.specl(
-            @lib.map((x84 : (@kernel.Term, @kernel.Term)) => x84.1, plis_2),
-            t85,
+            @lib.map((x78 : (@kernel.Term, @kernel.Term)) => x78.1, plis_2),
+            t79,
           ),
         )
         let th7 = @lib.itlist(
-          (x90 : (@kernel.Term, @kernel.Term), x91 : @kernel.Thm) => {
-            ((x86 : @kernel.Term) => {
-              let t87 = @kernel.refl(x86)
-              (x88 : @kernel.Thm) => @bool.conj(t87, x88)
-            })(((x89 : (@kernel.Term, @kernel.Term)) => x89.1)(x90))(x91)
+          (x84 : (@kernel.Term, @kernel.Term), x85 : @kernel.Thm) => {
+            ((x80 : @kernel.Term) => {
+              let t81 = @kernel.refl(x80)
+              (x82 : @kernel.Thm) => @bool.conj(t81, x82)
+            })(((x83 : (@kernel.Term, @kernel.Term)) => x83.1)(x84))(x85)
           },
           no,
           @kernel.assume_rule(ant_1),
         )
         let th8 = @bool.genl(avs_4, @bool.disch(ant_1, @bool.mp(th6_1, th7)))
-        let t92 = @bool.disch_all(th8)
-        @bool.imp_antisym_rule(@bool.disch_all(th5_1), t92)
+        let t86 = @bool.disch_all(th8)
+        @bool.imp_antisym_rule(@bool.disch_all(th5_1), t86)
       } else {
         let atm_1 = @bool.list_mk_conj(
           @lib.map(
-            (x93 : (@kernel.Term, @kernel.Term)) => @basics.mk_eq(x93.0, x93.1),
+            (x87 : (@kernel.Term, @kernel.Term)) => @basics.mk_eq(x87.0, x87.1),
             yes.concat(no),
           ),
         )
         let ths_2 = @bool.conjuncts_rule(@kernel.assume_rule(atm_1))
         let thl_2 = @lib.map(
-          (x94 : @kernel.Term) => {
-            let t_3 = x94
+          (x88 : @kernel.Term) => {
+            let t_3 = x88
             @lib.find(
-              (x95 : @kernel.Thm) => {
-                let th_4 = x95
+              (x89 : @kernel.Thm) => {
+                let th_4 = x89
                 @equal.lhs(@kernel.concl(th_4)) == t_3
               },
               ths_2,
@@ -486,30 +375,30 @@ fn load_steps() -> Unit raise {
         )
         let th0_1 = @bool.specl(avs_4, @kernel.assume_rule(cls))
         let th1_3 = @lib.rev_itlist(
-          (x99 : @kernel.Thm, x100 : @kernel.Thm) => {
-            ((x97, x98) => {
+          (x93 : @kernel.Thm, x94 : @kernel.Thm) => {
+            ((x91, x92) => {
               @lib.curry(
-                (x96 : (@kernel.Thm, @kernel.Thm)) => {
-                  @kernel.mk_comb_rule(x96.0, x96.1)
+                (x90 : (@kernel.Thm, @kernel.Thm)) => {
+                  @kernel.mk_comb_rule(x90.0, x90.1)
                 },
-                x97,
-                x98,
+                x91,
+                x92,
               )
-            })(x100, x99)
+            })(x94, x93)
           },
           thl_2,
           @kernel.refl(rel),
         )
         let th2_3 = @kernel.eq_mp(@equal.sym(th1_3), th0_1)
         let th3_3 = @kernel.inst_rule(yes, @bool.disch(atm_1, th2_3))
-        let t101 = @equal.lhand(@kernel.concl(th3_3))
-        let tm4_1 = @lib.funpow(@lib.length(yes), @kernel.rand, t101)
+        let t95 = @equal.lhand(@kernel.concl(th3_3))
+        let tm4_1 = @lib.funpow(@lib.length(yes), @kernel.rand, t95)
         let th4_3 = @lib.itlist(
-          (x106 : (@kernel.Term, @kernel.Term), x107 : @kernel.Thm) => {
-            ((x102 : @kernel.Term) => {
-              let t103 = @kernel.refl(x102)
-              (x104 : @kernel.Thm) => @bool.conj(t103, x104)
-            })(((x105 : (@kernel.Term, @kernel.Term)) => x105.0)(x106))(x107)
+          (x100 : (@kernel.Term, @kernel.Term), x101 : @kernel.Thm) => {
+            ((x96 : @kernel.Term) => {
+              let t97 = @kernel.refl(x96)
+              (x98 : @kernel.Thm) => @bool.conj(t97, x98)
+            })(((x99 : (@kernel.Term, @kernel.Term)) => x99.0)(x100))(x101)
           },
           yes,
           @kernel.assume_rule(tm4_1),
@@ -518,34 +407,34 @@ fn load_steps() -> Unit raise {
           args_1,
           @bool.genl(nvs, @bool.disch(tm4_1, @bool.mp(th3_3, th4_3))),
         )
-        let t109 = @kernel.assume_rule(@kernel.concl(th5_2))
+        let t103 = @kernel.assume_rule(@kernel.concl(th5_2))
         let th6_2 = @bool.specl(
           nvs,
           @bool.specl(
-            @lib.map((x108 : (@kernel.Term, @kernel.Term)) => x108.1, plis_2),
-            t109,
+            @lib.map((x102 : (@kernel.Term, @kernel.Term)) => x102.1, plis_2),
+            t103,
           ),
         )
         let th7_1 = @lib.end_itlist(
           @bool.conj,
           @lib.map(
-            (x111 : (@kernel.Term, @kernel.Term)) => {
+            (x105 : (@kernel.Term, @kernel.Term)) => {
               @kernel.refl(
-                ((x110 : (@kernel.Term, @kernel.Term)) => x110.1)(x111),
+                ((x104 : (@kernel.Term, @kernel.Term)) => x104.1)(x105),
               )
             },
             no,
           ),
         )
         let th8_1 = @bool.genl(avs_4, @bool.mp(th6_2, th7_1))
-        let t112 = @bool.disch_all(th8_1)
-        @bool.imp_antisym_rule(@bool.disch_all(th5_2), t112)
+        let t106 = @bool.disch_all(th8_1)
+        @bool.imp_antisym_rule(@bool.disch_all(th5_2), t106)
       }
-      let t114 = @kernel.rand(@kernel.concl(eth))
+      let t108 = @kernel.rand(@kernel.concl(eth))
       let ftm = @lib.funpow(
         @lib.length(args_1),
-        (x113 : @kernel.Term) => @basics.body(@kernel.rand(x113)),
-        t114,
+        (x107 : @kernel.Term) => @basics.body(@kernel.rand(x107)),
+        t108,
       )
       @kernel.trans(
         eth,
@@ -553,28 +442,30 @@ fn load_steps() -> Unit raise {
       )
     }
   }
-  let t139 = (x115 : @list.List[@kernel.Term]) => {
-    let clauses = x115
+  let canonicalize_clauses : (@list.List[@kernel.Term]) -> @kernel.Thm raise = (
+    x109 : @list.List[@kernel.Term],
+  ) => {
+    let clauses = x109
     let concls = @lib.map(getconcl, clauses)
     let uncs = @lib.map(
-      (x116 : @kernel.Term) => @basics.strip_comb(x116),
+      (x110 : @kernel.Term) => @basics.strip_comb(x110),
       concls,
     )
     let rels = @lib.itlist(
       (
-        x118 : (@kernel.Term, @list.List[@kernel.Term]),
-        x119 : @list.List[@kernel.Term],
+        x112 : (@kernel.Term, @list.List[@kernel.Term]),
+        x113 : @list.List[@kernel.Term],
       ) => {
-        let t120 = ((x117 : (@kernel.Term, @list.List[@kernel.Term])) => x117.0)(
-          x118,
+        let t114 = ((x111 : (@kernel.Term, @list.List[@kernel.Term])) => x111.0)(
+          x112,
         )
-        (x121 => @lib.insert(t120, x121))(x119)
+        (x115 => @lib.insert(t114, x115))(x113)
       },
       uncs,
       @list.empty(),
     )
     let xargs_1 = @lib.map(
-      (x122 : @kernel.Term) => @lib.assoc(x122, uncs),
+      (x116 : @kernel.Term) => @lib.assoc(x116, uncs),
       rels,
     )
     let closed = @bool.list_mk_conj(clauses)
@@ -583,13 +474,13 @@ fn load_steps() -> Unit raise {
       "a",
       avoids,
       @lib.map(
-        (x123 : @kernel.Term) => @kernel.type_of(x123),
+        (x117 : @kernel.Term) => @kernel.type_of(x117),
         @lib.end_itlist(
-          (x126 : @list.List[@kernel.Term], x127 : @list.List[@kernel.Term]) => {
-            let s128 = ((x124 : @list.List[@kernel.Term]) => {
-              (x125 : @list.List[@kernel.Term]) => x124.concat(x125)
-            })(x126)
-            s128(x127)
+          (x120 : @list.List[@kernel.Term], x121 : @list.List[@kernel.Term]) => {
+            let s122 = ((x118 : @list.List[@kernel.Term]) => {
+              (x119 : @list.List[@kernel.Term]) => x118.concat(x119)
+            })(x120)
+            s122(x121)
           },
           xargs_1,
         ),
@@ -597,29 +488,31 @@ fn load_steps() -> Unit raise {
     )
     let zargs = @lib.zip(rels, @lib.shareout(xargs_1, flargs))
     let cargs = @lib.map(
-      (x129 : (@kernel.Term, @list.List[@kernel.Term])) => {
-        let (r_2, a) = x129
+      (x123 : (@kernel.Term, @list.List[@kernel.Term])) => {
+        let (r_2, a) = x123
         @lib.assoc(r_2, zargs)
       },
       uncs,
     )
     let cthms = @lib.map2(
-      (x130 : @kernel.Term, x131 : @list.List[@kernel.Term]) => {
-        let s132 = canonicalize_clause(x130)
-        s132(x131)
+      (x124 : @kernel.Term, x125 : @list.List[@kernel.Term]) => {
+        let s126 = canonicalize_clause(x124)
+        s126(x125)
       },
       clauses,
       cargs,
     )
     let pclauses = @lib.map(
-      (x133 : @kernel.Thm) => @kernel.rand(@kernel.concl(x133)),
+      (x127 : @kernel.Thm) => @kernel.rand(@kernel.concl(x127)),
       cthms,
     )
-    let collectclauses = (x134 : @kernel.Term) => {
-      let tm_3 = x134
+    let collectclauses : (@kernel.Term) -> @list.List[@kernel.Term] raise = (
+      x128 : @kernel.Term,
+    ) => {
+      let tm_3 = x128
       @lib.mapfilter(
-        (x135 : (@kernel.Term, @kernel.Term)) => {
-          let t_4 = x135
+        (x129 : (@kernel.Term, @kernel.Term)) => {
+          let t_4 = x129
           if t_4.0 == tm_3 {
             t_4.1
           } else {
@@ -628,7 +521,7 @@ fn load_steps() -> Unit raise {
         },
         @lib.zip(
           @lib.map(
-            (x136 : (@kernel.Term, @list.List[@kernel.Term])) => x136.0,
+            (x130 : (@kernel.Term, @list.List[@kernel.Term])) => x130.0,
             uncs,
           ),
           pclauses,
@@ -637,10 +530,8 @@ fn load_steps() -> Unit raise {
     }
     let clausell = @lib.map(collectclauses, rels)
     let cclausel = @lib.map(@bool.list_mk_conj, clausell)
-    let t137 = @bool.list_mk_conj(cclausel)
-    let t138 = @bool.list_mk_conj(pclauses)
-    let cclauses = t137
-    let oclauses = t138
+    let cclauses = @bool.list_mk_conj(cclausel)
+    let oclauses = @bool.list_mk_conj(pclauses)
     let eth_1 = conj_aci_rule(@basics.mk_eq(oclauses, cclauses))
     let pth = @kernel.trans(@lib.end_itlist(@drule.mk_conj_rule, cthms), eth_1)
     @kernel.trans(
@@ -648,51 +539,59 @@ fn load_steps() -> Unit raise {
       @lib.end_itlist(@drule.mk_conj_rule, @lib.map(and_imps_conv, cclausel)),
     )
   }
-  let t196 = (x140 : @list.List[@kernel.Term]) => {
-    let clauses_1 = x140
+  let derive_canon_inductive_relations : (@list.List[@kernel.Term]) -> @kernel.Thm raise = (
+    x131 : @list.List[@kernel.Term],
+  ) => {
+    let clauses_1 = x131
     let closed_1 = @bool.list_mk_conj(clauses_1)
     let clauses_2 = @basics.conjuncts(closed_1)
     let (vargs, bodies) = @lib.unzip(
-      @lib.map((x141 : @kernel.Term) => @basics.strip_forall(x141), clauses_2),
+      @lib.map((x132 : @kernel.Term) => @basics.strip_forall(x132), clauses_2),
     )
     let (ants, concs) = @lib.unzip(@lib.map(@basics.dest_imp, bodies))
-    let rels_1 = @lib.map(x142 => @lib.repeat(@kernel.rator, x142), concs)
+    let rels_1 = @lib.map(x133 => @lib.repeat(@kernel.rator, x133), concs)
     let avoids_1 = @basics.variables(closed_1)
     let rels_p = @basics.variants(avoids_1, rels_1)
     let crels = @lib.zip(rels_p, rels_1)
-    let prime_fn = (x143 : @kernel.Term) => @basics.subst(crels, x143)
+    let prime_fn : (@kernel.Term) -> @kernel.Term raise = (x134 : @kernel.Term) => {
+      @basics.subst(crels, x134)
+    }
     let closed_p = prime_fn(closed_1)
-    let mk_def = (x144 : @list.List[@kernel.Term]) => {
-      let arg = x144
-      (x145 : @kernel.Term) => {
-        let con_1 = x145
-        let t146 = @basics.list_mk_abs(
+    let mk_def : (@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Term raise) raise = (
+      x135 : @list.List[@kernel.Term],
+    ) => {
+      let arg = x135
+      (x136 : @kernel.Term) => {
+        let con_1 = x136
+        let t137 = @basics.list_mk_abs(
           arg,
           @bool.list_mk_forall(rels_p, @bool.mk_imp(closed_p, prime_fn(con_1))),
         )
-        @basics.mk_eq(@lib.repeat(@kernel.rator, con_1), t146)
+        @basics.mk_eq(@lib.repeat(@kernel.rator, con_1), t137)
       }
     }
     let deftms = @lib.map2(
-      (x147 : @list.List[@kernel.Term], x148 : @kernel.Term) => {
-        let s149 = mk_def(x147)
-        s149(x148)
+      (x138 : @list.List[@kernel.Term], x139 : @kernel.Term) => {
+        let s140 = mk_def(x138)
+        s140(x139)
       },
       vargs,
       concs,
     )
     let defthms = @lib.map2(
-      (x150 : @list.List[@kernel.Term], x151 : @kernel.Thm) => {
-        let s152 = half_beta_expand(x150)
-        s152(x151)
+      (x141 : @list.List[@kernel.Term], x142 : @kernel.Thm) => {
+        let s143 = half_beta_expand(x141)
+        s143(x142)
       },
       vargs,
       @lib.map(@kernel.assume_rule, deftms),
     )
-    let mk_ind = (x153 : @list.List[@kernel.Term]) => {
-      let args_2 = x153
-      (x154 : @kernel.Thm) => {
-        let th_5 = x154
+    let mk_ind : (@list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = (
+      x144 : @list.List[@kernel.Term],
+    ) => {
+      let args_2 = x144
+      (x145 : @kernel.Thm) => {
+        let th_5 = x145
         let th1_4 = @bool.eq_imp_rule(@bool.spec_all(th_5)).0
         let ant_2 = @equal.lhand(@kernel.concl(th1_4))
         let th2_4 = @bool.specl(rels_p, @bool.undisch(th1_4))
@@ -700,9 +599,9 @@ fn load_steps() -> Unit raise {
       }
     }
     let indthms = @lib.map2(
-      (x155 : @list.List[@kernel.Term], x156 : @kernel.Thm) => {
-        let s157 = mk_ind(x155)
-        s157(x156)
+      (x146 : @list.List[@kernel.Term], x147 : @kernel.Thm) => {
+        let s148 = mk_ind(x146)
+        s148(x147)
       },
       vargs,
       defthms,
@@ -710,30 +609,32 @@ fn load_steps() -> Unit raise {
     let indthmr = @lib.end_itlist(@bool.conj, indthms)
     let indthm = @bool.genl(rels_p, @bool.disch(closed_p, indthmr))
     let mconcs = @lib.map2(
-      (x158 : @list.List[@kernel.Term], x159 : @kernel.Term) => {
-        let a_1 = x158
-        let t_5 = x159
+      (x149 : @list.List[@kernel.Term], x150 : @kernel.Term) => {
+        let a_1 = x149
+        let t_5 = x150
         @bool.list_mk_forall(a_1, @bool.mk_imp(t_5, prime_fn(t_5)))
       },
       vargs,
       ants,
     )
-    let t160 = @bool.list_mk_conj(mconcs)
-    let monotm = @bool.mk_imp(@kernel.concl(indthmr), t160)
+    let t151 = @bool.list_mk_conj(mconcs)
+    let monotm = @bool.mk_imp(@kernel.concl(indthmr), t151)
     let monothm = @kernel.assume_rule(
       @bool.list_mk_forall(rels_1, @bool.list_mk_forall(rels_p, monotm)),
     )
     let closthm = @kernel.assume_rule(closed_p)
-    let t161 = @bool.mp(@bool.specl(rels_p, indthm), closthm)
-    let monothms = @bool.conjuncts_rule(@bool.mp(@bool.spec_all(monothm), t161))
+    let t152 = @bool.mp(@bool.specl(rels_p, indthm), closthm)
+    let monothms = @bool.conjuncts_rule(@bool.mp(@bool.spec_all(monothm), t152))
     let closthms = @bool.conjuncts_rule(closthm)
-    let prove_rule = (x162 : @kernel.Thm) => {
-      let mth = x162
-      (x163 : (@kernel.Thm, @kernel.Thm)) => {
-        let (cth, dth) = x163
+    let prove_rule : (@kernel.Thm) -> (((@kernel.Thm, @kernel.Thm)) -> @kernel.Thm raise) raise = (
+      x153 : @kernel.Thm,
+    ) => {
+      let mth = x153
+      (x154 : (@kernel.Thm, @kernel.Thm)) => {
+        let (cth, dth) = x154
         let (avs_5, bod_2) = @basics.strip_forall(@kernel.concl(mth))
-        let t164 = @bool.specl(avs_5, cth)
-        let th1_5 = @bool.imp_trans(@bool.specl(avs_5, mth), t164)
+        let t155 = @bool.specl(avs_5, cth)
+        let th1_5 = @bool.imp_trans(@bool.specl(avs_5, mth), t155)
         let th2_5 = @bool.genl(
           rels_p,
           @bool.disch(closed_p, @bool.undisch(th1_5)),
@@ -743,51 +644,56 @@ fn load_steps() -> Unit raise {
       }
     }
     let rulethms = @lib.map2(
-      (x165 : @kernel.Thm, x166 : (@kernel.Thm, @kernel.Thm)) => {
-        let s167 = prove_rule(x165)
-        s167(x166)
+      (x156 : @kernel.Thm, x157 : (@kernel.Thm, @kernel.Thm)) => {
+        let s158 = prove_rule(x156)
+        s158(x157)
       },
       monothms,
       @lib.zip(closthms, defthms),
     )
     let rulethm = @lib.end_itlist(@bool.conj, rulethms)
     let dtms = @lib.map2(
-      (x169, x170) => {
+      (x160, x161) => {
         @lib.curry(
-          (x168 : (@list.List[@kernel.Term], @kernel.Term)) => {
-            @basics.list_mk_abs(x168.0, x168.1)
+          (x159 : (@list.List[@kernel.Term], @kernel.Term)) => {
+            @basics.list_mk_abs(x159.0, x159.1)
           },
-          x169,
-          x170,
+          x160,
+          x161,
         )
       },
       vargs,
       ants,
     )
-    let t171 = @lib.zip(dtms, rels_1)
-    let double_fn = (x172 : @kernel.Term) => @basics.subst(t171, x172)
-    let mk_unbetas = (x173 : @kernel.Term) => {
-      let tm_4 = x173
-      (x174 : @kernel.Term) => {
-        let dtm = x174
+    let t162 = @lib.zip(dtms, rels_1)
+    let double_fn : (@kernel.Term) -> @kernel.Term raise = (x163 : @kernel.Term) => {
+      @basics.subst(t162, x163)
+    }
+    let mk_unbetas : (@kernel.Term) -> ((@kernel.Term) -> (
+      @kernel.Thm,
+      (@kernel.Thm, @kernel.Thm),
+    ) raise) raise = (x164 : @kernel.Term) => {
+      let tm_4 = x164
+      (x165 : @kernel.Term) => {
+        let dtm = x165
         let (avs_6, bod_3) = @basics.strip_forall(tm_4)
         let (il, r_3) = @kernel.dest_comb(bod_3)
         let (i, l_1) = @kernel.dest_comb(il)
-        let t175 = @kernel.refl(dtm)
-        let bth = right_betas(avs_6)(t175)
+        let t166 = @kernel.refl(dtm)
+        let bth = right_betas(avs_6)(t166)
         let munb = @equal.ap_thm(@equal.ap_term(i, bth), r_3)
         let iunb = @equal.ap_term(@kernel.mk_comb(i, double_fn(l_1)), bth)
         let junb = @equal.ap_term(@kernel.mk_comb(i, r_3), bth)
-        let quantify = x176 => @lib.itlist(@drule.mk_forall_rule, avs_6, x176)
-        let t177 = quantify(junb)
-        let t178 = (quantify(iunb), t177)
-        (quantify(munb), t178)
+        let quantify = x167 => @lib.itlist(@drule.mk_forall_rule, avs_6, x167)
+        let t168 = quantify(junb)
+        let t169 = (quantify(iunb), t168)
+        (quantify(munb), t169)
       }
     }
     let unths = @lib.map2(
-      (x179 : @kernel.Term, x180 : @kernel.Term) => {
-        let s181 = mk_unbetas(x179)
-        s181(x180)
+      (x170 : @kernel.Term, x171 : @kernel.Term) => {
+        let s172 = mk_unbetas(x170)
+        s172(x171)
       },
       clauses_2,
       dtms,
@@ -797,7 +703,7 @@ fn load_steps() -> Unit raise {
         @lib.end_itlist(
           @drule.mk_conj_rule,
           @lib.map(
-            (x182 : (@kernel.Thm, (@kernel.Thm, @kernel.Thm))) => x182.0,
+            (x173 : (@kernel.Thm, (@kernel.Thm, @kernel.Thm))) => x173.0,
             unths,
           ),
         ),
@@ -810,10 +716,10 @@ fn load_steps() -> Unit raise {
         @lib.end_itlist(
           @drule.mk_conj_rule,
           @lib.map(
-            (x185 : (@kernel.Thm, (@kernel.Thm, @kernel.Thm))) => {
-              ((x183 : (@kernel.Thm, @kernel.Thm)) => x183.0)(
-                ((x184 : (@kernel.Thm, (@kernel.Thm, @kernel.Thm))) => x184.1)(
-                  x185,
+            (x176 : (@kernel.Thm, (@kernel.Thm, @kernel.Thm))) => {
+              ((x174 : (@kernel.Thm, @kernel.Thm)) => x174.0)(
+                ((x175 : (@kernel.Thm, (@kernel.Thm, @kernel.Thm))) => x175.1)(
+                  x176,
                 ),
               )
             },
@@ -828,10 +734,10 @@ fn load_steps() -> Unit raise {
       @lib.end_itlist(
         @drule.mk_conj_rule,
         @lib.map(
-          (x188 : (@kernel.Thm, (@kernel.Thm, @kernel.Thm))) => {
-            ((x186 : (@kernel.Thm, @kernel.Thm)) => x186.1)(
-              ((x187 : (@kernel.Thm, (@kernel.Thm, @kernel.Thm))) => x187.1)(
-                x188,
+          (x179 : (@kernel.Thm, (@kernel.Thm, @kernel.Thm))) => {
+            ((x177 : (@kernel.Thm, @kernel.Thm)) => x177.1)(
+              ((x178 : (@kernel.Thm, (@kernel.Thm, @kernel.Thm))) => x178.1)(
+                x179,
               ),
             )
           },
@@ -840,33 +746,33 @@ fn load_steps() -> Unit raise {
       ),
       ifthm,
     )
-    let mk_case = (x189 : @kernel.Thm) => {
-      let th1_6 = x189
-      (x190 : @kernel.Thm) => {
-        let th2_6 = x190
+    let mk_case : (@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = (
+      x180 : @kernel.Thm,
+    ) => {
+      let th1_6 = x180
+      (x181 : @kernel.Thm) => {
+        let th2_6 = x181
         let avs_7 = @basics.strip_forall(@kernel.concl(th1_6)).0
-        let t191 = @bool.spec_all(th2_6)
-        @bool.genl(avs_7, @bool.imp_antisym_rule(@bool.spec_all(th1_6), t191))
+        let t182 = @bool.spec_all(th2_6)
+        @bool.genl(avs_7, @bool.imp_antisym_rule(@bool.spec_all(th1_6), t182))
       }
     }
-    let t195 = @bool.conjuncts_rule(rulethm)
+    let t186 = @bool.conjuncts_rule(rulethm)
     let casethm = @lib.end_itlist(
       @bool.conj,
       @lib.map2(
-        (x192 : @kernel.Thm, x193 : @kernel.Thm) => {
-          let s194 = mk_case(x192)
-          s194(x193)
+        (x183 : @kernel.Thm, x184 : @kernel.Thm) => {
+          let s185 = mk_case(x183)
+          s185(x184)
         },
         @bool.conjuncts_rule(fthm),
-        t195,
+        t186,
       ),
     )
     @bool.conj(rulethm, @bool.conj(indthm, casethm))
   }
-  let canonicalize_clauses = t139
-  let derive_canon_inductive_relations = t196
-  derive_nonschematic_inductive_relations_c.set((x197 : @kernel.Term) => {
-    let tm_5 = x197
+  derive_nonschematic_inductive_relations_c.set((x187 : @kernel.Term) => {
+    let tm_5 = x187
     let clauses_3 = @basics.conjuncts(tm_5)
     let canonthm = canonicalize_clauses(clauses_3)
     let canonthm_p = @equal.sym(canonthm)
@@ -875,16 +781,62 @@ fn load_steps() -> Unit raise {
     let rawthm = derive_canon_inductive_relations(pclauses_1)
     let (rulethm_1, otherthms) = @bool.conj_pair(rawthm)
     let (indthm_1, casethm_1) = @bool.conj_pair(otherthms)
-    let t198 = @kernel.eq_mp(canonthm_p, rulethm_1)
-    let t199 = @equal.conv_rule(
+    let rulethm_p = @kernel.eq_mp(canonthm_p, rulethm_1)
+    let indthm_p = @equal.conv_rule(
       @equal.once_depth_conv(@simp.rewr_conv(canonthm_p)),
       indthm_1,
     )
-    let rulethm_p = t198
-    let indthm_p = t199
     @bool.conj(rulethm_p, @bool.conj(indthm_p, casethm_1))
   })
-  // monotonicity_theorems
+}
+
+///|
+let derive_nonschematic_inductive_relations_c : @lib.Cell[
+  (@kernel.Term) -> @kernel.Thm raise,
+] = @lib.Cell::new("derive_nonschematic_inductive_relations")
+
+///|
+/// `derive_nonschematic_inductive_relations`
+pub fn derive_nonschematic_inductive_relations(
+  x : @kernel.Term,
+) -> @kernel.Thm raise {
+  derive_nonschematic_inductive_relations_c.get()(x)
+}
+
+///|
+fn[A : Eq + @lib.OCompare + @lib.OHash, B : Eq + @lib.OCompare + @lib.OHash] getequs_40(
+  x41 : @list.List[B],
+  x42 : @list.List[(A, B)],
+) -> @list.List[(A, B)] raise {
+  let (avs_1, plis) = (x41, x42)
+  if plis == @list.empty() {
+    @list.empty()
+  } else {
+    match plis {
+      More(h, tail=t_1) => {
+        let r_1 = h.1
+        if @lib.mem(r_1, avs_1) {
+          getequs_40(
+            avs_1,
+            @lib.filter(
+              (x45 : (A, B)) => {
+                ((x43 : B) => r_1 != x43)(((x44 : (A, B)) => x44.1)(x45))
+              },
+              t_1,
+            ),
+          ).prepend(h)
+        } else {
+          getequs_40(avs_1, t_1)
+        }
+      }
+      _ => raise @lib.MatchFailure("tscript.ml:84")
+    }
+  }
+}
+
+///|
+/// monotonicity_theorems
+fn step_5() -> Unit raise {
   monotonicity_theorems_c.set(Ref::{
     val: @list.List([
       @theorems.mono_and(),
@@ -895,38 +847,51 @@ fn load_steps() -> Unit raise {
       @theorems.mono_forall(),
     ]),
   })
-  // MONO_TAC
-  let t200 = @parser.parse_term("(==>)")
-  let t201 = @itab.itaut(@parser.parse_term("!p. p ==> p"))
-  let imp = t200
-  let imp_refl = t201
-  let t209 = (x202 : @kernel.Thm) => {
-    let th = x202
-    let match_fn = @drule.part_match(
-      (x205 : @kernel.Term) => {
-        ((x204 : (@kernel.Term, @kernel.Term)) => x204.1)(
-          @basics.dest_imp(x205),
+}
+
+///|
+let monotonicity_theorems_c : @lib.Cell[Ref[@list.List[@kernel.Thm]]] = @lib.Cell::new(
+  "monotonicity_theorems",
+)
+
+///|
+/// `monotonicity_theorems`
+pub fn monotonicity_theorems() -> Ref[@list.List[@kernel.Thm]] {
+  monotonicity_theorems_c.get()
+}
+
+///|
+/// MONO_TAC
+fn step_6() -> Unit raise {
+  let imp = @parser.parse_term("(==>)")
+  let imp_refl = @itab.itaut(@parser.parse_term("!p. p ==> p"))
+  let backchain_tac = (x188 : @kernel.Thm) => {
+    let th = x188
+    let match_fn : (@kernel.Term) -> @kernel.Thm raise = @drule.part_match(
+      (x191 : @kernel.Term) => {
+        ((x190 : (@kernel.Term, @kernel.Term)) => x190.1)(
+          @basics.dest_imp(x191),
         )
       },
       th,
     )
-    x206 => {
-      let (asl, w) = x206
+    x192 => {
+      let (asl, w) = x192
       let th1 = match_fn(w)
       let (ant, con) = @basics.dest_imp(@kernel.concl(th1))
       (
         @tactics.null_meta,
         @list.List([(asl, ant)]),
         (
-          x207 : (
+          x193 : (
             @list.List[(Int, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
         ) => {
-          let i = x207
-          (x208 : @list.List[@kernel.Thm]) => {
-            match x208 {
+          let i = x193
+          (x194 : @list.List[@kernel.Thm]) => {
+            match x194 {
               More(t, tail=Empty) =>
                 @drule.match_mp(@drule.instantiate_rule(i, th1))(t)
               _ => raise @lib.MatchFailure("tscript.ml:262")
@@ -936,32 +901,89 @@ fn load_steps() -> Unit raise {
       )
     }
   }
-  let t219 = (x210 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
-    let (asl_1, w_1) = x210
+  let mono_abs_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+    (
+      @list.List[@kernel.Term],
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+    ),
+    @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+    (
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+      @list.List[@kernel.Thm],
+    ) -> @kernel.Thm raise,
+  ) raise = (x195 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+    let (asl_1, w_1) = x195
     let (ant_1, con_1) = @basics.dest_imp(w_1)
     let vars = @basics.strip_comb(con_1).1
     let rnum = @lib.length(vars) - 1
-    let t211 = strip_ncomb(rnum)(ant_1)
-    let t212 = strip_ncomb(rnum)(con_1)
-    let (hd1, args1) = t211
-    let (hd2, args2) = t212
-    let t215 = @lib.rev_itlist(
-      (x213 : @kernel.Term, x214 : @kernel.Thm) => @equal.ap_thm(x214, x213),
+    let (hd1, args1) = strip_ncomb(rnum)(ant_1)
+    let (hd2, args2) = strip_ncomb(rnum)(con_1)
+    let th1_1 = @lib.rev_itlist(
+      (x196 : @kernel.Term, x197 : @kernel.Thm) => @equal.ap_thm(x197, x196),
       args1,
       @equal.beta_conv(hd1),
     )
-    let t218 = @lib.rev_itlist(
-      (x216 : @kernel.Term, x217 : @kernel.Thm) => @equal.ap_thm(x217, x216),
+    let th2 = @lib.rev_itlist(
+      (x198 : @kernel.Term, x199 : @kernel.Thm) => @equal.ap_thm(x199, x198),
       args1,
       @equal.beta_conv(hd2),
     )
-    let th1_1 = t215
-    let th2 = t218
     let th3 = @kernel.mk_comb_rule(@equal.ap_term(imp, th1_1), th2)
     @tactics.conv_tac(@simp.rewr_conv(th3))((asl_1, w_1))
   }
-  let t223 = (
-    x220 : @list.List[
+  let apply_monotac : (
+    @list.List[
+      (
+        String,
+        ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+          (
+            @list.List[@kernel.Term],
+            (
+              @list.List[(Int, @kernel.Term)],
+              @list.List[(@kernel.Term, @kernel.Term)],
+              @list.List[(@kernel.HolType, @kernel.HolType)],
+            ),
+          ),
+          @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+          (
+            (
+              @list.List[(Int, @kernel.Term)],
+              @list.List[(@kernel.Term, @kernel.Term)],
+              @list.List[(@kernel.HolType, @kernel.HolType)],
+            ),
+            @list.List[@kernel.Thm],
+          ) -> @kernel.Thm raise,
+        ) raise,
+      ),
+    ],
+  ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+    (
+      @list.List[@kernel.Term],
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+    ),
+    @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+    (
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+      @list.List[@kernel.Thm],
+    ) -> @kernel.Thm raise,
+  ) raise) raise = (
+    x200 : @list.List[
       (
         String,
         ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -986,9 +1008,9 @@ fn load_steps() -> Unit raise {
       ),
     ],
   ) => {
-    let tacs = x220
-    (x221 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
-      let (asl_2, w_2) = x221
+    let tacs = x200
+    (x201 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+      let (asl_2, w_2) = x201
       let (a, c) = @basics.dest_imp(w_2)
       if @basics.aconv(a, c) {
         @tactics.accept_tac(@bool.spec(a, imp_refl))((asl_2, w_2))
@@ -999,7 +1021,7 @@ fn load_steps() -> Unit raise {
           }
         @lib.tryfind(
           (
-            x222 : (
+            x202 : (
               String,
               ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
                 (
@@ -1022,7 +1044,7 @@ fn load_steps() -> Unit raise {
               ) raise,
             ),
           ) => {
-            let (k, t_1) = x222
+            let (k, t_1) = x202
             if k == cn {
               t_1((asl_2, w_2))
             } else {
@@ -1034,15 +1056,12 @@ fn load_steps() -> Unit raise {
       }
     }
   }
-  let backchain_tac = t209
-  let mono_abs_tac = t219
-  let apply_monotac = t223
-  mono_tac_c.set((x224 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
-    let gl = x224
+  mono_tac_c.set((x203 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+    let gl = x203
     let tacs_1 = @lib.itlist(
       (
-        x225 : @kernel.Thm,
-        x226 : @list.List[
+        x204 : @kernel.Thm,
+        x205 : @list.List[
           (
             String,
             ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1067,8 +1086,8 @@ fn load_steps() -> Unit raise {
           ),
         ],
       ) => {
-        let th_1 = x225
-        let l = x226
+        let th_1 = x204
+        let l = x205
         let ft = @lib.repeat(
           @kernel.rator,
           @lib.funpow(2, @kernel.rand, @kernel.concl(th_1)),
@@ -1077,31 +1096,31 @@ fn load_steps() -> Unit raise {
             Failure(_) => ""
             e => raise e
           }
-        let t233 = @tactics.repeat_tac(@tactics.conj_tac)
-        let t227 = backchain_tac(th_1)
+        let t212 = @tactics.repeat_tac(@tactics.conj_tac)
+        let t206 = backchain_tac(th_1)
         l.prepend(
           (
             c_1,
             @tactics.then_tac(
-              (x228 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
-                let t229 = t227(x228)
+              (x207 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => {
+                let t208 = t206(x207)
                 (
-                  t229.0,
-                  t229.1,
+                  t208.0,
+                  t208.1,
                   (
-                    x230 : (
+                    x209 : (
                       @list.List[(Int, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
-                    x231 : @list.List[@kernel.Thm],
+                    x210 : @list.List[@kernel.Thm],
                   ) => {
-                    let s232 = (t229.2)(x230)
-                    s232(x231)
+                    let s211 = (t208.2)(x209)
+                    s211(x210)
                   },
                 )
               },
-              t233,
+              t212,
             ),
           ),
         )
@@ -1109,56 +1128,160 @@ fn load_steps() -> Unit raise {
       monotonicity_theorems().val,
       @list.List([("", mono_abs_tac)]),
     )
-    let t234 = apply_monotac(tacs_1)
-    let mono_step_tac = @tactics.then_tac(
-      @tactics.repeat_tac(@tactics.gen_tac),
-      t234,
-    )
-    let t235 = @simp.asm_rewrite_tac(@list.empty())
-    @tactics.then_tac(@tactics.repeat_tac(mono_step_tac), t235)(gl)
+    let t213 = apply_monotac(tacs_1)
+    let mono_step_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+      (
+        @list.List[@kernel.Term],
+        (
+          @list.List[(Int, @kernel.Term)],
+          @list.List[(@kernel.Term, @kernel.Term)],
+          @list.List[(@kernel.HolType, @kernel.HolType)],
+        ),
+      ),
+      @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+      (
+        (
+          @list.List[(Int, @kernel.Term)],
+          @list.List[(@kernel.Term, @kernel.Term)],
+          @list.List[(@kernel.HolType, @kernel.HolType)],
+        ),
+        @list.List[@kernel.Thm],
+      ) -> @kernel.Thm raise,
+    ) raise = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t213)
+    let t214 = @simp.asm_rewrite_tac(@list.empty())
+    @tactics.then_tac(@tactics.repeat_tac(mono_step_tac), t214)(gl)
   })
-  // prove_monotonicity_hyps
-  let t240 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t239 = @tactics.disch_then(
-    @tactics.repeat_tcl(@tactics.conjuncts_then)((x236 : @kernel.Thm) => {
-      let s237 = @tactics.assume_tac(x236)
-      (x238 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s237(x238)
+}
+
+///|
+let mono_tac_c : @lib.Cell[(@tactics.Goal) -> @tactics.Goalstate raise] = @lib.Cell::new(
+  "MONO_TAC",
+)
+
+///|
+/// `MONO_TAC`
+pub fn mono_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
+  mono_tac_c.get()(x)
+}
+
+///|
+/// prove_monotonicity_hyps
+fn step_7() -> Unit raise {
+  let t219 = @tactics.repeat_tac(@tactics.conj_tac)
+  let t218 = @tactics.disch_then(
+    @tactics.repeat_tcl(@tactics.conjuncts_then)((x215 : @kernel.Thm) => {
+      let s216 = @tactics.assume_tac(x215)
+      (x217 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => s216(x217)
     }),
   )
-  let tac = @tactics.then_tac(
+  let tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
+    (
+      @list.List[@kernel.Term],
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+    ),
+    @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
+    (
+      (
+        @list.List[(Int, @kernel.Term)],
+        @list.List[(@kernel.Term, @kernel.Term)],
+        @list.List[(@kernel.HolType, @kernel.HolType)],
+      ),
+      @list.List[@kernel.Thm],
+    ) -> @kernel.Thm raise,
+  ) raise = @tactics.then_tac(
     @tactics.then_tac(
-      @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t239),
-      t240,
+      @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t218),
+      t219,
     ),
     mono_tac,
   )
-  let prove_mth = (x241 : @kernel.Term) => {
-    let t = x241
+  let prove_mth : (@kernel.Term) -> @kernel.Thm raise = (x220 : @kernel.Term) => {
+    let t = x220
     @tactics.prove(t, tac)
   }
-  prove_monotonicity_hyps_c.set((x242 : @kernel.Thm) => {
-    let th = x242
+  prove_monotonicity_hyps_c.set((x221 : @kernel.Thm) => {
+    let th = x221
     let mths = @lib.mapfilter(
       prove_mth,
       @lib.filter(
-        (x244 : @kernel.Term) => ((x243 : Bool) => !x243)(@basics.is_eq(x244)),
+        (x223 : @kernel.Term) => ((x222 : Bool) => !x222)(@basics.is_eq(x223)),
         @kernel.hyp(th),
       ),
     )
     @lib.itlist(@bool.prove_hyp, mths, th)
   })
-  // the_inductive_definitions
+}
+
+///|
+let prove_monotonicity_hyps_c : @lib.Cell[(@kernel.Thm) -> @kernel.Thm raise] = @lib.Cell::new(
+  "prove_monotonicity_hyps",
+)
+
+///|
+/// `prove_monotonicity_hyps`
+pub fn prove_monotonicity_hyps(x : @kernel.Thm) -> @kernel.Thm raise {
+  prove_monotonicity_hyps_c.get()(x)
+}
+
+///|
+/// the_inductive_definitions
+fn step_8() -> Unit raise {
   the_inductive_definitions_c.set(Ref::{ val: @list.empty(), })
-  // prove_inductive_relations_exist, new_inductive_definition
+}
+
+///|
+let the_inductive_definitions_c : @lib.Cell[
+  Ref[@list.List[(@kernel.Thm, @kernel.Thm, @kernel.Thm)]],
+] = @lib.Cell::new("the_inductive_definitions")
+
+///|
+/// `the_inductive_definitions`
+pub fn the_inductive_definitions() -> Ref[
+  @list.List[(@kernel.Thm, @kernel.Thm, @kernel.Thm)],
+] {
+  the_inductive_definitions_c.get()
+}
+
+///|
+let prove_inductive_relations_exist_c : @lib.Cell[
+  (@kernel.Term) -> @kernel.Thm raise,
+] = @lib.Cell::new("prove_inductive_relations_exist")
+
+///|
+/// `prove_inductive_relations_exist`
+pub fn prove_inductive_relations_exist(x : @kernel.Term) -> @kernel.Thm raise {
+  prove_inductive_relations_exist_c.get()(x)
+}
+
+///|
+let new_inductive_definition_c : @lib.Cell[
+  (@kernel.Term) -> (@kernel.Thm, @kernel.Thm, @kernel.Thm) raise,
+] = @lib.Cell::new("new_inductive_definition")
+
+///|
+/// `new_inductive_definition`
+pub fn new_inductive_definition(
+  x : @kernel.Term,
+) -> (@kernel.Thm, @kernel.Thm, @kernel.Thm) raise {
+  new_inductive_definition_c.get()(x)
+}
+
+///|
+/// prove_inductive_relations_exist, new_inductive_definition
+fn step_9() -> Unit raise {
   fn pare_comb(
-    x245 : @list.List[@kernel.Term],
-    x246 : @kernel.Term,
+    x224 : @list.List[@kernel.Term],
+    x225 : @kernel.Term,
   ) -> @kernel.Term raise {
-    let qvs = x245
-    let tm = x246
+    let qvs = x224
+    let tm = x225
     if @lib.intersect(@kernel.frees(tm), qvs) == @list.empty() &&
       @lib.forall(
-        (x247 : @kernel.Term) => @kernel.is_var(x247),
+        (x226 : @kernel.Term) => @kernel.is_var(x226),
         @basics.strip_comb(tm).1,
       ) {
       tm
@@ -1166,23 +1289,27 @@ fn load_steps() -> Unit raise {
       pare_comb(qvs, @kernel.rator(tm))
     }
   }
-  let t265 = (x248 : Bool) => {
-    let gflag = x248
-    (x249 : @list.List[@kernel.Term]) => {
-      let vs = x249
-      let generalize_def = (x251 : @kernel.Term) => {
-        let tm_1 = x251
-        (x252 : @kernel.Thm) => {
-          let th = x252
+  let generalize_schematic_variables : (Bool) -> ((@list.List[@kernel.Term]) -> ((
+    @kernel.Thm,
+  ) -> @kernel.Thm raise) raise) raise = (x227 : Bool) => {
+    let gflag = x227
+    (x228 : @list.List[@kernel.Term]) => {
+      let vs = x228
+      let generalize_def : (@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = (
+        x230 : @kernel.Term,
+      ) => {
+        let tm_1 = x230
+        (x231 : @kernel.Thm) => {
+          let th = x231
           let (l, r) = @kernel.dest_eq(tm_1)
           let (lname, lty) = @kernel.dest_var(l)
           let l_p = @kernel.mk_var(
             lname,
             @lib.itlist(
-              (x253 : @kernel.Term, x254 : @kernel.HolType) => {
-                let t255 = @kernel.type_of(x253)
-                ((x256 : @kernel.HolType) => @basics.mk_fun_ty(t255, x256))(
-                  x254,
+              (x232 : @kernel.Term, x233 : @kernel.HolType) => {
+                let t234 = @kernel.type_of(x232)
+                ((x235 : @kernel.HolType) => @basics.mk_fun_ty(t234, x235))(
+                  x233,
                 )
               },
               vs,
@@ -1191,34 +1318,34 @@ fn load_steps() -> Unit raise {
           )
           let r_p = @basics.list_mk_abs(vs, r)
           let tm_p = @basics.mk_eq(l_p, r_p)
-          let t257 = @kernel.assume_rule(tm_p)
-          let th0 = right_betas(vs)(t257)
-          let t258 = @bool.disch(tm_1, th)
+          let t236 = @kernel.assume_rule(tm_p)
+          let th0 = right_betas(vs)(t236)
+          let t237 = @bool.disch(tm_1, th)
           let th1 = @kernel.inst_rule(
             @list.List([(@equal.lhs(@kernel.concl(th0)), l)]),
-            t258,
+            t237,
           )
           @bool.mp(th1, th0)
         }
       }
-      (x259 : @kernel.Thm) => {
-        let th_1 = x259
+      (x238 : @kernel.Thm) => {
+        let th_1 = x238
         let (defs, others) = @lib.partition(
-          (x260 : @kernel.Term) => @basics.is_eq(x260),
+          (x239 : @kernel.Term) => @basics.is_eq(x239),
           @kernel.hyp(th_1),
         )
         let th1_1 = @lib.itlist(
-          (x261 : @kernel.Term, x262 : @kernel.Thm) => {
-            let s263 = generalize_def(x261)
-            s263(x262)
+          (x240 : @kernel.Term, x241 : @kernel.Thm) => {
+            let s242 = generalize_def(x240)
+            s242(x241)
           },
           defs,
           th_1,
         )
         if gflag {
           let others_p = @lib.map(
-            (x264 : @kernel.Term) => {
-              let t = x264
+            (x243 : @kernel.Term) => {
+              let t = x243
               let fvs = @kernel.frees(t)
               @bool.specl(
                 fvs,
@@ -1234,44 +1361,51 @@ fn load_steps() -> Unit raise {
       }
     }
   }
-  let t271 = (x266 : @kernel.Thm) => {
-    let th_2 = x266
+  let derive_existence : (@kernel.Thm) -> @kernel.Thm raise = (
+    x244 : @kernel.Thm,
+  ) => {
+    let th_2 = x244
     let defs_1 = @lib.filter(
-      (x267 : @kernel.Term) => @basics.is_eq(x267),
+      (x245 : @kernel.Term) => @basics.is_eq(x245),
       @kernel.hyp(th_2),
     )
     @lib.itlist(
-      (x268 : @kernel.Term, x269 : @kernel.Thm) => {
-        let s270 = exists_equation(x268)
-        s270(x269)
+      (x246 : @kernel.Term, x247 : @kernel.Thm) => {
+        let s248 = exists_equation(x246)
+        s248(x247)
       },
       defs_1,
       th_2,
     )
   }
-  let t278 = (x272 : @kernel.Thm) => {
-    let th_3 = x272
+  let make_definitions : (@kernel.Thm) -> @kernel.Thm raise = (
+    x249 : @kernel.Thm,
+  ) => {
+    let th_3 = x249
     let defs_2 = @lib.filter(
-      (x273 : @kernel.Term) => @basics.is_eq(x273),
+      (x250 : @kernel.Term) => @basics.is_eq(x250),
       @kernel.hyp(th_3),
     )
     let dths = @lib.map(@drule.new_definition, defs_2)
-    let t275 = @lib.map(@equal.lhs, defs_2)
+    let t252 = @lib.map(@equal.lhs, defs_2)
     let insts = @lib.zip(
-      @lib.map((x274 : @kernel.Thm) => @equal.lhs(@kernel.concl(x274)), dths),
-      t275,
+      @lib.map((x251 : @kernel.Thm) => @equal.lhs(@kernel.concl(x251)), dths),
+      t252,
     )
     @lib.rev_itlist(
-      (x276 : @kernel.Thm, x277 : @kernel.Thm) => @bool.mp(x277, x276),
+      (x253 : @kernel.Thm, x254 : @kernel.Thm) => @bool.mp(x254, x253),
       dths,
       @kernel.inst_rule(insts, @lib.itlist(@bool.disch, defs_2, th_3)),
     )
   }
-  let t286 = (x279 : @list.List[@kernel.Term]) => {
-    let clauses = x279
+  let unschematize_clauses : (@list.List[@kernel.Term]) -> (
+    @list.List[@kernel.Term],
+    @list.List[@kernel.Term],
+  ) raise = (x255 : @list.List[@kernel.Term]) => {
+    let clauses = x255
     let schem = @lib.map(
-      (x280 : @kernel.Term) => {
-        let cls = x280
+      (x256 : @kernel.Term) => {
+        let cls = x256
         let (avs, bod) = @basics.strip_forall(cls)
         pare_comb(
           avs,
@@ -1289,9 +1423,9 @@ fn load_steps() -> Unit raise {
     } else if !(@lib.length(
         @lib.setify(
           @lib.map(
-            (x282 : @kernel.Term) => {
-              ((x281 : (@kernel.Term, @list.List[@kernel.Term])) => x281.1)(
-                @basics.strip_comb(x282),
+            (x258 : @kernel.Term) => {
+              ((x257 : (@kernel.Term, @list.List[@kernel.Term])) => x257.1)(
+                @basics.strip_comb(x258),
               )
             },
             schems,
@@ -1302,36 +1436,39 @@ fn load_steps() -> Unit raise {
       raise Failure("Schematic variables not used consistently")
     } else {
       let avoids = @basics.variables(@bool.list_mk_conj(clauses))
-      let hack_fn = (x283 : @kernel.Term) => {
-        let tm_2 = x283
-        let t284 = @kernel.type_of(tm_2)
+      let hack_fn : (@kernel.Term) -> @kernel.Term raise = (x259 : @kernel.Term) => {
+        let tm_2 = x259
+        let t260 = @kernel.type_of(tm_2)
         @kernel.mk_var(
           @kernel.dest_var(@lib.repeat(@kernel.rator, tm_2)).0,
-          t284,
+          t260,
         )
       }
       let grels = @basics.variants(avoids, @lib.map(hack_fn, schems))
       let crels = @lib.zip(grels, schems)
       let clauses_p = @lib.map(
-        (x285 : @kernel.Term) => @basics.subst(crels, x285),
+        (x261 : @kernel.Term) => @basics.subst(crels, x261),
         clauses,
       )
       (clauses_p, @basics.strip_comb(@lib.hd(schems)).1)
     }
   }
-  let generalize_schematic_variables = t265
-  let derive_existence = t271
-  let make_definitions = t278
-  let unschematize_clauses = t286
-  let find_redefinition = (x287 : @kernel.Term) => {
-    let tm_3 = x287
-    (x288 : (@kernel.Thm, @kernel.Thm, @kernel.Thm)) => {
-      let (rth, ith, cth) as trip = x288
-      (trip, @drule.part_match((x289 : @kernel.Term) => x289, rth)(tm_3))
+  let find_redefinition : (@kernel.Term) -> ((
+    (@kernel.Thm, @kernel.Thm, @kernel.Thm),
+  ) -> ((@kernel.Thm, @kernel.Thm, @kernel.Thm), @kernel.Thm) raise) raise = (
+    x262 : @kernel.Term,
+  ) => {
+    let tm_3 = x262
+    (x263 : (@kernel.Thm, @kernel.Thm, @kernel.Thm)) => {
+      let (rth, ith, cth) as trip = x263
+      (trip, @drule.part_match((x264 : @kernel.Term) => x264, rth)(tm_3))
     }
   }
-  let prove_inductive_properties = (x290 : @kernel.Term) => {
-    let tm_4 = x290
+  let prove_inductive_properties : (@kernel.Term) -> (
+    @list.List[@kernel.Term],
+    @kernel.Thm,
+  ) raise = (x265 : @kernel.Term) => {
+    let tm_4 = x265
     let clauses_1 = @basics.conjuncts(tm_4)
     let (clauses_p_1, fvs_1) = unschematize_clauses(clauses_1)
     let th_4 = derive_nonschematic_inductive_relations(
@@ -1339,18 +1476,24 @@ fn load_steps() -> Unit raise {
     )
     (fvs_1, prove_monotonicity_hyps(th_4))
   }
-  let t292 = (x291 : @kernel.Term) => {
-    let tm_5 = x291
+  let prove_inductive_relations_exist : (@kernel.Term) -> @kernel.Thm raise = (
+    x266 : @kernel.Term,
+  ) => {
+    let tm_5 = x266
     let (fvs_2, th1_2) = prove_inductive_properties(tm_5)
     let th2 = generalize_schematic_variables(true)(fvs_2)(th1_2)
     derive_existence(th2)
   }
-  let t297 = (x293 : @kernel.Term) => {
-    let tm_6 = x293
+  let new_inductive_definition : (@kernel.Term) -> (
+    @kernel.Thm,
+    @kernel.Thm,
+    @kernel.Thm,
+  ) raise = (x267 : @kernel.Term) => {
+    let tm_6 = x267
     try {
       let tm_p_1 = @basics.strip_forall(tm_6).1
-      let t294 = the_inductive_definitions().val
-      let (th_5, _) = @lib.tryfind(find_redefinition(tm_p_1), t294)
+      let t268 = the_inductive_definitions().val
+      let (th_5, _) = @lib.tryfind(find_redefinition(tm_p_1), t268)
       @lib.warn(true, "Benign redefinition of inductive predicate")
       th_5
     } catch {
@@ -1361,9 +1504,9 @@ fn load_steps() -> Unit raise {
         let avs_1 = @basics.strip_forall(@kernel.concl(th3)).0
         let (r_1, ic) = @bool.conj_pair(@bool.specl(avs_1, th3))
         let (i, c) = @bool.conj_pair(ic)
-        let t295 = @bool.genl(avs_1, c)
-        let t296 = @bool.genl(avs_1, i)
-        let thtr = (@bool.genl(avs_1, r_1), t296, t295)
+        let t269 = @bool.genl(avs_1, c)
+        let t270 = @bool.genl(avs_1, i)
+        let thtr = (@bool.genl(avs_1, r_1), t270, t269)
         {
           the_inductive_definitions().val = the_inductive_definitions().val.prepend(
             thtr,
@@ -1375,46 +1518,50 @@ fn load_steps() -> Unit raise {
       e => raise e
     }
   }
-  let prove_inductive_relations_exist = t292
-  let new_inductive_definition = t297
   let (prove_inductive_relations_exist_1, new_inductive_definition_1) = (
     prove_inductive_relations_exist, new_inductive_definition,
   )
   prove_inductive_relations_exist_c.set(prove_inductive_relations_exist_1)
   new_inductive_definition_c.set(new_inductive_definition_1)
-  // derive_strong_induction
-  let dest_ibod = (x298 : @kernel.Term) => {
-    let tm = x298
+}
+
+///|
+/// derive_strong_induction
+fn step_10() -> Unit raise {
+  let dest_ibod : (@kernel.Term) -> (Int, (@kernel.Term, @kernel.Term)) raise = (
+    x271 : @kernel.Term,
+  ) => {
+    let tm = x271
     let (avs, ibod) = @basics.strip_forall(tm)
     let n = @lib.length(avs)
-    let prator = x299 => @lib.funpow(n, @kernel.rator, x299)
+    let prator = x272 => @lib.funpow(n, @kernel.rator, x272)
     let (ant, con) = @basics.dest_imp(ibod)
-    let t300 = prator(con)
-    (n, (prator(ant), t300))
+    let t273 = prator(con)
+    (n, (prator(ant), t273))
   }
-  fn prove_triv(x301 : @kernel.Term) -> @kernel.Thm raise {
-    let tm_1 = x301
+  fn prove_triv(x274 : @kernel.Term) -> @kernel.Thm raise {
+    let tm_1 = x274
     if @basics.is_conj(tm_1) {
-      let t302 = prove_triv(@kernel.rand(tm_1))
-      @bool.conj(prove_triv(@equal.lhand(tm_1)), t302)
+      let t275 = prove_triv(@kernel.rand(tm_1))
+      @bool.conj(prove_triv(@equal.lhand(tm_1)), t275)
     } else {
       let (avs_1, bod) = @basics.strip_forall(tm_1)
       let (a, c) = @basics.dest_imp(bod)
       let ths = @bool.conjuncts_rule(@kernel.assume_rule(a))
       let th = @lib.find(
-        (x304 : @kernel.Thm) => {
-          ((x303 : @kernel.Term) => @basics.aconv(c, x303))(@kernel.concl(x304))
+        (x277 : @kernel.Thm) => {
+          ((x276 : @kernel.Term) => @basics.aconv(c, x276))(@kernel.concl(x277))
         },
         ths,
       )
       @bool.genl(avs_1, @bool.disch(a, th))
     }
   }
-  fn weaken_triv(x305 : @kernel.Thm) -> @kernel.Thm raise {
-    let th_1 = x305
+  fn weaken_triv(x278 : @kernel.Thm) -> @kernel.Thm raise {
+    let th_1 = x278
     if @basics.is_conj(@kernel.concl(th_1)) {
-      let t306 = weaken_triv(@bool.conjunct2(th_1))
-      @bool.conj(weaken_triv(@bool.conjunct1(th_1)), t306)
+      let t279 = weaken_triv(@bool.conjunct2(th_1))
+      @bool.conj(weaken_triv(@bool.conjunct1(th_1)), t279)
     } else {
       let (avs_2, bod_1) = @basics.strip_forall(@kernel.concl(th_1))
       let th1 = @bool.specl(avs_2, th_1)
@@ -1422,48 +1569,50 @@ fn load_steps() -> Unit raise {
       @bool.genl(avs_2, @bool.disch(a_1, @bool.conjunct2(@bool.undisch(th1))))
     }
   }
-  let match_imps = @drule.match_mp(@theorems.mono_and())
-  derive_strong_induction_c.set((x307 : (@kernel.Thm, @kernel.Thm)) => {
-    let (rth, ith) = x307
+  let match_imps : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(
+    @theorems.mono_and(),
+  )
+  derive_strong_induction_c.set((x280 : (@kernel.Thm, @kernel.Thm)) => {
+    let (rth, ith) = x280
     let (ovs, ibod_1) = @basics.strip_forall(@kernel.concl(ith))
     let (iant, icon) = @basics.dest_imp(ibod_1)
     let (ns, prrs) = @lib.unzip(@lib.map(dest_ibod, @basics.conjuncts(icon)))
     let (rs, ps) = @lib.unzip(prrs)
     let gs = @basics.variants(@basics.variables(ibod_1), ps)
-    let t308 = @lib.length(ns)
-    let (svs, tvs) = @lib.chop_list(@lib.length(ovs) - t308, ovs)
-    let t309 = @bool.specl(svs, rth)
-    let t310 = @bool.specl(svs, ith)
-    let sth = t309
-    let jth = t310
+    let t281 = @lib.length(ns)
+    let (svs, tvs) = @lib.chop_list(@lib.length(ovs) - t281, ovs)
+    let sth = @bool.specl(svs, rth)
+    let jth = @bool.specl(svs, ith)
     let gimps = @basics.subst(@lib.zip(gs, rs), icon)
     let prs = @lib.map2(
-      (x311 : Int, x312 : (@kernel.Term, @kernel.Term)) => {
-        let n_1 = x311
-        let (r, p) = x312
-        let t313 = @kernel.type_of(r)
+      (x282 : Int, x283 : (@kernel.Term, @kernel.Term)) => {
+        let n_1 = x282
+        let (r, p) = x283
+        let t284 = @kernel.type_of(r)
         let (tys, ty) = @lib.nsplit(
           @basics.dest_fun_ty,
           @lib.range(1, n_1),
-          t313,
+          t284,
         )
         let gvs = @lib.map(
-          (x314 : @kernel.HolType) => @basics.genvar(x314),
+          (x285 : @kernel.HolType) => @basics.genvar(x285),
           tys,
         )
-        let t315 = @basics.list_mk_comb(p, gvs)
+        let t286 = @basics.list_mk_comb(p, gvs)
         @basics.list_mk_abs(
           gvs,
-          @bool.mk_conj(@basics.list_mk_comb(r, gvs), t315),
+          @bool.mk_conj(@basics.list_mk_comb(r, gvs), t286),
         )
       },
       ns,
       prrs,
     )
-    let modify_rule = (x316 : @kernel.Thm) => {
-      let rcl = x316
-      (x317 : @kernel.Term) => {
-        let itm = x317
+    let modify_rule : (@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise = (
+      x287 : @kernel.Thm,
+    ) => {
+      let rcl = x287
+      (x288 : @kernel.Term) => {
+        let itm = x288
         let (avs_3, bod_2) = @basics.strip_forall(itm)
         if @basics.is_imp(bod_2) {
           let (a_2, c_1) = @basics.dest_imp(bod_2)
@@ -1484,36 +1633,36 @@ fn load_steps() -> Unit raise {
           let t = @equal.lhand(@kernel.concl(jth_r))
           let kth_r = @bool.undisch(jth_r)
           let ntm = @bool.list_mk_forall(avs_3, @bool.mk_imp(t, c_1))
-          let t318 = @bool.mp(@bool.specl(avs_3, rcl), kth_r)
-          let t319 = @bool.undisch(@bool.specl(avs_3, @kernel.assume_rule(ntm)))
-          let lth_r = t318
-          let lth_p = t319
+          let lth_r = @bool.mp(@bool.specl(avs_3, rcl), kth_r)
+          let lth_p = @bool.undisch(
+            @bool.specl(avs_3, @kernel.assume_rule(ntm)),
+          )
           @bool.disch(
             ntm,
             @bool.genl(avs_3, @bool.disch(t, @bool.conj(lth_r, lth_p))),
           )
         } else {
-          let t320 = @bool.specl(avs_3, @kernel.assume_rule(itm))
+          let t289 = @bool.specl(avs_3, @kernel.assume_rule(itm))
           @bool.disch(
             itm,
-            @bool.genl(avs_3, @bool.conj(@bool.specl(avs_3, rcl), t320)),
+            @bool.genl(avs_3, @bool.conj(@bool.specl(avs_3, rcl), t289)),
           )
         }
       }
     }
-    let t324 = @basics.conjuncts(iant)
+    let t293 = @basics.conjuncts(iant)
     let mimps = @lib.map2(
-      (x321 : @kernel.Thm, x322 : @kernel.Term) => {
-        let s323 = modify_rule(x321)
-        s323(x322)
+      (x290 : @kernel.Thm, x291 : @kernel.Term) => {
+        let s292 = modify_rule(x290)
+        s292(x291)
       },
       @bool.conjuncts_rule(sth),
-      t324,
+      t293,
     )
     let th1_1 = @lib.end_itlist(
-      (x325 : @kernel.Thm, x326 : @kernel.Thm) => {
-        let th_2 = x325
-        let th_p = x326
+      (x294 : @kernel.Thm, x295 : @kernel.Thm) => {
+        let th_2 = x294
+        let th_p = x295
         match_imps(@bool.conj(th_2, th_p))
       },
       mimps,
@@ -1524,4 +1673,31 @@ fn load_steps() -> Unit raise {
     let th4 = @bool.genl(ps, @bool.disch(nasm, weaken_triv(@bool.undisch(th3))))
     @bool.genl(svs, prove_monotonicity_hyps(th4))
   })
+}
+
+///|
+let derive_strong_induction_c : @lib.Cell[
+  ((@kernel.Thm, @kernel.Thm)) -> @kernel.Thm raise,
+] = @lib.Cell::new("derive_strong_induction")
+
+///|
+/// `derive_strong_induction`
+pub fn derive_strong_induction(
+  x : (@kernel.Thm, @kernel.Thm),
+) -> @kernel.Thm raise {
+  derive_strong_induction_c.get()(x)
+}
+
+///|
+fn load_steps() -> Unit raise {
+  step_1()
+  step_2()
+  step_3()
+  step_4()
+  step_5()
+  step_6()
+  step_7()
+  step_8()
+  step_9()
+  step_10()
 }

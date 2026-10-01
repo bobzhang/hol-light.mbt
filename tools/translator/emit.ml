@@ -18,9 +18,16 @@ module Emit = struct
   let steps = Buffer.create 65536
   let errors = ref 0
 
+  (* each upstream phrase's load-time work is its own function (one huge
+     initializer overflows the wasm stack) *)
+  let step_count = ref 0
+
   let add_step comment stmts =
-    Buffer.add_string steps ("\n  // " ^ comment);
-    Buffer.add_string steps (Ir.string_of_stmts stmts |> String.split_on_char '\n' |> String.concat "\n  ")
+    incr step_count;
+    let name = Printf.sprintf "step_%d" !step_count in
+    let body = Ir.to_string (fun () -> Ir.indent := 1; List.iter Ir.pstmt stmts) in
+    add_decl (fun () -> Printf.sprintf "\n///|\n/// %s\nfn %s() -> Unit raise {%s\n}\n" comment name body);
+    Buffer.add_string steps ("\n  " ^ name ^ "()")
 
   let used_names : (string, unit) Hashtbl.t = Hashtbl.create 256
 
@@ -48,9 +55,9 @@ module Emit = struct
     match List.sort compare names with [] -> "" | ns -> "[" ^ String.concat ", " ns ^ "]"
 
   (* `let f p1 ... pn = body` -> `pub fn f(...) -> R raise { ... }` *)
-  let emit_function oname id (e : expression) =
+  let emit_function ?mname oname id (e : expression) =
     Hashtbl.reset tyvar_names;
-    let mname = fresh_top oname in
+    let mname = match mname with Some m -> m | None -> fresh_top oname in
     let param_tys, body = function_signature e in
     let want = M.Fun (List.map mty_of param_tys, mty_of body.exp_type, true) in
     ignore id;
@@ -77,18 +84,35 @@ module Emit = struct
 
   (* The declarations for a value cell `mname` of OCaml type `oty`: an
      accessor, or for a function a wrapper taking its first argument. *)
-  let installed_type oname (oty : Types.type_expr) =
-    match Env.find_value_by_name (Longident.Lident oname) !Toploop.toplevel_env with
-    | (_, vd) -> vd.Types.val_type
-    | exception Not_found -> oty
+  (* The type of a definition as installed by the toplevel (later phrases
+     may resolve its weak type variables): filled in after the phrase runs. *)
+  let pending_installs : (string * Types.type_expr option ref) list ref = ref []
+
+  let () =
+    Prov.on_record :=
+      fun name vd ->
+        match List.assoc_opt name !pending_installs with
+        | Some slot ->
+            slot := Some vd.Types.val_type;
+            pending_installs := List.remove_assoc name !pending_installs
+        | None -> ()
+
+  let install_slot oname =
+    let slot = ref None in
+    pending_installs := (oname, slot) :: List.remove_assoc oname !pending_installs;
+    slot
+
+  let installed_type slot (oty : Types.type_expr) =
+    match !slot with Some t -> t | None -> oty
 
   let cell_decls oname mname (oty0 : Types.type_expr) =
     let mty = mty_of oty0 in
+    let slot = install_slot oname in
     (match mty with
      | M.Fun _ ->
          add_decl (fun () ->
              Hashtbl.reset tyvar_names;
-             let oty = installed_type oname oty0 in
+             let oty = installed_type slot oty0 in
              let ty = show_ty oty in
              match arrow oty with
              | Some (a, b) ->
@@ -99,7 +123,7 @@ module Emit = struct
      | _ ->
          add_decl (fun () ->
              Hashtbl.reset tyvar_names;
-             let oty = installed_type oname oty0 in
+             let oty = installed_type slot oty0 in
              let ty = show_ty oty in
              Printf.sprintf
                "\n///|\nlet %s_c : @lib.Cell[%s] = @lib.Cell::new(%s)\n\n///|\n/// `%s`\npub fn%s %s() -> %s {\n  %s_c.get()\n}\n"
@@ -127,9 +151,10 @@ module Emit = struct
         (fun (id, _, ty) ->
           let oname = Ident.name id in
           let mname = fresh_top oname in
-          let local = (Hashtbl.find locals (Ident.unique_name id)).name in
+          let local = Hashtbl.find locals (Ident.unique_name id) in
           cell_decls oname mname ty;
-          Do (Call (Atom (mname ^ "_c.set"), [ Atom local ])))
+          let _, v = adapt ([], Atom local.name) local.mty (mty_of ty) in
+          Do (Call (Atom (mname ^ "_c.set"), [ v ])))
         ids
     in
     add_step (String.concat ", " (List.map (fun (id, _, _) -> Ident.name id) ids))
@@ -173,22 +198,24 @@ module Emit = struct
                else emit_value (Ident.name id) vb_expr
            | Tstr_value (Asttypes.Nonrecursive, [ vb ]) when irrefutable vb.vb_pat -> emit_pattern vb
            | Tstr_value (Asttypes.Recursive, vbs) ->
-               (* register every function first: they may call each other *)
-               List.iter
-                 (fun vb ->
-                   match vb.vb_pat.pat_desc with
-                   | Tpat_var (id, _) ->
-                       let param_tys, body = function_signature vb.vb_expr in
-                       let want = M.Fun (List.map mty_of param_tys, mty_of body.exp_type, true) in
-                       Hashtbl.replace own_by_name (Ident.name id) (sanitize (Ident.name id), Function want)
-                   | _ -> unsupported vb.vb_loc "recursive value")
-                 vbs;
-               List.iter
-                 (fun vb ->
-                   match vb.vb_pat.pat_desc with
-                   | Tpat_var (id, _) -> emit_function (Ident.name id) id vb.vb_expr
-                   | _ -> ())
-                 vbs
+               (* name and register every function first: they may call
+                  each other (and themselves, through local identifiers) *)
+               let named =
+                 List.map
+                   (fun vb ->
+                     match vb.vb_pat.pat_desc with
+                     | Tpat_var (id, _) ->
+                         let param_tys, body = function_signature vb.vb_expr in
+                         let want = M.Fun (List.map mty_of param_tys, mty_of body.exp_type, true) in
+                         let mname = fresh_top (Ident.name id) in
+                         Hashtbl.replace own_by_name (Ident.name id) (mname, Function want);
+                         Hashtbl.replace locals (Ident.unique_name id)
+                           { name = mname; mty = want; loty = Some vb.vb_expr.exp_type };
+                         (mname, id, vb)
+                     | _ -> unsupported vb.vb_loc "recursive value")
+                   vbs
+               in
+               List.iter (fun (mname, id, vb) -> emit_function ~mname (Ident.name id) id vb.vb_expr) named
            | Tstr_eval (e, _) -> emit_eval e
            | _ -> unsupported it.str_loc "structure item"
          with Unsupported (msg, loc) ->

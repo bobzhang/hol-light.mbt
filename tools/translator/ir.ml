@@ -27,7 +27,7 @@ module Ir = struct
     | Assign of exp * exp                 (* r.val = e *)
     | LetFn of string * (string * string) list * string * block
                                           (* local recursive function *)
-    | LetRec of (string * (string * string) list * block) list
+    | LetRec of (string * (string * string) list * string option * block) list
                                           (* mutually recursive closures *)
 
   and block = stmt list * exp
@@ -40,7 +40,7 @@ module Ir = struct
     | Tuple es | ListLit es -> List.exists ordered es
     | Prepend (a, b) | Concat (a, b) -> ordered a || ordered b
     | Field (e, _) | Not e -> ordered e
-    | RefNew e -> ordered e
+    | RefNew _ -> true (* a fresh mutable cell: its identity matters *)
     | Deref _ -> true (* reads mutable state *)
     | Binop (("==" | "!=" | "&&" | "||"), a, b) -> ordered a || ordered b
     | Binop _ -> true (* arithmetic can overflow/divide by zero *)
@@ -117,11 +117,16 @@ module Ir = struct
         p (String.concat ", " (List.map (fun (x, t) -> x ^ " : " ^ t) params));
         p ") -> "; p ret; p " raise "; pblock b
     | LetRec fns ->
+        (* `fn(...) -> R raise { }`: a lambda in a letrec is not inferred to
+           raise *)
         List.iteri
-          (fun i (name, params, b) ->
-            nl (); p (if i = 0 then "letrec " else "and "); p name; p " = (";
-            p (String.concat ", " (List.map (fun (x, t) -> if t = "_" then x else x ^ " : " ^ t) params));
-            p ") => "; pblock b)
+          (fun i (name, params, ret, b) ->
+            nl (); p (if i = 0 then "letrec " else "and "); p name;
+            let ps = String.concat ", " (List.map (fun (x, t) -> if t = "_" then x else x ^ " : " ^ t) params) in
+            (match ret with
+             | Some r -> p " = fn("; p ps; p ") -> "; p r; p " raise "
+             | None -> p " = ("; p ps; p ") => ");
+            pblock b)
           fns
 
   let to_string f =

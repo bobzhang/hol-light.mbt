@@ -1,0 +1,49 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/trivia"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn eta_one() -> @kernel.Thm
+
+pub fn exists_one_rep() -> @kernel.Thm
+
+pub fn exists_one_thm() -> @kernel.Thm
+
+pub fn forall_one_thm() -> @kernel.Thm
+
+pub fn i_def() -> @kernel.Thm
+
+pub fn i_o_id() -> @kernel.Thm
+
+pub fn i_thm() -> @kernel.Thm
+
+pub fn o_assoc() -> @kernel.Thm
+
+pub fn o_def() -> @kernel.Thm
+
+pub fn o_thm() -> @kernel.Thm
+
+pub fn one() -> @kernel.Thm
+
+pub fn one_axiom() -> @kernel.Thm
+
+pub fn one_axiom_v1() -> @kernel.Thm
+
+pub fn one_def() -> @kernel.Thm
+
+pub fn one_induct() -> @kernel.Thm
+
+pub fn one_recursion() -> @kernel.Thm
+
+pub fn one_tydef() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

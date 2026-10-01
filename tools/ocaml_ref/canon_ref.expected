@@ -1,0 +1,273 @@
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Warning: inventing type variables
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Warning: inventing type variables
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 5
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 5
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 4
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 3
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 0
+Searching with limit 1
+Searching with limit 2
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+canon quotations (48):
+  ~(a \\/ b) ==> ~a
+  ~(a \\/ b) ==> ~b
+  ~a ==> ~b ==> ~(a \\/ b)
+  (~a <=> ~b) ==> (a <=> b)
+  a:bool
+  b:bool
+  (/\\)
+  (\\/)
+  (~)
+  ~ ~ p = p
+  ~(p /\\ q) <=> ~p \\/ ~q
+  ~(p \\/ q) <=> ~p /\\ ~q
+  p ==> q <=> ~p \\/ q
+  ~(p ==> q) <=> p /\\ ~q
+  (p <=> q) <=> p /\\ q \\/ ~p /\\ ~q
+  ~(p <=> q) <=> p /\\ ~q \\/ ~p /\\ q
+  (p <=> q) <=> (p \\/ ~q) /\\ (~p \\/ q)
+  ~(p <=> q) <=> (p \\/ q) /\\ (~p \\/ ~q)
+  (~((!) P) <=> ?x:A. ~(P x)) /\\\n     (~((?) P) <=> !x:A. ~(P x)) /\\\n     (~((?!) P) <=> (!x:A. ~(P x)) \\/ ?x y. P x /\\ P y /\\ ~(y = x))
+  a /\\ b ==> c <=> ~a \\/ ~b \\/ c
+  ((?!) P) <=> (?x:A. P x) /\\ !x y. ~(P x) \\/ ~(P y) \\/ (y = x)
+  p:bool
+  q:bool
+  a /\\ (b \\/ c) <=> a /\\ b \\/ a /\\ c
+  (a \\/ b) /\\ c <=> a /\\ c \\/ b /\\ c
+  a:bool
+  b:bool
+  c:bool
+  (\\/)
+  a \\/ (b /\\ c) <=> (a \\/ b) /\\ (a \\/ c)
+  (a /\\ b) \\/ c <=> (a \\/ c) /\\ (b \\/ c)
+  a:bool
+  b:bool
+  c:bool
+  (/\\)
+  (P:A->bool)((@) P) <=> (?) P
+  P:A->bool
+  P:A->bool
+  P:A->bool
+  (s = \\x. t x) <=> (!x. s x = t x)
+  (!a. (a = c) ==> (P = Q a)) ==> (P <=> !a. (a = c) ==> Q a)
+  b:bool
+  ((b <=> F) ==> x = x0) /\\ ((b <=> T) ==> x = x1)\n     ==> x = (b /\\ x1 \\/ ~b /\\ x0)
+  b:bool
+  ((b <=> F) ==> x = x0) /\\ ((b <=> T) ==> x = x1)\n     ==> x = ((~b \\/ x1) /\\ (b \\/ x0))
+  F
+  T
+  !(f:A->B) x. f x = I f x
+PRESIMP_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) a:bool) (#~:fun(bool,bool) b:bool)))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) #T:bool) c:bool)) #F:bool))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) a:bool) (#~:fun(bool,bool) b:bool)))) c:bool))
+NNF_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (#?:fun(fun('A,bool),bool) (\y:'A. ((Q:fun('A,fun('A,bool)) x:'A) y:'A))))))) (#~:fun(bool,bool) (#?:fun(fun('A,bool),bool) (\z:'A. ((#/\:fun(bool,fun(bool,bool)) (R:fun('A,bool) z:'A)) ((#=:fun(bool,fun(bool,bool)) (P:fun('A,bool) z:'A)) ((Q:fun('A,fun('A,bool)) z:'A) z:'A)))))))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (P:fun('A,bool) x:'A))) (#?:fun(fun('A,bool),bool) (\y:'A. ((Q:fun('A,fun('A,bool)) x:'A) y:'A))))))) (#!:fun(fun('A,bool),bool) (\z:'A. ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (R:fun('A,bool) z:'A))) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (P:fun('A,bool) z:'A)) ((Q:fun('A,fun('A,bool)) z:'A) z:'A))) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) (P:fun('A,bool) z:'A))) (#~:fun(bool,bool) ((Q:fun('A,fun('A,bool)) z:'A) z:'A)))))))))
+NNFC_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(bool,fun(bool,bool)) p:bool) q:bool))) ((#=:fun(bool,fun(bool,bool)) r:bool) (#~:fun(bool,bool) s:bool)))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) p:bool)) (#~:fun(bool,bool) q:bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) r:bool) s:bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) r:bool)) (#~:fun(bool,bool) s:bool)))))
+NNF_CONV_eq =  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(bool,fun(bool,bool)) p:bool) q:bool))) ((#=:fun(bool,fun(bool,bool)) r:bool) (#~:fun(bool,bool) s:bool)))) ((#\/:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) (#~:fun(bool,bool) q:bool))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) p:bool)) q:bool))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) r:bool) (#~:fun(bool,bool) s:bool))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) r:bool)) s:bool))))
+SKOLEM_CONV =  |- ((#=:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. (#?:fun(fun('B,bool),bool) (\y:'B. ((#/\:fun(bool,fun(bool,bool)) ((P:fun('A,fun('B,bool)) x:'A) y:'B)) (#?:fun(fun('C,bool),bool) (\z:'C. ((Q:fun('A,fun('C,bool)) x:'A) z:'C))))))))) (#?:fun(fun(fun('A,'B),bool),bool) (\y:fun('A,'B). (#?:fun(fun(fun('A,'C),bool),bool) (\z:fun('A,'C). ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. ((P:fun('A,fun('B,bool)) x:'A) (y:fun('A,'B) x:'A))))) (#!:fun(fun('A,bool),bool) (\x:'A. ((Q:fun('A,fun('C,bool)) x:'A) (z:fun('A,'C) x:'A))))))))))
+PRENEX_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\y:'A. (Q:fun('A,bool) y:'A))))) R:bool)) ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. (#?:fun(fun('A,bool),bool) (\y:'A. ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) y:'A))))))) R:bool))
+WEAK_DNF_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#\/:fun(bool,fun(bool,bool)) c:bool) d:bool))) ((#\/:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) c:bool)) ((#/\:fun(bool,fun(bool,bool)) b:bool) c:bool))) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) d:bool)) ((#/\:fun(bool,fun(bool,bool)) b:bool) d:bool))))
+DNF_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#\/:fun(bool,fun(bool,bool)) c:bool) a:bool))) ((#\/:fun(bool,fun(bool,bool)) a:bool) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) c:bool)) ((#/\:fun(bool,fun(bool,bool)) b:bool) c:bool)))))
+WEAK_CNF_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#/\:fun(bool,fun(bool,bool)) c:bool) d:bool))) ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) a:bool) c:bool)) ((#\/:fun(bool,fun(bool,bool)) b:bool) c:bool))) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) a:bool) d:bool)) ((#\/:fun(bool,fun(bool,bool)) b:bool) d:bool))))
+CNF_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#/\:fun(bool,fun(bool,bool)) c:bool) a:bool))) ((#/\:fun(bool,fun(bool,bool)) a:bool) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) a:bool) c:bool)) ((#\/:fun(bool,fun(bool,bool)) b:bool) c:bool)))))
+CONJ_CANON_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) b:bool) a:bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) c:bool))) ((#/\:fun(bool,fun(bool,bool)) a:bool) ((#/\:fun(bool,fun(bool,bool)) b:bool) c:bool)))
+DISJ_CANON_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) b:bool) a:bool)) ((#\/:fun(bool,fun(bool,bool)) a:bool) c:bool))) ((#\/:fun(bool,fun(bool,bool)) a:bool) ((#\/:fun(bool,fun(bool,bool)) b:bool) c:bool)))
+CONJ_ACI_RULE =  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool)) c:bool)) ((#/\:fun(bool,fun(bool,bool)) c:bool) ((#/\:fun(bool,fun(bool,bool)) b:bool) a:bool)))
+DISJ_ACI_RULE =  |- ((#=:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) a:bool) b:bool)) c:bool)) ((#\/:fun(bool,fun(bool,bool)) c:bool) ((#\/:fun(bool,fun(bool,bool)) b:bool) a:bool)))
+Warning: inventing type variables
+LAMBDA_ELIM_CONV =  |- ((#=:fun(bool,fun(bool,bool)) (P:fun(fun('A,'B),bool) (\x:'A. ((f:fun('A,fun('?3965,'B)) x:'A) y:'?3965)))) (#!:fun(fun(fun(fun('A,fun('?3965,'B)),fun('?3965,fun('A,'B))),bool),bool) (\_602:fun(fun('A,fun('?3965,'B)),fun('?3965,fun('A,'B))). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(fun('A,fun('?3965,'B)),bool),bool) (\f:fun('A,fun('?3965,'B)). (#!:fun(fun('?3965,bool),bool) (\y:'?3965. (#!:fun(fun('A,bool),bool) (\x:'A. ((#=:fun('B,fun('B,bool)) (((_602:fun(fun('A,fun('?3965,'B)),fun('?3965,fun('A,'B))) f:fun('A,fun('?3965,'B))) y:'?3965) x:'A)) ((f:fun('A,fun('?3965,'B)) x:'A) y:'?3965))))))))) (P:fun(fun('A,'B),bool) ((_602:fun(fun('A,fun('?3965,'B)),fun('?3965,fun('A,'B))) f:fun('A,fun('?3965,'B))) y:'?3965))))))
+CONDS_ELIM_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) (((#COND:fun(bool,fun('A,fun('A,'A))) b:bool) x:'A) y:'A))) c:bool)) ((#\/:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) b:bool) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) c:bool))) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) b:bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) y:'A)) c:bool))))
+CONDS_CELIM_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) (((#COND:fun(bool,fun('A,fun('A,'A))) b:bool) x:'A) y:'A))) c:bool)) ((#/\:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) b:bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) c:bool))) ((#\/:fun(bool,fun(bool,bool)) b:bool) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) y:'A)) c:bool))))
+ASSOC_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#/\:fun(bool,fun(bool,bool)) c:bool) d:bool))) ((#/\:fun(bool,fun(bool,bool)) a:bool) ((#/\:fun(bool,fun(bool,bool)) b:bool) ((#/\:fun(bool,fun(bool,bool)) c:bool) d:bool))))
+PROP_ATOM_CONV =  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) (#~:fun(bool,bool) ((#==>:fun(bool,fun(bool,bool)) b:bool) ((\x:bool. x:bool) c:bool))))) ((#/\:fun(bool,fun(bool,bool)) a:bool) (#~:fun(bool,bool) ((#==>:fun(bool,fun(bool,bool)) b:bool) c:bool))))
+GEN_NNF_CONV =  |- ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) p:bool) ((#\/:fun(bool,fun(bool,bool)) q:bool) (#~:fun(bool,bool) r:bool))))) ((#\/:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) p:bool)) ((#/\:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) q:bool)) r:bool)))
+SELECT_ELIM_TAC = [((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) Q:bool)]
+ASM_FOL_TAC = [[(#!:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))] ?- (P:fun('A,bool) a:'A)]
+Warning: inventing type variables
+counter_tyvar = zz_counter:'?4022
+counter_genvar = _603:bool

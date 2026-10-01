@@ -30,6 +30,10 @@ module Lower = struct
 
   let tyvar_names : (int, string) Hashtbl.t = Hashtbl.create 16
 
+  (* type variable id -> instance, while printing a monomorphised local
+     function *)
+  let tyvar_subst : (int, Types.type_expr) Hashtbl.t = Hashtbl.create 16
+
   let tyvar_name ty =
     let id = Types.get_id ty in
     match Hashtbl.find_opt tyvar_names id with
@@ -65,6 +69,7 @@ module Lower = struct
     | "ref" -> Some "Ref"
     | "num" | "Num.num" -> Some "@num.Num"
     | "lexcode" -> Some "@parser.Lexcode"
+    | "func" -> Some "@lib.Func"
     | "Stdlib.ref" -> Some "Ref"
     | _ -> None
 
@@ -111,7 +116,12 @@ module Lower = struct
   (* MoonBit source text of an OCaml type, using aliases where they exist. *)
   and show_ty ty =
     match Types.get_desc ty with
-    | Types.Tvar _ | Types.Tunivar _ -> tyvar_name ty
+    | Types.Tvar _ | Types.Tunivar _ ->
+        (match Hashtbl.find_opt tyvar_subst (Types.get_id ty) with
+         | Some inst -> Hashtbl.remove tyvar_subst (Types.get_id ty);
+             let r = show_ty inst in
+             Hashtbl.replace tyvar_subst (Types.get_id ty) inst; r
+         | None -> tyvar_name ty)
     | Types.Tarrow (_, a, b, _) ->
         let r = show_ty b in
         let r = if String.length r > 0 && r.[0] = '(' && is_arrow b then "(" ^ r ^ ")" else r in
@@ -213,7 +223,14 @@ module Lower = struct
     if List.mem s keywords then s ^ "_" else s
 
   let counter = ref 0
-  let fresh base = incr counter; Printf.sprintf "%s%d" base !counter
+
+  (* names taken in the current item (see `unique_local`) *)
+  let taken_names : (string, unit) Hashtbl.t = Hashtbl.create 64
+
+  let rec fresh base =
+    incr counter;
+    let n = Printf.sprintf "%s%d" base !counter in
+    if Hashtbl.mem taken_names n then fresh base else (Hashtbl.add taken_names n (); n)
 
   (* ---------------------------------------------------------------- *)
   (* Environment                                                        *)
@@ -226,7 +243,7 @@ module Lower = struct
 
   (* MoonBit names of the locals of the current item: each binding gets a
      distinct name, since lowering flattens nested scopes. *)
-  let local_names : (string, unit) Hashtbl.t = Hashtbl.create 64
+  let local_names = taken_names
 
   let unique_local base =
     let rec go i =
@@ -236,6 +253,10 @@ module Lower = struct
     go 0
 
   let bind_local ?oty id mty =
+    (* the alternatives of an or-pattern bind the same identifier *)
+    match Hashtbl.find_opt locals (Ident.unique_name id) with
+    | Some l -> l.name
+    | None ->
     let name = unique_local (sanitize (Ident.name id)) in
     Hashtbl.replace locals (Ident.unique_name id) { name; mty; loty = oty };
     name
@@ -267,20 +288,24 @@ module Lower = struct
       s;
     List.sort compare !acc
 
-  (* The local variables (already bound outside) that an expression uses. *)
-  let captures (e : Typedtree.expression) =
+  (* The local variables (already bound outside) that an expression uses,
+     with their types. *)
+  let captures_typed (e : Typedtree.expression) =
     let acc = ref [] in
     let open Tast_iterator in
     let expr sub e =
       (match e.Typedtree.exp_desc with
        | Typedtree.Texp_ident (Path.Pident id, _, _) when Hashtbl.mem locals (Ident.unique_name id) ->
-           acc := Ident.unique_name id :: !acc
+           if not (List.mem_assoc (Ident.unique_name id) !acc) then
+             acc := (Ident.unique_name id, e.Typedtree.exp_type) :: !acc
        | _ -> ());
       default_iterator.expr sub e
     in
     let it = { default_iterator with expr } in
     it.expr it e;
-    !acc
+    List.rev !acc
+
+  let captures e = List.map fst (captures_typed e)
 
   (* ---------------------------------------------------------------- *)
   (* Callees                                                            *)
@@ -815,6 +840,14 @@ module Lower = struct
              else Binop (op, Call (Atom "@lib.compare", [ a; b ]), Atom "0"))
       | ("+" | "-" | "*" | "/") as op -> (2, fun [ a; b ] _ -> Binop (op, a, b))
       | "mod" -> (2, fun [ a; b ] _ -> Binop ("%", a, b))
+      | ("min" | "max") as op ->
+          (* `let min a b = if a <= b then a else b` (polymorphic compare) *)
+          (2, fun [ a; b ] tys ->
+             let le =
+               if is_int (List.hd tys) then Binop ("<=", a, b)
+               else Binop ("<=", Call (Atom "@lib.compare", [ a; b ]), Atom "0")
+             in
+             if op = "min" then If (le, ([], a), ([], b)) else If (le, ([], b), ([], a)))
       | "~-" -> (1, fun [ a ] _ -> Binop ("-", Atom "0", a))
       | "^" -> (2, fun [ a; b ] _ -> Binop ("+", a, b))
       | "not" -> (1, fun [ a ] _ -> Not a)
@@ -845,7 +878,13 @@ module Lower = struct
       let rest = List.filteri (fun i _ -> i >= arity) args in
       if rest <> [] then unsupported loc "over-applied primitive %s" name;
       let lowered = List.map (fun a -> let ss, x, _ = lower a in (ss, x)) now in
-      let stmts, xs = schedule (List.rev lowered) in
+      let stmts, xs =
+        if name = "min" || name = "max" then
+          (* each argument is used twice: evaluate both first *)
+          let hs = List.map hoist (List.rev lowered) in
+          (List.concat_map fst hs, List.map snd hs)
+        else schedule (List.rev lowered)
+      in
       let xs = List.rev xs in
       adapt_to ?expect (stmts, mk xs arg_tys, mty_of whole.exp_type)
     end
@@ -1041,6 +1080,8 @@ module Lower = struct
                            let ss, v, vt = lower f in
                            let rest = List.filteri (fun j _ -> j >= i) atoms in
                            let ssa, v2, vt2 = apply_values loc (v, vt) (List.map (fun (n, t) -> (Atom n, t)) rest) in
+                           (* a completed application runs now, before the next closure *)
+                           let ssa, v2 = if gs = [] then (ssa, v2) else hoist (ssa, v2) in
                            let ss', b = go None (Some (v2, vt2)) gs in
                            (ss @ ssa @ ss', b))
                  in
@@ -1055,6 +1096,7 @@ module Lower = struct
                (match body_val with
                 | Some (v, vt) ->
                     let ssa, v2, vt2 = apply_values loc (v, vt) (List.map (fun (n, t) -> (Atom n, t)) atoms) in
+                    let ssa, v2 = if gs = [] then (ssa, v2) else hoist (ssa, v2) in
                     let ss', b = go None (Some (v2, vt2)) gs in
                     ([], Lam (List.map2 param names g, (ssa @ ss', b)))
                 | None -> assert false))
@@ -1100,43 +1142,34 @@ module Lower = struct
 
   (* --- let --- *)
 
+  (* `let p1 = e1 and p2 = e2 in body`: each binding is evaluated and its
+     pattern checked in turn (locals have distinct MoonBit names, so a later
+     right-hand side cannot see an earlier binding). *)
   and lower_let ?expect vbs body =
     match vbs with
-    | [ vb ] ->
+    | [] -> lower ?expect body
+    | vb :: rest ->
         let ss, x, t = lower vb.vb_expr in
-        let rest = fun () -> lower ?expect body in
         (match vb.vb_pat.pat_desc with
          | Tpat_var (id, _) ->
-             let name = bind_local id t in
-             let ss2, y, ty = rest () in
-             (ss @ [ Let (name, x) ] @ ss2, y, ty)
+             let name = bind_local ~oty:vb.vb_expr.exp_type id t in
+             let ss2, y, ty = lower_let ?expect rest body in
+             (* a function-valued local gets its recorded type, so that the
+                MoonBit value has exactly that type *)
+             let bind =
+               match t, show_mty t with
+               | M.Fun _, Some ts -> LetTyped (name, ts, x)
+               | _ -> Let (name, x)
+             in
+             (ss @ [ bind ] @ ss2, y, ty)
          | _ when irrefutable vb.vb_pat ->
              let pat = pattern ~mty:t vb.vb_pat in
-             let ss2, y, ty = rest () in
+             let ss2, y, ty = lower_let ?expect rest body in
              (ss @ [ Let (pat, x) ] @ ss2, y, ty)
          | _ ->
              let pat = pattern ~mty:t vb.vb_pat in
-             let ss2, y, ty = rest () in
-             ( ss, Match (x, [ (pat, (ss2, y)); ("_", ([], match_failure vb.vb_loc)) ]), ty ))
-    | _ ->
-        (* evaluate every right-hand side (left to right) before binding *)
-        let temps =
-          List.map
-            (fun vb ->
-              let ss, x, t = lower vb.vb_expr in
-              let tmp = fresh "t" in
-              (ss @ [ Let (tmp, x) ], tmp, t, vb))
-            vbs
-        in
-        let binds =
-          List.map
-            (fun (_, tmp, t, vb) ->
-              if not (irrefutable vb.vb_pat) then unsupported vb.vb_loc "refutable let-and";
-              Let (pattern ~mty:t vb.vb_pat, Atom tmp))
-            temps
-        in
-        let ss2, y, ty = lower ?expect body in
-        (List.concat_map (fun (ss, _, _, _) -> ss) temps @ binds @ ss2, y, ty)
+             let ss2, y, ty = lower_let ?expect rest body in
+             (ss, Match (x, [ (pat, (ss2, y)); ("_", ([], match_failure vb.vb_loc)) ]), ty))
 
   (* --- let rec: local functions --- *)
 
@@ -1148,7 +1181,7 @@ module Lower = struct
        when its argument arrives: collect no parameters after it *)
     let rec params e acc =
       match e.exp_desc with
-      | Texp_function { cases = [ c ]; _ } when irrefutable c.c_lhs -> params c.c_rhs (e :: acc)
+      | Texp_function { cases = [ c ]; _ } when irrefutable c.c_lhs && c.c_guard = None -> params c.c_rhs (e :: acc)
       | Texp_function { cases = _ :: _; _ } when acc = [] -> ([ e ], body_after e)
       | Texp_function _ -> (List.rev (e :: acc), body_after e)
       | _ -> (List.rev acc, e)
@@ -1183,16 +1216,51 @@ module Lower = struct
         vbs
     in
     (* captured outer locals, before binding the functions themselves *)
-    let captured = List.concat_map (fun (_, e, _, _, _) -> captures e) fns in
+    let captured_typed = List.concat_map (fun (_, e, _, _, _) -> captures_typed e) fns in
+    let captured = List.map fst captured_typed in
     let sig_text (_, _, param_tys, fbody, _) =
       String.concat " " (List.map show_ty (fbody.exp_type :: param_tys))
     in
     let foreign = List.filter (fun v -> not (List.mem v !scope_tyvars)) (tyvars_of_text (String.concat " " (List.map sig_text fns))) in
     let lift = foreign <> [] && captured = [] in
+    (* otherwise, monomorphise at the instance the rest of the code uses *)
+    if foreign <> [] && not lift then begin
+      let uses = ref [] in
+      let open Tast_iterator in
+      let ids = List.map (fun (id, _, _, _, _) -> Ident.unique_name id) fns in
+      let expr sub e =
+        (match e.exp_desc with
+         | Texp_ident (Path.Pident id, _, _) when List.mem (Ident.unique_name id) ids ->
+             uses := (Ident.unique_name id, e.exp_type) :: !uses
+         | _ -> ());
+        default_iterator.expr sub e
+      in
+      let it = { default_iterator with expr } in
+      it.expr it body;
+      let rec unify g i =
+        match Types.get_desc g, Types.get_desc i with
+        | (Types.Tvar _ | Types.Tunivar _), _ ->
+            if not (Hashtbl.mem tyvar_subst (Types.get_id g)) then Hashtbl.replace tyvar_subst (Types.get_id g) i
+        | Types.Tarrow (_, a1, b1, _), Types.Tarrow (_, a2, b2, _) -> unify a1 a2; unify b1 b2
+        | Types.Ttuple ts1, Types.Ttuple ts2 when List.length ts1 = List.length ts2 -> List.iter2 unify ts1 ts2
+        | Types.Tconstr (_, as1, _), Types.Tconstr (_, as2, _) when List.length as1 = List.length as2 -> List.iter2 unify as1 as2
+        | _ -> ()
+      in
+      List.iter
+        (fun (id, e, _, _, _) ->
+          match List.assoc_opt (Ident.unique_name id) !uses with
+          | Some inst -> unify e.exp_type inst
+          | None -> ())
+        fns
+    end;
+    let foreign =
+      if lift then foreign
+      else List.filter (fun v -> not (List.mem v !scope_tyvars)) (tyvars_of_text (String.concat " " (List.map sig_text fns)))
+    in
     let names =
       List.map
         (fun (id, e, _, _, want) ->
-          let name = if lift then fresh (sanitize (Ident.name id) ^ "_") else sanitize (Ident.name id) in
+          let name = if lift then fresh (sanitize (Ident.name id) ^ "_") else unique_local (sanitize (Ident.name id)) in
           Hashtbl.replace locals (Ident.unique_name id) { name; mty = want; loty = Some e.exp_type };
           name)
         fns
@@ -1214,6 +1282,7 @@ module Lower = struct
         names fns
     in
     scope_tyvars := saved_scope;
+    Hashtbl.reset tyvar_subst;
     let paren r = if String.length r > 0 && r.[0] = '(' then "(" ^ r ^ ")" else r in
     if lift then begin
       List.iter
@@ -1222,7 +1291,7 @@ module Lower = struct
           (* OCaml's polymorphic equality and comparison *)
           let gens =
             if gens = [] then ""
-            else "[" ^ String.concat ", " (List.map (fun g -> g ^ " : Eq + @lib.OCompare") gens) ^ "]"
+            else "[" ^ String.concat ", " (List.map (fun g -> g ^ " : Eq + @lib.OCompare + @lib.OHash") gens) ^ "]"
           in
           lifted :=
             Printf.sprintf "\n///|\nfn%s %s(%s) -> %s raise %s\n" gens name (String.concat ", " ps) (paren ret)
@@ -1232,13 +1301,58 @@ module Lower = struct
       lower ?expect body
     end else begin
       let split p = match String.index_opt p ':' with Some i -> (String.trim (String.sub p 0 i), String.trim (String.sub p (i + 1) (String.length p - i - 1))) | None -> (p, "_") in
-      let def =
-        match lowered with
-        | [ (name, ps, ret, b) ] when foreign = [] -> LetFn (name, List.map split ps, paren ret, b)
-        | _ -> LetRec (List.map (fun (n, ps, _, b) -> (n, List.map split ps, b)) lowered)
-      in
-      let ss, y, ty = lower ?expect body in
-      (def :: ss, y, ty)
+      match lowered with
+      | [ (name, ps, ret, b) ] when foreign = [] ->
+          let ss, y, ty = lower ?expect body in
+          (LetFn (name, List.map split ps, paren ret, b) :: ss, y, ty)
+      | [ _ ] ->
+          let def = LetRec (List.map (fun (n, ps, _, b) -> (n, List.map split ps, None, b)) lowered) in
+          let ss, y, ty = lower ?expect body in
+          (def :: ss, y, ty)
+      | _ ->
+          (* Mutually recursive local functions are lifted to the top level
+             (MoonBit's `letrec` of large closures miscompiles): captured
+             variables become leading parameters, and each body, like the
+             definition site, binds closures for the group's functions. *)
+          let rec_ids = List.map (fun (id, _, _, _, _) -> Ident.unique_name id) fns in
+          let caps =
+            List.fold_left
+              (fun acc (u, t) -> if List.mem u rec_ids || List.mem_assoc u acc then acc else acc @ [ (u, t) ])
+              [] captured_typed
+          in
+          let caps =
+            List.map
+              (fun (u, oty) ->
+                let l = Hashtbl.find locals u in
+                let ty = match show_mty l.mty with Some t -> t | None -> show_ty oty in
+                (l.name, ty))
+              caps
+          in
+          let lifted_names = List.map (fun (name, _, _, _) -> fresh (name ^ "_l")) lowered in
+          let closures =
+            List.map2
+              (fun (name, ps, _, _) lname ->
+                let params = List.map split ps in
+                let xs = List.map fst params in
+                let lam_params = List.map (fun (x, t) -> if t = "_" then x else x ^ " : " ^ t) params in
+                Let (name, Lam (lam_params, ([], Call (Atom lname, List.map (fun (c, _) -> Atom c) caps @ List.map (fun x -> Atom x) xs)))))
+              lowered lifted_names
+          in
+          List.iter2
+            (fun (_, ps, ret, (bss, bx)) lname ->
+              let all_ps = List.map (fun (c, t) -> c ^ " : " ^ t) caps @ ps in
+              let gens = tyvars_of_text (String.concat " " (ret :: all_ps)) in
+              let gens =
+                if gens = [] then ""
+                else "[" ^ String.concat ", " (List.map (fun g -> g ^ " : Eq + @lib.OCompare + @lib.OHash") gens) ^ "]"
+              in
+              lifted :=
+                Printf.sprintf "\n///|\nfn%s %s(%s) -> %s raise %s\n" gens lname (String.concat ", " all_ps) (paren ret)
+                  (Ir.to_string (fun () -> Ir.pblock (closures @ bss, bx)))
+                :: !lifted)
+            lowered lifted_names;
+          let ss, y, ty = lower ?expect body in
+          (closures @ ss, y, ty)
     end
 
   (* --- match / try --- *)
