@@ -18,6 +18,14 @@ module Lower = struct
   module M = Mbti
   open Ir
 
+  (* A constructor of a predefined exception (Failure, Not_found, ...), not
+     a user exception of the same name *)
+  let predef_exn (cd : Types.constructor_description) =
+    match cd.cstr_tag with
+    | Cstr_extension (Path.Pident id, _) -> Ident.is_predef id
+    | Cstr_extension (Path.Pdot (Path.Pident m, _), _) -> Ident.name m = "Stdlib" && Ident.global m
+    | _ -> false
+
   (* MoonBit rejects a bare `match`/`if`/block expression as a pattern guard *)
   let guard_str g =
     match g with
@@ -1669,6 +1677,13 @@ module Lower = struct
     end
     else begin
       (* partial application: evaluate the supplied arguments, then a closure *)
+      let rec has_optional t =
+        match Types.get_desc (Ctype.expand_head whole.exp_env t) with
+        | Types.Tarrow (Asttypes.Optional _, _, _, _) -> true
+        | Types.Tarrow (_, _, r, _) -> has_optional r
+        | _ -> false
+      in
+      if has_optional f.exp_type then unsupported loc "partial application of %s (optional arguments)" name;
       let lowered = List.mapi (fun i a -> hoist (prim_arg name i a)) args in
       let stmts = List.concat_map fst (List.rev lowered) in
       let supplied = List.map snd lowered in
@@ -1740,8 +1755,11 @@ module Lower = struct
         let missing = List.filteri (fun i _ -> i >= List.length rest) convs |> List.map (fun t -> (fresh "x", t)) in
         let xs = ref (List.rev xs @ List.map (fun (n, _) -> Atom n) missing) in
         let next () = match !xs with x :: r -> xs := r; x | [] -> unsupported loc "printf arguments" in
-        let pieces = ref [] and buf = Buffer.create 16 and flush = ref false in
+        (* the output is a sequence of strings and flushes (`%!`) *)
+        let pieces = ref [] and buf = Buffer.create 16 and items = ref [] in
         let lit () = if Buffer.length buf > 0 then (pieces := Atom (string_lit (Buffer.contents buf)) :: !pieces; Buffer.clear buf) in
+        let concat ps = match List.rev ps with [] -> Atom "\"\"" | p :: ps -> List.fold_left (fun a b -> Binop ("+", a, b)) p ps in
+        let close () = lit (); if !pieces <> [] then (items := `Str (concat !pieces) :: !items; pieces := []) in
         let n = String.length text in
         let i = ref 0 in
         while !i < n do
@@ -1749,7 +1767,7 @@ module Lower = struct
              (match text.[!i + 1] with
               | 's' -> lit (); pieces := next () :: !pieces
               | 'd' | 'i' -> lit (); pieces := Call (Atom "@lib.string_of_int", [ next () ]) :: !pieces
-              | '!' -> flush := true
+              | '!' -> close (); items := `Flush :: !items
               | '%' -> Buffer.add_char buf '%'
               | c -> unsupported loc "printf conversion %%%c" c);
              i := !i + 2
@@ -1759,8 +1777,9 @@ module Lower = struct
              unsupported loc "Format directive @"
            else (Buffer.add_char buf text.[!i]; incr i))
         done;
-        lit ();
-        let str = match List.rev !pieces with [] -> Atom "\"\"" | p :: ps -> List.fold_left (fun a b -> Binop ("+", a, b)) p ps in
+        close ();
+        let items = List.rev !items in
+        let str = concat (List.rev (List.filter_map (function `Str e -> Some e | `Flush -> None) items)) in
         let curry (body, ty) =
           List.fold_right
             (fun (n, t) (b, ty) -> (Lam ([ n ^ " : " ^ t ], ([], b)), M.Fun ([ M.Named (t, []) ], ty, true)))
@@ -1771,7 +1790,9 @@ module Lower = struct
           else let e, t = curry (str, M.Named ("String", [])) in adapt_to ?expect (stmts, e, t)
         else
           let out = if name = "Printf.printf" then "@pp.print_string" else "@pp.std_formatter.print_string" in
-          let calls = [ Do (Call (Atom out, [ str ])) ] @ (if !flush then [ Do (Call (Atom (if name = "Printf.printf" then "@pp.flush_stdout_backlog" else "@pp.std_formatter.print_flush"), [])) ] else []) in
+          let flush = if name = "Printf.printf" then "@pp.flush_stdout_backlog" else "@pp.std_formatter.print_flush" in
+          let calls = List.map (function `Str e -> Do (Call (Atom out, [ e ])) | `Flush -> Do (Call (Atom flush, []))) items in
+          let calls = if calls = [] then [ Do (Call (Atom out, [ Atom "\"\"" ])) ] else calls in
           if missing = [] then (stmts, Blk (calls, Atom "()"), M.Named ("Unit", []))
           else let e, t = curry (Blk (calls, Atom "()"), M.Named ("Unit", [])) in adapt_to ?expect (stmts, e, t)
     | [] -> unsupported loc "printf"
@@ -1905,11 +1926,11 @@ module Lower = struct
              (stmts, Prepend (List.nth xs 0, List.nth xs 1), mty_of e.exp_type))
     | ("()" | "true" | "false" | "None"), [] -> ([], Atom cd.Types.cstr_name, mty_of e.exp_type)
     | "Some", [ a ] -> let ss, x, _ = lower a in (ss, Call (Atom "Some", [ x ]), mty_of e.exp_type)
-    | "Failure", [ a ] -> let ss, x, _ = lower a in (ss, Call (Atom "Failure", [ x ]), mty_of e.exp_type)
-    | "Invalid_argument", [ a ] -> let ss, x, _ = lower a in (ss, Call (Atom "@num.InvalidArgument", [ x ]), mty_of e.exp_type)
+    | "Failure", [ a ] when predef_exn cd -> let ss, x, _ = lower a in (ss, Call (Atom "Failure", [ x ]), mty_of e.exp_type)
+    | "Invalid_argument", [ a ] when predef_exn cd -> let ss, x, _ = lower a in (ss, Call (Atom "@num.InvalidArgument", [ x ]), mty_of e.exp_type)
     | "Noparse", [] -> ([], Atom "@parser.Noparse", mty_of e.exp_type)
     | "Unchanged", [] -> ([], Atom "@lib.Unchanged", mty_of e.exp_type)
-    | "Not_found", [] -> ([], Atom "@lib.NotFound", mty_of e.exp_type)
+    | "Not_found", [] when predef_exn cd -> ([], Atom "@lib.NotFound", mty_of e.exp_type)
     | name, [] when Hashtbl.mem own_ctors name -> ([], Atom (ctor_name ~cd name), mty_of e.exp_type)
     | name, args when Hashtbl.mem own_ctors name ->
         (* constructor arguments are evaluated right to left *)
@@ -2160,11 +2181,25 @@ module Lower = struct
     if List.exists (fun (_, p) -> match p with Some (pre, _) -> pre <> [] | None -> false) peeled then begin
       let prefixes = List.concat_map (fun (_, p) -> match p with Some (pre, _) -> pre | None -> []) peeled in
       if List.exists (fun (_, pvbs) -> mentions_group pvbs) prefixes then unsupported loc "recursive value whose set-up uses itself";
+      (* the set-ups and the values outside the group, in binding order *)
+      let steps =
+        List.concat_map
+          (fun (vb, p) ->
+            match p with
+            | Some (pre, _) -> pre
+            | None -> if List.memq vb values then [ (Asttypes.Nonrecursive, [ vb ]) ] else [])
+          peeled
+      in
       let vbs' =
-        List.map (fun (vb, p) -> match p with Some (_, f) -> { vb with vb_expr = f } | None -> vb) peeled
+        List.filter_map
+          (fun (vb, p) ->
+            match p with
+            | Some (_, f) -> Some { vb with vb_expr = f }
+            | None -> if List.memq vb values then None else Some vb)
+          peeled
       in
       let inner = { body with exp_desc = Texp_let (Asttypes.Recursive, vbs', body) } in
-      let nested = List.fold_right (fun (rf, pvbs) acc -> { body with exp_desc = Texp_let (rf, pvbs, acc) }) prefixes inner in
+      let nested = List.fold_right (fun (rf, pvbs) acc -> { body with exp_desc = Texp_let (rf, pvbs, acc) }) steps inner in
       lower ?expect nested
     end else
     let fns =
@@ -2393,11 +2428,11 @@ module Lower = struct
       | Tpat_value v -> exn_pattern (v :> value general_pattern)
       | Tpat_construct (_, cd, args, _) ->
           (match cd.Types.cstr_name, args with
-           | "Failure", [ a ] -> "Failure(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
-           | "Invalid_argument", [ a ] -> "@num.InvalidArgument(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
+           | "Failure", [ a ] when predef_exn cd -> "Failure(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
+           | "Invalid_argument", [ a ] when predef_exn cd -> "@num.InvalidArgument(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
            | "Noparse", [] -> "@parser.Noparse"
            | "Unchanged", [] -> "@lib.Unchanged"
-           | "Not_found", [] -> "@lib.NotFound"
+           | "Not_found", [] when predef_exn cd -> "@lib.NotFound"
            | "Match_failure", [ { pat_desc = Tpat_any; _ } ] -> "@lib.MatchFailure(_)"
            | name, [] when Hashtbl.mem own_ctors name -> ctor_name ~cd name
            | name, args when Hashtbl.mem own_ctors name ->

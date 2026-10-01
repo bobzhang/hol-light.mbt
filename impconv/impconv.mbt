@@ -3476,14 +3476,17 @@ fn step_1() -> Unit raise {
     @list.List([@class.not_forall_thm(), @class.not_imp()]),
     @list.empty(),
   )
-  let bigger_net : (Unit) -> @nets.Net[@simp.Gconv] raise = fn(
+  let bigger_net : (Unit) -> @nets.Net[
+    @simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise],
+  ] raise = fn(
     x595 : Unit,
-  ) -> @nets.Net[@simp.Gconv] raise {
+  ) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise {
     let _ = x595
     @lib.itlist(
-      (x596 : @kernel.Thm, x597 : @nets.Net[@simp.Gconv]) => {
-        @simp.net_of_thm(false, x596, x597)
-      },
+      (
+        x596 : @kernel.Thm,
+        x597 : @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]],
+      ) => @simp.net_of_thm(false, x596, x597),
       extra_basic_rewrites,
       @simp.basic_net(),
     )
@@ -6359,7 +6362,9 @@ fn[TBJ] top_depth_l(
 
 ///|
 fn[TBO, TBP] basic_cnv_l(
-  bigger_net : (Unit) -> @nets.Net[@simp.Gconv] raise,
+  bigger_net : (Unit) -> @nets.Net[
+    @simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise],
+  ] raise,
   x598 : @kernel.Term,
 ) -> (@kernel.Thm, TBO?, @list.List[TBP]) raise {
   let t_63 = x598

@@ -7424,13 +7424,15 @@ fn step_47() -> Unit raise {
 }
 
 ///|
-let basic_rectype_net_c : @lib.Cell[Ref[@nets.Net[@simp.Gconv]]] = @lib.Cell::new(
-  "basic_rectype_net",
-)
+let basic_rectype_net_c : @lib.Cell[
+  Ref[@nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]],
+] = @lib.Cell::new("basic_rectype_net")
 
 ///|
 /// `basic_rectype_net`
-pub fn basic_rectype_net() -> Ref[@nets.Net[@simp.Gconv]] {
+pub fn basic_rectype_net() -> Ref[
+  @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]],
+] {
   basic_rectype_net_c.get()
 }
 
@@ -7517,9 +7519,10 @@ pub fn[TA, TB] extend_rectype_net(
     ()
   }
   basic_rectype_net().val = @lib.itlist(
-    (x926 : @kernel.Thm, x927 : @nets.Net[@simp.Gconv]) => {
-      @simp.net_of_thm(true, x926, x927)
-    },
+    (
+      x926 : @kernel.Thm,
+      x927 : @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]],
+    ) => @simp.net_of_thm(true, x926, x927),
     canon_thl,
     basic_rectype_net().val,
   )
@@ -8546,9 +8549,10 @@ fn step_57() -> Unit raise {
     @list.empty(),
   )
   let net = @lib.itlist(
-    (x1074 : @kernel.Thm, x1075 : @nets.Net[@simp.Gconv]) => {
-      @simp.net_of_thm(false, x1074, x1075)
-    },
+    (
+      x1074 : @kernel.Thm,
+      x1075 : @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]],
+    ) => @simp.net_of_thm(false, x1074, x1075),
     ths,
     @simp.basic_net(),
   )
