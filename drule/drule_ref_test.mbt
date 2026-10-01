@@ -214,6 +214,22 @@ test "drule matches drule.ml" {
   })
   log.attempt("counter_tyvar", () => stm(tm("zz_counter")))
   log.attempt("counter_genvar", () => stm(@basics.genvar(@kernel.bool_ty)))
+  log.attempt("term_unify_abs_bad", () => {
+    let t1 = tm("\\x:bool. x")
+    let t2 = tm("(~)")
+    sinst(@drule.term_unify(@list.empty(), t1, t2))
+  })
+  log.attempt("term_type_unify_abs_bad", () => {
+    let t1 = tm("\\x:bool. x")
+    let t2 = tm("(~)")
+    sinst(
+      @drule.term_type_unify(
+        t1,
+        t2,
+        (@list.empty(), @list.empty(), @list.empty()),
+      ),
+    )
+  })
   inspect(
     log.contents(),
     content=(
@@ -274,6 +290,8 @@ test "drule matches drule.ml" {
       #|Warning: inventing type variables
       #|counter_tyvar = zz_counter:'?618
       #|counter_genvar = _7:bool
+      #|term_unify_abs_bad ! body: Not an abstraction
+      #|term_type_unify_abs_bad ! body: Not an abstraction
       #|
     ),
   )

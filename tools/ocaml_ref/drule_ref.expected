@@ -55,3 +55,5 @@ constants = TWICE ?! ~ F \/ ? ! ==> /\ T =
 Warning: inventing type variables
 counter_tyvar = zz_counter:'?618
 counter_genvar = _7:bool
+term_unify_abs_bad ! body: Not an abstraction
+term_type_unify_abs_bad ! body: Not an abstraction

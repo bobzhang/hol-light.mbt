@@ -716,10 +716,11 @@ fn tu_unify(
     }
   } else if @kernel.is_abs(tm1) {
     let tm11 = @basics.body(tm1)
-    let tm21 = @basics.subst(
-      @list.singleton((@basics.bndvar(tm1), @basics.bndvar(tm2))),
-      @basics.body(tm2),
-    )
+    // `subst [bndvar tm1,bndvar tm2] (body tm2)`: OCaml evaluates the
+    // argument first, then the tuple right to left.
+    let b2 = @basics.body(tm2)
+    let v2 = @basics.bndvar(tm2)
+    let tm21 = @basics.subst(@list.singleton((@basics.bndvar(tm1), v2)), b2)
     tu_unify(vars, tm11, tm21, sofar)
   } else {
     let (l1, r1) = @kernel.dest_comb(tm1)
@@ -876,10 +877,11 @@ fn ttu_unify(
     }
   } else if @kernel.is_abs(tm1) {
     let tm11 = @basics.body(tm1)
-    let tm21 = @basics.subst(
-      @list.singleton((@basics.bndvar(tm1), @basics.bndvar(tm2))),
-      @basics.body(tm2),
-    )
+    // `subst [bndvar tm1,bndvar tm2] (body tm2)`: OCaml evaluates the
+    // argument first, then the tuple right to left.
+    let b2 = @basics.body(tm2)
+    let v2 = @basics.bndvar(tm2)
+    let tm21 = @basics.subst(@list.singleton((@basics.bndvar(tm1), v2)), b2)
     ttu_unify(tm11, tm21, sofar)
   } else if @kernel.is_const(tm1) {
     if @printer.name_of(tm1) != @printer.name_of(tm2) {

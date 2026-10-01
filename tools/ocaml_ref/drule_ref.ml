@@ -66,3 +66,5 @@ attempt "axioms" (fun () -> String.concat " ;; " (map sthm (axioms())));;
 attempt "constants" (fun () -> String.concat " " (map fst (constants())));;
 attempt "counter_tyvar" (fun () -> stm (tm "zz_counter"));;
 attempt "counter_genvar" (fun () -> stm (genvar bool_ty));;
+attempt "term_unify_abs_bad" (fun () -> let t1 = tm "\\x:bool. x" in let t2 = tm "(~)" in sinst (term_unify [] t1 t2));;
+attempt "term_type_unify_abs_bad" (fun () -> let t1 = tm "\\x:bool. x" in let t2 = tm "(~)" in sinst (term_type_unify t1 t2 ([],[],[])));;
