@@ -115,15 +115,15 @@ fn label_to_store(lconsts : List[Term], tm : Term) -> (Label, List[Term]) {
 
 ///|
 /// Insert into a sorted tip list; equal elements are not duplicated.
-fn[A : NetCompare] set_insert(x : A, l : List[A]) -> List[A] {
+fn[A] set_insert(cmp : (A, A) -> Int?, x : A, l : List[A]) -> List[A] {
   let prefix = []
   let mut rest = l
   while rest is More(h, tail=t) {
-    match h.net_compare(x) {
+    match cmp(h, x) {
       Some(0) => return l
       _ => ()
     }
-    match x.net_compare(h) {
+    match cmp(x, h) {
       Some(c) if c < 0 => break
       _ => ()
     }
@@ -138,18 +138,19 @@ fn[A : NetCompare] set_insert(x : A, l : List[A]) -> List[A] {
 }
 
 ///|
-fn[A : NetCompare] net_update(
+fn[A] net_update(
+  cmp : (A, A) -> Int?,
   lconsts : List[Term],
   elem : A,
   tms : List[Term],
   net : Net[A],
 ) -> Net[A] {
   match tms {
-    Empty => { ..net, tips: set_insert(elem, net.tips), }
+    Empty => { ..net, tips: set_insert(cmp, elem, net.tips), }
     More(tm, tail=rtms) => {
       let (label, ntms) = label_to_store(lconsts, tm)
       let upd = (child : Net[A]) => {
-        net_update(lconsts, elem, ntms.concat(rtms), child)
+        net_update(cmp, lconsts, elem, ntms.concat(rtms), child)
       }
       match label {
         Vnet => {
@@ -185,7 +186,36 @@ pub fn[A : NetCompare] enter(
   elem : A,
   net : Net[A],
 ) -> Net[A] {
-  net_update(lconsts, elem, @list.singleton(tm), net)
+  net_update(
+    (a : A, b : A) => a.net_compare(b),
+    lconsts,
+    elem,
+    @list.singleton(tm),
+    net,
+  )
+}
+
+///|
+/// OCaml's `compare` on closures: equal when physically equal, else it
+/// raises (`None`, see `NetCompare`).
+fn[A] closure_compare(a : A, b : A) -> Int? {
+  if physical_equal(a, b) {
+    Some(0)
+  } else {
+    None
+  }
+}
+
+///|
+/// `enter` for a net of functions (MoonBit closures cannot implement
+/// `NetCompare`).
+pub fn[A] enter_fn(
+  lconsts : List[Term],
+  tm : Term,
+  elem : A,
+  net : Net[A],
+) -> Net[A] {
+  net_update(closure_compare, lconsts, elem, @list.singleton(tm), net)
 }
 
 ///|
@@ -230,7 +260,7 @@ pub fn[A] lookup(tm : Term, net : Net[A]) -> List[A] {
 }
 
 ///|
-fn[A : NetCompare] set_merge(l1 : List[A], l2 : List[A]) -> List[A] {
+fn[A] set_merge(cmp : (A, A) -> Int?, l1 : List[A], l2 : List[A]) -> List[A] {
   let out = []
   let mut a = l1
   let mut b = l2
@@ -244,7 +274,7 @@ fn[A : NetCompare] set_merge(l1 : List[A], l2 : List[A]) -> List[A] {
         return acc
       }
       (More(h1, tail=t1), More(h2, tail=t2)) =>
-        match h1.net_compare(h2) {
+        match cmp(h1, h2) {
           Some(0) => {
             out.push(h1)
             a = t1
@@ -265,18 +295,31 @@ fn[A : NetCompare] set_merge(l1 : List[A], l2 : List[A]) -> List[A] {
 }
 
 ///|
-/// Merge two nets (code from Don Syme's hol-lite).
-pub fn[A : NetCompare] merge_nets(n1 : Net[A], n2 : Net[A]) -> Net[A] {
+fn[A] merge_nets_by(cmp : (A, A) -> Int?, n1 : Net[A], n2 : Net[A]) -> Net[A] {
   let vnet = match (n1.vnet, n2.vnet) {
-    (Some(x), Some(y)) => Some(merge_nets(x, y))
+    (Some(x), Some(y)) => Some(merge_nets_by(cmp, x, y))
     (Some(_), None) => n1.vnet
     (None, _) => n2.vnet
   }
   {
     vnet,
-    cnets: n1.cnets.union_with(n2.cnets, (_, a, b) => merge_nets(a, b)),
-    lcnets: n1.lcnets.union_with(n2.lcnets, (_, a, b) => merge_nets(a, b)),
-    lnets: n1.lnets.union_with(n2.lnets, (_, a, b) => merge_nets(a, b)),
-    tips: set_merge(n1.tips, n2.tips),
+    cnets: n1.cnets.union_with(n2.cnets, (_, a, b) => merge_nets_by(cmp, a, b)),
+    lcnets: n1.lcnets.union_with(n2.lcnets, (_, a, b) => {
+      merge_nets_by(cmp, a, b)
+    }),
+    lnets: n1.lnets.union_with(n2.lnets, (_, a, b) => merge_nets_by(cmp, a, b)),
+    tips: set_merge(cmp, n1.tips, n2.tips),
   }
+}
+
+///|
+/// Merge two nets (code from Don Syme's hol-lite).
+pub fn[A : NetCompare] merge_nets(n1 : Net[A], n2 : Net[A]) -> Net[A] {
+  merge_nets_by((a : A, b : A) => a.net_compare(b), n1, n2)
+}
+
+///|
+/// `merge_nets` for nets of functions.
+pub fn[A] merge_nets_fn(n1 : Net[A], n2 : Net[A]) -> Net[A] {
+  merge_nets_by(closure_compare, n1, n2)
 }

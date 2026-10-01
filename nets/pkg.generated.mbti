@@ -11,9 +11,13 @@ pub fn[A] empty_net() -> Net[A]
 
 pub fn[A : NetCompare] enter(@list.List[@kernel.Term], @kernel.Term, A, Net[A]) -> Net[A]
 
+pub fn[A] enter_fn(@list.List[@kernel.Term], @kernel.Term, A, Net[A]) -> Net[A]
+
 pub fn[A] lookup(@kernel.Term, Net[A]) -> @list.List[A]
 
 pub fn[A : NetCompare] merge_nets(Net[A], Net[A]) -> Net[A]
+
+pub fn[A] merge_nets_fn(Net[A], Net[A]) -> Net[A]
 
 // Errors
 

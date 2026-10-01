@@ -1256,11 +1256,26 @@ module Lower = struct
         apply_head ?expect ~res:whole.exp_type loc { hstmts = []; hexp = Atom l.name; hmty; hoty = l.loty } args
     | Texp_ident (p, _, vd) ->
         let h = global_head loc p vd in
+        let h = closure_net_variant p f.exp_type h in
         apply_head ?expect ~res:whole.exp_type loc { h with hmty = refine h.hmty (mty_of f.exp_type) } args
     | _ ->
         if args = [] then unsupported loc "value";
         let ss, x, ty = lower f in
         apply_head ?expect ~res:whole.exp_type loc { hstmts = ss; hexp = x; hmty = ty; hoty = Some f.exp_type } args
+
+  (* nets.ml's enter/merge_nets on a net of functions: the nets package's
+     _fn variants (MoonBit closures cannot implement NetCompare) *)
+  and closure_net_variant p fty h =
+    match Prov.lookup p, h.hexp with
+    | Some ("nets.ml", ("enter" | "merge_nets")), Atom q ->
+        let rec result t = match arrow t with Some (_, b) -> result b | None -> t in
+        let elem_is_fn =
+          match Types.get_desc (expand (result fty)) with
+          | Types.Tconstr (_, [ a ], _) -> is_arrow a
+          | _ -> false
+        in
+        if elem_is_fn then { h with hexp = Atom (q ^ "_fn") } else h
+    | _ -> h
 
   (* Apply a head to OCaml arguments (source order). *)
   and note_bounds (args : expression list) =

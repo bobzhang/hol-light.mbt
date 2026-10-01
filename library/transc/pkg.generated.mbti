@@ -1,0 +1,692 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/transc"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/nets",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn acs() -> @kernel.Thm
+
+pub fn acs_bounds() -> @kernel.Thm
+
+pub fn acs_bounds_lt() -> @kernel.Thm
+
+pub fn acs_cos() -> @kernel.Thm
+
+pub fn acs_mono_lt() -> @kernel.Thm
+
+pub fn acs_v1() -> @kernel.Thm
+
+pub fn add_to_diff_net(@kernel.Thm) -> Unit raise
+
+pub fn asn() -> @kernel.Thm
+
+pub fn asn_bounds() -> @kernel.Thm
+
+pub fn asn_bounds_lt() -> @kernel.Thm
+
+pub fn asn_sin() -> @kernel.Thm
+
+pub fn asn_v1() -> @kernel.Thm
+
+pub fn atn() -> @kernel.Thm
+
+pub fn atn_0() -> @kernel.Thm
+
+pub fn atn_1() -> @kernel.Thm
+
+pub fn atn_bounds() -> @kernel.Thm
+
+pub fn atn_inj() -> @kernel.Thm
+
+pub fn atn_le_pi4() -> @kernel.Thm
+
+pub fn atn_lt_pi4() -> @kernel.Thm
+
+pub fn atn_lt_pi4_neg() -> @kernel.Thm
+
+pub fn atn_lt_pi4_pos() -> @kernel.Thm
+
+pub fn atn_mono_le_eq() -> @kernel.Thm
+
+pub fn atn_mono_lt() -> @kernel.Thm
+
+pub fn atn_mono_lt_eq() -> @kernel.Thm
+
+pub fn atn_neg() -> @kernel.Thm
+
+pub fn atn_pos_le() -> @kernel.Thm
+
+pub fn atn_pos_lt() -> @kernel.Thm
+
+pub fn atn_tan() -> @kernel.Thm
+
+pub fn atn_v1() -> @kernel.Thm
+
+pub fn circle_sincos() -> @kernel.Thm
+
+pub fn continuous_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn continuous_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn cos() -> @kernel.Thm
+
+pub fn cos_0() -> @kernel.Thm
+
+pub fn cos_2() -> @kernel.Thm
+
+pub fn cos_abs() -> @kernel.Thm
+
+pub fn cos_acs() -> @kernel.Thm
+
+pub fn cos_add() -> @kernel.Thm
+
+pub fn cos_asn_nz() -> @kernel.Thm
+
+pub fn cos_atn_nz() -> @kernel.Thm
+
+pub fn cos_bound() -> @kernel.Thm
+
+pub fn cos_bounds() -> @kernel.Thm
+
+pub fn cos_converges() -> @kernel.Thm
+
+pub fn cos_double() -> @kernel.Thm
+
+pub fn cos_fdiff() -> @kernel.Thm
+
+pub fn cos_iszero() -> @kernel.Thm
+
+pub fn cos_neg() -> @kernel.Thm
+
+pub fn cos_npi() -> @kernel.Thm
+
+pub fn cos_one_2pi() -> @kernel.Thm
+
+pub fn cos_paired() -> @kernel.Thm
+
+pub fn cos_periodic() -> @kernel.Thm
+
+pub fn cos_periodic_pi() -> @kernel.Thm
+
+pub fn cos_pi() -> @kernel.Thm
+
+pub fn cos_pi2() -> @kernel.Thm
+
+pub fn cos_pos_pi() -> @kernel.Thm
+
+pub fn cos_pos_pi2() -> @kernel.Thm
+
+pub fn cos_sin() -> @kernel.Thm
+
+pub fn cos_sin_sqrt() -> @kernel.Thm
+
+pub fn cos_total() -> @kernel.Thm
+
+pub fn cos_zero() -> @kernel.Thm
+
+pub fn cos_zero_lemma() -> @kernel.Thm
+
+pub fn defint() -> @kernel.Thm
+
+pub fn defint_0() -> @kernel.Thm
+
+pub fn defint_add() -> @kernel.Thm
+
+pub fn defint_cmul() -> @kernel.Thm
+
+pub fn defint_combine() -> @kernel.Thm
+
+pub fn defint_const() -> @kernel.Thm
+
+pub fn defint_delta() -> @kernel.Thm
+
+pub fn defint_delta_left() -> @kernel.Thm
+
+pub fn defint_delta_right() -> @kernel.Thm
+
+pub fn defint_eq() -> @kernel.Thm
+
+pub fn defint_finite_spike() -> @kernel.Thm
+
+pub fn defint_integral() -> @kernel.Thm
+
+pub fn defint_le() -> @kernel.Thm
+
+pub fn defint_neg() -> @kernel.Thm
+
+pub fn defint_point_spike() -> @kernel.Thm
+
+pub fn defint_sub() -> @kernel.Thm
+
+pub fn defint_triangle() -> @kernel.Thm
+
+pub fn defint_wrong() -> @kernel.Thm
+
+pub fn diff_acs() -> @kernel.Thm
+
+pub fn diff_acs_sin() -> @kernel.Thm
+
+pub fn diff_asn() -> @kernel.Thm
+
+pub fn diff_asn_cos() -> @kernel.Thm
+
+pub fn diff_atn() -> @kernel.Thm
+
+pub fn diff_composite() -> @kernel.Thm
+
+pub fn diff_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn diff_cos() -> @kernel.Thm
+
+pub fn diff_exp() -> @kernel.Thm
+
+pub fn diff_ln() -> @kernel.Thm
+
+pub fn diff_net() -> @ref.Ref[@nets.Net[(@kernel.Term) -> @kernel.Thm raise]]
+
+pub fn diff_sin() -> @kernel.Thm
+
+pub fn diff_sqrt() -> @kernel.Thm
+
+pub fn diff_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn diff_tan() -> @kernel.Thm
+
+pub fn differentiable_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn differentiable_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn diffs() -> @kernel.Thm
+
+pub fn diffs_equiv() -> @kernel.Thm
+
+pub fn diffs_lemma() -> @kernel.Thm
+
+pub fn diffs_lemma2() -> @kernel.Thm
+
+pub fn diffs_neg() -> @kernel.Thm
+
+pub fn dint_uniq() -> @kernel.Thm
+
+pub fn division() -> @kernel.Thm
+
+pub fn division_0() -> @kernel.Thm
+
+pub fn division_1() -> @kernel.Thm
+
+pub fn division_append() -> @kernel.Thm
+
+pub fn division_append_explicit() -> @kernel.Thm
+
+pub fn division_append_lemma1() -> @kernel.Thm
+
+pub fn division_append_lemma2() -> @kernel.Thm
+
+pub fn division_append_strong() -> @kernel.Thm
+
+pub fn division_bounds() -> @kernel.Thm
+
+pub fn division_dsize_eq() -> @kernel.Thm
+
+pub fn division_dsize_eq_alt() -> @kernel.Thm
+
+pub fn division_dsize_ge() -> @kernel.Thm
+
+pub fn division_dsize_le() -> @kernel.Thm
+
+pub fn division_eq() -> @kernel.Thm
+
+pub fn division_exists() -> @kernel.Thm
+
+pub fn division_gt() -> @kernel.Thm
+
+pub fn division_intermediate() -> @kernel.Thm
+
+pub fn division_lbound() -> @kernel.Thm
+
+pub fn division_lbound_lt() -> @kernel.Thm
+
+pub fn division_le() -> @kernel.Thm
+
+pub fn division_le_suc() -> @kernel.Thm
+
+pub fn division_lhs() -> @kernel.Thm
+
+pub fn division_lt() -> @kernel.Thm
+
+pub fn division_lt_gen() -> @kernel.Thm
+
+pub fn division_mono_le() -> @kernel.Thm
+
+pub fn division_mono_le_suc() -> @kernel.Thm
+
+pub fn division_rhs() -> @kernel.Thm
+
+pub fn division_single() -> @kernel.Thm
+
+pub fn division_thm() -> @kernel.Thm
+
+pub fn division_ubound() -> @kernel.Thm
+
+pub fn division_ubound_lt() -> @kernel.Thm
+
+pub fn dsize() -> @kernel.Thm
+
+pub fn even_div2() -> @kernel.Thm
+
+pub fn exp() -> @kernel.Thm
+
+pub fn exp_ln() -> @kernel.Thm
+
+pub fn ext_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn fine() -> @kernel.Thm
+
+pub fn fine_min() -> @kernel.Thm
+
+pub fn ftc1() -> @kernel.Thm
+
+pub fn gauge() -> @kernel.Thm
+
+pub fn gauge_min() -> @kernel.Thm
+
+pub fn gauge_min_finite() -> @kernel.Thm
+
+pub fn integrable() -> @kernel.Thm
+
+pub fn integrable_cauchy() -> @kernel.Thm
+
+pub fn integrable_combine() -> @kernel.Thm
+
+pub fn integrable_const() -> @kernel.Thm
+
+pub fn integrable_continuous() -> @kernel.Thm
+
+pub fn integrable_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn integrable_defint() -> @kernel.Thm
+
+pub fn integrable_limit() -> @kernel.Thm
+
+pub fn integrable_point_spike() -> @kernel.Thm
+
+pub fn integrable_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn integrable_split_sides() -> @kernel.Thm
+
+pub fn integrable_subinterval() -> @kernel.Thm
+
+pub fn integrable_subinterval_left() -> @kernel.Thm
+
+pub fn integrable_subinterval_right() -> @kernel.Thm
+
+pub fn integral() -> @kernel.Thm
+
+pub fn integral_add() -> @kernel.Thm
+
+pub fn integral_by_parts() -> @kernel.Thm
+
+pub fn integral_cmul() -> @kernel.Thm
+
+pub fn integral_const() -> @kernel.Thm
+
+pub fn integral_eq() -> @kernel.Thm
+
+pub fn integral_le() -> @kernel.Thm
+
+pub fn integral_null() -> @kernel.Thm
+
+pub fn integral_sub() -> @kernel.Thm
+
+pub fn integration_by_parts() -> @kernel.Thm
+
+pub fn le_match_tac(@kernel.Thm, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn less_1() -> @kernel.Thm
+
+pub fn less_suc_eq() -> @kernel.Thm
+
+pub fn ln() -> @kernel.Thm
+
+pub fn ln_1() -> @kernel.Thm
+
+pub fn ln_div() -> @kernel.Thm
+
+pub fn ln_exp() -> @kernel.Thm
+
+pub fn ln_inj() -> @kernel.Thm
+
+pub fn ln_inv() -> @kernel.Thm
+
+pub fn ln_le() -> @kernel.Thm
+
+pub fn ln_lt_x() -> @kernel.Thm
+
+pub fn ln_mono_le() -> @kernel.Thm
+
+pub fn ln_mono_lt() -> @kernel.Thm
+
+pub fn ln_mul() -> @kernel.Thm
+
+pub fn ln_pos() -> @kernel.Thm
+
+pub fn ln_pos_lt() -> @kernel.Thm
+
+pub fn ln_pow() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mclaurin() -> @kernel.Thm
+
+pub fn mclaurin_all_le() -> @kernel.Thm
+
+pub fn mclaurin_all_lt() -> @kernel.Thm
+
+pub fn mclaurin_atn() -> @kernel.Thm
+
+pub fn mclaurin_bi_le() -> @kernel.Thm
+
+pub fn mclaurin_cos() -> @kernel.Thm
+
+pub fn mclaurin_exp_le() -> @kernel.Thm
+
+pub fn mclaurin_exp_lemma() -> @kernel.Thm
+
+pub fn mclaurin_exp_lt() -> @kernel.Thm
+
+pub fn mclaurin_ln_neg() -> @kernel.Thm
+
+pub fn mclaurin_ln_pos() -> @kernel.Thm
+
+pub fn mclaurin_neg() -> @kernel.Thm
+
+pub fn mclaurin_sin() -> @kernel.Thm
+
+pub fn mclaurin_zero() -> @kernel.Thm
+
+pub fn mult_div_2() -> @kernel.Thm
+
+pub fn pi() -> @kernel.Thm
+
+pub fn pi2() -> @kernel.Thm
+
+pub fn pi2_bounds() -> @kernel.Thm
+
+pub fn pi2_pi4() -> @kernel.Thm
+
+pub fn pi_pos() -> @kernel.Thm
+
+pub fn pow_eq() -> @kernel.Thm
+
+pub fn pow_lt() -> @kernel.Thm
+
+pub fn pow_root_pos() -> @kernel.Thm
+
+pub fn pow_zero() -> @kernel.Thm
+
+pub fn pow_zero_eq() -> @kernel.Thm
+
+pub fn powdiff() -> @kernel.Thm
+
+pub fn powdiff_lemma() -> @kernel.Thm
+
+pub fn powrev() -> @kernel.Thm
+
+pub fn powser_0() -> @kernel.Thm
+
+pub fn powser_equal() -> @kernel.Thm
+
+pub fn powser_equal_0() -> @kernel.Thm
+
+pub fn powser_inside() -> @kernel.Thm
+
+pub fn powser_insidea() -> @kernel.Thm
+
+pub fn powser_limit_0() -> @kernel.Thm
+
+pub fn powser_limit_0_strong() -> @kernel.Thm
+
+pub fn real_atn_powser() -> @kernel.Thm
+
+pub fn real_atn_powser_diffl() -> @kernel.Thm
+
+pub fn real_atn_powser_diffs_diffs_summable() -> @kernel.Thm
+
+pub fn real_atn_powser_diffs_sum() -> @kernel.Thm
+
+pub fn real_atn_powser_diffs_summable() -> @kernel.Thm
+
+pub fn real_atn_powser_summable() -> @kernel.Thm
+
+pub fn real_div_sqrt() -> @kernel.Thm
+
+pub fn real_exp_0() -> @kernel.Thm
+
+pub fn real_exp_add() -> @kernel.Thm
+
+pub fn real_exp_add_mul() -> @kernel.Thm
+
+pub fn real_exp_bound_lemma() -> @kernel.Thm
+
+pub fn real_exp_converges() -> @kernel.Thm
+
+pub fn real_exp_fdiff() -> @kernel.Thm
+
+pub fn real_exp_inj() -> @kernel.Thm
+
+pub fn real_exp_le_x() -> @kernel.Thm
+
+pub fn real_exp_ln() -> @kernel.Thm
+
+pub fn real_exp_lt_1() -> @kernel.Thm
+
+pub fn real_exp_mono_imp() -> @kernel.Thm
+
+pub fn real_exp_mono_le() -> @kernel.Thm
+
+pub fn real_exp_mono_lt() -> @kernel.Thm
+
+pub fn real_exp_n() -> @kernel.Thm
+
+pub fn real_exp_neg() -> @kernel.Thm
+
+pub fn real_exp_neg_mul() -> @kernel.Thm
+
+pub fn real_exp_neg_mul2() -> @kernel.Thm
+
+pub fn real_exp_nz() -> @kernel.Thm
+
+pub fn real_exp_pos_le() -> @kernel.Thm
+
+pub fn real_exp_pos_lt() -> @kernel.Thm
+
+pub fn real_exp_sub() -> @kernel.Thm
+
+pub fn real_exp_total() -> @kernel.Thm
+
+pub fn real_exp_total_lemma() -> @kernel.Thm
+
+pub fn root() -> @kernel.Thm
+
+pub fn root_0() -> @kernel.Thm
+
+pub fn root_1() -> @kernel.Thm
+
+pub fn root_div() -> @kernel.Thm
+
+pub fn root_inj() -> @kernel.Thm
+
+pub fn root_inv() -> @kernel.Thm
+
+pub fn root_ln() -> @kernel.Thm
+
+pub fn root_lt_lemma() -> @kernel.Thm
+
+pub fn root_mono_le() -> @kernel.Thm
+
+pub fn root_mono_le_eq() -> @kernel.Thm
+
+pub fn root_mono_lt() -> @kernel.Thm
+
+pub fn root_mono_lt_eq() -> @kernel.Thm
+
+pub fn root_mul() -> @kernel.Thm
+
+pub fn root_pos_positive() -> @kernel.Thm
+
+pub fn root_pos_uniq() -> @kernel.Thm
+
+pub fn root_pow_pos() -> @kernel.Thm
+
+pub fn rsum() -> @kernel.Thm
+
+pub fn rsum_bound() -> @kernel.Thm
+
+pub fn rsum_diff_bound() -> @kernel.Thm
+
+pub fn seq_npow() -> @kernel.Thm
+
+pub fn sin() -> @kernel.Thm
+
+pub fn sin_0() -> @kernel.Thm
+
+pub fn sin_acs_nz() -> @kernel.Thm
+
+pub fn sin_add() -> @kernel.Thm
+
+pub fn sin_asn() -> @kernel.Thm
+
+pub fn sin_bound() -> @kernel.Thm
+
+pub fn sin_bounds() -> @kernel.Thm
+
+pub fn sin_circle() -> @kernel.Thm
+
+pub fn sin_converges() -> @kernel.Thm
+
+pub fn sin_cos() -> @kernel.Thm
+
+pub fn sin_cos_add() -> @kernel.Thm
+
+pub fn sin_cos_neg() -> @kernel.Thm
+
+pub fn sin_cos_sqrt() -> @kernel.Thm
+
+pub fn sin_double() -> @kernel.Thm
+
+pub fn sin_fdiff() -> @kernel.Thm
+
+pub fn sin_neg() -> @kernel.Thm
+
+pub fn sin_neglemma() -> @kernel.Thm
+
+pub fn sin_npi() -> @kernel.Thm
+
+pub fn sin_paired() -> @kernel.Thm
+
+pub fn sin_periodic() -> @kernel.Thm
+
+pub fn sin_periodic_pi() -> @kernel.Thm
+
+pub fn sin_pi() -> @kernel.Thm
+
+pub fn sin_pi2() -> @kernel.Thm
+
+pub fn sin_pos() -> @kernel.Thm
+
+pub fn sin_pos_pi() -> @kernel.Thm
+
+pub fn sin_pos_pi2() -> @kernel.Thm
+
+pub fn sin_pos_pi_le() -> @kernel.Thm
+
+pub fn sin_total() -> @kernel.Thm
+
+pub fn sin_zero() -> @kernel.Thm
+
+pub fn sin_zero_lemma() -> @kernel.Thm
+
+pub fn sin_zero_pi() -> @kernel.Thm
+
+pub fn sqrt_even_pow2() -> @kernel.Thm
+
+pub fn straddle_lemma() -> @kernel.Thm
+
+pub fn sum_diffs() -> @kernel.Thm
+
+pub fn sym_canon_conv(@kernel.Thm, ((@kernel.Term, @kernel.Term)) -> Bool raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn tan() -> @kernel.Thm
+
+pub fn tan_0() -> @kernel.Thm
+
+pub fn tan_abs_ge_x() -> @kernel.Thm
+
+pub fn tan_add() -> @kernel.Thm
+
+pub fn tan_atn() -> @kernel.Thm
+
+pub fn tan_bound_pi2() -> @kernel.Thm
+
+pub fn tan_cot() -> @kernel.Thm
+
+pub fn tan_double() -> @kernel.Thm
+
+pub fn tan_neg() -> @kernel.Thm
+
+pub fn tan_npi() -> @kernel.Thm
+
+pub fn tan_periodic() -> @kernel.Thm
+
+pub fn tan_periodic_npi() -> @kernel.Thm
+
+pub fn tan_periodic_pi() -> @kernel.Thm
+
+pub fn tan_pi() -> @kernel.Thm
+
+pub fn tan_pi4() -> @kernel.Thm
+
+pub fn tan_pos_pi2() -> @kernel.Thm
+
+pub fn tan_sec() -> @kernel.Thm
+
+pub fn tan_total() -> @kernel.Thm
+
+pub fn tan_total_lemma() -> @kernel.Thm
+
+pub fn tan_total_pos() -> @kernel.Thm
+
+pub fn tdiv() -> @kernel.Thm
+
+pub fn tdiv_bounds() -> @kernel.Thm
+
+pub fn tdiv_le() -> @kernel.Thm
+
+pub fn termdiff() -> @kernel.Thm
+
+pub fn termdiff_converges() -> @kernel.Thm
+
+pub fn termdiff_lemma1() -> @kernel.Thm
+
+pub fn termdiff_lemma2() -> @kernel.Thm
+
+pub fn termdiff_lemma3() -> @kernel.Thm
+
+pub fn termdiff_lemma4() -> @kernel.Thm
+
+pub fn termdiff_lemma5() -> @kernel.Thm
+
+pub fn termdiff_strong() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
