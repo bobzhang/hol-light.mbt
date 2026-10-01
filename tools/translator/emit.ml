@@ -288,6 +288,27 @@ module Emit = struct
         end
         else Hashtbl.replace own_types (prefix ^ "." ^ Ident.name d.typ_id) (!current_pkg, mname d))
       decls;
+    (* which of a (recursive) group's types hold closures or refs, decided
+       for the whole group first *)
+    let arg_types d =
+      Hashtbl.reset tyvar_names;
+      match d.typ_kind, d.typ_manifest with
+      | Ttype_variant cds, _ ->
+          String.concat " " (List.concat_map (fun cd -> match cd.cd_args with Cstr_tuple cts -> List.map (fun ct -> show_ty ct.ctyp_type) cts | _ -> []) cds)
+      | Ttype_record lds, _ -> String.concat " " (List.map (fun ld -> show_ty ld.ld_type.ctyp_type) lds)
+      | Ttype_abstract, Some ct -> show_ty ct.ctyp_type
+      | _ -> ""
+    in
+    let texts = List.map (fun d -> (mname d, arg_types d)) decls in
+    let changed = ref true in
+    while !changed do
+      changed := false;
+      List.iter
+        (fun (n, t) ->
+          if not (Hashtbl.mem fun_types n) && carries_fun t then (Hashtbl.replace fun_types n (); changed := true);
+          if not (Hashtbl.mem noeq_types n) && has_ref t then (Hashtbl.replace noeq_types n (); changed := true))
+        texts
+    done;
     List.iter
       (fun d ->
         Hashtbl.reset tyvar_names;
@@ -643,14 +664,18 @@ module Emit = struct
                let saved = !module_prefix in
                let name = match mb_id with Some id -> Ident.name id | None -> "_" in
                module_prefix := name :: saved;
-               (* a new module of this name: aliases under the old one go *)
+               (* a new module of this name: aliases under the old one go,
+                  once its body (which may still refer to them) is done *)
                let full = String.concat "." (List.rev !module_prefix) in
-               let stale = Hashtbl.fold (fun k _ acc -> if k = full || (String.length k > String.length full && String.sub k 0 (String.length full + 1) = full ^ ".") then k :: acc else acc) module_aliases [] in
-               List.iter (Hashtbl.remove module_aliases) stale;
+               let stale = Hashtbl.fold (fun k v acc -> if k = full || (String.length k > String.length full && String.sub k 0 (String.length full + 1) = full ^ ".") then (k, v) :: acc else acc) module_aliases [] in
                (match mb_id with
                 | Some id -> Hashtbl.replace module_paths (Ident.unique_name id) (List.rev !module_prefix)
                 | None -> ());
-               Fun.protect ~finally:(fun () -> module_prefix := saved)
+               Fun.protect
+                 ~finally:(fun () ->
+                   module_prefix := saved;
+                   (* stale entries the new body did not redefine *)
+                   List.iter (fun (k, v) -> if Hashtbl.find_opt module_aliases k = Some v then Hashtbl.remove module_aliases k) stale)
                  (fun () -> List.iter (fun it -> item ~hand it) str.str_items)
            | Tstr_module { mb_id = Some id; mb_expr = { mod_desc = Tmod_ident (p, _); _ }; _ } ->
                (* a module alias (e.g. a specialized functor's parameter) *)
@@ -682,6 +707,7 @@ module Emit = struct
                          register_own (Ident.name id) (mname, Function want);
                          Hashtbl.replace locals (Ident.unique_name id)
                            { name = mname; mty = want; loty = Some vb.vb_expr.exp_type };
+                         Hashtbl.replace toplevel_group_ids (Ident.unique_name id) ();
                          (mname, id, vb)
                      | _ -> unsupported vb.vb_loc "recursive value")
                    vbs

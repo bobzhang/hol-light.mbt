@@ -165,45 +165,67 @@ pub fn[A, B, C] list_fold_left2(
 }
 
 ///|
-/// OCaml's `Hashtbl.t` with structural keys: each key holds its bindings,
-/// newest first (`add` shadows, `remove` uncovers). Bucket iteration order
-/// is not modelled (no iteration functions).
+/// OCaml 4.14's `Hashtbl.t` (not randomized): power-of-two bucket arrays
+/// indexed by `Hashtbl.hash`, newest binding first in its bucket,
+/// doubling (order-preserving) when the size exceeds twice the buckets;
+/// `fold`/`iter` visit buckets in index order. Keys are compared with
+/// OCaml's `compare`.
 pub struct OHashtbl[K, V] {
-  priv buckets : Map[Int, Array[(K, @list.List[V])]]
+  priv mut size : Int
+  priv mut data : FixedArray[@list.List[(K, V)]]
+  priv initial_size : Int
 }
 
 ///|
 /// `Hashtbl.create n`
-pub fn[K, V] hashtbl_create(_n : Int) -> OHashtbl[K, V] {
-  { buckets: Map([]), }
+pub fn[K, V] hashtbl_create(n : Int) -> OHashtbl[K, V] {
+  let mut s = 16
+  while s < n && s * 2 <= 0x3FFFFFFF {
+    s = s * 2
+  }
+  { size: 0, data: FixedArray::make(s, @list.empty()), initial_size: s, }
 }
 
 ///|
-fn[K : OCompare + OHash, V] OHashtbl::slot(
-  self : OHashtbl[K, V],
-  k : K,
-) -> (Array[(K, @list.List[V])], Int) {
-  let h = hash(k)
-  let b = match self.buckets.get(h) {
-    Some(b) => b
-    None => {
-      let b = []
-      self.buckets[h] = b
-      b
-    }
-  }
-  for i, e in b {
-    if compare(e.0, k) == 0 {
-      return (b, i)
-    }
-  }
-  (b, -1)
+fn[K : OHash, V] OHashtbl::index(self : OHashtbl[K, V], k : K) -> Int {
+  hash(k) & (self.data.length() - 1)
 }
 
 ///|
-/// `Hashtbl.clear`
+fn[K : OHash, V] OHashtbl::resize(self : OHashtbl[K, V]) -> Unit {
+  let odata = self.data
+  let nsize = odata.length() * 2
+  let buckets : FixedArray[Array[(K, V)]] = FixedArray::makei(nsize, _ => [])
+  self.data = FixedArray::make(nsize, @list.empty())
+  // each old bucket in order, appended to the tails of the new ones
+  for b in odata {
+    for e in b {
+      buckets[self.index(e.0)].push(e)
+    }
+  }
+  for i in 0..<nsize {
+    self.data[i] = @list.from_array(buckets[i])
+  }
+}
+
+///|
+/// `Hashtbl.clear` (keeps the bucket array)
 pub fn[K, V] hashtbl_clear(t : OHashtbl[K, V]) -> Unit {
-  t.buckets.clear()
+  if t.size > 0 {
+    t.size = 0
+    t.data.fill(@list.empty())
+  }
+}
+
+///|
+/// `Hashtbl.reset` (back to the initial bucket array)
+pub fn[K, V] hashtbl_reset(t : OHashtbl[K, V]) -> Unit {
+  if t.data.length() == t.initial_size {
+    hashtbl_clear(t)
+  } else {
+    t.size = 0
+    t.data = FixedArray::make(t.initial_size, @list.empty())
+  }
 }
 
 ///|
@@ -213,28 +235,73 @@ pub fn[K : OCompare + OHash, V] hashtbl_add(
   k : K,
   v : V,
 ) -> Unit {
-  let (b, i) = t.slot(k)
-  if i < 0 {
-    b.push((k, @list.singleton(v)))
-  } else {
-    b[i] = (b[i].0, b[i].1.prepend(v))
+  let i = t.index(k)
+  t.data[i] = t.data[i].prepend((k, v))
+  t.size += 1
+  if t.size > t.data.length() * 2 {
+    t.resize()
   }
 }
 
 ///|
-/// `Hashtbl.replace t k v`: replaces the newest binding of `k`.
+/// `Hashtbl.replace t k v`: replaces the newest binding of `k`, or adds.
 pub fn[K : OCompare + OHash, V] hashtbl_replace(
   t : OHashtbl[K, V],
   k : K,
   v : V,
 ) -> Unit {
-  let (b, i) = t.slot(k)
-  if i < 0 {
-    b.push((k, @list.singleton(v)))
-  } else {
-    match b[i].1 {
-      More(_, tail=rest) => b[i] = (b[i].0, rest.prepend(v))
-      Empty => b[i] = (b[i].0, @list.singleton(v))
+  let i = t.index(k)
+  let before = []
+  let mut rest = t.data[i]
+  while true {
+    match rest {
+      Empty => break
+      More((k1, _) as e, tail=r) => {
+        if compare(k1, k) == 0 {
+          let mut l = r.prepend((k, v))
+          for j = before.length() - 1; j >= 0; j = j - 1 {
+            l = l.prepend(before[j])
+          }
+          t.data[i] = l
+          return
+        }
+        before.push(e)
+        rest = r
+      }
+    }
+  }
+  t.data[i] = t.data[i].prepend((k, v))
+  t.size += 1
+  if t.size > t.data.length() * 2 {
+    t.resize()
+  }
+}
+
+///|
+/// `Hashtbl.remove t k`: removes the newest binding of `k`.
+pub fn[K : OCompare + OHash, V] hashtbl_remove(
+  t : OHashtbl[K, V],
+  k : K,
+) -> Unit {
+  let i = t.index(k)
+  let before = []
+  let mut rest = t.data[i]
+  while true {
+    match rest {
+      Empty => return
+      More((k1, _) as e, tail=r) => {
+        if compare(k1, k) == 0 {
+          let mut l = r
+          for j = before.length() - 1; j >= 0; j = j - 1 {
+            l = l.prepend(before[j])
+          }
+          t.data[i] = l
+          t.size -= 1
+          return
+        }
+        before.push(e)
+        rest = r
+      }
     }
   }
 }
@@ -245,11 +312,9 @@ pub fn[K : OCompare + OHash, V] hashtbl_find(
   t : OHashtbl[K, V],
   k : K,
 ) -> V raise {
-  let (b, i) = t.slot(k)
-  if i >= 0 {
-    match b[i].1 {
-      More(v, ..) => return v
-      Empty => ()
+  for e in t.data[t.index(k)] {
+    if compare(e.0, k) == 0 {
+      return e.1
     }
   }
   raise NotFound
@@ -261,11 +326,27 @@ pub fn[K : OCompare + OHash, V] hashtbl_find_opt(
   t : OHashtbl[K, V],
   k : K,
 ) -> V? {
-  try hashtbl_find(t, k) catch {
-    _ => None
-  } noraise {
-    v => Some(v)
+  for e in t.data[t.index(k)] {
+    if compare(e.0, k) == 0 {
+      return Some(e.1)
+    }
   }
+  None
+}
+
+///|
+/// `Hashtbl.find_all`: all bindings of `k`, newest first.
+pub fn[K : OCompare + OHash, V] hashtbl_find_all(
+  t : OHashtbl[K, V],
+  k : K,
+) -> @list.List[V] {
+  let acc = []
+  for e in t.data[t.index(k)] {
+    if compare(e.0, k) == 0 {
+      acc.push(e.1)
+    }
+  }
+  @list.from_array(acc)
 }
 
 ///|
@@ -275,18 +356,55 @@ pub fn[K : OCompare + OHash, V] hashtbl_mem(t : OHashtbl[K, V], k : K) -> Bool {
 }
 
 ///|
-/// `Hashtbl.remove`: removes the newest binding of `k`.
-pub fn[K : OCompare + OHash, V] hashtbl_remove(
+/// `Hashtbl.length`
+pub fn[K, V] hashtbl_length(t : OHashtbl[K, V]) -> Int {
+  t.size
+}
+
+///|
+/// `Hashtbl.fold f t init`: buckets in index order, each newest first (on
+/// the bucket array at the start, as OCaml).
+pub fn[K, V, A] hashtbl_fold(
+  f : (K, V, A) -> A raise?,
   t : OHashtbl[K, V],
-  k : K,
-) -> Unit {
-  let (b, i) = t.slot(k)
-  if i >= 0 {
-    match b[i].1 {
-      More(_, tail=rest) => b[i] = (b[i].0, rest)
-      Empty => ()
+  init : A,
+) -> A raise? {
+  let d = t.data
+  let mut acc = init
+  for b in d {
+    for e in b {
+      acc = f(e.0, e.1, acc)
     }
   }
+  acc
+}
+
+///|
+/// `Hashtbl.iter f t`
+pub fn[K, V] hashtbl_iter(
+  f : (K, V) -> Unit raise?,
+  t : OHashtbl[K, V],
+) -> Unit raise? {
+  let d = t.data
+  for b in d {
+    for e in b {
+      f(e.0, e.1)
+    }
+  }
+}
+
+///|
+/// `Array.fold_left f init a`
+pub fn[A, B] array_fold_left(
+  f : (A, B) -> A raise?,
+  init : A,
+  a : FixedArray[B],
+) -> A raise? {
+  let mut acc = init
+  for x in a {
+    acc = f(acc, x)
+  }
+  acc
 }
 
 ///|
@@ -342,4 +460,16 @@ pub fn char_chr(n : Int) -> Char raise {
     raise @num.InvalidArgument("Char.chr")
   }
   n.unsafe_to_char()
+}
+
+///|
+/// `incr r`
+pub fn incr(r : Ref[Int]) -> Unit {
+  r.val = r.val + 1
+}
+
+///|
+/// `decr r`
+pub fn decr(r : Ref[Int]) -> Unit {
+  r.val = r.val - 1
 }

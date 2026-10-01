@@ -256,7 +256,9 @@ module Functors = struct
           env := names @ !env
       | _ -> default_iterator.structure_item self si
     in
-    let it = { default_iterator with expr; case; structure_item } in
+    (* a nested module's bindings stay inside it *)
+    let module_expr self m = let saved = !env in default_iterator.module_expr self m; env := saved in
+    let it = { default_iterator with expr; case; structure_item; module_expr } in
     it.structure it str;
     !free
 

@@ -602,10 +602,7 @@ pub fn[TA, TB] mapi(
   fn(x61 : Unit) -> TA raise {
     let _ = x61
     let h = i.val
-    {
-      i.val = i.val + 1
-      ()
-    }
+    @lib.incr(i)
     let t62 = l(())
     f(h)(t62)
   }
@@ -625,10 +622,7 @@ pub fn[TA] take(
     if i.val == 0 {
       raise End_of_strom::End_of_strom
     } else {
-      {
-        i.val = i.val - 1
-        ()
-      }
+      @lib.decr(i)
       l(())
     }
   }
@@ -813,10 +807,7 @@ pub fn integers_from(x91 : Int) -> ((Unit) -> Int raise) raise {
   fn(x93 : Unit) -> Int raise {
     let _ = x93
     let h = i.val
-    {
-      i.val = i.val + 1
-      ()
-    }
+    @lib.incr(i)
     h
   }
 }

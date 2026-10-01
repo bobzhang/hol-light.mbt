@@ -285,7 +285,10 @@ module Lower = struct
         let own = match own_type_path p with Some t -> Some t | None -> base_type0 name in
         (match (if own_type_path p <> None then None else alias name), own with
          | Some a, _ -> a
-         | None, Some "Option" -> show_ty (List.hd args) ^ "?"
+         | None, Some "Option" ->
+             let a = show_ty (List.hd args) in
+             (* `T?` of a function type needs parentheses *)
+             if is_arrow (List.hd args) then "(" ^ a ^ ")?" else a ^ "?"
          | None, Some n ->
              if args = [] then n
              else n ^ "[" ^ String.concat ", " (List.map show_ty args) ^ "]"
@@ -314,7 +317,7 @@ module Lower = struct
     | M.Named (v, []) when is_our_tyvar v ->
         if List.mem v !scope_tyvars_fwd then Some v else if !partial_types then Some "_" else None
     | M.Named (n, _) when String.length n > 0 && n.[0] = '?' -> None
-    | M.Named ("Option", [ a ]) -> Option.map (fun a -> a ^ "?") (show_mty a)
+    | M.Named ("Option", [ a ]) -> Option.map (fun s -> match a with M.Fun _ -> "(" ^ s ^ ")?" | _ -> s ^ "?") (show_mty a)
     | M.Named (n, []) -> Some n
     | M.Named (n, args) -> Option.map (fun a -> n ^ "[" ^ String.concat ", " a ^ "]") (all (List.map show_mty args))
     | M.Tuple ts -> Option.map (fun a -> "(" ^ String.concat ", " a ^ ")") (all (List.map show_mty ts))
@@ -397,6 +400,12 @@ module Lower = struct
     let s = Buffer.contents b in
     let s = if s = "" || (s.[0] >= '0' && s.[0] <= '9') then "v" ^ s else s in
     if List.mem s keywords then s ^ "_" else s
+
+  (* a record label's MoonBit field: OCaml's `ref` is MoonBit's Ref (`val`) *)
+  let label_name (ld : Types.label_description) =
+    match Types.get_desc ld.Types.lbl_res with
+    | Types.Tconstr (p, _, _) when ld.Types.lbl_name = "contents" && (match Path.name p with "Stdlib.ref" | "ref" -> true | _ -> false) -> "val"
+    | _ -> sanitize ld.Types.lbl_name
 
   let counter = ref 0
 
@@ -527,6 +536,9 @@ module Lower = struct
      unique name *)
   let local_module_members : (string, string) Hashtbl.t = Hashtbl.create 16
 
+  (* the functions of top-level recursive groups (globals, never captured) *)
+  let toplevel_group_ids : (string, unit) Hashtbl.t = Hashtbl.create 64
+
   (* polymorphic local functions used through fresh lambdas: their
      captured variables (unique name, OCaml type) *)
   let poly_caps : (string, (string * Types.type_expr) list) Hashtbl.t = Hashtbl.create 16
@@ -536,6 +548,7 @@ module Lower = struct
     let open Tast_iterator in
     let expr sub e =
       (match e.Typedtree.exp_desc with
+       | Typedtree.Texp_ident (Path.Pident id, _, _) when Hashtbl.mem toplevel_group_ids (Ident.unique_name id) -> ()
        | Typedtree.Texp_ident (Path.Pident id, _, _) when Hashtbl.mem poly_caps (Ident.unique_name id) ->
            List.iter (fun (u, t) -> if not (List.mem_assoc u !acc) then acc := (u, t) :: !acc) (Hashtbl.find poly_caps (Ident.unique_name id))
        | Typedtree.Texp_ident (Path.Pident id, _, _) when Hashtbl.mem locals (Ident.unique_name id) ->
@@ -906,7 +919,7 @@ module Lower = struct
     | Tpat_record (fields, _) ->
         "{ "
         ^ String.concat ", "
-            (List.map (fun (_, ld, q) -> sanitize ld.Types.lbl_name ^ ": " ^ pattern q) fields)
+            (List.map (fun (_, ld, q) -> label_name ld ^ ": " ^ pattern q) fields)
         ^ ", .. }"
     | Tpat_value v -> pattern ?mty (v :> value general_pattern)
     | Tpat_exception q -> pattern q
@@ -1021,7 +1034,8 @@ module Lower = struct
         (* evaluated (once) when forced *)
         let bb = lower_block body in
         ([], Call (Atom "@lib.lazy_new", [ Lam ([], bb) ]), mty_of e.exp_type)
-    | Texp_open (_, body) -> lower ?expect body
+    | Texp_open ({ open_expr = { mod_desc = Tmod_ident _; _ }; _ }, body) -> lower ?expect body
+    | Texp_open _ -> unsupported loc "local open of a module expression"
     | Texp_function _ -> lower_function ?expect e
     | Texp_let (Asttypes.Nonrecursive, vbs, body) -> lower_let ?expect vbs body
     | Texp_tuple es ->
@@ -1063,7 +1077,7 @@ module Lower = struct
           Array.to_list fields
           |> List.filter_map (fun (ld, def) ->
                  match def with
-                 | Overridden (_, fe) -> Some (field_name ld.Types.lbl_name, fe)
+                 | Overridden (_, fe) -> Some (label_name ld, fe)
                  | Kept _ -> None)
         in
         let lowered = List.map (fun (n, fe) -> let ss, x, _ = lower ~expect:(mty_of fe.exp_type) fe in (n, (ss, x))) given in
@@ -1074,13 +1088,13 @@ module Lower = struct
         (stmts, Record (tname, base_x, fields_x), mty_of e.exp_type)
     | Texp_field (r, _, ld) ->
         let ss, x, _ = lower r in
-        (ss, Proj (x, field_name ld.Types.lbl_name), mty_of e.exp_type)
+        (ss, Proj (x, label_name ld), mty_of e.exp_type)
     | Texp_setfield (r, _, ld, v) ->
         (* `r.f <- v`: v first *)
         let vl = lower_block ~expect:(mty_of v.exp_type) v in
         let rl = lower_block r in
         let stmts, xs = schedule [ vl; rl ] in
-        (stmts, Blk ([ SetField (List.nth xs 1, field_name ld.Types.lbl_name, List.nth xs 0) ], Atom "()"), M.Named ("Unit", []))
+        (stmts, Blk ([ SetField (List.nth xs 1, label_name ld, List.nth xs 0) ], Atom "()"), M.Named ("Unit", []))
     | Texp_letmodule (Some mid, _, _, { mod_desc = (Tmod_structure str | Tmod_constraint ({ mod_desc = Tmod_structure str; _ }, _, _, _)); _ }, body) ->
         (* `let module M = struct ... end in body`: the module's values
            become nested lets around the body; `M.x` refers to them *)
@@ -1364,6 +1378,23 @@ module Lower = struct
 
   (* --- Stdlib primitives --- *)
 
+  (* A function argument of a primitive implemented by a lib function
+     taking a k-parameter closure (`Hashtbl.fold f`): its expected type. *)
+  and prim_fn_arg name i (a : expression) =
+    let k =
+      match name, i with
+      | "Hashtbl.fold", 0 -> 3
+      | ("Hashtbl.iter" | "Array.fold_left"), 0 -> 2
+      | _ -> 0
+    in
+    if k = 0 then None
+    else
+      let rec take n t acc =
+        if n = 0 then Some (M.Fun (List.rev acc, t, true))
+        else match t with M.Fun ([ p ], r, _) -> take (n - 1) r (p :: acc) | _ -> None
+      in
+      take k (mty_of a.exp_type) []
+
   and lower_prim ?expect whole name f args =
     let loc = whole.exp_loc in
     let arity, mk =
@@ -1449,14 +1480,20 @@ module Lower = struct
       | "Random.int" -> (1, fun [ a ] _ -> Call (Atom "@lib.random_int", [ a ]))
       | "Random.init" -> (1, fun [ a ] _ -> Call (Atom "@lib.random_init", [ a ]))
       | "Random.bits" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@lib.random_bits", [])))
-      | "incr" -> (1, fun [ a ] _ -> Blk ([ Assign (a, Binop ("+", Deref a, Atom "1")) ], Atom "()"))
-      | "decr" -> (1, fun [ a ] _ -> Blk ([ Assign (a, Binop ("-", Deref a, Atom "1")) ], Atom "()"))
+      | "incr" -> (1, fun [ a ] _ -> Call (Atom "@lib.incr", [ a ]))
+      | "decr" -> (1, fun [ a ] _ -> Call (Atom "@lib.decr", [ a ]))
       | "Char.chr" -> (1, fun [ a ] _ -> Call (Atom "@lib.char_chr", [ a ]))
       | "Char.code" -> (1, fun [ a ] _ -> Call (Atom "Char::to_int", [ a ]))
       | "Format.std_formatter" -> (0, fun [] _ -> Atom "@pp.std_formatter")
       | "Lazy.force" -> (1, fun [ a ] _ -> Call (Atom "@lib.lazy_force", [ a ]))
       | "Hashtbl.create" -> (1, fun [ a ] _ -> Call (Atom "@lib.hashtbl_create", [ a ]))
-      | "Hashtbl.clear" | "Hashtbl.reset" -> (1, fun [ a ] _ -> Call (Atom "@lib.hashtbl_clear", [ a ]))
+      | "Hashtbl.clear" -> (1, fun [ a ] _ -> Call (Atom "@lib.hashtbl_clear", [ a ]))
+      | "Hashtbl.reset" -> (1, fun [ a ] _ -> Call (Atom "@lib.hashtbl_reset", [ a ]))
+      | "Hashtbl.length" -> (1, fun [ a ] _ -> Call (Atom "@lib.hashtbl_length", [ a ]))
+      | "Hashtbl.find_all" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.hashtbl_find_all", [ a; b ]))
+      | "Hashtbl.fold" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.hashtbl_fold", [ a; b; c ]))
+      | "Hashtbl.iter" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.hashtbl_iter", [ a; b ]))
+      | "Array.fold_left" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.array_fold_left", [ a; b; c ]))
       | "Hashtbl.add" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.hashtbl_add", [ a; b; c ]))
       | "Hashtbl.replace" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.hashtbl_replace", [ a; b; c ]))
       | "Hashtbl.find" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.hashtbl_find", [ a; b ]))
@@ -1489,7 +1526,7 @@ module Lower = struct
     in
     let arg_tys = List.map (fun a -> a.exp_type) args in
     (match name with
-     | "Hashtbl.add" | "Hashtbl.replace" | "Hashtbl.find" | "Hashtbl.find_opt" | "Hashtbl.mem" | "Hashtbl.remove" ->
+     | "Hashtbl.add" | "Hashtbl.replace" | "Hashtbl.find" | "Hashtbl.find_opt" | "Hashtbl.mem" | "Hashtbl.remove" | "Hashtbl.find_all" ->
          (match args with _ :: k :: _ -> note_bounds [ k ] | _ -> ())
      | "=" | "<>" | "compare" | "<" | ">" | "<=" | ">=" | "min" | "max" ->
          note_bounds args;
@@ -1511,7 +1548,7 @@ module Lower = struct
       let now = List.filteri (fun i _ -> i < arity) args in
       let rest = List.filteri (fun i _ -> i >= arity) args in
       if rest <> [] then unsupported loc "over-applied primitive %s" name;
-      let lowered = List.map (fun a -> let ss, x, _ = lower a in (ss, x)) now in
+      let lowered = List.mapi (fun i a -> let ss, x, _ = lower ?expect:(prim_fn_arg name i a) a in (ss, x)) now in
       let stmts, xs =
         if name = "min" || name = "max" then
           (* each argument is used twice: evaluate both first *)
@@ -1524,7 +1561,7 @@ module Lower = struct
     end
     else begin
       (* partial application: evaluate the supplied arguments, then a closure *)
-      let lowered = List.map (fun a -> let ss, x, _ = lower a in hoist (ss, x)) args in
+      let lowered = List.mapi (fun i a -> let ss, x, _ = lower ?expect:(prim_fn_arg name i a) a in hoist (ss, x)) args in
       let stmts = List.concat_map fst (List.rev lowered) in
       let supplied = List.map snd lowered in
       let missing = List.init (arity - List.length args) (fun _ -> fresh "x") in

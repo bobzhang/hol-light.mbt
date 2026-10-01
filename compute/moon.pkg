@@ -1,0 +1,38 @@
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/num",
+  "bobzhang/hol_light/basics",
+  "bobzhang/hol_light/nets",
+  "bobzhang/hol_light/printer",
+  "bobzhang/hol_light/preterm",
+  "bobzhang/hol_light/parser",
+  "bobzhang/hol_light/pp",
+  "bobzhang/hol_light/equal",
+  "bobzhang/hol_light/bool",
+  "bobzhang/hol_light/drule",
+  "bobzhang/hol_light/tactics",
+  "bobzhang/hol_light/itab",
+  "bobzhang/hol_light/simp",
+  "bobzhang/hol_light/theorems",
+  "bobzhang/hol_light/ind_defs",
+  "bobzhang/hol_light/class",
+  "bobzhang/hol_light/trivia",
+  "bobzhang/hol_light/canon",
+  "bobzhang/hol_light/meson",
+  "bobzhang/hol_light/firstorder",
+  "bobzhang/hol_light/omap",
+  "bobzhang/hol_light/oset",
+  "bobzhang/hol_light/metis",
+  "bobzhang/hol_light/thecops",
+  "bobzhang/hol_light/quot",
+  "bobzhang/hol_light/impconv",
+  "bobzhang/hol_light/pair",
+  "moonbitlang/core/list",
+}
+
+import {
+  "bobzhang/hol_light/testkit",
+} for "test"
+
+warnings = "-unused_value-unused_trait_bound-unused_package-unused_error_type"

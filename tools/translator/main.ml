@@ -20,6 +20,7 @@ module Main = struct
     | "thecops.ml" -> ("thecops/thecops.mbt", [])
     | "ocaml_map.ml" -> ("omap/omap.mbt", [])
     | "ocaml_set.ml" -> ("oset/oset.mbt", [])
+    | "compute.ml" -> ("compute/compute.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =

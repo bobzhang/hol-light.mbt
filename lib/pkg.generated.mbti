@@ -19,6 +19,8 @@ pub fn[K : OCompare + OHash, V] apply_opt(Func[K, V], K) -> V?
 
 pub fn[K : OCompare + OHash, V] applyd(Func[K, V], (K) -> V raise?, K) -> V raise?
 
+pub fn[A, B] array_fold_left((A, B) -> A raise?, A, FixedArray[B]) -> A raise?
+
 pub fn[A] array_get(FixedArray[A], Int) -> A raise
 
 pub fn[A] array_length(FixedArray[A]) -> Int
@@ -54,6 +56,8 @@ pub fn[A, B, C] compose((B) -> C raise, (A) -> B raise) -> (A) -> C raise
 pub let cpu_time : @ref.Ref[() -> Double]
 
 pub fn[A, B, C] curry(((A, B)) -> C raise?, A, B) -> C raise?
+
+pub fn decr(@ref.Ref[Int]) -> Unit
 
 pub fn[A, B : OCompare] decreasing((A) -> B raise?, A, A) -> Bool raise?
 
@@ -121,7 +125,15 @@ pub fn[K, V] hashtbl_create(Int) -> OHashtbl[K, V]
 
 pub fn[K : OCompare + OHash, V] hashtbl_find(OHashtbl[K, V], K) -> V raise
 
+pub fn[K : OCompare + OHash, V] hashtbl_find_all(OHashtbl[K, V], K) -> @list.List[V]
+
 pub fn[K : OCompare + OHash, V] hashtbl_find_opt(OHashtbl[K, V], K) -> V?
+
+pub fn[K, V, A] hashtbl_fold((K, V, A) -> A raise?, OHashtbl[K, V], A) -> A raise?
+
+pub fn[K, V] hashtbl_iter((K, V) -> Unit raise?, OHashtbl[K, V]) -> Unit raise?
+
+pub fn[K, V] hashtbl_length(OHashtbl[K, V]) -> Int
 
 pub fn[K : OCompare + OHash, V] hashtbl_mem(OHashtbl[K, V], K) -> Bool
 
@@ -129,11 +141,15 @@ pub fn[K : OCompare + OHash, V] hashtbl_remove(OHashtbl[K, V], K) -> Unit
 
 pub fn[K : OCompare + OHash, V] hashtbl_replace(OHashtbl[K, V], K, V) -> Unit
 
+pub fn[K, V] hashtbl_reset(OHashtbl[K, V]) -> Unit
+
 pub fn[A] hd(@list.List[A]) -> A raise
 
 pub fn[A] id(A) -> A
 
 pub fn implode(@list.List[String]) -> String
+
+pub fn incr(@ref.Ref[Int]) -> Unit
 
 pub fn[A, B : OCompare] increasing((A) -> B raise?, A, A) -> Bool raise?
 

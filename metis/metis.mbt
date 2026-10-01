@@ -21450,42 +21450,30 @@ pub fn repeattopdownconv(
   x3132 : (Term) -> (Term, Thm) raise,
 ) -> ((Term) -> (Term, Thm) raise) raise {
   let conv = x3132
-  let f = (x3134 : Term) => f_l_2(repeatconv, conv, x3134)
-  let g = (x3136 : Term) => g_l(repeatconv, conv, x3136)
-  let h = (x3138 : Term) => h_l(repeatconv, conv, x3138)
+  let f = (x3134 : Term) => f_l_2(conv, x3134)
+  let g = (x3136 : Term) => g_l(conv, x3136)
+  let h = (x3138 : Term) => h_l(conv, x3138)
   f
 }
 
 ///|
-fn f_l_2(
-  repeatconv : ((Term) -> (Term, Thm) raise, Term) -> (Term, Thm) raise,
-  conv : (Term) -> (Term, Thm) raise,
-  x3134 : Term,
-) -> (Term, Thm) raise {
-  let g = (x3136 : Term) => g_l(repeatconv, conv, x3136)
+fn f_l_2(conv : (Term) -> (Term, Thm) raise, x3134 : Term) -> (Term, Thm) raise {
+  let g = (x3136 : Term) => g_l(conv, x3136)
   let tm = x3134
   thenconv((x3135 : Term) => repeatconv(conv, x3135), g, tm)
 }
 
 ///|
-fn g_l(
-  repeatconv : ((Term) -> (Term, Thm) raise, Term) -> (Term, Thm) raise,
-  conv : (Term) -> (Term, Thm) raise,
-  x3136 : Term,
-) -> (Term, Thm) raise {
-  let f = (x3134 : Term) => f_l_2(repeatconv, conv, x3134)
-  let h = (x3138 : Term) => h_l(repeatconv, conv, x3138)
+fn g_l(conv : (Term) -> (Term, Thm) raise, x3136 : Term) -> (Term, Thm) raise {
+  let f = (x3134 : Term) => f_l_2(conv, x3134)
+  let h = (x3138 : Term) => h_l(conv, x3138)
   let tm_1 = x3136
   thenconv((x3137 : Term) => subtermsconv(f, x3137), h, tm_1)
 }
 
 ///|
-fn h_l(
-  repeatconv : ((Term) -> (Term, Thm) raise, Term) -> (Term, Thm) raise,
-  conv : (Term) -> (Term, Thm) raise,
-  x3138 : Term,
-) -> (Term, Thm) raise {
-  let f = (x3134 : Term) => f_l_2(repeatconv, conv, x3134)
+fn h_l(conv : (Term) -> (Term, Thm) raise, x3138 : Term) -> (Term, Thm) raise {
+  let f = (x3134 : Term) => f_l_2(conv, x3134)
   let tm_2 = x3138
   tryconv((x3139 : Term) => thenconv(conv, f, x3139))(tm_2)
 }

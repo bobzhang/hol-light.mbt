@@ -1,0 +1,291 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/compute"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn add_conv((@kernel.Term, Int, (@kernel.Term) -> @kernel.Thm raise), Compset) -> Unit raise
+
+pub fn add_convs(@list.List[(@kernel.Term, Int, (@kernel.Term) -> @kernel.Thm raise)]) -> Unit raise
+
+pub fn add_extern((@kernel.Term, Int, (@kernel.Term) -> (@kernel.Thm, Fterm[Db]) raise), Compset) -> Unit raise
+
+pub fn add_funs(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn add_in_db((Int, @kernel.Term, Action, Db)) -> Db raise
+
+pub fn add_in_db_upd(Compset, (String, Int, @kernel.Term), Action) -> Unit raise
+
+pub fn add_thms(@list.List[@kernel.Thm], Compset) -> Unit raise
+
+pub fn[TA] appl((Dterm[TA], Dterm[TA])) -> Dterm[TA] raise
+
+pub fn assoc_clause(Compset) -> ((String) -> @ref.Ref[(Db, Int?)] raise) raise
+
+pub fn auto_import_definitions() -> @ref.Ref[Bool]
+
+pub fn basic_compset(Unit) -> Compset raise
+
+pub fn beta_thm(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn body_conjuncts(@kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn bool_compset(Unit) -> Compset raise
+
+pub fn bool_redns() -> @list.List[@kernel.Thm]
+
+pub fn cbv_conv(Compset) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn[TA] cbv_up(((@kernel.Thm, Fterm[Db]), Stack[((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, (@kernel.Thm, Fterm[Db])), ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, Bool, (@kernel.Thm, Fterm[Db])), TA])) -> ((@kernel.Thm, Fterm[Db]), Stack[((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, (@kernel.Thm, Fterm[Db])), ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, Bool, (@kernel.Thm, Fterm[Db])), TA]) raise
+
+pub fn[TA] cbv_wk(((@kernel.Thm, Fterm[Db]), Stack[((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, (@kernel.Thm, Fterm[Db])), ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, Bool, (@kernel.Thm, Fterm[Db])), TA])) -> ((@kernel.Thm, Fterm[Db]), Stack[((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, (@kernel.Thm, Fterm[Db])), ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, Bool, (@kernel.Thm, Fterm[Db])), TA]) raise
+
+pub fn check_arg_form(@kernel.Term) -> (@list.List[@kernel.Term], @kernel.Term, @list.List[Pattern]) raise
+
+pub fn comb_ct(CstRec[Db], (@kernel.Term, Fterm[Db])) -> Fterm[Db] raise
+
+pub fn del_consts(@list.List[@kernel.Term]) -> Unit raise
+
+pub fn del_funs(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn deplist(Compset) -> @list.List[(String, @list.List[Transform])] raise
+
+pub fn empty_rws(Unit) -> Compset raise
+
+pub fn enter_thm(Compset, @kernel.Thm) -> Unit raise
+
+pub fn eq_intro(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn[TA] evaluate(TA) -> TA raise
+
+pub fn[TA] extern_of_conv(Compset, (TA) -> @kernel.Thm raise, TA) -> (@kernel.Thm, Fterm[Db]) raise
+
+pub fn from_list(@list.List[@kernel.Thm]) -> Compset raise
+
+pub fn from_term(Compset, @list.List[@kernel.Term], @kernel.Term) -> Dterm[Db] raise
+
+pub fn funify(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn initial_state(Compset, @kernel.Term) -> ((@kernel.Thm, Fterm[Db]), Stack[((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, (@kernel.Thm, Fterm[Db])), ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, Bool, (@kernel.Thm, Fterm[Db])), (@kernel.Thm) -> @kernel.Thm raise]) raise
+
+pub fn[TA] inst_one_var((@kernel.Thm, @list.List[TA]), (@kernel.Term, TA)?) -> (@kernel.Thm, @list.List[TA]) raise
+
+pub fn inst_rw(@kernel.Thm, Bool, RuleInst[Db]) -> (@kernel.Thm, Fterm[Db]) raise
+
+pub fn[TA] inst_type_dterm((@list.List[(@kernel.HolType, @kernel.HolType)], Dterm[TA])) -> Dterm[TA] raise
+
+pub fn[TA, TB] is_skip((TA, Fterm[TB])) -> Bool raise
+
+pub fn key_of(Rewrite) -> (String, Int, @kernel.Term) raise
+
+pub fn lazyfy_thm(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn listitems(Compset) -> @list.List[(String, @list.List[Transform])] raise
+
+pub fn[TA] match_const((TA, @list.List[(@kernel.HolType, @kernel.HolType)]), @kernel.Term, @kernel.Term) -> (TA, @list.List[(@kernel.HolType, @kernel.HolType)]) raise
+
+pub fn[TA] match_list((FixedArray[(@kernel.Term, Fterm[TA])?], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[Pattern], @list.List[(@kernel.Term, Fterm[TA])]) -> (FixedArray[(@kernel.Term, Fterm[TA])?], @list.List[(@kernel.HolType, @kernel.HolType)]) raise
+
+pub fn[TA] match_solve((FixedArray[(@kernel.Term, Fterm[TA])?], @list.List[(@kernel.HolType, @kernel.HolType)]), Pattern, (@kernel.Term, Fterm[TA])) -> (FixedArray[(@kernel.Term, Fterm[TA])?], @list.List[(@kernel.HolType, @kernel.HolType)]) raise
+
+pub fn[TA, TB] match_var((FixedArray[(@kernel.Term, TA)?], TB), Int, (@kernel.Term, TA)) -> (FixedArray[(@kernel.Term, TA)?], TB) raise
+
+pub fn mk_abs(@kernel.Thm) -> (@kernel.Term, @kernel.Thm, (@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn[TA] mk_clos(@list.List[Fterm[TA]], Dterm[TA]) -> Fterm[TA] raise
+
+pub fn mk_comb(@kernel.Thm) -> (@kernel.Thm, @kernel.Thm, (@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise
+
+pub fn mk_rewrite(Compset, @kernel.Thm) -> Rewrite raise
+
+pub fn monitoring() -> @ref.Ref[((@kernel.Term) -> Bool raise)?]
+
+pub fn new_compset(@list.List[@kernel.Thm]) -> Compset raise
+
+pub fn new_rws(Unit) -> Compset raise
+
+pub fn or(@list.List[@kernel.Term]) -> ((@kernel.Term) -> Bool raise) raise
+
+pub fn[TA] partition_skip(Int?, @list.List[TA]) -> (@list.List[TA], @list.List[TA]) raise
+
+pub fn[TA, TB, TC, TD] push_in_stk((TD) -> TA raise, TD, (@kernel.Thm, Stack[((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, (@kernel.Thm, TA)), TB, TC])) -> (@kernel.Thm, Stack[((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, (@kernel.Thm, TA)), TB, TC]) raise
+
+pub fn[TA, TB] push_lam_in_stk(@kernel.Thm, Stack[TA, TB, (@kernel.Thm) -> @kernel.Thm raise]) -> (@kernel.Thm, Stack[TA, TB, (@kernel.Thm) -> @kernel.Thm raise]) raise
+
+pub fn[TA, TB, TC, TD] push_skip_stk((TD) -> TB raise, TD, (@kernel.Thm, Stack[TA, ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, Bool, (@kernel.Thm, TB)), TC])) -> (@kernel.Thm, Stack[TA, ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, Bool, (@kernel.Thm, TB)), TC]) raise
+
+pub fn reduce_cst((@kernel.Thm, CstRec[Db])) -> (Bool, (@kernel.Thm, Fterm[Db])) raise
+
+pub fn refl_thm(@kernel.Term) -> @kernel.Thm raise
+
+pub fn repeat_on_conj((@kernel.Thm) -> @kernel.Thm raise, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn restr_eval_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn restr_eval_rule(@list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn restr_eval_tac(@list.List[@kernel.Term]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn rhs_concl(@kernel.Thm) -> @kernel.Term raise
+
+pub fn right_beta(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn right_eta(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn rws_of(Compset) -> @list.List[(@kernel.Term, @list.List[@kernel.Thm])] raise
+
+pub fn same_const(@kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn scrub_const(Compset) -> ((@kernel.Term) -> Unit raise) raise
+
+pub fn scrub_thms(@list.List[@kernel.Thm], Compset) -> Unit raise
+
+pub fn set_skip(Compset, @kernel.Term, Int?) -> Unit raise
+
+pub fn set_skip_name(Compset) -> ((String) -> ((Int?) -> Unit raise) raise) raise
+
+pub fn[TA, TB, TC, TD, TE, TF] stack_out((TA, Stack[((TA) -> ((TB) -> TA raise) raise, (TB, TC)), ((TD) -> ((TA) -> TA raise) raise, TE, (TD, TF)), (TA) -> TA raise])) -> TA raise
+
+pub fn stoppers() -> @ref.Ref[((@kernel.Term) -> Bool raise)?]
+
+pub fn strictify_thm(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn strong(((@kernel.Thm, Fterm[Db]), Stack[((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, (@kernel.Thm, Fterm[Db])), ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, Bool, (@kernel.Thm, Fterm[Db])), (@kernel.Thm) -> @kernel.Thm raise])) -> @kernel.Thm raise
+
+pub fn strong_up((@kernel.Thm, Stack[((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, (@kernel.Thm, Fterm[Db])), ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, Bool, (@kernel.Thm, Fterm[Db])), (@kernel.Thm) -> @kernel.Thm raise])) -> @kernel.Thm raise
+
+pub fn the_compset() -> Compset
+
+pub fn trans_thm(@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn try_eta(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn[TA] try_rwn(@list.List[(@kernel.HolType, @kernel.HolType)], @list.List[(@kernel.Term, Fterm[TA])]) -> ((@list.List[Rewrite]) -> RuleInst[TA] raise) raise
+
+pub fn unfunify(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn unsuitable(@kernel.Thm) -> Bool raise
+
+pub fn weak_cbv_conv(Compset) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn[TA, TB, TC] with_flag((@ref.Ref[TB], TB), (TC) -> TA raise, TC) -> TA raise
+
+// Errors
+pub(all) suberror Dead_code {
+  Dead_code(String)
+}
+
+pub(all) suberror No_match {
+  No_match
+}
+
+// Types and methods
+pub(all) enum Action {
+  Rewrite(@list.List[Rewrite])
+  Conv((@kernel.Term) -> (@kernel.Thm, Fterm[Db]) raise)
+}
+
+pub(all) struct ClosRec[TA] {
+  env : @list.List[Fterm[TA]]
+  term : Dterm[TA]
+}
+pub impl[TA : @lib.OCompare] @lib.OCompare for ClosRec[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for ClosRec[TA]
+
+pub(all) enum Compset {
+  Rws(@lib.OHashtbl[String, @ref.Ref[(Db, Int?)]])
+}
+
+pub(all) struct CstRec[TA] {
+  head : @kernel.Term
+  args : @list.List[(@kernel.Term, Fterm[TA])]
+  rws : TA
+  skip : Int?
+}
+pub impl[TA : @lib.OCompare] @lib.OCompare for CstRec[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for CstRec[TA]
+
+pub(all) enum Db {
+  End_db
+  Try(TryRec)
+  Need_arg(Db)
+}
+
+pub(all) enum Dterm[TA] {
+  Bv(Int)
+  Fv
+  Cst(@kernel.Term, @ref.Ref[(TA, Int?)])
+  App(Dterm[TA], @list.List[Dterm[TA]])
+  Abs(Dterm[TA])
+}
+pub impl[TA : @lib.OCompare] @lib.OCompare for Dterm[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for Dterm[TA]
+
+pub(all) enum Fterm[TA] {
+  Const(CstRec[TA])
+  Neutr
+  Clos(ClosRec[TA])
+}
+pub impl[TA : @lib.OCompare] @lib.OCompare for Fterm[TA]
+pub impl[TA : @lib.OHash] @lib.OHash for Fterm[TA]
+
+pub(all) enum Pattern {
+  Pvar(Int)
+  Papp(@kernel.Term, @list.List[Pattern])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Pattern
+pub impl @lib.OHash for Pattern
+
+pub(all) enum Rewrite {
+  Rw(RewriteRec)
+}
+
+pub(all) struct RewriteRec {
+  cst : @kernel.Term
+  lhs : @list.List[Pattern]
+  npv : Int
+  rhs : Dterm[Db]
+  thm : @kernel.Thm
+}
+
+pub(all) struct RuleInst[TA] {
+  rule : Rewrite
+  inst : (FixedArray[(@kernel.Term, Fterm[TA])?], @list.List[(@kernel.HolType, @kernel.HolType)])
+}
+
+pub(all) enum Stack[TA, TB, TC] {
+  Ztop
+  Zrator(TA, Stack[TA, TB, TC])
+  Zrand(TB, Stack[TA, TB, TC])
+  Zabs(TC, Stack[TA, TB, TC])
+} derive(Eq, @debug.Debug)
+pub impl[TA : @lib.OCompare, TB : @lib.OCompare, TC : @lib.OCompare] @lib.OCompare for Stack[TA, TB, TC]
+pub impl[TA : @lib.OHash, TB : @lib.OHash, TC : @lib.OHash] @lib.OHash for Stack[TA, TB, TC]
+
+pub(all) enum Transform {
+  Conversion((@kernel.Term) -> (@kernel.Thm, Fterm[Db]) raise)
+  Rrules(@list.List[@kernel.Thm])
+}
+
+pub(all) struct TryRec {
+  hcst : @kernel.Term
+  rws : Action
+  tail : Db
+}
+
+// Type aliases
+pub type CbvStack = Stack[((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, (@kernel.Thm, Fterm[Db])), ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, Bool, (@kernel.Thm, Fterm[Db])), (@kernel.Thm) -> @kernel.Thm raise]
+
+// Traits

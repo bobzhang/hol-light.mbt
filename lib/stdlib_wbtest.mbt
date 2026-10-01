@@ -75,3 +75,44 @@ test "floats hash and compare like OCaml" {
   inspect(compare(@double.not_a_number, @double.not_a_number), content="0")
   inspect(compare(2.0, 1.5), content="1")
 }
+
+///|
+/// Hashtbl with OCaml 4.14's layout: fold order after random operations
+/// (values from OCaml, same random numbers).
+test "hashtbl folds like OCaml" {
+  random_init(5)
+  let t : OHashtbl[Int, Int] = hashtbl_create(10)
+  for _ in 0..<400 {
+    let k = random_int(90)
+    let v = random_int(1000)
+    match random_int(5) {
+      0 | 1 => hashtbl_add(t, k, v)
+      2 => hashtbl_replace(t, k, v)
+      3 => hashtbl_remove(t, k)
+      _ => ignore(hashtbl_find_opt(t, k))
+    }
+  }
+  let l = hashtbl_fold(
+    (k, v, acc : @list.List[String]) => acc.prepend("\{k}:\{v}"),
+    t,
+    @list.empty(),
+  )
+  inspect(
+    l.to_array().join(" "),
+    content="18:957 18:406 50:309 50:713 80:372 50:468 50:57 25:9 25:849 25:897 4:570 30:493 62:858 30:963 14:949 82:727 89:246 89:646 89:20 89:15 56:92 79:87 56:480 31:996 31:558 31:665 31:615 12:957 12:708 54:600 54:258 45:89 45:307 54:165 78:77 81:331 1:480 1:484 81:369 1:621 1:22 77:586 23:423 77:310 70:751 70:418 70:958 3:968 3:970 16:355 24:868 16:994 24:424 21:385 76:982 76:985 57:40 85:634 26:143 26:426 26:963 9:142 9:297 9:30 63:154 13:69 63:501 13:615 51:415 32:457 17:760 17:848 17:626 17:828 40:938 67:577 55:384 55:378 55:391 60:229 60:57 60:418 59:548 6:710 6:372 6:988 38:113 61:285 61:139 61:360 87:424 84:385 84:643 58:105 34:602 74:671 75:805 75:931 48:750 71:90 22:824 53:108 28:689 28:647 28:602 28:292 28:622 53:106 28:526 28:589 65:462 73:835 73:711 44:284 44:905 44:942 5:787 5:497 5:938 72:101 72:835 37:158 37:616 64:408 41:734 10:668 10:26 10:152 10:786 0:445 0:644 0:359 39:247 83:409 66:493 39:406 83:640 83:283 66:101 7:791 88:189 29:199 29:168 43:619 86:56 86:436 43:151 20:218 2:240",
+  )
+  inspect(hashtbl_length(t), content="149")
+  let s : OHashtbl[String, Int] = hashtbl_create(3)
+  for w in ["alpha", "beta", "gamma", "delta", "x", "beta"] {
+    hashtbl_add(s, w, w.length())
+  }
+  let l2 = hashtbl_fold(
+    (k, v, acc : @list.List[String]) => acc.prepend("\{k}=\{v}"),
+    s,
+    @list.empty(),
+  )
+  inspect(
+    l2.to_array().join(" "),
+    content="delta=5 beta=4 x=1 beta=4 alpha=5 gamma=5",
+  )
+}
