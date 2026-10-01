@@ -10,7 +10,7 @@ import {
 }
 
 // Values
-pub fn basic_rectype_net() -> @ref.Ref[@nets.Net[@simp.Gconv]]
+pub fn basic_rectype_net() -> @ref.Ref[@nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]]
 
 pub fn bottom() -> @kernel.Thm
 

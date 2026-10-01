@@ -68,7 +68,7 @@ test "{name} matches {name}.ml" {{
   // END EXTRA
   log.attempt("counter_tyvar", () => stm(tm("zz_counter")))
   log.attempt("counter_genvar", () => stm(@basics.genvar(@kernel.bool_ty)))
-  inspect(log.contents())
+  inspect(@testkit.normalize_times(log.contents()))
 }}
 """
 open(f"{name}/{name}_ref_test.mbt", "w").write(mbt)

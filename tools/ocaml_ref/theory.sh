@@ -23,6 +23,8 @@ python3 - "$name" <<'PY'
 import sys
 p=f'tools/ocaml_ref/{sys.argv[1]}_ref.expected'
 s=open(p).read().replace("    * HOL-Light syntax in effect *\n\n","",1)
+import re
+s=re.sub(r"(?m)^CPU time \(user\): .*$", "CPU time (user): <t>", s)
 open(p,'w').write(s)
 PY
 python3 tools/ocaml_ref/embed_golden.py "tools/ocaml_ref/${name}_ref.expected" "$name/${name}_ref_test.mbt"

@@ -6,6 +6,8 @@ import {
 }
 
 // Values
+pub fn normalize_times(String) -> String
+
 pub fn ocaml_escaped(String) -> String
 
 pub fn start_trace() -> Unit

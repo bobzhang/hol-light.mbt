@@ -225,16 +225,18 @@ module Lower = struct
              (match M.find ~root:!Names.root pkg n with Some (M.Alias t) -> Some t | _ -> None)
          | None -> None)
 
-  (* `int * (term -> thm)`: simp's gconv, expanded *)
-  let is_gconv_tuple ty =
+  (* `int * (term -> 'a)`: an element of simp's rewrite nets (gconv when
+     'a is thm), expanded; its function part *)
+  let gconv_fun ty =
     let name t = match Types.get_desc (Ctype.expand_head (env ()) t) with Types.Tconstr (p, [], _) -> Path.last p | _ -> "" in
     match Types.get_desc (Ctype.expand_head (env ()) ty) with
-    | Types.Ttuple [ a; f ] ->
-        name a = "int"
-        && (match Types.get_desc (Ctype.expand_head (env ()) f) with
-            | Types.Tarrow (_, x, y, _) -> name x = "term" && name y = "thm"
-            | _ -> false)
-    | _ -> false
+    | Types.Ttuple [ a; f ] when name a = "int" ->
+        (match Types.get_desc (Ctype.expand_head (env ()) f) with
+         | Types.Tarrow (_, x, _, _) when name x = "term" -> Some f
+         | _ -> None)
+    | _ -> None
+
+  let is_gconv_tuple ty = gconv_fun ty <> None
 
   (* The canonical MoonBit type of an OCaml type: curried unary functions
      (a tuple parameter stays one tuple parameter), every function raising. *)
@@ -249,9 +251,10 @@ module Lower = struct
     | Types.Tarrow (_, a, b, _) -> M.Fun ([ mty_of a ], mty_of b, true)
     | Types.Ttuple ts -> M.Tuple (List.map mty_of ts)
     | Types.Tconstr (p, [ arg ], _) when Path.name p = "net" && is_gconv_tuple arg ->
-        (* `gconv net` seen through the abbreviation `gconv = int * conv`:
-           simp's nets hold Gconv structs *)
-        M.Named ("@nets.Net", [ M.Named ("@simp.Gconv", []) ])
+        (* `gconv net` seen through the abbreviation `gconv = int * conv`
+           (or `(int * (term -> 'a)) net`): simp's nets hold GconvOf structs *)
+        let f = Option.get (gconv_fun arg) in
+        M.Named ("@nets.Net", [ M.Named ("@simp.GconvOf", [ mty_of f ]) ])
     | Types.Tconstr (p, args, _) ->
         let own = match own_type_path p with Some t -> Some t | None -> base_type0 (Path.name p) in
         let is_alias =
@@ -306,7 +309,8 @@ module Lower = struct
         let r = if String.length r > 0 && r.[0] = '(' && is_arrow b then "(" ^ r ^ ")" else r in
         "(" ^ show_ty a ^ ") -> " ^ r ^ " raise"
     | Types.Ttuple ts -> "(" ^ String.concat ", " (List.map show_ty ts) ^ ")"
-    | Types.Tconstr (p, [ arg ], _) when Path.name p = "net" && is_gconv_tuple arg -> "@nets.Net[@simp.Gconv]"
+    | Types.Tconstr (p, [ arg ], _) when Path.name p = "net" && is_gconv_tuple arg ->
+        "@nets.Net[@simp.GconvOf[" ^ show_ty (Option.get (gconv_fun arg)) ^ "]]"
     | Types.Tconstr (p, args, _) ->
         let name = Path.name p in
         let own = match own_type_path p with Some t -> Some t | None -> base_type0 name in

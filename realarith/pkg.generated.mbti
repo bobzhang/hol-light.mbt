@@ -1,0 +1,101 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/realarith"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn gen_real_arith(((@num.Num) -> @kernel.Term raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> ((Positivstellensatz) -> @kernel.Thm raise) raise) -> (((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> @kernel.Thm raise) raise)) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn gen_real_arith_v1(((@num.Num) -> @kernel.Term raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> ((Positivstellensatz) -> @kernel.Thm raise) raise) -> (((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> @kernel.Thm raise) raise)) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn real_arith(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_arith_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_entire() -> @kernel.Thm
+
+pub fn real_le_add() -> @kernel.Thm
+
+pub fn real_le_lt() -> @kernel.Thm
+
+pub fn real_le_negtotal() -> @kernel.Thm
+
+pub fn real_le_square() -> @kernel.Thm
+
+pub fn real_let_add() -> @kernel.Thm
+
+pub fn real_let_total() -> @kernel.Thm
+
+pub fn real_let_trans() -> @kernel.Thm
+
+pub fn real_linear_prover(((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> ((Positivstellensatz) -> @kernel.Thm raise) raise) -> (((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> @kernel.Thm raise) raise
+
+pub fn real_lt_add() -> @kernel.Thm
+
+pub fn real_lt_imp_le() -> @kernel.Thm
+
+pub fn real_lt_le() -> @kernel.Thm
+
+pub fn real_lt_nz() -> @kernel.Thm
+
+pub fn real_lt_refl() -> @kernel.Thm
+
+pub fn real_lt_trans() -> @kernel.Thm
+
+pub fn real_lte_add() -> @kernel.Thm
+
+pub fn real_lte_antisym() -> @kernel.Thm
+
+pub fn real_lte_total() -> @kernel.Thm
+
+pub fn real_lte_trans() -> @kernel.Thm
+
+pub fn real_mul_rid() -> @kernel.Thm
+
+pub fn real_neg_sub() -> @kernel.Thm
+
+pub fn real_not_lt() -> @kernel.Thm
+
+pub fn real_poly_clauses() -> @kernel.Thm
+
+pub fn real_poly_neg_clauses() -> @kernel.Thm
+
+pub fn real_pos() -> @kernel.Thm
+
+pub fn real_pos_lt() -> @kernel.Thm
+
+pub fn real_pow_2() -> @kernel.Thm
+
+pub fn real_sub_0() -> @kernel.Thm
+
+pub fn real_sub_le() -> @kernel.Thm
+
+pub fn real_sub_lt() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+pub(all) enum Positivstellensatz {
+  Axiom_eq(Int)
+  Axiom_le(Int)
+  Axiom_lt(Int)
+  Rational_eq(@num.Num)
+  Rational_le(@num.Num)
+  Rational_lt(@num.Num)
+  Square(@kernel.Term)
+  Eqmul(@kernel.Term, Positivstellensatz)
+  Sum(Positivstellensatz, Positivstellensatz)
+  Product(Positivstellensatz, Positivstellensatz)
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Positivstellensatz
+pub impl @lib.OHash for Positivstellensatz
+
+// Type aliases
+
+// Traits

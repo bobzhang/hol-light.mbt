@@ -15,14 +15,16 @@ body = "\n".join("      #|" + l for l in lines + [""])
 src = open(test).read()
 # Either the bare call or a previously embedded one (which ends with the
 # `    ),\n  )` produced above; `#|` lines never contain that sequence).
-pattern = (r"inspect\((\w+\.(?:buf\.to_string|contents))\(\)\)"
-           r"|inspect\(\n    (\w+\.(?:buf\.to_string|contents))\(\),\n    content=\(\n"
+# the inspected expression: `log.contents()`, possibly normalized
+expr = r"((?:@testkit\.normalize_times\()?\w+\.(?:buf\.to_string|contents)\(\)\)?)"
+pattern = (r"inspect\(" + expr + r"\)"
+           r"|inspect\(\n    " + expr + r",\n    content=\(\n"
            r"(?:      #\|[^\n]*\n)*    \),\n  \)")
 
 
 def call(m):
     var = m.group(1) or m.group(2)
-    return ("inspect(\n    " + var + "(),\n    content=(\n" +
+    return ("inspect(\n    " + var + ",\n    content=(\n" +
             body + "\n    ),\n  )")
 
 

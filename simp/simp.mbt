@@ -34,18 +34,23 @@ fn[T] fail_() -> T raise {
 }
 
 ///|
-/// A conversion with a priority, as stored in rewrite nets: 1 for
+/// A conversion (or any function on terms, upstream's `'a` in
+/// `(int * 'a) net`) with a priority, as stored in rewrite nets: 1 for
 /// rewrites, 2 for conversions, 3 for conditional rewrites, 4 for
 /// congruences.
-pub struct Gconv {
+pub struct GconvOf[C] {
   priority : Int
-  conv : Conv
+  conv : C
 }
+
+///|
+/// The usual case: a conversion.
+pub type Gconv = GconvOf[Conv]
 
 ///|
 /// OCaml's `compare` on `int * conv`: the priorities first, then the
 /// closures, which only compare (as equal) when physically equal.
-pub impl @nets.NetCompare for Gconv with fn net_compare(self, other) {
+pub impl[C] @nets.NetCompare for GconvOf[C] with fn net_compare(self, other) {
   let c = self.priority.compare(other.priority)
   if c != 0 {
     Some(c)
@@ -57,7 +62,7 @@ pub impl @nets.NetCompare for Gconv with fn net_compare(self, other) {
 }
 
 ///|
-pub extend Gconv with @nets.NetCompare::{net_compare}
+pub extend GconvOf with @nets.NetCompare::{net_compare}
 
 ///|
 /// `REWR_CONV th`: rewrite with the equation `th`.
@@ -198,7 +203,11 @@ pub fn net_of_thm(rep : Bool, th : Thm, net : Net[Gconv]) -> Net[Gconv] raise {
 
 ///|
 /// `net_of_conv tm conv net`
-pub fn net_of_conv(tm : Term, conv : Conv, sofar : Net[Gconv]) -> Net[Gconv] {
+pub fn[C] net_of_conv(
+  tm : Term,
+  conv : C,
+  sofar : Net[GconvOf[C]],
+) -> Net[GconvOf[C]] {
   @nets.enter(@list.empty(), tm, { priority: 2, conv, }, sofar)
 }
 
@@ -295,10 +304,12 @@ pub fn mk_rewrites(cf : Bool, th : Thm, sofar : List[Thm]) -> List[Thm] raise {
 
 ///|
 /// `REWRITES_CONV net`: apply the first rewrite in `net` that works.
-pub fn rewrites_conv(net : Net[Gconv]) -> Conv {
+pub fn[B] rewrites_conv(
+  net : Net[GconvOf[(Term) -> B raise]],
+) -> (Term) -> B raise {
   tm => {
     let pconvs = @nets.lookup(tm, net)
-    @lib.tryfind((g : Gconv) => (g.conv)(tm), pconvs) catch {
+    @lib.tryfind((g : GconvOf[(Term) -> B raise]) => (g.conv)(tm), pconvs) catch {
       Failure(_) => raise Failure("REWRITES_CONV")
       e => raise e
     }
