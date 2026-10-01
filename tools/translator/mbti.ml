@@ -198,7 +198,7 @@ module Mbti = struct
     | Named (n, args) ->
         let n =
           if String.contains n '@' || List.mem n builtin || String.length n = 1 || List.mem n generics then n
-          else "@" ^ pkg ^ "." ^ n
+          else "@" ^ Filename.basename pkg ^ "." ^ n
         in
         Named (n, List.map (qualify ~generics pkg) args)
     | Tuple ts -> Tuple (List.map (qualify ~generics pkg) ts)

@@ -440,7 +440,7 @@ module Loader = struct
   (* Load `file` (path relative to the HOL Light root), calling `on_item`
      with every typed structure item before it is executed. *)
   let load_file ?(on_item = fun _ -> ()) ~hol file =
-    let base = Filename.basename file in
+    let base = file in (* the path relative to the HOL Light root *)
     List.iter
       (fun p ->
         match p with
@@ -470,6 +470,10 @@ end
 module Names = struct
   (* Upstream file -> MoonBit package. *)
   let package_of_file = function
+    | f when String.length f > 8 && String.sub f 0 8 = "Library/" ->
+        Some ("library/" ^ Filename.remove_extension (String.sub f 8 (String.length f - 8)))
+    | f when String.length f > 13 && String.sub f 0 13 = "Multivariate/" ->
+        Some ("multivariate/" ^ Filename.remove_extension (String.sub f 13 (String.length f - 13)))
     | "lib.ml" -> Some "lib"
     | "ocaml_map.ml" -> Some "omap"
     | "define.ml" -> Some "define"
@@ -676,9 +680,52 @@ module Translator = struct
                  "calc_rat.ml"; "int.ml"; "sets.ml"; "iterate.ml"; "cart.ml";
                  "define.ml" ]
 
-  let rec upto target = function
+  (* the files a file `needs` (Library/, Multivariate/ ...) *)
+  let needs_of ~hol file =
+    let path = Filename.concat hol file in
+    if not (Sys.file_exists path) then []
+    else begin
+      let ic = open_in path in
+      let text = really_input_string ic (in_channel_length ic) in
+      close_in ic;
+      let acc = ref [] and i = ref 0 in
+      let n = String.length text in
+      while !i < n - 6 do
+        if String.sub text !i 6 = "needs " then begin
+          let j = ref (!i + 6) in
+          while !j < n && text.[!j] = ' ' do incr j done;
+          if !j < n && text.[!j] = '"' then begin
+            let k = String.index_from text (!j + 1) '"' in
+            acc := String.sub text (!j + 1) (k - !j - 1) :: !acc;
+            i := k
+          end else i := !j
+        end else incr i
+      done;
+      List.rev !acc
+    end
+
+  let hol_dir = ref ""
+
+  let rec upto_in target = function
     | [] -> []
-    | f :: fs -> if f = target then [] else f :: upto target fs
+    | f :: fs -> if f = target then [] else f :: upto_in target fs
+
+  (* the files loaded before `target`: hol.ml's order; for a file outside
+     it (Library/, Multivariate/ ...), all of it, then what the file needs
+     (dependencies first) *)
+  let upto target list =
+    if List.mem target list then upto_in target list
+    else begin
+      let seen = ref [] in
+      let rec visit f =
+        if not (List.mem f !seen) && not (List.mem f list) then begin
+          List.iter visit (needs_of ~hol:!hol_dir f);
+          seen := !seen @ [ f ]
+        end
+      in
+      List.iter visit (needs_of ~hol:!hol_dir target);
+      list @ !seen
+    end
 
   let survey ~hol ~root target =
     Names.root := root;

@@ -89,7 +89,11 @@ module Lower = struct
         ("Ident", "parser"); ("Resword", "parser") ]
   let current_pkg = ref ""
 
-  let qualified (pkg, name) = if pkg = !current_pkg then name else "@" ^ pkg ^ "." ^ name
+  (* a package's import alias: its directory's last component
+     (`library/prime` is `@prime`) *)
+  let pkg_alias pkg = Filename.basename pkg
+
+  let qualified (pkg, name) = if pkg = !current_pkg then name else "@" ^ pkg_alias pkg ^ "." ^ name
 
   let own_type name = Option.map qualified (Hashtbl.find_opt own_types name)
 
@@ -644,7 +648,7 @@ module Lower = struct
         (match Names.resolve file name with
          | None -> unsupported loc "no MoonBit declaration for %s:%s" file name
          | Some (pkg, mname, decl) ->
-             let q = "@" ^ pkg ^ "." ^ mname in
+             let q = "@" ^ pkg_alias pkg ^ "." ^ mname in
              (match decl with
               | M.Func (_, [], r, _) when not (match arrow oty with Some (a, _) -> is_unit a | None -> false) ->
                   (* an accessor: `pub fn x() -> T` for an OCaml value *)
@@ -1222,7 +1226,7 @@ module Lower = struct
         let name = Option.get (list_alias p vd) in
         (match Names.resolve "lib.ml" name with
          | Some (pkg, mname, decl) ->
-             let h = { hstmts = []; hexp = Atom ("@" ^ pkg ^ "." ^ mname); hmty = mty_of_decl decl; hoty = Some vd.Types.val_type } in
+             let h = { hstmts = []; hexp = Atom ("@" ^ pkg_alias pkg ^ "." ^ mname); hmty = mty_of_decl decl; hoty = Some vd.Types.val_type } in
              apply_head ?expect ~res:whole.exp_type loc h args
          | None -> unsupported loc "List.%s" name)
     | Texp_ident (p, _, _) when (match stdlib_name p with Some ("Format.printf" | "Printf.printf" | "Printf.sprintf" | "Format.sprintf") -> true | _ -> false) ->

@@ -1,0 +1,55 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/binary"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn binarysum() -> @kernel.Thm
+
+pub fn binarysum_bitset() -> @kernel.Thm
+
+pub fn binarysum_bound() -> @kernel.Thm
+
+pub fn binarysum_bound_eq() -> @kernel.Thm
+
+pub fn binarysum_bound_lemma() -> @kernel.Thm
+
+pub fn binarysum_div() -> @kernel.Thm
+
+pub fn binarysum_div_divisible() -> @kernel.Thm
+
+pub fn bitset() -> @kernel.Thm
+
+pub fn bitset_0() -> @kernel.Thm
+
+pub fn bitset_binarysum() -> @kernel.Thm
+
+pub fn bitset_bound() -> @kernel.Thm
+
+pub fn bitset_bound_eq() -> @kernel.Thm
+
+pub fn bitset_bound_lemma() -> @kernel.Thm
+
+pub fn bitset_bound_weak() -> @kernel.Thm
+
+pub fn bitset_eq() -> @kernel.Thm
+
+pub fn bitset_eq_empty() -> @kernel.Thm
+
+pub fn bitset_step() -> @kernel.Thm
+
+pub fn bounded_finite() -> @kernel.Thm
+
+pub fn even_nsum() -> @kernel.Thm
+
+pub fn finite_bitset() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

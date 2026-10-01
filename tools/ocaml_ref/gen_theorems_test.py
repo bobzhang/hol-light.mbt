@@ -11,7 +11,11 @@ import re
 import sys
 
 pkg = sys.argv[1] if len(sys.argv) > 1 else 'theorems'
-src = open(f'{pkg}/{pkg}.mbt').read()
+alias = pkg.split('/')[-1]
+# optional explicit paths (nested packages: library/prime)
+ref = sys.argv[2] if len(sys.argv) > 2 else f'tools/ocaml_ref/{pkg}_ref.ml'
+test = sys.argv[3] if len(sys.argv) > 3 else f'{pkg}/{pkg}_ref_test.mbt'
+src = open(f'{pkg}/{alias}.mbt').read()
 pairs = re.findall(r'/// `([A-Za-z0-9_\']+)`\npub fn ([a-z0-9_]+)\(\) -> @kernel\.Thm', src)
 # a redefined name: OCaml's scripts see only the last definition
 last = {o: i for i, (o, _) in enumerate(pairs)}
@@ -25,10 +29,10 @@ def splice(path, begin, end, lines):
     open(path, 'w').write(text[:i] + '\n' + ''.join(lines) + text[j:])
 
 
-splice(f'tools/ocaml_ref/{pkg}_ref.ml',
+splice(ref,
        '(* BEGIN generated theorem list *)', '(* END generated theorem list *)',
        [f'attempt "{o}" (fun () -> sthm {o});;\n' for o, _ in pairs])
-splice(f'{pkg}/{pkg}_ref_test.mbt',
+splice(test,
        '// BEGIN generated theorem list', '  // END generated theorem list',
-       [f'  log.attempt("{o}", () => sthm(@{pkg}.{n}()))\n' for o, n in pairs])
+       [f'  log.attempt("{o}", () => sthm(@{alias}.{n}()))\n' for o, n in pairs])
 print(f'{len(pairs)} theorems')

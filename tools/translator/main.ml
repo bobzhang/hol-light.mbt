@@ -40,6 +40,9 @@ module Main = struct
     | "iterate.ml" -> ("iterate/iterate.mbt", [])
     | "cart.ml" -> ("cart/cart.mbt", [])
     | "define.ml" -> ("define/define.mbt", [])
+    | f when (match Names.package_of_file f with Some p -> String.contains p '/' | None -> false) ->
+        let p = Option.get (Names.package_of_file f) in
+        (p ^ "/" ^ Filename.basename p ^ ".mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =
@@ -48,7 +51,8 @@ module Main = struct
     Loader.stdlib_dir := Filename.concat root "tools/translator/stdlib";
     Functors.stdlib_dir := !Loader.stdlib_dir;
     Lower.current_file := target;
-    Lower.current_pkg := Filename.remove_extension (Filename.basename out);
+    Translator.hol_dir := hol;
+    Lower.current_pkg := Filename.dirname out;
     List.iter
       (fun f ->
         (* translated packages: their types are generated with these names *)
