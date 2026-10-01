@@ -3,8 +3,8 @@
 // symbols, each identifier is the longest string of alphanumerics or the
 // longest string of symbolics.
 //
-// Implemented as a loop over the characters (upstream's combinators recurse
-// once per token), with the same tokens and errors.
+// Implemented as a loop over the input bytes (upstream's combinators
+// recurse once per token), with the same tokens and errors.
 // ===========================================================================
 
 ///|
@@ -22,12 +22,6 @@ pub extend Lexcode with @debug.Debug::{to_repr}
 ///|
 /// The token that starts a comment running to the end of the line.
 pub let comment_token : Ref[Lexcode] = Ref::{ val: Resword("//"), }
-
-///|
-/// Escaped bytes 0x80..0xFF in string literals are kept as these private-use
-/// characters, so that `pmk_string` can turn them back into single bytes
-/// (OCaml strings are byte strings).
-let escaped_byte_base = 0xF700
 
 ///|
 fn char_str(c : Char) -> String {
@@ -158,12 +152,9 @@ fn string_literal(chars : Array[Char], i : Int) -> (String, Int)? raise {
 }
 
 ///|
+/// A byte as a character of the lexer's byte string.
 fn byte_char(v : Int) -> String {
-  if v < 0x80 {
-    v.unsafe_to_char().to_string()
-  } else {
-    (escaped_byte_base + v).unsafe_to_char().to_string()
-  }
+  v.unsafe_to_char().to_string()
 }
 
 ///|
@@ -210,9 +201,13 @@ fn skip_spaces(chars : Array[Char], i : Int) -> Int {
 }
 
 ///|
-/// Split a string into HOL tokens.
+/// Split a string into HOL tokens. As upstream, the input is processed as
+/// bytes (its UTF-8 encoding), one character per byte, so string literals
+/// carry exactly OCaml's bytes; non-ASCII bytes never form identifiers.
 pub fn lex(s : String) -> List[Lexcode] raise {
-  let chars : Array[Char] = s.iter().collect()
+  let chars : Array[Char] = [
+    for b in @utf8.encode(s) => b.to_int().unsafe_to_char()
+  ]
   let toks = []
   let mut i = 0
   while true {

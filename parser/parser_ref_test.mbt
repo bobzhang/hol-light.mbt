@@ -258,6 +258,13 @@ let cases : String =
   #|Y: nn
   #|Y: nn->bool
   #|T: (x:nn) = y
+  #|T: "é"
+  #|T: "\195\169"
+  #|T: "\xe9!"
+  #|T: "\xé"
+  #|T: "a\xFF\128"
+  #|T: é
+  #|T: xé
 
 ///|
 using @kernel {type Term, type HolType}
@@ -575,6 +582,13 @@ test "parser and printer match upstream on parse_cases.txt" {
       #|Y: nn = prod(num,num) | num#num
       #|Y: nn->bool = fun(prod(num,num),bool) | num#num->bool
       #|T: (x:nn) = y = ((#=:fun(prod(num,num),fun(prod(num,num),bool)) x:prod(num,num)) y:prod(num,num)) | x = y
+      #|T: "é" = ((#CONS:fun(char,fun(list(char),list(char))) ((((((((#ASCII:fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,char)))))))) #T:bool) #T:bool) #F:bool) #F:bool) #F:bool) #F:bool) #T:bool) #T:bool)) ((#CONS:fun(char,fun(list(char),list(char))) ((((((((#ASCII:fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,char)))))))) #T:bool) #F:bool) #T:bool) #F:bool) #T:bool) #F:bool) #F:bool) #T:bool)) #NIL:list(char))) | "\195\169"
+      #|T: "\195\169" = ((#CONS:fun(char,fun(list(char),list(char))) ((((((((#ASCII:fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,char)))))))) #T:bool) #T:bool) #F:bool) #F:bool) #F:bool) #F:bool) #T:bool) #T:bool)) ((#CONS:fun(char,fun(list(char),list(char))) ((((((((#ASCII:fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,char)))))))) #T:bool) #F:bool) #T:bool) #F:bool) #T:bool) #F:bool) #F:bool) #T:bool)) #NIL:list(char))) | "\195\169"
+      #|T: "\xe9!" = ((#CONS:fun(char,fun(list(char),list(char))) ((((((((#ASCII:fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,char)))))))) #T:bool) #T:bool) #T:bool) #F:bool) #T:bool) #F:bool) #F:bool) #T:bool)) ((#CONS:fun(char,fun(list(char),list(char))) ((((((((#ASCII:fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,char)))))))) #F:bool) #F:bool) #T:bool) #F:bool) #F:bool) #F:bool) #F:bool) #T:bool)) #NIL:list(char))) | "\233!"
+      #|T: "\xé" ! int_of_string
+      #|T: "a\xFF\128" = ((#CONS:fun(char,fun(list(char),list(char))) ((((((((#ASCII:fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,char)))))))) #F:bool) #T:bool) #T:bool) #F:bool) #F:bool) #F:bool) #F:bool) #T:bool)) ((#CONS:fun(char,fun(list(char),list(char))) ((((((((#ASCII:fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,char)))))))) #T:bool) #T:bool) #T:bool) #T:bool) #T:bool) #T:bool) #T:bool) #T:bool)) ((#CONS:fun(char,fun(list(char),list(char))) ((((((((#ASCII:fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,fun(bool,char)))))))) #T:bool) #F:bool) #F:bool) #F:bool) #F:bool) #F:bool) #F:bool) #F:bool)) #NIL:list(char)))) | "a\255\128"
+      #|T: é ! Unparsed input
+      #|T: xé ! Unparsed input
       #|
     ),
   )

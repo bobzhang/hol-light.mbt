@@ -233,6 +233,14 @@ pub(all) suberror Unchanged derive(@debug.Debug)
 pub fn Unchanged::to_repr(Self) -> @debug.Repr
 
 // Types and methods
+pub struct Cell[T] {
+  // private fields
+}
+pub fn[T] Cell::get(Self[T]) -> T
+pub fn[T] Cell::is_set(Self[T]) -> Bool
+pub fn[T] Cell::new(String) -> Self[T]
+pub fn[T] Cell::set(Self[T], T) -> Unit
+
 pub enum Func[K, V] {
   Empty
   Leaf(Int, @list.List[(K, V)])

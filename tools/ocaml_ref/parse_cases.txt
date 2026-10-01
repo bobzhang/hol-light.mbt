@@ -252,3 +252,10 @@ abbrev nn : num#num
 Y: nn
 Y: nn->bool
 T: (x:nn) = y
+T: "é"
+T: "\195\169"
+T: "\xe9!"
+T: "\xé"
+T: "a\xFF\128"
+T: é
+T: xé

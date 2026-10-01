@@ -357,24 +357,12 @@ fn pmk_char(c : Int) -> Preterm {
 }
 
 ///|
-/// The bytes of a string literal, as OCaml sees them: ASCII characters are
-/// one byte, escaped bytes (see `escaped_byte_base`) one byte, and other
-/// characters their UTF-8 encoding.
+/// The bytes of a string literal token (the lexer works on bytes, one
+/// character per byte).
 fn literal_bytes(s : String) -> Array[Int] {
-  let out = []
-  for ch in s {
-    let c = ch.to_int()
-    if c < 0x80 {
-      out.push(c)
-    } else if c >= escaped_byte_base + 0x80 && c <= escaped_byte_base + 0xFF {
-      out.push(c - escaped_byte_base)
-    } else {
-      for b in @utf8.encode(ch.to_string()) {
-        out.push(b.to_int())
-      }
-    }
-  }
-  out
+  [
+    for ch in s => ch.to_int()
+  ]
 }
 
 ///|
@@ -499,7 +487,7 @@ fn lmk_decimal(p : ((Lexcode, String), List[String])) -> Preterm raise {
       let n_r = @num.num_of_string(r0)
       let n_d = @num.power_num(
         @num.num_of_int(10),
-        @num.num_of_int(@utf8.encode(r0).length()),
+        @num.num_of_int(r0.length()),
       )
       let n_n = n_l * n_d + n_r
       (@num.string_of_num(n_n), @num.string_of_num(n_d))

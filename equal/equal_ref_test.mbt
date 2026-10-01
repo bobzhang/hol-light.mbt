@@ -35,15 +35,17 @@ test "equal matches equal.ml" {
   let t = (name : String, f : () -> @kernel.Term raise) => {
     log.attempt(name, () => @printer.string_of_term(f()))
   }
-  let asm = (s : String) => @kernel.assume_rule(tm(s))
+  let hyp_of = (s : String) => @kernel.assume_rule(tm(s))
   let beta = @equal.beta_conv
   th("BETA_CONV", () => beta(tm("(\\x:num. x + x) c")))
   th("BETA_CONV_var", () => beta(tm("(\\x:num. x + y) x")))
   th("BETA_CONV_bad", () => beta(tm("(f:num->num) c")))
-  th("AP_TERM", () => @equal.ap_term(tm("f:num->num"), asm("(x:num) = y")))
-  th("AP_TERM_bad", () => @equal.ap_term(tm("f:bool->num"), asm("(x:num) = y")))
-  th("AP_THM", () => @equal.ap_thm(asm("(f:num->num) = g"), tm("c")))
-  th("SYM", () => @equal.sym(asm("(x:num) = y + c")))
+  th("AP_TERM", () => @equal.ap_term(tm("f:num->num"), hyp_of("(x:num) = y")))
+  th("AP_TERM_bad", () => {
+    @equal.ap_term(tm("f:bool->num"), hyp_of("(x:num) = y"))
+  })
+  th("AP_THM", () => @equal.ap_thm(hyp_of("(f:num->num) = g"), tm("c")))
+  th("SYM", () => @equal.sym(hyp_of("(x:num) = y + c")))
   th("ALPHA", () => {
     @equal.alpha_rule(tm("\\x:num. x + c"), tm("\\y:num. y + c"))
   })
@@ -55,7 +57,11 @@ test "equal matches equal.ml" {
     @equal.gen_alpha_conv(tm("z:num"))(tm("!x:num. x + c = c"))
   })
   th("MK_BINOP", () => {
-    @equal.mk_binop_rule(tm("(+)"), asm("(a:num) = b"), asm("(c':num) = d"))
+    @equal.mk_binop_rule(
+      tm("(+)"),
+      hyp_of("(a:num) = b"),
+      hyp_of("(c':num) = d"),
+    )
   })
   th("THENC", () => {
     @equal.thenc(beta, beta)(tm("(\\x:num. (\\y:num. y + x) c) c"))
@@ -117,18 +123,20 @@ test "equal matches equal.ml" {
   })
   th("SYM_CONV", () => @equal.sym_conv(tm("(x:num) = y")))
   th("CONV_RULE", () => {
-    @equal.conv_rule(@equal.rand_conv(beta), asm("(a:num) = (\\x:num. x) c"))
+    @equal.conv_rule(@equal.rand_conv(beta), hyp_of("(a:num) = (\\x:num. x) c"))
   })
   th("SUBS_CONV", () => {
-    @equal.subs_conv(@list.List([asm("(a:num) = b"), asm("(c:num) = d")]))(
+    @equal.subs_conv(@list.List([hyp_of("(a:num) = b"), hyp_of("(c:num) = d")]))(
       tm("a + c + (\\a:num. a) b"),
     )
   })
   th("SUBS", () => {
-    @equal.subs(@list.List([asm("(a:num) = b")]), asm("a + a = (c:num)"))
+    @equal.subs(@list.List([hyp_of("(a:num) = b")]), hyp_of("a + a = (c:num)"))
   })
-  th("BETA_RULE", () => @equal.beta_rule(asm("(\\x:num. (\\y:num. y) x) c = c")))
-  th("GSYM", () => @equal.gsym(asm("!x:num. x = c")))
+  th("BETA_RULE", () => {
+    @equal.beta_rule(hyp_of("(\\x:num. (\\y:num. y) x) c = c"))
+  })
+  th("GSYM", () => @equal.gsym(hyp_of("!x:num. x = c")))
   let cc = @equal.cache_conv(beta)
   th("CACHE_CONV1", () => cc(tm("(\\x:num. x + x) c")))
   th("CACHE_CONV2", () => cc(tm("(\\y:num. y + y) c")))
