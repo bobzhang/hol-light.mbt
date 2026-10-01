@@ -1,0 +1,2542 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/grouptheory"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn abelian_free_abelian_group() -> @kernel.Thm
+
+pub fn abelian_group() -> @kernel.Thm
+
+pub fn abelian_group_conjugation() -> @kernel.Thm
+
+pub fn abelian_group_div_zpow() -> @kernel.Thm
+
+pub fn abelian_group_element_order_divides_maximal_alt() -> @kernel.Thm
+
+pub fn abelian_group_element_order_lcm_exists() -> @kernel.Thm
+
+pub fn abelian_group_element_order_mul_divides() -> @kernel.Thm
+
+pub fn abelian_group_element_order_mul_divides_gen() -> @kernel.Thm
+
+pub fn abelian_group_element_order_mul_divides_lcm() -> @kernel.Thm
+
+pub fn abelian_group_element_order_mul_eq() -> @kernel.Thm
+
+pub fn abelian_group_epimorphic_image() -> @kernel.Thm
+
+pub fn abelian_group_epimorphism_inversion() -> @kernel.Thm
+
+pub fn abelian_group_epimorphism_powering() -> @kernel.Thm
+
+pub fn abelian_group_epimorphism_powering_eq() -> @kernel.Thm
+
+pub fn abelian_group_homomorphism_group_mul() -> @kernel.Thm
+
+pub fn abelian_group_homomorphism_group_sum() -> @kernel.Thm
+
+pub fn abelian_group_homomorphism_inversion() -> @kernel.Thm
+
+pub fn abelian_group_homomorphism_powering() -> @kernel.Thm
+
+pub fn abelian_group_homomorphism_zpowering() -> @kernel.Thm
+
+pub fn abelian_group_isomorphism_inversion() -> @kernel.Thm
+
+pub fn abelian_group_isomorphism_powering() -> @kernel.Thm
+
+pub fn abelian_group_isomorphism_powering_eq() -> @kernel.Thm
+
+pub fn abelian_group_isomorphisms_inversion() -> @kernel.Thm
+
+pub fn abelian_group_iterate() -> @kernel.Thm
+
+pub fn abelian_group_monomorphism_inversion() -> @kernel.Thm
+
+pub fn abelian_group_monomorphism_powering() -> @kernel.Thm
+
+pub fn abelian_group_monomorphism_powering_eq() -> @kernel.Thm
+
+pub fn abelian_group_mul_ac() -> @kernel.Thm
+
+pub fn abelian_group_mul_pow() -> @kernel.Thm
+
+pub fn abelian_group_mul_zpow() -> @kernel.Thm
+
+pub fn abelian_group_normal_subgroup() -> @kernel.Thm
+
+pub fn abelian_group_order_divides_maximal() -> @kernel.Thm
+
+pub fn abelian_group_product_clauses() -> @kernel.Thm
+
+pub fn abelian_group_product_iterate() -> @kernel.Thm
+
+pub fn abelian_group_subgroup_generated_gen() -> @kernel.Thm
+
+pub fn abelian_group_sum_clauses() -> @kernel.Thm
+
+pub fn abelian_group_sum_inv() -> @kernel.Thm
+
+pub fn abelian_group_sum_iterate() -> @kernel.Thm
+
+pub fn abelian_group_sum_mul() -> @kernel.Thm
+
+pub fn abelian_group_sum_pow() -> @kernel.Thm
+
+pub fn abelian_group_sum_zpow() -> @kernel.Thm
+
+pub fn abelian_group_torsion_isomorphism() -> @kernel.Thm
+
+pub fn abelian_group_torsion_structure() -> @kernel.Thm
+
+pub fn abelian_imp_solvable_group() -> @kernel.Thm
+
+pub fn abelian_integer_group() -> @kernel.Thm
+
+pub fn abelian_integer_mod_group() -> @kernel.Thm
+
+pub fn abelian_opposite_group() -> @kernel.Thm
+
+pub fn abelian_prod_group() -> @kernel.Thm
+
+pub fn abelian_product_group() -> @kernel.Thm
+
+pub fn abelian_quotient_commutator() -> @kernel.Thm
+
+pub fn abelian_quotient_epimorphic_image() -> @kernel.Thm
+
+pub fn abelian_quotient_group() -> @kernel.Thm
+
+pub fn abelian_quotient_group_div() -> @kernel.Thm
+
+pub fn abelian_simple_group() -> @kernel.Thm
+
+pub fn abelian_singleton_group() -> @kernel.Thm
+
+pub fn abelian_subgroup_generated() -> @kernel.Thm
+
+pub fn abelian_sum_group() -> @kernel.Thm
+
+pub fn card_conjugate_subsets() -> @kernel.Thm
+
+pub fn card_conjugate_subsets_mul() -> @kernel.Thm
+
+pub fn card_conjugate_subsets_mul_gen() -> @kernel.Thm
+
+pub fn card_cyclic_subgroup_order() -> @kernel.Thm
+
+pub fn card_divides_group_epimorphic_image() -> @kernel.Thm
+
+pub fn card_divides_group_monomorphic_image() -> @kernel.Thm
+
+pub fn card_eq_free_abelian_group_infinite() -> @kernel.Thm
+
+pub fn card_eq_group_image_kernel() -> @kernel.Thm
+
+pub fn card_eq_group_isomorphic_image() -> @kernel.Thm
+
+pub fn card_eq_group_monomorphic_image() -> @kernel.Thm
+
+pub fn card_eq_group_orbit_stabilizers() -> @kernel.Thm
+
+pub fn card_eq_homomorphisms_from_free_abelian_group() -> @kernel.Thm
+
+pub fn card_eq_left_coset_subgroup() -> @kernel.Thm
+
+pub fn card_eq_left_cosets() -> @kernel.Thm
+
+pub fn card_eq_left_right_cosets() -> @kernel.Thm
+
+pub fn card_eq_right_coset_subgroup() -> @kernel.Thm
+
+pub fn card_eq_right_cosets() -> @kernel.Thm
+
+pub fn card_group_orbit_divides() -> @kernel.Thm
+
+pub fn card_group_setmul() -> @kernel.Thm
+
+pub fn card_group_setmul_divides() -> @kernel.Thm
+
+pub fn card_group_setmul_gen() -> @kernel.Thm
+
+pub fn card_group_setmul_mul() -> @kernel.Thm
+
+pub fn card_group_stabilizer_divides() -> @kernel.Thm
+
+pub fn card_le_group_epimorphic_image() -> @kernel.Thm
+
+pub fn card_le_group_monomorphic_image() -> @kernel.Thm
+
+pub fn card_le_quotient_group() -> @kernel.Thm
+
+pub fn card_le_subgroup_generated() -> @kernel.Thm
+
+pub fn card_left_cosets_divides() -> @kernel.Thm
+
+pub fn card_quotient_group_divides() -> @kernel.Thm
+
+pub fn card_right_cosets_divides() -> @kernel.Thm
+
+pub fn carrier_normal_subgroup_of() -> @kernel.Thm
+
+pub fn carrier_subgroup_generated_alt() -> @kernel.Thm
+
+pub fn carrier_subgroup_generated_by_sing() -> @kernel.Thm
+
+pub fn carrier_subgroup_generated_explicit() -> @kernel.Thm
+
+pub fn carrier_subgroup_generated_finite() -> @kernel.Thm
+
+pub fn carrier_subgroup_generated_subgroup() -> @kernel.Thm
+
+pub fn carrier_subgroup_generated_union() -> @kernel.Thm
+
+pub fn carrier_subgroup_generated_union_left() -> @kernel.Thm
+
+pub fn carrier_subgroup_generated_union_right() -> @kernel.Thm
+
+pub fn carrier_subgroup_generated_unions() -> @kernel.Thm
+
+pub fn carrier_subgroup_generated_unions_alt() -> @kernel.Thm
+
+pub fn carrier_subgroup_generated_unions_explicit() -> @kernel.Thm
+
+pub fn carrier_subgroup_generated_unions_finite() -> @kernel.Thm
+
+pub fn carrier_subgroup_of() -> @kernel.Thm
+
+pub fn cartesian_product_normal_subgroup_of_product_group() -> @kernel.Thm
+
+pub fn cartesian_product_subgroup_of_product_group() -> @kernel.Thm
+
+pub fn cartesian_product_subgroup_of_sum_group() -> @kernel.Thm
+
+pub fn cauchy_group_theorem() -> @kernel.Thm
+
+pub fn closed_group_orbit() -> @kernel.Thm
+
+pub fn commutator_imp_abelian_quotient() -> @kernel.Thm
+
+pub fn coprime_group_order() -> @kernel.Thm
+
+pub fn count_finite_cyclic_group_subgroups() -> @kernel.Thm
+
+pub fn count_finite_cyclic_group_subgroups_all() -> @kernel.Thm
+
+pub fn countable_subgroup_generated() -> @kernel.Thm
+
+pub fn create_isomorphic_copy_of_group() -> @kernel.Thm
+
+pub fn cross_normal_subgroup_of_prod_group() -> @kernel.Thm
+
+pub fn cross_subgroup_of_prod_group() -> @kernel.Thm
+
+pub fn cyclic_group() -> @kernel.Thm
+
+pub fn cyclic_group_alt() -> @kernel.Thm
+
+pub fn cyclic_group_element_order() -> @kernel.Thm
+
+pub fn cyclic_group_epimorphic_image() -> @kernel.Thm
+
+pub fn cyclic_group_generated() -> @kernel.Thm
+
+pub fn cyclic_group_integer_mod_group() -> @kernel.Thm
+
+pub fn cyclic_group_prime_order_eq() -> @kernel.Thm
+
+pub fn cyclic_group_quotient_group() -> @kernel.Thm
+
+pub fn cyclic_group_v1() -> @kernel.Thm
+
+pub fn cyclic_imp_abelian_group() -> @kernel.Thm
+
+pub fn cyclic_imp_countable_group() -> @kernel.Thm
+
+pub fn cyclic_imp_finitely_generated_group() -> @kernel.Thm
+
+pub fn cyclic_integer_group() -> @kernel.Thm
+
+pub fn cyclic_prime_order_group() -> @kernel.Thm
+
+pub fn cyclic_prod_group() -> @kernel.Thm
+
+pub fn cyclic_prod_integer_mod_group() -> @kernel.Thm
+
+pub fn disjoint_group_orbits() -> @kernel.Thm
+
+pub fn disjoint_left_cosets() -> @kernel.Thm
+
+pub fn disjoint_right_cosets() -> @kernel.Thm
+
+pub fn exact_sequence_hexagon_lemma() -> @kernel.Thm
+
+pub fn exact_sequence_sum_lemma() -> @kernel.Thm
+
+pub fn exists_in_group_carrier_inv() -> @kernel.Thm
+
+pub fn extremely_short_exact_sequence() -> @kernel.Thm
+
+pub fn finite_abelian_group_structure() -> @kernel.Thm
+
+pub fn finite_abelian_group_structure_alt() -> @kernel.Thm
+
+pub fn finite_and_pgroup_sing() -> @kernel.Thm
+
+pub fn finite_cyclic_subgroup() -> @kernel.Thm
+
+pub fn finite_cyclic_subgroup_alt() -> @kernel.Thm
+
+pub fn finite_cyclic_subgroup_explicit() -> @kernel.Thm
+
+pub fn finite_cyclic_subgroup_order() -> @kernel.Thm
+
+pub fn finite_group_actions() -> @kernel.Thm
+
+pub fn finite_group_centralizer() -> @kernel.Thm
+
+pub fn finite_group_element_order_nonzero() -> @kernel.Thm
+
+pub fn finite_group_epimorphic_image() -> @kernel.Thm
+
+pub fn finite_group_monomorphic_preimage() -> @kernel.Thm
+
+pub fn finite_group_normalizer() -> @kernel.Thm
+
+pub fn finite_group_orbit() -> @kernel.Thm
+
+pub fn finite_group_pow_injective_eq() -> @kernel.Thm
+
+pub fn finite_group_pow_surjective_eq() -> @kernel.Thm
+
+pub fn finite_group_root_exists() -> @kernel.Thm
+
+pub fn finite_group_setmul() -> @kernel.Thm
+
+pub fn finite_group_stabilizer() -> @kernel.Thm
+
+pub fn finite_group_zpow_injective_eq() -> @kernel.Thm
+
+pub fn finite_group_zpow_surjective_eq() -> @kernel.Thm
+
+pub fn finite_group_zroot_exists() -> @kernel.Thm
+
+pub fn finite_imp_finitely_generated_group() -> @kernel.Thm
+
+pub fn finite_integer_mod_group() -> @kernel.Thm
+
+pub fn finite_opposite_group() -> @kernel.Thm
+
+pub fn finite_pgroup() -> @kernel.Thm
+
+pub fn finite_pgroup_sing() -> @kernel.Thm
+
+pub fn finite_prod_group() -> @kernel.Thm
+
+pub fn finite_product_group() -> @kernel.Thm
+
+pub fn finite_quotient_group() -> @kernel.Thm
+
+pub fn finite_restricted_subgroups() -> @kernel.Thm
+
+pub fn finite_singleton_group() -> @kernel.Thm
+
+pub fn finite_subgroup_generated() -> @kernel.Thm
+
+pub fn finite_subgroup_of_setwise() -> @kernel.Thm
+
+pub fn finite_subgroups() -> @kernel.Thm
+
+pub fn finite_subgroups_eq() -> @kernel.Thm
+
+pub fn finitely_generated_abelian_group_as_product_of_cyclic_groups() -> @kernel.Thm
+
+pub fn finitely_generated_abelian_group_as_product_of_integer_groups() -> @kernel.Thm
+
+pub fn finitely_generated_abelian_group_as_product_of_integer_mod_groups() -> @kernel.Thm
+
+pub fn finitely_generated_abelian_group_as_sum_of_cyclic_groups() -> @kernel.Thm
+
+pub fn finitely_generated_abelian_group_as_sum_of_integer_groups() -> @kernel.Thm
+
+pub fn finitely_generated_abelian_group_as_sum_of_integer_mod_groups() -> @kernel.Thm
+
+pub fn finitely_generated_abelian_group_structure_explicit() -> @kernel.Thm
+
+pub fn finitely_generated_abelian_group_structure_explicit_alt() -> @kernel.Thm
+
+pub fn finitely_generated_abelian_subgroup() -> @kernel.Thm
+
+pub fn finitely_generated_abelian_subgroup_explicit() -> @kernel.Thm
+
+pub fn finitely_generated_abelian_subgroup_structure_explicit() -> @kernel.Thm
+
+pub fn finitely_generated_abelian_subgroup_structure_explicit_alt() -> @kernel.Thm
+
+pub fn finitely_generated_abelian_subgroup_structure_isomorphism() -> @kernel.Thm
+
+pub fn finitely_generated_abelian_subgroup_structure_isomorphism_alt() -> @kernel.Thm
+
+pub fn finitely_generated_finite_index_subgroup() -> @kernel.Thm
+
+pub fn finitely_generated_fixed_index_subgroups() -> @kernel.Thm
+
+pub fn finitely_generated_group() -> @kernel.Thm
+
+pub fn finitely_generated_group_epimorphic_image() -> @kernel.Thm
+
+pub fn finitely_generated_group_quotient_group() -> @kernel.Thm
+
+pub fn finitely_generated_group_v1() -> @kernel.Thm
+
+pub fn finitely_generated_imp_countable_group() -> @kernel.Thm
+
+pub fn finitely_generated_prod_group() -> @kernel.Thm
+
+pub fn finitely_generated_product_group() -> @kernel.Thm
+
+pub fn finitely_generated_sum_group() -> @kernel.Thm
+
+pub fn first_group_epimorphism_theorem() -> @kernel.Thm
+
+pub fn first_group_isomorphism_theorem() -> @kernel.Thm
+
+pub fn first_group_isomorphism_theorem_gen() -> @kernel.Thm
+
+pub fn first_group_isomorphism_theorem_gen_alt() -> @kernel.Thm
+
+pub fn five_lemma() -> @kernel.Thm
+
+pub fn forall_in_group_carrier_inv() -> @kernel.Thm
+
+pub fn four_lemma_epi() -> @kernel.Thm
+
+pub fn four_lemma_mono() -> @kernel.Thm
+
+pub fn frag_of_in_free_abelian_group() -> @kernel.Thm
+
+pub fn free_abelian_group() -> @kernel.Thm
+
+pub fn free_abelian_group_induct() -> @kernel.Thm
+
+pub fn free_abelian_group_pow() -> @kernel.Thm
+
+pub fn free_abelian_group_universal() -> @kernel.Thm
+
+pub fn free_abelian_group_v1() -> @kernel.Thm
+
+pub fn free_abelian_group_zpow() -> @kernel.Thm
+
+pub fn generator_integer_mod_group() -> @kernel.Thm
+
+pub fn group_action() -> @kernel.Thm
+
+pub fn group_action_alt() -> @kernel.Thm
+
+pub fn group_action_bijective() -> @kernel.Thm
+
+pub fn group_action_closed() -> @kernel.Thm
+
+pub fn group_action_conjugation() -> @kernel.Thm
+
+pub fn group_action_conjugation_normal_subgroup() -> @kernel.Thm
+
+pub fn group_action_eq() -> @kernel.Thm
+
+pub fn group_action_fibres() -> @kernel.Thm
+
+pub fn group_action_from_subgroup() -> @kernel.Thm
+
+pub fn group_action_group_translation() -> @kernel.Thm
+
+pub fn group_action_image() -> @kernel.Thm
+
+pub fn group_action_image_conjugation() -> @kernel.Thm
+
+pub fn group_action_image_conjugation_carrier() -> @kernel.Thm
+
+pub fn group_action_image_conjugation_subgroups() -> @kernel.Thm
+
+pub fn group_action_image_sized() -> @kernel.Thm
+
+pub fn group_action_injective() -> @kernel.Thm
+
+pub fn group_action_invariant() -> @kernel.Thm
+
+pub fn group_action_invariant_subset() -> @kernel.Thm
+
+pub fn group_action_kernel_pointwise() -> @kernel.Thm
+
+pub fn group_action_left_coset_multiplication() -> @kernel.Thm
+
+pub fn group_action_linv() -> @kernel.Thm
+
+pub fn group_action_mul() -> @kernel.Thm
+
+pub fn group_action_on_subset() -> @kernel.Thm
+
+pub fn group_action_rinv() -> @kernel.Thm
+
+pub fn group_action_subgroup_translation() -> @kernel.Thm
+
+pub fn group_action_subset_translation() -> @kernel.Thm
+
+pub fn group_action_surjective() -> @kernel.Thm
+
+pub fn group_actions_eq_on_generators() -> @kernel.Thm
+
+pub fn group_add() -> @kernel.Thm
+
+pub fn group_add_assoc() -> @kernel.Thm
+
+pub fn group_add_eq_id() -> @kernel.Thm
+
+pub fn group_add_eq_mul() -> @kernel.Thm
+
+pub fn group_add_lid() -> @kernel.Thm
+
+pub fn group_add_nmul() -> @kernel.Thm
+
+pub fn group_add_rid() -> @kernel.Thm
+
+pub fn group_add_sym() -> @kernel.Thm
+
+pub fn group_add_sym_eq() -> @kernel.Thm
+
+pub fn group_add_v1() -> @kernel.Thm
+
+pub fn group_automorphism() -> @kernel.Thm
+
+pub fn group_automorphism_conjugation() -> @kernel.Thm
+
+pub fn group_automorphism_eq() -> @kernel.Thm
+
+pub fn group_automorphism_imp_endomorphism() -> @kernel.Thm
+
+pub fn group_carrier() -> @kernel.Thm
+
+pub fn group_carrier_has_size_1() -> @kernel.Thm
+
+pub fn group_carrier_integer_mod_group() -> @kernel.Thm
+
+pub fn group_carrier_nonempty() -> @kernel.Thm
+
+pub fn group_carrier_subgroup_generated_mono() -> @kernel.Thm
+
+pub fn group_carrier_subgroup_generated_subset() -> @kernel.Thm
+
+pub fn group_centralizer() -> @kernel.Thm
+
+pub fn group_centralizer_alt() -> @kernel.Thm
+
+pub fn group_centralizer_centralizer_subset() -> @kernel.Thm
+
+pub fn group_centralizer_galois() -> @kernel.Thm
+
+pub fn group_centralizer_galois_eq() -> @kernel.Thm
+
+pub fn group_centralizer_mono() -> @kernel.Thm
+
+pub fn group_centralizer_nonempty() -> @kernel.Thm
+
+pub fn group_centralizer_pointwise() -> @kernel.Thm
+
+pub fn group_centralizer_restrict() -> @kernel.Thm
+
+pub fn group_centralizer_subgroup_generated() -> @kernel.Thm
+
+pub fn group_centralizer_subset() -> @kernel.Thm
+
+pub fn group_centralizer_subset_carrier() -> @kernel.Thm
+
+pub fn group_centralizer_subset_eq() -> @kernel.Thm
+
+pub fn group_centralizer_subset_normalizer() -> @kernel.Thm
+
+pub fn group_centralizer_v1() -> @kernel.Thm
+
+pub fn group_centre_eq_carrier() -> @kernel.Thm
+
+pub fn group_commutes_inv() -> @kernel.Thm
+
+pub fn group_commutes_inv_eq() -> @kernel.Thm
+
+pub fn group_commutes_mul() -> @kernel.Thm
+
+pub fn group_commutes_pow() -> @kernel.Thm
+
+pub fn group_commutes_product() -> @kernel.Thm
+
+pub fn group_commutes_subgroup_generated() -> @kernel.Thm
+
+pub fn group_commutes_subgroup_generated_eq() -> @kernel.Thm
+
+pub fn group_commutes_subgroups_generated_eq() -> @kernel.Thm
+
+pub fn group_commutes_sum() -> @kernel.Thm
+
+pub fn group_commutes_zpow() -> @kernel.Thm
+
+pub fn group_conjugate() -> @kernel.Thm
+
+pub fn group_conjugate_imp_card_eq() -> @kernel.Thm
+
+pub fn group_conjugate_imp_isomorphic() -> @kernel.Thm
+
+pub fn group_conjugate_normal_subgroup_of() -> @kernel.Thm
+
+pub fn group_conjugate_refl() -> @kernel.Thm
+
+pub fn group_conjugate_subgroup_of() -> @kernel.Thm
+
+pub fn group_conjugate_subgroups_generated() -> @kernel.Thm
+
+pub fn group_conjugate_sym() -> @kernel.Thm
+
+pub fn group_conjugate_trans() -> @kernel.Thm
+
+pub fn group_conjugation() -> @kernel.Thm
+
+pub fn group_conjugation_by_id() -> @kernel.Thm
+
+pub fn group_conjugation_conjugation() -> @kernel.Thm
+
+pub fn group_conjugation_eq() -> @kernel.Thm
+
+pub fn group_conjugation_eq_id() -> @kernel.Thm
+
+pub fn group_conjugation_eq_self() -> @kernel.Thm
+
+pub fn group_conjugation_linv() -> @kernel.Thm
+
+pub fn group_conjugation_right_coset() -> @kernel.Thm
+
+pub fn group_conjugation_rinv() -> @kernel.Thm
+
+pub fn group_conjugation_subgroup_generated() -> @kernel.Thm
+
+pub fn group_conjugation_v1() -> @kernel.Thm
+
+pub fn group_direct_limit() -> @kernel.Thm
+
+pub fn group_disjoint_sum_alt() -> @kernel.Thm
+
+pub fn group_disjoint_sum_cancel() -> @kernel.Thm
+
+pub fn group_disjoint_sum_id() -> @kernel.Thm
+
+pub fn group_div() -> @kernel.Thm
+
+pub fn group_div_eq_id() -> @kernel.Thm
+
+pub fn group_div_refl() -> @kernel.Thm
+
+pub fn group_div_subgroup_generated() -> @kernel.Thm
+
+pub fn group_div_v1() -> @kernel.Thm
+
+pub fn group_element_order() -> @kernel.Thm
+
+pub fn group_element_order_conjugation() -> @kernel.Thm
+
+pub fn group_element_order_coprime_decomp() -> @kernel.Thm
+
+pub fn group_element_order_coprime_decomp_divides() -> @kernel.Thm
+
+pub fn group_element_order_coprime_decomp_explicit() -> @kernel.Thm
+
+pub fn group_element_order_coprime_decomp_unique() -> @kernel.Thm
+
+pub fn group_element_order_divides_group_order() -> @kernel.Thm
+
+pub fn group_element_order_eq_0() -> @kernel.Thm
+
+pub fn group_element_order_eq_1() -> @kernel.Thm
+
+pub fn group_element_order_eq_2() -> @kernel.Thm
+
+pub fn group_element_order_eq_2_alt() -> @kernel.Thm
+
+pub fn group_element_order_eq_mul() -> @kernel.Thm
+
+pub fn group_element_order_eq_mul_gen() -> @kernel.Thm
+
+pub fn group_element_order_homomorphic_image() -> @kernel.Thm
+
+pub fn group_element_order_id() -> @kernel.Thm
+
+pub fn group_element_order_integer_group() -> @kernel.Thm
+
+pub fn group_element_order_integer_mod_group() -> @kernel.Thm
+
+pub fn group_element_order_integer_mod_group_1() -> @kernel.Thm
+
+pub fn group_element_order_integer_mod_group_1r() -> @kernel.Thm
+
+pub fn group_element_order_inv() -> @kernel.Thm
+
+pub fn group_element_order_lcm_exists() -> @kernel.Thm
+
+pub fn group_element_order_monomorphic_image() -> @kernel.Thm
+
+pub fn group_element_order_mul_divides() -> @kernel.Thm
+
+pub fn group_element_order_mul_divides_gen() -> @kernel.Thm
+
+pub fn group_element_order_mul_divides_lcm() -> @kernel.Thm
+
+pub fn group_element_order_mul_eq() -> @kernel.Thm
+
+pub fn group_element_order_mul_sym() -> @kernel.Thm
+
+pub fn group_element_order_pow() -> @kernel.Thm
+
+pub fn group_element_order_pow_divides() -> @kernel.Thm
+
+pub fn group_element_order_pow_gen() -> @kernel.Thm
+
+pub fn group_element_order_prime() -> @kernel.Thm
+
+pub fn group_element_order_primepow_decomp() -> @kernel.Thm
+
+pub fn group_element_order_prod_group() -> @kernel.Thm
+
+pub fn group_element_order_prod_group_alt() -> @kernel.Thm
+
+pub fn group_element_order_subgroup_generated() -> @kernel.Thm
+
+pub fn group_element_order_sum_group() -> @kernel.Thm
+
+pub fn group_element_order_sum_group_eq_0() -> @kernel.Thm
+
+pub fn group_element_order_unique() -> @kernel.Thm
+
+pub fn group_element_order_unique_alt() -> @kernel.Thm
+
+pub fn group_element_order_unique_prime() -> @kernel.Thm
+
+pub fn group_endomorphism() -> @kernel.Thm
+
+pub fn group_endomorphism_eq() -> @kernel.Thm
+
+pub fn group_endomorphism_integer_group_eq() -> @kernel.Thm
+
+pub fn group_endomorphism_integer_group_eq_alt() -> @kernel.Thm
+
+pub fn group_endomorphism_integer_group_explicit() -> @kernel.Thm
+
+pub fn group_endomorphism_integer_group_mul() -> @kernel.Thm
+
+pub fn group_epimorphism() -> @kernel.Thm
+
+pub fn group_epimorphism_abelian_group_sum() -> @kernel.Thm
+
+pub fn group_epimorphism_alt() -> @kernel.Thm
+
+pub fn group_epimorphism_between_subgroups() -> @kernel.Thm
+
+pub fn group_epimorphism_compose() -> @kernel.Thm
+
+pub fn group_epimorphism_compose_rev() -> @kernel.Thm
+
+pub fn group_epimorphism_eq() -> @kernel.Thm
+
+pub fn group_epimorphism_from_trivial_group() -> @kernel.Thm
+
+pub fn group_epimorphism_fst() -> @kernel.Thm
+
+pub fn group_epimorphism_group_mul_eq() -> @kernel.Thm
+
+pub fn group_epimorphism_group_sum() -> @kernel.Thm
+
+pub fn group_epimorphism_group_sum_eq() -> @kernel.Thm
+
+pub fn group_epimorphism_group_sum_gen() -> @kernel.Thm
+
+pub fn group_epimorphism_group_zpow() -> @kernel.Thm
+
+pub fn group_epimorphism_id() -> @kernel.Thm
+
+pub fn group_epimorphism_imp_homomorphism() -> @kernel.Thm
+
+pub fn group_epimorphism_integer_mod_group_zpow() -> @kernel.Thm
+
+pub fn group_epimorphism_into_subgroup_eq() -> @kernel.Thm
+
+pub fn group_epimorphism_into_subgroup_eq_gen() -> @kernel.Thm
+
+pub fn group_epimorphism_isomorphism_compose_rev() -> @kernel.Thm
+
+pub fn group_epimorphism_normal_subgroup_correspondence() -> @kernel.Thm
+
+pub fn group_epimorphism_normal_subgroup_correspondence_alt() -> @kernel.Thm
+
+pub fn group_epimorphism_of_fst() -> @kernel.Thm
+
+pub fn group_epimorphism_of_snd() -> @kernel.Thm
+
+pub fn group_epimorphism_product_projection() -> @kernel.Thm
+
+pub fn group_epimorphism_right_coset() -> @kernel.Thm
+
+pub fn group_epimorphism_right_invertible() -> @kernel.Thm
+
+pub fn group_epimorphism_snd() -> @kernel.Thm
+
+pub fn group_epimorphism_subgroup_correspondence() -> @kernel.Thm
+
+pub fn group_epimorphism_subgroup_correspondence_alt() -> @kernel.Thm
+
+pub fn group_epimorphism_subset() -> @kernel.Thm
+
+pub fn group_epimorphism_sum_projection() -> @kernel.Thm
+
+pub fn group_epimorphism_to_trivial_group() -> @kernel.Thm
+
+pub fn group_epimorphism_trivial() -> @kernel.Thm
+
+pub fn group_epimorphism_v1() -> @kernel.Thm
+
+pub fn group_exactness() -> @kernel.Thm
+
+pub fn group_exactness_epimorphism() -> @kernel.Thm
+
+pub fn group_exactness_epimorphism_eq_triviality() -> @kernel.Thm
+
+pub fn group_exactness_eq_triviality() -> @kernel.Thm
+
+pub fn group_exactness_imp_triviality() -> @kernel.Thm
+
+pub fn group_exactness_isomorphism_eq_mono_epi() -> @kernel.Thm
+
+pub fn group_exactness_isomorphism_eq_triviality() -> @kernel.Thm
+
+pub fn group_exactness_monomorphism() -> @kernel.Thm
+
+pub fn group_exactness_monomorphism_eq_triviality() -> @kernel.Thm
+
+pub fn group_homomorphism() -> @kernel.Thm
+
+pub fn group_homomorphism_abelian_group_sum() -> @kernel.Thm
+
+pub fn group_homomorphism_between_subgroups() -> @kernel.Thm
+
+pub fn group_homomorphism_between_subgroups_alt() -> @kernel.Thm
+
+pub fn group_homomorphism_componentwise() -> @kernel.Thm
+
+pub fn group_homomorphism_componentwise_univ() -> @kernel.Thm
+
+pub fn group_homomorphism_compose() -> @kernel.Thm
+
+pub fn group_homomorphism_conjugation() -> @kernel.Thm
+
+pub fn group_homomorphism_div() -> @kernel.Thm
+
+pub fn group_homomorphism_eq() -> @kernel.Thm
+
+pub fn group_homomorphism_free_abelian_groups_id() -> @kernel.Thm
+
+pub fn group_homomorphism_from_subgroup_generated() -> @kernel.Thm
+
+pub fn group_homomorphism_from_trivial_group() -> @kernel.Thm
+
+pub fn group_homomorphism_fst() -> @kernel.Thm
+
+pub fn group_homomorphism_group_mul() -> @kernel.Thm
+
+pub fn group_homomorphism_group_mul_eq() -> @kernel.Thm
+
+pub fn group_homomorphism_group_mul_gen() -> @kernel.Thm
+
+pub fn group_homomorphism_group_sum() -> @kernel.Thm
+
+pub fn group_homomorphism_group_sum_eq() -> @kernel.Thm
+
+pub fn group_homomorphism_group_sum_gen() -> @kernel.Thm
+
+pub fn group_homomorphism_group_zpow() -> @kernel.Thm
+
+pub fn group_homomorphism_id() -> @kernel.Thm
+
+pub fn group_homomorphism_image_preimage() -> @kernel.Thm
+
+pub fn group_homomorphism_image_preimage_eq() -> @kernel.Thm
+
+pub fn group_homomorphism_inclusion() -> @kernel.Thm
+
+pub fn group_homomorphism_into_subgroup() -> @kernel.Thm
+
+pub fn group_homomorphism_into_subgroup_eq() -> @kernel.Thm
+
+pub fn group_homomorphism_into_subgroup_eq_gen() -> @kernel.Thm
+
+pub fn group_homomorphism_inv() -> @kernel.Thm
+
+pub fn group_homomorphism_mul() -> @kernel.Thm
+
+pub fn group_homomorphism_of_fst() -> @kernel.Thm
+
+pub fn group_homomorphism_of_id() -> @kernel.Thm
+
+pub fn group_homomorphism_of_snd() -> @kernel.Thm
+
+pub fn group_homomorphism_paired() -> @kernel.Thm
+
+pub fn group_homomorphism_paired2() -> @kernel.Thm
+
+pub fn group_homomorphism_pairwise() -> @kernel.Thm
+
+pub fn group_homomorphism_pow() -> @kernel.Thm
+
+pub fn group_homomorphism_preimage_image() -> @kernel.Thm
+
+pub fn group_homomorphism_preimage_image_left() -> @kernel.Thm
+
+pub fn group_homomorphism_preimage_image_right() -> @kernel.Thm
+
+pub fn group_homomorphism_prod_integer_mod_group() -> @kernel.Thm
+
+pub fn group_homomorphism_product() -> @kernel.Thm
+
+pub fn group_homomorphism_product_injection() -> @kernel.Thm
+
+pub fn group_homomorphism_product_projection() -> @kernel.Thm
+
+pub fn group_homomorphism_right_coset() -> @kernel.Thm
+
+pub fn group_homomorphism_snd() -> @kernel.Thm
+
+pub fn group_homomorphism_sum() -> @kernel.Thm
+
+pub fn group_homomorphism_sum_injection() -> @kernel.Thm
+
+pub fn group_homomorphism_sum_projection() -> @kernel.Thm
+
+pub fn group_homomorphism_trivial() -> @kernel.Thm
+
+pub fn group_homomorphism_v1() -> @kernel.Thm
+
+pub fn group_homomorphism_zpow() -> @kernel.Thm
+
+pub fn group_homomorphisms_eq_on_generators() -> @kernel.Thm
+
+pub fn group_id() -> @kernel.Thm
+
+pub fn group_id_in_left_coset() -> @kernel.Thm
+
+pub fn group_id_in_left_coset_gen() -> @kernel.Thm
+
+pub fn group_id_in_right_coset() -> @kernel.Thm
+
+pub fn group_id_in_right_coset_gen() -> @kernel.Thm
+
+pub fn group_id_subgroup() -> @kernel.Thm
+
+pub fn group_id_v1() -> @kernel.Thm
+
+pub fn group_image() -> @kernel.Thm
+
+pub fn group_image_from_subgroup_generated() -> @kernel.Thm
+
+pub fn group_image_from_trivial_group() -> @kernel.Thm
+
+pub fn group_image_to_subgroup_generated() -> @kernel.Thm
+
+pub fn group_image_to_trivial_group() -> @kernel.Thm
+
+pub fn group_inter_im_ker() -> @kernel.Thm
+
+pub fn group_inv() -> @kernel.Thm
+
+pub fn group_inv_eq() -> @kernel.Thm
+
+pub fn group_inv_eq_id() -> @kernel.Thm
+
+pub fn group_inv_id() -> @kernel.Thm
+
+pub fn group_inv_inv() -> @kernel.Thm
+
+pub fn group_inv_mul() -> @kernel.Thm
+
+pub fn group_inv_pow() -> @kernel.Thm
+
+pub fn group_inv_subgroup() -> @kernel.Thm
+
+pub fn group_inv_v1() -> @kernel.Thm
+
+pub fn group_inv_zpow() -> @kernel.Thm
+
+pub fn group_isomorphism() -> @kernel.Thm
+
+pub fn group_isomorphism_abelian_group_sum() -> @kernel.Thm
+
+pub fn group_isomorphism_alt() -> @kernel.Thm
+
+pub fn group_isomorphism_between_subgroups() -> @kernel.Thm
+
+pub fn group_isomorphism_compose() -> @kernel.Thm
+
+pub fn group_isomorphism_compose_rev() -> @kernel.Thm
+
+pub fn group_isomorphism_conjugation() -> @kernel.Thm
+
+pub fn group_isomorphism_epimorphism() -> @kernel.Thm
+
+pub fn group_isomorphism_epimorphism_alt() -> @kernel.Thm
+
+pub fn group_isomorphism_eq() -> @kernel.Thm
+
+pub fn group_isomorphism_eq_epimorphism_finite() -> @kernel.Thm
+
+pub fn group_isomorphism_eq_monomorphism_finite() -> @kernel.Thm
+
+pub fn group_isomorphism_free_abelian_group_sum() -> @kernel.Thm
+
+pub fn group_isomorphism_fst() -> @kernel.Thm
+
+pub fn group_isomorphism_group_kernel_group_image() -> @kernel.Thm
+
+pub fn group_isomorphism_group_mul() -> @kernel.Thm
+
+pub fn group_isomorphism_group_mul_alt() -> @kernel.Thm
+
+pub fn group_isomorphism_group_mul_eq() -> @kernel.Thm
+
+pub fn group_isomorphism_group_mul_gen() -> @kernel.Thm
+
+pub fn group_isomorphism_group_mul_im_ker() -> @kernel.Thm
+
+pub fn group_isomorphism_group_mul_ker_im() -> @kernel.Thm
+
+pub fn group_isomorphism_group_sum() -> @kernel.Thm
+
+pub fn group_isomorphism_group_sum_eq() -> @kernel.Thm
+
+pub fn group_isomorphism_group_sum_gen() -> @kernel.Thm
+
+pub fn group_isomorphism_group_zpow() -> @kernel.Thm
+
+pub fn group_isomorphism_group_zpow_gen() -> @kernel.Thm
+
+pub fn group_isomorphism_id() -> @kernel.Thm
+
+pub fn group_isomorphism_imp_epimorphism() -> @kernel.Thm
+
+pub fn group_isomorphism_imp_homomorphism() -> @kernel.Thm
+
+pub fn group_isomorphism_imp_isomorphic() -> @kernel.Thm
+
+pub fn group_isomorphism_imp_monomorphism() -> @kernel.Thm
+
+pub fn group_isomorphism_inverse() -> @kernel.Thm
+
+pub fn group_isomorphism_onto_image() -> @kernel.Thm
+
+pub fn group_isomorphism_opposite_group() -> @kernel.Thm
+
+pub fn group_isomorphism_paired2() -> @kernel.Thm
+
+pub fn group_isomorphism_prod_integer_mod_group() -> @kernel.Thm
+
+pub fn group_isomorphism_prod_quotient_group() -> @kernel.Thm
+
+pub fn group_isomorphism_product_group_disjoint_union() -> @kernel.Thm
+
+pub fn group_isomorphism_product_projection() -> @kernel.Thm
+
+pub fn group_isomorphism_product_quotient_group() -> @kernel.Thm
+
+pub fn group_isomorphism_snd() -> @kernel.Thm
+
+pub fn group_isomorphism_subset() -> @kernel.Thm
+
+pub fn group_isomorphism_sum_group_disjoint_union() -> @kernel.Thm
+
+pub fn group_isomorphism_sum_projection() -> @kernel.Thm
+
+pub fn group_isomorphism_trivial() -> @kernel.Thm
+
+pub fn group_isomorphism_v1() -> @kernel.Thm
+
+pub fn group_isomorphisms() -> @kernel.Thm
+
+pub fn group_isomorphisms_between_subgroups() -> @kernel.Thm
+
+pub fn group_isomorphisms_between_subgroups_alt() -> @kernel.Thm
+
+pub fn group_isomorphisms_compose() -> @kernel.Thm
+
+pub fn group_isomorphisms_conjugation() -> @kernel.Thm
+
+pub fn group_isomorphisms_eq() -> @kernel.Thm
+
+pub fn group_isomorphisms_id() -> @kernel.Thm
+
+pub fn group_isomorphisms_imp_isomorphism() -> @kernel.Thm
+
+pub fn group_isomorphisms_imp_isomorphism_alt() -> @kernel.Thm
+
+pub fn group_isomorphisms_opposite_group() -> @kernel.Thm
+
+pub fn group_isomorphisms_paired2() -> @kernel.Thm
+
+pub fn group_isomorphisms_prod_group_swap() -> @kernel.Thm
+
+pub fn group_isomorphisms_product_group_disjoint_union() -> @kernel.Thm
+
+pub fn group_isomorphisms_sum_group_disjoint_union() -> @kernel.Thm
+
+pub fn group_isomorphisms_sym() -> @kernel.Thm
+
+pub fn group_isomorphisms_v1() -> @kernel.Thm
+
+pub fn group_kernel() -> @kernel.Thm
+
+pub fn group_kernel_from_subgroup_generated() -> @kernel.Thm
+
+pub fn group_kernel_from_trivial_group() -> @kernel.Thm
+
+pub fn group_kernel_id() -> @kernel.Thm
+
+pub fn group_kernel_image_trivial() -> @kernel.Thm
+
+pub fn group_kernel_nonempty() -> @kernel.Thm
+
+pub fn group_kernel_right_coset() -> @kernel.Thm
+
+pub fn group_kernel_subset_carrier() -> @kernel.Thm
+
+pub fn group_kernel_to_subgroup_generated() -> @kernel.Thm
+
+pub fn group_kernel_to_trivial_group() -> @kernel.Thm
+
+pub fn group_lid_eq() -> @kernel.Thm
+
+pub fn group_lid_unique() -> @kernel.Thm
+
+pub fn group_linv_eq() -> @kernel.Thm
+
+pub fn group_linv_unique() -> @kernel.Thm
+
+pub fn group_monomorphism() -> @kernel.Thm
+
+pub fn group_monomorphism_abelian_group_sum() -> @kernel.Thm
+
+pub fn group_monomorphism_alt() -> @kernel.Thm
+
+pub fn group_monomorphism_alt_eq() -> @kernel.Thm
+
+pub fn group_monomorphism_between_subgroups() -> @kernel.Thm
+
+pub fn group_monomorphism_compose() -> @kernel.Thm
+
+pub fn group_monomorphism_compose_rev() -> @kernel.Thm
+
+pub fn group_monomorphism_epimorphism() -> @kernel.Thm
+
+pub fn group_monomorphism_eq() -> @kernel.Thm
+
+pub fn group_monomorphism_from_subgroup_generated() -> @kernel.Thm
+
+pub fn group_monomorphism_from_trivial_group() -> @kernel.Thm
+
+pub fn group_monomorphism_group_mul_eq() -> @kernel.Thm
+
+pub fn group_monomorphism_group_sum() -> @kernel.Thm
+
+pub fn group_monomorphism_group_sum_eq() -> @kernel.Thm
+
+pub fn group_monomorphism_group_sum_gen() -> @kernel.Thm
+
+pub fn group_monomorphism_id() -> @kernel.Thm
+
+pub fn group_monomorphism_imp_homomorphism() -> @kernel.Thm
+
+pub fn group_monomorphism_inclusion() -> @kernel.Thm
+
+pub fn group_monomorphism_into_supergroup() -> @kernel.Thm
+
+pub fn group_monomorphism_isomorphism_compose_rev() -> @kernel.Thm
+
+pub fn group_monomorphism_left_invertible() -> @kernel.Thm
+
+pub fn group_monomorphism_to_trivial_group() -> @kernel.Thm
+
+pub fn group_monomorphism_trivial() -> @kernel.Thm
+
+pub fn group_monomorphism_v1() -> @kernel.Thm
+
+pub fn group_mul() -> @kernel.Thm
+
+pub fn group_mul_assoc() -> @kernel.Thm
+
+pub fn group_mul_eq_id() -> @kernel.Thm
+
+pub fn group_mul_lcancel() -> @kernel.Thm
+
+pub fn group_mul_lcancel_imp() -> @kernel.Thm
+
+pub fn group_mul_lid() -> @kernel.Thm
+
+pub fn group_mul_linv() -> @kernel.Thm
+
+pub fn group_mul_pow() -> @kernel.Thm
+
+pub fn group_mul_rcancel() -> @kernel.Thm
+
+pub fn group_mul_rcancel_imp() -> @kernel.Thm
+
+pub fn group_mul_rid() -> @kernel.Thm
+
+pub fn group_mul_rinv() -> @kernel.Thm
+
+pub fn group_mul_subgroup() -> @kernel.Thm
+
+pub fn group_mul_v1() -> @kernel.Thm
+
+pub fn group_mul_zpow() -> @kernel.Thm
+
+pub fn group_neg() -> @kernel.Thm
+
+pub fn group_neg_add() -> @kernel.Thm
+
+pub fn group_neg_eq_id() -> @kernel.Thm
+
+pub fn group_neg_eq_inv() -> @kernel.Thm
+
+pub fn group_neg_id() -> @kernel.Thm
+
+pub fn group_neg_neg() -> @kernel.Thm
+
+pub fn group_neg_nmul() -> @kernel.Thm
+
+pub fn group_neg_v1() -> @kernel.Thm
+
+pub fn group_nmul() -> @kernel.Thm
+
+pub fn group_nmul_1() -> @kernel.Thm
+
+pub fn group_nmul_add() -> @kernel.Thm
+
+pub fn group_nmul_eq_pow() -> @kernel.Thm
+
+pub fn group_nmul_mul() -> @kernel.Thm
+
+pub fn group_normalizer() -> @kernel.Thm
+
+pub fn group_normalizer_conjugation() -> @kernel.Thm
+
+pub fn group_normalizer_conjugation_eq() -> @kernel.Thm
+
+pub fn group_normalizer_finite() -> @kernel.Thm
+
+pub fn group_normalizer_maximal() -> @kernel.Thm
+
+pub fn group_normalizer_maximal_gen() -> @kernel.Thm
+
+pub fn group_normalizer_nonempty() -> @kernel.Thm
+
+pub fn group_normalizer_restrict() -> @kernel.Thm
+
+pub fn group_normalizer_sing() -> @kernel.Thm
+
+pub fn group_normalizer_subgroup_generated() -> @kernel.Thm
+
+pub fn group_normalizer_subset() -> @kernel.Thm
+
+pub fn group_normalizer_subset_carrier() -> @kernel.Thm
+
+pub fn group_normalizer_v1() -> @kernel.Thm
+
+pub fn group_npow() -> @kernel.Thm
+
+pub fn group_orbit() -> @kernel.Thm
+
+pub fn group_orbit_common_divisor() -> @kernel.Thm
+
+pub fn group_orbit_common_index() -> @kernel.Thm
+
+pub fn group_orbit_conjugate_stabilizers() -> @kernel.Thm
+
+pub fn group_orbit_conjugation() -> @kernel.Thm
+
+pub fn group_orbit_conjugation_gen() -> @kernel.Thm
+
+pub fn group_orbit_empty() -> @kernel.Thm
+
+pub fn group_orbit_eq() -> @kernel.Thm
+
+pub fn group_orbit_eq_empty() -> @kernel.Thm
+
+pub fn group_orbit_eq_sing() -> @kernel.Thm
+
+pub fn group_orbit_eq_sing_self() -> @kernel.Thm
+
+pub fn group_orbit_group_translation() -> @kernel.Thm
+
+pub fn group_orbit_has_size_1() -> @kernel.Thm
+
+pub fn group_orbit_image_conjugation() -> @kernel.Thm
+
+pub fn group_orbit_image_conjugation_gen() -> @kernel.Thm
+
+pub fn group_orbit_in_set() -> @kernel.Thm
+
+pub fn group_orbit_left_coset_multiplication() -> @kernel.Thm
+
+pub fn group_orbit_left_coset_multiplication_id() -> @kernel.Thm
+
+pub fn group_orbit_on_subset() -> @kernel.Thm
+
+pub fn group_orbit_refl() -> @kernel.Thm
+
+pub fn group_orbit_refl_eq() -> @kernel.Thm
+
+pub fn group_orbit_subgroup_translation() -> @kernel.Thm
+
+pub fn group_orbit_subset() -> @kernel.Thm
+
+pub fn group_orbit_sym() -> @kernel.Thm
+
+pub fn group_orbit_sym_eq() -> @kernel.Thm
+
+pub fn group_orbit_trans() -> @kernel.Thm
+
+pub fn group_orbit_v1() -> @kernel.Thm
+
+pub fn group_orbits_eq() -> @kernel.Thm
+
+pub fn group_pow() -> @kernel.Thm
+
+pub fn group_pow_0() -> @kernel.Thm
+
+pub fn group_pow_1() -> @kernel.Thm
+
+pub fn group_pow_2() -> @kernel.Thm
+
+pub fn group_pow_add() -> @kernel.Thm
+
+pub fn group_pow_cancel() -> @kernel.Thm
+
+pub fn group_pow_coprime_eq_id() -> @kernel.Thm
+
+pub fn group_pow_element_order() -> @kernel.Thm
+
+pub fn group_pow_eq() -> @kernel.Thm
+
+pub fn group_pow_eq_id() -> @kernel.Thm
+
+pub fn group_pow_eq_id_decomp() -> @kernel.Thm
+
+pub fn group_pow_eq_id_divisor() -> @kernel.Thm
+
+pub fn group_pow_gcd_eq_id() -> @kernel.Thm
+
+pub fn group_pow_group_order() -> @kernel.Thm
+
+pub fn group_pow_id() -> @kernel.Thm
+
+pub fn group_pow_integer_group() -> @kernel.Thm
+
+pub fn group_pow_integer_mod_group() -> @kernel.Thm
+
+pub fn group_pow_mod_element_order() -> @kernel.Thm
+
+pub fn group_pow_mod_order() -> @kernel.Thm
+
+pub fn group_pow_mul() -> @kernel.Thm
+
+pub fn group_pow_mul_eq_id_sym() -> @kernel.Thm
+
+pub fn group_pow_pow() -> @kernel.Thm
+
+pub fn group_pow_prod_group() -> @kernel.Thm
+
+pub fn group_pow_product_group() -> @kernel.Thm
+
+pub fn group_pow_sub() -> @kernel.Thm
+
+pub fn group_pow_sub_alt() -> @kernel.Thm
+
+pub fn group_pow_subgroup_generated() -> @kernel.Thm
+
+pub fn group_pow_sum_group() -> @kernel.Thm
+
+pub fn group_pow_v1() -> @kernel.Thm
+
+pub fn group_product() -> @kernel.Thm
+
+pub fn group_product_clauses() -> @kernel.Thm
+
+pub fn group_product_clauses_commuting() -> @kernel.Thm
+
+pub fn group_product_clauses_exists() -> @kernel.Thm
+
+pub fn group_product_clauses_left() -> @kernel.Thm
+
+pub fn group_product_clauses_numseg() -> @kernel.Thm
+
+pub fn group_product_clauses_right() -> @kernel.Thm
+
+pub fn group_product_closed() -> @kernel.Thm
+
+pub fn group_product_eq() -> @kernel.Thm
+
+pub fn group_product_eq_id() -> @kernel.Thm
+
+pub fn group_product_expand_cases() -> @kernel.Thm
+
+pub fn group_product_id() -> @kernel.Thm
+
+pub fn group_product_injection() -> @kernel.Thm
+
+pub fn group_product_mul() -> @kernel.Thm
+
+pub fn group_product_restrict() -> @kernel.Thm
+
+pub fn group_product_restrict_set() -> @kernel.Thm
+
+pub fn group_product_sing() -> @kernel.Thm
+
+pub fn group_product_superset() -> @kernel.Thm
+
+pub fn group_product_support() -> @kernel.Thm
+
+pub fn group_product_union() -> @kernel.Thm
+
+pub fn group_product_v1() -> @kernel.Thm
+
+pub fn group_properties() -> @list.List[@kernel.Thm]
+
+pub fn group_rid_eq() -> @kernel.Thm
+
+pub fn group_rid_unique() -> @kernel.Thm
+
+pub fn group_rinv_eq() -> @kernel.Thm
+
+pub fn group_rinv_unique() -> @kernel.Thm
+
+pub fn group_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn group_semidirect_sum_im_ker() -> @kernel.Thm
+
+pub fn group_semidirect_sum_ker_im() -> @kernel.Thm
+
+pub fn group_setinv() -> @kernel.Thm
+
+pub fn group_setinv_as_image() -> @kernel.Thm
+
+pub fn group_setinv_eq_empty() -> @kernel.Thm
+
+pub fn group_setinv_left_coset() -> @kernel.Thm
+
+pub fn group_setinv_left_coset_gen() -> @kernel.Thm
+
+pub fn group_setinv_mono() -> @kernel.Thm
+
+pub fn group_setinv_right_coset() -> @kernel.Thm
+
+pub fn group_setinv_right_coset_gen() -> @kernel.Thm
+
+pub fn group_setinv_sing() -> @kernel.Thm
+
+pub fn group_setinv_subgroup() -> @kernel.Thm
+
+pub fn group_setinv_subgroup_generated() -> @kernel.Thm
+
+pub fn group_setinv_v1() -> @kernel.Thm
+
+pub fn group_setmul() -> @kernel.Thm
+
+pub fn group_setmul_assoc() -> @kernel.Thm
+
+pub fn group_setmul_empty() -> @kernel.Thm
+
+pub fn group_setmul_eq_empty() -> @kernel.Thm
+
+pub fn group_setmul_inc() -> @kernel.Thm
+
+pub fn group_setmul_inc_gen() -> @kernel.Thm
+
+pub fn group_setmul_lcancel() -> @kernel.Thm
+
+pub fn group_setmul_lcancel_set() -> @kernel.Thm
+
+pub fn group_setmul_left_coset() -> @kernel.Thm
+
+pub fn group_setmul_lid() -> @kernel.Thm
+
+pub fn group_setmul_lsubset() -> @kernel.Thm
+
+pub fn group_setmul_lsubset_eq() -> @kernel.Thm
+
+pub fn group_setmul_mono() -> @kernel.Thm
+
+pub fn group_setmul_normal_subgroup() -> @kernel.Thm
+
+pub fn group_setmul_normal_subgroup_left() -> @kernel.Thm
+
+pub fn group_setmul_normal_subgroup_right() -> @kernel.Thm
+
+pub fn group_setmul_prod_group() -> @kernel.Thm
+
+pub fn group_setmul_product_group() -> @kernel.Thm
+
+pub fn group_setmul_rcancel() -> @kernel.Thm
+
+pub fn group_setmul_rcancel_set() -> @kernel.Thm
+
+pub fn group_setmul_rid() -> @kernel.Thm
+
+pub fn group_setmul_right_coset() -> @kernel.Thm
+
+pub fn group_setmul_rsubset() -> @kernel.Thm
+
+pub fn group_setmul_rsubset_eq() -> @kernel.Thm
+
+pub fn group_setmul_sing() -> @kernel.Thm
+
+pub fn group_setmul_subgroup() -> @kernel.Thm
+
+pub fn group_setmul_subgroup_generated() -> @kernel.Thm
+
+pub fn group_setmul_sym() -> @kernel.Thm
+
+pub fn group_setmul_sym_elementwise() -> @kernel.Thm
+
+pub fn group_setmul_v1() -> @kernel.Thm
+
+pub fn group_stabilizer() -> @kernel.Thm
+
+pub fn group_stabilizer_conjugation() -> @kernel.Thm
+
+pub fn group_stabilizer_group_translation() -> @kernel.Thm
+
+pub fn group_stabilizer_image_conjugation() -> @kernel.Thm
+
+pub fn group_stabilizer_left_coset_multiplication() -> @kernel.Thm
+
+pub fn group_stabilizer_left_coset_multiplication_id() -> @kernel.Thm
+
+pub fn group_stabilizer_nonempty() -> @kernel.Thm
+
+pub fn group_stabilizer_of_action() -> @kernel.Thm
+
+pub fn group_stabilizer_on_subgroup() -> @kernel.Thm
+
+pub fn group_stabilizer_subgroup_generated() -> @kernel.Thm
+
+pub fn group_stabilizer_subgroup_translation() -> @kernel.Thm
+
+pub fn group_stabilizer_subset_carrier() -> @kernel.Thm
+
+pub fn group_sum() -> @kernel.Thm
+
+pub fn group_sum_clauses_commuting() -> @kernel.Thm
+
+pub fn group_sum_clauses_exists() -> @kernel.Thm
+
+pub fn group_sum_closed() -> @kernel.Thm
+
+pub fn group_sum_commuting_imp_normal() -> @kernel.Thm
+
+pub fn group_sum_eq() -> @kernel.Thm
+
+pub fn group_sum_eq_id() -> @kernel.Thm
+
+pub fn group_sum_expand_cases() -> @kernel.Thm
+
+pub fn group_sum_id() -> @kernel.Thm
+
+pub fn group_sum_im_ker() -> @kernel.Thm
+
+pub fn group_sum_image() -> @kernel.Thm
+
+pub fn group_sum_injection() -> @kernel.Thm
+
+pub fn group_sum_inv() -> @kernel.Thm
+
+pub fn group_sum_ker_im() -> @kernel.Thm
+
+pub fn group_sum_mul() -> @kernel.Thm
+
+pub fn group_sum_normal_eq_commuting() -> @kernel.Thm
+
+pub fn group_sum_normal_imp_commuting() -> @kernel.Thm
+
+pub fn group_sum_pow() -> @kernel.Thm
+
+pub fn group_sum_restrict() -> @kernel.Thm
+
+pub fn group_sum_restrict_set() -> @kernel.Thm
+
+pub fn group_sum_sing() -> @kernel.Thm
+
+pub fn group_sum_superset() -> @kernel.Thm
+
+pub fn group_sum_support() -> @kernel.Thm
+
+pub fn group_sum_v1() -> @kernel.Thm
+
+pub fn group_sum_zpow() -> @kernel.Thm
+
+pub fn group_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn group_tybij() -> @kernel.Thm
+
+pub fn group_zpow() -> @kernel.Thm
+
+pub fn group_zpow_0() -> @kernel.Thm
+
+pub fn group_zpow_1() -> @kernel.Thm
+
+pub fn group_zpow_2() -> @kernel.Thm
+
+pub fn group_zpow_abs_eq_id() -> @kernel.Thm
+
+pub fn group_zpow_add() -> @kernel.Thm
+
+pub fn group_zpow_cancel() -> @kernel.Thm
+
+pub fn group_zpow_eq() -> @kernel.Thm
+
+pub fn group_zpow_eq_alt() -> @kernel.Thm
+
+pub fn group_zpow_eq_id() -> @kernel.Thm
+
+pub fn group_zpow_eq_id_divisor() -> @kernel.Thm
+
+pub fn group_zpow_id() -> @kernel.Thm
+
+pub fn group_zpow_integer_group() -> @kernel.Thm
+
+pub fn group_zpow_integer_mod_group() -> @kernel.Thm
+
+pub fn group_zpow_inv() -> @kernel.Thm
+
+pub fn group_zpow_minus1() -> @kernel.Thm
+
+pub fn group_zpow_mul() -> @kernel.Thm
+
+pub fn group_zpow_neg() -> @kernel.Thm
+
+pub fn group_zpow_pow() -> @kernel.Thm
+
+pub fn group_zpow_prod_group() -> @kernel.Thm
+
+pub fn group_zpow_product_group() -> @kernel.Thm
+
+pub fn group_zpow_rem_element_order() -> @kernel.Thm
+
+pub fn group_zpow_rem_order() -> @kernel.Thm
+
+pub fn group_zpow_sub() -> @kernel.Thm
+
+pub fn group_zpow_sub_alt() -> @kernel.Thm
+
+pub fn group_zpow_subgroup_generated() -> @kernel.Thm
+
+pub fn group_zpow_sum_group() -> @kernel.Thm
+
+pub fn group_zpow_v1() -> @kernel.Thm
+
+pub fn groups_eq() -> @kernel.Thm
+
+pub fn has_size_left_right_cosets() -> @kernel.Thm
+
+pub fn image_group_conjugation() -> @kernel.Thm
+
+pub fn image_group_conjugation_by_id() -> @kernel.Thm
+
+pub fn image_group_conjugation_by_inv() -> @kernel.Thm
+
+pub fn image_group_conjugation_by_mul() -> @kernel.Thm
+
+pub fn image_group_conjugation_eq() -> @kernel.Thm
+
+pub fn image_group_conjugation_eq_preimage() -> @kernel.Thm
+
+pub fn image_group_conjugation_eq_swap() -> @kernel.Thm
+
+pub fn image_group_conjugation_subgroup() -> @kernel.Thm
+
+pub fn image_group_conjugation_subset() -> @kernel.Thm
+
+pub fn image_group_conjugation_torsion_gen() -> @kernel.Thm
+
+pub fn image_left_coset_switch() -> @kernel.Thm
+
+pub fn image_right_coset_switch() -> @kernel.Thm
+
+pub fn in_group_centralizer_id() -> @kernel.Thm
+
+pub fn in_group_normalizer_id() -> @kernel.Thm
+
+pub fn in_group_orbit() -> @kernel.Thm
+
+pub fn in_group_orbit_self() -> @kernel.Thm
+
+pub fn in_image_group_conjugation() -> @kernel.Thm
+
+pub fn in_left_coset() -> @kernel.Thm
+
+pub fn in_left_coset_inv() -> @kernel.Thm
+
+pub fn in_left_coset_self() -> @kernel.Thm
+
+pub fn in_right_coset() -> @kernel.Thm
+
+pub fn in_right_coset_inv() -> @kernel.Thm
+
+pub fn in_right_coset_self() -> @kernel.Thm
+
+pub fn in_subgroup_conjugation() -> @kernel.Thm
+
+pub fn in_subgroup_div() -> @kernel.Thm
+
+pub fn in_subgroup_id() -> @kernel.Thm
+
+pub fn in_subgroup_inv() -> @kernel.Thm
+
+pub fn in_subgroup_mul() -> @kernel.Thm
+
+pub fn in_subgroup_pow() -> @kernel.Thm
+
+pub fn in_subgroup_product() -> @kernel.Thm
+
+pub fn in_subgroup_sum() -> @kernel.Thm
+
+pub fn in_subgroup_zpow() -> @kernel.Thm
+
+pub fn infinite_cyclic_subgroup() -> @kernel.Thm
+
+pub fn infinite_cyclic_subgroup_alt() -> @kernel.Thm
+
+pub fn infinite_cyclic_subgroup_order() -> @kernel.Thm
+
+pub fn infinite_integer_group() -> @kernel.Thm
+
+pub fn integer_group() -> @kernel.Thm
+
+pub fn integer_group_v1() -> @kernel.Thm
+
+pub fn integer_mod_group() -> @kernel.Thm
+
+pub fn integer_mod_group_0() -> @kernel.Thm
+
+pub fn integer_mod_group_1() -> @kernel.Thm
+
+pub fn integer_mod_group_1r() -> @kernel.Thm
+
+pub fn integer_mod_group_trivial() -> @kernel.Thm
+
+pub fn integer_mod_group_v1() -> @kernel.Thm
+
+pub fn integer_mod_subgroup_generated_by_1() -> @kernel.Thm
+
+pub fn integer_mod_subgroup_generated_by_1r() -> @kernel.Thm
+
+pub fn invariant_group_orbit() -> @kernel.Thm
+
+pub fn isomorphic_abelian_sum_group() -> @kernel.Thm
+
+pub fn isomorphic_copy_of_group() -> @kernel.Thm
+
+pub fn isomorphic_finite_cyclic_groups() -> @kernel.Thm
+
+pub fn isomorphic_finite_cyclic_integer_mod_group() -> @kernel.Thm
+
+pub fn isomorphic_free_abelian_group_unions() -> @kernel.Thm
+
+pub fn isomorphic_free_abelian_groups() -> @kernel.Thm
+
+pub fn isomorphic_group() -> @kernel.Thm
+
+pub fn isomorphic_group_abelianness() -> @kernel.Thm
+
+pub fn isomorphic_group_card_eq() -> @kernel.Thm
+
+pub fn isomorphic_group_cyclic_integer() -> @kernel.Thm
+
+pub fn isomorphic_group_cyclicity() -> @kernel.Thm
+
+pub fn isomorphic_group_finite_generation() -> @kernel.Thm
+
+pub fn isomorphic_group_finiteness() -> @kernel.Thm
+
+pub fn isomorphic_group_has_order() -> @kernel.Thm
+
+pub fn isomorphic_group_infinite_cyclic_integer() -> @kernel.Thm
+
+pub fn isomorphic_group_infiniteness() -> @kernel.Thm
+
+pub fn isomorphic_group_integer_free_abelian_group_sing() -> @kernel.Thm
+
+pub fn isomorphic_group_integer_mod_group() -> @kernel.Thm
+
+pub fn isomorphic_group_opposite_group() -> @kernel.Thm
+
+pub fn isomorphic_group_order() -> @kernel.Thm
+
+pub fn isomorphic_group_prod_group_swap_left() -> @kernel.Thm
+
+pub fn isomorphic_group_prod_group_swap_right() -> @kernel.Thm
+
+pub fn isomorphic_group_prod_group_sym() -> @kernel.Thm
+
+pub fn isomorphic_group_prod_groups() -> @kernel.Thm
+
+pub fn isomorphic_group_product_group() -> @kernel.Thm
+
+pub fn isomorphic_group_refl() -> @kernel.Thm
+
+pub fn isomorphic_group_singleton_group() -> @kernel.Thm
+
+pub fn isomorphic_group_solvability() -> @kernel.Thm
+
+pub fn isomorphic_group_sum_group() -> @kernel.Thm
+
+pub fn isomorphic_group_sym() -> @kernel.Thm
+
+pub fn isomorphic_group_torsion() -> @kernel.Thm
+
+pub fn isomorphic_group_trans() -> @kernel.Thm
+
+pub fn isomorphic_group_triviality() -> @kernel.Thm
+
+pub fn isomorphic_infinite_cyclic_groups() -> @kernel.Thm
+
+pub fn isomorphic_integer_mod_groups() -> @kernel.Thm
+
+pub fn isomorphic_normal_sum_group() -> @kernel.Thm
+
+pub fn isomorphic_prod_group_subgroup_generated() -> @kernel.Thm
+
+pub fn isomorphic_prod_integer_mod_group() -> @kernel.Thm
+
+pub fn isomorphic_prod_trivial_group() -> @kernel.Thm
+
+pub fn isomorphic_product_group_bijections() -> @kernel.Thm
+
+pub fn isomorphic_product_group_disjoint_union() -> @kernel.Thm
+
+pub fn isomorphic_product_group_insert() -> @kernel.Thm
+
+pub fn isomorphic_product_group_sing() -> @kernel.Thm
+
+pub fn isomorphic_product_group_support() -> @kernel.Thm
+
+pub fn isomorphic_product_group_symdiff() -> @kernel.Thm
+
+pub fn isomorphic_quotient_prod_group() -> @kernel.Thm
+
+pub fn isomorphic_quotient_product_group() -> @kernel.Thm
+
+pub fn isomorphic_sum_group() -> @kernel.Thm
+
+pub fn isomorphic_sum_group_bijections() -> @kernel.Thm
+
+pub fn isomorphic_sum_group_disjoint_union() -> @kernel.Thm
+
+pub fn isomorphic_sum_group_gen() -> @kernel.Thm
+
+pub fn isomorphic_sum_group_insert() -> @kernel.Thm
+
+pub fn isomorphic_sum_group_sing() -> @kernel.Thm
+
+pub fn isomorphic_sum_group_support() -> @kernel.Thm
+
+pub fn isomorphic_sum_group_symdiff() -> @kernel.Thm
+
+pub fn isomorphic_sum_integer_group() -> @kernel.Thm
+
+pub fn isomorphic_to_trivial_group() -> @kernel.Thm
+
+pub fn isomorphic_trivial_groups() -> @kernel.Thm
+
+pub fn lagrange_theorem() -> @kernel.Thm
+
+pub fn lagrange_theorem_left() -> @kernel.Thm
+
+pub fn lagrange_theorem_left_div() -> @kernel.Thm
+
+pub fn lagrange_theorem_left_gen() -> @kernel.Thm
+
+pub fn lagrange_theorem_right() -> @kernel.Thm
+
+pub fn lagrange_theorem_right_div() -> @kernel.Thm
+
+pub fn lagrange_theorem_right_gen() -> @kernel.Thm
+
+pub fn left_coset() -> @kernel.Thm
+
+pub fn left_coset_as_image() -> @kernel.Thm
+
+pub fn left_coset_carrier() -> @kernel.Thm
+
+pub fn left_coset_eq() -> @kernel.Thm
+
+pub fn left_coset_eq_empty() -> @kernel.Thm
+
+pub fn left_coset_eq_subgroup() -> @kernel.Thm
+
+pub fn left_coset_id() -> @kernel.Thm
+
+pub fn left_coset_left_coset() -> @kernel.Thm
+
+pub fn left_coset_nonempty() -> @kernel.Thm
+
+pub fn left_coset_opposite_group() -> @kernel.Thm
+
+pub fn left_coset_prod_group() -> @kernel.Thm
+
+pub fn left_coset_product_group() -> @kernel.Thm
+
+pub fn left_coset_subgroup_generated() -> @kernel.Thm
+
+pub fn left_coset_trivial() -> @kernel.Thm
+
+pub fn left_coset_v1() -> @kernel.Thm
+
+pub fn left_cosets_eq() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn maximal_normal_subgroup() -> @kernel.Thm
+
+pub fn maximal_normal_subgroup_exists() -> @kernel.Thm
+
+pub fn maximal_proper_subgroup_prime_index() -> @kernel.Thm
+
+pub fn maximal_subgroup() -> @kernel.Thm
+
+pub fn maximal_subgroup_exists() -> @kernel.Thm
+
+pub fn maximal_subgroup_prime_index() -> @kernel.Thm
+
+pub fn monoidal_group_add() -> @kernel.Thm
+
+pub fn neutral_group_add() -> @kernel.Thm
+
+pub fn no_proper_subgroup_epimorphic_image_eq() -> @kernel.Thm
+
+pub fn no_proper_subgroups_eq_cyclic_prime_order() -> @kernel.Thm
+
+pub fn no_proper_subgroups_imp_cyclic() -> @kernel.Thm
+
+pub fn non_trivial_integer_group() -> @kernel.Thm
+
+pub fn normal_subgroup_action_kernel() -> @kernel.Thm
+
+pub fn normal_subgroup_centralizer() -> @kernel.Thm
+
+pub fn normal_subgroup_centralizer_normalizer() -> @kernel.Thm
+
+pub fn normal_subgroup_conjugate() -> @kernel.Thm
+
+pub fn normal_subgroup_conjugate_alt() -> @kernel.Thm
+
+pub fn normal_subgroup_conjugate_eq() -> @kernel.Thm
+
+pub fn normal_subgroup_conjugate_inv() -> @kernel.Thm
+
+pub fn normal_subgroup_conjugation() -> @kernel.Thm
+
+pub fn normal_subgroup_conjugation_eq() -> @kernel.Thm
+
+pub fn normal_subgroup_conjugation_superset() -> @kernel.Thm
+
+pub fn normal_subgroup_group_kernel() -> @kernel.Thm
+
+pub fn normal_subgroup_imp_subgroup() -> @kernel.Thm
+
+pub fn normal_subgroup_left_eq_right_cosets() -> @kernel.Thm
+
+pub fn normal_subgroup_left_subset_right_cosets() -> @kernel.Thm
+
+pub fn normal_subgroup_mul_sym() -> @kernel.Thm
+
+pub fn normal_subgroup_normalizer_contains_carrier() -> @kernel.Thm
+
+pub fn normal_subgroup_normalizer_eq_carrier() -> @kernel.Thm
+
+pub fn normal_subgroup_of() -> @kernel.Thm
+
+pub fn normal_subgroup_of_epimorphic_image() -> @kernel.Thm
+
+pub fn normal_subgroup_of_epimorphic_preimage_eq() -> @kernel.Thm
+
+pub fn normal_subgroup_of_homomorphic_preimage() -> @kernel.Thm
+
+pub fn normal_subgroup_of_imp_subset() -> @kernel.Thm
+
+pub fn normal_subgroup_of_inter() -> @kernel.Thm
+
+pub fn normal_subgroup_of_inters() -> @kernel.Thm
+
+pub fn normal_subgroup_of_isomorphic_image_eq() -> @kernel.Thm
+
+pub fn normal_subgroup_of_normalizer() -> @kernel.Thm
+
+pub fn normal_subgroup_of_opposite_group() -> @kernel.Thm
+
+pub fn normal_subgroup_of_subgroup_generated() -> @kernel.Thm
+
+pub fn normal_subgroup_of_subgroup_generated_gen() -> @kernel.Thm
+
+pub fn normal_subgroup_of_torsion() -> @kernel.Thm
+
+pub fn normal_subgroup_of_torsion_gen() -> @kernel.Thm
+
+pub fn normal_subgroup_of_unions() -> @kernel.Thm
+
+pub fn normal_subgroup_right_subset_left_cosets() -> @kernel.Thm
+
+pub fn nsum_card_group_orbits() -> @kernel.Thm
+
+pub fn opposite_group() -> @kernel.Thm
+
+pub fn opposite_group_inv() -> @kernel.Thm
+
+pub fn opposite_group_mul() -> @kernel.Thm
+
+pub fn opposite_group_setinv() -> @kernel.Thm
+
+pub fn opposite_group_setmul() -> @kernel.Thm
+
+pub fn opposite_group_v1() -> @kernel.Thm
+
+pub fn opposite_opposite_group() -> @kernel.Thm
+
+pub fn opposite_prod_group() -> @kernel.Thm
+
+pub fn opposite_product_group() -> @kernel.Thm
+
+pub fn opposite_singleton_group() -> @kernel.Thm
+
+pub fn orbit_stabilizer() -> @kernel.Thm
+
+pub fn orbit_stabilizer_gen() -> @kernel.Thm
+
+pub fn orbit_stabilizer_mul() -> @kernel.Thm
+
+pub fn orbit_stabilizer_mul_gen() -> @kernel.Thm
+
+pub fn order_integer_mod_group() -> @kernel.Thm
+
+pub fn pairwise_disjoint_group_orbits() -> @kernel.Thm
+
+pub fn pairwise_disjoint_left_cosets() -> @kernel.Thm
+
+pub fn pairwise_disjoint_right_cosets() -> @kernel.Thm
+
+pub fn pgroup() -> @kernel.Thm
+
+pub fn pgroup_action_fixpoint() -> @kernel.Thm
+
+pub fn pgroup_action_fixpoints() -> @kernel.Thm
+
+pub fn pgroup_divides_normalizer_quotient() -> @kernel.Thm
+
+pub fn pgroup_empty() -> @kernel.Thm
+
+pub fn pgroup_epimorphic_image() -> @kernel.Thm
+
+pub fn pgroup_frattini() -> @kernel.Thm
+
+pub fn pgroup_maximal_normal_subgroup_of() -> @kernel.Thm
+
+pub fn pgroup_mono() -> @kernel.Thm
+
+pub fn pgroup_monomorphic_preimage() -> @kernel.Thm
+
+pub fn pgroup_nontrivial_centre() -> @kernel.Thm
+
+pub fn pgroup_nontrivial_centre_gen() -> @kernel.Thm
+
+pub fn pgroup_normalizer_normalizer() -> @kernel.Thm
+
+pub fn pgroup_prime_torsion() -> @kernel.Thm
+
+pub fn pgroup_prod_group() -> @kernel.Thm
+
+pub fn pgroup_quotient_group() -> @kernel.Thm
+
+pub fn pgroup_self_normalizer() -> @kernel.Thm
+
+pub fn pgroup_sing() -> @kernel.Thm
+
+pub fn pgroup_subgroup_generated() -> @kernel.Thm
+
+pub fn pgroup_subgroup_psubset_normalizer() -> @kernel.Thm
+
+pub fn pgroup_subset_prime_torsion() -> @kernel.Thm
+
+pub fn pgroup_sum_group() -> @kernel.Thm
+
+pub fn prime_divides_group_order() -> @kernel.Thm
+
+pub fn prime_index_maximal_proper_subgroup() -> @kernel.Thm
+
+pub fn prime_order_eq_no_proper_subgroups() -> @kernel.Thm
+
+pub fn prime_order_imp_cyclic_group() -> @kernel.Thm
+
+pub fn prime_order_imp_no_proper_subgroups() -> @kernel.Thm
+
+pub fn prod_group() -> @kernel.Thm
+
+pub fn prod_group_subgroup_generated() -> @kernel.Thm
+
+pub fn prod_group_v1() -> @kernel.Thm
+
+pub fn product_group() -> @kernel.Thm
+
+pub fn product_group_subgroup_generated() -> @kernel.Thm
+
+pub fn product_group_v1() -> @kernel.Thm
+
+pub fn quotient_group() -> @kernel.Thm
+
+pub fn quotient_group_div() -> @kernel.Thm
+
+pub fn quotient_group_id() -> @kernel.Thm
+
+pub fn quotient_group_inv() -> @kernel.Thm
+
+pub fn quotient_group_mul() -> @kernel.Thm
+
+pub fn quotient_group_pow() -> @kernel.Thm
+
+pub fn quotient_group_pow_eq_id() -> @kernel.Thm
+
+pub fn quotient_group_subgroup_generated() -> @kernel.Thm
+
+pub fn quotient_group_trivial() -> @kernel.Thm
+
+pub fn quotient_group_universal() -> @kernel.Thm
+
+pub fn quotient_group_universal_epimorphism() -> @kernel.Thm
+
+pub fn quotient_group_universal_explicit() -> @kernel.Thm
+
+pub fn quotient_group_v1() -> @kernel.Thm
+
+pub fn quotient_group_zpow() -> @kernel.Thm
+
+pub fn quotient_normal_subgroup_correspondence() -> @kernel.Thm
+
+pub fn quotient_subgroup_correspondence() -> @kernel.Thm
+
+pub fn right_coset() -> @kernel.Thm
+
+pub fn right_coset_carrier() -> @kernel.Thm
+
+pub fn right_coset_eq() -> @kernel.Thm
+
+pub fn right_coset_eq_empty() -> @kernel.Thm
+
+pub fn right_coset_eq_subgroup() -> @kernel.Thm
+
+pub fn right_coset_group_conjugation() -> @kernel.Thm
+
+pub fn right_coset_id() -> @kernel.Thm
+
+pub fn right_coset_nonempty() -> @kernel.Thm
+
+pub fn right_coset_opposite_group() -> @kernel.Thm
+
+pub fn right_coset_prod_group() -> @kernel.Thm
+
+pub fn right_coset_product_group() -> @kernel.Thm
+
+pub fn right_coset_right_coset() -> @kernel.Thm
+
+pub fn right_coset_subgroup_generated() -> @kernel.Thm
+
+pub fn right_coset_trivial() -> @kernel.Thm
+
+pub fn right_coset_v1() -> @kernel.Thm
+
+pub fn right_cosets_eq() -> @kernel.Thm
+
+pub fn schreier_transversal_lemma() -> @kernel.Thm
+
+pub fn short_exact_sequence() -> @kernel.Thm
+
+pub fn short_exact_sequence_normal_subgroup() -> @kernel.Thm
+
+pub fn short_exact_sequence_prod_group() -> @kernel.Thm
+
+pub fn short_exact_sequence_prod_group_alt() -> @kernel.Thm
+
+pub fn short_exact_sequence_quotient() -> @kernel.Thm
+
+pub fn short_exact_sequence_trivial_groups() -> @kernel.Thm
+
+pub fn short_exact_sequence_v1() -> @kernel.Thm
+
+pub fn short_five_lemma() -> @kernel.Thm
+
+pub fn short_five_lemma_epi() -> @kernel.Thm
+
+pub fn short_five_lemma_mono() -> @kernel.Thm
+
+pub fn simple_group_epimorphic_image_eq() -> @kernel.Thm
+
+pub fn singleton_group() -> @kernel.Thm
+
+pub fn singleton_group_v1() -> @kernel.Thm
+
+pub fn solvable_group() -> @kernel.Thm
+
+pub fn solvable_group_alt() -> @kernel.Thm
+
+pub fn solvable_group_epimorphic_image() -> @kernel.Thm
+
+pub fn solvable_group_monomorphic_preimage() -> @kernel.Thm
+
+pub fn solvable_group_normal_extension() -> @kernel.Thm
+
+pub fn solvable_group_quotient() -> @kernel.Thm
+
+pub fn solvable_group_solvable_quotient() -> @kernel.Thm
+
+pub fn solvable_group_subgroup() -> @kernel.Thm
+
+pub fn splitting_lemma_free_abelian_group() -> @kernel.Thm
+
+pub fn splitting_lemma_left() -> @kernel.Thm
+
+pub fn splitting_lemma_left_gen() -> @kernel.Thm
+
+pub fn splitting_lemma_left_prod_group() -> @kernel.Thm
+
+pub fn splitting_lemma_right() -> @kernel.Thm
+
+pub fn splitting_lemma_right_gen() -> @kernel.Thm
+
+pub fn splitting_lemma_right_prod_group() -> @kernel.Thm
+
+pub fn splitting_sublemma() -> @kernel.Thm
+
+pub fn splitting_sublemma_gen() -> @kernel.Thm
+
+pub fn subgroup_epimorphism_abelian_group_sum() -> @kernel.Thm
+
+pub fn subgroup_epimorphism_group_sum() -> @kernel.Thm
+
+pub fn subgroup_epimorphism_group_sum_eq() -> @kernel.Thm
+
+pub fn subgroup_epimorphism_group_sum_gen() -> @kernel.Thm
+
+pub fn subgroup_generated() -> @kernel.Thm
+
+pub fn subgroup_generated_by_epimorphic_image() -> @kernel.Thm
+
+pub fn subgroup_generated_by_homomorphic_image() -> @kernel.Thm
+
+pub fn subgroup_generated_by_homomorphic_image_eq() -> @kernel.Thm
+
+pub fn subgroup_generated_by_subgroup_generated() -> @kernel.Thm
+
+pub fn subgroup_generated_by_subgroup_generated_idempot() -> @kernel.Thm
+
+pub fn subgroup_generated_element_order() -> @kernel.Thm
+
+pub fn subgroup_generated_eq() -> @kernel.Thm
+
+pub fn subgroup_generated_group_carrier() -> @kernel.Thm
+
+pub fn subgroup_generated_idempot() -> @kernel.Thm
+
+pub fn subgroup_generated_idempot_gen() -> @kernel.Thm
+
+pub fn subgroup_generated_inc() -> @kernel.Thm
+
+pub fn subgroup_generated_inc_gen() -> @kernel.Thm
+
+pub fn subgroup_generated_induct() -> @kernel.Thm
+
+pub fn subgroup_generated_induct_alt() -> @kernel.Thm
+
+pub fn subgroup_generated_induct_left() -> @kernel.Thm
+
+pub fn subgroup_generated_induct_strong() -> @kernel.Thm
+
+pub fn subgroup_generated_insert_id() -> @kernel.Thm
+
+pub fn subgroup_generated_minimal() -> @kernel.Thm
+
+pub fn subgroup_generated_minimal_eq() -> @kernel.Thm
+
+pub fn subgroup_generated_mono() -> @kernel.Thm
+
+pub fn subgroup_generated_refl() -> @kernel.Thm
+
+pub fn subgroup_generated_restrict() -> @kernel.Thm
+
+pub fn subgroup_generated_setmul() -> @kernel.Thm
+
+pub fn subgroup_generated_subset_carrier() -> @kernel.Thm
+
+pub fn subgroup_generated_subset_carrier_subset() -> @kernel.Thm
+
+pub fn subgroup_generated_superset() -> @kernel.Thm
+
+pub fn subgroup_generated_union() -> @kernel.Thm
+
+pub fn subgroup_generated_union_left() -> @kernel.Thm
+
+pub fn subgroup_generated_union_right() -> @kernel.Thm
+
+pub fn subgroup_generated_unions_prime_torsion() -> @kernel.Thm
+
+pub fn subgroup_generated_unions_prime_torsion_finite() -> @kernel.Thm
+
+pub fn subgroup_generated_unions_prime_torsion_full() -> @kernel.Thm
+
+pub fn subgroup_generated_v1() -> @kernel.Thm
+
+pub fn subgroup_group_centralizer() -> @kernel.Thm
+
+pub fn subgroup_group_image() -> @kernel.Thm
+
+pub fn subgroup_group_kernel() -> @kernel.Thm
+
+pub fn subgroup_group_normalizer() -> @kernel.Thm
+
+pub fn subgroup_isomorphism_abelian_group_sum() -> @kernel.Thm
+
+pub fn subgroup_isomorphism_group_sum() -> @kernel.Thm
+
+pub fn subgroup_isomorphism_group_sum_eq() -> @kernel.Thm
+
+pub fn subgroup_isomorphism_group_sum_gen() -> @kernel.Thm
+
+pub fn subgroup_monomorphism_epimorphism() -> @kernel.Thm
+
+pub fn subgroup_of() -> @kernel.Thm
+
+pub fn subgroup_of_commuting_elements() -> @kernel.Thm
+
+pub fn subgroup_of_coprime_order() -> @kernel.Thm
+
+pub fn subgroup_of_cyclic_group() -> @kernel.Thm
+
+pub fn subgroup_of_cyclic_group_explicit() -> @kernel.Thm
+
+pub fn subgroup_of_epimorphic_preimage() -> @kernel.Thm
+
+pub fn subgroup_of_finite_cyclic_group() -> @kernel.Thm
+
+pub fn subgroup_of_group_stabilizer() -> @kernel.Thm
+
+pub fn subgroup_of_homomorphic_image() -> @kernel.Thm
+
+pub fn subgroup_of_homomorphic_preimage() -> @kernel.Thm
+
+pub fn subgroup_of_imp_nonempty() -> @kernel.Thm
+
+pub fn subgroup_of_imp_subset() -> @kernel.Thm
+
+pub fn subgroup_of_inter() -> @kernel.Thm
+
+pub fn subgroup_of_inters() -> @kernel.Thm
+
+pub fn subgroup_of_isomorphic_image_eq() -> @kernel.Thm
+
+pub fn subgroup_of_left_coset() -> @kernel.Thm
+
+pub fn subgroup_of_lower_order() -> @kernel.Thm
+
+pub fn subgroup_of_lower_order_alt() -> @kernel.Thm
+
+pub fn subgroup_of_nondivisible_order() -> @kernel.Thm
+
+pub fn subgroup_of_opposite_group() -> @kernel.Thm
+
+pub fn subgroup_of_powers() -> @kernel.Thm
+
+pub fn subgroup_of_prime_torsion() -> @kernel.Thm
+
+pub fn subgroup_of_primes_torsion() -> @kernel.Thm
+
+pub fn subgroup_of_quotient_group() -> @kernel.Thm
+
+pub fn subgroup_of_quotient_group_alt() -> @kernel.Thm
+
+pub fn subgroup_of_quotient_group_generated_by() -> @kernel.Thm
+
+pub fn subgroup_of_right_coset() -> @kernel.Thm
+
+pub fn subgroup_of_setwise() -> @kernel.Thm
+
+pub fn subgroup_of_subgroup_generated() -> @kernel.Thm
+
+pub fn subgroup_of_subgroup_generated_eq() -> @kernel.Thm
+
+pub fn subgroup_of_subgroup_generated_rev() -> @kernel.Thm
+
+pub fn subgroup_of_subgroup_generated_subgroup_eq() -> @kernel.Thm
+
+pub fn subgroup_of_torsion() -> @kernel.Thm
+
+pub fn subgroup_of_torsion_gen() -> @kernel.Thm
+
+pub fn subgroup_of_torsion_general() -> @kernel.Thm
+
+pub fn subgroup_of_unions() -> @kernel.Thm
+
+pub fn subgroup_setmul() -> @kernel.Thm
+
+pub fn subgroup_setmul_eq() -> @kernel.Thm
+
+pub fn subgroup_subgroup_generated() -> @kernel.Thm
+
+pub fn subgroup_sum_group() -> @kernel.Thm
+
+pub fn subgroups_generated_eq() -> @kernel.Thm
+
+pub fn subset_carrier_subgroup_generated() -> @kernel.Thm
+
+pub fn subset_group_orbit_closed() -> @kernel.Thm
+
+pub fn subset_group_orbit_invariant() -> @kernel.Thm
+
+pub fn sum_group() -> @kernel.Thm
+
+pub fn sum_group_alt() -> @kernel.Thm
+
+pub fn sum_group_clauses() -> @kernel.Thm
+
+pub fn sum_group_eq_product_group() -> @kernel.Thm
+
+pub fn sum_group_subgroup_generated() -> @kernel.Thm
+
+pub fn sylow_theorem() -> @kernel.Thm
+
+pub fn sylow_theorem_conjugate() -> @kernel.Thm
+
+pub fn sylow_theorem_conjugate_alt() -> @kernel.Thm
+
+pub fn sylow_theorem_conjugate_eq() -> @kernel.Thm
+
+pub fn sylow_theorem_conjugate_gen() -> @kernel.Thm
+
+pub fn sylow_theorem_conjugate_subset() -> @kernel.Thm
+
+pub fn sylow_theorem_count_divisor() -> @kernel.Thm
+
+pub fn sylow_theorem_count_mod() -> @kernel.Thm
+
+pub fn sylow_theorem_count_normalizer() -> @kernel.Thm
+
+pub fn sylow_theorem_count_normalizer_mul() -> @kernel.Thm
+
+pub fn sylow_theorem_normal_unique() -> @kernel.Thm
+
+pub fn sylow_theorem_normal_unique_eq() -> @kernel.Thm
+
+pub fn sylow_theorem_pgroup_superset() -> @kernel.Thm
+
+pub fn sylow_theorem_unique() -> @kernel.Thm
+
+pub fn torsion_abelian_group_as_sum_of_pgroups() -> @kernel.Thm
+
+pub fn torsion_abelian_group_isomorphism() -> @kernel.Thm
+
+pub fn torsion_abelian_group_structure() -> @kernel.Thm
+
+pub fn torsion_free_group() -> @kernel.Thm
+
+pub fn torsion_free_group_alt() -> @kernel.Thm
+
+pub fn torsion_free_quotient_group() -> @kernel.Thm
+
+pub fn trivial_group() -> @kernel.Thm
+
+pub fn trivial_group_alt() -> @kernel.Thm
+
+pub fn trivial_group_generated_by_anything() -> @kernel.Thm
+
+pub fn trivial_group_has_size_1() -> @kernel.Thm
+
+pub fn trivial_group_singleton_group() -> @kernel.Thm
+
+pub fn trivial_group_subgroup_generated() -> @kernel.Thm
+
+pub fn trivial_group_subgroup_generated_empty() -> @kernel.Thm
+
+pub fn trivial_group_subgroup_generated_eq() -> @kernel.Thm
+
+pub fn trivial_group_subgroup_generated_trivial() -> @kernel.Thm
+
+pub fn trivial_group_subset() -> @kernel.Thm
+
+pub fn trivial_group_v1() -> @kernel.Thm
+
+pub fn trivial_groups_imp_short_exact_sequence() -> @kernel.Thm
+
+pub fn trivial_homomorphism() -> @kernel.Thm
+
+pub fn trivial_homomorphism_group_image() -> @kernel.Thm
+
+pub fn trivial_homomorphism_group_kernel() -> @kernel.Thm
+
+pub fn trivial_homomorphism_trivial() -> @kernel.Thm
+
+pub fn trivial_imp_abelian_group() -> @kernel.Thm
+
+pub fn trivial_imp_cyclic_group() -> @kernel.Thm
+
+pub fn trivial_imp_finite_group() -> @kernel.Thm
+
+pub fn trivial_imp_finitely_generated_group() -> @kernel.Thm
+
+pub fn trivial_imp_solvable_group() -> @kernel.Thm
+
+pub fn trivial_integer_mod_group() -> @kernel.Thm
+
+pub fn trivial_normal_subgroup_of() -> @kernel.Thm
+
+pub fn trivial_opposite_group() -> @kernel.Thm
+
+pub fn trivial_prod_group() -> @kernel.Thm
+
+pub fn trivial_product_group() -> @kernel.Thm
+
+pub fn trivial_quotient_group() -> @kernel.Thm
+
+pub fn trivial_quotient_group_eq() -> @kernel.Thm
+
+pub fn trivial_quotient_group_self() -> @kernel.Thm
+
+pub fn trivial_subgroup_of() -> @kernel.Thm
+
+pub fn trivial_sum_group() -> @kernel.Thm
+
+pub fn unions_group_orbits() -> @kernel.Thm
+
+pub fn unions_group_orbits_closed() -> @kernel.Thm
+
+pub fn unions_group_orbits_invariant() -> @kernel.Thm
+
+pub fn unions_left_cosets() -> @kernel.Thm
+
+pub fn unions_right_cosets() -> @kernel.Thm
+
+pub fn very_short_exact_sequence() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
