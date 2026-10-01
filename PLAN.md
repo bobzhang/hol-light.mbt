@@ -174,4 +174,7 @@ functions, never through top-level side effects, so callers control loading.
 - [ ] Phase 3: `basics/` is done (basics.ml plus the untrusted tail of
   fusion.ml; it matches basics.ml on 79 differential checks, including
   hash-ordered `atoms`, `genvar` counters and capture-avoiding `subst`).
-  Next: `nets`, the Format subset, `printer`, `preterm`, `parser`.
+  `nets/` is done (persistent term nets with `NetCompare`, which models
+  OCaml `compare` raising on closures; it matches nets.ml on 28 lookups,
+  including closure-ordered tips and merges). Next: the Format subset,
+  `printer`, `preterm`, `parser`.

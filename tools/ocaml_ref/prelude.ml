@@ -3,6 +3,7 @@ let needs (_:string) = ();;
 #use "lib.ml";;
 #use "fusion.ml";;
 #use "basics.ml";;
+#use "nets.ml";;
 
 let rec sty ty = match ty with
     Tyvar s -> "'" ^ s

@@ -1,0 +1,36 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/nets"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn[A] empty_net() -> Net[A]
+
+pub fn[A : NetCompare] enter(@list.List[@kernel.Term], @kernel.Term, A, Net[A]) -> Net[A]
+
+pub fn[A] lookup(@kernel.Term, Net[A]) -> @list.List[A]
+
+pub fn[A : NetCompare] merge_nets(Net[A], Net[A]) -> Net[A]
+
+// Errors
+
+// Types and methods
+pub struct Net[A] {
+  // private fields
+}
+pub fn[A] Net::tips(Self[A]) -> @list.List[A]
+
+// Type aliases
+
+// Traits
+pub(open) trait NetCompare {
+  fn net_compare(Self, Self) -> Int?
+}
+pub impl NetCompare for Int
+pub impl NetCompare for String
+pub impl NetCompare for @kernel.Term
+pub impl NetCompare for @kernel.Thm
+pub impl[A : NetCompare, B : NetCompare] NetCompare for (A, B)
