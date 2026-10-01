@@ -1,0 +1,228 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/cart"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn card_cart_univ() -> @kernel.Thm
+
+pub fn card_finite_image() -> @kernel.Thm
+
+pub fn cart_eq() -> @kernel.Thm
+
+pub fn cart_eq_full() -> @kernel.Thm
+
+pub fn cart_tybij() -> @kernel.Thm
+
+pub fn dimindex() -> @kernel.Thm
+
+pub fn dimindex_1() -> @kernel.Thm
+
+pub fn dimindex_2() -> @kernel.Thm
+
+pub fn dimindex_3() -> @kernel.Thm
+
+pub fn dimindex_4() -> @kernel.Thm
+
+pub fn dimindex_clauses() -> @kernel.Thm
+
+pub fn dimindex_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn dimindex_finite_diff() -> @kernel.Thm
+
+pub fn dimindex_finite_image() -> @kernel.Thm
+
+pub fn dimindex_finite_prod() -> @kernel.Thm
+
+pub fn dimindex_finite_sum() -> @kernel.Thm
+
+pub fn dimindex_ge_1() -> @kernel.Thm
+
+pub fn dimindex_has_size_finite_diff() -> @kernel.Thm
+
+pub fn dimindex_has_size_finite_prod() -> @kernel.Thm
+
+pub fn dimindex_has_size_finite_sum() -> @kernel.Thm
+
+pub fn dimindex_nonzero() -> @kernel.Thm
+
+pub fn dimindex_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn dimindex_tybit0() -> @kernel.Thm
+
+pub fn dimindex_tybit1() -> @kernel.Thm
+
+pub fn dimindex_unique() -> @kernel.Thm
+
+pub fn dimindex_univ() -> @kernel.Thm
+
+pub fn disjoint_pcross() -> @kernel.Thm
+
+pub fn exists_in_pcross() -> @kernel.Thm
+
+pub fn exists_pastecart() -> @kernel.Thm
+
+pub fn finite_1() -> @kernel.Thm
+
+pub fn finite_cart() -> @kernel.Thm
+
+pub fn finite_cart_univ() -> @kernel.Thm
+
+pub fn finite_clauses() -> @kernel.Thm
+
+pub fn finite_diff_image() -> @kernel.Thm
+
+pub fn finite_diff_tybij() -> @kernel.Thm
+
+pub fn finite_finite_image() -> @kernel.Thm
+
+pub fn finite_image_image() -> @kernel.Thm
+
+pub fn finite_image_tybij() -> @kernel.Thm
+
+pub fn finite_index() -> @kernel.Thm
+
+pub fn finite_index_inj() -> @kernel.Thm
+
+pub fn finite_index_inrange() -> @kernel.Thm
+
+pub fn finite_index_inrange_2() -> @kernel.Thm
+
+pub fn finite_index_works() -> @kernel.Thm
+
+pub fn finite_pcross() -> @kernel.Thm
+
+pub fn finite_pcross_eq() -> @kernel.Thm
+
+pub fn finite_prod_image() -> @kernel.Thm
+
+pub fn finite_prod_tybij() -> @kernel.Thm
+
+pub fn finite_sum_image() -> @kernel.Thm
+
+pub fn finite_sum_tybij() -> @kernel.Thm
+
+pub fn finite_tybit0() -> @kernel.Thm
+
+pub fn finite_tybit1() -> @kernel.Thm
+
+pub fn forall_finite_index() -> @kernel.Thm
+
+pub fn forall_in_pcross() -> @kernel.Thm
+
+pub fn forall_pastecart() -> @kernel.Thm
+
+pub fn fstcart() -> @kernel.Thm
+
+pub fn fstcart_component() -> @kernel.Thm
+
+pub fn fstcart_pastecart() -> @kernel.Thm
+
+pub fn has_size_1() -> @kernel.Thm
+
+pub fn has_size_2() -> @kernel.Thm
+
+pub fn has_size_3() -> @kernel.Thm
+
+pub fn has_size_4() -> @kernel.Thm
+
+pub fn has_size_cart_univ() -> @kernel.Thm
+
+pub fn has_size_dimindex_rule(@kernel.HolType) -> @kernel.Thm raise
+
+pub fn has_size_finite_image() -> @kernel.Thm
+
+pub fn has_size_pcross() -> @kernel.Thm
+
+pub fn has_size_tybit0() -> @kernel.Thm
+
+pub fn has_size_tybit1() -> @kernel.Thm
+
+pub fn image_fstcart_pcross() -> @kernel.Thm
+
+pub fn image_sndcart_pcross() -> @kernel.Thm
+
+pub fn in_elim_pastecart_thm() -> @kernel.Thm
+
+pub fn inter_pcross() -> @kernel.Thm
+
+pub fn lambda() -> @kernel.Thm
+
+pub fn lambda_beta() -> @kernel.Thm
+
+pub fn lambda_eta() -> @kernel.Thm
+
+pub fn lambda_unique() -> @kernel.Thm
+
+pub fn numseg_lt_dimindex() -> @kernel.Thm
+
+pub fn pastecart() -> @kernel.Thm
+
+pub fn pastecart_component() -> @kernel.Thm
+
+pub fn pastecart_eq() -> @kernel.Thm
+
+pub fn pastecart_fst_snd() -> @kernel.Thm
+
+pub fn pastecart_in_pcross() -> @kernel.Thm
+
+pub fn pastecart_inj() -> @kernel.Thm
+
+pub fn pcross() -> @kernel.Thm
+
+pub fn pcross_diff() -> @kernel.Thm
+
+pub fn pcross_empty() -> @kernel.Thm
+
+pub fn pcross_eq() -> @kernel.Thm
+
+pub fn pcross_eq_empty() -> @kernel.Thm
+
+pub fn pcross_inter() -> @kernel.Thm
+
+pub fn pcross_inters() -> @kernel.Thm
+
+pub fn pcross_inters_inters() -> @kernel.Thm
+
+pub fn pcross_mono() -> @kernel.Thm
+
+pub fn pcross_sing() -> @kernel.Thm
+
+pub fn pcross_union() -> @kernel.Thm
+
+pub fn pcross_unions() -> @kernel.Thm
+
+pub fn pcross_unions_unions() -> @kernel.Thm
+
+pub fn sndcart() -> @kernel.Thm
+
+pub fn sndcart_component() -> @kernel.Thm
+
+pub fn sndcart_pastecart() -> @kernel.Thm
+
+pub fn subset_pcross() -> @kernel.Thm
+
+pub fn tybit0_induct() -> @kernel.Thm
+
+pub fn tybit0_recursion() -> @kernel.Thm
+
+pub fn tybit1_induct() -> @kernel.Thm
+
+pub fn tybit1_recursion() -> @kernel.Thm
+
+pub fn univ_has_size_dimindex() -> @kernel.Thm
+
+pub fn univ_pcross_univ() -> @kernel.Thm
+
+pub fn vector() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
