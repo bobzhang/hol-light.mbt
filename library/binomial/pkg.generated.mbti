@@ -1,0 +1,73 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/binomial"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn appell_sequence() -> @kernel.Thm
+
+pub fn binom() -> @kernel.Thm
+
+pub fn binom_0() -> @kernel.Thm
+
+pub fn binom_1() -> @kernel.Thm
+
+pub fn binom_both_step() -> @kernel.Thm
+
+pub fn binom_both_step_down() -> @kernel.Thm
+
+pub fn binom_both_step_real() -> @kernel.Thm
+
+pub fn binom_bottom_step() -> @kernel.Thm
+
+pub fn binom_bottom_step_real() -> @kernel.Thm
+
+pub fn binom_eq_0() -> @kernel.Thm
+
+pub fn binom_fact() -> @kernel.Thm
+
+pub fn binom_ge_top() -> @kernel.Thm
+
+pub fn binom_lt() -> @kernel.Thm
+
+pub fn binom_mul_shift() -> @kernel.Thm
+
+pub fn binom_penult() -> @kernel.Thm
+
+pub fn binom_refl() -> @kernel.Thm
+
+pub fn binom_sym() -> @kernel.Thm
+
+pub fn binom_top_step() -> @kernel.Thm
+
+pub fn binom_top_step_real() -> @kernel.Thm
+
+pub fn binom_v1() -> @kernel.Thm
+
+pub fn binomial_theorem() -> @kernel.Thm
+
+pub fn card_restricted_powerset() -> @kernel.Thm
+
+pub fn divides_coprime_binom() -> @kernel.Thm
+
+pub fn divides_gcd_binom() -> @kernel.Thm
+
+pub fn divides_prime_binom() -> @kernel.Thm
+
+pub fn has_size_restricted_powerset() -> @kernel.Thm
+
+pub fn num_binom_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_binomial_theorem() -> @kernel.Thm
+
+pub fn real_of_num_binom() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
