@@ -185,6 +185,8 @@ pub fn[A] sort((A, A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
 
 pub fn[A, B] splitlist((A) -> (B, A) raise, A) -> (@list.List[B], A) raise
 
+pub fn string_of_float(Double) -> String
+
 pub fn[A] striplist((A) -> (A, A) raise, A) -> @list.List[A] raise
 
 pub fn[A : OCompare] subset(@list.List[A], @list.List[A]) -> Bool

@@ -502,7 +502,10 @@ pub fn label_tac(s : String, thm : Thm) -> Tactic {
     (
       null_meta,
       @list.singleton((asl.prepend((s, thm)), w)),
-      (i, ths) => @bool.prove_hyp(@drule.instantiate_all(i, thm), one(ths)),
+      (i, ths) => {
+        let th0 = one(ths)
+        @bool.prove_hyp(@drule.instantiate_all(i, thm), th0)
+      },
     )
   }
 }
@@ -697,7 +700,10 @@ pub fn conv_tac(conv : Conv) -> Tactic {
     (
       null_meta,
       @list.singleton((asl, r)),
-      (i, ths) => @kernel.eq_mp(@drule.instantiate_all(i, th1), one(ths)),
+      (i, ths) => {
+        let th0 = one(ths)
+        @kernel.eq_mp(@drule.instantiate_all(i, th1), th0)
+      },
     )
   }
 }
@@ -730,7 +736,8 @@ pub let abs_tac : Tactic = g => {
       @kernel.vsubst(@list.singleton((v, rv)), rb),
     )
     let just : Justification = (i, ths) => {
-      let ath = @kernel.abs_rule(v, one(ths))
+      let th0 = one(ths)
+      let ath = @kernel.abs_rule(v, th0)
       @kernel.eq_mp(
         @equal.alpha_rule(@kernel.concl(ath), @drule.instantiate(i, w)),
         ath,
@@ -863,7 +870,10 @@ pub let disch_tac : Tactic = g => {
     (
       null_meta,
       @list.singleton((asl.prepend(("", th1)), c)),
-      (i, ths) => @bool.disch(@drule.instantiate(i, ant), one(ths)),
+      (i, ths) => {
+        let th0 = one(ths)
+        @bool.disch(@drule.instantiate(i, ant), th0)
+      },
     )
   } catch {
     Failure(_) =>
@@ -874,7 +884,8 @@ pub let disch_tac : Tactic = g => {
           null_meta,
           @list.singleton((asl.prepend(("", th1)), disch_tac_f.get())),
           (i, ths) => {
-            @bool.not_intro(@bool.disch(@drule.instantiate(i, ant), one(ths)))
+            let th0 = one(ths)
+            @bool.not_intro(@bool.disch(@drule.instantiate(i, ant), th0))
           },
         )
       } catch {
@@ -893,7 +904,10 @@ pub fn mp_tac(thm : Thm) -> Tactic {
     (
       null_meta,
       @list.singleton((asl, @bool.mk_imp(@kernel.concl(thm), w))),
-      (i, ths) => @bool.mp(one(ths), @drule.instantiate_all(i, thm)),
+      (i, ths) => {
+        let th0 = one(ths)
+        @bool.mp(th0, @drule.instantiate_all(i, thm))
+      },
     )
   }
 }
@@ -932,7 +946,8 @@ pub fn undisch_tac(tm : Term) -> Tactic {
       )
       let thm = sthm.1
       let just : Justification = (i, ths) => {
-        @bool.mp(one(ths), @drule.instantiate_all(i, thm))
+        let th0 = one(ths)
+        @bool.mp(th0, @drule.instantiate_all(i, thm))
       }
       (null_meta, @list.singleton((asl1, @bool.mk_imp(tm, w))), just)
     } catch {
@@ -951,7 +966,8 @@ pub fn spec_tac(t : Term, x : Term) -> Tactic {
     let result = try {
       let goal = @bool.mk_forall(x, @basics.subst(@list.singleton((x, t)), w))
       let just : Justification = (i, ths) => {
-        @bool.spec(@drule.instantiate(i, t), one(ths))
+        let th0 = one(ths)
+        @bool.spec(@drule.instantiate(i, t), th0)
       }
       (null_meta, @list.singleton((asl, goal)), just)
     } catch {
@@ -1006,7 +1022,10 @@ pub fn x_gen_tac(x1 : Term) -> Tactic raise {
     (
       null_meta,
       @list.singleton((asl, @kernel.vsubst(@list.singleton((x1, x)), bod))),
-      (_, ths) => afn(@bool.gen(x1, one(ths))),
+      (_, ths) => {
+        let th0 = one(ths)
+        afn(@bool.gen(x1, th0))
+      },
     )
   }
 }
@@ -1038,7 +1057,8 @@ pub fn x_choose_tac(x1 : Term, xth : Thm) -> Tactic raise {
       null_meta,
       @list.singleton((asl.prepend(("", xth1)), w)),
       (i, ths) => {
-        @bool.choose_rule(x1, @drule.instantiate_all(i, xth), one(ths))
+        let th0 = one(ths)
+        @bool.choose_rule(x1, @drule.instantiate_all(i, xth), th0)
       },
     )
   }
@@ -1059,9 +1079,10 @@ pub fn exists_tac(t : Term) -> Tactic {
       null_meta,
       @list.singleton((asl, @kernel.vsubst(@list.singleton((t, v)), bod))),
       (i, ths) => {
+        let th0 = one(ths)
         // `EXISTS (instantiate i w, instantiate i t) th`: right to left.
         let it = @drule.instantiate(i, t)
-        @bool.exists_rule(@drule.instantiate(i, w), it, one(ths))
+        @bool.exists_rule(@drule.instantiate(i, w), it, th0)
       },
     )
   }
@@ -1130,7 +1151,8 @@ pub let disj1_tac : Tactic = g => {
   let result = try {
     let (l, r) = @basics.dest_disj(w)
     let just : Justification = (i, ths) => {
-      @bool.disj1(one(ths), @drule.instantiate(i, r))
+      let th0 = one(ths)
+      @bool.disj1(th0, @drule.instantiate(i, r))
     }
     (null_meta, @list.singleton((asl, l)), just)
   } catch {
@@ -1241,7 +1263,8 @@ pub fn match_mp_tac(th : Thm) -> Tactic raise {
       let xth = match_fun(w)
       let lant = @basics.dest_imp(@kernel.concl(xth)).0
       let just : Justification = (i, ths) => {
-        @bool.mp(@drule.instantiate_all(i, xth), one(ths))
+        let th0 = one(ths)
+        @bool.mp(@drule.instantiate_all(i, xth), th0)
       }
       (null_meta, @list.singleton((asl, lant)), just)
     } catch {
@@ -1519,8 +1542,9 @@ pub fn x_meta_exists_tac(t : Term) -> Tactic {
       }
       let (v, bod) = @basics.dest_exists(w)
       let just : Justification = (i, ths) => {
+        let th0 = one(ths)
         let it = @drule.instantiate(i, t)
-        @bool.exists_rule(@drule.instantiate(i, w), it, one(ths))
+        @bool.exists_rule(@drule.instantiate(i, w), it, th0)
       }
       (
         (@list.singleton(t), null_inst),
@@ -1820,7 +1844,10 @@ pub fn mk_goalstate(g : Goal) -> Goalstate raise {
     (
       null_meta,
       @list.singleton((asl, w)),
-      (inst, ths) => @drule.instantiate_all(inst, one(ths)),
+      (inst, ths) => {
+        let th0 = one(ths)
+        @drule.instantiate_all(inst, th0)
+      },
     )
   } else {
     raise Failure("mk_goalstate: Non-boolean goal")
