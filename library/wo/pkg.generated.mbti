@@ -1,0 +1,336 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/wo"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn antichain() -> @kernel.Thm
+
+pub fn antichain_subset() -> @kernel.Thm
+
+pub fn antichain_v1() -> @kernel.Thm
+
+pub fn chain() -> @kernel.Thm
+
+pub fn chain_subset() -> @kernel.Thm
+
+pub fn chain_v1() -> @kernel.Thm
+
+pub fn dickson() -> @kernel.Thm
+
+pub fn extend_fld() -> @kernel.Thm
+
+pub fn extend_inseg() -> @kernel.Thm
+
+pub fn extend_linseg() -> @kernel.Thm
+
+pub fn finite_fld() -> @kernel.Thm
+
+pub fn fld() -> @kernel.Thm
+
+pub fn fld_eq_empty() -> @kernel.Thm
+
+pub fn fld_num() -> @kernel.Thm
+
+pub fn fld_pointwise() -> @kernel.Thm
+
+pub fn fld_restrict() -> @kernel.Thm
+
+pub fn fld_restrict_poset() -> @kernel.Thm
+
+pub fn fld_restrict_qoset() -> @kernel.Thm
+
+pub fn fld_restrict_toset() -> @kernel.Thm
+
+pub fn fld_restrict_woset() -> @kernel.Thm
+
+pub fn fld_restrict_wqoset() -> @kernel.Thm
+
+pub fn fld_restricted_subset() -> @kernel.Thm
+
+pub fn fld_subset() -> @kernel.Thm
+
+pub fn fld_suc() -> @kernel.Thm
+
+pub fn fld_trivial() -> @kernel.Thm
+
+pub fn hp() -> @kernel.Thm
+
+pub fn in_fld() -> @kernel.Thm
+
+pub fn inseg() -> @kernel.Thm
+
+pub fn inseg_antisym() -> @kernel.Thm
+
+pub fn inseg_fld_subset() -> @kernel.Thm
+
+pub fn inseg_linseg() -> @kernel.Thm
+
+pub fn inseg_ordinal() -> @kernel.Thm
+
+pub fn inseg_proper_subset() -> @kernel.Thm
+
+pub fn inseg_proper_subset_fld() -> @kernel.Thm
+
+pub fn inseg_refl() -> @kernel.Thm
+
+pub fn inseg_subset() -> @kernel.Thm
+
+pub fn inseg_subset_fld() -> @kernel.Thm
+
+pub fn inseg_trans() -> @kernel.Thm
+
+pub fn inseg_woset() -> @kernel.Thm
+
+pub fn kl() -> @kernel.Thm
+
+pub fn kl_poset_lemma() -> @kernel.Thm
+
+pub fn linseg() -> @kernel.Thm
+
+pub fn linseg_fld() -> @kernel.Thm
+
+pub fn linseg_inseg() -> @kernel.Thm
+
+pub fn linseg_woset() -> @kernel.Thm
+
+pub fn oep() -> @kernel.Thm
+
+pub fn ordinal() -> @kernel.Thm
+
+pub fn ordinal_chained() -> @kernel.Thm
+
+pub fn ordinal_chained_lemma() -> @kernel.Thm
+
+pub fn ordinal_fld_subset() -> @kernel.Thm
+
+pub fn ordinal_fld_subset_eq() -> @kernel.Thm
+
+pub fn ordinal_fld_unique() -> @kernel.Thm
+
+pub fn ordinal_imp_woset() -> @kernel.Thm
+
+pub fn ordinal_suc() -> @kernel.Thm
+
+pub fn ordinal_union() -> @kernel.Thm
+
+pub fn ordinal_union_lemma() -> @kernel.Thm
+
+pub fn ordinal_up() -> @kernel.Thm
+
+pub fn paired_ext() -> @kernel.Thm
+
+pub fn pbeta_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn poset() -> @kernel.Thm
+
+pub fn poset_antisym() -> @kernel.Thm
+
+pub fn poset_fldeq() -> @kernel.Thm
+
+pub fn poset_imp_qoset() -> @kernel.Thm
+
+pub fn poset_max() -> @kernel.Thm
+
+pub fn poset_min() -> @kernel.Thm
+
+pub fn poset_num() -> @kernel.Thm
+
+pub fn poset_qoset() -> @kernel.Thm
+
+pub fn poset_refl() -> @kernel.Thm
+
+pub fn poset_restrict() -> @kernel.Thm
+
+pub fn poset_restricted_subset() -> @kernel.Thm
+
+pub fn poset_trans() -> @kernel.Thm
+
+pub fn poset_trivial() -> @kernel.Thm
+
+pub fn properly() -> @kernel.Thm
+
+pub fn properly_eq_strictly() -> @kernel.Thm
+
+pub fn properly_mono() -> @kernel.Thm
+
+pub fn properly_properly() -> @kernel.Thm
+
+pub fn properly_strictly() -> @kernel.Thm
+
+pub fn qoset() -> @kernel.Thm
+
+pub fn qoset_fld() -> @kernel.Thm
+
+pub fn qoset_fldeq() -> @kernel.Thm
+
+pub fn qoset_max() -> @kernel.Thm
+
+pub fn qoset_min() -> @kernel.Thm
+
+pub fn qoset_num() -> @kernel.Thm
+
+pub fn qoset_pointwise() -> @kernel.Thm
+
+pub fn qoset_refl() -> @kernel.Thm
+
+pub fn qoset_refl_eq() -> @kernel.Thm
+
+pub fn qoset_restrict() -> @kernel.Thm
+
+pub fn qoset_trans() -> @kernel.Thm
+
+pub fn qoset_trivial() -> @kernel.Thm
+
+pub fn strictly() -> @kernel.Thm
+
+pub fn strictly_eq_properly() -> @kernel.Thm
+
+pub fn strictly_imp_properly() -> @kernel.Thm
+
+pub fn strictly_properly() -> @kernel.Thm
+
+pub fn strictly_strictly() -> @kernel.Thm
+
+pub fn subset_pred() -> @kernel.Thm
+
+pub fn subwoset_iso_inseg() -> @kernel.Thm
+
+pub fn toset() -> @kernel.Thm
+
+pub fn toset_cofinal_woset() -> @kernel.Thm
+
+pub fn toset_imp_poset() -> @kernel.Thm
+
+pub fn toset_imp_qoset() -> @kernel.Thm
+
+pub fn toset_max() -> @kernel.Thm
+
+pub fn toset_min() -> @kernel.Thm
+
+pub fn toset_num() -> @kernel.Thm
+
+pub fn toset_poset() -> @kernel.Thm
+
+pub fn toset_restrict() -> @kernel.Thm
+
+pub fn toset_trivial() -> @kernel.Thm
+
+pub fn toset_v1() -> @kernel.Thm
+
+pub fn tukey() -> @kernel.Thm
+
+pub fn union_fld() -> @kernel.Thm
+
+pub fn union_inseg() -> @kernel.Thm
+
+pub fn unions_pred() -> @kernel.Thm
+
+pub fn wf_inseg_woset() -> @kernel.Thm
+
+pub fn wo() -> @kernel.Thm
+
+pub fn wo_ordinal() -> @kernel.Thm
+
+pub fn woset() -> @kernel.Thm
+
+pub fn woset_antisym() -> @kernel.Thm
+
+pub fn woset_finite_toset() -> @kernel.Thm
+
+pub fn woset_fldeq() -> @kernel.Thm
+
+pub fn woset_imp_poset() -> @kernel.Thm
+
+pub fn woset_imp_qoset() -> @kernel.Thm
+
+pub fn woset_imp_toset() -> @kernel.Thm
+
+pub fn woset_imp_wqoset() -> @kernel.Thm
+
+pub fn woset_inseg_ordinal() -> @kernel.Thm
+
+pub fn woset_num() -> @kernel.Thm
+
+pub fn woset_poset() -> @kernel.Thm
+
+pub fn woset_refl() -> @kernel.Thm
+
+pub fn woset_restrict() -> @kernel.Thm
+
+pub fn woset_toset() -> @kernel.Thm
+
+pub fn woset_total() -> @kernel.Thm
+
+pub fn woset_total_le() -> @kernel.Thm
+
+pub fn woset_total_lt() -> @kernel.Thm
+
+pub fn woset_trans() -> @kernel.Thm
+
+pub fn woset_trans_le() -> @kernel.Thm
+
+pub fn woset_trans_less() -> @kernel.Thm
+
+pub fn woset_trivial() -> @kernel.Thm
+
+pub fn woset_v1() -> @kernel.Thm
+
+pub fn woset_well() -> @kernel.Thm
+
+pub fn woset_well_contrapos() -> @kernel.Thm
+
+pub fn woset_wf() -> @kernel.Thm
+
+pub fn woset_wqoset() -> @kernel.Thm
+
+pub fn wqoset() -> @kernel.Thm
+
+pub fn wqoset_antichain() -> @kernel.Thm
+
+pub fn wqoset_imp_qoset() -> @kernel.Thm
+
+pub fn wqoset_imp_wf() -> @kernel.Thm
+
+pub fn wqoset_nobad() -> @kernel.Thm
+
+pub fn wqoset_nobad_subseq() -> @kernel.Thm
+
+pub fn wqoset_num() -> @kernel.Thm
+
+pub fn wqoset_pointwise() -> @kernel.Thm
+
+pub fn wqoset_qoset() -> @kernel.Thm
+
+pub fn wqoset_restrict() -> @kernel.Thm
+
+pub fn wqoset_superset() -> @kernel.Thm
+
+pub fn wqoset_trivial() -> @kernel.Thm
+
+pub fn wqoset_v1() -> @kernel.Thm
+
+pub fn wqoset_wf_superset() -> @kernel.Thm
+
+pub fn wqoset_wf_superset_eq() -> @kernel.Thm
+
+pub fn zl() -> @kernel.Thm
+
+pub fn zl_strong() -> @kernel.Thm
+
+pub fn zl_subsets() -> @kernel.Thm
+
+pub fn zl_subsets_unions() -> @kernel.Thm
+
+pub fn zl_subsets_unions_nonempty() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
