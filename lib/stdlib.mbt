@@ -528,3 +528,40 @@ pub fn[A, B] array_map(
   }
   out
 }
+
+///|
+/// OCaml's `Sys_error`.
+pub(all) suberror SysError {
+  SysError(String)
+} derive(Debug)
+
+///|
+/// `Sys.command`: there is no shell (wasm), as on a host where the command
+/// is not found: exit status 127.
+pub fn sys_command(_cmd : String) -> Int {
+  127
+}
+
+///|
+/// `Filename.temp_file prefix suffix`: a name only (nothing is created).
+pub fn temp_file(prefix : String, suffix : String) -> String {
+  "/tmp/" + prefix + "000000" + suffix
+}
+
+///|
+/// `Sys.remove`: there is no file system.
+pub fn sys_remove(name : String) -> Unit raise {
+  raise SysError(name + ": No such file or directory")
+}
+
+///|
+/// `Sys.file_exists`
+pub fn sys_file_exists(_name : String) -> Bool {
+  false
+}
+
+///|
+/// lib.ml's `string_of_file`: there is no file system.
+pub fn string_of_file(name : String) -> String raise {
+  raise SysError(name + ": No such file or directory")
+}

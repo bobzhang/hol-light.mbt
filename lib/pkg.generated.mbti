@@ -330,6 +330,8 @@ pub fn string_length(String) -> Int
 
 pub fn string_make(Int, Char) -> String raise
 
+pub fn string_of_file(String) -> String raise
+
 pub fn string_of_float(Double) -> String
 
 pub fn string_of_int(Int) -> String
@@ -343,6 +345,14 @@ pub fn[A : OCompare] subset(@list.List[A], @list.List[A]) -> Bool
 pub fn[A : OCompare] subtract(@list.List[A], @list.List[A]) -> @list.List[A]
 
 pub fn[A] subtract_eq((A, A) -> Bool raise?, @list.List[A], @list.List[A]) -> @list.List[A] raise?
+
+pub fn sys_command(String) -> Int
+
+pub fn sys_file_exists(String) -> Bool
+
+pub fn sys_remove(String) -> Unit raise
+
+pub fn temp_file(String, String) -> String
 
 pub fn[A, B] time((A) -> B raise, A) -> B raise
 
@@ -391,6 +401,10 @@ pub(all) suberror MatchFailure {
 pub fn MatchFailure::to_repr(Self) -> @debug.Repr
 
 pub(all) suberror NotFound derive(@debug.Debug)
+
+pub(all) suberror SysError {
+  SysError(String)
+} derive(@debug.Debug)
 
 pub(all) suberror Unchanged derive(@debug.Debug)
 pub fn Unchanged::to_repr(Self) -> @debug.Repr
