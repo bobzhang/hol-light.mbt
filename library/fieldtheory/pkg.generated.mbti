@@ -1,0 +1,741 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/fieldtheory"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn algebraic_closure_exists() -> @kernel.Thm
+
+pub fn algebraic_closure_exists_id() -> @kernel.Thm
+
+pub fn algebraic_closure_extend_homomorphism() -> @kernel.Thm
+
+pub fn algebraic_closure_unique() -> @kernel.Thm
+
+pub fn algebraic_closure_unique_explicit() -> @kernel.Thm
+
+pub fn algebraic_extension() -> @kernel.Thm
+
+pub fn algebraic_extension_alt() -> @kernel.Thm
+
+pub fn algebraic_extension_eq() -> @kernel.Thm
+
+pub fn algebraic_extension_isomorphism() -> @kernel.Thm
+
+pub fn algebraic_extension_refl() -> @kernel.Thm
+
+pub fn algebraic_extension_subfield_generated_algebraic() -> @kernel.Thm
+
+pub fn algebraic_extension_subfields_generated() -> @kernel.Thm
+
+pub fn algebraic_extension_subring_generated_algebraic() -> @kernel.Thm
+
+pub fn algebraic_extension_trans() -> @kernel.Thm
+
+pub fn algebraic_extension_trans_eq() -> @kernel.Thm
+
+pub fn algebraic_extension_v1() -> @kernel.Thm
+
+pub fn algebraic_from_subring_generated() -> @kernel.Thm
+
+pub fn algebraic_imp_field_extension() -> @kernel.Thm
+
+pub fn algebraic_matroid() -> @kernel.Thm
+
+pub fn algebraic_matroid_basis() -> @kernel.Thm
+
+pub fn algebraic_matroid_dependent() -> @kernel.Thm
+
+pub fn algebraic_matroid_independent() -> @kernel.Thm
+
+pub fn algebraic_matroid_spanning() -> @kernel.Thm
+
+pub fn algebraic_matroid_v1() -> @kernel.Thm
+
+pub fn algebraic_over() -> @kernel.Thm
+
+pub fn algebraic_over_0() -> @kernel.Thm
+
+pub fn algebraic_over_1() -> @kernel.Thm
+
+pub fn algebraic_over_add() -> @kernel.Thm
+
+pub fn algebraic_over_algebraic_extension() -> @kernel.Thm
+
+pub fn algebraic_over_alt() -> @kernel.Thm
+
+pub fn algebraic_over_div() -> @kernel.Thm
+
+pub fn algebraic_over_eq() -> @kernel.Thm
+
+pub fn algebraic_over_eq_eq() -> @kernel.Thm
+
+pub fn algebraic_over_field_extension() -> @kernel.Thm
+
+pub fn algebraic_over_from_monomorphic_image() -> @kernel.Thm
+
+pub fn algebraic_over_image() -> @kernel.Thm
+
+pub fn algebraic_over_image_gen() -> @kernel.Thm
+
+pub fn algebraic_over_image_subset() -> @kernel.Thm
+
+pub fn algebraic_over_in_carrier() -> @kernel.Thm
+
+pub fn algebraic_over_inv() -> @kernel.Thm
+
+pub fn algebraic_over_isomorphic_image() -> @kernel.Thm
+
+pub fn algebraic_over_monomorphic_image() -> @kernel.Thm
+
+pub fn algebraic_over_mul() -> @kernel.Thm
+
+pub fn algebraic_over_neg() -> @kernel.Thm
+
+pub fn algebraic_over_nonmonomorphism() -> @kernel.Thm
+
+pub fn algebraic_over_pow() -> @kernel.Thm
+
+pub fn algebraic_over_range() -> @kernel.Thm
+
+pub fn algebraic_over_refl() -> @kernel.Thm
+
+pub fn algebraic_over_sub() -> @kernel.Thm
+
+pub fn algebraic_over_subfield_generated() -> @kernel.Thm
+
+pub fn algebraic_over_subfield_generated_algebraic() -> @kernel.Thm
+
+pub fn algebraic_over_subfield_subring_generated() -> @kernel.Thm
+
+pub fn algebraic_over_subring_generated() -> @kernel.Thm
+
+pub fn algebraic_over_subring_generated_mono() -> @kernel.Thm
+
+pub fn algebraic_over_trans() -> @kernel.Thm
+
+pub fn algebraic_over_v1() -> @kernel.Thm
+
+pub fn algebraic_span() -> @kernel.Thm
+
+pub fn algebraic_span_empty() -> @kernel.Thm
+
+pub fn algebraic_span_exchange() -> @kernel.Thm
+
+pub fn algebraic_span_field() -> @kernel.Thm
+
+pub fn algebraic_span_finitary() -> @kernel.Thm
+
+pub fn algebraic_span_mono() -> @kernel.Thm
+
+pub fn algebraic_span_monomorphic_image() -> @kernel.Thm
+
+pub fn algebraic_span_over_algebraic_extension() -> @kernel.Thm
+
+pub fn algebraic_span_range() -> @kernel.Thm
+
+pub fn algebraic_span_restrict() -> @kernel.Thm
+
+pub fn algebraic_span_span() -> @kernel.Thm
+
+pub fn algebraic_span_subset() -> @kernel.Thm
+
+pub fn algebraic_span_superset() -> @kernel.Thm
+
+pub fn algebraic_span_v1() -> @kernel.Thm
+
+pub fn algebraically_closed_field() -> @kernel.Thm
+
+pub fn algebraically_closed_field_decompose() -> @kernel.Thm
+
+pub fn algebraically_closed_field_eq_irreducibles() -> @kernel.Thm
+
+pub fn algebraically_closed_field_eq_splits() -> @kernel.Thm
+
+pub fn algebraically_closed_field_eq_splits_alt() -> @kernel.Thm
+
+pub fn algebraically_closed_field_imp_field() -> @kernel.Thm
+
+pub fn algebraically_closed_field_imp_infinite() -> @kernel.Thm
+
+pub fn algebraically_closed_field_isomorphic_image() -> @kernel.Thm
+
+pub fn algebraically_closed_field_no_proper_algebraic_extension() -> @kernel.Thm
+
+pub fn algebraically_closed_field_splits() -> @kernel.Thm
+
+pub fn algebraically_dependent() -> @kernel.Thm
+
+pub fn algebraically_dependent_alt() -> @kernel.Thm
+
+pub fn algebraically_dependent_finitary() -> @kernel.Thm
+
+pub fn algebraically_dependent_from_insert() -> @kernel.Thm
+
+pub fn algebraically_dependent_imp_subset() -> @kernel.Thm
+
+pub fn algebraically_dependent_insert() -> @kernel.Thm
+
+pub fn algebraically_dependent_mono() -> @kernel.Thm
+
+pub fn algebraically_dependent_monomorphic_image() -> @kernel.Thm
+
+pub fn algebraically_dependent_over_algebraic_extension() -> @kernel.Thm
+
+pub fn algebraically_dependent_over_subring_generated_mono() -> @kernel.Thm
+
+pub fn algebraically_dependent_sing() -> @kernel.Thm
+
+pub fn algebraically_dependent_span() -> @kernel.Thm
+
+pub fn algebraically_independent() -> @kernel.Thm
+
+pub fn algebraically_independent_card_le_spanning() -> @kernel.Thm
+
+pub fn algebraically_independent_empty() -> @kernel.Thm
+
+pub fn algebraically_independent_imp_disjoint() -> @kernel.Thm
+
+pub fn algebraically_independent_imp_subset() -> @kernel.Thm
+
+pub fn algebraically_independent_imp_transcendental() -> @kernel.Thm
+
+pub fn algebraically_independent_insert() -> @kernel.Thm
+
+pub fn algebraically_independent_mono() -> @kernel.Thm
+
+pub fn algebraically_independent_over_algebraic_extension() -> @kernel.Thm
+
+pub fn algebraically_independent_over_subring_generated_mono() -> @kernel.Thm
+
+pub fn algebraically_independent_sing() -> @kernel.Thm
+
+pub fn algebraically_independent_span() -> @kernel.Thm
+
+pub fn algebraically_independent_trans() -> @kernel.Thm
+
+pub fn algebraically_spanning() -> @kernel.Thm
+
+pub fn algebraically_spanning_contains_transcendence_basis() -> @kernel.Thm
+
+pub fn algebraically_spanning_over_algebraic_extension() -> @kernel.Thm
+
+pub fn algebraically_spanning_span() -> @kernel.Thm
+
+pub fn algebraically_spanning_trans() -> @kernel.Thm
+
+pub fn algebraically_spanning_v1() -> @kernel.Thm
+
+pub fn card_eq_algebraic_extension() -> @kernel.Thm
+
+pub fn card_finite_extension() -> @kernel.Thm
+
+pub fn card_le_algebraic_extension() -> @kernel.Thm
+
+pub fn carrier_subfield_generated_field() -> @kernel.Thm
+
+pub fn carrier_subfield_generated_subfield() -> @kernel.Thm
+
+pub fn carrier_subfield_of() -> @kernel.Thm
+
+pub fn coprime_poly_no_common_root() -> @kernel.Thm
+
+pub fn coprime_poly_no_common_root_i() -> @kernel.Thm
+
+pub fn field_algebraic_extension() -> @kernel.Thm
+
+pub fn field_algebraic_over() -> @kernel.Thm
+
+pub fn field_extension() -> @kernel.Thm
+
+pub fn field_extension_carrier() -> @kernel.Thm
+
+pub fn field_extension_eq() -> @kernel.Thm
+
+pub fn field_extension_from_prime_subring() -> @kernel.Thm
+
+pub fn field_extension_from_subring_generated() -> @kernel.Thm
+
+pub fn field_extension_imp_homomorphism() -> @kernel.Thm
+
+pub fn field_extension_imp_monomorphism() -> @kernel.Thm
+
+pub fn field_extension_imp_subset() -> @kernel.Thm
+
+pub fn field_extension_into_subfield_generated() -> @kernel.Thm
+
+pub fn field_extension_into_subring_generated() -> @kernel.Thm
+
+pub fn field_extension_isomorphism() -> @kernel.Thm
+
+pub fn field_extension_refl() -> @kernel.Thm
+
+pub fn field_extension_subring_generated() -> @kernel.Thm
+
+pub fn field_extension_tower_law() -> @kernel.Thm
+
+pub fn field_extension_trans() -> @kernel.Thm
+
+pub fn field_extension_trans_i() -> @kernel.Thm
+
+pub fn field_simple_algebraic_extension() -> @kernel.Thm
+
+pub fn field_simple_algebraic_extension_eq() -> @kernel.Thm
+
+pub fn field_simple_algebraic_extension_gen() -> @kernel.Thm
+
+pub fn field_subfield_generated() -> @kernel.Thm
+
+pub fn field_subfield_generated_alt() -> @kernel.Thm
+
+pub fn field_subfield_generated_eq() -> @kernel.Thm
+
+pub fn field_subfield_generated_mono() -> @kernel.Thm
+
+pub fn field_subfield_generated_units() -> @kernel.Thm
+
+pub fn finite_eq_field_extension() -> @kernel.Thm
+
+pub fn finite_eq_finitely_generated_algebraic_extension() -> @kernel.Thm
+
+pub fn finite_extension() -> @kernel.Thm
+
+pub fn finite_extension_any() -> @kernel.Thm
+
+pub fn finite_extension_basis() -> @kernel.Thm
+
+pub fn finite_extension_isomorphism() -> @kernel.Thm
+
+pub fn finite_extension_ring_matroid() -> @kernel.Thm
+
+pub fn finite_extension_spanning() -> @kernel.Thm
+
+pub fn finite_extension_trans() -> @kernel.Thm
+
+pub fn finite_extension_trans_eq() -> @kernel.Thm
+
+pub fn finite_extension_v1() -> @kernel.Thm
+
+pub fn finite_finite_field_extension() -> @kernel.Thm
+
+pub fn finite_finitely_generated_algebraic_extension() -> @kernel.Thm
+
+pub fn finite_imp_algebraic_extension() -> @kernel.Thm
+
+pub fn finite_imp_algebraic_extension_explicit() -> @kernel.Thm
+
+pub fn finite_imp_field_extension() -> @kernel.Thm
+
+pub fn finite_imp_finitely_generated_extension() -> @kernel.Thm
+
+pub fn finite_integral_domain_size() -> @kernel.Thm
+
+pub fn finite_simple_algebraic_extension() -> @kernel.Thm
+
+pub fn finite_subfield_generated() -> @kernel.Thm
+
+pub fn finite_subset_subfield_generated_denominator() -> @kernel.Thm
+
+pub fn finitely_generated_algebraically_independent_imp_finite() -> @kernel.Thm
+
+pub fn finitely_generated_extension() -> @kernel.Thm
+
+pub fn finitely_generated_extension_trans() -> @kernel.Thm
+
+pub fn finitely_generated_extension_trans_eq() -> @kernel.Thm
+
+pub fn finitely_generated_extension_v1() -> @kernel.Thm
+
+pub fn finitely_generated_imp_field_extension() -> @kernel.Thm
+
+pub fn frobenius_fixed_field() -> @kernel.Thm
+
+pub fn has_size_finite_extension() -> @kernel.Thm
+
+pub fn in_subfield_0() -> @kernel.Thm
+
+pub fn in_subfield_1() -> @kernel.Thm
+
+pub fn in_subfield_add() -> @kernel.Thm
+
+pub fn in_subfield_generated_finitary() -> @kernel.Thm
+
+pub fn in_subfield_inv() -> @kernel.Thm
+
+pub fn in_subfield_linv() -> @kernel.Thm
+
+pub fn in_subfield_mul() -> @kernel.Thm
+
+pub fn in_subfield_neg() -> @kernel.Thm
+
+pub fn in_subfield_pow() -> @kernel.Thm
+
+pub fn in_subfield_product() -> @kernel.Thm
+
+pub fn in_subfield_rinv() -> @kernel.Thm
+
+pub fn in_subfield_sub() -> @kernel.Thm
+
+pub fn in_subfield_sum() -> @kernel.Thm
+
+pub fn irreducible_algebraically_closed_field() -> @kernel.Thm
+
+pub fn isomorphic_ring_algebraically_closed_field() -> @kernel.Thm
+
+pub fn kronecker_field_extension() -> @kernel.Thm
+
+pub fn kronecker_simple_field_extension() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn poly_const_subfield_generated() -> @kernel.Thm
+
+pub fn poly_over_subfield_generated_denominator() -> @kernel.Thm
+
+pub fn poly_squarefree_explicit_eq() -> @kernel.Thm
+
+pub fn poly_squarefree_root_count() -> @kernel.Thm
+
+pub fn poly_squarefree_root_count_eq() -> @kernel.Thm
+
+pub fn poly_squarefree_root_count_explicit() -> @kernel.Thm
+
+pub fn poly_subfield_generated_clauses() -> @kernel.Thm
+
+pub fn prime_subfield_eq_subring() -> @kernel.Thm
+
+pub fn prime_subfield_minimal() -> @kernel.Thm
+
+pub fn ring_0_in_subfield_generated() -> @kernel.Thm
+
+pub fn ring_1_in_subfield_generated() -> @kernel.Thm
+
+pub fn ring_add_in_subfield_generated() -> @kernel.Thm
+
+pub fn ring_automorphism_frobenius_gen() -> @kernel.Thm
+
+pub fn ring_automorphism_of_algebraic_extension() -> @kernel.Thm
+
+pub fn ring_bases_card_eq() -> @kernel.Thm
+
+pub fn ring_basis() -> @kernel.Thm
+
+pub fn ring_basis_exists() -> @kernel.Thm
+
+pub fn ring_basis_imp_subset() -> @kernel.Thm
+
+pub fn ring_basis_trans() -> @kernel.Thm
+
+pub fn ring_carrier_subfield_generated_subring_quotients() -> @kernel.Thm
+
+pub fn ring_carrier_subfield_generated_subset() -> @kernel.Thm
+
+pub fn ring_char_subfield_generated() -> @kernel.Thm
+
+pub fn ring_dependent() -> @kernel.Thm
+
+pub fn ring_dependent_finitary() -> @kernel.Thm
+
+pub fn ring_dependent_finite() -> @kernel.Thm
+
+pub fn ring_dependent_imp_subset() -> @kernel.Thm
+
+pub fn ring_dependent_mono() -> @kernel.Thm
+
+pub fn ring_dependent_span_image() -> @kernel.Thm
+
+pub fn ring_div_in_subfield_generated() -> @kernel.Thm
+
+pub fn ring_independent() -> @kernel.Thm
+
+pub fn ring_independent_card_le_spanning() -> @kernel.Thm
+
+pub fn ring_independent_empty() -> @kernel.Thm
+
+pub fn ring_independent_finitary() -> @kernel.Thm
+
+pub fn ring_independent_finite() -> @kernel.Thm
+
+pub fn ring_independent_finite_eq() -> @kernel.Thm
+
+pub fn ring_independent_imp_subset() -> @kernel.Thm
+
+pub fn ring_independent_insert() -> @kernel.Thm
+
+pub fn ring_independent_le_span() -> @kernel.Thm
+
+pub fn ring_independent_mono() -> @kernel.Thm
+
+pub fn ring_independent_nonzero() -> @kernel.Thm
+
+pub fn ring_independent_products() -> @kernel.Thm
+
+pub fn ring_independent_trans() -> @kernel.Thm
+
+pub fn ring_inv_in_subfield_generated() -> @kernel.Thm
+
+pub fn ring_inv_subfield_generated() -> @kernel.Thm
+
+pub fn ring_inv_subring_generated() -> @kernel.Thm
+
+pub fn ring_matroid() -> @kernel.Thm
+
+pub fn ring_matroid_basis() -> @kernel.Thm
+
+pub fn ring_matroid_finite_dimensional() -> @kernel.Thm
+
+pub fn ring_matroid_independent() -> @kernel.Thm
+
+pub fn ring_matroid_spanning() -> @kernel.Thm
+
+pub fn ring_matroid_v1() -> @kernel.Thm
+
+pub fn ring_monomorphism_poly_extend() -> @kernel.Thm
+
+pub fn ring_mul_in_subfield_generated() -> @kernel.Thm
+
+pub fn ring_neg_in_subfield_generated() -> @kernel.Thm
+
+pub fn ring_of_int_subfield_generated() -> @kernel.Thm
+
+pub fn ring_of_num_subfield_generated() -> @kernel.Thm
+
+pub fn ring_pow_in_subfield_generated() -> @kernel.Thm
+
+pub fn ring_pow_subfield_generated() -> @kernel.Thm
+
+pub fn ring_simple_algebraic_extension_span() -> @kernel.Thm
+
+pub fn ring_simple_extension_span() -> @kernel.Thm
+
+pub fn ring_span_0() -> @kernel.Thm
+
+pub fn ring_span_add() -> @kernel.Thm
+
+pub fn ring_span_cases() -> @kernel.Thm
+
+pub fn ring_span_empty() -> @kernel.Thm
+
+pub fn ring_span_exchange() -> @kernel.Thm
+
+pub fn ring_span_finitary() -> @kernel.Thm
+
+pub fn ring_span_finite() -> @kernel.Thm
+
+pub fn ring_span_homomorphic_image() -> @kernel.Thm
+
+pub fn ring_span_inc() -> @kernel.Thm
+
+pub fn ring_span_induct() -> @kernel.Thm
+
+pub fn ring_span_mono() -> @kernel.Thm
+
+pub fn ring_span_mul() -> @kernel.Thm
+
+pub fn ring_span_neg() -> @kernel.Thm
+
+pub fn ring_span_nonempty() -> @kernel.Thm
+
+pub fn ring_span_restrict() -> @kernel.Thm
+
+pub fn ring_span_rules() -> @kernel.Thm
+
+pub fn ring_span_self() -> @kernel.Thm
+
+pub fn ring_span_sing() -> @kernel.Thm
+
+pub fn ring_span_span() -> @kernel.Thm
+
+pub fn ring_span_sub() -> @kernel.Thm
+
+pub fn ring_span_subset() -> @kernel.Thm
+
+pub fn ring_span_subset_algebraic_span() -> @kernel.Thm
+
+pub fn ring_span_subset_subfield_generated() -> @kernel.Thm
+
+pub fn ring_span_subset_subring_generated() -> @kernel.Thm
+
+pub fn ring_span_sum() -> @kernel.Thm
+
+pub fn ring_span_superset() -> @kernel.Thm
+
+pub fn ring_span_superset_eq() -> @kernel.Thm
+
+pub fn ring_span_superset_gen() -> @kernel.Thm
+
+pub fn ring_span_union() -> @kernel.Thm
+
+pub fn ring_spanning() -> @kernel.Thm
+
+pub fn ring_spanning_alt() -> @kernel.Thm
+
+pub fn ring_spanning_contains_basis() -> @kernel.Thm
+
+pub fn ring_spanning_imp_nonempty() -> @kernel.Thm
+
+pub fn ring_spanning_imp_subset() -> @kernel.Thm
+
+pub fn ring_spanning_trans() -> @kernel.Thm
+
+pub fn ring_sub_subfield_generated() -> @kernel.Thm
+
+pub fn simple_algebraic_extend_homomorphism() -> @kernel.Thm
+
+pub fn subfield_generated() -> @kernel.Thm
+
+pub fn subfield_generated_by_monomorphic_image() -> @kernel.Thm
+
+pub fn subfield_generated_by_subfield_generated() -> @kernel.Thm
+
+pub fn subfield_generated_eq() -> @kernel.Thm
+
+pub fn subfield_generated_idempot() -> @kernel.Thm
+
+pub fn subfield_generated_inc() -> @kernel.Thm
+
+pub fn subfield_generated_inc_gen() -> @kernel.Thm
+
+pub fn subfield_generated_induct() -> @kernel.Thm
+
+pub fn subfield_generated_minimal() -> @kernel.Thm
+
+pub fn subfield_generated_minimal_eq() -> @kernel.Thm
+
+pub fn subfield_generated_mono() -> @kernel.Thm
+
+pub fn subfield_generated_quotients() -> @kernel.Thm
+
+pub fn subfield_generated_refl() -> @kernel.Thm
+
+pub fn subfield_generated_restrict() -> @kernel.Thm
+
+pub fn subfield_generated_ring_carrier() -> @kernel.Thm
+
+pub fn subfield_generated_subfield_generated() -> @kernel.Thm
+
+pub fn subfield_generated_subring_quotients() -> @kernel.Thm
+
+pub fn subfield_generated_subset_carrier() -> @kernel.Thm
+
+pub fn subfield_generated_subset_carrier_subset() -> @kernel.Thm
+
+pub fn subfield_generated_superset() -> @kernel.Thm
+
+pub fn subfield_generated_trivial() -> @kernel.Thm
+
+pub fn subfield_generated_union() -> @kernel.Thm
+
+pub fn subfield_generated_union_left() -> @kernel.Thm
+
+pub fn subfield_generated_union_right() -> @kernel.Thm
+
+pub fn subfield_generated_v1() -> @kernel.Thm
+
+pub fn subfield_imp_subring_of() -> @kernel.Thm
+
+pub fn subfield_of() -> @kernel.Thm
+
+pub fn subfield_of_algebraic_extension() -> @kernel.Thm
+
+pub fn subfield_of_algebraic_over() -> @kernel.Thm
+
+pub fn subfield_of_field_inv() -> @kernel.Thm
+
+pub fn subfield_of_fixpoints() -> @kernel.Thm
+
+pub fn subfield_of_homomorphic_equalities() -> @kernel.Thm
+
+pub fn subfield_of_imp_10() -> @kernel.Thm
+
+pub fn subfield_of_imp_nontrivial() -> @kernel.Thm
+
+pub fn subfield_of_imp_subset() -> @kernel.Thm
+
+pub fn subfield_of_inter() -> @kernel.Thm
+
+pub fn subfield_of_inters() -> @kernel.Thm
+
+pub fn subfield_of_monomorphic_image() -> @kernel.Thm
+
+pub fn subfield_of_monomorphic_preimage() -> @kernel.Thm
+
+pub fn subfield_of_subfield_generated() -> @kernel.Thm
+
+pub fn subfield_of_subfield_generated_eq() -> @kernel.Thm
+
+pub fn subfield_of_subfield_generated_rev() -> @kernel.Thm
+
+pub fn subfield_of_subfield_generated_subfield_eq() -> @kernel.Thm
+
+pub fn subfield_of_subring_quotients() -> @kernel.Thm
+
+pub fn subfield_subfield_generated() -> @kernel.Thm
+
+pub fn subfield_subfield_generated_alt() -> @kernel.Thm
+
+pub fn subfield_subfield_generated_eq() -> @kernel.Thm
+
+pub fn subfields_generated_eq() -> @kernel.Thm
+
+pub fn subring_eq_subfield_generated() -> @kernel.Thm
+
+pub fn subring_generated_by_subfield_generated() -> @kernel.Thm
+
+pub fn subring_generated_subfield_generated() -> @kernel.Thm
+
+pub fn subring_of_algebraic_over() -> @kernel.Thm
+
+pub fn subring_of_subfield_generated_eq() -> @kernel.Thm
+
+pub fn subring_subfield_algebraic_over() -> @kernel.Thm
+
+pub fn subring_subfield_generated() -> @kernel.Thm
+
+pub fn subring_subset_subfield_generated() -> @kernel.Thm
+
+pub fn subset_carrier_subfield_generated() -> @kernel.Thm
+
+pub fn subset_ring_span() -> @kernel.Thm
+
+pub fn totally_transcendental_extension() -> @kernel.Thm
+
+pub fn totally_transcendental_extension_alt() -> @kernel.Thm
+
+pub fn transcendence_bases_card_eq() -> @kernel.Thm
+
+pub fn transcendence_basis() -> @kernel.Thm
+
+pub fn transcendence_basis_card_le_left() -> @kernel.Thm
+
+pub fn transcendence_basis_card_le_right() -> @kernel.Thm
+
+pub fn transcendence_basis_exists() -> @kernel.Thm
+
+pub fn transcendence_basis_imp_algebraically_independent() -> @kernel.Thm
+
+pub fn transcendence_basis_imp_algebraically_spanning() -> @kernel.Thm
+
+pub fn transcendence_basis_imp_subset() -> @kernel.Thm
+
+pub fn transcendence_basis_over_algebraic_extension() -> @kernel.Thm
+
+pub fn transcendence_basis_tower_law() -> @kernel.Thm
+
+pub fn transcendence_basis_trans() -> @kernel.Thm
+
+pub fn transcendental_over() -> @kernel.Thm
+
+pub fn transcendental_over_in_carrier() -> @kernel.Thm
+
+pub fn trivial_ring_subfield_generated() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
