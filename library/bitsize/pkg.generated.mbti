@@ -1,0 +1,65 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/bitsize"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn bitsize() -> @kernel.Thm
+
+pub fn bitsize_0() -> @kernel.Thm
+
+pub fn bitsize_1() -> @kernel.Thm
+
+pub fn bitsize_2() -> @kernel.Thm
+
+pub fn bitsize_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn bitsize_div() -> @kernel.Thm
+
+pub fn bitsize_eq_0() -> @kernel.Thm
+
+pub fn bitsize_le() -> @kernel.Thm
+
+pub fn bitsize_max() -> @kernel.Thm
+
+pub fn bitsize_min() -> @kernel.Thm
+
+pub fn bitsize_mono() -> @kernel.Thm
+
+pub fn bitsize_mult() -> @kernel.Thm
+
+pub fn bitsize_mult_add() -> @kernel.Thm
+
+pub fn bitsize_mult_le() -> @kernel.Thm
+
+pub fn bitsize_pow2() -> @kernel.Thm
+
+pub fn bitsize_rev() -> @kernel.Thm
+
+pub fn bitsize_rev_alt() -> @kernel.Thm
+
+pub fn bitsize_rev_eq() -> @kernel.Thm
+
+pub fn bitsize_rev_eq_alt() -> @kernel.Thm
+
+pub fn bitsize_unique() -> @kernel.Thm
+
+pub fn bitsize_unique_alt() -> @kernel.Thm
+
+pub fn bitsize_unique_eq() -> @kernel.Thm
+
+pub fn bitsize_v1() -> @kernel.Thm
+
+pub fn le_bitsize() -> @kernel.Thm
+
+pub fn le_bitsize_alt() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
