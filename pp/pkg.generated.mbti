@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/pp"
+
+// Values
+pub fn formatter_of_buffer(StringBuilder) -> Formatter
+
+pub let std_formatter : Formatter
+
+// Errors
+
+// Types and methods
+pub struct Formatter {
+  // private fields
+}
+pub fn Formatter::close_box(Self) -> Unit
+pub fn Formatter::force_newline(Self) -> Unit
+pub fn Formatter::get_margin(Self) -> Int
+pub fn Formatter::get_max_boxes(Self) -> Int
+pub fn Formatter::get_max_indent(Self) -> Int
+pub fn Formatter::new((String) -> Unit, out_flush? : () -> Unit) -> Self
+pub fn Formatter::open_box(Self, Int) -> Unit
+pub fn Formatter::open_hbox(Self) -> Unit
+pub fn Formatter::open_hovbox(Self, Int) -> Unit
+pub fn Formatter::open_hvbox(Self, Int) -> Unit
+pub fn Formatter::open_vbox(Self, Int) -> Unit
+pub fn Formatter::print_as(Self, Int, String) -> Unit
+pub fn Formatter::print_break(Self, Int, Int) -> Unit
+pub fn Formatter::print_cut(Self) -> Unit
+pub fn Formatter::print_flush(Self) -> Unit
+pub fn Formatter::print_if_newline(Self) -> Unit
+pub fn Formatter::print_int(Self, Int) -> Unit
+pub fn Formatter::print_newline(Self) -> Unit
+pub fn Formatter::print_space(Self) -> Unit
+pub fn Formatter::print_string(Self, String) -> Unit
+pub fn Formatter::set_ellipsis_text(Self, String) -> Unit
+pub fn Formatter::set_margin(Self, Int) -> Unit
+pub fn Formatter::set_max_boxes(Self, Int) -> Unit
+pub fn Formatter::set_max_indent(Self, Int) -> Unit
+pub fn Formatter::set_min_space_left(Self, Int) -> Unit
+
+// Type aliases
+
+// Traits

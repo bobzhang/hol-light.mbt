@@ -176,5 +176,7 @@ functions, never through top-level side effects, so callers control loading.
   hash-ordered `atoms`, `genvar` counters and capture-avoiding `subst`).
   `nets/` is done (persistent term nets with `NetCompare`, which models
   OCaml `compare` raising on closures; it matches nets.ml on 28 lookups,
-  including closure-ordered tips and merges). Next: the Format subset,
-  `printer`, `preterm`, `parser`.
+  including closure-ordered tips and merges). `pp/` is done: a port of
+  OCaml 4.14's Format engine; 300 random box/break documents at several
+  margins and max-box limits match OCaml byte for byte (5,766 lines).
+  Next: `printer`, `preterm`, `parser`.
