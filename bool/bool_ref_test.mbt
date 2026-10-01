@@ -10,9 +10,7 @@ using @testkit {sty, stm, sthm}
 ///|
 test "bool matches bool.ml" {
   let log = @testkit.Log::new()
-  @testkit.start_trace()
-  @bool.load()
-  log.show_trace("bool")
+  log.show_theory_trace("bool")
   log.capture_reports()
   let th = (name : String, f : () -> @kernel.Thm raise) => {
     log.attempt(name, () => sthm(f()))

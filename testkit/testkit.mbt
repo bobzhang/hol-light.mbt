@@ -121,3 +121,14 @@ pub fn Log::show_trace(self : Log, name : String) -> Unit {
   }
   @parser.quotation_trace.val = None
 }
+
+///|
+/// Log the quotations theory `name` parsed while loading, as
+/// tools/ocaml_ref/prelude.ml's `show_trace`.
+pub fn Log::show_theory_trace(self : Log, name : String) -> Unit {
+  let t = @parser.theory_trace(name)
+  self.out(name + " quotations (" + t.length().to_string() + "):")
+  for s in t {
+    self.out("  " + ocaml_escaped(s))
+  }
+}

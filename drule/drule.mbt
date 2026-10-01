@@ -34,32 +34,14 @@ fn q(s : String) -> Term raise {
 }
 
 ///|
-priv enum LoadState {
-  Unloaded
-  Loading
-  Loaded
-  Failed
-}
-
-///|
-let state : Ref[LoadState] = Ref::{ val: Unloaded, }
-
-///|
-/// Load the theory (idempotent). A failed load is terminal.
-pub fn load() -> Unit raise {
-  match state.val {
-    Loaded => return
-    Loading => raise Failure("drule: recursive load")
-    Failed => raise Failure("drule: an earlier load failed")
-    Unloaded => ()
+/// Loading: importing this package runs upstream's drule.ml load-time
+/// steps, in order, after the theories it imports.
+fn init {
+  @parser.begin_theory("drule")
+  load_steps() catch {
+    e => abort("HOL Light: loading drule.ml failed: " + e.to_string())
   }
-  state.val = Loading
-  errdefer {
-    state.val = Failed
-  }
-  @bool.load()
-  load_steps()
-  state.val = Loaded
+  @parser.end_theory()
 }
 
 // ---------------------------------------------------------------------------

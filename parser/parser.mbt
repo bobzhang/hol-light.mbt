@@ -809,9 +809,42 @@ pub fn parse_preterm(inp : Toks) -> (Preterm, Toks) raise {
 pub let quotation_trace : Ref[Array[String]?] = Ref::{ val: None, }
 
 ///|
+let theory_traces : Map[String, Array[String]] = Map([])
+
+///|
+let current_theory : Ref[String?] = Ref::{ val: None, }
+
+///|
+/// Called by a theory's `fn init` before its steps: the quotations it
+/// parses are recorded under `name` (see `theory_trace`).
+pub fn begin_theory(name : String) -> Unit {
+  theory_traces[name] = []
+  current_theory.val = Some(name)
+}
+
+///|
+pub fn end_theory() -> Unit {
+  current_theory.val = None
+}
+
+///|
+/// The quotations parsed while loading theory `name`, in order.
+pub fn theory_trace(name : String) -> Array[String] {
+  theory_traces.get(name).unwrap_or([])
+}
+
+///|
 fn trace(s : String) -> Unit {
   match quotation_trace.val {
     Some(t) => t.push(s)
+    None => ()
+  }
+  match current_theory.val {
+    Some(n) =>
+      match theory_traces.get(n) {
+        Some(t) => t.push(s)
+        None => ()
+      }
     None => ()
   }
 }

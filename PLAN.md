@@ -109,18 +109,22 @@ globals are dropped), and upstream's load-time effects are ordered:
 definitions register constants, quotations advance the type-variable and
 `GEN%PVAR` counters, and partially applied rules precompute theorems. So:
 
-- Each theory package has an idempotent `pub fn load() -> Unit raise`
-  with a state machine (`Unloaded`, `Loading`, `Loaded`, `Failed`). It loads
-  its dependencies at the same points as upstream's `needs`, then runs every
-  eager upstream computation in order: definitions, quotations, syntax
-  changes, closure set-up, and discarded results too. A failed load is
-  terminal: the environment is discarded, not retried.
+- Each theory package runs upstream's load-time steps in its `fn init`
+  (suggested by the user). A probe confirmed that `fn init` runs for every
+  imported package, even when nothing in it is used, in dependency order,
+  and also in tests. Importing a theory therefore loads it, like `needs`.
+  The canonical order comes from the import chain: each theory imports the
+  previous one in `hol_lib.ml` order. A failed load aborts. The steps are
+  every eager upstream computation, in order: definitions, quotations,
+  syntax changes, closure set-up, and discarded results too.
 - Theorems and precomputed proof steps are stored in write-once
   `@lib.Cell`s, exposed as typed accessors (`@bool.t_def()`). Rules are
   plain functions that read those cells.
 - Effectful expressions are lowered to explicit temporaries in the pinned
   OCaml 4.14 evaluation order: arguments and tuples right to left,
   `let … and …` and `match (…)` left to right.
+- The parser records the quotations each theory parses while loading
+  (`@parser.theory_trace(name)`).
 - Load-fidelity tests compare, after loading each file in a fresh process:
   the three counters (types, `GEN%PVAR`, `genvar`), `types()`,
   `constants()`, `definitions()`, `axioms()`, warnings, and structural

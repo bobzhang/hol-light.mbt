@@ -85,8 +85,6 @@ pub fn list_mk_exists(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Term ra
 
 pub fn list_mk_forall(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Term raise
 
-pub fn load() -> Unit raise
-
 pub fn mk_conj(@kernel.Term, @kernel.Term) -> @kernel.Term raise
 
 pub fn mk_disj(@kernel.Term, @kernel.Term) -> @kernel.Term raise

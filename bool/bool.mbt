@@ -2,8 +2,9 @@
 // Boolean theory including (intuitionistic) definitions of the logical
 // connectives (port of bool.ml).
 //
-// `load()` runs upstream's load-time steps in order: syntax declarations,
-// definitions, and the theorems that derived rules precompute. Quotations
+// Its `fn init` runs upstream's load-time steps in order: syntax
+// declarations, definitions, and the theorems that derived rules
+// precompute. Quotations
 // are parsed in OCaml's evaluation order (arguments right to left,
 // `let ... and ...` left to right), so the global counters advance exactly
 // as upstream.
@@ -38,31 +39,14 @@ fn tm_cell(name : String) -> Cell[Term] {
 // ---------------------------------------------------------------------------
 
 ///|
-priv enum LoadState {
-  Unloaded
-  Loading
-  Loaded
-  Failed
-}
-
-///|
-let state : Ref[LoadState] = Ref::{ val: Unloaded, }
-
-///|
-/// Load the theory (idempotent). A failed load is terminal.
-pub fn load() -> Unit raise {
-  match state.val {
-    Loaded => return
-    Loading => raise Failure("bool: recursive load")
-    Failed => raise Failure("bool: an earlier load failed")
-    Unloaded => ()
+/// Loading: importing this package runs upstream's bool.ml load-time
+/// steps, in order, after the theories it imports.
+fn init {
+  @parser.begin_theory("bool")
+  load_steps() catch {
+    e => abort("HOL Light: loading bool.ml failed: " + e.to_string())
   }
-  state.val = Loading
-  errdefer {
-    state.val = Failed
-  }
-  load_steps()
-  state.val = Loaded
+  @parser.end_theory()
 }
 
 // ---------------------------------------------------------------------------

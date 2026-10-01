@@ -16,11 +16,15 @@ pub fn[I, A] alt((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) ->
 
 pub fn[I, A] atleast(Int, (@list.List[I]) -> (A, @list.List[I]) raise) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise
 
+pub fn begin_theory(String) -> Unit
+
 pub let comment_token : @ref.Ref[Lexcode]
 
 pub fn delete_parser(String) -> Unit raise
 
 pub fn[I, A, S] elistof((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) -> (S, @list.List[I]) raise, String) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise
+
+pub fn end_theory() -> Unit
 
 pub fn[I] finished(@list.List[I]) -> (Int, @list.List[I]) raise
 
@@ -61,6 +65,8 @@ pub fn[I, A, S] rightbin((@list.List[I]) -> (A, @list.List[I]) raise, (@list.Lis
 pub fn[I, A, B] seq((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) -> (B, @list.List[I]) raise) -> (@list.List[I]) -> ((A, B), @list.List[I]) raise
 
 pub fn[I] some((I) -> Bool raise?) -> (@list.List[I]) -> (I, @list.List[I]) raise
+
+pub fn theory_trace(String) -> Array[String]
 
 // Errors
 pub(all) suberror Noparse derive(@debug.Debug)

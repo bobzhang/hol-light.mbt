@@ -27,6 +27,7 @@ pub fn Log::capture_reports(Self) -> Unit
 pub fn Log::contents(Self) -> String
 pub fn Log::new() -> Self
 pub fn Log::out(Self, String) -> Unit
+pub fn Log::show_theory_trace(Self, String) -> Unit
 pub fn Log::show_trace(Self, String) -> Unit
 
 // Type aliases

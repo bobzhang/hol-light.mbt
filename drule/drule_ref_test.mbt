@@ -23,10 +23,7 @@ fn sinst(i : @drule.Instantiation) -> String {
 test "drule matches drule.ml" {
   let log = @testkit.Log::new()
   log.capture_reports()
-  @bool.load()
-  @testkit.start_trace()
-  @drule.load()
-  log.show_trace("drule")
+  log.show_theory_trace("drule")
   let th = (name : String, f : () -> Thm raise) => {
     log.attempt(name, () => sthm(f()))
   }
