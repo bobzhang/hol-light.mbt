@@ -42,7 +42,10 @@ module Main = struct
     | "define.ml" -> ("define/define.mbt", [])
     | f when (match Names.package_of_file f with Some p -> String.contains p '/' | None -> false) ->
         let p = Option.get (Names.package_of_file f) in
-        (p ^ "/" ^ Filename.basename p ^ ".mbt", [])
+        (* moon takes *_test.mbt (and *_wbtest.mbt) for test files *)
+        let b = Filename.basename p in
+        let b = if Filename.check_suffix b "test" then b ^ "_ml" else b in
+        (p ^ "/" ^ b ^ ".mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =

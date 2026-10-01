@@ -130,7 +130,7 @@ def setup(f):
         lib_needs = [n for n in needs(f) if stem(n) not in CORE and stem(n) not in LOADED]
         calls = "".join(f"  @{os.path.basename(pkg_of(n))}.load()\n" for n in lib_needs)
         open(os.path.join(ROOT, pkg, "init.mbt"), "w").write(
-            f"// {name}.ml: the load steps are generated ({alias}.mbt).\n\n"
+            f"// {name}.ml: the load steps are generated ({alias}{'_ml' if alias.endswith('test') else ''}.mbt).\n\n"
             "///|\nlet loaded : Ref[Bool] = Ref::{ val: false }\n\n"
             f"///|\n/// Load {name}.ml (once), after the files it needs.\npub fn load() -> Unit {{\n"
             "  if loaded.val {\n    return\n  }\n  loaded.val = true\n" + calls +

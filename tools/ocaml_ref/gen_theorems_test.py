@@ -15,7 +15,9 @@ alias = pkg.split('/')[-1]
 # optional explicit paths (nested packages: library/prime)
 ref = sys.argv[2] if len(sys.argv) > 2 else f'tools/ocaml_ref/{pkg}_ref.ml'
 test = sys.argv[3] if len(sys.argv) > 3 else f'{pkg}/{pkg}_ref_test.mbt'
-src = open(f'{pkg}/{alias}.mbt').read()
+# the translator names a file ending in "test" <name>_ml.mbt (moon's test suffix)
+gen = f'{pkg}/{alias}_ml.mbt' if alias.endswith('test') else f'{pkg}/{alias}.mbt'
+src = open(gen).read()
 pairs = re.findall(r'/// `([A-Za-z0-9_\']+)`\npub fn ([a-z0-9_]+)\(\) -> @kernel\.Thm', src)
 # a redefined name: OCaml's scripts see only the last definition
 last = {o: i for i, (o, _) in enumerate(pairs)}

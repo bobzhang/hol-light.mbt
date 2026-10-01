@@ -1,0 +1,51 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/rabin_test"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn field_nonzero_product_permute() -> @kernel.Thm
+
+pub fn field_roots_bound() -> @kernel.Thm
+
+pub fn finite_field_card_char_power() -> @kernel.Thm
+
+pub fn finite_field_element_pow() -> @kernel.Thm
+
+pub fn finite_field_pow_iterate() -> @kernel.Thm
+
+pub fn irreducible_divides_degree() -> @kernel.Thm
+
+pub fn irreducible_divides_degree_bound() -> @kernel.Thm
+
+pub fn irreducible_divides_xq_minus_x() -> @kernel.Thm
+
+pub fn irreducible_divides_xq_minus_x_gen() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn poly_nonunit_degree_ge_1() -> @kernel.Thm
+
+pub fn quotient_poly_ring_finite_card() -> @kernel.Thm
+
+pub fn rabin_irreducibility_necessary() -> @kernel.Thm
+
+pub fn rabin_irreducibility_sufficient() -> @kernel.Thm
+
+pub fn rabin_irreducibility_test() -> @kernel.Thm
+
+pub fn ring_divides_pow_iterate() -> @kernel.Thm
+
+pub fn ring_divides_reduce() -> @kernel.Thm
+
+pub fn ring_endomorphism_frobenius_iterate() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
