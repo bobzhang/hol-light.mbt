@@ -1,0 +1,135 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/jacobi"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cong_iproduct() -> @kernel.Thm
+
+pub fn coprime_iproduct() -> @kernel.Thm
+
+pub fn int_jacobi() -> @kernel.Thm
+
+pub fn int_jacobi_0() -> @kernel.Thm
+
+pub fn int_jacobi_1() -> @kernel.Thm
+
+pub fn int_jacobi_2() -> @kernel.Thm
+
+pub fn int_jacobi_bound() -> @kernel.Thm
+
+pub fn int_jacobi_cases() -> @kernel.Thm
+
+pub fn int_jacobi_cong() -> @kernel.Thm
+
+pub fn int_jacobi_eq_0() -> @kernel.Thm
+
+pub fn int_jacobi_lmul() -> @kernel.Thm
+
+pub fn int_jacobi_lneg() -> @kernel.Thm
+
+pub fn int_jacobi_lpow() -> @kernel.Thm
+
+pub fn int_jacobi_minus1() -> @kernel.Thm
+
+pub fn int_jacobi_nums() -> @kernel.Thm
+
+pub fn int_jacobi_of_2() -> @kernel.Thm
+
+pub fn int_jacobi_pow_2() -> @kernel.Thm
+
+pub fn int_jacobi_rabs() -> @kernel.Thm
+
+pub fn int_jacobi_rem() -> @kernel.Thm
+
+pub fn int_jacobi_rem_gen() -> @kernel.Thm
+
+pub fn int_jacobi_rmul() -> @kernel.Thm
+
+pub fn int_jacobi_rneg() -> @kernel.Thm
+
+pub fn int_jacobi_rpow() -> @kernel.Thm
+
+pub fn int_jacobi_squared() -> @kernel.Thm
+
+pub fn jacobi() -> @kernel.Thm
+
+pub fn jacobi_0() -> @kernel.Thm
+
+pub fn jacobi_1() -> @kernel.Thm
+
+pub fn jacobi_2() -> @kernel.Thm
+
+pub fn jacobi_2_cases() -> @kernel.Thm
+
+pub fn jacobi_alt() -> @kernel.Thm
+
+pub fn jacobi_bound() -> @kernel.Thm
+
+pub fn jacobi_cases() -> @kernel.Thm
+
+pub fn jacobi_cong() -> @kernel.Thm
+
+pub fn jacobi_eq_0() -> @kernel.Thm
+
+pub fn jacobi_eq_1() -> @kernel.Thm
+
+pub fn jacobi_euler() -> @kernel.Thm
+
+pub fn jacobi_euler_alt() -> @kernel.Thm
+
+pub fn jacobi_exp_2() -> @kernel.Thm
+
+pub fn jacobi_exp_2_alt() -> @kernel.Thm
+
+pub fn jacobi_gauss_lemma() -> @kernel.Thm
+
+pub fn jacobi_lexp() -> @kernel.Thm
+
+pub fn jacobi_lmul() -> @kernel.Thm
+
+pub fn jacobi_minus1() -> @kernel.Thm
+
+pub fn jacobi_minus1_cases() -> @kernel.Thm
+
+pub fn jacobi_mod() -> @kernel.Thm
+
+pub fn jacobi_mod_gen() -> @kernel.Thm
+
+pub fn jacobi_ne_minus1() -> @kernel.Thm
+
+pub fn jacobi_nproduct_left() -> @kernel.Thm
+
+pub fn jacobi_nproduct_right() -> @kernel.Thm
+
+pub fn jacobi_of_2() -> @kernel.Thm
+
+pub fn jacobi_of_2_cases() -> @kernel.Thm
+
+pub fn jacobi_prime() -> @kernel.Thm
+
+pub fn jacobi_reciprocity() -> @kernel.Thm
+
+pub fn jacobi_reciprocity_alt() -> @kernel.Thm
+
+pub fn jacobi_rexp() -> @kernel.Thm
+
+pub fn jacobi_rmul() -> @kernel.Thm
+
+pub fn jacobi_squared() -> @kernel.Thm
+
+pub fn jacobi_v1() -> @kernel.Thm
+
+pub fn jacobi_zero() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
