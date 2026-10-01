@@ -1,0 +1,76 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/wf"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn measure() -> @kernel.Thm
+
+pub fn measure_le() -> @kernel.Thm
+
+pub fn minimal_bad_sequence() -> @kernel.Thm
+
+pub fn wf() -> @kernel.Thm
+
+pub fn wf_antisym() -> @kernel.Thm
+
+pub fn wf_dchain() -> @kernel.Thm
+
+pub fn wf_dhain_transitive() -> @kernel.Thm
+
+pub fn wf_eq() -> @kernel.Thm
+
+pub fn wf_erec() -> @kernel.Thm
+
+pub fn wf_false() -> @kernel.Thm
+
+pub fn wf_ind() -> @kernel.Thm
+
+pub fn wf_induct_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn wf_lex() -> @kernel.Thm
+
+pub fn wf_lex_dependent() -> @kernel.Thm
+
+pub fn wf_measure() -> @kernel.Thm
+
+pub fn wf_measure_gen() -> @kernel.Thm
+
+pub fn wf_num() -> @kernel.Thm
+
+pub fn wf_pointwise() -> @kernel.Thm
+
+pub fn wf_rec() -> @kernel.Thm
+
+pub fn wf_rec_exists() -> @kernel.Thm
+
+pub fn wf_rec_invariant() -> @kernel.Thm
+
+pub fn wf_rec_num() -> @kernel.Thm
+
+pub fn wf_rec_tail() -> @kernel.Thm
+
+pub fn wf_rec_tail_general() -> @kernel.Thm
+
+pub fn wf_rec_wf() -> @kernel.Thm
+
+pub fn wf_refl() -> @kernel.Thm
+
+pub fn wf_restrict() -> @kernel.Thm
+
+pub fn wf_subset() -> @kernel.Thm
+
+pub fn wf_urec() -> @kernel.Thm
+
+pub fn wf_urec_wf() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
