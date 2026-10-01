@@ -39,6 +39,7 @@ module Main = struct
     | "sets.ml" -> ("sets/sets.mbt", [])
     | "iterate.ml" -> ("iterate/iterate.mbt", [])
     | "cart.ml" -> ("cart/cart.mbt", [])
+    | "define.ml" -> ("define/define.mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
   let translate ~hol ~root target =

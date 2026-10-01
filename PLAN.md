@@ -339,5 +339,12 @@ definitions register constants, quotations advance the type-variable and
   translated module, and fixpoint bounds for recursive groups). Known
   limitation: Hashtbl.hash of float arrays is that of an ordinary block.
   The core (everything hol.ml loads before the theory files) is now
-  ported. Next: the theory files (pair, compute, nums, recursion, arith,
-  ...).
+  ported. All theory files hol.ml loads are translated and match upstream
+  in their differential tests: pair, compute, nums, recursion, arith, wf,
+  calc_num, normalizer, grobner, ind_types, lists, realax, calc_int,
+  realarith, real, calc_rat, int, sets, iterate, cart, define (theorem
+  lists plus behaviour checks: EVAL_CONV, NUM_REDUCE_CONV,
+  NUM_NORMALIZE_CONV, NUM_RING, define_type, REAL_ARITH, REAL_FIELD,
+  INT_ARITH, INT_RING, general recursive `define`). They are produced by
+  tools/ocaml_ref/theory.sh <file> <dependencies...>. Next: Library/ and
+  Multivariate/, then the native target.

@@ -1,0 +1,97 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/define"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn admissible() -> @kernel.Thm
+
+pub fn admissible_base() -> @kernel.Thm
+
+pub fn admissible_comb() -> @kernel.Thm
+
+pub fn admissible_cond() -> @kernel.Thm
+
+pub fn admissible_const() -> @kernel.Thm
+
+pub fn admissible_guarded_pattern() -> @kernel.Thm
+
+pub fn admissible_imp_superadmissible() -> @kernel.Thm
+
+pub fn admissible_lambda() -> @kernel.Thm
+
+pub fn admissible_map() -> @kernel.Thm
+
+pub fn admissible_match() -> @kernel.Thm
+
+pub fn admissible_match_seqpattern() -> @kernel.Thm
+
+pub fn admissible_nest() -> @kernel.Thm
+
+pub fn admissible_nsum() -> @kernel.Thm
+
+pub fn admissible_rand() -> @kernel.Thm
+
+pub fn admissible_seqpattern() -> @kernel.Thm
+
+pub fn admissible_sum() -> @kernel.Thm
+
+pub fn admissible_unguarded_pattern() -> @kernel.Thm
+
+pub fn casewise() -> @kernel.Thm
+
+pub fn casewise_cases() -> @kernel.Thm
+
+pub fn casewise_def() -> @kernel.Thm
+
+pub fn casewise_works() -> @kernel.Thm
+
+pub fn define(@kernel.Term) -> @kernel.Thm raise
+
+pub fn instantiate_casewise_recursion(@kernel.Term) -> @kernel.Thm raise
+
+pub fn match_seqpattern() -> @kernel.Thm
+
+pub fn prove_general_recursive_function_exists(@kernel.Term) -> @kernel.Thm raise
+
+pub fn pure_prove_recursive_function_exists(@kernel.Term) -> @kernel.Thm raise
+
+pub fn recursion_casewise() -> @kernel.Thm
+
+pub fn recursion_casewise_pairwise() -> @kernel.Thm
+
+pub fn recursion_superadmissible() -> @kernel.Thm
+
+pub fn superadmissible() -> @kernel.Thm
+
+pub fn superadmissible_cond() -> @kernel.Thm
+
+pub fn superadmissible_const() -> @kernel.Thm
+
+pub fn superadmissible_match_guarded_pattern() -> @kernel.Thm
+
+pub fn superadmissible_match_seqpattern() -> @kernel.Thm
+
+pub fn superadmissible_match_unguarded_pattern() -> @kernel.Thm
+
+pub fn superadmissible_t() -> @kernel.Thm
+
+pub fn superadmissible_tail() -> @kernel.Thm
+
+pub fn tailadmissible() -> @kernel.Thm
+
+pub fn wf_rec_cases() -> @kernel.Thm
+
+pub fn wf_rec_cases_p() -> @kernel.Thm
+
+pub fn wf_rec_tail_general_p() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
