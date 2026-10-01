@@ -1,0 +1,160 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/calc_real"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn approx_exp() -> @kernel.Thm
+
+pub fn approx_lemma1() -> @kernel.Thm
+
+pub fn approx_ln() -> @kernel.Thm
+
+pub fn eliminate_def(@list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn expand_range_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+pub fn log2(@num.Num) -> @num.Num raise
+
+pub fn mclaurin_exp_le1() -> @kernel.Thm
+
+pub fn raw_eval((@ref.Ref[(@num.Num, @num.Num)], (@num.Num) -> @num.Num raise)) -> ((@num.Num) -> @num.Num raise) raise
+
+pub fn real_abs_lemma() -> @kernel.Thm
+
+pub fn real_abs_lemma1() -> @kernel.Thm
+
+pub fn real_abs_triangle_lemma() -> @kernel.Thm
+
+pub fn real_exp_13() -> @kernel.Thm
+
+pub fn real_exp_15() -> @kernel.Thm
+
+pub fn real_le_suc_pow2() -> @kernel.Thm
+
+pub fn real_mono_pow2() -> @kernel.Thm
+
+pub fn real_mul_rsum0() -> @kernel.Thm
+
+pub fn real_ndiv_lemma1a() -> @kernel.Thm
+
+pub fn real_ndiv_lemma1b() -> @kernel.Thm
+
+pub fn real_ndiv_lemma2() -> @kernel.Thm
+
+pub fn real_ndiv_lemma3() -> @kernel.Thm
+
+pub fn real_oppsign() -> @kernel.Thm
+
+pub fn real_oppsign_lemma() -> @kernel.Thm
+
+pub fn real_sub_sum0() -> @kernel.Thm
+
+pub fn realcalc_abs() -> @kernel.Thm
+
+pub fn realcalc_add() -> @kernel.Thm
+
+pub fn realcalc_cache() -> @ref.Ref[@list.List[(@kernel.Term, ((@ref.Ref[(@num.Num, @num.Num)], (@num.Num) -> @num.Num raise), (@ref.Ref[(@num.Num, @kernel.Thm)], (@num.Num) -> @kernel.Thm raise)))]]
+
+pub fn realcalc_conv(@kernel.Term) -> ((@ref.Ref[(@num.Num, @num.Num)], (@num.Num) -> @num.Num raise), (@ref.Ref[(@num.Num, @kernel.Thm)], (@num.Num) -> @kernel.Thm raise)) raise
+
+pub fn realcalc_downgrade() -> @kernel.Thm
+
+pub fn realcalc_eq() -> @kernel.Thm
+
+pub fn realcalc_ge() -> @kernel.Thm
+
+pub fn realcalc_gt() -> @kernel.Thm
+
+pub fn realcalc_int() -> @kernel.Thm
+
+pub fn realcalc_inv() -> @kernel.Thm
+
+pub fn realcalc_inv_lemma() -> @kernel.Thm
+
+pub fn realcalc_le() -> @kernel.Thm
+
+pub fn realcalc_lt() -> @kernel.Thm
+
+pub fn realcalc_mul() -> @kernel.Thm
+
+pub fn realcalc_neg() -> @kernel.Thm
+
+pub fn[TA] realcalc_preconv((TA) -> @kernel.Thm raise, TA) -> ((@ref.Ref[(@num.Num, @num.Num)], (@num.Num) -> @num.Num raise), (@ref.Ref[(@num.Num, @kernel.Thm)], (@num.Num) -> @kernel.Thm raise)) raise
+
+pub fn realcalc_rel_conv(@kernel.Term) -> Bool raise
+
+pub fn realcalc_rel_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn realcalc_sqrt() -> @kernel.Thm
+
+pub fn step_cos() -> @kernel.Thm
+
+pub fn step_exp() -> @kernel.Thm
+
+pub fn step_exp_0() -> @kernel.Thm
+
+pub fn step_exp_1() -> @kernel.Thm
+
+pub fn step_exp_2() -> @kernel.Thm
+
+pub fn step_exp_3() -> @kernel.Thm
+
+pub fn step_exp_4() -> @kernel.Thm
+
+pub fn step_exp_4_plus() -> @kernel.Thm
+
+pub fn step_exp_5() -> @kernel.Thm
+
+pub fn step_exp_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn step_exp_thm() -> @kernel.Thm
+
+pub fn step_lemma1() -> @kernel.Thm
+
+pub fn step_lemma2() -> @kernel.Thm
+
+pub fn step_ln() -> @kernel.Thm
+
+pub fn step_sin() -> @kernel.Thm
+
+pub fn steps_exp() -> @kernel.Thm
+
+pub fn steps_exp_0() -> @kernel.Thm
+
+pub fn steps_exp_1() -> @kernel.Thm
+
+pub fn steps_exp_2() -> @kernel.Thm
+
+pub fn steps_exp_3() -> @kernel.Thm
+
+pub fn steps_exp_4() -> @kernel.Thm
+
+pub fn steps_exp_lemma() -> @kernel.Thm
+
+pub fn steps_ln() -> @kernel.Thm
+
+pub fn taylor_exp() -> @kernel.Thm
+
+pub fn taylor_exp_weak() -> @kernel.Thm
+
+pub fn taylor_ln() -> @kernel.Thm
+
+pub fn thm_eval((@ref.Ref[(@num.Num, @kernel.Thm)], (@num.Num) -> @kernel.Thm raise)) -> ((@num.Num) -> @kernel.Thm raise) raise
+
+pub fn thm_wrap((@num.Num) -> @kernel.Thm raise) -> (@ref.Ref[(@num.Num, @kernel.Thm)], (@num.Num) -> @kernel.Thm raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
