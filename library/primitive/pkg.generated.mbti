@@ -1,0 +1,131 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/primitive"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cong_to_1_pow2() -> @kernel.Thm
+
+pub fn coprime_1_plus_power() -> @kernel.Thm
+
+pub fn coprime_1_plus_power_step() -> @kernel.Thm
+
+pub fn count_orders_modulo_prime() -> @kernel.Thm
+
+pub fn count_power_residues_modulo_primitive() -> @kernel.Thm
+
+pub fn count_primitive_roots() -> @kernel.Thm
+
+pub fn count_primitive_roots_alt() -> @kernel.Thm
+
+pub fn count_quadratic_residues_modulo_primitive() -> @kernel.Thm
+
+pub fn count_roots_modulo_odd() -> @kernel.Thm
+
+pub fn count_roots_modulo_odd_alt() -> @kernel.Thm
+
+pub fn count_roots_modulo_odd_alt_gen() -> @kernel.Thm
+
+pub fn count_roots_modulo_odd_gen() -> @kernel.Thm
+
+pub fn count_roots_modulo_primitive() -> @kernel.Thm
+
+pub fn count_roots_modulo_primitive_alt() -> @kernel.Thm
+
+pub fn count_roots_modulo_primitive_gen() -> @kernel.Thm
+
+pub fn count_roots_modulo_primitive_gen_alt() -> @kernel.Thm
+
+pub fn euler_criterion() -> @kernel.Thm
+
+pub fn finite_intseg_restrict() -> @kernel.Thm
+
+pub fn generalized_euler_criterion() -> @kernel.Thm
+
+pub fn generalized_euler_criterion_prime() -> @kernel.Thm
+
+pub fn injective_exp_modulo_eq() -> @kernel.Thm
+
+pub fn int_of_num_power_residue() -> @kernel.Thm
+
+pub fn int_poly_diff_explicit() -> @kernel.Thm
+
+pub fn int_poly_lagrange() -> @kernel.Thm
+
+pub fn int_prime() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn no_primitive_root_modulo_composite() -> @kernel.Thm
+
+pub fn no_primitive_root_modulo_pow2() -> @kernel.Thm
+
+pub fn num_lagrange_lemma() -> @kernel.Thm
+
+pub fn power_residue_exists() -> @kernel.Thm
+
+pub fn power_residue_modulo_eq() -> @kernel.Thm
+
+pub fn power_residue_modulo_eq_alt() -> @kernel.Thm
+
+pub fn power_residue_modulo_odd() -> @kernel.Thm
+
+pub fn power_residue_modulo_prime_eq() -> @kernel.Thm
+
+pub fn power_residue_modulo_primitive() -> @kernel.Thm
+
+pub fn power_residue_modulo_primitive_order() -> @kernel.Thm
+
+pub fn power_residue_modulo_primitive_order_alt() -> @kernel.Thm
+
+pub fn power_residue_modulo_primitive_power() -> @kernel.Thm
+
+pub fn prime_divisor_order_exists() -> @kernel.Thm
+
+pub fn primitive_root_double_lemma() -> @kernel.Thm
+
+pub fn primitive_root_exists() -> @kernel.Thm
+
+pub fn primitive_root_exists_nontrivial() -> @kernel.Thm
+
+pub fn primitive_root_modulo_0() -> @kernel.Thm
+
+pub fn primitive_root_modulo_1() -> @kernel.Thm
+
+pub fn primitive_root_modulo_2() -> @kernel.Thm
+
+pub fn primitive_root_modulo_4() -> @kernel.Thm
+
+pub fn primitive_root_modulo_double_primepow() -> @kernel.Thm
+
+pub fn primitive_root_modulo_prime() -> @kernel.Thm
+
+pub fn primitive_root_modulo_primepow() -> @kernel.Thm
+
+pub fn primitive_root_modulo_primepows() -> @kernel.Thm
+
+pub fn primitive_roots_modulo_prime() -> @kernel.Thm
+
+pub fn quadratic_nonresidue_exists() -> @kernel.Thm
+
+pub fn quadratic_residue_modulo_odd_power() -> @kernel.Thm
+
+pub fn quadratic_residue_modulo_power_2() -> @kernel.Thm
+
+pub fn quadratic_residue_modulo_power_2_stable() -> @kernel.Thm
+
+pub fn quadratic_residue_modulo_primitive_order() -> @kernel.Thm
+
+pub fn quadratic_residue_modulo_primitive_power() -> @kernel.Thm
+
+pub fn real_poly_diff_explicit() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
