@@ -38,6 +38,8 @@ pub fn[I, A, S] leftbin((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List
 
 pub fn lex(String) -> @list.List[Lexcode] raise
 
+pub fn lex_list(@list.List[String]) -> @list.List[Lexcode] raise
+
 pub fn[I, A, S] listof((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) -> (S, @list.List[I]) raise, String) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise
 
 pub fn[I, A] many((@list.List[I]) -> (A, @list.List[I]) raise) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise

@@ -232,3 +232,14 @@ pub fn lex(s : String) -> List[Lexcode] raise {
   }
   @list.List(toks)
 }
+
+///|
+/// parser.ml's `lex` on a character list (`lex (explode s)`), as
+/// translated code calls it.
+pub fn lex_list(cs : List[String]) -> List[Lexcode] raise {
+  let sb = StringBuilder()
+  for c in cs {
+    sb.write_string(c)
+  }
+  lex(sb.to_string())
+}

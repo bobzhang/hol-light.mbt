@@ -1,0 +1,157 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ind_types"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/nets",
+  "bobzhang/hol_light/simp",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn basic_rectype_net() -> @ref.Ref[@nets.Net[@simp.Gconv]]
+
+pub fn bottom() -> @kernel.Thm
+
+pub fn cases(String) -> @kernel.Thm raise
+
+pub fn constr() -> @kernel.Thm
+
+pub fn constr_bot() -> @kernel.Thm
+
+pub fn constr_ind() -> @kernel.Thm
+
+pub fn constr_inj() -> @kernel.Thm
+
+pub fn constr_rec() -> @kernel.Thm
+
+pub fn define_type(String) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn define_type_raw(@list.List[(@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])])]) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn define_type_raw_v1(@list.List[(@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])])]) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn define_type_raw_v2(@list.List[(@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])])]) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn dest_rec_inj() -> @kernel.Thm
+
+pub fn distinctness(String) -> @kernel.Thm raise
+
+pub fn distinctness_store() -> @ref.Ref[@list.List[(String, @kernel.Thm)]]
+
+pub fn exists_option_thm() -> @kernel.Thm
+
+pub fn[TA, TB] extend_rectype_net(String, (TA, TB, @kernel.Thm)) -> Unit raise
+
+pub fn fcons() -> @kernel.Thm
+
+pub fn fcons_undo() -> @kernel.Thm
+
+pub fn fnil() -> @kernel.Thm
+
+pub fn forall_option_thm() -> @kernel.Thm
+
+pub fn forall_unwind_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn inj_inverse2() -> @kernel.Thm
+
+pub fn inja() -> @kernel.Thm
+
+pub fn inja_inj() -> @kernel.Thm
+
+pub fn injectivity(String) -> @kernel.Thm raise
+
+pub fn injectivity_store() -> @ref.Ref[@list.List[(String, @kernel.Thm)]]
+
+pub fn injf() -> @kernel.Thm
+
+pub fn injf_inj() -> @kernel.Thm
+
+pub fn injn() -> @kernel.Thm
+
+pub fn injn_inj() -> @kernel.Thm
+
+pub fn injp() -> @kernel.Thm
+
+pub fn injp_inj() -> @kernel.Thm
+
+pub fn iso() -> @kernel.Thm
+
+pub fn iso_fun() -> @kernel.Thm
+
+pub fn iso_refl() -> @kernel.Thm
+
+pub fn iso_usage() -> @kernel.Thm
+
+pub fn list_induct() -> @kernel.Thm
+
+pub fn list_recursion() -> @kernel.Thm
+
+pub fn match_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn mk_rec_inj() -> @kernel.Thm
+
+pub fn numpair() -> @kernel.Thm
+
+pub fn numpair_dest() -> @kernel.Thm
+
+pub fn numpair_inj() -> @kernel.Thm
+
+pub fn numpair_inj_lemma() -> @kernel.Thm
+
+pub fn numsum() -> @kernel.Thm
+
+pub fn numsum_dest() -> @kernel.Thm
+
+pub fn numsum_inj() -> @kernel.Thm
+
+pub fn option_distinct() -> @kernel.Thm
+
+pub fn option_induct() -> @kernel.Thm
+
+pub fn option_inj() -> @kernel.Thm
+
+pub fn option_recursion() -> @kernel.Thm
+
+pub fn outl() -> @kernel.Thm
+
+pub fn outr() -> @kernel.Thm
+
+pub fn parse_inductive_type_specification(String) -> @list.List[(@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])])] raise
+
+pub fn prove_cases_thm(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn prove_constructors_distinct(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn prove_constructors_injective(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn recspace_tydef() -> (@kernel.Thm, @kernel.Thm)
+
+pub fn sum_induct() -> @kernel.Thm
+
+pub fn sum_recursion() -> @kernel.Thm
+
+pub fn the_inductive_types() -> @ref.Ref[@list.List[(String, (@kernel.Thm, @kernel.Thm))]]
+
+pub fn unwind_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn zbot() -> @kernel.Thm
+
+pub fn zconstr() -> @kernel.Thm
+
+pub fn zconstr_zbot() -> @kernel.Thm
+
+pub fn zrecspace_cases() -> @kernel.Thm
+
+pub fn zrecspace_induct() -> @kernel.Thm
+
+pub fn zrecspace_rules() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

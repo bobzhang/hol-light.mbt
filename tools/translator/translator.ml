@@ -533,6 +533,9 @@ module Names = struct
     | "thenc_" -> Some "thenc" | "orelsec_" -> Some "orelsec"
     | "then_tcl_" -> Some "then_tcl" | "orelse_tcl_" -> Some "orelse_tcl"
     | "_FALSITY_" -> Some "falsity"
+    (* parser.ml's combinators *)
+    | ">>" -> Some "map" | "++" -> Some "seq" | "||" -> Some "alt"
+    | "lex" -> Some "lex_list"
     | _ -> None
 
   (* An uppercase name whose lowercase form is itself an OCaml value (e.g.
