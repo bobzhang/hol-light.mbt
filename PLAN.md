@@ -234,4 +234,11 @@ definitions register constants, quotations advance the type-variable and
   matches drule.ml including the load trace and counters).
   Test-writing rule: the OCaml reference scripts bind effectful arguments
   with explicit `let`s, because OCaml evaluates the script's own arguments
-  right to left. Next: `tactics`, …
+  right to left. `tactics/` is done: goals, goalstates and justifications
+  as closures, THEN/THENL with OCaml's right-to-left justification order,
+  the theorem tacticals, the goal printers, `prove`, and the interactive
+  goalstack (`g`/`e`/`r`/`b`/`er`). It matches tactics.ml on 130 checks,
+  including the load trace, failure messages, goal printing and counters.
+  Infix tacticals that collide with keywords are `then_tac` and
+  `orelse_tac`; `lib.time` reads a pluggable `cpu_time` clock (0 on wasm).
+  Next: `itab`, `simp`, …

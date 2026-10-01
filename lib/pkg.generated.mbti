@@ -37,6 +37,8 @@ pub fn[T : OCompare] compare(T, T) -> Int
 
 pub fn[A, B, C] compose((B) -> C raise, (A) -> B raise) -> (A) -> C raise
 
+pub let cpu_time : @ref.Ref[() -> Double]
+
 pub fn[A, B, C] curry(((A, B)) -> C raise?, A, B) -> C raise?
 
 pub fn[A, B : OCompare] decreasing((A) -> B raise?, A, A) -> Bool raise?
@@ -190,6 +192,8 @@ pub fn[A : OCompare] subset(@list.List[A], @list.List[A]) -> Bool
 pub fn[A : OCompare] subtract(@list.List[A], @list.List[A]) -> @list.List[A]
 
 pub fn[A] subtract_eq((A, A) -> Bool raise?, @list.List[A], @list.List[A]) -> @list.List[A] raise?
+
+pub fn[A, B] time((A) -> B raise, A) -> B raise
 
 pub fn[A] tl(@list.List[A]) -> @list.List[A] raise
 

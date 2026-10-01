@@ -1,0 +1,138 @@
+tactics quotations (7):
+  _FALSITY_ = F
+  _FALSITY_
+  _FALSITY_
+  T
+  F
+  p /\\ (q ==> r)
+  p ==> q
+CONJ_TAC =  |- ((#/\:fun(bool,fun(bool,bool)) #T:bool) #T:bool)
+DISJ1_TAC =  |- ((#\/:fun(bool,fun(bool,bool)) #T:bool) #F:bool)
+DISJ2_TAC =  |- ((#\/:fun(bool,fun(bool,bool)) #F:bool) #T:bool)
+GEN_DISCH =  |- (#!:fun(fun(bool,bool),bool) (\p:bool. ((#==>:fun(bool,fun(bool,bool)) p:bool) p:bool)))
+STRIP_TAC ! CONJ_TAC
+EXISTS_TAC =  |- (#?:fun(fun(bool,bool),bool) (\x:bool. x:bool))
+X_CHOOSE_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun(bool,bool),bool) (\x:bool. (P:fun(bool,bool) x:bool)))) (#?:fun(fun(bool,bool),bool) (\y:bool. (P:fun(bool,bool) y:bool))))
+STRIP_EXISTS =  |- ((#==>:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) (\x:'A. (P:fun('A,bool) x:'A)))) (#?:fun(fun('A,bool),bool) (\y:'A. (P:fun('A,bool) y:'A))))
+DISJ_CASES_THEN =  |- ((#==>:fun(bool,fun(bool,bool)) ((#\/:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#\/:fun(bool,fun(bool,bool)) q:bool) p:bool))
+CONTR_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) #F:bool) p:bool)
+MATCH_ACCEPT_TAC =  |- (#!:fun(fun(bool,bool),bool) (\b:bool. ((#=:fun(bool,fun(bool,bool)) b:bool) b:bool)))
+MATCH_MP_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (Q:fun('A,bool) x:'A))))) ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) c:'A)) (Q:fun('A,bool) c:'A)))
+ANTS_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) #T:bool) q:bool)) q:bool)
+EQ_TAC =  |- ((#=:fun(bool,fun(bool,bool)) p:bool) p:bool)
+MK_COMB_TAC =  |- ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) x:'A)) (f:fun('A,'B) x:'A))
+AP_TERM_TAC =  |- ((#=:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool))) (#~:fun(bool,bool) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool)))
+AP_THM_TAC =  |- ((#=:fun('B,fun('B,bool)) (f:fun('A,'B) x:'A)) (f:fun('A,'B) x:'A))
+BINOP_TAC =  |- ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#/\:fun(bool,fun(bool,bool)) a:bool) b:bool))
+ABS_TAC =  |- ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) (\x:'A. (f:fun('A,'B) x:'A))) (\y:'A. (f:fun('A,'B) y:'A)))
+BETA_TAC =  |- ((\x:bool. x:bool) #T:bool)
+CONV_TAC_eq =  |- ((#=:fun(bool,fun(bool,bool)) ((\x:bool. x:bool) #T:bool)) #T:bool)
+CONV_TAC_T =  |- #T:bool
+CONV_TAC_bad ! CONV_TAC: bad equation
+SUBST1_TAC =  |- (#!:fun(fun(bool,bool),bool) (\a:bool. (#!:fun(fun(bool,bool),bool) (\b:bool. ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#==>:fun(bool,fun(bool,bool)) b:bool) a:bool))))))
+SUBST_ALL_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(bool,fun(bool,bool)) a:bool) b:bool)) ((#==>:fun(bool,fun(bool,bool)) a:bool) b:bool))
+SUBST_VAR_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) ((#=:fun('A,fun('A,bool)) x:'A) y:'A)) ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) y:'A)))
+UNDISCH_TAC =  |- ((#==>:fun(bool,fun(bool,bool)) p:bool) p:bool)
+SPEC_TAC =  |- ((#=:fun('A,fun('A,bool)) (f:fun('A,'A) a:'A)) (f:fun('A,'A) a:'A))
+X_GEN_TAC_type ! X_GEN_TAC: expected type :bool but got :A
+X_GEN_TAC_notvar ! X_GEN_TAC: not a variable
+X_GEN_TAC_invalid ! X_GEN_TAC: invalid variable
+X_GEN_TAC_notforall ! X_GEN_TAC: Not universally quantified
+GEN_TAC_primed = [\n`(x <=> x) \\/ x'`\n]
+SUBGOAL_THEN =  |- ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#/\:fun(bool,fun(bool,bool)) p:bool) p:bool))
+Warning: SUBGOAL_TAC: additional subproofs ignored
+SUBGOAL_TAC = [\n`q`\n; \n  0 [`q`] (lab)\n\n`p`\n]
+SUBGOAL_TAC_none ! SUBGOAL_TAC: no subproof given
+FREEZE_THEN =  |- ((#==>:fun(bool,fun(bool,bool)) p:bool) p:bool)
+IMP_RES_THEN =  |- ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) q:bool))
+ANTE_RES_THEN =  |- ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) q:bool))
+IMP_RES_THEN_none ! tryfind
+LABEL_USE_THEN =  |- ((#==>:fun(bool,fun(bool,bool)) p:bool) ((#==>:fun(bool,fun(bool,bool)) q:bool) p:bool))
+USE_THEN_missing ! USE_TAC: didn't find assumption nope
+REMOVE_THEN = [\n  0 [`q`] (hq)\n\n`p ==> r`\n]
+HYP =  |- ((#==>:fun(bool,fun(bool,bool)) p:bool) p:bool)
+HYP_bad ! Invalid using pattern
+NAME_ASSUMS_TAC = [\n  0 [`a`] (H2)\n  1 [`b`] (H0)\n  2 [`c`] (H1)\n\n`d`\n]
+RULE_ASSUM_TAC = [\n  0 [`a`]\n  1 [`b`]\n\n`c`\n]
+STRIP_ASSUME_TAC = [\n  0 [`a`]\n  1 [`b`]\n\n`c`\n; \n  0 [`P x`]\n\n`c`\n]
+STRIP_ASSUME_TAC_dup = [\n  0 [`a`]\n\n`c`\n]
+STRUCT_CASES_TAC = [\n`P true`\n; \n`P false`\n]
+CONJUNCTS_THEN2 = [\n  0 [`a`]\n\n`b ==> c`\n]
+CHANGED_TAC_all ! CHANGED_TAC
+CHANGED_TAC_gen = [\n`x`\n]
+Warning: inventing type variables
+REPLICATE_TAC = [\n`forall z. x`\n]
+FAIL_TAC ! boom
+NO_TAC ! NO_TAC
+FIRST_empty ! end_itlist
+EVERY_empty = [\n`p`\n]
+FIRST = [\n`p`\n; \n`q`\n]
+MAP_EVERY = [\n`a`\n]
+MAP_FIRST = [\n  0 [`p`]\n\n`q`\n]
+TRY = [\n`p`\n]
+ORELSE = [\n`p`\n; \n`q`\n]
+THEN1 ! seqapply: Length mismatch
+THENL_mismatch ! seqapply: Length mismatch
+THENL_empty = []
+POP_ASSUM_empty ! POP_ASSUM: No assumption to pop
+POP_ASSUM_LIST = [\n  0 [`b`]\n  1 [`a`]\n\n`c`\n]
+EVERY_ASSUM = [\n  0 [`a`]\n  1 [`b`]\n\n`a ==> b ==> c`\n]
+ASSUM_LIST = [\n  0 [`a`]\n  1 [`b`]\n\n`b /\\ a ==> c`\n]
+FIND_ASSUM = [\n  0 [`a`]\n  1 [`b`]\n\n`a ==> c`\n]
+ASM = [\n  0 [`a`]\n\n`a ==> b`\n]
+ORELSE_TCL = [\n  0 [`a`]\n  1 [`b`]\n\n`c`\n]
+NO_THEN ! NO_THEN
+EVERY_TCL ! dest_binary
+REPEAT_GTCL = [\n  0 [`a`]\n  1 [`b`]\n  2 [`c`]\n\n`d`\n]
+FIRST_TCL_empty ! end_itlist
+TRANS_TAC = [\n`(a <=> b) /\\ (b <=> c)`\n]
+X_META_EXISTS_TAC = [\n`v /\\ y`\n]
+X_META_EXISTS_TAC_bad ! X_META_EXISTS_TAC
+META_EXISTS_TAC = [\n`x /\\ x'`\n]
+META_SPEC_TAC = [\n  0 [`P t`]\n\n`q`\n]
+CHEAT_TAC =  |- #F:bool
+RECALL_ACCEPT_TAC =  |- #T:bool
+prove_hyps ! prove: additional assumptions in result
+prove_unsolved ! TAC_PROOF: Unsolved goals
+prove_nonbool ! mk_goalstate: Non-boolean goal
+prove_alpha =  |- (#!:fun(fun(bool,bool),bool) (\x:bool. ((#==>:fun(bool,fun(bool,bool)) x:bool) x:bool)))
+mk_fthm = #_FALSITY_:bool, a:bool |- b:bool
+equals_goal = true false
+compose_insts = [a:bool; b:'A; a:'A] [x:bool; y:'A; x:'A] [bool]
+inst_goal = \n  0 [`a`] (h)\n\n`a`\n
+Warning: Free variables in goal: x, y
+g_free = 1 subgoal (1 total)\n\n`x /\\ y ==> y`\n
+g = 1 subgoal (1 total)\n\n`forall p q. p /\\ q ==> q /\\ p`\n
+e1 = 1 subgoal (1 total)\n\n`p /\\ q ==> q /\\ p`\n
+e2 = 1 subgoal (1 total)\n\n  0 [`p`]\n  1 [`q`]\n\n`q /\\ p`\n
+top_goal = [q:bool; p:bool] ?- ((#/\:fun(bool,fun(bool,bool)) q:bool) p:bool)
+e3 = 2 subgoals (2 total)\n\n  0 [`p`]\n  1 [`q`]\n\n`p`\n\n  0 [`p`]\n  1 [`q`]\n\n`q`\n
+r1 = 1 subgoal (2 total)\n\n  0 [`p`]\n  1 [`q`]\n\n`p`\n
+r_neg = 1 subgoal (2 total)\n\n  0 [`p`]\n  1 [`q`]\n\n`q`\n
+b1 = 1 subgoal (2 total)\n\n  0 [`p`]\n  1 [`q`]\n\n`p`\n
+e_valid ! VALID: Invalid tactic
+e4 = 1 subgoal (1 total)\n\n  0 [`p`]\n  1 [`q`]\n\n`q`\n
+e_bad = No subgoals\n
+e5 ! No goal set
+top_thm =  |- (#!:fun(fun(bool,bool),bool) (\p:bool. (#!:fun(fun(bool,bool),bool) (\q:bool. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) ((#/\:fun(bool,fun(bool,bool)) q:bool) p:bool))))))
+p = No subgoals\n
+flush = No subgoals\n
+b_too_far ! Can't back up any more
+Warning: Free variables in goal: a, b, c, d
+g2 = 1 subgoal (1 total)\n\n`(a /\\ b) /\\ c /\\ d`\n
+er1 = 1 subgoal (2 total)\n\n`a /\\ b`\n
+er2 = 1 subgoal (3 total)\n\n`c /\\ d`\n
+length = 3
+set_goal = 1 subgoal (1 total)\n\n  0 [`a`]\n\n`a /\\ (b ==> c)`\n
+e_lab = 2 subgoals (2 total)\n\n  0 [`a`]\n  1 [`b`] (hb)\n\n`c`\n\n  0 [`a`]\n\n`a`\n
+top_realgoal = \n  0 [`a`]\n\n`a`\n
+max_boxes = \n  0 []\n\n`p`\n
+empty_goalstack = Empty goalstack
+top_thm_open !! Match_failure
+e_nogoal ! No current goal
+by_nogoal ! No goal set
+axioms =  |- #F:bool
+constants = _FALSITY_ ?! ~ F \/ ? ! ==> /\ T =
+Warning: inventing type variables
+counter_tyvar = zz_counter:'?880
+counter_genvar = _22:bool

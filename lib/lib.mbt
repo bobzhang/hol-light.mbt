@@ -1120,6 +1120,48 @@ pub fn remark(s : String) -> Unit {
   }
 }
 
+///|
+/// The CPU clock used by `time` (seconds). The wasm target has no portable
+/// CPU clock, so it reads 0 unless a host installs one.
+pub let cpu_time : Ref[() -> Double] = Ref::{ val: () => 0.0, }
+
+///|
+/// OCaml's `string_of_float` for the values `time` reports.
+fn string_of_float(x : Double) -> String {
+  let s = x.to_string()
+  if s.contains(".") || s.contains("e") || s.contains("n") {
+    s
+  } else {
+    s + "."
+  }
+}
+
+///|
+/// Report a failure of a timed function; returns the error to re-raise.
+fn report_failure(start_time : Double, e : Error) -> Error {
+  let finish_time = (cpu_time.val)()
+  report(
+    "Failed after (user) CPU time of " +
+    string_of_float(finish_time - start_time) +
+    ": " +
+    e.to_string(),
+  )
+  e
+}
+
+///|
+/// `time f x`: apply `f`, reporting the CPU time taken if `report_timing`.
+pub fn[A, B] time(f : (A) -> B raise, x : A) -> B raise {
+  if !report_timing.val {
+    return f(x)
+  }
+  let start_time = (cpu_time.val)()
+  let result = f(x) catch { e => raise report_failure(start_time, e) }
+  let finish_time = (cpu_time.val)()
+  report("CPU time (user): " + string_of_float(finish_time - start_time))
+  result
+}
+
 // ---------------------------------------------------------------------------
 // Versions of map that avoid rebuilding unchanged elements.
 // ---------------------------------------------------------------------------
