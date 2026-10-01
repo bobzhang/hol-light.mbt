@@ -563,6 +563,8 @@ pub fn le_c_image() -> @kernel.Thm
 
 pub fn le_c_image_subset() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn mul_c() -> @kernel.Thm
 
 pub fn mul_c_univ() -> @kernel.Thm

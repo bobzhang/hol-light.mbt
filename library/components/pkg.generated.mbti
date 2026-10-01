@@ -50,6 +50,8 @@ pub fn extensionally_valid_component_thms() -> @ref.Ref[@list.List[@kernel.Thm]]
 
 pub fn forall_component() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn orthogonal_components() -> @kernel.Thm
 
 pub fn orthogonal_components_sym() -> @kernel.Thm

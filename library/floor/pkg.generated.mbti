@@ -95,6 +95,8 @@ pub fn integer_sub_eq() -> @kernel.Thm
 
 pub fn integer_sum() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn nonnegative_integer() -> @kernel.Thm
 
 pub fn nonpositive_integer() -> @kernel.Thm

@@ -1,7 +1,7 @@
 // Library/bitsize.ml: the load steps are generated (bitsize.mbt).
 
 ///|
-let loaded : Ref[Bool] = Ref::{ val: false }
+let loaded : Ref[Bool] = Ref::{ val: false, }
 
 ///|
 /// Load Library/bitsize.ml (once), after the files it needs.

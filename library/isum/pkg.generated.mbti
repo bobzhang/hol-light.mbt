@@ -192,6 +192,8 @@ pub fn isum_univ() -> @kernel.Thm
 
 pub fn isum_zero_exists() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn real_of_num_isum() -> @kernel.Thm
 
 pub fn real_of_num_isum_numseg() -> @kernel.Thm

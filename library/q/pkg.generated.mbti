@@ -36,6 +36,8 @@ pub fn genl(@list.List[String]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
 
 pub fn int_arith(String) -> @kernel.Thm raise
 
+pub fn load() -> Unit
+
 pub fn num_ring(String) -> @kernel.Thm raise
 
 pub fn[TA, TB] parse_in_context((@kernel.Term) -> (((@list.List[(TB, @kernel.Thm)], @kernel.Term)) -> TA raise) raise, String) -> (((@list.List[(TB, @kernel.Thm)], @kernel.Term)) -> TA raise) raise

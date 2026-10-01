@@ -8,6 +8,8 @@ import {
 // Values
 pub fn divisorsum_mobius() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn mobius() -> @kernel.Thm
 
 pub fn mobius_0() -> @kernel.Thm

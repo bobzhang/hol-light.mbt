@@ -452,6 +452,8 @@ pub fn le_index() -> @kernel.Thm
 
 pub fn le_lcm() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn max_le_lcm() -> @kernel.Thm
 
 pub fn max_le_lcm_eq() -> @kernel.Thm

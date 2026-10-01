@@ -58,6 +58,8 @@ pub fn divides_prime_binom() -> @kernel.Thm
 
 pub fn has_size_restricted_powerset() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn num_binom_conv(@kernel.Term) -> @kernel.Thm raise
 
 pub fn real_binomial_theorem() -> @kernel.Thm

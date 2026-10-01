@@ -1,7 +1,7 @@
 // Library/binary.ml: the load steps are generated (binary.mbt).
 
 ///|
-let loaded : Ref[Bool] = Ref::{ val: false }
+let loaded : Ref[Bool] = Ref::{ val: false, }
 
 ///|
 /// Load Library/binary.ml (once), after the files it needs.

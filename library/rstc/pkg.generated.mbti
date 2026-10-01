@@ -9,6 +9,8 @@ import {
 // Values
 pub fn inv() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn rc_cases() -> @kernel.Thm
 
 pub fn rc_closed() -> @kernel.Thm

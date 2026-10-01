@@ -24,6 +24,8 @@ pub fn iter_mul() -> @kernel.Thm
 
 pub fn iter_pointless() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn order_existence_card() -> @kernel.Thm
 
 pub fn order_existence_finite() -> @kernel.Thm

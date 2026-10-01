@@ -1,7 +1,7 @@
 // Library/wo.ml: the load steps are generated (wo.mbt).
 
 ///|
-let loaded : Ref[Bool] = Ref::{ val: false }
+let loaded : Ref[Bool] = Ref::{ val: false, }
 
 ///|
 /// Load Library/wo.ml (once), after the files it needs.

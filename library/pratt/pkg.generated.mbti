@@ -1,0 +1,144 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/library/pratt"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn certify_prime(@num.Num) -> Certificate raise
+
+pub fn check_certificate(Certificate) -> @kernel.Thm raise
+
+pub fn cong_0() -> @kernel.Thm
+
+pub fn cong_mod_0() -> @kernel.Thm
+
+pub fn cong_mod_1() -> @kernel.Thm
+
+pub fn cong_mult_lcancel() -> @kernel.Thm
+
+pub fn cong_refl() -> @kernel.Thm
+
+pub fn cong_sub_cases() -> @kernel.Thm
+
+pub fn cong_sym() -> @kernel.Thm
+
+pub fn cong_trans() -> @kernel.Thm
+
+pub fn difference_pos_lemma() -> @kernel.Thm
+
+pub fn even_num(@num.Num) -> Bool raise
+
+pub fn exp_eq_mod_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn factor(@num.Num) -> @list.List[(@num.Num, @num.Num)] raise
+
+pub fn fermat_little() -> @kernel.Thm
+
+pub fn fermat_little_prime() -> @kernel.Thm
+
+pub fn find_primitive_root(@num.Num) -> ((@list.List[@num.Num]) -> ((@num.Num) -> @num.Num raise) raise) raise
+
+pub fn finite_number_segment() -> @kernel.Thm
+
+pub fn itset_modmult() -> @kernel.Thm
+
+pub fn itset_modmult_coprime() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn log2(@num.Num) -> @num.Num raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] lookup_under_num(@num.Num, @list.List[(@num.Num, TA)]) -> TA raise
+
+pub fn lucas() -> @kernel.Thm
+
+pub fn lucas_coprime_lemma() -> @kernel.Thm
+
+pub fn lucas_primefact() -> @kernel.Thm
+
+pub fn lucas_weak() -> @kernel.Thm
+
+pub fn multifactor(@num.Num) -> @list.List[@num.Num] raise
+
+pub fn nat_mod() -> @kernel.Thm
+
+pub fn nat_mod_lemma() -> @kernel.Thm
+
+pub fn num_0() -> @num.Num
+
+pub fn num_1() -> @num.Num
+
+pub fn num_2() -> @num.Num
+
+pub fn odd_num(@num.Num) -> Bool raise
+
+pub fn phi() -> @kernel.Thm
+
+pub fn phi_0() -> @kernel.Thm
+
+pub fn phi_1() -> @kernel.Thm
+
+pub fn phi_alt() -> @kernel.Thm
+
+pub fn phi_another() -> @kernel.Thm
+
+pub fn phi_limit() -> @kernel.Thm
+
+pub fn phi_limit_strong() -> @kernel.Thm
+
+pub fn phi_lowerbound_1() -> @kernel.Thm
+
+pub fn phi_lowerbound_1_strong() -> @kernel.Thm
+
+pub fn phi_lowerbound_2() -> @kernel.Thm
+
+pub fn phi_prime() -> @kernel.Thm
+
+pub fn phi_prime_eq() -> @kernel.Thm
+
+pub fn powermod(@num.Num, @num.Num, @num.Num) -> @num.Num raise
+
+pub fn primafact_contains() -> @kernel.Thm
+
+pub fn prime() -> @kernel.Thm
+
+pub fn prime_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn prime_test(@kernel.Term) -> @kernel.Thm raise
+
+pub fn prime_theorem_cache() -> @ref.Ref[@list.List[(@num.Num, @kernel.Thm)]]
+
+pub fn primefact() -> @kernel.Thm
+
+pub fn primefact_v1() -> @kernel.Thm
+
+pub fn primefact_variant() -> @kernel.Thm
+
+pub fn prove_prime(@num.Num) -> @kernel.Thm raise
+
+pub fn prove_primefact(@num.Num) -> @kernel.Thm raise
+
+pub fn setify_num(@list.List[@num.Num]) -> @list.List[@num.Num] raise
+
+pub fn uniq_num(@list.List[@num.Num]) -> @list.List[@num.Num] raise
+
+// Errors
+
+// Types and methods
+pub(all) enum Certificate {
+  Prime_2
+  Primroot_and_factors(((@num.Num, @list.List[@num.Num]), @num.Num, @list.List[(@num.Num, Certificate)]))
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Certificate
+pub impl @lib.OHash for Certificate
+
+// Type aliases
+
+// Traits

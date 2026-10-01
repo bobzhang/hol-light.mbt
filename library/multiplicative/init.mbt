@@ -1,7 +1,7 @@
 // Library/multiplicative.ml: the load steps are generated (multiplicative.mbt).
 
 ///|
-let loaded : Ref[Bool] = Ref::{ val: false }
+let loaded : Ref[Bool] = Ref::{ val: false, }
 
 ///|
 /// Load Library/multiplicative.ml (once), after the files it needs.
@@ -15,7 +15,10 @@ pub fn load() -> Unit {
   @pocklington.load()
   @parser.begin_theory("Library/multiplicative")
   load_steps() catch {
-    e => abort("HOL Light: loading Library/multiplicative.ml failed: " + e.to_string())
+    e =>
+      abort(
+        "HOL Light: loading Library/multiplicative.ml failed: " + e.to_string(),
+      )
   }
   @parser.end_theory()
 }

@@ -97,6 +97,8 @@ pub fn linseg_inseg() -> @kernel.Thm
 
 pub fn linseg_woset() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn oep() -> @kernel.Thm
 
 pub fn ordinal() -> @kernel.Thm

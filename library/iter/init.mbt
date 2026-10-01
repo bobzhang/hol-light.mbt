@@ -1,7 +1,7 @@
 // Library/iter.ml: the load steps are generated (iter.mbt).
 
 ///|
-let loaded : Ref[Bool] = Ref::{ val: false }
+let loaded : Ref[Bool] = Ref::{ val: false, }
 
 ///|
 /// Load Library/iter.ml (once), after the files it needs.

@@ -227,6 +227,8 @@ pub fn iterate_iterate_divisors() -> @kernel.Thm
 
 pub fn iterate_over_coprime() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn log2(@num.Num) -> @num.Num raise
 
 pub fn[TA : Eq + @lib.OCompare + @lib.OHash] lookup_under_num(@num.Num, @list.List[(@num.Num, TA)]) -> TA raise

@@ -443,6 +443,8 @@ pub fn int_prime_neg() -> @kernel.Thm
 
 pub fn int_primes_infinite() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn odd_square_mod4() -> @kernel.Thm
 
 pub fn solvable_gcd() -> @kernel.Thm

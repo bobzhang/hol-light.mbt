@@ -14,6 +14,8 @@ pub fn define_record_type(String) -> (@kernel.Thm, @kernel.Thm, @kernel.Thm) rai
 
 pub fn get_record_components(@kernel.Thm) -> @list.List[@kernel.Term] raise
 
+pub fn load() -> Unit
+
 pub fn parse_record_specification(String) -> (String, @list.List[(String, @kernel.HolType)]) raise
 
 pub fn record_extensionally_valid_component_thms(@kernel.Thm, @kernel.Thm) -> @list.List[@kernel.Thm] raise

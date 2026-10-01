@@ -1,7 +1,7 @@
 // Library/prime.ml: the load steps are generated (prime.mbt).
 
 ///|
-let loaded : Ref[Bool] = Ref::{ val: false }
+let loaded : Ref[Bool] = Ref::{ val: false, }
 
 ///|
 /// Load Library/prime.ml (once), after the files it needs.

@@ -42,6 +42,8 @@ pub fn lex_list(@list.List[String]) -> @list.List[Lexcode] raise
 
 pub fn[I, A, S] listof((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) -> (S, @list.List[I]) raise, String) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise
 
+pub fn loaded_theories() -> Array[String]
+
 pub fn[I, A] many((@list.List[I]) -> (A, @list.List[I]) raise) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise
 
 pub fn[I, A, B] map((@list.List[I]) -> (A, @list.List[I]) raise, (A) -> B raise?) -> (@list.List[I]) -> (B, @list.List[I]) raise

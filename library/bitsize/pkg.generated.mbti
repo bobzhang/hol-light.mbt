@@ -56,6 +56,8 @@ pub fn le_bitsize() -> @kernel.Thm
 
 pub fn le_bitsize_alt() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 // Errors
 
 // Types and methods

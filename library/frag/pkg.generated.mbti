@@ -98,6 +98,8 @@ pub fn frag_support_sum() -> @kernel.Thm
 
 pub fn frag_tybij() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn monoidal_frag_add() -> @kernel.Thm
 
 pub fn neutral_frag_add() -> @kernel.Thm

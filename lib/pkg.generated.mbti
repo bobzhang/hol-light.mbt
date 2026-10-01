@@ -4,6 +4,7 @@ package "bobzhang/hol_light/lib"
 import {
   "bobzhang/hol_light/kernel",
   "bobzhang/hol_light/num",
+  "moonbitlang/core/bigint",
   "moonbitlang/core/debug",
   "moonbitlang/core/list",
   "moonbitlang/core/ref",
@@ -119,6 +120,8 @@ pub fn[A, B] forall2((A, B) -> Bool raise?, @list.List[A], @list.List[B]) -> Boo
 pub fn[A] funpow(Int, (A) -> A raise?, A) -> A raise?
 
 pub fn gcd(Int, Int) -> Int
+
+pub fn gp_factorint(@bigint.BigInt) -> String
 
 pub fn[K : OCompare, V : OCompare] graph(Func[K, V]) -> @list.List[(K, V)]
 

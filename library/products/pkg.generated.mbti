@@ -112,6 +112,8 @@ pub fn iproduct_union() -> @kernel.Thm
 
 pub fn iproduct_univ() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn nproduct_add_split() -> @kernel.Thm
 
 pub fn nproduct_clauses_left() -> @kernel.Thm

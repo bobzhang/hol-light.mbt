@@ -14,6 +14,8 @@ pub fn cauchy_induct() -> @kernel.Thm
 
 pub fn forall_2() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn numseg_2() -> @kernel.Thm
 
 pub fn product_split_2() -> @kernel.Thm

@@ -1,7 +1,7 @@
 // Library/floor.ml: the load steps are generated (floor.mbt).
 
 ///|
-let loaded : Ref[Bool] = Ref::{ val: false }
+let loaded : Ref[Bool] = Ref::{ val: false, }
 
 ///|
 /// Load Library/floor.ml (once), after the files it needs.

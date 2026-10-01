@@ -46,6 +46,8 @@ pub fn even_nsum() -> @kernel.Thm
 
 pub fn finite_bitset() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 // Errors
 
 // Types and methods

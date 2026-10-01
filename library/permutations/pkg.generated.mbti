@@ -62,6 +62,8 @@ pub fn involution_size_2_is_swap() -> @kernel.Thm
 
 pub fn iterate_permute() -> @kernel.Thm
 
+pub fn load() -> Unit
+
 pub fn nsum_permute() -> @kernel.Thm
 
 pub fn nsum_permute_numseg() -> @kernel.Thm
