@@ -241,4 +241,5 @@ definitions register constants, quotations advance the type-variable and
   including the load trace, failure messages, goal printing and counters.
   Infix tacticals that collide with keywords are `then_tac` and
   `orelse_tac`; `lib.time` reads a pluggable `cpu_time` clock (0 on wasm).
-  Next: `itab`, `simp`, …
+  `itab/` is done (ITAUT_TAC, UNIFY_ACCEPT_TAC, UNIFY_REFL_TAC; matches
+  itab.ml on ten ITAUT proofs and the metavariable goalstack). Next: `simp`, …

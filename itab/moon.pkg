@@ -1,0 +1,17 @@
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/basics",
+  "bobzhang/hol_light/printer",
+  "bobzhang/hol_light/equal",
+  "bobzhang/hol_light/bool",
+  "bobzhang/hol_light/drule",
+  "bobzhang/hol_light/tactics",
+  "moonbitlang/core/list",
+}
+
+import {
+  "bobzhang/hol_light/testkit",
+  "bobzhang/hol_light/parser",
+  "bobzhang/hol_light/pp",
+} for "test"
