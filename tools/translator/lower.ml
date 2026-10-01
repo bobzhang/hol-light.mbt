@@ -649,14 +649,14 @@ module Lower = struct
     | None ->
         (* the Num library (nums): the num package *)
         (match String.split_on_char '.' (Path.name path) with
-         | [ "Num"; n ] ->
-             (match M.find ~root:!Names.root "num" n with
-              | Some decl -> { hstmts = []; hexp = Atom ("@num." ^ n); hmty = mty_of_decl decl; hoty = Some oty }
-              | None -> unsupported loc "no MoonBit declaration for Num.%s" n)
          | [ "Num"; ("num_of_string" | "string_of_num") ] ->
              (* the Num library's (rational) parser and printer differ from
                 HOL Light's replacements in the num package *)
              unsupported loc "Num library's own %s" (Path.name path)
+         | [ "Num"; n ] ->
+             (match M.find ~root:!Names.root "num" n with
+              | Some decl -> { hstmts = []; hexp = Atom ("@num." ^ n); hmty = mty_of_decl decl; hoty = Some oty }
+              | None -> unsupported loc "no MoonBit declaration for Num.%s" n)
          | [ n ] ->
              (* bignum_num.ml (loaded before HOL Light): the num package *)
              let n' =

@@ -500,29 +500,122 @@ pub impl OHash for Double with fn ohash_visit(self, h) {
 }
 
 ///|
-/// `compare` on `num`: numeric order (see the num package: OCaml's
-/// structural order depends on the representation and fails on big
-/// integers).
-pub impl OCompare for @num.Num with fn ocompare(self, other) {
-  @num.compare_num(self, other)
+/// OCaml's representation of a `num`: `Int of int` (63-bit), `Big_int of
+/// big_int` or `Ratio of ratio` (constructor tags 0, 1, 2).
+fn num_tag(n : @num.Num) -> Int {
+  if !@num.is_integer_num(n) {
+    2
+  } else {
+    let v = @num.int64_of_num(n) catch { _ => return 1 }
+    if v >= -0x4000000000000000L && v < 0x4000000000000000L {
+      0
+    } else {
+      1
+    }
+  }
 }
 
 ///|
-/// `Hashtbl.hash` on `num`: an `Int n` block for integers that fit OCaml's
-/// immediate ints (as upstream); other values hash their sign and
-/// constructor only (upstream ignores the custom blocks of big integers).
+/// `compare` on `num`, as OCaml's structural compare on its representation:
+/// by constructor, then numerically for small integers; big integers and
+/// ratios of the same sign compare their (abstract) digits, where OCaml
+/// raises `Invalid_argument "compare: abstract value"` (here an abort).
+pub impl OCompare for @num.Num with fn ocompare(self, other) {
+  if physical_equal(self, other) {
+    return 0
+  }
+  let ta = num_tag(self)
+  let tb = num_tag(other)
+  if ta != tb {
+    return ta.compare(tb)
+  }
+  if ta == 0 {
+    return @num.compare_num(self, other)
+  }
+  // big_int = { sign; abs_value : nat }; a ratio starts with its numerator
+  let c = @num.sign_num(self).compare(@num.sign_num(other))
+  if c != 0 {
+    return c
+  }
+  abort("compare: abstract value")
+}
+
+///|
+/// An OCaml `int` field (63-bit).
+priv struct OInt(Int64)
+
+///|
+impl OHash for OInt with ohash_visit(self, h) {
+  h.int(self.0)
+}
+
+///|
+/// The digits of a big integer: a custom block hashed by the num library's
+/// `hash_nat` (each 64-bit digit as its low then high 32 bits, a zero high
+/// half of the last digit skipped: the minimal 32-bit little-endian
+/// chunks), mixed in as one meaningful value.
+priv struct NatDigits(@bigint.BigInt)
+
+///|
+impl OHash for NatDigits with ohash_visit(self, h) {
+  let digits : OHasher = { queue: [], h: 0U, num: 0 }
+  let base = @bigint.BigInt::from_int64(0x100000000L)
+  let mut m = self.0
+  let zero = @bigint.BigInt::from_int(0)
+  while m > zero {
+    let chunk = (m % base).to_int64()
+    digits.mix(chunk.reinterpret_as_uint64().to_uint())
+    m = m / base
+  }
+  h.mix(digits.h)
+  h.num -= 1
+}
+
+///|
+/// `big_int = { sign : int; abs_value : nat }`
+priv struct BigIntRecord((Int, @bigint.BigInt))
+
+///|
+impl OHash for BigIntRecord with ohash_visit(self, h) {
+  h.block(0, 2)
+  h.field(OInt(self.0.0.to_int64()))
+  h.field(NatDigits(self.0.1))
+}
+
+///|
+fn big_record(n : @num.Num) -> BigIntRecord {
+  let b = @num.big_int_of_num(@num.abs_num(n)) catch { _ => @bigint.BigInt::from_int(0) }
+  BigIntRecord((@num.sign_num(n), b))
+}
+
+///|
+/// `ratio = { numerator : big_int; denominator : big_int; normalized : bool }`
+priv struct RatioRecord(@num.Num)
+
+///|
+impl OHash for RatioRecord with ohash_visit(self, h) {
+  h.block(0, 3)
+  h.field(big_record(@num.numerator(self.0)))
+  h.field(big_record(@num.denominator(self.0)))
+  h.field(OInt(1L)) // normalized = true
+}
+
+///|
+/// `Hashtbl.hash` on `num`, through OCaml's representation (checked
+/// against OCaml for small, large and rational values).
 pub impl OHash for @num.Num with fn ohash_visit(self, h) {
-  if @num.is_integer_num(self) {
-    let n = @num.int64_of_num(self) catch { _ => 0x4000000000000000L }
-    if n >= -0x4000000000000000L && n < 0x4000000000000000L {
+  match num_tag(self) {
+    0 => {
       h.block(0, 1)
-      h.int(n)
-      return
+      h.field(OInt(@num.int64_of_num(self) catch { _ => 0L }))
     }
-    h.block(1, 2)
-    h.int(@num.sign_num(self).to_int64())
-  } else {
-    h.block(2, 2)
-    h.int(@num.sign_num(self).to_int64())
+    1 => {
+      h.block(1, 1)
+      h.field(big_record(self))
+    }
+    _ => {
+      h.block(2, 1)
+      h.field(RatioRecord(self))
+    }
   }
 }

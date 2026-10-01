@@ -122,4 +122,25 @@ test "hashtbl folds like OCaml" {
 test "num hashes like OCaml" {
   inspect(hash(@num.num_of_int(5)), content="448001807")
   inspect(hash(@num.num_of_int(123456)), content="63828017")
+  inspect(hash((@num.num_of_int(5), 1)), content="775441332")
+  let two = @num.num_of_int(2)
+  inspect(hash(@num.power_num(two, @num.num_of_int(62))), content="884995623")
+  // (OCaml's minus_num leaves -2^62 a Big_int although it fits an int;
+  // the port's representation is canonical)
+  inspect(
+    hash(@num.minus_num(@num.power_num(two, @num.num_of_int(70)))),
+    content="62429635",
+  )
+  inspect(
+    hash(@num.div_num(@num.num_of_int(7), @num.power_num(two, @num.num_of_int(40)))),
+    content="890408135",
+  )
+  inspect(hash(@num.power_num(two, @num.num_of_int(100))), content="924931919")
+  inspect(hash(@num.div_num(@num.num_of_int(1), two)), content="38334622")
+  inspect(
+    hash(@num.div_num(@num.num_of_int(-3), @num.num_of_int(4))),
+    content="191741208",
+  )
+  // compare follows the representation: an Int is below any Ratio
+  inspect(compare(@num.num_of_int(0), @num.div_num(@num.num_of_int(-1), two)), content="-1")
 }
