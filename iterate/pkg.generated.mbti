@@ -1,0 +1,681 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/iterate"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn card_eq_nsum() -> @kernel.Thm
+
+pub fn card_eq_sum() -> @kernel.Thm
+
+pub fn card_numseg() -> @kernel.Thm
+
+pub fn card_numseg_1() -> @kernel.Thm
+
+pub fn card_numseg_lemma() -> @kernel.Thm
+
+pub fn card_unions() -> @kernel.Thm
+
+pub fn card_unions_image() -> @kernel.Thm
+
+pub fn cong_nsum() -> @kernel.Thm
+
+pub fn disjoint_numseg() -> @kernel.Thm
+
+pub fn empty_numseg() -> @kernel.Thm
+
+pub fn expand_nsum_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn expand_sum_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn finite_index_numbers() -> @kernel.Thm
+
+pub fn finite_index_numseg() -> @kernel.Thm
+
+pub fn finite_int_seg() -> @kernel.Thm
+
+pub fn finite_numseg() -> @kernel.Thm
+
+pub fn finite_subset_numseg() -> @kernel.Thm
+
+pub fn finite_support() -> @kernel.Thm
+
+pub fn finite_support_delta() -> @kernel.Thm
+
+pub fn has_size_numseg() -> @kernel.Thm
+
+pub fn has_size_numseg_1() -> @kernel.Thm
+
+pub fn in_numseg() -> @kernel.Thm
+
+pub fn in_numseg_0() -> @kernel.Thm
+
+pub fn in_support() -> @kernel.Thm
+
+pub fn inter_numseg() -> @kernel.Thm
+
+pub fn iproduct() -> @kernel.Thm
+
+pub fn iproduct_clauses() -> @kernel.Thm
+
+pub fn isum() -> @kernel.Thm
+
+pub fn isum_clauses() -> @kernel.Thm
+
+pub fn iterate() -> @kernel.Thm
+
+pub fn iterate_bijection() -> @kernel.Thm
+
+pub fn iterate_cases() -> @kernel.Thm
+
+pub fn iterate_clauses() -> @kernel.Thm
+
+pub fn iterate_clauses_gen() -> @kernel.Thm
+
+pub fn iterate_clauses_numseg() -> @kernel.Thm
+
+pub fn iterate_clauses_numseg_le() -> @kernel.Thm
+
+pub fn iterate_clauses_numseg_lt() -> @kernel.Thm
+
+pub fn iterate_closed() -> @kernel.Thm
+
+pub fn iterate_closed_nonempty() -> @kernel.Thm
+
+pub fn iterate_delete() -> @kernel.Thm
+
+pub fn iterate_delta() -> @kernel.Thm
+
+pub fn iterate_diff() -> @kernel.Thm
+
+pub fn iterate_diff_gen() -> @kernel.Thm
+
+pub fn iterate_eq() -> @kernel.Thm
+
+pub fn iterate_eq_general() -> @kernel.Thm
+
+pub fn iterate_eq_general_inverses() -> @kernel.Thm
+
+pub fn iterate_eq_neutral() -> @kernel.Thm
+
+pub fn iterate_expand_cases() -> @kernel.Thm
+
+pub fn iterate_image() -> @kernel.Thm
+
+pub fn iterate_image_gen() -> @kernel.Thm
+
+pub fn iterate_image_nonzero() -> @kernel.Thm
+
+pub fn iterate_incl_excl() -> @kernel.Thm
+
+pub fn iterate_injection() -> @kernel.Thm
+
+pub fn iterate_iterate_product() -> @kernel.Thm
+
+pub fn iterate_op() -> @kernel.Thm
+
+pub fn iterate_op_gen() -> @kernel.Thm
+
+pub fn iterate_pair() -> @kernel.Thm
+
+pub fn iterate_reflect() -> @kernel.Thm
+
+pub fn iterate_related() -> @kernel.Thm
+
+pub fn iterate_related_nonempty() -> @kernel.Thm
+
+pub fn iterate_restrict_set() -> @kernel.Thm
+
+pub fn iterate_sing() -> @kernel.Thm
+
+pub fn iterate_superset() -> @kernel.Thm
+
+pub fn iterate_support() -> @kernel.Thm
+
+pub fn iterate_swap() -> @kernel.Thm
+
+pub fn iterate_union() -> @kernel.Thm
+
+pub fn iterate_union_gen() -> @kernel.Thm
+
+pub fn iterate_union_nonzero() -> @kernel.Thm
+
+pub fn iterate_univ() -> @kernel.Thm
+
+pub fn iterato() -> @kernel.Thm
+
+pub fn iterato_clauses() -> @kernel.Thm
+
+pub fn iterato_clauses_exists() -> @kernel.Thm
+
+pub fn iterato_clauses_gen() -> @kernel.Thm
+
+pub fn iterato_clauses_numseg_left() -> @kernel.Thm
+
+pub fn iterato_closed() -> @kernel.Thm
+
+pub fn iterato_eq() -> @kernel.Thm
+
+pub fn iterato_expand_cases() -> @kernel.Thm
+
+pub fn iterato_induct() -> @kernel.Thm
+
+pub fn iterato_iterate() -> @kernel.Thm
+
+pub fn iterato_support() -> @kernel.Thm
+
+pub fn mod_nsum_mod() -> @kernel.Thm
+
+pub fn mod_nsum_mod_numseg() -> @kernel.Thm
+
+pub fn monoidal() -> @kernel.Thm
+
+pub fn monoidal_ac() -> @kernel.Thm
+
+pub fn monoidal_add() -> @kernel.Thm
+
+pub fn monoidal_int_add() -> @kernel.Thm
+
+pub fn monoidal_int_mul() -> @kernel.Thm
+
+pub fn monoidal_mul() -> @kernel.Thm
+
+pub fn monoidal_real_add() -> @kernel.Thm
+
+pub fn monoidal_real_mul() -> @kernel.Thm
+
+pub fn neutral() -> @kernel.Thm
+
+pub fn neutral_add() -> @kernel.Thm
+
+pub fn neutral_int_add() -> @kernel.Thm
+
+pub fn neutral_int_mul() -> @kernel.Thm
+
+pub fn neutral_mul() -> @kernel.Thm
+
+pub fn neutral_real_add() -> @kernel.Thm
+
+pub fn neutral_real_mul() -> @kernel.Thm
+
+pub fn nproduct() -> @kernel.Thm
+
+pub fn nproduct_clauses() -> @kernel.Thm
+
+pub fn nsum() -> @kernel.Thm
+
+pub fn nsum_0() -> @kernel.Thm
+
+pub fn nsum_add() -> @kernel.Thm
+
+pub fn nsum_add_gen() -> @kernel.Thm
+
+pub fn nsum_add_numseg() -> @kernel.Thm
+
+pub fn nsum_add_split() -> @kernel.Thm
+
+pub fn nsum_bijection() -> @kernel.Thm
+
+pub fn nsum_bound() -> @kernel.Thm
+
+pub fn nsum_bound_gen() -> @kernel.Thm
+
+pub fn nsum_bound_lt() -> @kernel.Thm
+
+pub fn nsum_bound_lt_all() -> @kernel.Thm
+
+pub fn nsum_bound_lt_gen() -> @kernel.Thm
+
+pub fn nsum_cases() -> @kernel.Thm
+
+pub fn nsum_clauses() -> @kernel.Thm
+
+pub fn nsum_clauses_left() -> @kernel.Thm
+
+pub fn nsum_clauses_numseg() -> @kernel.Thm
+
+pub fn nsum_clauses_numseg_le() -> @kernel.Thm
+
+pub fn nsum_clauses_numseg_lt() -> @kernel.Thm
+
+pub fn nsum_clauses_right() -> @kernel.Thm
+
+pub fn nsum_closed() -> @kernel.Thm
+
+pub fn nsum_closed_nonempty() -> @kernel.Thm
+
+pub fn nsum_const() -> @kernel.Thm
+
+pub fn nsum_const_numseg() -> @kernel.Thm
+
+pub fn nsum_degenerate() -> @kernel.Thm
+
+pub fn nsum_delete() -> @kernel.Thm
+
+pub fn nsum_delta() -> @kernel.Thm
+
+pub fn nsum_diff() -> @kernel.Thm
+
+pub fn nsum_eq() -> @kernel.Thm
+
+pub fn nsum_eq_0() -> @kernel.Thm
+
+pub fn nsum_eq_0_iff() -> @kernel.Thm
+
+pub fn nsum_eq_0_iff_numseg() -> @kernel.Thm
+
+pub fn nsum_eq_0_numseg() -> @kernel.Thm
+
+pub fn nsum_eq_general() -> @kernel.Thm
+
+pub fn nsum_eq_general_inverses() -> @kernel.Thm
+
+pub fn nsum_eq_numseg() -> @kernel.Thm
+
+pub fn nsum_eq_superset() -> @kernel.Thm
+
+pub fn nsum_group() -> @kernel.Thm
+
+pub fn nsum_group_relation() -> @kernel.Thm
+
+pub fn nsum_image() -> @kernel.Thm
+
+pub fn nsum_image_gen() -> @kernel.Thm
+
+pub fn nsum_image_nonzero() -> @kernel.Thm
+
+pub fn nsum_incl_excl() -> @kernel.Thm
+
+pub fn nsum_injection() -> @kernel.Thm
+
+pub fn nsum_le() -> @kernel.Thm
+
+pub fn nsum_le_gen() -> @kernel.Thm
+
+pub fn nsum_le_numseg() -> @kernel.Thm
+
+pub fn nsum_lmul() -> @kernel.Thm
+
+pub fn nsum_lt() -> @kernel.Thm
+
+pub fn nsum_lt_all() -> @kernel.Thm
+
+pub fn nsum_mul_bound() -> @kernel.Thm
+
+pub fn nsum_multicount() -> @kernel.Thm
+
+pub fn nsum_multicount_gen() -> @kernel.Thm
+
+pub fn nsum_nsum_product() -> @kernel.Thm
+
+pub fn nsum_nsum_restrict() -> @kernel.Thm
+
+pub fn nsum_offset() -> @kernel.Thm
+
+pub fn nsum_offset_0() -> @kernel.Thm
+
+pub fn nsum_pair() -> @kernel.Thm
+
+pub fn nsum_pos_bound() -> @kernel.Thm
+
+pub fn nsum_pos_lt() -> @kernel.Thm
+
+pub fn nsum_pos_lt_all() -> @kernel.Thm
+
+pub fn nsum_reflect() -> @kernel.Thm
+
+pub fn nsum_related() -> @kernel.Thm
+
+pub fn nsum_related_nonempty() -> @kernel.Thm
+
+pub fn nsum_restrict() -> @kernel.Thm
+
+pub fn nsum_restrict_set() -> @kernel.Thm
+
+pub fn nsum_rmul() -> @kernel.Thm
+
+pub fn nsum_sing() -> @kernel.Thm
+
+pub fn nsum_sing_numseg() -> @kernel.Thm
+
+pub fn nsum_subset() -> @kernel.Thm
+
+pub fn nsum_subset_simple() -> @kernel.Thm
+
+pub fn nsum_superset() -> @kernel.Thm
+
+pub fn nsum_support() -> @kernel.Thm
+
+pub fn nsum_swap() -> @kernel.Thm
+
+pub fn nsum_swap_numseg() -> @kernel.Thm
+
+pub fn nsum_triv_numseg() -> @kernel.Thm
+
+pub fn nsum_union() -> @kernel.Thm
+
+pub fn nsum_union_eq() -> @kernel.Thm
+
+pub fn nsum_union_lzero() -> @kernel.Thm
+
+pub fn nsum_union_nonzero() -> @kernel.Thm
+
+pub fn nsum_union_rzero() -> @kernel.Thm
+
+pub fn nsum_unions_nonzero() -> @kernel.Thm
+
+pub fn nsum_univ() -> @kernel.Thm
+
+pub fn numseg() -> @kernel.Thm
+
+pub fn numseg_add_split() -> @kernel.Thm
+
+pub fn numseg_clauses() -> @kernel.Thm
+
+pub fn numseg_combine_l() -> @kernel.Thm
+
+pub fn numseg_combine_r() -> @kernel.Thm
+
+pub fn numseg_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn numseg_empty() -> @kernel.Thm
+
+pub fn numseg_le() -> @kernel.Thm
+
+pub fn numseg_lrec() -> @kernel.Thm
+
+pub fn numseg_lt() -> @kernel.Thm
+
+pub fn numseg_offset_image() -> @kernel.Thm
+
+pub fn numseg_rec() -> @kernel.Thm
+
+pub fn numseg_rrec() -> @kernel.Thm
+
+pub fn numseg_sing() -> @kernel.Thm
+
+pub fn polynomial_function() -> @kernel.Thm
+
+pub fn polynomial_function_add() -> @kernel.Thm
+
+pub fn polynomial_function_const() -> @kernel.Thm
+
+pub fn polynomial_function_finite_roots() -> @kernel.Thm
+
+pub fn polynomial_function_i() -> @kernel.Thm
+
+pub fn polynomial_function_id() -> @kernel.Thm
+
+pub fn polynomial_function_induct() -> @kernel.Thm
+
+pub fn polynomial_function_lmul() -> @kernel.Thm
+
+pub fn polynomial_function_mul() -> @kernel.Thm
+
+pub fn polynomial_function_neg() -> @kernel.Thm
+
+pub fn polynomial_function_o() -> @kernel.Thm
+
+pub fn polynomial_function_pow() -> @kernel.Thm
+
+pub fn polynomial_function_rmul() -> @kernel.Thm
+
+pub fn polynomial_function_sub() -> @kernel.Thm
+
+pub fn polynomial_function_sum() -> @kernel.Thm
+
+pub fn product() -> @kernel.Thm
+
+pub fn product_clauses() -> @kernel.Thm
+
+pub fn real_of_num_sum() -> @kernel.Thm
+
+pub fn real_of_num_sum_gen() -> @kernel.Thm
+
+pub fn real_of_num_sum_numseg() -> @kernel.Thm
+
+pub fn real_polyfun_eq_0() -> @kernel.Thm
+
+pub fn real_polyfun_eq_const() -> @kernel.Thm
+
+pub fn real_polyfun_finite_roots() -> @kernel.Thm
+
+pub fn real_polyfun_rootbound() -> @kernel.Thm
+
+pub fn real_sub_polyfun() -> @kernel.Thm
+
+pub fn real_sub_polyfun_alt() -> @kernel.Thm
+
+pub fn real_sub_pow() -> @kernel.Thm
+
+pub fn real_sub_pow_l1() -> @kernel.Thm
+
+pub fn real_sub_pow_r1() -> @kernel.Thm
+
+pub fn subset_numseg() -> @kernel.Thm
+
+pub fn sum() -> @kernel.Thm
+
+pub fn sum_0() -> @kernel.Thm
+
+pub fn sum_abs() -> @kernel.Thm
+
+pub fn sum_abs_bound() -> @kernel.Thm
+
+pub fn sum_abs_le() -> @kernel.Thm
+
+pub fn sum_abs_numseg() -> @kernel.Thm
+
+pub fn sum_add() -> @kernel.Thm
+
+pub fn sum_add_gen() -> @kernel.Thm
+
+pub fn sum_add_numseg() -> @kernel.Thm
+
+pub fn sum_add_split() -> @kernel.Thm
+
+pub fn sum_bijection() -> @kernel.Thm
+
+pub fn sum_bound() -> @kernel.Thm
+
+pub fn sum_bound_gen() -> @kernel.Thm
+
+pub fn sum_bound_lt() -> @kernel.Thm
+
+pub fn sum_bound_lt_all() -> @kernel.Thm
+
+pub fn sum_bound_lt_gen() -> @kernel.Thm
+
+pub fn sum_cases() -> @kernel.Thm
+
+pub fn sum_cases_1() -> @kernel.Thm
+
+pub fn sum_clauses() -> @kernel.Thm
+
+pub fn sum_clauses_left() -> @kernel.Thm
+
+pub fn sum_clauses_numseg() -> @kernel.Thm
+
+pub fn sum_clauses_numseg_le() -> @kernel.Thm
+
+pub fn sum_clauses_numseg_lt() -> @kernel.Thm
+
+pub fn sum_clauses_right() -> @kernel.Thm
+
+pub fn sum_closed() -> @kernel.Thm
+
+pub fn sum_closed_nonempty() -> @kernel.Thm
+
+pub fn sum_combine_l() -> @kernel.Thm
+
+pub fn sum_combine_r() -> @kernel.Thm
+
+pub fn sum_const() -> @kernel.Thm
+
+pub fn sum_const_numseg() -> @kernel.Thm
+
+pub fn sum_degenerate() -> @kernel.Thm
+
+pub fn sum_delete() -> @kernel.Thm
+
+pub fn sum_delete_cases() -> @kernel.Thm
+
+pub fn sum_delta() -> @kernel.Thm
+
+pub fn sum_diff() -> @kernel.Thm
+
+pub fn sum_diffs() -> @kernel.Thm
+
+pub fn sum_diffs_alt() -> @kernel.Thm
+
+pub fn sum_eq() -> @kernel.Thm
+
+pub fn sum_eq_0() -> @kernel.Thm
+
+pub fn sum_eq_0_numseg() -> @kernel.Thm
+
+pub fn sum_eq_general() -> @kernel.Thm
+
+pub fn sum_eq_general_inverses() -> @kernel.Thm
+
+pub fn sum_eq_numseg() -> @kernel.Thm
+
+pub fn sum_eq_superset() -> @kernel.Thm
+
+pub fn sum_group() -> @kernel.Thm
+
+pub fn sum_group_relation() -> @kernel.Thm
+
+pub fn sum_image() -> @kernel.Thm
+
+pub fn sum_image_gen() -> @kernel.Thm
+
+pub fn sum_image_le() -> @kernel.Thm
+
+pub fn sum_image_nonzero() -> @kernel.Thm
+
+pub fn sum_incl_excl() -> @kernel.Thm
+
+pub fn sum_injection() -> @kernel.Thm
+
+pub fn sum_le() -> @kernel.Thm
+
+pub fn sum_le_included() -> @kernel.Thm
+
+pub fn sum_le_numseg() -> @kernel.Thm
+
+pub fn sum_lmul() -> @kernel.Thm
+
+pub fn sum_lt() -> @kernel.Thm
+
+pub fn sum_lt_all() -> @kernel.Thm
+
+pub fn sum_mul_bound() -> @kernel.Thm
+
+pub fn sum_multicount() -> @kernel.Thm
+
+pub fn sum_multicount_gen() -> @kernel.Thm
+
+pub fn sum_neg() -> @kernel.Thm
+
+pub fn sum_offset() -> @kernel.Thm
+
+pub fn sum_offset_0() -> @kernel.Thm
+
+pub fn sum_pair() -> @kernel.Thm
+
+pub fn sum_partial_pre() -> @kernel.Thm
+
+pub fn sum_partial_suc() -> @kernel.Thm
+
+pub fn sum_pos_bound() -> @kernel.Thm
+
+pub fn sum_pos_eq_0() -> @kernel.Thm
+
+pub fn sum_pos_eq_0_numseg() -> @kernel.Thm
+
+pub fn sum_pos_le() -> @kernel.Thm
+
+pub fn sum_pos_le_numseg() -> @kernel.Thm
+
+pub fn sum_pos_lt() -> @kernel.Thm
+
+pub fn sum_pos_lt_all() -> @kernel.Thm
+
+pub fn sum_reflect() -> @kernel.Thm
+
+pub fn sum_related() -> @kernel.Thm
+
+pub fn sum_related_nonempty() -> @kernel.Thm
+
+pub fn sum_restrict() -> @kernel.Thm
+
+pub fn sum_restrict_set() -> @kernel.Thm
+
+pub fn sum_rmul() -> @kernel.Thm
+
+pub fn sum_sing() -> @kernel.Thm
+
+pub fn sum_sing_numseg() -> @kernel.Thm
+
+pub fn sum_sub() -> @kernel.Thm
+
+pub fn sum_sub_numseg() -> @kernel.Thm
+
+pub fn sum_subset() -> @kernel.Thm
+
+pub fn sum_subset_simple() -> @kernel.Thm
+
+pub fn sum_sum_product() -> @kernel.Thm
+
+pub fn sum_sum_restrict() -> @kernel.Thm
+
+pub fn sum_superset() -> @kernel.Thm
+
+pub fn sum_support() -> @kernel.Thm
+
+pub fn sum_swap() -> @kernel.Thm
+
+pub fn sum_swap_numseg() -> @kernel.Thm
+
+pub fn sum_triv_numseg() -> @kernel.Thm
+
+pub fn sum_union() -> @kernel.Thm
+
+pub fn sum_union_eq() -> @kernel.Thm
+
+pub fn sum_union_lzero() -> @kernel.Thm
+
+pub fn sum_union_nonzero() -> @kernel.Thm
+
+pub fn sum_union_rzero() -> @kernel.Thm
+
+pub fn sum_unions_nonzero() -> @kernel.Thm
+
+pub fn sum_univ() -> @kernel.Thm
+
+pub fn sum_zero_exists() -> @kernel.Thm
+
+pub fn support() -> @kernel.Thm
+
+pub fn support_clauses() -> @kernel.Thm
+
+pub fn support_delta() -> @kernel.Thm
+
+pub fn support_empty() -> @kernel.Thm
+
+pub fn support_subset() -> @kernel.Thm
+
+pub fn support_support() -> @kernel.Thm
+
+pub fn topological_sort() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
