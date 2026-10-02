@@ -990,7 +990,8 @@ module Lower = struct
     | Tpat_constant (Asttypes.Const_int n) when mty = Some (M.Named ("Int", [])) ->
         (* a scrutinee of a hand-ported `Int` (e.g. an adapted callback
            parameter) *)
-        if n < 0 then "(" ^ string_of_int n ^ ")" else string_of_int n
+        if n < -2147483648 || n > 2147483647 then unsupported loc "int pattern %d against a 32-bit Int" n
+        else if n < 0 then "(" ^ string_of_int n ^ ")" else string_of_int n
     | Tpat_constant c -> const loc c
     | Tpat_tuple ps ->
         let mtys =
@@ -1628,14 +1629,14 @@ module Lower = struct
       | "String.length" -> (1, fun [ a ] _ -> widen (Call (Atom "@lib.string_length", [ a ])))
       | "String.get" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.ocaml_string_get", [ a; narrow b ]))
       | "String.sub" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.string_sub", [ a; narrow b; narrow c ]))
-      | "String.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_make", [ narrow a; b ]))
+      | "String.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_make", [ a; b ]))
       | "Sys.command" -> (1, fun [ a ] _ -> widen (Call (Atom "@lib.sys_command", [ a ])))
       | "Sys.remove" -> (1, fun [ a ] _ -> Call (Atom "@lib.sys_remove", [ a ]))
       | "Sys.file_exists" -> (1, fun [ a ] _ -> Call (Atom "@lib.sys_file_exists", [ a ]))
       | "Filename.temp_file" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.temp_file", [ a; b ]))
       | "String.escaped" -> (1, fun [ a ] _ -> Call (Atom "@lib.string_escaped", [ a ]))
       | "String.concat" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_concat", [ a; b ]))
-      | "Array.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_make", [ narrow a; b ]))
+      | "Array.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_make", [ a; b ]))
       | "Array.get" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_get", [ a; narrow b ]))
       | "Array.set" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.array_set", [ a; narrow b; c ]))
       | "Array.length" -> (1, fun [ a ] _ -> widen (Call (Atom "@lib.array_length", [ a ])))

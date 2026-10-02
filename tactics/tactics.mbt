@@ -1827,12 +1827,13 @@ fn rotate_n(gs : Goalstate) -> Goalstate raise {
 
 ///|
 /// `rotate n`: rotate the subgoals.
-pub fn rotate(n : Int) -> Refinement {
+pub fn rotate(n : Int64) -> Refinement {
   gs => {
-    if n > 0 {
-      @lib.funpow(n, rotate_p, gs)
+    // an OCaml int count: `-n` wraps at 63 bits as in OCaml
+    if n > 0L {
+      @lib.funpow(@lib.int63_to_int(n), rotate_p, gs)
     } else {
-      @lib.funpow(-n, rotate_n, gs)
+      @lib.funpow(@lib.int63_to_int(@lib.neg63(n)), rotate_n, gs)
     }
   }
 }
@@ -1917,7 +1918,7 @@ pub fn e(tac : Tactic) -> Goalstack raise {
 
 ///|
 /// `r n`: rotate the subgoals.
-pub fn r(n : Int) -> Goalstack raise {
+pub fn r(n : Int64) -> Goalstack raise {
   refine(rotate(n))
 }
 
@@ -1950,7 +1951,7 @@ pub fn er(tac : Tactic) -> Goalstack raise {
       (if n_subgoals_to_rotate == 1 { "" } else { "s" }) +
       "...)\n\n",
     )
-    let new_g = r(n_subgoals_to_rotate)
+    let new_g = r(n_subgoals_to_rotate.to_int64())
     let cur_gs = current_goalstack.val
     current_goalstack.val = @lib.tl(@lib.tl(cur_gs)).prepend(@lib.hd(cur_gs))
     new_g

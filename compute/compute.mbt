@@ -1499,7 +1499,7 @@ pub fn[TA] try_rwn(
     match x137 {
       Empty => raise No_match::No_match
       More(Rewrite::Rw({ lhs, npv, .. }) as rw, tail=rwn) => {
-        let env = @lib.array_make(@lib.int63_to_int(npv), None)
+        let env = @lib.array_make(npv, None)
         RuleInst::{ rule: rw, inst: match_list((env, ibds), lhs, lt), } catch {
           No_match::No_match => try_rec(rwn)
           e => raise e

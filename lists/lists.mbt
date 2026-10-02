@@ -4781,7 +4781,7 @@ fn step_140() -> Unit raise {
       } else {
         let ccs = @lib.map(
           fn(x370 : @kernel.Term) -> String raise {
-            (fn(x369 : Char) -> String raise { @lib.string_make(1, x369) })(
+            (fn(x369 : Char) -> String raise { @lib.string_make(1L, x369) })(
               char_of_term(x370),
             )
           },

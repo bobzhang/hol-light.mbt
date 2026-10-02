@@ -26,18 +26,19 @@ STATE = os.path.join(theory.REF, "_build", "retranslate_done.txt")
 
 def order():
     files = ["ocaml_set.ml", "ocaml_map.ml"] + [c + ".ml" for c in theory.CORE]
-    # library packages, here or set aside
-    lib = {d for d in os.listdir(os.path.join(ROOT, "library"))
-           if os.path.isdir(os.path.join(ROOT, "library", d))}
-    if os.path.isdir(ASIDE):
-        lib |= {d[len("library__"):] for d in os.listdir(ASIDE) if d.startswith("library__")}
-    lib = sorted(lib)
     seen = set(files)
-    for d in lib:
-        for f in theory.deps("Library/" + d + ".ml") + ["Library/" + d + ".ml"]:
-            if f not in seen:
-                seen.add(f)
-                files.append(f)
+    # Library/ then Multivariate/ packages, here or set aside, after their
+    # `needs`
+    for top, src in (("library", "Library"), ("multivariate", "Multivariate")):
+        here = os.path.join(ROOT, top)
+        pkgs = {d for d in os.listdir(here) if os.path.isdir(os.path.join(here, d))} if os.path.isdir(here) else set()
+        if os.path.isdir(ASIDE):
+            pkgs |= {d[len(top) + 2:] for d in os.listdir(ASIDE) if d.startswith(top + "__")}
+        for d in sorted(pkgs):
+            for f in theory.deps(src + "/" + d + ".ml") + [src + "/" + d + ".ml"]:
+                if f not in seen:
+                    seen.add(f)
+                    files.append(f)
     return files
 
 
