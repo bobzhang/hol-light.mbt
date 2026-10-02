@@ -1,0 +1,694 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/determinants"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn bounded_functions_bijections_1() -> @kernel.Thm
+
+pub fn bounded_functions_bijections_2() -> @kernel.Thm
+
+pub fn characteristic_polynomial() -> @kernel.Thm
+
+pub fn cofactor() -> @kernel.Thm
+
+pub fn cofactor_0() -> @kernel.Thm
+
+pub fn cofactor_1() -> @kernel.Thm
+
+pub fn cofactor_1_gen() -> @kernel.Thm
+
+pub fn cofactor_cmul() -> @kernel.Thm
+
+pub fn cofactor_column() -> @kernel.Thm
+
+pub fn cofactor_i() -> @kernel.Thm
+
+pub fn cofactor_matrix_inv() -> @kernel.Thm
+
+pub fn cofactor_row() -> @kernel.Thm
+
+pub fn cofactor_transp() -> @kernel.Thm
+
+pub fn collinear_linear_image() -> @kernel.Thm
+
+pub fn collinear_linear_image_eq() -> @kernel.Thm
+
+pub fn collinear_translation() -> @kernel.Thm
+
+pub fn collinear_translation_eq() -> @kernel.Thm
+
+pub fn commuting_with_diagonal_matrix() -> @kernel.Thm
+
+pub fn compatible_norm_vectorize() -> @kernel.Thm
+
+pub fn cramer() -> @kernel.Thm
+
+pub fn cramer_lemma() -> @kernel.Thm
+
+pub fn cramer_lemma_transp() -> @kernel.Thm
+
+pub fn cramer_matrix_left() -> @kernel.Thm
+
+pub fn cramer_matrix_left_inverse() -> @kernel.Thm
+
+pub fn cramer_matrix_right() -> @kernel.Thm
+
+pub fn cramer_matrix_right_inverse() -> @kernel.Thm
+
+pub fn det() -> @kernel.Thm
+
+pub fn det_0() -> @kernel.Thm
+
+pub fn det_1() -> @kernel.Thm
+
+pub fn det_1_gen() -> @kernel.Thm
+
+pub fn det_2() -> @kernel.Thm
+
+pub fn det_3() -> @kernel.Thm
+
+pub fn det_4() -> @kernel.Thm
+
+pub fn det_cmul() -> @kernel.Thm
+
+pub fn det_cofactor_expansion() -> @kernel.Thm
+
+pub fn det_dependent_columns() -> @kernel.Thm
+
+pub fn det_dependent_rows() -> @kernel.Thm
+
+pub fn det_diagonal() -> @kernel.Thm
+
+pub fn det_eq_0() -> @kernel.Thm
+
+pub fn det_eq_0_rank() -> @kernel.Thm
+
+pub fn det_i() -> @kernel.Thm
+
+pub fn det_identical_columns() -> @kernel.Thm
+
+pub fn det_identical_rows() -> @kernel.Thm
+
+pub fn det_linear_row_vsum() -> @kernel.Thm
+
+pub fn det_linear_rows() -> @kernel.Thm
+
+pub fn det_linear_rows_vsum() -> @kernel.Thm
+
+pub fn det_linear_rows_vsum_lemma() -> @kernel.Thm
+
+pub fn det_lowertriangular() -> @kernel.Thm
+
+pub fn det_matrix_eq_0() -> @kernel.Thm
+
+pub fn det_matrix_eq_0_left() -> @kernel.Thm
+
+pub fn det_matrix_eq_0_right() -> @kernel.Thm
+
+pub fn det_matrix_inv() -> @kernel.Thm
+
+pub fn det_matrix_reflect_along() -> @kernel.Thm
+
+pub fn det_mul() -> @kernel.Thm
+
+pub fn det_neg() -> @kernel.Thm
+
+pub fn det_orthogonal_matrix() -> @kernel.Thm
+
+pub fn det_permute_columns() -> @kernel.Thm
+
+pub fn det_permute_rows() -> @kernel.Thm
+
+pub fn det_row_add() -> @kernel.Thm
+
+pub fn det_row_mul() -> @kernel.Thm
+
+pub fn det_row_operation() -> @kernel.Thm
+
+pub fn det_row_span() -> @kernel.Thm
+
+pub fn det_rows_mul() -> @kernel.Thm
+
+pub fn det_similar() -> @kernel.Thm
+
+pub fn det_transp() -> @kernel.Thm
+
+pub fn det_uppertriangular() -> @kernel.Thm
+
+pub fn det_zero_column() -> @kernel.Thm
+
+pub fn det_zero_row() -> @kernel.Thm
+
+pub fn diagonal_imp_symmetric_matrix() -> @kernel.Thm
+
+pub fn diagonal_matrix() -> @kernel.Thm
+
+pub fn diagonal_matrix_add() -> @kernel.Thm
+
+pub fn diagonal_matrix_cmul() -> @kernel.Thm
+
+pub fn diagonal_matrix_inv() -> @kernel.Thm
+
+pub fn diagonal_matrix_inv_component() -> @kernel.Thm
+
+pub fn diagonal_matrix_inv_explicit() -> @kernel.Thm
+
+pub fn diagonal_matrix_mat() -> @kernel.Thm
+
+pub fn diagonal_matrix_mul() -> @kernel.Thm
+
+pub fn diagonal_matrix_mul_component() -> @kernel.Thm
+
+pub fn diagonal_matrix_mul_eq() -> @kernel.Thm
+
+pub fn diagonal_matrix_v1() -> @kernel.Thm
+
+pub fn diagonal_positive_definite() -> @kernel.Thm
+
+pub fn diagonal_positive_semidefinite() -> @kernel.Thm
+
+pub fn disjoint_halfspaces_imp_collinear() -> @kernel.Thm
+
+pub fn disjoint_hyperplanes_imp_collinear() -> @kernel.Thm
+
+pub fn dot_vectorize() -> @kernel.Thm
+
+pub fn eigenvalues_characteristic() -> @kernel.Thm
+
+pub fn eigenvalues_characteristic_alt() -> @kernel.Thm
+
+pub fn euler_rotation_theorem() -> @kernel.Thm
+
+pub fn euler_rotoinversion_theorem() -> @kernel.Thm
+
+pub fn exists_genvar_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn finite_bounded_functions() -> @kernel.Thm
+
+pub fn finite_eigenvalues() -> @kernel.Thm
+
+pub fn gen_geom_normalize_tac(@kernel.Term, @list.List[String], (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn gen_geom_origin_tac(@kernel.Term, @list.List[String], (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn geom_basis_multiple_rule(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn geom_basis_multiple_tac(Int64, @kernel.Term, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn geom_drop_dimension_rule(@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn geom_equal_dimension_rule(@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn geom_normalize_rule(@list.List[String]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn geom_normalize_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn geom_origin_conv(@list.List[String]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn geom_origin_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn geom_transform_tac(@list.List[String]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn geom_translate_conv(@list.List[String]) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn geom_translate_tac(@list.List[String], (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn grassmann_plucker_2() -> @kernel.Thm
+
+pub fn grassmann_plucker_3() -> @kernel.Thm
+
+pub fn grassmann_plucker_4() -> @kernel.Thm
+
+pub fn hadamard_inequality_column() -> @kernel.Thm
+
+pub fn hadamard_inequality_row() -> @kernel.Thm
+
+pub fn homogeneous_linear_equations_det() -> @kernel.Thm
+
+pub fn in_dimindex_swap() -> @kernel.Thm
+
+pub fn integer_det() -> @kernel.Thm
+
+pub fn integer_product() -> @kernel.Thm
+
+pub fn integer_sign() -> @kernel.Thm
+
+pub fn invertible_covariance_rank() -> @kernel.Thm
+
+pub fn invertible_det_nz() -> @kernel.Thm
+
+pub fn invertible_diagonal_matrix() -> @kernel.Thm
+
+pub fn invertible_eigenvalues() -> @kernel.Thm
+
+pub fn invertible_matrix_mul() -> @kernel.Thm
+
+pub fn invertible_nearby() -> @kernel.Thm
+
+pub fn invertible_nearby_onorm() -> @kernel.Thm
+
+pub fn isometry_imp_affinity() -> @kernel.Thm
+
+pub fn isometry_linear() -> @kernel.Thm
+
+pub fn isometry_sphere_extend() -> @kernel.Thm
+
+pub fn lambda_beta_perm() -> @kernel.Thm
+
+pub fn linear_invariants(@kernel.Term) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn linear_reflect_along() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn loewner_order_antisym() -> @kernel.Thm
+
+pub fn matrix_inv_cofactor() -> @kernel.Thm
+
+pub fn matrix_inv_mul() -> @kernel.Thm
+
+pub fn matrix_inv_orthogonal_lmul() -> @kernel.Thm
+
+pub fn matrix_inv_orthogonal_rmul() -> @kernel.Thm
+
+pub fn matrix_left_inverse_cofactor() -> @kernel.Thm
+
+pub fn matrix_mul_diagonal() -> @kernel.Thm
+
+pub fn matrix_mul_left_cofactor() -> @kernel.Thm
+
+pub fn matrix_mul_linv() -> @kernel.Thm
+
+pub fn matrix_mul_ltransp_dot_column() -> @kernel.Thm
+
+pub fn matrix_mul_right_cofactor() -> @kernel.Thm
+
+pub fn matrix_mul_rinv() -> @kernel.Thm
+
+pub fn matrix_mul_rtransp_dot_row() -> @kernel.Thm
+
+pub fn matrix_mul_vsum_alt() -> @kernel.Thm
+
+pub fn matrix_reflect_along_basis() -> @kernel.Thm
+
+pub fn matrix_right_inverse_cofactor() -> @kernel.Thm
+
+pub fn nearby_positive_definite_matrix() -> @kernel.Thm
+
+pub fn nearby_positive_definite_matrix_gen() -> @kernel.Thm
+
+pub fn norm_le_max_eigenvector_span() -> @kernel.Thm
+
+pub fn norm_reflect_along() -> @kernel.Thm
+
+pub fn norm_vectorize_hadamard_le() -> @kernel.Thm
+
+pub fn norm_vectorize_mul_le() -> @kernel.Thm
+
+pub fn norm_vectorize_orthogonal_matrix_lmul() -> @kernel.Thm
+
+pub fn norm_vectorize_orthogonal_matrix_rmul() -> @kernel.Thm
+
+pub fn norm_vectorize_pow_2() -> @kernel.Thm
+
+pub fn norm_vectorize_transp() -> @kernel.Thm
+
+pub fn onorm_compose_orthogonal_transformation_left() -> @kernel.Thm
+
+pub fn onorm_compose_orthogonal_transformation_right() -> @kernel.Thm
+
+pub fn onorm_diagonal_matrix() -> @kernel.Thm
+
+pub fn onorm_diagonalized_covariance_matrix() -> @kernel.Thm
+
+pub fn onorm_diagonalized_matrix() -> @kernel.Thm
+
+pub fn onorm_eq_max_eigenvector() -> @kernel.Thm
+
+pub fn onorm_le_norm_vectorize() -> @kernel.Thm
+
+pub fn onorm_orthogonal_matrix() -> @kernel.Thm
+
+pub fn onorm_orthogonal_matrix_mul_left() -> @kernel.Thm
+
+pub fn onorm_orthogonal_matrix_mul_right() -> @kernel.Thm
+
+pub fn onorm_orthogonal_transformation() -> @kernel.Thm
+
+pub fn orthogonal_matrix() -> @kernel.Thm
+
+pub fn orthogonal_matrix_1() -> @kernel.Thm
+
+pub fn orthogonal_matrix_2() -> @kernel.Thm
+
+pub fn orthogonal_matrix_2_alt() -> @kernel.Thm
+
+pub fn orthogonal_matrix_alt() -> @kernel.Thm
+
+pub fn orthogonal_matrix_exists_basis() -> @kernel.Thm
+
+pub fn orthogonal_matrix_id() -> @kernel.Thm
+
+pub fn orthogonal_matrix_imp_invertible() -> @kernel.Thm
+
+pub fn orthogonal_matrix_inv() -> @kernel.Thm
+
+pub fn orthogonal_matrix_inv_eq() -> @kernel.Thm
+
+pub fn orthogonal_matrix_matrix() -> @kernel.Thm
+
+pub fn orthogonal_matrix_mul() -> @kernel.Thm
+
+pub fn orthogonal_matrix_norm() -> @kernel.Thm
+
+pub fn orthogonal_matrix_norm_eq() -> @kernel.Thm
+
+pub fn orthogonal_matrix_orthogonal_eigenvectors() -> @kernel.Thm
+
+pub fn orthogonal_matrix_orthonormal_columns() -> @kernel.Thm
+
+pub fn orthogonal_matrix_orthonormal_columns_indexed() -> @kernel.Thm
+
+pub fn orthogonal_matrix_orthonormal_columns_pairwise() -> @kernel.Thm
+
+pub fn orthogonal_matrix_orthonormal_columns_span() -> @kernel.Thm
+
+pub fn orthogonal_matrix_orthonormal_rows() -> @kernel.Thm
+
+pub fn orthogonal_matrix_orthonormal_rows_indexed() -> @kernel.Thm
+
+pub fn orthogonal_matrix_orthonormal_rows_pairwise() -> @kernel.Thm
+
+pub fn orthogonal_matrix_orthonormal_rows_span() -> @kernel.Thm
+
+pub fn orthogonal_matrix_transformation() -> @kernel.Thm
+
+pub fn orthogonal_matrix_transp() -> @kernel.Thm
+
+pub fn orthogonal_matrix_transp_lmul() -> @kernel.Thm
+
+pub fn orthogonal_matrix_transp_rmul() -> @kernel.Thm
+
+pub fn orthogonal_matrix_v1() -> @kernel.Thm
+
+pub fn orthogonal_orthogonal_transformation() -> @kernel.Thm
+
+pub fn orthogonal_rotation_or_rotoinversion() -> @kernel.Thm
+
+pub fn orthogonal_transformation() -> @kernel.Thm
+
+pub fn orthogonal_transformation_1_gen() -> @kernel.Thm
+
+pub fn orthogonal_transformation_adjoint() -> @kernel.Thm
+
+pub fn orthogonal_transformation_adjoint_eq() -> (@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)
+
+pub fn orthogonal_transformation_between_orthogonal_sets() -> @kernel.Thm
+
+pub fn orthogonal_transformation_compose() -> @kernel.Thm
+
+pub fn orthogonal_transformation_eq_adjoint() -> @kernel.Thm
+
+pub fn orthogonal_transformation_eq_adjoint_left() -> @kernel.Thm
+
+pub fn orthogonal_transformation_eq_adjoint_right() -> @kernel.Thm
+
+pub fn orthogonal_transformation_exists() -> @kernel.Thm
+
+pub fn orthogonal_transformation_exists_1() -> @kernel.Thm
+
+pub fn orthogonal_transformation_exists_gen() -> @kernel.Thm
+
+pub fn orthogonal_transformation_generated_by_reflections() -> @kernel.Thm
+
+pub fn orthogonal_transformation_i() -> @kernel.Thm
+
+pub fn orthogonal_transformation_id() -> @kernel.Thm
+
+pub fn orthogonal_transformation_injective() -> @kernel.Thm
+
+pub fn orthogonal_transformation_into_subspace() -> @kernel.Thm
+
+pub fn orthogonal_transformation_inverse() -> @kernel.Thm
+
+pub fn orthogonal_transformation_inverse_o() -> @kernel.Thm
+
+pub fn orthogonal_transformation_isometry() -> @kernel.Thm
+
+pub fn orthogonal_transformation_linear() -> @kernel.Thm
+
+pub fn orthogonal_transformation_lowdim_horizontal() -> @kernel.Thm
+
+pub fn orthogonal_transformation_matrix() -> @kernel.Thm
+
+pub fn orthogonal_transformation_neg() -> @kernel.Thm
+
+pub fn orthogonal_transformation_negation() -> @kernel.Thm
+
+pub fn orthogonal_transformation_onto_subspace() -> @kernel.Thm
+
+pub fn orthogonal_transformation_orthogonal_eigenvectors() -> @kernel.Thm
+
+pub fn orthogonal_transformation_reflect_along() -> @kernel.Thm
+
+pub fn orthogonal_transformation_reflect_induct() -> @kernel.Thm
+
+pub fn orthogonal_transformation_surjective() -> @kernel.Thm
+
+pub fn orthogonal_transformation_v1() -> @kernel.Thm
+
+pub fn orthogonality_preserving_eq_similarity() -> @kernel.Thm
+
+pub fn orthogonality_preserving_eq_similarity_alt() -> @kernel.Thm
+
+pub fn orthogonality_preserving_imp_scaling() -> @kernel.Thm
+
+pub fn positive_definite() -> @kernel.Thm
+
+pub fn positive_definite_1() -> @kernel.Thm
+
+pub fn positive_definite_1_gen() -> @kernel.Thm
+
+pub fn positive_definite_add() -> @kernel.Thm
+
+pub fn positive_definite_cmul() -> @kernel.Thm
+
+pub fn positive_definite_covariance() -> @kernel.Thm
+
+pub fn positive_definite_diagonal_matrix() -> @kernel.Thm
+
+pub fn positive_definite_diagonal_matrix_eq() -> @kernel.Thm
+
+pub fn positive_definite_id() -> @kernel.Thm
+
+pub fn positive_definite_imp_invertible() -> @kernel.Thm
+
+pub fn positive_definite_imp_positive_semidefinite() -> @kernel.Thm
+
+pub fn positive_definite_imp_symmetric() -> @kernel.Thm
+
+pub fn positive_definite_imp_symmetric_matrix() -> @kernel.Thm
+
+pub fn positive_definite_mat() -> @kernel.Thm
+
+pub fn positive_definite_positive_semidefinite() -> @kernel.Thm
+
+pub fn positive_definite_positive_semidefinite_add() -> @kernel.Thm
+
+pub fn positive_definite_similar() -> @kernel.Thm
+
+pub fn positive_definite_similar_eq() -> @kernel.Thm
+
+pub fn positive_definite_transp() -> @kernel.Thm
+
+pub fn positive_semidefinite() -> @kernel.Thm
+
+pub fn positive_semidefinite_1() -> @kernel.Thm
+
+pub fn positive_semidefinite_1_gen() -> @kernel.Thm
+
+pub fn positive_semidefinite_add() -> @kernel.Thm
+
+pub fn positive_semidefinite_antisym() -> @kernel.Thm
+
+pub fn positive_semidefinite_cmul() -> @kernel.Thm
+
+pub fn positive_semidefinite_covariance() -> @kernel.Thm
+
+pub fn positive_semidefinite_diagonal_matrix() -> @kernel.Thm
+
+pub fn positive_semidefinite_diagonal_matrix_eq() -> @kernel.Thm
+
+pub fn positive_semidefinite_imp_symmetric() -> @kernel.Thm
+
+pub fn positive_semidefinite_imp_symmetric_matrix() -> @kernel.Thm
+
+pub fn positive_semidefinite_mat() -> @kernel.Thm
+
+pub fn positive_semidefinite_positive_definite_add() -> @kernel.Thm
+
+pub fn positive_semidefinite_similar() -> @kernel.Thm
+
+pub fn positive_semidefinite_similar_eq() -> @kernel.Thm
+
+pub fn positive_semidefinite_submatrix_2() -> @kernel.Thm
+
+pub fn positive_semidefinite_transp() -> @kernel.Thm
+
+pub fn positive_semidefinite_zero_form() -> @kernel.Thm
+
+pub fn positive_semidefinite_zero_form_eq() -> @kernel.Thm
+
+pub fn product_1() -> @kernel.Thm
+
+pub fn product_2() -> @kernel.Thm
+
+pub fn product_3() -> @kernel.Thm
+
+pub fn product_4() -> @kernel.Thm
+
+pub fn product_permute() -> @kernel.Thm
+
+pub fn product_permute_numseg() -> @kernel.Thm
+
+pub fn rank_diagonal_matrix() -> @kernel.Thm
+
+pub fn rank_eq_full_det() -> @kernel.Thm
+
+pub fn real_mul_sum() -> @kernel.Thm
+
+pub fn real_mul_sum_numseg() -> @kernel.Thm
+
+pub fn reflect_along() -> @kernel.Thm
+
+pub fn reflect_along_0() -> @kernel.Thm
+
+pub fn reflect_along_1d() -> @kernel.Thm
+
+pub fn reflect_along_add() -> @kernel.Thm
+
+pub fn reflect_along_basis() -> @kernel.Thm
+
+pub fn reflect_along_basis_component() -> @kernel.Thm
+
+pub fn reflect_along_eq() -> @kernel.Thm
+
+pub fn reflect_along_eq_0() -> @kernel.Thm
+
+pub fn reflect_along_eq_self() -> @kernel.Thm
+
+pub fn reflect_along_galois() -> @kernel.Thm
+
+pub fn reflect_along_involution() -> @kernel.Thm
+
+pub fn reflect_along_linear_image() -> @kernel.Thm
+
+pub fn reflect_along_mul() -> @kernel.Thm
+
+pub fn reflect_along_neg() -> @kernel.Thm
+
+pub fn reflect_along_negation() -> @kernel.Thm
+
+pub fn reflect_along_refl() -> @kernel.Thm
+
+pub fn reflect_along_scale() -> @kernel.Thm
+
+pub fn reflect_along_surjective() -> @kernel.Thm
+
+pub fn reflect_along_switch() -> @kernel.Thm
+
+pub fn reflect_along_zero() -> @kernel.Thm
+
+pub fn reflect_basis_along_basis() -> @kernel.Thm
+
+pub fn rotation_exists() -> @kernel.Thm
+
+pub fn rotation_exists_1() -> @kernel.Thm
+
+pub fn rotation_lowdim_horizontal() -> @kernel.Thm
+
+pub fn rotation_matrix() -> @kernel.Thm
+
+pub fn rotation_matrix_1() -> @kernel.Thm
+
+pub fn rotation_matrix_2() -> @kernel.Thm
+
+pub fn rotation_matrix_exists_basis() -> @kernel.Thm
+
+pub fn rotation_rightward_line() -> @kernel.Thm
+
+pub fn rotoinversion_exists_gen() -> @kernel.Thm
+
+pub fn rotoinversion_matrix() -> @kernel.Thm
+
+pub fn rotoinversion_matrix_1() -> @kernel.Thm
+
+pub fn rotoinversion_matrix_reflect_along() -> @kernel.Thm
+
+pub fn scaling_linear() -> @kernel.Thm
+
+pub fn scaling_theorems(@kernel.Term) -> @kernel.Thm raise
+
+pub fn sqnorm_le_max_eigenvector_span() -> @kernel.Thm
+
+pub fn subset_halfspaces_imp_collinear() -> @kernel.Thm
+
+pub fn subset_hyperplanes() -> @kernel.Thm
+
+pub fn trace() -> @kernel.Thm
+
+pub fn trace_0() -> @kernel.Thm
+
+pub fn trace_add() -> @kernel.Thm
+
+pub fn trace_cmul() -> @kernel.Thm
+
+pub fn trace_covariance_cauchy_schwarz() -> @kernel.Thm
+
+pub fn trace_covariance_cauchy_schwarz_abs() -> @kernel.Thm
+
+pub fn trace_covariance_cauchy_schwarz_square() -> @kernel.Thm
+
+pub fn trace_covariance_eq_0() -> @kernel.Thm
+
+pub fn trace_covariance_pos_le() -> @kernel.Thm
+
+pub fn trace_covariance_pos_lt() -> @kernel.Thm
+
+pub fn trace_i() -> @kernel.Thm
+
+pub fn trace_le_mul_squares() -> @kernel.Thm
+
+pub fn trace_mul_cyclic() -> @kernel.Thm
+
+pub fn trace_mul_sym() -> @kernel.Thm
+
+pub fn trace_neg() -> @kernel.Thm
+
+pub fn trace_positive_definite() -> @kernel.Thm
+
+pub fn trace_positive_semidefinite() -> @kernel.Thm
+
+pub fn trace_similar() -> @kernel.Thm
+
+pub fn trace_sub() -> @kernel.Thm
+
+pub fn trace_transp() -> @kernel.Thm
+
+pub fn translation_invariants(@kernel.Term) -> @kernel.Thm raise
+
+pub fn transp_diagonal_matrix() -> @kernel.Thm
+
+pub fn usable_conclusion(@kernel.Term, @list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
