@@ -1,6 +1,7 @@
 #!/bin/sh
 # Run the OCaml -> MoonBit translator on an upstream HOL Light file.
 #   tools/ocaml_ref/translate.sh <command> <hol file>
+#   tools/ocaml_ref/translate.sh batch <plan file> <after command>
 # command: survey (report upstream names with no MoonBit declaration) or
 #          translate (write the MoonBit file named in tools/translator/main.ml).
 # The translator (plain OCaml) is loaded before pa_j; HOL Light is then
@@ -15,6 +16,7 @@ grep -v 'pa_j.cmo' boot.ml > _build/tboot.ml
 {
   cat _build/tboot.ml
   echo '#directory "+compiler-libs";;'
+  echo '#load "unix.cma";;'
   echo "#use \"$ROOT/tools/translator/mbti.ml\";;"
   for f in ir translator lower emit main; do
     echo "#use \"$ROOT/tools/translator/$f.ml\";;"
@@ -22,6 +24,11 @@ grep -v 'pa_j.cmo' boot.ml > _build/tboot.ml
   echo '#load "pa_j.cmo";;'
   echo 'let needs (_:string) = ();;'
   echo 'let float_sqrt = sqrt;; let float_fabs = abs_float;;'
-  echo "let _ = Main.$1 ~hol:\"$H\" ~root:\"$ROOT\" \"$2\";;"
+  if [ "$1" = batch ]; then
+    # $2: a file with the plan: `[ ([pre...], target); ... ]` (batch.py)
+    echo "let _ = Main.translate_batch ~hol:\"$H\" ~root:\"$ROOT\" ~after:\"$3\" ($(cat "$2"));;"
+  else
+    echo "let _ = Main.$1 ~hol:\"$H\" ~root:\"$ROOT\" \"$2\";;"
+  fi
 } > _build/tscript.ml
 _build/holtop -w -a -alert -all -I "$H" -I _build _build/tscript.ml 2>&1 | grep -v "HOL-Light syntax in effect"
