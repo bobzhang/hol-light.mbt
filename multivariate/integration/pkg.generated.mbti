@@ -1,0 +1,1855 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/integration"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn absolutely_continuous_comparison() -> @kernel.Thm
+
+pub fn absolutely_continuous_extends_to_closure() -> @kernel.Thm
+
+pub fn absolutely_continuous_isometric() -> @kernel.Thm
+
+pub fn absolutely_continuous_isometric_compose() -> @kernel.Thm
+
+pub fn absolutely_continuous_lipschitz_compose() -> @kernel.Thm
+
+pub fn absolutely_continuous_on() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_add() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_bilinear() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_closure() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_closure_eq() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_cmul() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_cmul_eq() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_combine() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_componentwise() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_compose_linear() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_const() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_division() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_empty() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_eq() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_id() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_imp_continuous() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_imp_has_bounded_variation_on() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_imp_uniformly_continuous() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_interior() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_interior_eq() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_lift_abs() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_lift_component() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_max() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_min() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_mul() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_neg() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_norm() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_null() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_sing() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_sub() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_subset() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_translation() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_vmul() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_vmul_eq() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_vsum() -> @kernel.Thm
+
+pub fn absolutely_integrable_0() -> @kernel.Thm
+
+pub fn absolutely_integrable_abs() -> @kernel.Thm
+
+pub fn absolutely_integrable_abs_1() -> @kernel.Thm
+
+pub fn absolutely_integrable_abs_eq() -> @kernel.Thm
+
+pub fn absolutely_integrable_absolutely_integrable_bound() -> @kernel.Thm
+
+pub fn absolutely_integrable_absolutely_integrable_component_lbound() -> @kernel.Thm
+
+pub fn absolutely_integrable_absolutely_integrable_component_ubound() -> @kernel.Thm
+
+pub fn absolutely_integrable_absolutely_integrable_drop_lbound() -> @kernel.Thm
+
+pub fn absolutely_integrable_absolutely_integrable_drop_ubound() -> @kernel.Thm
+
+pub fn absolutely_integrable_add() -> @kernel.Thm
+
+pub fn absolutely_integrable_affinity() -> @kernel.Thm
+
+pub fn absolutely_integrable_bounded_setvariation() -> @kernel.Thm
+
+pub fn absolutely_integrable_bounded_setvariation_eq() -> @kernel.Thm
+
+pub fn absolutely_integrable_bounded_setvariation_univ_eq() -> @kernel.Thm
+
+pub fn absolutely_integrable_cmul() -> @kernel.Thm
+
+pub fn absolutely_integrable_cmul_eq() -> @kernel.Thm
+
+pub fn absolutely_integrable_combine() -> @kernel.Thm
+
+pub fn absolutely_integrable_componentwise() -> @kernel.Thm
+
+pub fn absolutely_integrable_const() -> @kernel.Thm
+
+pub fn absolutely_integrable_continuous() -> @kernel.Thm
+
+pub fn absolutely_integrable_eq() -> @kernel.Thm
+
+pub fn absolutely_integrable_eq_integrable_pos() -> @kernel.Thm
+
+pub fn absolutely_integrable_imp_integrable() -> @kernel.Thm
+
+pub fn absolutely_integrable_imp_lift_norm_integrable() -> @kernel.Thm
+
+pub fn absolutely_integrable_inf_1() -> @kernel.Thm
+
+pub fn absolutely_integrable_integrable_bound() -> @kernel.Thm
+
+pub fn absolutely_integrable_le() -> @kernel.Thm
+
+pub fn absolutely_integrable_lift_component() -> @kernel.Thm
+
+pub fn absolutely_integrable_linear() -> @kernel.Thm
+
+pub fn absolutely_integrable_max() -> @kernel.Thm
+
+pub fn absolutely_integrable_max_1() -> @kernel.Thm
+
+pub fn absolutely_integrable_min() -> @kernel.Thm
+
+pub fn absolutely_integrable_min_1() -> @kernel.Thm
+
+pub fn absolutely_integrable_neg() -> @kernel.Thm
+
+pub fn absolutely_integrable_neg_eq() -> @kernel.Thm
+
+pub fn absolutely_integrable_norm() -> @kernel.Thm
+
+pub fn absolutely_integrable_on() -> @kernel.Thm
+
+pub fn absolutely_integrable_on_empty() -> @kernel.Thm
+
+pub fn absolutely_integrable_on_negligible() -> @kernel.Thm
+
+pub fn absolutely_integrable_on_null() -> @kernel.Thm
+
+pub fn absolutely_integrable_on_subinterval() -> @kernel.Thm
+
+pub fn absolutely_integrable_pastecart_sym() -> @kernel.Thm
+
+pub fn absolutely_integrable_pastecart_sym_univ() -> @kernel.Thm
+
+pub fn absolutely_integrable_reflect() -> @kernel.Thm
+
+pub fn absolutely_integrable_reflect_gen() -> @kernel.Thm
+
+pub fn absolutely_integrable_restrict_inter() -> @kernel.Thm
+
+pub fn absolutely_integrable_restrict_univ() -> @kernel.Thm
+
+pub fn absolutely_integrable_set_variation() -> @kernel.Thm
+
+pub fn absolutely_integrable_spike() -> @kernel.Thm
+
+pub fn absolutely_integrable_spike_eq() -> @kernel.Thm
+
+pub fn absolutely_integrable_spike_set() -> @kernel.Thm
+
+pub fn absolutely_integrable_spike_set_eq() -> @kernel.Thm
+
+pub fn absolutely_integrable_sub() -> @kernel.Thm
+
+pub fn absolutely_integrable_sup_1() -> @kernel.Thm
+
+pub fn absolutely_integrable_translation() -> @kernel.Thm
+
+pub fn absolutely_integrable_twizzle_eq() -> @kernel.Thm
+
+pub fn absolutely_integrable_vsum() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_comparison() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_0() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_add() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_alt() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_cmul() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_componentwise() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_compose_linear() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_division() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_eq() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_imp_has_bounded_setvariation_on() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_lift_abs() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_mul() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_neg() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_norm() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_null() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_sub() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_subset() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_on_vsum() -> @kernel.Thm
+
+pub fn additive_content_division() -> @kernel.Thm
+
+pub fn additive_content_tagged_division() -> @kernel.Thm
+
+pub fn additive_division_1() -> @kernel.Thm
+
+pub fn additive_tagged_division_1() -> @kernel.Thm
+
+pub fn antiderivative_continuous() -> @kernel.Thm
+
+pub fn antiderivative_integral_continuous() -> @kernel.Thm
+
+pub fn approximable_on_division() -> @kernel.Thm
+
+pub fn arc_length_minimal() -> @kernel.Thm
+
+pub fn arc_length_reparametrization() -> @kernel.Thm
+
+pub fn arc_length_unique() -> @kernel.Thm
+
+pub fn beppo_levi_decreasing() -> @kernel.Thm
+
+pub fn beppo_levi_increasing() -> @kernel.Thm
+
+pub fn beppo_levi_monotone_convergence_decreasing() -> @kernel.Thm
+
+pub fn beppo_levi_monotone_convergence_decreasing_ae() -> @kernel.Thm
+
+pub fn beppo_levi_monotone_convergence_increasing() -> @kernel.Thm
+
+pub fn beppo_levi_monotone_convergence_increasing_ae() -> @kernel.Thm
+
+pub fn bounded_equiintegral_over_thin_tagged_partial_division() -> @kernel.Thm
+
+pub fn bounded_integrals_over_subintervals() -> @kernel.Thm
+
+pub fn bounded_rectifiable_path_image() -> @kernel.Thm
+
+pub fn bounded_set_variation_from_pastecart() -> @kernel.Thm
+
+pub fn bounded_set_variation_on_pastecart() -> @kernel.Thm
+
+pub fn bounded_setvariation_absolutely_integrable() -> @kernel.Thm
+
+pub fn bounded_setvariation_absolutely_integrable_interval() -> @kernel.Thm
+
+pub fn bounded_variation_from_pastecart() -> @kernel.Thm
+
+pub fn bounded_vector_variation_on_pastecart() -> @kernel.Thm
+
+pub fn content() -> @kernel.Thm
+
+pub fn content_0_subset() -> @kernel.Thm
+
+pub fn content_0_subset_gen() -> @kernel.Thm
+
+pub fn content_1() -> @kernel.Thm
+
+pub fn content_closed_interval() -> @kernel.Thm
+
+pub fn content_closed_interval_cases() -> @kernel.Thm
+
+pub fn content_doublesplit() -> @kernel.Thm
+
+pub fn content_empty() -> @kernel.Thm
+
+pub fn content_eq_0() -> @kernel.Thm
+
+pub fn content_eq_0_1() -> @kernel.Thm
+
+pub fn content_eq_0_gen() -> @kernel.Thm
+
+pub fn content_eq_0_interior() -> @kernel.Thm
+
+pub fn content_image_affinity_interval() -> @kernel.Thm
+
+pub fn content_image_stretch_interval() -> @kernel.Thm
+
+pub fn content_lt_nz() -> @kernel.Thm
+
+pub fn content_pastecart() -> @kernel.Thm
+
+pub fn content_pos_le() -> @kernel.Thm
+
+pub fn content_pos_lt() -> @kernel.Thm
+
+pub fn content_pos_lt_1() -> @kernel.Thm
+
+pub fn content_pos_lt_eq() -> @kernel.Thm
+
+pub fn content_split() -> @kernel.Thm
+
+pub fn content_subset() -> @kernel.Thm
+
+pub fn content_unit() -> @kernel.Thm
+
+pub fn content_unit_1() -> @kernel.Thm
+
+pub fn continuous_bv_imp_uniformly_continuous() -> @kernel.Thm
+
+pub fn continuous_on_path_length_subpath_left() -> @kernel.Thm
+
+pub fn continuous_on_path_length_subpath_right() -> @kernel.Thm
+
+pub fn continuous_on_vector_variation() -> @kernel.Thm
+
+pub fn convex_has_bounded_variation() -> @kernel.Thm
+
+pub fn convex_has_bounded_variation_eq() -> @kernel.Thm
+
+pub fn convex_on_countable_nondifferentiable() -> @kernel.Thm
+
+pub fn convex_on_directional_derivative_functions() -> @kernel.Thm
+
+pub fn convex_on_directional_derivatives() -> @kernel.Thm
+
+pub fn convex_on_indefinite_integral_increasing() -> @kernel.Thm
+
+pub fn convex_on_is_indefinite_integral() -> @kernel.Thm
+
+pub fn convex_on_left_differentiable() -> @kernel.Thm
+
+pub fn convex_on_right_differentiable() -> @kernel.Thm
+
+pub fn decreasing_bounded_variation() -> @kernel.Thm
+
+pub fn decreasing_bounded_variation_gen() -> @kernel.Thm
+
+pub fn decreasing_countable_discontinuities() -> @kernel.Thm
+
+pub fn decreasing_imp_baire1() -> @kernel.Thm
+
+pub fn decreasing_left_limit_1() -> @kernel.Thm
+
+pub fn decreasing_left_limit_1_gen() -> @kernel.Thm
+
+pub fn decreasing_right_limit_1() -> @kernel.Thm
+
+pub fn decreasing_right_limit_1_gen() -> @kernel.Thm
+
+pub fn decreasing_vector_variation() -> @kernel.Thm
+
+pub fn dist_endpoints_le_path_length() -> @kernel.Thm
+
+pub fn dist_points_le_path_length() -> @kernel.Thm
+
+pub fn division_1_sort() -> @kernel.Thm
+
+pub fn division_common_point_bound() -> @kernel.Thm
+
+pub fn division_contains() -> @kernel.Thm
+
+pub fn division_disjoint_union() -> @kernel.Thm
+
+pub fn division_doublesplit() -> @kernel.Thm
+
+pub fn division_inter() -> @kernel.Thm
+
+pub fn division_inter_1() -> @kernel.Thm
+
+pub fn division_of() -> @kernel.Thm
+
+pub fn division_of_affinity() -> @kernel.Thm
+
+pub fn division_of_closed() -> @kernel.Thm
+
+pub fn division_of_content_0() -> @kernel.Thm
+
+pub fn division_of_finite() -> @kernel.Thm
+
+pub fn division_of_nontrivial() -> @kernel.Thm
+
+pub fn division_of_reflect() -> @kernel.Thm
+
+pub fn division_of_self() -> @kernel.Thm
+
+pub fn division_of_sing() -> @kernel.Thm
+
+pub fn division_of_subset() -> @kernel.Thm
+
+pub fn division_of_tagged_division() -> @kernel.Thm
+
+pub fn division_of_translation() -> @kernel.Thm
+
+pub fn division_of_trivial() -> @kernel.Thm
+
+pub fn division_of_union_self() -> @kernel.Thm
+
+pub fn division_of_unions() -> @kernel.Thm
+
+pub fn division_of_v1() -> @kernel.Thm
+
+pub fn division_points() -> @kernel.Thm
+
+pub fn division_points_finite() -> @kernel.Thm
+
+pub fn division_points_psubset() -> @kernel.Thm
+
+pub fn division_points_subset() -> @kernel.Thm
+
+pub fn division_split() -> @kernel.Thm
+
+pub fn division_split_left_inj() -> @kernel.Thm
+
+pub fn division_split_right_inj() -> @kernel.Thm
+
+pub fn division_union_intervals_exists() -> @kernel.Thm
+
+pub fn dominated_convergence() -> @kernel.Thm
+
+pub fn dominated_convergence_absolutely_integrable() -> @kernel.Thm
+
+pub fn dominated_convergence_ae() -> @kernel.Thm
+
+pub fn dominated_convergence_integrable() -> @kernel.Thm
+
+pub fn dsum_bound() -> @kernel.Thm
+
+pub fn elementary_bounded() -> @kernel.Thm
+
+pub fn elementary_compact() -> @kernel.Thm
+
+pub fn elementary_empty() -> @kernel.Thm
+
+pub fn elementary_inter() -> @kernel.Thm
+
+pub fn elementary_inters() -> @kernel.Thm
+
+pub fn elementary_interval() -> @kernel.Thm
+
+pub fn elementary_subset_interval() -> @kernel.Thm
+
+pub fn elementary_union() -> @kernel.Thm
+
+pub fn elementary_union_interval() -> @kernel.Thm
+
+pub fn elementary_union_interval_strong() -> @kernel.Thm
+
+pub fn elementary_unions_intervals() -> @kernel.Thm
+
+pub fn empty_division_of() -> @kernel.Thm
+
+pub fn equiintegrable_add() -> @kernel.Thm
+
+pub fn equiintegrable_closed_interval_restrictions() -> @kernel.Thm
+
+pub fn equiintegrable_cmul() -> @kernel.Thm
+
+pub fn equiintegrable_division() -> @kernel.Thm
+
+pub fn equiintegrable_eq() -> @kernel.Thm
+
+pub fn equiintegrable_halfspace_restrictions_ge() -> @kernel.Thm
+
+pub fn equiintegrable_halfspace_restrictions_gt() -> @kernel.Thm
+
+pub fn equiintegrable_halfspace_restrictions_le() -> @kernel.Thm
+
+pub fn equiintegrable_halfspace_restrictions_lt() -> @kernel.Thm
+
+pub fn equiintegrable_limit() -> @kernel.Thm
+
+pub fn equiintegrable_neg() -> @kernel.Thm
+
+pub fn equiintegrable_on() -> @kernel.Thm
+
+pub fn equiintegrable_on_null() -> @kernel.Thm
+
+pub fn equiintegrable_on_sing() -> @kernel.Thm
+
+pub fn equiintegrable_on_split() -> @kernel.Thm
+
+pub fn equiintegrable_open_interval_restrictions() -> @kernel.Thm
+
+pub fn equiintegrable_reflect() -> @kernel.Thm
+
+pub fn equiintegrable_sub() -> @kernel.Thm
+
+pub fn equiintegrable_subset() -> @kernel.Thm
+
+pub fn equiintegrable_sum() -> @kernel.Thm
+
+pub fn equiintegrable_uniform_limit() -> @kernel.Thm
+
+pub fn equiintegrable_union() -> @kernel.Thm
+
+pub fn exists_option() -> @kernel.Thm
+
+pub fn factor_continuous_through_variation() -> @kernel.Thm
+
+pub fn factor_through_variation() -> @kernel.Thm
+
+pub fn fatou() -> @kernel.Thm
+
+pub fn fatou_strong() -> @kernel.Thm
+
+pub fn fine() -> @kernel.Thm
+
+pub fn fine_division_exists() -> @kernel.Thm
+
+pub fn fine_inter() -> @kernel.Thm
+
+pub fn fine_inters() -> @kernel.Thm
+
+pub fn fine_subset() -> @kernel.Thm
+
+pub fn fine_union() -> @kernel.Thm
+
+pub fn fine_unions() -> @kernel.Thm
+
+pub fn forall_in_division() -> @kernel.Thm
+
+pub fn forall_in_division_nonempty() -> @kernel.Thm
+
+pub fn forall_option() -> @kernel.Thm
+
+pub fn fundamental_theorem_of_calculus() -> @kernel.Thm
+
+pub fn fundamental_theorem_of_calculus_bartle() -> @kernel.Thm
+
+pub fn fundamental_theorem_of_calculus_interior() -> @kernel.Thm
+
+pub fn fundamental_theorem_of_calculus_interior_strong() -> @kernel.Thm
+
+pub fn fundamental_theorem_of_calculus_strong() -> @kernel.Thm
+
+pub fn gauge() -> @kernel.Thm
+
+pub fn gauge_ball() -> @kernel.Thm
+
+pub fn gauge_ball_dependent() -> @kernel.Thm
+
+pub fn gauge_existence_lemma() -> @kernel.Thm
+
+pub fn gauge_inter() -> @kernel.Thm
+
+pub fn gauge_inters() -> @kernel.Thm
+
+pub fn gauge_modify() -> @kernel.Thm
+
+pub fn gauge_trivial() -> @kernel.Thm
+
+pub fn has_absolute_integral() -> @kernel.Thm
+
+pub fn has_bounded_set_variation() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_comparison() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_0() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_add() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_cmul() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_componentwise() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_compose_linear() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_division() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_elementary() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_eq() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_imp_bounded_on_subintervals() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_interval() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_lift_abs() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_mul() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_neg() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_norm() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_null() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_pastecart() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_sub() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_subset() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_univ() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_v1() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_on_vsum() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_reflect2_eq() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_translation() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_translation2_eq() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_works() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_works_on_elementary() -> @kernel.Thm
+
+pub fn has_bounded_setvariation_works_on_interval() -> @kernel.Thm
+
+pub fn has_bounded_variation_absolutely_integrable_derivative() -> @kernel.Thm
+
+pub fn has_bounded_variation_affinity2_eq() -> @kernel.Thm
+
+pub fn has_bounded_variation_affinity_eq() -> @kernel.Thm
+
+pub fn has_bounded_variation_comparison() -> @kernel.Thm
+
+pub fn has_bounded_variation_compose_decreasing() -> @kernel.Thm
+
+pub fn has_bounded_variation_compose_homeomorphism() -> @kernel.Thm
+
+pub fn has_bounded_variation_compose_increasing() -> @kernel.Thm
+
+pub fn has_bounded_variation_compose_increasing_gen() -> @kernel.Thm
+
+pub fn has_bounded_variation_compose_injective() -> @kernel.Thm
+
+pub fn has_bounded_variation_countable_discontinuities() -> @kernel.Thm
+
+pub fn has_bounded_variation_darboux() -> @kernel.Thm
+
+pub fn has_bounded_variation_darboux_gen() -> @kernel.Thm
+
+pub fn has_bounded_variation_darboux_strict() -> @kernel.Thm
+
+pub fn has_bounded_variation_darboux_strong() -> @kernel.Thm
+
+pub fn has_bounded_variation_imp_baire1() -> @kernel.Thm
+
+pub fn has_bounded_variation_integrable_norm_derivative() -> @kernel.Thm
+
+pub fn has_bounded_variation_isometric() -> @kernel.Thm
+
+pub fn has_bounded_variation_isometric_compose() -> @kernel.Thm
+
+pub fn has_bounded_variation_left_limit_gen() -> @kernel.Thm
+
+pub fn has_bounded_variation_lipschitz_compose() -> @kernel.Thm
+
+pub fn has_bounded_variation_nontrivial() -> @kernel.Thm
+
+pub fn has_bounded_variation_on() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_add() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_bilinear() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_closure() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_closure_eq() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_cmul() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_cmul_eq() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_combine() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_combine_gen() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_componentwise() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_compose_linear() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_const() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_darboux_imp_continuous() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_division() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_empty() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_eq() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_id() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_imp_bounded() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_imp_bounded_on_interval() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_imp_bounded_on_subintervals() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_indefinite_integral_left() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_indefinite_integral_right() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_interior() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_interior_eq() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_interval() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_lift_abs() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_linear_image() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_max() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_min() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_mul() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_neg() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_norm() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_null() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_pastecart() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_reflect() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_reflect_interval() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_sing() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_split() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_sub() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_subset() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_translation() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_union() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_vector_variation() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_vmul() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_vmul_eq() -> @kernel.Thm
+
+pub fn has_bounded_variation_on_vsum() -> @kernel.Thm
+
+pub fn has_bounded_variation_reflect2_eq() -> @kernel.Thm
+
+pub fn has_bounded_variation_reflect_eq() -> @kernel.Thm
+
+pub fn has_bounded_variation_reflect_eq_interval() -> @kernel.Thm
+
+pub fn has_bounded_variation_right_limit_gen() -> @kernel.Thm
+
+pub fn has_bounded_variation_translation() -> @kernel.Thm
+
+pub fn has_bounded_variation_translation2_eq() -> @kernel.Thm
+
+pub fn has_bounded_variation_translation_eq() -> @kernel.Thm
+
+pub fn has_bounded_variation_translation_eq_interval() -> @kernel.Thm
+
+pub fn has_bounded_variation_works() -> @kernel.Thm
+
+pub fn has_bounded_variation_works_on_elementary() -> @kernel.Thm
+
+pub fn has_bounded_variation_works_on_interval() -> @kernel.Thm
+
+pub fn has_bounded_vector_derivative_imp_has_bounded_variation_on() -> @kernel.Thm
+
+pub fn has_bounded_vector_variation() -> @kernel.Thm
+
+pub fn has_bounded_vector_variation_left_limit() -> @kernel.Thm
+
+pub fn has_bounded_vector_variation_on_interval() -> @kernel.Thm
+
+pub fn has_bounded_vector_variation_on_interval_gen() -> @kernel.Thm
+
+pub fn has_bounded_vector_variation_on_subintervals() -> @kernel.Thm
+
+pub fn has_bounded_vector_variation_right_limit() -> @kernel.Thm
+
+pub fn has_bounded_vector_variation_uniform_lim() -> @kernel.Thm
+
+pub fn has_derivative_zero_unique_strong_connected() -> @kernel.Thm
+
+pub fn has_derivative_zero_unique_strong_convex() -> @kernel.Thm
+
+pub fn has_derivative_zero_unique_strong_interval() -> @kernel.Thm
+
+pub fn has_integral() -> @kernel.Thm
+
+pub fn has_integral_0() -> @kernel.Thm
+
+pub fn has_integral_0_eq() -> @kernel.Thm
+
+pub fn has_integral_add() -> @kernel.Thm
+
+pub fn has_integral_affinity() -> @kernel.Thm
+
+pub fn has_integral_alt() -> @kernel.Thm
+
+pub fn has_integral_alt_v1() -> @kernel.Thm
+
+pub fn has_integral_bound() -> @kernel.Thm
+
+pub fn has_integral_closure() -> @kernel.Thm
+
+pub fn has_integral_cmul() -> @kernel.Thm
+
+pub fn has_integral_combine() -> @kernel.Thm
+
+pub fn has_integral_combine_division() -> @kernel.Thm
+
+pub fn has_integral_combine_division_topdown() -> @kernel.Thm
+
+pub fn has_integral_combine_tagged_division() -> @kernel.Thm
+
+pub fn has_integral_combine_tagged_division_topdown() -> @kernel.Thm
+
+pub fn has_integral_compact_interval() -> @kernel.Thm
+
+pub fn has_integral_component_lbound() -> @kernel.Thm
+
+pub fn has_integral_component_le() -> @kernel.Thm
+
+pub fn has_integral_component_le_ae() -> @kernel.Thm
+
+pub fn has_integral_component_neg() -> @kernel.Thm
+
+pub fn has_integral_component_pos() -> @kernel.Thm
+
+pub fn has_integral_component_ubound() -> @kernel.Thm
+
+pub fn has_integral_componentwise() -> @kernel.Thm
+
+pub fn has_integral_const() -> @kernel.Thm
+
+pub fn has_integral_def() -> @kernel.Thm
+
+pub fn has_integral_diff() -> @kernel.Thm
+
+pub fn has_integral_drop_le() -> @kernel.Thm
+
+pub fn has_integral_drop_le_ae() -> @kernel.Thm
+
+pub fn has_integral_drop_neg() -> @kernel.Thm
+
+pub fn has_integral_drop_pos() -> @kernel.Thm
+
+pub fn has_integral_drop_pos_ae() -> @kernel.Thm
+
+pub fn has_integral_empty() -> @kernel.Thm
+
+pub fn has_integral_empty_eq() -> @kernel.Thm
+
+pub fn has_integral_eq() -> @kernel.Thm
+
+pub fn has_integral_eq_eq() -> @kernel.Thm
+
+pub fn has_integral_factor_content() -> @kernel.Thm
+
+pub fn has_integral_integrable() -> @kernel.Thm
+
+pub fn has_integral_integrable_integral() -> @kernel.Thm
+
+pub fn has_integral_integral() -> @kernel.Thm
+
+pub fn has_integral_interior() -> @kernel.Thm
+
+pub fn has_integral_is_0() -> @kernel.Thm
+
+pub fn has_integral_lim_at_posinfinity() -> @kernel.Thm
+
+pub fn has_integral_lim_at_posinfinity_gen() -> @kernel.Thm
+
+pub fn has_integral_lim_sequentially() -> @kernel.Thm
+
+pub fn has_integral_linear() -> @kernel.Thm
+
+pub fn has_integral_neg() -> @kernel.Thm
+
+pub fn has_integral_negligible() -> @kernel.Thm
+
+pub fn has_integral_negligible_eq() -> @kernel.Thm
+
+pub fn has_integral_norm_bound_integral_component() -> @kernel.Thm
+
+pub fn has_integral_null() -> @kernel.Thm
+
+pub fn has_integral_null_eq() -> @kernel.Thm
+
+pub fn has_integral_on_negligible() -> @kernel.Thm
+
+pub fn has_integral_on_superset() -> @kernel.Thm
+
+pub fn has_integral_pastecart_sym() -> @kernel.Thm
+
+pub fn has_integral_pastecart_sym_alt() -> @kernel.Thm
+
+pub fn has_integral_pastecart_sym_univ() -> @kernel.Thm
+
+pub fn has_integral_refl() -> @kernel.Thm
+
+pub fn has_integral_reflect() -> @kernel.Thm
+
+pub fn has_integral_reflect_gen() -> @kernel.Thm
+
+pub fn has_integral_reflect_lemma() -> @kernel.Thm
+
+pub fn has_integral_restrict() -> @kernel.Thm
+
+pub fn has_integral_restrict_closed_subinterval() -> @kernel.Thm
+
+pub fn has_integral_restrict_closed_subintervals_eq() -> @kernel.Thm
+
+pub fn has_integral_restrict_inter() -> @kernel.Thm
+
+pub fn has_integral_restrict_open_subinterval() -> @kernel.Thm
+
+pub fn has_integral_restrict_univ() -> @kernel.Thm
+
+pub fn has_integral_separate_sides() -> @kernel.Thm
+
+pub fn has_integral_spike() -> @kernel.Thm
+
+pub fn has_integral_spike_eq() -> @kernel.Thm
+
+pub fn has_integral_spike_finite() -> @kernel.Thm
+
+pub fn has_integral_spike_finite_eq() -> @kernel.Thm
+
+pub fn has_integral_spike_interior() -> @kernel.Thm
+
+pub fn has_integral_spike_interior_eq() -> @kernel.Thm
+
+pub fn has_integral_spike_set() -> @kernel.Thm
+
+pub fn has_integral_spike_set_eq() -> @kernel.Thm
+
+pub fn has_integral_split() -> @kernel.Thm
+
+pub fn has_integral_straddle_null() -> @kernel.Thm
+
+pub fn has_integral_stretch() -> @kernel.Thm
+
+pub fn has_integral_sub() -> @kernel.Thm
+
+pub fn has_integral_subset_component_le() -> @kernel.Thm
+
+pub fn has_integral_subset_drop_le() -> @kernel.Thm
+
+pub fn has_integral_substitution_strong() -> @kernel.Thm
+
+pub fn has_integral_translation() -> @kernel.Thm
+
+pub fn has_integral_twiddle() -> @kernel.Thm
+
+pub fn has_integral_twiddle_gen() -> @kernel.Thm
+
+pub fn has_integral_twizzle() -> @kernel.Thm
+
+pub fn has_integral_twizzle_eq() -> @kernel.Thm
+
+pub fn has_integral_twizzle_interval() -> @kernel.Thm
+
+pub fn has_integral_union() -> @kernel.Thm
+
+pub fn has_integral_unions() -> @kernel.Thm
+
+pub fn has_integral_unions_image() -> @kernel.Thm
+
+pub fn has_integral_unique() -> @kernel.Thm
+
+pub fn has_integral_v1() -> @kernel.Thm
+
+pub fn has_integral_vsum() -> @kernel.Thm
+
+pub fn helly_selection_increasing() -> @kernel.Thm
+
+pub fn helly_selection_theorem() -> @kernel.Thm
+
+pub fn henstock_lemma() -> @kernel.Thm
+
+pub fn henstock_lemma_part1() -> @kernel.Thm
+
+pub fn henstock_lemma_part2() -> @kernel.Thm
+
+pub fn increasing_bounded_variation() -> @kernel.Thm
+
+pub fn increasing_bounded_variation_gen() -> @kernel.Thm
+
+pub fn increasing_countable_discontinuities() -> @kernel.Thm
+
+pub fn increasing_imp_baire1() -> @kernel.Thm
+
+pub fn increasing_left_limit_1() -> @kernel.Thm
+
+pub fn increasing_left_limit_1_gen() -> @kernel.Thm
+
+pub fn increasing_right_limit_1() -> @kernel.Thm
+
+pub fn increasing_right_limit_1_gen() -> @kernel.Thm
+
+pub fn increasing_vector_variation() -> @kernel.Thm
+
+pub fn indefinite_integral_continuous() -> @kernel.Thm
+
+pub fn indefinite_integral_continuous_left() -> @kernel.Thm
+
+pub fn indefinite_integral_continuous_right() -> @kernel.Thm
+
+pub fn indefinite_integral_uniformly_continuous() -> @kernel.Thm
+
+pub fn indefinite_integral_uniformly_continuous_explicit() -> @kernel.Thm
+
+pub fn integrable_0() -> @kernel.Thm
+
+pub fn integrable_add() -> @kernel.Thm
+
+pub fn integrable_affinity() -> @kernel.Thm
+
+pub fn integrable_alt() -> @kernel.Thm
+
+pub fn integrable_alt_subset() -> @kernel.Thm
+
+pub fn integrable_bounded_variation() -> @kernel.Thm
+
+pub fn integrable_bounded_variation_bilinear_lmul() -> @kernel.Thm
+
+pub fn integrable_bounded_variation_bilinear_rmul() -> @kernel.Thm
+
+pub fn integrable_bounded_variation_product() -> @kernel.Thm
+
+pub fn integrable_bounded_variation_product_alt() -> @kernel.Thm
+
+pub fn integrable_by_parts() -> @kernel.Thm
+
+pub fn integrable_by_parts_eq() -> @kernel.Thm
+
+pub fn integrable_cases() -> @kernel.Thm
+
+pub fn integrable_cauchy() -> @kernel.Thm
+
+pub fn integrable_cmul() -> @kernel.Thm
+
+pub fn integrable_cmul_eq() -> @kernel.Thm
+
+pub fn integrable_combine() -> @kernel.Thm
+
+pub fn integrable_combine_division() -> @kernel.Thm
+
+pub fn integrable_componentwise() -> @kernel.Thm
+
+pub fn integrable_const() -> @kernel.Thm
+
+pub fn integrable_continuous() -> @kernel.Thm
+
+pub fn integrable_decreasing() -> @kernel.Thm
+
+pub fn integrable_decreasing_1() -> @kernel.Thm
+
+pub fn integrable_decreasing_product() -> @kernel.Thm
+
+pub fn integrable_decreasing_product_univ() -> @kernel.Thm
+
+pub fn integrable_diff() -> @kernel.Thm
+
+pub fn integrable_eq() -> @kernel.Thm
+
+pub fn integrable_increasing() -> @kernel.Thm
+
+pub fn integrable_increasing_1() -> @kernel.Thm
+
+pub fn integrable_increasing_product() -> @kernel.Thm
+
+pub fn integrable_increasing_product_univ() -> @kernel.Thm
+
+pub fn integrable_integral() -> @kernel.Thm
+
+pub fn integrable_lift_component() -> @kernel.Thm
+
+pub fn integrable_linear() -> @kernel.Thm
+
+pub fn integrable_min_const_1() -> @kernel.Thm
+
+pub fn integrable_neg() -> @kernel.Thm
+
+pub fn integrable_neg_eq() -> @kernel.Thm
+
+pub fn integrable_on() -> @kernel.Thm
+
+pub fn integrable_on_all_intervals_integrable_bound() -> @kernel.Thm
+
+pub fn integrable_on_empty() -> @kernel.Thm
+
+pub fn integrable_on_little_subintervals() -> @kernel.Thm
+
+pub fn integrable_on_negligible() -> @kernel.Thm
+
+pub fn integrable_on_null() -> @kernel.Thm
+
+pub fn integrable_on_refl() -> @kernel.Thm
+
+pub fn integrable_on_subdivision() -> @kernel.Thm
+
+pub fn integrable_on_subinterval() -> @kernel.Thm
+
+pub fn integrable_on_subinterval_gen() -> @kernel.Thm
+
+pub fn integrable_on_subset() -> @kernel.Thm
+
+pub fn integrable_on_superset() -> @kernel.Thm
+
+pub fn integrable_pastecart_sym() -> @kernel.Thm
+
+pub fn integrable_pastecart_sym_univ() -> @kernel.Thm
+
+pub fn integrable_reflect() -> @kernel.Thm
+
+pub fn integrable_reflect_gen() -> @kernel.Thm
+
+pub fn integrable_restrict() -> @kernel.Thm
+
+pub fn integrable_restrict_inter() -> @kernel.Thm
+
+pub fn integrable_restrict_univ() -> @kernel.Thm
+
+pub fn integrable_spike() -> @kernel.Thm
+
+pub fn integrable_spike_eq() -> @kernel.Thm
+
+pub fn integrable_spike_finite() -> @kernel.Thm
+
+pub fn integrable_spike_interior() -> @kernel.Thm
+
+pub fn integrable_spike_set() -> @kernel.Thm
+
+pub fn integrable_spike_set_eq() -> @kernel.Thm
+
+pub fn integrable_split() -> @kernel.Thm
+
+pub fn integrable_straddle() -> @kernel.Thm
+
+pub fn integrable_straddle_interval() -> @kernel.Thm
+
+pub fn integrable_stretch() -> @kernel.Thm
+
+pub fn integrable_sub() -> @kernel.Thm
+
+pub fn integrable_subinterval() -> @kernel.Thm
+
+pub fn integrable_translation() -> @kernel.Thm
+
+pub fn integrable_twizzle_eq() -> @kernel.Thm
+
+pub fn integrable_uniform_limit() -> @kernel.Thm
+
+pub fn integrable_union() -> @kernel.Thm
+
+pub fn integrable_union_eq() -> @kernel.Thm
+
+pub fn integrable_unions() -> @kernel.Thm
+
+pub fn integrable_unions_image() -> @kernel.Thm
+
+pub fn integrable_vsum() -> @kernel.Thm
+
+pub fn integral() -> @kernel.Thm
+
+pub fn integral_0() -> @kernel.Thm
+
+pub fn integral_add() -> @kernel.Thm
+
+pub fn integral_cmul() -> @kernel.Thm
+
+pub fn integral_combine() -> @kernel.Thm
+
+pub fn integral_combine_division_bottomup() -> @kernel.Thm
+
+pub fn integral_combine_division_topdown() -> @kernel.Thm
+
+pub fn integral_combine_tagged_division_bottomup() -> @kernel.Thm
+
+pub fn integral_combine_tagged_division_topdown() -> @kernel.Thm
+
+pub fn integral_component() -> @kernel.Thm
+
+pub fn integral_component_lbound() -> @kernel.Thm
+
+pub fn integral_component_le() -> @kernel.Thm
+
+pub fn integral_component_le_ae() -> @kernel.Thm
+
+pub fn integral_component_pos() -> @kernel.Thm
+
+pub fn integral_component_ubound() -> @kernel.Thm
+
+pub fn integral_const() -> @kernel.Thm
+
+pub fn integral_countable_unions() -> @kernel.Thm
+
+pub fn integral_diff() -> @kernel.Thm
+
+pub fn integral_drop_le() -> @kernel.Thm
+
+pub fn integral_drop_le_ae() -> @kernel.Thm
+
+pub fn integral_drop_pos() -> @kernel.Thm
+
+pub fn integral_drop_pos_ae() -> @kernel.Thm
+
+pub fn integral_empty() -> @kernel.Thm
+
+pub fn integral_eq() -> @kernel.Thm
+
+pub fn integral_eq_0() -> @kernel.Thm
+
+pub fn integral_eq_has_integral() -> @kernel.Thm
+
+pub fn integral_has_vector_derivative() -> @kernel.Thm
+
+pub fn integral_has_vector_derivative_pointwise() -> @kernel.Thm
+
+pub fn integral_intervals_diff_inclusion_exclusion() -> @kernel.Thm
+
+pub fn integral_intervals_inclusion_exclusion() -> @kernel.Thm
+
+pub fn integral_intervals_inclusion_exclusion_left() -> @kernel.Thm
+
+pub fn integral_intervals_inclusion_exclusion_right() -> @kernel.Thm
+
+pub fn integral_linear() -> @kernel.Thm
+
+pub fn integral_neg() -> @kernel.Thm
+
+pub fn integral_norm_bound_integral() -> @kernel.Thm
+
+pub fn integral_norm_bound_integral_ae() -> @kernel.Thm
+
+pub fn integral_norm_bound_integral_component() -> @kernel.Thm
+
+pub fn integral_null() -> @kernel.Thm
+
+pub fn integral_on_negligible() -> @kernel.Thm
+
+pub fn integral_pastecart_const() -> @kernel.Thm
+
+pub fn integral_pastecart_sym() -> @kernel.Thm
+
+pub fn integral_pastecart_sym_univ() -> @kernel.Thm
+
+pub fn integral_refl() -> @kernel.Thm
+
+pub fn integral_reflect() -> @kernel.Thm
+
+pub fn integral_reflect_gen() -> @kernel.Thm
+
+pub fn integral_restrict() -> @kernel.Thm
+
+pub fn integral_restrict_inter() -> @kernel.Thm
+
+pub fn integral_restrict_univ() -> @kernel.Thm
+
+pub fn integral_spike() -> @kernel.Thm
+
+pub fn integral_spike_set() -> @kernel.Thm
+
+pub fn integral_split() -> @kernel.Thm
+
+pub fn integral_split_signed() -> @kernel.Thm
+
+pub fn integral_sub() -> @kernel.Thm
+
+pub fn integral_subset_component_le() -> @kernel.Thm
+
+pub fn integral_subset_drop_le() -> @kernel.Thm
+
+pub fn integral_subset_drop_le_ae() -> @kernel.Thm
+
+pub fn integral_translation() -> @kernel.Thm
+
+pub fn integral_twizzle_eq() -> @kernel.Thm
+
+pub fn integral_union() -> @kernel.Thm
+
+pub fn integral_unique() -> @kernel.Thm
+
+pub fn integral_vsum() -> @kernel.Thm
+
+pub fn integral_zero_on_subintervals_imp_zero_ae() -> @kernel.Thm
+
+pub fn integration_by_parts() -> @kernel.Thm
+
+pub fn integration_by_parts_simple() -> @kernel.Thm
+
+pub fn inter_interior_unions_intervals() -> @kernel.Thm
+
+pub fn interior_subset_union_intervals() -> @kernel.Thm
+
+pub fn interval_bisection() -> @kernel.Thm
+
+pub fn interval_bisection_step() -> @kernel.Thm
+
+pub fn interval_bounds_empty_1() -> @kernel.Thm
+
+pub fn interval_bounds_null_1() -> @kernel.Thm
+
+pub fn interval_doublesplit() -> @kernel.Thm
+
+pub fn interval_image_affinity_interval() -> @kernel.Thm
+
+pub fn interval_lowerbound() -> @kernel.Thm
+
+pub fn interval_lowerbound_1() -> @kernel.Thm
+
+pub fn interval_lowerbound_nonempty() -> @kernel.Thm
+
+pub fn interval_lowerbound_v1() -> @kernel.Thm
+
+pub fn interval_split() -> @kernel.Thm
+
+pub fn interval_subdivision() -> @kernel.Thm
+
+pub fn interval_upperbound() -> @kernel.Thm
+
+pub fn interval_upperbound_1() -> @kernel.Thm
+
+pub fn interval_upperbound_nonempty() -> @kernel.Thm
+
+pub fn interval_upperbound_v1() -> @kernel.Thm
+
+pub fn iterate_and() -> @kernel.Thm
+
+pub fn iterate_nonzero_image_lemma() -> @kernel.Thm
+
+pub fn iterate_some() -> @kernel.Thm
+
+pub fn lemma() -> @kernel.Thm
+
+pub fn lieb() -> @kernel.Thm
+
+pub fn lift_integral_component() -> @kernel.Thm
+
+pub fn lifted() -> @kernel.Thm
+
+pub fn linear_imp_has_bounded_variation() -> @kernel.Thm
+
+pub fn lipschitz_imp_absolutely_continuous() -> @kernel.Thm
+
+pub fn lipschitz_imp_has_bounded_variation() -> @kernel.Thm
+
+pub fn lipschitz_imp_rectifiable_path() -> @kernel.Thm
+
+pub fn lipschitz_vector_variation() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn monoidal_and() -> @kernel.Thm
+
+pub fn monoidal_lifted() -> @kernel.Thm
+
+pub fn monotone_convergence_decreasing() -> @kernel.Thm
+
+pub fn monotone_convergence_decreasing_ae() -> @kernel.Thm
+
+pub fn monotone_convergence_increasing() -> @kernel.Thm
+
+pub fn monotone_convergence_increasing_ae() -> @kernel.Thm
+
+pub fn monotone_convergence_interval() -> @kernel.Thm
+
+pub fn negligible() -> @kernel.Thm
+
+pub fn negligible_bounded_subsets() -> @kernel.Thm
+
+pub fn negligible_countable() -> @kernel.Thm
+
+pub fn negligible_countable_unions() -> @kernel.Thm
+
+pub fn negligible_diff() -> @kernel.Thm
+
+pub fn negligible_empty() -> @kernel.Thm
+
+pub fn negligible_finite() -> @kernel.Thm
+
+pub fn negligible_frontier_interval() -> @kernel.Thm
+
+pub fn negligible_insert() -> @kernel.Thm
+
+pub fn negligible_inter() -> @kernel.Thm
+
+pub fn negligible_on_countable_intervals() -> @kernel.Thm
+
+pub fn negligible_on_intervals() -> @kernel.Thm
+
+pub fn negligible_on_univ() -> @kernel.Thm
+
+pub fn negligible_sing() -> @kernel.Thm
+
+pub fn negligible_standard_hyperplane() -> @kernel.Thm
+
+pub fn negligible_subset() -> @kernel.Thm
+
+pub fn negligible_union() -> @kernel.Thm
+
+pub fn negligible_union_eq() -> @kernel.Thm
+
+pub fn negligible_unions() -> @kernel.Thm
+
+pub fn negligible_v1() -> @kernel.Thm
+
+pub fn neutral_and() -> @kernel.Thm
+
+pub fn neutral_lifted() -> @kernel.Thm
+
+pub fn nonnegative_absolutely_integrable() -> @kernel.Thm
+
+pub fn nonnegative_absolutely_integrable_ae() -> @kernel.Thm
+
+pub fn open_countable_limit_elementary() -> @kernel.Thm
+
+pub fn operative() -> @kernel.Thm
+
+pub fn operative_1_le() -> @kernel.Thm
+
+pub fn operative_1_lt() -> @kernel.Thm
+
+pub fn operative_absolutely_continuous_on() -> @kernel.Thm
+
+pub fn operative_absolutely_setcontinuous_on() -> @kernel.Thm
+
+pub fn operative_approximable() -> @kernel.Thm
+
+pub fn operative_content() -> @kernel.Thm
+
+pub fn operative_division() -> @kernel.Thm
+
+pub fn operative_division_and() -> @kernel.Thm
+
+pub fn operative_empty() -> @kernel.Thm
+
+pub fn operative_function_endpoint_diff() -> @kernel.Thm
+
+pub fn operative_has_bounded_setvariation_on() -> @kernel.Thm
+
+pub fn operative_has_bounded_variation_on() -> @kernel.Thm
+
+pub fn operative_integrable() -> @kernel.Thm
+
+pub fn operative_integral() -> @kernel.Thm
+
+pub fn operative_lifted_setvariation() -> @kernel.Thm
+
+pub fn operative_lifted_vector_variation() -> @kernel.Thm
+
+pub fn operative_real_function_endpoint_diff() -> @kernel.Thm
+
+pub fn operative_tagged_division() -> @kernel.Thm
+
+pub fn operative_trivial() -> @kernel.Thm
+
+pub fn partial_division_extend() -> @kernel.Thm
+
+pub fn partial_division_extend_1() -> @kernel.Thm
+
+pub fn partial_division_extend_interval() -> @kernel.Thm
+
+pub fn partial_division_of_tagged_division() -> @kernel.Thm
+
+pub fn path_length() -> @kernel.Thm
+
+pub fn path_length_combine() -> @kernel.Thm
+
+pub fn path_length_differentiable() -> @kernel.Thm
+
+pub fn path_length_eq() -> @kernel.Thm
+
+pub fn path_length_eq_0() -> @kernel.Thm
+
+pub fn path_length_eq_line_segment() -> @kernel.Thm
+
+pub fn path_length_isometric_image() -> @kernel.Thm
+
+pub fn path_length_join() -> @kernel.Thm
+
+pub fn path_length_linear_image() -> @kernel.Thm
+
+pub fn path_length_linepath() -> @kernel.Thm
+
+pub fn path_length_lipschitz() -> @kernel.Thm
+
+pub fn path_length_pos_le() -> @kernel.Thm
+
+pub fn path_length_reparametrization() -> @kernel.Thm
+
+pub fn path_length_reversepath() -> @kernel.Thm
+
+pub fn path_length_scaling() -> @kernel.Thm
+
+pub fn path_length_shiftpath() -> @kernel.Thm
+
+pub fn path_length_subpath() -> @kernel.Thm
+
+pub fn path_length_subpath_le() -> @kernel.Thm
+
+pub fn path_length_translation() -> @kernel.Thm
+
+pub fn picard_lindelof_right() -> @kernel.Thm
+
+pub fn property_empty_interval() -> @kernel.Thm
+
+pub fn rectifiable_path() -> @kernel.Thm
+
+pub fn rectifiable_path_combine() -> @kernel.Thm
+
+pub fn rectifiable_path_differentiable() -> @kernel.Thm
+
+pub fn rectifiable_path_eq() -> @kernel.Thm
+
+pub fn rectifiable_path_image_subset_cball() -> @kernel.Thm
+
+pub fn rectifiable_path_imp_path() -> @kernel.Thm
+
+pub fn rectifiable_path_join() -> @kernel.Thm
+
+pub fn rectifiable_path_join_eq() -> @kernel.Thm
+
+pub fn rectifiable_path_join_imp() -> @kernel.Thm
+
+pub fn rectifiable_path_linear_image_eq() -> @kernel.Thm
+
+pub fn rectifiable_path_linepath() -> @kernel.Thm
+
+pub fn rectifiable_path_lipschitz_image() -> @kernel.Thm
+
+pub fn rectifiable_path_reparametrization() -> @kernel.Thm
+
+pub fn rectifiable_path_reversepath() -> @kernel.Thm
+
+pub fn rectifiable_path_shiftpath() -> @kernel.Thm
+
+pub fn rectifiable_path_subpath() -> @kernel.Thm
+
+pub fn rectifiable_path_subpath_eq() -> @kernel.Thm
+
+pub fn rectifiable_path_sym() -> @kernel.Thm
+
+pub fn rectifiable_path_translation_eq() -> @kernel.Thm
+
+pub fn rsum_bound() -> @kernel.Thm
+
+pub fn rsum_component_le() -> @kernel.Thm
+
+pub fn rsum_diff_bound() -> @kernel.Thm
+
+pub fn second_mean_value_theorem() -> @kernel.Thm
+
+pub fn second_mean_value_theorem_bonnet() -> @kernel.Thm
+
+pub fn second_mean_value_theorem_bonnet_full() -> @kernel.Thm
+
+pub fn second_mean_value_theorem_full() -> @kernel.Thm
+
+pub fn second_mean_value_theorem_gen() -> @kernel.Thm
+
+pub fn second_mean_value_theorem_gen_full() -> @kernel.Thm
+
+pub fn set_variation() -> @kernel.Thm
+
+pub fn set_variation_0() -> @kernel.Thm
+
+pub fn set_variation_cmul() -> @kernel.Thm
+
+pub fn set_variation_comparison() -> @kernel.Thm
+
+pub fn set_variation_degenerates() -> @kernel.Thm
+
+pub fn set_variation_elementary_lemma() -> @kernel.Thm
+
+pub fn set_variation_eq() -> @kernel.Thm
+
+pub fn set_variation_ge_function() -> @kernel.Thm
+
+pub fn set_variation_interval_lemma() -> @kernel.Thm
+
+pub fn set_variation_lbound() -> @kernel.Thm
+
+pub fn set_variation_lbound_on_interval() -> @kernel.Thm
+
+pub fn set_variation_monotone() -> @kernel.Thm
+
+pub fn set_variation_on_division() -> @kernel.Thm
+
+pub fn set_variation_on_elementary() -> @kernel.Thm
+
+pub fn set_variation_on_empty() -> @kernel.Thm
+
+pub fn set_variation_on_interval() -> @kernel.Thm
+
+pub fn set_variation_on_null() -> @kernel.Thm
+
+pub fn set_variation_pos_le() -> @kernel.Thm
+
+pub fn set_variation_reflect2() -> @kernel.Thm
+
+pub fn set_variation_sum_le() -> @kernel.Thm
+
+pub fn set_variation_translation2() -> @kernel.Thm
+
+pub fn set_variation_triangle() -> @kernel.Thm
+
+pub fn set_variation_ubound() -> @kernel.Thm
+
+pub fn set_variation_ubound_on_interval() -> @kernel.Thm
+
+pub fn set_variation_v1() -> @kernel.Thm
+
+pub fn set_variation_works_on_interval() -> @kernel.Thm
+
+pub fn setvariation_equal_lemma() -> @kernel.Thm
+
+pub fn shortest_arc_exists() -> @kernel.Thm
+
+pub fn shortest_path_exists() -> @kernel.Thm
+
+pub fn shortest_path_exists_gen() -> @kernel.Thm
+
+pub fn shortest_path_exists_straddle() -> @kernel.Thm
+
+pub fn simple_path_length_minimal() -> @kernel.Thm
+
+pub fn simple_path_length_pos_lt() -> @kernel.Thm
+
+pub fn simple_path_length_unique() -> @kernel.Thm
+
+pub fn subadditive_content_division() -> @kernel.Thm
+
+pub fn sum_content_area_over_thin_division() -> @kernel.Thm
+
+pub fn sum_over_tagged_division_lemma() -> @kernel.Thm
+
+pub fn sum_over_tagged_partial_division_lemma() -> @kernel.Thm
+
+pub fn tag_in_interval() -> @kernel.Thm
+
+pub fn tagged_division_finer() -> @kernel.Thm
+
+pub fn tagged_division_of() -> @kernel.Thm
+
+pub fn tagged_division_of_alt() -> @kernel.Thm
+
+pub fn tagged_division_of_another() -> @kernel.Thm
+
+pub fn tagged_division_of_empty() -> @kernel.Thm
+
+pub fn tagged_division_of_finite() -> @kernel.Thm
+
+pub fn tagged_division_of_nontrivial() -> @kernel.Thm
+
+pub fn tagged_division_of_self() -> @kernel.Thm
+
+pub fn tagged_division_of_trivial() -> @kernel.Thm
+
+pub fn tagged_division_of_union_self() -> @kernel.Thm
+
+pub fn tagged_division_of_v1() -> @kernel.Thm
+
+pub fn tagged_division_split_left_inj() -> @kernel.Thm
+
+pub fn tagged_division_split_right_inj() -> @kernel.Thm
+
+pub fn tagged_division_union() -> @kernel.Thm
+
+pub fn tagged_division_union_image_snd() -> @kernel.Thm
+
+pub fn tagged_division_union_interval() -> @kernel.Thm
+
+pub fn tagged_division_unions() -> @kernel.Thm
+
+pub fn tagged_division_unions_exists() -> @kernel.Thm
+
+pub fn tagged_partial_division_common_point_bound() -> @kernel.Thm
+
+pub fn tagged_partial_division_common_tags() -> @kernel.Thm
+
+pub fn tagged_partial_division_of() -> @kernel.Thm
+
+pub fn tagged_partial_division_of_subset() -> @kernel.Thm
+
+pub fn tagged_partial_division_of_trivial() -> @kernel.Thm
+
+pub fn tagged_partial_division_of_union_self() -> @kernel.Thm
+
+pub fn tagged_partial_division_subset() -> @kernel.Thm
+
+pub fn variation_equal_lemma() -> @kernel.Thm
+
+pub fn vector_variation() -> @kernel.Thm
+
+pub fn vector_variation_affinity() -> @kernel.Thm
+
+pub fn vector_variation_affinity2() -> @kernel.Thm
+
+pub fn vector_variation_cmul() -> @kernel.Thm
+
+pub fn vector_variation_combine() -> @kernel.Thm
+
+pub fn vector_variation_comparison() -> @kernel.Thm
+
+pub fn vector_variation_component_le() -> @kernel.Thm
+
+pub fn vector_variation_compose_decreasing() -> @kernel.Thm
+
+pub fn vector_variation_compose_homeomorphism() -> @kernel.Thm
+
+pub fn vector_variation_compose_increasing() -> @kernel.Thm
+
+pub fn vector_variation_compose_increasing_gen() -> @kernel.Thm
+
+pub fn vector_variation_const() -> @kernel.Thm
+
+pub fn vector_variation_const_eq() -> @kernel.Thm
+
+pub fn vector_variation_continuous() -> @kernel.Thm
+
+pub fn vector_variation_continuous_left() -> @kernel.Thm
+
+pub fn vector_variation_continuous_right() -> @kernel.Thm
+
+pub fn vector_variation_degenerates() -> @kernel.Thm
+
+pub fn vector_variation_eq() -> @kernel.Thm
+
+pub fn vector_variation_ge_drop_function() -> @kernel.Thm
+
+pub fn vector_variation_ge_norm_function() -> @kernel.Thm
+
+pub fn vector_variation_id() -> @kernel.Thm
+
+pub fn vector_variation_integral_norm_derivative() -> @kernel.Thm
+
+pub fn vector_variation_isometric() -> @kernel.Thm
+
+pub fn vector_variation_isometric_compose() -> @kernel.Thm
+
+pub fn vector_variation_le_union() -> @kernel.Thm
+
+pub fn vector_variation_lift_abs() -> @kernel.Thm
+
+pub fn vector_variation_linear() -> @kernel.Thm
+
+pub fn vector_variation_lipschitz() -> @kernel.Thm
+
+pub fn vector_variation_minus_function_monotone() -> @kernel.Thm
+
+pub fn vector_variation_minus_function_monotone_left() -> @kernel.Thm
+
+pub fn vector_variation_minus_function_monotone_right() -> @kernel.Thm
+
+pub fn vector_variation_monotone() -> @kernel.Thm
+
+pub fn vector_variation_neg() -> @kernel.Thm
+
+pub fn vector_variation_on_closure() -> @kernel.Thm
+
+pub fn vector_variation_on_division() -> @kernel.Thm
+
+pub fn vector_variation_on_empty() -> @kernel.Thm
+
+pub fn vector_variation_on_interior() -> @kernel.Thm
+
+pub fn vector_variation_on_interval() -> @kernel.Thm
+
+pub fn vector_variation_on_null() -> @kernel.Thm
+
+pub fn vector_variation_pos_le() -> @kernel.Thm
+
+pub fn vector_variation_reflect() -> @kernel.Thm
+
+pub fn vector_variation_reflect2() -> @kernel.Thm
+
+pub fn vector_variation_reflect_interval() -> @kernel.Thm
+
+pub fn vector_variation_segment_triangle() -> @kernel.Thm
+
+pub fn vector_variation_sing() -> @kernel.Thm
+
+pub fn vector_variation_split() -> @kernel.Thm
+
+pub fn vector_variation_sum_le() -> @kernel.Thm
+
+pub fn vector_variation_translation() -> @kernel.Thm
+
+pub fn vector_variation_translation2() -> @kernel.Thm
+
+pub fn vector_variation_translation_alt() -> @kernel.Thm
+
+pub fn vector_variation_translation_interval() -> @kernel.Thm
+
+pub fn vector_variation_triangle() -> @kernel.Thm
+
+pub fn vector_variation_union_le() -> @kernel.Thm
+
+pub fn vector_variation_vector_variation() -> @kernel.Thm
+
+pub fn vector_variation_vmul() -> @kernel.Thm
+
+pub fn vsum_content_null() -> @kernel.Thm
+
+pub fn vsum_nonzero_image_lemma() -> @kernel.Thm
+
+pub fn vsum_over_tagged_division_lemma() -> @kernel.Thm
+
+pub fn vsum_over_tagged_partial_division_lemma() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

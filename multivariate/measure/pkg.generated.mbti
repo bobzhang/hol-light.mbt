@@ -1,0 +1,1547 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/measure"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn absolute_integral_absolutely_continuous_derivative_eq() -> @kernel.Thm
+
+pub fn absolute_integral_absolutely_continuous_derivative_eq_alt() -> @kernel.Thm
+
+pub fn absolute_integral_norm_derivative_le_variation() -> @kernel.Thm
+
+pub fn absolute_integral_norm_derivative_le_variation_alt() -> @kernel.Thm
+
+pub fn absolute_integral_substitution() -> @kernel.Thm
+
+pub fn absolute_integration_by_parts() -> @kernel.Thm
+
+pub fn absolute_integration_by_parts_sum() -> @kernel.Thm
+
+pub fn absolutely_continuous_differentiable_bv() -> @kernel.Thm
+
+pub fn absolutely_continuous_differentiable_bv_gen() -> @kernel.Thm
+
+pub fn absolutely_continuous_imp_banach_sproperty() -> @kernel.Thm
+
+pub fn absolutely_continuous_imp_path() -> @kernel.Thm
+
+pub fn absolutely_continuous_imp_rectifiable_path() -> @kernel.Thm
+
+pub fn absolutely_continuous_indefinite_integral_eq() -> @kernel.Thm
+
+pub fn absolutely_continuous_indefinite_integral_left() -> @kernel.Thm
+
+pub fn absolutely_continuous_indefinite_integral_right() -> @kernel.Thm
+
+pub fn absolutely_continuous_integral() -> @kernel.Thm
+
+pub fn absolutely_continuous_joinpaths() -> @kernel.Thm
+
+pub fn absolutely_continuous_measure_differentiable_image() -> @kernel.Thm
+
+pub fn absolutely_continuous_measure_differentiable_image_gen() -> @kernel.Thm
+
+pub fn absolutely_continuous_measure_image() -> @kernel.Thm
+
+pub fn absolutely_continuous_on_compose() -> @kernel.Thm
+
+pub fn absolutely_continuous_reversepath() -> @kernel.Thm
+
+pub fn absolutely_continuous_vector_variation() -> @kernel.Thm
+
+pub fn absolutely_integrable_absolutely_continuous_derivative() -> @kernel.Thm
+
+pub fn absolutely_integrable_absolutely_continuous_derivative_eq() -> @kernel.Thm
+
+pub fn absolutely_integrable_absolutely_continuous_derivative_eq_alt() -> @kernel.Thm
+
+pub fn absolutely_integrable_approximate_continuous() -> @kernel.Thm
+
+pub fn absolutely_integrable_bounded_measurable_product() -> @kernel.Thm
+
+pub fn absolutely_integrable_bounded_measurable_product_eq() -> @kernel.Thm
+
+pub fn absolutely_integrable_bounded_measurable_product_eq_alt() -> @kernel.Thm
+
+pub fn absolutely_integrable_bounded_variation_derivative() -> @kernel.Thm
+
+pub fn absolutely_integrable_bounded_variation_eq() -> @kernel.Thm
+
+pub fn absolutely_integrable_change_of_variables() -> @kernel.Thm
+
+pub fn absolutely_integrable_change_of_variables_1() -> @kernel.Thm
+
+pub fn absolutely_integrable_change_of_variables_linear() -> @kernel.Thm
+
+pub fn absolutely_integrable_convolution_ae() -> @kernel.Thm
+
+pub fn absolutely_integrable_convolution_l1_linf() -> @kernel.Thm
+
+pub fn absolutely_integrable_convolution_l2() -> @kernel.Thm
+
+pub fn absolutely_integrable_convolution_linf_l1() -> @kernel.Thm
+
+pub fn absolutely_integrable_convolution_sym() -> @kernel.Thm
+
+pub fn absolutely_integrable_diff() -> @kernel.Thm
+
+pub fn absolutely_integrable_improper() -> @kernel.Thm
+
+pub fn absolutely_integrable_improper_simple() -> @kernel.Thm
+
+pub fn absolutely_integrable_increasing_derivative() -> @kernel.Thm
+
+pub fn absolutely_integrable_increasing_derivative_alt() -> @kernel.Thm
+
+pub fn absolutely_integrable_inter() -> @kernel.Thm
+
+pub fn absolutely_integrable_lebesgue_points() -> @kernel.Thm
+
+pub fn absolutely_integrable_measurable() -> @kernel.Thm
+
+pub fn absolutely_integrable_on_const() -> @kernel.Thm
+
+pub fn absolutely_integrable_on_image() -> @kernel.Thm
+
+pub fn absolutely_integrable_on_indicator() -> @kernel.Thm
+
+pub fn absolutely_integrable_on_lebesgue_measurable_inter() -> @kernel.Thm
+
+pub fn absolutely_integrable_on_lebesgue_measurable_subset() -> @kernel.Thm
+
+pub fn absolutely_integrable_on_lebesgue_measurable_subset_eq() -> @kernel.Thm
+
+pub fn absolutely_integrable_on_lebesgue_measurable_subset_eq_alt() -> @kernel.Thm
+
+pub fn absolutely_integrable_on_linear_image() -> @kernel.Thm
+
+pub fn absolutely_integrable_on_open_interval() -> @kernel.Thm
+
+pub fn absolutely_integrable_square_integrable_product() -> @kernel.Thm
+
+pub fn absolutely_integrable_union() -> @kernel.Thm
+
+pub fn absolutely_integrable_vector_derivative_absolutely_continuous() -> @kernel.Thm
+
+pub fn absolutely_setcontinuous_indefinite_integral() -> @kernel.Thm
+
+pub fn analytic_imp_lebesgue_measurable() -> @kernel.Thm
+
+pub fn austin_lemma() -> @kernel.Thm
+
+pub fn baby_sard() -> @kernel.Thm
+
+pub fn baby_sard_alt() -> @kernel.Thm
+
+pub fn baire_imp_measurable_on() -> @kernel.Thm
+
+pub fn baire_imp_measurable_on_univ() -> @kernel.Thm
+
+pub fn banach_sproperty_imp_finite_preimages() -> @kernel.Thm
+
+pub fn banach_sproperty_imp_luzin_nproperty() -> @kernel.Thm
+
+pub fn banach_sproperty_imp_luzin_nproperty_outer() -> @kernel.Thm
+
+pub fn banach_sproperty_imp_preserves_measurable() -> @kernel.Thm
+
+pub fn banach_sproperty_outer() -> @kernel.Thm
+
+pub fn banach_zarecki() -> @kernel.Thm
+
+pub fn banach_zarecki_gen() -> @kernel.Thm
+
+pub fn borel_domain_of_injectivity() -> @kernel.Thm
+
+pub fn borel_imp_lebesgue_measurable() -> @kernel.Thm
+
+pub fn borel_measurable_imp_measurable_on() -> @kernel.Thm
+
+pub fn borel_points_of_differentiability() -> @kernel.Thm
+
+pub fn choose_large_compact_subset() -> @kernel.Thm
+
+pub fn choose_large_compact_subset_alt() -> @kernel.Thm
+
+pub fn choose_large_measurable_subset() -> @kernel.Thm
+
+pub fn congruent_image_std_simplex() -> @kernel.Thm
+
+pub fn connected_jacobian_graph() -> @kernel.Thm
+
+pub fn connected_jacobian_range() -> @kernel.Thm
+
+pub fn connected_jacobian_range_alt() -> @kernel.Thm
+
+pub fn connected_jacobian_range_subset() -> @kernel.Thm
+
+pub fn continuous_additive_imp_linear() -> @kernel.Thm
+
+pub fn continuous_ae_imp_measurable_on_lebesgue_measurable_subset() -> @kernel.Thm
+
+pub fn continuous_imp_measurable_on() -> @kernel.Thm
+
+pub fn continuous_imp_measurable_on_closed_subset() -> @kernel.Thm
+
+pub fn continuous_imp_measurable_on_lebesgue_measurable_subset() -> @kernel.Thm
+
+pub fn continuous_measure_differentiable_image_translation() -> @kernel.Thm
+
+pub fn continuous_measure_translation_diff() -> @kernel.Thm
+
+pub fn continuous_measure_translation_symdiff() -> @kernel.Thm
+
+pub fn continuous_on_absolutely_integrable_translation() -> @kernel.Thm
+
+pub fn continuous_on_absolutely_integrable_translation_gen() -> @kernel.Thm
+
+pub fn continuous_on_absolutely_integrable_translation_norm() -> @kernel.Thm
+
+pub fn continuous_on_absolutely_integrable_translation_norm_gen() -> @kernel.Thm
+
+pub fn continuous_on_convolution_l1_linf() -> @kernel.Thm
+
+pub fn continuous_on_convolution_linf_l1() -> @kernel.Thm
+
+pub fn continuous_on_measure_in_halfspace() -> @kernel.Thm
+
+pub fn continuous_on_measure_in_portion() -> @kernel.Thm
+
+pub fn convergence_in_measure() -> @kernel.Thm
+
+pub fn convergence_in_measure_unique() -> @kernel.Thm
+
+pub fn converse_sard() -> @kernel.Thm
+
+pub fn converse_sard_1() -> @kernel.Thm
+
+pub fn countable_elementary_division() -> @kernel.Thm
+
+pub fn covering_lemma() -> @kernel.Thm
+
+pub fn diff_chain_at_equal_ae() -> @kernel.Thm
+
+pub fn diff_chain_within_ae() -> @kernel.Thm
+
+pub fn diff_chain_within_equal_ae() -> @kernel.Thm
+
+pub fn differential_zero_levelset_density() -> @kernel.Thm
+
+pub fn differential_zero_maxmin_density() -> @kernel.Thm
+
+pub fn double_integrable_convolution() -> @kernel.Thm
+
+pub fn double_integral_convolution() -> @kernel.Thm
+
+pub fn double_lebesgue_measurable() -> @kernel.Thm
+
+pub fn double_lebesgue_measurable_inverse_function() -> @kernel.Thm
+
+pub fn double_lebesgue_measurable_inverse_function_gen() -> @kernel.Thm
+
+pub fn double_lebesgue_measurable_left_inverse() -> @kernel.Thm
+
+pub fn double_lebesgue_measurable_on() -> @kernel.Thm
+
+pub fn double_lebesgue_measurable_right_inverse() -> @kernel.Thm
+
+pub fn egorov() -> @kernel.Thm
+
+pub fn expand_closed_open_interval() -> @kernel.Thm
+
+pub fn fsigma_imp_lebesgue_measurable() -> @kernel.Thm
+
+pub fn fubini_absolutely_integrable() -> @kernel.Thm
+
+pub fn fubini_absolutely_integrable_alt() -> @kernel.Thm
+
+pub fn fubini_has_absolute_integral() -> @kernel.Thm
+
+pub fn fubini_has_absolute_integral_alt() -> @kernel.Thm
+
+pub fn fubini_has_integral_swap() -> @kernel.Thm
+
+pub fn fubini_has_integral_swap_alt() -> @kernel.Thm
+
+pub fn fubini_integral() -> @kernel.Thm
+
+pub fn fubini_integral_alt() -> @kernel.Thm
+
+pub fn fubini_integral_interval() -> @kernel.Thm
+
+pub fn fubini_integral_interval_alt() -> @kernel.Thm
+
+pub fn fubini_integral_swap() -> @kernel.Thm
+
+pub fn fubini_lebesgue_measurable() -> @kernel.Thm
+
+pub fn fubini_lebesgue_measurable_alt() -> @kernel.Thm
+
+pub fn fubini_measure() -> @kernel.Thm
+
+pub fn fubini_measure_alt() -> @kernel.Thm
+
+pub fn fubini_negligible() -> @kernel.Thm
+
+pub fn fubini_negligible_alt() -> @kernel.Thm
+
+pub fn fubini_negligible_offset() -> @kernel.Thm
+
+pub fn fubini_negligible_replacements() -> @kernel.Thm
+
+pub fn fubini_negligible_replacements_alt() -> @kernel.Thm
+
+pub fn fubini_tonelli() -> @kernel.Thm
+
+pub fn fubini_tonelli_alt() -> @kernel.Thm
+
+pub fn fubini_tonelli_measure() -> @kernel.Thm
+
+pub fn fubini_tonelli_measure_alt() -> @kernel.Thm
+
+pub fn fubini_tonelli_negligible() -> @kernel.Thm
+
+pub fn fubini_tonelli_negligible_alt() -> @kernel.Thm
+
+pub fn fundamental_theorem_of_calculus_absolutely_continuous() -> @kernel.Thm
+
+pub fn gdelta_domain_of_injectivity_measurable() -> @kernel.Thm
+
+pub fn gdelta_imp_lebesgue_measurable() -> @kernel.Thm
+
+pub fn half_measures() -> @kernel.Thm
+
+pub fn has_absolute_integral_change_of_variables() -> @kernel.Thm
+
+pub fn has_absolute_integral_change_of_variables_1() -> @kernel.Thm
+
+pub fn has_absolute_integral_change_of_variables_invertible() -> @kernel.Thm
+
+pub fn has_absolute_integral_change_of_variables_linear() -> @kernel.Thm
+
+pub fn has_double_integral_convolution() -> @kernel.Thm
+
+pub fn has_double_integral_pcross() -> @kernel.Thm
+
+pub fn has_integral_const_gen() -> @kernel.Thm
+
+pub fn has_integral_convolution_sym() -> @kernel.Thm
+
+pub fn has_integral_measure_under_curve() -> @kernel.Thm
+
+pub fn has_integral_negligible_eq_ae() -> @kernel.Thm
+
+pub fn has_integral_open_interval() -> @kernel.Thm
+
+pub fn has_measure() -> @kernel.Thm
+
+pub fn has_measure_0() -> @kernel.Thm
+
+pub fn has_measure_affinity() -> @kernel.Thm
+
+pub fn has_measure_almost() -> @kernel.Thm
+
+pub fn has_measure_almost_eq() -> @kernel.Thm
+
+pub fn has_measure_countable_negligible_unions() -> @kernel.Thm
+
+pub fn has_measure_countable_negligible_unions_bounded() -> @kernel.Thm
+
+pub fn has_measure_diff_negligible() -> @kernel.Thm
+
+pub fn has_measure_diff_negligible_eq() -> @kernel.Thm
+
+pub fn has_measure_diff_subset() -> @kernel.Thm
+
+pub fn has_measure_differentiable_image() -> @kernel.Thm
+
+pub fn has_measure_disjoint_union() -> @kernel.Thm
+
+pub fn has_measure_disjoint_unions() -> @kernel.Thm
+
+pub fn has_measure_disjoint_unions_image() -> @kernel.Thm
+
+pub fn has_measure_disjoint_unions_image_strong() -> @kernel.Thm
+
+pub fn has_measure_elementary() -> @kernel.Thm
+
+pub fn has_measure_empty() -> @kernel.Thm
+
+pub fn has_measure_image_std_simplex() -> @kernel.Thm
+
+pub fn has_measure_imp_measurable() -> @kernel.Thm
+
+pub fn has_measure_inner_outer() -> @kernel.Thm
+
+pub fn has_measure_inner_outer_le() -> @kernel.Thm
+
+pub fn has_measure_interval() -> @kernel.Thm
+
+pub fn has_measure_isometry() -> @kernel.Thm
+
+pub fn has_measure_limit() -> @kernel.Thm
+
+pub fn has_measure_linear_image() -> @kernel.Thm
+
+pub fn has_measure_linear_image_alt() -> @kernel.Thm
+
+pub fn has_measure_linear_image_same() -> @kernel.Thm
+
+pub fn has_measure_linear_sufficient() -> @kernel.Thm
+
+pub fn has_measure_measurable_measure() -> @kernel.Thm
+
+pub fn has_measure_measure() -> @kernel.Thm
+
+pub fn has_measure_negligible_symdiff() -> @kernel.Thm
+
+pub fn has_measure_negligible_union() -> @kernel.Thm
+
+pub fn has_measure_negligible_unions() -> @kernel.Thm
+
+pub fn has_measure_negligible_unions_image() -> @kernel.Thm
+
+pub fn has_measure_negligible_unions_image_strong() -> @kernel.Thm
+
+pub fn has_measure_nested_inters() -> @kernel.Thm
+
+pub fn has_measure_nested_unions() -> @kernel.Thm
+
+pub fn has_measure_orthogonal_image() -> @kernel.Thm
+
+pub fn has_measure_orthogonal_image_eq() -> @kernel.Thm
+
+pub fn has_measure_pcross() -> @kernel.Thm
+
+pub fn has_measure_pos_le() -> @kernel.Thm
+
+pub fn has_measure_scaling() -> @kernel.Thm
+
+pub fn has_measure_scaling_eq() -> @kernel.Thm
+
+pub fn has_measure_shear_interval() -> @kernel.Thm
+
+pub fn has_measure_simplex() -> @kernel.Thm
+
+pub fn has_measure_simplex_0() -> @kernel.Thm
+
+pub fn has_measure_std_simplex() -> @kernel.Thm
+
+pub fn has_measure_stretch() -> @kernel.Thm
+
+pub fn has_measure_subset() -> @kernel.Thm
+
+pub fn has_measure_tetrahedron() -> @kernel.Thm
+
+pub fn has_measure_translation() -> @kernel.Thm
+
+pub fn has_measure_translation_eq() -> @kernel.Thm
+
+pub fn has_measure_triangle() -> @kernel.Thm
+
+pub fn has_measure_union_negligible() -> @kernel.Thm
+
+pub fn has_measure_union_negligible_eq() -> @kernel.Thm
+
+pub fn has_measure_unique() -> @kernel.Thm
+
+pub fn has_measure_v1() -> @kernel.Thm
+
+pub fn has_vector_derivative_indefinite_integral() -> @kernel.Thm
+
+pub fn increasing_ftc_ae_imp_absolutely_continuous() -> @kernel.Thm
+
+pub fn induct_linear_elementary() -> @kernel.Thm
+
+pub fn induct_matrix_elementary() -> @kernel.Thm
+
+pub fn induct_matrix_elementary_alt() -> @kernel.Thm
+
+pub fn induct_matrix_row_operations() -> @kernel.Thm
+
+pub fn integrable_ccontinuous_explicit() -> @kernel.Thm
+
+pub fn integrable_ccontinuous_explicit_symmetric() -> @kernel.Thm
+
+pub fn integrable_convolution_sym() -> @kernel.Thm
+
+pub fn integrable_iff_measurable_under_curve() -> @kernel.Thm
+
+pub fn integrable_imp_measurable() -> @kernel.Thm
+
+pub fn integrable_on_const() -> @kernel.Thm
+
+pub fn integrable_on_indicator() -> @kernel.Thm
+
+pub fn integrable_on_open_interval() -> @kernel.Thm
+
+pub fn integrable_subintervals_imp_measurable() -> @kernel.Thm
+
+pub fn integral_change_of_variables() -> @kernel.Thm
+
+pub fn integral_change_of_variables_linear() -> @kernel.Thm
+
+pub fn integral_const_gen() -> @kernel.Thm
+
+pub fn integral_convolution_sym() -> @kernel.Thm
+
+pub fn integral_countable_unions_alt() -> @kernel.Thm
+
+pub fn integral_drop_le_measurable() -> @kernel.Thm
+
+pub fn integral_indicator() -> @kernel.Thm
+
+pub fn integral_measure() -> @kernel.Thm
+
+pub fn integral_measure_univ() -> @kernel.Thm
+
+pub fn integral_on_image_drop_ubound_le() -> @kernel.Thm
+
+pub fn integral_open_interval() -> @kernel.Thm
+
+pub fn integral_pastecart_continuous() -> @kernel.Thm
+
+pub fn integral_swap_continuous() -> @kernel.Thm
+
+pub fn integral_zero_on_subintervals_imp_zero_ae_alt() -> @kernel.Thm
+
+pub fn interior_rectifiable_path_image() -> @kernel.Thm
+
+pub fn lambda_add_galois() -> @kernel.Thm
+
+pub fn lambda_swap_galois() -> @kernel.Thm
+
+pub fn lebesgue_density_theorem_integral_ball() -> @kernel.Thm
+
+pub fn lebesgue_density_theorem_integral_cball() -> @kernel.Thm
+
+pub fn lebesgue_density_theorem_integral_norm_ball() -> @kernel.Thm
+
+pub fn lebesgue_density_theorem_integral_norm_cball() -> @kernel.Thm
+
+pub fn lebesgue_density_theorem_lift_ball() -> @kernel.Thm
+
+pub fn lebesgue_density_theorem_lift_cball() -> @kernel.Thm
+
+pub fn lebesgue_differentiation_theorem() -> @kernel.Thm
+
+pub fn lebesgue_differentiation_theorem_alt() -> @kernel.Thm
+
+pub fn lebesgue_differentiation_theorem_compact() -> @kernel.Thm
+
+pub fn lebesgue_differentiation_theorem_decreasing() -> @kernel.Thm
+
+pub fn lebesgue_differentiation_theorem_gen() -> @kernel.Thm
+
+pub fn lebesgue_differentiation_theorem_increasing() -> @kernel.Thm
+
+pub fn lebesgue_measurable() -> @kernel.Thm
+
+pub fn lebesgue_measurable_absolutely_continuous_image() -> @kernel.Thm
+
+pub fn lebesgue_measurable_almost_fsigma() -> @kernel.Thm
+
+pub fn lebesgue_measurable_almost_gdelta() -> @kernel.Thm
+
+pub fn lebesgue_measurable_ball() -> @kernel.Thm
+
+pub fn lebesgue_measurable_cball() -> @kernel.Thm
+
+pub fn lebesgue_measurable_closed() -> @kernel.Thm
+
+pub fn lebesgue_measurable_closed_in() -> @kernel.Thm
+
+pub fn lebesgue_measurable_compact() -> @kernel.Thm
+
+pub fn lebesgue_measurable_compl() -> @kernel.Thm
+
+pub fn lebesgue_measurable_continuous_image() -> @kernel.Thm
+
+pub fn lebesgue_measurable_convex() -> @kernel.Thm
+
+pub fn lebesgue_measurable_countable_inters() -> @kernel.Thm
+
+pub fn lebesgue_measurable_countable_inters_explicit() -> @kernel.Thm
+
+pub fn lebesgue_measurable_countable_unions() -> @kernel.Thm
+
+pub fn lebesgue_measurable_countable_unions_explicit() -> @kernel.Thm
+
+pub fn lebesgue_measurable_delete() -> @kernel.Thm
+
+pub fn lebesgue_measurable_diff() -> @kernel.Thm
+
+pub fn lebesgue_measurable_differentiable_image() -> @kernel.Thm
+
+pub fn lebesgue_measurable_domain_of_injectivity() -> @kernel.Thm
+
+pub fn lebesgue_measurable_empty() -> @kernel.Thm
+
+pub fn lebesgue_measurable_function_ordinate_set_le() -> @kernel.Thm
+
+pub fn lebesgue_measurable_function_ordinate_set_le_eq() -> @kernel.Thm
+
+pub fn lebesgue_measurable_function_ordinate_set_lt() -> @kernel.Thm
+
+pub fn lebesgue_measurable_function_ordinate_set_lt_eq() -> @kernel.Thm
+
+pub fn lebesgue_measurable_function_orthant_set_le_eq() -> @kernel.Thm
+
+pub fn lebesgue_measurable_function_orthant_set_lt_eq() -> @kernel.Thm
+
+pub fn lebesgue_measurable_iff_measurable() -> @kernel.Thm
+
+pub fn lebesgue_measurable_inner_closed() -> @kernel.Thm
+
+pub fn lebesgue_measurable_inner_compact() -> @kernel.Thm
+
+pub fn lebesgue_measurable_insert() -> @kernel.Thm
+
+pub fn lebesgue_measurable_inter() -> @kernel.Thm
+
+pub fn lebesgue_measurable_inters() -> @kernel.Thm
+
+pub fn lebesgue_measurable_interval() -> @kernel.Thm
+
+pub fn lebesgue_measurable_jordan() -> @kernel.Thm
+
+pub fn lebesgue_measurable_lebesgue_measurable_preimage_analytic() -> @kernel.Thm
+
+pub fn lebesgue_measurable_lebesgue_measurable_preimage_borel() -> @kernel.Thm
+
+pub fn lebesgue_measurable_lebesgue_measurable_preimage_closed() -> @kernel.Thm
+
+pub fn lebesgue_measurable_lebesgue_measurable_preimage_open() -> @kernel.Thm
+
+pub fn lebesgue_measurable_linear_image_eq() -> @kernel.Thm
+
+pub fn lebesgue_measurable_linear_image_eq_gen() -> @kernel.Thm
+
+pub fn lebesgue_measurable_linear_image_gen() -> @kernel.Thm
+
+pub fn lebesgue_measurable_lipschitz_image() -> @kernel.Thm
+
+pub fn lebesgue_measurable_locally_lipschitz_image() -> @kernel.Thm
+
+pub fn lebesgue_measurable_measurable_image() -> @kernel.Thm
+
+pub fn lebesgue_measurable_measurable_inter_eq() -> @kernel.Thm
+
+pub fn lebesgue_measurable_measurable_on_countable_subintervals() -> @kernel.Thm
+
+pub fn lebesgue_measurable_measurable_on_subintervals() -> @kernel.Thm
+
+pub fn lebesgue_measurable_negligible_symdiff() -> @kernel.Thm
+
+pub fn lebesgue_measurable_negligible_symdiff_eq() -> @kernel.Thm
+
+pub fn lebesgue_measurable_on_subintervals() -> @kernel.Thm
+
+pub fn lebesgue_measurable_open() -> @kernel.Thm
+
+pub fn lebesgue_measurable_open_in() -> @kernel.Thm
+
+pub fn lebesgue_measurable_outer_open() -> @kernel.Thm
+
+pub fn lebesgue_measurable_pcross() -> @kernel.Thm
+
+pub fn lebesgue_measurable_points_of_convergence() -> @kernel.Thm
+
+pub fn lebesgue_measurable_points_of_differentiability_at() -> @kernel.Thm
+
+pub fn lebesgue_measurable_points_of_differentiability_within() -> @kernel.Thm
+
+pub fn lebesgue_measurable_preimage_analytic() -> @kernel.Thm
+
+pub fn lebesgue_measurable_preimage_borel() -> @kernel.Thm
+
+pub fn lebesgue_measurable_preimage_card_le() -> @kernel.Thm
+
+pub fn lebesgue_measurable_preimage_closed() -> @kernel.Thm
+
+pub fn lebesgue_measurable_preimage_finite() -> @kernel.Thm
+
+pub fn lebesgue_measurable_preimage_has_size() -> @kernel.Thm
+
+pub fn lebesgue_measurable_preimage_infinite() -> @kernel.Thm
+
+pub fn lebesgue_measurable_preimage_open() -> @kernel.Thm
+
+pub fn lebesgue_measurable_regular_inner() -> @kernel.Thm
+
+pub fn lebesgue_measurable_regular_outer() -> @kernel.Thm
+
+pub fn lebesgue_measurable_sing() -> @kernel.Thm
+
+pub fn lebesgue_measurable_small_imp_negligible() -> @kernel.Thm
+
+pub fn lebesgue_measurable_translation() -> @kernel.Thm
+
+pub fn lebesgue_measurable_union() -> @kernel.Thm
+
+pub fn lebesgue_measurable_unions() -> @kernel.Thm
+
+pub fn lebesgue_measurable_univ() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn locally_lebesgue_measurable() -> @kernel.Thm
+
+pub fn locally_lebesgue_measurable_alt() -> @kernel.Thm
+
+pub fn locally_negligible() -> @kernel.Thm
+
+pub fn locally_negligible_alt() -> @kernel.Thm
+
+pub fn luzin() -> @kernel.Thm
+
+pub fn luzin_eq() -> @kernel.Thm
+
+pub fn luzin_eq_alt() -> @kernel.Thm
+
+pub fn luzin_nproperty_imp_countable_preimages() -> @kernel.Thm
+
+pub fn luzin_sigma() -> @kernel.Thm
+
+pub fn luzin_sigma_explicit() -> @kernel.Thm
+
+pub fn luzin_sigma_nested() -> @kernel.Thm
+
+pub fn measurable() -> @kernel.Thm
+
+pub fn measurable_absolutely_continuous_image() -> @kernel.Thm
+
+pub fn measurable_additive_imp_linear() -> @kernel.Thm
+
+pub fn measurable_affinity() -> @kernel.Thm
+
+pub fn measurable_affinity_eq() -> @kernel.Thm
+
+pub fn measurable_almost() -> @kernel.Thm
+
+pub fn measurable_ball() -> @kernel.Thm
+
+pub fn measurable_bounded_ae_by_integrable_imp_integrable() -> @kernel.Thm
+
+pub fn measurable_bounded_by_integrable_imp_absolutely_integrable() -> @kernel.Thm
+
+pub fn measurable_bounded_by_integrable_imp_absolutely_integrable_ae() -> @kernel.Thm
+
+pub fn measurable_bounded_by_integrable_imp_integrable() -> @kernel.Thm
+
+pub fn measurable_bounded_differentiable_image() -> @kernel.Thm
+
+pub fn measurable_cball() -> @kernel.Thm
+
+pub fn measurable_closed_in() -> @kernel.Thm
+
+pub fn measurable_closure() -> @kernel.Thm
+
+pub fn measurable_compact() -> @kernel.Thm
+
+pub fn measurable_continuous_compose() -> @kernel.Thm
+
+pub fn measurable_convex() -> @kernel.Thm
+
+pub fn measurable_convex_eq() -> @kernel.Thm
+
+pub fn measurable_convex_hull() -> @kernel.Thm
+
+pub fn measurable_countable_inters() -> @kernel.Thm
+
+pub fn measurable_countable_inters_gen() -> @kernel.Thm
+
+pub fn measurable_countable_unions() -> @kernel.Thm
+
+pub fn measurable_countable_unions_bounded() -> @kernel.Thm
+
+pub fn measurable_countable_unions_strong() -> @kernel.Thm
+
+pub fn measurable_delete() -> @kernel.Thm
+
+pub fn measurable_diff() -> @kernel.Thm
+
+pub fn measurable_differentiable_image() -> @kernel.Thm
+
+pub fn measurable_differentiable_image_alt() -> @kernel.Thm
+
+pub fn measurable_differentiable_image_eq() -> @kernel.Thm
+
+pub fn measurable_elementary() -> @kernel.Thm
+
+pub fn measurable_empty() -> @kernel.Thm
+
+pub fn measurable_eq_almost_baire1() -> @kernel.Thm
+
+pub fn measurable_eq_almost_baire2() -> @kernel.Thm
+
+pub fn measurable_frontier() -> @kernel.Thm
+
+pub fn measurable_iff_lebesgue_measurable_under_curve() -> @kernel.Thm
+
+pub fn measurable_imp_lebesgue_measurable() -> @kernel.Thm
+
+pub fn measurable_inner_compact() -> @kernel.Thm
+
+pub fn measurable_inner_outer() -> @kernel.Thm
+
+pub fn measurable_insert() -> @kernel.Thm
+
+pub fn measurable_inside() -> @kernel.Thm
+
+pub fn measurable_integrable() -> @kernel.Thm
+
+pub fn measurable_inter() -> @kernel.Thm
+
+pub fn measurable_inter_halfspace_ge() -> @kernel.Thm
+
+pub fn measurable_inter_halfspace_le() -> @kernel.Thm
+
+pub fn measurable_inter_interval() -> @kernel.Thm
+
+pub fn measurable_interior() -> @kernel.Thm
+
+pub fn measurable_interval() -> @kernel.Thm
+
+pub fn measurable_jordan() -> @kernel.Thm
+
+pub fn measurable_lebesgue_measurable_inter_measurable() -> @kernel.Thm
+
+pub fn measurable_lebesgue_measurable_subset() -> @kernel.Thm
+
+pub fn measurable_linear_image() -> @kernel.Thm
+
+pub fn measurable_linear_image_eq() -> @kernel.Thm
+
+pub fn measurable_linear_image_eq_gen() -> @kernel.Thm
+
+pub fn measurable_linear_image_gen() -> @kernel.Thm
+
+pub fn measurable_linear_image_interval() -> @kernel.Thm
+
+pub fn measurable_lipschitz_image() -> @kernel.Thm
+
+pub fn measurable_locally_lipschitz_image() -> @kernel.Thm
+
+pub fn measurable_measurable_diff_lebesgue_measurable() -> @kernel.Thm
+
+pub fn measurable_measurable_inter_lebesgue_measurable() -> @kernel.Thm
+
+pub fn measurable_measurable_preimage_closed() -> @kernel.Thm
+
+pub fn measurable_measurable_preimage_open() -> @kernel.Thm
+
+pub fn measurable_measure_eq_0() -> @kernel.Thm
+
+pub fn measurable_measure_pos_lt() -> @kernel.Thm
+
+pub fn measurable_midpoint_convex_imp_continuous() -> @kernel.Thm
+
+pub fn measurable_midpoint_convex_imp_convex_1d() -> @kernel.Thm
+
+pub fn measurable_midpoint_convex_imp_convex_cball() -> @kernel.Thm
+
+pub fn measurable_midpoint_convex_imp_convex_gen() -> @kernel.Thm
+
+pub fn measurable_midpoint_convex_imp_convex_open() -> @kernel.Thm
+
+pub fn measurable_negations() -> @kernel.Thm
+
+pub fn measurable_negligible_symdiff() -> @kernel.Thm
+
+pub fn measurable_negligible_symdiff_eq() -> @kernel.Thm
+
+pub fn measurable_nested_unions() -> @kernel.Thm
+
+pub fn measurable_nonnegligible_imp_large() -> @kernel.Thm
+
+pub fn measurable_on() -> @kernel.Thm
+
+pub fn measurable_on_0() -> @kernel.Thm
+
+pub fn measurable_on_add() -> @kernel.Thm
+
+pub fn measurable_on_banach_indicatrix() -> @kernel.Thm
+
+pub fn measurable_on_bilinear() -> @kernel.Thm
+
+pub fn measurable_on_cases() -> @kernel.Thm
+
+pub fn measurable_on_cmul() -> @kernel.Thm
+
+pub fn measurable_on_cmul_eq() -> @kernel.Thm
+
+pub fn measurable_on_combine() -> @kernel.Thm
+
+pub fn measurable_on_componentwise() -> @kernel.Thm
+
+pub fn measurable_on_compose_alt() -> @kernel.Thm
+
+pub fn measurable_on_compose_continuous() -> @kernel.Thm
+
+pub fn measurable_on_compose_continuous_0() -> @kernel.Thm
+
+pub fn measurable_on_compose_continuous_closed_set() -> @kernel.Thm
+
+pub fn measurable_on_compose_continuous_closed_set_0() -> @kernel.Thm
+
+pub fn measurable_on_compose_continuous_open_interval() -> @kernel.Thm
+
+pub fn measurable_on_compose_fstcart() -> @kernel.Thm
+
+pub fn measurable_on_compose_gen() -> @kernel.Thm
+
+pub fn measurable_on_compose_rev() -> @kernel.Thm
+
+pub fn measurable_on_compose_sndcart() -> @kernel.Thm
+
+pub fn measurable_on_compose_sub() -> @kernel.Thm
+
+pub fn measurable_on_const() -> @kernel.Thm
+
+pub fn measurable_on_const_eq() -> @kernel.Thm
+
+pub fn measurable_on_continuous_compose() -> @kernel.Thm
+
+pub fn measurable_on_continuous_compose_rev() -> @kernel.Thm
+
+pub fn measurable_on_convolution() -> @kernel.Thm
+
+pub fn measurable_on_countable_unions() -> @kernel.Thm
+
+pub fn measurable_on_det_jacobian() -> @kernel.Thm
+
+pub fn measurable_on_diff() -> @kernel.Thm
+
+pub fn measurable_on_differentiable_image() -> @kernel.Thm
+
+pub fn measurable_on_drop_mul() -> @kernel.Thm
+
+pub fn measurable_on_empty() -> @kernel.Thm
+
+pub fn measurable_on_eq() -> @kernel.Thm
+
+pub fn measurable_on_indicator() -> @kernel.Thm
+
+pub fn measurable_on_indicator_subset() -> @kernel.Thm
+
+pub fn measurable_on_inter() -> @kernel.Thm
+
+pub fn measurable_on_inverse_function() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_preimage_analytic() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_preimage_analytic_eq() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_preimage_borel() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_preimage_borel_eq() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_preimage_closed() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_preimage_closed_eq() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_preimage_closed_interval() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_preimage_halfspace_component_ge() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_preimage_halfspace_component_gt() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_preimage_halfspace_component_le() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_preimage_halfspace_component_lt() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_preimage_open() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_preimage_open_eq() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_preimage_open_interval() -> @kernel.Thm
+
+pub fn measurable_on_lebesgue_measurable_subset() -> @kernel.Thm
+
+pub fn measurable_on_left_inverse() -> @kernel.Thm
+
+pub fn measurable_on_lift_abs() -> @kernel.Thm
+
+pub fn measurable_on_lift_div() -> @kernel.Thm
+
+pub fn measurable_on_lift_inv() -> @kernel.Thm
+
+pub fn measurable_on_lift_mul() -> @kernel.Thm
+
+pub fn measurable_on_lift_pow() -> @kernel.Thm
+
+pub fn measurable_on_lift_product() -> @kernel.Thm
+
+pub fn measurable_on_limit() -> @kernel.Thm
+
+pub fn measurable_on_linear_image_eq() -> @kernel.Thm
+
+pub fn measurable_on_linear_image_eq_gen() -> @kernel.Thm
+
+pub fn measurable_on_max() -> @kernel.Thm
+
+pub fn measurable_on_measurable_preimage_closed() -> @kernel.Thm
+
+pub fn measurable_on_measurable_preimage_closed_eq() -> @kernel.Thm
+
+pub fn measurable_on_measurable_preimage_closed_interval() -> @kernel.Thm
+
+pub fn measurable_on_measurable_preimage_halfspace_component_ge() -> @kernel.Thm
+
+pub fn measurable_on_measurable_preimage_halfspace_component_gt() -> @kernel.Thm
+
+pub fn measurable_on_measurable_preimage_halfspace_component_le() -> @kernel.Thm
+
+pub fn measurable_on_measurable_preimage_halfspace_component_lt() -> @kernel.Thm
+
+pub fn measurable_on_measurable_preimage_open() -> @kernel.Thm
+
+pub fn measurable_on_measurable_preimage_open_eq() -> @kernel.Thm
+
+pub fn measurable_on_measurable_preimage_open_interval() -> @kernel.Thm
+
+pub fn measurable_on_measurable_subset() -> @kernel.Thm
+
+pub fn measurable_on_min() -> @kernel.Thm
+
+pub fn measurable_on_mul() -> @kernel.Thm
+
+pub fn measurable_on_neg() -> @kernel.Thm
+
+pub fn measurable_on_neg_eq() -> @kernel.Thm
+
+pub fn measurable_on_norm() -> @kernel.Thm
+
+pub fn measurable_on_open_interval() -> @kernel.Thm
+
+pub fn measurable_on_partial_derivatives() -> @kernel.Thm
+
+pub fn measurable_on_pastecart() -> @kernel.Thm
+
+pub fn measurable_on_preimage_analytic() -> @kernel.Thm
+
+pub fn measurable_on_preimage_borel() -> @kernel.Thm
+
+pub fn measurable_on_preimage_closed() -> @kernel.Thm
+
+pub fn measurable_on_preimage_closed_interval() -> @kernel.Thm
+
+pub fn measurable_on_preimage_closed_interval_dense() -> @kernel.Thm
+
+pub fn measurable_on_preimage_halfspace_component_ge() -> @kernel.Thm
+
+pub fn measurable_on_preimage_halfspace_component_ge_dense() -> @kernel.Thm
+
+pub fn measurable_on_preimage_halfspace_component_gt() -> @kernel.Thm
+
+pub fn measurable_on_preimage_halfspace_component_gt_dense() -> @kernel.Thm
+
+pub fn measurable_on_preimage_halfspace_component_le() -> @kernel.Thm
+
+pub fn measurable_on_preimage_halfspace_component_le_dense() -> @kernel.Thm
+
+pub fn measurable_on_preimage_halfspace_component_lt() -> @kernel.Thm
+
+pub fn measurable_on_preimage_halfspace_component_lt_dense() -> @kernel.Thm
+
+pub fn measurable_on_preimage_open() -> @kernel.Thm
+
+pub fn measurable_on_preimage_open_interval() -> @kernel.Thm
+
+pub fn measurable_on_preimage_open_interval_dense() -> @kernel.Thm
+
+pub fn measurable_on_preimage_orthant_ge() -> @kernel.Thm
+
+pub fn measurable_on_preimage_orthant_ge_dense() -> @kernel.Thm
+
+pub fn measurable_on_preimage_orthant_gt() -> @kernel.Thm
+
+pub fn measurable_on_preimage_orthant_gt_dense() -> @kernel.Thm
+
+pub fn measurable_on_preimage_orthant_le() -> @kernel.Thm
+
+pub fn measurable_on_preimage_orthant_le_dense() -> @kernel.Thm
+
+pub fn measurable_on_preimage_orthant_lt() -> @kernel.Thm
+
+pub fn measurable_on_preimage_orthant_lt_dense() -> @kernel.Thm
+
+pub fn measurable_on_real_sgn() -> @kernel.Thm
+
+pub fn measurable_on_reflect() -> @kernel.Thm
+
+pub fn measurable_on_restrict() -> @kernel.Thm
+
+pub fn measurable_on_right_inverse() -> @kernel.Thm
+
+pub fn measurable_on_simple_function_limit() -> @kernel.Thm
+
+pub fn measurable_on_simple_function_limit_increasing() -> @kernel.Thm
+
+pub fn measurable_on_spike() -> @kernel.Thm
+
+pub fn measurable_on_spike_set() -> @kernel.Thm
+
+pub fn measurable_on_spike_set_eq() -> @kernel.Thm
+
+pub fn measurable_on_sub() -> @kernel.Thm
+
+pub fn measurable_on_translation() -> @kernel.Thm
+
+pub fn measurable_on_translation_eq() -> @kernel.Thm
+
+pub fn measurable_on_union() -> @kernel.Thm
+
+pub fn measurable_on_unions() -> @kernel.Thm
+
+pub fn measurable_on_univ() -> @kernel.Thm
+
+pub fn measurable_on_vector_derivative() -> @kernel.Thm
+
+pub fn measurable_on_vector_derivative_gen() -> @kernel.Thm
+
+pub fn measurable_on_vsum() -> @kernel.Thm
+
+pub fn measurable_open() -> @kernel.Thm
+
+pub fn measurable_open_in() -> @kernel.Thm
+
+pub fn measurable_outer_closed_intervals() -> @kernel.Thm
+
+pub fn measurable_outer_intervals_bounded() -> @kernel.Thm
+
+pub fn measurable_outer_open() -> @kernel.Thm
+
+pub fn measurable_outer_open_intervals() -> @kernel.Thm
+
+pub fn measurable_pcross() -> @kernel.Thm
+
+pub fn measurable_scaling() -> @kernel.Thm
+
+pub fn measurable_scaling_eq() -> @kernel.Thm
+
+pub fn measurable_segment() -> @kernel.Thm
+
+pub fn measurable_simplex() -> @kernel.Thm
+
+pub fn measurable_sing() -> @kernel.Thm
+
+pub fn measurable_small_imp_negligible() -> @kernel.Thm
+
+pub fn measurable_tetrahedron() -> @kernel.Thm
+
+pub fn measurable_translation() -> @kernel.Thm
+
+pub fn measurable_translation_eq() -> @kernel.Thm
+
+pub fn measurable_triangle() -> @kernel.Thm
+
+pub fn measurable_union() -> @kernel.Thm
+
+pub fn measurable_unions() -> @kernel.Thm
+
+pub fn measurable_v1() -> @kernel.Thm
+
+pub fn measure() -> @kernel.Thm
+
+pub fn measure_affinity() -> @kernel.Thm
+
+pub fn measure_ball_bound() -> @kernel.Thm
+
+pub fn measure_ball_pos() -> @kernel.Thm
+
+pub fn measure_ball_scaling() -> @kernel.Thm
+
+pub fn measure_bounded_differentiable_image() -> @kernel.Thm
+
+pub fn measure_cball_bound() -> @kernel.Thm
+
+pub fn measure_cball_pos() -> @kernel.Thm
+
+pub fn measure_cball_scaling() -> @kernel.Thm
+
+pub fn measure_closure() -> @kernel.Thm
+
+pub fn measure_continuous_with_hausdist() -> @kernel.Thm
+
+pub fn measure_continuous_with_hausdist_explicit() -> @kernel.Thm
+
+pub fn measure_countable_unions_approachable() -> @kernel.Thm
+
+pub fn measure_countable_unions_le() -> @kernel.Thm
+
+pub fn measure_countable_unions_le_gen() -> @kernel.Thm
+
+pub fn measure_countable_unions_le_strong() -> @kernel.Thm
+
+pub fn measure_countable_unions_le_strong_gen() -> @kernel.Thm
+
+pub fn measure_delete() -> @kernel.Thm
+
+pub fn measure_diff_subset() -> @kernel.Thm
+
+pub fn measure_differentiable_image() -> @kernel.Thm
+
+pub fn measure_differentiable_image_approx() -> @kernel.Thm
+
+pub fn measure_differentiable_image_approx_gen() -> @kernel.Thm
+
+pub fn measure_differentiable_image_eq() -> @kernel.Thm
+
+pub fn measure_disjoint_union() -> @kernel.Thm
+
+pub fn measure_disjoint_union_eq() -> @kernel.Thm
+
+pub fn measure_disjoint_unions() -> @kernel.Thm
+
+pub fn measure_disjoint_unions_image() -> @kernel.Thm
+
+pub fn measure_disjoint_unions_image_strong() -> @kernel.Thm
+
+pub fn measure_elementary() -> @kernel.Thm
+
+pub fn measure_empty() -> @kernel.Thm
+
+pub fn measure_eq_0() -> @kernel.Thm
+
+pub fn measure_frontier() -> @kernel.Thm
+
+pub fn measure_insert() -> @kernel.Thm
+
+pub fn measure_integral() -> @kernel.Thm
+
+pub fn measure_integral_univ() -> @kernel.Thm
+
+pub fn measure_interior() -> @kernel.Thm
+
+pub fn measure_interval() -> @kernel.Thm
+
+pub fn measure_interval_1() -> @kernel.Thm
+
+pub fn measure_interval_1_alt() -> @kernel.Thm
+
+pub fn measure_interval_2() -> @kernel.Thm
+
+pub fn measure_interval_2_alt() -> @kernel.Thm
+
+pub fn measure_interval_3() -> @kernel.Thm
+
+pub fn measure_interval_3_alt() -> @kernel.Thm
+
+pub fn measure_interval_4() -> @kernel.Thm
+
+pub fn measure_interval_4_alt() -> @kernel.Thm
+
+pub fn measure_isometry() -> @kernel.Thm
+
+pub fn measure_limit() -> @kernel.Thm
+
+pub fn measure_linear_image() -> @kernel.Thm
+
+pub fn measure_linear_image_same() -> @kernel.Thm
+
+pub fn measure_lipschitz_image() -> @kernel.Thm
+
+pub fn measure_locally_lipschitz_image() -> @kernel.Thm
+
+pub fn measure_negations() -> @kernel.Thm
+
+pub fn measure_negligible_symdiff() -> @kernel.Thm
+
+pub fn measure_negligible_union() -> @kernel.Thm
+
+pub fn measure_negligible_union_eq() -> @kernel.Thm
+
+pub fn measure_negligible_unions() -> @kernel.Thm
+
+pub fn measure_negligible_unions_image() -> @kernel.Thm
+
+pub fn measure_negligible_unions_image_strong() -> @kernel.Thm
+
+pub fn measure_open_pos_lt() -> @kernel.Thm
+
+pub fn measure_open_pos_lt_eq() -> @kernel.Thm
+
+pub fn measure_orthogonal_image_eq() -> @kernel.Thm
+
+pub fn measure_pcross() -> @kernel.Thm
+
+pub fn measure_pos_le() -> @kernel.Thm
+
+pub fn measure_scaling() -> @kernel.Thm
+
+pub fn measure_segment_1() -> @kernel.Thm
+
+pub fn measure_semicontinuous_with_hausdist_bound() -> @kernel.Thm
+
+pub fn measure_semicontinuous_with_hausdist_explicit() -> @kernel.Thm
+
+pub fn measure_simplex() -> @kernel.Thm
+
+pub fn measure_sing() -> @kernel.Thm
+
+pub fn measure_sub_le_measure_diff() -> @kernel.Thm
+
+pub fn measure_sub_le_measure_symdiff() -> @kernel.Thm
+
+pub fn measure_subset() -> @kernel.Thm
+
+pub fn measure_tetrahedron() -> @kernel.Thm
+
+pub fn measure_translation() -> @kernel.Thm
+
+pub fn measure_triangle() -> @kernel.Thm
+
+pub fn measure_union() -> @kernel.Thm
+
+pub fn measure_union_le() -> @kernel.Thm
+
+pub fn measure_unions_le() -> @kernel.Thm
+
+pub fn measure_unions_le_image() -> @kernel.Thm
+
+pub fn measure_unique() -> @kernel.Thm
+
+pub fn midpoint_convex_imp_continuous_ostrowski() -> @kernel.Thm
+
+pub fn midpoint_convex_imp_convex_ostrowski() -> @kernel.Thm
+
+pub fn multipart_measures() -> @kernel.Thm
+
+pub fn negligible_absolutely_continuous_image() -> @kernel.Thm
+
+pub fn negligible_absolutely_continuous_image_lowdim() -> @kernel.Thm
+
+pub fn negligible_affine_hull() -> @kernel.Thm
+
+pub fn negligible_affine_hull_1() -> @kernel.Thm
+
+pub fn negligible_affine_hull_2() -> @kernel.Thm
+
+pub fn negligible_affine_hull_3() -> @kernel.Thm
+
+pub fn negligible_affinity() -> @kernel.Thm
+
+pub fn negligible_affinity_eq() -> @kernel.Thm
+
+pub fn negligible_convex_frontier() -> @kernel.Thm
+
+pub fn negligible_convex_hull() -> @kernel.Thm
+
+pub fn negligible_convex_hull_1() -> @kernel.Thm
+
+pub fn negligible_convex_hull_2() -> @kernel.Thm
+
+pub fn negligible_convex_hull_3() -> @kernel.Thm
+
+pub fn negligible_convex_interior() -> @kernel.Thm
+
+pub fn negligible_countable_unions_gen() -> @kernel.Thm
+
+pub fn negligible_delete() -> @kernel.Thm
+
+pub fn negligible_differentiable_image_lowdim() -> @kernel.Thm
+
+pub fn negligible_differentiable_image_negligible() -> @kernel.Thm
+
+pub fn negligible_differentiable_preimage() -> @kernel.Thm
+
+pub fn negligible_disjoint_translates() -> @kernel.Thm
+
+pub fn negligible_empty_interior() -> @kernel.Thm
+
+pub fn negligible_eq_measure_0() -> @kernel.Thm
+
+pub fn negligible_eq_zero_density() -> @kernel.Thm
+
+pub fn negligible_eq_zero_density_alt() -> @kernel.Thm
+
+pub fn negligible_hyperplane() -> @kernel.Thm
+
+pub fn negligible_iff_lebesgue_measurable_subsets() -> @kernel.Thm
+
+pub fn negligible_iff_measurable_subsets() -> @kernel.Thm
+
+pub fn negligible_image_bounded_variation_interval() -> @kernel.Thm
+
+pub fn negligible_image_indefinite_integral() -> @kernel.Thm
+
+pub fn negligible_imp_lebesgue_measurable() -> @kernel.Thm
+
+pub fn negligible_imp_measurable() -> @kernel.Thm
+
+pub fn negligible_infinite_preimages_differentiable() -> @kernel.Thm
+
+pub fn negligible_infinite_preimages_mostly_differentiable() -> @kernel.Thm
+
+pub fn negligible_infinite_preimages_mostly_differentiable_gen() -> @kernel.Thm
+
+pub fn negligible_interval() -> @kernel.Thm
+
+pub fn negligible_linear_image() -> @kernel.Thm
+
+pub fn negligible_linear_image_eq() -> @kernel.Thm
+
+pub fn negligible_linear_image_gen() -> @kernel.Thm
+
+pub fn negligible_linear_singular_image() -> @kernel.Thm
+
+pub fn negligible_lipschitz_image_univ() -> @kernel.Thm
+
+pub fn negligible_locally_lipschitz_image() -> @kernel.Thm
+
+pub fn negligible_locally_lipschitz_image_lowdim() -> @kernel.Thm
+
+pub fn negligible_lowdim() -> @kernel.Thm
+
+pub fn negligible_measurable_function_graph() -> @kernel.Thm
+
+pub fn negligible_outer() -> @kernel.Thm
+
+pub fn negligible_outer_le() -> @kernel.Thm
+
+pub fn negligible_pcross() -> @kernel.Thm
+
+pub fn negligible_points_of_ambiguous_derivative() -> @kernel.Thm
+
+pub fn negligible_rectifiable_path_image() -> @kernel.Thm
+
+pub fn negligible_scaling() -> @kernel.Thm
+
+pub fn negligible_scaling_eq() -> @kernel.Thm
+
+pub fn negligible_segment() -> @kernel.Thm
+
+pub fn negligible_sphere() -> @kernel.Thm
+
+pub fn negligible_symdiff_eq() -> @kernel.Thm
+
+pub fn negligible_translation() -> @kernel.Thm
+
+pub fn negligible_translation_eq() -> @kernel.Thm
+
+pub fn negligible_translation_rev() -> @kernel.Thm
+
+pub fn non_measurable_set() -> @kernel.Thm
+
+pub fn not_measurable_univ() -> @kernel.Thm
+
+pub fn not_negligible_univ() -> @kernel.Thm
+
+pub fn open_measurable_inner_division() -> @kernel.Thm
+
+pub fn open_not_negligible() -> @kernel.Thm
+
+pub fn ostrowski_theorem() -> @kernel.Thm
+
+pub fn outer_lebesgue_measure() -> @kernel.Thm
+
+pub fn outer_measure() -> @kernel.Thm
+
+pub fn outer_measure_eq() -> @kernel.Thm
+
+pub fn outer_measure_gen() -> @kernel.Thm
+
+pub fn pairwise_disjoint_lebesgue_measurable_imp_countable() -> @kernel.Thm
+
+pub fn part_measures() -> @kernel.Thm
+
+pub fn positive_ae_derivative_imp_increasing_le() -> @kernel.Thm
+
+pub fn positive_ae_derivative_imp_increasing_le_gen() -> @kernel.Thm
+
+pub fn positive_ae_derivative_imp_increasing_lt() -> @kernel.Thm
+
+pub fn positive_ae_derivative_imp_increasing_lt_gen() -> @kernel.Thm
+
+pub fn positive_ae_derivative_imp_nondecreasing() -> @kernel.Thm
+
+pub fn preserves_lebesgue_measurable_iff_preserves_negligible() -> @kernel.Thm
+
+pub fn preserves_lebesgue_measurable_iff_preserves_negligible_alt() -> @kernel.Thm
+
+pub fn preserves_lebesgue_measurable_iff_preserves_negligible_gen() -> @kernel.Thm
+
+pub fn preserves_lebesgue_measurable_imp_preserves_negligible() -> @kernel.Thm
+
+pub fn preserves_negligible_image() -> @kernel.Thm
+
+pub fn preserves_negligible_image_univ() -> @kernel.Thm
+
+pub fn rademacher() -> @kernel.Thm
+
+pub fn rademacher_gen() -> @kernel.Thm
+
+pub fn rademacher_open() -> @kernel.Thm
+
+pub fn rademacher_univ() -> @kernel.Thm
+
+pub fn square_integral_square_integrable_product_le() -> @kernel.Thm
+
+pub fn starlike_negligible() -> @kernel.Thm
+
+pub fn starlike_negligible_bounded_measurable() -> @kernel.Thm
+
+pub fn starlike_negligible_lemma() -> @kernel.Thm
+
+pub fn starlike_negligible_strong() -> @kernel.Thm
+
+pub fn steinhaus() -> @kernel.Thm
+
+pub fn steinhaus_diffs() -> @kernel.Thm
+
+pub fn steinhaus_lebesgue() -> @kernel.Thm
+
+pub fn steinhaus_sums() -> @kernel.Thm
+
+pub fn stepanov() -> @kernel.Thm
+
+pub fn stepanov_gen() -> @kernel.Thm
+
+pub fn stepanov_univ() -> @kernel.Thm
+
+pub fn stretch_galois() -> @kernel.Thm
+
+pub fn subinterval_mean_value_theorem() -> @kernel.Thm
+
+pub fn subinterval_mean_value_theorem_alt() -> @kernel.Thm
+
+pub fn subinterval_mean_value_theorem_seq() -> @kernel.Thm
+
+pub fn suslin_lebesgue_measurable() -> @kernel.Thm
+
+pub fn vector_variation_integral_norm_derivative_gen() -> @kernel.Thm
+
+pub fn vector_variation_integral_norm_derivative_rev() -> @kernel.Thm
+
+pub fn vitali_covering_lemma_balls() -> @kernel.Thm
+
+pub fn vitali_covering_lemma_cballs() -> @kernel.Thm
+
+pub fn vitali_covering_lemma_cballs_balls() -> @kernel.Thm
+
+pub fn vitali_covering_theorem_balls() -> @kernel.Thm
+
+pub fn vitali_covering_theorem_cballs() -> @kernel.Thm
+
+pub fn weak_lebesgue_points_imp_ivt() -> @kernel.Thm
+
+pub fn wiener_covering_lemma_balls() -> @kernel.Thm
+
+pub fn wiener_covering_lemma_cballs() -> @kernel.Thm
+
+pub fn zero_ae_derivative_imp_constant() -> @kernel.Thm
+
+pub fn zero_ae_derivative_imp_constant_gen() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

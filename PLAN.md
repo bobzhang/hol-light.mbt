@@ -376,4 +376,13 @@ definitions register constants, quotations advance the type-variable and
   `int63_of_num`). Upstream and the port now agree beyond 2^31 (e.g.
   bitmatch on 32-bit word numerals). tools/ocaml_ref/retranslate_all.py
   regenerates every translated package in load order.
-  Next: Multivariate/, then the native target.
+  Multivariate/ loads in make.ml's order (each file after its
+  predecessor's chain and what it needs), checked a run of files at a time
+  by tools/ocaml_ref/batch.py (one translation session and one upstream
+  session, forking a child per file, instead of three chain reloads per
+  file). Not ported: multivariate_database.ml and complex_database.ml, the
+  name/theorem tables of the interactive `search` (they need help.ml, like
+  database.ml, and define no theory). Native: `--target native` passes the
+  whole suite; `--release` hits a moonc C-backend miscompile
+  (tools/moonbit_bugs/).
+  Next: the rest of Multivariate/, then the native target.

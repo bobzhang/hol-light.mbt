@@ -88,12 +88,14 @@ def needs(f):
 # it, then the remaining files (each after what it needs): a file there is
 # loaded after its predecessor in this order (and that one's chain), then
 # what it needs. One session can then load the chain once for a batch
-# (tools/ocaml_ref/batch.py).
+# (tools/ocaml_ref/batch.py). Not ported: multivariate_database.ml and
+# complex_database.ml, the name/theorem tables of the interactive `search`
+# (help.ml, like database.ml); they define no theory.
 MV_ORDER = ["Multivariate/" + n + ".ml" for n in [
     "misc", "metric", "homology", "vectors", "determinants", "topology", "convex", "paths",
     "polytope", "degree", "derivatives", "clifford", "integration", "measure",
-    "multivariate_database", "complexes", "canal", "transcendentals", "realanalysis",
-    "moretop", "cauchy", "complex_database", "cross", "msum", "paracompact",
+    "complexes", "canal", "transcendentals", "realanalysis",
+    "moretop", "cauchy", "cross", "msum", "paracompact",
     "specialtopologies", "tarski", "wlog", "wlog_examples", "geom", "lpspaces", "gamma",
     "cvectors", "flyspeck"]]
 

@@ -1,0 +1,251 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/clifford"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn bilinear_eq_mbasis() -> @kernel.Thm
+
+pub fn bilinear_geom() -> @kernel.Thm
+
+pub fn bilinear_inner() -> @kernel.Thm
+
+pub fn bilinear_outer() -> @kernel.Thm
+
+pub fn bilinear_product() -> @kernel.Thm
+
+pub fn card_add_symdiff_inter() -> @kernel.Thm
+
+pub fn card_diff_inter() -> @kernel.Thm
+
+pub fn card_union_lemma() -> @kernel.Thm
+
+pub fn codeset() -> @kernel.Thm
+
+pub fn codeset_setcode_bijections() -> @kernel.Thm
+
+pub fn dest_mk_multivector() -> @kernel.Thm
+
+pub fn dimindex_multivector() -> @kernel.Thm
+
+pub fn exists_swap() -> @kernel.Thm
+
+pub fn finite_cart_subset_lemma() -> @kernel.Thm
+
+pub fn finite_multivector() -> @kernel.Thm
+
+pub fn forall_multivector() -> @kernel.Thm
+
+pub fn forall_setcode() -> @kernel.Thm
+
+pub fn geom_assoc() -> @kernel.Thm
+
+pub fn geom_ladd() -> @kernel.Thm
+
+pub fn geom_lmul() -> @kernel.Thm
+
+pub fn geom_lneg() -> @kernel.Thm
+
+pub fn geom_lzero() -> @kernel.Thm
+
+pub fn geom_mbasis() -> @kernel.Thm
+
+pub fn geom_mbasis_sing() -> @kernel.Thm
+
+pub fn geom_mul() -> @kernel.Thm
+
+pub fn geom_radd() -> @kernel.Thm
+
+pub fn geom_rmul() -> @kernel.Thm
+
+pub fn geom_rneg() -> @kernel.Thm
+
+pub fn geom_rzero() -> @kernel.Thm
+
+pub fn grade() -> @kernel.Thm
+
+pub fn grade_add() -> @kernel.Thm
+
+pub fn grade_cmul() -> @kernel.Thm
+
+pub fn has_size_multivector() -> @kernel.Thm
+
+pub fn inner() -> @kernel.Thm
+
+pub fn inner_ladd() -> @kernel.Thm
+
+pub fn inner_lmul() -> @kernel.Thm
+
+pub fn inner_lneg() -> @kernel.Thm
+
+pub fn inner_lzero() -> @kernel.Thm
+
+pub fn inner_radd() -> @kernel.Thm
+
+pub fn inner_rmul() -> @kernel.Thm
+
+pub fn inner_rneg() -> @kernel.Thm
+
+pub fn inner_rzero() -> @kernel.Thm
+
+pub fn lambdas() -> @kernel.Thm
+
+pub fn linear_eq_mbasis() -> @kernel.Thm
+
+pub fn linear_property() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mbasis() -> @kernel.Thm
+
+pub fn mbasis_component() -> @kernel.Thm
+
+pub fn mbasis_eq_0() -> @kernel.Thm
+
+pub fn mbasis_expansion() -> @kernel.Thm
+
+pub fn mbasis_extension() -> @kernel.Thm
+
+pub fn mbasis_group_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn mbasis_merge_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn mbasis_nonzero() -> @kernel.Thm
+
+pub fn mbasis_split() -> @kernel.Thm
+
+pub fn mbasis_split_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn minimal_in_insert() -> @kernel.Thm
+
+pub fn multivec() -> @kernel.Thm
+
+pub fn multivector() -> @kernel.Thm
+
+pub fn multivector_add_component() -> @kernel.Thm
+
+pub fn multivector_beta() -> @kernel.Thm
+
+pub fn multivector_eq() -> @kernel.Thm
+
+pub fn multivector_eta() -> @kernel.Thm
+
+pub fn multivector_grade() -> @kernel.Thm
+
+pub fn multivector_image() -> @kernel.Thm
+
+pub fn multivector_mul_component() -> @kernel.Thm
+
+pub fn multivector_tybij() -> @kernel.Thm
+
+pub fn multivector_tybij_th() -> @kernel.Thm
+
+pub fn multivector_unique() -> @kernel.Thm
+
+pub fn multivector_vec_component() -> @kernel.Thm
+
+pub fn multivector_vsum() -> @kernel.Thm
+
+pub fn multivector_vsum_component() -> @kernel.Thm
+
+pub fn neutral_outer() -> @kernel.Thm
+
+pub fn outer() -> @kernel.Thm
+
+pub fn outer_aci() -> @kernel.Thm
+
+pub fn outer_assoc() -> @kernel.Thm
+
+pub fn outer_canon_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn outer_ladd() -> @kernel.Thm
+
+pub fn outer_lmul() -> @kernel.Thm
+
+pub fn outer_lneg() -> @kernel.Thm
+
+pub fn outer_lzero() -> @kernel.Thm
+
+pub fn outer_mbasis() -> @kernel.Thm
+
+pub fn outer_mbasis_lscalar() -> @kernel.Thm
+
+pub fn outer_mbasis_refl() -> @kernel.Thm
+
+pub fn outer_mbasis_rscalar() -> @kernel.Thm
+
+pub fn outer_mbasis_sing() -> @kernel.Thm
+
+pub fn outer_mbasis_skewsym() -> @kernel.Thm
+
+pub fn outer_radd() -> @kernel.Thm
+
+pub fn outer_rmul() -> @kernel.Thm
+
+pub fn outer_rneg() -> @kernel.Thm
+
+pub fn outer_rzero() -> @kernel.Thm
+
+pub fn outer_v1() -> @kernel.Thm
+
+pub fn outermorphism() -> @kernel.Thm
+
+pub fn outermorphism_mbasis() -> @kernel.Thm
+
+pub fn outermorphism_mbasis_empty() -> @kernel.Thm
+
+pub fn product_associative() -> @kernel.Thm
+
+pub fn product_def() -> @kernel.Thm
+
+pub fn product_ladd() -> @kernel.Thm
+
+pub fn product_lmul() -> @kernel.Thm
+
+pub fn product_lneg() -> @kernel.Thm
+
+pub fn product_lzero() -> @kernel.Thm
+
+pub fn product_mbasis() -> @kernel.Thm
+
+pub fn product_mbasis_sing() -> @kernel.Thm
+
+pub fn product_radd() -> @kernel.Thm
+
+pub fn product_rmul() -> @kernel.Thm
+
+pub fn product_rneg() -> @kernel.Thm
+
+pub fn product_rzero() -> @kernel.Thm
+
+pub fn reversion() -> @kernel.Thm
+
+pub fn seqiterate() -> @kernel.Thm
+
+pub fn seqiterate_clauses() -> @kernel.Thm
+
+pub fn seqiterate_exists() -> @kernel.Thm
+
+pub fn seqiterate_iterate() -> @kernel.Thm
+
+pub fn setcode() -> @kernel.Thm
+
+pub fn setcode_bounds() -> @kernel.Thm
+
+pub fn setenum_norm_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn sindex() -> @kernel.Thm
+
+pub fn span_mbasis() -> @kernel.Thm
+
+pub fn symdiff_parity_lemma() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

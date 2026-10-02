@@ -1,0 +1,435 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/derivatives"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn baire1_det_jacobian() -> @kernel.Thm
+
+pub fn baire1_partial_derivatives() -> @kernel.Thm
+
+pub fn baire1_vector_derivative() -> @kernel.Thm
+
+pub fn bilinear_differentiable_at_compose() -> @kernel.Thm
+
+pub fn bilinear_differentiable_on_compose() -> @kernel.Thm
+
+pub fn bilinear_differentiable_within_compose() -> @kernel.Thm
+
+pub fn brouwer_surjective() -> @kernel.Thm
+
+pub fn brouwer_surjective_cball() -> @kernel.Thm
+
+pub fn convex_on_derivative_secant() -> @kernel.Thm
+
+pub fn convex_on_derivative_secant_imp() -> @kernel.Thm
+
+pub fn convex_on_derivatives() -> @kernel.Thm
+
+pub fn convex_on_derivatives_imp() -> @kernel.Thm
+
+pub fn convex_on_secant_derivative() -> @kernel.Thm
+
+pub fn convex_on_secant_derivative_imp() -> @kernel.Thm
+
+pub fn diff_chain_at() -> @kernel.Thm
+
+pub fn diff_chain_within() -> @kernel.Thm
+
+pub fn differentiable() -> @kernel.Thm
+
+pub fn differentiable_add() -> @kernel.Thm
+
+pub fn differentiable_at_imp_differentiable_on() -> @kernel.Thm
+
+pub fn differentiable_at_lift_dot2() -> @kernel.Thm
+
+pub fn differentiable_at_within() -> @kernel.Thm
+
+pub fn differentiable_bound() -> @kernel.Thm
+
+pub fn differentiable_chain_at() -> @kernel.Thm
+
+pub fn differentiable_chain_within() -> @kernel.Thm
+
+pub fn differentiable_cmul() -> @kernel.Thm
+
+pub fn differentiable_componentwise_at() -> @kernel.Thm
+
+pub fn differentiable_componentwise_within() -> @kernel.Thm
+
+pub fn differentiable_const() -> @kernel.Thm
+
+pub fn differentiable_countable_preimages() -> @kernel.Thm
+
+pub fn differentiable_discrete_preimages() -> @kernel.Thm
+
+pub fn differentiable_discrete_preimages_closed() -> @kernel.Thm
+
+pub fn differentiable_finite_preimages() -> @kernel.Thm
+
+pub fn differentiable_finite_preimages_gen() -> @kernel.Thm
+
+pub fn differentiable_id() -> @kernel.Thm
+
+pub fn differentiable_imp_continuous_at() -> @kernel.Thm
+
+pub fn differentiable_imp_continuous_on() -> @kernel.Thm
+
+pub fn differentiable_imp_continuous_within() -> @kernel.Thm
+
+pub fn differentiable_imp_open_map() -> @kernel.Thm
+
+pub fn differentiable_imp_open_map_alt() -> @kernel.Thm
+
+pub fn differentiable_imp_open_map_gen() -> @kernel.Thm
+
+pub fn differentiable_lift_component() -> @kernel.Thm
+
+pub fn differentiable_linear() -> @kernel.Thm
+
+pub fn differentiable_mul_at() -> @kernel.Thm
+
+pub fn differentiable_mul_within() -> @kernel.Thm
+
+pub fn differentiable_neg() -> @kernel.Thm
+
+pub fn differentiable_on() -> @kernel.Thm
+
+pub fn differentiable_on_add() -> @kernel.Thm
+
+pub fn differentiable_on_compose() -> @kernel.Thm
+
+pub fn differentiable_on_const() -> @kernel.Thm
+
+pub fn differentiable_on_empty() -> @kernel.Thm
+
+pub fn differentiable_on_eq() -> @kernel.Thm
+
+pub fn differentiable_on_eq_differentiable_at() -> @kernel.Thm
+
+pub fn differentiable_on_id() -> @kernel.Thm
+
+pub fn differentiable_on_lift_dot2() -> @kernel.Thm
+
+pub fn differentiable_on_linear() -> @kernel.Thm
+
+pub fn differentiable_on_mul() -> @kernel.Thm
+
+pub fn differentiable_on_neg() -> @kernel.Thm
+
+pub fn differentiable_on_reflect() -> @kernel.Thm
+
+pub fn differentiable_on_sqnorm() -> @kernel.Thm
+
+pub fn differentiable_on_sub() -> @kernel.Thm
+
+pub fn differentiable_on_subset() -> @kernel.Thm
+
+pub fn differentiable_sqnorm_at() -> @kernel.Thm
+
+pub fn differentiable_sub() -> @kernel.Thm
+
+pub fn differentiable_transform_at() -> @kernel.Thm
+
+pub fn differentiable_transform_within() -> @kernel.Thm
+
+pub fn differentiable_vsum() -> @kernel.Thm
+
+pub fn differentiable_vsum_numseg() -> @kernel.Thm
+
+pub fn differentiable_within_lift_dot2() -> @kernel.Thm
+
+pub fn differentiable_within_open() -> @kernel.Thm
+
+pub fn differentiable_within_subset() -> @kernel.Thm
+
+pub fn differential_component_neg_at_maximum() -> @kernel.Thm
+
+pub fn differential_component_pos_at_minimum() -> @kernel.Thm
+
+pub fn differential_component_zero_at_maxmin() -> @kernel.Thm
+
+pub fn differential_zero_maxmin() -> @kernel.Thm
+
+pub fn differential_zero_maxmin_component() -> @kernel.Thm
+
+pub fn drop_differential_neg_at_maximum() -> @kernel.Thm
+
+pub fn drop_differential_pos_at_minimum() -> @kernel.Thm
+
+pub fn frechet_derivative() -> @kernel.Thm
+
+pub fn frechet_derivative_at() -> @kernel.Thm
+
+pub fn frechet_derivative_const_at() -> @kernel.Thm
+
+pub fn frechet_derivative_unique_at() -> @kernel.Thm
+
+pub fn frechet_derivative_unique_within() -> @kernel.Thm
+
+pub fn frechet_derivative_unique_within_closed_interval() -> @kernel.Thm
+
+pub fn frechet_derivative_unique_within_open_interval() -> @kernel.Thm
+
+pub fn frechet_derivative_within_closed_interval() -> @kernel.Thm
+
+pub fn frechet_derivative_works() -> @kernel.Thm
+
+pub fn gateaux_derivative() -> @kernel.Thm
+
+pub fn gateaux_derivative_lipschitz() -> @kernel.Thm
+
+pub fn gateaux_derivative_within() -> @kernel.Thm
+
+pub fn has_antiderivative_limit() -> @kernel.Thm
+
+pub fn has_antiderivative_sequence() -> @kernel.Thm
+
+pub fn has_bounded_vector_derivative_imp_lipschitz() -> @kernel.Thm
+
+pub fn has_derivative() -> @kernel.Thm
+
+pub fn has_derivative_add() -> @kernel.Thm
+
+pub fn has_derivative_at() -> @kernel.Thm
+
+pub fn has_derivative_at_alt() -> @kernel.Thm
+
+pub fn has_derivative_at_reflect() -> @kernel.Thm
+
+pub fn has_derivative_at_v1() -> @kernel.Thm
+
+pub fn has_derivative_at_within() -> @kernel.Thm
+
+pub fn has_derivative_bilinear_at() -> @kernel.Thm
+
+pub fn has_derivative_bilinear_within() -> @kernel.Thm
+
+pub fn has_derivative_cmul() -> @kernel.Thm
+
+pub fn has_derivative_cmul_eq() -> @kernel.Thm
+
+pub fn has_derivative_componentwise_at() -> @kernel.Thm
+
+pub fn has_derivative_componentwise_within() -> @kernel.Thm
+
+pub fn has_derivative_const() -> @kernel.Thm
+
+pub fn has_derivative_id() -> @kernel.Thm
+
+pub fn has_derivative_imp_differentiable() -> @kernel.Thm
+
+pub fn has_derivative_inverse() -> @kernel.Thm
+
+pub fn has_derivative_inverse_basic() -> @kernel.Thm
+
+pub fn has_derivative_inverse_basic_x() -> @kernel.Thm
+
+pub fn has_derivative_inverse_dieudonne() -> @kernel.Thm
+
+pub fn has_derivative_inverse_on() -> @kernel.Thm
+
+pub fn has_derivative_inverse_strong() -> @kernel.Thm
+
+pub fn has_derivative_inverse_strong_x() -> @kernel.Thm
+
+pub fn has_derivative_inverse_within() -> @kernel.Thm
+
+pub fn has_derivative_lift_component() -> @kernel.Thm
+
+pub fn has_derivative_lift_dot() -> @kernel.Thm
+
+pub fn has_derivative_linear() -> @kernel.Thm
+
+pub fn has_derivative_locally_injective() -> @kernel.Thm
+
+pub fn has_derivative_mul_at() -> @kernel.Thm
+
+pub fn has_derivative_mul_within() -> @kernel.Thm
+
+pub fn has_derivative_neg() -> @kernel.Thm
+
+pub fn has_derivative_neg_eq() -> @kernel.Thm
+
+pub fn has_derivative_pastecart() -> @kernel.Thm
+
+pub fn has_derivative_pastecart_eq() -> @kernel.Thm
+
+pub fn has_derivative_sequence() -> @kernel.Thm
+
+pub fn has_derivative_sequence_lipschitz() -> @kernel.Thm
+
+pub fn has_derivative_series() -> @kernel.Thm
+
+pub fn has_derivative_sqnorm_at() -> @kernel.Thm
+
+pub fn has_derivative_sub() -> @kernel.Thm
+
+pub fn has_derivative_transform_at() -> @kernel.Thm
+
+pub fn has_derivative_transform_within() -> @kernel.Thm
+
+pub fn has_derivative_transform_within_open() -> @kernel.Thm
+
+pub fn has_derivative_vmul_component() -> @kernel.Thm
+
+pub fn has_derivative_vmul_drop() -> @kernel.Thm
+
+pub fn has_derivative_vsum() -> @kernel.Thm
+
+pub fn has_derivative_vsum_numseg() -> @kernel.Thm
+
+pub fn has_derivative_within() -> @kernel.Thm
+
+pub fn has_derivative_within_alt() -> @kernel.Thm
+
+pub fn has_derivative_within_open() -> @kernel.Thm
+
+pub fn has_derivative_within_open_in() -> @kernel.Thm
+
+pub fn has_derivative_within_reflect() -> @kernel.Thm
+
+pub fn has_derivative_within_subset() -> @kernel.Thm
+
+pub fn has_derivative_within_v1() -> @kernel.Thm
+
+pub fn has_derivative_zero_connected_constant() -> @kernel.Thm
+
+pub fn has_derivative_zero_connected_unique() -> @kernel.Thm
+
+pub fn has_derivative_zero_constant() -> @kernel.Thm
+
+pub fn has_derivative_zero_unique() -> @kernel.Thm
+
+pub fn has_frechet_derivative_unique_at() -> @kernel.Thm
+
+pub fn has_vector_derivative() -> @kernel.Thm
+
+pub fn has_vector_derivative_add() -> @kernel.Thm
+
+pub fn has_vector_derivative_at_1d() -> @kernel.Thm
+
+pub fn has_vector_derivative_at_within() -> @kernel.Thm
+
+pub fn has_vector_derivative_bilinear_at() -> @kernel.Thm
+
+pub fn has_vector_derivative_bilinear_within() -> @kernel.Thm
+
+pub fn has_vector_derivative_cmul() -> @kernel.Thm
+
+pub fn has_vector_derivative_cmul_eq() -> @kernel.Thm
+
+pub fn has_vector_derivative_componentwise_at() -> @kernel.Thm
+
+pub fn has_vector_derivative_componentwise_within() -> @kernel.Thm
+
+pub fn has_vector_derivative_const() -> @kernel.Thm
+
+pub fn has_vector_derivative_id() -> @kernel.Thm
+
+pub fn has_vector_derivative_imp_differentiable() -> @kernel.Thm
+
+pub fn has_vector_derivative_lift_component_at() -> @kernel.Thm
+
+pub fn has_vector_derivative_lift_component_within() -> @kernel.Thm
+
+pub fn has_vector_derivative_neg() -> @kernel.Thm
+
+pub fn has_vector_derivative_neg_eq() -> @kernel.Thm
+
+pub fn has_vector_derivative_sub() -> @kernel.Thm
+
+pub fn has_vector_derivative_transform_at() -> @kernel.Thm
+
+pub fn has_vector_derivative_transform_within() -> @kernel.Thm
+
+pub fn has_vector_derivative_transform_within_open() -> @kernel.Thm
+
+pub fn has_vector_derivative_within_1d() -> @kernel.Thm
+
+pub fn has_vector_derivative_within_subset() -> @kernel.Thm
+
+pub fn inverse_function_c1() -> @kernel.Thm
+
+pub fn inverse_function_theorem() -> @kernel.Thm
+
+pub fn inverse_function_theorem_affine() -> @kernel.Thm
+
+pub fn inverse_function_theorem_c1_pointwise() -> @kernel.Thm
+
+pub fn inverse_function_theorem_global() -> @kernel.Thm
+
+pub fn inverse_function_theorem_subspace() -> @kernel.Thm
+
+pub fn jacobian() -> @kernel.Thm
+
+pub fn jacobian_sign_invariance() -> @kernel.Thm
+
+pub fn jacobian_works() -> @kernel.Thm
+
+pub fn lim_mul_norm_within() -> @kernel.Thm
+
+pub fn linear_frechet_derivative() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mvt() -> @kernel.Thm
+
+pub fn mvt_general() -> @kernel.Thm
+
+pub fn mvt_segment() -> @kernel.Thm
+
+pub fn mvt_segment_simple() -> @kernel.Thm
+
+pub fn mvt_simple() -> @kernel.Thm
+
+pub fn mvt_very_simple() -> @kernel.Thm
+
+pub fn norm_vector_derivatives_le_at() -> @kernel.Thm
+
+pub fn norm_vector_derivatives_le_within() -> @kernel.Thm
+
+pub fn onorm_derivatives_le() -> @kernel.Thm
+
+pub fn restriction_has_derivative() -> @kernel.Thm
+
+pub fn rolle() -> @kernel.Thm
+
+pub fn sussmann_open_mapping() -> @kernel.Thm
+
+pub fn vector_derivative() -> @kernel.Thm
+
+pub fn vector_derivative_at() -> @kernel.Thm
+
+pub fn vector_derivative_const_at() -> @kernel.Thm
+
+pub fn vector_derivative_increasing_within() -> @kernel.Thm
+
+pub fn vector_derivative_unique_at() -> @kernel.Thm
+
+pub fn vector_derivative_unique_within() -> @kernel.Thm
+
+pub fn vector_derivative_unique_within_closed_interval() -> @kernel.Thm
+
+pub fn vector_derivative_within_closed_interval() -> @kernel.Thm
+
+pub fn vector_derivative_works() -> @kernel.Thm
+
+pub fn vector_diff_chain_at() -> @kernel.Thm
+
+pub fn vector_diff_chain_within() -> @kernel.Thm
+
+pub fn vector_differentiable() -> @kernel.Thm
+
+pub fn vector_differentiable_bound() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,793 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/degree"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn absolute_extensor_imp_ar() -> @kernel.Thm
+
+pub fn absolute_neighbourhood_extensor_imp_anr() -> @kernel.Thm
+
+pub fn absolute_retract_contractible_anr() -> @kernel.Thm
+
+pub fn absolute_retract_convex() -> @kernel.Thm
+
+pub fn absolute_retract_convex_closed() -> @kernel.Thm
+
+pub fn absolute_retract_from_union_and_inter() -> @kernel.Thm
+
+pub fn absolute_retract_homeomorphic_convex_compact() -> @kernel.Thm
+
+pub fn absolute_retract_imp_ar() -> @kernel.Thm
+
+pub fn absolute_retract_imp_ar_gen() -> @kernel.Thm
+
+pub fn absolute_retract_path_image_arc() -> @kernel.Thm
+
+pub fn absolute_retract_union() -> @kernel.Thm
+
+pub fn absolute_retraction_convex_closed() -> @kernel.Thm
+
+pub fn absolute_retraction_convex_closed_relative() -> @kernel.Thm
+
+pub fn accessible_frontier_anr_complement_component() -> @kernel.Thm
+
+pub fn accessible_frontier_anr_inter_complement_component() -> @kernel.Thm
+
+pub fn aff_dim_dimension() -> @kernel.Thm
+
+pub fn aff_dim_dimension_alt() -> @kernel.Thm
+
+pub fn anr() -> @kernel.Thm
+
+pub fn anr_ball() -> @kernel.Thm
+
+pub fn anr_cball() -> @kernel.Thm
+
+pub fn anr_closed_union() -> @kernel.Thm
+
+pub fn anr_closed_union_local() -> @kernel.Thm
+
+pub fn anr_closure_from_frontier() -> @kernel.Thm
+
+pub fn anr_component_anr() -> @kernel.Thm
+
+pub fn anr_componentwise() -> @kernel.Thm
+
+pub fn anr_connected_component_anr() -> @kernel.Thm
+
+pub fn anr_covering_space() -> @kernel.Thm
+
+pub fn anr_covering_space_eq() -> @kernel.Thm
+
+pub fn anr_delete() -> @kernel.Thm
+
+pub fn anr_empty() -> @kernel.Thm
+
+pub fn anr_eq_absolute_neighbourhood_extensor() -> @kernel.Thm
+
+pub fn anr_finite_unions_convex_closed() -> @kernel.Thm
+
+pub fn anr_from_union_and_inter() -> @kernel.Thm
+
+pub fn anr_from_union_and_inter_local() -> @kernel.Thm
+
+pub fn anr_imp_absolute_closed_neighbourhood_extensor() -> @kernel.Thm
+
+pub fn anr_imp_absolute_closed_neighbourhood_retract() -> @kernel.Thm
+
+pub fn anr_imp_absolute_neighbourhood_extensor() -> @kernel.Thm
+
+pub fn anr_imp_absolute_neighbourhood_retract() -> @kernel.Thm
+
+pub fn anr_imp_absolute_neighbourhood_retract_univ() -> @kernel.Thm
+
+pub fn anr_imp_closed_neighbourhood_retract() -> @kernel.Thm
+
+pub fn anr_imp_locally_connected() -> @kernel.Thm
+
+pub fn anr_imp_locally_path_connected() -> @kernel.Thm
+
+pub fn anr_imp_neighbourhood_retract() -> @kernel.Thm
+
+pub fn anr_insert() -> @kernel.Thm
+
+pub fn anr_interior() -> @kernel.Thm
+
+pub fn anr_interval() -> @kernel.Thm
+
+pub fn anr_linear_image_eq() -> @kernel.Thm
+
+pub fn anr_locally() -> @kernel.Thm
+
+pub fn anr_neighborhood_retract() -> @kernel.Thm
+
+pub fn anr_open_in() -> @kernel.Thm
+
+pub fn anr_open_union() -> @kernel.Thm
+
+pub fn anr_open_unions() -> @kernel.Thm
+
+pub fn anr_path_component_anr() -> @kernel.Thm
+
+pub fn anr_path_image_simple_path() -> @kernel.Thm
+
+pub fn anr_pcross() -> @kernel.Thm
+
+pub fn anr_pcross_eq() -> @kernel.Thm
+
+pub fn anr_relative_frontier_convex() -> @kernel.Thm
+
+pub fn anr_relative_interior() -> @kernel.Thm
+
+pub fn anr_retract_of_anr() -> @kernel.Thm
+
+pub fn anr_simplicial_complex() -> @kernel.Thm
+
+pub fn anr_sing() -> @kernel.Thm
+
+pub fn anr_sphere() -> @kernel.Thm
+
+pub fn anr_strong_deformation_retraction() -> @kernel.Thm
+
+pub fn anr_translation() -> @kernel.Thm
+
+pub fn anr_triangulation() -> @kernel.Thm
+
+pub fn anr_union_extension_lemma() -> @kernel.Thm
+
+pub fn anr_univ() -> @kernel.Thm
+
+pub fn ar() -> @kernel.Thm
+
+pub fn ar_anr() -> @kernel.Thm
+
+pub fn ar_arc_image() -> @kernel.Thm
+
+pub fn ar_ball() -> @kernel.Thm
+
+pub fn ar_cball() -> @kernel.Thm
+
+pub fn ar_closed_union() -> @kernel.Thm
+
+pub fn ar_closed_union_local() -> @kernel.Thm
+
+pub fn ar_deformation_retract_of_contractible() -> @kernel.Thm
+
+pub fn ar_eq_absolute_extensor() -> @kernel.Thm
+
+pub fn ar_from_union_and_inter() -> @kernel.Thm
+
+pub fn ar_from_union_and_inter_local() -> @kernel.Thm
+
+pub fn ar_imp_absolute_extensor() -> @kernel.Thm
+
+pub fn ar_imp_absolute_retract() -> @kernel.Thm
+
+pub fn ar_imp_absolute_retract_univ() -> @kernel.Thm
+
+pub fn ar_imp_anr() -> @kernel.Thm
+
+pub fn ar_imp_connected() -> @kernel.Thm
+
+pub fn ar_imp_contractible() -> @kernel.Thm
+
+pub fn ar_imp_locally_connected() -> @kernel.Thm
+
+pub fn ar_imp_locally_path_connected() -> @kernel.Thm
+
+pub fn ar_imp_nonempty() -> @kernel.Thm
+
+pub fn ar_imp_path_connected() -> @kernel.Thm
+
+pub fn ar_imp_retract() -> @kernel.Thm
+
+pub fn ar_interval() -> @kernel.Thm
+
+pub fn ar_linear_image_eq() -> @kernel.Thm
+
+pub fn ar_pcross() -> @kernel.Thm
+
+pub fn ar_pcross_eq() -> @kernel.Thm
+
+pub fn ar_retract_of_ar() -> @kernel.Thm
+
+pub fn ar_sing() -> @kernel.Thm
+
+pub fn ar_strong_deformation_retract_of_ar() -> @kernel.Thm
+
+pub fn ar_translation() -> @kernel.Thm
+
+pub fn ar_univ() -> @kernel.Thm
+
+pub fn bohl() -> @kernel.Thm
+
+pub fn bohl_alt() -> @kernel.Thm
+
+pub fn bohl_simple() -> @kernel.Thm
+
+pub fn borsuk_homotopy_extension() -> @kernel.Thm
+
+pub fn borsuk_homotopy_extension_homotopic() -> @kernel.Thm
+
+pub fn bounded_component_retract_complement_meets() -> @kernel.Thm
+
+pub fn brouwer() -> @kernel.Thm
+
+pub fn brouwer_absolute_retract() -> @kernel.Thm
+
+pub fn brouwer_absolute_retract_gen() -> @kernel.Thm
+
+pub fn brouwer_ar() -> @kernel.Thm
+
+pub fn brouwer_ball() -> @kernel.Thm
+
+pub fn brouwer_contractible_anr() -> @kernel.Thm
+
+pub fn brouwer_cube() -> @kernel.Thm
+
+pub fn brouwer_degree() -> @kernel.Thm
+
+pub fn brouwer_degree1() -> @kernel.Thm
+
+pub fn brouwer_degree1_compose() -> @kernel.Thm
+
+pub fn brouwer_degree1_const() -> @kernel.Thm
+
+pub fn brouwer_degree1_eq() -> @kernel.Thm
+
+pub fn brouwer_degree1_homotopic() -> @kernel.Thm
+
+pub fn brouwer_degree1_id() -> @kernel.Thm
+
+pub fn brouwer_degree1_nonsurjective() -> @kernel.Thm
+
+pub fn brouwer_degree1_reflect_along() -> @kernel.Thm
+
+pub fn brouwer_degree_compose() -> @kernel.Thm
+
+pub fn brouwer_degree_const() -> @kernel.Thm
+
+pub fn brouwer_degree_eq() -> @kernel.Thm
+
+pub fn brouwer_degree_homotopic() -> @kernel.Thm
+
+pub fn brouwer_degree_id() -> @kernel.Thm
+
+pub fn brouwer_degree_nonsurjective() -> @kernel.Thm
+
+pub fn brouwer_degree_orthogonal_transformation() -> @kernel.Thm
+
+pub fn brouwer_degree_reflect_along() -> @kernel.Thm
+
+pub fn brouwer_factor_through_ar() -> @kernel.Thm
+
+pub fn brouwer_inessential_anr() -> @kernel.Thm
+
+pub fn brouwer_weak() -> @kernel.Thm
+
+pub fn card_le_retract_complement_components() -> @kernel.Thm
+
+pub fn closed_in_retract() -> @kernel.Thm
+
+pub fn cohomotopically_trivial_1d() -> @kernel.Thm
+
+pub fn cohomotopically_trivial_on_components() -> @kernel.Thm
+
+pub fn cohomotopically_trivial_on_components_null() -> @kernel.Thm
+
+pub fn compact_ar() -> @kernel.Thm
+
+pub fn compact_subset_frontier_retraction() -> @kernel.Thm
+
+pub fn component_retract_complement_meets() -> @kernel.Thm
+
+pub fn connected_arc_complement() -> @kernel.Thm
+
+pub fn connected_complement_absolute_retract() -> @kernel.Thm
+
+pub fn connected_complement_homeomorphic_convex_compact() -> @kernel.Thm
+
+pub fn connected_convex_diff_lowdim() -> @kernel.Thm
+
+pub fn connected_full_convex_diff_lowdim() -> @kernel.Thm
+
+pub fn connected_full_regular_diff_lowdim() -> @kernel.Thm
+
+pub fn connected_open_diff_lowdim() -> @kernel.Thm
+
+pub fn connected_open_in_convex_diff_lowdim() -> @kernel.Thm
+
+pub fn connected_open_in_diff_lowdim() -> @kernel.Thm
+
+pub fn connected_retract_complement() -> @kernel.Thm
+
+pub fn connected_sphere_gen() -> @kernel.Thm
+
+pub fn connected_univ_diff_lowdim() -> @kernel.Thm
+
+pub fn continuous_function_has_eigenvalues_odd_dim() -> @kernel.Thm
+
+pub fn continuous_interval_bij() -> @kernel.Thm
+
+pub fn continuous_on_interval_bij() -> @kernel.Thm
+
+pub fn contractible_sphere() -> @kernel.Thm
+
+pub fn convex_imp_anr() -> @kernel.Thm
+
+pub fn convex_imp_ar() -> @kernel.Thm
+
+pub fn countable_anr_components() -> @kernel.Thm
+
+pub fn countable_anr_connected_components() -> @kernel.Thm
+
+pub fn countable_anr_path_components() -> @kernel.Thm
+
+pub fn countable_enr_components() -> @kernel.Thm
+
+pub fn countable_enr_connected_components() -> @kernel.Thm
+
+pub fn countable_enr_path_components() -> @kernel.Thm
+
+pub fn deformation_retract() -> @kernel.Thm
+
+pub fn deformation_retract_imp_homotopy_equivalent() -> @kernel.Thm
+
+pub fn deformation_retract_of_contractible() -> @kernel.Thm
+
+pub fn deformation_retract_of_contractible_sing() -> @kernel.Thm
+
+pub fn deformation_retract_trans() -> @kernel.Thm
+
+pub fn deformation_retraction_compose() -> @kernel.Thm
+
+pub fn dim_dimension() -> @kernel.Thm
+
+pub fn dimension_atmost_rational_coordinates() -> @kernel.Thm
+
+pub fn dimension_complement_rational_coordinates() -> @kernel.Thm
+
+pub fn dimension_eq_aff_dim() -> @kernel.Thm
+
+pub fn dimension_eq_full() -> @kernel.Thm
+
+pub fn dimension_eq_full_alt() -> @kernel.Thm
+
+pub fn dimension_eq_full_gen() -> @kernel.Thm
+
+pub fn dimension_frontier_bounded_open() -> @kernel.Thm
+
+pub fn dimension_frontier_nondense_open() -> @kernel.Thm
+
+pub fn dimension_lt_full() -> @kernel.Thm
+
+pub fn dimension_lt_full_alt() -> @kernel.Thm
+
+pub fn dimension_lt_full_gen() -> @kernel.Thm
+
+pub fn dimension_nonempty_interior() -> @kernel.Thm
+
+pub fn dimension_open() -> @kernel.Thm
+
+pub fn dimension_open_in_convex() -> @kernel.Thm
+
+pub fn dimension_relative_frontier_bounded_open() -> @kernel.Thm
+
+pub fn dimension_relative_frontier_convex() -> @kernel.Thm
+
+pub fn dimension_relative_frontier_nondense_open() -> @kernel.Thm
+
+pub fn dimension_sphere() -> @kernel.Thm
+
+pub fn dimension_sphere_inter_affine() -> @kernel.Thm
+
+pub fn dimension_subspace() -> @kernel.Thm
+
+pub fn dimension_univ() -> @kernel.Thm
+
+pub fn enr() -> @kernel.Thm
+
+pub fn enr_anr() -> @kernel.Thm
+
+pub fn enr_ball() -> @kernel.Thm
+
+pub fn enr_bounded() -> @kernel.Thm
+
+pub fn enr_cball() -> @kernel.Thm
+
+pub fn enr_closed_union() -> @kernel.Thm
+
+pub fn enr_closed_union_local() -> @kernel.Thm
+
+pub fn enr_closure_from_frontier() -> @kernel.Thm
+
+pub fn enr_component_enr() -> @kernel.Thm
+
+pub fn enr_componentwise() -> @kernel.Thm
+
+pub fn enr_connected_component_enr() -> @kernel.Thm
+
+pub fn enr_convex_closed() -> @kernel.Thm
+
+pub fn enr_covering_space() -> @kernel.Thm
+
+pub fn enr_covering_space_eq() -> @kernel.Thm
+
+pub fn enr_delete() -> @kernel.Thm
+
+pub fn enr_empty() -> @kernel.Thm
+
+pub fn enr_finite_unions_convex_closed() -> @kernel.Thm
+
+pub fn enr_from_union_and_inter() -> @kernel.Thm
+
+pub fn enr_from_union_and_inter_gen() -> @kernel.Thm
+
+pub fn enr_imp_absolute_neighbourhood_retract() -> @kernel.Thm
+
+pub fn enr_imp_absolute_neighbourhood_retract_univ() -> @kernel.Thm
+
+pub fn enr_imp_anr() -> @kernel.Thm
+
+pub fn enr_imp_fsgima() -> @kernel.Thm
+
+pub fn enr_imp_gdelta() -> @kernel.Thm
+
+pub fn enr_imp_locally_compact() -> @kernel.Thm
+
+pub fn enr_imp_locally_connected() -> @kernel.Thm
+
+pub fn enr_imp_locally_path_connected() -> @kernel.Thm
+
+pub fn enr_insert() -> @kernel.Thm
+
+pub fn enr_inter_closed_open() -> @kernel.Thm
+
+pub fn enr_interior() -> @kernel.Thm
+
+pub fn enr_interval() -> @kernel.Thm
+
+pub fn enr_linear_image_eq() -> @kernel.Thm
+
+pub fn enr_locally() -> @kernel.Thm
+
+pub fn enr_neighborhood_retract() -> @kernel.Thm
+
+pub fn enr_open_in() -> @kernel.Thm
+
+pub fn enr_open_union() -> @kernel.Thm
+
+pub fn enr_open_unions() -> @kernel.Thm
+
+pub fn enr_path_component_enr() -> @kernel.Thm
+
+pub fn enr_path_image_simple_path() -> @kernel.Thm
+
+pub fn enr_pcross() -> @kernel.Thm
+
+pub fn enr_pcross_eq() -> @kernel.Thm
+
+pub fn enr_relative_frontier_convex() -> @kernel.Thm
+
+pub fn enr_relative_interior() -> @kernel.Thm
+
+pub fn enr_retract_of_enr() -> @kernel.Thm
+
+pub fn enr_simplicial_complex() -> @kernel.Thm
+
+pub fn enr_sing() -> @kernel.Thm
+
+pub fn enr_sphere() -> @kernel.Thm
+
+pub fn enr_translation() -> @kernel.Thm
+
+pub fn enr_triangulation() -> @kernel.Thm
+
+pub fn enr_univ() -> @kernel.Thm
+
+pub fn euler_rotation_theorem_gen() -> @kernel.Thm
+
+pub fn extension_from_component() -> @kernel.Thm
+
+pub fn extension_into_ar() -> @kernel.Thm
+
+pub fn extension_into_ar_local() -> @kernel.Thm
+
+pub fn fashoda() -> @kernel.Thm
+
+pub fn fashoda_interlace() -> @kernel.Thm
+
+pub fn fashoda_unit() -> @kernel.Thm
+
+pub fn fashoda_unit_path() -> @kernel.Thm
+
+pub fn finite_anr_complement_components_concentric() -> @kernel.Thm
+
+pub fn finite_anr_components() -> @kernel.Thm
+
+pub fn finite_complement_anr_components() -> @kernel.Thm
+
+pub fn finite_complement_enr_components() -> @kernel.Thm
+
+pub fn finite_enr_components() -> @kernel.Thm
+
+pub fn finite_imp_anr() -> @kernel.Thm
+
+pub fn finite_imp_enr() -> @kernel.Thm
+
+pub fn fixed_point_inessential_sphere_map() -> @kernel.Thm
+
+pub fn fixpoint_homotopic_identity_sphere() -> @kernel.Thm
+
+pub fn fixpoint_or_neg_mapping_sphere() -> @kernel.Thm
+
+pub fn frontier_retract_of_punctured_universe() -> @kernel.Thm
+
+pub fn frontier_subset_retraction() -> @kernel.Thm
+
+pub fn hairy_ball_theorem() -> @kernel.Thm
+
+pub fn hairy_ball_theorem_alt() -> @kernel.Thm
+
+pub fn homeomorphic_anrness() -> @kernel.Thm
+
+pub fn homeomorphic_arness() -> @kernel.Thm
+
+pub fn homeomorphic_compact_arness() -> @kernel.Thm
+
+pub fn homeomorphic_enrness() -> @kernel.Thm
+
+pub fn homeomorphic_fixpoint_property() -> @kernel.Thm
+
+pub fn homeomorphism_anrness() -> @kernel.Thm
+
+pub fn homeomorphism_arness() -> @kernel.Thm
+
+pub fn homeomorphism_enrness() -> @kernel.Thm
+
+pub fn homotopic_into_retract() -> @kernel.Thm
+
+pub fn homotopic_linear_maps_alt() -> @kernel.Thm
+
+pub fn homotopic_linear_maps_imp() -> @kernel.Thm
+
+pub fn homotopic_neighbourhood_extension() -> @kernel.Thm
+
+pub fn homotopic_on_components() -> @kernel.Thm
+
+pub fn homotopic_on_components_eq() -> @kernel.Thm
+
+pub fn homotopic_on_neighbourhood_into_anr() -> @kernel.Thm
+
+pub fn homotopic_orthogonal_transformations() -> @kernel.Thm
+
+pub fn homotopic_orthogonal_transformations_alt() -> @kernel.Thm
+
+pub fn homotopic_orthogonal_transformations_imp() -> @kernel.Thm
+
+pub fn homotopy_equivalent_punctured_univ_sphere() -> @kernel.Thm
+
+pub fn homotopy_equivalent_relative_frontier_punctured_affine_hull() -> @kernel.Thm
+
+pub fn homotopy_equivalent_relative_frontier_punctured_convex() -> @kernel.Thm
+
+pub fn idempotent_imp_retraction() -> @kernel.Thm
+
+pub fn in_interval_interval_bij() -> @kernel.Thm
+
+pub fn inessential_on_components() -> @kernel.Thm
+
+pub fn inessential_on_components_eq() -> @kernel.Thm
+
+pub fn infnorm_2() -> @kernel.Thm
+
+pub fn infnorm_eq_1_2() -> @kernel.Thm
+
+pub fn infnorm_eq_1_imp() -> @kernel.Thm
+
+pub fn inside_arc_empty() -> @kernel.Thm
+
+pub fn inside_simple_curve_imp_closed() -> @kernel.Thm
+
+pub fn interval_bij() -> @kernel.Thm
+
+pub fn interval_bij_affine() -> @kernel.Thm
+
+pub fn interval_bij_bij() -> @kernel.Thm
+
+pub fn invertible_fixpoint_property() -> @kernel.Thm
+
+pub fn is_interval_imp_baire1_indicator() -> @kernel.Thm
+
+pub fn is_interval_imp_enr() -> @kernel.Thm
+
+pub fn is_interval_imp_fsigma() -> @kernel.Thm
+
+pub fn is_interval_imp_gdelta() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn locally_anr() -> @kernel.Thm
+
+pub fn locally_anr_alt() -> @kernel.Thm
+
+pub fn locally_connected_sphere_gen() -> @kernel.Thm
+
+pub fn locally_enr() -> @kernel.Thm
+
+pub fn locally_enr_alt() -> @kernel.Thm
+
+pub fn locally_path_connected_sphere_gen() -> @kernel.Thm
+
+pub fn lpc_intermediate_closure_anr_complement() -> @kernel.Thm
+
+pub fn lpc_intermediate_closure_anr_complement_component() -> @kernel.Thm
+
+pub fn lpc_open_simple_path_complement() -> @kernel.Thm
+
+pub fn lpc_superset_complement_simple_path_image() -> @kernel.Thm
+
+pub fn neighbourhood_extension_into_anr() -> @kernel.Thm
+
+pub fn no_retraction_cball() -> @kernel.Thm
+
+pub fn no_retraction_frontier_bounded() -> @kernel.Thm
+
+pub fn not_absolute_retract_cobounded() -> @kernel.Thm
+
+pub fn not_ar_empty() -> @kernel.Thm
+
+pub fn nullhomotopic_into_anr_extension() -> @kernel.Thm
+
+pub fn nullhomotopic_into_relative_frontier_extension() -> @kernel.Thm
+
+pub fn nullhomotopic_into_sphere_extension() -> @kernel.Thm
+
+pub fn open_imp_anr() -> @kernel.Thm
+
+pub fn open_imp_enr() -> @kernel.Thm
+
+pub fn path_connected_arc_complement() -> @kernel.Thm
+
+pub fn path_connected_complement_absolute_retract() -> @kernel.Thm
+
+pub fn path_connected_complement_homeomorphic_convex_compact() -> @kernel.Thm
+
+pub fn path_connected_intermediate_closure_anr_complement_component() -> @kernel.Thm
+
+pub fn path_connected_open_arc_complement() -> @kernel.Thm
+
+pub fn path_connected_sphere_gen() -> @kernel.Thm
+
+pub fn path_connected_superset_complement_arc_image() -> @kernel.Thm
+
+pub fn perron_frobenius() -> @kernel.Thm
+
+pub fn relative_boundary_retract_of_punctured_affine_hull() -> @kernel.Thm
+
+pub fn relative_frontier_deformation_retract_of_punctured_convex() -> @kernel.Thm
+
+pub fn relative_frontier_retract_of_punctured_affine_hull() -> @kernel.Thm
+
+pub fn retract_fixpoint_property() -> @kernel.Thm
+
+pub fn retract_from_union_and_inter() -> @kernel.Thm
+
+pub fn retract_of() -> @kernel.Thm
+
+pub fn retract_of_closed() -> @kernel.Thm
+
+pub fn retract_of_closed_union() -> @kernel.Thm
+
+pub fn retract_of_cohomotopically_trivial() -> @kernel.Thm
+
+pub fn retract_of_cohomotopically_trivial_null() -> @kernel.Thm
+
+pub fn retract_of_compact() -> @kernel.Thm
+
+pub fn retract_of_connected() -> @kernel.Thm
+
+pub fn retract_of_contractible() -> @kernel.Thm
+
+pub fn retract_of_empty() -> @kernel.Thm
+
+pub fn retract_of_homotopically_trivial() -> @kernel.Thm
+
+pub fn retract_of_homotopically_trivial_null() -> @kernel.Thm
+
+pub fn retract_of_imp_extensible() -> @kernel.Thm
+
+pub fn retract_of_imp_subset() -> @kernel.Thm
+
+pub fn retract_of_injective_linear_image() -> @kernel.Thm
+
+pub fn retract_of_linear_image_eq() -> @kernel.Thm
+
+pub fn retract_of_locally_compact() -> @kernel.Thm
+
+pub fn retract_of_locally_connected() -> @kernel.Thm
+
+pub fn retract_of_locally_path_connected() -> @kernel.Thm
+
+pub fn retract_of_open_union() -> @kernel.Thm
+
+pub fn retract_of_path_connected() -> @kernel.Thm
+
+pub fn retract_of_pcross() -> @kernel.Thm
+
+pub fn retract_of_pcross_eq() -> @kernel.Thm
+
+pub fn retract_of_refl() -> @kernel.Thm
+
+pub fn retract_of_separated_union() -> @kernel.Thm
+
+pub fn retract_of_simply_connected() -> @kernel.Thm
+
+pub fn retract_of_sing() -> @kernel.Thm
+
+pub fn retract_of_space_euclidean() -> @kernel.Thm
+
+pub fn retract_of_subset() -> @kernel.Thm
+
+pub fn retract_of_trans() -> @kernel.Thm
+
+pub fn retract_of_translation() -> @kernel.Thm
+
+pub fn retract_of_translation_eq() -> @kernel.Thm
+
+pub fn retract_of_univ() -> @kernel.Thm
+
+pub fn retraction() -> @kernel.Thm
+
+pub fn retraction_arc() -> @kernel.Thm
+
+pub fn retraction_closest_point() -> @kernel.Thm
+
+pub fn retraction_idempotent() -> @kernel.Thm
+
+pub fn retraction_imp_quotient_map_explicit() -> @kernel.Thm
+
+pub fn retraction_maps_euclidean() -> @kernel.Thm
+
+pub fn retraction_o() -> @kernel.Thm
+
+pub fn retraction_refl() -> @kernel.Thm
+
+pub fn retraction_subset() -> @kernel.Thm
+
+pub fn retraction_v1() -> @kernel.Thm
+
+pub fn rothe() -> @kernel.Thm
+
+pub fn schauder() -> @kernel.Thm
+
+pub fn schauder_gen() -> @kernel.Thm
+
+pub fn schauder_projection() -> @kernel.Thm
+
+pub fn schauder_univ() -> @kernel.Thm
+
+pub fn segment_horizontal() -> @kernel.Thm
+
+pub fn segment_vertical() -> @kernel.Thm
+
+pub fn sing_strong_deformation_retract_of_ar() -> @kernel.Thm
+
+pub fn sphere_retract_of_punctured_universe() -> @kernel.Thm
+
+pub fn sphere_retract_of_punctured_universe_gen() -> @kernel.Thm
+
+pub fn strong_deformation_retract_of_ar() -> @kernel.Thm
+
+pub fn unbounded_components_complement_absolute_retract() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
