@@ -2771,7 +2771,7 @@ pub fn bm_analyze_pat(
   x252 : Int64,
 ) -> ((@kernel.Term) -> FixedArray[Bool?] raise) raise {
   let sz = x252
-  let a = @lib.array_make(@lib.int63_to_int(sz), None)
+  let a = @lib.array_make(sz, None)
   fn go(x254 : Int64, x255 : @kernel.Term) -> Unit raise {
     let i = x254
     match x255 {
@@ -3359,10 +3359,7 @@ fn step_41() -> Unit raise {
               let eqth = x311
               let cls_1 = x312
               let cs_1 = x313
-              let analysis = @lib.array_make(
-                @lib.int63_to_int(sz),
-                Some((0L, 0L)),
-              )
+              let analysis = @lib.array_make(sz, Some((0L, 0L)))
               let _ = @lib.do_list(
                 fn(x316 : FixedArray[Bool?]) -> Unit raise {
                   @lib.array_iteri(

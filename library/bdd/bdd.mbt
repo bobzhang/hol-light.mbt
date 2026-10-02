@@ -54,7 +54,7 @@ pub fn mk_vtable(
   let t13 = @lib.hashtbl_create(@lib.int63_to_int(@lib.add63(n, 1L)))
   let t14 = Ref::{ val: 1L, }
   let t12 = @parser.parse_term("T")
-  (@lib.array_make(@lib.int63_to_int(@lib.add63(n, 1L)), t12), t14, t13)
+  (@lib.array_make(@lib.add63(n, 1L), t12), t14, t13)
 }
 
 ///|

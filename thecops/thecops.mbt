@@ -2164,7 +2164,7 @@ pub fn[TA, TB] empty_v1(
   x311 : Int64,
 ) -> ((FixedArray[Iterm?], Ref[@list.List[TA]]), @list.List[TB]) raise {
   let n = x311
-  let suba = @lib.array_make(@lib.int63_to_int(n), None)
+  let suba = @lib.array_make(n, None)
   let env = Ref::{ val: @list.empty(), }
   let subl = @list.empty()
   ((suba, env), subl)

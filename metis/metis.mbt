@@ -26028,8 +26028,7 @@ pub fn newtable(x3855 : Int64, x3856 : Int64) -> Table raise {
   let arity_1 = x3856
   match elementlistspace(Size::{ size: n, })(arity_1) {
     None => Table::Forgetful_table
-    Some(space) =>
-      Table::Array_table(@lib.array_make(@lib.int63_to_int(space), cunknown()))
+    Some(space) => Table::Array_table(@lib.array_make(space, cunknown()))
   }
 }
 
@@ -35248,11 +35247,7 @@ pub fn hol_of_term_path(
       let t5022 = "r" + path_p
       (
         tm_p,
-        @lib.string_make(
-          @lib.int63_to_int(@lib.sub63(@lib.sub63(arity_1, i), 1L)),
-          'l',
-        ) +
-        t5022,
+        @lib.string_make(@lib.sub63(@lib.sub63(arity_1, i), 1L), 'l') + t5022,
       )
     }
     _ => raise Failure("hol_of_term_path")

@@ -74,14 +74,18 @@ pub fn string_sub(s : String, start : Int, len : Int) -> String raise {
 
 ///|
 /// `String.make n c`
-pub fn string_make(n : Int, c : Char) -> String raise {
+pub fn string_make(n : Int64, c : Char) -> String raise {
   if c.to_int() >= 128 {
     abort("String.make: non-ASCII byte")
   }
-  if n < 0 {
+  // OCaml's Sys.max_string_length (64-bit): beyond it, Invalid_argument
+  if n < 0L || n > 0x1FFFFFFFFFFFFF7L {
     raise @num.InvalidArgument("Bytes.create")
   }
-  String::make(n, c)
+  if n > 2147483647L {
+    abort("Out_of_memory: String.make")
+  }
+  String::make(n.to_int(), c)
 }
 
 ///|
@@ -101,11 +105,15 @@ pub fn string_concat(sep : String, l : @list.List[String]) -> String {
 
 ///|
 /// `Array.make n x`
-pub fn[A] array_make(n : Int, x : A) -> FixedArray[A] raise {
-  if n < 0 {
+pub fn[A] array_make(n : Int64, x : A) -> FixedArray[A] raise {
+  // OCaml's Sys.max_array_length (64-bit): beyond it, Invalid_argument
+  if n < 0L || n > 0x3FFFFFFFFFFFFFL {
     raise @num.InvalidArgument("Array.make")
   }
-  FixedArray::make(n, x)
+  if n > 2147483647L {
+    abort("Out_of_memory: Array.make")
+  }
+  FixedArray::make(n.to_int(), x)
 }
 
 ///|
@@ -544,13 +552,16 @@ pub fn temp_file(prefix : String, suffix : String) -> String {
 ///|
 /// `Array.init n f` (applies `f` to 0, 1, ... in order)
 pub fn[A] array_init(n : Int64, f : (Int64) -> A raise?) -> FixedArray[A] raise {
-  if n < 0L {
+  if n < 0L || n > 0x3FFFFFFFFFFFFFL {
     raise @num.InvalidArgument("Array.init")
   }
   if n == 0L {
     return []
   }
-  let n = int63_to_int(n)
+  if n > 2147483647L {
+    abort("Out_of_memory: Array.init")
+  }
+  let n = n.to_int()
   let out = FixedArray::make(n, f(0L))
   for i in 1..<n {
     out[i] = f(i.to_int64())

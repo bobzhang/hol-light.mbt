@@ -39,7 +39,7 @@ pub fn[A] array_iteri((Int64, A) -> Unit raise?, FixedArray[A]) -> Unit raise?
 
 pub fn[A] array_length(FixedArray[A]) -> Int
 
-pub fn[A] array_make(Int, A) -> FixedArray[A] raise
+pub fn[A] array_make(Int64, A) -> FixedArray[A] raise
 
 pub fn[A, B] array_map((A) -> B raise?, FixedArray[A]) -> FixedArray[B] raise?
 
@@ -371,7 +371,7 @@ pub fn string_escaped(String) -> String
 
 pub fn string_length(String) -> Int
 
-pub fn string_make(Int, Char) -> String raise
+pub fn string_make(Int64, Char) -> String raise
 
 pub fn string_of_file(String) -> String raise
 
