@@ -2167,7 +2167,7 @@ fn step_27() -> Unit raise {
     x198 : String,
   ) -> @kernel.Term raise {
     let c = x198
-    mk_small_numeral(Int::to_int64(Char::to_int(@lib.string_get(c, 0))))
+    mk_small_numeral(Int::to_int64(Char::to_int(@lib.ocaml_string_get(c, 0))))
   }
   let mk_code : (String) -> @kernel.Term raise = fn(
     x199 : String,

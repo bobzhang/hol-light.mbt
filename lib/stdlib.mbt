@@ -54,7 +54,7 @@ fn ascii_only(s : String, what : String) -> Unit {
 
 ///|
 /// `String.get s i`: the byte at `i`.
-pub fn string_get(s : String, i : Int) -> Char raise {
+pub fn ocaml_string_get(s : String, i : Int) -> Char raise {
   ascii_only(s, "String.get")
   if i < 0 || i >= s.length() {
     raise @num.InvalidArgument("index out of bounds")

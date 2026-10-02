@@ -1613,7 +1613,7 @@ module Lower = struct
       | "**" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.float_pow", [ a; b ]))
       | "int_of_string" -> (1, fun [ a ] _ -> Call (Atom "@lib.int63_of_string", [ a ]))
       | "String.length" -> (1, fun [ a ] _ -> widen (Call (Atom "@lib.string_length", [ a ])))
-      | "String.get" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_get", [ a; narrow b ]))
+      | "String.get" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.ocaml_string_get", [ a; narrow b ]))
       | "String.sub" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.string_sub", [ a; narrow b; narrow c ]))
       | "String.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_make", [ narrow a; b ]))
       | "Sys.command" -> (1, fun [ a ] _ -> widen (Call (Atom "@lib.sys_command", [ a ])))

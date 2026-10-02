@@ -299,6 +299,8 @@ pub fn norm63(Int64) -> Int64
 
 pub fn[A, B, C] nsplit((A) -> (B, A) raise?, @list.List[C], A) -> (@list.List[B], A) raise?
 
+pub fn ocaml_string_get(String, Int) -> Char raise
+
 pub fn[A, B] op_bar_gt(A, (A) -> B raise) -> B raise
 
 pub fn[A, B, C, D] pair_map((A) -> C raise?, (B) -> D raise?, (A, B)) -> (C, D) raise?
@@ -366,8 +368,6 @@ pub fn[A, B] splitlist((A) -> (B, A) raise, A) -> (@list.List[B], A) raise
 pub fn string_concat(String, @list.List[String]) -> String
 
 pub fn string_escaped(String) -> String
-
-pub fn string_get(String, Int) -> Char raise
 
 pub fn string_length(String) -> Int
 

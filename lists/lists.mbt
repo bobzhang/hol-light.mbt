@@ -4851,7 +4851,7 @@ fn step_140() -> Unit raise {
     let ns = @lib.map(
       fn(x381 : Int64) -> Int64 raise {
         let i_1 = x381
-        Int::to_int64(Char::to_int(@lib.string_get(s, @lib.int63_to_int(i_1))))
+        Int::to_int64(Char::to_int(@lib.ocaml_string_get(s, @lib.int63_to_int(i_1))))
       },
       @lib.range(0L, @lib.sub63(Int::to_int64(@lib.string_length(s)), 1L)),
     )

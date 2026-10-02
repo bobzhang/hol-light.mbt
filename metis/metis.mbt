@@ -471,7 +471,7 @@ pub fn stripsuffix(x94 : (Char) -> Bool raise, x95 : String) -> String raise {
     let pos = x96
     if pos < 0L {
       ""
-    } else if pred(@lib.string_get(s, @lib.int63_to_int(pos))) {
+    } else if pred(@lib.ocaml_string_get(s, @lib.int63_to_int(pos))) {
       strip(@lib.sub63(pos, 1L))
     } else {
       @lib.string_sub(s, 0, @lib.int63_to_int(@lib.add63(pos, 1L)))
