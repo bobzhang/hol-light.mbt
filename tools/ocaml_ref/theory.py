@@ -84,9 +84,34 @@ def needs(f):
     return re.findall(r'(?<![A-Za-z0-9_\'])needs\s+"([^"]+)"', strip_comments(open(path).read()))
 
 
+# Multivariate/ is loaded as Multivariate/make.ml and make_complex.ml load
+# it, then the remaining files (each after what it needs): a file there is
+# loaded after its predecessor in this order (and that one's chain), then
+# what it needs. One session can then load the chain once for a batch
+# (tools/ocaml_ref/batch.py).
+MV_ORDER = ["Multivariate/" + n + ".ml" for n in [
+    "misc", "metric", "homology", "vectors", "determinants", "topology", "convex", "paths",
+    "polytope", "degree", "derivatives", "clifford", "integration", "measure",
+    "multivariate_database", "complexes", "canal", "transcendentals", "realanalysis",
+    "moretop", "cauchy", "complex_database", "cross", "msum", "paracompact",
+    "specialtopologies", "tarski", "wlog", "wlog_examples", "geom", "lpspaces", "gamma",
+    "cvectors", "flyspeck"]]
+
+
+def chain_prev(f):
+    """The file loaded just before `f`'s own needs (Multivariate order)."""
+    if f in MV_ORDER and MV_ORDER.index(f) > 0:
+        return MV_ORDER[MV_ORDER.index(f) - 1]
+    return None
+
+
 def deps(f):
-    """The files `f` needs outside hol.ml's list, dependencies first."""
-    seen, visiting = [], [f]
+    """The files loaded before `f` outside hol.ml's list, in order:
+    its predecessor's chain and the predecessor (Multivariate order), then
+    what `f` needs, dependencies first."""
+    prev = chain_prev(f)
+    seen = deps(prev) + [prev] if prev else []
+    visiting = [f]
 
     def visit(g):
         # hol.ml's files (hand-ported or translated) are already loaded
@@ -130,7 +155,8 @@ def setup(f):
         # loaded on demand, as upstream's `needs`: what it needs first (in
         # order), then itself, once (MoonBit's package initialization order
         # is not upstream's)
-        lib_needs = [n for n in needs(f) if stem(n) not in CORE and stem(n) not in LOADED]
+        lib_needs = ([chain_prev(f)] if chain_prev(f) else []) + \
+            [n for n in needs(f) if stem(n) not in CORE and stem(n) not in LOADED]
         calls = "".join(f"  @{os.path.basename(pkg_of(n))}.load()\n" for n in lib_needs)
         open(os.path.join(ROOT, pkg, "init.mbt"), "w").write(
             f"// {name}.ml: the load steps are generated ({alias}{'_ml' if alias.endswith('test') else ''}.mbt).\n\n"
@@ -149,9 +175,14 @@ def setup(f):
     return pkg, alias, name
 
 
-def write_tests(f, pkg, alias, name):
+def write_tests_paths(f, pkg, alias, name):
+    """The reference script and the MoonBit test of `f`."""
     ref = os.path.join(REF, alias + "_ref.ml" if "/" not in name else name.replace("/", "_") + "_ref.ml")
-    test = os.path.join(ROOT, pkg, alias + "_ref_test.mbt")
+    return ref, os.path.join(ROOT, pkg, alias + "_ref_test.mbt")
+
+
+def write_tests(f, pkg, alias, name):
+    ref, test = write_tests_paths(f, pkg, alias, name)
     if os.path.exists(test) and os.path.exists(ref):
         return ref, test
     before = CORE[:CORE.index(name)] if name in CORE else CORE

@@ -48,14 +48,11 @@ module Main = struct
         (p ^ "/" ^ b ^ ".mbt", [])
     | f -> failwith ("no manifest entry for " ^ f)
 
-  let translate ~hol ~root target =
-    let out, hand = manifest target in
+  let rec translate ~hol ~root target =
     Names.root := root;
     Loader.stdlib_dir := Filename.concat root "tools/translator/stdlib";
     Functors.stdlib_dir := !Loader.stdlib_dir;
-    Lower.current_file := target;
     Translator.hol_dir := hol;
-    Lower.current_pkg := Filename.dirname out;
     List.iter
       (fun f ->
         (* translated packages: their types are generated with these names *)
@@ -67,6 +64,13 @@ module Main = struct
         in
         Loader.load_file ~hol ~on_item f)
       (Translator.upto target Translator.prefix);
+    translate_loaded ~hol ~root target
+
+  (* translate `target`, everything before it being loaded *)
+  and translate_loaded ~hol ~root target =
+    let out, hand = manifest target in
+    Lower.current_file := target;
+    Lower.current_pkg := Filename.dirname out;
     (* count the top-level definitions of each name *)
     List.iter
       (function
@@ -106,6 +110,60 @@ module Main = struct
     Loader.load_file ~hol ~on_item:(Emit.item ~hand) target;
     Emit.output ~source:target ~out:(Filename.concat root out);
     Printf.printf "wrote %s; %d unsupported items\n" out !Emit.errors
+
+  (* Several files in one session (tools/ocaml_ref/batch.py): `plan` lists,
+     for each target in order, the files to load before it (after hol.ml's;
+     those already loaded are skipped) and the target. Each target is translated in a forked child, a
+     copy of the session, so no per-file translator state carries over; the
+     parent then runs `after <target>` (`moon info`: the interfaces the next
+     translations read) and loads the target itself. Stops at the first
+     failure (exit status 1). *)
+  let translate_batch ~hol ~root ~after plan =
+    Names.root := root;
+    Loader.stdlib_dir := Filename.concat root "tools/translator/stdlib";
+    Functors.stdlib_dir := !Loader.stdlib_dir;
+    Translator.hol_dir := hol;
+    let load f =
+      let translated = (try ignore (manifest f); true with Failure _ -> false) in
+      let on_item =
+        match Names.package_of_file f with
+        | Some pkg when translated -> Emit.register pkg
+        | _ -> fun _ -> ()
+      in
+      Loader.load_file ~hol ~on_item f
+    in
+    let fail msg = Printf.printf "BATCH FAILED: %s\n%!" msg; exit 1 in
+    let loaded = Hashtbl.create 64 in
+    let load_new f = if not (Hashtbl.mem loaded f) then (Hashtbl.add loaded f (); load f) in
+    List.iter
+      (fun (pre, target) ->
+        (* hol.ml's files, then the planned chain; the translator's own
+           dependency order must agree with it *)
+        List.iter load_new Translator.prefix;
+        List.iter load_new pre;
+        List.iter
+          (fun f -> if not (Hashtbl.mem loaded f) then fail ("unplanned dependency " ^ f ^ " of " ^ target))
+          (Translator.upto target Translator.prefix);
+        flush_all ();
+        Format.pp_print_flush Format.std_formatter ();
+        match Unix.fork () with
+        | 0 ->
+            (try
+               translate_loaded ~hol ~root target;
+               flush_all ();
+               Unix._exit (if !Emit.errors = 0 then 0 else 3)
+             with e ->
+               Printf.printf "Exception: %s\n%!" (Printexc.to_string e);
+               Unix._exit 2)
+        | pid ->
+            (match Unix.waitpid [] pid with
+             | _, Unix.WEXITED 0 -> ()
+             | _, Unix.WEXITED 3 -> fail ("unsupported items in " ^ target)
+             | _ -> fail ("translation of " ^ target));
+            if Sys.command (after ^ " " ^ Filename.quote target) <> 0 then fail ("after " ^ target);
+            load_new target)
+      plan;
+    print_endline "BATCH DONE"
 
   let survey = Translator.survey
 end
