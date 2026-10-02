@@ -14,6 +14,8 @@ import {
   "bobzhang/hol_light/tactics",
   "bobzhang/hol_light/itab",
   "bobzhang/hol_light/simp",
+  "bobzhang/hol_light/omap",
+  "bobzhang/hol_light/oset",
   "bobzhang/hol_light/theorems",
   "bobzhang/hol_light/ind_defs",
   "bobzhang/hol_light/class",
@@ -21,8 +23,6 @@ import {
   "bobzhang/hol_light/canon",
   "bobzhang/hol_light/meson",
   "bobzhang/hol_light/firstorder",
-  "bobzhang/hol_light/omap",
-  "bobzhang/hol_light/oset",
   "bobzhang/hol_light/metis",
   "bobzhang/hol_light/thecops",
   "bobzhang/hol_light/quot",
@@ -44,6 +44,27 @@ import {
   "bobzhang/hol_light/real",
   "bobzhang/hol_light/calc_rat",
   "bobzhang/hol_light/int",
+  "bobzhang/hol_light/sets",
+  "bobzhang/hol_light/iterate",
+  "bobzhang/hol_light/cart",
+  "bobzhang/hol_light/define",
+  "bobzhang/hol_light/library/frag",
+  "bobzhang/hol_light/library/wo",
+  "bobzhang/hol_light/library/card",
+  "bobzhang/hol_light/library/prime",
+  "bobzhang/hol_light/library/grouptheory",
+  "bobzhang/hol_light/library/products",
+  "bobzhang/hol_light/library/floor",
+  "bobzhang/hol_light/multivariate/misc",
+  "bobzhang/hol_light/library/iter",
+  "bobzhang/hol_light/multivariate/metric",
+  "bobzhang/hol_light/multivariate/homology",
+  "bobzhang/hol_light/library/matroids",
+  "bobzhang/hol_light/multivariate/vectors",
+  "bobzhang/hol_light/library/permutations",
+  "bobzhang/hol_light/multivariate/determinants",
+  "bobzhang/hol_light/multivariate/topology",
+  "bobzhang/hol_light/multivariate/convex",
   "moonbitlang/core/list",
 }
 
@@ -53,4 +74,4 @@ import {
 
 warnings = "-unused_value-unused_trait_bound-unused_package-unused_error_type"
 
-formatter(ignore: [ "sets.mbt" ])
+formatter(ignore: [ "paths.mbt" ])

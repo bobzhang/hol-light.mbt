@@ -56,3 +56,5 @@ import {
 } for "test"
 
 warnings = "-unused_value-unused_trait_bound-unused_package-unused_error_type"
+
+formatter(ignore: [ "bdd.mbt" ])

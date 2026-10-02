@@ -122,6 +122,9 @@ def setup(f):
     text = "import {\n" + "".join(f'  "bobzhang/hol_light/{p}",\n' for p in imports)
     text += '  "moonbitlang/core/list",\n}\n\nimport {\n  "bobzhang/hol_light/testkit",\n} for "test"\n\n'
     text += 'warnings = "-unused_value-unused_trait_bound-unused_package-unused_error_type"\n'
+    # the translation stays as the translator emits it
+    gen = alias + ("_ml" if alias.endswith("test") else "") + ".mbt"
+    text += f'\nformatter(ignore: [ "{gen}" ])\n'
     open(os.path.join(ROOT, pkg, "moon.pkg"), "w").write(text)
     if "/" in pkg:
         # loaded on demand, as upstream's `needs`: what it needs first (in
@@ -208,6 +211,16 @@ test "{name} matches {name}.ml" {{
 
 
 def main():
+    import time
+    t0 = [time.time()]
+    stages = []
+
+    def stage(name):
+        now = time.time()
+        stages.append(f"{name} {now - t0[0]:.0f}s")
+        t0[0] = now
+        print("timing: " + ", ".join(stages), file=sys.stderr, flush=True)
+
     f = sys.argv[1]
     if not f.endswith(".ml"):
         f += ".ml"
@@ -218,38 +231,50 @@ def main():
         if os.path.exists(os.path.join(ROOT, pkg0)):
             sys.exit(f"both {pkg0} and {aside} exist; resolve by hand")
         os.rename(aside, os.path.join(ROOT, pkg0))
+    alias0 = pkg0.split("/")[-1]
+    gen0 = os.path.join(ROOT, pkg0, alias0 + ("_ml" if alias0.endswith("test") else "") + ".mbt")
+    retranslating = os.path.exists(gen0)
     pkg, alias, name = setup(f)
     ref, test = write_tests(f, pkg, alias, name)
-    # refresh the other packages' interfaces with this one set aside
-    os.makedirs(os.path.dirname(aside), exist_ok=True)
-    os.rename(os.path.join(ROOT, pkg), aside)
-    try:
-        run(["moon", "info"], capture_output=True)
-    finally:
-        os.rename(aside, os.path.join(ROOT, pkg))
+    if retranslating:
+        # refresh the other packages' interfaces with this one (its old,
+        # possibly stale translation) set aside; a new package needs no
+        # refresh: the previous run left the interfaces current
+        os.makedirs(os.path.dirname(aside), exist_ok=True)
+        os.rename(os.path.join(ROOT, pkg), aside)
+        try:
+            run(["moon", "info"], capture_output=True)
+        finally:
+            os.rename(aside, os.path.join(ROOT, pkg))
+    stage("setup+info")
     out = run(["tools/ocaml_ref/translate.sh", "translate", f], capture_output=True, text=True).stdout
+    stage("translate")
     lines = [l for l in out.splitlines() if "unsupported" in l or "wrote" in l or "Exception" in l]
     print("\n".join(lines))
     if not any(" 0 unsupported" in l for l in lines):
         print(f"UNSUPPORTED ITEMS in {f}", file=sys.stderr)
         sys.exit(1)
-    run(["moon", "fmt"], capture_output=True)
-    chk = run(["moon", "check"], capture_output=True, text=True)
+    # `moon info` type-checks and writes the interface the next translations
+    # read
+    chk = run(["moon", "info"], capture_output=True, text=True)
     errs = re.findall(r"^Error.*(?:\n.*){0,8}", chk.stdout + chk.stderr, re.M)
     if errs:
         print("\n--\n".join(errs[:6]))
         sys.exit(1)
-    run(["moon", "info"], capture_output=True)
+    stage("info")
     run(["python3", "tools/ocaml_ref/gen_theorems_test.py", pkg, os.path.relpath(ref, ROOT), os.path.relpath(test, ROOT)])
     expected = ref[:-3] + ".expected"
     res = subprocess.run(["./run.sh", os.path.basename(ref)], cwd=REF, capture_output=True, text=True)
     s = res.stdout.replace("    * HOL-Light syntax in effect *\n\n", "", 1)
     s = re.sub(r"(?m)^CPU time \(user\): .*$", "CPU time (user): <t>", s)
     open(expected, "w").write(s)
+    stage("ocaml-ref")
     run(["python3", "tools/ocaml_ref/embed_golden.py", os.path.relpath(expected, ROOT), os.path.relpath(test, ROOT)])
+    # cheap: translations are formatter-ignored (moon.pkg)
     run(["moon", "fmt"], capture_output=True)
     t = run(["moon", "test", "--target", "wasm", "-p", "bobzhang/hol_light/" + pkg], capture_output=True, text=True)
     log = t.stdout + t.stderr
+    stage("moon-test")
     open(os.path.join(REF, "_build", "theory_" + alias + ".log"), "w").write(log)
     shown = [l for l in log.splitlines() if not l.lstrip().startswith("#|")]
     keep = [l for l in shown if re.match(r"^(Error|Total|Diff|[-+])|failed", l) and not re.match(r"^[-+ ]0\.\.", l)]

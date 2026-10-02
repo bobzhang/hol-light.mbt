@@ -16,3 +16,5 @@ import {
   "bobzhang/hol_light/testkit",
   "bobzhang/hol_light/pp",
 } for "test"
+
+formatter(ignore: [ "theorems.mbt" ])

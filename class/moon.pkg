@@ -21,3 +21,5 @@ import {
 } for "test"
 
 warnings = "-unused_value-unused_trait_bound-unused_package"
+
+formatter(ignore: [ "class.mbt" ])
