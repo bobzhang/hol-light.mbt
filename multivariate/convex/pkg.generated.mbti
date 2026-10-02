@@ -1,0 +1,1883 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/convex"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn aff_dim() -> @kernel.Thm
+
+pub fn aff_dim_2() -> @kernel.Thm
+
+pub fn aff_dim_affine_hull() -> @kernel.Thm
+
+pub fn aff_dim_affine_independent() -> @kernel.Thm
+
+pub fn aff_dim_affine_inter_hyperplane() -> @kernel.Thm
+
+pub fn aff_dim_ball() -> @kernel.Thm
+
+pub fn aff_dim_cball() -> @kernel.Thm
+
+pub fn aff_dim_closure() -> @kernel.Thm
+
+pub fn aff_dim_conic_hull() -> @kernel.Thm
+
+pub fn aff_dim_conic_hull_dim() -> @kernel.Thm
+
+pub fn aff_dim_convex_hull() -> @kernel.Thm
+
+pub fn aff_dim_convex_inter_nonempty_interior() -> @kernel.Thm
+
+pub fn aff_dim_convex_inter_open() -> @kernel.Thm
+
+pub fn aff_dim_dim() -> @kernel.Thm
+
+pub fn aff_dim_dim_0() -> @kernel.Thm
+
+pub fn aff_dim_dim_affine_diffs() -> @kernel.Thm
+
+pub fn aff_dim_dim_affine_diffs_strong() -> @kernel.Thm
+
+pub fn aff_dim_dim_subspace() -> @kernel.Thm
+
+pub fn aff_dim_empty() -> @kernel.Thm
+
+pub fn aff_dim_eq_0() -> @kernel.Thm
+
+pub fn aff_dim_eq_affine_hull() -> @kernel.Thm
+
+pub fn aff_dim_eq_full() -> @kernel.Thm
+
+pub fn aff_dim_eq_full_gen() -> @kernel.Thm
+
+pub fn aff_dim_eq_hyperplane() -> @kernel.Thm
+
+pub fn aff_dim_eq_inter_hyperplane() -> @kernel.Thm
+
+pub fn aff_dim_eq_minus1() -> @kernel.Thm
+
+pub fn aff_dim_ge() -> @kernel.Thm
+
+pub fn aff_dim_halfspace_ge() -> @kernel.Thm
+
+pub fn aff_dim_halfspace_gt() -> @kernel.Thm
+
+pub fn aff_dim_halfspace_le() -> @kernel.Thm
+
+pub fn aff_dim_halfspace_lt() -> @kernel.Thm
+
+pub fn aff_dim_hyperplane() -> @kernel.Thm
+
+pub fn aff_dim_injective_linear_image() -> @kernel.Thm
+
+pub fn aff_dim_insert() -> @kernel.Thm
+
+pub fn aff_dim_interval() -> @kernel.Thm
+
+pub fn aff_dim_le_card() -> @kernel.Thm
+
+pub fn aff_dim_le_dim() -> @kernel.Thm
+
+pub fn aff_dim_le_univ() -> @kernel.Thm
+
+pub fn aff_dim_linear_image_le() -> @kernel.Thm
+
+pub fn aff_dim_lt_full() -> @kernel.Thm
+
+pub fn aff_dim_nonempty_interior() -> @kernel.Thm
+
+pub fn aff_dim_nonempty_interior_eq() -> @kernel.Thm
+
+pub fn aff_dim_nonempty_interior_of() -> @kernel.Thm
+
+pub fn aff_dim_nonempty_interior_of_eq() -> @kernel.Thm
+
+pub fn aff_dim_open() -> @kernel.Thm
+
+pub fn aff_dim_open_in() -> @kernel.Thm
+
+pub fn aff_dim_pcross() -> @kernel.Thm
+
+pub fn aff_dim_pos_le() -> @kernel.Thm
+
+pub fn aff_dim_psubset() -> @kernel.Thm
+
+pub fn aff_dim_relative_interior() -> @kernel.Thm
+
+pub fn aff_dim_segment() -> @kernel.Thm
+
+pub fn aff_dim_sing() -> @kernel.Thm
+
+pub fn aff_dim_subset() -> @kernel.Thm
+
+pub fn aff_dim_sums_inter() -> @kernel.Thm
+
+pub fn aff_dim_translation_eq() -> @kernel.Thm
+
+pub fn aff_dim_union() -> @kernel.Thm
+
+pub fn aff_dim_unique() -> @kernel.Thm
+
+pub fn aff_dim_univ() -> @kernel.Thm
+
+pub fn aff_dim_v1() -> @kernel.Thm
+
+pub fn aff_lowdim_subset_hyperplane() -> @kernel.Thm
+
+pub fn affine() -> @kernel.Thm
+
+pub fn affine_affine_hull() -> @kernel.Thm
+
+pub fn affine_affinity() -> @kernel.Thm
+
+pub fn affine_affinity_eq() -> @kernel.Thm
+
+pub fn affine_alt() -> @kernel.Thm
+
+pub fn affine_basis_exists() -> @kernel.Thm
+
+pub fn affine_bounded_eq_lowdim() -> @kernel.Thm
+
+pub fn affine_bounded_eq_trivial() -> @kernel.Thm
+
+pub fn affine_dependent() -> @kernel.Thm
+
+pub fn affine_dependent_biggerset() -> @kernel.Thm
+
+pub fn affine_dependent_biggerset_general() -> @kernel.Thm
+
+pub fn affine_dependent_choose() -> @kernel.Thm
+
+pub fn affine_dependent_explicit() -> @kernel.Thm
+
+pub fn affine_dependent_explicit_finite() -> @kernel.Thm
+
+pub fn affine_dependent_imp_collinear_3() -> @kernel.Thm
+
+pub fn affine_dependent_imp_dependent() -> @kernel.Thm
+
+pub fn affine_dependent_linear_image() -> @kernel.Thm
+
+pub fn affine_dependent_linear_image_eq() -> @kernel.Thm
+
+pub fn affine_dependent_mono() -> @kernel.Thm
+
+pub fn affine_dependent_translation() -> @kernel.Thm
+
+pub fn affine_dependent_translation_eq() -> @kernel.Thm
+
+pub fn affine_differences() -> @kernel.Thm
+
+pub fn affine_diffs_subspace() -> @kernel.Thm
+
+pub fn affine_empty() -> @kernel.Thm
+
+pub fn affine_eq_subspace() -> @kernel.Thm
+
+pub fn affine_exists() -> @kernel.Thm
+
+pub fn affine_explicit() -> @kernel.Thm
+
+pub fn affine_hull_0_2_explicit() -> @kernel.Thm
+
+pub fn affine_hull_0_3_explicit() -> @kernel.Thm
+
+pub fn affine_hull_0_explicit() -> @kernel.Thm
+
+pub fn affine_hull_2() -> @kernel.Thm
+
+pub fn affine_hull_2_alt() -> @kernel.Thm
+
+pub fn affine_hull_3() -> @kernel.Thm
+
+pub fn affine_hull_3_imp_collinear() -> @kernel.Thm
+
+pub fn affine_hull_affine_inter_nonempty_interior() -> @kernel.Thm
+
+pub fn affine_hull_affine_inter_open() -> @kernel.Thm
+
+pub fn affine_hull_affine_inter_open_in() -> @kernel.Thm
+
+pub fn affine_hull_affinity() -> @kernel.Thm
+
+pub fn affine_hull_closure() -> @kernel.Thm
+
+pub fn affine_hull_conic_hull() -> @kernel.Thm
+
+pub fn affine_hull_convex_hull() -> @kernel.Thm
+
+pub fn affine_hull_convex_inter_nonempty_interior() -> @kernel.Thm
+
+pub fn affine_hull_convex_inter_open() -> @kernel.Thm
+
+pub fn affine_hull_convex_inter_open_in() -> @kernel.Thm
+
+pub fn affine_hull_empty() -> @kernel.Thm
+
+pub fn affine_hull_eq() -> @kernel.Thm
+
+pub fn affine_hull_eq_empty() -> @kernel.Thm
+
+pub fn affine_hull_eq_sing() -> @kernel.Thm
+
+pub fn affine_hull_eq_span() -> @kernel.Thm
+
+pub fn affine_hull_eq_span_eq() -> @kernel.Thm
+
+pub fn affine_hull_explicit() -> @kernel.Thm
+
+pub fn affine_hull_explicit_alt() -> @kernel.Thm
+
+pub fn affine_hull_explicit_unique() -> @kernel.Thm
+
+pub fn affine_hull_finite() -> @kernel.Thm
+
+pub fn affine_hull_finite_intersection_hyperplanes() -> @kernel.Thm
+
+pub fn affine_hull_finite_step() -> @kernel.Thm
+
+pub fn affine_hull_finite_step_gen() -> @kernel.Thm
+
+pub fn affine_hull_halfspace_ge() -> @kernel.Thm
+
+pub fn affine_hull_halfspace_gt() -> @kernel.Thm
+
+pub fn affine_hull_halfspace_le() -> @kernel.Thm
+
+pub fn affine_hull_halfspace_lt() -> @kernel.Thm
+
+pub fn affine_hull_indexed() -> @kernel.Thm
+
+pub fn affine_hull_insert_span() -> @kernel.Thm
+
+pub fn affine_hull_insert_subset_span() -> @kernel.Thm
+
+pub fn affine_hull_inter() -> @kernel.Thm
+
+pub fn affine_hull_inters() -> @kernel.Thm
+
+pub fn affine_hull_linear_image() -> @kernel.Thm
+
+pub fn affine_hull_nonempty_interior() -> @kernel.Thm
+
+pub fn affine_hull_open() -> @kernel.Thm
+
+pub fn affine_hull_open_in() -> @kernel.Thm
+
+pub fn affine_hull_open_in_affine() -> @kernel.Thm
+
+pub fn affine_hull_open_in_convex() -> @kernel.Thm
+
+pub fn affine_hull_pcross() -> @kernel.Thm
+
+pub fn affine_hull_relative_frontier_bounded() -> @kernel.Thm
+
+pub fn affine_hull_relative_interior() -> @kernel.Thm
+
+pub fn affine_hull_scaling() -> @kernel.Thm
+
+pub fn affine_hull_segment() -> @kernel.Thm
+
+pub fn affine_hull_sing() -> @kernel.Thm
+
+pub fn affine_hull_span() -> @kernel.Thm
+
+pub fn affine_hull_subset_span() -> @kernel.Thm
+
+pub fn affine_hull_sums() -> @kernel.Thm
+
+pub fn affine_hull_translation() -> @kernel.Thm
+
+pub fn affine_hull_univ() -> @kernel.Thm
+
+pub fn affine_hulls_eq() -> @kernel.Thm
+
+pub fn affine_hyperplane() -> @kernel.Thm
+
+pub fn affine_hyperplane_sums_eq_univ() -> @kernel.Thm
+
+pub fn affine_imp_convex() -> @kernel.Thm
+
+pub fn affine_imp_subspace() -> @kernel.Thm
+
+pub fn affine_independent_1() -> @kernel.Thm
+
+pub fn affine_independent_2() -> @kernel.Thm
+
+pub fn affine_independent_card_dim_diffs() -> @kernel.Thm
+
+pub fn affine_independent_card_le() -> @kernel.Thm
+
+pub fn affine_independent_convex_affine_hull() -> @kernel.Thm
+
+pub fn affine_independent_delete() -> @kernel.Thm
+
+pub fn affine_independent_empty() -> @kernel.Thm
+
+pub fn affine_independent_iff_card() -> @kernel.Thm
+
+pub fn affine_independent_imp_finite() -> @kernel.Thm
+
+pub fn affine_independent_insert() -> @kernel.Thm
+
+pub fn affine_independent_span_eq() -> @kernel.Thm
+
+pub fn affine_independent_span_gt() -> @kernel.Thm
+
+pub fn affine_independent_stdbasis() -> @kernel.Thm
+
+pub fn affine_independent_subset() -> @kernel.Thm
+
+pub fn affine_indexed() -> @kernel.Thm
+
+pub fn affine_inter() -> @kernel.Thm
+
+pub fn affine_inters() -> @kernel.Thm
+
+pub fn affine_linear_image() -> @kernel.Thm
+
+pub fn affine_linear_image_eq() -> @kernel.Thm
+
+pub fn affine_linear_preimage() -> @kernel.Thm
+
+pub fn affine_negations() -> @kernel.Thm
+
+pub fn affine_parallel_slice() -> @kernel.Thm
+
+pub fn affine_pcross() -> @kernel.Thm
+
+pub fn affine_pcross_eq() -> @kernel.Thm
+
+pub fn affine_scaling() -> @kernel.Thm
+
+pub fn affine_scaling_eq() -> @kernel.Thm
+
+pub fn affine_sing() -> @kernel.Thm
+
+pub fn affine_span() -> @kernel.Thm
+
+pub fn affine_standard_hyperplane() -> @kernel.Thm
+
+pub fn affine_sums() -> @kernel.Thm
+
+pub fn affine_translation() -> @kernel.Thm
+
+pub fn affine_translation_eq() -> @kernel.Thm
+
+pub fn affine_translation_subspace() -> @kernel.Thm
+
+pub fn affine_translation_subspace_explicit() -> @kernel.Thm
+
+pub fn affine_translation_unique_subspace() -> @kernel.Thm
+
+pub fn affine_univ() -> @kernel.Thm
+
+pub fn affine_v1() -> @kernel.Thm
+
+pub fn affine_vsum() -> @kernel.Thm
+
+pub fn affine_vsum_strong() -> @kernel.Thm
+
+pub fn any_closest_point_affine_orthogonal() -> @kernel.Thm
+
+pub fn any_closest_point_dot() -> @kernel.Thm
+
+pub fn any_closest_point_unique() -> @kernel.Thm
+
+pub fn ball_subset_open_map_image() -> @kernel.Thm
+
+pub fn barycentre() -> @kernel.Thm
+
+pub fn barycentre_0() -> @kernel.Thm
+
+pub fn barycentre_1() -> @kernel.Thm
+
+pub fn barycentre_2() -> @kernel.Thm
+
+pub fn barycentre_in_affine_hull() -> @kernel.Thm
+
+pub fn barycentre_in_convex_hull() -> @kernel.Thm
+
+pub fn barycentre_in_relative_interior() -> @kernel.Thm
+
+pub fn barycentre_linear_image() -> @kernel.Thm
+
+pub fn barycentre_not_in_set() -> @kernel.Thm
+
+pub fn barycentre_translation() -> @kernel.Thm
+
+pub fn between_dist_le() -> @kernel.Thm
+
+pub fn between_dist_lt() -> @kernel.Thm
+
+pub fn between_in_convex_hull() -> @kernel.Thm
+
+pub fn between_linear_image_eq() -> @kernel.Thm
+
+pub fn between_norm_le() -> @kernel.Thm
+
+pub fn between_norm_lt() -> @kernel.Thm
+
+pub fn bilinear_in_affine_hull() -> @kernel.Thm
+
+pub fn bilinear_in_convex_hull() -> @kernel.Thm
+
+pub fn bilipschitz_homeomorphism_relative_frontiers() -> @kernel.Thm
+
+pub fn bilipschitz_homeomorphism_spherical_projection() -> @kernel.Thm
+
+pub fn blaschke() -> @kernel.Thm
+
+pub fn blaschke_univ() -> @kernel.Thm
+
+pub fn bounded_convex_hull() -> @kernel.Thm
+
+pub fn bounded_convex_hull_eq() -> @kernel.Thm
+
+pub fn bounded_hyperplane_eq_trivial() -> @kernel.Thm
+
+pub fn bounded_relative_frontier() -> @kernel.Thm
+
+pub fn bounded_relative_interior() -> @kernel.Thm
+
+pub fn bounded_segment() -> @kernel.Thm
+
+pub fn caratheodory() -> @kernel.Thm
+
+pub fn caratheodory_aff_dim() -> @kernel.Thm
+
+pub fn card_components_complement_convex() -> @kernel.Thm
+
+pub fn card_le_components_closure_frontier() -> @kernel.Thm
+
+pub fn card_le_components_frontier() -> @kernel.Thm
+
+pub fn choose_affine_subset() -> @kernel.Thm
+
+pub fn closed_affine() -> @kernel.Thm
+
+pub fn closed_affine_hull() -> @kernel.Thm
+
+pub fn closed_interval_as_convex_hull() -> @kernel.Thm
+
+pub fn closed_polar_dual() -> @kernel.Thm
+
+pub fn closed_relative_boundary() -> @kernel.Thm
+
+pub fn closed_relative_frontier() -> @kernel.Thm
+
+pub fn closed_segment() -> @kernel.Thm
+
+pub fn closed_segment_descale() -> @kernel.Thm
+
+pub fn closed_strip_component_le() -> @kernel.Thm
+
+pub fn closer_point_lemma() -> @kernel.Thm
+
+pub fn closer_points_lemma() -> @kernel.Thm
+
+pub fn closest_point_affine_orthogonal() -> @kernel.Thm
+
+pub fn closest_point_affine_orthogonal_eq() -> @kernel.Thm
+
+pub fn closest_point_dot() -> @kernel.Thm
+
+pub fn closest_point_idempotent() -> @kernel.Thm
+
+pub fn closest_point_in_relative_frontier() -> @kernel.Thm
+
+pub fn closest_point_in_relative_interior() -> @kernel.Thm
+
+pub fn closest_point_lipschitz() -> @kernel.Thm
+
+pub fn closest_point_lt() -> @kernel.Thm
+
+pub fn closest_point_subspace_orthogonal() -> @kernel.Thm
+
+pub fn closest_point_subspace_orthogonal_eq() -> @kernel.Thm
+
+pub fn closest_point_translation() -> @kernel.Thm
+
+pub fn closest_point_unique() -> @kernel.Thm
+
+pub fn closure_convex_hull() -> @kernel.Thm
+
+pub fn closure_convex_inter_superset() -> @kernel.Thm
+
+pub fn closure_dyadic_rationals_in_convex_set() -> @kernel.Thm
+
+pub fn closure_inter_convex() -> @kernel.Thm
+
+pub fn closure_inter_convex_open() -> @kernel.Thm
+
+pub fn closure_inters_convex() -> @kernel.Thm
+
+pub fn closure_inters_convex_open() -> @kernel.Thm
+
+pub fn closure_rationals_in_convex_set() -> @kernel.Thm
+
+pub fn closure_segment() -> @kernel.Thm
+
+pub fn closure_strip_component_lt() -> @kernel.Thm
+
+pub fn closure_subset_affine_hull() -> @kernel.Thm
+
+pub fn collinear_3_affine_hull() -> @kernel.Thm
+
+pub fn collinear_3_eq_affine_dependent() -> @kernel.Thm
+
+pub fn collinear_3_explicit() -> @kernel.Thm
+
+pub fn collinear_3_in_affine_hull() -> @kernel.Thm
+
+pub fn collinear_aff_dim() -> @kernel.Thm
+
+pub fn collinear_affine_hull() -> @kernel.Thm
+
+pub fn collinear_affine_hull_collinear() -> @kernel.Thm
+
+pub fn collinear_convex_hull_collinear() -> @kernel.Thm
+
+pub fn collinear_descale() -> @kernel.Thm
+
+pub fn collinear_hyperplane_2() -> @kernel.Thm
+
+pub fn collinear_imp_coplanar() -> @kernel.Thm
+
+pub fn collinear_segment() -> @kernel.Thm
+
+pub fn collinear_standard_hyperplane_2() -> @kernel.Thm
+
+pub fn compact_convex_collinear_segment() -> @kernel.Thm
+
+pub fn compact_convex_collinear_segment_alt() -> @kernel.Thm
+
+pub fn compact_convex_combinations() -> @kernel.Thm
+
+pub fn compact_convex_hull() -> @kernel.Thm
+
+pub fn compact_frontier_line_lemma() -> @kernel.Thm
+
+pub fn compact_relative_boundary() -> @kernel.Thm
+
+pub fn compact_relative_frontier() -> @kernel.Thm
+
+pub fn compact_relative_frontier_bounded() -> @kernel.Thm
+
+pub fn compact_segment() -> @kernel.Thm
+
+pub fn complete_hausdist_convex() -> @kernel.Thm
+
+pub fn complete_hausdist_convex_univ() -> @kernel.Thm
+
+pub fn component_complement_connected() -> @kernel.Thm
+
+pub fn components_convex_complement_contains_halfspace() -> @kernel.Thm
+
+pub fn conic() -> @kernel.Thm
+
+pub fn conic_conic_hull() -> @kernel.Thm
+
+pub fn conic_contains_0() -> @kernel.Thm
+
+pub fn conic_convex_cone_hull() -> @kernel.Thm
+
+pub fn conic_convex_hull() -> @kernel.Thm
+
+pub fn conic_empty() -> @kernel.Thm
+
+pub fn conic_halfspace_ge() -> @kernel.Thm
+
+pub fn conic_halfspace_le() -> @kernel.Thm
+
+pub fn conic_hull_0() -> @kernel.Thm
+
+pub fn conic_hull_as_image() -> @kernel.Thm
+
+pub fn conic_hull_contains_0() -> @kernel.Thm
+
+pub fn conic_hull_convex_hull() -> @kernel.Thm
+
+pub fn conic_hull_empty() -> @kernel.Thm
+
+pub fn conic_hull_eq() -> @kernel.Thm
+
+pub fn conic_hull_eq_affine_hull() -> @kernel.Thm
+
+pub fn conic_hull_eq_empty() -> @kernel.Thm
+
+pub fn conic_hull_eq_sing() -> @kernel.Thm
+
+pub fn conic_hull_eq_span() -> @kernel.Thm
+
+pub fn conic_hull_eq_span_eq() -> @kernel.Thm
+
+pub fn conic_hull_explicit() -> @kernel.Thm
+
+pub fn conic_hull_image_scale() -> @kernel.Thm
+
+pub fn conic_hull_inter_affine_hull() -> @kernel.Thm
+
+pub fn conic_hull_linear_image() -> @kernel.Thm
+
+pub fn conic_hull_pointless_as_image() -> @kernel.Thm
+
+pub fn conic_hull_subset_convex_cone_hull() -> @kernel.Thm
+
+pub fn conic_hull_subset_span() -> @kernel.Thm
+
+pub fn conic_hull_univ() -> @kernel.Thm
+
+pub fn conic_hulls_eq_imp_spans_eq() -> @kernel.Thm
+
+pub fn conic_image_multiple() -> @kernel.Thm
+
+pub fn conic_image_multiple_eq() -> @kernel.Thm
+
+pub fn conic_imp_starlike() -> @kernel.Thm
+
+pub fn conic_inters() -> @kernel.Thm
+
+pub fn conic_linear_image() -> @kernel.Thm
+
+pub fn conic_linear_image_eq() -> @kernel.Thm
+
+pub fn conic_mul() -> @kernel.Thm
+
+pub fn conic_negations() -> @kernel.Thm
+
+pub fn conic_pcross() -> @kernel.Thm
+
+pub fn conic_pcross_eq() -> @kernel.Thm
+
+pub fn conic_positive_orthant() -> @kernel.Thm
+
+pub fn conic_span() -> @kernel.Thm
+
+pub fn conic_sums() -> @kernel.Thm
+
+pub fn conic_univ() -> @kernel.Thm
+
+pub fn connected_ball() -> @kernel.Thm
+
+pub fn connected_cball() -> @kernel.Thm
+
+pub fn connected_compact_interval_1() -> @kernel.Thm
+
+pub fn connected_convex_1() -> @kernel.Thm
+
+pub fn connected_convex_1_gen() -> @kernel.Thm
+
+pub fn connected_imp_perfect_aff_dim() -> @kernel.Thm
+
+pub fn connected_inter_relative_frontier() -> @kernel.Thm
+
+pub fn connected_interval() -> @kernel.Thm
+
+pub fn connected_semiopen_segment() -> @kernel.Thm
+
+pub fn connected_union_clopen_in_complement() -> @kernel.Thm
+
+pub fn connected_with_relative_interior_open_in_convex() -> @kernel.Thm
+
+pub fn contains_component_of_closure_frontier() -> @kernel.Thm
+
+pub fn contains_component_of_compact_frontier() -> @kernel.Thm
+
+pub fn continuous_at_closest_point() -> @kernel.Thm
+
+pub fn continuous_decreasing_image_interval_1() -> @kernel.Thm
+
+pub fn continuous_increasing_image_interval_1() -> @kernel.Thm
+
+pub fn continuous_midpoint_convex() -> @kernel.Thm
+
+pub fn continuous_on_closest_point() -> @kernel.Thm
+
+pub fn continuous_on_compact_surface_projection() -> @kernel.Thm
+
+pub fn convex() -> @kernel.Thm
+
+pub fn convex_add() -> @kernel.Thm
+
+pub fn convex_add_eq() -> @kernel.Thm
+
+pub fn convex_affinity() -> @kernel.Thm
+
+pub fn convex_affinity_eq() -> @kernel.Thm
+
+pub fn convex_alt() -> @kernel.Thm
+
+pub fn convex_and_affine_inter_open() -> @kernel.Thm
+
+pub fn convex_ball() -> @kernel.Thm
+
+pub fn convex_bounds_lemma() -> @kernel.Thm
+
+pub fn convex_cball() -> @kernel.Thm
+
+pub fn convex_closed_contains_same_ray() -> @kernel.Thm
+
+pub fn convex_closure() -> @kernel.Thm
+
+pub fn convex_closure_interior() -> @kernel.Thm
+
+pub fn convex_closure_relative_interior() -> @kernel.Thm
+
+pub fn convex_cmul() -> @kernel.Thm
+
+pub fn convex_concave_eq_affine() -> @kernel.Thm
+
+pub fn convex_cone() -> @kernel.Thm
+
+pub fn convex_cone_add() -> @kernel.Thm
+
+pub fn convex_cone_contains_0() -> @kernel.Thm
+
+pub fn convex_cone_convex_cone_hull() -> @kernel.Thm
+
+pub fn convex_cone_halfspace_ge() -> @kernel.Thm
+
+pub fn convex_cone_halfspace_le() -> @kernel.Thm
+
+pub fn convex_cone_hull_add() -> @kernel.Thm
+
+pub fn convex_cone_hull_contains_0() -> @kernel.Thm
+
+pub fn convex_cone_hull_convex_hull() -> @kernel.Thm
+
+pub fn convex_cone_hull_convex_hull_nonempty() -> @kernel.Thm
+
+pub fn convex_cone_hull_empty() -> @kernel.Thm
+
+pub fn convex_cone_hull_linear_image() -> @kernel.Thm
+
+pub fn convex_cone_hull_mul() -> @kernel.Thm
+
+pub fn convex_cone_hull_nonempty() -> @kernel.Thm
+
+pub fn convex_cone_hull_separate() -> @kernel.Thm
+
+pub fn convex_cone_hull_separate_nonempty() -> @kernel.Thm
+
+pub fn convex_cone_hull_union() -> @kernel.Thm
+
+pub fn convex_cone_inters() -> @kernel.Thm
+
+pub fn convex_cone_linear_image() -> @kernel.Thm
+
+pub fn convex_cone_linear_image_eq() -> @kernel.Thm
+
+pub fn convex_cone_mul() -> @kernel.Thm
+
+pub fn convex_cone_negations() -> @kernel.Thm
+
+pub fn convex_cone_nonempty() -> @kernel.Thm
+
+pub fn convex_cone_pcross() -> @kernel.Thm
+
+pub fn convex_cone_pcross_eq() -> @kernel.Thm
+
+pub fn convex_cone_sing() -> @kernel.Thm
+
+pub fn convex_cone_span() -> @kernel.Thm
+
+pub fn convex_cone_sums() -> @kernel.Thm
+
+pub fn convex_cone_v1() -> @kernel.Thm
+
+pub fn convex_conic_hull() -> @kernel.Thm
+
+pub fn convex_connected() -> @kernel.Thm
+
+pub fn convex_connected_1() -> @kernel.Thm
+
+pub fn convex_connected_1_gen() -> @kernel.Thm
+
+pub fn convex_connected_collinear() -> @kernel.Thm
+
+pub fn convex_contains() -> @kernel.Thm
+
+pub fn convex_contains_open_segment() -> @kernel.Thm
+
+pub fn convex_contains_segment() -> @kernel.Thm
+
+pub fn convex_contains_segment_eq() -> @kernel.Thm
+
+pub fn convex_contains_segment_imp() -> @kernel.Thm
+
+pub fn convex_convex_cone_hull() -> @kernel.Thm
+
+pub fn convex_convex_hull() -> @kernel.Thm
+
+pub fn convex_differences() -> @kernel.Thm
+
+pub fn convex_distance() -> @kernel.Thm
+
+pub fn convex_empty() -> @kernel.Thm
+
+pub fn convex_epigraph() -> @kernel.Thm
+
+pub fn convex_epigraph_convex() -> @kernel.Thm
+
+pub fn convex_eq_connected_line_intersection() -> @kernel.Thm
+
+pub fn convex_eq_convex_line_intersection() -> @kernel.Thm
+
+pub fn convex_explicit() -> @kernel.Thm
+
+pub fn convex_finite() -> @kernel.Thm
+
+pub fn convex_halfspace_component_ge() -> @kernel.Thm
+
+pub fn convex_halfspace_component_gt() -> @kernel.Thm
+
+pub fn convex_halfspace_component_le() -> @kernel.Thm
+
+pub fn convex_halfspace_component_lt() -> @kernel.Thm
+
+pub fn convex_halfspace_component_sgn() -> @kernel.Thm
+
+pub fn convex_halfspace_ge() -> @kernel.Thm
+
+pub fn convex_halfspace_gt() -> @kernel.Thm
+
+pub fn convex_halfspace_intersection() -> @kernel.Thm
+
+pub fn convex_halfspace_le() -> @kernel.Thm
+
+pub fn convex_halfspace_lt() -> @kernel.Thm
+
+pub fn convex_halfspace_sgn() -> @kernel.Thm
+
+pub fn convex_hausdist_limit() -> @kernel.Thm
+
+pub fn convex_hull_2() -> @kernel.Thm
+
+pub fn convex_hull_2_alt() -> @kernel.Thm
+
+pub fn convex_hull_3() -> @kernel.Thm
+
+pub fn convex_hull_3_alt() -> @kernel.Thm
+
+pub fn convex_hull_affinity() -> @kernel.Thm
+
+pub fn convex_hull_caratheodory() -> @kernel.Thm
+
+pub fn convex_hull_caratheodory_aff_dim() -> @kernel.Thm
+
+pub fn convex_hull_closure() -> @kernel.Thm
+
+pub fn convex_hull_closure_subset() -> @kernel.Thm
+
+pub fn convex_hull_contains() -> @kernel.Thm
+
+pub fn convex_hull_empty() -> @kernel.Thm
+
+pub fn convex_hull_eq() -> @kernel.Thm
+
+pub fn convex_hull_eq_empty() -> @kernel.Thm
+
+pub fn convex_hull_eq_sing() -> @kernel.Thm
+
+pub fn convex_hull_exchange_inter() -> @kernel.Thm
+
+pub fn convex_hull_exchange_union() -> @kernel.Thm
+
+pub fn convex_hull_explicit() -> @kernel.Thm
+
+pub fn convex_hull_finite() -> @kernel.Thm
+
+pub fn convex_hull_finite_image_explicit() -> @kernel.Thm
+
+pub fn convex_hull_finite_step() -> @kernel.Thm
+
+pub fn convex_hull_image() -> @kernel.Thm
+
+pub fn convex_hull_image_lt() -> @kernel.Thm
+
+pub fn convex_hull_indexed() -> @kernel.Thm
+
+pub fn convex_hull_insert() -> @kernel.Thm
+
+pub fn convex_hull_insert_alt() -> @kernel.Thm
+
+pub fn convex_hull_insert_segments() -> @kernel.Thm
+
+pub fn convex_hull_inter() -> @kernel.Thm
+
+pub fn convex_hull_interior_subset() -> @kernel.Thm
+
+pub fn convex_hull_inters() -> @kernel.Thm
+
+pub fn convex_hull_linear_image() -> @kernel.Thm
+
+pub fn convex_hull_pcross() -> @kernel.Thm
+
+pub fn convex_hull_scaling() -> @kernel.Thm
+
+pub fn convex_hull_sing() -> @kernel.Thm
+
+pub fn convex_hull_sphere() -> @kernel.Thm
+
+pub fn convex_hull_subset_affine_hull() -> @kernel.Thm
+
+pub fn convex_hull_subset_convex_cone_hull() -> @kernel.Thm
+
+pub fn convex_hull_subset_span() -> @kernel.Thm
+
+pub fn convex_hull_sums() -> @kernel.Thm
+
+pub fn convex_hull_translation() -> @kernel.Thm
+
+pub fn convex_hull_union_explicit() -> @kernel.Thm
+
+pub fn convex_hull_union_nonempty_explicit() -> @kernel.Thm
+
+pub fn convex_hull_union_unions() -> @kernel.Thm
+
+pub fn convex_hull_univ() -> @kernel.Thm
+
+pub fn convex_hulls_eq() -> @kernel.Thm
+
+pub fn convex_hyperplane() -> @kernel.Thm
+
+pub fn convex_imp_bounded_on_interval() -> @kernel.Thm
+
+pub fn convex_imp_lipschitz() -> @kernel.Thm
+
+pub fn convex_imp_locally_bounded() -> @kernel.Thm
+
+pub fn convex_imp_locally_lipschitz() -> @kernel.Thm
+
+pub fn convex_imp_piecewise_monotone() -> @kernel.Thm
+
+pub fn convex_imp_starlike() -> @kernel.Thm
+
+pub fn convex_indexed() -> @kernel.Thm
+
+pub fn convex_inter() -> @kernel.Thm
+
+pub fn convex_interior() -> @kernel.Thm
+
+pub fn convex_interior_closure() -> @kernel.Thm
+
+pub fn convex_intermediate_ball() -> @kernel.Thm
+
+pub fn convex_inters() -> @kernel.Thm
+
+pub fn convex_interval() -> @kernel.Thm
+
+pub fn convex_line_intersection_unique_closed() -> @kernel.Thm
+
+pub fn convex_line_intersection_unique_open() -> @kernel.Thm
+
+pub fn convex_line_intersection_unique_open_in() -> @kernel.Thm
+
+pub fn convex_line_intersections() -> @kernel.Thm
+
+pub fn convex_line_intersections_alt() -> @kernel.Thm
+
+pub fn convex_linear_image() -> @kernel.Thm
+
+pub fn convex_linear_image_eq() -> @kernel.Thm
+
+pub fn convex_linear_preimage() -> @kernel.Thm
+
+pub fn convex_local_global_minimum() -> @kernel.Thm
+
+pub fn convex_local_global_minimum_gen() -> @kernel.Thm
+
+pub fn convex_local_global_minimum_segment() -> @kernel.Thm
+
+pub fn convex_lower() -> @kernel.Thm
+
+pub fn convex_lower_segment() -> @kernel.Thm
+
+pub fn convex_lower_segment_lt() -> @kernel.Thm
+
+pub fn convex_max() -> @kernel.Thm
+
+pub fn convex_nearby_in_scaling() -> @kernel.Thm
+
+pub fn convex_nearby_in_scaling_relative_interior() -> @kernel.Thm
+
+pub fn convex_nearby_not_in_scaling() -> @kernel.Thm
+
+pub fn convex_negations() -> @kernel.Thm
+
+pub fn convex_norm() -> @kernel.Thm
+
+pub fn convex_on() -> @kernel.Thm
+
+pub fn convex_on_compose_linear() -> @kernel.Thm
+
+pub fn convex_on_const() -> @kernel.Thm
+
+pub fn convex_on_continuous() -> @kernel.Thm
+
+pub fn convex_on_continuous_on_relative_interior() -> @kernel.Thm
+
+pub fn convex_on_convex_hull_bound() -> @kernel.Thm
+
+pub fn convex_on_convex_hull_bound_eq() -> @kernel.Thm
+
+pub fn convex_on_empty() -> @kernel.Thm
+
+pub fn convex_on_epigraph_slice_le() -> @kernel.Thm
+
+pub fn convex_on_epigraph_slice_lt() -> @kernel.Thm
+
+pub fn convex_on_eq() -> @kernel.Thm
+
+pub fn convex_on_imp_jensen() -> @kernel.Thm
+
+pub fn convex_on_imp_midpoint_convex() -> @kernel.Thm
+
+pub fn convex_on_jensen() -> @kernel.Thm
+
+pub fn convex_on_left_secant() -> @kernel.Thm
+
+pub fn convex_on_left_secant_mul() -> @kernel.Thm
+
+pub fn convex_on_mid_secant() -> @kernel.Thm
+
+pub fn convex_on_mid_secant_mul() -> @kernel.Thm
+
+pub fn convex_on_right_secant() -> @kernel.Thm
+
+pub fn convex_on_right_secant_mul() -> @kernel.Thm
+
+pub fn convex_on_secants_1() -> @kernel.Thm
+
+pub fn convex_on_secants_1_imp() -> @kernel.Thm
+
+pub fn convex_on_setdist() -> @kernel.Thm
+
+pub fn convex_on_sing() -> @kernel.Thm
+
+pub fn convex_on_subset() -> @kernel.Thm
+
+pub fn convex_on_sum() -> @kernel.Thm
+
+pub fn convex_on_sup() -> @kernel.Thm
+
+pub fn convex_on_translation() -> @kernel.Thm
+
+pub fn convex_open_segment_cases() -> @kernel.Thm
+
+pub fn convex_open_segment_cases_alt() -> @kernel.Thm
+
+pub fn convex_pcross() -> @kernel.Thm
+
+pub fn convex_pcross_eq() -> @kernel.Thm
+
+pub fn convex_polar_dual() -> @kernel.Thm
+
+pub fn convex_positive_orthant() -> @kernel.Thm
+
+pub fn convex_preimage_concave_scaling() -> @kernel.Thm
+
+pub fn convex_relative_interior() -> @kernel.Thm
+
+pub fn convex_relative_interior_closure() -> @kernel.Thm
+
+pub fn convex_same_relative_interior_closure() -> @kernel.Thm
+
+pub fn convex_same_relative_interior_closure_straddle() -> @kernel.Thm
+
+pub fn convex_scaling() -> @kernel.Thm
+
+pub fn convex_scaling_eq() -> @kernel.Thm
+
+pub fn convex_segment() -> @kernel.Thm
+
+pub fn convex_semiopen_segment() -> @kernel.Thm
+
+pub fn convex_sing() -> @kernel.Thm
+
+pub fn convex_span() -> @kernel.Thm
+
+pub fn convex_standard_hyperplane() -> @kernel.Thm
+
+pub fn convex_starcentres() -> @kernel.Thm
+
+pub fn convex_strip_component_le() -> @kernel.Thm
+
+pub fn convex_strip_component_lt() -> @kernel.Thm
+
+pub fn convex_sums() -> @kernel.Thm
+
+pub fn convex_sums_multiples() -> @kernel.Thm
+
+pub fn convex_translation() -> @kernel.Thm
+
+pub fn convex_translation_eq() -> @kernel.Thm
+
+pub fn convex_translation_subset_preimage() -> @kernel.Thm
+
+pub fn convex_translation_superset_preimage() -> @kernel.Thm
+
+pub fn convex_triple_relative_frontier() -> @kernel.Thm
+
+pub fn convex_univ() -> @kernel.Thm
+
+pub fn convex_v1() -> @kernel.Thm
+
+pub fn convex_vsum() -> @kernel.Thm
+
+pub fn convex_vsum_strong() -> @kernel.Thm
+
+pub fn convexity_preserving_shrink_0() -> @kernel.Thm
+
+pub fn coplanar() -> @kernel.Thm
+
+pub fn coplanar_2() -> @kernel.Thm
+
+pub fn coplanar_3() -> @kernel.Thm
+
+pub fn coplanar_aff_dim() -> @kernel.Thm
+
+pub fn coplanar_affine_hull_coplanar() -> @kernel.Thm
+
+pub fn coplanar_empty() -> @kernel.Thm
+
+pub fn coplanar_intersecting_lines() -> @kernel.Thm
+
+pub fn coplanar_linear_image() -> @kernel.Thm
+
+pub fn coplanar_linear_image_eq() -> @kernel.Thm
+
+pub fn coplanar_sing() -> @kernel.Thm
+
+pub fn coplanar_small() -> @kernel.Thm
+
+pub fn coplanar_subset() -> @kernel.Thm
+
+pub fn coplanar_translation() -> @kernel.Thm
+
+pub fn coplanar_translation_eq() -> @kernel.Thm
+
+pub fn dense_complement_affine() -> @kernel.Thm
+
+pub fn dense_complement_convex() -> @kernel.Thm
+
+pub fn dense_complement_convex_closed() -> @kernel.Thm
+
+pub fn dense_complement_open_in_affine_hull() -> @kernel.Thm
+
+pub fn dense_complement_subspace() -> @kernel.Thm
+
+pub fn dependent_affine_dependent_cases() -> @kernel.Thm
+
+pub fn dependent_imp_affine_dependent() -> @kernel.Thm
+
+pub fn diameter_attained_frontier() -> @kernel.Thm
+
+pub fn diameter_attained_relative_frontier() -> @kernel.Thm
+
+pub fn diameter_bounded_bound_lt() -> @kernel.Thm
+
+pub fn diameter_convex_hull() -> @kernel.Thm
+
+pub fn diameter_frontier() -> @kernel.Thm
+
+pub fn diameter_relative_frontier() -> @kernel.Thm
+
+pub fn diameter_simplex() -> @kernel.Thm
+
+pub fn diameter_sphere() -> @kernel.Thm
+
+pub fn different_norm_3_collinear_points() -> @kernel.Thm
+
+pub fn diffs_affine_hull_span() -> @kernel.Thm
+
+pub fn dim_conic_hull() -> @kernel.Thm
+
+pub fn dim_convex_hull() -> @kernel.Thm
+
+pub fn dim_eq_hyperplane() -> @kernel.Thm
+
+pub fn dim_hyperplane() -> @kernel.Thm
+
+pub fn dim_open() -> @kernel.Thm
+
+pub fn dim_open_in() -> @kernel.Thm
+
+pub fn disjoint_affine_hull() -> @kernel.Thm
+
+pub fn disjoint_relative_interior_convex_hull() -> @kernel.Thm
+
+pub fn dist_convex_hull_bound_2() -> @kernel.Thm
+
+pub fn dist_convex_hull_bound_eq() -> @kernel.Thm
+
+pub fn dugundji() -> @kernel.Thm
+
+pub fn empty_interior_aff_dim() -> @kernel.Thm
+
+pub fn empty_interior_affine_hull() -> @kernel.Thm
+
+pub fn empty_interior_convex_hull() -> @kernel.Thm
+
+pub fn empty_interior_of_aff_dim() -> @kernel.Thm
+
+pub fn empty_interior_subset_hyperplane() -> @kernel.Thm
+
+pub fn epigraph() -> @kernel.Thm
+
+pub fn eq_sums_lcancel() -> @kernel.Thm
+
+pub fn eq_sums_rcancel() -> @kernel.Thm
+
+pub fn explicit_subset_interior_convex_hull() -> @kernel.Thm
+
+pub fn explicit_subset_interior_convex_hull_minimal() -> @kernel.Thm
+
+pub fn explicit_subset_relative_interior_convex_hull() -> @kernel.Thm
+
+pub fn explicit_subset_relative_interior_convex_hull_minimal() -> @kernel.Thm
+
+pub fn extend_convex_frontier_segment() -> @kernel.Thm
+
+pub fn extend_convex_relative_frontier_segment() -> @kernel.Thm
+
+pub fn extend_to_affine_basis() -> @kernel.Thm
+
+pub fn finite_components_complement_convex() -> @kernel.Thm
+
+pub fn finite_imp_bounded_convex_hull() -> @kernel.Thm
+
+pub fn finite_imp_compact_convex_hull() -> @kernel.Thm
+
+pub fn finite_segment() -> @kernel.Thm
+
+pub fn forall_of_drop() -> @kernel.Thm
+
+pub fn forall_of_pastecart() -> @kernel.Thm
+
+pub fn frontier_closure_convex() -> @kernel.Thm
+
+pub fn frontier_convex_hull_cases() -> @kernel.Thm
+
+pub fn frontier_convex_hull_explicit() -> @kernel.Thm
+
+pub fn frontier_of_components_closed_complement() -> @kernel.Thm
+
+pub fn frontier_of_components_subset() -> @kernel.Thm
+
+pub fn frontier_of_connected_component_subset() -> @kernel.Thm
+
+pub fn frontier_segment() -> @kernel.Thm
+
+pub fn frontier_strip_component_le() -> @kernel.Thm
+
+pub fn frontier_strip_component_lt() -> @kernel.Thm
+
+pub fn graph_embeds_in_r3() -> @kernel.Thm
+
+pub fn hausdist_complements_convex_explicit() -> @kernel.Thm
+
+pub fn hausdist_complements_convex_le() -> @kernel.Thm
+
+pub fn hausdist_convex_hulls() -> @kernel.Thm
+
+pub fn hausdist_relative_interior() -> @kernel.Thm
+
+pub fn hausdist_sums() -> @kernel.Thm
+
+pub fn helly() -> @kernel.Thm
+
+pub fn helly_alt() -> @kernel.Thm
+
+pub fn helly_closed() -> @kernel.Thm
+
+pub fn helly_closed_alt() -> @kernel.Thm
+
+pub fn helly_compact() -> @kernel.Thm
+
+pub fn helly_compact_alt() -> @kernel.Thm
+
+pub fn helly_induct() -> @kernel.Thm
+
+pub fn homeomorphic_affine_sets() -> @kernel.Thm
+
+pub fn homeomorphic_closed_intervals() -> @kernel.Thm
+
+pub fn homeomorphic_convex_compact() -> @kernel.Thm
+
+pub fn homeomorphic_convex_compact_cball() -> @kernel.Thm
+
+pub fn homeomorphic_convex_compact_sets() -> @kernel.Thm
+
+pub fn homeomorphic_convex_open_sets() -> @kernel.Thm
+
+pub fn homeomorphic_relative_frontiers_convex_bounded_sets() -> @kernel.Thm
+
+pub fn homeomorphic_relative_interiors_convex_compact_sets() -> @kernel.Thm
+
+pub fn homeomorphic_relatively_open_convex_sets() -> @kernel.Thm
+
+pub fn in_affine_add_mul() -> @kernel.Thm
+
+pub fn in_affine_add_mul_diff() -> @kernel.Thm
+
+pub fn in_affine_hull_linear_image() -> @kernel.Thm
+
+pub fn in_affine_mul_diff_add() -> @kernel.Thm
+
+pub fn in_affine_sub_mul_diff() -> @kernel.Thm
+
+pub fn in_convex_hull_exchange() -> @kernel.Thm
+
+pub fn in_convex_hull_exchange_unique() -> @kernel.Thm
+
+pub fn in_convex_hull_interval_1() -> @kernel.Thm
+
+pub fn in_convex_hull_linear_image() -> @kernel.Thm
+
+pub fn in_convex_hull_segment_1() -> @kernel.Thm
+
+pub fn in_convex_set() -> @kernel.Thm
+
+pub fn in_epigraph() -> @kernel.Thm
+
+pub fn in_frontier_convex_hull() -> @kernel.Thm
+
+pub fn in_interior_closure_convex_segment() -> @kernel.Thm
+
+pub fn in_interior_closure_convex_shrink() -> @kernel.Thm
+
+pub fn in_interior_convex_shrink() -> @kernel.Thm
+
+pub fn in_relative_interior() -> @kernel.Thm
+
+pub fn in_relative_interior_cball() -> @kernel.Thm
+
+pub fn in_relative_interior_closure_convex_segment() -> @kernel.Thm
+
+pub fn in_relative_interior_closure_convex_shrink() -> @kernel.Thm
+
+pub fn in_relative_interior_convex_shrink() -> @kernel.Thm
+
+pub fn in_relative_interior_in_open_segment() -> @kernel.Thm
+
+pub fn in_relative_interior_in_open_segment_eq() -> @kernel.Thm
+
+pub fn in_relative_interior_in_open_segment_strong() -> @kernel.Thm
+
+pub fn increasing_extends_from_dense() -> @kernel.Thm
+
+pub fn independent_imp_affine_dependent_0() -> @kernel.Thm
+
+pub fn inter_convex_hull_insert_relative_exterior() -> @kernel.Thm
+
+pub fn inter_relative_frontier_conic_hull() -> @kernel.Thm
+
+pub fn inter_relative_interior_subset() -> @kernel.Thm
+
+pub fn inter_segment() -> @kernel.Thm
+
+pub fn interior_convex_hull_3() -> @kernel.Thm
+
+pub fn interior_convex_hull_3_minimal() -> @kernel.Thm
+
+pub fn interior_convex_hull_eq_empty() -> @kernel.Thm
+
+pub fn interior_convex_hull_explicit() -> @kernel.Thm
+
+pub fn interior_convex_hull_explicit_minimal() -> @kernel.Thm
+
+pub fn interior_segment() -> @kernel.Thm
+
+pub fn interior_simplex_nonempty() -> @kernel.Thm
+
+pub fn interior_std_simplex() -> @kernel.Thm
+
+pub fn interior_strip_component_le() -> @kernel.Thm
+
+pub fn interior_subset_relative_interior() -> @kernel.Thm
+
+pub fn inverse_lipschitz_convex_spherical_projection() -> @kernel.Thm
+
+pub fn inverse_lipschitz_convex_spherical_projection_explicit() -> @kernel.Thm
+
+pub fn is_affine_hull() -> @kernel.Thm
+
+pub fn is_convex_hull() -> @kernel.Thm
+
+pub fn is_interval_closure() -> @kernel.Thm
+
+pub fn is_interval_connected() -> @kernel.Thm
+
+pub fn is_interval_connected_1() -> @kernel.Thm
+
+pub fn is_interval_convex() -> @kernel.Thm
+
+pub fn is_interval_convex_1() -> @kernel.Thm
+
+pub fn is_interval_interior() -> @kernel.Thm
+
+pub fn is_interval_relative_interior() -> @kernel.Thm
+
+pub fn isometric_homeomorphism_affine() -> @kernel.Thm
+
+pub fn ivt_decreasing_component_1() -> @kernel.Thm
+
+pub fn ivt_decreasing_component_on_1() -> @kernel.Thm
+
+pub fn ivt_increasing_component_1() -> @kernel.Thm
+
+pub fn ivt_increasing_component_on_1() -> @kernel.Thm
+
+pub fn jung() -> @kernel.Thm
+
+pub fn kirchberger() -> @kernel.Thm
+
+pub fn kirszbraun() -> @kernel.Thm
+
+pub fn krein_milman_frontier() -> @kernel.Thm
+
+pub fn krein_milman_relative_boundary() -> @kernel.Thm
+
+pub fn krein_milman_relative_frontier() -> @kernel.Thm
+
+pub fn limit_point_of_interval() -> @kernel.Thm
+
+pub fn limpt_of_convex() -> @kernel.Thm
+
+pub fn linear_closest_point() -> @kernel.Thm
+
+pub fn linear_convex_on_1() -> @kernel.Thm
+
+pub fn linear_imp_convex_on() -> @kernel.Thm
+
+pub fn lipschitz_convex_spherical_projection() -> @kernel.Thm
+
+pub fn lipschitz_convex_spherical_projection_explicit() -> @kernel.Thm
+
+pub fn lipschitz_extension_exists() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn matrix_inv_projection_image() -> @kernel.Thm
+
+pub fn matrix_inv_projection_image_alt() -> @kernel.Thm
+
+pub fn maximal_affine_independent_subset() -> @kernel.Thm
+
+pub fn maximal_affine_independent_subset_affine() -> @kernel.Thm
+
+pub fn midpoint_convex_dyadic_rationals() -> @kernel.Thm
+
+pub fn midpoint_convex_set() -> @kernel.Thm
+
+pub fn midpoint_in_convex() -> @kernel.Thm
+
+pub fn midpoints_in_convex_hull() -> @kernel.Thm
+
+pub fn nondecreasing_extends_from_dense() -> @kernel.Thm
+
+pub fn nondecreasing_extends_to_convex_hull() -> @kernel.Thm
+
+pub fn nonempty_affine_exists() -> @kernel.Thm
+
+pub fn not_in_interior_convex_hull() -> @kernel.Thm
+
+pub fn open_convex_hull() -> @kernel.Thm
+
+pub fn open_in_convex_meets_relative_interior() -> @kernel.Thm
+
+pub fn open_in_relative_interior() -> @kernel.Thm
+
+pub fn open_in_segment() -> @kernel.Thm
+
+pub fn open_in_set_relative_interior() -> @kernel.Thm
+
+pub fn open_in_subset_relative_interior() -> @kernel.Thm
+
+pub fn open_segment_descale() -> @kernel.Thm
+
+pub fn open_segment_subset_ball() -> @kernel.Thm
+
+pub fn open_strip_component_lt() -> @kernel.Thm
+
+pub fn open_subset_closure_convex() -> @kernel.Thm
+
+pub fn orthogonal_any_closest_point() -> @kernel.Thm
+
+pub fn polar_dual() -> @kernel.Thm
+
+pub fn polar_dual_0() -> @kernel.Thm
+
+pub fn polar_dual_antimono() -> @kernel.Thm
+
+pub fn polar_dual_cball() -> @kernel.Thm
+
+pub fn polar_dual_empty() -> @kernel.Thm
+
+pub fn polar_dual_polar_dual() -> @kernel.Thm
+
+pub fn polar_dual_polar_dual_eq() -> @kernel.Thm
+
+pub fn polar_dual_polar_dual_gen() -> @kernel.Thm
+
+pub fn polar_dual_scaling() -> @kernel.Thm
+
+pub fn polar_dual_sing() -> @kernel.Thm
+
+pub fn polar_dual_union() -> @kernel.Thm
+
+pub fn polar_dual_unit_cball() -> @kernel.Thm
+
+pub fn polar_dual_univ() -> @kernel.Thm
+
+pub fn polar_dual_v1() -> @kernel.Thm
+
+pub fn radon() -> @kernel.Thm
+
+pub fn radon_ex_lemma() -> @kernel.Thm
+
+pub fn radon_partition() -> @kernel.Thm
+
+pub fn radon_s_lemma() -> @kernel.Thm
+
+pub fn radon_v_lemma() -> @kernel.Thm
+
+pub fn ray_to_frontier() -> @kernel.Thm
+
+pub fn ray_to_relative_frontier() -> @kernel.Thm
+
+pub fn regular_polytope_dist_barycentre() -> @kernel.Thm
+
+pub fn regular_polytope_exists() -> @kernel.Thm
+
+pub fn regular_polytope_with_barycentre_exists() -> @kernel.Thm
+
+pub fn regular_polytope_with_barycentre_exists_alt() -> @kernel.Thm
+
+pub fn relative_frontier() -> @kernel.Thm
+
+pub fn relative_frontier_ball() -> @kernel.Thm
+
+pub fn relative_frontier_cball() -> @kernel.Thm
+
+pub fn relative_frontier_closure() -> @kernel.Thm
+
+pub fn relative_frontier_convex_hull_explicit() -> @kernel.Thm
+
+pub fn relative_frontier_empty() -> @kernel.Thm
+
+pub fn relative_frontier_eq_empty() -> @kernel.Thm
+
+pub fn relative_frontier_frontier() -> @kernel.Thm
+
+pub fn relative_frontier_frontier_of() -> @kernel.Thm
+
+pub fn relative_frontier_injective_linear_image() -> @kernel.Thm
+
+pub fn relative_frontier_nonempty_interior() -> @kernel.Thm
+
+pub fn relative_frontier_not_sing() -> @kernel.Thm
+
+pub fn relative_frontier_of_convex_hull() -> @kernel.Thm
+
+pub fn relative_frontier_open() -> @kernel.Thm
+
+pub fn relative_frontier_relative_interior() -> @kernel.Thm
+
+pub fn relative_frontier_sing() -> @kernel.Thm
+
+pub fn relative_frontier_subset() -> @kernel.Thm
+
+pub fn relative_frontier_subset_eq() -> @kernel.Thm
+
+pub fn relative_frontier_subset_frontier() -> @kernel.Thm
+
+pub fn relative_frontier_translation() -> @kernel.Thm
+
+pub fn relative_interior() -> @kernel.Thm
+
+pub fn relative_interior_affine() -> @kernel.Thm
+
+pub fn relative_interior_ball() -> @kernel.Thm
+
+pub fn relative_interior_cball() -> @kernel.Thm
+
+pub fn relative_interior_cball_inter_affine() -> @kernel.Thm
+
+pub fn relative_interior_closure_subset() -> @kernel.Thm
+
+pub fn relative_interior_convex_contains_same_ray() -> @kernel.Thm
+
+pub fn relative_interior_convex_hull_explicit() -> @kernel.Thm
+
+pub fn relative_interior_convex_inter_affine() -> @kernel.Thm
+
+pub fn relative_interior_convex_inter_open() -> @kernel.Thm
+
+pub fn relative_interior_convex_prolong() -> @kernel.Thm
+
+pub fn relative_interior_empty() -> @kernel.Thm
+
+pub fn relative_interior_eq() -> @kernel.Thm
+
+pub fn relative_interior_eq_closure() -> @kernel.Thm
+
+pub fn relative_interior_eq_empty() -> @kernel.Thm
+
+pub fn relative_interior_injective_linear_image() -> @kernel.Thm
+
+pub fn relative_interior_inter() -> @kernel.Thm
+
+pub fn relative_interior_interior() -> @kernel.Thm
+
+pub fn relative_interior_interior_of() -> @kernel.Thm
+
+pub fn relative_interior_linear_image_convex() -> @kernel.Thm
+
+pub fn relative_interior_linear_preimage_convex() -> @kernel.Thm
+
+pub fn relative_interior_maximal() -> @kernel.Thm
+
+pub fn relative_interior_nonempty_interior() -> @kernel.Thm
+
+pub fn relative_interior_open() -> @kernel.Thm
+
+pub fn relative_interior_open_in() -> @kernel.Thm
+
+pub fn relative_interior_pcross() -> @kernel.Thm
+
+pub fn relative_interior_prolong() -> @kernel.Thm
+
+pub fn relative_interior_relative_interior() -> @kernel.Thm
+
+pub fn relative_interior_segment() -> @kernel.Thm
+
+pub fn relative_interior_sing() -> @kernel.Thm
+
+pub fn relative_interior_subset() -> @kernel.Thm
+
+pub fn relative_interior_sums() -> @kernel.Thm
+
+pub fn relative_interior_translation() -> @kernel.Thm
+
+pub fn relative_interior_unbounded_convex_contains_ray() -> @kernel.Thm
+
+pub fn relative_interior_unbounded_convex_contains_rays() -> @kernel.Thm
+
+pub fn relative_interior_unique() -> @kernel.Thm
+
+pub fn relative_interior_univ() -> @kernel.Thm
+
+pub fn relative_interior_v1() -> @kernel.Thm
+
+pub fn rigid_transformation_between_2() -> @kernel.Thm
+
+pub fn rigid_transformation_between_3() -> @kernel.Thm
+
+pub fn rigid_transformation_between_congruent_sets() -> @kernel.Thm
+
+pub fn rigid_transformation_between_congruent_sets_strong() -> @kernel.Thm
+
+pub fn rotation_to_general_position_exists() -> @kernel.Thm
+
+pub fn rotation_to_general_position_exists_gen() -> @kernel.Thm
+
+pub fn same_distances_to_affine_hull() -> @kernel.Thm
+
+pub fn segment_as_ball() -> @kernel.Thm
+
+pub fn segment_bound() -> @kernel.Thm
+
+pub fn segment_convex_hull() -> @kernel.Thm
+
+pub fn segment_eq() -> @kernel.Thm
+
+pub fn segment_eq_empty() -> @kernel.Thm
+
+pub fn segment_eq_sing() -> @kernel.Thm
+
+pub fn segment_furthest_le() -> @kernel.Thm
+
+pub fn segment_image_interval() -> @kernel.Thm
+
+pub fn segment_out_to_frontier() -> @kernel.Thm
+
+pub fn segment_subset_convex() -> @kernel.Thm
+
+pub fn segment_subset_line() -> @kernel.Thm
+
+pub fn segment_subset_relative_frontier_convex() -> @kernel.Thm
+
+pub fn segment_subset_relative_frontier_convex_gen() -> @kernel.Thm
+
+pub fn segment_to_frontier_simple() -> @kernel.Thm
+
+pub fn segment_to_relative_frontier() -> @kernel.Thm
+
+pub fn segment_to_relative_frontier_simple() -> @kernel.Thm
+
+pub fn self_adjoint_closest_point() -> @kernel.Thm
+
+pub fn separate_closed_cones() -> @kernel.Thm
+
+pub fn separating_hyperplane_affine_affine() -> @kernel.Thm
+
+pub fn separating_hyperplane_affine_hulls() -> @kernel.Thm
+
+pub fn separating_hyperplane_closed_0() -> @kernel.Thm
+
+pub fn separating_hyperplane_closed_0_inset() -> @kernel.Thm
+
+pub fn separating_hyperplane_closed_compact() -> @kernel.Thm
+
+pub fn separating_hyperplane_closed_point() -> @kernel.Thm
+
+pub fn separating_hyperplane_closed_point_inset() -> @kernel.Thm
+
+pub fn separating_hyperplane_compact_closed() -> @kernel.Thm
+
+pub fn separating_hyperplane_compact_closed_nonzero() -> @kernel.Thm
+
+pub fn separating_hyperplane_compact_compact() -> @kernel.Thm
+
+pub fn separating_hyperplane_relative_interiors() -> @kernel.Thm
+
+pub fn separating_hyperplane_set_0() -> @kernel.Thm
+
+pub fn separating_hyperplane_set_0_inspan() -> @kernel.Thm
+
+pub fn separating_hyperplane_set_point_inaff() -> @kernel.Thm
+
+pub fn separating_hyperplane_sets() -> @kernel.Thm
+
+pub fn setdist_relative_interior() -> @kernel.Thm
+
+pub fn simplex_explicit() -> @kernel.Thm
+
+pub fn simplex_extremal_le() -> @kernel.Thm
+
+pub fn simplex_extremal_le_exists() -> @kernel.Thm
+
+pub fn simplex_furthest_le() -> @kernel.Thm
+
+pub fn simplex_furthest_le_exists() -> @kernel.Thm
+
+pub fn simplex_furthest_lt() -> @kernel.Thm
+
+pub fn simplex_furthest_lt_exists() -> @kernel.Thm
+
+pub fn span_affine_hull_insert() -> @kernel.Thm
+
+pub fn span_conic_hull() -> @kernel.Thm
+
+pub fn span_convex_cone_allsigns() -> @kernel.Thm
+
+pub fn span_convex_hull() -> @kernel.Thm
+
+pub fn span_open() -> @kernel.Thm
+
+pub fn sphere_subset_convex() -> @kernel.Thm
+
+pub fn starlike() -> @kernel.Thm
+
+pub fn starlike_closure() -> @kernel.Thm
+
+pub fn starlike_compact_projective() -> @kernel.Thm
+
+pub fn starlike_convex_tweak_boundary_points() -> @kernel.Thm
+
+pub fn starlike_linear_image() -> @kernel.Thm
+
+pub fn starlike_linear_image_eq() -> @kernel.Thm
+
+pub fn starlike_pcross() -> @kernel.Thm
+
+pub fn starlike_pcross_eq() -> @kernel.Thm
+
+pub fn starlike_translation_eq() -> @kernel.Thm
+
+pub fn starlike_univ() -> @kernel.Thm
+
+pub fn std_simplex() -> @kernel.Thm
+
+pub fn subset_convex_hull_frontier() -> @kernel.Thm
+
+pub fn subset_convex_hull_relative_frontier() -> @kernel.Thm
+
+pub fn subset_relative_interior() -> @kernel.Thm
+
+pub fn subset_relative_interior_intersecting_convex() -> @kernel.Thm
+
+pub fn subset_segment() -> @kernel.Thm
+
+pub fn subset_segment_open_closed() -> @kernel.Thm
+
+pub fn subset_sums_lcancel() -> @kernel.Thm
+
+pub fn subset_sums_rcancel() -> @kernel.Thm
+
+pub fn subspace_convex_cone_symmetric() -> @kernel.Thm
+
+pub fn subspace_eq_affine() -> @kernel.Thm
+
+pub fn subspace_imp_affine() -> @kernel.Thm
+
+pub fn subspace_imp_conic() -> @kernel.Thm
+
+pub fn subspace_imp_convex() -> @kernel.Thm
+
+pub fn subspace_imp_convex_cone() -> @kernel.Thm
+
+pub fn supporting_hyperplane_closed_point() -> @kernel.Thm
+
+pub fn supporting_hyperplane_compact_point_inf() -> @kernel.Thm
+
+pub fn supporting_hyperplane_compact_point_sup() -> @kernel.Thm
+
+pub fn supporting_hyperplane_frontier() -> @kernel.Thm
+
+pub fn supporting_hyperplane_point() -> @kernel.Thm
+
+pub fn supporting_hyperplane_relative_boundary() -> @kernel.Thm
+
+pub fn supporting_hyperplane_relative_frontier() -> @kernel.Thm
+
+pub fn tietze() -> @kernel.Thm
+
+pub fn tietze_closed_interval() -> @kernel.Thm
+
+pub fn tietze_closed_interval_1() -> @kernel.Thm
+
+pub fn tietze_open_interval() -> @kernel.Thm
+
+pub fn tietze_open_interval_1() -> @kernel.Thm
+
+pub fn tietze_unbounded() -> @kernel.Thm
+
+pub fn translation_eq_imp() -> @kernel.Thm
+
+pub fn trivial_limit_within_convex() -> @kernel.Thm
+
+pub fn unbounded_complement_component_convex() -> @kernel.Thm
+
+pub fn unbounded_complement_convex() -> @kernel.Thm
+
+pub fn unbounded_convex_closed_contains_ray() -> @kernel.Thm
+
+pub fn unbounded_convex_closed_contains_rays() -> @kernel.Thm
+
+pub fn union_segment() -> @kernel.Thm
+
+pub fn unit_interval_convex_hull() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
