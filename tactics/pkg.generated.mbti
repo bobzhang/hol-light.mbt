@@ -173,7 +173,7 @@ pub fn print_colored_goal_tac((@list.List[(String, @kernel.Thm)], @kernel.Term))
 
 pub fn print_goal((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> Unit raise
 
-pub let print_goal_hyp_max_boxes : @ref.Ref[Int?]
+pub let print_goal_hyp_max_boxes : @ref.Ref[Int64?]
 
 pub fn print_goal_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
 

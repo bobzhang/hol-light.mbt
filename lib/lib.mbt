@@ -1047,15 +1047,16 @@ pub fn explode(s : String) -> @list.List[String] {
 // ---------------------------------------------------------------------------
 
 ///|
-pub fn gcd(x : Int, y : Int) -> Int {
-  let mut a = x.abs()
-  let mut b = y.abs()
+pub fn gcd(x : Int64, y : Int64) -> Int64 {
+  // OCaml ints: `abs min_int` is `min_int`
+  let mut a = abs63(x)
+  let mut b = abs63(y)
   if a < b {
     let t = a
     a = b
     b = t
   }
-  while b != 0 {
+  while b != 0L {
     let r = a % b
     a = b
     b = r

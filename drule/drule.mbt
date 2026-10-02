@@ -179,9 +179,9 @@ fn ho_betas(bcs : List[(Int64, Term)], pat : Term, tm : Term) -> Term raise {
     Failure(_) => {
       let (hop, args) = @basics.strip_comb(pat)
       try {
-        let n = @lib.rev_assoc(hop, bcs).to_int()
-        if args.length() == n {
-          betas(n, tm)
+        let n = @lib.rev_assoc(hop, bcs)
+        if args.length().to_int64() == n {
+          betas(n.to_int(), tm)
         } else {
           fail_()
         }
@@ -256,9 +256,9 @@ fn ho_betas_thm(bcs : List[(Int64, Term)], pat : Term, tm : Term) -> Thm raise {
     Failure(_) => {
       let (hop, args) = @basics.strip_comb(pat)
       try {
-        let n = @lib.rev_assoc(hop, bcs).to_int()
-        if args.length() == n {
-          betas_conv_n(n, tm)
+        let n = @lib.rev_assoc(hop, bcs)
+        if args.length().to_int64() == n {
+          betas_conv_n(n.to_int(), tm)
         } else {
           fail_()
         }

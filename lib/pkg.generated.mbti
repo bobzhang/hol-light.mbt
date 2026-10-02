@@ -135,7 +135,7 @@ pub fn[A, B] forall2((A, B) -> Bool raise?, @list.List[A], @list.List[B]) -> Boo
 
 pub fn[A] funpow(Int, (A) -> A raise?, A) -> A raise?
 
-pub fn gcd(Int, Int) -> Int
+pub fn gcd(Int64, Int64) -> Int64
 
 pub fn gp_factorint(@bigint.BigInt) -> String
 
@@ -187,7 +187,7 @@ pub fn[A] insert_eq((A, A) -> Bool raise?, A, @list.List[A]) -> @list.List[A] ra
 
 pub fn int63_of_string(String) -> Int64 raise
 
-pub fn int63_to_int(Int64) -> Int raise @num.InvalidArgument
+pub fn int63_to_int(Int64) -> Int
 
 pub fn int_of_string(String) -> Int raise
 
