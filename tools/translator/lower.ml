@@ -2180,18 +2180,35 @@ module Lower = struct
     (* only when every other binding is a plain closure: OCaml evaluates
        the bindings in order, and a function's setup (`let x = e in fun`)
        would otherwise run after the values *)
+    (* OCaml 4.14 (Rec_check) evaluates the dynamic bindings first; the
+       static ones (constructions, constants, functions and their set-ups)
+       follow in binding order *)
+    let rec is_static e =
+      match e.exp_desc with
+      | Texp_let (_, _, b) -> is_static b
+      | Texp_construct (_, { Types.cstr_tag = Types.Cstr_unboxed; _ }, [ a ]) -> is_static a
+      | Texp_construct _ | Texp_record _ | Texp_variant _ | Texp_tuple _ | Texp_constant _ | Texp_function _
+      | Texp_lazy _ | Texp_array _ | Texp_extension_constructor _ | Texp_unreachable ->
+          true
+      | Texp_apply ({ exp_desc = Texp_ident (_, _, { Types.val_kind = Types.Val_prim { Primitive.prim_name = "%makemutable"; _ }; _ }); _ }, _) -> true
+      | _ -> false
+    in
+    let dynamic, static_values = List.partition (fun vb -> not (is_static vb.vb_expr)) values in
     if values <> [] && fns <> [] && List.for_all is_fn fns then
-      lower_let ?expect values { body with exp_desc = Texp_let (Asttypes.Recursive, fns, body) }
+      lower_let ?expect (dynamic @ static_values) { body with exp_desc = Texp_let (Asttypes.Recursive, fns, body) }
     else
     let peeled = List.map (fun vb -> (vb, peel vb.vb_expr [])) vbs in
     if List.exists (fun (_, p) -> match p with Some (pre, _) -> pre <> [] | None -> false) peeled then begin
       let prefixes = List.concat_map (fun (_, p) -> match p with Some (pre, _) -> pre | None -> []) peeled in
       if List.exists (fun (_, pvbs) -> mentions_group pvbs) prefixes then unsupported loc "recursive value whose set-up uses itself";
-      (* OCaml evaluates the values outside the group (dynamic bindings)
-         first, then the closures' set-ups, each in binding order *)
       let steps =
-        List.filter_map (fun (vb, p) -> if p = None && List.memq vb values then Some (Asttypes.Nonrecursive, [ vb ]) else None) peeled
-        @ prefixes
+        List.map (fun vb -> (Asttypes.Nonrecursive, [ vb ])) dynamic
+        @ List.concat_map
+            (fun (vb, p) ->
+              match p with
+              | Some (pre, _) -> pre
+              | None -> if List.memq vb static_values then [ (Asttypes.Nonrecursive, [ vb ]) ] else [])
+            peeled
       in
       let vbs' =
         List.filter_map
