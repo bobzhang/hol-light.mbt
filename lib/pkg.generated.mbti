@@ -469,7 +469,7 @@ pub enum Func[K, V] {
   Empty
   Leaf(Int, @list.List[(K, V)])
   Branch(Int, Int, Func[K, V], Func[K, V])
-}
+} derive(Eq)
 
 pub struct OHasher {
   // private fields

@@ -1,0 +1,23 @@
+// Multivariate/vectors.ml: the load steps are generated (vectors.mbt).
+
+///|
+let loaded : Ref[Bool] = Ref::{ val: false, }
+
+///|
+/// Load Multivariate/vectors.ml (once), after the files it needs.
+pub fn load() -> Unit {
+  if loaded.val {
+    return
+  }
+  loaded.val = true
+  @matroids.load()
+  @misc.load()
+  @parser.begin_theory("Multivariate/vectors")
+  load_steps() catch {
+    e =>
+      abort(
+        "HOL Light: loading Multivariate/vectors.ml failed: " + e.to_string(),
+      )
+  }
+  @parser.end_theory()
+}
