@@ -1,0 +1,5234 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/metric"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn alexander_subbase_theorem() -> @kernel.Thm
+
+pub fn alexander_subbase_theorem_alt() -> @kernel.Thm
+
+pub fn alexandroff_compactification() -> @kernel.Thm
+
+pub fn alexandroff_compactification_dense() -> @kernel.Thm
+
+pub fn alexandroff_compactification_unique() -> @kernel.Thm
+
+pub fn alexandroff_hausdorff() -> @kernel.Thm
+
+pub fn always_eventually() -> @kernel.Thm
+
+pub fn always_within_eventually() -> @kernel.Thm
+
+pub fn arch_eventually_abs_inv_offset() -> @kernel.Thm
+
+pub fn arch_eventually_inv() -> @kernel.Thm
+
+pub fn arch_eventually_inv1() -> @kernel.Thm
+
+pub fn arch_eventually_inv_offset() -> @kernel.Thm
+
+pub fn arch_eventually_le() -> @kernel.Thm
+
+pub fn arch_eventually_lt() -> @kernel.Thm
+
+pub fn arch_eventually_pow() -> @kernel.Thm
+
+pub fn arch_eventually_pow_inv() -> @kernel.Thm
+
+pub fn asm_metric_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn atpointof() -> @kernel.Thm
+
+pub fn atpointof_subtopology() -> @kernel.Thm
+
+pub fn atpointof_v1() -> @kernel.Thm
+
+pub fn atpointof_within_topspace() -> @kernel.Thm
+
+pub fn atpointof_within_trivial() -> @kernel.Thm
+
+pub fn baire_category() -> @kernel.Thm
+
+pub fn baire_category_alt() -> @kernel.Thm
+
+pub fn banach_fixpoint_thm() -> @kernel.Thm
+
+pub fn bijective_closed_imp_homeomorphic_map() -> @kernel.Thm
+
+pub fn bijective_closed_imp_open_map() -> @kernel.Thm
+
+pub fn bijective_open_imp_closed_map() -> @kernel.Thm
+
+pub fn bijective_open_imp_homeomorphic_map() -> @kernel.Thm
+
+pub fn bolzano_weierstrass_property() -> @kernel.Thm
+
+pub fn borel_from_subtopology() -> @kernel.Thm
+
+pub fn borel_in_cases() -> @kernel.Thm
+
+pub fn borel_in_complement() -> @kernel.Thm
+
+pub fn borel_in_complement_eq() -> @kernel.Thm
+
+pub fn borel_in_continuous_map_preimage() -> @kernel.Thm
+
+pub fn borel_in_diff() -> @kernel.Thm
+
+pub fn borel_in_empty() -> @kernel.Thm
+
+pub fn borel_in_homeomorphic_map_image() -> @kernel.Thm
+
+pub fn borel_in_homeomorphic_map_image_eq() -> @kernel.Thm
+
+pub fn borel_in_homeomorphic_maps_image_eq() -> @kernel.Thm
+
+pub fn borel_in_induct() -> @kernel.Thm
+
+pub fn borel_in_inter() -> @kernel.Thm
+
+pub fn borel_in_inter_subtopology() -> @kernel.Thm
+
+pub fn borel_in_inters() -> @kernel.Thm
+
+pub fn borel_in_rules() -> @kernel.Thm
+
+pub fn borel_in_subset_topspace() -> @kernel.Thm
+
+pub fn borel_in_subtopology() -> @kernel.Thm
+
+pub fn borel_in_subtopology_eq() -> @kernel.Thm
+
+pub fn borel_in_topspace() -> @kernel.Thm
+
+pub fn borel_in_union() -> @kernel.Thm
+
+pub fn borel_in_unions() -> @kernel.Thm
+
+pub fn borel_measurable_map() -> @kernel.Thm
+
+pub fn borel_measurable_map_closed_in() -> @kernel.Thm
+
+pub fn borel_measurable_map_compose() -> @kernel.Thm
+
+pub fn borel_measurable_map_const() -> @kernel.Thm
+
+pub fn borel_measurable_map_eq() -> @kernel.Thm
+
+pub fn borel_measurable_map_from_subtopology() -> @kernel.Thm
+
+pub fn borel_measurable_map_id() -> @kernel.Thm
+
+pub fn borel_measurable_map_image_subset_topspace() -> @kernel.Thm
+
+pub fn borel_measurable_map_into_subtopology() -> @kernel.Thm
+
+pub fn borel_measurable_map_limit() -> @kernel.Thm
+
+pub fn borel_measurable_map_open_in() -> @kernel.Thm
+
+pub fn boundary_bumping_theorem() -> @kernel.Thm
+
+pub fn boundary_bumping_theorem_closed() -> @kernel.Thm
+
+pub fn boundary_bumping_theorem_closed_gen() -> @kernel.Thm
+
+pub fn boundary_bumping_theorem_gen() -> @kernel.Thm
+
+pub fn bounded_equivalent_metric() -> @kernel.Thm
+
+pub fn cantor_map() -> @kernel.Thm
+
+pub fn cantor_map_closed_image() -> @kernel.Thm
+
+pub fn cantor_map_closed_in_interval() -> @kernel.Thm
+
+pub fn cantor_map_continuous() -> @kernel.Thm
+
+pub fn cantor_map_embedding() -> @kernel.Thm
+
+pub fn cantor_map_ge_partial_sum() -> @kernel.Thm
+
+pub fn cantor_map_image_subset_interval() -> @kernel.Thm
+
+pub fn cantor_map_injective() -> @kernel.Thm
+
+pub fn cantor_map_le_one() -> @kernel.Thm
+
+pub fn cantor_map_partial_sum_bound() -> @kernel.Thm
+
+pub fn cantor_map_pos() -> @kernel.Thm
+
+pub fn cantor_map_range() -> @kernel.Thm
+
+pub fn cantor_map_strict_lt() -> @kernel.Thm
+
+pub fn cantor_map_summable() -> @kernel.Thm
+
+pub fn cantor_map_sums() -> @kernel.Thm
+
+pub fn cantor_partial_sum_diff_at_k() -> @kernel.Thm
+
+pub fn cantor_partial_sum_mono() -> @kernel.Thm
+
+pub fn cantor_set() -> @kernel.Thm
+
+pub fn cantor_set_subset_interval() -> @kernel.Thm
+
+pub fn cantor_space() -> @kernel.Thm
+
+pub fn cantor_space_homeomorphic_cantor_set() -> @kernel.Thm
+
+pub fn cantor_term() -> @kernel.Thm
+
+pub fn cantor_term_bound() -> @kernel.Thm
+
+pub fn cantor_term_continuous() -> @kernel.Thm
+
+pub fn cantor_term_pos() -> @kernel.Thm
+
+pub fn capped_metric() -> @kernel.Thm
+
+pub fn capped_metric_v1() -> @kernel.Thm
+
+pub fn card_eq_open_closed_in_sets() -> @kernel.Thm
+
+pub fn card_frontier_of_realinterval() -> @kernel.Thm
+
+pub fn card_ge_perfect_set() -> @kernel.Thm
+
+pub fn card_le_connected_components_alt() -> @kernel.Thm
+
+pub fn card_le_connected_components_of_topspace() -> @kernel.Thm
+
+pub fn card_le_connnected_components_connected_in() -> @kernel.Thm
+
+pub fn card_le_pairwise_separated_connected_in() -> @kernel.Thm
+
+pub fn card_le_path_components_of_topspace() -> @kernel.Thm
+
+pub fn card_le_quasi_components_of_topspace() -> @kernel.Thm
+
+pub fn card_le_topspace_closed_sets() -> @kernel.Thm
+
+pub fn card_le_topspace_open_sets() -> @kernel.Thm
+
+pub fn cauchy_continuous_imp_continuous_map() -> @kernel.Thm
+
+pub fn cauchy_continuous_map() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_compose() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_const() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_eq() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_extends_to_closure_of() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_extends_to_continuous_closure_of() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_extends_to_continuous_intermediate_closure_of() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_extends_to_intermediate_closure_of() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_from_submetric() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_from_submetric_mono() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_fst() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_id() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_image() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_into_submetric() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_mdist() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_on_intermediate_closure() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_paired() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_pairwise() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_real_abs() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_real_add() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_real_const() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_real_div() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_real_inv() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_real_lmul() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_real_max() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_real_min() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_real_mul() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_real_multiplication() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_real_neg() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_real_pow() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_real_rmul() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_real_sub() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_snd() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_sqrt() -> @kernel.Thm
+
+pub fn cauchy_continuous_map_sum() -> @kernel.Thm
+
+pub fn cauchy_eq_uniformly_continuous_map() -> @kernel.Thm
+
+pub fn cauchy_imp_uniformly_continuous_map() -> @kernel.Thm
+
+pub fn cauchy_in() -> @kernel.Thm
+
+pub fn cauchy_in_capped_metric() -> @kernel.Thm
+
+pub fn cauchy_in_const() -> @kernel.Thm
+
+pub fn cauchy_in_convergent_subsequence() -> @kernel.Thm
+
+pub fn cauchy_in_imp_mbounded() -> @kernel.Thm
+
+pub fn cauchy_in_interleaving() -> @kernel.Thm
+
+pub fn cauchy_in_interleaving_gen() -> @kernel.Thm
+
+pub fn cauchy_in_offset() -> @kernel.Thm
+
+pub fn cauchy_in_prod_metric() -> @kernel.Thm
+
+pub fn cauchy_in_submetric() -> @kernel.Thm
+
+pub fn cauchy_in_subsequence() -> @kernel.Thm
+
+pub fn centre_in_mball() -> @kernel.Thm
+
+pub fn centre_in_mball_eq() -> @kernel.Thm
+
+pub fn centre_in_mcball() -> @kernel.Thm
+
+pub fn centre_in_mcball_eq() -> @kernel.Thm
+
+pub fn cfunspace() -> @kernel.Thm
+
+pub fn cfunspace_imp_bounded2() -> @kernel.Thm
+
+pub fn cfunspace_mdist_le() -> @kernel.Thm
+
+pub fn cfunspace_mdist_lt() -> @kernel.Thm
+
+pub fn cfunspace_subset_funspace() -> @kernel.Thm
+
+pub fn cfunspace_v1() -> @kernel.Thm
+
+pub fn chain_from_open_cover() -> @kernel.Thm
+
+pub fn chain_hierarchy() -> @kernel.Thm
+
+pub fn chain_in_open_connected_set() -> @kernel.Thm
+
+pub fn chain_refinement_step() -> @kernel.Thm
+
+pub fn claim_tac(String, @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn clopen_in_complement() -> @kernel.Thm
+
+pub fn clopen_in_eq_frontier_of() -> @kernel.Thm
+
+pub fn closed_compact_in() -> @kernel.Thm
+
+pub fn closed_eq_continuous_inverse_map() -> @kernel.Thm
+
+pub fn closed_imp_borel_in() -> @kernel.Thm
+
+pub fn closed_imp_fsigma_in() -> @kernel.Thm
+
+pub fn closed_imp_gdelta_in() -> @kernel.Thm
+
+pub fn closed_in() -> @kernel.Thm
+
+pub fn closed_in_alexandroff_compactification() -> @kernel.Thm
+
+pub fn closed_in_alexandroff_compactification_image_inl() -> @kernel.Thm
+
+pub fn closed_in_cantor_set() -> @kernel.Thm
+
+pub fn closed_in_cantor_set_interval() -> @kernel.Thm
+
+pub fn closed_in_cartesian_product() -> @kernel.Thm
+
+pub fn closed_in_closed_subtopology() -> @kernel.Thm
+
+pub fn closed_in_closure_of() -> @kernel.Thm
+
+pub fn closed_in_compact_space() -> @kernel.Thm
+
+pub fn closed_in_compact_subtopology() -> @kernel.Thm
+
+pub fn closed_in_connected_component_of() -> @kernel.Thm
+
+pub fn closed_in_connected_component_of_subtopology() -> @kernel.Thm
+
+pub fn closed_in_connected_components_of() -> @kernel.Thm
+
+pub fn closed_in_contains_derived_set() -> @kernel.Thm
+
+pub fn closed_in_continuous_map_preimage() -> @kernel.Thm
+
+pub fn closed_in_continuous_map_preimage_gen() -> @kernel.Thm
+
+pub fn closed_in_continuous_maps_eq() -> @kernel.Thm
+
+pub fn closed_in_cross() -> @kernel.Thm
+
+pub fn closed_in_derived_set() -> @kernel.Thm
+
+pub fn closed_in_derived_set_of() -> @kernel.Thm
+
+pub fn closed_in_derived_set_of_gen() -> @kernel.Thm
+
+pub fn closed_in_diff() -> @kernel.Thm
+
+pub fn closed_in_discrete_space() -> @kernel.Thm
+
+pub fn closed_in_discrete_topology() -> @kernel.Thm
+
+pub fn closed_in_disjoint_union() -> @kernel.Thm
+
+pub fn closed_in_empty() -> @kernel.Thm
+
+pub fn closed_in_eq_mcomplete() -> @kernel.Thm
+
+pub fn closed_in_euclidean_space() -> @kernel.Thm
+
+pub fn closed_in_frontier_of() -> @kernel.Thm
+
+pub fn closed_in_hausdorff_finite() -> @kernel.Thm
+
+pub fn closed_in_hausdorff_finite_eq() -> @kernel.Thm
+
+pub fn closed_in_hausdorff_sing() -> @kernel.Thm
+
+pub fn closed_in_hausdorff_sing_eq() -> @kernel.Thm
+
+pub fn closed_in_imp_subset() -> @kernel.Thm
+
+pub fn closed_in_inter() -> @kernel.Thm
+
+pub fn closed_in_inter_closure_of() -> @kernel.Thm
+
+pub fn closed_in_inters() -> @kernel.Thm
+
+pub fn closed_in_kification() -> @kernel.Thm
+
+pub fn closed_in_kification_finer() -> @kernel.Thm
+
+pub fn closed_in_locally_finite_unions() -> @kernel.Thm
+
+pub fn closed_in_mcball() -> @kernel.Thm
+
+pub fn closed_in_mcomplete_imp_mcomplete() -> @kernel.Thm
+
+pub fn closed_in_metric() -> @kernel.Thm
+
+pub fn closed_in_mspace() -> @kernel.Thm
+
+pub fn closed_in_path_component_of_locally_path_connected_space() -> @kernel.Thm
+
+pub fn closed_in_path_components_of_locally_path_connected_space() -> @kernel.Thm
+
+pub fn closed_in_quasi_component_of() -> @kernel.Thm
+
+pub fn closed_in_quasi_components_of() -> @kernel.Thm
+
+pub fn closed_in_relative_to() -> @kernel.Thm
+
+pub fn closed_in_subset() -> @kernel.Thm
+
+pub fn closed_in_subset_topspace() -> @kernel.Thm
+
+pub fn closed_in_subset_trans() -> @kernel.Thm
+
+pub fn closed_in_subtopology() -> @kernel.Thm
+
+pub fn closed_in_subtopology_alt() -> @kernel.Thm
+
+pub fn closed_in_subtopology_borel_in() -> @kernel.Thm
+
+pub fn closed_in_subtopology_diff_open() -> @kernel.Thm
+
+pub fn closed_in_subtopology_empty() -> @kernel.Thm
+
+pub fn closed_in_subtopology_inter_closed() -> @kernel.Thm
+
+pub fn closed_in_subtopology_inter_closed_in() -> @kernel.Thm
+
+pub fn closed_in_subtopology_inter_subset() -> @kernel.Thm
+
+pub fn closed_in_subtopology_refl() -> @kernel.Thm
+
+pub fn closed_in_subtopology_union() -> @kernel.Thm
+
+pub fn closed_in_sum_topology() -> @kernel.Thm
+
+pub fn closed_in_sum_topology_alt() -> @kernel.Thm
+
+pub fn closed_in_t1_sing() -> @kernel.Thm
+
+pub fn closed_in_topspace() -> @kernel.Thm
+
+pub fn closed_in_topspace_empty() -> @kernel.Thm
+
+pub fn closed_in_trans() -> @kernel.Thm
+
+pub fn closed_in_trans_full() -> @kernel.Thm
+
+pub fn closed_in_union() -> @kernel.Thm
+
+pub fn closed_in_unions() -> @kernel.Thm
+
+pub fn closed_in_unions_locally_finite_closures() -> @kernel.Thm
+
+pub fn closed_injective_imp_proper_map() -> @kernel.Thm
+
+pub fn closed_inter_closed_in_subtopology() -> @kernel.Thm
+
+pub fn closed_inter_compact_in() -> @kernel.Thm
+
+pub fn closed_map() -> @kernel.Thm
+
+pub fn closed_map_closure_of_image() -> @kernel.Thm
+
+pub fn closed_map_component_injection() -> @kernel.Thm
+
+pub fn closed_map_compose() -> @kernel.Thm
+
+pub fn closed_map_const() -> @kernel.Thm
+
+pub fn closed_map_diag_eq() -> @kernel.Thm
+
+pub fn closed_map_eq() -> @kernel.Thm
+
+pub fn closed_map_fibre_neighbourhood() -> @kernel.Thm
+
+pub fn closed_map_from_closed_subtopology() -> @kernel.Thm
+
+pub fn closed_map_from_composition_left() -> @kernel.Thm
+
+pub fn closed_map_from_composition_right() -> @kernel.Thm
+
+pub fn closed_map_from_subtopology() -> @kernel.Thm
+
+pub fn closed_map_fst() -> @kernel.Thm
+
+pub fn closed_map_id() -> @kernel.Thm
+
+pub fn closed_map_imp_closed_graph() -> @kernel.Thm
+
+pub fn closed_map_imp_subset() -> @kernel.Thm
+
+pub fn closed_map_imp_subset_topspace() -> @kernel.Thm
+
+pub fn closed_map_in_subtopology() -> @kernel.Thm
+
+pub fn closed_map_inclusion() -> @kernel.Thm
+
+pub fn closed_map_inclusion_eq() -> @kernel.Thm
+
+pub fn closed_map_into_discrete_topology() -> @kernel.Thm
+
+pub fn closed_map_into_k_space() -> @kernel.Thm
+
+pub fn closed_map_into_k_space_eq() -> @kernel.Thm
+
+pub fn closed_map_into_subtopology() -> @kernel.Thm
+
+pub fn closed_map_kolmogorov_quotient() -> @kernel.Thm
+
+pub fn closed_map_kolmogorov_quotient_explicit() -> @kernel.Thm
+
+pub fn closed_map_kolmogorov_quotient_gen() -> @kernel.Thm
+
+pub fn closed_map_on_empty() -> @kernel.Thm
+
+pub fn closed_map_paired() -> @kernel.Thm
+
+pub fn closed_map_paired_closed_map_left() -> @kernel.Thm
+
+pub fn closed_map_paired_closed_map_right() -> @kernel.Thm
+
+pub fn closed_map_paired_continuous_map_left() -> @kernel.Thm
+
+pub fn closed_map_paired_continuous_map_right() -> @kernel.Thm
+
+pub fn closed_map_paired_gen() -> @kernel.Thm
+
+pub fn closed_map_pairwise() -> @kernel.Thm
+
+pub fn closed_map_preimage_neighbourhood() -> @kernel.Thm
+
+pub fn closed_map_prod() -> @kernel.Thm
+
+pub fn closed_map_product() -> @kernel.Thm
+
+pub fn closed_map_restriction() -> @kernel.Thm
+
+pub fn closed_map_snd() -> @kernel.Thm
+
+pub fn closure_of() -> @kernel.Thm
+
+pub fn closure_of_alt() -> @kernel.Thm
+
+pub fn closure_of_cartesian_product() -> @kernel.Thm
+
+pub fn closure_of_closed_in() -> @kernel.Thm
+
+pub fn closure_of_closure_of() -> @kernel.Thm
+
+pub fn closure_of_complement() -> @kernel.Thm
+
+pub fn closure_of_cross() -> @kernel.Thm
+
+pub fn closure_of_dyadic_rationals_in_unit_interval() -> @kernel.Thm
+
+pub fn closure_of_empty() -> @kernel.Thm
+
+pub fn closure_of_eq() -> @kernel.Thm
+
+pub fn closure_of_eq_empty() -> @kernel.Thm
+
+pub fn closure_of_eq_empty_gen() -> @kernel.Thm
+
+pub fn closure_of_eq_univ() -> @kernel.Thm
+
+pub fn closure_of_hull() -> @kernel.Thm
+
+pub fn closure_of_interior_of() -> @kernel.Thm
+
+pub fn closure_of_interior_of_idemp() -> @kernel.Thm
+
+pub fn closure_of_interior_of_realinterval() -> @kernel.Thm
+
+pub fn closure_of_locally_finite_unions() -> @kernel.Thm
+
+pub fn closure_of_minimal() -> @kernel.Thm
+
+pub fn closure_of_minimal_eq() -> @kernel.Thm
+
+pub fn closure_of_mono() -> @kernel.Thm
+
+pub fn closure_of_open_in_inter_closure_of() -> @kernel.Thm
+
+pub fn closure_of_open_in_inter_superset() -> @kernel.Thm
+
+pub fn closure_of_open_in_subtopology_inter_closure_of() -> @kernel.Thm
+
+pub fn closure_of_real_interval() -> @kernel.Thm
+
+pub fn closure_of_restrict() -> @kernel.Thm
+
+pub fn closure_of_sequentially() -> @kernel.Thm
+
+pub fn closure_of_sing() -> @kernel.Thm
+
+pub fn closure_of_subset() -> @kernel.Thm
+
+pub fn closure_of_subset_eq() -> @kernel.Thm
+
+pub fn closure_of_subset_inter() -> @kernel.Thm
+
+pub fn closure_of_subset_subtopology() -> @kernel.Thm
+
+pub fn closure_of_subset_topspace() -> @kernel.Thm
+
+pub fn closure_of_subtopology() -> @kernel.Thm
+
+pub fn closure_of_subtopology_mono() -> @kernel.Thm
+
+pub fn closure_of_subtopology_open() -> @kernel.Thm
+
+pub fn closure_of_subtopology_subset() -> @kernel.Thm
+
+pub fn closure_of_topspace() -> @kernel.Thm
+
+pub fn closure_of_union() -> @kernel.Thm
+
+pub fn closure_of_unions() -> @kernel.Thm
+
+pub fn closure_of_unions_subset() -> @kernel.Thm
+
+pub fn closure_of_unique() -> @kernel.Thm
+
+pub fn closure_of_univ() -> @kernel.Thm
+
+pub fn closure_of_v1() -> @kernel.Thm
+
+pub fn compact_closure_of_eq_bolzano_weierstrass() -> @kernel.Thm
+
+pub fn compact_closure_of_imp_bolzano_weierstrass() -> @kernel.Thm
+
+pub fn compact_closure_of_imp_totally_bounded_in() -> @kernel.Thm
+
+pub fn compact_connected_locally_connected_imp_path_connected() -> @kernel.Thm
+
+pub fn compact_euclidean_space() -> @kernel.Thm
+
+pub fn compact_hausdorff_imp_regular_space() -> @kernel.Thm
+
+pub fn compact_hausdorff_or_regular_imp_normal_space() -> @kernel.Thm
+
+pub fn compact_hausdorff_space_optimal() -> @kernel.Thm
+
+pub fn compact_imp_compact_in_subtopology() -> @kernel.Thm
+
+pub fn compact_imp_k_space() -> @kernel.Thm
+
+pub fn compact_imp_lindelof_space() -> @kernel.Thm
+
+pub fn compact_imp_locally_compact_space() -> @kernel.Thm
+
+pub fn compact_imp_paracompact_space() -> @kernel.Thm
+
+pub fn compact_imp_perfect_map() -> @kernel.Thm
+
+pub fn compact_imp_proper_map() -> @kernel.Thm
+
+pub fn compact_imp_proper_map_gen() -> @kernel.Thm
+
+pub fn compact_in() -> @kernel.Thm
+
+pub fn compact_in_absolute() -> @kernel.Thm
+
+pub fn compact_in_cartesian_product() -> @kernel.Thm
+
+pub fn compact_in_contractive() -> @kernel.Thm
+
+pub fn compact_in_cross() -> @kernel.Thm
+
+pub fn compact_in_discrete_topology() -> @kernel.Thm
+
+pub fn compact_in_empty() -> @kernel.Thm
+
+pub fn compact_in_eq_bolzano_weierstrass() -> @kernel.Thm
+
+pub fn compact_in_euclideanreal() -> @kernel.Thm
+
+pub fn compact_in_euclideanreal_interval() -> @kernel.Thm
+
+pub fn compact_in_fip() -> @kernel.Thm
+
+pub fn compact_in_imp_bolzano_weierstrass() -> @kernel.Thm
+
+pub fn compact_in_imp_closed_in() -> @kernel.Thm
+
+pub fn compact_in_imp_closed_in_gen() -> @kernel.Thm
+
+pub fn compact_in_imp_mbounded() -> @kernel.Thm
+
+pub fn compact_in_imp_mcomplete() -> @kernel.Thm
+
+pub fn compact_in_imp_totally_bounded_in() -> @kernel.Thm
+
+pub fn compact_in_imp_totally_bounded_in_explicit() -> @kernel.Thm
+
+pub fn compact_in_inter() -> @kernel.Thm
+
+pub fn compact_in_kification() -> @kernel.Thm
+
+pub fn compact_in_locally_connected_eq_fccoverable_space() -> @kernel.Thm
+
+pub fn compact_in_locally_connected_eq_fccoverable_space_alt() -> @kernel.Thm
+
+pub fn compact_in_locally_connected_imp_fccoverable_space() -> @kernel.Thm
+
+pub fn compact_in_locally_connected_imp_ulc_space() -> @kernel.Thm
+
+pub fn compact_in_locally_connected_imp_ulc_space_alt() -> @kernel.Thm
+
+pub fn compact_in_mspace_cfunspace() -> @kernel.Thm
+
+pub fn compact_in_path_image() -> @kernel.Thm
+
+pub fn compact_in_proper_map_preimage() -> @kernel.Thm
+
+pub fn compact_in_sequence_with_limit() -> @kernel.Thm
+
+pub fn compact_in_sequentially() -> @kernel.Thm
+
+pub fn compact_in_sing() -> @kernel.Thm
+
+pub fn compact_in_subset_topspace() -> @kernel.Thm
+
+pub fn compact_in_subspace() -> @kernel.Thm
+
+pub fn compact_in_subtopology() -> @kernel.Thm
+
+pub fn compact_in_subtopology_imp_compact() -> @kernel.Thm
+
+pub fn compact_in_union() -> @kernel.Thm
+
+pub fn compact_in_unions() -> @kernel.Thm
+
+pub fn compact_inter_closed_in() -> @kernel.Thm
+
+pub fn compact_kc_eq_maximal_compact_space() -> @kernel.Thm
+
+pub fn compact_lf_open_neighborhood() -> @kernel.Thm
+
+pub fn compact_locally_connected_nearby_path() -> @kernel.Thm
+
+pub fn compact_metrizable_locally_connected_imp_locally_path_connected() -> @kernel.Thm
+
+pub fn compact_metrizable_peano_imp_path_connected() -> @kernel.Thm
+
+pub fn compact_nested_inters() -> @kernel.Thm
+
+pub fn compact_quasi_eq_connected_components_of() -> @kernel.Thm
+
+pub fn compact_space() -> @kernel.Thm
+
+pub fn compact_space_alexandroff_compactification() -> @kernel.Thm
+
+pub fn compact_space_alt() -> @kernel.Thm
+
+pub fn compact_space_cantor_space() -> @kernel.Thm
+
+pub fn compact_space_contractive() -> @kernel.Thm
+
+pub fn compact_space_discrete_topology() -> @kernel.Thm
+
+pub fn compact_space_eq_bolzano_weierstrass() -> @kernel.Thm
+
+pub fn compact_space_eq_mcomplete_totally_bounded_in() -> @kernel.Thm
+
+pub fn compact_space_fip() -> @kernel.Thm
+
+pub fn compact_space_imp_bolzano_weierstrass() -> @kernel.Thm
+
+pub fn compact_space_imp_mcomplete() -> @kernel.Thm
+
+pub fn compact_space_imp_nest() -> @kernel.Thm
+
+pub fn compact_space_kification() -> @kernel.Thm
+
+pub fn compact_space_nest() -> @kernel.Thm
+
+pub fn compact_space_perfect_map_image() -> @kernel.Thm
+
+pub fn compact_space_perfect_map_image_eq() -> @kernel.Thm
+
+pub fn compact_space_prod_topology() -> @kernel.Thm
+
+pub fn compact_space_product_topology() -> @kernel.Thm
+
+pub fn compact_space_proper_map_preimage() -> @kernel.Thm
+
+pub fn compact_space_quotient_map_image() -> @kernel.Thm
+
+pub fn compact_space_retraction_map_image() -> @kernel.Thm
+
+pub fn compact_space_sequentially() -> @kernel.Thm
+
+pub fn compact_space_subtopology() -> @kernel.Thm
+
+pub fn compact_space_topspace_empty() -> @kernel.Thm
+
+pub fn compact_space_v1() -> @kernel.Thm
+
+pub fn compact_tube_cover() -> @kernel.Thm
+
+pub fn complement_connected_components_of_unions() -> @kernel.Thm
+
+pub fn complement_path_components_of_unions() -> @kernel.Thm
+
+pub fn complement_quasi_components_of_unions() -> @kernel.Thm
+
+pub fn completely_metrizable_connected_locally_connected_imp_path_connected() -> @kernel.Thm
+
+pub fn completely_metrizable_euclidean_space() -> @kernel.Thm
+
+pub fn completely_metrizable_imp_metrizable_space() -> @kernel.Thm
+
+pub fn completely_metrizable_locally_path_connected_eq_locally_connected() -> @kernel.Thm
+
+pub fn completely_metrizable_space() -> @kernel.Thm
+
+pub fn completely_metrizable_space_closed_in() -> @kernel.Thm
+
+pub fn completely_metrizable_space_discrete_topology() -> @kernel.Thm
+
+pub fn completely_metrizable_space_eq_gdelta_in() -> @kernel.Thm
+
+pub fn completely_metrizable_space_euclideanreal() -> @kernel.Thm
+
+pub fn completely_metrizable_space_gdelta_in() -> @kernel.Thm
+
+pub fn completely_metrizable_space_gdelta_in_alt() -> @kernel.Thm
+
+pub fn completely_metrizable_space_imp_gdelta_in() -> @kernel.Thm
+
+pub fn completely_metrizable_space_mtopology() -> @kernel.Thm
+
+pub fn completely_metrizable_space_open_in() -> @kernel.Thm
+
+pub fn completely_metrizable_space_prod_topology() -> @kernel.Thm
+
+pub fn completely_metrizable_space_product_topology() -> @kernel.Thm
+
+pub fn completely_metrizable_space_retraction_map_image() -> @kernel.Thm
+
+pub fn completely_regular_eq_regular_space() -> @kernel.Thm
+
+pub fn completely_regular_imp_regular_space() -> @kernel.Thm
+
+pub fn completely_regular_space() -> @kernel.Thm
+
+pub fn completely_regular_space_alexandroff_compactification() -> @kernel.Thm
+
+pub fn completely_regular_space_alt() -> @kernel.Thm
+
+pub fn completely_regular_space_cube_embedding() -> @kernel.Thm
+
+pub fn completely_regular_space_cube_embedding_explicit() -> @kernel.Thm
+
+pub fn completely_regular_space_discrete_topology() -> @kernel.Thm
+
+pub fn completely_regular_space_gen() -> @kernel.Thm
+
+pub fn completely_regular_space_gen_alt() -> @kernel.Thm
+
+pub fn completely_regular_space_mtopology() -> @kernel.Thm
+
+pub fn completely_regular_space_prod_topology() -> @kernel.Thm
+
+pub fn completely_regular_space_product_topology() -> @kernel.Thm
+
+pub fn completely_regular_space_retraction_map_image() -> @kernel.Thm
+
+pub fn completely_regular_space_subtopology() -> @kernel.Thm
+
+pub fn component_le_prod_metric() -> @kernel.Thm
+
+pub fn conj_list(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn connected_component_in_connected_components_of() -> @kernel.Thm
+
+pub fn connected_component_in_topspace() -> @kernel.Thm
+
+pub fn connected_component_of() -> @kernel.Thm
+
+pub fn connected_component_of_continuous_image() -> @kernel.Thm
+
+pub fn connected_component_of_discrete_topology() -> @kernel.Thm
+
+pub fn connected_component_of_disjoint() -> @kernel.Thm
+
+pub fn connected_component_of_eq() -> @kernel.Thm
+
+pub fn connected_component_of_eq_empty() -> @kernel.Thm
+
+pub fn connected_component_of_eq_overlap() -> @kernel.Thm
+
+pub fn connected_component_of_eq_wellchained() -> @kernel.Thm
+
+pub fn connected_component_of_equiv() -> @kernel.Thm
+
+pub fn connected_component_of_imp_wellchained() -> @kernel.Thm
+
+pub fn connected_component_of_maximal() -> @kernel.Thm
+
+pub fn connected_component_of_mono() -> @kernel.Thm
+
+pub fn connected_component_of_nonoverlap() -> @kernel.Thm
+
+pub fn connected_component_of_overlap() -> @kernel.Thm
+
+pub fn connected_component_of_pair() -> @kernel.Thm
+
+pub fn connected_component_of_product_topology() -> @kernel.Thm
+
+pub fn connected_component_of_refl() -> @kernel.Thm
+
+pub fn connected_component_of_set() -> @kernel.Thm
+
+pub fn connected_component_of_subset_topspace() -> @kernel.Thm
+
+pub fn connected_component_of_subtopology() -> @kernel.Thm
+
+pub fn connected_component_of_subtopology_eq() -> @kernel.Thm
+
+pub fn connected_component_of_sym() -> @kernel.Thm
+
+pub fn connected_component_of_trans() -> @kernel.Thm
+
+pub fn connected_component_of_unique() -> @kernel.Thm
+
+pub fn connected_component_subset_quasi_component_of() -> @kernel.Thm
+
+pub fn connected_components_of() -> @kernel.Thm
+
+pub fn connected_components_of_connected_space() -> @kernel.Thm
+
+pub fn connected_components_of_discrete_topology() -> @kernel.Thm
+
+pub fn connected_components_of_disjoint() -> @kernel.Thm
+
+pub fn connected_components_of_empty_space() -> @kernel.Thm
+
+pub fn connected_components_of_eq_empty() -> @kernel.Thm
+
+pub fn connected_components_of_eq_sing() -> @kernel.Thm
+
+pub fn connected_components_of_maximal() -> @kernel.Thm
+
+pub fn connected_components_of_overlap() -> @kernel.Thm
+
+pub fn connected_components_of_prod_topology() -> @kernel.Thm
+
+pub fn connected_components_of_product_topology() -> @kernel.Thm
+
+pub fn connected_components_of_subset() -> @kernel.Thm
+
+pub fn connected_components_of_subset_sing() -> @kernel.Thm
+
+pub fn connected_components_of_subtopology() -> @kernel.Thm
+
+pub fn connected_eq_wellchained_in() -> @kernel.Thm
+
+pub fn connected_euclidean_space() -> @kernel.Thm
+
+pub fn connected_imp_quasi_component_of() -> @kernel.Thm
+
+pub fn connected_in() -> @kernel.Thm
+
+pub fn connected_in_absolute() -> @kernel.Thm
+
+pub fn connected_in_cartesian_product() -> @kernel.Thm
+
+pub fn connected_in_chain() -> @kernel.Thm
+
+pub fn connected_in_chain_gen() -> @kernel.Thm
+
+pub fn connected_in_chain_unions() -> @kernel.Thm
+
+pub fn connected_in_clopen_cases() -> @kernel.Thm
+
+pub fn connected_in_closed_in() -> @kernel.Thm
+
+pub fn connected_in_closure_of() -> @kernel.Thm
+
+pub fn connected_in_connected_component_of() -> @kernel.Thm
+
+pub fn connected_in_connected_components_of() -> @kernel.Thm
+
+pub fn connected_in_continuous_map_image() -> @kernel.Thm
+
+pub fn connected_in_cross() -> @kernel.Thm
+
+pub fn connected_in_discrete_topology() -> @kernel.Thm
+
+pub fn connected_in_empty() -> @kernel.Thm
+
+pub fn connected_in_eq_not_separated() -> @kernel.Thm
+
+pub fn connected_in_eq_not_separated_subset() -> @kernel.Thm
+
+pub fn connected_in_eq_subset_separated_union() -> @kernel.Thm
+
+pub fn connected_in_euclideanreal() -> @kernel.Thm
+
+pub fn connected_in_euclideanreal_interval() -> @kernel.Thm
+
+pub fn connected_in_iff_connected_component_of() -> @kernel.Thm
+
+pub fn connected_in_imp_perfect() -> @kernel.Thm
+
+pub fn connected_in_imp_perfect_gen() -> @kernel.Thm
+
+pub fn connected_in_imp_wellchained() -> @kernel.Thm
+
+pub fn connected_in_inter_frontier_of() -> @kernel.Thm
+
+pub fn connected_in_intermediate_closure_of() -> @kernel.Thm
+
+pub fn connected_in_monotone_quotient_map_preimage() -> @kernel.Thm
+
+pub fn connected_in_nest() -> @kernel.Thm
+
+pub fn connected_in_nest_gen() -> @kernel.Thm
+
+pub fn connected_in_nonseparated_union() -> @kernel.Thm
+
+pub fn connected_in_path_image() -> @kernel.Thm
+
+pub fn connected_in_separation() -> @kernel.Thm
+
+pub fn connected_in_separation_alt() -> @kernel.Thm
+
+pub fn connected_in_sing() -> @kernel.Thm
+
+pub fn connected_in_subset_separated_union() -> @kernel.Thm
+
+pub fn connected_in_subset_topspace() -> @kernel.Thm
+
+pub fn connected_in_subtopology() -> @kernel.Thm
+
+pub fn connected_in_topspace() -> @kernel.Thm
+
+pub fn connected_in_union() -> @kernel.Thm
+
+pub fn connected_in_unions() -> @kernel.Thm
+
+pub fn connected_in_unions_strong() -> @kernel.Thm
+
+pub fn connected_in_v1() -> @kernel.Thm
+
+pub fn connected_quasi_component_of() -> @kernel.Thm
+
+pub fn connected_space() -> @kernel.Thm
+
+pub fn connected_space_clopen_in() -> @kernel.Thm
+
+pub fn connected_space_closed_in() -> @kernel.Thm
+
+pub fn connected_space_closed_in_eq() -> @kernel.Thm
+
+pub fn connected_space_closures() -> @kernel.Thm
+
+pub fn connected_space_connected_component_set() -> @kernel.Thm
+
+pub fn connected_space_discrete_topology() -> @kernel.Thm
+
+pub fn connected_space_eq() -> @kernel.Thm
+
+pub fn connected_space_eq_frontier_eq_empty() -> @kernel.Thm
+
+pub fn connected_space_eq_not_separated() -> @kernel.Thm
+
+pub fn connected_space_eq_not_separated_subset() -> @kernel.Thm
+
+pub fn connected_space_frontier_eq_empty() -> @kernel.Thm
+
+pub fn connected_space_iff_components_eq() -> @kernel.Thm
+
+pub fn connected_space_iff_components_subset_sing() -> @kernel.Thm
+
+pub fn connected_space_iff_connected_component() -> @kernel.Thm
+
+pub fn connected_space_iff_quasi_component() -> @kernel.Thm
+
+pub fn connected_space_iff_quasi_components_eq() -> @kernel.Thm
+
+pub fn connected_space_iff_quasi_components_subset_sing() -> @kernel.Thm
+
+pub fn connected_space_imp_card_ge() -> @kernel.Thm
+
+pub fn connected_space_imp_card_ge_alt() -> @kernel.Thm
+
+pub fn connected_space_imp_card_ge_gen() -> @kernel.Thm
+
+pub fn connected_space_imp_connected_component_of() -> @kernel.Thm
+
+pub fn connected_space_imp_infinite() -> @kernel.Thm
+
+pub fn connected_space_imp_infinite_alt() -> @kernel.Thm
+
+pub fn connected_space_imp_infinite_gen() -> @kernel.Thm
+
+pub fn connected_space_imp_quasi_component_of() -> @kernel.Thm
+
+pub fn connected_space_imp_separated_between_trivial() -> @kernel.Thm
+
+pub fn connected_space_imp_uncountable() -> @kernel.Thm
+
+pub fn connected_space_monotone_quotient_map_preimage() -> @kernel.Thm
+
+pub fn connected_space_prod_topology() -> @kernel.Thm
+
+pub fn connected_space_product_topology() -> @kernel.Thm
+
+pub fn connected_space_quasi_component_set() -> @kernel.Thm
+
+pub fn connected_space_quotient_map_image() -> @kernel.Thm
+
+pub fn connected_space_retraction_map_image() -> @kernel.Thm
+
+pub fn connected_space_separated_between() -> @kernel.Thm
+
+pub fn connected_space_subconnected() -> @kernel.Thm
+
+pub fn connected_space_subtopology() -> @kernel.Thm
+
+pub fn connected_space_topspace_empty() -> @kernel.Thm
+
+pub fn connected_subset_quasi_components_of_pointwise() -> @kernel.Thm
+
+pub fn continuous_closed_imp_perfect_map() -> @kernel.Thm
+
+pub fn continuous_closed_imp_proper_map() -> @kernel.Thm
+
+pub fn continuous_closed_imp_quotient_map() -> @kernel.Thm
+
+pub fn continuous_closed_quotient_map() -> @kernel.Thm
+
+pub fn continuous_compose_quotient_map() -> @kernel.Thm
+
+pub fn continuous_compose_quotient_map_eq() -> @kernel.Thm
+
+pub fn continuous_eq_cauchy_continuous_map() -> @kernel.Thm
+
+pub fn continuous_eq_uniformly_continuous_map() -> @kernel.Thm
+
+pub fn continuous_extension_of_proper_map_from_subtopology() -> @kernel.Thm
+
+pub fn continuous_imp_borel_measurable_map() -> @kernel.Thm
+
+pub fn continuous_imp_cauchy_continuous_map() -> @kernel.Thm
+
+pub fn continuous_imp_closed_map() -> @kernel.Thm
+
+pub fn continuous_imp_closed_map_gen() -> @kernel.Thm
+
+pub fn continuous_imp_embedding_map() -> @kernel.Thm
+
+pub fn continuous_imp_homeomorphic_map() -> @kernel.Thm
+
+pub fn continuous_imp_pefect_map() -> @kernel.Thm
+
+pub fn continuous_imp_proper_map() -> @kernel.Thm
+
+pub fn continuous_imp_quotient_map() -> @kernel.Thm
+
+pub fn continuous_imp_uniformly_continuous_map() -> @kernel.Thm
+
+pub fn continuous_inverse_map() -> @kernel.Thm
+
+pub fn continuous_map() -> @kernel.Thm
+
+pub fn continuous_map_atpointof() -> @kernel.Thm
+
+pub fn continuous_map_cases() -> @kernel.Thm
+
+pub fn continuous_map_cases_alt() -> @kernel.Thm
+
+pub fn continuous_map_cases_function() -> @kernel.Thm
+
+pub fn continuous_map_cases_le() -> @kernel.Thm
+
+pub fn continuous_map_cases_lt() -> @kernel.Thm
+
+pub fn continuous_map_closed_in() -> @kernel.Thm
+
+pub fn continuous_map_closure_preimage_subset() -> @kernel.Thm
+
+pub fn continuous_map_component_injection() -> @kernel.Thm
+
+pub fn continuous_map_componentwise() -> @kernel.Thm
+
+pub fn continuous_map_componentwise_euclidean_space() -> @kernel.Thm
+
+pub fn continuous_map_componentwise_univ() -> @kernel.Thm
+
+pub fn continuous_map_compose() -> @kernel.Thm
+
+pub fn continuous_map_const() -> @kernel.Thm
+
+pub fn continuous_map_eq() -> @kernel.Thm
+
+pub fn continuous_map_eq_closure_preimage_subset() -> @kernel.Thm
+
+pub fn continuous_map_eq_closure_preimage_subset_alt() -> @kernel.Thm
+
+pub fn continuous_map_eq_image_closure_subset() -> @kernel.Thm
+
+pub fn continuous_map_eq_image_closure_subset_alt() -> @kernel.Thm
+
+pub fn continuous_map_eq_image_closure_subset_gen() -> @kernel.Thm
+
+pub fn continuous_map_eq_interior_preimage_subset() -> @kernel.Thm
+
+pub fn continuous_map_eq_interior_preimage_subset_alt() -> @kernel.Thm
+
+pub fn continuous_map_eq_topcontinuous_at() -> @kernel.Thm
+
+pub fn continuous_map_euclidean_space_add() -> @kernel.Thm
+
+pub fn continuous_map_euclidean_space_sub() -> @kernel.Thm
+
+pub fn continuous_map_extension_pointwise() -> @kernel.Thm
+
+pub fn continuous_map_extension_pointwise_alt() -> @kernel.Thm
+
+pub fn continuous_map_from_discrete_topology() -> @kernel.Thm
+
+pub fn continuous_map_from_k_space() -> @kernel.Thm
+
+pub fn continuous_map_from_kification() -> @kernel.Thm
+
+pub fn continuous_map_from_metric() -> @kernel.Thm
+
+pub fn continuous_map_from_subtopology() -> @kernel.Thm
+
+pub fn continuous_map_from_subtopology_mono() -> @kernel.Thm
+
+pub fn continuous_map_frontier_frontier_preimage_subset() -> @kernel.Thm
+
+pub fn continuous_map_fst() -> @kernel.Thm
+
+pub fn continuous_map_fst_of() -> @kernel.Thm
+
+pub fn continuous_map_id() -> @kernel.Thm
+
+pub fn continuous_map_image_closure_subset() -> @kernel.Thm
+
+pub fn continuous_map_image_subset_topspace() -> @kernel.Thm
+
+pub fn continuous_map_imp_closed_graph() -> @kernel.Thm
+
+pub fn continuous_map_in_subtopology() -> @kernel.Thm
+
+pub fn continuous_map_inf() -> @kernel.Thm
+
+pub fn continuous_map_inl() -> @kernel.Thm
+
+pub fn continuous_map_interior_preimage_subset() -> @kernel.Thm
+
+pub fn continuous_map_into_empty() -> @kernel.Thm
+
+pub fn continuous_map_into_fulltopology() -> @kernel.Thm
+
+pub fn continuous_map_into_kification() -> @kernel.Thm
+
+pub fn continuous_map_into_subtopology() -> @kernel.Thm
+
+pub fn continuous_map_into_topology_base() -> @kernel.Thm
+
+pub fn continuous_map_into_topology_base_eq() -> @kernel.Thm
+
+pub fn continuous_map_into_topology_subbase() -> @kernel.Thm
+
+pub fn continuous_map_into_topology_subbase_eq() -> @kernel.Thm
+
+pub fn continuous_map_kification() -> @kernel.Thm
+
+pub fn continuous_map_kolmogorov_quotient() -> @kernel.Thm
+
+pub fn continuous_map_limit() -> @kernel.Thm
+
+pub fn continuous_map_mdist() -> @kernel.Thm
+
+pub fn continuous_map_mdist_alt() -> @kernel.Thm
+
+pub fn continuous_map_metric() -> @kernel.Thm
+
+pub fn continuous_map_nsphere_reflection() -> @kernel.Thm
+
+pub fn continuous_map_of_fst() -> @kernel.Thm
+
+pub fn continuous_map_of_snd() -> @kernel.Thm
+
+pub fn continuous_map_on_empty() -> @kernel.Thm
+
+pub fn continuous_map_on_intermediate_closure_of() -> @kernel.Thm
+
+pub fn continuous_map_on_intermediate_closure_of_eq() -> @kernel.Thm
+
+pub fn continuous_map_paired() -> @kernel.Thm
+
+pub fn continuous_map_pairwise() -> @kernel.Thm
+
+pub fn continuous_map_prod() -> @kernel.Thm
+
+pub fn continuous_map_product() -> @kernel.Thm
+
+pub fn continuous_map_product_projection() -> @kernel.Thm
+
+pub fn continuous_map_real_abs() -> @kernel.Thm
+
+pub fn continuous_map_real_add() -> @kernel.Thm
+
+pub fn continuous_map_real_const() -> @kernel.Thm
+
+pub fn continuous_map_real_div() -> @kernel.Thm
+
+pub fn continuous_map_real_grow() -> @kernel.Thm
+
+pub fn continuous_map_real_inv() -> @kernel.Thm
+
+pub fn continuous_map_real_lmul() -> @kernel.Thm
+
+pub fn continuous_map_real_lmul_eq() -> @kernel.Thm
+
+pub fn continuous_map_real_max() -> @kernel.Thm
+
+pub fn continuous_map_real_min() -> @kernel.Thm
+
+pub fn continuous_map_real_mul() -> @kernel.Thm
+
+pub fn continuous_map_real_neg() -> @kernel.Thm
+
+pub fn continuous_map_real_neg_eq() -> @kernel.Thm
+
+pub fn continuous_map_real_pow() -> @kernel.Thm
+
+pub fn continuous_map_real_product() -> @kernel.Thm
+
+pub fn continuous_map_real_rmul() -> @kernel.Thm
+
+pub fn continuous_map_real_rmul_eq() -> @kernel.Thm
+
+pub fn continuous_map_real_shrink() -> @kernel.Thm
+
+pub fn continuous_map_real_sub() -> @kernel.Thm
+
+pub fn continuous_map_separated_union() -> @kernel.Thm
+
+pub fn continuous_map_snd() -> @kernel.Thm
+
+pub fn continuous_map_snd_of() -> @kernel.Thm
+
+pub fn continuous_map_sqrt() -> @kernel.Thm
+
+pub fn continuous_map_square_root() -> @kernel.Thm
+
+pub fn continuous_map_sum() -> @kernel.Thm
+
+pub fn continuous_map_sum_locally_finite() -> @kernel.Thm
+
+pub fn continuous_map_sup() -> @kernel.Thm
+
+pub fn continuous_map_to_metric() -> @kernel.Thm
+
+pub fn continuous_map_uniform_limit() -> @kernel.Thm
+
+pub fn continuous_map_uniform_limit_alt() -> @kernel.Thm
+
+pub fn continuous_map_uniformly_cauchy_limit() -> @kernel.Thm
+
+pub fn continuous_map_upper_lower_semicontinuous_le() -> @kernel.Thm
+
+pub fn continuous_map_upper_lower_semicontinuous_le_gen() -> @kernel.Thm
+
+pub fn continuous_map_upper_lower_semicontinuous_lt() -> @kernel.Thm
+
+pub fn continuous_map_upper_lower_semicontinuous_lt_gen() -> @kernel.Thm
+
+pub fn continuous_map_upper_lower_semicontinuous_lte() -> @kernel.Thm
+
+pub fn continuous_map_upper_lower_semicontinuous_lte_gen() -> @kernel.Thm
+
+pub fn continuous_map_v1() -> @kernel.Thm
+
+pub fn continuous_on_mdist() -> @kernel.Thm
+
+pub fn continuous_open_imp_quotient_map() -> @kernel.Thm
+
+pub fn continuous_open_quotient_map() -> @kernel.Thm
+
+pub fn contractible_eq_homotopy_equivalent_singleton_subtopology() -> @kernel.Thm
+
+pub fn contractible_euclidean_space() -> @kernel.Thm
+
+pub fn contractible_imp_connected_space() -> @kernel.Thm
+
+pub fn contractible_imp_path_connected_space() -> @kernel.Thm
+
+pub fn contractible_space() -> @kernel.Thm
+
+pub fn contractible_space_alt() -> @kernel.Thm
+
+pub fn contractible_space_empty() -> @kernel.Thm
+
+pub fn contractible_space_euclideanreal() -> @kernel.Thm
+
+pub fn contractible_space_lower_hemisphere() -> @kernel.Thm
+
+pub fn contractible_space_prod_topology() -> @kernel.Thm
+
+pub fn contractible_space_product_topology() -> @kernel.Thm
+
+pub fn contractible_space_retraction_map_image() -> @kernel.Thm
+
+pub fn contractible_space_sing() -> @kernel.Thm
+
+pub fn contractible_space_subset_sing() -> @kernel.Thm
+
+pub fn contractible_space_subtopology_euclideanreal() -> @kernel.Thm
+
+pub fn contractible_space_subtopology_sing() -> @kernel.Thm
+
+pub fn contractible_space_upper_hemisphere() -> @kernel.Thm
+
+pub fn contractible_space_v1() -> @kernel.Thm
+
+pub fn contraction_imp_unique_fixpoint() -> @kernel.Thm
+
+pub fn convergent_eq_zero_oscillation_gen() -> @kernel.Thm
+
+pub fn convergent_imp_cauchy_in() -> @kernel.Thm
+
+pub fn countable_imp_lindelof_space() -> @kernel.Thm
+
+pub fn countable_imp_sigma_locally_finite_in() -> @kernel.Thm
+
+pub fn cut_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn cut_wire_fence_theorem() -> @kernel.Thm
+
+pub fn cut_wire_fence_theorem_gen() -> @kernel.Thm
+
+pub fn deformation_retract_imp_homotopy_equivalent_space() -> @kernel.Thm
+
+pub fn deformation_retract_of_space() -> @kernel.Thm
+
+pub fn deformation_retraction_imp_homotopy_equivalent_space() -> @kernel.Thm
+
+pub fn dense_function_on_dyadic() -> @kernel.Thm
+
+pub fn dense_intersects_open() -> @kernel.Thm
+
+pub fn dense_locally_compact_open_in_hausdorff_space() -> @kernel.Thm
+
+pub fn derived_set_of() -> @kernel.Thm
+
+pub fn derived_set_of_derived_set_subset() -> @kernel.Thm
+
+pub fn derived_set_of_derived_set_subset_gen() -> @kernel.Thm
+
+pub fn derived_set_of_empty() -> @kernel.Thm
+
+pub fn derived_set_of_finite() -> @kernel.Thm
+
+pub fn derived_set_of_infinite_mball() -> @kernel.Thm
+
+pub fn derived_set_of_infinite_mcball() -> @kernel.Thm
+
+pub fn derived_set_of_infinite_open_in() -> @kernel.Thm
+
+pub fn derived_set_of_infinite_open_in_metric() -> @kernel.Thm
+
+pub fn derived_set_of_mono() -> @kernel.Thm
+
+pub fn derived_set_of_restrict() -> @kernel.Thm
+
+pub fn derived_set_of_sequentially() -> @kernel.Thm
+
+pub fn derived_set_of_sequentially_alt() -> @kernel.Thm
+
+pub fn derived_set_of_sequentially_decreasing() -> @kernel.Thm
+
+pub fn derived_set_of_sequentially_decreasing_alt() -> @kernel.Thm
+
+pub fn derived_set_of_sequentially_inj() -> @kernel.Thm
+
+pub fn derived_set_of_sequentially_inj_alt() -> @kernel.Thm
+
+pub fn derived_set_of_sing() -> @kernel.Thm
+
+pub fn derived_set_of_subset_closure_of() -> @kernel.Thm
+
+pub fn derived_set_of_subset_subtopology() -> @kernel.Thm
+
+pub fn derived_set_of_subset_topspace() -> @kernel.Thm
+
+pub fn derived_set_of_subtopology() -> @kernel.Thm
+
+pub fn derived_set_of_topspace() -> @kernel.Thm
+
+pub fn derived_set_of_trivial_limit() -> @kernel.Thm
+
+pub fn derived_set_of_union() -> @kernel.Thm
+
+pub fn derived_set_of_unions() -> @kernel.Thm
+
+pub fn derived_set_subset() -> @kernel.Thm
+
+pub fn derived_set_subset_gen() -> @kernel.Thm
+
+pub fn dimension_le_0_neighbourhood_base_of_clopen() -> @kernel.Thm
+
+pub fn dimension_le_bound() -> @kernel.Thm
+
+pub fn dimension_le_cases() -> @kernel.Thm
+
+pub fn dimension_le_discrete_topology() -> @kernel.Thm
+
+pub fn dimension_le_eq_empty() -> @kernel.Thm
+
+pub fn dimension_le_eq_subtopology() -> @kernel.Thm
+
+pub fn dimension_le_induct() -> @kernel.Thm
+
+pub fn dimension_le_mono() -> @kernel.Thm
+
+pub fn dimension_le_neighbourhood_base() -> @kernel.Thm
+
+pub fn dimension_le_retraction_map_image() -> @kernel.Thm
+
+pub fn dimension_le_rules() -> @kernel.Thm
+
+pub fn dimension_le_subtopologies() -> @kernel.Thm
+
+pub fn dimension_le_subtopology() -> @kernel.Thm
+
+pub fn discrete_compact_in_eq_finite() -> @kernel.Thm
+
+pub fn discrete_compact_space_eq_finite() -> @kernel.Thm
+
+pub fn discrete_metric() -> @kernel.Thm
+
+pub fn discrete_metric_v1() -> @kernel.Thm
+
+pub fn discrete_space() -> @kernel.Thm
+
+pub fn discrete_space_closed() -> @kernel.Thm
+
+pub fn discrete_space_closed_eq() -> @kernel.Thm
+
+pub fn discrete_space_closed_map_image() -> @kernel.Thm
+
+pub fn discrete_space_discrete_topology() -> @kernel.Thm
+
+pub fn discrete_space_open() -> @kernel.Thm
+
+pub fn discrete_space_open_eq() -> @kernel.Thm
+
+pub fn discrete_space_open_map_image() -> @kernel.Thm
+
+pub fn discrete_space_perfect_map_image() -> @kernel.Thm
+
+pub fn discrete_space_prod_topology() -> @kernel.Thm
+
+pub fn discrete_space_product_topology() -> @kernel.Thm
+
+pub fn discrete_space_quotient_map_image() -> @kernel.Thm
+
+pub fn discrete_space_retraction_map_image() -> @kernel.Thm
+
+pub fn discrete_space_subtopology() -> @kernel.Thm
+
+pub fn discrete_space_topspace_empty() -> @kernel.Thm
+
+pub fn discrete_space_unique() -> @kernel.Thm
+
+pub fn discrete_space_v1() -> @kernel.Thm
+
+pub fn discrete_topology() -> @kernel.Thm
+
+pub fn discrete_topology_cartesian_product() -> @kernel.Thm
+
+pub fn discrete_topology_cartesian_product_eq() -> @kernel.Thm
+
+pub fn discrete_topology_closure_of() -> @kernel.Thm
+
+pub fn discrete_topology_frontier_of() -> @kernel.Thm
+
+pub fn discrete_topology_interior_of() -> @kernel.Thm
+
+pub fn discrete_topology_unique() -> @kernel.Thm
+
+pub fn discrete_topology_unique_alt() -> @kernel.Thm
+
+pub fn discrete_topology_unique_derived_set() -> @kernel.Thm
+
+pub fn discrete_ultrametric() -> @kernel.Thm
+
+pub fn disjoint_mball() -> @kernel.Thm
+
+pub fn embedding_eq_section_map() -> @kernel.Thm
+
+pub fn embedding_imp_closed_map() -> @kernel.Thm
+
+pub fn embedding_imp_closed_map_eq() -> @kernel.Thm
+
+pub fn embedding_imp_continuous_map() -> @kernel.Thm
+
+pub fn embedding_imp_injective_map() -> @kernel.Thm
+
+pub fn embedding_imp_monotone_map() -> @kernel.Thm
+
+pub fn embedding_imp_open_map() -> @kernel.Thm
+
+pub fn embedding_imp_open_map_eq() -> @kernel.Thm
+
+pub fn embedding_into_metrizable_imp_metrizable() -> @kernel.Thm
+
+pub fn embedding_map() -> @kernel.Thm
+
+pub fn embedding_map_component_injection() -> @kernel.Thm
+
+pub fn embedding_map_compose() -> @kernel.Thm
+
+pub fn embedding_map_eq() -> @kernel.Thm
+
+pub fn embedding_map_graph() -> @kernel.Thm
+
+pub fn embedding_map_imp_homeomorphic_space() -> @kernel.Thm
+
+pub fn embedding_map_in_subtopology() -> @kernel.Thm
+
+pub fn embedding_map_inl() -> @kernel.Thm
+
+pub fn embedding_map_into_euclideanreal() -> @kernel.Thm
+
+pub fn embedding_map_on_dense_subtopology() -> @kernel.Thm
+
+pub fn embedding_map_on_empty() -> @kernel.Thm
+
+pub fn epsilon_absorbing_imp_clopen() -> @kernel.Thm
+
+pub fn euclidean_space() -> @kernel.Thm
+
+pub fn euclideanreal() -> @kernel.Thm
+
+pub fn euclideanreal_closure_of_halfspace_ge() -> @kernel.Thm
+
+pub fn euclideanreal_closure_of_halfspace_gt() -> @kernel.Thm
+
+pub fn euclideanreal_closure_of_halfspace_le() -> @kernel.Thm
+
+pub fn euclideanreal_closure_of_halfspace_lt() -> @kernel.Thm
+
+pub fn euclideanreal_closure_of_irrational() -> @kernel.Thm
+
+pub fn euclideanreal_closure_of_rational() -> @kernel.Thm
+
+pub fn euclideanreal_frontier_of_halfspace_ge() -> @kernel.Thm
+
+pub fn euclideanreal_frontier_of_halfspace_gt() -> @kernel.Thm
+
+pub fn euclideanreal_frontier_of_halfspace_le() -> @kernel.Thm
+
+pub fn euclideanreal_frontier_of_halfspace_lt() -> @kernel.Thm
+
+pub fn euclideanreal_interior_of_halfspace_ge() -> @kernel.Thm
+
+pub fn euclideanreal_interior_of_halfspace_gt() -> @kernel.Thm
+
+pub fn euclideanreal_interior_of_halfspace_le() -> @kernel.Thm
+
+pub fn euclideanreal_interior_of_halfspace_lt() -> @kernel.Thm
+
+pub fn eventually() -> @kernel.Thm
+
+pub fn eventually_and() -> @kernel.Thm
+
+pub fn eventually_atpointof() -> @kernel.Thm
+
+pub fn eventually_atpointof_metric() -> @kernel.Thm
+
+pub fn eventually_atpointof_sequentially() -> @kernel.Thm
+
+pub fn eventually_atpointof_sequentially_decreasing() -> @kernel.Thm
+
+pub fn eventually_atpointof_sequentially_inj() -> @kernel.Thm
+
+pub fn eventually_atpointof_within_sequentially() -> @kernel.Thm
+
+pub fn eventually_atpointof_within_sequentially_decreasing() -> @kernel.Thm
+
+pub fn eventually_atpointof_within_sequentially_inj() -> @kernel.Thm
+
+pub fn eventually_eq_mp() -> @kernel.Thm
+
+pub fn eventually_false() -> @kernel.Thm
+
+pub fn eventually_forall() -> @kernel.Thm
+
+pub fn eventually_happens() -> @kernel.Thm
+
+pub fn eventually_happens_sequentially() -> @kernel.Thm
+
+pub fn eventually_iff() -> @kernel.Thm
+
+pub fn eventually_imp_within() -> @kernel.Thm
+
+pub fn eventually_in_sequentially() -> @kernel.Thm
+
+pub fn eventually_lbound_le_sequentially() -> @kernel.Thm
+
+pub fn eventually_mono() -> @kernel.Thm
+
+pub fn eventually_mp() -> @kernel.Thm
+
+pub fn eventually_no_subsequence() -> @kernel.Thm
+
+pub fn eventually_sequentially() -> @kernel.Thm
+
+pub fn eventually_sequentially_within() -> @kernel.Thm
+
+pub fn eventually_subsequence() -> @kernel.Thm
+
+pub fn eventually_trivial() -> @kernel.Thm
+
+pub fn eventually_true() -> @kernel.Thm
+
+pub fn eventually_ubound_le_sequentially() -> @kernel.Thm
+
+pub fn eventually_within_imp() -> @kernel.Thm
+
+pub fn eventually_within_inter_imp() -> @kernel.Thm
+
+pub fn eventually_within_subset() -> @kernel.Thm
+
+pub fn exists_closed_in() -> @kernel.Thm
+
+pub fn exists_closed_in_sum_topology() -> @kernel.Thm
+
+pub fn exists_completely_metrizable_space() -> @kernel.Thm
+
+pub fn exists_connected_component_of_superset() -> @kernel.Thm
+
+pub fn exists_metrizable_space() -> @kernel.Thm
+
+pub fn exists_open_in() -> @kernel.Thm
+
+pub fn exists_open_in_sum_topology() -> @kernel.Thm
+
+pub fn exists_path_component_of_superset() -> @kernel.Thm
+
+pub fn expansion_set_contains() -> @kernel.Thm
+
+pub fn expansion_set_open() -> @kernel.Thm
+
+pub fn fccoverable_in() -> @kernel.Thm
+
+pub fn fccoverable_in_compact_locally_connected() -> @kernel.Thm
+
+pub fn fccoverable_in_imp_fccoverable_space_submetric() -> @kernel.Thm
+
+pub fn fccoverable_in_imp_locally_connected_space() -> @kernel.Thm
+
+pub fn fccoverable_space() -> @kernel.Thm
+
+pub fn fccoverable_space_eq_fccoverable_in_mspace() -> @kernel.Thm
+
+pub fn fccoverable_space_imp_locally_connected_space() -> @kernel.Thm
+
+pub fn fccoverable_space_intermediate_closure() -> @kernel.Thm
+
+pub fn finite_connected_components_clopen_union() -> @kernel.Thm
+
+pub fn finite_connected_components_compact_locally_connected() -> @kernel.Thm
+
+pub fn finite_connected_components_of_finite() -> @kernel.Thm
+
+pub fn finite_imp_compact_in() -> @kernel.Thm
+
+pub fn finite_imp_compact_in_eq() -> @kernel.Thm
+
+pub fn finite_imp_locally_finite_in() -> @kernel.Thm
+
+pub fn finite_imp_totally_bounded_in() -> @kernel.Thm
+
+pub fn finite_path_components_of_finite() -> @kernel.Thm
+
+pub fn finite_quasi_components_of_finite() -> @kernel.Thm
+
+pub fn finite_t1_space_imp_discrete_topology() -> @kernel.Thm
+
+pub fn finite_topspace_imp_discrete_topology() -> @kernel.Thm
+
+pub fn first_countable() -> @kernel.Thm
+
+pub fn first_countable_discrete_topology() -> @kernel.Thm
+
+pub fn first_countable_mtopology() -> @kernel.Thm
+
+pub fn first_countable_neighbourhood_base() -> @kernel.Thm
+
+pub fn first_countable_neighbourhood_base_alt() -> @kernel.Thm
+
+pub fn first_countable_open_map_image() -> @kernel.Thm
+
+pub fn first_countable_retraction_map_image() -> @kernel.Thm
+
+pub fn first_countable_subtopology() -> @kernel.Thm
+
+pub fn forall_closed_in() -> @kernel.Thm
+
+pub fn forall_closed_in_homeomorphic_image() -> @kernel.Thm
+
+pub fn forall_closed_in_sum_topology() -> @kernel.Thm
+
+pub fn forall_completely_metrizable_space() -> @kernel.Thm
+
+pub fn forall_discrete_spaces() -> @kernel.Thm
+
+pub fn forall_eventually() -> @kernel.Thm
+
+pub fn forall_in_closure_of() -> @kernel.Thm
+
+pub fn forall_in_closure_of_eq() -> @kernel.Thm
+
+pub fn forall_in_closure_of_gen() -> @kernel.Thm
+
+pub fn forall_in_closure_of_univ() -> @kernel.Thm
+
+pub fn forall_mcomplete_topology() -> @kernel.Thm
+
+pub fn forall_metric_topology() -> @kernel.Thm
+
+pub fn forall_metrizable_space() -> @kernel.Thm
+
+pub fn forall_open_in() -> @kernel.Thm
+
+pub fn forall_open_in_homeomorphic_image() -> @kernel.Thm
+
+pub fn forall_open_in_sum_topology() -> @kernel.Thm
+
+pub fn frontier_of() -> @kernel.Thm
+
+pub fn frontier_of_closures() -> @kernel.Thm
+
+pub fn frontier_of_complement() -> @kernel.Thm
+
+pub fn frontier_of_disjoint_eq() -> @kernel.Thm
+
+pub fn frontier_of_disjoint_eq_alt() -> @kernel.Thm
+
+pub fn frontier_of_empty() -> @kernel.Thm
+
+pub fn frontier_of_eq_empty() -> @kernel.Thm
+
+pub fn frontier_of_frontier_of() -> @kernel.Thm
+
+pub fn frontier_of_frontier_of_frontier_of() -> @kernel.Thm
+
+pub fn frontier_of_frontier_of_subset() -> @kernel.Thm
+
+pub fn frontier_of_inter() -> @kernel.Thm
+
+pub fn frontier_of_inter_closed_in() -> @kernel.Thm
+
+pub fn frontier_of_inter_subset() -> @kernel.Thm
+
+pub fn frontier_of_locally_connected_subspace_component() -> @kernel.Thm
+
+pub fn frontier_of_open_in() -> @kernel.Thm
+
+pub fn frontier_of_open_in_straddle_inter() -> @kernel.Thm
+
+pub fn frontier_of_restrict() -> @kernel.Thm
+
+pub fn frontier_of_subset_closed_in() -> @kernel.Thm
+
+pub fn frontier_of_subset_eq() -> @kernel.Thm
+
+pub fn frontier_of_subset_subtopology() -> @kernel.Thm
+
+pub fn frontier_of_subset_topspace() -> @kernel.Thm
+
+pub fn frontier_of_subtopology_mono() -> @kernel.Thm
+
+pub fn frontier_of_subtopology_open() -> @kernel.Thm
+
+pub fn frontier_of_subtopology_subset() -> @kernel.Thm
+
+pub fn frontier_of_topspace() -> @kernel.Thm
+
+pub fn frontier_of_union_subset() -> @kernel.Thm
+
+pub fn frontier_of_unions_subset() -> @kernel.Thm
+
+pub fn fsigma_imp_borel_in() -> @kernel.Thm
+
+pub fn fsigma_in() -> @kernel.Thm
+
+pub fn fsigma_in_ascending() -> @kernel.Thm
+
+pub fn fsigma_in_diff() -> @kernel.Thm
+
+pub fn fsigma_in_empty() -> @kernel.Thm
+
+pub fn fsigma_in_fsigma_subtopology() -> @kernel.Thm
+
+pub fn fsigma_in_gdelta_in() -> @kernel.Thm
+
+pub fn fsigma_in_inter() -> @kernel.Thm
+
+pub fn fsigma_in_relative_to() -> @kernel.Thm
+
+pub fn fsigma_in_subset() -> @kernel.Thm
+
+pub fn fsigma_in_subtopology() -> @kernel.Thm
+
+pub fn fsigma_in_topspace() -> @kernel.Thm
+
+pub fn fsigma_in_union() -> @kernel.Thm
+
+pub fn fsigma_in_unions() -> @kernel.Thm
+
+pub fn funspace() -> @kernel.Thm
+
+pub fn funspace_imp_bounded() -> @kernel.Thm
+
+pub fn funspace_imp_bounded2() -> @kernel.Thm
+
+pub fn funspace_imp_bounded_image() -> @kernel.Thm
+
+pub fn funspace_imp_extensional() -> @kernel.Thm
+
+pub fn funspace_imp_welldefined() -> @kernel.Thm
+
+pub fn funspace_mdist_le() -> @kernel.Thm
+
+pub fn funspace_v1() -> @kernel.Thm
+
+pub fn gdelta_homeomorphic_space_closed_in_product() -> @kernel.Thm
+
+pub fn gdelta_imp_borel_in() -> @kernel.Thm
+
+pub fn gdelta_in() -> @kernel.Thm
+
+pub fn gdelta_in_alt() -> @kernel.Thm
+
+pub fn gdelta_in_descending() -> @kernel.Thm
+
+pub fn gdelta_in_diff() -> @kernel.Thm
+
+pub fn gdelta_in_empty() -> @kernel.Thm
+
+pub fn gdelta_in_eq_completely_metrizable_space() -> @kernel.Thm
+
+pub fn gdelta_in_fsigma_in() -> @kernel.Thm
+
+pub fn gdelta_in_gdelta_subtopology() -> @kernel.Thm
+
+pub fn gdelta_in_inter() -> @kernel.Thm
+
+pub fn gdelta_in_inters() -> @kernel.Thm
+
+pub fn gdelta_in_points_of_convergence_within() -> @kernel.Thm
+
+pub fn gdelta_in_relative_to() -> @kernel.Thm
+
+pub fn gdelta_in_subset() -> @kernel.Thm
+
+pub fn gdelta_in_subtopology() -> @kernel.Thm
+
+pub fn gdelta_in_topspace() -> @kernel.Thm
+
+pub fn gdelta_in_union() -> @kernel.Thm
+
+pub fn hahn_mazurkiewicz() -> @kernel.Thm
+
+pub fn hahn_mazurkiewicz_imp() -> @kernel.Thm
+
+pub fn hausdorff_euclidean_space() -> @kernel.Thm
+
+pub fn hausdorff_imp_kc_space() -> @kernel.Thm
+
+pub fn hausdorff_imp_t0_space() -> @kernel.Thm
+
+pub fn hausdorff_imp_t1_space() -> @kernel.Thm
+
+pub fn hausdorff_normal_space_closed_continuous_map_image() -> @kernel.Thm
+
+pub fn hausdorff_space() -> @kernel.Thm
+
+pub fn hausdorff_space_alexandroff_compactification() -> @kernel.Thm
+
+pub fn hausdorff_space_alexandroff_compactification_asymmetric_prod() -> @kernel.Thm
+
+pub fn hausdorff_space_cantor_space() -> @kernel.Thm
+
+pub fn hausdorff_space_closed_continuous_map_image() -> @kernel.Thm
+
+pub fn hausdorff_space_closed_continuous_map_image_eq() -> @kernel.Thm
+
+pub fn hausdorff_space_closed_in_diagonal() -> @kernel.Thm
+
+pub fn hausdorff_space_closed_neighbourhood() -> @kernel.Thm
+
+pub fn hausdorff_space_compact_separation() -> @kernel.Thm
+
+pub fn hausdorff_space_compact_sets() -> @kernel.Thm
+
+pub fn hausdorff_space_continuous_map_image() -> @kernel.Thm
+
+pub fn hausdorff_space_continuous_map_image_eq() -> @kernel.Thm
+
+pub fn hausdorff_space_discrete_compact_in() -> @kernel.Thm
+
+pub fn hausdorff_space_discrete_topology() -> @kernel.Thm
+
+pub fn hausdorff_space_euclideanreal() -> @kernel.Thm
+
+pub fn hausdorff_space_expansive() -> @kernel.Thm
+
+pub fn hausdorff_space_finite_topspace() -> @kernel.Thm
+
+pub fn hausdorff_space_injective_preimage() -> @kernel.Thm
+
+pub fn hausdorff_space_mtopology() -> @kernel.Thm
+
+pub fn hausdorff_space_one_point_compactification() -> @kernel.Thm
+
+pub fn hausdorff_space_one_point_compactification_asymmetric_prod() -> @kernel.Thm
+
+pub fn hausdorff_space_perfect_map_image() -> @kernel.Thm
+
+pub fn hausdorff_space_prod_topology() -> @kernel.Thm
+
+pub fn hausdorff_space_product_topology() -> @kernel.Thm
+
+pub fn hausdorff_space_proper_map_image() -> @kernel.Thm
+
+pub fn hausdorff_space_retraction_map_image() -> @kernel.Thm
+
+pub fn hausdorff_space_sing_inters_closed() -> @kernel.Thm
+
+pub fn hausdorff_space_sing_inters_opens() -> @kernel.Thm
+
+pub fn hausdorff_space_subtopology() -> @kernel.Thm
+
+pub fn hausdorff_space_topspace_empty() -> @kernel.Thm
+
+pub fn hereditarily() -> @kernel.Thm
+
+pub fn hereditarily_inc() -> @kernel.Thm
+
+pub fn hereditarily_mono() -> @kernel.Thm
+
+pub fn hereditarily_normal_separation() -> @kernel.Thm
+
+pub fn hereditarily_normal_separation_pairwise() -> @kernel.Thm
+
+pub fn hereditarily_normal_space() -> @kernel.Thm
+
+pub fn hereditarily_normal_space_continuous_closed_map_image() -> @kernel.Thm
+
+pub fn hereditarily_normal_space_perfect_map_image() -> @kernel.Thm
+
+pub fn hereditarily_normal_space_retraction_map_image() -> @kernel.Thm
+
+pub fn hereditarily_subtopology() -> @kernel.Thm
+
+pub fn hereditarily_v1() -> @kernel.Thm
+
+pub fn hereditary_imp_retractive_property() -> @kernel.Thm
+
+pub fn homeomorphic_compact_space() -> @kernel.Thm
+
+pub fn homeomorphic_completely_metrizable_space() -> @kernel.Thm
+
+pub fn homeomorphic_completely_regular_space() -> @kernel.Thm
+
+pub fn homeomorphic_connected_space() -> @kernel.Thm
+
+pub fn homeomorphic_discrete_space() -> @kernel.Thm
+
+pub fn homeomorphic_discrete_spaces() -> @kernel.Thm
+
+pub fn homeomorphic_empty_space() -> @kernel.Thm
+
+pub fn homeomorphic_empty_space_eq() -> @kernel.Thm
+
+pub fn homeomorphic_eq_everything_map() -> @kernel.Thm
+
+pub fn homeomorphic_eq_injective_perfect_map() -> @kernel.Thm
+
+pub fn homeomorphic_euclidean_space_product_topology() -> @kernel.Thm
+
+pub fn homeomorphic_hausdorff_space() -> @kernel.Thm
+
+pub fn homeomorphic_hereditarily_normal_space() -> @kernel.Thm
+
+pub fn homeomorphic_imp_closed_map() -> @kernel.Thm
+
+pub fn homeomorphic_imp_continuous_map() -> @kernel.Thm
+
+pub fn homeomorphic_imp_homotopy_equivalent_space() -> @kernel.Thm
+
+pub fn homeomorphic_imp_injective_map() -> @kernel.Thm
+
+pub fn homeomorphic_imp_monotone_map() -> @kernel.Thm
+
+pub fn homeomorphic_imp_open_map() -> @kernel.Thm
+
+pub fn homeomorphic_imp_perfect_map() -> @kernel.Thm
+
+pub fn homeomorphic_imp_proper_map() -> @kernel.Thm
+
+pub fn homeomorphic_imp_quotient_map() -> @kernel.Thm
+
+pub fn homeomorphic_imp_retraction_map() -> @kernel.Thm
+
+pub fn homeomorphic_imp_retraction_maps() -> @kernel.Thm
+
+pub fn homeomorphic_imp_section_map() -> @kernel.Thm
+
+pub fn homeomorphic_imp_surjective_map() -> @kernel.Thm
+
+pub fn homeomorphic_k_space() -> @kernel.Thm
+
+pub fn homeomorphic_kc_space() -> @kernel.Thm
+
+pub fn homeomorphic_locally_compact_space() -> @kernel.Thm
+
+pub fn homeomorphic_locally_connected_space() -> @kernel.Thm
+
+pub fn homeomorphic_locally_path_connected_space() -> @kernel.Thm
+
+pub fn homeomorphic_map() -> @kernel.Thm
+
+pub fn homeomorphic_map_closedness() -> @kernel.Thm
+
+pub fn homeomorphic_map_closedness_eq() -> @kernel.Thm
+
+pub fn homeomorphic_map_closure_of() -> @kernel.Thm
+
+pub fn homeomorphic_map_compactness() -> @kernel.Thm
+
+pub fn homeomorphic_map_compactness_eq() -> @kernel.Thm
+
+pub fn homeomorphic_map_compose() -> @kernel.Thm
+
+pub fn homeomorphic_map_connected_component_of() -> @kernel.Thm
+
+pub fn homeomorphic_map_connected_components_of() -> @kernel.Thm
+
+pub fn homeomorphic_map_connectedness() -> @kernel.Thm
+
+pub fn homeomorphic_map_connectedness_eq() -> @kernel.Thm
+
+pub fn homeomorphic_map_derived_set_of() -> @kernel.Thm
+
+pub fn homeomorphic_map_eq() -> @kernel.Thm
+
+pub fn homeomorphic_map_frontier_of() -> @kernel.Thm
+
+pub fn homeomorphic_map_fsigmaness() -> @kernel.Thm
+
+pub fn homeomorphic_map_fsigmaness_eq() -> @kernel.Thm
+
+pub fn homeomorphic_map_gdeltaness() -> @kernel.Thm
+
+pub fn homeomorphic_map_gdeltaness_eq() -> @kernel.Thm
+
+pub fn homeomorphic_map_i() -> @kernel.Thm
+
+pub fn homeomorphic_map_id() -> @kernel.Thm
+
+pub fn homeomorphic_map_imp_homeomorphic_space() -> @kernel.Thm
+
+pub fn homeomorphic_map_interior_of() -> @kernel.Thm
+
+pub fn homeomorphic_map_involution() -> @kernel.Thm
+
+pub fn homeomorphic_map_maps() -> @kernel.Thm
+
+pub fn homeomorphic_map_openness() -> @kernel.Thm
+
+pub fn homeomorphic_map_openness_eq() -> @kernel.Thm
+
+pub fn homeomorphic_map_path_component_of() -> @kernel.Thm
+
+pub fn homeomorphic_map_path_components_of() -> @kernel.Thm
+
+pub fn homeomorphic_map_path_connectedness() -> @kernel.Thm
+
+pub fn homeomorphic_map_path_connectedness_eq() -> @kernel.Thm
+
+pub fn homeomorphic_map_quasi_component_of() -> @kernel.Thm
+
+pub fn homeomorphic_map_quasi_components_of() -> @kernel.Thm
+
+pub fn homeomorphic_map_separation() -> @kernel.Thm
+
+pub fn homeomorphic_map_subtopologies() -> @kernel.Thm
+
+pub fn homeomorphic_map_subtopologies_alt() -> @kernel.Thm
+
+pub fn homeomorphic_map_swap() -> @kernel.Thm
+
+pub fn homeomorphic_maps() -> @kernel.Thm
+
+pub fn homeomorphic_maps_compose() -> @kernel.Thm
+
+pub fn homeomorphic_maps_eq() -> @kernel.Thm
+
+pub fn homeomorphic_maps_graph() -> @kernel.Thm
+
+pub fn homeomorphic_maps_i() -> @kernel.Thm
+
+pub fn homeomorphic_maps_id() -> @kernel.Thm
+
+pub fn homeomorphic_maps_imp_homeomorphic_space() -> @kernel.Thm
+
+pub fn homeomorphic_maps_imp_map() -> @kernel.Thm
+
+pub fn homeomorphic_maps_involution() -> @kernel.Thm
+
+pub fn homeomorphic_maps_map() -> @kernel.Thm
+
+pub fn homeomorphic_maps_prod() -> @kernel.Thm
+
+pub fn homeomorphic_maps_real_shrink() -> @kernel.Thm
+
+pub fn homeomorphic_maps_subtopologies() -> @kernel.Thm
+
+pub fn homeomorphic_maps_subtopologies_alt() -> @kernel.Thm
+
+pub fn homeomorphic_maps_swap() -> @kernel.Thm
+
+pub fn homeomorphic_maps_sym() -> @kernel.Thm
+
+pub fn homeomorphic_metrizable_space() -> @kernel.Thm
+
+pub fn homeomorphic_normal_space() -> @kernel.Thm
+
+pub fn homeomorphic_paracompact_space() -> @kernel.Thm
+
+pub fn homeomorphic_path_connected_space() -> @kernel.Thm
+
+pub fn homeomorphic_regular_space() -> @kernel.Thm
+
+pub fn homeomorphic_separable_space() -> @kernel.Thm
+
+pub fn homeomorphic_space() -> @kernel.Thm
+
+pub fn homeomorphic_space_contractibility() -> @kernel.Thm
+
+pub fn homeomorphic_space_countability() -> @kernel.Thm
+
+pub fn homeomorphic_space_dimension_le() -> @kernel.Thm
+
+pub fn homeomorphic_space_finiteness() -> @kernel.Thm
+
+pub fn homeomorphic_space_first_countability() -> @kernel.Thm
+
+pub fn homeomorphic_space_imp_card_eq() -> @kernel.Thm
+
+pub fn homeomorphic_space_infiniteness() -> @kernel.Thm
+
+pub fn homeomorphic_space_prod_topology() -> @kernel.Thm
+
+pub fn homeomorphic_space_prod_topology_sing() -> @kernel.Thm
+
+pub fn homeomorphic_space_prod_topology_swap() -> @kernel.Thm
+
+pub fn homeomorphic_space_refl() -> @kernel.Thm
+
+pub fn homeomorphic_space_second_countability() -> @kernel.Thm
+
+pub fn homeomorphic_space_singleton_product() -> @kernel.Thm
+
+pub fn homeomorphic_space_sym() -> @kernel.Thm
+
+pub fn homeomorphic_space_trans() -> @kernel.Thm
+
+pub fn homeomorphic_space_v1() -> @kernel.Thm
+
+pub fn homeomorphic_t0_space() -> @kernel.Thm
+
+pub fn homeomorphic_t1_space() -> @kernel.Thm
+
+pub fn homotopic_compose_continuous_map_left() -> @kernel.Thm
+
+pub fn homotopic_compose_continuous_map_right() -> @kernel.Thm
+
+pub fn homotopic_constant_maps() -> @kernel.Thm
+
+pub fn homotopic_from_contractible_space() -> @kernel.Thm
+
+pub fn homotopic_from_subtopology() -> @kernel.Thm
+
+pub fn homotopic_into_contractible_space() -> @kernel.Thm
+
+pub fn homotopic_on_empty() -> @kernel.Thm
+
+pub fn homotopic_through_contractible_space() -> @kernel.Thm
+
+pub fn homotopic_with() -> @kernel.Thm
+
+pub fn homotopic_with_compose_continuous_map_left() -> @kernel.Thm
+
+pub fn homotopic_with_compose_continuous_map_right() -> @kernel.Thm
+
+pub fn homotopic_with_eq() -> @kernel.Thm
+
+pub fn homotopic_with_equal() -> @kernel.Thm
+
+pub fn homotopic_with_imp_continuous_maps() -> @kernel.Thm
+
+pub fn homotopic_with_imp_property() -> @kernel.Thm
+
+pub fn homotopic_with_prod_topology() -> @kernel.Thm
+
+pub fn homotopic_with_product_topology() -> @kernel.Thm
+
+pub fn homotopic_with_refl() -> @kernel.Thm
+
+pub fn homotopic_with_sym() -> @kernel.Thm
+
+pub fn homotopic_with_trans() -> @kernel.Thm
+
+pub fn homotopic_with_v1() -> @kernel.Thm
+
+pub fn homotopy_dominated_contractibility() -> @kernel.Thm
+
+pub fn homotopy_equivalent_space() -> @kernel.Thm
+
+pub fn homotopy_equivalent_space_contractibility() -> @kernel.Thm
+
+pub fn homotopy_equivalent_space_refl() -> @kernel.Thm
+
+pub fn homotopy_equivalent_space_sym() -> @kernel.Thm
+
+pub fn homotopy_equivalent_space_trans() -> @kernel.Thm
+
+pub fn image_compact_in() -> @kernel.Thm
+
+pub fn in_closure_of() -> @kernel.Thm
+
+pub fn in_closure_of_imp_subset_mcball() -> @kernel.Thm
+
+pub fn in_derived_set_of() -> @kernel.Thm
+
+pub fn in_interior_of_mball() -> @kernel.Thm
+
+pub fn in_interior_of_mcball() -> @kernel.Thm
+
+pub fn in_mball() -> @kernel.Thm
+
+pub fn in_mcball() -> @kernel.Thm
+
+pub fn in_prod_topology_closure_of() -> @kernel.Thm
+
+pub fn in_product_topology_closure_of() -> @kernel.Thm
+
+pub fn infinite_perfect_set() -> @kernel.Thm
+
+pub fn infinite_perfect_set_gen() -> @kernel.Thm
+
+pub fn injective_closed_imp_embedding_map() -> @kernel.Thm
+
+pub fn injective_eq_monotone_map() -> @kernel.Thm
+
+pub fn injective_eq_real_open_map_euclideanreal() -> @kernel.Thm
+
+pub fn injective_imp_monotone_map() -> @kernel.Thm
+
+pub fn injective_imp_proper_eq_closed_map() -> @kernel.Thm
+
+pub fn injective_open_imp_embedding_map() -> @kernel.Thm
+
+pub fn injective_quotient_map() -> @kernel.Thm
+
+pub fn interior_in_cartesian_product() -> @kernel.Thm
+
+pub fn interior_of() -> @kernel.Thm
+
+pub fn interior_of_closed_in_union_empty_interior_of() -> @kernel.Thm
+
+pub fn interior_of_closure_of() -> @kernel.Thm
+
+pub fn interior_of_closure_of_idemp() -> @kernel.Thm
+
+pub fn interior_of_closure_of_realinterval() -> @kernel.Thm
+
+pub fn interior_of_complement() -> @kernel.Thm
+
+pub fn interior_of_cross() -> @kernel.Thm
+
+pub fn interior_of_empty() -> @kernel.Thm
+
+pub fn interior_of_eq() -> @kernel.Thm
+
+pub fn interior_of_eq_empty() -> @kernel.Thm
+
+pub fn interior_of_eq_empty_alt() -> @kernel.Thm
+
+pub fn interior_of_eq_empty_complement() -> @kernel.Thm
+
+pub fn interior_of_frontier_of() -> @kernel.Thm
+
+pub fn interior_of_frontier_of_empty() -> @kernel.Thm
+
+pub fn interior_of_inter() -> @kernel.Thm
+
+pub fn interior_of_interior_of() -> @kernel.Thm
+
+pub fn interior_of_inters_subset() -> @kernel.Thm
+
+pub fn interior_of_locally_connected_subspace_component() -> @kernel.Thm
+
+pub fn interior_of_maximal() -> @kernel.Thm
+
+pub fn interior_of_maximal_eq() -> @kernel.Thm
+
+pub fn interior_of_mono() -> @kernel.Thm
+
+pub fn interior_of_open_in() -> @kernel.Thm
+
+pub fn interior_of_real_interval() -> @kernel.Thm
+
+pub fn interior_of_restrict() -> @kernel.Thm
+
+pub fn interior_of_subset() -> @kernel.Thm
+
+pub fn interior_of_subset_closure_of() -> @kernel.Thm
+
+pub fn interior_of_subset_subtopology() -> @kernel.Thm
+
+pub fn interior_of_subset_topspace() -> @kernel.Thm
+
+pub fn interior_of_subtopology_mono() -> @kernel.Thm
+
+pub fn interior_of_subtopology_open() -> @kernel.Thm
+
+pub fn interior_of_subtopology_subset() -> @kernel.Thm
+
+pub fn interior_of_subtopology_subsets() -> @kernel.Thm
+
+pub fn interior_of_topspace() -> @kernel.Thm
+
+pub fn interior_of_union_eq_empty() -> @kernel.Thm
+
+pub fn interior_of_union_frontier_of() -> @kernel.Thm
+
+pub fn interior_of_unions_open_in_subsets() -> @kernel.Thm
+
+pub fn interior_of_unique() -> @kernel.Thm
+
+pub fn intermediate_continuum_exists() -> @kernel.Thm
+
+pub fn is_metric_space() -> @kernel.Thm
+
+pub fn is_metric_space_subspace() -> @kernel.Thm
+
+pub fn is_metric_space_v1() -> @kernel.Thm
+
+pub fn is_realinterval_closure_of() -> @kernel.Thm
+
+pub fn is_realinterval_interior_of() -> @kernel.Thm
+
+pub fn is_realinterval_interior_segment() -> @kernel.Thm
+
+pub fn is_topology_metric_topology() -> @kernel.Thm
+
+pub fn isometry_imp_embedding_map() -> @kernel.Thm
+
+pub fn isometry_imp_homeomorphic_map() -> @kernel.Thm
+
+pub fn istopology() -> @kernel.Thm
+
+pub fn istopology_base() -> @kernel.Thm
+
+pub fn istopology_base_alt() -> @kernel.Thm
+
+pub fn istopology_base_eq() -> @kernel.Thm
+
+pub fn istopology_open_in() -> @kernel.Thm
+
+pub fn istopology_relative_to() -> @kernel.Thm
+
+pub fn istopology_subbase() -> @kernel.Thm
+
+pub fn istopology_subbase_univ() -> @kernel.Thm
+
+pub fn istopology_subtopology() -> @kernel.Thm
+
+pub fn k_kc_space_subtopology() -> @kernel.Thm
+
+pub fn k_space() -> @kernel.Thm
+
+pub fn k_space_alt() -> @kernel.Thm
+
+pub fn k_space_as_quotient() -> @kernel.Thm
+
+pub fn k_space_as_quotient_explicit() -> @kernel.Thm
+
+pub fn k_space_closed_subtopology() -> @kernel.Thm
+
+pub fn k_space_discrete_topology() -> @kernel.Thm
+
+pub fn k_space_euclideanreal() -> @kernel.Thm
+
+pub fn k_space_kification() -> @kernel.Thm
+
+pub fn k_space_mtopology() -> @kernel.Thm
+
+pub fn k_space_open() -> @kernel.Thm
+
+pub fn k_space_open_subtopology() -> @kernel.Thm
+
+pub fn k_space_perfect_map_image() -> @kernel.Thm
+
+pub fn k_space_perfect_map_image_eq() -> @kernel.Thm
+
+pub fn k_space_prod_topology_left() -> @kernel.Thm
+
+pub fn k_space_prod_topology_right() -> @kernel.Thm
+
+pub fn k_space_quotient_map_image() -> @kernel.Thm
+
+pub fn k_space_retraction_map_image() -> @kernel.Thm
+
+pub fn k_space_subtopology() -> @kernel.Thm
+
+pub fn k_space_subtopology_open() -> @kernel.Thm
+
+pub fn k_space_v1() -> @kernel.Thm
+
+pub fn kc_imp_t1_space() -> @kernel.Thm
+
+pub fn kc_locally_compact_space() -> @kernel.Thm
+
+pub fn kc_space() -> @kernel.Thm
+
+pub fn kc_space_alexandroff_compactification() -> @kernel.Thm
+
+pub fn kc_space_as_compactification_unique() -> @kernel.Thm
+
+pub fn kc_space_as_compactification_unique_explicit() -> @kernel.Thm
+
+pub fn kc_space_closed_continuous_map_image() -> @kernel.Thm
+
+pub fn kc_space_closed_continuous_map_image_eq() -> @kernel.Thm
+
+pub fn kc_space_compact_prod_topology() -> @kernel.Thm
+
+pub fn kc_space_compact_subtopologies() -> @kernel.Thm
+
+pub fn kc_space_continuous_injective_map_preimage() -> @kernel.Thm
+
+pub fn kc_space_discrete_topology() -> @kernel.Thm
+
+pub fn kc_space_euclideanreal() -> @kernel.Thm
+
+pub fn kc_space_expansive() -> @kernel.Thm
+
+pub fn kc_space_mtopology() -> @kernel.Thm
+
+pub fn kc_space_one_point_compactification() -> @kernel.Thm
+
+pub fn kc_space_one_point_compactification_gen() -> @kernel.Thm
+
+pub fn kc_space_perfect_map_image() -> @kernel.Thm
+
+pub fn kc_space_prod_topology() -> @kernel.Thm
+
+pub fn kc_space_prod_topology_alt() -> @kernel.Thm
+
+pub fn kc_space_prod_topology_gen() -> @kernel.Thm
+
+pub fn kc_space_prod_topology_left() -> @kernel.Thm
+
+pub fn kc_space_prod_topology_right() -> @kernel.Thm
+
+pub fn kc_space_proper_map_image() -> @kernel.Thm
+
+pub fn kc_space_retraction_map_image() -> @kernel.Thm
+
+pub fn kc_space_subtopology() -> @kernel.Thm
+
+pub fn kification() -> @kernel.Thm
+
+pub fn kification_eq_self() -> @kernel.Thm
+
+pub fn kification_kification() -> @kernel.Thm
+
+pub fn kolmogorov_quotient() -> @kernel.Thm
+
+pub fn kolmogorov_quotient_continuous_map() -> @kernel.Thm
+
+pub fn kolmogorov_quotient_eq() -> @kernel.Thm
+
+pub fn kolmogorov_quotient_eq_alt() -> @kernel.Thm
+
+pub fn kolmogorov_quotient_id() -> @kernel.Thm
+
+pub fn kolmogorov_quotient_idemp() -> @kernel.Thm
+
+pub fn kolmogorov_quotient_in_closed() -> @kernel.Thm
+
+pub fn kolmogorov_quotient_in_open() -> @kernel.Thm
+
+pub fn kolmogorov_quotient_in_topspace() -> @kernel.Thm
+
+pub fn kolmogorov_quotient_lift_exists() -> @kernel.Thm
+
+pub fn kuratowski_component_number_invariance() -> @kernel.Thm
+
+pub fn label_abbrev_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn label_induct_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn lavrentiev_extension() -> @kernel.Thm
+
+pub fn lavrentiev_extension_gen() -> @kernel.Thm
+
+pub fn lebesgue_covering_lemma() -> @kernel.Thm
+
+pub fn lebesgue_covering_lemma_gen() -> @kernel.Thm
+
+pub fn lebesgue_number() -> @kernel.Thm
+
+pub fn lf_closed_perfect_map_image() -> @kernel.Thm
+
+pub fn lf_covering_imp_lf_closed() -> @kernel.Thm
+
+pub fn lf_covering_imp_lf_open() -> @kernel.Thm
+
+pub fn limit() -> @kernel.Thm
+
+pub fn limit_atpointof() -> @kernel.Thm
+
+pub fn limit_atpointof_metric() -> @kernel.Thm
+
+pub fn limit_atpointof_self() -> @kernel.Thm
+
+pub fn limit_atpointof_sequentially() -> @kernel.Thm
+
+pub fn limit_atpointof_sequentially_decreasing() -> @kernel.Thm
+
+pub fn limit_atpointof_sequentially_inj() -> @kernel.Thm
+
+pub fn limit_atpointof_sequentially_within() -> @kernel.Thm
+
+pub fn limit_atpointof_sequentially_within_decreasing() -> @kernel.Thm
+
+pub fn limit_atpointof_sequentially_within_inj() -> @kernel.Thm
+
+pub fn limit_componentwise() -> @kernel.Thm
+
+pub fn limit_const() -> @kernel.Thm
+
+pub fn limit_const_eq() -> @kernel.Thm
+
+pub fn limit_continuous_map() -> @kernel.Thm
+
+pub fn limit_continuous_map_within() -> @kernel.Thm
+
+pub fn limit_eventually() -> @kernel.Thm
+
+pub fn limit_hausdorff_unique() -> @kernel.Thm
+
+pub fn limit_imp_within() -> @kernel.Thm
+
+pub fn limit_in_closed_in() -> @kernel.Thm
+
+pub fn limit_in_mspace() -> @kernel.Thm
+
+pub fn limit_in_topspace() -> @kernel.Thm
+
+pub fn limit_inf() -> @kernel.Thm
+
+pub fn limit_kc_unique() -> @kernel.Thm
+
+pub fn limit_metric() -> @kernel.Thm
+
+pub fn limit_metric_dist_null() -> @kernel.Thm
+
+pub fn limit_metric_sequentially() -> @kernel.Thm
+
+pub fn limit_metric_unique() -> @kernel.Thm
+
+pub fn limit_null_real() -> @kernel.Thm
+
+pub fn limit_null_real_abs() -> @kernel.Thm
+
+pub fn limit_null_real_comparison() -> @kernel.Thm
+
+pub fn limit_null_real_harmonic_offset() -> @kernel.Thm
+
+pub fn limit_pairwise() -> @kernel.Thm
+
+pub fn limit_product() -> @kernel.Thm
+
+pub fn limit_real_abs() -> @kernel.Thm
+
+pub fn limit_real_add() -> @kernel.Thm
+
+pub fn limit_real_const() -> @kernel.Thm
+
+pub fn limit_real_div() -> @kernel.Thm
+
+pub fn limit_real_inv() -> @kernel.Thm
+
+pub fn limit_real_lmul() -> @kernel.Thm
+
+pub fn limit_real_lmul_eq() -> @kernel.Thm
+
+pub fn limit_real_max() -> @kernel.Thm
+
+pub fn limit_real_min() -> @kernel.Thm
+
+pub fn limit_real_mul() -> @kernel.Thm
+
+pub fn limit_real_neg() -> @kernel.Thm
+
+pub fn limit_real_neg_eq() -> @kernel.Thm
+
+pub fn limit_real_rmul() -> @kernel.Thm
+
+pub fn limit_real_rmul_eq() -> @kernel.Thm
+
+pub fn limit_real_sub() -> @kernel.Thm
+
+pub fn limit_sequentially() -> @kernel.Thm
+
+pub fn limit_sequentially_offset() -> @kernel.Thm
+
+pub fn limit_sequentially_offset_rev() -> @kernel.Thm
+
+pub fn limit_submetric_iff() -> @kernel.Thm
+
+pub fn limit_subsequence() -> @kernel.Thm
+
+pub fn limit_subtopology() -> @kernel.Thm
+
+pub fn limit_sum() -> @kernel.Thm
+
+pub fn limit_sup() -> @kernel.Thm
+
+pub fn limit_transform_eventually() -> @kernel.Thm
+
+pub fn limit_trivial() -> @kernel.Thm
+
+pub fn limit_within_subset() -> @kernel.Thm
+
+pub fn lindelof_hausdorff_regular_eq_paracompact() -> @kernel.Thm
+
+pub fn lindelof_space() -> @kernel.Thm
+
+pub fn lindelof_space_alt() -> @kernel.Thm
+
+pub fn lindelof_space_closed_in_subtopology() -> @kernel.Thm
+
+pub fn lindelof_space_continuous_map_image() -> @kernel.Thm
+
+pub fn lindelof_space_perfect_map_image() -> @kernel.Thm
+
+pub fn lindelof_space_perfect_map_image_eq() -> @kernel.Thm
+
+pub fn lindelof_space_proper_map_preimage() -> @kernel.Thm
+
+pub fn lindelof_space_quotient_map_image() -> @kernel.Thm
+
+pub fn lindelof_space_retraction_map_image() -> @kernel.Thm
+
+pub fn lindelof_space_subtopology() -> @kernel.Thm
+
+pub fn lindelof_space_subtopology_subset() -> @kernel.Thm
+
+pub fn lindelof_space_topspace_empty() -> @kernel.Thm
+
+pub fn lindelof_space_unions() -> @kernel.Thm
+
+pub fn lipschitz_coefficient_pos() -> @kernel.Thm
+
+pub fn lipschitz_continuous_imp_continuous_map() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_compose() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_const() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_eq() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_extends_to_closure_of() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_extends_to_intermediate_closure_of() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_from_submetric() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_from_submetric_mono() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_fst() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_id() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_into_submetric() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_mdist() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_metric() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_on_intermediate_closure() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_paired() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_pairwise() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_pos() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_projections() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_abs() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_absolute_value() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_add() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_addition() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_div() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_inv() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_left_multiplication() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_lmul() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_max() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_maximum() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_min() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_minimum() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_mul() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_neg() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_negation() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_right_multiplication() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_rmul() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_sub() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_real_subtraction() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_snd() -> @kernel.Thm
+
+pub fn lipschitz_continuous_map_sum() -> @kernel.Thm
+
+pub fn lipschitz_imp_cauchy_continuous_map() -> @kernel.Thm
+
+pub fn lipschitz_imp_uniformly_continuous_map() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn locally_cauchy_continuous_map() -> @kernel.Thm
+
+pub fn locally_compact_connected_imp_path_connected_space() -> @kernel.Thm
+
+pub fn locally_compact_euclidean_space() -> @kernel.Thm
+
+pub fn locally_compact_hausdorff_imp_regular_space() -> @kernel.Thm
+
+pub fn locally_compact_hausdorff_or_regular() -> @kernel.Thm
+
+pub fn locally_compact_imp_completely_metrizable_space() -> @kernel.Thm
+
+pub fn locally_compact_imp_k_space() -> @kernel.Thm
+
+pub fn locally_compact_imp_kc_eq_hausdorff_space() -> @kernel.Thm
+
+pub fn locally_compact_kc_imp_regular_space() -> @kernel.Thm
+
+pub fn locally_compact_kc_space() -> @kernel.Thm
+
+pub fn locally_compact_kc_space_alt() -> @kernel.Thm
+
+pub fn locally_compact_locally_connected_imp_locally_path_connected_space() -> @kernel.Thm
+
+pub fn locally_compact_locally_path_connected_eq_locally_connected_space() -> @kernel.Thm
+
+pub fn locally_compact_regular_imp_completely_regular_space() -> @kernel.Thm
+
+pub fn locally_compact_regular_space_neighbourhood_base() -> @kernel.Thm
+
+pub fn locally_compact_space() -> @kernel.Thm
+
+pub fn locally_compact_space_closed_subset() -> @kernel.Thm
+
+pub fn locally_compact_space_compact_closed_compact() -> @kernel.Thm
+
+pub fn locally_compact_space_compact_closed_in() -> @kernel.Thm
+
+pub fn locally_compact_space_compact_closure_of() -> @kernel.Thm
+
+pub fn locally_compact_space_continuous_open_map_image() -> @kernel.Thm
+
+pub fn locally_compact_space_discrete_topology() -> @kernel.Thm
+
+pub fn locally_compact_space_euclideanreal() -> @kernel.Thm
+
+pub fn locally_compact_space_imp_gdelta_in() -> @kernel.Thm
+
+pub fn locally_compact_space_neighbourhood_base() -> @kernel.Thm
+
+pub fn locally_compact_space_neighbourhood_base_closed_in() -> @kernel.Thm
+
+pub fn locally_compact_space_neighbourhood_base_closure_of() -> @kernel.Thm
+
+pub fn locally_compact_space_neighbourhood_base_open_closure_of() -> @kernel.Thm
+
+pub fn locally_compact_space_open_subset() -> @kernel.Thm
+
+pub fn locally_compact_space_perfect_map_image() -> @kernel.Thm
+
+pub fn locally_compact_space_perfect_map_image_eq() -> @kernel.Thm
+
+pub fn locally_compact_space_perfect_map_preimage() -> @kernel.Thm
+
+pub fn locally_compact_space_prod_topology() -> @kernel.Thm
+
+pub fn locally_compact_space_product_topology() -> @kernel.Thm
+
+pub fn locally_compact_space_retraction_map_image() -> @kernel.Thm
+
+pub fn locally_compact_space_sum_topology() -> @kernel.Thm
+
+pub fn locally_compact_subspace_closed_inter_open_in() -> @kernel.Thm
+
+pub fn locally_compact_subspace_closed_inter_open_in_eq() -> @kernel.Thm
+
+pub fn locally_compact_subspace_open_in_closure_of() -> @kernel.Thm
+
+pub fn locally_compact_subspace_open_in_closure_of_eq() -> @kernel.Thm
+
+pub fn locally_connected_at() -> @kernel.Thm
+
+pub fn locally_connected_continuum_space() -> @kernel.Thm
+
+pub fn locally_connected_euclidean_space() -> @kernel.Thm
+
+pub fn locally_connected_is_realinterval() -> @kernel.Thm
+
+pub fn locally_connected_not_countable_closed_union() -> @kernel.Thm
+
+pub fn locally_connected_real_interval() -> @kernel.Thm
+
+pub fn locally_connected_space() -> @kernel.Thm
+
+pub fn locally_connected_space_alt() -> @kernel.Thm
+
+pub fn locally_connected_space_discrete_topology() -> @kernel.Thm
+
+pub fn locally_connected_space_eq_open_connected_component_of() -> @kernel.Thm
+
+pub fn locally_connected_space_euclideanreal() -> @kernel.Thm
+
+pub fn locally_connected_space_im_kleinen() -> @kernel.Thm
+
+pub fn locally_connected_space_open_connected_components() -> @kernel.Thm
+
+pub fn locally_connected_space_open_subset() -> @kernel.Thm
+
+pub fn locally_connected_space_prod_topology() -> @kernel.Thm
+
+pub fn locally_connected_space_product_topology() -> @kernel.Thm
+
+pub fn locally_connected_space_quotient_map_image() -> @kernel.Thm
+
+pub fn locally_connected_space_retraction_map_image() -> @kernel.Thm
+
+pub fn locally_connected_space_sum_topology() -> @kernel.Thm
+
+pub fn locally_connected_space_v1() -> @kernel.Thm
+
+pub fn locally_constant_refinement() -> @kernel.Thm
+
+pub fn locally_fccoverable_space() -> @kernel.Thm
+
+pub fn locally_fccoverable_space_chain() -> @kernel.Thm
+
+pub fn locally_finite_cover_of_compact_space() -> @kernel.Thm
+
+pub fn locally_finite_cover_of_lindelof_space() -> @kernel.Thm
+
+pub fn locally_finite_in() -> @kernel.Thm
+
+pub fn locally_finite_in_closures() -> @kernel.Thm
+
+pub fn locally_finite_in_homeomorphic_image() -> @kernel.Thm
+
+pub fn locally_finite_in_refinement() -> @kernel.Thm
+
+pub fn locally_finite_in_subset() -> @kernel.Thm
+
+pub fn locally_finite_in_subtopology() -> @kernel.Thm
+
+pub fn locally_finite_in_subtopology_eq() -> @kernel.Thm
+
+pub fn locally_finite_product_tubes() -> @kernel.Thm
+
+pub fn locally_lipschitz_continuous_map_real_inversion() -> @kernel.Thm
+
+pub fn locally_lipschitz_continuous_map_real_multiplication() -> @kernel.Thm
+
+pub fn locally_path_connected_at() -> @kernel.Thm
+
+pub fn locally_path_connected_euclidean_space() -> @kernel.Thm
+
+pub fn locally_path_connected_imp_locally_connected_at() -> @kernel.Thm
+
+pub fn locally_path_connected_imp_locally_connected_space() -> @kernel.Thm
+
+pub fn locally_path_connected_is_realinterval() -> @kernel.Thm
+
+pub fn locally_path_connected_real_interval() -> @kernel.Thm
+
+pub fn locally_path_connected_space() -> @kernel.Thm
+
+pub fn locally_path_connected_space_alt() -> @kernel.Thm
+
+pub fn locally_path_connected_space_discrete_topology() -> @kernel.Thm
+
+pub fn locally_path_connected_space_eq_open_path_component_of() -> @kernel.Thm
+
+pub fn locally_path_connected_space_euclideanreal() -> @kernel.Thm
+
+pub fn locally_path_connected_space_im_kleinen() -> @kernel.Thm
+
+pub fn locally_path_connected_space_open_path_components() -> @kernel.Thm
+
+pub fn locally_path_connected_space_open_subset() -> @kernel.Thm
+
+pub fn locally_path_connected_space_prod_topology() -> @kernel.Thm
+
+pub fn locally_path_connected_space_product_topology() -> @kernel.Thm
+
+pub fn locally_path_connected_space_quotient_map_image() -> @kernel.Thm
+
+pub fn locally_path_connected_space_retraction_map_image() -> @kernel.Thm
+
+pub fn locally_path_connected_space_sum_topology() -> @kernel.Thm
+
+pub fn locally_path_connected_space_v1() -> @kernel.Thm
+
+pub fn mball() -> @kernel.Thm
+
+pub fn mball_empty() -> @kernel.Thm
+
+pub fn mball_empty_alt() -> @kernel.Thm
+
+pub fn mball_eq_empty() -> @kernel.Thm
+
+pub fn mball_inter_dseparated_singleton() -> @kernel.Thm
+
+pub fn mball_prod_metric_subset() -> @kernel.Thm
+
+pub fn mball_real_interval() -> @kernel.Thm
+
+pub fn mball_submetric() -> @kernel.Thm
+
+pub fn mball_submetric_eq() -> @kernel.Thm
+
+pub fn mball_subset() -> @kernel.Thm
+
+pub fn mball_subset_concentric() -> @kernel.Thm
+
+pub fn mball_subset_mcball() -> @kernel.Thm
+
+pub fn mball_subset_mspace() -> @kernel.Thm
+
+pub fn mball_subset_prod_metric() -> @kernel.Thm
+
+pub fn mbounded() -> @kernel.Thm
+
+pub fn mbounded_alt() -> @kernel.Thm
+
+pub fn mbounded_alt_pos() -> @kernel.Thm
+
+pub fn mbounded_and_mdiameter_le() -> @kernel.Thm
+
+pub fn mbounded_closure_of() -> @kernel.Thm
+
+pub fn mbounded_closure_of_eq() -> @kernel.Thm
+
+pub fn mbounded_cross() -> @kernel.Thm
+
+pub fn mbounded_discrete_metric() -> @kernel.Thm
+
+pub fn mbounded_empty() -> @kernel.Thm
+
+pub fn mbounded_imp_in_mspace() -> @kernel.Thm
+
+pub fn mbounded_insert() -> @kernel.Thm
+
+pub fn mbounded_inter() -> @kernel.Thm
+
+pub fn mbounded_lipschitz_continuous_image() -> @kernel.Thm
+
+pub fn mbounded_mball() -> @kernel.Thm
+
+pub fn mbounded_mcball() -> @kernel.Thm
+
+pub fn mbounded_pos() -> @kernel.Thm
+
+pub fn mbounded_prod_metric() -> @kernel.Thm
+
+pub fn mbounded_real_euclidean_metric() -> @kernel.Thm
+
+pub fn mbounded_submetric() -> @kernel.Thm
+
+pub fn mbounded_subset() -> @kernel.Thm
+
+pub fn mbounded_subset_mspace() -> @kernel.Thm
+
+pub fn mbounded_union() -> @kernel.Thm
+
+pub fn mbounded_unions() -> @kernel.Thm
+
+pub fn mbounded_v1() -> @kernel.Thm
+
+pub fn mcball() -> @kernel.Thm
+
+pub fn mcball_empty() -> @kernel.Thm
+
+pub fn mcball_empty_alt() -> @kernel.Thm
+
+pub fn mcball_eq_empty() -> @kernel.Thm
+
+pub fn mcball_prod_metric_subset() -> @kernel.Thm
+
+pub fn mcball_real_interval() -> @kernel.Thm
+
+pub fn mcball_submetric() -> @kernel.Thm
+
+pub fn mcball_submetric_eq() -> @kernel.Thm
+
+pub fn mcball_subset() -> @kernel.Thm
+
+pub fn mcball_subset_concentric() -> @kernel.Thm
+
+pub fn mcball_subset_mball() -> @kernel.Thm
+
+pub fn mcball_subset_mball_concentric() -> @kernel.Thm
+
+pub fn mcball_subset_mspace() -> @kernel.Thm
+
+pub fn mcball_subset_prod_metric() -> @kernel.Thm
+
+pub fn mcomplete() -> @kernel.Thm
+
+pub fn mcomplete_alt() -> @kernel.Thm
+
+pub fn mcomplete_capped_metric() -> @kernel.Thm
+
+pub fn mcomplete_cfunspace() -> @kernel.Thm
+
+pub fn mcomplete_connected_locally_connected_imp_path_connected() -> @kernel.Thm
+
+pub fn mcomplete_connected_locally_connected_imp_path_connected_in() -> @kernel.Thm
+
+pub fn mcomplete_discrete_metric() -> @kernel.Thm
+
+pub fn mcomplete_dyadic_approximation() -> @kernel.Thm
+
+pub fn mcomplete_empty_mspace() -> @kernel.Thm
+
+pub fn mcomplete_fip() -> @kernel.Thm
+
+pub fn mcomplete_fip_sing() -> @kernel.Thm
+
+pub fn mcomplete_funspace() -> @kernel.Thm
+
+pub fn mcomplete_imbedding_in_lc_continuum() -> @kernel.Thm
+
+pub fn mcomplete_imbedding_in_lc_continuum_in() -> @kernel.Thm
+
+pub fn mcomplete_imp_closed_in() -> @kernel.Thm
+
+pub fn mcomplete_in_locally_compact_imp_locally_compact() -> @kernel.Thm
+
+pub fn mcomplete_inter() -> @kernel.Thm
+
+pub fn mcomplete_inters() -> @kernel.Thm
+
+pub fn mcomplete_locally_connected_imp_locally_path_connected() -> @kernel.Thm
+
+pub fn mcomplete_locally_path_connected_eq_locally_connected() -> @kernel.Thm
+
+pub fn mcomplete_nest() -> @kernel.Thm
+
+pub fn mcomplete_nest_sing() -> @kernel.Thm
+
+pub fn mcomplete_prod_metric() -> @kernel.Thm
+
+pub fn mcomplete_real_euclidean_metric() -> @kernel.Thm
+
+pub fn mcomplete_submetric_empty() -> @kernel.Thm
+
+pub fn mcomplete_submetric_real_euclidean_metric() -> @kernel.Thm
+
+pub fn mcomplete_union() -> @kernel.Thm
+
+pub fn mcomplete_unions() -> @kernel.Thm
+
+pub fn mcomplete_v1() -> @kernel.Thm
+
+pub fn mdiameter() -> @kernel.Thm
+
+pub fn mdiameter_bounded() -> @kernel.Thm
+
+pub fn mdiameter_bounded_bound() -> @kernel.Thm
+
+pub fn mdiameter_closure() -> @kernel.Thm
+
+pub fn mdiameter_compact_attained() -> @kernel.Thm
+
+pub fn mdiameter_empty() -> @kernel.Thm
+
+pub fn mdiameter_eq_0() -> @kernel.Thm
+
+pub fn mdiameter_le() -> @kernel.Thm
+
+pub fn mdiameter_pos_le() -> @kernel.Thm
+
+pub fn mdiameter_sing() -> @kernel.Thm
+
+pub fn mdiameter_submetric() -> @kernel.Thm
+
+pub fn mdiameter_subset() -> @kernel.Thm
+
+pub fn mdiameter_subset_mball() -> @kernel.Thm
+
+pub fn mdiameter_subset_mcball() -> @kernel.Thm
+
+pub fn mdiameter_subset_mcball_nonempty() -> @kernel.Thm
+
+pub fn mdiameter_union_le() -> @kernel.Thm
+
+pub fn mdist() -> @kernel.Thm
+
+pub fn mdist_0() -> @kernel.Thm
+
+pub fn mdist_capped() -> @kernel.Thm
+
+pub fn mdist_cfunspace_eq_mdist_funspace() -> @kernel.Thm
+
+pub fn mdist_cfunspace_imp_mdist_le() -> @kernel.Thm
+
+pub fn mdist_cfunspace_le() -> @kernel.Thm
+
+pub fn mdist_pos_eq() -> @kernel.Thm
+
+pub fn mdist_pos_le() -> @kernel.Thm
+
+pub fn mdist_pos_lt() -> @kernel.Thm
+
+pub fn mdist_refl() -> @kernel.Thm
+
+pub fn mdist_reverse_triangle() -> @kernel.Thm
+
+pub fn mdist_sym() -> @kernel.Thm
+
+pub fn mdist_triangle() -> @kernel.Thm
+
+pub fn mdist_triangle_lt() -> @kernel.Thm
+
+pub fn mdist_v1() -> @kernel.Thm
+
+pub fn metric() -> @kernel.Thm
+
+pub fn metric_arith(@kernel.Term) -> @kernel.Thm raise
+
+pub fn metric_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn metric_baire_category() -> @kernel.Thm
+
+pub fn metric_baire_category_alt() -> @kernel.Thm
+
+pub fn metric_closed_in_iff_sequentially_closed() -> @kernel.Thm
+
+pub fn metric_closure_of() -> @kernel.Thm
+
+pub fn metric_closure_of_alt() -> @kernel.Thm
+
+pub fn metric_completion() -> @kernel.Thm
+
+pub fn metric_completion_explicit() -> @kernel.Thm
+
+pub fn metric_continuous_map() -> @kernel.Thm
+
+pub fn metric_cover_sigma_locally_finite() -> @kernel.Thm
+
+pub fn metric_derived_set_of() -> @kernel.Thm
+
+pub fn metric_injective_image() -> @kernel.Thm
+
+pub fn metric_interior_of() -> @kernel.Thm
+
+pub fn metric_interior_of_alt() -> @kernel.Thm
+
+pub fn metric_tybij() -> @kernel.Thm
+
+pub fn metrizable_euclidean_space() -> @kernel.Thm
+
+pub fn metrizable_imp_completely_regular_space() -> @kernel.Thm
+
+pub fn metrizable_imp_first_countable() -> @kernel.Thm
+
+pub fn metrizable_imp_hausdorff_space() -> @kernel.Thm
+
+pub fn metrizable_imp_hereditarily_normal_space() -> @kernel.Thm
+
+pub fn metrizable_imp_k_space() -> @kernel.Thm
+
+pub fn metrizable_imp_kc_space() -> @kernel.Thm
+
+pub fn metrizable_imp_normal_space() -> @kernel.Thm
+
+pub fn metrizable_imp_paracompact_space() -> @kernel.Thm
+
+pub fn metrizable_imp_regular_space() -> @kernel.Thm
+
+pub fn metrizable_imp_t1_space() -> @kernel.Thm
+
+pub fn metrizable_product_euclideanreal_num() -> @kernel.Thm
+
+pub fn metrizable_space() -> @kernel.Thm
+
+pub fn metrizable_space_cantor_space() -> @kernel.Thm
+
+pub fn metrizable_space_completion() -> @kernel.Thm
+
+pub fn metrizable_space_discrete_topology() -> @kernel.Thm
+
+pub fn metrizable_space_euclideanreal() -> @kernel.Thm
+
+pub fn metrizable_space_mtopology() -> @kernel.Thm
+
+pub fn metrizable_space_prod_topology() -> @kernel.Thm
+
+pub fn metrizable_space_product_topology() -> @kernel.Thm
+
+pub fn metrizable_space_retraction_map_image() -> @kernel.Thm
+
+pub fn metrizable_space_separation() -> @kernel.Thm
+
+pub fn metrizable_space_subtopology() -> @kernel.Thm
+
+pub fn michael_lemma() -> @kernel.Thm
+
+pub fn minimal_topology_base() -> @kernel.Thm
+
+pub fn minimal_topology_subbase() -> @kernel.Thm
+
+pub fn monotone_closed_map() -> @kernel.Thm
+
+pub fn monotone_map() -> @kernel.Thm
+
+pub fn monotone_map_euclideanreal() -> @kernel.Thm
+
+pub fn monotone_map_euclideanreal_alt() -> @kernel.Thm
+
+pub fn monotone_map_from_subtopology() -> @kernel.Thm
+
+pub fn monotone_map_in_subtopology() -> @kernel.Thm
+
+pub fn monotone_map_into_euclideanreal() -> @kernel.Thm
+
+pub fn monotone_map_into_euclideanreal_alt() -> @kernel.Thm
+
+pub fn monotone_map_restriction() -> @kernel.Thm
+
+pub fn monotone_map_v1() -> @kernel.Thm
+
+pub fn monotone_open_map() -> @kernel.Thm
+
+pub fn mspace() -> @kernel.Thm
+
+pub fn mspace_v1() -> @kernel.Thm
+
+pub fn msphere() -> @kernel.Thm
+
+pub fn mtopology() -> @kernel.Thm
+
+pub fn mtopology_base() -> @kernel.Thm
+
+pub fn mtopology_capped_metric() -> @kernel.Thm
+
+pub fn mtopology_discrete_metric() -> @kernel.Thm
+
+pub fn mtopology_prod_metric() -> @kernel.Thm
+
+pub fn mtopology_real_euclidean_metric() -> @kernel.Thm
+
+pub fn mtopology_submetric() -> @kernel.Thm
+
+pub fn neighbourhood_base_at() -> @kernel.Thm
+
+pub fn neighbourhood_base_at_discrete_topology() -> @kernel.Thm
+
+pub fn neighbourhood_base_at_mono() -> @kernel.Thm
+
+pub fn neighbourhood_base_at_topology_base() -> @kernel.Thm
+
+pub fn neighbourhood_base_at_unlocalized() -> @kernel.Thm
+
+pub fn neighbourhood_base_at_with_subset() -> @kernel.Thm
+
+pub fn neighbourhood_base_imp_locally_compact_space() -> @kernel.Thm
+
+pub fn neighbourhood_base_of() -> @kernel.Thm
+
+pub fn neighbourhood_base_of_closed_hausdorff_space() -> @kernel.Thm
+
+pub fn neighbourhood_base_of_closed_in() -> @kernel.Thm
+
+pub fn neighbourhood_base_of_discrete_topology() -> @kernel.Thm
+
+pub fn neighbourhood_base_of_mono() -> @kernel.Thm
+
+pub fn neighbourhood_base_of_open_subset() -> @kernel.Thm
+
+pub fn neighbourhood_base_of_topology_base() -> @kernel.Thm
+
+pub fn neighbourhood_base_of_unlocalized() -> @kernel.Thm
+
+pub fn neighbourhood_base_of_v1() -> @kernel.Thm
+
+pub fn neighbourhood_base_of_with_subset() -> @kernel.Thm
+
+pub fn nested_compact_approx() -> @kernel.Thm
+
+pub fn net() -> @kernel.Thm
+
+pub fn net_tybij() -> @kernel.Thm
+
+pub fn net_within_univ() -> @kernel.Thm
+
+pub fn netfilter() -> @kernel.Thm
+
+pub fn netlimit() -> @kernel.Thm
+
+pub fn netlimit_atpointof() -> @kernel.Thm
+
+pub fn netlimits() -> @kernel.Thm
+
+pub fn netlimits_atpointof() -> @kernel.Thm
+
+pub fn netlimits_sequentially() -> @kernel.Thm
+
+pub fn netlimits_within() -> @kernel.Thm
+
+pub fn nonempty_connected_components_of() -> @kernel.Thm
+
+pub fn nonempty_euclidean_space() -> @kernel.Thm
+
+pub fn nonempty_nsphere() -> @kernel.Thm
+
+pub fn nonempty_path_components_of() -> @kernel.Thm
+
+pub fn nonempty_quasi_components_of() -> @kernel.Thm
+
+pub fn nonempty_topspace_cantor_space() -> @kernel.Thm
+
+pub fn nontrivial_limit_within() -> @kernel.Thm
+
+pub fn normal_hausdorff_space_closed_continuous_map_image() -> @kernel.Thm
+
+pub fn normal_imp_completely_regular_space() -> @kernel.Thm
+
+pub fn normal_imp_completely_regular_space_gen() -> @kernel.Thm
+
+pub fn normal_space() -> @kernel.Thm
+
+pub fn normal_space_alt() -> @kernel.Thm
+
+pub fn normal_space_closed_subtopology() -> @kernel.Thm
+
+pub fn normal_space_closures() -> @kernel.Thm
+
+pub fn normal_space_continuous_closed_map_image() -> @kernel.Thm
+
+pub fn normal_space_discrete_topology() -> @kernel.Thm
+
+pub fn normal_space_disjoint_closures() -> @kernel.Thm
+
+pub fn normal_space_dual() -> @kernel.Thm
+
+pub fn normal_space_eq_tietze() -> @kernel.Thm
+
+pub fn normal_space_eq_urysohn() -> @kernel.Thm
+
+pub fn normal_space_eq_urysohn_alt() -> @kernel.Thm
+
+pub fn normal_space_eq_urysohn_gen() -> @kernel.Thm
+
+pub fn normal_space_eq_urysohn_gen_alt() -> @kernel.Thm
+
+pub fn normal_space_fsigma_subtopology() -> @kernel.Thm
+
+pub fn normal_space_fsigmas() -> @kernel.Thm
+
+pub fn normal_space_mtopology() -> @kernel.Thm
+
+pub fn normal_space_perfect_map_image() -> @kernel.Thm
+
+pub fn normal_space_retraction_map_image() -> @kernel.Thm
+
+pub fn normal_space_v1() -> @kernel.Thm
+
+pub fn normal_t1_eq_hausdorff_space() -> @kernel.Thm
+
+pub fn normal_t1_imp_hausdorff_space() -> @kernel.Thm
+
+pub fn normal_t1_imp_regular_space() -> @kernel.Thm
+
+pub fn not_compact_space_euclideanreal() -> @kernel.Thm
+
+pub fn not_eventually() -> @kernel.Thm
+
+pub fn not_locally_compact_space_irrational() -> @kernel.Thm
+
+pub fn not_locally_compact_space_irrational_gen() -> @kernel.Thm
+
+pub fn not_locally_compact_space_rational() -> @kernel.Thm
+
+pub fn not_locally_compact_space_rational_gen() -> @kernel.Thm
+
+pub fn not_real_bounded_univ() -> @kernel.Thm
+
+pub fn not_real_compact_univ() -> @kernel.Thm
+
+pub fn nsphere() -> @kernel.Thm
+
+pub fn nsphere_v1() -> @kernel.Thm
+
+pub fn nullhomotopic_from_contractible_space() -> @kernel.Thm
+
+pub fn nullhomotopic_into_contractible_space() -> @kernel.Thm
+
+pub fn nullhomotopic_nonsurjective_sphere_map() -> @kernel.Thm
+
+pub fn nullhomotopic_through_contractible_space() -> @kernel.Thm
+
+pub fn one_point_compactification_dense() -> @kernel.Thm
+
+pub fn one_point_compactification_interior() -> @kernel.Thm
+
+pub fn open_connected_fine_cover() -> @kernel.Thm
+
+pub fn open_eq_continuous_inverse_map() -> @kernel.Thm
+
+pub fn open_homeomorphic_space_closed_in_product() -> @kernel.Thm
+
+pub fn open_imp_borel_in() -> @kernel.Thm
+
+pub fn open_imp_fsigma_in() -> @kernel.Thm
+
+pub fn open_imp_gdelta_in() -> @kernel.Thm
+
+pub fn open_in_alexandroff_compactification() -> @kernel.Thm
+
+pub fn open_in_cartesian_product() -> @kernel.Thm
+
+pub fn open_in_cartesian_product_gen() -> @kernel.Thm
+
+pub fn open_in_clauses() -> @kernel.Thm
+
+pub fn open_in_closed_in() -> @kernel.Thm
+
+pub fn open_in_closed_in_eq() -> @kernel.Thm
+
+pub fn open_in_connected_component_of_locally_connected_space() -> @kernel.Thm
+
+pub fn open_in_connected_components_of_locally_connected_space() -> @kernel.Thm
+
+pub fn open_in_continuous_map_preimage() -> @kernel.Thm
+
+pub fn open_in_continuous_map_preimage_gen() -> @kernel.Thm
+
+pub fn open_in_cross() -> @kernel.Thm
+
+pub fn open_in_diff() -> @kernel.Thm
+
+pub fn open_in_discrete_space() -> @kernel.Thm
+
+pub fn open_in_discrete_topology() -> @kernel.Thm
+
+pub fn open_in_disjoint_union() -> @kernel.Thm
+
+pub fn open_in_empty() -> @kernel.Thm
+
+pub fn open_in_finite_connected_components() -> @kernel.Thm
+
+pub fn open_in_finite_quasi_components() -> @kernel.Thm
+
+pub fn open_in_hausdorff_delete() -> @kernel.Thm
+
+pub fn open_in_imp_subset() -> @kernel.Thm
+
+pub fn open_in_inter() -> @kernel.Thm
+
+pub fn open_in_inter_closure_of_eq() -> @kernel.Thm
+
+pub fn open_in_inter_closure_of_eq_empty() -> @kernel.Thm
+
+pub fn open_in_inter_closure_of_subset() -> @kernel.Thm
+
+pub fn open_in_inter_derived_set_of_eq() -> @kernel.Thm
+
+pub fn open_in_inter_derived_set_of_subset() -> @kernel.Thm
+
+pub fn open_in_interior_of() -> @kernel.Thm
+
+pub fn open_in_inters() -> @kernel.Thm
+
+pub fn open_in_kification() -> @kernel.Thm
+
+pub fn open_in_kification_finer() -> @kernel.Thm
+
+pub fn open_in_mball() -> @kernel.Thm
+
+pub fn open_in_mspace() -> @kernel.Thm
+
+pub fn open_in_mtopology() -> @kernel.Thm
+
+pub fn open_in_mtopology_mcball() -> @kernel.Thm
+
+pub fn open_in_open_subtopology() -> @kernel.Thm
+
+pub fn open_in_path_component_of_locally_path_connected_space() -> @kernel.Thm
+
+pub fn open_in_path_components_of_locally_path_connected_space() -> @kernel.Thm
+
+pub fn open_in_prod_topology() -> @kernel.Thm
+
+pub fn open_in_prod_topology_alt() -> @kernel.Thm
+
+pub fn open_in_product_topology() -> @kernel.Thm
+
+pub fn open_in_product_topology_alt() -> @kernel.Thm
+
+pub fn open_in_product_topology_alt_expand() -> @kernel.Thm
+
+pub fn open_in_product_topology_empty() -> @kernel.Thm
+
+pub fn open_in_quasi_component_of_locally_connected_space() -> @kernel.Thm
+
+pub fn open_in_quasi_components_of_locally_connected_space() -> @kernel.Thm
+
+pub fn open_in_relative_to() -> @kernel.Thm
+
+pub fn open_in_subbase() -> @kernel.Thm
+
+pub fn open_in_subopen() -> @kernel.Thm
+
+pub fn open_in_subset() -> @kernel.Thm
+
+pub fn open_in_subset_topspace() -> @kernel.Thm
+
+pub fn open_in_subset_topspace_eq() -> @kernel.Thm
+
+pub fn open_in_subset_trans() -> @kernel.Thm
+
+pub fn open_in_subtopology() -> @kernel.Thm
+
+pub fn open_in_subtopology_alt() -> @kernel.Thm
+
+pub fn open_in_subtopology_borel_in() -> @kernel.Thm
+
+pub fn open_in_subtopology_diff_closed() -> @kernel.Thm
+
+pub fn open_in_subtopology_empty() -> @kernel.Thm
+
+pub fn open_in_subtopology_inter_open() -> @kernel.Thm
+
+pub fn open_in_subtopology_inter_open_in() -> @kernel.Thm
+
+pub fn open_in_subtopology_inter_subset() -> @kernel.Thm
+
+pub fn open_in_subtopology_refl() -> @kernel.Thm
+
+pub fn open_in_subtopology_union() -> @kernel.Thm
+
+pub fn open_in_sum_topology() -> @kernel.Thm
+
+pub fn open_in_sum_topology_alt() -> @kernel.Thm
+
+pub fn open_in_topology_base_unique() -> @kernel.Thm
+
+pub fn open_in_topology_neighbourhood_base_unique() -> @kernel.Thm
+
+pub fn open_in_topspace() -> @kernel.Thm
+
+pub fn open_in_topspace_empty() -> @kernel.Thm
+
+pub fn open_in_trans() -> @kernel.Thm
+
+pub fn open_in_trans_full() -> @kernel.Thm
+
+pub fn open_in_union() -> @kernel.Thm
+
+pub fn open_in_unions() -> @kernel.Thm
+
+pub fn open_inter_open_in_subtopology() -> @kernel.Thm
+
+pub fn open_map() -> @kernel.Thm
+
+pub fn open_map_component_injection() -> @kernel.Thm
+
+pub fn open_map_compose() -> @kernel.Thm
+
+pub fn open_map_eq() -> @kernel.Thm
+
+pub fn open_map_from_composition_left() -> @kernel.Thm
+
+pub fn open_map_from_composition_right() -> @kernel.Thm
+
+pub fn open_map_from_open_subtopology() -> @kernel.Thm
+
+pub fn open_map_from_subtopology() -> @kernel.Thm
+
+pub fn open_map_fst() -> @kernel.Thm
+
+pub fn open_map_id() -> @kernel.Thm
+
+pub fn open_map_imp_subset() -> @kernel.Thm
+
+pub fn open_map_imp_subset_topspace() -> @kernel.Thm
+
+pub fn open_map_in_subtopology() -> @kernel.Thm
+
+pub fn open_map_inclusion() -> @kernel.Thm
+
+pub fn open_map_inclusion_eq() -> @kernel.Thm
+
+pub fn open_map_inl() -> @kernel.Thm
+
+pub fn open_map_interior_of_image_subset() -> @kernel.Thm
+
+pub fn open_map_interior_of_image_subset_alt() -> @kernel.Thm
+
+pub fn open_map_interior_of_image_subset_gen() -> @kernel.Thm
+
+pub fn open_map_into_discrete_topology() -> @kernel.Thm
+
+pub fn open_map_into_k_space() -> @kernel.Thm
+
+pub fn open_map_into_k_space_eq() -> @kernel.Thm
+
+pub fn open_map_into_subtopology() -> @kernel.Thm
+
+pub fn open_map_kolmogorov_quotient() -> @kernel.Thm
+
+pub fn open_map_kolmogorov_quotient_explicit() -> @kernel.Thm
+
+pub fn open_map_kolmogorov_quotient_gen() -> @kernel.Thm
+
+pub fn open_map_on_empty() -> @kernel.Thm
+
+pub fn open_map_preimage_neighbourhood() -> @kernel.Thm
+
+pub fn open_map_prod() -> @kernel.Thm
+
+pub fn open_map_product() -> @kernel.Thm
+
+pub fn open_map_product_projection() -> @kernel.Thm
+
+pub fn open_map_restriction() -> @kernel.Thm
+
+pub fn open_map_snd() -> @kernel.Thm
+
+pub fn open_neighbourhood_base_at() -> @kernel.Thm
+
+pub fn open_neighbourhood_base_of() -> @kernel.Thm
+
+pub fn open_quasi_eq_connected_components_of() -> @kernel.Thm
+
+pub fn pairwise_disjoint_connected_components_of() -> @kernel.Thm
+
+pub fn pairwise_disjoint_path_components_of() -> @kernel.Thm
+
+pub fn pairwise_disjoint_quasi_components_of() -> @kernel.Thm
+
+pub fn pairwise_separated_connected_components_of() -> @kernel.Thm
+
+pub fn pairwise_separated_quasi_components_of() -> @kernel.Thm
+
+pub fn paracompact_hausdorff_closure_refinement() -> @kernel.Thm
+
+pub fn paracompact_hausdorff_expansion_lemma() -> @kernel.Thm
+
+pub fn paracompact_hausdorff_imp_normal_space() -> @kernel.Thm
+
+pub fn paracompact_hausdorff_imp_regular_space() -> @kernel.Thm
+
+pub fn paracompact_hausdorff_indexed_shrinking() -> @kernel.Thm
+
+pub fn paracompact_partition_of_unity() -> @kernel.Thm
+
+pub fn paracompact_space() -> @kernel.Thm
+
+pub fn paracompact_space_closed_subset() -> @kernel.Thm
+
+pub fn paracompact_space_discrete_topology() -> @kernel.Thm
+
+pub fn paracompact_space_eq_closed_refinement() -> @kernel.Thm
+
+pub fn paracompact_space_eq_locally_finite_refinement() -> @kernel.Thm
+
+pub fn paracompact_space_fsigma_subset() -> @kernel.Thm
+
+pub fn paracompact_space_mtopology() -> @kernel.Thm
+
+pub fn paracompact_space_perfect_map_image() -> @kernel.Thm
+
+pub fn paracompact_space_perfect_map_preimage() -> @kernel.Thm
+
+pub fn paracompact_space_product_compact_left() -> @kernel.Thm
+
+pub fn paracompact_space_product_compact_right() -> @kernel.Thm
+
+pub fn paracompact_space_retraction_map_image() -> @kernel.Thm
+
+pub fn pasting_lemma() -> @kernel.Thm
+
+pub fn pasting_lemma_closed() -> @kernel.Thm
+
+pub fn pasting_lemma_exists() -> @kernel.Thm
+
+pub fn pasting_lemma_exists_closed() -> @kernel.Thm
+
+pub fn pasting_lemma_exists_locally_finite() -> @kernel.Thm
+
+pub fn pasting_lemma_locally_finite() -> @kernel.Thm
+
+pub fn path_component_eq_connected_component_of() -> @kernel.Thm
+
+pub fn path_component_in_path_components_of() -> @kernel.Thm
+
+pub fn path_component_in_topspace() -> @kernel.Thm
+
+pub fn path_component_of() -> @kernel.Thm
+
+pub fn path_component_of_continuous_image() -> @kernel.Thm
+
+pub fn path_component_of_discrete_topology() -> @kernel.Thm
+
+pub fn path_component_of_disjoint() -> @kernel.Thm
+
+pub fn path_component_of_eq() -> @kernel.Thm
+
+pub fn path_component_of_eq_empty() -> @kernel.Thm
+
+pub fn path_component_of_eq_overlap() -> @kernel.Thm
+
+pub fn path_component_of_equiv() -> @kernel.Thm
+
+pub fn path_component_of_maximal() -> @kernel.Thm
+
+pub fn path_component_of_mono() -> @kernel.Thm
+
+pub fn path_component_of_nonoverlap() -> @kernel.Thm
+
+pub fn path_component_of_overlap() -> @kernel.Thm
+
+pub fn path_component_of_pair() -> @kernel.Thm
+
+pub fn path_component_of_product_topology() -> @kernel.Thm
+
+pub fn path_component_of_refl() -> @kernel.Thm
+
+pub fn path_component_of_set() -> @kernel.Thm
+
+pub fn path_component_of_set_alt() -> @kernel.Thm
+
+pub fn path_component_of_subset_topspace() -> @kernel.Thm
+
+pub fn path_component_of_subtopology() -> @kernel.Thm
+
+pub fn path_component_of_subtopology_eq() -> @kernel.Thm
+
+pub fn path_component_of_sym() -> @kernel.Thm
+
+pub fn path_component_of_trans() -> @kernel.Thm
+
+pub fn path_component_of_unique() -> @kernel.Thm
+
+pub fn path_component_of_v1() -> @kernel.Thm
+
+pub fn path_component_subset_connected_component_of() -> @kernel.Thm
+
+pub fn path_component_subset_quasi_component_of() -> @kernel.Thm
+
+pub fn path_components_eq_connected_components_of() -> @kernel.Thm
+
+pub fn path_components_of() -> @kernel.Thm
+
+pub fn path_components_of_discrete_topology() -> @kernel.Thm
+
+pub fn path_components_of_disjoint() -> @kernel.Thm
+
+pub fn path_components_of_empty_space() -> @kernel.Thm
+
+pub fn path_components_of_eq_empty() -> @kernel.Thm
+
+pub fn path_components_of_eq_sing() -> @kernel.Thm
+
+pub fn path_components_of_maximal() -> @kernel.Thm
+
+pub fn path_components_of_overlap() -> @kernel.Thm
+
+pub fn path_components_of_path_connected_space() -> @kernel.Thm
+
+pub fn path_components_of_prod_topology() -> @kernel.Thm
+
+pub fn path_components_of_product_topology() -> @kernel.Thm
+
+pub fn path_components_of_subset() -> @kernel.Thm
+
+pub fn path_components_of_subset_sing() -> @kernel.Thm
+
+pub fn path_components_of_subtopology() -> @kernel.Thm
+
+pub fn path_connected_eq_connected_space() -> @kernel.Thm
+
+pub fn path_connected_euclidean_space() -> @kernel.Thm
+
+pub fn path_connected_imp_connected_space() -> @kernel.Thm
+
+pub fn path_connected_in() -> @kernel.Thm
+
+pub fn path_connected_in_absolute() -> @kernel.Thm
+
+pub fn path_connected_in_cartesian_product() -> @kernel.Thm
+
+pub fn path_connected_in_continuous_map_image() -> @kernel.Thm
+
+pub fn path_connected_in_cross() -> @kernel.Thm
+
+pub fn path_connected_in_discrete_topology() -> @kernel.Thm
+
+pub fn path_connected_in_empty() -> @kernel.Thm
+
+pub fn path_connected_in_euclideanreal() -> @kernel.Thm
+
+pub fn path_connected_in_euclideanreal_interval() -> @kernel.Thm
+
+pub fn path_connected_in_imp_connected_in() -> @kernel.Thm
+
+pub fn path_connected_in_path_component_of() -> @kernel.Thm
+
+pub fn path_connected_in_path_components_of() -> @kernel.Thm
+
+pub fn path_connected_in_path_image() -> @kernel.Thm
+
+pub fn path_connected_in_sing() -> @kernel.Thm
+
+pub fn path_connected_in_subset_topspace() -> @kernel.Thm
+
+pub fn path_connected_in_subtopology() -> @kernel.Thm
+
+pub fn path_connected_in_topspace() -> @kernel.Thm
+
+pub fn path_connected_in_union() -> @kernel.Thm
+
+pub fn path_connected_in_unions() -> @kernel.Thm
+
+pub fn path_connected_in_v1() -> @kernel.Thm
+
+pub fn path_connected_space() -> @kernel.Thm
+
+pub fn path_connected_space_discrete_topology() -> @kernel.Thm
+
+pub fn path_connected_space_iff_components_eq() -> @kernel.Thm
+
+pub fn path_connected_space_iff_components_subset_sing() -> @kernel.Thm
+
+pub fn path_connected_space_iff_path_component() -> @kernel.Thm
+
+pub fn path_connected_space_imp_card_ge() -> @kernel.Thm
+
+pub fn path_connected_space_imp_path_component_of() -> @kernel.Thm
+
+pub fn path_connected_space_imp_uncountable() -> @kernel.Thm
+
+pub fn path_connected_space_path_component_set() -> @kernel.Thm
+
+pub fn path_connected_space_prod_topology() -> @kernel.Thm
+
+pub fn path_connected_space_product_topology() -> @kernel.Thm
+
+pub fn path_connected_space_quotient_map_image() -> @kernel.Thm
+
+pub fn path_connected_space_retraction_map_image() -> @kernel.Thm
+
+pub fn path_connected_space_subconnected() -> @kernel.Thm
+
+pub fn path_connected_space_topspace_empty() -> @kernel.Thm
+
+pub fn path_finish_in_topspace() -> @kernel.Thm
+
+pub fn path_image_subset_topspace() -> @kernel.Thm
+
+pub fn path_imp_connected_component_of() -> @kernel.Thm
+
+pub fn path_imp_quasi_component_of() -> @kernel.Thm
+
+pub fn path_in() -> @kernel.Thm
+
+pub fn path_in_compose() -> @kernel.Thm
+
+pub fn path_in_const() -> @kernel.Thm
+
+pub fn path_in_subtopology() -> @kernel.Thm
+
+pub fn path_start_in_topspace() -> @kernel.Thm
+
+pub fn peano_gap_filling_extension() -> @kernel.Thm
+
+pub fn perfect_cantor_space() -> @kernel.Thm
+
+pub fn perfect_cantor_space_eq() -> @kernel.Thm
+
+pub fn perfect_imp_closed_map() -> @kernel.Thm
+
+pub fn perfect_imp_continuous_map() -> @kernel.Thm
+
+pub fn perfect_imp_proper_map() -> @kernel.Thm
+
+pub fn perfect_imp_quotient_map() -> @kernel.Thm
+
+pub fn perfect_imp_surjective_map() -> @kernel.Thm
+
+pub fn perfect_injective_eq_homeomorphic_map() -> @kernel.Thm
+
+pub fn perfect_map() -> @kernel.Thm
+
+pub fn perfect_map_compose() -> @kernel.Thm
+
+pub fn perfect_map_from_composition_left() -> @kernel.Thm
+
+pub fn perfect_map_from_composition_right() -> @kernel.Thm
+
+pub fn perfect_map_from_composition_right_inj() -> @kernel.Thm
+
+pub fn perfect_map_from_kification() -> @kernel.Thm
+
+pub fn perfect_map_fst() -> @kernel.Thm
+
+pub fn perfect_map_id() -> @kernel.Thm
+
+pub fn perfect_map_restriction() -> @kernel.Thm
+
+pub fn perfect_map_snd() -> @kernel.Thm
+
+pub fn prod_metric() -> @kernel.Thm
+
+pub fn prod_metric_le_components() -> @kernel.Thm
+
+pub fn prod_metric_v1() -> @kernel.Thm
+
+pub fn prod_topology() -> @kernel.Thm
+
+pub fn prod_topology_discrete_topology() -> @kernel.Thm
+
+pub fn prod_topology_eq() -> @kernel.Thm
+
+pub fn prod_topology_homeomorphic_space_left() -> @kernel.Thm
+
+pub fn prod_topology_homeomorphic_space_right() -> @kernel.Thm
+
+pub fn prod_topology_subtopology() -> @kernel.Thm
+
+pub fn product_topology() -> @kernel.Thm
+
+pub fn product_topology_base_alt() -> @kernel.Thm
+
+pub fn product_topology_empty() -> @kernel.Thm
+
+pub fn product_topology_empty_discrete() -> @kernel.Thm
+
+pub fn product_topology_eq() -> @kernel.Thm
+
+pub fn product_topology_homeomorphic_component() -> @kernel.Thm
+
+pub fn product_topology_subbase_alt() -> @kernel.Thm
+
+pub fn proper_eq_compact_map() -> @kernel.Thm
+
+pub fn proper_imp_closed_map() -> @kernel.Thm
+
+pub fn proper_imp_continuous_map() -> @kernel.Thm
+
+pub fn proper_map() -> @kernel.Thm
+
+pub fn proper_map_alt() -> @kernel.Thm
+
+pub fn proper_map_compose() -> @kernel.Thm
+
+pub fn proper_map_const() -> @kernel.Thm
+
+pub fn proper_map_diag_eq() -> @kernel.Thm
+
+pub fn proper_map_from_closed_subtopology() -> @kernel.Thm
+
+pub fn proper_map_from_composition_left() -> @kernel.Thm
+
+pub fn proper_map_from_composition_right() -> @kernel.Thm
+
+pub fn proper_map_from_composition_right_inj() -> @kernel.Thm
+
+pub fn proper_map_from_kification() -> @kernel.Thm
+
+pub fn proper_map_from_subtopology() -> @kernel.Thm
+
+pub fn proper_map_fst() -> @kernel.Thm
+
+pub fn proper_map_id() -> @kernel.Thm
+
+pub fn proper_map_imp_subset_topspace() -> @kernel.Thm
+
+pub fn proper_map_in_subtopology() -> @kernel.Thm
+
+pub fn proper_map_inclusion() -> @kernel.Thm
+
+pub fn proper_map_into_k_space() -> @kernel.Thm
+
+pub fn proper_map_into_k_space_eq() -> @kernel.Thm
+
+pub fn proper_map_into_subtopology() -> @kernel.Thm
+
+pub fn proper_map_on_empty() -> @kernel.Thm
+
+pub fn proper_map_paired() -> @kernel.Thm
+
+pub fn proper_map_paired_closed_map_left() -> @kernel.Thm
+
+pub fn proper_map_paired_closed_map_right() -> @kernel.Thm
+
+pub fn proper_map_paired_continuous_map_left() -> @kernel.Thm
+
+pub fn proper_map_paired_continuous_map_right() -> @kernel.Thm
+
+pub fn proper_map_pairwise() -> @kernel.Thm
+
+pub fn proper_map_prod() -> @kernel.Thm
+
+pub fn proper_map_restriction() -> @kernel.Thm
+
+pub fn proper_map_snd() -> @kernel.Thm
+
+pub fn quasi_component_as_connected_component_unions() -> @kernel.Thm
+
+pub fn quasi_component_in_quasi_components_of() -> @kernel.Thm
+
+pub fn quasi_component_in_topspace() -> @kernel.Thm
+
+pub fn quasi_component_nonseparated() -> @kernel.Thm
+
+pub fn quasi_component_of() -> @kernel.Thm
+
+pub fn quasi_component_of_alt() -> @kernel.Thm
+
+pub fn quasi_component_of_clopen_cases() -> @kernel.Thm
+
+pub fn quasi_component_of_continuous_image() -> @kernel.Thm
+
+pub fn quasi_component_of_discrete_topology() -> @kernel.Thm
+
+pub fn quasi_component_of_disjoint() -> @kernel.Thm
+
+pub fn quasi_component_of_eq() -> @kernel.Thm
+
+pub fn quasi_component_of_eq_empty() -> @kernel.Thm
+
+pub fn quasi_component_of_eq_overlap() -> @kernel.Thm
+
+pub fn quasi_component_of_equiv() -> @kernel.Thm
+
+pub fn quasi_component_of_mono() -> @kernel.Thm
+
+pub fn quasi_component_of_nonoverlap() -> @kernel.Thm
+
+pub fn quasi_component_of_overlap() -> @kernel.Thm
+
+pub fn quasi_component_of_refl() -> @kernel.Thm
+
+pub fn quasi_component_of_separated() -> @kernel.Thm
+
+pub fn quasi_component_of_set() -> @kernel.Thm
+
+pub fn quasi_component_of_subset_topspace() -> @kernel.Thm
+
+pub fn quasi_component_of_subtopology() -> @kernel.Thm
+
+pub fn quasi_component_of_sym() -> @kernel.Thm
+
+pub fn quasi_component_of_trans() -> @kernel.Thm
+
+pub fn quasi_component_of_v1() -> @kernel.Thm
+
+pub fn quasi_components_as_connected_components_unions() -> @kernel.Thm
+
+pub fn quasi_components_of() -> @kernel.Thm
+
+pub fn quasi_components_of_connected_space() -> @kernel.Thm
+
+pub fn quasi_components_of_discrete_topology() -> @kernel.Thm
+
+pub fn quasi_components_of_disjoint() -> @kernel.Thm
+
+pub fn quasi_components_of_empty_space() -> @kernel.Thm
+
+pub fn quasi_components_of_eq_empty() -> @kernel.Thm
+
+pub fn quasi_components_of_eq_sing() -> @kernel.Thm
+
+pub fn quasi_components_of_overlap() -> @kernel.Thm
+
+pub fn quasi_components_of_set() -> @kernel.Thm
+
+pub fn quasi_components_of_subset() -> @kernel.Thm
+
+pub fn quasi_components_of_subset_sing() -> @kernel.Thm
+
+pub fn quasi_eq_connected_component_of() -> @kernel.Thm
+
+pub fn quasi_eq_connected_component_of_eq() -> @kernel.Thm
+
+pub fn quasi_eq_connected_components_of() -> @kernel.Thm
+
+pub fn quasi_eq_connected_components_of_alt() -> @kernel.Thm
+
+pub fn quasi_eq_connected_components_of_inclusion() -> @kernel.Thm
+
+pub fn quasi_eq_connected_components_of_pointwise() -> @kernel.Thm
+
+pub fn quasi_eq_connected_components_of_pointwise_alt() -> @kernel.Thm
+
+pub fn quasi_subset_connected_components_of_pointwise() -> @kernel.Thm
+
+pub fn quotient_imp_continuous_map() -> @kernel.Thm
+
+pub fn quotient_imp_surjective_map() -> @kernel.Thm
+
+pub fn quotient_map() -> @kernel.Thm
+
+pub fn quotient_map_compose() -> @kernel.Thm
+
+pub fn quotient_map_compose_eq() -> @kernel.Thm
+
+pub fn quotient_map_eq() -> @kernel.Thm
+
+pub fn quotient_map_from_composition() -> @kernel.Thm
+
+pub fn quotient_map_fst() -> @kernel.Thm
+
+pub fn quotient_map_into_k_space() -> @kernel.Thm
+
+pub fn quotient_map_into_k_space_eq() -> @kernel.Thm
+
+pub fn quotient_map_kolmogorov_quotient() -> @kernel.Thm
+
+pub fn quotient_map_kolmogorov_quotient_gen() -> @kernel.Thm
+
+pub fn quotient_map_lift_exists() -> @kernel.Thm
+
+pub fn quotient_map_onto_image() -> @kernel.Thm
+
+pub fn quotient_map_prod() -> @kernel.Thm
+
+pub fn quotient_map_prod_left() -> @kernel.Thm
+
+pub fn quotient_map_prod_right() -> @kernel.Thm
+
+pub fn quotient_map_product_projection() -> @kernel.Thm
+
+pub fn quotient_map_restriction() -> @kernel.Thm
+
+pub fn quotient_map_saturated_closed() -> @kernel.Thm
+
+pub fn quotient_map_saturated_open() -> @kernel.Thm
+
+pub fn quotient_map_snd() -> @kernel.Thm
+
+pub fn quotient_map_v1() -> @kernel.Thm
+
+pub fn real_abs_mdist() -> @kernel.Thm
+
+pub fn real_bounded() -> @kernel.Thm
+
+pub fn real_bounded_pos() -> @kernel.Thm
+
+pub fn real_bounded_real_interval() -> @kernel.Thm
+
+pub fn real_bounded_shrink() -> @kernel.Thm
+
+pub fn real_closed() -> @kernel.Thm
+
+pub fn real_closed_contains_inf() -> @kernel.Thm
+
+pub fn real_closed_contains_sup() -> @kernel.Thm
+
+pub fn real_closed_diff() -> @kernel.Thm
+
+pub fn real_closed_empty() -> @kernel.Thm
+
+pub fn real_closed_halfspace_ge() -> @kernel.Thm
+
+pub fn real_closed_halfspace_le() -> @kernel.Thm
+
+pub fn real_closed_in() -> @kernel.Thm
+
+pub fn real_closed_inter() -> @kernel.Thm
+
+pub fn real_closed_inters() -> @kernel.Thm
+
+pub fn real_closed_real_interval() -> @kernel.Thm
+
+pub fn real_closed_sing() -> @kernel.Thm
+
+pub fn real_closed_union() -> @kernel.Thm
+
+pub fn real_closed_unions() -> @kernel.Thm
+
+pub fn real_closed_univ() -> @kernel.Thm
+
+pub fn real_compact_attains_inf() -> @kernel.Thm
+
+pub fn real_compact_attains_sup() -> @kernel.Thm
+
+pub fn real_compact_contains_inf() -> @kernel.Thm
+
+pub fn real_compact_contains_sup() -> @kernel.Thm
+
+pub fn real_compact_def() -> @kernel.Thm
+
+pub fn real_compact_eq_bounded_closed() -> @kernel.Thm
+
+pub fn real_compact_imp_bounded() -> @kernel.Thm
+
+pub fn real_compact_imp_closed() -> @kernel.Thm
+
+pub fn real_compact_interval() -> @kernel.Thm
+
+pub fn real_compact_is_realinterval() -> @kernel.Thm
+
+pub fn real_compact_union() -> @kernel.Thm
+
+pub fn real_euclidean_metric() -> @kernel.Thm
+
+pub fn real_euclidean_metric_v1() -> @kernel.Thm
+
+pub fn real_infsum() -> @kernel.Thm
+
+pub fn real_open() -> @kernel.Thm
+
+pub fn real_open_diff() -> @kernel.Thm
+
+pub fn real_open_empty() -> @kernel.Thm
+
+pub fn real_open_halfspace_gt() -> @kernel.Thm
+
+pub fn real_open_halfspace_lt() -> @kernel.Thm
+
+pub fn real_open_in() -> @kernel.Thm
+
+pub fn real_open_inter() -> @kernel.Thm
+
+pub fn real_open_inters() -> @kernel.Thm
+
+pub fn real_open_real_closed() -> @kernel.Thm
+
+pub fn real_open_real_interval() -> @kernel.Thm
+
+pub fn real_open_subreal_open() -> @kernel.Thm
+
+pub fn real_open_subset_closure_of_realinterval() -> @kernel.Thm
+
+pub fn real_open_subset_closure_of_realinterval_alt() -> @kernel.Thm
+
+pub fn real_open_union() -> @kernel.Thm
+
+pub fn real_open_unions() -> @kernel.Thm
+
+pub fn real_open_univ() -> @kernel.Thm
+
+pub fn real_series_from() -> @kernel.Thm
+
+pub fn real_series_le() -> @kernel.Thm
+
+pub fn real_sierpinski_lemma() -> @kernel.Thm
+
+pub fn real_summable() -> @kernel.Thm
+
+pub fn real_summable_cauchy() -> @kernel.Thm
+
+pub fn real_summable_comparison() -> @kernel.Thm
+
+pub fn real_sums() -> @kernel.Thm
+
+pub fn real_sums_infsum() -> @kernel.Thm
+
+pub fn real_sums_summable() -> @kernel.Thm
+
+pub fn reallim() -> @kernel.Thm
+
+pub fn reallim_const() -> @kernel.Thm
+
+pub fn reallim_lbound() -> @kernel.Thm
+
+pub fn reallim_le() -> @kernel.Thm
+
+pub fn reallim_sequentially() -> @kernel.Thm
+
+pub fn reallim_sub() -> @kernel.Thm
+
+pub fn reallim_ubound() -> @kernel.Thm
+
+pub fn regular_closed_in() -> @kernel.Thm
+
+pub fn regular_closure_of_imp_thin_frontier_of() -> @kernel.Thm
+
+pub fn regular_closure_of_interior_of() -> @kernel.Thm
+
+pub fn regular_closure_refinement_covers() -> @kernel.Thm
+
+pub fn regular_interior_of_closure_of() -> @kernel.Thm
+
+pub fn regular_interior_of_imp_thin_frontier_of() -> @kernel.Thm
+
+pub fn regular_lindelof_imp_normal_space() -> @kernel.Thm
+
+pub fn regular_lindelof_imp_paracompact_space() -> @kernel.Thm
+
+pub fn regular_open_in() -> @kernel.Thm
+
+pub fn regular_second_countable_hausdorff_imp_normal_space() -> @kernel.Thm
+
+pub fn regular_second_countable_imp_hereditarily_normal_space() -> @kernel.Thm
+
+pub fn regular_space() -> @kernel.Thm
+
+pub fn regular_space_alexandroff_compactification() -> @kernel.Thm
+
+pub fn regular_space_compact_closed_separation() -> @kernel.Thm
+
+pub fn regular_space_compact_closed_sets() -> @kernel.Thm
+
+pub fn regular_space_continuous_proper_map_image() -> @kernel.Thm
+
+pub fn regular_space_discrete_topology() -> @kernel.Thm
+
+pub fn regular_space_euclideanreal() -> @kernel.Thm
+
+pub fn regular_space_mtopology() -> @kernel.Thm
+
+pub fn regular_space_one_point_compactification() -> @kernel.Thm
+
+pub fn regular_space_perfect_map_image() -> @kernel.Thm
+
+pub fn regular_space_perfect_map_image_eq() -> @kernel.Thm
+
+pub fn regular_space_prod_topology() -> @kernel.Thm
+
+pub fn regular_space_product_topology() -> @kernel.Thm
+
+pub fn regular_space_retraction_map_image() -> @kernel.Thm
+
+pub fn regular_space_subtopology() -> @kernel.Thm
+
+pub fn regular_space_v1() -> @kernel.Thm
+
+pub fn regular_t0_eq_hausdorff_space() -> @kernel.Thm
+
+pub fn regular_t0_imp_hausdorff_space() -> @kernel.Thm
+
+pub fn regular_t1_eq_hausdorff_space() -> @kernel.Thm
+
+pub fn regular_t1_imp_hausdorff_space() -> @kernel.Thm
+
+pub fn restriction_continuous_map() -> @kernel.Thm
+
+pub fn retract_of_space() -> @kernel.Thm
+
+pub fn retract_of_space_clopen() -> @kernel.Thm
+
+pub fn retract_of_space_disjoint_union() -> @kernel.Thm
+
+pub fn retract_of_space_empty() -> @kernel.Thm
+
+pub fn retract_of_space_imp_closed_in() -> @kernel.Thm
+
+pub fn retract_of_space_imp_nonempty() -> @kernel.Thm
+
+pub fn retract_of_space_imp_subset() -> @kernel.Thm
+
+pub fn retract_of_space_kolmogorov_quotient_image() -> @kernel.Thm
+
+pub fn retract_of_space_retraction_maps() -> @kernel.Thm
+
+pub fn retract_of_space_section_map() -> @kernel.Thm
+
+pub fn retract_of_space_sing() -> @kernel.Thm
+
+pub fn retract_of_space_subtopology() -> @kernel.Thm
+
+pub fn retract_of_space_topspace() -> @kernel.Thm
+
+pub fn retract_of_space_trans() -> @kernel.Thm
+
+pub fn retraction_imp_continuous_map() -> @kernel.Thm
+
+pub fn retraction_imp_quotient_map() -> @kernel.Thm
+
+pub fn retraction_imp_surjective_map() -> @kernel.Thm
+
+pub fn retraction_map() -> @kernel.Thm
+
+pub fn retraction_map_compose() -> @kernel.Thm
+
+pub fn retraction_map_eq() -> @kernel.Thm
+
+pub fn retraction_map_fst() -> @kernel.Thm
+
+pub fn retraction_map_into_subtopology() -> @kernel.Thm
+
+pub fn retraction_map_kolmogorov_quotient() -> @kernel.Thm
+
+pub fn retraction_map_product_projection() -> @kernel.Thm
+
+pub fn retraction_map_snd() -> @kernel.Thm
+
+pub fn retraction_maps() -> @kernel.Thm
+
+pub fn retraction_maps_compose() -> @kernel.Thm
+
+pub fn retraction_maps_eq() -> @kernel.Thm
+
+pub fn retraction_maps_kolmogorov_quotient() -> @kernel.Thm
+
+pub fn retraction_maps_section_image() -> @kernel.Thm
+
+pub fn retraction_maps_subtopologies() -> @kernel.Thm
+
+pub fn retraction_maps_to_retract_maps() -> @kernel.Thm
+
+pub fn second_countable() -> @kernel.Thm
+
+pub fn second_countable_closed_map_image() -> @kernel.Thm
+
+pub fn second_countable_discrete_topology() -> @kernel.Thm
+
+pub fn second_countable_imp_first_countable() -> @kernel.Thm
+
+pub fn second_countable_imp_lindelof_space() -> @kernel.Thm
+
+pub fn second_countable_imp_separable_space() -> @kernel.Thm
+
+pub fn second_countable_locally_compact_hausdorff_imp_paracompact() -> @kernel.Thm
+
+pub fn second_countable_neighbourhood_base() -> @kernel.Thm
+
+pub fn second_countable_neighbourhood_base_alt() -> @kernel.Thm
+
+pub fn second_countable_open_map_image() -> @kernel.Thm
+
+pub fn second_countable_regular_imp_paracompact_space() -> @kernel.Thm
+
+pub fn second_countable_retraction_map_image() -> @kernel.Thm
+
+pub fn second_countable_subtopology() -> @kernel.Thm
+
+pub fn second_countable_v1() -> @kernel.Thm
+
+pub fn section_and_retraction_eq_homeomorphic_map() -> @kernel.Thm
+
+pub fn section_imp_continuous_map() -> @kernel.Thm
+
+pub fn section_imp_embedding_map() -> @kernel.Thm
+
+pub fn section_imp_injective_map() -> @kernel.Thm
+
+pub fn section_imp_monotone_map() -> @kernel.Thm
+
+pub fn section_map() -> @kernel.Thm
+
+pub fn section_map_compose() -> @kernel.Thm
+
+pub fn section_map_eq() -> @kernel.Thm
+
+pub fn semi_locally_connected_compact_space() -> @kernel.Thm
+
+pub fn semi_locally_connected_connected() -> @kernel.Thm
+
+pub fn semi_locally_connected_gen_space() -> @kernel.Thm
+
+pub fn separable_metrizable_imp_second_countable() -> @kernel.Thm
+
+pub fn separable_space() -> @kernel.Thm
+
+pub fn separable_space_continuous_map_image() -> @kernel.Thm
+
+pub fn separable_space_discrete_topology() -> @kernel.Thm
+
+pub fn separable_space_open_subset() -> @kernel.Thm
+
+pub fn separable_space_quotient_map_image() -> @kernel.Thm
+
+pub fn separable_space_retraction_map_image() -> @kernel.Thm
+
+pub fn separated_between() -> @kernel.Thm
+
+pub fn separated_between_alt() -> @kernel.Thm
+
+pub fn separated_between_closure_of() -> @kernel.Thm
+
+pub fn separated_between_closure_of_eq() -> @kernel.Thm
+
+pub fn separated_between_compact_connected_component() -> @kernel.Thm
+
+pub fn separated_between_compact_quasi_component() -> @kernel.Thm
+
+pub fn separated_between_empty() -> @kernel.Thm
+
+pub fn separated_between_eq_separated_in() -> @kernel.Thm
+
+pub fn separated_between_from_closed_subtopology() -> @kernel.Thm
+
+pub fn separated_between_from_closed_subtopology_frontier() -> @kernel.Thm
+
+pub fn separated_between_from_frontier_of_closed_subtopology() -> @kernel.Thm
+
+pub fn separated_between_frontier_of() -> @kernel.Thm
+
+pub fn separated_between_frontier_of_eq() -> @kernel.Thm
+
+pub fn separated_between_full() -> @kernel.Thm
+
+pub fn separated_between_imp_disjoint() -> @kernel.Thm
+
+pub fn separated_between_imp_separated_in() -> @kernel.Thm
+
+pub fn separated_between_imp_subset() -> @kernel.Thm
+
+pub fn separated_between_mono() -> @kernel.Thm
+
+pub fn separated_between_point_quasi_component() -> @kernel.Thm
+
+pub fn separated_between_pointwise_left() -> @kernel.Thm
+
+pub fn separated_between_pointwise_right() -> @kernel.Thm
+
+pub fn separated_between_quasi_component_compact() -> @kernel.Thm
+
+pub fn separated_between_quasi_component_point() -> @kernel.Thm
+
+pub fn separated_between_quasi_component_pointwise_left() -> @kernel.Thm
+
+pub fn separated_between_quasi_component_pointwise_right() -> @kernel.Thm
+
+pub fn separated_between_quasi_components() -> @kernel.Thm
+
+pub fn separated_between_refl() -> @kernel.Thm
+
+pub fn separated_between_sings() -> @kernel.Thm
+
+pub fn separated_between_sym() -> @kernel.Thm
+
+pub fn separated_between_union() -> @kernel.Thm
+
+pub fn separated_between_v1() -> @kernel.Thm
+
+pub fn separated_eq_distinguishable() -> @kernel.Thm
+
+pub fn separated_in() -> @kernel.Thm
+
+pub fn separated_in_closed_sets() -> @kernel.Thm
+
+pub fn separated_in_complement() -> @kernel.Thm
+
+pub fn separated_in_diffs() -> @kernel.Thm
+
+pub fn separated_in_discrete_topology() -> @kernel.Thm
+
+pub fn separated_in_empty() -> @kernel.Thm
+
+pub fn separated_in_full() -> @kernel.Thm
+
+pub fn separated_in_imp_disjoint() -> @kernel.Thm
+
+pub fn separated_in_mono() -> @kernel.Thm
+
+pub fn separated_in_open_sets() -> @kernel.Thm
+
+pub fn separated_in_refl() -> @kernel.Thm
+
+pub fn separated_in_sing() -> @kernel.Thm
+
+pub fn separated_in_subtopology() -> @kernel.Thm
+
+pub fn separated_in_sym() -> @kernel.Thm
+
+pub fn separated_in_union() -> @kernel.Thm
+
+pub fn separated_in_unions() -> @kernel.Thm
+
+pub fn separating_functions_injective() -> @kernel.Thm
+
+pub fn separation_by_closed_intermediates_count() -> @kernel.Thm
+
+pub fn separation_by_closed_intermediates_eq_count() -> @kernel.Thm
+
+pub fn separation_by_closed_intermediates_eq_gen() -> @kernel.Thm
+
+pub fn separation_by_closed_intermediates_gen() -> @kernel.Thm
+
+pub fn separation_closed_in_union_gen() -> @kernel.Thm
+
+pub fn separation_open_in_union_gen() -> @kernel.Thm
+
+pub fn sequentially() -> @kernel.Thm
+
+pub fn sequentially_closed_in_mcomplete_imp_mcomplete() -> @kernel.Thm
+
+pub fn sequentially_v1() -> @kernel.Thm
+
+pub fn sigma_locally_finite_imp_locally_finite_covering() -> @kernel.Thm
+
+pub fn sigma_locally_finite_in() -> @kernel.Thm
+
+pub fn subbase_subtopology_euclideanreal() -> @kernel.Thm
+
+pub fn submetric() -> @kernel.Thm
+
+pub fn submetric_mspace() -> @kernel.Thm
+
+pub fn submetric_prod_metric() -> @kernel.Thm
+
+pub fn submetric_restrict() -> @kernel.Thm
+
+pub fn submetric_submetric() -> @kernel.Thm
+
+pub fn submetric_univ() -> @kernel.Thm
+
+pub fn submetric_v1() -> @kernel.Thm
+
+pub fn subset_euclidean_space() -> @kernel.Thm
+
+pub fn subset_interior_of_eq() -> @kernel.Thm
+
+pub fn subtopology() -> @kernel.Thm
+
+pub fn subtopology_cartesian_product() -> @kernel.Thm
+
+pub fn subtopology_cross() -> @kernel.Thm
+
+pub fn subtopology_discrete_topology() -> @kernel.Thm
+
+pub fn subtopology_eq_discrete_topology() -> @kernel.Thm
+
+pub fn subtopology_eq_discrete_topology_empty() -> @kernel.Thm
+
+pub fn subtopology_eq_discrete_topology_eq() -> @kernel.Thm
+
+pub fn subtopology_eq_discrete_topology_finite() -> @kernel.Thm
+
+pub fn subtopology_eq_discrete_topology_gen() -> @kernel.Thm
+
+pub fn subtopology_eq_discrete_topology_gen_finite() -> @kernel.Thm
+
+pub fn subtopology_eq_discrete_topology_sing() -> @kernel.Thm
+
+pub fn subtopology_kification_compact() -> @kernel.Thm
+
+pub fn subtopology_kification_finer() -> @kernel.Thm
+
+pub fn subtopology_mspace() -> @kernel.Thm
+
+pub fn subtopology_nsphere_equator() -> @kernel.Thm
+
+pub fn subtopology_restrict() -> @kernel.Thm
+
+pub fn subtopology_subtopology() -> @kernel.Thm
+
+pub fn subtopology_sum_topology() -> @kernel.Thm
+
+pub fn subtopology_superset() -> @kernel.Thm
+
+pub fn subtopology_topspace() -> @kernel.Thm
+
+pub fn subtopology_univ() -> @kernel.Thm
+
+pub fn sum_topology() -> @kernel.Thm
+
+pub fn sum_twothirds() -> @kernel.Thm
+
+pub fn sup_metric_cartesian_product() -> @kernel.Thm
+
+pub fn surjective_embedding_map() -> @kernel.Thm
+
+pub fn surjective_retraction_or_section_map() -> @kernel.Thm
+
+pub fn surjective_section_eq_homeomorphic_map() -> @kernel.Thm
+
+pub fn t0_space() -> @kernel.Thm
+
+pub fn t0_space_alexandroff_compactification() -> @kernel.Thm
+
+pub fn t0_space_closure_of_sing() -> @kernel.Thm
+
+pub fn t0_space_discrete_topology() -> @kernel.Thm
+
+pub fn t0_space_expansive() -> @kernel.Thm
+
+pub fn t0_space_kolmogorov_quotient() -> @kernel.Thm
+
+pub fn t0_space_one_point_compactification() -> @kernel.Thm
+
+pub fn t0_space_prod_topology() -> @kernel.Thm
+
+pub fn t0_space_product_topology() -> @kernel.Thm
+
+pub fn t0_space_retraction_map_image() -> @kernel.Thm
+
+pub fn t0_space_subtopology() -> @kernel.Thm
+
+pub fn t0_space_v1() -> @kernel.Thm
+
+pub fn t1_eq_symmetric_t0_space() -> @kernel.Thm
+
+pub fn t1_eq_symmetric_t0_space_alt() -> @kernel.Thm
+
+pub fn t1_imp_t0_space() -> @kernel.Thm
+
+pub fn t1_or_hausdorff_space() -> @kernel.Thm
+
+pub fn t1_space() -> @kernel.Thm
+
+pub fn t1_space_alexandroff_compactification() -> @kernel.Thm
+
+pub fn t1_space_alt() -> @kernel.Thm
+
+pub fn t1_space_closed_in_finite() -> @kernel.Thm
+
+pub fn t1_space_closed_in_sing() -> @kernel.Thm
+
+pub fn t1_space_closed_map_image() -> @kernel.Thm
+
+pub fn t1_space_derived_set_of_finite() -> @kernel.Thm
+
+pub fn t1_space_derived_set_of_infinite_open_in() -> @kernel.Thm
+
+pub fn t1_space_derived_set_of_sing() -> @kernel.Thm
+
+pub fn t1_space_euclideanreal() -> @kernel.Thm
+
+pub fn t1_space_expansive() -> @kernel.Thm
+
+pub fn t1_space_inters_open_supersets() -> @kernel.Thm
+
+pub fn t1_space_mtopology() -> @kernel.Thm
+
+pub fn t1_space_one_point_compactification() -> @kernel.Thm
+
+pub fn t1_space_open_in_delete() -> @kernel.Thm
+
+pub fn t1_space_open_in_delete_alt() -> @kernel.Thm
+
+pub fn t1_space_perfect_map_image() -> @kernel.Thm
+
+pub fn t1_space_prod_topology() -> @kernel.Thm
+
+pub fn t1_space_product_topology() -> @kernel.Thm
+
+pub fn t1_space_retraction_map_image() -> @kernel.Thm
+
+pub fn t1_space_separated_in() -> @kernel.Thm
+
+pub fn t1_space_sing_inters_open() -> @kernel.Thm
+
+pub fn t1_space_subtopology() -> @kernel.Thm
+
+pub fn tendsto_real_def() -> @kernel.Thm
+
+pub fn tendsto_real_eps_delta() -> @kernel.Thm
+
+pub fn thin_frontier_of_cic() -> @kernel.Thm
+
+pub fn thin_frontier_of_ici() -> @kernel.Thm
+
+pub fn thin_frontier_of_subset() -> @kernel.Thm
+
+pub fn tietze_extension_closed_real_interval() -> @kernel.Thm
+
+pub fn tietze_extension_completely_regular() -> @kernel.Thm
+
+pub fn tietze_extension_realinterval() -> @kernel.Thm
+
+pub fn topcontinuous_at() -> @kernel.Thm
+
+pub fn topcontinuous_at_atpointof() -> @kernel.Thm
+
+pub fn topological_property_of_prod_component() -> @kernel.Thm
+
+pub fn topological_property_of_product_component() -> @kernel.Thm
+
+pub fn topological_property_of_sum_component() -> @kernel.Thm
+
+pub fn topology_base_unique() -> @kernel.Thm
+
+pub fn topology_bases_eq() -> @kernel.Thm
+
+pub fn topology_eq() -> @kernel.Thm
+
+pub fn topology_eq_alt() -> @kernel.Thm
+
+pub fn topology_finer_closed_id() -> @kernel.Thm
+
+pub fn topology_finer_closed_in() -> @kernel.Thm
+
+pub fn topology_finer_continuous_id() -> @kernel.Thm
+
+pub fn topology_finer_open_id() -> @kernel.Thm
+
+pub fn topology_finer_subtopology() -> @kernel.Thm
+
+pub fn topology_tybij() -> @kernel.Thm
+
+pub fn topology_tybij_th() -> @kernel.Thm
+
+pub fn topspace() -> @kernel.Thm
+
+pub fn topspace_alexandroff_compactification() -> @kernel.Thm
+
+pub fn topspace_alexandroff_compactification_delete() -> @kernel.Thm
+
+pub fn topspace_cantor_space() -> @kernel.Thm
+
+pub fn topspace_discrete_topology() -> @kernel.Thm
+
+pub fn topspace_euclidean_space() -> @kernel.Thm
+
+pub fn topspace_euclideanreal() -> @kernel.Thm
+
+pub fn topspace_euclideanreal_subtopology() -> @kernel.Thm
+
+pub fn topspace_kification() -> @kernel.Thm
+
+pub fn topspace_mtopology() -> @kernel.Thm
+
+pub fn topspace_prod_topology() -> @kernel.Thm
+
+pub fn topspace_product_topology() -> @kernel.Thm
+
+pub fn topspace_product_topology_alt() -> @kernel.Thm
+
+pub fn topspace_product_topology_empty() -> @kernel.Thm
+
+pub fn topspace_subbase() -> @kernel.Thm
+
+pub fn topspace_subtopology() -> @kernel.Thm
+
+pub fn topspace_subtopology_is_subset() -> @kernel.Thm
+
+pub fn topspace_subtopology_subset() -> @kernel.Thm
+
+pub fn topspace_sum_topology() -> @kernel.Thm
+
+pub fn totally_bounded_imp_discrete_finite() -> @kernel.Thm
+
+pub fn totally_bounded_in() -> @kernel.Thm
+
+pub fn totally_bounded_in_absolute() -> @kernel.Thm
+
+pub fn totally_bounded_in_cauchy_continuous_image() -> @kernel.Thm
+
+pub fn totally_bounded_in_cauchy_sequence() -> @kernel.Thm
+
+pub fn totally_bounded_in_closure_of() -> @kernel.Thm
+
+pub fn totally_bounded_in_closure_of_eq() -> @kernel.Thm
+
+pub fn totally_bounded_in_cross() -> @kernel.Thm
+
+pub fn totally_bounded_in_discrete_metric() -> @kernel.Thm
+
+pub fn totally_bounded_in_empty() -> @kernel.Thm
+
+pub fn totally_bounded_in_eq_compact_closure_of() -> @kernel.Thm
+
+pub fn totally_bounded_in_imp_mbounded() -> @kernel.Thm
+
+pub fn totally_bounded_in_imp_subset() -> @kernel.Thm
+
+pub fn totally_bounded_in_prod_metric() -> @kernel.Thm
+
+pub fn totally_bounded_in_sequentially() -> @kernel.Thm
+
+pub fn totally_bounded_in_sing() -> @kernel.Thm
+
+pub fn totally_bounded_in_submetric() -> @kernel.Thm
+
+pub fn totally_bounded_in_subset() -> @kernel.Thm
+
+pub fn totally_bounded_in_union() -> @kernel.Thm
+
+pub fn totally_bounded_in_unions() -> @kernel.Thm
+
+pub fn totally_bounded_ulc_space_imp_fccoverable_space() -> @kernel.Thm
+
+pub fn trivial_limit() -> @kernel.Thm
+
+pub fn trivial_limit_atpointof() -> @kernel.Thm
+
+pub fn trivial_limit_atpointof_within() -> @kernel.Thm
+
+pub fn trivial_limit_sequentially() -> @kernel.Thm
+
+pub fn trivial_limit_sequentially_within() -> @kernel.Thm
+
+pub fn tube_lemma_left() -> @kernel.Thm
+
+pub fn tube_lemma_right() -> @kernel.Thm
+
+pub fn twothirds_sums() -> @kernel.Thm
+
+pub fn ulc_space() -> @kernel.Thm
+
+pub fn ulc_space_imp_locally_connected_space() -> @kernel.Thm
+
+pub fn uniformly_continuous_imp_continuous_map() -> @kernel.Thm
+
+pub fn uniformly_continuous_map() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_compose() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_const() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_eq() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_extends_to_closure_of() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_extends_to_intermediate_closure_of() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_from_submetric() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_from_submetric_mono() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_fst() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_id() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_into_submetric() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_mdist() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_on_intermediate_closure() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_paired() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_pairwise() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_real_abs() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_real_add() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_real_const() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_real_div() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_real_inv() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_real_lmul() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_real_max() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_real_min() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_real_mul() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_real_neg() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_real_rmul() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_real_sub() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_sequentially() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_sequentially_alt() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_snd() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_sqrt() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_square_root() -> @kernel.Thm
+
+pub fn uniformly_continuous_map_sum() -> @kernel.Thm
+
+pub fn uniformly_imp_cauchy_continuous_map() -> @kernel.Thm
+
+pub fn union_interior_of_subset() -> @kernel.Thm
+
+pub fn unions_connected_components_of() -> @kernel.Thm
+
+pub fn unions_path_components_of() -> @kernel.Thm
+
+pub fn unions_quasi_components_of() -> @kernel.Thm
+
+pub fn urysohn_completely_regular_closed_compact() -> @kernel.Thm
+
+pub fn urysohn_completely_regular_compact_closed() -> @kernel.Thm
+
+pub fn urysohn_completely_regular_compact_closed_alt() -> @kernel.Thm
+
+pub fn urysohn_lemma() -> @kernel.Thm
+
+pub fn urysohn_lemma_alt() -> @kernel.Thm
+
+pub fn urysohn_metrization() -> @kernel.Thm
+
+pub fn urysohn_metrization_eq() -> @kernel.Thm
+
+pub fn wallace_theorem_prod_topology() -> @kernel.Thm
+
+pub fn weakly_hereditary_imp_retractive_property() -> @kernel.Thm
+
+pub fn weakly_locally_connected_at() -> @kernel.Thm
+
+pub fn weakly_locally_connected_at_v1() -> @kernel.Thm
+
+pub fn weakly_locally_path_connected_at() -> @kernel.Thm
+
+pub fn weakly_locally_path_connected_at_v1() -> @kernel.Thm
+
+pub fn weakly_locally_path_connected_imp_weakly_locally_connected_at() -> @kernel.Thm
+
+pub fn wellchained_elements() -> @kernel.Thm
+
+pub fn wellchained_inters() -> @kernel.Thm
+
+pub fn wellchained_sets() -> @kernel.Thm
+
+pub fn wilder_locally_compact_component_thm() -> @kernel.Thm
+
+pub fn within() -> @kernel.Thm
+
+pub fn within_v1() -> @kernel.Thm
+
+pub fn within_within() -> @kernel.Thm
+
+pub fn zero_dimensional_cantor_space() -> @kernel.Thm
+
+pub fn zero_dimensional_imp_completely_regular_space() -> @kernel.Thm
+
+pub fn zero_dimensional_imp_regular_space() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
