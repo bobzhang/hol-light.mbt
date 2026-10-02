@@ -257,11 +257,6 @@ def main():
     f = sys.argv[1]
     if not f.endswith(".ml"):
         f += ".ml"
-    if f in MV_ORDER:
-        # Multivariate files: loaded after their predecessor's chain, which
-        # tools/ocaml_ref/batch.py plans (the translator's own `needs` order
-        # would differ)
-        os.execvp("python3", ["python3", os.path.join(REF, "batch.py"), f])
     pkg0 = pkg_of(f)
     aside = os.path.join(REF, "_build", "pkg_" + pkg0.replace("/", "__"))
     # an interrupted earlier run left the package aside: put it back
@@ -269,6 +264,11 @@ def main():
         if os.path.exists(os.path.join(ROOT, pkg0)):
             sys.exit(f"both {pkg0} and {aside} exist; resolve by hand")
         os.rename(aside, os.path.join(ROOT, pkg0))
+    if f in MV_ORDER:
+        # Multivariate files: loaded after their predecessor's chain, which
+        # tools/ocaml_ref/batch.py plans (the translator's own `needs` order
+        # would differ)
+        os.execvp("python3", ["python3", os.path.join(REF, "batch.py"), f])
     alias0 = pkg0.split("/")[-1]
     gen0 = os.path.join(ROOT, pkg0, alias0 + ("_ml" if alias0.endswith("test") else "") + ".mbt")
     retranslating = os.path.exists(gen0)
