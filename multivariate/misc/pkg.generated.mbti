@@ -1,0 +1,404 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/misc"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn abs_square_eq_1() -> @kernel.Thm
+
+pub fn abs_square_le_1() -> @kernel.Thm
+
+pub fn abs_square_lt_1() -> @kernel.Thm
+
+pub fn approachable_lt_le() -> @kernel.Thm
+
+pub fn arbitrary_intersection_of_relative_to() -> @kernel.Thm
+
+pub fn arbitrary_union_of_nonempty_finite_intersection() -> @kernel.Thm
+
+pub fn arbitrary_union_of_relative_to() -> @kernel.Thm
+
+pub fn assert_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn back_and_forth() -> @kernel.Thm
+
+pub fn back_and_forth_2() -> @kernel.Thm
+
+pub fn back_and_forth_alt() -> @kernel.Thm
+
+pub fn card_eq_integer() -> @kernel.Thm
+
+pub fn card_eq_rational() -> @kernel.Thm
+
+pub fn card_suslin_eq() -> @kernel.Thm
+
+pub fn card_suslin_le() -> @kernel.Thm
+
+pub fn closed_real_interval() -> @kernel.Thm
+
+pub fn convergent_bounded_increasing() -> @kernel.Thm
+
+pub fn convergent_bounded_monotone() -> @kernel.Thm
+
+pub fn countable_integer() -> @kernel.Thm
+
+pub fn countable_integer_coordinates() -> @kernel.Thm
+
+pub fn countable_intersection_of_relative_to() -> @kernel.Thm
+
+pub fn countable_intersection_of_relative_to_alt() -> @kernel.Thm
+
+pub fn countable_local_maxima() -> @kernel.Thm
+
+pub fn countable_local_minima() -> @kernel.Thm
+
+pub fn countable_rational() -> @kernel.Thm
+
+pub fn countable_rational_coordinates() -> @kernel.Thm
+
+pub fn countable_strict_local_maxima() -> @kernel.Thm
+
+pub fn countable_strict_local_minima() -> @kernel.Thm
+
+pub fn countable_union_of_relative_to() -> @kernel.Thm
+
+pub fn empty_as_real_interval() -> @kernel.Thm
+
+pub fn ends_in_real_interval() -> @kernel.Thm
+
+pub fn ends_in_unit_real_interval() -> @kernel.Thm
+
+pub fn epsilon_delta_minimal() -> @kernel.Thm
+
+pub fn eq_trans_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn exists_diff() -> @kernel.Thm
+
+pub fn exists_matrify() -> @kernel.Thm
+
+pub fn exists_vectorize() -> @kernel.Thm
+
+pub fn finite_index_numseg_special() -> @kernel.Thm
+
+pub fn finite_inter_numseg() -> @kernel.Thm
+
+pub fn finite_intersection_of_relative_to() -> @kernel.Thm
+
+pub fn finite_intersection_of_relative_to_alt() -> @kernel.Thm
+
+pub fn finite_union_of_relative_to() -> @kernel.Thm
+
+pub fn forall_diff() -> @kernel.Thm
+
+pub fn forall_diff_alt() -> @kernel.Thm
+
+pub fn forall_diff_gen() -> @kernel.Thm
+
+pub fn forall_matrify() -> @kernel.Thm
+
+pub fn forall_pos_mono() -> @kernel.Thm
+
+pub fn forall_pos_mono_1() -> @kernel.Thm
+
+pub fn forall_pos_mono_1_eq() -> @kernel.Thm
+
+pub fn forall_pos_mono_eq() -> @kernel.Thm
+
+pub fn forall_relative_to() -> @kernel.Thm
+
+pub fn forall_suc() -> @kernel.Thm
+
+pub fn forall_vectorize() -> @kernel.Thm
+
+pub fn from() -> @kernel.Thm
+
+pub fn from_0() -> @kernel.Thm
+
+pub fn from_inter_numseg() -> @kernel.Thm
+
+pub fn from_inter_numseg_gen() -> @kernel.Thm
+
+pub fn from_inter_numseg_max() -> @kernel.Thm
+
+pub fn from_mono() -> @kernel.Thm
+
+pub fn from_nonempty() -> @kernel.Thm
+
+pub fn ge_refl() -> @kernel.Thm
+
+pub fn general_reduction_theorem() -> @kernel.Thm
+
+pub fn general_reduction_theorem_2() -> @kernel.Thm
+
+pub fn has_size_1_exists() -> @kernel.Thm
+
+pub fn horner_sum_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn hull() -> @kernel.Thm
+
+pub fn hull_antimono() -> @kernel.Thm
+
+pub fn hull_eq() -> @kernel.Thm
+
+pub fn hull_hull() -> @kernel.Thm
+
+pub fn hull_image() -> @kernel.Thm
+
+pub fn hull_image_galois() -> @kernel.Thm
+
+pub fn hull_image_subset() -> @kernel.Thm
+
+pub fn hull_inc() -> @kernel.Thm
+
+pub fn hull_induct() -> @kernel.Thm
+
+pub fn hull_insert() -> @kernel.Thm
+
+pub fn hull_inter_subset() -> @kernel.Thm
+
+pub fn hull_inters_subset() -> @kernel.Thm
+
+pub fn hull_minimal() -> @kernel.Thm
+
+pub fn hull_mono() -> @kernel.Thm
+
+pub fn hull_p() -> @kernel.Thm
+
+pub fn hull_p_and_q() -> @kernel.Thm
+
+pub fn hull_redundant() -> @kernel.Thm
+
+pub fn hull_redundant_eq() -> @kernel.Thm
+
+pub fn hull_subset() -> @kernel.Thm
+
+pub fn hull_union() -> @kernel.Thm
+
+pub fn hull_union_left() -> @kernel.Thm
+
+pub fn hull_union_right() -> @kernel.Thm
+
+pub fn hull_union_subset() -> @kernel.Thm
+
+pub fn hull_unions_subset() -> @kernel.Thm
+
+pub fn hull_unique() -> @kernel.Thm
+
+pub fn hull_univ() -> @kernel.Thm
+
+pub fn hulls_eq() -> @kernel.Thm
+
+pub fn in_from() -> @kernel.Thm
+
+pub fn in_real_interval() -> @kernel.Thm
+
+pub fn in_real_interval_reflect() -> @kernel.Thm
+
+pub fn infinite_enumerate_eq_alt() -> @kernel.Thm
+
+pub fn infinite_enumerate_weak() -> @kernel.Thm
+
+pub fn infinite_from() -> @kernel.Thm
+
+pub fn infinite_irrational_in_range() -> @kernel.Thm
+
+pub fn inter_real_interval() -> @kernel.Thm
+
+pub fn irrational_approximation() -> @kernel.Thm
+
+pub fn irrational_approximation_above() -> @kernel.Thm
+
+pub fn irrational_approximation_below() -> @kernel.Thm
+
+pub fn irrational_approximation_straddle() -> @kernel.Thm
+
+pub fn irrational_between() -> @kernel.Thm
+
+pub fn irrational_between_eq() -> @kernel.Thm
+
+pub fn is_hull() -> @kernel.Thm
+
+pub fn is_realinterval() -> @kernel.Thm
+
+pub fn is_realinterval_contains_interval() -> @kernel.Thm
+
+pub fn is_realinterval_empty() -> @kernel.Thm
+
+pub fn is_realinterval_inter() -> @kernel.Thm
+
+pub fn is_realinterval_interval() -> @kernel.Thm
+
+pub fn is_realinterval_shrink() -> @kernel.Thm
+
+pub fn is_realinterval_sing() -> @kernel.Thm
+
+pub fn is_realinterval_union() -> @kernel.Thm
+
+pub fn is_realinterval_univ() -> @kernel.Thm
+
+pub fn lambda_skolem() -> @kernel.Thm
+
+pub fn linear_equations_1_eq() -> @kernel.Thm
+
+pub fn linear_equations_2_eq() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn lower_bound_finite_set() -> @kernel.Thm
+
+pub fn lower_bound_finite_set_real() -> @kernel.Thm
+
+pub fn matrify() -> @kernel.Thm
+
+pub fn matrify_component() -> @kernel.Thm
+
+pub fn matrify_eq() -> @kernel.Thm
+
+pub fn matrify_vectorize() -> @kernel.Thm
+
+pub fn monotone_bigger() -> @kernel.Thm
+
+pub fn monotone_subsequence() -> @kernel.Thm
+
+pub fn open_real_interval() -> @kernel.Thm
+
+pub fn p_hull() -> @kernel.Thm
+
+pub fn real_arch_rdiv_eq_0() -> @kernel.Thm
+
+pub fn real_closed_open_interval() -> @kernel.Thm
+
+pub fn real_convex_sum_bound_le() -> @kernel.Thm
+
+pub fn real_convex_sum_bound_lt() -> @kernel.Thm
+
+pub fn real_half() -> @kernel.Thm
+
+pub fn real_interval() -> @kernel.Thm
+
+pub fn real_interval_eq_empty() -> @kernel.Thm
+
+pub fn real_interval_ne_empty() -> @kernel.Thm
+
+pub fn real_interval_open_subset_closed() -> @kernel.Thm
+
+pub fn real_interval_sing() -> @kernel.Thm
+
+pub fn real_le_between() -> @kernel.Thm
+
+pub fn real_let_between() -> @kernel.Thm
+
+pub fn real_lt_between() -> @kernel.Thm
+
+pub fn real_lt_between_gen() -> @kernel.Thm
+
+pub fn real_lte_between() -> @kernel.Thm
+
+pub fn real_non_monotone() -> @kernel.Thm
+
+pub fn real_open_closed_interval() -> @kernel.Thm
+
+pub fn recursion_on_dyadic_fractions() -> @kernel.Thm
+
+pub fn reflect_real_interval() -> @kernel.Thm
+
+pub fn relative_to() -> @kernel.Thm
+
+pub fn relative_to_compl() -> @kernel.Thm
+
+pub fn relative_to_imp_subset() -> @kernel.Thm
+
+pub fn relative_to_inc() -> @kernel.Thm
+
+pub fn relative_to_inter() -> @kernel.Thm
+
+pub fn relative_to_mono() -> @kernel.Thm
+
+pub fn relative_to_relative_to() -> @kernel.Thm
+
+pub fn relative_to_subset() -> @kernel.Thm
+
+pub fn relative_to_subset_inc() -> @kernel.Thm
+
+pub fn relative_to_subset_trans() -> @kernel.Thm
+
+pub fn relative_to_union() -> @kernel.Thm
+
+pub fn relative_to_univ() -> @kernel.Thm
+
+pub fn relative_to_v1() -> @kernel.Thm
+
+pub fn seq_mono_lemma() -> @kernel.Thm
+
+pub fn strictly_decreasing_alt() -> @kernel.Thm
+
+pub fn strictly_increasing_alt() -> @kernel.Thm
+
+pub fn subsequence_diagonalization_lemma() -> @kernel.Thm
+
+pub fn subsequence_imp_injective() -> @kernel.Thm
+
+pub fn subsequence_stepwise() -> @kernel.Thm
+
+pub fn subset_hull() -> @kernel.Thm
+
+pub fn subset_real_interval() -> @kernel.Thm
+
+pub fn sum_gp() -> @kernel.Thm
+
+pub fn sum_gp_basic() -> @kernel.Thm
+
+pub fn sum_gp_multiplied() -> @kernel.Thm
+
+pub fn sum_gp_offset() -> @kernel.Thm
+
+pub fn suslin() -> @kernel.Thm
+
+pub fn suslin_inc() -> @kernel.Thm
+
+pub fn suslin_inter() -> @kernel.Thm
+
+pub fn suslin_inters() -> @kernel.Thm
+
+pub fn suslin_mono() -> @kernel.Thm
+
+pub fn suslin_operation() -> @kernel.Thm
+
+pub fn suslin_regular() -> @kernel.Thm
+
+pub fn suslin_subset() -> @kernel.Thm
+
+pub fn suslin_superset() -> @kernel.Thm
+
+pub fn suslin_suslin() -> @kernel.Thm
+
+pub fn suslin_union() -> @kernel.Thm
+
+pub fn suslin_unions() -> @kernel.Thm
+
+pub fn triangle_lemma() -> @kernel.Thm
+
+pub fn upper_bound_finite_set() -> @kernel.Thm
+
+pub fn upper_bound_finite_set_real() -> @kernel.Thm
+
+pub fn vectorize() -> @kernel.Thm
+
+pub fn vectorize_component() -> @kernel.Thm
+
+pub fn vectorize_eq() -> @kernel.Thm
+
+pub fn vectorize_gspec() -> @kernel.Thm
+
+pub fn vectorize_matrify() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
