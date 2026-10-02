@@ -198,7 +198,7 @@ pub fn is_hidden(c : String) -> Bool {
 pub(all) enum Pretype {
   Utv(String) // user type variable
   Ptycon(String, List[Pretype]) // type constructor
-  Stv(Int) // system type variable
+  Stv(Int64) // system type variable (an OCaml int)
 } derive(Eq, Debug)
 
 ///|
@@ -249,12 +249,12 @@ pub fn preterm_of_term(tm : Term) -> Preterm {
 // ---------------------------------------------------------------------------
 
 ///|
-let tyv_num : Ref[Int] = Ref::{ val: 0, }
+let tyv_num : Ref[Int64] = Ref::{ val: 0, }
 
 ///|
 fn new_type_var() -> Pretype {
   let n = tyv_num.val
-  tyv_num.val = n + 1
+  tyv_num.val = @lib.add63(n, 1L)
   Stv(n)
 }
 
@@ -337,7 +337,7 @@ fn get_var_type(vname : String) -> HolType raise {
 }
 
 ///|
-type Env = @lib.Func[Int, Pretype]
+type Env = @lib.Func[Int64, Pretype]
 
 ///|
 fn solve(env : Env, pty : Pretype) -> Pretype {
@@ -353,8 +353,8 @@ fn solve(env : Env, pty : Pretype) -> Pretype {
 }
 
 ///|
-fn free_stvs(ty : Pretype) -> List[Int] {
-  fn go(ty : Pretype) -> List[Int] {
+fn free_stvs(ty : Pretype) -> List[Int64] {
+  fn go(ty : Pretype) -> List[Int64] {
     match ty {
       Stv(n) => @list.singleton(n)
       Utv(_) => @list.empty()
@@ -366,7 +366,7 @@ fn free_stvs(ty : Pretype) -> List[Int] {
 }
 
 ///|
-fn string_of_pretype(stvs : List[Int], ty : Pretype) -> String raise {
+fn string_of_pretype(stvs : List[Int64], ty : Pretype) -> String raise {
   fn conv(ty : Pretype) -> HolType raise {
     match ty {
       Stv(n) =>
@@ -448,7 +448,7 @@ fn string_of_ty_error(env : Env, err : TyError) -> String raise {
 }
 
 ///|
-fn istrivial(err : TyError, env : Env, x : Int, ty : Pretype) -> Bool raise {
+fn istrivial(err : TyError, env : Env, x : Int64, ty : Pretype) -> Bool raise {
   match ty {
     Stv(y) =>
       y == x ||
@@ -814,6 +814,6 @@ pub extend Preterm with @lib.OCompare::{ocompare}
 
 ///|
 /// The type-variable counter (for differential tests of load order).
-pub fn type_var_counter() -> Int {
+pub fn type_var_counter() -> Int64 {
   tyv_num.val
 }

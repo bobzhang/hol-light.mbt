@@ -987,6 +987,10 @@ module Lower = struct
     | Tpat_alias (q, id, _) ->
         let s = pattern ?mty q in
         s ^ " as " ^ bind_local id (match mty with Some t -> t | None -> mty_of p.pat_type)
+    | Tpat_constant (Asttypes.Const_int n) when mty = Some (M.Named ("Int", [])) ->
+        (* a scrutinee of a hand-ported `Int` (e.g. an adapted callback
+           parameter) *)
+        if n < 0 then "(" ^ string_of_int n ^ ")" else string_of_int n
     | Tpat_constant c -> const loc c
     | Tpat_tuple ps ->
         let mtys =
@@ -1537,6 +1541,15 @@ module Lower = struct
     | None -> let ss, x, _ = lower a in (ss, x)
 
   and lower_prim ?expect whole name f args =
+    match name, args with
+    | ("fst" | "snd"), [ a ] ->
+        (* the component's own type (an `Int` of a hand-ported tuple is
+           widened by `lower`) *)
+        let i = if name = "fst" then 0 else 1 in
+        let ss, x, t = lower a in
+        let comp = match t with M.Tuple ts when List.length ts = 2 -> List.nth ts i | _ -> mty_of whole.exp_type in
+        adapt_to ?expect (ss, Field (x, i), comp)
+    | _ ->
     let loc = whole.exp_loc in
     let arity, mk =
       match name with

@@ -52,7 +52,7 @@ pub let type_invention_warning : @ref.Ref[Bool]
 
 pub fn type_of_pretype(Pretype) -> @kernel.HolType raise
 
-pub fn type_var_counter() -> Int
+pub fn type_var_counter() -> Int64
 
 pub fn unhide_constant(String) -> Unit
 
@@ -75,7 +75,7 @@ pub impl @lib.OCompare for Preterm
 pub(all) enum Pretype {
   Utv(String)
   Ptycon(String, @list.List[Pretype])
-  Stv(Int)
+  Stv(Int64)
 } derive(Eq, @debug.Debug)
 pub fn Pretype::equal(Self, Self) -> Bool
 pub fn Pretype::not_equal(Self, Self) -> Bool

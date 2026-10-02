@@ -308,7 +308,14 @@ test "lib matches lib.ml" {
     sl(@lib.explode("a b")) + @lib.implode(@list.List(["x", "y"]))
   })
   r.tr("gcd", () => {
-    il(l([@lib.gcd(12, 18), @lib.gcd(-12, 18), @lib.gcd(0, 0), @lib.gcd(7, 0)]))
+    il(
+      @list.List([
+        @lib.gcd(12, 18),
+        @lib.gcd(-12, 18),
+        @lib.gcd(0, 0),
+        @lib.gcd(7, 0),
+      ]),
+    )
   })
   r.tr("repeat", () => {
     si(@lib.repeat(x => if x > 10 { @lib.failwith("s") } else { x * 2 }, 1))

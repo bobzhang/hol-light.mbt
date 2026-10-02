@@ -1619,7 +1619,7 @@ pub fn ants_tac(g : Goal) -> Goalstate raise {
 
 ///|
 /// Max boxes for printing hypotheses (`None`: the formatter's setting).
-pub let print_goal_hyp_max_boxes : Ref[Int?] = Ref::{ val: None, }
+pub let print_goal_hyp_max_boxes : Ref[Int64?] = Ref::{ val: None, }
 
 ///|
 fn string_of_int3(n : Int) -> String {
@@ -1654,7 +1654,7 @@ fn print_goal_gen(color : Bool, fmt : Formatter, g : Goal) -> Unit raise {
       let old_max_boxes = fmt.get_max_boxes()
       match print_goal_hyp_max_boxes.val {
         None => ()
-        Some(hb) => fmt.set_max_boxes(hb)
+        Some(hb) => fmt.set_max_boxes(@lib.int63_to_int(hb))
       }
       qterm(@kernel.concl(th))
       fmt.set_max_boxes(old_max_boxes)
