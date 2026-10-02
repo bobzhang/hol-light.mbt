@@ -16,8 +16,8 @@ test "Multivariate/metric matches Multivariate/metric.ml" {
       "metis", "thecops", "quot", "impconv", "pair", "compute", "nums", "recursion",
       "arith", "wf", "calc_num", "normalizer", "grobner", "ind_types", "lists", "realax",
       "calc_int", "realarith", "real", "calc_rat", "int", "sets", "iterate", "cart",
-      "define", "Library/products", "Library/wo", "Library/card", "Library/floor",
-      "Multivariate/misc", "Library/iter", "Multivariate/metric",
+      "define", "Library/wo", "Library/card", "Library/floor", "Multivariate/misc",
+      "Library/products", "Library/iter", "Multivariate/metric",
     ] {
     log.show_theory_output(th)
   }
@@ -12019,130 +12019,6 @@ test "Multivariate/metric matches Multivariate/metric.ml" {
       #|0..0..0..solved at 3
       #|Warning: inventing type variables
       #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|0..0..1..4..13..29..64..122..204..solved at 247
-      #|Warning: inventing type variables
-      #|0..0..1..solved at 5
-      #|0..0..1..solved at 5
-      #|0..0..solved at 2
-      #|0..0..2..solved at 7
-      #|0..0..2..solved at 8
-      #|0..0..2..solved at 7
-      #|0..0..solved at 2
-      #|0..0..3..solved at 9
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|0..0..3..solved at 6
-      #|0..0..2..4..7..solved at 17
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|0..0..2..4..solved at 8
-      #|0..0..1..2..7..14..21..solved at 28
-      #|0..0..3..6..solved at 10
-      #|0..0..2..4..8..26..55..85..141..solved at 150
-      #|1 basis elements and 0 critical pairs
-      #|3 basis elements and 0 critical pairs
-      #|1 basis elements and 0 critical pairs
-      #|Translating certificate to HOL inferences
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|0..0..solved at 2
-      #|0..0..solved at 3
-      #|0..0..solved at 2
-      #|0..0..2..4..7..19..solved at 33
-      #|0..0..1..2..3..10..solved at 17
-      #|0..0..2..4..7..19..solved at 33
-      #|0..0..1..2..3..10..solved at 16
-      #|0..0..3..6..17..36..64..solved at 95
-      #|0..0..2..4..13..27..47..solved at 60
-      #|0..0..solved at 3
-      #|0..0..solved at 2
-      #|Warning: inventing type variables
-      #|0..0..1..solved at 4
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|0..0..1..4..13..29..64..122..204..solved at 247
-      #|Warning: inventing type variables
-      #|0..0..1..solved at 5
-      #|0..0..1..solved at 5
-      #|0..0..solved at 2
-      #|0..0..2..solved at 7
-      #|0..0..2..solved at 8
-      #|0..0..2..solved at 7
-      #|0..0..solved at 2
-      #|0..0..3..solved at 9
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|0..0..3..solved at 6
-      #|0..0..3..solved at 6
-      #|0..0..2..4..6..14..26..40..57..77..98..142..190..245..338..solved at 450
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|0..0..2..4..solved at 8
-      #|0..0..1..2..7..14..21..solved at 28
-      #|0..0..3..6..solved at 10
-      #|0..0..2..4..8..26..55..85..141..solved at 150
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|0..0..1..4..13..29..64..122..204..solved at 247
-      #|Warning: inventing type variables
-      #|0..0..1..solved at 5
-      #|0..0..1..solved at 5
-      #|0..0..solved at 2
-      #|0..0..2..solved at 7
-      #|0..0..2..solved at 8
-      #|0..0..2..solved at 7
-      #|0..0..solved at 2
-      #|0..0..3..solved at 9
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|0..0..3..solved at 6
-      #|0..0..3..solved at 6
-      #|0..0..2..4..6..14..26..40..57..77..98..142..190..245..338..solved at 450
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|0..0..2..4..solved at 8
-      #|0..0..1..2..7..14..21..solved at 28
-      #|0..0..3..6..solved at 10
-      #|0..0..2..4..8..26..55..85..141..solved at 150
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
-      #|Warning: inventing type variables
       #|0..0..solved at 2
       #|0..0..solved at 2
       #|0..0..solved at 2
@@ -15518,6 +15394,130 @@ test "Multivariate/metric matches Multivariate/metric.ml" {
       #|0..0..0..2..4..8..solved at 16
       #|0..0..2..solved at 5
       #|0..0..3..solved at 6
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|0..0..1..4..13..29..64..122..204..solved at 247
+      #|Warning: inventing type variables
+      #|0..0..1..solved at 5
+      #|0..0..1..solved at 5
+      #|0..0..solved at 2
+      #|0..0..2..solved at 7
+      #|0..0..2..solved at 8
+      #|0..0..2..solved at 7
+      #|0..0..solved at 2
+      #|0..0..3..solved at 9
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|0..0..3..solved at 6
+      #|0..0..2..4..7..solved at 17
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|0..0..2..4..solved at 8
+      #|0..0..1..2..7..14..21..solved at 28
+      #|0..0..3..6..solved at 10
+      #|0..0..2..4..8..26..55..85..141..solved at 150
+      #|1 basis elements and 0 critical pairs
+      #|3 basis elements and 0 critical pairs
+      #|1 basis elements and 0 critical pairs
+      #|Translating certificate to HOL inferences
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|0..0..solved at 2
+      #|0..0..solved at 3
+      #|0..0..solved at 2
+      #|0..0..2..4..7..19..solved at 33
+      #|0..0..1..2..3..10..solved at 17
+      #|0..0..2..4..7..19..solved at 33
+      #|0..0..1..2..3..10..solved at 16
+      #|0..0..3..6..17..36..64..solved at 95
+      #|0..0..2..4..13..27..47..solved at 60
+      #|0..0..solved at 3
+      #|0..0..solved at 2
+      #|Warning: inventing type variables
+      #|0..0..1..solved at 4
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|0..0..1..4..13..29..64..122..204..solved at 247
+      #|Warning: inventing type variables
+      #|0..0..1..solved at 5
+      #|0..0..1..solved at 5
+      #|0..0..solved at 2
+      #|0..0..2..solved at 7
+      #|0..0..2..solved at 8
+      #|0..0..2..solved at 7
+      #|0..0..solved at 2
+      #|0..0..3..solved at 9
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|0..0..3..solved at 6
+      #|0..0..3..solved at 6
+      #|0..0..2..4..6..14..26..40..57..77..98..142..190..245..338..solved at 450
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|0..0..2..4..solved at 8
+      #|0..0..1..2..7..14..21..solved at 28
+      #|0..0..3..6..solved at 10
+      #|0..0..2..4..8..26..55..85..141..solved at 150
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|0..0..1..4..13..29..64..122..204..solved at 247
+      #|Warning: inventing type variables
+      #|0..0..1..solved at 5
+      #|0..0..1..solved at 5
+      #|0..0..solved at 2
+      #|0..0..2..solved at 7
+      #|0..0..2..solved at 8
+      #|0..0..2..solved at 7
+      #|0..0..solved at 2
+      #|0..0..3..solved at 9
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|0..0..3..solved at 6
+      #|0..0..3..solved at 6
+      #|0..0..2..4..6..14..26..40..57..77..98..142..190..245..338..solved at 450
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|0..0..2..4..solved at 8
+      #|0..0..1..2..7..14..21..solved at 28
+      #|0..0..3..6..solved at 10
+      #|0..0..2..4..8..26..55..85..141..solved at 150
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|Warning: inventing type variables
       #|Warning: inventing type variables

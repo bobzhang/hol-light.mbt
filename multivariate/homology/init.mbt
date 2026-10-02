@@ -10,6 +10,7 @@ pub fn load() -> Unit {
     return
   }
   loaded.val = true
+  @metric.load()
   @frag.load()
   @grouptheory.load()
   @metric.load()

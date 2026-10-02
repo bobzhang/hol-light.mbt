@@ -10,6 +10,7 @@ pub fn load() -> Unit {
     return
   }
   loaded.val = true
+  @misc.load()
   @products.load()
   @misc.load()
   @iter.load()

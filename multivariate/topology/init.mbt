@@ -10,6 +10,7 @@ pub fn load() -> Unit {
     return
   }
   loaded.val = true
+  @determinants.load()
   @card.load()
   @iter.load()
   @metric.load()

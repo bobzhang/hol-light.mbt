@@ -11,6 +11,7 @@ pub fn load() -> Unit {
   }
   loaded.val = true
   @vectors.load()
+  @vectors.load()
   @permutations.load()
   @floor.load()
   @products.load()

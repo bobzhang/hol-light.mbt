@@ -40,11 +40,15 @@
 #use "define.ml";;
 #use "Library/wo.ml";;
 #use "Library/card.ml";;
-#use "Library/iter.ml";;
-#use "Library/products.ml";;
 #use "Library/floor.ml";;
 #use "Multivariate/misc.ml";;
+#use "Library/products.ml";;
+#use "Library/iter.ml";;
 #use "Multivariate/metric.ml";;
+#use "Library/frag.ml";;
+#use "Library/prime.ml";;
+#use "Library/grouptheory.ml";;
+#use "Multivariate/homology.ml";;
 #use "Library/matroids.ml";;
 #use "Multivariate/vectors.ml";;
 #use "Library/permutations.ml";;

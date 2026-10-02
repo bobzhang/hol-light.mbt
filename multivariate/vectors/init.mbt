@@ -10,6 +10,7 @@ pub fn load() -> Unit {
     return
   }
   loaded.val = true
+  @homology.load()
   @matroids.load()
   @misc.load()
   @parser.begin_theory("Multivariate/vectors")

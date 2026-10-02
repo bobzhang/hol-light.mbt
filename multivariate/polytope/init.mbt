@@ -11,6 +11,7 @@ pub fn load() -> Unit {
   }
   loaded.val = true
   @paths.load()
+  @paths.load()
   @parser.begin_theory("Multivariate/polytope")
   load_steps() catch {
     e =>

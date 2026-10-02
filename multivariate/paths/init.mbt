@@ -10,6 +10,7 @@ pub fn load() -> Unit {
     return
   }
   loaded.val = true
+  @convex.load()
   @homology.load()
   @convex.load()
   @parser.begin_theory("Multivariate/paths")

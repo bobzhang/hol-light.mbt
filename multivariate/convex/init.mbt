@@ -11,6 +11,7 @@ pub fn load() -> Unit {
   }
   loaded.val = true
   @topology.load()
+  @topology.load()
   @parser.begin_theory("Multivariate/convex")
   load_steps() catch {
     e =>

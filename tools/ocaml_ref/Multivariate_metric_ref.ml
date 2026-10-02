@@ -38,11 +38,11 @@
 #use "iterate.ml";;
 #use "cart.ml";;
 #use "define.ml";;
-#use "Library/products.ml";;
 #use "Library/wo.ml";;
 #use "Library/card.ml";;
 #use "Library/floor.ml";;
 #use "Multivariate/misc.ml";;
+#use "Library/products.ml";;
 #use "Library/iter.ml";;
 start_trace ();;
 #use "Multivariate/metric.ml";;
