@@ -11,12 +11,13 @@
 
 ///|
 /// A finite partial function from `K` to `V`. Read-only outside this
-/// package so that only the operations below build trees.
+/// package so that only the operations below build trees. Equality is
+/// structural, as OCaml's `=` on the same trees.
 pub enum Func[K, V] {
   Empty
   Leaf(Int, @list.List[(K, V)])
   Branch(Int, Int, Func[K, V], Func[K, V])
-}
+} derive(Eq)
 
 ///|
 /// The everywhere-undefined function.
