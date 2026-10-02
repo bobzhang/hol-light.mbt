@@ -1,0 +1,741 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/polytope"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn aff_dim_simplex() -> @kernel.Thm
+
+pub fn affine_hull_face_of_disjoint_relative_interior() -> @kernel.Thm
+
+pub fn affine_imp_polyhedron() -> @kernel.Thm
+
+pub fn card_faces_of_simplex() -> @kernel.Thm
+
+pub fn cell_complex_disjoint_relative_interiors() -> @kernel.Thm
+
+pub fn cell_complex_subdivision_exists() -> @kernel.Thm
+
+pub fn choose_polytope() -> @kernel.Thm
+
+pub fn choose_simplex() -> @kernel.Thm
+
+pub fn choose_surrounding_simplex() -> @kernel.Thm
+
+pub fn choose_surrounding_simplex_full() -> @kernel.Thm
+
+pub fn closed_conic_hull() -> @kernel.Thm
+
+pub fn closed_conic_hull_strong() -> @kernel.Thm
+
+pub fn closed_convex_cone_hull() -> @kernel.Thm
+
+pub fn closed_convex_cone_hull_strong() -> @kernel.Thm
+
+pub fn closed_extreme_points_2d() -> @kernel.Thm
+
+pub fn closed_in_conic_hull() -> @kernel.Thm
+
+pub fn closure_conic_hull() -> @kernel.Thm
+
+pub fn collinear_extreme_points() -> @kernel.Thm
+
+pub fn conic_closure() -> @kernel.Thm
+
+pub fn conic_hull_diff() -> @kernel.Thm
+
+pub fn conic_hull_inter() -> @kernel.Thm
+
+pub fn conic_hull_relative_frontier() -> @kernel.Thm
+
+pub fn conic_hull_relative_interior() -> @kernel.Thm
+
+pub fn conic_hull_relative_interior_subset() -> @kernel.Thm
+
+pub fn conic_interior() -> @kernel.Thm
+
+pub fn conic_interior_insert() -> @kernel.Thm
+
+pub fn conic_relative_interior() -> @kernel.Thm
+
+pub fn conic_relative_interior_insert() -> @kernel.Thm
+
+pub fn conic_subset_as_conic_hull() -> @kernel.Thm
+
+pub fn convex_facial_partition() -> @kernel.Thm
+
+pub fn convex_hull_insert_redundant_point() -> @kernel.Thm
+
+pub fn convex_hull_redundant_point() -> @kernel.Thm
+
+pub fn convex_hull_redundant_subset() -> @kernel.Thm
+
+pub fn convex_hull_redundant_subset_gen() -> @kernel.Thm
+
+pub fn convex_hull_redundant_subset_rev() -> @kernel.Thm
+
+pub fn convex_inner_approximation() -> @kernel.Thm
+
+pub fn convex_inner_polytope() -> @kernel.Thm
+
+pub fn convex_outer_approximation() -> @kernel.Thm
+
+pub fn convex_outer_polytope() -> @kernel.Thm
+
+pub fn convex_relative_boundary_subset_of_proper_face() -> @kernel.Thm
+
+pub fn convex_symdiff_close_to_frontier() -> @kernel.Thm
+
+pub fn convex_unions_fulldim_cells() -> @kernel.Thm
+
+pub fn edge_of() -> @kernel.Thm
+
+pub fn edge_of_imp_subset() -> @kernel.Thm
+
+pub fn edge_of_linear_image() -> @kernel.Thm
+
+pub fn edge_of_translation_eq() -> @kernel.Thm
+
+pub fn empty_exposed_face_of() -> @kernel.Thm
+
+pub fn empty_face_of() -> @kernel.Thm
+
+pub fn exposed_face_of() -> @kernel.Thm
+
+pub fn exposed_face_of_imp_face_of() -> @kernel.Thm
+
+pub fn exposed_face_of_inter() -> @kernel.Thm
+
+pub fn exposed_face_of_inter_supporting_hyperplane_ge() -> @kernel.Thm
+
+pub fn exposed_face_of_inter_supporting_hyperplane_le() -> @kernel.Thm
+
+pub fn exposed_face_of_inters() -> @kernel.Thm
+
+pub fn exposed_face_of_linear_image() -> @kernel.Thm
+
+pub fn exposed_face_of_parallel() -> @kernel.Thm
+
+pub fn exposed_face_of_polyhedron() -> @kernel.Thm
+
+pub fn exposed_face_of_refl() -> @kernel.Thm
+
+pub fn exposed_face_of_refl_eq() -> @kernel.Thm
+
+pub fn exposed_face_of_sums() -> @kernel.Thm
+
+pub fn exposed_face_of_translation_eq() -> @kernel.Thm
+
+pub fn exposed_face_of_v1() -> @kernel.Thm
+
+pub fn exposed_facet_of() -> @kernel.Thm
+
+pub fn exposed_point_of_furthest_point() -> @kernel.Thm
+
+pub fn exposed_point_of_inter_supporting_hyperplane_ge() -> @kernel.Thm
+
+pub fn exposed_point_of_inter_supporting_hyperplane_le() -> @kernel.Thm
+
+pub fn extreme_point_exists_convex() -> @kernel.Thm
+
+pub fn extreme_point_in_frontier() -> @kernel.Thm
+
+pub fn extreme_point_in_relative_frontier() -> @kernel.Thm
+
+pub fn extreme_point_not_in_interior() -> @kernel.Thm
+
+pub fn extreme_point_not_in_relative_interior() -> @kernel.Thm
+
+pub fn extreme_point_of() -> @kernel.Thm
+
+pub fn extreme_point_of_cball() -> @kernel.Thm
+
+pub fn extreme_point_of_conic() -> @kernel.Thm
+
+pub fn extreme_point_of_conic_hull() -> @kernel.Thm
+
+pub fn extreme_point_of_convex_hull() -> @kernel.Thm
+
+pub fn extreme_point_of_convex_hull_2() -> @kernel.Thm
+
+pub fn extreme_point_of_convex_hull_affine_independent() -> @kernel.Thm
+
+pub fn extreme_point_of_convex_hull_convex_independent() -> @kernel.Thm
+
+pub fn extreme_point_of_convex_hull_eq() -> @kernel.Thm
+
+pub fn extreme_point_of_convex_hull_insert() -> @kernel.Thm
+
+pub fn extreme_point_of_convex_hull_insert_eq() -> @kernel.Thm
+
+pub fn extreme_point_of_empty() -> @kernel.Thm
+
+pub fn extreme_point_of_face() -> @kernel.Thm
+
+pub fn extreme_point_of_inter() -> @kernel.Thm
+
+pub fn extreme_point_of_inter_gen() -> @kernel.Thm
+
+pub fn extreme_point_of_inter_supporting_hyperplane_ge() -> @kernel.Thm
+
+pub fn extreme_point_of_inter_supporting_hyperplane_le() -> @kernel.Thm
+
+pub fn extreme_point_of_linear_image() -> @kernel.Thm
+
+pub fn extreme_point_of_midpoint() -> @kernel.Thm
+
+pub fn extreme_point_of_segment() -> @kernel.Thm
+
+pub fn extreme_point_of_sing() -> @kernel.Thm
+
+pub fn extreme_point_of_stillconvex() -> @kernel.Thm
+
+pub fn extreme_point_of_stillconvex_imp() -> @kernel.Thm
+
+pub fn extreme_point_of_translation_eq() -> @kernel.Thm
+
+pub fn extreme_point_relative_frontier() -> @kernel.Thm
+
+pub fn extreme_points_of_convex_hull() -> @kernel.Thm
+
+pub fn extreme_points_of_convex_hull_affine_independent() -> @kernel.Thm
+
+pub fn extreme_points_of_convex_hull_eq() -> @kernel.Thm
+
+pub fn extreme_points_of_linear_image() -> @kernel.Thm
+
+pub fn extreme_points_of_stillconvex() -> @kernel.Thm
+
+pub fn extreme_points_of_translation() -> @kernel.Thm
+
+pub fn face_of() -> @kernel.Thm
+
+pub fn face_of_aff_dim_0() -> @kernel.Thm
+
+pub fn face_of_aff_dim_lt() -> @kernel.Thm
+
+pub fn face_of_affine_eq() -> @kernel.Thm
+
+pub fn face_of_affine_trivial() -> @kernel.Thm
+
+pub fn face_of_conic() -> @kernel.Thm
+
+pub fn face_of_conic_hull() -> @kernel.Thm
+
+pub fn face_of_conic_hull_eq() -> @kernel.Thm
+
+pub fn face_of_conic_hull_rev() -> @kernel.Thm
+
+pub fn face_of_convex_hull_affine_independent() -> @kernel.Thm
+
+pub fn face_of_convex_hull_insert() -> @kernel.Thm
+
+pub fn face_of_convex_hull_insert_eq() -> @kernel.Thm
+
+pub fn face_of_convex_hull_subset() -> @kernel.Thm
+
+pub fn face_of_convex_hulls() -> @kernel.Thm
+
+pub fn face_of_disjoint_interior() -> @kernel.Thm
+
+pub fn face_of_disjoint_relative_interior() -> @kernel.Thm
+
+pub fn face_of_empty() -> @kernel.Thm
+
+pub fn face_of_eq() -> @kernel.Thm
+
+pub fn face_of_face() -> @kernel.Thm
+
+pub fn face_of_halfspace_ge() -> @kernel.Thm
+
+pub fn face_of_halfspace_le() -> @kernel.Thm
+
+pub fn face_of_imp_closed() -> @kernel.Thm
+
+pub fn face_of_imp_compact() -> @kernel.Thm
+
+pub fn face_of_imp_convex() -> @kernel.Thm
+
+pub fn face_of_imp_subset() -> @kernel.Thm
+
+pub fn face_of_inter() -> @kernel.Thm
+
+pub fn face_of_inter_as_inter_of_face() -> @kernel.Thm
+
+pub fn face_of_inter_inter() -> @kernel.Thm
+
+pub fn face_of_inter_subface() -> @kernel.Thm
+
+pub fn face_of_inter_supporting_hyperplane_ge() -> @kernel.Thm
+
+pub fn face_of_inter_supporting_hyperplane_ge_strong() -> @kernel.Thm
+
+pub fn face_of_inter_supporting_hyperplane_le() -> @kernel.Thm
+
+pub fn face_of_inter_supporting_hyperplane_le_strong() -> @kernel.Thm
+
+pub fn face_of_inters() -> @kernel.Thm
+
+pub fn face_of_linear_image() -> @kernel.Thm
+
+pub fn face_of_pcross() -> @kernel.Thm
+
+pub fn face_of_pcross_decomp() -> @kernel.Thm
+
+pub fn face_of_pcross_eq() -> @kernel.Thm
+
+pub fn face_of_polyhedron() -> @kernel.Thm
+
+pub fn face_of_polyhedron_explicit() -> @kernel.Thm
+
+pub fn face_of_polyhedron_face_of_facet() -> @kernel.Thm
+
+pub fn face_of_polyhedron_polyhedron() -> @kernel.Thm
+
+pub fn face_of_polyhedron_subset_explicit() -> @kernel.Thm
+
+pub fn face_of_polyhedron_subset_facet() -> @kernel.Thm
+
+pub fn face_of_polytope_insert_eq() -> @kernel.Thm
+
+pub fn face_of_polytope_polytope() -> @kernel.Thm
+
+pub fn face_of_refl() -> @kernel.Thm
+
+pub fn face_of_refl_eq() -> @kernel.Thm
+
+pub fn face_of_simplex_subset() -> @kernel.Thm
+
+pub fn face_of_sing() -> @kernel.Thm
+
+pub fn face_of_slice() -> @kernel.Thm
+
+pub fn face_of_stillconvex() -> @kernel.Thm
+
+pub fn face_of_subset() -> @kernel.Thm
+
+pub fn face_of_subset_frontier_aff_dim() -> @kernel.Thm
+
+pub fn face_of_subset_relative_boundary() -> @kernel.Thm
+
+pub fn face_of_subset_relative_frontier() -> @kernel.Thm
+
+pub fn face_of_subset_relative_frontier_aff_dim() -> @kernel.Thm
+
+pub fn face_of_trans() -> @kernel.Thm
+
+pub fn face_of_translation_eq() -> @kernel.Thm
+
+pub fn faces_of_linear_image() -> @kernel.Thm
+
+pub fn faces_of_simplex() -> @kernel.Thm
+
+pub fn faces_of_translation() -> @kernel.Thm
+
+pub fn facet_of() -> @kernel.Thm
+
+pub fn facet_of_convex_hull_affine_independent() -> @kernel.Thm
+
+pub fn facet_of_convex_hull_affine_independent_alt() -> @kernel.Thm
+
+pub fn facet_of_empty() -> @kernel.Thm
+
+pub fn facet_of_halfspace_ge() -> @kernel.Thm
+
+pub fn facet_of_halfspace_le() -> @kernel.Thm
+
+pub fn facet_of_imp_face_of() -> @kernel.Thm
+
+pub fn facet_of_imp_proper() -> @kernel.Thm
+
+pub fn facet_of_imp_subset() -> @kernel.Thm
+
+pub fn facet_of_linear_image() -> @kernel.Thm
+
+pub fn facet_of_polyhedron() -> @kernel.Thm
+
+pub fn facet_of_polyhedron_explicit() -> @kernel.Thm
+
+pub fn facet_of_refl() -> @kernel.Thm
+
+pub fn facet_of_translation_eq() -> @kernel.Thm
+
+pub fn facets_of_polyhedron_explicit_distinct() -> @kernel.Thm
+
+pub fn farkas_lemma() -> @kernel.Thm
+
+pub fn farkas_lemma_alt() -> @kernel.Thm
+
+pub fn fine_simplicial_subdivision_of_cell_complex() -> @kernel.Thm
+
+pub fn fine_triangular_subdivision_of_cell_complex() -> @kernel.Thm
+
+pub fn finite_faces_of_simplex() -> @kernel.Thm
+
+pub fn finite_polyhedron_exposed_faces() -> @kernel.Thm
+
+pub fn finite_polyhedron_extreme_points() -> @kernel.Thm
+
+pub fn finite_polyhedron_faces() -> @kernel.Thm
+
+pub fn finite_polyhedron_facets() -> @kernel.Thm
+
+pub fn finite_polytope_faces() -> @kernel.Thm
+
+pub fn finite_polytope_facets() -> @kernel.Thm
+
+pub fn finitely_generated_conic_polyhedron() -> @kernel.Thm
+
+pub fn frontier_of_convex_closed() -> @kernel.Thm
+
+pub fn frontier_of_convex_hull() -> @kernel.Thm
+
+pub fn frontier_of_triangle() -> @kernel.Thm
+
+pub fn has_size_faces_of_simplex() -> @kernel.Thm
+
+pub fn hausdist_frontiers_convex() -> @kernel.Thm
+
+pub fn hausdist_still_inside() -> @kernel.Thm
+
+pub fn hausdist_still_inside_interior() -> @kernel.Thm
+
+pub fn hausdist_still_nonempty_interior() -> @kernel.Thm
+
+pub fn hausdist_still_outside() -> @kernel.Thm
+
+pub fn hausdist_still_same_place() -> @kernel.Thm
+
+pub fn hausdist_still_same_place_conic_hull() -> @kernel.Thm
+
+pub fn hausdist_still_same_place_conic_hull_strong() -> @kernel.Thm
+
+pub fn hausdist_still_same_place_strong() -> @kernel.Thm
+
+pub fn hyperplane_face_of_halfspace_ge() -> @kernel.Thm
+
+pub fn hyperplane_face_of_halfspace_le() -> @kernel.Thm
+
+pub fn hyperplane_facet_of_halfspace_ge() -> @kernel.Thm
+
+pub fn hyperplane_facet_of_halfspace_le() -> @kernel.Thm
+
+pub fn in_relative_interior_of_face() -> @kernel.Thm
+
+pub fn in_relative_interior_of_unique_face() -> @kernel.Thm
+
+pub fn inside_of_triangle() -> @kernel.Thm
+
+pub fn inter_conic_hull() -> @kernel.Thm
+
+pub fn inter_conic_hull_subsets_convex_relative_frontier() -> @kernel.Thm
+
+pub fn interior_of_triangle() -> @kernel.Thm
+
+pub fn inters_faces_finite_altbound() -> @kernel.Thm
+
+pub fn inters_faces_finite_bound() -> @kernel.Thm
+
+pub fn krein_milman() -> @kernel.Thm
+
+pub fn krein_milman_eq() -> @kernel.Thm
+
+pub fn krein_milman_minkowski() -> @kernel.Thm
+
+pub fn krein_milman_polytope() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn not_in_affine_hull_surface_triangulation() -> @kernel.Thm
+
+pub fn open_conic_hull() -> @kernel.Thm
+
+pub fn open_in_conic_hull() -> @kernel.Thm
+
+pub fn open_in_relative_frontier_interior_facet() -> @kernel.Thm
+
+pub fn open_in_same_conic_hull() -> @kernel.Thm
+
+pub fn polyhedral_convex_cone() -> @kernel.Thm
+
+pub fn polyhedron() -> @kernel.Thm
+
+pub fn polyhedron_affine_hull() -> @kernel.Thm
+
+pub fn polyhedron_as_cone_plus_conv() -> @kernel.Thm
+
+pub fn polyhedron_conic_hull_polytope() -> @kernel.Thm
+
+pub fn polyhedron_convex_cone_hull() -> @kernel.Thm
+
+pub fn polyhedron_convex_cone_hull_polytope() -> @kernel.Thm
+
+pub fn polyhedron_convex_hull() -> @kernel.Thm
+
+pub fn polyhedron_empty() -> @kernel.Thm
+
+pub fn polyhedron_eq_finite_exposed_faces() -> @kernel.Thm
+
+pub fn polyhedron_eq_finite_faces() -> @kernel.Thm
+
+pub fn polyhedron_halfspace_ge() -> @kernel.Thm
+
+pub fn polyhedron_halfspace_le() -> @kernel.Thm
+
+pub fn polyhedron_hyperplane() -> @kernel.Thm
+
+pub fn polyhedron_imp_closed() -> @kernel.Thm
+
+pub fn polyhedron_imp_convex() -> @kernel.Thm
+
+pub fn polyhedron_inter() -> @kernel.Thm
+
+pub fn polyhedron_inter_affine() -> @kernel.Thm
+
+pub fn polyhedron_inter_affine_minimal() -> @kernel.Thm
+
+pub fn polyhedron_inter_affine_parallel() -> @kernel.Thm
+
+pub fn polyhedron_inter_affine_parallel_minimal() -> @kernel.Thm
+
+pub fn polyhedron_inter_polytope() -> @kernel.Thm
+
+pub fn polyhedron_inters() -> @kernel.Thm
+
+pub fn polyhedron_interval() -> @kernel.Thm
+
+pub fn polyhedron_linear_image() -> @kernel.Thm
+
+pub fn polyhedron_linear_image_eq() -> @kernel.Thm
+
+pub fn polyhedron_linear_preimage() -> @kernel.Thm
+
+pub fn polyhedron_minimal_lemma() -> @kernel.Thm
+
+pub fn polyhedron_negations() -> @kernel.Thm
+
+pub fn polyhedron_polytope_sums() -> @kernel.Thm
+
+pub fn polyhedron_positive_orthant() -> @kernel.Thm
+
+pub fn polyhedron_ridge_two_facets() -> @kernel.Thm
+
+pub fn polyhedron_sums() -> @kernel.Thm
+
+pub fn polyhedron_translation_eq() -> @kernel.Thm
+
+pub fn polyhedron_univ() -> @kernel.Thm
+
+pub fn polyhedron_v1() -> @kernel.Thm
+
+pub fn polytope() -> @kernel.Thm
+
+pub fn polytope_1() -> @kernel.Thm
+
+pub fn polytope_aff_dim_1() -> @kernel.Thm
+
+pub fn polytope_affinity() -> @kernel.Thm
+
+pub fn polytope_affinity_eq() -> @kernel.Thm
+
+pub fn polytope_convex_hull() -> @kernel.Thm
+
+pub fn polytope_empty() -> @kernel.Thm
+
+pub fn polytope_eq_bounded_polyhedron() -> @kernel.Thm
+
+pub fn polytope_facet_exists() -> @kernel.Thm
+
+pub fn polytope_facet_lower_bound() -> @kernel.Thm
+
+pub fn polytope_imp_bounded() -> @kernel.Thm
+
+pub fn polytope_imp_closed() -> @kernel.Thm
+
+pub fn polytope_imp_compact() -> @kernel.Thm
+
+pub fn polytope_imp_convex() -> @kernel.Thm
+
+pub fn polytope_imp_polyhedron() -> @kernel.Thm
+
+pub fn polytope_inter() -> @kernel.Thm
+
+pub fn polytope_inter_polyhedron() -> @kernel.Thm
+
+pub fn polytope_interval() -> @kernel.Thm
+
+pub fn polytope_linear_image() -> @kernel.Thm
+
+pub fn polytope_linear_image_eq() -> @kernel.Thm
+
+pub fn polytope_lowdim_imp_simplex() -> @kernel.Thm
+
+pub fn polytope_negations() -> @kernel.Thm
+
+pub fn polytope_pcross() -> @kernel.Thm
+
+pub fn polytope_pcross_eq() -> @kernel.Thm
+
+pub fn polytope_scaling() -> @kernel.Thm
+
+pub fn polytope_scaling_eq() -> @kernel.Thm
+
+pub fn polytope_segment() -> @kernel.Thm
+
+pub fn polytope_sing() -> @kernel.Thm
+
+pub fn polytope_sums() -> @kernel.Thm
+
+pub fn polytope_translation_eq() -> @kernel.Thm
+
+pub fn polytope_union_convex_hull_facets() -> @kernel.Thm
+
+pub fn polytope_vertex_lower_bound() -> @kernel.Thm
+
+pub fn regular_closed_unions_fat_cells_univ() -> @kernel.Thm
+
+pub fn relative_boundary_of_convex_hull() -> @kernel.Thm
+
+pub fn relative_boundary_of_polyhedron() -> @kernel.Thm
+
+pub fn relative_boundary_of_triangle() -> @kernel.Thm
+
+pub fn relative_boundary_point_in_exposed_face() -> @kernel.Thm
+
+pub fn relative_boundary_point_in_proper_face() -> @kernel.Thm
+
+pub fn relative_frontier_conic_hull() -> @kernel.Thm
+
+pub fn relative_frontier_facial_partition() -> @kernel.Thm
+
+pub fn relative_frontier_facial_partition_alt() -> @kernel.Thm
+
+pub fn relative_frontier_of_convex_closed() -> @kernel.Thm
+
+pub fn relative_frontier_of_polyhedron() -> @kernel.Thm
+
+pub fn relative_frontier_of_polyhedron_alt() -> @kernel.Thm
+
+pub fn relative_frontier_of_triangle() -> @kernel.Thm
+
+pub fn relative_interior_conic_hull() -> @kernel.Thm
+
+pub fn relative_interior_conic_hull_0() -> @kernel.Thm
+
+pub fn relative_interior_of_polyhedron() -> @kernel.Thm
+
+pub fn relative_interior_polyhedron_explicit() -> @kernel.Thm
+
+pub fn relative_interior_subset_of_proper_face() -> @kernel.Thm
+
+pub fn segment_edge_of() -> @kernel.Thm
+
+pub fn segment_face_of() -> @kernel.Thm
+
+pub fn separating_hyperplane_polyhedra() -> @kernel.Thm
+
+pub fn simplex() -> @kernel.Thm
+
+pub fn simplex_0_not_in_affine_hull() -> @kernel.Thm
+
+pub fn simplex_alt() -> @kernel.Thm
+
+pub fn simplex_alt1() -> @kernel.Thm
+
+pub fn simplex_convex_hull() -> @kernel.Thm
+
+pub fn simplex_dim_ge() -> @kernel.Thm
+
+pub fn simplex_empty() -> @kernel.Thm
+
+pub fn simplex_extreme_points() -> @kernel.Thm
+
+pub fn simplex_extreme_points_nonempty() -> @kernel.Thm
+
+pub fn simplex_face_of_simplex() -> @kernel.Thm
+
+pub fn simplex_imp_closed() -> @kernel.Thm
+
+pub fn simplex_imp_compact() -> @kernel.Thm
+
+pub fn simplex_imp_convex() -> @kernel.Thm
+
+pub fn simplex_imp_polyhedron() -> @kernel.Thm
+
+pub fn simplex_imp_polytope() -> @kernel.Thm
+
+pub fn simplex_insert() -> @kernel.Thm
+
+pub fn simplex_insert_dimplus1() -> @kernel.Thm
+
+pub fn simplex_linear_image_eq() -> @kernel.Thm
+
+pub fn simplex_minus_1() -> @kernel.Thm
+
+pub fn simplex_segment() -> @kernel.Thm
+
+pub fn simplex_segment_cases() -> @kernel.Thm
+
+pub fn simplex_sing() -> @kernel.Thm
+
+pub fn simplex_translation_eq() -> @kernel.Thm
+
+pub fn simplex_v1() -> @kernel.Thm
+
+pub fn simplex_vertices_unique() -> @kernel.Thm
+
+pub fn simplex_zero() -> @kernel.Thm
+
+pub fn simplicial_complex() -> @kernel.Thm
+
+pub fn simplicial_complex_disjoint_relative_interiors() -> @kernel.Thm
+
+pub fn simplicial_complex_imp_triangulation() -> @kernel.Thm
+
+pub fn simplicial_complex_linear_image() -> @kernel.Thm
+
+pub fn simplicial_complex_translation() -> @kernel.Thm
+
+pub fn simplicial_subdivision_of_cell_complex() -> @kernel.Thm
+
+pub fn simplicial_subdivision_of_cell_complex_lowdim() -> @kernel.Thm
+
+pub fn subset_face_of_simplex() -> @kernel.Thm
+
+pub fn subset_of_face_of() -> @kernel.Thm
+
+pub fn subset_of_face_of_affine_hull() -> @kernel.Thm
+
+pub fn triangular_subdivision_of_cell_complex() -> @kernel.Thm
+
+pub fn triangulation() -> @kernel.Thm
+
+pub fn triangulation_disjoint_relative_interiors() -> @kernel.Thm
+
+pub fn triangulation_inter_simplex() -> @kernel.Thm
+
+pub fn triangulation_linear_image() -> @kernel.Thm
+
+pub fn triangulation_simplex_faces() -> @kernel.Thm
+
+pub fn triangulation_simplex_facets() -> @kernel.Thm
+
+pub fn triangulation_simplicial_complex() -> @kernel.Thm
+
+pub fn triangulation_subfaces() -> @kernel.Thm
+
+pub fn triangulation_subset() -> @kernel.Thm
+
+pub fn triangulation_translation() -> @kernel.Thm
+
+pub fn triangulation_union() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
