@@ -1,0 +1,739 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/homology"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abelian_chain_group() -> @kernel.Thm
+
+pub fn abelian_homology_group() -> @kernel.Thm
+
+pub fn abelian_relative_homology_group() -> @kernel.Thm
+
+pub fn abelian_relcycle_group() -> @kernel.Thm
+
+pub fn basis_in_standard_simplex() -> @kernel.Thm
+
+pub fn borsuk_odd_mapping_degree_step() -> @kernel.Thm
+
+pub fn brouwer_degree2() -> @kernel.Thm
+
+pub fn brouwer_degree2_compose() -> @kernel.Thm
+
+pub fn brouwer_degree2_const() -> @kernel.Thm
+
+pub fn brouwer_degree2_eq() -> @kernel.Thm
+
+pub fn brouwer_degree2_homeomorphic_map() -> @kernel.Thm
+
+pub fn brouwer_degree2_homeomorphic_maps() -> @kernel.Thm
+
+pub fn brouwer_degree2_homotopic() -> @kernel.Thm
+
+pub fn brouwer_degree2_homotopy_equivalence() -> @kernel.Thm
+
+pub fn brouwer_degree2_id() -> @kernel.Thm
+
+pub fn brouwer_degree2_iff() -> @kernel.Thm
+
+pub fn brouwer_degree2_nonsurjective() -> @kernel.Thm
+
+pub fn brouwer_degree2_nullhomotopic() -> @kernel.Thm
+
+pub fn brouwer_degree2_reflection() -> @kernel.Thm
+
+pub fn brouwer_degree2_retraction_map() -> @kernel.Thm
+
+pub fn brouwer_degree2_section_map() -> @kernel.Thm
+
+pub fn brouwer_degree2_unique() -> @kernel.Thm
+
+pub fn brouwer_degree2_unique_generator() -> @kernel.Thm
+
+pub fn brouwer_degree2_v1() -> @kernel.Thm
+
+pub fn card_eq_connected_components_euclidean_complements() -> @kernel.Thm
+
+pub fn card_eq_path_components_euclidean_complements() -> @kernel.Thm
+
+pub fn chain_boundary() -> @kernel.Thm
+
+pub fn chain_boundary_0() -> @kernel.Thm
+
+pub fn chain_boundary_add() -> @kernel.Thm
+
+pub fn chain_boundary_boundary() -> @kernel.Thm
+
+pub fn chain_boundary_boundary_alt() -> @kernel.Thm
+
+pub fn chain_boundary_chain_map() -> @kernel.Thm
+
+pub fn chain_boundary_cmul() -> @kernel.Thm
+
+pub fn chain_boundary_neg() -> @kernel.Thm
+
+pub fn chain_boundary_of() -> @kernel.Thm
+
+pub fn chain_boundary_of_sing() -> @kernel.Thm
+
+pub fn chain_boundary_simplicial_cone() -> @kernel.Thm
+
+pub fn chain_boundary_simplicial_cone_of() -> @kernel.Thm
+
+pub fn chain_boundary_simplicial_subdivision() -> @kernel.Thm
+
+pub fn chain_boundary_singular_subdivision() -> @kernel.Thm
+
+pub fn chain_boundary_sub() -> @kernel.Thm
+
+pub fn chain_boundary_sum() -> @kernel.Thm
+
+pub fn chain_group() -> @kernel.Thm
+
+pub fn chain_group_v1() -> @kernel.Thm
+
+pub fn chain_homotopic_imp_homologous_rel() -> @kernel.Thm
+
+pub fn chain_homotopic_iterated_singular_subdivision() -> @kernel.Thm
+
+pub fn chain_homotopic_simplicial_subdivision() -> @kernel.Thm
+
+pub fn chain_homotopic_singular_subdivision() -> @kernel.Thm
+
+pub fn chain_map() -> @kernel.Thm
+
+pub fn chain_map_0() -> @kernel.Thm
+
+pub fn chain_map_add() -> @kernel.Thm
+
+pub fn chain_map_cmul() -> @kernel.Thm
+
+pub fn chain_map_compose() -> @kernel.Thm
+
+pub fn chain_map_eq() -> @kernel.Thm
+
+pub fn chain_map_i() -> @kernel.Thm
+
+pub fn chain_map_id() -> @kernel.Thm
+
+pub fn chain_map_id_gen() -> @kernel.Thm
+
+pub fn chain_map_neg() -> @kernel.Thm
+
+pub fn chain_map_of() -> @kernel.Thm
+
+pub fn chain_map_simplicial_cone() -> @kernel.Thm
+
+pub fn chain_map_sub() -> @kernel.Thm
+
+pub fn chain_map_sum() -> @kernel.Thm
+
+pub fn closed_in_standard_simplex() -> @kernel.Thm
+
+pub fn compact_in_standard_simplex() -> @kernel.Thm
+
+pub fn connected_in_euclidean_complements() -> @kernel.Thm
+
+pub fn connected_in_standard_simplex() -> @kernel.Thm
+
+pub fn convex_standard_simplex() -> @kernel.Thm
+
+pub fn cyclic_reduced_homology_group_nsphere() -> @kernel.Thm
+
+pub fn deformation_retract_imp_isomorphic_homology_groups() -> @kernel.Thm
+
+pub fn deformation_retract_imp_isomorphic_relative_homology_groups() -> @kernel.Thm
+
+pub fn deformation_retract_relative_homology_group_isomorphism() -> @kernel.Thm
+
+pub fn deformation_retract_relative_homology_group_isomorphism_id() -> @kernel.Thm
+
+pub fn deformation_retract_relative_homology_group_isomorphisms() -> @kernel.Thm
+
+pub fn deformation_retraction_imp_isomorphic_homology_groups() -> @kernel.Thm
+
+pub fn deformation_retraction_imp_isomorphic_relative_homology_groups() -> @kernel.Thm
+
+pub fn deformation_retraction_relative_homology_group_isomorphisms() -> @kernel.Thm
+
+pub fn excised_chain_exists() -> @kernel.Thm
+
+pub fn excised_relcycle_exists() -> @kernel.Thm
+
+pub fn group_carrier_reduced_homology_group() -> @kernel.Thm
+
+pub fn group_carrier_reduced_homology_group_subset() -> @kernel.Thm
+
+pub fn group_epimorphism_hom_induced_inclusion() -> @kernel.Thm
+
+pub fn group_epimorphism_hom_induced_relativization() -> @kernel.Thm
+
+pub fn group_epimorphism_hom_induced_retraction_map() -> @kernel.Thm
+
+pub fn group_homomorphism_chain_boundary() -> @kernel.Thm
+
+pub fn group_homomorphism_chain_map() -> @kernel.Thm
+
+pub fn group_homomorphism_hom_boundary() -> @kernel.Thm
+
+pub fn group_homomorphism_hom_boundary_reduced() -> @kernel.Thm
+
+pub fn group_homomorphism_hom_induced() -> @kernel.Thm
+
+pub fn group_homomorphism_hom_induced_empty() -> @kernel.Thm
+
+pub fn group_homomorphism_hom_induced_reduced() -> @kernel.Thm
+
+pub fn group_homomorphism_hom_relboundary() -> @kernel.Thm
+
+pub fn group_image_reduced_homology_group() -> @kernel.Thm
+
+pub fn group_isomorphism_chain_group_sum() -> @kernel.Thm
+
+pub fn group_isomorphism_cycle_group_sum() -> @kernel.Thm
+
+pub fn group_isomorphism_hom_induced_inclusion_contractible() -> @kernel.Thm
+
+pub fn group_isomorphism_hom_induced_relativization_contractible() -> @kernel.Thm
+
+pub fn group_isomorphism_hom_relboundary_contractible() -> @kernel.Thm
+
+pub fn group_isomorphism_integer_zeroth_homology_group() -> @kernel.Thm
+
+pub fn group_isomorphism_lower_hemisphere_reduced_homology_group() -> @kernel.Thm
+
+pub fn group_isomorphism_reduced_homology_by_contractible() -> @kernel.Thm
+
+pub fn group_isomorphism_reduced_homology_group_lower_hemisphere() -> @kernel.Thm
+
+pub fn group_isomorphism_reduced_homology_group_upper_hemisphere() -> @kernel.Thm
+
+pub fn group_isomorphism_relative_homology_group_lower_hemisphere() -> @kernel.Thm
+
+pub fn group_isomorphism_relative_homology_group_upper_hemisphere() -> @kernel.Thm
+
+pub fn group_isomorphism_relative_homology_of_contractible() -> @kernel.Thm
+
+pub fn group_isomorphism_upper_hemisphere_reduced_homology_group() -> @kernel.Thm
+
+pub fn group_isomorphisms_homology_group_prod_deformation() -> @kernel.Thm
+
+pub fn group_isomorphisms_homology_group_prod_retract() -> @kernel.Thm
+
+pub fn group_monomorphism_hom_boundary_inclusion() -> @kernel.Thm
+
+pub fn group_monomorphism_hom_induced_inclusion() -> @kernel.Thm
+
+pub fn group_monomorphism_hom_induced_section_map() -> @kernel.Thm
+
+pub fn hom_boundary() -> @kernel.Thm
+
+pub fn hom_boundary_chain_boundary() -> @kernel.Thm
+
+pub fn hom_boundary_default() -> @kernel.Thm
+
+pub fn hom_boundary_restrict() -> @kernel.Thm
+
+pub fn hom_boundary_trivial() -> @kernel.Thm
+
+pub fn hom_induced() -> @kernel.Thm
+
+pub fn hom_induced_chain_map() -> @kernel.Thm
+
+pub fn hom_induced_chain_map_gen() -> @kernel.Thm
+
+pub fn hom_induced_compose() -> @kernel.Thm
+
+pub fn hom_induced_compose_empty() -> @kernel.Thm
+
+pub fn hom_induced_default() -> @kernel.Thm
+
+pub fn hom_induced_eq() -> @kernel.Thm
+
+pub fn hom_induced_id() -> @kernel.Thm
+
+pub fn hom_induced_id_gen() -> @kernel.Thm
+
+pub fn hom_induced_reduced() -> @kernel.Thm
+
+pub fn hom_induced_restrict() -> @kernel.Thm
+
+pub fn hom_induced_trivial() -> @kernel.Thm
+
+pub fn hom_relboundary() -> @kernel.Thm
+
+pub fn hom_relboundary_empty() -> @kernel.Thm
+
+pub fn hom_relboundary_v1() -> @kernel.Thm
+
+pub fn homeomorphic_map_homology_group_isomorphism() -> @kernel.Thm
+
+pub fn homeomorphic_map_relative_homology_group_isomorphism() -> @kernel.Thm
+
+pub fn homeomorphic_maps_relative_homology_group_isomorphisms() -> @kernel.Thm
+
+pub fn homeomorphic_space_imp_isomorphic_homology_groups() -> @kernel.Thm
+
+pub fn homeomorphic_space_imp_isomorphic_reduced_homology_groups() -> @kernel.Thm
+
+pub fn homologous_rel() -> @kernel.Thm
+
+pub fn homologous_rel_add() -> @kernel.Thm
+
+pub fn homologous_rel_eq() -> @kernel.Thm
+
+pub fn homologous_rel_eq_relboundary() -> @kernel.Thm
+
+pub fn homologous_rel_refl() -> @kernel.Thm
+
+pub fn homologous_rel_restrict() -> @kernel.Thm
+
+pub fn homologous_rel_singular_chain() -> @kernel.Thm
+
+pub fn homologous_rel_singular_relcycle() -> @kernel.Thm
+
+pub fn homologous_rel_singular_subdivision() -> @kernel.Thm
+
+pub fn homologous_rel_sub() -> @kernel.Thm
+
+pub fn homologous_rel_sum() -> @kernel.Thm
+
+pub fn homologous_rel_sym() -> @kernel.Thm
+
+pub fn homologous_rel_trans() -> @kernel.Thm
+
+pub fn homology_additivity_axiom() -> @kernel.Thm
+
+pub fn homology_additivity_axiom_gen() -> @kernel.Thm
+
+pub fn homology_additivity_explicit() -> @kernel.Thm
+
+pub fn homology_coefficients() -> @kernel.Thm
+
+pub fn homology_dimension_axiom() -> @kernel.Thm
+
+pub fn homology_dimension_reduced() -> @kernel.Thm
+
+pub fn homology_exactness_axiom_1() -> @kernel.Thm
+
+pub fn homology_exactness_axiom_2() -> @kernel.Thm
+
+pub fn homology_exactness_axiom_3() -> @kernel.Thm
+
+pub fn homology_exactness_reduced_1() -> @kernel.Thm
+
+pub fn homology_exactness_reduced_2() -> @kernel.Thm
+
+pub fn homology_exactness_reduced_3() -> @kernel.Thm
+
+pub fn homology_exactness_triple_1() -> @kernel.Thm
+
+pub fn homology_exactness_triple_2() -> @kernel.Thm
+
+pub fn homology_exactness_triple_3() -> @kernel.Thm
+
+pub fn homology_excision_axiom() -> @kernel.Thm
+
+pub fn homology_group() -> @kernel.Thm
+
+pub fn homology_homotopy_axiom() -> @kernel.Thm
+
+pub fn homology_homotopy_empty() -> @kernel.Thm
+
+pub fn homotopic_imp_homologous_rel_chain_maps() -> @kernel.Thm
+
+pub fn homotopy_equivalence_homology_group_isomorphism() -> @kernel.Thm
+
+pub fn homotopy_equivalence_reduced_homology_group_isomorphism() -> @kernel.Thm
+
+pub fn homotopy_equivalence_reduced_homology_group_isomorphisms() -> @kernel.Thm
+
+pub fn homotopy_equivalence_relative_homology_group_isomorphism() -> @kernel.Thm
+
+pub fn homotopy_equivalence_relative_homology_group_isomorphisms() -> @kernel.Thm
+
+pub fn homotopy_equivalent_space_imp_isomorphic_homology_groups() -> @kernel.Thm
+
+pub fn homotopy_equivalent_space_imp_isomorphic_reduced_homology_groups() -> @kernel.Thm
+
+pub fn homotopy_equivalent_space_imp_isomorphic_relative_homology_groups() -> @kernel.Thm
+
+pub fn invariance_of_dimension_closed_in_euclidean_space() -> @kernel.Thm
+
+pub fn invariance_of_dimension_euclidean_space() -> @kernel.Thm
+
+pub fn invariance_of_domain_euclidean_space() -> @kernel.Thm
+
+pub fn invariance_of_domain_euclidean_space_embedding_map() -> @kernel.Thm
+
+pub fn invariance_of_domain_euclidean_space_embedding_map_gen() -> @kernel.Thm
+
+pub fn invariance_of_domain_euclidean_space_gen() -> @kernel.Thm
+
+pub fn isomorphic_group_homology_by_sing() -> @kernel.Thm
+
+pub fn isomorphic_group_homology_contractible_space_subtopology() -> @kernel.Thm
+
+pub fn isomorphic_group_homology_group_prod_deformation() -> @kernel.Thm
+
+pub fn isomorphic_group_homology_group_prod_retract() -> @kernel.Thm
+
+pub fn isomorphic_group_integer_zeroth_homology_group() -> @kernel.Thm
+
+pub fn isomorphic_group_reduced_homology_by_contractible() -> @kernel.Thm
+
+pub fn isomorphic_group_reduced_homology_by_sing() -> @kernel.Thm
+
+pub fn isomorphic_group_reduced_homology_of_contractible() -> @kernel.Thm
+
+pub fn isomorphic_group_relative_homology_by_contractible() -> @kernel.Thm
+
+pub fn isomorphic_group_relative_homology_by_sing() -> @kernel.Thm
+
+pub fn isomorphic_group_relative_homology_of_contractible() -> @kernel.Thm
+
+pub fn isomorphic_homology_groups_euclidean_complements() -> @kernel.Thm
+
+pub fn isomorphic_homology_imp_path_components() -> @kernel.Thm
+
+pub fn isomorphic_homology_imp_path_connectedness() -> @kernel.Thm
+
+pub fn isomorphic_relative_contractible_space_imp_homology_groups() -> @kernel.Thm
+
+pub fn isomorphic_relative_homology_groups_euclidean_complements() -> @kernel.Thm
+
+pub fn isomorphic_relative_homology_groups_inclusion_contractible() -> @kernel.Thm
+
+pub fn isomorphic_relative_homology_groups_relativization_contractible() -> @kernel.Thm
+
+pub fn isomorphic_relative_homology_groups_relboundary_contractible() -> @kernel.Thm
+
+pub fn iterated_singular_subdivision() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mod_subset() -> @kernel.Thm
+
+pub fn mod_subset_add() -> @kernel.Thm
+
+pub fn mod_subset_cmul() -> @kernel.Thm
+
+pub fn mod_subset_empty() -> @kernel.Thm
+
+pub fn mod_subset_refl() -> @kernel.Thm
+
+pub fn naturality_hom_induced() -> @kernel.Thm
+
+pub fn naturality_hom_induced_relboundary() -> @kernel.Thm
+
+pub fn naturality_simplicial_subdivision() -> @kernel.Thm
+
+pub fn naturality_singular_subdivision() -> @kernel.Thm
+
+pub fn non_contractible_space_nsphere() -> @kernel.Thm
+
+pub fn nonempty_standard_simplex() -> @kernel.Thm
+
+pub fn nontrivial_relative_homology_group() -> @kernel.Thm
+
+pub fn normal_subgroup_singular_relboundary_relcycle() -> @kernel.Thm
+
+pub fn oriented_simplex() -> @kernel.Thm
+
+pub fn oriented_simplex_eq() -> @kernel.Thm
+
+pub fn path_connected_in_euclidean_complements() -> @kernel.Thm
+
+pub fn path_connected_in_standard_simplex() -> @kernel.Thm
+
+pub fn reduced_homology_group() -> @kernel.Thm
+
+pub fn reduced_homology_group_nsphere() -> @kernel.Thm
+
+pub fn reduced_homology_group_nsphere_step() -> @kernel.Thm
+
+pub fn reduced_homology_group_pair() -> @kernel.Thm
+
+pub fn relative_homology_group() -> @kernel.Thm
+
+pub fn relative_homology_group_euclidean_complement_step() -> @kernel.Thm
+
+pub fn relative_homology_group_restrict() -> @kernel.Thm
+
+pub fn relative_homology_group_v1() -> @kernel.Thm
+
+pub fn relcycle_group() -> @kernel.Thm
+
+pub fn relcycle_group_restrict() -> @kernel.Thm
+
+pub fn relcycle_group_v1() -> @kernel.Thm
+
+pub fn right_coset_singular_relboundary() -> @kernel.Thm
+
+pub fn short_exact_sequence_hom_induced_inclusion() -> @kernel.Thm
+
+pub fn short_exact_sequence_hom_induced_relativization() -> @kernel.Thm
+
+pub fn simplex_cone() -> @kernel.Thm
+
+pub fn simplex_map() -> @kernel.Thm
+
+pub fn simplex_map_compose() -> @kernel.Thm
+
+pub fn simplex_map_eq() -> @kernel.Thm
+
+pub fn simplex_map_i() -> @kernel.Thm
+
+pub fn simplex_map_id_gen() -> @kernel.Thm
+
+pub fn simplex_map_oriented_simplex() -> @kernel.Thm
+
+pub fn simplicial_chain() -> @kernel.Thm
+
+pub fn simplicial_chain_0() -> @kernel.Thm
+
+pub fn simplicial_chain_boundary() -> @kernel.Thm
+
+pub fn simplicial_chain_chain_map() -> @kernel.Thm
+
+pub fn simplicial_chain_cmul() -> @kernel.Thm
+
+pub fn simplicial_chain_of() -> @kernel.Thm
+
+pub fn simplicial_chain_simplicial_cone() -> @kernel.Thm
+
+pub fn simplicial_chain_simplicial_subdivision() -> @kernel.Thm
+
+pub fn simplicial_chain_sub() -> @kernel.Thm
+
+pub fn simplicial_chain_sum() -> @kernel.Thm
+
+pub fn simplicial_cone() -> @kernel.Thm
+
+pub fn simplicial_face() -> @kernel.Thm
+
+pub fn simplicial_face_in_standard_simplex() -> @kernel.Thm
+
+pub fn simplicial_imp_singular_chain() -> @kernel.Thm
+
+pub fn simplicial_imp_singular_simplex() -> @kernel.Thm
+
+pub fn simplicial_simplex() -> @kernel.Thm
+
+pub fn simplicial_simplex_empty() -> @kernel.Thm
+
+pub fn simplicial_simplex_i() -> @kernel.Thm
+
+pub fn simplicial_simplex_oriented_simplex() -> @kernel.Thm
+
+pub fn simplicial_simplex_simplex_cone() -> @kernel.Thm
+
+pub fn simplicial_simplex_singular_face() -> @kernel.Thm
+
+pub fn simplicial_simplex_v1() -> @kernel.Thm
+
+pub fn simplicial_subdivision() -> @kernel.Thm
+
+pub fn simplicial_subdivision_0() -> @kernel.Thm
+
+pub fn simplicial_subdivision_of() -> @kernel.Thm
+
+pub fn simplicial_subdivision_shrinks() -> @kernel.Thm
+
+pub fn simplicial_subdivision_sub() -> @kernel.Thm
+
+pub fn simplicial_vertex() -> @kernel.Thm
+
+pub fn simplicial_vertex_oriented_simplex() -> @kernel.Thm
+
+pub fn singular_boundary() -> @kernel.Thm
+
+pub fn singular_boundary_eq_cycle_sing() -> @kernel.Thm
+
+pub fn singular_boundary_imp_chain() -> @kernel.Thm
+
+pub fn singular_boundary_mono() -> @kernel.Thm
+
+pub fn singular_boundary_sing() -> @kernel.Thm
+
+pub fn singular_chain() -> @kernel.Thm
+
+pub fn singular_chain_0() -> @kernel.Thm
+
+pub fn singular_chain_add() -> @kernel.Thm
+
+pub fn singular_chain_boundary() -> @kernel.Thm
+
+pub fn singular_chain_boundary_alt() -> @kernel.Thm
+
+pub fn singular_chain_chain_map() -> @kernel.Thm
+
+pub fn singular_chain_cmul() -> @kernel.Thm
+
+pub fn singular_chain_empty() -> @kernel.Thm
+
+pub fn singular_chain_extend() -> @kernel.Thm
+
+pub fn singular_chain_imp_relboundary() -> @kernel.Thm
+
+pub fn singular_chain_mono() -> @kernel.Thm
+
+pub fn singular_chain_neg() -> @kernel.Thm
+
+pub fn singular_chain_of() -> @kernel.Thm
+
+pub fn singular_chain_sing() -> @kernel.Thm
+
+pub fn singular_chain_singular_subdivision() -> @kernel.Thm
+
+pub fn singular_chain_sub() -> @kernel.Thm
+
+pub fn singular_chain_subtopology() -> @kernel.Thm
+
+pub fn singular_chain_sum() -> @kernel.Thm
+
+pub fn singular_cycle() -> @kernel.Thm
+
+pub fn singular_cycle_mono() -> @kernel.Thm
+
+pub fn singular_cycle_sing() -> @kernel.Thm
+
+pub fn singular_face() -> @kernel.Thm
+
+pub fn singular_face_oriented_simplex() -> @kernel.Thm
+
+pub fn singular_face_simplex_map() -> @kernel.Thm
+
+pub fn singular_relboundary() -> @kernel.Thm
+
+pub fn singular_relboundary_0() -> @kernel.Thm
+
+pub fn singular_relboundary_add() -> @kernel.Thm
+
+pub fn singular_relboundary_alt() -> @kernel.Thm
+
+pub fn singular_relboundary_chain_map() -> @kernel.Thm
+
+pub fn singular_relboundary_cmul() -> @kernel.Thm
+
+pub fn singular_relboundary_imp_chain() -> @kernel.Thm
+
+pub fn singular_relboundary_imp_relcycle() -> @kernel.Thm
+
+pub fn singular_relboundary_neg() -> @kernel.Thm
+
+pub fn singular_relboundary_restrict() -> @kernel.Thm
+
+pub fn singular_relboundary_sub() -> @kernel.Thm
+
+pub fn singular_relboundary_v1() -> @kernel.Thm
+
+pub fn singular_relcycle() -> @kernel.Thm
+
+pub fn singular_relcycle_0() -> @kernel.Thm
+
+pub fn singular_relcycle_add() -> @kernel.Thm
+
+pub fn singular_relcycle_chain_map() -> @kernel.Thm
+
+pub fn singular_relcycle_cmul() -> @kernel.Thm
+
+pub fn singular_relcycle_neg() -> @kernel.Thm
+
+pub fn singular_relcycle_restrict() -> @kernel.Thm
+
+pub fn singular_relcycle_sub() -> @kernel.Thm
+
+pub fn singular_relcycle_sum() -> @kernel.Thm
+
+pub fn singular_relcycle_v1() -> @kernel.Thm
+
+pub fn singular_simplex() -> @kernel.Thm
+
+pub fn singular_simplex_chain_map_i() -> @kernel.Thm
+
+pub fn singular_simplex_empty() -> @kernel.Thm
+
+pub fn singular_simplex_mono() -> @kernel.Thm
+
+pub fn singular_simplex_simplex_map() -> @kernel.Thm
+
+pub fn singular_simplex_sing() -> @kernel.Thm
+
+pub fn singular_simplex_singular_face() -> @kernel.Thm
+
+pub fn singular_simplex_subtopology() -> @kernel.Thm
+
+pub fn singular_subdivision() -> @kernel.Thm
+
+pub fn singular_subdivision_0() -> @kernel.Thm
+
+pub fn singular_subdivision_add() -> @kernel.Thm
+
+pub fn singular_subdivision_simplicial_simplex() -> @kernel.Thm
+
+pub fn singular_subdivision_sub() -> @kernel.Thm
+
+pub fn singular_subdivision_zero() -> @kernel.Thm
+
+pub fn small_homologous_rel_relcycle_exists() -> @kernel.Thm
+
+pub fn standard_simplex() -> @kernel.Thm
+
+pub fn standard_simplex_0() -> @kernel.Thm
+
+pub fn standard_simplex_mono() -> @kernel.Thm
+
+pub fn subgroup_singular_relboundary() -> @kernel.Thm
+
+pub fn subgroup_singular_relboundary_relcycle() -> @kernel.Thm
+
+pub fn subgroup_singular_relcycle() -> @kernel.Thm
+
+pub fn sufficient_iterated_singular_subdivision_exists() -> @kernel.Thm
+
+pub fn topspace_standard_simplex() -> @kernel.Thm
+
+pub fn trivial_homology_group() -> @kernel.Thm
+
+pub fn trivial_homology_group_contractible_space() -> @kernel.Thm
+
+pub fn trivial_homology_group_empty() -> @kernel.Thm
+
+pub fn trivial_homomorphism_hom_boundary_inclusion() -> @kernel.Thm
+
+pub fn trivial_homomorphism_hom_induced_relativization() -> @kernel.Thm
+
+pub fn trivial_reduced_homology_group() -> @kernel.Thm
+
+pub fn trivial_reduced_homology_group_contractible_space() -> @kernel.Thm
+
+pub fn trivial_reduced_homology_group_empty() -> @kernel.Thm
+
+pub fn trivial_reduced_homology_group_nsphere() -> @kernel.Thm
+
+pub fn trivial_relative_homology_group() -> @kernel.Thm
+
+pub fn trivial_relative_homology_group_alt() -> @kernel.Thm
+
+pub fn trivial_relative_homology_group_contractible_spaces() -> @kernel.Thm
+
+pub fn trivial_relative_homology_group_empty() -> @kernel.Thm
+
+pub fn trivial_relative_homology_group_gen() -> @kernel.Thm
+
+pub fn trivial_relative_homology_group_topspace() -> @kernel.Thm
+
+pub fn un_reduced_homology_group() -> @kernel.Thm
+
+pub fn zeroth_homology_group() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
