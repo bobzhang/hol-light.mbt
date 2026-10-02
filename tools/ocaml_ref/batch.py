@@ -42,8 +42,9 @@ def after(target):
     """`moon info` after a target's translation; errors stop the batch."""
     r = subprocess.run(["moon", "info"], cwd=ROOT, capture_output=True, text=True)
     errs = re.findall(r"^Error.*(?:\n.*){0,9}", r.stdout + r.stderr, re.M)
-    if errs:
-        print(f"moon info after {target}:\n" + "\n--\n".join(errs[:8]), flush=True)
+    if errs or r.returncode != 0:
+        print(f"moon info after {target} (status {r.returncode}):\n" +
+              "\n--\n".join(errs[:8] or [(r.stdout + r.stderr)[-3000:]]), flush=True)
         sys.exit(1)
     print(f"translated {target}", flush=True)
 
@@ -120,7 +121,8 @@ def references(targets, refs):
     boot = open(os.path.join(REF, "boot.ml")).read()
     i = boot.index('#load "pa_j.cmo";;')
     open(script, "w").write(boot[:i] + '#load "unix.cma";;\n' + "".join(helpers) + boot[i:] +
-                            f"let _ = Toploop.use_silently Format.std_formatter (Toploop.File {ml_str(body)});;\n")
+                            f"let () = if not (Toploop.use_silently Format.std_formatter (Toploop.File {ml_str(body)})) "
+                            "then exit 1;;\n")
     env = os.environ.copy()
     p = subprocess.run(["sh", "-c", 'eval "$(opam env --switch=4.14.1+idea --set-switch 2>/dev/null)"; '
                         f'ocaml -w -a -alert -all -I {HOL} -I _build {script}'],
@@ -149,12 +151,32 @@ def main():
     order = theory.MV_ORDER
     targets = order[order.index(first):order.index(last) + 1]
     refs, tests, pkgs = {}, {}, {}
+    # the Multivariate packages already in the chain load in the current
+    # order (their init.mbt and moon.pkg are regenerated)
+    for d in theory.deps(targets[0]):
+        if d in order:
+            theory.setup(d)
     for t in targets:
         pkg, alias, name = theory.setup(t)
+        # a placeholder translation until the target's turn, so that the
+        # project builds (`moon info`) while earlier targets are translated
+        gen = os.path.join(ROOT, pkg, alias + ("_ml" if alias.endswith("test") else "") + ".mbt")
+        if not os.path.exists(gen):
+            open(gen, "w").write("///|\nfn load_steps() -> Unit raise {\n  ()\n}\n")
+        # regenerate the test files (the chain may have changed), keeping
+        # their hand-written checks (BEGIN/END EXTRA)
+        extras = {}
         for old in theory.write_tests_paths(t, pkg, alias, name):
             if os.path.exists(old):
+                m = re.search(r"BEGIN EXTRA[^\n]*\n(.*?)^[^\n]*END EXTRA", open(old).read(), re.S | re.M)
+                extras[old] = m.group(1) if m else ""
                 os.remove(old)
         refs[t], tests[t] = theory.write_tests(t, pkg, alias, name)
+        for path, body in extras.items():
+            if body:
+                text = open(path).read()
+                text = re.sub(r"(BEGIN EXTRA[^\n]*\n)(?=[^\n]*END EXTRA)", lambda m: m.group(1) + body, text, count=1)
+                open(path, "w").write(text)
         pkgs[t] = pkg
     translate(targets)
     for t in targets:

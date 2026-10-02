@@ -255,6 +255,11 @@ def main():
     f = sys.argv[1]
     if not f.endswith(".ml"):
         f += ".ml"
+    if f in MV_ORDER:
+        # Multivariate files: loaded after their predecessor's chain, which
+        # tools/ocaml_ref/batch.py plans (the translator's own `needs` order
+        # would differ)
+        os.execvp("python3", ["python3", os.path.join(REF, "batch.py"), f])
     pkg0 = pkg_of(f)
     aside = os.path.join(REF, "_build", "pkg_" + pkg0.replace("/", "__"))
     # an interrupted earlier run left the package aside: put it back
