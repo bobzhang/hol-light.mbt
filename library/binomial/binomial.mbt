@@ -3406,7 +3406,7 @@ fn step_29() -> Unit raise {
       @drule.mp_conv(@calc_num.num_lt_conv, th)
     } else if @num.eq_num(n, k) {
       @kernel.inst_rule(@list.List([(@nums.mk_numeral(n), n_tm)]), pth_1)
-    } else if @num.lt_num(@num.mult_num(@num.num_of_int(2), k), n) {
+    } else if @num.lt_num(@num.mult_num(@num.num_of_int64(2L), k), n) {
       let t369 = (@nums.mk_numeral(k), k_tm)
       let th1 = @kernel.inst_rule(
         @list.List([(@nums.mk_numeral(n), n_tm), t369]),
@@ -3431,7 +3431,7 @@ fn step_29() -> Unit raise {
       )
       @kernel.trans(th3, binom_rule(n, @num.sub_num(n, k)))
     } else {
-      let th1_1 = binom_rule(@num.sub_num(n, @num.num_of_int(1)), k)
+      let th1_1 = binom_rule(@num.sub_num(n, @num.num_of_int64(1L)), k)
       let y = @basics.dest_numeral(@kernel.rand(@kernel.concl(th1_1)))
       let x = @num.mult_num(@num.div_num(n, @num.sub_num(n, k)), y)
       let t373 = (@nums.mk_numeral(y), y_tm)
@@ -3439,7 +3439,7 @@ fn step_29() -> Unit raise {
       let t375 = (@nums.mk_numeral(k), k_tm)
       let th2_1 = @kernel.inst_rule(
         @list.List([
-          (@nums.mk_numeral(@num.sub_num(n, @num.num_of_int(1))), n_tm),
+          (@nums.mk_numeral(@num.sub_num(n, @num.num_of_int64(1L))), n_tm),
           t375,
           t374,
           t373,

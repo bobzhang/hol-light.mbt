@@ -1623,17 +1623,17 @@ fn step_14() -> Unit raise {
   fn log2_1(x154 : @num.Num, x155 : @num.Num) -> @num.Num raise {
     let x = x154
     let y = x155
-    if @num.lt_num(x, @num.num_of_int(1)) {
+    if @num.lt_num(x, @num.num_of_int64(1L)) {
       y
     } else {
-      let t156 = @num.add_num(y, @num.num_of_int(1))
-      log2_1(@num.quo_num(x, @num.num_of_int(2)), t156)
+      let t156 = @num.add_num(y, @num.num_of_int64(1L))
+      log2_1(@num.quo_num(x, @num.num_of_int64(2L)), t156)
     }
   }
   log2_c.set(fn(x157 : @num.Num) -> @num.Num raise {
     let x_1 = x157
-    let t158 = @num.num_of_int(0)
-    log2_1(@num.sub_num(x_1, @num.num_of_int(1)), t158)
+    let t158 = @num.num_of_int64(0L)
+    log2_1(@num.sub_num(x_1, @num.num_of_int64(1L)), t158)
   })
 }
 
@@ -15339,24 +15339,27 @@ fn step_58() -> Unit raise {
       let q = @num.quo_num(x, y)
       let r = @num.sub_num(x, @num.mult_num(q, y))
       let t2087 = @num.abs_num(y)
-      if @num.le_num(@num.abs_num(@num.mult_num(@num.num_of_int(2), r)), t2087) {
+      if @num.le_num(
+          @num.abs_num(@num.mult_num(@num.num_of_int64(2L), r)),
+          t2087,
+        ) {
         q
       } else {
         let t2089 = @num.abs_num(y)
         let t2088 = @num.sub_num(r, y)
         if @num.le_num(
-            @num.abs_num(@num.mult_num(@num.num_of_int(2), t2088)),
+            @num.abs_num(@num.mult_num(@num.num_of_int64(2L), t2088)),
             t2089,
           ) {
-          @num.add_num(q, @num.num_of_int(1))
+          @num.add_num(q, @num.num_of_int64(1L))
         } else {
           let t2091 = @num.abs_num(y)
           let t2090 = @num.add_num(r, y)
           if @num.le_num(
-              @num.abs_num(@num.mult_num(@num.num_of_int(2), t2090)),
+              @num.abs_num(@num.mult_num(@num.num_of_int64(2L), t2090)),
               t2091,
             ) {
-            @num.sub_num(q, @num.num_of_int(1))
+            @num.sub_num(q, @num.num_of_int64(1L))
           } else {
             let t2092 = " and " + @num.string_of_num(y)
             let s = @num.string_of_num(x) + t2092
@@ -15373,8 +15376,8 @@ fn step_58() -> Unit raise {
     x2093 : (@num.Num) -> @num.Num raise,
   ) -> (Ref[(@num.Num, @num.Num)], (@num.Num) -> @num.Num raise) raise {
     let _ as f = x2093
-    let t2094 = @num.num_of_int(0)
-    (Ref::{ val: (@num.num_of_int(@lib.int63_to_int(-1L)), t2094), }, f)
+    let t2094 = @num.num_of_int64(0L)
+    (Ref::{ val: (@num.num_of_int64(-1L), t2094), }, f)
   }
   let raw_eval : ((Ref[(@num.Num, @num.Num)], (@num.Num) -> @num.Num raise)) -> ((
     @num.Num,
@@ -15387,7 +15390,7 @@ fn step_58() -> Unit raise {
       let (n0, y0) = r_1.val
       if @num.le_num(n, n0) {
         let t2097 = @num.sub_num(n0, n)
-        let t2098 = @num.power_num(@num.num_of_int(2), t2097)
+        let t2098 = @num.power_num(@num.num_of_int64(2L), t2097)
         ndiv(y0)(t2098)
       } else {
         let y_1 = f_1(n)
@@ -15427,7 +15430,7 @@ fn step_58() -> Unit raise {
             @kernel.mk_comb(
               suc_tm,
               @nums.mk_numeral(
-                @num.sub_num(n0_1, @num.add_num(n_1, @num.num_of_int(1))),
+                @num.sub_num(n0_1, @num.add_num(n_1, @num.num_of_int64(1L))),
               ),
             ),
           )
@@ -15444,7 +15447,7 @@ fn step_58() -> Unit raise {
           let (tm5f, tm5g) = @kernel.dest_comb(@kernel.rand(tm5d))
           let tm5h = @kernel.rand(@kernel.rand(tm5f))
           let t2107 = @basics.dest_numeral(tm5h)
-          let t2108 = @num.power_num(@num.num_of_int(2), t2107)
+          let t2108 = @num.power_num(@num.num_of_int64(2L), t2107)
           let bin = @calc_int.mk_realintconst(
             ndiv(@calc_int.dest_realintconst(tm5e))(t2108),
           )
@@ -15535,10 +15538,7 @@ fn step_58() -> Unit raise {
     x2120 : (@num.Num) -> @kernel.Thm raise,
   ) -> (Ref[(@num.Num, @kernel.Thm)], (@num.Num) -> @kernel.Thm raise) raise {
     let _ as f_3 = x2120
-    (
-      Ref::{ val: (@num.num_of_int(@lib.int63_to_int(-1L)), @bool.truth()), },
-      f_3,
-    )
+    (Ref::{ val: (@num.num_of_int64(-1L), @bool.truth()), }, f_3)
   }
   fn find_msd(
     x2121 : @num.Num,
@@ -15547,13 +15547,13 @@ fn step_58() -> Unit raise {
     let n_2 = x2121
     let f_4 = x2122
     let t2123 = @num.abs_num(raw_eval(f_4)(n_2))
-    if @num.lt_num(@num.num_of_int(1), t2123) {
+    if @num.lt_num(@num.num_of_int64(1L), t2123) {
       n_2
     } else {
-      find_msd(@num.add_num(n_2, @num.num_of_int(1)), f_4)
+      find_msd(@num.add_num(n_2, @num.num_of_int64(1L)), f_4)
     }
   }
-  let t2124 = @num.num_of_int(0)
+  let t2124 = @num.num_of_int64(0L)
   let find_msd_1 : ((Ref[(@num.Num, @num.Num)], (@num.Num) -> @num.Num raise)) -> @num.Num raise = (
     x2125 : (Ref[(@num.Num, @num.Num)], (@num.Num) -> @num.Num raise),
   ) => find_msd(t2124, x2125)
@@ -15564,13 +15564,13 @@ fn step_58() -> Unit raise {
     let n_3 = x2126
     let f_5 = x2127
     let t2128 = @num.abs_num(raw_eval(f_5)(n_3))
-    if @num.lt_num(@num.num_of_int(32), t2128) {
+    if @num.lt_num(@num.num_of_int64(32L), t2128) {
       n_3
     } else {
-      find_msd_2(@num.add_num(n_3, @num.num_of_int(1)), f_5)
+      find_msd_2(@num.add_num(n_3, @num.num_of_int64(1L)), f_5)
     }
   }
-  let t2129 = @num.num_of_int(0)
+  let t2129 = @num.num_of_int64(0L)
   let find_acc : ((Ref[(@num.Num, @num.Num)], (@num.Num) -> @num.Num raise)) -> @num.Num raise = (
     x2130 : (Ref[(@num.Num, @num.Num)], (@num.Num) -> @num.Num raise),
   ) => find_msd_2(t2129, x2130)
@@ -15580,7 +15580,7 @@ fn step_58() -> Unit raise {
     let f_6 = x2131
     let k = find_acc(f_6)
     let a = @num.abs_num(raw_eval(f_6)(k))
-    @num.sub_num(k, log2(@num.add_num(a, @num.num_of_int(1))))
+    @num.sub_num(k, log2(@num.add_num(a, @num.num_of_int64(1L))))
   }
   let t_tm = @parser.parse_term("t:num->real")
   let n_tm_1 = @parser.parse_term("n:num")
@@ -15601,7 +15601,7 @@ fn step_58() -> Unit raise {
     if @num.ge_num(acc, r_3) {
       i
     } else {
-      let i_p = @num.add_num(i, @num.num_of_int(1))
+      let i_p = @num.add_num(i, @num.num_of_int64(1L))
       calculate_m(@num.mult_num(i_p, acc), i_p, r_3)
     }
   }
@@ -15613,15 +15613,15 @@ fn step_58() -> Unit raise {
     let p2 = x2135
     let s_1 = x2136
     let i_1 = x2137
-    if @num.lt_num(i_1, @num.num_of_int(0)) {
+    if @num.lt_num(i_1, @num.num_of_int64(0L)) {
       @list.empty()
-    } else if @num.eq_num(i_1, @num.num_of_int(0)) {
+    } else if @num.eq_num(i_1, @num.num_of_int64(0L)) {
       @list.List([p2])
     } else {
       let acc_1 = calculate_exp_sequence(
         p2,
         s_1,
-        @num.sub_num(i_1, @num.num_of_int(1)),
+        @num.sub_num(i_1, @num.num_of_int64(1L)),
       )
       let t = @lib.hd(acc_1)
       let t2138 = @num.mult_num(p2, i_1)
@@ -15639,9 +15639,13 @@ fn step_58() -> Unit raise {
       let s_2 = x2140
       fn(x2141 : @num.Num) -> @list.List[@num.Num] raise {
         let m = x2141
-        let p2_1 = @num.power_num(@num.num_of_int(2), p)
+        let p2_1 = @num.power_num(@num.num_of_int64(2L), p)
         @lib.rev(
-          calculate_exp_sequence(p2_1, s_2, @num.sub_num(m, @num.num_of_int(1))),
+          calculate_exp_sequence(
+            p2_1,
+            s_2,
+            @num.sub_num(m, @num.num_of_int64(1L)),
+          ),
         )
       }
     }
@@ -15684,13 +15688,13 @@ fn step_58() -> Unit raise {
       x2147 : @num.Num,
     ) -> @num.Num raise {
       let n_4 = x2147
-      let t2148 = @num.add_num(n_4, @num.num_of_int(2))
-      let t2149 = @num.power_num(@num.num_of_int(2), t2148)
-      let t2150 = @num.mult_num(@num.num_of_int(3), t2149)
-      let t2151 = @num.num_of_int(0)
-      let m_1 = calculate_m(@num.num_of_int(1), t2151, t2150)
-      let e = log2(@num.mult_num(@num.num_of_int(2), m_1))
-      let t2152 = @num.num_of_int(2)
+      let t2148 = @num.add_num(n_4, @num.num_of_int64(2L))
+      let t2149 = @num.power_num(@num.num_of_int64(2L), t2148)
+      let t2150 = @num.mult_num(@num.num_of_int64(3L), t2149)
+      let t2151 = @num.num_of_int64(0L)
+      let m_1 = calculate_m(@num.num_of_int64(1L), t2151, t2150)
+      let e = log2(@num.mult_num(@num.num_of_int64(2L), m_1))
+      let t2152 = @num.num_of_int64(2L)
       let p_1 = @num.add_num(@num.add_num(n_4, e), t2152)
       let s_3 = raw_eval(fn1)(p_1)
       let seq = calculate_exp_sequence_1(p_1)(s_3)(m_1)
@@ -15699,23 +15703,23 @@ fn step_58() -> Unit raise {
           @num.add_num(x2153, x2154)
         },
         seq,
-        @num.num_of_int(0),
+        @num.num_of_int64(0L),
       )
-      let t2155 = @num.add_num(e, @num.num_of_int(2))
-      let t2156 = @num.power_num(@num.num_of_int(2), t2155)
+      let t2155 = @num.add_num(e, @num.num_of_int64(2L))
+      let t2156 = @num.power_num(@num.num_of_int64(2L), t2155)
       ndiv(u0)(t2156)
     }
     let thm_fn : (@num.Num) -> @kernel.Thm raise = fn(
       x2157 : @num.Num,
     ) -> @kernel.Thm raise {
       let n_5 = x2157
-      let t2158 = @num.add_num(n_5, @num.num_of_int(2))
-      let t2159 = @num.power_num(@num.num_of_int(2), t2158)
-      let t2160 = @num.mult_num(@num.num_of_int(3), t2159)
-      let t2161 = @num.num_of_int(0)
-      let m_2 = calculate_m(@num.num_of_int(1), t2161, t2160)
-      let e_1 = log2(@num.mult_num(@num.num_of_int(2), m_2))
-      let t2162 = @num.num_of_int(2)
+      let t2158 = @num.add_num(n_5, @num.num_of_int64(2L))
+      let t2159 = @num.power_num(@num.num_of_int64(2L), t2158)
+      let t2160 = @num.mult_num(@num.num_of_int64(3L), t2159)
+      let t2161 = @num.num_of_int64(0L)
+      let m_2 = calculate_m(@num.num_of_int64(1L), t2161, t2160)
+      let e_1 = log2(@num.mult_num(@num.num_of_int64(2L), m_2))
+      let t2162 = @num.num_of_int64(2L)
       let p_2 = @num.add_num(@num.add_num(n_5, e_1), t2162)
       let sth = thm_eval(fn2)(p_2)
       let tm1 = @kernel.rand(@equal.lhand(@kernel.concl(sth)))
@@ -15728,10 +15732,10 @@ fn step_58() -> Unit raise {
           @num.add_num(x2163, x2164)
         },
         seq_1,
-        @num.num_of_int(0),
+        @num.num_of_int64(0L),
       )
-      let t2165 = @num.add_num(e_1, @num.num_of_int(2))
-      let t2166 = @num.power_num(@num.num_of_int(2), t2165)
+      let t2165 = @num.add_num(e_1, @num.num_of_int64(2L))
+      let t2166 = @num.power_num(@num.num_of_int64(2L), t2165)
       let u = ndiv(u0_1)(t2166)
       let m_num = @nums.mk_numeral(m_2)
       let n_num = @nums.mk_numeral(n_5)
@@ -15820,12 +15824,12 @@ fn step_58() -> Unit raise {
     let m_3 = x2174
     let r_4 = x2175
     if @num.ge_num(
-        @num.mult_num(acc_2, @num.add_num(m_3, @num.num_of_int(1))),
+        @num.mult_num(acc_2, @num.add_num(m_3, @num.num_of_int64(1L))),
         r_4,
       ) {
       m_3
     } else {
-      let t2176 = @num.add_num(m_3, @num.num_of_int(1))
+      let t2176 = @num.add_num(m_3, @num.num_of_int64(1L))
       calculate_m_1(@num.mult_num(k2, acc_2), k2, t2176, r_4)
     }
   }
@@ -15837,24 +15841,21 @@ fn step_58() -> Unit raise {
     let p2_2 = x2177
     let s_5 = x2178
     let i_2 = x2179
-    if @num.lt_num(i_2, @num.num_of_int(0)) {
+    if @num.lt_num(i_2, @num.num_of_int64(0L)) {
       @list.empty()
-    } else if @num.eq_num(i_2, @num.num_of_int(0)) {
+    } else if @num.eq_num(i_2, @num.num_of_int64(0L)) {
       @list.List([s_5])
     } else {
       let acc_3 = calculate_ln_sequence(
         p2_2,
         s_5,
-        @num.sub_num(i_2, @num.num_of_int(1)),
+        @num.sub_num(i_2, @num.num_of_int64(1L)),
       )
       let t_1 = @lib.hd(acc_3)
-      let t2180 = @num.mult_num(p2_2, @num.add_num(i_2, @num.num_of_int(1)))
+      let t2180 = @num.mult_num(p2_2, @num.add_num(i_2, @num.num_of_int64(1L)))
       let t_p_1 = ndiv(
         @num.mult_num(
-          @num.mult_num(
-            @num.mult_num(@num.num_of_int(@lib.int63_to_int(-1L)), s_5),
-            t_1,
-          ),
+          @num.mult_num(@num.mult_num(@num.num_of_int64(-1L), s_5), t_1),
           i_2,
         ),
       )(t2180)
@@ -15871,12 +15872,12 @@ fn step_58() -> Unit raise {
       let s_6 = x2182
       fn(x2183 : @num.Num) -> @list.List[@num.Num] raise {
         let m_4 = x2183
-        let p2_3 = @num.power_num(@num.num_of_int(2), p_3)
+        let p2_3 = @num.power_num(@num.num_of_int64(2L), p_3)
         @lib.rev(
           calculate_ln_sequence(
             p2_3,
             s_6,
-            @num.sub_num(m_4, @num.num_of_int(1)),
+            @num.sub_num(m_4, @num.num_of_int64(1L)),
           ),
         )
       }
@@ -15945,15 +15946,15 @@ fn step_58() -> Unit raise {
     ) -> @num.Num raise {
       let n_6 = x2193
       let k_1 = find_ubound(fn1_1)
-      if @num.lt_num(k_1, @num.num_of_int(1)) {
+      if @num.lt_num(k_1, @num.num_of_int64(1L)) {
         raise Failure("ln of number not provably <= 1/2")
       } else {
-        let k2_1 = @num.power_num(@num.num_of_int(2), k_1)
-        let t2194 = @num.add_num(n_6, @num.num_of_int(2))
-        let t2195 = @num.power_num(@num.num_of_int(2), t2194)
-        let m_5 = calculate_m_1(k2_1, k2_1, @num.num_of_int(0), t2195)
-        let e_2 = log2(@num.mult_num(@num.num_of_int(3), m_5))
-        let t2196 = @num.num_of_int(2)
+        let k2_1 = @num.power_num(@num.num_of_int64(2L), k_1)
+        let t2194 = @num.add_num(n_6, @num.num_of_int64(2L))
+        let t2195 = @num.power_num(@num.num_of_int64(2L), t2194)
+        let m_5 = calculate_m_1(k2_1, k2_1, @num.num_of_int64(0L), t2195)
+        let e_2 = log2(@num.mult_num(@num.num_of_int64(3L), m_5))
+        let t2196 = @num.num_of_int64(2L)
         let p_4 = @num.add_num(@num.add_num(n_6, e_2), t2196)
         let s_7 = raw_eval(fn1_1)(p_4)
         let seq_2 = calculate_ln_sequence_1(p_4)(s_7)(m_5)
@@ -15962,10 +15963,10 @@ fn step_58() -> Unit raise {
             @num.add_num(x2197, x2198)
           },
           seq_2,
-          @num.num_of_int(0),
+          @num.num_of_int64(0L),
         )
-        let t2199 = @num.add_num(e_2, @num.num_of_int(2))
-        let t2200 = @num.power_num(@num.num_of_int(2), t2199)
+        let t2199 = @num.add_num(e_2, @num.num_of_int64(2L))
+        let t2200 = @num.power_num(@num.num_of_int64(2L), t2199)
         ndiv(u0_2)(t2200)
       }
     }
@@ -15974,15 +15975,15 @@ fn step_58() -> Unit raise {
     ) -> @kernel.Thm raise {
       let n_7 = x2201
       let k_2 = find_ubound(fn1_1)
-      if @num.lt_num(k_2, @num.num_of_int(1)) {
+      if @num.lt_num(k_2, @num.num_of_int64(1L)) {
         raise Failure("ln of number not provably <= 1/2")
       } else {
-        let k2_2 = @num.power_num(@num.num_of_int(2), k_2)
-        let t2202 = @num.add_num(n_7, @num.num_of_int(2))
-        let t2203 = @num.power_num(@num.num_of_int(2), t2202)
-        let m_6 = calculate_m_1(k2_2, k2_2, @num.num_of_int(0), t2203)
-        let e_3 = log2(@num.mult_num(@num.num_of_int(3), m_6))
-        let t2204 = @num.num_of_int(2)
+        let k2_2 = @num.power_num(@num.num_of_int64(2L), k_2)
+        let t2202 = @num.add_num(n_7, @num.num_of_int64(2L))
+        let t2203 = @num.power_num(@num.num_of_int64(2L), t2202)
+        let m_6 = calculate_m_1(k2_2, k2_2, @num.num_of_int64(0L), t2203)
+        let e_3 = log2(@num.mult_num(@num.num_of_int64(3L), m_6))
+        let t2204 = @num.num_of_int64(2L)
         let p_5 = @num.add_num(@num.add_num(n_7, e_3), t2204)
         let sth_1 = thm_eval(fn2_1)(p_5)
         let tm1_1 = @kernel.rand(@equal.lhand(@kernel.concl(sth_1)))
@@ -15995,10 +15996,10 @@ fn step_58() -> Unit raise {
             @num.add_num(x2205, x2206)
           },
           seq_3,
-          @num.num_of_int(0),
+          @num.num_of_int64(0L),
         )
-        let t2207 = @num.add_num(e_3, @num.num_of_int(2))
-        let t2208 = @num.power_num(@num.num_of_int(2), t2207)
+        let t2207 = @num.add_num(e_3, @num.num_of_int64(2L))
+        let t2208 = @num.power_num(@num.num_of_int64(2L), t2207)
         let u_1 = ndiv(u0_3)(t2208)
         let m_num_1 = @nums.mk_numeral(m_6)
         let n_num_1 = @nums.mk_numeral(n_7)
@@ -16084,7 +16085,7 @@ fn step_58() -> Unit raise {
   ) -> @num.Num raise {
     let (a_3, b_2) = x2213
     let y_2 = x2214
-    let t2215 = @num.num_of_int(1)
+    let t2215 = @num.num_of_int64(1L)
     if @num.le_num(@num.abs_num(@num.sub_num(a_3, b_2)), t2215) {
       if @num.le_num(
           @num.abs_num(@num.sub_num(@num.mult_num(a_3, a_3), y_2)),
@@ -16095,7 +16096,7 @@ fn step_58() -> Unit raise {
         b_2
       }
     } else {
-      let t2216 = @num.num_of_int(2)
+      let t2216 = @num.num_of_int64(2L)
       let c = @num.quo_num(@num.add_num(a_3, b_2), t2216)
       if @num.le_num(@num.mult_num(c, c), y_2) {
         isolate_sqrt((c, b_2), y_2)
@@ -16108,7 +16109,7 @@ fn step_58() -> Unit raise {
     x2217 : @num.Num,
   ) -> @num.Num raise {
     let n_8 = x2217
-    isolate_sqrt((@num.num_of_int(0), n_8), n_8)
+    isolate_sqrt((@num.num_of_int64(0L), n_8), n_8)
   }
   let match_pth : (@kernel.Thm) -> @kernel.Thm raise = @drule.match_mp(
     realcalc_sqrt(),
@@ -16296,7 +16297,7 @@ fn step_58() -> Unit raise {
     ) -> @num.Num raise {
       let n_9 = x2240
       let t2241 = raw_eval(fn1_2)(n_9)
-      num_sqrt(@num.mult_num(@num.power_num(@num.num_of_int(2), n_9), t2241))
+      num_sqrt(@num.mult_num(@num.power_num(@num.num_of_int64(2L), n_9), t2241))
     }
     let thm_fn_2 : (@num.Num) -> @kernel.Thm raise = fn(
       x2242 : @num.Num,
@@ -16364,7 +16365,7 @@ fn step_58() -> Unit raise {
           ) -> @num.Num raise {
             let acc_4 = x2251
             @num.floor_num(
-              @num.mult_num(@num.power_num(@num.num_of_int(2), acc_4), x_1),
+              @num.mult_num(@num.power_num(@num.num_of_int64(2L), acc_4), x_1),
             )
           }
           let thm_fn_3 : (@num.Num) -> @kernel.Thm raise = fn(
@@ -16372,7 +16373,7 @@ fn step_58() -> Unit raise {
           ) -> @kernel.Thm raise {
             let acc_5 = x2252
             let a_4 = @num.floor_num(
-              @num.mult_num(@num.power_num(@num.num_of_int(2), acc_5), x_1),
+              @num.mult_num(@num.power_num(@num.num_of_int64(2L), acc_5), x_1),
             )
             let atm = @calc_int.mk_realintconst(a_4)
             let rtm = @kernel.mk_comb(
@@ -16453,29 +16454,29 @@ fn step_58() -> Unit raise {
             realcalc_sqrt_conv(realcalc_conv(r_5))
           } else if lop == inv_tm {
             let (rfn_2, tfn_2) = realcalc_conv(r_5)
-            let t2261 = @num.num_of_int(0)
+            let t2261 = @num.num_of_int64(0L)
             let x0 = raw_eval(rfn_2)(t2261)
             let ax0 = @num.abs_num(x0)
-            let t2262 = @num.num_of_int(1)
+            let t2262 = @num.num_of_int64(1L)
             let r_6 = @num.sub_num(log2(ax0), t2262)
             let get_ek : (@num.Num) -> (@num.Num, @num.Num) raise = fn(
               x2263 : @num.Num,
             ) -> (@num.Num, @num.Num) raise {
               let acc_10 = x2263
-              if @lib.compare(r_6, @num.num_of_int(0)) < 0 {
+              if @lib.compare(r_6, @num.num_of_int64(0L)) < 0 {
                 let p_6 = find_msd_1(rfn_2)
-                let t2264 = @num.num_of_int(1)
+                let t2264 = @num.num_of_int64(1L)
                 let e_4 = @num.add_num(@num.add_num(acc_10, p_6), t2264)
                 let k_4 = @num.add_num(e_4, p_6)
                 (e_4, k_4)
               } else {
-                let t2265 = @num.mult_num(@num.num_of_int(2), r_6)
+                let t2265 = @num.mult_num(@num.num_of_int64(2L), r_6)
                 let k0 = @num.sub_num(
-                  @num.add_num(acc_10, @num.num_of_int(1)),
+                  @num.add_num(acc_10, @num.num_of_int64(1L)),
                   t2265,
                 )
-                let k_5 = if @num.lt_num(k0, @num.num_of_int(0)) {
-                  @num.num_of_int(0)
+                let k_5 = if @num.lt_num(k0, @num.num_of_int64(0L)) {
+                  @num.num_of_int64(0L)
                 } else {
                   k0
                 }
@@ -16489,7 +16490,7 @@ fn step_58() -> Unit raise {
               let acc_11 = x2266
               let (_, k_6) = get_ek(acc_11)
               let t2267 = @num.add_num(acc_11, k_6)
-              let nk2 = @num.power_num(@num.num_of_int(2), t2267)
+              let nk2 = @num.power_num(@num.num_of_int64(2L), t2267)
               let t2268 = raw_eval(rfn_2)(k_6)
               ndiv(nk2)(t2268)
             }
@@ -16499,7 +16500,7 @@ fn step_58() -> Unit raise {
               let acc_12 = x2269
               let (e_6, k_7) = get_ek(acc_12)
               let t2270 = @num.add_num(acc_12, k_7)
-              let nk2_1 = @num.power_num(@num.num_of_int(2), t2270)
+              let nk2_1 = @num.power_num(@num.num_of_int64(2L), t2270)
               let th1_6 = thm_eval(tfn_2)(k_7)
               let atm_1 = @equal.lhand(
                 @kernel.rand(@equal.lhand(@kernel.concl(th1_6))),
@@ -16584,8 +16585,8 @@ fn step_58() -> Unit raise {
                 x2276 : @num.Num,
               ) -> @num.Num raise {
                 let acc_13 = x2276
-                let acc_p = @num.add_num(acc_13, @num.num_of_int(2))
-                let t2278 = @num.num_of_int(4)
+                let acc_p = @num.add_num(acc_13, @num.num_of_int64(2L))
+                let t2278 = @num.num_of_int64(4L)
                 let t2277 = raw_eval(rfn2)(acc_p)
                 ndiv(@num.add_num(raw_eval(rfn1)(acc_p), t2277))(t2278)
               }
@@ -16593,7 +16594,7 @@ fn step_58() -> Unit raise {
                 x2279 : @num.Num,
               ) -> @kernel.Thm raise {
                 let acc_14 = x2279
-                let acc_p_1 = @num.add_num(acc_14, @num.num_of_int(2))
+                let acc_p_1 = @num.add_num(acc_14, @num.num_of_int64(2L))
                 let th1_7 = @kernel.inst_rule(
                   @list.List([(@nums.mk_numeral(acc_14), n_tm)]),
                   realcalc_add(),
@@ -16612,7 +16613,7 @@ fn step_58() -> Unit raise {
                 let n2 = @calc_int.dest_realintconst(
                   @equal.lhand(@kernel.rand(@equal.lhand(@kernel.concl(th5_4)))),
                 )
-                let t2281 = @num.num_of_int(4)
+                let t2281 = @num.num_of_int64(4L)
                 let ci = @calc_int.mk_realintconst(
                   ndiv(@num.add_num(n1, n2))(t2281),
                 )
@@ -16633,21 +16634,21 @@ fn step_58() -> Unit raise {
                 x2283 : @num.Num,
               ) -> (@num.Num, @num.Num) raise {
                 let acc_15 = x2283
-                let n_p = @num.add_num(acc_15, @num.num_of_int(2))
-                let r_7 = @num.quo_num(n_p, @num.num_of_int(2))
+                let n_p = @num.add_num(acc_15, @num.num_of_int64(2L))
+                let r_7 = @num.quo_num(n_p, @num.num_of_int64(2L))
                 let s_9 = @num.sub_num(n_p, r_7)
                 let p_7 = log2(@num.abs_num(raw_eval(rfn1_1)(r_7)))
                 let q_1 = log2(@num.abs_num(raw_eval(rfn2_1)(s_9)))
-                let t2284 = @num.num_of_int(1)
+                let t2284 = @num.num_of_int64(1L)
                 let k_8 = @num.add_num(@num.add_num(q_1, r_7), t2284)
-                let t2285 = @num.num_of_int(1)
+                let t2285 = @num.num_of_int64(1L)
                 let l_1 = @num.add_num(@num.add_num(p_7, s_9), t2285)
-                if @num.eq_num(p_7, @num.num_of_int(0)) &&
-                  @num.eq_num(q_1, @num.num_of_int(0)) {
+                if @num.eq_num(p_7, @num.num_of_int64(0L)) &&
+                  @num.eq_num(q_1, @num.num_of_int64(0L)) {
                   if @num.lt_num(k_8, l_1) {
-                    (@num.add_num(k_8, @num.num_of_int(1)), l_1)
+                    (@num.add_num(k_8, @num.num_of_int64(1L)), l_1)
                   } else {
-                    (k_8, @num.add_num(l_1, @num.num_of_int(1)))
+                    (k_8, @num.add_num(l_1, @num.num_of_int64(1L)))
                   }
                 } else {
                   (k_8, l_1)
@@ -16659,7 +16660,7 @@ fn step_58() -> Unit raise {
                 let acc_16 = x2286
                 let (k_9, l_2) = get_kl(acc_16)
                 let m_7 = @num.sub_num(@num.add_num(k_9, l_2), acc_16)
-                let t2288 = @num.power_num(@num.num_of_int(2), m_7)
+                let t2288 = @num.power_num(@num.num_of_int64(2L), m_7)
                 let t2287 = raw_eval(rfn2_1)(l_2)
                 ndiv(@num.mult_num(raw_eval(rfn1_1)(k_9), t2287))(t2288)
               }
@@ -16677,7 +16678,7 @@ fn step_58() -> Unit raise {
                 let b_4 = @calc_int.dest_realintconst(
                   @equal.lhand(@kernel.rand(@equal.lhand(@kernel.concl(th1b)))),
                 )
-                let t2290 = @num.power_num(@num.num_of_int(2), m_8)
+                let t2290 = @num.power_num(@num.num_of_int64(2L), m_8)
                 let c_1 = ndiv(@num.mult_num(a_6, b_4))(t2290)
                 let ntm_1 = @nums.mk_numeral(acc_17)
                 let mtm = @nums.mk_numeral(m_8)
@@ -17159,10 +17160,10 @@ fn step_64() -> Unit raise {
     let rfn1 = x2343
     let rfn2 = x2344
     let n = x2345
-    if @num.gt_num(n, @num.num_of_int(1000)) {
+    if @num.gt_num(n, @num.num_of_int64(1000L)) {
       raise Failure("realcalc_rel_conv: too close to discriminate")
     } else {
-      let t2347 = @num.num_of_int(4)
+      let t2347 = @num.num_of_int64(4L)
       let t2346 = raw_eval(rfn2)(n)
       if @num.ge_num(
           @num.abs_num(@num.sub_num(raw_eval(rfn1)(n), t2346)),
@@ -17170,7 +17171,7 @@ fn step_64() -> Unit raise {
         ) {
         n
       } else {
-        find_n(rfn1, rfn2, @num.add_num(n, @num.num_of_int(1)))
+        find_n(rfn1, rfn2, @num.add_num(n, @num.num_of_int64(1L)))
       }
     }
   }
@@ -17186,7 +17187,7 @@ fn step_64() -> Unit raise {
     }
     let (rfn1_1, tfn1) = realcalc_conv(l)
     let (rfn2_1, tfn2) = realcalc_conv(r)
-    let n_1 = find_n(rfn1_1, rfn2_1, @num.num_of_int(1))
+    let n_1 = find_n(rfn1_1, rfn2_1, @num.num_of_int64(1L))
     let t2349 = raw_eval(rfn2_1)(n_1)
     pop(raw_eval(rfn1_1)(n_1))(t2349)
   })
@@ -17225,10 +17226,10 @@ fn step_65() -> Unit raise {
     let rfn1 = x2354
     let rfn2 = x2355
     let n = x2356
-    if @num.gt_num(n, @num.num_of_int(1000)) {
+    if @num.gt_num(n, @num.num_of_int64(1000L)) {
       raise Failure("realcalc_rel_conv: too close to discriminate")
     } else {
-      let t2358 = @num.num_of_int(4)
+      let t2358 = @num.num_of_int64(4L)
       let t2357 = raw_eval(rfn2)(n)
       if @num.ge_num(
           @num.abs_num(@num.sub_num(raw_eval(rfn1)(n), t2357)),
@@ -17236,7 +17237,7 @@ fn step_65() -> Unit raise {
         ) {
         n
       } else {
-        find_n(rfn1, rfn2, @num.add_num(n, @num.num_of_int(1)))
+        find_n(rfn1, rfn2, @num.add_num(n, @num.num_of_int64(1L)))
       }
     }
   }
@@ -17250,7 +17251,7 @@ fn step_65() -> Unit raise {
     }
     let (rfn1_1, tfn1) = realcalc_conv(l)
     let (rfn2_1, tfn2) = realcalc_conv(r)
-    let n_1 = find_n(rfn1_1, rfn2_1, @num.num_of_int(1))
+    let n_1 = find_n(rfn1_1, rfn2_1, @num.num_of_int64(1L))
     let th1 = thm_eval(tfn1)(n_1)
     let th2 = thm_eval(tfn2)(n_1)
     let t2360 = @bool.conj(th1, th2)

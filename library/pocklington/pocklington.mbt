@@ -10,7 +10,7 @@ fn step_1() -> Unit raise {
 ///|
 /// num_0
 fn step_2() -> Unit raise {
-  num_0_c.set(@num.num_of_int(0))
+  num_0_c.set(@num.num_of_int64(0L))
 }
 
 ///|
@@ -25,7 +25,7 @@ pub fn num_0() -> @num.Num {
 ///|
 /// num_1
 fn step_3() -> Unit raise {
-  num_1_c.set(@num.num_of_int(1))
+  num_1_c.set(@num.num_of_int64(1L))
 }
 
 ///|
@@ -40,7 +40,7 @@ pub fn num_1() -> @num.Num {
 ///|
 /// num_2
 fn step_4() -> Unit raise {
-  num_2_c.set(@num.num_of_int(2))
+  num_2_c.set(@num.num_of_int64(2L))
 }
 
 ///|
@@ -7718,9 +7718,9 @@ fn step_96() -> Unit raise {
     if @num.lt_num(n, m) {
       let (x, y) = gcdex(n, m)
       (y, x)
-    } else if @num.eq_num(m, @num.num_of_int(0)) {
-      let t762 = @num.num_of_int(1)
-      (@num.num_of_int(0), t762)
+    } else if @num.eq_num(m, @num.num_of_int64(0L)) {
+      let t762 = @num.num_of_int64(1L)
+      (@num.num_of_int64(0L), t762)
     } else {
       let q = @num.quo_num(n, m)
       let r = @num.sub_num(n, @num.mult_num(q, m))
@@ -26124,7 +26124,7 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash] multilist_l(
   } else {
     let (x, n_2) = @lib.hd(l)
     let t2708 = multilist_l(@lib.tl(l))
-    @lib.replicate(x, @num.int_of_num(n_2)).concat(t2708)
+    @lib.replicate(x, @lib.int63_to_int(@num.int63_of_num(n_2))).concat(t2708)
   }
 }
 
@@ -26955,13 +26955,13 @@ fn step_221() -> Unit raise {
 ///|
 /// Library/pocklington.ml:2614
 fn step_222() -> Unit raise {
-  ignore(@lib.time(prove_primefact, @num.num_of_int(222)))
+  ignore(@lib.time(prove_primefact, @num.num_of_int64(222L)))
 }
 
 ///|
 /// Library/pocklington.ml:2616
 fn step_223() -> Unit raise {
-  ignore(@lib.time(prove_primefact, @num.num_of_int(151)))
+  ignore(@lib.time(prove_primefact, @num.num_of_int64(151L)))
 }
 
 ///|

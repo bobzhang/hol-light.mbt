@@ -1355,7 +1355,7 @@ fn step_17() -> Unit raise {
     let d = @num.gcd_num(x3n, y3n)
     let x3n_p = @num.quo_num(x3n, d)
     let y3n_p = @num.quo_num(y3n, d)
-    let (x3n_p_p, y3n_p_p) = if @num.gt_num(y3n_p, @num.num_of_int(0)) {
+    let (x3n_p_p, y3n_p_p) = if @num.gt_num(y3n_p, @num.num_of_int64(0L)) {
       (x3n_p, y3n_p)
     } else {
       let t152 = @num.minus_num(y3n_p)

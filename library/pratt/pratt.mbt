@@ -10,7 +10,7 @@ fn step_1() -> Unit raise {
 ///|
 /// num_0
 fn step_2() -> Unit raise {
-  num_0_c.set(@num.num_of_int(0))
+  num_0_c.set(@num.num_of_int64(0L))
 }
 
 ///|
@@ -25,7 +25,7 @@ pub fn num_0() -> @num.Num {
 ///|
 /// num_1
 fn step_3() -> Unit raise {
-  num_1_c.set(@num.num_of_int(1))
+  num_1_c.set(@num.num_of_int64(1L))
 }
 
 ///|
@@ -40,7 +40,7 @@ pub fn num_1() -> @num.Num {
 ///|
 /// num_2
 fn step_4() -> Unit raise {
-  num_2_c.set(@num.num_of_int(2))
+  num_2_c.set(@num.num_of_int64(2L))
 }
 
 ///|
@@ -10572,7 +10572,7 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash] multilist_l(
   } else {
     let (x, n) = @lib.hd(l)
     let t1064 = multilist_l(@lib.tl(l))
-    @lib.replicate(x, @num.int_of_num(n)).concat(t1064)
+    @lib.replicate(x, @lib.int63_to_int(@num.int63_of_num(n))).concat(t1064)
   }
 }
 
@@ -11168,9 +11168,9 @@ fn step_54() -> Unit raise {
   prime_test_c.set(fn(x1132 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x1132
     let p = @basics.dest_numeral(tm)
-    if @num.eq_num(p, @num.num_of_int(0)) {
+    if @num.eq_num(p, @num.num_of_int64(0L)) {
       @bool.eqf_intro(@prime.prime_0())
-    } else if @num.eq_num(p, @num.num_of_int(1)) {
+    } else if @num.eq_num(p, @num.num_of_int64(1L)) {
       @bool.eqf_intro(@prime.prime_1())
     } else {
       let pfact = multifactor(p)
@@ -11284,13 +11284,13 @@ fn step_59() -> Unit raise {
 ///|
 /// Library/pratt.ml:976
 fn step_60() -> Unit raise {
-  ignore(@lib.time(prove_primefact, @num.num_of_int(222)))
+  ignore(@lib.time(prove_primefact, @num.num_of_int64(222L)))
 }
 
 ///|
 /// Library/pratt.ml:978
 fn step_61() -> Unit raise {
-  ignore(@lib.time(prove_primefact, @num.num_of_int(151)))
+  ignore(@lib.time(prove_primefact, @num.num_of_int64(151L)))
 }
 
 ///|

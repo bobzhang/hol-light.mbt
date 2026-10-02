@@ -2019,7 +2019,7 @@ pub fn bit1_def() -> @kernel.Thm {
 /// mk_numeral
 fn step_24() -> Unit raise {
   let pow24 = @num.pow2(24)
-  let num_0 = @num.num_of_int(0)
+  let num_0 = @num.num_of_int64(0L)
   let zero_tm = @kernel.mk_const("_0", @list.empty())
   let bit0_tm = @kernel.mk_const("BIT0", @list.empty())
   let bit1_tm = @kernel.mk_const("BIT1", @list.empty())
@@ -2040,7 +2040,7 @@ fn step_24() -> Unit raise {
     if @num.eq_num(n, num_0) {
       stripzeros(l_1)
     } else {
-      let h = Int::to_int64(@num.int_of_num(@num.mod_num(n, pow24)))
+      let h = @num.int63_of_num(@num.mod_num(n, pow24))
       let t190 = @num.quo_num(n, pow24)
       let t167 = l_1.prepend((h & 1L) != 0L)
       let t168 = t167.prepend((h & 2L) != 0L)
@@ -2114,14 +2114,14 @@ pub fn mk_numeral(x : @num.Num) -> @kernel.Term raise {
 /// `mk_small_numeral`
 pub fn mk_small_numeral(x195 : Int64) -> @kernel.Term raise {
   let n = x195
-  mk_numeral(@num.num_of_int(@lib.int63_to_int(n)))
+  mk_numeral(@num.num_of_int64(n))
 }
 
 ///|
 /// `dest_small_numeral`
 pub fn dest_small_numeral(x196 : @kernel.Term) -> Int64 raise {
   let t = x196
-  Int::to_int64(@num.int_of_num(@basics.dest_numeral(t)))
+  @num.int63_of_num(@basics.dest_numeral(t))
 }
 
 ///|

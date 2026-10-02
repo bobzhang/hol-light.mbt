@@ -22640,12 +22640,12 @@ fn step_282() -> Unit raise {
     x2265 : @num.Num,
   ) -> (@num.Num, @num.Num) raise {
     let (m, n) = (x2264, x2265)
-    if @num.eq_num(m, @num.num_of_int(0)) {
-      let t2266 = @num.num_of_int(1)
-      (@num.num_of_int(0), t2266)
-    } else if @num.eq_num(n, @num.num_of_int(0)) {
-      let t2267 = @num.num_of_int(0)
-      (@num.num_of_int(1), t2267)
+    if @num.eq_num(m, @num.num_of_int64(0L)) {
+      let t2266 = @num.num_of_int64(1L)
+      (@num.num_of_int64(0L), t2266)
+    } else if @num.eq_num(n, @num.num_of_int64(0L)) {
+      let t2267 = @num.num_of_int64(0L)
+      (@num.num_of_int64(1L), t2267)
     } else if @num.le_num(m, n) {
       let q = @num.quo_num(n, m)
       let r = @num.mod_num(n, m)
@@ -22665,15 +22665,15 @@ fn step_282() -> Unit raise {
       let (l, r_1) = @pair.dest_pair(ptm)
       let m_1 = @basics.dest_numeral(l)
       let n_1 = @basics.dest_numeral(r_1)
-      if @num.eq_num(m_1, @num.num_of_int(0)) &&
-        @num.eq_num(n_1, @num.num_of_int(0)) {
+      if @num.eq_num(m_1, @num.num_of_int64(0L)) &&
+        @num.eq_num(n_1, @num.num_of_int64(0L)) {
         pth_oo
       } else {
         let (x_2, y_2) = bezout_1(m_1, n_1)
         let t2269 = @num.mult_num(y_2, n_1)
         let d = @num.add_num(@num.mult_num(x_2, m_1), t2269)
-        let th = if @num.eq_num(d, @num.num_of_int(1)) {
-          if @num.gt_num(x_2, @num.num_of_int(0)) {
+        let th = if @num.eq_num(d, @num.num_of_int64(1L)) {
+          if @num.gt_num(x_2, @num.num_of_int64(0L)) {
             let t2270 = (@nums.mk_numeral(@num.minus_num(y_2)), y_tm)
             @kernel.inst_rule(
               @list.List([
@@ -22827,12 +22827,12 @@ fn step_283() -> Unit raise {
     x2285 : @num.Num,
   ) -> (@num.Num, @num.Num) raise {
     let (m, n) = (x2284, x2285)
-    if @num.eq_num(m, @num.num_of_int(0)) {
-      let t2286 = @num.num_of_int(1)
-      (@num.num_of_int(0), t2286)
-    } else if @num.eq_num(n, @num.num_of_int(0)) {
-      let t2287 = @num.num_of_int(0)
-      (@num.num_of_int(1), t2287)
+    if @num.eq_num(m, @num.num_of_int64(0L)) {
+      let t2286 = @num.num_of_int64(1L)
+      (@num.num_of_int64(0L), t2286)
+    } else if @num.eq_num(n, @num.num_of_int64(0L)) {
+      let t2287 = @num.num_of_int64(0L)
+      (@num.num_of_int64(1L), t2287)
     } else if @num.le_num(m, n) {
       let q = @num.quo_num(n, m)
       let r = @num.mod_num(n, m)
@@ -22852,8 +22852,8 @@ fn step_283() -> Unit raise {
       let (mtm, ntm) = @pair.dest_pair(lr)
       let m_1 = @basics.dest_numeral(mtm)
       let n_1 = @basics.dest_numeral(ntm)
-      if @num.eq_num(m_1, @num.num_of_int(0)) &&
-        @num.eq_num(n_1, @num.num_of_int(0)) {
+      if @num.eq_num(m_1, @num.num_of_int64(0L)) &&
+        @num.eq_num(n_1, @num.num_of_int64(0L)) {
         pth0
       } else {
         let (x0, y0) = bezout_1(m_1, n_1)

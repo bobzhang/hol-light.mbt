@@ -689,6 +689,8 @@ module Lower = struct
                 HOL Light's replacements in the num package *)
              unsupported loc "Num library's own %s" (Path.name path)
          | [ "Num"; n ] ->
+             (* OCaml ints are 63-bit (Int64) *)
+             let n = match n with "int_of_num" -> "int63_of_num" | "num_of_int" -> "num_of_int64" | n -> n in
              (match M.find ~root:!Names.root "num" n with
               | Some decl -> { hstmts = []; hexp = Atom ("@num." ^ n); hmty = mty_of_decl decl; hoty = Some oty }
               | None -> unsupported loc "no MoonBit declaration for Num.%s" n)
@@ -696,7 +698,8 @@ module Lower = struct
              (* bignum_num.ml (loaded before HOL Light): the num package *)
              let n' =
                match n with
-               | "num" -> "num_of_int"
+               | "num" | "num_of_int" -> "num_of_int64"
+               | "int_of_num" -> "int63_of_num"
                | "=/" -> "eq_num" | "</" -> "lt_num" | "<=/" -> "le_num" | ">/" -> "gt_num" | ">=/" -> "ge_num"
                | "<>/" -> "neq_num" | "+/" -> "add_num" | "-/" -> "sub_num" | "*/" -> "mult_num" | "//" -> "div_num"
                | "**/" -> "power_num" | "quo_num" | "mod_num" -> n

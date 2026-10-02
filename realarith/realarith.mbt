@@ -2337,13 +2337,13 @@ fn step_31() -> Unit raise {
     if tm == zero_tm {
       @lib.undefined()
     } else if !@kernel.is_comb(tm) {
-      @lib.single(tm, @num.num_of_int(1))
+      @lib.single(tm, @num.num_of_int64(1L))
     } else if @calc_int.is_ratconst(tm) {
       @lib.single(one_tm_1, @calc_int.rat_of_term(tm))
     } else {
       let (lop, r) = @kernel.dest_comb(tm)
       if !@kernel.is_comb(lop) {
-        @lib.single(tm, @num.num_of_int(1))
+        @lib.single(tm, @num.num_of_int64(1L))
       } else {
         let (op, l) = @kernel.dest_comb(lop)
         if op == add_tm {
@@ -2352,7 +2352,7 @@ fn step_31() -> Unit raise {
         } else if op == mul_tm && @calc_int.is_ratconst(l) {
           @lib.single(r, @calc_int.rat_of_term(l))
         } else {
-          @lib.single(tm, @num.num_of_int(1))
+          @lib.single(tm, @num.num_of_int64(1L))
         }
       }
     }
@@ -2480,7 +2480,7 @@ fn step_31() -> Unit raise {
         @lib.map(
           fn(x274 : @kernel.Term) -> @lib.Func[@kernel.Term, @num.Num] raise {
             let v_3 = x274
-            @lib.single(v_3, @num.num_of_int(1))
+            @lib.single(v_3, @num.num_of_int64(1L))
           },
           aliens,
         ),
@@ -2489,7 +2489,7 @@ fn step_31() -> Unit raise {
         @lib.map(
           fn(x275 : @kernel.Term) -> @lib.Func[@kernel.Term, @num.Num] raise {
             let v_4 = x275
-            @lib.single(v_4, @num.num_of_int(1))
+            @lib.single(v_4, @num.num_of_int64(1L))
           },
           suc_aliens,
         ),

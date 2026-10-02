@@ -53546,7 +53546,7 @@ fn step_924() -> Unit raise {
     x5132 : @num.Num,
   ) -> @num.Num raise {
     let n_1 = x5132
-    @num.num_of_int(@lib.int63_to_int(log2(@num.abs_num(n_1), @num.num_1, 0L)))
+    @num.num_of_int64(log2(@num.abs_num(n_1), @num.num_1, 0L))
   }
   fn conv(x5133 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x5133
@@ -54706,7 +54706,7 @@ fn step_927() -> Unit raise {
     x5282 : @num.Num,
   ) -> @num.Num raise {
     let n_1 = x5282
-    @num.num_of_int(@lib.int63_to_int(log2(@num.abs_num(n_1), @num.num_1, 0L)))
+    @num.num_of_int64(log2(@num.abs_num(n_1), @num.num_1, 0L))
   }
   fn ilog2(x5283 : @num.Num, x5284 : @num.Num, x5285 : Int64) -> Int64 raise {
     let n_2 = x5283
@@ -54723,7 +54723,7 @@ fn step_927() -> Unit raise {
     x5287 : @num.Num,
   ) -> @num.Num raise {
     let n_3 = x5287
-    @num.num_of_int(@lib.int63_to_int(ilog2(n_3, @num.num_1, 1L)))
+    @num.num_of_int64(ilog2(n_3, @num.num_1, 1L))
   }
   fn conv(x5288 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x5288
@@ -55625,7 +55625,7 @@ fn step_935() -> Unit raise {
           let i = x5394
           @kernel.mk_comb(@kernel.mk_comb(btm, @nums.mk_small_numeral(i)), tm_1)
         },
-        @lib.range(0L, @lib.sub63(Int::to_int64(@num.int_of_num(n)), 1L)),
+        @lib.range(0L, @lib.sub63(@num.int63_of_num(n), 1L)),
       )
     } catch {
       Failure(_) => @list.empty()

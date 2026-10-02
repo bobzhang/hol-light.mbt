@@ -35,6 +35,8 @@ pub fn ge_num(Num, Num) -> Bool
 
 pub fn gt_num(Num, Num) -> Bool
 
+pub fn int63_of_num(Num) -> Int64 raise
+
 pub fn int64_of_num(Num) -> Int64 raise
 
 pub fn int_of_num(Num) -> Int raise

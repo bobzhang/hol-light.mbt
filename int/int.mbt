@@ -14120,7 +14120,7 @@ fn step_445() -> Unit raise {
     fn(x953 : @num.Num) -> @num.Num raise {
       let y = x953
       let r_1 = @num.mod_num(x, y)
-      if @num.lt_num(r_1, @num.num_of_int(0)) {
+      if @num.lt_num(r_1, @num.num_of_int64(0L)) {
         @num.add_num(r_1, @num.abs_num(y))
       } else {
         r_1

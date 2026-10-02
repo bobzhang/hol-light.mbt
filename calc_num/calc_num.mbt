@@ -1087,9 +1087,9 @@ fn step_22() -> Unit raise {
         ),
       )
       let eq_tm = @kernel.rator(@kernel.rator(@kernel.concl(@arith.two())))
-      let num_0 = @num.num_of_int(0)
-      let num_1 = @num.num_of_int(1)
-      let num_2 = @num.num_of_int(2)
+      let num_0 = @num.num_of_int64(0L)
+      let num_1 = @num.num_of_int64(1L)
+      let num_2 = @num.num_of_int64(2L)
       let a_tm = @kernel.mk_var("a", num_ty)
       let b_tm = @kernel.mk_var("b", num_ty)
       let c_tm = @kernel.mk_var("c", num_ty)
@@ -5404,20 +5404,17 @@ fn step_22() -> Unit raise {
               (if l <= 50L {
                 true
               } else {
-                let t568 = @num.num_of_int(@lib.int63_to_int(l))
-                let t567 = @num.num_of_int(@lib.int63_to_int(k_6))
+                let t568 = @num.num_of_int64(l)
+                let t567 = @num.num_of_int64(k_6)
                 if @num.le_num(
-                    @num.mult_num(@num.num_of_int(@lib.int63_to_int(k_6)), t567),
+                    @num.mult_num(@num.num_of_int64(k_6), t567),
                     t568,
                   ) {
                   true
                 } else {
-                  let t570 = @num.num_of_int(@lib.int63_to_int(k_6))
-                  let t569 = @num.num_of_int(@lib.int63_to_int(l))
-                  @num.le_num(
-                    @num.mult_num(@num.num_of_int(@lib.int63_to_int(l)), t569),
-                    t570,
-                  )
+                  let t570 = @num.num_of_int64(k_6)
+                  let t569 = @num.num_of_int64(l)
+                  @num.le_num(@num.mult_num(@num.num_of_int64(l), t569), t570)
                 }
               }) {
               match (mtm_13, ntm_15) {
@@ -7786,10 +7783,10 @@ fn step_25() -> Unit raise {
         @lib.failure()
       } else {
         let x = @basics.dest_numeral(r)
-        if @num.eq_num(x, @num.num_of_int(0)) {
+        if @num.eq_num(x, @num.num_of_int64(0L)) {
           tth
         } else {
-          let tm_p = @nums.mk_numeral(@num.sub_num(x, @num.num_of_int(1)))
+          let tm_p = @nums.mk_numeral(@num.sub_num(x, @num.num_of_int64(1L)))
           let th1 = num_suc_conv(@kernel.mk_comb(suc, tm_p))
           @bool.mp(@kernel.inst_rule(@list.List([(tm_p, m), (r, n)]), pth), th1)
         }
@@ -8133,18 +8130,18 @@ fn step_28() -> Unit raise {
     x738 : @num.Num,
   ) -> @kernel.Thm raise {
     let n = x738
-    let n_p = @num.sub_num(n, @num.num_of_int(1))
+    let n_p = @num.sub_num(n, @num.num_of_int64(1L))
     num_suc_conv(@kernel.mk_comb(suc, @nums.mk_numeral(n_p)))
   }
   fn num_fact_conv_1(x739 : @num.Num) -> @kernel.Thm raise {
     let n_1 = x739
-    if @num.eq_num(n_1, @num.num_of_int(0)) {
+    if @num.eq_num(n_1, @num.num_of_int64(0L)) {
       pth_0
     } else {
       let th0 = mksuc(n_1)
       let tmx = @kernel.rand(@equal.lhand(@kernel.concl(th0)))
       let tm0 = @kernel.rand(@kernel.concl(th0))
-      let th1 = num_fact_conv_1(@num.sub_num(n_1, @num.num_of_int(1)))
+      let th1 = num_fact_conv_1(@num.sub_num(n_1, @num.num_of_int64(1L)))
       let tm1 = @kernel.rand(@kernel.concl(th1))
       let th2 = num_mult_conv(@basics.mk_binop(mul, tm0, tm1))
       let tm2 = @kernel.rand(@kernel.concl(th2))
@@ -8494,9 +8491,9 @@ fn step_38() -> Unit raise {
   let suc_tm = @parser.parse_term("SUC")
   num_conv_c.set(fn(x788 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x788
-    let t789 = @num.num_of_int(1)
+    let t789 = @num.num_of_int64(1L)
     let n = @num.sub_num(@basics.dest_numeral(tm), t789)
-    if @num.lt_num(n, @num.num_of_int(0)) {
+    if @num.lt_num(n, @num.num_of_int64(0L)) {
       raise Failure("num_CONV")
     } else {
       let tm_p = @nums.mk_numeral(n)

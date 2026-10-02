@@ -1357,7 +1357,7 @@ fn step_22() -> Unit raise {
                 a_1,
               ) => {
               let t112 = @basics.dest_finty(i)
-              let t113 = @num.power_num(@num.num_of_int(2), t112)
+              let t113 = @num.power_num(@num.num_of_int64(2L), t112)
               if @num.lt_num(@basics.dest_numeral(a_1), t113) {
                 a_1
               } else {
@@ -2779,10 +2779,8 @@ pub fn bm_analyze_pat(
         @kernel.Term::Comb(@kernel.Term::Const("CONSPAT", _), p),
         a_1
       ) => {
-        let n = Int::to_int64(
-          @num.int_of_num(
-            @basics.dest_finty(dest_word_ty(@kernel.type_of(a_1))),
-          ),
+        let n = @num.int63_of_num(
+          @basics.dest_finty(dest_word_ty(@kernel.type_of(a_1))),
         )
         if @lib.add63(i, n) > sz {
           raise @num.InvalidArgument("incorrect bit length")
@@ -3418,9 +3416,7 @@ fn step_41() -> Unit raise {
               match r_2 {
                 None => DiscrimTree::Leaf_dt(eqth)
                 Some((_, i_3)) => {
-                  let ii = @nums.mk_numeral(
-                    @num.num_of_int(@lib.int63_to_int(i_3)),
-                  )
+                  let ii = @nums.mk_numeral(@num.num_of_int64(i_3))
                   let bit_1 = bit_tm(ii)(e_2)
                   let skip_th : (@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = fn(
                     x322 : @kernel.Term,
@@ -3534,8 +3530,8 @@ pub fn bm_build_tree(
       @kernel.Term::Comb(@kernel.Term::Const("_BITMATCH", _), e),
       cs
     ) as tm => {
-      let sz = Int::to_int64(
-        @num.int_of_num(@basics.dest_finty(dest_word_ty(@kernel.type_of(e)))),
+      let sz = @num.int63_of_num(
+        @basics.dest_finty(dest_word_ty(@kernel.type_of(e))),
       )
       let cls = bm_analyze_clauses(sz, cs)
       (cls, bm_build_tree_p(sz)(cls)(tm))
@@ -4635,20 +4631,30 @@ pub fn bitpat_matches(x442 : @kernel.Term, x443 : @num.Num) -> Int64? raise {
       a
     ) => {
       let n = dest_word_ty(@kernel.type_of(a))
-      let n_1 = Int::to_int64(@num.int_of_num(@basics.dest_finty(n)))
-      let t444 = @num.num_of_int(@lib.int63_to_int(n_1))
-      let m = @num.power_num(@num.num_of_int(2), t444)
+      let n_1 = @num.int63_of_num(@basics.dest_finty(n))
+      let t444 = @num.num_of_int64(n_1)
+      let m = @num.power_num(@num.num_of_int64(2L), t444)
       let i_p = @num.quo_num(i, m)
       let a_p = @num.mod_num(i, m)
       let r_1 = match a {
         @kernel.Term::Comb(
           @kernel.Term::Const("word1", _),
           @kernel.Term::Const("T", _)
-        ) => if @num.eq_num(a_p, @num.num_of_int(1)) { None } else { Some(0L) }
+        ) =>
+          if @num.eq_num(a_p, @num.num_of_int64(1L)) {
+            None
+          } else {
+            Some(0L)
+          }
         @kernel.Term::Comb(
           @kernel.Term::Const("word1", _),
           @kernel.Term::Const("F", _)
-        ) => if @num.eq_num(a_p, @num.num_of_int(0)) { None } else { Some(0L) }
+        ) =>
+          if @num.eq_num(a_p, @num.num_of_int64(0L)) {
+            None
+          } else {
+            Some(0L)
+          }
         @kernel.Term::Comb(
           @kernel.Term::Const("word1", _),
           @kernel.Term::Var(_, _)
@@ -4668,8 +4674,8 @@ pub fn bitpat_matches(x442 : @kernel.Term, x443 : @num.Num) -> Int64? raise {
                 f(@lib.lsr63(i_1, 1L), t447)
               }
             }
-            let t448 = Int::to_int64(@num.int_of_num(n_p))
-            Some(f(Int::to_int64(@num.int_of_num(a_p)) ^ t448, 0L))
+            let t448 = @num.int63_of_num(n_p)
+            Some(f(@num.int63_of_num(a_p) ^ t448, 0L))
           }
         }
         @kernel.Term::Var(_, _) => None
@@ -4685,7 +4691,7 @@ pub fn bitpat_matches(x442 : @kernel.Term, x443 : @num.Num) -> Int64? raise {
       }
     }
     @kernel.Term::Const("NILPAT", _) =>
-      if @num.eq_num(i, @num.num_of_int(0)) {
+      if @num.eq_num(i, @num.num_of_int64(0L)) {
         None
       } else {
         raise Failure("bitpat_matches: out of range")
@@ -5198,9 +5204,9 @@ fn step_52() -> Unit raise {
         a
       ) => {
         let n_1 = dest_word_ty(@kernel.type_of(a))
-        let n_2 = Int::to_int64(@num.int_of_num(@basics.dest_finty(n_1)))
-        let t508 = @num.num_of_int(@lib.int63_to_int(n_2))
-        let m = @num.power_num(@num.num_of_int(2), t508)
+        let n_2 = @num.int63_of_num(@basics.dest_finty(n_1))
+        let t508 = @num.num_of_int64(n_2)
+        let m = @num.power_num(@num.num_of_int64(2L), t508)
         let i_p = @num.quo_num(i, m)
         let a_p = @num.mod_num(i, m)
         let (ls, th_p) = go(i_p, p)
@@ -5212,7 +5218,7 @@ fn step_52() -> Unit raise {
               @kernel.Term::Const("T", _) => (ls, true)
               @kernel.Term::Const("F", _) => (ls, false)
               @kernel.Term::Var(_, _) => {
-                let b = @num.eq_num(a_p, @num.num_of_int(1))
+                let b = @num.eq_num(a_p, @num.num_of_int64(1L))
                 (ls.prepend((if b { t } else { f }, a_1)), b)
               }
               _ => raise Failure("inst_bitpat_numeral")
@@ -5223,7 +5229,7 @@ fn step_52() -> Unit raise {
                 th_p,
                 if b_1 {
                   @kernel.inst_rule(@list.List([(x, ex), (p_p_1, ep)]), w1t)
-                } else if @num.eq_num(i, @num.num_of_int(0)) {
+                } else if @num.eq_num(i, @num.num_of_int64(0L)) {
                   @kernel.inst_rule(@list.List([(p_p_1, ep)]), w1f0)
                 } else {
                   @kernel.inst_rule(@list.List([(x, ex), (p_p_1, ep)]), w1f)
@@ -5641,8 +5647,8 @@ pub fn bitmatch_conv(x549 : @kernel.Term) -> @kernel.Thm raise {
       _
     ) if @nums.is_numeral(n_1) => {
       let (a, tr) = bm_build_pos_tree(tm)
-      let n_2 = Int::to_int64(@num.int_of_num(@basics.dest_numeral(n_1)))
-      let sz = Int::to_int64(@num.int_of_num(@basics.dest_finty(n)))
+      let n_2 = @num.int63_of_num(@basics.dest_numeral(n_1))
+      let sz = @num.int63_of_num(@basics.dest_finty(n))
       let a_1 = @lib.array_init(sz, fn(x550 : Int64) -> Bool? raise {
         let i = x550
         Some(!physical_equal(n_2 & @lib.lsl63(1L, i), 0L))
@@ -5650,7 +5656,7 @@ pub fn bitmatch_conv(x549 : @kernel.Term) -> @kernel.Thm raise {
       match get_dt(a_1, tr).1.1 {
         More(th, tail=_) => {
           let ps = @lib.hd(@kernel.hyp(th))
-          let t551 = @num.num_of_int(@lib.int63_to_int(n_2))
+          let t551 = @num.num_of_int64(n_2)
           let (ls, th_p) = inst_bitpat_numeral(ps)(t551)
           @bool.prove_hyp(th_p, @kernel.inst_rule(ls, th))
         }
@@ -5784,10 +5790,8 @@ pub fn bitmatch_simp_conv(x552 : @list.List[@kernel.Thm]) -> @equal.Conv raise {
                       e => raise e
                     }
                   Empty => {
-                    let sz = Int::to_int64(
-                      @num.int_of_num(
-                        @basics.dest_finty(dest_word_ty(@kernel.type_of(e))),
-                      ),
+                    let sz = @num.int63_of_num(
+                      @basics.dest_finty(dest_word_ty(@kernel.type_of(e))),
                     )
                     let a = bm_analyze_pat(sz)(pat)
                     fn check_disj(
@@ -5821,9 +5825,7 @@ pub fn bitmatch_simp_conv(x552 : @list.List[@kernel.Thm]) -> @equal.Conv raise {
                             )
                             let i_2 = match r.val {
                               Some(i_1) =>
-                                @nums.mk_numeral(
-                                  @num.num_of_int(@lib.int63_to_int(i_1)),
-                                )
+                                @nums.mk_numeral(@num.num_of_int64(i_1))
                               _ => @lib.failure()
                             }
                             let t567 = bm_skip_clause(pat_to_bit(false)(i_2))(
@@ -6914,7 +6916,7 @@ pub fn bm_seq_numeral(
       cs
     ) => {
       let n = dest_word_ty(@kernel.type_of(e))
-      let sz = Int::to_int64(@num.int_of_num(@basics.dest_finty(n)))
+      let sz = @num.int63_of_num(@basics.dest_finty(n))
       let word = @kernel.mk_const(
         "word",
         @list.List([(n, @parser.parse_type("N"))]),
@@ -6949,9 +6951,7 @@ pub fn bm_seq_numeral(
             ) -> @kernel.Thm? raise {
               let i = x670
               try {
-                let t671 = @nums.mk_numeral(
-                  @num.num_of_int(@lib.int63_to_int(i)),
-                )
+                let t671 = @nums.mk_numeral(@num.num_of_int64(i))
                 Some(bm_skip_clause(pat_to_bit(false)(t671))(tm))
               } catch {
                 Failure(_) => None
@@ -7072,9 +7072,7 @@ fn step_56() -> Unit raise {
         let valty = @kernel.type_of(bitval)
         match valty {
           @kernel.HolType::Tyapp("word", More(n_1, tail=Empty)) => {
-            let bitwidth = Int::to_int64(
-              @num.int_of_num(@basics.dest_finty(n_1)),
-            )
+            let bitwidth = @num.int63_of_num(@basics.dest_finty(n_1))
             let pattern_arrs = bm_analyze_clauses(bitwidth, patterns)
             @lib.list_iteri(
               fn(x690 : Int, x691 : FixedArray[Bool?]) -> Unit raise {
