@@ -34,30 +34,30 @@ pub fn meson_prefine() -> Ref[Bool] {
 ///|
 /// meson_dcutin
 fn step_3() -> Unit raise {
-  meson_dcutin_c.set(Ref::{ val: 1, })
+  meson_dcutin_c.set(Ref::{ val: 1L, })
 }
 
 ///|
-let meson_dcutin_c : @lib.Cell[Ref[Int]] = @lib.Cell::new("meson_dcutin")
+let meson_dcutin_c : @lib.Cell[Ref[Int64]] = @lib.Cell::new("meson_dcutin")
 
 ///|
 /// `meson_dcutin`
-pub fn meson_dcutin() -> Ref[Int] {
+pub fn meson_dcutin() -> Ref[Int64] {
   meson_dcutin_c.get()
 }
 
 ///|
 /// meson_skew
 fn step_4() -> Unit raise {
-  meson_skew_c.set(Ref::{ val: 3, })
+  meson_skew_c.set(Ref::{ val: 3L, })
 }
 
 ///|
-let meson_skew_c : @lib.Cell[Ref[Int]] = @lib.Cell::new("meson_skew")
+let meson_skew_c : @lib.Cell[Ref[Int64]] = @lib.Cell::new("meson_skew")
 
 ///|
 /// `meson_skew`
-pub fn meson_skew() -> Ref[Int] {
+pub fn meson_skew() -> Ref[Int64] {
   meson_skew_c.get()
 }
 
@@ -79,17 +79,17 @@ pub fn meson_brand() -> Ref[Bool] {
 ///|
 /// meson_split_limit
 fn step_6() -> Unit raise {
-  meson_split_limit_c.set(Ref::{ val: 8, })
+  meson_split_limit_c.set(Ref::{ val: 8L, })
 }
 
 ///|
-let meson_split_limit_c : @lib.Cell[Ref[Int]] = @lib.Cell::new(
+let meson_split_limit_c : @lib.Cell[Ref[Int64]] = @lib.Cell::new(
   "meson_split_limit",
 )
 
 ///|
 /// `meson_split_limit`
-pub fn meson_split_limit() -> Ref[Int] {
+pub fn meson_split_limit() -> Ref[Int64] {
   meson_split_limit_c.get()
 }
 
@@ -117,8 +117,8 @@ pub(all) suberror Cut {
 ///|
 /// `fol_term`
 pub(all) enum FolTerm {
-  Fvar(Int)
-  Fnapp(Int, @list.List[FolTerm])
+  Fvar(Int64)
+  Fnapp(Int64, @list.List[FolTerm])
 } derive(Eq, Debug)
 
 ///|
@@ -161,7 +161,7 @@ pub impl @lib.OHash for FolTerm with fn ohash_visit(self, h) {
 
 ///|
 /// `fol_atom`
-pub type FolAtom = (Int, @list.List[FolTerm])
+pub type FolAtom = (Int64, @list.List[FolTerm])
 
 ///|
 /// `fol_form`
@@ -169,7 +169,7 @@ pub(all) enum FolForm {
   Atom(FolAtom)
   Conj(FolForm, FolForm)
   Disj(FolForm, FolForm)
-  Forallq(Int, FolForm)
+  Forallq(Int64, FolForm)
 } derive(Eq, Debug)
 
 ///|
@@ -242,9 +242,9 @@ pub(all) enum FolGoal {
   Subgoal(
     FolAtom,
     @list.List[FolGoal],
-    (Int, @kernel.Thm),
-    Int,
-    @list.List[(FolTerm, Int)]
+    (Int64, @kernel.Thm),
+    Int64,
+    @list.List[(FolTerm, Int64)]
   )
 } derive(Eq, Debug)
 
@@ -298,38 +298,38 @@ pub impl @lib.OHash for FolGoal with fn ohash_visit(self, h) {
 ///|
 /// offinc
 fn step_8() -> Unit raise {
-  offinc_c.set(10000)
+  offinc_c.set(10000L)
 }
 
 ///|
-let offinc_c : @lib.Cell[Int] = @lib.Cell::new("offinc")
+let offinc_c : @lib.Cell[Int64] = @lib.Cell::new("offinc")
 
 ///|
 /// `offinc`
-pub fn offinc() -> Int {
+pub fn offinc() -> Int64 {
   offinc_c.get()
 }
 
 ///|
 /// inferences
 fn step_9() -> Unit raise {
-  inferences_c.set(Ref::{ val: 0, })
+  inferences_c.set(Ref::{ val: 0L, })
 }
 
 ///|
-let inferences_c : @lib.Cell[Ref[Int]] = @lib.Cell::new("inferences")
+let inferences_c : @lib.Cell[Ref[Int64]] = @lib.Cell::new("inferences")
 
 ///|
 /// `inferences`
-pub fn inferences() -> Ref[Int] {
+pub fn inferences() -> Ref[Int64] {
   inferences_c.get()
 }
 
 ///|
 /// `mk_negated`
-pub fn[TA] mk_negated(x1 : Int, x2 : TA) -> (Int, TA) raise {
+pub fn[TA] mk_negated(x1 : Int64, x2 : TA) -> (Int64, TA) raise {
   let (p, a) = (x1, x2)
-  (0 - p, a)
+  (@lib.neg63(p), a)
 }
 
 ///|
@@ -386,24 +386,24 @@ pub fn reset_vars(x : Unit) -> Unit raise {
 }
 
 ///|
-let fol_of_var_c : @lib.Cell[(@kernel.Term) -> Int raise] = @lib.Cell::new(
+let fol_of_var_c : @lib.Cell[(@kernel.Term) -> Int64 raise] = @lib.Cell::new(
   "fol_of_var",
 )
 
 ///|
 /// `fol_of_var`
-pub fn fol_of_var(x : @kernel.Term) -> Int raise {
+pub fn fol_of_var(x : @kernel.Term) -> Int64 raise {
   fol_of_var_c.get()(x)
 }
 
 ///|
-let hol_of_var_c : @lib.Cell[(Int) -> @kernel.Term raise] = @lib.Cell::new(
+let hol_of_var_c : @lib.Cell[(Int64) -> @kernel.Term raise] = @lib.Cell::new(
   "hol_of_var",
 )
 
 ///|
 /// `hol_of_var`
-pub fn hol_of_var(x : Int) -> @kernel.Term raise {
+pub fn hol_of_var(x : Int64) -> @kernel.Term raise {
   hol_of_var_c.get()(x)
 }
 
@@ -412,11 +412,11 @@ pub fn hol_of_var(x : Int) -> @kernel.Term raise {
 fn step_10() -> Unit raise {
   let vstore = Ref::{ val: @list.empty(), }
   let gstore = Ref::{ val: @list.empty(), }
-  let vcounter = Ref::{ val: 0, }
-  let inc_vcounter : (Unit) -> Int raise = fn(x8 : Unit) -> Int raise {
+  let vcounter = Ref::{ val: 0L, }
+  let inc_vcounter : (Unit) -> Int64 raise = fn(x8 : Unit) -> Int64 raise {
     let _ = x8
     let n = vcounter.val
-    let m = n + 1
+    let m = @lib.add63(n, 1L)
     if m >= offinc() {
       raise Failure("inc_vcounter: too many variables")
     } else {
@@ -437,12 +437,12 @@ fn step_10() -> Unit raise {
       gstore.val = @list.empty()
       ()
     }
-    vcounter.val = 0
+    vcounter.val = 0L
     ()
   }
-  let fol_of_var : (@kernel.Term) -> Int raise = fn(
+  let fol_of_var : (@kernel.Term) -> Int64 raise = fn(
     x10 : @kernel.Term,
-  ) -> Int raise {
+  ) -> Int64 raise {
     let v = x10
     let currentvars = vstore.val
     @lib.assoc(v, currentvars) catch {
@@ -457,8 +457,8 @@ fn step_10() -> Unit raise {
       e => raise e
     }
   }
-  let hol_of_var : (Int) -> @kernel.Term raise = fn(
-    x11 : Int,
+  let hol_of_var : (Int64) -> @kernel.Term raise = fn(
+    x11 : Int64,
   ) -> @kernel.Term raise {
     let v_1 = x11
     @lib.rev_assoc(v_1, vstore.val) catch {
@@ -466,13 +466,13 @@ fn step_10() -> Unit raise {
       e => raise e
     }
   }
-  let hol_of_bumped_var : (Int) -> @kernel.Term raise = fn(
-    x12 : Int,
+  let hol_of_bumped_var : (Int64) -> @kernel.Term raise = fn(
+    x12 : Int64,
   ) -> @kernel.Term raise {
     let v_2 = x12
     hol_of_var(v_2) catch {
       Failure(_) => {
-        let v_p = v_2 % offinc()
+        let v_p = @lib.mod63(v_2, offinc())
         let hv_p = hol_of_var(v_p)
         let gv = @basics.genvar(@kernel.type_of(hv_p))
         {
@@ -504,24 +504,24 @@ pub fn reset_consts(x : Unit) -> Unit raise {
 }
 
 ///|
-let fol_of_const_c : @lib.Cell[(@kernel.Term) -> Int raise] = @lib.Cell::new(
+let fol_of_const_c : @lib.Cell[(@kernel.Term) -> Int64 raise] = @lib.Cell::new(
   "fol_of_const",
 )
 
 ///|
 /// `fol_of_const`
-pub fn fol_of_const(x : @kernel.Term) -> Int raise {
+pub fn fol_of_const(x : @kernel.Term) -> Int64 raise {
   fol_of_const_c.get()(x)
 }
 
 ///|
-let hol_of_const_c : @lib.Cell[(Int) -> @kernel.Term raise] = @lib.Cell::new(
+let hol_of_const_c : @lib.Cell[(Int64) -> @kernel.Term raise] = @lib.Cell::new(
   "hol_of_const",
 )
 
 ///|
 /// `hol_of_const`
-pub fn hol_of_const(x : Int) -> @kernel.Term raise {
+pub fn hol_of_const(x : Int64) -> @kernel.Term raise {
   hol_of_const_c.get()(x)
 }
 
@@ -530,26 +530,26 @@ pub fn hol_of_const(x : Int) -> @kernel.Term raise {
 fn step_11() -> Unit raise {
   let false_tm = @parser.parse_term("F")
   let cstore = Ref::{ val: @list.empty(), }
-  let ccounter = Ref::{ val: 2, }
+  let ccounter = Ref::{ val: 2L, }
   let reset_consts : (Unit) -> Unit raise = fn(x13 : Unit) -> Unit raise {
     let _ = x13
     {
-      cstore.val = @list.List([(false_tm, 1)])
+      cstore.val = @list.List([(false_tm, 1L)])
       ()
     }
-    ccounter.val = 2
+    ccounter.val = 2L
     ()
   }
-  let fol_of_const : (@kernel.Term) -> Int raise = fn(
+  let fol_of_const : (@kernel.Term) -> Int64 raise = fn(
     x14 : @kernel.Term,
-  ) -> Int raise {
+  ) -> Int64 raise {
     let c = x14
     let currentconsts = cstore.val
     @lib.assoc(c, currentconsts) catch {
       Failure(_) => {
         let n = ccounter.val
         {
-          ccounter.val = n + 1
+          ccounter.val = @lib.add63(n, 1L)
           ()
         }
         {
@@ -561,8 +561,8 @@ fn step_11() -> Unit raise {
       e => raise e
     }
   }
-  let hol_of_const : (Int) -> @kernel.Term raise = fn(
-    x15 : Int,
+  let hol_of_const : (Int64) -> @kernel.Term raise = fn(
+    x15 : Int64,
   ) -> @kernel.Term raise {
     let c_1 = x15
     @lib.rev_assoc(c_1, cstore.val)
@@ -607,7 +607,7 @@ pub fn fol_of_atom(
   x20 : @list.List[@kernel.Term],
   x21 : @list.List[@kernel.Term],
   x22 : @kernel.Term,
-) -> (Int, @list.List[FolTerm]) raise {
+) -> (Int64, @list.List[FolTerm]) raise {
   let env = x20
   let consts = x21
   let tm = x22
@@ -626,14 +626,14 @@ pub fn fol_of_literal(
   x24 : @list.List[@kernel.Term],
   x25 : @list.List[@kernel.Term],
   x26 : @kernel.Term,
-) -> (Int, @list.List[FolTerm]) raise {
+) -> (Int64, @list.List[FolTerm]) raise {
   let env = x24
   let consts = x25
   let tm = x26
   try {
     let tm_p = @basics.dest_neg(tm)
     let (p, a) = fol_of_atom(env, consts, tm_p)
-    (0 - p, a)
+    (@lib.neg63(p), a)
   } catch {
     Failure(_) => fol_of_atom(env, consts, tm)
     e => raise e
@@ -698,7 +698,10 @@ pub fn hol_of_term(x30 : FolTerm) -> @kernel.Term raise {
 
 ///|
 /// `hol_of_atom`
-pub fn hol_of_atom(x32 : Int, x33 : @list.List[FolTerm]) -> @kernel.Term raise {
+pub fn hol_of_atom(
+  x32 : Int64,
+  x33 : @list.List[FolTerm],
+) -> @kernel.Term raise {
   let (p, args) = (x32, x33)
   let t34 = @lib.map(hol_of_term, args)
   @basics.list_mk_comb(hol_of_const(p), t34)
@@ -707,12 +710,12 @@ pub fn hol_of_atom(x32 : Int, x33 : @list.List[FolTerm]) -> @kernel.Term raise {
 ///|
 /// `hol_of_literal`
 pub fn hol_of_literal(
-  x35 : Int,
+  x35 : Int64,
   x36 : @list.List[FolTerm],
 ) -> @kernel.Term raise {
   let (p, args) = (x35, x36)
-  if p < 0 {
-    @bool.mk_neg(hol_of_atom(0 - p, args))
+  if p < 0L {
+    @bool.mk_neg(hol_of_atom(@lib.neg63(p), args))
   } else {
     hol_of_atom(p, args)
   }
@@ -720,7 +723,7 @@ pub fn hol_of_literal(
 
 ///|
 /// `fol_free_in`
-pub fn fol_free_in(x37 : Int, x38 : FolTerm) -> Bool raise {
+pub fn fol_free_in(x37 : Int64, x38 : FolTerm) -> Bool raise {
   let v = x37
   let tm = x38
   match tm {
@@ -733,7 +736,7 @@ pub fn fol_free_in(x37 : Int, x38 : FolTerm) -> Bool raise {
 ///|
 /// `fol_subst`
 pub fn fol_subst(
-  x40 : @list.List[(FolTerm, Int)],
+  x40 : @list.List[(FolTerm, Int64)],
   x41 : FolTerm,
 ) -> FolTerm raise {
   let theta = x40
@@ -754,9 +757,9 @@ pub fn fol_subst(
 ///|
 /// `fol_inst`
 pub fn fol_inst(
-  x43 : @list.List[(FolTerm, Int)],
-  x44 : (Int, @list.List[FolTerm]),
-) -> (Int, @list.List[FolTerm]) raise {
+  x43 : @list.List[(FolTerm, Int64)],
+  x44 : (Int64, @list.List[FolTerm]),
+) -> (Int64, @list.List[FolTerm]) raise {
   let theta = x43
   let (p, args) as at = x44
   let args_p = @lib.qmap((x45 : FolTerm) => fol_subst(theta, x45), args)
@@ -770,8 +773,8 @@ pub fn fol_inst(
 ///|
 /// `fol_subst_bump`
 pub fn fol_subst_bump(
-  x46 : Int,
-  x47 : @list.List[(FolTerm, Int)],
+  x46 : Int64,
+  x47 : @list.List[(FolTerm, Int64)],
   x48 : FolTerm,
 ) -> FolTerm raise {
   let offset = x46
@@ -780,7 +783,7 @@ pub fn fol_subst_bump(
   match tm {
     FolTerm::Fvar(v) =>
       if v < offinc() {
-        let v_p = v + offset
+        let v_p = @lib.add63(v, offset)
         @lib.rev_assocd(v_p, theta, FolTerm::Fvar(v_p))
       } else {
         @lib.rev_assocd(v, theta, tm)
@@ -802,10 +805,10 @@ pub fn fol_subst_bump(
 ///|
 /// `fol_inst_bump`
 pub fn fol_inst_bump(
-  x50 : Int,
-  x51 : @list.List[(FolTerm, Int)],
-  x52 : (Int, @list.List[FolTerm]),
-) -> (Int, @list.List[FolTerm]) raise {
+  x50 : Int64,
+  x51 : @list.List[(FolTerm, Int64)],
+  x52 : (Int64, @list.List[FolTerm]),
+) -> (Int64, @list.List[FolTerm]) raise {
   let offset = x50
   let theta = x51
   let (p, args) as at = x52
@@ -823,8 +826,8 @@ pub fn fol_inst_bump(
 ///|
 /// `istriv`
 pub fn istriv(
-  x54 : @list.List[(FolTerm, Int)],
-  x55 : Int,
+  x54 : @list.List[(FolTerm, Int64)],
+  x55 : Int64,
   x56 : FolTerm,
 ) -> Bool raise {
   let env = x54
@@ -849,11 +852,11 @@ pub fn istriv(
 ///|
 /// `fol_unify`
 pub fn fol_unify(
-  x58 : Int,
+  x58 : Int64,
   x59 : FolTerm,
   x60 : FolTerm,
-  x61 : @list.List[(FolTerm, Int)],
-) -> @list.List[(FolTerm, Int)] raise {
+  x61 : @list.List[(FolTerm, Int64)],
+) -> @list.List[(FolTerm, Int64)] raise {
   let offset = x58
   let tm1 = x59
   let tm2 = x60
@@ -864,7 +867,7 @@ pub fn fol_unify(
         raise Failure("")
       } else {
         @lib.itlist2(
-          (x62 : FolTerm, x63 : FolTerm, x64 : @list.List[(FolTerm, Int)]) => {
+          (x62 : FolTerm, x63 : FolTerm, x64 : @list.List[(FolTerm, Int64)]) => {
             fol_unify(offset, x62, x63, x64)
           },
           fargs,
@@ -873,10 +876,10 @@ pub fn fol_unify(
         )
       }
     (_, FolTerm::Fvar(x)) => {
-      let x_p = x + offset
+      let x_p = @lib.add63(x, offset)
       try {
         let tm2_p = @lib.rev_assoc(x_p, sofar)
-        fol_unify(0, tm1, tm2_p, sofar)
+        fol_unify(0L, tm1, tm2_p, sofar)
       } catch {
         Failure("find") =>
           if istriv(sofar, x_p, tm1) {
@@ -908,7 +911,7 @@ pub fn fol_unify(
 ///|
 /// `fol_eq`
 pub fn fol_eq(
-  x65 : @list.List[(FolTerm, Int)],
+  x65 : @list.List[(FolTerm, Int64)],
   x66 : FolTerm,
   x67 : FolTerm,
 ) -> Bool raise {
@@ -954,7 +957,7 @@ pub fn fol_eq(
 ///|
 /// `fol_atom_eq`
 pub fn[TA : Eq + @lib.OCompare + @lib.OHash] fol_atom_eq(
-  x70 : @list.List[(FolTerm, Int)],
+  x70 : @list.List[(FolTerm, Int64)],
   x71 : (TA, @list.List[FolTerm]),
   x72 : (TA, @list.List[FolTerm]),
 ) -> Bool raise {
@@ -1004,19 +1007,21 @@ pub fn[
 ///|
 /// `checkan`
 pub fn[TA, TB] checkan(
-  x79 : @list.List[(FolTerm, Int)],
-  x80 : (Int, @list.List[FolTerm]),
-  x81 : @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])],
-) -> @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])] raise {
+  x79 : @list.List[(FolTerm, Int64)],
+  x80 : (Int64, @list.List[FolTerm]),
+  x81 : @list.List[
+    (Int64, @list.List[((TA, (Int64, @list.List[FolTerm])), TB)]),
+  ],
+) -> @list.List[(Int64, @list.List[((TA, (Int64, @list.List[FolTerm])), TB)])] raise {
   let insts = x79
   let (p, a) = x80
   let ancestors = x81
-  let p_p = 0 - p
+  let p_p = @lib.neg63(p)
   let t_p = (p_p, a)
   try {
     let ours = @lib.assoc(p_p, ancestors)
     if @lib.exists(
-        fn(x82 : ((TA, (Int, @list.List[FolTerm])), TB)) -> Bool raise {
+        fn(x82 : ((TA, (Int64, @list.List[FolTerm])), TB)) -> Bool raise {
           let u = x82
           fol_atom_eq(insts, t_p, u.0.1)
         },
@@ -1035,35 +1040,35 @@ pub fn[TA, TB] checkan(
 ///|
 /// `insertan`
 pub fn[TA] insertan(
-  x83 : @list.List[(FolTerm, Int)],
-  x84 : (Int, @list.List[FolTerm]),
+  x83 : @list.List[(FolTerm, Int64)],
+  x84 : (Int64, @list.List[FolTerm]),
   x85 : @list.List[
     (
-      Int,
+      Int64,
       @list.List[
-        ((@list.List[TA], (Int, @list.List[FolTerm])), (Int, @kernel.Thm)),
+        ((@list.List[TA], (Int64, @list.List[FolTerm])), (Int64, @kernel.Thm)),
       ],
     ),
   ],
 ) -> @list.List[
   (
-    Int,
+    Int64,
     @list.List[
-      ((@list.List[TA], (Int, @list.List[FolTerm])), (Int, @kernel.Thm)),
+      ((@list.List[TA], (Int64, @list.List[FolTerm])), (Int64, @kernel.Thm)),
     ],
   ),
 ] raise {
   let insts = x83
   let (p, a) = x84
   let ancestors = x85
-  let p_p = 0 - p
+  let p_p = @lib.neg63(p)
   let t_p = (p_p, a)
   let (ourancp, otheranc) = @lib.remove(
     fn(
       x86 : (
-        Int,
+        Int64,
         @list.List[
-          ((@list.List[TA], (Int, @list.List[FolTerm])), (Int, @kernel.Thm)),
+          ((@list.List[TA], (Int64, @list.List[FolTerm])), (Int64, @kernel.Thm)),
         ],
       ),
     ) -> Bool raise {
@@ -1078,7 +1083,10 @@ pub fn[TA] insertan(
   let ouranc = ourancp.1
   if @lib.exists(
       fn(
-        x87 : ((@list.List[TA], (Int, @list.List[FolTerm])), (Int, @kernel.Thm)),
+        x87 : (
+          (@list.List[TA], (Int64, @list.List[FolTerm])),
+          (Int64, @kernel.Thm),
+        ),
       ) -> Bool raise {
         let u = x87
         fol_atom_eq(insts, t_p, u.0.1)
@@ -1088,7 +1096,7 @@ pub fn[TA] insertan(
     raise Failure("insertan: loop")
   } else {
     otheranc.prepend(
-      (p_p, ouranc.prepend(((@list.empty(), t_p), (0, @bool.truth())))),
+      (p_p, ouranc.prepend(((@list.empty(), t_p), (0L, @bool.truth())))),
     )
   }
 }
@@ -1096,7 +1104,7 @@ pub fn[TA] insertan(
 ///|
 /// `fol_subst_partial`
 pub fn fol_subst_partial(
-  x88 : @list.List[(FolTerm, Int)],
+  x88 : @list.List[(FolTerm, Int64)],
   x89 : FolTerm,
 ) -> FolTerm raise {
   let insts = x88
@@ -1121,15 +1129,15 @@ pub fn fol_subst_partial(
 ///|
 /// `separate_insts`
 pub fn separate_insts(
-  x91 : Int,
-  x92 : @list.List[(FolTerm, Int)],
-  x93 : @list.List[(FolTerm, Int)],
-) -> (@list.List[(FolTerm, Int)], @list.List[(FolTerm, Int)]) raise {
+  x91 : Int64,
+  x92 : @list.List[(FolTerm, Int64)],
+  x93 : @list.List[(FolTerm, Int64)],
+) -> (@list.List[(FolTerm, Int64)], @list.List[(FolTerm, Int64)]) raise {
   let offset = x91
   let oldinsts = x92
   let newinsts = x93
   let (locins, globins) = qpartition(
-    fn(x94 : (FolTerm, Int)) -> Bool raise {
+    fn(x94 : (FolTerm, Int64)) -> Bool raise {
       let (_, v) = x94
       offset <= v
     },
@@ -1138,7 +1146,7 @@ pub fn separate_insts(
   if globins == oldinsts {
     (
       @lib.map(
-        fn(x95 : (FolTerm, Int)) -> (FolTerm, Int) raise {
+        fn(x95 : (FolTerm, Int64)) -> (FolTerm, Int64) raise {
           let (t, x) = x95
           (fol_subst_partial(newinsts, t), x)
         },
@@ -1148,7 +1156,7 @@ pub fn separate_insts(
     )
   } else {
     let t98 = @lib.map(
-      fn(x97 : (FolTerm, Int)) -> (FolTerm, Int) raise {
+      fn(x97 : (FolTerm, Int64)) -> (FolTerm, Int64) raise {
         let (t_2, x_2) = x97
         (fol_subst_partial(newinsts, t_2), x_2)
       },
@@ -1156,7 +1164,7 @@ pub fn separate_insts(
     )
     (
       @lib.map(
-        fn(x96 : (FolTerm, Int)) -> (FolTerm, Int) raise {
+        fn(x96 : (FolTerm, Int64)) -> (FolTerm, Int64) raise {
           let (t_1, x_1) = x96
           (fol_subst_partial(newinsts, t_1), x_1)
         },
@@ -1170,33 +1178,33 @@ pub fn separate_insts(
 ///|
 /// `meson_single_expand`
 pub fn[TA, TB, TC, TD, TE] meson_single_expand(
-  x99 : Int,
+  x99 : Int64,
   x100 : (
-    (@list.List[(Int, @list.List[FolTerm])], (TC, @list.List[FolTerm])),
+    (@list.List[(Int64, @list.List[FolTerm])], (TC, @list.List[FolTerm])),
     TD,
   ),
   x101 : (
     (
       (TE, @list.List[FolTerm]),
-      @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])],
+      @list.List[(Int64, @list.List[((TA, (Int64, @list.List[FolTerm])), TB)])],
     ),
-    (@list.List[(FolTerm, Int)], Int, Int),
+    (@list.List[(FolTerm, Int64)], Int64, Int64),
   ),
 ) -> (
   @list.List[
     (
-      (Int, @list.List[FolTerm]),
-      @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])],
+      (Int64, @list.List[FolTerm]),
+      @list.List[(Int64, @list.List[((TA, (Int64, @list.List[FolTerm])), TB)])],
     ),
   ],
-  (@list.List[(FolTerm, Int)], Int, Int),
+  (@list.List[(FolTerm, Int64)], Int64, Int64),
 ) raise {
   let loffset = x99
   let rule = x100
   let ((g, ancestors), (insts, offset, size)) = x101
   let ((hyps, conc), tag) = rule
   let allins = @lib.rev_itlist2(
-    (x102 : FolTerm, x103 : FolTerm, x104 : @list.List[(FolTerm, Int)]) => {
+    (x102 : FolTerm, x103 : FolTerm, x104 : @list.List[(FolTerm, Int64)]) => {
       fol_unify(loffset, x102, x103, x104)
     },
     g.1,
@@ -1204,14 +1212,14 @@ pub fn[TA, TB, TC, TD, TE] meson_single_expand(
     insts,
   )
   let (locin, globin) = separate_insts(offset, insts, allins)
-  let mk_ihyp : ((Int, @list.List[FolTerm])) -> (
-    (Int, @list.List[FolTerm]),
-    @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])],
+  let mk_ihyp : ((Int64, @list.List[FolTerm])) -> (
+    (Int64, @list.List[FolTerm]),
+    @list.List[(Int64, @list.List[((TA, (Int64, @list.List[FolTerm])), TB)])],
   ) raise = fn(
-    x105 : (Int, @list.List[FolTerm]),
+    x105 : (Int64, @list.List[FolTerm]),
   ) -> (
-    (Int, @list.List[FolTerm]),
-    @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])],
+    (Int64, @list.List[FolTerm]),
+    @list.List[(Int64, @list.List[((TA, (Int64, @list.List[FolTerm])), TB)])],
   ) raise {
     let h = x105
     let h_p = fol_inst_bump(offset, locin, h)
@@ -1219,36 +1227,38 @@ pub fn[TA, TB, TC, TD, TE] meson_single_expand(
   }
   let newhyps = @lib.map(mk_ihyp, hyps)
   {
-    inferences().val = inferences().val + 1
+    inferences().val = @lib.add63(inferences().val, 1L)
     ()
   }
-  let t106 = size - @lib.length(hyps)
-  (newhyps, (globin, offset + offinc(), t106))
+  let t106 = @lib.sub63(size, Int::to_int64(@lib.length(hyps)))
+  (newhyps, (globin, @lib.add63(offset, offinc()), t106))
 }
 
 ///|
 /// `meson_expand_cont`
 pub fn[TA, TB, TC, TD, TE, TF] meson_expand_cont(
-  x107 : Int,
+  x107 : Int64,
   x108 : @list.List[
-    ((@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])), TC),
+    ((@list.List[(Int64, @list.List[FolTerm])], (TB, @list.List[FolTerm])), TC),
   ],
   x109 : (
     (
       (TD, @list.List[FolTerm]),
-      @list.List[(Int, @list.List[((TE, (Int, @list.List[FolTerm])), TF)])],
+      @list.List[(Int64, @list.List[((TE, (Int64, @list.List[FolTerm])), TF)])],
     ),
-    (@list.List[(FolTerm, Int)], Int, Int),
+    (@list.List[(FolTerm, Int64)], Int64, Int64),
   ),
   x110 : (TC) -> ((
     (
       @list.List[
         (
-          (Int, @list.List[FolTerm]),
-          @list.List[(Int, @list.List[((TE, (Int, @list.List[FolTerm])), TF)])],
+          (Int64, @list.List[FolTerm]),
+          @list.List[
+            (Int64, @list.List[((TE, (Int64, @list.List[FolTerm])), TF)]),
+          ],
         ),
       ],
-      (@list.List[(FolTerm, Int)], Int, Int),
+      (@list.List[(FolTerm, Int64)], Int64, Int64),
     ),
   ) -> TA raise) raise,
 ) -> TA raise {
@@ -1259,7 +1269,7 @@ pub fn[TA, TB, TC, TD, TE, TF] meson_expand_cont(
   @lib.tryfind(
     fn(
       x111 : (
-        (@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])),
+        (@list.List[(Int64, @list.List[FolTerm])], (TB, @list.List[FolTerm])),
         TC,
       ),
     ) -> TA raise {
@@ -1276,57 +1286,57 @@ pub fn[TA, TB, TC, TD, TE, TF] meson_expand_cont(
 pub fn[TA, TB] meson_expand(
   x113 : @list.List[
     (
-      Int,
+      Int64,
       @list.List[
         (
-          (@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])),
-          (Int, @kernel.Thm),
+          (@list.List[(Int64, @list.List[FolTerm])], (TB, @list.List[FolTerm])),
+          (Int64, @kernel.Thm),
         ),
       ],
     ),
   ],
   x114 : (
     (
-      (Int, @list.List[FolTerm]),
+      (Int64, @list.List[FolTerm]),
       @list.List[
         (
-          Int,
+          Int64,
           @list.List[
             (
               (
-                @list.List[(Int, @list.List[FolTerm])],
-                (Int, @list.List[FolTerm]),
+                @list.List[(Int64, @list.List[FolTerm])],
+                (Int64, @list.List[FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ],
         ),
       ],
     ),
-    (@list.List[(FolTerm, Int)], Int, Int),
+    (@list.List[(FolTerm, Int64)], Int64, Int64),
   ),
-  x115 : ((Int, @kernel.Thm)) -> ((
+  x115 : ((Int64, @kernel.Thm)) -> ((
     (
       @list.List[
         (
-          (Int, @list.List[FolTerm]),
+          (Int64, @list.List[FolTerm]),
           @list.List[
             (
-              Int,
+              Int64,
               @list.List[
                 (
                   (
-                    @list.List[(Int, @list.List[FolTerm])],
-                    (Int, @list.List[FolTerm]),
+                    @list.List[(Int64, @list.List[FolTerm])],
+                    (Int64, @list.List[FolTerm]),
                   ),
-                  (Int, @kernel.Thm),
+                  (Int64, @kernel.Thm),
                 ),
               ],
             ),
           ],
         ),
       ],
-      (@list.List[(FolTerm, Int)], Int, Int),
+      (@list.List[(FolTerm, Int64)], Int64, Int64),
     ),
   ) -> TA raise) raise,
 ) -> TA raise {
@@ -1337,11 +1347,11 @@ pub fn[TA, TB] meson_expand(
   let newancestors = insertan(insts, g, ancestors)
   let newstate = ((g, newancestors), tup)
   try {
-    if meson_prefine().val && pr > 0 {
+    if meson_prefine().val && pr > 0L {
       raise Failure("meson_expand")
     } else {
       let arules = @lib.assoc(pr, ancestors)
-      meson_expand_cont(0, arules, newstate, cont)
+      meson_expand_cont(0L, arules, newstate, cont)
     }
   } catch {
     Cut::Cut => raise Failure("meson_expand")
@@ -1351,14 +1361,14 @@ pub fn[TA, TB] meson_expand(
           fn(
             x116 : (
               (
-                @list.List[(Int, @list.List[FolTerm])],
+                @list.List[(Int64, @list.List[FolTerm])],
                 (TB, @list.List[FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ) -> Bool raise {
             let ((h, _), _) = x116
-            @lib.length(h) <= size
+            Int::to_int64(@lib.length(h)) <= size
           },
           @lib.assoc(pr, rules),
         )
@@ -1377,11 +1387,11 @@ pub fn[TA, TB] meson_expand(
 pub fn[TA, TB] expand_goal(
   x117 : @list.List[
     (
-      Int,
+      Int64,
       @list.List[
         (
-          (@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])),
-          (Int, @kernel.Thm),
+          (@list.List[(Int64, @list.List[FolTerm])], (TB, @list.List[FolTerm])),
+          (Int64, @kernel.Thm),
         ),
       ],
     ),
@@ -1391,59 +1401,61 @@ pub fn[TA, TB] expand_goal(
     FolAtom,
     @list.List[
       (
-        Int,
+        Int64,
         @list.List[
           (
-            (@list.List[FolAtom], (Int, @list.List[FolTerm])),
-            (Int, @kernel.Thm),
+            (@list.List[FolAtom], (Int64, @list.List[FolTerm])),
+            (Int64, @kernel.Thm),
           ),
         ],
       ),
     ],
   ),
-) -> ((Int) -> ((Int) -> ((
-  ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
+) -> ((Int64) -> ((Int64) -> ((
+  ((FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64))) -> TA raise,
 ) -> TA raise) raise) raise) raise) raise {
   let rules = x117
   fn(
     x139 : (
-      (Int, @list.List[FolTerm]),
+      (Int64, @list.List[FolTerm]),
       @list.List[
         (
-          Int,
+          Int64,
           @list.List[
             (
               (
-                @list.List[(Int, @list.List[FolTerm])],
-                (Int, @list.List[FolTerm]),
+                @list.List[(Int64, @list.List[FolTerm])],
+                (Int64, @list.List[FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ],
         ),
       ],
     ),
-  ) -> ((Int) -> ((Int) -> ((
-    ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
+  ) -> ((Int64) -> ((Int64) -> ((
+    ((FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64))) -> TA raise,
   ) -> TA raise) raise) raise) raise {
     let g_3 = x139
     fn(
-      x140 : Int,
-    ) -> ((Int) -> ((
-      ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
+      x140 : Int64,
+    ) -> ((Int64) -> ((
+      ((FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64))) -> TA raise,
     ) -> TA raise) raise) raise {
       let maxdep = x140
       fn(
-        x141 : Int,
-      ) -> ((((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise) -> TA raise) raise {
+        x141 : Int64,
+      ) -> ((
+        ((FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64))) -> TA raise,
+      ) -> TA raise) raise {
         let maxinf = x141
         fn(
-          x142 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise,
+          x142 : ((FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64))) -> TA raise,
         ) -> TA raise {
           let cont_2 = x142
           ((x119, x120, x121) => expand_goal_1_l(rules, x119, x120, x121))(
             maxdep,
-            (g_3, (@list.empty(), 2 * offinc(), maxinf)),
+            (g_3, (@list.empty(), @lib.mul63(2L, offinc()), maxinf)),
             cont_2,
           )
         }
@@ -1456,94 +1468,94 @@ pub fn[TA, TB] expand_goal(
 fn[TB, TC] expand_goal_1_l(
   rules : @list.List[
     (
-      Int,
+      Int64,
       @list.List[
         (
-          (@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])),
-          (Int, @kernel.Thm),
+          (@list.List[(Int64, @list.List[FolTerm])], (TB, @list.List[FolTerm])),
+          (Int64, @kernel.Thm),
         ),
       ],
     ),
   ],
-  x119 : Int,
+  x119 : Int64,
   x120 : (
     (
-      (Int, @list.List[FolTerm]),
+      (Int64, @list.List[FolTerm]),
       @list.List[
         (
-          Int,
+          Int64,
           @list.List[
             (
               (
-                @list.List[(Int, @list.List[FolTerm])],
-                (Int, @list.List[FolTerm]),
+                @list.List[(Int64, @list.List[FolTerm])],
+                (Int64, @list.List[FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ],
         ),
       ],
     ),
-    (@list.List[(FolTerm, Int)], Int, Int),
+    (@list.List[(FolTerm, Int64)], Int64, Int64),
   ),
-  x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TC raise,
+  x121 : ((FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64))) -> TC raise,
 ) -> TC raise {
   let expand_goals = (
-    x126 : Int,
+    x126 : Int64,
     x127 : (
       @list.List[
         (
-          (Int, @list.List[FolTerm]),
+          (Int64, @list.List[FolTerm]),
           @list.List[
             (
-              Int,
+              Int64,
               @list.List[
                 (
                   (
-                    @list.List[(Int, @list.List[FolTerm])],
-                    (Int, @list.List[FolTerm]),
+                    @list.List[(Int64, @list.List[FolTerm])],
+                    (Int64, @list.List[FolTerm]),
                   ),
-                  (Int, @kernel.Thm),
+                  (Int64, @kernel.Thm),
                 ),
               ],
             ),
           ],
         ),
       ],
-      (@list.List[(FolTerm, Int)], Int, Int),
+      (@list.List[(FolTerm, Int64)], Int64, Int64),
     ),
-    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> TC raise,
+    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int64)], Int64, Int64))) -> TC raise,
   ) => expand_goals_l(rules, x126, x127, x128)
   let depth = x119
   let ((g, _), (insts, offset, size)) as state = x120
   let cont = x121
-  if depth < 0 {
+  if depth < 0L {
     raise Failure("expand_goal: too deep")
   } else {
     meson_expand(rules, state, fn(
-      x122 : (Int, @kernel.Thm),
+      x122 : (Int64, @kernel.Thm),
     ) -> ((
       (
         @list.List[
           (
-            (Int, @list.List[FolTerm]),
+            (Int64, @list.List[FolTerm]),
             @list.List[
               (
-                Int,
+                Int64,
                 @list.List[
                   (
                     (
-                      @list.List[(Int, @list.List[FolTerm])],
-                      (Int, @list.List[FolTerm]),
+                      @list.List[(Int64, @list.List[FolTerm])],
+                      (Int64, @list.List[FolTerm]),
                     ),
-                    (Int, @kernel.Thm),
+                    (Int64, @kernel.Thm),
                   ),
                 ],
               ),
             ],
           ),
         ],
-        (@list.List[(FolTerm, Int)], Int, Int),
+        (@list.List[(FolTerm, Int64)], Int64, Int64),
       ),
     ) -> TC raise) raise {
       let apprule = x122
@@ -1551,29 +1563,32 @@ fn[TB, TC] expand_goal_1_l(
         x123 : (
           @list.List[
             (
-              (Int, @list.List[FolTerm]),
+              (Int64, @list.List[FolTerm]),
               @list.List[
                 (
-                  Int,
+                  Int64,
                   @list.List[
                     (
                       (
-                        @list.List[(Int, @list.List[FolTerm])],
-                        (Int, @list.List[FolTerm]),
+                        @list.List[(Int64, @list.List[FolTerm])],
+                        (Int64, @list.List[FolTerm]),
                       ),
-                      (Int, @kernel.Thm),
+                      (Int64, @kernel.Thm),
                     ),
                   ],
                 ),
               ],
             ),
           ],
-          (@list.List[(FolTerm, Int)], Int, Int),
+          (@list.List[(FolTerm, Int64)], Int64, Int64),
         ),
       ) -> TC raise {
         let (_, (pinsts, _, _)) as newstate = x123
         let t125 = cacheconts(fn(
-          x124 : (@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int)),
+          x124 : (
+            @list.List[FolGoal],
+            (@list.List[(FolTerm, Int64)], Int64, Int64),
+          ),
         ) -> TC raise {
           let (gs, (newinsts, newoffset, newsize)) = x124
           let (locin, globin) = separate_insts(offset, pinsts, newinsts)
@@ -1591,7 +1606,7 @@ fn[TB, TC] expand_goal_1_l(
             }
           }
         })
-        expand_goals(depth - 1, newstate, t125)
+        expand_goals(@lib.sub63(depth, 1L), newstate, t125)
       }
     })
   }
@@ -1601,89 +1616,89 @@ fn[TB, TC] expand_goal_1_l(
 fn[TB, TC] expand_goals_l(
   rules : @list.List[
     (
-      Int,
+      Int64,
       @list.List[
         (
-          (@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])),
-          (Int, @kernel.Thm),
+          (@list.List[(Int64, @list.List[FolTerm])], (TB, @list.List[FolTerm])),
+          (Int64, @kernel.Thm),
         ),
       ],
     ),
   ],
-  x126 : Int,
+  x126 : Int64,
   x127 : (
     @list.List[
       (
-        (Int, @list.List[FolTerm]),
+        (Int64, @list.List[FolTerm]),
         @list.List[
           (
-            Int,
+            Int64,
             @list.List[
               (
                 (
-                  @list.List[(Int, @list.List[FolTerm])],
-                  (Int, @list.List[FolTerm]),
+                  @list.List[(Int64, @list.List[FolTerm])],
+                  (Int64, @list.List[FolTerm]),
                 ),
-                (Int, @kernel.Thm),
+                (Int64, @kernel.Thm),
               ),
             ],
           ),
         ],
       ),
     ],
-    (@list.List[(FolTerm, Int)], Int, Int),
+    (@list.List[(FolTerm, Int64)], Int64, Int64),
   ),
-  x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> TC raise,
+  x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int64)], Int64, Int64))) -> TC raise,
 ) -> TC raise {
   let expand_goal_1 = (
-    x119 : Int,
+    x119 : Int64,
     x120 : (
       (
-        (Int, @list.List[FolTerm]),
+        (Int64, @list.List[FolTerm]),
         @list.List[
           (
-            Int,
+            Int64,
             @list.List[
               (
                 (
-                  @list.List[(Int, @list.List[FolTerm])],
-                  (Int, @list.List[FolTerm]),
+                  @list.List[(Int64, @list.List[FolTerm])],
+                  (Int64, @list.List[FolTerm]),
                 ),
-                (Int, @kernel.Thm),
+                (Int64, @kernel.Thm),
               ),
             ],
           ),
         ],
       ),
-      (@list.List[(FolTerm, Int)], Int, Int),
+      (@list.List[(FolTerm, Int64)], Int64, Int64),
     ),
-    x121 : ((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TC raise,
+    x121 : ((FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64))) -> TC raise,
   ) => expand_goal_1_l(rules, x119, x120, x121)
   let expand_goals = (
-    x126 : Int,
+    x126 : Int64,
     x127 : (
       @list.List[
         (
-          (Int, @list.List[FolTerm]),
+          (Int64, @list.List[FolTerm]),
           @list.List[
             (
-              Int,
+              Int64,
               @list.List[
                 (
                   (
-                    @list.List[(Int, @list.List[FolTerm])],
-                    (Int, @list.List[FolTerm]),
+                    @list.List[(Int64, @list.List[FolTerm])],
+                    (Int64, @list.List[FolTerm]),
                   ),
-                  (Int, @kernel.Thm),
+                  (Int64, @kernel.Thm),
                 ),
               ],
             ),
           ],
         ),
       ],
-      (@list.List[(FolTerm, Int)], Int, Int),
+      (@list.List[(FolTerm, Int64)], Int64, Int64),
     ),
-    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int))) -> TC raise,
+    x128 : ((@list.List[FolGoal], (@list.List[(FolTerm, Int64)], Int64, Int64))) -> TC raise,
   ) => expand_goals_l(rules, x126, x127, x128)
   let depth_1 = x126
   let (gl, (insts_1, offset_1, size_1) as tup) = x127
@@ -1692,33 +1707,43 @@ fn[TB, TC] expand_goals_l(
     Empty => cont_1((@list.empty(), tup))
     More(g_1, tail=Empty) =>
       expand_goal_1(depth_1, (g_1, tup), fn(
-        x129 : (FolGoal, (@list.List[(FolTerm, Int)], Int, Int)),
+        x129 : (FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64)),
       ) -> TC raise {
         let (g_p_1, stup) = x129
         cont_1((@list.List([g_p_1]), stup))
       })
     gl_1 =>
       if size_1 >= meson_dcutin().val {
-        let lsize = size_1 / meson_skew().val
-        let rsize = size_1 - lsize
-        let (lgoals, rgoals) = @lib.chop_list(@lib.length(gl_1) / 2, gl_1)
+        let lsize = @lib.div63(size_1, meson_skew().val)
+        let rsize = @lib.sub63(size_1, lsize)
+        let (lgoals, rgoals) = @lib.chop_list(
+          @lib.int63_to_int(@lib.div63(Int::to_int64(@lib.length(gl_1)), 2L)),
+          gl_1,
+        )
         expand_goals(
           depth_1,
           (lgoals, (insts_1, offset_1, lsize)),
           cacheconts(fn(
-            x130 : (@list.List[FolGoal], (@list.List[(FolTerm, Int)], Int, Int)),
+            x130 : (
+              @list.List[FolGoal],
+              (@list.List[(FolTerm, Int64)], Int64, Int64),
+            ),
           ) -> TC raise {
             let (lg_p, (i, off, n)) = x130
             let t132 = cacheconts(fn(
               x131 : (
                 @list.List[FolGoal],
-                (@list.List[(FolTerm, Int)], Int, Int),
+                (@list.List[(FolTerm, Int64)], Int64, Int64),
               ),
             ) -> TC raise {
               let (rg_p, ztup) = x131
               cont_1((lg_p.concat(rg_p), ztup))
             })
-            expand_goals(depth_1, (rgoals, (i, off, n + rsize)), t132)
+            expand_goals(
+              depth_1,
+              (rgoals, (i, off, @lib.add63(n, rsize))),
+              t132,
+            )
           }),
         ) catch {
           Failure(_) =>
@@ -1728,25 +1753,29 @@ fn[TB, TC] expand_goals_l(
               cacheconts(fn(
                 x133 : (
                   @list.List[FolGoal],
-                  (@list.List[(FolTerm, Int)], Int, Int),
+                  (@list.List[(FolTerm, Int64)], Int64, Int64),
                 ),
               ) -> TC raise {
                 let (rg_p_1, (i_1, off_1, n_1)) = x133
                 let t136 = cacheconts(fn(
                   x134 : (
                     @list.List[FolGoal],
-                    (@list.List[(FolTerm, Int)], Int, Int),
+                    (@list.List[(FolTerm, Int64)], Int64, Int64),
                   ),
                 ) -> TC raise {
                   let (lg_p_1, (_, _, fsize) as ztup_1) = x134
-                  let t135 = lsize + fsize
-                  if n_1 + rsize <= t135 {
+                  let t135 = @lib.add63(lsize, fsize)
+                  if @lib.add63(n_1, rsize) <= t135 {
                     raise Failure("repetition of demigoal pair")
                   } else {
                     cont_1((lg_p_1.concat(rg_p_1), ztup_1))
                   }
                 })
-                expand_goals(depth_1, (lgoals, (i_1, off_1, n_1 + rsize)), t136)
+                expand_goals(
+                  depth_1,
+                  (lgoals, (i_1, off_1, @lib.add63(n_1, rsize))),
+                  t136,
+                )
               }),
             )
           e => raise e
@@ -1758,7 +1787,7 @@ fn[TB, TC] expand_goals_l(
               depth_1,
               (g_2, tup),
               cacheconts(fn(
-                x137 : (FolGoal, (@list.List[(FolTerm, Int)], Int, Int)),
+                x137 : (FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64)),
               ) -> TC raise {
                 let (g_p_2, stup_1) = x137
                 expand_goals(
@@ -1767,7 +1796,7 @@ fn[TB, TC] expand_goals_l(
                   cacheconts(fn(
                     x138 : (
                       @list.List[FolGoal],
-                      (@list.List[(FolTerm, Int)], Int, Int),
+                      (@list.List[(FolTerm, Int64)], Int64, Int64),
                     ),
                   ) -> TC raise {
                     let (gs_p, ftup) = x138
@@ -1787,76 +1816,72 @@ fn[TB, TC] expand_goals_l(
 pub fn[TA] solve_goal(
   x143 : @list.List[
     (
-      Int,
+      Int64,
       @list.List[
         (
-          (@list.List[(Int, @list.List[FolTerm])], (TA, @list.List[FolTerm])),
-          (Int, @kernel.Thm),
+          (@list.List[(Int64, @list.List[FolTerm])], (TA, @list.List[FolTerm])),
+          (Int64, @kernel.Thm),
         ),
       ],
     ),
   ],
   x144 : Bool,
-  x145 : Int,
-  x146 : Int,
-  x147 : Int,
-) -> ((FolAtom) -> (FolGoal, (@list.List[(FolTerm, Int)], Int, Int)) raise) raise {
+  x145 : Int64,
+  x146 : Int64,
+  x147 : Int64,
+) -> ((FolAtom) -> (FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64)) raise) raise {
   let rules = x143
   let incdepth = x144
   let min = x145
   let max = x146
   let incsize = x147
   fn solve(
-    x149 : Int,
+    x149 : Int64,
     x150 : (
-      (Int, @list.List[FolTerm]),
+      (Int64, @list.List[FolTerm]),
       @list.List[
         (
-          Int,
+          Int64,
           @list.List[
             (
               (
-                @list.List[(Int, @list.List[FolTerm])],
-                (Int, @list.List[FolTerm]),
+                @list.List[(Int64, @list.List[FolTerm])],
+                (Int64, @list.List[FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ],
         ),
       ],
     ),
-  ) -> (FolGoal, (@list.List[(FolTerm, Int)], Int, Int)) raise {
+  ) -> (FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64)) raise {
     let n = x149
     let g = x150
     if n > max {
       raise Failure("solve_goal: Too deep")
     } else if meson_chatty().val && @lib.verbose.val {
       let t151 = " inferences so far. " +
-        ("Searching with maximum size " + (@lib.string_of_int(n) + "."))
-      @pp.std_formatter.print_string(
-        @lib.string_of_int(inferences().val) + t151,
-      )
+        ("Searching with maximum size " + (Int64::to_string(n) + "."))
+      @pp.std_formatter.print_string(Int64::to_string(inferences().val) + t151)
       @pp.std_formatter.print_newline()
     } else if @lib.verbose.val {
-      @pp.std_formatter.print_string(
-        @lib.string_of_int(inferences().val) + "..",
-      )
+      @pp.std_formatter.print_string(Int64::to_string(inferences().val) + "..")
       @pp.std_formatter.print_flush()
     } else {
       ()
     }
     try {
       let gi = if incdepth {
-        expand_goal(rules)(g)(n)(100000)(fn(
-          x152 : (FolGoal, (@list.List[(FolTerm, Int)], Int, Int)),
-        ) -> (FolGoal, (@list.List[(FolTerm, Int)], Int, Int)) raise {
+        expand_goal(rules)(g)(n)(100000L)(fn(
+          x152 : (FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64)),
+        ) -> (FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64)) raise {
           let x = x152
           x
         })
       } else {
-        expand_goal(rules)(g)(100000)(n)(fn(
-          x153 : (FolGoal, (@list.List[(FolTerm, Int)], Int, Int)),
-        ) -> (FolGoal, (@list.List[(FolTerm, Int)], Int, Int)) raise {
+        expand_goal(rules)(g)(100000L)(n)(fn(
+          x153 : (FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64)),
+        ) -> (FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64)) raise {
           let x_1 = x153
           x_1
         })
@@ -1864,12 +1889,12 @@ pub fn[TA] solve_goal(
       if meson_chatty().val && @lib.verbose.val {
         @pp.std_formatter.print_string(
           "Goal solved with " +
-          (@lib.string_of_int(inferences().val) + " inferences."),
+          (Int64::to_string(inferences().val) + " inferences."),
         )
         @pp.std_formatter.print_newline()
       } else if @lib.verbose.val {
         @pp.std_formatter.print_string(
-          "solved at " + @lib.string_of_int(inferences().val),
+          "solved at " + Int64::to_string(inferences().val),
         )
         @pp.std_formatter.print_newline()
       } else {
@@ -1877,13 +1902,13 @@ pub fn[TA] solve_goal(
       }
       gi
     } catch {
-      Failure(_) => solve(n + incsize, g)
+      Failure(_) => solve(@lib.add63(n, incsize), g)
       e => raise e
     }
   }
   fn(
-    x154 : (Int, @list.List[FolTerm]),
-  ) -> (FolGoal, (@list.List[(FolTerm, Int)], Int, Int)) raise {
+    x154 : (Int64, @list.List[FolTerm]),
+  ) -> (FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64)) raise {
     let g_1 = x154
     solve(min, (g_1, @list.empty()))
   }
@@ -1894,15 +1919,15 @@ pub fn[TA] solve_goal(
 fn step_12() -> Unit raise {
   let fol_of_hol_clause : (@kernel.Thm) -> @list.List[
     (
-      (@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])),
-      (Int, @kernel.Thm),
+      (@list.List[(Int64, @list.List[FolTerm])], (Int64, @list.List[FolTerm])),
+      (Int64, @kernel.Thm),
     ),
   ] raise = fn(
     x163 : @kernel.Thm,
   ) -> @list.List[
     (
-      (@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])),
-      (Int, @kernel.Thm),
+      (@list.List[(Int64, @list.List[FolTerm])], (Int64, @list.List[FolTerm])),
+      (Int64, @kernel.Thm),
     ),
   ] raise {
     let th_1 = x163
@@ -1913,11 +1938,11 @@ fn step_12() -> Unit raise {
       (x164 : @kernel.Term) => fol_of_literal(@list.empty(), lconsts, x164),
       hlits,
     )
-    let basics = mk_contraposes_l(0, th_1, @list.empty(), flits, @list.empty())
+    let basics = mk_contraposes_l(0L, th_1, @list.empty(), flits, @list.empty())
     if @lib.forall(
-        fn(x165 : (Int, @list.List[FolTerm])) -> Bool raise {
+        fn(x165 : (Int64, @list.List[FolTerm])) -> Bool raise {
           let (p, _) = x165
-          p < 0
+          p < 0L
         },
         flits,
       ) {
@@ -1926,15 +1951,15 @@ fn step_12() -> Unit raise {
           (
             @lib.map(
               fn(
-                x166 : (Int, @list.List[FolTerm]),
-              ) -> (Int, @list.List[FolTerm]) raise {
+                x166 : (Int64, @list.List[FolTerm]),
+              ) -> (Int64, @list.List[FolTerm]) raise {
                 mk_negated(x166.0, x166.1)
               },
               flits,
             ),
-            (1, @list.empty()),
+            (1L, @list.empty()),
           ),
-          (-1, th_1),
+          (-1L, th_1),
         ),
       )
     } else {
@@ -1945,11 +1970,14 @@ fn step_12() -> Unit raise {
     x167 : @list.List[@kernel.Thm],
   ) -> @list.List[
     (
-      Int,
+      Int64,
       @list.List[
         (
-          (@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])),
-          (Int, @kernel.Thm),
+          (
+            @list.List[(Int64, @list.List[FolTerm])],
+            (Int64, @list.List[FolTerm]),
+          ),
+          (Int64, @kernel.Thm),
         ),
       ],
     ),
@@ -1960,78 +1988,87 @@ fn step_12() -> Unit raise {
         x172 : @kernel.Thm,
         x173 : @list.List[
           (
-            (@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])),
-            (Int, @kernel.Thm),
+            (
+              @list.List[(Int64, @list.List[FolTerm])],
+              (Int64, @list.List[FolTerm]),
+            ),
+            (Int64, @kernel.Thm),
           ),
         ],
       ) -> @list.List[
         (
-          (@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])),
-          (Int, @kernel.Thm),
+          (
+            @list.List[(Int64, @list.List[FolTerm])],
+            (Int64, @list.List[FolTerm]),
+          ),
+          (Int64, @kernel.Thm),
         ),
       ] raise {
         (fn(
           x170 : @list.List[
             (
               (
-                @list.List[(Int, @list.List[FolTerm])],
-                (Int, @list.List[FolTerm]),
+                @list.List[(Int64, @list.List[FolTerm])],
+                (Int64, @list.List[FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ],
         ) -> ((
           @list.List[
             (
               (
-                @list.List[(Int, @list.List[FolTerm])],
-                (Int, @list.List[FolTerm]),
+                @list.List[(Int64, @list.List[FolTerm])],
+                (Int64, @list.List[FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ],
         ) -> @list.List[
           (
-            (@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])),
-            (Int, @kernel.Thm),
+            (
+              @list.List[(Int64, @list.List[FolTerm])],
+              (Int64, @list.List[FolTerm]),
+            ),
+            (Int64, @kernel.Thm),
           ),
         ] raise) raise {
           fn(
             x171 : @list.List[
               (
                 (
-                  @list.List[(Int, @list.List[FolTerm])],
-                  (Int, @list.List[FolTerm]),
+                  @list.List[(Int64, @list.List[FolTerm])],
+                  (Int64, @list.List[FolTerm]),
                 ),
-                (Int, @kernel.Thm),
+                (Int64, @kernel.Thm),
               ),
             ],
           ) -> @list.List[
             (
               (
-                @list.List[(Int, @list.List[FolTerm])],
-                (Int, @list.List[FolTerm]),
+                @list.List[(Int64, @list.List[FolTerm])],
+                (Int64, @list.List[FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ] raise {
             ((
               x168 : @list.List[
                 (
                   (
-                    @list.List[(Int, @list.List[FolTerm])],
-                    (Int, @list.List[FolTerm]),
+                    @list.List[(Int64, @list.List[FolTerm])],
+                    (Int64, @list.List[FolTerm]),
                   ),
-                  (Int, @kernel.Thm),
+                  (Int64, @kernel.Thm),
                 ),
               ],
               x169 : @list.List[
                 (
                   (
-                    @list.List[(Int, @list.List[FolTerm])],
-                    (Int, @list.List[FolTerm]),
+                    @list.List[(Int64, @list.List[FolTerm])],
+                    (Int64, @list.List[FolTerm]),
                   ),
-                  (Int, @kernel.Thm),
+                  (Int64, @kernel.Thm),
                 ),
               ],
             ) => @lib.union_eq(eqt_l, x168, x169))(x170, x171)
@@ -2045,23 +2082,26 @@ fn step_12() -> Unit raise {
       @lib.map(
         fn(
           x178 : (
-            (@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])),
-            (Int, @kernel.Thm),
+            (
+              @list.List[(Int64, @list.List[FolTerm])],
+              (Int64, @list.List[FolTerm]),
+            ),
+            (Int64, @kernel.Thm),
           ),
-        ) -> Int raise {
+        ) -> Int64 raise {
           (fn(
             x176 : (
-              @list.List[(Int, @list.List[FolTerm])],
-              (Int, @list.List[FolTerm]),
+              @list.List[(Int64, @list.List[FolTerm])],
+              (Int64, @list.List[FolTerm]),
             ),
-          ) -> Int raise {
-            (fn(x174 : (Int, @list.List[FolTerm])) -> Int raise { x174.0 })(
+          ) -> Int64 raise {
+            (fn(x174 : (Int64, @list.List[FolTerm])) -> Int64 raise { x174.0 })(
               (fn(
                 x175 : (
-                  @list.List[(Int, @list.List[FolTerm])],
-                  (Int, @list.List[FolTerm]),
+                  @list.List[(Int64, @list.List[FolTerm])],
+                  (Int64, @list.List[FolTerm]),
                 ),
-              ) -> (Int, @list.List[FolTerm]) raise {
+              ) -> (Int64, @list.List[FolTerm]) raise {
                 x175.1
               })(x176),
             )
@@ -2069,14 +2109,14 @@ fn step_12() -> Unit raise {
             (fn(
               x177 : (
                 (
-                  @list.List[(Int, @list.List[FolTerm])],
-                  (Int, @list.List[FolTerm]),
+                  @list.List[(Int64, @list.List[FolTerm])],
+                  (Int64, @list.List[FolTerm]),
                 ),
-                (Int, @kernel.Thm),
+                (Int64, @kernel.Thm),
               ),
             ) -> (
-              @list.List[(Int, @list.List[FolTerm])],
-              (Int, @list.List[FolTerm]),
+              @list.List[(Int64, @list.List[FolTerm])],
+              (Int64, @list.List[FolTerm]),
             ) raise {
               x177.0
             })(x178),
@@ -2087,13 +2127,16 @@ fn step_12() -> Unit raise {
     )
     let prules = @lib.map(
       fn(
-        x179 : Int,
+        x179 : Int64,
       ) -> (
-        Int,
+        Int64,
         @list.List[
           (
-            (@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])),
-            (Int, @kernel.Thm),
+            (
+              @list.List[(Int64, @list.List[FolTerm])],
+              (Int64, @list.List[FolTerm]),
+            ),
+            (Int64, @kernel.Thm),
           ),
         ],
       ) raise {
@@ -2104,31 +2147,31 @@ fn step_12() -> Unit raise {
             fn(
               x186 : (
                 (
-                  @list.List[(Int, @list.List[FolTerm])],
-                  (Int, @list.List[FolTerm]),
+                  @list.List[(Int64, @list.List[FolTerm])],
+                  (Int64, @list.List[FolTerm]),
                 ),
-                (Int, @kernel.Thm),
+                (Int64, @kernel.Thm),
               ),
             ) -> Bool raise {
               (fn(
                 x184 : (
-                  @list.List[(Int, @list.List[FolTerm])],
-                  (Int, @list.List[FolTerm]),
+                  @list.List[(Int64, @list.List[FolTerm])],
+                  (Int64, @list.List[FolTerm]),
                 ),
               ) -> Bool raise {
-                (fn(x182 : (Int, @list.List[FolTerm])) -> Bool raise {
-                  (fn(x180 : Int) -> Bool raise { t_1 == x180 })(
-                    (fn(x181 : (Int, @list.List[FolTerm])) -> Int raise {
+                (fn(x182 : (Int64, @list.List[FolTerm])) -> Bool raise {
+                  (fn(x180 : Int64) -> Bool raise { t_1 == x180 })(
+                    (fn(x181 : (Int64, @list.List[FolTerm])) -> Int64 raise {
                       x181.0
                     })(x182),
                   )
                 })(
                   (fn(
                     x183 : (
-                      @list.List[(Int, @list.List[FolTerm])],
-                      (Int, @list.List[FolTerm]),
+                      @list.List[(Int64, @list.List[FolTerm])],
+                      (Int64, @list.List[FolTerm]),
                     ),
-                  ) -> (Int, @list.List[FolTerm]) raise {
+                  ) -> (Int64, @list.List[FolTerm]) raise {
                     x183.1
                   })(x184),
                 )
@@ -2136,14 +2179,14 @@ fn step_12() -> Unit raise {
                 (fn(
                   x185 : (
                     (
-                      @list.List[(Int, @list.List[FolTerm])],
-                      (Int, @list.List[FolTerm]),
+                      @list.List[(Int64, @list.List[FolTerm])],
+                      (Int64, @list.List[FolTerm]),
                     ),
-                    (Int, @kernel.Thm),
+                    (Int64, @kernel.Thm),
                   ),
                 ) -> (
-                  @list.List[(Int, @list.List[FolTerm])],
-                  (Int, @list.List[FolTerm]),
+                  @list.List[(Int64, @list.List[FolTerm])],
+                  (Int64, @list.List[FolTerm]),
                 ) raise {
                   x185.0
                 })(x186),
@@ -2158,34 +2201,34 @@ fn step_12() -> Unit raise {
     let srules = @lib.sort(
       fn(
         x187 : (
-          Int,
+          Int64,
           @list.List[
             (
               (
-                @list.List[(Int, @list.List[FolTerm])],
-                (Int, @list.List[FolTerm]),
+                @list.List[(Int64, @list.List[FolTerm])],
+                (Int64, @list.List[FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ],
         ),
         x188 : (
-          Int,
+          Int64,
           @list.List[
             (
               (
-                @list.List[(Int, @list.List[FolTerm])],
-                (Int, @list.List[FolTerm]),
+                @list.List[(Int64, @list.List[FolTerm])],
+                (Int64, @list.List[FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ],
         ),
       ) -> Bool raise {
         let (p_1, _) = x187
         let (q, _) = x188
-        let t189 = @lib.abs_int(q)
-        @lib.abs_int(p_1) <= t189
+        let t189 = @lib.abs63(q)
+        @lib.abs63(p_1) <= t189
       },
       prules,
     )
@@ -2197,11 +2240,14 @@ fn step_12() -> Unit raise {
 let fol_of_hol_clauses_c : @lib.Cell[
   (@list.List[@kernel.Thm]) -> @list.List[
     (
-      Int,
+      Int64,
       @list.List[
         (
-          (@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])),
-          (Int, @kernel.Thm),
+          (
+            @list.List[(Int64, @list.List[FolTerm])],
+            (Int64, @list.List[FolTerm]),
+          ),
+          (Int64, @kernel.Thm),
         ),
       ],
     ),
@@ -2214,11 +2260,11 @@ pub fn fol_of_hol_clauses(
   x : @list.List[@kernel.Thm],
 ) -> @list.List[
   (
-    Int,
+    Int64,
     @list.List[
       (
-        (@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])),
-        (Int, @kernel.Thm),
+        (@list.List[(Int64, @list.List[FolTerm])], (Int64, @list.List[FolTerm])),
+        (Int64, @kernel.Thm),
       ),
     ],
   ),
@@ -2238,12 +2284,12 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] e
 
 ///|
 fn[TC, TD] mk_contraposes_l(
-  x157 : Int,
+  x157 : Int64,
   x158 : TD,
-  x159 : @list.List[(Int, TC)],
-  x160 : @list.List[(Int, TC)],
-  x161 : @list.List[((@list.List[(Int, TC)], (Int, TC)), (Int, TD))],
-) -> @list.List[((@list.List[(Int, TC)], (Int, TC)), (Int, TD))] raise {
+  x159 : @list.List[(Int64, TC)],
+  x160 : @list.List[(Int64, TC)],
+  x161 : @list.List[((@list.List[(Int64, TC)], (Int64, TC)), (Int64, TD))],
+) -> @list.List[((@list.List[(Int64, TC)], (Int64, TC)), (Int64, TD))] raise {
   let n = x157
   let th = x158
   let used = x159
@@ -2255,7 +2301,7 @@ fn[TC, TD] mk_contraposes_l(
       let nw = (
         (
           @lib.map(
-            fn(x162 : (Int, TC)) -> (Int, TC) raise {
+            fn(x162 : (Int64, TC)) -> (Int64, TC) raise {
               mk_negated(x162.0, x162.1)
             },
             used.concat(t),
@@ -2265,7 +2311,7 @@ fn[TC, TD] mk_contraposes_l(
         (n, th),
       )
       mk_contraposes_l(
-        n + 1,
+        @lib.add63(n, 1L),
         th,
         used.concat(@list.List([h])),
         t,
@@ -2281,11 +2327,14 @@ fn step_13() -> Unit raise {
   optimize_rules_c.set((
     x195 : @list.List[
       (
-        Int,
+        Int64,
         @list.List[
           (
-            (@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])),
-            (Int, @kernel.Thm),
+            (
+              @list.List[(Int64, @list.List[FolTerm])],
+              (Int64, @list.List[FolTerm]),
+            ),
+            (Int64, @kernel.Thm),
           ),
         ],
       ),
@@ -2294,23 +2343,26 @@ fn step_13() -> Unit raise {
     @lib.map(
       fn(
         x194 : (
-          Int,
+          Int64,
           @list.List[
             (
               (
-                @list.List[(Int, @list.List[FolTerm])],
-                (Int, @list.List[FolTerm]),
+                @list.List[(Int64, @list.List[FolTerm])],
+                (Int64, @list.List[FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ],
         ),
       ) -> (
-        Int,
+        Int64,
         @list.List[
           (
-            (@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])),
-            (Int, @kernel.Thm),
+            (
+              @list.List[(Int64, @list.List[FolTerm])],
+              (Int64, @list.List[FolTerm]),
+            ),
+            (Int64, @kernel.Thm),
           ),
         ],
       ) raise {
@@ -2327,20 +2379,23 @@ let optimize_rules_c : @lib.Cell[
   (
     @list.List[
       (
-        Int,
+        Int64,
         @list.List[
           (
-            (@list.List[FolAtom], (Int, @list.List[FolTerm])),
-            (Int, @kernel.Thm),
+            (@list.List[FolAtom], (Int64, @list.List[FolTerm])),
+            (Int64, @kernel.Thm),
           ),
         ],
       ),
     ],
   ) -> @list.List[
     (
-      Int,
+      Int64,
       @list.List[
-        ((@list.List[FolAtom], (Int, @list.List[FolTerm])), (Int, @kernel.Thm)),
+        (
+          (@list.List[FolAtom], (Int64, @list.List[FolTerm])),
+          (Int64, @kernel.Thm),
+        ),
       ],
     ),
   ] raise,
@@ -2351,17 +2406,23 @@ let optimize_rules_c : @lib.Cell[
 pub fn optimize_rules(
   x : @list.List[
     (
-      Int,
+      Int64,
       @list.List[
-        ((@list.List[FolAtom], (Int, @list.List[FolTerm])), (Int, @kernel.Thm)),
+        (
+          (@list.List[FolAtom], (Int64, @list.List[FolTerm])),
+          (Int64, @kernel.Thm),
+        ),
       ],
     ),
   ],
 ) -> @list.List[
   (
-    Int,
+    Int64,
     @list.List[
-      ((@list.List[FolAtom], (Int, @list.List[FolTerm])), (Int, @kernel.Thm)),
+      (
+        (@list.List[FolAtom], (Int64, @list.List[FolTerm])),
+        (Int64, @kernel.Thm),
+      ),
     ],
   ),
 ] raise {
@@ -2380,8 +2441,8 @@ fn[TA, TB, TC] optimize_clause_order_l(
     ) -> Bool raise {
       let ((l1, _), _) = x191
       let ((l2, _), _) = x192
-      let t193 = @lib.length(l2)
-      @lib.length(l1) <= t193
+      let t193 = Int::to_int64(@lib.length(l2))
+      Int::to_int64(@lib.length(l1)) <= t193
     },
     cls,
   )
@@ -2399,13 +2460,13 @@ pub fn clear_contrapos_cache(x : Unit) -> Unit raise {
 }
 
 ///|
-let make_hol_contrapos_c : @lib.Cell[((Int, @kernel.Thm)) -> @kernel.Thm raise] = @lib.Cell::new(
-  "make_hol_contrapos",
-)
+let make_hol_contrapos_c : @lib.Cell[
+  ((Int64, @kernel.Thm)) -> @kernel.Thm raise,
+] = @lib.Cell::new("make_hol_contrapos")
 
 ///|
 /// `make_hol_contrapos`
-pub fn make_hol_contrapos(x : (Int, @kernel.Thm)) -> @kernel.Thm raise {
+pub fn make_hol_contrapos(x : (Int64, @kernel.Thm)) -> @kernel.Thm raise {
   make_hol_contrapos_c.get()(x)
 }
 
@@ -2451,22 +2512,22 @@ fn step_14() -> Unit raise {
     memory.val = @list.empty()
     ()
   }
-  let make_hol_contrapos : ((Int, @kernel.Thm)) -> @kernel.Thm raise = fn(
-    x204 : (Int, @kernel.Thm),
+  let make_hol_contrapos : ((Int64, @kernel.Thm)) -> @kernel.Thm raise = fn(
+    x204 : (Int64, @kernel.Thm),
   ) -> @kernel.Thm raise {
     let (n, th) = x204
     let tm = @kernel.concl(th)
     let key = (n, tm)
     @lib.assoc(key, memory.val) catch {
       Failure(_) =>
-        if n < 0 {
+        if n < 0L {
           @equal.conv_rule(@equal.thenc(pull_conv, imf_conv), th)
         } else {
           let djs = @basics.disjuncts(tm)
-          let acth = if n == 0 {
+          let acth = if n == 0L {
             th
           } else {
-            let (ldjs, rdjs) = @lib.chop_list(n, djs)
+            let (ldjs, rdjs) = @lib.chop_list(@lib.int63_to_int(n), djs)
             let t205 = ldjs.concat(@lib.tl(rdjs))
             let ndjs = t205.prepend(@lib.hd(rdjs))
             @kernel.eq_mp(
@@ -2474,7 +2535,7 @@ fn step_14() -> Unit raise {
               th,
             )
           }
-          let fth = if @lib.length(djs) == 1 {
+          let fth = if Int::to_int64(@lib.length(djs)) == 1L {
             acth
           } else {
             @equal.conv_rule(@equal.thenc(imp_conv, push_conv), acth)
@@ -2534,19 +2595,21 @@ fn step_16() -> Unit raise {
       e => raise e
     }
   }
-  let merge_inst : ((FolTerm, Int)) -> ((@list.List[(FolTerm, Int)]) -> @list.List[
-    (FolTerm, Int),
+  let merge_inst : ((FolTerm, Int64)) -> ((@list.List[(FolTerm, Int64)]) -> @list.List[
+    (FolTerm, Int64),
   ] raise) raise = fn(
-    x209 : (FolTerm, Int),
-  ) -> ((@list.List[(FolTerm, Int)]) -> @list.List[(FolTerm, Int)] raise) raise {
+    x209 : (FolTerm, Int64),
+  ) -> ((@list.List[(FolTerm, Int64)]) -> @list.List[(FolTerm, Int64)] raise) raise {
     let (t, x) = x209
-    fn(x210 : @list.List[(FolTerm, Int)]) -> @list.List[(FolTerm, Int)] raise {
+    fn(
+      x210 : @list.List[(FolTerm, Int64)],
+    ) -> @list.List[(FolTerm, Int64)] raise {
       let current = x210
       current.prepend((fol_subst(current, t), x))
     }
   }
   fn meson_to_hol_1(
-    x211 : @list.List[(FolTerm, Int)],
+    x211 : @list.List[(FolTerm, Int64)],
     x212 : FolGoal,
   ) -> @kernel.Thm raise {
     let insts = x211
@@ -2554,9 +2617,9 @@ fn step_16() -> Unit raise {
       FolGoal::Subgoal(g, gs, (n, th), offset, locin) => {
         let newins = @lib.itlist(
           fn(
-            x213 : (FolTerm, Int),
-            x214 : @list.List[(FolTerm, Int)],
-          ) -> @list.List[(FolTerm, Int)] raise {
+            x213 : (FolTerm, Int64),
+            x214 : @list.List[(FolTerm, Int64)],
+          ) -> @list.List[(FolTerm, Int64)] raise {
             let s215 = merge_inst(x213)
             s215(x214)
           },
@@ -2586,7 +2649,7 @@ fn step_16() -> Unit raise {
     }
   }
   meson_to_hol_c.set(fn(
-    x219 : @list.List[(FolTerm, Int)],
+    x219 : @list.List[(FolTerm, Int64)],
   ) -> ((FolGoal) -> @kernel.Thm raise) raise {
     fn(x220 : FolGoal) -> @kernel.Thm raise { meson_to_hol_1(x219, x220) }
   })
@@ -2594,13 +2657,13 @@ fn step_16() -> Unit raise {
 
 ///|
 let meson_to_hol_c : @lib.Cell[
-  (@list.List[(FolTerm, Int)]) -> ((FolGoal) -> @kernel.Thm raise) raise,
+  (@list.List[(FolTerm, Int64)]) -> ((FolGoal) -> @kernel.Thm raise) raise,
 ] = @lib.Cell::new("meson_to_hol")
 
 ///|
 /// `meson_to_hol`
 pub fn meson_to_hol(
-  x : @list.List[(FolTerm, Int)],
+  x : @list.List[(FolTerm, Int64)],
 ) -> ((FolGoal) -> @kernel.Thm raise) raise {
   meson_to_hol_c.get()(x)
 }
@@ -2632,7 +2695,7 @@ fn step_17() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -2640,7 +2703,7 @@ fn step_17() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -2661,21 +2724,28 @@ fn step_17() -> Unit raise {
   let veq_tm = @kernel.rator(@kernel.rator(@kernel.concl(@lib.hd(eq_thms))))
   fn tm_consts(
     x232 : @kernel.Term,
-    x233 : @list.List[(@kernel.Term, Int)],
-  ) -> @list.List[(@kernel.Term, Int)] raise {
+    x233 : @list.List[(@kernel.Term, Int64)],
+  ) -> @list.List[(@kernel.Term, Int64)] raise {
     let tm = x232
     let acc = x233
     let (fn_, args) = @basics.strip_comb(tm)
     if args == @list.empty() {
       acc
     } else {
-      @lib.itlist(tm_consts, args, @lib.insert((fn_, @lib.length(args)), acc))
+      @lib.itlist(
+        tm_consts,
+        args,
+        @lib.insert((fn_, Int::to_int64(@lib.length(args))), acc),
+      )
     }
   }
   fn fm_consts(
     x234 : @kernel.Term,
-    x235 : (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]),
-  ) -> (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]) raise {
+    x235 : (
+      @list.List[(@kernel.Term, Int64)],
+      @list.List[(@kernel.Term, Int64)],
+    ),
+  ) -> (@list.List[(@kernel.Term, Int64)], @list.List[(@kernel.Term, Int64)]) raise {
     let tm_1 = x234
     let (preds, funs) as acc_1 = x235
     fm_consts(@basics.dest_forall(tm_1).1, acc_1) catch {
@@ -2717,7 +2787,7 @@ fn step_17() -> Unit raise {
                                   )
                                   (
                                     @lib.insert(
-                                      (pred, @lib.length(args_1)),
+                                      (pred, Int::to_int64(@lib.length(args_1))),
                                       preds,
                                     ),
                                     t236,
@@ -2739,11 +2809,11 @@ fn step_17() -> Unit raise {
       e => raise e
     }
   }
-  let create_congruence_axiom : (Bool) -> (((@kernel.Term, Int)) -> @kernel.Thm raise) raise = fn(
+  let create_congruence_axiom : (Bool) -> (((@kernel.Term, Int64)) -> @kernel.Thm raise) raise = fn(
     x237 : Bool,
-  ) -> (((@kernel.Term, Int)) -> @kernel.Thm raise) raise {
+  ) -> (((@kernel.Term, Int64)) -> @kernel.Thm raise) raise {
     let pflag = x237
-    fn(x238 : (@kernel.Term, Int)) -> @kernel.Thm raise {
+    fn(x238 : (@kernel.Term, Int64)) -> @kernel.Thm raise {
       let (tm_2, len) = x238
       let (atys, rty) = @lib.splitlist(
         fn(x239 : @kernel.HolType) -> (@kernel.HolType, @kernel.HolType) raise {
@@ -2758,7 +2828,7 @@ fn step_17() -> Unit raise {
         },
         @kernel.type_of(tm_2),
       )
-      let ctys = @lib.chop_list(len, atys).0
+      let ctys = @lib.chop_list(@lib.int63_to_int(len), atys).0
       let largs = @lib.map(
         fn(x241 : @kernel.HolType) -> @kernel.Term raise {
           @basics.genvar(x241)
@@ -2824,7 +2894,7 @@ fn step_17() -> Unit raise {
       (@list.empty(), @list.empty()),
     )
     let (eqs0, noneqs) = @lib.partition(
-      fn(x256 : (@kernel.Term, Int)) -> Bool raise {
+      fn(x256 : (@kernel.Term, Int64)) -> Bool raise {
         let (t, _) = x256
         @kernel.is_const(t) && @kernel.dest_const(t).0 == "="
       },
@@ -2844,7 +2914,7 @@ fn step_17() -> Unit raise {
         (@list.empty(), @list.empty()),
       )
       let eqs1 = @lib.filter(
-        fn(x258 : (@kernel.Term, Int)) -> Bool raise {
+        fn(x258 : (@kernel.Term, Int64)) -> Bool raise {
           let (t_1, _) = x258
           @kernel.is_const(t_1) && @kernel.dest_const(t_1).0 == "="
         },
@@ -2853,7 +2923,7 @@ fn step_17() -> Unit raise {
       let eqs = @lib.union(eqs0, eqs1)
       let equivs = @lib.itlist(
         fn(
-          x266 : (@kernel.Term, Int),
+          x266 : (@kernel.Term, Int64),
           x267 : @list.List[@kernel.Thm],
         ) -> @list.List[@kernel.Thm] raise {
           (fn(
@@ -2873,7 +2943,7 @@ fn step_17() -> Unit raise {
               })(x263, x264)
             }
           })(
-            (fn(x265 : (@kernel.Term, Int)) -> @list.List[@kernel.Thm] raise {
+            (fn(x265 : (@kernel.Term, Int64)) -> @list.List[@kernel.Thm] raise {
               ((x227, x228) => {
                 create_equivalence_axioms_l(veq_tm, eq_thms, x227, x228)
               })(x265.0, x265.1)
@@ -3495,7 +3565,7 @@ fn step_19() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -3503,7 +3573,7 @@ fn step_19() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -3517,7 +3587,7 @@ fn step_19() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -3525,7 +3595,7 @@ fn step_19() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -3571,7 +3641,7 @@ fn step_19() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -3579,7 +3649,7 @@ fn step_19() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -3593,7 +3663,7 @@ fn step_19() -> Unit raise {
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -3601,7 +3671,7 @@ fn step_19() -> Unit raise {
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -3678,9 +3748,9 @@ fn[TB] setify_p_l(
 ///|
 /// `SIMPLE_MESON_REFUTE`
 pub fn simple_meson_refute(
-  x396 : Int,
-  x397 : Int,
-  x398 : Int,
+  x396 : Int64,
+  x397 : Int64,
+  x398 : Int64,
   x399 : @list.List[@kernel.Thm],
 ) -> @kernel.Thm raise {
   let min = x396
@@ -3689,12 +3759,12 @@ pub fn simple_meson_refute(
   let ths = x399
   clear_contrapos_cache(())
   {
-    inferences().val = 0
+    inferences().val = 0L
     ()
   }
   let old_dcutin = meson_dcutin().val
   if meson_depth().val {
-    meson_dcutin().val = 100001
+    meson_dcutin().val = 100001L
     ()
   } else {
     ()
@@ -3718,7 +3788,7 @@ pub fn simple_meson_refute(
     min,
     max,
     inc,
-  )((1, @list.empty()))
+  )((1L, @list.empty()))
   {
     meson_dcutin().val = old_dcutin
     ()
@@ -3733,7 +3803,7 @@ pub fn conjuncts_then_p(
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -3741,7 +3811,7 @@ pub fn conjuncts_then_p(
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -3759,9 +3829,9 @@ pub fn conjuncts_then_p(
 ///|
 /// `PURE_MESON_TAC`
 pub fn pure_meson_tac(
-  x405 : Int,
-  x406 : Int,
-  x407 : Int,
+  x405 : Int64,
+  x406 : Int64,
+  x407 : Int64,
   x408 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
 ) -> @tactics.Goalstate raise {
   let min = x405
@@ -3777,7 +3847,7 @@ pub fn pure_meson_tac(
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -3785,7 +3855,7 @@ pub fn pure_meson_tac(
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -3799,7 +3869,7 @@ pub fn pure_meson_tac(
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -3807,7 +3877,7 @@ pub fn pure_meson_tac(
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -3823,7 +3893,7 @@ pub fn pure_meson_tac(
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -3831,7 +3901,7 @@ pub fn pure_meson_tac(
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -3844,7 +3914,7 @@ pub fn pure_meson_tac(
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -3852,7 +3922,7 @@ pub fn pure_meson_tac(
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -3865,7 +3935,7 @@ pub fn pure_meson_tac(
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -3873,7 +3943,7 @@ pub fn pure_meson_tac(
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -3886,7 +3956,7 @@ pub fn pure_meson_tac(
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -3894,7 +3964,7 @@ pub fn pure_meson_tac(
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -3907,7 +3977,7 @@ pub fn pure_meson_tac(
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -3915,7 +3985,7 @@ pub fn pure_meson_tac(
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -3929,7 +3999,7 @@ pub fn pure_meson_tac(
                 (
                   @list.List[@kernel.Term],
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -3937,7 +4007,7 @@ pub fn pure_meson_tac(
                 @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                 (
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -4006,13 +4076,13 @@ pub fn quant_bool_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// `SPLIT_TAC`
 pub fn split_tac(
-  x423 : Int,
+  x423 : Int64,
   x424 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
 ) -> @tactics.Goalstate raise {
   let n = x423
   let g = x424
-  let t432 = if n > 0 {
-    let t430 = n - 1
+  let t432 = if n > 0L {
+    let t430 = @lib.sub63(n, 1L)
     @tactics.then_tac(@tactics.first_x_assum(@tactics.disj_cases_tac), (
       x431 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
     ) => split_tac(t430, x431))
@@ -4030,7 +4100,7 @@ pub fn split_tac(
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -4038,7 +4108,7 @@ pub fn split_tac(
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -4052,7 +4122,7 @@ pub fn split_tac(
                 (
                   @list.List[@kernel.Term],
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -4060,7 +4130,7 @@ pub fn split_tac(
                 @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                 (
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -4086,9 +4156,9 @@ pub fn split_tac(
 ///|
 /// `GEN_MESON_TAC`
 pub fn gen_meson_tac(
-  x433 : Int,
-  x434 : Int,
-  x435 : Int,
+  x433 : Int64,
+  x434 : Int64,
+  x435 : Int64,
   x436 : @list.List[@kernel.Thm],
 ) -> @tactics.Tactic raise {
   let min = x433
@@ -4109,7 +4179,7 @@ pub fn gen_meson_tac(
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -4117,7 +4187,7 @@ pub fn gen_meson_tac(
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -4131,7 +4201,7 @@ pub fn gen_meson_tac(
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -4139,7 +4209,7 @@ pub fn gen_meson_tac(
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -4183,7 +4253,7 @@ pub fn gen_meson_tac(
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -4191,7 +4261,7 @@ pub fn gen_meson_tac(
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -4205,7 +4275,7 @@ pub fn gen_meson_tac(
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -4213,7 +4283,7 @@ pub fn gen_meson_tac(
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -4270,7 +4340,7 @@ pub fn gen_meson_tac(
                                       (
                                         @list.List[@kernel.Term],
                                         (
-                                          @list.List[(Int, @kernel.Term)],
+                                          @list.List[(Int64, @kernel.Term)],
                                           @list.List[
                                             (@kernel.Term, @kernel.Term),
                                           ],
@@ -4287,7 +4357,7 @@ pub fn gen_meson_tac(
                                       ],
                                       (
                                         (
-                                          @list.List[(Int, @kernel.Term)],
+                                          @list.List[(Int64, @kernel.Term)],
                                           @list.List[
                                             (@kernel.Term, @kernel.Term),
                                           ],
@@ -4308,7 +4378,7 @@ pub fn gen_meson_tac(
                                         (
                                           @list.List[@kernel.Term],
                                           (
-                                            @list.List[(Int, @kernel.Term)],
+                                            @list.List[(Int64, @kernel.Term)],
                                             @list.List[
                                               (@kernel.Term, @kernel.Term),
                                             ],
@@ -4325,7 +4395,7 @@ pub fn gen_meson_tac(
                                         ],
                                         (
                                           (
-                                            @list.List[(Int, @kernel.Term)],
+                                            @list.List[(Int64, @kernel.Term)],
                                             @list.List[
                                               (@kernel.Term, @kernel.Term),
                                             ],
@@ -4350,7 +4420,7 @@ pub fn gen_meson_tac(
                                     (
                                       @list.List[@kernel.Term],
                                       (
-                                        @list.List[(Int, @kernel.Term)],
+                                        @list.List[(Int64, @kernel.Term)],
                                         @list.List[(@kernel.Term, @kernel.Term)],
                                         @list.List[
                                           (@kernel.HolType, @kernel.HolType),
@@ -4365,7 +4435,7 @@ pub fn gen_meson_tac(
                                     ],
                                     (
                                       (
-                                        @list.List[(Int, @kernel.Term)],
+                                        @list.List[(Int64, @kernel.Term)],
                                         @list.List[(@kernel.Term, @kernel.Term)],
                                         @list.List[
                                           (@kernel.HolType, @kernel.HolType),
@@ -4388,7 +4458,7 @@ pub fn gen_meson_tac(
                                       (
                                         @list.List[@kernel.Term],
                                         (
-                                          @list.List[(Int, @kernel.Term)],
+                                          @list.List[(Int64, @kernel.Term)],
                                           @list.List[
                                             (@kernel.Term, @kernel.Term),
                                           ],
@@ -4405,7 +4475,7 @@ pub fn gen_meson_tac(
                                       ],
                                       (
                                         (
-                                          @list.List[(Int, @kernel.Term)],
+                                          @list.List[(Int64, @kernel.Term)],
                                           @list.List[
                                             (@kernel.Term, @kernel.Term),
                                           ],
@@ -4431,7 +4501,9 @@ pub fn gen_meson_tac(
                                             (
                                               @list.List[@kernel.Term],
                                               (
-                                                @list.List[(Int, @kernel.Term)],
+                                                @list.List[
+                                                  (Int64, @kernel.Term),
+                                                ],
                                                 @list.List[
                                                   (@kernel.Term, @kernel.Term),
                                                 ],
@@ -4453,7 +4525,9 @@ pub fn gen_meson_tac(
                                             ],
                                             (
                                               (
-                                                @list.List[(Int, @kernel.Term)],
+                                                @list.List[
+                                                  (Int64, @kernel.Term),
+                                                ],
                                                 @list.List[
                                                   (@kernel.Term, @kernel.Term),
                                                 ],
@@ -4481,7 +4555,7 @@ pub fn gen_meson_tac(
                                                 @list.List[@kernel.Term],
                                                 (
                                                   @list.List[
-                                                    (Int, @kernel.Term),
+                                                    (Int64, @kernel.Term),
                                                   ],
                                                   @list.List[
                                                     (@kernel.Term, @kernel.Term),
@@ -4505,7 +4579,7 @@ pub fn gen_meson_tac(
                                               (
                                                 (
                                                   @list.List[
-                                                    (Int, @kernel.Term),
+                                                    (Int64, @kernel.Term),
                                                   ],
                                                   @list.List[
                                                     (@kernel.Term, @kernel.Term),
@@ -4534,7 +4608,7 @@ pub fn gen_meson_tac(
                                                   @list.List[@kernel.Term],
                                                   (
                                                     @list.List[
-                                                      (Int, @kernel.Term),
+                                                      (Int64, @kernel.Term),
                                                     ],
                                                     @list.List[
                                                       (
@@ -4561,7 +4635,7 @@ pub fn gen_meson_tac(
                                                 (
                                                   (
                                                     @list.List[
-                                                      (Int, @kernel.Term),
+                                                      (Int64, @kernel.Term),
                                                     ],
                                                     @list.List[
                                                       (
@@ -4594,7 +4668,7 @@ pub fn gen_meson_tac(
                                                     @list.List[@kernel.Term],
                                                     (
                                                       @list.List[
-                                                        (Int, @kernel.Term),
+                                                        (Int64, @kernel.Term),
                                                       ],
                                                       @list.List[
                                                         (
@@ -4621,7 +4695,7 @@ pub fn gen_meson_tac(
                                                   (
                                                     (
                                                       @list.List[
-                                                        (Int, @kernel.Term),
+                                                        (Int64, @kernel.Term),
                                                       ],
                                                       @list.List[
                                                         (
@@ -4682,7 +4756,7 @@ pub fn gen_meson_tac(
                                 (
                                   @list.List[@kernel.Term],
                                   (
-                                    @list.List[(Int, @kernel.Term)],
+                                    @list.List[(Int64, @kernel.Term)],
                                     @list.List[(@kernel.Term, @kernel.Term)],
                                     @list.List[
                                       (@kernel.HolType, @kernel.HolType),
@@ -4697,7 +4771,7 @@ pub fn gen_meson_tac(
                                 ],
                                 (
                                   (
-                                    @list.List[(Int, @kernel.Term)],
+                                    @list.List[(Int64, @kernel.Term)],
                                     @list.List[(@kernel.Term, @kernel.Term)],
                                     @list.List[
                                       (@kernel.HolType, @kernel.HolType),
@@ -4720,7 +4794,7 @@ pub fn gen_meson_tac(
                                   (
                                     @list.List[@kernel.Term],
                                     (
-                                      @list.List[(Int, @kernel.Term)],
+                                      @list.List[(Int64, @kernel.Term)],
                                       @list.List[(@kernel.Term, @kernel.Term)],
                                       @list.List[
                                         (@kernel.HolType, @kernel.HolType),
@@ -4735,7 +4809,7 @@ pub fn gen_meson_tac(
                                   ],
                                   (
                                     (
-                                      @list.List[(Int, @kernel.Term)],
+                                      @list.List[(Int64, @kernel.Term)],
                                       @list.List[(@kernel.Term, @kernel.Term)],
                                       @list.List[
                                         (@kernel.HolType, @kernel.HolType),
@@ -4757,7 +4831,7 @@ pub fn gen_meson_tac(
                                       (
                                         @list.List[@kernel.Term],
                                         (
-                                          @list.List[(Int, @kernel.Term)],
+                                          @list.List[(Int64, @kernel.Term)],
                                           @list.List[
                                             (@kernel.Term, @kernel.Term),
                                           ],
@@ -4774,7 +4848,7 @@ pub fn gen_meson_tac(
                                       ],
                                       (
                                         (
-                                          @list.List[(Int, @kernel.Term)],
+                                          @list.List[(Int64, @kernel.Term)],
                                           @list.List[
                                             (@kernel.Term, @kernel.Term),
                                           ],
@@ -4829,7 +4903,7 @@ pub fn gen_meson_tac(
 /// ASM_MESON_TAC
 fn step_21() -> Unit raise {
   asm_meson_tac_c.set((x486 : @list.List[@kernel.Thm]) => {
-    gen_meson_tac(0, 50, 1, x486)
+    gen_meson_tac(0L, 50L, 1L, x486)
   })
 }
 
@@ -4856,7 +4930,7 @@ pub fn meson_tac(x487 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -4864,7 +4938,7 @@ pub fn meson_tac(x487 : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),

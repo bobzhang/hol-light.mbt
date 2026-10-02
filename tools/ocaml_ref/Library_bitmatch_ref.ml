@@ -80,6 +80,9 @@ attempt "types" (fun () -> String.concat " " (map (fun (s,n) -> s ^ "/" ^ string
 attempt "constants" (fun () -> String.concat " " (map fst (constants())));;
 attempt "definitions" (fun () -> string_of_int (length (definitions())));;
 (* BEGIN EXTRA *)
+(* word numerals beyond 2^31 (OCaml ints are 63-bit) *)
+attempt "bitmatch_conv_2^31" (fun () -> sthm (BITMATCH_CONV (tm "bitmatch (word 2147483648:32 word) with [a:1; b:31] -> b")));;
+attempt "bitmatch_conv_2^32-1" (fun () -> sthm (BITMATCH_CONV (tm "bitmatch (word 4294967295:32 word) with [a:16; b:16] -> a")));;
 (* END EXTRA *)
 attempt "counter_tyvar" (fun () -> stm (tm "zz_counter"));;
 attempt "counter_genvar" (fun () -> stm (genvar bool_ty));;

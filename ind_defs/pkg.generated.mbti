@@ -14,7 +14,7 @@ pub fn derive_strong_induction((@kernel.Thm, @kernel.Thm)) -> @kernel.Thm raise
 
 pub fn exists_equation(@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
 
-pub fn mono_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+pub fn mono_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
 
 pub fn monotonicity_theorems() -> @ref.Ref[@list.List[@kernel.Thm]]
 
@@ -26,7 +26,7 @@ pub fn prove_monotonicity_hyps(@kernel.Thm) -> @kernel.Thm raise
 
 pub fn right_betas(@list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
 
-pub fn strip_ncomb(Int) -> ((@kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise) raise
+pub fn strip_ncomb(Int64) -> ((@kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise) raise
 
 pub fn the_inductive_definitions() -> @ref.Ref[@list.List[(@kernel.Thm, @kernel.Thm, @kernel.Thm)]]
 

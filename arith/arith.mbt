@@ -4,61 +4,61 @@
 ///|
 /// arith.ml:23
 fn step_1() -> Unit raise {
-  @printer.parse_as_infix("<", (12, "right"))
+  @printer.parse_as_infix("<", (12L, "right"))
 }
 
 ///|
 /// arith.ml:24
 fn step_2() -> Unit raise {
-  @printer.parse_as_infix("<=", (12, "right"))
+  @printer.parse_as_infix("<=", (12L, "right"))
 }
 
 ///|
 /// arith.ml:25
 fn step_3() -> Unit raise {
-  @printer.parse_as_infix(">", (12, "right"))
+  @printer.parse_as_infix(">", (12L, "right"))
 }
 
 ///|
 /// arith.ml:26
 fn step_4() -> Unit raise {
-  @printer.parse_as_infix(">=", (12, "right"))
+  @printer.parse_as_infix(">=", (12L, "right"))
 }
 
 ///|
 /// arith.ml:28
 fn step_5() -> Unit raise {
-  @printer.parse_as_infix("+", (16, "right"))
+  @printer.parse_as_infix("+", (16L, "right"))
 }
 
 ///|
 /// arith.ml:29
 fn step_6() -> Unit raise {
-  @printer.parse_as_infix("-", (18, "left"))
+  @printer.parse_as_infix("-", (18L, "left"))
 }
 
 ///|
 /// arith.ml:30
 fn step_7() -> Unit raise {
-  @printer.parse_as_infix("*", (20, "right"))
+  @printer.parse_as_infix("*", (20L, "right"))
 }
 
 ///|
 /// arith.ml:31
 fn step_8() -> Unit raise {
-  @printer.parse_as_infix("EXP", (24, "left"))
+  @printer.parse_as_infix("EXP", (24L, "left"))
 }
 
 ///|
 /// arith.ml:33
 fn step_9() -> Unit raise {
-  @printer.parse_as_infix("DIV", (22, "left"))
+  @printer.parse_as_infix("DIV", (22L, "left"))
 }
 
 ///|
 /// arith.ml:34
 fn step_10() -> Unit raise {
-  @printer.parse_as_infix("MOD", (22, "left"))
+  @printer.parse_as_infix("MOD", (22L, "left"))
 }
 
 ///|
@@ -1661,7 +1661,7 @@ fn step_80() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -1669,7 +1669,7 @@ fn step_80() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -1682,7 +1682,7 @@ fn step_80() -> Unit raise {
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -1690,7 +1690,7 @@ fn step_80() -> Unit raise {
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -1703,7 +1703,7 @@ fn step_80() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -1711,7 +1711,7 @@ fn step_80() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -1724,7 +1724,7 @@ fn step_80() -> Unit raise {
                 (
                   @list.List[@kernel.Term],
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -1732,7 +1732,7 @@ fn step_80() -> Unit raise {
                 @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                 (
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -1745,7 +1745,7 @@ fn step_80() -> Unit raise {
                   (
                     @list.List[@kernel.Term],
                     (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -1753,7 +1753,7 @@ fn step_80() -> Unit raise {
                   @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                   (
                     (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -1768,7 +1768,7 @@ fn step_80() -> Unit raise {
                     (
                       @list.List[@kernel.Term],
                       (
-                        @list.List[(Int, @kernel.Term)],
+                        @list.List[(Int64, @kernel.Term)],
                         @list.List[(@kernel.Term, @kernel.Term)],
                         @list.List[(@kernel.HolType, @kernel.HolType)],
                       ),
@@ -1778,7 +1778,7 @@ fn step_80() -> Unit raise {
                     ],
                     (
                       (
-                        @list.List[(Int, @kernel.Term)],
+                        @list.List[(Int64, @kernel.Term)],
                         @list.List[(@kernel.Term, @kernel.Term)],
                         @list.List[(@kernel.HolType, @kernel.HolType)],
                       ),
@@ -1791,7 +1791,7 @@ fn step_80() -> Unit raise {
                       (
                         @list.List[@kernel.Term],
                         (
-                          @list.List[(Int, @kernel.Term)],
+                          @list.List[(Int64, @kernel.Term)],
                           @list.List[(@kernel.Term, @kernel.Term)],
                           @list.List[(@kernel.HolType, @kernel.HolType)],
                         ),
@@ -1801,7 +1801,7 @@ fn step_80() -> Unit raise {
                       ],
                       (
                         (
-                          @list.List[(Int, @kernel.Term)],
+                          @list.List[(Int64, @kernel.Term)],
                           @list.List[(@kernel.Term, @kernel.Term)],
                           @list.List[(@kernel.HolType, @kernel.HolType)],
                         ),
@@ -1818,7 +1818,7 @@ fn step_80() -> Unit raise {
                             (
                               @list.List[@kernel.Term],
                               (
-                                @list.List[(Int, @kernel.Term)],
+                                @list.List[(Int64, @kernel.Term)],
                                 @list.List[(@kernel.Term, @kernel.Term)],
                                 @list.List[(@kernel.HolType, @kernel.HolType)],
                               ),
@@ -1828,7 +1828,7 @@ fn step_80() -> Unit raise {
                             ],
                             (
                               (
-                                @list.List[(Int, @kernel.Term)],
+                                @list.List[(Int64, @kernel.Term)],
                                 @list.List[(@kernel.Term, @kernel.Term)],
                                 @list.List[(@kernel.HolType, @kernel.HolType)],
                               ),
@@ -1845,7 +1845,7 @@ fn step_80() -> Unit raise {
                               (
                                 @list.List[@kernel.Term],
                                 (
-                                  @list.List[(Int, @kernel.Term)],
+                                  @list.List[(Int64, @kernel.Term)],
                                   @list.List[(@kernel.Term, @kernel.Term)],
                                   @list.List[(@kernel.HolType, @kernel.HolType)],
                                 ),
@@ -1858,7 +1858,7 @@ fn step_80() -> Unit raise {
                               ],
                               (
                                 (
-                                  @list.List[(Int, @kernel.Term)],
+                                  @list.List[(Int64, @kernel.Term)],
                                   @list.List[(@kernel.Term, @kernel.Term)],
                                   @list.List[(@kernel.HolType, @kernel.HolType)],
                                 ),
@@ -1878,7 +1878,7 @@ fn step_80() -> Unit raise {
                         (
                           @list.List[@kernel.Term],
                           (
-                            @list.List[(Int, @kernel.Term)],
+                            @list.List[(Int64, @kernel.Term)],
                             @list.List[(@kernel.Term, @kernel.Term)],
                             @list.List[(@kernel.HolType, @kernel.HolType)],
                           ),
@@ -1888,7 +1888,7 @@ fn step_80() -> Unit raise {
                         ],
                         (
                           (
-                            @list.List[(Int, @kernel.Term)],
+                            @list.List[(Int64, @kernel.Term)],
                             @list.List[(@kernel.Term, @kernel.Term)],
                             @list.List[(@kernel.HolType, @kernel.HolType)],
                           ),
@@ -2019,7 +2019,7 @@ fn step_84() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -2027,7 +2027,7 @@ fn step_84() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -2041,7 +2041,7 @@ fn step_84() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -2049,7 +2049,7 @@ fn step_84() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -2069,7 +2069,7 @@ fn step_84() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2077,7 +2077,7 @@ fn step_84() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2091,7 +2091,7 @@ fn step_84() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2099,7 +2099,7 @@ fn step_84() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2115,7 +2115,7 @@ fn step_84() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2123,7 +2123,7 @@ fn step_84() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2137,7 +2137,7 @@ fn step_84() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2145,7 +2145,7 @@ fn step_84() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2223,7 +2223,7 @@ fn step_85() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -2231,7 +2231,7 @@ fn step_85() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -2244,7 +2244,7 @@ fn step_85() -> Unit raise {
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -2252,7 +2252,7 @@ fn step_85() -> Unit raise {
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -2265,7 +2265,7 @@ fn step_85() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -2273,7 +2273,7 @@ fn step_85() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -2286,7 +2286,7 @@ fn step_85() -> Unit raise {
                 (
                   @list.List[@kernel.Term],
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -2294,7 +2294,7 @@ fn step_85() -> Unit raise {
                 @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                 (
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -2307,7 +2307,7 @@ fn step_85() -> Unit raise {
                   (
                     @list.List[@kernel.Term],
                     (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -2315,7 +2315,7 @@ fn step_85() -> Unit raise {
                   @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                   (
                     (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -2330,7 +2330,7 @@ fn step_85() -> Unit raise {
                     (
                       @list.List[@kernel.Term],
                       (
-                        @list.List[(Int, @kernel.Term)],
+                        @list.List[(Int64, @kernel.Term)],
                         @list.List[(@kernel.Term, @kernel.Term)],
                         @list.List[(@kernel.HolType, @kernel.HolType)],
                       ),
@@ -2340,7 +2340,7 @@ fn step_85() -> Unit raise {
                     ],
                     (
                       (
-                        @list.List[(Int, @kernel.Term)],
+                        @list.List[(Int64, @kernel.Term)],
                         @list.List[(@kernel.Term, @kernel.Term)],
                         @list.List[(@kernel.HolType, @kernel.HolType)],
                       ),
@@ -2353,7 +2353,7 @@ fn step_85() -> Unit raise {
                       (
                         @list.List[@kernel.Term],
                         (
-                          @list.List[(Int, @kernel.Term)],
+                          @list.List[(Int64, @kernel.Term)],
                           @list.List[(@kernel.Term, @kernel.Term)],
                           @list.List[(@kernel.HolType, @kernel.HolType)],
                         ),
@@ -2363,7 +2363,7 @@ fn step_85() -> Unit raise {
                       ],
                       (
                         (
-                          @list.List[(Int, @kernel.Term)],
+                          @list.List[(Int64, @kernel.Term)],
                           @list.List[(@kernel.Term, @kernel.Term)],
                           @list.List[(@kernel.HolType, @kernel.HolType)],
                         ),
@@ -2380,7 +2380,7 @@ fn step_85() -> Unit raise {
                             (
                               @list.List[@kernel.Term],
                               (
-                                @list.List[(Int, @kernel.Term)],
+                                @list.List[(Int64, @kernel.Term)],
                                 @list.List[(@kernel.Term, @kernel.Term)],
                                 @list.List[(@kernel.HolType, @kernel.HolType)],
                               ),
@@ -2390,7 +2390,7 @@ fn step_85() -> Unit raise {
                             ],
                             (
                               (
-                                @list.List[(Int, @kernel.Term)],
+                                @list.List[(Int64, @kernel.Term)],
                                 @list.List[(@kernel.Term, @kernel.Term)],
                                 @list.List[(@kernel.HolType, @kernel.HolType)],
                               ),
@@ -2407,7 +2407,7 @@ fn step_85() -> Unit raise {
                               (
                                 @list.List[@kernel.Term],
                                 (
-                                  @list.List[(Int, @kernel.Term)],
+                                  @list.List[(Int64, @kernel.Term)],
                                   @list.List[(@kernel.Term, @kernel.Term)],
                                   @list.List[(@kernel.HolType, @kernel.HolType)],
                                 ),
@@ -2420,7 +2420,7 @@ fn step_85() -> Unit raise {
                               ],
                               (
                                 (
-                                  @list.List[(Int, @kernel.Term)],
+                                  @list.List[(Int64, @kernel.Term)],
                                   @list.List[(@kernel.Term, @kernel.Term)],
                                   @list.List[(@kernel.HolType, @kernel.HolType)],
                                 ),
@@ -2440,7 +2440,7 @@ fn step_85() -> Unit raise {
                         (
                           @list.List[@kernel.Term],
                           (
-                            @list.List[(Int, @kernel.Term)],
+                            @list.List[(Int64, @kernel.Term)],
                             @list.List[(@kernel.Term, @kernel.Term)],
                             @list.List[(@kernel.HolType, @kernel.HolType)],
                           ),
@@ -2450,7 +2450,7 @@ fn step_85() -> Unit raise {
                         ],
                         (
                           (
-                            @list.List[(Int, @kernel.Term)],
+                            @list.List[(Int64, @kernel.Term)],
                             @list.List[(@kernel.Term, @kernel.Term)],
                             @list.List[(@kernel.HolType, @kernel.HolType)],
                           ),
@@ -2522,7 +2522,7 @@ fn step_86() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -2530,7 +2530,7 @@ fn step_86() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -2543,7 +2543,7 @@ fn step_86() -> Unit raise {
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -2551,7 +2551,7 @@ fn step_86() -> Unit raise {
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -2564,7 +2564,7 @@ fn step_86() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -2572,7 +2572,7 @@ fn step_86() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -2585,7 +2585,7 @@ fn step_86() -> Unit raise {
                 (
                   @list.List[@kernel.Term],
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -2593,7 +2593,7 @@ fn step_86() -> Unit raise {
                 @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                 (
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -2606,7 +2606,7 @@ fn step_86() -> Unit raise {
                   (
                     @list.List[@kernel.Term],
                     (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -2614,7 +2614,7 @@ fn step_86() -> Unit raise {
                   @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                   (
                     (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -2629,7 +2629,7 @@ fn step_86() -> Unit raise {
                     (
                       @list.List[@kernel.Term],
                       (
-                        @list.List[(Int, @kernel.Term)],
+                        @list.List[(Int64, @kernel.Term)],
                         @list.List[(@kernel.Term, @kernel.Term)],
                         @list.List[(@kernel.HolType, @kernel.HolType)],
                       ),
@@ -2639,7 +2639,7 @@ fn step_86() -> Unit raise {
                     ],
                     (
                       (
-                        @list.List[(Int, @kernel.Term)],
+                        @list.List[(Int64, @kernel.Term)],
                         @list.List[(@kernel.Term, @kernel.Term)],
                         @list.List[(@kernel.HolType, @kernel.HolType)],
                       ),
@@ -2652,7 +2652,7 @@ fn step_86() -> Unit raise {
                       (
                         @list.List[@kernel.Term],
                         (
-                          @list.List[(Int, @kernel.Term)],
+                          @list.List[(Int64, @kernel.Term)],
                           @list.List[(@kernel.Term, @kernel.Term)],
                           @list.List[(@kernel.HolType, @kernel.HolType)],
                         ),
@@ -2662,7 +2662,7 @@ fn step_86() -> Unit raise {
                       ],
                       (
                         (
-                          @list.List[(Int, @kernel.Term)],
+                          @list.List[(Int64, @kernel.Term)],
                           @list.List[(@kernel.Term, @kernel.Term)],
                           @list.List[(@kernel.HolType, @kernel.HolType)],
                         ),
@@ -2679,7 +2679,7 @@ fn step_86() -> Unit raise {
                             (
                               @list.List[@kernel.Term],
                               (
-                                @list.List[(Int, @kernel.Term)],
+                                @list.List[(Int64, @kernel.Term)],
                                 @list.List[(@kernel.Term, @kernel.Term)],
                                 @list.List[(@kernel.HolType, @kernel.HolType)],
                               ),
@@ -2689,7 +2689,7 @@ fn step_86() -> Unit raise {
                             ],
                             (
                               (
-                                @list.List[(Int, @kernel.Term)],
+                                @list.List[(Int64, @kernel.Term)],
                                 @list.List[(@kernel.Term, @kernel.Term)],
                                 @list.List[(@kernel.HolType, @kernel.HolType)],
                               ),
@@ -2706,7 +2706,7 @@ fn step_86() -> Unit raise {
                               (
                                 @list.List[@kernel.Term],
                                 (
-                                  @list.List[(Int, @kernel.Term)],
+                                  @list.List[(Int64, @kernel.Term)],
                                   @list.List[(@kernel.Term, @kernel.Term)],
                                   @list.List[(@kernel.HolType, @kernel.HolType)],
                                 ),
@@ -2719,7 +2719,7 @@ fn step_86() -> Unit raise {
                               ],
                               (
                                 (
-                                  @list.List[(Int, @kernel.Term)],
+                                  @list.List[(Int64, @kernel.Term)],
                                   @list.List[(@kernel.Term, @kernel.Term)],
                                   @list.List[(@kernel.HolType, @kernel.HolType)],
                                 ),
@@ -2739,7 +2739,7 @@ fn step_86() -> Unit raise {
                         (
                           @list.List[@kernel.Term],
                           (
-                            @list.List[(Int, @kernel.Term)],
+                            @list.List[(Int64, @kernel.Term)],
                             @list.List[(@kernel.Term, @kernel.Term)],
                             @list.List[(@kernel.HolType, @kernel.HolType)],
                           ),
@@ -2749,7 +2749,7 @@ fn step_86() -> Unit raise {
                         ],
                         (
                           (
-                            @list.List[(Int, @kernel.Term)],
+                            @list.List[(Int64, @kernel.Term)],
                             @list.List[(@kernel.Term, @kernel.Term)],
                             @list.List[(@kernel.HolType, @kernel.HolType)],
                           ),
@@ -2901,7 +2901,7 @@ fn step_91() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2909,7 +2909,7 @@ fn step_91() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2923,7 +2923,7 @@ fn step_91() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2931,7 +2931,7 @@ fn step_91() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2974,7 +2974,7 @@ fn step_91() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -2982,7 +2982,7 @@ fn step_91() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -2996,7 +2996,7 @@ fn step_91() -> Unit raise {
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -3004,7 +3004,7 @@ fn step_91() -> Unit raise {
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -3036,7 +3036,7 @@ fn step_91() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -3044,7 +3044,7 @@ fn step_91() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -3058,7 +3058,7 @@ fn step_91() -> Unit raise {
                 (
                   @list.List[@kernel.Term],
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -3066,7 +3066,7 @@ fn step_91() -> Unit raise {
                 @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                 (
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -3082,7 +3082,7 @@ fn step_91() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -3090,7 +3090,7 @@ fn step_91() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -3104,7 +3104,7 @@ fn step_91() -> Unit raise {
                 (
                   @list.List[@kernel.Term],
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -3112,7 +3112,7 @@ fn step_91() -> Unit raise {
                 @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                 (
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -3184,7 +3184,7 @@ fn step_92() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -3192,7 +3192,7 @@ fn step_92() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -3206,7 +3206,7 @@ fn step_92() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -3214,7 +3214,7 @@ fn step_92() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -3257,7 +3257,7 @@ fn step_92() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -3265,7 +3265,7 @@ fn step_92() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -3279,7 +3279,7 @@ fn step_92() -> Unit raise {
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -3287,7 +3287,7 @@ fn step_92() -> Unit raise {
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -3317,7 +3317,7 @@ fn step_92() -> Unit raise {
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -3325,7 +3325,7 @@ fn step_92() -> Unit raise {
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -3339,7 +3339,7 @@ fn step_92() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -3347,7 +3347,7 @@ fn step_92() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -3363,7 +3363,7 @@ fn step_92() -> Unit raise {
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -3371,7 +3371,7 @@ fn step_92() -> Unit raise {
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -3385,7 +3385,7 @@ fn step_92() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -3393,7 +3393,7 @@ fn step_92() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -4309,7 +4309,7 @@ fn step_120() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -4317,7 +4317,7 @@ fn step_120() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -4330,7 +4330,7 @@ fn step_120() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -4338,7 +4338,7 @@ fn step_120() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -4352,7 +4352,7 @@ fn step_120() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -4360,7 +4360,7 @@ fn step_120() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -4395,7 +4395,7 @@ fn step_120() -> Unit raise {
                           (
                             @list.List[@kernel.Term],
                             (
-                              @list.List[(Int, @kernel.Term)],
+                              @list.List[(Int64, @kernel.Term)],
                               @list.List[(@kernel.Term, @kernel.Term)],
                               @list.List[(@kernel.HolType, @kernel.HolType)],
                             ),
@@ -4405,7 +4405,7 @@ fn step_120() -> Unit raise {
                           ],
                           (
                             (
-                              @list.List[(Int, @kernel.Term)],
+                              @list.List[(Int64, @kernel.Term)],
                               @list.List[(@kernel.Term, @kernel.Term)],
                               @list.List[(@kernel.HolType, @kernel.HolType)],
                             ),
@@ -4422,7 +4422,7 @@ fn step_120() -> Unit raise {
                             (
                               @list.List[@kernel.Term],
                               (
-                                @list.List[(Int, @kernel.Term)],
+                                @list.List[(Int64, @kernel.Term)],
                                 @list.List[(@kernel.Term, @kernel.Term)],
                                 @list.List[(@kernel.HolType, @kernel.HolType)],
                               ),
@@ -4432,7 +4432,7 @@ fn step_120() -> Unit raise {
                             ],
                             (
                               (
-                                @list.List[(Int, @kernel.Term)],
+                                @list.List[(Int64, @kernel.Term)],
                                 @list.List[(@kernel.Term, @kernel.Term)],
                                 @list.List[(@kernel.HolType, @kernel.HolType)],
                               ),
@@ -4450,7 +4450,7 @@ fn step_120() -> Unit raise {
                           (
                             @list.List[@kernel.Term],
                             (
-                              @list.List[(Int, @kernel.Term)],
+                              @list.List[(Int64, @kernel.Term)],
                               @list.List[(@kernel.Term, @kernel.Term)],
                               @list.List[(@kernel.HolType, @kernel.HolType)],
                             ),
@@ -4460,7 +4460,7 @@ fn step_120() -> Unit raise {
                           ],
                           (
                             (
-                              @list.List[(Int, @kernel.Term)],
+                              @list.List[(Int64, @kernel.Term)],
                               @list.List[(@kernel.Term, @kernel.Term)],
                               @list.List[(@kernel.HolType, @kernel.HolType)],
                             ),
@@ -4475,7 +4475,7 @@ fn step_120() -> Unit raise {
                             (
                               @list.List[@kernel.Term],
                               (
-                                @list.List[(Int, @kernel.Term)],
+                                @list.List[(Int64, @kernel.Term)],
                                 @list.List[(@kernel.Term, @kernel.Term)],
                                 @list.List[(@kernel.HolType, @kernel.HolType)],
                               ),
@@ -4485,7 +4485,7 @@ fn step_120() -> Unit raise {
                             ],
                             (
                               (
-                                @list.List[(Int, @kernel.Term)],
+                                @list.List[(Int64, @kernel.Term)],
                                 @list.List[(@kernel.Term, @kernel.Term)],
                                 @list.List[(@kernel.HolType, @kernel.HolType)],
                               ),
@@ -4502,7 +4502,7 @@ fn step_120() -> Unit raise {
                               (
                                 @list.List[@kernel.Term],
                                 (
-                                  @list.List[(Int, @kernel.Term)],
+                                  @list.List[(Int64, @kernel.Term)],
                                   @list.List[(@kernel.Term, @kernel.Term)],
                                   @list.List[(@kernel.HolType, @kernel.HolType)],
                                 ),
@@ -4515,7 +4515,7 @@ fn step_120() -> Unit raise {
                               ],
                               (
                                 (
-                                  @list.List[(Int, @kernel.Term)],
+                                  @list.List[(Int64, @kernel.Term)],
                                   @list.List[(@kernel.Term, @kernel.Term)],
                                   @list.List[(@kernel.HolType, @kernel.HolType)],
                                 ),
@@ -4556,7 +4556,7 @@ fn step_120() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -4564,7 +4564,7 @@ fn step_120() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -4578,7 +4578,7 @@ fn step_120() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -4586,7 +4586,7 @@ fn step_120() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -4603,7 +4603,7 @@ fn step_120() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -4611,7 +4611,7 @@ fn step_120() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -4625,7 +4625,7 @@ fn step_120() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -4633,7 +4633,7 @@ fn step_120() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -4666,7 +4666,7 @@ fn step_120() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -4674,7 +4674,7 @@ fn step_120() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -4692,7 +4692,7 @@ fn step_120() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -4700,7 +4700,7 @@ fn step_120() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -4714,7 +4714,7 @@ fn step_120() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -4722,7 +4722,7 @@ fn step_120() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -4738,7 +4738,7 @@ fn step_120() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -4746,7 +4746,7 @@ fn step_120() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -4772,7 +4772,7 @@ fn step_120() -> Unit raise {
                       (
                         @list.List[@kernel.Term],
                         (
-                          @list.List[(Int, @kernel.Term)],
+                          @list.List[(Int64, @kernel.Term)],
                           @list.List[(@kernel.Term, @kernel.Term)],
                           @list.List[(@kernel.HolType, @kernel.HolType)],
                         ),
@@ -4782,7 +4782,7 @@ fn step_120() -> Unit raise {
                       ],
                       (
                         (
-                          @list.List[(Int, @kernel.Term)],
+                          @list.List[(Int64, @kernel.Term)],
                           @list.List[(@kernel.Term, @kernel.Term)],
                           @list.List[(@kernel.HolType, @kernel.HolType)],
                         ),
@@ -4796,7 +4796,7 @@ fn step_120() -> Unit raise {
                         (
                           @list.List[@kernel.Term],
                           (
-                            @list.List[(Int, @kernel.Term)],
+                            @list.List[(Int64, @kernel.Term)],
                             @list.List[(@kernel.Term, @kernel.Term)],
                             @list.List[(@kernel.HolType, @kernel.HolType)],
                           ),
@@ -4806,7 +4806,7 @@ fn step_120() -> Unit raise {
                         ],
                         (
                           (
-                            @list.List[(Int, @kernel.Term)],
+                            @list.List[(Int64, @kernel.Term)],
                             @list.List[(@kernel.Term, @kernel.Term)],
                             @list.List[(@kernel.HolType, @kernel.HolType)],
                           ),
@@ -4958,7 +4958,7 @@ fn step_122() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -4966,7 +4966,7 @@ fn step_122() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -4979,7 +4979,7 @@ fn step_122() -> Unit raise {
                 (
                   @list.List[@kernel.Term],
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -4987,7 +4987,7 @@ fn step_122() -> Unit raise {
                 @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                 (
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -5000,7 +5000,7 @@ fn step_122() -> Unit raise {
                   (
                     @list.List[@kernel.Term],
                     (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -5008,7 +5008,7 @@ fn step_122() -> Unit raise {
                   @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                   (
                     (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -5021,7 +5021,7 @@ fn step_122() -> Unit raise {
                     (
                       @list.List[@kernel.Term],
                       (
-                        @list.List[(Int, @kernel.Term)],
+                        @list.List[(Int64, @kernel.Term)],
                         @list.List[(@kernel.Term, @kernel.Term)],
                         @list.List[(@kernel.HolType, @kernel.HolType)],
                       ),
@@ -5031,7 +5031,7 @@ fn step_122() -> Unit raise {
                     ],
                     (
                       (
-                        @list.List[(Int, @kernel.Term)],
+                        @list.List[(Int64, @kernel.Term)],
                         @list.List[(@kernel.Term, @kernel.Term)],
                         @list.List[(@kernel.HolType, @kernel.HolType)],
                       ),
@@ -5044,7 +5044,7 @@ fn step_122() -> Unit raise {
                       (
                         @list.List[@kernel.Term],
                         (
-                          @list.List[(Int, @kernel.Term)],
+                          @list.List[(Int64, @kernel.Term)],
                           @list.List[(@kernel.Term, @kernel.Term)],
                           @list.List[(@kernel.HolType, @kernel.HolType)],
                         ),
@@ -5054,7 +5054,7 @@ fn step_122() -> Unit raise {
                       ],
                       (
                         (
-                          @list.List[(Int, @kernel.Term)],
+                          @list.List[(Int64, @kernel.Term)],
                           @list.List[(@kernel.Term, @kernel.Term)],
                           @list.List[(@kernel.HolType, @kernel.HolType)],
                         ),
@@ -5068,7 +5068,7 @@ fn step_122() -> Unit raise {
                         (
                           @list.List[@kernel.Term],
                           (
-                            @list.List[(Int, @kernel.Term)],
+                            @list.List[(Int64, @kernel.Term)],
                             @list.List[(@kernel.Term, @kernel.Term)],
                             @list.List[(@kernel.HolType, @kernel.HolType)],
                           ),
@@ -5078,7 +5078,7 @@ fn step_122() -> Unit raise {
                         ],
                         (
                           (
-                            @list.List[(Int, @kernel.Term)],
+                            @list.List[(Int64, @kernel.Term)],
                             @list.List[(@kernel.Term, @kernel.Term)],
                             @list.List[(@kernel.HolType, @kernel.HolType)],
                           ),
@@ -5266,7 +5266,7 @@ fn step_129() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -5274,7 +5274,7 @@ fn step_129() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -5288,7 +5288,7 @@ fn step_129() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -5296,7 +5296,7 @@ fn step_129() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -5313,7 +5313,7 @@ fn step_129() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -5321,7 +5321,7 @@ fn step_129() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -5335,7 +5335,7 @@ fn step_129() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -5343,7 +5343,7 @@ fn step_129() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -5405,7 +5405,7 @@ fn step_130() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -5413,7 +5413,7 @@ fn step_130() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -5427,7 +5427,7 @@ fn step_130() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -5435,7 +5435,7 @@ fn step_130() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -5452,7 +5452,7 @@ fn step_130() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -5460,7 +5460,7 @@ fn step_130() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -5474,7 +5474,7 @@ fn step_130() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -5482,7 +5482,7 @@ fn step_130() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -5783,7 +5783,7 @@ fn step_138() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -5791,7 +5791,7 @@ fn step_138() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -5805,7 +5805,7 @@ fn step_138() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -5813,7 +5813,7 @@ fn step_138() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -5869,7 +5869,7 @@ fn step_139() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -5877,7 +5877,7 @@ fn step_139() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -5891,7 +5891,7 @@ fn step_139() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -5899,7 +5899,7 @@ fn step_139() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -6003,7 +6003,7 @@ fn step_140() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -6011,7 +6011,7 @@ fn step_140() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -6024,7 +6024,7 @@ fn step_140() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -6032,7 +6032,7 @@ fn step_140() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -6046,7 +6046,7 @@ fn step_140() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -6054,7 +6054,7 @@ fn step_140() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -6072,7 +6072,7 @@ fn step_140() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -6080,7 +6080,7 @@ fn step_140() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -6094,7 +6094,7 @@ fn step_140() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -6102,7 +6102,7 @@ fn step_140() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -6127,7 +6127,7 @@ fn step_140() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -6135,7 +6135,7 @@ fn step_140() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -6148,7 +6148,7 @@ fn step_140() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -6156,7 +6156,7 @@ fn step_140() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -6170,7 +6170,7 @@ fn step_140() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -6178,7 +6178,7 @@ fn step_140() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -6585,7 +6585,7 @@ fn step_154() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -6593,7 +6593,7 @@ fn step_154() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -6607,7 +6607,7 @@ fn step_154() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -6615,7 +6615,7 @@ fn step_154() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -6633,7 +6633,7 @@ fn step_154() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -6641,7 +6641,7 @@ fn step_154() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -6665,7 +6665,7 @@ fn step_154() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -6673,7 +6673,7 @@ fn step_154() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -6777,7 +6777,7 @@ fn step_157() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -6785,7 +6785,7 @@ fn step_157() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -6798,7 +6798,7 @@ fn step_157() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -6806,7 +6806,7 @@ fn step_157() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -6819,7 +6819,7 @@ fn step_157() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -6827,7 +6827,7 @@ fn step_157() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -6841,7 +6841,7 @@ fn step_157() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -6849,7 +6849,7 @@ fn step_157() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -7039,7 +7039,7 @@ fn step_163() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7047,7 +7047,7 @@ fn step_163() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7061,7 +7061,7 @@ fn step_163() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -7069,7 +7069,7 @@ fn step_163() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -7085,7 +7085,7 @@ fn step_163() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7093,7 +7093,7 @@ fn step_163() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7258,7 +7258,7 @@ fn step_165() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7266,7 +7266,7 @@ fn step_165() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7280,7 +7280,7 @@ fn step_165() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -7288,7 +7288,7 @@ fn step_165() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -7310,7 +7310,7 @@ fn step_165() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -7318,7 +7318,7 @@ fn step_165() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -7372,7 +7372,7 @@ fn step_165() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7380,7 +7380,7 @@ fn step_165() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7394,7 +7394,7 @@ fn step_165() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -7402,7 +7402,7 @@ fn step_165() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -7418,7 +7418,7 @@ fn step_165() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7426,7 +7426,7 @@ fn step_165() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7842,7 +7842,7 @@ fn step_173() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7850,7 +7850,7 @@ fn step_173() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7864,7 +7864,7 @@ fn step_173() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -7872,7 +7872,7 @@ fn step_173() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -7888,7 +7888,7 @@ fn step_173() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7896,7 +7896,7 @@ fn step_173() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7913,7 +7913,7 @@ fn step_173() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7921,7 +7921,7 @@ fn step_173() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -7939,7 +7939,7 @@ fn step_173() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -7947,7 +7947,7 @@ fn step_173() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -7961,7 +7961,7 @@ fn step_173() -> Unit raise {
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -7969,7 +7969,7 @@ fn step_173() -> Unit raise {
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -7994,7 +7994,7 @@ fn step_173() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -8002,7 +8002,7 @@ fn step_173() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -8016,7 +8016,7 @@ fn step_173() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -8024,7 +8024,7 @@ fn step_173() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -8043,7 +8043,7 @@ fn step_173() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8051,7 +8051,7 @@ fn step_173() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8065,7 +8065,7 @@ fn step_173() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -8073,7 +8073,7 @@ fn step_173() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -8093,7 +8093,7 @@ fn step_173() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -8101,7 +8101,7 @@ fn step_173() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -8114,7 +8114,7 @@ fn step_173() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8122,7 +8122,7 @@ fn step_173() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8136,7 +8136,7 @@ fn step_173() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -8144,7 +8144,7 @@ fn step_173() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -8162,7 +8162,7 @@ fn step_173() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -8170,7 +8170,7 @@ fn step_173() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -8183,7 +8183,7 @@ fn step_173() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8191,7 +8191,7 @@ fn step_173() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8204,7 +8204,7 @@ fn step_173() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -8212,7 +8212,7 @@ fn step_173() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -8226,7 +8226,7 @@ fn step_173() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -8234,7 +8234,7 @@ fn step_173() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -8559,7 +8559,7 @@ fn step_183() -> Unit raise {
                   (
                     @list.List[@kernel.Term],
                     (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -8567,7 +8567,7 @@ fn step_183() -> Unit raise {
                   @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                   (
                     (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -8581,7 +8581,7 @@ fn step_183() -> Unit raise {
                     (
                       @list.List[@kernel.Term],
                       (
-                        @list.List[(Int, @kernel.Term)],
+                        @list.List[(Int64, @kernel.Term)],
                         @list.List[(@kernel.Term, @kernel.Term)],
                         @list.List[(@kernel.HolType, @kernel.HolType)],
                       ),
@@ -8591,7 +8591,7 @@ fn step_183() -> Unit raise {
                     ],
                     (
                       (
-                        @list.List[(Int, @kernel.Term)],
+                        @list.List[(Int64, @kernel.Term)],
                         @list.List[(@kernel.Term, @kernel.Term)],
                         @list.List[(@kernel.HolType, @kernel.HolType)],
                       ),
@@ -8637,7 +8637,7 @@ fn step_183() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8645,7 +8645,7 @@ fn step_183() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8658,7 +8658,7 @@ fn step_183() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -8666,7 +8666,7 @@ fn step_183() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -8680,7 +8680,7 @@ fn step_183() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -8688,7 +8688,7 @@ fn step_183() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -8718,7 +8718,7 @@ fn step_183() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -8726,7 +8726,7 @@ fn step_183() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -8740,7 +8740,7 @@ fn step_183() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8748,7 +8748,7 @@ fn step_183() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8764,7 +8764,7 @@ fn step_183() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -8772,7 +8772,7 @@ fn step_183() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -8792,7 +8792,7 @@ fn step_183() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -8800,7 +8800,7 @@ fn step_183() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -8814,7 +8814,7 @@ fn step_183() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8822,7 +8822,7 @@ fn step_183() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8875,7 +8875,7 @@ fn step_183() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -8883,7 +8883,7 @@ fn step_183() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -8897,7 +8897,7 @@ fn step_183() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8905,7 +8905,7 @@ fn step_183() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8961,7 +8961,7 @@ fn step_184() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8969,7 +8969,7 @@ fn step_184() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -8983,7 +8983,7 @@ fn step_184() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -8991,7 +8991,7 @@ fn step_184() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -9010,7 +9010,7 @@ fn step_184() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9018,7 +9018,7 @@ fn step_184() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9032,7 +9032,7 @@ fn step_184() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -9040,7 +9040,7 @@ fn step_184() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -9056,7 +9056,7 @@ fn step_184() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9064,7 +9064,7 @@ fn step_184() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9123,7 +9123,7 @@ fn step_185() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9131,7 +9131,7 @@ fn step_185() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9170,7 +9170,7 @@ fn step_186() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9178,7 +9178,7 @@ fn step_186() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9263,7 +9263,7 @@ fn step_187() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -9271,7 +9271,7 @@ fn step_187() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -9345,7 +9345,7 @@ fn step_188() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -9353,7 +9353,7 @@ fn step_188() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -9521,7 +9521,7 @@ fn step_193() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9529,7 +9529,7 @@ fn step_193() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9542,7 +9542,7 @@ fn step_193() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -9550,7 +9550,7 @@ fn step_193() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -9567,7 +9567,7 @@ fn step_193() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9575,7 +9575,7 @@ fn step_193() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9588,7 +9588,7 @@ fn step_193() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -9596,7 +9596,7 @@ fn step_193() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -9610,7 +9610,7 @@ fn step_193() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -9618,7 +9618,7 @@ fn step_193() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -9643,7 +9643,7 @@ fn step_193() -> Unit raise {
                 (
                   @list.List[@kernel.Term],
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -9651,7 +9651,7 @@ fn step_193() -> Unit raise {
                 @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                 (
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -9665,7 +9665,7 @@ fn step_193() -> Unit raise {
                   (
                     @list.List[@kernel.Term],
                     (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -9673,7 +9673,7 @@ fn step_193() -> Unit raise {
                   @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                   (
                     (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -9701,7 +9701,7 @@ fn step_193() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9709,7 +9709,7 @@ fn step_193() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9723,7 +9723,7 @@ fn step_193() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -9731,7 +9731,7 @@ fn step_193() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -9788,7 +9788,7 @@ fn step_194() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9796,7 +9796,7 @@ fn step_194() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9857,7 +9857,7 @@ fn step_195() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9865,7 +9865,7 @@ fn step_195() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9891,7 +9891,7 @@ fn step_195() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9899,7 +9899,7 @@ fn step_195() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -9912,7 +9912,7 @@ fn step_195() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -9920,7 +9920,7 @@ fn step_195() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -9933,7 +9933,7 @@ fn step_195() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -9941,7 +9941,7 @@ fn step_195() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -9955,7 +9955,7 @@ fn step_195() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -9963,7 +9963,7 @@ fn step_195() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -10026,7 +10026,7 @@ fn step_196() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -10034,7 +10034,7 @@ fn step_196() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -10163,7 +10163,7 @@ fn step_197() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -10171,7 +10171,7 @@ fn step_197() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -10223,7 +10223,7 @@ fn step_199() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -10231,7 +10231,7 @@ fn step_199() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -10533,7 +10533,7 @@ fn step_205() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -10541,7 +10541,7 @@ fn step_205() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -10650,7 +10650,7 @@ fn step_206() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -10658,7 +10658,7 @@ fn step_206() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -10672,7 +10672,7 @@ fn step_206() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -10680,7 +10680,7 @@ fn step_206() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -10962,7 +10962,7 @@ fn step_213() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -10970,7 +10970,7 @@ fn step_213() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -10983,7 +10983,7 @@ fn step_213() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -10991,7 +10991,7 @@ fn step_213() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -11004,7 +11004,7 @@ fn step_213() -> Unit raise {
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -11012,7 +11012,7 @@ fn step_213() -> Unit raise {
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -11025,7 +11025,7 @@ fn step_213() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -11033,7 +11033,7 @@ fn step_213() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -11047,7 +11047,7 @@ fn step_213() -> Unit raise {
                 (
                   @list.List[@kernel.Term],
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -11055,7 +11055,7 @@ fn step_213() -> Unit raise {
                 @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                 (
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -11104,7 +11104,7 @@ fn step_214() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -11112,7 +11112,7 @@ fn step_214() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -11166,7 +11166,7 @@ fn step_215() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -11174,7 +11174,7 @@ fn step_215() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -11187,7 +11187,7 @@ fn step_215() -> Unit raise {
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -11195,7 +11195,7 @@ fn step_215() -> Unit raise {
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -11208,7 +11208,7 @@ fn step_215() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -11216,7 +11216,7 @@ fn step_215() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -11229,7 +11229,7 @@ fn step_215() -> Unit raise {
                 (
                   @list.List[@kernel.Term],
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -11237,7 +11237,7 @@ fn step_215() -> Unit raise {
                 @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                 (
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -11251,7 +11251,7 @@ fn step_215() -> Unit raise {
                   (
                     @list.List[@kernel.Term],
                     (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -11259,7 +11259,7 @@ fn step_215() -> Unit raise {
                   @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                   (
                     (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -11445,7 +11445,7 @@ fn step_219() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -11453,7 +11453,7 @@ fn step_219() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -11467,7 +11467,7 @@ fn step_219() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -11475,7 +11475,7 @@ fn step_219() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -12030,7 +12030,7 @@ fn step_232() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12038,7 +12038,7 @@ fn step_232() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12063,7 +12063,7 @@ fn step_232() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12071,7 +12071,7 @@ fn step_232() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12101,7 +12101,7 @@ fn step_232() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12109,7 +12109,7 @@ fn step_232() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12123,7 +12123,7 @@ fn step_232() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -12131,7 +12131,7 @@ fn step_232() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -12153,7 +12153,7 @@ fn step_232() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12161,7 +12161,7 @@ fn step_232() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12178,7 +12178,7 @@ fn step_232() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -12186,7 +12186,7 @@ fn step_232() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -12199,7 +12199,7 @@ fn step_232() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -12207,7 +12207,7 @@ fn step_232() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -12220,7 +12220,7 @@ fn step_232() -> Unit raise {
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -12228,7 +12228,7 @@ fn step_232() -> Unit raise {
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -12242,7 +12242,7 @@ fn step_232() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -12250,7 +12250,7 @@ fn step_232() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -12282,7 +12282,7 @@ fn step_232() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12290,7 +12290,7 @@ fn step_232() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12303,7 +12303,7 @@ fn step_232() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -12311,7 +12311,7 @@ fn step_232() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -12325,7 +12325,7 @@ fn step_232() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -12333,7 +12333,7 @@ fn step_232() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -12499,7 +12499,7 @@ fn step_237() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12507,7 +12507,7 @@ fn step_237() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12521,7 +12521,7 @@ fn step_237() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -12529,7 +12529,7 @@ fn step_237() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -12586,7 +12586,7 @@ fn step_238() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12594,7 +12594,7 @@ fn step_238() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12708,7 +12708,7 @@ fn step_240() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -12716,7 +12716,7 @@ fn step_240() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -12730,7 +12730,7 @@ fn step_240() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -12738,7 +12738,7 @@ fn step_240() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -12865,7 +12865,7 @@ fn step_242() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12873,7 +12873,7 @@ fn step_242() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12910,7 +12910,7 @@ fn step_242() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12918,7 +12918,7 @@ fn step_242() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -12931,7 +12931,7 @@ fn step_242() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -12939,7 +12939,7 @@ fn step_242() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -12952,7 +12952,7 @@ fn step_242() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -12960,7 +12960,7 @@ fn step_242() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -12974,7 +12974,7 @@ fn step_242() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -12982,7 +12982,7 @@ fn step_242() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -13295,7 +13295,7 @@ fn step_246() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -13303,7 +13303,7 @@ fn step_246() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -13317,7 +13317,7 @@ fn step_246() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -13325,7 +13325,7 @@ fn step_246() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -13359,7 +13359,7 @@ fn step_246() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -13367,7 +13367,7 @@ fn step_246() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -13381,7 +13381,7 @@ fn step_246() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -13389,7 +13389,7 @@ fn step_246() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -13410,7 +13410,7 @@ fn step_246() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -13418,7 +13418,7 @@ fn step_246() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -13593,7 +13593,7 @@ fn step_247() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -13601,7 +13601,7 @@ fn step_247() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -13797,7 +13797,7 @@ fn step_254() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -13805,7 +13805,7 @@ fn step_254() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -13819,7 +13819,7 @@ fn step_254() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -13827,7 +13827,7 @@ fn step_254() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -13843,7 +13843,7 @@ fn step_254() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -13851,7 +13851,7 @@ fn step_254() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -13949,7 +13949,7 @@ fn step_256() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -13957,7 +13957,7 @@ fn step_256() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -13970,7 +13970,7 @@ fn step_256() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -13978,7 +13978,7 @@ fn step_256() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -13992,7 +13992,7 @@ fn step_256() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -14000,7 +14000,7 @@ fn step_256() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -14531,7 +14531,7 @@ fn step_269() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -14539,7 +14539,7 @@ fn step_269() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -14553,7 +14553,7 @@ fn step_269() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -14561,7 +14561,7 @@ fn step_269() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -14578,7 +14578,7 @@ fn step_269() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -14586,7 +14586,7 @@ fn step_269() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -14600,7 +14600,7 @@ fn step_269() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -14608,7 +14608,7 @@ fn step_269() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -14886,7 +14886,7 @@ fn step_274() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -14894,7 +14894,7 @@ fn step_274() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -14908,7 +14908,7 @@ fn step_274() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -14916,7 +14916,7 @@ fn step_274() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),

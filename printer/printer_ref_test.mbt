@@ -43,7 +43,7 @@ test "printer matches printer.ml" {
       ("tybit0", 1),
       ("tybit1", 1),
     ] {
-    @kernel.new_type(t.0, t.1)
+    @kernel.new_type(t.0, t.1.to_int64())
   }
   let mk_type = (s : String, args : Array[@kernel.HolType]) => {
     @kernel.mk_type(s, @list.List(args))

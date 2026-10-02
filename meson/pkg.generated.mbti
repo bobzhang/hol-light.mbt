@@ -10,73 +10,73 @@ import {
 }
 
 // Values
-pub fn asm_meson_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+pub fn asm_meson_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
 
 pub fn[TA, TB, TC : Eq + @lib.OCompare + @lib.OHash, TD, TE : Eq + @lib.OCompare + @lib.OHash] cacheconts(((TB, (TC, TD, TE))) -> TA raise) -> (((TB, (TC, TD, TE))) -> TA raise) raise
 
-pub fn[TA, TB] checkan(@list.List[(FolTerm, Int)], (Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])]) -> @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])] raise
+pub fn[TA, TB] checkan(@list.List[(FolTerm, Int64)], (Int64, @list.List[FolTerm]), @list.List[(Int64, @list.List[((TA, (Int64, @list.List[FolTerm])), TB)])]) -> @list.List[(Int64, @list.List[((TA, (Int64, @list.List[FolTerm])), TB)])] raise
 
 pub fn clear_contrapos_cache(Unit) -> Unit raise
 
-pub fn conjuncts_then_p((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise, @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+pub fn conjuncts_then_p((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise, @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
 
 pub fn create_equality_axioms(@list.List[@kernel.Term]) -> @list.List[@kernel.Thm] raise
 
-pub fn[TA, TB] expand_goal(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])), (Int, @kernel.Thm))])]) -> ((((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])])) -> ((Int) -> ((Int) -> ((((FolGoal, (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise) -> TA raise) raise) raise) raise) raise
+pub fn[TA, TB] expand_goal(@list.List[(Int64, @list.List[((@list.List[(Int64, @list.List[FolTerm])], (TB, @list.List[FolTerm])), (Int64, @kernel.Thm))])]) -> ((((Int64, @list.List[FolTerm]), @list.List[(Int64, @list.List[((@list.List[(Int64, @list.List[FolTerm])], (Int64, @list.List[FolTerm])), (Int64, @kernel.Thm))])])) -> ((Int64) -> ((Int64) -> ((((FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64))) -> TA raise) -> TA raise) raise) raise) raise) raise
 
 pub fn finish_rule(@kernel.Thm) -> @kernel.Thm raise
 
-pub fn[TA : Eq + @lib.OCompare + @lib.OHash] fol_atom_eq(@list.List[(FolTerm, Int)], (TA, @list.List[FolTerm]), (TA, @list.List[FolTerm])) -> Bool raise
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] fol_atom_eq(@list.List[(FolTerm, Int64)], (TA, @list.List[FolTerm]), (TA, @list.List[FolTerm])) -> Bool raise
 
-pub fn fol_eq(@list.List[(FolTerm, Int)], FolTerm, FolTerm) -> Bool raise
+pub fn fol_eq(@list.List[(FolTerm, Int64)], FolTerm, FolTerm) -> Bool raise
 
-pub fn fol_free_in(Int, FolTerm) -> Bool raise
+pub fn fol_free_in(Int64, FolTerm) -> Bool raise
 
-pub fn fol_inst(@list.List[(FolTerm, Int)], (Int, @list.List[FolTerm])) -> (Int, @list.List[FolTerm]) raise
+pub fn fol_inst(@list.List[(FolTerm, Int64)], (Int64, @list.List[FolTerm])) -> (Int64, @list.List[FolTerm]) raise
 
-pub fn fol_inst_bump(Int, @list.List[(FolTerm, Int)], (Int, @list.List[FolTerm])) -> (Int, @list.List[FolTerm]) raise
+pub fn fol_inst_bump(Int64, @list.List[(FolTerm, Int64)], (Int64, @list.List[FolTerm])) -> (Int64, @list.List[FolTerm]) raise
 
-pub fn fol_of_atom(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> (Int, @list.List[FolTerm]) raise
+pub fn fol_of_atom(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> (Int64, @list.List[FolTerm]) raise
 
-pub fn fol_of_const(@kernel.Term) -> Int raise
+pub fn fol_of_const(@kernel.Term) -> Int64 raise
 
 pub fn fol_of_form(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> FolForm raise
 
-pub fn fol_of_hol_clauses(@list.List[@kernel.Thm]) -> @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])] raise
+pub fn fol_of_hol_clauses(@list.List[@kernel.Thm]) -> @list.List[(Int64, @list.List[((@list.List[(Int64, @list.List[FolTerm])], (Int64, @list.List[FolTerm])), (Int64, @kernel.Thm))])] raise
 
-pub fn fol_of_literal(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> (Int, @list.List[FolTerm]) raise
+pub fn fol_of_literal(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> (Int64, @list.List[FolTerm]) raise
 
 pub fn fol_of_term(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> FolTerm raise
 
-pub fn fol_of_var(@kernel.Term) -> Int raise
+pub fn fol_of_var(@kernel.Term) -> Int64 raise
 
-pub fn fol_subst(@list.List[(FolTerm, Int)], FolTerm) -> FolTerm raise
+pub fn fol_subst(@list.List[(FolTerm, Int64)], FolTerm) -> FolTerm raise
 
-pub fn fol_subst_bump(Int, @list.List[(FolTerm, Int)], FolTerm) -> FolTerm raise
+pub fn fol_subst_bump(Int64, @list.List[(FolTerm, Int64)], FolTerm) -> FolTerm raise
 
-pub fn fol_subst_partial(@list.List[(FolTerm, Int)], FolTerm) -> FolTerm raise
+pub fn fol_subst_partial(@list.List[(FolTerm, Int64)], FolTerm) -> FolTerm raise
 
-pub fn fol_unify(Int, FolTerm, FolTerm, @list.List[(FolTerm, Int)]) -> @list.List[(FolTerm, Int)] raise
+pub fn fol_unify(Int64, FolTerm, FolTerm, @list.List[(FolTerm, Int64)]) -> @list.List[(FolTerm, Int64)] raise
 
-pub fn gen_meson_tac(Int, Int, Int, @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+pub fn gen_meson_tac(Int64, Int64, Int64, @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
 
-pub fn hol_of_atom(Int, @list.List[FolTerm]) -> @kernel.Term raise
+pub fn hol_of_atom(Int64, @list.List[FolTerm]) -> @kernel.Term raise
 
-pub fn hol_of_const(Int) -> @kernel.Term raise
+pub fn hol_of_const(Int64) -> @kernel.Term raise
 
-pub fn hol_of_literal(Int, @list.List[FolTerm]) -> @kernel.Term raise
+pub fn hol_of_literal(Int64, @list.List[FolTerm]) -> @kernel.Term raise
 
 pub fn hol_of_term(FolTerm) -> @kernel.Term raise
 
-pub fn hol_of_var(Int) -> @kernel.Term raise
+pub fn hol_of_var(Int64) -> @kernel.Term raise
 
-pub fn inferences() -> @ref.Ref[Int]
+pub fn inferences() -> @ref.Ref[Int64]
 
-pub fn[TA] insertan(@list.List[(FolTerm, Int)], (Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[TA], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])]) -> @list.List[(Int, @list.List[((@list.List[TA], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])] raise
+pub fn[TA] insertan(@list.List[(FolTerm, Int64)], (Int64, @list.List[FolTerm]), @list.List[(Int64, @list.List[((@list.List[TA], (Int64, @list.List[FolTerm])), (Int64, @kernel.Thm))])]) -> @list.List[(Int64, @list.List[((@list.List[TA], (Int64, @list.List[FolTerm])), (Int64, @kernel.Thm))])] raise
 
-pub fn istriv(@list.List[(FolTerm, Int)], Int, FolTerm) -> Bool raise
+pub fn istriv(@list.List[(FolTerm, Int64)], Int64, FolTerm) -> Bool raise
 
-pub fn make_hol_contrapos((Int, @kernel.Thm)) -> @kernel.Thm raise
+pub fn make_hol_contrapos((Int64, @kernel.Thm)) -> @kernel.Thm raise
 
 pub fn meson(@list.List[@kernel.Thm], @kernel.Term) -> @kernel.Thm raise
 
@@ -84,37 +84,37 @@ pub fn meson_brand() -> @ref.Ref[Bool]
 
 pub fn meson_chatty() -> @ref.Ref[Bool]
 
-pub fn meson_dcutin() -> @ref.Ref[Int]
+pub fn meson_dcutin() -> @ref.Ref[Int64]
 
 pub fn meson_depth() -> @ref.Ref[Bool]
 
-pub fn[TA, TB] meson_expand(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])), (Int, @kernel.Thm))])], (((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])]), (@list.List[(FolTerm, Int)], Int, Int)), ((Int, @kernel.Thm)) -> (((@list.List[((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])])], (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise) raise) -> TA raise
+pub fn[TA, TB] meson_expand(@list.List[(Int64, @list.List[((@list.List[(Int64, @list.List[FolTerm])], (TB, @list.List[FolTerm])), (Int64, @kernel.Thm))])], (((Int64, @list.List[FolTerm]), @list.List[(Int64, @list.List[((@list.List[(Int64, @list.List[FolTerm])], (Int64, @list.List[FolTerm])), (Int64, @kernel.Thm))])]), (@list.List[(FolTerm, Int64)], Int64, Int64)), ((Int64, @kernel.Thm)) -> (((@list.List[((Int64, @list.List[FolTerm]), @list.List[(Int64, @list.List[((@list.List[(Int64, @list.List[FolTerm])], (Int64, @list.List[FolTerm])), (Int64, @kernel.Thm))])])], (@list.List[(FolTerm, Int64)], Int64, Int64))) -> TA raise) raise) -> TA raise
 
-pub fn[TA, TB, TC, TD, TE, TF] meson_expand_cont(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (TB, @list.List[FolTerm])), TC)], (((TD, @list.List[FolTerm]), @list.List[(Int, @list.List[((TE, (Int, @list.List[FolTerm])), TF)])]), (@list.List[(FolTerm, Int)], Int, Int)), (TC) -> (((@list.List[((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((TE, (Int, @list.List[FolTerm])), TF)])])], (@list.List[(FolTerm, Int)], Int, Int))) -> TA raise) raise) -> TA raise
+pub fn[TA, TB, TC, TD, TE, TF] meson_expand_cont(Int64, @list.List[((@list.List[(Int64, @list.List[FolTerm])], (TB, @list.List[FolTerm])), TC)], (((TD, @list.List[FolTerm]), @list.List[(Int64, @list.List[((TE, (Int64, @list.List[FolTerm])), TF)])]), (@list.List[(FolTerm, Int64)], Int64, Int64)), (TC) -> (((@list.List[((Int64, @list.List[FolTerm]), @list.List[(Int64, @list.List[((TE, (Int64, @list.List[FolTerm])), TF)])])], (@list.List[(FolTerm, Int64)], Int64, Int64))) -> TA raise) raise) -> TA raise
 
 pub fn meson_prefine() -> @ref.Ref[Bool]
 
-pub fn[TA, TB, TC, TD, TE] meson_single_expand(Int, ((@list.List[(Int, @list.List[FolTerm])], (TC, @list.List[FolTerm])), TD), (((TE, @list.List[FolTerm]), @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])]), (@list.List[(FolTerm, Int)], Int, Int))) -> (@list.List[((Int, @list.List[FolTerm]), @list.List[(Int, @list.List[((TA, (Int, @list.List[FolTerm])), TB)])])], (@list.List[(FolTerm, Int)], Int, Int)) raise
+pub fn[TA, TB, TC, TD, TE] meson_single_expand(Int64, ((@list.List[(Int64, @list.List[FolTerm])], (TC, @list.List[FolTerm])), TD), (((TE, @list.List[FolTerm]), @list.List[(Int64, @list.List[((TA, (Int64, @list.List[FolTerm])), TB)])]), (@list.List[(FolTerm, Int64)], Int64, Int64))) -> (@list.List[((Int64, @list.List[FolTerm]), @list.List[(Int64, @list.List[((TA, (Int64, @list.List[FolTerm])), TB)])])], (@list.List[(FolTerm, Int64)], Int64, Int64)) raise
 
-pub fn meson_skew() -> @ref.Ref[Int]
+pub fn meson_skew() -> @ref.Ref[Int64]
 
-pub fn meson_split_limit() -> @ref.Ref[Int]
+pub fn meson_split_limit() -> @ref.Ref[Int64]
 
-pub fn meson_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+pub fn meson_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
 
-pub fn meson_to_hol(@list.List[(FolTerm, Int)]) -> ((FolGoal) -> @kernel.Thm raise) raise
+pub fn meson_to_hol(@list.List[(FolTerm, Int64)]) -> ((FolGoal) -> @kernel.Thm raise) raise
 
-pub fn[TA] mk_negated(Int, TA) -> (Int, TA) raise
+pub fn[TA] mk_negated(Int64, TA) -> (Int64, TA) raise
 
-pub fn offinc() -> Int
+pub fn offinc() -> Int64
 
-pub fn optimize_rules(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])]) -> @list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (Int, @list.List[FolTerm])), (Int, @kernel.Thm))])] raise
+pub fn optimize_rules(@list.List[(Int64, @list.List[((@list.List[(Int64, @list.List[FolTerm])], (Int64, @list.List[FolTerm])), (Int64, @kernel.Thm))])]) -> @list.List[(Int64, @list.List[((@list.List[(Int64, @list.List[FolTerm])], (Int64, @list.List[FolTerm])), (Int64, @kernel.Thm))])] raise
 
 pub fn perform_brand_modification(@list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise
 
-pub fn poly_assume_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+pub fn poly_assume_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
 
-pub fn pure_meson_tac(Int, Int, Int, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+pub fn pure_meson_tac(Int64, Int64, Int64, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
 
 pub fn[TA] qpartition((TA) -> Bool raise, @list.List[TA]) -> ((@list.List[TA]) -> (@list.List[TA], @list.List[TA]) raise) raise
 
@@ -124,13 +124,13 @@ pub fn reset_consts(Unit) -> Unit raise
 
 pub fn reset_vars(Unit) -> Unit raise
 
-pub fn separate_insts(Int, @list.List[(FolTerm, Int)], @list.List[(FolTerm, Int)]) -> (@list.List[(FolTerm, Int)], @list.List[(FolTerm, Int)]) raise
+pub fn separate_insts(Int64, @list.List[(FolTerm, Int64)], @list.List[(FolTerm, Int64)]) -> (@list.List[(FolTerm, Int64)], @list.List[(FolTerm, Int64)]) raise
 
-pub fn simple_meson_refute(Int, Int, Int, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+pub fn simple_meson_refute(Int64, Int64, Int64, @list.List[@kernel.Thm]) -> @kernel.Thm raise
 
-pub fn[TA] solve_goal(@list.List[(Int, @list.List[((@list.List[(Int, @list.List[FolTerm])], (TA, @list.List[FolTerm])), (Int, @kernel.Thm))])], Bool, Int, Int, Int) -> (((Int, @list.List[FolTerm])) -> (FolGoal, (@list.List[(FolTerm, Int)], Int, Int)) raise) raise
+pub fn[TA] solve_goal(@list.List[(Int64, @list.List[((@list.List[(Int64, @list.List[FolTerm])], (TA, @list.List[FolTerm])), (Int64, @kernel.Thm))])], Bool, Int64, Int64, Int64) -> (((Int64, @list.List[FolTerm])) -> (FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64)) raise) raise
 
-pub fn split_tac(Int, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+pub fn split_tac(Int64, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
 
 // Errors
 pub(all) suberror Cut {
@@ -139,28 +139,28 @@ pub(all) suberror Cut {
 
 // Types and methods
 pub(all) enum FolForm {
-  Atom((Int, @list.List[FolTerm]))
+  Atom((Int64, @list.List[FolTerm]))
   Conj(FolForm, FolForm)
   Disj(FolForm, FolForm)
-  Forallq(Int, FolForm)
+  Forallq(Int64, FolForm)
 } derive(Eq, @debug.Debug)
 pub impl @lib.OCompare for FolForm
 pub impl @lib.OHash for FolForm
 
 pub(all) enum FolGoal {
-  Subgoal((Int, @list.List[FolTerm]), @list.List[FolGoal], (Int, @kernel.Thm), Int, @list.List[(FolTerm, Int)])
+  Subgoal((Int64, @list.List[FolTerm]), @list.List[FolGoal], (Int64, @kernel.Thm), Int64, @list.List[(FolTerm, Int64)])
 } derive(Eq, @debug.Debug)
 pub impl @lib.OCompare for FolGoal
 pub impl @lib.OHash for FolGoal
 
 pub(all) enum FolTerm {
-  Fvar(Int)
-  Fnapp(Int, @list.List[FolTerm])
+  Fvar(Int64)
+  Fnapp(Int64, @list.List[FolTerm])
 } derive(Eq, @debug.Debug)
 pub impl @lib.OCompare for FolTerm
 pub impl @lib.OHash for FolTerm
 
 // Type aliases
-pub type FolAtom = (Int, @list.List[FolTerm])
+pub type FolAtom = (Int64, @list.List[FolTerm])
 
 // Traits

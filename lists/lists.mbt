@@ -2728,7 +2728,7 @@ fn step_97() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2736,7 +2736,7 @@ fn step_97() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2749,7 +2749,7 @@ fn step_97() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2757,7 +2757,7 @@ fn step_97() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2771,7 +2771,7 @@ fn step_97() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -2779,7 +2779,7 @@ fn step_97() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -2849,7 +2849,7 @@ fn step_98() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2857,7 +2857,7 @@ fn step_98() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2870,7 +2870,7 @@ fn step_98() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2878,7 +2878,7 @@ fn step_98() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2892,7 +2892,7 @@ fn step_98() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -2900,7 +2900,7 @@ fn step_98() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -4738,34 +4738,36 @@ fn step_140() -> Unit raise {
       _ => raise Failure("bool_of_term")
     }
   }
-  let code_of_term : (@kernel.Term) -> Int raise = fn(
+  let code_of_term : (@kernel.Term) -> Int64 raise = fn(
     x363 : @kernel.Term,
-  ) -> Int raise {
+  ) -> Int64 raise {
     let t_1 = x363
     let (f, tms) = @basics.strip_comb(t_1)
     if !(@kernel.is_const(f) && @kernel.dest_const(f).0 == "ASCII") ||
-      !(@lib.length(tms) == 8) {
+      !(Int::to_int64(@lib.length(tms)) == 8L) {
       raise Failure("code_of_term")
     } else {
       @lib.itlist(
-        fn(x364 : Bool, x365 : Int) -> Int raise {
+        fn(x364 : Bool, x365 : Int64) -> Int64 raise {
           let b = x364
           let f_1 = x365
           if b {
-            1 + 2 * f_1
+            @lib.add63(1L, @lib.mul63(2L, f_1))
           } else {
-            2 * f_1
+            @lib.mul63(2L, f_1)
           }
         },
         @lib.map(bool_of_term, @lib.rev(tms)),
-        0,
+        0L,
       )
     }
   }
   let char_of_term : (@kernel.Term) -> Char raise = fn(
     x367 : @kernel.Term,
   ) -> Char raise {
-    (fn(x366 : Int) -> Char raise { @lib.char_chr(x366) })(code_of_term(x367))
+    (fn(x366 : Int64) -> Char raise { @lib.char_chr(@lib.int63_to_int(x366)) })(
+      code_of_term(x367),
+    )
   }
   let dest_string : (@kernel.Term) -> String raise = fn(
     x368 : @kernel.Term,
@@ -4805,16 +4807,16 @@ fn step_140() -> Unit raise {
     }
   }
   let ascii_tm = @parser.parse_term("ASCII")
-  let mk_code : (Int) -> @kernel.Term raise = fn(
-    x373 : Int,
+  let mk_code : (Int64) -> @kernel.Term raise = fn(
+    x373 : Int64,
   ) -> @kernel.Term raise {
     let c = x373
     let lis = @lib.map(
-      fn(x374 : Int) -> @kernel.Term raise {
+      fn(x374 : Int64) -> @kernel.Term raise {
         let i = x374
-        mk_bool(c / @lib.lsl(1, i) % 2 == 1)
+        mk_bool(@lib.mod63(@lib.div63(c, @lib.lsl63(1L, i)), 2L) == 1L)
       },
-      @lib.range(0, 7),
+      @lib.range(0L, 7L),
     )
     @lib.itlist(
       fn(x375 : @kernel.Term, x376 : @kernel.Term) -> @kernel.Term raise {
@@ -4826,28 +4828,32 @@ fn step_140() -> Unit raise {
       ascii_tm,
     )
   }
-  let codes = @lib.array_map(mk_code, @lib.array_of_list(@lib.range(0, 255)))
-  let mk_code_1 : (Int) -> @kernel.Term raise = fn(
-    x377 : Int,
+  let codes = @lib.array_map(mk_code, @lib.array_of_list(@lib.range(0L, 255L)))
+  let mk_code_1 : (Int64) -> @kernel.Term raise = fn(
+    x377 : Int64,
   ) -> @kernel.Term raise {
     let c_1 = x377
-    @lib.array_get(codes, c_1)
+    @lib.array_get(codes, @lib.int63_to_int(c_1))
   }
   let mk_char : (Char) -> @kernel.Term raise = fn(
     x379 : Char,
   ) -> @kernel.Term raise {
-    mk_code_1((fn(x378 : Char) -> Int raise { Char::to_int(x378) })(x379))
+    mk_code_1(
+      (fn(x378 : Char) -> Int64 raise { Int::to_int64(Char::to_int(x378)) })(
+        x379,
+      ),
+    )
   }
   let mk_string : (String) -> @kernel.Term raise = fn(
     x380 : String,
   ) -> @kernel.Term raise {
     let s = x380
     let ns = @lib.map(
-      fn(x381 : Int) -> Int raise {
+      fn(x381 : Int64) -> Int64 raise {
         let i_1 = x381
-        Char::to_int(@lib.string_get(s, i_1))
+        Int::to_int64(Char::to_int(@lib.string_get(s, @lib.int63_to_int(i_1))))
       },
-      @lib.range(0, @lib.string_length(s) - 1),
+      @lib.range(0L, @lib.sub63(Int::to_int64(@lib.string_length(s)), 1L)),
     )
     let t382 = @parser.parse_type("char")
     mk_list(@lib.map(mk_code_1, ns), t382)
@@ -4920,7 +4926,7 @@ fn step_140() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -4928,7 +4934,7 @@ fn step_140() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -4955,12 +4961,12 @@ fn step_140() -> Unit raise {
   }
   let ascii_neqs_tf = @lib.map(f_2, ascii_neqs_ft)
   fn findneq(
-    x415 : Int,
+    x415 : Int64,
     x416 : @list.List[@kernel.Term],
     x417 : @list.List[@kernel.Term],
     x418 : @list.List[@kernel.Term],
   ) -> (
-    Int,
+    Int64,
     @list.List[@kernel.Term],
     Bool,
     @list.List[@kernel.Term],
@@ -4976,7 +4982,7 @@ fn step_140() -> Unit raise {
           let t419 = bool_of_term(b2)
           (n_1, @lib.rev(prefix), t419, a_1, b_3)
         } else {
-          findneq(n_1 + 1, prefix.prepend(b1), a_1, b_3)
+          findneq(@lib.add63(n_1, 1L), prefix.prepend(b1), a_1, b_3)
         }
       (_, _) => @lib.failure()
     }
@@ -4989,12 +4995,12 @@ fn step_140() -> Unit raise {
       let c2 = x421
       let (_, a_2) = @basics.strip_comb(c1)
       let (_, b_4) = @basics.strip_comb(c2)
-      let (n_2, p, b_5, s1, s2) = findneq(0, @list.empty(), a_2, b_4)
-      let ss1 = @lib.funpow(n_2, @lib.tl, bvars)
-      let ss2 = @lib.funpow(n_2, @lib.tl, cvars)
+      let (n_2, p, b_5, s1, s2) = findneq(0L, @list.empty(), a_2, b_4)
+      let ss1 = @lib.funpow(@lib.int63_to_int(n_2), @lib.tl, bvars)
+      let ss2 = @lib.funpow(@lib.int63_to_int(n_2), @lib.tl, cvars)
       let pp = prefix_l(n_2, avars)
       let pth = if b_5 { ascii_neqs_ft } else { ascii_neqs_tf }
-      let t424 = @lib.el(n_2, pth)
+      let t424 = @lib.el(@lib.int63_to_int(n_2), pth)
       let t422 = @lib.zip(s2, ss2)
       let t423 = @lib.zip(s1, ss1).concat(t422)
       @kernel.inst_rule(@lib.zip(p, pp).concat(t423), t424)
@@ -5022,7 +5028,7 @@ fn step_140() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -5030,7 +5036,7 @@ fn step_140() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -5057,7 +5063,7 @@ fn step_140() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -5065,7 +5071,7 @@ fn step_140() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -5131,7 +5137,7 @@ fn step_140() -> Unit raise {
   ) -> @kernel.Thm raise {
     let tm_1 = x441
     let (c1_2, c2_3) = @kernel.dest_eq(tm_1)
-    if @lib.compare(c1_2, c2_3) == 0 {
+    if Int::to_int64(@lib.compare(c1_2, c2_3)) == 0L {
       @bool.eqt_intro(@kernel.refl(c1_2))
     } else {
       char_distinctness(c1_2)(c2_3)
@@ -5142,7 +5148,7 @@ fn step_140() -> Unit raise {
   ) -> @kernel.Thm raise {
     let tm_2 = x442
     let (ltm, rtm) = @kernel.dest_eq(tm_2)
-    if @lib.compare(ltm, rtm) == 0 {
+    if Int::to_int64(@lib.compare(ltm, rtm)) == 0L {
       @bool.eqt_intro(@kernel.refl(ltm))
     } else {
       string_distinctness_1(ltm)(rtm)
@@ -5167,14 +5173,14 @@ fn step_140() -> Unit raise {
 }
 
 ///|
-fn[TA] prefix_l(x413 : Int, x414 : @list.List[TA]) -> @list.List[TA] raise {
+fn[TA] prefix_l(x413 : Int64, x414 : @list.List[TA]) -> @list.List[TA] raise {
   let n = x413
   let l = x414
-  if n == 0 {
+  if n == 0L {
     @list.empty()
   } else {
     match l {
-      More(h, tail=t_2) => prefix_l(n - 1, t_2).prepend(h)
+      More(h, tail=t_2) => prefix_l(@lib.sub63(n, 1L), t_2).prepend(h)
       _ => l
     }
   }

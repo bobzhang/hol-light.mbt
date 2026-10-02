@@ -158,7 +158,7 @@ fn step_3() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -166,7 +166,7 @@ fn step_3() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -296,13 +296,13 @@ pub fn get_record_components(
 ) -> @list.List[@kernel.Term] raise {
   let cth = x20
   let cjs = @basics.conjuncts(@kernel.concl(cth))
-  let n = @lib.length(cjs) / 2
+  let n = @lib.div63(Int::to_int64(@lib.length(cjs)), 2L)
   let rcjs = @lib.map(
-    fn(x21 : Int) -> @kernel.Term raise {
+    fn(x21 : Int64) -> @kernel.Term raise {
       let i = x21
-      @lib.el(2 * i, cjs)
+      @lib.el(@lib.int63_to_int(@lib.mul63(2L, i)), cjs)
     },
-    @lib.range(0, n - 1),
+    @lib.range(0L, @lib.sub63(n, 1L)),
   )
   @lib.map(
     fn(x26 : @kernel.Term) -> @kernel.Term raise {
@@ -490,7 +490,7 @@ pub fn record_orthogonality_thms(
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -498,7 +498,7 @@ pub fn record_orthogonality_thms(
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),

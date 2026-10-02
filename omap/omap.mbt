@@ -5,7 +5,7 @@
 /// `t`
 pub(all) enum T[TA, TB] {
   Empty
-  Node(T[TA, TB], TA, TB, T[TA, TB], Int)
+  Node(T[TA, TB], TA, TB, T[TA, TB], Int64)
 } derive(Eq, Debug)
 
 ///|
@@ -65,9 +65,9 @@ pub impl[TA : @lib.OHash, TB : @lib.OHash] @lib.OHash for T[TA, TB] with fn ohas
 
 ///|
 /// `height`
-pub fn[TA, TB] height(x1 : T[TA, TB]) -> Int raise {
+pub fn[TA, TB] height(x1 : T[TA, TB]) -> Int64 raise {
   match x1 {
-    T::Empty => 0
+    T::Empty => 0L
     T::Node(_, _, _, _, h) => h
   }
 }
@@ -86,7 +86,17 @@ pub fn[TA, TB] create(
   let r = x5
   let hl = height(l)
   let hr = height(r)
-  T::Node(l, x, d, r, if hl >= hr { hl + 1 } else { hr + 1 })
+  T::Node(
+    l,
+    x,
+    d,
+    r,
+    if hl >= hr {
+      @lib.add63(hl, 1L)
+    } else {
+      @lib.add63(hr, 1L)
+    },
+  )
 }
 
 ///|
@@ -94,7 +104,7 @@ pub fn[TA, TB] create(
 pub fn[TA, TB] singleton(x6 : TA, x7 : TB) -> T[TA, TB] raise {
   let x = x6
   let d = x7
-  T::Node(T::Empty, x, d, T::Empty, 1)
+  T::Node(T::Empty, x, d, T::Empty, 1L)
 }
 
 ///|
@@ -110,14 +120,14 @@ pub fn[TA, TB] bal(
   let d = x10
   let r = x11
   let hl = match l {
-    T::Empty => 0
+    T::Empty => 0L
     T::Node(_, _, _, _, h) => h
   }
   let hr = match r {
-    T::Empty => 0
+    T::Empty => 0L
     T::Node(_, _, _, _, h_1) => h_1
   }
-  if hl > hr + 2 {
+  if hl > @lib.add63(hr, 2L) {
     match l {
       T::Empty => raise @num.InvalidArgument("Map.bal")
       T::Node(ll, lv, ld, lr, _) => {
@@ -135,7 +145,7 @@ pub fn[TA, TB] bal(
         }
       }
     }
-  } else if hr > hl + 2 {
+  } else if hr > @lib.add63(hl, 2L) {
     match r {
       T::Empty => raise @num.InvalidArgument("Map.bal")
       T::Node(rl, rv, rd, rr, _) => {
@@ -154,7 +164,17 @@ pub fn[TA, TB] bal(
       }
     }
   } else {
-    T::Node(l, x, d, r, if hl >= hr { hl + 1 } else { hr + 1 })
+    T::Node(
+      l,
+      x,
+      d,
+      r,
+      if hl >= hr {
+        @lib.add63(hl, 1L)
+      } else {
+        @lib.add63(hr, 1L)
+      },
+    )
   }
 }
 
@@ -176,7 +196,7 @@ pub fn[TA, TB] is_empty(x16 : T[TA, TB]) -> Bool raise {
 ///|
 /// `add`
 pub fn[TA, TB] add(
-  x17 : (TA) -> ((TA) -> Int raise) raise,
+  x17 : (TA) -> ((TA) -> Int64 raise) raise,
   x18 : TA,
   x19 : TB,
   x20 : T[TA, TB],
@@ -185,16 +205,16 @@ pub fn[TA, TB] add(
   let x = x18
   let data = x19
   match x20 {
-    T::Empty => T::Node(T::Empty, x, data, T::Empty, 1)
+    T::Empty => T::Node(T::Empty, x, data, T::Empty, 1L)
     T::Node(l, v, d, r, h) as m => {
       let c = ord(x)(v)
-      if c == 0 {
+      if c == 0L {
         if physical_equal(d, data) {
           m
         } else {
           T::Node(l, x, data, r, h)
         }
-      } else if c < 0 {
+      } else if c < 0L {
         let ll = add(ord, x, data, l)
         if physical_equal(l, ll) {
           m
@@ -216,7 +236,7 @@ pub fn[TA, TB] add(
 ///|
 /// `find`
 pub fn[TA, TB, TC] find(
-  x21 : (TC) -> ((TB) -> Int raise) raise,
+  x21 : (TC) -> ((TB) -> Int64 raise) raise,
   x22 : TC,
   x23 : T[TB, TA],
 ) -> TA raise {
@@ -226,10 +246,10 @@ pub fn[TA, TB, TC] find(
     T::Empty => raise @lib.NotFound
     T::Node(l, v, d, r, _) => {
       let c = ord(x)(v)
-      if c == 0 {
+      if c == 0L {
         d
       } else {
-        find(ord, x, if c < 0 { l } else { r })
+        find(ord, x, if c < 0L { l } else { r })
       }
     }
   }
@@ -398,7 +418,7 @@ pub fn[TA, TB] find_last_opt(
 ///|
 /// `find_opt`
 pub fn[TA, TB, TC] find_opt(
-  x48 : (TC) -> ((TB) -> Int raise) raise,
+  x48 : (TC) -> ((TB) -> Int64 raise) raise,
   x49 : TC,
   x50 : T[TB, TA],
 ) -> TA? raise {
@@ -408,10 +428,10 @@ pub fn[TA, TB, TC] find_opt(
     T::Empty => None
     T::Node(l, v, d, r, _) => {
       let c = ord(x)(v)
-      if c == 0 {
+      if c == 0L {
         Some(d)
       } else {
-        find_opt(ord, x, if c < 0 { l } else { r })
+        find_opt(ord, x, if c < 0L { l } else { r })
       }
     }
   }
@@ -420,7 +440,7 @@ pub fn[TA, TB, TC] find_opt(
 ///|
 /// `mem`
 pub fn[TA, TB, TC] mem(
-  x51 : (TB) -> ((TA) -> Int raise) raise,
+  x51 : (TB) -> ((TA) -> Int64 raise) raise,
   x52 : TB,
   x53 : T[TA, TC],
 ) -> Bool raise {
@@ -430,7 +450,7 @@ pub fn[TA, TB, TC] mem(
     T::Empty => false
     T::Node(l, v, _, r, _) => {
       let c = ord(x)(v)
-      c == 0 || mem(ord, x, if c < 0 { l } else { r })
+      c == 0L || mem(ord, x, if c < 0L { l } else { r })
     }
   }
 }
@@ -503,7 +523,7 @@ pub fn[TA, TB] merge_trees(x59 : T[TA, TB], x60 : T[TA, TB]) -> T[TA, TB] raise 
 ///|
 /// `remove`
 pub fn[TA, TB, TC] remove(
-  x61 : (TC) -> ((TA) -> Int raise) raise,
+  x61 : (TC) -> ((TA) -> Int64 raise) raise,
   x62 : TC,
   x63 : T[TA, TB],
 ) -> T[TA, TB] raise {
@@ -513,9 +533,9 @@ pub fn[TA, TB, TC] remove(
     T::Empty => T::Empty
     T::Node(l, v, d, r, _) as m => {
       let c = ord(x)(v)
-      if c == 0 {
+      if c == 0L {
         merge_trees(l, r)
-      } else if c < 0 {
+      } else if c < 0L {
         let ll = remove(ord, x, l)
         if physical_equal(l, ll) {
           m
@@ -537,7 +557,7 @@ pub fn[TA, TB, TC] remove(
 ///|
 /// `update`
 pub fn[TA, TB] update(
-  x64 : (TA) -> ((TA) -> Int raise) raise,
+  x64 : (TA) -> ((TA) -> Int64 raise) raise,
   x65 : TA,
   x66 : (TB?) -> TB? raise,
   x67 : T[TA, TB],
@@ -549,11 +569,11 @@ pub fn[TA, TB] update(
     T::Empty =>
       match f(None) {
         None => T::Empty
-        Some(data) => T::Node(T::Empty, x, data, T::Empty, 1)
+        Some(data) => T::Node(T::Empty, x, data, T::Empty, 1L)
       }
     T::Node(l, v, d, r, h) as m => {
       let c = ord(x)(v)
-      if c == 0 {
+      if c == 0L {
         match f(Some(d)) {
           None => merge_trees(l, r)
           Some(data_1) =>
@@ -563,7 +583,7 @@ pub fn[TA, TB] update(
               T::Node(l, x, data_1, r, h)
             }
         }
-      } else if c < 0 {
+      } else if c < 0L {
         let ll = update(ord, x, f, l)
         if physical_equal(l, ll) {
           m
@@ -726,9 +746,9 @@ pub fn[TA, TB] join(
     (T::Empty, _) => add_min_binding(v, d, r)
     (_, T::Empty) => add_max_binding(v, d, l)
     (T::Node(ll, lv, ld, lr, lh), T::Node(rl, rv, rd, rr, rh)) =>
-      if lh > rh + 2 {
+      if lh > @lib.add63(rh, 2L) {
         bal(ll, lv, ld, join(lr, v, d, r))
-      } else if rh > lh + 2 {
+      } else if rh > @lib.add63(lh, 2L) {
         bal(join(l, v, d, rl), rv, rd, rr)
       } else {
         create(l, v, d, r)
@@ -772,7 +792,7 @@ pub fn[TA, TB] concat_or_join(
 ///|
 /// `split`
 pub fn[TA, TB, TC] split(
-  x98 : (TC) -> ((TA) -> Int raise) raise,
+  x98 : (TC) -> ((TA) -> Int64 raise) raise,
   x99 : TC,
   x100 : T[TA, TB],
 ) -> (T[TA, TB], TB?, T[TA, TB]) raise {
@@ -782,9 +802,9 @@ pub fn[TA, TB, TC] split(
     T::Empty => (T::Empty, None, T::Empty)
     T::Node(l, v, d, r, _) => {
       let c = ord(x)(v)
-      if c == 0 {
+      if c == 0L {
         (l, Some(d), r)
-      } else if c < 0 {
+      } else if c < 0L {
         let (ll, pres, rl) = split(ord, x, l)
         (ll, pres, join(rl, v, d, r))
       } else {
@@ -798,7 +818,7 @@ pub fn[TA, TB, TC] split(
 ///|
 /// `merge`
 pub fn[TA, TB, TC, TD] merge(
-  x101 : (TA) -> ((TA) -> Int raise) raise,
+  x101 : (TA) -> ((TA) -> Int64 raise) raise,
   x102 : (TA) -> ((TD?) -> ((TC?) -> TB? raise) raise) raise,
   x103 : T[TA, TD],
   x104 : T[TA, TC],
@@ -830,7 +850,7 @@ pub fn[TA, TB, TC, TD] merge(
 ///|
 /// `union`
 pub fn[TA, TB] union(
-  x111 : (TA) -> ((TA) -> Int raise) raise,
+  x111 : (TA) -> ((TA) -> Int64 raise) raise,
   x112 : (TA) -> ((TB) -> ((TB) -> TB? raise) raise) raise,
   x113 : T[TA, TB],
   x114 : T[TA, TB],
@@ -1007,11 +1027,11 @@ pub fn[TA, TB] cons_enum(
 ///|
 /// `compare`
 pub fn[TA, TB, TC, TD] compare(
-  x125 : (TB) -> ((TA) -> Int raise) raise,
-  x126 : (TD) -> ((TC) -> Int raise) raise,
+  x125 : (TB) -> ((TA) -> Int64 raise) raise,
+  x126 : (TD) -> ((TC) -> Int64 raise) raise,
   x127 : T[TB, TD],
   x128 : T[TA, TC],
-) -> Int raise {
+) -> Int64 raise {
   let ord = x125
   let cmp = x126
   let m1 = x127
@@ -1019,20 +1039,20 @@ pub fn[TA, TB, TC, TD] compare(
   fn compare_aux(
     x129 : Enumeration[TB, TD],
     x130 : Enumeration[TA, TC],
-  ) -> Int raise {
+  ) -> Int64 raise {
     let e1 = x129
     let e2 = x130
     match (e1, e2) {
-      (Enumeration::End, Enumeration::End) => 0
-      (Enumeration::End, _) => -1
-      (_, Enumeration::End) => 1
+      (Enumeration::End, Enumeration::End) => 0L
+      (Enumeration::End, _) => -1L
+      (_, Enumeration::End) => 1L
       (Enumeration::More(v1, d1, r1, e1_1), Enumeration::More(v2, d2, r2, e2_1)) => {
         let c = ord(v1)(v2)
-        if c != 0 {
+        if c != 0L {
           c
         } else {
           let c_1 = cmp(d1)(d2)
-          if c_1 != 0 {
+          if c_1 != 0L {
             c_1
           } else {
             let t131 = cons_enum(r2, e2_1)
@@ -1049,7 +1069,7 @@ pub fn[TA, TB, TC, TD] compare(
 ///|
 /// `equal`
 pub fn[TA, TB, TC, TD] equal(
-  x133 : (TB) -> ((TA) -> Int raise) raise,
+  x133 : (TB) -> ((TA) -> Int64 raise) raise,
   x134 : (TD) -> ((TC) -> Bool raise) raise,
   x135 : T[TB, TD],
   x136 : T[TA, TC],
@@ -1069,7 +1089,7 @@ pub fn[TA, TB, TC, TD] equal(
       (Enumeration::End, _) => false
       (_, Enumeration::End) => false
       (Enumeration::More(v1, d1, r1, e1_1), Enumeration::More(v2, d2, r2, e2_1)) =>
-        ord(v1)(v2) == 0 &&
+        ord(v1)(v2) == 0L &&
         (if cmp(d1)(d2) {
           let t139 = cons_enum(r2, e2_1)
           equal_aux(cons_enum(r1, e1_1), t139)
@@ -1084,12 +1104,12 @@ pub fn[TA, TB, TC, TD] equal(
 
 ///|
 /// `cardinal`
-pub fn[TA, TB] cardinal(x141 : T[TA, TB]) -> Int raise {
+pub fn[TA, TB] cardinal(x141 : T[TA, TB]) -> Int64 raise {
   match x141 {
-    T::Empty => 0
+    T::Empty => 0L
     T::Node(l, _, _, r, _) => {
       let t142 = cardinal(r)
-      cardinal(l) + 1 + t142
+      @lib.add63(@lib.add63(cardinal(l), 1L), t142)
     }
   }
 }

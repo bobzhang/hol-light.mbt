@@ -15,9 +15,9 @@ pub fn delete_user_color_printer(String) -> Unit raise
 
 pub fn delete_user_printer(String) -> Unit raise
 
-pub fn get_infix_status(String) -> (Int, String) raise
+pub fn get_infix_status(String) -> (Int64, String) raise
 
-pub fn infixes() -> @list.List[(String, (Int, String))]
+pub fn infixes() -> @list.List[(String, (Int64, String))]
 
 pub fn install_user_color_printer(String, (@pp.Formatter, @kernel.Term) -> Unit raise) -> Unit
 
@@ -45,7 +45,7 @@ pub fn name_of(@kernel.Term) -> String
 
 pub fn parse_as_binder(String) -> Unit
 
-pub fn parse_as_infix(String, (Int, String)) -> Unit
+pub fn parse_as_infix(String, (Int64, String)) -> Unit
 
 pub fn parse_as_prefix(String) -> Unit
 
@@ -103,7 +103,7 @@ pub fn[T] print_to_string((@pp.Formatter) -> ((T) -> Unit raise) raise) -> ((T) 
 
 pub fn print_type(@kernel.HolType) -> Unit raise
 
-pub let print_types_of_subterms : @ref.Ref[Int]
+pub let print_types_of_subterms : @ref.Ref[Int64]
 
 pub let print_unambiguous_comprehensions : @ref.Ref[Bool]
 

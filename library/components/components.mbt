@@ -496,7 +496,7 @@ fn step_21() -> Unit raise {
 ///|
 /// Library/components.ml:118
 fn step_22() -> Unit raise {
-  @printer.parse_as_infix(":>", (28, "right"))
+  @printer.parse_as_infix(":>", (28L, "right"))
 }
 
 ///|

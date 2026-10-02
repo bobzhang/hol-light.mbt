@@ -8,7 +8,7 @@ import {
 }
 
 // Values
-pub fn[TA, TB] add((TA) -> ((TA) -> Int raise) raise, TA, TB, T[TA, TB]) -> T[TA, TB] raise
+pub fn[TA, TB] add((TA) -> ((TA) -> Int64 raise) raise, TA, TB, T[TA, TB]) -> T[TA, TB] raise
 
 pub fn[TA, TB] add_max_binding(TA, TB, T[TA, TB]) -> T[TA, TB] raise
 
@@ -20,13 +20,13 @@ pub fn[TA, TB] bindings(T[TA, TB]) -> @list.List[(TA, TB)] raise
 
 pub fn[TA, TB] bindings_aux(@list.List[(TA, TB)], T[TA, TB]) -> @list.List[(TA, TB)] raise
 
-pub fn[TA, TB] cardinal(T[TA, TB]) -> Int raise
+pub fn[TA, TB] cardinal(T[TA, TB]) -> Int64 raise
 
 pub fn[TA, TB] choose(T[TA, TB]) -> (TA, TB) raise
 
 pub fn[TA, TB] choose_opt(T[TA, TB]) -> (TA, TB)? raise
 
-pub fn[TA, TB, TC, TD] compare((TB) -> ((TA) -> Int raise) raise, (TD) -> ((TC) -> Int raise) raise, T[TB, TD], T[TA, TC]) -> Int raise
+pub fn[TA, TB, TC, TD] compare((TB) -> ((TA) -> Int64 raise) raise, (TD) -> ((TC) -> Int64 raise) raise, T[TB, TD], T[TA, TC]) -> Int64 raise
 
 pub fn[TA, TB] concat(T[TA, TB], T[TA, TB]) -> T[TA, TB] raise
 
@@ -38,7 +38,7 @@ pub fn[TA, TB] create(T[TA, TB], TA, TB, T[TA, TB]) -> T[TA, TB] raise
 
 pub fn[TA, TB] empty() -> T[TA, TB]
 
-pub fn[TA, TB, TC, TD] equal((TB) -> ((TA) -> Int raise) raise, (TD) -> ((TC) -> Bool raise) raise, T[TB, TD], T[TA, TC]) -> Bool raise
+pub fn[TA, TB, TC, TD] equal((TB) -> ((TA) -> Int64 raise) raise, (TD) -> ((TC) -> Bool raise) raise, T[TB, TD], T[TA, TC]) -> Bool raise
 
 pub fn[TA, TB] exists((TB) -> ((TA) -> Bool raise) raise, T[TB, TA]) -> Bool raise
 
@@ -46,7 +46,7 @@ pub fn[TA, TB] filter((TA) -> ((TB) -> Bool raise) raise, T[TA, TB]) -> T[TA, TB
 
 pub fn[TA, TB, TC] filter_map((TA) -> ((TC) -> TB? raise) raise, T[TA, TC]) -> T[TA, TB] raise
 
-pub fn[TA, TB, TC] find((TC) -> ((TB) -> Int raise) raise, TC, T[TB, TA]) -> TA raise
+pub fn[TA, TB, TC] find((TC) -> ((TB) -> Int64 raise) raise, TC, T[TB, TA]) -> TA raise
 
 pub fn[TA, TB] find_first((TA) -> Bool raise, T[TA, TB]) -> (TA, TB) raise
 
@@ -64,13 +64,13 @@ pub fn[TA, TB] find_last_opt((TA) -> Bool raise, T[TA, TB]) -> (TA, TB)? raise
 
 pub fn[TA, TB] find_last_opt_aux(TA, TB, (TA) -> Bool raise, T[TA, TB]) -> (TA, TB)? raise
 
-pub fn[TA, TB, TC] find_opt((TC) -> ((TB) -> Int raise) raise, TC, T[TB, TA]) -> TA? raise
+pub fn[TA, TB, TC] find_opt((TC) -> ((TB) -> Int64 raise) raise, TC, T[TB, TA]) -> TA? raise
 
 pub fn[TA, TB, TC] fold((TC) -> ((TB) -> ((TA) -> TA raise) raise) raise, T[TC, TB], TA) -> TA raise
 
 pub fn[TA, TB] for_all((TB) -> ((TA) -> Bool raise) raise, T[TB, TA]) -> Bool raise
 
-pub fn[TA, TB] height(T[TA, TB]) -> Int raise
+pub fn[TA, TB] height(T[TA, TB]) -> Int64 raise
 
 pub fn[TA, TB] is_empty(T[TA, TB]) -> Bool raise
 
@@ -86,9 +86,9 @@ pub fn[TA, TB] max_binding(T[TA, TB]) -> (TA, TB) raise
 
 pub fn[TA, TB] max_binding_opt(T[TA, TB]) -> (TA, TB)? raise
 
-pub fn[TA, TB, TC] mem((TB) -> ((TA) -> Int raise) raise, TB, T[TA, TC]) -> Bool raise
+pub fn[TA, TB, TC] mem((TB) -> ((TA) -> Int64 raise) raise, TB, T[TA, TC]) -> Bool raise
 
-pub fn[TA, TB, TC, TD] merge((TA) -> ((TA) -> Int raise) raise, (TA) -> ((TD?) -> ((TC?) -> TB? raise) raise) raise, T[TA, TD], T[TA, TC]) -> T[TA, TB] raise
+pub fn[TA, TB, TC, TD] merge((TA) -> ((TA) -> Int64 raise) raise, (TA) -> ((TD?) -> ((TC?) -> TB? raise) raise) raise, T[TA, TD], T[TA, TC]) -> T[TA, TB] raise
 
 pub fn[TA, TB] merge_trees(T[TA, TB], T[TA, TB]) -> T[TA, TB] raise
 
@@ -98,17 +98,17 @@ pub fn[TA, TB] min_binding_opt(T[TA, TB]) -> (TA, TB)? raise
 
 pub fn[TA, TB] partition((TA) -> ((TB) -> Bool raise) raise, T[TA, TB]) -> (T[TA, TB], T[TA, TB]) raise
 
-pub fn[TA, TB, TC] remove((TC) -> ((TA) -> Int raise) raise, TC, T[TA, TB]) -> T[TA, TB] raise
+pub fn[TA, TB, TC] remove((TC) -> ((TA) -> Int64 raise) raise, TC, T[TA, TB]) -> T[TA, TB] raise
 
 pub fn[TA, TB] remove_min_binding(T[TA, TB]) -> T[TA, TB] raise
 
 pub fn[TA, TB] singleton(TA, TB) -> T[TA, TB] raise
 
-pub fn[TA, TB, TC] split((TC) -> ((TA) -> Int raise) raise, TC, T[TA, TB]) -> (T[TA, TB], TB?, T[TA, TB]) raise
+pub fn[TA, TB, TC] split((TC) -> ((TA) -> Int64 raise) raise, TC, T[TA, TB]) -> (T[TA, TB], TB?, T[TA, TB]) raise
 
-pub fn[TA, TB] union((TA) -> ((TA) -> Int raise) raise, (TA) -> ((TB) -> ((TB) -> TB? raise) raise) raise, T[TA, TB], T[TA, TB]) -> T[TA, TB] raise
+pub fn[TA, TB] union((TA) -> ((TA) -> Int64 raise) raise, (TA) -> ((TB) -> ((TB) -> TB? raise) raise) raise, T[TA, TB], T[TA, TB]) -> T[TA, TB] raise
 
-pub fn[TA, TB] update((TA) -> ((TA) -> Int raise) raise, TA, (TB?) -> TB? raise, T[TA, TB]) -> T[TA, TB] raise
+pub fn[TA, TB] update((TA) -> ((TA) -> Int64 raise) raise, TA, (TB?) -> TB? raise, T[TA, TB]) -> T[TA, TB] raise
 
 // Errors
 
@@ -122,7 +122,7 @@ pub impl[TA : @lib.OHash, TB : @lib.OHash] @lib.OHash for Enumeration[TA, TB]
 
 pub(all) enum T[TA, TB] {
   Empty
-  Node(T[TA, TB], TA, TB, T[TA, TB], Int)
+  Node(T[TA, TB], TA, TB, T[TA, TB], Int64)
 } derive(Eq, @debug.Debug)
 pub impl[TA : @lib.OCompare, TB : @lib.OCompare] @lib.OCompare for T[TA, TB]
 pub impl[TA : @lib.OHash, TB : @lib.OHash] @lib.OHash for T[TA, TB]

@@ -336,7 +336,7 @@ fn step_4() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -344,7 +344,7 @@ fn step_4() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -1979,7 +1979,7 @@ fn step_11() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -1987,7 +1987,7 @@ fn step_11() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2000,7 +2000,7 @@ fn step_11() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -2008,7 +2008,7 @@ fn step_11() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -2021,7 +2021,7 @@ fn step_11() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -2029,7 +2029,7 @@ fn step_11() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -2383,8 +2383,11 @@ fn step_14() -> Unit raise {
   fn get_heads(
     x201 : @list.List[@kernel.Term],
     x202 : @kernel.Term,
-    x203 : (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]),
-  ) -> (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]) raise {
+    x203 : (
+      @list.List[(@kernel.Term, Int64)],
+      @list.List[(@kernel.Term, Int64)],
+    ),
+  ) -> (@list.List[(@kernel.Term, Int64)], @list.List[(@kernel.Term, Int64)]) raise {
     let lconsts = x201
     let tm = x202
     let (cheads, vheads) as sofar = x203
@@ -2407,11 +2410,11 @@ fn step_14() -> Unit raise {
             } catch {
               Failure(_) => {
                 let (hop, args) = @basics.strip_comb(tm)
-                let len = @lib.length(args)
+                let len = Int::to_int64(@lib.length(args))
                 let newheads = if @kernel.is_const(hop) ||
                   @lib.mem(hop, lconsts) {
                   (@lib.insert((hop, len), cheads), vheads)
-                } else if len > 0 {
+                } else if len > 0L {
                   (cheads, @lib.insert((hop, len), vheads))
                 } else {
                   sofar
@@ -2420,8 +2423,8 @@ fn step_14() -> Unit raise {
                   (
                     x204 : @kernel.Term,
                     x205 : (
-                      @list.List[(@kernel.Term, Int)],
-                      @list.List[(@kernel.Term, Int)],
+                      @list.List[(@kernel.Term, Int64)],
+                      @list.List[(@kernel.Term, Int64)],
                     ),
                   ) => get_heads(lconsts, x204, x205),
                   args,
@@ -2436,17 +2439,20 @@ fn step_14() -> Unit raise {
     }
   }
   let get_thm_heads : (@kernel.Thm) -> ((
-    (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]),
-  ) -> (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]) raise) raise = fn(
+    (@list.List[(@kernel.Term, Int64)], @list.List[(@kernel.Term, Int64)]),
+  ) -> (@list.List[(@kernel.Term, Int64)], @list.List[(@kernel.Term, Int64)]) raise) raise = fn(
     x206 : @kernel.Thm,
-  ) -> (((@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)])) -> (
-    @list.List[(@kernel.Term, Int)],
-    @list.List[(@kernel.Term, Int)],
+  ) -> (((@list.List[(@kernel.Term, Int64)], @list.List[(@kernel.Term, Int64)])) -> (
+    @list.List[(@kernel.Term, Int64)],
+    @list.List[(@kernel.Term, Int64)],
   ) raise) raise {
     let th = x206
     fn(
-      x207 : (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]),
-    ) -> (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]) raise {
+      x207 : (
+        @list.List[(@kernel.Term, Int64)],
+        @list.List[(@kernel.Term, Int64)],
+      ),
+    ) -> (@list.List[(@kernel.Term, Int64)], @list.List[(@kernel.Term, Int64)]) raise {
       let sofar_1 = x207
       let t208 = @kernel.concl(th)
       get_heads(@kernel.freesl(@kernel.hyp(th)), t208, sofar_1)
@@ -2458,13 +2464,13 @@ fn step_14() -> Unit raise {
     t209,
   )
   let app_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(th_1)
-  fn app_n_conv(x210 : Int, x211 : @kernel.Term) -> @kernel.Thm raise {
+  fn app_n_conv(x210 : Int64, x211 : @kernel.Term) -> @kernel.Thm raise {
     let n = x210
     let tm_1 = x211
-    if n == 1 {
+    if n == 1L {
       app_conv(tm_1)
     } else {
-      let t212 = n - 1
+      let t212 = @lib.sub63(n, 1L)
       @equal.thenc(
         @equal.rator_conv((x213 : @kernel.Term) => app_n_conv(t212, x213)),
         app_conv,
@@ -2472,7 +2478,7 @@ fn step_14() -> Unit raise {
     }
   }
   fn fol_conv(
-    x214 : @list.List[(@kernel.Term, Int)],
+    x214 : @list.List[(@kernel.Term, Int64)],
     x215 : @kernel.Term,
   ) -> @kernel.Thm raise {
     let hddata = x214
@@ -2508,12 +2514,12 @@ fn step_14() -> Unit raise {
       let tm_p_1 = @kernel.rand(@kernel.concl(th_2))
       let n_1 = try {
         let t227 = @lib.assoc(op, hddata)
-        @lib.length(args_1) - t227
+        @lib.sub63(Int::to_int64(@lib.length(args_1)), t227)
       } catch {
-        Failure(_) => 0
+        Failure(_) => 0L
         e => raise e
       }
-      if n_1 == 0 {
+      if n_1 == 0L {
         th_2
       } else {
         @kernel.trans(th_2, app_n_conv(n_1, tm_p_1))
@@ -2521,24 +2527,27 @@ fn step_14() -> Unit raise {
     }
   }
   let gen_fol_conv : (
-    (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]),
+    (@list.List[(@kernel.Term, Int64)], @list.List[(@kernel.Term, Int64)]),
   ) -> ((@kernel.Term) -> @kernel.Thm raise) raise = fn(
-    x228 : (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]),
+    x228 : (
+      @list.List[(@kernel.Term, Int64)],
+      @list.List[(@kernel.Term, Int64)],
+    ),
   ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let (cheads_1, vheads_1) = x228
     let hddata_1 = if vheads_1 == @list.empty() {
       let hops = @lib.setify(
         @lib.map(
-          fn(x230 : (@kernel.Term, Int)) -> @kernel.Term raise { x230.0 },
+          fn(x230 : (@kernel.Term, Int64)) -> @kernel.Term raise { x230.0 },
           cheads_1,
         ),
       )
-      let getmin : (@kernel.Term) -> (@kernel.Term, Int) raise = fn(
+      let getmin : (@kernel.Term) -> (@kernel.Term, Int64) raise = fn(
         x231 : @kernel.Term,
-      ) -> (@kernel.Term, Int) raise {
+      ) -> (@kernel.Term, Int64) raise {
         let h = x231
         let ns = @lib.mapfilter(
-          fn(x232 : (@kernel.Term, Int)) -> Int raise {
+          fn(x232 : (@kernel.Term, Int64)) -> Int64 raise {
             let (k, n_2) = x232
             if k == h {
               n_2
@@ -2548,15 +2557,15 @@ fn step_14() -> Unit raise {
           },
           cheads_1,
         )
-        if @lib.length(ns) < 2 {
+        if Int::to_int64(@lib.length(ns)) < 2L {
           @lib.failure()
         } else {
           (
             h,
             @lib.end_itlist(
-              fn(x235 : Int, x236 : Int) -> Int raise {
-                let s237 = (fn(x233 : Int) -> ((Int) -> Int raise) raise {
-                  fn(x234 : Int) -> Int raise {
+              fn(x235 : Int64, x236 : Int64) -> Int64 raise {
+                let s237 = (fn(x233 : Int64) -> ((Int64) -> Int64 raise) raise {
+                  fn(x234 : Int64) -> Int64 raise {
                     if x233 <= x234 {
                       x233
                     } else {
@@ -2574,17 +2583,17 @@ fn step_14() -> Unit raise {
       @lib.mapfilter(getmin, hops)
     } else {
       @lib.map(
-        fn(x238 : @kernel.Term) -> (@kernel.Term, Int) raise {
+        fn(x238 : @kernel.Term) -> (@kernel.Term, Int64) raise {
           let t = x238
           if @kernel.is_const(t) && @kernel.dest_const(t).0 == "=" {
-            (t, 2)
+            (t, 2L)
           } else {
-            (t, 0)
+            (t, 0L)
           }
         },
         @lib.setify(
           @lib.map(
-            fn(x239 : (@kernel.Term, Int)) -> @kernel.Term raise { x239.0 },
+            fn(x239 : (@kernel.Term, Int64)) -> @kernel.Term raise { x239.0 },
             vheads_1.concat(cheads_1),
           ),
         ),
@@ -2598,7 +2607,7 @@ fn step_14() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2606,7 +2615,7 @@ fn step_14() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2618,10 +2627,13 @@ fn step_14() -> Unit raise {
       fn(
         x243 : (String, @kernel.Thm),
         x244 : (
-          @list.List[(@kernel.Term, Int)],
-          @list.List[(@kernel.Term, Int)],
+          @list.List[(@kernel.Term, Int64)],
+          @list.List[(@kernel.Term, Int64)],
         ),
-      ) -> (@list.List[(@kernel.Term, Int)], @list.List[(@kernel.Term, Int)]) raise {
+      ) -> (
+        @list.List[(@kernel.Term, Int64)],
+        @list.List[(@kernel.Term, Int64)],
+      ) raise {
         get_thm_heads(
           (fn(x242 : (String, @kernel.Thm)) -> @kernel.Thm raise { x242.1 })(
             x243,

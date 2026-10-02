@@ -13,7 +13,7 @@ pub fn bit0_def() -> @kernel.Thm
 
 pub fn bit1_def() -> @kernel.Thm
 
-pub fn dest_small_numeral(@kernel.Term) -> Int raise
+pub fn dest_small_numeral(@kernel.Term) -> Int64 raise
 
 pub fn ind_suc_0() -> @kernel.Thm
 
@@ -23,7 +23,7 @@ pub fn ind_suc_inj() -> @kernel.Thm
 
 pub fn ind_suc_spec() -> @kernel.Thm
 
-pub fn induct_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+pub fn induct_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
 
 pub fn infinity_ax() -> @kernel.Thm
 
@@ -31,7 +31,7 @@ pub fn is_numeral(@kernel.Term) -> Bool raise
 
 pub fn mk_numeral(@num.Num) -> @kernel.Term raise
 
-pub fn mk_small_numeral(Int) -> @kernel.Term raise
+pub fn mk_small_numeral(Int64) -> @kernel.Term raise
 
 pub fn new_specification(@list.List[String]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
 

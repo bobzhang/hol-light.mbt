@@ -170,14 +170,14 @@ pub fn prefixes() -> List[String] {
 }
 
 ///|
-let infix_list : Ref[List[(String, (Int, String))]] = Ref::{
+let infix_list : Ref[List[(String, (Int64, String))]] = Ref::{
   val: @list.empty(),
 }
 
 ///|
 pub fn unparse_as_infix(n : String) -> Unit {
   infix_list.val = @lib.filter(
-    (e : (String, (Int, String))) => e.0 != n,
+    (e : (String, (Int64, String))) => e.0 != n,
     infix_list.val,
   )
 }
@@ -185,9 +185,9 @@ pub fn unparse_as_infix(n : String) -> Unit {
 ///|
 /// Declare `n` as an infix with precedence `d.0` and associativity
 /// `d.1` (`"left"` or `"right"`).
-pub fn parse_as_infix(n : String, d : (Int, String)) -> Unit {
+pub fn parse_as_infix(n : String, d : (Int64, String)) -> Unit {
   // Sort by precedence, then right-associative first, then by name.
-  let cmp = (e1 : (String, (Int, String)), e2 : (String, (Int, String))) => {
+  let cmp = (e1 : (String, (Int64, String)), e2 : (String, (Int64, String))) => {
     let (s, (x, a)) = e1
     let (t, (y, b)) = e2
     x < y ||
@@ -196,7 +196,7 @@ pub fn parse_as_infix(n : String, d : (Int, String)) -> Unit {
   }
   infix_list.val = @lib.sort(
     cmp,
-    @lib.filter((e : (String, (Int, String))) => e.0 != n, infix_list.val).prepend(
+    @lib.filter((e : (String, (Int64, String))) => e.0 != n, infix_list.val).prepend(
       (n, d),
     ),
   )
@@ -204,12 +204,12 @@ pub fn parse_as_infix(n : String, d : (Int, String)) -> Unit {
 
 ///|
 /// Precedence and associativity of an infix (fails with "find").
-pub fn get_infix_status(n : String) -> (Int, String) raise {
+pub fn get_infix_status(n : String) -> (Int64, String) raise {
   @lib.assoc(n, infix_list.val)
 }
 
 ///|
-pub fn infixes() -> List[(String, (Int, String))] {
+pub fn infixes() -> List[(String, (Int64, String))] {
   infix_list.val
 }
 
@@ -260,7 +260,7 @@ pub let print_all_thm : Ref[Bool] = Ref::{ val: true, }
 ///|
 /// 0: never print types of subterms; 1 (default): only types containing
 /// invented type variables; 2: types of all constants and variables.
-pub let print_types_of_subterms : Ref[Int] = Ref::{ val: 1, }
+pub let print_types_of_subterms : Ref[Int64] = Ref::{ val: 1, }
 
 ///|
 /// The name of a constant or variable (`""` otherwise).

@@ -17,28 +17,28 @@ pub fn[TA, TB, TC] tsnd(x4 : TB, x5 : TA, x6 : TC) -> TA raise {
 
 ///|
 /// `var_of_num`
-pub fn[TA] var_of_num(x7 : FixedArray[TA], x8 : Int) -> TA raise {
+pub fn[TA] var_of_num(x7 : FixedArray[TA], x8 : Int64) -> TA raise {
   let varray = x7
   let n = x8
-  @lib.array_get(varray, n)
+  @lib.array_get(varray, @lib.int63_to_int(n))
 }
 
 ///|
 /// `num_of_var`
 pub fn[TA : Eq + @lib.OCompare + @lib.OHash] num_of_var(
-  x9 : (FixedArray[TA], Ref[Int], @lib.OHashtbl[TA, Int]),
+  x9 : (FixedArray[TA], Ref[Int64], @lib.OHashtbl[TA, Int64]),
   x10 : TA,
-) -> Int raise {
+) -> Int64 raise {
   let (varray, vnext, vhash) = x9
   let v = x10
   @lib.hashtbl_find(vhash, v) catch {
     not_found => {
       let n = vnext.val
       {
-        vnext.val = n + 1
+        vnext.val = @lib.add63(n, 1L)
         ()
       }
-      @lib.array_set(varray, n, v)
+      @lib.array_set(varray, @lib.int63_to_int(n), v)
       @lib.hashtbl_add(vhash, v, n)
       n
     }
@@ -48,42 +48,42 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] num_of_var(
 ///|
 /// `mk_vtable`
 pub fn mk_vtable(
-  x11 : Int,
-) -> (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]) raise {
+  x11 : Int64,
+) -> (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]) raise {
   let n = x11
-  let t13 = @lib.hashtbl_create(n + 1)
-  let t14 = Ref::{ val: 1, }
+  let t13 = @lib.hashtbl_create(@lib.int63_to_int(@lib.add63(n, 1L)))
+  let t14 = Ref::{ val: 1L, }
   let t12 = @parser.parse_term("T")
-  (@lib.array_make(n + 1, t12), t14, t13)
+  (@lib.array_make(@lib.int63_to_int(@lib.add63(n, 1L)), t12), t14, t13)
 }
 
 ///|
 /// BDD_1
 fn step_1() -> Unit raise {
-  bdd_1_c.set(2147483647)
+  bdd_1_c.set(@lib.max_int63)
 }
 
 ///|
-let bdd_1_c : @lib.Cell[Int] = @lib.Cell::new("BDD_1")
+let bdd_1_c : @lib.Cell[Int64] = @lib.Cell::new("BDD_1")
 
 ///|
 /// `BDD_1`
-pub fn bdd_1() -> Int {
+pub fn bdd_1() -> Int64 {
   bdd_1_c.get()
 }
 
 ///|
 /// BDD_0
 fn step_2() -> Unit raise {
-  bdd_0_c.set(0 - bdd_1())
+  bdd_0_c.set(@lib.neg63(bdd_1()))
 }
 
 ///|
-let bdd_0_c : @lib.Cell[Int] = @lib.Cell::new("BDD_0")
+let bdd_0_c : @lib.Cell[Int64] = @lib.Cell::new("BDD_0")
 
 ///|
 /// `BDD_0`
-pub fn bdd_0() -> Int {
+pub fn bdd_0() -> Int64 {
   bdd_0_c.get()
 }
 
@@ -92,7 +92,7 @@ pub fn bdd_0() -> Int {
 fn step_3() -> Unit raise {
   let true_tm = @parser.parse_term("T")
   btm_of_int_c.set(x17 => {
-    fn(x18 : Int) -> @kernel.Term raise {
+    fn(x18 : Int64) -> @kernel.Term raise {
       ((x15, x16) => btm_of_int_1_l(true_tm, x15, x16))(x17, x18)
     }
   })
@@ -100,30 +100,31 @@ fn step_3() -> Unit raise {
 
 ///|
 let btm_of_int_c : @lib.Cell[
-  (Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]]) -> ((Int) -> @kernel.Term raise) raise,
+  (Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]]) -> ((Int64) -> @kernel.Term raise) raise,
 ] = @lib.Cell::new("btm_of_int")
 
 ///|
 /// `btm_of_int`
 pub fn btm_of_int(
-  x : Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-) -> ((Int) -> @kernel.Term raise) raise {
+  x : Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+) -> ((Int64) -> @kernel.Term raise) raise {
   btm_of_int_c.get()(x)
 }
 
 ///|
 fn[TB : Eq + @lib.OCompare + @lib.OHash] btm_of_int_1_l(
   true_tm : @kernel.Term,
-  x15 : Ref[@lib.Func[Int, (TB, @kernel.Thm)]],
-  x16 : Int,
+  x15 : Ref[@lib.Func[Int64, (TB, @kernel.Thm)]],
+  x16 : Int64,
 ) -> @kernel.Term raise {
-  let btm_of_int_1 = (x15 : Ref[@lib.Func[Int, (TB, @kernel.Thm)]], x16 : Int) => {
-    btm_of_int_1_l(true_tm, x15, x16)
-  }
+  let btm_of_int_1 = (
+    x15 : Ref[@lib.Func[Int64, (TB, @kernel.Thm)]],
+    x16 : Int64,
+  ) => btm_of_int_1_l(true_tm, x15, x16)
   let uarray = x15
   let n = x16
-  if n < 0 {
-    @bool.mk_neg(btm_of_int_1(uarray, 0 - n))
+  if n < 0L {
+    @bool.mk_neg(btm_of_int_1(uarray, @lib.neg63(n)))
   } else if n == bdd_1() {
     true_tm
   } else {
@@ -136,12 +137,12 @@ fn[TB : Eq + @lib.OCompare + @lib.OHash] btm_of_int_1_l(
 pub fn lookup_triple(
   x19 : FixedArray[@kernel.Term],
   x20 : (
-    Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-    Ref[Int],
-    Ref[@lib.Func[(Int, Int, Int), Int]],
+    Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+    Ref[Int64],
+    Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
   ),
-  x21 : (Int, Int, Int),
-) -> Int raise {
+  x21 : (Int64, Int64, Int64),
+) -> Int64 raise {
   let varray = x19
   let (uarray, unext, uhash) = x20
   let (v, y, n) as tr = x21
@@ -149,12 +150,12 @@ pub fn lookup_triple(
     not_found => {
       let ytm = btm_of_int(uarray)(y)
       let ntm = btm_of_int(uarray)(n)
-      let vtm = @lib.array_get(varray, v)
+      let vtm = @lib.array_get(varray, @lib.int63_to_int(v))
       let m = unext.val
       let ltm = @class.mk_cond(vtm, ytm, ntm)
       let dth = @kernel.refl(ltm)
       {
-        unext.val = m + 1
+        unext.val = @lib.add63(m, 1L)
         ()
       }
       {
@@ -176,16 +177,16 @@ pub fn[
   TA : Eq + @lib.OCompare + @lib.OHash,
   TB : Eq + @lib.OCompare + @lib.OHash,
 ] bdd_expand(
-  x22 : Ref[@lib.Func[Int, ((TA, Int, Int), TB)]],
-  x23 : Int,
-) -> (TA, Int, Int) raise {
+  x22 : Ref[@lib.Func[Int64, ((TA, Int64, Int64), TB)]],
+  x23 : Int64,
+) -> (TA, Int64, Int64) raise {
   let uarray = x22
   let b = x23
-  if b < 0 {
-    let t24 = 0 - b
+  if b < 0L {
+    let t24 = @lib.neg63(b)
     let (v, l, r) = @lib.apply(uarray.val, t24).0
-    let t25 = 0 - r
-    (v, 0 - l, t25)
+    let t25 = @lib.neg63(r)
+    (v, @lib.neg63(l), t25)
   } else {
     @lib.apply(uarray.val, b).0
   }
@@ -211,7 +212,7 @@ fn step_4() -> Unit raise {
   let b1_tm = @parser.parse_term("b1:bool")
   let b2_tm = @parser.parse_term("b2:bool")
   bdd_expand_v1_c.set(x30 => {
-    fn(x31 : Int) -> @kernel.Thm raise {
+    fn(x31 : Int64) -> @kernel.Thm raise {
       ((x26, x27) => {
         bdd_expand_1_l(
           v_tm, b1_tm, b2_tm, pth4, pth3, pth2, pth1, neg_tm, x26, x27,
@@ -223,14 +224,14 @@ fn step_4() -> Unit raise {
 
 ///|
 let bdd_expand_v1_c : @lib.Cell[
-  (Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]]) -> ((Int) -> @kernel.Thm raise) raise,
+  (Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]]) -> ((Int64) -> @kernel.Thm raise) raise,
 ] = @lib.Cell::new("BDD_EXPAND")
 
 ///|
 /// `BDD_EXPAND`
 pub fn bdd_expand_v1(
-  x : Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-) -> ((Int) -> @kernel.Thm raise) raise {
+  x : Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+) -> ((Int64) -> @kernel.Thm raise) raise {
   bdd_expand_v1_c.get()(x)
 }
 
@@ -244,13 +245,13 @@ fn[TB : Eq + @lib.OCompare + @lib.OHash] bdd_expand_1_l(
   pth2 : @kernel.Thm,
   pth1 : @kernel.Thm,
   neg_tm : @kernel.Term,
-  x26 : Ref[@lib.Func[Int, (TB, @kernel.Thm)]],
-  x27 : Int,
+  x26 : Ref[@lib.Func[Int64, (TB, @kernel.Thm)]],
+  x27 : Int64,
 ) -> @kernel.Thm raise {
   let uarray = x26
   let b = x27
-  if b < 0 {
-    let t28 = 0 - b
+  if b < 0L {
+    let t28 = @lib.neg63(b)
     let def = @lib.apply(uarray.val, t28).1
     let (v, (y, n)) = @class.dest_cond(@kernel.rand(@kernel.concl(def)))
     let pth = if @basics.is_neg(y) {
@@ -301,12 +302,12 @@ fn step_5() -> Unit raise {
   fn bdd_lookup_1(
     x32 : FixedArray[@kernel.Term],
     x33 : (
-      Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int, Int), Int]],
+      Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
     ),
-    x34 : (Int, Int, Int),
-  ) -> (@kernel.Thm, Int, Int) raise {
+    x34 : (Int64, Int64, Int64),
+  ) -> (@kernel.Thm, Int64, Int64) raise {
     let varray = x32
     let utable = x33
     let (v, l, r) = x34
@@ -318,11 +319,11 @@ fn step_5() -> Unit raise {
           pth1,
         ),
         l,
-        0,
+        0L,
       )
-    } else if l < 0 {
-      let t36 = 0 - r
-      let i = lookup_triple(varray, utable, (v, 0 - l, t36))
+    } else if l < 0L {
+      let t36 = @lib.neg63(r)
+      let i = lookup_triple(varray, utable, (v, @lib.neg63(l), t36))
       let dth = @lib.apply(tfst(utable.0, utable.1, utable.2).val, i).1
       let t38 = @kernel.dest_eq(@kernel.concl(dth))
       let t39 = @class.dest_cond(t38.1)
@@ -330,8 +331,8 @@ fn step_5() -> Unit raise {
         (fn(x37 : @kernel.Term) -> @kernel.Term raise { x37 })(t38.0),
         t39,
       )
-      if r < 0 {
-        let t40 = 0 - i
+      if r < 0L {
+        let t40 = @lib.neg63(i)
         (
           @bool.mp(
             @kernel.inst_rule(
@@ -344,7 +345,7 @@ fn step_5() -> Unit raise {
           i,
         )
       } else {
-        let t41 = 0 - i
+        let t41 = @lib.neg63(i)
         (
           @bool.mp(
             @kernel.inst_rule(
@@ -372,19 +373,19 @@ fn step_5() -> Unit raise {
     x42 : FixedArray[@kernel.Term],
   ) -> ((
     (
-      Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int, Int), Int]],
+      Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
     ),
-  ) -> (((Int, Int, Int)) -> (@kernel.Thm, Int, Int) raise) raise) raise {
+  ) -> (((Int64, Int64, Int64)) -> (@kernel.Thm, Int64, Int64) raise) raise) raise {
     fn(
       x43 : (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
-    ) -> (((Int, Int, Int)) -> (@kernel.Thm, Int, Int) raise) raise {
-      fn(x44 : (Int, Int, Int)) -> (@kernel.Thm, Int, Int) raise {
+    ) -> (((Int64, Int64, Int64)) -> (@kernel.Thm, Int64, Int64) raise) raise {
+      fn(x44 : (Int64, Int64, Int64)) -> (@kernel.Thm, Int64, Int64) raise {
         bdd_lookup_1(x42, x43, x44)
       }
     }
@@ -395,11 +396,11 @@ fn step_5() -> Unit raise {
 let bdd_lookup_c : @lib.Cell[
   (FixedArray[@kernel.Term]) -> ((
     (
-      Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int, Int), Int]],
+      Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
     ),
-  ) -> (((Int, Int, Int)) -> (@kernel.Thm, Int, Int) raise) raise) raise,
+  ) -> (((Int64, Int64, Int64)) -> (@kernel.Thm, Int64, Int64) raise) raise) raise,
 ] = @lib.Cell::new("BDD_LOOKUP")
 
 ///|
@@ -408,11 +409,11 @@ pub fn bdd_lookup(
   x : FixedArray[@kernel.Term],
 ) -> ((
   (
-    Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-    Ref[Int],
-    Ref[@lib.Func[(Int, Int, Int), Int]],
+    Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+    Ref[Int64],
+    Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
   ),
-) -> (((Int, Int, Int)) -> (@kernel.Thm, Int, Int) raise) raise) raise {
+) -> (((Int64, Int64, Int64)) -> (@kernel.Thm, Int64, Int64) raise) raise) raise {
   bdd_lookup_c.get()(x)
 }
 
@@ -421,14 +422,14 @@ pub fn bdd_lookup(
 pub fn[TA, TB] mk_utable(
   x45 : Unit,
 ) -> (
-  Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-  Ref[Int],
+  Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+  Ref[Int64],
   Ref[@lib.Func[TA, TB]],
 ) raise {
   let _ = x45
   let t46 = Ref::{ val: @lib.undefined(), }
-  let t47 = Ref::{ val: 1, }
-  (Ref::{ val: @lib.single(0, ((0, 0, 0), @bool.truth())), }, t47, t46)
+  let t47 = Ref::{ val: 1L, }
+  (Ref::{ val: @lib.single(0L, ((0L, 0L, 0L), @bool.truth())), }, t47, t46)
 }
 
 ///|
@@ -468,19 +469,22 @@ fn step_6() -> Unit raise {
     x50 : (
       FixedArray[@kernel.Term],
       (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
       (
         Ref[
-          @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+          @lib.Func[
+            Int64,
+            (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+          ],
         ],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int), Int]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64), Int64]],
       ),
     ),
-    x51 : (Int, Int),
+    x51 : (Int64, Int64),
   ) => {
     bdd_and_1_l(
       r1_tm, pth1, l1_tm, pth2, pth3, pth4, b1_tm, b2_tm, b3_tm, l2_tm, l3_tm, r2_tm,
@@ -491,19 +495,22 @@ fn step_6() -> Unit raise {
     x86 : (
       FixedArray[@kernel.Term],
       (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
       (
         Ref[
-          @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+          @lib.Func[
+            Int64,
+            (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+          ],
         ],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int), Int]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64), Int64]],
       ),
     ),
-    x87 : (Int, Int),
+    x87 : (Int64, Int64),
   ) => {
     bdd_ands_l(
       r1_tm, pth1, l1_tm, pth2, pth3, pth4, b1_tm, b2_tm, b3_tm, l2_tm, l3_tm, r2_tm,
@@ -514,20 +521,23 @@ fn step_6() -> Unit raise {
     x93 : (
       FixedArray[@kernel.Term],
       (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
       (
         Ref[
-          @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+          @lib.Func[
+            Int64,
+            (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+          ],
         ],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int), Int]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64), Int64]],
       ),
     ),
-  ) -> (((Int, Int)) -> (Int, Int) raise) raise {
-    fn(x94 : (Int, Int)) -> (Int, Int) raise { bdd_and_1(x93, x94) }
+  ) -> (((Int64, Int64)) -> (Int64, Int64) raise) raise {
+    fn(x94 : (Int64, Int64)) -> (Int64, Int64) raise { bdd_and_1(x93, x94) }
   })
 }
 
@@ -537,19 +547,22 @@ let bdd_and_c : @lib.Cell[
     (
       FixedArray[@kernel.Term],
       (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
       (
         Ref[
-          @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+          @lib.Func[
+            Int64,
+            (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+          ],
         ],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int), Int]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64), Int64]],
       ),
     ),
-  ) -> (((Int, Int)) -> (Int, Int) raise) raise,
+  ) -> (((Int64, Int64)) -> (Int64, Int64) raise) raise,
 ] = @lib.Cell::new("bdd_and")
 
 ///|
@@ -558,19 +571,22 @@ pub fn bdd_and(
   x : (
     FixedArray[@kernel.Term],
     (
-      Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int, Int), Int]],
+      Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
     ),
     (
       Ref[
-        @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+        @lib.Func[
+          Int64,
+          (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+        ],
       ],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int), Int]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64), Int64]],
     ),
   ),
-) -> (((Int, Int)) -> (Int, Int) raise) raise {
+) -> (((Int64, Int64)) -> (Int64, Int64) raise) raise {
   bdd_and_c.get()(x)
 }
 
@@ -619,37 +635,43 @@ fn bdd_and_1_l(
   x50 : (
     FixedArray[@kernel.Term],
     (
-      Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int, Int), Int]],
+      Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
     ),
     (
       Ref[
-        @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+        @lib.Func[
+          Int64,
+          (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+        ],
       ],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int), Int]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64), Int64]],
     ),
   ),
-  x51 : (Int, Int),
-) -> (Int, Int) raise {
+  x51 : (Int64, Int64),
+) -> (Int64, Int64) raise {
   let bdd_ands = (
     x86 : (
       FixedArray[@kernel.Term],
       (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
       (
         Ref[
-          @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+          @lib.Func[
+            Int64,
+            (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+          ],
         ],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int), Int]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64), Int64]],
       ),
     ),
-    x87 : (Int, Int),
+    x87 : (Int64, Int64),
   ) => {
     bdd_ands_l(
       r1_tm, pth1, l1_tm, pth2, pth3, pth4, b1_tm, b2_tm, b3_tm, l2_tm, l3_tm, r2_tm,
@@ -696,7 +718,7 @@ fn bdd_and_1_l(
           @list.empty(),
           @list.empty(),
         )
-      } else if l_1 == 0 - r_1 {
+      } else if l_1 == @lib.neg63(r_1) {
         (
           bdd_0(),
           @kernel.inst_rule(
@@ -764,13 +786,8 @@ fn bdd_and_1_l(
             lis,
             ith,
           )
-          let t65 = @lib.abs_int(r_1)
-          (
-            c,
-            xth,
-            @list.List([@lib.abs_int(l_1), t65, jc]),
-            @list.List([jy, jn]),
-          )
+          let t65 = @lib.abs63(r_1)
+          (c, xth, @list.List([@lib.abs63(l_1), t65, jc]), @list.List([jy, jn]))
         } else if lv > rv {
           let (thy_1, cy_1, jy_1) = bdd_ands(
             (varray, utable, ctable),
@@ -827,7 +844,7 @@ fn bdd_and_1_l(
           (
             c_1,
             xth_1,
-            @list.List([@lib.abs_int(l_1), jc_1]),
+            @list.List([@lib.abs63(l_1), jc_1]),
             @list.List([jy_1, jn_1]),
           )
         } else {
@@ -886,14 +903,14 @@ fn bdd_and_1_l(
           (
             c_2,
             xth_2,
-            @list.List([@lib.abs_int(r_1), jc_2]),
+            @list.List([@lib.abs63(r_1), jc_2]),
             @list.List([jy_2, jn_2]),
           )
         }
       }
       let m = cnext_1.val
       {
-        cnext_1.val = m + 1
+        cnext_1.val = @lib.add63(m, 1L)
         ()
       }
       {
@@ -933,37 +950,43 @@ fn bdd_ands_l(
   x86 : (
     FixedArray[@kernel.Term],
     (
-      Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int, Int), Int]],
+      Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
     ),
     (
       Ref[
-        @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+        @lib.Func[
+          Int64,
+          (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+        ],
       ],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int), Int]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64), Int64]],
     ),
   ),
-  x87 : (Int, Int),
-) -> (@kernel.Thm, Int, Int) raise {
+  x87 : (Int64, Int64),
+) -> (@kernel.Thm, Int64, Int64) raise {
   let bdd_and_1 = (
     x50 : (
       FixedArray[@kernel.Term],
       (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
       (
         Ref[
-          @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+          @lib.Func[
+            Int64,
+            (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+          ],
         ],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int), Int]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64), Int64]],
       ),
     ),
-    x51 : (Int, Int),
+    x51 : (Int64, Int64),
   ) => {
     bdd_and_1_l(
       r1_tm, pth1, l1_tm, pth2, pth3, pth4, b1_tm, b2_tm, b3_tm, l2_tm, l3_tm, r2_tm,
@@ -993,10 +1016,10 @@ fn bdd_ands_l(
 /// `mk_ctable`
 pub fn[TA, TB, TC, TD] mk_ctable(
   x95 : Unit,
-) -> (Ref[@lib.Func[TA, TB]], Ref[Int], Ref[@lib.Func[TC, TD]]) raise {
+) -> (Ref[@lib.Func[TA, TB]], Ref[Int64], Ref[@lib.Func[TC, TD]]) raise {
   let _ = x95
   let t96 = Ref::{ val: @lib.undefined(), }
-  let t97 = Ref::{ val: 0, }
+  let t97 = Ref::{ val: 0L, }
   (Ref::{ val: @lib.undefined(), }, t97, t96)
 }
 
@@ -1007,11 +1030,11 @@ fn step_7() -> Unit raise {
 }
 
 ///|
-let bdd_true_c : @lib.Cell[(Int, @kernel.Thm)] = @lib.Cell::new("BDD_TRUE")
+let bdd_true_c : @lib.Cell[(Int64, @kernel.Thm)] = @lib.Cell::new("BDD_TRUE")
 
 ///|
 /// `BDD_TRUE`
-pub fn bdd_true() -> (Int, @kernel.Thm) {
+pub fn bdd_true() -> (Int64, @kernel.Thm) {
   bdd_true_c.get()
 }
 
@@ -1022,11 +1045,11 @@ fn step_8() -> Unit raise {
 }
 
 ///|
-let bdd_false_c : @lib.Cell[(Int, @kernel.Thm)] = @lib.Cell::new("BDD_FALSE")
+let bdd_false_c : @lib.Cell[(Int64, @kernel.Thm)] = @lib.Cell::new("BDD_FALSE")
 
 ///|
 /// `BDD_FALSE`
-pub fn bdd_false() -> (Int, @kernel.Thm) {
+pub fn bdd_false() -> (Int64, @kernel.Thm) {
   bdd_false_c.get()
 }
 
@@ -1040,7 +1063,7 @@ fn step_9() -> Unit raise {
   let v_tm = @parser.parse_term("v:bool")
   bdd_var_c.set(x98 => {
     let (vtable, utable, ctable) = x98
-    fn(x99 : @kernel.Term) -> (Int, @kernel.Thm) raise {
+    fn(x99 : @kernel.Term) -> (Int64, @kernel.Thm) raise {
       let tm = x99
       let v = num_of_var(vtable, tm)
       let u = lookup_triple(
@@ -1060,42 +1083,48 @@ fn step_9() -> Unit raise {
 let bdd_var_c : @lib.Cell[
   (
     (
-      (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+      (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
       (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
       (
         Ref[
-          @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+          @lib.Func[
+            Int64,
+            (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+          ],
         ],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int), Int]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64), Int64]],
       ),
     ),
-  ) -> ((@kernel.Term) -> (Int, @kernel.Thm) raise) raise,
+  ) -> ((@kernel.Term) -> (Int64, @kernel.Thm) raise) raise,
 ] = @lib.Cell::new("BDD_VAR")
 
 ///|
 /// `BDD_VAR`
 pub fn bdd_var(
   x : (
-    (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+    (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
     (
-      Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int, Int), Int]],
+      Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
     ),
     (
       Ref[
-        @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+        @lib.Func[
+          Int64,
+          (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+        ],
       ],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int), Int]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64), Int64]],
     ),
   ),
-) -> ((@kernel.Term) -> (Int, @kernel.Thm) raise) raise {
+) -> ((@kernel.Term) -> (Int64, @kernel.Thm) raise) raise {
   bdd_var_c.get()(x)
 }
 
@@ -1107,17 +1136,17 @@ fn step_10() -> Unit raise {
   let pth = @class.taut(@parser.parse_term("~ ~ x <=> x"))
   bdd_neg_c.set(x100 => {
     let (vtable, utable, ctable) = x100
-    fn(x101 : (Int, @kernel.Thm)) -> (Int, @kernel.Thm) raise {
+    fn(x101 : (Int64, @kernel.Thm)) -> (Int64, @kernel.Thm) raise {
       let (i, fth) = x101
-      if i < 0 {
-        let t102 = 0 - i
+      if i < 0L {
+        let t102 = @lib.neg63(i)
         let utm = btm_of_int(tfst(utable.0, utable.1, utable.2))(t102)
         let th = @kernel.inst_rule(@list.List([(utm, x_tm)]), pth)
         let t103 = @kernel.trans(@equal.ap_term(neg_tm, fth), th)
-        (0 - i, t103)
+        (@lib.neg63(i), t103)
       } else {
         let t104 = @equal.ap_term(neg_tm, fth)
-        (0 - i, t104)
+        (@lib.neg63(i), t104)
       }
     }
   })
@@ -1127,42 +1156,48 @@ fn step_10() -> Unit raise {
 let bdd_neg_c : @lib.Cell[
   (
     (
-      (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+      (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
       (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
       (
         Ref[
-          @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+          @lib.Func[
+            Int64,
+            (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+          ],
         ],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int), Int]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64), Int64]],
       ),
     ),
-  ) -> (((Int, @kernel.Thm)) -> (Int, @kernel.Thm) raise) raise,
+  ) -> (((Int64, @kernel.Thm)) -> (Int64, @kernel.Thm) raise) raise,
 ] = @lib.Cell::new("BDD_NEG")
 
 ///|
 /// `BDD_NEG`
 pub fn bdd_neg(
   x : (
-    (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+    (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
     (
-      Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int, Int), Int]],
+      Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
     ),
     (
       Ref[
-        @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+        @lib.Func[
+          Int64,
+          (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+        ],
       ],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int), Int]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64), Int64]],
     ),
   ),
-) -> (((Int, @kernel.Thm)) -> (Int, @kernel.Thm) raise) raise {
+) -> (((Int64, @kernel.Thm)) -> (Int64, @kernel.Thm) raise) raise {
   bdd_neg_c.get()(x)
 }
 
@@ -1176,8 +1211,8 @@ fn step_11() -> Unit raise {
   bdd_and_v1_c.set(x105 => {
     let (vtable, utable, ctable) = x105
     fn(
-      x106 : ((Int, @kernel.Thm), (Int, @kernel.Thm)),
-    ) -> (Int, @kernel.Thm) raise {
+      x106 : ((Int64, @kernel.Thm), (Int64, @kernel.Thm)),
+    ) -> (Int64, @kernel.Thm) raise {
       let ((i1, th1), (i2, th2)) = x106
       if i2 < i1 {
         let (i3, j) = bdd_and(
@@ -1223,42 +1258,48 @@ fn step_11() -> Unit raise {
 let bdd_and_v1_c : @lib.Cell[
   (
     (
-      (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+      (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
       (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
       (
         Ref[
-          @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+          @lib.Func[
+            Int64,
+            (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+          ],
         ],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int), Int]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64), Int64]],
       ),
     ),
-  ) -> ((((Int, @kernel.Thm), (Int, @kernel.Thm))) -> (Int, @kernel.Thm) raise) raise,
+  ) -> ((((Int64, @kernel.Thm), (Int64, @kernel.Thm))) -> (Int64, @kernel.Thm) raise) raise,
 ] = @lib.Cell::new("BDD_AND")
 
 ///|
 /// `BDD_AND`
 pub fn bdd_and_v1(
   x : (
-    (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+    (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
     (
-      Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int, Int), Int]],
+      Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
     ),
     (
       Ref[
-        @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+        @lib.Func[
+          Int64,
+          (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+        ],
       ],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int), Int]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64), Int64]],
     ),
   ),
-) -> ((((Int, @kernel.Thm), (Int, @kernel.Thm))) -> (Int, @kernel.Thm) raise) raise {
+) -> ((((Int64, @kernel.Thm), (Int64, @kernel.Thm))) -> (Int64, @kernel.Thm) raise) raise {
   bdd_and_v1_c.get()(x)
 }
 
@@ -1274,8 +1315,8 @@ fn step_12() -> Unit raise {
   bdd_or_c.set(x112 => {
     let tt = x112
     fn(
-      x113 : ((Int, @kernel.Thm), (Int, @kernel.Thm)),
-    ) -> (Int, @kernel.Thm) raise {
+      x113 : ((Int64, @kernel.Thm), (Int64, @kernel.Thm)),
+    ) -> (Int64, @kernel.Thm) raise {
       let (b1, b2) = x113
       let t114 = bdd_neg(tt)(b2)
       let t115 = (bdd_neg(tt)(b1), t114)
@@ -1290,42 +1331,48 @@ fn step_12() -> Unit raise {
 let bdd_or_c : @lib.Cell[
   (
     (
-      (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+      (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
       (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
       (
         Ref[
-          @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+          @lib.Func[
+            Int64,
+            (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+          ],
         ],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int), Int]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64), Int64]],
       ),
     ),
-  ) -> ((((Int, @kernel.Thm), (Int, @kernel.Thm))) -> (Int, @kernel.Thm) raise) raise,
+  ) -> ((((Int64, @kernel.Thm), (Int64, @kernel.Thm))) -> (Int64, @kernel.Thm) raise) raise,
 ] = @lib.Cell::new("BDD_OR")
 
 ///|
 /// `BDD_OR`
 pub fn bdd_or(
   x : (
-    (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+    (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
     (
-      Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int, Int), Int]],
+      Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
     ),
     (
       Ref[
-        @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+        @lib.Func[
+          Int64,
+          (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+        ],
       ],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int), Int]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64), Int64]],
     ),
   ),
-) -> ((((Int, @kernel.Thm), (Int, @kernel.Thm))) -> (Int, @kernel.Thm) raise) raise {
+) -> ((((Int64, @kernel.Thm), (Int64, @kernel.Thm))) -> (Int64, @kernel.Thm) raise) raise {
   bdd_or_c.get()(x)
 }
 
@@ -1341,8 +1388,8 @@ fn step_13() -> Unit raise {
   bdd_imp_c.set(x118 => {
     let tt = x118
     fn(
-      x119 : ((Int, @kernel.Thm), (Int, @kernel.Thm)),
-    ) -> (Int, @kernel.Thm) raise {
+      x119 : ((Int64, @kernel.Thm), (Int64, @kernel.Thm)),
+    ) -> (Int64, @kernel.Thm) raise {
       let (b1, b2) = x119
       let t120 = (b1, bdd_neg(tt)(b2))
       let t121 = bdd_and_v1(tt)(t120)
@@ -1356,42 +1403,48 @@ fn step_13() -> Unit raise {
 let bdd_imp_c : @lib.Cell[
   (
     (
-      (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+      (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
       (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
       (
         Ref[
-          @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+          @lib.Func[
+            Int64,
+            (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+          ],
         ],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int), Int]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64), Int64]],
       ),
     ),
-  ) -> ((((Int, @kernel.Thm), (Int, @kernel.Thm))) -> (Int, @kernel.Thm) raise) raise,
+  ) -> ((((Int64, @kernel.Thm), (Int64, @kernel.Thm))) -> (Int64, @kernel.Thm) raise) raise,
 ] = @lib.Cell::new("BDD_IMP")
 
 ///|
 /// `BDD_IMP`
 pub fn bdd_imp(
   x : (
-    (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+    (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
     (
-      Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int, Int), Int]],
+      Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
     ),
     (
       Ref[
-        @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+        @lib.Func[
+          Int64,
+          (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+        ],
       ],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int), Int]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64), Int64]],
     ),
   ),
-) -> ((((Int, @kernel.Thm), (Int, @kernel.Thm))) -> (Int, @kernel.Thm) raise) raise {
+) -> ((((Int64, @kernel.Thm), (Int64, @kernel.Thm))) -> (Int64, @kernel.Thm) raise) raise {
   bdd_imp_c.get()(x)
 }
 
@@ -1409,8 +1462,8 @@ fn step_14() -> Unit raise {
   bdd_iff_c.set(x123 => {
     let tt = x123
     fn(
-      x124 : ((Int, @kernel.Thm), (Int, @kernel.Thm)),
-    ) -> (Int, @kernel.Thm) raise {
+      x124 : ((Int64, @kernel.Thm), (Int64, @kernel.Thm)),
+    ) -> (Int64, @kernel.Thm) raise {
       let (b1, b2) = x124
       let t127 = (bdd_neg(tt)(b1), b2)
       let t128 = bdd_and_v1(tt)(t127)
@@ -1428,66 +1481,75 @@ fn step_14() -> Unit raise {
 let bdd_iff_c : @lib.Cell[
   (
     (
-      (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+      (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
       (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
       (
         Ref[
-          @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+          @lib.Func[
+            Int64,
+            (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+          ],
         ],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int), Int]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64), Int64]],
       ),
     ),
-  ) -> ((((Int, @kernel.Thm), (Int, @kernel.Thm))) -> (Int, @kernel.Thm) raise) raise,
+  ) -> ((((Int64, @kernel.Thm), (Int64, @kernel.Thm))) -> (Int64, @kernel.Thm) raise) raise,
 ] = @lib.Cell::new("BDD_IFF")
 
 ///|
 /// `BDD_IFF`
 pub fn bdd_iff(
   x : (
-    (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+    (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
     (
-      Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int, Int), Int]],
+      Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
     ),
     (
       Ref[
-        @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+        @lib.Func[
+          Int64,
+          (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+        ],
       ],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int), Int]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64), Int64]],
     ),
   ),
-) -> ((((Int, @kernel.Thm), (Int, @kernel.Thm))) -> (Int, @kernel.Thm) raise) raise {
+) -> ((((Int64, @kernel.Thm), (Int64, @kernel.Thm))) -> (Int64, @kernel.Thm) raise) raise {
   bdd_iff_c.get()(x)
 }
 
 ///|
 /// `BDD_OF_TERM`
 pub fn bdd_of_term(
-  x131 : @lib.Func[@kernel.Term, (Int, @kernel.Thm)],
+  x131 : @lib.Func[@kernel.Term, (Int64, @kernel.Thm)],
   x132 : (
-    (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+    (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
     (
-      Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int, Int), Int]],
+      Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
     ),
     (
       Ref[
-        @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+        @lib.Func[
+          Int64,
+          (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+        ],
       ],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int), Int]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64), Int64]],
     ),
   ),
   x133 : @kernel.Term,
-) -> (Int, @kernel.Thm) raise {
+) -> (Int64, @kernel.Thm) raise {
   let defs = x131
   let tt = x132
   let tm = x133
@@ -1585,37 +1647,37 @@ fn step_15() -> Unit raise {
           x151 : (
             (
               FixedArray[@kernel.Term],
-              Ref[Int],
-              @lib.OHashtbl[@kernel.Term, Int],
+              Ref[Int64],
+              @lib.OHashtbl[@kernel.Term, Int64],
             ),
             (
-              Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-              Ref[Int],
-              Ref[@lib.Func[(Int, Int, Int), Int]],
+              Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+              Ref[Int64],
+              Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
             ),
             (
               Ref[
                 @lib.Func[
-                  Int,
-                  (Int, (@kernel.Thm, @list.List[Int], @list.List[Int])),
+                  Int64,
+                  (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
                 ],
               ],
-              Ref[Int],
-              Ref[@lib.Func[(Int, Int), Int]],
+              Ref[Int64],
+              Ref[@lib.Func[(Int64, Int64), Int64]],
             ),
           ),
-        ) -> ((@kernel.Term) -> (((Int, @kernel.Thm)) -> (Int, @kernel.Thm) raise) raise) raise {
+        ) -> ((@kernel.Term) -> (((Int64, @kernel.Thm)) -> (Int64, @kernel.Thm) raise) raise) raise {
           let (vtable, utable, ctable) = x151
           fn(
             x152 : @kernel.Term,
-          ) -> (((Int, @kernel.Thm)) -> (Int, @kernel.Thm) raise) raise {
+          ) -> (((Int64, @kernel.Thm)) -> (Int64, @kernel.Thm) raise) raise {
             let x = x152
             let etable = Ref::{ val: @lib.undefined(), }
             let xn = num_of_var(vtable, x)
             fn bdd_exists_1(
-              x154 : Int,
+              x154 : Int64,
               x155 : @kernel.Thm,
-            ) -> (Int, @kernel.Thm) raise {
+            ) -> (Int64, @kernel.Thm) raise {
               let (n, th) = (x154, x155)
               @lib.apply(etable.val, n) catch {
                 Failure(_) => {
@@ -1677,7 +1739,7 @@ fn step_15() -> Unit raise {
                 e => raise e
               }
             }
-            fn(x159 : (Int, @kernel.Thm)) -> (Int, @kernel.Thm) raise {
+            fn(x159 : (Int64, @kernel.Thm)) -> (Int64, @kernel.Thm) raise {
               bdd_exists_1(x159.0, x159.1)
             }
           }
@@ -1691,60 +1753,66 @@ fn step_15() -> Unit raise {
 let bdd_exists_c : @lib.Cell[
   (
     (
-      (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+      (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
       (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
       (
         Ref[
-          @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+          @lib.Func[
+            Int64,
+            (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+          ],
         ],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int), Int]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64), Int64]],
       ),
     ),
-  ) -> ((@kernel.Term) -> (((Int, @kernel.Thm)) -> (Int, @kernel.Thm) raise) raise) raise,
+  ) -> ((@kernel.Term) -> (((Int64, @kernel.Thm)) -> (Int64, @kernel.Thm) raise) raise) raise,
 ] = @lib.Cell::new("BDD_EXISTS")
 
 ///|
 /// `BDD_EXISTS`
 pub fn bdd_exists(
   x : (
-    (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+    (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
     (
-      Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int, Int), Int]],
+      Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
     ),
     (
       Ref[
-        @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+        @lib.Func[
+          Int64,
+          (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+        ],
       ],
-      Ref[Int],
-      Ref[@lib.Func[(Int, Int), Int]],
+      Ref[Int64],
+      Ref[@lib.Func[(Int64, Int64), Int64]],
     ),
   ),
-) -> ((@kernel.Term) -> (((Int, @kernel.Thm)) -> (Int, @kernel.Thm) raise) raise) raise {
+) -> ((@kernel.Term) -> (((Int64, @kernel.Thm)) -> (Int64, @kernel.Thm) raise) raise) raise {
   bdd_exists_c.get()(x)
 }
 
 ///|
 /// `bdd_stats`
 pub fn[TA, TB, TC, TD, TE, TF] bdd_stats(
-  x160 : Int,
-  x161 : ((TA, Ref[Int], TB), (TC, Ref[Int], TD), (TE, Ref[Int], TF)),
+  x160 : Int64,
+  x161 : ((TA, Ref[Int64], TB), (TC, Ref[Int64], TD), (TE, Ref[Int64], TF)),
 ) -> Unit raise {
   let nd = x160
   let (vt, ct, ut) = x161
-  let d = if nd == 0 { "" } else { @lib.string_of_int(nd) + " definitions, " }
+  let d = if nd == 0L { "" } else { Int64::to_string(nd) + " definitions, " }
   let t162 = " nodes and " +
-    (@lib.string_of_int(tsnd(ct.0, ct.1, ct.2).val) + " cached results")
+    (Int64::to_string(tsnd(ct.0, ct.1, ct.2).val) + " cached results")
   let t163 = " variables, " +
-    (@lib.string_of_int(tsnd(ut.0, ut.1, ut.2).val) + t162)
+    (Int64::to_string(tsnd(ut.0, ut.1, ut.2).val) + t162)
   @lib.remark(
-    "BDD with " + (d + (@lib.string_of_int(tsnd(vt.0, vt.1, vt.2).val) + t163)),
+    "BDD with " + (d + (Int64::to_string(tsnd(vt.0, vt.1, vt.2).val) + t163)),
   )
 }
 
@@ -1752,11 +1820,11 @@ pub fn[TA, TB, TC, TD, TE, TF] bdd_stats(
 /// `BDD_TAUT`
 pub fn bdd_taut(x164 : @kernel.Term) -> @kernel.Thm raise {
   let tm = x164
-  let vt = mk_vtable(@lib.length(@basics.atoms(tm)))
+  let vt = mk_vtable(Int::to_int64(@lib.length(@basics.atoms(tm))))
   let ut = mk_utable(())
   let ct = mk_ctable(())
   let b = bdd_of_term(@lib.undefined(), (vt, ut, ct), tm)
-  let _ = bdd_stats(0, (vt, ct, ut))
+  let _ = bdd_stats(0L, (vt, ct, ut))
   @bool.eqt_elim(b.1)
 }
 
@@ -1764,24 +1832,27 @@ pub fn bdd_taut(x164 : @kernel.Term) -> @kernel.Thm raise {
 /// BDD_DEFTAUT
 fn step_16() -> Unit raise {
   fn bdd_of_defs(
-    x169 : @lib.Func[@kernel.Term, (Int, @kernel.Thm)],
+    x169 : @lib.Func[@kernel.Term, (Int64, @kernel.Thm)],
     x170 : (
-      (FixedArray[@kernel.Term], Ref[Int], @lib.OHashtbl[@kernel.Term, Int]),
+      (FixedArray[@kernel.Term], Ref[Int64], @lib.OHashtbl[@kernel.Term, Int64]),
       (
-        Ref[@lib.Func[Int, ((Int, Int, Int), @kernel.Thm)]],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int, Int), Int]],
+        Ref[@lib.Func[Int64, ((Int64, Int64, Int64), @kernel.Thm)]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64, Int64), Int64]],
       ),
       (
         Ref[
-          @lib.Func[Int, (Int, (@kernel.Thm, @list.List[Int], @list.List[Int]))],
+          @lib.Func[
+            Int64,
+            (Int64, (@kernel.Thm, @list.List[Int64], @list.List[Int64])),
+          ],
         ],
-        Ref[Int],
-        Ref[@lib.Func[(Int, Int), Int]],
+        Ref[Int64],
+        Ref[@lib.Func[(Int64, Int64), Int64]],
       ),
     ),
     x171 : @list.List[@kernel.Thm],
-  ) -> @lib.Func[@kernel.Term, (Int, @kernel.Thm)] raise {
+  ) -> @lib.Func[@kernel.Term, (Int64, @kernel.Thm)] raise {
     let defs = x169
     let tt = x170
     let ths = x171
@@ -1874,13 +1945,13 @@ fn step_16() -> Unit raise {
     fn(x187 : @kernel.Term) -> @kernel.Thm raise {
       let tm_6 = x187
       let vars = ivars.concat(@lib.subtract(@basics.atoms(tm_6), ivars))
-      let vt = mk_vtable(@lib.length(vars))
+      let vt = mk_vtable(Int::to_int64(@lib.length(vars)))
       let ut = mk_utable(())
       let ct = mk_ctable(())
       let t189 = bdd_var((vt, ut, ct))
       let _ = @lib.do_list(
         fn(x190 : @kernel.Term) -> Unit raise {
-          (fn(x188 : (Int, @kernel.Thm)) -> Unit raise { ignore(x188) })(
+          (fn(x188 : (Int64, @kernel.Thm)) -> Unit raise { ignore(x188) })(
             t189(x190),
           )
         },
@@ -1893,12 +1964,15 @@ fn step_16() -> Unit raise {
         )
         let defs_1 = bdd_of_defs(@lib.undefined(), (vt, ut, ct), ths_1)
         let b = bdd_of_term(defs_1, (vt, ut, ct), @kernel.rand(tm_6))
-        let _ = bdd_stats(@lib.length(@lib.dom(defs_1)), (vt, ct, ut))
+        let _ = bdd_stats(
+          Int::to_int64(@lib.length(@lib.dom(defs_1))),
+          (vt, ct, ut),
+        )
         let t191 = @bool.eqt_elim(b.1)
         @bool.disch(@equal.lhand(tm_6), t191)
       } else {
         let b_1 = bdd_of_term(@lib.undefined(), (vt, ut, ct), tm_6)
-        let _ = bdd_stats(0, (vt, ct, ut))
+        let _ = bdd_stats(0L, (vt, ct, ut))
         @bool.eqt_elim(b_1.1)
       }
     }

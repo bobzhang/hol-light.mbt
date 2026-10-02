@@ -14,7 +14,7 @@ fn hex(b : Bytes) -> String {
 test "md5 and Random match OCaml 4.14" {
   inspect(hex(md5(b"")), content="d41d8cd98f00b204e9800998ecf8427e")
   inspect(hex(md5(b"x0")), content="e50eb7598b580311bab8f39bb8f4815b")
-  let show = (xs : Array[Int]) => xs.map(x => x.to_string()).join(" ")
+  let show = (xs : Array[Int64]) => xs.map(x => x.to_string()).join(" ")
   inspect(
     show(Array::makei(5, _ => random_bits())),
     content="89809344 994326685 290180182 366831641 332180439",
@@ -26,13 +26,13 @@ test "md5 and Random match OCaml 4.14" {
   )
   let ints = []
   for i in 0..<8 {
-    ints.push(random_int(i * 7 + 3))
+    ints.push(random_int((i * 7 + 3).to_int64()))
   }
   inspect(show(ints), content="1 8 5 2 8 14 43 18")
-  random_full_init([1, 2, 3])
+  random_full_init([1L, 2L, 3L])
   inspect(random_bits(), content="311998834")
   random_init(123456)
-  inspect(random_int(0x3FFFFFFF), content="353840024")
+  inspect(random_int(0x3FFFFFFFL), content="353840024")
 }
 
 ///|
@@ -83,12 +83,12 @@ test "hashtbl folds like OCaml" {
   random_init(5)
   let t : OHashtbl[Int, Int] = hashtbl_create(10)
   for _ in 0..<400 {
-    let k = random_int(90)
-    let v = random_int(1000)
-    match random_int(5) {
-      0 | 1 => hashtbl_add(t, k, v)
-      2 => hashtbl_replace(t, k, v)
-      3 => hashtbl_remove(t, k)
+    let k = random_int(90L).to_int()
+    let v = random_int(1000L).to_int()
+    match random_int(5L) {
+      0L | 1L => hashtbl_add(t, k, v)
+      2L => hashtbl_replace(t, k, v)
+      3L => hashtbl_remove(t, k)
       _ => ignore(hashtbl_find_opt(t, k))
     }
   }

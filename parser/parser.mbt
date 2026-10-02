@@ -350,7 +350,7 @@ fn pmk_list(els : List[Preterm]) -> Preterm {
 ///|
 fn pmk_char(c : Int) -> Preterm {
   let bits = @lib.map(
-    i => pv(if (c >> i) % 2 == 1 { "T" } else { "F" }),
+    (i : Int64) => pv(if (c >> i.to_int()) % 2 == 1 { "T" } else { "F" }),
     @lib.range(0, 7),
   )
   @lib.itlist((x, y) => @preterm.Combp(y, x), bits, pv("ASCII"))
@@ -395,20 +395,20 @@ fn pmk_setabs(fabs : Preterm, babs : Preterm) -> Preterm raise {
 
 ///|
 fn mk_precedence(
-  infxs : List[(String, (Int, String))],
+  infxs : List[(String, (Int64, String))],
   prs : (Toks) -> (Preterm, Toks) raise,
   inp : Toks,
 ) -> (Preterm, Toks) raise {
   match infxs {
     More((_, (p, at)), tail=_) => {
       let (topins, rest) = @lib.partition(
-        (e : (String, (Int, String))) => e.1 == (p, at),
+        (e : (String, (Int64, String))) => e.1 == (p, at),
         infxs,
       )
       let binop = if at == "right" { rightbin } else { leftbin }
       let ops = @lib.end_itlist(
         (p1, p2) => alt(p1, p2),
-        @lib.map((e : (String, (Int, String))) => idt(e.0), topins),
+        @lib.map((e : (String, (Int64, String))) => idt(e.0), topins),
       )
       binop(
         i => mk_precedence(rest, prs, i),
@@ -559,7 +559,7 @@ fn preterm(i : Toks) -> (Preterm, Toks) raise {
 ///|
 fn nocommapreterm(i : Toks) -> (Preterm, Toks) raise {
   let infs = @lib.filter(
-    (e : (String, (Int, String))) => e.0 != ",",
+    (e : (String, (Int64, String))) => e.0 != ",",
     @printer.infixes(),
   )
   mk_precedence(infs, typed_appl_preterm, i)

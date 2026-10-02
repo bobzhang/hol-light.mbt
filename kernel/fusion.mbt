@@ -113,19 +113,19 @@ fn[A] qmap(f : (A) -> A raise?, l : @list.List[A]) -> @list.List[A] raise? {
 // ---------------------------------------------------------------------------
 
 ///|
-let the_type_constants : Ref[@list.List[(String, Int)]] = Ref::{
-  val: @list.List([("bool", 0), ("fun", 2)]),
+let the_type_constants : Ref[@list.List[(String, Int64)]] = Ref::{
+  val: @list.List([("bool", 0L), ("fun", 2L)]),
 }
 
 ///|
-/// All type constants with their arities, most recent first.
-pub fn types() -> @list.List[(String, Int)] {
+/// All type constants with their arities (OCaml ints), most recent first.
+pub fn types() -> @list.List[(String, Int64)] {
   the_type_constants.val
 }
 
 ///|
 /// Arity of a type constant.
-pub fn get_type_arity(s : String) -> Int raise {
+pub fn get_type_arity(s : String) -> Int64 raise {
   for entry in the_type_constants.val {
     if entry.0 == s {
       return entry.1
@@ -143,7 +143,7 @@ fn check_new_type(name : String) -> Unit raise {
 
 ///|
 /// Declare a new type constant.
-pub fn new_type(name : String, arity : Int) -> Unit raise {
+pub fn new_type(name : String, arity : Int64) -> Unit raise {
   check_new_type(name)
   the_type_constants.val = the_type_constants.val.prepend((name, arity))
 }
@@ -153,7 +153,7 @@ pub fn mk_type(tyop : String, args : @list.List[HolType]) -> HolType raise {
   let arity = get_type_arity(tyop) catch {
     _ => failwith("mk_type: type " + tyop + " has not been defined")
   }
-  if arity == args.length() {
+  if arity == args.length().to_int64() {
     Tyapp(tyop, args)
   } else {
     failwith("mk_type: wrong number of arguments to " + tyop)
@@ -1036,7 +1036,7 @@ pub fn new_basic_type_definition(
   }
   // Publish only after every check has passed and both theorems exist.
   the_type_constants.val = the_type_constants.val.prepend(
-    (tyname, tyvars.length()),
+    (tyname, tyvars.length().to_int64()),
   )
   the_term_constants.val = the_term_constants.val
     .prepend((absname, absty))

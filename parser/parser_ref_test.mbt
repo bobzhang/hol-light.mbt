@@ -347,13 +347,13 @@ fn run(log : Log, line : String) -> Unit raise {
   let after = (p : String) => line[p.length():].to_owned()
   try {
     match words {
-      ["newtype", n, a] => @kernel.new_type(n, @string.parse_int(a))
+      ["newtype", n, a] => @kernel.new_type(n, @string.parse_int(a).to_int64())
       ["const", ..] => {
         let (n, t) = split_colon(after("const "))
         @kernel.new_constant(n, @parser.parse_type(t))
       }
       ["infix", n, p, a] =>
-        @printer.parse_as_infix(n, (@string.parse_int(p), a))
+        @printer.parse_as_infix(n, (@string.parse_int(p).to_int64(), a))
       ["binder", n] => @printer.parse_as_binder(n)
       ["prefix", n] => @printer.parse_as_prefix(n)
       ["overloadable", ..] => {

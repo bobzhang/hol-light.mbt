@@ -41,8 +41,8 @@ fn RandomState::bits(self : RandomState) -> Int {
 }
 
 ///|
-fn RandomState::full_init(self : RandomState, seed : Array[Int]) -> Unit {
-  let seed = if seed.length() == 0 { [0] } else { seed }
+fn RandomState::full_init(self : RandomState, seed : Array[Int64]) -> Unit {
+  let seed = if seed.length() == 0 { [0L] } else { seed }
   let l = seed.length()
   for i in 0..<55 {
     self.st[i] = i
@@ -68,35 +68,36 @@ fn RandomState::full_init(self : RandomState, seed : Array[Int]) -> Unit {
 
 ///|
 /// `Random.bits ()`: 30 random bits.
-pub fn random_bits() -> Int {
-  random_default.bits()
+pub fn random_bits() -> Int64 {
+  random_default.bits().to_int64()
 }
 
 ///|
 /// `Random.int bound`: raises `Invalid_argument` unless 0 < bound <= 2^30 - 1.
-pub fn random_int(bound : Int) -> Int raise {
-  if bound > 0x3FFFFFFF || bound <= 0 {
+pub fn random_int(bound : Int64) -> Int64 raise {
+  if bound > 0x3FFFFFFFL || bound <= 0L {
     raise @num.InvalidArgument("Random.int")
   }
+  let bound = bound.to_int()
   while true {
     let r = random_default.bits()
     let v = r % bound
     if !(r - v > 0x3FFFFFFF - bound + 1) {
-      return v
+      return v.to_int64()
     }
   }
-  0
+  0L
 }
 
 ///|
 /// `Random.init seed`
-pub fn random_init(seed : Int) -> Unit {
+pub fn random_init(seed : Int64) -> Unit {
   random_default.full_init([seed])
 }
 
 ///|
 /// `Random.full_init seeds`
-pub fn random_full_init(seed : Array[Int]) -> Unit {
+pub fn random_full_init(seed : Array[Int64]) -> Unit {
   random_default.full_init(seed)
 }
 

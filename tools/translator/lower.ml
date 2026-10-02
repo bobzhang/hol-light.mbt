@@ -26,6 +26,19 @@ module Lower = struct
     | Cstr_extension (Path.Pdot (Path.Pident m, _), _) -> Ident.name m = "Stdlib" && Ident.global m
     | _ -> false
 
+  (* An OCaml int (Int64) from a MoonBit Int, and back (checked); a literal
+     is converted in place *)
+  let widen e =
+    match e with
+    | Atom a when a <> "" && (match a.[0] with '0' .. '9' -> true | _ -> false) && String.for_all (function '0' .. '9' -> true | _ -> false) a -> Atom (a ^ "L")
+    | _ -> Call (Atom "Int::to_int64", [ e ])
+
+  let narrow e =
+    let lit a = String.length a > 1 && a.[String.length a - 1] = 'L' && String.for_all (function '0' .. '9' -> true | _ -> false) (String.sub a 0 (String.length a - 1)) in
+    match e with
+    | Atom a when lit a && String.length a <= 10 -> Atom (String.sub a 0 (String.length a - 1))
+    | _ -> Call (Atom "@lib.int63_to_int", [ e ])
+
   (* MoonBit rejects a bare `match`/`if`/block expression as a pattern guard *)
   let guard_str g =
     match g with
@@ -162,7 +175,7 @@ module Lower = struct
     | "hol_type" -> Some "@kernel.HolType"
     | "list" -> Some "@list.List"
     | "string" -> Some "String"
-    | "int" -> Some "Int"
+    | "int" -> Some "Int64"
     | "bool" -> Some "Bool"
     | "unit" -> Some "Unit"
     | "char" -> Some "Char"
@@ -758,6 +771,7 @@ module Lower = struct
         || List.exists2 (fun p1 p2 -> needs_eta p2 p1) ps1 ps2
         || needs_eta r1 r2
     | M.Tuple hs, M.Tuple ws when List.length hs = List.length ws -> List.exists2 needs_eta hs ws
+    | M.Named ("Int", []), M.Named ("Int64", []) | M.Named ("Int64", []), M.Named ("Int", []) -> true
     | _ -> false
 
   let rec groups = function
@@ -774,6 +788,9 @@ module Lower = struct
     if not (needs_eta have want) then (stmts, e)
     else
     match have, want with
+    (* an OCaml int (Int64) through a hand-ported `Int` *)
+    | M.Named ("Int", []), M.Named ("Int64", []) -> (stmts, widen e)
+    | M.Named ("Int64", []), M.Named ("Int", []) -> (stmts, narrow e)
     | M.Tuple hs, M.Tuple ws ->
         (* rebuild the tuple, adapting its components *)
         let stmts, e = hoist (stmts, e) in
@@ -923,7 +940,8 @@ module Lower = struct
   (* ---------------------------------------------------------------- *)
 
   let const loc = function
-    | Asttypes.Const_int n -> if n < 0 then "(" ^ string_of_int n ^ ")" else string_of_int n
+    (* OCaml's 63-bit int is an Int64 (lib/int63.mbt) *)
+    | Asttypes.Const_int n -> if n < 0 then "(" ^ string_of_int n ^ "L)" else string_of_int n ^ "L"
     | Asttypes.Const_string (s, _, _) -> string_lit s
     | Asttypes.Const_float f ->
         (* MoonBit wants digits after the point and a point before `e`
@@ -1069,7 +1087,23 @@ module Lower = struct
 
   let depth = ref 0
 
+  (* An expression of OCaml type int is an Int64 unless an `Int` is
+     expected (a hand-ported parameter); scalar Int/Int64 mismatches are
+     converted (lib/int63.mbt) *)
   let rec lower ?expect (e : expression) : stmt list * exp * M.ty =
+    let ss, x, t = lower0 ?expect e in
+    let want =
+      match expect with
+      | Some w -> Some w
+      | None -> if is_int e.exp_type then Some (M.Named ("Int64", [])) else None
+    in
+    match t, want with
+    | M.Named (("Int" | "Int64") as a, []), Some (M.Named (("Int" | "Int64") as b, []) as w) when a <> b ->
+        let ss, x = adapt (ss, x) t w in
+        (ss, x, w)
+    | _ -> (ss, x, t)
+
+  and lower0 ?expect (e : expression) : stmt list * exp * M.ty =
     let loc = e.exp_loc in
     incr depth;
     if !depth > 3000 then unsupported loc "lowering recursion too deep";
@@ -1513,19 +1547,22 @@ module Lower = struct
           (2, fun [ a; b ] tys ->
              if is_int (List.hd tys) then Binop (op, a, b)
              else Binop (op, Call (Atom "@lib.compare", [ a; b ]), Atom "0"))
-      | ("+" | "-" | "*" | "/") as op -> (2, fun [ a; b ] _ -> Binop (op, a, b))
-      | "mod" -> (2, fun [ a; b ] _ -> Binop ("%", a, b))
-      | "compare" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.compare", [ a; b ]))
+      (* ints: 63-bit arithmetic on Int64 (lib/int63.mbt) *)
+      | "+" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.add63", [ a; b ]))
+      | "-" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.sub63", [ a; b ]))
+      | "*" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.mul63", [ a; b ]))
+      | "/" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.div63", [ a; b ]))
+      | "mod" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.mod63", [ a; b ]))
+      | "compare" -> (2, fun [ a; b ] _ -> widen (Call (Atom "@lib.compare", [ a; b ])))
       | ("+." | "-." | "*." | "/.") as op -> (2, fun [ a; b ] _ -> Binop (String.sub op 0 1, a, b))
       | "~-." -> (1, fun [ a ] _ -> Call (Atom "@lib.float_neg", [ a ]))
-      | "float_of_int" -> (1, fun [ a ] _ -> Call (Atom "Int::to_double", [ a ]))
+      | "float_of_int" -> (1, fun [ a ] _ -> Call (Atom "Int64::to_double", [ a ]))
       | "sqrt" | "float_sqrt" -> (1, fun [ a ] _ -> Call (Atom "Double::sqrt", [ a ]))
       | "floor" -> (1, fun [ a ] _ -> Call (Atom "Double::floor", [ a ]))
       | "abs_float" | "float_fabs" -> (1, fun [ a ] _ -> Call (Atom "Double::abs", [ a ]))
-      (* MoonBit's Int is 32-bit (OCaml's int is 63-bit) *)
-      | "max_int" -> (0, fun [] _ -> Atom "2147483647")
-      | "min_int" -> (0, fun [] _ -> Atom "(-2147483648)")
-      | "int_of_float" | "truncate" -> (1, fun [ a ] _ -> Call (Atom "Double::to_int", [ a ]))
+      | "max_int" -> (0, fun [] _ -> Atom "@lib.max_int63")
+      | "min_int" -> (0, fun [] _ -> Atom "@lib.min_int63")
+      | "int_of_float" | "truncate" -> (1, fun [ a ] _ -> Call (Atom "@lib.norm63", [ Call (Atom "Double::to_int64", [ a ]) ]))
       | ("min" | "max") as op ->
           (* `let min a b = if a <= b then a else b` (polymorphic compare) *)
           (2, fun [ a; b ] tys ->
@@ -1541,64 +1578,64 @@ module Lower = struct
                  else Binop (">=", Call (Atom "@lib.compare", [ a; b ]), Atom "0")
                in
                If (ge, ([], a), ([], b)))
-      | "~-" -> (1, fun [ a ] _ -> Binop ("-", Atom "0", a))
-      | "abs" -> (1, fun [ a ] _ -> Call (Atom "@lib.abs_int", [ a ]))
-      | "succ" -> (1, fun [ a ] _ -> Binop ("+", a, Atom "1"))
-      | "pred" -> (1, fun [ a ] _ -> Binop ("-", a, Atom "1"))
+      | "~-" -> (1, fun [ a ] _ -> Call (Atom "@lib.neg63", [ a ]))
+      | "abs" -> (1, fun [ a ] _ -> Call (Atom "@lib.abs63", [ a ]))
+      | "succ" -> (1, fun [ a ] _ -> Call (Atom "@lib.succ63", [ a ]))
+      | "pred" -> (1, fun [ a ] _ -> Call (Atom "@lib.pred63", [ a ]))
       | "^" -> (2, fun [ a; b ] _ -> Binop ("+", a, b))
       | "not" -> (1, fun [ a ] _ -> Not a)
       | "@" -> (2, fun [ a; b ] _ -> Concat (a, b))
       | "failwith" -> (1, fun [ a ] _ -> Raise (Call (Atom "Failure", [ a ])))
       | "raise" -> (1, fun [ a ] _ -> Raise a)
       | "ignore" -> (1, fun [ a ] _ -> Call (Atom "ignore", [ a ]))
-      | "string_of_int" -> (1, fun [ a ] _ -> Call (Atom "@lib.string_of_int", [ a ]))
+      | "string_of_int" -> (1, fun [ a ] _ -> Call (Atom "Int64::to_string", [ a ]))
       | "!" -> (1, fun [ a ] _ -> Deref a)
       | "ref" -> (1, fun [ a ] _ -> RefNew a)
       | ":=" -> (2, fun [ a; b ] _ -> Blk ([ Assign (a, b) ], Atom "()"))
       | "Format.print_string" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_string", [ a ]))
       | "Format.print_newline" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_newline", [])))
       | "Format.print_flush" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_flush", [])))
-      | "Format.print_int" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_int", [ a ]))
+      | "Format.print_int" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_string", [ Call (Atom "Int64::to_string", [ a ]) ]))
       | "print_string" -> (1, fun [ a ] _ -> Call (Atom "@pp.print_string", [ a ]))
       | "print_endline" -> (1, fun [ a ] _ -> Call (Atom "@pp.print_string", [ Binop ("+", a, Atom "\"\\n\"") ]))
       | "invalid_arg" -> (1, fun [ a ] _ -> Raise (Call (Atom "@num.InvalidArgument", [ a ])))
-      | "lsl" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.lsl", [ a; b ]))
-      | "asr" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.asr", [ a; b ]))
-      | "lsr" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.lsr", [ a; b ]))
+      | "lsl" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.lsl63", [ a; b ]))
+      | "asr" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.asr63", [ a; b ]))
+      | "lsr" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.lsr63", [ a; b ]))
       | "land" -> (2, fun [ a; b ] _ -> Binop ("&", a, b))
       | "lor" -> (2, fun [ a; b ] _ -> Binop ("|", a, b))
       | "lxor" -> (2, fun [ a; b ] _ -> Binop ("^", a, b))
-      | "lnot" -> (1, fun [ a ] _ -> Call (Atom "Int::lnot", [ a ]))
+      | "lnot" -> (1, fun [ a ] _ -> Call (Atom "@lib.lnot63", [ a ]))
       | "log" -> (1, fun [ a ] _ -> Call (Atom "@lib.float_log", [ a ]))
       | "**" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.float_pow", [ a; b ]))
-      | "int_of_string" -> (1, fun [ a ] _ -> Call (Atom "@lib.int_of_string", [ a ]))
-      | "String.length" -> (1, fun [ a ] _ -> Call (Atom "@lib.string_length", [ a ]))
-      | "String.get" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_get", [ a; b ]))
-      | "String.sub" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.string_sub", [ a; b; c ]))
-      | "String.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_make", [ a; b ]))
-      | "Sys.command" -> (1, fun [ a ] _ -> Call (Atom "@lib.sys_command", [ a ]))
+      | "int_of_string" -> (1, fun [ a ] _ -> Call (Atom "@lib.int63_of_string", [ a ]))
+      | "String.length" -> (1, fun [ a ] _ -> widen (Call (Atom "@lib.string_length", [ a ])))
+      | "String.get" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_get", [ a; narrow b ]))
+      | "String.sub" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.string_sub", [ a; narrow b; narrow c ]))
+      | "String.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_make", [ narrow a; b ]))
+      | "Sys.command" -> (1, fun [ a ] _ -> widen (Call (Atom "@lib.sys_command", [ a ])))
       | "Sys.remove" -> (1, fun [ a ] _ -> Call (Atom "@lib.sys_remove", [ a ]))
       | "Sys.file_exists" -> (1, fun [ a ] _ -> Call (Atom "@lib.sys_file_exists", [ a ]))
       | "Filename.temp_file" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.temp_file", [ a; b ]))
       | "String.escaped" -> (1, fun [ a ] _ -> Call (Atom "@lib.string_escaped", [ a ]))
       | "String.concat" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_concat", [ a; b ]))
-      | "Array.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_make", [ a; b ]))
-      | "Array.get" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_get", [ a; b ]))
-      | "Array.set" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.array_set", [ a; b; c ]))
-      | "Array.length" -> (1, fun [ a ] _ -> Call (Atom "@lib.array_length", [ a ]))
+      | "Array.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_make", [ narrow a; b ]))
+      | "Array.get" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_get", [ a; narrow b ]))
+      | "Array.set" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.array_set", [ a; narrow b; c ]))
+      | "Array.length" -> (1, fun [ a ] _ -> widen (Call (Atom "@lib.array_length", [ a ])))
       | "Random.int" -> (1, fun [ a ] _ -> Call (Atom "@lib.random_int", [ a ]))
       | "Random.init" -> (1, fun [ a ] _ -> Call (Atom "@lib.random_init", [ a ]))
       | "Random.bits" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@lib.random_bits", [])))
       | "incr" -> (1, fun [ a ] _ -> Call (Atom "@lib.incr", [ a ]))
       | "decr" -> (1, fun [ a ] _ -> Call (Atom "@lib.decr", [ a ]))
-      | "Char.chr" -> (1, fun [ a ] _ -> Call (Atom "@lib.char_chr", [ a ]))
-      | "Char.code" -> (1, fun [ a ] _ -> Call (Atom "Char::to_int", [ a ]))
+      | "Char.chr" -> (1, fun [ a ] _ -> Call (Atom "@lib.char_chr", [ narrow a ]))
+      | "Char.code" -> (1, fun [ a ] _ -> widen (Call (Atom "Char::to_int", [ a ])))
       | "Format.std_formatter" -> (0, fun [] _ -> Atom "@pp.std_formatter")
       | "Lazy.force" -> (1, fun [ a ] _ -> Call (Atom "@lib.lazy_force", [ a ]))
-      | "Hashtbl.create" -> (1, fun [ a ] _ -> Call (Atom "@lib.hashtbl_create", [ a ]))
+      | "Hashtbl.create" -> (1, fun [ a ] _ -> Call (Atom "@lib.hashtbl_create", [ narrow a ]))
       | "Hashtbl.clear" -> (1, fun [ a ] _ -> Call (Atom "@lib.hashtbl_clear", [ a ]))
       | "Hashtbl.reset" -> (1, fun [ a ] _ -> Call (Atom "@lib.hashtbl_reset", [ a ]))
-      | "Hashtbl.length" -> (1, fun [ a ] _ -> Call (Atom "@lib.hashtbl_length", [ a ]))
+      | "Hashtbl.length" -> (1, fun [ a ] _ -> widen (Call (Atom "@lib.hashtbl_length", [ a ])))
       | "Hashtbl.find_all" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.hashtbl_find_all", [ a; b ]))
       | "Hashtbl.fold" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.hashtbl_fold", [ a; b; c ]))
       | "Hashtbl.iter" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.hashtbl_iter", [ a; b ]))
@@ -1606,7 +1643,7 @@ module Lower = struct
       | "Array.init" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_init", [ a; b ]))
       | "Array.iteri" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_iteri", [ a; b ]))
       | "Array.iter" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_iter", [ a; b ]))
-      | "Array.fill" -> (4, fun [ a; b; c; d ] _ -> Call (Atom "@lib.array_fill", [ a; b; c; d ]))
+      | "Array.fill" -> (4, fun [ a; b; c; d ] _ -> Call (Atom "@lib.array_fill", [ a; narrow b; narrow c; d ]))
       | "Array.map" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_map", [ a; b ]))
       | "Array.of_list" -> (1, fun [ a ] _ -> Call (Atom "@lib.array_of_list", [ a ]))
       | "Array.to_list" -> (1, fun [ a ] _ -> Call (Atom "@lib.array_to_list", [ a ]))
@@ -1618,23 +1655,23 @@ module Lower = struct
       | "Hashtbl.remove" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.hashtbl_remove", [ a; b ]))
       | "Format.pp_print_char" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::print_string", [ a; Call (Atom "Char::to_string", [ b ]) ]))
       | "Format.pp_print_string" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::print_string", [ a; b ]))
-      | "Format.pp_print_int" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::print_int", [ a; b ]))
+      | "Format.pp_print_int" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::print_string", [ a; Call (Atom "Int64::to_string", [ b ]) ]))
       | "Format.pp_print_space" -> (2, fun [ a; b ] _ -> Blk ((if ordered b then [ Do b ] else []), Call (Atom "@pp.Formatter::print_space", [ a ])))
       | "Format.pp_print_cut" -> (2, fun [ a; b ] _ -> Blk ((if ordered b then [ Do b ] else []), Call (Atom "@pp.Formatter::print_cut", [ a ])))
       | "Format.pp_print_newline" -> (2, fun [ a; b ] _ -> Blk ((if ordered b then [ Do b ] else []), Call (Atom "@pp.Formatter::print_newline", [ a ])))
       | "Format.pp_print_flush" -> (2, fun [ a; b ] _ -> Blk ((if ordered b then [ Do b ] else []), Call (Atom "@pp.Formatter::print_flush", [ a ])))
-      | "Format.pp_print_break" -> (3, fun [ a; b; c ] _ -> Call (Atom "@pp.Formatter::print_break", [ a; b; c ]))
-      | "Format.pp_open_box" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::open_box", [ a; b ]))
-      | "Format.pp_open_hvbox" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::open_hvbox", [ a; b ]))
-      | "Format.pp_open_vbox" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::open_vbox", [ a; b ]))
+      | "Format.pp_print_break" -> (3, fun [ a; b; c ] _ -> Call (Atom "@pp.Formatter::print_break", [ a; narrow b; narrow c ]))
+      | "Format.pp_open_box" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::open_box", [ a; narrow b ]))
+      | "Format.pp_open_hvbox" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::open_hvbox", [ a; narrow b ]))
+      | "Format.pp_open_vbox" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.Formatter::open_vbox", [ a; narrow b ]))
       | "Format.pp_close_box" -> (2, fun [ a; b ] _ -> Blk ((if ordered b then [ Do b ] else []), Call (Atom "@pp.Formatter::close_box", [ a ])))
-      | "Format.print_break" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.std_formatter.print_break", [ a; b ]))
+      | "Format.print_break" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.std_formatter.print_break", [ narrow a; narrow b ]))
       | "Format.print_space" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_space", [])))
       | "Format.print_cut" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_cut", [])))
-      | "Format.open_box" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.open_box", [ a ]))
-      | "Format.open_vbox" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.open_vbox", [ a ]))
-      | "Format.open_hvbox" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.open_hvbox", [ a ]))
-      | "Format.open_hovbox" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.open_hovbox", [ a ]))
+      | "Format.open_box" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.open_box", [ narrow a ]))
+      | "Format.open_vbox" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.open_vbox", [ narrow a ]))
+      | "Format.open_hvbox" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.open_hvbox", [ narrow a ]))
+      | "Format.open_hovbox" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.open_hovbox", [ narrow a ]))
       | "Format.open_hbox" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.open_hbox", [])))
       | "Format.close_box" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.close_box", [])))
       | "&&" | "||" -> (2, fun _ _ -> assert false)
@@ -1736,7 +1773,7 @@ module Lower = struct
           let acc = ref [] and i = ref 0 in
           while !i < String.length text - 1 do
             if text.[!i] = '%' then begin
-              (match text.[!i + 1] with 's' -> acc := "String" :: !acc | 'd' | 'i' -> acc := "Int" :: !acc | _ -> ());
+              (match text.[!i + 1] with 's' -> acc := "String" :: !acc | 'd' | 'i' -> acc := "Int64" :: !acc | _ -> ());
               i := !i + 2
             end else incr i
           done;
@@ -1772,7 +1809,7 @@ module Lower = struct
           (if text.[!i] = '%' && !i + 1 < n then begin
              (match text.[!i + 1] with
               | 's' -> lit (); pieces := next () :: !pieces
-              | 'd' | 'i' -> lit (); pieces := Call (Atom "@lib.string_of_int", [ next () ]) :: !pieces
+              | 'd' | 'i' -> lit (); pieces := Call (Atom "Int64::to_string", [ next () ]) :: !pieces
               | '!' -> close (); items := `Flush :: !items
               | '%' -> Buffer.add_char buf '%'
               | c -> unsupported loc "printf conversion %%%c" c);
@@ -2180,18 +2217,50 @@ module Lower = struct
     (* only when every other binding is a plain closure: OCaml evaluates
        the bindings in order, and a function's setup (`let x = e in fun`)
        would otherwise run after the values *)
+    (* OCaml 4.14 (Rec_check) evaluates the dynamic bindings first; the
+       static ones (constructions, constants, functions and their set-ups)
+       follow in binding order *)
+    let rec is_static e =
+      match e.exp_desc with
+      | Texp_let (_, _, b) -> is_static b
+      | Texp_construct (_, { Types.cstr_tag = Types.Cstr_unboxed; _ }, [ a ]) -> is_static a
+      | Texp_construct _ | Texp_record _ | Texp_variant _ | Texp_tuple _ | Texp_constant _ | Texp_function _
+      | Texp_lazy _ | Texp_array _ | Texp_extension_constructor _ | Texp_unreachable ->
+          true
+      | Texp_apply ({ exp_desc = Texp_ident (_, _, { Types.val_kind = Types.Val_prim { Primitive.prim_name = "%makemutable"; _ }; _ }); _ }, _) -> true
+      | _ -> false
+    in
+    let dynamic, static_values = List.partition (fun vb -> not (is_static vb.vb_expr)) values in
+    (* OCaml's initialization order beyond that depends on how each binding
+       is compiled (constants, aliases, unboxed records): effectful values
+       are accepted only where the order cannot matter *)
+    let rec pure e =
+      match e.exp_desc with
+      | Texp_ident _ | Texp_constant _ | Texp_function _ | Texp_lazy _ -> true
+      | Texp_construct (_, _, args) -> List.for_all pure args
+      | Texp_tuple es -> List.for_all pure es
+      | Texp_let (_, pvbs, b) -> List.for_all (fun pvb -> pure pvb.vb_expr) pvbs && pure b
+      | _ -> false
+    in
+    let effectful = List.filter (fun vb -> not (pure vb.vb_expr)) values in
+    let has_setup = List.exists (fun vb -> match peel vb.vb_expr [] with Some (pre, _) -> pre <> [] | None -> false) fns in
+    if List.length effectful > 1 || (effectful <> [] && has_setup) then
+      unsupported loc "recursive group mixing effectful values with other effects (OCaml's initialization order)";
     if values <> [] && fns <> [] && List.for_all is_fn fns then
-      lower_let ?expect values { body with exp_desc = Texp_let (Asttypes.Recursive, fns, body) }
+      lower_let ?expect (dynamic @ static_values) { body with exp_desc = Texp_let (Asttypes.Recursive, fns, body) }
     else
     let peeled = List.map (fun vb -> (vb, peel vb.vb_expr [])) vbs in
     if List.exists (fun (_, p) -> match p with Some (pre, _) -> pre <> [] | None -> false) peeled then begin
       let prefixes = List.concat_map (fun (_, p) -> match p with Some (pre, _) -> pre | None -> []) peeled in
       if List.exists (fun (_, pvbs) -> mentions_group pvbs) prefixes then unsupported loc "recursive value whose set-up uses itself";
-      (* OCaml evaluates the values outside the group (dynamic bindings)
-         first, then the closures' set-ups, each in binding order *)
       let steps =
-        List.filter_map (fun (vb, p) -> if p = None && List.memq vb values then Some (Asttypes.Nonrecursive, [ vb ]) else None) peeled
-        @ prefixes
+        List.map (fun vb -> (Asttypes.Nonrecursive, [ vb ])) dynamic
+        @ List.concat_map
+            (fun (vb, p) ->
+              match p with
+              | Some (pre, _) -> pre
+              | None -> if List.memq vb static_values then [ (Asttypes.Nonrecursive, [ vb ]) ] else [])
+            peeled
       in
       let vbs' =
         List.filter_map

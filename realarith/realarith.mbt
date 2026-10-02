@@ -476,7 +476,7 @@ fn step_20() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -484,7 +484,7 @@ fn step_20() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -504,7 +504,7 @@ fn step_20() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -512,7 +512,7 @@ fn step_20() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -525,7 +525,7 @@ fn step_20() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -533,7 +533,7 @@ fn step_20() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -547,7 +547,7 @@ fn step_20() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -555,7 +555,7 @@ fn step_20() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -658,7 +658,7 @@ fn step_22() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -666,7 +666,7 @@ fn step_22() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -917,9 +917,9 @@ pub fn real_pos_lt() -> @kernel.Thm {
 ///|
 /// `positivstellensatz`
 pub(all) enum Positivstellensatz {
-  Axiom_eq(Int)
-  Axiom_le(Int)
-  Axiom_lt(Int)
+  Axiom_eq(Int64)
+  Axiom_le(Int64)
+  Axiom_lt(Int64)
   Rational_eq(@num.Num)
   Rational_le(@num.Num)
   Rational_lt(@num.Num)
@@ -1519,9 +1519,12 @@ fn step_30() -> Unit raise {
           fn translate(x151 : Positivstellensatz) -> @kernel.Thm raise {
             let prf = x151
             match prf {
-              Positivstellensatz::Axiom_eq(n) => @lib.el(n, eqs)
-              Positivstellensatz::Axiom_le(n_1) => @lib.el(n_1, les)
-              Positivstellensatz::Axiom_lt(n_2) => @lib.el(n_2, lts)
+              Positivstellensatz::Axiom_eq(n) =>
+                @lib.el(@lib.int63_to_int(n), eqs)
+              Positivstellensatz::Axiom_le(n_1) =>
+                @lib.el(@lib.int63_to_int(n_1), les)
+              Positivstellensatz::Axiom_lt(n_2) =>
+                @lib.el(@lib.int63_to_int(n_2), lts)
               Positivstellensatz::Rational_eq(x) =>
                 @bool.eqt_elim(
                   numeric_eq_conv(
@@ -1867,58 +1870,64 @@ fn step_31() -> Unit raise {
               raise Failure("linear_ineqs: no contradiction")
             } else {
               let ineqs = les.concat(lts)
-              let blowup : (@kernel.Term) -> Int raise = fn(
+              let blowup : (@kernel.Term) -> Int64 raise = fn(
                 x191 : @kernel.Term,
-              ) -> Int raise {
+              ) -> Int64 raise {
                 let v = x191
-                let t194 = @lib.length(
-                  @lib.filter(
-                    fn(
-                      x193 : (
-                        @lib.Func[@kernel.Term, @num.Num],
-                        Positivstellensatz,
-                      ),
-                    ) -> Bool raise {
-                      let (e_2, _) = x193
-                      @num.lt_num(
-                        @lib.tryapplyd(e_2, v, @num.num_0),
-                        @num.num_0,
-                      )
-                    },
-                    ineqs,
+                let t194 = Int::to_int64(
+                  @lib.length(
+                    @lib.filter(
+                      fn(
+                        x193 : (
+                          @lib.Func[@kernel.Term, @num.Num],
+                          Positivstellensatz,
+                        ),
+                      ) -> Bool raise {
+                        let (e_2, _) = x193
+                        @num.lt_num(
+                          @lib.tryapplyd(e_2, v, @num.num_0),
+                          @num.num_0,
+                        )
+                      },
+                      ineqs,
+                    ),
                   ),
                 )
-                @lib.length(
-                  @lib.filter(
-                    fn(
-                      x192 : (
-                        @lib.Func[@kernel.Term, @num.Num],
-                        Positivstellensatz,
+                @lib.mul63(
+                  Int::to_int64(
+                    @lib.length(
+                      @lib.filter(
+                        fn(
+                          x192 : (
+                            @lib.Func[@kernel.Term, @num.Num],
+                            Positivstellensatz,
+                          ),
+                        ) -> Bool raise {
+                          let (e_1, _) = x192
+                          @num.gt_num(
+                            @lib.tryapplyd(e_1, v, @num.num_0),
+                            @num.num_0,
+                          )
+                        },
+                        ineqs,
                       ),
-                    ) -> Bool raise {
-                      let (e_1, _) = x192
-                      @num.gt_num(
-                        @lib.tryapplyd(e_1, v, @num.num_0),
-                        @num.num_0,
-                      )
-                    },
-                    ineqs,
+                    ),
                   ),
-                ) *
-                t194
+                  t194,
+                )
               }
               let v_2 = @lib.hd(
                   @lib.sort(
                     fn(
-                      x195 : (@kernel.Term, Int),
-                      x196 : (@kernel.Term, Int),
+                      x195 : (@kernel.Term, Int64),
+                      x196 : (@kernel.Term, Int64),
                     ) -> Bool raise {
                       let (_, i) = x195
                       let (_, j) = x196
                       i < j
                     },
                     @lib.map(
-                      fn(x197 : @kernel.Term) -> (@kernel.Term, Int) raise {
+                      fn(x197 : @kernel.Term) -> (@kernel.Term, Int64) raise {
                         let v_1 = x197
                         (v_1, blowup(v_1))
                       },
@@ -2282,38 +2291,38 @@ fn step_31() -> Unit raise {
     let eqs_1 = @lib.map2(
       fn(
         x245 : @lib.Func[@kernel.Term, @num.Num],
-        x246 : Int,
+        x246 : Int64,
       ) -> (@lib.Func[@kernel.Term, @num.Num], Positivstellensatz) raise {
         let p_2 = x245
         let n = x246
         (p_2, Positivstellensatz::Axiom_eq(n))
       },
       eq,
-      @lib.range(0, @lib.length(eq) - 1),
+      @lib.range(0L, @lib.sub63(Int::to_int64(@lib.length(eq)), 1L)),
     )
     let les_2 = @lib.map2(
       fn(
         x247 : @lib.Func[@kernel.Term, @num.Num],
-        x248 : Int,
+        x248 : Int64,
       ) -> (@lib.Func[@kernel.Term, @num.Num], Positivstellensatz) raise {
         let p_3 = x247
         let n_1 = x248
         (p_3, Positivstellensatz::Axiom_le(n_1))
       },
       le,
-      @lib.range(0, @lib.length(le) - 1),
+      @lib.range(0L, @lib.sub63(Int::to_int64(@lib.length(le)), 1L)),
     )
     let lts_2 = @lib.map2(
       fn(
         x249 : @lib.Func[@kernel.Term, @num.Num],
-        x250 : Int,
+        x250 : Int64,
       ) -> (@lib.Func[@kernel.Term, @num.Num], Positivstellensatz) raise {
         let p_4 = x249
         let n_2 = x250
         (p_4, Positivstellensatz::Axiom_lt(n_2))
       },
       lt,
-      @lib.range(0, @lib.length(lt) - 1),
+      @lib.range(0L, @lib.sub63(Int::to_int64(@lib.length(lt)), 1L)),
     )
     linear_eqs(eqs_1, les_2, lts_2)
   }

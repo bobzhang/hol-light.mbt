@@ -628,7 +628,7 @@ fn Ctx::print_infix_app(
     let (tmt, tms) = @lib.rev_splitlist(t => dest_binary_term(hop, t), tm)
     tms.prepend(tmt)
   }
-  let newprec = get_infix_status(s).0
+  let newprec = get_infix_status(s).0.to_int()
   let fmt = self.fmt
   if newprec <= prec {
     fmt.open_hvbox(1)

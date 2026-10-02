@@ -464,14 +464,14 @@ pub fn char_chr(n : Int) -> Char raise {
 
 ///|
 /// `incr r`
-pub fn incr(r : Ref[Int]) -> Unit {
-  r.val = r.val + 1
+pub fn incr(r : Ref[Int64]) -> Unit {
+  r.val = add63(r.val, 1L)
 }
 
 ///|
 /// `decr r`
-pub fn decr(r : Ref[Int]) -> Unit {
-  r.val = r.val - 1
+pub fn decr(r : Ref[Int64]) -> Unit {
+  r.val = sub63(r.val, 1L)
 }
 
 ///|
@@ -543,16 +543,17 @@ pub fn temp_file(prefix : String, suffix : String) -> String {
 
 ///|
 /// `Array.init n f` (applies `f` to 0, 1, ... in order)
-pub fn[A] array_init(n : Int, f : (Int) -> A raise?) -> FixedArray[A] raise {
-  if n < 0 {
+pub fn[A] array_init(n : Int64, f : (Int64) -> A raise?) -> FixedArray[A] raise {
+  if n < 0L {
     raise @num.InvalidArgument("Array.init")
   }
-  if n == 0 {
+  if n == 0L {
     return []
   }
-  let out = FixedArray::make(n, f(0))
+  let n = int63_to_int(n)
+  let out = FixedArray::make(n, f(0L))
   for i in 1..<n {
-    out[i] = f(i)
+    out[i] = f(i.to_int64())
   }
   out
 }
@@ -560,11 +561,11 @@ pub fn[A] array_init(n : Int, f : (Int) -> A raise?) -> FixedArray[A] raise {
 ///|
 /// `Array.iteri f a`
 pub fn[A] array_iteri(
-  f : (Int, A) -> Unit raise?,
+  f : (Int64, A) -> Unit raise?,
   a : FixedArray[A],
 ) -> Unit raise? {
   for i, x in a {
-    f(i, x)
+    f(i.to_int64(), x)
   }
 }
 
