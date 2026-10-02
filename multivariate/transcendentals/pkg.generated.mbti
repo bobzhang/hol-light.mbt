@@ -1,0 +1,1495 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/transcendentals"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn absolutely_integrable_change_of_variables_polar() -> @kernel.Thm
+
+pub fn acs() -> @kernel.Thm
+
+pub fn acs_0() -> @kernel.Thm
+
+pub fn acs_1() -> @kernel.Thm
+
+pub fn acs_asn() -> @kernel.Thm
+
+pub fn acs_asn_sqrt_neg() -> @kernel.Thm
+
+pub fn acs_asn_sqrt_pos() -> @kernel.Thm
+
+pub fn acs_atn() -> @kernel.Thm
+
+pub fn acs_bounds() -> @kernel.Thm
+
+pub fn acs_bounds_lt() -> @kernel.Thm
+
+pub fn acs_cos() -> @kernel.Thm
+
+pub fn acs_inj() -> @kernel.Thm
+
+pub fn acs_mono_le() -> @kernel.Thm
+
+pub fn acs_mono_le_eq() -> @kernel.Thm
+
+pub fn acs_mono_lt() -> @kernel.Thm
+
+pub fn acs_mono_lt_eq() -> @kernel.Thm
+
+pub fn acs_neg() -> @kernel.Thm
+
+pub fn acs_neg_1() -> @kernel.Thm
+
+pub fn arg() -> @kernel.Thm
+
+pub fn arg_0() -> @kernel.Thm
+
+pub fn arg_atan_upperhalf() -> @kernel.Thm
+
+pub fn arg_cexp() -> @kernel.Thm
+
+pub fn arg_clog() -> @kernel.Thm
+
+pub fn arg_cnj() -> @kernel.Thm
+
+pub fn arg_def() -> @kernel.Thm
+
+pub fn arg_div_cx() -> @kernel.Thm
+
+pub fn arg_eq() -> @kernel.Thm
+
+pub fn arg_eq_0() -> @kernel.Thm
+
+pub fn arg_eq_0_pi() -> @kernel.Thm
+
+pub fn arg_eq_pi() -> @kernel.Thm
+
+pub fn arg_inv() -> @kernel.Thm
+
+pub fn arg_inv_eq_0() -> @kernel.Thm
+
+pub fn arg_le_div_sum() -> @kernel.Thm
+
+pub fn arg_le_div_sum_eq() -> @kernel.Thm
+
+pub fn arg_le_pi() -> @kernel.Thm
+
+pub fn arg_lt_nz() -> @kernel.Thm
+
+pub fn arg_lt_pi() -> @kernel.Thm
+
+pub fn arg_mul() -> @kernel.Thm
+
+pub fn arg_mul_cx() -> @kernel.Thm
+
+pub fn arg_num() -> @kernel.Thm
+
+pub fn arg_real() -> @kernel.Thm
+
+pub fn arg_rotate2d() -> @kernel.Thm
+
+pub fn arg_rotate2d_unique() -> @kernel.Thm
+
+pub fn arg_rotate2d_unique_2pi() -> @kernel.Thm
+
+pub fn arg_unique() -> @kernel.Thm
+
+pub fn asn() -> @kernel.Thm
+
+pub fn asn_0() -> @kernel.Thm
+
+pub fn asn_1() -> @kernel.Thm
+
+pub fn asn_acs() -> @kernel.Thm
+
+pub fn asn_acs_sqrt_neg() -> @kernel.Thm
+
+pub fn asn_acs_sqrt_pos() -> @kernel.Thm
+
+pub fn asn_atn() -> @kernel.Thm
+
+pub fn asn_bounds() -> @kernel.Thm
+
+pub fn asn_bounds_lt() -> @kernel.Thm
+
+pub fn asn_bounds_pi2() -> @kernel.Thm
+
+pub fn asn_mono_le() -> @kernel.Thm
+
+pub fn asn_mono_le_eq() -> @kernel.Thm
+
+pub fn asn_mono_lt() -> @kernel.Thm
+
+pub fn asn_mono_lt_eq() -> @kernel.Thm
+
+pub fn asn_neg() -> @kernel.Thm
+
+pub fn asn_neg_1() -> @kernel.Thm
+
+pub fn asn_plus_acs() -> @kernel.Thm
+
+pub fn asn_sin() -> @kernel.Thm
+
+pub fn atn() -> @kernel.Thm
+
+pub fn atn_0() -> @kernel.Thm
+
+pub fn atn_1() -> @kernel.Thm
+
+pub fn atn_abs() -> @kernel.Thm
+
+pub fn atn_abs_le_x() -> @kernel.Thm
+
+pub fn atn_add() -> @kernel.Thm
+
+pub fn atn_add_small() -> @kernel.Thm
+
+pub fn atn_bound() -> @kernel.Thm
+
+pub fn atn_bounds() -> @kernel.Thm
+
+pub fn atn_inj() -> @kernel.Thm
+
+pub fn atn_inv() -> @kernel.Thm
+
+pub fn atn_le_pi4() -> @kernel.Thm
+
+pub fn atn_le_x() -> @kernel.Thm
+
+pub fn atn_lt_pi4() -> @kernel.Thm
+
+pub fn atn_lt_pi4_neg() -> @kernel.Thm
+
+pub fn atn_lt_pi4_pos() -> @kernel.Thm
+
+pub fn atn_mono_le_eq() -> @kernel.Thm
+
+pub fn atn_mono_lt() -> @kernel.Thm
+
+pub fn atn_mono_lt_eq() -> @kernel.Thm
+
+pub fn atn_neg() -> @kernel.Thm
+
+pub fn atn_pos_le() -> @kernel.Thm
+
+pub fn atn_pos_lt() -> @kernel.Thm
+
+pub fn atn_tan() -> @kernel.Thm
+
+pub fn cacs() -> @kernel.Thm
+
+pub fn cacs_0() -> @kernel.Thm
+
+pub fn cacs_1() -> @kernel.Thm
+
+pub fn cacs_body_lemma() -> @kernel.Thm
+
+pub fn cacs_bounds() -> @kernel.Thm
+
+pub fn cacs_casn_sqrt_pos() -> @kernel.Thm
+
+pub fn cacs_ccos() -> @kernel.Thm
+
+pub fn cacs_neg_1() -> @kernel.Thm
+
+pub fn cacs_range_lemma() -> @kernel.Thm
+
+pub fn cacs_unique() -> @kernel.Thm
+
+pub fn card_complex_roots_unity() -> @kernel.Thm
+
+pub fn casn() -> @kernel.Thm
+
+pub fn casn_0() -> @kernel.Thm
+
+pub fn casn_1() -> @kernel.Thm
+
+pub fn casn_body_lemma() -> @kernel.Thm
+
+pub fn casn_bounds() -> @kernel.Thm
+
+pub fn casn_cacs_sqrt_pos() -> @kernel.Thm
+
+pub fn casn_csin() -> @kernel.Thm
+
+pub fn casn_neg_1() -> @kernel.Thm
+
+pub fn casn_range_lemma() -> @kernel.Thm
+
+pub fn casn_unique() -> @kernel.Thm
+
+pub fn catn() -> @kernel.Thm
+
+pub fn catn_0() -> @kernel.Thm
+
+pub fn catn_ctan() -> @kernel.Thm
+
+pub fn ccos() -> @kernel.Thm
+
+pub fn ccos_0() -> @kernel.Thm
+
+pub fn ccos_add() -> @kernel.Thm
+
+pub fn ccos_cacs() -> @kernel.Thm
+
+pub fn ccos_casn() -> @kernel.Thm
+
+pub fn ccos_casn_nz() -> @kernel.Thm
+
+pub fn ccos_converges() -> @kernel.Thm
+
+pub fn ccos_csin_csqrt() -> @kernel.Thm
+
+pub fn ccos_double() -> @kernel.Thm
+
+pub fn ccos_double_ccos() -> @kernel.Thm
+
+pub fn ccos_double_csin() -> @kernel.Thm
+
+pub fn ccos_eq() -> @kernel.Thm
+
+pub fn ccos_eq_0() -> @kernel.Thm
+
+pub fn ccos_eq_1() -> @kernel.Thm
+
+pub fn ccos_eq_minus1() -> @kernel.Thm
+
+pub fn ccos_neg() -> @kernel.Thm
+
+pub fn ccos_sub() -> @kernel.Thm
+
+pub fn ccot_double() -> @kernel.Thm
+
+pub fn cexp() -> @kernel.Thm
+
+pub fn cexp_0() -> @kernel.Thm
+
+pub fn cexp_add() -> @kernel.Thm
+
+pub fn cexp_add_mul() -> @kernel.Thm
+
+pub fn cexp_bound_blemma() -> @kernel.Thm
+
+pub fn cexp_bound_half() -> @kernel.Thm
+
+pub fn cexp_bound_lemma() -> @kernel.Thm
+
+pub fn cexp_clog() -> @kernel.Thm
+
+pub fn cexp_complex() -> @kernel.Thm
+
+pub fn cexp_converges() -> @kernel.Thm
+
+pub fn cexp_converges_uniformly() -> @kernel.Thm
+
+pub fn cexp_converges_uniformly_cauchy() -> @kernel.Thm
+
+pub fn cexp_converges_unique() -> @kernel.Thm
+
+pub fn cexp_eq() -> @kernel.Thm
+
+pub fn cexp_eq_1() -> @kernel.Thm
+
+pub fn cexp_euler() -> @kernel.Thm
+
+pub fn cexp_ii_ne_1() -> @kernel.Thm
+
+pub fn cexp_ii_pi() -> @kernel.Thm
+
+pub fn cexp_integer_2pi() -> @kernel.Thm
+
+pub fn cexp_lipschitz_bounded() -> @kernel.Thm
+
+pub fn cexp_mul_cpow() -> @kernel.Thm
+
+pub fn cexp_n() -> @kernel.Thm
+
+pub fn cexp_neg() -> @kernel.Thm
+
+pub fn cexp_neg_lmul() -> @kernel.Thm
+
+pub fn cexp_neg_rmul() -> @kernel.Thm
+
+pub fn cexp_nz() -> @kernel.Thm
+
+pub fn cexp_sub() -> @kernel.Thm
+
+pub fn cexp_vsum() -> @kernel.Thm
+
+pub fn circle_sincos() -> @kernel.Thm
+
+pub fn clog() -> @kernel.Thm
+
+pub fn clog_1() -> @kernel.Thm
+
+pub fn clog_cexp() -> @kernel.Thm
+
+pub fn clog_div_pos() -> @kernel.Thm
+
+pub fn clog_eq() -> @kernel.Thm
+
+pub fn clog_ii() -> @kernel.Thm
+
+pub fn clog_inv() -> @kernel.Thm
+
+pub fn clog_mul() -> @kernel.Thm
+
+pub fn clog_mul_cx() -> @kernel.Thm
+
+pub fn clog_mul_ii() -> @kernel.Thm
+
+pub fn clog_mul_pos() -> @kernel.Thm
+
+pub fn clog_mul_simple() -> @kernel.Thm
+
+pub fn clog_mul_unwinding() -> @kernel.Thm
+
+pub fn clog_neg() -> @kernel.Thm
+
+pub fn clog_neg_1() -> @kernel.Thm
+
+pub fn clog_neg_ii() -> @kernel.Thm
+
+pub fn clog_unique() -> @kernel.Thm
+
+pub fn clog_works() -> @kernel.Thm
+
+pub fn closed_arg_le() -> @kernel.Thm
+
+pub fn cnj_ccos() -> @kernel.Thm
+
+pub fn cnj_cexp() -> @kernel.Thm
+
+pub fn cnj_clog() -> @kernel.Thm
+
+pub fn cnj_csin() -> @kernel.Thm
+
+pub fn cnj_csqrt() -> @kernel.Thm
+
+pub fn cnj_ctan() -> @kernel.Thm
+
+pub fn complex_add_ccos() -> @kernel.Thm
+
+pub fn complex_add_csin() -> @kernel.Thm
+
+pub fn complex_add_ctan() -> @kernel.Thm
+
+pub fn complex_differentiable_at_cacs() -> @kernel.Thm
+
+pub fn complex_differentiable_at_casn() -> @kernel.Thm
+
+pub fn complex_differentiable_at_catn() -> @kernel.Thm
+
+pub fn complex_differentiable_at_ccos() -> @kernel.Thm
+
+pub fn complex_differentiable_at_cexp() -> @kernel.Thm
+
+pub fn complex_differentiable_at_clog() -> @kernel.Thm
+
+pub fn complex_differentiable_at_csin() -> @kernel.Thm
+
+pub fn complex_differentiable_at_csqrt() -> @kernel.Thm
+
+pub fn complex_differentiable_at_ctan() -> @kernel.Thm
+
+pub fn complex_differentiable_cpow_right() -> @kernel.Thm
+
+pub fn complex_differentiable_within_cacs() -> @kernel.Thm
+
+pub fn complex_differentiable_within_casn() -> @kernel.Thm
+
+pub fn complex_differentiable_within_catn() -> @kernel.Thm
+
+pub fn complex_differentiable_within_ccos() -> @kernel.Thm
+
+pub fn complex_differentiable_within_cexp() -> @kernel.Thm
+
+pub fn complex_differentiable_within_clog() -> @kernel.Thm
+
+pub fn complex_differentiable_within_csin() -> @kernel.Thm
+
+pub fn complex_differentiable_within_csqrt() -> @kernel.Thm
+
+pub fn complex_differentiable_within_ctan() -> @kernel.Thm
+
+pub fn complex_div_rotation() -> @kernel.Thm
+
+pub fn complex_eq_cexp() -> @kernel.Thm
+
+pub fn complex_mul_ccos_ccos() -> @kernel.Thm
+
+pub fn complex_mul_ccos_csin() -> @kernel.Thm
+
+pub fn complex_mul_csin_ccos() -> @kernel.Thm
+
+pub fn complex_mul_csin_csin() -> @kernel.Thm
+
+pub fn complex_norm_eq_1_cexp() -> @kernel.Thm
+
+pub fn complex_not_root_unity() -> @kernel.Thm
+
+pub fn complex_root_polyfun() -> @kernel.Thm
+
+pub fn complex_root_unity() -> @kernel.Thm
+
+pub fn complex_root_unity_eq() -> @kernel.Thm
+
+pub fn complex_root_unity_eq_1() -> @kernel.Thm
+
+pub fn complex_roots_unity() -> @kernel.Thm
+
+pub fn complex_sub_ccos() -> @kernel.Thm
+
+pub fn complex_sub_csin() -> @kernel.Thm
+
+pub fn complex_sub_ctan() -> @kernel.Thm
+
+pub fn complex_unimodular_polar() -> @kernel.Thm
+
+pub fn continuous_at_arg() -> @kernel.Thm
+
+pub fn continuous_at_cacs() -> @kernel.Thm
+
+pub fn continuous_at_casn() -> @kernel.Thm
+
+pub fn continuous_at_catn() -> @kernel.Thm
+
+pub fn continuous_at_ccos() -> @kernel.Thm
+
+pub fn continuous_at_cexp() -> @kernel.Thm
+
+pub fn continuous_at_clog() -> @kernel.Thm
+
+pub fn continuous_at_csin() -> @kernel.Thm
+
+pub fn continuous_at_csqrt() -> @kernel.Thm
+
+pub fn continuous_at_ctan() -> @kernel.Thm
+
+pub fn continuous_on_arg() -> @kernel.Thm
+
+pub fn continuous_on_cacs() -> @kernel.Thm
+
+pub fn continuous_on_cacs_real() -> @kernel.Thm
+
+pub fn continuous_on_casn() -> @kernel.Thm
+
+pub fn continuous_on_casn_real() -> @kernel.Thm
+
+pub fn continuous_on_catn() -> @kernel.Thm
+
+pub fn continuous_on_ccos() -> @kernel.Thm
+
+pub fn continuous_on_cexp() -> @kernel.Thm
+
+pub fn continuous_on_clog() -> @kernel.Thm
+
+pub fn continuous_on_compose_arg() -> @kernel.Thm
+
+pub fn continuous_on_cpow_right() -> @kernel.Thm
+
+pub fn continuous_on_csin() -> @kernel.Thm
+
+pub fn continuous_on_csqrt() -> @kernel.Thm
+
+pub fn continuous_on_ctan() -> @kernel.Thm
+
+pub fn continuous_on_upperhalf_arg() -> @kernel.Thm
+
+pub fn continuous_within_cacs() -> @kernel.Thm
+
+pub fn continuous_within_cacs_real() -> @kernel.Thm
+
+pub fn continuous_within_casn() -> @kernel.Thm
+
+pub fn continuous_within_casn_real() -> @kernel.Thm
+
+pub fn continuous_within_catn() -> @kernel.Thm
+
+pub fn continuous_within_ccos() -> @kernel.Thm
+
+pub fn continuous_within_cexp() -> @kernel.Thm
+
+pub fn continuous_within_clog() -> @kernel.Thm
+
+pub fn continuous_within_csin() -> @kernel.Thm
+
+pub fn continuous_within_csqrt() -> @kernel.Thm
+
+pub fn continuous_within_csqrt_posreal() -> @kernel.Thm
+
+pub fn continuous_within_ctan() -> @kernel.Thm
+
+pub fn continuous_within_upperhalf_arg() -> @kernel.Thm
+
+pub fn cos() -> @kernel.Thm
+
+pub fn cos_0() -> @kernel.Thm
+
+pub fn cos_abs() -> @kernel.Thm
+
+pub fn cos_acs() -> @kernel.Thm
+
+pub fn cos_add() -> @kernel.Thm
+
+pub fn cos_asn() -> @kernel.Thm
+
+pub fn cos_asn_nz() -> @kernel.Thm
+
+pub fn cos_atn() -> @kernel.Thm
+
+pub fn cos_atn_nz() -> @kernel.Thm
+
+pub fn cos_bound() -> @kernel.Thm
+
+pub fn cos_bounds() -> @kernel.Thm
+
+pub fn cos_double() -> @kernel.Thm
+
+pub fn cos_double_bound() -> @kernel.Thm
+
+pub fn cos_double_cos() -> @kernel.Thm
+
+pub fn cos_double_sin() -> @kernel.Thm
+
+pub fn cos_eq() -> @kernel.Thm
+
+pub fn cos_eq_0() -> @kernel.Thm
+
+pub fn cos_eq_1() -> @kernel.Thm
+
+pub fn cos_eq_minus1() -> @kernel.Thm
+
+pub fn cos_goesnegative() -> @kernel.Thm
+
+pub fn cos_goesnegative_lemma() -> @kernel.Thm
+
+pub fn cos_haszero() -> @kernel.Thm
+
+pub fn cos_inj_pi() -> @kernel.Thm
+
+pub fn cos_integer_2pi() -> @kernel.Thm
+
+pub fn cos_mono_le() -> @kernel.Thm
+
+pub fn cos_mono_le_eq() -> @kernel.Thm
+
+pub fn cos_mono_lt() -> @kernel.Thm
+
+pub fn cos_mono_lt_eq() -> @kernel.Thm
+
+pub fn cos_neg() -> @kernel.Thm
+
+pub fn cos_nontrivial() -> @kernel.Thm
+
+pub fn cos_npi() -> @kernel.Thm
+
+pub fn cos_one_2pi() -> @kernel.Thm
+
+pub fn cos_periodic() -> @kernel.Thm
+
+pub fn cos_periodic_pi() -> @kernel.Thm
+
+pub fn cos_pi() -> @kernel.Thm
+
+pub fn cos_pi2() -> @kernel.Thm
+
+pub fn cos_pi3() -> @kernel.Thm
+
+pub fn cos_pi6() -> @kernel.Thm
+
+pub fn cos_pos_pi() -> @kernel.Thm
+
+pub fn cos_pos_pi2() -> @kernel.Thm
+
+pub fn cos_pos_pi_le() -> @kernel.Thm
+
+pub fn cos_sin() -> @kernel.Thm
+
+pub fn cos_sub() -> @kernel.Thm
+
+pub fn cos_tan() -> @kernel.Thm
+
+pub fn cos_treble_cos() -> @kernel.Thm
+
+pub fn cos_zero() -> @kernel.Thm
+
+pub fn cos_zero_pi() -> @kernel.Thm
+
+pub fn cot_double() -> @kernel.Thm
+
+pub fn cpow() -> @kernel.Thm
+
+pub fn cpow_0() -> @kernel.Thm
+
+pub fn cpow_1() -> @kernel.Thm
+
+pub fn cpow_add() -> @kernel.Thm
+
+pub fn cpow_eq_0() -> @kernel.Thm
+
+pub fn cpow_mul_real() -> @kernel.Thm
+
+pub fn cpow_n() -> @kernel.Thm
+
+pub fn cpow_neg() -> @kernel.Thm
+
+pub fn cpow_real_real() -> @kernel.Thm
+
+pub fn cpow_sub() -> @kernel.Thm
+
+pub fn cpow_suc() -> @kernel.Thm
+
+pub fn csin() -> @kernel.Thm
+
+pub fn csin_0() -> @kernel.Thm
+
+pub fn csin_add() -> @kernel.Thm
+
+pub fn csin_cacs() -> @kernel.Thm
+
+pub fn csin_cacs_nz() -> @kernel.Thm
+
+pub fn csin_casn() -> @kernel.Thm
+
+pub fn csin_ccos_csqrt() -> @kernel.Thm
+
+pub fn csin_circle() -> @kernel.Thm
+
+pub fn csin_converges() -> @kernel.Thm
+
+pub fn csin_double() -> @kernel.Thm
+
+pub fn csin_eq() -> @kernel.Thm
+
+pub fn csin_eq_0() -> @kernel.Thm
+
+pub fn csin_eq_1() -> @kernel.Thm
+
+pub fn csin_eq_minus1() -> @kernel.Thm
+
+pub fn csin_neg() -> @kernel.Thm
+
+pub fn csin_sub() -> @kernel.Thm
+
+pub fn csqrt_cexp_clog() -> @kernel.Thm
+
+pub fn ctan() -> @kernel.Thm
+
+pub fn ctan_0() -> @kernel.Thm
+
+pub fn ctan_add() -> @kernel.Thm
+
+pub fn ctan_catn() -> @kernel.Thm
+
+pub fn ctan_ccot_double() -> @kernel.Thm
+
+pub fn ctan_cexp() -> @kernel.Thm
+
+pub fn ctan_double() -> @kernel.Thm
+
+pub fn ctan_neg() -> @kernel.Thm
+
+pub fn ctan_sub() -> @kernel.Thm
+
+pub fn cx_acs() -> @kernel.Thm
+
+pub fn cx_asn() -> @kernel.Thm
+
+pub fn cx_atn() -> @kernel.Thm
+
+pub fn cx_cos() -> @kernel.Thm
+
+pub fn cx_cosh() -> @kernel.Thm
+
+pub fn cx_exp() -> @kernel.Thm
+
+pub fn cx_log() -> @kernel.Thm
+
+pub fn cx_pi_nz() -> @kernel.Thm
+
+pub fn cx_sin() -> @kernel.Thm
+
+pub fn cx_sinh() -> @kernel.Thm
+
+pub fn cx_tan() -> @kernel.Thm
+
+pub fn demoivre() -> @kernel.Thm
+
+pub fn det_matrix_rotate2d() -> @kernel.Thm
+
+pub fn dist_cexp_ii_1() -> @kernel.Thm
+
+pub fn e_approx_32() -> @kernel.Thm
+
+pub fn euler() -> @kernel.Thm
+
+pub fn exists_complex_p() -> @kernel.Thm
+
+pub fn exists_complex_root() -> @kernel.Thm
+
+pub fn exp() -> @kernel.Thm
+
+pub fn exp_log() -> @kernel.Thm
+
+pub fn finite_card_complex_roots_unity() -> @kernel.Thm
+
+pub fn finite_card_complex_roots_unity_explicit() -> @kernel.Thm
+
+pub fn finite_complex_roots_unity() -> @kernel.Thm
+
+pub fn fubini_polar() -> @kernel.Thm
+
+pub fn fubini_tonelli_polar() -> @kernel.Thm
+
+pub fn has_absolute_integral_change_of_variables_polar() -> @kernel.Thm
+
+pub fn has_complex_derivative_cacs() -> @kernel.Thm
+
+pub fn has_complex_derivative_casn() -> @kernel.Thm
+
+pub fn has_complex_derivative_catn() -> @kernel.Thm
+
+pub fn has_complex_derivative_ccos() -> @kernel.Thm
+
+pub fn has_complex_derivative_cexp() -> @kernel.Thm
+
+pub fn has_complex_derivative_clog() -> @kernel.Thm
+
+pub fn has_complex_derivative_cpow() -> @kernel.Thm
+
+pub fn has_complex_derivative_cpow_right() -> @kernel.Thm
+
+pub fn has_complex_derivative_csin() -> @kernel.Thm
+
+pub fn has_complex_derivative_csqrt() -> @kernel.Thm
+
+pub fn has_complex_derivative_ctan() -> @kernel.Thm
+
+pub fn has_derivative_polar() -> @kernel.Thm
+
+pub fn has_size_complex_roots_unity() -> @kernel.Thm
+
+pub fn holomorphic_on_cacs() -> @kernel.Thm
+
+pub fn holomorphic_on_casn() -> @kernel.Thm
+
+pub fn holomorphic_on_catn() -> @kernel.Thm
+
+pub fn holomorphic_on_ccos() -> @kernel.Thm
+
+pub fn holomorphic_on_cexp() -> @kernel.Thm
+
+pub fn holomorphic_on_clog() -> @kernel.Thm
+
+pub fn holomorphic_on_cpow_right() -> @kernel.Thm
+
+pub fn holomorphic_on_csin() -> @kernel.Thm
+
+pub fn holomorphic_on_csqrt() -> @kernel.Thm
+
+pub fn holomorphic_on_ctan() -> @kernel.Thm
+
+pub fn homotopic_antipodal_identity_map() -> @kernel.Thm
+
+pub fn homotopic_circlemaps_imp_homotopic_loops() -> @kernel.Thm
+
+pub fn homotopic_invertible_linear_maps() -> @kernel.Thm
+
+pub fn homotopic_invertible_linear_maps_alt() -> @kernel.Thm
+
+pub fn homotopic_linear_maps() -> @kernel.Thm
+
+pub fn homotopic_linear_maps_eq() -> @kernel.Thm
+
+pub fn homotopic_linear_positive_definite_maps() -> @kernel.Thm
+
+pub fn homotopic_linear_positive_semidefinite_maps() -> @kernel.Thm
+
+pub fn homotopic_loops_imp_homotopic_circlemaps() -> @kernel.Thm
+
+pub fn homotopic_orthogonal_transformations_eq() -> @kernel.Thm
+
+pub fn homotopic_orthogonal_transformations_sphere() -> @kernel.Thm
+
+pub fn homotopic_restricted_linear_maps() -> @kernel.Thm
+
+pub fn homotopic_special_orthogonal_transformations() -> @kernel.Thm
+
+pub fn homotopic_with_orthogonal_transformations_univ() -> @kernel.Thm
+
+pub fn homotopy_equivalent_simple_connectedness() -> @kernel.Thm
+
+pub fn im_ccos() -> @kernel.Thm
+
+pub fn im_cexp() -> @kernel.Thm
+
+pub fn im_clog_eq_0() -> @kernel.Thm
+
+pub fn im_clog_eq_pi() -> @kernel.Thm
+
+pub fn im_clog_pos_le() -> @kernel.Thm
+
+pub fn im_clog_pos_lt() -> @kernel.Thm
+
+pub fn im_clog_pos_lt_imp() -> @kernel.Thm
+
+pub fn im_complex_div_lemma() -> @kernel.Thm
+
+pub fn im_csin() -> @kernel.Thm
+
+pub fn im_pow_2() -> @kernel.Thm
+
+pub fn ivt_decreasing_im() -> @kernel.Thm
+
+pub fn ivt_decreasing_re() -> @kernel.Thm
+
+pub fn ivt_increasing_im() -> @kernel.Thm
+
+pub fn ivt_increasing_re() -> @kernel.Thm
+
+pub fn lim_1_over_log() -> @kernel.Thm
+
+pub fn lim_1_over_n() -> @kernel.Thm
+
+pub fn lim_1_over_power() -> @kernel.Thm
+
+pub fn lim_cexp_minus_1() -> @kernel.Thm
+
+pub fn lim_csin_over_x() -> @kernel.Thm
+
+pub fn lim_cx_over_cexp() -> @kernel.Thm
+
+pub fn lim_inv_n() -> @kernel.Thm
+
+pub fn lim_inv_n_offset() -> @kernel.Thm
+
+pub fn lim_inv_n_pow() -> @kernel.Thm
+
+pub fn lim_inv_n_pow_offset() -> @kernel.Thm
+
+pub fn lim_inv_x() -> @kernel.Thm
+
+pub fn lim_inv_x_offset() -> @kernel.Thm
+
+pub fn lim_inv_x_pow() -> @kernel.Thm
+
+pub fn lim_inv_x_pow_offset() -> @kernel.Thm
+
+pub fn lim_inv_z() -> @kernel.Thm
+
+pub fn lim_inv_z_offset() -> @kernel.Thm
+
+pub fn lim_inv_z_pow() -> @kernel.Thm
+
+pub fn lim_inv_z_pow_offset() -> @kernel.Thm
+
+pub fn lim_log_over_n() -> @kernel.Thm
+
+pub fn lim_log_over_power() -> @kernel.Thm
+
+pub fn lim_log_over_power_n() -> @kernel.Thm
+
+pub fn lim_log_over_x() -> @kernel.Thm
+
+pub fn lim_log_over_z() -> @kernel.Thm
+
+pub fn lim_n_over_pown() -> @kernel.Thm
+
+pub fn lim_n_times_pown() -> @kernel.Thm
+
+pub fn lim_pown() -> @kernel.Thm
+
+pub fn lim_z_times_clog() -> @kernel.Thm
+
+pub fn linear_rotate2d() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn log_1() -> @kernel.Thm
+
+pub fn log_def() -> @kernel.Thm
+
+pub fn log_div() -> @kernel.Thm
+
+pub fn log_exp() -> @kernel.Thm
+
+pub fn log_inj() -> @kernel.Thm
+
+pub fn log_inv() -> @kernel.Thm
+
+pub fn log_le() -> @kernel.Thm
+
+pub fn log_le_strong() -> @kernel.Thm
+
+pub fn log_lt_x() -> @kernel.Thm
+
+pub fn log_mono_le() -> @kernel.Thm
+
+pub fn log_mono_le_imp() -> @kernel.Thm
+
+pub fn log_mono_le_rev() -> @kernel.Thm
+
+pub fn log_mono_lt() -> @kernel.Thm
+
+pub fn log_mono_lt_imp() -> @kernel.Thm
+
+pub fn log_mono_lt_rev() -> @kernel.Thm
+
+pub fn log_mul() -> @kernel.Thm
+
+pub fn log_pos() -> @kernel.Thm
+
+pub fn log_pos_lt() -> @kernel.Thm
+
+pub fn log_pow() -> @kernel.Thm
+
+pub fn log_product() -> @kernel.Thm
+
+pub fn log_root() -> @kernel.Thm
+
+pub fn log_rpow() -> @kernel.Thm
+
+pub fn log_sqrt() -> @kernel.Thm
+
+pub fn machin() -> @kernel.Thm
+
+pub fn machin_euler() -> @kernel.Thm
+
+pub fn machin_gauss() -> @kernel.Thm
+
+pub fn matrix_rotate2d() -> @kernel.Thm
+
+pub fn norm_ccos_le() -> @kernel.Thm
+
+pub fn norm_ccos_plus1_le() -> @kernel.Thm
+
+pub fn norm_ccos_pow_2() -> @kernel.Thm
+
+pub fn norm_cexp() -> @kernel.Thm
+
+pub fn norm_cexp_ii() -> @kernel.Thm
+
+pub fn norm_cexp_imaginary() -> @kernel.Thm
+
+pub fn norm_cossin() -> @kernel.Thm
+
+pub fn norm_cpow() -> @kernel.Thm
+
+pub fn norm_cpow_real() -> @kernel.Thm
+
+pub fn norm_cpow_real_mono() -> @kernel.Thm
+
+pub fn norm_csin_pow_2() -> @kernel.Thm
+
+pub fn norm_rotate2d() -> @kernel.Thm
+
+pub fn nullhomotopic_orthogonal_transformation() -> @kernel.Thm
+
+pub fn open_arg_gt() -> @kernel.Thm
+
+pub fn open_arg_ltt() -> @kernel.Thm
+
+pub fn orthogonal_transformation_rotate2d() -> @kernel.Thm
+
+pub fn pi() -> @kernel.Thm
+
+pub fn pi2_bounds() -> @kernel.Thm
+
+pub fn pi_approx_32() -> @kernel.Thm
+
+pub fn pi_nz() -> @kernel.Thm
+
+pub fn pi_pos() -> @kernel.Thm
+
+pub fn pi_pos_le() -> @kernel.Thm
+
+pub fn pi_works() -> @kernel.Thm
+
+pub fn re_cacs() -> @kernel.Thm
+
+pub fn re_cacs_bound() -> @kernel.Thm
+
+pub fn re_cacs_bounds() -> @kernel.Thm
+
+pub fn re_casn() -> @kernel.Thm
+
+pub fn re_casn_bound() -> @kernel.Thm
+
+pub fn re_casn_bounds() -> @kernel.Thm
+
+pub fn re_catn_bounds() -> @kernel.Thm
+
+pub fn re_ccos() -> @kernel.Thm
+
+pub fn re_cexp() -> @kernel.Thm
+
+pub fn re_clog() -> @kernel.Thm
+
+pub fn re_clog_pos_le() -> @kernel.Thm
+
+pub fn re_clog_pos_lt() -> @kernel.Thm
+
+pub fn re_clog_pos_lt_imp() -> @kernel.Thm
+
+pub fn re_complex_div_lemma() -> @kernel.Thm
+
+pub fn re_csin() -> @kernel.Thm
+
+pub fn re_pow_2() -> @kernel.Thm
+
+pub fn real_abs_cos_mono_le_eq() -> @kernel.Thm
+
+pub fn real_abs_exp() -> @kernel.Thm
+
+pub fn real_abs_pi() -> @kernel.Thm
+
+pub fn real_abs_rpow() -> @kernel.Thm
+
+pub fn real_abs_sin_bound_le() -> @kernel.Thm
+
+pub fn real_abs_sin_bound_lt() -> @kernel.Thm
+
+pub fn real_acs() -> @kernel.Thm
+
+pub fn real_add_arg() -> @kernel.Thm
+
+pub fn real_add_cos() -> @kernel.Thm
+
+pub fn real_add_sin() -> @kernel.Thm
+
+pub fn real_add_tan() -> @kernel.Thm
+
+pub fn real_asn() -> @kernel.Thm
+
+pub fn real_cos() -> @kernel.Thm
+
+pub fn real_exp() -> @kernel.Thm
+
+pub fn real_exp_0() -> @kernel.Thm
+
+pub fn real_exp_add() -> @kernel.Thm
+
+pub fn real_exp_add_mul() -> @kernel.Thm
+
+pub fn real_exp_bound_lemma() -> @kernel.Thm
+
+pub fn real_exp_eq_1() -> @kernel.Thm
+
+pub fn real_exp_inj() -> @kernel.Thm
+
+pub fn real_exp_le_x() -> @kernel.Thm
+
+pub fn real_exp_log() -> @kernel.Thm
+
+pub fn real_exp_lt_1() -> @kernel.Thm
+
+pub fn real_exp_mono_imp() -> @kernel.Thm
+
+pub fn real_exp_mono_le() -> @kernel.Thm
+
+pub fn real_exp_mono_lt() -> @kernel.Thm
+
+pub fn real_exp_n() -> @kernel.Thm
+
+pub fn real_exp_neg() -> @kernel.Thm
+
+pub fn real_exp_neg_mul() -> @kernel.Thm
+
+pub fn real_exp_neg_mul2() -> @kernel.Thm
+
+pub fn real_exp_nz() -> @kernel.Thm
+
+pub fn real_exp_pos_le() -> @kernel.Thm
+
+pub fn real_exp_pos_lt() -> @kernel.Thm
+
+pub fn real_exp_sub() -> @kernel.Thm
+
+pub fn real_exp_sum() -> @kernel.Thm
+
+pub fn real_inv_rpow() -> @kernel.Thm
+
+pub fn real_le_root() -> @kernel.Thm
+
+pub fn real_max_rpow() -> @kernel.Thm
+
+pub fn real_min_rpow() -> @kernel.Thm
+
+pub fn real_mul_cos_cos() -> @kernel.Thm
+
+pub fn real_mul_cos_sin() -> @kernel.Thm
+
+pub fn real_mul_sin_cos() -> @kernel.Thm
+
+pub fn real_mul_sin_sin() -> @kernel.Thm
+
+pub fn real_pow_root() -> @kernel.Thm
+
+pub fn real_root_div() -> @kernel.Thm
+
+pub fn real_root_inv() -> @kernel.Thm
+
+pub fn real_root_le() -> @kernel.Thm
+
+pub fn real_root_mul() -> @kernel.Thm
+
+pub fn real_root_pow() -> @kernel.Thm
+
+pub fn real_root_pow_gen() -> @kernel.Thm
+
+pub fn real_root_rpow() -> @kernel.Thm
+
+pub fn real_sin() -> @kernel.Thm
+
+pub fn real_sub_arg() -> @kernel.Thm
+
+pub fn real_sub_cos() -> @kernel.Thm
+
+pub fn real_sub_sin() -> @kernel.Thm
+
+pub fn real_sub_tan() -> @kernel.Thm
+
+pub fn real_tan() -> @kernel.Thm
+
+pub fn root() -> @kernel.Thm
+
+pub fn root_0() -> @kernel.Thm
+
+pub fn root_1() -> @kernel.Thm
+
+pub fn root_2() -> @kernel.Thm
+
+pub fn root_eq_0() -> @kernel.Thm
+
+pub fn root_exp_log() -> @kernel.Thm
+
+pub fn root_inj() -> @kernel.Thm
+
+pub fn root_le_0() -> @kernel.Thm
+
+pub fn root_lt_0() -> @kernel.Thm
+
+pub fn root_mono_le() -> @kernel.Thm
+
+pub fn root_mono_le_eq() -> @kernel.Thm
+
+pub fn root_mono_lt() -> @kernel.Thm
+
+pub fn root_mono_lt_eq() -> @kernel.Thm
+
+pub fn root_neg() -> @kernel.Thm
+
+pub fn root_pos_le() -> @kernel.Thm
+
+pub fn root_pos_lt() -> @kernel.Thm
+
+pub fn root_product() -> @kernel.Thm
+
+pub fn root_unique() -> @kernel.Thm
+
+pub fn root_works() -> @kernel.Thm
+
+pub fn rotate2d() -> @kernel.Thm
+
+pub fn rotate2d_0() -> @kernel.Thm
+
+pub fn rotate2d_2pi() -> @kernel.Thm
+
+pub fn rotate2d_add() -> @kernel.Thm
+
+pub fn rotate2d_add_vectors() -> @kernel.Thm
+
+pub fn rotate2d_complex() -> @kernel.Thm
+
+pub fn rotate2d_eq() -> @kernel.Thm
+
+pub fn rotate2d_eq_0() -> @kernel.Thm
+
+pub fn rotate2d_npi() -> @kernel.Thm
+
+pub fn rotate2d_pi() -> @kernel.Thm
+
+pub fn rotate2d_pi2() -> @kernel.Thm
+
+pub fn rotate2d_polar() -> @kernel.Thm
+
+pub fn rotate2d_sub() -> @kernel.Thm
+
+pub fn rotate2d_sub_arg() -> @kernel.Thm
+
+pub fn rotate2d_zero() -> @kernel.Thm
+
+pub fn rotation_matrix_rotate2d() -> @kernel.Thm
+
+pub fn rotation_matrix_rotate2d_eq() -> @kernel.Thm
+
+pub fn rotation_rotate2d() -> @kernel.Thm
+
+pub fn rotation_rotate2d_exists() -> @kernel.Thm
+
+pub fn rotation_rotate2d_exists_gen() -> @kernel.Thm
+
+pub fn rotation_rotate2d_exists_orthogonal() -> @kernel.Thm
+
+pub fn rotation_rotate2d_exists_orthogonal_oriented() -> @kernel.Thm
+
+pub fn rpow() -> @kernel.Thm
+
+pub fn rpow_0() -> @kernel.Thm
+
+pub fn rpow_1_le() -> @kernel.Thm
+
+pub fn rpow_add() -> @kernel.Thm
+
+pub fn rpow_add_alt() -> @kernel.Thm
+
+pub fn rpow_add_integer() -> @kernel.Thm
+
+pub fn rpow_div() -> @kernel.Thm
+
+pub fn rpow_eq_0() -> @kernel.Thm
+
+pub fn rpow_inj() -> @kernel.Thm
+
+pub fn rpow_inv() -> @kernel.Thm
+
+pub fn rpow_le2() -> @kernel.Thm
+
+pub fn rpow_le_1() -> @kernel.Thm
+
+pub fn rpow_lneg() -> @kernel.Thm
+
+pub fn rpow_lt2() -> @kernel.Thm
+
+pub fn rpow_lt_1() -> @kernel.Thm
+
+pub fn rpow_mono_inv() -> @kernel.Thm
+
+pub fn rpow_mono_le() -> @kernel.Thm
+
+pub fn rpow_mono_le_eq() -> @kernel.Thm
+
+pub fn rpow_mono_lt() -> @kernel.Thm
+
+pub fn rpow_mono_lt_eq() -> @kernel.Thm
+
+pub fn rpow_mul() -> @kernel.Thm
+
+pub fn rpow_neg() -> @kernel.Thm
+
+pub fn rpow_one() -> @kernel.Thm
+
+pub fn rpow_pos_le() -> @kernel.Thm
+
+pub fn rpow_pos_lt() -> @kernel.Thm
+
+pub fn rpow_pow() -> @kernel.Thm
+
+pub fn rpow_product() -> @kernel.Thm
+
+pub fn rpow_rpow() -> @kernel.Thm
+
+pub fn rpow_sqrt() -> @kernel.Thm
+
+pub fn rpow_sub() -> @kernel.Thm
+
+pub fn rpow_sub_alt() -> @kernel.Thm
+
+pub fn rpow_zero() -> @kernel.Thm
+
+pub fn simply_connected_eq_contractible_circlemap() -> @kernel.Thm
+
+pub fn simply_connected_eq_homotopic_circlemaps() -> @kernel.Thm
+
+pub fn sin() -> @kernel.Thm
+
+pub fn sin_0() -> @kernel.Thm
+
+pub fn sin_acs() -> @kernel.Thm
+
+pub fn sin_acs_nz() -> @kernel.Thm
+
+pub fn sin_add() -> @kernel.Thm
+
+pub fn sin_asn() -> @kernel.Thm
+
+pub fn sin_atn() -> @kernel.Thm
+
+pub fn sin_bound() -> @kernel.Thm
+
+pub fn sin_bounds() -> @kernel.Thm
+
+pub fn sin_circle() -> @kernel.Thm
+
+pub fn sin_cos() -> @kernel.Thm
+
+pub fn sin_cos_eq() -> @kernel.Thm
+
+pub fn sin_cos_inj() -> @kernel.Thm
+
+pub fn sin_cos_sqrt() -> @kernel.Thm
+
+pub fn sin_double() -> @kernel.Thm
+
+pub fn sin_eq() -> @kernel.Thm
+
+pub fn sin_eq_0() -> @kernel.Thm
+
+pub fn sin_eq_0_pi() -> @kernel.Thm
+
+pub fn sin_eq_1() -> @kernel.Thm
+
+pub fn sin_eq_minus1() -> @kernel.Thm
+
+pub fn sin_haszero() -> @kernel.Thm
+
+pub fn sin_haszero_minimal() -> @kernel.Thm
+
+pub fn sin_inj_pi() -> @kernel.Thm
+
+pub fn sin_integer_2pi() -> @kernel.Thm
+
+pub fn sin_integer_pi() -> @kernel.Thm
+
+pub fn sin_mono_le() -> @kernel.Thm
+
+pub fn sin_mono_le_eq() -> @kernel.Thm
+
+pub fn sin_mono_lt() -> @kernel.Thm
+
+pub fn sin_mono_lt_eq() -> @kernel.Thm
+
+pub fn sin_nearzero() -> @kernel.Thm
+
+pub fn sin_neg() -> @kernel.Thm
+
+pub fn sin_nontrivial() -> @kernel.Thm
+
+pub fn sin_npi() -> @kernel.Thm
+
+pub fn sin_periodic() -> @kernel.Thm
+
+pub fn sin_periodic_pi() -> @kernel.Thm
+
+pub fn sin_pi() -> @kernel.Thm
+
+pub fn sin_pi2() -> @kernel.Thm
+
+pub fn sin_pi3() -> @kernel.Thm
+
+pub fn sin_pi6() -> @kernel.Thm
+
+pub fn sin_pi6_straddle() -> @kernel.Thm
+
+pub fn sin_pimul_eq_0() -> @kernel.Thm
+
+pub fn sin_pos_pi() -> @kernel.Thm
+
+pub fn sin_pos_pi2() -> @kernel.Thm
+
+pub fn sin_pos_pi_le() -> @kernel.Thm
+
+pub fn sin_pos_pi_rev() -> @kernel.Thm
+
+pub fn sin_sub() -> @kernel.Thm
+
+pub fn sin_tan() -> @kernel.Thm
+
+pub fn sin_total_pos() -> @kernel.Thm
+
+pub fn sin_zero() -> @kernel.Thm
+
+pub fn sin_zero_pi() -> @kernel.Thm
+
+pub fn sincos_principal_value() -> @kernel.Thm
+
+pub fn sincos_total_2pi() -> @kernel.Thm
+
+pub fn sincos_total_pi() -> @kernel.Thm
+
+pub fn sincos_total_pi2() -> @kernel.Thm
+
+pub fn sqrt_product() -> @kernel.Thm
+
+pub fn summable_zeta() -> @kernel.Thm
+
+pub fn summable_zeta_integer() -> @kernel.Thm
+
+pub fn tan() -> @kernel.Thm
+
+pub fn tan_0() -> @kernel.Thm
+
+pub fn tan_abs_ge_x() -> @kernel.Thm
+
+pub fn tan_add() -> @kernel.Thm
+
+pub fn tan_atn() -> @kernel.Thm
+
+pub fn tan_bound_pi2() -> @kernel.Thm
+
+pub fn tan_cot() -> @kernel.Thm
+
+pub fn tan_cot_double() -> @kernel.Thm
+
+pub fn tan_def() -> @kernel.Thm
+
+pub fn tan_double() -> @kernel.Thm
+
+pub fn tan_mono_le() -> @kernel.Thm
+
+pub fn tan_mono_le_eq() -> @kernel.Thm
+
+pub fn tan_mono_lt() -> @kernel.Thm
+
+pub fn tan_mono_lt_eq() -> @kernel.Thm
+
+pub fn tan_neg() -> @kernel.Thm
+
+pub fn tan_npi() -> @kernel.Thm
+
+pub fn tan_periodic_npi() -> @kernel.Thm
+
+pub fn tan_periodic_pi() -> @kernel.Thm
+
+pub fn tan_pi() -> @kernel.Thm
+
+pub fn tan_pi4() -> @kernel.Thm
+
+pub fn tan_pos_pi2() -> @kernel.Thm
+
+pub fn tan_pos_pi2_le() -> @kernel.Thm
+
+pub fn tan_sec() -> @kernel.Thm
+
+pub fn tan_sub() -> @kernel.Thm
+
+pub fn tan_total() -> @kernel.Thm
+
+pub fn tan_total_lemma() -> @kernel.Thm
+
+pub fn tan_total_pos() -> @kernel.Thm
+
+pub fn taylor_ccos() -> @kernel.Thm
+
+pub fn taylor_ccos_raw() -> @kernel.Thm
+
+pub fn taylor_cexp() -> @kernel.Thm
+
+pub fn taylor_csin() -> @kernel.Thm
+
+pub fn taylor_csin_raw() -> @kernel.Thm
+
+pub fn unwinding() -> @kernel.Thm
+
+pub fn unwinding_2pi() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

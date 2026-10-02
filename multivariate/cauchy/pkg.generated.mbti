@@ -1,0 +1,985 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/cauchy"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn absolutely_continuous_rectifiable_valid_path() -> @kernel.Thm
+
+pub fn analytic_complex_derivative() -> @kernel.Thm
+
+pub fn analytic_continuation() -> @kernel.Thm
+
+pub fn analytic_higher_complex_derivative() -> @kernel.Thm
+
+pub fn analytic_iff_power_series() -> @kernel.Thm
+
+pub fn arc_partcirclepath() -> @kernel.Thm
+
+pub fn ball_biholomorphism_exists() -> @kernel.Thm
+
+pub fn ball_biholomorphism_moebius_function() -> @kernel.Thm
+
+pub fn bloch() -> @kernel.Thm
+
+pub fn bloch_corollary() -> @kernel.Thm
+
+pub fn bloch_lemma() -> @kernel.Thm
+
+pub fn bloch_unit() -> @kernel.Thm
+
+pub fn borsukian_eq_simply_connected() -> @kernel.Thm
+
+pub fn borsukian_separation_open_closed() -> @kernel.Thm
+
+pub fn bounded_valid_path_image() -> @kernel.Thm
+
+pub fn caratheodory_conformal_extension_lemma() -> @kernel.Thm
+
+pub fn caratheodory_conformal_extension_theorem() -> @kernel.Thm
+
+pub fn casorati_weierstrass() -> @kernel.Thm
+
+pub fn catn_converges() -> @kernel.Thm
+
+pub fn catn_converges_strong() -> @kernel.Thm
+
+pub fn cauchy_derivative_integral_circlepath() -> @kernel.Thm
+
+pub fn cauchy_has_path_integral_higher_derivative_circlepath() -> @kernel.Thm
+
+pub fn cauchy_higher_complex_derivative_bound() -> @kernel.Thm
+
+pub fn cauchy_higher_derivative_integral_circlepath() -> @kernel.Thm
+
+pub fn cauchy_inequality() -> @kernel.Thm
+
+pub fn cauchy_integral_circlepath() -> @kernel.Thm
+
+pub fn cauchy_integral_circlepath_simple() -> @kernel.Thm
+
+pub fn cauchy_integral_formula_convex() -> @kernel.Thm
+
+pub fn cauchy_integral_formula_convex_simple() -> @kernel.Thm
+
+pub fn cauchy_integral_formula_global() -> @kernel.Thm
+
+pub fn cauchy_integral_formula_weak() -> @kernel.Thm
+
+pub fn cauchy_next_derivative() -> @kernel.Thm
+
+pub fn cauchy_next_derivative_circlepath() -> @kernel.Thm
+
+pub fn cauchy_theorem_convex() -> @kernel.Thm
+
+pub fn cauchy_theorem_convex_simple() -> @kernel.Thm
+
+pub fn cauchy_theorem_disc() -> @kernel.Thm
+
+pub fn cauchy_theorem_disc_simple() -> @kernel.Thm
+
+pub fn cauchy_theorem_flat() -> @kernel.Thm
+
+pub fn cauchy_theorem_flat_lemma() -> @kernel.Thm
+
+pub fn cauchy_theorem_global() -> @kernel.Thm
+
+pub fn cauchy_theorem_global_outside() -> @kernel.Thm
+
+pub fn cauchy_theorem_homotopic_loops() -> @kernel.Thm
+
+pub fn cauchy_theorem_homotopic_paths() -> @kernel.Thm
+
+pub fn cauchy_theorem_null_homotopic() -> @kernel.Thm
+
+pub fn cauchy_theorem_primitive() -> @kernel.Thm
+
+pub fn cauchy_theorem_quadrisection() -> @kernel.Thm
+
+pub fn cauchy_theorem_simply_connected() -> @kernel.Thm
+
+pub fn cauchy_theorem_starlike() -> @kernel.Thm
+
+pub fn cauchy_theorem_starlike_simple() -> @kernel.Thm
+
+pub fn cauchy_theorem_triangle() -> @kernel.Thm
+
+pub fn cauchy_theorem_triangle_cofinite() -> @kernel.Thm
+
+pub fn cauchy_theorem_triangle_interior() -> @kernel.Thm
+
+pub fn ccot_converges() -> @kernel.Thm
+
+pub fn cexp_limit() -> @kernel.Thm
+
+pub fn circlepath() -> @kernel.Thm
+
+pub fn circlepath_v1() -> @kernel.Thm
+
+pub fn clog_converges() -> @kernel.Thm
+
+pub fn clog_converges_strong() -> @kernel.Thm
+
+pub fn closed_path() -> @kernel.Thm
+
+pub fn closed_valid_path_image() -> @kernel.Thm
+
+pub fn compact_valid_path_image() -> @kernel.Thm
+
+pub fn complex_integer() -> @kernel.Thm
+
+pub fn complex_integer_v1() -> @kernel.Thm
+
+pub fn connected_complement_iff_simply_connected_components() -> @kernel.Thm
+
+pub fn connected_valid_path_image() -> @kernel.Thm
+
+pub fn continuous_at_winding_number() -> @kernel.Thm
+
+pub fn continuous_on_winding_number() -> @kernel.Thm
+
+pub fn contractible_eq_simply_connected_2d() -> @kernel.Thm
+
+pub fn convex_hull_subset() -> @kernel.Thm
+
+pub fn covering_space_lift_holomorphic() -> @kernel.Thm
+
+pub fn covering_space_lift_is_holomorphic() -> @kernel.Thm
+
+pub fn covering_space_pow_punctured_plane() -> @kernel.Thm
+
+pub fn covering_space_square_punctured_plane() -> @kernel.Thm
+
+pub fn ctan_converges() -> @kernel.Thm
+
+pub fn cx_2pii_nz() -> @kernel.Thm
+
+pub fn differentiable_imp_piecewise_differentiable() -> @kernel.Thm
+
+pub fn differentiable_on_imp_piecewise_differentiable() -> @kernel.Thm
+
+pub fn differentiable_piecewise_differentiable_compose() -> @kernel.Thm
+
+pub fn exp_limit() -> @kernel.Thm
+
+pub fn finite_fundamental_group_imp_borsukian() -> @kernel.Thm
+
+pub fn finite_order_fundamental_group_imp_borsukian() -> @kernel.Thm
+
+pub fn first_cartan_thm_dim_1() -> @kernel.Thm
+
+pub fn frontier_proper_holomorphic_image() -> @kernel.Thm
+
+pub fn fta() -> @kernel.Thm
+
+pub fn great_picard() -> @kernel.Thm
+
+pub fn great_picard_alt() -> @kernel.Thm
+
+pub fn great_picard_infinite() -> @kernel.Thm
+
+pub fn hadamard_three_circle() -> @kernel.Thm
+
+pub fn hadamard_three_circle_explicit() -> @kernel.Thm
+
+pub fn hadamard_three_line_explicit_im() -> @kernel.Thm
+
+pub fn hadamard_three_line_explicit_re() -> @kernel.Thm
+
+pub fn hadamard_three_line_im() -> @kernel.Thm
+
+pub fn hadamard_three_line_re() -> @kernel.Thm
+
+pub fn has_chain_integral_chain_integral() -> @kernel.Thm
+
+pub fn has_complex_derivative_higher_complex_derivative() -> @kernel.Thm
+
+pub fn has_complex_derivative_iter_1() -> @kernel.Thm
+
+pub fn has_complex_derivative_locally_injective() -> @kernel.Thm
+
+pub fn has_complex_derivative_locally_invertible() -> @kernel.Thm
+
+pub fn has_complex_derivative_uniform_limit() -> @kernel.Thm
+
+pub fn has_complex_derivative_uniform_sequence() -> @kernel.Thm
+
+pub fn has_integral_localized_vector_derivative() -> @kernel.Thm
+
+pub fn has_integral_path_integral_subpath() -> @kernel.Thm
+
+pub fn has_path_integral() -> @kernel.Thm
+
+pub fn has_path_integral_0() -> @kernel.Thm
+
+pub fn has_path_integral_add() -> @kernel.Thm
+
+pub fn has_path_integral_bound_circlepath() -> @kernel.Thm
+
+pub fn has_path_integral_bound_circlepath_strong() -> @kernel.Thm
+
+pub fn has_path_integral_bound_linepath() -> @kernel.Thm
+
+pub fn has_path_integral_bound_linepath_strong() -> @kernel.Thm
+
+pub fn has_path_integral_bound_partcirclepath() -> @kernel.Thm
+
+pub fn has_path_integral_bound_partcirclepath_strong() -> @kernel.Thm
+
+pub fn has_path_integral_complex_div() -> @kernel.Thm
+
+pub fn has_path_integral_complex_lmul() -> @kernel.Thm
+
+pub fn has_path_integral_complex_rmul() -> @kernel.Thm
+
+pub fn has_path_integral_const_linepath() -> @kernel.Thm
+
+pub fn has_path_integral_eq() -> @kernel.Thm
+
+pub fn has_path_integral_integrable() -> @kernel.Thm
+
+pub fn has_path_integral_integrable_integral() -> @kernel.Thm
+
+pub fn has_path_integral_integral() -> @kernel.Thm
+
+pub fn has_path_integral_is_0() -> @kernel.Thm
+
+pub fn has_path_integral_join() -> @kernel.Thm
+
+pub fn has_path_integral_linepath() -> @kernel.Thm
+
+pub fn has_path_integral_midpoint() -> @kernel.Thm
+
+pub fn has_path_integral_neg() -> @kernel.Thm
+
+pub fn has_path_integral_reverse_linepath() -> @kernel.Thm
+
+pub fn has_path_integral_reversepath() -> @kernel.Thm
+
+pub fn has_path_integral_shiftpath() -> @kernel.Thm
+
+pub fn has_path_integral_shiftpath_eq() -> @kernel.Thm
+
+pub fn has_path_integral_split() -> @kernel.Thm
+
+pub fn has_path_integral_sub() -> @kernel.Thm
+
+pub fn has_path_integral_subpath() -> @kernel.Thm
+
+pub fn has_path_integral_subpath_refl() -> @kernel.Thm
+
+pub fn has_path_integral_trivial() -> @kernel.Thm
+
+pub fn has_path_integral_unique() -> @kernel.Thm
+
+pub fn has_path_integral_v1() -> @kernel.Thm
+
+pub fn has_path_integral_vsum() -> @kernel.Thm
+
+pub fn has_path_integral_winding_number() -> @kernel.Thm
+
+pub fn has_path_integral_winding_number_ac() -> @kernel.Thm
+
+pub fn has_residue_integral() -> @kernel.Thm
+
+pub fn has_residue_integral_integer() -> @kernel.Thm
+
+pub fn has_vector_derivative_circlepath() -> @kernel.Thm
+
+pub fn has_vector_derivative_linepath_at() -> @kernel.Thm
+
+pub fn has_vector_derivative_linepath_within() -> @kernel.Thm
+
+pub fn has_vector_derivative_partcirclepath() -> @kernel.Thm
+
+pub fn higher_complex_derivative_add() -> @kernel.Thm
+
+pub fn higher_complex_derivative_add_at() -> @kernel.Thm
+
+pub fn higher_complex_derivative_alt() -> @kernel.Thm
+
+pub fn higher_complex_derivative_comp_iter_lemma() -> @kernel.Thm
+
+pub fn higher_complex_derivative_comp_lemma() -> @kernel.Thm
+
+pub fn higher_complex_derivative_compose_linear() -> @kernel.Thm
+
+pub fn higher_complex_derivative_const() -> @kernel.Thm
+
+pub fn higher_complex_derivative_eq_iter() -> @kernel.Thm
+
+pub fn higher_complex_derivative_higher_complex_derivative() -> @kernel.Thm
+
+pub fn higher_complex_derivative_id() -> @kernel.Thm
+
+pub fn higher_complex_derivative_iter_top_lemma() -> @kernel.Thm
+
+pub fn higher_complex_derivative_linear() -> @kernel.Thm
+
+pub fn higher_complex_derivative_mul() -> @kernel.Thm
+
+pub fn higher_complex_derivative_mul_at() -> @kernel.Thm
+
+pub fn higher_complex_derivative_neg() -> @kernel.Thm
+
+pub fn higher_complex_derivative_neg_at() -> @kernel.Thm
+
+pub fn higher_complex_derivative_power_series() -> @kernel.Thm
+
+pub fn higher_complex_derivative_sub() -> @kernel.Thm
+
+pub fn higher_complex_derivative_sub_at() -> @kernel.Thm
+
+pub fn higher_complex_derivative_transform_within_open() -> @kernel.Thm
+
+pub fn holomorphic_complex_derivative() -> @kernel.Thm
+
+pub fn holomorphic_constant_norm() -> @kernel.Thm
+
+pub fn holomorphic_constant_on_frontier() -> @kernel.Thm
+
+pub fn holomorphic_constant_on_sphere_segment() -> @kernel.Thm
+
+pub fn holomorphic_convex_primitive() -> @kernel.Thm
+
+pub fn holomorphic_derivative() -> @kernel.Thm
+
+pub fn holomorphic_factor_order_of_zero() -> @kernel.Thm
+
+pub fn holomorphic_factor_order_of_zero_strong() -> @kernel.Thm
+
+pub fn holomorphic_factor_zero_nonconstant() -> @kernel.Thm
+
+pub fn holomorphic_fun_eq_0_on_ball() -> @kernel.Thm
+
+pub fn holomorphic_fun_eq_0_on_connected() -> @kernel.Thm
+
+pub fn holomorphic_fun_eq_const_on_connected() -> @kernel.Thm
+
+pub fn holomorphic_fun_eq_on_ball() -> @kernel.Thm
+
+pub fn holomorphic_fun_eq_on_connected() -> @kernel.Thm
+
+pub fn holomorphic_function_entire() -> @kernel.Thm
+
+pub fn holomorphic_function_entire_product() -> @kernel.Thm
+
+pub fn holomorphic_higher_complex_derivative() -> @kernel.Thm
+
+pub fn holomorphic_iff_power_series() -> @kernel.Thm
+
+pub fn holomorphic_injective_imp_regular() -> @kernel.Thm
+
+pub fn holomorphic_involution_point() -> @kernel.Thm
+
+pub fn holomorphic_lower_bound_difference() -> @kernel.Thm
+
+pub fn holomorphic_nonzero_constant_norm_on_frontier() -> @kernel.Thm
+
+pub fn holomorphic_on_extend_bounded() -> @kernel.Thm
+
+pub fn holomorphic_on_extend_lim() -> @kernel.Thm
+
+pub fn holomorphic_on_inverse() -> @kernel.Thm
+
+pub fn holomorphic_on_paste_across_line() -> @kernel.Thm
+
+pub fn holomorphic_periodic_fixpoint() -> @kernel.Thm
+
+pub fn holomorphic_point_small_triangle() -> @kernel.Thm
+
+pub fn holomorphic_power_series() -> @kernel.Thm
+
+pub fn holomorphic_starlike_primitive() -> @kernel.Thm
+
+pub fn holomorphic_subordination() -> @kernel.Thm
+
+pub fn holomorphic_uniform_limit() -> @kernel.Thm
+
+pub fn holomorphic_uniform_sequence() -> @kernel.Thm
+
+pub fn homeomorphic_inside_simple_path_ball() -> @kernel.Thm
+
+pub fn homotopic_loops_partcirclepath() -> @kernel.Thm
+
+pub fn hurwitz_injective() -> @kernel.Thm
+
+pub fn hurwitz_no_zeros() -> @kernel.Thm
+
+pub fn im_linepath_cx() -> @kernel.Thm
+
+pub fn in_path_image_partcirclepath() -> @kernel.Thm
+
+pub fn integer_winding_number() -> @kernel.Thm
+
+pub fn integer_winding_number_eq() -> @kernel.Thm
+
+pub fn isolated_zeros() -> @kernel.Thm
+
+pub fn jordan_schoenflies() -> @kernel.Thm
+
+pub fn jordan_schoenflies_circle() -> @kernel.Thm
+
+pub fn jordan_schoenflies_s2() -> @kernel.Thm
+
+pub fn landau_picard() -> @kernel.Thm
+
+pub fn lim_logplus1_over_x() -> @kernel.Thm
+
+pub fn lim_n_mul_sub_clog() -> @kernel.Thm
+
+pub fn lim_sub_clog() -> @kernel.Thm
+
+pub fn linepath_cx() -> @kernel.Thm
+
+pub fn linepath_in_path() -> @kernel.Thm
+
+pub fn liouville_polynomial() -> @kernel.Thm
+
+pub fn liouville_theorem() -> @kernel.Thm
+
+pub fn liouville_weak() -> @kernel.Thm
+
+pub fn liouville_weak_inverse() -> @kernel.Thm
+
+pub fn little_picard() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn log2_approx_32() -> @kernel.Thm
+
+pub fn maximum_modulus_bounded_function() -> @kernel.Thm
+
+pub fn maximum_modulus_frontier() -> @kernel.Thm
+
+pub fn maximum_modulus_limit_atinfinity() -> @kernel.Thm
+
+pub fn maximum_modulus_principle() -> @kernel.Thm
+
+pub fn maximum_real_frontier() -> @kernel.Thm
+
+pub fn moebius_function() -> @kernel.Thm
+
+pub fn moebius_function_compose() -> @kernel.Thm
+
+pub fn moebius_function_eq_zero() -> @kernel.Thm
+
+pub fn moebius_function_holomorphic() -> @kernel.Thm
+
+pub fn moebius_function_norm_lt_1() -> @kernel.Thm
+
+pub fn moebius_function_of_zero() -> @kernel.Thm
+
+pub fn moebius_function_simple() -> @kernel.Thm
+
+pub fn monodromy_continuous_log() -> @kernel.Thm
+
+pub fn montel() -> @kernel.Thm
+
+pub fn montel_omitting() -> @kernel.Thm
+
+pub fn morera_local_triangle() -> @kernel.Thm
+
+pub fn morera_local_triangle_gen() -> @kernel.Thm
+
+pub fn morera_triangle() -> @kernel.Thm
+
+pub fn negligible_valid_path_image() -> @kernel.Thm
+
+pub fn no_bounded_connected_component_imp_winding_number_zero() -> @kernel.Thm
+
+pub fn no_bounded_path_component_imp_winding_number_zero() -> @kernel.Thm
+
+pub fn no_isolated_singularity() -> @kernel.Thm
+
+pub fn norm_sum_lemma() -> @kernel.Thm
+
+pub fn not_in_interior_convex_hull_3() -> @kernel.Thm
+
+pub fn open_mapping_thm() -> @kernel.Thm
+
+pub fn open_winding_number_levelsets() -> @kernel.Thm
+
+pub fn partcirclepath() -> @kernel.Thm
+
+pub fn path_circlepath() -> @kernel.Thm
+
+pub fn path_image_circlepath() -> @kernel.Thm
+
+pub fn path_image_partcirclepath() -> @kernel.Thm
+
+pub fn path_image_partcirclepath_subset() -> @kernel.Thm
+
+pub fn path_image_partcirclepath_subset_abs() -> @kernel.Thm
+
+pub fn path_integrable_add() -> @kernel.Thm
+
+pub fn path_integrable_complex_div() -> @kernel.Thm
+
+pub fn path_integrable_complex_lmul() -> @kernel.Thm
+
+pub fn path_integrable_complex_rmul() -> @kernel.Thm
+
+pub fn path_integrable_continuous_circlepath() -> @kernel.Thm
+
+pub fn path_integrable_continuous_linepath() -> @kernel.Thm
+
+pub fn path_integrable_continuous_partcirclepath() -> @kernel.Thm
+
+pub fn path_integrable_eq() -> @kernel.Thm
+
+pub fn path_integrable_holomorphic() -> @kernel.Thm
+
+pub fn path_integrable_holomorphic_simple() -> @kernel.Thm
+
+pub fn path_integrable_inversediff() -> @kernel.Thm
+
+pub fn path_integrable_join() -> @kernel.Thm
+
+pub fn path_integrable_neg() -> @kernel.Thm
+
+pub fn path_integrable_on() -> @kernel.Thm
+
+pub fn path_integrable_on_v1() -> @kernel.Thm
+
+pub fn path_integrable_reversepath() -> @kernel.Thm
+
+pub fn path_integrable_reversepath_eq() -> @kernel.Thm
+
+pub fn path_integrable_sub() -> @kernel.Thm
+
+pub fn path_integrable_subpath() -> @kernel.Thm
+
+pub fn path_integrable_subpath_refl() -> @kernel.Thm
+
+pub fn path_integrable_vsum() -> @kernel.Thm
+
+pub fn path_integral() -> @kernel.Thm
+
+pub fn path_integral_0() -> @kernel.Thm
+
+pub fn path_integral_add() -> @kernel.Thm
+
+pub fn path_integral_bound_exists() -> @kernel.Thm
+
+pub fn path_integral_bound_linepath() -> @kernel.Thm
+
+pub fn path_integral_complex_div() -> @kernel.Thm
+
+pub fn path_integral_complex_lmul() -> @kernel.Thm
+
+pub fn path_integral_complex_rmul() -> @kernel.Thm
+
+pub fn path_integral_const_linepath() -> @kernel.Thm
+
+pub fn path_integral_eq() -> @kernel.Thm
+
+pub fn path_integral_eq_0() -> @kernel.Thm
+
+pub fn path_integral_integral() -> @kernel.Thm
+
+pub fn path_integral_join() -> @kernel.Thm
+
+pub fn path_integral_local_primitive() -> @kernel.Thm
+
+pub fn path_integral_local_primitive_any() -> @kernel.Thm
+
+pub fn path_integral_local_primitive_lemma() -> @kernel.Thm
+
+pub fn path_integral_midpoint() -> @kernel.Thm
+
+pub fn path_integral_nearby_ends() -> @kernel.Thm
+
+pub fn path_integral_nearby_loop() -> @kernel.Thm
+
+pub fn path_integral_neg() -> @kernel.Thm
+
+pub fn path_integral_primitive() -> @kernel.Thm
+
+pub fn path_integral_primitive_lemma() -> @kernel.Thm
+
+pub fn path_integral_reverse_linepath() -> @kernel.Thm
+
+pub fn path_integral_reversepath() -> @kernel.Thm
+
+pub fn path_integral_shiftpath() -> @kernel.Thm
+
+pub fn path_integral_split() -> @kernel.Thm
+
+pub fn path_integral_split_linepath() -> @kernel.Thm
+
+pub fn path_integral_sub() -> @kernel.Thm
+
+pub fn path_integral_subpath_combine() -> @kernel.Thm
+
+pub fn path_integral_subpath_integral() -> @kernel.Thm
+
+pub fn path_integral_subpath_refl() -> @kernel.Thm
+
+pub fn path_integral_swap() -> @kernel.Thm
+
+pub fn path_integral_trivial() -> @kernel.Thm
+
+pub fn path_integral_uniform_limit() -> @kernel.Thm
+
+pub fn path_integral_uniform_limit_circlepath() -> @kernel.Thm
+
+pub fn path_integral_unique() -> @kernel.Thm
+
+pub fn path_integral_vsum() -> @kernel.Thm
+
+pub fn path_length_circlepath() -> @kernel.Thm
+
+pub fn path_length_partcirclepath() -> @kernel.Thm
+
+pub fn path_length_valid_path() -> @kernel.Thm
+
+pub fn path_partcirclepath() -> @kernel.Thm
+
+pub fn pathfinish_circlepath() -> @kernel.Thm
+
+pub fn pathfinish_partcirclepath() -> @kernel.Thm
+
+pub fn pathintegral_convex_primitive() -> @kernel.Thm
+
+pub fn pathstart_circlepath() -> @kernel.Thm
+
+pub fn pathstart_partcirclepath() -> @kernel.Thm
+
+pub fn piecewise_differentiable_add() -> @kernel.Thm
+
+pub fn piecewise_differentiable_affine() -> @kernel.Thm
+
+pub fn piecewise_differentiable_cases() -> @kernel.Thm
+
+pub fn piecewise_differentiable_compose() -> @kernel.Thm
+
+pub fn piecewise_differentiable_neg() -> @kernel.Thm
+
+pub fn piecewise_differentiable_on() -> @kernel.Thm
+
+pub fn piecewise_differentiable_on_imp_continuous_on() -> @kernel.Thm
+
+pub fn piecewise_differentiable_on_subset() -> @kernel.Thm
+
+pub fn piecewise_differentiable_sub() -> @kernel.Thm
+
+pub fn points_in_convex_hull() -> @kernel.Thm
+
+pub fn pole_at_infinity() -> @kernel.Thm
+
+pub fn pole_lemma() -> @kernel.Thm
+
+pub fn pole_lemma_open() -> @kernel.Thm
+
+pub fn pole_theorem() -> @kernel.Thm
+
+pub fn pole_theorem_0() -> @kernel.Thm
+
+pub fn pole_theorem_analytic() -> @kernel.Thm
+
+pub fn pole_theorem_analytic_0() -> @kernel.Thm
+
+pub fn pole_theorem_analytic_open_superset() -> @kernel.Thm
+
+pub fn pole_theorem_analytic_open_superset_0() -> @kernel.Thm
+
+pub fn pole_theorem_open() -> @kernel.Thm
+
+pub fn pole_theorem_open_0() -> @kernel.Thm
+
+pub fn power_series_analytic() -> @kernel.Thm
+
+pub fn power_series_and_derivative() -> @kernel.Thm
+
+pub fn power_series_and_derivative_0() -> @kernel.Thm
+
+pub fn power_series_holomorphic() -> @kernel.Thm
+
+pub fn proper_map_complex_polyfun() -> @kernel.Thm
+
+pub fn proper_map_complex_polyfun_eq() -> @kernel.Thm
+
+pub fn proper_map_complex_polyfun_univ() -> @kernel.Thm
+
+pub fn re_linepath_cx() -> @kernel.Thm
+
+pub fn re_winding_number() -> @kernel.Thm
+
+pub fn rectifiable_loop_frontier_convex() -> @kernel.Thm
+
+pub fn rectifiable_loop_relative_frontier_convex() -> @kernel.Thm
+
+pub fn rectifiable_path_circlepath() -> @kernel.Thm
+
+pub fn rectifiable_path_frontier_convex() -> @kernel.Thm
+
+pub fn rectifiable_path_partcirclepath() -> @kernel.Thm
+
+pub fn rectifiable_valid_path() -> @kernel.Thm
+
+pub fn riemann_mapping_theorem() -> @kernel.Thm
+
+pub fn schottky() -> @kernel.Thm
+
+pub fn schwarz_lemma() -> @kernel.Thm
+
+pub fn schwarz_reflection() -> @kernel.Thm
+
+pub fn schwarz_reflection_unique() -> @kernel.Thm
+
+pub fn second_cartan_thm_dim_1() -> @kernel.Thm
+
+pub fn segments_subset_convex_hull() -> @kernel.Thm
+
+pub fn series_and_derivative_comparison() -> @kernel.Thm
+
+pub fn series_and_derivative_comparison_complex() -> @kernel.Thm
+
+pub fn series_and_derivative_comparison_local() -> @kernel.Thm
+
+pub fn series_differentiable_comparison_complex() -> @kernel.Thm
+
+pub fn shiftpath_circlepath() -> @kernel.Thm
+
+pub fn simple_closed_path_abs_winding_number_inside() -> @kernel.Thm
+
+pub fn simple_closed_path_norm_winding_number_inside() -> @kernel.Thm
+
+pub fn simple_closed_path_winding_number_cases() -> @kernel.Thm
+
+pub fn simple_closed_path_winding_number_inside() -> @kernel.Thm
+
+pub fn simple_closed_path_winding_number_pos() -> @kernel.Thm
+
+pub fn simple_path_circlepath() -> @kernel.Thm
+
+pub fn simple_path_partcirclepath() -> @kernel.Thm
+
+pub fn simply_connected_component_path_complement() -> @kernel.Thm
+
+pub fn simply_connected_eq_biholomorphic_to_disc() -> @kernel.Thm
+
+pub fn simply_connected_eq_borsukian() -> @kernel.Thm
+
+pub fn simply_connected_eq_continuous_log() -> @kernel.Thm
+
+pub fn simply_connected_eq_continuous_sqrt() -> @kernel.Thm
+
+pub fn simply_connected_eq_empty_inside() -> @kernel.Thm
+
+pub fn simply_connected_eq_frontier_properties() -> @kernel.Thm
+
+pub fn simply_connected_eq_global_primitive() -> @kernel.Thm
+
+pub fn simply_connected_eq_holomorphic_log() -> @kernel.Thm
+
+pub fn simply_connected_eq_holomorphic_sqrt() -> @kernel.Thm
+
+pub fn simply_connected_eq_homeomorphic_to_disc() -> @kernel.Thm
+
+pub fn simply_connected_eq_injective_holomorphic_sqrt() -> @kernel.Thm
+
+pub fn simply_connected_eq_path_integral_zero() -> @kernel.Thm
+
+pub fn simply_connected_eq_unbounded_complement_components() -> @kernel.Thm
+
+pub fn simply_connected_eq_winding_number_zero() -> @kernel.Thm
+
+pub fn simply_connected_iff_simple() -> @kernel.Thm
+
+pub fn simply_connected_imp_winding_number_zero() -> @kernel.Thm
+
+pub fn simply_connected_inside_simple_path() -> @kernel.Thm
+
+pub fn simply_connected_inter() -> @kernel.Thm
+
+pub fn starlike_convex_subset() -> @kernel.Thm
+
+pub fn taylor_catn() -> @kernel.Thm
+
+pub fn taylor_clog() -> @kernel.Thm
+
+pub fn taylor_clog_neg() -> @kernel.Thm
+
+pub fn torhorst_conformal_extension_theorem() -> @kernel.Thm
+
+pub fn triangle_linear_has_chain_integral() -> @kernel.Thm
+
+pub fn triangle_path_integrals_convex_primitive() -> @kernel.Thm
+
+pub fn triangle_path_integrals_starlike_primitive() -> @kernel.Thm
+
+pub fn triangle_points_closer() -> @kernel.Thm
+
+pub fn valid_path() -> @kernel.Thm
+
+pub fn valid_path_circlepath() -> @kernel.Thm
+
+pub fn valid_path_compose() -> @kernel.Thm
+
+pub fn valid_path_eq() -> @kernel.Thm
+
+pub fn valid_path_imp_path() -> @kernel.Thm
+
+pub fn valid_path_join() -> @kernel.Thm
+
+pub fn valid_path_join_eq() -> @kernel.Thm
+
+pub fn valid_path_linear_image_eq() -> @kernel.Thm
+
+pub fn valid_path_linepath() -> @kernel.Thm
+
+pub fn valid_path_partcirclepath() -> @kernel.Thm
+
+pub fn valid_path_reversepath() -> @kernel.Thm
+
+pub fn valid_path_shiftpath() -> @kernel.Thm
+
+pub fn valid_path_subpath() -> @kernel.Thm
+
+pub fn valid_path_sym() -> @kernel.Thm
+
+pub fn valid_path_translation_eq() -> @kernel.Thm
+
+pub fn valid_path_vector_polynomial_function() -> @kernel.Thm
+
+pub fn vector_derivative_circlepath() -> @kernel.Thm
+
+pub fn vector_derivative_linepath_at() -> @kernel.Thm
+
+pub fn vector_derivative_linepath_within() -> @kernel.Thm
+
+pub fn vector_derivative_partcirclepath() -> @kernel.Thm
+
+pub fn vector_derivative_within_interior() -> @kernel.Thm
+
+pub fn winding_number() -> @kernel.Thm
+
+pub fn winding_number_ahlfors() -> @kernel.Thm
+
+pub fn winding_number_ahlfors_full() -> @kernel.Thm
+
+pub fn winding_number_ahlfors_lemma() -> @kernel.Thm
+
+pub fn winding_number_around_inside() -> @kernel.Thm
+
+pub fn winding_number_as_continuous_logarithm() -> @kernel.Thm
+
+pub fn winding_number_big_meets() -> @kernel.Thm
+
+pub fn winding_number_circlepath() -> @kernel.Thm
+
+pub fn winding_number_compose_cexp() -> @kernel.Thm
+
+pub fn winding_number_constant() -> @kernel.Thm
+
+pub fn winding_number_eq() -> @kernel.Thm
+
+pub fn winding_number_eq_1() -> @kernel.Thm
+
+pub fn winding_number_equal() -> @kernel.Thm
+
+pub fn winding_number_from_innerpath() -> @kernel.Thm
+
+pub fn winding_number_homotopic_loops() -> @kernel.Thm
+
+pub fn winding_number_homotopic_loops_eq() -> @kernel.Thm
+
+pub fn winding_number_homotopic_loops_null_eq() -> @kernel.Thm
+
+pub fn winding_number_homotopic_paths() -> @kernel.Thm
+
+pub fn winding_number_homotopic_paths_eq() -> @kernel.Thm
+
+pub fn winding_number_homotopic_paths_null_eq() -> @kernel.Thm
+
+pub fn winding_number_homotopic_paths_null_explicit_eq() -> @kernel.Thm
+
+pub fn winding_number_ivt_abs() -> @kernel.Thm
+
+pub fn winding_number_ivt_neg() -> @kernel.Thm
+
+pub fn winding_number_ivt_pos() -> @kernel.Thm
+
+pub fn winding_number_join() -> @kernel.Thm
+
+pub fn winding_number_join_pos_combined() -> @kernel.Thm
+
+pub fn winding_number_le_half() -> @kernel.Thm
+
+pub fn winding_number_linepath_pos_lt() -> @kernel.Thm
+
+pub fn winding_number_loops_linear_eq() -> @kernel.Thm
+
+pub fn winding_number_lt_1() -> @kernel.Thm
+
+pub fn winding_number_lt_half() -> @kernel.Thm
+
+pub fn winding_number_lt_half_linepath() -> @kernel.Thm
+
+pub fn winding_number_nearby_loops_eq() -> @kernel.Thm
+
+pub fn winding_number_nearby_paths_eq() -> @kernel.Thm
+
+pub fn winding_number_offset() -> @kernel.Thm
+
+pub fn winding_number_partcirclepath() -> @kernel.Thm
+
+pub fn winding_number_partcirclepath_pos_lt() -> @kernel.Thm
+
+pub fn winding_number_paths_linear_eq() -> @kernel.Thm
+
+pub fn winding_number_pos_le() -> @kernel.Thm
+
+pub fn winding_number_pos_lt() -> @kernel.Thm
+
+pub fn winding_number_pos_lt_lemma() -> @kernel.Thm
+
+pub fn winding_number_pos_meets() -> @kernel.Thm
+
+pub fn winding_number_reversepath() -> @kernel.Thm
+
+pub fn winding_number_shiftpath() -> @kernel.Thm
+
+pub fn winding_number_split_linepath() -> @kernel.Thm
+
+pub fn winding_number_strong() -> @kernel.Thm
+
+pub fn winding_number_subpath_combine() -> @kernel.Thm
+
+pub fn winding_number_subpath_continuous() -> @kernel.Thm
+
+pub fn winding_number_triangle() -> @kernel.Thm
+
+pub fn winding_number_trivial() -> @kernel.Thm
+
+pub fn winding_number_unique() -> @kernel.Thm
+
+pub fn winding_number_unique_loop() -> @kernel.Thm
+
+pub fn winding_number_v1() -> @kernel.Thm
+
+pub fn winding_number_valid_path() -> @kernel.Thm
+
+pub fn winding_number_zero_atinfinity() -> @kernel.Thm
+
+pub fn winding_number_zero_in_outside() -> @kernel.Thm
+
+pub fn winding_number_zero_outside() -> @kernel.Thm
+
+pub fn winding_number_zero_point() -> @kernel.Thm
+
+pub fn zbyexpm1_converges() -> @kernel.Thm
+
+pub fn zbyexpm1_converges_alt() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

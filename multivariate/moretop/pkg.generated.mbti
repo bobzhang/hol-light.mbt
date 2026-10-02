@@ -1,0 +1,303 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/moretop"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn borsuk_map_essential_bounded_component() -> @kernel.Thm
+
+pub fn borsuk_map_into_sphere() -> @kernel.Thm
+
+pub fn borsuk_maps_homotopic_in_connected_component_eq() -> @kernel.Thm
+
+pub fn borsuk_maps_homotopic_in_path_component() -> @kernel.Thm
+
+pub fn borsuk_odd_mapping() -> @kernel.Thm
+
+pub fn borsuk_odd_mapping_gen() -> @kernel.Thm
+
+pub fn borsuk_separation_theorem() -> @kernel.Thm
+
+pub fn borsuk_separation_theorem_gen() -> @kernel.Thm
+
+pub fn borsuk_ulam_antipodal() -> @kernel.Thm
+
+pub fn borsuk_ulam_antipodal_gen() -> @kernel.Thm
+
+pub fn borsuk_ulam_antipodal_subspace() -> @kernel.Thm
+
+pub fn borsuk_ulam_frontier_map() -> @kernel.Thm
+
+pub fn borsuk_ulam_frontier_map_gen() -> @kernel.Thm
+
+pub fn borsuk_ulam_not_nullhomotopic() -> @kernel.Thm
+
+pub fn borsuk_ulam_not_nullhomotopic_gen() -> @kernel.Thm
+
+pub fn borsuk_ulam_surjective() -> @kernel.Thm
+
+pub fn borsuk_ulam_surjective_gen() -> @kernel.Thm
+
+pub fn borsuk_ulam_zero() -> @kernel.Thm
+
+pub fn borsuk_ulam_zero_gen() -> @kernel.Thm
+
+pub fn borsukian() -> @kernel.Thm
+
+pub fn borsukian_1() -> @kernel.Thm
+
+pub fn borsukian_1_gen() -> @kernel.Thm
+
+pub fn borsukian_alt() -> @kernel.Thm
+
+pub fn borsukian_circle() -> @kernel.Thm
+
+pub fn borsukian_circle_alt() -> @kernel.Thm
+
+pub fn borsukian_closed_union() -> @kernel.Thm
+
+pub fn borsukian_componentwise() -> @kernel.Thm
+
+pub fn borsukian_componentwise_eq() -> @kernel.Thm
+
+pub fn borsukian_continuous_logarithm() -> @kernel.Thm
+
+pub fn borsukian_continuous_logarithm_circle() -> @kernel.Thm
+
+pub fn borsukian_continuous_logarithm_circle_cx() -> @kernel.Thm
+
+pub fn borsukian_empty() -> @kernel.Thm
+
+pub fn borsukian_imp_unicoherent() -> @kernel.Thm
+
+pub fn borsukian_injective_linear_image() -> @kernel.Thm
+
+pub fn borsukian_monotone_image_compact() -> @kernel.Thm
+
+pub fn borsukian_open_map_image_compact() -> @kernel.Thm
+
+pub fn borsukian_open_union() -> @kernel.Thm
+
+pub fn borsukian_retraction_gen() -> @kernel.Thm
+
+pub fn borsukian_separation_compact() -> @kernel.Thm
+
+pub fn borsukian_sphere() -> @kernel.Thm
+
+pub fn borsukian_translation() -> @kernel.Thm
+
+pub fn borsukian_univ() -> @kernel.Thm
+
+pub fn conic_imp_borsukian() -> @kernel.Thm
+
+pub fn connected_common_frontier_domains() -> @kernel.Thm
+
+pub fn connected_complement_contractible() -> @kernel.Thm
+
+pub fn connected_complement_simple_path_image() -> @kernel.Thm
+
+pub fn connected_frontier_component_complement() -> @kernel.Thm
+
+pub fn connected_frontier_disjoint() -> @kernel.Thm
+
+pub fn connected_frontier_simple() -> @kernel.Thm
+
+pub fn connected_inter_disjoint_open_frontiers() -> @kernel.Thm
+
+pub fn continuous_logarithm_on_ball() -> @kernel.Thm
+
+pub fn continuous_logarithm_on_cball() -> @kernel.Thm
+
+pub fn continuous_logarithm_on_contractible() -> @kernel.Thm
+
+pub fn continuous_logarithm_on_simply_connected() -> @kernel.Thm
+
+pub fn continuous_on_borsuk_map() -> @kernel.Thm
+
+pub fn continuous_sqrt_on_contractible() -> @kernel.Thm
+
+pub fn continuous_sqrt_on_simply_connected() -> @kernel.Thm
+
+pub fn contractible_imp_borsukian() -> @kernel.Thm
+
+pub fn contractible_imp_holomorphic_acs() -> @kernel.Thm
+
+pub fn contractible_imp_holomorphic_acs_bounded() -> @kernel.Thm
+
+pub fn contractible_imp_holomorphic_log() -> @kernel.Thm
+
+pub fn contractible_imp_holomorphic_sqrt() -> @kernel.Thm
+
+pub fn contractible_imp_unicoherent() -> @kernel.Thm
+
+pub fn convex_imp_borsukian() -> @kernel.Thm
+
+pub fn convex_imp_unicoherent() -> @kernel.Thm
+
+pub fn covering_space_cexp_punctured_plane() -> @kernel.Thm
+
+pub fn extend_map_affine_to_sphere_cofinite() -> @kernel.Thm
+
+pub fn extend_map_affine_to_sphere_cofinite_gen() -> @kernel.Thm
+
+pub fn extend_map_affine_to_sphere_cofinite_simple() -> @kernel.Thm
+
+pub fn extend_map_cell_complex_to_sphere() -> @kernel.Thm
+
+pub fn extend_map_cell_complex_to_sphere_cofinite() -> @kernel.Thm
+
+pub fn extend_map_sphere_to_sphere() -> @kernel.Thm
+
+pub fn extend_map_sphere_to_sphere_cofinite() -> @kernel.Thm
+
+pub fn extend_map_sphere_to_sphere_cofinite_gen() -> @kernel.Thm
+
+pub fn extend_map_sphere_to_sphere_gen() -> @kernel.Thm
+
+pub fn extend_map_univ_to_sphere_cofinite() -> @kernel.Thm
+
+pub fn extend_map_univ_to_sphere_no_bounded_component() -> @kernel.Thm
+
+pub fn ham_sandwich_theorem() -> @kernel.Thm
+
+pub fn homeomorphic_borsukian() -> @kernel.Thm
+
+pub fn homeomorphic_borsukian_eq() -> @kernel.Thm
+
+pub fn homeomorphic_spheres_eq() -> @kernel.Thm
+
+pub fn homeomorphic_unicoherent() -> @kernel.Thm
+
+pub fn homeomorphic_unicoherent_eq() -> @kernel.Thm
+
+pub fn homeomorphism_borsukianness() -> @kernel.Thm
+
+pub fn homeomorphism_unicoherence() -> @kernel.Thm
+
+pub fn homotopic_borsuk_maps_in_bounded_component() -> @kernel.Thm
+
+pub fn homotopic_circlemaps_div() -> @kernel.Thm
+
+pub fn homotopic_circlemaps_div_1() -> @kernel.Thm
+
+pub fn homotopy_equivalent_borsukianness() -> @kernel.Thm
+
+pub fn homotopy_equivalent_separation() -> @kernel.Thm
+
+pub fn homotopy_equivalent_separation_sphere() -> @kernel.Thm
+
+pub fn homotopy_equivalent_spheres_eq() -> @kernel.Thm
+
+pub fn inessential_eq_continuous_logarithm() -> @kernel.Thm
+
+pub fn inessential_eq_continuous_logarithm_circle() -> @kernel.Thm
+
+pub fn inessential_eq_extensible() -> @kernel.Thm
+
+pub fn inessential_imp_continuous_logarithm_circle() -> @kernel.Thm
+
+pub fn inessential_neighbourhood_extension_logarithm() -> @kernel.Thm
+
+pub fn inessential_spheremap_2() -> @kernel.Thm
+
+pub fn inessential_spheremap_lowdim() -> @kernel.Thm
+
+pub fn inessential_spheremap_lowdim_gen() -> @kernel.Thm
+
+pub fn injective_eq_1d_open_map_univ() -> @kernel.Thm
+
+pub fn janiszewski() -> @kernel.Thm
+
+pub fn janiszewski_connected() -> @kernel.Thm
+
+pub fn janiszewski_dual() -> @kernel.Thm
+
+pub fn janiszewski_gen() -> @kernel.Thm
+
+pub fn jordan_brouwer_accessibility() -> @kernel.Thm
+
+pub fn jordan_brouwer_nonseparation_strong() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn locally_connected_frontier_anr() -> @kernel.Thm
+
+pub fn lusternik_schnirelmann() -> @kernel.Thm
+
+pub fn non_extensible_borsuk_map() -> @kernel.Thm
+
+pub fn nonseparation_by_component_eq() -> @kernel.Thm
+
+pub fn nonsurjective_differentiable_spheremap_lowdim() -> @kernel.Thm
+
+pub fn not_simply_connected_circle() -> @kernel.Thm
+
+pub fn odd_map_homotopy_lemma() -> @kernel.Thm
+
+pub fn open_unicoherent_univ() -> @kernel.Thm
+
+pub fn path_connected_psuperset_complement_simple_path_image() -> @kernel.Thm
+
+pub fn real_continuous_on_inverse() -> @kernel.Thm
+
+pub fn real_continuous_on_inverse_alt() -> @kernel.Thm
+
+pub fn retract_of_borsukian() -> @kernel.Thm
+
+pub fn separation_by_component_closed() -> @kernel.Thm
+
+pub fn separation_by_component_closed_pointwise() -> @kernel.Thm
+
+pub fn separation_by_component_open() -> @kernel.Thm
+
+pub fn separation_by_union_closed() -> @kernel.Thm
+
+pub fn separation_by_union_closed_pointwise() -> @kernel.Thm
+
+pub fn separation_by_union_open() -> @kernel.Thm
+
+pub fn simply_connected_convex_diff_finite() -> @kernel.Thm
+
+pub fn simply_connected_imp_borsukian() -> @kernel.Thm
+
+pub fn simply_connected_imp_holomorphic_log() -> @kernel.Thm
+
+pub fn simply_connected_imp_holomorphic_sqrt() -> @kernel.Thm
+
+pub fn simply_connected_punctured_convex() -> @kernel.Thm
+
+pub fn simply_connected_punctured_universe() -> @kernel.Thm
+
+pub fn simply_connected_punctured_universe_eq() -> @kernel.Thm
+
+pub fn simply_connected_sphere() -> @kernel.Thm
+
+pub fn simply_connected_sphere_eq() -> @kernel.Thm
+
+pub fn simply_connected_sphere_gen() -> @kernel.Thm
+
+pub fn split_inside_simple_closed_curve() -> @kernel.Thm
+
+pub fn starlike_imp_borsukian() -> @kernel.Thm
+
+pub fn theta_curve_inside_cases() -> @kernel.Thm
+
+pub fn unicoherent() -> @kernel.Thm
+
+pub fn unicoherent_injective_linear_image() -> @kernel.Thm
+
+pub fn unicoherent_monotone_image_compact() -> @kernel.Thm
+
+pub fn unicoherent_translation() -> @kernel.Thm
+
+pub fn unicoherent_univ() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

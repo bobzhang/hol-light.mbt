@@ -1,0 +1,2813 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/realanalysis"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn absolute_real_integration_by_parts() -> @kernel.Thm
+
+pub fn absolute_real_integration_by_parts_sum() -> @kernel.Thm
+
+pub fn absolutely_integrable_change_of_variables_1_alt() -> @kernel.Thm
+
+pub fn absolutely_integrable_on_mul_bernoulli_frac() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_0() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_abs() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_absolutely_real_integrable_bound() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_absolutely_real_integrable_lbound() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_absolutely_real_integrable_ubound() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_add() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_bounded_measurable_product() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_const() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_continuous() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_decreasing() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_decreasing_product() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_imp_integrable() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_improper_simple() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_increasing() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_increasing_product() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_inf() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_integrable_bound() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_le() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_linear() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_lmul() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_max() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_min() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_neg() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_on() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_on_empty() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_on_subinterval() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_on_v1() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_real_measurable() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_restrict_univ() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_rmul() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_sub() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_sum() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_sup() -> @kernel.Thm
+
+pub fn add_real_differentiation_theorems(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn agm() -> @kernel.Thm
+
+pub fn agm_2() -> @kernel.Thm
+
+pub fn agm_gen() -> @kernel.Thm
+
+pub fn agm_root() -> @kernel.Thm
+
+pub fn agm_rpow() -> @kernel.Thm
+
+pub fn agm_sqrt() -> @kernel.Thm
+
+pub fn alternating_sum_bound() -> @kernel.Thm
+
+pub fn alternating_sum_bounds() -> @kernel.Thm
+
+pub fn atreal() -> @kernel.Thm
+
+pub fn atreal_v1() -> @kernel.Thm
+
+pub fn bernoulli() -> @kernel.Thm
+
+pub fn bernoulli_1() -> @kernel.Thm
+
+pub fn bernoulli_1_0() -> @kernel.Thm
+
+pub fn bernoulli_add() -> @kernel.Thm
+
+pub fn bernoulli_alt() -> @kernel.Thm
+
+pub fn bernoulli_bound() -> @kernel.Thm
+
+pub fn bernoulli_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn bernoulli_even_bound() -> @kernel.Thm
+
+pub fn bernoulli_expansion() -> @kernel.Thm
+
+pub fn bernoulli_half() -> @kernel.Thm
+
+pub fn bernoulli_number() -> @kernel.Thm
+
+pub fn bernoulli_number_alt() -> @kernel.Thm
+
+pub fn bernoulli_number_eq_0() -> @kernel.Thm
+
+pub fn bernoulli_number_v1() -> @kernel.Thm
+
+pub fn bernoulli_number_zero() -> @kernel.Thm
+
+pub fn bernoulli_raabe_2() -> @kernel.Thm
+
+pub fn bernoulli_reflect() -> @kernel.Thm
+
+pub fn bernoulli_sub_add1() -> @kernel.Thm
+
+pub fn bernoulli_unique() -> @kernel.Thm
+
+pub fn bernoulli_v1() -> @kernel.Thm
+
+pub fn bernstein() -> @kernel.Thm
+
+pub fn bernstein_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn bernstein_lemma() -> @kernel.Thm
+
+pub fn bernstein_pos() -> @kernel.Thm
+
+pub fn bernstein_weierstrass() -> @kernel.Thm
+
+pub fn bounded_partial_real_sums() -> @kernel.Thm
+
+pub fn bounded_slice() -> @kernel.Thm
+
+pub fn cauchy_hadamard_radius() -> @kernel.Thm
+
+pub fn cauchy_hadamard_radius_absconv() -> @kernel.Thm
+
+pub fn cauchy_hadamard_radius_absconv_derivative() -> @kernel.Thm
+
+pub fn cauchy_hadamard_radius_derivative() -> @kernel.Thm
+
+pub fn cauchy_hadamard_radius_uniform() -> @kernel.Thm
+
+pub fn cauchy_hadamard_radius_uniform_derivative() -> @kernel.Thm
+
+pub fn closed_algebraic_variety() -> @kernel.Thm
+
+pub fn closed_real_segment() -> @kernel.Thm
+
+pub fn closed_slice() -> @kernel.Thm
+
+pub fn compact_slice() -> @kernel.Thm
+
+pub fn complex_euler_maclaurin_antiderivative() -> @kernel.Thm
+
+pub fn complex_stone_weierstrass() -> @kernel.Thm
+
+pub fn complex_stone_weierstrass_alt() -> @kernel.Thm
+
+pub fn connected_open_vector_polynomial_connected() -> @kernel.Thm
+
+pub fn continuous_atreal() -> @kernel.Thm
+
+pub fn continuous_atreal_compose() -> @kernel.Thm
+
+pub fn continuous_atreal_sqrt_compose() -> @kernel.Thm
+
+pub fn continuous_atreal_v1() -> @kernel.Thm
+
+pub fn continuous_atreal_withinreal() -> @kernel.Thm
+
+pub fn continuous_componentwise() -> @kernel.Thm
+
+pub fn continuous_continuous_atreal() -> @kernel.Thm
+
+pub fn continuous_continuous_withinreal() -> @kernel.Thm
+
+pub fn continuous_cx_atreal() -> @kernel.Thm
+
+pub fn continuous_cx_withinreal() -> @kernel.Thm
+
+pub fn continuous_imp_real_measurable_on() -> @kernel.Thm
+
+pub fn continuous_imp_real_measurable_on_closed_subset() -> @kernel.Thm
+
+pub fn continuous_on_const_dyadic_rationals() -> @kernel.Thm
+
+pub fn continuous_on_vector_polynomial_function() -> @kernel.Thm
+
+pub fn continuous_real_continuous_at_compose() -> @kernel.Thm
+
+pub fn continuous_real_continuous_atreal_compose() -> @kernel.Thm
+
+pub fn continuous_real_continuous_within_compose() -> @kernel.Thm
+
+pub fn continuous_real_continuous_withinreal_compose() -> @kernel.Thm
+
+pub fn continuous_transform_withinreal_set_imp() -> @kernel.Thm
+
+pub fn continuous_vector_polynomial_function() -> @kernel.Thm
+
+pub fn continuous_withinreal() -> @kernel.Thm
+
+pub fn continuous_withinreal_compose() -> @kernel.Thm
+
+pub fn continuous_withinreal_sqrt_compose() -> @kernel.Thm
+
+pub fn continuous_withinreal_subset() -> @kernel.Thm
+
+pub fn continuous_withinreal_v1() -> @kernel.Thm
+
+pub fn convergent_real_bounded_monotone() -> @kernel.Thm
+
+pub fn convex_on_real_pow() -> @kernel.Thm
+
+pub fn convex_slice() -> @kernel.Thm
+
+pub fn decreasing_left_limit() -> @kernel.Thm
+
+pub fn decreasing_right_limit() -> @kernel.Thm
+
+pub fn differentiable_norm_at() -> @kernel.Thm
+
+pub fn differentiable_on_norm() -> @kernel.Thm
+
+pub fn differentiable_on_real_polynomial_function() -> @kernel.Thm
+
+pub fn differentiable_on_vector_polynomial_function() -> @kernel.Thm
+
+pub fn differentiable_real_polynomial_function_at() -> @kernel.Thm
+
+pub fn differentiable_vector_polynomial_function() -> @kernel.Thm
+
+pub fn empty_interior_algebraic_variety() -> @kernel.Thm
+
+pub fn ends_in_real_segment() -> @kernel.Thm
+
+pub fn eventually_atreal() -> @kernel.Thm
+
+pub fn eventually_withinreal() -> @kernel.Thm
+
+pub fn eventually_withinreal_le() -> @kernel.Thm
+
+pub fn floor_continuous_monotone_floor() -> @kernel.Thm
+
+pub fn fubini_closed_interval() -> @kernel.Thm
+
+pub fn fubini_simple() -> @kernel.Thm
+
+pub fn fubini_simple_alt() -> @kernel.Thm
+
+pub fn fubini_simple_compact() -> @kernel.Thm
+
+pub fn fubini_simple_compact_strong() -> @kernel.Thm
+
+pub fn fubini_simple_convex() -> @kernel.Thm
+
+pub fn fubini_simple_convex_strong() -> @kernel.Thm
+
+pub fn fubini_simple_lemma() -> @kernel.Thm
+
+pub fn fubini_simple_open() -> @kernel.Thm
+
+pub fn fubini_simple_open_strong() -> @kernel.Thm
+
+pub fn has_absolute_integral_change_of_variables_1_alt() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_affinity2_eq() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_affinity_eq() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_countable_discontinuities() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_darboux() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_darboux_strict() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_darboux_strong() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_left_limit() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_abs() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_add() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_combine() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_empty() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_eq() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_imp_bounded_on_interval() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_lmul() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_max() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_min() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_mul() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_neg() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_null() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_rmul() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_sub() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_on_subset() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_reflect2_eq() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_reflect_eq() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_reflect_eq_interval() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_right_limit() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_translation() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_translation2_eq() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_translation_eq() -> @kernel.Thm
+
+pub fn has_bounded_real_variation_translation_eq_interval() -> @kernel.Thm
+
+pub fn has_complex_real_derivative_at() -> @kernel.Thm
+
+pub fn has_complex_real_derivative_at_gen() -> @kernel.Thm
+
+pub fn has_complex_real_derivative_within() -> @kernel.Thm
+
+pub fn has_complex_real_derivative_within_gen() -> @kernel.Thm
+
+pub fn has_liminf() -> @kernel.Thm
+
+pub fn has_liminf_at() -> @kernel.Thm
+
+pub fn has_liminf_at_reallim_inf() -> @kernel.Thm
+
+pub fn has_liminf_eventually_lbound() -> @kernel.Thm
+
+pub fn has_liminf_imp_lbound_le() -> @kernel.Thm
+
+pub fn has_liminf_lbound() -> @kernel.Thm
+
+pub fn has_liminf_le() -> @kernel.Thm
+
+pub fn has_liminf_not_lbound() -> @kernel.Thm
+
+pub fn has_liminf_sequentially() -> @kernel.Thm
+
+pub fn has_liminf_sequentially_imp_reallim_inf() -> @kernel.Thm
+
+pub fn has_liminf_sequentially_reallim_inf() -> @kernel.Thm
+
+pub fn has_liminf_sequentially_within() -> @kernel.Thm
+
+pub fn has_liminf_transform() -> @kernel.Thm
+
+pub fn has_liminf_v1() -> @kernel.Thm
+
+pub fn has_limsup() -> @kernel.Thm
+
+pub fn has_limsup_at() -> @kernel.Thm
+
+pub fn has_limsup_at_reallim_sup() -> @kernel.Thm
+
+pub fn has_limsup_eventually_ubound() -> @kernel.Thm
+
+pub fn has_limsup_imp_ubound_le() -> @kernel.Thm
+
+pub fn has_limsup_le() -> @kernel.Thm
+
+pub fn has_limsup_mul_reallim_left() -> @kernel.Thm
+
+pub fn has_limsup_mul_reallim_right() -> @kernel.Thm
+
+pub fn has_limsup_not_ubound() -> @kernel.Thm
+
+pub fn has_limsup_sequentially() -> @kernel.Thm
+
+pub fn has_limsup_sequentially_imp_reallim_sup() -> @kernel.Thm
+
+pub fn has_limsup_sequentially_reallim_sup() -> @kernel.Thm
+
+pub fn has_limsup_sequentially_within() -> @kernel.Thm
+
+pub fn has_limsup_sequentially_within_lbound_zero() -> @kernel.Thm
+
+pub fn has_limsup_transform() -> @kernel.Thm
+
+pub fn has_limsup_ubound() -> @kernel.Thm
+
+pub fn has_limsup_v1() -> @kernel.Thm
+
+pub fn has_real_complex_derivative_at() -> @kernel.Thm
+
+pub fn has_real_complex_derivative_within() -> @kernel.Thm
+
+pub fn has_real_derivative() -> @kernel.Thm
+
+pub fn has_real_derivative_acs() -> @kernel.Thm
+
+pub fn has_real_derivative_acs_sin() -> @kernel.Thm
+
+pub fn has_real_derivative_add() -> @kernel.Thm
+
+pub fn has_real_derivative_asn() -> @kernel.Thm
+
+pub fn has_real_derivative_asn_cos() -> @kernel.Thm
+
+pub fn has_real_derivative_atn() -> @kernel.Thm
+
+pub fn has_real_derivative_atreal() -> @kernel.Thm
+
+pub fn has_real_derivative_atreal_within() -> @kernel.Thm
+
+pub fn has_real_derivative_bernoulli() -> @kernel.Thm
+
+pub fn has_real_derivative_caratheodory_atreal() -> @kernel.Thm
+
+pub fn has_real_derivative_caratheodory_withinreal() -> @kernel.Thm
+
+pub fn has_real_derivative_cdiv_atreal() -> @kernel.Thm
+
+pub fn has_real_derivative_cdiv_within() -> @kernel.Thm
+
+pub fn has_real_derivative_chain() -> @kernel.Thm
+
+pub fn has_real_derivative_chain_univ() -> @kernel.Thm
+
+pub fn has_real_derivative_const() -> @kernel.Thm
+
+pub fn has_real_derivative_cos() -> @kernel.Thm
+
+pub fn has_real_derivative_derivative() -> @kernel.Thm
+
+pub fn has_real_derivative_differentiable() -> @kernel.Thm
+
+pub fn has_real_derivative_div_atreal() -> @kernel.Thm
+
+pub fn has_real_derivative_div_within() -> @kernel.Thm
+
+pub fn has_real_derivative_exp() -> @kernel.Thm
+
+pub fn has_real_derivative_frac() -> @kernel.Thm
+
+pub fn has_real_derivative_from_complex_at() -> @kernel.Thm
+
+pub fn has_real_derivative_id() -> @kernel.Thm
+
+pub fn has_real_derivative_imp_continuous_atreal() -> @kernel.Thm
+
+pub fn has_real_derivative_imp_continuous_withinreal() -> @kernel.Thm
+
+pub fn has_real_derivative_increasing() -> @kernel.Thm
+
+pub fn has_real_derivative_increasing_imp() -> @kernel.Thm
+
+pub fn has_real_derivative_indefinite_integral() -> @kernel.Thm
+
+pub fn has_real_derivative_inv_atreal() -> @kernel.Thm
+
+pub fn has_real_derivative_inv_basic() -> @kernel.Thm
+
+pub fn has_real_derivative_inv_within() -> @kernel.Thm
+
+pub fn has_real_derivative_inverse_basic() -> @kernel.Thm
+
+pub fn has_real_derivative_inverse_strong() -> @kernel.Thm
+
+pub fn has_real_derivative_inverse_strong_x() -> @kernel.Thm
+
+pub fn has_real_derivative_lmul_atreal() -> @kernel.Thm
+
+pub fn has_real_derivative_lmul_within() -> @kernel.Thm
+
+pub fn has_real_derivative_log() -> @kernel.Thm
+
+pub fn has_real_derivative_mul_atreal() -> @kernel.Thm
+
+pub fn has_real_derivative_mul_within() -> @kernel.Thm
+
+pub fn has_real_derivative_neg() -> @kernel.Thm
+
+pub fn has_real_derivative_pow_atreal() -> @kernel.Thm
+
+pub fn has_real_derivative_pow_within() -> @kernel.Thm
+
+pub fn has_real_derivative_rmul_atreal() -> @kernel.Thm
+
+pub fn has_real_derivative_rmul_within() -> @kernel.Thm
+
+pub fn has_real_derivative_rpow() -> @kernel.Thm
+
+pub fn has_real_derivative_rpow_right() -> @kernel.Thm
+
+pub fn has_real_derivative_sequence() -> @kernel.Thm
+
+pub fn has_real_derivative_series() -> @kernel.Thm
+
+pub fn has_real_derivative_sin() -> @kernel.Thm
+
+pub fn has_real_derivative_sqrt() -> @kernel.Thm
+
+pub fn has_real_derivative_strictly_increasing_imp() -> @kernel.Thm
+
+pub fn has_real_derivative_sub() -> @kernel.Thm
+
+pub fn has_real_derivative_sum() -> @kernel.Thm
+
+pub fn has_real_derivative_tan() -> @kernel.Thm
+
+pub fn has_real_derivative_transform_atreal() -> @kernel.Thm
+
+pub fn has_real_derivative_transform_within() -> @kernel.Thm
+
+pub fn has_real_derivative_within_real_open() -> @kernel.Thm
+
+pub fn has_real_derivative_within_subset() -> @kernel.Thm
+
+pub fn has_real_derivative_withinreal() -> @kernel.Thm
+
+pub fn has_real_derivative_zero_constant() -> @kernel.Thm
+
+pub fn has_real_derivative_zero_unique() -> @kernel.Thm
+
+pub fn has_real_derivative_zero_unique_strong_convex() -> @kernel.Thm
+
+pub fn has_real_derivative_zero_unique_strong_interval() -> @kernel.Thm
+
+pub fn has_real_frechet_derivative_at() -> @kernel.Thm
+
+pub fn has_real_frechet_derivative_within() -> @kernel.Thm
+
+pub fn has_real_integral() -> @kernel.Thm
+
+pub fn has_real_integral_0() -> @kernel.Thm
+
+pub fn has_real_integral_0_eq() -> @kernel.Thm
+
+pub fn has_real_integral_add() -> @kernel.Thm
+
+pub fn has_real_integral_affinity() -> @kernel.Thm
+
+pub fn has_real_integral_alt() -> @kernel.Thm
+
+pub fn has_real_integral_area_under_curve() -> @kernel.Thm
+
+pub fn has_real_integral_area_under_curve_univ() -> @kernel.Thm
+
+pub fn has_real_integral_bernoulli() -> @kernel.Thm
+
+pub fn has_real_integral_bound() -> @kernel.Thm
+
+pub fn has_real_integral_combine() -> @kernel.Thm
+
+pub fn has_real_integral_const() -> @kernel.Thm
+
+pub fn has_real_integral_empty() -> @kernel.Thm
+
+pub fn has_real_integral_empty_eq() -> @kernel.Thm
+
+pub fn has_real_integral_eq() -> @kernel.Thm
+
+pub fn has_real_integral_eq_eq() -> @kernel.Thm
+
+pub fn has_real_integral_integrable() -> @kernel.Thm
+
+pub fn has_real_integral_integrable_integral() -> @kernel.Thm
+
+pub fn has_real_integral_integral() -> @kernel.Thm
+
+pub fn has_real_integral_is_0() -> @kernel.Thm
+
+pub fn has_real_integral_isneg() -> @kernel.Thm
+
+pub fn has_real_integral_lbound() -> @kernel.Thm
+
+pub fn has_real_integral_le() -> @kernel.Thm
+
+pub fn has_real_integral_linear() -> @kernel.Thm
+
+pub fn has_real_integral_lmul() -> @kernel.Thm
+
+pub fn has_real_integral_neg() -> @kernel.Thm
+
+pub fn has_real_integral_negligible() -> @kernel.Thm
+
+pub fn has_real_integral_negligible_eq() -> @kernel.Thm
+
+pub fn has_real_integral_null() -> @kernel.Thm
+
+pub fn has_real_integral_null_eq() -> @kernel.Thm
+
+pub fn has_real_integral_on_superset() -> @kernel.Thm
+
+pub fn has_real_integral_open_interval() -> @kernel.Thm
+
+pub fn has_real_integral_pos() -> @kernel.Thm
+
+pub fn has_real_integral_refl() -> @kernel.Thm
+
+pub fn has_real_integral_reflect() -> @kernel.Thm
+
+pub fn has_real_integral_reflect_gen() -> @kernel.Thm
+
+pub fn has_real_integral_reflect_lemma() -> @kernel.Thm
+
+pub fn has_real_integral_restrict() -> @kernel.Thm
+
+pub fn has_real_integral_restrict_inter() -> @kernel.Thm
+
+pub fn has_real_integral_restrict_univ() -> @kernel.Thm
+
+pub fn has_real_integral_rmul() -> @kernel.Thm
+
+pub fn has_real_integral_spike() -> @kernel.Thm
+
+pub fn has_real_integral_spike_eq() -> @kernel.Thm
+
+pub fn has_real_integral_spike_finite() -> @kernel.Thm
+
+pub fn has_real_integral_spike_finite_eq() -> @kernel.Thm
+
+pub fn has_real_integral_spike_interior() -> @kernel.Thm
+
+pub fn has_real_integral_spike_interior_eq() -> @kernel.Thm
+
+pub fn has_real_integral_spike_set() -> @kernel.Thm
+
+pub fn has_real_integral_spike_set_eq() -> @kernel.Thm
+
+pub fn has_real_integral_straddle_null() -> @kernel.Thm
+
+pub fn has_real_integral_stretch() -> @kernel.Thm
+
+pub fn has_real_integral_sub() -> @kernel.Thm
+
+pub fn has_real_integral_subset_le() -> @kernel.Thm
+
+pub fn has_real_integral_substitution() -> @kernel.Thm
+
+pub fn has_real_integral_substitution_simple() -> @kernel.Thm
+
+pub fn has_real_integral_substitution_strong() -> @kernel.Thm
+
+pub fn has_real_integral_sum() -> @kernel.Thm
+
+pub fn has_real_integral_ubound() -> @kernel.Thm
+
+pub fn has_real_integral_union() -> @kernel.Thm
+
+pub fn has_real_integral_unions() -> @kernel.Thm
+
+pub fn has_real_integral_unique() -> @kernel.Thm
+
+pub fn has_real_integral_v1() -> @kernel.Thm
+
+pub fn has_real_measure() -> @kernel.Thm
+
+pub fn has_real_measure_0() -> @kernel.Thm
+
+pub fn has_real_measure_affinity() -> @kernel.Thm
+
+pub fn has_real_measure_almost() -> @kernel.Thm
+
+pub fn has_real_measure_almost_eq() -> @kernel.Thm
+
+pub fn has_real_measure_countable_real_negligible_unions() -> @kernel.Thm
+
+pub fn has_real_measure_countable_real_negligible_unions_bounded() -> @kernel.Thm
+
+pub fn has_real_measure_diff_real_negligible() -> @kernel.Thm
+
+pub fn has_real_measure_diff_real_negligible_eq() -> @kernel.Thm
+
+pub fn has_real_measure_diff_subset() -> @kernel.Thm
+
+pub fn has_real_measure_disjoint_union() -> @kernel.Thm
+
+pub fn has_real_measure_disjoint_unions() -> @kernel.Thm
+
+pub fn has_real_measure_disjoint_unions_image() -> @kernel.Thm
+
+pub fn has_real_measure_disjoint_unions_image_strong() -> @kernel.Thm
+
+pub fn has_real_measure_empty() -> @kernel.Thm
+
+pub fn has_real_measure_has_measure() -> @kernel.Thm
+
+pub fn has_real_measure_imp_real_measurable() -> @kernel.Thm
+
+pub fn has_real_measure_inner_outer() -> @kernel.Thm
+
+pub fn has_real_measure_inner_outer_le() -> @kernel.Thm
+
+pub fn has_real_measure_measure() -> @kernel.Thm
+
+pub fn has_real_measure_nested_unions() -> @kernel.Thm
+
+pub fn has_real_measure_pos_le() -> @kernel.Thm
+
+pub fn has_real_measure_real_interval() -> @kernel.Thm
+
+pub fn has_real_measure_real_measurable_real_measure() -> @kernel.Thm
+
+pub fn has_real_measure_real_negligible_symdiff() -> @kernel.Thm
+
+pub fn has_real_measure_real_negligible_union() -> @kernel.Thm
+
+pub fn has_real_measure_real_negligible_unions() -> @kernel.Thm
+
+pub fn has_real_measure_real_negligible_unions_image() -> @kernel.Thm
+
+pub fn has_real_measure_real_negligible_unions_image_strong() -> @kernel.Thm
+
+pub fn has_real_measure_scaling() -> @kernel.Thm
+
+pub fn has_real_measure_scaling_eq() -> @kernel.Thm
+
+pub fn has_real_measure_subset() -> @kernel.Thm
+
+pub fn has_real_measure_translation() -> @kernel.Thm
+
+pub fn has_real_measure_translation_eq() -> @kernel.Thm
+
+pub fn has_real_measure_union_real_negligible() -> @kernel.Thm
+
+pub fn has_real_measure_union_real_negligible_eq() -> @kernel.Thm
+
+pub fn has_real_measure_unique() -> @kernel.Thm
+
+pub fn has_real_measure_v1() -> @kernel.Thm
+
+pub fn has_real_vector_derivative_at() -> @kernel.Thm
+
+pub fn has_real_vector_derivative_within() -> @kernel.Thm
+
+pub fn has_vector_derivative_vector_polynomial_function() -> @kernel.Thm
+
+pub fn higher_real_derivative() -> @kernel.Thm
+
+pub fn hoelder() -> @kernel.Thm
+
+pub fn image_affinity_real_interval() -> @kernel.Thm
+
+pub fn image_lift_real_segment() -> @kernel.Thm
+
+pub fn image_stretch_real_interval() -> @kernel.Thm
+
+pub fn in_real_segment() -> @kernel.Thm
+
+pub fn in_slice() -> @kernel.Thm
+
+pub fn increasing_bounded_real_variation() -> @kernel.Thm
+
+pub fn increasing_left_limit() -> @kernel.Thm
+
+pub fn increasing_real_variation() -> @kernel.Thm
+
+pub fn increasing_right_limit() -> @kernel.Thm
+
+pub fn integrable_imp_real_measurable() -> @kernel.Thm
+
+pub fn integrable_subintervals_imp_real_measurable() -> @kernel.Thm
+
+pub fn interval_inter_hyperplane() -> @kernel.Thm
+
+pub fn is_real_interval_cases() -> @kernel.Thm
+
+pub fn is_real_interval_contains_segment() -> @kernel.Thm
+
+pub fn is_realinterval_clauses() -> @kernel.Thm
+
+pub fn is_realinterval_connected() -> @kernel.Thm
+
+pub fn is_realinterval_contains_segment_eq() -> @kernel.Thm
+
+pub fn is_realinterval_contains_segment_imp() -> @kernel.Thm
+
+pub fn is_realinterval_continuous_image() -> @kernel.Thm
+
+pub fn is_realinterval_convex() -> @kernel.Thm
+
+pub fn is_realinterval_convex_complex() -> @kernel.Thm
+
+pub fn is_realinterval_segment() -> @kernel.Thm
+
+pub fn lebesgue_density_theorem() -> @kernel.Thm
+
+pub fn lhospital() -> @kernel.Thm
+
+pub fn lim_atreal() -> @kernel.Thm
+
+pub fn lim_atreal_at() -> @kernel.Thm
+
+pub fn lim_atreal_atcomplex() -> @kernel.Thm
+
+pub fn lim_atreal_withinreal() -> @kernel.Thm
+
+pub fn lim_atreal_zero() -> @kernel.Thm
+
+pub fn lim_componentwise() -> @kernel.Thm
+
+pub fn lim_cong_atreal() -> @kernel.Thm
+
+pub fn lim_cong_withinreal() -> @kernel.Thm
+
+pub fn lim_null_complex_pow_eq() -> @kernel.Thm
+
+pub fn lim_null_rpow() -> @kernel.Thm
+
+pub fn lim_real_continuous_function() -> @kernel.Thm
+
+pub fn lim_transform_withinreal_set() -> @kernel.Thm
+
+pub fn lim_transform_withinreal_set_imp() -> @kernel.Thm
+
+pub fn lim_within_real_open() -> @kernel.Thm
+
+pub fn lim_withinreal() -> @kernel.Thm
+
+pub fn lim_withinreal_le() -> @kernel.Thm
+
+pub fn lim_withinreal_subset() -> @kernel.Thm
+
+pub fn lim_withinreal_within() -> @kernel.Thm
+
+pub fn lim_withinreal_withincomplex() -> @kernel.Thm
+
+pub fn lim_zero_neginfinity() -> @kernel.Thm
+
+pub fn lim_zero_posinfinity() -> @kernel.Thm
+
+pub fn liminf_exists() -> @kernel.Thm
+
+pub fn limsup_exists() -> @kernel.Thm
+
+pub fn lipschitz_real_polynomial_function() -> @kernel.Thm
+
+pub fn lipschitz_vector_polynomial_function() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn log_convex_add() -> @kernel.Thm
+
+pub fn log_convex_const() -> @kernel.Thm
+
+pub fn log_convex_imp_convex() -> @kernel.Thm
+
+pub fn log_convex_imp_pos() -> @kernel.Thm
+
+pub fn log_convex_mul() -> @kernel.Thm
+
+pub fn log_convex_on() -> @kernel.Thm
+
+pub fn log_convex_on_convex() -> @kernel.Thm
+
+pub fn log_convex_on_empty() -> @kernel.Thm
+
+pub fn log_convex_on_eq() -> @kernel.Thm
+
+pub fn log_convex_on_sing() -> @kernel.Thm
+
+pub fn log_convex_on_subset() -> @kernel.Thm
+
+pub fn log_convex_on_v1() -> @kernel.Thm
+
+pub fn log_convex_product() -> @kernel.Thm
+
+pub fn measurable_on_clog() -> @kernel.Thm
+
+pub fn measurable_on_complex_div() -> @kernel.Thm
+
+pub fn measurable_on_complex_inv() -> @kernel.Thm
+
+pub fn measurable_on_complex_mul() -> @kernel.Thm
+
+pub fn measurable_on_cpow() -> @kernel.Thm
+
+pub fn measurable_on_cproduct() -> @kernel.Thm
+
+pub fn measurable_on_lift_rpow() -> @kernel.Thm
+
+pub fn measurable_outer_intervals_bounded_explicit_special() -> @kernel.Thm
+
+pub fn midpoint_log_convex() -> @kernel.Thm
+
+pub fn midpoint_real_log_convex() -> @kernel.Thm
+
+pub fn negligible_algebraic_variety() -> @kernel.Thm
+
+pub fn negligible_real() -> @kernel.Thm
+
+pub fn netlimit_atreal() -> @kernel.Thm
+
+pub fn netlimit_withinreal() -> @kernel.Thm
+
+pub fn nonnegative_absolutely_real_integrable() -> @kernel.Thm
+
+pub fn nowhere_dense_algebraic_variety() -> @kernel.Thm
+
+pub fn open_real_segment() -> @kernel.Thm
+
+pub fn open_slice() -> @kernel.Thm
+
+pub fn path_approx_vector_polynomial_function() -> @kernel.Thm
+
+pub fn path_vector_polynomial_function() -> @kernel.Thm
+
+pub fn polynomial_function_bernoulli() -> @kernel.Thm
+
+pub fn polynomial_function_drop() -> @kernel.Thm
+
+pub fn polynomial_function_lift() -> @kernel.Thm
+
+pub fn power_real_series_conv_imp_absconv_weak() -> @kernel.Thm
+
+pub fn real_abel_lemma() -> @kernel.Thm
+
+pub fn real_abel_limit_theorem() -> @kernel.Thm
+
+pub fn real_absolute_integral_imp_ae_derivative() -> @kernel.Thm
+
+pub fn real_antiderivative_continuous() -> @kernel.Thm
+
+pub fn real_antiderivative_integral_continuous() -> @kernel.Thm
+
+pub fn real_beppo_levi_decreasing() -> @kernel.Thm
+
+pub fn real_beppo_levi_increasing() -> @kernel.Thm
+
+pub fn real_beppo_levi_monotone_convergence_decreasing() -> @kernel.Thm
+
+pub fn real_beppo_levi_monotone_convergence_increasing() -> @kernel.Thm
+
+pub fn real_bounded() -> @kernel.Thm
+
+pub fn real_bounded_pos_lt() -> @kernel.Thm
+
+pub fn real_bounded_subset() -> @kernel.Thm
+
+pub fn real_bounded_subset_closed_interval() -> @kernel.Thm
+
+pub fn real_bounded_subset_closed_interval_symmetric() -> @kernel.Thm
+
+pub fn real_bounded_subset_open_interval() -> @kernel.Thm
+
+pub fn real_bounded_subset_open_interval_symmetric() -> @kernel.Thm
+
+pub fn real_bounded_union() -> @kernel.Thm
+
+pub fn real_cauchy_hadamard_radius() -> @kernel.Thm
+
+pub fn real_cauchy_hadamard_radius_absconv() -> @kernel.Thm
+
+pub fn real_cauchy_hadamard_radius_absconv_derivative() -> @kernel.Thm
+
+pub fn real_cauchy_hadamard_radius_derivative() -> @kernel.Thm
+
+pub fn real_cauchy_hadamard_radius_uniform() -> @kernel.Thm
+
+pub fn real_cauchy_hadamard_radius_uniform_derivative() -> @kernel.Thm
+
+pub fn real_closed() -> @kernel.Thm
+
+pub fn real_compact() -> @kernel.Thm
+
+pub fn real_compact_continuous_image() -> @kernel.Thm
+
+pub fn real_compact_uniformly_continuous() -> @kernel.Thm
+
+pub fn real_complex_continuous_atreal() -> @kernel.Thm
+
+pub fn real_complex_continuous_withinreal() -> @kernel.Thm
+
+pub fn real_complex_measurable_on() -> @kernel.Thm
+
+pub fn real_continuous() -> @kernel.Thm
+
+pub fn real_continuous_abs() -> @kernel.Thm
+
+pub fn real_continuous_add() -> @kernel.Thm
+
+pub fn real_continuous_additive_extend() -> @kernel.Thm
+
+pub fn real_continuous_additive_imp_linear() -> @kernel.Thm
+
+pub fn real_continuous_additive_imp_linear_interval() -> @kernel.Thm
+
+pub fn real_continuous_ae_imp_measurable_on_lebesgue_measurable_subset() -> @kernel.Thm
+
+pub fn real_continuous_agree_on_closure_interval() -> @kernel.Thm
+
+pub fn real_continuous_at() -> @kernel.Thm
+
+pub fn real_continuous_at_acs() -> @kernel.Thm
+
+pub fn real_continuous_at_arg() -> @kernel.Thm
+
+pub fn real_continuous_at_asn() -> @kernel.Thm
+
+pub fn real_continuous_at_atn() -> @kernel.Thm
+
+pub fn real_continuous_at_component() -> @kernel.Thm
+
+pub fn real_continuous_at_compose() -> @kernel.Thm
+
+pub fn real_continuous_at_cos() -> @kernel.Thm
+
+pub fn real_continuous_at_exp() -> @kernel.Thm
+
+pub fn real_continuous_at_id() -> @kernel.Thm
+
+pub fn real_continuous_at_linear_image() -> @kernel.Thm
+
+pub fn real_continuous_at_log() -> @kernel.Thm
+
+pub fn real_continuous_at_rpow() -> @kernel.Thm
+
+pub fn real_continuous_at_rpow_right() -> @kernel.Thm
+
+pub fn real_continuous_at_sin() -> @kernel.Thm
+
+pub fn real_continuous_at_sqrt() -> @kernel.Thm
+
+pub fn real_continuous_at_sqrt_compose() -> @kernel.Thm
+
+pub fn real_continuous_at_tan() -> @kernel.Thm
+
+pub fn real_continuous_at_translation() -> @kernel.Thm
+
+pub fn real_continuous_at_v1() -> @kernel.Thm
+
+pub fn real_continuous_at_within() -> @kernel.Thm
+
+pub fn real_continuous_atreal() -> @kernel.Thm
+
+pub fn real_continuous_atreal_compose() -> @kernel.Thm
+
+pub fn real_continuous_atreal_sqrt_compose() -> @kernel.Thm
+
+pub fn real_continuous_atreal_v1() -> @kernel.Thm
+
+pub fn real_continuous_atreal_withinreal() -> @kernel.Thm
+
+pub fn real_continuous_attains_inf() -> @kernel.Thm
+
+pub fn real_continuous_attains_sup() -> @kernel.Thm
+
+pub fn real_continuous_complex_components_at() -> @kernel.Thm
+
+pub fn real_continuous_complex_components_within() -> @kernel.Thm
+
+pub fn real_continuous_const() -> @kernel.Thm
+
+pub fn real_continuous_continuous() -> @kernel.Thm
+
+pub fn real_continuous_continuous1() -> @kernel.Thm
+
+pub fn real_continuous_continuous_at_compose() -> @kernel.Thm
+
+pub fn real_continuous_continuous_atreal() -> @kernel.Thm
+
+pub fn real_continuous_continuous_atreal_compose() -> @kernel.Thm
+
+pub fn real_continuous_continuous_within_compose() -> @kernel.Thm
+
+pub fn real_continuous_continuous_withinreal() -> @kernel.Thm
+
+pub fn real_continuous_continuous_withinreal_compose() -> @kernel.Thm
+
+pub fn real_continuous_dist_at() -> @kernel.Thm
+
+pub fn real_continuous_dist_within() -> @kernel.Thm
+
+pub fn real_continuous_div() -> @kernel.Thm
+
+pub fn real_continuous_div_at() -> @kernel.Thm
+
+pub fn real_continuous_div_atreal() -> @kernel.Thm
+
+pub fn real_continuous_div_within() -> @kernel.Thm
+
+pub fn real_continuous_div_withinreal() -> @kernel.Thm
+
+pub fn real_continuous_floor() -> @kernel.Thm
+
+pub fn real_continuous_frac() -> @kernel.Thm
+
+pub fn real_continuous_imp_real_measurable_on_closed_subset() -> @kernel.Thm
+
+pub fn real_continuous_injective_iff_monotonic() -> @kernel.Thm
+
+pub fn real_continuous_inv() -> @kernel.Thm
+
+pub fn real_continuous_inv_at() -> @kernel.Thm
+
+pub fn real_continuous_inv_atreal() -> @kernel.Thm
+
+pub fn real_continuous_inv_within() -> @kernel.Thm
+
+pub fn real_continuous_inv_withinreal() -> @kernel.Thm
+
+pub fn real_continuous_lmul() -> @kernel.Thm
+
+pub fn real_continuous_max() -> @kernel.Thm
+
+pub fn real_continuous_measure_in_halfspace_le() -> @kernel.Thm
+
+pub fn real_continuous_midpoint_convex() -> @kernel.Thm
+
+pub fn real_continuous_min() -> @kernel.Thm
+
+pub fn real_continuous_mul() -> @kernel.Thm
+
+pub fn real_continuous_neg() -> @kernel.Thm
+
+pub fn real_continuous_norm_at() -> @kernel.Thm
+
+pub fn real_continuous_norm_within() -> @kernel.Thm
+
+pub fn real_continuous_on() -> @kernel.Thm
+
+pub fn real_continuous_on_abs() -> @kernel.Thm
+
+pub fn real_continuous_on_acs() -> @kernel.Thm
+
+pub fn real_continuous_on_add() -> @kernel.Thm
+
+pub fn real_continuous_on_asn() -> @kernel.Thm
+
+pub fn real_continuous_on_atn() -> @kernel.Thm
+
+pub fn real_continuous_on_bernoulli() -> @kernel.Thm
+
+pub fn real_continuous_on_cases() -> @kernel.Thm
+
+pub fn real_continuous_on_cases_open() -> @kernel.Thm
+
+pub fn real_continuous_on_compose() -> @kernel.Thm
+
+pub fn real_continuous_on_compose_frac() -> @kernel.Thm
+
+pub fn real_continuous_on_const() -> @kernel.Thm
+
+pub fn real_continuous_on_const_dyadic_rationals() -> @kernel.Thm
+
+pub fn real_continuous_on_cos() -> @kernel.Thm
+
+pub fn real_continuous_on_div() -> @kernel.Thm
+
+pub fn real_continuous_on_eq() -> @kernel.Thm
+
+pub fn real_continuous_on_eq_continuous_within() -> @kernel.Thm
+
+pub fn real_continuous_on_eq_real_continuous_at() -> @kernel.Thm
+
+pub fn real_continuous_on_exp() -> @kernel.Thm
+
+pub fn real_continuous_on_id() -> @kernel.Thm
+
+pub fn real_continuous_on_inv() -> @kernel.Thm
+
+pub fn real_continuous_on_lmul() -> @kernel.Thm
+
+pub fn real_continuous_on_log() -> @kernel.Thm
+
+pub fn real_continuous_on_max() -> @kernel.Thm
+
+pub fn real_continuous_on_min() -> @kernel.Thm
+
+pub fn real_continuous_on_mul() -> @kernel.Thm
+
+pub fn real_continuous_on_neg() -> @kernel.Thm
+
+pub fn real_continuous_on_polynomial_function() -> @kernel.Thm
+
+pub fn real_continuous_on_pow() -> @kernel.Thm
+
+pub fn real_continuous_on_product() -> @kernel.Thm
+
+pub fn real_continuous_on_rmul() -> @kernel.Thm
+
+pub fn real_continuous_on_rpow() -> @kernel.Thm
+
+pub fn real_continuous_on_sin() -> @kernel.Thm
+
+pub fn real_continuous_on_sqrt() -> @kernel.Thm
+
+pub fn real_continuous_on_sub() -> @kernel.Thm
+
+pub fn real_continuous_on_subset() -> @kernel.Thm
+
+pub fn real_continuous_on_sum() -> @kernel.Thm
+
+pub fn real_continuous_on_tan() -> @kernel.Thm
+
+pub fn real_continuous_on_union() -> @kernel.Thm
+
+pub fn real_continuous_on_union_open() -> @kernel.Thm
+
+pub fn real_continuous_on_v1() -> @kernel.Thm
+
+pub fn real_continuous_polynomial_function_atreal() -> @kernel.Thm
+
+pub fn real_continuous_polynomial_function_within() -> @kernel.Thm
+
+pub fn real_continuous_pow() -> @kernel.Thm
+
+pub fn real_continuous_product() -> @kernel.Thm
+
+pub fn real_continuous_real_continuous_atreal() -> @kernel.Thm
+
+pub fn real_continuous_real_continuous_withinreal() -> @kernel.Thm
+
+pub fn real_continuous_real_polymonial_function() -> @kernel.Thm
+
+pub fn real_continuous_rmul() -> @kernel.Thm
+
+pub fn real_continuous_rpow_compose_within() -> @kernel.Thm
+
+pub fn real_continuous_sub() -> @kernel.Thm
+
+pub fn real_continuous_sum() -> @kernel.Thm
+
+pub fn real_continuous_transform_at() -> @kernel.Thm
+
+pub fn real_continuous_transform_atreal() -> @kernel.Thm
+
+pub fn real_continuous_transform_within() -> @kernel.Thm
+
+pub fn real_continuous_transform_within_set_imp() -> @kernel.Thm
+
+pub fn real_continuous_transform_withinreal() -> @kernel.Thm
+
+pub fn real_continuous_transform_withinreal_set_imp() -> @kernel.Thm
+
+pub fn real_continuous_trivial_limit() -> @kernel.Thm
+
+pub fn real_continuous_within() -> @kernel.Thm
+
+pub fn real_continuous_within_acs() -> @kernel.Thm
+
+pub fn real_continuous_within_acs_strong() -> @kernel.Thm
+
+pub fn real_continuous_within_asn() -> @kernel.Thm
+
+pub fn real_continuous_within_asn_strong() -> @kernel.Thm
+
+pub fn real_continuous_within_atn() -> @kernel.Thm
+
+pub fn real_continuous_within_compose() -> @kernel.Thm
+
+pub fn real_continuous_within_cos() -> @kernel.Thm
+
+pub fn real_continuous_within_exp() -> @kernel.Thm
+
+pub fn real_continuous_within_id() -> @kernel.Thm
+
+pub fn real_continuous_within_log() -> @kernel.Thm
+
+pub fn real_continuous_within_rpow() -> @kernel.Thm
+
+pub fn real_continuous_within_sin() -> @kernel.Thm
+
+pub fn real_continuous_within_sqrt() -> @kernel.Thm
+
+pub fn real_continuous_within_sqrt_compose() -> @kernel.Thm
+
+pub fn real_continuous_within_subset() -> @kernel.Thm
+
+pub fn real_continuous_within_tan() -> @kernel.Thm
+
+pub fn real_continuous_within_v1() -> @kernel.Thm
+
+pub fn real_continuous_withinreal() -> @kernel.Thm
+
+pub fn real_continuous_withinreal_compose() -> @kernel.Thm
+
+pub fn real_continuous_withinreal_sqrt_compose() -> @kernel.Thm
+
+pub fn real_continuous_withinreal_subset() -> @kernel.Thm
+
+pub fn real_continuous_withinreal_v1() -> @kernel.Thm
+
+pub fn real_convergent_imp_bounded() -> @kernel.Thm
+
+pub fn real_convex() -> @kernel.Thm
+
+pub fn real_convex_add() -> @kernel.Thm
+
+pub fn real_convex_alt() -> @kernel.Thm
+
+pub fn real_convex_compose() -> @kernel.Thm
+
+pub fn real_convex_convex_compose() -> @kernel.Thm
+
+pub fn real_convex_distance() -> @kernel.Thm
+
+pub fn real_convex_lmul() -> @kernel.Thm
+
+pub fn real_convex_local_global_minimum() -> @kernel.Thm
+
+pub fn real_convex_lower() -> @kernel.Thm
+
+pub fn real_convex_lower_real_interval() -> @kernel.Thm
+
+pub fn real_convex_lower_real_segment() -> @kernel.Thm
+
+pub fn real_convex_on() -> @kernel.Thm
+
+pub fn real_convex_on_asym() -> @kernel.Thm
+
+pub fn real_convex_on_const() -> @kernel.Thm
+
+pub fn real_convex_on_continuous() -> @kernel.Thm
+
+pub fn real_convex_on_derivative_increasing() -> @kernel.Thm
+
+pub fn real_convex_on_derivative_increasing_imp() -> @kernel.Thm
+
+pub fn real_convex_on_derivative_secant() -> @kernel.Thm
+
+pub fn real_convex_on_derivative_secant_imp() -> @kernel.Thm
+
+pub fn real_convex_on_derivatives() -> @kernel.Thm
+
+pub fn real_convex_on_derivatives_imp() -> @kernel.Thm
+
+pub fn real_convex_on_empty() -> @kernel.Thm
+
+pub fn real_convex_on_eq() -> @kernel.Thm
+
+pub fn real_convex_on_exp() -> @kernel.Thm
+
+pub fn real_convex_on_imp_jensen() -> @kernel.Thm
+
+pub fn real_convex_on_jensen() -> @kernel.Thm
+
+pub fn real_convex_on_left_secant() -> @kernel.Thm
+
+pub fn real_convex_on_left_secant_mul() -> @kernel.Thm
+
+pub fn real_convex_on_log() -> @kernel.Thm
+
+pub fn real_convex_on_real_inv() -> @kernel.Thm
+
+pub fn real_convex_on_real_pow() -> @kernel.Thm
+
+pub fn real_convex_on_right_secant() -> @kernel.Thm
+
+pub fn real_convex_on_right_secant_mul() -> @kernel.Thm
+
+pub fn real_convex_on_rpow() -> @kernel.Thm
+
+pub fn real_convex_on_rpow_integer() -> @kernel.Thm
+
+pub fn real_convex_on_rpow_neg() -> @kernel.Thm
+
+pub fn real_convex_on_secant_derivative() -> @kernel.Thm
+
+pub fn real_convex_on_secant_derivative_imp() -> @kernel.Thm
+
+pub fn real_convex_on_second_derivative() -> @kernel.Thm
+
+pub fn real_convex_on_sing() -> @kernel.Thm
+
+pub fn real_convex_on_subset() -> @kernel.Thm
+
+pub fn real_convex_on_sum() -> @kernel.Thm
+
+pub fn real_convex_on_v1() -> @kernel.Thm
+
+pub fn real_convex_rmul() -> @kernel.Thm
+
+pub fn real_derivative() -> @kernel.Thm
+
+pub fn real_derivative_ivt_decreasing() -> @kernel.Thm
+
+pub fn real_derivative_ivt_increasing() -> @kernel.Thm
+
+pub fn real_derivative_neg_left_maximum() -> @kernel.Thm
+
+pub fn real_derivative_neg_right_minimum() -> @kernel.Thm
+
+pub fn real_derivative_pos_left_minimum() -> @kernel.Thm
+
+pub fn real_derivative_pos_right_maximum() -> @kernel.Thm
+
+pub fn real_derivative_unique_atreal() -> @kernel.Thm
+
+pub fn real_derivative_zero_maxmin() -> @kernel.Thm
+
+pub fn real_diff_chain_atreal() -> @kernel.Thm
+
+pub fn real_diff_chain_within() -> @kernel.Thm
+
+pub fn real_diff_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_diff_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn real_differentiable() -> @kernel.Thm
+
+pub fn real_differentiable_add() -> @kernel.Thm
+
+pub fn real_differentiable_at() -> @kernel.Thm
+
+pub fn real_differentiable_at_acs() -> @kernel.Thm
+
+pub fn real_differentiable_at_asn() -> @kernel.Thm
+
+pub fn real_differentiable_at_atn() -> @kernel.Thm
+
+pub fn real_differentiable_at_cos() -> @kernel.Thm
+
+pub fn real_differentiable_at_exp() -> @kernel.Thm
+
+pub fn real_differentiable_at_log() -> @kernel.Thm
+
+pub fn real_differentiable_at_rpow() -> @kernel.Thm
+
+pub fn real_differentiable_at_rpow_right() -> @kernel.Thm
+
+pub fn real_differentiable_at_sin() -> @kernel.Thm
+
+pub fn real_differentiable_at_sqrt() -> @kernel.Thm
+
+pub fn real_differentiable_at_tan() -> @kernel.Thm
+
+pub fn real_differentiable_atreal_within() -> @kernel.Thm
+
+pub fn real_differentiable_bound() -> @kernel.Thm
+
+pub fn real_differentiable_caratheodory_atreal() -> @kernel.Thm
+
+pub fn real_differentiable_caratheodory_withinreal() -> @kernel.Thm
+
+pub fn real_differentiable_compose_atreal() -> @kernel.Thm
+
+pub fn real_differentiable_compose_within() -> @kernel.Thm
+
+pub fn real_differentiable_const() -> @kernel.Thm
+
+pub fn real_differentiable_div_atreal() -> @kernel.Thm
+
+pub fn real_differentiable_div_within() -> @kernel.Thm
+
+pub fn real_differentiable_eq() -> @kernel.Thm
+
+pub fn real_differentiable_frac() -> @kernel.Thm
+
+pub fn real_differentiable_from_complex_at() -> @kernel.Thm
+
+pub fn real_differentiable_id() -> @kernel.Thm
+
+pub fn real_differentiable_imp_continuous_atreal() -> @kernel.Thm
+
+pub fn real_differentiable_imp_continuous_withinreal() -> @kernel.Thm
+
+pub fn real_differentiable_inv_atreal() -> @kernel.Thm
+
+pub fn real_differentiable_inv_within() -> @kernel.Thm
+
+pub fn real_differentiable_mul_atreal() -> @kernel.Thm
+
+pub fn real_differentiable_mul_within() -> @kernel.Thm
+
+pub fn real_differentiable_neg() -> @kernel.Thm
+
+pub fn real_differentiable_on() -> @kernel.Thm
+
+pub fn real_differentiable_on_add() -> @kernel.Thm
+
+pub fn real_differentiable_on_bernoulli() -> @kernel.Thm
+
+pub fn real_differentiable_on_compose() -> @kernel.Thm
+
+pub fn real_differentiable_on_const() -> @kernel.Thm
+
+pub fn real_differentiable_on_differentiable() -> @kernel.Thm
+
+pub fn real_differentiable_on_div() -> @kernel.Thm
+
+pub fn real_differentiable_on_id() -> @kernel.Thm
+
+pub fn real_differentiable_on_imp_differentiable_atreal() -> @kernel.Thm
+
+pub fn real_differentiable_on_imp_differentiable_within() -> @kernel.Thm
+
+pub fn real_differentiable_on_imp_real_continuous_on() -> @kernel.Thm
+
+pub fn real_differentiable_on_inv() -> @kernel.Thm
+
+pub fn real_differentiable_on_mul() -> @kernel.Thm
+
+pub fn real_differentiable_on_neg() -> @kernel.Thm
+
+pub fn real_differentiable_on_polynomial_function() -> @kernel.Thm
+
+pub fn real_differentiable_on_pow() -> @kernel.Thm
+
+pub fn real_differentiable_on_real_open() -> @kernel.Thm
+
+pub fn real_differentiable_on_sub() -> @kernel.Thm
+
+pub fn real_differentiable_on_subset() -> @kernel.Thm
+
+pub fn real_differentiable_on_sum() -> @kernel.Thm
+
+pub fn real_differentiable_on_v1() -> @kernel.Thm
+
+pub fn real_differentiable_polynomial_function_atreal() -> @kernel.Thm
+
+pub fn real_differentiable_polynomial_function_within() -> @kernel.Thm
+
+pub fn real_differentiable_pow_atreal() -> @kernel.Thm
+
+pub fn real_differentiable_pow_within() -> @kernel.Thm
+
+pub fn real_differentiable_sub() -> @kernel.Thm
+
+pub fn real_differentiable_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn real_differentiable_transform() -> @kernel.Thm
+
+pub fn real_differentiable_transform_atreal() -> @kernel.Thm
+
+pub fn real_differentiable_transform_within() -> @kernel.Thm
+
+pub fn real_differentiable_within() -> @kernel.Thm
+
+pub fn real_differentiable_within_acs() -> @kernel.Thm
+
+pub fn real_differentiable_within_asn() -> @kernel.Thm
+
+pub fn real_differentiable_within_atn() -> @kernel.Thm
+
+pub fn real_differentiable_within_cos() -> @kernel.Thm
+
+pub fn real_differentiable_within_exp() -> @kernel.Thm
+
+pub fn real_differentiable_within_log() -> @kernel.Thm
+
+pub fn real_differentiable_within_sin() -> @kernel.Thm
+
+pub fn real_differentiable_within_sqrt() -> @kernel.Thm
+
+pub fn real_differentiable_within_subset() -> @kernel.Thm
+
+pub fn real_differentiable_within_tan() -> @kernel.Thm
+
+pub fn real_differentiation_theorems() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn real_dini() -> @kernel.Thm
+
+pub fn real_dominated_convergence() -> @kernel.Thm
+
+pub fn real_euler_maclaurin() -> @kernel.Thm
+
+pub fn real_euler_maclaurin_antiderivative() -> @kernel.Thm
+
+pub fn real_exp_limit_rpow_le() -> @kernel.Thm
+
+pub fn real_exp_limit_rpow_lt() -> @kernel.Thm
+
+pub fn real_fundamental_theorem_of_calculus() -> @kernel.Thm
+
+pub fn real_fundamental_theorem_of_calculus_interior() -> @kernel.Thm
+
+pub fn real_fundamental_theorem_of_calculus_interior_strong() -> @kernel.Thm
+
+pub fn real_fundamental_theorem_of_calculus_strong() -> @kernel.Thm
+
+pub fn real_indefinite_integral_continuous() -> @kernel.Thm
+
+pub fn real_indefinite_integral_continuous_left() -> @kernel.Thm
+
+pub fn real_indefinite_integral_continuous_right() -> @kernel.Thm
+
+pub fn real_infsum() -> @kernel.Thm
+
+pub fn real_infsum_0() -> @kernel.Thm
+
+pub fn real_infsum_add() -> @kernel.Thm
+
+pub fn real_infsum_complex() -> @kernel.Thm
+
+pub fn real_infsum_eq() -> @kernel.Thm
+
+pub fn real_infsum_even() -> @kernel.Thm
+
+pub fn real_infsum_lmul() -> @kernel.Thm
+
+pub fn real_infsum_neg() -> @kernel.Thm
+
+pub fn real_infsum_odd() -> @kernel.Thm
+
+pub fn real_infsum_restrict() -> @kernel.Thm
+
+pub fn real_infsum_rmul() -> @kernel.Thm
+
+pub fn real_infsum_sub() -> @kernel.Thm
+
+pub fn real_infsum_unique() -> @kernel.Thm
+
+pub fn real_infsum_v1() -> @kernel.Thm
+
+pub fn real_integrable_0() -> @kernel.Thm
+
+pub fn real_integrable_add() -> @kernel.Thm
+
+pub fn real_integrable_affinity() -> @kernel.Thm
+
+pub fn real_integrable_by_parts() -> @kernel.Thm
+
+pub fn real_integrable_by_parts_eq() -> @kernel.Thm
+
+pub fn real_integrable_combine() -> @kernel.Thm
+
+pub fn real_integrable_const() -> @kernel.Thm
+
+pub fn real_integrable_continuous() -> @kernel.Thm
+
+pub fn real_integrable_decreasing() -> @kernel.Thm
+
+pub fn real_integrable_decreasing_product() -> @kernel.Thm
+
+pub fn real_integrable_decreasing_product_univ() -> @kernel.Thm
+
+pub fn real_integrable_eq() -> @kernel.Thm
+
+pub fn real_integrable_increasing() -> @kernel.Thm
+
+pub fn real_integrable_increasing_product() -> @kernel.Thm
+
+pub fn real_integrable_increasing_product_univ() -> @kernel.Thm
+
+pub fn real_integrable_integral() -> @kernel.Thm
+
+pub fn real_integrable_linear() -> @kernel.Thm
+
+pub fn real_integrable_lmul() -> @kernel.Thm
+
+pub fn real_integrable_lmul_eq() -> @kernel.Thm
+
+pub fn real_integrable_neg() -> @kernel.Thm
+
+pub fn real_integrable_neg_eq() -> @kernel.Thm
+
+pub fn real_integrable_on() -> @kernel.Thm
+
+pub fn real_integrable_on_empty() -> @kernel.Thm
+
+pub fn real_integrable_on_little_subintervals() -> @kernel.Thm
+
+pub fn real_integrable_on_null() -> @kernel.Thm
+
+pub fn real_integrable_on_open_interval() -> @kernel.Thm
+
+pub fn real_integrable_on_refl() -> @kernel.Thm
+
+pub fn real_integrable_on_subinterval() -> @kernel.Thm
+
+pub fn real_integrable_on_subinterval_gen() -> @kernel.Thm
+
+pub fn real_integrable_on_superset() -> @kernel.Thm
+
+pub fn real_integrable_on_v1() -> @kernel.Thm
+
+pub fn real_integrable_real_bounded_variation_product() -> @kernel.Thm
+
+pub fn real_integrable_reflect() -> @kernel.Thm
+
+pub fn real_integrable_reflect_gen() -> @kernel.Thm
+
+pub fn real_integrable_restrict_inter() -> @kernel.Thm
+
+pub fn real_integrable_restrict_univ() -> @kernel.Thm
+
+pub fn real_integrable_rmul() -> @kernel.Thm
+
+pub fn real_integrable_rmul_eq() -> @kernel.Thm
+
+pub fn real_integrable_spike() -> @kernel.Thm
+
+pub fn real_integrable_spike_eq() -> @kernel.Thm
+
+pub fn real_integrable_spike_finite() -> @kernel.Thm
+
+pub fn real_integrable_spike_interior() -> @kernel.Thm
+
+pub fn real_integrable_spike_set() -> @kernel.Thm
+
+pub fn real_integrable_spike_set_eq() -> @kernel.Thm
+
+pub fn real_integrable_straddle() -> @kernel.Thm
+
+pub fn real_integrable_stretch() -> @kernel.Thm
+
+pub fn real_integrable_sub() -> @kernel.Thm
+
+pub fn real_integrable_subinterval() -> @kernel.Thm
+
+pub fn real_integrable_sum() -> @kernel.Thm
+
+pub fn real_integrable_uniform_limit() -> @kernel.Thm
+
+pub fn real_integral() -> @kernel.Thm
+
+pub fn real_integral_0() -> @kernel.Thm
+
+pub fn real_integral_abs_bound_integral() -> @kernel.Thm
+
+pub fn real_integral_add() -> @kernel.Thm
+
+pub fn real_integral_combine() -> @kernel.Thm
+
+pub fn real_integral_const() -> @kernel.Thm
+
+pub fn real_integral_empty() -> @kernel.Thm
+
+pub fn real_integral_eq() -> @kernel.Thm
+
+pub fn real_integral_eq_0() -> @kernel.Thm
+
+pub fn real_integral_eq_has_integral() -> @kernel.Thm
+
+pub fn real_integral_has_real_derivative() -> @kernel.Thm
+
+pub fn real_integral_has_real_derivative_pointwise() -> @kernel.Thm
+
+pub fn real_integral_lbound() -> @kernel.Thm
+
+pub fn real_integral_le() -> @kernel.Thm
+
+pub fn real_integral_linear() -> @kernel.Thm
+
+pub fn real_integral_lmul() -> @kernel.Thm
+
+pub fn real_integral_neg() -> @kernel.Thm
+
+pub fn real_integral_null() -> @kernel.Thm
+
+pub fn real_integral_open_interval() -> @kernel.Thm
+
+pub fn real_integral_pos() -> @kernel.Thm
+
+pub fn real_integral_real_measure() -> @kernel.Thm
+
+pub fn real_integral_real_measure_univ() -> @kernel.Thm
+
+pub fn real_integral_refl() -> @kernel.Thm
+
+pub fn real_integral_reflect() -> @kernel.Thm
+
+pub fn real_integral_reflect_gen() -> @kernel.Thm
+
+pub fn real_integral_restrict() -> @kernel.Thm
+
+pub fn real_integral_restrict_inter() -> @kernel.Thm
+
+pub fn real_integral_restrict_univ() -> @kernel.Thm
+
+pub fn real_integral_rmul() -> @kernel.Thm
+
+pub fn real_integral_spike() -> @kernel.Thm
+
+pub fn real_integral_spike_set() -> @kernel.Thm
+
+pub fn real_integral_sub() -> @kernel.Thm
+
+pub fn real_integral_subset_le() -> @kernel.Thm
+
+pub fn real_integral_substitution() -> @kernel.Thm
+
+pub fn real_integral_substitution_simple() -> @kernel.Thm
+
+pub fn real_integral_sum() -> @kernel.Thm
+
+pub fn real_integral_ubound() -> @kernel.Thm
+
+pub fn real_integral_unique() -> @kernel.Thm
+
+pub fn real_integral_v1() -> @kernel.Thm
+
+pub fn real_integration_by_parts() -> @kernel.Thm
+
+pub fn real_integration_by_parts_simple() -> @kernel.Thm
+
+pub fn real_interval_subset_real_segment() -> @kernel.Thm
+
+pub fn real_interval_translation() -> @kernel.Thm
+
+pub fn real_ivt_decreasing() -> @kernel.Thm
+
+pub fn real_ivt_increasing() -> @kernel.Thm
+
+pub fn real_le_abs_sinh() -> @kernel.Thm
+
+pub fn real_le_x_sinh() -> @kernel.Thm
+
+pub fn real_lebesgue_differentiation_theorem() -> @kernel.Thm
+
+pub fn real_lebesgue_differentiation_theorem_alt() -> @kernel.Thm
+
+pub fn real_lebesgue_differentiation_theorem_decreasing() -> @kernel.Thm
+
+pub fn real_lebesgue_differentiation_theorem_increasing() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_closed() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_compact() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_compl() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_countable_inters() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_countable_inters_explicit() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_countable_unions() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_countable_unions_explicit() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_diff() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_empty() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_iff_measurable() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_inter() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_inters() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_interval() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_on_subintervals() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_open() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_preimage_closed() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_preimage_open() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_union() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_unions() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_univ() -> @kernel.Thm
+
+pub fn real_lebesgue_measurable_v1() -> @kernel.Thm
+
+pub fn real_log_convex_add() -> @kernel.Thm
+
+pub fn real_log_convex_const() -> @kernel.Thm
+
+pub fn real_log_convex_imp_convex() -> @kernel.Thm
+
+pub fn real_log_convex_imp_pos() -> @kernel.Thm
+
+pub fn real_log_convex_lim() -> @kernel.Thm
+
+pub fn real_log_convex_log_convex() -> @kernel.Thm
+
+pub fn real_log_convex_mul() -> @kernel.Thm
+
+pub fn real_log_convex_on() -> @kernel.Thm
+
+pub fn real_log_convex_on_convex() -> @kernel.Thm
+
+pub fn real_log_convex_on_empty() -> @kernel.Thm
+
+pub fn real_log_convex_on_eq() -> @kernel.Thm
+
+pub fn real_log_convex_on_sing() -> @kernel.Thm
+
+pub fn real_log_convex_on_subset() -> @kernel.Thm
+
+pub fn real_log_convex_on_v1() -> @kernel.Thm
+
+pub fn real_log_convex_product() -> @kernel.Thm
+
+pub fn real_log_convex_rpow_right() -> @kernel.Thm
+
+pub fn real_measurable() -> @kernel.Thm
+
+pub fn real_measurable_almost() -> @kernel.Thm
+
+pub fn real_measurable_bounded_ae_by_integrable_imp_integrable() -> @kernel.Thm
+
+pub fn real_measurable_bounded_by_integrable_imp_absolutely_integrable() -> @kernel.Thm
+
+pub fn real_measurable_bounded_by_integrable_imp_integrable() -> @kernel.Thm
+
+pub fn real_measurable_compact() -> @kernel.Thm
+
+pub fn real_measurable_countable_inters() -> @kernel.Thm
+
+pub fn real_measurable_countable_unions() -> @kernel.Thm
+
+pub fn real_measurable_countable_unions_bounded() -> @kernel.Thm
+
+pub fn real_measurable_countable_unions_strong() -> @kernel.Thm
+
+pub fn real_measurable_diff() -> @kernel.Thm
+
+pub fn real_measurable_empty() -> @kernel.Thm
+
+pub fn real_measurable_imp_real_lebesgue_measurable() -> @kernel.Thm
+
+pub fn real_measurable_inner_outer() -> @kernel.Thm
+
+pub fn real_measurable_inter() -> @kernel.Thm
+
+pub fn real_measurable_measurable() -> @kernel.Thm
+
+pub fn real_measurable_nested_unions() -> @kernel.Thm
+
+pub fn real_measurable_on() -> @kernel.Thm
+
+pub fn real_measurable_on_0() -> @kernel.Thm
+
+pub fn real_measurable_on_abs() -> @kernel.Thm
+
+pub fn real_measurable_on_add() -> @kernel.Thm
+
+pub fn real_measurable_on_cases() -> @kernel.Thm
+
+pub fn real_measurable_on_compose_continuous() -> @kernel.Thm
+
+pub fn real_measurable_on_compose_continuous_0() -> @kernel.Thm
+
+pub fn real_measurable_on_compose_continuous_closed_set() -> @kernel.Thm
+
+pub fn real_measurable_on_compose_continuous_closed_set_0() -> @kernel.Thm
+
+pub fn real_measurable_on_compose_continuous_open_interval() -> @kernel.Thm
+
+pub fn real_measurable_on_const() -> @kernel.Thm
+
+pub fn real_measurable_on_decreasing() -> @kernel.Thm
+
+pub fn real_measurable_on_decreasing_univ() -> @kernel.Thm
+
+pub fn real_measurable_on_div() -> @kernel.Thm
+
+pub fn real_measurable_on_increasing() -> @kernel.Thm
+
+pub fn real_measurable_on_increasing_univ() -> @kernel.Thm
+
+pub fn real_measurable_on_inv() -> @kernel.Thm
+
+pub fn real_measurable_on_lebesgue_measurable_subset() -> @kernel.Thm
+
+pub fn real_measurable_on_limit() -> @kernel.Thm
+
+pub fn real_measurable_on_lmul() -> @kernel.Thm
+
+pub fn real_measurable_on_max() -> @kernel.Thm
+
+pub fn real_measurable_on_measurable_subset() -> @kernel.Thm
+
+pub fn real_measurable_on_min() -> @kernel.Thm
+
+pub fn real_measurable_on_mul() -> @kernel.Thm
+
+pub fn real_measurable_on_neg() -> @kernel.Thm
+
+pub fn real_measurable_on_neg_eq() -> @kernel.Thm
+
+pub fn real_measurable_on_preimage_closed() -> @kernel.Thm
+
+pub fn real_measurable_on_preimage_closed_interval() -> @kernel.Thm
+
+pub fn real_measurable_on_preimage_halfspace_ge() -> @kernel.Thm
+
+pub fn real_measurable_on_preimage_halfspace_gt() -> @kernel.Thm
+
+pub fn real_measurable_on_preimage_halfspace_le() -> @kernel.Thm
+
+pub fn real_measurable_on_preimage_halfspace_lt() -> @kernel.Thm
+
+pub fn real_measurable_on_preimage_open() -> @kernel.Thm
+
+pub fn real_measurable_on_preimage_open_interval() -> @kernel.Thm
+
+pub fn real_measurable_on_restrict() -> @kernel.Thm
+
+pub fn real_measurable_on_rmul() -> @kernel.Thm
+
+pub fn real_measurable_on_rpow() -> @kernel.Thm
+
+pub fn real_measurable_on_simple_function_limit() -> @kernel.Thm
+
+pub fn real_measurable_on_spike_set() -> @kernel.Thm
+
+pub fn real_measurable_on_sub() -> @kernel.Thm
+
+pub fn real_measurable_on_univ() -> @kernel.Thm
+
+pub fn real_measurable_open() -> @kernel.Thm
+
+pub fn real_measurable_real_integrable() -> @kernel.Thm
+
+pub fn real_measurable_real_interval() -> @kernel.Thm
+
+pub fn real_measurable_real_measure_eq_0() -> @kernel.Thm
+
+pub fn real_measurable_real_measure_pos_lt() -> @kernel.Thm
+
+pub fn real_measurable_real_negligible_symdiff() -> @kernel.Thm
+
+pub fn real_measurable_real_segment() -> @kernel.Thm
+
+pub fn real_measurable_scaling() -> @kernel.Thm
+
+pub fn real_measurable_scaling_eq() -> @kernel.Thm
+
+pub fn real_measurable_translation() -> @kernel.Thm
+
+pub fn real_measurable_union() -> @kernel.Thm
+
+pub fn real_measurable_unions() -> @kernel.Thm
+
+pub fn real_measurable_v1() -> @kernel.Thm
+
+pub fn real_measure() -> @kernel.Thm
+
+pub fn real_measure_diff_subset() -> @kernel.Thm
+
+pub fn real_measure_disjoint_union() -> @kernel.Thm
+
+pub fn real_measure_disjoint_unions() -> @kernel.Thm
+
+pub fn real_measure_disjoint_unions_image() -> @kernel.Thm
+
+pub fn real_measure_disjoint_unions_image_strong() -> @kernel.Thm
+
+pub fn real_measure_empty() -> @kernel.Thm
+
+pub fn real_measure_eq_0() -> @kernel.Thm
+
+pub fn real_measure_measure() -> @kernel.Thm
+
+pub fn real_measure_pos_le() -> @kernel.Thm
+
+pub fn real_measure_real_integral() -> @kernel.Thm
+
+pub fn real_measure_real_integral_univ() -> @kernel.Thm
+
+pub fn real_measure_real_interval() -> @kernel.Thm
+
+pub fn real_measure_real_negligible_symdiff() -> @kernel.Thm
+
+pub fn real_measure_real_negligible_union() -> @kernel.Thm
+
+pub fn real_measure_real_negligible_unions() -> @kernel.Thm
+
+pub fn real_measure_real_negligible_unions_image() -> @kernel.Thm
+
+pub fn real_measure_real_negligible_unions_image_strong() -> @kernel.Thm
+
+pub fn real_measure_real_segment() -> @kernel.Thm
+
+pub fn real_measure_scaling() -> @kernel.Thm
+
+pub fn real_measure_subset() -> @kernel.Thm
+
+pub fn real_measure_translation() -> @kernel.Thm
+
+pub fn real_measure_union() -> @kernel.Thm
+
+pub fn real_measure_union_le() -> @kernel.Thm
+
+pub fn real_measure_unions_le() -> @kernel.Thm
+
+pub fn real_measure_unions_le_image() -> @kernel.Thm
+
+pub fn real_measure_unique() -> @kernel.Thm
+
+pub fn real_midpoint_in_convex() -> @kernel.Thm
+
+pub fn real_monotone_convergence_decreasing() -> @kernel.Thm
+
+pub fn real_monotone_convergence_increasing() -> @kernel.Thm
+
+pub fn real_monotone_convergence_increasing_ae() -> @kernel.Thm
+
+pub fn real_mvt() -> @kernel.Thm
+
+pub fn real_mvt_cauchy() -> @kernel.Thm
+
+pub fn real_mvt_simple() -> @kernel.Thm
+
+pub fn real_mvt_very_simple() -> @kernel.Thm
+
+pub fn real_negligible() -> @kernel.Thm
+
+pub fn real_negligible_countable() -> @kernel.Thm
+
+pub fn real_negligible_countable_unions() -> @kernel.Thm
+
+pub fn real_negligible_diff() -> @kernel.Thm
+
+pub fn real_negligible_empty() -> @kernel.Thm
+
+pub fn real_negligible_finite() -> @kernel.Thm
+
+pub fn real_negligible_frontier_interval() -> @kernel.Thm
+
+pub fn real_negligible_insert() -> @kernel.Thm
+
+pub fn real_negligible_inter() -> @kernel.Thm
+
+pub fn real_negligible_on_intervals() -> @kernel.Thm
+
+pub fn real_negligible_outer() -> @kernel.Thm
+
+pub fn real_negligible_outer_le() -> @kernel.Thm
+
+pub fn real_negligible_real_interval() -> @kernel.Thm
+
+pub fn real_negligible_sing() -> @kernel.Thm
+
+pub fn real_negligible_subset() -> @kernel.Thm
+
+pub fn real_negligible_translation() -> @kernel.Thm
+
+pub fn real_negligible_translation_eq() -> @kernel.Thm
+
+pub fn real_negligible_translation_rev() -> @kernel.Thm
+
+pub fn real_negligible_union() -> @kernel.Thm
+
+pub fn real_negligible_union_eq() -> @kernel.Thm
+
+pub fn real_negligible_unions() -> @kernel.Thm
+
+pub fn real_open() -> @kernel.Thm
+
+pub fn real_open_exists_rational() -> @kernel.Thm
+
+pub fn real_open_not_real_negligible() -> @kernel.Thm
+
+pub fn real_open_rational() -> @kernel.Thm
+
+pub fn real_open_set_exists_rational() -> @kernel.Thm
+
+pub fn real_open_set_rational() -> @kernel.Thm
+
+pub fn real_partial_sums_le_infsum() -> @kernel.Thm
+
+pub fn real_partial_sums_le_infsum_gen() -> @kernel.Thm
+
+pub fn real_poly_derivative() -> @kernel.Thm
+
+pub fn real_polynomial_function_1() -> @kernel.Thm
+
+pub fn real_polynomial_function_add() -> @kernel.Thm
+
+pub fn real_polynomial_function_cases() -> @kernel.Thm
+
+pub fn real_polynomial_function_drop() -> @kernel.Thm
+
+pub fn real_polynomial_function_explicit() -> @kernel.Thm
+
+pub fn real_polynomial_function_explicit_nz() -> @kernel.Thm
+
+pub fn real_polynomial_function_explicit_univ() -> @kernel.Thm
+
+pub fn real_polynomial_function_induct() -> @kernel.Thm
+
+pub fn real_polynomial_function_mul() -> @kernel.Thm
+
+pub fn real_polynomial_function_neg() -> @kernel.Thm
+
+pub fn real_polynomial_function_pow() -> @kernel.Thm
+
+pub fn real_polynomial_function_product() -> @kernel.Thm
+
+pub fn real_polynomial_function_rules() -> @kernel.Thm
+
+pub fn real_polynomial_function_sub() -> @kernel.Thm
+
+pub fn real_polynomial_function_sum() -> @kernel.Thm
+
+pub fn real_power_series_conv_imp_absconv() -> @kernel.Thm
+
+pub fn real_rolle() -> @kernel.Thm
+
+pub fn real_rolle_simple() -> @kernel.Thm
+
+pub fn real_second_mean_value_theorem() -> @kernel.Thm
+
+pub fn real_second_mean_value_theorem_bonnet() -> @kernel.Thm
+
+pub fn real_second_mean_value_theorem_bonnet_full() -> @kernel.Thm
+
+pub fn real_second_mean_value_theorem_full() -> @kernel.Thm
+
+pub fn real_second_mean_value_theorem_gen() -> @kernel.Thm
+
+pub fn real_second_mean_value_theorem_gen_full() -> @kernel.Thm
+
+pub fn real_segment() -> @kernel.Thm
+
+pub fn real_segment_interval() -> @kernel.Thm
+
+pub fn real_segment_segment() -> @kernel.Thm
+
+pub fn real_seq_offset() -> @kernel.Thm
+
+pub fn real_seq_offset_rev() -> @kernel.Thm
+
+pub fn real_series_0() -> @kernel.Thm
+
+pub fn real_series_absconv_imp_conv() -> @kernel.Thm
+
+pub fn real_series_add() -> @kernel.Thm
+
+pub fn real_series_bound() -> @kernel.Thm
+
+pub fn real_series_cauchy() -> @kernel.Thm
+
+pub fn real_series_cauchy_uniform() -> @kernel.Thm
+
+pub fn real_series_comparison() -> @kernel.Thm
+
+pub fn real_series_comparison_bound() -> @kernel.Thm
+
+pub fn real_series_comparison_uniform() -> @kernel.Thm
+
+pub fn real_series_diffs() -> @kernel.Thm
+
+pub fn real_series_dirichlet() -> @kernel.Thm
+
+pub fn real_series_even() -> @kernel.Thm
+
+pub fn real_series_finite() -> @kernel.Thm
+
+pub fn real_series_finite_support() -> @kernel.Thm
+
+pub fn real_series_from() -> @kernel.Thm
+
+pub fn real_series_goestozero() -> @kernel.Thm
+
+pub fn real_series_le() -> @kernel.Thm
+
+pub fn real_series_lmul() -> @kernel.Thm
+
+pub fn real_series_mul() -> @kernel.Thm
+
+pub fn real_series_mul_unique() -> @kernel.Thm
+
+pub fn real_series_neg() -> @kernel.Thm
+
+pub fn real_series_odd() -> @kernel.Thm
+
+pub fn real_series_pos() -> @kernel.Thm
+
+pub fn real_series_ratio() -> @kernel.Thm
+
+pub fn real_series_restrict() -> @kernel.Thm
+
+pub fn real_series_rmul() -> @kernel.Thm
+
+pub fn real_series_root_test() -> @kernel.Thm
+
+pub fn real_series_sub() -> @kernel.Thm
+
+pub fn real_series_subset() -> @kernel.Thm
+
+pub fn real_series_sum() -> @kernel.Thm
+
+pub fn real_series_terms_tozero() -> @kernel.Thm
+
+pub fn real_series_trivial() -> @kernel.Thm
+
+pub fn real_series_unique() -> @kernel.Thm
+
+pub fn real_steinhaus() -> @kernel.Thm
+
+pub fn real_stone_weierstrass() -> @kernel.Thm
+
+pub fn real_stone_weierstrass_alt() -> @kernel.Thm
+
+pub fn real_stone_weierstrass_polynomial_function() -> @kernel.Thm
+
+pub fn real_sum_integral_bounds_decreasing() -> @kernel.Thm
+
+pub fn real_sum_integral_bounds_increasing() -> @kernel.Thm
+
+pub fn real_sum_integral_lbound_decreasing() -> @kernel.Thm
+
+pub fn real_sum_integral_lbound_increasing() -> @kernel.Thm
+
+pub fn real_sum_integral_ubound_decreasing() -> @kernel.Thm
+
+pub fn real_sum_integral_ubound_increasing() -> @kernel.Thm
+
+pub fn real_summable() -> @kernel.Thm
+
+pub fn real_summable_0() -> @kernel.Thm
+
+pub fn real_summable_add() -> @kernel.Thm
+
+pub fn real_summable_alternating_series() -> @kernel.Thm
+
+pub fn real_summable_cauchy() -> @kernel.Thm
+
+pub fn real_summable_comparison() -> @kernel.Thm
+
+pub fn real_summable_complex() -> @kernel.Thm
+
+pub fn real_summable_eq() -> @kernel.Thm
+
+pub fn real_summable_eq_cofinite() -> @kernel.Thm
+
+pub fn real_summable_eq_eventually() -> @kernel.Thm
+
+pub fn real_summable_even() -> @kernel.Thm
+
+pub fn real_summable_finite() -> @kernel.Thm
+
+pub fn real_summable_from_elsewhere() -> @kernel.Thm
+
+pub fn real_summable_from_elsewhere_eq() -> @kernel.Thm
+
+pub fn real_summable_gp() -> @kernel.Thm
+
+pub fn real_summable_iff() -> @kernel.Thm
+
+pub fn real_summable_iff_cofinite() -> @kernel.Thm
+
+pub fn real_summable_iff_eventually() -> @kernel.Thm
+
+pub fn real_summable_imp_bounded() -> @kernel.Thm
+
+pub fn real_summable_imp_real_sums_bounded() -> @kernel.Thm
+
+pub fn real_summable_imp_tozero() -> @kernel.Thm
+
+pub fn real_summable_lmul() -> @kernel.Thm
+
+pub fn real_summable_mul_left() -> @kernel.Thm
+
+pub fn real_summable_mul_right() -> @kernel.Thm
+
+pub fn real_summable_neg() -> @kernel.Thm
+
+pub fn real_summable_odd() -> @kernel.Thm
+
+pub fn real_summable_pos_subset() -> @kernel.Thm
+
+pub fn real_summable_restrict() -> @kernel.Thm
+
+pub fn real_summable_rmul() -> @kernel.Thm
+
+pub fn real_summable_sub() -> @kernel.Thm
+
+pub fn real_summable_subset() -> @kernel.Thm
+
+pub fn real_summable_trivial() -> @kernel.Thm
+
+pub fn real_summable_v1() -> @kernel.Thm
+
+pub fn real_summable_zeta() -> @kernel.Thm
+
+pub fn real_summable_zeta_integer() -> @kernel.Thm
+
+pub fn real_sums() -> @kernel.Thm
+
+pub fn real_sums_complex() -> @kernel.Thm
+
+pub fn real_sums_eq() -> @kernel.Thm
+
+pub fn real_sums_finite_diff() -> @kernel.Thm
+
+pub fn real_sums_finite_union() -> @kernel.Thm
+
+pub fn real_sums_gp() -> @kernel.Thm
+
+pub fn real_sums_iff() -> @kernel.Thm
+
+pub fn real_sums_im() -> @kernel.Thm
+
+pub fn real_sums_infsum() -> @kernel.Thm
+
+pub fn real_sums_offset() -> @kernel.Thm
+
+pub fn real_sums_offset_rev() -> @kernel.Thm
+
+pub fn real_sums_re() -> @kernel.Thm
+
+pub fn real_sums_reindex() -> @kernel.Thm
+
+pub fn real_sums_summable() -> @kernel.Thm
+
+pub fn real_sums_v1() -> @kernel.Thm
+
+pub fn real_taylor() -> @kernel.Thm
+
+pub fn real_taylor_mvt_neg() -> @kernel.Thm
+
+pub fn real_taylor_mvt_pos() -> @kernel.Thm
+
+pub fn real_tendsto() -> @kernel.Thm
+
+pub fn real_tietze_periodic_interval() -> @kernel.Thm
+
+pub fn real_uniformly_continuous_imp_real_continuous() -> @kernel.Thm
+
+pub fn real_uniformly_continuous_on() -> @kernel.Thm
+
+pub fn real_uniformly_continuous_on_add() -> @kernel.Thm
+
+pub fn real_uniformly_continuous_on_compose() -> @kernel.Thm
+
+pub fn real_uniformly_continuous_on_const() -> @kernel.Thm
+
+pub fn real_uniformly_continuous_on_id() -> @kernel.Thm
+
+pub fn real_uniformly_continuous_on_lmul() -> @kernel.Thm
+
+pub fn real_uniformly_continuous_on_neg() -> @kernel.Thm
+
+pub fn real_uniformly_continuous_on_rmul() -> @kernel.Thm
+
+pub fn real_uniformly_continuous_on_sequentially() -> @kernel.Thm
+
+pub fn real_uniformly_continuous_on_sub() -> @kernel.Thm
+
+pub fn real_uniformly_continuous_on_subset() -> @kernel.Thm
+
+pub fn real_uniformly_continuous_on_sum() -> @kernel.Thm
+
+pub fn real_uniformly_continuous_on_v1() -> @kernel.Thm
+
+pub fn real_variation() -> @kernel.Thm
+
+pub fn real_variation_affinity() -> @kernel.Thm
+
+pub fn real_variation_affinity2() -> @kernel.Thm
+
+pub fn real_variation_combine() -> @kernel.Thm
+
+pub fn real_variation_continuous() -> @kernel.Thm
+
+pub fn real_variation_continuous_left() -> @kernel.Thm
+
+pub fn real_variation_continuous_right() -> @kernel.Thm
+
+pub fn real_variation_ge_abs_function() -> @kernel.Thm
+
+pub fn real_variation_ge_function() -> @kernel.Thm
+
+pub fn real_variation_minus_function_monotone() -> @kernel.Thm
+
+pub fn real_variation_monotone() -> @kernel.Thm
+
+pub fn real_variation_neg() -> @kernel.Thm
+
+pub fn real_variation_pos_le() -> @kernel.Thm
+
+pub fn real_variation_reflect() -> @kernel.Thm
+
+pub fn real_variation_reflect2() -> @kernel.Thm
+
+pub fn real_variation_reflect_interval() -> @kernel.Thm
+
+pub fn real_variation_translation() -> @kernel.Thm
+
+pub fn real_variation_translation2() -> @kernel.Thm
+
+pub fn real_variation_translation_interval() -> @kernel.Thm
+
+pub fn real_variation_triangle() -> @kernel.Thm
+
+pub fn real_vector_polynomial_function_o() -> @kernel.Thm
+
+pub fn reallim() -> @kernel.Thm
+
+pub fn reallim_1_over_log() -> @kernel.Thm
+
+pub fn reallim_1_over_n() -> @kernel.Thm
+
+pub fn reallim_1_over_n_offset() -> @kernel.Thm
+
+pub fn reallim_1_over_pow() -> @kernel.Thm
+
+pub fn reallim_abs() -> @kernel.Thm
+
+pub fn reallim_add() -> @kernel.Thm
+
+pub fn reallim_at() -> @kernel.Thm
+
+pub fn reallim_at_infinity() -> @kernel.Thm
+
+pub fn reallim_at_infinity_complex_0() -> @kernel.Thm
+
+pub fn reallim_at_neginfinity() -> @kernel.Thm
+
+pub fn reallim_at_posinfinity() -> @kernel.Thm
+
+pub fn reallim_at_within() -> @kernel.Thm
+
+pub fn reallim_at_zero() -> @kernel.Thm
+
+pub fn reallim_atreal() -> @kernel.Thm
+
+pub fn reallim_atreal_at() -> @kernel.Thm
+
+pub fn reallim_atreal_id() -> @kernel.Thm
+
+pub fn reallim_atreal_withinreal() -> @kernel.Thm
+
+pub fn reallim_atreal_zero() -> @kernel.Thm
+
+pub fn reallim_complex() -> @kernel.Thm
+
+pub fn reallim_compose_at() -> @kernel.Thm
+
+pub fn reallim_compose_within() -> @kernel.Thm
+
+pub fn reallim_cong_at() -> @kernel.Thm
+
+pub fn reallim_cong_atreal() -> @kernel.Thm
+
+pub fn reallim_cong_within() -> @kernel.Thm
+
+pub fn reallim_cong_withinreal() -> @kernel.Thm
+
+pub fn reallim_const() -> @kernel.Thm
+
+pub fn reallim_const_eq() -> @kernel.Thm
+
+pub fn reallim_continuous_function() -> @kernel.Thm
+
+pub fn reallim_div() -> @kernel.Thm
+
+pub fn reallim_eventually() -> @kernel.Thm
+
+pub fn reallim_eventually_lbound() -> @kernel.Thm
+
+pub fn reallim_eventually_ubound() -> @kernel.Thm
+
+pub fn reallim_im() -> @kernel.Thm
+
+pub fn reallim_imp_has_liminf() -> @kernel.Thm
+
+pub fn reallim_imp_has_limsup() -> @kernel.Thm
+
+pub fn reallim_inv() -> @kernel.Thm
+
+pub fn reallim_lbound() -> @kernel.Thm
+
+pub fn reallim_le() -> @kernel.Thm
+
+pub fn reallim_lmul() -> @kernel.Thm
+
+pub fn reallim_lmul_eq() -> @kernel.Thm
+
+pub fn reallim_log_over_n() -> @kernel.Thm
+
+pub fn reallim_max() -> @kernel.Thm
+
+pub fn reallim_min() -> @kernel.Thm
+
+pub fn reallim_mul() -> @kernel.Thm
+
+pub fn reallim_neg() -> @kernel.Thm
+
+pub fn reallim_neg_eq() -> @kernel.Thm
+
+pub fn reallim_null() -> @kernel.Thm
+
+pub fn reallim_null_abs() -> @kernel.Thm
+
+pub fn reallim_null_add() -> @kernel.Thm
+
+pub fn reallim_null_comparison() -> @kernel.Thm
+
+pub fn reallim_null_lmul() -> @kernel.Thm
+
+pub fn reallim_null_lmul_eq() -> @kernel.Thm
+
+pub fn reallim_null_neg() -> @kernel.Thm
+
+pub fn reallim_null_pow() -> @kernel.Thm
+
+pub fn reallim_null_pow_eq() -> @kernel.Thm
+
+pub fn reallim_null_rmul() -> @kernel.Thm
+
+pub fn reallim_null_rmul_eq() -> @kernel.Thm
+
+pub fn reallim_null_sub() -> @kernel.Thm
+
+pub fn reallim_null_sum() -> @kernel.Thm
+
+pub fn reallim_posinfinity_sequentially() -> @kernel.Thm
+
+pub fn reallim_pow() -> @kernel.Thm
+
+pub fn reallim_pown() -> @kernel.Thm
+
+pub fn reallim_re() -> @kernel.Thm
+
+pub fn reallim_real_continuous_function() -> @kernel.Thm
+
+pub fn reallim_rmul() -> @kernel.Thm
+
+pub fn reallim_rmul_eq() -> @kernel.Thm
+
+pub fn reallim_root_refl() -> @kernel.Thm
+
+pub fn reallim_rpow() -> @kernel.Thm
+
+pub fn reallim_rpow_compose() -> @kernel.Thm
+
+pub fn reallim_sequentially() -> @kernel.Thm
+
+pub fn reallim_sequentially_within() -> @kernel.Thm
+
+pub fn reallim_sin_over_x() -> @kernel.Thm
+
+pub fn reallim_sub() -> @kernel.Thm
+
+pub fn reallim_sum() -> @kernel.Thm
+
+pub fn reallim_transform() -> @kernel.Thm
+
+pub fn reallim_transform_eq() -> @kernel.Thm
+
+pub fn reallim_transform_eventually() -> @kernel.Thm
+
+pub fn reallim_transform_straddle() -> @kernel.Thm
+
+pub fn reallim_transform_within_set() -> @kernel.Thm
+
+pub fn reallim_transform_within_set_imp() -> @kernel.Thm
+
+pub fn reallim_transform_withinreal_set() -> @kernel.Thm
+
+pub fn reallim_transform_withinreal_set_imp() -> @kernel.Thm
+
+pub fn reallim_trivial() -> @kernel.Thm
+
+pub fn reallim_ubound() -> @kernel.Thm
+
+pub fn reallim_unique() -> @kernel.Thm
+
+pub fn reallim_within() -> @kernel.Thm
+
+pub fn reallim_within_le() -> @kernel.Thm
+
+pub fn reallim_within_open() -> @kernel.Thm
+
+pub fn reallim_within_real_open() -> @kernel.Thm
+
+pub fn reallim_within_subset() -> @kernel.Thm
+
+pub fn reallim_withinreal() -> @kernel.Thm
+
+pub fn reallim_withinreal_id() -> @kernel.Thm
+
+pub fn reallim_withinreal_le() -> @kernel.Thm
+
+pub fn reallim_withinreal_subset() -> @kernel.Thm
+
+pub fn reallim_withinreal_within() -> @kernel.Thm
+
+pub fn reallim_x_times_log() -> @kernel.Thm
+
+pub fn reallim_zero_neginfinity() -> @kernel.Thm
+
+pub fn reallim_zero_posinfinity() -> @kernel.Thm
+
+pub fn rectifiable_path_vector_polynomial_function() -> @kernel.Thm
+
+pub fn rpow_minus1_quotient_le() -> @kernel.Thm
+
+pub fn rpow_minus1_quotient_lt() -> @kernel.Thm
+
+pub fn segment_real_segment() -> @kernel.Thm
+
+pub fn series_normconv_imp_conv() -> @kernel.Thm
+
+pub fn series_root_test() -> @kernel.Thm
+
+pub fn slice() -> @kernel.Thm
+
+pub fn slice_ball() -> @kernel.Thm
+
+pub fn slice_cball() -> @kernel.Thm
+
+pub fn slice_diff() -> @kernel.Thm
+
+pub fn slice_empty() -> @kernel.Thm
+
+pub fn slice_inter() -> @kernel.Thm
+
+pub fn slice_interval() -> @kernel.Thm
+
+pub fn slice_subset() -> @kernel.Thm
+
+pub fn slice_union() -> @kernel.Thm
+
+pub fn slice_unions() -> @kernel.Thm
+
+pub fn slice_univ() -> @kernel.Thm
+
+pub fn steinhaus_trivial() -> @kernel.Thm
+
+pub fn stone_weierstrass() -> @kernel.Thm
+
+pub fn stone_weierstrass_alt() -> @kernel.Thm
+
+pub fn stone_weierstrass_real_polynomial_function() -> @kernel.Thm
+
+pub fn stone_weierstrass_vector_polynomial_function() -> @kernel.Thm
+
+pub fn stone_weierstrass_vector_polynomial_function_affine() -> @kernel.Thm
+
+pub fn stone_weierstrass_vector_polynomial_function_subspace() -> @kernel.Thm
+
+pub fn sum_bernstein() -> @kernel.Thm
+
+pub fn sum_of_powers() -> @kernel.Thm
+
+pub fn tendsto_real() -> @kernel.Thm
+
+pub fn tendsto_real_v1() -> @kernel.Thm
+
+pub fn trivial_limit_atreal() -> @kernel.Thm
+
+pub fn trivial_limit_within_realinterval() -> @kernel.Thm
+
+pub fn trivial_limit_withinreal_within() -> @kernel.Thm
+
+pub fn trivial_limit_withinreal_withincomplex() -> @kernel.Thm
+
+pub fn vector_polynomial_function() -> @kernel.Thm
+
+pub fn vector_polynomial_function_add() -> @kernel.Thm
+
+pub fn vector_polynomial_function_cmul() -> @kernel.Thm
+
+pub fn vector_polynomial_function_component() -> @kernel.Thm
+
+pub fn vector_polynomial_function_const() -> @kernel.Thm
+
+pub fn vector_polynomial_function_id() -> @kernel.Thm
+
+pub fn vector_polynomial_function_lift() -> @kernel.Thm
+
+pub fn vector_polynomial_function_mul() -> @kernel.Thm
+
+pub fn vector_polynomial_function_neg() -> @kernel.Thm
+
+pub fn vector_polynomial_function_o() -> @kernel.Thm
+
+pub fn vector_polynomial_function_reflect() -> @kernel.Thm
+
+pub fn vector_polynomial_function_sub() -> @kernel.Thm
+
+pub fn vector_polynomial_function_vsum() -> @kernel.Thm
+
+pub fn withinreal_univ() -> @kernel.Thm
+
+pub fn young_inequality() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

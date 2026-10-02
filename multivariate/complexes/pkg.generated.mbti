@@ -1,0 +1,699 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/complexes"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn bilinear_complex_mul() -> @kernel.Thm
+
+pub fn cnj() -> @kernel.Thm
+
+pub fn cnj_add() -> @kernel.Thm
+
+pub fn cnj_cnj() -> @kernel.Thm
+
+pub fn cnj_cproduct() -> @kernel.Thm
+
+pub fn cnj_cx() -> @kernel.Thm
+
+pub fn cnj_div() -> @kernel.Thm
+
+pub fn cnj_eq_0() -> @kernel.Thm
+
+pub fn cnj_eq_cx() -> @kernel.Thm
+
+pub fn cnj_ii() -> @kernel.Thm
+
+pub fn cnj_inj() -> @kernel.Thm
+
+pub fn cnj_inv() -> @kernel.Thm
+
+pub fn cnj_mul() -> @kernel.Thm
+
+pub fn cnj_neg() -> @kernel.Thm
+
+pub fn cnj_pow() -> @kernel.Thm
+
+pub fn cnj_sub() -> @kernel.Thm
+
+pub fn cnj_vsum() -> @kernel.Thm
+
+pub fn complex() -> @kernel.Thm
+
+pub fn complex_add() -> @kernel.Thm
+
+pub fn complex_add2_sub2() -> @kernel.Thm
+
+pub fn complex_add_ac() -> @kernel.Thm
+
+pub fn complex_add_assoc() -> @kernel.Thm
+
+pub fn complex_add_cnj() -> @kernel.Thm
+
+pub fn complex_add_ldistrib() -> @kernel.Thm
+
+pub fn complex_add_lid() -> @kernel.Thm
+
+pub fn complex_add_linv() -> @kernel.Thm
+
+pub fn complex_add_rdistrib() -> @kernel.Thm
+
+pub fn complex_add_rid() -> @kernel.Thm
+
+pub fn complex_add_rinv() -> @kernel.Thm
+
+pub fn complex_add_sub() -> @kernel.Thm
+
+pub fn complex_add_sub2() -> @kernel.Thm
+
+pub fn complex_add_sym() -> @kernel.Thm
+
+pub fn complex_basis() -> @kernel.Thm
+
+pub fn complex_cauchy_schwarz_eq() -> @kernel.Thm
+
+pub fn complex_cmul() -> @kernel.Thm
+
+pub fn complex_diffsq() -> @kernel.Thm
+
+pub fn complex_div() -> @kernel.Thm
+
+pub fn complex_div_1() -> @kernel.Thm
+
+pub fn complex_div_cnj() -> @kernel.Thm
+
+pub fn complex_div_eq_0() -> @kernel.Thm
+
+pub fn complex_div_lmul() -> @kernel.Thm
+
+pub fn complex_div_pow() -> @kernel.Thm
+
+pub fn complex_div_pow2() -> @kernel.Thm
+
+pub fn complex_div_refl() -> @kernel.Thm
+
+pub fn complex_div_rmul() -> @kernel.Thm
+
+pub fn complex_entire() -> @kernel.Thm
+
+pub fn complex_eq() -> @kernel.Thm
+
+pub fn complex_eq_0() -> @kernel.Thm
+
+pub fn complex_eq_add_lcancel() -> @kernel.Thm
+
+pub fn complex_eq_add_lcancel_0() -> @kernel.Thm
+
+pub fn complex_eq_add_rcancel() -> @kernel.Thm
+
+pub fn complex_eq_add_rcancel_0() -> @kernel.Thm
+
+pub fn complex_eq_inv2() -> @kernel.Thm
+
+pub fn complex_eq_mul_lcancel() -> @kernel.Thm
+
+pub fn complex_eq_mul_rcancel() -> @kernel.Thm
+
+pub fn complex_eq_neg2() -> @kernel.Thm
+
+pub fn complex_eq_sub_ladd() -> @kernel.Thm
+
+pub fn complex_eq_sub_radd() -> @kernel.Thm
+
+pub fn complex_expand() -> @kernel.Thm
+
+pub fn complex_field(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_ideal_cofactors(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @list.List[@kernel.Term] raise) raise
+
+pub fn complex_inv() -> @kernel.Thm
+
+pub fn complex_inv_0() -> @kernel.Thm
+
+pub fn complex_inv_1() -> @kernel.Thm
+
+pub fn complex_inv_cnj() -> @kernel.Thm
+
+pub fn complex_inv_div() -> @kernel.Thm
+
+pub fn complex_inv_eq_0() -> @kernel.Thm
+
+pub fn complex_inv_eq_1() -> @kernel.Thm
+
+pub fn complex_inv_ii() -> @kernel.Thm
+
+pub fn complex_inv_inv() -> @kernel.Thm
+
+pub fn complex_inv_mul() -> @kernel.Thm
+
+pub fn complex_inv_neg() -> @kernel.Thm
+
+pub fn complex_l1_le_norm() -> @kernel.Thm
+
+pub fn complex_linear() -> @kernel.Thm
+
+pub fn complex_linear_alt() -> @kernel.Thm
+
+pub fn complex_lneg_uniq() -> @kernel.Thm
+
+pub fn complex_mul() -> @kernel.Thm
+
+pub fn complex_mul_2() -> @kernel.Thm
+
+pub fn complex_mul_ac() -> @kernel.Thm
+
+pub fn complex_mul_assoc() -> @kernel.Thm
+
+pub fn complex_mul_cnj() -> @kernel.Thm
+
+pub fn complex_mul_lid() -> @kernel.Thm
+
+pub fn complex_mul_linv() -> @kernel.Thm
+
+pub fn complex_mul_lneg() -> @kernel.Thm
+
+pub fn complex_mul_lzero() -> @kernel.Thm
+
+pub fn complex_mul_rid() -> @kernel.Thm
+
+pub fn complex_mul_rinv() -> @kernel.Thm
+
+pub fn complex_mul_rneg() -> @kernel.Thm
+
+pub fn complex_mul_rzero() -> @kernel.Thm
+
+pub fn complex_mul_sym() -> @kernel.Thm
+
+pub fn complex_neg() -> @kernel.Thm
+
+pub fn complex_neg_0() -> @kernel.Thm
+
+pub fn complex_neg_add() -> @kernel.Thm
+
+pub fn complex_neg_eq() -> @kernel.Thm
+
+pub fn complex_neg_eq_0() -> @kernel.Thm
+
+pub fn complex_neg_inv() -> @kernel.Thm
+
+pub fn complex_neg_lmul() -> @kernel.Thm
+
+pub fn complex_neg_minus1() -> @kernel.Thm
+
+pub fn complex_neg_mul2() -> @kernel.Thm
+
+pub fn complex_neg_neg() -> @kernel.Thm
+
+pub fn complex_neg_rmul() -> @kernel.Thm
+
+pub fn complex_neg_sub() -> @kernel.Thm
+
+pub fn complex_norm() -> @kernel.Thm
+
+pub fn complex_norm_0() -> @kernel.Thm
+
+pub fn complex_norm_abs_norm() -> @kernel.Thm
+
+pub fn complex_norm_cnj() -> @kernel.Thm
+
+pub fn complex_norm_cx() -> @kernel.Thm
+
+pub fn complex_norm_div() -> @kernel.Thm
+
+pub fn complex_norm_ge_re_im() -> @kernel.Thm
+
+pub fn complex_norm_ii() -> @kernel.Thm
+
+pub fn complex_norm_inv() -> @kernel.Thm
+
+pub fn complex_norm_le_re_im() -> @kernel.Thm
+
+pub fn complex_norm_mul() -> @kernel.Thm
+
+pub fn complex_norm_num() -> @kernel.Thm
+
+pub fn complex_norm_nz() -> @kernel.Thm
+
+pub fn complex_norm_pow() -> @kernel.Thm
+
+pub fn complex_norm_pow_2() -> @kernel.Thm
+
+pub fn complex_norm_triangle_sub() -> @kernel.Thm
+
+pub fn complex_norm_vsum_bound() -> @kernel.Thm
+
+pub fn complex_norm_vsum_bound_subset() -> @kernel.Thm
+
+pub fn complex_norm_vsum_sum_re() -> @kernel.Thm
+
+pub fn complex_norm_zero() -> @kernel.Thm
+
+pub fn complex_orthogonal_rotation() -> @kernel.Thm
+
+pub fn complex_orthogonal_rotoinversion() -> @kernel.Thm
+
+pub fn complex_orthogonal_transformation() -> @kernel.Thm
+
+pub fn complex_poly_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_poly_clauses() -> @kernel.Thm
+
+pub fn complex_poly_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_poly_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_poly_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_poly_neg_clauses() -> @kernel.Thm
+
+pub fn complex_poly_neg_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_poly_pow_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_poly_sub_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_polyfun_eq_0() -> @kernel.Thm
+
+pub fn complex_polyfun_eq_const() -> @kernel.Thm
+
+pub fn complex_polyfun_extremal() -> @kernel.Thm
+
+pub fn complex_polyfun_extremal_lemma() -> @kernel.Thm
+
+pub fn complex_polyfun_finite_roots() -> @kernel.Thm
+
+pub fn complex_polyfun_linear_factor() -> @kernel.Thm
+
+pub fn complex_polyfun_linear_factor_root() -> @kernel.Thm
+
+pub fn complex_polyfun_rootbound() -> @kernel.Thm
+
+pub fn complex_pow() -> @kernel.Thm
+
+pub fn complex_pow_1() -> @kernel.Thm
+
+pub fn complex_pow_2() -> @kernel.Thm
+
+pub fn complex_pow_add() -> @kernel.Thm
+
+pub fn complex_pow_div() -> @kernel.Thm
+
+pub fn complex_pow_eq_0() -> @kernel.Thm
+
+pub fn complex_pow_eq_1() -> @kernel.Thm
+
+pub fn complex_pow_ii_2() -> @kernel.Thm
+
+pub fn complex_pow_inv() -> @kernel.Thm
+
+pub fn complex_pow_mul() -> @kernel.Thm
+
+pub fn complex_pow_neg() -> @kernel.Thm
+
+pub fn complex_pow_one() -> @kernel.Thm
+
+pub fn complex_pow_pow() -> @kernel.Thm
+
+pub fn complex_pow_zero() -> @kernel.Thm
+
+pub fn complex_rat_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_rat_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_rat_inv_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_rat_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_rat_pow_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_ring(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_rneg_uniq() -> @kernel.Thm
+
+pub fn complex_sqnorm() -> @kernel.Thm
+
+pub fn complex_sub() -> @kernel.Thm
+
+pub fn complex_sub_0() -> @kernel.Thm
+
+pub fn complex_sub_add() -> @kernel.Thm
+
+pub fn complex_sub_add2() -> @kernel.Thm
+
+pub fn complex_sub_ldistrib() -> @kernel.Thm
+
+pub fn complex_sub_lneg() -> @kernel.Thm
+
+pub fn complex_sub_lzero() -> @kernel.Thm
+
+pub fn complex_sub_neg2() -> @kernel.Thm
+
+pub fn complex_sub_polyfun() -> @kernel.Thm
+
+pub fn complex_sub_polyfun_alt() -> @kernel.Thm
+
+pub fn complex_sub_pow() -> @kernel.Thm
+
+pub fn complex_sub_pow_l1() -> @kernel.Thm
+
+pub fn complex_sub_pow_r1() -> @kernel.Thm
+
+pub fn complex_sub_rdistrib() -> @kernel.Thm
+
+pub fn complex_sub_refl() -> @kernel.Thm
+
+pub fn complex_sub_rneg() -> @kernel.Thm
+
+pub fn complex_sub_rzero() -> @kernel.Thm
+
+pub fn complex_sub_sub() -> @kernel.Thm
+
+pub fn complex_sub_sub2() -> @kernel.Thm
+
+pub fn complex_sub_triangle() -> @kernel.Thm
+
+pub fn complex_trad() -> @kernel.Thm
+
+pub fn complex_v1() -> @kernel.Thm
+
+pub fn complex_vec_0() -> @kernel.Thm
+
+pub fn convex_real() -> @kernel.Thm
+
+pub fn cproduct() -> @kernel.Thm
+
+pub fn cproduct_1() -> @kernel.Thm
+
+pub fn cproduct_clauses() -> @kernel.Thm
+
+pub fn cproduct_clauses_left() -> @kernel.Thm
+
+pub fn cproduct_clauses_numseg() -> @kernel.Thm
+
+pub fn cproduct_clauses_right() -> @kernel.Thm
+
+pub fn cproduct_const() -> @kernel.Thm
+
+pub fn cproduct_const_numseg() -> @kernel.Thm
+
+pub fn cproduct_eq() -> @kernel.Thm
+
+pub fn cproduct_eq_0() -> @kernel.Thm
+
+pub fn cproduct_eq_1() -> @kernel.Thm
+
+pub fn cproduct_image() -> @kernel.Thm
+
+pub fn cproduct_inv() -> @kernel.Thm
+
+pub fn cproduct_mul() -> @kernel.Thm
+
+pub fn cproduct_offset() -> @kernel.Thm
+
+pub fn cproduct_pair() -> @kernel.Thm
+
+pub fn cproduct_pow() -> @kernel.Thm
+
+pub fn cproduct_reflect() -> @kernel.Thm
+
+pub fn cproduct_sing() -> @kernel.Thm
+
+pub fn cproduct_superset() -> @kernel.Thm
+
+pub fn cproduct_union() -> @kernel.Thm
+
+pub fn csqrt() -> @kernel.Thm
+
+pub fn csqrt_0() -> @kernel.Thm
+
+pub fn csqrt_1() -> @kernel.Thm
+
+pub fn csqrt_cx() -> @kernel.Thm
+
+pub fn csqrt_eq_0() -> @kernel.Thm
+
+pub fn csqrt_principal() -> @kernel.Thm
+
+pub fn csqrt_unique() -> @kernel.Thm
+
+pub fn csqrt_v1() -> @kernel.Thm
+
+pub fn cx_abs() -> @kernel.Thm
+
+pub fn cx_add() -> @kernel.Thm
+
+pub fn cx_def() -> @kernel.Thm
+
+pub fn cx_div() -> @kernel.Thm
+
+pub fn cx_im_cnj() -> @kernel.Thm
+
+pub fn cx_inj() -> @kernel.Thm
+
+pub fn cx_inv() -> @kernel.Thm
+
+pub fn cx_mul() -> @kernel.Thm
+
+pub fn cx_neg() -> @kernel.Thm
+
+pub fn cx_pow() -> @kernel.Thm
+
+pub fn cx_product() -> @kernel.Thm
+
+pub fn cx_re_cnj() -> @kernel.Thm
+
+pub fn cx_sqrt() -> @kernel.Thm
+
+pub fn cx_sub() -> @kernel.Thm
+
+pub fn dest_complex_const(@kernel.Term) -> @num.Num raise
+
+pub fn dim_real() -> @kernel.Thm
+
+pub fn dist_cx() -> @kernel.Thm
+
+pub fn dot_cnj() -> @kernel.Thm
+
+pub fn dot_complex_mul_cnj() -> @kernel.Thm
+
+pub fn exists_cnj() -> @kernel.Thm
+
+pub fn exists_complex() -> @kernel.Thm
+
+pub fn exists_real() -> @kernel.Thm
+
+pub fn forall_cnj() -> @kernel.Thm
+
+pub fn forall_complex() -> @kernel.Thm
+
+pub fn forall_real() -> @kernel.Thm
+
+pub fn ii() -> @kernel.Thm
+
+pub fn ii_nz() -> @kernel.Thm
+
+pub fn im() -> @kernel.Thm
+
+pub fn im_add() -> @kernel.Thm
+
+pub fn im_cmul() -> @kernel.Thm
+
+pub fn im_cnj() -> @kernel.Thm
+
+pub fn im_complex_div_eq_0() -> @kernel.Thm
+
+pub fn im_complex_div_ge_0() -> @kernel.Thm
+
+pub fn im_complex_div_gt_0() -> @kernel.Thm
+
+pub fn im_complex_div_le_0() -> @kernel.Thm
+
+pub fn im_complex_div_lt_0() -> @kernel.Thm
+
+pub fn im_complex_inv_eq_0() -> @kernel.Thm
+
+pub fn im_complex_inv_ge_0() -> @kernel.Thm
+
+pub fn im_complex_inv_gt_0() -> @kernel.Thm
+
+pub fn im_complex_inv_le_0() -> @kernel.Thm
+
+pub fn im_complex_inv_lt_0() -> @kernel.Thm
+
+pub fn im_cx() -> @kernel.Thm
+
+pub fn im_def() -> @kernel.Thm
+
+pub fn im_div_cx() -> @kernel.Thm
+
+pub fn im_ii() -> @kernel.Thm
+
+pub fn im_mul_cx() -> @kernel.Thm
+
+pub fn im_mul_ii() -> @kernel.Thm
+
+pub fn im_neg() -> @kernel.Thm
+
+pub fn im_sub() -> @kernel.Thm
+
+pub fn im_vsum() -> @kernel.Thm
+
+pub fn image_cx() -> @kernel.Thm
+
+pub fn in_segment_cx() -> @kernel.Thm
+
+pub fn in_segment_cx_gen() -> @kernel.Thm
+
+pub fn interior_real() -> @kernel.Thm
+
+pub fn is_complex_const(@kernel.Term) -> Bool raise
+
+pub fn linear_cnj() -> @kernel.Thm
+
+pub fn linear_complex_lmul() -> @kernel.Thm
+
+pub fn linear_complex_mul() -> @kernel.Thm
+
+pub fn linear_complex_rmul() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mk_complex_const(@num.Num) -> @kernel.Term raise
+
+pub fn monoidal_complex_mul() -> @kernel.Thm
+
+pub fn neutral_complex_mul() -> @kernel.Thm
+
+pub fn norm_cproduct() -> @kernel.Thm
+
+pub fn orthogonal_transformation_cnj() -> @kernel.Thm
+
+pub fn orthogonal_transformation_complex_mul() -> @kernel.Thm
+
+pub fn pow_2_csqrt() -> @kernel.Thm
+
+pub fn prioritize_complex(Unit) -> Unit raise
+
+pub fn re() -> @kernel.Thm
+
+pub fn re_add() -> @kernel.Thm
+
+pub fn re_cmul() -> @kernel.Thm
+
+pub fn re_cnj() -> @kernel.Thm
+
+pub fn re_complex_div_eq_0() -> @kernel.Thm
+
+pub fn re_complex_div_ge_0() -> @kernel.Thm
+
+pub fn re_complex_div_gt_0() -> @kernel.Thm
+
+pub fn re_complex_div_le_0() -> @kernel.Thm
+
+pub fn re_complex_div_lt_0() -> @kernel.Thm
+
+pub fn re_complex_inv_ge_0() -> @kernel.Thm
+
+pub fn re_complex_inv_gt_0() -> @kernel.Thm
+
+pub fn re_csqrt() -> @kernel.Thm
+
+pub fn re_cx() -> @kernel.Thm
+
+pub fn re_def() -> @kernel.Thm
+
+pub fn re_div_cx() -> @kernel.Thm
+
+pub fn re_ii() -> @kernel.Thm
+
+pub fn re_mul_cx() -> @kernel.Thm
+
+pub fn re_mul_ii() -> @kernel.Thm
+
+pub fn re_neg() -> @kernel.Thm
+
+pub fn re_pos_segment() -> @kernel.Thm
+
+pub fn re_sub() -> @kernel.Thm
+
+pub fn re_vsum() -> @kernel.Thm
+
+pub fn real() -> @kernel.Thm
+
+pub fn real_add() -> @kernel.Thm
+
+pub fn real_cnj() -> @kernel.Thm
+
+pub fn real_cx() -> @kernel.Thm
+
+pub fn real_div() -> @kernel.Thm
+
+pub fn real_exists() -> @kernel.Thm
+
+pub fn real_imp_cnj() -> @kernel.Thm
+
+pub fn real_inv() -> @kernel.Thm
+
+pub fn real_inv_eq() -> @kernel.Thm
+
+pub fn real_mul() -> @kernel.Thm
+
+pub fn real_mul_cnj() -> @kernel.Thm
+
+pub fn real_mul_cx() -> @kernel.Thm
+
+pub fn real_neg() -> @kernel.Thm
+
+pub fn real_norm() -> @kernel.Thm
+
+pub fn real_norm_pos() -> @kernel.Thm
+
+pub fn real_pow() -> @kernel.Thm
+
+pub fn real_segment() -> @kernel.Thm
+
+pub fn real_sgn_im_complex_div() -> @kernel.Thm
+
+pub fn real_sgn_re_complex_div() -> @kernel.Thm
+
+pub fn real_sub() -> @kernel.Thm
+
+pub fn real_v1() -> @kernel.Thm
+
+pub fn real_vsum() -> @kernel.Thm
+
+pub fn sgn_re_complex_inv() -> @kernel.Thm
+
+pub fn simple_complex_arith(@kernel.Term) -> @kernel.Thm raise
+
+pub fn simple_complex_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn subspace_real() -> @kernel.Thm
+
+pub fn vsum_complex_lmul() -> @kernel.Thm
+
+pub fn vsum_complex_rmul() -> @kernel.Thm
+
+pub fn vsum_cx() -> @kernel.Thm
+
+pub fn vsum_cx_numseg() -> @kernel.Thm
+
+pub fn vsum_gp() -> @kernel.Thm
+
+pub fn vsum_gp_basic() -> @kernel.Thm
+
+pub fn vsum_gp_multiplied() -> @kernel.Thm
+
+pub fn vsum_gp_offset() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
