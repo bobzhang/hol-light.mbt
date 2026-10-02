@@ -82,9 +82,9 @@ pub fn real_sub_lt() -> @kernel.Thm
 
 // Types and methods
 pub(all) enum Positivstellensatz {
-  Axiom_eq(Int)
-  Axiom_le(Int)
-  Axiom_lt(Int)
+  Axiom_eq(Int64)
+  Axiom_le(Int64)
+  Axiom_lt(Int64)
   Rational_eq(@num.Num)
   Rational_le(@num.Num)
   Rational_lt(@num.Num)

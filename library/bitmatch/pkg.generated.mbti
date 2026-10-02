@@ -19,9 +19,9 @@ pub fn _elsepattern() -> @kernel.Thm
 
 pub fn bit0_word1() -> @kernel.Thm
 
-pub fn bitmatch_asm_cases_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+pub fn bitmatch_asm_cases_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
 
-pub fn bitmatch_cases_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+pub fn bitmatch_cases_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
 
 pub fn bitmatch_conv(@kernel.Term) -> @kernel.Thm raise
 
@@ -47,19 +47,19 @@ pub fn bitpat_irrefutable(@kernel.Term) -> Bool raise
 
 pub fn bitpat_irrefutable_thm(@kernel.Term) -> @kernel.Thm raise
 
-pub fn bitpat_matches(@kernel.Term, @num.Num) -> Int? raise
+pub fn bitpat_matches(@kernel.Term, @num.Num) -> Int64? raise
 
 pub fn bm_add_pos(DiscrimTree[@kernel.Thm], @kernel.Term) -> DiscrimTree[(@kernel.Thm, @list.List[@kernel.Thm])] raise
 
-pub fn bm_analyze_clauses(Int, @kernel.Term) -> @list.List[FixedArray[Bool?]] raise
+pub fn bm_analyze_clauses(Int64, @kernel.Term) -> @list.List[FixedArray[Bool?]] raise
 
-pub fn bm_analyze_pat(Int) -> ((@kernel.Term) -> FixedArray[Bool?] raise) raise
+pub fn bm_analyze_pat(Int64) -> ((@kernel.Term) -> FixedArray[Bool?] raise) raise
 
 pub fn bm_build_pos_tree(@kernel.Term) -> (@list.List[FixedArray[Bool?]], DiscrimTree[(@kernel.Thm, @list.List[@kernel.Thm])]) raise
 
 pub fn bm_build_tree(@kernel.Term) -> (@list.List[FixedArray[Bool?]], DiscrimTree[@kernel.Thm]) raise
 
-pub fn bm_build_tree_p(Int) -> ((@list.List[FixedArray[Bool?]]) -> ((@kernel.Term) -> DiscrimTree[@kernel.Thm] raise) raise) raise
+pub fn bm_build_tree_p(Int64) -> ((@list.List[FixedArray[Bool?]]) -> ((@kernel.Term) -> DiscrimTree[@kernel.Thm] raise) raise) raise
 
 pub fn bm_cases(@kernel.Term) -> @list.List[@kernel.Thm] raise
 
@@ -109,7 +109,7 @@ pub fn nilpat_pat_set() -> @kernel.Thm
 
 pub fn nilpat_pat_size() -> @kernel.Thm
 
-pub fn only_bitmatch_cases_then((@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+pub fn only_bitmatch_cases_then((@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
 
 pub fn pat_extract() -> @kernel.Thm
 
@@ -151,7 +151,7 @@ pub fn triv_choose(@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
 
 pub fn val_word1() -> @kernel.Thm
 
-pub fn with_goal((@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+pub fn with_goal((@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
 
 pub fn word1() -> @kernel.Thm
 
@@ -162,7 +162,7 @@ pub fn word1_odd() -> @kernel.Thm
 // Types and methods
 pub(all) enum DiscrimTree[TA] {
   Leaf_dt(TA)
-  Split_dt(Int, @kernel.Term, DiscrimTree[TA], DiscrimTree[TA])
+  Split_dt(Int64, @kernel.Term, DiscrimTree[TA], DiscrimTree[TA])
 } derive(Eq, @debug.Debug)
 pub impl[TA : @lib.OCompare] @lib.OCompare for DiscrimTree[TA]
 pub impl[TA : @lib.OHash] @lib.OHash for DiscrimTree[TA]

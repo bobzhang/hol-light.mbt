@@ -23,7 +23,7 @@ using @equal {type Conv}
 /// Instantiations: higher-order bindings (number of arguments, pattern
 /// head), term bindings and type bindings.
 pub type Instantiation = (
-  List[(Int, Term)],
+  List[(Int64, Term)],
   List[(Term, Term)],
   List[(HolType, HolType)],
 )
@@ -167,7 +167,7 @@ fn[T] fail_() -> T raise {
 }
 
 ///|
-fn ho_betas(bcs : List[(Int, Term)], pat : Term, tm : Term) -> Term raise {
+fn ho_betas(bcs : List[(Int64, Term)], pat : Term, tm : Term) -> Term raise {
   if @kernel.is_var(pat) || @kernel.is_const(pat) {
     fail_()
   }
@@ -179,7 +179,7 @@ fn ho_betas(bcs : List[(Int, Term)], pat : Term, tm : Term) -> Term raise {
     Failure(_) => {
       let (hop, args) = @basics.strip_comb(pat)
       try {
-        let n = @lib.rev_assoc(hop, bcs)
+        let n = @lib.rev_assoc(hop, bcs).to_int()
         if args.length() == n {
           betas(n, tm)
         } else {
@@ -244,7 +244,7 @@ fn betas_conv_n(n : Int, tm : Term) -> Thm raise {
 }
 
 ///|
-fn ho_betas_thm(bcs : List[(Int, Term)], pat : Term, tm : Term) -> Thm raise {
+fn ho_betas_thm(bcs : List[(Int64, Term)], pat : Term, tm : Term) -> Thm raise {
   if @kernel.is_var(pat) || @kernel.is_const(pat) {
     fail_()
   }
@@ -256,7 +256,7 @@ fn ho_betas_thm(bcs : List[(Int, Term)], pat : Term, tm : Term) -> Thm raise {
     Failure(_) => {
       let (hop, args) = @basics.strip_comb(pat)
       try {
-        let n = @lib.rev_assoc(hop, bcs)
+        let n = @lib.rev_assoc(hop, bcs).to_int()
         if args.length() == n {
           betas_conv_n(n, tm)
         } else {
@@ -515,9 +515,9 @@ fn separate_insts(insts : List[(Term, Term)]) -> Instantiation raise {
     @list.empty()
   } else {
     @lib.itlist(
-      (p : (Term, Term), sof : List[(Int, Term)]) => {
+      (p : (Term, Term), sof : List[(Int64, Term)]) => {
         let (hop, args) = @basics.strip_comb(p.1)
-        safe_insert((args.length(), hop), sof) catch {
+        safe_insert((args.length().to_int64(), hop), sof) catch {
           Failure(_) => {
             @lib.warn(true, "Inconsistent patterning in higher order match")
             sof

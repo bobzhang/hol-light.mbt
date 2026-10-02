@@ -1705,8 +1705,8 @@ fn print_goalstate(
   fmt.print_string(s)
   fmt.print_newline()
   if !gl.is_empty() {
-    for i in @lib.range(0, k - 1).rev() {
-      print_goal_gen(color, fmt, @lib.el(i, gl))
+    for i in @lib.range(0, (k - 1).to_int64()).rev() {
+      print_goal_gen(color, fmt, @lib.el(i.to_int(), gl))
     }
   }
 }

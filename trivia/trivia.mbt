@@ -4,7 +4,7 @@
 ///|
 /// trivia.ml:16
 fn step_1() -> Unit raise {
-  @printer.parse_as_infix("o", (26, "right"))
+  @printer.parse_as_infix("o", (26L, "right"))
 }
 
 ///|
@@ -349,7 +349,7 @@ fn step_16() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -357,7 +357,7 @@ fn step_16() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -371,7 +371,7 @@ fn step_16() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -379,7 +379,7 @@ fn step_16() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -474,7 +474,7 @@ pub fn eta_one() -> @kernel.Thm {
 /// trivia.ml:104
 fn step_19() -> Unit raise {
   @class.inductive_type_store().val = @class.inductive_type_store().val.prepend(
-    ("1", (1, one_induct(), one_recursion())),
+    ("1", (1L, one_induct(), one_recursion())),
   )
   ()
 }

@@ -26,7 +26,7 @@ fn Rec::tr(self : Rec, name : String, f : () -> String raise) -> Unit {
 }
 
 ///|
-fn il(l : @list.List[Int]) -> String {
+fn[T : Show] il(l : @list.List[T]) -> String {
   "[" + l.map(x => x.to_string()).to_array().join(";") + "]"
 }
 
@@ -36,7 +36,7 @@ fn sl(l : @list.List[String]) -> String {
 }
 
 ///|
-fn si(x : Int) -> String {
+fn[T : Show] si(x : T) -> String {
   x.to_string()
 }
 
@@ -393,7 +393,11 @@ test "lib matches lib.ml" {
   )
   r.tr("func_int_foldl", () => {
     il(
-      @lib.foldl((a : @list.List[Int], x, _) => a.prepend(x), @list.empty(), f3),
+      @lib.foldl(
+        (a : @list.List[Int64], x, _) => a.prepend(x),
+        @list.empty(),
+        f3,
+      ),
     )
   })
   r.tr("func_choose_int", () => si(@lib.choose(f3).0))

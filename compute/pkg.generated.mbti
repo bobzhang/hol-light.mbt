@@ -10,23 +10,23 @@ import {
 }
 
 // Values
-pub fn add_conv((@kernel.Term, Int, (@kernel.Term) -> @kernel.Thm raise), Compset) -> Unit raise
+pub fn add_conv((@kernel.Term, Int64, (@kernel.Term) -> @kernel.Thm raise), Compset) -> Unit raise
 
-pub fn add_convs(@list.List[(@kernel.Term, Int, (@kernel.Term) -> @kernel.Thm raise)]) -> Unit raise
+pub fn add_convs(@list.List[(@kernel.Term, Int64, (@kernel.Term) -> @kernel.Thm raise)]) -> Unit raise
 
-pub fn add_extern((@kernel.Term, Int, (@kernel.Term) -> (@kernel.Thm, Fterm[Db]) raise), Compset) -> Unit raise
+pub fn add_extern((@kernel.Term, Int64, (@kernel.Term) -> (@kernel.Thm, Fterm[Db]) raise), Compset) -> Unit raise
 
 pub fn add_funs(@list.List[@kernel.Thm]) -> Unit raise
 
-pub fn add_in_db((Int, @kernel.Term, Action, Db)) -> Db raise
+pub fn add_in_db((Int64, @kernel.Term, Action, Db)) -> Db raise
 
-pub fn add_in_db_upd(Compset, (String, Int, @kernel.Term), Action) -> Unit raise
+pub fn add_in_db_upd(Compset, (String, Int64, @kernel.Term), Action) -> Unit raise
 
 pub fn add_thms(@list.List[@kernel.Thm], Compset) -> Unit raise
 
 pub fn[TA] appl((Dterm[TA], Dterm[TA])) -> Dterm[TA] raise
 
-pub fn assoc_clause(Compset) -> ((String) -> @ref.Ref[(Db, Int?)] raise) raise
+pub fn assoc_clause(Compset) -> ((String) -> @ref.Ref[(Db, Int64?)] raise) raise
 
 pub fn auto_import_definitions() -> @ref.Ref[Bool]
 
@@ -66,7 +66,7 @@ pub fn eval_conv(@kernel.Term) -> @kernel.Thm raise
 
 pub fn eval_rule(@kernel.Thm) -> @kernel.Thm raise
 
-pub fn eval_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+pub fn eval_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
 
 pub fn[TA] evaluate(TA) -> TA raise
 
@@ -88,7 +88,7 @@ pub fn[TA] inst_type_dterm((@list.List[(@kernel.HolType, @kernel.HolType)], Dter
 
 pub fn[TA, TB] is_skip((TA, Fterm[TB])) -> Bool raise
 
-pub fn key_of(Rewrite) -> (String, Int, @kernel.Term) raise
+pub fn key_of(Rewrite) -> (String, Int64, @kernel.Term) raise
 
 pub fn lazyfy_thm(@kernel.Thm) -> @kernel.Thm raise
 
@@ -100,7 +100,7 @@ pub fn[TA] match_list((FixedArray[(@kernel.Term, Fterm[TA])?], @list.List[(@kern
 
 pub fn[TA] match_solve((FixedArray[(@kernel.Term, Fterm[TA])?], @list.List[(@kernel.HolType, @kernel.HolType)]), Pattern, (@kernel.Term, Fterm[TA])) -> (FixedArray[(@kernel.Term, Fterm[TA])?], @list.List[(@kernel.HolType, @kernel.HolType)]) raise
 
-pub fn[TA, TB] match_var((FixedArray[(@kernel.Term, TA)?], TB), Int, (@kernel.Term, TA)) -> (FixedArray[(@kernel.Term, TA)?], TB) raise
+pub fn[TA, TB] match_var((FixedArray[(@kernel.Term, TA)?], TB), Int64, (@kernel.Term, TA)) -> (FixedArray[(@kernel.Term, TA)?], TB) raise
 
 pub fn mk_abs(@kernel.Thm) -> (@kernel.Term, @kernel.Thm, (@kernel.Thm) -> @kernel.Thm raise) raise
 
@@ -118,7 +118,7 @@ pub fn new_rws(Unit) -> Compset raise
 
 pub fn or(@list.List[@kernel.Term]) -> ((@kernel.Term) -> Bool raise) raise
 
-pub fn[TA] partition_skip(Int?, @list.List[TA]) -> (@list.List[TA], @list.List[TA]) raise
+pub fn[TA] partition_skip(Int64?, @list.List[TA]) -> (@list.List[TA], @list.List[TA]) raise
 
 pub fn[TA, TB, TC, TD] push_in_stk((TD) -> TA raise, TD, (@kernel.Thm, Stack[((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, (@kernel.Thm, TA)), TB, TC])) -> (@kernel.Thm, Stack[((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise, (@kernel.Thm, TA)), TB, TC]) raise
 
@@ -136,7 +136,7 @@ pub fn restr_eval_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.T
 
 pub fn restr_eval_rule(@list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
 
-pub fn restr_eval_tac(@list.List[@kernel.Term]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+pub fn restr_eval_tac(@list.List[@kernel.Term]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
 
 pub fn rhs_concl(@kernel.Thm) -> @kernel.Term raise
 
@@ -152,9 +152,9 @@ pub fn scrub_const(Compset) -> ((@kernel.Term) -> Unit raise) raise
 
 pub fn scrub_thms(@list.List[@kernel.Thm], Compset) -> Unit raise
 
-pub fn set_skip(Compset, @kernel.Term, Int?) -> Unit raise
+pub fn set_skip(Compset, @kernel.Term, Int64?) -> Unit raise
 
-pub fn set_skip_name(Compset) -> ((String) -> ((Int?) -> Unit raise) raise) raise
+pub fn set_skip_name(Compset) -> ((String) -> ((Int64?) -> Unit raise) raise) raise
 
 pub fn[TA, TB, TC, TD, TE, TF] stack_out((TA, Stack[((TA) -> ((TB) -> TA raise) raise, (TB, TC)), ((TD) -> ((TA) -> TA raise) raise, TE, (TD, TF)), (TA) -> TA raise])) -> TA raise
 
@@ -205,14 +205,14 @@ pub impl[TA : @lib.OCompare] @lib.OCompare for ClosRec[TA]
 pub impl[TA : @lib.OHash] @lib.OHash for ClosRec[TA]
 
 pub(all) enum Compset {
-  Rws(@lib.OHashtbl[String, @ref.Ref[(Db, Int?)]])
+  Rws(@lib.OHashtbl[String, @ref.Ref[(Db, Int64?)]])
 }
 
 pub(all) struct CstRec[TA] {
   head : @kernel.Term
   args : @list.List[(@kernel.Term, Fterm[TA])]
   rws : TA
-  skip : Int?
+  skip : Int64?
 }
 pub impl[TA : @lib.OCompare] @lib.OCompare for CstRec[TA]
 pub impl[TA : @lib.OHash] @lib.OHash for CstRec[TA]
@@ -224,9 +224,9 @@ pub(all) enum Db {
 }
 
 pub(all) enum Dterm[TA] {
-  Bv(Int)
+  Bv(Int64)
   Fv
-  Cst(@kernel.Term, @ref.Ref[(TA, Int?)])
+  Cst(@kernel.Term, @ref.Ref[(TA, Int64?)])
   App(Dterm[TA], @list.List[Dterm[TA]])
   Abs(Dterm[TA])
 }
@@ -242,7 +242,7 @@ pub impl[TA : @lib.OCompare] @lib.OCompare for Fterm[TA]
 pub impl[TA : @lib.OHash] @lib.OHash for Fterm[TA]
 
 pub(all) enum Pattern {
-  Pvar(Int)
+  Pvar(Int64)
   Papp(@kernel.Term, @list.List[Pattern])
 } derive(Eq, @debug.Debug)
 pub impl @lib.OCompare for Pattern
@@ -255,7 +255,7 @@ pub(all) enum Rewrite {
 pub(all) struct RewriteRec {
   cst : @kernel.Term
   lhs : @list.List[Pattern]
-  npv : Int
+  npv : Int64
   rhs : Dterm[Db]
   thm : @kernel.Thm
 }

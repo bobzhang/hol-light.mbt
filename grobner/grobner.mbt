@@ -4,8 +4,8 @@
 ///|
 /// `history`
 pub(all) enum History {
-  Start(Int)
-  Mmul((@num.Num, @list.List[Int]), History)
+  Start(Int64)
+  Mmul((@num.Num, @list.List[Int64]), History)
   Add(History, History)
 } derive(Eq, Debug)
 
@@ -63,42 +63,42 @@ pub impl @lib.OHash for History with fn ohash_visit(self, h) {
 ///|
 /// RING_AND_IDEAL_CONV
 fn step_1() -> Unit raise {
-  let morder_lt : (@list.List[Int]) -> ((@list.List[Int]) -> Bool raise) raise = fn(
-    x3 : @list.List[Int],
-  ) -> ((@list.List[Int]) -> Bool raise) raise {
+  let morder_lt : (@list.List[Int64]) -> ((@list.List[Int64]) -> Bool raise) raise = fn(
+    x3 : @list.List[Int64],
+  ) -> ((@list.List[Int64]) -> Bool raise) raise {
     let m1 = x3
-    fn(x4 : @list.List[Int]) -> Bool raise {
+    fn(x4 : @list.List[Int64]) -> Bool raise {
       let m2 = x4
       let n1 = @lib.itlist(
-        fn(x7 : Int, x8 : Int) -> Int raise {
-          let s9 = (fn(x5 : Int) -> ((Int) -> Int raise) raise {
-            fn(x6 : Int) -> Int raise { x5 + x6 }
+        fn(x7 : Int64, x8 : Int64) -> Int64 raise {
+          let s9 = (fn(x5 : Int64) -> ((Int64) -> Int64 raise) raise {
+            fn(x6 : Int64) -> Int64 raise { @lib.add63(x5, x6) }
           })(x7)
           s9(x8)
         },
         m1,
-        0,
+        0L,
       )
       let n2 = @lib.itlist(
-        fn(x12 : Int, x13 : Int) -> Int raise {
-          let s14 = (fn(x10 : Int) -> ((Int) -> Int raise) raise {
-            fn(x11 : Int) -> Int raise { x10 + x11 }
+        fn(x12 : Int64, x13 : Int64) -> Int64 raise {
+          let s14 = (fn(x10 : Int64) -> ((Int64) -> Int64 raise) raise {
+            fn(x11 : Int64) -> Int64 raise { @lib.add63(x10, x11) }
           })(x12)
           s14(x13)
         },
         m2,
-        0,
+        0L,
       )
       n1 < n2 || (n1 == n2 && lexorder_l(m1, m2))
     }
   }
-  let grob_neg : (@list.List[(@num.Num, @list.List[Int])]) -> @list.List[
-    (@num.Num, @list.List[Int]),
-  ] raise = (x16 : @list.List[(@num.Num, @list.List[Int])]) => {
+  let grob_neg : (@list.List[(@num.Num, @list.List[Int64])]) -> @list.List[
+    (@num.Num, @list.List[Int64]),
+  ] raise = (x16 : @list.List[(@num.Num, @list.List[Int64])]) => {
     @lib.map(
       fn(
-        x15 : (@num.Num, @list.List[Int]),
-      ) -> (@num.Num, @list.List[Int]) raise {
+        x15 : (@num.Num, @list.List[Int64]),
+      ) -> (@num.Num, @list.List[Int64]) raise {
         let (c, m) = x15
         (@num.minus_num(c), m)
       },
@@ -106,9 +106,9 @@ fn step_1() -> Unit raise {
     )
   }
   fn grob_add(
-    x17 : @list.List[(@num.Num, @list.List[Int])],
-    x18 : @list.List[(@num.Num, @list.List[Int])],
-  ) -> @list.List[(@num.Num, @list.List[Int])] raise {
+    x17 : @list.List[(@num.Num, @list.List[Int64])],
+    x18 : @list.List[(@num.Num, @list.List[Int64])],
+  ) -> @list.List[(@num.Num, @list.List[Int64])] raise {
     let l1_1 = x17
     let l2_1 = x18
     match (l1_1, l2_1) {
@@ -130,33 +130,35 @@ fn step_1() -> Unit raise {
         }
     }
   }
-  let grob_sub : (@list.List[(@num.Num, @list.List[Int])]) -> ((
-    @list.List[(@num.Num, @list.List[Int])],
-  ) -> @list.List[(@num.Num, @list.List[Int])] raise) raise = fn(
-    x19 : @list.List[(@num.Num, @list.List[Int])],
-  ) -> ((@list.List[(@num.Num, @list.List[Int])]) -> @list.List[
-    (@num.Num, @list.List[Int]),
+  let grob_sub : (@list.List[(@num.Num, @list.List[Int64])]) -> ((
+    @list.List[(@num.Num, @list.List[Int64])],
+  ) -> @list.List[(@num.Num, @list.List[Int64])] raise) raise = fn(
+    x19 : @list.List[(@num.Num, @list.List[Int64])],
+  ) -> ((@list.List[(@num.Num, @list.List[Int64])]) -> @list.List[
+    (@num.Num, @list.List[Int64]),
   ] raise) raise {
     let l1_3 = x19
     fn(
-      x20 : @list.List[(@num.Num, @list.List[Int])],
-    ) -> @list.List[(@num.Num, @list.List[Int])] raise {
+      x20 : @list.List[(@num.Num, @list.List[Int64])],
+    ) -> @list.List[(@num.Num, @list.List[Int64])] raise {
       let l2_3 = x20
       grob_add(l1_3, grob_neg(l2_3))
     }
   }
-  let grob_mmul : ((@num.Num, @list.List[Int])) -> ((
-    (@num.Num, @list.List[Int]),
-  ) -> (@num.Num, @list.List[Int]) raise) raise = fn(
-    x21 : (@num.Num, @list.List[Int]),
-  ) -> (((@num.Num, @list.List[Int])) -> (@num.Num, @list.List[Int]) raise) raise {
+  let grob_mmul : ((@num.Num, @list.List[Int64])) -> ((
+    (@num.Num, @list.List[Int64]),
+  ) -> (@num.Num, @list.List[Int64]) raise) raise = fn(
+    x21 : (@num.Num, @list.List[Int64]),
+  ) -> (((@num.Num, @list.List[Int64])) -> (@num.Num, @list.List[Int64]) raise) raise {
     let (c1_1, m1_2) = x21
-    fn(x22 : (@num.Num, @list.List[Int])) -> (@num.Num, @list.List[Int]) raise {
+    fn(
+      x22 : (@num.Num, @list.List[Int64]),
+    ) -> (@num.Num, @list.List[Int64]) raise {
       let (c2_1, m2_2) = x22
       let t28 = @lib.map2(
-        fn(x25 : Int, x26 : Int) -> Int raise {
-          let s27 = (fn(x23 : Int) -> ((Int) -> Int raise) raise {
-            fn(x24 : Int) -> Int raise { x23 + x24 }
+        fn(x25 : Int64, x26 : Int64) -> Int64 raise {
+          let s27 = (fn(x23 : Int64) -> ((Int64) -> Int64 raise) raise {
+            fn(x24 : Int64) -> Int64 raise { @lib.add63(x23, x24) }
           })(x25)
           s27(x26)
         },
@@ -167,17 +169,17 @@ fn step_1() -> Unit raise {
     }
   }
   fn grob_cmul(
-    x29 : (@num.Num, @list.List[Int]),
-    x30 : @list.List[(@num.Num, @list.List[Int])],
-  ) -> @list.List[(@num.Num, @list.List[Int])] raise {
+    x29 : (@num.Num, @list.List[Int64]),
+    x30 : @list.List[(@num.Num, @list.List[Int64])],
+  ) -> @list.List[(@num.Num, @list.List[Int64])] raise {
     let cm = x29
     let pol = x30
     @lib.map(grob_mmul(cm), pol)
   }
   fn grob_mul(
-    x31 : @list.List[(@num.Num, @list.List[Int])],
-    x32 : @list.List[(@num.Num, @list.List[Int])],
-  ) -> @list.List[(@num.Num, @list.List[Int])] raise {
+    x31 : @list.List[(@num.Num, @list.List[Int64])],
+    x32 : @list.List[(@num.Num, @list.List[Int64])],
+  ) -> @list.List[(@num.Num, @list.List[Int64])] raise {
     let l1_4 = x31
     let l2_4 = x32
     match l1_4 {
@@ -188,17 +190,17 @@ fn step_1() -> Unit raise {
       }
     }
   }
-  let grob_inv : (@list.List[(@num.Num, @list.List[Int])]) -> @list.List[
-    (@num.Num, @list.List[Int]),
+  let grob_inv : (@list.List[(@num.Num, @list.List[Int64])]) -> @list.List[
+    (@num.Num, @list.List[Int64]),
   ] raise = fn(
-    x34 : @list.List[(@num.Num, @list.List[Int])],
-  ) -> @list.List[(@num.Num, @list.List[Int])] raise {
+    x34 : @list.List[(@num.Num, @list.List[Int64])],
+  ) -> @list.List[(@num.Num, @list.List[Int64])] raise {
     let l = x34
     match l {
       More((c_2, vs), tail=Empty) if @lib.forall(
-          fn(x35 : Int) -> Bool raise {
+          fn(x35 : Int64) -> Bool raise {
             let x = x35
-            x == 0
+            x == 0L
           },
           vs,
         ) =>
@@ -210,23 +212,23 @@ fn step_1() -> Unit raise {
       _ => raise Failure("grob_inv: non-constant divisor polynomial")
     }
   }
-  let grob_div : (@list.List[(@num.Num, @list.List[Int])]) -> ((
-    @list.List[(@num.Num, @list.List[Int])],
-  ) -> @list.List[(@num.Num, @list.List[Int])] raise) raise = fn(
-    x36 : @list.List[(@num.Num, @list.List[Int])],
-  ) -> ((@list.List[(@num.Num, @list.List[Int])]) -> @list.List[
-    (@num.Num, @list.List[Int]),
+  let grob_div : (@list.List[(@num.Num, @list.List[Int64])]) -> ((
+    @list.List[(@num.Num, @list.List[Int64])],
+  ) -> @list.List[(@num.Num, @list.List[Int64])] raise) raise = fn(
+    x36 : @list.List[(@num.Num, @list.List[Int64])],
+  ) -> ((@list.List[(@num.Num, @list.List[Int64])]) -> @list.List[
+    (@num.Num, @list.List[Int64]),
   ] raise) raise {
     let l1_5 = x36
     fn(
-      x37 : @list.List[(@num.Num, @list.List[Int])],
-    ) -> @list.List[(@num.Num, @list.List[Int])] raise {
+      x37 : @list.List[(@num.Num, @list.List[Int64])],
+    ) -> @list.List[(@num.Num, @list.List[Int64])] raise {
       let l2_5 = x37
       match l2_5 {
         More((c_3, l_1), tail=Empty) if @lib.forall(
-            fn(x38 : Int) -> Bool raise {
+            fn(x38 : Int64) -> Bool raise {
               let x_1 = x38
-              x_1 == 0
+              x_1 == 0L
             },
             l_1,
           ) =>
@@ -239,23 +241,25 @@ fn step_1() -> Unit raise {
       }
     }
   }
-  let mdiv : ((@num.Num, @list.List[Int])) -> (((@num.Num, @list.List[Int])) -> (
+  let mdiv : ((@num.Num, @list.List[Int64])) -> (((@num.Num, @list.List[Int64])) -> (
     @num.Num,
-    @list.List[Int],
+    @list.List[Int64],
   ) raise) raise = fn(
-    x43 : (@num.Num, @list.List[Int]),
-  ) -> (((@num.Num, @list.List[Int])) -> (@num.Num, @list.List[Int]) raise) raise {
+    x43 : (@num.Num, @list.List[Int64]),
+  ) -> (((@num.Num, @list.List[Int64])) -> (@num.Num, @list.List[Int64]) raise) raise {
     let (c1_2, m1_3) = x43
-    fn(x44 : (@num.Num, @list.List[Int])) -> (@num.Num, @list.List[Int]) raise {
+    fn(
+      x44 : (@num.Num, @list.List[Int64]),
+    ) -> (@num.Num, @list.List[Int64]) raise {
       let (c2_2, m2_3) = x44
       let t47 = @lib.map2(
-        fn(x45 : Int, x46 : Int) -> Int raise {
+        fn(x45 : Int64, x46 : Int64) -> Int64 raise {
           let n1_1 = x45
           let n2_1 = x46
           if n1_1 < n2_1 {
             raise Failure("mdiv")
           } else {
-            n1_1 - n2_1
+            @lib.sub63(n1_1, n2_1)
           }
         },
         m1_3,
@@ -264,18 +268,18 @@ fn step_1() -> Unit raise {
       (@num.div_num(c1_2, c2_2), t47)
     }
   }
-  let reduce1 : ((@num.Num, @list.List[Int])) -> ((
-    (@list.List[(@num.Num, @list.List[Int])], History),
-  ) -> (@list.List[(@num.Num, @list.List[Int])], History) raise) raise = fn(
-    x55 : (@num.Num, @list.List[Int]),
-  ) -> (((@list.List[(@num.Num, @list.List[Int])], History)) -> (
-    @list.List[(@num.Num, @list.List[Int])],
+  let reduce1 : ((@num.Num, @list.List[Int64])) -> ((
+    (@list.List[(@num.Num, @list.List[Int64])], History),
+  ) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise) raise = fn(
+    x55 : (@num.Num, @list.List[Int64]),
+  ) -> (((@list.List[(@num.Num, @list.List[Int64])], History)) -> (
+    @list.List[(@num.Num, @list.List[Int64])],
     History,
   ) raise) raise {
     let cm_1 = x55
     fn(
-      x56 : (@list.List[(@num.Num, @list.List[Int])], History),
-    ) -> (@list.List[(@num.Num, @list.List[Int])], History) raise {
+      x56 : (@list.List[(@num.Num, @list.List[Int64])], History),
+    ) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise {
       let (pol_1, hpol) = x56
       match pol_1 {
         Empty => raise Failure("reduce1")
@@ -291,23 +295,23 @@ fn step_1() -> Unit raise {
       }
     }
   }
-  let reduceb : ((@num.Num, @list.List[Int])) -> ((
-    @list.List[(@list.List[(@num.Num, @list.List[Int])], History)],
-  ) -> (@list.List[(@num.Num, @list.List[Int])], History) raise) raise = fn(
-    x58 : (@num.Num, @list.List[Int]),
-  ) -> ((@list.List[(@list.List[(@num.Num, @list.List[Int])], History)]) -> (
-    @list.List[(@num.Num, @list.List[Int])],
+  let reduceb : ((@num.Num, @list.List[Int64])) -> ((
+    @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)],
+  ) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise) raise = fn(
+    x58 : (@num.Num, @list.List[Int64]),
+  ) -> ((@list.List[(@list.List[(@num.Num, @list.List[Int64])], History)]) -> (
+    @list.List[(@num.Num, @list.List[Int64])],
     History,
   ) raise) raise {
     let cm_2 = x58
     fn(
-      x59 : @list.List[(@list.List[(@num.Num, @list.List[Int])], History)],
-    ) -> (@list.List[(@num.Num, @list.List[Int])], History) raise {
+      x59 : @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)],
+    ) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise {
       let basis = x59
       @lib.tryfind(
         fn(
-          x60 : (@list.List[(@num.Num, @list.List[Int])], History),
-        ) -> (@list.List[(@num.Num, @list.List[Int])], History) raise {
+          x60 : (@list.List[(@num.Num, @list.List[Int64])], History),
+        ) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise {
           let p = x60
           reduce1(cm_2)(p)
         },
@@ -316,9 +320,9 @@ fn step_1() -> Unit raise {
     }
   }
   fn reduce(
-    x61 : @list.List[(@list.List[(@num.Num, @list.List[Int])], History)],
-    x62 : (@list.List[(@num.Num, @list.List[Int])], History),
-  ) -> (@list.List[(@num.Num, @list.List[Int])], History) raise {
+    x61 : @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)],
+    x62 : (@list.List[(@num.Num, @list.List[Int64])], History),
+  ) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise {
     let basis_1 = x61
     let (pol_2, hist) = x62
     match pol_2 {
@@ -337,27 +341,27 @@ fn step_1() -> Unit raise {
         }
     }
   }
-  let spoly : ((@num.Num, @list.List[Int])) -> ((
-    (@list.List[(@num.Num, @list.List[Int])], History),
-  ) -> (((@list.List[(@num.Num, @list.List[Int])], History)) -> (
-    @list.List[(@num.Num, @list.List[Int])],
+  let spoly : ((@num.Num, @list.List[Int64])) -> ((
+    (@list.List[(@num.Num, @list.List[Int64])], History),
+  ) -> (((@list.List[(@num.Num, @list.List[Int64])], History)) -> (
+    @list.List[(@num.Num, @list.List[Int64])],
     History,
   ) raise) raise) raise = fn(
-    x68 : (@num.Num, @list.List[Int]),
-  ) -> (((@list.List[(@num.Num, @list.List[Int])], History)) -> ((
-    (@list.List[(@num.Num, @list.List[Int])], History),
-  ) -> (@list.List[(@num.Num, @list.List[Int])], History) raise) raise) raise {
+    x68 : (@num.Num, @list.List[Int64]),
+  ) -> (((@list.List[(@num.Num, @list.List[Int64])], History)) -> ((
+    (@list.List[(@num.Num, @list.List[Int64])], History),
+  ) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise) raise) raise {
     let cm_4 = x68
     fn(
-      x69 : (@list.List[(@num.Num, @list.List[Int])], History),
-    ) -> (((@list.List[(@num.Num, @list.List[Int])], History)) -> (
-      @list.List[(@num.Num, @list.List[Int])],
+      x69 : (@list.List[(@num.Num, @list.List[Int64])], History),
+    ) -> (((@list.List[(@num.Num, @list.List[Int64])], History)) -> (
+      @list.List[(@num.Num, @list.List[Int64])],
       History,
     ) raise) raise {
       let ph1 = x69
       fn(
-        x70 : (@list.List[(@num.Num, @list.List[Int])], History),
-      ) -> (@list.List[(@num.Num, @list.List[Int])], History) raise {
+        x70 : (@list.List[(@num.Num, @list.List[Int64])], History),
+      ) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise {
         let ph2 = x70
         match (ph1, ph2) {
           ((Empty, h), p_1) => (@list.empty(), h)
@@ -376,23 +380,23 @@ fn step_1() -> Unit raise {
     }
   }
   fn grobner_basis(
-    x104 : @list.List[(@list.List[(@num.Num, @list.List[Int])], History)],
+    x104 : @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)],
     x105 : @list.List[
       (
-        (@num.Num, @list.List[Int]),
+        (@num.Num, @list.List[Int64]),
         (
-          (@list.List[(@num.Num, @list.List[Int])], History),
-          (@list.List[(@num.Num, @list.List[Int])], History),
+          (@list.List[(@num.Num, @list.List[Int64])], History),
+          (@list.List[(@num.Num, @list.List[Int64])], History),
         ),
       ),
     ],
-  ) -> @list.List[(@list.List[(@num.Num, @list.List[Int])], History)] raise {
+  ) -> @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)] raise {
     let basis_3 = x104
     let pairs = x105
     let t106 = " basis elements and " +
-      (@lib.string_of_int(@lib.length(pairs)) + " critical pairs")
+      (Int64::to_string(Int::to_int64(@lib.length(pairs))) + " critical pairs")
     @pp.std_formatter.print_string(
-      @lib.string_of_int(@lib.length(basis_3)) + t106,
+      Int64::to_string(Int::to_int64(@lib.length(basis_3))) + t106,
     )
     @pp.std_formatter.print_newline()
     match pairs {
@@ -412,12 +416,12 @@ fn step_1() -> Unit raise {
         } else {
           let rawcps = @lib.map(
             fn(
-              x108 : (@list.List[(@num.Num, @list.List[Int])], History),
+              x108 : (@list.List[(@num.Num, @list.List[Int64])], History),
             ) -> (
-              (@num.Num, @list.List[Int]),
+              (@num.Num, @list.List[Int64]),
               (
-                (@list.List[(@num.Num, @list.List[Int])], History),
-                (@list.List[(@num.Num, @list.List[Int])], History),
+                (@list.List[(@num.Num, @list.List[Int64])], History),
+                (@list.List[(@num.Num, @list.List[Int64])], History),
               ),
             ) raise {
               let p_7 = x108
@@ -430,10 +434,10 @@ fn step_1() -> Unit raise {
           let newcps = @lib.filter(
             fn(
               x111 : (
-                (@num.Num, @list.List[Int]),
+                (@num.Num, @list.List[Int64]),
                 (
-                  (@list.List[(@num.Num, @list.List[Int])], History),
-                  (@list.List[(@num.Num, @list.List[Int])], History),
+                  (@list.List[(@num.Num, @list.List[Int64])], History),
+                  (@list.List[(@num.Num, @list.List[Int64])], History),
                 ),
               ),
             ) -> Bool raise {
@@ -462,17 +466,17 @@ fn step_1() -> Unit raise {
     }
   }
   fn grobner_interreduce(
-    x112 : @list.List[(@list.List[(@num.Num, @list.List[Int])], History)],
-    x113 : @list.List[(@list.List[(@num.Num, @list.List[Int])], History)],
-  ) -> @list.List[(@list.List[(@num.Num, @list.List[Int])], History)] raise {
+    x112 : @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)],
+    x113 : @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)],
+  ) -> @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)] raise {
     let rpols = x112
     let ipols = x113
     match ipols {
       Empty =>
         @lib.map(
           fn(
-            x114 : (@list.List[(@num.Num, @list.List[Int])], History),
-          ) -> (@list.List[(@num.Num, @list.List[Int])], History) raise {
+            x114 : (@list.List[(@num.Num, @list.List[Int64])], History),
+          ) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise {
             monic_l(x114.0, x114.1)
           },
           @lib.rev(rpols),
@@ -487,27 +491,27 @@ fn step_1() -> Unit raise {
       }
     }
   }
-  let grobner : (@list.List[@list.List[(@num.Num, @list.List[Int])]]) -> @list.List[
-    (@list.List[(@num.Num, @list.List[Int])], History),
+  let grobner : (@list.List[@list.List[(@num.Num, @list.List[Int64])]]) -> @list.List[
+    (@list.List[(@num.Num, @list.List[Int64])], History),
   ] raise = fn(
-    x115 : @list.List[@list.List[(@num.Num, @list.List[Int])]],
-  ) -> @list.List[(@list.List[(@num.Num, @list.List[Int])], History)] raise {
+    x115 : @list.List[@list.List[(@num.Num, @list.List[Int64])]],
+  ) -> @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)] raise {
     let pols = x115
     let npols = @lib.map2(
       fn(
-        x116 : @list.List[(@num.Num, @list.List[Int])],
-        x117 : Int,
-      ) -> (@list.List[(@num.Num, @list.List[Int])], History) raise {
+        x116 : @list.List[(@num.Num, @list.List[Int64])],
+        x117 : Int64,
+      ) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise {
         let p_10 = x116
         let n_1 = x117
         (p_10, History::Start(n_1))
       },
       pols,
-      @lib.range(0, @lib.length(pols) - 1),
+      @lib.range(0L, @lib.sub63(Int::to_int64(@lib.length(pols)), 1L)),
     )
     let phists = @lib.filter(
       fn(
-        x118 : (@list.List[(@num.Num, @list.List[Int])], History),
+        x118 : (@list.List[(@num.Num, @list.List[Int64])], History),
       ) -> Bool raise {
         let (p_11, _) = x118
         p_11 != @list.empty()
@@ -518,8 +522,8 @@ fn step_1() -> Unit raise {
       @list.empty(),
       @lib.map(
         fn(
-          x119 : (@list.List[(@num.Num, @list.List[Int])], History),
-        ) -> (@list.List[(@num.Num, @list.List[Int])], History) raise {
+          x119 : (@list.List[(@num.Num, @list.List[Int64])], History),
+        ) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise {
           monic_l(x119.0, x119.1)
         },
         phists,
@@ -527,11 +531,11 @@ fn step_1() -> Unit raise {
     )
     let prs0 = @lib.allpairs(
       fn(
-        x120 : (@list.List[(@num.Num, @list.List[Int])], History),
-        x121 : (@list.List[(@num.Num, @list.List[Int])], History),
+        x120 : (@list.List[(@num.Num, @list.List[Int64])], History),
+        x121 : (@list.List[(@num.Num, @list.List[Int64])], History),
       ) -> (
-        (@list.List[(@num.Num, @list.List[Int])], History),
-        (@list.List[(@num.Num, @list.List[Int])], History),
+        (@list.List[(@num.Num, @list.List[Int64])], History),
+        (@list.List[(@num.Num, @list.List[Int64])], History),
       ) raise {
         let x_2 = x120
         let y = x121
@@ -543,8 +547,8 @@ fn step_1() -> Unit raise {
     let prs1 = @lib.filter(
       fn(
         x122 : (
-          (@list.List[(@num.Num, @list.List[Int])], History),
-          (@list.List[(@num.Num, @list.List[Int])], History),
+          (@list.List[(@num.Num, @list.List[Int64])], History),
+          (@list.List[(@num.Num, @list.List[Int64])], History),
         ),
       ) -> Bool raise {
         let ((x_3, _), (y_1, _)) = x122
@@ -555,14 +559,14 @@ fn step_1() -> Unit raise {
     let prs2 = @lib.map(
       fn(
         x123 : (
-          (@list.List[(@num.Num, @list.List[Int])], History),
-          (@list.List[(@num.Num, @list.List[Int])], History),
+          (@list.List[(@num.Num, @list.List[Int64])], History),
+          (@list.List[(@num.Num, @list.List[Int64])], History),
         ),
       ) -> (
-        (@num.Num, @list.List[Int]),
+        (@num.Num, @list.List[Int64]),
         (
-          (@list.List[(@num.Num, @list.List[Int])], History),
-          (@list.List[(@num.Num, @list.List[Int])], History),
+          (@list.List[(@num.Num, @list.List[Int64])], History),
+          (@list.List[(@num.Num, @list.List[Int64])], History),
         ),
       ) raise {
         let (p_12, q_6) = x123
@@ -574,10 +578,10 @@ fn step_1() -> Unit raise {
     let prs3 = @lib.filter(
       fn(
         x125 : (
-          (@num.Num, @list.List[Int]),
+          (@num.Num, @list.List[Int64]),
           (
-            (@list.List[(@num.Num, @list.List[Int])], History),
-            (@list.List[(@num.Num, @list.List[Int])], History),
+            (@list.List[(@num.Num, @list.List[Int64])], History),
+            (@list.List[(@num.Num, @list.List[Int64])], History),
           ),
         ),
       ) -> Bool raise {
@@ -595,91 +599,94 @@ fn step_1() -> Unit raise {
       @lib.mergesort((x80, x81) => forder_l(morder_lt, x80, x81), prs3),
     )
   }
-  let grobner_refute : (@list.List[@list.List[(@num.Num, @list.List[Int])]]) -> History raise = fn(
-    x126 : @list.List[@list.List[(@num.Num, @list.List[Int])]],
+  let grobner_refute : (@list.List[@list.List[(@num.Num, @list.List[Int64])]]) -> History raise = fn(
+    x126 : @list.List[@list.List[(@num.Num, @list.List[Int64])]],
   ) -> History raise {
     let pols_1 = x126
     let gb = grobner(pols_1)
     @lib.find(
       fn(
-        x127 : (@list.List[(@num.Num, @list.List[Int])], History),
+        x127 : (@list.List[(@num.Num, @list.List[Int64])], History),
       ) -> Bool raise {
         let (p_14, h_2) = x127
-        @lib.length(p_14) == 1 &&
-        @lib.forall(fn(x128 : Int) -> Bool raise { 0 == x128 }, @lib.hd(p_14).1)
+        Int::to_int64(@lib.length(p_14)) == 1L &&
+        @lib.forall(
+          fn(x128 : Int64) -> Bool raise { 0L == x128 },
+          @lib.hd(p_14).1,
+        )
       },
       gb,
     ).1
   }
   let grobner_strong : (@list.List[@kernel.Term]) -> ((
-    @list.List[@list.List[(@num.Num, @list.List[Int])]],
-  ) -> ((@list.List[(@num.Num, @list.List[Int])]) -> (
-    Int,
+    @list.List[@list.List[(@num.Num, @list.List[Int64])]],
+  ) -> ((@list.List[(@num.Num, @list.List[Int64])]) -> (
+    Int64,
     @num.Num,
-    @list.List[(Int, @list.List[(@num.Num, @list.List[Int])])],
+    @list.List[(Int64, @list.List[(@num.Num, @list.List[Int64])])],
   ) raise) raise) raise = fn(
     x160 : @list.List[@kernel.Term],
-  ) -> ((@list.List[@list.List[(@num.Num, @list.List[Int])]]) -> ((
-    @list.List[(@num.Num, @list.List[Int])],
+  ) -> ((@list.List[@list.List[(@num.Num, @list.List[Int64])]]) -> ((
+    @list.List[(@num.Num, @list.List[Int64])],
   ) -> (
-    Int,
+    Int64,
     @num.Num,
-    @list.List[(Int, @list.List[(@num.Num, @list.List[Int])])],
+    @list.List[(Int64, @list.List[(@num.Num, @list.List[Int64])])],
   ) raise) raise) raise {
     let vars_4 = x160
     fn(
-      x161 : @list.List[@list.List[(@num.Num, @list.List[Int])]],
-    ) -> ((@list.List[(@num.Num, @list.List[Int])]) -> (
-      Int,
+      x161 : @list.List[@list.List[(@num.Num, @list.List[Int64])]],
+    ) -> ((@list.List[(@num.Num, @list.List[Int64])]) -> (
+      Int64,
       @num.Num,
-      @list.List[(Int, @list.List[(@num.Num, @list.List[Int])])],
+      @list.List[(Int64, @list.List[(@num.Num, @list.List[Int64])])],
     ) raise) raise {
       let pols_4 = x161
       fn(
-        x162 : @list.List[(@num.Num, @list.List[Int])],
+        x162 : @list.List[(@num.Num, @list.List[Int64])],
       ) -> (
-        Int,
+        Int64,
         @num.Num,
-        @list.List[(Int, @list.List[(@num.Num, @list.List[Int])])],
+        @list.List[(Int64, @list.List[(@num.Num, @list.List[Int64])])],
       ) raise {
         let pol_6 = x162
         if pol_6 == @list.empty() {
-          (1, @num.num_1, @list.empty())
+          (1L, @num.num_1, @list.empty())
         } else {
           let vars_p = vars_4.prepend(@kernel.concl(@bool.truth()))
           let grob_z = @list.List([
             (
               @num.num_1,
               @lib.map(
-                fn(x163 : @kernel.Term) -> Int raise {
+                fn(x163 : @kernel.Term) -> Int64 raise {
                   let x_4 = x163
-                  0
+                  0L
                 },
                 vars_4,
-              ).prepend(1),
+              ).prepend(1L),
             ),
           ])
           let grob_1 = @list.List([
             (
               @num.num_1,
               @lib.map(
-                fn(x164 : @kernel.Term) -> Int raise {
+                fn(x164 : @kernel.Term) -> Int64 raise {
                   let x_5 = x164
-                  0
+                  0L
                 },
                 vars_p,
               ),
             ),
           ])
-          let augment : (@list.List[(@num.Num, @list.List[Int])]) -> @list.List[
-            (@num.Num, @list.List[Int]),
-          ] raise = (x166 : @list.List[(@num.Num, @list.List[Int])]) => {
+          let augment : (@list.List[(@num.Num, @list.List[Int64])]) -> @list.List[
+            (@num.Num, @list.List[Int64]),
+          ] raise = (x166 : @list.List[(@num.Num, @list.List[Int64])]) => {
             @lib.map(
               fn(
-                x165 : (@num.Num, @list.List[Int]),
-              ) -> (@num.Num, @list.List[Int]) raise {
+                x165 : (@num.Num, @list.List[Int64]),
+              ) -> (@num.Num, @list.List[Int64]) raise {
                 let (c_6, m_5) = x165
-                (c_6, m_5.prepend(0))
+                (c_6, m_5.prepend(0L))
               },
               x166,
             )
@@ -694,24 +701,27 @@ fn step_1() -> Unit raise {
           })(vars_p, allpols)
           let d_1 = @lib.itlist(
             fn(
-              x178 : (Int, @list.List[(@num.Num, @list.List[Int])]),
-              x179 : Int,
-            ) -> Int raise {
+              x178 : (Int64, @list.List[(@num.Num, @list.List[Int64])]),
+              x179 : Int64,
+            ) -> Int64 raise {
               (fn(
-                x175 : @list.List[(@num.Num, @list.List[Int])],
-              ) -> ((Int) -> Int raise) raise {
-                fn(x176 : Int) -> Int raise {
-                  ((x173 : @list.List[(@num.Num, @list.List[Int])], x174 : Int) => {
+                x175 : @list.List[(@num.Num, @list.List[Int64])],
+              ) -> ((Int64) -> Int64 raise) raise {
+                fn(x176 : Int64) -> Int64 raise {
+                  ((
+                    x173 : @list.List[(@num.Num, @list.List[Int64])],
+                    x174 : Int64,
+                  ) => {
                     @lib.itlist(
                       fn(
-                        x171 : (@num.Num, @list.List[Int]),
-                        x172 : Int,
-                      ) -> Int raise {
+                        x171 : (@num.Num, @list.List[Int64]),
+                        x172 : Int64,
+                      ) -> Int64 raise {
                         (fn(
-                          x169 : @list.List[Int],
-                        ) -> ((Int) -> Int raise) raise {
-                          (fn(x167 : Int) -> ((Int) -> Int raise) raise {
-                            fn(x168 : Int) -> Int raise {
+                          x169 : @list.List[Int64],
+                        ) -> ((Int64) -> Int64 raise) raise {
+                          (fn(x167 : Int64) -> ((Int64) -> Int64 raise) raise {
+                            fn(x168 : Int64) -> Int64 raise {
                               if x167 >= x168 {
                                 x167
                               } else {
@@ -721,8 +731,8 @@ fn step_1() -> Unit raise {
                           })(@lib.hd(x169))
                         })(
                           (fn(
-                            x170 : (@num.Num, @list.List[Int]),
-                          ) -> @list.List[Int] raise {
+                            x170 : (@num.Num, @list.List[Int64]),
+                          ) -> @list.List[Int64] raise {
                             x170.1
                           })(x171),
                         )(x172)
@@ -734,47 +744,47 @@ fn step_1() -> Unit raise {
                 }
               })(
                 (fn(
-                  x177 : (Int, @list.List[(@num.Num, @list.List[Int])]),
-                ) -> @list.List[(@num.Num, @list.List[Int])] raise {
+                  x177 : (Int64, @list.List[(@num.Num, @list.List[Int64])]),
+                ) -> @list.List[(@num.Num, @list.List[Int64])] raise {
                   x177.1
                 })(x178),
               )(x179)
             },
             cert_1,
-            0,
+            0L,
           )
-          let transform_monomial : ((@num.Num, @list.List[Int])) -> @list.List[
-            (@num.Num, @list.List[Int]),
+          let transform_monomial : ((@num.Num, @list.List[Int64])) -> @list.List[
+            (@num.Num, @list.List[Int64]),
           ] raise = fn(
-            x180 : (@num.Num, @list.List[Int]),
-          ) -> @list.List[(@num.Num, @list.List[Int])] raise {
+            x180 : (@num.Num, @list.List[Int64]),
+          ) -> @list.List[(@num.Num, @list.List[Int64])] raise {
             let (c_7, m_6) = x180
             let t181 = ((x39, x40, x41) => grob_pow_l(grob_mul, x39, x40, x41))(
               vars_4,
               pol_6,
-              d_1 - @lib.hd(m_6),
+              @lib.sub63(d_1, @lib.hd(m_6)),
             )
             grob_cmul((c_7, @lib.tl(m_6)), t181)
           }
-          let transform_polynomial : (@list.List[(@num.Num, @list.List[Int])]) -> @list.List[
-            (@num.Num, @list.List[Int]),
+          let transform_polynomial : (@list.List[(@num.Num, @list.List[Int64])]) -> @list.List[
+            (@num.Num, @list.List[Int64]),
           ] raise = fn(
-            x182 : @list.List[(@num.Num, @list.List[Int])],
-          ) -> @list.List[(@num.Num, @list.List[Int])] raise {
+            x182 : @list.List[(@num.Num, @list.List[Int64])],
+          ) -> @list.List[(@num.Num, @list.List[Int64])] raise {
             let q_8 = x182
             @lib.itlist(
               fn(
-                x185 : (@num.Num, @list.List[Int]),
-                x186 : @list.List[(@num.Num, @list.List[Int])],
-              ) -> @list.List[(@num.Num, @list.List[Int])] raise {
+                x185 : (@num.Num, @list.List[Int64]),
+                x186 : @list.List[(@num.Num, @list.List[Int64])],
+              ) -> @list.List[(@num.Num, @list.List[Int64])] raise {
                 (fn(
-                  x183 : @list.List[(@num.Num, @list.List[Int])],
-                ) -> ((@list.List[(@num.Num, @list.List[Int])]) -> @list.List[
-                  (@num.Num, @list.List[Int]),
+                  x183 : @list.List[(@num.Num, @list.List[Int64])],
+                ) -> ((@list.List[(@num.Num, @list.List[Int64])]) -> @list.List[
+                  (@num.Num, @list.List[Int64]),
                 ] raise) raise {
                   fn(
-                    x184 : @list.List[(@num.Num, @list.List[Int])],
-                  ) -> @list.List[(@num.Num, @list.List[Int])] raise {
+                    x184 : @list.List[(@num.Num, @list.List[Int64])],
+                  ) -> @list.List[(@num.Num, @list.List[Int64])] raise {
                     grob_add(x183, x184)
                   }
                 })(transform_monomial(x185))(x186)
@@ -785,18 +795,18 @@ fn step_1() -> Unit raise {
           }
           let cert_p = @lib.map(
             fn(
-              x187 : (Int, @list.List[(@num.Num, @list.List[Int])]),
-            ) -> (Int, @list.List[(@num.Num, @list.List[Int])]) raise {
+              x187 : (Int64, @list.List[(@num.Num, @list.List[Int64])]),
+            ) -> (Int64, @list.List[(@num.Num, @list.List[Int64])]) raise {
               let (c_8, q_9) = x187
               let t188 = transform_polynomial(q_9)
-              (c_8 - 1, t188)
+              (@lib.sub63(c_8, 1L), t188)
             },
             @lib.filter(
               fn(
-                x189 : (Int, @list.List[(@num.Num, @list.List[Int])]),
+                x189 : (Int64, @list.List[(@num.Num, @list.List[Int64])]),
               ) -> Bool raise {
                 let (k, _) = x189
-                k != 0
+                k != 0L
               },
               cert_1,
             ),
@@ -820,7 +830,7 @@ fn step_1() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -828,7 +838,7 @@ fn step_1() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -841,7 +851,7 @@ fn step_1() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -849,7 +859,7 @@ fn step_1() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -863,7 +873,7 @@ fn step_1() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -871,7 +881,7 @@ fn step_1() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -1129,7 +1139,7 @@ fn step_1() -> Unit raise {
     fn grobify_term(
       x240 : @list.List[@kernel.Term],
       x241 : @kernel.Term,
-    ) -> @list.List[(@num.Num, @list.List[Int])] raise {
+    ) -> @list.List[(@num.Num, @list.List[Int64])] raise {
       let vars_5 = x240
       let tm_2 = x241
       try {
@@ -1140,12 +1150,12 @@ fn step_1() -> Unit raise {
             (
               @num.num_1,
               @lib.map(
-                fn(x242 : @kernel.Term) -> Int raise {
+                fn(x242 : @kernel.Term) -> Int64 raise {
                   let i_1 = x242
                   if i_1 == tm_2 {
-                    1
+                    1L
                   } else {
-                    0
+                    0L
                   }
                 },
                 vars_5,
@@ -1164,9 +1174,9 @@ fn step_1() -> Unit raise {
                 (
                   x_6,
                   @lib.map(
-                    fn(x243 : @kernel.Term) -> Int raise {
+                    fn(x243 : @kernel.Term) -> Int64 raise {
                       let v_1 = x243
-                      0
+                      0L
                     },
                     vars_5,
                   ),
@@ -1238,12 +1248,14 @@ fn step_1() -> Unit raise {
       }
     }
     let grobify_equation : (@list.List[@kernel.Term]) -> ((@kernel.Term) -> @list.List[
-      (@num.Num, @list.List[Int]),
+      (@num.Num, @list.List[Int64]),
     ] raise) raise = fn(
       x249 : @list.List[@kernel.Term],
-    ) -> ((@kernel.Term) -> @list.List[(@num.Num, @list.List[Int])] raise) raise {
+    ) -> ((@kernel.Term) -> @list.List[(@num.Num, @list.List[Int64])] raise) raise {
       let vars_6 = x249
-      fn(x250 : @kernel.Term) -> @list.List[(@num.Num, @list.List[Int])] raise {
+      fn(
+        x250 : @kernel.Term,
+      ) -> @list.List[(@num.Num, @list.List[Int64])] raise {
         let tm_3 = x250
         let (l_17, r_8) = @kernel.dest_eq(tm_3)
         let t251 = grobify_term(vars_6, r_8)
@@ -1252,12 +1264,12 @@ fn step_1() -> Unit raise {
     }
     let grobify_equations : (@kernel.Term) -> (
       @list.List[@kernel.Term],
-      @list.List[@list.List[(@num.Num, @list.List[Int])]],
+      @list.List[@list.List[(@num.Num, @list.List[Int64])]],
     ) raise = fn(
       x252 : @kernel.Term,
     ) -> (
       @list.List[@kernel.Term],
-      @list.List[@list.List[(@num.Num, @list.List[Int])]],
+      @list.List[@list.List[(@num.Num, @list.List[Int64])]],
     ) raise {
       let tm_4 = x252
       let cjs = @basics.conjuncts(tm_4)
@@ -1284,11 +1296,11 @@ fn step_1() -> Unit raise {
       )
       (vars_7, @lib.map(grobify_equation(vars_7), cjs))
     }
-    let holify_varpow : ((@kernel.Term, Int)) -> @kernel.Term raise = fn(
-      x258 : (@kernel.Term, Int),
+    let holify_varpow : ((@kernel.Term, Int64)) -> @kernel.Term raise = fn(
+      x258 : (@kernel.Term, Int64),
     ) -> @kernel.Term raise {
       let (v_2, n_4) = x258
-      if n_4 == 1 {
+      if n_4 == 1L {
         v_2
       } else {
         let t259 = @nums.mk_small_numeral(n_4)
@@ -1296,19 +1308,19 @@ fn step_1() -> Unit raise {
       }
     }
     let holify_monomial : (@list.List[@kernel.Term]) -> ((
-      (@num.Num, @list.List[Int]),
+      (@num.Num, @list.List[Int64]),
     ) -> @kernel.Term raise) raise = fn(
       x260 : @list.List[@kernel.Term],
-    ) -> (((@num.Num, @list.List[Int])) -> @kernel.Term raise) raise {
+    ) -> (((@num.Num, @list.List[Int64])) -> @kernel.Term raise) raise {
       let vars_8 = x260
-      fn(x261 : (@num.Num, @list.List[Int])) -> @kernel.Term raise {
+      fn(x261 : (@num.Num, @list.List[Int64])) -> @kernel.Term raise {
         let (c_9, m_7) = x261
         let xps = @lib.map(
           holify_varpow,
           @lib.filter(
-            fn(x262 : (@kernel.Term, Int)) -> Bool raise {
+            fn(x262 : (@kernel.Term, Int64)) -> Bool raise {
               let (_, n_5) = x262
-              n_5 != 0
+              n_5 != 0L
             },
             @lib.zip(vars_8, m_7),
           ),
@@ -1323,12 +1335,14 @@ fn step_1() -> Unit raise {
       }
     }
     let holify_polynomial : (@list.List[@kernel.Term]) -> ((
-      @list.List[(@num.Num, @list.List[Int])],
+      @list.List[(@num.Num, @list.List[Int64])],
     ) -> @kernel.Term raise) raise = fn(
       x266 : @list.List[@kernel.Term],
-    ) -> ((@list.List[(@num.Num, @list.List[Int])]) -> @kernel.Term raise) raise {
+    ) -> ((@list.List[(@num.Num, @list.List[Int64])]) -> @kernel.Term raise) raise {
       let vars_9 = x266
-      fn(x267 : @list.List[(@num.Num, @list.List[Int])]) -> @kernel.Term raise {
+      fn(
+        x267 : @list.List[(@num.Num, @list.List[Int64])],
+      ) -> @kernel.Term raise {
         let p_17 = x267
         if p_17 == @list.empty() {
           ring_mk_const(@num.num_0)
@@ -1344,7 +1358,7 @@ fn step_1() -> Unit raise {
       }
     }
     let holify_polynomial_1 : (@list.List[@kernel.Term]) -> ((
-      @list.List[(@num.Num, @list.List[Int])],
+      @list.List[(@num.Num, @list.List[Int64])],
     ) -> @kernel.Term raise) raise = holify_polynomial
     let (pth_idom, pth_ine) = @bool.conj_pair(
       @drule.match_mp(pth_step)(ring_integral),
@@ -1432,13 +1446,13 @@ fn step_1() -> Unit raise {
             }
           }
           let mul_rule : (@list.List[@kernel.Term]) -> ((
-            (@num.Num, @list.List[Int]),
+            (@num.Num, @list.List[Int64]),
           ) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise = fn(
             x290 : @list.List[@kernel.Term],
-          ) -> (((@num.Num, @list.List[Int])) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise {
+          ) -> (((@num.Num, @list.List[Int64])) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise {
             let vars_11 = x290
             fn(
-              x291 : (@num.Num, @list.List[Int]),
+              x291 : (@num.Num, @list.List[Int64]),
             ) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
               let m_8 = x291
               fn(x292 : @kernel.Thm) -> @kernel.Thm raise {
@@ -1482,7 +1496,8 @@ fn step_1() -> Unit raise {
               assoceq_l(prf_3, execache.val) catch {
                 Failure(_) =>
                   match prf_3 {
-                    History::Start(m_9) => @lib.el(m_9, initpols)
+                    History::Start(m_9) =>
+                      @lib.el(@lib.int63_to_int(m_9), initpols)
                     History::Add(p1_5, p2_5) => {
                       let t300 = run_proof(vars_12, p2_5)
                       let t301 = add_rule(run_proof(vars_12, p1_5))(t300)
@@ -1517,9 +1532,9 @@ fn step_1() -> Unit raise {
             )
             @pp.std_formatter.print_newline()
             let km = @lib.map(
-              fn(x306 : @kernel.Term) -> Int raise {
+              fn(x306 : @kernel.Term) -> Int64 raise {
                 let x_11 = x306
-                0
+                0L
               },
               vars_10,
             )
@@ -1552,7 +1567,7 @@ fn step_1() -> Unit raise {
                 Failure(_) =>
                   match prf_6 {
                     History::Start(m_11) =>
-                      (@num.num_1, @lib.el(m_11, initpols))
+                      (@num.num_1, @lib.el(@lib.int63_to_int(m_11), initpols))
                     History::Add(p1_6, p2_7) => {
                       let (d1, th1_3) = run_scaled_proof(vars_14, p1_6)
                       let (d2, th2_3) = run_scaled_proof(vars_14, p2_7)
@@ -1712,7 +1727,7 @@ fn step_1() -> Unit raise {
                   nth,
                 )
                 let th2_7 = @lib.funpow(
-                  deg,
+                  @lib.int63_to_int(deg),
                   fn(x342 : @kernel.Thm) -> @kernel.Thm raise {
                     idom_rule(
                       ((x341 : @kernel.Thm) => @bool.conj(th1_7, x341))(x342),
@@ -1731,13 +1746,13 @@ fn step_1() -> Unit raise {
           @pp.std_formatter.print_newline()
           let cert_pos = @lib.map(
             fn(
-              x343 : (Int, @list.List[(@num.Num, @list.List[Int])]),
-            ) -> (Int, @list.List[(@num.Num, @list.List[Int])]) raise {
+              x343 : (Int64, @list.List[(@num.Num, @list.List[Int64])]),
+            ) -> (Int64, @list.List[(@num.Num, @list.List[Int64])]) raise {
               let (i_2, p_18) = x343
               (
                 i_2,
                 @lib.filter(
-                  fn(x344 : (@num.Num, @list.List[Int])) -> Bool raise {
+                  fn(x344 : (@num.Num, @list.List[Int64])) -> Bool raise {
                     let (c_11, m_12) = x344
                     @num.gt_num(c_11, @num.num_0)
                   },
@@ -1749,20 +1764,20 @@ fn step_1() -> Unit raise {
           )
           let cert_neg = @lib.map(
             fn(
-              x345 : (Int, @list.List[(@num.Num, @list.List[Int])]),
-            ) -> (Int, @list.List[(@num.Num, @list.List[Int])]) raise {
+              x345 : (Int64, @list.List[(@num.Num, @list.List[Int64])]),
+            ) -> (Int64, @list.List[(@num.Num, @list.List[Int64])]) raise {
               let (i_3, p_19) = x345
               (
                 i_3,
                 @lib.map(
                   fn(
-                    x346 : (@num.Num, @list.List[Int]),
-                  ) -> (@num.Num, @list.List[Int]) raise {
+                    x346 : (@num.Num, @list.List[Int64]),
+                  ) -> (@num.Num, @list.List[Int64]) raise {
                     let (c_12, m_13) = x346
                     (@num.minus_num(c_12), m_13)
                   },
                   @lib.filter(
-                    fn(x347 : (@num.Num, @list.List[Int])) -> Bool raise {
+                    fn(x347 : (@num.Num, @list.List[Int64])) -> Bool raise {
                       let (c_13, m_14) = x347
                       @num.lt_num(c_13, @num.num_0)
                     },
@@ -1775,8 +1790,8 @@ fn step_1() -> Unit raise {
           )
           let herts_pos = @lib.map(
             fn(
-              x348 : (Int, @list.List[(@num.Num, @list.List[Int])]),
-            ) -> (Int, @kernel.Term) raise {
+              x348 : (Int64, @list.List[(@num.Num, @list.List[Int64])]),
+            ) -> (Int64, @kernel.Term) raise {
               let (i_4, p_20) = x348
               (i_4, holify_polynomial_1(vars_19)(p_20))
             },
@@ -1784,15 +1799,15 @@ fn step_1() -> Unit raise {
           )
           let herts_neg = @lib.map(
             fn(
-              x349 : (Int, @list.List[(@num.Num, @list.List[Int])]),
-            ) -> (Int, @kernel.Term) raise {
+              x349 : (Int64, @list.List[(@num.Num, @list.List[Int64])]),
+            ) -> (Int64, @kernel.Term) raise {
               let (i_5, p_21) = x349
               (i_5, holify_polynomial_1(vars_19)(p_21))
             },
             cert_neg,
           )
-          let thm_fn : (@list.List[(Int, @kernel.Term)]) -> @kernel.Thm raise = fn(
-            x350 : @list.List[(Int, @kernel.Term)],
+          let thm_fn : (@list.List[(Int64, @kernel.Term)]) -> @kernel.Thm raise = fn(
+            x350 : @list.List[(Int64, @kernel.Term)],
           ) -> @kernel.Thm raise {
             let pols_8 = x350
             if pols_8 == @list.empty() {
@@ -1807,9 +1822,9 @@ fn step_1() -> Unit raise {
                   s353(x352)
                 },
                 @lib.map(
-                  fn(x354 : (Int, @kernel.Term)) -> @kernel.Thm raise {
+                  fn(x354 : (Int64, @kernel.Term)) -> @kernel.Thm raise {
                     let (i_6, p_22) = x354
-                    let t355 = @lib.el(i_6, eths_1)
+                    let t355 = @lib.el(@lib.int63_to_int(i_6), eths_1)
                     @equal.ap_term(@kernel.mk_comb(ring_mul_tm, p_22), t355)
                   },
                   pols_8,
@@ -1916,12 +1931,12 @@ fn step_1() -> Unit raise {
           )
         })(vars_20, pols_9, pol_8)
         @lib.map(
-          fn(x370 : Int) -> @kernel.Term raise {
+          fn(x370 : Int64) -> @kernel.Term raise {
             let n_8 = x370
             let p_23 = @lib.assocd(n_8, cert_5, @list.empty())
             holify_polynomial_1(vars_20)(p_23)
           },
-          @lib.range(0, @lib.length(pols_9) - 1),
+          @lib.range(0L, @lib.sub63(Int::to_int64(@lib.length(pols_9)), 1L)),
         )
       }
     }
@@ -1996,38 +2011,38 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash] lexorder_l(
 ///|
 fn[TB] grob_pow_l(
   grob_mul : (
-    @list.List[(@num.Num, @list.List[Int])],
-    @list.List[(@num.Num, @list.List[Int])],
-  ) -> @list.List[(@num.Num, @list.List[Int])] raise,
+    @list.List[(@num.Num, @list.List[Int64])],
+    @list.List[(@num.Num, @list.List[Int64])],
+  ) -> @list.List[(@num.Num, @list.List[Int64])] raise,
   x39 : @list.List[TB],
-  x40 : @list.List[(@num.Num, @list.List[Int])],
-  x41 : Int,
-) -> @list.List[(@num.Num, @list.List[Int])] raise {
+  x40 : @list.List[(@num.Num, @list.List[Int64])],
+  x41 : Int64,
+) -> @list.List[(@num.Num, @list.List[Int64])] raise {
   let grob_pow = (
     x39 : @list.List[TB],
-    x40 : @list.List[(@num.Num, @list.List[Int])],
-    x41 : Int,
+    x40 : @list.List[(@num.Num, @list.List[Int64])],
+    x41 : Int64,
   ) => grob_pow_l(grob_mul, x39, x40, x41)
   let vars = x39
   let l_2 = x40
   let n = x41
-  if n < 0 {
+  if n < 0L {
     raise Failure("grob_pow: negative power")
-  } else if n == 0 {
+  } else if n == 0L {
     @list.List([
       (
         @num.num_1,
         @lib.map(
-          fn(x42 : TB) -> Int raise {
+          fn(x42 : TB) -> Int64 raise {
             let v = x42
-            0
+            0L
           },
           vars,
         ),
       ),
     ])
   } else {
-    grob_mul(l_2, grob_pow(vars, l_2, n - 1))
+    grob_mul(l_2, grob_pow(vars, l_2, @lib.sub63(n, 1L)))
   }
 }
 
@@ -2061,13 +2076,12 @@ fn[TC : Eq + @lib.OCompare + @lib.OHash, TD, TE] mlcm_l(
 
 ///|
 fn[TF] orthogonal_l(
-  grob_mmul : ((@num.Num, @list.List[Int])) -> (((@num.Num, @list.List[Int])) -> (
-    @num.Num,
-    @list.List[Int],
-  ) raise) raise,
-  x64 : (TF, @list.List[Int]),
-  x65 : @list.List[(@num.Num, @list.List[Int])],
-  x66 : @list.List[(@num.Num, @list.List[Int])],
+  grob_mmul : ((@num.Num, @list.List[Int64])) -> ((
+    (@num.Num, @list.List[Int64]),
+  ) -> (@num.Num, @list.List[Int64]) raise) raise,
+  x64 : (TF, @list.List[Int64]),
+  x65 : @list.List[(@num.Num, @list.List[Int64])],
+  x66 : @list.List[(@num.Num, @list.List[Int64])],
 ) -> Bool raise {
   let l_3 = x64
   let p1 = x65
@@ -2086,7 +2100,7 @@ fn[TG : Eq + @lib.OCompare + @lib.OHash] monic_l(
     (pol_3, hist_1)
   } else {
     let (c_p, m_p) = @lib.hd(pol_3)
-    let t78 = @lib.map(fn(x77 : TG) -> Int raise { 0 }, m_p)
+    let t78 = @lib.map(fn(x77 : TG) -> Int64 raise { 0L }, m_p)
     let t79 = History::Mmul((@num.div_num(@num.num_1, c_p), t78), hist_1)
     (
       @lib.map(
@@ -2105,9 +2119,9 @@ fn[TG : Eq + @lib.OCompare + @lib.OHash] monic_l(
 
 ///|
 fn[TH, TI, TJ, TK] forder_l(
-  morder_lt : (@list.List[Int]) -> ((@list.List[Int]) -> Bool raise) raise,
-  x80 : ((TJ, @list.List[Int]), TK),
-  x81 : ((TH, @list.List[Int]), TI),
+  morder_lt : (@list.List[Int64]) -> ((@list.List[Int64]) -> Bool raise) raise,
+  x80 : ((TJ, @list.List[Int64]), TK),
+  x81 : ((TH, @list.List[Int64]), TI),
 ) -> Bool raise {
   let ((c1_4, m1_5), _) = x80
   let ((c2_4, m2_5), _) = x81
@@ -2196,24 +2210,24 @@ fn[
 
 ///|
 fn[TV, TW, TX, TY] criterion2_l(
-  mdiv : ((@num.Num, @list.List[Int])) -> (((@num.Num, @list.List[Int])) -> (
+  mdiv : ((@num.Num, @list.List[Int64])) -> (((@num.Num, @list.List[Int64])) -> (
     @num.Num,
-    @list.List[Int],
+    @list.List[Int64],
   ) raise) raise,
-  x93 : @list.List[(@list.List[(@num.Num, @list.List[Int])], TY)],
+  x93 : @list.List[(@list.List[(@num.Num, @list.List[Int64])], TY)],
   x94 : (
-    (@num.Num, @list.List[Int]),
+    (@num.Num, @list.List[Int64]),
     (
-      (@list.List[(@num.Num, @list.List[Int])], TY),
-      (@list.List[(@num.Num, @list.List[Int])], TY),
+      (@list.List[(@num.Num, @list.List[Int64])], TY),
+      (@list.List[(@num.Num, @list.List[Int64])], TY),
     ),
   ),
   x95 : @list.List[
     (
       TV,
       (
-        (@list.List[(@num.Num, @list.List[Int])], TW),
-        (@list.List[(@num.Num, @list.List[Int])], TX),
+        (@list.List[(@num.Num, @list.List[Int64])], TW),
+        (@list.List[(@num.Num, @list.List[Int64])], TX),
       ),
     ),
   ],
@@ -2222,7 +2236,7 @@ fn[TV, TW, TX, TY] criterion2_l(
   let (lcm, ((p1_3, h1_2), (p2_3, h2_1))) = x94
   let opairs = x95
   @lib.exists(
-    fn(x96 : (@list.List[(@num.Num, @list.List[Int])], TY)) -> Bool raise {
+    fn(x96 : (@list.List[(@num.Num, @list.List[Int64])], TY)) -> Bool raise {
       let g = x96
       !poly_eq_l(g.0, p1_3) &&
       (if !poly_eq_l(g.0, p2_3) {
@@ -2233,13 +2247,13 @@ fn[TV, TW, TX, TY] criterion2_l(
               x98 : (
                 TV,
                 (
-                  (@list.List[(@num.Num, @list.List[Int])], TW),
-                  (@list.List[(@num.Num, @list.List[Int])], TX),
+                  (@list.List[(@num.Num, @list.List[Int64])], TW),
+                  (@list.List[(@num.Num, @list.List[Int64])], TX),
                 ),
               ),
             ) -> (
-              (@list.List[(@num.Num, @list.List[Int])], TW),
-              (@list.List[(@num.Num, @list.List[Int])], TX),
+              (@list.List[(@num.Num, @list.List[Int64])], TW),
+              (@list.List[(@num.Num, @list.List[Int64])], TX),
             ) raise {
               x98.1
             },
@@ -2251,13 +2265,13 @@ fn[TV, TW, TX, TY] criterion2_l(
                 x100 : (
                   TV,
                   (
-                    (@list.List[(@num.Num, @list.List[Int])], TW),
-                    (@list.List[(@num.Num, @list.List[Int])], TX),
+                    (@list.List[(@num.Num, @list.List[Int64])], TW),
+                    (@list.List[(@num.Num, @list.List[Int64])], TX),
                   ),
                 ),
               ) -> (
-                (@list.List[(@num.Num, @list.List[Int])], TW),
-                (@list.List[(@num.Num, @list.List[Int])], TX),
+                (@list.List[(@num.Num, @list.List[Int64])], TW),
+                (@list.List[(@num.Num, @list.List[Int64])], TX),
               ) raise {
                 x100.1
               },
@@ -2279,38 +2293,40 @@ fn[TV, TW, TX, TY] criterion2_l(
 }
 
 ///|
-fn[TZ] constant_poly_l(x102 : @list.List[(TZ, @list.List[Int])]) -> Bool raise {
+fn[TZ] constant_poly_l(
+  x102 : @list.List[(TZ, @list.List[Int64])],
+) -> Bool raise {
   let p_6 = x102
-  @lib.length(p_6) == 1 &&
-  @lib.forall(fn(x103 : Int) -> Bool raise { 0 == x103 }, @lib.hd(p_6).1)
+  Int::to_int64(@lib.length(p_6)) == 1L &&
+  @lib.forall(fn(x103 : Int64) -> Bool raise { 0L == x103 }, @lib.hd(p_6).1)
 }
 
 ///|
 fn[TBA] resolve_proof_l(
   grob_cmul : (
-    (@num.Num, @list.List[Int]),
-    @list.List[(@num.Num, @list.List[Int])],
-  ) -> @list.List[(@num.Num, @list.List[Int])] raise,
+    (@num.Num, @list.List[Int64]),
+    @list.List[(@num.Num, @list.List[Int64])],
+  ) -> @list.List[(@num.Num, @list.List[Int64])] raise,
   grob_add : (
-    @list.List[(@num.Num, @list.List[Int])],
-    @list.List[(@num.Num, @list.List[Int])],
-  ) -> @list.List[(@num.Num, @list.List[Int])] raise,
+    @list.List[(@num.Num, @list.List[Int64])],
+    @list.List[(@num.Num, @list.List[Int64])],
+  ) -> @list.List[(@num.Num, @list.List[Int64])] raise,
   x129 : @list.List[TBA],
   x130 : History,
-) -> @list.List[(Int, @list.List[(@num.Num, @list.List[Int])])] raise {
+) -> @list.List[(Int64, @list.List[(@num.Num, @list.List[Int64])])] raise {
   let resolve_proof = (x129 : @list.List[TBA], x130 : History) => {
     resolve_proof_l(grob_cmul, grob_add, x129, x130)
   }
   let vars_1 = x129
   let prf = x130
   match prf {
-    History::Start(-1) => @list.empty()
+    History::Start(-1L) => @list.empty()
     History::Start(m_3) =>
       @list.List([
         (
           m_3,
           @list.List([
-            (@num.num_1, @lib.map(fn(x131 : TBA) -> Int raise { 0 }, vars_1)),
+            (@num.num_1, @lib.map(fn(x131 : TBA) -> Int64 raise { 0L }, vars_1)),
           ]),
         ),
       ])
@@ -2318,8 +2334,8 @@ fn[TBA] resolve_proof_l(
       let lis = resolve_proof(vars_1, lin)
       @lib.map(
         fn(
-          x132 : (Int, @list.List[(@num.Num, @list.List[Int])]),
-        ) -> (Int, @list.List[(@num.Num, @list.List[Int])]) raise {
+          x132 : (Int64, @list.List[(@num.Num, @list.List[Int64])]),
+        ) -> (Int64, @list.List[(@num.Num, @list.List[Int64])]) raise {
           let (n_2, p_15) = x132
           (n_2, grob_cmul(pol_4, p_15))
         },
@@ -2330,7 +2346,9 @@ fn[TBA] resolve_proof_l(
       let lis1 = resolve_proof(vars_1, lin1)
       let lis2 = resolve_proof(vars_1, lin2)
       let t135 = @lib.map(
-        fn(x134 : (Int, @list.List[(@num.Num, @list.List[Int])])) -> Int raise {
+        fn(
+          x134 : (Int64, @list.List[(@num.Num, @list.List[Int64])]),
+        ) -> Int64 raise {
           x134.0
         },
         lis2,
@@ -2339,8 +2357,8 @@ fn[TBA] resolve_proof_l(
         @lib.union(
           @lib.map(
             fn(
-              x133 : (Int, @list.List[(@num.Num, @list.List[Int])]),
-            ) -> Int raise {
+              x133 : (Int64, @list.List[(@num.Num, @list.List[Int64])]),
+            ) -> Int64 raise {
               x133.0
             },
             lis1,
@@ -2349,7 +2367,9 @@ fn[TBA] resolve_proof_l(
         ),
       )
       @lib.map(
-        fn(x136 : Int) -> (Int, @list.List[(@num.Num, @list.List[Int])]) raise {
+        fn(
+          x136 : Int64,
+        ) -> (Int64, @list.List[(@num.Num, @list.List[Int64])]) raise {
           let n_3 = x136
           let a = @lib.assoc(n_3, lis1) catch {
             Failure(_) => @list.empty()
@@ -2370,17 +2390,17 @@ fn[TBA] resolve_proof_l(
 ///|
 fn[TBB] grobner_weak_l(
   grob_cmul : (
-    (@num.Num, @list.List[Int]),
-    @list.List[(@num.Num, @list.List[Int])],
-  ) -> @list.List[(@num.Num, @list.List[Int])] raise,
+    (@num.Num, @list.List[Int64]),
+    @list.List[(@num.Num, @list.List[Int64])],
+  ) -> @list.List[(@num.Num, @list.List[Int64])] raise,
   grob_add : (
-    @list.List[(@num.Num, @list.List[Int])],
-    @list.List[(@num.Num, @list.List[Int])],
-  ) -> @list.List[(@num.Num, @list.List[Int])] raise,
-  grobner_refute : (@list.List[@list.List[(@num.Num, @list.List[Int])]]) -> History raise,
+    @list.List[(@num.Num, @list.List[Int64])],
+    @list.List[(@num.Num, @list.List[Int64])],
+  ) -> @list.List[(@num.Num, @list.List[Int64])] raise,
+  grobner_refute : (@list.List[@list.List[(@num.Num, @list.List[Int64])]]) -> History raise,
   x137 : @list.List[TBB],
-  x138 : @list.List[@list.List[(@num.Num, @list.List[Int])]],
-) -> (@num.Num, @list.List[(Int, @list.List[(@num.Num, @list.List[Int])])]) raise {
+  x138 : @list.List[@list.List[(@num.Num, @list.List[Int64])]],
+) -> (@num.Num, @list.List[(Int64, @list.List[(@num.Num, @list.List[Int64])])]) raise {
   let vars_2 = x137
   let pols_2 = x138
   let cert = ((x129, x130) => resolve_proof_l(grob_cmul, grob_add, x129, x130))(
@@ -2389,17 +2409,17 @@ fn[TBB] grobner_weak_l(
   )
   let l_7 = @lib.itlist(
     fn(
-      x151 : (Int, @list.List[(@num.Num, @list.List[Int])]),
+      x151 : (Int64, @list.List[(@num.Num, @list.List[Int64])]),
       x152 : @num.Num,
     ) -> @num.Num raise {
       (fn(
-        x148 : @list.List[(@num.Num, @list.List[Int])],
+        x148 : @list.List[(@num.Num, @list.List[Int64])],
       ) -> ((@num.Num) -> @num.Num raise) raise {
         fn(x149 : @num.Num) -> @num.Num raise {
-          ((x146 : @list.List[(@num.Num, @list.List[Int])], x147 : @num.Num) => {
+          ((x146 : @list.List[(@num.Num, @list.List[Int64])], x147 : @num.Num) => {
             @lib.itlist(
               fn(
-                x144 : (@num.Num, @list.List[Int]),
+                x144 : (@num.Num, @list.List[Int64]),
                 x145 : @num.Num,
               ) -> @num.Num raise {
                 (fn(x142 : @num.Num) -> ((@num.Num) -> @num.Num raise) raise {
@@ -2413,7 +2433,7 @@ fn[TBB] grobner_weak_l(
                     })(x142),
                   )
                 })(
-                  (fn(x143 : (@num.Num, @list.List[Int])) -> @num.Num raise {
+                  (fn(x143 : (@num.Num, @list.List[Int64])) -> @num.Num raise {
                     x143.0
                   })(x144),
                 )(x145)
@@ -2425,8 +2445,8 @@ fn[TBB] grobner_weak_l(
         }
       })(
         (fn(
-          x150 : (Int, @list.List[(@num.Num, @list.List[Int])]),
-        ) -> @list.List[(@num.Num, @list.List[Int])] raise {
+          x150 : (Int64, @list.List[(@num.Num, @list.List[Int64])]),
+        ) -> @list.List[(@num.Num, @list.List[Int64])] raise {
           x150.1
         })(x151),
       )(x152)
@@ -2438,15 +2458,15 @@ fn[TBB] grobner_weak_l(
     l_7,
     @lib.map(
       fn(
-        x153 : (Int, @list.List[(@num.Num, @list.List[Int])]),
-      ) -> (Int, @list.List[(@num.Num, @list.List[Int])]) raise {
+        x153 : (Int64, @list.List[(@num.Num, @list.List[Int64])]),
+      ) -> (Int64, @list.List[(@num.Num, @list.List[Int64])]) raise {
         let (i, p_16) = x153
         (
           i,
           @lib.map(
             fn(
-              x154 : (@num.Num, @list.List[Int]),
-            ) -> (@num.Num, @list.List[Int]) raise {
+              x154 : (@num.Num, @list.List[Int64]),
+            ) -> (@num.Num, @list.List[Int64]) raise {
               let (d, m_4) = x154
               (@num.mult_num(l_7, d), m_4)
             },
@@ -2462,31 +2482,31 @@ fn[TBB] grobner_weak_l(
 ///|
 fn[TBC] grobner_ideal_l(
   reduce : (
-    @list.List[(@list.List[(@num.Num, @list.List[Int])], History)],
-    (@list.List[(@num.Num, @list.List[Int])], History),
-  ) -> (@list.List[(@num.Num, @list.List[Int])], History) raise,
-  grobner : (@list.List[@list.List[(@num.Num, @list.List[Int])]]) -> @list.List[
-    (@list.List[(@num.Num, @list.List[Int])], History),
+    @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)],
+    (@list.List[(@num.Num, @list.List[Int64])], History),
+  ) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise,
+  grobner : (@list.List[@list.List[(@num.Num, @list.List[Int64])]]) -> @list.List[
+    (@list.List[(@num.Num, @list.List[Int64])], History),
   ] raise,
-  grob_neg : (@list.List[(@num.Num, @list.List[Int])]) -> @list.List[
-    (@num.Num, @list.List[Int]),
+  grob_neg : (@list.List[(@num.Num, @list.List[Int64])]) -> @list.List[
+    (@num.Num, @list.List[Int64]),
   ] raise,
   grob_cmul : (
-    (@num.Num, @list.List[Int]),
-    @list.List[(@num.Num, @list.List[Int])],
-  ) -> @list.List[(@num.Num, @list.List[Int])] raise,
+    (@num.Num, @list.List[Int64]),
+    @list.List[(@num.Num, @list.List[Int64])],
+  ) -> @list.List[(@num.Num, @list.List[Int64])] raise,
   grob_add : (
-    @list.List[(@num.Num, @list.List[Int])],
-    @list.List[(@num.Num, @list.List[Int])],
-  ) -> @list.List[(@num.Num, @list.List[Int])] raise,
+    @list.List[(@num.Num, @list.List[Int64])],
+    @list.List[(@num.Num, @list.List[Int64])],
+  ) -> @list.List[(@num.Num, @list.List[Int64])] raise,
   x155 : @list.List[TBC],
-  x156 : @list.List[@list.List[(@num.Num, @list.List[Int])]],
-  x157 : @list.List[(@num.Num, @list.List[Int])],
-) -> @list.List[(Int, @list.List[(@num.Num, @list.List[Int])])] raise {
+  x156 : @list.List[@list.List[(@num.Num, @list.List[Int64])]],
+  x157 : @list.List[(@num.Num, @list.List[Int64])],
+) -> @list.List[(Int64, @list.List[(@num.Num, @list.List[Int64])])] raise {
   let grobner_ideal = (
     x155 : @list.List[TBC],
-    x156 : @list.List[@list.List[(@num.Num, @list.List[Int])]],
-    x157 : @list.List[(@num.Num, @list.List[Int])],
+    x156 : @list.List[@list.List[(@num.Num, @list.List[Int64])]],
+    x157 : @list.List[(@num.Num, @list.List[Int64])],
   ) => {
     grobner_ideal_l(
       reduce, grobner, grob_neg, grob_cmul, grob_add, x155, x156, x157,
@@ -2495,7 +2515,7 @@ fn[TBC] grobner_ideal_l(
   let vars_3 = x155
   let pols_3 = x156
   let pol_5 = x157
-  let t158 = History::Start(-1)
+  let t158 = History::Start(-1L)
   let t159 = (grob_neg(pol_5), t158)
   let (pol_p, h_3) = reduce(grobner(pols_3), t159)
   if pol_p != @list.empty() {
@@ -2871,7 +2891,7 @@ fn step_3() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -2879,7 +2899,7 @@ fn step_3() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -2911,7 +2931,7 @@ fn step_3() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2919,7 +2939,7 @@ fn step_3() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2933,7 +2953,7 @@ fn step_3() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2941,7 +2961,7 @@ fn step_3() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2958,7 +2978,7 @@ fn step_3() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2966,7 +2986,7 @@ fn step_3() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),

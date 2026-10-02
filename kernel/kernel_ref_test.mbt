@@ -339,7 +339,7 @@ test "kernel matches upstream fusion.ml" {
     sthm(th1) + " ;; " + sthm(th2)
   })
   log.attempt("types", () => {
-    slist((e : (String, Int)) => e.0 + "/" + e.1.to_string(), @kernel.types())
+    slist((e : (String, Int64)) => e.0 + "/" + e.1.to_string(), @kernel.types())
   })
   log.attempt("constants", () => {
     slist(

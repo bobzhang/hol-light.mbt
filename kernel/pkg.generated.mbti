@@ -57,7 +57,7 @@ pub fn freesl(@list.List[Term]) -> @list.List[Term]
 
 pub fn get_const_type(String) -> HolType raise
 
-pub fn get_type_arity(String) -> Int raise
+pub fn get_type_arity(String) -> Int64 raise
 
 pub fn hyp(Thm) -> @list.List[Term]
 
@@ -101,7 +101,7 @@ pub fn new_basic_type_definition(String, String, String, Thm) -> (Thm, Thm) rais
 
 pub fn new_constant(String, HolType) -> Unit raise
 
-pub fn new_type(String, Int) -> Unit raise
+pub fn new_type(String, Int64) -> Unit raise
 
 pub fn rand(Term) -> Term raise
 
@@ -117,7 +117,7 @@ pub fn type_subst(@list.List[(HolType, HolType)], HolType) -> HolType
 
 pub fn type_vars_in_term(Term) -> @list.List[HolType]
 
-pub fn types() -> @list.List[(String, Int)]
+pub fn types() -> @list.List[(String, Int64)]
 
 pub fn tyvars(HolType) -> @list.List[HolType]
 

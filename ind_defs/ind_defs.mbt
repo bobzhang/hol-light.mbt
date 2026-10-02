@@ -5,20 +5,20 @@
 /// strip_ncomb
 fn step_1() -> Unit raise {
   fn strip(
-    x1 : Int,
+    x1 : Int64,
     x2 : @kernel.Term,
     x3 : @list.List[@kernel.Term],
   ) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
     let (n, tm, acc) = (x1, x2, x3)
-    if n < 1 {
+    if n < 1L {
       (tm, acc)
     } else {
       let (l, r) = @kernel.dest_comb(tm)
-      strip(n - 1, l, acc.prepend(r))
+      strip(@lib.sub63(n, 1L), l, acc.prepend(r))
     }
   }
   strip_ncomb_c.set(fn(
-    x4 : Int,
+    x4 : Int64,
   ) -> ((@kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise) raise {
     let n_1 = x4
     fn(x5 : @kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
@@ -30,13 +30,13 @@ fn step_1() -> Unit raise {
 
 ///|
 let strip_ncomb_c : @lib.Cell[
-  (Int) -> ((@kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise) raise,
+  (Int64) -> ((@kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise) raise,
 ] = @lib.Cell::new("strip_ncomb")
 
 ///|
 /// `strip_ncomb`
 pub fn strip_ncomb(
-  x : Int,
+  x : Int64,
 ) -> ((@kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise) raise {
   strip_ncomb_c.get()(x)
 }
@@ -1109,7 +1109,7 @@ fn step_6() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -1117,7 +1117,7 @@ fn step_6() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -1129,7 +1129,7 @@ fn step_6() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -1137,7 +1137,7 @@ fn step_6() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -1147,7 +1147,7 @@ fn step_6() -> Unit raise {
     let (asl_1, w_1) = x210
     let (ant_1, con_1) = @basics.dest_imp(w_1)
     let vars = @basics.strip_comb(con_1).1
-    let rnum = @lib.length(vars) - 1
+    let rnum = @lib.sub63(Int::to_int64(@lib.length(vars)), 1L)
     let (hd1, args1) = strip_ncomb(rnum)(ant_1)
     let (hd2, args2) = strip_ncomb(rnum)(con_1)
     let th1_1 = @lib.rev_itlist(
@@ -1183,7 +1183,7 @@ fn step_6() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -1191,7 +1191,7 @@ fn step_6() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -1204,7 +1204,7 @@ fn step_6() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -1212,7 +1212,7 @@ fn step_6() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -1226,7 +1226,7 @@ fn step_6() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -1234,7 +1234,7 @@ fn step_6() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -1247,7 +1247,7 @@ fn step_6() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -1255,7 +1255,7 @@ fn step_6() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -1269,7 +1269,7 @@ fn step_6() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -1277,7 +1277,7 @@ fn step_6() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -1301,7 +1301,7 @@ fn step_6() -> Unit raise {
                 (
                   @list.List[@kernel.Term],
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -1309,7 +1309,7 @@ fn step_6() -> Unit raise {
                 @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                 (
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -1321,7 +1321,7 @@ fn step_6() -> Unit raise {
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -1329,7 +1329,7 @@ fn step_6() -> Unit raise {
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -1354,7 +1354,7 @@ fn step_6() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -1362,7 +1362,7 @@ fn step_6() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -1380,7 +1380,7 @@ fn step_6() -> Unit raise {
               (
                 @list.List[@kernel.Term],
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -1388,7 +1388,7 @@ fn step_6() -> Unit raise {
               @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
               (
                 (
-                  @list.List[(Int, @kernel.Term)],
+                  @list.List[(Int64, @kernel.Term)],
                   @list.List[(@kernel.Term, @kernel.Term)],
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ),
@@ -1404,7 +1404,7 @@ fn step_6() -> Unit raise {
             (
               @list.List[@kernel.Term],
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -1412,7 +1412,7 @@ fn step_6() -> Unit raise {
             @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
             (
               (
-                @list.List[(Int, @kernel.Term)],
+                @list.List[(Int64, @kernel.Term)],
                 @list.List[(@kernel.Term, @kernel.Term)],
                 @list.List[(@kernel.HolType, @kernel.HolType)],
               ),
@@ -1443,7 +1443,7 @@ fn step_6() -> Unit raise {
                 (
                   @list.List[@kernel.Term],
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -1451,7 +1451,7 @@ fn step_6() -> Unit raise {
                 @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
                 (
                   (
-                    @list.List[(Int, @kernel.Term)],
+                    @list.List[(Int64, @kernel.Term)],
                     @list.List[(@kernel.Term, @kernel.Term)],
                     @list.List[(@kernel.HolType, @kernel.HolType)],
                   ),
@@ -1464,7 +1464,7 @@ fn step_6() -> Unit raise {
                   t227.1,
                   fn(
                     x228 : (
-                      @list.List[(Int, @kernel.Term)],
+                      @list.List[(Int64, @kernel.Term)],
                       @list.List[(@kernel.Term, @kernel.Term)],
                       @list.List[(@kernel.HolType, @kernel.HolType)],
                     ),
@@ -1488,7 +1488,7 @@ fn step_6() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -1496,7 +1496,7 @@ fn step_6() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -1542,7 +1542,7 @@ fn[TA] backchain_tac_l(
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -1550,7 +1550,7 @@ fn[TA] backchain_tac_l(
     @list.List[(TA, @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -1564,7 +1564,7 @@ fn[TA] backchain_tac_l(
       @list.List([(asl, ant)]),
       fn(
         x208 : (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -1593,7 +1593,7 @@ fn step_7() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -1601,7 +1601,7 @@ fn step_7() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -1615,7 +1615,7 @@ fn step_7() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -1623,7 +1623,7 @@ fn step_7() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -1638,7 +1638,7 @@ fn step_7() -> Unit raise {
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -1646,7 +1646,7 @@ fn step_7() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -1917,27 +1917,29 @@ fn step_9() -> Unit raise {
     let schems = @lib.setify(schem)
     if @kernel.is_var(@lib.hd(schem)) {
       (clauses, @list.empty())
-    } else if !(@lib.length(
-        @lib.setify(
-          @lib.map(
-            fn(x283 : @kernel.Term) -> @list.List[@kernel.Term] raise {
-              (fn(
-                x281 : (@kernel.Term, @list.List[@kernel.Term]),
-              ) -> @list.List[@kernel.Term] raise {
-                x281.1
-              })(
+    } else if !(Int::to_int64(
+        @lib.length(
+          @lib.setify(
+            @lib.map(
+              fn(x283 : @kernel.Term) -> @list.List[@kernel.Term] raise {
                 (fn(
-                  x282 : @kernel.Term,
-                ) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
-                  @basics.strip_comb(x282)
-                })(x283),
-              )
-            },
-            schems,
+                  x281 : (@kernel.Term, @list.List[@kernel.Term]),
+                ) -> @list.List[@kernel.Term] raise {
+                  x281.1
+                })(
+                  (fn(
+                    x282 : @kernel.Term,
+                  ) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
+                    @basics.strip_comb(x282)
+                  })(x283),
+                )
+              },
+              schems,
+            ),
           ),
         ),
       ) ==
-      1) {
+      1L) {
       raise Failure("Schematic variables not used consistently")
     } else {
       let avoids = @basics.variables(@bool.list_mk_conj(clauses))
@@ -2050,36 +2052,37 @@ fn step_9() -> Unit raise {
 ///|
 /// derive_strong_induction
 fn step_10() -> Unit raise {
-  let dest_ibod : (@kernel.Term) -> (Int, (@kernel.Term, @kernel.Term)) raise = fn(
+  let dest_ibod : (@kernel.Term) -> (Int64, (@kernel.Term, @kernel.Term)) raise = fn(
     x296 : @kernel.Term,
-  ) -> (Int, (@kernel.Term, @kernel.Term)) raise {
+  ) -> (Int64, (@kernel.Term, @kernel.Term)) raise {
     let tm = x296
     let (avs, ibod) = @basics.strip_forall(tm)
-    let n = @lib.length(avs)
-    let prator : (@kernel.Term) -> @kernel.Term raise = (x297 : @kernel.Term) => {
-      @lib.funpow(n, @kernel.rator, x297)
+    let n = Int::to_int64(@lib.length(avs))
+    let t297 = @lib.int63_to_int(n)
+    let prator : (@kernel.Term) -> @kernel.Term raise = (x298 : @kernel.Term) => {
+      @lib.funpow(t297, @kernel.rator, x298)
     }
     let (ant, con) = @basics.dest_imp(ibod)
-    let t298 = prator(con)
-    (n, (prator(ant), t298))
+    let t299 = prator(con)
+    (n, (prator(ant), t299))
   }
-  fn prove_triv(x299 : @kernel.Term) -> @kernel.Thm raise {
-    let tm_1 = x299
+  fn prove_triv(x300 : @kernel.Term) -> @kernel.Thm raise {
+    let tm_1 = x300
     if @basics.is_conj(tm_1) {
-      let t300 = prove_triv(@kernel.rand(tm_1))
-      @bool.conj(prove_triv(@equal.lhand(tm_1)), t300)
+      let t301 = prove_triv(@kernel.rand(tm_1))
+      @bool.conj(prove_triv(@equal.lhand(tm_1)), t301)
     } else {
       let (avs_1, bod) = @basics.strip_forall(tm_1)
       let (a, c) = @basics.dest_imp(bod)
       let ths = @bool.conjuncts_rule(@kernel.assume_rule(a))
       let th = @lib.find(
-        fn(x304 : @kernel.Thm) -> Bool raise {
-          (fn(x302 : @kernel.Term) -> Bool raise {
-            ((x301 : @kernel.Term) => @basics.aconv(c, x301))(x302)
+        fn(x305 : @kernel.Thm) -> Bool raise {
+          (fn(x303 : @kernel.Term) -> Bool raise {
+            ((x302 : @kernel.Term) => @basics.aconv(c, x302))(x303)
           })(
-            (fn(x303 : @kernel.Thm) -> @kernel.Term raise {
-              @kernel.concl(x303)
-            })(x304),
+            (fn(x304 : @kernel.Thm) -> @kernel.Term raise {
+              @kernel.concl(x304)
+            })(x305),
           )
         },
         ths,
@@ -2087,11 +2090,11 @@ fn step_10() -> Unit raise {
       @bool.genl(avs_1, @bool.disch(a, th))
     }
   }
-  fn weaken_triv(x305 : @kernel.Thm) -> @kernel.Thm raise {
-    let th_1 = x305
+  fn weaken_triv(x306 : @kernel.Thm) -> @kernel.Thm raise {
+    let th_1 = x306
     if @basics.is_conj(@kernel.concl(th_1)) {
-      let t306 = weaken_triv(@bool.conjunct2(th_1))
-      @bool.conj(weaken_triv(@bool.conjunct1(th_1)), t306)
+      let t307 = weaken_triv(@bool.conjunct2(th_1))
+      @bool.conj(weaken_triv(@bool.conjunct1(th_1)), t307)
     } else {
       let (avs_2, bod_1) = @basics.strip_forall(@kernel.concl(th_1))
       let th1 = @bool.specl(avs_2, th_1)
@@ -2103,53 +2106,56 @@ fn step_10() -> Unit raise {
     @theorems.mono_and(),
   )
   derive_strong_induction_c.set(fn(
-    x307 : (@kernel.Thm, @kernel.Thm),
+    x308 : (@kernel.Thm, @kernel.Thm),
   ) -> @kernel.Thm raise {
-    let (rth, ith) = x307
+    let (rth, ith) = x308
     let (ovs, ibod_1) = @basics.strip_forall(@kernel.concl(ith))
     let (iant, icon) = @basics.dest_imp(ibod_1)
     let (ns, prrs) = @lib.unzip(@lib.map(dest_ibod, @basics.conjuncts(icon)))
     let (rs, ps) = @lib.unzip(prrs)
     let gs = @basics.variants(@basics.variables(ibod_1), ps)
-    let t308 = @lib.length(ns)
-    let (svs, tvs) = @lib.chop_list(@lib.length(ovs) - t308, ovs)
+    let t309 = Int::to_int64(@lib.length(ns))
+    let (svs, tvs) = @lib.chop_list(
+      @lib.int63_to_int(@lib.sub63(Int::to_int64(@lib.length(ovs)), t309)),
+      ovs,
+    )
     let sth = @bool.specl(svs, rth)
     let jth = @bool.specl(svs, ith)
     let gimps = @basics.subst(@lib.zip(gs, rs), icon)
     let prs = @lib.map2(
       fn(
-        x309 : Int,
-        x310 : (@kernel.Term, @kernel.Term),
+        x310 : Int64,
+        x311 : (@kernel.Term, @kernel.Term),
       ) -> @kernel.Term raise {
-        let n_1 = x309
-        let (r, p) = x310
-        let t311 = @kernel.type_of(r)
+        let n_1 = x310
+        let (r, p) = x311
+        let t312 = @kernel.type_of(r)
         let (tys, ty) = @lib.nsplit(
           @basics.dest_fun_ty,
-          @lib.range(1, n_1),
-          t311,
+          @lib.range(1L, n_1),
+          t312,
         )
         let gvs = @lib.map(
-          fn(x312 : @kernel.HolType) -> @kernel.Term raise {
-            @basics.genvar(x312)
+          fn(x313 : @kernel.HolType) -> @kernel.Term raise {
+            @basics.genvar(x313)
           },
           tys,
         )
-        let t313 = @basics.list_mk_comb(p, gvs)
+        let t314 = @basics.list_mk_comb(p, gvs)
         @basics.list_mk_abs(
           gvs,
-          @bool.mk_conj(@basics.list_mk_comb(r, gvs), t313),
+          @bool.mk_conj(@basics.list_mk_comb(r, gvs), t314),
         )
       },
       ns,
       prrs,
     )
     let modify_rule : (@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise = fn(
-      x314 : @kernel.Thm,
+      x315 : @kernel.Thm,
     ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
-      let rcl = x314
-      fn(x315 : @kernel.Term) -> @kernel.Thm raise {
-        let itm = x315
+      let rcl = x315
+      fn(x316 : @kernel.Term) -> @kernel.Thm raise {
+        let itm = x316
         let (avs_3, bod_2) = @basics.strip_forall(itm)
         if @basics.is_imp(bod_2) {
           let (a_2, c_1) = @basics.dest_imp(bod_2)
@@ -2179,27 +2185,27 @@ fn step_10() -> Unit raise {
             @bool.genl(avs_3, @bool.disch(t, @bool.conj(lth_r, lth_p))),
           )
         } else {
-          let t316 = @bool.specl(avs_3, @kernel.assume_rule(itm))
+          let t317 = @bool.specl(avs_3, @kernel.assume_rule(itm))
           @bool.disch(
             itm,
-            @bool.genl(avs_3, @bool.conj(@bool.specl(avs_3, rcl), t316)),
+            @bool.genl(avs_3, @bool.conj(@bool.specl(avs_3, rcl), t317)),
           )
         }
       }
     }
-    let t320 = @basics.conjuncts(iant)
+    let t321 = @basics.conjuncts(iant)
     let mimps = @lib.map2(
-      fn(x317 : @kernel.Thm, x318 : @kernel.Term) -> @kernel.Thm raise {
-        let s319 = modify_rule(x317)
-        s319(x318)
+      fn(x318 : @kernel.Thm, x319 : @kernel.Term) -> @kernel.Thm raise {
+        let s320 = modify_rule(x318)
+        s320(x319)
       },
       @bool.conjuncts_rule(sth),
-      t320,
+      t321,
     )
     let th1_1 = @lib.end_itlist(
-      fn(x321 : @kernel.Thm, x322 : @kernel.Thm) -> @kernel.Thm raise {
-        let th_2 = x321
-        let th_p = x322
+      fn(x322 : @kernel.Thm, x323 : @kernel.Thm) -> @kernel.Thm raise {
+        let th_2 = x322
+        let th_p = x323
         match_imps(@bool.conj(th_2, th_p))
       },
       mimps,

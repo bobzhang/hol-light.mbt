@@ -2,7 +2,7 @@
 // tools/ocaml_ref/omap_ref.ml (keep in sync) with the same random numbers.
 
 ///|
-fn dm(m : T[Int, Int]) -> String {
+fn dm(m : T[Int64, Int64]) -> String {
   match m {
     Empty => "."
     Node(l, k, v, r, h) => "(\{dm(l)} \{k}:\{v}/\{h} \{dm(r)})"
@@ -10,7 +10,7 @@ fn dm(m : T[Int, Int]) -> String {
 }
 
 ///|
-fn ds(s : @oset.T[Int]) -> String {
+fn ds(s : @oset.T[Int64]) -> String {
   match s {
     Empty => "."
     Node(l, k, r, h) => "(\{ds(l)} \{k}/\{h} \{ds(r)})"
@@ -19,18 +19,20 @@ fn ds(s : @oset.T[Int]) -> String {
 
 ///|
 test "omap and oset match OCaml 4.14 Map and Set" {
-  let ord : (Int) -> ((Int) -> Int raise) raise = x => y => x.compare(y)
+  let ord : (Int64) -> ((Int64) -> Int64 raise) raise = x => {
+    y => x.compare(y).to_int64()
+  }
   let out = StringBuilder()
   let log = StringBuilder()
-  let note = (k : Int) => log.write_string("\{k} ")
-  @lib.random_init(7)
-  let mut m : T[Int, Int] = empty()
-  let mut s : @oset.T[Int] = @oset.empty()
+  let note = (k : Int64) => log.write_string("\{k} ")
+  @lib.random_init(7L)
+  let mut m : T[Int64, Int64] = empty()
+  let mut s : @oset.T[Int64] = @oset.empty()
   for i in 1..<=600 {
     // OCaml evaluates `let k = ... in let v = ... in` in order
-    let k = @lib.random_int(60)
-    let v = @lib.random_int(5)
-    match @lib.random_int(9) {
+    let k = @lib.random_int(60L)
+    let v = @lib.random_int(5L)
+    match @lib.random_int(9L) {
       0 | 1 | 2 => {
         m = add(ord, k, v, m)
         s = @oset.add(ord, k, s)
@@ -87,9 +89,9 @@ test "omap and oset match OCaml 4.14 Map and Set" {
         )
       }
       _ => {
-        let mut t : @oset.T[Int] = @oset.empty()
+        let mut t : @oset.T[Int64] = @oset.empty()
         for j in 0..<20 {
-          t = @oset.add(ord, j * 3, t)
+          t = @oset.add(ord, (j * 3).to_int64(), t)
         }
         s = @oset.inter(ord, s, t)
         ignore(

@@ -126,7 +126,7 @@ fn step_6() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -134,7 +134,7 @@ fn step_6() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -148,7 +148,7 @@ fn step_6() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -156,7 +156,7 @@ fn step_6() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -172,7 +172,7 @@ fn step_6() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -180,7 +180,7 @@ fn step_6() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -194,7 +194,7 @@ fn step_6() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -202,7 +202,7 @@ fn step_6() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -1057,14 +1057,14 @@ pub fn bitsize_div() -> @kernel.Thm {
 ///|
 /// BITSIZE_CONV
 fn step_25() -> Unit raise {
-  fn bitfun(x112 : Int, x113 : @num.Num) -> Int raise {
+  fn bitfun(x112 : Int64, x113 : @num.Num) -> Int64 raise {
     let k = x112
     let n = x113
     if @num.eq_num(n, @num.num_0) {
       k
     } else {
       let t114 = @num.quo_num(n, @num.num_2)
-      bitfun(k + 1, t114)
+      bitfun(@lib.add63(k, 1L), t114)
     }
   }
   bitsize_conv_c.set(fn(x115 : @kernel.Term) -> @kernel.Thm raise {
@@ -1073,7 +1073,7 @@ fn step_25() -> Unit raise {
       @kernel.Term::Comb(@kernel.Term::Const("bitsize", _), ntm) if @nums.is_numeral(
           ntm,
         ) => {
-        let ktm = @nums.mk_small_numeral(bitfun(0, @basics.dest_numeral(ntm)))
+        let ktm = @nums.mk_small_numeral(bitfun(0L, @basics.dest_numeral(ntm)))
         let th = @bool.specl(@list.List([ntm, ktm]), bitsize_unique_eq())
         @bool.eqt_elim(
           @equal.conv_rule(@equal.rand_conv(@calc_num.num_reduce_conv), th),

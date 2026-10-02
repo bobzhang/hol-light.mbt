@@ -513,6 +513,24 @@ pub fn int_of_num(a : Num) -> Int raise {
 }
 
 ///|
+/// OCaml's `int_of_num` for 63-bit ints: fails outside [-2^62, 2^62 - 1].
+pub fn int63_of_num(a : Num) -> Int64 raise {
+  if !a.is_integer() {
+    raise Failure("integer argument required")
+  }
+  if a.num < min_int63 || a.num > max_int63 {
+    raise Failure("int_of_big_int")
+  }
+  a.num.to_int64()
+}
+
+///|
+let min_int63 : @bigint.BigInt = -4611686018427387904N
+
+///|
+let max_int63 : @bigint.BigInt = 4611686018427387903N
+
+///|
 let min_int64 : @bigint.BigInt = -9223372036854775808N
 
 ///|

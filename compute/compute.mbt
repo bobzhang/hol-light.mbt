@@ -489,7 +489,7 @@ pub fn eq_intro(x42 : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// `pattern`
 pub(all) enum Pattern {
-  Pvar(Int)
+  Pvar(Int64)
   Papp(@kernel.Term, @list.List[Pattern])
 } derive(Eq, Debug)
 
@@ -551,8 +551,13 @@ pub fn check_arg_form(
       chk(rator, stk.prepend(pat1), free_p)
     } else if @kernel.is_var(t) {
       if stk == @list.empty() {
-        let newi = @lib.length(free)
-        (free, Pattern::Pvar(newi - @lib.index(t, free) - 1)) catch {
+        let newi = Int::to_int64(@lib.length(free))
+        (
+          free,
+          Pattern::Pvar(
+            @lib.sub63(@lib.sub63(newi, Int::to_int64(@lib.index(t, free))), 1L),
+          ),
+        ) catch {
           _ => (free.prepend(t), Pattern::Pvar(newi))
         }
       } else {
@@ -582,7 +587,7 @@ pub(all) struct CstRec[TA] {
   head : @kernel.Term
   args : @list.List[(@kernel.Term, Fterm[TA])]
   rws : TA
-  skip : Int?
+  skip : Int64?
 }
 
 ///|
@@ -690,9 +695,9 @@ pub impl[TA : @lib.OHash] @lib.OHash for Fterm[TA] with fn ohash_visit(self, h) 
 ///|
 /// `dterm`
 pub(all) enum Dterm[TA] {
-  Bv(Int)
+  Bv(Int64)
   Fv
-  Cst(@kernel.Term, Ref[(TA, Int?)])
+  Cst(@kernel.Term, Ref[(TA, Int64?)])
   App(Dterm[TA], @list.List[Dterm[TA]])
   Abs(Dterm[TA])
 }
@@ -824,7 +829,7 @@ pub(all) enum Db {
 pub(all) struct RewriteRec {
   cst : @kernel.Term
   lhs : @list.List[Pattern]
-  npv : Int
+  npv : Int64
   rhs : Dterm[Db]
   thm : @kernel.Thm
 }
@@ -837,19 +842,21 @@ pub(all) enum Rewrite {
 
 ///|
 /// `add_in_db`
-pub fn add_in_db(x51 : (Int, @kernel.Term, Action, Db)) -> Db raise {
+pub fn add_in_db(x51 : (Int64, @kernel.Term, Action, Db)) -> Db raise {
   match x51 {
-    (n, cst, act, Db::End_db) =>
+    (n, cst, act, Db::End_db) => {
+      let t53 = Db::Try(TryRec::{ hcst: cst, rws: act, tail: Db::End_db, })
       @lib.funpow(
-        n,
+        @lib.int63_to_int(n),
         fn(x52 : Db) -> Db raise {
           let a = x52
           Db::Need_arg(a)
         },
-        Db::Try(TryRec::{ hcst: cst, rws: act, tail: Db::End_db, }),
+        t53,
       )
+    }
     (
-      0,
+      0L,
       cst_1,
       Action::Rewrite(nrws) as act_1,
       Db::Try({ hcst, rws: Action::Rewrite(rws) as rw, tail, .. }),
@@ -860,7 +867,7 @@ pub fn add_in_db(x51 : (Int, @kernel.Term, Action, Db)) -> Db raise {
         Db::Try(TryRec::{
           hcst,
           rws: rw,
-          tail: add_in_db((0, cst_1, act_1, tail)),
+          tail: add_in_db((0L, cst_1, act_1, tail)),
         })
       }
     (n_1, cst_2, act_2, Db::Try({ hcst: hcst_1, rws: rws_1, tail: tail_1, .. })) =>
@@ -869,29 +876,30 @@ pub fn add_in_db(x51 : (Int, @kernel.Term, Action, Db)) -> Db raise {
         rws: rws_1,
         tail: add_in_db((n_1, cst_2, act_2, tail_1)),
       })
-    (0, cst_3, act_3, db) =>
+    (0L, cst_3, act_3, db) =>
       Db::Try(TryRec::{ hcst: cst_3, rws: act_3, tail: db, })
     (n_2, cst_4, act_4, Db::Need_arg(tail_2)) =>
-      Db::Need_arg(add_in_db((n_2 - 1, cst_4, act_4, tail_2)))
+      Db::Need_arg(add_in_db((@lib.sub63(n_2, 1L), cst_4, act_4, tail_2)))
   }
 }
 
 ///|
 /// `key_of`
-pub fn key_of(x53 : Rewrite) -> (String, Int, @kernel.Term) raise {
-  match x53 {
+pub fn key_of(x54 : Rewrite) -> (String, Int64, @kernel.Term) raise {
+  match x54 {
     Rewrite::Rw({ cst, lhs, .. }) => {
       let (name, _) = @kernel.dest_const(cst)
-      (name, @lib.length(lhs), cst)
+      (name, Int::to_int64(@lib.length(lhs)), cst)
     }
   }
 }
 
 ///|
 /// `is_skip`
-pub fn[TA, TB] is_skip(x54 : (TA, Fterm[TB])) -> Bool raise {
-  match x54 {
-    (_, Fterm::Const({ args, skip: Some(n), .. })) => n <= @lib.length(args)
+pub fn[TA, TB] is_skip(x55 : (TA, Fterm[TB])) -> Bool raise {
+  match x55 {
+    (_, Fterm::Const({ args, skip: Some(n), .. })) =>
+      n <= Int::to_int64(@lib.length(args))
     _ => false
   }
 }
@@ -899,16 +907,16 @@ pub fn[TA, TB] is_skip(x54 : (TA, Fterm[TB])) -> Bool raise {
 ///|
 /// `partition_skip`
 pub fn[TA] partition_skip(
-  x55 : Int?,
-  x56 : @list.List[TA],
+  x56 : Int64?,
+  x57 : @list.List[TA],
 ) -> (@list.List[TA], @list.List[TA]) raise {
-  let skip = x55
-  let args = x56
+  let skip = x56
+  let args = x57
   match skip {
     Some(n) => {
-      let len = @lib.length(args)
+      let len = Int::to_int64(@lib.length(args))
       if n <= len {
-        @lib.chop_list(len - n, args)
+        @lib.chop_list(@lib.int63_to_int(@lib.sub63(len, n)), args)
       } else {
         (@list.empty(), args)
       }
@@ -920,23 +928,25 @@ pub fn[TA] partition_skip(
 ///|
 /// `compset`
 pub(all) enum Compset {
-  Rws(@lib.OHashtbl[String, Ref[(Db, Int?)]])
+  Rws(@lib.OHashtbl[String, Ref[(Db, Int64?)]])
 }
 
 ///|
 /// `empty_rws`
-pub fn empty_rws(x57 : Unit) -> Compset raise {
-  let _ = x57
+pub fn empty_rws(x58 : Unit) -> Compset raise {
+  let _ = x58
   Compset::Rws(@lib.hashtbl_create(100))
 }
 
 ///|
 /// `assoc_clause`
-pub fn assoc_clause(x58 : Compset) -> ((String) -> Ref[(Db, Int?)] raise) raise {
-  match x58 {
+pub fn assoc_clause(
+  x59 : Compset,
+) -> ((String) -> Ref[(Db, Int64?)] raise) raise {
+  match x59 {
     Compset::Rws(rws) =>
-      fn(x59 : String) -> Ref[(Db, Int?)] raise {
-        let cst = x59
+      fn(x60 : String) -> Ref[(Db, Int64?)] raise {
+        let cst = x60
         @lib.hashtbl_find(rws, cst) catch {
           @lib.NotFound => {
             let mt = Ref::{ val: (Db::End_db, None), }
@@ -952,13 +962,13 @@ pub fn assoc_clause(x58 : Compset) -> ((String) -> Ref[(Db, Int?)] raise) raise 
 ///|
 /// `add_in_db_upd`
 pub fn add_in_db_upd(
-  x60 : Compset,
-  x61 : (String, Int, @kernel.Term),
-  x62 : Action,
+  x61 : Compset,
+  x62 : (String, Int64, @kernel.Term),
+  x63 : Action,
 ) -> Unit raise {
-  let rws = x60
-  let (name, arity, hcst) = x61
-  let act = x62
+  let rws = x61
+  let (name, arity, hcst) = x62
+  let act = x63
   match assoc_clause(rws)(name) {
     { val: (db, sk), .. } as rl => {
       rl.val = (add_in_db((arity, hcst, act, db)), sk)
@@ -971,14 +981,14 @@ pub fn add_in_db_upd(
 ///|
 /// `set_skip_name`
 pub fn set_skip_name(
-  x63 : Compset,
-) -> ((String) -> ((Int?) -> Unit raise) raise) raise {
-  match x63 {
+  x64 : Compset,
+) -> ((String) -> ((Int64?) -> Unit raise) raise) raise {
+  match x64 {
     Compset::Rws(htbl) as rws =>
-      fn(x64 : String) -> ((Int?) -> Unit raise) raise {
-        let p = x64
-        fn(x65 : Int?) -> Unit raise {
-          let sk = x65
+      fn(x65 : String) -> ((Int64?) -> Unit raise) raise {
+        let p = x65
+        fn(x66 : Int64?) -> Unit raise {
+          let sk = x66
           match assoc_clause(rws)(p) {
             { val: (db, _), .. } as rl => {
               rl.val = (db, sk)
@@ -993,11 +1003,11 @@ pub fn set_skip_name(
 
 ///|
 /// `scrub_const`
-pub fn scrub_const(x66 : Compset) -> ((@kernel.Term) -> Unit raise) raise {
-  match x66 {
+pub fn scrub_const(x67 : Compset) -> ((@kernel.Term) -> Unit raise) raise {
+  match x67 {
     Compset::Rws(htbl) =>
-      fn(x67 : @kernel.Term) -> Unit raise {
-        let c = x67
+      fn(x68 : @kernel.Term) -> Unit raise {
+        let c = x68
         let (name, _) = @kernel.dest_const(c)
         @lib.hashtbl_remove(htbl, name)
       }
@@ -1007,47 +1017,54 @@ pub fn scrub_const(x66 : Compset) -> ((@kernel.Term) -> Unit raise) raise {
 ///|
 /// `from_term`
 pub fn from_term(
-  x68 : Compset,
-  x69 : @list.List[@kernel.Term],
-  x70 : @kernel.Term,
+  x69 : Compset,
+  x70 : @list.List[@kernel.Term],
+  x71 : @kernel.Term,
 ) -> Dterm[Db] raise {
-  let (rws, env, t) = (x68, x69, x70)
+  let (rws, env, t) = (x69, x70, x71)
   let down = (
-    x71 : @list.List[@kernel.Term],
-    x72 : @kernel.Term,
-    x73 : Stack[(@list.List[@kernel.Term], @kernel.Term), Dterm[Db], Unit],
-  ) => down_l(rws, x71, x72, x73)
+    x72 : @list.List[@kernel.Term],
+    x73 : @kernel.Term,
+    x74 : Stack[(@list.List[@kernel.Term], @kernel.Term), Dterm[Db], Unit],
+  ) => down_l(rws, x72, x73, x74)
   let up = (
-    x74 : (
+    x75 : (
       Dterm[Db],
       Stack[(@list.List[@kernel.Term], @kernel.Term), Dterm[Db], Unit],
     ),
-  ) => up_l(rws, x74)
+  ) => up_l(rws, x75)
   down(env, t, Stack::Ztop)
 }
 
 ///|
 fn down_l(
   rws : Compset,
-  x71 : @list.List[@kernel.Term],
-  x72 : @kernel.Term,
-  x73 : Stack[(@list.List[@kernel.Term], @kernel.Term), Dterm[Db], Unit],
+  x72 : @list.List[@kernel.Term],
+  x73 : @kernel.Term,
+  x74 : Stack[(@list.List[@kernel.Term], @kernel.Term), Dterm[Db], Unit],
 ) -> Dterm[Db] raise {
   let down = (
-    x71 : @list.List[@kernel.Term],
-    x72 : @kernel.Term,
-    x73 : Stack[(@list.List[@kernel.Term], @kernel.Term), Dterm[Db], Unit],
-  ) => down_l(rws, x71, x72, x73)
+    x72 : @list.List[@kernel.Term],
+    x73 : @kernel.Term,
+    x74 : Stack[(@list.List[@kernel.Term], @kernel.Term), Dterm[Db], Unit],
+  ) => down_l(rws, x72, x73, x74)
   let up = (
-    x74 : (
+    x75 : (
       Dterm[Db],
       Stack[(@list.List[@kernel.Term], @kernel.Term), Dterm[Db], Unit],
     ),
-  ) => up_l(rws, x74)
-  let (env_1, t_1, c) = (x71, x72, x73)
+  ) => up_l(rws, x75)
+  let (env_1, t_1, c) = (x72, x73, x74)
   match t_1 {
     @kernel.Term::Var(_, _) =>
-      up((Dterm::Bv(@lib.index(t_1, env_1)) catch { _ => Dterm::Fv }, c))
+      up(
+        (
+          Dterm::Bv(Int::to_int64(@lib.index(t_1, env_1))) catch {
+            _ => Dterm::Fv
+          },
+          c,
+        ),
+      )
     @kernel.Term::Const(name, _) =>
       up((Dterm::Cst(t_1, assoc_clause(rws)(name)), c))
     @kernel.Term::Comb(rator, rand) =>
@@ -1060,23 +1077,23 @@ fn down_l(
 ///|
 fn up_l(
   rws : Compset,
-  x74 : (
+  x75 : (
     Dterm[Db],
     Stack[(@list.List[@kernel.Term], @kernel.Term), Dterm[Db], Unit],
   ),
 ) -> Dterm[Db] raise {
   let down = (
-    x71 : @list.List[@kernel.Term],
-    x72 : @kernel.Term,
-    x73 : Stack[(@list.List[@kernel.Term], @kernel.Term), Dterm[Db], Unit],
-  ) => down_l(rws, x71, x72, x73)
+    x72 : @list.List[@kernel.Term],
+    x73 : @kernel.Term,
+    x74 : Stack[(@list.List[@kernel.Term], @kernel.Term), Dterm[Db], Unit],
+  ) => down_l(rws, x72, x73, x74)
   let up = (
-    x74 : (
+    x75 : (
       Dterm[Db],
       Stack[(@list.List[@kernel.Term], @kernel.Term), Dterm[Db], Unit],
     ),
-  ) => up_l(rws, x74)
-  match x74 {
+  ) => up_l(rws, x75)
+  match x75 {
     (dt, Stack::Ztop) => dt
     (dt_1, Stack::Zrator((env_2, arg), c_1)) =>
       down(env_2, arg, Stack::Zrand(dt_1, c_1))
@@ -1087,9 +1104,9 @@ fn up_l(
 
 ///|
 /// `mk_rewrite`
-pub fn mk_rewrite(x75 : Compset, x76 : @kernel.Thm) -> Rewrite raise {
-  let rws = x75
-  let eq_thm = x76
+pub fn mk_rewrite(x76 : Compset, x77 : @kernel.Thm) -> Rewrite raise {
+  let rws = x76
+  let eq_thm = x77
   let (lhs, rhs) = @kernel.dest_eq(@kernel.concl(eq_thm))
   let (fv, cst, pats) = check_arg_form(lhs)
   let gen_thm = @lib.itlist(@bool.gen, fv, eq_thm)
@@ -1097,7 +1114,7 @@ pub fn mk_rewrite(x75 : Compset, x76 : @kernel.Thm) -> Rewrite raise {
   Rewrite::Rw(RewriteRec::{
     cst,
     lhs: pats,
-    npv: @lib.length(fv),
+    npv: Int::to_int64(@lib.length(fv)),
     rhs: rhsc,
     thm: gen_thm,
   })
@@ -1105,36 +1122,36 @@ pub fn mk_rewrite(x75 : Compset, x76 : @kernel.Thm) -> Rewrite raise {
 
 ///|
 /// `unsuitable`
-pub fn unsuitable(x77 : @kernel.Thm) -> Bool raise {
-  let th = x77
+pub fn unsuitable(x78 : @kernel.Thm) -> Bool raise {
+  let th = x78
   let (l, r) = @kernel.dest_eq(@kernel.concl(th))
-  @lib.can((x78 : @kernel.Term) => @drule.term_match(@list.empty(), l, x78), r)
+  @lib.can((x79 : @kernel.Term) => @drule.term_match(@list.empty(), l, x79), r)
 }
 
 ///|
 /// `enter_thm`
-pub fn enter_thm(x79 : Compset, x80 : @kernel.Thm) -> Unit raise {
-  let rws = x79
-  let thm0 = x80
+pub fn enter_thm(x80 : Compset, x81 : @kernel.Thm) -> Unit raise {
+  let rws = x80
+  let thm0 = x81
   let thm = eq_intro(thm0)
   if unsuitable(thm) {
     ()
   } else {
     let rw = mk_rewrite(rws, thm)
-    let t81 = Action::Rewrite(@list.List([rw]))
-    add_in_db_upd(rws, key_of(rw), t81)
+    let t82 = Action::Rewrite(@list.List([rw]))
+    add_in_db_upd(rws, key_of(rw), t82)
   }
 }
 
 ///|
 /// `add_thms`
-pub fn add_thms(x82 : @list.List[@kernel.Thm], x83 : Compset) -> Unit raise {
-  let lthm = x82
-  let rws = x83
+pub fn add_thms(x83 : @list.List[@kernel.Thm], x84 : Compset) -> Unit raise {
+  let lthm = x83
+  let rws = x84
   @lib.do_list(
-    fn(x86 : @kernel.Thm) -> Unit raise {
-      (x85 => @lib.do_list((x84 : @kernel.Thm) => enter_thm(rws, x84), x85))(
-        body_conjuncts(x86),
+    fn(x87 : @kernel.Thm) -> Unit raise {
+      (x86 => @lib.do_list((x85 : @kernel.Thm) => enter_thm(rws, x85), x86))(
+        body_conjuncts(x87),
       )
     },
     lthm,
@@ -1144,19 +1161,19 @@ pub fn add_thms(x82 : @list.List[@kernel.Thm], x83 : Compset) -> Unit raise {
 ///|
 /// `add_extern`
 pub fn add_extern(
-  x87 : (@kernel.Term, Int, (@kernel.Term) -> (@kernel.Thm, Fterm[Db]) raise),
-  x88 : Compset,
+  x88 : (@kernel.Term, Int64, (@kernel.Term) -> (@kernel.Thm, Fterm[Db]) raise),
+  x89 : Compset,
 ) -> Unit raise {
-  let (cst, arity, fconv) = x87
-  let rws = x88
+  let (cst, arity, fconv) = x88
+  let rws = x89
   let (name, _) = @kernel.dest_const(cst)
   add_in_db_upd(rws, (name, arity, cst), Action::Conv(fconv))
 }
 
 ///|
 /// `new_rws`
-pub fn new_rws(x89 : Unit) -> Compset raise {
-  let _ = x89
+pub fn new_rws(x90 : Unit) -> Compset raise {
+  let _ = x90
   let rws = empty_rws(())
   add_thms(@list.List([@theorems.refl_clause()]), rws)
   rws
@@ -1164,8 +1181,8 @@ pub fn new_rws(x89 : Unit) -> Compset raise {
 
 ///|
 /// `from_list`
-pub fn from_list(x90 : @list.List[@kernel.Thm]) -> Compset raise {
-  let lthm = x90
+pub fn from_list(x91 : @list.List[@kernel.Thm]) -> Compset raise {
+  let lthm = x91
   let rws = new_rws(())
   add_thms(lthm, rws)
   rws
@@ -1173,51 +1190,51 @@ pub fn from_list(x90 : @list.List[@kernel.Thm]) -> Compset raise {
 
 ///|
 /// `scrub_thms`
-pub fn scrub_thms(x91 : @list.List[@kernel.Thm], x92 : Compset) -> Unit raise {
-  let lthm = x91
-  let rws = x92
+pub fn scrub_thms(x92 : @list.List[@kernel.Thm], x93 : Compset) -> Unit raise {
+  let lthm = x92
+  let rws = x93
   let tmlist = @lib.map(
-    fn(x95 : @kernel.Thm) -> @kernel.Term raise {
-      (fn(x94 : @list.List[@kernel.Thm]) -> @kernel.Term raise {
-        (fn(x93 : @kernel.Thm) -> @kernel.Term raise { @kernel.concl(x93) })(
-          @lib.hd(x94),
+    fn(x96 : @kernel.Thm) -> @kernel.Term raise {
+      (fn(x95 : @list.List[@kernel.Thm]) -> @kernel.Term raise {
+        (fn(x94 : @kernel.Thm) -> @kernel.Term raise { @kernel.concl(x94) })(
+          @lib.hd(x95),
         )
-      })(body_conjuncts(x95))
+      })(body_conjuncts(x96))
     },
     lthm,
   )
   let clist = @lib.map(
-    fn(x103 : @kernel.Term) -> @kernel.Term raise {
+    fn(x104 : @kernel.Term) -> @kernel.Term raise {
       (fn(
-        x101 : (@list.List[@kernel.Term], @kernel.Term),
+        x102 : (@list.List[@kernel.Term], @kernel.Term),
       ) -> @kernel.Term raise {
-        (fn(x99 : @kernel.Term) -> @kernel.Term raise {
-          (fn(x98 : @kernel.Term) -> @kernel.Term raise {
+        (fn(x100 : @kernel.Term) -> @kernel.Term raise {
+          (fn(x99 : @kernel.Term) -> @kernel.Term raise {
             (fn(
-              x96 : (@kernel.Term, @list.List[@kernel.Term]),
+              x97 : (@kernel.Term, @list.List[@kernel.Term]),
             ) -> @kernel.Term raise {
-              x96.0
+              x97.0
             })(
               (fn(
-                x97 : @kernel.Term,
+                x98 : @kernel.Term,
               ) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
-                @basics.strip_comb(x97)
-              })(x98),
+                @basics.strip_comb(x98)
+              })(x99),
             )
-          })(@equal.lhs(x99))
+          })(@equal.lhs(x100))
         })(
           (fn(
-            x100 : (@list.List[@kernel.Term], @kernel.Term),
+            x101 : (@list.List[@kernel.Term], @kernel.Term),
           ) -> @kernel.Term raise {
-            x100.1
-          })(x101),
+            x101.1
+          })(x102),
         )
       })(
         (fn(
-          x102 : @kernel.Term,
+          x103 : @kernel.Term,
         ) -> (@list.List[@kernel.Term], @kernel.Term) raise {
-          @basics.strip_forall(x102)
-        })(x103),
+          @basics.strip_forall(x103)
+        })(x104),
       )
     },
     tmlist,
@@ -1228,19 +1245,19 @@ pub fn scrub_thms(x91 : @list.List[@kernel.Thm], x92 : Compset) -> Unit raise {
 ///|
 /// `rws_of`
 pub fn rws_of(
-  x104 : Compset,
+  x105 : Compset,
 ) -> @list.List[(@kernel.Term, @list.List[@kernel.Thm])] raise {
-  match x104 {
+  match x105 {
     Compset::Rws(htbl) => {
       let dblist = @lib.hashtbl_fold(
         fn(
-          x105 : String,
-          x106 : Ref[(Db, Int?)],
-          x107 : @list.List[Db],
+          x106 : String,
+          x107 : Ref[(Db, Int64?)],
+          x108 : @list.List[Db],
         ) -> @list.List[Db] raise {
-          match x106 {
+          match x107 {
             { val: (db, _), .. } => {
-              let r = x107
+              let r = x108
               r.prepend(db)
             }
           }
@@ -1248,8 +1265,8 @@ pub fn rws_of(
         htbl,
         @list.empty(),
       )
-      fn get_actions(x108 : Db) -> @list.List[(@kernel.Term, Action)] raise {
-        let db_1 = x108
+      fn get_actions(x109 : Db) -> @list.List[(@kernel.Term, Action)] raise {
+        let db_1 = x109
         match db_1 {
           Db::End_db => @list.empty()
           Db::Need_arg(db_p) => get_actions(db_p)
@@ -1259,13 +1276,13 @@ pub fn rws_of(
       }
       let actionlist = @lib.flat(@lib.map(get_actions, dblist))
       let dest : (Rewrite) -> @kernel.Thm raise = fn(
-        x109 : Rewrite,
+        x110 : Rewrite,
       ) -> @kernel.Thm raise {
-        match x109 {
+        match x110 {
           Rewrite::Rw({ thm, .. }) => thm
         }
       }
-      let rwlist = @lib.map(x110 => dest_action_l(dest, x110), actionlist)
+      let rwlist = @lib.map(x111 => dest_action_l(dest, x111), actionlist)
       rwlist
     }
   }
@@ -1274,9 +1291,9 @@ pub fn rws_of(
 ///|
 fn[TA] dest_action_l(
   dest : (Rewrite) -> @kernel.Thm raise,
-  x110 : (TA, Action),
+  x111 : (TA, Action),
 ) -> (TA, @list.List[@kernel.Thm]) raise {
-  match x110 {
+  match x111 {
     (hcst_1, Action::Rewrite(rws_1)) => (hcst_1, @lib.map(dest, rws_1))
     (hcst_2, Action::Conv(_)) => (hcst_2, @list.empty())
   }
@@ -1292,20 +1309,20 @@ pub(all) enum Transform {
 ///|
 /// `deplist`
 pub fn deplist(
-  x111 : Compset,
+  x112 : Compset,
 ) -> @list.List[(String, @list.List[Transform])] raise {
-  match x111 {
+  match x112 {
     Compset::Rws(htbl) => {
       let dblist = @lib.hashtbl_fold(
         fn(
-          x112 : String,
-          x113 : Ref[(Db, Int?)],
-          x114 : @list.List[(String, Db)],
+          x113 : String,
+          x114 : Ref[(Db, Int64?)],
+          x115 : @list.List[(String, Db)],
         ) -> @list.List[(String, Db)] raise {
-          let s = x112
-          match x113 {
+          let s = x113
+          match x114 {
             { val: (db, _), .. } => {
-              let r = x114
+              let r = x115
               r.prepend((s, db))
             }
           }
@@ -1313,8 +1330,8 @@ pub fn deplist(
         htbl,
         @list.empty(),
       )
-      fn get_actions(x115 : Db) -> @list.List[Action] raise {
-        let db_1 = x115
+      fn get_actions(x116 : Db) -> @list.List[Action] raise {
+        let db_1 = x116
         match db_1 {
           Db::End_db => @list.empty()
           Db::Need_arg(db_p) => get_actions(db_p)
@@ -1322,32 +1339,32 @@ pub fn deplist(
         }
       }
       let actionlist = @lib.map(
-        fn(x116 : (String, Db)) -> (String, @list.List[Action]) raise {
-          let (s_1, db_2) = x116
+        fn(x117 : (String, Db)) -> (String, @list.List[Action]) raise {
+          let (s_1, db_2) = x117
           (s_1, get_actions(db_2))
         },
         dblist,
       )
       let dest : (Rewrite) -> @kernel.Thm raise = fn(
-        x117 : Rewrite,
+        x118 : Rewrite,
       ) -> @kernel.Thm raise {
-        match x117 {
+        match x118 {
           Rewrite::Rw({ thm, .. }) => thm
         }
       }
       let dest_action : (Action) -> Transform raise = fn(
-        x118 : Action,
+        x119 : Action,
       ) -> Transform raise {
-        match x118 {
+        match x119 {
           Action::Rewrite(rws_1) => Transform::Rrules(@lib.map(dest, rws_1))
           Action::Conv(ecnv) => Transform::Conversion(ecnv)
         }
       }
       let rwlist = @lib.map(
         fn(
-          x119 : (String, @list.List[Action]),
+          x120 : (String, @list.List[Action]),
         ) -> (String, @list.List[Transform]) raise {
-          let (s_2, act) = x119
+          let (s_2, act) = x120
           (s_2, @lib.map(dest_action, act))
         },
         actionlist,
@@ -1366,13 +1383,13 @@ pub(all) suberror No_match {
 ///|
 /// `match_const`
 pub fn[TA] match_const(
-  x120 : (TA, @list.List[(@kernel.HolType, @kernel.HolType)]),
-  x121 : @kernel.Term,
+  x121 : (TA, @list.List[(@kernel.HolType, @kernel.HolType)]),
   x122 : @kernel.Term,
+  x123 : @kernel.Term,
 ) -> (TA, @list.List[(@kernel.HolType, @kernel.HolType)]) raise {
-  let (bds, tbds) = x120
-  let pc = x121
-  let c = x122
+  let (bds, tbds) = x121
+  let pc = x122
+  let c = x123
   let (name, ty) = @kernel.dest_const(pc)
   let (name_p, ty_p) = @kernel.dest_const(c)
   if name == name_p {
@@ -1387,21 +1404,21 @@ pub fn[TA] match_const(
 ///|
 /// `match_var`
 pub fn[TA, TB] match_var(
-  x123 : (FixedArray[(@kernel.Term, TA)?], TB),
-  x124 : Int,
-  x125 : (@kernel.Term, TA),
+  x124 : (FixedArray[(@kernel.Term, TA)?], TB),
+  x125 : Int64,
+  x126 : (@kernel.Term, TA),
 ) -> (FixedArray[(@kernel.Term, TA)?], TB) raise {
-  let (bds, tbds) = x123
-  let var_ = x124
-  let arg = x125
-  let _ = match @lib.array_get(bds, var_) {
+  let (bds, tbds) = x124
+  let var_ = x125
+  let arg = x126
+  let _ = match @lib.array_get(bds, @lib.int63_to_int(var_)) {
     Some((tm, _)) =>
       if @basics.aconv(tm, arg.0) {
         ()
       } else {
         raise No_match::No_match
       }
-    None => @lib.array_set(bds, var_, Some(arg))
+    None => @lib.array_set(bds, @lib.int63_to_int(var_), Some(arg))
   }
   (bds, tbds)
 }
@@ -1409,19 +1426,19 @@ pub fn[TA, TB] match_var(
 ///|
 /// `match_list`
 pub fn[TA] match_list(
-  x126 : (
+  x127 : (
     FixedArray[(@kernel.Term, Fterm[TA])?],
     @list.List[(@kernel.HolType, @kernel.HolType)],
   ),
-  x127 : @list.List[Pattern],
-  x128 : @list.List[(@kernel.Term, Fterm[TA])],
+  x128 : @list.List[Pattern],
+  x129 : @list.List[(@kernel.Term, Fterm[TA])],
 ) -> (
   FixedArray[(@kernel.Term, Fterm[TA])?],
   @list.List[(@kernel.HolType, @kernel.HolType)],
 ) raise {
-  let bds = x126
-  let pats = x127
-  let args = x128
+  let bds = x127
+  let pats = x128
+  let args = x129
   match (pats, args) {
     (More(pat, tail=pats_1), More(arg, tail=args_1)) =>
       match_list(match_solve(bds, pat, arg), pats_1, args_1)
@@ -1433,24 +1450,24 @@ pub fn[TA] match_list(
 ///|
 /// `match_solve`
 pub fn[TA] match_solve(
-  x129 : (
+  x130 : (
     FixedArray[(@kernel.Term, Fterm[TA])?],
     @list.List[(@kernel.HolType, @kernel.HolType)],
   ),
-  x130 : Pattern,
-  x131 : (@kernel.Term, Fterm[TA]),
+  x131 : Pattern,
+  x132 : (@kernel.Term, Fterm[TA]),
 ) -> (
   FixedArray[(@kernel.Term, Fterm[TA])?],
   @list.List[(@kernel.HolType, @kernel.HolType)],
 ) raise {
-  let bds_1 = x129
-  let pat_1 = x130
-  let arg_1 = x131
+  let bds_1 = x130
+  let pat_1 = x131
+  let arg_1 = x132
   match (pat_1, arg_1) {
     (Pattern::Pvar(var_), arg_2) => match_var(bds_1, var_, arg_2)
     (Pattern::Papp(phead, pargs), (_, Fterm::Const({ head, args: args_2, .. }))) => {
-      let t132 = @lib.length(args_2)
-      if @lib.length(pargs) == t132 {
+      let t133 = Int::to_int64(@lib.length(args_2))
+      if Int::to_int64(@lib.length(pargs)) == t133 {
         match_list(match_const(bds_1, phead, head), pargs, args_2)
       } else {
         raise No_match::No_match
@@ -1473,16 +1490,16 @@ pub(all) struct RuleInst[TA] {
 ///|
 /// `try_rwn`
 pub fn[TA] try_rwn(
-  x133 : @list.List[(@kernel.HolType, @kernel.HolType)],
-  x134 : @list.List[(@kernel.Term, Fterm[TA])],
+  x134 : @list.List[(@kernel.HolType, @kernel.HolType)],
+  x135 : @list.List[(@kernel.Term, Fterm[TA])],
 ) -> ((@list.List[Rewrite]) -> RuleInst[TA] raise) raise {
-  let ibds = x133
-  let lt = x134
-  fn try_rec(x136 : @list.List[Rewrite]) -> RuleInst[TA] raise {
-    match x136 {
+  let ibds = x134
+  let lt = x135
+  fn try_rec(x137 : @list.List[Rewrite]) -> RuleInst[TA] raise {
+    match x137 {
       Empty => raise No_match::No_match
       More(Rewrite::Rw({ lhs, npv, .. }) as rw, tail=rwn) => {
-        let env = @lib.array_make(npv, None)
+        let env = @lib.array_make(@lib.int63_to_int(npv), None)
         RuleInst::{ rule: rw, inst: match_list((env, ibds), lhs, lt), } catch {
           No_match::No_match => try_rec(rwn)
           e => raise e
@@ -1496,11 +1513,11 @@ pub fn[TA] try_rwn(
 ///|
 /// `comb_ct`
 pub fn comb_ct(
-  x137 : CstRec[Db],
-  x138 : (@kernel.Term, Fterm[Db]),
+  x138 : CstRec[Db],
+  x139 : (@kernel.Term, Fterm[Db]),
 ) -> Fterm[Db] raise {
-  let cst = x137
-  let arg = x138
+  let cst = x138
+  let arg = x139
   match cst {
     { head, args, rws: Db::Need_arg(tail), skip, .. } =>
       Fterm::Const(CstRec::{ head, args: args.prepend(arg), rws: tail, skip, })
@@ -1519,14 +1536,14 @@ pub fn comb_ct(
 ///|
 /// `mk_clos`
 pub fn[TA] mk_clos(
-  x139 : @list.List[Fterm[TA]],
-  x140 : Dterm[TA],
+  x140 : @list.List[Fterm[TA]],
+  x141 : Dterm[TA],
 ) -> Fterm[TA] raise {
-  let (env, t) = (x139, x140)
+  let (env, t) = (x140, x141)
   match t {
     Dterm::Cst(hc, { val: (db, b), .. }) =>
       Fterm::Const(CstRec::{ head: hc, args: @list.empty(), rws: db, skip: b, })
-    Dterm::Bv(i) => @lib.list_nth(env, i)
+    Dterm::Bv(i) => @lib.list_nth(env, @lib.int63_to_int(i))
     Dterm::Fv => Fterm::Neutr
     _ => Fterm::Clos(ClosRec::{ env, term: t, })
   }
@@ -1535,11 +1552,11 @@ pub fn[TA] mk_clos(
 ///|
 /// `inst_one_var`
 pub fn[TA] inst_one_var(
-  x141 : (@kernel.Thm, @list.List[TA]),
-  x142 : (@kernel.Term, TA)?,
+  x142 : (@kernel.Thm, @list.List[TA]),
+  x143 : (@kernel.Term, TA)?,
 ) -> (@kernel.Thm, @list.List[TA]) raise {
-  let (thm, lv) = x141
-  match x142 {
+  let (thm, lv) = x142
+  match x143 {
     Some((tm, v)) => (@bool.spec(tm, thm), lv.prepend(v))
     None => raise Dead_code::Dead_code("inst_rw")
   }
@@ -1548,11 +1565,11 @@ pub fn[TA] inst_one_var(
 ///|
 /// `inst_rw`
 pub fn inst_rw(
-  x143 : @kernel.Thm,
-  x144 : Bool,
-  x145 : RuleInst[Db],
+  x144 : @kernel.Thm,
+  x145 : Bool,
+  x146 : RuleInst[Db],
 ) -> (@kernel.Thm, Fterm[Db]) raise {
-  match (x143, x144, x145) {
+  match (x144, x145, x146) {
     (
       th,
       monitoring,
@@ -1572,8 +1589,8 @@ pub fn inst_rw(
           ()
         }) {
         _ => {
-          let t146 = mk_clos(venv, tirhs)
-          (trans_thm(th)(spec_thm), t146)
+          let t147 = mk_clos(venv, tirhs)
+          (trans_thm(th)(spec_thm), t147)
         }
       }
     }
@@ -1617,9 +1634,9 @@ pub fn stoppers() -> Ref[((@kernel.Term) -> Bool raise)?] {
 ///|
 /// `reduce_cst`
 pub fn reduce_cst(
-  x147 : (@kernel.Thm, CstRec[Db]),
+  x148 : (@kernel.Thm, CstRec[Db]),
 ) -> (Bool, (@kernel.Thm, Fterm[Db])) raise {
-  match x147 {
+  match x148 {
     (
       th,
       {
@@ -1753,7 +1770,7 @@ pub type CbvStack = Stack[
 ///|
 /// `stack_out`
 pub fn[TA, TB, TC, TD, TE, TF] stack_out(
-  x148 : (
+  x149 : (
     TA,
     Stack[
       ((TA) -> ((TB) -> TA raise) raise, (TB, TC)),
@@ -1762,7 +1779,7 @@ pub fn[TA, TB, TC, TD, TE, TF] stack_out(
     ],
   ),
 ) -> TA raise {
-  match x148 {
+  match x149 {
     (th, Stack::Ztop) => th
     (th_1, Stack::Zrator((mka, (thb, _)), ctx)) =>
       stack_out((mka(th_1)(thb), ctx))
@@ -1775,19 +1792,19 @@ pub fn[TA, TB, TC, TD, TE, TF] stack_out(
 ///|
 /// `initial_state`
 pub fn initial_state(
-  x149 : Compset,
-  x150 : @kernel.Term,
+  x150 : Compset,
+  x151 : @kernel.Term,
 ) -> ((@kernel.Thm, Fterm[Db]), CbvStack) raise {
-  let rws = x149
-  let t = x150
-  let t151 = mk_clos(@list.empty(), from_term(rws, @list.empty(), t))
-  ((refl_thm(t), t151), Stack::Ztop)
+  let rws = x150
+  let t = x151
+  let t152 = mk_clos(@list.empty(), from_term(rws, @list.empty(), t))
+  ((refl_thm(t), t152), Stack::Ztop)
 }
 
 ///|
 /// `cbv_wk`
 pub fn[TA] cbv_wk(
-  x152 : (
+  x153 : (
     (@kernel.Thm, Fterm[Db]),
     Stack[
       (
@@ -1817,12 +1834,12 @@ pub fn[TA] cbv_wk(
     TA,
   ],
 ) raise {
-  match x152 {
+  match x153 {
     ((th, Fterm::Clos({ env, term: Dterm::App(a, args), .. })), stk) => {
       let (tha, stka) = @lib.rev_itlist(
         (
-          x155 : Dterm[Db],
-          x156 : (
+          x156 : Dterm[Db],
+          x157 : (
             @kernel.Thm,
             Stack[
               (
@@ -1839,19 +1856,19 @@ pub fn[TA] cbv_wk(
           ),
         ) => {
           push_in_stk(
-            (x154 : Dterm[Db]) => {
+            (x155 : Dterm[Db]) => {
               @lib.curry(
                 fn(
-                  x153 : (@list.List[Fterm[Db]], Dterm[Db]),
+                  x154 : (@list.List[Fterm[Db]], Dterm[Db]),
                 ) -> Fterm[Db] raise {
-                  mk_clos(x153.0, x153.1)
+                  mk_clos(x154.0, x154.1)
                 },
                 env,
-                x154,
+                x155,
               )
             },
-            x155,
             x156,
+            x157,
           )
         },
         args,
@@ -1863,8 +1880,8 @@ pub fn[TA] cbv_wk(
       (th_1, Fterm::Clos({ env: env_1, term: Dterm::Abs(body), .. })),
       Stack::Zrator((mka, (thb, cl)), s_p),
     ) => {
-      let t157 = mk_clos(env_1.prepend(cl), body)
-      cbv_wk(((beta_thm(mka(th_1)(thb)), t157), s_p))
+      let t158 = mk_clos(env_1.prepend(cl), body)
+      cbv_wk(((beta_thm(mka(th_1)(thb)), t158), s_p))
     }
     ((th_2, Fterm::Const(cargs)), stk_1) => {
       let (reduced, clos) = reduce_cst((th_2, cargs))
@@ -1881,7 +1898,7 @@ pub fn[TA] cbv_wk(
 ///|
 /// `cbv_up`
 pub fn[TA] cbv_up(
-  x158 : (
+  x159 : (
     (@kernel.Thm, Fterm[Db]),
     Stack[
       (
@@ -1911,7 +1928,7 @@ pub fn[TA] cbv_up(
     TA,
   ],
 ) raise {
-  match x158 {
+  match x159 {
     (hcl, Stack::Zrator((mka_1, clos_2), ctx)) => {
       let new_state = (clos_2, Stack::Zrand((mka_1, false, hcl), ctx))
       if is_skip(hcl) {
@@ -1924,8 +1941,8 @@ pub fn[TA] cbv_up(
       (thb_1, v),
       Stack::Zrand((mka_2, false, (th_3, Fterm::Const(cargs_1))), stk_3),
     ) => {
-      let t159 = comb_ct(cargs_1, (rhs_concl(thb_1), v))
-      cbv_wk(((mka_2(th_3)(thb_1), t159), stk_3))
+      let t160 = comb_ct(cargs_1, (rhs_concl(thb_1), v))
+      cbv_wk(((mka_2(th_3)(thb_1), t160), stk_3))
     }
     (
       (thb_2, Fterm::Neutr),
@@ -1938,7 +1955,7 @@ pub fn[TA] cbv_up(
 ///|
 /// `strong`
 pub fn strong(
-  x160 : (
+  x161 : (
     (@kernel.Thm, Fterm[Db]),
     Stack[
       (
@@ -1954,7 +1971,7 @@ pub fn strong(
     ],
   ),
 ) -> @kernel.Thm raise {
-  match x160 {
+  match x161 {
     ((th, Fterm::Clos({ env, term: Dterm::Abs(t), .. })), stk) => {
       let (thb, stk_p) = push_lam_in_stk(th, stk)
       strong(cbv_wk(((thb, mk_clos(env.prepend(Fterm::Neutr), t)), stk_p)))
@@ -1964,8 +1981,8 @@ pub fn strong(
       let (argssk, argsrd) = partition_skip(skip, args)
       let (th_p, stk_p_1) = @lib.rev_itlist(
         (
-          x162 : (@kernel.Term, Fterm[Db]),
-          x163 : (
+          x163 : (@kernel.Term, Fterm[Db]),
+          x164 : (
             @kernel.Thm,
             Stack[
               (
@@ -1982,9 +1999,9 @@ pub fn strong(
           ),
         ) => {
           push_skip_stk(
-            fn(x161 : (@kernel.Term, Fterm[Db])) -> Fterm[Db] raise { x161.1 },
-            x162,
+            fn(x162 : (@kernel.Term, Fterm[Db])) -> Fterm[Db] raise { x162.1 },
             x163,
+            x164,
           )
         },
         argssk,
@@ -1992,8 +2009,8 @@ pub fn strong(
       )
       let (th_p_p, stk_p_p) = @lib.rev_itlist(
         (
-          x165 : (@kernel.Term, Fterm[Db]),
-          x166 : (
+          x166 : (@kernel.Term, Fterm[Db]),
+          x167 : (
             @kernel.Thm,
             Stack[
               (
@@ -2010,9 +2027,9 @@ pub fn strong(
           ),
         ) => {
           push_in_stk(
-            fn(x164 : (@kernel.Term, Fterm[Db])) -> Fterm[Db] raise { x164.1 },
-            x165,
+            fn(x165 : (@kernel.Term, Fterm[Db])) -> Fterm[Db] raise { x165.1 },
             x166,
+            x167,
           )
         },
         argsrd,
@@ -2027,7 +2044,7 @@ pub fn strong(
 ///|
 /// `strong_up`
 pub fn strong_up(
-  x167 : (
+  x168 : (
     @kernel.Thm,
     Stack[
       (
@@ -2043,7 +2060,7 @@ pub fn strong_up(
     ],
   ),
 ) -> @kernel.Thm raise {
-  match x167 {
+  match x168 {
     (th_3, Stack::Ztop) => th_3
     (th_4, Stack::Zrand((mka, false, (tha, Fterm::Neutr)), ctx)) =>
       strong(cbv_wk(((mka(tha)(th_4), Fterm::Neutr), ctx)))
@@ -2063,11 +2080,11 @@ pub fn strong_up(
 
 ///|
 /// `CBV_CONV`
-pub fn cbv_conv(x168 : Compset) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
-  let rws = x168
-  fn(x173 : @kernel.Term) -> @kernel.Thm raise {
+pub fn cbv_conv(x169 : Compset) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
+  let rws = x169
+  fn(x174 : @kernel.Term) -> @kernel.Thm raise {
     (fn(
-      x171 : (
+      x172 : (
         (@kernel.Thm, Fterm[Db]),
         Stack[
           (
@@ -2084,7 +2101,7 @@ pub fn cbv_conv(x168 : Compset) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       ),
     ) -> @kernel.Thm raise {
       (fn(
-        x170 : (
+        x171 : (
           (@kernel.Thm, Fterm[Db]),
           Stack[
             (
@@ -2100,21 +2117,21 @@ pub fn cbv_conv(x168 : Compset) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
           ],
         ),
       ) -> @kernel.Thm raise {
-        evaluate(strong(x170))
-      })(cbv_wk(x171))
-    })(((x172 : @kernel.Term) => initial_state(rws, x172))(x173))
+        evaluate(strong(x171))
+      })(cbv_wk(x172))
+    })(((x173 : @kernel.Term) => initial_state(rws, x173))(x174))
   }
 }
 
 ///|
 /// `WEAK_CBV_CONV`
 pub fn weak_cbv_conv(
-  x174 : Compset,
+  x175 : Compset,
 ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
-  let rws = x174
-  fn(x180 : @kernel.Term) -> @kernel.Thm raise {
+  let rws = x175
+  fn(x181 : @kernel.Term) -> @kernel.Thm raise {
     (fn(
-      x178 : (
+      x179 : (
         (@kernel.Thm, Fterm[Db]),
         Stack[
           (
@@ -2131,7 +2148,7 @@ pub fn weak_cbv_conv(
       ),
     ) -> @kernel.Thm raise {
       (fn(
-        x177 : (
+        x178 : (
           (@kernel.Thm, Fterm[Db]),
           Stack[
             (
@@ -2149,7 +2166,7 @@ pub fn weak_cbv_conv(
       ) -> @kernel.Thm raise {
         evaluate(
           (fn(
-            x176 : (
+            x177 : (
               (@kernel.Thm, Fterm[Db]),
               Stack[
                 (
@@ -2165,25 +2182,25 @@ pub fn weak_cbv_conv(
               ],
             ),
           ) -> @kernel.Thm raise {
-            let ((th, _), stk) = x176
+            let ((th, _), stk) = x177
             stack_out((th, stk))
-          })(x177),
+          })(x178),
         )
-      })(cbv_wk(x178))
-    })(((x179 : @kernel.Term) => initial_state(rws, x179))(x180))
+      })(cbv_wk(x179))
+    })(((x180 : @kernel.Term) => initial_state(rws, x180))(x181))
   }
 }
 
 ///|
 /// `extern_of_conv`
 pub fn[TA] extern_of_conv(
-  x181 : Compset,
-  x182 : (TA) -> @kernel.Thm raise,
-  x183 : TA,
+  x182 : Compset,
+  x183 : (TA) -> @kernel.Thm raise,
+  x184 : TA,
 ) -> (@kernel.Thm, Fterm[Db]) raise {
-  let rws = x181
-  let conv = x182
-  let tm = x183
+  let rws = x182
+  let conv = x183
+  let tm = x184
   let thm = conv(tm)
   (
     thm,
@@ -2197,23 +2214,27 @@ pub fn[TA] extern_of_conv(
 ///|
 /// `add_conv`
 pub fn add_conv(
-  x184 : (@kernel.Term, Int, (@kernel.Term) -> @kernel.Thm raise),
-  x185 : Compset,
+  x185 : (@kernel.Term, Int64, (@kernel.Term) -> @kernel.Thm raise),
+  x186 : Compset,
 ) -> Unit raise {
-  let (cst, arity, conv) = x184
-  let rws = x185
+  let (cst, arity, conv) = x185
+  let rws = x186
   add_extern(
-    (cst, arity, (x186 : @kernel.Term) => extern_of_conv(rws, conv, x186)),
+    (cst, arity, (x187 : @kernel.Term) => extern_of_conv(rws, conv, x187)),
     rws,
   )
 }
 
 ///|
 /// `set_skip`
-pub fn set_skip(x187 : Compset, x188 : @kernel.Term, x189 : Int?) -> Unit raise {
-  let compset = x187
-  let c = x188
-  let opt = x189
+pub fn set_skip(
+  x188 : Compset,
+  x189 : @kernel.Term,
+  x190 : Int64?,
+) -> Unit raise {
+  let compset = x188
+  let c = x189
+  let opt = x190
   try {
     let (name, _) = @kernel.dest_const(c)
     set_skip_name(compset)(name)(opt)
@@ -2225,7 +2246,7 @@ pub fn set_skip(x187 : Compset, x188 : @kernel.Term, x189 : Int?) -> Unit raise 
 ///|
 /// bool_redns
 fn step_12() -> Unit raise {
-  let t190 = @lib.map(
+  let t191 = @lib.map(
     lazyfy_thm,
     @list.List([
       @class.cond_clauses(),
@@ -2237,7 +2258,7 @@ fn step_12() -> Unit raise {
       @theorems.eq_clauses(),
     ]),
   )
-  bool_redns_c.set(t190.prepend(strictify_thm(@pair.let_def())))
+  bool_redns_c.set(t191.prepend(strictify_thm(@pair.let_def())))
 }
 
 ///|
@@ -2253,8 +2274,8 @@ pub fn bool_redns() -> @list.List[@kernel.Thm] {
 
 ///|
 /// `bool_compset`
-pub fn bool_compset(x191 : Unit) -> Compset raise {
-  let _ = x191
+pub fn bool_compset(x192 : Unit) -> Compset raise {
+  let _ = x192
   let base = from_list(bool_redns())
   match set_skip(base, @parser.parse_term("COND: bool -> A -> A -> A"), None) {
     _ => base
@@ -2263,8 +2284,8 @@ pub fn bool_compset(x191 : Unit) -> Compset raise {
 
 ///|
 /// `basic_compset`
-pub fn basic_compset(x192 : Unit) -> Compset raise {
-  let _ = x192
+pub fn basic_compset(x193 : Unit) -> Compset raise {
+  let _ = x193
   let basic_rws0 = @simp.basic_rewrites()
   let lhs_lambda_rules = @lib.map(
     @bool.spec_all,
@@ -2275,8 +2296,8 @@ pub fn basic_compset(x192 : Unit) -> Compset raise {
     ]),
   )
   let basic_rws = @lib.list_filter(
-    fn(x193 : @kernel.Thm) -> Bool raise {
-      let th = x193
+    fn(x194 : @kernel.Thm) -> Bool raise {
+      let th = x194
       !@lib.mem(th, lhs_lambda_rules)
     },
     basic_rws0,
@@ -2284,15 +2305,15 @@ pub fn basic_compset(x192 : Unit) -> Compset raise {
   let cs = new_compset(@lib.map(lazyfy_thm, basic_rws))
   @lib.do_list(
     fn(
-      x194 : (String, (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise)),
+      x195 : (String, (@kernel.Term, (@kernel.Term) -> @kernel.Thm raise)),
     ) -> Unit raise {
-      let (_, (pat, the_conv)) = x194
+      let (_, (pat, the_conv)) = x195
       let (cst, args) = @basics.strip_comb(pat)
-      add_conv((cst, @lib.length(args), the_conv), cs)
+      add_conv((cst, Int::to_int64(@lib.length(args)), the_conv), cs)
     },
     @simp.basic_convs(),
   )
-  add_conv((@parser.parse_term("LET:(A->B)->A->B"), 2, @pair.let_conv), cs)
+  add_conv((@parser.parse_term("LET:(A->B)->A->B"), 2L, @pair.let_conv), cs)
   set_skip(cs, @parser.parse_term("COND: bool -> A -> A -> A"), None)
   cs
 }
@@ -2315,10 +2336,10 @@ pub fn the_compset() -> Compset {
 ///|
 /// add_funs
 fn step_14() -> Unit raise {
-  add_funs_c.set(fn(x197 : @list.List[@kernel.Thm]) -> Unit raise {
-    (fn(x195 : @list.List[@kernel.Thm]) -> ((Compset) -> Unit raise) raise {
-      fn(x196 : Compset) -> Unit raise { add_thms(x195, x196) }
-    })(x197)(the_compset())
+  add_funs_c.set(fn(x198 : @list.List[@kernel.Thm]) -> Unit raise {
+    (fn(x196 : @list.List[@kernel.Thm]) -> ((Compset) -> Unit raise) raise {
+      fn(x197 : Compset) -> Unit raise { add_thms(x196, x197) }
+    })(x198)(the_compset())
   })
 }
 
@@ -2336,31 +2357,31 @@ pub fn add_funs(x : @list.List[@kernel.Thm]) -> Unit raise {
 ///|
 /// add_convs
 fn step_15() -> Unit raise {
-  add_convs_c.set(x201 => {
+  add_convs_c.set(x202 => {
     @lib.do_list(
       fn(
-        x200 : (@kernel.Term, Int, (@kernel.Term) -> @kernel.Thm raise),
+        x201 : (@kernel.Term, Int64, (@kernel.Term) -> @kernel.Thm raise),
       ) -> Unit raise {
         (fn(
-          x198 : (@kernel.Term, Int, (@kernel.Term) -> @kernel.Thm raise),
+          x199 : (@kernel.Term, Int64, (@kernel.Term) -> @kernel.Thm raise),
         ) -> ((Compset) -> Unit raise) raise {
-          fn(x199 : Compset) -> Unit raise { add_conv(x198, x199) }
-        })(x200)(the_compset())
+          fn(x200 : Compset) -> Unit raise { add_conv(x199, x200) }
+        })(x201)(the_compset())
       },
-      x201,
+      x202,
     )
   })
 }
 
 ///|
 let add_convs_c : @lib.Cell[
-  (@list.List[(@kernel.Term, Int, @equal.Conv)]) -> Unit raise,
+  (@list.List[(@kernel.Term, Int64, @equal.Conv)]) -> Unit raise,
 ] = @lib.Cell::new("add_convs")
 
 ///|
 /// `add_convs`
 pub fn add_convs(
-  x : @list.List[(@kernel.Term, Int, @equal.Conv)],
+  x : @list.List[(@kernel.Term, Int64, @equal.Conv)],
 ) -> Unit raise {
   add_convs_c.get()(x)
 }
@@ -2368,8 +2389,8 @@ pub fn add_convs(
 ///|
 /// del_consts
 fn step_16() -> Unit raise {
-  let t202 = scrub_const(the_compset())
-  del_consts_c.set(x203 => @lib.do_list(t202, x203))
+  let t203 = scrub_const(the_compset())
+  del_consts_c.set(x204 => @lib.do_list(t203, x204))
 }
 
 ///|
@@ -2386,10 +2407,10 @@ pub fn del_consts(x : @list.List[@kernel.Term]) -> Unit raise {
 ///|
 /// del_funs
 fn step_17() -> Unit raise {
-  del_funs_c.set(fn(x206 : @list.List[@kernel.Thm]) -> Unit raise {
-    (fn(x204 : @list.List[@kernel.Thm]) -> ((Compset) -> Unit raise) raise {
-      fn(x205 : Compset) -> Unit raise { scrub_thms(x204, x205) }
-    })(x206)(the_compset())
+  del_funs_c.set(fn(x207 : @list.List[@kernel.Thm]) -> Unit raise {
+    (fn(x205 : @list.List[@kernel.Thm]) -> ((Compset) -> Unit raise) raise {
+      fn(x206 : Compset) -> Unit raise { scrub_thms(x205, x206) }
+    })(x207)(the_compset())
   })
 }
 
@@ -2422,7 +2443,7 @@ pub fn eval_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// EVAL_RULE
 fn step_19() -> Unit raise {
-  eval_rule_c.set((x207 : @kernel.Thm) => @equal.conv_rule(eval_conv, x207))
+  eval_rule_c.set((x208 : @kernel.Thm) => @equal.conv_rule(eval_conv, x208))
 }
 
 ///|
@@ -2453,24 +2474,24 @@ pub fn eval_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 
 ///|
 /// `same_const`
-pub fn same_const(x208 : @kernel.Term, x209 : @kernel.Term) -> Bool raise {
-  let c1 = x208
-  let c2 = x209
-  let t210 = @kernel.dest_const(c2).0
-  @kernel.dest_const(c1).0 == t210
+pub fn same_const(x209 : @kernel.Term, x210 : @kernel.Term) -> Bool raise {
+  let c1 = x209
+  let c2 = x210
+  let t211 = @kernel.dest_const(c2).0
+  @kernel.dest_const(c1).0 == t211
 }
 
 ///|
 /// `OR`
 pub fn or(
-  x211 : @list.List[@kernel.Term],
+  x212 : @list.List[@kernel.Term],
 ) -> ((@kernel.Term) -> Bool raise) raise {
-  match x211 {
-    Empty => fn(x213 : @kernel.Term) -> Bool raise { false }
-    More(x, tail=Empty) => (x215 : @kernel.Term) => same_const(x, x215)
+  match x212 {
+    Empty => fn(x214 : @kernel.Term) -> Bool raise { false }
+    More(x, tail=Empty) => (x216 : @kernel.Term) => same_const(x, x216)
     More(h, tail=t) =>
-      fn(x216 : @kernel.Term) -> Bool raise {
-        let x_1 = x216
+      fn(x217 : @kernel.Term) -> Bool raise {
+        let x_1 = x217
         same_const(h, x_1) || or(t)(x_1)
       }
   }
@@ -2479,23 +2500,23 @@ pub fn or(
 ///|
 /// `RESTR_EVAL_CONV`
 pub fn restr_eval_conv(
-  x217 : @list.List[@kernel.Term],
+  x218 : @list.List[@kernel.Term],
 ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
-  let clist = x217
-  let t219 = (stoppers(), Some(or(clist)))
-  (x220 : @kernel.Term) => with_flag(t219, eval_conv, x220)
+  let clist = x218
+  let t220 = (stoppers(), Some(or(clist)))
+  (x221 : @kernel.Term) => with_flag(t220, eval_conv, x221)
 }
 
 ///|
 /// RESTR_EVAL_TAC
 fn step_21() -> Unit raise {
   restr_eval_tac_c.set(fn(
-    x224 : @list.List[@kernel.Term],
+    x225 : @list.List[@kernel.Term],
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
       @list.List[@kernel.Term],
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2503,7 +2524,7 @@ fn step_21() -> Unit raise {
     @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
     (
       (
-        @list.List[(Int, @kernel.Term)],
+        @list.List[(Int64, @kernel.Term)],
         @list.List[(@kernel.Term, @kernel.Term)],
         @list.List[(@kernel.HolType, @kernel.HolType)],
       ),
@@ -2511,12 +2532,12 @@ fn step_21() -> Unit raise {
     ) -> @kernel.Thm raise,
   ) raise) raise {
     (fn(
-      x221 : (@kernel.Term) -> @kernel.Thm raise,
+      x222 : (@kernel.Term) -> @kernel.Thm raise,
     ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -2524,21 +2545,21 @@ fn step_21() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
         @list.List[@kernel.Thm],
       ) -> @kernel.Thm raise,
     ) raise) raise {
-      let s222 = @tactics.conv_tac(x221)
+      let s223 = @tactics.conv_tac(x222)
       fn(
-        x223 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
+        x224 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
       ) -> (
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -2546,16 +2567,16 @@ fn step_21() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
           @list.List[@kernel.Thm],
         ) -> @kernel.Thm raise,
       ) raise {
-        s222(x223)
+        s223(x224)
       }
-    })(restr_eval_conv(x224))
+    })(restr_eval_conv(x225))
   })
 }
 
@@ -2574,15 +2595,15 @@ pub fn restr_eval_tac(x : @list.List[@kernel.Term]) -> @tactics.Tactic raise {
 /// RESTR_EVAL_RULE
 fn step_22() -> Unit raise {
   restr_eval_rule_c.set(fn(
-    x227 : @list.List[@kernel.Term],
+    x228 : @list.List[@kernel.Term],
   ) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
     (fn(
-      x225 : (@kernel.Term) -> @kernel.Thm raise,
+      x226 : (@kernel.Term) -> @kernel.Thm raise,
     ) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
-      fn(x226 : @kernel.Thm) -> @kernel.Thm raise {
-        @equal.conv_rule(x225, x226)
+      fn(x227 : @kernel.Thm) -> @kernel.Thm raise {
+        @equal.conv_rule(x226, x227)
       }
-    })(restr_eval_conv(x227))
+    })(restr_eval_conv(x228))
   })
 }
 

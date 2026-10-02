@@ -11,7 +11,11 @@ import {
 }
 
 // Values
+pub fn abs63(Int64) -> Int64
+
 pub fn abs_int(Int) -> Int
+
+pub fn add63(Int64, Int64) -> Int64
 
 pub fn[A, B, C] allpairs((A, B) -> C raise?, @list.List[A], @list.List[B]) -> @list.List[C] raise?
 
@@ -27,11 +31,11 @@ pub fn[A, B] array_fold_left((A, B) -> A raise?, A, FixedArray[B]) -> A raise?
 
 pub fn[A] array_get(FixedArray[A], Int) -> A raise
 
-pub fn[A] array_init(Int, (Int) -> A raise?) -> FixedArray[A] raise
+pub fn[A] array_init(Int64, (Int64) -> A raise?) -> FixedArray[A] raise
 
 pub fn[A] array_iter((A) -> Unit raise?, FixedArray[A]) -> Unit raise?
 
-pub fn[A] array_iteri((Int, A) -> Unit raise?, FixedArray[A]) -> Unit raise?
+pub fn[A] array_iteri((Int64, A) -> Unit raise?, FixedArray[A]) -> Unit raise?
 
 pub fn[A] array_length(FixedArray[A]) -> Int
 
@@ -46,6 +50,8 @@ pub fn[A] array_set(FixedArray[A], Int, A) -> Unit raise
 pub fn[A] array_to_list(FixedArray[A]) -> @list.List[A]
 
 pub fn asr(Int, Int) -> Int
+
+pub fn asr63(Int64, Int64) -> Int64
 
 pub fn[A : OCompare, B] assoc(A, @list.List[(A, B)]) -> B raise
 
@@ -73,11 +79,13 @@ pub let cpu_time : @ref.Ref[() -> Double]
 
 pub fn[A, B, C] curry(((A, B)) -> C raise?, A, B) -> C raise?
 
-pub fn decr(@ref.Ref[Int]) -> Unit
+pub fn decr(@ref.Ref[Int64]) -> Unit
 
 pub fn[A, B : OCompare] decreasing((A) -> B raise?, A, A) -> Bool raise?
 
 pub fn[K : OCompare + OHash, V] defined(Func[K, V], K) -> Bool
+
+pub fn div63(Int64, Int64) -> Int64 raise @num.DivisionByZero
 
 pub fn[A] do_list((A) -> Unit raise?, @list.List[A]) -> Unit raise?
 
@@ -101,7 +109,7 @@ pub fn[A] filter((A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
 
 pub fn[A] find((A) -> Bool raise?, @list.List[A]) -> A raise
 
-pub fn[A] find_index((A) -> Bool raise?, @list.List[A]) -> Int? raise?
+pub fn[A] find_index((A) -> Bool raise?, @list.List[A]) -> Int64? raise?
 
 pub fn[A] flat(@list.List[@list.List[A]]) -> @list.List[A]
 
@@ -167,7 +175,7 @@ pub fn[A] id(A) -> A
 
 pub fn implode(@list.List[String]) -> String
 
-pub fn incr(@ref.Ref[Int]) -> Unit
+pub fn incr(@ref.Ref[Int64]) -> Unit
 
 pub fn[A, B : OCompare] increasing((A) -> B raise?, A, A) -> Bool raise?
 
@@ -176,6 +184,10 @@ pub fn[A : OCompare] index(A, @list.List[A]) -> Int raise
 pub fn[A : OCompare] insert(A, @list.List[A]) -> @list.List[A]
 
 pub fn[A] insert_eq((A, A) -> Bool raise?, A, @list.List[A]) -> @list.List[A] raise?
+
+pub fn int63_of_string(String) -> Int64 raise
+
+pub fn int63_to_int(Int64) -> Int raise @num.InvalidArgument
 
 pub fn int_of_string(String) -> Int raise
 
@@ -243,9 +255,15 @@ pub fn[A] list_sort((A, A) -> Int raise?, @list.List[A]) -> @list.List[A] raise?
 
 pub fn[A, B] list_split(@list.List[(A, B)]) -> (@list.List[A], @list.List[B])
 
+pub fn lnot63(Int64) -> Int64
+
 pub fn lsl(Int, Int) -> Int
 
+pub fn lsl63(Int64, Int64) -> Int64
+
 pub fn lsr(Int, Int) -> Int
+
+pub fn lsr63(Int64, Int64) -> Int64
 
 pub fn[A, B] map((A) -> B raise?, @list.List[A]) -> @list.List[B] raise?
 
@@ -257,6 +275,8 @@ pub fn[A, B] mapfilter((A) -> B raise, @list.List[A]) -> @list.List[B] raise
 
 pub fn[A, B] mapi((Int, A) -> B raise?, @list.List[A]) -> @list.List[B] raise?
 
+pub let max_int63 : Int64
+
 pub fn md5(Bytes) -> Bytes
 
 pub fn[A : OCompare] mem(A, @list.List[A]) -> Bool
@@ -267,6 +287,16 @@ pub fn[A] merge((A, A) -> Bool raise?, @list.List[A], @list.List[A]) -> @list.Li
 
 pub fn[A] mergesort((A, A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
 
+pub let min_int63 : Int64
+
+pub fn mod63(Int64, Int64) -> Int64 raise @num.DivisionByZero
+
+pub fn mul63(Int64, Int64) -> Int64
+
+pub fn neg63(Int64) -> Int64
+
+pub fn norm63(Int64) -> Int64
+
 pub fn[A, B, C] nsplit((A) -> (B, A) raise?, @list.List[C], A) -> (@list.List[B], A) raise?
 
 pub fn[A, B] op_bar_gt(A, (A) -> B raise) -> B raise
@@ -275,21 +305,23 @@ pub fn[A, B, C, D] pair_map((A) -> C raise?, (B) -> D raise?, (A, B)) -> (C, D) 
 
 pub fn[A] partition((A) -> Bool raise?, @list.List[A]) -> (@list.List[A], @list.List[A]) raise?
 
+pub fn pred63(Int64) -> Int64
+
 pub fn[A] qmap((A) -> A raise?, @list.List[A]) -> @list.List[A] raise?
 
 pub fn[T] raise_error(Error) -> T raise
 
 pub fn[K, V : OCompare] ran(Func[K, V]) -> @list.List[V]
 
-pub fn random_bits() -> Int
+pub fn random_bits() -> Int64
 
-pub fn random_full_init(Array[Int]) -> Unit
+pub fn random_full_init(Array[Int64]) -> Unit
 
-pub fn random_init(Int) -> Unit
+pub fn random_init(Int64) -> Unit
 
-pub fn random_int(Int) -> Int raise
+pub fn random_int(Int64) -> Int64 raise
 
-pub fn range(Int, Int) -> @list.List[Int]
+pub fn range(Int64, Int64) -> @list.List[Int64]
 
 pub fn remark(String) -> Unit
 
@@ -351,11 +383,15 @@ pub fn string_sub(String, Int, Int) -> String raise
 
 pub fn[A] striplist((A) -> (A, A) raise, A) -> @list.List[A] raise
 
+pub fn sub63(Int64, Int64) -> Int64
+
 pub fn[A : OCompare] subset(@list.List[A], @list.List[A]) -> Bool
 
 pub fn[A : OCompare] subtract(@list.List[A], @list.List[A]) -> @list.List[A]
 
 pub fn[A] subtract_eq((A, A) -> Bool raise?, @list.List[A], @list.List[A]) -> @list.List[A] raise?
+
+pub fn succ63(Int64) -> Int64
 
 pub fn sys_command(String) -> Int
 

@@ -13,7 +13,7 @@ fn step_1() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -21,7 +21,7 @@ fn step_1() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -53,7 +53,7 @@ fn step_1() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -61,7 +61,7 @@ fn step_1() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -75,7 +75,7 @@ fn step_1() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -83,7 +83,7 @@ fn step_1() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -112,7 +112,7 @@ fn step_1() -> Unit raise {
       (
         @list.List[@kernel.Term],
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -120,7 +120,7 @@ fn step_1() -> Unit raise {
       @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
       (
         (
-          @list.List[(Int, @kernel.Term)],
+          @list.List[(Int64, @kernel.Term)],
           @list.List[(@kernel.Term, @kernel.Term)],
           @list.List[(@kernel.HolType, @kernel.HolType)],
         ),
@@ -134,7 +134,7 @@ fn step_1() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -142,7 +142,7 @@ fn step_1() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -168,7 +168,7 @@ fn step_1() -> Unit raise {
         (
           @list.List[@kernel.Term],
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -176,7 +176,7 @@ fn step_1() -> Unit raise {
         @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
         (
           (
-            @list.List[(Int, @kernel.Term)],
+            @list.List[(Int64, @kernel.Term)],
             @list.List[(@kernel.Term, @kernel.Term)],
             @list.List[(@kernel.HolType, @kernel.HolType)],
           ),
@@ -190,7 +190,7 @@ fn step_1() -> Unit raise {
           (
             @list.List[@kernel.Term],
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -198,7 +198,7 @@ fn step_1() -> Unit raise {
           @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)],
           (
             (
-              @list.List[(Int, @kernel.Term)],
+              @list.List[(Int64, @kernel.Term)],
               @list.List[(@kernel.Term, @kernel.Term)],
               @list.List[(@kernel.HolType, @kernel.HolType)],
             ),
@@ -243,7 +243,7 @@ fn step_1() -> Unit raise {
                               (
                                 @list.List[@kernel.Term],
                                 (
-                                  @list.List[(Int, @kernel.Term)],
+                                  @list.List[(Int64, @kernel.Term)],
                                   @list.List[(@kernel.Term, @kernel.Term)],
                                   @list.List[(@kernel.HolType, @kernel.HolType)],
                                 ),
@@ -256,7 +256,7 @@ fn step_1() -> Unit raise {
                               ],
                               (
                                 (
-                                  @list.List[(Int, @kernel.Term)],
+                                  @list.List[(Int64, @kernel.Term)],
                                   @list.List[(@kernel.Term, @kernel.Term)],
                                   @list.List[(@kernel.HolType, @kernel.HolType)],
                                 ),
@@ -273,7 +273,7 @@ fn step_1() -> Unit raise {
                                 (
                                   @list.List[@kernel.Term],
                                   (
-                                    @list.List[(Int, @kernel.Term)],
+                                    @list.List[(Int64, @kernel.Term)],
                                     @list.List[(@kernel.Term, @kernel.Term)],
                                     @list.List[
                                       (@kernel.HolType, @kernel.HolType),
@@ -288,7 +288,7 @@ fn step_1() -> Unit raise {
                                 ],
                                 (
                                   (
-                                    @list.List[(Int, @kernel.Term)],
+                                    @list.List[(Int64, @kernel.Term)],
                                     @list.List[(@kernel.Term, @kernel.Term)],
                                     @list.List[
                                       (@kernel.HolType, @kernel.HolType),
@@ -775,22 +775,22 @@ fn step_1() -> Unit raise {
                   }
                 }
               }
-              let vorder : (@kernel.Term) -> ((@kernel.Term) -> Int raise) raise = fn(
+              let vorder : (@kernel.Term) -> ((@kernel.Term) -> Int64 raise) raise = fn(
                 x55 : @kernel.Term,
-              ) -> ((@kernel.Term) -> Int raise) raise {
+              ) -> ((@kernel.Term) -> Int64 raise) raise {
                 let x_1 = x55
-                fn(x56 : @kernel.Term) -> Int raise {
+                fn(x56 : @kernel.Term) -> Int64 raise {
                   let y_1 = x56
                   if x_1 == y_1 {
-                    0
+                    0L
                   } else if x_1 == one_tm {
-                    -1
+                    -1L
                   } else if y_1 == one_tm {
-                    1
+                    1L
                   } else if variable_order(x_1)(y_1) {
-                    -1
+                    -1L
                   } else {
-                    1
+                    1L
                   }
                 }
               }
@@ -809,7 +809,7 @@ fn step_1() -> Unit raise {
                     let (rx_2, ry) = dest_mul(r_7)
                     let vr = powvar(rx_2)
                     let ord = vorder(vl)(vr)
-                    if ord == 0 {
+                    if ord == 0L {
                       let th1_5 = @kernel.inst_rule(
                         @list.List([
                           (lx_1, lx_tm),
@@ -835,7 +835,7 @@ fn step_1() -> Unit raise {
                       let th4 = monomial_mul(tm6, @kernel.rand(tm7), tm8)
                       @kernel.trans(th3, @equal.ap_term(tm5, th4))
                     } else {
-                      let th0 = if ord < 0 { pthm_16 } else { pthm_17 }
+                      let th0 = if ord < 0L { pthm_16 } else { pthm_17 }
                       let th1_6 = @kernel.inst_rule(
                         @list.List([
                           (lx_1, lx_tm),
@@ -861,7 +861,7 @@ fn step_1() -> Unit raise {
                     Failure(_) => {
                       let vr_1 = powvar(r_7)
                       let ord_1 = vorder(vl)(vr_1)
-                      if ord_1 == 0 {
+                      if ord_1 == 0L {
                         let th1_7 = @kernel.inst_rule(
                           @list.List([(lx_1, lx_tm), (ly, ly_tm), (r_7, rx_tm)]),
                           pthm_18,
@@ -875,7 +875,7 @@ fn step_1() -> Unit raise {
                           tm2_5,
                         )
                         @kernel.trans(th1_7, th2_1)
-                      } else if ord_1 < 0 {
+                      } else if ord_1 < 0L {
                         let th1_8 = @kernel.inst_rule(
                           @list.List([(lx_1, lx_tm), (ly, ly_tm), (r_7, rx_tm)]),
                           pthm_19,
@@ -907,7 +907,7 @@ fn step_1() -> Unit raise {
                       let (rx_3, ry_1) = dest_mul(r_7)
                       let vr_2 = powvar(rx_3)
                       let ord_2 = vorder(vl_1)(vr_2)
-                      if ord_2 == 0 {
+                      if ord_2 == 0L {
                         let th1_9 = @kernel.inst_rule(
                           @list.List([
                             (l_7, lx_tm),
@@ -927,7 +927,7 @@ fn step_1() -> Unit raise {
                             tm2_7,
                           ),
                         )
-                      } else if ord_2 > 0 {
+                      } else if ord_2 > 0L {
                         let th1_10 = @kernel.inst_rule(
                           @list.List([
                             (l_7, lx_tm),
@@ -954,9 +954,9 @@ fn step_1() -> Unit raise {
                       Failure(_) => {
                         let vr_3 = powvar(r_7)
                         let ord_3 = vorder(vl_1)(vr_3)
-                        if ord_3 == 0 {
+                        if ord_3 == 0L {
                           powvar_mul_conv(tm_5)
-                        } else if ord_3 > 0 {
+                        } else if ord_3 > 0L {
                           @kernel.inst_rule(
                             @list.List([(l_7, lx_tm), (r_7, rx_tm)]),
                             pthm_20,
@@ -1092,32 +1092,32 @@ fn step_1() -> Unit raise {
               fn lexorder(
                 x68 : @list.List[(@kernel.Term, @num.Num)],
                 x69 : @list.List[(@kernel.Term, @num.Num)],
-              ) -> Int raise {
+              ) -> Int64 raise {
                 let l1 = x68
                 let l2 = x69
                 match (l1, l2) {
-                  (Empty, Empty) => 0
-                  (vps, Empty) => -1
-                  (Empty, vps_1) => 1
+                  (Empty, Empty) => 0L
+                  (vps, Empty) => -1L
+                  (Empty, vps_1) => 1L
                   (More((x1_1, n1), tail=vs1), More((x2, n2), tail=vs2)) =>
                     if variable_order(x1_1)(x2) {
-                      1
+                      1L
                     } else if variable_order(x2)(x1_1) {
-                      -1
+                      -1L
                     } else if @num.lt_num(n1, n2) {
-                      -1
+                      -1L
                     } else if @num.lt_num(n2, n1) {
-                      1
+                      1L
                     } else {
                       lexorder(vs1, vs2)
                     }
                 }
               }
-              let morder : (@kernel.Term) -> ((@kernel.Term) -> Int raise) raise = fn(
+              let morder : (@kernel.Term) -> ((@kernel.Term) -> Int64 raise) raise = fn(
                 x70 : @kernel.Term,
-              ) -> ((@kernel.Term) -> Int raise) raise {
+              ) -> ((@kernel.Term) -> Int64 raise) raise {
                 let tm1_11 = x70
-                fn(x71 : @kernel.Term) -> Int raise {
+                fn(x71 : @kernel.Term) -> Int64 raise {
                   let tm2_11 = x71
                   let vdegs1 = @lib.map(dest_varpow, powervars(tm1_11))
                   let vdegs2 = @lib.map(dest_varpow, powervars(tm2_11))
@@ -1162,9 +1162,9 @@ fn step_1() -> Unit raise {
                     @num.num_0,
                   )
                   if @num.lt_num(deg1, deg2) {
-                    -1
+                    -1L
                   } else if @num.gt_num(deg1, deg2) {
-                    1
+                    1L
                   } else {
                     lexorder(vdegs1, vdegs2)
                   }
@@ -1207,7 +1207,7 @@ fn step_1() -> Unit raise {
                   if is_add(r_12) {
                     let (c, d) = dest_add(r_12)
                     let ord_4 = morder(a)(c)
-                    if ord_4 == 0 {
+                    if ord_4 == 0L {
                       let th1_13 = @kernel.inst_rule(
                         @list.List([(a, a_tm), (b, b_tm), (c, c_tm), (d, d_tm)]),
                         pthm_23,
@@ -1227,7 +1227,7 @@ fn step_1() -> Unit raise {
                         ),
                       )
                     } else {
-                      let th1_14 = if ord_4 > 0 {
+                      let th1_14 = if ord_4 > 0L {
                         @kernel.inst_rule(
                           @list.List([(a, a_tm), (b, b_tm), (r_12, c_tm)]),
                           pthm_24,
@@ -1250,7 +1250,7 @@ fn step_1() -> Unit raise {
                     }
                   } else {
                     let ord_5 = morder(a)(r_12)
-                    if ord_5 == 0 {
+                    if ord_5 == 0L {
                       let th1_15 = @kernel.inst_rule(
                         @list.List([(a, a_tm), (b, b_tm), (r_12, c_tm)]),
                         pthm_26,
@@ -1264,7 +1264,7 @@ fn step_1() -> Unit raise {
                         tm2_14,
                       )
                       dezero_rule(@kernel.trans(th1_15, th2_5))
-                    } else if ord_5 > 0 {
+                    } else if ord_5 > 0L {
                       let th1_16 = @kernel.inst_rule(
                         @list.List([(a, a_tm), (b, b_tm), (r_12, c_tm)]),
                         pthm_24,
@@ -1290,7 +1290,7 @@ fn step_1() -> Unit raise {
                 } else if is_add(r_12) {
                   let (c_1, d_1) = dest_add(r_12)
                   let ord_6 = morder(l_12)(c_1)
-                  if ord_6 == 0 {
+                  if ord_6 == 0L {
                     let th1_17 = @kernel.inst_rule(
                       @list.List([(l_12, a_tm), (c_1, c_tm), (d_1, d_tm)]),
                       pthm_28,
@@ -1304,7 +1304,7 @@ fn step_1() -> Unit raise {
                       tm2_16,
                     )
                     dezero_rule(@kernel.trans(th1_17, th2_6))
-                  } else if ord_6 > 0 {
+                  } else if ord_6 > 0L {
                     @kernel.refl(tm_12)
                   } else {
                     let th1_18 = @kernel.inst_rule(
@@ -1323,9 +1323,9 @@ fn step_1() -> Unit raise {
                   }
                 } else {
                   let ord_7 = morder(l_12)(r_12)
-                  if ord_7 == 0 {
+                  if ord_7 == 0L {
                     monomial_add_conv(tm_12)
-                  } else if ord_7 > 0 {
+                  } else if ord_7 > 0L {
                     dezero_rule(@kernel.refl(tm_12))
                   } else {
                     dezero_rule(

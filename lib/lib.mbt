@@ -448,7 +448,7 @@ pub fn[A] replicate(x : A, n : Int) -> @list.List[A] {
 
 ///|
 /// `m -- n`: the list `[m; m+1; ...; n]` (empty if `m > n`).
-pub fn range(m : Int, n : Int) -> @list.List[Int] {
+pub fn range(m : Int64, n : Int64) -> @list.List[Int64] {
   let mut acc = @list.empty()
   let mut i = n
   while i >= m {
@@ -456,7 +456,7 @@ pub fn range(m : Int, n : Int) -> @list.List[Int] {
     if i == m {
       break
     }
-    i -= 1
+    i -= 1L
   }
   acc
 }
@@ -683,13 +683,16 @@ pub fn[A] chop_list(
 }
 
 ///|
-pub fn[A] find_index(p : (A) -> Bool raise?, l : @list.List[A]) -> Int? raise? {
-  let mut i = 0
+pub fn[A] find_index(
+  p : (A) -> Bool raise?,
+  l : @list.List[A],
+) -> Int64? raise? {
+  let mut i = 0L
   for x in l {
     if p(x) {
       return Some(i)
     }
-    i += 1
+    i += 1L
   }
   None
 }
@@ -697,7 +700,7 @@ pub fn[A] find_index(p : (A) -> Bool raise?, l : @list.List[A]) -> Int? raise? {
 ///|
 pub fn[A : OCompare] index(x : A, l : @list.List[A]) -> Int raise {
   match find_index(y => x.ocompare(y) == 0, l) {
-    Some(n) => n
+    Some(n) => n.to_int()
     None => failwith("index")
   }
 }
@@ -1252,6 +1255,16 @@ pub extend MatchFailure with @debug.Debug::{to_repr}
 /// after the first digit; prefixed numbers are unsigned and wrap), with the
 /// result then required to fit in an `Int`. Fails with `int_of_string`.
 pub fn int_of_string(s : String) -> Int raise {
+  let v = int63_of_string(s)
+  if v > 2147483647L || v < -2147483648L {
+    raise Failure("int_of_string")
+  }
+  v.to_int()
+}
+
+///|
+/// OCaml's `int_of_string` (an OCaml int: 63 bits).
+pub fn int63_of_string(s : String) -> Int64 raise {
   let fail = () => raise Failure("int_of_string")
   let s : Array[Char] = s.to_array()
   let n = s.length()
@@ -1345,11 +1358,7 @@ pub fn int_of_string(s : String) -> Int raise {
     res = 0UL - res
   }
   // an OCaml int keeps the low 63 bits
-  let v = (res << 1).reinterpret_as_int64() >> 1
-  if v > 2147483647L || v < -2147483648L {
-    fail()
-  }
-  v.to_int()
+  (res << 1).reinterpret_as_int64() >> 1
 }
 
 ///|

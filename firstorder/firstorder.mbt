@@ -101,7 +101,7 @@ fn[TB] go_l(
 ///|
 /// `nth_rest`
 pub fn[TA] nth_rest(
-  x19 : Int,
+  x19 : Int64,
 ) -> ((@list.List[TA]) -> (TA, (@list.List[TA], @list.List[TA])) raise) raise {
   let n = x19
   (x24 : @list.List[TA]) => go_l_1(@list.empty(), n, x24)
@@ -110,14 +110,14 @@ pub fn[TA] nth_rest(
 ///|
 fn[TB] go_l_1(
   x21 : @list.List[TB],
-  x22 : Int,
+  x22 : Int64,
   x23 : @list.List[TB],
 ) -> (TB, (@list.List[TB], @list.List[TB])) raise {
   let acc = x21
   let i = x22
   match x23 {
-    More(x, tail=xs) if i > 0 => go_l_1(acc.prepend(x), i - 1, xs)
-    More(x_1, tail=xs_1) if i == 0 => (x_1, (@lib.rev(acc), xs_1))
+    More(x, tail=xs) if i > 0L => go_l_1(acc.prepend(x), @lib.sub63(i, 1L), xs)
+    More(x_1, tail=xs_1) if i == 0L => (x_1, (@lib.rev(acc), xs_1))
     _ => raise Failure("nth_rest")
   }
 }
@@ -125,7 +125,7 @@ fn[TB] go_l_1(
 ///|
 /// `insert_at`
 pub fn[TA] insert_at(
-  x25 : Int,
+  x25 : Int64,
   x26 : TA,
   x27 : @list.List[TA],
 ) -> @list.List[TA] raise {
@@ -134,13 +134,14 @@ pub fn[TA] insert_at(
   let l = x27
   fn go(
     x28 : @list.List[TA],
-    x29 : (Int, @list.List[TA]),
+    x29 : (Int64, @list.List[TA]),
   ) -> @list.List[TA] raise {
     let acc = x28
     match x29 {
-      (0, xs) => @lib.rev_append(acc, xs.prepend(elem))
+      (0L, xs) => @lib.rev_append(acc, xs.prepend(elem))
       (n, Empty) => raise Failure("insert_at")
-      (n_1, More(x, tail=xs_1)) => go(acc.prepend(x), (n_1 - 1, xs_1))
+      (n_1, More(x, tail=xs_1)) =>
+        go(acc.prepend(x), (@lib.sub63(n_1, 1L), xs_1))
     }
   }
   go(@list.empty(), (i, l))
@@ -149,7 +150,7 @@ pub fn[TA] insert_at(
 ///|
 /// `take_drop`
 pub fn[TA] take_drop(
-  x30 : Int,
+  x30 : Int64,
 ) -> ((@list.List[TA]) -> (@list.List[TA], @list.List[TA]) raise) raise {
   let n = x30
   (x35 : @list.List[TA]) => go_l_2(@list.empty(), n, x35)
@@ -158,21 +159,21 @@ pub fn[TA] take_drop(
 ///|
 fn[TB] go_l_2(
   x32 : @list.List[TB],
-  x33 : Int,
+  x33 : Int64,
   x34 : @list.List[TB],
 ) -> (@list.List[TB], @list.List[TB]) raise {
   let acc = x32
   let i = x33
   match x34 {
-    Empty if i > 0 => raise Failure("take_drop")
-    More(x, tail=xs) if i > 0 => go_l_2(acc.prepend(x), i - 1, xs)
+    Empty if i > 0L => raise Failure("take_drop")
+    More(x, tail=xs) if i > 0L => go_l_2(acc.prepend(x), @lib.sub63(i, 1L), xs)
     xs_1 => (@lib.rev(acc), xs_1)
   }
 }
 
 ///|
 /// `take`
-pub fn[TA] take(x36 : Int, x37 : @list.List[TA]) -> @list.List[TA] raise {
+pub fn[TA] take(x36 : Int64, x37 : @list.List[TA]) -> @list.List[TA] raise {
   let n = x36
   let l = x37
   take_drop(n)(l).0
@@ -181,19 +182,24 @@ pub fn[TA] take(x36 : Int, x37 : @list.List[TA]) -> @list.List[TA] raise {
 ///|
 /// `findi`
 pub fn[TA] findi(
-  x38 : (Int) -> ((TA) -> Bool raise) raise,
+  x38 : (Int64) -> ((TA) -> Bool raise) raise,
   x39 : @list.List[TA],
-) -> (Int, TA) raise {
+) -> (Int64, TA) raise {
   let p = x38
   let l = x39
-  fn loop_(x40 : Int, x41 : @list.List[TA]) -> (Int, TA) raise {
+  fn loop_(x40 : Int64, x41 : @list.List[TA]) -> (Int64, TA) raise {
     let n = x40
     match x41 {
       Empty => raise @lib.NotFound
-      More(h, tail=t) => if p(n)(h) { (n, h) } else { loop_(n + 1, t) }
+      More(h, tail=t) =>
+        if p(n)(h) {
+          (n, h)
+        } else {
+          loop_(@lib.add63(n, 1L), t)
+        }
     }
   }
-  loop_(0, l)
+  loop_(0L, l)
 }
 
 ///|
@@ -414,24 +420,24 @@ pub fn reset_vars(x : Unit) -> Unit raise {
 }
 
 ///|
-let fol_of_var_c : @lib.Cell[(@kernel.Term) -> Int raise] = @lib.Cell::new(
+let fol_of_var_c : @lib.Cell[(@kernel.Term) -> Int64 raise] = @lib.Cell::new(
   "fol_of_var",
 )
 
 ///|
 /// `fol_of_var`
-pub fn fol_of_var(x : @kernel.Term) -> Int raise {
+pub fn fol_of_var(x : @kernel.Term) -> Int64 raise {
   fol_of_var_c.get()(x)
 }
 
 ///|
 let hol_of_var_c : @lib.Cell[
-  (Int) -> ((@kernel.HolType) -> @kernel.Term raise) raise,
+  (Int64) -> ((@kernel.HolType) -> @kernel.Term raise) raise,
 ] = @lib.Cell::new("hol_of_var")
 
 ///|
 /// `hol_of_var`
-pub fn hol_of_var(x : Int) -> ((@kernel.HolType) -> @kernel.Term raise) raise {
+pub fn hol_of_var(x : Int64) -> ((@kernel.HolType) -> @kernel.Term raise) raise {
   hol_of_var_c.get()(x)
 }
 
@@ -440,11 +446,11 @@ pub fn hol_of_var(x : Int) -> ((@kernel.HolType) -> @kernel.Term raise) raise {
 fn step_3() -> Unit raise {
   let vstore = Ref::{ val: @list.empty(), }
   let gstore = Ref::{ val: @list.empty(), }
-  let vcounter = Ref::{ val: 0, }
-  let inc_vcounter : (Unit) -> Int raise = fn(x78 : Unit) -> Int raise {
+  let vcounter = Ref::{ val: 0L, }
+  let inc_vcounter : (Unit) -> Int64 raise = fn(x78 : Unit) -> Int64 raise {
     let _ = x78
     let n = vcounter.val
-    let m = n + 1
+    let m = @lib.add63(n, 1L)
     {
       vcounter.val = m
       ()
@@ -461,12 +467,12 @@ fn step_3() -> Unit raise {
       gstore.val = @list.empty()
       ()
     }
-    vcounter.val = 0
+    vcounter.val = 0L
     ()
   }
-  let fol_of_var : (@kernel.Term) -> Int raise = fn(
+  let fol_of_var : (@kernel.Term) -> Int64 raise = fn(
     x80 : @kernel.Term,
-  ) -> Int raise {
+  ) -> Int64 raise {
     let v = x80
     @lib.assoc(v, vstore.val) catch {
       Failure(_) => {
@@ -480,7 +486,7 @@ fn step_3() -> Unit raise {
             " (ty = " +
             t81 +
             ") <- " +
-            @lib.string_of_int(n_1) +
+            Int64::to_string(n_1) +
             "\n",
           )
           @pp.std_formatter.print_flush()
@@ -497,8 +503,8 @@ fn step_3() -> Unit raise {
       e => raise e
     }
   }
-  let hol_of_var : (Int) -> ((@kernel.HolType) -> @kernel.Term raise) raise = fn(
-    x83 : Int,
+  let hol_of_var : (Int64) -> ((@kernel.HolType) -> @kernel.Term raise) raise = fn(
+    x83 : Int64,
   ) -> ((@kernel.HolType) -> @kernel.Term raise) raise {
     let v_1 = x83
     fn(x84 : @kernel.HolType) -> @kernel.Term raise {
@@ -536,24 +542,24 @@ pub fn reset_consts(x : Unit) -> Unit raise {
 }
 
 ///|
-let fol_of_const_c : @lib.Cell[(@kernel.Term) -> Int raise] = @lib.Cell::new(
+let fol_of_const_c : @lib.Cell[(@kernel.Term) -> Int64 raise] = @lib.Cell::new(
   "fol_of_const",
 )
 
 ///|
 /// `fol_of_const`
-pub fn fol_of_const(x : @kernel.Term) -> Int raise {
+pub fn fol_of_const(x : @kernel.Term) -> Int64 raise {
   fol_of_const_c.get()(x)
 }
 
 ///|
-let hol_of_const_c : @lib.Cell[(Int) -> @kernel.Term raise] = @lib.Cell::new(
+let hol_of_const_c : @lib.Cell[(Int64) -> @kernel.Term raise] = @lib.Cell::new(
   "hol_of_const",
 )
 
 ///|
 /// `hol_of_const`
-pub fn hol_of_const(x : Int) -> @kernel.Term raise {
+pub fn hol_of_const(x : Int64) -> @kernel.Term raise {
   hol_of_const_c.get()(x)
 }
 
@@ -600,7 +606,7 @@ pub fn fol_of_atom(
   x89 : @list.List[@kernel.Term],
   x90 : @list.List[@kernel.Term],
   x91 : @kernel.Term,
-) -> (Int, @list.List[@meson.FolTerm]) raise {
+) -> (Int64, @list.List[@meson.FolTerm]) raise {
   let env = x89
   let consts = x90
   let tm = x91
@@ -619,14 +625,14 @@ pub fn fol_of_literal(
   x93 : @list.List[@kernel.Term],
   x94 : @list.List[@kernel.Term],
   x95 : @kernel.Term,
-) -> (Int, @list.List[@meson.FolTerm]) raise {
+) -> (Int64, @list.List[@meson.FolTerm]) raise {
   let env = x93
   let consts = x94
   let tm = x95
   try {
     let tm_p = @basics.dest_neg(tm)
     let (p, a) = fol_of_atom(env, consts, tm_p)
-    (0 - p, a)
+    (@lib.neg63(p), a)
   } catch {
     Failure(_) => fol_of_atom(env, consts, tm)
     e => raise e
@@ -693,31 +699,31 @@ pub fn hol_of_term(
 ///|
 /// `hol_of_atom`
 pub fn hol_of_atom(
-  x101 : Int,
+  x101 : Int64,
   x102 : @list.List[@meson.FolTerm],
 ) -> @kernel.Term raise {
   let (f_1, args_1) = (x101, x102)
   let f_p = hol_of_const(f_1)
   let tys = @lib.splitlist(@basics.dest_fun_ty, @kernel.type_of(f_p)).0
-  let t103 = @lib.length(tys)
-  if @lib.length(args_1) <= t103 {
+  let t103 = Int::to_int64(@lib.length(tys))
+  if Int::to_int64(@lib.length(args_1)) <= t103 {
     ()
   } else {
     raise @lib.AssertFailure("tscript.ml:217:4")
   }
-  let tys_p = take(@lib.length(args_1), tys)
+  let tys_p = take(Int::to_int64(@lib.length(args_1)), tys)
   @basics.list_mk_comb(f_p, @lib.list_map2(hol_of_term, tys_p, args_1))
 }
 
 ///|
 /// `hol_of_literal`
 pub fn hol_of_literal(
-  x104 : Int,
+  x104 : Int64,
   x105 : @list.List[@meson.FolTerm],
 ) -> @kernel.Term raise {
   let (p, args) = (x104, x105)
-  if p < 0 {
-    @bool.mk_neg(hol_of_atom(0 - p, args))
+  if p < 0L {
+    @bool.mk_neg(hol_of_atom(@lib.neg63(p), args))
   } else {
     hol_of_atom(p, args)
   }
@@ -729,20 +735,20 @@ fn step_5() -> Unit raise {
   let fol_of_hol_clause : (@kernel.Thm) -> @list.List[
     (
       (
-        @list.List[(Int, @list.List[@meson.FolTerm])],
-        (Int, @list.List[@meson.FolTerm]),
+        @list.List[(Int64, @list.List[@meson.FolTerm])],
+        (Int64, @list.List[@meson.FolTerm]),
       ),
-      (Int, @kernel.Thm),
+      (Int64, @kernel.Thm),
     ),
   ] raise = fn(
     x114 : @kernel.Thm,
   ) -> @list.List[
     (
       (
-        @list.List[(Int, @list.List[@meson.FolTerm])],
-        (Int, @list.List[@meson.FolTerm]),
+        @list.List[(Int64, @list.List[@meson.FolTerm])],
+        (Int64, @list.List[@meson.FolTerm]),
       ),
-      (Int, @kernel.Thm),
+      (Int64, @kernel.Thm),
     ),
   ] raise {
     let th_1 = x114
@@ -753,11 +759,11 @@ fn step_5() -> Unit raise {
       (x115 : @kernel.Term) => fol_of_literal(@list.empty(), lconsts, x115),
       hlits,
     )
-    let basics = mk_contraposes_l(0, th_1, @list.empty(), flits, @list.empty())
+    let basics = mk_contraposes_l(0L, th_1, @list.empty(), flits, @list.empty())
     if @lib.forall(
-        fn(x116 : (Int, @list.List[@meson.FolTerm])) -> Bool raise {
+        fn(x116 : (Int64, @list.List[@meson.FolTerm])) -> Bool raise {
           let (p, _) = x116
-          p < 0
+          p < 0L
         },
         flits,
       ) {
@@ -766,15 +772,15 @@ fn step_5() -> Unit raise {
           (
             @lib.map(
               fn(
-                x117 : (Int, @list.List[@meson.FolTerm]),
-              ) -> (Int, @list.List[@meson.FolTerm]) raise {
+                x117 : (Int64, @list.List[@meson.FolTerm]),
+              ) -> (Int64, @list.List[@meson.FolTerm]) raise {
                 @meson.mk_negated(x117.0, x117.1)
               },
               flits,
             ),
-            (1, @list.empty()),
+            (1L, @list.empty()),
           ),
-          (-1, th_1),
+          (-1L, th_1),
         ),
       )
     } else {
@@ -785,14 +791,14 @@ fn step_5() -> Unit raise {
     x118 : @list.List[@kernel.Thm],
   ) -> @list.List[
     (
-      Int,
+      Int64,
       @list.List[
         (
           (
-            @list.List[(Int, @list.List[@meson.FolTerm])],
-            (Int, @list.List[@meson.FolTerm]),
+            @list.List[(Int64, @list.List[@meson.FolTerm])],
+            (Int64, @list.List[@meson.FolTerm]),
           ),
-          (Int, @kernel.Thm),
+          (Int64, @kernel.Thm),
         ),
       ],
     ),
@@ -804,86 +810,86 @@ fn step_5() -> Unit raise {
         x124 : @list.List[
           (
             (
-              @list.List[(Int, @list.List[@meson.FolTerm])],
-              (Int, @list.List[@meson.FolTerm]),
+              @list.List[(Int64, @list.List[@meson.FolTerm])],
+              (Int64, @list.List[@meson.FolTerm]),
             ),
-            (Int, @kernel.Thm),
+            (Int64, @kernel.Thm),
           ),
         ],
       ) -> @list.List[
         (
           (
-            @list.List[(Int, @list.List[@meson.FolTerm])],
-            (Int, @list.List[@meson.FolTerm]),
+            @list.List[(Int64, @list.List[@meson.FolTerm])],
+            (Int64, @list.List[@meson.FolTerm]),
           ),
-          (Int, @kernel.Thm),
+          (Int64, @kernel.Thm),
         ),
       ] raise {
         (fn(
           x121 : @list.List[
             (
               (
-                @list.List[(Int, @list.List[@meson.FolTerm])],
-                (Int, @list.List[@meson.FolTerm]),
+                @list.List[(Int64, @list.List[@meson.FolTerm])],
+                (Int64, @list.List[@meson.FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ],
         ) -> ((
           @list.List[
             (
               (
-                @list.List[(Int, @list.List[@meson.FolTerm])],
-                (Int, @list.List[@meson.FolTerm]),
+                @list.List[(Int64, @list.List[@meson.FolTerm])],
+                (Int64, @list.List[@meson.FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ],
         ) -> @list.List[
           (
             (
-              @list.List[(Int, @list.List[@meson.FolTerm])],
-              (Int, @list.List[@meson.FolTerm]),
+              @list.List[(Int64, @list.List[@meson.FolTerm])],
+              (Int64, @list.List[@meson.FolTerm]),
             ),
-            (Int, @kernel.Thm),
+            (Int64, @kernel.Thm),
           ),
         ] raise) raise {
           fn(
             x122 : @list.List[
               (
                 (
-                  @list.List[(Int, @list.List[@meson.FolTerm])],
-                  (Int, @list.List[@meson.FolTerm]),
+                  @list.List[(Int64, @list.List[@meson.FolTerm])],
+                  (Int64, @list.List[@meson.FolTerm]),
                 ),
-                (Int, @kernel.Thm),
+                (Int64, @kernel.Thm),
               ),
             ],
           ) -> @list.List[
             (
               (
-                @list.List[(Int, @list.List[@meson.FolTerm])],
-                (Int, @list.List[@meson.FolTerm]),
+                @list.List[(Int64, @list.List[@meson.FolTerm])],
+                (Int64, @list.List[@meson.FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ] raise {
             ((
               x119 : @list.List[
                 (
                   (
-                    @list.List[(Int, @list.List[@meson.FolTerm])],
-                    (Int, @list.List[@meson.FolTerm]),
+                    @list.List[(Int64, @list.List[@meson.FolTerm])],
+                    (Int64, @list.List[@meson.FolTerm]),
                   ),
-                  (Int, @kernel.Thm),
+                  (Int64, @kernel.Thm),
                 ),
               ],
               x120 : @list.List[
                 (
                   (
-                    @list.List[(Int, @list.List[@meson.FolTerm])],
-                    (Int, @list.List[@meson.FolTerm]),
+                    @list.List[(Int64, @list.List[@meson.FolTerm])],
+                    (Int64, @list.List[@meson.FolTerm]),
                   ),
-                  (Int, @kernel.Thm),
+                  (Int64, @kernel.Thm),
                 ),
               ],
             ) => @lib.union_eq(eqt_l, x119, x120))(x121, x122)
@@ -898,27 +904,27 @@ fn step_5() -> Unit raise {
         fn(
           x129 : (
             (
-              @list.List[(Int, @list.List[@meson.FolTerm])],
-              (Int, @list.List[@meson.FolTerm]),
+              @list.List[(Int64, @list.List[@meson.FolTerm])],
+              (Int64, @list.List[@meson.FolTerm]),
             ),
-            (Int, @kernel.Thm),
+            (Int64, @kernel.Thm),
           ),
-        ) -> Int raise {
+        ) -> Int64 raise {
           (fn(
             x127 : (
-              @list.List[(Int, @list.List[@meson.FolTerm])],
-              (Int, @list.List[@meson.FolTerm]),
+              @list.List[(Int64, @list.List[@meson.FolTerm])],
+              (Int64, @list.List[@meson.FolTerm]),
             ),
-          ) -> Int raise {
-            (fn(x125 : (Int, @list.List[@meson.FolTerm])) -> Int raise {
+          ) -> Int64 raise {
+            (fn(x125 : (Int64, @list.List[@meson.FolTerm])) -> Int64 raise {
               x125.0
             })(
               (fn(
                 x126 : (
-                  @list.List[(Int, @list.List[@meson.FolTerm])],
-                  (Int, @list.List[@meson.FolTerm]),
+                  @list.List[(Int64, @list.List[@meson.FolTerm])],
+                  (Int64, @list.List[@meson.FolTerm]),
                 ),
-              ) -> (Int, @list.List[@meson.FolTerm]) raise {
+              ) -> (Int64, @list.List[@meson.FolTerm]) raise {
                 x126.1
               })(x127),
             )
@@ -926,14 +932,14 @@ fn step_5() -> Unit raise {
             (fn(
               x128 : (
                 (
-                  @list.List[(Int, @list.List[@meson.FolTerm])],
-                  (Int, @list.List[@meson.FolTerm]),
+                  @list.List[(Int64, @list.List[@meson.FolTerm])],
+                  (Int64, @list.List[@meson.FolTerm]),
                 ),
-                (Int, @kernel.Thm),
+                (Int64, @kernel.Thm),
               ),
             ) -> (
-              @list.List[(Int, @list.List[@meson.FolTerm])],
-              (Int, @list.List[@meson.FolTerm]),
+              @list.List[(Int64, @list.List[@meson.FolTerm])],
+              (Int64, @list.List[@meson.FolTerm]),
             ) raise {
               x128.0
             })(x129),
@@ -944,16 +950,16 @@ fn step_5() -> Unit raise {
     )
     let prules = @lib.map(
       fn(
-        x130 : Int,
+        x130 : Int64,
       ) -> (
-        Int,
+        Int64,
         @list.List[
           (
             (
-              @list.List[(Int, @list.List[@meson.FolTerm])],
-              (Int, @list.List[@meson.FolTerm]),
+              @list.List[(Int64, @list.List[@meson.FolTerm])],
+              (Int64, @list.List[@meson.FolTerm]),
             ),
-            (Int, @kernel.Thm),
+            (Int64, @kernel.Thm),
           ),
         ],
       ) raise {
@@ -964,31 +970,33 @@ fn step_5() -> Unit raise {
             fn(
               x137 : (
                 (
-                  @list.List[(Int, @list.List[@meson.FolTerm])],
-                  (Int, @list.List[@meson.FolTerm]),
+                  @list.List[(Int64, @list.List[@meson.FolTerm])],
+                  (Int64, @list.List[@meson.FolTerm]),
                 ),
-                (Int, @kernel.Thm),
+                (Int64, @kernel.Thm),
               ),
             ) -> Bool raise {
               (fn(
                 x135 : (
-                  @list.List[(Int, @list.List[@meson.FolTerm])],
-                  (Int, @list.List[@meson.FolTerm]),
+                  @list.List[(Int64, @list.List[@meson.FolTerm])],
+                  (Int64, @list.List[@meson.FolTerm]),
                 ),
               ) -> Bool raise {
-                (fn(x133 : (Int, @list.List[@meson.FolTerm])) -> Bool raise {
-                  (fn(x131 : Int) -> Bool raise { t_1 == x131 })(
-                    (fn(x132 : (Int, @list.List[@meson.FolTerm])) -> Int raise {
+                (fn(x133 : (Int64, @list.List[@meson.FolTerm])) -> Bool raise {
+                  (fn(x131 : Int64) -> Bool raise { t_1 == x131 })(
+                    (fn(
+                      x132 : (Int64, @list.List[@meson.FolTerm]),
+                    ) -> Int64 raise {
                       x132.0
                     })(x133),
                   )
                 })(
                   (fn(
                     x134 : (
-                      @list.List[(Int, @list.List[@meson.FolTerm])],
-                      (Int, @list.List[@meson.FolTerm]),
+                      @list.List[(Int64, @list.List[@meson.FolTerm])],
+                      (Int64, @list.List[@meson.FolTerm]),
                     ),
-                  ) -> (Int, @list.List[@meson.FolTerm]) raise {
+                  ) -> (Int64, @list.List[@meson.FolTerm]) raise {
                     x134.1
                   })(x135),
                 )
@@ -996,14 +1004,14 @@ fn step_5() -> Unit raise {
                 (fn(
                   x136 : (
                     (
-                      @list.List[(Int, @list.List[@meson.FolTerm])],
-                      (Int, @list.List[@meson.FolTerm]),
+                      @list.List[(Int64, @list.List[@meson.FolTerm])],
+                      (Int64, @list.List[@meson.FolTerm]),
                     ),
-                    (Int, @kernel.Thm),
+                    (Int64, @kernel.Thm),
                   ),
                 ) -> (
-                  @list.List[(Int, @list.List[@meson.FolTerm])],
-                  (Int, @list.List[@meson.FolTerm]),
+                  @list.List[(Int64, @list.List[@meson.FolTerm])],
+                  (Int64, @list.List[@meson.FolTerm]),
                 ) raise {
                   x136.0
                 })(x137),
@@ -1018,34 +1026,34 @@ fn step_5() -> Unit raise {
     let srules = @lib.sort(
       fn(
         x138 : (
-          Int,
+          Int64,
           @list.List[
             (
               (
-                @list.List[(Int, @list.List[@meson.FolTerm])],
-                (Int, @list.List[@meson.FolTerm]),
+                @list.List[(Int64, @list.List[@meson.FolTerm])],
+                (Int64, @list.List[@meson.FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ],
         ),
         x139 : (
-          Int,
+          Int64,
           @list.List[
             (
               (
-                @list.List[(Int, @list.List[@meson.FolTerm])],
-                (Int, @list.List[@meson.FolTerm]),
+                @list.List[(Int64, @list.List[@meson.FolTerm])],
+                (Int64, @list.List[@meson.FolTerm]),
               ),
-              (Int, @kernel.Thm),
+              (Int64, @kernel.Thm),
             ),
           ],
         ),
       ) -> Bool raise {
         let (p_1, _) = x138
         let (q, _) = x139
-        let t140 = @lib.abs_int(q)
-        @lib.abs_int(p_1) <= t140
+        let t140 = @lib.abs63(q)
+        @lib.abs63(p_1) <= t140
       },
       prules,
     )
@@ -1057,14 +1065,14 @@ fn step_5() -> Unit raise {
 let fol_of_hol_clauses_c : @lib.Cell[
   (@list.List[@kernel.Thm]) -> @list.List[
     (
-      Int,
+      Int64,
       @list.List[
         (
           (
-            @list.List[(Int, @list.List[@meson.FolTerm])],
-            (Int, @list.List[@meson.FolTerm]),
+            @list.List[(Int64, @list.List[@meson.FolTerm])],
+            (Int64, @list.List[@meson.FolTerm]),
           ),
-          (Int, @kernel.Thm),
+          (Int64, @kernel.Thm),
         ),
       ],
     ),
@@ -1077,14 +1085,14 @@ pub fn fol_of_hol_clauses(
   x : @list.List[@kernel.Thm],
 ) -> @list.List[
   (
-    Int,
+    Int64,
     @list.List[
       (
         (
-          @list.List[(Int, @list.List[@meson.FolTerm])],
-          (Int, @list.List[@meson.FolTerm]),
+          @list.List[(Int64, @list.List[@meson.FolTerm])],
+          (Int64, @list.List[@meson.FolTerm]),
         ),
-        (Int, @kernel.Thm),
+        (Int64, @kernel.Thm),
       ),
     ],
   ),
@@ -1104,12 +1112,12 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] e
 
 ///|
 fn[TC, TD] mk_contraposes_l(
-  x108 : Int,
+  x108 : Int64,
   x109 : TD,
-  x110 : @list.List[(Int, TC)],
-  x111 : @list.List[(Int, TC)],
-  x112 : @list.List[((@list.List[(Int, TC)], (Int, TC)), (Int, TD))],
-) -> @list.List[((@list.List[(Int, TC)], (Int, TC)), (Int, TD))] raise {
+  x110 : @list.List[(Int64, TC)],
+  x111 : @list.List[(Int64, TC)],
+  x112 : @list.List[((@list.List[(Int64, TC)], (Int64, TC)), (Int64, TD))],
+) -> @list.List[((@list.List[(Int64, TC)], (Int64, TC)), (Int64, TD))] raise {
   let n = x108
   let th = x109
   let used = x110
@@ -1121,7 +1129,7 @@ fn[TC, TD] mk_contraposes_l(
       let nw = (
         (
           @lib.map(
-            fn(x113 : (Int, TC)) -> (Int, TC) raise {
+            fn(x113 : (Int64, TC)) -> (Int64, TC) raise {
               @meson.mk_negated(x113.0, x113.1)
             },
             used.concat(t),
@@ -1131,7 +1139,7 @@ fn[TC, TD] mk_contraposes_l(
         (n, th),
       )
       mk_contraposes_l(
-        n + 1,
+        @lib.add63(n, 1L),
         th,
         used.concat(@list.List([h])),
         t,
