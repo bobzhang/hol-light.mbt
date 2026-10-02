@@ -65,7 +65,7 @@ Upstream: `.repos/hol-light` (jrh13/hol-light @ `cba9198`), not tracked in this 
 | `Failure`, `try … with Failure _`, `can`, `Unchanged`, `Match_failure` | Use the builtin `Failure(String)`. Every fallible HOL function is declared plain `raise`, kernel included, because a `raise Failure` function value is not accepted where a `raise` callback is expected, and HOL passes rules around as values everywhere. Catch sites match `Failure(_)` and re-raise everything else (`e => raise e`), like OCaml's `with Failure _`. `Unchanged`, `MatchFailure`, `InvalidArgument` and `DivisionByZero` are separate `pub(all)` error types. |
 | Deep recursion. Both wasm and wasm-gc overflow somewhere between 10K and 30K frames. | List utilities use loops or `@list` builtins. Recursion over terms is **not** assumed safe: there are stress tests for deep combinations, binders and long lists, and explicit work stacks are added where needed. |
 | Evaluation order. OCaml 4.14 evaluates tuples, function arguments, constructor arguments, list literals and binary operators right to left. But `let … and …` and `match (e1, e2) with` (where the tuple is never built) go left to right. MoonBit is always left to right. | Whenever the parts have effects (fresh names, registration, exceptions), write the order out explicitly. Library callback order follows `lib.ml` exactly: `map` runs head-first, `filter`/`mapfilter` tail-first. |
-| OCaml 63-bit `int` vs MoonBit 32-bit `Int` | Use `Int` only where the range is clearly small (indexes, arities, counters). Use `Int64` where values can grow (hash values, user-visible numbers), with an audit at each port. |
+| OCaml 63-bit `int` vs MoonBit 32-bit `Int` | OCaml `int` is `Int64` with exact 63-bit semantics (lib/int63.mbt) in translated code and in OCaml-visible data; `Int` only for indexes and bounded internals, converted with a range check at the boundary. |
 | `Hashtbl.hash` decides the tree shape of the `lib.ml` Patricia maps (`func`, `\|->`), and so their fold and `choose` order | Implement an OCaml-compatible `caml_hash` (MurmurHash3, limits 10/256) for the key types used (strings, ints, terms, types, tuples) and test it against OCaml values. Keep `Hashtbl` duplicate-binding semantics. |
 | Callback effect types | Combinators that only propagate errors take `raise?` callbacks, which accept any function value. Combinators that catch `Failure` (`can`, `repeat`, `tryfind`, `splitlist`, `find_term`, …) take `raise` callbacks, and a named non-raising function must be passed as a lambda (`t => is_var(t)`). The translator always eta-expands function arguments. |
 | Physical equality `==` | Use `physical_equal` only as a sharing optimization. Results must be structurally identical whether it returns true or false. |
@@ -339,9 +339,7 @@ definitions register constants, quotations advance the type-variable and
   translated module, and fixpoint bounds for recursive groups). Known
   limitation: Hashtbl.hash of float arrays is that of an ordinary block.
   Further known limits (each fails loudly or was checked not to matter
-  where used): OCaml's 63-bit `int` is MoonBit's 32-bit `Int` (e.g.
-  dest_small_numeral fails above 2^31 - 1 where upstream succeeds; metis'
-  multInt behaves identically); `num` keeps no representation history, so
+  where used): `num` keeps no representation history, so
   OCaml's structural compare and Hashtbl.hash on nums are reproduced from
   the canonical form (a non-normalized Big_int such as `minus_num (2^62)`
   differs) and where OCaml's compare raises on big-integer digits the port
@@ -367,16 +365,15 @@ definitions register constants, quotations advance the type-variable and
   Library/tactician_light.ml, an interactive tool that evaluates OCaml
   tactic strings at run time with `loadt` (it needs a tactic-expression
   interpreter, a possible later addition).
-  Next: OCaml `int` as a 63-bit `Int64` (below), Multivariate/, then the
-  native target.
-
-  Planned: OCaml `int` becomes `Int64` with exact 63-bit semantics
-  (lib/int63.mbt: results normalized to [-2^62, 2^62 - 1], `lsl`/`lsr`/
-  `asr` as OCaml, division by zero raising), in the hand-ported APIs
-  (fusion arities and type tables, num's `int_of_num`/`num_of_int` with
-  63-bit bounds, lib list/index helpers, Random seeds, source-facing hash
-  results) and in the translator's type mapping; MoonBit `Int` stays for
-  storage indexes and bounded internals, with checked narrowing at array
-  and string boundaries. This removes the divergences where upstream
-  accepts and the port fails (bitmatch on 32-bit word numerals,
-  dest_small_numeral above 2^31 - 1).
+  OCaml `int` is an `Int64` with exact 63-bit semantics (lib/int63.mbt:
+  results normalized to [-2^62, 2^62 - 1], OCaml's `max_int`/`min_int`,
+  `lsl`/`lsr`/`asr`, division by zero raising; checked against OCaml
+  4.14). The translator maps `int` to `Int64` and converts at the
+  boundaries of hand-ported `Int` APIs (scalars, tuples and functions;
+  `Int` stays for indexes and bounded internals, narrowed with a check);
+  APIs carrying OCaml ints inside data are `Int64` (kernel type arities,
+  `range`, infix precedences, instantiations, `Num.int_of_num` as
+  `int63_of_num`). Upstream and the port now agree beyond 2^31 (e.g.
+  bitmatch on 32-bit word numerals). tools/ocaml_ref/retranslate_all.py
+  regenerates every translated package in load order.
+  Next: Multivariate/, then the native target.
