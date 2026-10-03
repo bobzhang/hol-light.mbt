@@ -1,0 +1,113 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/specialtopologies"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn closed_in_cocountable_topology() -> @kernel.Thm
+
+pub fn closed_in_cofinite_topology() -> @kernel.Thm
+
+pub fn closed_in_indiscrete_topology() -> @kernel.Thm
+
+pub fn cocountable_eq_discrete_topology() -> @kernel.Thm
+
+pub fn cocountable_topology() -> @kernel.Thm
+
+pub fn cofinite_eq_discrete_topology() -> @kernel.Thm
+
+pub fn cofinite_topology() -> @kernel.Thm
+
+pub fn compact_in_cocountable_topology() -> @kernel.Thm
+
+pub fn compact_in_cofinite_topology() -> @kernel.Thm
+
+pub fn compact_in_indiscrete_topology() -> @kernel.Thm
+
+pub fn compact_space_cocountable_topology() -> @kernel.Thm
+
+pub fn compact_space_cofinite_topology() -> @kernel.Thm
+
+pub fn compact_space_indiscrete_topology() -> @kernel.Thm
+
+pub fn completely_regular_space_indiscrete_topology() -> @kernel.Thm
+
+pub fn connected_in_cocountable_topology() -> @kernel.Thm
+
+pub fn connected_in_cofinite_topology() -> @kernel.Thm
+
+pub fn connected_space_cocountable_topology() -> @kernel.Thm
+
+pub fn connected_space_cofinite_topology() -> @kernel.Thm
+
+pub fn continuous_map_from_indiscrete_topology() -> @kernel.Thm
+
+pub fn continuous_map_into_indiscrete_topology() -> @kernel.Thm
+
+pub fn derived_set_of_indiscrete_topology() -> @kernel.Thm
+
+pub fn derived_set_of_topspace_indiscrete_topology() -> @kernel.Thm
+
+pub fn hausdorff_space_cocountable_topology() -> @kernel.Thm
+
+pub fn hausdorff_space_cofinite_topology() -> @kernel.Thm
+
+pub fn hausdorff_space_indiscrete_topology() -> @kernel.Thm
+
+pub fn hausdorff_space_subtopology_cocountable_topology() -> @kernel.Thm
+
+pub fn hausdorff_space_subtopology_cofinite_topology() -> @kernel.Thm
+
+pub fn indiscrete_topology() -> @kernel.Thm
+
+pub fn kc_space_cocountable_topology() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn locally_compact_space_indiscrete_topology() -> @kernel.Thm
+
+pub fn neighbourhood_base_of_indiscrete_topology() -> @kernel.Thm
+
+pub fn normal_space_indiscrete_topology() -> @kernel.Thm
+
+pub fn open_in_cocountable_topology() -> @kernel.Thm
+
+pub fn open_in_cofinite_topology() -> @kernel.Thm
+
+pub fn open_in_indiscrete_topology() -> @kernel.Thm
+
+pub fn path_connected_in_indiscrete_topology() -> @kernel.Thm
+
+pub fn path_connected_space_indiscrete_topology() -> @kernel.Thm
+
+pub fn perfect_set_indiscrete_topology() -> @kernel.Thm
+
+pub fn regular_space_indiscrete_topology() -> @kernel.Thm
+
+pub fn subtopology_indiscrete_topology() -> @kernel.Thm
+
+pub fn t0_space_indiscrete_topology() -> @kernel.Thm
+
+pub fn t1_space_cocountable_topology() -> @kernel.Thm
+
+pub fn t1_space_cofinite_topology() -> @kernel.Thm
+
+pub fn t1_space_cofinite_topology_minimal() -> @kernel.Thm
+
+pub fn t1_space_indiscrete_topology() -> @kernel.Thm
+
+pub fn topspace_cocountable_topology() -> @kernel.Thm
+
+pub fn topspace_cofinite_topology() -> @kernel.Thm
+
+pub fn topspace_indiscrete_topology() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

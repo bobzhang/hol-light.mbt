@@ -1,0 +1,201 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/gamma"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cgamma() -> @kernel.Thm
+
+pub fn cgamma_1() -> @kernel.Thm
+
+pub fn cgamma_eq_0() -> @kernel.Thm
+
+pub fn cgamma_fact() -> @kernel.Thm
+
+pub fn cgamma_half() -> @kernel.Thm
+
+pub fn cgamma_legendre() -> @kernel.Thm
+
+pub fn cgamma_legendre_alt() -> @kernel.Thm
+
+pub fn cgamma_lgamma() -> @kernel.Thm
+
+pub fn cgamma_poles() -> @kernel.Thm
+
+pub fn cgamma_recurrence() -> @kernel.Thm
+
+pub fn cgamma_recurrence_alt() -> @kernel.Thm
+
+pub fn cgamma_reflection() -> @kernel.Thm
+
+pub fn cgamma_simple_poles() -> @kernel.Thm
+
+pub fn cgamma_v1() -> @kernel.Thm
+
+pub fn cgamma_weierstrass() -> @kernel.Thm
+
+pub fn cnj_cgamma() -> @kernel.Thm
+
+pub fn complex_differentiable_at_cgamma() -> @kernel.Thm
+
+pub fn complex_differentiable_at_lgamma() -> @kernel.Thm
+
+pub fn complex_differentiable_at_recip_cgamma() -> @kernel.Thm
+
+pub fn complex_differentiable_within_cgamma() -> @kernel.Thm
+
+pub fn complex_differentiable_within_recip_cgamma() -> @kernel.Thm
+
+pub fn continuous_at_cgamma() -> @kernel.Thm
+
+pub fn continuous_at_recip_cgamma() -> @kernel.Thm
+
+pub fn continuous_on_cgamma() -> @kernel.Thm
+
+pub fn continuous_on_recip_cgamma() -> @kernel.Thm
+
+pub fn continuous_within_cgamma() -> @kernel.Thm
+
+pub fn continuous_within_recip_cgamma() -> @kernel.Thm
+
+pub fn csin_product() -> @kernel.Thm
+
+pub fn cx_gamma() -> @kernel.Thm
+
+pub fn euler_has_integral_cgamma() -> @kernel.Thm
+
+pub fn euler_has_real_integral_gamma() -> @kernel.Thm
+
+pub fn euler_integrable() -> @kernel.Thm
+
+pub fn euler_integral() -> @kernel.Thm
+
+pub fn euler_mascheroni() -> @kernel.Thm
+
+pub fn euler_mascheroni_approx_32() -> @kernel.Thm
+
+pub fn euler_mascheroni_v1() -> @kernel.Thm
+
+pub fn euler_original_has_integral_cgamma() -> @kernel.Thm
+
+pub fn euler_original_has_real_integral_gamma() -> @kernel.Thm
+
+pub fn euler_original_integrable() -> @kernel.Thm
+
+pub fn euler_original_integral() -> @kernel.Thm
+
+pub fn euler_original_real_integrable() -> @kernel.Thm
+
+pub fn euler_original_real_integral() -> @kernel.Thm
+
+pub fn euler_real_integrable() -> @kernel.Thm
+
+pub fn euler_real_integral() -> @kernel.Thm
+
+pub fn gamma() -> @kernel.Thm
+
+pub fn gamma_1() -> @kernel.Thm
+
+pub fn gamma_eq_0() -> @kernel.Thm
+
+pub fn gamma_fact() -> @kernel.Thm
+
+pub fn gamma_half() -> @kernel.Thm
+
+pub fn gamma_legendre() -> @kernel.Thm
+
+pub fn gamma_legendre_alt() -> @kernel.Thm
+
+pub fn gamma_poles() -> @kernel.Thm
+
+pub fn gamma_pos_le() -> @kernel.Thm
+
+pub fn gamma_pos_lt() -> @kernel.Thm
+
+pub fn gamma_real_log_convex_unique() -> @kernel.Thm
+
+pub fn gamma_recurrence() -> @kernel.Thm
+
+pub fn gamma_recurrence_alt() -> @kernel.Thm
+
+pub fn gamma_reflection() -> @kernel.Thm
+
+pub fn gamma_simple_poles() -> @kernel.Thm
+
+pub fn gamma_v1() -> @kernel.Thm
+
+pub fn gamma_weierstrass() -> @kernel.Thm
+
+pub fn gaussian_integral() -> @kernel.Thm
+
+pub fn holomorphic_on_cgamma() -> @kernel.Thm
+
+pub fn holomorphic_on_recip_cgamma() -> @kernel.Thm
+
+pub fn lgamma() -> @kernel.Thm
+
+pub fn lgamma_alt() -> @kernel.Thm
+
+pub fn lgamma_alt2() -> @kernel.Thm
+
+pub fn lgamma_stirling() -> @kernel.Thm
+
+pub fn lgamma_stirling_integrals_exist() -> @kernel.Thm
+
+pub fn lgamma_v1() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn log2_approx_40() -> @kernel.Thm
+
+pub fn log_gamma_stirling() -> @kernel.Thm
+
+pub fn re_pos_cgamma_real() -> @kernel.Thm
+
+pub fn real_continuous_atreal_gamma() -> @kernel.Thm
+
+pub fn real_continuous_atreal_recip_gamma() -> @kernel.Thm
+
+pub fn real_continuous_on_gamma() -> @kernel.Thm
+
+pub fn real_continuous_on_recip_gamma() -> @kernel.Thm
+
+pub fn real_continuous_within_gamma() -> @kernel.Thm
+
+pub fn real_continuous_withinreal_recip_gamma() -> @kernel.Thm
+
+pub fn real_differentiable_at_gamma() -> @kernel.Thm
+
+pub fn real_differentiable_atreal_recip_gamma() -> @kernel.Thm
+
+pub fn real_differentiable_on_gamma() -> @kernel.Thm
+
+pub fn real_differentiable_on_recip_gamma() -> @kernel.Thm
+
+pub fn real_differentiable_within_gamma() -> @kernel.Thm
+
+pub fn real_differentiable_within_recip_gamma() -> @kernel.Thm
+
+pub fn real_gamma() -> @kernel.Thm
+
+pub fn real_log_convex_gamma() -> @kernel.Thm
+
+pub fn recip_cgamma() -> @kernel.Thm
+
+pub fn recip_cgamma_weierstrass() -> @kernel.Thm
+
+pub fn sin_product() -> @kernel.Thm
+
+pub fn wallis() -> @kernel.Thm
+
+pub fn wallis_alt() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

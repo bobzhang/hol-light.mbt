@@ -1,0 +1,141 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/lpspaces"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cx_drop_integral() -> @kernel.Thm
+
+pub fn cxdrop_linear() -> @kernel.Thm
+
+pub fn hoelder_bound() -> @kernel.Thm
+
+pub fn hoelder_inequality() -> @kernel.Thm
+
+pub fn hoelder_inequality_full() -> @kernel.Thm
+
+pub fn integral_lnorm_rpow() -> @kernel.Thm
+
+pub fn l2_cnj_product_integrable() -> @kernel.Thm
+
+pub fn lnorm() -> @kernel.Thm
+
+pub fn lnorm_0() -> @kernel.Thm
+
+pub fn lnorm_const() -> @kernel.Thm
+
+pub fn lnorm_eq_0() -> @kernel.Thm
+
+pub fn lnorm_mono() -> @kernel.Thm
+
+pub fn lnorm_mul() -> @kernel.Thm
+
+pub fn lnorm_neg() -> @kernel.Thm
+
+pub fn lnorm_norm() -> @kernel.Thm
+
+pub fn lnorm_pos_le() -> @kernel.Thm
+
+pub fn lnorm_rpow() -> @kernel.Thm
+
+pub fn lnorm_triangle() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn lproduct() -> @kernel.Thm
+
+pub fn lproduct_cauchy_schwarz() -> @kernel.Thm
+
+pub fn lproduct_l2lim() -> @kernel.Thm
+
+pub fn lproduct_l2lim_rslot() -> @kernel.Thm
+
+pub fn lproduct_lmul() -> @kernel.Thm
+
+pub fn lproduct_lsub() -> @kernel.Thm
+
+pub fn lproduct_lsum() -> @kernel.Thm
+
+pub fn lproduct_rmul() -> @kernel.Thm
+
+pub fn lproduct_rsum() -> @kernel.Thm
+
+pub fn lproduct_self() -> @kernel.Thm
+
+pub fn lproduct_self_lnorm() -> @kernel.Thm
+
+pub fn lproduct_sym() -> @kernel.Thm
+
+pub fn lspace() -> @kernel.Thm
+
+pub fn lspace_0() -> @kernel.Thm
+
+pub fn lspace_1() -> @kernel.Thm
+
+pub fn lspace_add() -> @kernel.Thm
+
+pub fn lspace_alt() -> @kernel.Thm
+
+pub fn lspace_approximate_bounded() -> @kernel.Thm
+
+pub fn lspace_approximate_continuous() -> @kernel.Thm
+
+pub fn lspace_approximate_vector_polynomial_function() -> @kernel.Thm
+
+pub fn lspace_bounded_measurable() -> @kernel.Thm
+
+pub fn lspace_bounded_measurable_simple() -> @kernel.Thm
+
+pub fn lspace_cmul() -> @kernel.Thm
+
+pub fn lspace_cnj() -> @kernel.Thm
+
+pub fn lspace_complex_lmul() -> @kernel.Thm
+
+pub fn lspace_const() -> @kernel.Thm
+
+pub fn lspace_dominated_convergence() -> @kernel.Thm
+
+pub fn lspace_imp_integrable() -> @kernel.Thm
+
+pub fn lspace_inclusion() -> @kernel.Thm
+
+pub fn lspace_integrable_product() -> @kernel.Thm
+
+pub fn lspace_max() -> @kernel.Thm
+
+pub fn lspace_min() -> @kernel.Thm
+
+pub fn lspace_mono() -> @kernel.Thm
+
+pub fn lspace_neg() -> @kernel.Thm
+
+pub fn lspace_norm() -> @kernel.Thm
+
+pub fn lspace_sub() -> @kernel.Thm
+
+pub fn lspace_subset() -> @kernel.Thm
+
+pub fn lspace_summable() -> @kernel.Thm
+
+pub fn lspace_summable_univ() -> @kernel.Thm
+
+pub fn lspace_vsum() -> @kernel.Thm
+
+pub fn lspace_zero() -> @kernel.Thm
+
+pub fn measurable_on_cnj() -> @kernel.Thm
+
+pub fn riesz_fischer() -> @kernel.Thm
+
+pub fn vsum_lnorm() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

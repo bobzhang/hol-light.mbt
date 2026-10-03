@@ -1,0 +1,93 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/wlog_examples"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn aff_ge_def() -> @kernel.Thm
+
+pub fn aff_ge_injective_linear_image() -> @kernel.Thm
+
+pub fn aff_ge_translation() -> @kernel.Thm
+
+pub fn aff_gt_def() -> @kernel.Thm
+
+pub fn aff_gt_injective_linear_image() -> @kernel.Thm
+
+pub fn aff_gt_translation() -> @kernel.Thm
+
+pub fn aff_le_def() -> @kernel.Thm
+
+pub fn aff_le_injective_linear_image() -> @kernel.Thm
+
+pub fn aff_le_translation() -> @kernel.Thm
+
+pub fn aff_lt_def() -> @kernel.Thm
+
+pub fn aff_lt_injective_linear_image() -> @kernel.Thm
+
+pub fn aff_lt_translation() -> @kernel.Thm
+
+pub fn affine_plane() -> @kernel.Thm
+
+pub fn affsign() -> @kernel.Thm
+
+pub fn affsign_alt() -> @kernel.Thm
+
+pub fn affsign_injective_linear_image() -> @kernel.Thm
+
+pub fn affsign_translation() -> @kernel.Thm
+
+pub fn affsign_v1() -> @kernel.Thm
+
+pub fn affsign_v2() -> @kernel.Thm
+
+pub fn in_affsign() -> @kernel.Thm
+
+pub fn in_affsign_translation() -> @kernel.Thm
+
+pub fn in_affsign_v1() -> @kernel.Thm
+
+pub fn lemma() -> @kernel.Thm
+
+pub fn lemma_v1() -> @kernel.Thm
+
+pub fn lemma_v2() -> @kernel.Thm
+
+pub fn lin_combo() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn not_coplanar_not_collinear() -> @kernel.Thm
+
+pub fn opposite() -> @kernel.Thm
+
+pub fn opposite_linear_image_eq() -> @kernel.Thm
+
+pub fn opposite_translation_eq() -> @kernel.Thm
+
+pub fn sgn_ge() -> @kernel.Thm
+
+pub fn sgn_gt() -> @kernel.Thm
+
+pub fn sgn_le() -> @kernel.Thm
+
+pub fn sgn_lt() -> @kernel.Thm
+
+pub fn theorem() -> @kernel.Thm
+
+pub fn truong_1() -> @kernel.Thm
+
+pub fn truong_opposite_lemma() -> @kernel.Thm
+
+pub fn truong_opposite_thm() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

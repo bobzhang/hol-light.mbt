@@ -1,0 +1,104 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/cross"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn bilinear_cross() -> @kernel.Thm
+
+pub fn continuous_cross() -> @kernel.Thm
+
+pub fn continuous_on_cross() -> @kernel.Thm
+
+pub fn cross() -> @kernel.Thm
+
+pub fn cross_0() -> @kernel.Thm
+
+pub fn cross_basis() -> @kernel.Thm
+
+pub fn cross_basis_nonzero() -> @kernel.Thm
+
+pub fn cross_components() -> @kernel.Thm
+
+pub fn cross_cross_det() -> @kernel.Thm
+
+pub fn cross_dot_cancel() -> @kernel.Thm
+
+pub fn cross_eq_0() -> @kernel.Thm
+
+pub fn cross_eq_self() -> @kernel.Thm
+
+pub fn cross_jacobi() -> @kernel.Thm
+
+pub fn cross_ladd() -> @kernel.Thm
+
+pub fn cross_lagrange() -> @kernel.Thm
+
+pub fn cross_linear_image() -> @kernel.Thm
+
+pub fn cross_linear_image_weak() -> @kernel.Thm
+
+pub fn cross_lmul() -> @kernel.Thm
+
+pub fn cross_lneg() -> @kernel.Thm
+
+pub fn cross_lsub() -> @kernel.Thm
+
+pub fn cross_lzero() -> @kernel.Thm
+
+pub fn cross_matrix_mul() -> @kernel.Thm
+
+pub fn cross_orthogonal_matrix() -> @kernel.Thm
+
+pub fn cross_orthogonal_transformation() -> @kernel.Thm
+
+pub fn cross_radd() -> @kernel.Thm
+
+pub fn cross_refl() -> @kernel.Thm
+
+pub fn cross_rmul() -> @kernel.Thm
+
+pub fn cross_rneg() -> @kernel.Thm
+
+pub fn cross_rotation_matrix() -> @kernel.Thm
+
+pub fn cross_rotoinversion_matrix() -> @kernel.Thm
+
+pub fn cross_rsub() -> @kernel.Thm
+
+pub fn cross_rzero() -> @kernel.Thm
+
+pub fn cross_skew() -> @kernel.Thm
+
+pub fn cross_triple() -> @kernel.Thm
+
+pub fn dot_cross() -> @kernel.Thm
+
+pub fn dot_cross_det() -> @kernel.Thm
+
+pub fn dot_cross_self() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn norm_and_cross_eq_0() -> @kernel.Thm
+
+pub fn norm_cross() -> @kernel.Thm
+
+pub fn norm_cross_dot() -> @kernel.Thm
+
+pub fn orthogonal_cross() -> @kernel.Thm
+
+pub fn vec3_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn vec3_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

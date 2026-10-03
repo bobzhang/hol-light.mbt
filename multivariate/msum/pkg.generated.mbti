@@ -1,0 +1,187 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/msum"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn matrix_norm() -> @kernel.Thm
+
+pub fn monoidal_matrix_add() -> @kernel.Thm
+
+pub fn msum() -> @kernel.Thm
+
+pub fn msum_0() -> @kernel.Thm
+
+pub fn msum_1() -> @kernel.Thm
+
+pub fn msum_2() -> @kernel.Thm
+
+pub fn msum_3() -> @kernel.Thm
+
+pub fn msum_4() -> @kernel.Thm
+
+pub fn msum_add() -> @kernel.Thm
+
+pub fn msum_add_gen() -> @kernel.Thm
+
+pub fn msum_add_numseg() -> @kernel.Thm
+
+pub fn msum_add_split() -> @kernel.Thm
+
+pub fn msum_bijection() -> @kernel.Thm
+
+pub fn msum_cases() -> @kernel.Thm
+
+pub fn msum_cases_1() -> @kernel.Thm
+
+pub fn msum_clauses() -> @kernel.Thm
+
+pub fn msum_clauses_left() -> @kernel.Thm
+
+pub fn msum_clauses_numseg() -> @kernel.Thm
+
+pub fn msum_clauses_right() -> @kernel.Thm
+
+pub fn msum_cmul_numseg() -> @kernel.Thm
+
+pub fn msum_combine_l() -> @kernel.Thm
+
+pub fn msum_combine_r() -> @kernel.Thm
+
+pub fn msum_component() -> @kernel.Thm
+
+pub fn msum_const() -> @kernel.Thm
+
+pub fn msum_const_numseg() -> @kernel.Thm
+
+pub fn msum_delete() -> @kernel.Thm
+
+pub fn msum_delete_cases() -> @kernel.Thm
+
+pub fn msum_delta() -> @kernel.Thm
+
+pub fn msum_diff() -> @kernel.Thm
+
+pub fn msum_diffs() -> @kernel.Thm
+
+pub fn msum_diffs_alt() -> @kernel.Thm
+
+pub fn msum_eq() -> @kernel.Thm
+
+pub fn msum_eq_0() -> @kernel.Thm
+
+pub fn msum_eq_general() -> @kernel.Thm
+
+pub fn msum_eq_general_inverses() -> @kernel.Thm
+
+pub fn msum_eq_numseg() -> @kernel.Thm
+
+pub fn msum_eq_superset() -> @kernel.Thm
+
+pub fn msum_group() -> @kernel.Thm
+
+pub fn msum_group_relation() -> @kernel.Thm
+
+pub fn msum_image() -> @kernel.Thm
+
+pub fn msum_image_gen() -> @kernel.Thm
+
+pub fn msum_image_nonzero() -> @kernel.Thm
+
+pub fn msum_incl_excl() -> @kernel.Thm
+
+pub fn msum_injection() -> @kernel.Thm
+
+pub fn msum_lmul() -> @kernel.Thm
+
+pub fn msum_matrix_lmul() -> @kernel.Thm
+
+pub fn msum_matrix_rmul() -> @kernel.Thm
+
+pub fn msum_msum_product() -> @kernel.Thm
+
+pub fn msum_neg() -> @kernel.Thm
+
+pub fn msum_norm() -> @kernel.Thm
+
+pub fn msum_norm_bound() -> @kernel.Thm
+
+pub fn msum_norm_le() -> @kernel.Thm
+
+pub fn msum_norm_triangle() -> @kernel.Thm
+
+pub fn msum_offset() -> @kernel.Thm
+
+pub fn msum_offset_0() -> @kernel.Thm
+
+pub fn msum_pair() -> @kernel.Thm
+
+pub fn msum_pair_0() -> @kernel.Thm
+
+pub fn msum_partial_pre() -> @kernel.Thm
+
+pub fn msum_partial_suc() -> @kernel.Thm
+
+pub fn msum_reflect() -> @kernel.Thm
+
+pub fn msum_restrict() -> @kernel.Thm
+
+pub fn msum_restrict_set() -> @kernel.Thm
+
+pub fn msum_rmul() -> @kernel.Thm
+
+pub fn msum_row() -> @kernel.Thm
+
+pub fn msum_sing() -> @kernel.Thm
+
+pub fn msum_sing_numseg() -> @kernel.Thm
+
+pub fn msum_sub() -> @kernel.Thm
+
+pub fn msum_sub_numseg() -> @kernel.Thm
+
+pub fn msum_suc() -> @kernel.Thm
+
+pub fn msum_superset() -> @kernel.Thm
+
+pub fn msum_support() -> @kernel.Thm
+
+pub fn msum_support_explicit() -> @kernel.Thm
+
+pub fn msum_swap() -> @kernel.Thm
+
+pub fn msum_swap_numseg() -> @kernel.Thm
+
+pub fn msum_triv_numseg() -> @kernel.Thm
+
+pub fn msum_union() -> @kernel.Thm
+
+pub fn msum_union_lzero() -> @kernel.Thm
+
+pub fn msum_union_nonzero() -> @kernel.Thm
+
+pub fn msum_union_rzero() -> @kernel.Thm
+
+pub fn msum_unions_nonzero() -> @kernel.Thm
+
+pub fn msum_univ() -> @kernel.Thm
+
+pub fn msum_v1() -> @kernel.Thm
+
+pub fn msum_vmul() -> @kernel.Thm
+
+pub fn neutral_matrix_add() -> @kernel.Thm
+
+pub fn vectorize_msum() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

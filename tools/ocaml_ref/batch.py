@@ -49,9 +49,55 @@ def after(target):
     print(f"translated {target}", flush=True)
 
 
+class Node:
+    """A trie node: the session state after loading the files on its path."""
+    count = 0
+
+    def __init__(self, f):
+        self.f, self.children, self.target = f, {}, False
+        Node.count += 1
+        self.id = Node.count
+
+
+def trie(targets, before):
+    """The targets' load sequences (`before` + chain + target) as a trie."""
+    root = Node(None)
+    for t in targets:
+        n = root
+        for f in [ml_file(x) for x in before + theory.deps(t)] + [t]:
+            n = n.children.setdefault(f, Node(f))
+        n.target = True
+    return root
+
+
+def steps(node):
+    """Depth-first steps: every child but the last runs in a branch (a
+    forked copy of the session), the last continues the session."""
+    out, kids = [], list(node.children.values())
+    for i, k in enumerate(kids):
+        sub = [("target" if k.target else "load", k)] + steps(k)
+        if i < len(kids) - 1:
+            out.append(("branch", sub))
+        else:
+            out += sub
+    return out
+
+
+def path_to(root, t, before):
+    """The nodes from the root to target `t`."""
+    nodes, n = [], root
+    for f in [ml_file(x) for x in before + theory.deps(t)] + [t]:
+        n = n.children[f]
+        nodes.append(n)
+    return nodes
+
+
 def translate(targets):
-    plan = "[" + "; ".join(
-        f"([{'; '.join(ml_str(d) for d in theory.deps(t))}], {ml_str(t)})" for t in targets) + "]"
+    def ml(st):
+        return "[" + "; ".join(
+            f"Main.Branch {ml(x)}" if kind == "branch" else
+            f"Main.{'Target' if kind == 'target' else 'Load'} {ml_str(x.f)}" for kind, x in st) + "]"
+    plan = ml(steps(trie(targets, [])))
     os.makedirs(OUT, exist_ok=True)
     pf = os.path.join(OUT, "plan.ml")
     open(pf, "w").write(plan)
@@ -68,13 +114,8 @@ def translate(targets):
         sys.exit("translation batch failed (tools/ocaml_ref/_build/batch/translate.log)")
 
 
-def log_of(f):
-    return os.path.join(OUT, "out_" + ml_file(f).replace("/", "__") + ".txt")
-
-
 def references(targets, refs):
     """One upstream session; returns {target: expected output}."""
-    core = [u + ".ml" for u in theory.USE_BEFORE + theory.CORE]
     tails = {}
     for t in targets:
         text = open(refs[t]).read()
@@ -98,23 +139,40 @@ def references(targets, refs):
         "  | pid -> (match Unix.waitpid [] pid with\n"
         "      | _, Unix.WEXITED 0 -> ()\n"
         "      | _ -> prerr_endline (\"batch: reference of \" ^ tail ^ \" failed\"); exit 1);;\n",
+        "let batch_branch file = batch_flush ();\n"
+        "  match Unix.fork () with\n"
+        "  | 0 -> let ok = Toploop.use_silently Format.std_formatter (Toploop.File file) in\n"
+        "      batch_flush (); Unix._exit (if ok then 0 else 1)\n"
+        "  | pid -> (match Unix.waitpid [] pid with\n"
+        "      | _, Unix.WEXITED 0 -> ()\n"
+        "      | _ -> prerr_endline (\"batch: branch \" ^ file ^ \" failed\"); exit 1);;\n",
     ]
     lines = [
         f"let () = batch_redirect {ml_str(os.path.join(OUT, 'prelude.txt'))};;\n",
         open(os.path.join(REF, "prelude.ml")).read(), "\n",
     ]
-    loaded = set()
+    before = theory.USE_BEFORE + theory.CORE
+    root = trie(targets, before)
+    nbranch = [0]
 
-    def load(f):
-        if f not in loaded:
-            loaded.add(f)
-            lines.append(f"let () = batch_load {ml_str(f)} {ml_str(log_of(f))};;\n")
+    def log(n, child=False):
+        return os.path.join(OUT, f"out_{'child_' if child else ''}{n.id}.txt")
 
-    for t in targets:
-        for f in core + theory.deps(t):
-            load(ml_file(f))
-        lines.append(f"let () = batch_target {ml_str(tails[t])} {ml_str(log_of('child_' + t))};;\n")
-        load(t)
+    def emit(st):
+        out = []
+        for kind, x in st:
+            if kind == "branch":
+                nbranch[0] += 1
+                bf = os.path.join(OUT, f"branch_{nbranch[0]}.ml")
+                open(bf, "w").write("".join(emit(x)))
+                out.append(f"let () = batch_branch {ml_str(bf)};;\n")
+            else:
+                if kind == "target":
+                    out.append(f"let () = batch_target {ml_str(tails[x.f])} {ml_str(log(x, True))};;\n")
+                out.append(f"let () = batch_load {ml_str(x.f)} {ml_str(log(x))};;\n")
+        return out
+
+    lines += emit(steps(root))
     body = os.path.join(OUT, "ref_body.ml")
     open(body, "w").write("".join(lines))
     script = os.path.join(OUT, "ref_script.ml")
@@ -132,8 +190,8 @@ def references(targets, refs):
         sys.exit("reference batch failed (tools/ocaml_ref/_build/batch/ref.log):\n" + (p.stdout + p.stderr)[-3000:])
     expected = {}
     for t in targets:
-        parts = [os.path.join(OUT, "prelude.txt")] + [log_of(ml_file(f)) for f in core + theory.deps(t)] + \
-            [log_of("child_" + t)]
+        nodes = path_to(root, t, before)
+        parts = [os.path.join(OUT, "prelude.txt")] + [log(n) for n in nodes[:-1]] + [log(nodes[-1], True)]
         s = "".join(open(x).read() for x in parts)
         # run.sh's filters, then theory.py's normalization
         s = "\n".join(l for l in s.splitlines() if "HOL-Light syntax in effect" not in l and l != "") + "\n"

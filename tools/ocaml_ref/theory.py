@@ -91,19 +91,40 @@ def needs(f):
 # (tools/ocaml_ref/batch.py). Not ported: multivariate_database.ml and
 # complex_database.ml, the name/theorem tables of the interactive `search`
 # (help.ml, like database.ml); they define no theory.
-MV_ORDER = ["Multivariate/" + n + ".ml" for n in [
+MAKE_ORDER = ["Multivariate/" + n + ".ml" for n in [
     "misc", "metric", "homology", "vectors", "determinants", "topology", "convex", "paths",
     "polytope", "degree", "derivatives", "clifford", "integration", "measure",
-    "complexes", "canal", "transcendentals", "realanalysis",
-    "moretop", "cauchy", "cross", "msum", "paracompact",
-    "specialtopologies", "tarski", "wlog", "wlog_examples", "geom", "lpspaces", "gamma",
-    "cvectors", "flyspeck"]]
+    "complexes", "canal", "transcendentals", "realanalysis", "moretop", "cauchy"]]
+# the other files, loaded after the deepest make.ml file they need (their
+# anchor) and what they need: e.g. tarski.ml's proofs expect convex.ml's
+# context, not the complex analysis loaded after it
+EXTRAS = ["Multivariate/" + n + ".ml" for n in [
+    "cross", "msum", "paracompact", "specialtopologies", "tarski", "wlog", "wlog_examples",
+    "geom", "lpspaces", "gamma", "cvectors", "flyspeck"]]
+MV_ORDER = MAKE_ORDER + EXTRAS
+
+
+def needs_closure(f):
+    """Every file `f` needs, transitively (hol.ml's excluded)."""
+    out, todo = [], list(needs(f))
+    while todo:
+        g = todo.pop()
+        if stem(g) in CORE or stem(g) in LOADED or g in out:
+            continue
+        out.append(g)
+        todo += needs(g)
+    return out
 
 
 def chain_prev(f):
-    """The file loaded just before `f`'s own needs (Multivariate order)."""
-    if f in MV_ORDER and MV_ORDER.index(f) > 0:
-        return MV_ORDER[MV_ORDER.index(f) - 1]
+    """The file loaded just before `f`'s own needs: its predecessor in
+    make.ml's order, or an extra file's anchor."""
+    if f in MAKE_ORDER:
+        i = MAKE_ORDER.index(f)
+        return MAKE_ORDER[i - 1] if i > 0 else None
+    if f in EXTRAS:
+        anchored = [g for g in needs_closure(f) if g in MAKE_ORDER]
+        return max(anchored, key=MAKE_ORDER.index) if anchored else None
     return None
 
 

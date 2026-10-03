@@ -111,13 +111,15 @@ module Main = struct
     Emit.output ~source:target ~out:(Filename.concat root out);
     Printf.printf "wrote %s; %d unsupported items\n" out !Emit.errors
 
-  (* Several files in one session (tools/ocaml_ref/batch.py): `plan` lists,
-     for each target in order, the files to load before it (after hol.ml's;
-     those already loaded are skipped) and the target. Each target is translated in a forked child, a
-     copy of the session, so no per-file translator state carries over; the
-     parent then runs `after <target>` (`moon info`: the interfaces the next
-     translations read) and loads the target itself. Stops at the first
-     failure (exit status 1). *)
+  (* Several files in one session (tools/ocaml_ref/batch.py). The plan is a
+     tree of steps after hol.ml's files: `Load f` loads a file, `Target f`
+     translates it in a forked child (a copy of the session, so no per-file
+     translator state carries over), runs `after <f>` (`moon info`: the
+     interfaces the next translations read) and then loads it; `Branch
+     steps` runs steps in a forked child, so that files loaded there do not
+     reach the steps after it. Stops at the first failure (exit status 1). *)
+  type step = Load of string | Target of string | Branch of step list
+
   let translate_batch ~hol ~root ~after plan =
     Names.root := root;
     Loader.stdlib_dir := Filename.concat root "tools/translator/stdlib";
@@ -135,34 +137,45 @@ module Main = struct
     let fail msg = Printf.printf "BATCH FAILED: %s\n%!" msg; exit 1 in
     let loaded = Hashtbl.create 64 in
     let load_new f = if not (Hashtbl.mem loaded f) then (Hashtbl.add loaded f (); load f) in
-    List.iter
-      (fun (pre, target) ->
-        (* hol.ml's files, then the planned chain; the translator's own
-           dependency order must agree with it *)
-        List.iter load_new Translator.prefix;
-        List.iter load_new pre;
-        List.iter
-          (fun f -> if not (Hashtbl.mem loaded f) then fail ("unplanned dependency " ^ f ^ " of " ^ target))
-          (Translator.upto target Translator.prefix);
-        flush_all ();
-        Format.pp_print_flush Format.std_formatter ();
-        match Unix.fork () with
-        | 0 ->
-            (try
-               translate_loaded ~hol ~root target;
-               flush_all ();
-               Unix._exit (if !Emit.errors = 0 then 0 else 3)
-             with e ->
-               Printf.printf "Exception: %s\n%!" (Printexc.to_string e);
-               Unix._exit 2)
-        | pid ->
-            (match Unix.waitpid [] pid with
-             | _, Unix.WEXITED 0 -> ()
-             | _, Unix.WEXITED 3 -> fail ("unsupported items in " ^ target)
-             | _ -> fail ("translation of " ^ target));
-            if Sys.command (after ^ " " ^ Filename.quote target) <> 0 then fail ("after " ^ target);
-            load_new target)
-      plan;
+    let flush () = flush_all (); Format.pp_print_flush Format.std_formatter () in
+    let rec run = function
+      | [] -> ()
+      | Load f :: rest -> load_new f; run rest
+      | Target target :: rest ->
+          (* the translator's own dependency order must agree with the plan *)
+          List.iter
+            (fun f -> if not (Hashtbl.mem loaded f) then fail ("unplanned dependency " ^ f ^ " of " ^ target))
+            (Translator.upto target Translator.prefix);
+          flush ();
+          (match Unix.fork () with
+           | 0 ->
+               (try
+                  translate_loaded ~hol ~root target;
+                  flush ();
+                  Unix._exit (if !Emit.errors = 0 then 0 else 3)
+                with e ->
+                  Printf.printf "Exception: %s\n%!" (Printexc.to_string e);
+                  Unix._exit 2)
+           | pid ->
+               (match Unix.waitpid [] pid with
+                | _, Unix.WEXITED 0 -> ()
+                | _, Unix.WEXITED 3 -> fail ("unsupported items in " ^ target)
+                | _ -> fail ("translation of " ^ target)));
+          if Sys.command (after ^ " " ^ Filename.quote target) <> 0 then fail ("after " ^ target);
+          load_new target;
+          run rest
+      | Branch steps :: rest ->
+          flush ();
+          (match Unix.fork () with
+           | 0 -> run steps; flush (); Unix._exit 0
+           | pid ->
+               (match Unix.waitpid [] pid with
+                | _, Unix.WEXITED 0 -> ()
+                | _ -> fail "a branch failed"));
+          run rest
+    in
+    List.iter load_new Translator.prefix;
+    run plan;
     print_endline "BATCH DONE"
 
   let survey = Translator.survey

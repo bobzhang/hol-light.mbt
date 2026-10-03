@@ -1,0 +1,39 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/tarski"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn tarski_axiom_10_euclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_11_euclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_1_euclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_2_euclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_3_euclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_4_euclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_5_euclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_6_euclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_7_euclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_8_euclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_9_euclidean() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

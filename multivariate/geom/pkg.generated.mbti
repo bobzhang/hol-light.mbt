@@ -1,0 +1,223 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/geom"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn angle() -> @kernel.Thm
+
+pub fn angle_between() -> @kernel.Thm
+
+pub fn angle_eq() -> @kernel.Thm
+
+pub fn angle_eq_0_dist() -> @kernel.Thm
+
+pub fn angle_eq_0_dist_abs() -> @kernel.Thm
+
+pub fn angle_eq_0_left() -> @kernel.Thm
+
+pub fn angle_eq_0_right() -> @kernel.Thm
+
+pub fn angle_eq_pi_dist() -> @kernel.Thm
+
+pub fn angle_eq_pi_left() -> @kernel.Thm
+
+pub fn angle_eq_pi_others() -> @kernel.Thm
+
+pub fn angle_eq_pi_right() -> @kernel.Thm
+
+pub fn angle_linear_image_eq() -> @kernel.Thm
+
+pub fn angle_range() -> @kernel.Thm
+
+pub fn angle_refl() -> @kernel.Thm
+
+pub fn angle_refl_mid() -> @kernel.Thm
+
+pub fn angle_sym() -> @kernel.Thm
+
+pub fn angle_translation_eq() -> @kernel.Thm
+
+pub fn angle_triangle_law() -> @kernel.Thm
+
+pub fn angle_v1() -> @kernel.Thm
+
+pub fn angles_add_between() -> @kernel.Thm
+
+pub fn angles_along_line() -> @kernel.Thm
+
+pub fn area_triangle_sin() -> @kernel.Thm
+
+pub fn arg_eq_vector_angle_1() -> @kernel.Thm
+
+pub fn asn_sin_vector_angle() -> @kernel.Thm
+
+pub fn between_angle() -> @kernel.Thm
+
+pub fn collinear_angle() -> @kernel.Thm
+
+pub fn collinear_sin_angle() -> @kernel.Thm
+
+pub fn collinear_sin_angle_imp() -> @kernel.Thm
+
+pub fn collinear_sin_vector_angle() -> @kernel.Thm
+
+pub fn collinear_sin_vector_angle_imp() -> @kernel.Thm
+
+pub fn collinear_vector_angle() -> @kernel.Thm
+
+pub fn congruent_triangles_aas() -> @kernel.Thm
+
+pub fn congruent_triangles_aas_full() -> @kernel.Thm
+
+pub fn congruent_triangles_asa() -> @kernel.Thm
+
+pub fn congruent_triangles_asa_full() -> @kernel.Thm
+
+pub fn congruent_triangles_sas() -> @kernel.Thm
+
+pub fn congruent_triangles_sas_full() -> @kernel.Thm
+
+pub fn congruent_triangles_sss() -> @kernel.Thm
+
+pub fn congruent_triangles_sss_full() -> @kernel.Thm
+
+pub fn continuous_at_cx_vector_angle() -> @kernel.Thm
+
+pub fn continuous_on_cx_vector_angle() -> @kernel.Thm
+
+pub fn continuous_within_cx_vector_angle() -> @kernel.Thm
+
+pub fn continuous_within_cx_vector_angle_compose() -> @kernel.Thm
+
+pub fn cos_adjacent_hypotenuse() -> @kernel.Thm
+
+pub fn cos_adjacent_over_hypotenuse() -> @kernel.Thm
+
+pub fn cos_angle() -> @kernel.Thm
+
+pub fn cos_angle_eq() -> @kernel.Thm
+
+pub fn cos_minus1_lemma() -> @kernel.Thm
+
+pub fn cos_vector_angle() -> @kernel.Thm
+
+pub fn cos_vector_angle_eq() -> @kernel.Thm
+
+pub fn law_of_cosines() -> @kernel.Thm
+
+pub fn law_of_sines() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn orthogonal_vector_angle() -> @kernel.Thm
+
+pub fn pythagoras() -> @kernel.Thm
+
+pub fn real_continuous_at_vector_angle() -> @kernel.Thm
+
+pub fn real_continuous_within_vector_angle() -> @kernel.Thm
+
+pub fn setdist_point_line() -> @kernel.Thm
+
+pub fn sin_angle() -> @kernel.Thm
+
+pub fn sin_angle_eq() -> @kernel.Thm
+
+pub fn sin_angle_eq_0() -> @kernel.Thm
+
+pub fn sin_angle_pos() -> @kernel.Thm
+
+pub fn sin_opposite_hypotenuse() -> @kernel.Thm
+
+pub fn sin_opposite_over_hypotenuse() -> @kernel.Thm
+
+pub fn sin_squared_angle() -> @kernel.Thm
+
+pub fn sin_squared_vector_angle() -> @kernel.Thm
+
+pub fn sin_vector_angle() -> @kernel.Thm
+
+pub fn sin_vector_angle_eq() -> @kernel.Thm
+
+pub fn sin_vector_angle_eq_0() -> @kernel.Thm
+
+pub fn sin_vector_angle_lmul() -> @kernel.Thm
+
+pub fn sin_vector_angle_pos() -> @kernel.Thm
+
+pub fn sin_vector_angle_rmul() -> @kernel.Thm
+
+pub fn tan_opposite_adjacent() -> @kernel.Thm
+
+pub fn tan_opposite_over_adjacent() -> @kernel.Thm
+
+pub fn triangle_angle_sum() -> @kernel.Thm
+
+pub fn triangle_angle_sum_lemma() -> @kernel.Thm
+
+pub fn vector_angle() -> @kernel.Thm
+
+pub fn vector_angle_1() -> @kernel.Thm
+
+pub fn vector_angle_angle() -> @kernel.Thm
+
+pub fn vector_angle_arg() -> @kernel.Thm
+
+pub fn vector_angle_complex_lmul() -> @kernel.Thm
+
+pub fn vector_angle_eq() -> @kernel.Thm
+
+pub fn vector_angle_eq_0() -> @kernel.Thm
+
+pub fn vector_angle_eq_0_dist() -> @kernel.Thm
+
+pub fn vector_angle_eq_0_left() -> @kernel.Thm
+
+pub fn vector_angle_eq_0_right() -> @kernel.Thm
+
+pub fn vector_angle_eq_pi() -> @kernel.Thm
+
+pub fn vector_angle_eq_pi_dist() -> @kernel.Thm
+
+pub fn vector_angle_eq_pi_left() -> @kernel.Thm
+
+pub fn vector_angle_eq_pi_right() -> @kernel.Thm
+
+pub fn vector_angle_linear_image_eq() -> @kernel.Thm
+
+pub fn vector_angle_lmul() -> @kernel.Thm
+
+pub fn vector_angle_lneg() -> @kernel.Thm
+
+pub fn vector_angle_neg2() -> @kernel.Thm
+
+pub fn vector_angle_orthogonal_transformation() -> @kernel.Thm
+
+pub fn vector_angle_preserving_eq_similarity() -> @kernel.Thm
+
+pub fn vector_angle_preserving_eq_similarity_alt() -> @kernel.Thm
+
+pub fn vector_angle_range() -> @kernel.Thm
+
+pub fn vector_angle_refl() -> @kernel.Thm
+
+pub fn vector_angle_rmul() -> @kernel.Thm
+
+pub fn vector_angle_rneg() -> @kernel.Thm
+
+pub fn vector_angle_sym() -> @kernel.Thm
+
+pub fn vector_angle_triangle_law() -> @kernel.Thm
+
+pub fn vector_angle_v1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

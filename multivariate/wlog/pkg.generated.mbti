@@ -1,0 +1,58 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/wlog"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn forall_pad2d3d_thm() -> @kernel.Thm
+
+pub fn geom_horizontal_line_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn geom_horizontal_line_tac(@kernel.Term, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn geom_horizontal_plane_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn geom_horizontal_plane_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn injective_pad2d3d() -> @kernel.Thm
+
+pub fn linear_pad2d3d() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn norm_pad2d3d() -> @kernel.Thm
+
+pub fn pad2d3d() -> @kernel.Thm
+
+pub fn pad2d3d_quantify_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn pad2d3d_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn plane() -> @kernel.Thm
+
+pub fn plane_linear_image() -> @kernel.Thm
+
+pub fn plane_linear_image_eq() -> @kernel.Thm
+
+pub fn plane_translation() -> @kernel.Thm
+
+pub fn plane_translation_eq() -> @kernel.Thm
+
+pub fn quantify_pad2d3d_thm() -> @kernel.Thm
+
+pub fn rotation_horizontal_line() -> @kernel.Thm
+
+pub fn rotation_horizontal_plane() -> @kernel.Thm
+
+pub fn rotation_plane_horizontal() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

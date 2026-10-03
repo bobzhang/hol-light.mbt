@@ -1,0 +1,97 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/paracompact"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn clf_open_closure_imp_lf_closed() -> @kernel.Thm
+
+pub fn closed_g_delta_in_sigma_locally_finite_base() -> @kernel.Thm
+
+pub fn closed_gdelta_in_sigma_lf_base() -> @kernel.Thm
+
+pub fn closed_refinement_imp_paracompact() -> @kernel.Thm
+
+pub fn collectionwise_normal_imp_normal() -> @kernel.Thm
+
+pub fn collectionwise_normal_space() -> @kernel.Thm
+
+pub fn collectionwise_normal_space_closed_subset() -> @kernel.Thm
+
+pub fn countably_paracompact_imp_dowker() -> @kernel.Thm
+
+pub fn countably_paracompact_space() -> @kernel.Thm
+
+pub fn countably_paracompact_space_closed_subset() -> @kernel.Thm
+
+pub fn countably_paracompact_space_product_compact() -> @kernel.Thm
+
+pub fn cp_implies_normal_space() -> @kernel.Thm
+
+pub fn cp_indexed_closed_cover() -> @kernel.Thm
+
+pub fn dowker_backward() -> @kernel.Thm
+
+pub fn dowker_discrete_expansion() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn locally_finite_level_union_gen() -> @kernel.Thm
+
+pub fn locally_metrizable_space() -> @kernel.Thm
+
+pub fn metrizable_imp_collectionwise_normal() -> @kernel.Thm
+
+pub fn metrizable_imp_countably_paracompact_space() -> @kernel.Thm
+
+pub fn michael_paracompact() -> @kernel.Thm
+
+pub fn michael_paracompact_eq() -> @kernel.Thm
+
+pub fn nagata_smirnov_metrization() -> @kernel.Thm
+
+pub fn normal_countably_paracompact_characterization() -> @kernel.Thm
+
+pub fn normal_space_sigma_locally_finite_base() -> @kernel.Thm
+
+pub fn open_sigma_lf_closure_cover() -> @kernel.Thm
+
+pub fn paracompact_hausdorff_imp_collectionwise_normal() -> @kernel.Thm
+
+pub fn paracompact_imp_countably_paracompact_space() -> @kernel.Thm
+
+pub fn paracompact_locally_metrizable_imp_metrizable() -> @kernel.Thm
+
+pub fn paracompact_locally_metrizable_sigma_lf_base() -> @kernel.Thm
+
+pub fn paracompact_space_closed_map_image() -> @kernel.Thm
+
+pub fn point_finite_cp_closed_imp_locally_finite() -> @kernel.Thm
+
+pub fn realcompact_space() -> @kernel.Thm
+
+pub fn regular_open_cover_closure_shrink() -> @kernel.Thm
+
+pub fn shrink_disjoint_later() -> @kernel.Thm
+
+pub fn shrink_sequence_covers() -> @kernel.Thm
+
+pub fn shrink_sequence_locally_finite() -> @kernel.Thm
+
+pub fn smirnov_metrization() -> @kernel.Thm
+
+pub fn smirnov_metrization_second_countable() -> @kernel.Thm
+
+pub fn urysohn_function_closed_gdelta() -> @kernel.Thm
+
+pub fn urysohn_function_g_delta() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

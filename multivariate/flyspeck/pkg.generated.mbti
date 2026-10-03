@@ -1,0 +1,694 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/flyspeck"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn aff_ge_0_affine_convex_cone() -> @kernel.Thm
+
+pub fn aff_ge_0_affine_multiple_convex() -> @kernel.Thm
+
+pub fn aff_ge_0_convex_cone_negations() -> @kernel.Thm
+
+pub fn aff_ge_0_convex_hull() -> @kernel.Thm
+
+pub fn aff_ge_0_convex_hull_alt() -> @kernel.Thm
+
+pub fn aff_ge_0_multiple_affine_convex() -> @kernel.Thm
+
+pub fn aff_ge_0_n() -> @kernel.Thm
+
+pub fn aff_ge_1_1() -> @kernel.Thm
+
+pub fn aff_ge_1_1_0() -> @kernel.Thm
+
+pub fn aff_ge_1_2() -> @kernel.Thm
+
+pub fn aff_ge_1_2_0() -> @kernel.Thm
+
+pub fn aff_ge_2_1() -> @kernel.Thm
+
+pub fn aff_ge_2_1_0() -> @kernel.Thm
+
+pub fn aff_ge_2_1_0_dropout_3() -> @kernel.Thm
+
+pub fn aff_ge_2_1_0_semialgebraic() -> @kernel.Thm
+
+pub fn aff_ge_aff_gt_decomp() -> @kernel.Thm
+
+pub fn aff_ge_def() -> @kernel.Thm
+
+pub fn aff_ge_disjoint_diff() -> @kernel.Thm
+
+pub fn aff_ge_eq_affine_hull() -> @kernel.Thm
+
+pub fn aff_ge_injective_linear_image() -> @kernel.Thm
+
+pub fn aff_ge_mono_left() -> @kernel.Thm
+
+pub fn aff_ge_mono_right() -> @kernel.Thm
+
+pub fn aff_ge_scale_lemma() -> @kernel.Thm
+
+pub fn aff_ge_special_scale() -> @kernel.Thm
+
+pub fn aff_ge_subset_affine_hull() -> @kernel.Thm
+
+pub fn aff_ge_translation() -> @kernel.Thm
+
+pub fn aff_gt_1_1() -> @kernel.Thm
+
+pub fn aff_gt_1_2() -> @kernel.Thm
+
+pub fn aff_gt_2_1() -> @kernel.Thm
+
+pub fn aff_gt_3_1() -> @kernel.Thm
+
+pub fn aff_gt_def() -> @kernel.Thm
+
+pub fn aff_gt_eq_affine_hull() -> @kernel.Thm
+
+pub fn aff_gt_injective_linear_image() -> @kernel.Thm
+
+pub fn aff_gt_lemma() -> @kernel.Thm
+
+pub fn aff_gt_mono_left() -> @kernel.Thm
+
+pub fn aff_gt_shuffle() -> @kernel.Thm
+
+pub fn aff_gt_special_scale() -> @kernel.Thm
+
+pub fn aff_gt_subset_aff_ge() -> @kernel.Thm
+
+pub fn aff_gt_subset_affine_hull() -> @kernel.Thm
+
+pub fn aff_gt_translation() -> @kernel.Thm
+
+pub fn aff_le_def() -> @kernel.Thm
+
+pub fn aff_le_eq_affine_hull() -> @kernel.Thm
+
+pub fn aff_le_injective_linear_image() -> @kernel.Thm
+
+pub fn aff_le_mono_left() -> @kernel.Thm
+
+pub fn aff_le_mono_right() -> @kernel.Thm
+
+pub fn aff_le_special_scale() -> @kernel.Thm
+
+pub fn aff_le_subset_affine_hull() -> @kernel.Thm
+
+pub fn aff_le_translation() -> @kernel.Thm
+
+pub fn aff_lt_1_1() -> @kernel.Thm
+
+pub fn aff_lt_2_1() -> @kernel.Thm
+
+pub fn aff_lt_def() -> @kernel.Thm
+
+pub fn aff_lt_eq_affine_hull() -> @kernel.Thm
+
+pub fn aff_lt_injective_linear_image() -> @kernel.Thm
+
+pub fn aff_lt_mono_left() -> @kernel.Thm
+
+pub fn aff_lt_special_scale() -> @kernel.Thm
+
+pub fn aff_lt_subset_affine_hull() -> @kernel.Thm
+
+pub fn aff_lt_translation() -> @kernel.Thm
+
+pub fn aff_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn affine_hull_3_generated() -> @kernel.Thm
+
+pub fn affine_hull_subset_aff_ge() -> @kernel.Thm
+
+pub fn affine_hull_subset_affsign() -> @kernel.Thm
+
+pub fn affine_plane() -> @kernel.Thm
+
+pub fn affsign() -> @kernel.Thm
+
+pub fn affsign_0() -> @kernel.Thm
+
+pub fn affsign_alt() -> @kernel.Thm
+
+pub fn affsign_disjoint_diff() -> @kernel.Thm
+
+pub fn affsign_eq_affine_hull() -> @kernel.Thm
+
+pub fn affsign_injective_linear_image() -> @kernel.Thm
+
+pub fn affsign_mono_left() -> @kernel.Thm
+
+pub fn affsign_mono_right() -> @kernel.Thm
+
+pub fn affsign_mono_shuffle() -> @kernel.Thm
+
+pub fn affsign_special_scale() -> @kernel.Thm
+
+pub fn affsign_subset_affine_hull() -> @kernel.Thm
+
+pub fn affsign_subset_affsign() -> @kernel.Thm
+
+pub fn affsign_translation() -> @kernel.Thm
+
+pub fn affsign_v1() -> @kernel.Thm
+
+pub fn angles_add_aff_ge() -> @kernel.Thm
+
+pub fn arcv() -> @kernel.Thm
+
+pub fn arcv_angle() -> @kernel.Thm
+
+pub fn arcv_linear_image_eq() -> @kernel.Thm
+
+pub fn arcv_translation_eq() -> @kernel.Thm
+
+pub fn area_ball() -> @kernel.Thm
+
+pub fn area_cball() -> @kernel.Thm
+
+pub fn area_unit_cball() -> @kernel.Thm
+
+pub fn arg_div_eq_subset_halfline() -> @kernel.Thm
+
+pub fn arg_eq_subset_halfline() -> @kernel.Thm
+
+pub fn azim() -> @kernel.Thm
+
+pub fn azim_arcv() -> @kernel.Thm
+
+pub fn azim_arg() -> @kernel.Thm
+
+pub fn azim_compl() -> @kernel.Thm
+
+pub fn azim_compl_eq_0() -> @kernel.Thm
+
+pub fn azim_def() -> @kernel.Thm
+
+pub fn azim_degenerate() -> @kernel.Thm
+
+pub fn azim_dihv_compl() -> @kernel.Thm
+
+pub fn azim_dihv_eq_0() -> @kernel.Thm
+
+pub fn azim_dihv_eq_pi() -> @kernel.Thm
+
+pub fn azim_dihv_same() -> @kernel.Thm
+
+pub fn azim_dihv_same_strong() -> @kernel.Thm
+
+pub fn azim_divh() -> @kernel.Thm
+
+pub fn azim_eq() -> @kernel.Thm
+
+pub fn azim_eq_0() -> @kernel.Thm
+
+pub fn azim_eq_0_alt() -> @kernel.Thm
+
+pub fn azim_eq_0_ge() -> @kernel.Thm
+
+pub fn azim_eq_0_ge_alt() -> @kernel.Thm
+
+pub fn azim_eq_0_ge_imp() -> @kernel.Thm
+
+pub fn azim_eq_0_pi_eq_coplanar() -> @kernel.Thm
+
+pub fn azim_eq_0_pi_imp_coplanar() -> @kernel.Thm
+
+pub fn azim_eq_0_sym() -> @kernel.Thm
+
+pub fn azim_eq_alt() -> @kernel.Thm
+
+pub fn azim_eq_imp() -> @kernel.Thm
+
+pub fn azim_eq_pi() -> @kernel.Thm
+
+pub fn azim_eq_pi_alt() -> @kernel.Thm
+
+pub fn azim_eq_pi_sym() -> @kernel.Thm
+
+pub fn azim_exists() -> @kernel.Thm
+
+pub fn azim_in_upper_halfspace() -> @kernel.Thm
+
+pub fn azim_linear_image() -> @kernel.Thm
+
+pub fn azim_refl() -> @kernel.Thm
+
+pub fn azim_refl_alt() -> @kernel.Thm
+
+pub fn azim_same_within_aff_ge() -> @kernel.Thm
+
+pub fn azim_same_within_aff_ge_alt() -> @kernel.Thm
+
+pub fn azim_scale_all() -> @kernel.Thm
+
+pub fn azim_spec() -> @kernel.Thm
+
+pub fn azim_special_scale() -> @kernel.Thm
+
+pub fn azim_translation() -> @kernel.Thm
+
+pub fn azim_unique() -> @kernel.Thm
+
+pub fn bounded_conic_cap() -> @kernel.Thm
+
+pub fn bounded_conic_cap_wedge() -> @kernel.Thm
+
+pub fn bounded_conv0() -> @kernel.Thm
+
+pub fn c_cone() -> @kernel.Thm
+
+pub fn circular_cone() -> @kernel.Thm
+
+pub fn closed_aff_ge() -> @kernel.Thm
+
+pub fn closed_halfline() -> @kernel.Thm
+
+pub fn collinear_azim_0_or_pi() -> @kernel.Thm
+
+pub fn collinear_basis_3() -> @kernel.Thm
+
+pub fn collinear_scale_all() -> @kernel.Thm
+
+pub fn collinear_special_scale() -> @kernel.Thm
+
+pub fn collinear_within_aff_ge_collinear() -> @kernel.Thm
+
+pub fn cone() -> @kernel.Thm
+
+pub fn cone0() -> @kernel.Thm
+
+pub fn conic_aff_ge_0() -> @kernel.Thm
+
+pub fn conic_cap() -> @kernel.Thm
+
+pub fn conic_cap_degenerate() -> @kernel.Thm
+
+pub fn conv0() -> @kernel.Thm
+
+pub fn conv0_aff_gt() -> @kernel.Thm
+
+pub fn conv0_injective_linear_image() -> @kernel.Thm
+
+pub fn conv0_subset_convex_hull() -> @kernel.Thm
+
+pub fn conv0_translation() -> @kernel.Thm
+
+pub fn convex_aff_ge() -> @kernel.Thm
+
+pub fn convex_aff_gt() -> @kernel.Thm
+
+pub fn convex_aff_le() -> @kernel.Thm
+
+pub fn convex_aff_lt() -> @kernel.Thm
+
+pub fn convex_affsign() -> @kernel.Thm
+
+pub fn convex_conv0() -> @kernel.Thm
+
+pub fn convex_hull_aff_ge() -> @kernel.Thm
+
+pub fn convex_hull_conv0_decomp() -> @kernel.Thm
+
+pub fn convex_rcone_gt() -> @kernel.Thm
+
+pub fn coplanar() -> @kernel.Thm
+
+pub fn coplanar_azim_eq() -> @kernel.Thm
+
+pub fn coplanar_cross_dot() -> @kernel.Thm
+
+pub fn coplanar_det_eq_0() -> @kernel.Thm
+
+pub fn coplanar_imp_negligible() -> @kernel.Thm
+
+pub fn coplanar_insert_0_neg() -> @kernel.Thm
+
+pub fn coplanar_scale_all() -> @kernel.Thm
+
+pub fn coplanar_special_scale() -> @kernel.Thm
+
+pub fn cos_azim_dihv() -> @kernel.Thm
+
+pub fn delta_x() -> @kernel.Thm
+
+pub fn dihv() -> @kernel.Thm
+
+pub fn dihv_arcv() -> @kernel.Thm
+
+pub fn dihv_eq_0_pi_eq_coplanar() -> @kernel.Thm
+
+pub fn dihv_linear_image() -> @kernel.Thm
+
+pub fn dihv_neg() -> @kernel.Thm
+
+pub fn dihv_neg_0() -> @kernel.Thm
+
+pub fn dihv_range() -> @kernel.Thm
+
+pub fn dihv_special_scale() -> @kernel.Thm
+
+pub fn dihv_sym() -> @kernel.Thm
+
+pub fn dihv_translation_eq() -> @kernel.Thm
+
+pub fn dihv_v1() -> @kernel.Thm
+
+pub fn dropout_basis_3() -> @kernel.Thm
+
+pub fn edges() -> @kernel.Thm
+
+pub fn edges_linear_image() -> @kernel.Thm
+
+pub fn edges_translation() -> @kernel.Thm
+
+pub fn ellipsoid() -> @kernel.Thm
+
+pub fn ends_in_halfline() -> @kernel.Thm
+
+pub fn forall_pad2d3d_thm() -> @kernel.Thm
+
+pub fn frustt() -> @kernel.Thm
+
+pub fn frustum() -> @kernel.Thm
+
+pub fn frustum_degenerate() -> @kernel.Thm
+
+pub fn geom_horizontal_plane_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn geom_horizontal_plane_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn halfline() -> @kernel.Thm
+
+pub fn halfline_explicit() -> @kernel.Thm
+
+pub fn halfline_inter_compact_segment() -> @kernel.Thm
+
+pub fn halfline_refl() -> @kernel.Thm
+
+pub fn halfline_subset_affine_hull() -> @kernel.Thm
+
+pub fn has_measure_lune() -> @kernel.Thm
+
+pub fn has_measure_lune_simple() -> @kernel.Thm
+
+pub fn has_measure_open_sector_lt() -> @kernel.Thm
+
+pub fn has_measure_open_sector_lt_gen() -> @kernel.Thm
+
+pub fn in_affsign() -> @kernel.Thm
+
+pub fn in_affsign_translation() -> @kernel.Thm
+
+pub fn injective_pad2d3d() -> @kernel.Thm
+
+pub fn is_sphere() -> @kernel.Thm
+
+pub fn lin_combo() -> @kernel.Thm
+
+pub fn linear_pad2d3d() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn measurable_ball_aff_gt() -> @kernel.Thm
+
+pub fn measurable_ball_wedge() -> @kernel.Thm
+
+pub fn measurable_bounded_inter_open() -> @kernel.Thm
+
+pub fn measurable_closed_sector_le() -> @kernel.Thm
+
+pub fn measurable_closed_sector_lt() -> @kernel.Thm
+
+pub fn measurable_closed_sector_lte() -> @kernel.Thm
+
+pub fn measurable_conic_cap() -> @kernel.Thm
+
+pub fn measurable_conic_cap_wedge() -> @kernel.Thm
+
+pub fn measurable_conv0() -> @kernel.Thm
+
+pub fn measurable_ellipsoid() -> @kernel.Thm
+
+pub fn measurable_rules() -> @kernel.Thm
+
+pub fn measure_ball_aff_gt_shuffle() -> @kernel.Thm
+
+pub fn measure_ball_aff_gt_shuffle_lemma() -> @kernel.Thm
+
+pub fn measure_closed_sector_le() -> @kernel.Thm
+
+pub fn measure_conv0_convex_hull() -> @kernel.Thm
+
+pub fn measure_ellipsoid() -> @kernel.Thm
+
+pub fn measure_lune_decomposition() -> @kernel.Thm
+
+pub fn measure_open_sector_lt() -> @kernel.Thm
+
+pub fn measure_scale() -> @kernel.Thm
+
+pub fn negligible_arg_eq() -> @kernel.Thm
+
+pub fn negligible_circular_cone() -> @kernel.Thm
+
+pub fn negligible_circular_cone_0() -> @kernel.Thm
+
+pub fn negligible_circular_cone_0_nonparallel() -> @kernel.Thm
+
+pub fn negligible_convex_hull_diff_conv0() -> @kernel.Thm
+
+pub fn negligible_rcone_eq() -> @kernel.Thm
+
+pub fn norm_cross() -> @kernel.Thm
+
+pub fn norm_pad2d3d() -> @kernel.Thm
+
+pub fn normball() -> @kernel.Thm
+
+pub fn normball_ball() -> @kernel.Thm
+
+pub fn not_coplanar_0_4_imp_independent() -> @kernel.Thm
+
+pub fn not_coplanar_imp_not_collinear_dropout_3() -> @kernel.Thm
+
+pub fn not_coplanar_not_collinear() -> @kernel.Thm
+
+pub fn nullset_rules() -> @kernel.Thm
+
+pub fn open_dropout_3() -> @kernel.Thm
+
+pub fn open_rcone_gt() -> @kernel.Thm
+
+pub fn open_wedge() -> @kernel.Thm
+
+pub fn orthonormal() -> @kernel.Thm
+
+pub fn orthonormal_cross() -> @kernel.Thm
+
+pub fn orthonormal_imp_distinct() -> @kernel.Thm
+
+pub fn orthonormal_imp_independent() -> @kernel.Thm
+
+pub fn orthonormal_imp_independent_explicit() -> @kernel.Thm
+
+pub fn orthonormal_imp_independent_explicit_0() -> @kernel.Thm
+
+pub fn orthonormal_imp_nonzero() -> @kernel.Thm
+
+pub fn orthonormal_imp_spanning() -> @kernel.Thm
+
+pub fn orthonormal_linear_image() -> @kernel.Thm
+
+pub fn orthonormal_permute() -> @kernel.Thm
+
+pub fn pad2d3d() -> @kernel.Thm
+
+pub fn pad2d3d_quantify_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn pad2d3d_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn plane() -> @kernel.Thm
+
+pub fn plane_affine_hull_3() -> @kernel.Thm
+
+pub fn plane_linear_image() -> @kernel.Thm
+
+pub fn plane_linear_image_eq() -> @kernel.Thm
+
+pub fn plane_translation() -> @kernel.Thm
+
+pub fn plane_translation_eq() -> @kernel.Thm
+
+pub fn polyhedron_aff_ge() -> @kernel.Thm
+
+pub fn polyhedron_collinear_faces() -> @kernel.Thm
+
+pub fn polyhedron_collinear_faces_strong() -> @kernel.Thm
+
+pub fn primitive() -> @kernel.Thm
+
+pub fn quantify_pad2d3d_thm() -> @kernel.Thm
+
+pub fn rcone_eq() -> @kernel.Thm
+
+pub fn rcone_ge() -> @kernel.Thm
+
+pub fn rcone_ge_gt() -> @kernel.Thm
+
+pub fn rcone_gt() -> @kernel.Thm
+
+pub fn rcone_gt_ge() -> @kernel.Thm
+
+pub fn rcone_gt_neg() -> @kernel.Thm
+
+pub fn rconesgn() -> @kernel.Thm
+
+pub fn real_continuous_at_azim() -> @kernel.Thm
+
+pub fn real_continuous_at_azim_compose() -> @kernel.Thm
+
+pub fn real_continuous_at_azim_sharp() -> @kernel.Thm
+
+pub fn real_continuous_at_dihv() -> @kernel.Thm
+
+pub fn real_continuous_at_dihv_compose() -> @kernel.Thm
+
+pub fn real_continuous_atreal_azim_compose() -> @kernel.Thm
+
+pub fn real_continuous_atreal_dihv_compose() -> @kernel.Thm
+
+pub fn real_continuous_within_azim_compose() -> @kernel.Thm
+
+pub fn real_continuous_within_dihv_compose() -> @kernel.Thm
+
+pub fn real_continuous_withinreal_azim_compose() -> @kernel.Thm
+
+pub fn real_continuous_withinreal_dihv_compose() -> @kernel.Thm
+
+pub fn real_sgn_sin_azim() -> @kernel.Thm
+
+pub fn rect() -> @kernel.Thm
+
+pub fn rect_interval() -> @kernel.Thm
+
+pub fn rotation_horizontal_plane() -> @kernel.Thm
+
+pub fn rotation_plane_horizontal() -> @kernel.Thm
+
+pub fn scale() -> @kernel.Thm
+
+pub fn sdiff() -> @kernel.Thm
+
+pub fn segment_subset_halfline() -> @kernel.Thm
+
+pub fn sgn_ge() -> @kernel.Thm
+
+pub fn sgn_gt() -> @kernel.Thm
+
+pub fn sgn_le() -> @kernel.Thm
+
+pub fn sgn_lt() -> @kernel.Thm
+
+pub fn slice_123() -> @kernel.Thm
+
+pub fn slice_312() -> @kernel.Thm
+
+pub fn slice_dropout_3() -> @kernel.Thm
+
+pub fn slice_special_wedge() -> @kernel.Thm
+
+pub fn solid_triangle() -> @kernel.Thm
+
+pub fn solid_triangle_congruent_neg() -> @kernel.Thm
+
+pub fn spherical_coordinates() -> @kernel.Thm
+
+pub fn subset_affine_hull_special_scale() -> @kernel.Thm
+
+pub fn vertices() -> @kernel.Thm
+
+pub fn vertices_linear_image() -> @kernel.Thm
+
+pub fn vertices_translation() -> @kernel.Thm
+
+pub fn vol_ball_wedge() -> @kernel.Thm
+
+pub fn vol_conic_cap_wedge() -> @kernel.Thm
+
+pub fn vol_conv() -> @kernel.Thm
+
+pub fn vol_frustt_wedge() -> @kernel.Thm
+
+pub fn vol_rect() -> @kernel.Thm
+
+pub fn vol_solid_triangle() -> @kernel.Thm
+
+pub fn volume_ball() -> @kernel.Thm
+
+pub fn volume_ball_wedge() -> @kernel.Thm
+
+pub fn volume_cball() -> @kernel.Thm
+
+pub fn volume_conic_cap() -> @kernel.Thm
+
+pub fn volume_conic_cap_compl() -> @kernel.Thm
+
+pub fn volume_conic_cap_strong() -> @kernel.Thm
+
+pub fn volume_conic_cap_wedge() -> @kernel.Thm
+
+pub fn volume_conic_cap_wedge_medium() -> @kernel.Thm
+
+pub fn volume_conic_cap_wedge_weak() -> @kernel.Thm
+
+pub fn volume_frustt() -> @kernel.Thm
+
+pub fn volume_frustt_strong() -> @kernel.Thm
+
+pub fn volume_frustt_wedge() -> @kernel.Thm
+
+pub fn volume_of_closed_tetrahedron() -> @kernel.Thm
+
+pub fn volume_of_tetrahedron() -> @kernel.Thm
+
+pub fn volume_props() -> @kernel.Thm
+
+pub fn volume_solid_triangle() -> @kernel.Thm
+
+pub fn wedge() -> @kernel.Thm
+
+pub fn wedge_alt() -> @kernel.Thm
+
+pub fn wedge_degenerate() -> @kernel.Thm
+
+pub fn wedge_linear_image() -> @kernel.Thm
+
+pub fn wedge_lune() -> @kernel.Thm
+
+pub fn wedge_lune_ge() -> @kernel.Thm
+
+pub fn wedge_lune_gt() -> @kernel.Thm
+
+pub fn wedge_special_scale() -> @kernel.Thm
+
+pub fn wedge_translation() -> @kernel.Thm
+
+pub fn wedge_v1() -> @kernel.Thm
+
+pub fn zenith_exists() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

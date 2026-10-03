@@ -1,0 +1,662 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/multivariate/cvectors"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn abs_im_norm() -> @kernel.Thm
+
+pub fn abs_re_norm() -> @kernel.Thm
+
+pub fn add_cdot_sym() -> @kernel.Thm
+
+pub fn cart_eq3() -> @kernel.Thm
+
+pub fn ccross() -> @kernel.Thm
+
+pub fn ccross_collinear_cvectors() -> @kernel.Thm
+
+pub fn ccross_component() -> @kernel.Thm
+
+pub fn ccross_jacobi() -> @kernel.Thm
+
+pub fn ccross_ladd() -> @kernel.Thm
+
+pub fn ccross_lmul() -> @kernel.Thm
+
+pub fn ccross_lneg() -> @kernel.Thm
+
+pub fn ccross_lreal() -> @kernel.Thm
+
+pub fn ccross_lzero() -> @kernel.Thm
+
+pub fn ccross_radd() -> @kernel.Thm
+
+pub fn ccross_refl() -> @kernel.Thm
+
+pub fn ccross_rmul() -> @kernel.Thm
+
+pub fn ccross_rneg() -> @kernel.Thm
+
+pub fn ccross_rreal() -> @kernel.Thm
+
+pub fn ccross_rzero() -> @kernel.Thm
+
+pub fn ccross_skew() -> @kernel.Thm
+
+pub fn ccross_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn cdot() -> @kernel.Thm
+
+pub fn cdot3() -> @kernel.Thm
+
+pub fn cdot_cauchy_schwarz() -> @kernel.Thm
+
+pub fn cdot_cauchy_schwarz_equal() -> @kernel.Thm
+
+pub fn cdot_cauchy_schwarz_pow_2() -> @kernel.Thm
+
+pub fn cdot_cauchy_schwarz_pow_2_equal() -> @kernel.Thm
+
+pub fn cdot_cunit_mul_cunit() -> @kernel.Thm
+
+pub fn cdot_eq_0() -> @kernel.Thm
+
+pub fn cdot_ladd() -> @kernel.Thm
+
+pub fn cdot_lmul() -> @kernel.Thm
+
+pub fn cdot_lneg() -> @kernel.Thm
+
+pub fn cdot_lreal() -> @kernel.Thm
+
+pub fn cdot_lsub() -> @kernel.Thm
+
+pub fn cdot_lzero() -> @kernel.Thm
+
+pub fn cdot_pythagorean() -> @kernel.Thm
+
+pub fn cdot_radd() -> @kernel.Thm
+
+pub fn cdot_rmul() -> @kernel.Thm
+
+pub fn cdot_rneg() -> @kernel.Thm
+
+pub fn cdot_rreal() -> @kernel.Thm
+
+pub fn cdot_rsub() -> @kernel.Thm
+
+pub fn cdot_rzero() -> @kernel.Thm
+
+pub fn cdot_self_pos() -> @kernel.Thm
+
+pub fn cdot_sym() -> @kernel.Thm
+
+pub fn cinfsum() -> @kernel.Thm
+
+pub fn cinfsum_linear() -> @kernel.Thm
+
+pub fn clinear() -> @kernel.Thm
+
+pub fn clinear_0() -> @kernel.Thm
+
+pub fn clinear_add() -> @kernel.Thm
+
+pub fn clinear_cmul() -> @kernel.Thm
+
+pub fn clinear_compose() -> @kernel.Thm
+
+pub fn clinear_compose_add() -> @kernel.Thm
+
+pub fn clinear_compose_cmul() -> @kernel.Thm
+
+pub fn clinear_compose_neg() -> @kernel.Thm
+
+pub fn clinear_compose_sub() -> @kernel.Thm
+
+pub fn clinear_fstcart_sndcart() -> @kernel.Thm
+
+pub fn clinear_i() -> @kernel.Thm
+
+pub fn clinear_id() -> @kernel.Thm
+
+pub fn clinear_injective_0() -> @kernel.Thm
+
+pub fn clinear_neg() -> @kernel.Thm
+
+pub fn clinear_negation() -> @kernel.Thm
+
+pub fn clinear_sub() -> @kernel.Thm
+
+pub fn clinear_vmul_component() -> @kernel.Thm
+
+pub fn clinear_zero() -> @kernel.Thm
+
+pub fn cnj_zero() -> @kernel.Thm
+
+pub fn cnorm() -> @kernel.Thm
+
+pub fn cnorm2() -> @kernel.Thm
+
+pub fn cnorm2_alt() -> @kernel.Thm
+
+pub fn cnorm2_cvector_zero() -> @kernel.Thm
+
+pub fn cnorm2_eq_0() -> @kernel.Thm
+
+pub fn cnorm2_modulus() -> @kernel.Thm
+
+pub fn cnorm2_mul() -> @kernel.Thm
+
+pub fn cnorm2_norm2() -> @kernel.Thm
+
+pub fn cnorm2_norm2_2() -> @kernel.Thm
+
+pub fn cnorm2_pos() -> @kernel.Thm
+
+pub fn cnorm2_sub() -> @kernel.Thm
+
+pub fn cnorm2_vector_to_cvector() -> @kernel.Thm
+
+pub fn cnorm_basis() -> @kernel.Thm
+
+pub fn cnorm_basis_1() -> @kernel.Thm
+
+pub fn cnorm_cvector_zero() -> @kernel.Thm
+
+pub fn cnorm_eq_0() -> @kernel.Thm
+
+pub fn cnorm_mul() -> @kernel.Thm
+
+pub fn cnorm_norm() -> @kernel.Thm
+
+pub fn cnorm_norm_2() -> @kernel.Thm
+
+pub fn cnorm_pos() -> @kernel.Thm
+
+pub fn cnorm_pow_2() -> @kernel.Thm
+
+pub fn cnorm_sub() -> @kernel.Thm
+
+pub fn cnorm_triangle() -> @kernel.Thm
+
+pub fn cnorm_vector_to_cvector() -> @kernel.Thm
+
+pub fn collinear_cvectors() -> @kernel.Thm
+
+pub fn collinear_cvectors_0() -> @kernel.Thm
+
+pub fn collinear_cvectors_sym() -> @kernel.Thm
+
+pub fn collinear_cvectors_vector_to_cvector() -> @kernel.Thm
+
+pub fn collinear_lnonnull() -> @kernel.Thm
+
+pub fn collinear_rnonnull() -> @kernel.Thm
+
+pub fn collinear_runitreal() -> @kernel.Thm
+
+pub fn common_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn common_tac_v1((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn common_tac_v2(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn complex_add_is_a_map() -> @kernel.Thm
+
+pub fn complex_add_pow_2() -> @kernel.Thm
+
+pub fn complex_balance_div_mul() -> @kernel.Thm
+
+pub fn complex_eq_rcancel_imp() -> @kernel.Thm
+
+pub fn complex_neg_is_a_map() -> @kernel.Thm
+
+pub fn complex_sub_is_a_map() -> @kernel.Thm
+
+pub fn complex_vector() -> @kernel.Thm
+
+pub fn complex_vector_map() -> @kernel.Thm
+
+pub fn complex_vector_map2() -> @kernel.Thm
+
+pub fn complex_vector_transpose() -> @kernel.Thm
+
+pub fn component_le_norm_alt() -> @kernel.Thm
+
+pub fn component_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn corthogonal() -> @kernel.Thm
+
+pub fn corthogonal_0() -> @kernel.Thm
+
+pub fn corthogonal_collinear_cvectors() -> @kernel.Thm
+
+pub fn corthogonal_lmul() -> @kernel.Thm
+
+pub fn corthogonal_lmul_eq() -> @kernel.Thm
+
+pub fn corthogonal_lreal() -> @kernel.Thm
+
+pub fn corthogonal_lrmul() -> @kernel.Thm
+
+pub fn corthogonal_lrmul_clauses() -> @kernel.Thm
+
+pub fn corthogonal_lrmul_eq() -> @kernel.Thm
+
+pub fn corthogonal_lunit() -> @kernel.Thm
+
+pub fn corthogonal_lzero() -> @kernel.Thm
+
+pub fn corthogonal_mul_clauses() -> @kernel.Thm
+
+pub fn corthogonal_projection() -> @kernel.Thm
+
+pub fn corthogonal_real_clauses() -> @kernel.Thm
+
+pub fn corthogonal_rmul() -> @kernel.Thm
+
+pub fn corthogonal_rmul_eq() -> @kernel.Thm
+
+pub fn corthogonal_rreal() -> @kernel.Thm
+
+pub fn corthogonal_runit() -> @kernel.Thm
+
+pub fn corthogonal_rzero() -> @kernel.Thm
+
+pub fn corthogonal_sym() -> @kernel.Thm
+
+pub fn corthogonal_unit() -> @kernel.Thm
+
+pub fn csqrt_mul_lcx() -> @kernel.Thm
+
+pub fn csqrt_mul_lcx_lt() -> @kernel.Thm
+
+pub fn csummable() -> @kernel.Thm
+
+pub fn csummable_flatten_cvector() -> @kernel.Thm
+
+pub fn csummable_linear() -> @kernel.Thm
+
+pub fn cunit() -> @kernel.Thm
+
+pub fn cunit_cvector_zero() -> @kernel.Thm
+
+pub fn cvector_add() -> @kernel.Thm
+
+pub fn cvector_add_ac() -> @kernel.Thm
+
+pub fn cvector_add_alt() -> @kernel.Thm
+
+pub fn cvector_add_assoc() -> @kernel.Thm
+
+pub fn cvector_add_component() -> @kernel.Thm
+
+pub fn cvector_add_id() -> @kernel.Thm
+
+pub fn cvector_add_inv() -> @kernel.Thm
+
+pub fn cvector_add_ldistrib() -> @kernel.Thm
+
+pub fn cvector_add_lid() -> @kernel.Thm
+
+pub fn cvector_add_rdistrib() -> @kernel.Thm
+
+pub fn cvector_add_rid() -> @kernel.Thm
+
+pub fn cvector_add_sub() -> @kernel.Thm
+
+pub fn cvector_add_sym() -> @kernel.Thm
+
+pub fn cvector_arith(@kernel.Term) -> @kernel.Thm raise
+
+pub fn cvector_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn cvector_choose_size() -> @kernel.Thm
+
+pub fn cvector_cnj() -> @kernel.Thm
+
+pub fn cvector_cnj_add() -> @kernel.Thm
+
+pub fn cvector_cnj_cnj() -> @kernel.Thm
+
+pub fn cvector_cnj_neg() -> @kernel.Thm
+
+pub fn cvector_cnj_sub() -> @kernel.Thm
+
+pub fn cvector_eq() -> @kernel.Thm
+
+pub fn cvector_eq_addr() -> @kernel.Thm
+
+pub fn cvector_flatten() -> @kernel.Thm
+
+pub fn cvector_im() -> @kernel.Thm
+
+pub fn cvector_im_add() -> @kernel.Thm
+
+pub fn cvector_im_cnj() -> @kernel.Thm
+
+pub fn cvector_im_component() -> @kernel.Thm
+
+pub fn cvector_im_mul() -> @kernel.Thm
+
+pub fn cvector_im_vector_map() -> @kernel.Thm
+
+pub fn cvector_im_vector_map2() -> @kernel.Thm
+
+pub fn cvector_im_vector_to_cvector() -> @kernel.Thm
+
+pub fn cvector_im_vector_to_cvector_im() -> @kernel.Thm
+
+pub fn cvector_im_vector_to_cvector_re_im() -> @kernel.Thm
+
+pub fn cvector_map_property(@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn cvector_map_property_v1(@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn cvector_mul() -> @kernel.Thm
+
+pub fn cvector_mul_assoc() -> @kernel.Thm
+
+pub fn cvector_mul_component() -> @kernel.Thm
+
+pub fn cvector_mul_eq_0() -> @kernel.Thm
+
+pub fn cvector_mul_id() -> @kernel.Thm
+
+pub fn cvector_mul_inv() -> @kernel.Thm
+
+pub fn cvector_mul_inv2() -> @kernel.Thm
+
+pub fn cvector_mul_lcancel() -> @kernel.Thm
+
+pub fn cvector_mul_lneg() -> @kernel.Thm
+
+pub fn cvector_mul_lzero() -> @kernel.Thm
+
+pub fn cvector_mul_lzero_v1() -> @kernel.Thm
+
+pub fn cvector_mul_rcancel() -> @kernel.Thm
+
+pub fn cvector_mul_rneg() -> @kernel.Thm
+
+pub fn cvector_mul_rzero() -> @kernel.Thm
+
+pub fn cvector_neg() -> @kernel.Thm
+
+pub fn cvector_neg_0() -> @kernel.Thm
+
+pub fn cvector_neg_alt() -> @kernel.Thm
+
+pub fn cvector_neg_component() -> @kernel.Thm
+
+pub fn cvector_neg_eq_0() -> @kernel.Thm
+
+pub fn cvector_neg_minus1() -> @kernel.Thm
+
+pub fn cvector_neg_neg() -> @kernel.Thm
+
+pub fn cvector_neg_sub() -> @kernel.Thm
+
+pub fn cvector_non_zero() -> @kernel.Thm
+
+pub fn cvector_re() -> @kernel.Thm
+
+pub fn cvector_re_add() -> @kernel.Thm
+
+pub fn cvector_re_cnj() -> @kernel.Thm
+
+pub fn cvector_re_component() -> @kernel.Thm
+
+pub fn cvector_re_mul() -> @kernel.Thm
+
+pub fn cvector_re_vector_map() -> @kernel.Thm
+
+pub fn cvector_re_vector_map2() -> @kernel.Thm
+
+pub fn cvector_re_vector_to_cvector() -> @kernel.Thm
+
+pub fn cvector_re_vector_to_cvector_re_im() -> @kernel.Thm
+
+pub fn cvector_scalar_rdist() -> @kernel.Thm
+
+pub fn cvector_sub() -> @kernel.Thm
+
+pub fn cvector_sub_add() -> @kernel.Thm
+
+pub fn cvector_sub_add2() -> @kernel.Thm
+
+pub fn cvector_sub_alt() -> @kernel.Thm
+
+pub fn cvector_sub_component() -> @kernel.Thm
+
+pub fn cvector_sub_eq() -> @kernel.Thm
+
+pub fn cvector_sub_ldistrib() -> @kernel.Thm
+
+pub fn cvector_sub_lzero() -> @kernel.Thm
+
+pub fn cvector_sub_radd() -> @kernel.Thm
+
+pub fn cvector_sub_rdistrib() -> @kernel.Thm
+
+pub fn cvector_sub_refl() -> @kernel.Thm
+
+pub fn cvector_sub_rzero() -> @kernel.Thm
+
+pub fn cvector_sub_v1() -> @kernel.Thm
+
+pub fn cvector_unflatten() -> @kernel.Thm
+
+pub fn cvector_zero() -> @kernel.Thm
+
+pub fn cvector_zero_component() -> @kernel.Thm
+
+pub fn cvector_zero_vec0() -> @kernel.Thm
+
+pub fn cvsum() -> @kernel.Thm
+
+pub fn cx_cnorm2() -> @kernel.Thm
+
+pub fn[TA, TB] distrib(@list.List[(TB) -> TA raise], TB) -> @list.List[TA] raise
+
+pub fn[TA] distrib_v1(@list.List[(TA) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise], TA) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn finite_index_inrange_2() -> @kernel.Thm
+
+pub fn finite_inter_enum() -> @kernel.Thm
+
+pub fn flatten_add() -> @kernel.Thm
+
+pub fn flatten_cinfsum() -> @kernel.Thm
+
+pub fn flatten_clinear() -> @kernel.Thm
+
+pub fn flatten_map() -> @kernel.Thm
+
+pub fn flatten_map2() -> @kernel.Thm
+
+pub fn flatten_neg() -> @kernel.Thm
+
+pub fn flatten_re_im_component() -> @kernel.Thm
+
+pub fn flatten_sub() -> @kernel.Thm
+
+pub fn flatten_unflatten() -> @kernel.Thm
+
+pub fn fstcart_clinear() -> @kernel.Thm
+
+pub fn fstcart_cvector_zero() -> @kernel.Thm
+
+pub fn fstcart_sndcart_cvector_add() -> @kernel.Thm
+
+pub fn fstcart_sndcart_cvector_mul() -> @kernel.Thm
+
+pub fn fstcart_sndcart_cvector_zero() -> @kernel.Thm
+
+pub fn gconjuncts(@kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn im_norm() -> @kernel.Thm
+
+pub fn linear_sums() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn non_null_collinears() -> @kernel.Thm
+
+pub fn norm2_add_real() -> @kernel.Thm
+
+pub fn norm_pastecart_ge1() -> @kernel.Thm
+
+pub fn norm_pastecart_ge2() -> @kernel.Thm
+
+pub fn norm_re() -> @kernel.Thm
+
+pub fn norm_re_add() -> @kernel.Thm
+
+pub fn norm_re_sub() -> @kernel.Thm
+
+pub fn pastecart_cvector_add() -> @kernel.Thm
+
+pub fn pastecart_cvector_mul() -> @kernel.Thm
+
+pub fn pastecart_cvector_zero() -> @kernel.Thm
+
+pub fn pastecart_eq_cvector_zero() -> @kernel.Thm
+
+pub fn pastecart_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn pastecart_vector_map() -> @kernel.Thm
+
+pub fn pastecart_vector_map2() -> @kernel.Thm
+
+pub fn prioritize_cvector(Unit) -> Unit raise
+
+pub fn re_im_norm() -> @kernel.Thm
+
+pub fn re_norm() -> @kernel.Thm
+
+pub fn real_abs_sub_cnorm() -> @kernel.Thm
+
+pub fn real_add_pow_2() -> @kernel.Thm
+
+pub fn real_cdot_self() -> @kernel.Thm
+
+pub fn real_complex_add_cnj() -> @kernel.Thm
+
+pub fn real_mul() -> @kernel.Thm
+
+pub fn real_of_complex() -> @kernel.Thm
+
+pub fn real_of_complex_0() -> @kernel.Thm
+
+pub fn real_of_complex_add() -> @kernel.Thm
+
+pub fn real_of_complex_cx() -> @kernel.Thm
+
+pub fn real_of_complex_mul() -> @kernel.Thm
+
+pub fn real_of_complex_norm() -> @kernel.Thm
+
+pub fn real_of_complex_re() -> @kernel.Thm
+
+pub fn real_of_complex_v1() -> @kernel.Thm
+
+pub fn rewrite_tacs(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn[TA, TB] single((@list.List[TB]) -> TA raise, TB) -> TA raise
+
+pub fn sndcart_clinear() -> @kernel.Thm
+
+pub fn sndcart_cvector_zero() -> @kernel.Thm
+
+pub fn sums_pastecart() -> @kernel.Thm
+
+pub fn unflatten_flatten() -> @kernel.Thm
+
+pub fn vector_add_is_a_map() -> @kernel.Thm
+
+pub fn vector_const() -> @kernel.Thm
+
+pub fn vector_const_component() -> @kernel.Thm
+
+pub fn vector_map() -> @kernel.Thm
+
+pub fn vector_map2() -> @kernel.Thm
+
+pub fn vector_map2_as_vector_map() -> @kernel.Thm
+
+pub fn vector_map2_component() -> @kernel.Thm
+
+pub fn vector_map2_lvector_const() -> @kernel.Thm
+
+pub fn vector_map2_lvector_map() -> @kernel.Thm
+
+pub fn vector_map2_lvector_map2() -> @kernel.Thm
+
+pub fn vector_map2_rvector_const() -> @kernel.Thm
+
+pub fn vector_map2_rvector_map() -> @kernel.Thm
+
+pub fn vector_map2_rvector_map2() -> @kernel.Thm
+
+pub fn vector_map2_rvector_map_alt() -> @kernel.Thm
+
+pub fn vector_map3() -> @kernel.Thm
+
+pub fn vector_map3_component() -> @kernel.Thm
+
+pub fn vector_map_component() -> @kernel.Thm
+
+pub fn vector_map_cvector_im() -> @kernel.Thm
+
+pub fn vector_map_cvector_re() -> @kernel.Thm
+
+pub fn vector_map_property(@kernel.Term, @list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn vector_map_property_tac(@list.List[@kernel.Thm], @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn vector_map_simp_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn vector_map_vector_const() -> @kernel.Thm
+
+pub fn vector_map_vector_map() -> @kernel.Thm
+
+pub fn vector_map_vector_map2() -> @kernel.Thm
+
+pub fn vector_map_vector_map_alt() -> @kernel.Thm
+
+pub fn vector_neg_is_a_map() -> @kernel.Thm
+
+pub fn vector_sub_is_a_map() -> @kernel.Thm
+
+pub fn vector_to_cvector() -> @kernel.Thm
+
+pub fn vector_to_cvector_component() -> @kernel.Thm
+
+pub fn vector_to_cvector_cvector_re_im() -> @kernel.Thm
+
+pub fn vector_to_cvector_mul() -> @kernel.Thm
+
+pub fn vector_to_cvector_zero() -> @kernel.Thm
+
+pub fn vector_to_cvector_zero_eq() -> @kernel.Thm
+
+pub fn vector_unzip() -> @kernel.Thm
+
+pub fn vector_unzip_component() -> @kernel.Thm
+
+pub fn vector_zip() -> @kernel.Thm
+
+pub fn vector_zip_component() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
