@@ -51,8 +51,12 @@ and file I/O before starting it.
 3. **Package aliases** (blocks 5 and 6): the override table described
    under Open issues, before the first colliding directory.
 4. **Small directories that need only the core or Library/** (63K lines):
-   Complex (done), then 100/cubic; Arithmetic, Permutation, Ntrie,
-   IsabelleLight, Boyer_Moore, GL, Model, EC, Divstep, Rqe. A directory
+   Complex, 100/cubic, Arithmetic (but pa.ml, which make.ml does not
+   load), Permutation, Ntrie, Model and GL are done; EC, Divstep and Rqe
+   next. IsabelleLight and Boyer_Moore load their files from a computed
+   list (`map (load_on_path paths) [...]`), and Boyer_Moore has
+   `boyer-moore.ml` (no package can be named so) and a make.ml with
+   definitions: step 8. A directory
    with a make.ml loads in that order (theory.make_plan). Expect translator
    work per directory: Complex needed five additions (over-applied
    primitives, unqualified Format functions, `Num.string_of_num`, weak type
@@ -123,7 +127,9 @@ and file I/O before starting it.
   older packages; equivalent, but the code differs.
 - **Codex review** of the last commits (frexp, `= []`, --resume, streamed
   logs, alias table when added).
-- **Not ported**: tactician_light.ml (needs a tactic-expression interpreter
+- **Not ported**: GL/tests.ml (an interactive script: `e GL_TAC` fails on
+  purpose to show a countermodel, so the file cannot be loaded upstream
+  either), tactician_light.ml (needs a tactic-expression interpreter
   to replace `loadt` of OCaml strings), help.ml/database.ml and the
   Multivariate `*_database.ml` search tables (interactive), 
   100/e_is_transcendental.ml (fails upstream).

@@ -1,0 +1,313 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/gl/gl"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn gl_add_assum() -> @kernel.Thm
+
+pub fn gl_and() -> @kernel.Thm
+
+pub fn gl_and_assoc() -> @kernel.Thm
+
+pub fn gl_and_assoc_th() -> @kernel.Thm
+
+pub fn gl_and_comm() -> @kernel.Thm
+
+pub fn gl_and_comm_th() -> @kernel.Thm
+
+pub fn gl_and_elim() -> @kernel.Thm
+
+pub fn gl_and_eq_or() -> @kernel.Thm
+
+pub fn gl_and_intro() -> @kernel.Thm
+
+pub fn gl_and_left_th() -> @kernel.Thm
+
+pub fn gl_and_left_true_th() -> @kernel.Thm
+
+pub fn gl_and_or_distr() -> @kernel.Thm
+
+pub fn gl_and_or_distr_equiv() -> @kernel.Thm
+
+pub fn gl_and_or_distr_inv() -> @kernel.Thm
+
+pub fn gl_and_or_distr_inv_prelim() -> @kernel.Thm
+
+pub fn gl_and_or_ldistrib_th() -> @kernel.Thm
+
+pub fn gl_and_pair_th() -> @kernel.Thm
+
+pub fn gl_and_right_th() -> @kernel.Thm
+
+pub fn gl_and_rigth_true_th() -> @kernel.Thm
+
+pub fn gl_and_subst() -> @kernel.Thm
+
+pub fn gl_and_subst_left_th() -> @kernel.Thm
+
+pub fn gl_and_subst_right_th() -> @kernel.Thm
+
+pub fn gl_and_subst_th() -> @kernel.Thm
+
+pub fn gl_ante_conj() -> @kernel.Thm
+
+pub fn gl_ante_disj() -> @kernel.Thm
+
+pub fn gl_axiom_addimp() -> @kernel.Thm
+
+pub fn gl_axiom_and() -> @kernel.Thm
+
+pub fn gl_axiom_boximp() -> @kernel.Thm
+
+pub fn gl_axiom_distribimp() -> @kernel.Thm
+
+pub fn gl_axiom_doubleneg() -> @kernel.Thm
+
+pub fn gl_axiom_iffimp1() -> @kernel.Thm
+
+pub fn gl_axiom_iffimp2() -> @kernel.Thm
+
+pub fn gl_axiom_impiff() -> @kernel.Thm
+
+pub fn gl_axiom_lob() -> @kernel.Thm
+
+pub fn gl_axiom_not() -> @kernel.Thm
+
+pub fn gl_axiom_or() -> @kernel.Thm
+
+pub fn gl_axiom_true() -> @kernel.Thm
+
+pub fn gl_bool_cases() -> @kernel.Thm
+
+pub fn gl_box_and() -> @kernel.Thm
+
+pub fn gl_box_and_inv() -> @kernel.Thm
+
+pub fn gl_box_and_inv_th() -> @kernel.Thm
+
+pub fn gl_box_and_th() -> @kernel.Thm
+
+pub fn gl_box_iff() -> @kernel.Thm
+
+pub fn gl_box_iff_th() -> @kernel.Thm
+
+pub fn gl_box_moduspones() -> @kernel.Thm
+
+pub fn gl_box_subst() -> @kernel.Thm
+
+pub fn gl_consistent() -> @kernel.Thm
+
+pub fn gl_contrad() -> @kernel.Thm
+
+pub fn gl_contrapos() -> @kernel.Thm
+
+pub fn gl_contrapos_eq() -> @kernel.Thm
+
+pub fn gl_contrapos_eq_th() -> @kernel.Thm
+
+pub fn gl_contrapos_th() -> @kernel.Thm
+
+pub fn gl_crysippus_th() -> @kernel.Thm
+
+pub fn gl_de_morgan_and_th() -> @kernel.Thm
+
+pub fn gl_de_morgan_or_th() -> @kernel.Thm
+
+pub fn gl_disj_imp() -> @kernel.Thm
+
+pub fn gl_dot_box() -> @kernel.Thm
+
+pub fn gl_doubleneg() -> @kernel.Thm
+
+pub fn gl_doubleneg_cl() -> @kernel.Thm
+
+pub fn gl_ex_falso() -> @kernel.Thm
+
+pub fn gl_ex_falso_th() -> @kernel.Thm
+
+pub fn gl_frege() -> @kernel.Thm
+
+pub fn gl_iff() -> @kernel.Thm
+
+pub fn gl_iff_def() -> @kernel.Thm
+
+pub fn gl_iff_def_th() -> @kernel.Thm
+
+pub fn gl_iff_imp1() -> @kernel.Thm
+
+pub fn gl_iff_imp2() -> @kernel.Thm
+
+pub fn gl_iff_mp() -> @kernel.Thm
+
+pub fn gl_iff_refl_th() -> @kernel.Thm
+
+pub fn gl_iff_subst() -> @kernel.Thm
+
+pub fn gl_iff_sym() -> @kernel.Thm
+
+pub fn gl_iff_sym_th() -> @kernel.Thm
+
+pub fn gl_iff_sym_th_v1() -> @kernel.Thm
+
+pub fn gl_iff_trans() -> @kernel.Thm
+
+pub fn gl_iff_true_th() -> @kernel.Thm
+
+pub fn gl_imp_add_assum() -> @kernel.Thm
+
+pub fn gl_imp_antisym() -> @kernel.Thm
+
+pub fn gl_imp_box() -> @kernel.Thm
+
+pub fn gl_imp_clauses() -> @kernel.Thm
+
+pub fn gl_imp_contr_th() -> @kernel.Thm
+
+pub fn gl_imp_false_rule() -> @kernel.Thm
+
+pub fn gl_imp_insert() -> @kernel.Thm
+
+pub fn gl_imp_mono() -> @kernel.Thm
+
+pub fn gl_imp_mono_th() -> @kernel.Thm
+
+pub fn gl_imp_mono_th_v1() -> @kernel.Thm
+
+pub fn gl_imp_refl_th() -> @kernel.Thm
+
+pub fn gl_imp_subst() -> @kernel.Thm
+
+pub fn gl_imp_swap() -> @kernel.Thm
+
+pub fn gl_imp_swap_th() -> @kernel.Thm
+
+pub fn gl_imp_trans() -> @kernel.Thm
+
+pub fn gl_imp_trans2() -> @kernel.Thm
+
+pub fn gl_imp_trans_chain_2() -> @kernel.Thm
+
+pub fn gl_imp_trans_th() -> @kernel.Thm
+
+pub fn gl_imp_true_rule() -> @kernel.Thm
+
+pub fn gl_imp_truefalse_th() -> @kernel.Thm
+
+pub fn gl_imp_unduplicate() -> @kernel.Thm
+
+pub fn gl_itf_valid() -> @kernel.Thm
+
+pub fn gl_modusponens() -> @kernel.Thm
+
+pub fn gl_modusponens_th() -> @kernel.Thm
+
+pub fn gl_nc() -> @kernel.Thm
+
+pub fn gl_nc_th() -> @kernel.Thm
+
+pub fn gl_necessitation() -> @kernel.Thm
+
+pub fn gl_not_def() -> @kernel.Thm
+
+pub fn gl_not_not_false_th() -> @kernel.Thm
+
+pub fn gl_not_not_th() -> @kernel.Thm
+
+pub fn gl_not_subst() -> @kernel.Thm
+
+pub fn gl_not_true_th() -> @kernel.Thm
+
+pub fn gl_or_and_distr() -> @kernel.Thm
+
+pub fn gl_or_and_distr_equiv() -> @kernel.Thm
+
+pub fn gl_or_and_distr_inv() -> @kernel.Thm
+
+pub fn gl_or_assoc() -> @kernel.Thm
+
+pub fn gl_or_assoc_left_th() -> @kernel.Thm
+
+pub fn gl_or_assoc_right_th() -> @kernel.Thm
+
+pub fn gl_or_assoc_th() -> @kernel.Thm
+
+pub fn gl_or_comm() -> @kernel.Thm
+
+pub fn gl_or_elim() -> @kernel.Thm
+
+pub fn gl_or_introl() -> @kernel.Thm
+
+pub fn gl_or_intror() -> @kernel.Thm
+
+pub fn gl_or_left_th() -> @kernel.Thm
+
+pub fn gl_or_lid_th() -> @kernel.Thm
+
+pub fn gl_or_rid_th() -> @kernel.Thm
+
+pub fn gl_or_right_th() -> @kernel.Thm
+
+pub fn gl_or_subst_right() -> @kernel.Thm
+
+pub fn gl_or_subst_th() -> @kernel.Thm
+
+pub fn gl_or_transl() -> @kernel.Thm
+
+pub fn gl_or_transr() -> @kernel.Thm
+
+pub fn gl_schema_4() -> @kernel.Thm
+
+pub fn gl_shunt() -> @kernel.Thm
+
+pub fn gl_tnd_th() -> @kernel.Thm
+
+pub fn gl_transnt_valid() -> @kernel.Thm
+
+pub fn gl_truth_th() -> @kernel.Thm
+
+pub fn glaxiom_cases() -> @kernel.Thm
+
+pub fn glaxiom_induct() -> @kernel.Thm
+
+pub fn glaxiom_rules() -> @kernel.Thm
+
+pub fn glaxioms_transnt_valid() -> @kernel.Thm
+
+pub fn glimp_add_concl() -> @kernel.Thm
+
+pub fn glproves_cases() -> @kernel.Thm
+
+pub fn glproves_induct() -> @kernel.Thm
+
+pub fn glproves_rules() -> @kernel.Thm
+
+pub fn itf() -> @kernel.Thm
+
+pub fn itf_nt() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn lob_imp_transnt() -> @kernel.Thm
+
+pub fn subst() -> @kernel.Thm
+
+pub fn subst_iff() -> @kernel.Thm
+
+pub fn subst_imp() -> @kernel.Thm
+
+pub fn substitution_lemma() -> @kernel.Thm
+
+pub fn transnt_eq_lob() -> @kernel.Thm
+
+pub fn transnt_imp_lob() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

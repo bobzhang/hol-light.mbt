@@ -1,0 +1,140 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/gl/completeness"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn accessibility_lemma() -> @kernel.Thm
+
+pub fn bisimimulation_set_of_list() -> @kernel.Thm
+
+pub fn completeness_theorem() -> @kernel.Thm
+
+pub fn completeness_theorem_gen() -> @kernel.Thm
+
+pub fn conjlist() -> @kernel.Thm
+
+pub fn conjlist_append() -> @kernel.Thm
+
+pub fn conjlist_cons() -> @kernel.Thm
+
+pub fn conjlist_imp() -> @kernel.Thm
+
+pub fn conjlist_imp_head() -> @kernel.Thm
+
+pub fn conjlist_imp_mem() -> @kernel.Thm
+
+pub fn conjlist_imp_sublist() -> @kernel.Thm
+
+pub fn conjlist_imp_tail() -> @kernel.Thm
+
+pub fn conjlist_map_box() -> @kernel.Thm
+
+pub fn conjlist_mono() -> @kernel.Thm
+
+pub fn consistent() -> @kernel.Thm
+
+pub fn consistent_cons() -> @kernel.Thm
+
+pub fn consistent_em() -> @kernel.Thm
+
+pub fn consistent_lemma() -> @kernel.Thm
+
+pub fn consistent_nc() -> @kernel.Thm
+
+pub fn consistent_sing() -> @kernel.Thm
+
+pub fn consistent_sublist() -> @kernel.Thm
+
+pub fn extend_maximal_consistent() -> @kernel.Thm
+
+pub fn false_imp_not_consistent() -> @kernel.Thm
+
+pub fn false_not_conjlist() -> @kernel.Thm
+
+pub fn gl_countermodel() -> @kernel.Thm
+
+pub fn gl_countermodel_alt() -> @kernel.Thm
+
+pub fn gl_countermodel_finite_sets() -> @kernel.Thm
+
+pub fn gl_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn gl_standard_frame() -> @kernel.Thm
+
+pub fn gl_standard_model() -> @kernel.Thm
+
+pub fn gl_standard_rel() -> @kernel.Thm
+
+pub fn gl_stdrel_cases() -> @kernel.Thm
+
+pub fn gl_stdrel_imp_gl_stdworlds() -> @kernel.Thm
+
+pub fn gl_stdrel_induct() -> @kernel.Thm
+
+pub fn gl_stdrel_rules() -> @kernel.Thm
+
+pub fn gl_stdworlds_cases() -> @kernel.Thm
+
+pub fn gl_stdworlds_induct() -> @kernel.Thm
+
+pub fn gl_stdworlds_rules() -> @kernel.Thm
+
+pub fn gl_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn gl_truth_lemma() -> @kernel.Thm
+
+pub fn head_tail_imp_conjlist() -> @kernel.Thm
+
+pub fn imp_conjlist() -> @kernel.Thm
+
+pub fn itf_maximal_consistent() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn maximal_consistent() -> @kernel.Thm
+
+pub fn maximal_consistent_lemma() -> @kernel.Thm
+
+pub fn maximal_consistent_mem_cases() -> @kernel.Thm
+
+pub fn maximal_consistent_mem_not() -> @kernel.Thm
+
+pub fn maximal_consistent_subformula_mem_eq_derivable() -> @kernel.Thm
+
+pub fn maximal_consistent_subformula_mem_neg_eq_derivable() -> @kernel.Thm
+
+pub fn nonempty_maximal_consistent() -> @kernel.Thm
+
+pub fn set_of_list_eq_conjlist() -> @kernel.Thm
+
+pub fn set_of_list_eq_conjlist_eq() -> @kernel.Thm
+
+pub fn set_of_list_eq_consistent() -> @kernel.Thm
+
+pub fn set_of_list_eq_gl_standard_rel() -> @kernel.Thm
+
+pub fn set_of_list_eq_imp_mem() -> @kernel.Thm
+
+pub fn set_of_list_eq_maximal_consistent() -> @kernel.Thm
+
+pub fn subformula_imp_neg_subsentence() -> @kernel.Thm
+
+pub fn subformula_imp_subsentence() -> @kernel.Thm
+
+pub fn subsentence_cases() -> @kernel.Thm
+
+pub fn subsentence_induct() -> @kernel.Thm
+
+pub fn subsentence_rules() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

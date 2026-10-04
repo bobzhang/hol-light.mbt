@@ -1,0 +1,289 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/gl/k4lr"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn gl_equiv_k4lr() -> @kernel.Thm
+
+pub fn gl_proves_k4lraxioms() -> @kernel.Thm
+
+pub fn gl_proves_lob_rule() -> @kernel.Thm
+
+pub fn glproves_subset_k4lrproves() -> @kernel.Thm
+
+pub fn k4lr_add_assum() -> @kernel.Thm
+
+pub fn k4lr_and() -> @kernel.Thm
+
+pub fn k4lr_and_assoc() -> @kernel.Thm
+
+pub fn k4lr_and_assoc_th() -> @kernel.Thm
+
+pub fn k4lr_and_comm() -> @kernel.Thm
+
+pub fn k4lr_and_comm_th() -> @kernel.Thm
+
+pub fn k4lr_and_elim() -> @kernel.Thm
+
+pub fn k4lr_and_eq_or() -> @kernel.Thm
+
+pub fn k4lr_and_intro() -> @kernel.Thm
+
+pub fn k4lr_and_left_th() -> @kernel.Thm
+
+pub fn k4lr_and_left_true_th() -> @kernel.Thm
+
+pub fn k4lr_and_or_distr() -> @kernel.Thm
+
+pub fn k4lr_and_or_distr_equiv() -> @kernel.Thm
+
+pub fn k4lr_and_or_distr_inv() -> @kernel.Thm
+
+pub fn k4lr_and_or_distr_inv_prelim() -> @kernel.Thm
+
+pub fn k4lr_and_or_ldistrib_th() -> @kernel.Thm
+
+pub fn k4lr_and_pair_th() -> @kernel.Thm
+
+pub fn k4lr_and_right_th() -> @kernel.Thm
+
+pub fn k4lr_and_rigth_true_th() -> @kernel.Thm
+
+pub fn k4lr_and_subst() -> @kernel.Thm
+
+pub fn k4lr_and_subst_left_th() -> @kernel.Thm
+
+pub fn k4lr_and_subst_right_th() -> @kernel.Thm
+
+pub fn k4lr_and_subst_th() -> @kernel.Thm
+
+pub fn k4lr_ante_conj() -> @kernel.Thm
+
+pub fn k4lr_ante_disj() -> @kernel.Thm
+
+pub fn k4lr_axiom_4() -> @kernel.Thm
+
+pub fn k4lr_axiom_addimp() -> @kernel.Thm
+
+pub fn k4lr_axiom_and() -> @kernel.Thm
+
+pub fn k4lr_axiom_boximp() -> @kernel.Thm
+
+pub fn k4lr_axiom_distribimp() -> @kernel.Thm
+
+pub fn k4lr_axiom_doubleneg() -> @kernel.Thm
+
+pub fn k4lr_axiom_iffimp1() -> @kernel.Thm
+
+pub fn k4lr_axiom_iffimp2() -> @kernel.Thm
+
+pub fn k4lr_axiom_impiff() -> @kernel.Thm
+
+pub fn k4lr_axiom_not() -> @kernel.Thm
+
+pub fn k4lr_axiom_or() -> @kernel.Thm
+
+pub fn k4lr_axiom_true() -> @kernel.Thm
+
+pub fn k4lr_bool_cases() -> @kernel.Thm
+
+pub fn k4lr_box_and() -> @kernel.Thm
+
+pub fn k4lr_box_and_inv() -> @kernel.Thm
+
+pub fn k4lr_box_moduspones() -> @kernel.Thm
+
+pub fn k4lr_contrad() -> @kernel.Thm
+
+pub fn k4lr_contrapos() -> @kernel.Thm
+
+pub fn k4lr_contrapos_eq() -> @kernel.Thm
+
+pub fn k4lr_contrapos_eq_th() -> @kernel.Thm
+
+pub fn k4lr_contrapos_th() -> @kernel.Thm
+
+pub fn k4lr_crysippus_th() -> @kernel.Thm
+
+pub fn k4lr_de_morgan_and_th() -> @kernel.Thm
+
+pub fn k4lr_de_morgan_or_th() -> @kernel.Thm
+
+pub fn k4lr_disj_imp() -> @kernel.Thm
+
+pub fn k4lr_doubleneg() -> @kernel.Thm
+
+pub fn k4lr_doubleneg_cl() -> @kernel.Thm
+
+pub fn k4lr_ex_falso() -> @kernel.Thm
+
+pub fn k4lr_ex_falso_th() -> @kernel.Thm
+
+pub fn k4lr_frege() -> @kernel.Thm
+
+pub fn k4lr_frege_th() -> @kernel.Thm
+
+pub fn k4lr_iff() -> @kernel.Thm
+
+pub fn k4lr_iff_def() -> @kernel.Thm
+
+pub fn k4lr_iff_def_th() -> @kernel.Thm
+
+pub fn k4lr_iff_imp1() -> @kernel.Thm
+
+pub fn k4lr_iff_imp2() -> @kernel.Thm
+
+pub fn k4lr_iff_mp() -> @kernel.Thm
+
+pub fn k4lr_iff_refl_th() -> @kernel.Thm
+
+pub fn k4lr_iff_sym() -> @kernel.Thm
+
+pub fn k4lr_iff_sym_th() -> @kernel.Thm
+
+pub fn k4lr_iff_sym_th_v1() -> @kernel.Thm
+
+pub fn k4lr_iff_trans() -> @kernel.Thm
+
+pub fn k4lr_iff_true_th() -> @kernel.Thm
+
+pub fn k4lr_imp_add_assum() -> @kernel.Thm
+
+pub fn k4lr_imp_add_concl() -> @kernel.Thm
+
+pub fn k4lr_imp_antisym() -> @kernel.Thm
+
+pub fn k4lr_imp_box() -> @kernel.Thm
+
+pub fn k4lr_imp_clauses() -> @kernel.Thm
+
+pub fn k4lr_imp_contr_th() -> @kernel.Thm
+
+pub fn k4lr_imp_false_rule() -> @kernel.Thm
+
+pub fn k4lr_imp_insert() -> @kernel.Thm
+
+pub fn k4lr_imp_mono() -> @kernel.Thm
+
+pub fn k4lr_imp_mono_th() -> @kernel.Thm
+
+pub fn k4lr_imp_mono_th_v1() -> @kernel.Thm
+
+pub fn k4lr_imp_refl_th() -> @kernel.Thm
+
+pub fn k4lr_imp_subst() -> @kernel.Thm
+
+pub fn k4lr_imp_swap() -> @kernel.Thm
+
+pub fn k4lr_imp_swap_th() -> @kernel.Thm
+
+pub fn k4lr_imp_trans() -> @kernel.Thm
+
+pub fn k4lr_imp_trans2() -> @kernel.Thm
+
+pub fn k4lr_imp_trans_chain_2() -> @kernel.Thm
+
+pub fn k4lr_imp_trans_th() -> @kernel.Thm
+
+pub fn k4lr_imp_true_rule() -> @kernel.Thm
+
+pub fn k4lr_imp_truefalse_th() -> @kernel.Thm
+
+pub fn k4lr_imp_unduplicate() -> @kernel.Thm
+
+pub fn k4lr_lobrule() -> @kernel.Thm
+
+pub fn k4lr_modusponens() -> @kernel.Thm
+
+pub fn k4lr_modusponens_th() -> @kernel.Thm
+
+pub fn k4lr_nc() -> @kernel.Thm
+
+pub fn k4lr_nc_th() -> @kernel.Thm
+
+pub fn k4lr_necessitation() -> @kernel.Thm
+
+pub fn k4lr_not_def() -> @kernel.Thm
+
+pub fn k4lr_not_not_false_th() -> @kernel.Thm
+
+pub fn k4lr_not_not_th() -> @kernel.Thm
+
+pub fn k4lr_not_subst() -> @kernel.Thm
+
+pub fn k4lr_not_true_th() -> @kernel.Thm
+
+pub fn k4lr_or_and_distr() -> @kernel.Thm
+
+pub fn k4lr_or_and_distr_equiv() -> @kernel.Thm
+
+pub fn k4lr_or_and_distr_inv() -> @kernel.Thm
+
+pub fn k4lr_or_assoc() -> @kernel.Thm
+
+pub fn k4lr_or_assoc_left_th() -> @kernel.Thm
+
+pub fn k4lr_or_assoc_right_th() -> @kernel.Thm
+
+pub fn k4lr_or_assoc_th() -> @kernel.Thm
+
+pub fn k4lr_or_comm() -> @kernel.Thm
+
+pub fn k4lr_or_elim() -> @kernel.Thm
+
+pub fn k4lr_or_introl() -> @kernel.Thm
+
+pub fn k4lr_or_intror() -> @kernel.Thm
+
+pub fn k4lr_or_left_th() -> @kernel.Thm
+
+pub fn k4lr_or_lid_th() -> @kernel.Thm
+
+pub fn k4lr_or_rid_th() -> @kernel.Thm
+
+pub fn k4lr_or_right_th() -> @kernel.Thm
+
+pub fn k4lr_or_subst_right() -> @kernel.Thm
+
+pub fn k4lr_or_subst_th() -> @kernel.Thm
+
+pub fn k4lr_or_transl() -> @kernel.Thm
+
+pub fn k4lr_or_transr() -> @kernel.Thm
+
+pub fn k4lr_proves_glaxioms() -> @kernel.Thm
+
+pub fn k4lr_proves_lob_axiom() -> @kernel.Thm
+
+pub fn k4lr_shunt() -> @kernel.Thm
+
+pub fn k4lr_tnd_th() -> @kernel.Thm
+
+pub fn k4lr_truth_th() -> @kernel.Thm
+
+pub fn k4lraxiom_cases() -> @kernel.Thm
+
+pub fn k4lraxiom_induct() -> @kernel.Thm
+
+pub fn k4lraxiom_rules() -> @kernel.Thm
+
+pub fn k4lrproves_cases() -> @kernel.Thm
+
+pub fn k4lrproves_induct() -> @kernel.Thm
+
+pub fn k4lrproves_rules() -> @kernel.Thm
+
+pub fn k4lrproves_subset_glproves() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
