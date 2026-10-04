@@ -859,7 +859,7 @@ pub fn add_in_db(x51 : (Int64, @kernel.Term, Action, Db)) -> Db raise {
       0L,
       cst_1,
       Action::Rewrite(nrws) as act_1,
-      Db::Try({ hcst, rws: Action::Rewrite(rws) as rw, tail, .. }),
+      Db::Try({ hcst, rws: Action::Rewrite(rws) as rw, tail }),
     ) =>
       if cst_1 == hcst {
         Db::Try(TryRec::{ hcst, rws: Action::Rewrite(nrws.concat(rws)), tail, })
@@ -870,7 +870,7 @@ pub fn add_in_db(x51 : (Int64, @kernel.Term, Action, Db)) -> Db raise {
           tail: add_in_db((0L, cst_1, act_1, tail)),
         })
       }
-    (n_1, cst_2, act_2, Db::Try({ hcst: hcst_1, rws: rws_1, tail: tail_1, .. })) =>
+    (n_1, cst_2, act_2, Db::Try({ hcst: hcst_1, rws: rws_1, tail: tail_1 })) =>
       Db::Try(TryRec::{
         hcst: hcst_1,
         rws: rws_1,
@@ -970,7 +970,7 @@ pub fn add_in_db_upd(
   let (name, arity, hcst) = x62
   let act = x63
   match assoc_clause(rws)(name) {
-    { val: (db, sk), .. } as rl => {
+    { val: (db, sk) } as rl => {
       rl.val = (add_in_db((arity, hcst, act, db)), sk)
       ()
     }
@@ -990,7 +990,7 @@ pub fn set_skip_name(
         fn(x66 : Int64?) -> Unit raise {
           let sk = x66
           match assoc_clause(rws)(p) {
-            { val: (db, _), .. } as rl => {
+            { val: (db, _) } as rl => {
               rl.val = (db, sk)
               ()
             }
@@ -1256,7 +1256,7 @@ pub fn rws_of(
           x108 : @list.List[Db],
         ) -> @list.List[Db] raise {
           match x107 {
-            { val: (db, _), .. } => {
+            { val: (db, _) } => {
               let r = x108
               r.prepend(db)
             }
@@ -1270,7 +1270,7 @@ pub fn rws_of(
         match db_1 {
           Db::End_db => @list.empty()
           Db::Need_arg(db_p) => get_actions(db_p)
-          Db::Try({ hcst, rws, tail, .. }) =>
+          Db::Try({ hcst, rws, tail }) =>
             get_actions(tail).prepend((hcst, rws))
         }
       }
@@ -1321,7 +1321,7 @@ pub fn deplist(
         ) -> @list.List[(String, Db)] raise {
           let s = x113
           match x114 {
-            { val: (db, _), .. } => {
+            { val: (db, _) } => {
               let r = x115
               r.prepend((s, db))
             }
@@ -1335,7 +1335,7 @@ pub fn deplist(
         match db_1 {
           Db::End_db => @list.empty()
           Db::Need_arg(db_p) => get_actions(db_p)
-          Db::Try({ hcst, rws, tail, .. }) => get_actions(tail).prepend(rws)
+          Db::Try({ hcst, rws, tail }) => get_actions(tail).prepend(rws)
         }
       }
       let actionlist = @lib.map(
@@ -1519,9 +1519,9 @@ pub fn comb_ct(
   let cst = x138
   let arg = x139
   match cst {
-    { head, args, rws: Db::Need_arg(tail), skip, .. } =>
+    { head, args, rws: Db::Need_arg(tail), skip } =>
       Fterm::Const(CstRec::{ head, args: args.prepend(arg), rws: tail, skip, })
-    { head: head_1, args: args_1, rws: Db::End_db, skip: skip_1, .. } =>
+    { head: head_1, args: args_1, rws: Db::End_db, skip: skip_1 } =>
       Fterm::Const(CstRec::{
         head: head_1,
         args: args_1.prepend(arg),
@@ -1541,7 +1541,7 @@ pub fn[TA] mk_clos(
 ) -> Fterm[TA] raise {
   let (env, t) = (x140, x141)
   match t {
-    Dterm::Cst(hc, { val: (db, b), .. }) =>
+    Dterm::Cst(hc, { val: (db, b) }) =>
       Fterm::Const(CstRec::{ head: hc, args: @list.empty(), rws: db, skip: b, })
     Dterm::Bv(i) => @lib.list_nth(env, @lib.int63_to_int(i))
     Dterm::Fv => Fterm::Neutr
@@ -1573,7 +1573,7 @@ pub fn inst_rw(
     (
       th,
       monitoring,
-      { rule: Rewrite::Rw({ rhs, thm, .. }), inst: (bds, tysub), .. },
+      { rule: Rewrite::Rw({ rhs, thm }), inst: (bds, tysub) },
     ) => {
       let tirhs = inst_type_dterm((tysub, rhs))
       let tithm = @kernel.inst_type(tysub, thm)
@@ -1642,9 +1642,8 @@ pub fn reduce_cst(
       {
         head,
         args,
-        rws: Db::Try({ hcst, rws: Action::Rewrite(rls), tail, .. }),
-        skip,
-        ..
+        rws: Db::Try({ hcst, rws: Action::Rewrite(rls), tail }),
+        skip
       },
     ) =>
       try {
@@ -1677,10 +1676,9 @@ pub fn reduce_cst(
         head: head_1,
         args: args_1,
         rws: Db::Try(
-          { hcst: hcst_1, rws: Action::Conv(fconv), tail: tail_1, .. }
+          { hcst: hcst_1, rws: Action::Conv(fconv), tail: tail_1 }
         ),
-        skip: skip_1,
-        ..
+        skip: skip_1
       },
     ) =>
       try {
@@ -1835,7 +1833,7 @@ pub fn[TA] cbv_wk(
   ],
 ) raise {
   match x153 {
-    ((th, Fterm::Clos({ env, term: Dterm::App(a, args), .. })), stk) => {
+    ((th, Fterm::Clos({ env, term: Dterm::App(a, args) })), stk) => {
       let (tha, stka) = @lib.rev_itlist(
         (
           x156 : Dterm[Db],
@@ -1877,7 +1875,7 @@ pub fn[TA] cbv_wk(
       cbv_wk(((tha, mk_clos(env, a)), stka))
     }
     (
-      (th_1, Fterm::Clos({ env: env_1, term: Dterm::Abs(body), .. })),
+      (th_1, Fterm::Clos({ env: env_1, term: Dterm::Abs(body) })),
       Stack::Zrator((mka, (thb, cl)), s_p),
     ) => {
       let t158 = mk_clos(env_1.prepend(cl), body)
@@ -1972,7 +1970,7 @@ pub fn strong(
   ),
 ) -> @kernel.Thm raise {
   match x161 {
-    ((th, Fterm::Clos({ env, term: Dterm::Abs(t), .. })), stk) => {
+    ((th, Fterm::Clos({ env, term: Dterm::Abs(t) })), stk) => {
       let (thb, stk_p) = push_lam_in_stk(th, stk)
       strong(cbv_wk(((thb, mk_clos(env.prepend(Fterm::Neutr), t)), stk_p)))
     }

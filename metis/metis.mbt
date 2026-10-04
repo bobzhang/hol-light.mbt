@@ -1289,7 +1289,7 @@ pub fn[TA, TB, TC] nodedelete(
   let dkey_1 = x199
   let node_1 = x200
   match node_1 {
-    { size, priority, left, key, value: value_1, right, .. } => {
+    { size, priority, left, key, value: value_1, right } => {
       let c = comparekey_1(dkey_1)(key)
       if c < 0L {
         let size_1 = @lib.sub63(size, 1L)
@@ -1380,7 +1380,7 @@ pub fn[TA, TB, TC] nodemap(
   let f_1 = x207
   let node_1 = x208
   match node_1 {
-    { size, priority, left, key, value: value_1, right, .. } => {
+    { size, priority, left, key, value: value_1, right } => {
       let left_1 = treemap(f_1, left)
       let value_2 = f_1((key, value_1))
       let right_1 = treemap(f_1, right)
@@ -1865,7 +1865,7 @@ pub fn[TA, TB] nodedeletenth(
   let n_1 = x273
   let node_1 = x274
   match node_1 {
-    { size, priority, left, key, value: value_1, right, .. } => {
+    { size, priority, left, key, value: value_1, right } => {
       let k = treesize(left)
       if n_1 == k {
         ((key, value_1), treeappend(left, right))
@@ -22892,7 +22892,7 @@ pub fn zeroelement() -> Int64 {
 /// `incrementElement`
 pub fn incrementelement(x3321 : Size) -> ((Int64) -> Int64? raise) raise {
   match x3321 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3322 : Int64) -> Int64? raise {
         let i = x3322
         let i_1 = @lib.add63(i, 1L)
@@ -22909,7 +22909,7 @@ pub fn incrementelement(x3321 : Size) -> ((Int64) -> Int64? raise) raise {
 /// `elementListSpace`
 pub fn elementlistspace(x3323 : Size) -> ((Int64) -> Int64? raise) raise {
   match x3323 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3324 : Int64) -> Int64? raise {
         let arity_1 = x3324
         match expint(n, arity_1) {
@@ -22926,7 +22926,7 @@ pub fn elementlistindex(
   x3325 : Size,
 ) -> ((@list.List[Int64]) -> Int64 raise) raise {
   match x3325 {
-    { size: n, .. } => {
+    { size: n } => {
       fn f(x3327 : Int64, x3328 : @list.List[Int64]) -> Int64 raise {
         let acc = x3327
         let elts = x3328
@@ -23169,7 +23169,7 @@ pub fn insertfunctionfixed(
   let fix = x3353
   let name_arity_fun = x3354
   match fix {
-    { functions: fns, relations: rels, .. } => {
+    { functions: fns, relations: rels } => {
       let fns_1 = insert_v4(fns, name_arity_fun)
       Fixed::{ functions: fns_1, relations: rels, }
     }
@@ -23189,7 +23189,7 @@ pub fn insertrelationfixed(
   let fix = x3355
   let name_arity_rel = x3356
   match fix {
-    { functions: fns, relations: rels, .. } => {
+    { functions: fns, relations: rels } => {
       let rels_1 = insert_v4(rels, name_arity_rel)
       Fixed::{ functions: fns, relations: rels_1, }
     }
@@ -23209,9 +23209,9 @@ pub fn unionfixed(x3358 : Fixed, x3359 : Fixed) -> Fixed raise {
   let fix1 = x3358
   let fix2 = x3359
   match fix1 {
-    { functions: fns1, relations: rels1, .. } =>
+    { functions: fns1, relations: rels1 } =>
       match fix2 {
-        { functions: fns2, relations: rels2, .. } => {
+        { functions: fns2, relations: rels2 } => {
           let fns = union_v13(union_v35, fns1, fns2)
           let rels = union_v13(union_v35, rels1, rels2)
           Fixed::{ functions: fns, relations: rels, }
@@ -23324,9 +23324,9 @@ pub fn mapfixed(x3370 : FixedMap, x3371 : Fixed) -> Fixed raise {
   let fixmap = x3370
   let fix = x3371
   match fixmap {
-    { functionmap: fnmap, relationmap: relmap, .. } =>
+    { functionmap: fnmap, relationmap: relmap } =>
       match fix {
-        { functions: fns, relations: rels, .. } => {
+        { functions: fns, relations: rels } => {
           let fns_1 = compose(fnmap, fns)
           let rels_1 = compose(relmap, rels)
           Fixed::{ functions: fns_1, relations: rels_1, }
@@ -23802,7 +23802,7 @@ pub fn sucname() -> Name {
 /// `modN`
 pub fn modn(x3386 : Size) -> ((Int64) -> Int64 raise) raise {
   match x3386 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3387 : Int64) -> Int64 raise {
         let x = x3387
         @lib.mod63(x, n)
@@ -23850,7 +23850,7 @@ pub fn divfn(
   x3398 : Size,
 ) -> ((Int64) -> ((Int64) -> Int64? raise) raise) raise {
   match x3398 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3399 : Int64) -> ((Int64) -> Int64? raise) raise {
         let x = x3399
         fn(x3400 : Int64) -> Int64? raise {
@@ -23878,7 +23878,7 @@ pub fn modfn(
   x3406 : Size,
 ) -> ((Int64) -> ((Int64) -> Int64? raise) raise) raise {
   match x3406 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3407 : Int64) -> ((Int64) -> Int64? raise) raise {
         let x = x3407
         fn(x3408 : Int64) -> Int64? raise {
@@ -23903,7 +23903,7 @@ pub fn multfn(x3409 : Size, x3410 : Int64, x3411 : Int64) -> Int64? raise {
 /// `negFn`
 pub fn negfn(x3412 : Size) -> ((Int64) -> Int64? raise) raise {
   match x3412 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3413 : Int64) -> Int64? raise {
         let x = x3413
         Some(if x == 0L { 0L } else { @lib.sub63(n, x) })
@@ -23915,7 +23915,7 @@ pub fn negfn(x3412 : Size) -> ((Int64) -> Int64? raise) raise {
 /// `preFn`
 pub fn prefn(x3414 : Size) -> ((Int64) -> Int64? raise) raise {
   match x3414 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3415 : Int64) -> Int64? raise {
         let x = x3415
         Some(if x == 0L { @lib.sub63(n, 1L) } else { @lib.sub63(x, 1L) })
@@ -23929,7 +23929,7 @@ pub fn subfn(
   x3416 : Size,
 ) -> ((Int64) -> ((Int64) -> Int64? raise) raise) raise {
   match x3416 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3417 : Int64) -> ((Int64) -> Int64? raise) raise {
         let x = x3417
         fn(x3418 : Int64) -> Int64? raise {
@@ -23950,7 +23950,7 @@ pub fn subfn(
 /// `sucFn`
 pub fn sucfn(x3419 : Size) -> ((Int64) -> Int64? raise) raise {
   match x3419 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3420 : Int64) -> Int64? raise {
         let x = x3420
         Some(if x == @lib.sub63(n, 1L) { 0L } else { @lib.add63(x, 1L) })
@@ -24368,7 +24368,7 @@ pub fn modularfixed() -> Fixed {
 /// `cutN`
 pub fn cutn(x3546 : Size) -> ((Int64) -> Int64 raise) raise {
   match x3546 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3547 : Int64) -> Int64 raise {
         let x = x3547
         if x >= n {
@@ -24446,7 +24446,7 @@ pub fn modfn_v1(
   x3566 : Size,
 ) -> ((Int64) -> ((Int64) -> Int64? raise) raise) raise {
   match x3566 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3567 : Int64) -> ((Int64) -> Int64? raise) raise {
         let x = x3567
         fn(x3568 : Int64) -> Int64? raise {
@@ -24498,7 +24498,7 @@ pub fn subfn_v1(
   x3576 : Size,
 ) -> ((Int64) -> ((Int64) -> Int64? raise) raise) raise {
   match x3576 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3577 : Int64) -> ((Int64) -> Int64? raise) raise {
         let x = x3577
         fn(x3578 : Int64) -> Int64? raise {
@@ -24530,7 +24530,7 @@ pub fn dividesrel_v1(
   x3582 : Size,
 ) -> ((Int64) -> ((Int64) -> Bool? raise) raise) raise {
   match x3582 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3583 : Int64) -> ((Int64) -> Bool? raise) raise {
         let x = x3583
         fn(x3584 : Int64) -> Bool? raise {
@@ -24553,7 +24553,7 @@ pub fn dividesrel_v1(
 /// `evenRel`
 pub fn evenrel_v1(x3585 : Size) -> ((Int64) -> Bool? raise) raise {
   match x3585 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3586 : Int64) -> Bool? raise {
         let x = x3586
         if x == @lib.sub63(n, 1L) {
@@ -24571,7 +24571,7 @@ pub fn gerel_v1(
   x3587 : Size,
 ) -> ((Int64) -> ((Int64) -> Bool? raise) raise) raise {
   match x3587 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3588 : Int64) -> ((Int64) -> Bool? raise) raise {
         let y = x3588
         fn(x3589 : Int64) -> Bool? raise {
@@ -24598,7 +24598,7 @@ pub fn gtrel_v1(
   x3590 : Size,
 ) -> ((Int64) -> ((Int64) -> Bool? raise) raise) raise {
   match x3590 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3591 : Int64) -> ((Int64) -> Bool? raise) raise {
         let y = x3591
         fn(x3592 : Int64) -> Bool? raise {
@@ -24632,7 +24632,7 @@ pub fn lerel_v1(
   x3595 : Size,
 ) -> ((Int64) -> ((Int64) -> Bool? raise) raise) raise {
   match x3595 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3596 : Int64) -> ((Int64) -> Bool? raise) raise {
         let x = x3596
         fn(x3597 : Int64) -> Bool? raise {
@@ -24659,7 +24659,7 @@ pub fn ltrel_v1(
   x3598 : Size,
 ) -> ((Int64) -> ((Int64) -> Bool? raise) raise) raise {
   match x3598 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3599 : Int64) -> ((Int64) -> Bool? raise) raise {
         let x = x3599
         fn(x3600 : Int64) -> Bool? raise {
@@ -24684,7 +24684,7 @@ pub fn ltrel_v1(
 /// `oddRel`
 pub fn oddrel_v1(x3601 : Size) -> ((Int64) -> Bool? raise) raise {
   match x3601 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3602 : Int64) -> Bool? raise {
         let x = x3602
         if x == @lib.sub63(n, 1L) {
@@ -25171,7 +25171,7 @@ pub fn universename() -> Name {
 /// `eltN`
 pub fn eltn(x3697 : Size) -> Int64 raise {
   match x3697 {
-    { size: n, .. } => {
+    { size: n } => {
       fn f(x3698 : Int64, x3699 : Int64) -> Int64 raise {
         let acc = x3698
         match x3699 {
@@ -25901,7 +25901,7 @@ pub fn randomvaluation(
   x3836 : Size,
 ) -> ((@oset.T[Name]) -> Valuation raise) raise {
   match x3836 {
-    { size: n, .. } =>
+    { size: n } =>
       fn(x3837 : @oset.T[String]) -> Valuation raise {
         let vs = x3837
         let f : ((String, Valuation)) -> Valuation raise = fn(
@@ -26136,7 +26136,7 @@ pub fn gettables(x3867 : Tables, x3868 : (String, Int64)) -> Table raise {
   let tables = x3867
   let n_a = x3868
   match tables {
-    { domainsize: n, rangesize: _, tablemap: tm, .. } => {
+    { domainsize: n, rangesize: _, tablemap: tm } => {
       let m = tm.val
       match peek_v5(m, n_a) {
         Some(t) => t
@@ -26215,9 +26215,9 @@ pub(all) struct Model {
 /// `newModel`
 pub fn newmodel(x3873 : Parameters) -> Model raise {
   match x3873 {
-    { sizep: vn, fixed, .. } =>
+    { sizep: vn, fixed } =>
       match fixed {
-        { functions: fns, relations: rels, .. } => {
+        { functions: fns, relations: rels } => {
           let fixfns = transform_v7(fn(
             x3874 : (Size) -> ((@list.List[Int64]) -> Int64? raise) raise,
           ) -> ((@list.List[Int64]) -> Int64? raise) raise {
@@ -28263,7 +28263,7 @@ pub fn[TA] fifoize(
   x4114 : Parameters1,
 ) -> ((@list.List[(Int64, TA)]) -> @list.List[(Int64, TA)] raise) raise {
   match x4114 {
-    { fifo, .. } =>
+    { fifo } =>
       fn(x4115 : @list.List[(Int64, TA)]) -> @list.List[(Int64, TA)] raise {
         let l = x4115
         if fifo {
@@ -28762,7 +28762,7 @@ pub fn[TA] insert_v12(
   x4169 : LiteralNet[TA],
 ) -> ((((Bool, (Name, @list.List[Term])), TA)) -> LiteralNet[TA] raise) raise {
   match x4169 {
-    { positive: positive_1, negative: negative_1, .. } =>
+    { positive: positive_1, negative: negative_1 } =>
       fn(
         x4170 : ((Bool, (String, @list.List[Term])), TA),
       ) -> LiteralNet[TA] raise {
@@ -28810,7 +28810,7 @@ pub fn[TA] filter_v29(
 ) -> LiteralNet[TA] raise {
   let pred = x4174
   match x4175 {
-    { positive: positive_1, negative: negative_1, .. } => {
+    { positive: positive_1, negative: negative_1 } => {
       let t4176 = filter_v28(pred)(negative_1)
       LiteralNet::{ positive: filter_v28(pred)(positive_1), negative: t4176, }
     }
@@ -28830,7 +28830,7 @@ pub fn[TA] matchnet_v2(
   x4178 : LiteralNet[TA],
 ) -> (((Bool, (Name, @list.List[Term]))) -> @list.List[TA] raise) raise {
   match x4178 {
-    { positive: positive_1, negative: negative_1, .. } =>
+    { positive: positive_1, negative: negative_1 } =>
       fn(x4179 : (Bool, (String, @list.List[Term]))) -> @list.List[TA] raise {
         match x4179 {
           (true, atm) => matchnet_v1(positive_1, atm)
@@ -28846,7 +28846,7 @@ pub fn[TA] matched_v2(
   x4180 : LiteralNet[TA],
 ) -> (((Bool, (Name, @list.List[Term]))) -> @list.List[TA] raise) raise {
   match x4180 {
-    { positive: positive_1, negative: negative_1, .. } =>
+    { positive: positive_1, negative: negative_1 } =>
       fn(x4181 : (Bool, (String, @list.List[Term]))) -> @list.List[TA] raise {
         match x4181 {
           (true, atm) => matched_v1(positive_1, atm)
@@ -28862,7 +28862,7 @@ pub fn[TA] unify_v5(
   x4182 : LiteralNet[TA],
 ) -> (((Bool, (Name, @list.List[Term]))) -> @list.List[TA] raise) raise {
   match x4182 {
-    { positive: positive_1, negative: negative_1, .. } =>
+    { positive: positive_1, negative: negative_1 } =>
       fn(x4183 : (Bool, (String, @list.List[Term]))) -> @list.List[TA] raise {
         match x4183 {
           (true, atm) => unify_v4(positive_1, atm)
@@ -29169,7 +29169,7 @@ pub fn[TA] newsubsume(x4217 : Unit) -> Subsume[TA] raise {
 /// `size`
 pub fn[TA] size_v22(x4221 : Subsume[TA]) -> Int64 raise {
   match x4221 {
-    { empty: empty_1, unitn, nonunit: { clauses, .. }, .. } => {
+    { empty: empty_1, unitn, nonunit: { clauses } } => {
       let t4223 = size_v2(clauses)
       let t4222 = size_v21(unitn)
       @lib.add63(@lib.add63(Int::to_int64(@lib.length(empty_1)), t4222), t4223)
@@ -29183,7 +29183,7 @@ pub fn[TA] insert_v13(
   x4224 : Subsume[TA],
 ) -> (((Clause, TA)) -> Subsume[TA] raise) raise {
   match x4224 {
-    { empty: empty_1, unitn, nonunit, .. } =>
+    { empty: empty_1, unitn, nonunit } =>
       fn(
         x4225 : (@oset.T[(Bool, (String, @list.List[Term]))], TA),
       ) -> Subsume[TA] raise {
@@ -29199,7 +29199,7 @@ pub fn[TA] insert_v13(
           }
           More(fstlit, tail=More(sndlit, tail=otherlits) as nonfstlits) =>
             match nonunit {
-              { nextid, clauses, fstlits, sndlits, .. } => {
+              { nextid, clauses, fstlits, sndlits } => {
                 let id_length = (nextid, size_v16(cl_p))
                 let fstlits_1 = insert_v12(fstlits)((fstlit, id_length))
                 let (sndlit_1, otherlits_1) = match
@@ -29234,7 +29234,7 @@ pub fn[TA] filter_v30(
 ) -> Subsume[TA] raise {
   let pred = x4226
   match x4227 {
-    { empty: empty_1, unitn, nonunit, .. } => {
+    { empty: empty_1, unitn, nonunit } => {
       let empty_2 = @lib.list_filter(
         fn(
           x4231 : (@oset.T[(Bool, (String, @list.List[Term]))], Subst, TA),
@@ -29264,7 +29264,7 @@ pub fn[TA] filter_v30(
         unitn,
       )
       let nonunit_1 = match nonunit {
-        { nextid, clauses, fstlits, sndlits, .. } => {
+        { nextid, clauses, fstlits, sndlits } => {
           let clauses_p = filter_v3(fn(
             x4233 : (
               Int64,
@@ -29554,7 +29554,7 @@ pub fn[TA] nonunitsubsumes(
     }
   }
   match nonunit {
-    { nextid: _, clauses, fstlits, sndlits, .. } => {
+    { nextid: _, clauses, fstlits, sndlits } => {
       let fstcands = foldl(sublit(fstlits), idsetempty(), cl)
       let sndcands = foldl(sublit(sndlits), idsetempty(), cl)
       let cands = idsetintersect(fstcands, sndcands)
@@ -29599,7 +29599,7 @@ pub fn[TA] gensubsumes(
 ) -> ((ClauseLength?) -> ((@oset.T[Literal]) -> (Clause, Subst, TA)? raise) raise) raise {
   let pred = x4276
   match x4277 {
-    { empty: empty_1, unitn, nonunit, .. } =>
+    { empty: empty_1, unitn, nonunit } =>
       fn(
         x4278 : Int64?,
       ) -> ((@oset.T[(Bool, (String, @list.List[Term]))]) -> (
@@ -30034,7 +30034,7 @@ pub fn compare_v44(
   x4331 : Kbo,
 ) -> ((Term) -> ((Term) -> Int64? raise) raise) raise {
   match x4331 {
-    { weight, precedence, .. } => {
+    { weight, precedence } => {
       let weightdifference : (Term) -> ((Term) -> Weight raise) raise = fn(
         x4333 : Term,
       ) -> ((Term) -> Weight raise) raise {
@@ -30321,7 +30321,7 @@ pub fn updatewaiting(x4359 : Rewrite, x4360 : @oset.T[Int64]) -> Rewrite raise {
   let waiting = x4360
   match rw {
     Rewrite::Rewrite(
-      { order, known, redexes: redexes_1, subterms: subterms_1, waiting: _, .. }
+      { order, known, redexes: redexes_1, subterms: subterms_1, waiting: _ }
     ) =>
       Rewrite::Rewrite(RewriteT::{
         order,
@@ -31445,7 +31445,7 @@ pub fn reduce1(
   let (eq0, _) = eqn0
   match rw {
     Rewrite::Rewrite(
-      { order, known, redexes: redexes_1, subterms: subterms_1, waiting, .. }
+      { order, known, redexes: redexes_1, subterms: subterms_1, waiting }
     ) => {
       let (eq, _) as eqn = rewriteideqn_p(order, known, redexes_1, id, eqn0)
       let (l0, r0) = eq0
@@ -31646,7 +31646,7 @@ pub fn rebuild(
   let rw = x4592
   match rw {
     Rewrite::Rewrite(
-      { order, known, redexes: redexes_1, subterms: subterms_1, waiting, .. }
+      { order, known, redexes: redexes_1, subterms: subterms_1, waiting }
     ) => {
       let redexes_2 = cleanredexes(known, redexes_1, rpl)
       let subterms_2 = cleansubterms(known, subterms_1, spl)
@@ -32522,7 +32522,7 @@ pub fn subsumes_v1(x4698 : Subsume[Clause1], x4699 : Clause1) -> Bool raise {
 /// `freshVars`
 pub fn freshvars_v2(x4700 : Clause1) -> Clause1 raise {
   match x4700 {
-    Clause1::Clause({ parameters, id: id_1, thm: thm_1, .. }) =>
+    Clause1::Clause({ parameters, id: id_1, thm: thm_1 }) =>
       Clause1::Clause(ClauseInfo::{
         parameters,
         id: id_1,
@@ -32535,7 +32535,7 @@ pub fn freshvars_v2(x4700 : Clause1) -> Clause1 raise {
 /// `simplify`
 pub fn simplify_v1(x4701 : Clause1) -> Clause1? raise {
   match x4701 {
-    Clause1::Clause({ parameters, id: id_1, thm: thm_1, .. }) =>
+    Clause1::Clause({ parameters, id: id_1, thm: thm_1 }) =>
       match simplify(thm_1) {
         None => None
         Some(thm_2) =>
@@ -32551,7 +32551,7 @@ pub fn simplify_v1(x4701 : Clause1) -> Clause1? raise {
 pub fn reduce_v2(x4702 : Units, x4703 : Clause1) -> Clause1 raise {
   let units = x4702
   match x4703 {
-    Clause1::Clause({ parameters, id: id_1, thm: thm_1, .. }) =>
+    Clause1::Clause({ parameters, id: id_1, thm: thm_1 }) =>
       Clause1::Clause(ClauseInfo::{
         parameters,
         id: id_1,
@@ -32565,7 +32565,7 @@ pub fn reduce_v2(x4702 : Units, x4703 : Clause1) -> Clause1 raise {
 pub fn rewrite_v1(x4704 : Rewrite, x4705 : Clause1) -> Clause1 raise {
   let rewr = x4704
   match x4705 {
-    Clause1::Clause({ parameters, id: id_1, thm: thm_1, .. }) => {
+    Clause1::Clause({ parameters, id: id_1, thm: thm_1 }) => {
       let simp : (Thm) -> Thm raise = fn(x4706 : Thm) -> Thm raise {
         let th = x4706
         match parameters {
@@ -32965,7 +32965,7 @@ pub fn simplify_v2(
   let rewr = x4738
   let subs = x4739
   match simp {
-    { subsumes: s, reduce: r, rewrites: w, .. } => {
+    { subsumes: s, reduce: r, rewrites: w } => {
       fn rewrite_1(x4741 : Clause1) -> Clause1? raise {
         let cl = x4741
         let cl_p = rewrite_v1(rewr, cl)
@@ -33207,8 +33207,7 @@ pub fn addclause(x4773 : Active, x4774 : Clause1) -> Active raise {
         literals: literals_1,
         equations: equations_1,
         subterms: subterms_1,
-        allsubterms: allsubterms_1,
-        ..
+        allsubterms: allsubterms_1
       }
     ) => {
       let clauses_2 = insert_v1(clauses_1, (id(cl), cl))
@@ -33248,8 +33247,7 @@ pub fn addfactorclause(x4775 : Active, x4776 : Clause1) -> Active raise {
         literals: literals_1,
         equations: equations_1,
         subterms: subterms_1,
-        allsubterms: allsubterms_1,
-        ..
+        allsubterms: allsubterms_1
       }
     ) => {
       let units_1 = addunit(units, cl)
@@ -33674,8 +33672,7 @@ pub fn delete_v17(x4824 : Active, x4825 : @oset.T[Int64]) -> Active raise {
           literals: literals_1,
           equations: equations_1,
           subterms: subterms_1,
-          allsubterms: allsubterms_1,
-          ..
+          allsubterms: allsubterms_1
         }
       ) => {
         let clauses_2 = filter_v3(fn(x4834 : (Int64, Clause1)) -> Bool raise {
@@ -33954,7 +33951,7 @@ pub fn newactive(
 ) -> (Active, AxCjCl) raise {
   let parameters = x4866
   match x4867 {
-    { axioms_thm, conjecture_thm, .. } =>
+    { axioms_thm, conjecture_thm } =>
       match parameters {
         { clause: clause_1, .. } => {
           let mk_clause_1 : (Thm) -> Clause1 raise = (x4868 : Thm) => {
@@ -34318,7 +34315,7 @@ pub fn clauseweight(
   let mcl = x4904
   let cl = x4905
   match parm {
-    { symbolsweight, variablesweight, literalsweight, modelsp, .. } => {
+    { symbolsweight, variablesweight, literalsweight, modelsp } => {
       let lits = literals(cl)
       let symbolsw = @lib.float_pow(clausesymbols(lits), symbolsweight)
       let variablesw = @lib.float_pow(clausevariables(lits), variablesweight)
@@ -34347,7 +34344,7 @@ pub fn add_p(
   let mcls = x4908
   let cls = x4909
   match waiting {
-    Waiting::Waiting({ parameters, clauses: clauses_1, models, .. }) =>
+    Waiting::Waiting({ parameters, clauses: clauses_1, models }) =>
       match parameters {
         { modelsp: modelparameters, .. } => {
           let dist_1 = dist +
@@ -34453,7 +34450,7 @@ pub fn empty_v28(
 pub fn newwaiting(x4921 : Parameters6, x4922 : AxCjCl) -> Waiting raise {
   let parameters = x4921
   match x4922 {
-    { axioms_cl, conjecture_cl, .. } => {
+    { axioms_cl, conjecture_cl } => {
       let maxioms = mkmodelclauses(axioms_cl)
       let mconjecture = mkmodelclauses(conjecture_cl)
       let waiting = empty_v28(parameters, maxioms, mconjecture)
@@ -34475,7 +34472,7 @@ pub fn newwaiting(x4921 : Parameters6, x4922 : AxCjCl) -> Waiting raise {
 /// `remove`
 pub fn remove_v21(x4923 : Waiting) -> ((Distance, Clause1), Waiting)? raise {
   match x4923 {
-    Waiting::Waiting({ parameters, clauses: clauses_1, models, .. }) =>
+    Waiting::Waiting({ parameters, clauses: clauses_1, models }) =>
       if null_v6(clauses_1) {
         None
       } else {
@@ -34535,7 +34532,7 @@ pub fn newresolution(x4924 : Parameters7, x4925 : AxCjThm) -> Resolution raise {
   let parameters = x4924
   let ths = x4925
   match parameters {
-    { activep: activeparm, waitingp: waitingparm, .. } => {
+    { activep: activeparm, waitingp: waitingparm } => {
       let (active, cls) = newactive(activeparm, ths)
       let waiting = newwaiting(waitingparm, cls)
       Resolution::Resolution(ResolutionT::{ parameters, active, waiting, })
@@ -34611,7 +34608,7 @@ pub fn iterate(x4928 : Resolution) -> State raise {
   let res = x4928
   match res {
     Resolution::Resolution(
-      { parameters, active: active_1, waiting: waiting_1, .. }
+      { parameters, active: active_1, waiting: waiting_1 }
     ) =>
       match remove_v21(waiting_1) {
         None => {
