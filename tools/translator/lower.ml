@@ -1542,7 +1542,22 @@ module Lower = struct
     | None -> let ss, x, _ = lower a in (ss, x)
 
   and lower_prim ?expect whole name f args =
+    let constant_ctor c e =
+      match e.exp_desc with Texp_construct (_, cd, []) -> cd.Types.cstr_name = c | _ -> false
+    in
     match name, args with
+    | ("=" | "<>"), [ a; b ]
+      when List.exists (fun e -> constant_ctor "[]" e || constant_ctor "None" e) [ a; b ] ->
+        (* comparing with `[]` or `None` looks at the other side's
+           constructor only (OCaml compares no elements: a list of
+           functions is fine), so no OCompare bound *)
+        let k, other = if constant_ctor "[]" a || constant_ctor "None" a then (a, b) else (b, a) in
+        let ss, x, _ = lower other in
+        let test =
+          if constant_ctor "[]" k then Call (Atom "@list.List::is_empty", [ x ])
+          else Atom ("(" ^ string_of_exp x ^ " is None)")
+        in
+        adapt_to ?expect (ss, (if name = "=" then test else Not test), M.Named ("Bool", []))
     | ("fst" | "snd"), [ a ] ->
         (* the component's own type (an `Int` of a hand-ported tuple is
            widened by `lower`) *)
