@@ -1,0 +1,95 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/reciprocity"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn card_subcross_determinate() -> @kernel.Thm
+
+pub fn card_subcross_swap() -> @kernel.Thm
+
+pub fn cong_cond_lemma() -> @kernel.Thm
+
+pub fn cong_exp_minus1() -> @kernel.Thm
+
+pub fn cong_minus1_square() -> @kernel.Thm
+
+pub fn cong_nproduct() -> @kernel.Thm
+
+pub fn coprime_nproduct() -> @kernel.Thm
+
+pub fn euler_criterion() -> @kernel.Thm
+
+pub fn even_div() -> @kernel.Thm
+
+pub fn fact_nproduct() -> @kernel.Thm
+
+pub fn finite_subcross() -> @kernel.Thm
+
+pub fn gauss_lemma() -> @kernel.Thm
+
+pub fn gauss_lemma_1() -> @kernel.Thm
+
+pub fn gauss_lemma_2() -> @kernel.Thm
+
+pub fn gauss_lemma_3() -> @kernel.Thm
+
+pub fn gauss_lemma_4() -> @kernel.Thm
+
+pub fn gauss_lemma_sym() -> @kernel.Thm
+
+pub fn gauss_lemma_sym_p() -> @kernel.Thm
+
+pub fn in_numseg_1() -> @kernel.Thm
+
+pub fn is_quadratic_residue() -> @kernel.Thm
+
+pub fn is_quadratic_residue_common() -> @kernel.Thm
+
+pub fn is_quadratic_residue_pair() -> @kernel.Thm
+
+pub fn is_quadratic_residue_v1() -> @kernel.Thm
+
+pub fn legendre() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn not_cong_minus1() -> @kernel.Thm
+
+pub fn nproduct() -> @kernel.Thm
+
+pub fn nproduct_delta_const() -> @kernel.Thm
+
+pub fn nproduct_pairup_induct() -> @kernel.Thm
+
+pub fn quadratic_nonresidue_fact() -> @kernel.Thm
+
+pub fn quadratic_residue_fact() -> @kernel.Thm
+
+pub fn quadratic_residue_pair() -> @kernel.Thm
+
+pub fn quadratic_residue_pair_add() -> @kernel.Thm
+
+pub fn quadratic_residue_pair_product() -> @kernel.Thm
+
+pub fn reciprocity_legendre() -> @kernel.Thm
+
+pub fn reciprocity_set_lemma() -> @kernel.Thm
+
+pub fn reciprocity_simple() -> @kernel.Thm
+
+pub fn wilson() -> @kernel.Thm
+
+pub fn wilson_imp() -> @kernel.Thm
+
+pub fn wilson_lemma() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

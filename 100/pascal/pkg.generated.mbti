@@ -1,0 +1,152 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/pascal"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn affine_conic() -> @kernel.Thm
+
+pub fn affine_projective_conic() -> @kernel.Thm
+
+pub fn axiom_1() -> @kernel.Thm
+
+pub fn axiom_2() -> @kernel.Thm
+
+pub fn axiom_3() -> @kernel.Thm
+
+pub fn axiom_4() -> @kernel.Thm
+
+pub fn bracket() -> @kernel.Thm
+
+pub fn collinear() -> @kernel.Thm
+
+pub fn collinear_bracket() -> @kernel.Thm
+
+pub fn collinear_not_cocircular() -> @kernel.Thm
+
+pub fn collinear_pair() -> @kernel.Thm
+
+pub fn collinear_projectivize() -> @kernel.Thm
+
+pub fn collinear_singleton() -> @kernel.Thm
+
+pub fn collinear_triple() -> @kernel.Thm
+
+pub fn direction_axiom_1() -> @kernel.Thm
+
+pub fn direction_axiom_2() -> @kernel.Thm
+
+pub fn direction_axiom_3() -> @kernel.Thm
+
+pub fn direction_axiom_4() -> @kernel.Thm
+
+pub fn direction_axiom_4_weak() -> @kernel.Thm
+
+pub fn direction_clauses() -> @kernel.Thm
+
+pub fn direction_tybij() -> @kernel.Thm
+
+pub fn eq_homol() -> @kernel.Thm
+
+pub fn eq_homop() -> @kernel.Thm
+
+pub fn homogeneous_conic() -> @kernel.Thm
+
+pub fn homogeneous_conic_bracket() -> @kernel.Thm
+
+pub fn homogenize() -> @kernel.Thm
+
+pub fn homogenize_nonzero() -> @kernel.Thm
+
+pub fn homol() -> @kernel.Thm
+
+pub fn homop() -> @kernel.Thm
+
+pub fn homop_def() -> @kernel.Thm
+
+pub fn line_axiom_1() -> @kernel.Thm
+
+pub fn line_axiom_2() -> @kernel.Thm
+
+pub fn line_axiom_3() -> @kernel.Thm
+
+pub fn line_axiom_4() -> @kernel.Thm
+
+pub fn line_lift_thm(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn line_tybij() -> (@kernel.Thm, @kernel.Thm)
+
+pub fn load() -> Unit
+
+pub fn normal_exists() -> @kernel.Thm
+
+pub fn on() -> @kernel.Thm
+
+pub fn on_homol() -> @kernel.Thm
+
+pub fn orthogonal_combine() -> @kernel.Thm
+
+pub fn parallel() -> @kernel.Thm
+
+pub fn parallel_projl_homol() -> @kernel.Thm
+
+pub fn parallel_projp_homop() -> @kernel.Thm
+
+pub fn parallel_projp_homop_explicit() -> @kernel.Thm
+
+pub fn pardir() -> @kernel.Thm
+
+pub fn pardir_equiv() -> @kernel.Thm
+
+pub fn pardir_refl() -> @kernel.Thm
+
+pub fn pardir_sym() -> @kernel.Thm
+
+pub fn pardir_trans() -> @kernel.Thm
+
+pub fn pascal() -> @kernel.Thm
+
+pub fn pascal_affine() -> @kernel.Thm
+
+pub fn pascal_affine_circle() -> @kernel.Thm
+
+pub fn pascal_direct() -> @kernel.Thm
+
+pub fn perpdir() -> @kernel.Thm
+
+pub fn perpdir_welldef() -> @kernel.Thm
+
+pub fn perpl() -> @kernel.Thm
+
+pub fn perpl_th() -> @kernel.Thm
+
+pub fn point_clauses() -> @kernel.Thm
+
+pub fn point_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn point_tybij() -> @kernel.Thm
+
+pub fn projective_conic() -> @kernel.Thm
+
+pub fn projective_conic_bracket() -> @kernel.Thm
+
+pub fn projectivize() -> @kernel.Thm
+
+pub fn projl() -> @kernel.Thm
+
+pub fn projl_total() -> @kernel.Thm
+
+pub fn projp() -> @kernel.Thm
+
+pub fn projp_total() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

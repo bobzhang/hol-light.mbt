@@ -1,0 +1,31 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/primerecip"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn induction_from_1() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn primerecip_diverges() -> @kernel.Thm
+
+pub fn primerecip_diverges_numseg() -> @kernel.Thm
+
+pub fn primerecip_harmonic_lbound() -> @kernel.Thm
+
+pub fn primerecip_lbound() -> @kernel.Thm
+
+pub fn sum_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn unbounded_divergent() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

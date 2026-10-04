@@ -1,0 +1,65 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/descartes"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn arthan_lemma() -> @kernel.Thm
+
+pub fn descartes_rule_of_signs() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn multiplicity() -> @kernel.Thm
+
+pub fn multiplicity_other_root() -> @kernel.Thm
+
+pub fn multiplicity_unique() -> @kernel.Thm
+
+pub fn multiplicity_works() -> @kernel.Thm
+
+pub fn odd_variation_positive_root() -> @kernel.Thm
+
+pub fn opposite_signs() -> @kernel.Thm
+
+pub fn real_polyfun_has_positive_root() -> @kernel.Thm
+
+pub fn real_polyfun_sgn_at_infinity() -> @kernel.Thm
+
+pub fn variation() -> @kernel.Thm
+
+pub fn variation_1() -> @kernel.Thm
+
+pub fn variation_2() -> @kernel.Thm
+
+pub fn variation_3() -> @kernel.Thm
+
+pub fn variation_eq() -> @kernel.Thm
+
+pub fn variation_offset() -> @kernel.Thm
+
+pub fn variation_opposite_ends() -> @kernel.Thm
+
+pub fn variation_positive_root_factor() -> @kernel.Thm
+
+pub fn variation_positive_root_multiple_factor() -> @kernel.Thm
+
+pub fn variation_positive_root_multiplicity_factor() -> @kernel.Thm
+
+pub fn variation_set_finite() -> @kernel.Thm
+
+pub fn variation_split() -> @kernel.Thm
+
+pub fn variation_split_numseg() -> @kernel.Thm
+
+pub fn variation_subset() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

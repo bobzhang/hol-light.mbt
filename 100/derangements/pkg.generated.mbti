@@ -1,0 +1,114 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/derangements"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn compose() -> @kernel.Thm
+
+pub fn converse() -> @kernel.Thm
+
+pub fn converse_compose() -> @kernel.Thm
+
+pub fn converse_converse() -> @kernel.Thm
+
+pub fn derangement_add1() -> @kernel.Thm
+
+pub fn derangement_add2() -> @kernel.Thm
+
+pub fn derangement_empty() -> @kernel.Thm
+
+pub fn derangement_induct() -> @kernel.Thm
+
+pub fn derangement_sing() -> @kernel.Thm
+
+pub fn derangements() -> @kernel.Thm
+
+pub fn derangements_exp() -> @kernel.Thm
+
+pub fn derangements_exp_v1() -> @kernel.Thm
+
+pub fn derangements_v1() -> @kernel.Thm
+
+pub fn deranges() -> @kernel.Thm
+
+pub fn domain() -> @kernel.Thm
+
+pub fn id() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn number_of_derangements() -> @kernel.Thm
+
+pub fn number_of_pairings() -> @kernel.Thm
+
+pub fn number_of_permutations() -> @kernel.Thm
+
+pub fn pair_beta_thm() -> @kernel.Thm
+
+pub fn pairsup() -> @kernel.Thm
+
+pub fn pairsup_cofunctional() -> @kernel.Thm
+
+pub fn pairsup_compose() -> @kernel.Thm
+
+pub fn pairsup_converse() -> @kernel.Thm
+
+pub fn pairsup_domran() -> @kernel.Thm
+
+pub fn pairsup_empty() -> @kernel.Thm
+
+pub fn pairsup_explicit() -> @kernel.Thm
+
+pub fn pairsup_functional() -> @kernel.Thm
+
+pub fn pairsup_id() -> @kernel.Thm
+
+pub fn pairsup_insert() -> @kernel.Thm
+
+pub fn permutes() -> @kernel.Thm
+
+pub fn permutes_cofunctional() -> @kernel.Thm
+
+pub fn permutes_compose() -> @kernel.Thm
+
+pub fn permutes_converse() -> @kernel.Thm
+
+pub fn permutes_domran() -> @kernel.Thm
+
+pub fn permutes_explicit() -> @kernel.Thm
+
+pub fn permutes_functional() -> @kernel.Thm
+
+pub fn permutes_id() -> @kernel.Thm
+
+pub fn permutes_swap() -> @kernel.Thm
+
+pub fn range() -> @kernel.Thm
+
+pub fn rel_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn rel_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn round() -> @kernel.Thm
+
+pub fn round_works() -> @kernel.Thm
+
+pub fn sum_1() -> @kernel.Thm
+
+pub fn sum_2() -> @kernel.Thm
+
+pub fn swap() -> @kernel.Thm
+
+pub fn the_derangements_formula() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

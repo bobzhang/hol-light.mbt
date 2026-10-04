@@ -30,6 +30,8 @@ import theory  # noqa: E402
 
 ROOT, REF, HOL = theory.ROOT, theory.REF, theory.HOL
 OUT = os.path.join(REF, "_build", "batch")
+# reference branches running at once (each a forked OCaml session, ~3 GB)
+BRANCHES = 8
 PLACEHOLDER = "///|\nfn load_steps() -> Unit raise {\n  ()\n}\n"
 
 
@@ -166,11 +168,29 @@ def references(targets, refs):
         "  | pid -> (match Unix.waitpid [] pid with\n"
         "      | _, Unix.WEXITED 0 -> ()\n"
         "      | _ -> prerr_endline (\"batch: reference of \" ^ tail ^ \" failed\"); exit 1);;\n",
+        # branches run in parallel, at most BRANCHES at a time across the
+        # whole process tree (tokens in a pipe all processes inherit); with
+        # no token free a branch runs synchronously, so nesting cannot
+        # deadlock
+        f"let batch_tokens = let (r, w) = Unix.pipe () in Unix.set_nonblock r;\n"
+        f"  ignore (Unix.write_substring w (String.make {BRANCHES} 'x') 0 {BRANCHES}); (r, w);;\n",
+        "let batch_pending = ref [];;\n",
+        "let batch_wait_all () =\n"
+        "  let ok = List.fold_left (fun ok pid -> (match Unix.waitpid [] pid with\n"
+        "      | _, Unix.WEXITED 0 -> ok | _ -> false)) true !batch_pending in\n"
+        "  batch_pending := []; ok;;\n",
         "let batch_branch file = batch_flush ();\n"
+        "  let token = (try Unix.read (fst batch_tokens) (Bytes.create 1) 0 1 = 1\n"
+        "               with Unix.Unix_error ((Unix.EAGAIN | Unix.EWOULDBLOCK), _, _) -> false) in\n"
         "  match Unix.fork () with\n"
-        "  | 0 -> let ok = Toploop.use_silently Format.std_formatter (Toploop.File file) in\n"
-        "      batch_flush (); Unix._exit (if ok then 0 else 1)\n"
-        "  | pid -> (match Unix.waitpid [] pid with\n"
+        "  | 0 -> batch_pending := [];\n"
+        "      let ok = (try Toploop.use_silently Format.std_formatter (Toploop.File file) with _ -> false) in\n"
+        "      let ok = batch_wait_all () && ok in\n"
+        "      batch_flush ();\n"
+        "      if token then ignore (Unix.write_substring (snd batch_tokens) \"x\" 0 1);\n"
+        "      Unix._exit (if ok then 0 else 1)\n"
+        "  | pid -> if token then batch_pending := pid :: !batch_pending\n"
+        "      else (match Unix.waitpid [] pid with\n"
         "      | _, Unix.WEXITED 0 -> ()\n"
         "      | _ -> prerr_endline (\"batch: branch \" ^ file ^ \" failed\"); exit 1);;\n",
     ]
@@ -200,6 +220,8 @@ def references(targets, refs):
         return out
 
     lines += emit(steps(root))
+    # the parallel branches must all succeed
+    lines.append('let () = if not (batch_wait_all ()) then (prerr_endline "batch: a branch failed"; exit 1);;\n')
     body = os.path.join(OUT, "ref_body.ml")
     open(body, "w").write("".join(lines))
     script = os.path.join(OUT, "ref_script.ml")

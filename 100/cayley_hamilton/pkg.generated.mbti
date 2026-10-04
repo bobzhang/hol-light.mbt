@@ -1,0 +1,53 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/cayley_hamilton"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cayley_hamilton() -> @kernel.Thm
+
+pub fn char_poly() -> @kernel.Thm
+
+pub fn cofactor_as_matric_polynomial() -> @kernel.Thm
+
+pub fn cofactor_entry_as_polyfun() -> @kernel.Thm
+
+pub fn determinant_as_polyfun() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn matric_charpoly_difference() -> @kernel.Thm
+
+pub fn matric_poly_lemma() -> @kernel.Thm
+
+pub fn matric_polyfun_eq_0() -> @kernel.Thm
+
+pub fn matric_power_difference() -> @kernel.Thm
+
+pub fn mpow() -> @kernel.Thm
+
+pub fn mpow_1() -> @kernel.Thm
+
+pub fn mpow_add() -> @kernel.Thm
+
+pub fn mpow_suc() -> @kernel.Thm
+
+pub fn polyfun_n_add() -> @kernel.Thm
+
+pub fn polyfun_n_cmul() -> @kernel.Thm
+
+pub fn polyfun_n_const() -> @kernel.Thm
+
+pub fn polyfun_n_product() -> @kernel.Thm
+
+pub fn polyfun_n_sum() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
