@@ -391,3 +391,6 @@ definitions register constants, quotations advance the type-variable and
   proofs fail after the complex analysis). batch.py plans a run of files as
   a tree (branches fork the session) so a chain loads once per side. The
   whole suite (145 tests) passes with `moon test -j 16`.
+  Not ported because they fail upstream (HOL Light 3.1.0, OCaml 4.14, in
+  upstream's own hol_lib.ml environment): 100/e_is_transcendental.ml
+  (ACCEPT_TAC fails; 100/transcendence.ml proves the result independently).
