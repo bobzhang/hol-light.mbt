@@ -1,0 +1,404 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/ramsey"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn ac_conv(@kernel.Thm, @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn ac_rule((@kernel.Thm, @kernel.Thm)) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn and1_thm() -> @kernel.Thm
+
+pub fn and2_thm() -> @kernel.Thm
+
+pub fn and_forall_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn and_imp_intro() -> @kernel.Thm
+
+pub fn and_intro_thm() -> @kernel.Thm
+
+pub fn ante_conj_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ante_res_then((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise, @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn body_conjuncts(@kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn bool_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn bool_eq_distinct() -> @kernel.Thm
+
+pub fn cases_thenl(@list.List[(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise]) -> ((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn check_assume_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn colouring_lemma() -> @kernel.Thm
+
+pub fn colouring_thm() -> @kernel.Thm
+
+pub fn cond_cases_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn cond_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn conj_disch(@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn conj_dischl(@list.List[@kernel.Term], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn conj_list(Int64, @kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn conj_set_conv(@list.List[@kernel.Term], @list.List[@kernel.Term]) -> @kernel.Thm raise
+
+pub fn conjuncts_conv(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn conv_of_rconv((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn conv_of_thm(@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn dest_neg_imp(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn discard_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn disj_cases_union(@kernel.Thm, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn disj_imp(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn eq_expand() -> @kernel.Thm
+
+pub fn eq_imp_thm() -> @kernel.Thm
+
+pub fn exists_and_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn exists_eq(@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn exists_imp(@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn exists_unique_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn f_imp() -> @kernel.Thm
+
+pub fn fact_less() -> @kernel.Thm
+
+pub fn falsity() -> @kernel.Thm
+
+pub fn filter_asm_rewrite_rule((@kernel.Term) -> Bool raise, @list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn filter_asm_rewrite_tac((@kernel.Term) -> Bool raise, @list.List[@kernel.Thm], (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn filter_disch_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn filter_disch_then((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise, @kernel.Term, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn filter_gen_tac(@kernel.Term, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn filter_once_asm_rewrite_rule((@kernel.Term) -> Bool raise, @list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn filter_once_asm_rewrite_tac((@kernel.Term) -> Bool raise, @list.List[@kernel.Thm], (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn filter_pure_asm_rewrite_rule((@kernel.Term) -> Bool raise, @list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn filter_pure_asm_rewrite_tac((@kernel.Term) -> Bool raise, @list.List[@kernel.Thm], (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn filter_pure_once_asm_rewrite_rule((@kernel.Term) -> Bool raise, @list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn filter_pure_once_asm_rewrite_tac((@kernel.Term) -> Bool raise, @list.List[@kernel.Thm], (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn filter_strip_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn filter_strip_then((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise, @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn find_match(@kernel.Term) -> ((@kernel.Term) -> (@list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise) raise
+
+pub fn forall_eq(@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn forall_imp_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn front_conj_conv(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise
+
+pub fn fun_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn greater() -> @kernel.Thm
+
+pub fn greater_eq() -> @kernel.Thm
+
+pub fn gspec(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn half_mk_abs(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn image_wop_lemma() -> @kernel.Thm
+
+pub fn imp_canon(@kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn imp_conj(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn imp_disj_thm() -> @kernel.Thm
+
+pub fn imp_elim(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn imp_f() -> @kernel.Thm
+
+pub fn imp_f_eq_f() -> @kernel.Thm
+
+pub fn imp_res_tac(@kernel.Thm, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn imp_res_then((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise, @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn imp_res_then_v1((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> ((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn infinite_choose() -> @kernel.Thm
+
+pub fn infinite_delete() -> @kernel.Thm
+
+pub fn infinite_finite_choice() -> @kernel.Thm
+
+pub fn infinite_insert() -> @kernel.Thm
+
+pub fn infinite_member() -> @kernel.Thm
+
+pub fn inst_ty_term((@list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @kernel.Thm) -> @kernel.Thm raise
+
+pub fn inv_suc_eq() -> @kernel.Thm
+
+pub fn is_constant(String) -> Bool raise
+
+pub fn is_neg_imp(@kernel.Term) -> Bool raise
+
+pub fn is_type(String) -> Bool raise
+
+pub fn left_and_exists_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn left_and_over_or() -> @kernel.Thm
+
+pub fn left_imp_exists_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn left_or_over_and() -> @kernel.Thm
+
+pub fn less_0() -> @kernel.Thm
+
+pub fn less_0_cases() -> @kernel.Thm
+
+pub fn less_add_1() -> @kernel.Thm
+
+pub fn less_add_suc() -> @kernel.Thm
+
+pub fn less_cases() -> @kernel.Thm
+
+pub fn less_cases_imp() -> @kernel.Thm
+
+pub fn less_eq() -> @kernel.Thm
+
+pub fn less_eq_0() -> @kernel.Thm
+
+pub fn less_eq_add() -> @kernel.Thm
+
+pub fn less_eq_cases() -> @kernel.Thm
+
+pub fn less_eq_exists() -> @kernel.Thm
+
+pub fn less_eq_imp_less_suc() -> @kernel.Thm
+
+pub fn less_eq_less_trans() -> @kernel.Thm
+
+pub fn less_eq_mono() -> @kernel.Thm
+
+pub fn less_eq_refl() -> @kernel.Thm
+
+pub fn less_eq_suc() -> @kernel.Thm
+
+pub fn less_eq_suc_refl() -> @kernel.Thm
+
+pub fn less_eq_trans() -> @kernel.Thm
+
+pub fn less_equal_add() -> @kernel.Thm
+
+pub fn less_equal_antisym() -> @kernel.Thm
+
+pub fn less_imp_less_or_eq() -> @kernel.Thm
+
+pub fn less_lemma1() -> @kernel.Thm
+
+pub fn less_less_cases() -> @kernel.Thm
+
+pub fn less_less_eq_trans() -> @kernel.Thm
+
+pub fn less_mono_add() -> @kernel.Thm
+
+pub fn less_mono_add_eq() -> @kernel.Thm
+
+pub fn less_mono_eq() -> @kernel.Thm
+
+pub fn less_mono_mult() -> @kernel.Thm
+
+pub fn less_mult2() -> @kernel.Thm
+
+pub fn less_mult_mono() -> @kernel.Thm
+
+pub fn less_or() -> @kernel.Thm
+
+pub fn less_or_eq() -> @kernel.Thm
+
+pub fn less_refl() -> @kernel.Thm
+
+pub fn less_suc() -> @kernel.Thm
+
+pub fn less_suc_refl() -> @kernel.Thm
+
+pub fn less_thm() -> @kernel.Thm
+
+pub fn less_trans() -> @kernel.Thm
+
+pub fn list_beta_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn list_conj(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn list_mk_exists(@list.List[@kernel.Term], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn list_mp(@list.List[@kernel.Thm]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn load() -> Unit
+
+pub fn match_mp_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn mk_abs(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn mk_exists(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn mk_primed_var(String, @kernel.HolType) -> @kernel.Term raise
+
+pub fn not_and() -> @kernel.Thm
+
+pub fn not_eq_sym(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn not_exists_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn not_f() -> @kernel.Thm
+
+pub fn not_forall_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn not_less() -> @kernel.Thm
+
+pub fn not_less_0() -> @kernel.Thm
+
+pub fn not_less_equal() -> @kernel.Thm
+
+pub fn not_mp(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn not_suc_less_eq() -> @kernel.Thm
+
+pub fn[TA] null(@list.List[TA]) -> Bool raise
+
+pub fn or_elim_thm() -> @kernel.Thm
+
+pub fn or_imp_thm() -> @kernel.Thm
+
+pub fn or_intro_thm1() -> @kernel.Thm
+
+pub fn or_intro_thm2() -> @kernel.Thm
+
+pub fn or_less() -> @kernel.Thm
+
+pub fn prove((@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)) -> @kernel.Thm raise
+
+pub fn prove_abs_fn_one_one(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn prove_abs_fn_onto(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn prove_rep_fn_one_one(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn prove_rep_fn_onto(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn prove_thm(String, @kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) -> @kernel.Thm raise
+
+pub fn ramsey() -> @kernel.Thm
+
+pub fn ramsey_lemma1() -> @kernel.Thm
+
+pub fn ramsey_lemma2() -> @kernel.Thm
+
+pub fn ramsey_lemma3() -> @kernel.Thm
+
+pub fn res_canon(@kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn res_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn res_then((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn right_and_exists_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn right_and_over_or() -> @kernel.Thm
+
+pub fn right_beta(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn right_conv_rule((@kernel.Term) -> @kernel.Thm raise, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn right_imp_exists_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn right_list_beta(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn right_or_over_and() -> @kernel.Thm
+
+pub fn select_eq(@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn single_depth_conv((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn size_delete() -> @kernel.Thm
+
+pub fn size_exists() -> @kernel.Thm
+
+pub fn size_insert() -> @kernel.Thm
+
+pub fn skolem_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn sub() -> @kernel.Thm
+
+pub fn sub_eq_eq_0() -> @kernel.Thm
+
+pub fn sub_equal_0() -> @kernel.Thm
+
+pub fn sub_left_greater_eq() -> @kernel.Thm
+
+pub fn sub_left_less_eq() -> @kernel.Thm
+
+pub fn sub_less_eq() -> @kernel.Thm
+
+pub fn sub_mono_eq() -> @kernel.Thm
+
+pub fn sub_sub() -> @kernel.Thm
+
+pub fn subset_delete() -> @kernel.Thm
+
+pub fn subset_finite() -> @kernel.Thm
+
+pub fn subst(@list.List[(@kernel.Thm, @kernel.Term)], @kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn subst_conv(@list.List[(@kernel.Thm, @kernel.Term)], @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn subst_match(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn subst_occs(@list.List[@list.List[Int64]]) -> ((@list.List[(@kernel.Term, @kernel.Term)]) -> ((@kernel.Term) -> @kernel.Term raise) raise) raise
+
+pub fn suc_not() -> @kernel.Thm
+
+pub fn suc_sub1() -> @kernel.Thm
+
+pub fn type_tyvars(@kernel.HolType) -> @list.List[@kernel.HolType] raise
+
+pub fn x_cases_then(@list.List[@list.List[@kernel.Term]], (@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> ((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn x_cases_thenl(@list.List[@list.List[@kernel.Term]], @list.List[(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise]) -> ((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn x_fun_eq_conv(@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn x_skolem_conv(@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn zero_less_eq() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

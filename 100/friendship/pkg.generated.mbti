@@ -1,0 +1,63 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/friendship"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn card_pathcycles_step() -> @kernel.Thm
+
+pub fn cycle() -> @kernel.Thm
+
+pub fn cycle_mod() -> @kernel.Thm
+
+pub fn cycle_offset() -> @kernel.Thm
+
+pub fn cycles_prime_lemma() -> @kernel.Thm
+
+pub fn elements_pair_up() -> @kernel.Thm
+
+pub fn equivalence_uniform_partition() -> @kernel.Thm
+
+pub fn equivalence_uniform_partition_restrict() -> @kernel.Thm
+
+pub fn finite_cycles() -> @kernel.Thm
+
+pub fn finite_paths() -> @kernel.Thm
+
+pub fn friendship() -> @kernel.Thm
+
+pub fn gcd_induct() -> @kernel.Thm
+
+pub fn has_size_cycles() -> @kernel.Thm
+
+pub fn has_size_paths() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn loop_coprime() -> @kernel.Thm
+
+pub fn loop_gcd() -> @kernel.Thm
+
+pub fn path() -> @kernel.Thm
+
+pub fn paths_mono() -> @kernel.Thm
+
+pub fn shiftable() -> @kernel.Thm
+
+pub fn shiftable_local() -> @kernel.Thm
+
+pub fn shiftable_refl() -> @kernel.Thm
+
+pub fn shiftable_sym() -> @kernel.Thm
+
+pub fn shiftable_trans() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
