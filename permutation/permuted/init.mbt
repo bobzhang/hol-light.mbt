@@ -1,0 +1,23 @@
+// Permutation/permuted.ml: the load steps are generated (permuted.mbt).
+
+///|
+let loaded : Ref[Bool] = Ref::{ val: false, }
+
+///|
+/// Load Permutation/permuted.ml (once), after the files it needs.
+pub fn load() -> Unit {
+  if loaded.val {
+    return
+  }
+  loaded.val = true
+  @morelist.load()
+  @morelist.load()
+  @parser.begin_theory("Permutation/permuted")
+  load_steps() catch {
+    e =>
+      abort(
+        "HOL Light: loading Permutation/permuted.ml failed: " + e.to_string(),
+      )
+  }
+  @parser.end_theory()
+}

@@ -1,0 +1,74 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/permutation/permuted"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn permuted_all() -> @kernel.Thm
+
+pub fn permuted_append_cong() -> @kernel.Thm
+
+pub fn permuted_append_lcancel() -> @kernel.Thm
+
+pub fn permuted_append_rcancel() -> @kernel.Thm
+
+pub fn permuted_append_swap() -> @kernel.Thm
+
+pub fn permuted_cases() -> @kernel.Thm
+
+pub fn permuted_cons_delete1() -> @kernel.Thm
+
+pub fn permuted_count() -> @kernel.Thm
+
+pub fn permuted_delete1_l() -> @kernel.Thm
+
+pub fn permuted_delete1_r() -> @kernel.Thm
+
+pub fn permuted_imp_pairwise() -> @kernel.Thm
+
+pub fn permuted_induct() -> @kernel.Thm
+
+pub fn permuted_induct_strong() -> @kernel.Thm
+
+pub fn permuted_length() -> @kernel.Thm
+
+pub fn permuted_list_uniq() -> @kernel.Thm
+
+pub fn permuted_map() -> @kernel.Thm
+
+pub fn permuted_mem() -> @kernel.Thm
+
+pub fn permuted_nil_eq_nil() -> @kernel.Thm
+
+pub fn permuted_pairwise() -> @kernel.Thm
+
+pub fn permuted_rfl() -> @kernel.Thm
+
+pub fn permuted_rules() -> @kernel.Thm
+
+pub fn permuted_singleton() -> @kernel.Thm
+
+pub fn permuted_swap_head() -> @kernel.Thm
+
+pub fn permuted_sym() -> @kernel.Thm
+
+pub fn permuted_tail() -> @kernel.Thm
+
+pub fn permuted_tail_imp() -> @kernel.Thm
+
+pub fn permuted_trs() -> @kernel.Thm
+
+pub fn permuted_trs_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

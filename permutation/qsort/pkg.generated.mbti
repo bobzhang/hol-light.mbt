@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/permutation/qsort"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn all_qsort() -> @kernel.Thm
+
+pub fn count_qsort() -> @kernel.Thm
+
+pub fn length_qsort() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mem_qsort() -> @kernel.Thm
+
+pub fn ordered_append() -> @kernel.Thm
+
+pub fn ordered_cases() -> @kernel.Thm
+
+pub fn ordered_cons() -> @kernel.Thm
+
+pub fn ordered_induct() -> @kernel.Thm
+
+pub fn ordered_pairwise() -> @kernel.Thm
+
+pub fn ordered_qsort() -> @kernel.Thm
+
+pub fn ordered_rules() -> @kernel.Thm
+
+pub fn qsort() -> @kernel.Thm
+
+pub fn qsort_permuted() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
