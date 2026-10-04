@@ -206,3 +206,21 @@ test "gp factorint emulation" {
   inspect(sys_file_exists("/tmp/x.out"), content="false")
   inspect(sys_command("ls"), content="127")
 }
+
+///|
+/// `frexp` against OCaml 4.14 (mantissa bits, exponent).
+test "float_frexp matches OCaml" {
+  let check = (x : Double, mbits : UInt64, e : Int64) => {
+    let (m, e1) = float_frexp(x)
+    assert_eq(m.reinterpret_as_uint64(), mbits)
+    assert_eq(e1, e)
+  }
+  check(0.0, 0UL, 0L)
+  check(1.0, 4602678819172646912UL, 1L)
+  check(-3.5, 13829428555747950592UL, 2L)
+  check(1.0e-310, 4603356717229943552UL, -1029L)
+  check(5.0e-324, 4602678819172646912UL, -1073L)
+  check(1.7976931348623157e308, 4607182418800017407UL, 1024L)
+  check(0.1, 4605380978949069210UL, -3L)
+  check(1024.0, 4602678819172646912UL, 11L)
+}

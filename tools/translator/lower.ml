@@ -1624,6 +1624,7 @@ module Lower = struct
       | "lxor" -> (2, fun [ a; b ] _ -> Binop ("^", a, b))
       | "lnot" -> (1, fun [ a ] _ -> Call (Atom "@lib.lnot63", [ a ]))
       | "log" -> (1, fun [ a ] _ -> Call (Atom "@lib.float_log", [ a ]))
+      | "frexp" -> (1, fun [ a ] _ -> Call (Atom "@lib.float_frexp", [ a ]))
       | "**" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.float_pow", [ a; b ]))
       | "int_of_string" -> (1, fun [ a ] _ -> Call (Atom "@lib.int63_of_string", [ a ]))
       | "String.length" -> (1, fun [ a ] _ -> widen (Call (Atom "@lib.string_length", [ a ])))

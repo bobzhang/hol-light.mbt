@@ -24,6 +24,24 @@ pub fn asr(x : Int, n : Int) -> Int {
 }
 
 ///|
+/// `frexp x`: `(m, e)` with `x = m * 2^e` and `0.5 <= |m| < 1`; zero,
+/// infinities and NaN give `(x, 0)` (C's frexp, as OCaml's).
+pub fn float_frexp(x : Double) -> (Double, Int64) {
+  if x == 0.0 || x != x || x == 1.0 / 0.0 || x == -1.0 / 0.0 {
+    return (x, 0L)
+  }
+  let bits = x.reinterpret_as_uint64()
+  let exp = ((bits >> 52) & 0x7FFUL).to_int()
+  if exp == 0 {
+    // subnormal: scale into the normal range first
+    let (m, e) = float_frexp(x * 18014398509481984.0)
+    return (m, e - 54L)
+  }
+  let mbits = (bits & 0x800FFFFFFFFFFFFFUL) | (1022UL << 52)
+  (mbits.reinterpret_as_double(), (exp - 1022).to_int64())
+}
+
+///|
 /// `log` (natural logarithm)
 pub fn float_log(x : Double) -> Double {
   @math.ln(x)
