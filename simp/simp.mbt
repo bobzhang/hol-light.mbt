@@ -212,6 +212,14 @@ pub fn[C] net_of_conv(
 }
 
 ///|
+/// The elements of a rewrite net as OCaml's `(priority, conv)` pairs, for
+/// translated code that takes them apart (`snd(hd(lookup tm net))` in
+/// Complex/quelim.ml): the nets hold `GconvOf` structs.
+pub fn[C] gconv_pairs(l : @list.List[GconvOf[C]]) -> @list.List[(Int64, C)] {
+  l.map(g => (g.priority.to_int64(), g.conv))
+}
+
+///|
 /// `net_of_cong th net`: add the congruence rule `th`.
 pub fn net_of_cong(th : Thm, sofar : Net[Gconv]) -> Net[Gconv] raise {
   let (conc, n) = @lib.repeat(

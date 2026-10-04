@@ -18,8 +18,7 @@ side instead of three chain reloads per file (tools/ocaml_ref/theory.py):
    the target, the theorem list, the checks). A target's expected output is
    its chain's logs followed by the child's, which is what a fresh run of
    the reference script prints.
-5. Goldens embedded, `moon test --target wasm-gc` on the targets' packages
-   (a fifth of the time wasm takes; tools/test.py runs the suite).
+5. Goldens embedded, tools/test.py on the targets' packages (wasm-gc).
 """
 import os
 import re
@@ -139,6 +138,13 @@ def translate(targets, done=()):
             or l.startswith("translated ") or l.startswith("Error")]
     print("\n".join(keep[-60:]), flush=True)
     if "BATCH DONE" not in out:
+        # a target with unsupported items has an incomplete translation:
+        # back to the placeholder, or --resume would take it for done
+        for f in re.findall(r"BATCH FAILED: unsupported items in (\S+)", out):
+            pkg = theory.pkg_of(f)
+            alias = pkg.split("/")[-1]
+            gen = os.path.join(ROOT, pkg, alias + ("_ml" if alias.endswith("test") else "") + ".mbt")
+            open(gen, "w").write(PLACEHOLDER)
         sys.exit("translation batch failed (tools/ocaml_ref/_build/batch/translate.log)")
 
 
@@ -306,15 +312,13 @@ def main():
         theory.run(["python3", "tools/ocaml_ref/embed_golden.py", os.path.relpath(e, ROOT),
                     os.path.relpath(tests[t], ROOT)])
     theory.run(["moon", "fmt"], capture_output=True)
-    args = ["moon", "test", "--target", "wasm-gc", "-j", str(os.cpu_count() or 1)]
-    for t in targets:
-        args += ["-p", "bobzhang/hol_light/" + pkgs[t]]
+    # tools/test.py runs the test executables with a larger stack than
+    # `moon test` gives them
+    args = ["python3", "tools/test.py"] + [pkgs[t] for t in targets]
     r = subprocess.run(args, cwd=ROOT, capture_output=True, text=True)
     log = r.stdout + r.stderr
     open(os.path.join(OUT, "test.log"), "w").write(log)
-    shown = [l for l in log.splitlines() if not l.lstrip().startswith("#|")]
-    print("\n".join([l for l in shown if re.match(r"^(Error|Total|Diff|\[|[-+])|failed", l)
-                     and not re.match(r"^[-+ ]0\.\.", l)][:60]))
+    print("\n".join(log.splitlines()[:80]))
     sys.exit(r.returncode)
 
 
