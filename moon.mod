@@ -13,7 +13,3 @@ keywords = [ "theorem-prover", "hol", "logic" ]
 preferred_target = "wasm"
 
 description = "A MoonBit port of the HOL Light theorem prover"
-
-options(
-  exclude: [ "tools", "TODO.md", "**/*_test.mbt", "**/*_wbtest.mbt" ],
-)
