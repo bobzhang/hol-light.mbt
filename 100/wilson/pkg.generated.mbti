@@ -1,0 +1,29 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/wilson"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn fact_nproduct() -> @kernel.Thm
+
+pub fn fact_nproduct_alt() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn nproduct_pairup() -> @kernel.Thm
+
+pub fn nproduct_pairup_induct() -> @kernel.Thm
+
+pub fn wilson() -> @kernel.Thm
+
+pub fn wilson_eq() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

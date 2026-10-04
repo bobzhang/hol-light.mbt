@@ -1,0 +1,57 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/konigsberg"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn connects() -> @kernel.Thm
+
+pub fn degree() -> @kernel.Thm
+
+pub fn degree_delete_edge() -> @kernel.Thm
+
+pub fn delete_edge() -> @kernel.Thm
+
+pub fn delete_edge_clauses() -> @kernel.Thm
+
+pub fn edges() -> @kernel.Thm
+
+pub fn eulerian_cases() -> @kernel.Thm
+
+pub fn eulerian_finite() -> @kernel.Thm
+
+pub fn eulerian_induct() -> @kernel.Thm
+
+pub fn eulerian_odd() -> @kernel.Thm
+
+pub fn eulerian_odd_lemma() -> @kernel.Thm
+
+pub fn eulerian_rules() -> @kernel.Thm
+
+pub fn graph() -> @kernel.Thm
+
+pub fn graph_delete_edge() -> @kernel.Thm
+
+pub fn koenigsberg() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn localdegree() -> @kernel.Thm
+
+pub fn locally_finite() -> @kernel.Thm
+
+pub fn termini() -> @kernel.Thm
+
+pub fn termini_in_vertices() -> @kernel.Thm
+
+pub fn vertices() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

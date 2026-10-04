@@ -1,0 +1,71 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/euler"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn card_eq_lemma() -> @kernel.Thm
+
+pub fn distinct_distinct_of_odd() -> @kernel.Thm
+
+pub fn distinct_of_odd() -> @kernel.Thm
+
+pub fn distinct_of_odd_of_distinct() -> @kernel.Thm
+
+pub fn distinct_of_odd_v1() -> @kernel.Thm
+
+pub fn euler_partition_theorem() -> @kernel.Thm
+
+pub fn finite_partitions() -> @kernel.Thm
+
+pub fn finite_partitions_lemma() -> @kernel.Thm
+
+pub fn finite_subset_partitions() -> @kernel.Thm
+
+pub fn index() -> @kernel.Thm
+
+pub fn index_oddpart() -> @kernel.Thm
+
+pub fn index_oddpart_decomposition() -> @kernel.Thm
+
+pub fn index_oddpart_unique() -> @kernel.Thm
+
+pub fn index_oddpart_work() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn nsum_bound_lemma() -> @kernel.Thm
+
+pub fn nsum_distinct_of_odd() -> @kernel.Thm
+
+pub fn odd_odd_of_distinct() -> @kernel.Thm
+
+pub fn odd_oddpart() -> @kernel.Thm
+
+pub fn odd_of_distinct() -> @kernel.Thm
+
+pub fn odd_of_distinct_of_odd() -> @kernel.Thm
+
+pub fn odd_of_distinct_v1() -> @kernel.Thm
+
+pub fn oddpart() -> @kernel.Thm
+
+pub fn oddpart_le() -> @kernel.Thm
+
+pub fn partitions() -> @kernel.Thm
+
+pub fn partitions_bound() -> @kernel.Thm
+
+pub fn support_distinct_of_odd() -> @kernel.Thm
+
+pub fn support_odd_of_distinct() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

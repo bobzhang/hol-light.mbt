@@ -1,0 +1,29 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/ratcountable"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn countable() -> @kernel.Thm
+
+pub fn countable_rationals() -> @kernel.Thm
+
+pub fn denumerable() -> @kernel.Thm
+
+pub fn denumerable_rationals() -> @kernel.Thm
+
+pub fn denumerable_rationals_expand() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn rational() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,23 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/div3"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn divisibility_by_3() -> @kernel.Thm
+
+pub fn exp_10_cong_3() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn sum_cong_3() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

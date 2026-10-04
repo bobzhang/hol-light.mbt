@@ -713,7 +713,9 @@ module Translator = struct
       let ident ch = (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9') || ch = '_' || ch = '\'' in
       let acc = ref [] and k = ref 0 in
       while !k + 5 < m do
-        if String.sub t !k 5 = "needs" && (!k = 0 || not (ident t.[!k - 1])) && not (ident t.[!k + 5]) then begin
+        (* `needs "f"`, and `loadt "f"` used the same way (100/lagrange.ml) *)
+        if (String.sub t !k 5 = "needs" || String.sub t !k 5 = "loadt") && (!k = 0 || not (ident t.[!k - 1]))
+           && not (ident t.[!k + 5]) then begin
           let j = ref (!k + 5) in
           while !j < m && t.[!j] = ' ' do incr j done;
           if !j < m && t.[!j] = '"' then begin

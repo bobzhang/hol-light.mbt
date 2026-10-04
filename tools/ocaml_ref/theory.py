@@ -83,7 +83,8 @@ def strip_comments(text):
 def needs(f):
     path = os.path.join(HOL, f if f.endswith(".ml") else f + ".ml")
     # the same rule as the translator's Translator.needs_of
-    return re.findall(r'(?<![A-Za-z0-9_\'])needs\s+"([^"]+)"', strip_comments(open(path).read()))
+    # `loadt "f"` is used as `needs` too (100/lagrange.ml)
+    return re.findall(r'(?<![A-Za-z0-9_\'])(?:needs|loadt)\s+"([^"]+)"', strip_comments(open(path).read()))
 
 
 # Multivariate/ is loaded as Multivariate/make.ml and make_complex.ml load

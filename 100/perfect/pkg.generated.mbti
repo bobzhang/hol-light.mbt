@@ -1,0 +1,53 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/perfect"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn coprime_odd_pow2() -> @kernel.Thm
+
+pub fn even_odd_decomp() -> @kernel.Thm
+
+pub fn finite_divisors() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mult_eq_coprime() -> @kernel.Thm
+
+pub fn mult_nsum() -> @kernel.Thm
+
+pub fn odd_pow2_minus1() -> @kernel.Thm
+
+pub fn perfect() -> @kernel.Thm
+
+pub fn perfect_euclid() -> @kernel.Thm
+
+pub fn perfect_euler() -> @kernel.Thm
+
+pub fn sigma() -> @kernel.Thm
+
+pub fn sigma_0() -> @kernel.Thm
+
+pub fn sigma_1() -> @kernel.Thm
+
+pub fn sigma_lbound() -> @kernel.Thm
+
+pub fn sigma_mult() -> @kernel.Thm
+
+pub fn sigma_multiplicative() -> @kernel.Thm
+
+pub fn sigma_pow2() -> @kernel.Thm
+
+pub fn sigma_prime() -> @kernel.Thm
+
+pub fn sigma_prime_eq() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

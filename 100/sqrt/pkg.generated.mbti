@@ -1,0 +1,23 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/sqrt"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn irrational_sqrt_2() -> @kernel.Thm
+
+pub fn irrational_sqrt_nonsquare() -> @kernel.Thm
+
+pub fn irrational_sqrt_prime() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

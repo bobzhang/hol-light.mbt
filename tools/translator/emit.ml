@@ -499,7 +499,7 @@ module Emit = struct
 
   let emit_eval (e : expression) =
     match e.exp_desc with
-    | Texp_apply ({ exp_desc = Texp_ident (p, _, _); _ }, _) when Path.name p = "needs" -> ()
+    | Texp_apply ({ exp_desc = Texp_ident (p, _, _); _ }, _) when Path.name p = "needs" || Path.name p = "loadt" -> ()
     | _ ->
         let stmts, x, _ = lower e in
         let last = if is_unit e.exp_type then Do x else Do (Call (Atom "ignore", [ x ])) in

@@ -1,0 +1,27 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/subsequence"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn erdos_szekeres() -> @kernel.Thm
+
+pub fn lemma() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mono_on() -> @kernel.Thm
+
+pub fn mono_on_subset() -> @kernel.Thm
+
+pub fn pigeonhole_lemma() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

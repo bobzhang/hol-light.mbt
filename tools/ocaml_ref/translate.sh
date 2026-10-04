@@ -23,6 +23,7 @@ grep -v 'pa_j.cmo' boot.ml > _build/tboot.ml
   done
   echo '#load "pa_j.cmo";;'
   echo 'let needs (_:string) = ();;'
+  echo 'let loadt (_:string) = ();;'
   echo 'let float_sqrt = sqrt;; let float_fabs = abs_float;;'
   if [ "$1" = batch ]; then
     # $2: a file with the plan: `[ ([pre...], target); ... ]` (batch.py)

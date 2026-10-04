@@ -1,0 +1,51 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/realsuncountable"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn binary_bound() -> @kernel.Thm
+
+pub fn binary_div_pow2() -> @kernel.Thm
+
+pub fn binary_plus_div_pow2() -> @kernel.Thm
+
+pub fn binary_unique_lemma() -> @kernel.Thm
+
+pub fn canonical() -> @kernel.Thm
+
+pub fn countable() -> @kernel.Thm
+
+pub fn countable_repeating() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn plus_mod_refl() -> @kernel.Thm
+
+pub fn repeating() -> @kernel.Thm
+
+pub fn sum_binsequence_lbound() -> @kernel.Thm
+
+pub fn sum_binsequence_ubound_le() -> @kernel.Thm
+
+pub fn sum_binsequence_ubound_sharp() -> @kernel.Thm
+
+pub fn suminf_inj_lemma() -> @kernel.Thm
+
+pub fn summable_binsequence() -> @kernel.Thm
+
+pub fn sums_binsequence() -> @kernel.Thm
+
+pub fn uncountable_canonical() -> @kernel.Thm
+
+pub fn uncountable_reals() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,25 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/lagrange"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn group() -> @kernel.Thm
+
+pub fn group_lagrange() -> @kernel.Thm
+
+pub fn group_lagrange_cosets() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn subgroup() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

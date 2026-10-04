@@ -1,0 +1,75 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/ballot"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn add1_not_in_numseg() -> @kernel.Thm
+
+pub fn all_countings() -> @kernel.Thm
+
+pub fn all_countings_0() -> @kernel.Thm
+
+pub fn all_countings_suc() -> @kernel.Thm
+
+pub fn all_countings_v1() -> @kernel.Thm
+
+pub fn ballot() -> @kernel.Thm
+
+pub fn card_numseg_restrict_extrema() -> @kernel.Thm
+
+pub fn card_numseg_restrict_suc() -> @kernel.Thm
+
+pub fn counting_lemma() -> @kernel.Thm
+
+pub fn finite_countings() -> @kernel.Thm
+
+pub fn finite_funspace() -> @kernel.Thm
+
+pub fn forall_range_suc() -> @kernel.Thm
+
+pub fn funspace() -> @kernel.Thm
+
+pub fn funspace_empty() -> @kernel.Thm
+
+pub fn funspace_fixed() -> @kernel.Thm
+
+pub fn has_size_funspace() -> @kernel.Thm
+
+pub fn in_numseg_restrict_false() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn numseg_1_clauses() -> @kernel.Thm
+
+pub fn numseg_restrict_suc() -> @kernel.Thm
+
+pub fn univ_vote() -> @kernel.Thm
+
+pub fn valid_countings() -> @kernel.Thm
+
+pub fn valid_countings_0() -> @kernel.Thm
+
+pub fn valid_countings_suc() -> @kernel.Thm
+
+pub fn valid_countings_v1() -> @kernel.Thm
+
+pub fn vote_cases() -> @kernel.Thm
+
+pub fn vote_distinct() -> @kernel.Thm
+
+pub fn vote_induct() -> @kernel.Thm
+
+pub fn vote_not_eq() -> @kernel.Thm
+
+pub fn vote_recursion() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

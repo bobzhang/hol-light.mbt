@@ -1,0 +1,37 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/birthday"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn birthday_thm() -> @kernel.Thm
+
+pub fn birthday_thm_explicit() -> @kernel.Thm
+
+pub fn fact_div_mult() -> @kernel.Thm
+
+pub fn fact_div_simp() -> @kernel.Thm
+
+pub fn fact_divides() -> @kernel.Thm
+
+pub fn funspace() -> @kernel.Thm
+
+pub fn funspace_empty() -> @kernel.Thm
+
+pub fn has_size_diff() -> @kernel.Thm
+
+pub fn has_size_funspace() -> @kernel.Thm
+
+pub fn has_size_funspace_injective() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

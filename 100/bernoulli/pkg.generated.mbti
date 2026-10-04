@@ -1,0 +1,50 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/bernoulli"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn bernoulli() -> @kernel.Thm
+
+pub fn bernoulli_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn bernoulli_v1() -> @kernel.Thm
+
+pub fn bernoullis(Int64) -> @list.List[@kernel.Thm] raise
+
+pub fn bernpoly() -> @kernel.Thm
+
+pub fn bernpoly_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn binom_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn diff_bernpoly() -> @kernel.Thm
+
+pub fn diff_sum() -> @kernel.Thm
+
+pub fn integrals_eq() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn recurrence_bernpoly() -> @kernel.Thm
+
+pub fn sop_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn sop_num_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn sum_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn sum_diffs() -> @kernel.Thm
+
+pub fn sum_of_powers() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

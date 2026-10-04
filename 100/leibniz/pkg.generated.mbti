@@ -1,0 +1,37 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/leibniz"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn alternating_sum_bound() -> @kernel.Thm
+
+pub fn alternating_sum_bounds() -> @kernel.Thm
+
+pub fn leibniz_pi() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn real_atn_powser_alt() -> @kernel.Thm
+
+pub fn sum_bound_lemma() -> @kernel.Thm
+
+pub fn sum_bounds_lemma() -> @kernel.Thm
+
+pub fn sum_differences() -> @kernel.Thm
+
+pub fn sum_rearrange_lemma() -> @kernel.Thm
+
+pub fn summable_alternating() -> @kernel.Thm
+
+pub fn summable_leibniz() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

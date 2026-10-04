@@ -1,0 +1,37 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/cantor"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cantor() -> @kernel.Thm
+
+pub fn cantor_johnstone() -> @kernel.Thm
+
+pub fn cantor_lawvere() -> @kernel.Thm
+
+pub fn cantor_taylor() -> @kernel.Thm
+
+pub fn cantor_thm_inj() -> @kernel.Thm
+
+pub fn cantor_thm_inj_p() -> @kernel.Thm
+
+pub fn cantor_thm_surj() -> @kernel.Thm
+
+pub fn cantor_v1() -> @kernel.Thm
+
+pub fn injective_surjective_preimage() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn surjective_compose() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

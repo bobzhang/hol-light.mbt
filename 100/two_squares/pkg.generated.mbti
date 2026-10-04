@@ -1,0 +1,65 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/two_squares"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn in_triple() -> @kernel.Thm
+
+pub fn involution() -> @kernel.Thm
+
+pub fn involution_delete() -> @kernel.Thm
+
+pub fn involution_even() -> @kernel.Thm
+
+pub fn involution_fix_fix() -> @kernel.Thm
+
+pub fn involution_fix_odd() -> @kernel.Thm
+
+pub fn involution_image() -> @kernel.Thm
+
+pub fn involution_nofixes() -> @kernel.Thm
+
+pub fn involution_odd() -> @kernel.Thm
+
+pub fn involution_stepdown() -> @kernel.Thm
+
+pub fn involution_subset() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn prime_4x() -> @kernel.Thm
+
+pub fn prime_square() -> @kernel.Thm
+
+pub fn prime_xyz_nonzero() -> @kernel.Thm
+
+pub fn sum_of_two_squares() -> @kernel.Thm
+
+pub fn tag() -> @kernel.Thm
+
+pub fn tag_involution() -> @kernel.Thm
+
+pub fn zag() -> @kernel.Thm
+
+pub fn zag_involution() -> @kernel.Thm
+
+pub fn zag_involution_general() -> @kernel.Thm
+
+pub fn zag_lemma() -> @kernel.Thm
+
+pub fn zset() -> @kernel.Thm
+
+pub fn zset_bound() -> @kernel.Thm
+
+pub fn zset_finite() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

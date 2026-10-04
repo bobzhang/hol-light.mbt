@@ -1,0 +1,37 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/fta"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn fta() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn nproduct() -> @kernel.Thm
+
+pub fn nproduct_cancel_prime() -> @kernel.Thm
+
+pub fn nproduct_clauses() -> @kernel.Thm
+
+pub fn nproduct_eq() -> @kernel.Thm
+
+pub fn nproduct_eq_1_eq() -> @kernel.Thm
+
+pub fn nproduct_eq_gen() -> @kernel.Thm
+
+pub fn nproduct_splitoff() -> @kernel.Thm
+
+pub fn nproduct_splitoff_hack() -> @kernel.Thm
+
+pub fn prime_divides_nproduct() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

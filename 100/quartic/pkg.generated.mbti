@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/quartic"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn quartic_1() -> @kernel.Thm
+
+pub fn quartic_1_p() -> @kernel.Thm
+
+pub fn quartic_1_v1() -> @kernel.Thm
+
+pub fn quartic_1_v2() -> @kernel.Thm
+
+pub fn quartic_2() -> @kernel.Thm
+
+pub fn quartic_2_p() -> @kernel.Thm
+
+pub fn quartic_3() -> @kernel.Thm
+
+pub fn quartic_3_p() -> @kernel.Thm
+
+pub fn quartic_4() -> @kernel.Thm
+
+pub fn quartic_4_p() -> @kernel.Thm
+
+pub fn quartic_cases() -> @kernel.Thm
+
+pub fn quartic_cases_v1() -> @kernel.Thm
+
+pub fn quartic_cases_v2() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

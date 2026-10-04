@@ -1,0 +1,21 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/arithmetic"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn arithmetic_progression() -> @kernel.Thm
+
+pub fn arithmetic_progression_lemma() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

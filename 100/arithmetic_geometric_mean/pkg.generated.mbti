@@ -1,0 +1,27 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/arithmetic_geometric_mean"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn agm() -> @kernel.Thm
+
+pub fn agm_root() -> @kernel.Thm
+
+pub fn lemma_1() -> @kernel.Thm
+
+pub fn lemma_2() -> @kernel.Thm
+
+pub fn lemma_3() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

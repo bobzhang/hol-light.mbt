@@ -1,5 +1,7 @@
 (* Loads the upstream lib.ml + fusion.ml into a plain OCaml toplevel. *)
 let needs (_:string) = ();;
+(* a top-level `loadt "f"` is a dependency, loaded before (as `needs`) *)
+let loadt (_:string) = ();;
 let float_sqrt = sqrt;;
 let float_fabs = abs_float;;
 #use "lib.ml";;
