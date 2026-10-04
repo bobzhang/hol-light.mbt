@@ -42,6 +42,15 @@ session (forked children per file), then runs the new tests with
 
 ## Open issues
 
+- **Publishing**: mooncakes caps a module at 100 MB unpacked (over it, the
+  server answers "Invalid ZIP archive"). `bobzhang/hol_light` 0.1.0 has the
+  core and Library/ with their tests (71 MB). Multivariate/ (166 MB: 73 MB
+  source, 93 MB tests) and 100/ (which needs it) are on GitHub only. Publish
+  them as separate modules (e.g. `bobzhang/hol_light_multivariate`, possibly
+  split further, tests trimmed): the translator and theory.py write import
+  paths `bobzhang/hol_light/<pkg>`, so they need a module prefix per
+  directory.
+
 - **Package alias collisions**: MoonBit imports a package by its last path
   component; `Probability/measure.ml` clashes with `Multivariate/measure`,
   `Probability/independence.ml` with `100/independence`,
