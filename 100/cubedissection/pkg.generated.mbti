@@ -1,0 +1,82 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/cubedissection"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn avoid_dim2_tac(@kernel.Term, @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn avoid_dim3_tac(@kernel.Term, @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn bound_common_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn cube() -> @kernel.Thm
+
+pub fn cube_bounds_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn cube_dissection() -> @kernel.Thm
+
+pub fn cube_exists_form() -> @kernel.Thm
+
+pub fn cube_imp_nonempty() -> @kernel.Thm
+
+pub fn cube_imp_nonempty_interior() -> @kernel.Thm
+
+pub fn division_face_lowerbound() -> @kernel.Thm
+
+pub fn division_whole_is_singleton() -> @kernel.Thm
+
+pub fn e_pair_preimage_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn finite_pairwise_minimum() -> @kernel.Thm
+
+pub fn interval_length() -> @kernel.Thm
+
+pub fn interval_length_cube() -> @kernel.Thm
+
+pub fn interval_length_cube_component() -> @kernel.Thm
+
+pub fn interval_length_cube_pos() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn meson_assume_tac(@list.List[@kernel.Thm], @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn only_trivial_cube_dissection() -> @kernel.Thm
+
+pub fn only_trivial_cube_dissection_cube() -> @kernel.Thm
+
+pub fn point_in_multiple_division_of() -> @kernel.Thm
+
+pub fn point_in_multiple_division_of_gen() -> @kernel.Thm
+
+pub fn real_open_interval_avoid_finite() -> @kernel.Thm
+
+pub fn square_dissection_nonedge() -> @kernel.Thm
+
+pub fn valley() -> @kernel.Thm
+
+pub fn valley_descent() -> @kernel.Thm
+
+pub fn valley_descent_containment() -> @kernel.Thm
+
+pub fn valley_face_exists_another() -> @kernel.Thm
+
+pub fn valley_face_interior() -> @kernel.Thm
+
+pub fn valley_impossible() -> @kernel.Thm
+
+pub fn valley_initial() -> @kernel.Thm
+
+pub fn vector2_cube() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

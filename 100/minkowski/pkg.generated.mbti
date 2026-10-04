@@ -1,0 +1,25 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/minkowski"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn blichfeldt() -> @kernel.Thm
+
+pub fn lemma() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn minkowski() -> @kernel.Thm
+
+pub fn minkowski_compact() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

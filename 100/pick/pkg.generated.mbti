@@ -1,0 +1,107 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/pick"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn arc_polygonal_path_imp_distinct() -> @kernel.Thm
+
+pub fn collinear_imp_negligible() -> @kernel.Thm
+
+pub fn convex_hull_3_0() -> @kernel.Thm
+
+pub fn distinguishing_rotation_exists() -> @kernel.Thm
+
+pub fn distinguishing_rotation_exists_pair() -> @kernel.Thm
+
+pub fn distinguishing_rotation_exists_polygon() -> @kernel.Thm
+
+pub fn finite_bounded_integer_points() -> @kernel.Thm
+
+pub fn finite_triangle_integer_points() -> @kernel.Thm
+
+pub fn integral_basis_unimodular() -> @kernel.Thm
+
+pub fn integral_vector() -> @kernel.Thm
+
+pub fn integral_vector_add() -> @kernel.Thm
+
+pub fn integral_vector_add_lcancel() -> @kernel.Thm
+
+pub fn integral_vector_stdbasis() -> @kernel.Thm
+
+pub fn integral_vector_sub() -> @kernel.Thm
+
+pub fn integral_vector_vec() -> @kernel.Thm
+
+pub fn interior_convex_hull_3_0() -> @kernel.Thm
+
+pub fn linear_integral_vector() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn measure_convex_hull_2_trivial() -> @kernel.Thm
+
+pub fn negligible_segment_2() -> @kernel.Thm
+
+pub fn parity_lemma() -> @kernel.Thm
+
+pub fn path_image_polygonal_path_rotate() -> @kernel.Thm
+
+pub fn path_image_polygonal_path_subset_convex_hull() -> @kernel.Thm
+
+pub fn path_image_polygonal_path_subset_segments() -> @kernel.Thm
+
+pub fn path_polygonal_path() -> @kernel.Thm
+
+pub fn pathfinish_polygonal_path() -> @kernel.Thm
+
+pub fn pathstart_polygonal_path() -> @kernel.Thm
+
+pub fn pick() -> @kernel.Thm
+
+pub fn pick_elementary_triangle() -> @kernel.Thm
+
+pub fn pick_elementary_triangle_0() -> @kernel.Thm
+
+pub fn pick_triangle() -> @kernel.Thm
+
+pub fn pick_triangle_alt() -> @kernel.Thm
+
+pub fn pick_triangle_flat() -> @kernel.Thm
+
+pub fn polygon_chop_in_two() -> @kernel.Thm
+
+pub fn polygonal_path() -> @kernel.Thm
+
+pub fn polygonal_path_cons_cons() -> @kernel.Thm
+
+pub fn polygonal_path_linear_image() -> @kernel.Thm
+
+pub fn polygonal_path_translation() -> @kernel.Thm
+
+pub fn properties_polygonal_path_snoc() -> @kernel.Thm
+
+pub fn rotate_list_to_front_0() -> @kernel.Thm
+
+pub fn rotate_list_to_front_1() -> @kernel.Thm
+
+pub fn set_of_list_polygonal_path_rotate() -> @kernel.Thm
+
+pub fn simple_path_polygonal_path_rotate() -> @kernel.Thm
+
+pub fn triangle_additive_decomposition() -> @kernel.Thm
+
+pub fn triangle_decomposition() -> @kernel.Thm
+
+pub fn vertices_in_path_image_polygonal_path() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
