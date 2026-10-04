@@ -258,8 +258,9 @@ def main():
         # a placeholder translation until the target's turn, so that the
         # project builds (`moon info`) while earlier targets are translated
         gen = os.path.join(ROOT, pkg, alias + ("_ml" if alias.endswith("test") else "") + ".mbt")
-        if not os.path.exists(gen):
-            open(gen, "w").write(PLACEHOLDER)
+        # (every target is translated again: a stale translation from an
+        # interrupted run must not break the build meanwhile)
+        open(gen, "w").write(PLACEHOLDER)
         # regenerate the test files (the chain may have changed), keeping
         # their hand-written checks (BEGIN/END EXTRA)
         extras = {}
