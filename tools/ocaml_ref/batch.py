@@ -70,10 +70,30 @@ def trie(targets, before):
     return root
 
 
+def targets_in(node):
+    return ({node.f} if node.target else set()).union(*[targets_in(k) for k in node.children.values()])
+
+
+def ordered_children(node):
+    """The children, a subtree before any whose targets need one of its
+    targets (that translation and its interface come first); otherwise in
+    insertion order."""
+    kids = list(node.children.values())
+    tset = {id(k): targets_in(k) for k in kids}
+    needed = {id(k): set().union(*[set(map(ml_file, theory.deps(t))) for t in tset[id(k)]]) for k in kids}
+    out = []
+    while kids:
+        free = [k for k in kids if not any(tset[id(j)] & needed[id(k)] for j in kids if j is not k)]
+        k = free[0] if free else kids[0]
+        out.append(k)
+        kids.remove(k)
+    return out
+
+
 def steps(node):
     """Depth-first steps: every child but the last runs in a branch (a
     forked copy of the session), the last continues the session."""
-    out, kids = [], list(node.children.values())
+    out, kids = [], ordered_children(node)
     for i, k in enumerate(kids):
         sub = [("target" if k.target else "load", k)] + steps(k)
         if i < len(kids) - 1:

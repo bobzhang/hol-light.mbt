@@ -11,6 +11,7 @@ markers) unless they exist, translates <file>, regenerates the theorem
 lists, runs the OCaml reference and embeds its output, and runs the test.
 Exits with the test's status.
 """
+import functools
 import os
 import re
 import subprocess
@@ -78,6 +79,7 @@ def strip_comments(text):
     return "".join(out)
 
 
+@functools.lru_cache(maxsize=None)
 def needs(f):
     path = os.path.join(HOL, f if f.endswith(".ml") else f + ".ml")
     # the same rule as the translator's Translator.needs_of
@@ -128,7 +130,8 @@ def chain_prev(f):
     return None
 
 
-def deps(f):
+@functools.lru_cache(maxsize=None)
+def _deps(f):
     """The files loaded before `f` outside hol.ml's list, in order:
     its predecessor's chain and the predecessor (Multivariate order), then
     what `f` needs, dependencies first."""
@@ -148,6 +151,10 @@ def deps(f):
     for h in needs(f):
         visit(h)
     return seen
+
+
+def deps(f):
+    return list(_deps(f))
 
 
 def run(cmd, **kw):
