@@ -706,6 +706,11 @@ module Emit = struct
                (* applications are specialized (Functors) *)
                ()
            | Tstr_value (Asttypes.Nonrecursive, [ vb ]) -> emit_pattern vb
+           | Tstr_value (Asttypes.Recursive, [ vb ]) when not (is_function vb.vb_expr) ->
+               (* `let rec x = e` with `e` not a function cannot mention
+                  `x`: an ordinary definition (Model/syntax.ml's
+                  `let rec sizeof = define ...`) *)
+               emit_pattern vb
            | Tstr_value (Asttypes.Recursive, vbs) ->
                (* name and register every function first: they may call
                   each other (and themselves, through local identifiers) *)
