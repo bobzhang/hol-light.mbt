@@ -724,7 +724,9 @@ module Translator = struct
           while !b >= 0 && t.[!b] = ' ' do decr b done;
           !b < 0 || (!b >= 1 && t.[!b] = ';' && t.[!b - 1] = ';')
         in
-        if (String.sub t !k 5 = "needs" || String.sub t !k 5 = "loadt") && phrase_start
+        (* `loads "f"` too (Rqe/make.ml, IsabelleLight/isalight.ml): a file
+           is loaded once here, so it is `needs` *)
+        if (String.sub t !k 5 = "needs" || String.sub t !k 5 = "loadt" || String.sub t !k 5 = "loads") && phrase_start
            && not (ident t.[!k + 5]) then begin
           let j = ref (!k + 5) in
           while !j < m && t.[!j] = ' ' do incr j done;

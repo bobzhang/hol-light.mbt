@@ -90,10 +90,11 @@ def needs(f):
     if not os.path.isfile(path):
         path = os.path.join(HOL, f if f.endswith(".ml") else f + ".ml")
     # the same rule as the translator's Translator.needs_of
-    # `loadt "f"` is used as `needs` too (100/lagrange.ml); only top-level
-    # phrases with a literal file name are dependencies
+    # `loadt "f"` is used as `needs` too (100/lagrange.ml), and `loads "f"`
+    # (Rqe/make.ml): a file is loaded once here. Only top-level phrases
+    # with a literal file name are dependencies
     text = strip_comments(open(path).read())
-    return [m.group(1) for m in re.finditer(r'(?<![A-Za-z0-9_\'])(?:needs|loadt)\s+"([^"]+)"', text)
+    return [m.group(1) for m in re.finditer(r'(?<![A-Za-z0-9_\'])(?:needs|loadt|loads)\s+"([^"]+)"', text)
             if text[:m.start()].rstrip() == "" or text[:m.start()].rstrip().endswith(";;")]
 
 
