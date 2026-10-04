@@ -714,7 +714,13 @@ module Translator = struct
       let acc = ref [] and k = ref 0 in
       while !k + 5 < m do
         (* `needs "f"`, and `loadt "f"` used the same way (100/lagrange.ml) *)
-        if (String.sub t !k 5 = "needs" || String.sub t !k 5 = "loadt") && (!k = 0 || not (ident t.[!k - 1]))
+        (* only at the start of a top-level phrase *)
+        let phrase_start =
+          let b = ref (!k - 1) in
+          while !b >= 0 && t.[!b] = ' ' do decr b done;
+          !b < 0 || (!b >= 1 && t.[!b] = ';' && t.[!b - 1] = ';')
+        in
+        if (String.sub t !k 5 = "needs" || String.sub t !k 5 = "loadt") && phrase_start
            && not (ident t.[!k + 5]) then begin
           let j = ref (!k + 5) in
           while !j < m && t.[!j] = ' ' do incr j done;

@@ -36,7 +36,8 @@ HAND = ["kernel", "lib", "num", "basics", "nets", "printer", "preterm", "parser"
 
 
 def stem(f):
-    return f[:-3] if f.endswith(".ml") else f
+    f = f[:-3] if f.endswith(".ml") else f
+    return f[:-3] if f.endswith(".hl") else f
 
 
 def pkg_of(f):
@@ -44,6 +45,9 @@ def pkg_of(f):
     s = stem(f)
     if "/" in s:
         d, b = s.split("/", 1)
+        same = [x for x in os.listdir(HOL) if x.lower() == d.lower() and os.path.isdir(os.path.join(HOL, x))]
+        if len(same) > 1:
+            sys.exit(f"upstream directories {same} map to the same package directory")
         return d.lower() + "/" + b
     return s
 
@@ -81,10 +85,16 @@ def strip_comments(text):
 
 @functools.lru_cache(maxsize=None)
 def needs(f):
-    path = os.path.join(HOL, f if f.endswith(".ml") else f + ".ml")
+    # `f` as named (`Quaternions/misc.hl`), else with `.ml`
+    path = os.path.join(HOL, f)
+    if not os.path.isfile(path):
+        path = os.path.join(HOL, f if f.endswith(".ml") else f + ".ml")
     # the same rule as the translator's Translator.needs_of
-    # `loadt "f"` is used as `needs` too (100/lagrange.ml)
-    return re.findall(r'(?<![A-Za-z0-9_\'])(?:needs|loadt)\s+"([^"]+)"', strip_comments(open(path).read()))
+    # `loadt "f"` is used as `needs` too (100/lagrange.ml); only top-level
+    # phrases with a literal file name are dependencies
+    text = strip_comments(open(path).read())
+    return [m.group(1) for m in re.finditer(r'(?<![A-Za-z0-9_\'])(?:needs|loadt)\s+"([^"]+)"', text)
+            if text[:m.start()].rstrip() == "" or text[:m.start()].rstrip().endswith(";;")]
 
 
 # Multivariate/ is loaded as Multivariate/make.ml and make_complex.ml load

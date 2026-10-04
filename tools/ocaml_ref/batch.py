@@ -29,6 +29,7 @@ import theory  # noqa: E402
 
 ROOT, REF, HOL = theory.ROOT, theory.REF, theory.HOL
 OUT = os.path.join(REF, "_build", "batch")
+PLACEHOLDER = "///|\nfn load_steps() -> Unit raise {\n  ()\n}\n"
 
 
 def ml_str(s):
@@ -237,7 +238,9 @@ def main():
     def translated(f):
         pkg = theory.pkg_of(f)
         alias = pkg.split("/")[-1]
-        return os.path.exists(os.path.join(ROOT, pkg, alias + ("_ml" if alias.endswith("test") else "") + ".mbt"))
+        gen = os.path.join(ROOT, pkg, alias + ("_ml" if alias.endswith("test") else "") + ".mbt")
+        # a placeholder (left by an interrupted batch) is not a translation
+        return os.path.exists(gen) and open(gen).read() != PLACEHOLDER
     expanded = []
     for t in targets:
         for d in theory.deps(t) + [t]:
@@ -256,7 +259,7 @@ def main():
         # project builds (`moon info`) while earlier targets are translated
         gen = os.path.join(ROOT, pkg, alias + ("_ml" if alias.endswith("test") else "") + ".mbt")
         if not os.path.exists(gen):
-            open(gen, "w").write("///|\nfn load_steps() -> Unit raise {\n  ()\n}\n")
+            open(gen, "w").write(PLACEHOLDER)
         # regenerate the test files (the chain may have changed), keeping
         # their hand-written checks (BEGIN/END EXTRA)
         extras = {}
