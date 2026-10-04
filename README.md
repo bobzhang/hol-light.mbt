@@ -16,6 +16,10 @@ constructs theorems only through its API.
 - **Multivariate/**: all 32 theory files (`multivariate/<name>`).
 - **100/**: 25 files so far (`100/<name>`).
 
+The mooncakes package `bobzhang/hol_light` has the core and Library/ (the
+registry caps a module at 100 MB); Multivariate/, 100/ and the translation
+tooling are in the [GitHub repository](https://github.com/bobzhang/hol-light.mbt).
+
 Translated files are produced from upstream's OCaml by `tools/translator`,
 which reproduces OCaml's runtime behaviour exactly (63-bit ints, polymorphic
 compare and hashing, evaluation order, Hashtbl/Map/Random). Each translated
