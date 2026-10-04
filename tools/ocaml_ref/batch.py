@@ -124,10 +124,12 @@ def translate(targets):
     pf = os.path.join(OUT, "plan.ml")
     open(pf, "w").write(plan)
     cmd = f"python3 {os.path.abspath(__file__)} after"
-    p = subprocess.run([os.path.join(REF, "translate.sh"), "batch", pf, cmd], cwd=ROOT,
-                       capture_output=True, text=True)
-    out = p.stdout + p.stderr
-    open(os.path.join(OUT, "translate.log"), "w").write(out)
+    # streamed to the log as it runs (progress: `translated <file>` lines)
+    log = os.path.join(OUT, "translate.log")
+    with open(log, "w") as lf:
+        subprocess.run([os.path.join(REF, "translate.sh"), "batch", pf, cmd], cwd=ROOT,
+                       stdout=lf, stderr=subprocess.STDOUT)
+    out = open(log).read()
     keep = [l for l in out.splitlines()
             if "wrote" in l or "unsupported" in l or "BATCH" in l or "Exception" in l or "moon info" in l
             or l.startswith("translated ") or l.startswith("Error")]
@@ -204,12 +206,13 @@ def references(targets, refs):
                             f"let () = if not (Toploop.use_silently Format.std_formatter (Toploop.File {ml_str(body)})) "
                             "then exit 1;;\n")
     env = os.environ.copy()
-    p = subprocess.run(["sh", "-c", 'eval "$(opam env --switch=4.14.1+idea --set-switch 2>/dev/null)"; '
-                        f'ocaml -w -a -alert -all -I {HOL} -I _build {script}'],
-                       cwd=REF, capture_output=True, text=True, env=env)
-    open(os.path.join(OUT, "ref.log"), "w").write(p.stdout + p.stderr)
+    rlog = os.path.join(OUT, "ref.log")
+    with open(rlog, "w") as lf:
+        p = subprocess.run(["sh", "-c", 'eval "$(opam env --switch=4.14.1+idea --set-switch 2>/dev/null)"; '
+                            f'ocaml -w -a -alert -all -I {HOL} -I _build {script}'],
+                           cwd=REF, stdout=lf, stderr=subprocess.STDOUT, env=env)
     if p.returncode != 0:
-        sys.exit("reference batch failed (tools/ocaml_ref/_build/batch/ref.log):\n" + (p.stdout + p.stderr)[-3000:])
+        sys.exit("reference batch failed (tools/ocaml_ref/_build/batch/ref.log):\n" + open(rlog).read()[-3000:])
     expected = {}
     for t in targets:
         nodes = path_to(root, t, before)
