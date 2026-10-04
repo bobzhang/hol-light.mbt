@@ -1,0 +1,62 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/morley"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn affine_group_compose() -> @kernel.Thm
+
+pub fn affine_group_eq() -> @kernel.Thm
+
+pub fn affine_group_i() -> @kernel.Thm
+
+pub fn affine_group_iter_3() -> @kernel.Thm
+
+pub fn affine_group_rotate_about() -> @kernel.Thm
+
+pub fn algebraic_lemma() -> @kernel.Thm
+
+pub fn cyclic_perm_subgoal_then(@kernel.Term) -> (((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn equilateral_triangle_algebraic() -> @kernel.Thm
+
+pub fn iter_rotate_about() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn morley() -> @kernel.Thm
+
+pub fn real_le_im_div_cyclic() -> @kernel.Thm
+
+pub fn reflect2d() -> @kernel.Thm
+
+pub fn reflect2d_compose() -> @kernel.Thm
+
+pub fn reflect_across() -> @kernel.Thm
+
+pub fn reflect_across_compose() -> @kernel.Thm
+
+pub fn reflect_across_compose_angle() -> @kernel.Thm
+
+pub fn reflect_across_compose_involution() -> @kernel.Thm
+
+pub fn reflect_across_sym() -> @kernel.Thm
+
+pub fn rotate_about() -> @kernel.Thm
+
+pub fn rotate_about_invert() -> @kernel.Thm
+
+pub fn rotate_eq_reflect_lemma() -> @kernel.Thm
+
+pub fn rotate_eq_reflect_pi_lemma() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

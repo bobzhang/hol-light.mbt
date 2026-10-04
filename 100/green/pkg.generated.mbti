@@ -1,0 +1,249 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/green"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn absolutely_integrable_cauchy_path_product() -> @kernel.Thm
+
+pub fn absolutely_integrable_cpow() -> @kernel.Thm
+
+pub fn absolutely_integrable_dbar_kernel() -> @kernel.Thm
+
+pub fn angular_ftc() -> @kernel.Thm
+
+pub fn angular_integral_ii_zero() -> @kernel.Thm
+
+pub fn angular_integral_zero() -> @kernel.Thm
+
+pub fn bounded_support_translate() -> @kernel.Thm
+
+pub fn cauchy_kernel_absolutely_integrable() -> @kernel.Thm
+
+pub fn cauchy_kernel_norm_trunc_continuous() -> @kernel.Thm
+
+pub fn cauchy_kernel_norm_trunc_converges() -> @kernel.Thm
+
+pub fn cauchy_kernel_norm_trunc_integrable() -> @kernel.Thm
+
+pub fn cauchy_kernel_norm_uniform_bound() -> @kernel.Thm
+
+pub fn cauchy_kernel_weighted_measurable() -> @kernel.Thm
+
+pub fn cauchy_transform_dbar_translation() -> @kernel.Thm
+
+pub fn cauchy_transform_inverts_dbar() -> @kernel.Thm
+
+pub fn cexp_0ii() -> @kernel.Thm
+
+pub fn cexp_2pii() -> @kernel.Thm
+
+pub fn complex_green() -> @kernel.Thm
+
+pub fn complex_green_alt() -> @kernel.Thm
+
+pub fn complex_green_area() -> @kernel.Thm
+
+pub fn complex_green_area_abs() -> @kernel.Thm
+
+pub fn complex_green_cnj() -> @kernel.Thm
+
+pub fn complex_green_i() -> @kernel.Thm
+
+pub fn complex_green_inside() -> @kernel.Thm
+
+pub fn cont_cexp_polar() -> @kernel.Thm
+
+pub fn cont_ii_cx_drop() -> @kernel.Thm
+
+pub fn continuous_on_cexp_sndcart() -> @kernel.Thm
+
+pub fn continuous_on_complex_lmul_fn() -> @kernel.Thm
+
+pub fn continuous_on_f_polar() -> @kernel.Thm
+
+pub fn continuous_on_f_radial() -> @kernel.Thm
+
+pub fn continuous_on_polar_pastecart() -> @kernel.Thm
+
+pub fn continuous_on_polar_path() -> @kernel.Thm
+
+pub fn continuous_on_polar_path_interval() -> @kernel.Thm
+
+pub fn continuous_on_radial_path() -> @kernel.Thm
+
+pub fn continuous_on_translate_univ() -> @kernel.Thm
+
+pub fn drop_pos_of_nonneg_nz() -> @kernel.Thm
+
+pub fn frechet_continuous_on_joint() -> @kernel.Thm
+
+pub fn frechet_derivative_cx_lmul() -> @kernel.Thm
+
+pub fn frechet_derivative_zero_outside() -> @kernel.Thm
+
+pub fn frechet_wirtinger() -> @kernel.Thm
+
+pub fn fubini_path_area() -> @kernel.Thm
+
+pub fn green_area() -> @kernel.Thm
+
+pub fn green_area_abs() -> @kernel.Thm
+
+pub fn green_area_abs_alt() -> @kernel.Thm
+
+pub fn green_area_alt() -> @kernel.Thm
+
+pub fn green_theorem_curl() -> @kernel.Thm
+
+pub fn has_derivative_affine_mul() -> @kernel.Thm
+
+pub fn has_derivative_cexp_polar() -> @kernel.Thm
+
+pub fn has_derivative_cnj() -> @kernel.Thm
+
+pub fn has_derivative_cx_drop() -> @kernel.Thm
+
+pub fn has_derivative_ii_cx_drop() -> @kernel.Thm
+
+pub fn has_derivative_polar_path() -> @kernel.Thm
+
+pub fn has_derivative_radial_path() -> @kernel.Thm
+
+pub fn has_path_integral_cnj() -> @kernel.Thm
+
+pub fn has_path_integral_i_closed() -> @kernel.Thm
+
+pub fn has_real_derivative_hermite_at_0() -> @kernel.Thm
+
+pub fn has_real_derivative_hermite_at_1() -> @kernel.Thm
+
+pub fn has_real_derivative_hermite_explicit() -> @kernel.Thm
+
+pub fn has_real_derivative_hermite_interior() -> @kernel.Thm
+
+pub fn has_real_derivative_hermite_left() -> @kernel.Thm
+
+pub fn has_real_derivative_hermite_right() -> @kernel.Thm
+
+pub fn has_vector_derivative_f_polar() -> @kernel.Thm
+
+pub fn has_vector_derivative_f_radial() -> @kernel.Thm
+
+pub fn hc_shifted_continuous_on() -> @kernel.Thm
+
+pub fn hcd_shifted_continuous_on() -> @kernel.Thm
+
+pub fn hermite_cutoff() -> @kernel.Thm
+
+pub fn hermite_cutoff_chi_has_derivative() -> @kernel.Thm
+
+pub fn hermite_cutoff_continuous() -> @kernel.Thm
+
+pub fn hermite_cutoff_deriv() -> @kernel.Thm
+
+pub fn hermite_cutoff_deriv_continuous() -> @kernel.Thm
+
+pub fn hermite_cutoff_differentiable() -> @kernel.Thm
+
+pub fn hermite_cutoff_differentiable_on() -> @kernel.Thm
+
+pub fn hermite_cutoff_ge_1() -> @kernel.Thm
+
+pub fn hermite_cutoff_le_0() -> @kernel.Thm
+
+pub fn hermite_cutoff_nonneg() -> @kernel.Thm
+
+pub fn hermite_cutoff_shifted_has_derivative() -> @kernel.Thm
+
+pub fn inner_integral_simplify() -> @kernel.Thm
+
+pub fn integrable_winding_dbar_product() -> @kernel.Thm
+
+pub fn integral_const_2pi() -> @kernel.Thm
+
+pub fn integral_if_const() -> @kernel.Thm
+
+pub fn inv_absolutely_integrable_bounded() -> @kernel.Thm
+
+pub fn inv_cexp_ii() -> @kernel.Thm
+
+pub fn inv_two_times_two_pi() -> @kernel.Thm
+
+pub fn jacobian_cnj() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn lspace_complex_inv() -> @kernel.Thm
+
+pub fn measurable_on_fubini_integrand() -> @kernel.Thm
+
+pub fn negligible_absolutely_continuous_path_image() -> @kernel.Thm
+
+pub fn negligible_graph_product() -> @kernel.Thm
+
+pub fn norm_cpow_complex() -> @kernel.Thm
+
+pub fn path_integrable_continuous_absolutely_continuous() -> @kernel.Thm
+
+pub fn phi_shifted_continuous_on() -> @kernel.Thm
+
+pub fn piecewise_has_derivative_local() -> @kernel.Thm
+
+pub fn piecewise_has_real_derivative_local() -> @kernel.Thm
+
+pub fn polar_cexp_simplify() -> @kernel.Thm
+
+pub fn polar_fubini_swap() -> @kernel.Thm
+
+pub fn polar_integral_decomposition() -> @kernel.Thm
+
+pub fn polar_point_norm_bound() -> @kernel.Thm
+
+pub fn polar_simplify() -> @kernel.Thm
+
+pub fn poly_continuous_real1() -> @kernel.Thm
+
+pub fn radial_ftc() -> @kernel.Thm
+
+pub fn radial_integral_neg_fw() -> @kernel.Thm
+
+pub fn smooth_extension_from_open() -> @kernel.Thm
+
+pub fn support_bounded_outside() -> @kernel.Thm
+
+pub fn wirtinger_dbar() -> @kernel.Thm
+
+pub fn wirtinger_dbar_bounded_support() -> @kernel.Thm
+
+pub fn wirtinger_dbar_cnj() -> @kernel.Thm
+
+pub fn wirtinger_dbar_continuous() -> @kernel.Thm
+
+pub fn wirtinger_dbar_eq_zero() -> @kernel.Thm
+
+pub fn wirtinger_dbar_frechet() -> @kernel.Thm
+
+pub fn wirtinger_dbar_frechet_polar() -> @kernel.Thm
+
+pub fn wirtinger_dbar_i() -> @kernel.Thm
+
+pub fn wirtinger_dz() -> @kernel.Thm
+
+pub fn wirtinger_dz_complex_derivative() -> @kernel.Thm
+
+pub fn wirtinger_dz_continuous() -> @kernel.Thm
+
+pub fn wirtinger_dz_frechet() -> @kernel.Thm
+
+pub fn zero_outside_support_ball() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

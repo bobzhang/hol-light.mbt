@@ -1,0 +1,111 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/independence"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn between_collinear_ddist_eq() -> @kernel.Thm
+
+pub fn between_kleinify_moebius() -> @kernel.Thm
+
+pub fn collinear_kleinify_moebius() -> @kernel.Thm
+
+pub fn continuous_at_lift_ddist() -> @kernel.Thm
+
+pub fn ddist() -> @kernel.Thm
+
+pub fn ddist_congruent_triples_0() -> @kernel.Thm
+
+pub fn ddist_eq_0() -> @kernel.Thm
+
+pub fn ddist_eq_origin() -> @kernel.Thm
+
+pub fn ddist_increases_online() -> @kernel.Thm
+
+pub fn ddist_kleinify() -> @kernel.Thm
+
+pub fn ddist_kleinify_eq() -> @kernel.Thm
+
+pub fn ddist_kleinify_moebius() -> @kernel.Thm
+
+pub fn ddist_pos_le() -> @kernel.Thm
+
+pub fn ddist_pos_lt() -> @kernel.Thm
+
+pub fn ddist_refl() -> @kernel.Thm
+
+pub fn ddist_sym() -> @kernel.Thm
+
+pub fn dest_plane_eq() -> @kernel.Thm
+
+pub fn dest_plane_norm_lt() -> @kernel.Thm
+
+pub fn exists_dest_plane() -> @kernel.Thm
+
+pub fn forall_dest_plane() -> @kernel.Thm
+
+pub fn hyperbolic_isometry() -> @kernel.Thm
+
+pub fn hyperbolic_midpoint() -> @kernel.Thm
+
+pub fn hyperbolic_translation() -> @kernel.Thm
+
+pub fn kleinify() -> @kernel.Thm
+
+pub fn kleinify_0() -> @kernel.Thm
+
+pub fn kleinify_poincarify() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn norm_kleinify() -> @kernel.Thm
+
+pub fn norm_kleinify_lt() -> @kernel.Thm
+
+pub fn norm_kleinify_moebius_lt() -> @kernel.Thm
+
+pub fn norm_poincarify_lt() -> @kernel.Thm
+
+pub fn not_tarski_axiom_10_noneuclidean() -> @kernel.Thm
+
+pub fn pbetween() -> @kernel.Thm
+
+pub fn pdist() -> @kernel.Thm
+
+pub fn plane_tybij() -> @kernel.Thm
+
+pub fn poincarify() -> @kernel.Thm
+
+pub fn poincarify_0() -> @kernel.Thm
+
+pub fn poincarify_kleinify() -> @kernel.Thm
+
+pub fn tarski_axiom_11_noneuclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_1_noneuclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_2_noneuclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_3_noneuclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_4_noneuclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_5_noneuclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_6_noneuclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_7_noneuclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_8_noneuclidean() -> @kernel.Thm
+
+pub fn tarski_axiom_9_noneuclidean() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

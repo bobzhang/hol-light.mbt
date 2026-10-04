@@ -1,0 +1,132 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/constructible"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn collinear3() -> @kernel.Thm
+
+pub fn constructible_cases() -> @kernel.Thm
+
+pub fn constructible_induct() -> @kernel.Thm
+
+pub fn constructible_radical() -> @kernel.Thm
+
+pub fn constructible_rules() -> @kernel.Thm
+
+pub fn cos_pi3() -> @kernel.Thm
+
+pub fn cos_triple() -> @kernel.Thm
+
+pub fn cubic_root_integer() -> @kernel.Thm
+
+pub fn cubic_root_radical_induct() -> @kernel.Thm
+
+pub fn cubic_root_rational() -> @kernel.Thm
+
+pub fn cubic_root_step() -> @kernel.Thm
+
+pub fn depth() -> @kernel.Thm
+
+pub fn double_the_cube() -> @kernel.Thm
+
+pub fn double_the_cube_algebra() -> @kernel.Thm
+
+pub fn expression_induct() -> @kernel.Thm
+
+pub fn expression_recursion() -> @kernel.Thm
+
+pub fn finite_max() -> @kernel.Thm
+
+pub fn finite_radicals() -> @kernel.Thm
+
+pub fn in_radicals_smaller() -> @kernel.Thm
+
+pub fn is_intersection() -> @kernel.Thm
+
+pub fn length() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn lt_max() -> @kernel.Thm
+
+pub fn not_in_own_radicals() -> @kernel.Thm
+
+pub fn on_circle() -> @kernel.Thm
+
+pub fn parallel() -> @kernel.Thm
+
+pub fn radical_canonical() -> @kernel.Thm
+
+pub fn radical_canonical_trivial() -> @kernel.Thm
+
+pub fn radical_cases() -> @kernel.Thm
+
+pub fn radical_circle_circle_intersection() -> @kernel.Thm
+
+pub fn radical_expression() -> @kernel.Thm
+
+pub fn radical_induct() -> @kernel.Thm
+
+pub fn radical_line_circle_intersection() -> @kernel.Thm
+
+pub fn radical_line_line_intersection() -> @kernel.Thm
+
+pub fn radical_linear_equation() -> @kernel.Thm
+
+pub fn radical_quadratic_equation() -> @kernel.Thm
+
+pub fn radical_rules() -> @kernel.Thm
+
+pub fn radical_rules_v1() -> @kernel.Thm
+
+pub fn radical_simultaneous_linear_equation() -> @kernel.Thm
+
+pub fn radical_simultaneous_linear_quadratic() -> @kernel.Thm
+
+pub fn radical_simultaneous_quadratic_quadratic() -> @kernel.Thm
+
+pub fn radical_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn radical_top() -> @kernel.Thm
+
+pub fn radicals() -> @kernel.Thm
+
+pub fn radicals_empty_rational() -> @kernel.Thm
+
+pub fn radicals_subset() -> @kernel.Thm
+
+pub fn radicals_wellformed() -> @kernel.Thm
+
+pub fn rational_lowest() -> @kernel.Thm
+
+pub fn rational_lowest_lemma() -> @kernel.Thm
+
+pub fn rational_root_integer() -> @kernel.Thm
+
+pub fn sqrt_cases_lemma() -> @kernel.Thm
+
+pub fn step_lemma() -> @kernel.Thm
+
+pub fn step_lemma_sqrt() -> @kernel.Thm
+
+pub fn trisect_60_degrees() -> @kernel.Thm
+
+pub fn trisect_60_degrees_algebra() -> @kernel.Thm
+
+pub fn value() -> @kernel.Thm
+
+pub fn wellformed() -> @kernel.Thm
+
+pub fn wellformed_radicals() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
