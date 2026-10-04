@@ -236,9 +236,11 @@ def write_tests(f, pkg, alias, name):
     ml += ["start_trace ();;\n", f'#use "{name}.ml";;\n', f'show_trace "{name}";;\n',
            "(* BEGIN generated theorem list *)\n(* END generated theorem list *)\n",
            "let tm s = parse_term s;;\n",
-           'attempt "types" (fun () -> String.concat " " (map (fun (s,n) -> s ^ "/" ^ string_of_int n) (types())));;\n',
-           'attempt "constants" (fun () -> String.concat " " (map fst (constants())));;\n',
-           'attempt "definitions" (fun () -> string_of_int (length (definitions())));;\n',
+           # Stdlib's functions by their qualified names: a file may define
+           # `length` or `map` itself (100/chords.ml defines `length`)
+           'attempt "types" (fun () -> String.concat " " (List.map (fun (s,n) -> s ^ "/" ^ string_of_int n) (types())));;\n',
+           'attempt "constants" (fun () -> String.concat " " (List.map fst (constants())));;\n',
+           'attempt "definitions" (fun () -> string_of_int (List.length (definitions())));;\n',
            "(* BEGIN EXTRA *)\n(* END EXTRA *)\n",
            'attempt "counter_tyvar" (fun () -> stm (tm "zz_counter"));;\n',
            'attempt "counter_genvar" (fun () -> stm (genvar bool_ty));;\n']

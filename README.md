@@ -58,6 +58,7 @@ opam switch `hol-light` (or `$HOL_LIGHT_SWITCH`):
 ```
 opam switch create hol-light ocaml-base-compiler.4.14.1 --no-switch
 opam install --switch=hol-light camlp5.8.02.01 num camlp-streams ocamlfind
+brew install pari    # upstream's PRIME_CONV calls gp (Library/pocklington.ml)
 ```
 
 [PLAN.md](PLAN.md) has the design, decisions and known limitations;
