@@ -5,6 +5,7 @@ side instead of three chain reloads per file (tools/ocaml_ref/theory.py):
   python3 tools/ocaml_ref/batch.py Multivariate/polytope.ml [Multivariate/x.ml]
     (from the first file to the last, inclusive, in theory.MV_ORDER)
   python3 tools/ocaml_ref/batch.py --files 100/ballot.ml 100/bertrand.ml ...
+  python3 tools/ocaml_ref/batch.py --resume ...  (keeps a failed run's translations)
 
 1. Package set-up and test files for every target (theory.setup,
    theory.write_tests).
@@ -114,11 +115,13 @@ def path_to(root, t, before):
     return nodes
 
 
-def translate(targets):
+def translate(targets, done=()):
+    """`done`: targets already translated (--resume): loaded, not translated."""
     def ml(st):
         return "[" + "; ".join(
             f"Main.Branch {ml(x)}" if kind == "branch" else
-            f"Main.{'Target' if kind == 'target' else 'Load'} {ml_str(x.f)}" for kind, x in st) + "]"
+            f"Main.{'Target' if kind == 'target' and x.f not in done else 'Load'} {ml_str(x.f)}"
+            for kind, x in st) + "]"
     plan = ml(steps(trie(targets, [])))
     os.makedirs(OUT, exist_ok=True)
     pf = os.path.join(OUT, "plan.ml")
@@ -229,6 +232,10 @@ def main():
     if sys.argv[1] == "after":
         after(sys.argv[2])
         return
+    # --resume: keep the translations a failed run of the same batch made
+    resume = sys.argv[1] == "--resume"
+    if resume:
+        del sys.argv[1]
     order = theory.MV_ORDER
     if sys.argv[1] == "--files":
         # explicit targets (any directory), e.g. `--files 100/*.ml`
@@ -263,7 +270,8 @@ def main():
         gen = os.path.join(ROOT, pkg, alias + ("_ml" if alias.endswith("test") else "") + ".mbt")
         # (every target is translated again: a stale translation from an
         # interrupted run must not break the build meanwhile)
-        open(gen, "w").write(PLACEHOLDER)
+        if not resume or not translated(t):
+            open(gen, "w").write(PLACEHOLDER)
         # regenerate the test files (the chain may have changed), keeping
         # their hand-written checks (BEGIN/END EXTRA)
         extras = {}
@@ -279,7 +287,7 @@ def main():
                 text = re.sub(r"(BEGIN EXTRA[^\n]*\n)(?=[^\n]*END EXTRA)", lambda m: m.group(1) + body, text, count=1)
                 open(path, "w").write(text)
         pkgs[t] = pkg
-    translate(targets)
+    translate(targets, [t for t in targets if resume and translated(t)])
     for t in targets:
         theory.run(["python3", "tools/ocaml_ref/gen_theorems_test.py", pkgs[t], os.path.relpath(refs[t], ROOT),
                     os.path.relpath(tests[t], ROOT)])
