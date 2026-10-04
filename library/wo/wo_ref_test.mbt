@@ -201,6 +201,7 @@ test "Library/wo matches Library/wo.ml" {
   // END EXTRA
   log.attempt("counter_tyvar", () => stm(tm("zz_counter")))
   log.attempt("counter_genvar", () => stm(@basics.genvar(@kernel.bool_ty)))
+  @testkit.check_axioms()
   inspect(
     @testkit.normalize_times(log.contents()),
     content=(

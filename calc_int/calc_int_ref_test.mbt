@@ -68,6 +68,7 @@ test "calc_int matches calc_int.ml" {
   // END EXTRA
   log.attempt("counter_tyvar", () => stm(tm("zz_counter")))
   log.attempt("counter_genvar", () => stm(@basics.genvar(@kernel.bool_ty)))
+  @testkit.check_axioms()
   inspect(
     log.contents(),
     content=(

@@ -186,3 +186,34 @@ pub fn normalize_times(s : String) -> String {
   })
   .join("\n")
 }
+
+///|
+/// The axioms upstream's own files assert (class.ml: `ETA_AX`, `SELECT_AX`;
+/// nums.ml: `INFINITY_AX`), as `sthm` renders them.
+let approved_axioms : Array[String] = [
+  (
+    #| |- (#!:fun(fun(fun('A,'B),bool),bool) (\t:fun('A,'B). ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) (\x:'A. (t:fun('A,'B) x:'A))) t:fun('A,'B))))
+  ),
+  (
+    #| |- (#!:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) (#@:fun(fun('A,bool),'A) P:fun('A,bool))))))))
+  ),
+  (
+    #| |- (#?:fun(fun(fun(ind,ind),bool),bool) (\f:fun(ind,ind). ((#/\:fun(bool,fun(bool,bool)) (#ONE_ONE:fun(fun(ind,ind),bool) f:fun(ind,ind))) (#~:fun(bool,bool) (#ONTO:fun(fun(ind,ind),bool) f:fun(ind,ind))))))
+  ),
+]
+
+///|
+/// Fail unless every axiom asserted so far (`@kernel.axioms()`) is one of
+/// upstream's three, each at most once. `new_axiom` is unrestricted, as
+/// upstream (`mk_thm` and `CHEAT_TAC` go through it), so this is the audit:
+/// the load-fidelity tests run it after loading their theory.
+pub fn check_axioms() -> Unit raise {
+  let seen = []
+  for th in @kernel.axioms() {
+    let s = sthm(th)
+    if !approved_axioms.contains(s) || seen.contains(s) {
+      raise Failure("check_axioms: unexpected axiom" + s)
+    }
+    seen.push(s)
+  }
+}

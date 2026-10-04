@@ -40,9 +40,17 @@ let th = @prime.prime_2()
 ## Develop
 
 ```
-moon test -j 16                                         # whole suite (~5 h)
+python3 tools/test.py                      # hand-ported core, wasm and wasm-gc (10 s)
+python3 tools/test.py core                 # everything hol.ml loads (20 s)
+python3 tools/test.py library              # or multivariate, 100, a package directory
+python3 tools/test.py all                  # the whole suite on wasm-gc (25 min on 24 cores)
+python3 tools/test.py all --target wasm    # on the primary target (hours): before a release
 python3 tools/ocaml_ref/batch.py --files 100/x.ml ...   # translate and check
 ```
+
+Each theory's test loads its whole chain in a fresh process, so the suite
+is 4.5 hours of CPU on wasm-gc and five times that on wasm: run the tier
+you touch. `--shard I/N` splits a selection across machines.
 
 The upstream sources go in `.repos/hol-light`; the reference runs need OCaml
 4.14 with camlp5 and num (see `tools/ocaml_ref`). [PLAN.md](PLAN.md) has the

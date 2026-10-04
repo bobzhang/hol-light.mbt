@@ -18,7 +18,8 @@ side instead of three chain reloads per file (tools/ocaml_ref/theory.py):
    the target, the theorem list, the checks). A target's expected output is
    its chain's logs followed by the child's, which is what a fresh run of
    the reference script prints.
-5. Goldens embedded, `moon test -j 16` on the targets' packages.
+5. Goldens embedded, `moon test --target wasm-gc` on the targets' packages
+   (a fifth of the time wasm takes; tools/test.py runs the suite).
 """
 import os
 import re
@@ -287,7 +288,14 @@ def main():
                 text = re.sub(r"(BEGIN EXTRA[^\n]*\n)(?=[^\n]*END EXTRA)", lambda m: m.group(1) + body, text, count=1)
                 open(path, "w").write(text)
         pkgs[t] = pkg
-    translate(targets, [t for t in targets if resume and translated(t)])
+    done = [t for t in targets if resume and translated(t)]
+    if len(done) == len(targets):
+        # nothing left to translate: no translation session (it would only
+        # load the chains again); the interfaces must still be current
+        os.makedirs(OUT, exist_ok=True)
+        after("nothing: every target is already translated")
+    else:
+        translate(targets, done)
     for t in targets:
         theory.run(["python3", "tools/ocaml_ref/gen_theorems_test.py", pkgs[t], os.path.relpath(refs[t], ROOT),
                     os.path.relpath(tests[t], ROOT)])
@@ -298,7 +306,7 @@ def main():
         theory.run(["python3", "tools/ocaml_ref/embed_golden.py", os.path.relpath(e, ROOT),
                     os.path.relpath(tests[t], ROOT)])
     theory.run(["moon", "fmt"], capture_output=True)
-    args = ["moon", "test", "--target", "wasm", "-j", "16"]
+    args = ["moon", "test", "--target", "wasm-gc", "-j", str(os.cpu_count() or 1)]
     for t in targets:
         args += ["-p", "bobzhang/hol_light/" + pkgs[t]]
     r = subprocess.run(args, cwd=ROOT, capture_output=True, text=True)

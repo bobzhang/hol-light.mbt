@@ -276,6 +276,7 @@ test "{name} matches {name}.ml" {{
   // END EXTRA
   log.attempt("counter_tyvar", () => stm(tm("zz_counter")))
   log.attempt("counter_genvar", () => stm(@basics.genvar(@kernel.bool_ty)))
+  @testkit.check_axioms()
   inspect(@testkit.normalize_times(log.contents()))
 }}
 """
@@ -350,7 +351,8 @@ def main():
     run(["python3", "tools/ocaml_ref/embed_golden.py", os.path.relpath(expected, ROOT), os.path.relpath(test, ROOT)])
     # cheap: translations are formatter-ignored (moon.pkg)
     run(["moon", "fmt"], capture_output=True)
-    t = run(["moon", "test", "--target", "wasm", "-p", "bobzhang/hol_light/" + pkg], capture_output=True, text=True)
+    # wasm-gc: a fifth of the time wasm takes (tools/test.py runs the suite)
+    t = run(["moon", "test", "--target", "wasm-gc", "-p", "bobzhang/hol_light/" + pkg], capture_output=True, text=True)
     log = t.stdout + t.stderr
     stage("moon-test")
     open(os.path.join(REF, "_build", "theory_" + alias + ".log"), "w").write(log)

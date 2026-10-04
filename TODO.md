@@ -11,7 +11,10 @@ this file is what to do next.
   12 others loaded after their anchor).
 - 100/: 25 files (arithmetic .. euler).
 - Each translated file loads identically to upstream (theorem statements,
-  constants, counters): `moon test -j 16` (145 tests, ~5 h).
+  constants, counters) and asserts no axiom but upstream's three
+  (`@testkit.check_axioms`): `tools/test.py all` (wasm-gc, 25 min on 24
+  cores; `--target wasm` takes hours). Tiers: `tools/test.py` (hand-ported
+  core, 10 s), `core`, `library`, `multivariate`, `100`.
 - OCaml `int` is exact 63-bit `Int64`; native (debug) passes too.
 
 ## Resume
@@ -22,16 +25,20 @@ this file is what to do next.
 
 batch.py translates in one OCaml session and checks against one upstream
 session (forked children per file), then runs the new tests with
-`moon test -j 16`. Untranslated dependencies are added as targets. Progress:
+`moon test --target wasm-gc`. Untranslated dependencies are added as targets. Progress:
 `tools/ocaml_ref/_build/batch/translate.log` and `ref.log`. Keep batches to
 ~10-15 files: a failure late in a big batch costs hours.
 
 ## Next
 
 1. **100/ chunk 2** (34 files, pythagoras .. transcendence): translated on
-   branch `wip/100-chunk2`, references and tests not run. Check out the
-   branch, then `batch.py --resume --files <those files>`; commit to main
-   when the tests pass.
+   branch `wip/100-chunk2`, references and tests not run. The translations
+   type-check against the current main (2026-10-04). Take the 34 package
+   directories and their `tools/ocaml_ref/100_*_ref.ml` from the branch
+   (not its batch.py), then `batch.py --resume --files <those files>` (with
+   every target translated it goes straight to the references); the ten
+   files that need only Library/ make a quick first batch. Commit to main
+   when the tests pass. Blocked on the reference toolchain (below).
 2. **100/ remainder**: buffon (Probability), cubic (Complex), dirichlet and
    pnt (Examples/mangoldt.ml), piseries (Examples/machin.ml), thales and
    ceva (Examples/sos.ml, see csdp below).
@@ -41,6 +48,12 @@ session (forked children per file), then runs the new tests with
    first.
 
 ## Open issues
+
+- **Reference toolchain**: run.sh and translate.sh select the opam switch
+  `4.14.1+idea`, which this machine no longer has; the 4.14 switch that
+  exists (`idea-dev`) has num and camlp-streams but no camlp5, so reference
+  runs fail with `No_such_package ("camlp5")`. Install camlp5 8.00 there
+  (or recreate the switch) and fix the switch name in both scripts.
 
 - **Publishing**: mooncakes caps a module at 100 MB unpacked (over it, the
   server answers "Invalid ZIP archive"). `bobzhang/hol_light` 0.1.0 has the
@@ -68,6 +81,14 @@ session (forked children per file), then runs the new tests with
   it reproduces committed goldens byte for byte (the first 100/ chunk)
   before using it. The translation session is still serial (each
   translation needs the previous interfaces from `moon info`).
+- **CI**: none yet. `tools/test.py <tier> --shard I/N` is meant for it: the
+  quick tier on every push, the theory tiers as a matrix (Multivariate is
+  3.7 of the suite's 4.5 CPU hours; building every test executable takes
+  another 10 minutes on 24 cores).
+- **Stale references**: tools/ocaml_ref/num_ref.expected has three lines
+  the test no longer embeds (`int_big`, `int_too_big`, `max_min`), and
+  parser_ref.expected is not what parser_ref_test.mbt embeds; regenerate
+  or delete them.
 - **Native release**: `moon test --release --target native` hits a moonc
   C-backend miscompile; repro in tools/moonbit_bugs/. Retry after a compiler
   update (debug native passes).

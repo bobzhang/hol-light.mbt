@@ -6,6 +6,8 @@ import {
 }
 
 // Values
+pub fn check_axioms() -> Unit raise
+
 pub fn normalize_times(String) -> String
 
 pub fn ocaml_escaped(String) -> String
