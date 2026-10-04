@@ -1,0 +1,132 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/arithmetic/godel"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn closed_not_true() -> @kernel.Thm
+
+pub fn complete_for() -> @kernel.Thm
+
+pub fn complete_sound_sentence() -> @kernel.Thm
+
+pub fn consistent() -> @kernel.Thm
+
+pub fn consistent_alt() -> @kernel.Thm
+
+pub fn definable_by_onevar() -> @kernel.Thm
+
+pub fn delta() -> @kernel.Thm
+
+pub fn fv_gsentence() -> @kernel.Thm
+
+pub fn fv_hsentence() -> @kernel.Thm
+
+pub fn g1() -> @kernel.Thm
+
+pub fn g1_trad() -> @kernel.Thm
+
+pub fn ground() -> @kernel.Thm
+
+pub fn gsentence() -> @kernel.Thm
+
+pub fn gsentence_fix() -> @kernel.Thm
+
+pub fn hsentence() -> @kernel.Thm
+
+pub fn hsentence_fix() -> @kernel.Thm
+
+pub fn hsentence_fix_strong() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn pi() -> @kernel.Thm
+
+pub fn sigma() -> @kernel.Thm
+
+pub fn sigmapi_axiom() -> @kernel.Thm
+
+pub fn sigmapi_cases() -> @kernel.Thm
+
+pub fn sigmapi_clauses() -> @kernel.Thm
+
+pub fn sigmapi_clauses_code() -> @kernel.Thm
+
+pub fn sigmapi_diagonalize() -> @kernel.Thm
+
+pub fn sigmapi_divides() -> @kernel.Thm
+
+pub fn sigmapi_fixpoint() -> @kernel.Thm
+
+pub fn sigmapi_form() -> @kernel.Thm
+
+pub fn sigmapi_form1() -> @kernel.Thm
+
+pub fn sigmapi_formsubst() -> @kernel.Thm
+
+pub fn sigmapi_freeform() -> @kernel.Thm
+
+pub fn sigmapi_freeform1() -> @kernel.Thm
+
+pub fn sigmapi_freeterm() -> @kernel.Thm
+
+pub fn sigmapi_freeterm1() -> @kernel.Thm
+
+pub fn sigmapi_gnumeral() -> @kernel.Thm
+
+pub fn sigmapi_gnumeral1() -> @kernel.Thm
+
+pub fn sigmapi_gsentence() -> @kernel.Thm
+
+pub fn sigmapi_hsentence() -> @kernel.Thm
+
+pub fn sigmapi_induct() -> @kernel.Thm
+
+pub fn sigmapi_mono_lemma() -> @kernel.Thm
+
+pub fn sigmapi_prime() -> @kernel.Thm
+
+pub fn sigmapi_primepow() -> @kernel.Thm
+
+pub fn sigmapi_primrec() -> @kernel.Thm
+
+pub fn sigmapi_primrecstep() -> @kernel.Thm
+
+pub fn sigmapi_prop() -> @kernel.Thm
+
+pub fn sigmapi_prov() -> @kernel.Thm
+
+pub fn sigmapi_prov1() -> @kernel.Thm
+
+pub fn sigmapi_qdiag() -> @kernel.Thm
+
+pub fn sigmapi_qsubst() -> @kernel.Thm
+
+pub fn sigmapi_rev_exists() -> @kernel.Thm
+
+pub fn sigmapi_rev_forall() -> @kernel.Thm
+
+pub fn sigmapi_rtc() -> @kernel.Thm
+
+pub fn sigmapi_rtcp() -> @kernel.Thm
+
+pub fn sigmapi_rules() -> @kernel.Thm
+
+pub fn sigmapi_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn sigmapi_term() -> @kernel.Thm
+
+pub fn sigmapi_term1() -> @kernel.Thm
+
+pub fn sound_for() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

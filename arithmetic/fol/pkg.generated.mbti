@@ -1,0 +1,173 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/arithmetic/fol"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn arithtrue() -> @kernel.Thm
+
+pub fn assign() -> @kernel.Thm
+
+pub fn assign_triv() -> @kernel.Thm
+
+pub fn assign_v1() -> @kernel.Thm
+
+pub fn axiom_cases() -> @kernel.Thm
+
+pub fn axiom_induct() -> @kernel.Thm
+
+pub fn axiom_rules() -> @kernel.Thm
+
+pub fn axioms_true() -> @kernel.Thm
+
+pub fn closed() -> @kernel.Thm
+
+pub fn forall_valmod() -> @kernel.Thm
+
+pub fn form_cases() -> @kernel.Thm
+
+pub fn form_distinct() -> @kernel.Thm
+
+pub fn form_induct() -> @kernel.Thm
+
+pub fn form_inj() -> @kernel.Thm
+
+pub fn form_recursion() -> @kernel.Thm
+
+pub fn formsubst() -> @kernel.Thm
+
+pub fn formsubst_eq() -> @kernel.Thm
+
+pub fn formsubst_fv() -> @kernel.Thm
+
+pub fn formsubst_properties() -> @kernel.Thm
+
+pub fn formsubst_safe_for() -> @kernel.Thm
+
+pub fn formsubst_triv() -> @kernel.Thm
+
+pub fn formsubst_trivial() -> @kernel.Thm
+
+pub fn fv() -> @kernel.Thm
+
+pub fn fv_finite() -> @kernel.Thm
+
+pub fn fv_qsubst() -> @kernel.Thm
+
+pub fn fvt() -> @kernel.Thm
+
+pub fn fvt_finite() -> @kernel.Thm
+
+pub fn fvt_numeral() -> @kernel.Thm
+
+pub fn holds() -> @kernel.Thm
+
+pub fn holds_formsubst() -> @kernel.Thm
+
+pub fn holds_qsubst() -> @kernel.Thm
+
+pub fn holds_valmod_other() -> @kernel.Thm
+
+pub fn holds_valuation() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn max_assoc() -> @kernel.Thm
+
+pub fn max_sym() -> @kernel.Thm
+
+pub fn not_in_variant() -> @kernel.Thm
+
+pub fn numeral() -> @kernel.Thm
+
+pub fn proves_cases() -> @kernel.Thm
+
+pub fn proves_induct() -> @kernel.Thm
+
+pub fn proves_rules() -> @kernel.Thm
+
+pub fn qsubst() -> @kernel.Thm
+
+pub fn safe_for() -> @kernel.Thm
+
+pub fn safe_for_assign() -> @kernel.Thm
+
+pub fn safe_for_v() -> @kernel.Thm
+
+pub fn safe_for_valmod() -> @kernel.Thm
+
+pub fn setmax() -> @kernel.Thm
+
+pub fn setmax_lemma() -> @kernel.Thm
+
+pub fn setmax_member() -> @kernel.Thm
+
+pub fn setmax_thm() -> @kernel.Thm
+
+pub fn setmax_union() -> @kernel.Thm
+
+pub fn term_cases() -> @kernel.Thm
+
+pub fn term_distinct() -> @kernel.Thm
+
+pub fn term_induct() -> @kernel.Thm
+
+pub fn term_inj() -> @kernel.Thm
+
+pub fn term_recursion() -> @kernel.Thm
+
+pub fn termsubst() -> @kernel.Thm
+
+pub fn termsubst_assign() -> @kernel.Thm
+
+pub fn termsubst_eq() -> @kernel.Thm
+
+pub fn termsubst_fvt() -> @kernel.Thm
+
+pub fn termsubst_termsubst() -> @kernel.Thm
+
+pub fn termsubst_triv() -> @kernel.Thm
+
+pub fn termsubst_trivial() -> @kernel.Thm
+
+pub fn termval() -> @kernel.Thm
+
+pub fn termval_numeral() -> @kernel.Thm
+
+pub fn termval_termsubst() -> @kernel.Thm
+
+pub fn termval_valmod_other() -> @kernel.Thm
+
+pub fn termval_valuation() -> @kernel.Thm
+
+pub fn theorems_true() -> @kernel.Thm
+
+pub fn valmod() -> @kernel.Thm
+
+pub fn valmod_basic() -> @kernel.Thm
+
+pub fn valmod_repeat() -> @kernel.Thm
+
+pub fn valmod_swap() -> @kernel.Thm
+
+pub fn valmod_trivial() -> @kernel.Thm
+
+pub fn valmod_v1() -> @kernel.Thm
+
+pub fn valmod_valmod_basic() -> @kernel.Thm
+
+pub fn variant() -> @kernel.Thm
+
+pub fn variant_finite() -> @kernel.Thm
+
+pub fn variant_thm() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

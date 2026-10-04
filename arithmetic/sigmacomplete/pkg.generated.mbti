@@ -1,0 +1,136 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/arithmetic/sigmacomplete"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn add_0() -> @kernel.Thm
+
+pub fn add_0_p() -> @kernel.Thm
+
+pub fn add_0_right() -> @kernel.Thm
+
+pub fn add_suc() -> @kernel.Thm
+
+pub fn add_suc_p() -> @kernel.Thm
+
+pub fn atom_eq_false() -> @kernel.Thm
+
+pub fn atom_eq_true() -> @kernel.Thm
+
+pub fn atom_le_false() -> @kernel.Thm
+
+pub fn atom_le_true() -> @kernel.Thm
+
+pub fn atom_lt_false() -> @kernel.Thm
+
+pub fn atom_lt_true() -> @kernel.Thm
+
+pub fn canonize_clauses() -> @kernel.Thm
+
+pub fn canonize_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn closed_closure() -> @kernel.Thm
+
+pub fn closed_true_or_false() -> @kernel.Thm
+
+pub fn closure() -> @kernel.Thm
+
+pub fn complete() -> @kernel.Thm
+
+pub fn definable_definable_by() -> @kernel.Thm
+
+pub fn definable_onevar() -> @kernel.Thm
+
+pub fn false_imp() -> @kernel.Thm
+
+pub fn formsubst_formsubst_same_none() -> @kernel.Thm
+
+pub fn fv_generalize() -> @kernel.Thm
+
+pub fn g1_robinson() -> @kernel.Thm
+
+pub fn generalize() -> @kernel.Thm
+
+pub fn le_def() -> @kernel.Thm
+
+pub fn le_iff_lt() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn lt_def() -> @kernel.Thm
+
+pub fn lt_def_p() -> @kernel.Thm
+
+pub fn mul_0() -> @kernel.Thm
+
+pub fn mul_0_p() -> @kernel.Thm
+
+pub fn mul_suc() -> @kernel.Thm
+
+pub fn mul_suc_p() -> @kernel.Thm
+
+pub fn not_lt_0() -> @kernel.Thm
+
+pub fn not_suc_eq_0() -> @kernel.Thm
+
+pub fn not_suc_le_0() -> @kernel.Thm
+
+pub fn num_cases() -> @kernel.Thm
+
+pub fn num_cases_p() -> @kernel.Thm
+
+pub fn num_cases_rule() -> @kernel.Thm
+
+pub fn provable_closure() -> @kernel.Thm
+
+pub fn provable_generalize() -> @kernel.Thm
+
+pub fn robinson() -> @kernel.Thm
+
+pub fn semcomplete() -> @kernel.Thm
+
+pub fn semcomplete_imp_complete() -> @kernel.Thm
+
+pub fn semcomplete_sound_eq_consistent() -> @kernel.Thm
+
+pub fn sigma1_complete_add() -> @kernel.Thm
+
+pub fn sigma1_complete_mul() -> @kernel.Thm
+
+pub fn sigma1_complete_term() -> @kernel.Thm
+
+pub fn sigmapi1_complete() -> @kernel.Thm
+
+pub fn sound() -> @kernel.Thm
+
+pub fn sound_closed() -> @kernel.Thm
+
+pub fn sound_imp_consistent() -> @kernel.Thm
+
+pub fn suc_inj() -> @kernel.Thm
+
+pub fn suc_inj_eq() -> @kernel.Thm
+
+pub fn suc_inj_p() -> @kernel.Thm
+
+pub fn suc_le_eq() -> @kernel.Thm
+
+pub fn suc_lt_eq() -> @kernel.Thm
+
+pub fn true_closure() -> @kernel.Thm
+
+pub fn true_generalize() -> @kernel.Thm
+
+pub fn true_imp() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,171 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/arithmetic/arithprov"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn alln() -> @kernel.Thm
+
+pub fn alln_def() -> @kernel.Thm
+
+pub fn arith_axiom() -> @kernel.Thm
+
+pub fn arith_axiom_v1() -> @kernel.Thm
+
+pub fn arith_form() -> @kernel.Thm
+
+pub fn arith_form1() -> @kernel.Thm
+
+pub fn arith_form1_v1() -> @kernel.Thm
+
+pub fn arith_form_v1() -> @kernel.Thm
+
+pub fn arith_freeform() -> @kernel.Thm
+
+pub fn arith_freeform1() -> @kernel.Thm
+
+pub fn arith_freeform1_v1() -> @kernel.Thm
+
+pub fn arith_freeform_v1() -> @kernel.Thm
+
+pub fn arith_freeterm() -> @kernel.Thm
+
+pub fn arith_freeterm1() -> @kernel.Thm
+
+pub fn arith_freeterm1_v1() -> @kernel.Thm
+
+pub fn arith_freeterm_v1() -> @kernel.Thm
+
+pub fn arith_prov() -> @kernel.Thm
+
+pub fn arith_prov1() -> @kernel.Thm
+
+pub fn arith_prov1_v1() -> @kernel.Thm
+
+pub fn arith_prov1_v2() -> @kernel.Thm
+
+pub fn arith_prov_v1() -> @kernel.Thm
+
+pub fn arith_term() -> @kernel.Thm
+
+pub fn arith_term1() -> @kernel.Thm
+
+pub fn arith_term1_v1() -> @kernel.Thm
+
+pub fn arith_term_v1() -> @kernel.Thm
+
+pub fn axiom() -> @kernel.Thm
+
+pub fn axiom_formula() -> @kernel.Thm
+
+pub fn axiom_thm() -> @kernel.Thm
+
+pub fn axiom_thm_strong() -> @kernel.Thm
+
+pub fn form() -> @kernel.Thm
+
+pub fn form1() -> @kernel.Thm
+
+pub fn form_lemma1() -> @kernel.Thm
+
+pub fn form_lemma2() -> @kernel.Thm
+
+pub fn form_thm() -> @kernel.Thm
+
+pub fn freeform() -> @kernel.Thm
+
+pub fn freeform1() -> @kernel.Thm
+
+pub fn freeform_lemma1() -> @kernel.Thm
+
+pub fn freeform_lemma2() -> @kernel.Thm
+
+pub fn freeform_thm() -> @kernel.Thm
+
+pub fn freeterm() -> @kernel.Thm
+
+pub fn freeterm1() -> @kernel.Thm
+
+pub fn freeterm_lemma1() -> @kernel.Thm
+
+pub fn freeterm_lemma2() -> @kernel.Thm
+
+pub fn freeterm_thm() -> @kernel.Thm
+
+pub fn fv_axiom() -> @kernel.Thm
+
+pub fn fv_form() -> @kernel.Thm
+
+pub fn fv_form1() -> @kernel.Thm
+
+pub fn fv_freeform() -> @kernel.Thm
+
+pub fn fv_freeform1() -> @kernel.Thm
+
+pub fn fv_freeterm() -> @kernel.Thm
+
+pub fn fv_freeterm1() -> @kernel.Thm
+
+pub fn fv_prov() -> @kernel.Thm
+
+pub fn fv_prov1() -> @kernel.Thm
+
+pub fn fv_term() -> @kernel.Thm
+
+pub fn fv_term1() -> @kernel.Thm
+
+pub fn gform_cases_alt() -> @kernel.Thm
+
+pub fn godel_crude() -> @kernel.Thm
+
+pub fn gterm_cases_alt() -> @kernel.Thm
+
+pub fn isafform() -> @kernel.Thm
+
+pub fn isafform_v1() -> @kernel.Thm
+
+pub fn isafterm() -> @kernel.Thm
+
+pub fn isafterm_v1() -> @kernel.Thm
+
+pub fn isagform() -> @kernel.Thm
+
+pub fn isagterm() -> @kernel.Thm
+
+pub fn isaprove() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn prov() -> @kernel.Thm
+
+pub fn prov1() -> @kernel.Thm
+
+pub fn prov_definable() -> @kernel.Thm
+
+pub fn prov_lemma1() -> @kernel.Thm
+
+pub fn prov_lemma2() -> @kernel.Thm
+
+pub fn prov_thm() -> @kernel.Thm
+
+pub fn prov_thm_strong() -> @kernel.Thm
+
+pub fn term() -> @kernel.Thm
+
+pub fn term1() -> @kernel.Thm
+
+pub fn term_lemma1() -> @kernel.Thm
+
+pub fn term_lemma2() -> @kernel.Thm
+
+pub fn term_thm() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -573,6 +573,10 @@ module Names = struct
     @ (if lowercase_taken name then [] else [ base ])
     @ [ base ^ "_rule"; base ^ "_thm"; base ^ "_conv"; base ^ "_tac";
         base ^ "_tcl"; base ^ "_" ]
+    (* the lowercase name may have been taken since, by a later file
+       (Arithmetic/derived.ml defines `spec`; bool.ml's SPEC is still
+       `@bool.spec`): the bare name last *)
+    @ (if lowercase_taken name then [ base ] else [])
 
   let root = ref "."
 

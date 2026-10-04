@@ -1,0 +1,275 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/arithmetic/derived"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn add_assum() -> @kernel.Thm
+
+pub fn alliff() -> @kernel.Thm
+
+pub fn allimp() -> @kernel.Thm
+
+pub fn alpha() -> @kernel.Thm
+
+pub fn and_left() -> @kernel.Thm
+
+pub fn and_pair() -> @kernel.Thm
+
+pub fn and_right() -> @kernel.Thm
+
+pub fn ante_conj() -> @kernel.Thm
+
+pub fn ante_disj() -> @kernel.Thm
+
+pub fn assume() -> @kernel.Thm
+
+pub fn axiom_addimp() -> @kernel.Thm
+
+pub fn axiom_allimp() -> @kernel.Thm
+
+pub fn axiom_and() -> @kernel.Thm
+
+pub fn axiom_distribimp() -> @kernel.Thm
+
+pub fn axiom_doubleneg() -> @kernel.Thm
+
+pub fn axiom_eqrefl() -> @kernel.Thm
+
+pub fn axiom_exists() -> @kernel.Thm
+
+pub fn axiom_existseq() -> @kernel.Thm
+
+pub fn axiom_funcong() -> @kernel.Thm
+
+pub fn axiom_iffimp1() -> @kernel.Thm
+
+pub fn axiom_iffimp2() -> @kernel.Thm
+
+pub fn axiom_impall() -> @kernel.Thm
+
+pub fn axiom_impiff() -> @kernel.Thm
+
+pub fn axiom_not() -> @kernel.Thm
+
+pub fn axiom_or() -> @kernel.Thm
+
+pub fn axiom_predcong() -> @kernel.Thm
+
+pub fn axiom_true() -> @kernel.Thm
+
+pub fn bool_cases() -> @kernel.Thm
+
+pub fn complexity() -> @kernel.Thm
+
+pub fn complexity_formsubst() -> @kernel.Thm
+
+pub fn cong_add() -> @kernel.Thm
+
+pub fn cong_eq() -> @kernel.Thm
+
+pub fn cong_le() -> @kernel.Thm
+
+pub fn cong_lt() -> @kernel.Thm
+
+pub fn cong_mul() -> @kernel.Thm
+
+pub fn cong_suc() -> @kernel.Thm
+
+pub fn contrad() -> @kernel.Thm
+
+pub fn contrapos() -> @kernel.Thm
+
+pub fn contrapos_eq() -> @kernel.Thm
+
+pub fn deduction() -> @kernel.Thm
+
+pub fn deduction_lemma() -> @kernel.Thm
+
+pub fn eq_sym() -> @kernel.Thm
+
+pub fn eq_sym_rule() -> @kernel.Thm
+
+pub fn eq_trans() -> @kernel.Thm
+
+pub fn eq_trans_imp() -> @kernel.Thm
+
+pub fn eq_trans_rule() -> @kernel.Thm
+
+pub fn ex_falso() -> @kernel.Thm
+
+pub fn exiff() -> @kernel.Thm
+
+pub fn eximp() -> @kernel.Thm
+
+pub fn exists_imp() -> @kernel.Thm
+
+pub fn exists_intro() -> @kernel.Thm
+
+pub fn formsubst_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn formsubst_twice() -> @kernel.Thm
+
+pub fn formsubst_twice_general() -> @kernel.Thm
+
+pub fn fv_subset_vars() -> @kernel.Thm
+
+pub fn fv_theorems() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn gen() -> @kernel.Thm
+
+pub fn gen_right() -> @kernel.Thm
+
+pub fn gen_rule(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn gen_tac(Int64) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn genimp() -> @kernel.Thm
+
+pub fn gens_tac(@list.List[Int64], (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn ichoose() -> @kernel.Thm
+
+pub fn icongruence() -> @kernel.Thm
+
+pub fn icongruence_general() -> @kernel.Thm
+
+pub fn icongruence_var() -> @kernel.Thm
+
+pub fn iexists() -> @kernel.Thm
+
+pub fn iff_def() -> @kernel.Thm
+
+pub fn iff_imp1() -> @kernel.Thm
+
+pub fn iff_imp2() -> @kernel.Thm
+
+pub fn iff_refl() -> @kernel.Thm
+
+pub fn iff_sym() -> @kernel.Thm
+
+pub fn iff_trans() -> @kernel.Thm
+
+pub fn imp_add_assum() -> @kernel.Thm
+
+pub fn imp_add_concl() -> @kernel.Thm
+
+pub fn imp_antisym() -> @kernel.Thm
+
+pub fn imp_contr() -> @kernel.Thm
+
+pub fn imp_contrf() -> @kernel.Thm
+
+pub fn imp_false_rule() -> @kernel.Thm
+
+pub fn imp_insert() -> @kernel.Thm
+
+pub fn imp_mono_th() -> @kernel.Thm
+
+pub fn imp_refl() -> @kernel.Thm
+
+pub fn imp_swap() -> @kernel.Thm
+
+pub fn imp_swap_th() -> @kernel.Thm
+
+pub fn imp_trans() -> @kernel.Thm
+
+pub fn imp_trans2() -> @kernel.Thm
+
+pub fn imp_trans_chain_2() -> @kernel.Thm
+
+pub fn imp_trans_th() -> @kernel.Thm
+
+pub fn imp_true_rule() -> @kernel.Thm
+
+pub fn imp_truefalse() -> @kernel.Thm
+
+pub fn imp_unduplicate() -> @kernel.Thm
+
+pub fn impex() -> @kernel.Thm
+
+pub fn in_fv_rule(@list.List[@kernel.Thm], @kernel.Term) -> @kernel.Thm raise
+
+pub fn instantiate_rule(@list.List[(@kernel.Term, Int64)], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn instantiation() -> @kernel.Thm
+
+pub fn ispec() -> @kernel.Thm
+
+pub fn ispec_lemma() -> @kernel.Thm
+
+pub fn isubst() -> @kernel.Thm
+
+pub fn isubst_general() -> @kernel.Thm
+
+pub fn isubst_var() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn meta_and() -> @kernel.Thm
+
+pub fn modusponens() -> @kernel.Thm
+
+pub fn negatef() -> @kernel.Thm
+
+pub fn negativef() -> @kernel.Thm
+
+pub fn not_not() -> @kernel.Thm
+
+pub fn not_not_false() -> @kernel.Thm
+
+pub fn or_left() -> @kernel.Thm
+
+pub fn or_right() -> @kernel.Thm
+
+pub fn proves_mono() -> @kernel.Thm
+
+pub fn safe_for_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn shunt() -> @kernel.Thm
+
+pub fn spec() -> @kernel.Thm
+
+pub fn spec_all_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn spec_right() -> @kernel.Thm
+
+pub fn spec_rule(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn spec_var() -> @kernel.Thm
+
+pub fn spec_var_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn specl_rule(@list.List[@kernel.Term], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn subalpha() -> @kernel.Thm
+
+pub fn subspec() -> @kernel.Thm
+
+pub fn termsubst_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn termsubst_numeral() -> @kernel.Thm
+
+pub fn termsubst_twice() -> @kernel.Thm
+
+pub fn termsubst_twice_general() -> @kernel.Thm
+
+pub fn truth() -> @kernel.Thm
+
+pub fn valmod_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn vars() -> @kernel.Thm
+
+pub fn vars_finite() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
