@@ -52,6 +52,13 @@ Each theory's test loads its whole chain in a fresh process, so the suite
 is 4.5 hours of CPU on wasm-gc and five times that on wasm: run the tier
 you touch. `--shard I/N` splits a selection across machines.
 
-The upstream sources go in `.repos/hol-light`; the reference runs need OCaml
-4.14 with camlp5 and num (see `tools/ocaml_ref`). [PLAN.md](PLAN.md) has the
-design, decisions and known limitations.
+The upstream sources go in `.repos/hol-light`. The reference runs use the
+opam switch `hol-light` (or `$HOL_LIGHT_SWITCH`):
+
+```
+opam switch create hol-light ocaml-base-compiler.4.14.1 --no-switch
+opam install --switch=hol-light camlp5.8.02.01 num camlp-streams ocamlfind
+```
+
+[PLAN.md](PLAN.md) has the design, decisions and known limitations;
+[TODO.md](TODO.md) the plan for what is left.

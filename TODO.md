@@ -29,31 +29,52 @@ session (forked children per file), then runs the new tests with
 `tools/ocaml_ref/_build/batch/translate.log` and `ref.log`. Keep batches to
 ~10-15 files: a failure late in a big batch costs hours.
 
-## Next
+## Plan to finish
 
-1. **100/ chunk 2** (34 files, pythagoras .. transcendence): translated on
-   branch `wip/100-chunk2`, references and tests not run. The translations
-   type-check against the current main (2026-10-04). Take the 34 package
-   directories and their `tools/ocaml_ref/100_*_ref.ml` from the branch
-   (not its batch.py), then `batch.py --resume --files <those files>` (with
-   every target translated it goes straight to the references); the ten
-   files that need only Library/ make a quick first batch. Commit to main
-   when the tests pass. Blocked on the reference toolchain (below).
-2. **100/ remainder**: buffon (Probability), cubic (Complex), dirichlet and
-   pnt (Examples/mangoldt.ml), piseries (Examples/machin.ml), thales and
-   ceva (Examples/sos.ml, see csdp below).
-3. **Probability/** (97k lines), then Jordan/ (75k), Examples/ (30k),
-   RichterHilbertAxiomGeometry/, Divstep/, Rqe/, Logic/, the smaller theory
-   directories, Autoformalization/ (205k). Check each for external tools
-   first.
+Upstream has about 1.25M lines; 500K are ported. What is left, in the
+order to do it (dependencies first, cheap before expensive). Every step
+is the same loop: `batch.py --files ...` in batches of 10-15 files,
+`tools/test.py <tier>`, commit. Check a directory for external programs
+and file I/O before starting it.
+
+1. **Reference toolchain** (done): the opam switch `hol-light` (README.md)
+   reproduces the committed goldens byte for byte (theorems, class,
+   Library/prime, 100/fta). kernel_ref.ml no longer runs upstream (it
+   builds `Tyvar "Z"` directly; `hol_type` is private): rewrite it with
+   `mk_vartype`.
+2. **100/ chunk 2** (34 files, 61K lines; translated on `wip/100-chunk2`,
+   type-checks against main): take the package directories and their
+   `tools/ocaml_ref/100_*_ref.ml` from the branch (not its batch.py), then
+   `batch.py --resume --files ...` in three batches: the ten files that
+   need only Library/, those up to Multivariate/measure, the rest
+   (transcendence alone is 24K lines).
+3. **Package aliases** (blocks 5 and 6): the override table described
+   under Open issues, before the first colliding directory.
+4. **Small directories that need only the core or Library/** (63K lines):
+   Complex, Arithmetic, Permutation, Ntrie, IsabelleLight, Boyer_Moore, GL,
+   Model, EC, Divstep, Rqe. Then 100/cubic (Complex).
+5. **Examples/** (30K) and Logic/ (17K, needs two Examples files). sos.ml
+   needs csdp and three files need Minisat/Cadical/miz3/Rqe: those wait
+   for step 8. Then 100/dirichlet, pnt (mangoldt.ml), piseries (machin.ml).
+6. **Directories on top of Multivariate/** (220K): Quaternions,
+   Geometric_Algebra, Functionspaces, Unity, Mizarlight, Probability
+   (97K; then 100/buffon), Jordan (75K; needs Rqe and Examples),
+   RichterHilbertAxiomGeometry (36K; needs miz3), WZ.
+7. **Autoformalization/** (205K): seven large files, a batch each.
+8. **External programs and other formats**: each needs a decision first.
+   - Minisat, Cadical, QBF (SAT/QBF solver proofs) and Examples/sos.ml
+     (csdp): replay recorded solver output, as lib/gp.mbt does for PARI/GP.
+     Then 100/thales and ceva.
+   - miz3 (its own proof language, evaluated at run time), LP_arith.
+   - Formal_ineqs (44K) and IEEE (10K): `.hl` files; check what loads them.
+   - Tutorial/, UnitTests/: scripts over the above; port as tests.
+   - Not theories, not ported: Proofrecording (a second kernel), ProofTrace,
+     mcp, update_database, help.ml/database.ml, tactician_light.ml.
+9. **Closing**: regenerate everything once (retranslate_all.py), the whole
+   suite on wasm (`tools/test.py all --target wasm`), CI with shards,
+   separate mooncakes modules per directory, README.
 
 ## Open issues
-
-- **Reference toolchain**: run.sh and translate.sh select the opam switch
-  `4.14.1+idea`, which this machine no longer has; the 4.14 switch that
-  exists (`idea-dev`) has num and camlp-streams but no camlp5, so reference
-  runs fail with `No_such_package ("camlp5")`. Install camlp5 8.00 there
-  (or recreate the switch) and fix the switch name in both scripts.
 
 - **Publishing**: mooncakes caps a module at 100 MB unpacked (over it, the
   server answers "Invalid ZIP archive"). `bobzhang/hol_light` 0.1.0 has the

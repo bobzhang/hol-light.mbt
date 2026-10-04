@@ -8,7 +8,7 @@
 # loaded with pa_j phrase by phrase, recording where each value is defined.
 set -e
 cd "$(dirname "$0")"
-eval "$(opam env --switch=4.14.1+idea --set-switch 2>/dev/null)" || true
+eval "$(opam env --switch="${HOL_LIGHT_SWITCH:-hol-light}" --set-switch 2>/dev/null)" || true
 H="$(cd ../../.repos/hol-light && pwd)"
 ROOT="$(cd ../.. && pwd)"
 [ -f _build/holtop ] || ocamlfind ocamlmktop -o _build/holtop

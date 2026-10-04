@@ -1,10 +1,11 @@
 #!/bin/sh
 # Run a reference script against the upstream HOL Light sources.
 #   tools/ocaml_ref/run.sh kernel_ref.ml
-# Requires opam switch with OCaml 4.14, camlp5 8.00, num, camlp-streams.
+# Requires the opam switch `hol-light` (or $HOL_LIGHT_SWITCH): OCaml 4.14.1,
+# camlp5 8.02.01, num, camlp-streams, ocamlfind (see README.md).
 set -e
 cd "$(dirname "$0")"
-eval "$(opam env --switch=4.14.1+idea --set-switch 2>/dev/null)" || true
+eval "$(opam env --switch="${HOL_LIGHT_SWITCH:-hol-light}" --set-switch 2>/dev/null)" || true
 H=../../.repos/hol-light
 if [ ! -f _build/pa_j.cmo ]; then
   mkdir -p _build

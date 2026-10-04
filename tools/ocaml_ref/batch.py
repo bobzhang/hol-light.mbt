@@ -212,7 +212,7 @@ def references(targets, refs):
     env = os.environ.copy()
     rlog = os.path.join(OUT, "ref.log")
     with open(rlog, "w") as lf:
-        p = subprocess.run(["sh", "-c", 'eval "$(opam env --switch=4.14.1+idea --set-switch 2>/dev/null)"; '
+        p = subprocess.run(["sh", "-c", 'eval "$(opam env --switch="${HOL_LIGHT_SWITCH:-hol-light}" --set-switch 2>/dev/null)"; '
                             f'ocaml -w -a -alert -all -I {HOL} -I _build {script}'],
                            cwd=REF, stdout=lf, stderr=subprocess.STDOUT, env=env)
     if p.returncode != 0:
