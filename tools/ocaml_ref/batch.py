@@ -4,6 +4,7 @@ side instead of three chain reloads per file (tools/ocaml_ref/theory.py):
 
   python3 tools/ocaml_ref/batch.py Multivariate/polytope.ml [Multivariate/x.ml]
     (from the first file to the last, inclusive, in theory.MV_ORDER)
+  python3 tools/ocaml_ref/batch.py --files 100/ballot.ml 100/bertrand.ml ...
 
 1. Package set-up and test files for every target (theory.setup,
    theory.write_tests).
@@ -224,15 +225,30 @@ def main():
     if sys.argv[1] == "after":
         after(sys.argv[2])
         return
-    first = sys.argv[1]
-    last = sys.argv[2] if len(sys.argv) > 2 else first
     order = theory.MV_ORDER
-    targets = order[order.index(first):order.index(last) + 1]
+    if sys.argv[1] == "--files":
+        # explicit targets (any directory), e.g. `--files 100/*.ml`
+        targets = [ml_file(os.path.relpath(f, HOL) if os.path.isabs(f) else f) for f in sys.argv[2:]]
+    else:
+        first = sys.argv[1]
+        last = sys.argv[2] if len(sys.argv) > 2 else first
+        targets = order[order.index(first):order.index(last) + 1]
+    # dependencies not translated yet are targets too, before their users
+    def translated(f):
+        pkg = theory.pkg_of(f)
+        alias = pkg.split("/")[-1]
+        return os.path.exists(os.path.join(ROOT, pkg, alias + ("_ml" if alias.endswith("test") else "") + ".mbt"))
+    expanded = []
+    for t in targets:
+        for d in theory.deps(t) + [t]:
+            if d not in expanded and (d in targets or not translated(d)):
+                expanded.append(d)
+    targets = expanded
     refs, tests, pkgs = {}, {}, {}
     # the Multivariate packages already in the chain load in the current
     # order (their init.mbt and moon.pkg are regenerated)
-    for d in theory.deps(targets[0]):
-        if d in order:
+    for d in dict.fromkeys(d for t in targets for d in theory.deps(t)):
+        if d in order and d not in targets:
             theory.setup(d)
     for t in targets:
         pkg, alias, name = theory.setup(t)

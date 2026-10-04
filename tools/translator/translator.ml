@@ -470,10 +470,11 @@ end
 module Names = struct
   (* Upstream file -> MoonBit package. *)
   let package_of_file = function
-    | f when String.length f > 8 && String.sub f 0 8 = "Library/" ->
-        Some ("library/" ^ Filename.remove_extension (String.sub f 8 (String.length f - 8)))
-    | f when String.length f > 13 && String.sub f 0 13 = "Multivariate/" ->
-        Some ("multivariate/" ^ Filename.remove_extension (String.sub f 13 (String.length f - 13)))
+    | f when String.contains f '/' ->
+        (* `Library/prime.ml` -> `library/prime` (theory.py's pkg_of) *)
+        let i = String.index f '/' in
+        Some (String.lowercase_ascii (String.sub f 0 i) ^ "/"
+              ^ Filename.remove_extension (String.sub f (i + 1) (String.length f - i - 1)))
     | "lib.ml" -> Some "lib"
     | "ocaml_map.ml" -> Some "omap"
     | "define.ml" -> Some "define"

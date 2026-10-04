@@ -144,7 +144,8 @@ def _deps(f):
         if stem(g) in CORE or stem(g) in LOADED or g in seen or g in visiting:
             return
         visiting.append(g)
-        for h in needs(g):
+        # as g's load(): its predecessor's chain first, then what it needs
+        for h in ([chain_prev(g)] if chain_prev(g) else []) + list(needs(g)):
             visit(h)
         seen.append(g)
 
