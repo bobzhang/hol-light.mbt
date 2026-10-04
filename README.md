@@ -14,7 +14,9 @@ constructs theorems only through its API.
   `define`) are translated.
 - **Library/**: every file but `tactician_light.ml` (`library/<name>`).
 - **Multivariate/**: all 32 theory files (`multivariate/<name>`).
-- **100/**: 25 files so far (`100/<name>`).
+- **100/**: 59 of 67 files (`100/<name>`); the rest wait for other
+  directories.
+- **Complex/**: all 9 files (`complex/<name>`).
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the
 registry caps a module at 100 MB); Multivariate/, 100/ and the translation

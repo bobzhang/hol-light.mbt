@@ -1,0 +1,337 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/complex/complexnumbers"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn cnj() -> @kernel.Thm
+
+pub fn cnj_add() -> @kernel.Thm
+
+pub fn cnj_cnj() -> @kernel.Thm
+
+pub fn cnj_cx() -> @kernel.Thm
+
+pub fn cnj_div() -> @kernel.Thm
+
+pub fn cnj_inj() -> @kernel.Thm
+
+pub fn cnj_inv() -> @kernel.Thm
+
+pub fn cnj_mul() -> @kernel.Thm
+
+pub fn cnj_neg() -> @kernel.Thm
+
+pub fn cnj_pow() -> @kernel.Thm
+
+pub fn cnj_sub() -> @kernel.Thm
+
+pub fn complex() -> @kernel.Thm
+
+pub fn complex_abs_norm() -> @kernel.Thm
+
+pub fn complex_add() -> @kernel.Thm
+
+pub fn complex_add2_sub2() -> @kernel.Thm
+
+pub fn complex_add_ac() -> @kernel.Thm
+
+pub fn complex_add_assoc() -> @kernel.Thm
+
+pub fn complex_add_ldistrib() -> @kernel.Thm
+
+pub fn complex_add_lid() -> @kernel.Thm
+
+pub fn complex_add_linv() -> @kernel.Thm
+
+pub fn complex_add_rdistrib() -> @kernel.Thm
+
+pub fn complex_add_rid() -> @kernel.Thm
+
+pub fn complex_add_rinv() -> @kernel.Thm
+
+pub fn complex_add_sub() -> @kernel.Thm
+
+pub fn complex_add_sub2() -> @kernel.Thm
+
+pub fn complex_add_sym() -> @kernel.Thm
+
+pub fn complex_diffsq() -> @kernel.Thm
+
+pub fn complex_div() -> @kernel.Thm
+
+pub fn complex_div_lmul() -> @kernel.Thm
+
+pub fn complex_div_refl() -> @kernel.Thm
+
+pub fn complex_div_rmul() -> @kernel.Thm
+
+pub fn complex_entire() -> @kernel.Thm
+
+pub fn complex_eq() -> @kernel.Thm
+
+pub fn complex_eq_add_lcancel() -> @kernel.Thm
+
+pub fn complex_eq_add_lcancel_0() -> @kernel.Thm
+
+pub fn complex_eq_add_rcancel() -> @kernel.Thm
+
+pub fn complex_eq_add_rcancel_0() -> @kernel.Thm
+
+pub fn complex_eq_mul_lcancel() -> @kernel.Thm
+
+pub fn complex_eq_mul_rcancel() -> @kernel.Thm
+
+pub fn complex_eq_neg2() -> @kernel.Thm
+
+pub fn complex_eq_sub_ladd() -> @kernel.Thm
+
+pub fn complex_eq_sub_radd() -> @kernel.Thm
+
+pub fn complex_field(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_ideal_cofactors(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @list.List[@kernel.Term] raise) raise
+
+pub fn complex_inv() -> @kernel.Thm
+
+pub fn complex_inv_0() -> @kernel.Thm
+
+pub fn complex_inv_1() -> @kernel.Thm
+
+pub fn complex_inv_inv() -> @kernel.Thm
+
+pub fn complex_inv_mul() -> @kernel.Thm
+
+pub fn complex_lneg_uniq() -> @kernel.Thm
+
+pub fn complex_mul() -> @kernel.Thm
+
+pub fn complex_mul_2() -> @kernel.Thm
+
+pub fn complex_mul_ac() -> @kernel.Thm
+
+pub fn complex_mul_assoc() -> @kernel.Thm
+
+pub fn complex_mul_lid() -> @kernel.Thm
+
+pub fn complex_mul_linv() -> @kernel.Thm
+
+pub fn complex_mul_linv_uniq() -> @kernel.Thm
+
+pub fn complex_mul_lneg() -> @kernel.Thm
+
+pub fn complex_mul_lzero() -> @kernel.Thm
+
+pub fn complex_mul_rid() -> @kernel.Thm
+
+pub fn complex_mul_rinv() -> @kernel.Thm
+
+pub fn complex_mul_rinv_uniq() -> @kernel.Thm
+
+pub fn complex_mul_rneg() -> @kernel.Thm
+
+pub fn complex_mul_rzero() -> @kernel.Thm
+
+pub fn complex_mul_sym() -> @kernel.Thm
+
+pub fn complex_neg() -> @kernel.Thm
+
+pub fn complex_neg_0() -> @kernel.Thm
+
+pub fn complex_neg_add() -> @kernel.Thm
+
+pub fn complex_neg_eq() -> @kernel.Thm
+
+pub fn complex_neg_eq_0() -> @kernel.Thm
+
+pub fn complex_neg_lmul() -> @kernel.Thm
+
+pub fn complex_neg_minus1() -> @kernel.Thm
+
+pub fn complex_neg_mul2() -> @kernel.Thm
+
+pub fn complex_neg_neg() -> @kernel.Thm
+
+pub fn complex_neg_rmul() -> @kernel.Thm
+
+pub fn complex_neg_sub() -> @kernel.Thm
+
+pub fn complex_norm() -> @kernel.Thm
+
+pub fn complex_norm_0() -> @kernel.Thm
+
+pub fn complex_norm_abs_norm() -> @kernel.Thm
+
+pub fn complex_norm_cnj() -> @kernel.Thm
+
+pub fn complex_norm_cx() -> @kernel.Thm
+
+pub fn complex_norm_cx_v1() -> @kernel.Thm
+
+pub fn complex_norm_div() -> @kernel.Thm
+
+pub fn complex_norm_inv() -> @kernel.Thm
+
+pub fn complex_norm_mul() -> @kernel.Thm
+
+pub fn complex_norm_neg() -> @kernel.Thm
+
+pub fn complex_norm_num() -> @kernel.Thm
+
+pub fn complex_norm_nz() -> @kernel.Thm
+
+pub fn complex_norm_pos() -> @kernel.Thm
+
+pub fn complex_norm_pow() -> @kernel.Thm
+
+pub fn complex_norm_triangle() -> @kernel.Thm
+
+pub fn complex_norm_triangle_sub() -> @kernel.Thm
+
+pub fn complex_norm_zero() -> @kernel.Thm
+
+pub fn complex_poly_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_poly_clauses() -> @kernel.Thm
+
+pub fn complex_poly_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_poly_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_poly_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_poly_neg_clauses() -> @kernel.Thm
+
+pub fn complex_poly_neg_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_poly_pow_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_poly_sub_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_pow() -> @kernel.Thm
+
+pub fn complex_pow_1() -> @kernel.Thm
+
+pub fn complex_pow_2() -> @kernel.Thm
+
+pub fn complex_pow_add() -> @kernel.Thm
+
+pub fn complex_pow_div() -> @kernel.Thm
+
+pub fn complex_pow_eq_0() -> @kernel.Thm
+
+pub fn complex_pow_ii_2() -> @kernel.Thm
+
+pub fn complex_pow_inv() -> @kernel.Thm
+
+pub fn complex_pow_mul() -> @kernel.Thm
+
+pub fn complex_pow_neg() -> @kernel.Thm
+
+pub fn complex_pow_one() -> @kernel.Thm
+
+pub fn complex_pow_pow() -> @kernel.Thm
+
+pub fn complex_rat_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_rat_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_rat_inv_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_rat_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_rat_pow_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_ring(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_rneg_uniq() -> @kernel.Thm
+
+pub fn complex_sub() -> @kernel.Thm
+
+pub fn complex_sub_0() -> @kernel.Thm
+
+pub fn complex_sub_add() -> @kernel.Thm
+
+pub fn complex_sub_add2() -> @kernel.Thm
+
+pub fn complex_sub_ldistrib() -> @kernel.Thm
+
+pub fn complex_sub_lneg() -> @kernel.Thm
+
+pub fn complex_sub_lzero() -> @kernel.Thm
+
+pub fn complex_sub_neg2() -> @kernel.Thm
+
+pub fn complex_sub_rdistrib() -> @kernel.Thm
+
+pub fn complex_sub_refl() -> @kernel.Thm
+
+pub fn complex_sub_rneg() -> @kernel.Thm
+
+pub fn complex_sub_rzero() -> @kernel.Thm
+
+pub fn complex_sub_sub() -> @kernel.Thm
+
+pub fn complex_sub_sub2() -> @kernel.Thm
+
+pub fn complex_sub_triangle() -> @kernel.Thm
+
+pub fn complex_tybij() -> @kernel.Thm
+
+pub fn complex_tybij_raw() -> @kernel.Thm
+
+pub fn cx_abs() -> @kernel.Thm
+
+pub fn cx_add() -> @kernel.Thm
+
+pub fn cx_def() -> @kernel.Thm
+
+pub fn cx_div() -> @kernel.Thm
+
+pub fn cx_inj() -> @kernel.Thm
+
+pub fn cx_inv() -> @kernel.Thm
+
+pub fn cx_mul() -> @kernel.Thm
+
+pub fn cx_neg() -> @kernel.Thm
+
+pub fn cx_pow() -> @kernel.Thm
+
+pub fn cx_sub() -> @kernel.Thm
+
+pub fn dest_complex_const(@kernel.Term) -> @num.Num raise
+
+pub fn ii() -> @kernel.Thm
+
+pub fn im() -> @kernel.Thm
+
+pub fn im_def() -> @kernel.Thm
+
+pub fn is_complex_const(@kernel.Term) -> Bool raise
+
+pub fn load() -> Unit
+
+pub fn mk_complex_const(@num.Num) -> @kernel.Term raise
+
+pub fn prioritize_complex(Unit) -> Unit raise
+
+pub fn re() -> @kernel.Thm
+
+pub fn re_def() -> @kernel.Thm
+
+pub fn simple_complex_arith(@kernel.Term) -> @kernel.Thm raise
+
+pub fn simple_complex_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

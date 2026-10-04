@@ -1,0 +1,181 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/complex/cpoly"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn complex_rat_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_rat_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn complex_rat_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn degree() -> @kernel.Thm
+
+pub fn degree_welldef() -> @kernel.Thm
+
+pub fn degree_zero() -> @kernel.Thm
+
+pub fn divides() -> @kernel.Thm
+
+pub fn finite_lemma() -> @kernel.Thm
+
+pub fn last_linear_mul() -> @kernel.Thm
+
+pub fn last_linear_mul_lemma() -> @kernel.Thm
+
+pub fn length_normalize_le() -> @kernel.Thm
+
+pub fn linear_mul_degree() -> @kernel.Thm
+
+pub fn linear_pow_mul_degree() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn normal_degree() -> @kernel.Thm
+
+pub fn normal_normalize() -> @kernel.Thm
+
+pub fn normalize() -> @kernel.Thm
+
+pub fn normalize_eq() -> @kernel.Thm
+
+pub fn order() -> @kernel.Thm
+
+pub fn order_decomp() -> @kernel.Thm
+
+pub fn order_degree() -> @kernel.Thm
+
+pub fn order_divides() -> @kernel.Thm
+
+pub fn order_mul() -> @kernel.Thm
+
+pub fn order_poly() -> @kernel.Thm
+
+pub fn order_root() -> @kernel.Thm
+
+pub fn order_thm() -> @kernel.Thm
+
+pub fn order_unique() -> @kernel.Thm
+
+pub fn order_v1() -> @kernel.Thm
+
+pub fn poly() -> @kernel.Thm
+
+pub fn poly_add() -> @kernel.Thm
+
+pub fn poly_add_clauses() -> @kernel.Thm
+
+pub fn poly_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn poly_add_rzero() -> @kernel.Thm
+
+pub fn poly_add_v1() -> @kernel.Thm
+
+pub fn poly_cmul() -> @kernel.Thm
+
+pub fn poly_cmul_clauses() -> @kernel.Thm
+
+pub fn poly_cmul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn poly_cmul_v1() -> @kernel.Thm
+
+pub fn poly_cons_eq() -> @kernel.Thm
+
+pub fn poly_divides_add() -> @kernel.Thm
+
+pub fn poly_divides_exp() -> @kernel.Thm
+
+pub fn poly_divides_refl() -> @kernel.Thm
+
+pub fn poly_divides_sub() -> @kernel.Thm
+
+pub fn poly_divides_sub2() -> @kernel.Thm
+
+pub fn poly_divides_trans() -> @kernel.Thm
+
+pub fn poly_divides_zero() -> @kernel.Thm
+
+pub fn poly_entire() -> @kernel.Thm
+
+pub fn poly_entire_lemma() -> @kernel.Thm
+
+pub fn poly_exp() -> @kernel.Thm
+
+pub fn poly_exp_add() -> @kernel.Thm
+
+pub fn poly_exp_divides() -> @kernel.Thm
+
+pub fn poly_exp_eq_0() -> @kernel.Thm
+
+pub fn poly_exp_prime_eq_0() -> @kernel.Thm
+
+pub fn poly_exp_v1() -> @kernel.Thm
+
+pub fn poly_length_mul() -> @kernel.Thm
+
+pub fn poly_linear_divides() -> @kernel.Thm
+
+pub fn poly_linear_rem() -> @kernel.Thm
+
+pub fn poly_mul() -> @kernel.Thm
+
+pub fn poly_mul_assoc() -> @kernel.Thm
+
+pub fn poly_mul_clauses() -> @kernel.Thm
+
+pub fn poly_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn poly_mul_lcancel() -> @kernel.Thm
+
+pub fn poly_mul_v1() -> @kernel.Thm
+
+pub fn poly_neg() -> @kernel.Thm
+
+pub fn poly_neg_clauses() -> @kernel.Thm
+
+pub fn poly_neg_v1() -> @kernel.Thm
+
+pub fn poly_normalize() -> @kernel.Thm
+
+pub fn poly_normalize_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn poly_normalize_eq() -> @kernel.Thm
+
+pub fn poly_normalize_eq_lemma() -> @kernel.Thm
+
+pub fn poly_normalize_zero() -> @kernel.Thm
+
+pub fn poly_order() -> @kernel.Thm
+
+pub fn poly_order_exists() -> @kernel.Thm
+
+pub fn poly_prime_eq_0() -> @kernel.Thm
+
+pub fn poly_primes() -> @kernel.Thm
+
+pub fn poly_roots_finite() -> @kernel.Thm
+
+pub fn poly_roots_finite_lemma() -> @kernel.Thm
+
+pub fn poly_roots_finite_set() -> @kernel.Thm
+
+pub fn poly_roots_index_lemma() -> @kernel.Thm
+
+pub fn poly_roots_index_length() -> @kernel.Thm
+
+pub fn poly_zero() -> @kernel.Thm
+
+pub fn poly_zero_lemma() -> @kernel.Thm
+
+pub fn simple_complex_arith(@kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

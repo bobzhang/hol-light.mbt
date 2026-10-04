@@ -1,0 +1,61 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/complex/fundamental"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn bolzano_weierstrass_complex_disc() -> @kernel.Thm
+
+pub fn constant() -> @kernel.Thm
+
+pub fn fundamental_theorem_of_algebra() -> @kernel.Thm
+
+pub fn fundamental_theorem_of_algebra_alt() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn metric_bound_lemma() -> @kernel.Thm
+
+pub fn nonconstant_length() -> @kernel.Thm
+
+pub fn poly_0() -> @kernel.Thm
+
+pub fn poly_bound_exists() -> @kernel.Thm
+
+pub fn poly_cmul_map() -> @kernel.Thm
+
+pub fn poly_cont() -> @kernel.Thm
+
+pub fn poly_decompose() -> @kernel.Thm
+
+pub fn poly_decompose_lemma() -> @kernel.Thm
+
+pub fn poly_infinity() -> @kernel.Thm
+
+pub fn poly_minimum_modulus() -> @kernel.Thm
+
+pub fn poly_minimum_modulus_disc() -> @kernel.Thm
+
+pub fn poly_offset() -> @kernel.Thm
+
+pub fn poly_offset_lemma() -> @kernel.Thm
+
+pub fn poly_replicate_append() -> @kernel.Thm
+
+pub fn reduce_poly_simple() -> @kernel.Thm
+
+pub fn sqrt_sos_eq_1() -> @kernel.Thm
+
+pub fn sqrt_sos_lt_1() -> @kernel.Thm
+
+pub fn unimodular_reduce_norm() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

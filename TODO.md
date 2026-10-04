@@ -9,7 +9,11 @@ this file is what to do next.
 - Library/: every file except `tactician_light.ml`.
 - Multivariate/: all 32 theory files (make.ml/make_complex.ml order, plus the
   12 others loaded after their anchor).
-- 100/: 25 files (arithmetic .. euler).
+- 100/: 59 of 67 files. Left: cubic (Complex, now possible), buffon
+  (Probability), dirichlet and pnt (Examples/mangoldt.ml), piseries
+  (Examples/machin.ml), thales and ceva (Examples/sos.ml), and
+  e_is_transcendental (fails upstream).
+- Complex/: all 9 files, loaded in make.ml's order.
 - Each translated file loads identically to upstream (theorem statements,
   constants, counters) and asserts no axiom but upstream's three
   (`@testkit.check_axioms`): `tools/test.py all` (wasm-gc, 25 min on 24
@@ -42,17 +46,17 @@ and file I/O before starting it.
    Library/prime, 100/fta). kernel_ref.ml no longer runs upstream (it
    builds `Tyvar "Z"` directly; `hol_type` is private): rewrite it with
    `mk_vartype`.
-2. **100/ chunk 2** (34 files, 61K lines; translated on `wip/100-chunk2`,
-   type-checks against main): take the package directories and their
-   `tools/ocaml_ref/100_*_ref.ml` from the branch (not its batch.py), then
-   `batch.py --resume --files ...` in three batches: the ten files that
-   need only Library/, those up to Multivariate/measure, the rest
-   (transcendence alone is 24K lines).
+2. **100/ chunk 2** (done): 34 files, taken from `wip/100-chunk2` and
+   checked in four batches.
 3. **Package aliases** (blocks 5 and 6): the override table described
    under Open issues, before the first colliding directory.
 4. **Small directories that need only the core or Library/** (63K lines):
-   Complex, Arithmetic, Permutation, Ntrie, IsabelleLight, Boyer_Moore, GL,
-   Model, EC, Divstep, Rqe. Then 100/cubic (Complex).
+   Complex (done), then 100/cubic; Arithmetic, Permutation, Ntrie,
+   IsabelleLight, Boyer_Moore, GL, Model, EC, Divstep, Rqe. A directory
+   with a make.ml loads in that order (theory.make_plan). Expect translator
+   work per directory: Complex needed five additions (over-applied
+   primitives, unqualified Format functions, `Num.string_of_num`, weak type
+   variables in lifted local functions, rewrite nets with other payloads).
 5. **Examples/** (30K) and Logic/ (17K, needs two Examples files). sos.ml
    needs csdp and three files need Minisat/Cadical/miz3/Rqe: those wait
    for step 8. Then 100/dirichlet, pnt (mangoldt.ml), piseries (machin.ml).

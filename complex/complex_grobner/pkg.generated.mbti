@@ -1,0 +1,116 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/complex/complex_grobner"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] align((@list.List[(@num.Num, TA)], TB), (@list.List[(@num.Num, TA)], TB)) -> ((@list.List[(@num.Num, TA)], TB), (@list.List[(@num.Num, TA)], TB)) raise
+
+pub fn[TA, TB, TC] allpairs((TC) -> ((TB) -> TA raise) raise, @list.List[TC], @list.List[TB]) -> @list.List[TA] raise
+
+pub fn complex_arith(@kernel.Term) -> @kernel.Thm raise
+
+pub fn[TA] constant_poly(@list.List[(TA, @list.List[Int64])]) -> Bool raise
+
+pub fn[TA, TB, TC, TD] criterion2(@list.List[(@list.List[(@num.Num, @list.List[Int64])], TA)], ((@num.Num, @list.List[Int64]), ((@list.List[(@num.Num, @list.List[Int64])], TA), (@list.List[(@num.Num, @list.List[Int64])], TA))), @list.List[(TB, ((@list.List[(@num.Num, @list.List[Int64])], TC), (@list.List[(@num.Num, @list.List[Int64])], TD)))]) -> Bool raise
+
+pub fn dependencies(History) -> @list.List[Int64] raise
+
+pub fn[TA, TB, TC, TD] forder(((TA, @list.List[Int64]), TB), ((TC, @list.List[Int64]), TD)) -> Bool raise
+
+pub fn gr_po_pbner(@list.List[@list.List[(@num.Num, @list.List[Int64])]]) -> (@list.List[(@list.List[(@num.Num, @list.List[Int64])], History)], @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)]) raise
+
+pub fn grob_add(@list.List[(@num.Num, @list.List[Int64])], @list.List[(@num.Num, @list.List[Int64])]) -> @list.List[(@num.Num, @list.List[Int64])] raise
+
+pub fn grob_cmul((@num.Num, @list.List[Int64]), @list.List[(@num.Num, @list.List[Int64])]) -> @list.List[(@num.Num, @list.List[Int64])] raise
+
+pub fn grob_const(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @list.List[(@num.Num, @list.List[Int64])] raise) raise
+
+pub fn grob_mmul((@num.Num, @list.List[Int64]), (@num.Num, @list.List[Int64])) -> (@num.Num, @list.List[Int64]) raise
+
+pub fn grob_mul(@list.List[(@num.Num, @list.List[Int64])], @list.List[(@num.Num, @list.List[Int64])]) -> @list.List[(@num.Num, @list.List[Int64])] raise
+
+pub fn grob_neg(@list.List[(@num.Num, @list.List[Int64])]) -> @list.List[(@num.Num, @list.List[Int64])] raise
+
+pub fn[TA] grob_pow(@list.List[TA], @list.List[(@num.Num, @list.List[Int64])], Int64) -> @list.List[(@num.Num, @list.List[Int64])] raise
+
+pub fn grob_sub(@list.List[(@num.Num, @list.List[Int64])], @list.List[(@num.Num, @list.List[Int64])]) -> @list.List[(@num.Num, @list.List[Int64])] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] grob_var(@list.List[TA], TA) -> @list.List[(@num.Num, @list.List[Int64])] raise
+
+pub fn grobify_equations(@kernel.Term) -> (@list.List[@kernel.Term], @list.List[@list.List[(@num.Num, @list.List[Int64])]]) raise
+
+pub fn grobify_term(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @list.List[(@num.Num, @list.List[Int64])] raise) raise
+
+pub fn grobner(@list.List[(@list.List[(@num.Num, @list.List[Int64])], History)], @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)], @list.List[((@num.Num, @list.List[Int64]), ((@list.List[(@num.Num, @list.List[Int64])], History), (@list.List[(@num.Num, @list.List[Int64])], History)))]) -> (@list.List[(@list.List[(@num.Num, @list.List[Int64])], History)], @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)]) raise
+
+pub fn grobner_refute(@kernel.Term) -> @kernel.Thm raise
+
+pub fn grobvars(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn groebner(@list.List[@list.List[(@num.Num, @list.List[Int64])]]) -> (@list.List[(@list.List[(@num.Num, @list.List[Int64])], History)], @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)]) raise
+
+pub fn holify_polynomial(@list.List[@kernel.Term]) -> ((@list.List[(@num.Num, @list.List[Int64])]) -> @kernel.Term raise) raise
+
+pub fn involved(@list.List[@list.List[Int64]], @list.List[Int64], @list.List[Int64]) -> @list.List[Int64] raise
+
+pub fn load() -> Unit
+
+pub fn mdiv((@num.Num, @list.List[Int64]), (@num.Num, @list.List[Int64])) -> (@num.Num, @list.List[Int64]) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB, TC : Eq + @lib.OCompare + @lib.OHash, TD, TE, TF] memx(((@list.List[(@num.Num, TA)], TB), (@list.List[(@num.Num, TC)], TD)), @list.List[((@list.List[(@num.Num, TA)], TE), (@list.List[(@num.Num, TC)], TF))]) -> Bool raise
+
+pub fn[TA] merge((TA) -> ((TA) -> Bool raise) raise, @list.List[TA], @list.List[TA]) -> @list.List[TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB, TC] mlcm((TB, @list.List[TA]), (TC, @list.List[TA])) -> (@num.Num, @list.List[TA]) raise
+
+pub fn[TA] monic(@list.List[(@num.Num, @list.List[TA])], History) -> (@list.List[(@num.Num, @list.List[TA])], History) raise
+
+pub fn morder_gt(@list.List[Int64], @list.List[Int64]) -> Bool raise
+
+pub fn morder_le(@list.List[Int64], @list.List[Int64]) -> Bool raise
+
+pub fn morder_lt(@list.List[Int64]) -> ((@list.List[Int64]) -> Bool raise) raise
+
+pub fn[TA] orthogonal((TA, @list.List[Int64]), @list.List[(@num.Num, @list.List[Int64])], @list.List[(@num.Num, @list.List[Int64])]) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] poly_eq(@list.List[(@num.Num, TA)], @list.List[(@num.Num, TA)]) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] poly_lt(@list.List[(@num.Num, TA)], @list.List[(@num.Num, TA)]) -> Bool raise
+
+pub fn reduce(@list.List[(@list.List[(@num.Num, @list.List[Int64])], History)], (@list.List[(@num.Num, @list.List[Int64])], History)) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise
+
+pub fn reduce1((@num.Num, @list.List[Int64]), (@list.List[(@num.Num, @list.List[Int64])], History)) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise
+
+pub fn reduceb((@num.Num, @list.List[Int64]), @list.List[(@list.List[(@num.Num, @list.List[Int64])], History)]) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise
+
+pub fn[TA] resolve_proof(@list.List[TA], History) -> @list.List[(Int64, @list.List[(@num.Num, @list.List[Int64])])] raise
+
+pub fn[TA] sort((TA) -> ((TA) -> Bool raise) raise) -> ((@list.List[TA]) -> @list.List[TA] raise) raise
+
+pub fn spoly((@num.Num, @list.List[Int64]), (@list.List[(@num.Num, @list.List[Int64])], History), (@list.List[(@num.Num, @list.List[Int64])], History)) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise
+
+pub fn string_of_monomial(@list.List[String], (@num.Num, @list.List[Int64])) -> String raise
+
+pub fn string_of_polynomial(@list.List[String], @list.List[(@num.Num, @list.List[Int64])]) -> String raise
+
+// Errors
+
+// Types and methods
+pub(all) enum History {
+  Start(Int64)
+  Mmul((@num.Num, @list.List[Int64]), History)
+  Add(History, History)
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for History
+pub impl @lib.OHash for History
+
+// Type aliases
+
+// Traits

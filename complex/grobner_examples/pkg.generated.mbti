@@ -1,0 +1,78 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/complex/grobner_examples"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn centroid() -> @kernel.Thm
+
+pub fn collinear() -> @kernel.Thm
+
+pub fn det3() -> @kernel.Thm
+
+pub fn det_transpose() -> @kernel.Thm
+
+pub fn distinctpairs() -> @kernel.Thm
+
+pub fn expand_coords_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn fleck() -> @kernel.Thm
+
+pub fn gauss() -> @kernel.Thm
+
+pub fn geom_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn hurwitz() -> @kernel.Thm
+
+pub fn is_intersection() -> @kernel.Thm
+
+pub fn is_midpoint() -> @kernel.Thm
+
+pub fn isotropic() -> @kernel.Thm
+
+pub fn lagrange_4() -> @kernel.Thm
+
+pub fn lagrange_8() -> @kernel.Thm
+
+pub fn length() -> @kernel.Thm
+
+pub fn lengths_eq() -> @kernel.Thm
+
+pub fn liouville() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn oncircle_with_diagonal() -> @kernel.Thm
+
+pub fn pair_beta_thm() -> @kernel.Thm
+
+pub fn parallel() -> @kernel.Thm
+
+pub fn perpendicular() -> @kernel.Thm
+
+pub fn schur() -> @kernel.Thm
+
+pub fn sdet3() -> @kernel.Thm
+
+pub fn sdet3_permute_1() -> @kernel.Thm
+
+pub fn sdet3_permute_2() -> @kernel.Thm
+
+pub fn sdet_cramer() -> @kernel.Thm
+
+pub fn sdet_lincomb() -> @kernel.Thm
+
+pub fn sdet_nz() -> @kernel.Thm
+
+pub fn sdet_sum() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
