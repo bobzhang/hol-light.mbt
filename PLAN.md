@@ -385,4 +385,9 @@ definitions register constants, quotations advance the type-variable and
   database.ml, and define no theory). Native: `--target native` passes the
   whole suite; `--release` hits a moonc C-backend miscompile
   (tools/moonbit_bugs/).
-  Next: the rest of Multivariate/, then the native target.
+  Multivariate/ is translated and matches upstream file by file: the 20
+  files make.ml and make_complex.ml load, and the 12 others, each loaded
+  after its anchor (the deepest make.ml file it needs; e.g. tarski.ml's
+  proofs fail after the complex analysis). batch.py plans a run of files as
+  a tree (branches fork the session) so a chain loads once per side. The
+  whole suite (145 tests) passes with `moon test -j 16`.
