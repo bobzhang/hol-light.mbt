@@ -40,7 +40,7 @@ pub fn read_dimacs(filename : String) -> @kernel.Term raise {
     let c = buildclause(ns)
     term = match term {
       None => Some(c)
-      Some(t) => Some(@basics.mk_conj(c, t))
+      Some(t) => Some(@bool.mk_conj(c, t))
     }
   }
 
