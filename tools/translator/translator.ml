@@ -470,6 +470,9 @@ end
 module Names = struct
   (* Upstream file -> MoonBit package. *)
   let package_of_file = function
+    (* named like a package loaded with it (theory.py's RENAMED) *)
+    | "Logic/canon.ml" -> Some "logic/logic_canon"
+    | "Probability/measure.ml" -> Some "probability/probability_measure"
     | f when String.contains f '/' ->
         (* `Library/prime.ml` -> `library/prime` (theory.py's pkg_of) *)
         let i = String.index f '/' in

@@ -40,9 +40,20 @@ def stem(f):
     return f[:-3] if f.endswith(".hl") else f
 
 
+# A package is imported under its last component: a file named like a
+# package loaded with it takes its directory's name too (the same table:
+# tools/translator/translator.ml, Names.package_of_file)
+RENAMED = {
+    "Logic/canon": "logic/logic_canon",                    # canon.ml
+    "Probability/measure": "probability/probability_measure",  # Multivariate/measure.ml
+}
+
+
 def pkg_of(f):
     """`Library/prime.ml` -> `library/prime`; `arith.ml` -> `arith`."""
     s = stem(f)
+    if s in RENAMED:
+        return RENAMED[s]
     if "/" in s:
         d, b = s.split("/", 1)
         same = [x for x in os.listdir(HOL) if x.lower() == d.lower() and os.path.isdir(os.path.join(HOL, x))]
