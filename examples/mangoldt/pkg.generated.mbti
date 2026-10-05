@@ -1,0 +1,51 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/mangoldt"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn log_2_bounds() -> @kernel.Thm
+
+pub fn log_fact() -> @kernel.Thm
+
+pub fn log_fact_bounds() -> @kernel.Thm
+
+pub fn log_le_refl() -> @kernel.Thm
+
+pub fn log_mangoldt_sum() -> @kernel.Thm
+
+pub fn mangoldt() -> @kernel.Thm
+
+pub fn mangoldt_1() -> @kernel.Thm
+
+pub fn mangoldt_pos_le() -> @kernel.Thm
+
+pub fn mangoldt_primepow() -> @kernel.Thm
+
+pub fn mangoldt_v1() -> @kernel.Thm
+
+pub fn mertens() -> @kernel.Thm
+
+pub fn mertens_lemma() -> @kernel.Thm
+
+pub fn mertens_mangoldt_versus_log() -> @kernel.Thm
+
+pub fn psi_bound() -> @kernel.Thm
+
+pub fn psi_bound_exp() -> @kernel.Thm
+
+pub fn psi_bound_induct() -> @kernel.Thm
+
+pub fn sum_divisors_floor_lemma() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

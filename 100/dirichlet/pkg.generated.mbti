@@ -1,0 +1,163 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/dirichlet"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn agm_special() -> @kernel.Thm
+
+pub fn bounded_diff_logmul() -> @kernel.Thm
+
+pub fn bounded_dirichlet_mangoldt_lemma() -> @kernel.Thm
+
+pub fn bounded_dirichlet_mangoldt_nonprincipal() -> @kernel.Thm
+
+pub fn bounded_dirichlet_mangoldt_nonzero() -> @kernel.Thm
+
+pub fn bounded_dirichlet_mangoldt_principal() -> @kernel.Thm
+
+pub fn bounded_dirichlet_mangoldt_principal_lemma() -> @kernel.Thm
+
+pub fn bounded_dirichlet_mangoldt_zero() -> @kernel.Thm
+
+pub fn bounded_lfunction_dirichlet_mangoldt() -> @kernel.Thm
+
+pub fn bounded_lfunction_dirichlet_mangoldt_lemma() -> @kernel.Thm
+
+pub fn bounded_lfunction_partial_sums() -> @kernel.Thm
+
+pub fn bounded_sum_over_dirichlet_characters() -> @kernel.Thm
+
+pub fn character_extend_from_subgroup() -> @kernel.Thm
+
+pub fn chi_0() -> @kernel.Thm
+
+pub fn cnj_chi_0() -> @kernel.Thm
+
+pub fn decreasing_log_over_n() -> @kernel.Thm
+
+pub fn dirichlet() -> @kernel.Thm
+
+pub fn dirichlet_character() -> @kernel.Thm
+
+pub fn dirichlet_character_0() -> @kernel.Thm
+
+pub fn dirichlet_character_1() -> @kernel.Thm
+
+pub fn dirichlet_character_chi_0() -> @kernel.Thm
+
+pub fn dirichlet_character_cnj() -> @kernel.Thm
+
+pub fn dirichlet_character_cong() -> @kernel.Thm
+
+pub fn dirichlet_character_discriminator() -> @kernel.Thm
+
+pub fn dirichlet_character_divisorsum_eq_1() -> @kernel.Thm
+
+pub fn dirichlet_character_divisorsum_pos() -> @kernel.Thm
+
+pub fn dirichlet_character_divisorsum_primepow_pos() -> @kernel.Thm
+
+pub fn dirichlet_character_eq_0() -> @kernel.Thm
+
+pub fn dirichlet_character_eq_1() -> @kernel.Thm
+
+pub fn dirichlet_character_eq_principal() -> @kernel.Thm
+
+pub fn dirichlet_character_groupinv() -> @kernel.Thm
+
+pub fn dirichlet_character_groupmul() -> @kernel.Thm
+
+pub fn dirichlet_character_mul() -> @kernel.Thm
+
+pub fn dirichlet_character_mul_cnj() -> @kernel.Thm
+
+pub fn dirichlet_character_nonprincipal() -> @kernel.Thm
+
+pub fn dirichlet_character_nonprincipal_nontrivial() -> @kernel.Thm
+
+pub fn dirichlet_character_norm() -> @kernel.Thm
+
+pub fn dirichlet_character_periodic() -> @kernel.Thm
+
+pub fn dirichlet_character_periodic_gen() -> @kernel.Thm
+
+pub fn dirichlet_character_pow() -> @kernel.Thm
+
+pub fn dirichlet_character_real_cases() -> @kernel.Thm
+
+pub fn dirichlet_character_root() -> @kernel.Thm
+
+pub fn dirichlet_character_sum_mod() -> @kernel.Thm
+
+pub fn dirichlet_character_sum_over_characters() -> @kernel.Thm
+
+pub fn dirichlet_character_sum_over_characters_inexplicit() -> @kernel.Thm
+
+pub fn dirichlet_character_sum_over_characters_pos() -> @kernel.Thm
+
+pub fn dirichlet_character_sum_over_characters_weak() -> @kernel.Thm
+
+pub fn dirichlet_character_sum_over_numbers() -> @kernel.Thm
+
+pub fn dirichlet_character_zerosum() -> @kernel.Thm
+
+pub fn dirichlet_character_zerosum_mul() -> @kernel.Thm
+
+pub fn dirichlet_mangoldt() -> @kernel.Thm
+
+pub fn dirichlet_mangoldt_explicit() -> @kernel.Thm
+
+pub fn dirichlet_strong() -> @kernel.Thm
+
+pub fn divisorsum_primepow() -> @kernel.Thm
+
+pub fn divisorvsum_primepow() -> @kernel.Thm
+
+pub fn exists_complex_root_nontrivial() -> @kernel.Thm
+
+pub fn finite_dirichlet_characters() -> @kernel.Thm
+
+pub fn lemma() -> @kernel.Thm
+
+pub fn lfunction() -> @kernel.Thm
+
+pub fn lfunction_cnj() -> @kernel.Thm
+
+pub fn lfunction_def() -> @kernel.Thm
+
+pub fn lfunction_nonzero_nonprincipal() -> @kernel.Thm
+
+pub fn lfunction_nonzero_real() -> @kernel.Thm
+
+pub fn lfunction_partial_sum() -> @kernel.Thm
+
+pub fn lfunction_partial_sum_strong() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mangoldt_log_sum() -> @kernel.Thm
+
+pub fn product_pow_nsum() -> @kernel.Thm
+
+pub fn product_special() -> @kernel.Thm
+
+pub fn real_exp_1_le_4() -> @kernel.Thm
+
+pub fn sum_log_over_x_bound() -> @kernel.Thm
+
+pub fn sum_of_numbers() -> @kernel.Thm
+
+pub fn summable_character_log_over_n() -> @kernel.Thm
+
+pub fn vsum_vsum_divisors() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
