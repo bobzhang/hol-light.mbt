@@ -1,0 +1,201 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/probability/ergodic"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn archimedean_inv_bound() -> @kernel.Thm
+
+pub fn avg_gt_imp_maxsum_pos() -> @kernel.Thm
+
+pub fn avg_gt_imp_sum_pos() -> @kernel.Thm
+
+pub fn avg_lt_imp_sum_pos() -> @kernel.Thm
+
+pub fn avg_shift_diff() -> @kernel.Thm
+
+pub fn birkhoff_ergodic() -> @kernel.Thm
+
+pub fn birkhoff_ergodic_bounded() -> @kernel.Thm
+
+pub fn birkhoff_ergodic_bounded_l1() -> @kernel.Thm
+
+pub fn birkhoff_ergodic_l1() -> @kernel.Thm
+
+pub fn birkhoff_ergodic_theorem() -> @kernel.Thm
+
+pub fn birkhoff_ergodic_theorem_bounded() -> @kernel.Thm
+
+pub fn birkhoff_limit_invariant() -> @kernel.Thm
+
+pub fn birkhoff_oscillation_containment() -> @kernel.Thm
+
+pub fn bounded_limsup_liminf_converge() -> @kernel.Thm
+
+pub fn ergodic() -> @kernel.Thm
+
+pub fn ergodic_avg_bounded() -> @kernel.Thm
+
+pub fn ergodic_avg_diff_bound() -> @kernel.Thm
+
+pub fn ergodic_avg_expectation() -> @kernel.Thm
+
+pub fn ergodic_avg_integrable() -> @kernel.Thm
+
+pub fn ergodic_avg_integrable_pow2() -> @kernel.Thm
+
+pub fn ergodic_avg_variance_bound() -> @kernel.Thm
+
+pub fn ergodic_liminf_null() -> @kernel.Thm
+
+pub fn ergodic_liminf_shift() -> @kernel.Thm
+
+pub fn ergodic_limsup_null() -> @kernel.Thm
+
+pub fn ergodic_limsup_shift() -> @kernel.Thm
+
+pub fn ergodic_maxsum() -> @kernel.Thm
+
+pub fn ergodic_maxsum_ge_sum() -> @kernel.Thm
+
+pub fn ergodic_maxsum_integrable() -> @kernel.Thm
+
+pub fn ergodic_maxsum_key_ineq() -> @kernel.Thm
+
+pub fn ergodic_maxsum_mono() -> @kernel.Thm
+
+pub fn ergodic_maxsum_pos() -> @kernel.Thm
+
+pub fn ergodic_maxsum_pos_event() -> @kernel.Thm
+
+pub fn ergodic_maxsum_rv() -> @kernel.Thm
+
+pub fn ergodic_oscillation_invariant() -> @kernel.Thm
+
+pub fn ergodic_oscillation_measurable() -> @kernel.Thm
+
+pub fn ergodic_oscillation_null() -> @kernel.Thm
+
+pub fn ergodic_sum_expectation() -> @kernel.Thm
+
+pub fn ergodic_sum_integrable() -> @kernel.Thm
+
+pub fn ergodic_sum_shift() -> @kernel.Thm
+
+pub fn ergodic_truncation_abs_bound() -> @kernel.Thm
+
+pub fn ergodic_truncation_integrable() -> @kernel.Thm
+
+pub fn ergodic_truncation_l1() -> @kernel.Thm
+
+pub fn ergodic_truncation_pointwise() -> @kernel.Thm
+
+pub fn expectation_comp_preserved() -> @kernel.Thm
+
+pub fn expectation_iter_comp_preserved() -> @kernel.Thm
+
+pub fn iid_slln_l1_via_birkhoff() -> @kernel.Thm
+
+pub fn iid_slln_via_birkhoff() -> @kernel.Thm
+
+pub fn inf_perturb_bound() -> @kernel.Thm
+
+pub fn inf_subset_le() -> @kernel.Thm
+
+pub fn integrable_bounded_pow2() -> @kernel.Thm
+
+pub fn integrable_comp_mp() -> @kernel.Thm
+
+pub fn invariant_event() -> @kernel.Thm
+
+pub fn invariant_events_sub_sigma_algebra() -> @kernel.Thm
+
+pub fn iter_1() -> @kernel.Thm
+
+pub fn iter_add() -> @kernel.Thm
+
+pub fn iter_in_invariant() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn maximal_ergodic_infinite() -> @kernel.Thm
+
+pub fn maximal_ergodic_lemma() -> @kernel.Thm
+
+pub fn mean_ergodic_bounded() -> @kernel.Thm
+
+pub fn mean_ergodic_theorem() -> @kernel.Thm
+
+pub fn measure_preserving() -> @kernel.Thm
+
+pub fn measure_preserving_carrier() -> @kernel.Thm
+
+pub fn measure_preserving_events() -> @kernel.Thm
+
+pub fn measure_preserving_iter() -> @kernel.Thm
+
+pub fn measure_preserving_prob() -> @kernel.Thm
+
+pub fn mel_invariant_set() -> @kernel.Thm
+
+pub fn nn_expectation_comp_preserved() -> @kernel.Thm
+
+pub fn nn_expectation_comp_preserved_bounded() -> @kernel.Thm
+
+pub fn not_convergent_oscillation() -> @kernel.Thm
+
+pub fn random_variable_comp_mp() -> @kernel.Thm
+
+pub fn random_variable_iter_comp_mp() -> @kernel.Thm
+
+pub fn real_le_epsilon() -> @kernel.Thm
+
+pub fn real_liminf_le_limsup_abs() -> @kernel.Thm
+
+pub fn real_liminf_le_perturb() -> @kernel.Thm
+
+pub fn real_liminf_lt_exists_bounded() -> @kernel.Thm
+
+pub fn real_liminf_perturb_null() -> @kernel.Thm
+
+pub fn real_limsup_gt_exists_bounded() -> @kernel.Thm
+
+pub fn real_limsup_le_perturb() -> @kernel.Thm
+
+pub fn real_limsup_le_sup_p() -> @kernel.Thm
+
+pub fn real_limsup_neg() -> @kernel.Thm
+
+pub fn real_limsup_perturb_null() -> @kernel.Thm
+
+pub fn rv_level_set_event() -> @kernel.Thm
+
+pub fn rv_strict_ineq_event() -> @kernel.Thm
+
+pub fn simple_expectation_comp_preserved() -> @kernel.Thm
+
+pub fn simple_rv_comp_mp() -> @kernel.Thm
+
+pub fn sq_sum_bound() -> @kernel.Thm
+
+pub fn sum_square_cauchy_schwarz() -> @kernel.Thm
+
+pub fn sup_perturb_bound() -> @kernel.Thm
+
+pub fn sup_subset_ge() -> @kernel.Thm
+
+pub fn truncation_l2_convergence() -> @kernel.Thm
+
+pub fn wiener_maximal_inequality() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
