@@ -44,3 +44,23 @@ test "channels on in-memory files" {
   )
   inspect(string_split_on_char(' ', "").to_array().length(), content="1")
 }
+
+///|
+test "the Str subset" {
+  let blank = str_regexp("[ \n\t\r]")
+  inspect(str_split(blank, " a  b c ").to_array().join("|"), content="a||b|c")
+  inspect(str_split(blank, "").to_array().length(), content="0")
+  let sat = str_regexp("SAT")
+  inspect(str_search_forward(sat, "UNSAT SAT", 0L), content="2")
+  inspect(str_search_forward(sat, "UNSAT SAT", 3L), content="6")
+  inspect(str_search_backward(str_regexp("0"), "1 0 2 0", 7L), content="6")
+  inspect(str_string_before("abcdef", 2L), content="ab")
+  inspect(str_string_after("abcdef", 2L), content="cdef")
+  let r = try {
+    ignore(str_regexp("a*"))
+    "made"
+  } catch {
+    _ => "refused"
+  }
+  inspect(r, content="refused")
+}

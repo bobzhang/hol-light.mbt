@@ -151,3 +151,9 @@ pub fn string_map(f : (Char) -> Char raise?, s : String) -> String raise? {
 pub fn filename_is_relative(name : String) -> Bool {
   !name.has_prefix("/")
 }
+
+///|
+/// `input_byte`: the next character's code (the files are byte strings).
+pub fn input_byte(ic : InChannel) -> Int64 raise {
+  input_char(ic).to_int().to_int64()
+}
