@@ -592,9 +592,21 @@ pub(all) suberror SysError {
 } derive(Debug)
 
 ///|
-/// `Filename.temp_file prefix suffix`: a name only (nothing is created).
+let temp_file_count : Ref[Int] = Ref::{ val: 0, }
+
+///|
+/// `Filename.temp_file prefix suffix`: a fresh name, of an empty file (in
+/// memory), as OCaml's creates it.
 pub fn temp_file(prefix : String, suffix : String) -> String {
-  "/tmp/" + prefix + "000000" + suffix
+  let n = temp_file_count.val.to_string()
+  temp_file_count.val += 1
+  let name = "/tmp/" +
+    prefix +
+    "0".repeat(@cmp.maximum(0, 6 - n.length())) +
+    n +
+    suffix
+  file_of_string(name, "")
+  name
 }
 
 ///|
