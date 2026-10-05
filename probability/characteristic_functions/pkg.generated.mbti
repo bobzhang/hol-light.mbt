@@ -1,0 +1,829 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/probability/characteristic_functions"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abs_ge_iff_pow2_ge() -> @kernel.Thm
+
+pub fn abs_ge_in_events() -> @kernel.Thm
+
+pub fn abs_le_1_plus_pow2() -> @kernel.Thm
+
+pub fn abs_le_exp_quarter() -> @kernel.Thm
+
+pub fn abs_x_gaussian_bound() -> @kernel.Thm
+
+pub fn am_gm_frac_bound() -> @kernel.Thm
+
+pub fn arctan_integral() -> @kernel.Thm
+
+pub fn atn_pi2_bound() -> @kernel.Thm
+
+pub fn azuma_hoeffding() -> @kernel.Thm
+
+pub fn azuma_hoeffding_two_sided() -> @kernel.Thm
+
+pub fn azuma_mgf_bound() -> @kernel.Thm
+
+pub fn bound_from_product() -> @kernel.Thm
+
+pub fn bounded_cont_times_density_integrable() -> @kernel.Thm
+
+pub fn bounded_continuous_trig_approx() -> @kernel.Thm
+
+pub fn bounded_differences() -> @kernel.Thm
+
+pub fn bounded_differences_doob_increment() -> @kernel.Thm
+
+pub fn bounded_real_seq_has_convergent_subseq() -> @kernel.Thm
+
+pub fn cdf_bounds_from_tightness() -> @kernel.Thm
+
+pub fn cdf_le_integral_bounded() -> @kernel.Thm
+
+pub fn cdf_simple_agree() -> @kernel.Thm
+
+pub fn char_fn_im_simple() -> @kernel.Thm
+
+pub fn char_fn_re_simple() -> @kernel.Thm
+
+pub fn chernoff_bound() -> @kernel.Thm
+
+pub fn clamp_lipschitz() -> @kernel.Thm
+
+pub fn clt_char_fn_convergence_full() -> @kernel.Thm
+
+pub fn clt_convergence_in_distribution() -> @kernel.Thm
+
+pub fn clt_standardized() -> @kernel.Thm
+
+pub fn clt_variance_form() -> @kernel.Thm
+
+pub fn complex_product_modulus_sq() -> @kernel.Thm
+
+pub fn cond_exp_bounded_variation() -> @kernel.Thm
+
+pub fn cond_exp_indicator_diff_zero() -> @kernel.Thm
+
+pub fn cond_exp_iterated() -> @kernel.Thm
+
+pub fn cond_exp_preserves_bd() -> @kernel.Thm
+
+pub fn cond_exp_rv_sigma_n() -> @kernel.Thm
+
+pub fn cond_exp_rv_sigma_trivial() -> @kernel.Thm
+
+pub fn cond_exp_self() -> @kernel.Thm
+
+pub fn cond_exp_sum_repr() -> @kernel.Thm
+
+pub fn continuous_limit_sandwich() -> @kernel.Thm
+
+pub fn convergence_set_in_events() -> @kernel.Thm
+
+pub fn converges_as_from_rate() -> @kernel.Thm
+
+pub fn converges_in_distribution() -> @kernel.Thm
+
+pub fn converges_in_prob_ae_subsequence() -> @kernel.Thm
+
+pub fn converges_in_prob_subsequence() -> @kernel.Thm
+
+pub fn converges_in_prob_subsequence_principle() -> @kernel.Thm
+
+pub fn convex_bound_exp() -> @kernel.Thm
+
+pub fn cos_approx_bound() -> @kernel.Thm
+
+pub fn cos_diff_has_real_integral_halfline() -> @kernel.Thm
+
+pub fn cos_diff_has_real_integral_halfline_full() -> @kernel.Thm
+
+pub fn cos_diff_has_real_integral_halfline_gen() -> @kernel.Thm
+
+pub fn cos_has_real_integral() -> @kernel.Thm
+
+pub fn cos_lipschitz() -> @kernel.Thm
+
+pub fn cos_periodic_n() -> @kernel.Thm
+
+pub fn cos_taylor2_bound() -> @kernel.Thm
+
+pub fn deriv_neg_x_gaussian() -> @kernel.Thm
+
+pub fn diagonal_bounded_convergence() -> @kernel.Thm
+
+pub fn dirichlet_integral() -> @kernel.Thm
+
+pub fn dirichlet_tail_bound() -> @kernel.Thm
+
+pub fn dist_fn_seq() -> @kernel.Thm
+
+pub fn doob_compensator() -> @kernel.Thm
+
+pub fn doob_compensator_increasing() -> @kernel.Thm
+
+pub fn doob_compensator_martingale() -> @kernel.Thm
+
+pub fn doob_compensator_measurable() -> @kernel.Thm
+
+pub fn doob_compensator_predictable() -> @kernel.Thm
+
+pub fn doob_compensator_simple_rv() -> @kernel.Thm
+
+pub fn doob_concentration() -> @kernel.Thm
+
+pub fn doob_concentration_two_sided() -> @kernel.Thm
+
+pub fn doob_decomposition() -> @kernel.Thm
+
+pub fn doob_decomposition_super() -> @kernel.Thm
+
+pub fn error_integral_bound() -> @kernel.Thm
+
+pub fn exp_decay_integral() -> @kernel.Thm
+
+pub fn exp_diff_le() -> @kernel.Thm
+
+pub fn exp_integral_rep() -> @kernel.Thm
+
+pub fn exp_neg_add() -> @kernel.Thm
+
+pub fn exp_neg_le_pow() -> @kernel.Thm
+
+pub fn exp_neg_sq_real_continuous() -> @kernel.Thm
+
+pub fn exp_neg_x2_continuous() -> @kernel.Thm
+
+pub fn exp_neg_x2_integrable() -> @kernel.Thm
+
+pub fn exp_quad_antideriv() -> @kernel.Thm
+
+pub fn expectation_sum_finite() -> @kernel.Thm
+
+pub fn fejer_kernel_real() -> @kernel.Thm
+
+pub fn fejer_kernel_real_cosine() -> @kernel.Thm
+
+pub fn fejer_kernel_real_eq_sinc_squared() -> @kernel.Thm
+
+pub fn fejer_kernel_real_integral() -> @kernel.Thm
+
+pub fn fejer_kernel_real_pos() -> @kernel.Thm
+
+pub fn fejer_kernel_real_tail_bound() -> @kernel.Thm
+
+pub fn fiber_bounded_diff() -> @kernel.Thm
+
+pub fn filtration_rv_sigma() -> @kernel.Thm
+
+pub fn finite_rv_sigma() -> @kernel.Thm
+
+pub fn finite_rv_sigma_atoms() -> @kernel.Thm
+
+pub fn four_ab_le_apb_sq() -> @kernel.Thm
+
+pub fn ftc_square() -> @kernel.Thm
+
+pub fn ftc_square_deriv() -> @kernel.Thm
+
+pub fn gauss_2d_continuous() -> @kernel.Thm
+
+pub fn gauss_inner_rewrite() -> @kernel.Thm
+
+pub fn gauss_integral_deriv() -> @kernel.Thm
+
+pub fn gauss_sq_ftc() -> @kernel.Thm
+
+pub fn gauss_substitution() -> @kernel.Thm
+
+pub fn gaussian_antideriv_bound() -> @kernel.Thm
+
+pub fn gaussian_cos_integrable() -> @kernel.Thm
+
+pub fn gaussian_cos_integral_has_deriv() -> @kernel.Thm
+
+pub fn gaussian_exp_decay() -> @kernel.Thm
+
+pub fn gaussian_ft() -> @kernel.Thm
+
+pub fn gaussian_ft_antideriv_deriv() -> @kernel.Thm
+
+pub fn gaussian_ft_halfline() -> @kernel.Thm
+
+pub fn gaussian_ft_ibp() -> @kernel.Thm
+
+pub fn gaussian_ft_sin() -> @kernel.Thm
+
+pub fn gaussian_integral() -> @kernel.Thm
+
+pub fn gaussian_integral_scaled() -> @kernel.Thm
+
+pub fn gaussian_integral_trig_poly() -> @kernel.Thm
+
+pub fn gaussian_quarter_integrable() -> @kernel.Thm
+
+pub fn gaussian_t2_integrable() -> @kernel.Thm
+
+pub fn gaussian_t2_pointwise_bound() -> @kernel.Thm
+
+pub fn gaussian_t_sin_integrable() -> @kernel.Thm
+
+pub fn gaussian_trapezoidal_bound() -> @kernel.Thm
+
+pub fn gaussian_trapezoidal_lower_bound() -> @kernel.Thm
+
+pub fn general_clt() -> @kernel.Thm
+
+pub fn general_clt_mutual() -> @kernel.Thm
+
+pub fn h_integrand_integrable() -> @kernel.Thm
+
+pub fn h_limit_zero() -> @kernel.Thm
+
+pub fn h_plus_j() -> @kernel.Thm
+
+pub fn half_gaussian_converges() -> @kernel.Thm
+
+pub fn has_integral_trig_term() -> @kernel.Thm
+
+pub fn has_real_derivative_zero_constant() -> @kernel.Thm
+
+pub fn has_real_integral_stretch_univ() -> @kernel.Thm
+
+pub fn hb_nonneg() -> @kernel.Thm
+
+pub fn helly_limit() -> @kernel.Thm
+
+pub fn helly_limit_approach() -> @kernel.Thm
+
+pub fn helly_limit_bounds() -> @kernel.Thm
+
+pub fn helly_limit_le_rational() -> @kernel.Thm
+
+pub fn helly_limit_mono() -> @kernel.Thm
+
+pub fn helly_limit_set_props() -> @kernel.Thm
+
+pub fn helly_rational_convergence() -> @kernel.Thm
+
+pub fn helly_selection_theorem() -> @kernel.Thm
+
+pub fn hoeffding_analytic_lemma() -> @kernel.Thm
+
+pub fn hoeffding_denom_pos() -> @kernel.Thm
+
+pub fn hoeffding_exp_l_eq() -> @kernel.Thm
+
+pub fn hoeffding_l_at_zero() -> @kernel.Thm
+
+pub fn hoeffding_l_has_deriv() -> @kernel.Thm
+
+pub fn hoeffding_l_taylor_bound() -> @kernel.Thm
+
+pub fn hoeffding_lemma() -> @kernel.Thm
+
+pub fn hoeffding_lprime_at_zero() -> @kernel.Thm
+
+pub fn hoeffding_lprime_has_deriv() -> @kernel.Thm
+
+pub fn hoeffding_mgf_sum_bound() -> @kernel.Thm
+
+pub fn hoeffding_second_deriv_abs_bound() -> @kernel.Thm
+
+pub fn hoeffding_second_deriv_bound() -> @kernel.Thm
+
+pub fn hoeffding_single() -> @kernel.Thm
+
+pub fn hoeffding_sum() -> @kernel.Thm
+
+pub fn hoeffding_sum_general() -> @kernel.Thm
+
+pub fn ib_nonneg() -> @kernel.Thm
+
+pub fn ib_sq_eq() -> @kernel.Thm
+
+pub fn image_lift_real_interval() -> @kernel.Thm
+
+pub fn image_neg_univ() -> @kernel.Thm
+
+pub fn image_neg_univ_real() -> @kernel.Thm
+
+pub fn indep_rv_add_const() -> @kernel.Thm
+
+pub fn indep_rv_rv_sigma_simple() -> @kernel.Thm
+
+pub fn indep_rv_sigma_event_cdf() -> @kernel.Thm
+
+pub fn indep_rv_sigma_event_point_mass() -> @kernel.Thm
+
+pub fn infinite_extract_subseq() -> @kernel.Thm
+
+pub fn inner_integral_t() -> @kernel.Thm
+
+pub fn inner_integral_u() -> @kernel.Thm
+
+pub fn inner_integrand_integrable() -> @kernel.Thm
+
+pub fn inner_vec_conv() -> @kernel.Thm
+
+pub fn inner_x_integral() -> @kernel.Thm
+
+pub fn integrable_sum_finite() -> @kernel.Thm
+
+pub fn integral_bounded_le_cdf() -> @kernel.Thm
+
+pub fn integral_inv_1_t() -> @kernel.Thm
+
+pub fn integral_inv_one_plus_sq() -> @kernel.Thm
+
+pub fn integrand_bound() -> @kernel.Thm
+
+pub fn integrand_sum_eq_inv() -> @kernel.Thm
+
+pub fn inters_tail_unions_subset_compl() -> @kernel.Thm
+
+pub fn j_equals_outer() -> @kernel.Thm
+
+pub fn j_outer_integrand_integrable() -> @kernel.Thm
+
+pub fn kolmogorov_cross_term_vanish() -> @kernel.Thm
+
+pub fn kolmogorov_maximal_ineq_indep() -> @kernel.Thm
+
+pub fn laplace_sin() -> @kernel.Thm
+
+pub fn lhs_integrable() -> @kernel.Thm
+
+pub fn lift_drop_fstcart() -> @kernel.Thm
+
+pub fn lift_drop_sndcart() -> @kernel.Thm
+
+pub fn lift_exp_drop_continuous() -> @kernel.Thm
+
+pub fn lift_integral_bridge() -> @kernel.Thm
+
+pub fn lift_zero() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn log_lower_bound() -> @kernel.Thm
+
+pub fn markov_second_moment() -> @kernel.Thm
+
+pub fn martingale_imp_martingale() -> @kernel.Thm
+
+pub fn mcdiarmid_inequality() -> @kernel.Thm
+
+pub fn mcdiarmid_inequality_two_sided() -> @kernel.Thm
+
+pub fn measurable_wrt_compose() -> @kernel.Thm
+
+pub fn measurable_wrt_finite_simple_rv() -> @kernel.Thm
+
+pub fn measurable_wrt_rv_sigma() -> @kernel.Thm
+
+pub fn measurable_wrt_sum_filtration_1() -> @kernel.Thm
+
+pub fn monotone_continuity_dense() -> @kernel.Thm
+
+pub fn monotone_small_osc_subinterval() -> @kernel.Thm
+
+pub fn mutually_indep_rv() -> @kernel.Thm
+
+pub fn mutually_indep_rv_imp_indep_rv() -> @kernel.Thm
+
+pub fn mutually_indep_rv_mono() -> @kernel.Thm
+
+pub fn mutually_indep_rv_sum_indep_rv() -> @kernel.Thm
+
+pub fn one_minus_cos_has_real_integral_halfline() -> @kernel.Thm
+
+pub fn one_minus_cos_has_real_integral_univ() -> @kernel.Thm
+
+pub fn one_minus_cos_le() -> @kernel.Thm
+
+pub fn one_minus_cos_scaled_has_real_integral_halfline() -> @kernel.Thm
+
+pub fn one_minus_exp_neg_le() -> @kernel.Thm
+
+pub fn outer_integrand_integrable() -> @kernel.Thm
+
+pub fn outer_vec_conv() -> @kernel.Thm
+
+pub fn periodic_real_bound() -> @kernel.Thm
+
+pub fn positive_prob_rv_sigma_atom() -> @kernel.Thm
+
+pub fn pow_diff_bound_unit() -> @kernel.Thm
+
+pub fn pow_exp_neg_diff() -> @kernel.Thm
+
+pub fn pow_le_exp_neg() -> @kernel.Thm
+
+pub fn predictable_martingale_zero() -> @kernel.Thm
+
+pub fn predictable_neg() -> @kernel.Thm
+
+pub fn predictable_sub() -> @kernel.Thm
+
+pub fn prohorov_forward_simple() -> @kernel.Thm
+
+pub fn quantitative_cdf_lower() -> @kernel.Thm
+
+pub fn quantitative_cdf_upper() -> @kernel.Thm
+
+pub fn real_diff_sq_bound() -> @kernel.Thm
+
+pub fn real_eq_rdiv_cancel() -> @kernel.Thm
+
+pub fn real_exp_decay_bound() -> @kernel.Thm
+
+pub fn real_exp_neg_lt_inv() -> @kernel.Thm
+
+pub fn real_integral_refl() -> @kernel.Thm
+
+pub fn real_mul_sub_decomp() -> @kernel.Thm
+
+pub fn real_mul_sub_rearrange() -> @kernel.Thm
+
+pub fn real_pow_diff_bound() -> @kernel.Thm
+
+pub fn real_pow_pow_swap() -> @kernel.Thm
+
+pub fn real_sq_diff_factor() -> @kernel.Thm
+
+pub fn real_sq_le_abs() -> @kernel.Thm
+
+pub fn reallim_exp_neg() -> @kernel.Thm
+
+pub fn reallim_exp_neg_sq() -> @kernel.Thm
+
+pub fn reallim_inv_sqrt_suc() -> @kernel.Thm
+
+pub fn reallim_null_sqabs() -> @kernel.Thm
+
+pub fn reallim_pow_exp_neg() -> @kernel.Thm
+
+pub fn reallim_pow_exp_neg_perturb() -> @kernel.Thm
+
+pub fn reallim_subseq_same_limit() -> @kernel.Thm
+
+pub fn reallim_subsequence() -> @kernel.Thm
+
+pub fn rhs_integrable() -> @kernel.Thm
+
+pub fn rv_sigma() -> @kernel.Thm
+
+pub fn rv_sigma_atom() -> @kernel.Thm
+
+pub fn rv_sigma_atom_eq() -> @kernel.Thm
+
+pub fn rv_sigma_atom_in_events() -> @kernel.Thm
+
+pub fn rv_sigma_atom_in_sigma() -> @kernel.Thm
+
+pub fn rv_sigma_atom_indep_cdf() -> @kernel.Thm
+
+pub fn rv_sigma_atom_indep_point_mass() -> @kernel.Thm
+
+pub fn rv_sigma_atom_indep_point_mass_gen() -> @kernel.Thm
+
+pub fn rv_sigma_in_events() -> @kernel.Thm
+
+pub fn rv_sigma_mono() -> @kernel.Thm
+
+pub fn rv_sigma_trivial() -> @kernel.Thm
+
+pub fn rv_sigma_union_of_atoms() -> @kernel.Thm
+
+pub fn s_sq_decomp_bound() -> @kernel.Thm
+
+pub fn scaled_approx_bound() -> @kernel.Thm
+
+pub fn se_measurable_indicator_atom() -> @kernel.Thm
+
+pub fn sigma_algebra_rv_sigma() -> @kernel.Thm
+
+pub fn sigma_atom_rv_sigma_0() -> @kernel.Thm
+
+pub fn simple_azuma_hoeffding() -> @kernel.Thm
+
+pub fn simple_cdf() -> @kernel.Thm
+
+pub fn simple_cdf_as_expectation() -> @kernel.Thm
+
+pub fn simple_cdf_bounds() -> @kernel.Thm
+
+pub fn simple_cdf_le_expectation() -> @kernel.Thm
+
+pub fn simple_cdf_lower_trapezoidal() -> @kernel.Thm
+
+pub fn simple_cdf_upper_trapezoidal() -> @kernel.Thm
+
+pub fn simple_char_fn_add_indep_im() -> @kernel.Thm
+
+pub fn simple_char_fn_add_indep_re() -> @kernel.Thm
+
+pub fn simple_char_fn_determines_normal_cdf_limit() -> @kernel.Thm
+
+pub fn simple_char_fn_im() -> @kernel.Thm
+
+pub fn simple_char_fn_im_bound() -> @kernel.Thm
+
+pub fn simple_char_fn_im_continuous() -> @kernel.Thm
+
+pub fn simple_char_fn_im_div() -> @kernel.Thm
+
+pub fn simple_char_fn_im_mean_zero_bound() -> @kernel.Thm
+
+pub fn simple_char_fn_modulus_le() -> @kernel.Thm
+
+pub fn simple_char_fn_re() -> @kernel.Thm
+
+pub fn simple_char_fn_re_approx() -> @kernel.Thm
+
+pub fn simple_char_fn_re_bound() -> @kernel.Thm
+
+pub fn simple_char_fn_re_continuous() -> @kernel.Thm
+
+pub fn simple_char_fn_re_div() -> @kernel.Thm
+
+pub fn simple_char_fn_re_pow_conv_exp() -> @kernel.Thm
+
+pub fn simple_char_fn_sum_iid_im_sq_bound() -> @kernel.Thm
+
+pub fn simple_char_fn_sum_iid_modulus() -> @kernel.Thm
+
+pub fn simple_char_fn_sum_iid_re_bound() -> @kernel.Thm
+
+pub fn simple_char_fn_sum_iid_triangle() -> @kernel.Thm
+
+pub fn simple_char_fn_zero() -> @kernel.Thm
+
+pub fn simple_clt_char_fn_convergence() -> @kernel.Thm
+
+pub fn simple_clt_char_fn_im_convergence() -> @kernel.Thm
+
+pub fn simple_clt_im_error_vanishes() -> @kernel.Thm
+
+pub fn simple_doob_decomposition() -> @kernel.Thm
+
+pub fn simple_doob_decomposition_unique() -> @kernel.Thm
+
+pub fn simple_expectation_compose_sum() -> @kernel.Thm
+
+pub fn simple_expectation_indicator_measurable() -> @kernel.Thm
+
+pub fn simple_expectation_le_cdf() -> @kernel.Thm
+
+pub fn simple_expectation_lower_bound() -> @kernel.Thm
+
+pub fn simple_expectation_product_compose_indep() -> @kernel.Thm
+
+pub fn simple_expectation_sq_le() -> @kernel.Thm
+
+pub fn simple_expectation_trapezoidal_fourier() -> @kernel.Thm
+
+pub fn simple_expectation_trig_term() -> @kernel.Thm
+
+pub fn simple_expectation_upper_bound() -> @kernel.Thm
+
+pub fn simple_jensen() -> @kernel.Thm
+
+pub fn simple_levy_continuity_clt() -> @kernel.Thm
+
+pub fn simple_martingale_diff_convex_indicator() -> @kernel.Thm
+
+pub fn simple_martingale_diff_exp_adapted_bound() -> @kernel.Thm
+
+pub fn simple_martingale_diff_exp_indicator_bound() -> @kernel.Thm
+
+pub fn simple_martingale_diff_indicator_zero() -> @kernel.Thm
+
+pub fn simple_martingale_sub() -> @kernel.Thm
+
+pub fn simple_mgf() -> @kernel.Thm
+
+pub fn simple_mgf_add_indep() -> @kernel.Thm
+
+pub fn simple_mgf_convex_bound() -> @kernel.Thm
+
+pub fn simple_mgf_nonneg() -> @kernel.Thm
+
+pub fn simple_prob_sum_one() -> @kernel.Thm
+
+pub fn simple_rv_cdf_as_sum() -> @kernel.Thm
+
+pub fn simple_rv_cdf_decompose() -> @kernel.Thm
+
+pub fn simple_rv_compose_sum_indicator() -> @kernel.Thm
+
+pub fn simple_rv_div() -> @kernel.Thm
+
+pub fn simple_rv_exp() -> @kernel.Thm
+
+pub fn simple_rv_joint_cdf_as_double_sum() -> @kernel.Thm
+
+pub fn simple_rv_real_compose() -> @kernel.Thm
+
+pub fn simple_rv_sum_div() -> @kernel.Thm
+
+pub fn simple_rv_sum_numseg_1() -> @kernel.Thm
+
+pub fn simple_rv_wrt_neg() -> @kernel.Thm
+
+pub fn simple_rv_wrt_sub() -> @kernel.Thm
+
+pub fn simple_step_c_bound() -> @kernel.Thm
+
+pub fn simple_submartingale_cond_exp_ge() -> @kernel.Thm
+
+pub fn simple_tightness_from_second_moments() -> @kernel.Thm
+
+pub fn simple_trig_poly_weak_convergence() -> @kernel.Thm
+
+pub fn simple_variance_mean_zero() -> @kernel.Thm
+
+pub fn simple_weak_convergence_from_char_fn() -> @kernel.Thm
+
+pub fn sin2x_inv_x_substitution() -> @kernel.Thm
+
+pub fn sin_approx_bound() -> @kernel.Thm
+
+pub fn sin_density_integrable() -> @kernel.Thm
+
+pub fn sin_exp_2d_continuous() -> @kernel.Thm
+
+pub fn sin_exp_fubini() -> @kernel.Thm
+
+pub fn sin_lipschitz() -> @kernel.Thm
+
+pub fn sin_periodic_n() -> @kernel.Thm
+
+pub fn sin_pow2_le() -> @kernel.Thm
+
+pub fn sin_squared_ibp() -> @kernel.Thm
+
+pub fn sin_squared_inv_le() -> @kernel.Thm
+
+pub fn sin_taylor2_bound() -> @kernel.Thm
+
+pub fn sinc_abs_integral_bound_log() -> @kernel.Thm
+
+pub fn sinc_bound() -> @kernel.Thm
+
+pub fn sinc_continuous() -> @kernel.Thm
+
+pub fn sinc_decomposition() -> @kernel.Thm
+
+pub fn sinc_exp_decay_bound() -> @kernel.Thm
+
+pub fn sinc_exp_decay_integrable() -> @kernel.Thm
+
+pub fn sinc_exp_eq() -> @kernel.Thm
+
+pub fn sinc_integrable() -> @kernel.Thm
+
+pub fn sinc_integral_bound() -> @kernel.Thm
+
+pub fn sinc_integral_identity() -> @kernel.Thm
+
+pub fn sinc_integral_split() -> @kernel.Thm
+
+pub fn sinc_inv_integrable() -> @kernel.Thm
+
+pub fn sinc_le_one() -> @kernel.Thm
+
+pub fn sinc_mul_integrable() -> @kernel.Thm
+
+pub fn sinc_squared_continuous() -> @kernel.Thm
+
+pub fn sinc_squared_has_real_integral_halfline() -> @kernel.Thm
+
+pub fn sinc_squared_has_real_integral_univ() -> @kernel.Thm
+
+pub fn sinc_squared_identity() -> @kernel.Thm
+
+pub fn sinc_squared_integrable() -> @kernel.Thm
+
+pub fn sinc_squared_integral() -> @kernel.Thm
+
+pub fn sinc_squared_integral_bound() -> @kernel.Thm
+
+pub fn sinc_squared_le_one() -> @kernel.Thm
+
+pub fn smoothing_integrand_integrable() -> @kernel.Thm
+
+pub fn smoothing_integrand_measurable() -> @kernel.Thm
+
+pub fn sqrt_2pi_cancel() -> @kernel.Thm
+
+pub fn sqrt_2pi_inv() -> @kernel.Thm
+
+pub fn sqrt_pi_half_sq() -> @kernel.Thm
+
+pub fn std_normal_cdf() -> @kernel.Thm
+
+pub fn std_normal_cdf_bounds() -> @kernel.Thm
+
+pub fn std_normal_cdf_continuous() -> @kernel.Thm
+
+pub fn std_normal_cdf_interval() -> @kernel.Thm
+
+pub fn std_normal_cdf_lipschitz() -> @kernel.Thm
+
+pub fn std_normal_cdf_mono() -> @kernel.Thm
+
+pub fn std_normal_cdf_zero() -> @kernel.Thm
+
+pub fn std_normal_char_fn_im() -> @kernel.Thm
+
+pub fn std_normal_char_fn_re() -> @kernel.Thm
+
+pub fn std_normal_density() -> @kernel.Thm
+
+pub fn std_normal_density_bound() -> @kernel.Thm
+
+pub fn std_normal_density_continuous() -> @kernel.Thm
+
+pub fn std_normal_density_even() -> @kernel.Thm
+
+pub fn std_normal_density_integrable() -> @kernel.Thm
+
+pub fn std_normal_density_integrable_halfline() -> @kernel.Thm
+
+pub fn std_normal_density_integrable_upper_halfline() -> @kernel.Thm
+
+pub fn std_normal_density_integral() -> @kernel.Thm
+
+pub fn std_normal_density_nonneg() -> @kernel.Thm
+
+pub fn std_normal_density_pos() -> @kernel.Thm
+
+pub fn std_normal_density_sym() -> @kernel.Thm
+
+pub fn std_normal_mean_zero() -> @kernel.Thm
+
+pub fn std_normal_mean_zero_integral() -> @kernel.Thm
+
+pub fn std_normal_second_moment() -> @kernel.Thm
+
+pub fn std_normal_second_moment_integral() -> @kernel.Thm
+
+pub fn step_d_bound() -> @kernel.Thm
+
+pub fn strictly_increasing_compose() -> @kernel.Thm
+
+pub fn strictly_increasing_ge() -> @kernel.Thm
+
+pub fn sub_sigma_algebra_rv_sigma() -> @kernel.Thm
+
+pub fn submartingale_imp_submartingale() -> @kernel.Thm
+
+pub fn sum_telescope_alt() -> @kernel.Thm
+
+pub fn sum_trig_factor() -> @kernel.Thm
+
+pub fn t_cos_has_real_integral() -> @kernel.Thm
+
+pub fn tight_helly_limit_proper() -> @kernel.Thm
+
+pub fn tight_sequence() -> @kernel.Thm
+
+pub fn trapezoidal_alg_identity() -> @kernel.Thm
+
+pub fn trapezoidal_continuous() -> @kernel.Thm
+
+pub fn trapezoidal_fourier_identity() -> @kernel.Thm
+
+pub fn trapezoidal_lower_continuous() -> @kernel.Thm
+
+pub fn trig_cos_diff_expand() -> @kernel.Thm
+
+pub fn trig_poly_expectation_diff() -> @kernel.Thm
+
+pub fn trig_poly_expectation_diff_bound() -> @kernel.Thm
+
+pub fn unions_rv_sigma() -> @kernel.Thm
+
+pub fn witness_exists_rv() -> @kernel.Thm
+
+pub fn x2_gaussian_has_integral() -> @kernel.Thm
+
+pub fn x2_minus_1_gaussian_has_integral_0() -> @kernel.Thm
+
+pub fn x_gaussian_integrable() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
