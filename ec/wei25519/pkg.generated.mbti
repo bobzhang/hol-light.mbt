@@ -1,0 +1,59 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/wei25519"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn a_25519() -> @kernel.Thm
+
+pub fn abelian_wei25519_group() -> @kernel.Thm
+
+pub fn b_25519() -> @kernel.Thm
+
+pub fn cyclic_wei25519_group() -> @kernel.Thm
+
+pub fn finite_group_carrier_wei25519() -> @kernel.Thm
+
+pub fn fullgenerator_in_group_carrier_wei25519() -> @kernel.Thm
+
+pub fn g_25519() -> @kernel.Thm
+
+pub fn generated_wei25519_group() -> @kernel.Thm
+
+pub fn generator_in_group_carrier_wei25519() -> @kernel.Thm
+
+pub fn gg_25519() -> @kernel.Thm
+
+pub fn group_element_order_wei25519_g25519() -> @kernel.Thm
+
+pub fn group_element_order_wei25519_gg25519() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn n_25519() -> @kernel.Thm
+
+pub fn n_25519_v1() -> @kernel.Thm
+
+pub fn p_25519() -> @kernel.Thm
+
+pub fn p_25519_v1() -> @kernel.Thm
+
+pub fn prime_n25519() -> @kernel.Thm
+
+pub fn prime_p25519() -> @kernel.Thm
+
+pub fn size_wei25519_group() -> @kernel.Thm
+
+pub fn wei25519_group() -> @kernel.Thm
+
+pub fn wei25519_group_v1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
