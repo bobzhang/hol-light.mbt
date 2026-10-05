@@ -230,7 +230,8 @@ def run_wasm(target, ps, a):
     def run(job):
         p, kind, exe, args, n = job
         t = time.time()
-        proc = subprocess.Popen(["moonrun", "--stack-size", a.stack_size, "--test-args", args, exe, "--"],
+        proc = subprocess.Popen(["sh", "-c", f'ulimit -s {stack_limit_kb(int(a.stack_size))} 2>/dev/null; exec "$@"', "sh",
+                                 "moonrun", "--stack-size", a.stack_size, "--test-args", args, exe, "--"],
                                 cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         # watch its memory: a test that runs away is killed, not left to
         # take the machine with it
@@ -291,6 +292,19 @@ def record_times(secs):
     known.update({p: str(max(1, round(s))) for p, s in secs.items()})
     with open(TIMES, "w") as f:
         f.write("".join(head) + "".join(f"{p}\t{s}\n" for p, s in sorted(known.items())))
+
+
+
+def stack_limit_kb(kb):
+    """The OS stack limit (in KB) a test executable gets: moonrun's wasm
+    stack is its main thread's, the default limit is 8 MB on macOS, and
+    going over it kills the process ("has overflowed its stack") instead
+    of trapping. `ulimit -s` in the shell that execs it (Python's
+    setrlimit cannot raise its own on macOS)."""
+    import resource
+    hard = resource.getrlimit(resource.RLIMIT_STACK)[1]
+    want = kb + 2048
+    return want if hard == resource.RLIM_INFINITY else min(want, hard // 1024)
 
 
 def main():
