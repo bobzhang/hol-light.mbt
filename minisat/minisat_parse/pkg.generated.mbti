@@ -1,0 +1,76 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/minisat/minisat_parse"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/oset",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn addbranch(@lib.InChannel, @list.List[Clause], Int64, Int64, Int64) -> (Int64, Bool, @list.List[Clause]) raise
+
+pub fn[TA] addclause(FixedArray[Int64], TA, Int64, Int64, FixedArray[@kernel.Term], @lib.InChannel, @list.List[Clause], Int64) -> (Int64, Int64, @list.List[Clause]) raise
+
+pub fn getchain(Clause) -> @list.List[(Int64, Int64)] raise
+
+pub fn getintbranch(@lib.InChannel, Int64, Int64) -> (@list.List[(Int64, Int64)], Int64) raise
+
+pub fn getintroot(@lib.InChannel, Int64) -> @list.List[Int64] raise
+
+pub fn[TA, TB] getnextrootclause(FixedArray[TA], TB, TA, Int64, @list.List[Int64], FixedArray[@kernel.Term]) -> (Int64, (@kernel.Term, @oset.T[(Bool, Int64)])) raise
+
+pub fn is_compl(Int64, Int64) -> Bool raise
+
+pub fn isrootclauseidx(FixedArray[Clause], Int64) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] issameclause(TA, TA) -> Bool raise
+
+pub fn literaltoint2(@kernel.Term) -> Int64 raise
+
+pub fn literaltoint3(@kernel.Term) -> (Bool, Int64) raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_sk(FixedArray[Clause], FixedArray[Bool], Int64) -> @list.List[Int64] raise
+
+pub fn[TA] parseminisatproof(Int64, String, TA, FixedArray[@kernel.Term]) -> (FixedArray[Clause], @list.List[Int64], FixedArray[Int64], Int64, Int64)? raise
+
+pub fn[TA] parsetrace(Int64, String, TA, FixedArray[@kernel.Term]) -> (Int64, @list.List[Clause], FixedArray[Int64])? raise
+
+pub fn[TA] readtrace_aux(FixedArray[Int64], TA, Int64, Int64, FixedArray[@kernel.Term], @lib.InChannel, @list.List[Clause], Int64) -> (Int64, @list.List[Clause]) raise
+
+pub fn sat_fileclose(@lib.InChannel) -> Unit raise
+
+pub fn sat_fileopen(String) -> @lib.InChannel raise
+
+pub fn sat_getchar(@lib.InChannel) -> Int raise
+
+pub fn sat_getint(@lib.InChannel) -> Int64 raise
+
+// Errors
+
+// Types and methods
+pub(all) enum Clause {
+  Blank
+  Chain(@list.List[(Int64, Int64)], Int64)
+  Root(Rootc)
+  Learnt(@kernel.Thm, @oset.T[(Bool, Int64)])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Clause
+pub impl @lib.OHash for Clause
+
+pub(all) enum Rootc {
+  Rthm(@kernel.Thm, @oset.T[(Bool, Int64)], @kernel.Term, @kernel.Thm)
+  Ll(@kernel.Term, @oset.T[(Bool, Int64)])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Rootc
+pub impl @lib.OHash for Rootc
+
+// Type aliases
+
+// Traits

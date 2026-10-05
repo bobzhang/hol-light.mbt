@@ -1,0 +1,69 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/minisat/dimacs_tools"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/omap",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn all_string_of_term(@kernel.Term) -> String raise
+
+pub fn buildclause(@list.List[Int64]) -> @kernel.Term raise
+
+pub fn dimacstoterm(@list.List[Int64]) -> @kernel.Term raise
+
+pub fn dimacstoterm_aux(@list.List[Int64], @list.List[Int64]) -> (@kernel.Term, @list.List[Int64]) raise
+
+pub fn initsatvarmap(Int64) -> Unit raise
+
+pub fn inttoliteral(Int64) -> @kernel.Term raise
+
+pub fn inttoprefixedliteral(Int64) -> @kernel.Term raise
+
+pub fn literaltoint(@kernel.Term) -> (Bool, Int64) raise
+
+pub fn literaltostring(Bool, Int64) -> String raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn lookup_sat_num(Int64) -> @kernel.Term raise
+
+pub fn lookup_sat_var(@kernel.Term) -> Int64 raise
+
+pub fn prefix() -> @ref.Ref[String]
+
+pub fn print_all_term(@kernel.Term) -> Unit raise
+
+pub fn read_dimacs(String) -> @kernel.Term raise
+
+pub fn sat_var_arr() -> @ref.Ref[FixedArray[@kernel.Term]]
+
+pub fn sat_var_map() -> @ref.Ref[(Int64, @omap.T[@kernel.Term, (@kernel.Term, Int64)])]
+
+pub fn showsatvarmap(Unit) -> (Int64, @list.List[(@kernel.Term, Int64)]) raise
+
+pub fn termtodimacs(@kernel.Term) -> @list.List[@list.List[(Bool, Int64)]] raise
+
+pub fn termtodimacsfile(String?, @kernel.Term, Int64) -> String raise
+
+pub fn tmp_name() -> @ref.Ref[String]
+
+// Errors
+pub(all) suberror Lit_to_int_err {
+  Lit_to_int_err(String)
+}
+
+pub(all) suberror Read_dimacs_error {
+  Read_dimacs_error
+}
+
+// Types and methods
+
+// Type aliases
+
+// Traits

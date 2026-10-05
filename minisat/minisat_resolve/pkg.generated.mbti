@@ -1,0 +1,59 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/minisat/minisat_resolve"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/minisat/minisat_parse",
+  "bobzhang/hol_light/omap",
+  "bobzhang/hol_light/oset",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn dualise(@lib.Func[@kernel.Term, @kernel.Term]) -> ((@omap.T[@kernel.Term, @kernel.Thm]) -> ((@kernel.Term) -> (@kernel.Thm, @kernel.Term, @kernel.Thm) raise) raise) raise
+
+pub fn[TA] get_var_num(TA, @kernel.Term) -> Int64 raise
+
+pub fn getclause(@lib.Func[@kernel.Term, @kernel.Term], @omap.T[@kernel.Term, @kernel.Thm], FixedArray[@minisat_parse.Clause], Int64) -> (@kernel.Thm, @oset.T[(Bool, Int64)]) raise
+
+pub fn getrootclause(FixedArray[@minisat_parse.Clause], Int64) -> (@kernel.Thm, @oset.T[(Bool, Int64)], @kernel.Term, @kernel.Thm) raise
+
+pub fn[TA] l2hh(@list.List[TA]) -> (TA, TA, @list.List[TA]) raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_sat_var(@lib.Func[@kernel.Term, @kernel.Term], Int64) -> @kernel.Term raise
+
+pub fn not_not_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn not_not_elim(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn preparerootclause(@lib.Func[@kernel.Term, @kernel.Term], @omap.T[@kernel.Term, @kernel.Thm], FixedArray[@minisat_parse.Clause], (@kernel.Term, @oset.T[(Bool, Int64)]), Int64) -> (@kernel.Thm, @oset.T[(Bool, Int64)]) raise
+
+pub fn resolve(@kernel.Term) -> ((Bool) -> ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn resolvechain(@lib.Func[@kernel.Term, @kernel.Term], @omap.T[@kernel.Term, @kernel.Thm], FixedArray[@minisat_parse.Clause], Int64) -> Unit raise
+
+pub fn resolveclause(@lib.Func[@kernel.Term, @kernel.Term], @omap.T[@kernel.Term, @kernel.Thm], FixedArray[@minisat_parse.Clause], Int64, Int64, (Int64, Int64)) -> Unit raise
+
+pub fn tovar(@kernel.Term) -> @kernel.Term raise
+
+pub fn unsatproveresolve(@lib.Func[@kernel.Term, @kernel.Term], @omap.T[@kernel.Term, @kernel.Thm], (FixedArray[@minisat_parse.Clause], @list.List[Int64], Int64)) -> @kernel.Thm raise
+
+// Errors
+pub(all) suberror Fn_get_clause__match {
+  Fn_get_clause__match
+}
+
+pub(all) suberror Fn_get_root_clause__match {
+  Fn_get_root_clause__match
+}
+
+// Types and methods
+
+// Type aliases
+
+// Traits
