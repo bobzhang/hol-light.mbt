@@ -1,0 +1,3084 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/jordan/jordan_curve_theorem"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/nets",
+  "bobzhang/hol_light/simp",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn abs3_012() -> @kernel.Thm
+
+pub fn abs3_distinct() -> @kernel.Thm
+
+pub fn abs3_onto() -> @kernel.Thm
+
+pub fn abs_dest_int_half() -> @kernel.Thm
+
+pub fn abssinx_le() -> @kernel.Thm
+
+pub fn abssinx_lemma() -> @kernel.Thm
+
+pub fn adj() -> @kernel.Thm
+
+pub fn adj_edge() -> @kernel.Thm
+
+pub fn adj_edge_down() -> @kernel.Thm
+
+pub fn adj_edge_left() -> @kernel.Thm
+
+pub fn adj_edge_right() -> @kernel.Thm
+
+pub fn adj_edge_right_v1() -> @kernel.Thm
+
+pub fn adj_edge_sym() -> @kernel.Thm
+
+pub fn adj_irrefl() -> @kernel.Thm
+
+pub fn adj_symm() -> @kernel.Thm
+
+pub fn adjv() -> @kernel.Thm
+
+pub fn adjv_adj() -> @kernel.Thm
+
+pub fn adjv_adj2() -> @kernel.Thm
+
+pub fn adjv_segment() -> @kernel.Thm
+
+pub fn adjv_symm() -> @kernel.Thm
+
+pub fn adjv_unique() -> @kernel.Thm
+
+pub fn along_lemma1() -> @kernel.Thm
+
+pub fn along_lemma10() -> @kernel.Thm
+
+pub fn along_lemma11() -> @kernel.Thm
+
+pub fn along_lemma2() -> @kernel.Thm
+
+pub fn along_lemma3() -> @kernel.Thm
+
+pub fn along_lemma4() -> @kernel.Thm
+
+pub fn along_lemma5() -> @kernel.Thm
+
+pub fn along_lemma6() -> @kernel.Thm
+
+pub fn along_lemma7() -> @kernel.Thm
+
+pub fn along_lemma8() -> @kernel.Thm
+
+pub fn along_lemma9() -> @kernel.Thm
+
+pub fn along_seg() -> @kernel.Thm
+
+pub fn arc_reparameter_gen() -> @kernel.Thm
+
+pub fn arc_reparameter_rev() -> @kernel.Thm
+
+pub fn arc_restrict() -> @kernel.Thm
+
+pub fn asm_rsimp_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn basic_net_bak() -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]]
+
+pub fn basic_rewrite_bak() -> @list.List[@kernel.Thm]
+
+pub fn bij_empty() -> @kernel.Thm
+
+pub fn bij_homeo() -> @kernel.Thm
+
+pub fn bij_imp_image() -> @kernel.Thm
+
+pub fn bij_inj_image() -> @kernel.Thm
+
+pub fn bij_sing() -> @kernel.Thm
+
+pub fn bij_target_set() -> @kernel.Thm
+
+pub fn bij_target_set_odd() -> @kernel.Thm
+
+pub fn bool_size() -> @kernel.Thm
+
+pub fn bool_three_delete_bij() -> @kernel.Thm
+
+pub fn bounded_avoidance_subset() -> @kernel.Thm
+
+pub fn bounded_diff() -> @kernel.Thm
+
+pub fn bounded_euclid() -> @kernel.Thm
+
+pub fn bounded_set() -> @kernel.Thm
+
+pub fn bounded_set_curve_cell_empty() -> @kernel.Thm
+
+pub fn bounded_subset_unions() -> @kernel.Thm
+
+pub fn bounded_triple_avoidance() -> @kernel.Thm
+
+pub fn bounded_triple_inner_union() -> @kernel.Thm
+
+pub fn bounded_unbounded_disj() -> @kernel.Thm
+
+pub fn bounded_unbounded_union() -> @kernel.Thm
+
+pub fn c_edge_euclid() -> @kernel.Thm
+
+pub fn card_gt_3() -> @kernel.Thm
+
+pub fn card_has_subset() -> @kernel.Thm
+
+pub fn card_inj() -> @kernel.Thm
+
+pub fn card_sing() -> @kernel.Thm
+
+pub fn card_subset_lt() -> @kernel.Thm
+
+pub fn card_suc_delete() -> @kernel.Thm
+
+pub fn card_suc_insert() -> @kernel.Thm
+
+pub fn card_surj_bij() -> @kernel.Thm
+
+pub fn cartesian() -> @kernel.Thm
+
+pub fn cartesian_el() -> @kernel.Thm
+
+pub fn cartesian_finite() -> @kernel.Thm
+
+pub fn cartesian_pair() -> @kernel.Thm
+
+pub fn cartesian_size() -> @kernel.Thm
+
+pub fn cartesian_univ() -> @kernel.Thm
+
+pub fn cases4() -> @kernel.Thm
+
+pub fn cell() -> @kernel.Thm
+
+pub fn cell_clauses() -> @kernel.Thm
+
+pub fn cell_convex() -> @kernel.Thm
+
+pub fn cell_euclid() -> @kernel.Thm
+
+pub fn cell_inter() -> @kernel.Thm
+
+pub fn cell_mem() -> @kernel.Thm
+
+pub fn cell_nonempty() -> @kernel.Thm
+
+pub fn cell_of() -> @kernel.Thm
+
+pub fn cell_partition() -> @kernel.Thm
+
+pub fn cell_rules() -> @kernel.Thm
+
+pub fn cell_unions() -> @kernel.Thm
+
+pub fn cell_unions_disj() -> @kernel.Thm
+
+pub fn cell_ununion() -> @kernel.Thm
+
+pub fn cis() -> @kernel.Thm
+
+pub fn cis0() -> @kernel.Thm
+
+pub fn cis3pi2() -> @kernel.Thm
+
+pub fn cis_distinct() -> @kernel.Thm
+
+pub fn cis_exist_lemma() -> @kernel.Thm
+
+pub fn cis_inj() -> @kernel.Thm
+
+pub fn cis_lemma() -> @kernel.Thm
+
+pub fn cis_nz() -> @kernel.Thm
+
+pub fn cispi() -> @kernel.Thm
+
+pub fn cispi2() -> @kernel.Thm
+
+pub fn clean_int_le_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn closed_ball2_center() -> @kernel.Thm
+
+pub fn closed_ball_compact() -> @kernel.Thm
+
+pub fn closed_ball_empty() -> @kernel.Thm
+
+pub fn closed_ball_inter() -> @kernel.Thm
+
+pub fn closed_ball_pt() -> @kernel.Thm
+
+pub fn closed_ball_subset_larger_open() -> @kernel.Thm
+
+pub fn closed_ball_subset_open() -> @kernel.Thm
+
+pub fn closed_half_plane2d_fle() -> @kernel.Thm
+
+pub fn closed_half_plane2d_flt_closed() -> @kernel.Thm
+
+pub fn closed_half_plane2d_flt_convex() -> @kernel.Thm
+
+pub fn closed_half_plane2d_lef() -> @kernel.Thm
+
+pub fn closed_half_plane2d_les() -> @kernel.Thm
+
+pub fn closed_half_plane2d_ltf_closed() -> @kernel.Thm
+
+pub fn closed_half_plane2d_ltf_convex() -> @kernel.Thm
+
+pub fn closed_half_plane2d_lts_closed() -> @kernel.Thm
+
+pub fn closed_half_plane2d_lts_convex() -> @kernel.Thm
+
+pub fn closed_half_plane2d_sle() -> @kernel.Thm
+
+pub fn closed_half_plane2d_slt_closed() -> @kernel.Thm
+
+pub fn closed_half_plane2d_slt_convex() -> @kernel.Thm
+
+pub fn closed_half_space() -> @kernel.Thm
+
+pub fn closed_half_space_closed() -> @kernel.Thm
+
+pub fn closed_half_space_convex() -> @kernel.Thm
+
+pub fn closed_half_space_diff() -> @kernel.Thm
+
+pub fn closed_half_space_euclid() -> @kernel.Thm
+
+pub fn closed_half_space_inter() -> @kernel.Thm
+
+pub fn closed_half_space_scale() -> @kernel.Thm
+
+pub fn closed_inter2() -> @kernel.Thm
+
+pub fn closed_point() -> @kernel.Thm
+
+pub fn closed_union() -> @kernel.Thm
+
+pub fn closedball_convex() -> @kernel.Thm
+
+pub fn closedball_mk_segment_end() -> @kernel.Thm
+
+pub fn closure_empty() -> @kernel.Thm
+
+pub fn closure_euclid() -> @kernel.Thm
+
+pub fn closure_euclid_v1() -> @kernel.Thm
+
+pub fn closure_flt() -> @kernel.Thm
+
+pub fn closure_half_space() -> @kernel.Thm
+
+pub fn closure_imp_adj() -> @kernel.Thm
+
+pub fn closure_inter() -> @kernel.Thm
+
+pub fn closure_ltf() -> @kernel.Thm
+
+pub fn closure_lts() -> @kernel.Thm
+
+pub fn closure_open_ball() -> @kernel.Thm
+
+pub fn closure_open_interval() -> @kernel.Thm
+
+pub fn closure_real_set() -> @kernel.Thm
+
+pub fn closure_segment() -> @kernel.Thm
+
+pub fn closure_slt() -> @kernel.Thm
+
+pub fn closure_union() -> @kernel.Thm
+
+pub fn closure_unions() -> @kernel.Thm
+
+pub fn closure_univ() -> @kernel.Thm
+
+pub fn cls() -> @kernel.Thm
+
+pub fn cls_edge() -> @kernel.Thm
+
+pub fn cls_edge_size2() -> @kernel.Thm
+
+pub fn cls_empty() -> @kernel.Thm
+
+pub fn cls_h() -> @kernel.Thm
+
+pub fn cls_inj() -> @kernel.Thm
+
+pub fn cls_inj_lemma_h() -> @kernel.Thm
+
+pub fn cls_inj_lemma_hv() -> @kernel.Thm
+
+pub fn cls_inj_lemma_v() -> @kernel.Thm
+
+pub fn cls_subset() -> @kernel.Thm
+
+pub fn cls_union() -> @kernel.Thm
+
+pub fn cls_v() -> @kernel.Thm
+
+pub fn col() -> @kernel.Thm
+
+pub fn col_disj() -> @kernel.Thm
+
+pub fn comp_comp() -> @kernel.Thm
+
+pub fn comp_h_rect() -> @kernel.Thm
+
+pub fn comp_h_squ() -> @kernel.Thm
+
+pub fn comp_p_squ() -> @kernel.Thm
+
+pub fn comp_pointi_long() -> @kernel.Thm
+
+pub fn comp_squ() -> @kernel.Thm
+
+pub fn comp_squ_adj() -> @kernel.Thm
+
+pub fn comp_squ_down_rect() -> @kernel.Thm
+
+pub fn comp_squ_down_rect_h() -> @kernel.Thm
+
+pub fn comp_squ_fill() -> @kernel.Thm
+
+pub fn comp_squ_left_rect() -> @kernel.Thm
+
+pub fn comp_squ_left_rect_v() -> @kernel.Thm
+
+pub fn comp_squ_right_left() -> @kernel.Thm
+
+pub fn comp_squ_right_rect() -> @kernel.Thm
+
+pub fn comp_squ_right_rect_v() -> @kernel.Thm
+
+pub fn comp_squ_up_rect() -> @kernel.Thm
+
+pub fn comp_squ_up_rect_h() -> @kernel.Thm
+
+pub fn comp_v_rect() -> @kernel.Thm
+
+pub fn comp_v_squ() -> @kernel.Thm
+
+pub fn compact_distance() -> @kernel.Thm
+
+pub fn compact_inf() -> @kernel.Thm
+
+pub fn compact_infm() -> @kernel.Thm
+
+pub fn compact_max_real() -> @kernel.Thm
+
+pub fn compact_min_real() -> @kernel.Thm
+
+pub fn compact_point() -> @kernel.Thm
+
+pub fn compact_subset() -> @kernel.Thm
+
+pub fn compact_sup() -> @kernel.Thm
+
+pub fn compact_supm() -> @kernel.Thm
+
+pub fn component() -> @kernel.Thm
+
+pub fn component_empty() -> @kernel.Thm
+
+pub fn component_homeo() -> @kernel.Thm
+
+pub fn component_imp_connected() -> @kernel.Thm
+
+pub fn component_properties() -> @kernel.Thm
+
+pub fn component_refla() -> @kernel.Thm
+
+pub fn component_reflb() -> @kernel.Thm
+
+pub fn component_reflc() -> @kernel.Thm
+
+pub fn component_replace() -> @kernel.Thm
+
+pub fn component_simple_arc() -> @kernel.Thm
+
+pub fn component_simple_arc_ver2() -> @kernel.Thm
+
+pub fn component_unions() -> @kernel.Thm
+
+pub fn compose_cont() -> @kernel.Thm
+
+pub fn compose_image() -> @kernel.Thm
+
+pub fn conn() -> @kernel.Thm
+
+pub fn conn2() -> @kernel.Thm
+
+pub fn conn2_cls3() -> @kernel.Thm
+
+pub fn conn2_has_rectagon() -> @kernel.Thm
+
+pub fn conn2_imp_conn() -> @kernel.Thm
+
+pub fn conn2_no1() -> @kernel.Thm
+
+pub fn conn2_proper() -> @kernel.Thm
+
+pub fn conn2_psegment_triple() -> @kernel.Thm
+
+pub fn conn2_rect_diff_inner() -> @kernel.Thm
+
+pub fn conn2_rectagon() -> @kernel.Thm
+
+pub fn conn2_sequence() -> @kernel.Thm
+
+pub fn conn2_sequence_lemma1() -> @kernel.Thm
+
+pub fn conn2_sequence_lemma2() -> @kernel.Thm
+
+pub fn conn2_sequence_lemma3() -> @kernel.Thm
+
+pub fn conn2_sequence_lemma4() -> @kernel.Thm
+
+pub fn conn2_sequence_lemma5() -> @kernel.Thm
+
+pub fn conn2_union() -> @kernel.Thm
+
+pub fn conn2_union_edge() -> @kernel.Thm
+
+pub fn conn_splice() -> @kernel.Thm
+
+pub fn conn_union() -> @kernel.Thm
+
+pub fn connect_real_open() -> @kernel.Thm
+
+pub fn connected_component() -> @kernel.Thm
+
+pub fn connected_empty() -> @kernel.Thm
+
+pub fn connected_empty_v1() -> @kernel.Thm
+
+pub fn connected_homeo() -> @kernel.Thm
+
+pub fn connected_in_edge() -> @kernel.Thm
+
+pub fn connected_induced() -> @kernel.Thm
+
+pub fn connected_induced2() -> @kernel.Thm
+
+pub fn connected_metric() -> @kernel.Thm
+
+pub fn connected_metric_pair() -> @kernel.Thm
+
+pub fn connected_mk_segment() -> @kernel.Thm
+
+pub fn connected_nogap() -> @kernel.Thm
+
+pub fn connected_open() -> @kernel.Thm
+
+pub fn connected_open_closure() -> @kernel.Thm
+
+pub fn connected_unions_common() -> @kernel.Thm
+
+pub fn construct_hv_finite() -> @kernel.Thm
+
+pub fn cont_domain() -> @kernel.Thm
+
+pub fn cont_extend_real_lemma() -> @kernel.Thm
+
+pub fn cont_mk_segment() -> @kernel.Thm
+
+pub fn continuous_delta() -> @kernel.Thm
+
+pub fn continuous_i() -> @kernel.Thm
+
+pub fn continuous_induced_domain() -> @kernel.Thm
+
+pub fn continuous_interval() -> @kernel.Thm
+
+pub fn continuous_metric_extend() -> @kernel.Thm
+
+pub fn continuous_neg_delta() -> @kernel.Thm
+
+pub fn continuous_range() -> @kernel.Thm
+
+pub fn continuous_real_const() -> @kernel.Thm
+
+pub fn continuous_real_mul() -> @kernel.Thm
+
+pub fn continuous_uninduced() -> @kernel.Thm
+
+pub fn convex_component() -> @kernel.Thm
+
+pub fn convex_component_ver2() -> @kernel.Thm
+
+pub fn convex_connected() -> @kernel.Thm
+
+pub fn convex_connected_ver2() -> @kernel.Thm
+
+pub fn convex_inter() -> @kernel.Thm
+
+pub fn convex_pointi() -> @kernel.Thm
+
+pub fn coord01() -> @kernel.Thm
+
+pub fn cos_double2() -> @kernel.Thm
+
+pub fn cos_period() -> @kernel.Thm
+
+pub fn cos_period_int() -> @kernel.Thm
+
+pub fn cos_period_neg() -> @kernel.Thm
+
+pub fn cos_sin_reduce() -> @kernel.Thm
+
+pub fn cosdiff2() -> @kernel.Thm
+
+pub fn count_iso_eps_pair() -> @kernel.Thm
+
+pub fn count_iso_scale() -> @kernel.Thm
+
+pub fn count_iso_translate() -> @kernel.Thm
+
+pub fn ctop() -> @kernel.Thm
+
+pub fn ctop_comp_open() -> @kernel.Thm
+
+pub fn ctop_open() -> @kernel.Thm
+
+pub fn ctop_open_v1() -> @kernel.Thm
+
+pub fn ctop_refla() -> @kernel.Thm
+
+pub fn ctop_reflb() -> @kernel.Thm
+
+pub fn ctop_reflc() -> @kernel.Thm
+
+pub fn ctop_top() -> @kernel.Thm
+
+pub fn ctop_top2() -> @kernel.Thm
+
+pub fn ctop_top2_ver2() -> @kernel.Thm
+
+pub fn ctop_unions() -> @kernel.Thm
+
+pub fn curve_annulus_lemma() -> @kernel.Thm
+
+pub fn curve_cell() -> @kernel.Thm
+
+pub fn curve_cell_cell() -> @kernel.Thm
+
+pub fn curve_cell_cls() -> @kernel.Thm
+
+pub fn curve_cell_edge() -> @kernel.Thm
+
+pub fn curve_cell_empty() -> @kernel.Thm
+
+pub fn curve_cell_finite_union() -> @kernel.Thm
+
+pub fn curve_cell_grid_unions() -> @kernel.Thm
+
+pub fn curve_cell_h() -> @kernel.Thm
+
+pub fn curve_cell_h_inter() -> @kernel.Thm
+
+pub fn curve_cell_h_inter_ver2() -> @kernel.Thm
+
+pub fn curve_cell_h_ver2() -> @kernel.Thm
+
+pub fn curve_cell_imp_subset() -> @kernel.Thm
+
+pub fn curve_cell_in() -> @kernel.Thm
+
+pub fn curve_cell_not_point() -> @kernel.Thm
+
+pub fn curve_cell_not_point_ver2() -> @kernel.Thm
+
+pub fn curve_cell_point() -> @kernel.Thm
+
+pub fn curve_cell_sing() -> @kernel.Thm
+
+pub fn curve_cell_squ() -> @kernel.Thm
+
+pub fn curve_cell_squ_inter() -> @kernel.Thm
+
+pub fn curve_cell_squ_inter_ver2() -> @kernel.Thm
+
+pub fn curve_cell_squ_ver2() -> @kernel.Thm
+
+pub fn curve_cell_subset() -> @kernel.Thm
+
+pub fn curve_cell_subset_v1() -> @kernel.Thm
+
+pub fn curve_cell_union() -> @kernel.Thm
+
+pub fn curve_cell_v() -> @kernel.Thm
+
+pub fn curve_cell_v_inter() -> @kernel.Thm
+
+pub fn curve_cell_v_inter_ver2() -> @kernel.Thm
+
+pub fn curve_cell_v_ver2() -> @kernel.Thm
+
+pub fn curve_circle_lemma() -> @kernel.Thm
+
+pub fn curve_closed() -> @kernel.Thm
+
+pub fn curve_closed_ver2() -> @kernel.Thm
+
+pub fn curve_closure() -> @kernel.Thm
+
+pub fn curve_closure_ver2() -> @kernel.Thm
+
+pub fn curve_point_unions() -> @kernel.Thm
+
+pub fn curve_point_unions_ver2() -> @kernel.Thm
+
+pub fn curve_restriction() -> @kernel.Thm
+
+pub fn curve_simple_lemma() -> @kernel.Thm
+
+pub fn cut_arc() -> @kernel.Thm
+
+pub fn cut_arc_inter() -> @kernel.Thm
+
+pub fn cut_arc_inter_lemma() -> @kernel.Thm
+
+pub fn cut_arc_order() -> @kernel.Thm
+
+pub fn cut_arc_replace() -> @kernel.Thm
+
+pub fn cut_arc_simple() -> @kernel.Thm
+
+pub fn cut_arc_simple2() -> @kernel.Thm
+
+pub fn cut_arc_subset() -> @kernel.Thm
+
+pub fn cut_arc_symm() -> @kernel.Thm
+
+pub fn cut_arc_unique() -> @kernel.Thm
+
+pub fn cut_psegment() -> @kernel.Thm
+
+pub fn cut_rectagon() -> @kernel.Thm
+
+pub fn cut_rectagon_cls() -> @kernel.Thm
+
+pub fn cut_rectagon_unique() -> @kernel.Thm
+
+pub fn d_euclid_bound2() -> @kernel.Thm
+
+pub fn d_euclid_cis() -> @kernel.Thm
+
+pub fn d_euclid_cis_ineq() -> @kernel.Thm
+
+pub fn d_euclid_eq_arg() -> @kernel.Thm
+
+pub fn d_euclid_floor() -> @kernel.Thm
+
+pub fn d_euclid_mk_segment() -> @kernel.Thm
+
+pub fn d_euclid_point() -> @kernel.Thm
+
+pub fn d_euclid_pointi_pos() -> @kernel.Thm
+
+pub fn d_euclid_pos2() -> @kernel.Thm
+
+pub fn d_euclid_zero() -> @kernel.Thm
+
+pub fn d_euclidpq() -> @kernel.Thm
+
+pub fn degree4_vertex_hv() -> @kernel.Thm
+
+pub fn degree_vertex_annulus() -> @kernel.Thm
+
+pub fn degree_vertex_disk() -> @kernel.Thm
+
+pub fn degree_vertex_disk_ver2() -> @kernel.Thm
+
+pub fn delta_partition_lemma() -> @kernel.Thm
+
+pub fn delta_partition_lemma_ver2() -> @kernel.Thm
+
+pub fn delta_pos_arch() -> @kernel.Thm
+
+pub fn dest_graph_t() -> @kernel.Thm
+
+pub fn dest_pt() -> @kernel.Thm
+
+pub fn dest_pt_point() -> @kernel.Thm
+
+pub fn diff_pow1() -> @kernel.Thm
+
+pub fn diff_unchange() -> @kernel.Thm
+
+pub fn disch_then_rewrite((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn disk_endpoint() -> @kernel.Thm
+
+pub fn disk_endpoint_gen() -> @kernel.Thm
+
+pub fn disk_endpoint_outer() -> @kernel.Thm
+
+pub fn dot_point() -> @kernel.Thm
+
+pub fn down() -> @kernel.Thm
+
+pub fn e1() -> @kernel.Thm
+
+pub fn e2() -> @kernel.Thm
+
+pub fn edge() -> @kernel.Thm
+
+pub fn edge_cell() -> @kernel.Thm
+
+pub fn edge_euclid2() -> @kernel.Thm
+
+pub fn edge_h() -> @kernel.Thm
+
+pub fn edge_inter() -> @kernel.Thm
+
+pub fn edge_midend() -> @kernel.Thm
+
+pub fn edge_subset_ctop() -> @kernel.Thm
+
+pub fn edge_v() -> @kernel.Thm
+
+pub fn edgec_convex() -> @kernel.Thm
+
+pub fn endpoint() -> @kernel.Thm
+
+pub fn endpoint_closure() -> @kernel.Thm
+
+pub fn endpoint_cls() -> @kernel.Thm
+
+pub fn endpoint_criterion() -> @kernel.Thm
+
+pub fn endpoint_edge() -> @kernel.Thm
+
+pub fn endpoint_even() -> @kernel.Thm
+
+pub fn endpoint_lemma() -> @kernel.Thm
+
+pub fn endpoint_lemma_big_fst() -> @kernel.Thm
+
+pub fn endpoint_lemma_big_snd() -> @kernel.Thm
+
+pub fn endpoint_lemma_mid_fst() -> @kernel.Thm
+
+pub fn endpoint_lemma_small_fst() -> @kernel.Thm
+
+pub fn endpoint_lemma_summary() -> @kernel.Thm
+
+pub fn endpoint_lemma_upper_left() -> @kernel.Thm
+
+pub fn endpoint_lemma_upper_left_v1() -> @kernel.Thm
+
+pub fn endpoint_lemma_upper_right() -> @kernel.Thm
+
+pub fn endpoint_psegment() -> @kernel.Thm
+
+pub fn endpoint_size2() -> @kernel.Thm
+
+pub fn endpoint_sub_rectagon() -> @kernel.Thm
+
+pub fn endpoint_subrectagon() -> @kernel.Thm
+
+pub fn eps_hyper() -> @kernel.Thm
+
+pub fn eps_hyper_inj() -> @kernel.Thm
+
+pub fn eps_hyper_ne() -> @kernel.Thm
+
+pub fn eps_hyper_scale() -> @kernel.Thm
+
+pub fn eps_hyper_scale_perp() -> @kernel.Thm
+
+pub fn eps_hyper_translate() -> @kernel.Thm
+
+pub fn eps_hyper_translate_perp() -> @kernel.Thm
+
+pub fn eps_scale() -> @kernel.Thm
+
+pub fn eps_translate() -> @kernel.Thm
+
+pub fn eps_translate_def() -> @kernel.Thm
+
+pub fn eq_antisym() -> @kernel.Thm
+
+pub fn eq_exchange() -> @kernel.Thm
+
+pub fn eq_pair_exchange() -> @kernel.Thm
+
+pub fn eq_sing() -> @kernel.Thm
+
+pub fn eq_sing_sym() -> @kernel.Thm
+
+pub fn euclid0_point() -> @kernel.Thm
+
+pub fn euclid2_d0() -> @kernel.Thm
+
+pub fn euclid2_e12() -> @kernel.Thm
+
+pub fn euclid2_point() -> @kernel.Thm
+
+pub fn euclid_add_cancel() -> @kernel.Thm
+
+pub fn euclid_cancel1() -> @kernel.Thm
+
+pub fn euclid_diff_par_cell() -> @kernel.Thm
+
+pub fn euclid_eq_minus() -> @kernel.Thm
+
+pub fn euclid_euclid0() -> @kernel.Thm
+
+pub fn euclid_minus0() -> @kernel.Thm
+
+pub fn euclid_minus_scale() -> @kernel.Thm
+
+pub fn euclid_n_convex() -> @kernel.Thm
+
+pub fn euclid_plus_pair() -> @kernel.Thm
+
+pub fn euclid_point() -> @kernel.Thm
+
+pub fn euclid_scale0() -> @kernel.Thm
+
+pub fn euclid_scale_bij() -> @kernel.Thm
+
+pub fn euclid_scale_cancel() -> @kernel.Thm
+
+pub fn euclid_scale_cont() -> @kernel.Thm
+
+pub fn euclid_scale_homeo() -> @kernel.Thm
+
+pub fn euclid_scale_inv() -> @kernel.Thm
+
+pub fn euclid_scale_rinv() -> @kernel.Thm
+
+pub fn euclid_scale_simple_arc_ver2() -> @kernel.Thm
+
+pub fn euclid_segment() -> @kernel.Thm
+
+pub fn euclid_xy() -> @kernel.Thm
+
+pub fn even2() -> @kernel.Thm
+
+pub fn even_card_even() -> @kernel.Thm
+
+pub fn even_cell() -> @kernel.Thm
+
+pub fn even_cell_h_edge() -> @kernel.Thm
+
+pub fn even_cell_point() -> @kernel.Thm
+
+pub fn even_cell_squ() -> @kernel.Thm
+
+pub fn even_cell_v_edge() -> @kernel.Thm
+
+pub fn even_delete() -> @kernel.Thm
+
+pub fn even_num_lower_union() -> @kernel.Thm
+
+pub fn exp_gt1() -> @kernel.Thm
+
+pub fn expinj() -> @kernel.Thm
+
+pub fn extend_simp_rewrites(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn fibre2() -> @kernel.Thm
+
+pub fn fibre_card() -> @kernel.Thm
+
+pub fn finite_augment() -> @kernel.Thm
+
+pub fn finite_augment1() -> @kernel.Thm
+
+pub fn finite_cls() -> @kernel.Thm
+
+pub fn finite_compact() -> @kernel.Thm
+
+pub fn finite_graph_edge() -> @kernel.Thm
+
+pub fn finite_graph_vertex() -> @kernel.Thm
+
+pub fn finite_inf() -> @kernel.Thm
+
+pub fn finite_inf_min() -> @kernel.Thm
+
+pub fn finite_lb() -> @kernel.Thm
+
+pub fn finite_num_closure() -> @kernel.Thm
+
+pub fn finite_set_lower() -> @kernel.Thm
+
+pub fn finite_supm() -> @kernel.Thm
+
+pub fn finite_supm_max() -> @kernel.Thm
+
+pub fn finite_ub() -> @kernel.Thm
+
+pub fn floor() -> @kernel.Thm
+
+pub fn floor_abs() -> @kernel.Thm
+
+pub fn floor_add_num() -> @kernel.Thm
+
+pub fn floor_ineq() -> @kernel.Thm
+
+pub fn floor_int() -> @kernel.Thm
+
+pub fn floor_le() -> @kernel.Thm
+
+pub fn floor_level() -> @kernel.Thm
+
+pub fn floor_lt() -> @kernel.Thm
+
+pub fn floor_mono() -> @kernel.Thm
+
+pub fn floor_neg_num() -> @kernel.Thm
+
+pub fn floor_num() -> @kernel.Thm
+
+pub fn floor_range() -> @kernel.Thm
+
+pub fn good_plane_graph() -> @kernel.Thm
+
+pub fn good_replace() -> @kernel.Thm
+
+pub fn graph() -> @kernel.Thm
+
+pub fn graph_2_connected() -> @kernel.Thm
+
+pub fn graph_connected() -> @kernel.Thm
+
+pub fn graph_cycle() -> @kernel.Thm
+
+pub fn graph_del() -> @kernel.Thm
+
+pub fn graph_disk() -> @kernel.Thm
+
+pub fn graph_disk_hv() -> @kernel.Thm
+
+pub fn graph_disk_hv_preliminaries() -> @kernel.Thm
+
+pub fn graph_disk_lemma1() -> @kernel.Thm
+
+pub fn graph_edge() -> @kernel.Thm
+
+pub fn graph_edge2() -> @kernel.Thm
+
+pub fn graph_edge_around() -> @kernel.Thm
+
+pub fn graph_edge_around4() -> @kernel.Thm
+
+pub fn graph_edge_around_empty() -> @kernel.Thm
+
+pub fn graph_edge_around_finite() -> @kernel.Thm
+
+pub fn graph_edge_compact() -> @kernel.Thm
+
+pub fn graph_edge_end_select() -> @kernel.Thm
+
+pub fn graph_edge_end_select_other() -> @kernel.Thm
+
+pub fn graph_edge_euclid() -> @kernel.Thm
+
+pub fn graph_edge_graph() -> @kernel.Thm
+
+pub fn graph_edge_iso() -> @kernel.Thm
+
+pub fn graph_edge_mk_graph() -> @kernel.Thm
+
+pub fn graph_edge_mod() -> @kernel.Thm
+
+pub fn graph_edge_mod_e() -> @kernel.Thm
+
+pub fn graph_edge_mod_i() -> @kernel.Thm
+
+pub fn graph_edge_mod_v() -> @kernel.Thm
+
+pub fn graph_edge_nonempty() -> @kernel.Thm
+
+pub fn graph_eps_scale_image() -> @kernel.Thm
+
+pub fn graph_eps_translate_image() -> @kernel.Thm
+
+pub fn graph_hv_finite_radius() -> @kernel.Thm
+
+pub fn graph_inc() -> @kernel.Thm
+
+pub fn graph_inc_mk_graph() -> @kernel.Thm
+
+pub fn graph_inc_subset() -> @kernel.Thm
+
+pub fn graph_incident() -> @kernel.Thm
+
+pub fn graph_int_model() -> @kernel.Thm
+
+pub fn graph_iso() -> @kernel.Thm
+
+pub fn graph_iso_around() -> @kernel.Thm
+
+pub fn graph_isomorphic() -> @kernel.Thm
+
+pub fn graph_isomorphic_graph() -> @kernel.Thm
+
+pub fn graph_isomorphic_refl() -> @kernel.Thm
+
+pub fn graph_isomorphic_symm() -> @kernel.Thm
+
+pub fn graph_isomorphic_trans() -> @kernel.Thm
+
+pub fn graph_near_support() -> @kernel.Thm
+
+pub fn graph_path() -> @kernel.Thm
+
+pub fn graph_rad_pt_center_piece() -> @kernel.Thm
+
+pub fn graph_rad_pt_select() -> @kernel.Thm
+
+pub fn graph_radius_exists() -> @kernel.Thm
+
+pub fn graph_replace() -> @kernel.Thm
+
+pub fn graph_replace_card() -> @kernel.Thm
+
+pub fn graph_replace_hv_finite_radius() -> @kernel.Thm
+
+pub fn graph_replace_iso() -> @kernel.Thm
+
+pub fn graph_replace_plane() -> @kernel.Thm
+
+pub fn graph_support_eps() -> @kernel.Thm
+
+pub fn graph_support_init() -> @kernel.Thm
+
+pub fn graph_vertex() -> @kernel.Thm
+
+pub fn graph_vertex_2() -> @kernel.Thm
+
+pub fn graph_vertex_exhaust() -> @kernel.Thm
+
+pub fn graph_vertex_exist() -> @kernel.Thm
+
+pub fn graph_vertex_mk_graph() -> @kernel.Thm
+
+pub fn grid() -> @kernel.Thm
+
+pub fn grid33() -> @kernel.Thm
+
+pub fn grid33_conn2() -> @kernel.Thm
+
+pub fn grid33_edge() -> @kernel.Thm
+
+pub fn grid33_finite() -> @kernel.Thm
+
+pub fn grid33_h() -> @kernel.Thm
+
+pub fn grid33_radius() -> @kernel.Thm
+
+pub fn grid33_unions() -> @kernel.Thm
+
+pub fn grid_conn2() -> @kernel.Thm
+
+pub fn grid_conn2_induct_lemma() -> @kernel.Thm
+
+pub fn grid_edge() -> @kernel.Thm
+
+pub fn grid_finite() -> @kernel.Thm
+
+pub fn grid_image_bounded() -> @kernel.Thm
+
+pub fn grid_image_bounded_ver2() -> @kernel.Thm
+
+pub fn h_compat() -> @kernel.Thm
+
+pub fn h_compat_bij() -> @kernel.Thm
+
+pub fn h_compat_bij2() -> @kernel.Thm
+
+pub fn h_edge() -> @kernel.Thm
+
+pub fn h_edge_ball() -> @kernel.Thm
+
+pub fn h_edge_closed_ball() -> @kernel.Thm
+
+pub fn h_edge_closure() -> @kernel.Thm
+
+pub fn h_edge_convex() -> @kernel.Thm
+
+pub fn h_edge_cpoint() -> @kernel.Thm
+
+pub fn h_edge_disj() -> @kernel.Thm
+
+pub fn h_edge_euclid() -> @kernel.Thm
+
+pub fn h_edge_floor() -> @kernel.Thm
+
+pub fn h_edge_inj() -> @kernel.Thm
+
+pub fn h_edge_inter() -> @kernel.Thm
+
+pub fn h_edge_pointi() -> @kernel.Thm
+
+pub fn h_edge_pointiv2() -> @kernel.Thm
+
+pub fn h_edge_row() -> @kernel.Thm
+
+pub fn h_edge_squ_parity() -> @kernel.Thm
+
+pub fn h_edge_subset() -> @kernel.Thm
+
+pub fn h_seg_openball() -> @kernel.Thm
+
+pub fn h_simple_polygonal() -> @kernel.Thm
+
+pub fn h_translate() -> @kernel.Thm
+
+pub fn h_translate_bij() -> @kernel.Thm
+
+pub fn h_translate_cont() -> @kernel.Thm
+
+pub fn h_translate_h() -> @kernel.Thm
+
+pub fn h_translate_hom() -> @kernel.Thm
+
+pub fn h_translate_inv() -> @kernel.Thm
+
+pub fn h_translate_point() -> @kernel.Thm
+
+pub fn h_translate_v() -> @kernel.Thm
+
+pub fn half_closed() -> @kernel.Thm
+
+pub fn half_closed_above() -> @kernel.Thm
+
+pub fn half_pos() -> @kernel.Thm
+
+pub fn has_size1() -> @kernel.Thm
+
+pub fn has_size2() -> @kernel.Thm
+
+pub fn has_size2_distinct() -> @kernel.Thm
+
+pub fn has_size2_pair() -> @kernel.Thm
+
+pub fn has_size2_subset() -> @kernel.Thm
+
+pub fn has_size2_subset_ne() -> @kernel.Thm
+
+pub fn has_size3_bij() -> @kernel.Thm
+
+pub fn has_size3_bij2() -> @kernel.Thm
+
+pub fn has_size_bij() -> @kernel.Thm
+
+pub fn has_size_bij2() -> @kernel.Thm
+
+pub fn has_size_bij_set() -> @kernel.Thm
+
+pub fn has_size_drop_le() -> @kernel.Thm
+
+pub fn has_size_insert() -> @kernel.Thm
+
+pub fn has_size_le9() -> @kernel.Thm
+
+pub fn hc_edge() -> @kernel.Thm
+
+pub fn hc_edge_closed() -> @kernel.Thm
+
+pub fn hc_edge_convex() -> @kernel.Thm
+
+pub fn hc_edge_inter() -> @kernel.Thm
+
+pub fn hc_edge_pointi() -> @kernel.Thm
+
+pub fn homeo_adj() -> @kernel.Thm
+
+pub fn homeo_adj_eq() -> @kernel.Thm
+
+pub fn homeo_bij() -> @kernel.Thm
+
+pub fn homeo_closed() -> @kernel.Thm
+
+pub fn homeo_closure() -> @kernel.Thm
+
+pub fn homeo_inj() -> @kernel.Thm
+
+pub fn homeo_num_closure() -> @kernel.Thm
+
+pub fn homeo_unions() -> @kernel.Thm
+
+pub fn homeomorphism_compose() -> @kernel.Thm
+
+pub fn homeomorphism_eps_scale() -> @kernel.Thm
+
+pub fn homeomorphism_eps_translate() -> @kernel.Thm
+
+pub fn homeomorphism_induced_top() -> @kernel.Thm
+
+pub fn homeomorphism_inv() -> @kernel.Thm
+
+pub fn homeomorphism_subset() -> @kernel.Thm
+
+pub fn hv_edge() -> @kernel.Thm
+
+pub fn hv_edgev2() -> @kernel.Thm
+
+pub fn hv_finite() -> @kernel.Thm
+
+pub fn hv_finite_hyper() -> @kernel.Thm
+
+pub fn hv_finite_subset() -> @kernel.Thm
+
+pub fn hv_line() -> @kernel.Thm
+
+pub fn hv_line_hyper() -> @kernel.Thm
+
+pub fn hv_line_hyper2() -> @kernel.Thm
+
+pub fn hyperplane() -> @kernel.Thm
+
+pub fn hyperplane1_h_translate() -> @kernel.Thm
+
+pub fn hyperplane1_inj() -> @kernel.Thm
+
+pub fn hyperplane1_r_scale() -> @kernel.Thm
+
+pub fn hyperplane1_u_scale() -> @kernel.Thm
+
+pub fn hyperplane1_v_translate() -> @kernel.Thm
+
+pub fn hyperplane2_h_translate() -> @kernel.Thm
+
+pub fn hyperplane2_inj() -> @kernel.Thm
+
+pub fn hyperplane2_r_scale() -> @kernel.Thm
+
+pub fn hyperplane2_u_scale() -> @kernel.Thm
+
+pub fn hyperplane2_v_translate() -> @kernel.Thm
+
+pub fn hyperplane_closed() -> @kernel.Thm
+
+pub fn hyperplane_convex() -> @kernel.Thm
+
+pub fn hyperplane_euclid() -> @kernel.Thm
+
+pub fn hyperplane_ne() -> @kernel.Thm
+
+pub fn hyperplane_scale() -> @kernel.Thm
+
+pub fn i_bij() -> @kernel.Thm
+
+pub fn image2() -> @kernel.Thm
+
+pub fn image_app() -> @kernel.Thm
+
+pub fn image_curve_cell_refla() -> @kernel.Thm
+
+pub fn image_curve_cell_reflb() -> @kernel.Thm
+
+pub fn image_curve_cell_reflc() -> @kernel.Thm
+
+pub fn image_delete_choice() -> @kernel.Thm
+
+pub fn image_domain_sub() -> @kernel.Thm
+
+pub fn image_empty() -> @kernel.Thm
+
+pub fn image_imp() -> @kernel.Thm
+
+pub fn image_inj() -> @kernel.Thm
+
+pub fn image_inters() -> @kernel.Thm
+
+pub fn image_interval() -> @kernel.Thm
+
+pub fn image_interval2() -> @kernel.Thm
+
+pub fn image_inv_image() -> @kernel.Thm
+
+pub fn image_power_inj() -> @kernel.Thm
+
+pub fn image_power_surj() -> @kernel.Thm
+
+pub fn image_powerset() -> @kernel.Thm
+
+pub fn image_preimage() -> @kernel.Thm
+
+pub fn image_sing() -> @kernel.Thm
+
+pub fn image_unions() -> @kernel.Thm
+
+pub fn in_pair() -> @kernel.Thm
+
+pub fn in_union() -> @kernel.Thm
+
+pub fn incf() -> @kernel.Thm
+
+pub fn incf_v() -> @kernel.Thm
+
+pub fn incf_value() -> @kernel.Thm
+
+pub fn induced_top_interval() -> @kernel.Thm
+
+pub fn inductive_diff() -> @kernel.Thm
+
+pub fn inductive_inter() -> @kernel.Thm
+
+pub fn inductive_segment() -> @kernel.Thm
+
+pub fn inductive_set() -> @kernel.Thm
+
+pub fn inductive_set_adj() -> @kernel.Thm
+
+pub fn inductive_set_endpoint() -> @kernel.Thm
+
+pub fn inductive_set_join() -> @kernel.Thm
+
+pub fn inductive_set_restrict() -> @kernel.Thm
+
+pub fn inductive_univ() -> @kernel.Thm
+
+pub fn inf() -> @kernel.Thm
+
+pub fn inf_eps() -> @kernel.Thm
+
+pub fn inf_lb() -> @kernel.Thm
+
+pub fn inf_unique() -> @kernel.Thm
+
+pub fn infinite_closed_interval() -> @kernel.Thm
+
+pub fn infinite_image() -> @kernel.Thm
+
+pub fn infinite_int() -> @kernel.Thm
+
+pub fn infinite_interval() -> @kernel.Thm
+
+pub fn infinite_intpair() -> @kernel.Thm
+
+pub fn infinite_subset() -> @kernel.Thm
+
+pub fn inj_bij() -> @kernel.Thm
+
+pub fn inj_bij_size() -> @kernel.Thm
+
+pub fn inj_domain_sub() -> @kernel.Thm
+
+pub fn inj_image() -> @kernel.Thm
+
+pub fn inj_image_subset() -> @kernel.Thm
+
+pub fn inj_inter() -> @kernel.Thm
+
+pub fn inj_split() -> @kernel.Thm
+
+pub fn inj_subset() -> @kernel.Thm
+
+pub fn inj_subset2() -> @kernel.Thm
+
+pub fn inj_subset_domain() -> @kernel.Thm
+
+pub fn inj_terminal() -> @kernel.Thm
+
+pub fn inj_univ() -> @kernel.Thm
+
+pub fn insert_sing() -> @kernel.Thm
+
+pub fn int2_range_finite() -> @kernel.Thm
+
+pub fn int_arch() -> @kernel.Thm
+
+pub fn int_le_mp() -> @kernel.Thm
+
+pub fn int_le_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn int_lt_suc_le() -> @kernel.Thm
+
+pub fn int_neg_num_th() -> @kernel.Thm
+
+pub fn int_pow2_gt1() -> @kernel.Thm
+
+pub fn int_range_finite() -> @kernel.Thm
+
+pub fn int_suc() -> @kernel.Thm
+
+pub fn inter_lattice() -> @kernel.Thm
+
+pub fn inter_midpoint() -> @kernel.Thm
+
+pub fn inter_union() -> @kernel.Thm
+
+pub fn inters_inter() -> @kernel.Thm
+
+pub fn interval_closed() -> @kernel.Thm
+
+pub fn interval_eq() -> @kernel.Thm
+
+pub fn interval_subset() -> @kernel.Thm
+
+pub fn inv_comp_left() -> @kernel.Thm
+
+pub fn inv_comp_right() -> @kernel.Thm
+
+pub fn invo_bij() -> @kernel.Thm
+
+pub fn invo_homeo() -> @kernel.Thm
+
+pub fn iso_eps_support0() -> @kernel.Thm
+
+pub fn iso_int_model_lemma() -> @kernel.Thm
+
+pub fn iso_support_eps_finite() -> @kernel.Thm
+
+pub fn iso_support_eps_min() -> @kernel.Thm
+
+pub fn iso_support_eps_nonempty() -> @kernel.Thm
+
+pub fn iso_support_eps_pair() -> @kernel.Thm
+
+pub fn iso_support_min_int() -> @kernel.Thm
+
+pub fn isthree() -> @kernel.Thm
+
+pub fn isubset() -> @kernel.Thm
+
+pub fn joinf_image_above() -> @kernel.Thm
+
+pub fn joinf_image_below() -> @kernel.Thm
+
+pub fn joinf_inj_above() -> @kernel.Thm
+
+pub fn joinf_inj_below() -> @kernel.Thm
+
+pub fn jordan_curve_access() -> @kernel.Thm
+
+pub fn jordan_curve_ap_bp_empty() -> @kernel.Thm
+
+pub fn jordan_curve_ap_euclid() -> @kernel.Thm
+
+pub fn jordan_curve_ap_size3() -> @kernel.Thm
+
+pub fn jordan_curve_bp_size3() -> @kernel.Thm
+
+pub fn jordan_curve_cut_inter() -> @kernel.Thm
+
+pub fn jordan_curve_defs() -> @kernel.Thm
+
+pub fn jordan_curve_edge_arc() -> @kernel.Thm
+
+pub fn jordan_curve_edge_inter() -> @kernel.Thm
+
+pub fn jordan_curve_guider_disj() -> @kernel.Thm
+
+pub fn jordan_curve_guider_enum() -> @kernel.Thm
+
+pub fn jordan_curve_guider_exists() -> @kernel.Thm
+
+pub fn jordan_curve_guider_inj() -> @kernel.Thm
+
+pub fn jordan_curve_guider_sep_lemma() -> @kernel.Thm
+
+pub fn jordan_curve_guider_separate() -> @kernel.Thm
+
+pub fn jordan_curve_k33() -> @kernel.Thm
+
+pub fn jordan_curve_k33_data() -> @kernel.Thm
+
+pub fn jordan_curve_k33_data_exist() -> @kernel.Thm
+
+pub fn jordan_curve_k33_data_inter() -> @kernel.Thm
+
+pub fn jordan_curve_k33_isk33() -> @kernel.Thm
+
+pub fn jordan_curve_k33_plane() -> @kernel.Thm
+
+pub fn jordan_curve_k33_plane_criterion() -> @kernel.Thm
+
+pub fn jordan_curve_k33_plane_criterion2() -> @kernel.Thm
+
+pub fn jordan_curve_no_inj3() -> @kernel.Thm
+
+pub fn jordan_curve_not_one_sided() -> @kernel.Thm
+
+pub fn jordan_curve_seg3() -> @kernel.Thm
+
+pub fn jordan_curve_theorem() -> @kernel.Thm
+
+pub fn jordan_curve_v() -> @kernel.Thm
+
+pub fn jordan_curve_w() -> @kernel.Thm
+
+pub fn jordan_curve_x() -> @kernel.Thm
+
+pub fn jordan_def(@kernel.Term) -> @kernel.Thm raise
+
+pub fn jordan_k33f_bij() -> @kernel.Thm
+
+pub fn k33() -> @kernel.Thm
+
+pub fn k33_graph() -> @kernel.Thm
+
+pub fn k33_graph_edge() -> @kernel.Thm
+
+pub fn k33_graph_inc() -> @kernel.Thm
+
+pub fn k33_graph_vertex() -> @kernel.Thm
+
+pub fn k33_isgraph() -> @kernel.Thm
+
+pub fn k33_iso() -> @kernel.Thm
+
+pub fn k33_nonplanar() -> @kernel.Thm
+
+pub fn k33_planar_graph_data_expand() -> @kernel.Thm
+
+pub fn k33_rectagon_hyp() -> @kernel.Thm
+
+pub fn k33_rectagon_hyp_false() -> @kernel.Thm
+
+pub fn k33_rectagon_hyp_odd_exist() -> @kernel.Thm
+
+pub fn k33_rectagon_two_even() -> @kernel.Thm
+
+pub fn k33_rectagon_two_odd() -> @kernel.Thm
+
+pub fn k33f() -> @kernel.Thm
+
+pub fn k33f_cut() -> @kernel.Thm
+
+pub fn k33f_cut_lemma() -> @kernel.Thm
+
+pub fn k33f_e() -> @kernel.Thm
+
+pub fn k33f_value() -> @kernel.Thm
+
+pub fn lc_bounds() -> @kernel.Thm
+
+pub fn left() -> @kernel.Thm
+
+pub fn lin_solve_x() -> @kernel.Thm
+
+pub fn line2d_f() -> @kernel.Thm
+
+pub fn line2d_f_closed() -> @kernel.Thm
+
+pub fn line2d_f_convex() -> @kernel.Thm
+
+pub fn line2d_s() -> @kernel.Thm
+
+pub fn line2d_s_closed() -> @kernel.Thm
+
+pub fn line2d_s_convex() -> @kernel.Thm
+
+pub fn linear_cont() -> @kernel.Thm
+
+pub fn linear_image_gen() -> @kernel.Thm
+
+pub fn linear_image_rev() -> @kernel.Thm
+
+pub fn linear_inj() -> @kernel.Thm
+
+pub fn linear_inj_rev() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn loc_path_conn_top2() -> @kernel.Thm
+
+pub fn long_v() -> @kernel.Thm
+
+pub fn long_v_convex() -> @kernel.Thm
+
+pub fn long_v_euclid() -> @kernel.Thm
+
+pub fn long_v_inter() -> @kernel.Thm
+
+pub fn long_v_lemma1() -> @kernel.Thm
+
+pub fn long_v_lemma2() -> @kernel.Thm
+
+pub fn long_v_lemma3() -> @kernel.Thm
+
+pub fn long_v_union() -> @kernel.Thm
+
+pub fn max_real_le() -> @kernel.Thm
+
+pub fn max_real_symm() -> @kernel.Thm
+
+pub fn meeting_lemma() -> @kernel.Thm
+
+pub fn metric_continuous_continuous_top2() -> @kernel.Thm
+
+pub fn metric_continuous_domain() -> @kernel.Thm
+
+pub fn metric_continuous_range() -> @kernel.Thm
+
+pub fn metric_space_zero2() -> @kernel.Thm
+
+pub fn mid_end_disj() -> @kernel.Thm
+
+pub fn midpoint() -> @kernel.Thm
+
+pub fn midpoint_edge() -> @kernel.Thm
+
+pub fn midpoint_exclusion() -> @kernel.Thm
+
+pub fn midpoint_exists() -> @kernel.Thm
+
+pub fn midpoint_h_edge() -> @kernel.Thm
+
+pub fn midpoint_unique() -> @kernel.Thm
+
+pub fn midpoint_v_edge() -> @kernel.Thm
+
+pub fn min_real_le() -> @kernel.Thm
+
+pub fn min_real_le_v1() -> @kernel.Thm
+
+pub fn min_real_symm() -> @kernel.Thm
+
+pub fn mk_graph_t() -> @kernel.Thm
+
+pub fn mk_line_2() -> @kernel.Thm
+
+pub fn mk_line_fin_inter() -> @kernel.Thm
+
+pub fn mk_line_hyper2_e1() -> @kernel.Thm
+
+pub fn mk_line_hyper2_e2() -> @kernel.Thm
+
+pub fn mk_line_hyper2_fst() -> @kernel.Thm
+
+pub fn mk_line_hyper2_snd() -> @kernel.Thm
+
+pub fn mk_line_inter() -> @kernel.Thm
+
+pub fn mk_line_pt() -> @kernel.Thm
+
+pub fn mk_line_sub() -> @kernel.Thm
+
+pub fn mk_line_symm() -> @kernel.Thm
+
+pub fn mk_segment_convex() -> @kernel.Thm
+
+pub fn mk_segment_end() -> @kernel.Thm
+
+pub fn mk_segment_endpoint() -> @kernel.Thm
+
+pub fn mk_segment_eq() -> @kernel.Thm
+
+pub fn mk_segment_h() -> @kernel.Thm
+
+pub fn mk_segment_hc() -> @kernel.Thm
+
+pub fn mk_segment_hyperplane() -> @kernel.Thm
+
+pub fn mk_segment_image() -> @kernel.Thm
+
+pub fn mk_segment_inj_image() -> @kernel.Thm
+
+pub fn mk_segment_inj_image2() -> @kernel.Thm
+
+pub fn mk_segment_simple_arc_end() -> @kernel.Thm
+
+pub fn mk_segment_sym() -> @kernel.Thm
+
+pub fn mk_segment_sym_lemma() -> @kernel.Thm
+
+pub fn mk_segment_v() -> @kernel.Thm
+
+pub fn mk_segment_vc() -> @kernel.Thm
+
+pub fn mk_simple_graph() -> @kernel.Thm
+
+pub fn neg_point() -> @kernel.Thm
+
+pub fn no_k33_planar_graph_data() -> @kernel.Thm
+
+pub fn norm2() -> @kernel.Thm
+
+pub fn norm2_0() -> @kernel.Thm
+
+pub fn norm2_bounds() -> @kernel.Thm
+
+pub fn norm2_cis() -> @kernel.Thm
+
+pub fn norm2_nn() -> @kernel.Thm
+
+pub fn norm2_point() -> @kernel.Thm
+
+pub fn norm2_scale() -> @kernel.Thm
+
+pub fn norm2_scale_cis() -> @kernel.Thm
+
+pub fn norm_scale2() -> @kernel.Thm
+
+pub fn not_cls_exists() -> @kernel.Thm
+
+pub fn not_eq() -> @kernel.Thm
+
+pub fn not_not() -> @kernel.Thm
+
+pub fn num_abs_of_int0() -> @kernel.Thm
+
+pub fn num_abs_of_int_exists() -> @kernel.Thm
+
+pub fn num_abs_of_int_mono() -> @kernel.Thm
+
+pub fn num_abs_of_int_mul() -> @kernel.Thm
+
+pub fn num_abs_of_int_neg() -> @kernel.Thm
+
+pub fn num_abs_of_int_num() -> @kernel.Thm
+
+pub fn num_abs_of_int_pre() -> @kernel.Thm
+
+pub fn num_abs_of_int_select() -> @kernel.Thm
+
+pub fn num_abs_of_int_suc() -> @kernel.Thm
+
+pub fn num_abs_of_int_th() -> @kernel.Thm
+
+pub fn num_abs_of_int_triangle() -> @kernel.Thm
+
+pub fn num_closure() -> @kernel.Thm
+
+pub fn num_closure0() -> @kernel.Thm
+
+pub fn num_closure0_edge() -> @kernel.Thm
+
+pub fn num_closure1() -> @kernel.Thm
+
+pub fn num_closure2() -> @kernel.Thm
+
+pub fn num_closure_delete() -> @kernel.Thm
+
+pub fn num_closure_elt() -> @kernel.Thm
+
+pub fn num_closure_mono() -> @kernel.Thm
+
+pub fn num_closure_pos() -> @kernel.Thm
+
+pub fn num_closure_size() -> @kernel.Thm
+
+pub fn num_lower() -> @kernel.Thm
+
+pub fn num_lower_down() -> @kernel.Thm
+
+pub fn num_lower_set() -> @kernel.Thm
+
+pub fn odd_bounded() -> @kernel.Thm
+
+pub fn odd_bounded_subset() -> @kernel.Thm
+
+pub fn old_every_step_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn one_over_plus1() -> @kernel.Thm
+
+pub fn one_sided_jordan_curve() -> @kernel.Thm
+
+pub fn open_half_plane2d_flt() -> @kernel.Thm
+
+pub fn open_half_plane2d_flt_convex() -> @kernel.Thm
+
+pub fn open_half_plane2d_flt_open() -> @kernel.Thm
+
+pub fn open_half_plane2d_ltf() -> @kernel.Thm
+
+pub fn open_half_plane2d_ltf_convex() -> @kernel.Thm
+
+pub fn open_half_plane2d_ltf_open() -> @kernel.Thm
+
+pub fn open_half_plane2d_lts() -> @kernel.Thm
+
+pub fn open_half_plane2d_lts_convex() -> @kernel.Thm
+
+pub fn open_half_plane2d_lts_open() -> @kernel.Thm
+
+pub fn open_half_plane2d_slt() -> @kernel.Thm
+
+pub fn open_half_plane2d_slt_convex() -> @kernel.Thm
+
+pub fn open_half_plane2d_slt_open() -> @kernel.Thm
+
+pub fn open_half_space() -> @kernel.Thm
+
+pub fn open_half_space_convex() -> @kernel.Thm
+
+pub fn open_half_space_diff() -> @kernel.Thm
+
+pub fn open_half_space_euclid() -> @kernel.Thm
+
+pub fn open_half_space_open() -> @kernel.Thm
+
+pub fn open_half_space_scale() -> @kernel.Thm
+
+pub fn open_induced() -> @kernel.Thm
+
+pub fn open_real_interval() -> @kernel.Thm
+
+pub fn openball_convex() -> @kernel.Thm
+
+pub fn openball_mk_segment_end() -> @kernel.Thm
+
+pub fn order_imp_psegment() -> @kernel.Thm
+
+pub fn order_imp_psegment_shift() -> @kernel.Thm
+
+pub fn order_lt_imp_psegment() -> @kernel.Thm
+
+pub fn other_end() -> @kernel.Thm
+
+pub fn other_end_prop() -> @kernel.Thm
+
+pub fn outer_segment_even() -> @kernel.Thm
+
+pub fn p_conn() -> @kernel.Thm
+
+pub fn p_conn_ball() -> @kernel.Thm
+
+pub fn p_conn_conn() -> @kernel.Thm
+
+pub fn p_conn_diff() -> @kernel.Thm
+
+pub fn p_conn_euclid() -> @kernel.Thm
+
+pub fn p_conn_hv_finite() -> @kernel.Thm
+
+pub fn p_conn_open() -> @kernel.Thm
+
+pub fn p_conn_subset() -> @kernel.Thm
+
+pub fn p_conna() -> @kernel.Thm
+
+pub fn pair_apply() -> @kernel.Thm
+
+pub fn pair_indistinct() -> @kernel.Thm
+
+pub fn pair_lemmav2() -> @kernel.Thm
+
+pub fn pair_order_endpoint() -> @kernel.Thm
+
+pub fn pair_size_2() -> @kernel.Thm
+
+pub fn pair_split() -> @kernel.Thm
+
+pub fn pair_swap() -> @kernel.Thm
+
+pub fn pair_swap_adj() -> @kernel.Thm
+
+pub fn pair_swap_invol() -> @kernel.Thm
+
+pub fn pair_swap_pair() -> @kernel.Thm
+
+pub fn pair_swap_select() -> @kernel.Thm
+
+pub fn pair_swap_unique() -> @kernel.Thm
+
+pub fn par_cell() -> @kernel.Thm
+
+pub fn par_cell_cell() -> @kernel.Thm
+
+pub fn par_cell_cell_partition() -> @kernel.Thm
+
+pub fn par_cell_closure() -> @kernel.Thm
+
+pub fn par_cell_closure_cell() -> @kernel.Thm
+
+pub fn par_cell_comp() -> @kernel.Thm
+
+pub fn par_cell_curve_cell_disj() -> @kernel.Thm
+
+pub fn par_cell_curve_disj() -> @kernel.Thm
+
+pub fn par_cell_disjoint() -> @kernel.Thm
+
+pub fn par_cell_even_imp() -> @kernel.Thm
+
+pub fn par_cell_h() -> @kernel.Thm
+
+pub fn par_cell_h_in_rectangle() -> @kernel.Thm
+
+pub fn par_cell_h_rectangle() -> @kernel.Thm
+
+pub fn par_cell_h_squ() -> @kernel.Thm
+
+pub fn par_cell_nbd() -> @kernel.Thm
+
+pub fn par_cell_nonempty() -> @kernel.Thm
+
+pub fn par_cell_odd_imp() -> @kernel.Thm
+
+pub fn par_cell_open() -> @kernel.Thm
+
+pub fn par_cell_partition() -> @kernel.Thm
+
+pub fn par_cell_point() -> @kernel.Thm
+
+pub fn par_cell_point_h() -> @kernel.Thm
+
+pub fn par_cell_point_in_rectangle() -> @kernel.Thm
+
+pub fn par_cell_point_rectangle() -> @kernel.Thm
+
+pub fn par_cell_point_v() -> @kernel.Thm
+
+pub fn par_cell_pointi() -> @kernel.Thm
+
+pub fn par_cell_pointi_trichot() -> @kernel.Thm
+
+pub fn par_cell_simple_arc() -> @kernel.Thm
+
+pub fn par_cell_squ() -> @kernel.Thm
+
+pub fn par_cell_squ_neg() -> @kernel.Thm
+
+pub fn par_cell_squ_rectangle() -> @kernel.Thm
+
+pub fn par_cell_union_comp() -> @kernel.Thm
+
+pub fn par_cell_union_disjoint() -> @kernel.Thm
+
+pub fn par_cell_unions_nonempty() -> @kernel.Thm
+
+pub fn par_cell_v() -> @kernel.Thm
+
+pub fn par_cell_v_in_rectangle() -> @kernel.Thm
+
+pub fn par_cell_v_rectangle() -> @kernel.Thm
+
+pub fn par_cell_v_squ() -> @kernel.Thm
+
+pub fn parity() -> @kernel.Thm
+
+pub fn parity_even_cell() -> @kernel.Thm
+
+pub fn parity_h() -> @kernel.Thm
+
+pub fn parity_point() -> @kernel.Thm
+
+pub fn parity_select() -> @kernel.Thm
+
+pub fn parity_squ() -> @kernel.Thm
+
+pub fn parity_union() -> @kernel.Thm
+
+pub fn parity_union_triple() -> @kernel.Thm
+
+pub fn parity_union_triple_even() -> @kernel.Thm
+
+pub fn parity_union_triple_odd() -> @kernel.Thm
+
+pub fn parity_unique() -> @kernel.Thm
+
+pub fn parity_v() -> @kernel.Thm
+
+pub fn part_below() -> @kernel.Thm
+
+pub fn part_below_finite() -> @kernel.Thm
+
+pub fn part_below_finite_v1() -> @kernel.Thm
+
+pub fn part_below_h() -> @kernel.Thm
+
+pub fn part_below_subset() -> @kernel.Thm
+
+pub fn part_below_subset_v1() -> @kernel.Thm
+
+pub fn part_below_v() -> @kernel.Thm
+
+pub fn partial_rewrite_conv(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn partial_rewrite_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn pconn_refl() -> @kernel.Thm
+
+pub fn pconn_symm() -> @kernel.Thm
+
+pub fn pconn_trans() -> @kernel.Thm
+
+pub fn pi_bounds() -> @kernel.Thm
+
+pub fn planar_graph() -> @kernel.Thm
+
+pub fn planar_graph_hv() -> @kernel.Thm
+
+pub fn planar_graph_rectagonal() -> @kernel.Thm
+
+pub fn planar_is_graph() -> @kernel.Thm
+
+pub fn planar_iso() -> @kernel.Thm
+
+pub fn plane_graph() -> @kernel.Thm
+
+pub fn plane_graph_contain() -> @kernel.Thm
+
+pub fn plane_graph_image() -> @kernel.Thm
+
+pub fn plane_graph_image_bij() -> @kernel.Thm
+
+pub fn plane_graph_image_e() -> @kernel.Thm
+
+pub fn plane_graph_image_i() -> @kernel.Thm
+
+pub fn plane_graph_image_iso() -> @kernel.Thm
+
+pub fn plane_graph_image_plane() -> @kernel.Thm
+
+pub fn plane_graph_image_v() -> @kernel.Thm
+
+pub fn plane_graph_mod() -> @kernel.Thm
+
+pub fn plane_planar() -> @kernel.Thm
+
+pub fn plus_e12() -> @kernel.Thm
+
+pub fn point() -> @kernel.Thm
+
+pub fn point_add() -> @kernel.Thm
+
+pub fn point_closure() -> @kernel.Thm
+
+pub fn point_dest_pt() -> @kernel.Thm
+
+pub fn point_inj() -> @kernel.Thm
+
+pub fn point_onto() -> @kernel.Thm
+
+pub fn point_scale() -> @kernel.Thm
+
+pub fn point_split() -> @kernel.Thm
+
+pub fn point_x() -> @kernel.Thm
+
+pub fn point_xy() -> @kernel.Thm
+
+pub fn pointi() -> @kernel.Thm
+
+pub fn pointi_col() -> @kernel.Thm
+
+pub fn pointi_inj() -> @kernel.Thm
+
+pub fn pointi_inter() -> @kernel.Thm
+
+pub fn pointi_row() -> @kernel.Thm
+
+pub fn polar_cont() -> @kernel.Thm
+
+pub fn polar_curve_lemma() -> @kernel.Thm
+
+pub fn polar_distinct() -> @kernel.Thm
+
+pub fn polar_euclid() -> @kernel.Thm
+
+pub fn polar_exist() -> @kernel.Thm
+
+pub fn polar_fg_inj() -> @kernel.Thm
+
+pub fn polar_inj() -> @kernel.Thm
+
+pub fn polar_nz() -> @kernel.Thm
+
+pub fn powerset() -> @kernel.Thm
+
+pub fn preimage_closed() -> @kernel.Thm
+
+pub fn preimage_compact() -> @kernel.Thm
+
+pub fn preimage_compact_interval() -> @kernel.Thm
+
+pub fn preimage_first() -> @kernel.Thm
+
+pub fn preimage_restrict() -> @kernel.Thm
+
+pub fn preimage_union2() -> @kernel.Thm
+
+pub fn psegment() -> @kernel.Thm
+
+pub fn psegment_cls() -> @kernel.Thm
+
+pub fn psegment_delete_end() -> @kernel.Thm
+
+pub fn psegment_edge() -> @kernel.Thm
+
+pub fn psegment_endpoint() -> @kernel.Thm
+
+pub fn psegment_order() -> @kernel.Thm
+
+pub fn psegment_order_induct_lemma() -> @kernel.Thm
+
+pub fn psegment_order_p() -> @kernel.Thm
+
+pub fn psegment_subset_endpoint() -> @kernel.Thm
+
+pub fn psegment_triple() -> @kernel.Thm
+
+pub fn psegment_triple2() -> @kernel.Thm
+
+pub fn psegment_triple3() -> @kernel.Thm
+
+pub fn psegment_triple_odd_even() -> @kernel.Thm
+
+pub fn q_point() -> @kernel.Thm
+
+pub fn r_scale() -> @kernel.Thm
+
+pub fn r_scale_bij() -> @kernel.Thm
+
+pub fn r_scale_cont() -> @kernel.Thm
+
+pub fn r_scale_h() -> @kernel.Thm
+
+pub fn r_scale_hom() -> @kernel.Thm
+
+pub fn r_scale_inv() -> @kernel.Thm
+
+pub fn r_scale_point() -> @kernel.Thm
+
+pub fn r_scale_v() -> @kernel.Thm
+
+pub fn real012() -> @kernel.Thm
+
+pub fn real_div_assoc() -> @kernel.Thm
+
+pub fn real_div_denom() -> @kernel.Thm
+
+pub fn real_div_denom_lt() -> @kernel.Thm
+
+pub fn real_eq_div() -> @kernel.Thm
+
+pub fn real_finite_increase() -> @kernel.Thm
+
+pub fn real_lt_square_abs() -> @kernel.Thm
+
+pub fn real_middle1_lt() -> @kernel.Thm
+
+pub fn real_middle2_lt() -> @kernel.Thm
+
+pub fn real_prop_lt_sqrt_p() -> @kernel.Thm
+
+pub fn real_sub_half() -> @kernel.Thm
+
+pub fn rectagon() -> @kernel.Thm
+
+pub fn rectagon_2() -> @kernel.Thm
+
+pub fn rectagon_adj() -> @kernel.Thm
+
+pub fn rectagon_curve() -> @kernel.Thm
+
+pub fn rectagon_delete() -> @kernel.Thm
+
+pub fn rectagon_delete_end() -> @kernel.Thm
+
+pub fn rectagon_endpoint() -> @kernel.Thm
+
+pub fn rectagon_endpoint0() -> @kernel.Thm
+
+pub fn rectagon_graph() -> @kernel.Thm
+
+pub fn rectagon_graph_k33_false() -> @kernel.Thm
+
+pub fn rectagon_h_edge() -> @kernel.Thm
+
+pub fn rectagon_nonsing() -> @kernel.Thm
+
+pub fn rectagon_order() -> @kernel.Thm
+
+pub fn rectagon_rectangle_grid_sq() -> @kernel.Thm
+
+pub fn rectagon_segment() -> @kernel.Thm
+
+pub fn rectagon_subset() -> @kernel.Thm
+
+pub fn rectagon_subset_endpoint() -> @kernel.Thm
+
+pub fn rectagon_surround_conn2() -> @kernel.Thm
+
+pub fn rectagon_v_edge() -> @kernel.Thm
+
+pub fn rectagonal_graph() -> @kernel.Thm
+
+pub fn rectagonal_graph_k33() -> @kernel.Thm
+
+pub fn rectangle() -> @kernel.Thm
+
+pub fn rectangle_convex() -> @kernel.Thm
+
+pub fn rectangle_euclid() -> @kernel.Thm
+
+pub fn rectangle_grid() -> @kernel.Thm
+
+pub fn rectangle_grid_conn2() -> @kernel.Thm
+
+pub fn rectangle_grid_edge() -> @kernel.Thm
+
+pub fn rectangle_grid_h() -> @kernel.Thm
+
+pub fn rectangle_grid_h_conn2() -> @kernel.Thm
+
+pub fn rectangle_grid_sq() -> @kernel.Thm
+
+pub fn rectangle_grid_sq_cls() -> @kernel.Thm
+
+pub fn rectangle_grid_subset() -> @kernel.Thm
+
+pub fn rectangle_grid_v() -> @kernel.Thm
+
+pub fn rectangle_h() -> @kernel.Thm
+
+pub fn rectangle_inter() -> @kernel.Thm
+
+pub fn rectangle_lemma1() -> @kernel.Thm
+
+pub fn rectangle_lemma2() -> @kernel.Thm
+
+pub fn rectangle_lemma3() -> @kernel.Thm
+
+pub fn rectangle_lemma4() -> @kernel.Thm
+
+pub fn rectangle_lemma5() -> @kernel.Thm
+
+pub fn rectangle_lemma6() -> @kernel.Thm
+
+pub fn rectangle_open() -> @kernel.Thm
+
+pub fn rectangle_squ() -> @kernel.Thm
+
+pub fn rectangle_v() -> @kernel.Thm
+
+pub fn refla_bij() -> @kernel.Thm
+
+pub fn refla_cont() -> @kernel.Thm
+
+pub fn refla_edge() -> @kernel.Thm
+
+pub fn refla_h_edge() -> @kernel.Thm
+
+pub fn refla_homeo() -> @kernel.Thm
+
+pub fn refla_pointi() -> @kernel.Thm
+
+pub fn refla_segment() -> @kernel.Thm
+
+pub fn refla_squ() -> @kernel.Thm
+
+pub fn refla_v_edge() -> @kernel.Thm
+
+pub fn reflaf() -> @kernel.Thm
+
+pub fn reflaf_inv() -> @kernel.Thm
+
+pub fn reflai() -> @kernel.Thm
+
+pub fn reflai_inv() -> @kernel.Thm
+
+pub fn reflb_bij() -> @kernel.Thm
+
+pub fn reflb_cont() -> @kernel.Thm
+
+pub fn reflb_edge() -> @kernel.Thm
+
+pub fn reflb_h_edge() -> @kernel.Thm
+
+pub fn reflb_homeo() -> @kernel.Thm
+
+pub fn reflb_pointi() -> @kernel.Thm
+
+pub fn reflb_segment() -> @kernel.Thm
+
+pub fn reflb_squ() -> @kernel.Thm
+
+pub fn reflb_v_edge() -> @kernel.Thm
+
+pub fn reflbf() -> @kernel.Thm
+
+pub fn reflbf_inv() -> @kernel.Thm
+
+pub fn reflbi() -> @kernel.Thm
+
+pub fn reflbi_inv() -> @kernel.Thm
+
+pub fn reflc_bij() -> @kernel.Thm
+
+pub fn reflc_cont() -> @kernel.Thm
+
+pub fn reflc_edge() -> @kernel.Thm
+
+pub fn reflc_homeo() -> @kernel.Thm
+
+pub fn reflc_hv_edge() -> @kernel.Thm
+
+pub fn reflc_pointi() -> @kernel.Thm
+
+pub fn reflc_segment() -> @kernel.Thm
+
+pub fn reflc_squ() -> @kernel.Thm
+
+pub fn reflc_vh_edge() -> @kernel.Thm
+
+pub fn reflcf() -> @kernel.Thm
+
+pub fn reflcf_inv() -> @kernel.Thm
+
+pub fn reflci() -> @kernel.Thm
+
+pub fn reflci_inv() -> @kernel.Thm
+
+pub fn rep3_lt() -> @kernel.Thm
+
+pub fn replace() -> @kernel.Thm
+
+pub fn replace_inj() -> @kernel.Thm
+
+pub fn replace_x() -> @kernel.Thm
+
+pub fn reset(Unit) -> Unit raise
+
+pub fn right() -> @kernel.Thm
+
+pub fn right_left() -> @kernel.Thm
+
+pub fn row() -> @kernel.Thm
+
+pub fn row_col() -> @kernel.Thm
+
+pub fn row_disj() -> @kernel.Thm
+
+pub fn rsimp_conv(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn rsimp_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn segment() -> @kernel.Thm
+
+pub fn segment_delete() -> @kernel.Thm
+
+pub fn segment_end() -> @kernel.Thm
+
+pub fn segment_end_cls() -> @kernel.Thm
+
+pub fn segment_end_cls2() -> @kernel.Thm
+
+pub fn segment_end_disj() -> @kernel.Thm
+
+pub fn segment_end_finite() -> @kernel.Thm
+
+pub fn segment_end_inj() -> @kernel.Thm
+
+pub fn segment_end_select() -> @kernel.Thm
+
+pub fn segment_end_sing() -> @kernel.Thm
+
+pub fn segment_end_symm() -> @kernel.Thm
+
+pub fn segment_end_trans() -> @kernel.Thm
+
+pub fn segment_end_union() -> @kernel.Thm
+
+pub fn segment_end_union_lemma() -> @kernel.Thm
+
+pub fn segment_end_union_rectagon() -> @kernel.Thm
+
+pub fn segment_euclid() -> @kernel.Thm
+
+pub fn segment_euclid_v1() -> @kernel.Thm
+
+pub fn segment_finite() -> @kernel.Thm
+
+pub fn segment_in_comp() -> @kernel.Thm
+
+pub fn segment_not_in() -> @kernel.Thm
+
+pub fn segment_of() -> @kernel.Thm
+
+pub fn segment_of_endpoint() -> @kernel.Thm
+
+pub fn segment_of_eq() -> @kernel.Thm
+
+pub fn segment_of_finite() -> @kernel.Thm
+
+pub fn segment_of_g() -> @kernel.Thm
+
+pub fn segment_of_in() -> @kernel.Thm
+
+pub fn segment_of_segment() -> @kernel.Thm
+
+pub fn segment_of_subset() -> @kernel.Thm
+
+pub fn segment_superset_endpoint() -> @kernel.Thm
+
+pub fn segment_union() -> @kernel.Thm
+
+pub fn segment_union2() -> @kernel.Thm
+
+pub fn segpath() -> @kernel.Thm
+
+pub fn segpath_end() -> @kernel.Thm
+
+pub fn segpath_inj() -> @kernel.Thm
+
+pub fn segpath_lemma() -> @kernel.Thm
+
+pub fn segpathxy() -> @kernel.Thm
+
+pub fn select_card_max() -> @kernel.Thm
+
+pub fn select_card_min() -> @kernel.Thm
+
+pub fn select_image_num_max() -> @kernel.Thm
+
+pub fn select_image_num_min() -> @kernel.Thm
+
+pub fn select_inter() -> @kernel.Thm
+
+pub fn select_num_max() -> @kernel.Thm
+
+pub fn set_dist() -> @kernel.Thm
+
+pub fn set_dist_eq() -> @kernel.Thm
+
+pub fn set_dist_inf() -> @kernel.Thm
+
+pub fn set_dist_nn() -> @kernel.Thm
+
+pub fn set_dist_pos() -> @kernel.Thm
+
+pub fn set_lower() -> @kernel.Thm
+
+pub fn set_lower_delete() -> @kernel.Thm
+
+pub fn set_lower_n() -> @kernel.Thm
+
+pub fn set_simp_rewrites(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn shift_inj() -> @kernel.Thm
+
+pub fn simp_net(Unit) -> @nets.Net[@simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise]] raise
+
+pub fn simp_rewrites(Unit) -> @list.List[@kernel.Thm] raise
+
+pub fn simp_ss(@list.List[@kernel.Thm]) -> @simp.Simpset raise
+
+pub fn simple_arc() -> @kernel.Thm
+
+pub fn simple_arc_ball_cover() -> @kernel.Thm
+
+pub fn simple_arc_ball_cover_ver2() -> @kernel.Thm
+
+pub fn simple_arc_choose_end() -> @kernel.Thm
+
+pub fn simple_arc_compact() -> @kernel.Thm
+
+pub fn simple_arc_conn_complement() -> @kernel.Thm
+
+pub fn simple_arc_connected() -> @kernel.Thm
+
+pub fn simple_arc_constants() -> @kernel.Thm
+
+pub fn simple_arc_coord() -> @kernel.Thm
+
+pub fn simple_arc_end() -> @kernel.Thm
+
+pub fn simple_arc_end_closed() -> @kernel.Thm
+
+pub fn simple_arc_end_cont() -> @kernel.Thm
+
+pub fn simple_arc_end_cut() -> @kernel.Thm
+
+pub fn simple_arc_end_distinct() -> @kernel.Thm
+
+pub fn simple_arc_end_edge_closure() -> @kernel.Thm
+
+pub fn simple_arc_end_edge_full_closure() -> @kernel.Thm
+
+pub fn simple_arc_end_end() -> @kernel.Thm
+
+pub fn simple_arc_end_end2() -> @kernel.Thm
+
+pub fn simple_arc_end_end_closed() -> @kernel.Thm
+
+pub fn simple_arc_end_end_closed2() -> @kernel.Thm
+
+pub fn simple_arc_end_homeo() -> @kernel.Thm
+
+pub fn simple_arc_end_inj() -> @kernel.Thm
+
+pub fn simple_arc_end_ivt() -> @kernel.Thm
+
+pub fn simple_arc_end_plane_select() -> @kernel.Thm
+
+pub fn simple_arc_end_restriction() -> @kernel.Thm
+
+pub fn simple_arc_end_select() -> @kernel.Thm
+
+pub fn simple_arc_end_simple() -> @kernel.Thm
+
+pub fn simple_arc_end_subset_trans() -> @kernel.Thm
+
+pub fn simple_arc_end_subset_trans_lemma() -> @kernel.Thm
+
+pub fn simple_arc_end_symm() -> @kernel.Thm
+
+pub fn simple_arc_end_trans() -> @kernel.Thm
+
+pub fn simple_arc_euclid() -> @kernel.Thm
+
+pub fn simple_arc_finite_lemma1() -> @kernel.Thm
+
+pub fn simple_arc_finite_lemma2() -> @kernel.Thm
+
+pub fn simple_arc_finite_lemma3() -> @kernel.Thm
+
+pub fn simple_arc_finite_lemma4() -> @kernel.Thm
+
+pub fn simple_arc_finite_pointi() -> @kernel.Thm
+
+pub fn simple_arc_grid_properties() -> @kernel.Thm
+
+pub fn simple_arc_homeo() -> @kernel.Thm
+
+pub fn simple_arc_homeo_v1() -> @kernel.Thm
+
+pub fn simple_arc_infinite() -> @kernel.Thm
+
+pub fn simple_arc_midpoint() -> @kernel.Thm
+
+pub fn simple_arc_nonempty() -> @kernel.Thm
+
+pub fn simple_arc_segment() -> @kernel.Thm
+
+pub fn simple_arc_sep() -> @kernel.Thm
+
+pub fn simple_arc_sep2() -> @kernel.Thm
+
+pub fn simple_arc_sep3() -> @kernel.Thm
+
+pub fn simple_arc_sep_three_t() -> @kernel.Thm
+
+pub fn simple_arc_uniformly_continuous() -> @kernel.Thm
+
+pub fn simple_closed_curve() -> @kernel.Thm
+
+pub fn simple_closed_curve_2pt() -> @kernel.Thm
+
+pub fn simple_closed_curve_closed() -> @kernel.Thm
+
+pub fn simple_closed_curve_compact() -> @kernel.Thm
+
+pub fn simple_closed_curve_cut_unique() -> @kernel.Thm
+
+pub fn simple_closed_curve_cut_unique_inter() -> @kernel.Thm
+
+pub fn simple_closed_curve_euclid() -> @kernel.Thm
+
+pub fn simple_closed_curve_mk_abd() -> @kernel.Thm
+
+pub fn simple_closed_curve_mk_c() -> @kernel.Thm
+
+pub fn simple_closed_curve_mk_e() -> @kernel.Thm
+
+pub fn simple_closed_curve_nonempty() -> @kernel.Thm
+
+pub fn simple_closed_curve_nsubset_arc() -> @kernel.Thm
+
+pub fn simple_closed_curve_pt() -> @kernel.Thm
+
+pub fn simple_closed_cut() -> @kernel.Thm
+
+pub fn simple_polygonal_arc() -> @kernel.Thm
+
+pub fn simple_polygonal_curve() -> @kernel.Thm
+
+pub fn sin_half() -> @kernel.Thm
+
+pub fn sin_period() -> @kernel.Thm
+
+pub fn sin_period_int() -> @kernel.Thm
+
+pub fn sin_period_neg() -> @kernel.Thm
+
+pub fn sing_has_size1() -> @kernel.Thm
+
+pub fn single_inter() -> @kernel.Thm
+
+pub fn single_subset() -> @kernel.Thm
+
+pub fn sinx_le_x() -> @kernel.Thm
+
+pub fn sqrt_frac() -> @kernel.Thm
+
+pub fn sqrt_mono_le_p() -> @kernel.Thm
+
+pub fn sqrt_mono_lt_p() -> @kernel.Thm
+
+pub fn squ() -> @kernel.Thm
+
+pub fn squ_closure() -> @kernel.Thm
+
+pub fn squ_closure_down_h() -> @kernel.Thm
+
+pub fn squ_closure_h() -> @kernel.Thm
+
+pub fn squ_closure_hc() -> @kernel.Thm
+
+pub fn squ_closure_left_v() -> @kernel.Thm
+
+pub fn squ_closure_right_v() -> @kernel.Thm
+
+pub fn squ_closure_up_h() -> @kernel.Thm
+
+pub fn squ_closure_up_hc() -> @kernel.Thm
+
+pub fn squ_closure_v() -> @kernel.Thm
+
+pub fn squ_closure_vc() -> @kernel.Thm
+
+pub fn squ_disj() -> @kernel.Thm
+
+pub fn squ_down() -> @kernel.Thm
+
+pub fn squ_euclid() -> @kernel.Thm
+
+pub fn squ_induct() -> @kernel.Thm
+
+pub fn squ_inj() -> @kernel.Thm
+
+pub fn squ_inter() -> @kernel.Thm
+
+pub fn squ_left_even() -> @kernel.Thm
+
+pub fn squ_left_odd() -> @kernel.Thm
+
+pub fn squ_left_par() -> @kernel.Thm
+
+pub fn squ_squc() -> @kernel.Thm
+
+pub fn squ_squc_c() -> @kernel.Thm
+
+pub fn squ_subset_sqc() -> @kernel.Thm
+
+pub fn square_cell() -> @kernel.Thm
+
+pub fn square_col() -> @kernel.Thm
+
+pub fn square_disj() -> @kernel.Thm
+
+pub fn square_domain() -> @kernel.Thm
+
+pub fn square_floor0() -> @kernel.Thm
+
+pub fn square_floor1() -> @kernel.Thm
+
+pub fn square_h_edge() -> @kernel.Thm
+
+pub fn square_h_edgev2() -> @kernel.Thm
+
+pub fn square_pointi() -> @kernel.Thm
+
+pub fn square_pointiv2() -> @kernel.Thm
+
+pub fn square_row() -> @kernel.Thm
+
+pub fn square_square() -> @kernel.Thm
+
+pub fn square_v_edge() -> @kernel.Thm
+
+pub fn square_v_edgev2() -> @kernel.Thm
+
+pub fn squc() -> @kernel.Thm
+
+pub fn squc_closed() -> @kernel.Thm
+
+pub fn squc_h() -> @kernel.Thm
+
+pub fn squc_inter() -> @kernel.Thm
+
+pub fn squc_lemma4() -> @kernel.Thm
+
+pub fn squc_union() -> @kernel.Thm
+
+pub fn squc_union_lemma1() -> @kernel.Thm
+
+pub fn squc_union_lemma2() -> @kernel.Thm
+
+pub fn squc_union_lemma3() -> @kernel.Thm
+
+pub fn squc_v() -> @kernel.Thm
+
+pub fn star_avoidance() -> @kernel.Thm
+
+pub fn star_avoidance_contrp() -> @kernel.Thm
+
+pub fn star_avoidance_lemma1() -> @kernel.Thm
+
+pub fn strict_dom() -> @kernel.Thm
+
+pub fn strict_dom_irrefl() -> @kernel.Thm
+
+pub fn strict_dom_trans() -> @kernel.Thm
+
+pub fn subagoal_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn subf() -> @kernel.Thm
+
+pub fn subf_cont() -> @kernel.Thm
+
+pub fn subf_lemma() -> @kernel.Thm
+
+pub fn subs_lemma() -> @kernel.Thm
+
+pub fn subset3_absorb() -> @kernel.Thm
+
+pub fn subset_antisym_eq() -> @kernel.Thm
+
+pub fn subset_contain() -> @kernel.Thm
+
+pub fn subset_imp() -> @kernel.Thm
+
+pub fn subset_imp_eq() -> @kernel.Thm
+
+pub fn subset_inter_pair() -> @kernel.Thm
+
+pub fn subset_of_closure() -> @kernel.Thm
+
+pub fn subset_union_inter() -> @kernel.Thm
+
+pub fn subset_union_pair() -> @kernel.Thm
+
+pub fn suc_div() -> @kernel.Thm
+
+pub fn suc_interval() -> @kernel.Thm
+
+pub fn suc_sum() -> @kernel.Thm
+
+pub fn supm() -> @kernel.Thm
+
+pub fn supm_eps() -> @kernel.Thm
+
+pub fn supm_ub() -> @kernel.Thm
+
+pub fn supm_unique() -> @kernel.Thm
+
+pub fn target_edge() -> @kernel.Thm
+
+pub fn target_h() -> @kernel.Thm
+
+pub fn target_set() -> @kernel.Thm
+
+pub fn target_set_even() -> @kernel.Thm
+
+pub fn target_set_finite() -> @kernel.Thm
+
+pub fn target_set_odd() -> @kernel.Thm
+
+pub fn target_set_subset() -> @kernel.Thm
+
+pub fn target_v() -> @kernel.Thm
+
+pub fn terminal_adj() -> @kernel.Thm
+
+pub fn terminal_case1() -> @kernel.Thm
+
+pub fn terminal_case2() -> @kernel.Thm
+
+pub fn terminal_case_v() -> @kernel.Thm
+
+pub fn terminal_edge() -> @kernel.Thm
+
+pub fn terminal_edge_adj() -> @kernel.Thm
+
+pub fn terminal_edge_bij() -> @kernel.Thm
+
+pub fn terminal_edge_image() -> @kernel.Thm
+
+pub fn terminal_edge_surj() -> @kernel.Thm
+
+pub fn terminal_endpoint() -> @kernel.Thm
+
+pub fn terminal_unique() -> @kernel.Thm
+
+pub fn test_case_int_le_tac() -> @kernel.Thm
+
+pub fn thr_bij() -> @kernel.Thm
+
+pub fn thr_finite() -> @kernel.Thm
+
+pub fn thread_finite_union() -> @kernel.Thm
+
+pub fn three_delete_size() -> @kernel.Thm
+
+pub fn three_t() -> @kernel.Thm
+
+pub fn three_t_enum() -> @kernel.Thm
+
+pub fn three_t_eq() -> @kernel.Thm
+
+pub fn three_t_finite() -> @kernel.Thm
+
+pub fn three_t_not_pair() -> @kernel.Thm
+
+pub fn three_t_not_sing() -> @kernel.Thm
+
+pub fn three_t_size3() -> @kernel.Thm
+
+pub fn three_t_size3_v1() -> @kernel.Thm
+
+pub fn three_t_univ() -> @kernel.Thm
+
+pub fn top2() -> @kernel.Thm
+
+pub fn top2_top() -> @kernel.Thm
+
+pub fn top2_unions() -> @kernel.Thm
+
+pub fn top_closed_unions() -> @kernel.Thm
+
+pub fn top_union() -> @kernel.Thm
+
+pub fn totally_bounded_pointi() -> @kernel.Thm
+
+pub fn transpose() -> @kernel.Thm
+
+pub fn transpose2() -> @kernel.Thm
+
+pub fn trap_odd_cell() -> @kernel.Thm
+
+pub fn trap_triple_seg() -> @kernel.Thm
+
+pub fn triple_in_comp() -> @kernel.Thm
+
+pub fn triple_par_cell_distinct() -> @kernel.Thm
+
+pub fn two_endpoint() -> @kernel.Thm
+
+pub fn two_endpoint_segment() -> @kernel.Thm
+
+pub fn two_exclusion() -> @kernel.Thm
+
+pub fn two_two_lemma1() -> @kernel.Thm
+
+pub fn two_two_lemma2() -> @kernel.Thm
+
+pub fn two_two_lemma3() -> @kernel.Thm
+
+pub fn two_two_nine() -> @kernel.Thm
+
+pub fn two_two_union() -> @kernel.Thm
+
+pub fn twopow_lt() -> @kernel.Thm
+
+pub fn type_bij() -> @kernel.Thm
+
+pub fn u_scale() -> @kernel.Thm
+
+pub fn u_scale_bij() -> @kernel.Thm
+
+pub fn u_scale_cont() -> @kernel.Thm
+
+pub fn u_scale_h() -> @kernel.Thm
+
+pub fn u_scale_hom() -> @kernel.Thm
+
+pub fn u_scale_inv() -> @kernel.Thm
+
+pub fn u_scale_point() -> @kernel.Thm
+
+pub fn u_scale_v() -> @kernel.Thm
+
+pub fn unabbrev_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn unbound_set_x_axis() -> @kernel.Thm
+
+pub fn unbounded() -> @kernel.Thm
+
+pub fn unbounded_avoidance_subset() -> @kernel.Thm
+
+pub fn unbounded_avoidance_subset_ver2() -> @kernel.Thm
+
+pub fn unbounded_comp() -> @kernel.Thm
+
+pub fn unbounded_comp_unique() -> @kernel.Thm
+
+pub fn unbounded_connect() -> @kernel.Thm
+
+pub fn unbounded_diff() -> @kernel.Thm
+
+pub fn unbounded_elt() -> @kernel.Thm
+
+pub fn unbounded_euclid() -> @kernel.Thm
+
+pub fn unbounded_even() -> @kernel.Thm
+
+pub fn unbounded_even_subset() -> @kernel.Thm
+
+pub fn unbounded_set() -> @kernel.Thm
+
+pub fn unbounded_set_ball() -> @kernel.Thm
+
+pub fn unbounded_set_comp() -> @kernel.Thm
+
+pub fn unbounded_set_comp_elt() -> @kernel.Thm
+
+pub fn unbounded_set_comp_elt_eq() -> @kernel.Thm
+
+pub fn unbounded_set_curve_cell_empty() -> @kernel.Thm
+
+pub fn unbounded_set_empty() -> @kernel.Thm
+
+pub fn unbounded_set_lemma() -> @kernel.Thm
+
+pub fn unbounded_set_nonempty() -> @kernel.Thm
+
+pub fn unbounded_set_trans_lemma() -> @kernel.Thm
+
+pub fn unbounded_subset_unions() -> @kernel.Thm
+
+pub fn unbounded_triple_avoidance() -> @kernel.Thm
+
+pub fn undischq_tac((@kernel.Term) -> Bool raise, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn union_diff() -> @kernel.Thm
+
+pub fn union_diff2() -> @kernel.Thm
+
+pub fn union_imp_subset() -> @kernel.Thm
+
+pub fn unions_cell_of() -> @kernel.Thm
+
+pub fn unions_cell_of_ver2() -> @kernel.Thm
+
+pub fn unions_curve_cell() -> @kernel.Thm
+
+pub fn unions_curve_cell_par_cell_disj() -> @kernel.Thm
+
+pub fn unions_delete_choice() -> @kernel.Thm
+
+pub fn unions_empty_imp_empty() -> @kernel.Thm
+
+pub fn unions_union() -> @kernel.Thm
+
+pub fn unique_bounded() -> @kernel.Thm
+
+pub fn up() -> @kernel.Thm
+
+pub fn v_compat() -> @kernel.Thm
+
+pub fn v_compat_bij2() -> @kernel.Thm
+
+pub fn v_edge() -> @kernel.Thm
+
+pub fn v_edge_ball() -> @kernel.Thm
+
+pub fn v_edge_cases() -> @kernel.Thm
+
+pub fn v_edge_closed_ball() -> @kernel.Thm
+
+pub fn v_edge_closure() -> @kernel.Thm
+
+pub fn v_edge_col() -> @kernel.Thm
+
+pub fn v_edge_convex() -> @kernel.Thm
+
+pub fn v_edge_cpoint() -> @kernel.Thm
+
+pub fn v_edge_disj() -> @kernel.Thm
+
+pub fn v_edge_euclid() -> @kernel.Thm
+
+pub fn v_edge_floor() -> @kernel.Thm
+
+pub fn v_edge_inj() -> @kernel.Thm
+
+pub fn v_edge_inter() -> @kernel.Thm
+
+pub fn v_edge_pointi() -> @kernel.Thm
+
+pub fn v_edge_pointiv2() -> @kernel.Thm
+
+pub fn v_edge_subset() -> @kernel.Thm
+
+pub fn v_simple_polygonal() -> @kernel.Thm
+
+pub fn v_translate() -> @kernel.Thm
+
+pub fn v_translate_bij() -> @kernel.Thm
+
+pub fn v_translate_cont() -> @kernel.Thm
+
+pub fn v_translate_h() -> @kernel.Thm
+
+pub fn v_translate_hom() -> @kernel.Thm
+
+pub fn v_translate_inv() -> @kernel.Thm
+
+pub fn v_translate_point() -> @kernel.Thm
+
+pub fn v_translate_v() -> @kernel.Thm
+
+pub fn vc_edge() -> @kernel.Thm
+
+pub fn vc_edge_closed() -> @kernel.Thm
+
+pub fn vc_edge_convex() -> @kernel.Thm
+
+pub fn vc_edge_inter() -> @kernel.Thm
+
+pub fn vc_edge_pointi() -> @kernel.Thm
+
+pub fn x_diff_y2() -> @kernel.Thm
+
+pub fn xmaxq() -> @kernel.Thm
+
+pub fn xmaxq_exists() -> @kernel.Thm
+
+pub fn xmaxq_max() -> @kernel.Thm
+
+pub fn xmaxqexists_lemma() -> @kernel.Thm
+
+pub fn xmin_le_xmax() -> @kernel.Thm
+
+pub fn xmin_lt_xmax() -> @kernel.Thm
+
+pub fn xminq() -> @kernel.Thm
+
+pub fn xminq_exists() -> @kernel.Thm
+
+pub fn xminq_min() -> @kernel.Thm
+
+pub fn xminqexists_lemma() -> @kernel.Thm
+
+pub fn ymaxq() -> @kernel.Thm
+
+pub fn ymaxq_exists() -> @kernel.Thm
+
+pub fn ymaxq_max() -> @kernel.Thm
+
+pub fn ymaxqexists_lemma() -> @kernel.Thm
+
+pub fn ymin_le_ymax() -> @kernel.Thm
+
+pub fn ymin_lt_ymax() -> @kernel.Thm
+
+pub fn yminq() -> @kernel.Thm
+
+pub fn yminq_exists() -> @kernel.Thm
+
+pub fn yminq_min() -> @kernel.Thm
+
+pub fn yminqexists_lemma() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
