@@ -1428,8 +1428,19 @@ module Lower = struct
         let elem_is_fn =
           match Types.get_desc (expand (result fty)) with
           | Types.Tconstr (_, [ a ], _) ->
-              (* through abbreviations too: a `conv net` (Examples/cooper.ml) *)
-              (match Types.get_desc (Ctype.expand_head (env ()) a) with Types.Tarrow _ -> true | _ -> false)
+              (* through abbreviations too: a `conv net` (Examples/cooper.ml).
+                 A tuple holding a function ((term -> bool) * 'a in
+                 Examples/holby.ml) cannot implement NetCompare either:
+                 such elements are compared by identity as a whole, where
+                 OCaml compares the components (it differs only when the
+                 same closure is stored with equal other components) *)
+              let rec holds_fn t =
+                match Types.get_desc (Ctype.expand_head (env ()) t) with
+                | Types.Tarrow _ -> true
+                | Types.Ttuple ts -> List.exists holds_fn ts
+                | _ -> false
+              in
+              not (is_gconv_tuple a) && holds_fn a
           | _ -> false
         in
         if elem_is_fn then { h with hexp = Atom (q ^ "_fn") } else h

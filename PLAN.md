@@ -355,7 +355,9 @@ definitions register constants, quotations advance the type-variable and
   differs) and where OCaml's compare raises on big-integer digits the port
   aborts; simp's generic net elements order equal-priority payloads by
   physical identity only (upstream compares non-closure payloads
-  structurally; HOL's nets hold closures); byte-level string operations
+  structurally; HOL's nets hold closures); a net whose elements are
+  tuples holding a function compares them by identity as a whole
+  (Examples/holby.ml); byte-level string operations
   abort on non-ASCII characters (e.g. dest_string of a char >= 128).
   The core (everything hol.ml loads before the theory files) is now
   ported. All theory files hol.ml loads are translated and match upstream
