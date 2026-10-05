@@ -1,0 +1,52 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/quaternions/qcalc"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn cnj_quat() -> @kernel.Thm
+
+pub fn dest_quat(@kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn quat_components_conv((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn quat_trad_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn rat_quat_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn rat_quat_cnj_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn rat_quat_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn rat_quat_inv_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn rat_quat_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn rat_quat_neg_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn rat_quat_pow_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn rat_quat_red_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn rat_quat_reduce_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn rat_quat_reduce_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn rat_quat_sub_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn rational_quat_conv(@kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

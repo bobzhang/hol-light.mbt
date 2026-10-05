@@ -1,0 +1,40 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/quaternions/quaternions_misc"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn cases_tac(String, @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn dot_lbasis() -> @kernel.Thm
+
+pub fn dot_rbasis() -> @kernel.Thm
+
+pub fn induct_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mp_list_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn vector_eq_1() -> @kernel.Thm
+
+pub fn vector_eq_2() -> @kernel.Thm
+
+pub fn vector_eq_3() -> @kernel.Thm
+
+pub fn vector_eq_4() -> @kernel.Thm
+
+pub fn vector_norm_sqnorm_unit() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

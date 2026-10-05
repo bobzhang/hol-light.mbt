@@ -1,0 +1,451 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/quaternions/quaternion"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn bilinear_quat_mul() -> @kernel.Thm
+
+pub fn cnj_eq_hx() -> @kernel.Thm
+
+pub fn cnj_hx() -> @kernel.Thm
+
+pub fn dest_quat_const(@kernel.Term) -> @num.Num raise
+
+pub fn exists_quat() -> @kernel.Thm
+
+pub fn forall_quat() -> @kernel.Thm
+
+pub fn hx_abs() -> @kernel.Thm
+
+pub fn hx_add() -> @kernel.Thm
+
+pub fn hx_components() -> @kernel.Thm
+
+pub fn hx_def() -> @kernel.Thm
+
+pub fn hx_inj() -> @kernel.Thm
+
+pub fn hx_inv() -> @kernel.Thm
+
+pub fn hx_mul() -> @kernel.Thm
+
+pub fn hx_neg() -> @kernel.Thm
+
+pub fn hx_pow() -> @kernel.Thm
+
+pub fn hx_quat_re_cnj() -> @kernel.Thm
+
+pub fn hx_sub() -> @kernel.Thm
+
+pub fn image_hx() -> @kernel.Thm
+
+pub fn in_segment_hx() -> @kernel.Thm
+
+pub fn in_segment_hx_gen() -> @kernel.Thm
+
+pub fn is_quat_const(@kernel.Term) -> Bool raise
+
+pub fn linear_quat_lmul() -> @kernel.Thm
+
+pub fn linear_quat_rmul() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_quat_const(@num.Num) -> @kernel.Term raise
+
+pub fn mul_hx_components() -> @kernel.Thm
+
+pub fn norm_hx() -> @kernel.Thm
+
+pub fn prioritize_quat(Unit) -> Unit raise
+
+pub fn quat() -> @kernel.Thm
+
+pub fn quat_add() -> @kernel.Thm
+
+pub fn quat_add2_sub2() -> @kernel.Thm
+
+pub fn quat_add_ac() -> @kernel.Thm
+
+pub fn quat_add_assoc() -> @kernel.Thm
+
+pub fn quat_add_cnj() -> @kernel.Thm
+
+pub fn quat_add_components() -> @kernel.Thm
+
+pub fn quat_add_ldistrib() -> @kernel.Thm
+
+pub fn quat_add_lid() -> @kernel.Thm
+
+pub fn quat_add_linv() -> @kernel.Thm
+
+pub fn quat_add_rdistrib() -> @kernel.Thm
+
+pub fn quat_add_rid() -> @kernel.Thm
+
+pub fn quat_add_rinv() -> @kernel.Thm
+
+pub fn quat_add_sub() -> @kernel.Thm
+
+pub fn quat_add_sub2() -> @kernel.Thm
+
+pub fn quat_add_sym() -> @kernel.Thm
+
+pub fn quat_cmul() -> @kernel.Thm
+
+pub fn quat_cmul_components() -> @kernel.Thm
+
+pub fn quat_cmul_lid() -> @kernel.Thm
+
+pub fn quat_cmul_rid() -> @kernel.Thm
+
+pub fn quat_cnj() -> @kernel.Thm
+
+pub fn quat_cnj_add() -> @kernel.Thm
+
+pub fn quat_cnj_cnj() -> @kernel.Thm
+
+pub fn quat_cnj_components() -> @kernel.Thm
+
+pub fn quat_cnj_eq_0() -> @kernel.Thm
+
+pub fn quat_cnj_inj() -> @kernel.Thm
+
+pub fn quat_cnj_inv() -> @kernel.Thm
+
+pub fn quat_cnj_mul() -> @kernel.Thm
+
+pub fn quat_cnj_neg() -> @kernel.Thm
+
+pub fn quat_cnj_pow() -> @kernel.Thm
+
+pub fn quat_cnj_sub() -> @kernel.Thm
+
+pub fn quat_cnj_units() -> @kernel.Thm
+
+pub fn quat_cnj_vsum() -> @kernel.Thm
+
+pub fn quat_components() -> @kernel.Thm
+
+pub fn quat_components_def() -> @kernel.Thm
+
+pub fn quat_convex_real() -> @kernel.Thm
+
+pub fn quat_dot() -> @kernel.Thm
+
+pub fn quat_entire() -> @kernel.Thm
+
+pub fn quat_eq() -> @kernel.Thm
+
+pub fn quat_eq_0() -> @kernel.Thm
+
+pub fn quat_eq_add_lcancel() -> @kernel.Thm
+
+pub fn quat_eq_add_lcancel_0() -> @kernel.Thm
+
+pub fn quat_eq_add_rcancel() -> @kernel.Thm
+
+pub fn quat_eq_add_rcancel_0() -> @kernel.Thm
+
+pub fn quat_eq_mul_lcancel() -> @kernel.Thm
+
+pub fn quat_eq_mul_rcancel() -> @kernel.Thm
+
+pub fn quat_eq_neg2() -> @kernel.Thm
+
+pub fn quat_eq_sub_ladd() -> @kernel.Thm
+
+pub fn quat_eq_sub_radd() -> @kernel.Thm
+
+pub fn quat_exists_real() -> @kernel.Thm
+
+pub fn quat_expand() -> @kernel.Thm
+
+pub fn quat_forall_real() -> @kernel.Thm
+
+pub fn quat_ii() -> @kernel.Thm
+
+pub fn quat_ii_nz() -> @kernel.Thm
+
+pub fn quat_im1_def() -> @kernel.Thm
+
+pub fn quat_im2_def() -> @kernel.Thm
+
+pub fn quat_im3_def() -> @kernel.Thm
+
+pub fn quat_inv() -> @kernel.Thm
+
+pub fn quat_inv_0() -> @kernel.Thm
+
+pub fn quat_inv_0_eq() -> @kernel.Thm
+
+pub fn quat_inv_1() -> @kernel.Thm
+
+pub fn quat_inv_cnj() -> @kernel.Thm
+
+pub fn quat_inv_eq_cnj() -> @kernel.Thm
+
+pub fn quat_inv_inv() -> @kernel.Thm
+
+pub fn quat_inv_mul() -> @kernel.Thm
+
+pub fn quat_inv_units() -> @kernel.Thm
+
+pub fn quat_jj() -> @kernel.Thm
+
+pub fn quat_jj_nz() -> @kernel.Thm
+
+pub fn quat_kk() -> @kernel.Thm
+
+pub fn quat_kk_nz() -> @kernel.Thm
+
+pub fn quat_lneg_uniq() -> @kernel.Thm
+
+pub fn quat_mul() -> @kernel.Thm
+
+pub fn quat_mul_2() -> @kernel.Thm
+
+pub fn quat_mul_assoc() -> @kernel.Thm
+
+pub fn quat_mul_cnj() -> @kernel.Thm
+
+pub fn quat_mul_cnj_sym() -> @kernel.Thm
+
+pub fn quat_mul_hx_sym() -> @kernel.Thm
+
+pub fn quat_mul_lcancel() -> @kernel.Thm
+
+pub fn quat_mul_lid() -> @kernel.Thm
+
+pub fn quat_mul_linv() -> @kernel.Thm
+
+pub fn quat_mul_lneg() -> @kernel.Thm
+
+pub fn quat_mul_lzero() -> @kernel.Thm
+
+pub fn quat_mul_pow_sym() -> @kernel.Thm
+
+pub fn quat_mul_rcancel() -> @kernel.Thm
+
+pub fn quat_mul_rid() -> @kernel.Thm
+
+pub fn quat_mul_rinv() -> @kernel.Thm
+
+pub fn quat_mul_rneg() -> @kernel.Thm
+
+pub fn quat_mul_rzero() -> @kernel.Thm
+
+pub fn quat_mul_units_components() -> @kernel.Thm
+
+pub fn quat_neg() -> @kernel.Thm
+
+pub fn quat_neg_0() -> @kernel.Thm
+
+pub fn quat_neg_add() -> @kernel.Thm
+
+pub fn quat_neg_components() -> @kernel.Thm
+
+pub fn quat_neg_eq() -> @kernel.Thm
+
+pub fn quat_neg_eq_0() -> @kernel.Thm
+
+pub fn quat_neg_lmul() -> @kernel.Thm
+
+pub fn quat_neg_minus1() -> @kernel.Thm
+
+pub fn quat_neg_mul2() -> @kernel.Thm
+
+pub fn quat_neg_neg() -> @kernel.Thm
+
+pub fn quat_neg_rmul() -> @kernel.Thm
+
+pub fn quat_neg_sub() -> @kernel.Thm
+
+pub fn quat_norm() -> @kernel.Thm
+
+pub fn quat_norm_0() -> @kernel.Thm
+
+pub fn quat_norm_abs_norm() -> @kernel.Thm
+
+pub fn quat_norm_cnj() -> @kernel.Thm
+
+pub fn quat_norm_inv() -> @kernel.Thm
+
+pub fn quat_norm_mul() -> @kernel.Thm
+
+pub fn quat_norm_num() -> @kernel.Thm
+
+pub fn quat_norm_nz() -> @kernel.Thm
+
+pub fn quat_norm_pow() -> @kernel.Thm
+
+pub fn quat_norm_pow_2() -> @kernel.Thm
+
+pub fn quat_norm_pow_2_alt() -> @kernel.Thm
+
+pub fn quat_norm_triangle_sub() -> @kernel.Thm
+
+pub fn quat_norm_units() -> @kernel.Thm
+
+pub fn quat_norm_vsum_bound() -> @kernel.Thm
+
+pub fn quat_norm_vsum_bound_subset() -> @kernel.Thm
+
+pub fn quat_norm_vsum_sum_re() -> @kernel.Thm
+
+pub fn quat_norm_zero() -> @kernel.Thm
+
+pub fn quat_poly_clauses() -> @kernel.Thm
+
+pub fn quat_pow() -> @kernel.Thm
+
+pub fn quat_pow_1() -> @kernel.Thm
+
+pub fn quat_pow_2() -> @kernel.Thm
+
+pub fn quat_pow_add() -> @kernel.Thm
+
+pub fn quat_pow_eq_0() -> @kernel.Thm
+
+pub fn quat_pow_eq_1() -> @kernel.Thm
+
+pub fn quat_pow_inv() -> @kernel.Thm
+
+pub fn quat_pow_lmul_sym() -> @kernel.Thm
+
+pub fn quat_pow_mul() -> @kernel.Thm
+
+pub fn quat_pow_mul_sym() -> @kernel.Thm
+
+pub fn quat_pow_neg() -> @kernel.Thm
+
+pub fn quat_pow_one() -> @kernel.Thm
+
+pub fn quat_pow_pow() -> @kernel.Thm
+
+pub fn quat_pow_rmul_sym() -> @kernel.Thm
+
+pub fn quat_pow_suc_alt() -> @kernel.Thm
+
+pub fn quat_pow_units_2() -> @kernel.Thm
+
+pub fn quat_pow_zero() -> @kernel.Thm
+
+pub fn quat_rat_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn quat_rat_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn quat_rat_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn quat_rat_pow_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn quat_re_def() -> @kernel.Thm
+
+pub fn quat_re_pos_segment() -> @kernel.Thm
+
+pub fn quat_real() -> @kernel.Thm
+
+pub fn quat_real_add() -> @kernel.Thm
+
+pub fn quat_real_cnj() -> @kernel.Thm
+
+pub fn quat_real_exists() -> @kernel.Thm
+
+pub fn quat_real_inv() -> @kernel.Thm
+
+pub fn quat_real_inv_eq() -> @kernel.Thm
+
+pub fn quat_real_mul() -> @kernel.Thm
+
+pub fn quat_real_neg() -> @kernel.Thm
+
+pub fn quat_real_norm() -> @kernel.Thm
+
+pub fn quat_real_norm_pos() -> @kernel.Thm
+
+pub fn quat_real_pow() -> @kernel.Thm
+
+pub fn quat_real_segment() -> @kernel.Thm
+
+pub fn quat_real_sub() -> @kernel.Thm
+
+pub fn quat_real_v1() -> @kernel.Thm
+
+pub fn quat_real_vsum() -> @kernel.Thm
+
+pub fn quat_rneg_uniq() -> @kernel.Thm
+
+pub fn quat_sqnorm() -> @kernel.Thm
+
+pub fn quat_sub() -> @kernel.Thm
+
+pub fn quat_sub_0() -> @kernel.Thm
+
+pub fn quat_sub_add() -> @kernel.Thm
+
+pub fn quat_sub_add2() -> @kernel.Thm
+
+pub fn quat_sub_components() -> @kernel.Thm
+
+pub fn quat_sub_ldistrib() -> @kernel.Thm
+
+pub fn quat_sub_lneg() -> @kernel.Thm
+
+pub fn quat_sub_lzero() -> @kernel.Thm
+
+pub fn quat_sub_neg2() -> @kernel.Thm
+
+pub fn quat_sub_rdistrib() -> @kernel.Thm
+
+pub fn quat_sub_refl() -> @kernel.Thm
+
+pub fn quat_sub_rneg() -> @kernel.Thm
+
+pub fn quat_sub_rzero() -> @kernel.Thm
+
+pub fn quat_sub_sub() -> @kernel.Thm
+
+pub fn quat_sub_sub2() -> @kernel.Thm
+
+pub fn quat_sub_triangle() -> @kernel.Thm
+
+pub fn quat_trad() -> @kernel.Thm
+
+pub fn quat_units_components() -> @kernel.Thm
+
+pub fn quat_v1() -> @kernel.Thm
+
+pub fn quat_vec_0() -> @kernel.Thm
+
+pub fn quat_vsum_components() -> @kernel.Thm
+
+pub fn real_hx() -> @kernel.Thm
+
+pub fn real_mul_hx() -> @kernel.Thm
+
+pub fn simple_quat_arith(@kernel.Term) -> @kernel.Thm raise
+
+pub fn simple_quat_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn vsum_hx() -> @kernel.Thm
+
+pub fn vsum_hx_numseg() -> @kernel.Thm
+
+pub fn vsum_quat_lmul() -> @kernel.Thm
+
+pub fn vsum_quat_rmul() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
