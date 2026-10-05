@@ -645,21 +645,21 @@ module Emit = struct
                (* `include M` of a translated module re-exports its members
                   (e.g. `include Sub` in a specialized functor) *)
                let here n = String.concat "" (List.rev_map (fun m -> m ^ ".") !module_prefix) ^ n in
+               (* a member another file defines keeps that file's
+                  declaration; it is re-exported under this module *)
+               let foreign_member p id =
+                 match Prov.lookup (Path.Pdot (p, Ident.name id)) with
+                 | Some (file, qname) when file <> !current_file ->
+                     Hashtbl.replace Prov.table (Ident.unique_name id) (file, qname);
+                     Hashtbl.replace reexports (here (Ident.name id)) (file, qname)
+                 | _ -> ()
+               in
                (match module_path p with
                 | None ->
                     (* a module another file translated (`include Pa` in
                        Functionspaces/utils.ml, over Library/q.ml's Pa):
                        its members keep that file's declarations *)
-                    List.iter
-                      (function
-                        | Types.Sig_value (id, _, _) ->
-                            (match Prov.lookup (Path.Pdot (p, Ident.name id)) with
-                             | Some (file, qname) when file <> !current_file ->
-                                 Hashtbl.replace Prov.table (Ident.unique_name id) (file, qname);
-                                 Hashtbl.replace reexports (here (Ident.name id)) (file, qname)
-                             | _ -> ())
-                        | _ -> ())
-                      incl_type
+                    List.iter (function Types.Sig_value (id, _, _) -> foreign_member p id | _ -> ()) incl_type
                 | Some src ->
                     let skey n = String.concat "." (src @ [ n ]) in
                     List.iter
@@ -669,7 +669,7 @@ module Emit = struct
                              | Some entry ->
                                  Hashtbl.replace own_values (Ident.unique_name id) entry;
                                  Hashtbl.replace own_by_name (here (Ident.name id)) entry
-                             | None -> ())
+                             | None -> foreign_member p id)
                         | Types.Sig_type (id, _, _, _) ->
                             (match Hashtbl.find_opt own_types (skey (Ident.name id)) with
                              | Some t ->
