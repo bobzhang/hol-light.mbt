@@ -1,0 +1,150 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/divstep/hull_light"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn choosevar(@kernel.Term, @kernel.Term, @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn def(@kernel.Term, @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn divsteps_h0() -> @kernel.Thm
+
+pub fn divsteps_h1() -> @kernel.Thm
+
+pub fn divsteps_hinit_0_1() -> @kernel.Thm
+
+pub fn divsteps_houter() -> @kernel.Thm
+
+pub fn divsteps_s() -> @kernel.Thm
+
+pub fn divsteps_s_definition() -> @kernel.Thm
+
+pub fn divsteps_w() -> @kernel.Thm
+
+pub fn endtoend() -> @kernel.Thm
+
+pub fn endtoend_16384_simple() -> @kernel.Thm
+
+pub fn endtoend_255_simple() -> @kernel.Thm
+
+pub fn endtoend_256_simple() -> @kernel.Thm
+
+pub fn endtoend_512_simple() -> @kernel.Thm
+
+pub fn endtoend_bits_simple() -> @kernel.Thm
+
+pub fn endtoend_simple() -> @kernel.Thm
+
+pub fn generic_1_p0() -> @kernel.Thm
+
+pub fn generic_1_ppos() -> @kernel.Thm
+
+pub fn generic_2() -> @kernel.Thm
+
+pub fn h1_16_lemma1() -> @kernel.Thm
+
+pub fn h1_16_lemma1neg() -> @kernel.Thm
+
+pub fn h1_16_lemma2() -> @kernel.Thm
+
+pub fn h1_16_lemma2neg() -> @kernel.Thm
+
+pub fn h1_16_lemma3() -> @kernel.Thm
+
+pub fn h1_16_lemma3neg() -> @kernel.Thm
+
+pub fn h1_contains0() -> @kernel.Thm
+
+pub fn h1_convex() -> @kernel.Thm
+
+pub fn h1_convex_horizontal() -> @kernel.Thm
+
+pub fn h1_shrink() -> @kernel.Thm
+
+pub fn h1_shrink32() -> @kernel.Thm
+
+pub fn ineq_convex() -> @kernel.Thm
+
+pub fn init2stable() -> @kernel.Thm
+
+pub fn init2stable_simple() -> @kernel.Thm
+
+pub fn int_linear(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn int_neg_as_minusnum1() -> @kernel.Thm
+
+pub fn iteration_sizebound() -> @kernel.Thm
+
+pub fn iteration_sizebound_simple() -> @kernel.Thm
+
+pub fn iteration_stability() -> @kernel.Thm
+
+pub fn latticetheorem() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn note(@kernel.Term, @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn notetac(@kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn num_linear(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn real_cancel(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn real_le_rdiv() -> @kernel.Thm
+
+pub fn real_linear(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn real_lt_extra2() -> @kernel.Thm
+
+pub fn real_lt_ldiv() -> @kernel.Thm
+
+pub fn real_lt_rdiv_one_extra() -> @kernel.Thm
+
+pub fn specialize(@list.List[@kernel.Term], @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn spow_bound() -> @kernel.Thm
+
+pub fn theorem0() -> @kernel.Thm
+
+pub fn theorem1() -> @kernel.Thm
+
+pub fn theorem3() -> @kernel.Thm
+
+pub fn theorem5() -> @kernel.Thm
+
+pub fn theorem_1() -> @kernel.Thm
+
+pub fn theorem_2() -> @kernel.Thm
+
+pub fn theorem_3scale() -> @kernel.Thm
+
+pub fn theorem_4scale() -> @kernel.Thm
+
+pub fn theoremouter() -> @kernel.Thm
+
+pub fn theoremouter_simple() -> @kernel.Thm
+
+pub fn twocases(@kernel.Term, @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn unscale_3() -> @kernel.Thm
+
+pub fn unscale_4() -> @kernel.Thm
+
+pub fn upow_bound() -> @kernel.Thm
+
+pub fn w_transition0() -> @kernel.Thm
+
+pub fn w_transition1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

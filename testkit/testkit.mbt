@@ -91,10 +91,52 @@ pub fn Log::contents(self : Log) -> String {
 }
 
 ///|
+/// Where reports and standard output went before a log first captured
+/// them (`release_output` sends them there again).
+let saved_report_sink : Ref[((String) -> Unit)?] = Ref::{ val: None, }
+
+///|
+let saved_stdout_sink : Ref[((String) -> Unit)?] = Ref::{ val: None, }
+
+///|
 /// Send `report`/`warn` output to the log (upstream prints warnings on the
 /// same stream as the results).
 pub fn Log::capture_reports(self : Log) -> Unit {
+  if saved_report_sink.val is None {
+    saved_report_sink.val = Some(@lib.report_sink.val)
+  }
   @lib.report_sink.val = s => self.out(s)
+}
+
+///|
+/// Undo `capture_reports` and `capture_stdout`: output goes where it went
+/// before any log captured it. A test that loads several files in turn
+/// calls this before each load, so that what a file prints while loading is
+/// recorded as its own load output, not in the previous file's log.
+pub fn release_output() -> Unit {
+  if saved_report_sink.val is Some(f) {
+    @lib.report_sink.val = f
+  }
+  if saved_stdout_sink.val is Some(f) {
+    @pp.flush_stdout_partial()
+    @pp.stdout_sink.val = f
+  }
+  stdout_owner.val = -1
+}
+
+///|
+/// The last lines of a generated theory test (the warning that parsing
+/// `zz_counter` gives, then `counter_tyvar` and `counter_genvar`), read
+/// from the counters without advancing them: for a test that goes on to
+/// load more files, whose state must be what a fresh process would have.
+pub fn Log::probe_counters(self : Log) -> Unit {
+  self.out("Warning: inventing type variables")
+  self.out(
+    "counter_tyvar = zz_counter:'?" + @preterm.type_var_counter().to_string(),
+  )
+  self.out(
+    "counter_genvar = _" + @basics.genvar_counter().to_string() + ":bool",
+  )
 }
 
 ///|
@@ -102,6 +144,9 @@ pub fn Log::capture_reports(self : Log) -> Unit {
 pub fn Log::capture_stdout(self : Log) -> Unit {
   // Load-time output belongs before anything the test prints.
   @pp.flush_stdout_backlog()
+  if saved_stdout_sink.val is None {
+    saved_stdout_sink.val = Some(@pp.stdout_sink.val)
+  }
   @pp.stdout_sink.val = s => self.buf.write_string(s + "\n")
   self.via_stdout = true
   stdout_owner.val = self.id
@@ -185,4 +230,35 @@ pub fn normalize_times(s : String) -> String {
     }
   })
   .join("\n")
+}
+
+///|
+/// The axioms upstream's own files assert (class.ml: `ETA_AX`, `SELECT_AX`;
+/// nums.ml: `INFINITY_AX`), as `sthm` renders them.
+let approved_axioms : Array[String] = [
+  (
+    #| |- (#!:fun(fun(fun('A,'B),bool),bool) (\t:fun('A,'B). ((#=:fun(fun('A,'B),fun(fun('A,'B),bool)) (\x:'A. (t:fun('A,'B) x:'A))) t:fun('A,'B))))
+  ),
+  (
+    #| |- (#!:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) (#@:fun(fun('A,bool),'A) P:fun('A,bool))))))))
+  ),
+  (
+    #| |- (#?:fun(fun(fun(ind,ind),bool),bool) (\f:fun(ind,ind). ((#/\:fun(bool,fun(bool,bool)) (#ONE_ONE:fun(fun(ind,ind),bool) f:fun(ind,ind))) (#~:fun(bool,bool) (#ONTO:fun(fun(ind,ind),bool) f:fun(ind,ind))))))
+  ),
+]
+
+///|
+/// Fail unless every axiom asserted so far (`@kernel.axioms()`) is one of
+/// upstream's three, each at most once. `new_axiom` is unrestricted, as
+/// upstream (`mk_thm` and `CHEAT_TAC` go through it), so this is the audit:
+/// the load-fidelity tests run it after loading their theory.
+pub fn check_axioms() -> Unit raise {
+  let seen = []
+  for th in @kernel.axioms() {
+    let s = sthm(th)
+    if !approved_axioms.contains(s) || seen.contains(s) {
+      raise Failure("check_axioms: unexpected axiom" + s)
+    }
+    seen.push(s)
+  }
 }

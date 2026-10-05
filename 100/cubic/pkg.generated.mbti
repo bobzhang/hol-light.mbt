@@ -1,0 +1,27 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/cubic"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn ccbrt() -> @kernel.Thm
+
+pub fn ccbrt_v1() -> @kernel.Thm
+
+pub fn cubic() -> @kernel.Thm
+
+pub fn cubic_basic() -> @kernel.Thm
+
+pub fn cubic_reduction() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

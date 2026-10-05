@@ -1,0 +1,97 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/complex/complex_transc"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn ccos() -> @kernel.Thm
+
+pub fn ccos_0() -> @kernel.Thm
+
+pub fn ccos_add() -> @kernel.Thm
+
+pub fn ccos_double() -> @kernel.Thm
+
+pub fn ccos_neg() -> @kernel.Thm
+
+pub fn cexp() -> @kernel.Thm
+
+pub fn cexp_0() -> @kernel.Thm
+
+pub fn cexp_add() -> @kernel.Thm
+
+pub fn cexp_clog() -> @kernel.Thm
+
+pub fn cexp_euler() -> @kernel.Thm
+
+pub fn cexp_mul() -> @kernel.Thm
+
+pub fn cexp_neg() -> @kernel.Thm
+
+pub fn cexp_neg_lmul() -> @kernel.Thm
+
+pub fn cexp_neg_rmul() -> @kernel.Thm
+
+pub fn cexp_nonzero() -> @kernel.Thm
+
+pub fn cexp_sub() -> @kernel.Thm
+
+pub fn clog() -> @kernel.Thm
+
+pub fn clog_mul() -> @kernel.Thm
+
+pub fn clog_works() -> @kernel.Thm
+
+pub fn complex_ii_nz() -> @kernel.Thm
+
+pub fn complex_norm_ge_re_im() -> @kernel.Thm
+
+pub fn complex_unimodular_polar() -> @kernel.Thm
+
+pub fn cos_integer_2pi() -> @kernel.Thm
+
+pub fn csin() -> @kernel.Thm
+
+pub fn csin_0() -> @kernel.Thm
+
+pub fn csin_add() -> @kernel.Thm
+
+pub fn csin_circle() -> @kernel.Thm
+
+pub fn csin_double() -> @kernel.Thm
+
+pub fn csin_neg() -> @kernel.Thm
+
+pub fn csqrt() -> @kernel.Thm
+
+pub fn csqrt_v1() -> @kernel.Thm
+
+pub fn cx_ccos() -> @kernel.Thm
+
+pub fn cx_cexp() -> @kernel.Thm
+
+pub fn cx_csin() -> @kernel.Thm
+
+pub fn demoivre() -> @kernel.Thm
+
+pub fn exists_complex() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn sin_integer_2pi() -> @kernel.Thm
+
+pub fn sincos_principal_value() -> @kernel.Thm
+
+pub fn unwinding() -> @kernel.Thm
+
+pub fn unwinding_2pi() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

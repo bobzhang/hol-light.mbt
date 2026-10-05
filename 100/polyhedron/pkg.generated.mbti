@@ -1,0 +1,133 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/polyhedron"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cell_subset_cellcomplex() -> @kernel.Thm
+
+pub fn disjoint_hyperplane_cells() -> @kernel.Thm
+
+pub fn disjoint_hyperplane_cells_eq() -> @kernel.Thm
+
+pub fn euler_characteristic() -> @kernel.Thm
+
+pub fn euler_characteristic_cell() -> @kernel.Thm
+
+pub fn euler_characteristic_cell_unions() -> @kernel.Thm
+
+pub fn euler_characteristic_cellcomplex_union() -> @kernel.Thm
+
+pub fn euler_characteristic_cellcomplex_unions() -> @kernel.Thm
+
+pub fn euler_characteristic_empty() -> @kernel.Thm
+
+pub fn euler_characteristic_inclusion_exclusion() -> @kernel.Thm
+
+pub fn euler_characteristic_v1() -> @kernel.Thm
+
+pub fn euler_characterstic_invariant() -> @kernel.Thm
+
+pub fn euler_characterstic_lemma() -> @kernel.Thm
+
+pub fn euler_poincare_full() -> @kernel.Thm
+
+pub fn euler_poincare_lemma() -> @kernel.Thm
+
+pub fn euler_poincare_special() -> @kernel.Thm
+
+pub fn euler_polyhedral_cone() -> @kernel.Thm
+
+pub fn euler_relation() -> @kernel.Thm
+
+pub fn finite_hyperplane_cellcomplexes() -> @kernel.Thm
+
+pub fn finite_hyperplane_cells() -> @kernel.Thm
+
+pub fn finite_restrict_hyperplane_cellcomplexes() -> @kernel.Thm
+
+pub fn finite_restrict_hyperplane_cells() -> @kernel.Thm
+
+pub fn finite_set_of_hyperplane_cells() -> @kernel.Thm
+
+pub fn finite_set_of_hyperplane_cells_v1() -> @kernel.Thm
+
+pub fn hyperplane_cell() -> @kernel.Thm
+
+pub fn hyperplane_cell_cellcomplex() -> @kernel.Thm
+
+pub fn hyperplane_cell_convex() -> @kernel.Thm
+
+pub fn hyperplane_cell_empty() -> @kernel.Thm
+
+pub fn hyperplane_cell_inter() -> @kernel.Thm
+
+pub fn hyperplane_cell_inter_open_affine() -> @kernel.Thm
+
+pub fn hyperplane_cell_inters() -> @kernel.Thm
+
+pub fn hyperplane_cell_relative_interior() -> @kernel.Thm
+
+pub fn hyperplane_cell_relatively_open() -> @kernel.Thm
+
+pub fn hyperplane_cell_sing() -> @kernel.Thm
+
+pub fn hyperplane_cell_sing_cases() -> @kernel.Thm
+
+pub fn hyperplane_cell_union() -> @kernel.Thm
+
+pub fn hyperplane_cell_v1() -> @kernel.Thm
+
+pub fn hyperplane_cellcomplex() -> @kernel.Thm
+
+pub fn hyperplane_cellcomplex_compl() -> @kernel.Thm
+
+pub fn hyperplane_cellcomplex_diff() -> @kernel.Thm
+
+pub fn hyperplane_cellcomplex_empty() -> @kernel.Thm
+
+pub fn hyperplane_cellcomplex_inter() -> @kernel.Thm
+
+pub fn hyperplane_cellcomplex_inters() -> @kernel.Thm
+
+pub fn hyperplane_cellcomplex_mono() -> @kernel.Thm
+
+pub fn hyperplane_cellcomplex_union() -> @kernel.Thm
+
+pub fn hyperplane_cellcomplex_unions() -> @kernel.Thm
+
+pub fn hyperplane_cellcomplex_univ() -> @kernel.Thm
+
+pub fn hyperplane_cells_distinct_lemma() -> @kernel.Thm
+
+pub fn hyperplane_equiv() -> @kernel.Thm
+
+pub fn hyperplane_equiv_refl() -> @kernel.Thm
+
+pub fn hyperplane_equiv_sym() -> @kernel.Thm
+
+pub fn hyperplane_equiv_trans() -> @kernel.Thm
+
+pub fn hyperplane_equiv_union() -> @kernel.Thm
+
+pub fn hyperplane_side() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn nonempty_hyperplane_cell() -> @kernel.Thm
+
+pub fn not_hyperplane_cell_empty() -> @kernel.Thm
+
+pub fn pairwise_disjoint_hyperplane_cells() -> @kernel.Thm
+
+pub fn unions_hyperplane_cells() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -9,15 +9,16 @@ Upstream: `.repos/hol-light` (jrh13/hol-light @ `cba9198`), not tracked in this 
   (~1.2M lines in total).
 - **Targets:** `wasm` (linear memory) is the primary target, and every
   package must pass `moon test --target wasm`. `native` comes later. Keep
-  packages target-agnostic: no FFI and no async in core packages.
+  packages target-agnostic: no FFI and no async in core packages. Day to
+  day the theory tests run on `wasm-gc`, where they take a fifth of the
+  time (see Verification); results must not depend on the target.
 - **Small trusted kernel:** only `kernel/` (a port of `fusion.ml`) is trusted.
   It depends only on `moonbitlang/core` and uses the builtin `Failure` error.
   The `lib.ml` helpers it needs (`union`, `subtract`, `qmap`, `rev_assocd`, …)
   are private copies inside `kernel/`, so the audited trusted code is
   exactly that package. `HolType` and `Term` are read-only enums (they can be
   matched but not constructed outside the kernel), so every term is well
-  typed. Axioms added with `new_axiom` are checked against the upstream
-  approved list (`hol_lib.ml`). `Thm`
+  typed. `Thm`
   has private fields, so the 10 primitive rules plus the axiom and definition
   functions are the only way to make a theorem. Everything else (lib, parser,
   tactics, decision procedures, theories) is untrusted and goes through the
@@ -43,9 +44,10 @@ Upstream: `.repos/hol-light` (jrh13/hol-light @ `cba9198`), not tracked in this 
   well-typed terms guarantee (operators have function types, binders are
   variables, clashes do not escape `inst`). None of them silently continues.
 - **Axioms:** as upstream, `new_axiom` is unrestricted (`mk_thm` relies on
-  it). `axioms()` is the audit trail, and `check_axioms` (only `INFINITY_AX`,
-  `SELECT_AX` and `ETA_AX` allowed) runs at the end of every theory-load
-  test.
+  it). `axioms()` is the audit trail, and `@testkit.check_axioms` (only
+  `INFINITY_AX`, `SELECT_AX` and `ETA_AX` allowed, each once) runs at the end
+  of every generated theory-load test (the template in
+  tools/ocaml_ref/theory.py).
 - **Traps:** a wasm trap (for example a stack overflow) during an extension
   leaves the store as it was at the trap. A trapped instance must be
   discarded, not resumed. Inference rules have no side effects, so a trap
@@ -179,8 +181,16 @@ definitions register constants, quotations advance the type-variable and
   match these exactly.
 - Unit tests ported from `UnitTests/`. Kernel tests cover every rule's
   success and failure cases.
-- Every commit must pass `moon check --target wasm`,
-  `moon test --target wasm`, `moon fmt` and `moon info`.
+- Every commit must pass `moon check --target wasm`, `tools/test.py`
+  (the hand-ported core on wasm and wasm-gc, seconds), `moon fmt` and
+  `moon info`; a change to a theory, the translator or the engine also the
+  tiers it touches (`tools/test.py core|library|multivariate|100|all`, on
+  wasm-gc). A file's test loads everything before it in a fresh process;
+  the files of a load order (a make.ml) are test blocks of one package,
+  run in order in one process with their goldens unchanged (the blocks
+  read the counters without advancing them: tools/ocaml_ref/chain_test.py).
+  `tools/test.py all --target wasm` (the primary target) is for releases. `--shard I/N` splits a selection across machines,
+  balanced by tools/test_times.tsv.
 
 ## Phases
 

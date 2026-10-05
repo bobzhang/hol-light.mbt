@@ -201,12 +201,25 @@ pub impl Neg for Num with fn neg(a) {
 }
 
 ///|
-/// Numeric order.
+/// -1, 0 or 1, as OCaml's comparisons return. `BigInt::compare` only
+/// promises the sign (it returns 2 for some arguments on wasm-gc).
+fn sign_of_compare(c : Int) -> Int {
+  if c < 0 {
+    -1
+  } else if c > 0 {
+    1
+  } else {
+    0
+  }
+}
+
+///|
+/// Numeric order (-1, 0 or 1, as `compare_num`).
 pub impl Compare for Num with fn compare(a, b) {
   if a.is_integer() && b.is_integer() {
-    a.num.compare(b.num)
+    sign_of_compare(a.num.compare(b.num))
   } else {
-    (a.num * b.den).compare(b.num * a.den)
+    sign_of_compare((a.num * b.den).compare(b.num * a.den))
   }
 }
 
@@ -286,8 +299,9 @@ pub fn abs_num(a : Num) -> Num {
 }
 
 ///|
+/// -1, 0 or 1.
 pub fn sign_num(a : Num) -> Int {
-  a.num.compare(big_zero)
+  sign_of_compare(a.num.compare(big_zero))
 }
 
 ///|

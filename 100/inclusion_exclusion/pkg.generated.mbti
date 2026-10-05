@@ -1,0 +1,47 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/inclusion_exclusion"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn card_adjust_lemma() -> @kernel.Thm
+
+pub fn card_subsets_step() -> @kernel.Thm
+
+pub fn card_subsupersets_even_odd() -> @kernel.Thm
+
+pub fn finite_subsets_restrict() -> @kernel.Thm
+
+pub fn finite_subsets_restrict_v1() -> @kernel.Thm
+
+pub fn inclusion_exclusion() -> @kernel.Thm
+
+pub fn inclusion_exclusion_mobius() -> @kernel.Thm
+
+pub fn inclusion_exclusion_real() -> @kernel.Thm
+
+pub fn inclusion_exclusion_real_indexed() -> @kernel.Thm
+
+pub fn inclusion_exclusion_real_restricted() -> @kernel.Thm
+
+pub fn inclusion_exclusion_real_restricted_indexed() -> @kernel.Thm
+
+pub fn inclusion_exclusion_symmetric() -> @kernel.Thm
+
+pub fn inclusion_exclusion_usual() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn subset_insert_exists() -> @kernel.Thm
+
+pub fn sum_alternating_cancels() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

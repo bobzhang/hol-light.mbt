@@ -1,0 +1,222 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ntrie/ntrie"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+  "bobzhang/hol_light/parser",
+  "bobzhang/hol_light/pp",
+  "bobzhang/hol_light/preterm",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn bit0_tm() -> @kernel.Term
+
+pub fn bit1_tm() -> @kernel.Term
+
+pub fn comb_numeral(@kernel.Term) -> @kernel.Term raise
+
+pub fn conj_tm() -> @kernel.Term
+
+pub fn delete_tm() -> @kernel.Term
+
+pub fn dest_ntrie(@kernel.Term) -> @list.List[@num.Num] raise
+
+pub fn dest_small_ntrie(@kernel.Term) -> @list.List[Int64] raise
+
+pub fn diff_tm() -> @kernel.Term
+
+pub fn disjoint_tm() -> @kernel.Term
+
+pub fn empty_tm() -> @kernel.Term
+
+pub fn eq_tm() -> @kernel.Term
+
+pub fn iff_tm() -> @kernel.Term
+
+pub fn image_eq_ntrie_image() -> @kernel.Thm
+
+pub fn in_tm() -> @kernel.Term
+
+pub fn insert_tm() -> @kernel.Term
+
+pub fn inter_tm() -> @kernel.Term
+
+pub fn load() -> Unit
+
+pub fn mk_bit0(@kernel.Term) -> @kernel.Term raise
+
+pub fn mk_bit1(@kernel.Term) -> @kernel.Term raise
+
+pub fn mk_nnode(@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise
+
+pub fn mk_nnode_rule((@kernel.Term, @kernel.Term)) -> @kernel.Thm raise
+
+pub fn mk_ntrie(@list.List[@num.Num]) -> @kernel.Term raise
+
+pub fn mk_numset(@list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn mk_small_ntrie(@list.List[Int64]) -> @kernel.Term raise
+
+pub fn neg_tm() -> @kernel.Term
+
+pub fn nempty() -> @kernel.Thm
+
+pub fn nempty_tm() -> @kernel.Term
+
+pub fn nnode() -> @kernel.Thm
+
+pub fn nnode_tm() -> @kernel.Term
+
+pub fn ntrie() -> @kernel.Thm
+
+pub fn ntrie_choose_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_decode_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_decode_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_delete() -> @kernel.Thm
+
+pub fn ntrie_delete_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_delete_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_delete_zero(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_diff() -> @kernel.Thm
+
+pub fn ntrie_diff_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_diff_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_disjoint() -> @kernel.Thm
+
+pub fn ntrie_disjoint_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_disjoint_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_encode_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_encode_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_eq() -> @kernel.Thm
+
+pub fn ntrie_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_eq_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_image() -> @kernel.Thm
+
+pub fn ntrie_image_def() -> @kernel.Thm
+
+pub fn ntrie_in() -> @kernel.Thm
+
+pub fn ntrie_in_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_in_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_insert() -> @kernel.Thm
+
+pub fn ntrie_insert_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_insert_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_insert_rule((@kernel.Term, @kernel.Term)) -> @kernel.Thm raise
+
+pub fn ntrie_inter() -> @kernel.Thm
+
+pub fn ntrie_inter_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_inter_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_nnode_delete_zero((@kernel.Term, @kernel.Term)) -> @kernel.Thm raise
+
+pub fn ntrie_red_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_reduce_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_reduce_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn ntrie_rel_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_relations() -> @kernel.Thm
+
+pub fn ntrie_sing() -> @kernel.Thm
+
+pub fn ntrie_sing_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_sing_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_sing_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_subset() -> @kernel.Thm
+
+pub fn ntrie_subset_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_subset_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_tm() -> @kernel.Term
+
+pub fn ntrie_ty() -> @kernel.HolType
+
+pub fn ntrie_union() -> @kernel.Thm
+
+pub fn ntrie_union_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_union_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ntrie_zero_in_rule(@kernel.Term) -> (Bool, @kernel.Thm) raise
+
+pub fn num_nz_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn numeral_tm() -> @kernel.Term
+
+pub fn nvar() -> @kernel.Term
+
+pub fn nzero() -> @kernel.Thm
+
+pub fn nzero_tm() -> @kernel.Term
+
+pub fn parse_ntrie(String) -> @kernel.Term raise
+
+pub fn pp_print_ntrie(@pp.Formatter) -> ((@kernel.Term) -> Unit raise) raise
+
+pub fn preparse_ntrie(@list.List[@parser.Lexcode]) -> (@preterm.Preterm, @list.List[@parser.Lexcode]) raise
+
+pub fn print_ntrie(@kernel.Term) -> Unit raise
+
+pub fn psubset_tm() -> @kernel.Term
+
+pub fn standardize(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn string_of_ntrie(@kernel.Term) -> String raise
+
+pub fn subset_tm() -> @kernel.Term
+
+pub fn svar() -> @kernel.Term
+
+pub fn svar1() -> @kernel.Term
+
+pub fn svar2() -> @kernel.Term
+
+pub fn tvar() -> @kernel.Term
+
+pub fn tvar1() -> @kernel.Term
+
+pub fn tvar2() -> @kernel.Term
+
+pub fn union_tm() -> @kernel.Term
+
+pub fn wellformed(@kernel.Term) -> Bool raise
+
+pub fn zero_tm() -> @kernel.Term
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

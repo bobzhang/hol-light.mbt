@@ -2,6 +2,8 @@
 let needs (_:string) = ();;
 (* a top-level `loadt "f"` is a dependency, loaded before (as `needs`) *)
 let loadt (_:string) = ();;
+(* likewise `loads "f"` (Rqe/make.ml, IsabelleLight/isalight.ml) *)
+let loads (_:string) = ();;
 let float_sqrt = sqrt;;
 let float_fabs = abs_float;;
 #use "lib.ml";;

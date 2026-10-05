@@ -154,6 +154,9 @@ module Main = struct
                   flush ();
                   Unix._exit (if !Emit.errors = 0 then 0 else 3)
                 with e ->
+                  (* a typing error with its location and message *)
+                  (try Location.report_exception Format.std_formatter e; Format.pp_print_flush Format.std_formatter ()
+                   with _ -> ());
                   Printf.printf "Exception: %s\n%!" (Printexc.to_string e);
                   Unix._exit 2)
            | pid ->

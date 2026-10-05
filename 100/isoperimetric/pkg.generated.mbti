@@ -1,0 +1,41 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/isoperimetric"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn green_area_theorem() -> @kernel.Thm
+
+pub fn isoperimetric_convexification() -> @kernel.Thm
+
+pub fn isoperimetric_convexification_1() -> @kernel.Thm
+
+pub fn isoperimetric_theorem() -> @kernel.Thm
+
+pub fn isoperimetric_theorem_convex() -> @kernel.Thm
+
+pub fn lemma1() -> @kernel.Thm
+
+pub fn lemma2() -> @kernel.Thm
+
+pub fn lemma3() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn real_hoelder_bound_2() -> @kernel.Thm
+
+pub fn scaled_wirtinger_inequality() -> @kernel.Thm
+
+pub fn step_lemma() -> @kernel.Thm
+
+pub fn wirtinger_inequality() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

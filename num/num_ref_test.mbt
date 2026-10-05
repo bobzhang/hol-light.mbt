@@ -470,3 +470,23 @@ test "power_num with a fractional exponent raises Invalid_argument" {
     _ => fail("expected power_num to fail")
   }
 }
+
+///|
+test "sign_num and compare_num return -1, 0 or 1 on every target" {
+  let big = @num.power_num(@num.num_of_int(2), @num.num_of_int(100))
+  let small = @num.num_of_int(3)
+  let half = @num.div_num(@num.num_of_int(1), @num.num_of_int(2))
+  inspect(
+    [
+      @num.sign_num(big),
+      @num.sign_num(@num.minus_num(big)),
+      @num.sign_num(@num.num_of_int(0)),
+      @num.compare_num(big, small),
+      @num.compare_num(small, big),
+      @num.compare_num(big, big),
+      @num.compare_num(@num.mult_num(big, half), half),
+      @num.compare_num(half, @num.mult_num(big, half)),
+    ],
+    content="[1, -1, 0, 1, -1, 0, 1, -1]",
+  )
+}

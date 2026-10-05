@@ -1,0 +1,352 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/fourier"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn absolutely_integrable_approximate_continuous() -> @kernel.Thm
+
+pub fn absolutely_integrable_cos_product() -> @kernel.Thm
+
+pub fn absolutely_integrable_sin_product() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_mul_dirichlet_kernel() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_mul_dirichlet_kernel_reflected() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_mul_dirichlet_kernel_reflected_part() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_mul_fejer_kernel() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_mul_fejer_kernel_reflected() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_mul_fejer_kernel_reflected_part() -> @kernel.Thm
+
+pub fn absolutely_real_integrable_periodic_offset() -> @kernel.Thm
+
+pub fn bessel_inequality() -> @kernel.Thm
+
+pub fn bidifferentiable_fourier_convergence_periodic() -> @kernel.Thm
+
+pub fn cosine_sum_lemma() -> @kernel.Thm
+
+pub fn differentiable_fourier_convergence_periodic() -> @kernel.Thm
+
+pub fn dirichlet_kernel() -> @kernel.Thm
+
+pub fn dirichlet_kernel_0() -> @kernel.Thm
+
+pub fn dirichlet_kernel_continuous() -> @kernel.Thm
+
+pub fn dirichlet_kernel_continuous_strong() -> @kernel.Thm
+
+pub fn dirichlet_kernel_cosine_sum() -> @kernel.Thm
+
+pub fn dirichlet_kernel_neg() -> @kernel.Thm
+
+pub fn fejer_kernel() -> @kernel.Thm
+
+pub fn fejer_kernel_continuous() -> @kernel.Thm
+
+pub fn fejer_kernel_continuous_strong() -> @kernel.Thm
+
+pub fn fejer_kernel_pos_le() -> @kernel.Thm
+
+pub fn fejer_kernel_v1() -> @kernel.Thm
+
+pub fn fourier_coefficient() -> @kernel.Thm
+
+pub fn fourier_coefficient_add() -> @kernel.Thm
+
+pub fn fourier_coefficient_const() -> @kernel.Thm
+
+pub fn fourier_coefficient_sub() -> @kernel.Thm
+
+pub fn fourier_dini_test() -> @kernel.Thm
+
+pub fn fourier_fejer_cesaro_summable() -> @kernel.Thm
+
+pub fn fourier_fejer_cesaro_summable_simple() -> @kernel.Thm
+
+pub fn fourier_jordan_bounded_variation() -> @kernel.Thm
+
+pub fn fourier_jordan_bounded_variation_simple() -> @kernel.Thm
+
+pub fn fourier_offset_term() -> @kernel.Thm
+
+pub fn fourier_products_integrable() -> @kernel.Thm
+
+pub fn fourier_products_integrable_strong() -> @kernel.Thm
+
+pub fn fourier_series_l2() -> @kernel.Thm
+
+pub fn fourier_series_l2_summable() -> @kernel.Thm
+
+pub fn fourier_series_l2_summable_strong() -> @kernel.Thm
+
+pub fn fourier_series_square_summable() -> @kernel.Thm
+
+pub fn fourier_sum_0() -> @kernel.Thm
+
+pub fn fourier_sum_0_explicit() -> @kernel.Thm
+
+pub fn fourier_sum_0_integral() -> @kernel.Thm
+
+pub fn fourier_sum_0_integrals() -> @kernel.Thm
+
+pub fn fourier_sum_limit_dirichlet_kernel() -> @kernel.Thm
+
+pub fn fourier_sum_limit_dirichlet_kernel_half() -> @kernel.Thm
+
+pub fn fourier_sum_limit_dirichlet_kernel_part() -> @kernel.Thm
+
+pub fn fourier_sum_limit_fejer_kernel_half() -> @kernel.Thm
+
+pub fn fourier_sum_limit_pair() -> @kernel.Thm
+
+pub fn fourier_sum_limit_sine_part() -> @kernel.Thm
+
+pub fn fourier_sum_offset() -> @kernel.Thm
+
+pub fn fourier_sum_offset_dirichlet_kernel() -> @kernel.Thm
+
+pub fn fourier_sum_offset_dirichlet_kernel_half() -> @kernel.Thm
+
+pub fn fourier_sum_offset_fejer_kernel_half() -> @kernel.Thm
+
+pub fn fourier_sum_offset_unpaired() -> @kernel.Thm
+
+pub fn has_real_integral_cos_nx() -> @kernel.Thm
+
+pub fn has_real_integral_dirichlet_kernel() -> @kernel.Thm
+
+pub fn has_real_integral_dirichlet_kernel_half() -> @kernel.Thm
+
+pub fn has_real_integral_fejer_kernel() -> @kernel.Thm
+
+pub fn has_real_integral_fejer_kernel_half() -> @kernel.Thm
+
+pub fn has_real_integral_offset() -> @kernel.Thm
+
+pub fn has_real_integral_periodic_offset() -> @kernel.Thm
+
+pub fn has_real_integral_periodic_offset_lemma() -> @kernel.Thm
+
+pub fn has_real_integral_periodic_offset_pos() -> @kernel.Thm
+
+pub fn has_real_integral_periodic_offset_weak() -> @kernel.Thm
+
+pub fn has_real_integral_sin_nx() -> @kernel.Thm
+
+pub fn hoelder_fourier_convergence_periodic() -> @kernel.Thm
+
+pub fn inv_sin_sub_inv_bound() -> @kernel.Thm
+
+pub fn l2_complete() -> @kernel.Thm
+
+pub fn l2_summable() -> @kernel.Thm
+
+pub fn l2norm() -> @kernel.Thm
+
+pub fn l2norm_eq() -> @kernel.Thm
+
+pub fn l2norm_le() -> @kernel.Thm
+
+pub fn l2norm_lmul() -> @kernel.Thm
+
+pub fn l2norm_lnorm() -> @kernel.Thm
+
+pub fn l2norm_neg() -> @kernel.Thm
+
+pub fn l2norm_pos_le() -> @kernel.Thm
+
+pub fn l2norm_pow_2() -> @kernel.Thm
+
+pub fn l2norm_rmul() -> @kernel.Thm
+
+pub fn l2norm_sub() -> @kernel.Thm
+
+pub fn l2norm_triangle() -> @kernel.Thm
+
+pub fn l2product() -> @kernel.Thm
+
+pub fn l2product_ladd() -> @kernel.Thm
+
+pub fn l2product_lmul() -> @kernel.Thm
+
+pub fn l2product_lsub() -> @kernel.Thm
+
+pub fn l2product_lsum() -> @kernel.Thm
+
+pub fn l2product_lzero() -> @kernel.Thm
+
+pub fn l2product_pos_le() -> @kernel.Thm
+
+pub fn l2product_radd() -> @kernel.Thm
+
+pub fn l2product_rmul() -> @kernel.Thm
+
+pub fn l2product_rsub() -> @kernel.Thm
+
+pub fn l2product_rsum() -> @kernel.Thm
+
+pub fn l2product_rzero() -> @kernel.Thm
+
+pub fn l2product_sym() -> @kernel.Thm
+
+pub fn lipschitz_fourier_convergence_periodic() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn odd_even_induct_lemma() -> @kernel.Thm
+
+pub fn orthonormal_coefficient() -> @kernel.Thm
+
+pub fn orthonormal_fourier_partial_sum_diff_squared() -> @kernel.Thm
+
+pub fn orthonormal_optimal_partial_sum() -> @kernel.Thm
+
+pub fn orthonormal_partial_sum_diff() -> @kernel.Thm
+
+pub fn orthonormal_system() -> @kernel.Thm
+
+pub fn orthonormal_system_l2norm() -> @kernel.Thm
+
+pub fn orthonormal_system_trigonometric_set() -> @kernel.Thm
+
+pub fn real_continuous_imp_square_integrable() -> @kernel.Thm
+
+pub fn real_integrable_cos_cx() -> @kernel.Thm
+
+pub fn real_integrable_dirichlet_kernel_mul_expand() -> @kernel.Thm
+
+pub fn real_integrable_on_interval_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn real_integrable_periodic_offset() -> @kernel.Thm
+
+pub fn real_integrable_reflect_and_add() -> @kernel.Thm
+
+pub fn real_integrable_sin_and_cos() -> @kernel.Thm
+
+pub fn real_integrable_sin_cx() -> @kernel.Thm
+
+pub fn real_integral_cos_nx() -> @kernel.Thm
+
+pub fn real_integral_dirichlet_kernel_mul_expand() -> @kernel.Thm
+
+pub fn real_integral_periodic_offset() -> @kernel.Thm
+
+pub fn real_integral_reflect_and_add() -> @kernel.Thm
+
+pub fn real_integral_sin_and_cos() -> @kernel.Thm
+
+pub fn real_integral_sin_nx() -> @kernel.Thm
+
+pub fn real_integral_sin_over_x_bound() -> @kernel.Thm
+
+pub fn real_integral_tweak_ends() -> @kernel.Thm
+
+pub fn real_periodic_integer_multiple() -> @kernel.Thm
+
+pub fn real_sin_x2_zeros() -> @kernel.Thm
+
+pub fn riemann_lebesgue() -> @kernel.Thm
+
+pub fn riemann_lebesgue_cos() -> @kernel.Thm
+
+pub fn riemann_lebesgue_sin() -> @kernel.Thm
+
+pub fn riemann_lebesgue_sin_half() -> @kernel.Thm
+
+pub fn riemann_lebesgue_square_integrable() -> @kernel.Thm
+
+pub fn riemann_localization() -> @kernel.Thm
+
+pub fn riemann_localization_integral() -> @kernel.Thm
+
+pub fn riemann_localization_integral_range() -> @kernel.Thm
+
+pub fn riemann_localization_integral_range_half() -> @kernel.Thm
+
+pub fn schwartz_inequality() -> @kernel.Thm
+
+pub fn schwartz_inequality_abs() -> @kernel.Thm
+
+pub fn schwartz_inequality_strong() -> @kernel.Thm
+
+pub fn schwarz_bound() -> @kernel.Thm
+
+pub fn simple_fourier_convergence_periodic() -> @kernel.Thm
+
+pub fn sin_lower_bound_half() -> @kernel.Thm
+
+pub fn sin_over_x_sub1_bound() -> @kernel.Thm
+
+pub fn sin_sub_x_bound() -> @kernel.Thm
+
+pub fn square_integrable_0() -> @kernel.Thm
+
+pub fn square_integrable_abs() -> @kernel.Thm
+
+pub fn square_integrable_add() -> @kernel.Thm
+
+pub fn square_integrable_approximate_continuous() -> @kernel.Thm
+
+pub fn square_integrable_approximate_continuous_ends() -> @kernel.Thm
+
+pub fn square_integrable_imp_absolutely_integrable() -> @kernel.Thm
+
+pub fn square_integrable_imp_absolutely_integrable_product() -> @kernel.Thm
+
+pub fn square_integrable_imp_integrable() -> @kernel.Thm
+
+pub fn square_integrable_imp_integrable_product() -> @kernel.Thm
+
+pub fn square_integrable_imp_measurable() -> @kernel.Thm
+
+pub fn square_integrable_lmul() -> @kernel.Thm
+
+pub fn square_integrable_lspace() -> @kernel.Thm
+
+pub fn square_integrable_neg() -> @kernel.Thm
+
+pub fn square_integrable_neg_eq() -> @kernel.Thm
+
+pub fn square_integrable_on() -> @kernel.Thm
+
+pub fn square_integrable_rmul() -> @kernel.Thm
+
+pub fn square_integrable_sub() -> @kernel.Thm
+
+pub fn square_integrable_sum() -> @kernel.Thm
+
+pub fn square_integrable_trigonometric_set() -> @kernel.Thm
+
+pub fn sum_numbers() -> @kernel.Thm
+
+pub fn trigonometric_set() -> @kernel.Thm
+
+pub fn trigonometric_set_def() -> @kernel.Thm
+
+pub fn trigonometric_set_even() -> @kernel.Thm
+
+pub fn trigonometric_set_mul_absolutely_integrable() -> @kernel.Thm
+
+pub fn trigonometric_set_mul_integrable() -> @kernel.Thm
+
+pub fn weierstrass_l2_trig_polynomial() -> @kernel.Thm
+
+pub fn weierstrass_l2_trigonometric_set() -> @kernel.Thm
+
+pub fn weierstrass_trig_polynomial() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

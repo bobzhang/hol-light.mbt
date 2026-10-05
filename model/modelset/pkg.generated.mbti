@@ -1,0 +1,219 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/model/modelset"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abstract_() -> @kernel.Thm
+
+pub fn abstract_eq() -> @kernel.Thm
+
+pub fn abstract_in_funspace() -> @kernel.Thm
+
+pub fn apply_abstract() -> @kernel.Thm
+
+pub fn apply_def() -> @kernel.Thm
+
+pub fn apply_in_ranspace() -> @kernel.Thm
+
+pub fn boolean() -> @kernel.Thm
+
+pub fn boolean_eq() -> @kernel.Thm
+
+pub fn boolean_eq_true() -> @kernel.Thm
+
+pub fn boolean_in_boolset() -> @kernel.Thm
+
+pub fn boolset() -> @kernel.Thm
+
+pub fn card_bool_lt_i() -> @kernel.Thm
+
+pub fn cartesian_exists() -> @kernel.Thm
+
+pub fn cartproduct() -> @kernel.Thm
+
+pub fn cartproduct_inhabited() -> @kernel.Thm
+
+pub fn ch() -> @kernel.Thm
+
+pub fn comprehension_exists() -> @kernel.Thm
+
+pub fn dest_mk_pair() -> @kernel.Thm
+
+pub fn droplevel() -> @kernel.Thm
+
+pub fn element() -> @kernel.Thm
+
+pub fn element_in_level() -> @kernel.Thm
+
+pub fn empty_exists() -> @kernel.Thm
+
+pub fn empty_set() -> @kernel.Thm
+
+pub fn extensionality_level() -> @kernel.Thm
+
+pub fn extensionality_nonempty() -> @kernel.Thm
+
+pub fn false_def() -> @kernel.Thm
+
+pub fn forall_valmod() -> @kernel.Thm
+
+pub fn fst_def() -> @kernel.Thm
+
+pub fn funspace() -> @kernel.Thm
+
+pub fn funspace_inhabited() -> @kernel.Thm
+
+pub fn holds() -> @kernel.Thm
+
+pub fn i_axiom() -> @kernel.Thm
+
+pub fn i_bool() -> @kernel.Thm
+
+pub fn i_bool_exists() -> @kernel.Thm
+
+pub fn i_ind() -> @kernel.Thm
+
+pub fn i_ind_exists() -> @kernel.Thm
+
+pub fn i_infinite() -> @kernel.Thm
+
+pub fn i_pair() -> @kernel.Thm
+
+pub fn i_pair_exists() -> @kernel.Thm
+
+pub fn i_set() -> @kernel.Thm
+
+pub fn i_set_exists() -> @kernel.Thm
+
+pub fn i_set_setlevel() -> @kernel.Thm
+
+pub fn in_bool() -> @kernel.Thm
+
+pub fn in_cartproduct() -> @kernel.Thm
+
+pub fn in_comprehension() -> @kernel.Thm
+
+pub fn in_powerset() -> @kernel.Thm
+
+pub fn in_set_element() -> @kernel.Thm
+
+pub fn inacc_tybij() -> @kernel.Thm
+
+pub fn inacc_tybij_th() -> @kernel.Thm
+
+pub fn ind_model_tybij() -> @kernel.Thm
+
+pub fn ind_model_tybij_th() -> @kernel.Thm
+
+pub fn indset() -> @kernel.Thm
+
+pub fn indset_ind_model() -> @kernel.Thm
+
+pub fn indset_inhabited() -> @kernel.Thm
+
+pub fn inj_lemma() -> @kernel.Thm
+
+pub fn inset() -> @kernel.Thm
+
+pub fn isaset() -> @kernel.Thm
+
+pub fn isasetlevel() -> @kernel.Thm
+
+pub fn level() -> @kernel.Thm
+
+pub fn level_nonempty() -> @kernel.Thm
+
+pub fn level_pair() -> @kernel.Thm
+
+pub fn level_set_exists() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn members_isaset() -> @kernel.Thm
+
+pub fn mk_v_clauses() -> @kernel.Thm
+
+pub fn mk_v_set() -> @kernel.Thm
+
+pub fn pair() -> @kernel.Thm
+
+pub fn pair_clauses() -> @kernel.Thm
+
+pub fn pair_in_level() -> @kernel.Thm
+
+pub fn pair_inj() -> @kernel.Thm
+
+pub fn powerset() -> @kernel.Thm
+
+pub fn powerset_exists() -> @kernel.Thm
+
+pub fn set() -> @kernel.Thm
+
+pub fn set_decomp() -> @kernel.Thm
+
+pub fn set_subset_setlevel() -> @kernel.Thm
+
+pub fn set_v1() -> @kernel.Thm
+
+pub fn setlevel() -> @kernel.Thm
+
+pub fn setlevel_card() -> @kernel.Thm
+
+pub fn setlevel_distinct() -> @kernel.Thm
+
+pub fn setlevel_exists() -> @kernel.Thm
+
+pub fn setlevel_induct() -> @kernel.Thm
+
+pub fn setlevel_inj() -> @kernel.Thm
+
+pub fn setlevel_recursion() -> @kernel.Thm
+
+pub fn setunion() -> @kernel.Thm
+
+pub fn snd_def() -> @kernel.Thm
+
+pub fn subset_alt() -> @kernel.Thm
+
+pub fn subset_antisym_level() -> @kernel.Thm
+
+pub fn subset_def() -> @kernel.Thm
+
+pub fn suchthat() -> @kernel.Thm
+
+pub fn true_def() -> @kernel.Thm
+
+pub fn true_ne_false() -> @kernel.Thm
+
+pub fn union_exists() -> @kernel.Thm
+
+pub fn universe() -> @kernel.Thm
+
+pub fn v_tybij() -> @kernel.Thm
+
+pub fn v_tybij_th() -> @kernel.Thm
+
+pub fn v_tybij_v1() -> @kernel.Thm
+
+pub fn valmod() -> @kernel.Thm
+
+pub fn valmod_basic() -> @kernel.Thm
+
+pub fn valmod_repeat() -> @kernel.Thm
+
+pub fn valmod_swap() -> @kernel.Thm
+
+pub fn valmod_v1() -> @kernel.Thm
+
+pub fn valmod_valmod_basic() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

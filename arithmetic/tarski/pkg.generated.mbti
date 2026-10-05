@@ -1,0 +1,93 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/arithmetic/tarski"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn arith_diagonalize() -> @kernel.Thm
+
+pub fn arith_gnumeral() -> @kernel.Thm
+
+pub fn arith_gnumeral1() -> @kernel.Thm
+
+pub fn arith_gnumeral1_p() -> @kernel.Thm
+
+pub fn arith_gnumeral1_p_v1() -> @kernel.Thm
+
+pub fn arith_gnumeral1_v1() -> @kernel.Thm
+
+pub fn arith_gnumeral_v1() -> @kernel.Thm
+
+pub fn arith_qdiag() -> @kernel.Thm
+
+pub fn arith_qdiag_v1() -> @kernel.Thm
+
+pub fn carnap() -> @kernel.Thm
+
+pub fn definable() -> @kernel.Thm
+
+pub fn definable_by() -> @kernel.Thm
+
+pub fn denumber() -> @kernel.Thm
+
+pub fn diagonalize() -> @kernel.Thm
+
+pub fn fixpoint() -> @kernel.Thm
+
+pub fn fv_diagonalize() -> @kernel.Thm
+
+pub fn fv_fixpoint() -> @kernel.Thm
+
+pub fn fv_gnumeral() -> @kernel.Thm
+
+pub fn fv_gnumeral1() -> @kernel.Thm
+
+pub fn fv_gnumeral1_p() -> @kernel.Thm
+
+pub fn fv_qdiag() -> @kernel.Thm
+
+pub fn gform() -> @kernel.Thm
+
+pub fn gform_cases() -> @kernel.Thm
+
+pub fn gform_inj() -> @kernel.Thm
+
+pub fn gnumeral() -> @kernel.Thm
+
+pub fn gterm() -> @kernel.Thm
+
+pub fn gterm_cases() -> @kernel.Thm
+
+pub fn gterm_inj() -> @kernel.Thm
+
+pub fn holds_fixpoint() -> @kernel.Thm
+
+pub fn holds_iff_fixpoint() -> @kernel.Thm
+
+pub fn holds_qdiag() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn number() -> @kernel.Thm
+
+pub fn number_denumber() -> @kernel.Thm
+
+pub fn number_inj() -> @kernel.Thm
+
+pub fn number_surj() -> @kernel.Thm
+
+pub fn qdiag() -> @kernel.Thm
+
+pub fn qdiag_fv() -> @kernel.Thm
+
+pub fn tarski_theorem() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

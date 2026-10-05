@@ -18,7 +18,7 @@ side instead of three chain reloads per file (tools/ocaml_ref/theory.py):
    the target, the theorem list, the checks). A target's expected output is
    its chain's logs followed by the child's, which is what a fresh run of
    the reference script prints.
-5. Goldens embedded, `moon test -j 16` on the targets' packages.
+5. Goldens embedded, tools/test.py on the targets' packages (wasm-gc).
 """
 import os
 import re
@@ -43,7 +43,7 @@ def ml_file(f):
 
 def after(target):
     """`moon info` after a target's translation; errors stop the batch."""
-    r = subprocess.run(["moon", "info"], cwd=ROOT, capture_output=True, text=True)
+    r = theory.moon_info(capture_output=True, text=True)
     errs = re.findall(r"^Error.*(?:\n.*){0,9}", r.stdout + r.stderr, re.M)
     if errs or r.returncode != 0:
         print(f"moon info after {target} (status {r.returncode}):\n" +
@@ -138,6 +138,13 @@ def translate(targets, done=()):
             or l.startswith("translated ") or l.startswith("Error")]
     print("\n".join(keep[-60:]), flush=True)
     if "BATCH DONE" not in out:
+        # a target with unsupported items has an incomplete translation:
+        # back to the placeholder, or --resume would take it for done
+        for f in re.findall(r"BATCH FAILED: unsupported items in (\S+)", out):
+            pkg = theory.pkg_of(f)
+            alias = pkg.split("/")[-1]
+            gen = os.path.join(ROOT, pkg, alias + ("_ml" if alias.endswith("test") else "") + ".mbt")
+            open(gen, "w").write(PLACEHOLDER)
         sys.exit("translation batch failed (tools/ocaml_ref/_build/batch/translate.log)")
 
 
@@ -208,10 +215,13 @@ def references(targets, refs):
     open(script, "w").write(boot[:i] + '#load "unix.cma";;\n' + "".join(helpers) + boot[i:] +
                             f"let () = if not (Toploop.use_silently Format.std_formatter (Toploop.File {ml_str(body)})) "
                             "then exit 1;;\n")
+    subprocess.run(["./ensure_pa_j.sh"], cwd=REF, check=True)
     env = os.environ.copy()
+    # the bytecode stack limit, as run.sh
+    env.setdefault("OCAMLRUNPARAM", "l=256M")
     rlog = os.path.join(OUT, "ref.log")
     with open(rlog, "w") as lf:
-        p = subprocess.run(["sh", "-c", 'eval "$(opam env --switch=4.14.1+idea --set-switch 2>/dev/null)"; '
+        p = subprocess.run(["sh", "-c", 'eval "$(opam env --switch="${HOL_LIGHT_SWITCH:-hol-light}" --set-switch 2>/dev/null)"; '
                             f'ocaml -w -a -alert -all -I {HOL} -I _build {script}'],
                            cwd=REF, stdout=lf, stderr=subprocess.STDOUT, env=env)
     if p.returncode != 0:
@@ -287,7 +297,14 @@ def main():
                 text = re.sub(r"(BEGIN EXTRA[^\n]*\n)(?=[^\n]*END EXTRA)", lambda m: m.group(1) + body, text, count=1)
                 open(path, "w").write(text)
         pkgs[t] = pkg
-    translate(targets, [t for t in targets if resume and translated(t)])
+    done = [t for t in targets if resume and translated(t)]
+    if len(done) == len(targets):
+        # nothing left to translate: no translation session (it would only
+        # load the chains again); the interfaces must still be current
+        os.makedirs(OUT, exist_ok=True)
+        after("nothing: every target is already translated")
+    else:
+        translate(targets, done)
     for t in targets:
         theory.run(["python3", "tools/ocaml_ref/gen_theorems_test.py", pkgs[t], os.path.relpath(refs[t], ROOT),
                     os.path.relpath(tests[t], ROOT)])
@@ -298,15 +315,13 @@ def main():
         theory.run(["python3", "tools/ocaml_ref/embed_golden.py", os.path.relpath(e, ROOT),
                     os.path.relpath(tests[t], ROOT)])
     theory.run(["moon", "fmt"], capture_output=True)
-    args = ["moon", "test", "--target", "wasm", "-j", "16"]
-    for t in targets:
-        args += ["-p", "bobzhang/hol_light/" + pkgs[t]]
+    # tools/test.py runs the test executables with a larger stack than
+    # `moon test` gives them
+    args = ["python3", "tools/test.py"] + [pkgs[t] for t in targets]
     r = subprocess.run(args, cwd=ROOT, capture_output=True, text=True)
     log = r.stdout + r.stderr
     open(os.path.join(OUT, "test.log"), "w").write(log)
-    shown = [l for l in log.splitlines() if not l.lstrip().startswith("#|")]
-    print("\n".join([l for l in shown if re.match(r"^(Error|Total|Diff|\[|[-+])|failed", l)
-                     and not re.match(r"^[-+ ]0\.\.", l)][:60]))
+    print("\n".join(log.splitlines()[:80]))
     sys.exit(r.returncode)
 
 

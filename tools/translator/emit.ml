@@ -109,20 +109,27 @@ module Emit = struct
      may resolve its weak type variables): filled in after the phrase runs. *)
   let pending_installs : (string * Types.type_expr option ref) list ref = ref []
 
+  (* the translator's own type of each such definition (Lower.link_weak) *)
+  let pending_own : (string, Types.type_expr) Hashtbl.t = Hashtbl.create 16
+
   let () =
     Prov.on_record :=
       fun name vd ->
         match List.assoc_opt name !pending_installs with
         | Some slot ->
             slot := Some vd.Types.val_type;
-            pending_installs := List.remove_assoc name !pending_installs
+            pending_installs := List.remove_assoc name !pending_installs;
+            (match Hashtbl.find_opt pending_own name with
+             | Some own -> Hashtbl.remove pending_own name; link_weak own vd.Types.val_type
+             | None -> ())
         | None -> ()
 
-  let install_slot oname =
+  let install_slot oname own =
     (* keyed by the qualified name: modules may define the same name *)
     let key = String.concat "" (List.rev_map (fun m -> m ^ ".") !module_prefix) ^ oname in
     let slot = ref None in
     pending_installs := (key, slot) :: List.remove_assoc key !pending_installs;
+    Hashtbl.replace pending_own key own;
     slot
 
   let installed_type slot (oty : Types.type_expr) =
@@ -130,7 +137,7 @@ module Emit = struct
 
   let cell_decls oname mname (oty0 : Types.type_expr) =
     let mty = mty_of oty0 in
-    let slot = install_slot oname in
+    let slot = install_slot oname oty0 in
     (match mty with
      | M.Fun _ ->
          add_decl (fun () ->
@@ -699,6 +706,47 @@ module Emit = struct
                (* applications are specialized (Functors) *)
                ()
            | Tstr_value (Asttypes.Nonrecursive, [ vb ]) -> emit_pattern vb
+           | Tstr_value (Asttypes.Recursive, [ vb ]) when not (is_function vb.vb_expr) ->
+               let rec fn_after_lets e =
+                 match e.exp_desc with
+                 | Texp_function _ -> true
+                 | Texp_let (_, _, b) -> fn_after_lets b
+                 | _ -> false
+               in
+               (match vb.vb_pat.pat_desc with
+                | Tpat_var (id, name) when fn_after_lets vb.vb_expr ->
+                    (* `let rec f = let c = e in fun x -> ... f ...`: the
+                       value of the expression `let rec f' = ... in f'`
+                       (Rqe/simplify.ml's SIMPLIFY_CONV). The inner function
+                       has its own identifier: the definition and it would
+                       get the same local name. *)
+                    let e = vb.vb_expr in
+                    let id' = Ident.create_local (Ident.name id ^ "_rec") in
+                    let mapper =
+                      { Tast_mapper.default with
+                        expr =
+                          (fun sub x ->
+                            match x.exp_desc with
+                            | Texp_ident (Path.Pident i, lid, vd) when Ident.same i id ->
+                                { x with exp_desc = Texp_ident (Path.Pident id', lid, vd) }
+                            | _ -> Tast_mapper.default.expr sub x) }
+                    in
+                    let inner =
+                      { vb with vb_pat = { vb.vb_pat with pat_desc = Tpat_var (id', name) }; vb_expr = mapper.expr mapper e }
+                    in
+                    let vd =
+                      { Types.val_type = e.exp_type; val_kind = Types.Val_reg; val_loc = e.exp_loc;
+                        val_attributes = []; val_uid = Types.Uid.internal_not_actually_unique }
+                    in
+                    let self =
+                      { e with exp_desc = Texp_ident (Path.Pident id', { name with Location.txt = Longident.Lident (Ident.name id') }, vd) }
+                    in
+                    emit_pattern { vb with vb_expr = { e with exp_desc = Texp_let (Asttypes.Recursive, [ inner ], self) } }
+                | _ ->
+                    (* `let rec x = e` with `e` not a function cannot
+                       mention `x`: an ordinary definition (Model/syntax.ml's
+                       `let rec sizeof = define ...`) *)
+                    emit_pattern vb)
            | Tstr_value (Asttypes.Recursive, vbs) ->
                (* name and register every function first: they may call
                   each other (and themselves, through local identifiers) *)
@@ -762,14 +810,53 @@ module Emit = struct
            add_step (Printf.sprintf "UNSUPPORTED at line %d: %s" line msg) []);
         flush_lifted ()
 
+  (* The placeholders of weak type variables (Lower.weak_name) become their
+     types as resolved by now. One that nothing resolved has no value whose
+     type matters: Unit. *)
+  let resolve_weak text =
+    let replace_all text name by =
+      let n = String.length name and b = Buffer.create (String.length text) in
+      let i = ref 0 in
+      while !i < String.length text do
+        if !i + n <= String.length text && String.sub text !i n = name then (Buffer.add_string b by; i := !i + n)
+        else (Buffer.add_char b text.[!i]; incr i)
+      done;
+      Buffer.contents b
+    in
+    let contains text name =
+      let n = String.length name in
+      let rec at i = i + n <= String.length text && (String.sub text i n = name || at (i + 1)) in
+      at 0
+    in
+    let rec go text rounds =
+      let present = Hashtbl.fold (fun name ty acc -> if contains text name then (name, ty) :: acc else acc) weak_vars [] in
+      if present = [] || rounds = 0 then text
+      else
+        go
+          (List.fold_left
+             (fun text (name, ty) ->
+               let by = match weak_resolved ty with Some t -> show_ty t | None -> "Unit" in
+               replace_all text name by)
+             text present)
+          (rounds - 1)
+    in
+    go text 8
+
   let output ~source ~out =
     let oc = open_out out in
-    Printf.fprintf oc
-      "// Generated by tools/translator from %s; do not edit.\n// Regenerate with tools/ocaml_ref/translate.sh translate %s.\n%s%s"
-      source source (String.concat "" (List.rev_map (fun f -> f ()) !decls))
-      (* a file of definitions only has nothing to load *)
-      (if Buffer.length steps = 0 then ""
-       else Printf.sprintf "\n///|\nfn load_steps() -> Unit raise {%s\n}\n" (Buffer.contents steps));
+    output_string oc
+      (resolve_weak
+         (Printf.sprintf
+            "// Generated by tools/translator from %s; do not edit.\n// Regenerate with tools/ocaml_ref/translate.sh translate %s.\n%s%s"
+            source source (String.concat "" (List.rev_map (fun f -> f ()) !decls))
+            (* a file of definitions only has nothing to load; a package
+               set up by theory.py calls load_steps all the same
+               (Rqe/rqe_lib.ml) *)
+            (if Buffer.length steps = 0 then
+               (if Sys.file_exists (Filename.concat (Filename.dirname out) "init.mbt")
+                then "\n///|\nfn load_steps() -> Unit raise {\n  ()\n}\n"
+                else "")
+             else Printf.sprintf "\n///|\nfn load_steps() -> Unit raise {%s\n}\n" (Buffer.contents steps))));
     close_out oc;
     (* module members' MoonBit names, for packages translated later
        (`A.f` and `B.f` cannot both be `f`) *)

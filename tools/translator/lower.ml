@@ -84,6 +84,47 @@ module Lower = struct
         Hashtbl.add tyvar_names id n;
         n
 
+  (* A weak type variable (`'_weak1`: left by a phrase that is not
+     generalized, such as `let f = let th = prove ... in fun avs -> ...`
+     where nothing fixes the type of `avs`): a later phrase of the file may
+     resolve it. Its text is a placeholder that Emit replaces when the file
+     is written (as the declarations of toplevel values are printed then).
+     Complex/quelim.ml: MPOLY_NORM_CONV and the local functions using it. *)
+  let weak_vars : (string, Types.type_expr) Hashtbl.t = Hashtbl.create 16
+
+  let is_weak ty =
+    (match Types.get_desc ty with Types.Tvar _ -> true | _ -> false)
+    && Types.get_level ty <> Btype.generic_level
+
+  let weak_name ty =
+    let n = Printf.sprintf "Weak_%d_" (Types.get_id ty) in
+    Hashtbl.replace weak_vars n ty;
+    n
+
+  (* The translator types a phrase itself; the toplevel types it again when
+     it runs it, and only that copy's weak variables are the ones later
+     phrases resolve. `link_weak own installed` records, for each weak
+     variable of the translator's type of a definition, the corresponding
+     part of the type the toplevel installed. *)
+  let weak_alias : (int, Types.type_expr) Hashtbl.t = Hashtbl.create 16
+
+  let rec link_weak (own : Types.type_expr) (installed : Types.type_expr) =
+    match Types.get_desc own, Types.get_desc installed with
+    | Types.Tvar _, _ when is_weak own ->
+        if not (Hashtbl.mem weak_alias (Types.get_id own)) && Types.get_id own <> Types.get_id installed then
+          Hashtbl.replace weak_alias (Types.get_id own) installed
+    | Types.Tarrow (_, a1, b1, _), Types.Tarrow (_, a2, b2, _) -> link_weak a1 a2; link_weak b1 b2
+    | Types.Ttuple l1, Types.Ttuple l2 when List.length l1 = List.length l2 -> List.iter2 link_weak l1 l2
+    | Types.Tconstr (p1, l1, _), Types.Tconstr (p2, l2, _) when Path.same p1 p2 && List.length l1 = List.length l2 ->
+        List.iter2 link_weak l1 l2
+    | _ -> ()
+
+  (* the type a weak variable stands for by now, if anything resolved it *)
+  let rec weak_resolved ty =
+    match Types.get_desc ty with
+    | Types.Tvar _ -> Option.bind (Hashtbl.find_opt weak_alias (Types.get_id ty)) weak_resolved
+    | _ -> Some ty
+
   (* Type abbreviations with a MoonBit alias of the same meaning. *)
   let alias = function
     | "conv" -> Some "@equal.Conv"
@@ -257,13 +298,14 @@ module Lower = struct
          | None -> None)
 
   (* `int * (term -> 'a)`: an element of simp's rewrite nets (gconv when
-     'a is thm), expanded; its function part *)
+     'a is thm), expanded; its function part. `net_of_conv` takes any
+     payload: a function of another type too (Complex/quelim.ml) *)
   let gconv_fun ty =
     let name t = match Types.get_desc (Ctype.expand_head (env ()) t) with Types.Tconstr (p, [], _) -> Path.last p | _ -> "" in
     match Types.get_desc (Ctype.expand_head (env ()) ty) with
     | Types.Ttuple [ a; f ] when name a = "int" ->
         (match Types.get_desc (Ctype.expand_head (env ()) f) with
-         | Types.Tarrow (_, x, _, _) when name x = "term" -> Some f
+         | Types.Tarrow _ -> Some f
          | _ -> None)
     | _ -> None
 
@@ -278,6 +320,7 @@ module Lower = struct
          | Some inst -> Hashtbl.remove tyvar_subst (Types.get_id ty);
              let r = mty_of inst in
              Hashtbl.replace tyvar_subst (Types.get_id ty) inst; r
+         | None when is_weak ty -> M.Named (weak_name ty, [])
          | None -> M.Named (tyvar_name ty, []))
     | Types.Tarrow (_, a, b, _) -> M.Fun ([ mty_of a ], mty_of b, true)
     | Types.Ttuple ts -> M.Tuple (List.map mty_of ts)
@@ -334,6 +377,7 @@ module Lower = struct
          | Some inst -> Hashtbl.remove tyvar_subst (Types.get_id ty);
              let r = show_ty inst in
              Hashtbl.replace tyvar_subst (Types.get_id ty) inst; r
+         | None when is_weak ty -> weak_name ty
          | None -> tyvar_name ty)
     | Types.Tarrow (_, a, b, _) ->
         let r = show_ty b in
@@ -444,7 +488,11 @@ module Lower = struct
       "unsafe"; "use"; "where"; "await"; "dyn"; "abstract"; "do"; "final";
       "macro"; "override"; "package"; "private"; "protected"; "throw";
       "sizeof"; "virtual"; "yield"; "init"; "main"; "lazy"; "pure"; "drop";
-      "readonly"; "enumview"; "Self" ]
+      "readonly"; "enumview"; "Self";
+      (* prelude functions the generated test driver calls unqualified: a
+         package's own `ignore` (Rqe/rqe_tactics_ext.ml's IGNORE) would
+         capture them *)
+      "ignore"; "not" ]
 
   let rec sanitize name =
     match Names.op_name name with
@@ -684,9 +732,9 @@ module Lower = struct
     | None ->
         (* the Num library (nums): the num package *)
         (match String.split_on_char '.' (Path.name path) with
-         | [ "Num"; ("num_of_string" | "string_of_num") ] ->
-             (* the Num library's (rational) parser and printer differ from
-                HOL Light's replacements in the num package *)
+         | [ "Num"; "num_of_string" ] ->
+             (* the Num library's parser differs from lib.ml's
+                `num_of_string`, the one the num package has *)
              unsupported loc "Num library's own %s" (Path.name path)
          | [ "Num"; n ] ->
              (* OCaml ints are 63-bit (Int64) *)
@@ -804,9 +852,12 @@ module Lower = struct
       let stmts, e = hoist (stmts, e) in
       let wgs, wres = groups want in
       let hgs, hres = groups have in
-      (* a parameter is `Plain t` or `Split ts` (one tuple, k units) *)
-      let plain gs = List.map (List.map (fun t -> `Plain t)) gs in
-      let units p = match p with `Plain _ -> 1 | `Split ts -> List.length ts in
+      (* a parameter is `Plain t` or `Split ts` (one tuple, k units); a
+         group without parameters (`() -> T`, an OCaml `unit -> t`) is one
+         unit, `Zero: against `(Unit) -> T`, what a generic `(A) -> B` is at
+         unit (`(f o top_goal) ()` in Rqe/util.ml) *)
+      let plain gs = List.map (fun g -> if g = [] then [ `Zero ] else List.map (fun t -> `Plain t) g) gs in
+      let units p = match p with `Plain _ | `Zero -> 1 | `Split ts -> List.length ts in
       let count gs = List.fold_left (fun n g -> List.fold_left (fun n p -> n + units p) n g) 0 gs in
       let split_first gs =
         let found = ref false in
@@ -837,6 +888,11 @@ module Lower = struct
             let rec take g pending acc =
               match g with
               | [] -> (List.rev acc, pending)
+              | `Zero :: g' ->
+                  (* the unit argument is not passed *)
+                  (match pending with
+                   | _ :: rest -> take g' rest acc
+                   | [] -> assert false)
               | `Plain ht :: g' ->
                   (match pending with
                    | (x, wt) :: rest -> take g' rest (snd (adapt ([], x) wt ht) :: acc)
@@ -864,14 +920,15 @@ module Lower = struct
                      (fun p ->
                        let x = fresh "x" in
                        match p with
-                       | `Plain t -> (param x t, [ (Atom x, t) ])
-                       | `Split ts -> (param x (M.Tuple ts), List.mapi (fun i t -> (Field (Atom x, i), t)) ts))
+                       | `Zero -> ([], [ (Atom "()", M.Named ("Unit", [])) ])
+                       | `Plain t -> ([ param x t ], [ (Atom x, t) ])
+                       | `Split ts -> ([ param x (M.Tuple ts) ], List.mapi (fun i t -> (Field (Atom x, i), t)) ts))
                      g
                  in
                  let body = go cur hps (pending @ List.concat_map snd params) wrest in
-                 let ptype = function `Plain t -> t | `Split ts -> M.Tuple ts in
-                 let ret = List.fold_right (fun g acc -> M.Fun (List.map ptype g, acc, true)) wrest wres in
-                 ([], typed_lam (List.map fst params) ret body))
+                 let ptypes = function `Zero -> [] | `Plain t -> [ t ] | `Split ts -> [ M.Tuple ts ] in
+                 let ret = List.fold_right (fun g acc -> M.Fun (List.concat_map ptypes g, acc, true)) wrest wres in
+                 ([], typed_lam (List.concat_map fst params) ret body))
       in
       let ss, e' = go e hps [] wps in
       (stmts @ ss, e')
@@ -965,7 +1022,9 @@ module Lower = struct
         else Printf.sprintf "'\\u{%x}'" (Char.code c)
     | _ -> unsupported loc "constant"
 
-  let rec irrefutable : type k. k general_pattern -> bool = fun p ->
+  (* `'k.` with `fun (type k)`, not `: type k.`: camlp5 8.02.01 rejects the
+     latter on OCaml 4.14 (the translator is parsed by camlp5) *)
+  let rec irrefutable : 'k. 'k general_pattern -> bool = fun (type k) (p : k general_pattern) ->
     match p.pat_desc with
     | Tpat_any | Tpat_var _ -> true
     | Tpat_alias (q, _, _) -> irrefutable q
@@ -976,8 +1035,8 @@ module Lower = struct
 
   (* MoonBit text of a pattern, binding its variables; `mty` is the
      MoonBit type of the matched value when known. *)
-  let rec pattern : type k. ?mty:M.ty -> k general_pattern -> string =
-    fun ?mty p ->
+  let rec pattern : 'k. ?mty:M.ty -> 'k general_pattern -> string =
+    fun (type k) ?mty (p : k general_pattern) ->
     let loc = p.pat_loc in
     let sub_mty q = mty_of q.pat_type in
     match p.pat_desc with
@@ -1146,6 +1205,30 @@ module Lower = struct
         let cs, cx, _ = lower c in
         let bs, bx, _ = lower body in
         ([ While ((cs, cx), (bs @ (if ordered bx then [ Do bx ] else []), Atom "()")) ], Atom "()", M.Named ("Unit", []))
+    | Texp_for (id, _, lo, hi, dir, body) ->
+        (* `for i = lo to hi do body done`: the bounds are evaluated once,
+           `lo` first; the counter is a Ref. (At `hi = max_int` OCaml stops
+           where this wraps: no upstream loop runs to it.) *)
+        let int64 = M.Named ("Int64", []) in
+        let ls, lx, _ = lower ~expect:int64 lo in
+        let hs, hx, _ = lower ~expect:int64 hi in
+        let r = fresh "i" in
+        let bound = fresh "n" in
+        let name = bind_local id int64 in
+        let bs, bx, _ = lower body in
+        let cmp, step =
+          match dir with Asttypes.Upto -> ("<=", "@lib.add63") | Asttypes.Downto -> (">=", "@lib.sub63")
+        in
+        ( ls @ [ Let (r, RefNew lx) ] @ hs
+          @ [ Let (bound, hx);
+              While
+                ( ([], Binop (cmp, Deref (Atom r), Atom bound)),
+                  ( [ Let (name, Deref (Atom r)) ] @ bs
+                    @ (if ordered bx then [ Do bx ] else [])
+                    @ [ Assign (Atom r, Call (Atom step, [ Deref (Atom r); Atom "1L" ])) ],
+                    Atom "()" ) ) ],
+          Atom "()",
+          M.Named ("Unit", []) )
     | Texp_lazy body ->
         (* evaluated (once) when forced *)
         let bb = lower_block body in
@@ -1292,8 +1375,11 @@ module Lower = struct
         (* printer.ml includes Format *)
         lower_printf ?expect whole ("Format." ^ snd (Option.get (Prov.lookup p))) args
     | Texp_ident (p, _, _)
-      when (match Prov.lookup p with Some ("printer.ml", ("std_formatter" | "pp_print_string" | "pp_print_char" | "pp_print_int" | "pp_print_newline" | "pp_print_space" | "pp_print_cut" | "pp_print_break" | "pp_open_box" | "pp_close_box" | "pp_open_hvbox" | "pp_open_vbox" | "pp_print_flush")) -> true | _ -> false) ->
-        (* printer.ml includes Format *)
+      when (match Prov.lookup p with Some ("printer.ml", ("std_formatter" | "pp_print_string" | "pp_print_char" | "pp_print_int" | "pp_print_newline" | "pp_print_space" | "pp_print_cut" | "pp_print_break" | "pp_open_box" | "pp_close_box" | "pp_open_hvbox" | "pp_open_vbox" | "pp_print_flush"
+                                                   | "print_string" | "print_newline" | "print_int" | "print_float" | "print_break" | "print_space" | "print_cut" | "print_flush"
+                                                   | "open_box" | "open_hbox" | "open_vbox" | "open_hvbox" | "open_hovbox" | "close_box")) -> true | _ -> false) ->
+        (* printer.ml includes Format: an unqualified `print_string` after
+           it is Format's (Complex/complex_grobner.ml) *)
         (match Prov.lookup p with
          | Some (_, n) -> lower_prim ?expect whole ("Format." ^ n) f args
          | None -> assert false)
@@ -1313,6 +1399,17 @@ module Lower = struct
         (* a polymorphic local is used at an instance of its type *)
         let hmty = refine l.mty (mty_of f.exp_type) in
         apply_head ?expect ~res:whole.exp_type loc { hstmts = []; hexp = Atom l.name; hmty; hoty = l.loty } args
+    | Texp_ident (p, _, vd)
+      when (match Prov.lookup p with Some ("nets.ml", "lookup") -> true | _ -> false)
+           && List.length args = 2
+           && (match Types.get_desc (expand whole.exp_type) with
+               | Types.Tconstr (_, [ e ], _) -> is_gconv_tuple e
+               | _ -> false) ->
+        (* a rewrite net holds GconvOf structs: its elements, OCaml's
+           `(priority, conv)` pairs, are made pairs where they leave it *)
+        let h = global_head loc p vd in
+        let ss, x, ty = apply_head ~res:whole.exp_type loc { h with hmty = refine h.hmty (mty_of f.exp_type) } args in
+        adapt_to ?expect (ss, Call (Atom "@simp.gconv_pairs", [ x ]), ty)
     | Texp_ident (p, _, vd) ->
         let h = global_head loc p vd in
         let h = closure_net_variant p f.exp_type h in
@@ -1621,10 +1718,14 @@ module Lower = struct
       | "raise" -> (1, fun [ a ] _ -> Raise a)
       | "ignore" -> (1, fun [ a ] _ -> Call (Atom "ignore", [ a ]))
       | "string_of_int" -> (1, fun [ a ] _ -> Call (Atom "Int64::to_string", [ a ]))
+      | "string_of_float" -> (1, fun [ a ] _ -> Call (Atom "@lib.string_of_float", [ a ]))
       | "!" -> (1, fun [ a ] _ -> Deref a)
       | "ref" -> (1, fun [ a ] _ -> RefNew a)
       | ":=" -> (2, fun [ a; b ] _ -> Blk ([ Assign (a, b) ], Atom "()"))
       | "Format.print_string" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_string", [ a ]))
+      | "Format.print_float" ->
+          (* Format prints a float as `string_of_float` does *)
+          (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_string", [ Call (Atom "@lib.string_of_float", [ a ]) ]))
       | "Format.print_newline" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_newline", [])))
       | "Format.print_flush" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_flush", [])))
       | "Format.print_int" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_string", [ Call (Atom "Int64::to_string", [ a ]) ]))
@@ -1646,6 +1747,9 @@ module Lower = struct
       | "String.get" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.ocaml_string_get", [ a; narrow b ]))
       | "String.sub" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.string_sub", [ a; narrow b; narrow c ]))
       | "String.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_make", [ a; b ]))
+      | "Sys.time" ->
+          (* the clock lib.ml's `time` reads (0 on wasm) *)
+          (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "(@lib.cpu_time.val)", [])))
       | "Sys.command" -> (1, fun [ a ] _ -> widen (Call (Atom "@lib.sys_command", [ a ])))
       | "Sys.remove" -> (1, fun [ a ] _ -> Call (Atom "@lib.sys_remove", [ a ]))
       | "Sys.file_exists" -> (1, fun [ a ] _ -> Call (Atom "@lib.sys_file_exists", [ a ]))
@@ -1733,7 +1837,15 @@ module Lower = struct
     else if List.length args >= arity then begin
       let now = List.filteri (fun i _ -> i < arity) args in
       let rest = List.filteri (fun i _ -> i >= arity) args in
-      if rest <> [] then unsupported loc "over-applied primitive %s" name;
+      if rest <> [] then begin
+        (* the primitive returns a function, applied to the rest
+           (`snd (hd l) f x`): as `(snd (hd l)) f x`, a head expression *)
+        let rec result t n = if n = 0 then t else match arrow t with Some (_, b) -> result b (n - 1) | None -> unsupported loc "over-applied primitive %s" name in
+        let inner_ty = result f.exp_type arity in
+        let inner = { whole with exp_desc = Texp_apply (f, List.map (fun a -> (Asttypes.Nolabel, Some a)) now); exp_type = inner_ty } in
+        let ss, x, ty = lower inner in
+        apply_head ?expect ~res:whole.exp_type loc { hstmts = ss; hexp = x; hmty = ty; hoty = Some inner_ty } rest
+      end else
       let lowered = List.mapi (fun i a -> prim_arg name i a) now in
       let stmts, xs =
         if name = "min" || name = "max" then
@@ -2524,7 +2636,7 @@ module Lower = struct
     let b = lower_block ?expect:want body in
     let catch_all = ref false in
     (* exception patterns *)
-    let rec exn_pattern : type k. k general_pattern -> string = fun p ->
+    let rec exn_pattern : 'k. 'k general_pattern -> string = fun (type k) (p : k general_pattern) ->
       match p.pat_desc with
       | Tpat_any -> catch_all := true; "_"
       | Tpat_var (id, _) -> catch_all := true; bind_local id (M.Named ("Error", []))

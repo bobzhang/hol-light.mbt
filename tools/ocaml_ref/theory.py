@@ -90,10 +90,11 @@ def needs(f):
     if not os.path.isfile(path):
         path = os.path.join(HOL, f if f.endswith(".ml") else f + ".ml")
     # the same rule as the translator's Translator.needs_of
-    # `loadt "f"` is used as `needs` too (100/lagrange.ml); only top-level
-    # phrases with a literal file name are dependencies
+    # `loadt "f"` is used as `needs` too (100/lagrange.ml), and `loads "f"`
+    # (Rqe/make.ml): a file is loaded once here. Only top-level phrases
+    # with a literal file name are dependencies
     text = strip_comments(open(path).read())
-    return [m.group(1) for m in re.finditer(r'(?<![A-Za-z0-9_\'])(?:needs|loadt)\s+"([^"]+)"', text)
+    return [m.group(1) for m in re.finditer(r'(?<![A-Za-z0-9_\'])(?:needs|loadt|loads)\s+"([^"]+)"', text)
             if text[:m.start()].rstrip() == "" or text[:m.start()].rstrip().endswith(";;")]
 
 
@@ -129,15 +130,47 @@ def needs_closure(f):
     return out
 
 
+@functools.lru_cache(maxsize=None)
+def make_plan(d):
+    """What `d`/make.ml loads, in order: (file of `d`, the files of other
+    directories make.ml loads just before it). Empty without a make.ml, and
+    for Multivariate/ (MAKE_ORDER above)."""
+    if d == "Multivariate" or not os.path.isfile(os.path.join(HOL, d, "make.ml")):
+        return []
+    plan, pre = [], []
+    for g in needs(d + "/make.ml"):
+        if g.startswith(d + "/"):
+            plan.append((g, pre))
+            pre = []
+        else:
+            pre.append(g)
+    return plan
+
+
+def make_pre(f):
+    """The files of other directories its directory's make.ml loads just
+    before `f`: loaded before `f`, like what it needs."""
+    for g, pre in make_plan(os.path.dirname(f)):
+        if g == f:
+            return pre
+    return []
+
+
 def chain_prev(f):
     """The file loaded just before `f`'s own needs: its predecessor in
-    make.ml's order, or an extra file's anchor."""
+    make.ml's order, or an extra file's anchor. A directory with a make.ml
+    is loaded as that loads it (some files name no `needs` and rely on it:
+    Complex/complex_real.ml)."""
     if f in MAKE_ORDER:
         i = MAKE_ORDER.index(f)
         return MAKE_ORDER[i - 1] if i > 0 else None
     if f in EXTRAS:
         anchored = [g for g in needs_closure(f) if g in MAKE_ORDER]
         return max(anchored, key=MAKE_ORDER.index) if anchored else None
+    order = [g for g, _ in make_plan(os.path.dirname(f))]
+    if f in order:
+        i = order.index(f)
+        return order[i - 1] if i > 0 else None
     return None
 
 
@@ -156,11 +189,11 @@ def _deps(f):
             return
         visiting.append(g)
         # as g's load(): its predecessor's chain first, then what it needs
-        for h in ([chain_prev(g)] if chain_prev(g) else []) + list(needs(g)):
+        for h in ([chain_prev(g)] if chain_prev(g) else []) + make_pre(g) + list(needs(g)):
             visit(h)
         seen.append(g)
 
-    for h in needs(f):
+    for h in make_pre(f) + needs(f):
         visit(h)
     return seen
 
@@ -171,6 +204,18 @@ def deps(f):
 
 def run(cmd, **kw):
     return subprocess.run(cmd, cwd=ROOT, **kw)
+
+
+# moonc processes at once: one per core (moon's default) exhausted the
+# machine's memory on the large generated packages
+MOON_JOBS = os.environ.get("HOL_MOON_JOBS", "4")
+
+
+def moon_info(**kw):
+    """`moon info`, after `moon check` at MOON_JOBS at a time: `moon info`
+    takes no -j, and then finds the packages already checked."""
+    run(["moon", "check", "-j", MOON_JOBS], capture_output=True)
+    return run(["moon", "info"], **kw)
 
 
 def setup(f):
@@ -198,7 +243,7 @@ def setup(f):
         # order), then itself, once (MoonBit's package initialization order
         # is not upstream's)
         lib_needs = ([chain_prev(f)] if chain_prev(f) else []) + \
-            [n for n in needs(f) if stem(n) not in CORE and stem(n) not in LOADED]
+            [n for n in make_pre(f) + needs(f) if stem(n) not in CORE and stem(n) not in LOADED]
         calls = "".join(f"  @{os.path.basename(pkg_of(n))}.load()\n" for n in lib_needs)
         open(os.path.join(ROOT, pkg, "init.mbt"), "w").write(
             f"// {name}.ml: the load steps are generated ({alias}{'_ml' if alias.endswith('test') else ''}.mbt).\n\n"
@@ -236,9 +281,11 @@ def write_tests(f, pkg, alias, name):
     ml += ["start_trace ();;\n", f'#use "{name}.ml";;\n', f'show_trace "{name}";;\n',
            "(* BEGIN generated theorem list *)\n(* END generated theorem list *)\n",
            "let tm s = parse_term s;;\n",
-           'attempt "types" (fun () -> String.concat " " (map (fun (s,n) -> s ^ "/" ^ string_of_int n) (types())));;\n',
-           'attempt "constants" (fun () -> String.concat " " (map fst (constants())));;\n',
-           'attempt "definitions" (fun () -> string_of_int (length (definitions())));;\n',
+           # Stdlib's functions by their qualified names: a file may define
+           # `length` or `map` itself (100/chords.ml defines `length`)
+           'attempt "types" (fun () -> String.concat " " (List.map (fun (s,n) -> s ^ "/" ^ string_of_int n) (types())));;\n',
+           'attempt "constants" (fun () -> String.concat " " (List.map fst (constants())));;\n',
+           'attempt "definitions" (fun () -> string_of_int (List.length (definitions())));;\n',
            "(* BEGIN EXTRA *)\n(* END EXTRA *)\n",
            'attempt "counter_tyvar" (fun () -> stm (tm "zz_counter"));;\n',
            'attempt "counter_genvar" (fun () -> stm (genvar bool_ty));;\n']
@@ -276,6 +323,7 @@ test "{name} matches {name}.ml" {{
   // END EXTRA
   log.attempt("counter_tyvar", () => stm(tm("zz_counter")))
   log.attempt("counter_genvar", () => stm(@basics.genvar(@kernel.bool_ty)))
+  @testkit.check_axioms()
   inspect(@testkit.normalize_times(log.contents()))
 }}
 """
@@ -321,7 +369,7 @@ def main():
         os.makedirs(os.path.dirname(aside), exist_ok=True)
         os.rename(os.path.join(ROOT, pkg), aside)
         try:
-            run(["moon", "info"], capture_output=True)
+            moon_info(capture_output=True)
         finally:
             os.rename(aside, os.path.join(ROOT, pkg))
     stage("setup+info")
@@ -334,7 +382,7 @@ def main():
         sys.exit(1)
     # `moon info` type-checks and writes the interface the next translations
     # read
-    chk = run(["moon", "info"], capture_output=True, text=True)
+    chk = moon_info(capture_output=True, text=True)
     errs = re.findall(r"^Error.*(?:\n.*){0,8}", chk.stdout + chk.stderr, re.M)
     if errs:
         print("\n--\n".join(errs[:6]))
@@ -350,13 +398,12 @@ def main():
     run(["python3", "tools/ocaml_ref/embed_golden.py", os.path.relpath(expected, ROOT), os.path.relpath(test, ROOT)])
     # cheap: translations are formatter-ignored (moon.pkg)
     run(["moon", "fmt"], capture_output=True)
-    t = run(["moon", "test", "--target", "wasm", "-p", "bobzhang/hol_light/" + pkg], capture_output=True, text=True)
+    # tools/test.py: wasm-gc, with a larger stack than `moon test` gives
+    t = run(["python3", "tools/test.py", pkg], capture_output=True, text=True)
     log = t.stdout + t.stderr
     stage("moon-test")
     open(os.path.join(REF, "_build", "theory_" + alias + ".log"), "w").write(log)
-    shown = [l for l in log.splitlines() if not l.lstrip().startswith("#|")]
-    keep = [l for l in shown if re.match(r"^(Error|Total|Diff|[-+])|failed", l) and not re.match(r"^[-+ ]0\.\.", l)]
-    print("\n".join(keep[:40]))
+    print("\n".join(log.splitlines()[:40]))
     sys.exit(t.returncode)
 
 

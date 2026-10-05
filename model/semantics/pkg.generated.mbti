@@ -1,0 +1,89 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/model/semantics"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abs_correct() -> @kernel.Thm
+
+pub fn assume_correct() -> @kernel.Thm
+
+pub fn beta_correct() -> @kernel.Thm
+
+pub fn binary_inference_rule() -> @kernel.Thm
+
+pub fn deduct_antisym_rule_correct() -> @kernel.Thm
+
+pub fn dest_var() -> @kernel.Thm
+
+pub fn eq_mp_correct() -> @kernel.Thm
+
+pub fn hol_is_consistent() -> @kernel.Thm
+
+pub fn hol_is_sound() -> @kernel.Thm
+
+pub fn inst_correct() -> @kernel.Thm
+
+pub fn inst_type_correct() -> @kernel.Thm
+
+pub fn itlist_valmod_eq() -> @kernel.Thm
+
+pub fn itlist_valmod_filter() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mk_comb_correct() -> @kernel.Thm
+
+pub fn refl_correct() -> @kernel.Thm
+
+pub fn semantics() -> @kernel.Thm
+
+pub fn semantics_aconv() -> @kernel.Thm
+
+pub fn semantics_equation() -> @kernel.Thm
+
+pub fn semantics_equation_alt() -> @kernel.Thm
+
+pub fn semantics_inst() -> @kernel.Thm
+
+pub fn semantics_inst_core() -> @kernel.Thm
+
+pub fn semantics_raconv() -> @kernel.Thm
+
+pub fn semantics_select() -> @kernel.Thm
+
+pub fn semantics_typeset() -> @kernel.Thm
+
+pub fn semantics_typeset_induct() -> @kernel.Thm
+
+pub fn semantics_vsubst() -> @kernel.Thm
+
+pub fn sequent() -> @kernel.Thm
+
+pub fn term_valuation() -> @kernel.Thm
+
+pub fn term_valuation_itlist() -> @kernel.Thm
+
+pub fn term_valuation_valmod() -> @kernel.Thm
+
+pub fn term_valuation_vfree_in() -> @kernel.Thm
+
+pub fn trans_correct() -> @kernel.Thm
+
+pub fn type_valuation() -> @kernel.Thm
+
+pub fn typeset() -> @kernel.Thm
+
+pub fn typeset_inhabited() -> @kernel.Thm
+
+pub fn typeset_lemma() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -14,7 +14,10 @@ constructs theorems only through its API.
   `define`) are translated.
 - **Library/**: every file but `tactician_light.ml` (`library/<name>`).
 - **Multivariate/**: all 32 theory files (`multivariate/<name>`).
-- **100/**: 25 files so far (`100/<name>`).
+- **100/**: 59 of 67 files (`100/<name>`); the rest wait for other
+  directories.
+- **Complex/, Arithmetic/, Permutation/, Ntrie/, Model/, GL/, Divstep/**:
+  their theory files (`complex/<name>`, ...).
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the
 registry caps a module at 100 MB); Multivariate/, 100/ and the translation
@@ -40,10 +43,32 @@ let th = @prime.prime_2()
 ## Develop
 
 ```
-moon test -j 16                                         # whole suite (~5 h)
+python3 tools/test.py                      # hand-ported core, wasm and wasm-gc (10 s)
+python3 tools/test.py core                 # everything hol.ml loads (20 s)
+python3 tools/test.py library              # or multivariate, 100, a package directory
+python3 tools/test.py all                  # the whole suite on wasm-gc
+python3 tools/test.py all --target wasm    # on the primary target (hours): before a release
 python3 tools/ocaml_ref/batch.py --files 100/x.ml ...   # translate and check
 ```
 
-The upstream sources go in `.repos/hol-light`; the reference runs need OCaml
-4.14 with camlp5 and num (see `tools/ocaml_ref`). [PLAN.md](PLAN.md) has the
-design, decisions and known limitations.
+A file's test loads everything before it in a fresh process and compares
+what HOL Light itself gives. The files of a directory with a load order
+(its make.ml) are the test blocks of one package, `<dir>/make`, which
+loads the chain once; `tools/test.py complex/make/05_quelim_test.mbt` runs
+one member alone. Files outside such an order (100/, most of Library/)
+have a test each. Run the tier you touch; `--shard I/N` splits a selection
+across machines. Builds run 4 compiler processes at once (`--build-jobs`,
+`$HOL_MOON_JOBS`): linking the test executable of a long chain takes about
+14 GB, so moon's default of one per core is not safe here.
+
+The upstream sources go in `.repos/hol-light`. The reference runs use the
+opam switch `hol-light` (or `$HOL_LIGHT_SWITCH`):
+
+```
+opam switch create hol-light ocaml-base-compiler.4.14.1 --no-switch
+opam install --switch=hol-light camlp5.8.02.01 num camlp-streams ocamlfind
+brew install pari    # upstream's PRIME_CONV calls gp (Library/pocklington.ml)
+```
+
+[PLAN.md](PLAN.md) has the design, decisions and known limitations;
+[TODO.md](TODO.md) the plan for what is left.

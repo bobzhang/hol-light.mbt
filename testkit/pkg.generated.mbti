@@ -6,9 +6,13 @@ import {
 }
 
 // Values
+pub fn check_axioms() -> Unit raise
+
 pub fn normalize_times(String) -> String
 
 pub fn ocaml_escaped(String) -> String
+
+pub fn release_output() -> Unit
 
 pub fn start_trace() -> Unit
 
@@ -30,6 +34,7 @@ pub fn Log::capture_stdout(Self) -> Unit
 pub fn Log::contents(Self) -> String
 pub fn Log::new() -> Self
 pub fn Log::out(Self, String) -> Unit
+pub fn Log::probe_counters(Self) -> Unit
 pub fn Log::show_theory_output(Self, String) -> Unit
 pub fn Log::show_theory_trace(Self, String) -> Unit
 pub fn Log::show_trace(Self, String) -> Unit

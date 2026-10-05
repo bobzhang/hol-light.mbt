@@ -1,0 +1,51 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/permutation/permutation"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn count_revperm() -> @kernel.Thm
+
+pub fn delete1_revperm() -> @kernel.Thm
+
+pub fn list_uniq_mem_permutation() -> @kernel.Thm
+
+pub fn list_uniq_permuted_set_of_list() -> @kernel.Thm
+
+pub fn list_uniq_revperm() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mem_permutation() -> @kernel.Thm
+
+pub fn mem_revperm() -> @kernel.Thm
+
+pub fn permutation() -> @kernel.Thm
+
+pub fn permutation_count() -> @kernel.Thm
+
+pub fn permutation_list_uniq() -> @kernel.Thm
+
+pub fn permutation_mem() -> @kernel.Thm
+
+pub fn permutation_nil() -> @kernel.Thm
+
+pub fn permutation_set_of_list() -> @kernel.Thm
+
+pub fn permutation_uniq_lt() -> @kernel.Thm
+
+pub fn permuted_length_mem() -> @kernel.Thm
+
+pub fn revperm() -> @kernel.Thm
+
+pub fn set_of_list_revperm() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

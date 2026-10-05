@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/divstep/divstep"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn divstep() -> @kernel.Thm
+
+pub fn divstep1() -> @kernel.Thm
+
+pub fn divstep1_divstep2() -> @kernel.Thm
+
+pub fn divstep2() -> @kernel.Thm
+
+pub fn divstep_maintains_gcd() -> @kernel.Thm
+
+pub fn divstep_range_2scomplement() -> @kernel.Thm
+
+pub fn divstep_range_signmagnitude() -> @kernel.Thm
+
+pub fn divstep_stays_odd() -> @kernel.Thm
+
+pub fn divstep_stays_zero() -> @kernel.Thm
+
+pub fn iter_divstep_bound_alt() -> @kernel.Thm
+
+pub fn iter_divstep_gcd() -> @kernel.Thm
+
+pub fn iter_divstep_odd() -> @kernel.Thm
+
+pub fn iter_divstep_zero() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

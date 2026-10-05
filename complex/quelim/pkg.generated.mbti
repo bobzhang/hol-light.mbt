@@ -1,0 +1,92 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/complex/quelim"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn basic_quelim_conv(@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn complex_quelim_conv(@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn constant_degree() -> @kernel.Thm
+
+pub fn core_quelim_conv(@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn divides_degree() -> @kernel.Thm
+
+pub fn divides_degree_lemma() -> @kernel.Thm
+
+pub fn expand_ex_beta_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn expand_ex_beta_resolve_conv(@list.List[@kernel.Thm], @kernel.Term) -> @kernel.Thm raise
+
+pub fn full_complex_quelim_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn last_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn length_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+pub fn mpoly_add_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn mpoly_base_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn mpoly_cmul_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn mpoly_mul_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn mpoly_norm_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn mpoly_pow_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn mpoly_sub_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn mpoly_tadd_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn mpoly_tcmul_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn mpoly_tmul_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn nnf_cond_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn nullstellensatz_lemma() -> @kernel.Thm
+
+pub fn nullstellensatz_univariate() -> @kernel.Thm
+
+pub fn poly_cancel_ene_conv(@list.List[@kernel.Term], Int64, @kernel.Thm, @kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn poly_cancel_eq_conv(@list.List[@kernel.Term]) -> ((Int64) -> ((@kernel.Thm) -> ((@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise) raise) raise
+
+pub fn poly_divides_conv(@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn poly_divides_pad_const_rule(@list.List[@kernel.Term]) -> ((Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn poly_divides_pad_rule(@list.List[@kernel.Term]) -> ((Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn poly_ne_mult_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn poly_pad_rule(@list.List[@kernel.Term]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn polynate_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn resolve_eq(@list.List[@kernel.Thm], @kernel.Term) -> @kernel.Thm raise
+
+pub fn resolve_eq_ne(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn resolve_eq_raw(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn resolve_eq_then(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> (((@list.List[@kernel.Thm]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) -> (((@list.List[@kernel.Thm]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn resolve_ne(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

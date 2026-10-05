@@ -46,6 +46,8 @@ pub fn extend_basic_convs(String, (@kernel.Term, (@kernel.Term) -> @kernel.Thm r
 
 pub fn extend_basic_rewrites(@list.List[@kernel.Thm]) -> Unit raise
 
+pub fn[C] gconv_pairs(@list.List[GconvOf[C]]) -> @list.List[(Int64, C)]
+
 pub fn gen_rewrite_conv(((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise?, @list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
 
 pub fn gen_rewrite_rule(((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise?, @list.List[@kernel.Thm]) -> ((@kernel.Thm) -> @kernel.Thm raise) raise

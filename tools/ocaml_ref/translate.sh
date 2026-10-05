@@ -8,9 +8,13 @@
 # loaded with pa_j phrase by phrase, recording where each value is defined.
 set -e
 cd "$(dirname "$0")"
-eval "$(opam env --switch=4.14.1+idea --set-switch 2>/dev/null)" || true
+eval "$(opam env --switch="${HOL_LIGHT_SWITCH:-hol-light}" --set-switch 2>/dev/null)" || true
+# the bytecode stack limit (in words; the default 1M overflows in
+# EC/xzprojective.ml)
+export OCAMLRUNPARAM="${OCAMLRUNPARAM:-l=256M}"
 H="$(cd ../../.repos/hol-light && pwd)"
 ROOT="$(cd ../.. && pwd)"
+./ensure_pa_j.sh
 [ -f _build/holtop ] || ocamlfind ocamlmktop -o _build/holtop
 grep -v 'pa_j.cmo' boot.ml > _build/tboot.ml
 {
@@ -24,6 +28,7 @@ grep -v 'pa_j.cmo' boot.ml > _build/tboot.ml
   echo '#load "pa_j.cmo";;'
   echo 'let needs (_:string) = ();;'
   echo 'let loadt (_:string) = ();;'
+  echo 'let loads (_:string) = ();;'
   echo 'let float_sqrt = sqrt;; let float_fabs = abs_float;;'
   if [ "$1" = batch ]; then
     # $2: a file with the plan: `[ ([pre...], target); ... ]` (batch.py)

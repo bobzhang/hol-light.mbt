@@ -1,0 +1,153 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/model/syntax"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn aconv() -> @kernel.Thm
+
+pub fn aconv_refl() -> @kernel.Thm
+
+pub fn aconv_type() -> @kernel.Thm
+
+pub fn all_bool_term_union() -> @kernel.Thm
+
+pub fn alphavars() -> @kernel.Thm
+
+pub fn alphavars_refl() -> @kernel.Thm
+
+pub fn alphavars_type() -> @kernel.Thm
+
+pub fn clash() -> @kernel.Thm
+
+pub fn codomain() -> @kernel.Thm
+
+pub fn domain() -> @kernel.Thm
+
+pub fn equation() -> @kernel.Thm
+
+pub fn equation_has_type_bool() -> @kernel.Thm
+
+pub fn has_type_cases() -> @kernel.Thm
+
+pub fn has_type_induct() -> @kernel.Thm
+
+pub fn has_type_rules() -> @kernel.Thm
+
+pub fn inst_core() -> @kernel.Thm
+
+pub fn inst_core_exists() -> @kernel.Thm
+
+pub fn inst_def() -> @kernel.Thm
+
+pub fn is_clash() -> @kernel.Thm
+
+pub fn is_result() -> @kernel.Thm
+
+pub fn letlemma() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn not_is_result() -> @kernel.Thm
+
+pub fn prove_rules() -> @kernel.Thm
+
+pub fn proves_cases() -> @kernel.Thm
+
+pub fn proves_induct() -> @kernel.Thm
+
+pub fn raconv() -> @kernel.Thm
+
+pub fn raconv_cases() -> @kernel.Thm
+
+pub fn raconv_induct() -> @kernel.Thm
+
+pub fn raconv_refl() -> @kernel.Thm
+
+pub fn raconv_rules() -> @kernel.Thm
+
+pub fn raconv_type() -> @kernel.Thm
+
+pub fn result() -> @kernel.Thm
+
+pub fn result_distinct() -> @kernel.Thm
+
+pub fn result_induct() -> @kernel.Thm
+
+pub fn result_inj() -> @kernel.Thm
+
+pub fn result_recursion() -> @kernel.Thm
+
+pub fn rev_assocd() -> @kernel.Thm
+
+pub fn rev_assocd_filter() -> @kernel.Thm
+
+pub fn sizeof_() -> @kernel.Thm
+
+pub fn sizeof_vsubst() -> @kernel.Thm
+
+pub fn term_distinct() -> @kernel.Thm
+
+pub fn term_induct() -> @kernel.Thm
+
+pub fn term_inj() -> @kernel.Thm
+
+pub fn term_recursion() -> @kernel.Thm
+
+pub fn term_union() -> @kernel.Thm
+
+pub fn term_union_nonew() -> @kernel.Thm
+
+pub fn term_union_thm() -> @kernel.Thm
+
+pub fn type_distinct() -> @kernel.Thm
+
+pub fn type_induct() -> @kernel.Thm
+
+pub fn type_inj() -> @kernel.Thm
+
+pub fn type_recursion() -> @kernel.Thm
+
+pub fn type_subst() -> @kernel.Thm
+
+pub fn typeof() -> @kernel.Thm
+
+pub fn variant() -> @kernel.Thm
+
+pub fn variant_exists() -> @kernel.Thm
+
+pub fn vfree_in() -> @kernel.Thm
+
+pub fn vfree_in_aconv() -> @kernel.Thm
+
+pub fn vfree_in_finite() -> @kernel.Thm
+
+pub fn vfree_in_finite_alt() -> @kernel.Thm
+
+pub fn vfree_in_raconv() -> @kernel.Thm
+
+pub fn vfree_in_vsubst() -> @kernel.Thm
+
+pub fn vsubst() -> @kernel.Thm
+
+pub fn vsubst_has_type() -> @kernel.Thm
+
+pub fn vsubst_welltyped() -> @kernel.Thm
+
+pub fn welltyped() -> @kernel.Thm
+
+pub fn welltyped_clauses() -> @kernel.Thm
+
+pub fn welltyped_lemma() -> @kernel.Thm
+
+pub fn welltyped_v1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

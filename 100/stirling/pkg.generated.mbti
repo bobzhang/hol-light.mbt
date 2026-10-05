@@ -1,0 +1,85 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/stirling"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn ln_lim_bound() -> @kernel.Thm
+
+pub fn ln_lim_lemma() -> @kernel.Thm
+
+pub fn ln_wallis() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn oddeven_induct() -> @kernel.Thm
+
+pub fn other_deriv_lemma() -> @kernel.Thm
+
+pub fn pi2_le() -> @kernel.Thm
+
+pub fn pi2_lt() -> @kernel.Thm
+
+pub fn pi2_nz() -> @kernel.Thm
+
+pub fn positive_diff_lemma() -> @kernel.Thm
+
+pub fn stirling() -> @kernel.Thm
+
+pub fn stirling_converges() -> @kernel.Thm
+
+pub fn stirling_decreases() -> @kernel.Thm
+
+pub fn stirling_delta_deriv() -> @kernel.Thm
+
+pub fn stirling_delta_limit() -> @kernel.Thm
+
+pub fn stirling_diff() -> @kernel.Thm
+
+pub fn stirling_increases() -> @kernel.Thm
+
+pub fn stirling_lowerbound() -> @kernel.Thm
+
+pub fn stirling_mono() -> @kernel.Thm
+
+pub fn stirling_upperbound() -> @kernel.Thm
+
+pub fn stirling_v1() -> @kernel.Thm
+
+pub fn wallis() -> @kernel.Thm
+
+pub fn wallis_0() -> @kernel.Thm
+
+pub fn wallis_1() -> @kernel.Thm
+
+pub fn wallis_bounds() -> @kernel.Thm
+
+pub fn wallis_even() -> @kernel.Thm
+
+pub fn wallis_lt() -> @kernel.Thm
+
+pub fn wallis_mono() -> @kernel.Thm
+
+pub fn wallis_nz() -> @kernel.Thm
+
+pub fn wallis_odd() -> @kernel.Thm
+
+pub fn wallis_parts() -> @kernel.Thm
+
+pub fn wallis_parts_p() -> @kernel.Thm
+
+pub fn wallis_quotient() -> @kernel.Thm
+
+pub fn wallis_quotient_p() -> @kernel.Thm
+
+pub fn wallis_ratio_bounds() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,116 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/arithmetic/definability"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn arith_divides() -> @kernel.Thm
+
+pub fn arith_divides_v1() -> @kernel.Thm
+
+pub fn arith_pair() -> @kernel.Thm
+
+pub fn arith_pair_v1() -> @kernel.Thm
+
+pub fn arith_prime() -> @kernel.Thm
+
+pub fn arith_prime_v1() -> @kernel.Thm
+
+pub fn arith_primepow() -> @kernel.Thm
+
+pub fn arith_primepow_v1() -> @kernel.Thm
+
+pub fn arith_primrec() -> @kernel.Thm
+
+pub fn arith_primrec_v1() -> @kernel.Thm
+
+pub fn arith_primrecstep() -> @kernel.Thm
+
+pub fn arith_primrecstep_v1() -> @kernel.Thm
+
+pub fn arith_rtc() -> @kernel.Thm
+
+pub fn arith_rtc_parametrized() -> @kernel.Thm
+
+pub fn arith_rtc_v1() -> @kernel.Thm
+
+pub fn arith_rtcp() -> @kernel.Thm
+
+pub fn arith_rtcp_v1() -> @kernel.Thm
+
+pub fn divides_delta() -> @kernel.Thm
+
+pub fn fv_divides() -> @kernel.Thm
+
+pub fn fv_prime() -> @kernel.Thm
+
+pub fn fv_primepow() -> @kernel.Thm
+
+pub fn fv_primrec() -> @kernel.Thm
+
+pub fn fv_primrecstep() -> @kernel.Thm
+
+pub fn fv_rtc() -> @kernel.Thm
+
+pub fn fv_rtcp() -> @kernel.Thm
+
+pub fn fv_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn fvt_pair() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn npair() -> @kernel.Thm
+
+pub fn npair_inj() -> @kernel.Thm
+
+pub fn npair_inj_lemma() -> @kernel.Thm
+
+pub fn npair_lt() -> @kernel.Thm
+
+pub fn npair_nonzero() -> @kernel.Thm
+
+pub fn objectify(@list.List[@kernel.Thm]) -> ((String) -> ((@kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise) raise) raise
+
+pub fn objectify_rtc(@kernel.Thm) -> ((String) -> ((@kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise) raise) raise
+
+pub fn objectify_rtcp(@kernel.Thm) -> ((String) -> ((@kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise) raise) raise
+
+pub fn prime_delta() -> @kernel.Thm
+
+pub fn primepow() -> @kernel.Thm
+
+pub fn primepow_delta() -> @kernel.Thm
+
+pub fn primrec_sigma() -> @kernel.Thm
+
+pub fn pseq() -> @kernel.Thm
+
+pub fn pseq_1() -> @kernel.Thm
+
+pub fn pseq_bound() -> @kernel.Thm
+
+pub fn pseq_split() -> @kernel.Thm
+
+pub fn relpow_lemma() -> @kernel.Thm
+
+pub fn relpow_lemma_1() -> @kernel.Thm
+
+pub fn relpow_lemma_2() -> @kernel.Thm
+
+pub fn rtc_sigma() -> @kernel.Thm
+
+pub fn rtcp() -> @kernel.Thm
+
+pub fn rtcp_sigma() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

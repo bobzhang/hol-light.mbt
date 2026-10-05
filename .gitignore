@@ -1,6 +1,7 @@
-.repos/
+.repos
 _build/
 target/
 .mooncakes/
 .DS_Store
 .claude/scheduled_tasks.lock
+.port/

@@ -1,0 +1,90 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/gl/modal"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn bisimilar() -> @kernel.Thm
+
+pub fn bisimilar_holds() -> @kernel.Thm
+
+pub fn bisimilar_holds_in() -> @kernel.Thm
+
+pub fn bisimilar_in() -> @kernel.Thm
+
+pub fn bisimilar_valid() -> @kernel.Thm
+
+pub fn bisimimulation() -> @kernel.Thm
+
+pub fn bisimimulation_holds() -> @kernel.Thm
+
+pub fn countable_form() -> @kernel.Thm
+
+pub fn diam_def() -> @kernel.Thm
+
+pub fn dotbox_def() -> @kernel.Thm
+
+pub fn finite_subformula() -> @kernel.Thm
+
+pub fn finite_subset_subformulas_lemma() -> @kernel.Thm
+
+pub fn form_cases() -> @kernel.Thm
+
+pub fn form_distinct() -> @kernel.Thm
+
+pub fn form_induct() -> @kernel.Thm
+
+pub fn form_inj() -> @kernel.Thm
+
+pub fn form_recursion() -> @kernel.Thm
+
+pub fn holds() -> @kernel.Thm
+
+pub fn holds_forall_lemma() -> @kernel.Thm
+
+pub fn holds_in() -> @kernel.Thm
+
+pub fn in_minor_cases() -> @kernel.Thm
+
+pub fn in_minor_induct() -> @kernel.Thm
+
+pub fn in_minor_rules() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn minor_clauses() -> @kernel.Thm
+
+pub fn modal_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn modal_schema_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn modal_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn modal_trans() -> @kernel.Thm
+
+pub fn subformula() -> @kernel.Thm
+
+pub fn subformula_cases_l() -> @kernel.Thm
+
+pub fn subformula_inversion() -> @kernel.Thm
+
+pub fn subformula_list() -> @kernel.Thm
+
+pub fn subformula_refl() -> @kernel.Thm
+
+pub fn subformula_trans() -> @kernel.Thm
+
+pub fn transnt() -> @kernel.Thm
+
+pub fn valid() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

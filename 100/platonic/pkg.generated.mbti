@@ -1,0 +1,200 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/platonic"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn card_eq_lemma() -> @kernel.Thm
+
+pub fn compute_dist(@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise
+
+pub fn compute_edges_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn compute_edges_tac(@kernel.Thm, @kernel.Thm, @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn compute_faces_1() -> @kernel.Thm
+
+pub fn compute_faces_2() -> @kernel.Thm
+
+pub fn compute_faces_2_step_1() -> @kernel.Thm
+
+pub fn compute_faces_2_step_2() -> @kernel.Thm
+
+pub fn compute_faces_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn compute_vertices_tac(@kernel.Thm, @kernel.Thm, @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn congruent() -> @kernel.Thm
+
+pub fn congruent_edges_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn congruent_faces_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn congruent_segments() -> @kernel.Thm
+
+pub fn congruent_simple() -> @kernel.Thm
+
+pub fn coplanar_hyperplane_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn cube_congruent_edges() -> @kernel.Thm
+
+pub fn cube_congruent_facets() -> @kernel.Thm
+
+pub fn cube_edges() -> @kernel.Thm
+
+pub fn cube_edges_per_face() -> @kernel.Thm
+
+pub fn cube_edges_per_vertex() -> @kernel.Thm
+
+pub fn cube_facets() -> @kernel.Thm
+
+pub fn cube_vertices() -> @kernel.Thm
+
+pub fn dodecahedron_congruent_edges() -> @kernel.Thm
+
+pub fn dodecahedron_congruent_facets() -> @kernel.Thm
+
+pub fn dodecahedron_edges() -> @kernel.Thm
+
+pub fn dodecahedron_edges_per_face() -> @kernel.Thm
+
+pub fn dodecahedron_edges_per_vertex() -> @kernel.Thm
+
+pub fn dodecahedron_facets() -> @kernel.Thm
+
+pub fn dodecahedron_vertices() -> @kernel.Thm
+
+pub fn edges_per_face_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn edges_per_vertex_tac(@kernel.Thm, @kernel.Thm, @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn icosahedron_congruent_edges() -> @kernel.Thm
+
+pub fn icosahedron_congruent_facets() -> @kernel.Thm
+
+pub fn icosahedron_edges() -> @kernel.Thm
+
+pub fn icosahedron_edges_per_face() -> @kernel.Thm
+
+pub fn icosahedron_edges_per_vertex() -> @kernel.Thm
+
+pub fn icosahedron_facets() -> @kernel.Thm
+
+pub fn icosahedron_vertices() -> @kernel.Thm
+
+pub fn le_rat5(@kernel.Term) -> ((@kernel.Term) -> Bool raise) raise
+
+pub fn load() -> Unit
+
+pub fn matrix_by_cramer() -> @kernel.Thm
+
+pub fn matrix_by_cramer_lemma() -> @kernel.Thm
+
+pub fn matrix_lemma() -> @kernel.Thm
+
+pub fn matrix_vector_mul_3() -> @kernel.Thm
+
+pub fn mk_33matrix(@list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn multiple_counting_lemma() -> @kernel.Thm
+
+pub fn octahedron_congruent_edges() -> @kernel.Thm
+
+pub fn octahedron_congruent_facets() -> @kernel.Thm
+
+pub fn octahedron_edges() -> @kernel.Thm
+
+pub fn octahedron_edges_per_face() -> @kernel.Thm
+
+pub fn octahedron_edges_per_vertex() -> @kernel.Thm
+
+pub fn octahedron_facets() -> @kernel.Thm
+
+pub fn octahedron_vertices() -> @kernel.Thm
+
+pub fn platonic_solids() -> @kernel.Thm
+
+pub fn platonic_solids_limits() -> @kernel.Thm
+
+pub fn polytope_3d_lemma() -> @kernel.Thm
+
+pub fn polytope_fulldim_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn real_rat5_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat5_div_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat5_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat5_inv_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat5_le_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat5_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat5_of_rat_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat5_sub_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_rat_of_rat5_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn size_zero_dimensional_faces() -> @kernel.Thm
+
+pub fn std_cube() -> @kernel.Thm
+
+pub fn std_cube_fulldim() -> @kernel.Thm
+
+pub fn std_dodecahedron() -> @kernel.Thm
+
+pub fn std_dodecahedron_fulldim() -> @kernel.Thm
+
+pub fn std_dodecahedron_v1() -> @kernel.Thm
+
+pub fn std_icosahedron() -> @kernel.Thm
+
+pub fn std_icosahedron_fulldim() -> @kernel.Thm
+
+pub fn std_icosahedron_v1() -> @kernel.Thm
+
+pub fn std_octahedron() -> @kernel.Thm
+
+pub fn std_octahedron_fulldim() -> @kernel.Thm
+
+pub fn std_tetrahedron() -> @kernel.Thm
+
+pub fn std_tetrahedron_fulldim() -> @kernel.Thm
+
+pub fn tetrahedron_congruent_edges() -> @kernel.Thm
+
+pub fn tetrahedron_congruent_facets() -> @kernel.Thm
+
+pub fn tetrahedron_edges() -> @kernel.Thm
+
+pub fn tetrahedron_edges_per_face() -> @kernel.Thm
+
+pub fn tetrahedron_edges_per_vertex() -> @kernel.Thm
+
+pub fn tetrahedron_facets() -> @kernel.Thm
+
+pub fn tetrahedron_vertices() -> @kernel.Thm
+
+pub fn three_adjacent_points(@list.List[@kernel.Term]) -> (@kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn vector3_cross_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn vector3_dot_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn vector3_eq_0_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn vector3_sub_conv(@kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

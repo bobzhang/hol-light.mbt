@@ -1,0 +1,41 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/complex/quelim_examples"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn th() -> @kernel.Thm
+
+pub fn th_v1() -> @kernel.Thm
+
+pub fn th_v10() -> @kernel.Thm
+
+pub fn th_v11() -> @kernel.Thm
+
+pub fn th_v2() -> @kernel.Thm
+
+pub fn th_v3() -> @kernel.Thm
+
+pub fn th_v4() -> @kernel.Thm
+
+pub fn th_v5() -> @kernel.Thm
+
+pub fn th_v6() -> @kernel.Thm
+
+pub fn th_v7() -> @kernel.Thm
+
+pub fn th_v8() -> @kernel.Thm
+
+pub fn th_v9() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

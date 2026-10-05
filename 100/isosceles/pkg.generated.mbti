@@ -1,0 +1,35 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/isosceles"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn isosceles_triangle_1() -> @kernel.Thm
+
+pub fn isosceles_triangle_2() -> @kernel.Thm
+
+pub fn isosceles_triangle_3() -> @kernel.Thm
+
+pub fn isosceles_triangle_4() -> @kernel.Thm
+
+pub fn isosceles_triangle_5() -> @kernel.Thm
+
+pub fn isosceles_triangle_6() -> @kernel.Thm
+
+pub fn isosceles_triangle_converse() -> @kernel.Thm
+
+pub fn isosceles_triangle_theorem() -> @kernel.Thm
+
+pub fn lemma() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

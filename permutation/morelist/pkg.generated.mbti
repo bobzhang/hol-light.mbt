@@ -1,0 +1,90 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/permutation/morelist"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn all_delete1_all_imp() -> @kernel.Thm
+
+pub fn assert_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn card_length() -> @kernel.Thm
+
+pub fn count() -> @kernel.Thm
+
+pub fn count_append() -> @kernel.Thm
+
+pub fn count_delete1() -> @kernel.Thm
+
+pub fn count_filter() -> @kernel.Thm
+
+pub fn count_le_length() -> @kernel.Thm
+
+pub fn count_length_filter() -> @kernel.Thm
+
+pub fn count_zero() -> @kernel.Thm
+
+pub fn delete1() -> @kernel.Thm
+
+pub fn delete1_append() -> @kernel.Thm
+
+pub fn delete1_id() -> @kernel.Thm
+
+pub fn delete1_list_uniq() -> @kernel.Thm
+
+pub fn filter_delete1() -> @kernel.Thm
+
+pub fn length_delete1() -> @kernel.Thm
+
+pub fn length_filter_le() -> @kernel.Thm
+
+pub fn list_cases_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn list_uniq() -> @kernel.Thm
+
+pub fn list_uniq_append() -> @kernel.Thm
+
+pub fn list_uniq_card_length() -> @kernel.Thm
+
+pub fn list_uniq_cases() -> @kernel.Thm
+
+pub fn list_uniq_count() -> @kernel.Thm
+
+pub fn list_uniq_delete1() -> @kernel.Thm
+
+pub fn list_uniq_eq_pairwise_distinct() -> @kernel.Thm
+
+pub fn list_uniq_induct() -> @kernel.Thm
+
+pub fn list_uniq_list_of_set() -> @kernel.Thm
+
+pub fn list_uniq_rules() -> @kernel.Thm
+
+pub fn list_wf() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mem_count() -> @kernel.Thm
+
+pub fn mem_delete1() -> @kernel.Thm
+
+pub fn mem_delete1_mem_imp() -> @kernel.Thm
+
+pub fn not_mem_delete1() -> @kernel.Thm
+
+pub fn null_eq_nil() -> @kernel.Thm
+
+pub fn null_length() -> @kernel.Thm
+
+pub fn suffice_tac(@list.List[@kernel.Thm], @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

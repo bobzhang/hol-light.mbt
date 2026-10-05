@@ -1,0 +1,53 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/cosine"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn angle() -> @kernel.Thm
+
+pub fn angle_eq_pi() -> @kernel.Thm
+
+pub fn angle_range() -> @kernel.Thm
+
+pub fn angle_refl() -> @kernel.Thm
+
+pub fn angle_refl_mid() -> @kernel.Thm
+
+pub fn angle_sym() -> @kernel.Thm
+
+pub fn angle_v1() -> @kernel.Thm
+
+pub fn cos_minus1_lemma() -> @kernel.Thm
+
+pub fn law_of_cosines() -> @kernel.Thm
+
+pub fn law_of_sines() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn orthogonal_vangle() -> @kernel.Thm
+
+pub fn sin_angle_pos() -> @kernel.Thm
+
+pub fn triangle_angle_sum() -> @kernel.Thm
+
+pub fn triangle_angle_sum_lemma() -> @kernel.Thm
+
+pub fn vangle() -> @kernel.Thm
+
+pub fn vangle_eq_pi() -> @kernel.Thm
+
+pub fn vangle_range() -> @kernel.Thm
+
+pub fn vangle_v1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,99 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/four_squares"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn aubrey_lemma_4() -> @kernel.Thm
+
+pub fn aubrey_thm_4() -> @kernel.Thm
+
+pub fn in_triple() -> @kernel.Thm
+
+pub fn involution() -> @kernel.Thm
+
+pub fn involution_delete() -> @kernel.Thm
+
+pub fn involution_even() -> @kernel.Thm
+
+pub fn involution_fix_fix() -> @kernel.Thm
+
+pub fn involution_fix_odd() -> @kernel.Thm
+
+pub fn involution_image() -> @kernel.Thm
+
+pub fn involution_nofixes() -> @kernel.Thm
+
+pub fn involution_odd() -> @kernel.Thm
+
+pub fn involution_stepdown() -> @kernel.Thm
+
+pub fn involution_subset() -> @kernel.Thm
+
+pub fn lagrange_identity() -> @kernel.Thm
+
+pub fn lagrange_int() -> @kernel.Thm
+
+pub fn lagrange_lemma() -> @kernel.Thm
+
+pub fn lagrange_lemma_odd() -> @kernel.Thm
+
+pub fn lagrange_num() -> @kernel.Thm
+
+pub fn lagrange_real_num() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn pigeonhole_lemma() -> @kernel.Thm
+
+pub fn pigeonhole_lemma_p12() -> @kernel.Thm
+
+pub fn prime_4x() -> @kernel.Thm
+
+pub fn prime_square() -> @kernel.Thm
+
+pub fn prime_xyz_nonzero() -> @kernel.Thm
+
+pub fn real_integer_closures() -> @kernel.Thm
+
+pub fn real_num_round() -> @kernel.Thm
+
+pub fn real_pos_abs_middle() -> @kernel.Thm
+
+pub fn real_rat_abs_middle() -> @kernel.Thm
+
+pub fn reflect_inj() -> @kernel.Thm
+
+pub fn squaremod_inj() -> @kernel.Thm
+
+pub fn squaremod_inj_lemma() -> @kernel.Thm
+
+pub fn sum_of_two_squares() -> @kernel.Thm
+
+pub fn tag() -> @kernel.Thm
+
+pub fn tag_involution() -> @kernel.Thm
+
+pub fn zag() -> @kernel.Thm
+
+pub fn zag_involution() -> @kernel.Thm
+
+pub fn zag_involution_general() -> @kernel.Thm
+
+pub fn zag_lemma() -> @kernel.Thm
+
+pub fn zset() -> @kernel.Thm
+
+pub fn zset_bound() -> @kernel.Thm
+
+pub fn zset_finite() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
