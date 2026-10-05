@@ -1,0 +1,71 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/boyer_moore/support"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn conj_list(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn conj_list_v1(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn contrapos(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn disj_list(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn disj_list_v1(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] distinct(@list.List[TA]) -> Bool raise
+
+pub fn find_bm_terms((@kernel.Term) -> Bool raise, @kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn[TA, TB, TC] fst3(TA, TB, TC) -> TA raise
+
+pub fn[TA, TB, TC, TD] hash((TC) -> TA raise, (TD) -> TB raise, (TC, TD)) -> (TA, TB) raise
+
+pub fn[TA, TB, TC] hashi((TC) -> TA raise, (TC, TB)) -> (TA, TB) raise
+
+pub fn induct_tac_(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] insert_on_snd((TA, TB), @list.List[(TA, TB)]) -> @list.List[(TA, TB)] raise
+
+pub fn is_f(@kernel.Term) -> Bool raise
+
+pub fn is_t(@kernel.Term) -> Bool raise
+
+pub fn[TA, TB] lcombinep(@list.List[TA], @list.List[TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] lcount(TA, @list.List[TA]) -> Int64 raise
+
+pub fn list_mk_imp(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Term raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn not_eq_sym(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn[TA] number_list(@list.List[TA]) -> @list.List[(TA, Int64)] raise
+
+pub fn[TA] remove_el(Int64, @list.List[TA]) -> (TA, @list.List[TA]) raise
+
+pub fn[TA, TB, TC] snd3(TB, TA, TC) -> TA raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] sort_on_snd(@list.List[(TA, TB)]) -> @list.List[(TA, TB)] raise
+
+pub fn subst(@list.List[(@kernel.Thm, @kernel.Term)], @kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn subst_conv(@list.List[(@kernel.Thm, @kernel.Term)], @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn[TA, TB, TC] thd3(TB, TC, TA) -> TA raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

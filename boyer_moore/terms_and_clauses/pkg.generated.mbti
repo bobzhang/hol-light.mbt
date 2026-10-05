@@ -1,0 +1,86 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/boyer_moore/terms_and_clauses"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn bool_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn cond_f() -> @kernel.Thm
+
+pub fn cond_left() -> @kernel.Thm
+
+pub fn cond_or() -> @kernel.Thm
+
+pub fn cond_right() -> @kernel.Thm
+
+pub fn cond_right_f() -> @kernel.Thm
+
+pub fn cond_t() -> @kernel.Thm
+
+pub fn cond_t_f() -> @kernel.Thm
+
+pub fn eq_eq() -> @kernel.Thm
+
+pub fn eq_f() -> @kernel.Thm
+
+pub fn eq_t() -> @kernel.Thm
+
+pub fn expand_cond_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn expand_one_cond_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn hl_simplify_clause(@list.List[@kernel.Thm], @kernel.Term) -> (@list.List[@kernel.Term], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn hl_simplify_heuristic(@list.List[@kernel.Thm], (@kernel.Term, Bool)) -> (@list.List[(@kernel.Term, Bool)], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn move_cond_up_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn move_not_thru_conds_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn not_eq_f() -> @kernel.Thm
+
+pub fn or_over_ands_conv((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn prove_terms_not_eq(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn[TA] rewrite_application((TA) -> ((@list.List[String]) -> ((@list.List[@kernel.Term]) -> ((@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise) raise) raise, TA, @list.List[String], @list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise
+
+pub fn rewrite_conditional((@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise, @list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise
+
+pub fn rewrite_equality((@list.List[@kernel.Term]) -> ((@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise, @list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise
+
+pub fn rewrite_explicit_value(@kernel.Term) -> @kernel.Thm raise
+
+pub fn[TA] rewrite_term(TA, @list.List[String], @list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise
+
+pub fn rewrite_with_lemmas((@list.List[@kernel.Term]) -> ((@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise, @list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise
+
+pub fn simplify_clause(Int64, @kernel.Term) -> (@list.List[@kernel.Term], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn simplify_clauses(Int64, @kernel.Term) -> (@list.List[@kernel.Term], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn simplify_heuristic(@kernel.Term, Bool) -> (@list.List[(@kernel.Term, Bool)], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn simplify_one_literal(Int64, @kernel.Term) -> (@kernel.Thm, Int64) raise
+
+pub fn split_clause_on_cond_conv(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn subst_conv(@list.List[(@kernel.Thm, @kernel.Term)], @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn subst_heuristic(@kernel.Term, Bool) -> (@list.List[(@kernel.Term, Bool)], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,65 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/boyer_moore/shells"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn all_accessor_thms(Unit) -> @list.List[@kernel.Thm] raise
+
+pub fn all_accessors(Unit) -> @list.List[String] raise
+
+pub fn all_constructors(Unit) -> @list.List[String] raise
+
+pub fn list_shell() -> Shell
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn num_shell() -> Shell
+
+pub fn shell_accessor_thms(ShellInfo) -> @list.List[@kernel.Thm] raise
+
+pub fn shell_arg_types(ShellInfo) -> @list.List[@kernel.HolType] raise
+
+pub fn shell_constructor(String, ShellInfo) -> (@list.List[@kernel.HolType], @list.List[(String, @kernel.Thm)]) raise
+
+pub fn shell_constructor_accessors(String, ShellInfo) -> @list.List[(String, @kernel.Thm)] raise
+
+pub fn shell_constructor_arg_types(String, ShellInfo) -> @list.List[@kernel.HolType] raise
+
+pub fn shell_constructors(ShellInfo) -> @list.List[(String, @list.List[@kernel.HolType], @list.List[(String, @kernel.Thm)])] raise
+
+pub fn shell_info(@list.List[Shell], String) -> ShellInfo raise
+
+pub fn shells(Unit) -> @list.List[String] raise
+
+pub fn sys_shell_info(String) -> ShellInfo raise
+
+pub fn system_shells() -> @ref.Ref[@list.List[Shell]]
+
+// Errors
+
+// Types and methods
+pub(all) enum Shell {
+  Shell(String, ShellInfo)
+}
+
+pub(all) struct ShellInfo {
+  arg_types : @list.List[@kernel.HolType]
+  constructors : @list.List[(String, @list.List[@kernel.HolType], @list.List[(String, @kernel.Thm)])]
+  induct : @kernel.Thm
+  cases : @kernel.Thm
+  distinct : @list.List[@kernel.Thm]
+  one_one : @list.List[@kernel.Thm]
+  struct_conv : ((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+}
+
+// Type aliases
+pub type ConstructorInfo = (String, @list.List[@kernel.HolType], @list.List[(String, @kernel.Thm)])
+
+// Traits

@@ -1,0 +1,62 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/boyer_moore/rewrite_rules"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn applicable_rewrites(@kernel.Term) -> @list.List[@kernel.Thm] raise
+
+pub fn args_conv((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn assump_inst_hyps(@list.List[@kernel.Term], @kernel.Term, @list.List[@kernel.Term]) -> (@list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise
+
+pub fn assumps_inst_hyps(@list.List[@kernel.Term], @list.List[@kernel.Term], @list.List[@kernel.Term]) -> (@list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise
+
+pub fn f_or() -> @kernel.Thm
+
+pub fn imp_eq_eq_eq_not_or() -> @kernel.Thm
+
+pub fn imp_eq_eq_eq_or_not() -> @kernel.Thm
+
+pub fn imp_eq_or_eq_eq_or_not_or() -> @kernel.Thm
+
+pub fn imp_not_eq_eq_eq_or() -> @kernel.Thm
+
+pub fn inst_eq_thm((@list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @kernel.Thm) -> @kernel.Thm raise
+
+pub fn inst_frees_in_hyps(@list.List[@kernel.Term], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn is_permutative(@kernel.Term) -> Bool raise
+
+pub fn lex_smaller_term(@kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn multi_disj_disch((@list.List[@kernel.Term], @list.List[@kernel.Term]), @kernel.Thm) -> @kernel.Thm raise
+
+pub fn not_imp_eq_eq_eq_or() -> @kernel.Thm
+
+pub fn not_imp_eq_or_eq_eq_or_or() -> @kernel.Thm
+
+pub fn or_f() -> @kernel.Thm
+
+pub fn or_t() -> @kernel.Thm
+
+pub fn over_disj_disch(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn t_or() -> @kernel.Thm
+
+pub fn under_disj_disch(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

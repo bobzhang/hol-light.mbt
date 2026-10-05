@@ -1,0 +1,98 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/boyer_moore/generalize"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn all_equations(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn all_variables(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn applicable_gen_lemmas(@list.List[@kernel.Term]) -> @list.List[@kernel.Thm] raise
+
+pub fn apply_gen_lemma(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn checkgen() -> @ref.Ref[Bool]
+
+pub fn checksuitableeq() -> @ref.Ref[Bool]
+
+pub fn contains_any(@kernel.Term, @list.List[String]) -> Bool raise
+
+pub fn distinct_var(@list.List[@kernel.Term], @kernel.HolType) -> @kernel.Term raise
+
+pub fn distinct_vars(@list.List[@kernel.Term], @list.List[@kernel.HolType]) -> @list.List[@kernel.Term] raise
+
+pub fn eliminateselectors(@kernel.Term) -> @kernel.Term raise
+
+pub fn generalizable_subterms(@list.List[String], @kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn generalize_apart(@kernel.Term) -> (@kernel.Term, @list.List[(@kernel.Term, @kernel.Term)]) raise
+
+pub fn generalize_heuristic(@kernel.Term, Bool) -> (@list.List[(@kernel.Term, Bool)], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn generalize_heuristic_aderhold(@kernel.Term, Bool) -> (@list.List[(@kernel.Term, Bool)], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn generalize_heuristic_ext(@kernel.Term, Bool) -> (@list.List[(@kernel.Term, Bool)], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn generalizecommonsubterms(@kernel.Term) -> (@kernel.Term, @list.List[(@kernel.Term, @kernel.Term)]) raise
+
+pub fn generalized_apart_successfully(@kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn generateproposals(@kernel.Term, @kernel.Term) -> @list.List[@list.List[@kernel.Term]] raise
+
+pub fn get_proposal_term_occs(@list.List[@kernel.Term], @kernel.Term) -> Int64 raise
+
+pub fn get_rec_pos_of_fun(@kernel.Term) -> Int64 raise
+
+pub fn infer_constructor(@kernel.Term, @kernel.Term) -> String raise
+
+pub fn is_constructor_eq(String, @kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn is_constructor_neq(String, @kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn is_eq_suitable(@kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn is_generalizable(@list.List[String], @kernel.Term) -> Bool raise
+
+pub fn is_generalizable_subterm(@list.List[String], @kernel.Term) -> Bool raise
+
+pub fn is_in_rec_pos(@kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn is_rec_type(@kernel.Term) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] is_suitable_proposal(@list.List[TA], TB, @list.List[TA]) -> Bool raise
+
+pub fn is_var_in_rec_pos(@kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn minimal_common_subterms(@list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise
+
+pub fn newisgen() -> @ref.Ref[Bool]
+
+pub fn organizeproposals(@list.List[@list.List[@kernel.Term]], @kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn proposal_induction_test(@list.List[@kernel.Term], @kernel.Term) -> Bool raise
+
+pub fn separate(@kernel.Term, @kernel.Term, @kernel.Term, Bool, @kernel.Term) -> @kernel.Term raise
+
+pub fn terms_to_be_generalized(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn to_be_generalized(@kernel.Term, @list.List[@kernel.Term], @kernel.Term) -> Bool raise
+
+pub fn useful_apart_generalization(@kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term) -> Bool raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
