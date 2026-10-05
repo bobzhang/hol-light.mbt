@@ -1,0 +1,30 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/lucas_lehmer"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn ll_verbose() -> @ref.Ref[Bool]
+
+pub fn llseq() -> @kernel.Thm
+
+pub fn llseq_closedform() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn lucas_lehmer() -> @kernel.Thm
+
+pub fn lucas_lehmer_rule(Int64) -> @kernel.Thm raise
+
+pub fn real_pow_iter() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
