@@ -220,6 +220,19 @@ pub fn[C] gconv_pairs(l : @list.List[GconvOf[C]]) -> @list.List[(Int64, C)] {
 }
 
 ///|
+/// `enter lconsts (tm, (priority, conv)) net` on a rewrite net, for
+/// translated code that enters the pair itself (Jordan/tactics_ext2.ml):
+/// the nets hold `GconvOf` structs.
+pub fn[C] enter_gconv(
+  lconsts : @list.List[Term],
+  tm : Term,
+  elem : (Int64, C),
+  net : Net[GconvOf[C]],
+) -> Net[GconvOf[C]] {
+  @nets.enter(lconsts, tm, { priority: elem.0.to_int(), conv: elem.1 }, net)
+}
+
+///|
 /// `net_of_cong th net`: add the congruence rule `th`.
 pub fn net_of_cong(th : Thm, sofar : Net[Gconv]) -> Net[Gconv] raise {
   let (conc, n) = @lib.repeat(

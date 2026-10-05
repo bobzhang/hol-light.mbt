@@ -1485,6 +1485,16 @@ module Lower = struct
      _fn variants (MoonBit closures cannot implement NetCompare) *)
   and closure_net_variant p fty h =
     match Prov.lookup p, h.hexp with
+    | Some ("nets.ml", "enter"), Atom _
+      when (let rec result t = match arrow t with Some (_, b) -> result b | None -> t in
+            match Types.get_desc (expand (result fty)) with
+            | Types.Tconstr (_, [ a ], _) -> is_gconv_tuple a
+            | _ -> false) ->
+        (* a `(priority, conv)` pair entered into a rewrite net
+           (Jordan/tactics_ext2.ml): simp makes the GconvOf *)
+        (match M.find ~root:!Names.root "simp" "enter_gconv" with
+         | Some decl -> { h with hexp = Atom "@simp.enter_gconv"; hmty = mty_of_decl decl }
+         | None -> h)
     | Some ("nets.ml", ("enter" | "merge_nets")), Atom q ->
         let rec result t = match arrow t with Some (_, b) -> result b | None -> t in
         let elem_is_fn =

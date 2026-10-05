@@ -38,6 +38,8 @@ pub fn depth_sqconv(Simpset, Int, @kernel.Term) -> @kernel.Thm raise
 
 pub let empty_ss : Simpset
 
+pub fn[C] enter_gconv(@list.List[@kernel.Term], @kernel.Term, (Int64, C), @nets.Net[GconvOf[C]]) -> @nets.Net[GconvOf[C]]
+
 pub fn expand_tac(String) -> ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
 
 pub fn extend_basic_congs(@list.List[@kernel.Thm]) -> Unit
