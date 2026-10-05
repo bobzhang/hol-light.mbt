@@ -1,0 +1,214 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/minisat/sat_common_tools"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/omap",
+  "bobzhang/hol_light/oset",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] add(TA, TB, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] add_v1(TA, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn binder_conv((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn[TA, TB] bindings(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA, TB] cardinal(@omap.T[TA, TB]) -> Int64 raise
+
+pub fn[TA] cardinal_v1(@oset.T[TA]) -> Int64 raise
+
+pub fn[TA, TB] choose(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] choose_opt(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] choose_opt_v1(@oset.T[TA]) -> TA? raise
+
+pub fn[TA] choose_v1(@oset.T[TA]) -> TA raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] compare(TA) -> ((TA) -> Int64 raise) raise
+
+pub fn[TA, TB, TC : Eq + @lib.OCompare + @lib.OHash] compare_v1((TB) -> ((TA) -> Int64 raise) raise, @omap.T[TC, TB], @omap.T[TC, TA]) -> Int64 raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] compare_v2(TA) -> ((TA) -> Int64 raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] compare_v3(@oset.T[TA], @oset.T[TA]) -> Int64 raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] diff(@oset.T[TA], @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] disjoint(@oset.T[TA], @oset.T[TA]) -> Bool raise
+
+pub fn[TA] elements(@oset.T[TA]) -> @list.List[TA] raise
+
+pub fn[TA, TB] empty() -> @omap.T[TA, TB]
+
+pub fn[TA] empty_v1() -> @oset.T[TA]
+
+pub fn[TA, TB, TC : Eq + @lib.OCompare + @lib.OHash] equal((TB) -> ((TA) -> Bool raise) raise, @omap.T[TC, TB], @omap.T[TC, TA]) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] equal_v1(@oset.T[TA], @oset.T[TA]) -> Bool raise
+
+pub fn erc(@kernel.Term, @kernel.Term) -> @list.List[(@kernel.Term, @kernel.Term)] raise
+
+pub fn erewr_conv(@kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn[TA, TB] exists((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA] exists_v1((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn f_tm() -> @kernel.Term
+
+pub fn[TA, TB] filter((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB, TC] filter_map((TA) -> ((TC) -> TB? raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] filter_map_v1((TA) -> TA? raise, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA] filter_v1((TA) -> Bool raise, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] find(TB, @omap.T[TB, TA]) -> TA raise
+
+pub fn[TA, TB] find_first((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] find_first_opt((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_first_opt_v1((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA] find_first_v1((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB] find_last((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] find_last_opt((TA) -> Bool raise, @omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] find_last_opt_v1((TA) -> Bool raise, @oset.T[TA]) -> TA? raise
+
+pub fn[TA] find_last_v1((TA) -> Bool raise, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] find_opt(TB, @omap.T[TB, TA]) -> TA? raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] find_opt_v1(TA, @oset.T[TA]) -> TA? raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] find_v1(TA, @oset.T[TA]) -> TA raise
+
+pub fn[TA, TB, TC] fold((TC) -> ((TB) -> ((TA) -> TA raise) raise) raise, @omap.T[TC, TB], TA) -> TA raise
+
+pub fn[TA, TB] fold_v1((TB) -> ((TA) -> TA raise) raise, @oset.T[TB], TA) -> TA raise
+
+pub fn[TA, TB] for_all((TB) -> ((TA) -> Bool raise) raise, @omap.T[TB, TA]) -> Bool raise
+
+pub fn[TA] for_all_v1((TA) -> Bool raise, @oset.T[TA]) -> Bool raise
+
+pub fn forall_imp_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn input_all(@lib.InChannel) -> String raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] inter(@oset.T[TA], @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA, TB] is_empty(@omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA] is_empty_v1(@oset.T[TA]) -> Bool raise
+
+pub fn is_f(@kernel.Term) -> Bool raise
+
+pub fn is_t(@kernel.Term) -> Bool raise
+
+pub fn[TA, TB, TC] iter((TC) -> ((TB) -> TA raise) raise, @omap.T[TC, TB]) -> Unit raise
+
+pub fn[TA, TB] iter_v1((TB) -> TA raise, @oset.T[TB]) -> Unit raise
+
+pub fn last_forall_conv((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn left_imp_exists_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn lrand(@kernel.Term) -> @kernel.Term raise
+
+pub fn[TA, TB, TC] map((TC) -> TB raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] map_v1((TA) -> TA raise, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA, TB, TC] mapi((TA) -> ((TC) -> TB raise) raise, @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] max_binding(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] max_binding_opt(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] max_elt(@oset.T[TA]) -> TA raise
+
+pub fn[TA] max_elt_opt(@oset.T[TA]) -> TA? raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] mem(TA, @omap.T[TA, TB]) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] mem_v1(TA, @oset.T[TA]) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB, TC, TD] merge((TA) -> ((TD?) -> ((TC?) -> TB? raise) raise) raise, @omap.T[TA, TD], @omap.T[TA, TC]) -> @omap.T[TA, TB] raise
+
+pub fn[TA, TB] min_binding(@omap.T[TA, TB]) -> (TA, TB) raise
+
+pub fn[TA, TB] min_binding_opt(@omap.T[TA, TB]) -> (TA, TB)? raise
+
+pub fn[TA] min_elt(@oset.T[TA]) -> TA raise
+
+pub fn[TA] min_elt_opt(@oset.T[TA]) -> TA? raise
+
+pub fn[TA, TB] pair_map((TB) -> TA raise, (TB, TB)) -> (TA, TA) raise
+
+pub fn[TA, TB] partition((TA) -> ((TB) -> Bool raise) raise, @omap.T[TA, TB]) -> (@omap.T[TA, TB], @omap.T[TA, TB]) raise
+
+pub fn[TA] partition_v1((TA) -> Bool raise, @oset.T[TA]) -> (@oset.T[TA], @oset.T[TA]) raise
+
+pub fn print_term(@kernel.Term) -> Unit raise
+
+pub fn print_type(@kernel.HolType) -> Unit raise
+
+pub fn quant_conv((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] remove(TA, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] remove_v1(TA, @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA, TB] singleton(TA, TB) -> @omap.T[TA, TB] raise
+
+pub fn[TA] singleton_v1(TA) -> @oset.T[TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] split(TA, @omap.T[TA, TB]) -> (@omap.T[TA, TB], TB?, @omap.T[TA, TB]) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] split_v1(TA, @oset.T[TA]) -> (@oset.T[TA], Bool, @oset.T[TA]) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] subset(@oset.T[TA], @oset.T[TA]) -> Bool raise
+
+pub fn t_tm() -> @kernel.Term
+
+pub fn[TA, TB] tm_listitems(@omap.T[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] union((TA) -> ((TB) -> ((TB) -> TB? raise) raise) raise, @omap.T[TA, TB], @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] union_v1(@oset.T[TA], @oset.T[TA]) -> @oset.T[TA] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] update(TA, (TB?) -> TB? raise, @omap.T[TA, TB]) -> @omap.T[TA, TB] raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+pub type Elt = (Bool, Int64)
+
+pub using @kernel {type Term as Key}
+
+pub using @kernel {type Term as T}
+
+pub type T1[TA] = @omap.T[@kernel.Term, TA]
+
+pub type T2 = (Bool, Int64)
+
+pub type T3 = @oset.T[(Bool, Int64)]
+
+// Traits

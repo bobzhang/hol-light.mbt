@@ -1,0 +1,33 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/minisat/sat_solvers"
+
+// Values
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn minisat() -> SatSolver
+
+pub fn minisatp() -> SatSolver
+
+pub fn zchaff() -> SatSolver
+
+// Errors
+
+// Types and methods
+pub(all) struct SatSolver {
+  name : String
+  url : String
+  executable : String
+  good_exit : Int64
+  notime_run : (String) -> (((String, String)) -> String raise) raise
+  time_run : (String) -> ((((String, String), Int64)) -> String raise) raise
+  only_true : Bool
+  failure_string : String
+  start_string : String
+  end_string : String
+}
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,52 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/minisat/minisat_prove"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/minisat/sat_solvers",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn cleanup(String, String) -> Unit raise
+
+pub fn definitionalize(@kernel.Thm) -> (((Int64, @list.List[(@kernel.Term, @kernel.Thm)], @lib.Func[@kernel.Term, @kernel.Term], @lib.Func[@kernel.Term, @kernel.Term])) -> (Int64, @list.List[(@kernel.Term, @kernel.Thm)], @lib.Func[@kernel.Term, @kernel.Term], @lib.Func[@kernel.Term, @kernel.Term]) raise) raise
+
+pub fn exploit_conjunctive_structure() -> @ref.Ref[Bool]
+
+pub fn gconjuncts(@kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn gen_sat_prove(@sat_solvers.SatSolver, String) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn is_clausal(@kernel.Term) -> Bool raise
+
+pub fn is_literal(@kernel.Term) -> Bool raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn localdefs(@kernel.Term, (Int64, @lib.Func[@kernel.Term, @kernel.Term], @lib.Func[@kernel.Term, @kernel.Term])) -> (Int64, @kernel.Term, @lib.Func[@kernel.Term, @kernel.Term], @lib.Func[@kernel.Term, @kernel.Term]) raise
+
+pub fn propvar(Int64) -> @kernel.Term raise
+
+pub fn sat_debugging() -> @ref.Ref[Bool]
+
+pub fn sat_prove(@kernel.Term) -> @kernel.Thm raise
+
+pub fn transvar(Int64, @kernel.Term, @lib.Func[@kernel.Term, @kernel.Term], @lib.Func[@kernel.Term, @kernel.Term]) -> (Int64, @kernel.Term, @lib.Func[@kernel.Term, @kernel.Term], @lib.Func[@kernel.Term, @kernel.Term]) raise
+
+pub fn zsat_prove(@kernel.Term) -> @kernel.Thm raise
+
+// Errors
+pub(all) suberror Sat_counterexample {
+  Sat_counterexample(@kernel.Thm)
+}
+
+// Types and methods
+
+// Type aliases
+
+// Traits

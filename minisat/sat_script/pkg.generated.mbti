@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/minisat/sat_script"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn and_imp() -> @kernel.Thm
+
+pub fn and_imp2() -> @kernel.Thm
+
+pub fn and_imp3() -> @kernel.Thm
+
+pub fn and_inv() -> @kernel.Thm
+
+pub fn and_inv2() -> @kernel.Thm
+
+pub fn and_inv_imp() -> @kernel.Thm
+
+pub fn imp_f_eq_f() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn not_elim2() -> @kernel.Thm
+
+pub fn not_not() -> @kernel.Thm
+
+pub fn or_dual() -> @kernel.Thm
+
+pub fn or_dual2() -> @kernel.Thm
+
+pub fn or_dual3() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

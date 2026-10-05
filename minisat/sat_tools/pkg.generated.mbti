@@ -1,0 +1,51 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/minisat/sat_tools"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/minisat/sat_solvers",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn eqf_imp1() -> @kernel.Thm
+
+pub fn eqt_imp1() -> @kernel.Thm
+
+pub fn eqt_imp2() -> @kernel.Thm
+
+pub fn invokesat(@sat_solvers.SatSolver, String?, @kernel.Term, Int64?) -> @list.List[@kernel.Term]? raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn parsesat((String, String), String) -> @list.List[Int64] raise
+
+pub fn sat_command() -> @ref.Ref[String]
+
+pub fn satcheck(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise
+
+pub fn satdir() -> String
+
+pub fn satoracle(@sat_solvers.SatSolver, @kernel.Term) -> @kernel.Thm raise
+
+pub fn satprove(@sat_solvers.SatSolver, @kernel.Term) -> @kernel.Thm raise
+
+pub fn substringcontains(String, String) -> Bool raise
+
+// Errors
+pub(all) suberror Sat_check_error {
+  Sat_check_error
+}
+
+pub(all) suberror Sat_prove_error {
+  Sat_prove_error
+}
+
+// Types and methods
+
+// Type aliases
+
+// Traits
