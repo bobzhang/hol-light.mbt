@@ -1,0 +1,194 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/piseries"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn cot() -> @kernel.Thm
+
+pub fn cot_alt_powser() -> @kernel.Thm
+
+pub fn cot_half_knopp() -> @kernel.Thm
+
+pub fn cot_half_multiple() -> @kernel.Thm
+
+pub fn cot_half_neg() -> @kernel.Thm
+
+pub fn cot_half_pos() -> @kernel.Thm
+
+pub fn cot_half_tan() -> @kernel.Thm
+
+pub fn cot_limit_lemma() -> @kernel.Thm
+
+pub fn cot_limit_lemma1() -> @kernel.Thm
+
+pub fn cot_partial_fractions() -> @kernel.Thm
+
+pub fn cot_partial_fractions_from1() -> @kernel.Thm
+
+pub fn cot_partial_fractions_subterm() -> @kernel.Thm
+
+pub fn cot_powser_squared_form() -> @kernel.Thm
+
+pub fn cot_powser_squaredagain() -> @kernel.Thm
+
+pub fn cot_tan() -> @kernel.Thm
+
+pub fn cot_type_series_converges() -> @kernel.Thm
+
+pub fn cot_x_bound_lemma() -> @kernel.Thm
+
+pub fn cot_x_bound_lemma_pos() -> @kernel.Thm
+
+pub fn cot_x_limit() -> @kernel.Thm
+
+pub fn cot_x_powser() -> @kernel.Thm
+
+pub fn diff_chain_tan() -> @kernel.Thm
+
+pub fn diff_chain_tan_tanpolys() -> @kernel.Thm
+
+pub fn euler_harmonic_sum() -> @kernel.Thm
+
+pub fn even_poly_diff() -> @kernel.Thm
+
+pub fn harmonic_sums() -> @kernel.Thm
+
+pub fn harmonicsums_tannumber() -> @kernel.Thm
+
+pub fn iter_diffs_lemma() -> @kernel.Thm
+
+pub fn knopp_term_bound() -> @kernel.Thm
+
+pub fn knopp_term_bound_lemma() -> @kernel.Thm
+
+pub fn knopp_term_equivalent() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mclaurin_sin() -> @kernel.Thm
+
+pub fn mk_harmonic(Int64) -> @kernel.Thm raise
+
+pub fn not_integer_div_pow2() -> @kernel.Thm
+
+pub fn not_integer_lemma() -> @kernel.Thm
+
+pub fn odd_poly_diff() -> @kernel.Thm
+
+pub fn pi_approx_25_bits() -> @kernel.Thm
+
+pub fn polymerize_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_integer_closures() -> @kernel.Thm
+
+pub fn real_le_1_pow2() -> @kernel.Thm
+
+pub fn real_lt_1_pow2() -> @kernel.Thm
+
+pub fn real_pow2_clauses() -> @kernel.Thm
+
+pub fn seq_ge_const() -> @kernel.Thm
+
+pub fn seq_le_const() -> @kernel.Thm
+
+pub fn ser_insertzeros() -> @kernel.Thm
+
+pub fn ser_swapdouble_pos() -> @kernel.Thm
+
+pub fn sin_abs_lemma() -> @kernel.Thm
+
+pub fn sin_eq_lemma() -> @kernel.Thm
+
+pub fn sin_linear_above() -> @kernel.Thm
+
+pub fn sin_linear_below() -> @kernel.Thm
+
+pub fn sin_sumdiff_lemma() -> @kernel.Thm
+
+pub fn sin_x_limit() -> @kernel.Thm
+
+pub fn sin_x_range() -> @kernel.Thm
+
+pub fn sin_x_x_range() -> @kernel.Thm
+
+pub fn sin_zero_lemma() -> @kernel.Thm
+
+pub fn sum_permute_0() -> @kernel.Thm
+
+pub fn sum_reverse() -> @kernel.Thm
+
+pub fn sum_reverse_0() -> @kernel.Thm
+
+pub fn sum_swap() -> @kernel.Thm
+
+pub fn sum_swap_0() -> @kernel.Thm
+
+pub fn summable_inverse_powers() -> @kernel.Thm
+
+pub fn summable_inverse_squares() -> @kernel.Thm
+
+pub fn summable_inverse_squares_lemma() -> @kernel.Thm
+
+pub fn tan_cot_double() -> @kernel.Thm
+
+pub fn tan_deriv_powser() -> @kernel.Thm
+
+pub fn tan_powser() -> @kernel.Thm
+
+pub fn tan_powser_weak() -> @kernel.Thm
+
+pub fn tannumber() -> @kernel.Thm
+
+pub fn tannumber_bound() -> @kernel.Thm
+
+pub fn tannumber_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn tannumber_even() -> @kernel.Thm
+
+pub fn tannumber_harmonicsums() -> @kernel.Thm
+
+pub fn tannumbers_rule(Int64) -> @list.List[@kernel.Thm] raise
+
+pub fn tanpoly() -> @kernel.Thm
+
+pub fn tanpoly_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn tanpoly_odd_even() -> @kernel.Thm
+
+pub fn tanpolys_rule(Int64) -> @list.List[@kernel.Thm] raise
+
+pub fn taylor_cot_bound() -> @kernel.Thm
+
+pub fn taylor_cot_bound_general() -> @kernel.Thm
+
+pub fn taylor_cotx_bound() -> @kernel.Thm
+
+pub fn taylor_cotxx_bound() -> @kernel.Thm
+
+pub fn taylor_cotxx_sqrt_bound() -> @kernel.Thm
+
+pub fn taylor_tan_bound() -> @kernel.Thm
+
+pub fn taylor_tan_bound_general() -> @kernel.Thm
+
+pub fn taylor_tan_converges() -> @kernel.Thm
+
+pub fn taylor_tanx_bound() -> @kernel.Thm
+
+pub fn taylor_tanx_sqrt_bound() -> @kernel.Thm
+
+pub fn taylor_x_cot_converges() -> @kernel.Thm
+
+pub fn termdiff_alt() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
