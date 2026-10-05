@@ -14,14 +14,15 @@ constructs theorems only through its API.
   `define`) are translated.
 - **Library/**: every file but `tactician_light.ml` (`library/<name>`).
 - **Multivariate/**: all 32 theory files (`multivariate/<name>`).
-- **100/**: 60 of 67 files (`100/<name>`); the rest wait for other
-  directories.
+- **100/**: 64 of 67 files (`100/<name>`): `thales` and `ceva` need csdp,
+  `e_is_transcendental` does not load upstream.
 - **Complex/, Arithmetic/, Permutation/, Ntrie/, Model/, GL/, Divstep/, Rqe/,
   Unity/, Logic/, Jordan/** (with the Jordan curve theorem),
-  **Functionspaces/, Quaternions/**: their theory files (`complex/<name>`,
+  **Functionspaces/, Quaternions/, Geometric_Algebra/, Probability/, IEEE/,
+  IsabelleLight/, Boyer_Moore/**: their theory files (`complex/<name>`,
   ...).
-- **EC/**: 26 of 30 files so far. **Examples/**: 43 of 50.
-  **Probability/**: 3 of 10. **Autoformalization/**: 4 of 7.
+- **Examples/**: 45 of 50. **Tutorial/**: 18 of 24. **EC/**: 26 of 30.
+  **Autoformalization/**: 5 of 7.
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the
 registry caps a module at 100 MB); Multivariate/, 100/ and the translation

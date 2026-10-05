@@ -64,14 +64,11 @@ and file I/O before starting it.
    work per directory: Complex needed five additions (over-applied
    primitives, unqualified Format functions, `Num.string_of_num`, weak type
    variables in lifted local functions, rewrite nets with other payloads).
-5. **Examples/** (30K; 43 of 50 done: lucas_lehmer and apery are being
-   checked) and Logic/ (done). sos.ml
-   needs csdp and three files need Minisat/Cadical/miz3/Rqe: those wait
-   for step 8. Then 100/dirichlet, pnt (mangoldt.ml), piseries (machin.ml).
-6. **Directories on top of Multivariate/** (220K): Quaternions,
-   Functionspaces, Unity and Jordan (with jordan_curve_theorem.ml) are
-   done; Probability (97K) has 3 of 10 files in and all 10 translated
-   (then 100/buffon); Geometric_Algebra is next; Mizarlight,
+5. **Examples/** (30K; 45 of 50 done) and Logic/ (done). The other five
+   Examples/ files and 100/thales, ceva wait for step 8 (csdp, Minisat,
+   Cadical, miz3, Rqe's examples).
+6. **Directories on top of Multivariate/**: Quaternions, Geometric_Algebra,
+   Functionspaces, Unity, Jordan and Probability are done. Mizarlight,
    RichterHilbertAxiomGeometry (36K; needs miz3) and WZ (maxima) wait for
    step 8.
    A background job is stopped after two hours: split a long batch with
@@ -79,17 +76,24 @@ and file I/O before starting it.
    second clone meanwhile); a single file that takes longer
    (Autoformalization/fifteen_theorem.ml, EC/edwards25519.ml) has to run
    in a terminal.
-7. **Autoformalization/** (205K): fourier_transform, sarkovskii,
-   three_squares and carleson are done; fifteen_theorem, hilbert_waring
-   and planar_graph (which loads Multivariate/cauchy.ml part-way through:
-   theory.MID_NEEDS) are left.
+7. **Autoformalization/** (205K): 5 of 7 done. fifteen_theorem (translated;
+   its check against upstream takes hours) and planar_graph (95K; loads
+   Multivariate/cauchy.ml part-way through, theory.MID_NEEDS, and must not
+   have Multivariate/clifford.ml loaded, theory.CHAIN_SKIP) are left.
+   Also done on the way: IEEE, IsabelleLight, Boyer_Moore (the files
+   boyer-moore.ml loads; not make.ml's definitions and testset/) and 18
+   Tutorial/ files. Not ported from UnitTests/: basic_tests.ml needs the
+   zarith bignum backend (`pow`), printer_tests.ml and records.ml are test
+   scripts (`Format.set_margin`, `Printexc`, `exit`, `Assert_failure`).
 8. **External programs and other formats**: each needs a decision first.
    - Minisat, Cadical, QBF (SAT/QBF solver proofs) and Examples/sos.ml
      (csdp): replay recorded solver output, as lib/gp.mbt does for PARI/GP.
      Then 100/thales and ceva.
    - miz3 (its own proof language, evaluated at run time), LP_arith.
-   - Formal_ineqs (44K) and IEEE (10K): `.hl` files; check what loads them.
-   - Tutorial/, UnitTests/: scripts over the above; port as tests.
+   - Formal_ineqs (44K): `.hl` files in nested directories, found through
+     `load_path`, inside modules: the tooling takes one directory level.
+   - Tutorial/: the six files left need sos.ml, Rqe/make.ml or external
+     tools.
    - Not theories, not ported: Proofrecording (a second kernel), ProofTrace,
      mcp, update_database, help.ml/database.ml, tactician_light.ml.
 9. **Closing**: regenerate everything once (retranslate_all.py), the whole

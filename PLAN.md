@@ -389,7 +389,12 @@ definitions register constants, quotations advance the type-variable and
   bitmatch on 32-bit word numerals). tools/ocaml_ref/retranslate_all.py
   regenerates every translated package in load order.
   Multivariate/ loads in make.ml's order (each file after its
-  predecessor's chain and what it needs), checked a run of files at a time
+  predecessor's chain and what it needs; known difference: a file of
+  another directory that needs one Multivariate/ file gets every file
+  before it in that order, where upstream loads only what it needs, and
+  the references are taken in our order. theory.CHAIN_SKIP leaves a file
+  out where it matters: clifford.ml's infix `outer` in
+  Autoformalization/planar_graph.ml), checked a run of files at a time
   by tools/ocaml_ref/batch.py (one translation session and one upstream
   session, forking a child per file, instead of three chain reloads per
   file). Not ported: multivariate_database.ml and complex_database.ml, the
