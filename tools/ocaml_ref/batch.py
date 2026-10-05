@@ -216,7 +216,18 @@ def references(targets, refs):
             else:
                 if kind == "target" and x.f in tails:
                     out.append(f"let () = batch_target {ml_str(tails[x.f])} {ml_str(log(x, True))};;\n")
+                    if not x.children:
+                        # nothing is loaded after it: not loaded again
+                        continue
+                mids = theory.mid_plan(x.f)
+                if mids:
+                    # a file it loads part-way through is loaded there
+                    cases = " | ".join('"%s" -> List.iter batch_use [%s]' % (g, "; ".join(f'"{h}"' for h in new))
+                                       for g, new in mids)
+                    out.append(f"let needs s = match s with {cases} | _ -> ();;\n")
                 out.append(f"let () = batch_load {ml_str(x.f)} {ml_str(log(x))};;\n")
+                if mids:
+                    out.append("let needs (_:string) = ();;\n")
         return out
 
     lines += emit(steps(root))
