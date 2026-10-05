@@ -80,6 +80,8 @@ pub fn exists_complex() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn sin_integer_2pi() -> @kernel.Thm
 
 pub fn sincos_principal_value() -> @kernel.Thm

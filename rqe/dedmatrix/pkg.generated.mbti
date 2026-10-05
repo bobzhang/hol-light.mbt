@@ -30,6 +30,8 @@ pub fn get_sing_dirs(@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) rais
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn prove_nonconstant(@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
 
 pub fn remove_column1(@kernel.Thm) -> @kernel.Thm raise

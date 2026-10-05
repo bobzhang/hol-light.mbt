@@ -34,6 +34,8 @@ pub fn linear_pow_mul_degree() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn normal_degree() -> @kernel.Thm
 
 pub fn normal_normalize() -> @kernel.Thm

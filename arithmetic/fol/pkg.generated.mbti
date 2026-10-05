@@ -74,6 +74,8 @@ pub fn holds_valuation() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn max_assoc() -> @kernel.Thm
 
 pub fn max_sym() -> @kernel.Thm

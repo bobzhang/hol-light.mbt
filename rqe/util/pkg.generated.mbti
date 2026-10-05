@@ -22,6 +22,8 @@ pub fn goal_types(Unit) -> Unit raise
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn my_print_type(String, @kernel.HolType) -> Unit raise
 
 pub fn my_print_typel(@list.List[(String, @kernel.HolType)]) -> Unit raise

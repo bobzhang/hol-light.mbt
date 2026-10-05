@@ -21,6 +21,8 @@ pub fn is_pos(@kernel.Term) -> Bool raise
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn mk_neq(@kernel.Term, @kernel.Term) -> @kernel.Term raise
 
 pub fn neq() -> @kernel.Thm

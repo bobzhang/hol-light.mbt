@@ -229,7 +229,7 @@ pub fn[C] enter_gconv(
   elem : (Int64, C),
   net : Net[GconvOf[C]],
 ) -> Net[GconvOf[C]] {
-  @nets.enter(lconsts, tm, { priority: elem.0.to_int(), conv: elem.1 }, net)
+  @nets.enter(lconsts, tm, { priority: elem.0.to_int(), conv: elem.1, }, net)
 }
 
 ///|

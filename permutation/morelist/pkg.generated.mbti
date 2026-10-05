@@ -67,6 +67,8 @@ pub fn list_wf() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn mem_count() -> @kernel.Thm
 
 pub fn mem_delete1() -> @kernel.Thm

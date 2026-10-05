@@ -138,6 +138,8 @@ pub fn isaprove() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn prov() -> @kernel.Thm
 
 pub fn prov1() -> @kernel.Thm

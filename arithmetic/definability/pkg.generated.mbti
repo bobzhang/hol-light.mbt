@@ -63,6 +63,8 @@ pub fn fvt_pair() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn npair() -> @kernel.Thm
 
 pub fn npair_inj() -> @kernel.Thm

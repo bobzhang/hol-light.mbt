@@ -50,6 +50,8 @@ pub fn letlemma() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn not_is_result() -> @kernel.Thm
 
 pub fn prove_rules() -> @kernel.Thm

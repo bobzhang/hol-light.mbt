@@ -61,6 +61,8 @@ pub fn le_iff_lt() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn lt_def() -> @kernel.Thm
 
 pub fn lt_def_p() -> @kernel.Thm

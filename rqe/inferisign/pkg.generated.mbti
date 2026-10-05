@@ -16,6 +16,8 @@ pub fn inferisign_v1(@list.List[@kernel.Term]) -> ((@kernel.Thm) -> ((@kernel.Th
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn tdiff() -> @ref.Ref[@kernel.Thm]
 
 pub fn tex() -> @ref.Ref[@list.List[(@kernel.Term, @kernel.Thm)]]

@@ -29,6 +29,8 @@ pub fn length_conv(@kernel.Term) -> @kernel.Thm raise
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn[TA] matrix(@list.List[@kernel.Term], @list.List[@kernel.Term], (@kernel.Thm) -> ((@list.List[(@kernel.Term, @kernel.Thm)]) -> @kernel.Thm raise) raise, @list.List[@kernel.Thm], TA, @kernel.Term) -> @kernel.Thm raise
 
 pub fn matrix_count() -> @ref.Ref[Int64]

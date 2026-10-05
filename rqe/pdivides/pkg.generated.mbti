@@ -9,6 +9,8 @@ import {
 // Values
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn pdivides(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Term, @kernel.Term) -> (@kernel.Term, @kernel.Thm) raise
 
 pub fn pdivides_v1(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Term, @kernel.Term) -> (@kernel.Term, @kernel.Thm) raise

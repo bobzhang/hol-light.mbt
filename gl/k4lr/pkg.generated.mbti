@@ -280,6 +280,8 @@ pub fn k4lrproves_subset_glproves() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 // Errors
 
 // Types and methods

@@ -9,6 +9,8 @@ import {
 // Values
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn pth_0g() -> @kernel.Thm
 
 pub fn pth_0l() -> @kernel.Thm

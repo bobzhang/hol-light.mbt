@@ -13,6 +13,8 @@ pub fn list_induct() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn new_binder_definition(@kernel.Term, String) -> @kernel.Thm raise
 
 pub fn new_infix_definition(String, String, @kernel.Term, Int64) -> @kernel.Thm raise

@@ -8,6 +8,8 @@ import {
 // Values
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn th() -> @kernel.Thm
 
 pub fn th_v1() -> @kernel.Thm

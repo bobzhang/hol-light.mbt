@@ -41,6 +41,8 @@ pub fn[TA] list(TA) -> @list.List[TA] raise
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn[TA, TB, TC, TD] mappair((TC) -> TA raise, (TD) -> TB raise, @list.List[(TC, TD)]) -> @list.List[(TA, TB)] raise
 
 pub fn odd(Int64) -> Bool raise

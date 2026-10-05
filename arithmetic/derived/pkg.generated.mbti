@@ -210,6 +210,8 @@ pub fn isubst_var() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn meta_and() -> @kernel.Thm
 
 pub fn modusponens() -> @kernel.Thm

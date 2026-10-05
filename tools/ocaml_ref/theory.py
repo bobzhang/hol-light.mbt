@@ -181,27 +181,45 @@ def chain_prev(f):
     return None
 
 
+def alone(g, frm):
+    """Whether `frm` loads `g` by itself (`g` and what `g` needs) rather
+    than at its place in its directory's make.ml: a file of another
+    directory that needs it, as upstream's `needs` does. Jordan/make.ml loads
+    Rqe/num_calc_simp.ml so, and fails after the Rqe files before it.
+    Multivariate/ keeps its order from everywhere (MAKE_ORDER)."""
+    d = os.path.dirname(g)
+    return (g not in MV_ORDER and os.path.dirname(frm) != d
+            and g in [x for x, _ in make_plan(d)])
+
+
+def before(g, frm):
+    """The files `g`'s load brings in before `g`, when `frm` asks for it."""
+    chain = [] if alone(g, frm) else ([chain_prev(g)] if chain_prev(g) else []) + make_pre(g)
+    return chain + list(needs(g))
+
+
 @functools.lru_cache(maxsize=None)
 def _deps(f):
     """The files loaded before `f` outside hol.ml's list, in order:
-    its predecessor's chain and the predecessor (Multivariate order), then
-    what `f` needs, dependencies first."""
+    its predecessor's chain and the predecessor (its directory's order),
+    then what `f` needs, dependencies first."""
     prev = chain_prev(f)
     seen = deps(prev) + [prev] if prev else []
     visiting = [f]
 
-    def visit(g):
+    def visit(g, frm):
         # hol.ml's files (hand-ported or translated) are already loaded
         if stem(g) in CORE or stem(g) in LOADED or g in seen or g in visiting:
             return
         visiting.append(g)
-        # as g's load(): its predecessor's chain first, then what it needs
-        for h in ([chain_prev(g)] if chain_prev(g) else []) + make_pre(g) + list(needs(g)):
-            visit(h)
+        # as g's load(): its predecessor's chain first (unless `frm` loads
+        # it alone), then what it needs
+        for h in before(g, frm):
+            visit(h, g)
         seen.append(g)
 
     for h in make_pre(f) + needs(f):
-        visit(h)
+        visit(h, f)
     return seen
 
 
@@ -249,17 +267,31 @@ def setup(f):
         # loaded on demand, as upstream's `needs`: what it needs first (in
         # order), then itself, once (MoonBit's package initialization order
         # is not upstream's)
-        lib_needs = ([chain_prev(f)] if chain_prev(f) else []) + \
-            [n for n in make_pre(f) + needs(f) if stem(n) not in CORE and stem(n) not in LOADED]
-        calls = "".join(f"  @{os.path.basename(pkg_of(n))}.load()\n" for n in lib_needs)
-        open(os.path.join(ROOT, pkg, "init.mbt"), "w").write(
-            f"// {name}.ml: the load steps are generated ({alias}{'_ml' if alias.endswith('test') else ''}.mbt).\n\n"
-            "///|\nlet loaded : Ref[Bool] = Ref::{ val: false }\n\n"
-            f"///|\n/// Load {name}.ml (once), after the files it needs.\npub fn load() -> Unit {{\n"
-            "  if loaded.val {\n    return\n  }\n  loaded.val = true\n" + calls +
-            f'  @parser.begin_theory("{name}")\n  load_steps() catch {{\n'
-            f'    e => abort("HOL Light: loading {name}.ml failed: " + e.to_string())\n  }}\n'
-            "  @parser.end_theory()\n}\n")
+        def call(n):
+            return f"  @{os.path.basename(pkg_of(n))}.{'load_alone' if alone(n, f) else 'load'}()\n"
+
+        def ported(ns):
+            return [n for n in ns if stem(n) not in CORE and stem(n) not in LOADED]
+
+        chain = ([chain_prev(f)] if chain_prev(f) else []) + ported(make_pre(f))
+        own = ported(needs(f))
+        body = (f'  @parser.begin_theory("{name}")\n  load_steps() catch {{\n'
+                f'    e => abort("HOL Light: loading {name}.ml failed: " + e.to_string())\n  }}\n'
+                "  @parser.end_theory()\n}\n")
+        text = (f"// {name}.ml: the load steps are generated ({alias}{'_ml' if alias.endswith('test') else ''}.mbt).\n\n"
+                "///|\nlet loaded : Ref[Bool] = Ref::{ val: false }\n\n"
+                f"///|\n/// Load {name}.ml (once), after the files it needs.\npub fn load() -> Unit {{\n"
+                "  if loaded.val {\n    return\n  }\n  loaded.val = true\n"
+                + "".join(call(n) for n in chain + own) + body)
+        if f in [x for x, _ in make_plan(os.path.dirname(f))]:
+            # a member of its directory's make.ml order: a file of another
+            # directory that needs it loads it without the files before it
+            text += (f"\n///|\n/// Load {name}.ml (once) as `needs` does: after what it needs itself, not\n"
+                     "/// after the files its directory's make.ml loads before it.\n"
+                     "pub fn load_alone() -> Unit {\n"
+                     "  if loaded.val {\n    return\n  }\n  loaded.val = true\n"
+                     + "".join(call(n) for n in own) + body)
+        open(os.path.join(ROOT, pkg, "init.mbt"), "w").write(text)
     else:
         open(os.path.join(ROOT, pkg, "init.mbt"), "w").write(
             f"// {name}.ml: the load steps are generated ({alias}.mbt).\n\n///|\nfn init {{\n"

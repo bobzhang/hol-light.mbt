@@ -316,6 +316,8 @@ pub fn is_complex_const(@kernel.Term) -> Bool raise
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn mk_complex_const(@num.Num) -> @kernel.Term raise
 
 pub fn prioritize_complex(Unit) -> Unit raise

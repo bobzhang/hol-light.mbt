@@ -385,6 +385,8 @@ pub fn lessmetric() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn lub() -> @kernel.Thm
 
 pub fn struct_lemma0() -> @kernel.Thm

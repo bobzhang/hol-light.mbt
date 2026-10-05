@@ -10,6 +10,8 @@ pub fn gen_induct_thm() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 // Errors
 
 // Types and methods

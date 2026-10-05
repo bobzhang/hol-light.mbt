@@ -12,6 +12,8 @@ pub fn even_tm_v1() -> @kernel.Term
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn neq() -> @kernel.Term
 
 pub fn nge() -> @kernel.Term

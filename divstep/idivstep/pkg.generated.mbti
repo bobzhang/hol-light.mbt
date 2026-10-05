@@ -114,6 +114,8 @@ pub fn iter_divstep_integer() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn vector_2() -> @kernel.Thm
 
 // Errors

@@ -55,6 +55,8 @@ pub fn in_minor_rules() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn minor_clauses() -> @kernel.Thm
 
 pub fn modal_rule(@kernel.Term) -> @kernel.Thm raise

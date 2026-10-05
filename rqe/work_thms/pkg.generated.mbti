@@ -225,6 +225,8 @@ pub fn length_tl1() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn map2_el() -> @kernel.Thm
 
 pub fn map2_el_lem() -> @kernel.Thm

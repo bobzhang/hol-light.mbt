@@ -43,6 +43,8 @@ pub fn listdiff_sublist() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn mem_flatmap() -> @kernel.Thm
 
 pub fn mem_listdiff() -> @kernel.Thm

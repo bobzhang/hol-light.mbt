@@ -48,6 +48,8 @@ pub fn imp_thm_pp() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn lt_eq_thm() -> @kernel.Thm
 
 pub fn lt_ge_thm() -> @kernel.Thm

@@ -18,6 +18,8 @@ pub fn list_uniq_revperm() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn mem_permutation() -> @kernel.Thm
 
 pub fn mem_revperm() -> @kernel.Thm

@@ -13,6 +13,8 @@ pub fn combine_testforms_v1(@kernel.Term) -> ((@kernel.Thm) -> ((@kernel.Term) -
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn testform(@kernel.Term, @kernel.Thm, @kernel.Thm, @kernel.Term) -> @kernel.Thm raise
 
 pub fn testform_v1(@kernel.Term, @kernel.Thm, @kernel.Thm, @kernel.Term) -> @kernel.Thm raise
