@@ -177,12 +177,13 @@ def write_commands(t, pkg):
     def line():
         nonlocal pos
         j = data.index(b"\n", pos)
-        l, pos = data[pos:j].decode(), j + 1
+        l, pos = data[pos:j].decode("latin-1"), j + 1
         return l.split()
 
     def blob(n):
         nonlocal pos
-        b, pos = data[pos:pos + n].decode(), pos + n + 1
+        # files are byte strings (MiniSat's proofs are binary): a byte is a character
+        b, pos = data[pos:pos + n].decode("latin-1"), pos + n + 1
         return b
 
     while pos < len(data):
@@ -300,7 +301,7 @@ def references(targets, refs):
     script = os.path.join(OUT, "ref_script.ml")
     boot = open(os.path.join(REF, "boot.ml")).read()
     i = boot.index('#load "pa_j.cmo";;')
-    open(script, "w").write(boot[:i] + '#load "unix.cma";;\n' + "".join(helpers) + boot[i:] +
+    open(script, "w").write(boot[:i] + '#load "unix.cma";;\n#load "str.cma";;\n' + "".join(helpers) + boot[i:] +
                             f"let () = if not (Toploop.use_silently Format.std_formatter (Toploop.File {ml_str(body)})) "
                             "then exit 1;;\n")
     subprocess.run(["./ensure_pa_j.sh"], cwd=REF, check=True)

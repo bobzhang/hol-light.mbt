@@ -21,6 +21,7 @@ grep -v 'pa_j.cmo' boot.ml > _build/tboot.ml
   cat _build/tboot.ml
   echo '#directory "+compiler-libs";;'
   echo '#load "unix.cma";;'
+  echo '#load "str.cma";;'
   echo "#use \"$ROOT/tools/translator/mbti.ml\";;"
   for f in ir translator lower emit main; do
     echo "#use \"$ROOT/tools/translator/$f.ml\";;"
