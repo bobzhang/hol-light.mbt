@@ -1,0 +1,19 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/unity/mk_gen_induct"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn gen_induct_thm() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

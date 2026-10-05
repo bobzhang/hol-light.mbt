@@ -1,0 +1,404 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/unity/mk_leadsto"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn eqmetric() -> @kernel.Thm
+
+pub fn in_() -> @kernel.Thm
+
+pub fn ismonoleadsto2() -> @kernel.Thm
+
+pub fn leadsto() -> @kernel.Thm
+
+pub fn leadsto2() -> @kernel.Thm
+
+pub fn leadsto2_thm0() -> @kernel.Thm
+
+pub fn leadsto2_thm1() -> @kernel.Thm
+
+pub fn leadsto2_thm2() -> @kernel.Thm
+
+pub fn leadsto2_thm2a() -> @kernel.Thm
+
+pub fn leadsto2_thm2b() -> @kernel.Thm
+
+pub fn leadsto2_thm2c() -> @kernel.Thm
+
+pub fn leadsto2_thm2d() -> @kernel.Thm
+
+pub fn leadsto2_thm2d_lemma1() -> @kernel.Thm
+
+pub fn leadsto2_thm2e() -> @kernel.Thm
+
+pub fn leadsto2_thm3() -> @kernel.Thm
+
+pub fn leadsto2_thm3_lemma1() -> @kernel.Thm
+
+pub fn leadsto2_thm3a() -> @kernel.Thm
+
+pub fn leadsto2_thm4() -> @kernel.Thm
+
+pub fn leadsto2_thm4_lemma1() -> @kernel.Thm
+
+pub fn leadsto2_thm4_lemma1a() -> @kernel.Thm
+
+pub fn leadsto2_thm4_lemma2() -> @kernel.Thm
+
+pub fn leadsto2_thm4_lemma3() -> @kernel.Thm
+
+pub fn leadsto2_thm4_lemma4() -> @kernel.Thm
+
+pub fn leadsto2_thm5() -> @kernel.Thm
+
+pub fn leadsto2_thm6() -> @kernel.Thm
+
+pub fn leadsto2_thm7() -> @kernel.Thm
+
+pub fn leadsto2_thm7_lemma() -> @kernel.Thm
+
+pub fn leadsto2_thm7_lemma01() -> @kernel.Thm
+
+pub fn leadsto2_thm8() -> @kernel.Thm
+
+pub fn leadsto2eq() -> @kernel.Thm
+
+pub fn leadsto2eqs() -> @kernel.Thm
+
+pub fn leadsto2fam() -> @kernel.Thm
+
+pub fn leadsto2fn() -> @kernel.Thm
+
+pub fn leadsto2fn_eq_leadsto2fam() -> @kernel.Thm
+
+pub fn leadsto2imply1() -> @kernel.Thm
+
+pub fn leadsto2imply2() -> @kernel.Thm
+
+pub fn leadsto2imply_1() -> @kernel.Thm
+
+pub fn leadsto2inductthm() -> @kernel.Thm
+
+pub fn leadsto2minfixthm() -> @kernel.Thm
+
+pub fn leadsto2th() -> @kernel.Thm
+
+pub fn leadsto2thm1_1() -> @kernel.Thm
+
+pub fn leadsto_cor1() -> @kernel.Thm
+
+pub fn leadsto_cor10() -> @kernel.Thm
+
+pub fn leadsto_cor11() -> @kernel.Thm
+
+pub fn leadsto_cor12() -> @kernel.Thm
+
+pub fn leadsto_cor13() -> @kernel.Thm
+
+pub fn leadsto_cor13_lemma01() -> @kernel.Thm
+
+pub fn leadsto_cor14() -> @kernel.Thm
+
+pub fn leadsto_cor15() -> @kernel.Thm
+
+pub fn leadsto_cor16() -> @kernel.Thm
+
+pub fn leadsto_cor16_lemma1() -> @kernel.Thm
+
+pub fn leadsto_cor2() -> @kernel.Thm
+
+pub fn leadsto_cor3() -> @kernel.Thm
+
+pub fn leadsto_cor4() -> @kernel.Thm
+
+pub fn leadsto_cor5() -> @kernel.Thm
+
+pub fn leadsto_cor6() -> @kernel.Thm
+
+pub fn leadsto_cor7() -> @kernel.Thm
+
+pub fn leadsto_cor8() -> @kernel.Thm
+
+pub fn leadsto_cor9() -> @kernel.Thm
+
+pub fn leadsto_eq_leadsto2() -> @kernel.Thm
+
+pub fn leadsto_eq_leadsto2a() -> @kernel.Thm
+
+pub fn leadsto_eq_leadsto2b() -> @kernel.Thm
+
+pub fn leadsto_eq_leadsto2b_lemma() -> @kernel.Thm
+
+pub fn leadsto_eq_leadsto2c() -> @kernel.Thm
+
+pub fn leadsto_eq_leadsto2d() -> @kernel.Thm
+
+pub fn leadsto_induct0_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn leadsto_thm0() -> @kernel.Thm
+
+pub fn leadsto_thm1() -> @kernel.Thm
+
+pub fn leadsto_thm11() -> @kernel.Thm
+
+pub fn leadsto_thm12() -> @kernel.Thm
+
+pub fn leadsto_thm13() -> @kernel.Thm
+
+pub fn leadsto_thm14() -> @kernel.Thm
+
+pub fn leadsto_thm15() -> @kernel.Thm
+
+pub fn leadsto_thm16() -> @kernel.Thm
+
+pub fn leadsto_thm17() -> @kernel.Thm
+
+pub fn leadsto_thm18() -> @kernel.Thm
+
+pub fn leadsto_thm19() -> @kernel.Thm
+
+pub fn leadsto_thm2() -> @kernel.Thm
+
+pub fn leadsto_thm20() -> @kernel.Thm
+
+pub fn leadsto_thm21() -> @kernel.Thm
+
+pub fn leadsto_thm22() -> @kernel.Thm
+
+pub fn leadsto_thm23() -> @kernel.Thm
+
+pub fn leadsto_thm23_lemma00() -> @kernel.Thm
+
+pub fn leadsto_thm23_lemma01() -> @kernel.Thm
+
+pub fn leadsto_thm24() -> @kernel.Thm
+
+pub fn leadsto_thm24_lemma01() -> @kernel.Thm
+
+pub fn leadsto_thm25() -> @kernel.Thm
+
+pub fn leadsto_thm26() -> @kernel.Thm
+
+pub fn leadsto_thm27() -> @kernel.Thm
+
+pub fn leadsto_thm28() -> @kernel.Thm
+
+pub fn leadsto_thm29() -> @kernel.Thm
+
+pub fn leadsto_thm29_lemma00() -> @kernel.Thm
+
+pub fn leadsto_thm29_lemma05() -> @kernel.Thm
+
+pub fn leadsto_thm29_lemma05_1() -> @kernel.Thm
+
+pub fn leadsto_thm29_lemma05_2() -> @kernel.Thm
+
+pub fn leadsto_thm29_lemma05_3() -> @kernel.Thm
+
+pub fn leadsto_thm29_lemma05_4() -> @kernel.Thm
+
+pub fn leadsto_thm29_lemma05_5() -> @kernel.Thm
+
+pub fn leadsto_thm29_lemma05_6() -> @kernel.Thm
+
+pub fn leadsto_thm29_lemma06() -> @kernel.Thm
+
+pub fn leadsto_thm2a() -> @kernel.Thm
+
+pub fn leadsto_thm3() -> @kernel.Thm
+
+pub fn leadsto_thm30() -> @kernel.Thm
+
+pub fn leadsto_thm30_lemma00() -> @kernel.Thm
+
+pub fn leadsto_thm30_lemma01() -> @kernel.Thm
+
+pub fn leadsto_thm30_lemma02() -> @kernel.Thm
+
+pub fn leadsto_thm30_lemma03() -> @kernel.Thm
+
+pub fn leadsto_thm30_lemma04() -> @kernel.Thm
+
+pub fn leadsto_thm30_lemma05() -> @kernel.Thm
+
+pub fn leadsto_thm30_lemma06() -> @kernel.Thm
+
+pub fn leadsto_thm31() -> @kernel.Thm
+
+pub fn leadsto_thm32() -> @kernel.Thm
+
+pub fn leadsto_thm33() -> @kernel.Thm
+
+pub fn leadsto_thm34() -> @kernel.Thm
+
+pub fn leadsto_thm34a() -> @kernel.Thm
+
+pub fn leadsto_thm34a_lemma00() -> @kernel.Thm
+
+pub fn leadsto_thm34a_lemma01() -> @kernel.Thm
+
+pub fn leadsto_thm34a_lemma1() -> @kernel.Thm
+
+pub fn leadsto_thm34a_lemma2() -> @kernel.Thm
+
+pub fn leadsto_thm34a_lemma3() -> @kernel.Thm
+
+pub fn leadsto_thm34b() -> @kernel.Thm
+
+pub fn leadsto_thm35() -> @kernel.Thm
+
+pub fn leadsto_thm35_lemma00() -> @kernel.Thm
+
+pub fn leadsto_thm35_lemma01() -> @kernel.Thm
+
+pub fn leadsto_thm35_lemma01_1() -> @kernel.Thm
+
+pub fn leadsto_thm35_lemma01_10() -> @kernel.Thm
+
+pub fn leadsto_thm35_lemma01_2() -> @kernel.Thm
+
+pub fn leadsto_thm35_lemma01_3() -> @kernel.Thm
+
+pub fn leadsto_thm35_lemma01_4() -> @kernel.Thm
+
+pub fn leadsto_thm35_lemma01_5() -> @kernel.Thm
+
+pub fn leadsto_thm35_lemma01_6() -> @kernel.Thm
+
+pub fn leadsto_thm35_lemma01_7() -> @kernel.Thm
+
+pub fn leadsto_thm35_lemma01_8() -> @kernel.Thm
+
+pub fn leadsto_thm35_lemma01_9() -> @kernel.Thm
+
+pub fn leadsto_thm35_lemma01a() -> @kernel.Thm
+
+pub fn leadsto_thm36() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma00() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma01() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma02() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma03() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma04() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma05() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma06() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma07() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma08() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma09() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma10() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma10s() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma11() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma11s() -> @kernel.Thm
+
+pub fn leadsto_thm36_lemma12() -> @kernel.Thm
+
+pub fn leadsto_thm37() -> @kernel.Thm
+
+pub fn leadsto_thm37_lemma00() -> @kernel.Thm
+
+pub fn leadsto_thm37_lemma01() -> @kernel.Thm
+
+pub fn leadsto_thm37_lemma02() -> @kernel.Thm
+
+pub fn leadsto_thm38() -> @kernel.Thm
+
+pub fn leadsto_thm39() -> @kernel.Thm
+
+pub fn leadsto_thm39_lemma00() -> @kernel.Thm
+
+pub fn leadsto_thm39_lemma01() -> @kernel.Thm
+
+pub fn leadsto_thm3_lemma01() -> @kernel.Thm
+
+pub fn leadsto_thm3a() -> @kernel.Thm
+
+pub fn leadsto_thm3c() -> @kernel.Thm
+
+pub fn leadsto_thm3c_lemma01() -> @kernel.Thm
+
+pub fn leadsto_thm3c_lemma02() -> @kernel.Thm
+
+pub fn leadsto_thm3c_lemma03() -> @kernel.Thm
+
+pub fn leadsto_thm3c_lemma04() -> @kernel.Thm
+
+pub fn leadsto_thm4() -> @kernel.Thm
+
+pub fn leadsto_thm40() -> @kernel.Thm
+
+pub fn leadsto_thm41() -> @kernel.Thm
+
+pub fn leadsto_thm42() -> @kernel.Thm
+
+pub fn leadsto_thm42_lemma00() -> @kernel.Thm
+
+pub fn leadsto_thm42_lemma01() -> @kernel.Thm
+
+pub fn leadsto_thm42_lemma02() -> @kernel.Thm
+
+pub fn leadsto_thm43() -> @kernel.Thm
+
+pub fn leadsto_thm4_lemma1() -> @kernel.Thm
+
+pub fn leadsto_thm4_lemma1a() -> @kernel.Thm
+
+pub fn leadsto_thm4_lemma2() -> @kernel.Thm
+
+pub fn leadsto_thm4_lemma3() -> @kernel.Thm
+
+pub fn leadsto_thm5() -> @kernel.Thm
+
+pub fn leadsto_thm5_lemma1() -> @kernel.Thm
+
+pub fn leadsto_thm5_lemma2() -> @kernel.Thm
+
+pub fn leadsto_thm5_lemma3() -> @kernel.Thm
+
+pub fn leadsto_thm6() -> @kernel.Thm
+
+pub fn leadsto_thm7() -> @kernel.Thm
+
+pub fn leadsto_thm8() -> @kernel.Thm
+
+pub fn leadsto_thm9() -> @kernel.Thm
+
+pub fn leadstorel() -> @kernel.Thm
+
+pub fn lessmetric() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn lub() -> @kernel.Thm
+
+pub fn struct_lemma0() -> @kernel.Thm
+
+pub fn struct_lemma00() -> @kernel.Thm
+
+pub fn struct_lemma01() -> @kernel.Thm
+
+pub fn struct_lemma1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

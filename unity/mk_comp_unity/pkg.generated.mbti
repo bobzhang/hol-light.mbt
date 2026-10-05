@@ -1,0 +1,73 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/unity/mk_comp_unity"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn comp_ensures_cor0() -> @kernel.Thm
+
+pub fn comp_ensures_cor1() -> @kernel.Thm
+
+pub fn comp_ensures_thm1() -> @kernel.Thm
+
+pub fn comp_ensures_thm1_lemma_1() -> @kernel.Thm
+
+pub fn comp_ensures_thm1_lemma_2() -> @kernel.Thm
+
+pub fn comp_unity_cor0() -> @kernel.Thm
+
+pub fn comp_unity_cor1() -> @kernel.Thm
+
+pub fn comp_unity_cor10() -> @kernel.Thm
+
+pub fn comp_unity_cor11() -> @kernel.Thm
+
+pub fn comp_unity_cor12() -> @kernel.Thm
+
+pub fn comp_unity_cor12_lemma00() -> @kernel.Thm
+
+pub fn comp_unity_cor12_lemma01() -> @kernel.Thm
+
+pub fn comp_unity_cor12_lemma02() -> @kernel.Thm
+
+pub fn comp_unity_cor12_lemma03() -> @kernel.Thm
+
+pub fn comp_unity_cor12_lemma04() -> @kernel.Thm
+
+pub fn comp_unity_cor13() -> @kernel.Thm
+
+pub fn comp_unity_cor14() -> @kernel.Thm
+
+pub fn comp_unity_cor2() -> @kernel.Thm
+
+pub fn comp_unity_cor3() -> @kernel.Thm
+
+pub fn comp_unity_cor4() -> @kernel.Thm
+
+pub fn comp_unity_cor5() -> @kernel.Thm
+
+pub fn comp_unity_cor6() -> @kernel.Thm
+
+pub fn comp_unity_cor7() -> @kernel.Thm
+
+pub fn comp_unity_cor8() -> @kernel.Thm
+
+pub fn comp_unity_cor9() -> @kernel.Thm
+
+pub fn comp_unless_thm1() -> @kernel.Thm
+
+pub fn comp_unless_thm1_lemma_1() -> @kernel.Thm
+
+pub fn comp_unless_thm1_lemma_2() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

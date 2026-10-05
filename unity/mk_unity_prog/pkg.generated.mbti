@@ -1,0 +1,274 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/unity/mk_unity_prog"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn act() -> @kernel.HolType
+
+pub fn after_abs() -> @kernel.Thm
+
+pub fn after_lbl() -> @kernel.Thm
+
+pub fn after_rel() -> @kernel.Thm
+
+pub fn asg(@kernel.HolType) -> @kernel.HolType raise
+
+pub fn asg_act() -> @kernel.Thm
+
+pub fn at_abs() -> @kernel.Thm
+
+pub fn at_lbl() -> @kernel.Thm
+
+pub fn at_rel() -> @kernel.Thm
+
+pub fn before_abs() -> @kernel.Thm
+
+pub fn before_lbl() -> @kernel.Thm
+
+pub fn before_rel() -> @kernel.Thm
+
+pub fn bool() -> @kernel.HolType
+
+pub fn conja() -> @kernel.Thm
+
+pub fn conja0() -> @kernel.Thm
+
+pub fn conja0_term() -> @kernel.Term
+
+pub fn conja_s() -> @kernel.Thm
+
+pub fn disja() -> @kernel.Thm
+
+pub fn disja0() -> @kernel.Thm
+
+pub fn disja0_term() -> @kernel.Term
+
+pub fn disja_s() -> @kernel.Thm
+
+pub fn ds() -> @kernel.Term
+
+pub fn e() -> @kernel.Term
+
+pub fn fnc((@kernel.HolType, @list.List[@kernel.HolType])) -> @kernel.HolType raise
+
+pub fn follow_abs() -> @kernel.Thm
+
+pub fn follow_lbl() -> @kernel.Thm
+
+pub fn follow_rel() -> @kernel.Thm
+
+pub fn fst_var() -> @kernel.Thm
+
+pub fn fun(@kernel.HolType, @kernel.HolType) -> @kernel.HolType raise
+
+pub fn gto_act() -> @kernel.Thm
+
+pub fn id_int() -> @kernel.Thm
+
+pub fn id_par() -> @kernel.Thm
+
+pub fn id_seq() -> @kernel.Thm
+
+pub fn if1_seq() -> @kernel.Thm
+
+pub fn if2_seq() -> @kernel.Thm
+
+pub fn if_par() -> @kernel.Thm
+
+pub fn index_exp() -> @kernel.Thm
+
+pub fn inside_abs() -> @kernel.Thm
+
+pub fn inside_lbl() -> @kernel.Thm
+
+pub fn inside_rel() -> @kernel.Thm
+
+pub fn int() -> @kernel.HolType
+
+pub fn int_int() -> @kernel.Thm
+
+pub fn iter_int() -> @kernel.Thm
+
+pub fn iter_int0() -> @kernel.Thm
+
+pub fn iter_int0_term() -> @kernel.Term
+
+pub fn iter_par() -> @kernel.Thm
+
+pub fn iter_par0() -> @kernel.Thm
+
+pub fn iter_par0_term() -> @kernel.Term
+
+pub fn iter_seq() -> @kernel.Thm
+
+pub fn iter_seq0() -> @kernel.Thm
+
+pub fn iter_seq0_term() -> @kernel.Term
+
+pub fn k_def() -> @kernel.Thm
+
+pub fn list_exp() -> @kernel.Thm
+
+pub fn list_exp_term() -> @kernel.Term
+
+pub fn list_int() -> @kernel.Thm
+
+pub fn list_int_term() -> @kernel.Term
+
+pub fn list_par() -> @kernel.Thm
+
+pub fn list_par_term() -> @kernel.Term
+
+pub fn list_seq() -> @kernel.Thm
+
+pub fn list_seq_term() -> @kernel.Term
+
+pub fn load() -> Unit
+
+pub fn loc() -> @kernel.HolType
+
+pub fn loc_asg() -> @kernel.Thm
+
+pub fn loc_exp() -> @kernel.Thm
+
+pub fn loc_v1() -> @kernel.Term
+
+pub fn loc_var() -> @kernel.Thm
+
+pub fn lst(@kernel.HolType) -> @kernel.HolType raise
+
+pub fn member() -> @kernel.Thm
+
+pub fn member_term() -> @kernel.Term
+
+pub fn mk() -> @kernel.Term
+
+pub fn multa() -> @kernel.Thm
+
+pub fn multa0() -> @kernel.Thm
+
+pub fn multa0_term() -> @kernel.Term
+
+pub fn multa_s() -> @kernel.Thm
+
+pub fn num() -> @kernel.HolType
+
+pub fn par() -> @kernel.HolType
+
+pub fn par_atom() -> @kernel.Thm
+
+pub fn par_int() -> @kernel.Thm
+
+pub fn par_par() -> @kernel.Thm
+
+pub fn par_seq() -> @kernel.Thm
+
+pub fn prd(@kernel.HolType, @kernel.HolType) -> @kernel.HolType raise
+
+pub fn restricted_ensures() -> @kernel.Thm
+
+pub fn restricted_exists_transition() -> @kernel.Thm
+
+pub fn restricted_exists_transition_stmt() -> @kernel.Thm
+
+pub fn restricted_exists_transition_term() -> @kernel.Term
+
+pub fn restricted_leadsto() -> @kernel.Thm
+
+pub fn restricted_stable() -> @kernel.Thm
+
+pub fn restricted_stable_stmt() -> @kernel.Thm
+
+pub fn restricted_stable_term() -> @kernel.Term
+
+pub fn restricted_triple() -> @kernel.Thm
+
+pub fn restricted_unless() -> @kernel.Thm
+
+pub fn restricted_unless_stmt() -> @kernel.Thm
+
+pub fn restricted_unless_term() -> @kernel.Term
+
+pub fn s() -> @kernel.Term
+
+pub fn s0() -> @kernel.Term
+
+pub fn s_fst() -> @kernel.Thm
+
+pub fn s_snd() -> @kernel.Thm
+
+pub fn seq() -> @kernel.HolType
+
+pub fn seq_seq() -> @kernel.Thm
+
+pub fn snd_var() -> @kernel.Thm
+
+pub fn sta() -> @kernel.HolType
+
+pub fn summa() -> @kernel.Thm
+
+pub fn summa0() -> @kernel.Thm
+
+pub fn summa0_term() -> @kernel.Term
+
+pub fn summa_s() -> @kernel.Thm
+
+pub fn t() -> @kernel.HolType
+
+pub fn triple_term() -> @kernel.Term
+
+pub fn tst_act() -> @kernel.Thm
+
+pub fn unique() -> @kernel.Thm
+
+pub fn unique_term() -> @kernel.Term
+
+pub fn upd_fst() -> @kernel.Thm
+
+pub fn upd_index() -> @kernel.Thm
+
+pub fn upd_index_exp() -> @kernel.Thm
+
+pub fn upd_snd() -> @kernel.Thm
+
+pub fn v() -> @kernel.Term
+
+pub fn val() -> @kernel.HolType
+
+pub fn valid() -> @kernel.Thm
+
+pub fn var_(@kernel.HolType) -> @kernel.HolType raise
+
+pub fn var_asg() -> @kernel.Thm
+
+pub fn var_exp() -> @kernel.Thm
+
+pub fn var_fst_asg() -> @kernel.Thm
+
+pub fn var_index_asg() -> @kernel.Thm
+
+pub fn var_index_exp() -> @kernel.Thm
+
+pub fn var_indexvar() -> @kernel.Thm
+
+pub fn var_snd_asg() -> @kernel.Thm
+
+pub fn var_tp(String) -> @kernel.HolType raise
+
+pub fn when_par() -> @kernel.Thm
+
+pub fn whl_seq() -> @kernel.Thm
+
+pub fn xpr(@kernel.HolType) -> @kernel.HolType raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

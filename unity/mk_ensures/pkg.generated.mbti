@@ -1,0 +1,97 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/unity/mk_ensures"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn append_lemma01() -> @kernel.Thm
+
+pub fn append_lemma02() -> @kernel.Thm
+
+pub fn append_lemma03() -> @kernel.Thm
+
+pub fn append_lemma04() -> @kernel.Thm
+
+pub fn ensures() -> @kernel.Thm
+
+pub fn ensures_cor1() -> @kernel.Thm
+
+pub fn ensures_cor2() -> @kernel.Thm
+
+pub fn ensures_cor3() -> @kernel.Thm
+
+pub fn ensures_cor4() -> @kernel.Thm
+
+pub fn ensures_cor5() -> @kernel.Thm
+
+pub fn ensures_cor6() -> @kernel.Thm
+
+pub fn ensures_cor7() -> @kernel.Thm
+
+pub fn ensures_lemma0() -> @kernel.Thm
+
+pub fn ensures_lemma1() -> @kernel.Thm
+
+pub fn ensures_lemma2() -> @kernel.Thm
+
+pub fn ensures_lemma3() -> @kernel.Thm
+
+pub fn ensures_lemma4() -> @kernel.Thm
+
+pub fn ensures_stmt() -> @kernel.Thm
+
+pub fn ensures_thm0() -> @kernel.Thm
+
+pub fn ensures_thm1() -> @kernel.Thm
+
+pub fn ensures_thm2() -> @kernel.Thm
+
+pub fn ensures_thm3() -> @kernel.Thm
+
+pub fn ensures_thm4() -> @kernel.Thm
+
+pub fn ensures_thm5() -> @kernel.Thm
+
+pub fn exist_transition() -> @kernel.Thm
+
+pub fn exist_transition_term() -> @kernel.Term
+
+pub fn exist_transition_thm1() -> @kernel.Thm
+
+pub fn exist_transition_thm10() -> @kernel.Thm
+
+pub fn exist_transition_thm11() -> @kernel.Thm
+
+pub fn exist_transition_thm12() -> @kernel.Thm
+
+pub fn exist_transition_thm12a() -> @kernel.Thm
+
+pub fn exist_transition_thm12b() -> @kernel.Thm
+
+pub fn exist_transition_thm2() -> @kernel.Thm
+
+pub fn exist_transition_thm3() -> @kernel.Thm
+
+pub fn exist_transition_thm4() -> @kernel.Thm
+
+pub fn exist_transition_thm5() -> @kernel.Thm
+
+pub fn exist_transition_thm6() -> @kernel.Thm
+
+pub fn exist_transition_thm7() -> @kernel.Thm
+
+pub fn exist_transition_thm8() -> @kernel.Thm
+
+pub fn exist_transition_thm9() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
