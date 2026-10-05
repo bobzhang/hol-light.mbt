@@ -153,10 +153,18 @@ def translate(targets, done=()):
         sys.exit("translation batch failed (tools/ocaml_ref/_build/batch/translate.log)")
 
 
+def untested(t):
+    """A directory's make.ml, when another directory needs it (as
+    Geometric_Algebra/quaternions.ml needs Quaternions/make.ml): a package
+    that loads the directory's files, which have their own tests."""
+    return t.endswith("/make.ml")
+
+
 def references(targets, refs):
-    """One upstream session; returns {target: expected output}."""
+    """One upstream session; returns {target: expected output} (of the
+    targets with a reference script)."""
     tails = {}
-    for t in targets:
+    for t in refs:
         text = open(refs[t]).read()
         i = text.index("start_trace ();;")
         tails[t] = os.path.join(OUT, "tail_" + t.replace("/", "__"))
@@ -206,7 +214,7 @@ def references(targets, refs):
                 open(bf, "w").write("".join(emit(x)))
                 out.append(f"let () = batch_branch {ml_str(bf)};;\n")
             else:
-                if kind == "target":
+                if kind == "target" and x.f in tails:
                     out.append(f"let () = batch_target {ml_str(tails[x.f])} {ml_str(log(x, True))};;\n")
                 out.append(f"let () = batch_load {ml_str(x.f)} {ml_str(log(x))};;\n")
         return out
@@ -232,7 +240,7 @@ def references(targets, refs):
     if p.returncode != 0:
         sys.exit("reference batch failed (tools/ocaml_ref/_build/batch/ref.log):\n" + open(rlog).read()[-3000:])
     expected = {}
-    for t in targets:
+    for t in refs:
         nodes = path_to(root, t, before)
         parts = [os.path.join(OUT, "prelude.txt")] + [log(n) for n in nodes[:-1]] + [log(nodes[-1], True)]
         s = "".join(open(x).read() for x in parts)
@@ -295,6 +303,9 @@ def main():
             open(gen, "w").write(PLACEHOLDER)
         # regenerate the test files (the chain may have changed), keeping
         # their hand-written checks (BEGIN/END EXTRA)
+        pkgs[t] = pkg
+        if untested(t):
+            continue
         extras = {}
         for old in theory.write_tests_paths(t, pkg, alias, name):
             if os.path.exists(old):
@@ -319,11 +330,11 @@ def main():
     if translate_only:
         print("translated; run again with --resume for the references and the tests")
         return
-    for t in targets:
+    for t in refs:
         theory.run(["python3", "tools/ocaml_ref/gen_theorems_test.py", pkgs[t], os.path.relpath(refs[t], ROOT),
                     os.path.relpath(tests[t], ROOT)])
     expected = references(targets, refs)
-    for t in targets:
+    for t in refs:
         e = refs[t][:-3] + ".expected"
         open(e, "w").write(expected[t])
         theory.run(["python3", "tools/ocaml_ref/embed_golden.py", os.path.relpath(e, ROOT),
@@ -331,7 +342,7 @@ def main():
     theory.run(["moon", "fmt"], capture_output=True)
     # tools/test.py runs the test executables with a larger stack than
     # `moon test` gives them
-    args = ["python3", "tools/test.py"] + [pkgs[t] for t in targets]
+    args = ["python3", "tools/test.py"] + [pkgs[t] for t in refs]
     r = subprocess.run(args, cwd=ROOT, capture_output=True, text=True)
     log = r.stdout + r.stderr
     open(os.path.join(OUT, "test.log"), "w").write(log)

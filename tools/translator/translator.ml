@@ -488,6 +488,10 @@ module Names = struct
     | "Logic/canon.ml" -> Some "logic/logic_canon"
     | "Probability/measure.ml" -> Some "probability/probability_measure"
     | "Quaternions/misc.hl" -> Some "quaternions/quaternions_misc"
+    | f when String.contains f '/' && Filename.basename f = "make.ml" ->
+        (* `<dir>/make` is the directory's chain test package *)
+        let d = String.lowercase_ascii (Filename.dirname f) in
+        Some (d ^ "/" ^ d ^ "_make")
     | f when String.contains f '/' ->
         (* `Library/prime.ml` -> `library/prime` (theory.py's pkg_of) *)
         let i = String.index f '/' in

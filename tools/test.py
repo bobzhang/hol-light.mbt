@@ -25,7 +25,7 @@ time. `--target wasm` (or native) runs the selection there instead: do it
 for the whole suite before a release.
 
 On the wasm targets `moon test --build-only` builds the test executables
-and this script runs them with `moonrun --stack-size` (16 MB by default):
+and this script runs them with `moonrun --stack-size` (60 MB by default):
 `moon test` runs them with moonrun's default stack, which upstream's
 recursive list functions overflow on long lists (the Grobner bases of
 Complex/grobner_examples.ml), and one at a time unless given `-j`.
@@ -230,7 +230,8 @@ def run_wasm(target, ps, a):
     def run(job):
         p, kind, exe, args, n = job
         t = time.time()
-        proc = subprocess.Popen(["moonrun", "--stack-size", a.stack_size, "--test-args", args, exe, "--"],
+        proc = subprocess.Popen(["sh", "-c", f'ulimit -s {stack_limit_kb(int(a.stack_size))} 2>/dev/null; exec "$@"', "sh",
+                                 "moonrun", "--stack-size", a.stack_size, "--test-args", args, exe, "--"],
                                 cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         # watch its memory: a test that runs away is killed, not left to
         # take the machine with it
@@ -293,6 +294,19 @@ def record_times(secs):
         f.write("".join(head) + "".join(f"{p}\t{s}\n" for p, s in sorted(known.items())))
 
 
+
+def stack_limit_kb(kb):
+    """The OS stack limit (in KB) a test executable gets: moonrun's wasm
+    stack is its main thread's, the default limit is 8 MB on macOS, and
+    going over it kills the process ("has overflowed its stack") instead
+    of trapping. `ulimit -s` in the shell that execs it (Python's
+    setrlimit cannot raise its own on macOS)."""
+    import resource
+    hard = resource.getrlimit(resource.RLIMIT_STACK)[1]
+    want = kb + 2048
+    return want if hard == resource.RLIM_INFINITY else min(want, hard // 1024)
+
+
 def main():
     ap = argparse.ArgumentParser(usage=__doc__)
     ap.add_argument("tiers", nargs="*", default=["quick"])
@@ -303,7 +317,8 @@ def main():
     # moonc processes at once: linking the test executable of a long chain
     # takes about 14 GB (24 at once took 330 GB)
     ap.add_argument("--build-jobs", default=os.environ.get("HOL_MOON_JOBS", "4"))
-    ap.add_argument("--stack-size", default="16000")
+    # in KB. Examples/apery.ml needs more than 16 MB; macOS allows 64 MB
+    ap.add_argument("--stack-size", default="60000")
     # a test executable above this much memory is killed (the largest, a
     # whole chain in one process, stays well under it)
     ap.add_argument("--max-rss-gb", default="16")
