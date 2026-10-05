@@ -1,0 +1,19 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/cadical/test"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn test_taut((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> Bool raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
