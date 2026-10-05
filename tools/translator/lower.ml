@@ -2295,6 +2295,7 @@ module Lower = struct
     | "Unchanged", [] -> ([], Atom "@lib.Unchanged", mty_of e.exp_type)
     | "Not_found", [] when predef_exn cd -> ([], Atom "@lib.NotFound", mty_of e.exp_type)
     | "End_of_file", [] when predef_exn cd -> ([], Atom "@lib.EndOfFile", mty_of e.exp_type)
+    | "Break", [] when not (Hashtbl.mem own_ctors "Break") -> ([], Atom "@lib.Break", mty_of e.exp_type)
     | "Sys_error", [ a ] when predef_exn cd -> let ss, x, _ = lower a in (ss, Call (Atom "@lib.SysError", [ x ]), mty_of e.exp_type)
     | name, [] when Hashtbl.mem own_ctors name -> ([], Atom (ctor_name ~cd name), mty_of e.exp_type)
     | name, args when Hashtbl.mem own_ctors name ->
