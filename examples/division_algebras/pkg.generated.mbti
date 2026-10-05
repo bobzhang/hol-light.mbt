@@ -1,0 +1,31 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/division_algebras"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn alternative_division_algebra_has_identity() -> @kernel.Thm
+
+pub fn alternative_division_algebra_is_quadratic() -> @kernel.Thm
+
+pub fn associative_division_algebra() -> @kernel.Thm
+
+pub fn associative_division_algebra_has_identity() -> @kernel.Thm
+
+pub fn commutative_division_algebra() -> @kernel.Thm
+
+pub fn commutative_division_algebra_gen() -> @kernel.Thm
+
+pub fn division_algebra() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
