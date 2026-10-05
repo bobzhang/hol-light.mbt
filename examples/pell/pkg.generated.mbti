@@ -1,0 +1,155 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/pell"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abs_lt_representation() -> @kernel.Thm
+
+pub fn addition_formula_neg() -> @kernel.Thm
+
+pub fn addition_formula_pos() -> @kernel.Thm
+
+pub fn binomial_triviality() -> @kernel.Thm
+
+pub fn binomialish_lemma() -> @kernel.Thm
+
+pub fn dioph_conj() -> @kernel.Thm
+
+pub fn dioph_disj() -> @kernel.Thm
+
+pub fn dioph_exp() -> @kernel.Thm
+
+pub fn dioph_exp_lemma() -> @kernel.Thm
+
+pub fn dioph_le() -> @kernel.Thm
+
+pub fn dioph_lt() -> @kernel.Thm
+
+pub fn dioph_ne() -> @kernel.Thm
+
+pub fn dioph_y() -> @kernel.Thm
+
+pub fn integer_sub_lemma() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn pell_induction() -> @kernel.Thm
+
+pub fn real_arch_pow_minimal() -> @kernel.Thm
+
+pub fn real_sum_of_squares() -> @kernel.Thm
+
+pub fn root_nonpower() -> @kernel.Thm
+
+pub fn solutions_are_xy() -> @kernel.Thm
+
+pub fn solutions_induction() -> @kernel.Thm
+
+pub fn sqrt_linear_eq() -> @kernel.Thm
+
+pub fn step_down_lemma() -> @kernel.Thm
+
+pub fn step_down_lemma_4() -> @kernel.Thm
+
+pub fn step_down_lemma_4_asym() -> @kernel.Thm
+
+pub fn step_down_lemma_strong() -> @kernel.Thm
+
+pub fn step_down_lemma_strong_asym() -> @kernel.Thm
+
+pub fn x_clauses() -> @kernel.Thm
+
+pub fn x_congruent() -> @kernel.Thm
+
+pub fn x_congruent_2nj_neg() -> @kernel.Thm
+
+pub fn x_congruent_2nj_neg_lemma() -> @kernel.Thm
+
+pub fn x_congruent_2nj_pos() -> @kernel.Thm
+
+pub fn x_congruent_4mnj_pos() -> @kernel.Thm
+
+pub fn x_congruent_4nj_pos() -> @kernel.Thm
+
+pub fn x_def() -> @kernel.Thm
+
+pub fn x_degenerate() -> @kernel.Thm
+
+pub fn x_increases() -> @kernel.Thm
+
+pub fn x_increases_le() -> @kernel.Thm
+
+pub fn x_increases_lt() -> @kernel.Thm
+
+pub fn x_increases_suc() -> @kernel.Thm
+
+pub fn x_inj() -> @kernel.Thm
+
+pub fn xy_are_solutions() -> @kernel.Thm
+
+pub fn xy_coprime() -> @kernel.Thm
+
+pub fn xy_exp() -> @kernel.Thm
+
+pub fn xy_exp_lemma() -> @kernel.Thm
+
+pub fn xy_gcd() -> @kernel.Thm
+
+pub fn xy_gcd_lemma() -> @kernel.Thm
+
+pub fn xy_power_neg() -> @kernel.Thm
+
+pub fn xy_power_pos() -> @kernel.Thm
+
+pub fn xy_y3_congruence() -> @kernel.Thm
+
+pub fn y2_divides() -> @kernel.Thm
+
+pub fn y_0() -> @kernel.Thm
+
+pub fn y_0_triv() -> @kernel.Thm
+
+pub fn y_clauses() -> @kernel.Thm
+
+pub fn y_congruent() -> @kernel.Thm
+
+pub fn y_def() -> @kernel.Thm
+
+pub fn y_degenerate() -> @kernel.Thm
+
+pub fn y_dioph() -> @kernel.Thm
+
+pub fn y_divides() -> @kernel.Thm
+
+pub fn y_divides_lemma() -> @kernel.Thm
+
+pub fn y_eq_0() -> @kernel.Thm
+
+pub fn y_increases() -> @kernel.Thm
+
+pub fn y_increases_le() -> @kernel.Thm
+
+pub fn y_increases_lt() -> @kernel.Thm
+
+pub fn y_increases_suc() -> @kernel.Thm
+
+pub fn y_inj() -> @kernel.Thm
+
+pub fn y_lowerbound() -> @kernel.Thm
+
+pub fn y_n_mod2() -> @kernel.Thm
+
+pub fn y_n_moda1() -> @kernel.Thm
+
+pub fn y_upperbound() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

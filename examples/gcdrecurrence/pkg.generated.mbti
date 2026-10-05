@@ -1,0 +1,53 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/gcdrecurrence"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn divides_fib() -> @kernel.Thm
+
+pub fn divides_mersenne() -> @kernel.Thm
+
+pub fn divisors_recurrence() -> @kernel.Thm
+
+pub fn fib() -> @kernel.Thm
+
+pub fn fib_eq_0() -> @kernel.Thm
+
+pub fn fib_eq_1() -> @kernel.Thm
+
+pub fn fib_increases_le() -> @kernel.Thm
+
+pub fn fib_increases_lt() -> @kernel.Thm
+
+pub fn gcd_fib() -> @kernel.Thm
+
+pub fn gcd_mersenne() -> @kernel.Thm
+
+pub fn gcd_pelly() -> @kernel.Thm
+
+pub fn gcd_recurrence() -> @kernel.Thm
+
+pub fn induct_special() -> @kernel.Thm
+
+pub fn int_divisors_recurrence() -> @kernel.Thm
+
+pub fn int_gcd_recurrence() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn pellx() -> @kernel.Thm
+
+pub fn pelly() -> @kernel.Thm
+
+pub fn pelly_increases() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

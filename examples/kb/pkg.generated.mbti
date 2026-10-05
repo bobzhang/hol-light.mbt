@@ -1,0 +1,71 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/kb"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn complete(@list.List[@kernel.Term], (@list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> @list.List[@kernel.Thm] raise
+
+pub fn complete_equations(@list.List[@kernel.Term], @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise
+
+pub fn complete_tac(@list.List[@kernel.Term], @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn crit1(@list.List[@kernel.Term], @kernel.Thm, @kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn critical_pairs(@list.List[@kernel.Term], @kernel.Thm, @kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn eqs() -> @list.List[@kernel.Thm]
+
+pub fn eqs_v1() -> @list.List[@kernel.Thm]
+
+pub fn fixvariables(String, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn fullunify(@list.List[@kernel.Term], (@kernel.Term, @kernel.Term)) -> @list.List[(@kernel.Term, @kernel.Term)] raise
+
+pub fn is_realvar(@list.List[@kernel.Term], @kernel.Term) -> Bool raise
+
+pub fn istriv(@list.List[@kernel.Term], @lib.Func[@kernel.Term, @kernel.Term], @kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn left_reducible(@list.List[@kernel.Thm], @kernel.Thm) -> Bool raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] lexord((TA) -> ((TA) -> Bool raise) raise, @list.List[TA], @list.List[TA]) -> Bool raise
+
+pub fn list_mk_comb(@kernel.Term, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn[TA, TB, TC] listcases((@kernel.Term) -> (((TC) -> ((@kernel.Thm) -> TB raise) raise) -> @list.List[TA] raise) raise, (TC) -> ((@list.List[@kernel.Thm]) -> TB raise) raise, @list.List[@kernel.Term], @list.List[TA]) -> @list.List[TA] raise
+
+pub fn load() -> Unit
+
+pub fn lpo_ge(@list.List[@kernel.Term], @kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn lpo_gt(@list.List[@kernel.Term], @kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn normalize_and_orient(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn nreqs() -> @list.List[@kernel.Thm]
+
+pub fn[TA] overlaps(@list.List[@kernel.Term], @kernel.Thm, @kernel.Term, (@list.List[(@kernel.Term, @kernel.Term)]) -> ((@kernel.Thm) -> TA raise) raise) -> @list.List[TA] raise
+
+pub fn real_strip(@list.List[@kernel.Term], @kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise
+
+pub fn renamepair(@kernel.Thm, @kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] status((@list.List[TA], @list.List[TB]), @list.List[TA]) -> Unit raise
+
+pub fn thm_union(@list.List[@kernel.Thm], @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise
+
+pub fn unify(@list.List[@kernel.Term], @lib.Func[@kernel.Term, @kernel.Term], (@kernel.Term, @kernel.Term)) -> @lib.Func[@kernel.Term, @kernel.Term] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] weight(@list.List[TA], (TA, TB), (TA, TB)) -> Bool raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

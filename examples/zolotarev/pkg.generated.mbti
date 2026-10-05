@@ -1,0 +1,47 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/zolotarev"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn jacobi_eq_zolotarev() -> @kernel.Thm
+
+pub fn jacobi_eq_zolotarev_primepow() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn permutation_zolotarev() -> @kernel.Thm
+
+pub fn permutation_zolotarevu() -> @kernel.Thm
+
+pub fn permutes_zolotarev() -> @kernel.Thm
+
+pub fn permutes_zolotarev_alt() -> @kernel.Thm
+
+pub fn permutes_zolotarevu() -> @kernel.Thm
+
+pub fn zolatarev_eq_zolatarevu() -> @kernel.Thm
+
+pub fn zolatarev_mod() -> @kernel.Thm
+
+pub fn zolatarevu_mod() -> @kernel.Thm
+
+pub fn zolotarev() -> @kernel.Thm
+
+pub fn zolotarev_1() -> @kernel.Thm
+
+pub fn zolotarev_cong() -> @kernel.Thm
+
+pub fn zolotarevu() -> @kernel.Thm
+
+pub fn zolotarevu_primitive() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

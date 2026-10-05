@@ -1,0 +1,99 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/reduct"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn bound_sn() -> @kernel.Thm
+
+pub fn cr() -> @kernel.Thm
+
+pub fn cr_norm() -> @kernel.Thm
+
+pub fn cr_rstc_joinable() -> @kernel.Thm
+
+pub fn fc_finite_bound() -> @kernel.Thm
+
+pub fn fc_finite_bound_lemma() -> @kernel.Thm
+
+pub fn fld() -> @kernel.Thm
+
+pub fn has_size_subset() -> @kernel.Thm
+
+pub fn joinable() -> @kernel.Thm
+
+pub fn joinable_refl() -> @kernel.Thm
+
+pub fn joinable_sym() -> @kernel.Thm
+
+pub fn joinable_trans() -> @kernel.Thm
+
+pub fn joinable_trans_r() -> @kernel.Thm
+
+pub fn koenig_lemma() -> @kernel.Thm
+
+pub fn lf() -> @kernel.Thm
+
+pub fn lf_sn_bound() -> @kernel.Thm
+
+pub fn lf_tc_finite() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn newman_lemma() -> @kernel.Thm
+
+pub fn norm_cr() -> @kernel.Thm
+
+pub fn normal() -> @kernel.Thm
+
+pub fn normal_rtc() -> @kernel.Thm
+
+pub fn normal_tc() -> @kernel.Thm
+
+pub fn rc_cr() -> @kernel.Thm
+
+pub fn relpow_rtc() -> @kernel.Thm
+
+pub fn rtc_cr() -> @kernel.Thm
+
+pub fn rtc_tc_lemma() -> @kernel.Thm
+
+pub fn sn() -> @kernel.Thm
+
+pub fn sn_noetherian() -> @kernel.Thm
+
+pub fn sn_noloop() -> @kernel.Thm
+
+pub fn sn_preserve() -> @kernel.Thm
+
+pub fn sn_tc() -> @kernel.Thm
+
+pub fn sn_wf() -> @kernel.Thm
+
+pub fn sn_wn() -> @kernel.Thm
+
+pub fn stc_cr() -> @kernel.Thm
+
+pub fn strip_lemma() -> @kernel.Thm
+
+pub fn tc_cr() -> @kernel.Thm
+
+pub fn tree() -> @kernel.Thm
+
+pub fn tree_fld() -> @kernel.Thm
+
+pub fn wcr() -> @kernel.Thm
+
+pub fn wn() -> @kernel.Thm
+
+pub fn wn_tc() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

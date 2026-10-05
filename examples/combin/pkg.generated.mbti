@@ -1,0 +1,77 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/combin"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn characterise(@kernel.Term) -> @kernel.Thm raise
+
+pub fn cl_induct() -> @kernel.Thm
+
+pub fn cl_recursion() -> @kernel.Thm
+
+pub fn confluent() -> @kernel.Thm
+
+pub fn confluent_diamond_rtc() -> @kernel.Thm
+
+pub fn confluent_redn() -> @kernel.Thm
+
+pub fn kx_predn() -> @kernel.Thm
+
+pub fn kxy_predn() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn predn_cases() -> @kernel.Thm
+
+pub fn predn_diamond() -> @kernel.Thm
+
+pub fn predn_diamond_lemma() -> @kernel.Thm
+
+pub fn predn_ind() -> @kernel.Thm
+
+pub fn predn_rtcredn() -> @kernel.Thm
+
+pub fn predn_rules() -> @kernel.Thm
+
+pub fn redn_cases() -> @kernel.Thm
+
+pub fn redn_ind() -> @kernel.Thm
+
+pub fn redn_rules() -> @kernel.Thm
+
+pub fn rtcpredn() -> @kernel.Thm
+
+pub fn rtcpredn_eq_rtcredn() -> @kernel.Thm
+
+pub fn rtcpredn_ind() -> @kernel.Thm
+
+pub fn rtcpredn_rtcredn() -> @kernel.Thm
+
+pub fn rtcpredn_rules() -> @kernel.Thm
+
+pub fn rtcredn() -> @kernel.Thm
+
+pub fn rtcredn_ap_monotonic() -> @kernel.Thm
+
+pub fn rtcredn_ind() -> @kernel.Thm
+
+pub fn rtcredn_rtcpredn() -> @kernel.Thm
+
+pub fn rtcredn_rules() -> @kernel.Thm
+
+pub fn sx_predn() -> @kernel.Thm
+
+pub fn sxy_predn() -> @kernel.Thm
+
+pub fn sxyz_predn() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

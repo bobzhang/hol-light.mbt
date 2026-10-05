@@ -1,0 +1,97 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/rectypes"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn array_induction() -> @kernel.Thm
+
+pub fn array_recursion() -> @kernel.Thm
+
+pub fn bintree_induction() -> @kernel.Thm
+
+pub fn bintree_recursion() -> @kernel.Thm
+
+pub fn biterm_induction() -> @kernel.Thm
+
+pub fn biterm_recursion() -> @kernel.Thm
+
+pub fn daryl_induction() -> @kernel.Thm
+
+pub fn daryl_recursion() -> @kernel.Thm
+
+pub fn etree_induction() -> @kernel.Thm
+
+pub fn etree_recursion() -> @kernel.Thm
+
+pub fn example_induction() -> @kernel.Thm
+
+pub fn example_recursion() -> @kernel.Thm
+
+pub fn groof_induction() -> @kernel.Thm
+
+pub fn groof_recursion() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn long_induction() -> @kernel.Thm
+
+pub fn long_recursion() -> @kernel.Thm
+
+pub fn mut_induction() -> @kernel.Thm
+
+pub fn mut_recursion() -> @kernel.Thm
+
+pub fn myra_induction() -> @kernel.Thm
+
+pub fn myra_recursion() -> @kernel.Thm
+
+pub fn nonemptylist_induction() -> @kernel.Thm
+
+pub fn nonemptylist_recursion() -> @kernel.Thm
+
+pub fn ptree_induction() -> @kernel.Thm
+
+pub fn ptree_recursion() -> @kernel.Thm
+
+pub fn simper_induction() -> @kernel.Thm
+
+pub fn simper_recursion() -> @kernel.Thm
+
+pub fn strid_induction() -> @kernel.Thm
+
+pub fn strid_recursion() -> @kernel.Thm
+
+pub fn string_induction() -> @kernel.Thm
+
+pub fn string_recursion() -> @kernel.Thm
+
+pub fn term_induction() -> @kernel.Thm
+
+pub fn term_recursion() -> @kernel.Thm
+
+pub fn triterm_induction() -> @kernel.Thm
+
+pub fn triterm_recursion() -> @kernel.Thm
+
+pub fn value_induction() -> @kernel.Thm
+
+pub fn value_recursion() -> @kernel.Thm
+
+pub fn xtree_induction() -> @kernel.Thm
+
+pub fn xtree_recursion() -> @kernel.Thm
+
+pub fn zonk_induction() -> @kernel.Thm
+
+pub fn zonk_recursion() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

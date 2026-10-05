@@ -1,0 +1,111 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/machin"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn atn_add() -> @kernel.Thm
+
+pub fn atn_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn atn_add_small() -> @kernel.Thm
+
+pub fn atn_add_small_lemma() -> @kernel.Thm
+
+pub fn atn_add_small_lemma_pos() -> @kernel.Thm
+
+pub fn atn_approx_conv(Int64) -> ((@num.Num) -> @num.Num raise) raise
+
+pub fn atn_approx_conv_v1(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn atn_cmul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn atn_expand_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn atn_sub_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn bound_sumprod_rule((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @kernel.Thm raise
+
+pub fn bound_sumprod_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn euler() -> @kernel.Thm
+
+pub fn gauss_machin() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn machin_1() -> @kernel.Thm
+
+pub fn machin_2() -> @kernel.Thm
+
+pub fn machin_3() -> @kernel.Thm
+
+pub fn machin_4() -> @kernel.Thm
+
+pub fn machin_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn machin_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn machinlike_1() -> @kernel.Thm
+
+pub fn machinlike_2() -> @kernel.Thm
+
+pub fn machinlike_3() -> @kernel.Thm
+
+pub fn machinlike_4() -> @kernel.Thm
+
+pub fn machinlike_5() -> @kernel.Thm
+
+pub fn mclaurin_atn_approx() -> @kernel.Thm
+
+pub fn mclaurin_atn_rule(Int64) -> ((Int64) -> @list.List[@num.Num] raise) raise
+
+pub fn mclaurin_atn_rule_v1(Int64) -> ((Int64) -> @kernel.Thm raise) raise
+
+pub fn mclaurin_atn_simple() -> @kernel.Thm
+
+pub fn pi_approx_binary_rule(Int64) -> @num.Num raise
+
+pub fn pi_approx_binary_rule_v1(Int64) -> @kernel.Thm raise
+
+pub fn pi_approx_rule(Int64) -> @num.Num raise
+
+pub fn pi_approx_rule_v1(Int64) -> @kernel.Thm raise
+
+pub fn poly(@list.List[@num.Num], @num.Num) -> @num.Num raise
+
+pub fn real_atn_powser() -> @kernel.Thm
+
+pub fn real_atn_powser_diffl() -> @kernel.Thm
+
+pub fn real_atn_powser_diffs_diffs_summable() -> @kernel.Thm
+
+pub fn real_atn_powser_diffs_sum() -> @kernel.Thm
+
+pub fn real_atn_powser_diffs_summable() -> @kernel.Thm
+
+pub fn real_atn_powser_summable() -> @kernel.Thm
+
+pub fn real_le_1_pow2() -> @kernel.Thm
+
+pub fn real_lt_1_pow2() -> @kernel.Thm
+
+pub fn real_pow2_clauses() -> @kernel.Thm
+
+pub fn real_pow2_thm() -> @kernel.Thm
+
+pub fn strassnitzky_machin() -> @kernel.Thm
+
+pub fn tan_add_atn_sidecond() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

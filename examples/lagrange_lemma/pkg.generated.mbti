@@ -1,0 +1,29 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/lagrange_lemma"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn lagrange_4() -> @kernel.Thm
+
+pub fn lagrange_4_v1() -> @kernel.Thm
+
+pub fn lagrange_4_v2() -> @kernel.Thm
+
+pub fn lagrange_8() -> @kernel.Thm
+
+pub fn lagrange_8_v1() -> @kernel.Thm
+
+pub fn lagrange_8_v2() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
