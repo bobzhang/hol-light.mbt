@@ -47,6 +47,7 @@ RENAMED = {
     "Logic/canon": "logic/logic_canon",                    # canon.ml
     "Probability/measure": "probability/probability_measure",  # Multivariate/measure.ml
     "Quaternions/misc": "quaternions/quaternions_misc",    # Multivariate/misc.ml
+    "UnitTests/records": "unittests/unittests_records",    # Library/records.ml
 }
 
 
