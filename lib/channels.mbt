@@ -8,6 +8,11 @@
 pub(all) suberror EndOfFile derive(Debug)
 
 ///|
+/// OCaml's `Sys.Break` (an interrupt from the keyboard): matched by code
+/// that cleans up after one (Minisat/sat_tools.ml), never raised here.
+pub(all) suberror Break derive(Debug)
+
+///|
 /// `out_channel`: the file is written when the channel is flushed or closed.
 pub struct OutChannel {
   name : String
@@ -150,4 +155,10 @@ pub fn string_map(f : (Char) -> Char raise?, s : String) -> String raise? {
 /// `Filename.is_relative`
 pub fn filename_is_relative(name : String) -> Bool {
   !name.has_prefix("/")
+}
+
+///|
+/// `input_byte`: the next character's code (the files are byte strings).
+pub fn input_byte(ic : InChannel) -> Int64 raise {
+  input_char(ic).to_int().to_int64()
 }

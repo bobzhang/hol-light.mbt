@@ -197,6 +197,8 @@ pub fn[A, B : OCompare] increasing((A) -> B raise?, A, A) -> Bool raise?
 
 pub fn[A : OCompare] index(A, @list.List[A]) -> Int raise
 
+pub fn input_byte(InChannel) -> Int64 raise
+
 pub fn input_char(InChannel) -> Char raise
 
 pub fn input_line(InChannel) -> String raise
@@ -395,6 +397,20 @@ pub fn[A] sort((A, A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
 
 pub fn[A, B] splitlist((A) -> (B, A) raise, A) -> (@list.List[B], A) raise
 
+pub fn str_regexp(String) -> StrRegexp raise
+
+pub fn str_regexp_string(String) -> StrRegexp
+
+pub fn str_search_backward(StrRegexp, String, Int64) -> Int64 raise
+
+pub fn str_search_forward(StrRegexp, String, Int64) -> Int64 raise
+
+pub fn str_split(StrRegexp, String) -> @list.List[String]
+
+pub fn str_string_after(String, Int64) -> String
+
+pub fn str_string_before(String, Int64) -> String
+
 pub fn string_concat(String, @list.List[String]) -> String
 
 pub fn string_escaped(String) -> String
@@ -478,6 +494,8 @@ pub(all) suberror AssertFailure {
   AssertFailure(String)
 } derive(@debug.Debug)
 
+pub(all) suberror Break derive(@debug.Debug)
+
 pub(all) suberror EndOfFile derive(@debug.Debug)
 
 pub(all) suberror LazyUndefined derive(@debug.Debug)
@@ -539,6 +557,11 @@ pub struct OLazy[T] {
 pub struct OutChannel {
   name : String
   buf : StringBuilder
+}
+
+pub enum StrRegexp {
+  Literal(String)
+  Set(String)
 }
 
 // Type aliases

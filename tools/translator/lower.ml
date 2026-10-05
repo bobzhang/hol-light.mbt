@@ -270,6 +270,9 @@ module Lower = struct
     | "Format.formatter" | "Stdlib__Format.formatter" | "Stdlib.Format.formatter" | "formatter" -> Some "@pp.Formatter"
     (* channels on in-memory files (lib/channels.mbt) *)
     | "out_channel" | "Stdlib.out_channel" -> Some "@lib.OutChannel"
+    | "Str.regexp" -> Some "@lib.StrRegexp"
+    | "Buffer.t" | "Stdlib.Buffer.t" | "Stdlib__Buffer.t" -> Some "StringBuilder"
+    | "int32" | "Int32.t" | "Stdlib.Int32.t" | "Stdlib__Int32.t" -> Some "Int"
     | "in_channel" | "Stdlib.in_channel" -> Some "@lib.InChannel"
     | "net" -> Some "@nets.Net"
     | "gconv" -> Some "@simp.Gconv"
@@ -1177,6 +1180,8 @@ module Lower = struct
       Some (String.sub n 7 (String.length n - 7))
     (* a clock, as Sys.time (Formal_ineqs/ times its runs with it) *)
     else if n = "Unix.gettimeofday" then Some "Sys.time"
+    (* the Str library (lib/str.mbt has what Minisat/ uses of it) *)
+    else if String.length n > 4 && String.sub n 0 4 = "Str." then Some n
     else None
 
   (* Stdlib (or a module including it) `List.f` with the same meaning as
@@ -1816,6 +1821,7 @@ module Lower = struct
       | "ldexp" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.float_ldexp", [ a; b ]))
       | "abs_float" | "float_fabs" -> (1, fun [ a ] _ -> Call (Atom "Double::abs", [ a ]))
       | "max_int" -> (0, fun [] _ -> Atom "@lib.max_int63")
+      | "Sys.os_type" -> (0, fun [] _ -> Atom "\"Unix\"")
       | "min_int" -> (0, fun [] _ -> Atom "@lib.min_int63")
       | "int_of_float" | "truncate" -> (1, fun [ a ] _ -> Call (Atom "@lib.norm63", [ Call (Atom "Double::to_int64", [ a ]) ]))
       | ("min" | "max") as op ->
@@ -1900,6 +1906,28 @@ module Lower = struct
       | "String.index_opt" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_index_opt", [ a; b ]))
       | "String.split_on_char" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_split_on_char", [ a; b ]))
       | "String.map" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_map", [ a; b ]))
+      | "open_in_bin" -> (1, fun [ a ] _ -> Call (Atom "@lib.open_in", [ a ]))
+      | "input_byte" -> (1, fun [ a ] _ -> Call (Atom "@lib.input_byte", [ a ]))
+      (* the Str subset of lib/str.mbt (Minisat/) *)
+      | "Str.regexp" -> (1, fun [ a ] _ -> Call (Atom "@lib.str_regexp", [ a ]))
+      | "Str.regexp_string" -> (1, fun [ a ] _ -> Call (Atom "@lib.str_regexp_string", [ a ]))
+      | "Str.search_forward" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.str_search_forward", [ a; b; c ]))
+      | "Str.search_backward" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.str_search_backward", [ a; b; c ]))
+      | "Str.string_before" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.str_string_before", [ a; b ]))
+      | "Str.string_after" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.str_string_after", [ a; b ]))
+      | "Str.split" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.str_split", [ a; b ]))
+      (* Buffer: a StringBuilder *)
+      | "Buffer.create" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "StringBuilder::new", [])))
+      | "Buffer.add_char" -> (2, fun [ a; b ] _ -> Call (Atom "StringBuilder::write_char", [ a; b ]))
+      | "Buffer.add_string" -> (2, fun [ a; b ] _ -> Call (Atom "StringBuilder::write_string", [ a; b ]))
+      | "Buffer.contents" -> (1, fun [ a ] _ -> Call (Atom "StringBuilder::to_string", [ a ]))
+      (* Int32: MoonBit's Int (32 bits) *)
+      | "Int32.of_int" -> (1, fun [ a ] _ -> Call (Atom "Int64::to_int", [ a ]))
+      | "Int32.to_int" -> (1, fun [ a ] _ -> Call (Atom "Int::to_int64", [ a ]))
+      | "Int32.logand" -> (2, fun [ a; b ] _ -> Binop ("&", a, b))
+      | "Int32.logor" -> (2, fun [ a; b ] _ -> Binop ("|", a, b))
+      | "Int32.shift_left" -> (2, fun [ a; b ] _ -> Binop ("<<", a, narrow b))
+      | "Int32.shift_right" -> (2, fun [ a; b ] _ -> Binop (">>", a, narrow b))
       | "Filename.is_relative" -> (1, fun [ a ] _ -> Call (Atom "@lib.filename_is_relative", [ a ]))
       | "String.escaped" -> (1, fun [ a ] _ -> Call (Atom "@lib.string_escaped", [ a ]))
       | "String.concat" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_concat", [ a; b ]))
@@ -2267,6 +2295,7 @@ module Lower = struct
     | "Unchanged", [] -> ([], Atom "@lib.Unchanged", mty_of e.exp_type)
     | "Not_found", [] when predef_exn cd -> ([], Atom "@lib.NotFound", mty_of e.exp_type)
     | "End_of_file", [] when predef_exn cd -> ([], Atom "@lib.EndOfFile", mty_of e.exp_type)
+    | "Break", [] when not (Hashtbl.mem own_ctors "Break") -> ([], Atom "@lib.Break", mty_of e.exp_type)
     | "Sys_error", [ a ] when predef_exn cd -> let ss, x, _ = lower a in (ss, Call (Atom "@lib.SysError", [ x ]), mty_of e.exp_type)
     | name, [] when Hashtbl.mem own_ctors name -> ([], Atom (ctor_name ~cd name), mty_of e.exp_type)
     | name, args when Hashtbl.mem own_ctors name ->
@@ -2809,6 +2838,8 @@ module Lower = struct
            | "Not_found", [] when predef_exn cd -> "@lib.NotFound"
            | "End_of_file", [] when predef_exn cd -> "@lib.EndOfFile"
            | "Sys_error", [ a ] when predef_exn cd -> "@lib.SysError(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
+           (* Sys.Break (an interrupt from the keyboard: never raised here) *)
+           | "Break", [] when not (Hashtbl.mem own_ctors "Break") -> "@lib.Break"
            | "Match_failure", [ { pat_desc = Tpat_any; _ } ] -> "@lib.MatchFailure(_)"
            | name, [] when Hashtbl.mem own_ctors name -> ctor_name ~cd name
            | name, args when Hashtbl.mem own_ctors name ->
