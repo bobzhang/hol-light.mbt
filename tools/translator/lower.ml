@@ -1706,6 +1706,9 @@ module Lower = struct
       | "String.get" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.ocaml_string_get", [ a; narrow b ]))
       | "String.sub" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.string_sub", [ a; narrow b; narrow c ]))
       | "String.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_make", [ a; b ]))
+      | "Sys.time" ->
+          (* the clock lib.ml's `time` reads (0 on wasm) *)
+          (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "(@lib.cpu_time.val)", [])))
       | "Sys.command" -> (1, fun [ a ] _ -> widen (Call (Atom "@lib.sys_command", [ a ])))
       | "Sys.remove" -> (1, fun [ a ] _ -> Call (Atom "@lib.sys_remove", [ a ]))
       | "Sys.file_exists" -> (1, fun [ a ] _ -> Call (Atom "@lib.sys_file_exists", [ a ]))

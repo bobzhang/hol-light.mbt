@@ -216,6 +216,8 @@ def references(targets, refs):
                             f"let () = if not (Toploop.use_silently Format.std_formatter (Toploop.File {ml_str(body)})) "
                             "then exit 1;;\n")
     env = os.environ.copy()
+    # the bytecode stack limit, as run.sh
+    env.setdefault("OCAMLRUNPARAM", "l=256M")
     rlog = os.path.join(OUT, "ref.log")
     with open(rlog, "w") as lf:
         p = subprocess.run(["sh", "-c", 'eval "$(opam env --switch="${HOL_LIGHT_SWITCH:-hol-light}" --set-switch 2>/dev/null)"; '

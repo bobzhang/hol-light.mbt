@@ -6,6 +6,9 @@
 set -e
 cd "$(dirname "$0")"
 eval "$(opam env --switch="${HOL_LIGHT_SWITCH:-hol-light}" --set-switch 2>/dev/null)" || true
+# the bytecode stack limit (in words; the default 1M overflows in
+# EC/xzprojective.ml)
+export OCAMLRUNPARAM="${OCAMLRUNPARAM:-l=256M}"
 H=../../.repos/hol-light
 if [ ! -f _build/pa_j.cmo ]; then
   mkdir -p _build
