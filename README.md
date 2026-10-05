@@ -22,7 +22,7 @@ constructs theorems only through its API.
   IsabelleLight/, Boyer_Moore/**: their theory files (`complex/<name>`,
   ...).
 - **Examples/**: 45 of 50. **Tutorial/**: 18 of 24. **EC/**: 26 of 30.
-  **Autoformalization/**: 5 of 7.
+  **Autoformalization/**: 6 of 7.
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the
 registry caps a module at 100 MB); Multivariate/, 100/ and the translation

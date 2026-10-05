@@ -76,10 +76,11 @@ and file I/O before starting it.
    second clone meanwhile); a single file that takes longer
    (Autoformalization/fifteen_theorem.ml, EC/edwards25519.ml) has to run
    in a terminal.
-7. **Autoformalization/** (205K): 5 of 7 done. fifteen_theorem (translated;
-   its check against upstream takes hours) and planar_graph (95K; loads
-   Multivariate/cauchy.ml part-way through, theory.MID_NEEDS, and must not
-   have Multivariate/clifford.ml loaded, theory.CHAIN_SKIP) are left.
+7. **Autoformalization/** (205K): 6 of 7 done, with planar_graph (95K;
+   it loads Multivariate/cauchy.ml part-way through, theory.MID_NEEDS, and
+   is loaded without Multivariate/clifford.ml, theory.CHAIN_SKIP).
+   fifteen_theorem is translated; its check against upstream takes hours
+   (run it in a terminal).
    Also done on the way: IEEE, IsabelleLight, Boyer_Moore (the files
    boyer-moore.ml loads; not make.ml's definitions and testset/) and 18
    Tutorial/ files. Not ported from UnitTests/: basic_tests.ml needs the
@@ -90,8 +91,19 @@ and file I/O before starting it.
      (csdp): replay recorded solver output, as lib/gp.mbt does for PARI/GP.
      Then 100/thales and ceva.
    - miz3 (its own proof language, evaluated at run time), LP_arith.
-   - Formal_ineqs (44K): `.hl` files in nested directories, found through
-     `load_path`, inside modules: the tooling takes one directory level.
+   - Formal_ineqs (44K, 62 files in make.ml's closure): the tooling loads
+     it now (theory.ROOTS: one linear order; nested package paths). A
+     survey (`HOL_KEEP_GOING=1 batch.py --translate-only --files ...`)
+     left these for the translator, in order of weight:
+     `exception Error` (misc/misc_functions.hl: `Error` is a reserved type
+     name in MoonBit, rename it; every later file depends on this one);
+     "no provenance for <name>" for values of the file's own module used
+     from inside it (th_rule, case_rule, num_exp, ... about 250 uses: start
+     with arith/arith_num.hl); `Big_int.sign_big_int`; two "structure
+     item" and two "recursive value whose set-up uses itself". The
+     directory also writes log files (tests/log.hl: `Unix.mkdir`, output
+     channels, formats): port that module by hand, as
+     jordan/tactics_refine/dump.mbt.
    - Tutorial/: the six files left need sos.ml, Rqe/make.ml or external
      tools.
    - Not theories, not ported: Proofrecording (a second kernel), ProofTrace,
