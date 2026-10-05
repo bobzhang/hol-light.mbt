@@ -569,6 +569,12 @@ module Emit = struct
               (suffixes (List.rev !register_path));
             match d.typ_kind with
             | Ttype_variant cds -> List.iter (fun cd -> Hashtbl.replace own_ctors (Ident.name cd.cd_id) pkg) cds
+            | Ttype_abstract when d.typ_manifest <> None ->
+                (* an abbreviation is the type it stands for (a `goalthm`
+                   of Jordan/tactics_ext.ml is applied in
+                   Jordan/metric_spaces.ml) *)
+                Hashtbl.replace own_aliases (Ident.unique_name d.typ_id) ();
+                if !register_path <> [] then Hashtbl.replace own_aliases full ()
             | _ -> ())
           decls
     | Tstr_exception te ->
