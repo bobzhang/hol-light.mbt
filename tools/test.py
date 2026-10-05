@@ -30,7 +30,8 @@ and this script runs them with `moonrun --stack-size` (16 MB by default):
 recursive list functions overflow on long lists (the Grobner bases of
 Complex/grobner_examples.ml), and one at a time unless given `-j`.
 `-j JOBS` is how many run at once (one per package, each a single thread
-taking up to 1.5 GB): every core by default.
+taking 1 to 6 GB): half the cores by default. A test executable above
+`--max-rss-gb` (24) is killed and reported.
 
 `--shard I/N` runs the I-th of N parts of the selection (I from 1), for
 machines in parallel; the parts are balanced with the recorded times
@@ -40,8 +41,10 @@ import argparse
 import glob
 import json
 import os
+import re
 import subprocess
 import sys
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 
@@ -187,10 +190,15 @@ def run_wasm(target, ps, a):
         for info in sorted(glob.glob(os.path.join(out, p, "__*_test_info.json"))):
             kind = os.path.basename(info)[2:].split("_test_info")[0]
             tests = json.load(open(info))["tests"]
-            # the test files in name order: a chain's blocks load its files
-            # in order (tools/ocaml_ref/chain_test.py)
-            ranges = [[f, [{"start": 0, "end": len(v)}]] for f, v in sorted(tests.items())
-                      if v and (p not in ONLY or f in ONLY[p])]
+            # a chain's test files are numbered (NN_name_test.mbt) and run
+            # in that order (tools/ocaml_ref/chain_test.py); the files of
+            # any other package in the order moon lists them (the kernel's
+            # tests expect it)
+            files = [(f, v) for f, v in tests.items() if v]
+            if files and all(re.match(r"\d\d_", f) for f, _ in files):
+                files.sort()
+            ranges = [[f, [{"start": 0, "end": len(v)}]] for f, v in files
+                      if p not in ONLY or f in ONLY[p]]
             if not ranges:
                 continue
             exe = glob.glob(os.path.join(out, p, f"*.{kind}_test.wasm"))
@@ -203,24 +211,46 @@ def run_wasm(target, ps, a):
     def run(job):
         p, kind, exe, args, n = job
         t = time.time()
-        r = subprocess.run(["moonrun", "--stack-size", a.stack_size, "--test-args", args, exe, "--"],
-                           cwd=ROOT, capture_output=True, text=True)
-        res = [json.loads(l) for l in r.stdout.splitlines() if l.startswith('{"type":"result"')]
+        proc = subprocess.Popen(["moonrun", "--stack-size", a.stack_size, "--test-args", args, exe, "--"],
+                                cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        # watch its memory: a test that runs away is killed, not left to
+        # take the machine with it
+        peak, killed, done = [0.0], [False], threading.Event()
+
+        def watch():
+            while not done.wait(5):
+                r = subprocess.run(["ps", "-o", "rss=", "-p", str(proc.pid)], capture_output=True, text=True)
+                gb = int(r.stdout.strip() or 0) / 1048576
+                peak[0] = max(peak[0], gb)
+                if gb > float(a.max_rss_gb):
+                    killed[0] = True
+                    proc.kill()
+
+        w = threading.Thread(target=watch, daemon=True)
+        w.start()
+        out, err = proc.communicate()
+        done.set()
+        res = [json.loads(l) for l in out.splitlines() if l.startswith('{"type":"result"')]
         bad = [x for x in res if x.get("message")]
         lines = [f"   FAILED {p} ({kind}) {x['file']} #{x['index']}: {describe(x['message'])}" for x in bad]
-        if r.returncode != 0 or len(res) != n:
+        if killed[0]:
+            lines.append(f"   FAILED {p} ({kind}): killed above {a.max_rss_gb} GB of memory (--max-rss-gb), "
+                         f"{len(res)} of {n} tests ran")
+        elif proc.returncode != 0 or len(res) != n:
             # a trap (stack overflow, abort) ends the executable
-            tail = [l for l in r.stderr.strip().splitlines() if l.strip()][:6]
-            lines.append(f"   FAILED {p} ({kind}): exit {r.returncode}, {len(res)} of {n} tests ran\n     " +
+            tail = [l for l in err.strip().splitlines() if l.strip()][:6]
+            lines.append(f"   FAILED {p} ({kind}): exit {proc.returncode}, {len(res)} of {n} tests ran\n     " +
                          "\n     ".join(l[:300] for l in tail))
         for l in lines:
             print(l, flush=True)
-        return p, time.time() - t, n, len(res) - len(bad), not lines
+        return p, time.time() - t, n, len(res) - len(bad), not lines, peak[0]
 
     with ThreadPoolExecutor(int(a.jobs)) as ex:
         results = list(ex.map(run, jobs))
     total, passed = sum(r[2] for r in results), sum(r[3] for r in results)
     print(f"Total tests: {total}, passed: {passed}, failed: {total - passed}.")
+    top = sorted(results, key=lambda r: -r[5])[:3]
+    print("   most memory: " + ", ".join(f"{r[0]} {r[5]:.1f} GB" for r in top))
     if a.times:
         secs = {}
         for p, dt, *_ in results:
@@ -250,8 +280,11 @@ def main():
     ap.add_argument("--target")
     ap.add_argument("--shard")
     # moon runs the test executables one at a time unless told otherwise
-    ap.add_argument("-j", "--jobs", default=str(os.cpu_count() or 1))
+    ap.add_argument("-j", "--jobs", default=str(max(1, (os.cpu_count() or 2) // 2)))
     ap.add_argument("--stack-size", default="16000")
+    # a test executable above this much memory is killed (the largest, a
+    # whole chain in one process, stays well under it)
+    ap.add_argument("--max-rss-gb", default="24")
     # record each package's seconds in tools/test_times.tsv (wasm-gc)
     ap.add_argument("--times", action="store_true")
     ap.add_argument("--list", action="store_true")
