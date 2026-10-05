@@ -352,7 +352,10 @@ module Functors = struct
         let d = fresh () in
         let items = rewrite_items (new_scope d :: frames) items in
         ({ me with pmod_desc = Pmod_structure items }, Some d)
-    | Pmod_apply ({ pmod_desc = Pmod_ident { txt = f; _ }; _ }, ({ pmod_desc = Pmod_ident _; _ } as arg)) ->
+    (* the argument: a module's name, or a structure written in place
+       (`Map.Make (struct type t = term let compare = compare end)`,
+       Minisat/sat_common_tools.ml) *)
+    | Pmod_apply ({ pmod_desc = Pmod_ident { txt = f; _ }; _ }, ({ pmod_desc = (Pmod_ident _ | Pmod_structure _); _ } as arg)) ->
         let items = specialize frames f arg in
         rewrite_mexpr frames { me with pmod_desc = Pmod_structure items }
     | Pmod_ident { txt; _ } ->
