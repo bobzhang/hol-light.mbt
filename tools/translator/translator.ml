@@ -489,6 +489,8 @@ module Names = struct
     | "Probability/measure.ml" -> Some "probability/probability_measure"
     | "Quaternions/misc.hl" -> Some "quaternions/quaternions_misc"
     | "UnitTests/records.ml" -> Some "unittests/unittests_records"
+    | "Formal_ineqs/taylor/theory/taylor_interval-compiled.hl" -> Some "formal_ineqs/taylor/theory/taylor_interval_compiled"
+    | "Formal_ineqs/taylor/theory/multivariate_taylor-compiled.hl" -> Some "formal_ineqs/taylor/theory/multivariate_taylor_compiled"
     | f when String.contains f '/' && Filename.basename f = "make.ml" ->
         (* `<dir>/make` is the directory's chain test package *)
         let d = String.lowercase_ascii (Filename.dirname f) in

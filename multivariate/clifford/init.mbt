@@ -13,6 +13,9 @@ pub fn load() -> Unit {
   @derivatives.load()
   @vectors.load()
   @binary.load()
+  if skipped.val {
+    return
+  }
   @parser.begin_theory("Multivariate/clifford")
   load_steps() catch {
     e =>
@@ -24,8 +27,12 @@ pub fn load() -> Unit {
 }
 
 ///|
-/// Leave this file out of what is loaded after this call: a file that
-/// upstream loads without it (tools/ocaml_ref/theory.py, CHAIN_SKIP).
+let skipped : Ref[Bool] = Ref::{ val: false, }
+
+///|
+/// Leave this file's own steps out of what is loaded after this call: a
+/// file that upstream loads without it (tools/ocaml_ref/theory.py,
+/// CHAIN_SKIP).
 pub fn skip_load() -> Unit {
-  loaded.val = true
+  skipped.val = true
 }

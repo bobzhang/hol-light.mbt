@@ -10,6 +10,9 @@ pub fn load() -> Unit {
     return
   }
   loaded.val = true
+  if skipped.val {
+    return
+  }
   @parser.begin_theory("Library/binary")
   load_steps() catch {
     e => abort("HOL Light: loading Library/binary.ml failed: " + e.to_string())
@@ -18,8 +21,12 @@ pub fn load() -> Unit {
 }
 
 ///|
-/// Leave this file out of what is loaded after this call: a file that
-/// upstream loads without it (tools/ocaml_ref/theory.py, CHAIN_SKIP).
+let skipped : Ref[Bool] = Ref::{ val: false, }
+
+///|
+/// Leave this file's own steps out of what is loaded after this call: a
+/// file that upstream loads without it (tools/ocaml_ref/theory.py,
+/// CHAIN_SKIP).
 pub fn skip_load() -> Unit {
-  loaded.val = true
+  skipped.val = true
 }

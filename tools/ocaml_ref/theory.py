@@ -48,6 +48,9 @@ RENAMED = {
     "Probability/measure": "probability/probability_measure",  # Multivariate/measure.ml
     "Quaternions/misc": "quaternions/quaternions_misc",    # Multivariate/misc.ml
     "UnitTests/records": "unittests/unittests_records",    # Library/records.ml
+    # a package's name is an identifier
+    "Formal_ineqs/taylor/theory/taylor_interval-compiled": "formal_ineqs/taylor/theory/taylor_interval_compiled",
+    "Formal_ineqs/taylor/theory/multivariate_taylor-compiled": "formal_ineqs/taylor/theory/multivariate_taylor_compiled",
 }
 
 
@@ -186,6 +189,29 @@ def needs_closure(f):
 # OCaml session, where a curve by itself is at most forty minutes
 NEEDS_ONLY = {"EC"}
 
+# A directory whose make.ml loads one file that needs the rest, in nested
+# directories: its files load in the order that load visits them (each
+# file once, at its first `needs`, depth first), like a make.ml that lists
+# them. (Loaded by each file's own needs instead, two files reach a third
+# in different orders, and one session cannot translate them all.)
+ROOTS = {"Formal_ineqs": "Formal_ineqs/verifier/m_verifier_main.hl"}
+
+
+def top(f):
+    """The top-level directory of a file (`Formal_ineqs/arith/x.hl`)."""
+    return f.split("/")[0] if "/" in f else ""
+
+
+def needs_order(f, seen=None):
+    """`f` and what it needs, in upstream's load order (depth first)."""
+    seen = [] if seen is None else seen
+    for g in needs(f):
+        if g not in seen and stem(g) not in CORE and stem(g) not in LOADED:
+            needs_order(g, seen)
+    if f not in seen:
+        seen.append(f)
+    return seen
+
 
 # Directories whose loader computes its file list (`map (load_on_path
 # paths) [...]` in IsabelleLight/isalight.ml and Boyer_Moore/boyer-moore.ml):
@@ -205,6 +231,10 @@ def make_plan(d):
     for Multivariate/ (MAKE_ORDER above)."""
     if d in ORDERS:
         return [(f"{d}/{f}.ml", []) for f in ORDERS[d]]
+    if d in ROOTS:
+        pre = [g for g in needs(d + "/make.ml") if not g.startswith(d + "/")]
+        order = [g for g in needs_order(ROOTS[d]) if g.startswith(d + "/")]
+        return [(g, pre if i == 0 else []) for i, g in enumerate(order)]
     if d == "Multivariate" or d in NEEDS_ONLY or not os.path.isfile(os.path.join(HOL, d, "make.ml")):
         return []
     plan, pre = [], []
@@ -220,7 +250,7 @@ def make_plan(d):
 def make_pre(f):
     """The files of other directories its directory's make.ml loads just
     before `f`: loaded before `f`, like what it needs."""
-    for g, pre in make_plan(os.path.dirname(f)):
+    for g, pre in make_plan(top(f)):
         if g == f:
             return pre
     return []
@@ -237,7 +267,7 @@ def chain_prev(f):
     if f in EXTRAS:
         anchored = [g for g in needs_closure(f) if g in MAKE_ORDER]
         return max(anchored, key=MAKE_ORDER.index) if anchored else None
-    order = [g for g, _ in make_plan(os.path.dirname(f))]
+    order = [g for g, _ in make_plan(top(f))]
     if f in order:
         i = order.index(f)
         return order[i - 1] if i > 0 else None
@@ -250,8 +280,8 @@ def alone(g, frm):
     directory that needs it, as upstream's `needs` does. Jordan/make.ml loads
     Rqe/num_calc_simp.ml so, and fails after the Rqe files before it.
     Multivariate/ keeps its order from everywhere (MAKE_ORDER)."""
-    d = os.path.dirname(g)
-    return (g not in MV_ORDER and os.path.dirname(frm) != d
+    d = top(g)
+    return (g not in MV_ORDER and top(frm) != d
             and g in [x for x, _ in make_plan(d)])
 
 
@@ -343,17 +373,23 @@ def setup(f):
         body = (f'  @parser.begin_theory("{name}")\n  load_steps() catch {{\n'
                 f'    e => abort("HOL Light: loading {name}.ml failed: " + e.to_string())\n  }}\n'
                 "  @parser.end_theory()\n}\n")
+        skippable = any(f in v for v in CHAIN_SKIP.values())
         text = (f"// {name}.ml: the load steps are generated ({alias}{'_ml' if alias.endswith('test') else ''}.mbt).\n\n"
                 "///|\nlet loaded : Ref[Bool] = Ref::{ val: false }\n\n"
                 f"///|\n/// Load {name}.ml (once), after the files it needs.\npub fn load() -> Unit {{\n"
                 "  if loaded.val {\n    return\n  }\n  loaded.val = true\n"
                 + "".join(f"  @{os.path.basename(pkg_of(n))}.skip_load()\n" for n in skips)
-                + "".join(call(n) for n in chain + own) + body)
-        if any(f in v for v in CHAIN_SKIP.values()):
-            text += ("\n///|\n/// Leave this file out of what is loaded after this call: a file that\n"
-                     "/// upstream loads without it (tools/ocaml_ref/theory.py, CHAIN_SKIP).\n"
-                     "pub fn skip_load() -> Unit {\n  loaded.val = true\n}\n")
-        if f in [x for x, _ in make_plan(os.path.dirname(f))]:
+                + "".join(call(n) for n in chain + own)
+                # what it needs is loaded all the same, at this place in the
+                # order (theory.deps keeps those files where they are)
+                + ("  if skipped.val {\n    return\n  }\n" if skippable else "") + body)
+        if skippable:
+            text += ("\n///|\nlet skipped : Ref[Bool] = Ref::{ val: false }\n"
+                     "\n///|\n/// Leave this file's own steps out of what is loaded after this call: a\n"
+                     "/// file that upstream loads without it (tools/ocaml_ref/theory.py,\n"
+                     "/// CHAIN_SKIP).\n"
+                     "pub fn skip_load() -> Unit {\n  skipped.val = true\n}\n")
+        if f in [x for x, _ in make_plan(top(f))]:
             # a member of its directory's make.ml order: a file of another
             # directory that needs it loads it without the files before it
             text += (f"\n///|\n/// Load {name}.ml (once) as `needs` does: after what it needs itself, not\n"

@@ -632,6 +632,11 @@ module Emit = struct
         Hashtbl.reset local_names;
         (try
            match it.str_desc with
+           | Tstr_value (_, [ { vb_pat = { pat_desc = Tpat_var (id, _); pat_type; _ }; _ } ]) when takes_format pat_type ->
+               (* Formal_ineqs/misc/misc_functions.hl's error_fmt: a use of
+                  it would be reported as a value that is not translated *)
+               let name = Ident.name id in
+               add_decl (fun () -> Printf.sprintf "\n///|\n// `%s` takes an OCaml format string: not translated.\n" name)
            | Tstr_value (Asttypes.Nonrecursive, [ { vb_pat = { pat_desc = Tpat_var (id, _); _ }; vb_expr; _ } ]) ->
                if is_function vb_expr then emit_function (Ident.name id) id vb_expr
                else emit_value ~id (Ident.name id) vb_expr
