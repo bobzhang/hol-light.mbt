@@ -17,10 +17,10 @@ constructs theorems only through its API.
 - **100/**: 59 of 67 files (`100/<name>`); the rest wait for other
   directories.
 - **Complex/, Arithmetic/, Permutation/, Ntrie/, Model/, GL/, Divstep/, Rqe/,
-  Unity/**:
+  Unity/, Logic/**:
   their theory files (`complex/<name>`, ...).
-- **EC/**: 13 of 30 files so far. **Examples/**: 31 of 50.
-  **Autoformalization/**: 2 of 7.
+- **EC/**: 26 of 30 files so far. **Jordan/**: 13 of 14 (the main theorem
+  is next). **Examples/**: 31 of 50. **Autoformalization/**: 2 of 7.
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the
 registry caps a module at 100 MB); Multivariate/, 100/ and the translation

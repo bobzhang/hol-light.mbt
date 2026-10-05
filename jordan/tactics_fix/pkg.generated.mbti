@@ -1,0 +1,54 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/jordan/tactics_fix"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn find_hashstring(String) -> Int64 raise
+
+pub fn hash_of_string(String) -> Int64 raise
+
+pub fn hash_of_term(@kernel.Term) -> Int64 raise
+
+pub fn hash_of_type(@kernel.HolType) -> Int64 raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mem_hashstring(String) -> Bool raise
+
+pub fn memhash_of_string(String) -> Int64 raise
+
+pub fn paform(@kernel.Term) -> @kernel.Term raise
+
+pub fn print_goal_hashed(@list.List[(String, @kernel.Thm)], @kernel.Term) -> Unit raise
+
+pub fn print_goalstack_hashed(@list.List[((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)]) -> Unit raise
+
+pub fn print_goalstate_hashed(Int64, ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> Unit raise
+
+pub fn[TA] print_hyp(TA, (String, @kernel.Thm)) -> Unit raise
+
+pub fn print_hyps(Int64, @list.List[(String, @kernel.Thm)]) -> Unit raise
+
+pub fn remove_hashstring(String) -> Unit raise
+
+pub fn rename_var(Int64, @kernel.Term) -> @kernel.Term raise
+
+pub fn save_hashstring(String) -> Unit raise
+
+pub fn saved_hashstring() -> @ref.Ref[@lib.OHashtbl[String, Int64]]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,338 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/jordan/float"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn abs_num() -> @kernel.Thm
+
+pub fn abs_to_interval() -> @kernel.Thm
+
+pub fn add_real_constant(@kernel.Thm) -> Unit raise
+
+pub fn add_test((String, Bool)) -> Unit raise
+
+pub fn add_test_v1((String, Bool)) -> Unit raise
+
+pub fn calculated_constants() -> @ref.Ref[@list.List[(@kernel.Term, @kernel.Thm)]]
+
+pub fn dec_float(@kernel.Term) -> @kernel.Thm raise
+
+pub fn dest_decimal(@kernel.Term) -> @num.Num raise
+
+pub fn dest_float(@kernel.Term) -> @num.Num raise
+
+pub fn dest_int(@kernel.Term) -> @num.Num raise
+
+pub fn dest_interval(@kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn dest_unary(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn double_conv_file() -> Bool
+
+pub fn factor_c(Int64) -> ((@num.Num) -> (@num.Num, @num.Num) raise) raise
+
+pub fn[TA] falsify_ex((TA) -> Bool raise, TA) -> Bool raise
+
+pub fn float() -> @kernel.Thm
+
+pub fn float_abs() -> @kernel.Thm
+
+pub fn float_add() -> @kernel.Thm
+
+pub fn float_add_eq() -> @kernel.Thm
+
+pub fn float_add_nn() -> @kernel.Thm
+
+pub fn float_add_nnv2() -> @kernel.Thm
+
+pub fn float_add_np() -> @kernel.Thm
+
+pub fn float_add_pn() -> @kernel.Thm
+
+pub fn float_add_pp() -> @kernel.Thm
+
+pub fn float_add_ppv2() -> @kernel.Thm
+
+pub fn float_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_eq() -> @kernel.Thm
+
+pub fn float_ineq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_le() -> @kernel.Thm
+
+pub fn float_lt() -> @kernel.Thm
+
+pub fn float_mul() -> @kernel.Thm
+
+pub fn float_neg() -> @kernel.Thm
+
+pub fn float_nn() -> @kernel.Thm
+
+pub fn float_pos() -> @kernel.Thm
+
+pub fn float_pow() -> @kernel.Thm
+
+pub fn float_sub() -> @kernel.Thm
+
+pub fn float_zero() -> @kernel.Thm
+
+pub fn get_real_constant(@kernel.Term) -> @kernel.Thm raise
+
+pub fn heron_sqrt(Int64, @num.Num, @num.Num, @num.Num) -> @num.Num raise
+
+pub fn int_abs_neg_num() -> @kernel.Thm
+
+pub fn int_abs_num() -> @kernel.Thm
+
+pub fn int_add_neg() -> @kernel.Thm
+
+pub fn int_add_neg_num() -> @kernel.Thm
+
+pub fn int_add_negv2() -> @kernel.Thm
+
+pub fn int_nn() -> @kernel.Thm
+
+pub fn int_nn_neg() -> @kernel.Thm
+
+pub fn int_pos_neg() -> @kernel.Thm
+
+pub fn int_pos_p() -> @kernel.Thm
+
+pub fn int_pow_even_neg1() -> @kernel.Thm
+
+pub fn int_pow_mul() -> @kernel.Thm
+
+pub fn int_pow_neg1() -> @kernel.Thm
+
+pub fn int_pow_odd_neg1() -> @kernel.Thm
+
+pub fn int_pow_pow() -> @kernel.Thm
+
+pub fn int_rep3() -> @kernel.Thm
+
+pub fn int_sub() -> @kernel.Thm
+
+pub fn int_sub_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_zero() -> @kernel.Thm
+
+pub fn int_zero_neg() -> @kernel.Thm
+
+pub fn interval() -> @kernel.Thm
+
+pub fn interval_0() -> @kernel.Thm
+
+pub fn interval_abs_max() -> @kernel.Thm
+
+pub fn interval_abs_min() -> @kernel.Thm
+
+pub fn interval_absv() -> @kernel.Thm
+
+pub fn interval_add() -> @kernel.Thm
+
+pub fn interval_center() -> @kernel.Thm
+
+pub fn interval_clean_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn interval_div() -> @kernel.Thm
+
+pub fn interval_eps_0() -> @kernel.Thm
+
+pub fn interval_eps_pos() -> @kernel.Thm
+
+pub fn interval_max() -> @kernel.Thm
+
+pub fn interval_min() -> @kernel.Thm
+
+pub fn interval_minmax() -> @kernel.Thm
+
+pub fn interval_mk() -> @kernel.Thm
+
+pub fn interval_mul() -> @kernel.Thm
+
+pub fn interval_neg() -> @kernel.Thm
+
+pub fn interval_neg2() -> @kernel.Thm
+
+pub fn interval_num() -> @kernel.Thm
+
+pub fn interval_of_decimal(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn interval_of_neg(@kernel.Term) -> @kernel.Thm raise
+
+pub fn interval_of_num(@kernel.Term) -> @kernel.Thm raise
+
+pub fn interval_of_term(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn interval_of_twopow() -> @kernel.Thm
+
+pub fn interval_ssqrt() -> @kernel.Thm
+
+pub fn interval_sub() -> @kernel.Thm
+
+pub fn interval_to_less() -> @kernel.Thm
+
+pub fn interval_to_less_conv(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn interval_width() -> @kernel.Thm
+
+pub fn is_bits_format(@kernel.Term) -> Bool raise
+
+pub fn is_comb_of(@kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn is_decimal_format(@kernel.Term) -> Bool raise
+
+pub fn is_float_format(@kernel.Term) -> Bool raise
+
+pub fn is_int_format(@kernel.Term) -> Bool raise
+
+pub fn is_interval_format(@kernel.Term) -> Bool raise
+
+pub fn is_neg_int_format(@kernel.Term) -> Bool raise
+
+pub fn is_neg_real(@kernel.Term) -> Bool raise
+
+pub fn is_numeral_format(@kernel.Term) -> Bool raise
+
+pub fn is_pos_int_format(@kernel.Term) -> Bool raise
+
+pub fn is_real_num_format(@kernel.Term) -> Bool raise
+
+pub fn iwrite_real_le_lhs(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn iwrite_real_le_rhs(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn lemma1() -> @kernel.Thm
+
+pub fn lemma2() -> @kernel.Thm
+
+pub fn lemma3() -> @kernel.Thm
+
+pub fn let_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_decimal(@num.Num) -> @kernel.Term raise
+
+pub fn mk_float(@num.Num) -> @kernel.Term raise
+
+pub fn mk_int(@num.Num) -> @kernel.Term raise
+
+pub fn mk_interval(@kernel.Term, @kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mk_pos_decimal(@num.Num) -> @kernel.Term raise
+
+pub fn num_exponent(@num.Num) -> @num.Num raise
+
+pub fn rat_lemma1_sub() -> @kernel.Thm
+
+pub fn real_add_le_subst_lhs() -> @kernel.Thm
+
+pub fn real_add_le_subst_rhs() -> @kernel.Thm
+
+pub fn real_eq_inv() -> @kernel.Thm
+
+pub fn real_eq_rcancel_imp_p() -> @kernel.Thm
+
+pub fn real_ineq(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn real_inv2() -> @kernel.Thm
+
+pub fn real_le_abs_mul() -> @kernel.Thm
+
+pub fn real_mk_nn_ssqrt() -> @kernel.Thm
+
+pub fn real_mk_pos_abs__p() -> @kernel.Thm
+
+pub fn real_pow_pow() -> @kernel.Thm
+
+pub fn real_prop_le_labs() -> @kernel.Thm
+
+pub fn real_prop_le_rabs() -> @kernel.Thm
+
+pub fn real_rinv_2() -> @kernel.Thm
+
+pub fn real_ssqrt_char() -> @kernel.Thm
+
+pub fn real_ssqrt_eq_0() -> @kernel.Thm
+
+pub fn real_ssqrt_mono() -> @kernel.Thm
+
+pub fn real_ssqrt_neg() -> @kernel.Thm
+
+pub fn real_ssqrt_nn() -> @kernel.Thm
+
+pub fn real_ssqrt_square() -> @kernel.Thm
+
+pub fn real_ssqrt_square_p() -> @kernel.Thm
+
+pub fn real_sv_ssqrt_0() -> @kernel.Thm
+
+pub fn remove_real_constant(@kernel.Term) -> Unit raise
+
+pub fn round_inward(Int64, @num.Num) -> @num.Num raise
+
+pub fn round_inward_float(Int64, Double) -> @num.Num raise
+
+pub fn round_inward_rat(Int64, @num.Num) -> @num.Num raise
+
+pub fn round_outward(Int64, @num.Num) -> @num.Num raise
+
+pub fn round_outward_float(Int64, Double) -> @num.Num raise
+
+pub fn round_rat(Int64, @num.Num) -> @num.Num raise
+
+pub fn split_ratio(@num.Num) -> (@num.Num, @num.Num) raise
+
+pub fn ssqrt() -> @kernel.Thm
+
+pub fn subst_term(@list.List[(@kernel.Term, @kernel.Term)], @kernel.Term) -> @kernel.Term raise
+
+pub fn t1() -> @kernel.Term
+
+pub fn test_(Unit) -> Unit raise
+
+pub fn test__v1(Unit) -> Unit raise
+
+pub fn twopow() -> @kernel.Thm
+
+pub fn twopow_0() -> @kernel.Thm
+
+pub fn twopow_abs() -> @kernel.Thm
+
+pub fn twopow_add_1() -> @kernel.Thm
+
+pub fn twopow_add_int() -> @kernel.Thm
+
+pub fn twopow_add_num() -> @kernel.Thm
+
+pub fn twopow_inv() -> @kernel.Thm
+
+pub fn twopow_mk_pos() -> @kernel.Thm
+
+pub fn twopow_neg() -> @kernel.Thm
+
+pub fn twopow_nz() -> @kernel.Thm
+
+pub fn twopow_pos() -> @kernel.Thm
+
+pub fn twopow_pow() -> @kernel.Thm
+
+pub fn twopow_sub_num() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

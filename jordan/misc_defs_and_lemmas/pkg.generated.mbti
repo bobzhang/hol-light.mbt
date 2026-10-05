@@ -1,0 +1,407 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/jordan/misc_defs_and_lemmas"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abs_prod() -> @kernel.Thm
+
+pub fn abs_square() -> @kernel.Thm
+
+pub fn abs_square_le() -> @kernel.Thm
+
+pub fn affine() -> @kernel.Thm
+
+pub fn affine_convex_hull() -> @kernel.Term
+
+pub fn affine_dim() -> @kernel.Thm
+
+pub fn affine_dim0() -> @kernel.Term
+
+pub fn affine_dim_subset() -> @kernel.Term
+
+pub fn affine_hull() -> @kernel.Thm
+
+pub fn affine_hull_affine() -> @kernel.Term
+
+pub fn affine_hull_minimal() -> @kernel.Term
+
+pub fn affine_postulate() -> @kernel.Term
+
+pub fn bij_card() -> @kernel.Thm
+
+pub fn bij_inverse() -> @kernel.Thm
+
+pub fn card_delete_choice() -> @kernel.Thm
+
+pub fn card_ge_refl() -> @kernel.Thm
+
+pub fn card_sing() -> @kernel.Thm
+
+pub fn collinear() -> @kernel.Thm
+
+pub fn comp_assoc() -> @kernel.Thm
+
+pub fn comp_bij() -> @kernel.Thm
+
+pub fn comp_inj() -> @kernel.Thm
+
+pub fn comp_surj() -> @kernel.Thm
+
+pub fn compose() -> @kernel.Thm
+
+pub fn convex() -> @kernel.Thm
+
+pub fn convex_hull() -> @kernel.Thm
+
+pub fn convex_hull_hull() -> @kernel.Term
+
+pub fn coord() -> @kernel.Thm
+
+pub fn coplanar() -> @kernel.Thm
+
+pub fn countable_card() -> @kernel.Thm
+
+pub fn countable_image() -> @kernel.Thm
+
+pub fn countable_numseg() -> @kernel.Thm
+
+pub fn countable_unions() -> @kernel.Thm
+
+pub fn cross_product3() -> @kernel.Thm
+
+pub fn d_euclid() -> @kernel.Thm
+
+pub fn deriv() -> @kernel.Thm
+
+pub fn deriv2() -> @kernel.Thm
+
+pub fn diff_diff2() -> @kernel.Thm
+
+pub fn dirac_delta() -> @kernel.Thm
+
+pub fn domain_empty() -> @kernel.Thm
+
+pub fn domain_insert() -> @kernel.Thm
+
+pub fn dot() -> @kernel.Thm
+
+pub fn drop0() -> @kernel.Thm
+
+pub fn drop1() -> @kernel.Thm
+
+pub fn drop2() -> @kernel.Thm
+
+pub fn drop3() -> @kernel.Thm
+
+pub fn empty_exists() -> @kernel.Thm
+
+pub fn equivalence_relation() -> @kernel.Thm
+
+pub fn euclid() -> @kernel.Thm
+
+pub fn euclid0() -> @kernel.Thm
+
+pub fn euclid_affine_dim() -> @kernel.Term
+
+pub fn euclid_bounded() -> @kernel.Thm
+
+pub fn euclid_def(@kernel.Term) -> @kernel.Thm raise
+
+pub fn euclid_minus() -> @kernel.Thm
+
+pub fn euclid_neg() -> @kernel.Thm
+
+pub fn euclid_plus() -> @kernel.Thm
+
+pub fn euclid_scale() -> @kernel.Thm
+
+pub fn euclidean() -> @kernel.Thm
+
+pub fn finite_bij() -> @kernel.Thm
+
+pub fn finite_bij2() -> @kernel.Thm
+
+pub fn finite_countable() -> @kernel.Thm
+
+pub fn finite_has_size_lemma() -> @kernel.Thm
+
+pub fn finite_inj() -> @kernel.Thm
+
+pub fn finite_sing() -> @kernel.Thm
+
+pub fn fun() -> @kernel.Thm
+
+pub fn fun_size() -> @kernel.Thm
+
+pub fn func() -> @kernel.Thm
+
+pub fn gp16() -> @kernel.Thm
+
+pub fn gp16a() -> @kernel.Thm
+
+pub fn gspec_thm() -> @kernel.Thm
+
+pub fn half_set_convex() -> @kernel.Term
+
+pub fn hull_convex() -> @kernel.Term
+
+pub fn hull_minimal() -> @kernel.Term
+
+pub fn image_surj() -> @kernel.Thm
+
+pub fn in_elim_thm_p() -> @kernel.Thm
+
+pub fn in_preimage() -> @kernel.Thm
+
+pub fn infinite_pigeonhole() -> @kernel.Thm
+
+pub fn inner_cube() -> @kernel.Thm
+
+pub fn inner_vol() -> @kernel.Thm
+
+pub fn inter_finite() -> @kernel.Thm
+
+pub fn inters_empty() -> @kernel.Thm
+
+pub fn inters_subset() -> @kernel.Thm
+
+pub fn inters_subset2() -> @kernel.Thm
+
+pub fn inv_twopow() -> @kernel.Thm
+
+pub fn inverse_bij() -> @kernel.Thm
+
+pub fn inverse_def() -> @kernel.Thm
+
+pub fn inverse_fn() -> @kernel.Thm
+
+pub fn inverse_xy() -> @kernel.Thm
+
+pub fn line() -> @kernel.Thm
+
+pub fn line_plane() -> @kernel.Term
+
+pub fn line_postulate() -> @kernel.Term
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn local_def(@kernel.Term) -> @kernel.Thm raise
+
+pub fn max_num_sequence() -> @kernel.Thm
+
+pub fn max_real() -> @kernel.Thm
+
+pub fn metric_space() -> @kernel.Thm
+
+pub fn min_least() -> @kernel.Thm
+
+pub fn min_num() -> @kernel.Thm
+
+pub fn min_real() -> @kernel.Thm
+
+pub fn mk_angle() -> @kernel.Thm
+
+pub fn mk_convex_cone() -> @kernel.Thm
+
+pub fn mk_cube() -> @kernel.Thm
+
+pub fn mk_half_set() -> @kernel.Thm
+
+pub fn mk_interior_triangle() -> @kernel.Thm
+
+pub fn mk_line() -> @kernel.Thm
+
+pub fn mk_line_dim() -> @kernel.Term
+
+pub fn mk_open_half_set() -> @kernel.Thm
+
+pub fn mk_open_segment() -> @kernel.Thm
+
+pub fn mk_rectangle() -> @kernel.Thm
+
+pub fn mk_segment() -> @kernel.Thm
+
+pub fn mk_signed_angle() -> @kernel.Thm
+
+pub fn mk_triangle() -> @kernel.Thm
+
+pub fn mk_triangular_region() -> @kernel.Thm
+
+pub fn norm() -> @kernel.Thm
+
+pub fn num2_countable() -> @kernel.Thm
+
+pub fn num_above_finite() -> @kernel.Thm
+
+pub fn num_above_infinite() -> @kernel.Thm
+
+pub fn num_countable() -> @kernel.Thm
+
+pub fn num_infinite() -> @kernel.Thm
+
+pub fn num_intro() -> @kernel.Thm
+
+pub fn num_seg_union() -> @kernel.Thm
+
+pub fn one_vec() -> @kernel.Thm
+
+pub fn open_half_set_convex() -> @kernel.Term
+
+pub fn outer_cube() -> @kernel.Thm
+
+pub fn outer_vol() -> @kernel.Thm
+
+pub fn packing() -> @kernel.Thm
+
+pub fn pair_lemma() -> @kernel.Thm
+
+pub fn part0() -> @kernel.Thm
+
+pub fn part1() -> @kernel.Thm
+
+pub fn part2() -> @kernel.Thm
+
+pub fn part3() -> @kernel.Thm
+
+pub fn part4() -> @kernel.Thm
+
+pub fn part5() -> @kernel.Thm
+
+pub fn part6() -> @kernel.Thm
+
+pub fn part7() -> @kernel.Thm
+
+pub fn partition_def() -> @kernel.Thm
+
+pub fn pi_bound_fun() -> @kernel.Thm
+
+pub fn pi_est() -> @kernel.Thm
+
+pub fn pi_est2() -> @kernel.Thm
+
+pub fn pi_fun() -> @kernel.Thm
+
+pub fn pi_ser() -> @kernel.Thm
+
+pub fn pi_sern(@kernel.Term) -> @kernel.Thm raise
+
+pub fn plane() -> @kernel.Thm
+
+pub fn plane_inter() -> @kernel.Term
+
+pub fn plane_of_pt() -> @kernel.Term
+
+pub fn plane_of_pt_unique() -> @kernel.Term
+
+pub fn plane_separation() -> @kernel.Term
+
+pub fn preimage() -> @kernel.Thm
+
+pub fn prod() -> @kernel.Thm
+
+pub fn prod_abs() -> @kernel.Thm
+
+pub fn prod_cmul() -> @kernel.Thm
+
+pub fn prod_def() -> @kernel.Thm
+
+pub fn prod_eq() -> @kernel.Thm
+
+pub fn prod_exists() -> @kernel.Thm
+
+pub fn prod_mul() -> @kernel.Thm
+
+pub fn prod_pos() -> @kernel.Thm
+
+pub fn prod_pos_gen() -> @kernel.Thm
+
+pub fn prod_two() -> @kernel.Thm
+
+pub fn prod_zero() -> @kernel.Thm
+
+pub fn real_finite() -> @kernel.Thm
+
+pub fn real_inv_lt() -> @kernel.Thm
+
+pub fn real_mul_nn() -> @kernel.Thm
+
+pub fn recompute_pi(Int64) -> @kernel.Thm raise
+
+pub fn reflexive() -> @kernel.Thm
+
+pub fn ruler_postulate() -> @kernel.Term
+
+pub fn saturated_packing() -> @kernel.Thm
+
+pub fn ser_approx() -> @kernel.Thm
+
+pub fn ser_approx1() -> @kernel.Thm
+
+pub fn set_scale() -> @kernel.Thm
+
+pub fn set_translate() -> @kernel.Thm
+
+pub fn space() -> @kernel.Thm
+
+pub fn space_separation() -> @kernel.Term
+
+pub fn square_le() -> @kernel.Thm
+
+pub fn sub_union() -> @kernel.Thm
+
+pub fn subset_inter() -> @kernel.Thm
+
+pub fn subset_preimage() -> @kernel.Thm
+
+pub fn subset_suc() -> @kernel.Thm
+
+pub fn subset_suc2() -> @kernel.Thm
+
+pub fn suc_expand_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn sum_vector() -> @kernel.Thm
+
+pub fn sum_vector_exists() -> @kernel.Thm
+
+pub fn supp() -> @kernel.Thm
+
+pub fn supp_v1() -> @kernel.Thm
+
+pub fn surj_finite() -> @kernel.Thm
+
+pub fn surj_image() -> @kernel.Thm
+
+pub fn symmetric() -> @kernel.Thm
+
+pub fn transitive() -> @kernel.Thm
+
+pub fn triple_product() -> @kernel.Thm
+
+pub fn twopow_eps() -> @kernel.Thm
+
+pub fn unions_delete() -> @kernel.Thm
+
+pub fn unions_image_unions() -> @kernel.Thm
+
+pub fn unions_inter() -> @kernel.Thm
+
+pub fn unions_inters() -> @kernel.Thm
+
+pub fn unions_subset() -> @kernel.Thm
+
+pub fn unions_unions() -> @kernel.Thm
+
+pub fn vol() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

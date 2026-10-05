@@ -1,0 +1,178 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/jordan/real_ext"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn real_lmul_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn real_mk_le_square() -> @kernel.Thm
+
+pub fn real_mk_lt_square() -> @kernel.Thm
+
+pub fn real_mk_nn_abs() -> @kernel.Thm
+
+pub fn real_mk_nn_square() -> @kernel.Thm
+
+pub fn real_mk_nz_exp() -> @kernel.Thm
+
+pub fn real_mk_nz_pos() -> @kernel.Thm
+
+pub fn real_mk_pos_abs() -> @kernel.Thm
+
+pub fn real_mk_pos_exp() -> @kernel.Thm
+
+pub fn real_mk_pos_ln() -> @kernel.Thm
+
+pub fn real_mk_pos_pi() -> @kernel.Thm
+
+pub fn real_mul_ltimes() -> @kernel.Thm
+
+pub fn real_mul_ltimes_le() -> @kernel.Thm
+
+pub fn real_mul_rtimes() -> @kernel.Thm
+
+pub fn real_mul_rtimes_le() -> @kernel.Thm
+
+pub fn real_prop_eq_lmul() -> @kernel.Thm
+
+pub fn real_prop_eq_lmul__p() -> @kernel.Thm
+
+pub fn real_prop_eq_rmul() -> @kernel.Thm
+
+pub fn real_prop_eq_rmul__p() -> @kernel.Thm
+
+pub fn real_prop_eq_sqrt() -> @kernel.Thm
+
+pub fn real_prop_le_lcancel() -> @kernel.Thm
+
+pub fn real_prop_le_lmul() -> @kernel.Thm
+
+pub fn real_prop_le_lrmul() -> @kernel.Thm
+
+pub fn real_prop_le_pow() -> @kernel.Thm
+
+pub fn real_prop_le_rcancel() -> @kernel.Thm
+
+pub fn real_prop_le_rmul() -> @kernel.Thm
+
+pub fn real_prop_le_sqrt() -> @kernel.Thm
+
+pub fn real_prop_lt_lcancel() -> @kernel.Thm
+
+pub fn real_prop_lt_lmul() -> @kernel.Thm
+
+pub fn real_prop_lt_lrmul() -> @kernel.Thm
+
+pub fn real_prop_lt_rcancel() -> @kernel.Thm
+
+pub fn real_prop_lt_rmul() -> @kernel.Thm
+
+pub fn real_prop_lt_sqrt() -> @kernel.Thm
+
+pub fn real_prop_nn_add2() -> @kernel.Thm
+
+pub fn real_prop_nn_atn() -> @kernel.Thm
+
+pub fn real_prop_nn_double() -> @kernel.Thm
+
+pub fn real_prop_nn_inv() -> @kernel.Thm
+
+pub fn real_prop_nn_lcancel() -> @kernel.Thm
+
+pub fn real_prop_nn_mul2() -> @kernel.Thm
+
+pub fn real_prop_nn_pos() -> @kernel.Thm
+
+pub fn real_prop_nn_pow() -> @kernel.Thm
+
+pub fn real_prop_nn_rcancel() -> @kernel.Thm
+
+pub fn real_prop_nn_sin() -> @kernel.Thm
+
+pub fn real_prop_nn_sqrt() -> @kernel.Thm
+
+pub fn real_prop_nn_square() -> @kernel.Thm
+
+pub fn real_prop_nz_abs() -> @kernel.Thm
+
+pub fn real_prop_nz_inv() -> @kernel.Thm
+
+pub fn real_prop_nz_pow() -> @kernel.Thm
+
+pub fn real_prop_pos_add2() -> @kernel.Thm
+
+pub fn real_prop_pos_atn() -> @kernel.Thm
+
+pub fn real_prop_pos_inv() -> @kernel.Thm
+
+pub fn real_prop_pos_ladd() -> @kernel.Thm
+
+pub fn real_prop_pos_lmul() -> @kernel.Thm
+
+pub fn real_prop_pos_mul2() -> @kernel.Thm
+
+pub fn real_prop_pos_pow() -> @kernel.Thm
+
+pub fn real_prop_pos_radd() -> @kernel.Thm
+
+pub fn real_prop_pos_rmul() -> @kernel.Thm
+
+pub fn real_prop_pos_sin() -> @kernel.Thm
+
+pub fn real_prop_pos_sqrt() -> @kernel.Thm
+
+pub fn real_prop_pos_tan() -> @kernel.Thm
+
+pub fn real_prop_zero_abs() -> @kernel.Thm
+
+pub fn real_prop_zero_inv() -> @kernel.Thm
+
+pub fn real_prop_zero_neg() -> @kernel.Thm
+
+pub fn real_prop_zero_neg_v1() -> @kernel.Thm
+
+pub fn real_prop_zero_pow() -> @kernel.Thm
+
+pub fn real_prop_zero_sqrt() -> @kernel.Thm
+
+pub fn real_prop_zero_sumsq() -> @kernel.Thm
+
+pub fn real_rmul_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn real_sv_abs_0() -> @kernel.Thm
+
+pub fn real_sv_exp_0() -> @kernel.Thm
+
+pub fn real_sv_inv_0() -> @kernel.Thm
+
+pub fn real_sv_ladd_0() -> @kernel.Thm
+
+pub fn real_sv_lmul_0() -> @kernel.Thm
+
+pub fn real_sv_ln_1() -> @kernel.Thm
+
+pub fn real_sv_neg_0() -> @kernel.Thm
+
+pub fn real_sv_rmul_0() -> @kernel.Thm
+
+pub fn real_sv_sqrt_0() -> @kernel.Thm
+
+pub fn real_sv_tan_0() -> @kernel.Thm
+
+pub fn real_sv_tan_pi() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
