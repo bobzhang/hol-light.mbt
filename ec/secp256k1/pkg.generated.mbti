@@ -1,0 +1,65 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/secp256k1"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abelian_p256k1_group() -> @kernel.Thm
+
+pub fn cyclic_p256k1_group() -> @kernel.Thm
+
+pub fn finite_group_carrier_p256k1() -> @kernel.Thm
+
+pub fn g_256k1() -> @kernel.Thm
+
+pub fn generated_p256k1_group() -> @kernel.Thm
+
+pub fn generator_in_group_carrier_256k1() -> @kernel.Thm
+
+pub fn group_element_order_g256k1() -> @kernel.Thm
+
+pub fn group_endomorphism_triplex_beta() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn n_256k1() -> @kernel.Thm
+
+pub fn no_roots_256k1() -> @kernel.Thm
+
+pub fn p256k1_beta() -> @kernel.Thm
+
+pub fn p256k1_group() -> @kernel.Thm
+
+pub fn p256k1_group_element_order() -> @kernel.Thm
+
+pub fn p256k1_group_order() -> @kernel.Thm
+
+pub fn p256k1_group_v1() -> @kernel.Thm
+
+pub fn p256k1_lambda() -> @kernel.Thm
+
+pub fn p256k1_triplex_beta() -> @kernel.Thm
+
+pub fn p_256k1() -> @kernel.Thm
+
+pub fn p_256k1_alt() -> @kernel.Thm
+
+pub fn p_256k1_v1() -> @kernel.Thm
+
+pub fn prime_n256k1() -> @kernel.Thm
+
+pub fn prime_p256k1() -> @kernel.Thm
+
+pub fn secp256k1() -> @kernel.Thm
+
+pub fn size_p256k1_group() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
