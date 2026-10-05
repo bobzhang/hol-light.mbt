@@ -46,7 +46,7 @@ let th = @prime.prime_2()
 python3 tools/test.py                      # hand-ported core, wasm and wasm-gc (10 s)
 python3 tools/test.py core                 # everything hol.ml loads (20 s)
 python3 tools/test.py library              # or multivariate, 100, a package directory
-python3 tools/test.py all                  # the whole suite on wasm-gc (25 min on 24 cores)
+python3 tools/test.py all                  # the whole suite on wasm-gc
 python3 tools/test.py all --target wasm    # on the primary target (hours): before a release
 python3 tools/ocaml_ref/batch.py --files 100/x.ml ...   # translate and check
 ```
@@ -57,7 +57,9 @@ what HOL Light itself gives. The files of a directory with a load order
 loads the chain once; `tools/test.py complex/make/05_quelim_test.mbt` runs
 one member alone. Files outside such an order (100/, most of Library/)
 have a test each. Run the tier you touch; `--shard I/N` splits a selection
-across machines.
+across machines. Builds run 4 compiler processes at once (`--build-jobs`,
+`$HOL_MOON_JOBS`): linking the test executable of a long chain takes about
+14 GB, so moon's default of one per core is not safe here.
 
 The upstream sources go in `.repos/hol-light`. The reference runs use the
 opam switch `hol-light` (or `$HOL_LIGHT_SWITCH`):

@@ -43,7 +43,7 @@ def ml_file(f):
 
 def after(target):
     """`moon info` after a target's translation; errors stop the batch."""
-    r = subprocess.run(["moon", "info"], cwd=ROOT, capture_output=True, text=True)
+    r = theory.moon_info(capture_output=True, text=True)
     errs = re.findall(r"^Error.*(?:\n.*){0,9}", r.stdout + r.stderr, re.M)
     if errs or r.returncode != 0:
         print(f"moon info after {target} (status {r.returncode}):\n" +

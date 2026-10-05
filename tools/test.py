@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Run the test suite a tier (and a shard) at a time.
 
-usage: tools/test.py [tier ...] [--target T] [--shard I/N] [-j JOBS] [--stack-size KB] [--list]
+usage: tools/test.py [tier ...] [--target T] [--shard I/N] [-j JOBS] [--build-jobs N] [--list]
 
 Every theory's test loads its whole chain in a fresh process, so the suite
 costs hours of CPU. The tiers, cheapest first:
@@ -29,9 +29,12 @@ and this script runs them with `moonrun --stack-size` (16 MB by default):
 `moon test` runs them with moonrun's default stack, which upstream's
 recursive list functions overflow on long lists (the Grobner bases of
 Complex/grobner_examples.ml), and one at a time unless given `-j`.
-`-j JOBS` is how many run at once (one per package, each a single thread
-taking 1 to 6 GB): half the cores by default. A test executable above
-`--max-rss-gb` (24) is killed and reported.
+The build runs `--build-jobs` compiler processes at once (4, or
+$HOL_MOON_JOBS): linking a test executable that holds a long chain takes
+about 14 GB, and moon's default of one per core exhausted the machine.
+`-j JOBS` is how many tests run at once (one per package, each a single thread
+taking 1 to 6 GB): 8 by default, fewer on a small machine. A test
+executable above `--max-rss-gb` (16) is killed and reported.
 
 `--shard I/N` runs the I-th of N parts of the selection (I from 1), for
 machines in parallel; the parts are balanced with the recorded times
@@ -141,7 +144,7 @@ def run_moon(target, ps, a):
     # bury the result: show failures, the start of each diff and the totals
     # as they come; the full output goes to the log
     show = 0
-    cmd = ["moon", "test", "--target", target, "-j", a.jobs] + ps
+    cmd = ["moon", "test", "--target", target, "-j", a.build_jobs] + ps
     with open(logf, "w") as log, subprocess.Popen(
             cmd, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True) as r:
         for line in r.stdout:
@@ -176,7 +179,7 @@ def describe(message):
 def run_wasm(target, ps, a):
     """Build the test executables, then run each with moonrun."""
     logf = build_log(target)
-    b = subprocess.run(["moon", "test", "--target", target, "--build-only", "-j", a.jobs] + ps,
+    b = subprocess.run(["moon", "test", "--target", target, "--build-only", "-j", a.build_jobs] + ps,
                        cwd=ROOT, capture_output=True, text=True)
     open(logf, "w").write(b.stdout + b.stderr)
     if b.returncode != 0:
@@ -280,11 +283,14 @@ def main():
     ap.add_argument("--target")
     ap.add_argument("--shard")
     # moon runs the test executables one at a time unless told otherwise
-    ap.add_argument("-j", "--jobs", default=str(max(1, (os.cpu_count() or 2) // 2)))
+    ap.add_argument("-j", "--jobs", default=str(max(1, min(8, (os.cpu_count() or 2) // 2))))
+    # moonc processes at once: linking the test executable of a long chain
+    # takes about 14 GB (24 at once took 330 GB)
+    ap.add_argument("--build-jobs", default=os.environ.get("HOL_MOON_JOBS", "4"))
     ap.add_argument("--stack-size", default="16000")
     # a test executable above this much memory is killed (the largest, a
     # whole chain in one process, stays well under it)
-    ap.add_argument("--max-rss-gb", default="24")
+    ap.add_argument("--max-rss-gb", default="16")
     # record each package's seconds in tools/test_times.tsv (wasm-gc)
     ap.add_argument("--times", action="store_true")
     ap.add_argument("--list", action="store_true")

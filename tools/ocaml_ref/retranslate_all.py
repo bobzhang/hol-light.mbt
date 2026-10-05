@@ -47,7 +47,7 @@ def pkg(f):
 
 
 def errors_in(p):
-    out = subprocess.run(["moon", "check"], cwd=ROOT, capture_output=True, text=True)
+    out = subprocess.run(["moon", "check", "-j", os.environ.get("HOL_MOON_JOBS", "4")], cwd=ROOT, capture_output=True, text=True)
     text = out.stdout + out.stderr
     errs = re.findall(r"^Error.*(?:\n.*){0,9}", text, re.M)
     mine = [e for e in errs if f"/{p}/" in e]
@@ -85,6 +85,7 @@ def main():
         if errs:
             print("\n--\n".join((mine or errs)[:8]))
             sys.exit(1)
+        subprocess.run(["moon", "check", "-j", os.environ.get("HOL_MOON_JOBS", "4")], cwd=ROOT, capture_output=True)
         subprocess.run(["moon", "info"], cwd=ROOT, capture_output=True)
         with open(STATE, "a") as s:
             s.write(f + "\n")

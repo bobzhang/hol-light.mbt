@@ -206,6 +206,18 @@ def run(cmd, **kw):
     return subprocess.run(cmd, cwd=ROOT, **kw)
 
 
+# moonc processes at once: one per core (moon's default) exhausted the
+# machine's memory on the large generated packages
+MOON_JOBS = os.environ.get("HOL_MOON_JOBS", "4")
+
+
+def moon_info(**kw):
+    """`moon info`, after `moon check` at MOON_JOBS at a time: `moon info`
+    takes no -j, and then finds the packages already checked."""
+    run(["moon", "check", "-j", MOON_JOBS], capture_output=True)
+    return run(["moon", "info"], **kw)
+
+
 def setup(f):
     pkg = pkg_of(f)
     alias = os.path.basename(pkg)
@@ -357,7 +369,7 @@ def main():
         os.makedirs(os.path.dirname(aside), exist_ok=True)
         os.rename(os.path.join(ROOT, pkg), aside)
         try:
-            run(["moon", "info"], capture_output=True)
+            moon_info(capture_output=True)
         finally:
             os.rename(aside, os.path.join(ROOT, pkg))
     stage("setup+info")
@@ -370,7 +382,7 @@ def main():
         sys.exit(1)
     # `moon info` type-checks and writes the interface the next translations
     # read
-    chk = run(["moon", "info"], capture_output=True, text=True)
+    chk = moon_info(capture_output=True, text=True)
     errs = re.findall(r"^Error.*(?:\n.*){0,8}", chk.stdout + chk.stderr, re.M)
     if errs:
         print("\n--\n".join(errs[:6]))
