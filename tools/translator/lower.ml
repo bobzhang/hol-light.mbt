@@ -1192,6 +1192,30 @@ module Lower = struct
         let cs, cx, _ = lower c in
         let bs, bx, _ = lower body in
         ([ While ((cs, cx), (bs @ (if ordered bx then [ Do bx ] else []), Atom "()")) ], Atom "()", M.Named ("Unit", []))
+    | Texp_for (id, _, lo, hi, dir, body) ->
+        (* `for i = lo to hi do body done`: the bounds are evaluated once,
+           `lo` first; the counter is a Ref. (At `hi = max_int` OCaml stops
+           where this wraps: no upstream loop runs to it.) *)
+        let int64 = M.Named ("Int64", []) in
+        let ls, lx, _ = lower ~expect:int64 lo in
+        let hs, hx, _ = lower ~expect:int64 hi in
+        let r = fresh "i" in
+        let bound = fresh "n" in
+        let name = bind_local id int64 in
+        let bs, bx, _ = lower body in
+        let cmp, step =
+          match dir with Asttypes.Upto -> ("<=", "@lib.add63") | Asttypes.Downto -> (">=", "@lib.sub63")
+        in
+        ( ls @ [ Let (r, RefNew lx) ] @ hs
+          @ [ Let (bound, hx);
+              While
+                ( ([], Binop (cmp, Deref (Atom r), Atom bound)),
+                  ( [ Let (name, Deref (Atom r)) ] @ bs
+                    @ (if ordered bx then [ Do bx ] else [])
+                    @ [ Assign (Atom r, Call (Atom step, [ Deref (Atom r); Atom "1L" ])) ],
+                    Atom "()" ) ) ],
+          Atom "()",
+          M.Named ("Unit", []) )
     | Texp_lazy body ->
         (* evaluated (once) when forced *)
         let bb = lower_block body in
