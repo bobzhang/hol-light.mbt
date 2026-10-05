@@ -1766,6 +1766,8 @@ module Lower = struct
       | "float_of_int" -> (1, fun [ a ] _ -> Call (Atom "Int64::to_double", [ a ]))
       | "sqrt" | "float_sqrt" -> (1, fun [ a ] _ -> Call (Atom "Double::sqrt", [ a ]))
       | "floor" -> (1, fun [ a ] _ -> Call (Atom "Double::floor", [ a ]))
+      | "ceil" -> (1, fun [ a ] _ -> Call (Atom "Double::ceil", [ a ]))
+      | "ldexp" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.float_ldexp", [ a; b ]))
       | "abs_float" | "float_fabs" -> (1, fun [ a ] _ -> Call (Atom "Double::abs", [ a ]))
       | "max_int" -> (0, fun [] _ -> Atom "@lib.max_int63")
       | "min_int" -> (0, fun [] _ -> Atom "@lib.min_int63")

@@ -42,6 +42,36 @@ pub fn float_frexp(x : Double) -> (Double, Int64) {
 }
 
 ///|
+/// `ldexp x n`: `x * 2^n`. The scaling is done in exact steps of powers of
+/// two, so the result is C's (and OCaml's) whenever it is zero, infinite or
+/// in the normal range; a subnormal result may be rounded twice.
+pub fn float_ldexp(x : Double, n : Int64) -> Double {
+  // 2^k for -1022 <= k <= 1023
+  fn pow2(k : Int64) -> Double {
+    ((k + 1023L).reinterpret_as_uint64() << 52).reinterpret_as_double()
+  }
+
+  let mut r = x
+  let mut k = n
+  while k > 1000L && r != 0.0 && r == r {
+    r = r * pow2(1000L)
+    k = k - 1000L
+    if r == 1.0 / 0.0 || r == -1.0 / 0.0 {
+      return r
+    }
+  }
+  while k < -1000L && r != 0.0 && r == r {
+    r = r * pow2(-1000L)
+    k = k + 1000L
+  }
+  if k > 1000L || k < -1000L {
+    // zero or NaN: unchanged by any scaling
+    return r
+  }
+  r * pow2(k)
+}
+
+///|
 /// `log` (natural logarithm)
 pub fn float_log(x : Double) -> Double {
   @math.ln(x)
