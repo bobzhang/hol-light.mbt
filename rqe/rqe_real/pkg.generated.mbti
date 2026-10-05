@@ -1,0 +1,128 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/rqe_real"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn binomial_lemma() -> @kernel.Thm
+
+pub fn binomial_lemma_lt() -> @kernel.Thm
+
+pub fn dest_diffl(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_mult(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_plus(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_pow(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn diffl_tm() -> @kernel.Term
+
+pub fn div_id() -> @kernel.Thm
+
+pub fn even_odd_pow() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mk_mult(@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise
+
+pub fn mk_negative(@kernel.Term) -> @kernel.Term raise
+
+pub fn mk_plus(@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise
+
+pub fn mk_rlist(@list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn neg_abs() -> @kernel.Thm
+
+pub fn parity_pow_lt() -> @kernel.Thm
+
+pub fn pos_nat_pow() -> @kernel.Thm
+
+pub fn pos_pow() -> @kernel.Thm
+
+pub fn pow_tm() -> @kernel.Term
+
+pub fn rappend() -> @kernel.Term
+
+pub fn rd() -> @kernel.Term
+
+pub fn real_arch_simple_lt() -> @kernel.Thm
+
+pub fn real_dense() -> @kernel.Thm
+
+pub fn real_div_add_distrib() -> @kernel.Thm
+
+pub fn real_div_denom_le() -> @kernel.Thm
+
+pub fn real_div_denom_lt() -> @kernel.Thm
+
+pub fn real_div_distrib_2() -> @kernel.Thm
+
+pub fn real_div_distrib_l() -> @kernel.Thm
+
+pub fn real_div_distrib_r() -> @kernel.Thm
+
+pub fn real_div_inv() -> @kernel.Thm
+
+pub fn real_gt_exists() -> @kernel.Thm
+
+pub fn real_gt_imp_nz() -> @kernel.Thm
+
+pub fn real_lt_exists() -> @kernel.Thm
+
+pub fn real_mul_gt() -> @kernel.Thm
+
+pub fn real_mul_lt() -> @kernel.Thm
+
+pub fn real_neg_div() -> @kernel.Thm
+
+pub fn real_neg_nz() -> @kernel.Thm
+
+pub fn real_num_le_0() -> @kernel.Thm
+
+pub fn real_ty() -> @kernel.HolType
+
+pub fn req() -> @kernel.Term
+
+pub fn rge() -> @kernel.Term
+
+pub fn rgt() -> @kernel.Term
+
+pub fn rlast() -> @kernel.Term
+
+pub fn rle() -> @kernel.Term
+
+pub fn rlt() -> @kernel.Term
+
+pub fn rm() -> @kernel.Term
+
+pub fn rn() -> @kernel.Term
+
+pub fn rneq() -> @kernel.Term
+
+pub fn rone() -> @kernel.Term
+
+pub fn rp() -> @kernel.Term
+
+pub fn rs() -> @kernel.Term
+
+pub fn rx() -> @kernel.Term
+
+pub fn ry() -> @kernel.Term
+
+pub fn rz() -> @kernel.Term
+
+pub fn rzero() -> @kernel.Term
+
+pub fn rzero_v1() -> @kernel.Term
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

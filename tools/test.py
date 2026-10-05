@@ -41,12 +41,14 @@ machines in parallel; the parts are balanced with the recorded times
 (tools/test_times.tsv, seconds on wasm-gc; `--list` shows them).
 """
 import argparse
+import fcntl
 import glob
 import json
 import os
 import re
 import subprocess
 import sys
+import tempfile
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -132,6 +134,19 @@ def shard(pkgs, w, i, n):
     return sorted(parts[i - 1], key=pkgs.index)
 
 
+class build_lock:
+    """One build at a time on this machine, across checkouts: several
+    batches side by side (scratch clones) would otherwise link at once."""
+
+    def __enter__(self):
+        self.f = open(os.path.join(tempfile.gettempdir(), "hol-light-mbt-build.lock"), "w")
+        fcntl.flock(self.f, fcntl.LOCK_EX)
+
+    def __exit__(self, *exc):
+        fcntl.flock(self.f, fcntl.LOCK_UN)
+        self.f.close()
+
+
 def build_log(target):
     os.makedirs(os.path.join(ROOT, "_build"), exist_ok=True)
     return os.path.join(ROOT, "_build", f"test_{target}.log")
@@ -179,8 +194,9 @@ def describe(message):
 def run_wasm(target, ps, a):
     """Build the test executables, then run each with moonrun."""
     logf = build_log(target)
-    b = subprocess.run(["moon", "test", "--target", target, "--build-only", "-j", a.build_jobs] + ps,
-                       cwd=ROOT, capture_output=True, text=True)
+    with build_lock():
+        b = subprocess.run(["moon", "test", "--target", target, "--build-only", "-j", a.build_jobs] + ps,
+                           cwd=ROOT, capture_output=True, text=True)
     open(logf, "w").write(b.stdout + b.stderr)
     if b.returncode != 0:
         errs = [l for l in (b.stdout + b.stderr).splitlines() if l.startswith(("Error", "error"))]

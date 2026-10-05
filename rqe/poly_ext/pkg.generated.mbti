@@ -1,0 +1,118 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/poly_ext"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn behead(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Term raise
+
+pub fn behead3(@list.List[@kernel.Term]) -> ((@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn behead_v1(@list.List[@kernel.Term]) -> ((@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn behead_v2(@list.List[@kernel.Term]) -> ((@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn canon_poly_diff_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn coefficients(@list.List[@kernel.Term], @kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn degree_(@list.List[@kernel.Term], @kernel.Term) -> Int64 raise
+
+pub fn dest_poly(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] earlier(@list.List[TA], TA, TA) -> Bool raise
+
+pub fn eq_lem() -> @kernel.Thm
+
+pub fn head(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Term raise
+
+pub fn headconst(@kernel.Term) -> @num.Num raise
+
+pub fn is_const_poly(@list.List[@kernel.Term], @kernel.Term) -> Bool raise
+
+pub fn is_constant(@list.List[@kernel.Term], @kernel.Term) -> Bool raise
+
+pub fn is_poly(@kernel.Term) -> Bool raise
+
+pub fn le_lem() -> @kernel.Thm
+
+pub fn lem1() -> @kernel.Thm
+
+pub fn lem2() -> @kernel.Thm
+
+pub fn lem3() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn lt_lem() -> @kernel.Thm
+
+pub fn monic_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn pdivide(@list.List[@kernel.Term]) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn poly() -> @kernel.Thm
+
+pub fn poly_add_(@list.List[@kernel.Term]) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise) raise
+
+pub fn poly_add_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn poly_delist_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn poly_deriv_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn poly_diff() -> @kernel.Thm
+
+pub fn poly_diff_clauses() -> @kernel.Thm
+
+pub fn poly_diff_lemma() -> @kernel.Thm
+
+pub fn poly_enlist_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn poly_mul_(@list.List[@kernel.Term]) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise) raise
+
+pub fn poly_mul_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn poly_neg_(@kernel.Term) -> @kernel.Term raise
+
+pub fn poly_neg_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn poly_pow_(@list.List[@kernel.Term]) -> ((@kernel.Term) -> ((Int64) -> @kernel.Term raise) raise) raise
+
+pub fn poly_pow_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn poly_sub_(@list.List[@kernel.Term]) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise) raise
+
+pub fn poly_sub_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn poly_tm() -> @kernel.Term
+
+pub fn poly_var(@kernel.Term) -> @kernel.Term raise
+
+pub fn polyatom_conv(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise
+
+pub fn polynate_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn polyvar(@kernel.Term) -> @kernel.Term raise
+
+pub fn pow_prod_sum() -> @kernel.Thm
+
+pub fn sign_const(@kernel.Term) -> @kernel.Thm raise
+
+pub fn simp_pow_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn weakfactor(@kernel.Term, @kernel.Term) -> (Int64, @kernel.Term) raise
+
+pub fn weakfactor_conv(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,110 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/rqe_main"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn basic_real_qelim_conv(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise
+
+pub fn duplicate_columns(@list.List[Int64], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn duplicate_columns_v1(@kernel.Thm, @list.List[Int64]) -> @kernel.Thm raise
+
+pub fn duplicate_columns_v2(@kernel.Thm, @list.List[Int64]) -> @kernel.Thm raise
+
+pub fn[TA, TB] first((TB) -> TA raise, @list.List[TB]) -> TA raise
+
+pub fn gen_poly_diff_conv(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] get_repeats(@list.List[TA]) -> @list.List[Int64] raise
+
+pub fn last_nz_conv(@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn length_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+pub fn[TA] matrix(@list.List[@kernel.Term], @list.List[@kernel.Term], (@kernel.Thm) -> ((@list.List[(@kernel.Term, @kernel.Thm)]) -> @kernel.Thm raise) raise, @list.List[@kernel.Thm], TA, @kernel.Term) -> @kernel.Thm raise
+
+pub fn matrix_count() -> @ref.Ref[Int64]
+
+pub fn[TA, TB] message_time(String, (TB) -> TA raise, TB) -> TA raise
+
+pub fn[TA] monicize(@list.List[@kernel.Term], @list.List[@kernel.Term], (@kernel.Thm) -> ((@list.List[(@kernel.Term, @kernel.Thm)]) -> @kernel.Thm raise) raise, @list.List[@kernel.Thm], TA, @kernel.Term) -> @kernel.Thm raise
+
+pub fn monicize_count() -> @ref.Ref[Int64]
+
+pub fn neq_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn normal_list_conv(@kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn pdiff_tm() -> @kernel.Term
+
+pub fn polynomials(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn print_counts(Unit) -> (Int64, Int64, Int64, Int64) raise
+
+pub fn real_qelim_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn remove_column(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn remove_column_v1(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn replace_pol(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn replace_pol_v1(@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn reset_counts(Unit) -> Unit raise
+
+pub fn rpmat() -> @ref.Ref[@kernel.Thm]
+
+pub fn rppeq() -> @ref.Ref[@kernel.Thm]
+
+pub fn setify_conv(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn[TA] splitsigns(@list.List[@kernel.Term], @list.List[@kernel.Term], @list.List[@kernel.Term], (@kernel.Thm) -> ((@list.List[(@kernel.Term, @kernel.Thm)]) -> @kernel.Thm raise) raise, @list.List[@kernel.Thm], TA, @kernel.Term) -> @kernel.Thm raise
+
+pub fn splitsigns_count() -> @ref.Ref[Int64]
+
+pub fn[TA] splitzero(@list.List[@kernel.Term], @list.List[@kernel.Term], @list.List[@kernel.Term], (@kernel.Thm) -> ((@list.List[(@kernel.Term, @kernel.Thm)]) -> @kernel.Thm raise) raise, @list.List[@kernel.Thm], TA, @kernel.Term) -> @kernel.Thm raise
+
+pub fn splitzero_count() -> @ref.Ref[Int64]
+
+pub fn subtract_index(@list.List[Int64]) -> @list.List[Int64] raise
+
+pub fn swap_head_col(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn swap_head_col_row(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn swap_head_col_v1(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn[TA, TB] trapout((TB) -> ((TA) -> @kernel.Thm raise) raise, TB, TA, @kernel.Term) -> @kernel.Thm raise
+
+pub fn unfactor_isign(@list.List[@kernel.Term], @kernel.Thm, @kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn unfactor_isigns(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn unfactor_mat(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn unfactor_mat_v1(@list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn unmonicize_isign(@list.List[@kernel.Term], @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn unmonicize_isigns(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn unmonicize_mat(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn unmonicize_mat_v1(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

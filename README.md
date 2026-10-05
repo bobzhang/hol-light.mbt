@@ -16,7 +16,7 @@ constructs theorems only through its API.
 - **Multivariate/**: all 32 theory files (`multivariate/<name>`).
 - **100/**: 59 of 67 files (`100/<name>`); the rest wait for other
   directories.
-- **Complex/, Arithmetic/, Permutation/, Ntrie/, Model/, GL/, Divstep/**:
+- **Complex/, Arithmetic/, Permutation/, Ntrie/, Model/, GL/, Divstep/, Rqe/**:
   their theory files (`complex/<name>`, ...).
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the

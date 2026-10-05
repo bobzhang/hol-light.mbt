@@ -1,0 +1,27 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/simplify"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn evalc_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+pub fn psimplify1_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_leaf_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn simplify1_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn simplify_conv(@kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

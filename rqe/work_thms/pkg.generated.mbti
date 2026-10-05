@@ -1,0 +1,330 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/work_thms"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn all2_append() -> @kernel.Thm
+
+pub fn all2_append_length() -> @kernel.Thm
+
+pub fn all2_butlast() -> @kernel.Thm
+
+pub fn all2_el() -> @kernel.Thm
+
+pub fn all2_el_lem() -> @kernel.Thm
+
+pub fn all2_el_lt() -> @kernel.Thm
+
+pub fn all2_el_lt_lem() -> @kernel.Thm
+
+pub fn all2_hd() -> @kernel.Thm
+
+pub fn all2_interpsign_subset() -> @kernel.Thm
+
+pub fn all2_lem() -> @kernel.Thm
+
+pub fn all2_lem2() -> @kernel.Thm
+
+pub fn all2_length() -> @kernel.Thm
+
+pub fn all2_split() -> @kernel.Thm
+
+pub fn all2_tl() -> @kernel.Thm
+
+pub fn all2_unknown() -> @kernel.Thm
+
+pub fn all_el() -> @kernel.Thm
+
+pub fn append_append() -> @kernel.Thm
+
+pub fn append_cons() -> @kernel.Thm
+
+pub fn append_hd() -> @kernel.Thm
+
+pub fn append_tl() -> @kernel.Thm
+
+pub fn butlast_append() -> @kernel.Thm
+
+pub fn butlast_id() -> @kernel.Thm
+
+pub fn butlast_id_v1() -> @kernel.Thm
+
+pub fn butlast_length() -> @kernel.Thm
+
+pub fn butlast_nil() -> @kernel.Thm
+
+pub fn butlast_thm() -> @kernel.Thm
+
+pub fn butlast_tl() -> @kernel.Thm
+
+pub fn disj_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn div_even() -> @kernel.Thm
+
+pub fn el_map() -> @kernel.Thm
+
+pub fn el_pre() -> @kernel.Thm
+
+pub fn el_replicate() -> @kernel.Thm
+
+pub fn el_suc() -> @kernel.Thm
+
+pub fn even_pre() -> @kernel.Thm
+
+pub fn exists_tacl(@list.List[@kernel.Term]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn fun_eq_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn hd_append1() -> @kernel.Thm
+
+pub fn hd_append2() -> @kernel.Thm
+
+pub fn hd_butlast() -> @kernel.Thm
+
+pub fn hd_lem() -> @kernel.Thm
+
+pub fn hd_tl() -> @kernel.Thm
+
+pub fn inferisign_neg_neg_neg() -> @kernel.Thm
+
+pub fn inferisign_neg_neg_pos() -> @kernel.Thm
+
+pub fn inferisign_neg_pos_neg() -> @kernel.Thm
+
+pub fn inferisign_neg_pos_pos() -> @kernel.Thm
+
+pub fn inferisign_neg_zero_neg() -> @kernel.Thm
+
+pub fn inferisign_neg_zero_pos() -> @kernel.Thm
+
+pub fn inferisign_pos_neg_neg() -> @kernel.Thm
+
+pub fn inferisign_pos_neg_pos() -> @kernel.Thm
+
+pub fn inferisign_pos_pos_neg() -> @kernel.Thm
+
+pub fn inferisign_pos_pos_pos() -> @kernel.Thm
+
+pub fn inferisign_pos_zero_neg() -> @kernel.Thm
+
+pub fn inferisign_pos_zero_pos() -> @kernel.Thm
+
+pub fn inferisign_zero_neg_neg() -> @kernel.Thm
+
+pub fn inferisign_zero_neg_pos() -> @kernel.Thm
+
+pub fn inferisign_zero_pos_neg() -> @kernel.Thm
+
+pub fn inferisign_zero_pos_pos() -> @kernel.Thm
+
+pub fn inferisign_zero_zero_neg() -> @kernel.Thm
+
+pub fn inferisign_zero_zero_pos() -> @kernel.Thm
+
+pub fn inferpsign_matinsert_thm() -> @kernel.Thm
+
+pub fn inferpsign_neg() -> @kernel.Thm
+
+pub fn inferpsign_neg_even() -> @kernel.Thm
+
+pub fn inferpsign_neg_even_lem() -> @kernel.Thm
+
+pub fn inferpsign_neg_odd_pos() -> @kernel.Thm
+
+pub fn inferpsign_neg_odd_pos_lem() -> @kernel.Thm
+
+pub fn inferpsign_pos() -> @kernel.Thm
+
+pub fn inferpsign_pos_even() -> @kernel.Thm
+
+pub fn inferpsign_pos_even_lem() -> @kernel.Thm
+
+pub fn inferpsign_pos_odd_pos() -> @kernel.Thm
+
+pub fn inferpsign_pos_odd_pos_lem() -> @kernel.Thm
+
+pub fn inferpsign_zero_even() -> @kernel.Thm
+
+pub fn inferpsign_zero_even_lem() -> @kernel.Thm
+
+pub fn inferpsign_zero_odd_pos() -> @kernel.Thm
+
+pub fn inferpsign_zero_odd_pos_lem() -> @kernel.Thm
+
+pub fn infin_hd_neg_lem() -> @kernel.Thm
+
+pub fn infin_hd_pos_lem() -> @kernel.Thm
+
+pub fn infin_neg_neg() -> @kernel.Thm
+
+pub fn infin_neg_pos() -> @kernel.Thm
+
+pub fn infin_nil_neg() -> @kernel.Thm
+
+pub fn infin_nil_pos() -> @kernel.Thm
+
+pub fn infin_pos_neg() -> @kernel.Thm
+
+pub fn infin_pos_pos() -> @kernel.Thm
+
+pub fn infin_sing_neg_neg() -> @kernel.Thm
+
+pub fn infin_sing_neg_pos() -> @kernel.Thm
+
+pub fn infin_sing_pos_neg() -> @kernel.Thm
+
+pub fn infin_sing_pos_pos() -> @kernel.Thm
+
+pub fn infin_tl_neg_lem() -> @kernel.Thm
+
+pub fn infin_tl_pos_lem() -> @kernel.Thm
+
+pub fn insertat() -> @kernel.Thm
+
+pub fn insertat_0() -> @kernel.Thm
+
+pub fn insertat_el() -> @kernel.Thm
+
+pub fn insertat_length() -> @kernel.Thm
+
+pub fn insertat_tl() -> @kernel.Thm
+
+pub fn interp_const_neg() -> @kernel.Thm
+
+pub fn interp_const_pos() -> @kernel.Thm
+
+pub fn interp_const_zero() -> @kernel.Thm
+
+pub fn interpmat_length() -> @kernel.Thm
+
+pub fn interpmat_pol_length() -> @kernel.Thm
+
+pub fn interpmat_pol_length_lem() -> @kernel.Thm
+
+pub fn interpmat_sing() -> @kernel.Thm
+
+pub fn interpmat_trio() -> @kernel.Thm
+
+pub fn interpmat_trio_inner() -> @kernel.Thm
+
+pub fn interpmat_trio_tl() -> @kernel.Thm
+
+pub fn interpsigns_conj() -> @kernel.Thm
+
+pub fn last_append() -> @kernel.Thm
+
+pub fn length_n(Int64, @kernel.HolType) -> @kernel.Thm raise
+
+pub fn length_tl() -> @kernel.Thm
+
+pub fn length_tl1() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn map2_el() -> @kernel.Thm
+
+pub fn map2_el_lem() -> @kernel.Thm
+
+pub fn matinsert_thm() -> @kernel.Thm
+
+pub fn matinsert_thm2() -> @kernel.Thm
+
+pub fn num_cases_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn odd_pre() -> @kernel.Thm
+
+pub fn partition_line_append() -> @kernel.Thm
+
+pub fn partition_line_length() -> @kernel.Thm
+
+pub fn partition_line_length_tl() -> @kernel.Thm
+
+pub fn partition_line_not_nil() -> @kernel.Thm
+
+pub fn path_conv2(@list.List[String], (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn pl_all2_length() -> @kernel.Thm
+
+pub fn pl_butlast() -> @kernel.Thm
+
+pub fn pl_lem() -> @kernel.Thm
+
+pub fn pl_lem2() -> @kernel.Thm
+
+pub fn pre_lem() -> @kernel.Thm
+
+pub fn quant_conv((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn remove_col1() -> @kernel.Thm
+
+pub fn remove_hd_col() -> @kernel.Thm
+
+pub fn remove_last() -> @kernel.Thm
+
+pub fn restrip_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn rol_append2() -> @kernel.Thm
+
+pub fn rol_append_insert() -> @kernel.Thm
+
+pub fn rol_mem() -> @kernel.Thm
+
+pub fn rol_sublist() -> @kernel.Thm
+
+pub fn rol_sublist_lt() -> @kernel.Thm
+
+pub fn split_list_thm() -> @kernel.Thm
+
+pub fn sublist() -> @kernel.Thm
+
+pub fn sublist_append() -> @kernel.Thm
+
+pub fn sublist_append2() -> @kernel.Thm
+
+pub fn sublist_append_hd() -> @kernel.Thm
+
+pub fn sublist_append_tl() -> @kernel.Thm
+
+pub fn sublist_butlast() -> @kernel.Thm
+
+pub fn sublist_cons() -> @kernel.Thm
+
+pub fn sublist_cons2() -> @kernel.Thm
+
+pub fn sublist_cons_cons() -> @kernel.Thm
+
+pub fn sublist_delete() -> @kernel.Thm
+
+pub fn sublist_id() -> @kernel.Thm
+
+pub fn sublist_id_append() -> @kernel.Thm
+
+pub fn sublist_id_cons() -> @kernel.Thm
+
+pub fn sublist_match() -> @kernel.Thm
+
+pub fn sublist_mem() -> @kernel.Thm
+
+pub fn sublist_neq() -> @kernel.Thm
+
+pub fn sublist_nil() -> @kernel.Thm
+
+pub fn sublist_tl() -> @kernel.Thm
+
+pub fn sublist_trans() -> @kernel.Thm
+
+pub fn sublist_trans2() -> @kernel.Thm
+
+pub fn use_x_assum(String, (@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

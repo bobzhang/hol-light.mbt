@@ -1,0 +1,32 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/matinsert"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn[TA] matinsert(@list.List[@kernel.Term], Int64, @kernel.Thm, (@kernel.Thm) -> TA raise, @kernel.Thm) -> TA raise
+
+pub fn[TA] matinsert_v1(@list.List[@kernel.Term], Int64, @kernel.Thm, (@kernel.Thm) -> TA raise, @kernel.Thm) -> TA raise
+
+pub fn mk_lt((Int64, Int64)) -> @kernel.Thm raise
+
+pub fn mk_suc(Int64) -> @kernel.Term raise
+
+pub fn mk_suc_v1(Int64) -> @kernel.Thm raise
+
+pub fn pl_length(@kernel.Term) -> @kernel.Thm raise
+
+pub fn rowinsert(Int64) -> ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

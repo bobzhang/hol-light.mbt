@@ -1,0 +1,57 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/inferpsign"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn inferpsign(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Thm, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn inferpsign2(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Thm, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn inferpsign_row(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Thm, @kernel.Thm, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn inferpsign_v1(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Thm, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn inferpt(@list.List[@kernel.Term]) -> ((@list.List[@kernel.Thm]) -> ((@kernel.Thm) -> ((@list.List[@kernel.Thm]) -> ((Int64) -> @kernel.Thm raise) raise) raise) raise) raise
+
+pub fn inferpts(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Thm, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn insert_unknown_col(@kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn isign_eq_zero(@kernel.Thm) -> Bool raise
+
+pub fn isign_gt_zero(@kernel.Thm) -> Bool raise
+
+pub fn isign_lt_zero(@kernel.Thm) -> Bool raise
+
+pub fn itdivs() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn itmat() -> @ref.Ref[@kernel.Thm]
+
+pub fn itsgns() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn itvars() -> @ref.Ref[@list.List[@kernel.Term]]
+
+pub fn load() -> Unit
+
+pub fn mk_rep(@kernel.Term) -> @kernel.Thm raise
+
+pub fn prove_nonzero(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn remove_qs(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn split_interpsigns(@kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn split_list(Int64, @kernel.Term, @kernel.HolType) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

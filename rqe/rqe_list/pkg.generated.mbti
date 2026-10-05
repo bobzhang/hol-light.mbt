@@ -1,0 +1,65 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/rqe_list"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn aacons_tm() -> @kernel.Term
+
+pub fn chop_list() -> @kernel.Thm
+
+pub fn el_conv((@kernel.Term) -> @kernel.Thm raise, Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn hd_append() -> @kernel.Thm
+
+pub fn hd_conv((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn last_cons() -> @kernel.Thm
+
+pub fn last_cons_cons() -> @kernel.Thm
+
+pub fn last_sing() -> @kernel.Thm
+
+pub fn last_tl() -> @kernel.Thm
+
+pub fn length_0() -> @kernel.Thm
+
+pub fn length_1() -> @kernel.Thm
+
+pub fn length_nz() -> @kernel.Thm
+
+pub fn length_pair() -> @kernel.Thm
+
+pub fn length_sing() -> @kernel.Thm
+
+pub fn length_tl() -> @kernel.Thm
+
+pub fn list_tri() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mem_remove() -> @kernel.Thm
+
+pub fn not_cons() -> @kernel.Thm
+
+pub fn rem_false() -> @kernel.Thm
+
+pub fn rem_neq() -> @kernel.Thm
+
+pub fn rem_nil() -> @kernel.Thm
+
+pub fn remove() -> @kernel.Thm
+
+pub fn tl_conv((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn tl_nil() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

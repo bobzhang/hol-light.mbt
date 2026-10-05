@@ -1,0 +1,94 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/defs"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn all2_thm() -> @kernel.Thm
+
+pub fn all2_thm0() -> @kernel.Thm
+
+pub fn dest_all2(@kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn dest_interpmat(@kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn dest_interpsign(@kernel.Thm) -> (@kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn dest_interpsigns(@kernel.Thm) -> (@kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn interp_doub() -> @kernel.Thm
+
+pub fn interp_sing() -> @kernel.Thm
+
+pub fn interpmat() -> @kernel.Thm
+
+pub fn interpmat_thms(@kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn interpmat_tm() -> @kernel.Term
+
+pub fn interpsign() -> @kernel.Thm
+
+pub fn interpsign_tm() -> @kernel.Term
+
+pub fn interpsigns() -> @kernel.Thm
+
+pub fn interpsigns_thms(@kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn interpsigns_thms2(@kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn interpsigns_tm() -> @kernel.Term
+
+pub fn is_interval(@kernel.Term) -> Bool raise
+
+pub fn is_point(@kernel.Term) -> Bool raise
+
+pub fn load() -> Unit
+
+pub fn make_partition_list(@list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise
+
+pub fn mk_all2_interpsigns(@kernel.Thm, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn mk_interpmat_thm(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn mk_interpsigns(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn new_var(@kernel.HolType) -> @kernel.Term raise
+
+pub fn part_line_tm() -> @kernel.Term
+
+pub fn partition_line() -> @kernel.Thm
+
+pub fn partition_line_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_bool_ty() -> @kernel.HolType
+
+pub fn reset_vars(Unit) -> Unit raise
+
+pub fn sign_cases() -> @kernel.Thm
+
+pub fn sign_induct() -> @kernel.Thm
+
+pub fn sign_recursion() -> @kernel.Thm
+
+pub fn sneg_tm() -> @kernel.Term
+
+pub fn snonz_tm() -> @kernel.Term
+
+pub fn spos_tm() -> @kernel.Term
+
+pub fn sunk_tm() -> @kernel.Term
+
+pub fn szero_tm() -> @kernel.Term
+
+pub fn t0() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

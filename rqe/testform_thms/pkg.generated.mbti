@@ -1,0 +1,81 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/testform_thms"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn and_thm_nn() -> @kernel.Thm
+
+pub fn and_thm_np() -> @kernel.Thm
+
+pub fn and_thm_pn() -> @kernel.Thm
+
+pub fn and_thm_pp() -> @kernel.Thm
+
+pub fn eq_ge_thm() -> @kernel.Thm
+
+pub fn eq_gt_thm() -> @kernel.Thm
+
+pub fn eq_le_thm() -> @kernel.Thm
+
+pub fn eq_lt_thm() -> @kernel.Thm
+
+pub fn f_thm() -> @kernel.Thm
+
+pub fn gt_eq_thm() -> @kernel.Thm
+
+pub fn gt_ge_thm() -> @kernel.Thm
+
+pub fn gt_le_thm() -> @kernel.Thm
+
+pub fn gt_lt_thm() -> @kernel.Thm
+
+pub fn iff_thm_nn() -> @kernel.Thm
+
+pub fn iff_thm_np() -> @kernel.Thm
+
+pub fn iff_thm_pn() -> @kernel.Thm
+
+pub fn iff_thm_pp() -> @kernel.Thm
+
+pub fn imp_thm_n() -> @kernel.Thm
+
+pub fn imp_thm_pn() -> @kernel.Thm
+
+pub fn imp_thm_pp() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn lt_eq_thm() -> @kernel.Thm
+
+pub fn lt_ge_thm() -> @kernel.Thm
+
+pub fn lt_gt_thm() -> @kernel.Thm
+
+pub fn lt_le_thm() -> @kernel.Thm
+
+pub fn neg_thm_n() -> @kernel.Thm
+
+pub fn neg_thm_p() -> @kernel.Thm
+
+pub fn not_exists_conj_thm() -> @kernel.Thm
+
+pub fn or_thm_nn() -> @kernel.Thm
+
+pub fn or_thm_p() -> @kernel.Thm
+
+pub fn or_thm_q() -> @kernel.Thm
+
+pub fn t_thm() -> @kernel.Thm
+
+pub fn testform_itlem() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
