@@ -1,0 +1,75 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/ste"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn choice() -> @kernel.Thm
+
+pub fn defseq() -> @kernel.Thm
+
+pub fn defseq_minimal() -> @kernel.Thm
+
+pub fn deftraj() -> @kernel.Thm
+
+pub fn deftraj_defseq() -> @kernel.Thm
+
+pub fn deftraj_minimal() -> @kernel.Thm
+
+pub fn eval() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn monotonic() -> @kernel.Thm
+
+pub fn node_induct() -> @kernel.Thm
+
+pub fn node_recursion() -> @kernel.Thm
+
+pub fn propform_induct() -> @kernel.Thm
+
+pub fn propform_recursion() -> @kernel.Thm
+
+pub fn qjoin() -> @kernel.Thm
+
+pub fn qle() -> @kernel.Thm
+
+pub fn qle_choice() -> @kernel.Thm
+
+pub fn qle_ljoin() -> @kernel.Thm
+
+pub fn qle_refl() -> @kernel.Thm
+
+pub fn qle_rjoin() -> @kernel.Thm
+
+pub fn qle_trans() -> @kernel.Thm
+
+pub fn quat_distinct() -> @kernel.Thm
+
+pub fn quat_induct() -> @kernel.Thm
+
+pub fn quat_recursion() -> @kernel.Thm
+
+pub fn ste() -> @kernel.Thm
+
+pub fn ste_thm() -> @kernel.Thm
+
+pub fn tholds() -> @kernel.Thm
+
+pub fn trajectory() -> @kernel.Thm
+
+pub fn trajectory_deftraj() -> @kernel.Thm
+
+pub fn trajform_induct() -> @kernel.Thm
+
+pub fn trajform_recursion() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

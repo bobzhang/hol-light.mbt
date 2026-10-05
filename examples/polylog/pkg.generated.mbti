@@ -1,0 +1,27 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/polylog"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn factor_1x4_lemma() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn magic_derivative() -> @kernel.Thm
+
+pub fn polylog_converges() -> @kernel.Thm
+
+pub fn polylog_derivative() -> @kernel.Thm
+
+pub fn polylog_thm() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

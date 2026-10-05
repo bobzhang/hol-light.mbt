@@ -1,0 +1,164 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/doomsday"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn century_anchor() -> @kernel.Thm
+
+pub fn century_base_all() -> @kernel.Thm
+
+pub fn compute_cumdays(Int64) -> @kernel.Thm raise
+
+pub fn compute_year_doomsday(Int64) -> @kernel.Thm raise
+
+pub fn cumdays_400() -> @kernel.Thm
+
+pub fn cumdays_before() -> @kernel.Thm
+
+pub fn cumdays_before_step() -> @kernel.Thm
+
+pub fn cumulative_days() -> @kernel.Thm
+
+pub fn cumulative_days_400_mod7() -> @kernel.Thm
+
+pub fn cumulative_days_suc() -> @kernel.Thm
+
+pub fn day_1776_7_4() -> @kernel.Thm
+
+pub fn day_1966_12_14() -> @kernel.Thm
+
+pub fn day_1969_7_20() -> @kernel.Thm
+
+pub fn day_1989_11_9() -> @kernel.Thm
+
+pub fn day_2000_1_1() -> @kernel.Thm
+
+pub fn day_2005_03_25() -> @kernel.Thm
+
+pub fn day_2026_3_26() -> @kernel.Thm
+
+pub fn day_induct() -> @kernel.Thm
+
+pub fn day_number() -> @kernel.Thm
+
+pub fn day_of_week() -> @kernel.Thm
+
+pub fn day_of_week_400_period() -> @kernel.Thm
+
+pub fn day_of_year() -> @kernel.Thm
+
+pub fn day_recursion() -> @kernel.Thm
+
+pub fn dayname() -> @kernel.Thm
+
+pub fn days_in_month() -> @kernel.Thm
+
+pub fn days_in_month_pos() -> @kernel.Thm
+
+pub fn days_in_month_upper() -> @kernel.Thm
+
+pub fn days_in_year() -> @kernel.Thm
+
+pub fn days_in_year_sum() -> @kernel.Thm
+
+pub fn doomsday() -> @kernel.Thm
+
+pub fn doomsday_0() -> @kernel.Thm
+
+pub fn doomsday_100() -> @kernel.Thm
+
+pub fn doomsday_200() -> @kernel.Thm
+
+pub fn doomsday_300() -> @kernel.Thm
+
+pub fn doomsday_400_period() -> @kernel.Thm
+
+pub fn doomsday_algorithm() -> @kernel.Thm
+
+pub fn doomsday_algorithm_correct() -> @kernel.Thm
+
+pub fn doomsday_correct() -> @kernel.Thm
+
+pub fn doomsday_date() -> @kernel.Thm
+
+pub fn doomsday_date_bound() -> @kernel.Thm
+
+pub fn doomsday_day() -> @kernel.Thm
+
+pub fn doomsday_day_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn doomsday_day_correct() -> @kernel.Thm
+
+pub fn doomsday_same_weekday() -> @kernel.Thm
+
+pub fn doomsday_step() -> @kernel.Thm
+
+pub fn dow_from_doomsday() -> @kernel.Thm
+
+pub fn dow_period() -> @kernel.Thm
+
+pub fn dow_shift() -> @kernel.Thm
+
+pub fn leap_year() -> @kernel.Thm
+
+pub fn leap_year_2000() -> @kernel.Thm
+
+pub fn leap_year_2024() -> @kernel.Thm
+
+pub fn leap_year_2400() -> @kernel.Thm
+
+pub fn leap_year_400_period() -> @kernel.Thm
+
+pub fn leap_year_in_century() -> @kernel.Thm
+
+pub fn leap_year_mod() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mod_add_eq_compat() -> @kernel.Thm
+
+pub fn month_cases_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn not_leap_year_1900() -> @kernel.Thm
+
+pub fn not_leap_year_2023() -> @kernel.Thm
+
+pub fn not_leap_year_2100() -> @kernel.Thm
+
+pub fn valid_date() -> @kernel.Thm
+
+pub fn valid_doomsday() -> @kernel.Thm
+
+pub fn within_century() -> @kernel.Thm
+
+pub fn year_doomsday() -> @kernel.Thm
+
+pub fn year_doomsday_0() -> @kernel.Thm
+
+pub fn year_doomsday_100() -> @kernel.Thm
+
+pub fn year_doomsday_200() -> @kernel.Thm
+
+pub fn year_doomsday_300() -> @kernel.Thm
+
+pub fn year_doomsday_400() -> @kernel.Thm
+
+pub fn year_doomsday_400_period() -> @kernel.Thm
+
+pub fn year_doomsday_eq_doomsday() -> @kernel.Thm
+
+pub fn year_doomsday_eq_dow() -> @kernel.Thm
+
+pub fn year_doomsday_step() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

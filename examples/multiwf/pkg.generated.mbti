@@ -1,0 +1,99 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/multiwf"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn empty_is_finite() -> @kernel.Thm
+
+pub fn lemma_2_0() -> @kernel.Thm
+
+pub fn lemma_2_1() -> @kernel.Thm
+
+pub fn lemma_2_2() -> @kernel.Thm
+
+pub fn lemma_2_3() -> @kernel.Thm
+
+pub fn lemma_2_4() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mdiff() -> @kernel.Thm
+
+pub fn mdiff_v1() -> @kernel.Thm
+
+pub fn mempty() -> @kernel.Thm
+
+pub fn mempty_v1() -> @kernel.Thm
+
+pub fn mextension() -> @kernel.Thm
+
+pub fn mmember() -> @kernel.Thm
+
+pub fn mmember_mdiff() -> @kernel.Thm
+
+pub fn mmember_msing() -> @kernel.Thm
+
+pub fn mmember_munion() -> @kernel.Thm
+
+pub fn morder() -> @kernel.Thm
+
+pub fn morder_wf() -> @kernel.Thm
+
+pub fn msing() -> @kernel.Thm
+
+pub fn msing_v1() -> @kernel.Thm
+
+pub fn multiplicity_multiset() -> @kernel.Thm
+
+pub fn multiset_induct() -> @kernel.Thm
+
+pub fn multiset_induct_lemma1() -> @kernel.Thm
+
+pub fn multiset_induct_lemma2() -> @kernel.Thm
+
+pub fn multiset_tybij() -> @kernel.Thm
+
+pub fn multiset_tybij_th() -> @kernel.Thm
+
+pub fn munion() -> @kernel.Thm
+
+pub fn munion_11() -> @kernel.Thm
+
+pub fn munion_ac() -> @kernel.Thm
+
+pub fn munion_assoc() -> @kernel.Thm
+
+pub fn munion_empty() -> @kernel.Thm
+
+pub fn munion_inunion() -> @kernel.Thm
+
+pub fn munion_mempty() -> @kernel.Thm
+
+pub fn munion_v1() -> @kernel.Thm
+
+pub fn sing_is_finite() -> @kernel.Thm
+
+pub fn union_nonzero() -> @kernel.Thm
+
+pub fn wfp_cases() -> @kernel.Thm
+
+pub fn wfp_dchain() -> @kernel.Thm
+
+pub fn wfp_induct() -> @kernel.Thm
+
+pub fn wfp_part_induct() -> @kernel.Thm
+
+pub fn wfp_rules() -> @kernel.Thm
+
+pub fn wfp_wf() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

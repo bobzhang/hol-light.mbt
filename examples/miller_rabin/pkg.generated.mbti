@@ -1,0 +1,59 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/miller_rabin"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn absolute_miller_rabin_pseudoprime() -> @kernel.Thm
+
+pub fn bound_power_residues_modulo_odd_coprime() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn miller_rabin_composite() -> @kernel.Thm
+
+pub fn miller_rabin_composite_imp_composite() -> @kernel.Thm
+
+pub fn miller_rabin_composite_imp_composite_alt() -> @kernel.Thm
+
+pub fn miller_rabin_eq_fermat_pseudoprime_explicit() -> @kernel.Thm
+
+pub fn miller_rabin_imp_fermat_pseudoprime_explicit() -> @kernel.Thm
+
+pub fn miller_rabin_pseudoprime() -> @kernel.Thm
+
+pub fn miller_rabin_pseudoprime_1() -> @kernel.Thm
+
+pub fn miller_rabin_pseudoprime_bound() -> @kernel.Thm
+
+pub fn miller_rabin_pseudoprime_bound_gen() -> @kernel.Thm
+
+pub fn miller_rabin_pseudoprime_bound_lt() -> @kernel.Thm
+
+pub fn miller_rabin_pseudoprime_bound_phi() -> @kernel.Thm
+
+pub fn miller_rabin_pseudoprime_cong() -> @kernel.Thm
+
+pub fn miller_rabin_pseudoprime_imp_coprime() -> @kernel.Thm
+
+pub fn miller_rabin_pseudoprime_inverse_mod() -> @kernel.Thm
+
+pub fn miller_rabin_pseudoprime_mod_1() -> @kernel.Thm
+
+pub fn not_miller_rabin_composite() -> @kernel.Thm
+
+pub fn not_miller_rabin_pseudoprime() -> @kernel.Thm
+
+pub fn prime_imp_miller_rabin_pseudoprime() -> @kernel.Thm
+
+pub fn prime_imp_miller_rabin_pseudoprime_alt() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

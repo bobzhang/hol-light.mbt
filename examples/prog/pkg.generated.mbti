@@ -1,0 +1,204 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/prog"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/parser",
+  "bobzhang/hol_light/preterm",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn abort_() -> @kernel.Thm
+
+pub fn ado() -> @kernel.Thm
+
+pub fn and_() -> @kernel.Thm
+
+pub fn ands() -> @kernel.Thm
+
+pub fn assert() -> @kernel.Thm
+
+pub fn awhile() -> @kernel.Thm
+
+pub fn command_distinct() -> @kernel.Thm
+
+pub fn command_induction() -> @kernel.Thm
+
+pub fn command_injective() -> @kernel.Thm
+
+pub fn command_recursion() -> @kernel.Thm
+
+pub fn correct() -> @kernel.Thm
+
+pub fn correct_abort() -> @kernel.Thm
+
+pub fn correct_assert() -> @kernel.Thm
+
+pub fn correct_assign() -> @kernel.Thm
+
+pub fn correct_do() -> @kernel.Thm
+
+pub fn correct_if() -> @kernel.Thm
+
+pub fn correct_ite() -> @kernel.Thm
+
+pub fn correct_postweak() -> @kernel.Thm
+
+pub fn correct_prestrength() -> @kernel.Thm
+
+pub fn correct_seq() -> @kernel.Thm
+
+pub fn correct_skip() -> @kernel.Thm
+
+pub fn correct_while() -> @kernel.Thm
+
+pub fn determinism() -> @kernel.Thm
+
+pub fn deterministic() -> @kernel.Thm
+
+pub fn dive_to_var(@preterm.Preterm) -> @preterm.Preterm raise
+
+pub fn do_() -> @kernel.Thm
+
+pub fn example_factorial() -> @kernel.Thm
+
+pub fn false_() -> @kernel.Thm
+
+pub fn find_pwp(@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise
+
+pub fn if_() -> @kernel.Thm
+
+pub fn imp() -> @kernel.Thm
+
+pub fn implies() -> @kernel.Thm
+
+pub fn implies_trans() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn not_() -> @kernel.Thm
+
+pub fn or() -> @kernel.Thm
+
+pub fn ors() -> @kernel.Thm
+
+pub fn parse_program(@list.List[@parser.Lexcode]) -> (@preterm.Preterm, @list.List[@parser.Lexcode]) raise
+
+pub fn parse_program_assertion(@list.List[@parser.Lexcode]) -> (@preterm.Preterm, @list.List[@parser.Lexcode]) raise
+
+pub fn pred_taut(@kernel.Term) -> @kernel.Thm raise
+
+pub fn reserve_program_words(Unit) -> Unit raise
+
+pub fn sem_abort() -> @kernel.Thm
+
+pub fn sem_assert() -> @kernel.Thm
+
+pub fn sem_assign() -> @kernel.Thm
+
+pub fn sem_cases() -> @kernel.Thm
+
+pub fn sem_do() -> @kernel.Thm
+
+pub fn sem_if() -> @kernel.Thm
+
+pub fn sem_induct() -> @kernel.Thm
+
+pub fn sem_ite() -> @kernel.Thm
+
+pub fn sem_rules() -> @kernel.Thm
+
+pub fn sem_seq() -> @kernel.Thm
+
+pub fn sem_skip() -> @kernel.Thm
+
+pub fn sem_while() -> @kernel.Thm
+
+pub fn skip() -> @kernel.Thm
+
+pub fn state_gen_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn state_gen_tac_p((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn terminates() -> @kernel.Thm
+
+pub fn true_() -> @kernel.Thm
+
+pub fn unreserve_program_words(Unit) -> Unit raise
+
+pub fn vc_abort() -> @kernel.Thm
+
+pub fn vc_ado_measure() -> @kernel.Thm
+
+pub fn vc_ado_variant() -> @kernel.Thm
+
+pub fn vc_assert() -> @kernel.Thm
+
+pub fn vc_assign() -> @kernel.Thm
+
+pub fn vc_awhile_measure() -> @kernel.Thm
+
+pub fn vc_awhile_variant() -> @kernel.Thm
+
+pub fn vc_if() -> @kernel.Thm
+
+pub fn vc_ite() -> @kernel.Thm
+
+pub fn vc_seq_assert_left() -> @kernel.Thm
+
+pub fn vc_seq_assert_middle() -> @kernel.Thm
+
+pub fn vc_seq_assert_right() -> @kernel.Thm
+
+pub fn vc_seq_assign_left() -> @kernel.Thm
+
+pub fn vc_seq_assign_right() -> @kernel.Thm
+
+pub fn vc_seq_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn vc_skip() -> @kernel.Thm
+
+pub fn vc_step_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn vc_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn vc_unpack_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn wlp() -> @kernel.Thm
+
+pub fn wp() -> @kernel.Thm
+
+pub fn wp_abort() -> @kernel.Thm
+
+pub fn wp_assert() -> @kernel.Thm
+
+pub fn wp_assign() -> @kernel.Thm
+
+pub fn wp_conjunctive() -> @kernel.Thm
+
+pub fn wp_disjunctive() -> @kernel.Thm
+
+pub fn wp_do() -> @kernel.Thm
+
+pub fn wp_if() -> @kernel.Thm
+
+pub fn wp_ite() -> @kernel.Thm
+
+pub fn wp_monotonic() -> @kernel.Thm
+
+pub fn wp_seq() -> @kernel.Thm
+
+pub fn wp_skip() -> @kernel.Thm
+
+pub fn wp_total() -> @kernel.Thm
+
+pub fn wp_while() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

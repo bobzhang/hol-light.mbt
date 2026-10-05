@@ -1,0 +1,57 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/cong"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cong() -> @kernel.Thm
+
+pub fn cong_add() -> @kernel.Thm
+
+pub fn cong_mod_0() -> @kernel.Thm
+
+pub fn cong_mod_1() -> @kernel.Thm
+
+pub fn cong_mod_1_v1() -> @kernel.Thm
+
+pub fn cong_mod_abs() -> @kernel.Thm
+
+pub fn cong_mod_neg() -> @kernel.Thm
+
+pub fn cong_mul() -> @kernel.Thm
+
+pub fn cong_multiple() -> @kernel.Thm
+
+pub fn cong_neg() -> @kernel.Thm
+
+pub fn cong_refl() -> @kernel.Thm
+
+pub fn cong_rep_min() -> @kernel.Thm
+
+pub fn cong_rep_min_abs() -> @kernel.Thm
+
+pub fn cong_rep_pos() -> @kernel.Thm
+
+pub fn cong_rep_pos_pos() -> @kernel.Thm
+
+pub fn cong_self() -> @kernel.Thm
+
+pub fn cong_self_abs() -> @kernel.Thm
+
+pub fn cong_sub() -> @kernel.Thm
+
+pub fn cong_sym() -> @kernel.Thm
+
+pub fn cong_trans() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

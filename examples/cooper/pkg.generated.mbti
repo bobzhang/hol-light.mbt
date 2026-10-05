@@ -1,0 +1,220 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/cooper"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn adjustcoeff_conv(@list.List[@kernel.Term]) -> ((@num.Num) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn alldivide() -> @kernel.Thm
+
+pub fn alldivide_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn alldivide_mirror() -> @kernel.Thm
+
+pub fn aset() -> @kernel.Thm
+
+pub fn basic_cooper_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn bdisj_repeats_lemma() -> @kernel.Thm
+
+pub fn bset() -> @kernel.Thm
+
+pub fn bset_mirror() -> @kernel.Thm
+
+pub fn canon_interp_add(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn cform_induct() -> @kernel.Thm
+
+pub fn cform_recursion() -> @kernel.Thm
+
+pub fn coefficient(@kernel.Term, @kernel.Term) -> @num.Num raise
+
+pub fn cooper_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn cooper_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn dest_add(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_add_v1(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_int_const(@kernel.Term) -> @num.Num raise
+
+pub fn dest_mul(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_mul_v1(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_num_const(@kernel.Term) -> @num.Num raise
+
+pub fn dest_pow(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_sub(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn divides() -> @kernel.Thm
+
+pub fn divides_add() -> @kernel.Thm
+
+pub fn divides_add_revl() -> @kernel.Thm
+
+pub fn divides_add_revr() -> @kernel.Thm
+
+pub fn divides_lmul() -> @kernel.Thm
+
+pub fn divides_lneg() -> @kernel.Thm
+
+pub fn divides_rneg() -> @kernel.Thm
+
+pub fn divides_sub() -> @kernel.Thm
+
+pub fn dplcm(@kernel.Term) -> @num.Num raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] earlier(@list.List[TA], TA, TA) -> Bool raise
+
+pub fn eval_constant_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn exists_in_bset_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn exists_mod_eq() -> @kernel.Thm
+
+pub fn exists_mod_imp() -> @kernel.Thm
+
+pub fn exists_multiple_thm() -> @kernel.Thm
+
+pub fn exists_multiple_thm_1() -> @kernel.Thm
+
+pub fn exists_neg() -> @kernel.Thm
+
+pub fn expand_int_cases_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn forall_neg() -> @kernel.Thm
+
+pub fn formlcm(@kernel.Term, @kernel.Term) -> @num.Num raise
+
+pub fn int_add_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_cooper(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_divides_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_divides_num() -> @kernel.Thm
+
+pub fn int_divides_pos_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_down2() -> @kernel.Thm
+
+pub fn int_down_mul_lt() -> @kernel.Thm
+
+pub fn int_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_exists_cases() -> @kernel.Thm
+
+pub fn int_ge_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_gt_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_le_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_lt_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_mod_lemma() -> @kernel.Thm
+
+pub fn int_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_neg_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_pow_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn int_sub_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn interp() -> @kernel.Thm
+
+pub fn interp_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn interp_mirror() -> @kernel.Thm
+
+pub fn interp_mirror_lemma() -> @kernel.Thm
+
+pub fn is_add(@kernel.Term) -> Bool raise
+
+pub fn is_int_const(@kernel.Term) -> Bool raise
+
+pub fn is_mul(@kernel.Term) -> Bool raise
+
+pub fn is_num_const(@kernel.Term) -> Bool raise
+
+pub fn is_pow(@kernel.Term) -> Bool raise
+
+pub fn is_sub(@kernel.Term) -> Bool raise
+
+pub fn lcm_num(@num.Num, @num.Num) -> @num.Num raise
+
+pub fn linear_cmul(@list.List[@kernel.Term]) -> ((@num.Num) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn linearize_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn load() -> Unit
+
+pub fn mainthm_a() -> @kernel.Thm
+
+pub fn mainthm_b() -> @kernel.Thm
+
+pub fn minusinf() -> @kernel.Thm
+
+pub fn minusinf_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn minusinf_lemma() -> @kernel.Thm
+
+pub fn minusinf_mirror() -> @kernel.Thm
+
+pub fn minusinf_repeats() -> @kernel.Thm
+
+pub fn mirror() -> @kernel.Thm
+
+pub fn mk_int_const(@num.Num) -> @kernel.Term raise
+
+pub fn mk_num_const(@num.Num) -> @kernel.Term raise
+
+pub fn multiply_1_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn nnf_posineq_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn nominimal_equiv() -> @kernel.Thm
+
+pub fn normalize_coeff_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn plusinf() -> @kernel.Thm
+
+pub fn plusinf_mirror() -> @kernel.Thm
+
+pub fn polynomial_add_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn polynomial_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn polynomial_mul_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn polynomial_neg_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn polynomial_normalizers(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise, (@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn polynomial_pow_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn polynomial_sub_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn prove_divides_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn prove_divides_conv_pos(@kernel.Term) -> @kernel.Thm raise
+
+pub fn shadow_conv(@kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

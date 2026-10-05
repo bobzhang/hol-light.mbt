@@ -1,0 +1,53 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/mccarthy"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn c_def() -> @kernel.Thm
+
+pub fn cell_induct() -> @kernel.Thm
+
+pub fn cell_recursion() -> @kernel.Thm
+
+pub fn cellth() -> @kernel.Thm
+
+pub fn correctness_theorem() -> @kernel.Thm
+
+pub fn e_def() -> @kernel.Thm
+
+pub fn exp_induct() -> @kernel.Thm
+
+pub fn exp_recursion() -> @kernel.Thm
+
+pub fn inst_induct() -> @kernel.Thm
+
+pub fn inst_recursion() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn s_def() -> @kernel.Thm
+
+pub fn s_p_append() -> @kernel.Thm
+
+pub fn s_p_def() -> @kernel.Thm
+
+pub fn string_induct() -> @kernel.Thm
+
+pub fn string_recursion() -> @kernel.Thm
+
+pub fn update_def() -> @kernel.Thm
+
+pub fn update_different() -> @kernel.Thm
+
+pub fn update_same() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,27 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/forster"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn forster_puzzle() -> @kernel.Thm
+
+pub fn forster_puzzle_v1() -> @kernel.Thm
+
+pub fn forster_puzzle_v2() -> @kernel.Thm
+
+pub fn forster_puzzle_v3() -> @kernel.Thm
+
+pub fn forster_puzzle_v4() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

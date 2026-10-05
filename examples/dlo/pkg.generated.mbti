@@ -1,0 +1,112 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/dlo"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn[TA] afn_dlo_conv(TA) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn all_gt_lemma() -> @kernel.Thm
+
+pub fn all_lt_lemma() -> @kernel.Thm
+
+pub fn beq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn cases_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn cnnf_conv((@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn dest_binop_op(@kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn dest_cases(@kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn dlo_eq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn dlobasic_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn double_neg_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn eq_refl_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn eq_triv_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn expand_all(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn f_tm() -> @kernel.Term
+
+pub fn forall_thm() -> @kernel.Thm
+
+pub fn imp_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn is_cases(@kernel.Term) -> Bool raise
+
+pub fn lfn_dlo_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn lift_qelim_conv((@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise, (@kernel.Term) -> @kernel.Thm raise, (@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn list_conj(@list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn load() -> Unit
+
+pub fn lt_refl_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn max_lt() -> @kernel.Thm
+
+pub fn maxl() -> @kernel.Thm
+
+pub fn min_gt() -> @kernel.Thm
+
+pub fn minl() -> @kernel.Thm
+
+pub fn mk_lt(@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise
+
+pub fn mk_rlist(@list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn neg_and_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn neg_beq_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn neg_imp_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn neg_or_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn not_tm() -> @kernel.Term
+
+pub fn or_exists_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn or_tm() -> @kernel.Term
+
+pub fn proforma_both() -> @kernel.Thm
+
+pub fn proforma_left() -> @kernel.Thm
+
+pub fn proforma_right() -> @kernel.Thm
+
+pub fn push_exists_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn qe_simplify_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn qelim_dlo_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_dense() -> @kernel.Thm
+
+pub fn real_gt_exists() -> @kernel.Thm
+
+pub fn real_lt_exists() -> @kernel.Thm
+
+pub fn t_tm() -> @kernel.Term
+
+pub fn tests() -> @list.List[@kernel.Term]
+
+pub fn triv_exists_conv(@kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

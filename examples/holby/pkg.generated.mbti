@@ -1,0 +1,184 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/holby"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/nets",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn abs_p(@kernel.Term, Lazyeq) -> Lazyeq raise
+
+pub fn alpha_eq_p(@kernel.Term, @kernel.Term, Lazyeq) -> Lazyeq raise
+
+pub fn atominequalities(@kernel.Thm, @kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn basic_mizarby(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn cache((Unit) -> @kernel.Thm raise) -> ((Unit) -> @kernel.Thm raise) raise
+
+pub fn canonize(Termequivalence, @kernel.Term) -> Lazyeq raise
+
+pub fn[TA] careful_lookup(@kernel.Term, @nets.Net[((@kernel.Term) -> Bool raise, TA)]) -> @list.List[TA] raise
+
+pub fn ccprove(@list.List[Lazyeq], @kernel.Term) -> Lazyeq raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] check_consistency(@list.List[(TA, TB)]) -> Bool raise
+
+pub fn concl_p(Lazyeq) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn[TA] conditional_enter((@kernel.Term, TA), @nets.Net[TA]) -> @nets.Net[TA] raise
+
+pub fn congruence_closure(@list.List[@kernel.Term], @list.List[Lazyeq]) -> Termequivalence raise
+
+pub fn congruence_closure_contr(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn congruence_closure_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn correlate_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn disequalities(@list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise
+
+pub fn emerge(Lazyeq, (Termequivalence, @lib.Func[@kernel.Term, @list.List[@kernel.Term]])) -> (Termequivalence, @lib.Func[@kernel.Term, @list.List[@kernel.Term]]) raise
+
+pub fn equate(Lazyeq, Termequivalence) -> Termequivalence raise
+
+pub fn equated(Termequivalence) -> @list.List[@kernel.Term] raise
+
+pub fn equivalence_class(Termequivalence, @kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn first_order_match(@list.List[@kernel.Term], @kernel.Term, @kernel.Term, @list.List[(@kernel.Term, @kernel.Term)]) -> @list.List[(@kernel.Term, @kernel.Term)] raise
+
+pub fn genspec(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn hol_by(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn hol_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn lazy_eq(@kernel.Thm) -> Lazyeq raise
+
+pub fn lazy_eval(Lazyeq) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+pub fn[TA] matching_enter(@kernel.Term, TA, @nets.Net[((@kernel.Term) -> Bool raise, TA)]) -> @nets.Net[((@kernel.Term) -> Bool raise, TA)] raise
+
+pub fn matchleaves(@list.List[@kernel.Term]) -> ((@kernel.Term) -> ((@list.List[@kernel.Term]) -> ((@list.List[(@kernel.Term, @kernel.Term)]) -> @list.List[(@kernel.Term, @kernel.Term)] raise) raise) raise) raise
+
+pub fn mizar_by(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn mizar_refuter(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn mizar_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn mizar_unifier(Termequivalence, @list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn mk_comb_p(Lazyeq, Lazyeq) -> Lazyeq raise
+
+pub fn negate(@kernel.Term) -> @kernel.Term raise
+
+pub fn prechecker_then((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn predecessor_function(@list.List[@kernel.Term]) -> @lib.Func[@kernel.Term, @list.List[@kernel.Term]] raise
+
+pub fn prop_1() -> @kernel.Thm
+
+pub fn prop_10() -> @kernel.Thm
+
+pub fn prop_11() -> @kernel.Thm
+
+pub fn prop_12() -> @kernel.Thm
+
+pub fn prop_13() -> @kernel.Thm
+
+pub fn prop_14() -> @kernel.Thm
+
+pub fn prop_15() -> @kernel.Thm
+
+pub fn prop_16() -> @kernel.Thm
+
+pub fn prop_17() -> @kernel.Thm
+
+pub fn prop_2() -> @kernel.Thm
+
+pub fn prop_3() -> @kernel.Thm
+
+pub fn prop_4() -> @kernel.Thm
+
+pub fn prop_5() -> @kernel.Thm
+
+pub fn prop_6() -> @kernel.Thm
+
+pub fn prop_7() -> @kernel.Thm
+
+pub fn prop_8() -> @kernel.Thm
+
+pub fn prop_9() -> @kernel.Thm
+
+pub fn prove_complementary(Termequivalence, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn prove_equal(Termequivalence, (@kernel.Term, @kernel.Term)) -> Lazyeq raise
+
+pub fn prove_equal_v1(Termequivalence, (@kernel.Term, @kernel.Term)) -> Lazyeq raise
+
+pub fn prove_equivalent(Termequivalence, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn provecongruent(Termequivalence, (@kernel.Term, @kernel.Term)) -> Lazyeq raise
+
+pub fn refl_p(@kernel.Term) -> Lazyeq raise
+
+pub fn refute_leaves(Termequivalence, @list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn separate_insts(@list.List[(@kernel.Term, @kernel.Term)]) -> (@list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise
+
+pub fn split_fol_then((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn split_then((@list.List[@kernel.Thm]) -> @kernel.Thm raise) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn successors(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn supersubterms(@list.List[@kernel.Term], @kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn sym_p(Lazyeq) -> Lazyeq raise
+
+pub fn term_equivs(Termequivalence, @kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn term_fmatch(@list.List[@kernel.Term], @kernel.Term, @kernel.Term, @list.List[(@kernel.Term, @kernel.Term)]) -> @list.List[(@kernel.Term, @kernel.Term)] raise
+
+pub fn term_universe(@list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise
+
+pub fn terminus(Termequivalence) -> ((@kernel.Term) -> (Lazyeq, @list.List[@kernel.Term]) raise) raise
+
+pub fn test_eq(Termequivalence, (@kernel.Term, @kernel.Term), @list.List[(@kernel.Term, @kernel.Term)]) -> Bool raise
+
+pub fn thmlist_contr_rule(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn trans_p(Lazyeq) -> ((Lazyeq) -> Lazyeq raise) raise
+
+pub fn tryterminus(Termequivalence, @kernel.Term) -> (Lazyeq, @list.List[@kernel.Term]) raise
+
+pub fn[TA, TB] unconditional_enter((@kernel.Term, TB), @nets.Net[((TA) -> Bool raise, TB)]) -> @nets.Net[((TA) -> Bool raise, TB)] raise
+
+pub fn unequal() -> Termequivalence
+
+// Errors
+
+// Types and methods
+pub(all) enum Lazyeq {
+  Lazy((@kernel.Term, @kernel.Term), (Unit) -> @kernel.Thm raise)
+}
+
+pub(all) enum Termequivalence {
+  Equivalence(@lib.Func[@kernel.Term, Termnode])
+}
+
+pub(all) enum Termnode {
+  Nonterminal(Lazyeq)
+  Terminal(@kernel.Term, @list.List[@kernel.Term])
+}
+
+// Type aliases
+
+// Traits

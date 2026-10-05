@@ -616,13 +616,18 @@ module Names = struct
         Hashtbl.replace member_tables pkg t;
         t
 
-  let resolve file name =
+  let rec resolve file name =
     let qualified = name in
     let name = match String.rindex_opt name '.' with Some i when i > 0 && i < String.length name - 1 -> String.sub name (i + 1) (String.length name - i - 1) | _ -> name in
     let rec go_pkgs = function
       | [] -> None
       | pkg :: pkgs ->
           match Hashtbl.find_opt (members pkg) qualified with
+          | Some m when m <> "" && m.[0] = '=' ->
+              (* re-exported from another file: `=<file>:<its name there>` *)
+              let r = String.sub m 1 (String.length m - 1) in
+              let i = String.index r ':' in
+              resolve (String.sub r 0 i) (String.sub r (i + 1) (String.length r - i - 1))
           | Some m -> Option.map (fun d -> (pkg, m, d)) (Mbti.find ~root:!root pkg m)
           | None ->
           let rec go = function

@@ -1,0 +1,109 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/pseudoprime"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn absolute_euler_jacobi_pseudoprime() -> @kernel.Thm
+
+pub fn absolute_fermat_pseudoprime() -> @kernel.Thm
+
+pub fn absolute_weak_euler_pseudoprime() -> @kernel.Thm
+
+pub fn absolute_weak_euler_pseudoprime_alt() -> @kernel.Thm
+
+pub fn card_subset_half_lemma() -> @kernel.Thm
+
+pub fn carmichael_number() -> @kernel.Thm
+
+pub fn carmichael_number_imp_nz() -> @kernel.Thm
+
+pub fn carmichael_number_imp_odd() -> @kernel.Thm
+
+pub fn carmichael_number_imp_squarefree() -> @kernel.Thm
+
+pub fn carmichael_number_imp_triplet() -> @kernel.Thm
+
+pub fn carmichael_number_korselt() -> @kernel.Thm
+
+pub fn carmichael_number_korselt_alt() -> @kernel.Thm
+
+pub fn carmichael_number_prime_factor_cong_1() -> @kernel.Thm
+
+pub fn carmichael_number_v1() -> @kernel.Thm
+
+pub fn euler_jacobi_imp_fermat_pseudoprime() -> @kernel.Thm
+
+pub fn euler_jacobi_imp_weak_euler_pseudoprime() -> @kernel.Thm
+
+pub fn euler_jacobi_pseudoprime() -> @kernel.Thm
+
+pub fn euler_jacobi_pseudoprime_bound_lt() -> @kernel.Thm
+
+pub fn euler_jacobi_pseudoprime_bound_phi() -> @kernel.Thm
+
+pub fn euler_jacobi_pseudoprime_bound_phi_alt() -> @kernel.Thm
+
+pub fn euler_jacobi_pseudoprime_imp_coprime() -> @kernel.Thm
+
+pub fn euler_jacobi_pseudoprime_imp_odd() -> @kernel.Thm
+
+pub fn fermat_pseudoprime() -> @kernel.Thm
+
+pub fn fermat_pseudoprime_bound_lt() -> @kernel.Thm
+
+pub fn fermat_pseudoprime_bound_phi() -> @kernel.Thm
+
+pub fn fermat_pseudoprime_bound_phi_alt() -> @kernel.Thm
+
+pub fn fermat_pseudoprime_imp_coprime() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn miller_rabin_eq_euler_jacobi_pseudoprime() -> @kernel.Thm
+
+pub fn miller_rabin_eq_fermat_pseudoprime() -> @kernel.Thm
+
+pub fn miller_rabin_eq_weak_euler_pseudoprime() -> @kernel.Thm
+
+pub fn miller_rabin_imp_euler_jacobi_pseudoprime() -> @kernel.Thm
+
+pub fn miller_rabin_imp_fermat_pseudoprime() -> @kernel.Thm
+
+pub fn miller_rabin_imp_weak_euler_pseudoprime() -> @kernel.Thm
+
+pub fn prime_eq_euler_jacobi_pseudoprime() -> @kernel.Thm
+
+pub fn prime_eq_fermat_pseudoprime() -> @kernel.Thm
+
+pub fn prime_eq_weak_euler_pseudoprime() -> @kernel.Thm
+
+pub fn prime_imp_euler_jacobi_pseudoprime() -> @kernel.Thm
+
+pub fn prime_imp_fermat_pseudoprime() -> @kernel.Thm
+
+pub fn prime_imp_weak_euler_pseudoprime() -> @kernel.Thm
+
+pub fn weak_euler_imp_fermat_pseudoprime() -> @kernel.Thm
+
+pub fn weak_euler_pseudoprime() -> @kernel.Thm
+
+pub fn weak_euler_pseudoprime_bound_lt() -> @kernel.Thm
+
+pub fn weak_euler_pseudoprime_bound_phi() -> @kernel.Thm
+
+pub fn weak_euler_pseudoprime_bound_phi_alt() -> @kernel.Thm
+
+pub fn weak_euler_pseudoprime_imp_coprime() -> @kernel.Thm
+
+pub fn weak_euler_pseudoprime_imp_odd() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
