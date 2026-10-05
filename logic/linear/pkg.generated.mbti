@@ -1,0 +1,97 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/linear"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn all2_butlast() -> @kernel.Thm
+
+pub fn all2_mem() -> @kernel.Thm
+
+pub fn linear_resolution_complete() -> @kernel.Thm
+
+pub fn linearization() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn lpresproof_cases() -> @kernel.Thm
+
+pub fn lpresproof_induct() -> @kernel.Thm
+
+pub fn lpresproof_mono() -> @kernel.Thm
+
+pub fn lpresproof_rules() -> @kernel.Thm
+
+pub fn lresproof_cases() -> @kernel.Thm
+
+pub fn lresproof_clause() -> @kernel.Thm
+
+pub fn lresproof_induct() -> @kernel.Thm
+
+pub fn lresproof_rules() -> @kernel.Thm
+
+pub fn negate_literal() -> @kernel.Thm
+
+pub fn not_suffix_tail() -> @kernel.Thm
+
+pub fn ppresproof() -> @kernel.Thm
+
+pub fn ppresproof_allnegative() -> @kernel.Thm
+
+pub fn ppresproof_cases() -> @kernel.Thm
+
+pub fn ppresproof_clause() -> @kernel.Thm
+
+pub fn ppresproof_consequence() -> @kernel.Thm
+
+pub fn ppresproof_induct() -> @kernel.Thm
+
+pub fn ppresproof_rules() -> @kernel.Thm
+
+pub fn ppresproof_sound() -> @kernel.Thm
+
+pub fn presproof_clause() -> @kernel.Thm
+
+pub fn resolve_clause() -> @kernel.Thm
+
+pub fn resolve_mono() -> @kernel.Thm
+
+pub fn resolve_sym() -> @kernel.Thm
+
+pub fn resolve_taut_l() -> @kernel.Thm
+
+pub fn resolve_taut_r() -> @kernel.Thm
+
+pub fn subset_taut() -> @kernel.Thm
+
+pub fn suffix() -> @kernel.Thm
+
+pub fn suffix_antisym() -> @kernel.Thm
+
+pub fn suffix_butlast() -> @kernel.Thm
+
+pub fn suffix_cons() -> @kernel.Thm
+
+pub fn suffix_length() -> @kernel.Thm
+
+pub fn suffix_mem() -> @kernel.Thm
+
+pub fn suffix_refl() -> @kernel.Thm
+
+pub fn suffix_trans() -> @kernel.Thm
+
+pub fn symmetry_lemma_1() -> @kernel.Thm
+
+pub fn symmetry_lemma_2() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

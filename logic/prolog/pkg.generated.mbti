@@ -1,0 +1,93 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/prolog"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn all2_triv() -> @kernel.Thm
+
+pub fn breakhorn() -> @kernel.Thm
+
+pub fn conclusion() -> @kernel.Thm
+
+pub fn conclusion_definite() -> @kernel.Thm
+
+pub fn conclusion_definite_alt() -> @kernel.Thm
+
+pub fn definite() -> @kernel.Thm
+
+pub fn definite_imp_horn() -> @kernel.Thm
+
+pub fn falsify() -> @kernel.Thm
+
+pub fn falsify_definite() -> @kernel.Thm
+
+pub fn falsify_finite() -> @kernel.Thm
+
+pub fn gbackchain_cases() -> @kernel.Thm
+
+pub fn gbackchain_complete() -> @kernel.Thm
+
+pub fn gbackchain_induct() -> @kernel.Thm
+
+pub fn gbackchain_minimal() -> @kernel.Thm
+
+pub fn gbackchain_rules() -> @kernel.Thm
+
+pub fn gbackchain_sound() -> @kernel.Thm
+
+pub fn holds_falsify() -> @kernel.Thm
+
+pub fn holds_horn() -> @kernel.Thm
+
+pub fn holds_itlist_imp() -> @kernel.Thm
+
+pub fn horn() -> @kernel.Thm
+
+pub fn hypotheses() -> @kernel.Thm
+
+pub fn hypotheses_conclusion() -> @kernel.Thm
+
+pub fn ibackchain_cases() -> @kernel.Thm
+
+pub fn ibackchain_complete() -> @kernel.Thm
+
+pub fn ibackchain_induct() -> @kernel.Thm
+
+pub fn ibackchain_minimal() -> @kernel.Thm
+
+pub fn ibackchain_rules() -> @kernel.Thm
+
+pub fn ibackchain_sound() -> @kernel.Thm
+
+pub fn iminmodel() -> @kernel.Thm
+
+pub fn iminmodel_interpretation() -> @kernel.Thm
+
+pub fn iminmodel_minimal() -> @kernel.Thm
+
+pub fn iminmodel_model() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn minmodel() -> @kernel.Thm
+
+pub fn minmodel_minimal() -> @kernel.Thm
+
+pub fn minmodel_model() -> @kernel.Thm
+
+pub fn reduce_horn_definite() -> @kernel.Thm
+
+pub fn satisfies_image() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

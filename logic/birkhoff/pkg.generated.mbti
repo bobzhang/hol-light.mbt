@@ -1,0 +1,145 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/birkhoff"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn all2_sym() -> @kernel.Thm
+
+pub fn aprovable_cases() -> @kernel.Thm
+
+pub fn aprovable_induct() -> @kernel.Thm
+
+pub fn aprovable_rules() -> @kernel.Thm
+
+pub fn cprovable_cases() -> @kernel.Thm
+
+pub fn cprovable_induct() -> @kernel.Thm
+
+pub fn cprovable_provable() -> @kernel.Thm
+
+pub fn cprovable_provable_lemma() -> @kernel.Thm
+
+pub fn cprovable_rules() -> @kernel.Thm
+
+pub fn eqaxiom_pred_imp() -> @kernel.Thm
+
+pub fn eqclause_eqaxiom_func() -> @kernel.Thm
+
+pub fn eqclause_func() -> @kernel.Thm
+
+pub fn eqclause_pred() -> @kernel.Thm
+
+pub fn eqclauses_def() -> @kernel.Thm
+
+pub fn eqclauses_definite() -> @kernel.Thm
+
+pub fn eqclauses_eqaxioms() -> @kernel.Thm
+
+pub fn eqlogic_complete() -> @kernel.Thm
+
+pub fn eqlogic_sound() -> @kernel.Thm
+
+pub fn equal_inj() -> @kernel.Thm
+
+pub fn equal_inj_alt() -> @kernel.Thm
+
+pub fn esubterms() -> @kernel.Thm
+
+pub fn esubterms_trivial_l() -> @kernel.Thm
+
+pub fn esubterms_trivial_r() -> @kernel.Thm
+
+pub fn formsubst_eq() -> @kernel.Thm
+
+pub fn functions_eqclauses() -> @kernel.Thm
+
+pub fn functions_form_eqclause_func() -> @kernel.Thm
+
+pub fn functions_form_eqclause_pred() -> @kernel.Thm
+
+pub fn functions_form_not_uclose() -> @kernel.Thm
+
+pub fn functions_form_pred_varpairs() -> @kernel.Thm
+
+pub fn functions_insert_not_uclose() -> @kernel.Thm
+
+pub fn functions_term_fn_varpairs() -> @kernel.Thm
+
+pub fn functions_univ() -> @kernel.Thm
+
+pub fn functions_vareqlist() -> @kernel.Thm
+
+pub fn language_insert_not_uclose() -> @kernel.Thm
+
+pub fn language_univ() -> @kernel.Thm
+
+pub fn lemma() -> @kernel.Thm
+
+pub fn lemma1() -> @kernel.Thm
+
+pub fn lemma2() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn map_eq_all2() -> @kernel.Thm
+
+pub fn predicates_form_not_uclose() -> @kernel.Thm
+
+pub fn predicates_insert_not_uclose() -> @kernel.Thm
+
+pub fn predicates_univ() -> @kernel.Thm
+
+pub fn provable_cases() -> @kernel.Thm
+
+pub fn provable_induct() -> @kernel.Thm
+
+pub fn provable_rules() -> @kernel.Thm
+
+pub fn scprovable_cases() -> @kernel.Thm
+
+pub fn scprovable_cprovable() -> @kernel.Thm
+
+pub fn scprovable_cprovable_lemma() -> @kernel.Thm
+
+pub fn scprovable_induct() -> @kernel.Thm
+
+pub fn scprovable_provable() -> @kernel.Thm
+
+pub fn scprovable_rules() -> @kernel.Thm
+
+pub fn scprovable_subterms() -> @kernel.Thm
+
+pub fn subterms() -> @kernel.Thm
+
+pub fn subterms_refl() -> @kernel.Thm
+
+pub fn subtermsa() -> @kernel.Thm
+
+pub fn subtermss() -> @kernel.Thm
+
+pub fn terms_univ() -> @kernel.Thm
+
+pub fn wcprovable_cases() -> @kernel.Thm
+
+pub fn wcprovable_induct() -> @kernel.Thm
+
+pub fn wcprovable_inst() -> @kernel.Thm
+
+pub fn wcprovable_provable() -> @kernel.Thm
+
+pub fn wcprovable_rules() -> @kernel.Thm
+
+pub fn wcprovable_sym() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

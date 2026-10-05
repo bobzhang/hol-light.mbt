@@ -1,0 +1,105 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/support"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn negate_literal() -> @kernel.Thm
+
+pub fn npresproof() -> @kernel.Thm
+
+pub fn npresproof_cases() -> @kernel.Thm
+
+pub fn npresproof_clause() -> @kernel.Thm
+
+pub fn npresproof_induct() -> @kernel.Thm
+
+pub fn npresproof_rules() -> @kernel.Thm
+
+pub fn presproof_clause() -> @kernel.Thm
+
+pub fn presproof_sound() -> @kernel.Thm
+
+pub fn psatisfies_image_lemma() -> @kernel.Thm
+
+pub fn psresproof_cases() -> @kernel.Thm
+
+pub fn psresproof_clause() -> @kernel.Thm
+
+pub fn psresproof_induct() -> @kernel.Thm
+
+pub fn psresproof_rules() -> @kernel.Thm
+
+pub fn resolve_clause() -> @kernel.Thm
+
+pub fn resolve_mono() -> @kernel.Thm
+
+pub fn resolve_sym() -> @kernel.Thm
+
+pub fn resolve_taut_l() -> @kernel.Thm
+
+pub fn resolve_taut_r() -> @kernel.Thm
+
+pub fn sos_given() -> @kernel.Thm
+
+pub fn sos_given_general() -> @kernel.Thm
+
+pub fn sos_resolution_complete() -> @kernel.Thm
+
+pub fn spresproof_cases() -> @kernel.Thm
+
+pub fn spresproof_clause() -> @kernel.Thm
+
+pub fn spresproof_clause_nontaut() -> @kernel.Thm
+
+pub fn spresproof_induct() -> @kernel.Thm
+
+pub fn spresproof_mono() -> @kernel.Thm
+
+pub fn spresproof_mono_sos() -> @kernel.Thm
+
+pub fn spresproof_psresproof() -> @kernel.Thm
+
+pub fn spresproof_refutation_complete() -> @kernel.Thm
+
+pub fn spresproof_rules() -> @kernel.Thm
+
+pub fn sresproof_cases() -> @kernel.Thm
+
+pub fn sresproof_clause() -> @kernel.Thm
+
+pub fn sresproof_induct() -> @kernel.Thm
+
+pub fn sresproof_rules() -> @kernel.Thm
+
+pub fn subset_taut() -> @kernel.Thm
+
+pub fn subsumes_empty() -> @kernel.Thm
+
+pub fn support() -> @kernel.Thm
+
+pub fn support_asymmetric() -> @kernel.Thm
+
+pub fn support_induct() -> @kernel.Thm
+
+pub fn support_induct_lemma() -> @kernel.Thm
+
+pub fn support_lemma() -> @kernel.Thm
+
+pub fn support_symmetric() -> @kernel.Thm
+
+pub fn tautologous_satisfied() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

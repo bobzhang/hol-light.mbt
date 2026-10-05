@@ -1,0 +1,91 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/logic_canon"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn canon() -> @kernel.Thm
+
+pub fn canon_of_prop() -> @kernel.Thm
+
+pub fn canonical() -> @kernel.Thm
+
+pub fn canonical_canon_of_prop() -> @kernel.Thm
+
+pub fn compact_canon_qfree() -> @kernel.Thm
+
+pub fn compact_ls() -> @kernel.Thm
+
+pub fn finite_subset_instance() -> @kernel.Thm
+
+pub fn finite_subset_skolem() -> @kernel.Thm
+
+pub fn fol_valid_imp_prop_valid() -> @kernel.Thm
+
+pub fn holds_canon_of_prop() -> @kernel.Thm
+
+pub fn holds_canon_of_prop_general() -> @kernel.Thm
+
+pub fn holds_itlist_exists() -> @kernel.Thm
+
+pub fn interpretation_canon_of_prop() -> @kernel.Thm
+
+pub fn interpretation_extendlanguage() -> @kernel.Thm
+
+pub fn interpretation_restrictlanguage() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn lowmod() -> @kernel.Thm
+
+pub fn lowmod_dom_empty() -> @kernel.Thm
+
+pub fn lowmod_holds() -> @kernel.Thm
+
+pub fn lowmod_interpretation() -> @kernel.Thm
+
+pub fn lowmod_termval() -> @kernel.Thm
+
+pub fn ls() -> @kernel.Thm
+
+pub fn pholds_prop_of_model() -> @kernel.Thm
+
+pub fn prop_of_canon_of_prop() -> @kernel.Thm
+
+pub fn prop_of_model() -> @kernel.Thm
+
+pub fn prop_valid_imp_fol_valid() -> @kernel.Thm
+
+pub fn psatisfies_instances() -> @kernel.Thm
+
+pub fn satisfies_instances() -> @kernel.Thm
+
+pub fn satisfies_psatisfies() -> @kernel.Thm
+
+pub fn stupid_canondom_lemma() -> @kernel.Thm
+
+pub fn term_of_num() -> @kernel.Thm
+
+pub fn term_of_num_v1() -> @kernel.Thm
+
+pub fn terms_cases() -> @kernel.Thm
+
+pub fn terms_induct() -> @kernel.Thm
+
+pub fn terms_rules() -> @kernel.Thm
+
+pub fn uniformity() -> @kernel.Thm
+
+pub fn valuation_exists() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

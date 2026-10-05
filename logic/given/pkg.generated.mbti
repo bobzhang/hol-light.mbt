@@ -1,0 +1,199 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/given"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn allntresolvents() -> @kernel.Thm
+
+pub fn allntresolvents_step() -> @kernel.Thm
+
+pub fn allntresolvents_union() -> @kernel.Thm
+
+pub fn allresolvents() -> @kernel.Thm
+
+pub fn allresolvents_clause() -> @kernel.Thm
+
+pub fn allresolvents_finite() -> @kernel.Thm
+
+pub fn allresolvents_step() -> @kernel.Thm
+
+pub fn allresolvents_subsume() -> @kernel.Thm
+
+pub fn allresolvents_subsume_l() -> @kernel.Thm
+
+pub fn allresolvents_subsume_r() -> @kernel.Thm
+
+pub fn allresolvents_sym() -> @kernel.Thm
+
+pub fn allresolvents_union() -> @kernel.Thm
+
+pub fn break_() -> @kernel.Thm
+
+pub fn break_mono() -> @kernel.Thm
+
+pub fn clause_diff() -> @kernel.Thm
+
+pub fn clause_subset() -> @kernel.Thm
+
+pub fn clause_union() -> @kernel.Thm
+
+pub fn firstn() -> @kernel.Thm
+
+pub fn firstn_empty() -> @kernel.Thm
+
+pub fn firstn_short() -> @kernel.Thm
+
+pub fn firstn_sublist() -> @kernel.Thm
+
+pub fn firstn_suc() -> @kernel.Thm
+
+pub fn firstn_trivial() -> @kernel.Thm
+
+pub fn formsubst_formsubst() -> @kernel.Thm
+
+pub fn formsubst_termsubst_eq() -> @kernel.Thm
+
+pub fn given() -> @kernel.Thm
+
+pub fn given_invariant() -> @kernel.Thm
+
+pub fn image_clause_eq() -> @kernel.Thm
+
+pub fn incorporate() -> @kernel.Thm
+
+pub fn incorporate_clause() -> @kernel.Thm
+
+pub fn incorporate_clause_el() -> @kernel.Thm
+
+pub fn incorporate_fromnew() -> @kernel.Thm
+
+pub fn incorporate_subsumes_self() -> @kernel.Thm
+
+pub fn incorporate_v1() -> @kernel.Thm
+
+pub fn insert_def() -> @kernel.Thm
+
+pub fn isaresolvent_clause() -> @kernel.Thm
+
+pub fn isaresolvent_finite() -> @kernel.Thm
+
+pub fn isaresolvent_subsume() -> @kernel.Thm
+
+pub fn isaresolvent_subsume_l() -> @kernel.Thm
+
+pub fn isaresolvent_subsume_r() -> @kernel.Thm
+
+pub fn isaresolvent_sym() -> @kernel.Thm
+
+pub fn isaresolvent_tautology_l() -> @kernel.Thm
+
+pub fn isaresolvent_tautology_r() -> @kernel.Thm
+
+pub fn itlist_incorporate_fromnew() -> @kernel.Thm
+
+pub fn length_incorporate() -> @kernel.Thm
+
+pub fn length_replace() -> @kernel.Thm
+
+pub fn length_unused_change() -> @kernel.Thm
+
+pub fn length_unused_zero() -> @kernel.Thm
+
+pub fn level() -> @kernel.Thm
+
+pub fn level_0() -> @kernel.Thm
+
+pub fn level_clause() -> @kernel.Thm
+
+pub fn level_fromnew() -> @kernel.Thm
+
+pub fn level_mono() -> @kernel.Thm
+
+pub fn level_mono_subset() -> @kernel.Thm
+
+pub fn level_step() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn nontautologous_subsumes() -> @kernel.Thm
+
+pub fn replace() -> @kernel.Thm
+
+pub fn replace_clause() -> @kernel.Thm
+
+pub fn replace_fromnew() -> @kernel.Thm
+
+pub fn replace_subsumes_self() -> @kernel.Thm
+
+pub fn replace_v1() -> @kernel.Thm
+
+pub fn resolvents() -> @kernel.Thm
+
+pub fn set_of_list_filter() -> @kernel.Thm
+
+pub fn set_of_list_insert() -> @kernel.Thm
+
+pub fn step() -> @kernel.Thm
+
+pub fn step_v1() -> @kernel.Thm
+
+pub fn sub_def() -> @kernel.Thm
+
+pub fn sub_fromnew() -> @kernel.Thm
+
+pub fn sub_mono() -> @kernel.Thm
+
+pub fn sub_mono_subset() -> @kernel.Thm
+
+pub fn sub_subsumes_unused() -> @kernel.Thm
+
+pub fn subsumes() -> @kernel.Thm
+
+pub fn subsumes_clauses() -> @kernel.Thm
+
+pub fn subsumes_refl() -> @kernel.Thm
+
+pub fn subsumes_refl_v1() -> @kernel.Thm
+
+pub fn subsumes_subset() -> @kernel.Thm
+
+pub fn subsumes_subset_refl() -> @kernel.Thm
+
+pub fn subsumes_trans() -> @kernel.Thm
+
+pub fn subsumes_trans_v1() -> @kernel.Thm
+
+pub fn subsumes_union() -> @kernel.Thm
+
+pub fn subsumes_v1() -> @kernel.Thm
+
+pub fn tautologous() -> @kernel.Thm
+
+pub fn tautologous_instance() -> @kernel.Thm
+
+pub fn tautologous_subsumes() -> @kernel.Thm
+
+pub fn termsubst_termsubst_o() -> @kernel.Thm
+
+pub fn unused_def() -> @kernel.Thm
+
+pub fn unused_fromnew() -> @kernel.Thm
+
+pub fn unused_subsumes_self() -> @kernel.Thm
+
+pub fn used_def() -> @kernel.Thm
+
+pub fn used_sub() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

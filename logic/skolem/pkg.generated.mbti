@@ -1,0 +1,117 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/skolem"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn bumpform() -> @kernel.Thm
+
+pub fn bumpform_interpretation() -> @kernel.Thm
+
+pub fn bumpform_v1() -> @kernel.Thm
+
+pub fn bumpmod() -> @kernel.Thm
+
+pub fn bumpterm() -> @kernel.Thm
+
+pub fn bumpterm_v1() -> @kernel.Thm
+
+pub fn form_of_num() -> @kernel.Thm
+
+pub fn form_of_num_v1() -> @kernel.Thm
+
+pub fn functions_form_bumpform() -> @kernel.Thm
+
+pub fn functions_form_skolemize() -> @kernel.Thm
+
+pub fn holds_exists_lemma() -> @kernel.Thm
+
+pub fn holds_skolem1() -> @kernel.Thm
+
+pub fn holds_skolems_induction() -> @kernel.Thm
+
+pub fn holds_skolems_prenex() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn num_of_form() -> @kernel.Thm
+
+pub fn num_of_form_inj() -> @kernel.Thm
+
+pub fn num_of_term() -> @kernel.Thm
+
+pub fn num_of_term_inj() -> @kernel.Thm
+
+pub fn numlist() -> @kernel.Thm
+
+pub fn numlist_inj() -> @kernel.Thm
+
+pub fn numlist_num_of_term() -> @kernel.Thm
+
+pub fn skolem() -> @kernel.Thm
+
+pub fn skolem1_def() -> @kernel.Thm
+
+pub fn skolem_qfree() -> @kernel.Thm
+
+pub fn skolem_satisfiable() -> @kernel.Thm
+
+pub fn skolemize() -> @kernel.Thm
+
+pub fn skolemize_satisfiable() -> @kernel.Thm
+
+pub fn skolemize_works() -> @kernel.Thm
+
+pub fn skolems_def() -> @kernel.Thm
+
+pub fn skolems_existence() -> @kernel.Thm
+
+pub fn skolems_specification() -> @kernel.Thm
+
+pub fn skomod() -> @kernel.Thm
+
+pub fn skomod1() -> @kernel.Thm
+
+pub fn skomod1_works() -> @kernel.Thm
+
+pub fn skomod_interpretation() -> @kernel.Thm
+
+pub fn skomod_works() -> @kernel.Thm
+
+pub fn skopre() -> @kernel.Thm
+
+pub fn skopre_def() -> @kernel.Thm
+
+pub fn specialize() -> @kernel.Thm
+
+pub fn specialize_language() -> @kernel.Thm
+
+pub fn specialize_qfree() -> @kernel.Thm
+
+pub fn specialize_satisfies() -> @kernel.Thm
+
+pub fn unbumpform() -> @kernel.Thm
+
+pub fn unbumpform_v1() -> @kernel.Thm
+
+pub fn unbumpmod() -> @kernel.Thm
+
+pub fn unbumpmod_term() -> @kernel.Thm
+
+pub fn unbumpmod_v1() -> @kernel.Thm
+
+pub fn unbumpterm() -> @kernel.Thm
+
+pub fn unbumpterm_v1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
