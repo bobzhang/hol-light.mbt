@@ -26,7 +26,8 @@ grep -v 'pa_j.cmo' boot.ml > _build/tboot.ml
     echo "#use \"$ROOT/tools/translator/$f.ml\";;"
   done
   echo '#load "pa_j.cmo";;'
-  echo 'let needs (_:string) = ();;'
+  # a file loaded part-way through another is loaded there (Loader.needs_hook)
+  echo 'let needs (s:string) = (!Loader.needs_hook) s;;'
   echo 'let loadt (_:string) = ();;'
   echo 'let loads (_:string) = ();;'
   echo 'let float_sqrt = sqrt;; let float_fabs = abs_float;;'

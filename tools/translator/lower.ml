@@ -614,6 +614,10 @@ module Lower = struct
 
   let current_file = ref ""
 
+  (* the files the current file loads part-way through (theory.py's
+     MID_NEEDS): its `needs "f"` there is a load step *)
+  let mid_needs : (string, unit) Hashtbl.t = Hashtbl.create 4
+
   (* Type variables bound by the enclosing top-level function's generics. *)
   let scope_tyvars : string list ref = scope_tyvars_fwd
 

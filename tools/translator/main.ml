@@ -124,7 +124,9 @@ module Main = struct
      interfaces the next translations read) and then loads it; `Branch
      steps` runs steps in a forked child, so that files loaded there do not
      reach the steps after it. Stops at the first failure (exit status 1). *)
-  type step = Load of string | Target of string | Branch of step list
+  (* `Mid (f, g, files)`: `f` loads `g` part-way through, which brings in
+     `files` there (theory.py's mid_plan) *)
+  type step = Load of string | Target of string | Branch of step list | Mid of string * string * string list
 
   let translate_batch ~hol ~root ~after plan =
     Names.root := root;
@@ -144,18 +146,32 @@ module Main = struct
     let loaded = Hashtbl.create 64 in
     let load_new f = if not (Hashtbl.mem loaded f) then (Hashtbl.add loaded f (); load f) in
     let flush () = flush_all (); Format.pp_print_flush Format.std_formatter () in
+    let mids : (string * string, string list) Hashtbl.t = Hashtbl.create 4 in
+    let mid_files target = Hashtbl.fold (fun (t, _) fs acc -> if t = target then fs @ acc else acc) mids [] in
+    (* the session's `needs` (translate.sh): a file loaded part-way through
+       the file being loaded is loaded now *)
+    Loader.needs_hook :=
+      (fun g -> match Hashtbl.find_opt mids (!Loader.current, g) with
+         | Some fs ->
+             Printf.printf "loading %s inside %s\n%!" (String.concat ", " fs) !Loader.current;
+             List.iter load_new fs
+         | None -> ());
     let rec run = function
       | [] -> ()
+      | Mid (f, g, fs) :: rest -> Hashtbl.replace mids (f, g) fs; run rest
       | Load f :: rest -> load_new f; run rest
       | Target target :: rest ->
           (* the translator's own dependency order must agree with the plan *)
           List.iter
-            (fun f -> if not (Hashtbl.mem loaded f) then fail ("unplanned dependency " ^ f ^ " of " ^ target))
+            (fun f ->
+              if not (Hashtbl.mem loaded f || List.mem f (mid_files target)) then
+                fail ("unplanned dependency " ^ f ^ " of " ^ target))
             (Translator.upto target Translator.prefix);
           flush ();
           (match Unix.fork () with
            | 0 ->
                (try
+                  Hashtbl.iter (fun (t, g) _ -> if t = target then Hashtbl.replace Lower.mid_needs g ()) mids;
                   translate_loaded ~hol ~root target;
                   flush ();
                   Unix._exit (if !Emit.errors = 0 then 0 else 3)
