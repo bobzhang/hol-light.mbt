@@ -1,0 +1,1047 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/probability/expectation"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abel_summation_identity() -> @kernel.Thm
+
+pub fn abs_mul_ge_split() -> @kernel.Thm
+
+pub fn abs_mul_ge_split_bound() -> @kernel.Thm
+
+pub fn abs_mul_lt_sqrt() -> @kernel.Thm
+
+pub fn absolutely_continuous_from_integral() -> @kernel.Thm
+
+pub fn adaptive_selector_dep() -> @kernel.Thm
+
+pub fn almost_sure_imp_in_prob() -> @kernel.Thm
+
+pub fn almost_surely() -> @kernel.Thm
+
+pub fn almost_surely_carrier() -> @kernel.Thm
+
+pub fn almost_surely_countable_inter() -> @kernel.Thm
+
+pub fn almost_surely_eq() -> @kernel.Thm
+
+pub fn almost_surely_event() -> @kernel.Thm
+
+pub fn almost_surely_from_prob_one() -> @kernel.Thm
+
+pub fn almost_surely_inter() -> @kernel.Thm
+
+pub fn almost_surely_subset() -> @kernel.Thm
+
+pub fn almost_surely_union() -> @kernel.Thm
+
+pub fn am_gm_abs() -> @kernel.Thm
+
+pub fn bcl1_convergence() -> @kernel.Thm
+
+pub fn bcl1_convergence_rv() -> @kernel.Thm
+
+pub fn borel_in_euclideanreal_eq_sigma_generated() -> @kernel.Thm
+
+pub fn bounded_convergence_expectation() -> @kernel.Thm
+
+pub fn bounded_convergence_expectation_gen() -> @kernel.Thm
+
+pub fn bounded_convergence_nn() -> @kernel.Thm
+
+pub fn bounded_covariance_alt() -> @kernel.Thm
+
+pub fn bounded_covariance_cmul() -> @kernel.Thm
+
+pub fn bounded_expectation_add() -> @kernel.Thm
+
+pub fn bounded_expectation_cmul() -> @kernel.Thm
+
+pub fn bounded_expectation_mono() -> @kernel.Thm
+
+pub fn bounded_expectation_pos() -> @kernel.Thm
+
+pub fn bounded_expectation_sub() -> @kernel.Thm
+
+pub fn bounded_liminf_sandwich() -> @kernel.Thm
+
+pub fn bounded_nn_expectation_add() -> @kernel.Thm
+
+pub fn bounded_nn_expectation_cmul() -> @kernel.Thm
+
+pub fn bounded_nn_expectation_ge_simple() -> @kernel.Thm
+
+pub fn bounded_nn_expectation_mono() -> @kernel.Thm
+
+pub fn bounded_variance_add() -> @kernel.Thm
+
+pub fn cdf() -> @kernel.Thm
+
+pub fn char_fn_im() -> @kernel.Thm
+
+pub fn char_fn_im_bound() -> @kernel.Thm
+
+pub fn char_fn_re() -> @kernel.Thm
+
+pub fn char_fn_re_bound() -> @kernel.Thm
+
+pub fn char_fn_re_zero() -> @kernel.Thm
+
+pub fn chebyshev_convergence() -> @kernel.Thm
+
+pub fn chebyshev_inequality() -> @kernel.Thm
+
+pub fn chebyshev_inequality_simple() -> @kernel.Thm
+
+pub fn chebyshev_shifted_sum() -> @kernel.Thm
+
+pub fn chebyshev_shifted_sum_bounded() -> @kernel.Thm
+
+pub fn continuous_map_euclideanreal() -> @kernel.Thm
+
+pub fn converges_as() -> @kernel.Thm
+
+pub fn converges_in_prob() -> @kernel.Thm
+
+pub fn converges_in_prob_abs() -> @kernel.Thm
+
+pub fn converges_in_prob_add() -> @kernel.Thm
+
+pub fn converges_in_prob_bounded_mul() -> @kernel.Thm
+
+pub fn converges_in_prob_cmul() -> @kernel.Thm
+
+pub fn converges_in_prob_const() -> @kernel.Thm
+
+pub fn converges_in_prob_const_v1() -> @kernel.Thm
+
+pub fn converges_in_prob_continuous_compose() -> @kernel.Thm
+
+pub fn converges_in_prob_diff_zero() -> @kernel.Thm
+
+pub fn converges_in_prob_max() -> @kernel.Thm
+
+pub fn converges_in_prob_min() -> @kernel.Thm
+
+pub fn converges_in_prob_mul() -> @kernel.Thm
+
+pub fn converges_in_prob_neg() -> @kernel.Thm
+
+pub fn converges_in_prob_null_add() -> @kernel.Thm
+
+pub fn converges_in_prob_null_mul() -> @kernel.Thm
+
+pub fn converges_in_prob_sub() -> @kernel.Thm
+
+pub fn converges_in_prob_unique() -> @kernel.Thm
+
+pub fn converges_l2() -> @kernel.Thm
+
+pub fn converges_l2_agree() -> @kernel.Thm
+
+pub fn converges_l2_imp_in_prob() -> @kernel.Thm
+
+pub fn countable_disjoint_decomp_disjoint() -> @kernel.Thm
+
+pub fn countable_rational_sets() -> @kernel.Thm
+
+pub fn countable_union_disjoint_decomp() -> @kernel.Thm
+
+pub fn covariance() -> @kernel.Thm
+
+pub fn covariance_add_left() -> @kernel.Thm
+
+pub fn covariance_alt() -> @kernel.Thm
+
+pub fn covariance_cmul() -> @kernel.Thm
+
+pub fn covariance_indep_simple() -> @kernel.Thm
+
+pub fn covariance_self() -> @kernel.Thm
+
+pub fn covariance_shift() -> @kernel.Thm
+
+pub fn covariance_simple_agree() -> @kernel.Thm
+
+pub fn covariance_sum_left() -> @kernel.Thm
+
+pub fn covariance_sym() -> @kernel.Thm
+
+pub fn cross_mult_bound() -> @kernel.Thm
+
+pub fn dist_fn_in_events() -> @kernel.Thm
+
+pub fn dist_fn_le_1() -> @kernel.Thm
+
+pub fn dist_fn_mono() -> @kernel.Thm
+
+pub fn dist_fn_nonneg() -> @kernel.Thm
+
+pub fn distribution_cdf() -> @kernel.Thm
+
+pub fn distribution_fn() -> @kernel.Thm
+
+pub fn dominated_convergence() -> @kernel.Thm
+
+pub fn dominated_convergence_ae() -> @kernel.Thm
+
+pub fn dominated_convergence_nn() -> @kernel.Thm
+
+pub fn dominated_convergence_null() -> @kernel.Thm
+
+pub fn dominated_imp_ui() -> @kernel.Thm
+
+pub fn dyadic_block_inv_bound() -> @kernel.Thm
+
+pub fn dyadic_partition_sum() -> @kernel.Thm
+
+pub fn dynkin_pi_lambda() -> @kernel.Thm
+
+pub fn expectation() -> @kernel.Thm
+
+pub fn expectation_abs_bound() -> @kernel.Thm
+
+pub fn expectation_abs_le() -> @kernel.Thm
+
+pub fn expectation_add() -> @kernel.Thm
+
+pub fn expectation_affine() -> @kernel.Thm
+
+pub fn expectation_bound() -> @kernel.Thm
+
+pub fn expectation_cmul() -> @kernel.Thm
+
+pub fn expectation_cmul_nonneg() -> @kernel.Thm
+
+pub fn expectation_const() -> @kernel.Thm
+
+pub fn expectation_eq_tail_sum() -> @kernel.Thm
+
+pub fn expectation_ext() -> @kernel.Thm
+
+pub fn expectation_indicator() -> @kernel.Thm
+
+pub fn expectation_min_abs_limit() -> @kernel.Thm
+
+pub fn expectation_mono() -> @kernel.Thm
+
+pub fn expectation_neg() -> @kernel.Thm
+
+pub fn expectation_neg_integrable() -> @kernel.Thm
+
+pub fn expectation_nonneg_eq_nn() -> @kernel.Thm
+
+pub fn expectation_pos() -> @kernel.Thm
+
+pub fn expectation_product_indep_simple() -> @kernel.Thm
+
+pub fn expectation_simple_agree() -> @kernel.Thm
+
+pub fn expectation_sub() -> @kernel.Thm
+
+pub fn expectation_sum() -> @kernel.Thm
+
+pub fn expectation_tail_bound() -> @kernel.Thm
+
+pub fn expectation_tail_decomp() -> @kernel.Thm
+
+pub fn expectation_tail_pos() -> @kernel.Thm
+
+pub fn fatou_events_liminf() -> @kernel.Thm
+
+pub fn fatou_events_limsup() -> @kernel.Thm
+
+pub fn fatou_expectation() -> @kernel.Thm
+
+pub fn fatou_integrable() -> @kernel.Thm
+
+pub fn fatou_lemma() -> @kernel.Thm
+
+pub fn fatou_lemma_gen() -> @kernel.Thm
+
+pub fn fatou_nn_expectation() -> @kernel.Thm
+
+pub fn feasible_improvement_bound() -> @kernel.Thm
+
+pub fn fin_inters() -> @kernel.Thm
+
+pub fn fin_inters_pi_system() -> @kernel.Thm
+
+pub fn first_crossing_events_disjoint() -> @kernel.Thm
+
+pub fn first_crossing_events_measurable() -> @kernel.Thm
+
+pub fn first_crossing_events_union() -> @kernel.Thm
+
+pub fn gap_limit() -> @kernel.Thm
+
+pub fn gseq() -> @kernel.Thm
+
+pub fn gseq_bracket() -> @kernel.Thm
+
+pub fn gseq_div_identity() -> @kernel.Thm
+
+pub fn gseq_geometric_lower() -> @kernel.Thm
+
+pub fn gseq_growth_iterated() -> @kernel.Thm
+
+pub fn gseq_growth_step() -> @kernel.Thm
+
+pub fn gseq_inv_pow2_ratio() -> @kernel.Thm
+
+pub fn gseq_linear_lower() -> @kernel.Thm
+
+pub fn gseq_monotone() -> @kernel.Thm
+
+pub fn gseq_nz() -> @kernel.Thm
+
+pub fn gseq_pos() -> @kernel.Thm
+
+pub fn gseq_step_bound() -> @kernel.Thm
+
+pub fn gseq_step_ratio() -> @kernel.Thm
+
+pub fn gseq_suc_gt() -> @kernel.Thm
+
+pub fn gseq_sum_split() -> @kernel.Thm
+
+pub fn gseq_unbounded() -> @kernel.Thm
+
+pub fn gseq_upper_step() -> @kernel.Thm
+
+pub fn gseq_upper_step_nat() -> @kernel.Thm
+
+pub fn halflines_subset_univ() -> @kernel.Thm
+
+pub fn in_sigma_generated_gen() -> @kernel.Thm
+
+pub fn increasing_bounded_converges_to_sup() -> @kernel.Thm
+
+pub fn indep_extends_to_sigma() -> @kernel.Thm
+
+pub fn indep_fin_inter_sigma_future() -> @kernel.Thm
+
+pub fn indep_lambda_system() -> @kernel.Thm
+
+pub fn indep_rv() -> @kernel.Thm
+
+pub fn indep_rv_dist_fn() -> @kernel.Thm
+
+pub fn indep_rv_imp_rv() -> @kernel.Thm
+
+pub fn indep_rv_joint_distribution() -> @kernel.Thm
+
+pub fn indep_rv_point_mass() -> @kernel.Thm
+
+pub fn indep_rv_sym() -> @kernel.Thm
+
+pub fn indicator_fn_eta() -> @kernel.Thm
+
+pub fn inner_sum_reindex() -> @kernel.Thm
+
+pub fn integrable() -> @kernel.Thm
+
+pub fn integrable_abs() -> @kernel.Thm
+
+pub fn integrable_add() -> @kernel.Thm
+
+pub fn integrable_bounded() -> @kernel.Thm
+
+pub fn integrable_cmul() -> @kernel.Thm
+
+pub fn integrable_cmul_alt() -> @kernel.Thm
+
+pub fn integrable_const() -> @kernel.Thm
+
+pub fn integrable_cos_cmul() -> @kernel.Thm
+
+pub fn integrable_dominated() -> @kernel.Thm
+
+pub fn integrable_imp_random_variable() -> @kernel.Thm
+
+pub fn integrable_indicator() -> @kernel.Thm
+
+pub fn integrable_max() -> @kernel.Thm
+
+pub fn integrable_max_sub_const() -> @kernel.Thm
+
+pub fn integrable_min() -> @kernel.Thm
+
+pub fn integrable_mul_indicator_fn() -> @kernel.Thm
+
+pub fn integrable_mul_square() -> @kernel.Thm
+
+pub fn integrable_neg() -> @kernel.Thm
+
+pub fn integrable_neg_part() -> @kernel.Thm
+
+pub fn integrable_nonneg_nn_bounded() -> @kernel.Thm
+
+pub fn integrable_pointwise_limit_ui() -> @kernel.Thm
+
+pub fn integrable_pos_part() -> @kernel.Thm
+
+pub fn integrable_pow2_imp() -> @kernel.Thm
+
+pub fn integrable_simple() -> @kernel.Thm
+
+pub fn integrable_sin_cmul() -> @kernel.Thm
+
+pub fn integrable_sub() -> @kernel.Thm
+
+pub fn integrable_sum() -> @kernel.Thm
+
+pub fn integrable_sum_square() -> @kernel.Thm
+
+pub fn integrable_tail_vanishes() -> @kernel.Thm
+
+pub fn inters_image_in_events() -> @kernel.Thm
+
+pub fn iter_min() -> @kernel.Thm
+
+pub fn iter_min_le() -> @kernel.Thm
+
+pub fn iter_min_mono() -> @kernel.Thm
+
+pub fn iter_min_pos() -> @kernel.Thm
+
+pub fn jensen() -> @kernel.Thm
+
+pub fn joint_distribution_le_marginal_x() -> @kernel.Thm
+
+pub fn joint_level_sets_disjoint_y() -> @kernel.Thm
+
+pub fn kolmogorov_maximal_ineq() -> @kernel.Thm
+
+pub fn kolmogorov_maximal_ineq_shifted() -> @kernel.Thm
+
+pub fn kolmogorov_zero_one() -> @kernel.Thm
+
+pub fn kronecker_lemma() -> @kernel.Thm
+
+pub fn l2_bounded_imp_ui() -> @kernel.Thm
+
+pub fn l2_imp_in_prob() -> @kernel.Thm
+
+pub fn lambda_generated() -> @kernel.Thm
+
+pub fn lambda_generated_ga_is_lambda() -> @kernel.Thm
+
+pub fn lambda_generated_inter_closed() -> @kernel.Thm
+
+pub fn lambda_generated_inter_pi() -> @kernel.Thm
+
+pub fn lambda_generated_is_lambda() -> @kernel.Thm
+
+pub fn lambda_generated_mem() -> @kernel.Thm
+
+pub fn lambda_generated_minimal() -> @kernel.Thm
+
+pub fn lambda_generated_subset() -> @kernel.Thm
+
+pub fn lambda_generated_subset_u() -> @kernel.Thm
+
+pub fn lambda_system() -> @kernel.Thm
+
+pub fn lambda_system_diff() -> @kernel.Thm
+
+pub fn lambda_system_empty() -> @kernel.Thm
+
+pub fn lambda_system_inter_imp_sigma() -> @kernel.Thm
+
+pub fn lambda_system_union2() -> @kernel.Thm
+
+pub fn le_2_exp() -> @kernel.Thm
+
+pub fn liminf_events() -> @kernel.Thm
+
+pub fn liminf_events_alt() -> @kernel.Thm
+
+pub fn liminf_events_in_events() -> @kernel.Thm
+
+pub fn liminf_subset_limsup() -> @kernel.Thm
+
+pub fn limsup_bad_subset_compl_conv() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn markov_inequality() -> @kernel.Thm
+
+pub fn markov_inequality_simple() -> @kernel.Thm
+
+pub fn max_abs_sub_triangle() -> @kernel.Thm
+
+pub fn max_in_feasible_set() -> @kernel.Thm
+
+pub fn mct_nn_expectation() -> @kernel.Thm
+
+pub fn mct_nn_expectation_integrable() -> @kernel.Thm
+
+pub fn mct_nn_expectation_rv() -> @kernel.Thm
+
+pub fn mct_simple_nonneg() -> @kernel.Thm
+
+pub fn measure_agree_lambda_system() -> @kernel.Thm
+
+pub fn measure_unique_on_pi_system() -> @kernel.Thm
+
+pub fn min_eq_left() -> @kernel.Thm
+
+pub fn min_pow2_split() -> @kernel.Thm
+
+pub fn minpow_div_le_one() -> @kernel.Thm
+
+pub fn mono_seq_le() -> @kernel.Thm
+
+pub fn monotone_extends() -> @kernel.Thm
+
+pub fn mul_lneg_le() -> @kernel.Thm
+
+pub fn neg_div_neg() -> @kernel.Thm
+
+pub fn nn_expect_set_nonempty() -> @kernel.Thm
+
+pub fn nn_expectation() -> @kernel.Thm
+
+pub fn nn_expectation_add() -> @kernel.Thm
+
+pub fn nn_expectation_add_ge() -> @kernel.Thm
+
+pub fn nn_expectation_cmul() -> @kernel.Thm
+
+pub fn nn_expectation_const() -> @kernel.Thm
+
+pub fn nn_expectation_const_minus() -> @kernel.Thm
+
+pub fn nn_expectation_ext() -> @kernel.Thm
+
+pub fn nn_expectation_ge_simple() -> @kernel.Thm
+
+pub fn nn_expectation_integrable_bound() -> @kernel.Thm
+
+pub fn nn_expectation_le() -> @kernel.Thm
+
+pub fn nn_expectation_le_from_simple() -> @kernel.Thm
+
+pub fn nn_expectation_min_limit() -> @kernel.Thm
+
+pub fn nn_expectation_mono() -> @kernel.Thm
+
+pub fn nn_expectation_pos() -> @kernel.Thm
+
+pub fn nn_expectation_simple() -> @kernel.Thm
+
+pub fn nn_expectation_upper_bound() -> @kernel.Thm
+
+pub fn nondecreasing_convergence_gseq() -> @kernel.Thm
+
+pub fn nonneg_approx_index_finite() -> @kernel.Thm
+
+pub fn nonneg_approx_index_nonempty() -> @kernel.Thm
+
+pub fn nonneg_approx_set_finite() -> @kernel.Thm
+
+pub fn nonneg_approx_set_nonempty() -> @kernel.Thm
+
+pub fn nonneg_simple_fn_approx() -> @kernel.Thm
+
+pub fn nonneg_simple_fn_approx_converges() -> @kernel.Thm
+
+pub fn nonneg_simple_fn_approx_gap() -> @kernel.Thm
+
+pub fn nonneg_simple_fn_approx_in_grid() -> @kernel.Thm
+
+pub fn nonneg_simple_fn_approx_le() -> @kernel.Thm
+
+pub fn nonneg_simple_fn_approx_mono() -> @kernel.Thm
+
+pub fn nonneg_simple_fn_approx_nonneg() -> @kernel.Thm
+
+pub fn nonneg_simple_fn_approx_rv() -> @kernel.Thm
+
+pub fn nonneg_simple_fn_approx_simple_rv() -> @kernel.Thm
+
+pub fn nonneg_slln() -> @kernel.Thm
+
+pub fn null_event() -> @kernel.Thm
+
+pub fn null_event_compl() -> @kernel.Thm
+
+pub fn null_event_compl_one() -> @kernel.Thm
+
+pub fn null_event_countable_union() -> @kernel.Thm
+
+pub fn null_event_diff() -> @kernel.Thm
+
+pub fn null_event_empty() -> @kernel.Thm
+
+pub fn null_event_iff_prob_zero() -> @kernel.Thm
+
+pub fn null_event_inter() -> @kernel.Thm
+
+pub fn null_event_subset() -> @kernel.Thm
+
+pub fn null_event_union() -> @kernel.Thm
+
+pub fn num_sqrt_exists() -> @kernel.Thm
+
+pub fn off_limsup_converges() -> @kernel.Thm
+
+pub fn open_halfline_as_union() -> @kernel.Thm
+
+pub fn open_halfline_as_union_backward() -> @kernel.Thm
+
+pub fn open_halfline_as_union_forward() -> @kernel.Thm
+
+pub fn pi_system() -> @kernel.Thm
+
+pub fn prob_abs_ge_tends_to_zero() -> @kernel.Thm
+
+pub fn prob_carrier_nonempty() -> @kernel.Thm
+
+pub fn prob_convergence_events() -> @kernel.Thm
+
+pub fn prob_finite_additive_image() -> @kernel.Thm
+
+pub fn prob_level_set_as_sum() -> @kernel.Thm
+
+pub fn prob_pointwise_tail_vanishes() -> @kernel.Thm
+
+pub fn prob_strict_ineq_limit() -> @kernel.Thm
+
+pub fn radon_nikodym() -> @kernel.Thm
+
+pub fn radon_nikodym_nonneg() -> @kernel.Thm
+
+pub fn random_variable_abs() -> @kernel.Thm
+
+pub fn random_variable_add() -> @kernel.Thm
+
+pub fn random_variable_cmul() -> @kernel.Thm
+
+pub fn random_variable_comp_continuous() -> @kernel.Thm
+
+pub fn random_variable_cos() -> @kernel.Thm
+
+pub fn random_variable_inf_seq() -> @kernel.Thm
+
+pub fn random_variable_iter_min() -> @kernel.Thm
+
+pub fn random_variable_level_set() -> @kernel.Thm
+
+pub fn random_variable_max() -> @kernel.Thm
+
+pub fn random_variable_min() -> @kernel.Thm
+
+pub fn random_variable_mul() -> @kernel.Thm
+
+pub fn random_variable_neg_part() -> @kernel.Thm
+
+pub fn random_variable_open_interval() -> @kernel.Thm
+
+pub fn random_variable_pointwise_limit() -> @kernel.Thm
+
+pub fn random_variable_pos_part() -> @kernel.Thm
+
+pub fn random_variable_pow() -> @kernel.Thm
+
+pub fn random_variable_preimage_open() -> @kernel.Thm
+
+pub fn random_variable_real_liminf() -> @kernel.Thm
+
+pub fn random_variable_real_limsup() -> @kernel.Thm
+
+pub fn random_variable_real_limsup_dominated() -> @kernel.Thm
+
+pub fn random_variable_shift() -> @kernel.Thm
+
+pub fn random_variable_sin() -> @kernel.Thm
+
+pub fn random_variable_square() -> @kernel.Thm
+
+pub fn random_variable_sub() -> @kernel.Thm
+
+pub fn random_variable_sub_const() -> @kernel.Thm
+
+pub fn random_variable_sum() -> @kernel.Thm
+
+pub fn real_abs_triangle_sub() -> @kernel.Thm
+
+pub fn real_arch_inv_suc() -> @kernel.Thm
+
+pub fn real_cesaro_mean() -> @kernel.Thm
+
+pub fn real_convex_on_subgradient() -> @kernel.Thm
+
+pub fn real_div_floor_le() -> @kernel.Thm
+
+pub fn real_floor_exists() -> @kernel.Thm
+
+pub fn real_halfline_le_in_sigma() -> @kernel.Thm
+
+pub fn real_halfline_lt_in_sigma() -> @kernel.Thm
+
+pub fn real_halflines() -> @kernel.Thm
+
+pub fn real_interval_in_sigma() -> @kernel.Thm
+
+pub fn real_le_div_mono() -> @kernel.Thm
+
+pub fn real_le_from_scale() -> @kernel.Thm
+
+pub fn real_le_inv_cross() -> @kernel.Thm
+
+pub fn real_liminf() -> @kernel.Thm
+
+pub fn real_liminf_const_minus() -> @kernel.Thm
+
+pub fn real_liminf_eventually_lbound() -> @kernel.Thm
+
+pub fn real_liminf_lbound() -> @kernel.Thm
+
+pub fn real_liminf_le_limsup() -> @kernel.Thm
+
+pub fn real_liminf_limsup_converges() -> @kernel.Thm
+
+pub fn real_liminf_min_const_le() -> @kernel.Thm
+
+pub fn real_liminf_mono() -> @kernel.Thm
+
+pub fn real_liminf_sub_const() -> @kernel.Thm
+
+pub fn real_liminf_ubound() -> @kernel.Thm
+
+pub fn real_limsup() -> @kernel.Thm
+
+pub fn real_limsup_eventually_ubound() -> @kernel.Thm
+
+pub fn real_limsup_lbound() -> @kernel.Thm
+
+pub fn real_limsup_mono() -> @kernel.Thm
+
+pub fn real_limsup_sub_const() -> @kernel.Thm
+
+pub fn real_limsup_ubound() -> @kernel.Thm
+
+pub fn real_lt_sub_swap() -> @kernel.Thm
+
+pub fn real_max_mul_nonneg() -> @kernel.Thm
+
+pub fn real_min_refl() -> @kernel.Thm
+
+pub fn real_mul_4_factor() -> @kernel.Thm
+
+pub fn real_open_halfspace_lt() -> @kernel.Thm
+
+pub fn real_open_in_sigma() -> @kernel.Thm
+
+pub fn real_sub_mul_factor() -> @kernel.Thm
+
+pub fn real_summable_bound_partial() -> @kernel.Thm
+
+pub fn reallim_imp_real_liminf() -> @kernel.Thm
+
+pub fn reallim_min_const() -> @kernel.Thm
+
+pub fn reallim_subsequence_squares() -> @kernel.Thm
+
+pub fn reverse_fatou_dominated() -> @kernel.Thm
+
+pub fn reverse_fatou_expectation() -> @kernel.Thm
+
+pub fn reverse_fatou_lemma() -> @kernel.Thm
+
+pub fn rv_level_ge_in_events() -> @kernel.Thm
+
+pub fn rv_level_gt_in_events() -> @kernel.Thm
+
+pub fn rv_level_le_rv() -> @kernel.Thm
+
+pub fn sample_mean_interpolation() -> @kernel.Thm
+
+pub fn scheffe_lemma() -> @kernel.Thm
+
+pub fn set_in_simp() -> @kernel.Thm
+
+pub fn set_integral_zero_on_null() -> @kernel.Thm
+
+pub fn sigma_algebra_is_pi_system() -> @kernel.Thm
+
+pub fn sigma_algebra_powerset() -> @kernel.Thm
+
+pub fn sigma_algebra_powerset_carrier() -> @kernel.Thm
+
+pub fn sigma_algebra_sigma_generated_halflines() -> @kernel.Thm
+
+pub fn sigma_generated() -> @kernel.Thm
+
+pub fn sigma_generated_carrier() -> @kernel.Thm
+
+pub fn sigma_generated_is_sigma_algebra() -> @kernel.Thm
+
+pub fn sigma_generated_mem() -> @kernel.Thm
+
+pub fn sigma_generated_minimal() -> @kernel.Thm
+
+pub fn sigma_generated_mono() -> @kernel.Thm
+
+pub fn sigma_generated_subset_events() -> @kernel.Thm
+
+pub fn sigma_generated_superset() -> @kernel.Thm
+
+pub fn signed_measure_cmul() -> @kernel.Thm
+
+pub fn signed_measure_difference() -> @kernel.Thm
+
+pub fn signed_measure_from_integral() -> @kernel.Thm
+
+pub fn simple_chebyshev_convergence() -> @kernel.Thm
+
+pub fn simple_chebyshev_inequality() -> @kernel.Thm
+
+pub fn simple_converges_l2() -> @kernel.Thm
+
+pub fn simple_covariance() -> @kernel.Thm
+
+pub fn simple_covariance_add_left() -> @kernel.Thm
+
+pub fn simple_covariance_alt() -> @kernel.Thm
+
+pub fn simple_covariance_indep() -> @kernel.Thm
+
+pub fn simple_covariance_sum_left() -> @kernel.Thm
+
+pub fn simple_expectation() -> @kernel.Thm
+
+pub fn simple_expectation_abs_le() -> @kernel.Thm
+
+pub fn simple_expectation_add() -> @kernel.Thm
+
+pub fn simple_expectation_cauchy_schwarz() -> @kernel.Thm
+
+pub fn simple_expectation_cmul() -> @kernel.Thm
+
+pub fn simple_expectation_cmul_indicator_pair() -> @kernel.Thm
+
+pub fn simple_expectation_const() -> @kernel.Thm
+
+pub fn simple_expectation_double_sum() -> @kernel.Thm
+
+pub fn simple_expectation_ext() -> @kernel.Thm
+
+pub fn simple_expectation_ge_on_event() -> @kernel.Thm
+
+pub fn simple_expectation_indicator() -> @kernel.Thm
+
+pub fn simple_expectation_mono() -> @kernel.Thm
+
+pub fn simple_expectation_mul_indicator_carrier() -> @kernel.Thm
+
+pub fn simple_expectation_neg() -> @kernel.Thm
+
+pub fn simple_expectation_null_set() -> @kernel.Thm
+
+pub fn simple_expectation_on_carrier() -> @kernel.Thm
+
+pub fn simple_expectation_pos() -> @kernel.Thm
+
+pub fn simple_expectation_pow2_div() -> @kernel.Thm
+
+pub fn simple_expectation_product_double_sum() -> @kernel.Thm
+
+pub fn simple_expectation_product_indep() -> @kernel.Thm
+
+pub fn simple_expectation_quadratic() -> @kernel.Thm
+
+pub fn simple_expectation_sub() -> @kernel.Thm
+
+pub fn simple_expectation_sum_finite() -> @kernel.Thm
+
+pub fn simple_expectation_sum_numseg() -> @kernel.Thm
+
+pub fn simple_expectation_sum_zero() -> @kernel.Thm
+
+pub fn simple_expectation_zero_mul() -> @kernel.Thm
+
+pub fn simple_mct_nn_expectation() -> @kernel.Thm
+
+pub fn simple_rv() -> @kernel.Thm
+
+pub fn simple_rv_abs() -> @kernel.Thm
+
+pub fn simple_rv_add() -> @kernel.Thm
+
+pub fn simple_rv_bounded() -> @kernel.Thm
+
+pub fn simple_rv_cmul() -> @kernel.Thm
+
+pub fn simple_rv_cmul_indicator_pair() -> @kernel.Thm
+
+pub fn simple_rv_const() -> @kernel.Thm
+
+pub fn simple_rv_gap_below() -> @kernel.Thm
+
+pub fn simple_rv_ge_event() -> @kernel.Thm
+
+pub fn simple_rv_indicator() -> @kernel.Thm
+
+pub fn simple_rv_level_set_inter_in_events() -> @kernel.Thm
+
+pub fn simple_rv_max() -> @kernel.Thm
+
+pub fn simple_rv_min() -> @kernel.Thm
+
+pub fn simple_rv_mul() -> @kernel.Thm
+
+pub fn simple_rv_neg() -> @kernel.Thm
+
+pub fn simple_rv_product_sum_indicator() -> @kernel.Thm
+
+pub fn simple_rv_square() -> @kernel.Thm
+
+pub fn simple_rv_sub() -> @kernel.Thm
+
+pub fn simple_rv_sum() -> @kernel.Thm
+
+pub fn simple_rv_sum_finite() -> @kernel.Thm
+
+pub fn simple_rv_sum_numseg() -> @kernel.Thm
+
+pub fn simple_rv_upper_bound() -> @kernel.Thm
+
+pub fn simple_slln_subseq() -> @kernel.Thm
+
+pub fn simple_strong_law_of_large_numbers() -> @kernel.Thm
+
+pub fn simple_variance() -> @kernel.Thm
+
+pub fn simple_variance_add() -> @kernel.Thm
+
+pub fn simple_variance_add_uncorrelated() -> @kernel.Thm
+
+pub fn simple_variance_alt() -> @kernel.Thm
+
+pub fn simple_variance_cmul() -> @kernel.Thm
+
+pub fn simple_variance_const() -> @kernel.Thm
+
+pub fn simple_variance_nonneg() -> @kernel.Thm
+
+pub fn simple_variance_sum_iid() -> @kernel.Thm
+
+pub fn simple_variance_sum_uncorrelated() -> @kernel.Thm
+
+pub fn slln_bounded_variance() -> @kernel.Thm
+
+pub fn slln_gap_control() -> @kernel.Thm
+
+pub fn slln_gap_control_bounded() -> @kernel.Thm
+
+pub fn slln_gap_dyadic() -> @kernel.Thm
+
+pub fn slln_subseq() -> @kernel.Thm
+
+pub fn slln_subseq_bounded() -> @kernel.Thm
+
+pub fn slln_subseq_dyadic() -> @kernel.Thm
+
+pub fn slln_subseq_gseq() -> @kernel.Thm
+
+pub fn slln_summable_variance() -> @kernel.Thm
+
+pub fn strong_law_finite_variance() -> @kernel.Thm
+
+pub fn strong_law_of_large_numbers() -> @kernel.Thm
+
+pub fn strong_law_of_large_numbers_simple() -> @kernel.Thm
+
+pub fn sum_indicator_eq_nat() -> @kernel.Thm
+
+pub fn sum_indicator_le_real() -> @kernel.Thm
+
+pub fn sum_inv_sq_bound() -> @kernel.Thm
+
+pub fn sum_inv_sq_le_inv() -> @kernel.Thm
+
+pub fn sum_open_halfline_as_rational_union() -> @kernel.Thm
+
+pub fn sum_support_eq() -> @kernel.Thm
+
+pub fn sum_telescoping_inv() -> @kernel.Thm
+
+pub fn summable_inv_suc_squares() -> @kernel.Thm
+
+pub fn summable_variance_dyadic() -> @kernel.Thm
+
+pub fn summable_variance_dyadic_block() -> @kernel.Thm
+
+pub fn summable_variance_gseq() -> @kernel.Thm
+
+pub fn tail_inters_in_events() -> @kernel.Thm
+
+pub fn tail_inters_increasing() -> @kernel.Thm
+
+pub fn tail_le_sq_div() -> @kernel.Thm
+
+pub fn tail_mul_le_sq() -> @kernel.Thm
+
+pub fn tail_prob_sum_le_expectation() -> @kernel.Thm
+
+pub fn tail_prob_summable() -> @kernel.Thm
+
+pub fn tail_sigma() -> @kernel.Thm
+
+pub fn tail_sum_eq_nn_expectation() -> @kernel.Thm
+
+pub fn truncated_variance_sum_bound() -> @kernel.Thm
+
+pub fn truncated_variance_summable() -> @kernel.Thm
+
+pub fn ui_imp_l1_bounded() -> @kernel.Thm
+
+pub fn ui_pointwise_l1() -> @kernel.Thm
+
+pub fn uniformly_integrable() -> @kernel.Thm
+
+pub fn unions_sigma_generated_halflines() -> @kernel.Thm
+
+pub fn variance() -> @kernel.Thm
+
+pub fn variance_add() -> @kernel.Thm
+
+pub fn variance_alt() -> @kernel.Thm
+
+pub fn variance_cmul() -> @kernel.Thm
+
+pub fn variance_const() -> @kernel.Thm
+
+pub fn variance_nonneg() -> @kernel.Thm
+
+pub fn variance_shift() -> @kernel.Thm
+
+pub fn variance_simple() -> @kernel.Thm
+
+pub fn variance_sum_iid() -> @kernel.Thm
+
+pub fn variance_sum_uncorrelated() -> @kernel.Thm
+
+pub fn variance_sum_uncorrelated_simple() -> @kernel.Thm
+
+pub fn weak_law_of_large_numbers() -> @kernel.Thm
+
+pub fn weak_law_of_large_numbers_simple() -> @kernel.Thm
+
+pub fn wlln_convergence() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
