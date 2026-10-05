@@ -1,0 +1,63 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/digit_serial_methods"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn bound_theorem_div() -> @kernel.Thm
+
+pub fn bound_theorem_sqrt() -> @kernel.Thm
+
+pub fn bounds_instatiation(@kernel.Thm) -> ((@kernel.Term) -> ((@kernel.Term) -> ((@kernel.Term) -> ((Int64) -> ((Int64) -> @kernel.Thm raise) raise) raise) raise) raise) raise
+
+pub fn corollary_v_3() -> @kernel.Thm
+
+pub fn full_corollary() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn posynomial() -> @kernel.Thm
+
+pub fn posynomial_0() -> @kernel.Thm
+
+pub fn posynomial_1() -> @kernel.Thm
+
+pub fn posynomial_add() -> @kernel.Thm
+
+pub fn posynomial_cmul() -> @kernel.Thm
+
+pub fn posynomial_const() -> @kernel.Thm
+
+pub fn posynomial_mul() -> @kernel.Thm
+
+pub fn posynomial_sum() -> @kernel.Thm
+
+pub fn posynomial_v() -> @kernel.Thm
+
+pub fn posynomial_vdiv() -> @kernel.Thm
+
+pub fn posynomial_vmul() -> @kernel.Thm
+
+pub fn posynomial_vpowmul() -> @kernel.Thm
+
+pub fn real_convex_on_posynomial() -> @kernel.Thm
+
+pub fn table_part_1() -> @kernel.Thm
+
+pub fn table_part_2() -> @kernel.Thm
+
+pub fn table_part_3() -> @kernel.Thm
+
+pub fn table_part_4() -> @kernel.Thm
+
+pub fn theorem_v_1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
