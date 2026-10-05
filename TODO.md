@@ -52,8 +52,11 @@ and file I/O before starting it.
    under Open issues, before the first colliding directory.
 4. **Small directories that need only the core or Library/** (63K lines):
    Complex, 100/cubic, Arithmetic (but pa.ml, which make.ml does not
-   load), Permutation, Ntrie, Model and GL are done; EC, Divstep and Rqe
-   next. IsabelleLight and Boyer_Moore load their files from a computed
+   load), Permutation, Ntrie, Model, GL and Divstep are done; EC and Rqe
+   are in progress. After a directory with a make.ml passes, fold its tests
+   into `<dir>/make` (tools/ocaml_ref/chain_test.py). Independent
+   directories can run side by side in scratch clones under `.port/`
+   (the OCaml sessions are the slow, single-threaded part). IsabelleLight and Boyer_Moore load their files from a computed
    list (`map (load_on_path paths) [...]`), and Boyer_Moore has
    `boyer-moore.ml` (no package can be named so) and a make.ml with
    definitions: step 8. A directory

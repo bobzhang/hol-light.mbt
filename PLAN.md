@@ -185,9 +185,11 @@ definitions register constants, quotations advance the type-variable and
   (the hand-ported core on wasm and wasm-gc, seconds), `moon fmt` and
   `moon info`; a change to a theory, the translator or the engine also the
   tiers it touches (`tools/test.py core|library|multivariate|100|all`, on
-  wasm-gc). Each theory's test loads its whole chain in a fresh process, so
-  the suite is hours of CPU: `tools/test.py all --target wasm` (the primary
-  target) is for releases. `--shard I/N` splits a selection across machines,
+  wasm-gc). A file's test loads everything before it in a fresh process;
+  the files of a load order (a make.ml) are test blocks of one package,
+  run in order in one process with their goldens unchanged (the blocks
+  read the counters without advancing them: tools/ocaml_ref/chain_test.py).
+  `tools/test.py all --target wasm` (the primary target) is for releases. `--shard I/N` splits a selection across machines,
   balanced by tools/test_times.tsv.
 
 ## Phases

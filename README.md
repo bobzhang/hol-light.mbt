@@ -16,7 +16,8 @@ constructs theorems only through its API.
 - **Multivariate/**: all 32 theory files (`multivariate/<name>`).
 - **100/**: 59 of 67 files (`100/<name>`); the rest wait for other
   directories.
-- **Complex/**: all 9 files (`complex/<name>`).
+- **Complex/, Arithmetic/, Permutation/, Ntrie/, Model/, GL/, Divstep/**:
+  their theory files (`complex/<name>`, ...).
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the
 registry caps a module at 100 MB); Multivariate/, 100/ and the translation
@@ -50,9 +51,13 @@ python3 tools/test.py all --target wasm    # on the primary target (hours): befo
 python3 tools/ocaml_ref/batch.py --files 100/x.ml ...   # translate and check
 ```
 
-Each theory's test loads its whole chain in a fresh process, so the suite
-is 4.5 hours of CPU on wasm-gc and five times that on wasm: run the tier
-you touch. `--shard I/N` splits a selection across machines.
+A file's test loads everything before it in a fresh process and compares
+what HOL Light itself gives. The files of a directory with a load order
+(its make.ml) are the test blocks of one package, `<dir>/make`, which
+loads the chain once; `tools/test.py complex/make/05_quelim_test.mbt` runs
+one member alone. Files outside such an order (100/, most of Library/)
+have a test each. Run the tier you touch; `--shard I/N` splits a selection
+across machines.
 
 The upstream sources go in `.repos/hol-light`. The reference runs use the
 opam switch `hol-light` (or `$HOL_LIGHT_SWITCH`):
