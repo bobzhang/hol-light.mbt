@@ -836,6 +836,8 @@ pub fn linearity_thms() -> @ref.Ref[@list.List[@kernel.Thm]]
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn monoidal_cfun_add() -> @kernel.Thm
 
 pub fn mul_herm() -> @kernel.Thm
