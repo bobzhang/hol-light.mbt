@@ -1,0 +1,88 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/buffon"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn buffon_general() -> @kernel.Thm
+
+pub fn buffon_general_bridge() -> @kernel.Thm
+
+pub fn buffon_general_core_bound() -> @kernel.Thm
+
+pub fn buffon_long() -> @kernel.Thm
+
+pub fn buffon_short() -> @kernel.Thm
+
+pub fn cos_pi_sub() -> @kernel.Thm
+
+pub fn has_real_integral_cmul_sin() -> @kernel.Thm
+
+pub fn has_real_integral_cmul_sin_0_pi() -> @kernel.Thm
+
+pub fn has_real_integral_sin() -> @kernel.Thm
+
+pub fn has_real_integral_sin_0_pi() -> @kernel.Thm
+
+pub fn indep_joint_cdf() -> @kernel.Thm
+
+pub fn indep_rect_prob() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn min_abs_lipschitz() -> @kernel.Thm
+
+pub fn min_contraction() -> @kernel.Thm
+
+pub fn min_sin_integral_long() -> @kernel.Thm
+
+pub fn min_sin_integral_short() -> @kernel.Thm
+
+pub fn min_sin_oscillation() -> @kernel.Thm
+
+pub fn prob_finite_additive() -> @kernel.Thm
+
+pub fn prob_subset_diff() -> @kernel.Thm
+
+pub fn prob_zero_tac(@list.List[(String, @kernel.Thm)], @kernel.Term) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn real_eq_epsilon() -> @kernel.Thm
+
+pub fn sandwich_abs_bound() -> @kernel.Thm
+
+pub fn sin_lipschitz() -> @kernel.Thm
+
+pub fn sin_pi_sub() -> @kernel.Thm
+
+pub fn skolem_pair() -> @kernel.Thm
+
+pub fn subadditive_tac(@list.List[(String, @kernel.Thm)], @kernel.Term) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn uniform_rect_prob() -> @kernel.Thm
+
+pub fn uniform_rv() -> @kernel.Thm
+
+pub fn uniform_rv_bounds() -> @kernel.Thm
+
+pub fn uniform_rv_cdf_high() -> @kernel.Thm
+
+pub fn uniform_rv_cdf_low() -> @kernel.Thm
+
+pub fn uniform_rv_cdf_mid() -> @kernel.Thm
+
+pub fn uniform_rv_cdf_zero() -> @kernel.Thm
+
+pub fn uniform_rv_imp_rv() -> @kernel.Thm
+
+pub fn uniform_zero_cdf_range() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
