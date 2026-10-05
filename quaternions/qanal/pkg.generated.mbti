@@ -1,0 +1,135 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/quaternions/qanal"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn continuous_at_hx_dot() -> @kernel.Thm
+
+pub fn continuous_at_hx_norm() -> @kernel.Thm
+
+pub fn continuous_at_quat_components() -> @kernel.Thm
+
+pub fn continuous_hx_drop() -> @kernel.Thm
+
+pub fn continuous_hx_lift() -> @kernel.Thm
+
+pub fn continuous_on_hx_dot() -> @kernel.Thm
+
+pub fn continuous_on_hx_drop() -> @kernel.Thm
+
+pub fn continuous_on_hx_lift() -> @kernel.Thm
+
+pub fn continuous_on_hx_norm() -> @kernel.Thm
+
+pub fn continuous_on_quat_components() -> @kernel.Thm
+
+pub fn continuous_on_quat_inv() -> @kernel.Thm
+
+pub fn continuous_on_quat_lmul() -> @kernel.Thm
+
+pub fn continuous_on_quat_mul() -> @kernel.Thm
+
+pub fn continuous_on_quat_pow() -> @kernel.Thm
+
+pub fn continuous_on_quat_rmul() -> @kernel.Thm
+
+pub fn continuous_quat_inv() -> @kernel.Thm
+
+pub fn continuous_quat_inv_at() -> @kernel.Thm
+
+pub fn continuous_quat_inv_within() -> @kernel.Thm
+
+pub fn continuous_quat_mul() -> @kernel.Thm
+
+pub fn continuous_quat_pow() -> @kernel.Thm
+
+pub fn continuous_within_hx_dot() -> @kernel.Thm
+
+pub fn continuous_within_hx_norm() -> @kernel.Thm
+
+pub fn lim_im1_lbound() -> @kernel.Thm
+
+pub fn lim_im1_ubound() -> @kernel.Thm
+
+pub fn lim_im2_lbound() -> @kernel.Thm
+
+pub fn lim_im2_ubound() -> @kernel.Thm
+
+pub fn lim_im3_lbound() -> @kernel.Thm
+
+pub fn lim_im3_ubound() -> @kernel.Thm
+
+pub fn lim_null_quat_add() -> @kernel.Thm
+
+pub fn lim_null_quat_bound() -> @kernel.Thm
+
+pub fn lim_null_quat_lmul() -> @kernel.Thm
+
+pub fn lim_null_quat_lmul_bounded() -> @kernel.Thm
+
+pub fn lim_null_quat_mul() -> @kernel.Thm
+
+pub fn lim_null_quat_neg() -> @kernel.Thm
+
+pub fn lim_null_quat_pow() -> @kernel.Thm
+
+pub fn lim_null_quat_rmul() -> @kernel.Thm
+
+pub fn lim_null_quat_rmul_bounded() -> @kernel.Thm
+
+pub fn lim_null_quat_sub() -> @kernel.Thm
+
+pub fn lim_quat_inv() -> @kernel.Thm
+
+pub fn lim_quat_lmul() -> @kernel.Thm
+
+pub fn lim_quat_mul() -> @kernel.Thm
+
+pub fn lim_quat_pow() -> @kernel.Thm
+
+pub fn lim_quat_re_lbound() -> @kernel.Thm
+
+pub fn lim_quat_re_ubound() -> @kernel.Thm
+
+pub fn lim_quat_rmul() -> @kernel.Thm
+
+pub fn linear_quat_components() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn quat_inv_pow() -> @kernel.Thm
+
+pub fn quat_lim_lbound_components() -> @kernel.Thm
+
+pub fn quat_lim_ubound_components() -> @kernel.Thm
+
+pub fn quat_norm_img() -> @kernel.Thm
+
+pub fn quat_sqnorm_mul() -> @kernel.Thm
+
+pub fn series_quat_lmul() -> @kernel.Thm
+
+pub fn series_quat_rmul() -> @kernel.Thm
+
+pub fn summable_quat_lmul() -> @kernel.Thm
+
+pub fn summable_quat_rmul() -> @kernel.Thm
+
+pub fn sums_quat_0() -> @kernel.Thm
+
+pub fn uniform_lim_quat_inv() -> @kernel.Thm
+
+pub fn uniform_lim_quat_mul() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
