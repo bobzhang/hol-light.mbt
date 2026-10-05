@@ -1438,6 +1438,9 @@ module Lower = struct
                 match Types.get_desc (Ctype.expand_head (env ()) t) with
                 | Types.Tarrow _ -> true
                 | Types.Ttuple ts -> List.exists holds_fn ts
+                (* a polymorphic element (`enter [] (tm, x) net` at 'a):
+                   nothing says it is comparable *)
+                | Types.Tvar _ -> true
                 | _ -> false
               in
               not (is_gconv_tuple a) && holds_fn a
