@@ -255,6 +255,7 @@ module Lower = struct
     | "int" -> Some "Int64"
     | "bool" -> Some "Bool"
     | "unit" -> Some "Unit"
+    | "exn" -> Some "Error"
     | "char" -> Some "Char"
     | "option" -> Some "Option"
     | "ref" -> Some "Ref"
@@ -1302,7 +1303,12 @@ module Lower = struct
         let lowered = List.map2 (fun e t -> let ss, x, ty = lower ?expect:t e in ((ss, x), ty)) es mtys in
         (* right to left *)
         let stmts, xs = schedule (List.rev_map fst lowered) in
-        ( stmts, Tuple (List.rev xs), M.Tuple (List.map snd lowered) )
+        (* a component that always raises (`(failwith f, Failure m)` in
+           Unity/aux_definitions.ml): the tuple is never built, and MoonBit
+           takes no `raise` inside one *)
+        (match List.find_opt (function Raise _ -> true | _ -> false) xs with
+         | Some r -> (stmts, r, M.Tuple (List.map snd lowered))
+         | None -> ( stmts, Tuple (List.rev xs), M.Tuple (List.map snd lowered) ))
     | Texp_construct (_, cd, args) -> lower_construct ?expect e cd args
     | Texp_ifthenelse (c, a, b) ->
         let cs, cx, _ = lower c in
