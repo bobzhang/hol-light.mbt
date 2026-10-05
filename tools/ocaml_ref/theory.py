@@ -48,6 +48,9 @@ RENAMED = {
     "Probability/measure": "probability/probability_measure",  # Multivariate/measure.ml
     "Quaternions/misc": "quaternions/quaternions_misc",    # Multivariate/misc.ml
     "UnitTests/records": "unittests/unittests_records",    # Library/records.ml
+    # a package's name is an identifier
+    "Formal_ineqs/taylor/theory/taylor_interval-compiled": "formal_ineqs/taylor/theory/taylor_interval_compiled",
+    "Formal_ineqs/taylor/theory/multivariate_taylor-compiled": "formal_ineqs/taylor/theory/multivariate_taylor_compiled",
 }
 
 
@@ -184,7 +187,13 @@ def needs_closure(f):
 # order: every EC file states what it needs, and the chain (thirty files,
 # the curves one after another) is more than three hours of proofs in one
 # OCaml session, where a curve by itself is at most forty minutes
-NEEDS_ONLY = {"EC"}
+NEEDS_ONLY = {"EC", "Formal_ineqs"}
+
+# What a directory's make.ml loads before any of its files, which name
+# only one another: every file of the directory is loaded after these
+# (Formal_ineqs/make.ml needs Multivariate/realanalysis.ml, then loads
+# verifier/m_verifier_main.hl, which needs the rest)
+DIR_PRE = {"Formal_ineqs": ["Multivariate/realanalysis.ml"]}
 
 
 # Directories whose loader computes its file list (`map (load_on_path
@@ -223,7 +232,7 @@ def make_pre(f):
     for g, pre in make_plan(os.path.dirname(f)):
         if g == f:
             return pre
-    return []
+    return DIR_PRE.get(f.split("/")[0], []) if "/" in f else []
 
 
 def chain_prev(f):
