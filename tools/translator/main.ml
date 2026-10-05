@@ -46,6 +46,13 @@ module Main = struct
         ( "jordan/tactics_refine/tactics_refine.mbt",
           [ { Emit.line = 71; setup = None; names = [ ("dump_thm", "dump_thm") ] };
             { Emit.line = 76; setup = None; names = [ ("load_thm", "load_thm") ] } ] )
+    | "Minisat/dimacs_tools.ml" ->
+        (* readDimacs reads a file through the Stream and Genlex libraries:
+           by hand (minisat/dimacs_tools/read_dimacs.mbt), the functions
+           under it left out *)
+        ( "minisat/dimacs_tools/dimacs_tools.mbt",
+          List.map (fun line -> { Emit.line; setup = None; names = [] }) [ 256; 262; 269; 286; 295 ]
+          @ [ { Emit.line = 302; setup = None; names = [ ("readDimacs", "read_dimacs") ] } ] )
     | f when (match Names.package_of_file f with Some p -> String.contains p '/' | None -> false) ->
         let p = Option.get (Names.package_of_file f) in
         (* moon takes *_test.mbt (and *_wbtest.mbt) for test files *)
