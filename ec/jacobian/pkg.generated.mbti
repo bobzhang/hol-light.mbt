@@ -1,0 +1,87 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/jacobian"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn jacobian_0() -> @kernel.Thm
+
+pub fn jacobian_add() -> @kernel.Thm
+
+pub fn jacobian_add_unexceptional() -> @kernel.Thm
+
+pub fn jacobian_curve() -> @kernel.Thm
+
+pub fn jacobian_curve_add() -> @kernel.Thm
+
+pub fn jacobian_curve_imp_point() -> @kernel.Thm
+
+pub fn jacobian_curve_neg() -> @kernel.Thm
+
+pub fn jacobian_double_unexceptional() -> @kernel.Thm
+
+pub fn jacobian_eq() -> @kernel.Thm
+
+pub fn jacobian_eq_add() -> @kernel.Thm
+
+pub fn jacobian_eq_neg() -> @kernel.Thm
+
+pub fn jacobian_neg() -> @kernel.Thm
+
+pub fn jacobian_of_weierstrass() -> @kernel.Thm
+
+pub fn jacobian_of_weierstrass_add() -> @kernel.Thm
+
+pub fn jacobian_of_weierstrass_curve() -> @kernel.Thm
+
+pub fn jacobian_of_weierstrass_curve_eq() -> @kernel.Thm
+
+pub fn jacobian_of_weierstrass_eq() -> @kernel.Thm
+
+pub fn jacobian_of_weierstrass_neg() -> @kernel.Thm
+
+pub fn jacobian_of_weierstrass_of_jacobian() -> @kernel.Thm
+
+pub fn jacobian_of_weierstrass_point() -> @kernel.Thm
+
+pub fn jacobian_of_weierstrass_point_eq() -> @kernel.Thm
+
+pub fn jacobian_point() -> @kernel.Thm
+
+pub fn jacobian_point_add() -> @kernel.Thm
+
+pub fn jacobian_point_neg() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn weierstrass_of_jacobian() -> @kernel.Thm
+
+pub fn weierstrass_of_jacobian_add() -> @kernel.Thm
+
+pub fn weierstrass_of_jacobian_add_of_weierstrass() -> @kernel.Thm
+
+pub fn weierstrass_of_jacobian_add_unexceptional() -> @kernel.Thm
+
+pub fn weierstrass_of_jacobian_curve() -> @kernel.Thm
+
+pub fn weierstrass_of_jacobian_double_unexceptional() -> @kernel.Thm
+
+pub fn weierstrass_of_jacobian_eq() -> @kernel.Thm
+
+pub fn weierstrass_of_jacobian_neg() -> @kernel.Thm
+
+pub fn weierstrass_of_jacobian_neg_of_weierstrass() -> @kernel.Thm
+
+pub fn weierstrass_of_jacobian_of_weierstrass() -> @kernel.Thm
+
+pub fn weierstrass_of_jacobian_point() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

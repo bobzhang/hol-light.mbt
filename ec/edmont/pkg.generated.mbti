@@ -1,0 +1,57 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/edmont"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn ecurve_of_mcurve() -> @kernel.Thm
+
+pub fn ecurve_of_mcurve_of_ecurve() -> @kernel.Thm
+
+pub fn edwards_of_montgomery() -> @kernel.Thm
+
+pub fn edwards_of_montgomery_of_edwards() -> @kernel.Thm
+
+pub fn edwards_of_montgomery_v1() -> @kernel.Thm
+
+pub fn group_isomorphisms_edwards_montgomery_group() -> @kernel.Thm
+
+pub fn group_isomorphisms_montgomery_edwards_group() -> @kernel.Thm
+
+pub fn isomorphic_edwards_montgomery_group() -> @kernel.Thm
+
+pub fn isomorphic_montgomery_edwards_group() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mcurve_of_ecurve() -> @kernel.Thm
+
+pub fn mcurve_of_ecurve_nonsingular() -> @kernel.Thm
+
+pub fn mcurve_of_ecurve_nonsingular_eq() -> @kernel.Thm
+
+pub fn mcurve_of_ecurve_of_mcurve() -> @kernel.Thm
+
+pub fn mcurve_of_ecurve_strongly_nonsingular() -> @kernel.Thm
+
+pub fn mcurve_of_ecurve_strongly_nonsingular_eq() -> @kernel.Thm
+
+pub fn montgomery_of_edwards() -> @kernel.Thm
+
+pub fn montgomery_of_edwards_add() -> @kernel.Thm
+
+pub fn montgomery_of_edwards_neg() -> @kernel.Thm
+
+pub fn montgomery_of_edwards_of_montgomery() -> @kernel.Thm
+
+pub fn montgomery_of_edwards_v1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

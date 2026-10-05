@@ -1,0 +1,61 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/weierstrass"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn card_bound_weierstrass_curve() -> @kernel.Thm
+
+pub fn finite_weierstrass_curve() -> @kernel.Thm
+
+pub fn group_endomorphism_quady() -> @kernel.Thm
+
+pub fn group_endomorphism_triplex() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn weierstrass_add() -> @kernel.Thm
+
+pub fn weierstrass_add_assoc() -> @kernel.Thm
+
+pub fn weierstrass_add_lneg() -> @kernel.Thm
+
+pub fn weierstrass_add_sym() -> @kernel.Thm
+
+pub fn weierstrass_curve() -> @kernel.Thm
+
+pub fn weierstrass_curve_0() -> @kernel.Thm
+
+pub fn weierstrass_curve_add() -> @kernel.Thm
+
+pub fn weierstrass_curve_imp_point() -> @kernel.Thm
+
+pub fn weierstrass_curve_neg() -> @kernel.Thm
+
+pub fn weierstrass_group() -> @kernel.Thm
+
+pub fn weierstrass_group_v1() -> @kernel.Thm
+
+pub fn weierstrass_neg() -> @kernel.Thm
+
+pub fn weierstrass_nonsingular() -> @kernel.Thm
+
+pub fn weierstrass_point() -> @kernel.Thm
+
+pub fn weierstrass_point_add() -> @kernel.Thm
+
+pub fn weierstrass_point_neg() -> @kernel.Thm
+
+pub fn weierstrass_quady() -> @kernel.Thm
+
+pub fn weierstrass_triplex() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

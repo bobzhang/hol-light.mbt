@@ -1,0 +1,38 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/misc"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn associativity_lemma() -> @kernel.Thm
+
+pub fn cauchy_group_theorem_2() -> @kernel.Thm
+
+pub fn field_char_not2() -> @kernel.Thm
+
+pub fn field_char_not23() -> @kernel.Thm
+
+pub fn field_char_not3() -> @kernel.Thm
+
+pub fn finite_quadratic_curve() -> @kernel.Thm
+
+pub fn group_adhoc_order_unique_lemma() -> @kernel.Thm
+
+pub fn integer_mod_ring_root_exists() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn not_ring_char_divides_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn symmetry_lemma() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

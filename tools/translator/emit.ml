@@ -219,7 +219,10 @@ module Emit = struct
     let mname = fresh_top oname in
     if pure_value e && tyvars_of_text (show_ty e.exp_type) <> [] then
       emit_poly_value ?id oname mname e
-    else
+    else begin
+    (* not a syntactic value: computed once, so its generalized (covariant)
+       type variables take one instance (Lower.frozen_vars) *)
+    if tyvars_of_text (show_ty e.exp_type) <> [] then freeze_vars e.exp_type;
     let mty = mty_of e.exp_type in
     let stmts, x, _ = lower ~expect:mty e in
     add_step oname (stmts @ [ Do (Call (Atom (mname ^ "_c.set"), [ x ])) ]);
@@ -229,6 +232,7 @@ module Emit = struct
         Hashtbl.replace own_values (Ident.unique_name id)
           (mname, match mty with M.Fun _ -> Function mty | _ -> Accessor mty)
     | None -> ()
+    end
 
   let camel s =
     String.concat "" (List.map String.capitalize_ascii (String.split_on_char '_' s))

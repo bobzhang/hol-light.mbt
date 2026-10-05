@@ -92,9 +92,23 @@ module Lower = struct
      Complex/quelim.ml: MPOLY_NORM_CONV and the local functions using it. *)
   let weak_vars : (string, Types.type_expr) Hashtbl.t = Hashtbl.create 16
 
+  (* Generalized type variables treated like weak ones: those of a value
+     that is computed once (not a syntactic value), which OCaml generalizes
+     when they are covariant (`goal -> meta * 'a list * justification` for a
+     tactic returning `[]`: Examples/mizar.ml). MoonBit needs one type for
+     its cell: the instance its uses take (`note_instance`). *)
+  let frozen_vars : (int, unit) Hashtbl.t = Hashtbl.create 16
+
   let is_weak ty =
     (match Types.get_desc ty with Types.Tvar _ -> true | _ -> false)
-    && Types.get_level ty <> Btype.generic_level
+    && (Types.get_level ty <> Btype.generic_level || Hashtbl.mem frozen_vars (Types.get_id ty))
+
+  let rec freeze_vars ty =
+    match Types.get_desc ty with
+    | Types.Tvar _ -> Hashtbl.replace frozen_vars (Types.get_id ty) ()
+    | Types.Tarrow (_, a, b, _) -> freeze_vars a; freeze_vars b
+    | Types.Ttuple ts | Types.Tconstr (_, ts, _) -> List.iter freeze_vars ts
+    | _ -> ()
 
   let weak_name ty =
     let n = Printf.sprintf "Weak_%d_" (Types.get_id ty) in
@@ -111,12 +125,34 @@ module Lower = struct
   let rec link_weak (own : Types.type_expr) (installed : Types.type_expr) =
     match Types.get_desc own, Types.get_desc installed with
     | Types.Tvar _, _ when is_weak own ->
-        if not (Hashtbl.mem weak_alias (Types.get_id own)) && Types.get_id own <> Types.get_id installed then
-          Hashtbl.replace weak_alias (Types.get_id own) installed
+        if not (Hashtbl.mem weak_alias (Types.get_id own)) && Types.get_id own <> Types.get_id installed then begin
+          Hashtbl.replace weak_alias (Types.get_id own) installed;
+          (* a frozen variable's installed counterpart is resolved by the
+             uses of the value *)
+          if Hashtbl.mem frozen_vars (Types.get_id own) then freeze_vars installed
+        end
     | Types.Tarrow (_, a1, b1, _), Types.Tarrow (_, a2, b2, _) -> link_weak a1 a2; link_weak b1 b2
     | Types.Ttuple l1, Types.Ttuple l2 when List.length l1 = List.length l2 -> List.iter2 link_weak l1 l2
     | Types.Tconstr (p1, l1, _), Types.Tconstr (p2, l2, _) when Path.same p1 p2 && List.length l1 = List.length l2 ->
         List.iter2 link_weak l1 l2
+    | _ -> ()
+
+  (* a use of a value at an instance of its type: a frozen variable of the
+     scheme stands for the corresponding part of the first instance *)
+  let rec note_instance (scheme : Types.type_expr) (inst : Types.type_expr) =
+    match Types.get_desc scheme, Types.get_desc inst with
+    | Types.Tvar _, d when Hashtbl.mem frozen_vars (Types.get_id scheme) ->
+        (match d with
+         | Types.Tvar _ -> ()
+         | _ -> if not (Hashtbl.mem weak_alias (Types.get_id scheme)) then Hashtbl.replace weak_alias (Types.get_id scheme) inst)
+    | Types.Tarrow (_, a1, b1, _), Types.Tarrow (_, a2, b2, _) -> note_instance a1 a2; note_instance b1 b2
+    | Types.Ttuple l1, Types.Ttuple l2 when List.length l1 = List.length l2 -> List.iter2 note_instance l1 l2
+    | Types.Tconstr (p1, l1, _), Types.Tconstr (p2, l2, _) when Path.same p1 p2 && List.length l1 = List.length l2 ->
+        List.iter2 note_instance l1 l2
+    | (Types.Tconstr _, _ | _, Types.Tconstr _) ->
+        (* an abbreviation on one side (`tactic`) *)
+        let s' = Ctype.expand_head (env ()) scheme and i' = Ctype.expand_head (env ()) inst in
+        if not (s' == scheme && i' == inst) then note_instance s' i'
     | _ -> ()
 
   (* the type a weak variable stands for by now, if anything resolved it *)
@@ -1178,9 +1214,14 @@ module Lower = struct
     exp_env := Some e.exp_env;
     Fun.protect ~finally:(fun () -> decr depth; exp_env := saved_env) @@ fun () ->
     match e.exp_desc with
-    | Texp_ident (path, _, vd) -> lower_apply ?expect e e [] |> fun r -> ignore vd; ignore path; r
+    | Texp_ident (path, _, vd) ->
+        if Hashtbl.length frozen_vars > 0 then note_instance vd.Types.val_type e.exp_type;
+        lower_apply ?expect e e [] |> fun r -> ignore path; r
     | Texp_constant c -> ([], Atom (const loc c), mty_of e.exp_type)
     | Texp_apply (f, args) ->
+        (match f.exp_desc with
+         | Texp_ident (_, _, vd) when Hashtbl.length frozen_vars > 0 -> note_instance vd.Types.val_type f.exp_type
+         | _ -> ());
         (* the typed arguments are in the callee's parameter order, so a
            labelled argument is positional (none may be omitted) *)
         (* a Stdlib function's omitted optional arguments (`?random` of
@@ -1427,7 +1468,23 @@ module Lower = struct
         let rec result t = match arrow t with Some (_, b) -> result b | None -> t in
         let elem_is_fn =
           match Types.get_desc (expand (result fty)) with
-          | Types.Tconstr (_, [ a ], _) -> is_arrow a
+          | Types.Tconstr (_, [ a ], _) ->
+              (* through abbreviations too: a `conv net` (Examples/cooper.ml).
+                 A tuple holding a function ((term -> bool) * 'a in
+                 Examples/holby.ml) cannot implement NetCompare either:
+                 such elements are compared by identity as a whole, where
+                 OCaml compares the components (it differs only when the
+                 same closure is stored with equal other components) *)
+              let rec holds_fn t =
+                match Types.get_desc (Ctype.expand_head (env ()) t) with
+                | Types.Tarrow _ -> true
+                | Types.Ttuple ts -> List.exists holds_fn ts
+                (* a polymorphic element (`enter [] (tm, x) net` at 'a):
+                   nothing says it is comparable *)
+                | Types.Tvar _ -> true
+                | _ -> false
+              in
+              not (is_gconv_tuple a) && holds_fn a
           | _ -> false
         in
         if elem_is_fn then { h with hexp = Atom (q ^ "_fn") } else h

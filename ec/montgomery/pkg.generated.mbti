@@ -1,0 +1,63 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/montgomery"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abelian_montgomery_group() -> @kernel.Thm
+
+pub fn card_bound_montgomery_curve() -> @kernel.Thm
+
+pub fn finite_montgomery_curve() -> @kernel.Thm
+
+pub fn group_pow_montgomery_torsion() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn montgomery_add() -> @kernel.Thm
+
+pub fn montgomery_add_assoc() -> @kernel.Thm
+
+pub fn montgomery_add_lneg() -> @kernel.Thm
+
+pub fn montgomery_add_sym() -> @kernel.Thm
+
+pub fn montgomery_curve() -> @kernel.Thm
+
+pub fn montgomery_curve_0() -> @kernel.Thm
+
+pub fn montgomery_curve_add() -> @kernel.Thm
+
+pub fn montgomery_curve_imp_point() -> @kernel.Thm
+
+pub fn montgomery_curve_neg() -> @kernel.Thm
+
+pub fn montgomery_group() -> @kernel.Thm
+
+pub fn montgomery_group_v1() -> @kernel.Thm
+
+pub fn montgomery_neg() -> @kernel.Thm
+
+pub fn montgomery_nonsingular() -> @kernel.Thm
+
+pub fn montgomery_point() -> @kernel.Thm
+
+pub fn montgomery_point_add() -> @kernel.Thm
+
+pub fn montgomery_point_neg() -> @kernel.Thm
+
+pub fn montgomery_strongly_nonsingular() -> @kernel.Thm
+
+pub fn montgomery_strongly_nonsingular_imp_nonsingular() -> @kernel.Thm
+
+pub fn montgomery_strongly_nonsingular_v1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -29,7 +29,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import theory  # noqa: E402
 
 ROOT, REF, HOL = theory.ROOT, theory.REF, theory.HOL
-OUT = os.path.join(REF, "_build", "batch")
+# (another directory for a second batch in the same checkout)
+OUT = os.environ.get("HOL_BATCH_OUT") or os.path.join(REF, "_build", "batch")
 PLACEHOLDER = "///|\nfn load_steps() -> Unit raise {\n  ()\n}\n"
 
 
