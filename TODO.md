@@ -64,18 +64,25 @@ and file I/O before starting it.
    work per directory: Complex needed five additions (over-applied
    primitives, unqualified Format functions, `Num.string_of_num`, weak type
    variables in lifted local functions, rewrite nets with other payloads).
-5. **Examples/** (30K; 31 of 50 done) and Logic/ (done). sos.ml
+5. **Examples/** (30K; 43 of 50 done: lucas_lehmer and apery are being
+   checked) and Logic/ (done). sos.ml
    needs csdp and three files need Minisat/Cadical/miz3/Rqe: those wait
    for step 8. Then 100/dirichlet, pnt (mangoldt.ml), piseries (machin.ml).
-6. **Directories on top of Multivariate/** (220K): Quaternions (`.hl`
-   files: batch.py takes them), Geometric_Algebra, Functionspaces, Unity
-   (done), Mizarlight, Probability (97K; then 100/buffon), Jordan (75K:
-   the 13 files before jordan_curve_theorem.ml are done),
-   RichterHilbertAxiomGeometry (36K; needs miz3), WZ.
+6. **Directories on top of Multivariate/** (220K): Quaternions,
+   Functionspaces, Unity and Jordan (with jordan_curve_theorem.ml) are
+   done; Probability (97K) has 3 of 10 files in and all 10 translated
+   (then 100/buffon); Geometric_Algebra is next; Mizarlight,
+   RichterHilbertAxiomGeometry (36K; needs miz3) and WZ (maxima) wait for
+   step 8.
    A background job is stopped after two hours: split a long batch with
    `--translate-only`, then `--resume` (and check finished files in a
-   second clone meanwhile).
-7. **Autoformalization/** (205K): seven large files, a batch each.
+   second clone meanwhile); a single file that takes longer
+   (Autoformalization/fifteen_theorem.ml, EC/edwards25519.ml) has to run
+   in a terminal.
+7. **Autoformalization/** (205K): fourier_transform, sarkovskii,
+   three_squares and carleson are done; fifteen_theorem, hilbert_waring
+   and planar_graph (which loads Multivariate/cauchy.ml part-way through:
+   theory.MID_NEEDS) are left.
 8. **External programs and other formats**: each needs a decision first.
    - Minisat, Cadical, QBF (SAT/QBF solver proofs) and Examples/sos.ml
      (csdp): replay recorded solver output, as lib/gp.mbt does for PARI/GP.
