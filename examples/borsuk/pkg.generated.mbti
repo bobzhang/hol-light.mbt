@@ -1,0 +1,21 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/borsuk"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn borsuk_ulam() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn theorem_1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
