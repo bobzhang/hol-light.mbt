@@ -1,0 +1,129 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/lpo"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn descendant_distinct() -> @kernel.Thm
+
+pub fn descendant_smaller() -> @kernel.Thm
+
+pub fn fvt_fun_empty() -> @kernel.Thm
+
+pub fn itlist_add_1_pos() -> @kernel.Thm
+
+pub fn lex() -> @kernel.Thm
+
+pub fn lex_def() -> @kernel.Thm
+
+pub fn lex_length() -> @kernel.Thm
+
+pub fn lex_length_chain() -> @kernel.Thm
+
+pub fn lex_map() -> @kernel.Thm
+
+pub fn lex_refl() -> @kernel.Thm
+
+pub fn lex_restrict() -> @kernel.Thm
+
+pub fn lex_total() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn lpo_cases() -> @kernel.Thm
+
+pub fn lpo_cases_v1() -> @kernel.Thm
+
+pub fn lpo_congruence() -> @kernel.Thm
+
+pub fn lpo_fvt() -> @kernel.Thm
+
+pub fn lpo_ground_complete() -> @kernel.Thm
+
+pub fn lpo_induct() -> @kernel.Thm
+
+pub fn lpo_instantiation() -> @kernel.Thm
+
+pub fn lpo_psubterm() -> @kernel.Thm
+
+pub fn lpo_refl() -> @kernel.Thm
+
+pub fn lpo_rules() -> @kernel.Thm
+
+pub fn lpo_subterm() -> @kernel.Thm
+
+pub fn lpo_subterm_lemma() -> @kernel.Thm
+
+pub fn lpo_subterm_not() -> @kernel.Thm
+
+pub fn lpo_trans() -> @kernel.Thm
+
+pub fn lpo_trans_induct() -> @kernel.Thm
+
+pub fn lpo_wf() -> @kernel.Thm
+
+pub fn mono_lex() -> @kernel.Thm
+
+pub fn nonwf() -> @kernel.Thm
+
+pub fn nonwf_induct() -> @kernel.Thm
+
+pub fn nonwf_successor() -> @kernel.Thm
+
+pub fn psubterm() -> @kernel.Thm
+
+pub fn psubterm_antisym() -> @kernel.Thm
+
+pub fn psubterm_cases() -> @kernel.Thm
+
+pub fn psubterm_instantiation() -> @kernel.Thm
+
+pub fn sequence_partition_lemma() -> @kernel.Thm
+
+pub fn sequence_subsequence() -> @kernel.Thm
+
+pub fn subterm_antisym() -> @kernel.Thm
+
+pub fn subterm_cases() -> @kernel.Thm
+
+pub fn subterm_fvt() -> @kernel.Thm
+
+pub fn subterm_induct() -> @kernel.Thm
+
+pub fn subterm_instantiation() -> @kernel.Thm
+
+pub fn subterm_psubterm_trans() -> @kernel.Thm
+
+pub fn subterm_refl() -> @kernel.Thm
+
+pub fn subterm_rules() -> @kernel.Thm
+
+pub fn subterm_trans() -> @kernel.Thm
+
+pub fn termsize() -> @kernel.Thm
+
+pub fn termsize_exists() -> @kernel.Thm
+
+pub fn wf_lex_strong() -> @kernel.Thm
+
+pub fn wf_lex_strong_induct() -> @kernel.Thm
+
+pub fn wf_minimal_dchain() -> @kernel.Thm
+
+pub fn wf_minimal_step() -> @kernel.Thm
+
+pub fn wf_nonwf() -> @kernel.Thm
+
+pub fn wf_nonwf_v1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

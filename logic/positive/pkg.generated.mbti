@@ -1,0 +1,159 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/positive"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn allpositive() -> @kernel.Thm
+
+pub fn allpositive_instance_of() -> @kernel.Thm
+
+pub fn clause_finite() -> @kernel.Thm
+
+pub fn clause_image_propflip() -> @kernel.Thm
+
+pub fn functions_form_interp() -> @kernel.Thm
+
+pub fn functions_image_interp() -> @kernel.Thm
+
+pub fn functions_resolve() -> @kernel.Thm
+
+pub fn functions_term_noconstants() -> @kernel.Thm
+
+pub fn herbase() -> @kernel.Thm
+
+pub fn herbase_lemma() -> @kernel.Thm
+
+pub fn lifting_falsify() -> @kernel.Thm
+
+pub fn lifting_falsify_v1() -> @kernel.Thm
+
+pub fn lifting_falsity_clause() -> @kernel.Thm
+
+pub fn lifting_falsity_clause_v1() -> @kernel.Thm
+
+pub fn literal_propflip() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn negative_not() -> @kernel.Thm
+
+pub fn not_negative_atom() -> @kernel.Thm
+
+pub fn pholds_allfalse_neglit() -> @kernel.Thm
+
+pub fn pholds_allfalse_nonposclause() -> @kernel.Thm
+
+pub fn pholds_alltrue_posclause() -> @kernel.Thm
+
+pub fn pholds_alltrue_poslit() -> @kernel.Thm
+
+pub fn pholds_atom() -> @kernel.Thm
+
+pub fn pholds_atom_propflip_diff() -> @kernel.Thm
+
+pub fn pholds_image_propflip_same() -> @kernel.Thm
+
+pub fn pholds_interp_image_propflip_diff() -> @kernel.Thm
+
+pub fn pholds_literal_propflip() -> @kernel.Thm
+
+pub fn pholds_literal_propflip_diff() -> @kernel.Thm
+
+pub fn pholds_literal_propflip_same() -> @kernel.Thm
+
+pub fn positive_literal_atom() -> @kernel.Thm
+
+pub fn posresolution_complete() -> @kernel.Thm
+
+pub fn posresproof_cases() -> @kernel.Thm
+
+pub fn posresproof_clause() -> @kernel.Thm
+
+pub fn posresproof_finite() -> @kernel.Thm
+
+pub fn posresproof_induct() -> @kernel.Thm
+
+pub fn posresproof_rules() -> @kernel.Thm
+
+pub fn pposresproof_cases() -> @kernel.Thm
+
+pub fn pposresproof_clause() -> @kernel.Thm
+
+pub fn pposresproof_induct() -> @kernel.Thm
+
+pub fn pposresproof_mono() -> @kernel.Thm
+
+pub fn pposresproof_psemresproof() -> @kernel.Thm
+
+pub fn pposresproof_refutation_complete() -> @kernel.Thm
+
+pub fn pposresproof_refutation_complete_finite() -> @kernel.Thm
+
+pub fn pposresproof_rules() -> @kernel.Thm
+
+pub fn presolution_lemma() -> @kernel.Thm
+
+pub fn propflip() -> @kernel.Thm
+
+pub fn propflip_inj() -> @kernel.Thm
+
+pub fn propflip_involute() -> @kernel.Thm
+
+pub fn propflip_involute_clause() -> @kernel.Thm
+
+pub fn propflip_negate() -> @kernel.Thm
+
+pub fn propflip_resolve() -> @kernel.Thm
+
+pub fn psatisfiable_clauses_propflip() -> @kernel.Thm
+
+pub fn psemresproof_cases() -> @kernel.Thm
+
+pub fn psemresproof_clause() -> @kernel.Thm
+
+pub fn psemresproof_functions() -> @kernel.Thm
+
+pub fn psemresproof_induct() -> @kernel.Thm
+
+pub fn psemresproof_mono() -> @kernel.Thm
+
+pub fn psemresproof_refutation_complete() -> @kernel.Thm
+
+pub fn psemresproof_rules() -> @kernel.Thm
+
+pub fn qfree_holds_pholds() -> @kernel.Thm
+
+pub fn qfree_holds_pholds_v1() -> @kernel.Thm
+
+pub fn semresolution_complete() -> @kernel.Thm
+
+pub fn semresolution_complete_v1() -> @kernel.Thm
+
+pub fn semresproof2_cases() -> @kernel.Thm
+
+pub fn semresproof2_clause() -> @kernel.Thm
+
+pub fn semresproof2_induct() -> @kernel.Thm
+
+pub fn semresproof2_rules() -> @kernel.Thm
+
+pub fn semresproof_cases() -> @kernel.Thm
+
+pub fn semresproof_clause() -> @kernel.Thm
+
+pub fn semresproof_induct() -> @kernel.Thm
+
+pub fn semresproof_rules() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

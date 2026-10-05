@@ -40,7 +40,7 @@ def ml_str(s):
 
 
 def ml_file(f):
-    return f if f.endswith(".ml") else f + ".ml"
+    return f if f.endswith((".ml", ".hl")) else f + ".ml"
 
 
 def after(target):

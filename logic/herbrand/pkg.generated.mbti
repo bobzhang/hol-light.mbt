@@ -1,0 +1,55 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/herbrand"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn herbase_cases() -> @kernel.Thm
+
+pub fn herbase_functions() -> @kernel.Thm
+
+pub fn herbase_induct() -> @kernel.Thm
+
+pub fn herbase_nonempty() -> @kernel.Thm
+
+pub fn herbase_rules() -> @kernel.Thm
+
+pub fn herbase_subset_terms() -> @kernel.Thm
+
+pub fn herbrand() -> @kernel.Thm
+
+pub fn herbrand_herbrand_of_prop() -> @kernel.Thm
+
+pub fn herbrand_interpretation() -> @kernel.Thm
+
+pub fn herbrand_nonempty() -> @kernel.Thm
+
+pub fn herbrand_of_prop() -> @kernel.Thm
+
+pub fn herbrand_theorem() -> @kernel.Thm
+
+pub fn holds_herbrand_of_prop() -> @kernel.Thm
+
+pub fn holds_herbrand_of_prop_general() -> @kernel.Thm
+
+pub fn interpretation_herbrand_of_prop() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn prop_of_herbrand_of_prop() -> @kernel.Thm
+
+pub fn psatisfies_herbrand_instances() -> @kernel.Thm
+
+pub fn satisfies_subset() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

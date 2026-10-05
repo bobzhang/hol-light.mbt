@@ -1,0 +1,131 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/resolution"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn atom() -> @kernel.Thm
+
+pub fn atom_v1() -> @kernel.Thm
+
+pub fn clause() -> @kernel.Thm
+
+pub fn formsubst_atom() -> @kernel.Thm
+
+pub fn formsubst_literal() -> @kernel.Thm
+
+pub fn formsubst_negate() -> @kernel.Thm
+
+pub fn formsubst_not() -> @kernel.Thm
+
+pub fn fvs() -> @kernel.Thm
+
+pub fn fvs_clause_finite() -> @kernel.Thm
+
+pub fn holds_interp() -> @kernel.Thm
+
+pub fn holds_negate() -> @kernel.Thm
+
+pub fn image_clause() -> @kernel.Thm
+
+pub fn image_formsubst_clause() -> @kernel.Thm
+
+pub fn instance_of() -> @kernel.Thm
+
+pub fn instance_of_empty() -> @kernel.Thm
+
+pub fn interp() -> @kernel.Thm
+
+pub fn isaresolvent() -> @kernel.Thm
+
+pub fn lifting_lemma() -> @kernel.Thm
+
+pub fn literal() -> @kernel.Thm
+
+pub fn literal_v1() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn negate() -> @kernel.Thm
+
+pub fn negate_atom() -> @kernel.Thm
+
+pub fn negate_neg() -> @kernel.Thm
+
+pub fn negate_negate() -> @kernel.Thm
+
+pub fn negate_refl() -> @kernel.Thm
+
+pub fn negative() -> @kernel.Thm
+
+pub fn negative_formsubst() -> @kernel.Thm
+
+pub fn not_not_atom() -> @kernel.Thm
+
+pub fn pholds_atom() -> @kernel.Thm
+
+pub fn pholds_formsubst() -> @kernel.Thm
+
+pub fn pholds_interp() -> @kernel.Thm
+
+pub fn pholds_interp_image() -> @kernel.Thm
+
+pub fn pholds_negate() -> @kernel.Thm
+
+pub fn positive() -> @kernel.Thm
+
+pub fn presproof_cases() -> @kernel.Thm
+
+pub fn presproof_induct() -> @kernel.Thm
+
+pub fn presproof_mono() -> @kernel.Thm
+
+pub fn presproof_refutation_complete() -> @kernel.Thm
+
+pub fn presproof_refutation_complete_finite() -> @kernel.Thm
+
+pub fn presproof_rules() -> @kernel.Thm
+
+pub fn presproof_trans() -> @kernel.Thm
+
+pub fn qfree_atom() -> @kernel.Thm
+
+pub fn qfree_interp() -> @kernel.Thm
+
+pub fn qfree_literal() -> @kernel.Thm
+
+pub fn qfree_negate() -> @kernel.Thm
+
+pub fn qfree_not() -> @kernel.Thm
+
+pub fn rename() -> @kernel.Thm
+
+pub fn rename_away() -> @kernel.Thm
+
+pub fn resolution_complete() -> @kernel.Thm
+
+pub fn resolve() -> @kernel.Thm
+
+pub fn resproof_cases() -> @kernel.Thm
+
+pub fn resproof_clause() -> @kernel.Thm
+
+pub fn resproof_induct() -> @kernel.Thm
+
+pub fn resproof_rules() -> @kernel.Thm
+
+pub fn resproof_rules_v1() -> @kernel.Thm
+
+pub fn unpsatisfiable_finite_subset() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

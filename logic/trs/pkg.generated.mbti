@@ -1,0 +1,41 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/trs"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn convergent_delete_left() -> @kernel.Thm
+
+pub fn convergent_modify() -> @kernel.Thm
+
+pub fn convergent_modify_lemma() -> @kernel.Thm
+
+pub fn convergent_modify_lemma_v1() -> @kernel.Thm
+
+pub fn equivalent_joinable_modify() -> @kernel.Thm
+
+pub fn equivalent_modify() -> @kernel.Thm
+
+pub fn equivalent_modify_right() -> @kernel.Thm
+
+pub fn equivalent_rstc_modify() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn trs_cases() -> @kernel.Thm
+
+pub fn trs_induct() -> @kernel.Thm
+
+pub fn trs_rules() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

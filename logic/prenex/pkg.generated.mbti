@@ -1,0 +1,113 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/prenex"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn formsubst_structure_exists() -> @kernel.Thm
+
+pub fn formsubst_structure_lemma() -> @kernel.Thm
+
+pub fn formsubst_structure_not() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn ppat() -> @kernel.Thm
+
+pub fn ppat_def() -> @kernel.Thm
+
+pub fn prenex() -> @kernel.Thm
+
+pub fn prenex_cases() -> @kernel.Thm
+
+pub fn prenex_def() -> @kernel.Thm
+
+pub fn prenex_distinct() -> @kernel.Thm
+
+pub fn prenex_duality_lemmas() -> @kernel.Thm
+
+pub fn prenex_formsubst() -> @kernel.Thm
+
+pub fn prenex_formsubst_lemma() -> @kernel.Thm
+
+pub fn prenex_induct() -> @kernel.Thm
+
+pub fn prenex_induct_not() -> @kernel.Thm
+
+pub fn prenex_left() -> @kernel.Thm
+
+pub fn prenex_left_existence() -> @kernel.Thm
+
+pub fn prenex_left_exists() -> @kernel.Thm
+
+pub fn prenex_left_exists_fv() -> @kernel.Thm
+
+pub fn prenex_left_exists_language() -> @kernel.Thm
+
+pub fn prenex_left_forall() -> @kernel.Thm
+
+pub fn prenex_left_forall_fv() -> @kernel.Thm
+
+pub fn prenex_left_forall_language() -> @kernel.Thm
+
+pub fn prenex_left_thm() -> @kernel.Thm
+
+pub fn prenex_lemma_exists() -> @kernel.Thm
+
+pub fn prenex_lemma_forall() -> @kernel.Thm
+
+pub fn prenex_right() -> @kernel.Thm
+
+pub fn prenex_right_existence() -> @kernel.Thm
+
+pub fn prenex_right_exists() -> @kernel.Thm
+
+pub fn prenex_right_exists_fv() -> @kernel.Thm
+
+pub fn prenex_right_exists_language() -> @kernel.Thm
+
+pub fn prenex_right_forall() -> @kernel.Thm
+
+pub fn prenex_right_forall_fv() -> @kernel.Thm
+
+pub fn prenex_right_forall_language() -> @kernel.Thm
+
+pub fn prenex_right_thm() -> @kernel.Thm
+
+pub fn prenex_rules() -> @kernel.Thm
+
+pub fn prenex_thm() -> @kernel.Thm
+
+pub fn qfree() -> @kernel.Thm
+
+pub fn qfree_bv_empty() -> @kernel.Thm
+
+pub fn qfree_formsubst() -> @kernel.Thm
+
+pub fn qfree_v1() -> @kernel.Thm
+
+pub fn size() -> @kernel.Thm
+
+pub fn size_formsubst() -> @kernel.Thm
+
+pub fn size_rec() -> @kernel.Thm
+
+pub fn size_v1() -> @kernel.Thm
+
+pub fn universal_cases() -> @kernel.Thm
+
+pub fn universal_induct() -> @kernel.Thm
+
+pub fn universal_rules() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

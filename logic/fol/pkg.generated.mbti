@@ -1,0 +1,228 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/fol"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn and_def() -> @kernel.Thm
+
+pub fn bv() -> @kernel.Thm
+
+pub fn bv_finite() -> @kernel.Thm
+
+pub fn dom_def() -> @kernel.Thm
+
+pub fn entails() -> @kernel.Thm
+
+pub fn equivalent() -> @kernel.Thm
+
+pub fn exists_def() -> @kernel.Thm
+
+pub fn expand_tac(String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn form_cases() -> @kernel.Thm
+
+pub fn form_distinct() -> @kernel.Thm
+
+pub fn form_induction() -> @kernel.Thm
+
+pub fn form_inj() -> @kernel.Thm
+
+pub fn form_recursion() -> @kernel.Thm
+
+pub fn formsubst() -> @kernel.Thm
+
+pub fn formsubst_functions_form() -> @kernel.Thm
+
+pub fn formsubst_functions_form_1() -> @kernel.Thm
+
+pub fn formsubst_fv() -> @kernel.Thm
+
+pub fn formsubst_language_rename() -> @kernel.Thm
+
+pub fn formsubst_predicates() -> @kernel.Thm
+
+pub fn formsubst_rename() -> @kernel.Thm
+
+pub fn formsubst_triv() -> @kernel.Thm
+
+pub fn formsubst_valuation() -> @kernel.Thm
+
+pub fn fun_def() -> @kernel.Thm
+
+pub fn functions() -> @kernel.Thm
+
+pub fn functions_form() -> @kernel.Thm
+
+pub fn functions_sing() -> @kernel.Thm
+
+pub fn functions_term() -> @kernel.Thm
+
+pub fn fv() -> @kernel.Thm
+
+pub fn fv_exists() -> @kernel.Thm
+
+pub fn fv_finite() -> @kernel.Thm
+
+pub fn fvt() -> @kernel.Thm
+
+pub fn fvt_finite() -> @kernel.Thm
+
+pub fn hold() -> @kernel.Thm
+
+pub fn holds() -> @kernel.Thm
+
+pub fn holds_alpha_exists() -> @kernel.Thm
+
+pub fn holds_alpha_forall() -> @kernel.Thm
+
+pub fn holds_formsubst() -> @kernel.Thm
+
+pub fn holds_formsubst1() -> @kernel.Thm
+
+pub fn holds_functions() -> @kernel.Thm
+
+pub fn holds_predicates() -> @kernel.Thm
+
+pub fn holds_rename() -> @kernel.Thm
+
+pub fn holds_uclose() -> @kernel.Thm
+
+pub fn holds_v1() -> @kernel.Thm
+
+pub fn holds_valuation() -> @kernel.Thm
+
+pub fn iff_def() -> @kernel.Thm
+
+pub fn in_list_union() -> @kernel.Thm
+
+pub fn interpretation() -> @kernel.Thm
+
+pub fn interpretation_sublanguage() -> @kernel.Thm
+
+pub fn interpretation_termval() -> @kernel.Thm
+
+pub fn language() -> @kernel.Thm
+
+pub fn language_1() -> @kernel.Thm
+
+pub fn list_union() -> @kernel.Thm
+
+pub fn list_union_append() -> @kernel.Thm
+
+pub fn list_union_finite() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn max_assoc() -> @kernel.Thm
+
+pub fn max_sym() -> @kernel.Thm
+
+pub fn model_decomp() -> @kernel.Thm
+
+pub fn model_duplicate() -> @kernel.Thm
+
+pub fn model_eq() -> @kernel.Thm
+
+pub fn new_nested_recursive_definition(@kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn not_def() -> @kernel.Thm
+
+pub fn or_def() -> @kernel.Thm
+
+pub fn pred_def() -> @kernel.Thm
+
+pub fn predicates() -> @kernel.Thm
+
+pub fn predicates_form() -> @kernel.Thm
+
+pub fn satisfiable() -> @kernel.Thm
+
+pub fn satisfies() -> @kernel.Thm
+
+pub fn satisfies_1() -> @kernel.Thm
+
+pub fn setmax() -> @kernel.Thm
+
+pub fn setmax_lemma() -> @kernel.Thm
+
+pub fn setmax_member() -> @kernel.Thm
+
+pub fn setmax_thm() -> @kernel.Thm
+
+pub fn setmax_union() -> @kernel.Thm
+
+pub fn term_cases() -> @kernel.Thm
+
+pub fn term_distinct() -> @kernel.Thm
+
+pub fn term_induct() -> @kernel.Thm
+
+pub fn term_inj() -> @kernel.Thm
+
+pub fn term_raw_induct() -> @kernel.Thm
+
+pub fn term_raw_recursion() -> @kernel.Thm
+
+pub fn term_recursion() -> @kernel.Thm
+
+pub fn termsubst() -> @kernel.Thm
+
+pub fn termsubst_functions_term() -> @kernel.Thm
+
+pub fn termsubst_fvt() -> @kernel.Thm
+
+pub fn termsubst_termsubst() -> @kernel.Thm
+
+pub fn termsubst_termval() -> @kernel.Thm
+
+pub fn termsubst_triv() -> @kernel.Thm
+
+pub fn termsubst_valuation() -> @kernel.Thm
+
+pub fn termval() -> @kernel.Thm
+
+pub fn termval_functions() -> @kernel.Thm
+
+pub fn termval_termsubst() -> @kernel.Thm
+
+pub fn termval_triv() -> @kernel.Thm
+
+pub fn termval_valuation() -> @kernel.Thm
+
+pub fn true_def() -> @kernel.Thm
+
+pub fn valid() -> @kernel.Thm
+
+pub fn valmod() -> @kernel.Thm
+
+pub fn valmod_clauses() -> @kernel.Thm
+
+pub fn valmod_triv() -> @kernel.Thm
+
+pub fn valmod_valmod() -> @kernel.Thm
+
+pub fn valuation() -> @kernel.Thm
+
+pub fn valuation_is_valmod() -> @kernel.Thm
+
+pub fn valuation_valmod() -> @kernel.Thm
+
+pub fn variant() -> @kernel.Thm
+
+pub fn variant_finite() -> @kernel.Thm
+
+pub fn variant_thm() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

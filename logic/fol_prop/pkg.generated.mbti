@@ -1,0 +1,59 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/fol_prop"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn compact_disj() -> @kernel.Thm
+
+pub fn compact_prop() -> @kernel.Thm
+
+pub fn compact_prop_alt() -> @kernel.Thm
+
+pub fn finite_disj_lemma() -> @kernel.Thm
+
+pub fn finsat() -> @kernel.Thm
+
+pub fn finsat_deduction() -> @kernel.Thm
+
+pub fn finsat_extend() -> @kernel.Thm
+
+pub fn finsat_max() -> @kernel.Thm
+
+pub fn finsat_max_complete() -> @kernel.Thm
+
+pub fn finsat_max_complete_strong() -> @kernel.Thm
+
+pub fn finsat_max_consistent() -> @kernel.Thm
+
+pub fn finsat_max_homo() -> @kernel.Thm
+
+pub fn finsat_mono() -> @kernel.Thm
+
+pub fn finsat_satisfiable() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn pholds() -> @kernel.Thm
+
+pub fn pholds_v1() -> @kernel.Thm
+
+pub fn psatisfiable() -> @kernel.Thm
+
+pub fn psatisfiable_mono() -> @kernel.Thm
+
+pub fn psatisfies() -> @kernel.Thm
+
+pub fn satisfiable_mono() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

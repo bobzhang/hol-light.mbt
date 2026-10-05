@@ -1,0 +1,201 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/unif"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn all_adhoc() -> @kernel.Thm
+
+pub fn badloop_ununifiable() -> @kernel.Thm
+
+pub fn callorder() -> @kernel.Thm
+
+pub fn conflictfree() -> @kernel.Thm
+
+pub fn cright() -> @kernel.Thm
+
+pub fn eqv() -> @kernel.Thm
+
+pub fn eqv_imp_occ() -> @kernel.Thm
+
+pub fn ex_adhoc() -> @kernel.Thm
+
+pub fn formsubst_termsubst_lemma() -> @kernel.Thm
+
+pub fn goodloop_unifiable() -> @kernel.Thm
+
+pub fn ismgu() -> @kernel.Thm
+
+pub fn ismgu_mgu() -> @kernel.Thm
+
+pub fn ismgu_v1() -> @kernel.Thm
+
+pub fn istriv() -> @kernel.Thm
+
+pub fn istriv_exists() -> @kernel.Thm
+
+pub fn istriv_raw() -> @kernel.Thm
+
+pub fn istriv_works() -> @kernel.Thm
+
+pub fn itlist_valmod_lemma() -> @kernel.Thm
+
+pub fn left_and_ex_thm() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn loop_break() -> @kernel.Thm
+
+pub fn loopcheck() -> @kernel.Thm
+
+pub fn loopcheck_exists() -> @kernel.Thm
+
+pub fn loopcheck_raw() -> @kernel.Thm
+
+pub fn loopcheck_v1() -> @kernel.Thm
+
+pub fn loopfree() -> @kernel.Thm
+
+pub fn loopfree_preserve() -> @kernel.Thm
+
+pub fn loopfree_preserve_eq() -> @kernel.Thm
+
+pub fn loopfree_wf() -> @kernel.Thm
+
+pub fn loopfree_wf_term() -> @kernel.Thm
+
+pub fn mgu() -> @kernel.Thm
+
+pub fn mgu_exists() -> @kernel.Thm
+
+pub fn mgu_v1() -> @kernel.Thm
+
+pub fn mleft() -> @kernel.Thm
+
+pub fn multiset_filtereq() -> @kernel.Thm
+
+pub fn occ() -> @kernel.Thm
+
+pub fn option_distinct() -> @kernel.Thm
+
+pub fn option_inj() -> @kernel.Thm
+
+pub fn paired_eta_thm() -> @kernel.Thm
+
+pub fn renaming() -> @kernel.Thm
+
+pub fn renaming_v1() -> @kernel.Thm
+
+pub fn retval_distinct() -> @kernel.Thm
+
+pub fn retval_induct() -> @kernel.Thm
+
+pub fn retval_recursion() -> @kernel.Thm
+
+pub fn rightsubst() -> @kernel.Thm
+
+pub fn rtc_sub1() -> @kernel.Thm
+
+pub fn solve() -> @kernel.Thm
+
+pub fn solve_exists() -> @kernel.Thm
+
+pub fn solve_preserves_conflictfree() -> @kernel.Thm
+
+pub fn solve_preserves_conflictfree_lemma() -> @kernel.Thm
+
+pub fn solve_preserves_defree() -> @kernel.Thm
+
+pub fn solve_preserves_loopfree() -> @kernel.Thm
+
+pub fn solve_preserves_loopfree_lemma() -> @kernel.Thm
+
+pub fn solve_preserves_unifiers() -> @kernel.Thm
+
+pub fn solve_v1() -> @kernel.Thm
+
+pub fn solve_works() -> @kernel.Thm
+
+pub fn solve_works_general() -> @kernel.Thm
+
+pub fn solvec_raw() -> @kernel.Thm
+
+pub fn sub1() -> @kernel.Thm
+
+pub fn tc_rev() -> @kernel.Thm
+
+pub fn tc_sub1_irrefl() -> @kernel.Thm
+
+pub fn termcases() -> @kernel.Thm
+
+pub fn the() -> @kernel.Thm
+
+pub fn tpcases() -> @kernel.Thm
+
+pub fn tpcases_def() -> @kernel.Thm
+
+pub fn unifier() -> @kernel.Thm
+
+pub fn unifier_formpair_termlist() -> @kernel.Thm
+
+pub fn unifier_mgu() -> @kernel.Thm
+
+pub fn unifier_subterms() -> @kernel.Thm
+
+pub fn unifier_works() -> @kernel.Thm
+
+pub fn unifies() -> @kernel.Thm
+
+pub fn unifies_def() -> @kernel.Thm
+
+pub fn unifies_v1() -> @kernel.Thm
+
+pub fn unify() -> @kernel.Thm
+
+pub fn unify_exists_raw() -> @kernel.Thm
+
+pub fn unify_occurs() -> @kernel.Thm
+
+pub fn unify_occurs_proper() -> @kernel.Thm
+
+pub fn unify_raw() -> @kernel.Thm
+
+pub fn unify_works() -> @kernel.Thm
+
+pub fn unify_works_raw() -> @kernel.Thm
+
+pub fn unify_works_simple() -> @kernel.Thm
+
+pub fn wf_alternation() -> @kernel.Thm
+
+pub fn wf_callorder() -> @kernel.Thm
+
+pub fn wf_cright() -> @kernel.Thm
+
+pub fn wf_descent() -> @kernel.Thm
+
+pub fn wf_disj() -> @kernel.Thm
+
+pub fn wf_finite_lemma() -> @kernel.Thm
+
+pub fn wf_measure_or_noninc() -> @kernel.Thm
+
+pub fn wf_multizip() -> @kernel.Thm
+
+pub fn wf_proj_eq() -> @kernel.Thm
+
+pub fn wf_sub1() -> @kernel.Thm
+
+pub fn wf_subcomponent() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

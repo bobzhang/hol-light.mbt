@@ -1,0 +1,131 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/givensem"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn allntresolvents_sem() -> @kernel.Thm
+
+pub fn allntresolvents_sem_step() -> @kernel.Thm
+
+pub fn allntresolvents_sem_union() -> @kernel.Thm
+
+pub fn allresolvents_sem() -> @kernel.Thm
+
+pub fn allresolvents_sem_clause() -> @kernel.Thm
+
+pub fn allresolvents_sem_finite() -> @kernel.Thm
+
+pub fn allresolvents_sem_step() -> @kernel.Thm
+
+pub fn allresolvents_sem_subsume() -> @kernel.Thm
+
+pub fn allresolvents_sem_subsume_l() -> @kernel.Thm
+
+pub fn allresolvents_sem_subsume_r() -> @kernel.Thm
+
+pub fn allresolvents_sem_sym() -> @kernel.Thm
+
+pub fn allresolvents_sem_union() -> @kernel.Thm
+
+pub fn break_mono() -> @kernel.Thm
+
+pub fn break_sem() -> @kernel.Thm
+
+pub fn given_invariant() -> @kernel.Thm
+
+pub fn given_sem() -> @kernel.Thm
+
+pub fn holds_interp_subsume() -> @kernel.Thm
+
+pub fn incorporate_clause() -> @kernel.Thm
+
+pub fn incorporate_clause_el() -> @kernel.Thm
+
+pub fn incorporate_subsumes_self() -> @kernel.Thm
+
+pub fn isaresolvent_sem() -> @kernel.Thm
+
+pub fn isaresolvent_sem_clause() -> @kernel.Thm
+
+pub fn isaresolvent_sem_finite() -> @kernel.Thm
+
+pub fn isaresolvent_sem_subsume() -> @kernel.Thm
+
+pub fn isaresolvent_sem_subsume_l() -> @kernel.Thm
+
+pub fn isaresolvent_sem_subsume_r() -> @kernel.Thm
+
+pub fn isaresolvent_sem_sym() -> @kernel.Thm
+
+pub fn isaresolvent_sem_tautology_l() -> @kernel.Thm
+
+pub fn isaresolvent_sem_tautology_r() -> @kernel.Thm
+
+pub fn length_incorporate() -> @kernel.Thm
+
+pub fn length_replace() -> @kernel.Thm
+
+pub fn length_unused_change() -> @kernel.Thm
+
+pub fn length_unused_zero() -> @kernel.Thm
+
+pub fn level_0() -> @kernel.Thm
+
+pub fn level_clause() -> @kernel.Thm
+
+pub fn level_fromnew() -> @kernel.Thm
+
+pub fn level_mono() -> @kernel.Thm
+
+pub fn level_mono_subset() -> @kernel.Thm
+
+pub fn level_sem() -> @kernel.Thm
+
+pub fn level_step() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn replace_clause() -> @kernel.Thm
+
+pub fn replace_subsumes_self() -> @kernel.Thm
+
+pub fn resolvents_sem() -> @kernel.Thm
+
+pub fn step_sem() -> @kernel.Thm
+
+pub fn step_sem_v1() -> @kernel.Thm
+
+pub fn sub_fromnew() -> @kernel.Thm
+
+pub fn sub_mono() -> @kernel.Thm
+
+pub fn sub_mono_subset() -> @kernel.Thm
+
+pub fn sub_sem() -> @kernel.Thm
+
+pub fn sub_subsumes_unused() -> @kernel.Thm
+
+pub fn tautologous_subsumes() -> @kernel.Thm
+
+pub fn unused_fromnew() -> @kernel.Thm
+
+pub fn unused_sem() -> @kernel.Thm
+
+pub fn unused_subsumes_self() -> @kernel.Thm
+
+pub fn used_sem() -> @kernel.Thm
+
+pub fn used_sub() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

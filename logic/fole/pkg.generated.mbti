@@ -1,0 +1,133 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/logic/fole"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn compact_ls_norm() -> @kernel.Thm
+
+pub fn compact_ls_norm_lemma1() -> @kernel.Thm
+
+pub fn compact_ls_norm_lemma2() -> @kernel.Thm
+
+pub fn compact_ls_norm_lemma2a() -> @kernel.Thm
+
+pub fn downfrom() -> @kernel.Thm
+
+pub fn eqaxiom_func() -> @kernel.Thm
+
+pub fn eqaxiom_pred() -> @kernel.Thm
+
+pub fn eqaxioms_def() -> @kernel.Thm
+
+pub fn eqaxioms_subset() -> @kernel.Thm
+
+pub fn eqaxioms_union() -> @kernel.Thm
+
+pub fn equal_def() -> @kernel.Thm
+
+pub fn forall2_forall() -> @kernel.Thm
+
+pub fn forall2_varpairs() -> @kernel.Thm
+
+pub fn forall_downfrom() -> @kernel.Thm
+
+pub fn forall_terms_indexed() -> @kernel.Thm
+
+pub fn forall_terms_raw() -> @kernel.Thm
+
+pub fn forall_terms_strong() -> @kernel.Thm
+
+pub fn forall_varpairs() -> @kernel.Thm
+
+pub fn functions_eqaxiom() -> @kernel.Thm
+
+pub fn functions_eqaxiom_func() -> @kernel.Thm
+
+pub fn functions_eqaxiom_pred() -> @kernel.Thm
+
+pub fn functions_eqconj() -> @kernel.Thm
+
+pub fn functions_form_fnv1() -> @kernel.Thm
+
+pub fn functions_form_fnv2() -> @kernel.Thm
+
+pub fn functions_form_uclose() -> @kernel.Thm
+
+pub fn functions_form_uclose_v1() -> @kernel.Thm
+
+pub fn functions_insert() -> @kernel.Thm
+
+pub fn functions_subset() -> @kernel.Thm
+
+pub fn functions_term_fnv1() -> @kernel.Thm
+
+pub fn functions_term_fnv2() -> @kernel.Thm
+
+pub fn functions_union() -> @kernel.Thm
+
+pub fn holds_ands() -> @kernel.Thm
+
+pub fn holds_uclose_all() -> @kernel.Thm
+
+pub fn holds_uclose_all_eq() -> @kernel.Thm
+
+pub fn holds_uclose_any() -> @kernel.Thm
+
+pub fn in_eqaxioms() -> @kernel.Thm
+
+pub fn interpretation_eqaxioms() -> @kernel.Thm
+
+pub fn interpretation_modify_language() -> @kernel.Thm
+
+pub fn interpretation_restrict_language() -> @kernel.Thm
+
+pub fn length_varpairs() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn map_fst_varpairs() -> @kernel.Thm
+
+pub fn map_indexed() -> @kernel.Thm
+
+pub fn map_snd_varpairs() -> @kernel.Thm
+
+pub fn mult_div_lemma() -> @kernel.Thm
+
+pub fn normal() -> @kernel.Thm
+
+pub fn normal_thm() -> @kernel.Thm
+
+pub fn pair_lemma() -> @kernel.Thm
+
+pub fn predicates_form_uclose() -> @kernel.Thm
+
+pub fn predicates_union() -> @kernel.Thm
+
+pub fn reconstruct_termval() -> @kernel.Thm
+
+pub fn satisfies_not() -> @kernel.Thm
+
+pub fn satisfies_union() -> @kernel.Thm
+
+pub fn terms_subset() -> @kernel.Thm
+
+pub fn uclose() -> @kernel.Thm
+
+pub fn uclose_closed() -> @kernel.Thm
+
+pub fn uclose_fv_lemma() -> @kernel.Thm
+
+pub fn varpairs_def() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

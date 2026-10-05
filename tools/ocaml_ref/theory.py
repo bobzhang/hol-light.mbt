@@ -40,9 +40,21 @@ def stem(f):
     return f[:-3] if f.endswith(".hl") else f
 
 
+# A package is imported under its last component: a file named like a
+# package loaded with it takes its directory's name too (the same table:
+# tools/translator/translator.ml, Names.package_of_file)
+RENAMED = {
+    "Logic/canon": "logic/logic_canon",                    # canon.ml
+    "Probability/measure": "probability/probability_measure",  # Multivariate/measure.ml
+    "Quaternions/misc": "quaternions/quaternions_misc",    # Multivariate/misc.ml
+}
+
+
 def pkg_of(f):
     """`Library/prime.ml` -> `library/prime`; `arith.ml` -> `arith`."""
     s = stem(f)
+    if s in RENAMED:
+        return RENAMED[s]
     if "/" in s:
         d, b = s.split("/", 1)
         same = [x for x in os.listdir(HOL) if x.lower() == d.lower() and os.path.isdir(os.path.join(HOL, x))]
@@ -88,7 +100,7 @@ def needs(f):
     # `f` as named (`Quaternions/misc.hl`), else with `.ml`
     path = os.path.join(HOL, f)
     if not os.path.isfile(path):
-        path = os.path.join(HOL, f if f.endswith(".ml") else f + ".ml")
+        path = os.path.join(HOL, f if f.endswith((".ml", ".hl")) else f + ".ml")
     # the same rule as the translator's Translator.needs_of
     # `loadt "f"` is used as `needs` too (100/lagrange.ml), and `loads "f"`
     # (Rqe/make.ml): a file is loaded once here. Only top-level phrases
