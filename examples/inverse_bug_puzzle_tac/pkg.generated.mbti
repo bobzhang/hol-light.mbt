@@ -1,0 +1,96 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/inverse_bug_puzzle_tac"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn basic2move_thm() -> @kernel.Thm
+
+pub fn buildexist(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn cases(String, @kernel.Term, @list.List[((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn collinear_3_2dzero() -> @kernel.Thm
+
+pub fn collinearsymmetry() -> @kernel.Thm
+
+pub fn consider(String, @kernel.Term, @list.List[((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise], String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn correctfinalpoint() -> @kernel.Thm
+
+pub fn distinctimplies2moveable() -> @kernel.Thm
+
+pub fn fivemovesorless() -> @kernel.Thm
+
+pub fn fivemovesorless_strong() -> @kernel.Thm
+
+pub fn fourmovestocorrecttwo() -> @kernel.Thm
+
+pub fn fourstepmoveab() -> @kernel.Thm
+
+pub fn fourstepmoveabbareach() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn move2cond() -> @kernel.Thm
+
+pub fn move_() -> @kernel.Thm
+
+pub fn moveinvariant() -> @kernel.Thm
+
+pub fn movesymmetry() -> @kernel.Thm
+
+pub fn noncollinear_2span() -> @kernel.Thm
+
+pub fn noncollinear_3impliesdistinct() -> @kernel.Thm
+
+pub fn notenough_4() -> @kernel.Thm
+
+pub fn notmove2impliescollinear() -> @kernel.Thm
+
+pub fn oriented_area() -> @kernel.Thm
+
+pub fn oriented_area_collinear_cong() -> @kernel.Thm
+
+pub fn oriented_areasymmetry() -> @kernel.Thm
+
+pub fn raa(String, @kernel.Term, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn reachable() -> @kernel.Thm
+
+pub fn reachableinvariant() -> @kernel.Thm
+
+pub fn reachablen() -> @kernel.Thm
+
+pub fn reachablen_clauses() -> @kernel.Thm
+
+pub fn reachablen_five() -> @kernel.Thm
+
+pub fn reachablen_four() -> @kernel.Thm
+
+pub fn reachablen_one() -> @kernel.Thm
+
+pub fn reachablen_three() -> @kernel.Thm
+
+pub fn reachablen_two() -> @kernel.Thm
+
+pub fn reachablensymmetry() -> @kernel.Thm
+
+pub fn reachlemma() -> @kernel.Thm
+
+pub fn samecdiffab() -> @kernel.Thm
+
+pub fn so(((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn vec2_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
