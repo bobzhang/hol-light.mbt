@@ -53,7 +53,7 @@ and file I/O before starting it.
 4. **Small directories that need only the core or Library/** (63K lines):
    Complex, 100/cubic, Arithmetic (but pa.ml, which make.ml does not
    load), Permutation, Ntrie, Model, GL, Divstep and Rqe (but
-   examples.ml, commented out of its make.ml) are done; EC has 26 of 30 files. After a directory with a make.ml passes, fold its tests
+   examples.ml, commented out of its make.ml) are done, EC too (edwards25519.ml alone takes two hours to translate: in a terminal). After a directory with a make.ml passes, fold its tests
    into `<dir>/make` (tools/ocaml_ref/chain_test.py). Independent
    directories can run side by side in scratch clones under `.port/`
    (the OCaml sessions are the slow, single-threaded part). IsabelleLight and Boyer_Moore load their files from a computed
@@ -76,11 +76,12 @@ and file I/O before starting it.
    second clone meanwhile); a single file that takes longer
    (Autoformalization/fifteen_theorem.ml, EC/edwards25519.ml) has to run
    in a terminal.
-7. **Autoformalization/** (205K): 6 of 7 done, with planar_graph (95K;
-   it loads Multivariate/cauchy.ml part-way through, theory.MID_NEEDS, and
-   is loaded without Multivariate/clifford.ml, theory.CHAIN_SKIP).
-   fifteen_theorem is translated; its check against upstream takes hours
-   (run it in a terminal).
+7. **Autoformalization/** (205K): done, all 7 files. planar_graph loads
+   Multivariate/cauchy.ml part-way through (theory.MID_NEEDS) and is
+   loaded without Multivariate/clifford.ml (theory.CHAIN_SKIP);
+   fifteen_theorem takes 2.5 hours to check against upstream (run it in a
+   terminal) and parses `F` 2.4 million times (quotation traces collapse
+   such runs).
    Also done on the way: IEEE, IsabelleLight, Boyer_Moore (the files
    boyer-moore.ml loads; not make.ml's definitions and testset/) and 18
    Tutorial/ files. Not ported from UnitTests/: basic_tests.ml needs the
