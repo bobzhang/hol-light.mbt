@@ -25,7 +25,7 @@ time. `--target wasm` (or native) runs the selection there instead: do it
 for the whole suite before a release.
 
 On the wasm targets `moon test --build-only` builds the test executables
-and this script runs them with `moonrun --stack-size` (16 MB by default):
+and this script runs them with `moonrun --stack-size` (60 MB by default):
 `moon test` runs them with moonrun's default stack, which upstream's
 recursive list functions overflow on long lists (the Grobner bases of
 Complex/grobner_examples.ml), and one at a time unless given `-j`.
@@ -317,7 +317,8 @@ def main():
     # moonc processes at once: linking the test executable of a long chain
     # takes about 14 GB (24 at once took 330 GB)
     ap.add_argument("--build-jobs", default=os.environ.get("HOL_MOON_JOBS", "4"))
-    ap.add_argument("--stack-size", default="16000")
+    # in KB. Examples/apery.ml needs more than 16 MB; macOS allows 64 MB
+    ap.add_argument("--stack-size", default="60000")
     # a test executable above this much memory is killed (the largest, a
     # whole chain in one process, stays well under it)
     ap.add_argument("--max-rss-gb", default="16")
