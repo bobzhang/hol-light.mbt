@@ -1,0 +1,146 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/minisat/taut"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn add1_be() -> @kernel.Term
+
+pub fn add2_be() -> @kernel.Term
+
+pub fn add3_be() -> @kernel.Term
+
+pub fn add4_be() -> @kernel.Term
+
+pub fn ahb_arb_8() -> @kernel.Term
+
+pub fn aim_100_1_6_no_3() -> @kernel.Term
+
+pub fn aim_100_2_0_no_1() -> @kernel.Term
+
+pub fn aim_100_2_0_no_2() -> @kernel.Term
+
+pub fn aim_50_1_6_no_1() -> @kernel.Term
+
+pub fn aim_50_1_6_no_2() -> @kernel.Term
+
+pub fn aim_50_1_6_no_3() -> @kernel.Term
+
+pub fn aim_50_1_6_no_4() -> @kernel.Term
+
+pub fn aim_50_2_0_no_1() -> @kernel.Term
+
+pub fn aim_50_2_0_no_2() -> @kernel.Term
+
+pub fn aim_50_2_0_no_3() -> @kernel.Term
+
+pub fn aim_50_2_0_no_4() -> @kernel.Term
+
+pub fn all_taut() -> @list.List[(@kernel.Term, String)]
+
+pub fn counter_be() -> @kernel.Term
+
+pub fn dc2_be() -> @kernel.Term
+
+pub fn dk17_be() -> @kernel.Term
+
+pub fn dk27_be() -> @kernel.Term
+
+pub fn dubois20() -> @kernel.Term
+
+pub fn ex2_be() -> @kernel.Term
+
+pub fn f51m_be() -> @kernel.Term
+
+pub fn gra001_1() -> @kernel.Term
+
+pub fn hostint1_be() -> @kernel.Term
+
+pub fn jnh211() -> @kernel.Term
+
+pub fn load() -> Unit
+
+pub fn misg_be() -> @kernel.Term
+
+pub fn mjcg_yes() -> @kernel.Term
+
+pub fn msc006_1() -> @kernel.Term
+
+pub fn msc007_1_008() -> @kernel.Term
+
+pub fn mul03_be() -> @kernel.Term
+
+pub fn mul_be() -> @kernel.Term
+
+pub fn prv001_1() -> @kernel.Term
+
+pub fn puz014_1() -> @kernel.Term
+
+pub fn puz030_1() -> @kernel.Term
+
+pub fn puz030_2() -> @kernel.Term
+
+pub fn rip02_be() -> @kernel.Term
+
+pub fn rip04_be() -> @kernel.Term
+
+pub fn rip06_be() -> @kernel.Term
+
+pub fn rip08_be() -> @kernel.Term
+
+pub fn risc_be() -> @kernel.Term
+
+pub fn sqn_be() -> @kernel.Term
+
+pub fn ssa() -> @kernel.Term
+
+pub fn ssa0432_003() -> @kernel.Term
+
+pub fn syn011_1() -> @kernel.Term
+
+pub fn syn029_1() -> @kernel.Term
+
+pub fn syn030_1() -> @kernel.Term
+
+pub fn syn032_1() -> @kernel.Term
+
+pub fn syn044_1() -> @kernel.Term
+
+pub fn syn051_1() -> @kernel.Term
+
+pub fn syn052_1() -> @kernel.Term
+
+pub fn syn054_1() -> @kernel.Term
+
+pub fn syn071_1() -> @kernel.Term
+
+pub fn syn072_1() -> @kernel.Term
+
+pub fn syn321_1() -> @kernel.Term
+
+pub fn syn323_1() -> @kernel.Term
+
+pub fn transp_be() -> @kernel.Term
+
+pub fn u5() -> @kernel.Term
+
+pub fn vg2_be() -> @kernel.Term
+
+pub fn x1dn_be() -> @kernel.Term
+
+pub fn z4_be() -> @kernel.Term
+
+pub fn ztwaalf1_be() -> @kernel.Term
+
+pub fn ztwaalf2_be() -> @kernel.Term
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
