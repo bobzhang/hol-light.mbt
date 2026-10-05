@@ -16,7 +16,8 @@ constructs theorems only through its API.
 - **Multivariate/**: all 32 theory files (`multivariate/<name>`).
 - **100/**: 59 of 67 files (`100/<name>`); the rest wait for other
   directories.
-- **Complex/, Arithmetic/, Permutation/, Ntrie/, Model/, GL/, Divstep/, Rqe/**:
+- **Complex/, Arithmetic/, Permutation/, Ntrie/, Model/, GL/, Divstep/, Rqe/,
+  Unity/**:
   their theory files (`complex/<name>`, ...).
 - **EC/**: 13 of 30 files so far. **Examples/**: 31 of 50.
   **Autoformalization/**: 2 of 7.
