@@ -1793,7 +1793,10 @@ module Lower = struct
       | "not" -> (1, fun [ a ] _ -> Not a)
       | "@" -> (2, fun [ a; b ] _ -> Concat (a, b))
       | "failwith" -> (1, fun [ a ] _ -> Raise (Call (Atom "Failure", [ a ])))
-      | "raise" -> (1, fun [ a ] _ -> Raise a)
+      | "raise" ->
+          (* `raise (failwith m)`: the argument raises before `raise`
+             does (Jordan/num_ext_gcd.ml) *)
+          (1, fun [ a ] _ -> match a with Raise _ -> a | _ -> Raise a)
       | "ignore" -> (1, fun [ a ] _ -> Call (Atom "ignore", [ a ]))
       | "string_of_int" -> (1, fun [ a ] _ -> Call (Atom "Int64::to_string", [ a ]))
       | "string_of_float" -> (1, fun [ a ] _ -> Call (Atom "@lib.string_of_float", [ a ]))
