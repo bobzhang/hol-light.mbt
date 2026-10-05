@@ -836,7 +836,8 @@ pub fn end_theory() -> Unit {
   // `pop_priority()`) is the file's output
   @pp.std_formatter.print_flush()
   match loading_theories.pop() {
-    Some((name, start)) => theory_outputs[name] = @pp.stdout_backlog_since(start)
+    Some((name, start)) =>
+      theory_outputs[name] = @pp.stdout_backlog_since(start)
     None => ()
   }
   if loading_theories.is_empty() {

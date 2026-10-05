@@ -1,7 +1,7 @@
 // Functionspaces/utils.ml: the load steps are generated (utils.mbt).
 
 ///|
-let loaded : Ref[Bool] = Ref::{ val: false }
+let loaded : Ref[Bool] = Ref::{ val: false, }
 
 ///|
 /// Load Functionspaces/utils.ml (once), after the files it needs.
@@ -15,7 +15,10 @@ pub fn load() -> Unit {
   @q.load()
   @parser.begin_theory("Functionspaces/utils")
   load_steps() catch {
-    e => abort("HOL Light: loading Functionspaces/utils.ml failed: " + e.to_string())
+    e =>
+      abort(
+        "HOL Light: loading Functionspaces/utils.ml failed: " + e.to_string(),
+      )
   }
   @parser.end_theory()
 }
@@ -31,7 +34,10 @@ pub fn load_alone() -> Unit {
   @q.load()
   @parser.begin_theory("Functionspaces/utils")
   load_steps() catch {
-    e => abort("HOL Light: loading Functionspaces/utils.ml failed: " + e.to_string())
+    e =>
+      abort(
+        "HOL Light: loading Functionspaces/utils.ml failed: " + e.to_string(),
+      )
   }
   @parser.end_theory()
 }

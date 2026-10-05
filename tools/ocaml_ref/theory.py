@@ -47,6 +47,7 @@ RENAMED = {
     "Logic/canon": "logic/logic_canon",                    # canon.ml
     "Probability/measure": "probability/probability_measure",  # Multivariate/measure.ml
     "Quaternions/misc": "quaternions/quaternions_misc",    # Multivariate/misc.ml
+    "UnitTests/records": "unittests/unittests_records",    # Library/records.ml
 }
 
 
@@ -123,6 +124,14 @@ def needs(f):
 MID_NEEDS = {"Autoformalization/planar_graph.ml": ["Multivariate/cauchy.ml"]}
 
 
+# Multivariate/ files load in make.ml's order (MAKE_ORDER), which brings
+# in files that what a file needs does not: these files are loaded
+# without the ones listed (their packages' `skip_load`), as upstream loads
+# them. Autoformalization/planar_graph.ml has a variable `outer`, an infix
+# operator once Multivariate/clifford.ml is loaded.
+CHAIN_SKIP = {"Autoformalization/planar_graph.ml": ["Library/binary.ml", "Multivariate/clifford.ml"]}
+
+
 def head_needs(f):
     """What `f` needs before its first phrase (all but MID_NEEDS)."""
     return [n for n in needs(f) if n not in MID_NEEDS.get(f, [])]
@@ -131,7 +140,7 @@ def head_needs(f):
 def mid_plan(f):
     """[(file `f` loads part-way through, the files that load brings in, in
     order: what it needs that is not loaded yet, then itself)]."""
-    seen, out = deps(f), []
+    seen, out = deps(f) + CHAIN_SKIP.get(f, []), []
     for x in MID_NEEDS.get(f, []):
         new = [g for g in deps(x) + [x] if g not in seen]
         out.append((x, new))
@@ -178,11 +187,24 @@ def needs_closure(f):
 NEEDS_ONLY = {"EC"}
 
 
+# Directories whose loader computes its file list (`map (load_on_path
+# paths) [...]` in IsabelleLight/isalight.ml and Boyer_Moore/boyer-moore.ml):
+# the list, as the order make_plan gives
+ORDERS = {
+    "IsabelleLight": ["support", "new_tactics", "meta_rules"],
+    "Boyer_Moore": ["support", "struct_equal", "shells", "environment", "clausal_form", "waterfall",
+                    "rewrite_rules", "definitions", "terms_and_clauses", "equalities", "induction",
+                    "counterexample", "generalize", "irrelevance", "main"],
+}
+
+
 @functools.lru_cache(maxsize=None)
 def make_plan(d):
     """What `d`/make.ml loads, in order: (file of `d`, the files of other
     directories make.ml loads just before it). Empty without a make.ml, and
     for Multivariate/ (MAKE_ORDER above)."""
+    if d in ORDERS:
+        return [(f"{d}/{f}.ml", []) for f in ORDERS[d]]
     if d == "Multivariate" or d in NEEDS_ONLY or not os.path.isfile(os.path.join(HOL, d, "make.ml")):
         return []
     plan, pre = [], []
@@ -265,7 +287,7 @@ def _deps(f):
 
 
 def deps(f):
-    return list(_deps(f))
+    return [g for g in _deps(f) if g not in CHAIN_SKIP.get(f, [])]
 
 
 def run(cmd, **kw):
@@ -292,7 +314,8 @@ def setup(f):
     before = CORE[:CORE.index(name)] if name in CORE else CORE
     # translated packages, including the Stdlib replacements
     mids = [g for _, new in mid_plan(f) for g in new]
-    imports = HAND + ["omap", "oset"] + before + [pkg_of(d) for d in deps(f) + mids]
+    skips = CHAIN_SKIP.get(f, [])
+    imports = HAND + ["omap", "oset"] + before + [pkg_of(d) for d in deps(f) + mids + skips]
     # MoonBit imports packages by their last path component: no clashes
     aliases = [os.path.basename(p) for p in imports + [pkg]] + ["list", "testkit"]
     dup = sorted({a for a in aliases if aliases.count(a) > 1})
@@ -324,7 +347,12 @@ def setup(f):
                 "///|\nlet loaded : Ref[Bool] = Ref::{ val: false }\n\n"
                 f"///|\n/// Load {name}.ml (once), after the files it needs.\npub fn load() -> Unit {{\n"
                 "  if loaded.val {\n    return\n  }\n  loaded.val = true\n"
+                + "".join(f"  @{os.path.basename(pkg_of(n))}.skip_load()\n" for n in skips)
                 + "".join(call(n) for n in chain + own) + body)
+        if any(f in v for v in CHAIN_SKIP.values()):
+            text += ("\n///|\n/// Leave this file out of what is loaded after this call: a file that\n"
+                     "/// upstream loads without it (tools/ocaml_ref/theory.py, CHAIN_SKIP).\n"
+                     "pub fn skip_load() -> Unit {\n  loaded.val = true\n}\n")
         if f in [x for x, _ in make_plan(os.path.dirname(f))]:
             # a member of its directory's make.ml order: a file of another
             # directory that needs it loads it without the files before it

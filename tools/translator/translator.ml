@@ -488,6 +488,7 @@ module Names = struct
     | "Logic/canon.ml" -> Some "logic/logic_canon"
     | "Probability/measure.ml" -> Some "probability/probability_measure"
     | "Quaternions/misc.hl" -> Some "quaternions/quaternions_misc"
+    | "UnitTests/records.ml" -> Some "unittests/unittests_records"
     | f when String.contains f '/' && Filename.basename f = "make.ml" ->
         (* `<dir>/make` is the directory's chain test package *)
         let d = String.lowercase_ascii (Filename.dirname f) in

@@ -1,7 +1,7 @@
 // Functionspaces/L2.ml: the load steps are generated (L2.mbt).
 
 ///|
-let loaded : Ref[Bool] = Ref::{ val: false }
+let loaded : Ref[Bool] = Ref::{ val: false, }
 
 ///|
 /// Load Functionspaces/L2.ml (once), after the files it needs.
@@ -14,7 +14,8 @@ pub fn load() -> Unit {
   @cfunspace.load()
   @parser.begin_theory("Functionspaces/L2")
   load_steps() catch {
-    e => abort("HOL Light: loading Functionspaces/L2.ml failed: " + e.to_string())
+    e =>
+      abort("HOL Light: loading Functionspaces/L2.ml failed: " + e.to_string())
   }
   @parser.end_theory()
 }
@@ -30,7 +31,8 @@ pub fn load_alone() -> Unit {
   @cfunspace.load()
   @parser.begin_theory("Functionspaces/L2")
   load_steps() catch {
-    e => abort("HOL Light: loading Functionspaces/L2.ml failed: " + e.to_string())
+    e =>
+      abort("HOL Light: loading Functionspaces/L2.ml failed: " + e.to_string())
   }
   @parser.end_theory()
 }

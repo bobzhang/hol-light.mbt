@@ -20,6 +20,8 @@ pub fn is_almost_zero() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn r_inprod() -> @kernel.Thm
 
 pub fn real_integra_zero_subintervals() -> @kernel.Thm
