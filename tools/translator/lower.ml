@@ -528,7 +528,10 @@ module Lower = struct
       (* prelude functions the generated test driver calls unqualified: a
          package's own `ignore` (Rqe/rqe_tactics_ext.ml's IGNORE) would
          capture them *)
-      "ignore"; "not" ]
+      "ignore"; "not";
+      (* init.mbt calls abort; `and` joins recursive local functions
+         (Examples/prog.ml defines ABORT and AND) *)
+      "abort"; "and" ]
 
   let rec sanitize name =
     match Names.op_name name with
