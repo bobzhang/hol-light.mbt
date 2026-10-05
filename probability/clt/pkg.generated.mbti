@@ -1,0 +1,474 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/probability/clt"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn abs_diff_same_sign() -> @kernel.Thm
+
+pub fn abs_mul_bound() -> @kernel.Thm
+
+pub fn almost_surely_nonempty() -> @kernel.Thm
+
+pub fn as_convergence_truncated() -> @kernel.Thm
+
+pub fn as_imp_in_dist() -> @kernel.Thm
+
+pub fn as_imp_in_prob() -> @kernel.Thm
+
+pub fn bidvd_eventually() -> @kernel.Thm
+
+pub fn block_indep_sum_pow() -> @kernel.Thm
+
+pub fn borel_cantelli_almost_surely() -> @kernel.Thm
+
+pub fn bounded_expectation_nonneg_eq_nn() -> @kernel.Thm
+
+pub fn bounded_indep_divergent_variance_diverges() -> @kernel.Thm
+
+pub fn cdf_bounds() -> @kernel.Thm
+
+pub fn cdf_le_expectation() -> @kernel.Thm
+
+pub fn cdf_mono() -> @kernel.Thm
+
+pub fn cdf_right_continuous() -> @kernel.Thm
+
+pub fn char_fn_add_indep_im() -> @kernel.Thm
+
+pub fn char_fn_add_indep_re() -> @kernel.Thm
+
+pub fn char_fn_determines_normal_cdf_limit() -> @kernel.Thm
+
+pub fn char_fn_eq_of_same_dist() -> @kernel.Thm
+
+pub fn char_fn_im_component_bound() -> @kernel.Thm
+
+pub fn char_fn_im_continuous() -> @kernel.Thm
+
+pub fn char_fn_im_div() -> @kernel.Thm
+
+pub fn char_fn_modulus_le() -> @kernel.Thm
+
+pub fn char_fn_re_component_bound() -> @kernel.Thm
+
+pub fn char_fn_re_continuous() -> @kernel.Thm
+
+pub fn char_fn_re_div() -> @kernel.Thm
+
+pub fn char_fn_re_lower_bound() -> @kernel.Thm
+
+pub fn char_fn_re_pow_conv_exp() -> @kernel.Thm
+
+pub fn char_fn_re_upper_bound() -> @kernel.Thm
+
+pub fn char_fn_sum_iid_im_sq_bound() -> @kernel.Thm
+
+pub fn char_fn_sum_iid_modulus_rv() -> @kernel.Thm
+
+pub fn char_fn_sum_iid_re_bound() -> @kernel.Thm
+
+pub fn char_fn_sum_im_bound() -> @kernel.Thm
+
+pub fn char_fn_sum_re_product_bound() -> @kernel.Thm
+
+pub fn char_fn_uniqueness() -> @kernel.Thm
+
+pub fn clamp_bound() -> @kernel.Thm
+
+pub fn clamp_centered_bound() -> @kernel.Thm
+
+pub fn clamp_distribution_eq() -> @kernel.Thm
+
+pub fn clamp_eq_when_bounded() -> @kernel.Thm
+
+pub fn clamp_expectation_bound() -> @kernel.Thm
+
+pub fn clt_char_fn_convergence() -> @kernel.Thm
+
+pub fn clt_char_fn_im_convergence() -> @kernel.Thm
+
+pub fn clt_im_error_vanishes() -> @kernel.Thm
+
+pub fn clt_re_perturbation_vanishes() -> @kernel.Thm
+
+pub fn convergent_series_terms_vanish() -> @kernel.Thm
+
+pub fn cos_lower_bound() -> @kernel.Thm
+
+pub fn cos_taylor_bound_4() -> @kernel.Thm
+
+pub fn cos_taylor_nonneg() -> @kernel.Thm
+
+pub fn cos_taylor_upper() -> @kernel.Thm
+
+pub fn covariance_bounded_indep() -> @kernel.Thm
+
+pub fn covariance_indep() -> @kernel.Thm
+
+pub fn dirichlet_integral_scaled() -> @kernel.Thm
+
+pub fn dirichlet_integral_scaled_neg() -> @kernel.Thm
+
+pub fn distribution_fn_continuous_prob_zero() -> @kernel.Thm
+
+pub fn equidist_bounded_lipschitz() -> @kernel.Thm
+
+pub fn equidist_max_zero() -> @kernel.Thm
+
+pub fn equidist_neg_max_zero() -> @kernel.Thm
+
+pub fn equidist_nonneg_expectation() -> @kernel.Thm
+
+pub fn equidist_nonneg_min_expectation() -> @kernel.Thm
+
+pub fn equidist_nonneg_min_sq_expectation() -> @kernel.Thm
+
+pub fn equidist_prob_lt() -> @kernel.Thm
+
+pub fn equidist_tail_prob_gt() -> @kernel.Thm
+
+pub fn exp_le_product_1_minus() -> @kernel.Thm
+
+pub fn exp_neg_div_le_1_minus() -> @kernel.Thm
+
+pub fn expand_curry_tac(String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn expectation_cauchy_schwarz() -> @kernel.Thm
+
+pub fn expectation_if_gt() -> @kernel.Thm
+
+pub fn expectation_le_cdf() -> @kernel.Thm
+
+pub fn expectation_product_bounded_indep() -> @kernel.Thm
+
+pub fn expectation_product_compose_simple_indep() -> @kernel.Thm
+
+pub fn expectation_product_indep() -> @kernel.Thm
+
+pub fn expectation_product_pow_bounded_indep() -> @kernel.Thm
+
+pub fn expectation_split() -> @kernel.Thm
+
+pub fn expectation_sub_const() -> @kernel.Thm
+
+pub fn expectation_sum_centered() -> @kernel.Thm
+
+pub fn expectation_summable_chebyshev() -> @kernel.Thm
+
+pub fn expectation_truncation_limit() -> @kernel.Thm
+
+pub fn expectation_truncation_product_limit() -> @kernel.Thm
+
+pub fn finite_real_sequence_bounded() -> @kernel.Thm
+
+pub fn fold_curry_tac(String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn forall_shift_index() -> @kernel.Thm
+
+pub fn fourth_moment_bound_indep_centered() -> @kernel.Thm
+
+pub fn fourth_power_sum_bound() -> @kernel.Thm
+
+pub fn from_0_inter_numseg() -> @kernel.Thm
+
+pub fn general_trig_poly_weak_convergence() -> @kernel.Thm
+
+pub fn general_weak_convergence_convergent() -> @kernel.Thm
+
+pub fn iid_slln() -> @kernel.Thm
+
+pub fn iid_slln_nonneg() -> @kernel.Thm
+
+pub fn in_prob_imp_in_dist() -> @kernel.Thm
+
+pub fn indep_rv_clamp() -> @kernel.Thm
+
+pub fn indep_rv_max_const() -> @kernel.Thm
+
+pub fn indep_rv_min_const() -> @kernel.Thm
+
+pub fn indep_rv_min_diff_const() -> @kernel.Thm
+
+pub fn indep_rv_neg() -> @kernel.Thm
+
+pub fn indep_rv_nsfa() -> @kernel.Thm
+
+pub fn indep_rv_rv_left() -> @kernel.Thm
+
+pub fn indep_rv_rv_right() -> @kernel.Thm
+
+pub fn indep_rv_shift() -> @kernel.Thm
+
+pub fn indep_rv_strict_ineq() -> @kernel.Thm
+
+pub fn integrable_bounded_sum_pow() -> @kernel.Thm
+
+pub fn integrable_clamp() -> @kernel.Thm
+
+pub fn integrable_clamp_centered() -> @kernel.Thm
+
+pub fn integrable_clamp_centered_pow2() -> @kernel.Thm
+
+pub fn integrable_clamp_pow2() -> @kernel.Thm
+
+pub fn integrable_clt() -> @kernel.Thm
+
+pub fn integrable_clt_iid() -> @kernel.Thm
+
+pub fn integrable_indicator_weighted_pow2() -> @kernel.Thm
+
+pub fn integrable_indicator_weighted_pow2_le() -> @kernel.Thm
+
+pub fn integrable_max_zero_pow2() -> @kernel.Thm
+
+pub fn integrable_taylor_remainder() -> @kernel.Thm
+
+pub fn integral_expectation_exchange() -> @kernel.Thm
+
+pub fn integral_split_numseg() -> @kernel.Thm
+
+pub fn inversion_fubini() -> @kernel.Thm
+
+pub fn inversion_kernel_bounded() -> @kernel.Thm
+
+pub fn inversion_kernel_bounded_nz() -> @kernel.Thm
+
+pub fn inversion_kernel_converges_at_a() -> @kernel.Thm
+
+pub fn inversion_kernel_converges_at_b() -> @kernel.Thm
+
+pub fn inversion_kernel_converges_inside() -> @kernel.Thm
+
+pub fn inversion_kernel_converges_outside() -> @kernel.Thm
+
+pub fn inversion_kernel_rv() -> @kernel.Thm
+
+pub fn inversion_kernel_uniform_bound() -> @kernel.Thm
+
+pub fn inversion_sinc_even() -> @kernel.Thm
+
+pub fn inversion_trig_identity() -> @kernel.Thm
+
+pub fn kolmogorov_convergence_criterion() -> @kernel.Thm
+
+pub fn kolmogorov_slln() -> @kernel.Thm
+
+pub fn kolmogorov_slln_p() -> @kernel.Thm
+
+pub fn l2_imp_in_dist() -> @kernel.Thm
+
+pub fn levy_continuity_clt() -> @kernel.Thm
+
+pub fn levy_continuity_general() -> @kernel.Thm
+
+pub fn levy_continuity_general_cid() -> @kernel.Thm
+
+pub fn levy_inversion() -> @kernel.Thm
+
+pub fn lindeberg_feller_clt() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn local_asm_real_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn mutually_indep_cdf_point_mass_mixed() -> @kernel.Thm
+
+pub fn mutually_indep_expectation_product_pow() -> @kernel.Thm
+
+pub fn mutually_indep_indicator_product_expectation() -> @kernel.Thm
+
+pub fn mutually_indep_point_mass() -> @kernel.Thm
+
+pub fn mutually_indep_rv_seq() -> @kernel.Thm
+
+pub fn mutually_indep_rv_seq_clamp() -> @kernel.Thm
+
+pub fn mutually_indep_rv_seq_imp_finite() -> @kernel.Thm
+
+pub fn mutually_indep_rv_seq_nsfa() -> @kernel.Thm
+
+pub fn mutually_indep_rv_seq_pairwise() -> @kernel.Thm
+
+pub fn mutually_indep_rv_seq_shift() -> @kernel.Thm
+
+pub fn mutually_indep_rv_seq_shift_varying() -> @kernel.Thm
+
+pub fn mutually_indep_rv_seq_strict_ineq() -> @kernel.Thm
+
+pub fn mutually_indep_simple_expectation_product() -> @kernel.Thm
+
+pub fn nn_expectation_product_bounded_indep() -> @kernel.Thm
+
+pub fn nonneg_bounded_partial_sums_summable() -> @kernel.Thm
+
+pub fn nonneg_divergent_unbounded() -> @kernel.Thm
+
+pub fn nsfa_cdf_char() -> @kernel.Thm
+
+pub fn nsfa_cdf_equiv() -> @kernel.Thm
+
+pub fn one_minus_cos_nonneg() -> @kernel.Thm
+
+pub fn paley_zygmund() -> @kernel.Thm
+
+pub fn paley_zygmund_lower_bound() -> @kernel.Thm
+
+pub fn partial_sum_inters_subset_null() -> @kernel.Thm
+
+pub fn partial_sum_level_prob_vanishes() -> @kernel.Thm
+
+pub fn partition_existence() -> @kernel.Thm
+
+pub fn prob_indexed_union_events_lemma() -> @kernel.Thm
+
+pub fn prob_lim_helper() -> @kernel.Thm
+
+pub fn prod_rearrange() -> @kernel.Thm
+
+pub fn product_1_minus_le_exp() -> @kernel.Thm
+
+pub fn product_2() -> @kernel.Thm
+
+pub fn product_diff_sum_bound() -> @kernel.Thm
+
+pub fn product_indicator_fn_inters() -> @kernel.Thm
+
+pub fn prohorov_forward() -> @kernel.Thm
+
+pub fn random_variable_clamp() -> @kernel.Thm
+
+pub fn random_variable_indicator_gt() -> @kernel.Thm
+
+pub fn random_variable_indicator_le() -> @kernel.Thm
+
+pub fn random_variable_product_finite() -> @kernel.Thm
+
+pub fn real_continuous_atreal_sequentially() -> @kernel.Thm
+
+pub fn real_eq_from_approx() -> @kernel.Thm
+
+pub fn real_eq_of_abs_lt_all() -> @kernel.Thm
+
+pub fn real_eq_squeeze_div() -> @kernel.Thm
+
+pub fn real_eq_sub_radd() -> @kernel.Thm
+
+pub fn real_integral_even_symmetric() -> @kernel.Thm
+
+pub fn real_pow2_abs_le() -> @kernel.Thm
+
+pub fn real_summable_tail_bound() -> @kernel.Thm
+
+pub fn reallim_1_over_suc() -> @kernel.Thm
+
+pub fn reallim_at_posinfinity_from_subsequences() -> @kernel.Thm
+
+pub fn reallim_at_posinfinity_imp_sequentially() -> @kernel.Thm
+
+pub fn reallim_continuous_function() -> @kernel.Thm
+
+pub fn reallim_cos() -> @kernel.Thm
+
+pub fn reallim_imp_bounded_num() -> @kernel.Thm
+
+pub fn reallim_product_finite() -> @kernel.Thm
+
+pub fn reallim_sin() -> @kernel.Thm
+
+pub fn reallim_sqrt_null() -> @kernel.Thm
+
+pub fn reallim_truncation() -> @kernel.Thm
+
+pub fn riemann_lower_min() -> @kernel.Thm
+
+pub fn riemann_sum_converges() -> @kernel.Thm
+
+pub fn right_continuous_monotone_agree() -> @kernel.Thm
+
+pub fn rv_cdf_events() -> @kernel.Thm
+
+pub fn second_moment_bounded_from_as_convergence() -> @kernel.Thm
+
+pub fn simple_rv_product_finite() -> @kernel.Thm
+
+pub fn sin_minus_x_split_bound() -> @kernel.Thm
+
+pub fn sin_minus_x_sq_bound() -> @kernel.Thm
+
+pub fn sin_scaled_error_vanishes() -> @kernel.Thm
+
+pub fn sinc_integral_bound_all() -> @kernel.Thm
+
+pub fn sinc_integral_uniform_bound() -> @kernel.Thm
+
+pub fn sinc_scaled_diff_integrable() -> @kernel.Thm
+
+pub fn sinc_scaled_integrable() -> @kernel.Thm
+
+pub fn sinc_scaled_integrable_nz() -> @kernel.Thm
+
+pub fn sinc_scaled_neg_integrable() -> @kernel.Thm
+
+pub fn step_c_bound() -> @kernel.Thm
+
+pub fn sum_reindex_shift() -> @kernel.Thm
+
+pub fn summable_variance_from_convergence() -> @kernel.Thm
+
+pub fn summable_variance_from_convergence_v2() -> @kernel.Thm
+
+pub fn summable_variance_max_zero() -> @kernel.Thm
+
+pub fn tail_equivalence_convergence() -> @kernel.Thm
+
+pub fn taylor_cos_split_bound() -> @kernel.Thm
+
+pub fn taylor_remainder_expectation() -> @kernel.Thm
+
+pub fn three_series_condition1() -> @kernel.Thm
+
+pub fn three_series_condition2() -> @kernel.Thm
+
+pub fn three_series_condition3() -> @kernel.Thm
+
+pub fn three_series_necessity() -> @kernel.Thm
+
+pub fn three_series_necessity_indep() -> @kernel.Thm
+
+pub fn three_series_reduction() -> @kernel.Thm
+
+pub fn three_series_sufficiency() -> @kernel.Thm
+
+pub fn tightness_from_second_moments() -> @kernel.Thm
+
+pub fn trig_poly_weak_convergence() -> @kernel.Thm
+
+pub fn trunc_abs() -> @kernel.Thm
+
+pub fn trunc_same_sign() -> @kernel.Thm
+
+pub fn unbounded_eventually() -> @kernel.Thm
+
+pub fn variance_max_zero_bound() -> @kernel.Thm
+
+pub fn variance_mean_zero() -> @kernel.Thm
+
+pub fn variance_neg() -> @kernel.Thm
+
+pub fn variance_sub_const() -> @kernel.Thm
+
+pub fn weak_convergence_from_char_fn() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
