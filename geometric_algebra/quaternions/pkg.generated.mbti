@@ -1,0 +1,31 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/geometric_algebra/quaternions"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cnj_quat() -> @kernel.Thm
+
+pub fn complex_product_ga010() -> @kernel.Thm
+
+pub fn dimindex_ga010() -> @kernel.Thm
+
+pub fn dimindex_ga020() -> @kernel.Thm
+
+pub fn geomalg_300_quat() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn quat_product_ga020() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
