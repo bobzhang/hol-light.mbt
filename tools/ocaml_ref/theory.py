@@ -373,16 +373,22 @@ def setup(f):
         body = (f'  @parser.begin_theory("{name}")\n  load_steps() catch {{\n'
                 f'    e => abort("HOL Light: loading {name}.ml failed: " + e.to_string())\n  }}\n'
                 "  @parser.end_theory()\n}\n")
+        skippable = any(f in v for v in CHAIN_SKIP.values())
         text = (f"// {name}.ml: the load steps are generated ({alias}{'_ml' if alias.endswith('test') else ''}.mbt).\n\n"
                 "///|\nlet loaded : Ref[Bool] = Ref::{ val: false }\n\n"
                 f"///|\n/// Load {name}.ml (once), after the files it needs.\npub fn load() -> Unit {{\n"
                 "  if loaded.val {\n    return\n  }\n  loaded.val = true\n"
                 + "".join(f"  @{os.path.basename(pkg_of(n))}.skip_load()\n" for n in skips)
-                + "".join(call(n) for n in chain + own) + body)
-        if any(f in v for v in CHAIN_SKIP.values()):
-            text += ("\n///|\n/// Leave this file out of what is loaded after this call: a file that\n"
-                     "/// upstream loads without it (tools/ocaml_ref/theory.py, CHAIN_SKIP).\n"
-                     "pub fn skip_load() -> Unit {\n  loaded.val = true\n}\n")
+                + "".join(call(n) for n in chain + own)
+                # what it needs is loaded all the same, at this place in the
+                # order (theory.deps keeps those files where they are)
+                + ("  if skipped.val {\n    return\n  }\n" if skippable else "") + body)
+        if skippable:
+            text += ("\n///|\nlet skipped : Ref[Bool] = Ref::{ val: false }\n"
+                     "\n///|\n/// Leave this file's own steps out of what is loaded after this call: a\n"
+                     "/// file that upstream loads without it (tools/ocaml_ref/theory.py,\n"
+                     "/// CHAIN_SKIP).\n"
+                     "pub fn skip_load() -> Unit {\n  skipped.val = true\n}\n")
         if f in [x for x, _ in make_plan(top(f))]:
             # a member of its directory's make.ml order: a file of another
             # directory that needs it loads it without the files before it
