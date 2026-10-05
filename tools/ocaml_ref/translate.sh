@@ -14,6 +14,7 @@ eval "$(opam env --switch="${HOL_LIGHT_SWITCH:-hol-light}" --set-switch 2>/dev/n
 export OCAMLRUNPARAM="${OCAMLRUNPARAM:-l=256M}"
 H="$(cd ../../.repos/hol-light && pwd)"
 ROOT="$(cd ../.. && pwd)"
+./ensure_pa_j.sh
 [ -f _build/holtop ] || ocamlfind ocamlmktop -o _build/holtop
 grep -v 'pa_j.cmo' boot.ml > _build/tboot.ml
 {

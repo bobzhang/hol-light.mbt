@@ -215,6 +215,7 @@ def references(targets, refs):
     open(script, "w").write(boot[:i] + '#load "unix.cma";;\n' + "".join(helpers) + boot[i:] +
                             f"let () = if not (Toploop.use_silently Format.std_formatter (Toploop.File {ml_str(body)})) "
                             "then exit 1;;\n")
+    subprocess.run(["./ensure_pa_j.sh"], cwd=REF, check=True)
     env = os.environ.copy()
     # the bytecode stack limit, as run.sh
     env.setdefault("OCAMLRUNPARAM", "l=256M")

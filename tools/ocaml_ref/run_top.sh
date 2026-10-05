@@ -10,13 +10,7 @@ eval "$(opam env --switch="${HOL_LIGHT_SWITCH:-hol-light}" --set-switch 2>/dev/n
 # EC/xzprojective.ml)
 export OCAMLRUNPARAM="${OCAMLRUNPARAM:-l=256M}"
 H=../../.repos/hol-light
-if [ ! -f _build/pa_j.cmo ]; then
-  mkdir -p _build
-  cp "$H/pa_j/pa_j_4.xx_8.02.ml" _build/pa_j.ml
-  (cd _build && ocamlc -safe-string -c \
-    -pp "camlp5r pa_lexer.cmo pa_extend.cmo q_MLast.cmo" \
-    -I "$(camlp5 -where)" -I "$(ocamlfind query camlp-streams)" pa_j.ml)
-fi
+./ensure_pa_j.sh
 cat prelude.ml "$1" > _build/body.ml
 { cat boot.ml; echo "let _ = Toploop.use_silently Format.std_formatter (Toploop.File \"$PWD/_build/body.ml\");;"; } > _build/script.ml
 _build/holtop -w -a -alert -all -I "$H" -I _build _build/script.ml | grep -v "HOL-Light syntax in effect" | sed "/^$/d"
