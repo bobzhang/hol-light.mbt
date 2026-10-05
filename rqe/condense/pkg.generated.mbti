@@ -1,0 +1,28 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/condense"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn condense(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn condense_v1(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+pub fn tmp() -> @ref.Ref[@kernel.Thm]
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] triple_index(@list.List[TA]) -> Int64 raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

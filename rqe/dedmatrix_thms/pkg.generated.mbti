@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/dedmatrix_thms"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn ge_lem() -> @kernel.Thm
+
+pub fn gt_int_lem() -> @kernel.Thm
+
+pub fn interpsign_subset() -> @kernel.Thm
+
+pub fn interpsigns_subset() -> @kernel.Thm
+
+pub fn le_lem() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn lt_int_lem() -> @kernel.Thm
+
+pub fn nopoint_lem() -> @kernel.Thm
+
+pub fn rest_eq_gt_lem() -> @kernel.Thm
+
+pub fn rest_eq_lt_lem() -> @kernel.Thm
+
+pub fn rest_gt_lem() -> @kernel.Thm
+
+pub fn rest_int_gt_lem() -> @kernel.Thm
+
+pub fn rest_int_lt_lem() -> @kernel.Thm
+
+pub fn rest_lt_lem() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

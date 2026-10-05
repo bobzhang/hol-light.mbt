@@ -1,0 +1,42 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/lift_qelim"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn aci_conj(@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn f_tm() -> @kernel.Term
+
+pub fn forall_thm() -> @kernel.Thm
+
+pub fn lift_qelim_conv((@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise, (@kernel.Term) -> @kernel.Thm raise, (@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn load() -> Unit
+
+pub fn not_tm() -> @kernel.Term
+
+pub fn or_assoc() -> @kernel.Thm
+
+pub fn or_exists_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn or_tm() -> @kernel.Term
+
+pub fn push_exists_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn qe_simplify_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn t_tm() -> @kernel.Term
+
+pub fn triv_exists_conv(@kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

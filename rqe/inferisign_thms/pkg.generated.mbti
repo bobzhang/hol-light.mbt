@@ -1,0 +1,49 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/inferisign_thms"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn eq_eq_false_thm() -> @kernel.Thm
+
+pub fn gt_nz_thm() -> @kernel.Thm
+
+pub fn inferisign_lem00() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn lt_nz_thm() -> @kernel.Thm
+
+pub fn neg_neg_neq_thm() -> @kernel.Thm
+
+pub fn neg_neg_neq_thm2() -> @kernel.Thm
+
+pub fn neg_pos_neq_thm() -> @kernel.Thm
+
+pub fn neg_pos_neq_thm2() -> @kernel.Thm
+
+pub fn neg_zero_neg_thm() -> @kernel.Thm
+
+pub fn pos_neg_neq_thm() -> @kernel.Thm
+
+pub fn pos_neg_neq_thm2() -> @kernel.Thm
+
+pub fn pos_pos_neq_thm() -> @kernel.Thm
+
+pub fn pos_pos_neq_thm2() -> @kernel.Thm
+
+pub fn pos_zero_pos_thm() -> @kernel.Thm
+
+pub fn zero_neg_neg_thm() -> @kernel.Thm
+
+pub fn zero_pos_pos_thm() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

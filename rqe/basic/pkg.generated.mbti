@@ -1,0 +1,38 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/basic"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn and_imp_thm() -> @kernel.Thm
+
+pub fn conj_list(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn dest_beq(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn f_tm() -> @kernel.Term
+
+pub fn imp_and_thm() -> @kernel.Thm
+
+pub fn is_pos(@kernel.Term) -> Bool raise
+
+pub fn load() -> Unit
+
+pub fn mk_neq(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn neq() -> @kernel.Thm
+
+pub fn nqt() -> @kernel.Term
+
+pub fn t_tm() -> @kernel.Term
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

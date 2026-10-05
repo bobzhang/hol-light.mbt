@@ -1,0 +1,19 @@
+// Rqe/lift_qelim.ml: the load steps are generated (lift_qelim.mbt).
+
+///|
+let loaded : Ref[Bool] = Ref::{ val: false, }
+
+///|
+/// Load Rqe/lift_qelim.ml (once), after the files it needs.
+pub fn load() -> Unit {
+  if loaded.val {
+    return
+  }
+  loaded.val = true
+  @simplify.load()
+  @parser.begin_theory("Rqe/lift_qelim")
+  load_steps() catch {
+    e => abort("HOL Light: loading Rqe/lift_qelim.ml failed: " + e.to_string())
+  }
+  @parser.end_theory()
+}

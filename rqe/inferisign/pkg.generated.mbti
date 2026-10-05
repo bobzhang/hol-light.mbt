@@ -1,0 +1,36 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/inferisign"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn get_mp(@kernel.Term) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn inferisign(@list.List[@kernel.Term], @kernel.Thm, @kernel.Thm, @list.List[(@kernel.Term, @kernel.Thm)]) -> (@kernel.Thm, @list.List[(@kernel.Term, @kernel.Thm)]) raise
+
+pub fn inferisign_v1(@list.List[@kernel.Term]) -> ((@kernel.Thm) -> ((@kernel.Thm) -> ((@list.List[(@kernel.Term, @kernel.Thm)]) -> (@kernel.Thm, @list.List[(@kernel.Term, @kernel.Thm)]) raise) raise) raise) raise
+
+pub fn load() -> Unit
+
+pub fn tdiff() -> @ref.Ref[@kernel.Thm]
+
+pub fn tex() -> @ref.Ref[@list.List[(@kernel.Term, @kernel.Thm)]]
+
+pub fn tmat() -> @ref.Ref[@kernel.Thm]
+
+pub fn tvars() -> @ref.Ref[@list.List[@kernel.Term]]
+
+// Errors
+pub(all) suberror Isign {
+  Isign((@kernel.Thm, @list.List[(@kernel.Term, @kernel.Thm)]))
+}
+
+// Types and methods
+
+// Type aliases
+
+// Traits

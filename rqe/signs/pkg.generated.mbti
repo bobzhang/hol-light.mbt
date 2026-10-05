@@ -1,0 +1,28 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/signs"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn assertsign(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn findsign(@list.List[@kernel.Term]) -> ((@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn load() -> Unit
+
+pub fn[TA] split_sign(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Term, (@list.List[@kernel.Thm]) -> ((TA) -> @kernel.Thm raise) raise, (@list.List[@kernel.Thm]) -> ((TA) -> @kernel.Thm raise) raise, TA) -> @kernel.Thm raise
+
+pub fn[TA] split_zero(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Term, (@list.List[@kernel.Thm]) -> ((TA) -> @kernel.Thm raise) raise, (@list.List[@kernel.Thm]) -> ((TA) -> @kernel.Thm raise) raise, TA) -> @kernel.Thm raise
+
+pub fn xterm_lt(@kernel.Term, @kernel.Term) -> Bool raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

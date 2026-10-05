@@ -1,0 +1,70 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/rqe_lib"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn[TA] add_to_list(@ref.Ref[@list.List[TA]], @list.List[TA]) -> Unit raise
+
+pub fn[TA, TB] allcombs((TB) -> ((TB) -> TA raise) raise, @list.List[TB]) -> @list.List[TA] raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] assoc_list(@list.List[TB], @list.List[(TB, TA)]) -> @list.List[TA] raise
+
+pub fn[TA] bindex((TA) -> Bool raise, @list.List[TA]) -> Int64 raise
+
+pub fn can_match(@kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn[TA] cons(TA, @list.List[TA]) -> @list.List[TA] raise
+
+pub fn dest_quant(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_var_or_const(@kernel.Term) -> (String, @kernel.HolType) raise
+
+pub fn even(Int64) -> Bool raise
+
+pub fn[TA, TB, TC] fst3(TA, TB, TC) -> TA raise
+
+pub fn get_binop(@kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn[TA] get_index((TA) -> Bool raise, @list.List[TA]) -> Int64 raise
+
+pub fn[TA] insertat(Int64, TA, @list.List[TA]) -> @list.List[TA] raise
+
+pub fn[TA] ith(Int64, @list.List[TA]) -> TA raise
+
+pub fn[TA] list(TA) -> @list.List[TA] raise
+
+pub fn load() -> Unit
+
+pub fn[TA, TB, TC, TD] mappair((TC) -> TA raise, (TD) -> TB raise, @list.List[(TC, TD)]) -> @list.List[(TA, TB)] raise
+
+pub fn odd(Int64) -> Bool raise
+
+pub fn op_plus_dot_eq(@ref.Ref[Double], Double) -> Unit raise
+
+pub fn op_plus_eq(@ref.Ref[Int64], Int64) -> Unit raise
+
+pub fn[TA, TB] ptime((TB) -> TA raise, TB) -> (TA, Double) raise
+
+pub fn[TA] rev_ith(Int64, @list.List[TA]) -> TA raise
+
+pub fn[TA, TB, TC] snd3(TB, TA, TC) -> TA raise
+
+pub fn[TA] swap_lists(@list.List[@list.List[TA]]) -> @list.List[@list.List[TA]] raise
+
+pub fn[TA] swap_lists_v1(@list.List[@list.List[TA]], @list.List[@list.List[TA]]) -> @list.List[@list.List[TA]] raise
+
+pub fn[TA, TB, TC] thd3(TB, TC, TA) -> TA raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

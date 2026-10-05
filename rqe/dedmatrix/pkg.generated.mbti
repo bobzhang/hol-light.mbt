@@ -1,0 +1,65 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/dedmatrix"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn add_infinities(@list.List[@kernel.Term], @kernel.Thm, @kernel.Thm, @kernel.Thm) -> (@kernel.Thm, (@kernel.Term, @kernel.Thm), (@kernel.Term, @kernel.Thm)) raise
+
+pub fn add_infinities_v1(@list.List[@kernel.Term]) -> ((@kernel.Thm) -> ((@kernel.Thm) -> ((@kernel.Thm) -> (@kernel.Thm, (@kernel.Term, @kernel.Thm), (@kernel.Term, @kernel.Thm)) raise) raise) raise) raise
+
+pub fn aitdiff() -> @ref.Ref[@kernel.Thm]
+
+pub fn aitmat() -> @ref.Ref[@kernel.Thm]
+
+pub fn aitnorm() -> @ref.Ref[@kernel.Thm]
+
+pub fn aitvars() -> @ref.Ref[@list.List[@kernel.Term]]
+
+pub fn appendize(@kernel.Term, Int64) -> @kernel.Thm raise
+
+pub fn dedmatrix(@list.List[@kernel.Term], @list.List[@kernel.Thm], @list.List[@kernel.Thm], @kernel.Thm, @kernel.Thm, (@kernel.Thm) -> ((@list.List[(@kernel.Term, @kernel.Thm)]) -> @kernel.Thm raise) raise, @kernel.Thm, @list.List[(@kernel.Term, @kernel.Thm)]) -> @kernel.Thm raise
+
+pub fn get_dirs(@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn get_sing_dirs(@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn load() -> Unit
+
+pub fn prove_nonconstant(@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn remove_column1(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn remove_column1_v1(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn remove_infinities(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn remove_infinities_v1(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn tcont() -> @ref.Ref[(@kernel.Thm) -> ((@list.List[(@kernel.Term, @kernel.Thm)]) -> @kernel.Thm raise) raise]
+
+pub fn tdiff() -> @ref.Ref[@kernel.Thm]
+
+pub fn tdivs() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn tex() -> @ref.Ref[@list.List[(@kernel.Term, @kernel.Thm)]]
+
+pub fn tmat() -> @ref.Ref[@kernel.Thm]
+
+pub fn tnorm() -> @ref.Ref[@kernel.Thm]
+
+pub fn tsgns() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn tvars() -> @ref.Ref[@list.List[@kernel.Term]]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

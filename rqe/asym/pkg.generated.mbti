@@ -1,0 +1,291 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/asym"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn degree_0() -> @kernel.Thm
+
+pub fn degree_cons() -> @kernel.Thm
+
+pub fn degree_pneg() -> @kernel.Thm
+
+pub fn degree_sing() -> @kernel.Thm
+
+pub fn even_cons() -> @kernel.Thm
+
+pub fn even_odd() -> @kernel.Thm
+
+pub fn last_pneg_0() -> @kernel.Thm
+
+pub fn last_pneg_aux_0() -> @kernel.Thm
+
+pub fn last_unb() -> @kernel.Thm
+
+pub fn last_unb_even_pos() -> @kernel.Thm
+
+pub fn last_unb_neg() -> @kernel.Thm
+
+pub fn last_unb_odd_neg() -> @kernel.Thm
+
+pub fn last_unb_odd_pos() -> @kernel.Thm
+
+pub fn last_unbb_even_neg() -> @kernel.Thm
+
+pub fn lem() -> @kernel.Thm
+
+pub fn lem_v1() -> @kernel.Thm
+
+pub fn lim_inv_1n() -> @kernel.Thm
+
+pub fn lim_inv_1np() -> @kernel.Thm
+
+pub fn lim_inv_con() -> @kernel.Thm
+
+pub fn lim_inv_const() -> @kernel.Thm
+
+pub fn lim_mono() -> @kernel.Thm
+
+pub fn lim_nn() -> @kernel.Thm
+
+pub fn lim_nnc() -> @kernel.Thm
+
+pub fn lim_poly() -> @kernel.Thm
+
+pub fn lim_poly2() -> @kernel.Thm
+
+pub fn lim_poly_lt() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mono_dec() -> @kernel.Thm
+
+pub fn mono_inc() -> @kernel.Thm
+
+pub fn mono_inc_dec() -> @kernel.Thm
+
+pub fn mono_inc_pow() -> @kernel.Thm
+
+pub fn mono_inc_pow_const() -> @kernel.Thm
+
+pub fn mono_unbounded() -> @kernel.Thm
+
+pub fn mono_unbounded_above() -> @kernel.Thm
+
+pub fn mono_unbounded_above_pos() -> @kernel.Thm
+
+pub fn mono_unbounded_below() -> @kernel.Thm
+
+pub fn mono_unbounded_below_neg() -> @kernel.Thm
+
+pub fn mu_div_const() -> @kernel.Thm
+
+pub fn mu_prod() -> @kernel.Thm
+
+pub fn mua_div_const() -> @kernel.Thm
+
+pub fn mua_mua() -> @kernel.Thm
+
+pub fn mua_mub() -> @kernel.Thm
+
+pub fn mua_neg() -> @kernel.Thm
+
+pub fn mua_neg2() -> @kernel.Thm
+
+pub fn mua_quotient_limit() -> @kernel.Thm
+
+pub fn mua_quotient_limit_neg() -> @kernel.Thm
+
+pub fn mub_div_const() -> @kernel.Thm
+
+pub fn mub_mua() -> @kernel.Thm
+
+pub fn mub_mub() -> @kernel.Thm
+
+pub fn mub_quotient_limit() -> @kernel.Thm
+
+pub fn neg_last() -> @kernel.Thm
+
+pub fn nmax_le() -> @kernel.Thm
+
+pub fn nonconstant() -> @kernel.Thm
+
+pub fn nonconstant_degree() -> @kernel.Thm
+
+pub fn nonconstant_diff_0() -> @kernel.Thm
+
+pub fn nonconstant_diff_nil() -> @kernel.Thm
+
+pub fn nonconstant_diff_normal() -> @kernel.Thm
+
+pub fn nonconstant_length() -> @kernel.Thm
+
+pub fn normal() -> @kernel.Thm
+
+pub fn normal_cons() -> @kernel.Thm
+
+pub fn normal_id() -> @kernel.Thm
+
+pub fn normal_last_length() -> @kernel.Thm
+
+pub fn normal_last_nonzero() -> @kernel.Thm
+
+pub fn normal_length() -> @kernel.Thm
+
+pub fn normal_nonconstant() -> @kernel.Thm
+
+pub fn normal_pdiff() -> @kernel.Thm
+
+pub fn normal_pdiff_lem() -> @kernel.Thm
+
+pub fn normal_pneg() -> @kernel.Thm
+
+pub fn normal_tail() -> @kernel.Thm
+
+pub fn normalize_length_mono() -> @kernel.Thm
+
+pub fn normalize_pair() -> @kernel.Thm
+
+pub fn normalize_sing() -> @kernel.Thm
+
+pub fn odd_cons() -> @kernel.Thm
+
+pub fn odd_even() -> @kernel.Thm
+
+pub fn pda_length() -> @kernel.Thm
+
+pub fn pdiff_neg_last() -> @kernel.Thm
+
+pub fn pdiff_pos_last() -> @kernel.Thm
+
+pub fn pneg() -> @kernel.Thm
+
+pub fn pneg_aux() -> @kernel.Thm
+
+pub fn pneg_aux_length() -> @kernel.Thm
+
+pub fn pneg_aux_nil() -> @kernel.Thm
+
+pub fn pneg_aux_normalize_length() -> @kernel.Thm
+
+pub fn pneg_cons() -> @kernel.Thm
+
+pub fn pneg_last() -> @kernel.Thm
+
+pub fn pneg_length() -> @kernel.Thm
+
+pub fn pneg_nil() -> @kernel.Thm
+
+pub fn pneg_nonconstant() -> @kernel.Thm
+
+pub fn pneg_normalize_length() -> @kernel.Thm
+
+pub fn pneg_normalize_length_v1() -> @kernel.Thm
+
+pub fn pneg_sing() -> @kernel.Thm
+
+pub fn poly_cmul_nil() -> @kernel.Thm
+
+pub fn poly_diff_aux_degree() -> @kernel.Thm
+
+pub fn poly_diff_aux_normal() -> @kernel.Thm
+
+pub fn poly_diff_aux_normal2() -> @kernel.Thm
+
+pub fn poly_diff_aux_odd() -> @kernel.Thm
+
+pub fn poly_diff_down_left() -> @kernel.Thm
+
+pub fn poly_diff_down_left2() -> @kernel.Thm
+
+pub fn poly_diff_down_left3() -> @kernel.Thm
+
+pub fn poly_diff_down_left4() -> @kernel.Thm
+
+pub fn poly_diff_down_left5() -> @kernel.Thm
+
+pub fn poly_diff_down_right() -> @kernel.Thm
+
+pub fn poly_diff_down_right2() -> @kernel.Thm
+
+pub fn poly_diff_down_right3() -> @kernel.Thm
+
+pub fn poly_diff_last_gt() -> @kernel.Thm
+
+pub fn poly_diff_last_lem() -> @kernel.Thm
+
+pub fn poly_diff_last_lt() -> @kernel.Thm
+
+pub fn poly_diff_length() -> @kernel.Thm
+
+pub fn poly_diff_normal() -> @kernel.Thm
+
+pub fn poly_diff_parity() -> @kernel.Thm
+
+pub fn poly_diff_parity2() -> @kernel.Thm
+
+pub fn poly_diff_sing() -> @kernel.Thm
+
+pub fn poly_diff_up_left() -> @kernel.Thm
+
+pub fn poly_diff_up_left2() -> @kernel.Thm
+
+pub fn poly_diff_up_left3() -> @kernel.Thm
+
+pub fn poly_diff_up_left4() -> @kernel.Thm
+
+pub fn poly_diff_up_left5() -> @kernel.Thm
+
+pub fn poly_diff_up_right() -> @kernel.Thm
+
+pub fn poly_diff_up_right2() -> @kernel.Thm
+
+pub fn poly_diff_up_right3() -> @kernel.Thm
+
+pub fn poly_last_gt() -> @kernel.Thm
+
+pub fn poly_last_lt() -> @kernel.Thm
+
+pub fn poly_neg_neg() -> @kernel.Thm
+
+pub fn poly_neg_nil() -> @kernel.Thm
+
+pub fn poly_normalize() -> @kernel.Thm
+
+pub fn poly_pneg() -> @kernel.Thm
+
+pub fn poly_pneg_aux() -> @kernel.Thm
+
+pub fn poly_pneg_aux_suc() -> @kernel.Thm
+
+pub fn poly_pneg_last() -> @kernel.Thm
+
+pub fn poly_pneg_last2() -> @kernel.Thm
+
+pub fn poly_pneg_neg() -> @kernel.Thm
+
+pub fn poly_sing() -> @kernel.Thm
+
+pub fn poly_ub() -> @kernel.Thm
+
+pub fn pow_unb() -> @kernel.Thm
+
+pub fn pow_unb_con() -> @kernel.Thm
+
+pub fn pow_unbb_con() -> @kernel.Thm
+
+pub fn seq_0_neg() -> @kernel.Thm
+
+pub fn unb_left_even() -> @kernel.Thm
+
+pub fn unb_left_odd() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

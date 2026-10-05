@@ -1,0 +1,58 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/util"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn assum(Int64) -> @kernel.Term raise
+
+pub fn assum_types(Int64) -> Unit raise
+
+pub fn gensort(@list.List[(String, @kernel.HolType)]) -> @list.List[(String, @kernel.HolType)] raise
+
+pub fn get_type(String, @kernel.Thm) -> @kernel.HolType raise
+
+pub fn get_type_list(@kernel.Term) -> @list.List[(String, @kernel.HolType)] raise
+
+pub fn goal_types(Unit) -> Unit raise
+
+pub fn load() -> Unit
+
+pub fn my_print_type(String, @kernel.HolType) -> Unit raise
+
+pub fn my_print_typel(@list.List[(String, @kernel.HolType)]) -> Unit raise
+
+pub fn pop_proof(Unit) -> @list.List[((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)] raise
+
+pub fn print_term_types(@kernel.Term) -> Unit raise
+
+pub fn print_thm_no_hyps(@kernel.Thm) -> Unit raise
+
+pub fn print_thm_types(@kernel.Thm) -> Unit raise
+
+pub fn print_trace_thm(Bool, String, @kernel.Thm) -> Unit raise
+
+pub fn proof_stack() -> @ref.Ref[@list.List[@list.List[((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)]]]
+
+pub fn push_proof(@kernel.Term) -> @list.List[((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)] raise
+
+pub fn set_types(@kernel.Term) -> @list.List[(String, @kernel.HolType)] raise
+
+pub fn string_of_char(Char) -> String raise
+
+pub fn suppress() -> @ref.Ref[@list.List[String]]
+
+// Errors
+pub(all) suberror Empty_stack {
+  Empty_stack
+}
+
+// Types and methods
+
+// Type aliases
+
+// Traits

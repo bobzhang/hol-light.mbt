@@ -1,0 +1,35 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/inferpsign_thms"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn even_div_lem() -> @kernel.Thm
+
+pub fn gt_div_lem() -> @kernel.Thm
+
+pub fn ips_gt_nz_thm() -> @kernel.Thm
+
+pub fn ips_lt_nz_thm() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn neg_odd_lem() -> @kernel.Thm
+
+pub fn neq_mult_gt_lem() -> @kernel.Thm
+
+pub fn neq_mult_lt_lem() -> @kernel.Thm
+
+pub fn neq_odd_lem() -> @kernel.Thm
+
+pub fn unknown_thm() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

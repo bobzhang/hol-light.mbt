@@ -1,0 +1,21 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/pdivides_thms"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn mul_odd_lem() -> @kernel.Thm
+
+pub fn neg_odd_lem() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

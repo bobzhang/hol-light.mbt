@@ -1,0 +1,32 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/testform"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn combine_testforms(@kernel.Term, @kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn combine_testforms_v1(@kernel.Term) -> ((@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn load() -> Unit
+
+pub fn testform(@kernel.Term, @kernel.Thm, @kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn testform_v1(@kernel.Term, @kernel.Thm, @kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn tfm() -> @ref.Ref[@kernel.Term]
+
+pub fn tmat() -> @ref.Ref[@kernel.Thm]
+
+pub fn tvar() -> @ref.Ref[@kernel.Term]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

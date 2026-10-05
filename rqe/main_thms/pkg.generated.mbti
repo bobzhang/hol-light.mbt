@@ -1,0 +1,66 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/main_thms"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn empty_mat() -> @kernel.Thm
+
+pub fn empty_sgns() -> @list.List[@kernel.Thm]
+
+pub fn factor_neg_even_neg() -> @kernel.Thm
+
+pub fn factor_neg_even_pos() -> @kernel.Thm
+
+pub fn factor_neg_even_zero() -> @kernel.Thm
+
+pub fn factor_neg_odd_neg() -> @kernel.Thm
+
+pub fn factor_neg_odd_pos() -> @kernel.Thm
+
+pub fn factor_neg_odd_zero() -> @kernel.Thm
+
+pub fn factor_pos_neg() -> @kernel.Thm
+
+pub fn factor_pos_pos() -> @kernel.Thm
+
+pub fn factor_pos_zero() -> @kernel.Thm
+
+pub fn factor_zero_neg() -> @kernel.Thm
+
+pub fn factor_zero_pos() -> @kernel.Thm
+
+pub fn factor_zero_zero() -> @kernel.Thm
+
+pub fn gtneg() -> @kernel.Thm
+
+pub fn gtpos() -> @kernel.Thm
+
+pub fn gtzero() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn ltneg() -> @kernel.Thm
+
+pub fn ltpos() -> @kernel.Thm
+
+pub fn ltzero() -> @kernel.Thm
+
+pub fn main_lem000() -> @kernel.Thm
+
+pub fn main_lem001() -> @kernel.Thm
+
+pub fn main_lem002() -> @kernel.Thm
+
+pub fn monic_isign_lem() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

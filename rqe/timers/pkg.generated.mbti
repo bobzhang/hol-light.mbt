@@ -1,0 +1,51 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/timers"
+
+import {
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn add_infinities_timer() -> @ref.Ref[Double]
+
+pub fn combine_testforms_timer() -> @ref.Ref[Double]
+
+pub fn condense_timer() -> @ref.Ref[Double]
+
+pub fn duplicate_columns_timer() -> @ref.Ref[Double]
+
+pub fn inferisign_timer() -> @ref.Ref[Double]
+
+pub fn inferpsign_timer() -> @ref.Ref[Double]
+
+pub fn load() -> Unit
+
+pub fn matinsert_timer() -> @ref.Ref[Double]
+
+pub fn pdivides_timer() -> @ref.Ref[Double]
+
+pub fn print_timers(Unit) -> Unit raise
+
+pub fn remove_column1_timer() -> @ref.Ref[Double]
+
+pub fn remove_infinities_timer() -> @ref.Ref[Double]
+
+pub fn replace_pol_timer() -> @ref.Ref[Double]
+
+pub fn reset_timers(Unit) -> Unit raise
+
+pub fn swap_head_col_timer() -> @ref.Ref[Double]
+
+pub fn testform_timer() -> @ref.Ref[Double]
+
+pub fn unfactor_mat_timer() -> @ref.Ref[Double]
+
+pub fn unmonicize_mat_timer() -> @ref.Ref[Double]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

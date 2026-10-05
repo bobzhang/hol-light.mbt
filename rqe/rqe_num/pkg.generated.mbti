@@ -1,0 +1,47 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/rqe_num"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn even_tm() -> @kernel.Term
+
+pub fn even_tm_v1() -> @kernel.Term
+
+pub fn load() -> Unit
+
+pub fn neq() -> @kernel.Term
+
+pub fn nge() -> @kernel.Term
+
+pub fn ngt() -> @kernel.Term
+
+pub fn nle() -> @kernel.Term
+
+pub fn nlt() -> @kernel.Term
+
+pub fn nm() -> @kernel.Term
+
+pub fn nmax() -> @kernel.Thm
+
+pub fn np() -> @kernel.Term
+
+pub fn nzero() -> @kernel.Term
+
+pub fn odd_tm() -> @kernel.Term
+
+pub fn odd_tm_v1() -> @kernel.Term
+
+pub fn parity_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn suc_1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

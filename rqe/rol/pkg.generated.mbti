@@ -1,0 +1,98 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/rqe/rol"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn chop_real_list(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn el_cons() -> @kernel.Thm
+
+pub fn[TA] interleave(@list.List[TA], @list.List[TA]) -> @list.List[TA] raise
+
+pub fn last_cons_lt() -> @kernel.Thm
+
+pub fn lem() -> @kernel.Thm
+
+pub fn lem0() -> @kernel.Thm
+
+pub fn lem0_v1() -> @kernel.Thm
+
+pub fn lem1() -> @kernel.Thm
+
+pub fn lem1_v1() -> @kernel.Thm
+
+pub fn lem1_v2() -> @kernel.Thm
+
+pub fn lem2() -> @kernel.Thm
+
+pub fn lem2_v1() -> @kernel.Thm
+
+pub fn lem_v1() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mk_rol(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn not_rol() -> @kernel.Thm
+
+pub fn real_nil() -> @kernel.Term
+
+pub fn real_ordered_list() -> @kernel.Thm
+
+pub fn rol_append() -> @kernel.Thm
+
+pub fn rol_chop_list(Int64, @kernel.Thm) -> (@kernel.Thm, @kernel.Thm, @kernel.Thm) raise
+
+pub fn rol_chop_lt(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn rol_cons() -> @kernel.Thm
+
+pub fn rol_cons_cons() -> @kernel.Thm
+
+pub fn rol_cons_cons_delete() -> @kernel.Thm
+
+pub fn rol_cons_cons_lt() -> @kernel.Thm
+
+pub fn rol_covers(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn rol_empty() -> @kernel.Thm
+
+pub fn rol_insert(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn rol_insert_back(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn rol_insert_back_thm() -> @kernel.Thm
+
+pub fn rol_insert_front(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn rol_insert_front_thm() -> @kernel.Thm
+
+pub fn rol_insert_middle(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn rol_insert_thm() -> @kernel.Thm
+
+pub fn rol_nil() -> @kernel.Thm
+
+pub fn rol_nonempty_thms(@kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn rol_remove(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn rol_sing() -> @kernel.Thm
+
+pub fn rol_tail() -> @kernel.Thm
+
+pub fn rol_thms(@kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn t1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
