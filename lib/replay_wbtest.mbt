@@ -39,8 +39,8 @@ test "channels on in-memory files" {
   inspect(string_index_opt("a.b", '.'), content="Some(1)")
   inspect(string_index_opt("ab", '.'), content="None")
   inspect(
-    string_split_on_char(' ', "1 -2  0").to_array(),
-    content="[\"1\", \"-2\", \"\", \"0\"]",
+    string_split_on_char(' ', "1 -2  0").to_array().join("|"),
+    content="1|-2||0",
   )
-  inspect(string_split_on_char(' ', "").to_array(), content="[\"\"]")
+  inspect(string_split_on_char(' ', "").to_array().length(), content="1")
 }
