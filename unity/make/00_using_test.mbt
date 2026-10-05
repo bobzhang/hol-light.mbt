@@ -1,0 +1,2 @@
+///|
+using @testkit {stm, sthm}
