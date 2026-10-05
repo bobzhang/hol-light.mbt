@@ -1,0 +1,30 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/cadical/ldrup"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn lrat_prove((Int64) -> @kernel.Term raise, String) -> @kernel.Thm raise
+
+pub fn lrat_prove_gen((Int64) -> @kernel.Term raise) -> ((String) -> ((String) -> @kernel.Thm raise) raise) raise
+
+pub fn lrat_refute((Int64) -> @kernel.Term raise, String) -> @kernel.Thm raise
+
+pub fn lrat_refute_gen((Int64) -> @kernel.Term raise, String, String) -> @kernel.Thm raise
+
+pub fn problem_dir() -> @ref.Ref[String]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

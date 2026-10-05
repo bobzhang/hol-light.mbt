@@ -1,0 +1,44 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/cadical/dimacs"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn clauses_of_term((@kernel.Term) -> Int64 raise, @kernel.Term) -> @list.List[@list.List[Int64]] raise
+
+pub fn count_conjuncts(Int64, @kernel.Term) -> Int64 raise
+
+pub fn dimacs_of_hol(String, @kernel.Term) -> Unit raise
+
+pub fn list_conjuncts(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn parse_clauses(@list.List[@list.List[Int64]], @list.List[Int64], @list.List[String]) -> @list.List[@list.List[Int64]] raise
+
+pub fn[TA] process_lines((String) -> @list.List[TA] raise, (@list.List[TA]) -> Bool raise, String) -> @list.List[TA] raise
+
+pub fn read_dimacs(String) -> @list.List[@list.List[Int64]] raise
+
+pub fn stripcomments(String) -> String raise
+
+pub fn term_of_clause((Int64) -> @kernel.Term raise) -> ((@list.List[Int64]) -> @kernel.Term raise) raise
+
+pub fn term_of_clauses((Int64) -> @kernel.Term raise) -> ((@list.List[@list.List[Int64]]) -> @kernel.Term raise) raise
+
+pub fn term_of_literal((Int64) -> @kernel.Term raise, Int64) -> @kernel.Term raise
+
+pub fn write_dimacs(String) -> ((@list.List[@list.List[Int64]]) -> Unit raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
