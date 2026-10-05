@@ -19,6 +19,7 @@ constructs theorems only through its API.
 - **Complex/, Arithmetic/, Permutation/, Ntrie/, Model/, GL/, Divstep/, Rqe/**:
   their theory files (`complex/<name>`, ...).
 - **EC/**: 13 of 30 files so far. **Examples/**: 31 of 50.
+  **Autoformalization/**: 2 of 7.
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the
 registry caps a module at 100 MB); Multivariate/, 100/ and the translation
