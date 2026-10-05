@@ -15,11 +15,10 @@ pub(all) suberror Noparse derive(Debug)
 pub extend Noparse with @debug.Debug::{to_repr}
 
 ///|
-/// `p1 ||| p2`
-pub fn[I, A] alt(
-  p1 : (List[I]) -> (A, List[I]) raise,
-  p2 : (List[I]) -> (A, List[I]) raise,
-) -> (List[I]) -> (A, List[I]) raise {
+/// `p1 ||| p2`. The combinators are as polymorphic as parser.ml's: the
+/// input and what is left of it are any types (Examples/sos.ml has a
+/// function generic in them).
+pub fn[X, R] alt(p1 : (X) -> R raise, p2 : (X) -> R raise) -> (X) -> R raise {
   input => {
     p1(input) catch {
       Noparse => p2(input)
@@ -30,10 +29,10 @@ pub fn[I, A] alt(
 
 ///|
 /// `p1 ++ p2`
-pub fn[I, A, B] seq(
-  p1 : (List[I]) -> (A, List[I]) raise,
-  p2 : (List[I]) -> (B, List[I]) raise,
-) -> (List[I]) -> ((A, B), List[I]) raise {
+pub fn[X, A, Y, B, Z] seq(
+  p1 : (X) -> (A, Y) raise,
+  p2 : (Y) -> (B, Z) raise,
+) -> (X) -> ((A, B), Z) raise {
   input => {
     let (r1, rest1) = p1(input)
     let (r2, rest2) = p2(rest1)
@@ -43,9 +42,7 @@ pub fn[I, A, B] seq(
 
 ///|
 /// `many p`: zero or more `p`.
-pub fn[I, A] many(
-  p : (List[I]) -> (A, List[I]) raise,
-) -> (List[I]) -> (List[A], List[I]) raise {
+pub fn[X, A] many(p : (X) -> (A, X) raise) -> (X) -> (List[A], X) raise {
   input => {
     let results = []
     let mut rest = input
@@ -63,10 +60,10 @@ pub fn[I, A] many(
 
 ///|
 /// `p >> f`
-pub fn[I, A, B] map(
-  p : (List[I]) -> (A, List[I]) raise,
+pub fn[X, A, B, Y] map(
+  p : (X) -> (A, Y) raise,
   f : (A) -> B raise?,
-) -> (List[I]) -> (B, List[I]) raise {
+) -> (X) -> (B, Y) raise {
   input => {
     let (r, rest) = p(input)
     (f(r), rest)
@@ -75,10 +72,7 @@ pub fn[I, A, B] map(
 
 ///|
 /// `fix err p`: turn `Noparse` into a failure "<err> expected".
-pub fn[I, A] fix(
-  err : String,
-  p : (List[I]) -> (A, List[I]) raise,
-) -> (List[I]) -> (A, List[I]) raise {
+pub fn[X, R] fix(err : String, p : (X) -> R raise) -> (X) -> R raise {
   input => {
     p(input) catch {
       Noparse => raise Failure(err + " expected")
@@ -100,7 +94,7 @@ pub fn[I, A, S] listof(
 }
 
 ///|
-pub fn[I, A] nothing(input : List[I]) -> (List[A], List[I]) {
+pub fn[X, A] nothing(input : X) -> (List[A], X) {
   (@list.empty(), input)
 }
 
@@ -150,9 +144,7 @@ pub fn[I, A, S] rightbin(
 
 ///|
 /// Zero or one `p`.
-pub fn[I, A] possibly(
-  p : (List[I]) -> (A, List[I]) raise,
-) -> (List[I]) -> (List[A], List[I]) raise {
+pub fn[X, A] possibly(p : (X) -> (A, X) raise) -> (X) -> (List[A], X) raise {
   input => {
     let (x, rest) = p(input) catch {
       Noparse => return (@list.empty(), input)
@@ -181,10 +173,10 @@ pub fn[I : Eq] a(tok : I) -> (List[I]) -> (I, List[I]) raise {
 
 ///|
 /// At least `n` occurrences of `p`.
-pub fn[I, A] atleast(
+pub fn[X, A] atleast(
   n : Int,
-  p : (List[I]) -> (A, List[I]) raise,
-) -> (List[I]) -> (List[A], List[I]) raise {
+  p : (X) -> (A, X) raise,
+) -> (X) -> (List[A], X) raise {
   input => {
     let first = []
     let mut rest = input

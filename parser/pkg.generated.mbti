@@ -12,9 +12,9 @@ import {
 // Values
 pub fn[I : Eq] a(I) -> (@list.List[I]) -> (I, @list.List[I]) raise
 
-pub fn[I, A] alt((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) -> (A, @list.List[I]) raise) -> (@list.List[I]) -> (A, @list.List[I]) raise
+pub fn[X, R] alt((X) -> R raise, (X) -> R raise) -> (X) -> R raise
 
-pub fn[I, A] atleast(Int, (@list.List[I]) -> (A, @list.List[I]) raise) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise
+pub fn[X, A] atleast(Int, (X) -> (A, X) raise) -> (X) -> (@list.List[A], X) raise
 
 pub fn begin_theory(String) -> Unit
 
@@ -28,7 +28,7 @@ pub fn end_theory() -> Unit
 
 pub fn[I] finished(@list.List[I]) -> (Int, @list.List[I]) raise
 
-pub fn[I, A] fix(String, (@list.List[I]) -> (A, @list.List[I]) raise) -> (@list.List[I]) -> (A, @list.List[I]) raise
+pub fn[X, R] fix(String, (X) -> R raise) -> (X) -> R raise
 
 pub fn install_parser(String, (@list.List[Lexcode]) -> (@preterm.Preterm, @list.List[Lexcode]) raise) -> Unit
 
@@ -44,11 +44,11 @@ pub fn[I, A, S] listof((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[
 
 pub fn loaded_theories() -> Array[String]
 
-pub fn[I, A] many((@list.List[I]) -> (A, @list.List[I]) raise) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise
+pub fn[X, A] many((X) -> (A, X) raise) -> (X) -> (@list.List[A], X) raise
 
-pub fn[I, A, B] map((@list.List[I]) -> (A, @list.List[I]) raise, (A) -> B raise?) -> (@list.List[I]) -> (B, @list.List[I]) raise
+pub fn[X, A, B, Y] map((X) -> (A, Y) raise, (A) -> B raise?) -> (X) -> (B, Y) raise
 
-pub fn[I, A] nothing(@list.List[I]) -> (@list.List[A], @list.List[I])
+pub fn[X, A] nothing(X) -> (@list.List[A], X)
 
 pub fn parse_preterm(@list.List[Lexcode]) -> (@preterm.Preterm, @list.List[Lexcode]) raise
 
@@ -60,13 +60,13 @@ pub fn parse_type(String) -> @kernel.HolType raise
 
 pub fn pgenvar_counter() -> Int
 
-pub fn[I, A] possibly((@list.List[I]) -> (A, @list.List[I]) raise) -> (@list.List[I]) -> (@list.List[A], @list.List[I]) raise
+pub fn[X, A] possibly((X) -> (A, X) raise) -> (X) -> (@list.List[A], X) raise
 
 pub let quotation_trace : @ref.Ref[Array[String]?]
 
 pub fn[I, A, S] rightbin((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) -> (S, @list.List[I]) raise, (S, A, A) -> A raise?, String) -> (@list.List[I]) -> (A, @list.List[I]) raise
 
-pub fn[I, A, B] seq((@list.List[I]) -> (A, @list.List[I]) raise, (@list.List[I]) -> (B, @list.List[I]) raise) -> (@list.List[I]) -> ((A, B), @list.List[I]) raise
+pub fn[X, A, Y, B, Z] seq((X) -> (A, Y) raise, (Y) -> (B, Z) raise) -> (X) -> ((A, B), Z) raise
 
 pub fn[I] some((I) -> Bool raise?) -> (@list.List[I]) -> (I, @list.List[I]) raise
 
