@@ -1,0 +1,57 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/functionspaces/L2"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abs_pow_2() -> @kernel.Thm
+
+pub fn alomst_zero_zero() -> @kernel.Thm
+
+pub fn cfun_almost_zero() -> @kernel.Thm
+
+pub fn complex_measurable() -> @kernel.Thm
+
+pub fn frechet_real_derivative_unique_within_closed_interval() -> @kernel.Thm
+
+pub fn is_almost_zero() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn r_inprod() -> @kernel.Thm
+
+pub fn real_integra_zero_subintervals() -> @kernel.Thm
+
+pub fn real_pow2_0() -> @kernel.Thm
+
+pub fn rinprod_almost_zero() -> @kernel.Thm
+
+pub fn rinprod_cnj() -> @kernel.Thm
+
+pub fn rinprod_ladd() -> @kernel.Thm
+
+pub fn rinprod_rsmul() -> @kernel.Thm
+
+pub fn rinprod_self_pos() -> @kernel.Thm
+
+pub fn rinprod_zero_eq() -> @kernel.Thm
+
+pub fn sq_integrable() -> @kernel.Thm
+
+pub fn sq_integrable_inner_space() -> @kernel.Thm
+
+pub fn sq_integrable_subspace() -> @kernel.Thm
+
+pub fn sq_rule() -> @kernel.Thm
+
+pub fn sq_rule_sub() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
