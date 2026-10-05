@@ -187,7 +187,9 @@ module Main = struct
                 | _, Unix.WEXITED 3 -> fail ("unsupported items in " ^ target)
                 | _ -> fail ("translation of " ^ target)));
           if Sys.command (after ^ " " ^ Filename.quote target) <> 0 then fail ("after " ^ target);
-          load_new target;
+          (* loaded for the steps after it (the last one is not: loading
+             Autoformalization/fifteen_theorem.ml again takes two hours) *)
+          if rest <> [] then load_new target;
           run rest
       | Branch steps :: rest ->
           flush ();
