@@ -2221,6 +2221,14 @@ module Lower = struct
         let lowered = List.map (fun a -> let ss, x, _ = lower a in (ss, x)) args in
         let stmts, xs = schedule (List.rev lowered) in
         (stmts, Call (Atom (ctor_name ~cd name), List.rev xs), mty_of e.exp_type)
+    | "Simpset", [ _; _; _; _ ] ->
+        (* simp.ml's simpsets are a struct: built by `@simp.simpset`
+           (Jordan/jordan_curve_theorem.ml) *)
+        (match Names.resolve "simp.ml" "simpset" with
+         | Some (pkg, mname, decl) ->
+             let h = { hstmts = []; hexp = Atom ("@" ^ pkg_alias pkg ^ "." ^ mname); hmty = mty_of_decl decl; hoty = None } in
+             apply_head ?expect ~res:e.exp_type loc h args
+         | None -> unsupported loc "constructor Simpset")
     | name, _ -> unsupported loc "constructor %s" name
 
   (* --- Functions --- *)

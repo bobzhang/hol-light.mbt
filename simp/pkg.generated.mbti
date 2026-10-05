@@ -152,6 +152,8 @@ pub fn simp_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)]
 
 pub fn simplify_conv(Simpset, @list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
 
+pub fn simpset(@nets.Net[GconvOf[(@kernel.Term) -> @kernel.Thm raise]], ((Simpset, Int, @kernel.Term) -> @kernel.Thm raise) -> ((Simpset, Int, @kernel.Term) -> @kernel.Thm raise) raise, @list.List[Prover], (@kernel.Thm, @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise) -> Simpset
+
 pub fn ss_of_congs(@list.List[@kernel.Thm], Simpset) -> Simpset raise
 
 pub fn ss_of_conv(@kernel.Term, (@kernel.Term) -> @kernel.Thm raise, Simpset) -> Simpset

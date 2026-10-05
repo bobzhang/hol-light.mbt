@@ -388,6 +388,17 @@ pub struct Simpset {
 pub type Strategy = (Simpset, Int, Term) -> Thm raise
 
 ///|
+/// OCaml's constructor `Simpset(net, prover, provers, rewmaker)`.
+pub fn simpset(
+  net : Net[Gconv],
+  prover : (Strategy) -> Strategy raise,
+  provers : List[Prover],
+  rewmaker : (Thm, List[Thm]) -> List[Thm] raise,
+) -> Simpset {
+  { net, prover, provers, rewmaker }
+}
+
+///|
 /// `basic_prover strat ss lev tm`
 pub fn basic_prover(strat : Strategy) -> Strategy {
   (ss, lev, tm) => {
