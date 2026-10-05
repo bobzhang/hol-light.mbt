@@ -130,7 +130,10 @@ and file I/O before starting it.
   older packages; equivalent, but the code differs.
 - **Codex review** of the last commits (frexp, `= []`, --resume, streamed
   logs, alias table when added).
-- **Not ported**: GL/tests.ml (an interactive script: `e GL_TAC` fails on
+- **Not ported**: Jordan/tactics_refine.ml's `dump_thm` and `load_thm`
+  (theorems marshalled to a file and read back as proved: the port never
+  deserializes theorems; the two functions exist and fail; upstream leaves
+  the fast load off), GL/tests.ml (an interactive script: `e GL_TAC` fails on
   purpose to show a countermodel, so the file cannot be loaded upstream
   either), tactician_light.ml (needs a tactic-expression interpreter
   to replace `loadt` of OCaml strings), help.ml/database.ml and the

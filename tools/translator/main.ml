@@ -40,6 +40,12 @@ module Main = struct
     | "iterate.ml" -> ("iterate/iterate.mbt", [])
     | "cart.ml" -> ("cart/cart.mbt", [])
     | "define.ml" -> ("define/define.mbt", [])
+    | "Jordan/tactics_refine.ml" ->
+        (* dump_thm and load_thm marshal theorems to and from a file: by
+           hand (jordan/tactics_refine/dump.mbt), and they only fail *)
+        ( "jordan/tactics_refine/tactics_refine.mbt",
+          [ { Emit.line = 71; setup = None; names = [ ("dump_thm", "dump_thm") ] };
+            { Emit.line = 76; setup = None; names = [ ("load_thm", "load_thm") ] } ] )
     | f when (match Names.package_of_file f with Some p -> String.contains p '/' | None -> false) ->
         let p = Option.get (Names.package_of_file f) in
         (* moon takes *_test.mbt (and *_wbtest.mbt) for test files *)
