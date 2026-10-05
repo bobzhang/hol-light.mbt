@@ -1,0 +1,441 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/probability/distributions"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn bernoulli_char_fn_im() -> @kernel.Thm
+
+pub fn bernoulli_char_fn_re() -> @kernel.Thm
+
+pub fn bernoulli_is_binomial_1() -> @kernel.Thm
+
+pub fn bernoulli_rv() -> @kernel.Thm
+
+pub fn bernoulli_rv_expectation() -> @kernel.Thm
+
+pub fn bernoulli_rv_prob_zero() -> @kernel.Thm
+
+pub fn bernoulli_rv_variance() -> @kernel.Thm
+
+pub fn binom_diag() -> @kernel.Thm
+
+pub fn binom_kbinom_identity() -> @kernel.Thm
+
+pub fn binom_kbinom_identity2() -> @kernel.Thm
+
+pub fn binom_le_pow() -> @kernel.Thm
+
+pub fn binom_pascal_add() -> @kernel.Thm
+
+pub fn binom_symm_add() -> @kernel.Thm
+
+pub fn binomial_char_fn_im() -> @kernel.Thm
+
+pub fn binomial_char_fn_re() -> @kernel.Thm
+
+pub fn binomial_rv() -> @kernel.Thm
+
+pub fn binomial_rv_expectation() -> @kernel.Thm
+
+pub fn binomial_rv_variance() -> @kernel.Thm
+
+pub fn char_fn_im_binomial_rv() -> @kernel.Thm
+
+pub fn char_fn_im_exponential_dist() -> @kernel.Thm
+
+pub fn char_fn_im_geometric_dist() -> @kernel.Thm
+
+pub fn char_fn_im_normal_dist() -> @kernel.Thm
+
+pub fn char_fn_im_poisson_dist() -> @kernel.Thm
+
+pub fn char_fn_im_uniform_dist() -> @kernel.Thm
+
+pub fn char_fn_re_binomial_rv() -> @kernel.Thm
+
+pub fn char_fn_re_exponential_dist() -> @kernel.Thm
+
+pub fn char_fn_re_geometric_dist() -> @kernel.Thm
+
+pub fn char_fn_re_normal_dist() -> @kernel.Thm
+
+pub fn char_fn_re_poisson_dist() -> @kernel.Thm
+
+pub fn char_fn_re_uniform_dist() -> @kernel.Thm
+
+pub fn cos_has_real_integral() -> @kernel.Thm
+
+pub fn exp_cos_antideriv() -> @kernel.Thm
+
+pub fn exp_cos_integral_interval() -> @kernel.Thm
+
+pub fn exp_sin_antideriv() -> @kernel.Thm
+
+pub fn exp_sin_integral_interval() -> @kernel.Thm
+
+pub fn expectation_exponential_dist() -> @kernel.Thm
+
+pub fn expectation_geometric_dist() -> @kernel.Thm
+
+pub fn expectation_normal_dist() -> @kernel.Thm
+
+pub fn expectation_poisson_dist() -> @kernel.Thm
+
+pub fn expectation_uniform_dist() -> @kernel.Thm
+
+pub fn exponential_cdf() -> @kernel.Thm
+
+pub fn exponential_cdf_le_1() -> @kernel.Thm
+
+pub fn exponential_cdf_nonneg() -> @kernel.Thm
+
+pub fn exponential_cdf_zero() -> @kernel.Thm
+
+pub fn exponential_char_fn_im() -> @kernel.Thm
+
+pub fn exponential_char_fn_re() -> @kernel.Thm
+
+pub fn exponential_density() -> @kernel.Thm
+
+pub fn exponential_density_integrable_nonneg() -> @kernel.Thm
+
+pub fn exponential_density_integral() -> @kernel.Thm
+
+pub fn exponential_density_nonneg() -> @kernel.Thm
+
+pub fn exponential_density_pos() -> @kernel.Thm
+
+pub fn exponential_density_zero() -> @kernel.Thm
+
+pub fn exponential_distributed() -> @kernel.Thm
+
+pub fn exponential_has_real_derivative() -> @kernel.Thm
+
+pub fn exponential_has_real_derivative_within() -> @kernel.Thm
+
+pub fn exponential_integrable_interval() -> @kernel.Thm
+
+pub fn exponential_integral_interval() -> @kernel.Thm
+
+pub fn exponential_integral_seq_tends_1() -> @kernel.Thm
+
+pub fn exponential_limit_posinfinity() -> @kernel.Thm
+
+pub fn exponential_linear_decay_seq() -> @kernel.Thm
+
+pub fn exponential_mean() -> @kernel.Thm
+
+pub fn exponential_mean_antideriv() -> @kernel.Thm
+
+pub fn exponential_mean_integral() -> @kernel.Thm
+
+pub fn exponential_mean_integral_interval() -> @kernel.Thm
+
+pub fn exponential_mean_seq_tends() -> @kernel.Thm
+
+pub fn exponential_memoryless() -> @kernel.Thm
+
+pub fn exponential_product_decay_seq() -> @kernel.Thm
+
+pub fn exponential_quadratic_decay_seq() -> @kernel.Thm
+
+pub fn exponential_real_continuous() -> @kernel.Thm
+
+pub fn exponential_second_moment() -> @kernel.Thm
+
+pub fn exponential_second_moment_antideriv() -> @kernel.Thm
+
+pub fn exponential_second_moment_integral() -> @kernel.Thm
+
+pub fn exponential_second_moment_integral_interval() -> @kernel.Thm
+
+pub fn exponential_second_moment_seq_tends() -> @kernel.Thm
+
+pub fn exponential_variance_integral() -> @kernel.Thm
+
+pub fn geometric_char_fn_im() -> @kernel.Thm
+
+pub fn geometric_char_fn_re() -> @kernel.Thm
+
+pub fn geometric_distributed() -> @kernel.Thm
+
+pub fn geometric_is_neg_binomial_1() -> @kernel.Thm
+
+pub fn geometric_mean_series() -> @kernel.Thm
+
+pub fn geometric_pmf() -> @kernel.Thm
+
+pub fn geometric_pmf_pos() -> @kernel.Thm
+
+pub fn geometric_pmf_sums() -> @kernel.Thm
+
+pub fn geometric_second_factorial_moment() -> @kernel.Thm
+
+pub fn geometric_second_moment() -> @kernel.Thm
+
+pub fn geometric_variance_series() -> @kernel.Thm
+
+pub fn has_density() -> @kernel.Thm
+
+pub fn has_density_integrable() -> @kernel.Thm
+
+pub fn has_density_integral_one() -> @kernel.Thm
+
+pub fn has_density_interval_prob() -> @kernel.Thm
+
+pub fn has_density_nonneg() -> @kernel.Thm
+
+pub fn has_density_rv() -> @kernel.Thm
+
+pub fn has_pmf() -> @kernel.Thm
+
+pub fn has_pmf_nonneg() -> @kernel.Thm
+
+pub fn has_pmf_prob() -> @kernel.Thm
+
+pub fn has_pmf_rv() -> @kernel.Thm
+
+pub fn has_pmf_sums_one() -> @kernel.Thm
+
+pub fn has_real_integral_affinity_univ() -> @kernel.Thm
+
+pub fn identity_has_real_integral() -> @kernel.Thm
+
+pub fn indicator_bernoulli() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn lotus_bounded_continuous() -> @kernel.Thm
+
+pub fn lotus_continuous() -> @kernel.Thm
+
+pub fn lotus_cos() -> @kernel.Thm
+
+pub fn lotus_nonneg_continuous() -> @kernel.Thm
+
+pub fn lotus_pmf_cos() -> @kernel.Thm
+
+pub fn lotus_pmf_integrable() -> @kernel.Thm
+
+pub fn lotus_pmf_sin() -> @kernel.Thm
+
+pub fn lotus_sin() -> @kernel.Thm
+
+pub fn nb_series() -> @kernel.Thm
+
+pub fn nb_series_telescoping() -> @kernel.Thm
+
+pub fn neg_binomial_mean_series() -> @kernel.Thm
+
+pub fn neg_binomial_pmf() -> @kernel.Thm
+
+pub fn neg_binomial_pmf_pos() -> @kernel.Thm
+
+pub fn neg_binomial_pmf_sums() -> @kernel.Thm
+
+pub fn neg_binomial_second_factorial_moment() -> @kernel.Thm
+
+pub fn neg_binomial_variance_series() -> @kernel.Thm
+
+pub fn normal_cdf() -> @kernel.Thm
+
+pub fn normal_cdf_bounds() -> @kernel.Thm
+
+pub fn normal_cdf_complement() -> @kernel.Thm
+
+pub fn normal_cdf_continuous() -> @kernel.Thm
+
+pub fn normal_cdf_limit_neg() -> @kernel.Thm
+
+pub fn normal_cdf_limit_pos() -> @kernel.Thm
+
+pub fn normal_cdf_mean() -> @kernel.Thm
+
+pub fn normal_cdf_mono() -> @kernel.Thm
+
+pub fn normal_cdf_standard() -> @kernel.Thm
+
+pub fn normal_char_fn_im() -> @kernel.Thm
+
+pub fn normal_char_fn_re() -> @kernel.Thm
+
+pub fn normal_density() -> @kernel.Thm
+
+pub fn normal_density_integrable() -> @kernel.Thm
+
+pub fn normal_density_integral() -> @kernel.Thm
+
+pub fn normal_density_nonneg() -> @kernel.Thm
+
+pub fn normal_density_pos() -> @kernel.Thm
+
+pub fn normal_density_standard() -> @kernel.Thm
+
+pub fn normal_density_standardize() -> @kernel.Thm
+
+pub fn normal_density_sym() -> @kernel.Thm
+
+pub fn normal_distributed() -> @kernel.Thm
+
+pub fn normal_mean() -> @kernel.Thm
+
+pub fn normal_mean_helper() -> @kernel.Thm
+
+pub fn normal_mean_integral() -> @kernel.Thm
+
+pub fn normal_shifted_cos_integral() -> @kernel.Thm
+
+pub fn normal_shifted_sin_integral() -> @kernel.Thm
+
+pub fn normal_variance() -> @kernel.Thm
+
+pub fn normal_variance_integral() -> @kernel.Thm
+
+pub fn numerator_limit() -> @kernel.Thm
+
+pub fn poisson_char_fn_im() -> @kernel.Thm
+
+pub fn poisson_char_fn_re() -> @kernel.Thm
+
+pub fn poisson_distributed() -> @kernel.Thm
+
+pub fn poisson_limit() -> @kernel.Thm
+
+pub fn poisson_mean_series() -> @kernel.Thm
+
+pub fn poisson_pmf() -> @kernel.Thm
+
+pub fn poisson_pmf_pos() -> @kernel.Thm
+
+pub fn poisson_pmf_recursion() -> @kernel.Thm
+
+pub fn poisson_pmf_sums() -> @kernel.Thm
+
+pub fn poisson_second_factorial_moment() -> @kernel.Thm
+
+pub fn poisson_second_moment() -> @kernel.Thm
+
+pub fn poisson_variance_series() -> @kernel.Thm
+
+pub fn poly_identity() -> @kernel.Thm
+
+pub fn pow_pred() -> @kernel.Thm
+
+pub fn real_exp_converges() -> @kernel.Thm
+
+pub fn real_exp_quadratic_bound() -> @kernel.Thm
+
+pub fn real_pow_offset2() -> @kernel.Thm
+
+pub fn real_sums_kk1x_pow() -> @kernel.Thm
+
+pub fn real_sums_kx_pow() -> @kernel.Thm
+
+pub fn reallim_binom_over_npower() -> @kernel.Thm
+
+pub fn reallim_binom_pown() -> @kernel.Thm
+
+pub fn reallim_n_times_pown() -> @kernel.Thm
+
+pub fn reallim_nsquared_times_pown() -> @kernel.Thm
+
+pub fn reallim_pow_exp_neg_p() -> @kernel.Thm
+
+pub fn reallim_pow_times_pown() -> @kernel.Thm
+
+pub fn reallim_ratio_to_1() -> @kernel.Thm
+
+pub fn reallim_shift_suc() -> @kernel.Thm
+
+pub fn sin_has_real_integral() -> @kernel.Thm
+
+pub fn square_has_real_integral() -> @kernel.Thm
+
+pub fn std_normal_cdf_complement() -> @kernel.Thm
+
+pub fn std_normal_cdf_limit_neg() -> @kernel.Thm
+
+pub fn std_normal_cdf_limit_pos() -> @kernel.Thm
+
+pub fn std_normal_cdf_seq_tends_1() -> @kernel.Thm
+
+pub fn std_normal_cdf_zero() -> @kernel.Thm
+
+pub fn std_normal_integral_interval_tends_1() -> @kernel.Thm
+
+pub fn sum_binomial_first_moment() -> @kernel.Thm
+
+pub fn sum_binomial_second_moment() -> @kernel.Thm
+
+pub fn sum_binomial_second_raw_moment() -> @kernel.Thm
+
+pub fn sum_gp_derivative() -> @kernel.Thm
+
+pub fn sum_gp_second_derivative() -> @kernel.Thm
+
+pub fn sum_kk1x_pow() -> @kernel.Thm
+
+pub fn sum_kx_pow() -> @kernel.Thm
+
+pub fn uniform_cdf() -> @kernel.Thm
+
+pub fn uniform_cdf_bounds() -> @kernel.Thm
+
+pub fn uniform_cdf_left() -> @kernel.Thm
+
+pub fn uniform_cdf_mono() -> @kernel.Thm
+
+pub fn uniform_cdf_right() -> @kernel.Thm
+
+pub fn uniform_char_fn_im() -> @kernel.Thm
+
+pub fn uniform_char_fn_re() -> @kernel.Thm
+
+pub fn uniform_density() -> @kernel.Thm
+
+pub fn uniform_density_integrable() -> @kernel.Thm
+
+pub fn uniform_density_integral() -> @kernel.Thm
+
+pub fn uniform_density_nonneg() -> @kernel.Thm
+
+pub fn uniform_density_pos() -> @kernel.Thm
+
+pub fn uniform_density_value() -> @kernel.Thm
+
+pub fn uniform_density_zero() -> @kernel.Thm
+
+pub fn uniform_distributed() -> @kernel.Thm
+
+pub fn uniform_mean() -> @kernel.Thm
+
+pub fn uniform_mean_integral() -> @kernel.Thm
+
+pub fn uniform_second_moment() -> @kernel.Thm
+
+pub fn uniform_second_moment_integral() -> @kernel.Thm
+
+pub fn uniform_variance_integral() -> @kernel.Thm
+
+pub fn variance_exponential_dist() -> @kernel.Thm
+
+pub fn variance_geometric_dist() -> @kernel.Thm
+
+pub fn variance_normal_dist() -> @kernel.Thm
+
+pub fn variance_poisson_dist() -> @kernel.Thm
+
+pub fn variance_uniform_dist() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
