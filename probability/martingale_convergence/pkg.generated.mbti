@@ -1,0 +1,733 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/probability/martingale_convergence"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abel_summation_convergence() -> @kernel.Thm
+
+pub fn abs_cont() -> @kernel.Thm
+
+pub fn abs_lim() -> @kernel.Thm
+
+pub fn absolutely_continuous_restrict() -> @kernel.Thm
+
+pub fn adapted_imp_rv() -> @kernel.Thm
+
+pub fn adapted_neg_backward() -> @kernel.Thm
+
+pub fn almost_surely_univ() -> @kernel.Thm
+
+pub fn backward_downcrossing_expectation_bound() -> @kernel.Thm
+
+pub fn backward_downcrossing_expectation_bound_l1() -> @kernel.Thm
+
+pub fn backward_downcrossing_prob_bound_l1() -> @kernel.Thm
+
+pub fn backward_martingale_almost_surely_bounded() -> @kernel.Thm
+
+pub fn backward_martingale_convergence_l1_bounded() -> @kernel.Thm
+
+pub fn backward_martingale_rv() -> @kernel.Thm
+
+pub fn backward_maximal_pos_part() -> @kernel.Thm
+
+pub fn backward_neg_part_maximal() -> @kernel.Thm
+
+pub fn backward_simple_running_max_neg_part_event() -> @kernel.Thm
+
+pub fn backward_simple_running_max_pos_part_event() -> @kernel.Thm
+
+pub fn bet_gain() -> @kernel.Thm
+
+pub fn bet_gain_decomposition() -> @kernel.Thm
+
+pub fn bounded_finite_downcrossings_imp_convergent() -> @kernel.Thm
+
+pub fn bounded_finite_upcrossings_imp_convergent() -> @kernel.Thm
+
+pub fn bounded_not_convergent_imp_oscillation() -> @kernel.Thm
+
+pub fn cond_exp() -> @kernel.Thm
+
+pub fn cond_exp_agrees_simple() -> @kernel.Thm
+
+pub fn cond_exp_atom_cond() -> @kernel.Thm
+
+pub fn cond_exp_conditioning() -> @kernel.Thm
+
+pub fn cond_exp_constant_on_atom() -> @kernel.Thm
+
+pub fn cond_exp_indicator_bounded_ae() -> @kernel.Thm
+
+pub fn cond_exp_integrable() -> @kernel.Thm
+
+pub fn cond_exp_l2_contraction() -> @kernel.Thm
+
+pub fn cond_exp_measurable_wrt() -> @kernel.Thm
+
+pub fn cond_exp_range_finite() -> @kernel.Thm
+
+pub fn cond_exp_simple_rv() -> @kernel.Thm
+
+pub fn cond_exp_take_out() -> @kernel.Thm
+
+pub fn cond_exp_tower() -> @kernel.Thm
+
+pub fn cond_variance() -> @kernel.Thm
+
+pub fn continuous_compose_seq() -> @kernel.Thm
+
+pub fn convex_affine_minorant_sup() -> @kernel.Thm
+
+pub fn convex_cont_at() -> @kernel.Thm
+
+pub fn dc_continuation() -> @kernel.Thm
+
+pub fn dc_le_rev_uc() -> @kernel.Thm
+
+pub fn dc_le_rev_uc_case_ge() -> @kernel.Thm
+
+pub fn dc_le_rev_uc_case_lt() -> @kernel.Thm
+
+pub fn dc_phase_shift() -> @kernel.Thm
+
+pub fn dc_phase_stays_1() -> @kernel.Thm
+
+pub fn dc_restart() -> @kernel.Thm
+
+pub fn decomposition_unbounded_iff() -> @kernel.Thm
+
+pub fn decr_integral_tends_0() -> @kernel.Thm
+
+pub fn decr_integral_tends_0_ae() -> @kernel.Thm
+
+pub fn discriminant_nonneg() -> @kernel.Thm
+
+pub fn doob_martingale() -> @kernel.Thm
+
+pub fn doob_maximal_pos_part() -> @kernel.Thm
+
+pub fn doob_upcrossing_inequality() -> @kernel.Thm
+
+pub fn downcrossing_count() -> @kernel.Thm
+
+pub fn downcrossing_count_eq_neg() -> @kernel.Thm
+
+pub fn downcrossing_phase() -> @kernel.Thm
+
+pub fn downcrossing_phase_eq_neg() -> @kernel.Thm
+
+pub fn downcrossing_prob_bound() -> @kernel.Thm
+
+pub fn dyadic_approx_bound() -> @kernel.Thm
+
+pub fn dyadic_bound() -> @kernel.Thm
+
+pub fn dyadic_conv() -> @kernel.Thm
+
+pub fn dyadic_level() -> @kernel.Thm
+
+pub fn dyadic_measurable() -> @kernel.Thm
+
+pub fn dyadic_simple() -> @kernel.Thm
+
+pub fn exp_affine_decomp() -> @kernel.Thm
+
+pub fn exp_simple_mul_decomp() -> @kernel.Thm
+
+pub fn expectation_abs_from_square() -> @kernel.Thm
+
+pub fn expectation_ae_zero() -> @kernel.Thm
+
+pub fn expectation_mono_ae() -> @kernel.Thm
+
+pub fn expectation_mul_indicator_conull() -> @kernel.Thm
+
+pub fn expectation_mul_indicator_zero_prob() -> @kernel.Thm
+
+pub fn expectation_nonneg_zero_ae_zero() -> @kernel.Thm
+
+pub fn expectation_restrict() -> @kernel.Thm
+
+pub fn expectation_sq_orthogonal() -> @kernel.Thm
+
+pub fn expectation_sum_finite() -> @kernel.Thm
+
+pub fn expectation_zero_ae_bounded_measurable() -> @kernel.Thm
+
+pub fn expectation_zero_bounded_measurable() -> @kernel.Thm
+
+pub fn expectation_zero_halving() -> @kernel.Thm
+
+pub fn filtration_const_events() -> @kernel.Thm
+
+pub fn finite_downcrossings_as() -> @kernel.Thm
+
+pub fn finite_downcrossings_as_l1_backward() -> @kernel.Thm
+
+pub fn finite_prefix_lower_bound() -> @kernel.Thm
+
+pub fn finite_sigma_atoms() -> @kernel.Thm
+
+pub fn finite_upcrossings_as_l1() -> @kernel.Thm
+
+pub fn finite_upcrossings_convergent_or_minus_inf() -> @kernel.Thm
+
+pub fn g_set_union_of_atoms() -> @kernel.Thm
+
+pub fn gen_cond_exp() -> @kernel.Thm
+
+pub fn gen_cond_exp_abs_bound() -> @kernel.Thm
+
+pub fn gen_cond_exp_add() -> @kernel.Thm
+
+pub fn gen_cond_exp_ae_unique() -> @kernel.Thm
+
+pub fn gen_cond_exp_affine() -> @kernel.Thm
+
+pub fn gen_cond_exp_cauchy_schwarz() -> @kernel.Thm
+
+pub fn gen_cond_exp_cmul() -> @kernel.Thm
+
+pub fn gen_cond_exp_conditioning() -> @kernel.Thm
+
+pub fn gen_cond_exp_const() -> @kernel.Thm
+
+pub fn gen_cond_exp_dct() -> @kernel.Thm
+
+pub fn gen_cond_exp_decr_tends_0() -> @kernel.Thm
+
+pub fn gen_cond_exp_exists() -> @kernel.Thm
+
+pub fn gen_cond_exp_integrable() -> @kernel.Thm
+
+pub fn gen_cond_exp_iterated() -> @kernel.Thm
+
+pub fn gen_cond_exp_jensen() -> @kernel.Thm
+
+pub fn gen_cond_exp_jensen_exp() -> @kernel.Thm
+
+pub fn gen_cond_exp_l2_contraction() -> @kernel.Thm
+
+pub fn gen_cond_exp_linear3() -> @kernel.Thm
+
+pub fn gen_cond_exp_mct() -> @kernel.Thm
+
+pub fn gen_cond_exp_measurable_wrt() -> @kernel.Thm
+
+pub fn gen_cond_exp_monotone() -> @kernel.Thm
+
+pub fn gen_cond_exp_nonneg() -> @kernel.Thm
+
+pub fn gen_cond_exp_self() -> @kernel.Thm
+
+pub fn gen_cond_exp_seq_mono_ae() -> @kernel.Thm
+
+pub fn gen_cond_exp_sub() -> @kernel.Thm
+
+pub fn gen_cond_exp_take_out_affine() -> @kernel.Thm
+
+pub fn gen_cond_exp_take_out_bounded() -> @kernel.Thm
+
+pub fn gen_cond_exp_take_out_indicator() -> @kernel.Thm
+
+pub fn gen_cond_exp_take_out_simple() -> @kernel.Thm
+
+pub fn gen_cond_exp_tower() -> @kernel.Thm
+
+pub fn gen_cond_exp_triangle() -> @kernel.Thm
+
+pub fn gen_doob_compensator() -> @kernel.Thm
+
+pub fn gen_doob_compensator_ae_increasing() -> @kernel.Thm
+
+pub fn gen_doob_compensator_gen_predictable() -> @kernel.Thm
+
+pub fn gen_doob_compensator_integrable() -> @kernel.Thm
+
+pub fn gen_doob_compensator_martingale() -> @kernel.Thm
+
+pub fn gen_doob_compensator_measurable_wrt() -> @kernel.Thm
+
+pub fn gen_doob_decomposition() -> @kernel.Thm
+
+pub fn gen_doob_decomposition_super() -> @kernel.Thm
+
+pub fn gen_doob_martingale() -> @kernel.Thm
+
+pub fn gen_predictable() -> @kernel.Thm
+
+pub fn in_subset_transfer() -> @kernel.Thm
+
+pub fn indicator_sum_bounded() -> @kernel.Thm
+
+pub fn indicator_sum_compensator_identity() -> @kernel.Thm
+
+pub fn indicator_sum_cond_exp_step() -> @kernel.Thm
+
+pub fn indicator_sum_submartingale() -> @kernel.Thm
+
+pub fn infinite_downcrossings_null() -> @kernel.Thm
+
+pub fn infinite_upcrossings_null_l1() -> @kernel.Thm
+
+pub fn integrable_abs_indicator() -> @kernel.Thm
+
+pub fn integrable_affine_ind_mul() -> @kernel.Thm
+
+pub fn integrable_carrier_agree() -> @kernel.Thm
+
+pub fn integrable_mul_bounded() -> @kernel.Thm
+
+pub fn integrable_num_downcrossings() -> @kernel.Thm
+
+pub fn integrable_num_upcrossings() -> @kernel.Thm
+
+pub fn integrable_product_indicator() -> @kernel.Thm
+
+pub fn integrable_restrict_imp() -> @kernel.Thm
+
+pub fn integrable_sum_finite() -> @kernel.Thm
+
+pub fn integrable_truncation() -> @kernel.Thm
+
+pub fn integral_gap_tends_0() -> @kernel.Thm
+
+pub fn inters_unions_in_events() -> @kernel.Thm
+
+pub fn kronecker_rescaled() -> @kernel.Thm
+
+pub fn law_of_total_variance() -> @kernel.Thm
+
+pub fn levy_conditional_borel_cantelli() -> @kernel.Thm
+
+pub fn limsup_events_iff_sum_unbounded() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn markov_ge() -> @kernel.Thm
+
+pub fn martingale_diff_orthogonal() -> @kernel.Thm
+
+pub fn martingale_neg() -> @kernel.Thm
+
+pub fn measurable_wrt_add() -> @kernel.Thm
+
+pub fn measurable_wrt_cmul() -> @kernel.Thm
+
+pub fn measurable_wrt_constant_on_atom() -> @kernel.Thm
+
+pub fn measurable_wrt_diff_lt() -> @kernel.Thm
+
+pub fn measurable_wrt_indicator() -> @kernel.Thm
+
+pub fn measurable_wrt_inv_ge_one() -> @kernel.Thm
+
+pub fn measurable_wrt_level_set() -> @kernel.Thm
+
+pub fn measurable_wrt_lt() -> @kernel.Thm
+
+pub fn measurable_wrt_max_const() -> @kernel.Thm
+
+pub fn measurable_wrt_min_const() -> @kernel.Thm
+
+pub fn measurable_wrt_mul() -> @kernel.Thm
+
+pub fn measurable_wrt_mul_indicator() -> @kernel.Thm
+
+pub fn measurable_wrt_neg() -> @kernel.Thm
+
+pub fn measurable_wrt_pow2() -> @kernel.Thm
+
+pub fn measurable_wrt_reallim() -> @kernel.Thm
+
+pub fn measurable_wrt_strict_lt() -> @kernel.Thm
+
+pub fn measurable_wrt_sub() -> @kernel.Thm
+
+pub fn measurable_wrt_sum() -> @kernel.Thm
+
+pub fn min_le_iff() -> @kernel.Thm
+
+pub fn min_le_right() -> @kernel.Thm
+
+pub fn mwrt_affine() -> @kernel.Thm
+
+pub fn nn_expectation_restrict() -> @kernel.Thm
+
+pub fn nn_expectation_restrict_bounded() -> @kernel.Thm
+
+pub fn nonneg_measurable_wrt_zero_integrals_ae_zero() -> @kernel.Thm
+
+pub fn nonneg_rationals_dense() -> @kernel.Thm
+
+pub fn nonneg_simple_fn_approx_restrict() -> @kernel.Thm
+
+pub fn nonneg_submartingale_maximal() -> @kernel.Thm
+
+pub fn not_bet_gain() -> @kernel.Thm
+
+pub fn not_bet_gain_nonneg_expectation() -> @kernel.Thm
+
+pub fn not_bet_gain_pos_part_nonneg() -> @kernel.Thm
+
+pub fn num_downcrossings() -> @kernel.Thm
+
+pub fn num_downcrossings_ge_event() -> @kernel.Thm
+
+pub fn num_downcrossings_mono() -> @kernel.Thm
+
+pub fn num_upcrossings() -> @kernel.Thm
+
+pub fn num_upcrossings_ge_event() -> @kernel.Thm
+
+pub fn num_upcrossings_mono() -> @kernel.Thm
+
+pub fn optional_stopping_ui() -> @kernel.Thm
+
+pub fn pos_part() -> @kernel.Thm
+
+pub fn pos_part_bound() -> @kernel.Thm
+
+pub fn pos_part_indicator_form() -> @kernel.Thm
+
+pub fn pos_part_le_iff() -> @kernel.Thm
+
+pub fn pos_part_neg() -> @kernel.Thm
+
+pub fn pos_part_nonneg() -> @kernel.Thm
+
+pub fn pos_part_pos() -> @kernel.Thm
+
+pub fn pos_part_sub_le_abs() -> @kernel.Thm
+
+pub fn pow2_shrink_zero() -> @kernel.Thm
+
+pub fn prob_increasing_union_bound() -> @kernel.Thm
+
+pub fn prob_unions_increasing_bound() -> @kernel.Thm
+
+pub fn radon_nikodym_unique() -> @kernel.Thm
+
+pub fn random_variable_div_pos() -> @kernel.Thm
+
+pub fn random_variable_restrict_forward() -> @kernel.Thm
+
+pub fn random_variable_sup_seq_fn() -> @kernel.Thm
+
+pub fn random_variable_truncation() -> @kernel.Thm
+
+pub fn rational_discriminant() -> @kernel.Thm
+
+pub fn rational_discriminant_density() -> @kernel.Thm
+
+pub fn rational_enumeration() -> @kernel.Thm
+
+pub fn real_abs_div_le() -> @kernel.Thm
+
+pub fn real_convex_supporting_line() -> @kernel.Thm
+
+pub fn real_div_abs_le_1() -> @kernel.Thm
+
+pub fn real_eq_0_from_inv_bound() -> @kernel.Thm
+
+pub fn real_eq_epsilon() -> @kernel.Thm
+
+pub fn real_le_zero_from_bound() -> @kernel.Thm
+
+pub fn real_of_num_cond_01() -> @kernel.Thm
+
+pub fn rescaled_indicator_convergence() -> @kernel.Thm
+
+pub fn rescaled_indicator_convergence_max() -> @kernel.Thm
+
+pub fn rescaled_max_l2_bounded() -> @kernel.Thm
+
+pub fn rescaled_max_martingale() -> @kernel.Thm
+
+pub fn rescaled_truncated_l2() -> @kernel.Thm
+
+pub fn restrict_prob_space() -> @kernel.Thm
+
+pub fn restrict_prob_space_carrier() -> @kernel.Thm
+
+pub fn restrict_prob_space_events() -> @kernel.Thm
+
+pub fn restrict_prob_space_ops() -> @kernel.Thm
+
+pub fn restrict_prob_space_prob() -> @kernel.Thm
+
+pub fn reversed_is_submartingale() -> @kernel.Thm
+
+pub fn running_max_bounded() -> @kernel.Thm
+
+pub fn running_max_ge() -> @kernel.Thm
+
+pub fn running_max_mono_suc() -> @kernel.Thm
+
+pub fn running_max_neg_part_event() -> @kernel.Thm
+
+pub fn running_max_pos_part_event() -> @kernel.Thm
+
+pub fn running_max_rev() -> @kernel.Thm
+
+pub fn rv_le_event() -> @kernel.Thm
+
+pub fn rv_num_downcrossings() -> @kernel.Thm
+
+pub fn rv_num_upcrossings() -> @kernel.Thm
+
+pub fn shifted_filtration() -> @kernel.Thm
+
+pub fn sigma_atom() -> @kernel.Thm
+
+pub fn sigma_atom_contains() -> @kernel.Thm
+
+pub fn sigma_atom_equal_or_disjoint() -> @kernel.Thm
+
+pub fn sigma_atom_in_g() -> @kernel.Thm
+
+pub fn sigma_atom_same() -> @kernel.Thm
+
+pub fn sigma_atom_subset() -> @kernel.Thm
+
+pub fn sigma_atom_subset_carrier() -> @kernel.Thm
+
+pub fn simple_backward_martingale_convergence_bounded() -> @kernel.Thm
+
+pub fn simple_cond_exp() -> @kernel.Thm
+
+pub fn simple_cond_exp_atom_cond() -> @kernel.Thm
+
+pub fn simple_cond_exp_conditioning() -> @kernel.Thm
+
+pub fn simple_cond_exp_constant_on_atom() -> @kernel.Thm
+
+pub fn simple_cond_exp_exists() -> @kernel.Thm
+
+pub fn simple_cond_exp_measurable_wrt_g() -> @kernel.Thm
+
+pub fn simple_cond_exp_property() -> @kernel.Thm
+
+pub fn simple_cond_exp_range_finite() -> @kernel.Thm
+
+pub fn simple_cond_exp_simple_rv() -> @kernel.Thm
+
+pub fn simple_cond_exp_simple_rv_wrt() -> @kernel.Thm
+
+pub fn simple_doob_maximal_pos_part() -> @kernel.Thm
+
+pub fn simple_doob_upcrossing_inequality() -> @kernel.Thm
+
+pub fn simple_expectation_mul_indicator_zero_prob() -> @kernel.Thm
+
+pub fn simple_expectation_null_event() -> @kernel.Thm
+
+pub fn simple_expectation_partition() -> @kernel.Thm
+
+pub fn simple_expectation_restrict() -> @kernel.Thm
+
+pub fn simple_finite_upcrossings_as() -> @kernel.Thm
+
+pub fn simple_finite_upcrossings_as_l1() -> @kernel.Thm
+
+pub fn simple_infinite_upcrossings_null() -> @kernel.Thm
+
+pub fn simple_infinite_upcrossings_null_l1() -> @kernel.Thm
+
+pub fn simple_martingale_convergence_bounded() -> @kernel.Thm
+
+pub fn simple_martingale_convergence_l1_bounded() -> @kernel.Thm
+
+pub fn simple_num_downcrossings_ge_event() -> @kernel.Thm
+
+pub fn simple_num_upcrossings_ge_event() -> @kernel.Thm
+
+pub fn simple_reversed_is_submartingale() -> @kernel.Thm
+
+pub fn simple_running_max_neg_part_event() -> @kernel.Thm
+
+pub fn simple_running_max_pos_part_event() -> @kernel.Thm
+
+pub fn simple_rv_abs_bounded() -> @kernel.Thm
+
+pub fn simple_rv_agree() -> @kernel.Thm
+
+pub fn simple_rv_le_event() -> @kernel.Thm
+
+pub fn simple_rv_not_bet_indicator() -> @kernel.Thm
+
+pub fn simple_rv_num_downcrossings() -> @kernel.Thm
+
+pub fn simple_rv_num_upcrossings() -> @kernel.Thm
+
+pub fn simple_rv_pos_part() -> @kernel.Thm
+
+pub fn simple_rv_pos_part_sub() -> @kernel.Thm
+
+pub fn simple_rv_restrict_forward() -> @kernel.Thm
+
+pub fn simple_rv_sum_indicator() -> @kernel.Thm
+
+pub fn simple_submartingale_neg_part_maximal() -> @kernel.Thm
+
+pub fn simple_submartingale_pos_part() -> @kernel.Thm
+
+pub fn simple_submartingale_pos_part_step() -> @kernel.Thm
+
+pub fn simple_submartingale_sub_const_step() -> @kernel.Thm
+
+pub fn simple_ui_submartingale_convergence_as() -> @kernel.Thm
+
+pub fn simple_upcrossing_expectation_bound() -> @kernel.Thm
+
+pub fn simple_upcrossing_expectation_bound_l1() -> @kernel.Thm
+
+pub fn simple_upcrossing_prob_bound() -> @kernel.Thm
+
+pub fn simple_upcrossing_prob_bound_l1() -> @kernel.Thm
+
+pub fn stopped_process_pointwise_limit() -> @kernel.Thm
+
+pub fn stopped_process_truncation_agree() -> @kernel.Thm
+
+pub fn stopping_time_min() -> @kernel.Thm
+
+pub fn sub_sigma_algebra_pred() -> @kernel.Thm
+
+pub fn sub_sigma_algebra_self() -> @kernel.Thm
+
+pub fn sub_sigma_algebra_subset() -> @kernel.Thm
+
+pub fn submartingale_almost_surely_bounded() -> @kernel.Thm
+
+pub fn submartingale_convergence_l1_bounded() -> @kernel.Thm
+
+pub fn submartingale_gen_cond_exp_ge() -> @kernel.Thm
+
+pub fn submartingale_multi_step() -> @kernel.Thm
+
+pub fn submartingale_neg_part_maximal() -> @kernel.Thm
+
+pub fn submartingale_optional_stopping_ui() -> @kernel.Thm
+
+pub fn submartingale_pos_part() -> @kernel.Thm
+
+pub fn submartingale_sub_const() -> @kernel.Thm
+
+pub fn summation_by_parts() -> @kernel.Thm
+
+pub fn sup_seq_via_inf() -> @kernel.Thm
+
+pub fn sup_tail_tends_0() -> @kernel.Thm
+
+pub fn supermartingale_neg_submartingale() -> @kernel.Thm
+
+pub fn supermartingale_optional_stopping_ui() -> @kernel.Thm
+
+pub fn supporting_slope() -> @kernel.Thm
+
+pub fn telescoping_step() -> @kernel.Thm
+
+pub fn telescoping_sum_bound() -> @kernel.Thm
+
+pub fn telescoping_sum_bound_simple() -> @kernel.Thm
+
+pub fn telescoping_variance_bound() -> @kernel.Thm
+
+pub fn telescoping_variance_bound_simple() -> @kernel.Thm
+
+pub fn three_slopes() -> @kernel.Thm
+
+pub fn to_pointwise() -> @kernel.Thm
+
+pub fn truncated_diff_expectation_zero() -> @kernel.Thm
+
+pub fn truncated_diff_sq_bound() -> @kernel.Thm
+
+pub fn truncation_abs_diff() -> @kernel.Thm
+
+pub fn truncation_preserves_limit() -> @kernel.Thm
+
+pub fn uc_completes() -> @kernel.Thm
+
+pub fn uc_increment_phase_change() -> @kernel.Thm
+
+pub fn uc_prefix() -> @kernel.Thm
+
+pub fn ui_backward_martingale_convergence_as() -> @kernel.Thm
+
+pub fn ui_martingale_closure() -> @kernel.Thm
+
+pub fn ui_pointwise_l1_ae() -> @kernel.Thm
+
+pub fn ui_submartingale_convergence_as() -> @kernel.Thm
+
+pub fn up_phase_01() -> @kernel.Thm
+
+pub fn up_phase_1_not_ge_b() -> @kernel.Thm
+
+pub fn up_phase_when_le_a() -> @kernel.Thm
+
+pub fn upcrossing_bet() -> @kernel.Thm
+
+pub fn upcrossing_bound() -> @kernel.Thm
+
+pub fn upcrossing_bound_invariant() -> @kernel.Thm
+
+pub fn upcrossing_count() -> @kernel.Thm
+
+pub fn upcrossing_count_at_transition() -> @kernel.Thm
+
+pub fn upcrossing_count_increasing() -> @kernel.Thm
+
+pub fn upcrossing_count_increment() -> @kernel.Thm
+
+pub fn upcrossing_count_iterate() -> @kernel.Thm
+
+pub fn upcrossing_count_le() -> @kernel.Thm
+
+pub fn upcrossing_count_mono() -> @kernel.Thm
+
+pub fn upcrossing_count_phase1_increment() -> @kernel.Thm
+
+pub fn upcrossing_count_shift() -> @kernel.Thm
+
+pub fn upcrossing_expectation_bound_l1() -> @kernel.Thm
+
+pub fn upcrossing_inequality_pointwise() -> @kernel.Thm
+
+pub fn upcrossing_phase() -> @kernel.Thm
+
+pub fn upcrossing_phase_below() -> @kernel.Thm
+
+pub fn upcrossing_phase_binary() -> @kernel.Thm
+
+pub fn upcrossing_phase_set_in_filtration() -> @kernel.Thm
+
+pub fn upcrossing_phase_shift() -> @kernel.Thm
+
+pub fn upcrossing_phase_suc_0() -> @kernel.Thm
+
+pub fn upcrossing_phase_suc_1() -> @kernel.Thm
+
+pub fn upcrossing_phase_transition_1() -> @kernel.Thm
+
+pub fn upcrossing_pointwise_sum_bound() -> @kernel.Thm
+
+pub fn upcrossing_prob_bound_l1() -> @kernel.Thm
+
+pub fn x2_convex() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
