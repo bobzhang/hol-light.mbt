@@ -1,0 +1,182 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/padics"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn card_eq_padic() -> @kernel.Thm
+
+pub fn closure_of_prational() -> @kernel.Thm
+
+pub fn continuous_map_padic_add() -> @kernel.Thm
+
+pub fn continuous_map_padic_addition() -> @kernel.Thm
+
+pub fn continuous_map_padic_mul() -> @kernel.Thm
+
+pub fn continuous_map_padic_multiplication() -> @kernel.Thm
+
+pub fn continuous_map_padic_neg() -> @kernel.Thm
+
+pub fn continuous_map_padic_sub() -> @kernel.Thm
+
+pub fn derived_set_of_prational() -> @kernel.Thm
+
+pub fn forall_in_padic_closure_of() -> @kernel.Thm
+
+pub fn hausdorff_space_padic_topology() -> @kernel.Thm
+
+pub fn image_padic_of_rational_rational() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mcomplete_padic_metric() -> @kernel.Thm
+
+pub fn mspace_padic_metric() -> @kernel.Thm
+
+pub fn padic_add_assoc() -> @kernel.Thm
+
+pub fn padic_add_ldistrib() -> @kernel.Thm
+
+pub fn padic_add_lid() -> @kernel.Thm
+
+pub fn padic_add_linv() -> @kernel.Thm
+
+pub fn padic_add_of_rational() -> @kernel.Thm
+
+pub fn padic_add_sym() -> @kernel.Thm
+
+pub fn padic_entire() -> @kernel.Thm
+
+pub fn padic_inv() -> @kernel.Thm
+
+pub fn padic_inv_0() -> @kernel.Thm
+
+pub fn padic_metric() -> @kernel.Thm
+
+pub fn padic_mul_assoc() -> @kernel.Thm
+
+pub fn padic_mul_lid() -> @kernel.Thm
+
+pub fn padic_mul_linv() -> @kernel.Thm
+
+pub fn padic_mul_of_rational() -> @kernel.Thm
+
+pub fn padic_mul_rinv() -> @kernel.Thm
+
+pub fn padic_mul_sym() -> @kernel.Thm
+
+pub fn padic_neg() -> @kernel.Thm
+
+pub fn padic_neg_of_rational() -> @kernel.Thm
+
+pub fn padic_of_num() -> @kernel.Thm
+
+pub fn padic_of_rational() -> @kernel.Thm
+
+pub fn padic_sub() -> @kernel.Thm
+
+pub fn padic_sub_of_rational() -> @kernel.Thm
+
+pub fn padic_topology() -> @kernel.Thm
+
+pub fn padic_tybij() -> @kernel.Thm
+
+pub fn pdist() -> @kernel.Thm
+
+pub fn pdist_alt() -> @kernel.Thm
+
+pub fn pdist_eq_0() -> @kernel.Thm
+
+pub fn pdist_gen() -> @kernel.Thm
+
+pub fn pdist_pnorm() -> @kernel.Thm
+
+pub fn pdist_pos_le() -> @kernel.Thm
+
+pub fn pdist_refl() -> @kernel.Thm
+
+pub fn pdist_sym() -> @kernel.Thm
+
+pub fn pdist_triangle() -> @kernel.Thm
+
+pub fn pdist_ultra() -> @kernel.Thm
+
+pub fn pdist_v1() -> @kernel.Thm
+
+pub fn pnorm() -> @kernel.Thm
+
+pub fn pnorm_0() -> @kernel.Thm
+
+pub fn pnorm_0_v1() -> @kernel.Thm
+
+pub fn pnorm_1() -> @kernel.Thm
+
+pub fn pnorm_eq_0() -> @kernel.Thm
+
+pub fn pnorm_inv() -> @kernel.Thm
+
+pub fn pnorm_mul() -> @kernel.Thm
+
+pub fn pnorm_neg() -> @kernel.Thm
+
+pub fn pnorm_pos_le() -> @kernel.Thm
+
+pub fn pnorm_pos_lt() -> @kernel.Thm
+
+pub fn pnorm_rational() -> @kernel.Thm
+
+pub fn pnorm_triangle() -> @kernel.Thm
+
+pub fn pnorm_ultra() -> @kernel.Thm
+
+pub fn prational() -> @kernel.Thm
+
+pub fn qadic_metric() -> @kernel.Thm
+
+pub fn qadic_metric_v1() -> @kernel.Thm
+
+pub fn qadic_ultrametric() -> @kernel.Thm
+
+pub fn qnorm() -> @kernel.Thm
+
+pub fn qnorm_0() -> @kernel.Thm
+
+pub fn qnorm_1() -> @kernel.Thm
+
+pub fn qnorm_abs() -> @kernel.Thm
+
+pub fn qnorm_def() -> @kernel.Thm
+
+pub fn qnorm_eq_0() -> @kernel.Thm
+
+pub fn qnorm_inv() -> @kernel.Thm
+
+pub fn qnorm_mul() -> @kernel.Thm
+
+pub fn qnorm_neg() -> @kernel.Thm
+
+pub fn qnorm_pos_le() -> @kernel.Thm
+
+pub fn qnorm_pos_lt() -> @kernel.Thm
+
+pub fn qnorm_triangle() -> @kernel.Thm
+
+pub fn qnorm_ultra() -> @kernel.Thm
+
+pub fn rational_of_padic() -> @kernel.Thm
+
+pub fn simple_padic_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn topspace_padic_topology() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

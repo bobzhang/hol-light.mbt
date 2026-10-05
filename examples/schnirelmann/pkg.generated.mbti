@@ -1,0 +1,87 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/schnirelmann"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn card_inter_0_1() -> @kernel.Thm
+
+pub fn count() -> @kernel.Thm
+
+pub fn count_bound() -> @kernel.Thm
+
+pub fn count_insensitive() -> @kernel.Thm
+
+pub fn count_mono() -> @kernel.Thm
+
+pub fn count_univ() -> @kernel.Thm
+
+pub fn enumeration_lemma() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn monoidal_sumset() -> @kernel.Thm
+
+pub fn neutral_sumset() -> @kernel.Thm
+
+pub fn schnirelman_lemma() -> @kernel.Thm
+
+pub fn schnirelmann() -> @kernel.Thm
+
+pub fn schnirelmann_bounds() -> @kernel.Thm
+
+pub fn schnirelmann_direct() -> @kernel.Thm
+
+pub fn schnirelmann_eq_1() -> @kernel.Thm
+
+pub fn schnirelmann_insensitive() -> @kernel.Thm
+
+pub fn schnirelmann_lbound() -> @kernel.Thm
+
+pub fn schnirelmann_mono() -> @kernel.Thm
+
+pub fn schnirelmann_sensitive() -> @kernel.Thm
+
+pub fn schnirelmann_sensitive_1() -> @kernel.Thm
+
+pub fn schnirelmann_sumset() -> @kernel.Thm
+
+pub fn schnirelmann_sumset_gen() -> @kernel.Thm
+
+pub fn schnirelmann_sumset_pow() -> @kernel.Thm
+
+pub fn schnirelmann_theorem() -> @kernel.Thm
+
+pub fn schnirelmann_theorem_2() -> @kernel.Thm
+
+pub fn schnirelmann_ubound() -> @kernel.Thm
+
+pub fn schnirelmann_ubound_mul() -> @kernel.Thm
+
+pub fn schnirelmann_univ() -> @kernel.Thm
+
+pub fn schnirelmann_v1() -> @kernel.Thm
+
+pub fn sumset() -> @kernel.Thm
+
+pub fn sumset_0() -> @kernel.Thm
+
+pub fn sumset_0_iter() -> @kernel.Thm
+
+pub fn sumset_assoc() -> @kernel.Thm
+
+pub fn sumset_superset_lzero() -> @kernel.Thm
+
+pub fn sumset_superset_rzero() -> @kernel.Thm
+
+pub fn sumset_sym() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
