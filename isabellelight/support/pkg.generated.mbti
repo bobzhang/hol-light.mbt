@@ -1,0 +1,49 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/isabellelight/support"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/pp",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn add_hyp(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn dischl(@list.List[@kernel.Term], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn[TA, TB, TC] fst3(TA, TB, TC) -> TA raise
+
+pub fn gl_frees(@list.List[(String, @kernel.Thm)], @kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn hide_types(Unit) -> Unit raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn print_goalstack_meta(@list.List[((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)]) -> Unit raise
+
+pub fn print_varandtype(@pp.Formatter, @kernel.Term) -> Unit raise
+
+pub fn show_types(Unit) -> Unit raise
+
+pub fn[TA, TB, TC] snd3(TB, TA, TC) -> TA raise
+
+pub fn terms_match(@list.List[@kernel.Term], @kernel.Term, @list.List[@kernel.Term]) -> (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise
+
+pub fn[TA, TB, TC] thd3(TB, TC, TA) -> TA raise
+
+pub fn thm_mk_primed_vars(@list.List[@kernel.Term], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn top_metas(@list.List[((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)]) -> @list.List[@kernel.Term] raise
+
+pub fn try_type(@kernel.HolType, @kernel.Term) -> @kernel.Term raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
