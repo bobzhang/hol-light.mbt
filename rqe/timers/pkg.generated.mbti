@@ -20,6 +20,8 @@ pub fn inferpsign_timer() -> @ref.Ref[Double]
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn matinsert_timer() -> @ref.Ref[Double]
 
 pub fn pdivides_timer() -> @ref.Ref[Double]

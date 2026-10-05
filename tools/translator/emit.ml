@@ -58,6 +58,27 @@ module Emit = struct
     in
     go 0
 
+  (* The cell of a top-level value: `<name>_c`, unless that is a name of
+     the file too (Autoformalization/carleson.ml proves CW_TAIL_LIM and
+     CW_TAIL_LIM_C). *)
+  let cell_names : (string, string) Hashtbl.t = Hashtbl.create 64
+  let file_names : (string, unit) Hashtbl.t Lazy.t =
+    lazy (let t = Hashtbl.create 64 in
+          Hashtbl.iter (fun n _ -> Hashtbl.replace t (sanitize n) ()) remaining_defs;
+          t)
+
+  let cell_of mname =
+    match Hashtbl.find_opt cell_names mname with
+    | Some c -> c
+    | None ->
+        let rec go n =
+          if Hashtbl.mem used_names n || Hashtbl.mem (Lazy.force file_names) n then go (n ^ "_")
+          else (Hashtbl.add used_names n (); n)
+        in
+        let c = go (mname ^ "_c") in
+        Hashtbl.replace cell_names mname c;
+        c
+
   let rec is_function e =
     match e.exp_desc with Texp_function _ -> true | _ -> false
 
@@ -147,8 +168,8 @@ module Emit = struct
              match arrow oty with
              | Some (a, b) ->
                  Printf.sprintf
-                   "\n///|\nlet %s_c : @lib.Cell[%s] = @lib.Cell::new(%s)\n\n///|\n/// `%s`\npub fn%s %s(x : %s) -> %s raise {\n  (%s_c.get())(x)\n}\n"
-                   mname ty (string_lit oname) oname (generics_of (show_ty a ^ " " ^ show_ty b)) mname (show_ty a) (paren_fn (show_ty b)) mname
+                   "\n///|\nlet %s : @lib.Cell[%s] = @lib.Cell::new(%s)\n\n///|\n/// `%s`\npub fn%s %s(x : %s) -> %s raise {\n  (%s.get())(x)\n}\n"
+                   (cell_of mname) ty (string_lit oname) oname (generics_of (show_ty a ^ " " ^ show_ty b)) mname (show_ty a) (paren_fn (show_ty b)) (cell_of mname)
              | None -> failwith "cell_decls")
      | _ ->
          add_decl (fun () ->
@@ -156,8 +177,8 @@ module Emit = struct
              let oty = installed_type slot oty0 in
              let ty = show_ty oty in
              Printf.sprintf
-               "\n///|\nlet %s_c : @lib.Cell[%s] = @lib.Cell::new(%s)\n\n///|\n/// `%s`\npub fn%s %s() -> %s {\n  %s_c.get()\n}\n"
-               mname ty (string_lit oname) oname (generics_of ty) mname ty mname));
+               "\n///|\nlet %s : @lib.Cell[%s] = @lib.Cell::new(%s)\n\n///|\n/// `%s`\npub fn%s %s() -> %s {\n  %s.get()\n}\n"
+               (cell_of mname) ty (string_lit oname) oname (generics_of ty) mname ty (cell_of mname)));
     register_own oname
       (mname, match mty with M.Fun _ -> Function mty | _ -> Accessor mty)
 
@@ -225,7 +246,7 @@ module Emit = struct
     if tyvars_of_text (show_ty e.exp_type) <> [] then freeze_vars e.exp_type;
     let mty = mty_of e.exp_type in
     let stmts, x, _ = lower ~expect:mty e in
-    add_step oname (stmts @ [ Do (Call (Atom (mname ^ "_c.set"), [ x ])) ]);
+    add_step oname (stmts @ [ Do (Call (Atom (cell_of mname ^ ".set"), [ x ])) ]);
     cell_decls oname mname e.exp_type;
     match id with
     | Some id ->
@@ -493,7 +514,7 @@ module Emit = struct
           Hashtbl.replace own_values (Ident.unique_name id)
             (mname, match mty_of ty with M.Fun _ as t -> Function t | t -> Accessor t);
           let _, v = adapt ([], Atom local.name) local.mty (mty_of ty) in
-          Do (Call (Atom (mname ^ "_c.set"), [ v ])))
+          Do (Call (Atom (cell_of mname ^ ".set"), [ v ])))
         ids
     in
     (* from now on these are top-level values, not locals *)
@@ -758,7 +779,10 @@ module Emit = struct
                     let self =
                       { e with exp_desc = Texp_ident (Path.Pident id', { name with Location.txt = Longident.Lident (Ident.name id') }, vd) }
                     in
-                    emit_pattern { vb with vb_expr = { e with exp_desc = Texp_let (Asttypes.Recursive, [ inner ], self) } }
+                    (* as a definition of one name: polymorphic when the
+                       prefix is of functions only (Functionspaces/utils.ml's
+                       simp_horn_conv), a generic wrapper then *)
+                    emit_value ~id (Ident.name id) { e with exp_desc = Texp_let (Asttypes.Recursive, [ inner ], self) }
                 | _ ->
                     (* `let rec x = e` with `e` not a function cannot
                        mention `x`: an ordinary definition (Model/syntax.ml's

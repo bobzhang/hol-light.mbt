@@ -40,6 +40,8 @@ pub fn list_tri() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn mem_remove() -> @kernel.Thm
 
 pub fn not_cons() -> @kernel.Thm

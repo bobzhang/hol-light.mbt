@@ -21,6 +21,8 @@ pub fn arith_ss(@list.List[@kernel.Thm]) -> @simp.Simpset raise
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 // Errors
 
 // Types and methods

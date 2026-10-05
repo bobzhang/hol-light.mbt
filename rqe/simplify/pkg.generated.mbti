@@ -10,6 +10,8 @@ pub fn evalc_conv(@kernel.Term) -> @kernel.Thm raise
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn psimplify1_conv(@kernel.Term) -> @kernel.Thm raise
 
 pub fn real_leaf_conv(@kernel.Term) -> @kernel.Thm raise

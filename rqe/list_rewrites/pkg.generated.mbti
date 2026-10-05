@@ -16,6 +16,8 @@ pub fn list_simp_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@li
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn not_nil() -> @kernel.Thm
 
 // Errors

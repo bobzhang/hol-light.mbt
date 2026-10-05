@@ -1,0 +1,61 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/nistp192"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abelian_p192_group() -> @kernel.Thm
+
+pub fn b_192() -> @kernel.Thm
+
+pub fn c_192() -> @kernel.Thm
+
+pub fn cyclic_p192_group() -> @kernel.Thm
+
+pub fn finite_group_carrier_p192() -> @kernel.Thm
+
+pub fn g_192() -> @kernel.Thm
+
+pub fn generated_p192_group() -> @kernel.Thm
+
+pub fn generator_in_group_carrier_192() -> @kernel.Thm
+
+pub fn group_element_order_g192() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn n_192() -> @kernel.Thm
+
+pub fn no_roots_p192() -> @kernel.Thm
+
+pub fn p192_group() -> @kernel.Thm
+
+pub fn p192_group_element_order() -> @kernel.Thm
+
+pub fn p192_group_order() -> @kernel.Thm
+
+pub fn p192_group_v1() -> @kernel.Thm
+
+pub fn p_192() -> @kernel.Thm
+
+pub fn p_192_v1() -> @kernel.Thm
+
+pub fn prime_n192() -> @kernel.Thm
+
+pub fn prime_p192() -> @kernel.Thm
+
+pub fn sanity_check_192() -> @kernel.Thm
+
+pub fn seed_192() -> @kernel.Thm
+
+pub fn size_p192_group() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

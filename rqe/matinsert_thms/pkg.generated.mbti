@@ -8,6 +8,8 @@ import {
 // Values
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn matinsert_lem0() -> @kernel.Thm
 
 // Errors

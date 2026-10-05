@@ -60,6 +60,8 @@ pub fn is_box(@kernel.Term) -> Bool raise
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn lt(@kernel.Term, @kernel.Term) -> Bool raise
 
 pub fn neg_contr_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise

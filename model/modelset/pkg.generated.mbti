@@ -132,6 +132,8 @@ pub fn level_set_exists() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn members_isaset() -> @kernel.Thm
 
 pub fn mk_v_clauses() -> @kernel.Thm

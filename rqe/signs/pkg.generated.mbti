@@ -13,6 +13,8 @@ pub fn findsign(@list.List[@kernel.Term]) -> ((@list.List[@kernel.Thm]) -> ((@ke
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn[TA] split_sign(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Term, (@list.List[@kernel.Thm]) -> ((TA) -> @kernel.Thm raise) raise, (@list.List[@kernel.Thm]) -> ((TA) -> @kernel.Thm raise) raise, TA) -> @kernel.Thm raise
 
 pub fn[TA] split_zero(@list.List[@kernel.Term], @list.List[@kernel.Thm], @kernel.Term, (@list.List[@kernel.Thm]) -> ((TA) -> @kernel.Thm raise) raise, (@list.List[@kernel.Thm]) -> ((TA) -> @kernel.Thm raise) raise, TA) -> @kernel.Thm raise

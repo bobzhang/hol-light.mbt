@@ -1485,6 +1485,16 @@ module Lower = struct
      _fn variants (MoonBit closures cannot implement NetCompare) *)
   and closure_net_variant p fty h =
     match Prov.lookup p, h.hexp with
+    | Some ("nets.ml", "enter"), Atom _
+      when (let rec result t = match arrow t with Some (_, b) -> result b | None -> t in
+            match Types.get_desc (expand (result fty)) with
+            | Types.Tconstr (_, [ a ], _) -> is_gconv_tuple a
+            | _ -> false) ->
+        (* a `(priority, conv)` pair entered into a rewrite net
+           (Jordan/tactics_ext2.ml): simp makes the GconvOf *)
+        (match M.find ~root:!Names.root "simp" "enter_gconv" with
+         | Some decl -> { h with hexp = Atom "@simp.enter_gconv"; hmty = mty_of_decl decl }
+         | None -> h)
     | Some ("nets.ml", ("enter" | "merge_nets")), Atom q ->
         let rec result t = match arrow t with Some (_, b) -> result b | None -> t in
         let elem_is_fn =
@@ -1761,11 +1771,15 @@ module Lower = struct
       | "/" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.div63", [ a; b ]))
       | "mod" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.mod63", [ a; b ]))
       | "compare" -> (2, fun [ a; b ] _ -> widen (Call (Atom "@lib.compare", [ a; b ])))
+      (* lib's reproduction of OCaml's hash (Jordan/tactics_ext2.ml) *)
+      | "Hashtbl.hash" -> (1, fun [ a ] _ -> widen (Call (Atom "@lib.hash", [ a ])))
       | ("+." | "-." | "*." | "/.") as op -> (2, fun [ a; b ] _ -> Binop (String.sub op 0 1, a, b))
       | "~-." -> (1, fun [ a ] _ -> Call (Atom "@lib.float_neg", [ a ]))
       | "float_of_int" -> (1, fun [ a ] _ -> Call (Atom "Int64::to_double", [ a ]))
       | "sqrt" | "float_sqrt" -> (1, fun [ a ] _ -> Call (Atom "Double::sqrt", [ a ]))
       | "floor" -> (1, fun [ a ] _ -> Call (Atom "Double::floor", [ a ]))
+      | "ceil" -> (1, fun [ a ] _ -> Call (Atom "Double::ceil", [ a ]))
+      | "ldexp" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.float_ldexp", [ a; b ]))
       | "abs_float" | "float_fabs" -> (1, fun [ a ] _ -> Call (Atom "Double::abs", [ a ]))
       | "max_int" -> (0, fun [] _ -> Atom "@lib.max_int63")
       | "min_int" -> (0, fun [] _ -> Atom "@lib.min_int63")
@@ -1793,7 +1807,10 @@ module Lower = struct
       | "not" -> (1, fun [ a ] _ -> Not a)
       | "@" -> (2, fun [ a; b ] _ -> Concat (a, b))
       | "failwith" -> (1, fun [ a ] _ -> Raise (Call (Atom "Failure", [ a ])))
-      | "raise" -> (1, fun [ a ] _ -> Raise a)
+      | "raise" ->
+          (* `raise (failwith m)`: the argument raises before `raise`
+             does (Jordan/num_ext_gcd.ml) *)
+          (1, fun [ a ] _ -> match a with Raise _ -> a | _ -> Raise a)
       | "ignore" -> (1, fun [ a ] _ -> Call (Atom "ignore", [ a ]))
       | "string_of_int" -> (1, fun [ a ] _ -> Call (Atom "Int64::to_string", [ a ]))
       | "string_of_float" -> (1, fun [ a ] _ -> Call (Atom "@lib.string_of_float", [ a ]))
@@ -1897,7 +1914,7 @@ module Lower = struct
     (match name with
      | "Hashtbl.add" | "Hashtbl.replace" | "Hashtbl.find" | "Hashtbl.find_opt" | "Hashtbl.mem" | "Hashtbl.remove" | "Hashtbl.find_all" ->
          (match args with _ :: k :: _ -> note_bounds [ k ] | _ -> ())
-     | "=" | "<>" | "compare" | "<" | ">" | "<=" | ">=" | "min" | "max" ->
+     | "=" | "<>" | "compare" | "<" | ">" | "<=" | ">=" | "min" | "max" | "Hashtbl.hash" ->
          note_bounds args;
          (* a partial application: the parameter types of its instance *)
          if List.length args < arity then

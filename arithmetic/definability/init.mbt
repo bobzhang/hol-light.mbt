@@ -20,3 +20,21 @@ pub fn load() -> Unit {
   }
   @parser.end_theory()
 }
+
+///|
+/// Load Arithmetic/definability.ml (once) as `needs` does: after what it needs itself, not
+/// after the files its directory's make.ml loads before it.
+pub fn load_alone() -> Unit {
+  if loaded.val {
+    return
+  }
+  loaded.val = true
+  @parser.begin_theory("Arithmetic/definability")
+  load_steps() catch {
+    e =>
+      abort(
+        "HOL Light: loading Arithmetic/definability.ml failed: " + e.to_string(),
+      )
+  }
+  @parser.end_theory()
+}

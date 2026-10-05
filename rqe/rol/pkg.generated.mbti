@@ -35,6 +35,8 @@ pub fn lem_v1() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn mk_rol(@list.List[@kernel.Thm]) -> @kernel.Thm raise
 
 pub fn not_rol() -> @kernel.Thm

@@ -43,6 +43,8 @@ pub fn hsentence_fix_strong() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn pi() -> @kernel.Thm
 
 pub fn sigma() -> @kernel.Thm

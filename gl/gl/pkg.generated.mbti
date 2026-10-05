@@ -290,6 +290,8 @@ pub fn itf_nt() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn lob_imp_transnt() -> @kernel.Thm
 
 pub fn subst() -> @kernel.Thm

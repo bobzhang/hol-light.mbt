@@ -18,3 +18,18 @@ pub fn load() -> Unit {
   }
   @parser.end_theory()
 }
+
+///|
+/// Load GL/misc.ml (once) as `needs` does: after what it needs itself, not
+/// after the files its directory's make.ml loads before it.
+pub fn load_alone() -> Unit {
+  if loaded.val {
+    return
+  }
+  loaded.val = true
+  @parser.begin_theory("GL/misc")
+  load_steps() catch {
+    e => abort("HOL Light: loading GL/misc.ml failed: " + e.to_string())
+  }
+  @parser.end_theory()
+}

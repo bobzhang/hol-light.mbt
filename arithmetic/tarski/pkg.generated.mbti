@@ -70,6 +70,8 @@ pub fn holds_qdiag() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn number() -> @kernel.Thm
 
 pub fn number_denumber() -> @kernel.Thm

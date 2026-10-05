@@ -31,6 +31,8 @@ pub fn length_conv(@kernel.Term) -> @kernel.Thm raise
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn mpoly_add_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
 
 pub fn mpoly_base_conv(@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise

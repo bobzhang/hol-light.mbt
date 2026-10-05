@@ -45,6 +45,8 @@ pub fn liouville() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn oncircle_with_diagonal() -> @kernel.Thm
 
 pub fn pair_beta_thm() -> @kernel.Thm

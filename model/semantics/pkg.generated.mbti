@@ -34,6 +34,8 @@ pub fn itlist_valmod_filter() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn mk_comb_correct() -> @kernel.Thm
 
 pub fn refl_correct() -> @kernel.Thm

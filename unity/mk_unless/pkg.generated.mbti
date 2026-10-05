@@ -22,6 +22,8 @@ pub fn invariant() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn not_not_or_lemma() -> @kernel.Thm
 
 pub fn p() -> @kernel.Term

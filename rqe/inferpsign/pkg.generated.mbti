@@ -38,6 +38,8 @@ pub fn itvars() -> @ref.Ref[@list.List[@kernel.Term]]
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn mk_rep(@kernel.Term) -> @kernel.Thm raise
 
 pub fn prove_nonzero(@kernel.Thm) -> @kernel.Thm raise

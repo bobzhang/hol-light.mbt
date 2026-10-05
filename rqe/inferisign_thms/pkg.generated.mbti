@@ -14,6 +14,8 @@ pub fn inferisign_lem00() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn lt_nz_thm() -> @kernel.Thm
 
 pub fn neg_neg_neq_thm() -> @kernel.Thm

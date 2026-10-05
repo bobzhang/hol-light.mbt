@@ -60,6 +60,8 @@ pub fn lim_poly_lt() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn mono_dec() -> @kernel.Thm
 
 pub fn mono_inc() -> @kernel.Thm

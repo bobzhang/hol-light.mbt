@@ -8,6 +8,8 @@ import {
 // Values
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn mul_odd_lem() -> @kernel.Thm
 
 pub fn neg_odd_lem() -> @kernel.Thm

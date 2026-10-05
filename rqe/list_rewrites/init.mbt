@@ -18,3 +18,19 @@ pub fn load() -> Unit {
   }
   @parser.end_theory()
 }
+
+///|
+/// Load Rqe/list_rewrites.ml (once) as `needs` does: after what it needs itself, not
+/// after the files its directory's make.ml loads before it.
+pub fn load_alone() -> Unit {
+  if loaded.val {
+    return
+  }
+  loaded.val = true
+  @parser.begin_theory("Rqe/list_rewrites")
+  load_steps() catch {
+    e =>
+      abort("HOL Light: loading Rqe/list_rewrites.ml failed: " + e.to_string())
+  }
+  @parser.end_theory()
+}

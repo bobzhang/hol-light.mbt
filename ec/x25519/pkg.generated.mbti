@@ -1,0 +1,87 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/x25519"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn curve25519x() -> @kernel.Thm
+
+pub fn curve25519x_curve25519() -> @kernel.Thm
+
+pub fn curve25519x_curve25519_group() -> @kernel.Thm
+
+pub fn curve25519x_group() -> @kernel.Thm
+
+pub fn curve25519x_group_gen() -> @kernel.Thm
+
+pub fn curve25519x_group_v1() -> @kernel.Thm
+
+pub fn field_quadratic_extension() -> @kernel.Thm
+
+pub fn field_sqintmod_field() -> @kernel.Thm
+
+pub fn group_pow_curve25519x_torsion() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn montgomery_nonsingular_curve25519x() -> @kernel.Thm
+
+pub fn montgomery_nonsingular_curve25519x_gen() -> @kernel.Thm
+
+pub fn purex25519() -> @kernel.Thm
+
+pub fn purex25519_bound() -> @kernel.Thm
+
+pub fn purex25519_def() -> @kernel.Thm
+
+pub fn purex25519_ladder() -> @kernel.Thm
+
+pub fn purex25519_mod() -> @kernel.Thm
+
+pub fn purex25519_unique() -> @kernel.Thm
+
+pub fn purex25519_unique_imp() -> @kernel.Thm
+
+pub fn purex25519_v1() -> @kernel.Thm
+
+pub fn quadratic_extension() -> @kernel.Thm
+
+pub fn quadratic_extension_v1() -> @kernel.Thm
+
+pub fn rfcx25519() -> @kernel.Thm
+
+pub fn rfcx25519_base_nonzero() -> @kernel.Thm
+
+pub fn rfcx25519_purex25519() -> @kernel.Thm
+
+pub fn ring_char_quadratic_extension() -> @kernel.Thm
+
+pub fn ring_char_sqintmod_field() -> @kernel.Thm
+
+pub fn ring_homomorphism_into_quadratic_extension() -> @kernel.Thm
+
+pub fn ring_monomorphism_into_quadratic_extension() -> @kernel.Thm
+
+pub fn ring_of_int_quadratic_extension() -> @kernel.Thm
+
+pub fn ring_of_num_quadratic_extension() -> @kernel.Thm
+
+pub fn specially_nonsingular_curve25519x() -> @kernel.Thm
+
+pub fn sqintmod_field() -> @kernel.Thm
+
+pub fn square_roots_sqintmod_field() -> @kernel.Thm
+
+pub fn x25519_ladder() -> @kernel.Thm
+
+pub fn x25519_ladderstep() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

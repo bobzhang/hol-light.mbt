@@ -27,6 +27,8 @@ pub fn even_odd_pow() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn mk_mult(@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise
 
 pub fn mk_negative(@kernel.Term) -> @kernel.Term raise

@@ -47,6 +47,8 @@ pub fn is_point(@kernel.Term) -> Bool raise
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn make_partition_list(@list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise
 
 pub fn mk_all2_interpsigns(@kernel.Thm, @list.List[@kernel.Thm]) -> @kernel.Thm raise

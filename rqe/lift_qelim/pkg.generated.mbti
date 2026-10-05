@@ -17,6 +17,8 @@ pub fn lift_qelim_conv((@list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn not_tm() -> @kernel.Term
 
 pub fn or_assoc() -> @kernel.Thm

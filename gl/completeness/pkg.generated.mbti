@@ -95,6 +95,8 @@ pub fn itf_maximal_consistent() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn maximal_consistent() -> @kernel.Thm
 
 pub fn maximal_consistent_lemma() -> @kernel.Thm

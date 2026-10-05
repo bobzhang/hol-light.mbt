@@ -43,6 +43,8 @@ pub fn gtzero() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn ltneg() -> @kernel.Thm
 
 pub fn ltpos() -> @kernel.Thm

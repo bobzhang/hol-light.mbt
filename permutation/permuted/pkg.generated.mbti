@@ -9,6 +9,8 @@ import {
 // Values
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn permuted_all() -> @kernel.Thm
 
 pub fn permuted_append_cong() -> @kernel.Thm

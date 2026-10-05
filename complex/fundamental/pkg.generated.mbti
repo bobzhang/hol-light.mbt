@@ -16,6 +16,8 @@ pub fn fundamental_theorem_of_algebra_alt() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn metric_bound_lemma() -> @kernel.Thm
 
 pub fn nonconstant_length() -> @kernel.Thm

@@ -129,6 +129,8 @@ pub fn list_seq_term() -> @kernel.Term
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn loc() -> @kernel.HolType
 
 pub fn loc_asg() -> @kernel.Thm

@@ -18,6 +18,8 @@ pub fn le_lem() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn lt_int_lem() -> @kernel.Thm
 
 pub fn nopoint_lem() -> @kernel.Thm

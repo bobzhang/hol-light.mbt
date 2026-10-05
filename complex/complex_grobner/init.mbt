@@ -22,3 +22,23 @@ pub fn load() -> Unit {
   }
   @parser.end_theory()
 }
+
+///|
+/// Load Complex/complex_grobner.ml (once) as `needs` does: after what it needs itself, not
+/// after the files its directory's make.ml loads before it.
+pub fn load_alone() -> Unit {
+  if loaded.val {
+    return
+  }
+  loaded.val = true
+  @complexnumbers.load()
+  @quelim.load()
+  @parser.begin_theory("Complex/complex_grobner")
+  load_steps() catch {
+    e =>
+      abort(
+        "HOL Light: loading Complex/complex_grobner.ml failed: " + e.to_string(),
+      )
+  }
+  @parser.end_theory()
+}

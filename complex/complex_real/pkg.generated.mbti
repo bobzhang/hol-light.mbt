@@ -10,6 +10,8 @@ pub fn grobner_real_arith(@kernel.Term) -> @kernel.Thm raise
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 // Errors
 
 // Types and methods

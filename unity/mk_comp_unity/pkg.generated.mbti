@@ -64,6 +64,8 @@ pub fn comp_unless_thm1_lemma_2() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 // Errors
 
 // Types and methods

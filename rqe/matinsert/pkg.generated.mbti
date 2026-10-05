@@ -9,6 +9,8 @@ import {
 // Values
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn[TA] matinsert(@list.List[@kernel.Term], Int64, @kernel.Thm, (@kernel.Thm) -> TA raise, @kernel.Thm) -> TA raise
 
 pub fn[TA] matinsert_v1(@list.List[@kernel.Term], Int64, @kernel.Thm, (@kernel.Thm) -> TA raise, @kernel.Thm) -> TA raise

@@ -16,6 +16,8 @@ pub fn ips_lt_nz_thm() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn neg_odd_lem() -> @kernel.Thm
 
 pub fn neq_mult_gt_lem() -> @kernel.Thm

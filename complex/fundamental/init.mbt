@@ -22,3 +22,23 @@ pub fn load() -> Unit {
   }
   @parser.end_theory()
 }
+
+///|
+/// Load Complex/fundamental.ml (once) as `needs` does: after what it needs itself, not
+/// after the files its directory's make.ml loads before it.
+pub fn load_alone() -> Unit {
+  if loaded.val {
+    return
+  }
+  loaded.val = true
+  @complex_transc.load()
+  @cpoly.load()
+  @parser.begin_theory("Complex/fundamental")
+  load_steps() catch {
+    e =>
+      abort(
+        "HOL Light: loading Complex/fundamental.ml failed: " + e.to_string(),
+      )
+  }
+  @parser.end_theory()
+}

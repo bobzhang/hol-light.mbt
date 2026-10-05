@@ -16,6 +16,8 @@ pub fn iter_divstep_odd_alt() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 // Errors
 
 // Types and methods

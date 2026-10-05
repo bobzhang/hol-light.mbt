@@ -18,6 +18,8 @@ pub fn gt_aux() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn real_cases() -> @kernel.Thm
 
 // Errors

@@ -1,0 +1,57 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/ccsm2"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abelian_sm2_group() -> @kernel.Thm
+
+pub fn b_sm2() -> @kernel.Thm
+
+pub fn ccsm2() -> @kernel.Thm
+
+pub fn cyclic_sm2_group() -> @kernel.Thm
+
+pub fn finite_group_carrier_sm2() -> @kernel.Thm
+
+pub fn g_sm2() -> @kernel.Thm
+
+pub fn generated_sm2_group() -> @kernel.Thm
+
+pub fn generator_in_group_carrier_sm2() -> @kernel.Thm
+
+pub fn group_element_order_sm2() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn n_sm2() -> @kernel.Thm
+
+pub fn no_roots_sm2() -> @kernel.Thm
+
+pub fn p_sm2() -> @kernel.Thm
+
+pub fn p_sm2_v1() -> @kernel.Thm
+
+pub fn prime_nsm2() -> @kernel.Thm
+
+pub fn prime_psm2() -> @kernel.Thm
+
+pub fn size_sm2_group() -> @kernel.Thm
+
+pub fn sm2_group() -> @kernel.Thm
+
+pub fn sm2_group_element_order() -> @kernel.Thm
+
+pub fn sm2_group_order() -> @kernel.Thm
+
+pub fn sm2_group_v1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -62,6 +62,8 @@ pub fn involved(@list.List[@list.List[Int64]], @list.List[Int64], @list.List[Int
 
 pub fn load() -> Unit
 
+pub fn load_alone() -> Unit
+
 pub fn mdiv((@num.Num, @list.List[Int64]), (@num.Num, @list.List[Int64])) -> (@num.Num, @list.List[Int64]) raise
 
 pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB, TC : Eq + @lib.OCompare + @lib.OHash, TD, TE, TF] memx(((@list.List[(@num.Num, TA)], TB), (@list.List[(@num.Num, TC)], TD)), @list.List[((@list.List[(@num.Num, TA)], TE), (@list.List[(@num.Num, TC)], TF))]) -> Bool raise
