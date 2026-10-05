@@ -46,6 +46,7 @@ def stem(f):
 RENAMED = {
     "Logic/canon": "logic/logic_canon",                    # canon.ml
     "Probability/measure": "probability/probability_measure",  # Multivariate/measure.ml
+    "Quaternions/misc": "quaternions/quaternions_misc",    # Multivariate/misc.ml
 }
 
 
@@ -99,7 +100,7 @@ def needs(f):
     # `f` as named (`Quaternions/misc.hl`), else with `.ml`
     path = os.path.join(HOL, f)
     if not os.path.isfile(path):
-        path = os.path.join(HOL, f if f.endswith(".ml") else f + ".ml")
+        path = os.path.join(HOL, f if f.endswith((".ml", ".hl")) else f + ".ml")
     # the same rule as the translator's Translator.needs_of
     # `loadt "f"` is used as `needs` too (100/lagrange.ml), and `loads "f"`
     # (Rqe/make.ml): a file is loaded once here. Only top-level phrases

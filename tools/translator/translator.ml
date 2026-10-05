@@ -473,6 +473,7 @@ module Names = struct
     (* named like a package loaded with it (theory.py's RENAMED) *)
     | "Logic/canon.ml" -> Some "logic/logic_canon"
     | "Probability/measure.ml" -> Some "probability/probability_measure"
+    | "Quaternions/misc.hl" -> Some "quaternions/quaternions_misc"
     | f when String.contains f '/' ->
         (* `Library/prime.ml` -> `library/prime` (theory.py's pkg_of) *)
         let i = String.index f '/' in
