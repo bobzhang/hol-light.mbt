@@ -1,0 +1,81 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/edwards448"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abelian_edwards448_group() -> @kernel.Thm
+
+pub fn cyclic_edwards448_group() -> @kernel.Thm
+
+pub fn d_448() -> @kernel.Thm
+
+pub fn e_448() -> @kernel.Thm
+
+pub fn e_448_v1() -> @kernel.Thm
+
+pub fn edwards448_group() -> @kernel.Thm
+
+pub fn edwards448_group_v1() -> @kernel.Thm
+
+pub fn edwards448_order_1() -> @kernel.Thm
+
+pub fn edwards448_order_2() -> @kernel.Thm
+
+pub fn edwards448_order_4() -> @kernel.Thm
+
+pub fn edwards448_order_8() -> @kernel.Thm
+
+pub fn edwards_nonsingular_448() -> @kernel.Thm
+
+pub fn ee_448() -> @kernel.Thm
+
+pub fn f_448() -> @kernel.Thm
+
+pub fn finite_group_carrier_edwards448() -> @kernel.Thm
+
+pub fn fullgenerator_in_group_carrier_edwards448() -> @kernel.Thm
+
+pub fn generated_edwards448_group() -> @kernel.Thm
+
+pub fn generator_in_group_carrier_edwards448() -> @kernel.Thm
+
+pub fn generator_in_group_carrier_f448() -> @kernel.Thm
+
+pub fn generator_in_group_carrier_h448() -> @kernel.Thm
+
+pub fn group_element_order_edwards448_e448() -> @kernel.Thm
+
+pub fn group_element_order_edwards448_ee448() -> @kernel.Thm
+
+pub fn group_element_order_edwards448_f448() -> @kernel.Thm
+
+pub fn group_element_order_edwards448_h448() -> @kernel.Thm
+
+pub fn h_448() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn n_448() -> @kernel.Thm
+
+pub fn n_448_v1() -> @kernel.Thm
+
+pub fn p_448() -> @kernel.Thm
+
+pub fn p_448_v1() -> @kernel.Thm
+
+pub fn prime_n448() -> @kernel.Thm
+
+pub fn prime_p448() -> @kernel.Thm
+
+pub fn size_edwards448_group() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

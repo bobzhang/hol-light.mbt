@@ -1,0 +1,59 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/family25519"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn c_25519() -> @kernel.Thm
+
+pub fn curve25519_of_edwards25519() -> @kernel.Thm
+
+pub fn curve25519_of_edwards25519_e25519() -> @kernel.Thm
+
+pub fn curve25519_of_edwards25519_ee25519() -> @kernel.Thm
+
+pub fn curve25519_of_wei25519() -> @kernel.Thm
+
+pub fn curve25519_of_wei25519_g25519() -> @kernel.Thm
+
+pub fn curve25519_of_wei25519_gg25519() -> @kernel.Thm
+
+pub fn edwards25519_of_curve25519() -> @kernel.Thm
+
+pub fn edwards25519_of_curve25519_c25519() -> @kernel.Thm
+
+pub fn edwards25519_of_curve25519_cc25519() -> @kernel.Thm
+
+pub fn group_isomorphisms_curve25519_wei25519() -> @kernel.Thm
+
+pub fn group_isomorphisms_edwards25519_curve25519() -> @kernel.Thm
+
+pub fn isomorphic_groups_curve25519_edwards25519() -> @kernel.Thm
+
+pub fn isomorphic_groups_curve25519_wei25519() -> @kernel.Thm
+
+pub fn isomorphic_groups_edwards25519_curve25519() -> @kernel.Thm
+
+pub fn isomorphic_groups_wei25519_curve25519() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mcurve_of_ecurve_25519() -> @kernel.Thm
+
+pub fn wcurve_of_mcurve_25519() -> @kernel.Thm
+
+pub fn wei25519_of_curve25519() -> @kernel.Thm
+
+pub fn wei25519_of_curve25519_c25519() -> @kernel.Thm
+
+pub fn wei25519_of_curve25519_cc25519() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
