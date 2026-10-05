@@ -186,11 +186,24 @@ def needs_closure(f):
 NEEDS_ONLY = {"EC"}
 
 
+# Directories whose loader computes its file list (`map (load_on_path
+# paths) [...]` in IsabelleLight/isalight.ml and Boyer_Moore/boyer-moore.ml):
+# the list, as the order make_plan gives
+ORDERS = {
+    "IsabelleLight": ["support", "new_tactics", "meta_rules"],
+    "Boyer_Moore": ["support", "struct_equal", "shells", "environment", "clausal_form", "waterfall",
+                    "rewrite_rules", "definitions", "terms_and_clauses", "equalities", "induction",
+                    "counterexample", "generalize", "irrelevance", "main"],
+}
+
+
 @functools.lru_cache(maxsize=None)
 def make_plan(d):
     """What `d`/make.ml loads, in order: (file of `d`, the files of other
     directories make.ml loads just before it). Empty without a make.ml, and
     for Multivariate/ (MAKE_ORDER above)."""
+    if d in ORDERS:
+        return [(f"{d}/{f}.ml", []) for f in ORDERS[d]]
     if d == "Multivariate" or d in NEEDS_ONLY or not os.path.isfile(os.path.join(HOL, d, "make.ml")):
         return []
     plan, pre = [], []
