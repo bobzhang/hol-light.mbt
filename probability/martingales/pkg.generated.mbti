@@ -1,0 +1,227 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/probability/martingales"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn adapted() -> @kernel.Thm
+
+pub fn backward_martingale() -> @kernel.Thm
+
+pub fn bounded_stopping_time() -> @kernel.Thm
+
+pub fn decreasing_filtration() -> @kernel.Thm
+
+pub fn doob_maximal_inequality() -> @kernel.Thm
+
+pub fn doob_maximal_inequality_general() -> @kernel.Thm
+
+pub fn doob_optional_stopping() -> @kernel.Thm
+
+pub fn expectation_carrier_indicator() -> @kernel.Thm
+
+pub fn filtration() -> @kernel.Thm
+
+pub fn filtration_mono() -> @kernel.Thm
+
+pub fn indicator_fn_disjoint_union() -> @kernel.Thm
+
+pub fn indicator_fn_inter() -> @kernel.Thm
+
+pub fn indicator_sum_stopping_time() -> @kernel.Thm
+
+pub fn integrable_stopped_process() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn martingale() -> @kernel.Thm
+
+pub fn martingale_characterization() -> @kernel.Thm
+
+pub fn martingale_const() -> @kernel.Thm
+
+pub fn martingale_expectation_const() -> @kernel.Thm
+
+pub fn martingale_imp_submartingale() -> @kernel.Thm
+
+pub fn martingale_imp_supermartingale() -> @kernel.Thm
+
+pub fn martingale_sub_super() -> @kernel.Thm
+
+pub fn martingale_tower() -> @kernel.Thm
+
+pub fn martingale_tower_eq() -> @kernel.Thm
+
+pub fn martingale_transform() -> @kernel.Thm
+
+pub fn measurable_wrt() -> @kernel.Thm
+
+pub fn measurable_wrt_const() -> @kernel.Thm
+
+pub fn measurable_wrt_eq_on_carrier() -> @kernel.Thm
+
+pub fn measurable_wrt_events() -> @kernel.Thm
+
+pub fn measurable_wrt_ge() -> @kernel.Thm
+
+pub fn measurable_wrt_if() -> @kernel.Thm
+
+pub fn measurable_wrt_imp_rv() -> @kernel.Thm
+
+pub fn measurable_wrt_mono() -> @kernel.Thm
+
+pub fn natural_filtration() -> @kernel.Thm
+
+pub fn predictable() -> @kernel.Thm
+
+pub fn random_variable_stopped_process() -> @kernel.Thm
+
+pub fn real_max_ge() -> @kernel.Thm
+
+pub fn running_max() -> @kernel.Thm
+
+pub fn running_max_exceeds_in_filtration() -> @kernel.Thm
+
+pub fn simple_adapted() -> @kernel.Thm
+
+pub fn simple_adapted_stopped_process() -> @kernel.Thm
+
+pub fn simple_backward_martingale() -> @kernel.Thm
+
+pub fn simple_doob_maximal_inequality_strong() -> @kernel.Thm
+
+pub fn simple_doob_optional_stopping() -> @kernel.Thm
+
+pub fn simple_doob_optional_stopping_bounded() -> @kernel.Thm
+
+pub fn simple_imp_backward_martingale() -> @kernel.Thm
+
+pub fn simple_imp_martingale() -> @kernel.Thm
+
+pub fn simple_imp_submartingale() -> @kernel.Thm
+
+pub fn simple_imp_supermartingale() -> @kernel.Thm
+
+pub fn simple_martingale() -> @kernel.Thm
+
+pub fn simple_martingale_cond_exp() -> @kernel.Thm
+
+pub fn simple_martingale_const() -> @kernel.Thm
+
+pub fn simple_martingale_expectation_const() -> @kernel.Thm
+
+pub fn simple_martingale_imp_submartingale() -> @kernel.Thm
+
+pub fn simple_martingale_imp_supermartingale() -> @kernel.Thm
+
+pub fn simple_martingale_stopped_process() -> @kernel.Thm
+
+pub fn simple_martingale_sub_super() -> @kernel.Thm
+
+pub fn simple_rv_eq_on_carrier() -> @kernel.Thm
+
+pub fn simple_rv_ext() -> @kernel.Thm
+
+pub fn simple_rv_stopped_process() -> @kernel.Thm
+
+pub fn simple_rv_stopping_time_indicator() -> @kernel.Thm
+
+pub fn simple_rv_wrt() -> @kernel.Thm
+
+pub fn simple_rv_wrt_imp_simple_rv() -> @kernel.Thm
+
+pub fn simple_submartingale() -> @kernel.Thm
+
+pub fn simple_submartingale_expectation_increasing() -> @kernel.Thm
+
+pub fn simple_submartingale_expectation_mono() -> @kernel.Thm
+
+pub fn simple_submartingale_localized_increasing() -> @kernel.Thm
+
+pub fn simple_submartingale_optional_stopping_ge() -> @kernel.Thm
+
+pub fn simple_submartingale_optional_stopping_ge_general() -> @kernel.Thm
+
+pub fn simple_submartingale_stopped_process() -> @kernel.Thm
+
+pub fn simple_supermartingale() -> @kernel.Thm
+
+pub fn simple_supermartingale_expectation_decreasing() -> @kernel.Thm
+
+pub fn simple_supermartingale_expectation_mono() -> @kernel.Thm
+
+pub fn simple_supermartingale_optional_stopping_le() -> @kernel.Thm
+
+pub fn simple_supermartingale_optional_stopping_le_general() -> @kernel.Thm
+
+pub fn simple_supermartingale_stopped_process() -> @kernel.Thm
+
+pub fn stopped_process() -> @kernel.Thm
+
+pub fn stopped_process_increment() -> @kernel.Thm
+
+pub fn stopped_process_measurable_wrt() -> @kernel.Thm
+
+pub fn stopped_process_zero() -> @kernel.Thm
+
+pub fn stopping_time() -> @kernel.Thm
+
+pub fn stopping_time_ge_event() -> @kernel.Thm
+
+pub fn stopping_time_gt_in_ff() -> @kernel.Thm
+
+pub fn stopping_time_indicator_predictable() -> @kernel.Thm
+
+pub fn stopping_time_suc_ge_in_ff() -> @kernel.Thm
+
+pub fn sub_sigma_algebra() -> @kernel.Thm
+
+pub fn sub_sigma_algebra_carrier_in() -> @kernel.Thm
+
+pub fn sub_sigma_algebra_compl() -> @kernel.Thm
+
+pub fn sub_sigma_algebra_diff() -> @kernel.Thm
+
+pub fn sub_sigma_algebra_in_events() -> @kernel.Thm
+
+pub fn sub_sigma_algebra_inter() -> @kernel.Thm
+
+pub fn sub_sigma_algebra_union() -> @kernel.Thm
+
+pub fn submartingale() -> @kernel.Thm
+
+pub fn submartingale_expectation_increasing() -> @kernel.Thm
+
+pub fn submartingale_expectation_mono() -> @kernel.Thm
+
+pub fn submartingale_optional_stopping_ge() -> @kernel.Thm
+
+pub fn submartingale_tower() -> @kernel.Thm
+
+pub fn sum_random_index() -> @kernel.Thm
+
+pub fn supermartingale() -> @kernel.Thm
+
+pub fn supermartingale_expectation_decreasing() -> @kernel.Thm
+
+pub fn supermartingale_expectation_mono() -> @kernel.Thm
+
+pub fn supermartingale_optional_stopping_le() -> @kernel.Thm
+
+pub fn supermartingale_tower() -> @kernel.Thm
+
+pub fn wald_equation() -> @kernel.Thm
+
+pub fn wald_term_expectation() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
