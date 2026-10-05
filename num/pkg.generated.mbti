@@ -87,6 +87,8 @@ pub fn numdom(Num) -> (Num, Num)
 
 pub fn numerator(Num) -> Num
 
+pub fn nums_num_of_string(String) -> Num raise
+
 pub fn pow10(Int) -> Num raise
 
 pub fn pow2(Int) -> Num raise

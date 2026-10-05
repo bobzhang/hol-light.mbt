@@ -6,6 +6,8 @@ let loadt (_:string) = ();;
 let loads (_:string) = ();;
 let float_sqrt = sqrt;;
 let float_fabs = abs_float;;
+(* hol.ml's (these scripts load its files one by one) *)
+let temp_path = ref "/tmp";;
 (* The external programs a file runs (csdp for Examples/sos.ml's REAL_SOS,
    ...) are recorded for the MoonBit side to replay (lib/gp.mbt,
    replay_command; wasm has no processes): each command's shape (its file

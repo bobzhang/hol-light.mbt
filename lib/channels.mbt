@@ -1,0 +1,121 @@
+// OCaml's file channels, on the in-memory files of gp.mbt (wasm has no file
+// system): what translated code writes, an emulated or replayed command
+// reads, and the other way round (Cadical/dimacs.ml writes a problem and
+// reads cadical's proof).
+
+///|
+/// OCaml's `End_of_file`.
+pub(all) suberror EndOfFile derive(Debug)
+
+///|
+/// `out_channel`: the file is written when the channel is flushed or closed.
+pub struct OutChannel {
+  name : String
+  buf : StringBuilder
+}
+
+///|
+/// `open_out`: creates the file, or empties it.
+pub fn open_out(name : String) -> OutChannel {
+  virtual_files[name] = ""
+  { name, buf: StringBuilder(), }
+}
+
+///|
+/// `output_string`
+pub fn output_string(oc : OutChannel, s : String) -> Unit {
+  oc.buf.write_string(s)
+}
+
+///|
+/// `output_char`
+pub fn output_char(oc : OutChannel, c : Char) -> Unit {
+  oc.buf.write_char(c)
+}
+
+///|
+/// `flush`
+pub fn flush_out(oc : OutChannel) -> Unit {
+  virtual_files[oc.name] = oc.buf.to_string()
+}
+
+///|
+/// `close_out`
+pub fn close_out(oc : OutChannel) -> Unit {
+  flush_out(oc)
+}
+
+///|
+/// `in_channel`: the file as it was when opened.
+pub struct InChannel {
+  text : String
+  mut pos : Int
+}
+
+///|
+/// `open_in`
+pub fn open_in(name : String) -> InChannel raise {
+  match virtual_files.get(name) {
+    Some(text) => { text, pos: 0, }
+    None => raise SysError(name + ": No such file or directory")
+  }
+}
+
+///|
+/// `input_line`: up to the next newline, which is not part of the result;
+/// `End_of_file` when nothing is left.
+pub fn input_line(ic : InChannel) -> String raise {
+  let n = ic.text.length()
+  if ic.pos >= n {
+    raise EndOfFile
+  }
+  let start = ic.pos
+  let mut i = start
+  while i < n && ic.text[i].to_int() != 10 {
+    i += 1
+  }
+  ic.pos = if i < n { i + 1 } else { i }
+  ic.text.view(start_offset=start, end_offset=i).to_string()
+}
+
+///|
+/// `input_char`
+pub fn input_char(ic : InChannel) -> Char raise {
+  if ic.pos >= ic.text.length() {
+    raise EndOfFile
+  }
+  let c = ic.text[ic.pos]
+  ic.pos += 1
+  c.to_int().unsafe_to_char()
+}
+
+///|
+/// `close_in`
+pub fn close_in(_ic : InChannel) -> Unit {
+
+}
+
+///|
+/// `String.index_opt s c`
+pub fn string_index_opt(s : String, c : Char) -> Int64? {
+  for i in 0..<s.length() {
+    if s[i].to_int() == c.to_int() {
+      return Some(i.to_int64())
+    }
+  }
+  None
+}
+
+///|
+/// hol.ml's `temp_path`: where the files handed to external programs go.
+pub let temp_path : Ref[String] = Ref::{ val: "/tmp", }
+
+///|
+/// `Filename.concat dir file`
+pub fn filename_concat(dir : String, file : String) -> String {
+  if dir == "" || dir.has_suffix("/") {
+    dir + file
+  } else {
+    dir + "/" + file
+  }
+}

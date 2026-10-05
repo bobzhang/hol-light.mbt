@@ -199,7 +199,8 @@ test "gp factorint emulation" {
     ),
     content="0",
   )
-  inspect(string_of_file("/tmp/x.out"), content="Mat([65537, 1])\n")
+  // the lines joined: no final newline, as lib.ml's
+  inspect(string_of_file("/tmp/x.out"), content="Mat([65537, 1])")
   sys_remove("/tmp/x.out") catch {
     _ => ()
   }

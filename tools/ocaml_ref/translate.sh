@@ -31,6 +31,8 @@ grep -v 'pa_j.cmo' boot.ml > _build/tboot.ml
   echo 'let loadt (_:string) = ();;'
   echo 'let loads (_:string) = ();;'
   echo 'let float_sqrt = sqrt;; let float_fabs = abs_float;;'
+  # hol.ml's (the sessions load its files one by one)
+  echo 'let temp_path = ref "/tmp";;'
   if [ "$1" = batch ]; then
     # $2: a file with the plan: `[ ([pre...], target); ... ]` (batch.py)
     echo "let _ = Main.translate_batch ~hol:\"$H\" ~root:\"$ROOT\" ~after:\"$3\" ($(cat "$2"));;"
