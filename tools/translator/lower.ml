@@ -614,6 +614,20 @@ module Lower = struct
 
   let current_file = ref ""
 
+  (* OCaml's typed format strings have no MoonBit type: a function that
+     takes one as a parameter is not translated (literal formats of
+     printf/sprintf calls are) *)
+  let rec takes_format ty =
+    match Types.get_desc ty with
+    | Types.Tconstr (p, args, _) ->
+        (match Path.last p with
+         | "format" | "format4" | "format6" -> true
+         | _ -> List.exists takes_format args)
+    | Types.Tarrow (_, a, b, _) -> takes_format a || takes_format b
+    | Types.Ttuple ts -> List.exists takes_format ts
+    | Types.Tpoly (t, _) -> takes_format t
+    | _ -> false
+
   (* the files the current file loads part-way through (theory.py's
      MID_NEEDS): its `needs "f"` there is a load step *)
   let mid_needs : (string, unit) Hashtbl.t = Hashtbl.create 4
@@ -1153,6 +1167,8 @@ module Lower = struct
     let n = path_name p in
     if String.length n > 7 && String.sub n 0 7 = "Stdlib." then
       Some (String.sub n 7 (String.length n - 7))
+    (* a clock, as Sys.time (Formal_ineqs/ times its runs with it) *)
+    else if n = "Unix.gettimeofday" then Some "Sys.time"
     else None
 
   (* Stdlib (or a module including it) `List.f` with the same meaning as

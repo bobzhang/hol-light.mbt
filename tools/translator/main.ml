@@ -146,6 +146,11 @@ module Main = struct
     let loaded = Hashtbl.create 64 in
     let load_new f = if not (Hashtbl.mem loaded f) then (Hashtbl.add loaded f (); load f) in
     let flush () = flush_all (); Format.pp_print_flush Format.std_formatter () in
+    (* $HOL_KEEP_GOING: a survey of a directory. A target with unsupported
+       items, or whose package does not build, does not stop the batch
+       (what follows it is translated against what there is: expect
+       reports that its values are not translated) *)
+    let keep_going = Sys.getenv_opt "HOL_KEEP_GOING" <> None in
     let mids : (string * string, string list) Hashtbl.t = Hashtbl.create 4 in
     let mid_files target = Hashtbl.fold (fun (t, _) fs acc -> if t = target then fs @ acc else acc) mids [] in
     (* the session's `needs` (translate.sh): a file loaded part-way through
@@ -184,9 +189,12 @@ module Main = struct
            | pid ->
                (match Unix.waitpid [] pid with
                 | _, Unix.WEXITED 0 -> ()
+                | _, Unix.WEXITED 3 when keep_going -> Printf.printf "KEPT GOING: unsupported items in %s\n%!" target
                 | _, Unix.WEXITED 3 -> fail ("unsupported items in " ^ target)
                 | _ -> fail ("translation of " ^ target)));
-          if Sys.command (after ^ " " ^ Filename.quote target) <> 0 then fail ("after " ^ target);
+          if Sys.command (after ^ " " ^ Filename.quote target) <> 0 then begin
+            if keep_going then Printf.printf "KEPT GOING: after %s\n%!" target else fail ("after " ^ target)
+          end;
           (* loaded for the steps after it (the last one is not: loading
              Autoformalization/fifteen_theorem.ml again takes two hours) *)
           if rest <> [] then load_new target;
