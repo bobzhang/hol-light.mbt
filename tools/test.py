@@ -14,7 +14,10 @@ costs hours of CPU. The tiers, cheapest first:
   all           everything
 
 A package directory (`library/prime`) selects that package; any other
-top-level directory of packages is a tier of its own.
+top-level directory of packages is a tier of its own. A test file
+(`complex/make/05_quelim_test.mbt`) selects that file's tests alone: one
+member of a chain, which loads what is before it by itself (as
+`moon test FILE -i N` selects one test block).
 
 Targets: the quick tier runs on wasm (the primary target) and on wasm-gc;
 the theory tiers run on wasm-gc, where the same tests take a fifth of the
@@ -68,11 +71,18 @@ def tier_of(pkg):
     return "quick" if pkg in QUICK else "core"
 
 
+# package -> the test files selected in it (all of them when absent)
+ONLY = {}
+
+
 def select(names, pkgs):
     out = []
     for n in names:
         n = n.rstrip("/")
-        if n == "all":
+        if n.endswith(".mbt") and os.path.isfile(os.path.join(ROOT, n)) and os.path.dirname(n) in pkgs:
+            ONLY.setdefault(os.path.dirname(n), set()).add(os.path.basename(n))
+            sel = [os.path.dirname(n)]
+        elif n == "all":
             sel = pkgs
         elif n == "core":
             sel = [p for p in pkgs if "/" not in p]
@@ -177,7 +187,10 @@ def run_wasm(target, ps, a):
         for info in sorted(glob.glob(os.path.join(out, p, "__*_test_info.json"))):
             kind = os.path.basename(info)[2:].split("_test_info")[0]
             tests = json.load(open(info))["tests"]
-            ranges = [[f, [{"start": 0, "end": len(v)}]] for f, v in tests.items() if v]
+            # the test files in name order: a chain's blocks load its files
+            # in order (tools/ocaml_ref/chain_test.py)
+            ranges = [[f, [{"start": 0, "end": len(v)}]] for f, v in sorted(tests.items())
+                      if v and (p not in ONLY or f in ONLY[p])]
             if not ranges:
                 continue
             exe = glob.glob(os.path.join(out, p, f"*.{kind}_test.wasm"))
@@ -185,7 +198,7 @@ def run_wasm(target, ps, a):
                 print(f"   {p}: no {kind} test executable")
                 return False
             args = json.dumps({"package": "bobzhang/hol_light/" + p, "file_and_index": ranges})
-            jobs.append((p, kind, exe[0], args, sum(len(v) for v in tests.values())))
+            jobs.append((p, kind, exe[0], args, sum(r[1][0]["end"] for r in ranges)))
 
     def run(job):
         p, kind, exe, args, n = job

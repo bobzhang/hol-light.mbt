@@ -91,10 +91,52 @@ pub fn Log::contents(self : Log) -> String {
 }
 
 ///|
+/// Where reports and standard output went before a log first captured
+/// them (`release_output` sends them there again).
+let saved_report_sink : Ref[((String) -> Unit)?] = Ref::{ val: None, }
+
+///|
+let saved_stdout_sink : Ref[((String) -> Unit)?] = Ref::{ val: None, }
+
+///|
 /// Send `report`/`warn` output to the log (upstream prints warnings on the
 /// same stream as the results).
 pub fn Log::capture_reports(self : Log) -> Unit {
+  if saved_report_sink.val is None {
+    saved_report_sink.val = Some(@lib.report_sink.val)
+  }
   @lib.report_sink.val = s => self.out(s)
+}
+
+///|
+/// Undo `capture_reports` and `capture_stdout`: output goes where it went
+/// before any log captured it. A test that loads several files in turn
+/// calls this before each load, so that what a file prints while loading is
+/// recorded as its own load output, not in the previous file's log.
+pub fn release_output() -> Unit {
+  if saved_report_sink.val is Some(f) {
+    @lib.report_sink.val = f
+  }
+  if saved_stdout_sink.val is Some(f) {
+    @pp.flush_stdout_partial()
+    @pp.stdout_sink.val = f
+  }
+  stdout_owner.val = -1
+}
+
+///|
+/// The last lines of a generated theory test (the warning that parsing
+/// `zz_counter` gives, then `counter_tyvar` and `counter_genvar`), read
+/// from the counters without advancing them: for a test that goes on to
+/// load more files, whose state must be what a fresh process would have.
+pub fn Log::probe_counters(self : Log) -> Unit {
+  self.out("Warning: inventing type variables")
+  self.out(
+    "counter_tyvar = zz_counter:'?" + @preterm.type_var_counter().to_string(),
+  )
+  self.out(
+    "counter_genvar = _" + @basics.genvar_counter().to_string() + ":bool",
+  )
 }
 
 ///|
@@ -102,6 +144,9 @@ pub fn Log::capture_reports(self : Log) -> Unit {
 pub fn Log::capture_stdout(self : Log) -> Unit {
   // Load-time output belongs before anything the test prints.
   @pp.flush_stdout_backlog()
+  if saved_stdout_sink.val is None {
+    saved_stdout_sink.val = Some(@pp.stdout_sink.val)
+  }
   @pp.stdout_sink.val = s => self.buf.write_string(s + "\n")
   self.via_stdout = true
   stdout_owner.val = self.id
