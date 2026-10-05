@@ -461,8 +461,10 @@ module Loader = struct
             let p = Parsetree.Ptop_def str in
             let tstr = typecheck str in
             List.iter on_item tstr.Typedtree.str_items;
-            if not (Toploop.execute_phrase false Format.err_formatter p) then
-              failwith ("phrase failed in " ^ base);
+            if not (Toploop.execute_phrase false Format.err_formatter p) then begin
+              let line = match str with it :: _ -> it.Parsetree.pstr_loc.Location.loc_start.Lexing.pos_lnum | [] -> 0 in
+              failwith (Printf.sprintf "phrase failed in %s (line %d)" base line)
+            end;
             List.iter
               (fun item ->
                 List.iter (Prov.record base) (bound_names item);

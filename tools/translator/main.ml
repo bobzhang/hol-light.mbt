@@ -152,7 +152,9 @@ module Main = struct
        the file being loaded is loaded now *)
     Loader.needs_hook :=
       (fun g -> match Hashtbl.find_opt mids (!Loader.current, g) with
-         | Some fs -> List.iter load_new fs
+         | Some fs ->
+             Printf.printf "loading %s inside %s\n%!" (String.concat ", " fs) !Loader.current;
+             List.iter load_new fs
          | None -> ());
     let rec run = function
       | [] -> ()
