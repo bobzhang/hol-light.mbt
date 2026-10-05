@@ -1438,7 +1438,7 @@ module Lower = struct
         lower_printf ?expect whole ("Format." ^ snd (Option.get (Prov.lookup p))) args
     | Texp_ident (p, _, _)
       when (match Prov.lookup p with Some ("printer.ml", ("std_formatter" | "pp_print_string" | "pp_print_char" | "pp_print_int" | "pp_print_newline" | "pp_print_space" | "pp_print_cut" | "pp_print_break" | "pp_open_box" | "pp_close_box" | "pp_open_hvbox" | "pp_open_vbox" | "pp_print_flush"
-                                                   | "print_string" | "print_newline" | "print_int" | "print_float" | "print_break" | "print_space" | "print_cut" | "print_flush"
+                                                   | "print_string" | "print_newline" | "print_int" | "print_float" | "print_as" | "print_break" | "print_space" | "print_cut" | "print_flush"
                                                    | "open_box" | "open_hbox" | "open_vbox" | "open_hvbox" | "open_hovbox" | "close_box")) -> true | _ -> false) ->
         (* printer.ml includes Format: an unqualified `print_string` after
            it is Format's (Complex/complex_grobner.ml) *)
@@ -1801,6 +1801,7 @@ module Lower = struct
       | "ref" -> (1, fun [ a ] _ -> RefNew a)
       | ":=" -> (2, fun [ a; b ] _ -> Blk ([ Assign (a, b) ], Atom "()"))
       | "Format.print_string" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_string", [ a ]))
+      | "Format.print_as" -> (2, fun [ a; b ] _ -> Call (Atom "@pp.std_formatter.print_as", [ narrow a; b ]))
       | "Format.print_float" ->
           (* Format prints a float as `string_of_float` does *)
           (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_string", [ Call (Atom "@lib.string_of_float", [ a ]) ]))
@@ -1843,8 +1844,8 @@ module Lower = struct
       | "Random.bits" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@lib.random_bits", [])))
       | "incr" -> (1, fun [ a ] _ -> Call (Atom "@lib.incr", [ a ]))
       | "decr" -> (1, fun [ a ] _ -> Call (Atom "@lib.decr", [ a ]))
-      | "Char.chr" -> (1, fun [ a ] _ -> Call (Atom "@lib.char_chr", [ narrow a ]))
-      | "Char.code" -> (1, fun [ a ] _ -> widen (Call (Atom "Char::to_int", [ a ])))
+      | "Char.chr" | "char_of_int" -> (1, fun [ a ] _ -> Call (Atom "@lib.char_chr", [ narrow a ]))
+      | "Char.code" | "int_of_char" -> (1, fun [ a ] _ -> widen (Call (Atom "Char::to_int", [ a ])))
       | "Format.std_formatter" -> (0, fun [] _ -> Atom "@pp.std_formatter")
       | "Lazy.force" -> (1, fun [ a ] _ -> Call (Atom "@lib.lazy_force", [ a ]))
       | "Hashtbl.create" -> (1, fun [ a ] _ -> Call (Atom "@lib.hashtbl_create", [ narrow a ]))
