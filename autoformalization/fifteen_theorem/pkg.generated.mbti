@@ -1,0 +1,2169 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/autoformalization/fifteen_theorem"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn binary_disc10() -> @kernel.Thm
+
+pub fn binary_disc3() -> @kernel.Thm
+
+pub fn binary_disc5() -> @kernel.Thm
+
+pub fn binary_disc7() -> @kernel.Thm
+
+pub fn binary_hermite_primitive() -> @kernel.Thm
+
+pub fn cong_14j1_7() -> @kernel.Thm
+
+pub fn cong_1_mod_5_case_125() -> @kernel.Thm
+
+pub fn cong_1_mod_7_case_disc7() -> @kernel.Thm
+
+pub fn cong_2_mod_5_case() -> @kernel.Thm
+
+pub fn cong_2_mod_7_case_disc7() -> @kernel.Thm
+
+pub fn cong_3_mod_5_case() -> @kernel.Thm
+
+pub fn cong_4_mod_5_case_125() -> @kernel.Thm
+
+pub fn cong_4_mod_7_case_disc7() -> @kernel.Thm
+
+pub fn cong_6j1_3() -> @kernel.Thm
+
+pub fn cong_a_3_test() -> @kernel.Thm
+
+pub fn cong_beta_1mod5_125_five() -> @kernel.Thm
+
+pub fn cong_beta_2mod5_125_g_five() -> @kernel.Thm
+
+pub fn cong_beta_3mod4_125() -> @kernel.Thm
+
+pub fn cong_beta_3mod5_125_g_five() -> @kernel.Thm
+
+pub fn cong_beta_3mod8_125_double() -> @kernel.Thm
+
+pub fn cong_beta_4mod5_125_five() -> @kernel.Thm
+
+pub fn cong_beta_neg5_125() -> @kernel.Thm
+
+pub fn cong_beta_neg5_125_double() -> @kernel.Thm
+
+pub fn cong_dickson_g_rhs_3() -> @kernel.Thm
+
+pub fn cong_dickson_p_1_125_g_five() -> @kernel.Thm
+
+pub fn cong_dickson_p_2() -> @kernel.Thm
+
+pub fn cong_dickson_p_3() -> @kernel.Thm
+
+pub fn cong_dickson_p_4_125_g_five() -> @kernel.Thm
+
+pub fn cong_dickson_p_mod8_125_g_five() -> @kernel.Thm
+
+pub fn cong_dickson_rhs_3() -> @kernel.Thm
+
+pub fn cong_disc7_offset_7() -> @kernel.Thm
+
+pub fn cong_half_1_mod5() -> @kernel.Thm
+
+pub fn cong_half_1_mod7() -> @kernel.Thm
+
+pub fn cong_half_1_or_4_mod5() -> @kernel.Thm
+
+pub fn cong_half_2_mod7() -> @kernel.Thm
+
+pub fn cong_half_4_mod5() -> @kernel.Thm
+
+pub fn cong_half_4_mod7() -> @kernel.Thm
+
+pub fn cong_neg3_6j1() -> @kernel.Thm
+
+pub fn cong_neg7_14j1() -> @kernel.Thm
+
+pub fn cong_p_1mod4_113() -> @kernel.Thm
+
+pub fn cong_p_1mod8_disc7() -> @kernel.Thm
+
+pub fn cong_quarter_1_mod7() -> @kernel.Thm
+
+pub fn cong_quarter_2_mod7() -> @kernel.Thm
+
+pub fn cong_quarter_4_mod7() -> @kernel.Thm
+
+pub fn conj_type1() -> @kernel.Thm
+
+pub fn conj_type5() -> @kernel.Thm
+
+pub fn conj_type6() -> @kernel.Thm
+
+pub fn coprime_10_beta_125_g_five() -> @kernel.Thm
+
+pub fn coprime_10_of_odd_not5() -> @kernel.Thm
+
+pub fn coprime_125_double_offset_160() -> @kernel.Thm
+
+pub fn coprime_125_double_offset_a() -> @kernel.Thm
+
+pub fn coprime_125_offset_80() -> @kernel.Thm
+
+pub fn coprime_125_offset_a() -> @kernel.Thm
+
+pub fn coprime_3_6j1() -> @kernel.Thm
+
+pub fn coprime_5_10j3() -> @kernel.Thm
+
+pub fn coprime_5_2() -> @kernel.Thm
+
+pub fn coprime_5_20j1() -> @kernel.Thm
+
+pub fn coprime_5_3() -> @kernel.Thm
+
+pub fn coprime_5_beta_125_five() -> @kernel.Thm
+
+pub fn coprime_5_of_10() -> @kernel.Thm
+
+pub fn coprime_5_of_cong_2_or_3() -> @kernel.Thm
+
+pub fn coprime_7_14j1() -> @kernel.Thm
+
+pub fn coprime_a_24() -> @kernel.Thm
+
+pub fn coprime_a_n() -> @kernel.Thm
+
+pub fn coprime_beta_10j3() -> @kernel.Thm
+
+pub fn coprime_beta_20j1() -> @kernel.Thm
+
+pub fn coprime_dirichlet_113() -> @kernel.Thm
+
+pub fn coprime_dirichlet_113_3() -> @kernel.Thm
+
+pub fn coprime_dirichlet_125() -> @kernel.Thm
+
+pub fn coprime_dirichlet_125_double() -> @kernel.Thm
+
+pub fn coprime_dirichlet_disc7() -> @kernel.Thm
+
+pub fn coprime_disc7_offset_112() -> @kernel.Thm
+
+pub fn coprime_disc7_offset_n() -> @kernel.Thm
+
+pub fn coprime_p_h_113() -> @kernel.Thm
+
+pub fn cross124_0_neg1_1_base() -> @kernel.Thm
+
+pub fn cross124_0_neg1_1_universal() -> @kernel.Thm
+
+pub fn cross124_0_neg1_3_base() -> @kernel.Thm
+
+pub fn cross124_0_neg1_3_finite_shift() -> @kernel.Thm
+
+pub fn cross124_0_neg1_3_universal() -> @kernel.Thm
+
+pub fn cross124_0_neg1_4_base() -> @kernel.Thm
+
+pub fn cross124_0_neg1_4_finite_shift() -> @kernel.Thm
+
+pub fn cross124_0_neg1_4_universal() -> @kernel.Thm
+
+pub fn cross124_0_neg1_6_base() -> @kernel.Thm
+
+pub fn cross124_0_neg1_6_finite_shift() -> @kernel.Thm
+
+pub fn cross124_0_neg1_6_universal() -> @kernel.Thm
+
+pub fn cross124_0_neg1_7_base() -> @kernel.Thm
+
+pub fn cross124_0_neg1_7_finite_shift() -> @kernel.Thm
+
+pub fn cross124_0_neg1_7_universal() -> @kernel.Thm
+
+pub fn cross124_10_2_base() -> @kernel.Thm
+
+pub fn cross124_10_2_universal() -> @kernel.Thm
+
+pub fn cross124_10_3_base() -> @kernel.Thm
+
+pub fn cross124_10_3_universal() -> @kernel.Thm
+
+pub fn cross124_10_4_rep_of_1226() -> @kernel.Thm
+
+pub fn cross124_10_4_universal() -> @kernel.Thm
+
+pub fn cross124_10_5_base() -> @kernel.Thm
+
+pub fn cross124_10_5_finite_shift() -> @kernel.Thm
+
+pub fn cross124_10_5_universal() -> @kernel.Thm
+
+pub fn cross124_10_6_base() -> @kernel.Thm
+
+pub fn cross124_10_6_finite_shift() -> @kernel.Thm
+
+pub fn cross124_10_6_universal() -> @kernel.Thm
+
+pub fn cross124_10_7_even_large() -> @kernel.Thm
+
+pub fn cross124_10_7_even_shift() -> @kernel.Thm
+
+pub fn cross124_10_7_odd_base() -> @kernel.Thm
+
+pub fn cross124_10_7_odd_large() -> @kernel.Thm
+
+pub fn cross124_10_7_odd_shift() -> @kernel.Thm
+
+pub fn cross124_10_7_odd_universal() -> @kernel.Thm
+
+pub fn cross124_10_7_small() -> @kernel.Thm
+
+pub fn cross124_10_7_universal() -> @kernel.Thm
+
+pub fn cross124_1_neg1_2_base() -> @kernel.Thm
+
+pub fn cross124_1_neg1_2_universal() -> @kernel.Thm
+
+pub fn cross124_1_neg1_3_base() -> @kernel.Thm
+
+pub fn cross124_1_neg1_3_universal() -> @kernel.Thm
+
+pub fn cross124_1_neg1_4_base() -> @kernel.Thm
+
+pub fn cross124_1_neg1_4_finite_shift() -> @kernel.Thm
+
+pub fn cross124_1_neg1_4_universal() -> @kernel.Thm
+
+pub fn cross124_1_neg1_6_base() -> @kernel.Thm
+
+pub fn cross124_1_neg1_6_finite_shift() -> @kernel.Thm
+
+pub fn cross124_1_neg1_6_universal() -> @kernel.Thm
+
+pub fn cross124_1_neg1_7_base() -> @kernel.Thm
+
+pub fn cross124_1_neg1_7_finite_shift() -> @kernel.Thm
+
+pub fn cross124_1_neg1_7_universal() -> @kernel.Thm
+
+pub fn cross124_315_residue_selector() -> @kernel.Thm
+
+pub fn cross124_90_finite_shift_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn cross124_90_residue_selector() -> @kernel.Thm
+
+pub fn cross124_base_tac(Int64, Int64, Int64, Int64) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn cross124_bounded_finite_shift_selector_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn cross124_cert_tac(Int64, Int64, Int64, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn cross124_child_rep() -> @kernel.Thm
+
+pub fn cross124_child_rep_regular() -> @kernel.Thm
+
+pub fn cross124_child_rep_scale() -> @kernel.Thm
+
+pub fn cross124_contr_false_assum_tac(@list.List[(String, @kernel.Thm)], @kernel.Term) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn cross124_det() -> @kernel.Thm
+
+pub fn cross124_diag1_base() -> @kernel.Thm
+
+pub fn cross124_diag1_universal() -> @kernel.Thm
+
+pub fn cross124_diag2_base() -> @kernel.Thm
+
+pub fn cross124_diag2_universal() -> @kernel.Thm
+
+pub fn cross124_diag4_base() -> @kernel.Thm
+
+pub fn cross124_diag4_universal() -> @kernel.Thm
+
+pub fn cross124_diag5_base() -> @kernel.Thm
+
+pub fn cross124_diag5_universal() -> @kernel.Thm
+
+pub fn cross124_diag6_base() -> @kernel.Thm
+
+pub fn cross124_diag6_universal() -> @kernel.Thm
+
+pub fn cross124_diag7_base() -> @kernel.Thm
+
+pub fn cross124_diag7_universal() -> @kernel.Thm
+
+pub fn cross124_eoe_not_mod4_01() -> @kernel.Thm
+
+pub fn cross124_finite_shift_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn cross124_generic_child() -> @kernel.Thm
+
+pub fn cross124_generic_child_data() -> @kernel.Thm
+
+pub fn cross124_generic_child_rep_large() -> @kernel.Thm
+
+pub fn cross124_generic_child_rep_large_of_finite() -> @kernel.Thm
+
+pub fn cross124_generic_child_rep_of_base() -> @kernel.Thm
+
+pub fn cross124_generic_child_rep_shift() -> @kernel.Thm
+
+pub fn cross124_generic_child_universal_of_finite_base() -> @kernel.Thm
+
+pub fn cross124_generic_child_universal_of_maybe_base() -> @kernel.Thm
+
+pub fn cross124_generic_offset() -> @kernel.Thm
+
+pub fn cross124_generic_offset_finite_shift() -> @kernel.Thm
+
+pub fn cross124_generic_offset_shift() -> @kernel.Thm
+
+pub fn cross124_maybe_check() -> @kernel.Thm
+
+pub fn cross124_needs_check() -> @kernel.Thm
+
+pub fn cross124_needs_imp_maybe_check() -> @kernel.Thm
+
+pub fn cross124_num_of_int(Int64) -> @num.Num raise
+
+pub fn cross124_ooe_not_mod4_01() -> @kernel.Thm
+
+pub fn cross124_quotient_base_tac(Int64, Int64, Int64, Int64) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn cross124_to_diag7_y_even() -> @kernel.Thm
+
+pub fn cross124_to_diag7_yz() -> @kernel.Thm
+
+pub fn cross124_universal_child_tac(@kernel.Term, @kernel.Term, @kernel.Term, @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn cross125_00_admissible() -> @kernel.Thm
+
+pub fn cross125_0_neg1_admissible() -> @kernel.Thm
+
+pub fn cross125_0_neg2_admissible() -> @kernel.Thm
+
+pub fn cross125_10_admissible() -> @kernel.Thm
+
+pub fn cross125_1_neg1_admissible() -> @kernel.Thm
+
+pub fn cross125_admissible() -> @kernel.Thm
+
+pub fn cross125_admissible_almost15() -> @kernel.Thm
+
+pub fn cross125_admissible_base() -> @kernel.Thm
+
+pub fn cross125_admissible_data() -> @kernel.Thm
+
+pub fn cross125_base_case_tac(Int64, Int64, Int64, Int64, Int64) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn cross125_cert_tac(Int64, Int64, Int64, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn cross125_child_almost15() -> @kernel.Thm
+
+pub fn cross125_child_rep() -> @kernel.Thm
+
+pub fn cross125_child_rep_regular() -> @kernel.Thm
+
+pub fn cross125_child_rep_residue7() -> @kernel.Thm
+
+pub fn cross125_child_rep_scale4() -> @kernel.Thm
+
+pub fn cross125_det() -> @kernel.Thm
+
+pub fn cross125_num_of_int(Int64) -> @num.Num raise
+
+pub fn cross125_universal_child_tac(@kernel.Term, @kernel.Term, @kernel.Thm, @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn cube_ge_27() -> @kernel.Thm
+
+pub fn descent_113_not_form() -> @kernel.Thm
+
+pub fn diag7_eeo_not_mod4_01() -> @kernel.Thm
+
+pub fn diag7_mod4_parity() -> @kernel.Thm
+
+pub fn diag7_ooe_not_mod4_01() -> @kernel.Thm
+
+pub fn diag7_to_117_double() -> @kernel.Thm
+
+pub fn diag7_to_cross124_xz() -> @kernel.Thm
+
+pub fn diag7_to_cross124_yz() -> @kernel.Thm
+
+pub fn dickson_c_125_g_five_minus() -> @kernel.Thm
+
+pub fn dickson_c_125_g_five_plus() -> @kernel.Thm
+
+pub fn dickson_c_125_t_five_minus() -> @kernel.Thm
+
+pub fn dickson_c_125_t_five_plus() -> @kernel.Thm
+
+pub fn dickson_data_125_g_five() -> @kernel.Thm
+
+pub fn dickson_data_125_t_five() -> @kernel.Thm
+
+pub fn dickson_norm_125_g_five_minus() -> @kernel.Thm
+
+pub fn dickson_norm_125_g_five_plus() -> @kernel.Thm
+
+pub fn dickson_odd_residue_lift_125_g_five() -> @kernel.Thm
+
+pub fn dickson_residue_lift_125_five() -> @kernel.Thm
+
+pub fn dirichlet_prime_113() -> @kernel.Thm
+
+pub fn dirichlet_prime_113_3() -> @kernel.Thm
+
+pub fn dirichlet_prime_125() -> @kernel.Thm
+
+pub fn dirichlet_prime_125_double() -> @kernel.Thm
+
+pub fn dirichlet_prime_disc7() -> @kernel.Thm
+
+pub fn dirichlet_prime_disc7_multiple() -> @kernel.Thm
+
+pub fn disc10_block3_even_value() -> @kernel.Thm
+
+pub fn disc10_block4_not6mod16() -> @kernel.Thm
+
+pub fn disc10_block5_not6mod16() -> @kernel.Thm
+
+pub fn disc10_min2_excluded() -> @kernel.Thm
+
+pub fn disc5_block2_false() -> @kernel.Thm
+
+pub fn disc5_min2_excluded() -> @kernel.Thm
+
+pub fn disc7_block2_type1_false() -> @kernel.Thm
+
+pub fn disc7_both_regular_mod4() -> @kernel.Thm
+
+pub fn disc7_cross124_regular() -> @kernel.Thm
+
+pub fn disc7_cross124_regular_mod3() -> @kernel.Thm
+
+pub fn disc7_descent_not_exception() -> @kernel.Thm
+
+pub fn disc7_dirichlet_genus_represents() -> @kernel.Thm
+
+pub fn disc7_dirichlet_type1() -> @kernel.Thm
+
+pub fn disc7_double_mod3_witness() -> @kernel.Thm
+
+pub fn disc7_even_type1() -> @kernel.Thm
+
+pub fn disc7_exception() -> @kernel.Thm
+
+pub fn disc7_exception_base() -> @kernel.Thm
+
+pub fn disc7_exception_mod49() -> @kernel.Thm
+
+pub fn disc7_exception_mul49() -> @kernel.Thm
+
+pub fn disc7_genus_coprime7() -> @kernel.Thm
+
+pub fn disc7_genus_regular() -> @kernel.Thm
+
+pub fn disc7_genus_rep_descend49() -> @kernel.Thm
+
+pub fn disc7_genus_rep_mul4() -> @kernel.Thm
+
+pub fn disc7_genus_rep_mul49() -> @kernel.Thm
+
+pub fn disc7_genus_represents_7_core() -> @kernel.Thm
+
+pub fn disc7_genus_represents_7_squareclass() -> @kernel.Thm
+
+pub fn disc7_matrix_genus_represents() -> @kernel.Thm
+
+pub fn disc7_min2_excluded() -> @kernel.Thm
+
+pub fn disc7_mod4_witness() -> @kernel.Thm
+
+pub fn disc7_not_exception_of_mod49() -> @kernel.Thm
+
+pub fn disc7_odd_type1() -> @kernel.Thm
+
+pub fn disc7_oddpart_not_div4() -> @kernel.Thm
+
+pub fn disc7_oddpart_squareclass() -> @kernel.Thm
+
+pub fn disc7_quarter_squareclass() -> @kernel.Thm
+
+pub fn disc7_squareclass_offset() -> @kernel.Thm
+
+pub fn div49_less() -> @kernel.Thm
+
+pub fn div49_pos() -> @kernel.Thm
+
+pub fn div9_less() -> @kernel.Thm
+
+pub fn exp_125_scale25() -> @kernel.Thm
+
+pub fn fifteen_theorem() -> @kernel.Thm
+
+pub fn finite_qindex() -> @kernel.Thm
+
+pub fn hermite_cube_disc10() -> @kernel.Thm
+
+pub fn hermite_cube_disc3() -> @kernel.Thm
+
+pub fn hermite_cube_disc5() -> @kernel.Thm
+
+pub fn hermite_cube_disc7() -> @kernel.Thm
+
+pub fn hermite_disc10_le2() -> @kernel.Thm
+
+pub fn hermite_disc10_min2_pair() -> @kernel.Thm
+
+pub fn hermite_disc3_a1() -> @kernel.Thm
+
+pub fn hermite_disc5_a1() -> @kernel.Thm
+
+pub fn hermite_disc5_le2() -> @kernel.Thm
+
+pub fn hermite_disc5_min2_pair() -> @kernel.Thm
+
+pub fn hermite_disc7_le2() -> @kernel.Thm
+
+pub fn hermite_disc7_min2_pair() -> @kernel.Thm
+
+pub fn int123_cert_tac(Int64, Int64, Int64, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn int123_num_of_int(Int64) -> @num.Num raise
+
+pub fn int124_cert_tac(Int64, Int64, Int64, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn int124_num_of_int(Int64) -> @num.Num raise
+
+pub fn int125_base_tac(Int64, Int64, Int64, Int64, Int64) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn int125_cert_tac(Int64, Int64, Int64, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn int125_child_rep() -> @kernel.Thm
+
+pub fn int125_child_rep_diag() -> @kernel.Thm
+
+pub fn int125_child_rep_of_ternary() -> @kernel.Thm
+
+pub fn int125_child_rep_rb1() -> @kernel.Thm
+
+pub fn int125_child_rep_rb1_rc1() -> @kernel.Thm
+
+pub fn int125_child_rep_rb1_rc2() -> @kernel.Thm
+
+pub fn int125_child_rep_rc1() -> @kernel.Thm
+
+pub fn int125_child_rep_rc2() -> @kernel.Thm
+
+pub fn int125_child_rep_scale25() -> @kernel.Thm
+
+pub fn int125_num_of_int(Int64) -> @num.Num raise
+
+pub fn int_112_all_even_ne_16q10() -> @kernel.Thm
+
+pub fn int_112_all_even_ne_16q2() -> @kernel.Thm
+
+pub fn int_112_not_14() -> @kernel.Thm
+
+pub fn int_112_opposite_halves_ne_16q10() -> @kernel.Thm
+
+pub fn int_112_opposite_halves_ne_16q2() -> @kernel.Thm
+
+pub fn int_112_opposite_halves_sym_ne_16q10() -> @kernel.Thm
+
+pub fn int_112_opposite_halves_sym_ne_16q2() -> @kernel.Thm
+
+pub fn int_113_not_6() -> @kernel.Thm
+
+pub fn int_117_bad_rem3() -> @kernel.Thm
+
+pub fn int_117_pair_to_127() -> @kernel.Thm
+
+pub fn int_122_not_7() -> @kernel.Thm
+
+pub fn int_123_not_10() -> @kernel.Thm
+
+pub fn int_124_not_14() -> @kernel.Thm
+
+pub fn int_125_child_not_10_tac(@kernel.Term, @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn int_125_double_two_mul() -> @kernel.Thm
+
+pub fn int_125_not_10() -> @kernel.Thm
+
+pub fn int_127_double_parity() -> @kernel.Thm
+
+pub fn int_2q2_add_2q_nonneg() -> @kernel.Thm
+
+pub fn int_2sq_not_7() -> @kernel.Thm
+
+pub fn int_2sq_not_7_core() -> @kernel.Thm
+
+pub fn int_2sq_two_odd_not_8() -> @kernel.Thm
+
+pub fn int_3_divides_sum_squares() -> @kernel.Thm
+
+pub fn int_3_divides_sum_three_squares() -> @kernel.Thm
+
+pub fn int_3q2_add_2q_nonneg() -> @kernel.Thm
+
+pub fn int_3q2_sub_2q_nonneg() -> @kernel.Thm
+
+pub fn int_6_divides_of_2_3() -> @kernel.Thm
+
+pub fn int_almost_universal_125_child_of_regular() -> @kernel.Thm
+
+pub fn int_almost_universal_diag125() -> @kernel.Thm
+
+pub fn int_almost_universal_diag125_rep() -> @kernel.Thm
+
+pub fn int_almost_universal_rb1_125() -> @kernel.Thm
+
+pub fn int_almost_universal_rb1_125_rep() -> @kernel.Thm
+
+pub fn int_almost_universal_rb1_rc1_125() -> @kernel.Thm
+
+pub fn int_almost_universal_rb1_rc1_125_rep() -> @kernel.Thm
+
+pub fn int_almost_universal_rb1_rc2_125() -> @kernel.Thm
+
+pub fn int_almost_universal_rb1_rc2_125_rep() -> @kernel.Thm
+
+pub fn int_almost_universal_rc1_125() -> @kernel.Thm
+
+pub fn int_almost_universal_rc1_125_rep() -> @kernel.Thm
+
+pub fn int_almost_universal_rc2_125() -> @kernel.Thm
+
+pub fn int_almost_universal_rc2_125_rep() -> @kernel.Thm
+
+pub fn int_block5_canonical_not6mod16() -> @kernel.Thm
+
+pub fn int_char_binary_even() -> @kernel.Thm
+
+pub fn int_characteristic_values_cong8() -> @kernel.Thm
+
+pub fn int_coprime3_of_sum_three_squares() -> @kernel.Thm
+
+pub fn int_coprime_3_2() -> @kernel.Thm
+
+pub fn int_cross124_0_neg1_2_not_7() -> @kernel.Thm
+
+pub fn int_cross124_10_7_table2_identity() -> @kernel.Thm
+
+pub fn int_cross124_1_neg1_8_not_7() -> @kernel.Thm
+
+pub fn int_cross124_binary_nonneg() -> @kernel.Thm
+
+pub fn int_cross124_binary_not_7() -> @kernel.Thm
+
+pub fn int_cross124_child_det_identity() -> @kernel.Thm
+
+pub fn int_cross124_child_shift7() -> @kernel.Thm
+
+pub fn int_cross124_not_7() -> @kernel.Thm
+
+pub fn int_cross124_offset_coerce() -> @kernel.Thm
+
+pub fn int_cross124_orthogonal_value() -> @kernel.Thm
+
+pub fn int_cross124_reduced_norm_not_div7() -> @kernel.Thm
+
+pub fn int_cross124_remainder() -> @kernel.Thm
+
+pub fn int_cross125_1_neg1_8_not_7() -> @kernel.Thm
+
+pub fn int_cross125_child_det_identity() -> @kernel.Thm
+
+pub fn int_cross125_child_offset_coerce() -> @kernel.Thm
+
+pub fn int_cross125_child_shift9() -> @kernel.Thm
+
+pub fn int_cross125_not_7() -> @kernel.Thm
+
+pub fn int_cross125_offset_coerce() -> @kernel.Thm
+
+pub fn int_cross125_orthogonal_value() -> @kernel.Thm
+
+pub fn int_cross125_remainder() -> @kernel.Thm
+
+pub fn int_crossb122_assemble() -> @kernel.Thm
+
+pub fn int_crossb122_shift_num() -> @kernel.Thm
+
+pub fn int_dc123_not_10_7() -> @kernel.Thm
+
+pub fn int_dc2_124_not_14() -> @kernel.Thm
+
+pub fn int_dc2_124_not_14_11() -> @kernel.Thm
+
+pub fn int_dc2_124_not_14_12() -> @kernel.Thm
+
+pub fn int_dc2_124_not_14_7() -> @kernel.Thm
+
+pub fn int_dc2_124_not_14_8() -> @kernel.Thm
+
+pub fn int_dc2_124_not_14_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn int_disc10_not_first3() -> @kernel.Thm
+
+pub fn int_disc3_offdiag_odd() -> @kernel.Thm
+
+pub fn int_disc7_block_characteristic() -> @kernel.Thm
+
+pub fn int_disc7_block_oddity5() -> @kernel.Thm
+
+pub fn int_disc7_dirichlet_a11_parity() -> @kernel.Thm
+
+pub fn int_disc7_not_first3() -> @kernel.Thm
+
+pub fn int_div2_decomp() -> @kernel.Thm
+
+pub fn int_div2_qr() -> @kernel.Thm
+
+pub fn int_div3_decomp() -> @kernel.Thm
+
+pub fn int_div4_balanced() -> @kernel.Thm
+
+pub fn int_div5_balanced() -> @kernel.Thm
+
+pub fn int_divides_square() -> @kernel.Thm
+
+pub fn int_divides_sub_of_rem_eq() -> @kernel.Thm
+
+pub fn int_double_shift_sq_bound_14() -> @kernel.Thm
+
+pub fn int_double_shift_sq_bound_28() -> @kernel.Thm
+
+pub fn int_double_two_mul() -> @kernel.Thm
+
+pub fn int_even_even_odd_squares_ne_double() -> @kernel.Thm
+
+pub fn int_even_odd_even_squares_ne_double() -> @kernel.Thm
+
+pub fn int_exists_pattern123() -> @kernel.Thm
+
+pub fn int_neg_rem2() -> @kernel.Thm
+
+pub fn int_not_2_divides_5_125() -> @kernel.Thm
+
+pub fn int_odd_det_kernel_mod2() -> @kernel.Thm
+
+pub fn int_odd_sq_sq_10_not_6mod8() -> @kernel.Thm
+
+pub fn int_odd_square_8_witness() -> @kernel.Thm
+
+pub fn int_oddity1_mod8() -> @kernel.Thm
+
+pub fn int_one_odd_squares_ne_double() -> @kernel.Thm
+
+pub fn int_pair_half() -> @kernel.Thm
+
+pub fn int_parity_disc_even() -> @kernel.Thm
+
+pub fn int_parity_witness() -> @kernel.Thm
+
+pub fn int_pattern123_of_slots() -> @kernel.Thm
+
+pub fn int_quad2_rem_nonneg() -> @kernel.Thm
+
+pub fn int_quad2_rem_nonneg_125() -> @kernel.Thm
+
+pub fn int_quad4_balanced_nonneg() -> @kernel.Thm
+
+pub fn int_quad5_balanced_nonneg() -> @kernel.Thm
+
+pub fn int_rb1_rc0_k7_125_not_10() -> @kernel.Thm
+
+pub fn int_rb1_rc0_k8_125_not_10() -> @kernel.Thm
+
+pub fn int_rb1_rc1_k4_125_not_10() -> @kernel.Thm
+
+pub fn int_rb1_rc1_k8_125_not_10() -> @kernel.Thm
+
+pub fn int_rb1_rc2_k7_125_not_10() -> @kernel.Thm
+
+pub fn int_rc2_124_not_14_1() -> @kernel.Thm
+
+pub fn int_rc2_124_not_14_7() -> @kernel.Thm
+
+pub fn int_rc2_124_not_14_7_9() -> @kernel.Thm
+
+pub fn int_rc2_124_not_14_9() -> @kernel.Thm
+
+pub fn int_rc2_124_not_14_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn int_rem_3_cases() -> @kernel.Thm
+
+pub fn int_rem_8mul_add6() -> @kernel.Thm
+
+pub fn int_repr123_core() -> @kernel.Thm
+
+pub fn int_repr123_of_pattern() -> @kernel.Thm
+
+pub fn int_repr123_three_mul() -> @kernel.Thm
+
+pub fn int_repr_133_one_mod3_num() -> @kernel.Thm
+
+pub fn int_represents_112_odd() -> @kernel.Thm
+
+pub fn int_represents_112_odd_second_16q10() -> @kernel.Thm
+
+pub fn int_represents_112_odd_second_16q2() -> @kernel.Thm
+
+pub fn int_represents_112_of_legendre() -> @kernel.Thm
+
+pub fn int_represents_112_scale4_num() -> @kernel.Thm
+
+pub fn int_represents_112_twice_8q_mod() -> @kernel.Thm
+
+pub fn int_represents_112_two() -> @kernel.Thm
+
+pub fn int_represents_122_avoids() -> @kernel.Thm
+
+pub fn int_represents_123_child_scale4() -> @kernel.Thm
+
+pub fn int_represents_124_child_scale4() -> @kernel.Thm
+
+pub fn int_represents_124_odd() -> @kernel.Thm
+
+pub fn int_represents_124_of_legendre() -> @kernel.Thm
+
+pub fn int_represents_124_scale4() -> @kernel.Thm
+
+pub fn int_represents_125_child_scale25() -> @kernel.Thm
+
+pub fn int_represents_125_scale25() -> @kernel.Thm
+
+pub fn int_represents_cross112_bad() -> @kernel.Thm
+
+pub fn int_represents_cross124_child_shift7() -> @kernel.Thm
+
+pub fn int_represents_cross125_child_scale4() -> @kernel.Thm
+
+pub fn int_represents_cross125_child_shift9() -> @kernel.Thm
+
+pub fn int_represents_cross125_of_legendre() -> @kernel.Thm
+
+pub fn int_represents_crossb122_w1() -> @kernel.Thm
+
+pub fn int_represents_dc123_mod16() -> @kernel.Thm
+
+pub fn int_represents_dc123_shift() -> @kernel.Thm
+
+pub fn int_represents_dc123_shift_mod16() -> @kernel.Thm
+
+pub fn int_represents_dc123_small_10() -> @kernel.Thm
+
+pub fn int_represents_dc123_small_2() -> @kernel.Thm
+
+pub fn int_represents_dc123_small_3() -> @kernel.Thm
+
+pub fn int_represents_dc123_small_4() -> @kernel.Thm
+
+pub fn int_represents_dc123_small_5() -> @kernel.Thm
+
+pub fn int_represents_dc123_small_6() -> @kernel.Thm
+
+pub fn int_represents_dc123_small_8() -> @kernel.Thm
+
+pub fn int_represents_dc123_small_9() -> @kernel.Thm
+
+pub fn int_represents_dc1_124_mod16() -> @kernel.Thm
+
+pub fn int_represents_dc1_124_shift() -> @kernel.Thm
+
+pub fn int_represents_dc1_124_small() -> @kernel.Thm
+
+pub fn int_represents_dc2_124_large() -> @kernel.Thm
+
+pub fn int_represents_dc2_124_mod16() -> @kernel.Thm
+
+pub fn int_represents_dc2_124_shift() -> @kernel.Thm
+
+pub fn int_represents_dc2_124_small() -> @kernel.Thm
+
+pub fn int_represents_det3_complement() -> @kernel.Thm
+
+pub fn int_represents_diag123_mod16() -> @kernel.Thm
+
+pub fn int_represents_diag123_shift() -> @kernel.Thm
+
+pub fn int_represents_diag123_small_shift() -> @kernel.Thm
+
+pub fn int_represents_diag124_mod16() -> @kernel.Thm
+
+pub fn int_represents_diag124_shift() -> @kernel.Thm
+
+pub fn int_represents_diag124_small() -> @kernel.Thm
+
+pub fn int_represents_diag125_base() -> @kernel.Thm
+
+pub fn int_represents_diag125_shift() -> @kernel.Thm
+
+pub fn int_represents_rb1_125_base() -> @kernel.Thm
+
+pub fn int_represents_rb1_125_shift() -> @kernel.Thm
+
+pub fn int_represents_rb1_rc1_125_base() -> @kernel.Thm
+
+pub fn int_represents_rb1_rc1_125_shift() -> @kernel.Thm
+
+pub fn int_represents_rb1_rc2_125_base() -> @kernel.Thm
+
+pub fn int_represents_rb1_rc2_125_shift() -> @kernel.Thm
+
+pub fn int_represents_rc1_125_base() -> @kernel.Thm
+
+pub fn int_represents_rc1_125_shift() -> @kernel.Thm
+
+pub fn int_represents_rc2_124_13() -> @kernel.Thm
+
+pub fn int_represents_rc2_124_5() -> @kernel.Thm
+
+pub fn int_represents_rc2_124_large() -> @kernel.Thm
+
+pub fn int_represents_rc2_124_large_all() -> @kernel.Thm
+
+pub fn int_represents_rc2_124_mod16() -> @kernel.Thm
+
+pub fn int_represents_rc2_124_shift() -> @kernel.Thm
+
+pub fn int_represents_rc2_124_small() -> @kernel.Thm
+
+pub fn int_represents_rc2_124_special() -> @kernel.Thm
+
+pub fn int_represents_rc2_125_base() -> @kernel.Thm
+
+pub fn int_represents_rc2_125_shift() -> @kernel.Thm
+
+pub fn int_represents_yc123_mod16() -> @kernel.Thm
+
+pub fn int_represents_yc123_shift() -> @kernel.Thm
+
+pub fn int_represents_yc123_shift_mod16() -> @kernel.Thm
+
+pub fn int_represents_yc123_small() -> @kernel.Thm
+
+pub fn int_represents_yc124_large() -> @kernel.Thm
+
+pub fn int_represents_yc124_mod16() -> @kernel.Thm
+
+pub fn int_represents_yc124_shift() -> @kernel.Thm
+
+pub fn int_represents_yc124_small() -> @kernel.Thm
+
+pub fn int_represents_zc123_mod16() -> @kernel.Thm
+
+pub fn int_represents_zc123_shift() -> @kernel.Thm
+
+pub fn int_represents_zc123_shift_mod16() -> @kernel.Thm
+
+pub fn int_represents_zc123_small() -> @kernel.Thm
+
+pub fn int_represents_zc124_mod16() -> @kernel.Thm
+
+pub fn int_represents_zc124_shift() -> @kernel.Thm
+
+pub fn int_represents_zc124_small() -> @kernel.Thm
+
+pub fn int_same_parity_half() -> @kernel.Thm
+
+pub fn int_same_rem_mod3_divides_sub() -> @kernel.Thm
+
+pub fn int_sign_mod3_1() -> @kernel.Thm
+
+pub fn int_sign_mod3_2() -> @kernel.Thm
+
+pub fn int_sign_normalize_mod3() -> @kernel.Thm
+
+pub fn int_sq_eq_one() -> @kernel.Thm
+
+pub fn int_sq_le_10_cases() -> @kernel.Thm
+
+pub fn int_sq_le_14_cases() -> @kernel.Thm
+
+pub fn int_sq_le_20_cases() -> @kernel.Thm
+
+pub fn int_sq_le_28_cases() -> @kernel.Thm
+
+pub fn int_sq_le_2_cases() -> @kernel.Thm
+
+pub fn int_sq_le_30_cases() -> @kernel.Thm
+
+pub fn int_sq_le_3_cases() -> @kernel.Thm
+
+pub fn int_sq_le_50_cases() -> @kernel.Thm
+
+pub fn int_sq_le_5_cases() -> @kernel.Thm
+
+pub fn int_sq_le_7_cases() -> @kernel.Thm
+
+pub fn int_sq_sq_5_not_3mod8() -> @kernel.Thm
+
+pub fn int_sq_sub_self_even() -> @kernel.Thm
+
+pub fn int_square_1mod3_decomp() -> @kernel.Thm
+
+pub fn int_three_odd_squares_ne_double() -> @kernel.Thm
+
+pub fn int_three_parity_pair() -> @kernel.Thm
+
+pub fn int_three_squares_4mul_8q_mod() -> @kernel.Thm
+
+pub fn int_three_squares_7mod8_core() -> @kernel.Thm
+
+pub fn int_three_squares_8q_mod() -> @kernel.Thm
+
+pub fn int_three_squares_mod3_pair() -> @kernel.Thm
+
+pub fn int_three_squares_not_7mod8() -> @kernel.Thm
+
+pub fn int_three_squares_of_legendre() -> @kernel.Thm
+
+pub fn int_three_squares_of_mod() -> @kernel.Thm
+
+pub fn int_two_mul_ne_one() -> @kernel.Thm
+
+pub fn int_universal_123_child_of_mod16() -> @kernel.Thm
+
+pub fn int_universal_124_child_of_mod16() -> @kernel.Thm
+
+pub fn int_universal_cross112_num() -> @kernel.Thm
+
+pub fn int_universal_cross113_num() -> @kernel.Thm
+
+pub fn int_universal_crossa122_num() -> @kernel.Thm
+
+pub fn int_universal_crossa122_z_num() -> @kernel.Thm
+
+pub fn int_universal_crossb122_num() -> @kernel.Thm
+
+pub fn int_universal_dc123_num() -> @kernel.Thm
+
+pub fn int_universal_dc1_124_num() -> @kernel.Thm
+
+pub fn int_universal_dc2_124_num() -> @kernel.Thm
+
+pub fn int_universal_diag113_num() -> @kernel.Thm
+
+pub fn int_universal_diag123_num() -> @kernel.Thm
+
+pub fn int_universal_diag124_num() -> @kernel.Thm
+
+pub fn int_universal_rc2_124_num() -> @kernel.Thm
+
+pub fn int_universal_yc123_num() -> @kernel.Thm
+
+pub fn int_universal_yc124_num() -> @kernel.Thm
+
+pub fn int_universal_zc123_num() -> @kernel.Thm
+
+pub fn int_universal_zc124_num() -> @kernel.Thm
+
+pub fn int_yc123_not_10_4() -> @kernel.Thm
+
+pub fn int_yc123_not_10_8() -> @kernel.Thm
+
+pub fn int_yc124_not_14() -> @kernel.Thm
+
+pub fn int_yc124_not_14_11() -> @kernel.Thm
+
+pub fn int_yc124_not_14_12() -> @kernel.Thm
+
+pub fn int_yc124_not_14_7() -> @kernel.Thm
+
+pub fn int_yc124_not_14_8() -> @kernel.Thm
+
+pub fn int_yc124_not_14_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn iq_111_corner_cases() -> @kernel.Thm
+
+pub fn iq_112_mod16_core() -> @kernel.Thm
+
+pub fn iq_112_parameters() -> @kernel.Thm
+
+pub fn iq_113_mod9_core() -> @kernel.Thm
+
+pub fn iq_122_mod8_core() -> @kernel.Thm
+
+pub fn iq_122_parameters() -> @kernel.Thm
+
+pub fn iq_123_mod16_core() -> @kernel.Thm
+
+pub fn iq_124_mod16_core() -> @kernel.Thm
+
+pub fn iq_124_reduced_k_bounds() -> @kernel.Thm
+
+pub fn iq_124_reduced_k_nonneg() -> @kernel.Thm
+
+pub fn iq_124_reduced_k_nonzero() -> @kernel.Thm
+
+pub fn iq_124_reduced_k_upper() -> @kernel.Thm
+
+pub fn iq_124_reduced_represents_14() -> @kernel.Thm
+
+pub fn iq_124_zero_forces_rb() -> @kernel.Thm
+
+pub fn iq_124_zero_forces_rc() -> @kernel.Thm
+
+pub fn iq_125_child_rep_of_num() -> @kernel.Thm
+
+pub fn iq_125_reduced_k_bounds() -> @kernel.Thm
+
+pub fn iq_125_reduced_k_nonneg() -> @kernel.Thm
+
+pub fn iq_125_reduced_k_nonzero() -> @kernel.Thm
+
+pub fn iq_125_reduced_k_upper() -> @kernel.Thm
+
+pub fn iq_125_reduced_represents_10() -> @kernel.Thm
+
+pub fn iq_125_zero_forces_rb() -> @kernel.Thm
+
+pub fn iq_125_zero_forces_rc() -> @kernel.Thm
+
+pub fn iq_12_parameters() -> @kernel.Thm
+
+pub fn iq_corner_11_cases() -> @kernel.Thm
+
+pub fn iq_cross113_corner_lower() -> @kernel.Thm
+
+pub fn iq_cross124_00_parameter_cases() -> @kernel.Thm
+
+pub fn iq_cross124_0_neg1_2_not_represents_7() -> @kernel.Thm
+
+pub fn iq_cross124_0_neg1_parameter_cases() -> @kernel.Thm
+
+pub fn iq_cross124_10_parameter_cases() -> @kernel.Thm
+
+pub fn iq_cross124_1_neg1_8_not_represents_7() -> @kernel.Thm
+
+pub fn iq_cross124_1_neg1_parameter_cases() -> @kernel.Thm
+
+pub fn iq_cross124_child_rep_of_num() -> @kernel.Thm
+
+pub fn iq_cross124_det_constraints() -> @kernel.Thm
+
+pub fn iq_cross124_det_le_49() -> @kernel.Thm
+
+pub fn iq_cross124_det_nonneg() -> @kernel.Thm
+
+pub fn iq_cross124_det_positive() -> @kernel.Thm
+
+pub fn iq_cross124_reduced_represents_7() -> @kernel.Thm
+
+pub fn iq_cross125_00_parameter_cases() -> @kernel.Thm
+
+pub fn iq_cross125_0_neg1_parameter_cases() -> @kernel.Thm
+
+pub fn iq_cross125_0_neg2_parameter_cases() -> @kernel.Thm
+
+pub fn iq_cross125_10_parameter_cases() -> @kernel.Thm
+
+pub fn iq_cross125_1_neg1_8_not_represents_7() -> @kernel.Thm
+
+pub fn iq_cross125_1_neg1_parameter_cases() -> @kernel.Thm
+
+pub fn iq_cross125_child_rep_of_num() -> @kernel.Thm
+
+pub fn iq_cross125_det_constraints() -> @kernel.Thm
+
+pub fn iq_cross125_det_le_63() -> @kernel.Thm
+
+pub fn iq_cross125_det_nonneg() -> @kernel.Thm
+
+pub fn iq_cross125_det_nonzero_of_represents_7() -> @kernel.Thm
+
+pub fn iq_cross125_det_not_div8_of_represents_7() -> @kernel.Thm
+
+pub fn iq_cross125_det_positive() -> @kernel.Thm
+
+pub fn iq_cross125_reduced_represents_7() -> @kernel.Thm
+
+pub fn iq_dc123_corner_lower() -> @kernel.Thm
+
+pub fn iq_dc123_not_represents_10_7() -> @kernel.Thm
+
+pub fn iq_dc123_parameter_cases() -> @kernel.Thm
+
+pub fn iq_dc2_124_not_embeds_1() -> @kernel.Thm
+
+pub fn iq_dc2_124_not_represents_14() -> @kernel.Thm
+
+pub fn iq_dc2_124_parameter_cases() -> @kernel.Thm
+
+pub fn iq_diag4_111c_representation_step() -> @kernel.Thm
+
+pub fn iq_diag4_112c_representation_step() -> @kernel.Thm
+
+pub fn iq_diag4_representation_scale4() -> @kernel.Thm
+
+pub fn iq_diag4_representation_scale4_num() -> @kernel.Thm
+
+pub fn iq_embedded_nonneg() -> @kernel.Thm
+
+pub fn iq_embeds() -> @kernel.Thm
+
+pub fn iq_embeds_1122_in_1111() -> @kernel.Thm
+
+pub fn iq_embeds_121_to_112() -> @kernel.Thm
+
+pub fn iq_embeds_12x1_to_111() -> @kernel.Thm
+
+pub fn iq_embeds_binary() -> @kernel.Thm
+
+pub fn iq_embeds_clear_11() -> @kernel.Thm
+
+pub fn iq_embeds_clear_111() -> @kernel.Thm
+
+pub fn iq_embeds_clear_112() -> @kernel.Thm
+
+pub fn iq_embeds_clear_113() -> @kernel.Thm
+
+pub fn iq_embeds_clear_12() -> @kernel.Thm
+
+pub fn iq_embeds_clear_122() -> @kernel.Thm
+
+pub fn iq_embeds_clear_123() -> @kernel.Thm
+
+pub fn iq_embeds_clear_124() -> @kernel.Thm
+
+pub fn iq_embeds_clear_125() -> @kernel.Thm
+
+pub fn iq_embeds_clear_cross124() -> @kernel.Thm
+
+pub fn iq_embeds_clear_cross125() -> @kernel.Thm
+
+pub fn iq_embeds_clear_unit2() -> @kernel.Thm
+
+pub fn iq_embeds_congruence() -> @kernel.Thm
+
+pub fn iq_embeds_cross124_10_1_embeds_111() -> @kernel.Thm
+
+pub fn iq_embeds_cross124_select013() -> @kernel.Thm
+
+pub fn iq_embeds_eq() -> @kernel.Thm
+
+pub fn iq_embeds_flip_113() -> @kernel.Thm
+
+pub fn iq_embeds_flip_123() -> @kernel.Thm
+
+pub fn iq_embeds_flip_124() -> @kernel.Thm
+
+pub fn iq_embeds_flip_124_neg1() -> @kernel.Thm
+
+pub fn iq_embeds_flip_124_neg2() -> @kernel.Thm
+
+pub fn iq_embeds_flip_125() -> @kernel.Thm
+
+pub fn iq_embeds_flip_125_neg1() -> @kernel.Thm
+
+pub fn iq_embeds_flip_125_neg2() -> @kernel.Thm
+
+pub fn iq_embeds_flip_cross124() -> @kernel.Thm
+
+pub fn iq_embeds_flip_cross125() -> @kernel.Thm
+
+pub fn iq_embeds_mat4_diag() -> @kernel.Thm
+
+pub fn iq_embeds_one() -> @kernel.Thm
+
+pub fn iq_embeds_quaternary_112() -> @kernel.Thm
+
+pub fn iq_embeds_quaternary_113() -> @kernel.Thm
+
+pub fn iq_embeds_quaternary_122() -> @kernel.Thm
+
+pub fn iq_embeds_quaternary_123() -> @kernel.Thm
+
+pub fn iq_embeds_quaternary_124() -> @kernel.Thm
+
+pub fn iq_embeds_quaternary_124_raw() -> @kernel.Thm
+
+pub fn iq_embeds_quaternary_125() -> @kernel.Thm
+
+pub fn iq_embeds_quaternary_125_raw() -> @kernel.Thm
+
+pub fn iq_embeds_quaternary_cross124() -> @kernel.Thm
+
+pub fn iq_embeds_quaternary_cross124_raw() -> @kernel.Thm
+
+pub fn iq_embeds_quaternary_cross125() -> @kernel.Thm
+
+pub fn iq_embeds_quaternary_cross125_raw() -> @kernel.Thm
+
+pub fn iq_embeds_represents_flip_cross124() -> @kernel.Thm
+
+pub fn iq_embeds_represents_flip_cross125() -> @kernel.Thm
+
+pub fn iq_embeds_ternary() -> @kernel.Thm
+
+pub fn iq_embeds_ternary_11() -> @kernel.Thm
+
+pub fn iq_embeds_ternary_12() -> @kernel.Thm
+
+pub fn iq_escalate_mat2() -> @kernel.Thm
+
+pub fn iq_escalate_mat3() -> @kernel.Thm
+
+pub fn iq_escalation_step() -> @kernel.Thm
+
+pub fn iq_flip_cross125_01() -> @kernel.Thm
+
+pub fn iq_flip_cross125_02() -> @kernel.Thm
+
+pub fn iq_flip_cross125_neg10() -> @kernel.Thm
+
+pub fn iq_flip_cross125_neg11() -> @kernel.Thm
+
+pub fn iq_nonzero() -> @kernel.Thm
+
+pub fn iq_positive() -> @kernel.Thm
+
+pub fn iq_positive_bilin_sq_le() -> @kernel.Thm
+
+pub fn iq_positive_imp_nonneg() -> @kernel.Thm
+
+pub fn iq_rb1_rc0_125_not_represents_10() -> @kernel.Thm
+
+pub fn iq_rb1_rc0_125_parameter_cases() -> @kernel.Thm
+
+pub fn iq_rb1_rc1_125_not_represents_10() -> @kernel.Thm
+
+pub fn iq_rb1_rc1_125_parameter_cases() -> @kernel.Thm
+
+pub fn iq_rb1_rc2_125_parameter_cases() -> @kernel.Thm
+
+pub fn iq_rb1_rc2_k1_125_not_embeds() -> @kernel.Thm
+
+pub fn iq_rb1_rc2_k7_125_not_represents_10() -> @kernel.Thm
+
+pub fn iq_rc2_124_not_represents_14_1() -> @kernel.Thm
+
+pub fn iq_rc2_124_not_represents_14_7_9() -> @kernel.Thm
+
+pub fn iq_rc2_124_parameter_cases() -> @kernel.Thm
+
+pub fn iq_rem_9_cases() -> @kernel.Thm
+
+pub fn iq_represents() -> @kernel.Thm
+
+pub fn iq_represents_diag4() -> @kernel.Thm
+
+pub fn iq_represents_flip_124() -> @kernel.Thm
+
+pub fn iq_represents_flip_124_neg1() -> @kernel.Thm
+
+pub fn iq_represents_flip_124_neg2() -> @kernel.Thm
+
+pub fn iq_represents_flip_125() -> @kernel.Thm
+
+pub fn iq_represents_flip_125_neg1() -> @kernel.Thm
+
+pub fn iq_represents_flip_125_neg2() -> @kernel.Thm
+
+pub fn iq_represents_flip_cross124() -> @kernel.Thm
+
+pub fn iq_represents_flip_cross125() -> @kernel.Thm
+
+pub fn iq_represents_of_embeds() -> @kernel.Thm
+
+pub fn iq_represents_reduced_123() -> @kernel.Thm
+
+pub fn iq_sq_mod_16() -> @kernel.Thm
+
+pub fn iq_sq_mod_9() -> @kernel.Thm
+
+pub fn iq_square_rem_16_of_mod8() -> @kernel.Thm
+
+pub fn iq_symmetric() -> @kernel.Thm
+
+pub fn iq_universal() -> @kernel.Thm
+
+pub fn iq_universal_1111() -> @kernel.Thm
+
+pub fn iq_universal_1112() -> @kernel.Thm
+
+pub fn iq_universal_1112_num() -> @kernel.Thm
+
+pub fn iq_universal_1113() -> @kernel.Thm
+
+pub fn iq_universal_1113_num() -> @kernel.Thm
+
+pub fn iq_universal_1114() -> @kernel.Thm
+
+pub fn iq_universal_1114_num() -> @kernel.Thm
+
+pub fn iq_universal_1115() -> @kernel.Thm
+
+pub fn iq_universal_1115_num() -> @kernel.Thm
+
+pub fn iq_universal_1116() -> @kernel.Thm
+
+pub fn iq_universal_1116_num() -> @kernel.Thm
+
+pub fn iq_universal_1117() -> @kernel.Thm
+
+pub fn iq_universal_1117_num() -> @kernel.Thm
+
+pub fn iq_universal_1121() -> @kernel.Thm
+
+pub fn iq_universal_11210() -> @kernel.Thm
+
+pub fn iq_universal_11210_num() -> @kernel.Thm
+
+pub fn iq_universal_11211() -> @kernel.Thm
+
+pub fn iq_universal_11211_num() -> @kernel.Thm
+
+pub fn iq_universal_11212() -> @kernel.Thm
+
+pub fn iq_universal_11212_num() -> @kernel.Thm
+
+pub fn iq_universal_11213() -> @kernel.Thm
+
+pub fn iq_universal_11213_num() -> @kernel.Thm
+
+pub fn iq_universal_11214() -> @kernel.Thm
+
+pub fn iq_universal_11214_num() -> @kernel.Thm
+
+pub fn iq_universal_1121_num() -> @kernel.Thm
+
+pub fn iq_universal_1122() -> @kernel.Thm
+
+pub fn iq_universal_1122_num() -> @kernel.Thm
+
+pub fn iq_universal_1123() -> @kernel.Thm
+
+pub fn iq_universal_1123_num() -> @kernel.Thm
+
+pub fn iq_universal_1124() -> @kernel.Thm
+
+pub fn iq_universal_1124_num() -> @kernel.Thm
+
+pub fn iq_universal_1125() -> @kernel.Thm
+
+pub fn iq_universal_1125_num() -> @kernel.Thm
+
+pub fn iq_universal_1126() -> @kernel.Thm
+
+pub fn iq_universal_1126_num() -> @kernel.Thm
+
+pub fn iq_universal_1127() -> @kernel.Thm
+
+pub fn iq_universal_1127_num() -> @kernel.Thm
+
+pub fn iq_universal_1128() -> @kernel.Thm
+
+pub fn iq_universal_1128_num() -> @kernel.Thm
+
+pub fn iq_universal_1129() -> @kernel.Thm
+
+pub fn iq_universal_1129_num() -> @kernel.Thm
+
+pub fn iq_universal_112_odd_num() -> @kernel.Thm
+
+pub fn iq_universal_112c_num_of_bad() -> @kernel.Thm
+
+pub fn iq_universal_1221() -> @kernel.Thm
+
+pub fn iq_universal_1221_num() -> @kernel.Thm
+
+pub fn iq_universal_1222() -> @kernel.Thm
+
+pub fn iq_universal_1223() -> @kernel.Thm
+
+pub fn iq_universal_1224() -> @kernel.Thm
+
+pub fn iq_universal_1225() -> @kernel.Thm
+
+pub fn iq_universal_1226() -> @kernel.Thm
+
+pub fn iq_universal_1227() -> @kernel.Thm
+
+pub fn iq_universal_122c_of_111c() -> @kernel.Thm
+
+pub fn iq_universal_123_child_of_num() -> @kernel.Thm
+
+pub fn iq_universal_124_child_of_num() -> @kernel.Thm
+
+pub fn iq_universal_cross112_num() -> @kernel.Thm
+
+pub fn iq_universal_cross113_num() -> @kernel.Thm
+
+pub fn iq_universal_cross113_of_num() -> @kernel.Thm
+
+pub fn iq_universal_crossa122_y_num() -> @kernel.Thm
+
+pub fn iq_universal_crossa122_z_num() -> @kernel.Thm
+
+pub fn iq_universal_crossb122_2() -> @kernel.Thm
+
+pub fn iq_universal_crossb122_3() -> @kernel.Thm
+
+pub fn iq_universal_crossb122_6() -> @kernel.Thm
+
+pub fn iq_universal_crossb122_7() -> @kernel.Thm
+
+pub fn iq_universal_crossb122_num() -> @kernel.Thm
+
+pub fn iq_universal_dc123_num() -> @kernel.Thm
+
+pub fn iq_universal_dc1_124_num() -> @kernel.Thm
+
+pub fn iq_universal_dc2_124_num() -> @kernel.Thm
+
+pub fn iq_universal_diag113_num() -> @kernel.Thm
+
+pub fn iq_universal_diag123_num() -> @kernel.Thm
+
+pub fn iq_universal_diag124_num() -> @kernel.Thm
+
+pub fn iq_universal_diag4_of_num() -> @kernel.Thm
+
+pub fn iq_universal_mat1222() -> @kernel.Thm
+
+pub fn iq_universal_mat1223() -> @kernel.Thm
+
+pub fn iq_universal_mat1224() -> @kernel.Thm
+
+pub fn iq_universal_mat1225() -> @kernel.Thm
+
+pub fn iq_universal_mat1226() -> @kernel.Thm
+
+pub fn iq_universal_mat1227() -> @kernel.Thm
+
+pub fn iq_universal_mat4_diag() -> @kernel.Thm
+
+pub fn iq_universal_of_125_child_almost15() -> @kernel.Thm
+
+pub fn iq_universal_of_cross112_child() -> @kernel.Thm
+
+pub fn iq_universal_of_cross113_child() -> @kernel.Thm
+
+pub fn iq_universal_of_cross124_00_3_child() -> @kernel.Thm
+
+pub fn iq_universal_of_cross124_0_neg1_5_child() -> @kernel.Thm
+
+pub fn iq_universal_of_cross124_10_1_child() -> @kernel.Thm
+
+pub fn iq_universal_of_cross124_1_neg1_5_child() -> @kernel.Thm
+
+pub fn iq_universal_of_cross124_rep_child() -> @kernel.Thm
+
+pub fn iq_universal_of_cross125_admissible_child() -> @kernel.Thm
+
+pub fn iq_universal_of_crossa122_y_child() -> @kernel.Thm
+
+pub fn iq_universal_of_crossa122_z_child() -> @kernel.Thm
+
+pub fn iq_universal_of_crossb122_child() -> @kernel.Thm
+
+pub fn iq_universal_of_dc123_child() -> @kernel.Thm
+
+pub fn iq_universal_of_dc1_124_child() -> @kernel.Thm
+
+pub fn iq_universal_of_dc2_124_child() -> @kernel.Thm
+
+pub fn iq_universal_of_diag111_child() -> @kernel.Thm
+
+pub fn iq_universal_of_diag112_child() -> @kernel.Thm
+
+pub fn iq_universal_of_diag113_child() -> @kernel.Thm
+
+pub fn iq_universal_of_diag122_child() -> @kernel.Thm
+
+pub fn iq_universal_of_diag123_child() -> @kernel.Thm
+
+pub fn iq_universal_of_diag124_child() -> @kernel.Thm
+
+pub fn iq_universal_of_diag125_child() -> @kernel.Thm
+
+pub fn iq_universal_of_embeds() -> @kernel.Thm
+
+pub fn iq_universal_of_embeds_111() -> @kernel.Thm
+
+pub fn iq_universal_of_embeds_112() -> @kernel.Thm
+
+pub fn iq_universal_of_embeds_113() -> @kernel.Thm
+
+pub fn iq_universal_of_embeds_122() -> @kernel.Thm
+
+pub fn iq_universal_of_embeds_123() -> @kernel.Thm
+
+pub fn iq_universal_of_embeds_124() -> @kernel.Thm
+
+pub fn iq_universal_of_embeds_125() -> @kernel.Thm
+
+pub fn iq_universal_of_embeds_cross124() -> @kernel.Thm
+
+pub fn iq_universal_of_embeds_cross125() -> @kernel.Thm
+
+pub fn iq_universal_of_rb1_125_child() -> @kernel.Thm
+
+pub fn iq_universal_of_rb1_rc1_125_child() -> @kernel.Thm
+
+pub fn iq_universal_of_rb1_rc2_125_child() -> @kernel.Thm
+
+pub fn iq_universal_of_rc1_125_child() -> @kernel.Thm
+
+pub fn iq_universal_of_rc2_124_child() -> @kernel.Thm
+
+pub fn iq_universal_of_rc2_125_child() -> @kernel.Thm
+
+pub fn iq_universal_of_represents_up_to_15() -> @kernel.Thm
+
+pub fn iq_universal_of_yc123_child() -> @kernel.Thm
+
+pub fn iq_universal_of_yc124_child() -> @kernel.Thm
+
+pub fn iq_universal_of_zc123_child() -> @kernel.Thm
+
+pub fn iq_universal_of_zc124_child() -> @kernel.Thm
+
+pub fn iq_universal_rc2_124_num() -> @kernel.Thm
+
+pub fn iq_universal_yc123_num() -> @kernel.Thm
+
+pub fn iq_universal_yc124_num() -> @kernel.Thm
+
+pub fn iq_universal_zc123_num() -> @kernel.Thm
+
+pub fn iq_universal_zc124_num() -> @kernel.Thm
+
+pub fn iq_yc123_corner_lower() -> @kernel.Thm
+
+pub fn iq_yc123_not_represents_10_4() -> @kernel.Thm
+
+pub fn iq_yc123_not_represents_10_8() -> @kernel.Thm
+
+pub fn iq_yc123_parameter_cases() -> @kernel.Thm
+
+pub fn iq_yc124_not_represents_14() -> @kernel.Thm
+
+pub fn iq_yc124_parameter_cases() -> @kernel.Thm
+
+pub fn iq_zc123_corner_lower() -> @kernel.Thm
+
+pub fn iqappend() -> @kernel.Thm
+
+pub fn iqappend_lt() -> @kernel.Thm
+
+pub fn iqappend_refl() -> @kernel.Thm
+
+pub fn iqbilin() -> @kernel.Thm
+
+pub fn iqbilin_eq_on_index() -> @kernel.Thm
+
+pub fn iqbilin_isum_l() -> @kernel.Thm
+
+pub fn iqbilin_isum_r() -> @kernel.Thm
+
+pub fn iqbilin_ladd() -> @kernel.Thm
+
+pub fn iqbilin_lmul() -> @kernel.Thm
+
+pub fn iqbilin_mat2() -> @kernel.Thm
+
+pub fn iqbilin_mat3() -> @kernel.Thm
+
+pub fn iqbilin_mat4() -> @kernel.Thm
+
+pub fn iqbilin_pullback() -> @kernel.Thm
+
+pub fn iqbilin_radd() -> @kernel.Thm
+
+pub fn iqbilin_rmul() -> @kernel.Thm
+
+pub fn iqbilin_sq_le() -> @kernel.Thm
+
+pub fn iqbilin_sym() -> @kernel.Thm
+
+pub fn iqclear11() -> @kernel.Thm
+
+pub fn iqclear111() -> @kernel.Thm
+
+pub fn iqclear112() -> @kernel.Thm
+
+pub fn iqclear113() -> @kernel.Thm
+
+pub fn iqclear12() -> @kernel.Thm
+
+pub fn iqclear122() -> @kernel.Thm
+
+pub fn iqclear123() -> @kernel.Thm
+
+pub fn iqclear124() -> @kernel.Thm
+
+pub fn iqclear125() -> @kernel.Thm
+
+pub fn iqclear2() -> @kernel.Thm
+
+pub fn iqclear_cross124() -> @kernel.Thm
+
+pub fn iqclear_cross125() -> @kernel.Thm
+
+pub fn iqcombine() -> @kernel.Thm
+
+pub fn iqcross1() -> @kernel.Thm
+
+pub fn iqdiag() -> @kernel.Thm
+
+pub fn iqdiag4() -> @kernel.Thm
+
+pub fn iqembed1122in1111() -> @kernel.Thm
+
+pub fn iqeval() -> @kernel.Thm
+
+pub fn iqeval_combo() -> @kernel.Thm
+
+pub fn iqeval_diag4() -> @kernel.Thm
+
+pub fn iqeval_eq_on_index() -> @kernel.Thm
+
+pub fn iqeval_iqdiag() -> @kernel.Thm
+
+pub fn iqeval_mat3() -> @kernel.Thm
+
+pub fn iqeval_mat4() -> @kernel.Thm
+
+pub fn iqeval_pullback() -> @kernel.Thm
+
+pub fn iqeval_zero_on_index() -> @kernel.Thm
+
+pub fn iqflip113() -> @kernel.Thm
+
+pub fn iqflip123() -> @kernel.Thm
+
+pub fn iqflip124() -> @kernel.Thm
+
+pub fn iqflip125() -> @kernel.Thm
+
+pub fn iqflip_cross124() -> @kernel.Thm
+
+pub fn iqflip_cross125() -> @kernel.Thm
+
+pub fn iqgram() -> @kernel.Thm
+
+pub fn iqgram_swap() -> @kernel.Thm
+
+pub fn iqmat2() -> @kernel.Thm
+
+pub fn iqmat3() -> @kernel.Thm
+
+pub fn iqmat4() -> @kernel.Thm
+
+pub fn iqrows2() -> @kernel.Thm
+
+pub fn iqrows3() -> @kernel.Thm
+
+pub fn iqrows4() -> @kernel.Thm
+
+pub fn iqselect013() -> @kernel.Thm
+
+pub fn iqselect111_cross124() -> @kernel.Thm
+
+pub fn iqswap12() -> @kernel.Thm
+
+pub fn iqsym() -> @kernel.Thm
+
+pub fn jacobi_2_5() -> @kernel.Thm
+
+pub fn jacobi_2_7() -> @kernel.Thm
+
+pub fn jacobi_3_5() -> @kernel.Thm
+
+pub fn jacobi_3_6j1() -> @kernel.Thm
+
+pub fn jacobi_4_5() -> @kernel.Thm
+
+pub fn jacobi_4_7() -> @kernel.Thm
+
+pub fn jacobi_5_10j3() -> @kernel.Thm
+
+pub fn jacobi_5_20j1() -> @kernel.Thm
+
+pub fn jacobi_5_beta_125_five() -> @kernel.Thm
+
+pub fn jacobi_5_beta_125_g_five() -> @kernel.Thm
+
+pub fn jacobi_5_beta_of_3mod8() -> @kernel.Thm
+
+pub fn jacobi_5_beta_of_3mod8_neg() -> @kernel.Thm
+
+pub fn jacobi_7_14j1() -> @kernel.Thm
+
+pub fn jacobi_7_odd_squareclass() -> @kernel.Thm
+
+pub fn jacobi_beta_10j3() -> @kernel.Thm
+
+pub fn jacobi_beta_20j1() -> @kernel.Thm
+
+pub fn jacobi_beta_5_125_five() -> @kernel.Thm
+
+pub fn jacobi_beta_5_125_five_minus() -> @kernel.Thm
+
+pub fn jacobi_beta_5_125_five_plus() -> @kernel.Thm
+
+pub fn jacobi_beta_5_125_g_five() -> @kernel.Thm
+
+pub fn jacobi_beta_5_125_g_five_minus() -> @kernel.Thm
+
+pub fn jacobi_beta_5_125_g_five_plus() -> @kernel.Thm
+
+pub fn jacobi_disc7_squareclass() -> @kernel.Thm
+
+pub fn jacobi_k_beta_125_double() -> @kernel.Thm
+
+pub fn jacobi_neg3_6j1() -> @kernel.Thm
+
+pub fn jacobi_neg40_of_3mod8() -> @kernel.Thm
+
+pub fn jacobi_neg40t_beta_125_five() -> @kernel.Thm
+
+pub fn jacobi_neg7_14j1() -> @kernel.Thm
+
+pub fn jacobi_neg80_of_3mod8() -> @kernel.Thm
+
+pub fn jacobi_neg80t_beta_125_g_five() -> @kernel.Thm
+
+pub fn jacobi_neg8k_beta_125_double() -> @kernel.Thm
+
+pub fn jacobi_negk_beta_125() -> @kernel.Thm
+
+pub fn jacobi_one_imp_coprime() -> @kernel.Thm
+
+pub fn jacobi_p_oddpart_disc7() -> @kernel.Thm
+
+pub fn jacobi_q_113_3() -> @kernel.Thm
+
+pub fn lemma_113() -> @kernel.Thm
+
+pub fn lemma_113_3() -> @kernel.Thm
+
+pub fn lemma_125() -> @kernel.Thm
+
+pub fn lemma_125_double() -> @kernel.Thm
+
+pub fn lemma_125_g_five_minus() -> @kernel.Thm
+
+pub fn lemma_125_g_five_plus() -> @kernel.Thm
+
+pub fn lemma_125_t_five() -> @kernel.Thm
+
+pub fn lemma_125_t_five_minus() -> @kernel.Thm
+
+pub fn lemma_125_t_five_plus() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mod16_2_cases() -> @kernel.Thm
+
+pub fn mod2_of_mod4() -> @kernel.Thm
+
+pub fn mod32_14_cases() -> @kernel.Thm
+
+pub fn mod32_7_cases() -> @kernel.Thm
+
+pub fn mod4_cases() -> @kernel.Thm
+
+pub fn mod64_14_cases() -> @kernel.Thm
+
+pub fn mod7_squareclass_disc7() -> @kernel.Thm
+
+pub fn mod7_zero_disc7_div49() -> @kernel.Thm
+
+pub fn mod9_3_rep_113() -> @kernel.Thm
+
+pub fn mod9_6_form_113() -> @kernel.Thm
+
+pub fn mod9_coprime3() -> @kernel.Thm
+
+pub fn no_square_3_mod_5() -> @kernel.Thm
+
+pub fn not_divides_5_of_cong_2_or_3() -> @kernel.Thm
+
+pub fn num_113_form_sub2_avoids() -> @kernel.Thm
+
+pub fn num_113_form_sub2_residue() -> @kernel.Thm
+
+pub fn num_123_exception_mod16() -> @kernel.Thm
+
+pub fn num_124_exception_mod16() -> @kernel.Thm
+
+pub fn num_124_half_avoids_122() -> @kernel.Thm
+
+pub fn num_125_child_descent() -> @kernel.Thm
+
+pub fn num_125_exception() -> @kernel.Thm
+
+pub fn num_125_exception_mod25() -> @kernel.Thm
+
+pub fn num_125_exception_not_div25() -> @kernel.Thm
+
+pub fn num_125_exception_scale25() -> @kernel.Thm
+
+pub fn num_125_high_power_mod25() -> @kernel.Thm
+
+pub fn num_125_shift_good() -> @kernel.Thm
+
+pub fn num_125_shift_good_one_or_four() -> @kernel.Thm
+
+pub fn num_125_unit_allowed() -> @kernel.Thm
+
+pub fn num_6m_avoids_three_square_form() -> @kernel.Thm
+
+pub fn num_6m_eq_16t_imp_div4() -> @kernel.Thm
+
+pub fn num_avoids_113_mul9() -> @kernel.Thm
+
+pub fn num_avoids_113_of_mod9() -> @kernel.Thm
+
+pub fn num_avoids_123_of_mod16() -> @kernel.Thm
+
+pub fn num_avoids_123_sub_of_residue() -> @kernel.Thm
+
+pub fn num_avoids_123_sub_small() -> @kernel.Thm
+
+pub fn num_avoids_124_sub_of_residue() -> @kernel.Thm
+
+pub fn num_avoids_125_sub_of_residues() -> @kernel.Thm
+
+pub fn num_avoids_125_sub_one_or_four() -> @kernel.Thm
+
+pub fn num_cross112_target_avoids() -> @kernel.Thm
+
+pub fn num_cross124_good_residues() -> @kernel.Thm
+
+pub fn num_cross125_sub_avoids() -> @kernel.Thm
+
+pub fn num_crossa122_target_odd() -> @kernel.Thm
+
+pub fn num_crossb122_shift2() -> @kernel.Thm
+
+pub fn num_crossb122_shift6() -> @kernel.Thm
+
+pub fn num_crossb122_w1_3() -> @kernel.Thm
+
+pub fn num_crossb122_w1_7() -> @kernel.Thm
+
+pub fn num_dc2_124_k_lower() -> @kernel.Thm
+
+pub fn num_dc2_124_offset_choice() -> @kernel.Thm
+
+pub fn num_decompose_mod() -> @kernel.Thm
+
+pub fn num_descent_not_124_form() -> @kernel.Thm
+
+pub fn num_diag113_shift_lt6() -> @kernel.Thm
+
+pub fn num_diag124_offset_choice() -> @kernel.Thm
+
+pub fn num_diag125_shift_coeff() -> @kernel.Thm
+
+pub fn num_div4_of_mod16_0_or_8() -> @kernel.Thm
+
+pub fn num_interval_cases_then(@kernel.Term, Int64, Int64, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn num_le_16q14_of_le_184() -> @kernel.Thm
+
+pub fn num_le_16q14_of_le_216() -> @kernel.Thm
+
+pub fn num_le_16q14_of_le_52() -> @kernel.Thm
+
+pub fn num_mod2_of_mod16_14() -> @kernel.Thm
+
+pub fn num_mod2_sub_odd() -> @kernel.Thm
+
+pub fn num_mod4_1_avoids() -> @kernel.Thm
+
+pub fn num_mod4_nonzero_nonodd() -> @kernel.Thm
+
+pub fn num_mod_sub_exact() -> @kernel.Thm
+
+pub fn num_mul5_mod25_2() -> @kernel.Thm
+
+pub fn num_mul5_mod25_3() -> @kernel.Thm
+
+pub fn num_range_cases_tac(@kernel.Term, Int64) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn num_range_cases_then(@kernel.Term, Int64, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn num_rb1_125_shift_coeff() -> @kernel.Thm
+
+pub fn num_rb1_rc1_125_shift_coeff() -> @kernel.Thm
+
+pub fn num_rb1_rc2_125_shift_coeff() -> @kernel.Thm
+
+pub fn num_rc1_125_shift_coeff() -> @kernel.Thm
+
+pub fn num_rc2_124_k_pos() -> @kernel.Thm
+
+pub fn num_rc2_124_offset_choice() -> @kernel.Thm
+
+pub fn num_rc2_124_reduced_range() -> @kernel.Thm
+
+pub fn num_rc2_125_shift_coeff() -> @kernel.Thm
+
+pub fn num_shift_rem() -> @kernel.Thm
+
+pub fn num_triple_eq_16b14_mod16() -> @kernel.Thm
+
+pub fn num_yc124_k_pos() -> @kernel.Thm
+
+pub fn num_yc124_offset_choice() -> @kernel.Thm
+
+pub fn num_zc123_offset_residue() -> @kernel.Thm
+
+pub fn odd_num_sq_cong_1_mod8() -> @kernel.Thm
+
+pub fn qindex() -> @kernel.Thm
+
+pub fn qr_113() -> @kernel.Thm
+
+pub fn qr_113_3() -> @kernel.Thm
+
+pub fn qr_125() -> @kernel.Thm
+
+pub fn qr_125_double() -> @kernel.Thm
+
+pub fn qr_125_g_five() -> @kernel.Thm
+
+pub fn qr_125_t_five() -> @kernel.Thm
+
+pub fn qr_disc7() -> @kernel.Thm
+
+pub fn qr_disc7_multiple_core() -> @kernel.Thm
+
+pub fn regular_113_3mod9() -> @kernel.Thm
+
+pub fn regular_113_coprime3() -> @kernel.Thm
+
+pub fn regular_113_not_form() -> @kernel.Thm
+
+pub fn regular_123_not_form() -> @kernel.Thm
+
+pub fn regular_125_coprime10() -> @kernel.Thm
+
+pub fn regular_125_double_coprime5() -> @kernel.Thm
+
+pub fn regular_125_not_exception() -> @kernel.Thm
+
+pub fn regular_125_not_exception_not25() -> @kernel.Thm
+
+pub fn regular_125_odd_five() -> @kernel.Thm
+
+pub fn regular_125_odd_five_minus() -> @kernel.Thm
+
+pub fn regular_125_odd_five_plus() -> @kernel.Thm
+
+pub fn regular_t_125_five() -> @kernel.Thm
+
+pub fn regular_t_125_five_minus() -> @kernel.Thm
+
+pub fn regular_t_125_five_plus() -> @kernel.Thm
+
+pub fn rep_113_descend9() -> @kernel.Thm
+
+pub fn rep_113_mul9() -> @kernel.Thm
+
+pub fn rep_125_double_of_t() -> @kernel.Thm
+
+pub fn repr_112_of_three_squares() -> @kernel.Thm
+
+pub fn repr_122_of_three_squares() -> @kernel.Thm
+
+pub fn repr_127_of_117_mod3() -> @kernel.Thm
+
+pub fn repr_cross124_of_127_double() -> @kernel.Thm
+
+pub fn repr_cross124_of_diag7_mod4() -> @kernel.Thm
+
+pub fn repr_cross125_of_three_squares() -> @kernel.Thm
+
+pub fn repr_diag7_of_cross124_mod4() -> @kernel.Thm
+
+pub fn residue_113() -> @kernel.Thm
+
+pub fn residue_113_3() -> @kernel.Thm
+
+pub fn residue_125() -> @kernel.Thm
+
+pub fn residue_125_double() -> @kernel.Thm
+
+pub fn residue_disc7() -> @kernel.Thm
+
+pub fn residue_disc7_multiple_core() -> @kernel.Thm
+
+pub fn square_mod_5() -> @kernel.Thm
+
+pub fn ternary_characteristic() -> @kernel.Thm
+
+pub fn ternary_disc10_type6_a11_1() -> @kernel.Thm
+
+pub fn ternary_disc10_type6_special() -> @kernel.Thm
+
+pub fn ternary_disc3_type5() -> @kernel.Thm
+
+pub fn ternary_disc3_type5_a11_1() -> @kernel.Thm
+
+pub fn ternary_disc5_a11_1_global() -> @kernel.Thm
+
+pub fn ternary_disc5_a11_1_second() -> @kernel.Thm
+
+pub fn ternary_disc5_double() -> @kernel.Thm
+
+pub fn ternary_disc5_second() -> @kernel.Thm
+
+pub fn ternary_disc7_a11_1() -> @kernel.Thm
+
+pub fn ternary_disc7_type1() -> @kernel.Thm
+
+pub fn ternary_type1() -> @kernel.Thm
+
+pub fn ternary_type1_of_characteristic() -> @kernel.Thm
+
+pub fn ternary_type5() -> @kernel.Thm
+
+pub fn ternary_type5_model() -> @kernel.Thm
+
+pub fn ternary_type5_model_3() -> @kernel.Thm
+
+pub fn ternary_type5_of_characteristic() -> @kernel.Thm
+
+pub fn ternary_type6() -> @kernel.Thm
+
+pub fn ternary_type6_dickson() -> @kernel.Thm
+
+pub fn ternary_type6_dickson_g_five() -> @kernel.Thm
+
+pub fn ternary_type6_of_characteristic() -> @kernel.Thm
+
+pub fn three_squares_avoids_four_mul() -> @kernel.Thm
+
+pub fn three_squares_avoids_of_mod() -> @kernel.Thm
+
+pub fn three_squares_avoids_sub2() -> @kernel.Thm
+
+pub fn tqbilin() -> @kernel.Thm
+
+pub fn tqeval() -> @kernel.Thm
+
+pub fn type5_disc3_binary_primitive() -> @kernel.Thm
+
+pub fn type6_disc10_binary_second() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
