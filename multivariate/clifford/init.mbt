@@ -22,3 +22,10 @@ pub fn load() -> Unit {
   }
   @parser.end_theory()
 }
+
+///|
+/// Leave this file out of what is loaded after this call: a file that
+/// upstream loads without it (tools/ocaml_ref/theory.py, CHAIN_SKIP).
+pub fn skip_load() -> Unit {
+  loaded.val = true
+}
