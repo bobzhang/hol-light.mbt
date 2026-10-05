@@ -409,6 +409,8 @@ pub fn string_of_float(Double) -> String
 
 pub fn string_of_int(Int) -> String
 
+pub fn string_split_on_char(Char, String) -> @list.List[String]
+
 pub fn string_sub(String, Int, Int) -> String raise
 
 pub fn[A] striplist((A) -> (A, A) raise, A) -> @list.List[A] raise

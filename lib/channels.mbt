@@ -119,3 +119,19 @@ pub fn filename_concat(dir : String, file : String) -> String {
     dir + "/" + file
   }
 }
+
+///|
+/// `String.split_on_char c s`: the pieces of `s` between occurrences of `c`
+/// (empty ones too; never an empty list).
+pub fn string_split_on_char(c : Char, s : String) -> @list.List[String] {
+  let parts : Array[String] = []
+  let mut start = 0
+  for i in 0..<s.length() {
+    if s[i].to_int() == c.to_int() {
+      parts.push(s.view(start_offset=start, end_offset=i).to_string())
+      start = i + 1
+    }
+  }
+  parts.push(s.view(start_offset=start).to_string())
+  @list.from_array(parts)
+}
