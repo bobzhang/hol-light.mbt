@@ -716,17 +716,32 @@ module Emit = struct
                (match vb.vb_pat.pat_desc with
                 | Tpat_var (id, name) when fn_after_lets vb.vb_expr ->
                     (* `let rec f = let c = e in fun x -> ... f ...`: the
-                       value of the expression `let rec f = ... in f`
-                       (Rqe/simplify.ml's SIMPLIFY_CONV) *)
+                       value of the expression `let rec f' = ... in f'`
+                       (Rqe/simplify.ml's SIMPLIFY_CONV). The inner function
+                       has its own identifier: the definition and it would
+                       get the same local name. *)
                     let e = vb.vb_expr in
+                    let id' = Ident.create_local (Ident.name id ^ "_rec") in
+                    let mapper =
+                      { Tast_mapper.default with
+                        expr =
+                          (fun sub x ->
+                            match x.exp_desc with
+                            | Texp_ident (Path.Pident i, lid, vd) when Ident.same i id ->
+                                { x with exp_desc = Texp_ident (Path.Pident id', lid, vd) }
+                            | _ -> Tast_mapper.default.expr sub x) }
+                    in
+                    let inner =
+                      { vb with vb_pat = { vb.vb_pat with pat_desc = Tpat_var (id', name) }; vb_expr = mapper.expr mapper e }
+                    in
                     let vd =
                       { Types.val_type = e.exp_type; val_kind = Types.Val_reg; val_loc = e.exp_loc;
                         val_attributes = []; val_uid = Types.Uid.internal_not_actually_unique }
                     in
                     let self =
-                      { e with exp_desc = Texp_ident (Path.Pident id, { name with Location.txt = Longident.Lident (Ident.name id) }, vd) }
+                      { e with exp_desc = Texp_ident (Path.Pident id', { name with Location.txt = Longident.Lident (Ident.name id') }, vd) }
                     in
-                    emit_pattern { vb with vb_expr = { e with exp_desc = Texp_let (Asttypes.Recursive, [ vb ], self) } }
+                    emit_pattern { vb with vb_expr = { e with exp_desc = Texp_let (Asttypes.Recursive, [ inner ], self) } }
                 | _ ->
                     (* `let rec x = e` with `e` not a function cannot
                        mention `x`: an ordinary definition (Model/syntax.ml's
