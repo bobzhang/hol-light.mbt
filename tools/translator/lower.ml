@@ -1427,7 +1427,9 @@ module Lower = struct
         let rec result t = match arrow t with Some (_, b) -> result b | None -> t in
         let elem_is_fn =
           match Types.get_desc (expand (result fty)) with
-          | Types.Tconstr (_, [ a ], _) -> is_arrow a
+          | Types.Tconstr (_, [ a ], _) ->
+              (* through abbreviations too: a `conv net` (Examples/cooper.ml) *)
+              (match Types.get_desc (Ctype.expand_head (env ()) a) with Types.Tarrow _ -> true | _ -> false)
           | _ -> false
         in
         if elem_is_fn then { h with hexp = Atom (q ^ "_fn") } else h
