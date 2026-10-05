@@ -317,7 +317,8 @@ def main():
     # moonc processes at once: linking the test executable of a long chain
     # takes about 14 GB (24 at once took 330 GB)
     ap.add_argument("--build-jobs", default=os.environ.get("HOL_MOON_JOBS", "4"))
-    # in KB. Examples/apery.ml needs more than 16 MB; macOS allows 64 MB
+    # in KB. Examples/apery.ml overflows the 8 MB an OS gives by default;
+    # macOS allows 64 MB
     ap.add_argument("--stack-size", default="60000")
     # a test executable above this much memory is killed (the largest, a
     # whole chain in one process, stays well under it)
