@@ -19,10 +19,9 @@ constructs theorems only through its API.
 - **Complex/, Arithmetic/, Permutation/, Ntrie/, Model/, GL/, Divstep/, Rqe/,
   Unity/, Logic/, Jordan/** (with the Jordan curve theorem),
   **Functionspaces/, Quaternions/, Geometric_Algebra/, Probability/, IEEE/,
-  IsabelleLight/, Boyer_Moore/**: their theory files (`complex/<name>`,
-  ...).
-- **Examples/**: 45 of 50. **Tutorial/**: 18 of 24. **EC/**: 26 of 30.
-  **Autoformalization/**: 6 of 7.
+  IsabelleLight/, Boyer_Moore/, EC/, Autoformalization/**: their theory
+  files (`complex/<name>`, ...).
+- **Examples/**: 45 of 50. **Tutorial/**: 18 of 24.
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the
 registry caps a module at 100 MB); Multivariate/, 100/ and the translation
