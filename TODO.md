@@ -48,12 +48,12 @@ and file I/O before starting it.
    `mk_vartype`.
 2. **100/ chunk 2** (done): 34 files, taken from `wip/100-chunk2` and
    checked in four batches.
-3. **Package aliases** (blocks 5 and 6): the override table described
-   under Open issues, before the first colliding directory.
+3. **Package aliases** (done): the rename table described under Open
+   issues.
 4. **Small directories that need only the core or Library/** (63K lines):
    Complex, 100/cubic, Arithmetic (but pa.ml, which make.ml does not
    load), Permutation, Ntrie, Model, GL, Divstep and Rqe (but
-   examples.ml, commented out of its make.ml) are done; EC is in progress. After a directory with a make.ml passes, fold its tests
+   examples.ml, commented out of its make.ml) are done; EC has 26 of 30 files. After a directory with a make.ml passes, fold its tests
    into `<dir>/make` (tools/ocaml_ref/chain_test.py). Independent
    directories can run side by side in scratch clones under `.port/`
    (the OCaml sessions are the slow, single-threaded part). IsabelleLight and Boyer_Moore load their files from a computed
@@ -64,13 +64,17 @@ and file I/O before starting it.
    work per directory: Complex needed five additions (over-applied
    primitives, unqualified Format functions, `Num.string_of_num`, weak type
    variables in lifted local functions, rewrite nets with other payloads).
-5. **Examples/** (30K) and Logic/ (17K, needs two Examples files). sos.ml
+5. **Examples/** (30K; 31 of 50 done) and Logic/ (done). sos.ml
    needs csdp and three files need Minisat/Cadical/miz3/Rqe: those wait
    for step 8. Then 100/dirichlet, pnt (mangoldt.ml), piseries (machin.ml).
-6. **Directories on top of Multivariate/** (220K): Quaternions,
-   Geometric_Algebra, Functionspaces, Unity, Mizarlight, Probability
-   (97K; then 100/buffon), Jordan (75K; needs Rqe and Examples),
+6. **Directories on top of Multivariate/** (220K): Quaternions (`.hl`
+   files: batch.py takes them), Geometric_Algebra, Functionspaces, Unity
+   (done), Mizarlight, Probability (97K; then 100/buffon), Jordan (75K:
+   the 13 files before jordan_curve_theorem.ml are done),
    RichterHilbertAxiomGeometry (36K; needs miz3), WZ.
+   A background job is stopped after two hours: split a long batch with
+   `--translate-only`, then `--resume` (and check finished files in a
+   second clone meanwhile).
 7. **Autoformalization/** (205K): seven large files, a batch each.
 8. **External programs and other formats**: each needs a decision first.
    - Minisat, Cadical, QBF (SAT/QBF solver proofs) and Examples/sos.ml
@@ -96,14 +100,13 @@ and file I/O before starting it.
   paths `bobzhang/hol_light/<pkg>`, so they need a module prefix per
   directory.
 
-- **Package alias collisions**: MoonBit imports a package by its last path
-  component; `Probability/measure.ml` clashes with `Multivariate/measure`,
-  `Probability/independence.ml` with `100/independence`,
-  `Logic/canon.ml` with core `canon`. moon.pkg supports
-  `"path" @alias`; add an override table (e.g.
-  `tools/translator/aliases.txt`) read by the translator (`Lower.pkg_alias`,
-  `Mbti.qualify`) and theory.py (setup's alias check), and check how
-  `moon info` spells aliased packages in interfaces.
+- **Package alias collisions** (done): MoonBit imports a package by its
+  last path component, so a file named like a package loaded with it gets
+  its directory's name too (`logic/logic_canon`,
+  `probability/probability_measure`, `quaternions/quaternions_misc`): the
+  table `RENAMED` in tools/ocaml_ref/theory.py, repeated in
+  `Names.package_of_file` (tools/translator/translator.ml). Add an entry
+  when a new directory collides.
 - **csdp**: Examples/sos.ml (REAL_SOS) runs the external SDP solver csdp
   (not in Homebrew; build from COIN-OR source, ask first). For wasm, replay
   recorded solver answers like lib/gp.mbt does for PARI/GP; the kernel
