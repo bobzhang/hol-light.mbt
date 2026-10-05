@@ -605,6 +605,12 @@ module Lower = struct
   let own_values : (string, string * own) Hashtbl.t = Hashtbl.create 256
   let own_by_name : (string, string * own) Hashtbl.t = Hashtbl.create 256
 
+  (* Members this file's modules re-export from a module another file
+     translated (`module Pa = struct include Pa ... end` in
+     Functionspaces/utils.ml, over Library/q.ml's Pa): qualified name here
+     -> (the file that defines it, its qualified name there) *)
+  let reexports : (string, string * string) Hashtbl.t = Hashtbl.create 16
+
   let current_file = ref ""
 
   (* Type variables bound by the enclosing top-level function's generics. *)
@@ -750,7 +756,13 @@ module Lower = struct
     | Some (mname, Accessor t) -> { hstmts = []; hexp = Atom (mname ^ "()"); hmty = t; hoty = Some oty }
     | Some (mname, Function t) -> { hstmts = []; hexp = Atom mname; hmty = t; hoty = Some oty }
     | None ->
-    match Prov.lookup path with
+    let prov =
+      match Prov.lookup path with
+      | Some (file, name) when file = !current_file && not (Hashtbl.mem own_by_name name) && Hashtbl.mem reexports name ->
+          Some (Hashtbl.find reexports name)
+      | r -> r
+    in
+    match prov with
     | Some (file, name) when file = !current_file ->
         (match Hashtbl.find_opt own_by_name name with
          | Some (mname, Accessor t) ->
