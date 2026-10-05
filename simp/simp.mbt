@@ -395,7 +395,7 @@ pub fn simpset(
   provers : List[Prover],
   rewmaker : (Thm, List[Thm]) -> List[Thm] raise,
 ) -> Simpset {
-  { net, prover, provers, rewmaker }
+  { net, prover, provers, rewmaker, }
 }
 
 ///|

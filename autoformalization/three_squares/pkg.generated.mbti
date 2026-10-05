@@ -1,0 +1,197 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/autoformalization/three_squares"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn adj_preimage() -> @kernel.Thm
+
+pub fn binary_disc1() -> @kernel.Thm
+
+pub fn binary_hermite() -> @kernel.Thm
+
+pub fn cong_1_mod_4() -> @kernel.Thm
+
+pub fn cong_1_mod_8() -> @kernel.Thm
+
+pub fn cong_2_mod_4() -> @kernel.Thm
+
+pub fn cong_3_mod_4() -> @kernel.Thm
+
+pub fn cong_3_mod_8() -> @kernel.Thm
+
+pub fn cong_mod_8_imp_mod_4() -> @kernel.Thm
+
+pub fn conj_min() -> @kernel.Thm
+
+pub fn conj_reps() -> @kernel.Thm
+
+pub fn coprime_dirichlet() -> @kernel.Thm
+
+pub fn coprime_dirichlet_18() -> @kernel.Thm
+
+pub fn coprime_from_multp1() -> @kernel.Thm
+
+pub fn cube_ge_8() -> @kernel.Thm
+
+pub fn descent_not_form() -> @kernel.Thm
+
+pub fn dirichlet_prime() -> @kernel.Thm
+
+pub fn dirichlet_prime_18() -> @kernel.Thm
+
+pub fn dirichlet_prime_1mod8() -> @kernel.Thm
+
+pub fn dirichlet_prime_5mod8() -> @kernel.Thm
+
+pub fn dirichlet_prime_cong() -> @kernel.Thm
+
+pub fn disc_g() -> @kernel.Thm
+
+pub fn div4_less() -> @kernel.Thm
+
+pub fn gauss_tri_from_3sq() -> @kernel.Thm
+
+pub fn gauss_triangular() -> @kernel.Thm
+
+pub fn gauss_triangular_sum() -> @kernel.Thm
+
+pub fn hermite_a1() -> @kernel.Thm
+
+pub fn hermite_cube() -> @kernel.Thm
+
+pub fn hermite_lower() -> @kernel.Thm
+
+pub fn int_balanced_rem() -> @kernel.Thm
+
+pub fn int_gcd3_exists() -> @kernel.Thm
+
+pub fn int_odd_form() -> @kernel.Thm
+
+pub fn int_tri_nat() -> @kernel.Thm
+
+pub fn jacobi_2_1mod8() -> @kernel.Thm
+
+pub fn jacobi_2_3mod8() -> @kernel.Thm
+
+pub fn jacobi_flip_1mod4() -> @kernel.Thm
+
+pub fn jacobi_flip_3mod4() -> @kernel.Thm
+
+pub fn jacobi_m1_1mod4() -> @kernel.Thm
+
+pub fn jacobi_m1_3mod4() -> @kernel.Thm
+
+pub fn jacobi_neg_1mod4() -> @kernel.Thm
+
+pub fn jacobi_neg_3mod4() -> @kernel.Thm
+
+pub fn jacobi_negative_square() -> @kernel.Thm
+
+pub fn jacobi_p_dprime() -> @kernel.Thm
+
+pub fn legendre_tail() -> @kernel.Thm
+
+pub fn legendre_tail_2p() -> @kernel.Thm
+
+pub fn legendre_three_squares() -> @kernel.Thm
+
+pub fn lemma_1_7() -> @kernel.Thm
+
+pub fn lemma_1_7_cong() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn min_primitive() -> @kernel.Thm
+
+pub fn mod8_04_div4() -> @kernel.Thm
+
+pub fn mod8_7_form() -> @kernel.Thm
+
+pub fn not_three_squares() -> @kernel.Thm
+
+pub fn odd_of_1mod4() -> @kernel.Thm
+
+pub fn odd_of_3mod4() -> @kernel.Thm
+
+pub fn odd_pred_even() -> @kernel.Thm
+
+pub fn odd_sq_mod_8() -> @kernel.Thm
+
+pub fn posdef_binary_criterion() -> @kernel.Thm
+
+pub fn posdef_minor2() -> @kernel.Thm
+
+pub fn qr_lift_2p() -> @kernel.Thm
+
+pub fn qr_mod_p() -> @kernel.Thm
+
+pub fn qr_mod_p_18() -> @kernel.Thm
+
+pub fn qr_mod_p_1mod4() -> @kernel.Thm
+
+pub fn qr_mod_p_5mod8() -> @kernel.Thm
+
+pub fn rem_8_cases() -> @kernel.Thm
+
+pub fn sl3_extend() -> @kernel.Thm
+
+pub fn sq_bound() -> @kernel.Thm
+
+pub fn sq_mod_8() -> @kernel.Thm
+
+pub fn square_mod_8() -> @kernel.Thm
+
+pub fn sum3_mod8_core() -> @kernel.Thm
+
+pub fn ternary_complete() -> @kernel.Thm
+
+pub fn ternary_min() -> @kernel.Thm
+
+pub fn ternary_posdef() -> @kernel.Thm
+
+pub fn three_sq_1mod8() -> @kernel.Thm
+
+pub fn three_sq_1mod8_num() -> @kernel.Thm
+
+pub fn three_sq_2mod4() -> @kernel.Thm
+
+pub fn three_sq_2mod4_num() -> @kernel.Thm
+
+pub fn three_sq_3mod8() -> @kernel.Thm
+
+pub fn three_sq_3mod8_num() -> @kernel.Thm
+
+pub fn three_sq_5mod8() -> @kernel.Thm
+
+pub fn three_sq_5mod8_num() -> @kernel.Thm
+
+pub fn three_sq_all_odd() -> @kernel.Thm
+
+pub fn three_sq_double() -> @kernel.Thm
+
+pub fn three_sq_int_to_num() -> @kernel.Thm
+
+pub fn three_sq_not_form() -> @kernel.Thm
+
+pub fn three_sq_residue_num() -> @kernel.Thm
+
+pub fn three_squares_4_lemma() -> @kernel.Thm
+
+pub fn three_squares_mod_8() -> @kernel.Thm
+
+pub fn triangular() -> @kernel.Thm
+
+pub fn tsq_disc1() -> @kernel.Thm
+
+pub fn tsq_disc1_a11_1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
