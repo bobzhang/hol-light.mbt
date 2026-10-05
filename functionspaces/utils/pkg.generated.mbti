@@ -1,0 +1,75 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/functionspaces/utils"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn cases_rewrite_tac(@kernel.Thm, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn complex_field(String) -> @kernel.Thm raise
+
+pub fn conjs(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn eq_not() -> @kernel.Thm
+
+pub fn eq_to_imp() -> @kernel.Thm
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] fixpoint((TA) -> TA raise, TA) -> TA raise
+
+pub fn gconv_tac((@kernel.Term) -> @kernel.Thm raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn gen_mp_rewr_tac((@kernel.Term) -> @kernel.Term raise, @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn gen_pure_mp_rewr_tac((@kernel.Term) -> @kernel.Term raise, @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn gimp_imp(@kernel.Term) -> @kernel.Term raise
+
+pub fn gimp_imp_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn gimp_imp_v1(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn hint_exists_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn horns_of_term(@kernel.Term) -> @list.List[(@list.List[@kernel.Term], @list.List[@kernel.Term])] raise
+
+pub fn let_defs() -> @kernel.Thm
+
+pub fn let_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn let_rule_l(@list.List[@kernel.Thm], @kernel.Thm) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+pub fn match_trans(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn mp_rewr_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn mp_rewrite_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn pure_mp_rewr_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] simp_horn_conv(@list.List[(@list.List[TA], @list.List[TA])]) -> @list.List[(@list.List[TA], @list.List[TA])] raise
+
+pub fn simp_horn_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn simp_horn_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn simple_complex_arith(String) -> @kernel.Thm raise
+
+pub fn spec_v((String, String), @kernel.Thm) -> @kernel.Thm raise
+
+pub fn term_of_horns(@list.List[(@list.List[@kernel.Term], @list.List[@kernel.Term])]) -> @kernel.Term raise
+
+pub fn[TA, TB] wrap((@list.List[TB]) -> TA raise, TB) -> TA raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

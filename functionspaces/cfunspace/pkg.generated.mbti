@@ -1,0 +1,1021 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/functionspaces/cfunspace"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn add_herm() -> @kernel.Thm
+
+pub fn add_herm_unbounded() -> @kernel.Thm
+
+pub fn add_lincop() -> @kernel.Thm
+
+pub fn add_linearity_thm(@kernel.Thm) -> Unit raise
+
+pub fn add_linearity_thms(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn add_real_thm(@kernel.Thm) -> Unit raise
+
+pub fn add_real_thms(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn add_self_adj() -> @kernel.Thm
+
+pub fn add_selfadjoint_thm(@kernel.Thm) -> Unit raise
+
+pub fn add_selfadjoint_thms(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn add_symmetric() -> @kernel.Thm
+
+pub fn add_symmetric_thm(@kernel.Thm) -> Unit raise
+
+pub fn add_symmetric_thms(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn add_ulincop() -> @kernel.Thm
+
+pub fn add_ulinearity_thm(@kernel.Thm) -> Unit raise
+
+pub fn add_ulinearity_thms(@list.List[@kernel.Thm]) -> Unit raise
+
+pub fn anti_commutator_self_adj() -> @kernel.Thm
+
+pub fn anti_commutator_symmetric() -> @kernel.Thm
+
+pub fn are_equv() -> @kernel.Thm
+
+pub fn are_orthogonal() -> @kernel.Thm
+
+pub fn are_orthogonal_lscalar() -> @kernel.Thm
+
+pub fn are_orthogonal_sym() -> @kernel.Thm
+
+pub fn are_orthogonal_v1() -> @kernel.Thm
+
+pub fn arith_herm_clauses() -> @kernel.Thm
+
+pub fn arith_lincop_clauses() -> @kernel.Thm
+
+pub fn cfun_add() -> @kernel.Thm
+
+pub fn cfun_add_ac() -> @kernel.Thm
+
+pub fn cfun_add_assoc() -> @kernel.Thm
+
+pub fn cfun_add_ldistrib() -> @kernel.Thm
+
+pub fn cfun_add_lid() -> @kernel.Thm
+
+pub fn cfun_add_rdistrib() -> @kernel.Thm
+
+pub fn cfun_add_rid() -> @kernel.Thm
+
+pub fn cfun_add_rsub() -> @kernel.Thm
+
+pub fn cfun_add_sym() -> @kernel.Thm
+
+pub fn cfun_add_thm() -> @kernel.Thm
+
+pub fn cfun_add_v1() -> @kernel.Thm
+
+pub fn cfun_arith(@kernel.Term) -> @kernel.Thm raise
+
+pub fn cfun_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn cfun_cnj() -> @kernel.Thm
+
+pub fn cfun_defs() -> @kernel.Thm
+
+pub fn cfun_dist() -> @kernel.Thm
+
+pub fn cfun_dist_nz() -> @kernel.Thm
+
+pub fn cfun_dist_refl() -> @kernel.Thm
+
+pub fn cfun_dist_triangle_add() -> @kernel.Thm
+
+pub fn cfun_dual() -> @kernel.Thm
+
+pub fn cfun_entire() -> @kernel.Thm
+
+pub fn cfun_eq() -> @kernel.Thm
+
+pub fn cfun_eq_add_lcancel() -> @kernel.Thm
+
+pub fn cfun_eq_add_rcancel() -> @kernel.Thm
+
+pub fn cfun_eq_lsub() -> @kernel.Thm
+
+pub fn cfun_eq_neg2() -> @kernel.Thm
+
+pub fn cfun_eq_rsub() -> @kernel.Thm
+
+pub fn cfun_eq_smul_lcancel() -> @kernel.Thm
+
+pub fn cfun_eq_smul_lcancel2() -> @kernel.Thm
+
+pub fn cfun_eq_sub_lcancel() -> @kernel.Thm
+
+pub fn cfun_eq_sub_radd() -> @kernel.Thm
+
+pub fn cfun_infsum() -> @kernel.Thm
+
+pub fn cfun_infsum_0() -> @kernel.Thm
+
+pub fn cfun_infsum_offset() -> @kernel.Thm
+
+pub fn cfun_infsum_reindex() -> @kernel.Thm
+
+pub fn cfun_infsum_slinear() -> @kernel.Thm
+
+pub fn cfun_infsum_smul() -> @kernel.Thm
+
+pub fn cfun_infsum_unique() -> @kernel.Thm
+
+pub fn cfun_lim() -> @kernel.Thm
+
+pub fn cfun_lim_add() -> @kernel.Thm
+
+pub fn cfun_lim_const() -> @kernel.Thm
+
+pub fn cfun_lim_inner_space() -> @kernel.Thm
+
+pub fn cfun_lim_neg() -> @kernel.Thm
+
+pub fn cfun_lim_norm_ubound() -> @kernel.Thm
+
+pub fn cfun_lim_sequentially() -> @kernel.Thm
+
+pub fn cfun_lim_smul() -> @kernel.Thm
+
+pub fn cfun_lim_sub() -> @kernel.Thm
+
+pub fn cfun_lim_ulinear() -> @kernel.Thm
+
+pub fn cfun_lim_unique() -> @kernel.Thm
+
+pub fn cfun_neg() -> @kernel.Thm
+
+pub fn cfun_neg_lambda() -> @kernel.Thm
+
+pub fn cfun_norm() -> @kernel.Thm
+
+pub fn cfun_norm_0() -> @kernel.Thm
+
+pub fn cfun_norm_eq_0() -> @kernel.Thm
+
+pub fn cfun_norm_inprod_0() -> @kernel.Thm
+
+pub fn cfun_norm_nz() -> @kernel.Thm
+
+pub fn cfun_norm_pos_le() -> @kernel.Thm
+
+pub fn cfun_norm_pow2() -> @kernel.Thm
+
+pub fn cfun_norm_smul() -> @kernel.Thm
+
+pub fn cfun_norm_sub() -> @kernel.Thm
+
+pub fn cfun_norm_sub_ineq() -> @kernel.Thm
+
+pub fn cfun_of_complex() -> @kernel.Thm
+
+pub fn cfun_of_complex_add() -> @kernel.Thm
+
+pub fn cfun_of_complex_cnj() -> @kernel.Thm
+
+pub fn cfun_of_complex_neg() -> @kernel.Thm
+
+pub fn cfun_of_complex_of_cfun() -> @kernel.Thm
+
+pub fn cfun_of_complex_smul() -> @kernel.Thm
+
+pub fn cfun_of_complex_sub() -> @kernel.Thm
+
+pub fn cfun_of_complex_zero() -> @kernel.Thm
+
+pub fn cfun_series_0() -> @kernel.Thm
+
+pub fn cfun_series_add() -> @kernel.Thm
+
+pub fn cfun_series_finite() -> @kernel.Thm
+
+pub fn cfun_series_restrict() -> @kernel.Thm
+
+pub fn cfun_series_slinear() -> @kernel.Thm
+
+pub fn cfun_series_smul() -> @kernel.Thm
+
+pub fn cfun_series_sub() -> @kernel.Thm
+
+pub fn cfun_series_unique() -> @kernel.Thm
+
+pub fn cfun_smul() -> @kernel.Thm
+
+pub fn cfun_smul_assoc() -> @kernel.Thm
+
+pub fn cfun_smul_dis() -> @kernel.Thm
+
+pub fn cfun_smul_distrib() -> @kernel.Thm
+
+pub fn cfun_smul_lid() -> @kernel.Thm
+
+pub fn cfun_smul_lid_neg() -> @kernel.Thm
+
+pub fn cfun_smul_lneg() -> @kernel.Thm
+
+pub fn cfun_smul_lzero() -> @kernel.Thm
+
+pub fn cfun_smul_rneg() -> @kernel.Thm
+
+pub fn cfun_smul_rzero() -> @kernel.Thm
+
+pub fn cfun_smul_sym() -> @kernel.Thm
+
+pub fn cfun_smul_v1() -> @kernel.Thm
+
+pub fn cfun_sub() -> @kernel.Thm
+
+pub fn cfun_sub_0() -> @kernel.Thm
+
+pub fn cfun_sub_add() -> @kernel.Thm
+
+pub fn cfun_sub_add2() -> @kernel.Thm
+
+pub fn cfun_sub_ldistrib() -> @kernel.Thm
+
+pub fn cfun_sub_neg() -> @kernel.Thm
+
+pub fn cfun_sub_radd() -> @kernel.Thm
+
+pub fn cfun_sub_rdistrib() -> @kernel.Thm
+
+pub fn cfun_sub_refl() -> @kernel.Thm
+
+pub fn cfun_sub_rid() -> @kernel.Thm
+
+pub fn cfun_sub_sub() -> @kernel.Thm
+
+pub fn cfun_sub_thm() -> @kernel.Thm
+
+pub fn cfun_sub_v1() -> @kernel.Thm
+
+pub fn cfun_subspace_add() -> @kernel.Thm
+
+pub fn cfun_subspace_neg() -> @kernel.Thm
+
+pub fn cfun_subspace_sing_cfunzero() -> @kernel.Thm
+
+pub fn cfun_subspace_smul() -> @kernel.Thm
+
+pub fn cfun_subspace_sub() -> @kernel.Thm
+
+pub fn cfun_subspace_zero() -> @kernel.Thm
+
+pub fn cfun_sum() -> @kernel.Thm
+
+pub fn cfun_sum_0() -> @kernel.Thm
+
+pub fn cfun_sum_add() -> @kernel.Thm
+
+pub fn cfun_sum_clauses() -> @kernel.Thm
+
+pub fn cfun_sum_clauses_left() -> @kernel.Thm
+
+pub fn cfun_sum_clauses_numseg() -> @kernel.Thm
+
+pub fn cfun_sum_const() -> @kernel.Thm
+
+pub fn cfun_sum_eq() -> @kernel.Thm
+
+pub fn cfun_sum_eq_0() -> @kernel.Thm
+
+pub fn cfun_sum_eq_numseg() -> @kernel.Thm
+
+pub fn cfun_sum_image() -> @kernel.Thm
+
+pub fn cfun_sum_in_spc() -> @kernel.Thm
+
+pub fn cfun_sum_offset() -> @kernel.Thm
+
+pub fn cfun_sum_offset_0() -> @kernel.Thm
+
+pub fn cfun_sum_restrict() -> @kernel.Thm
+
+pub fn cfun_sum_sing() -> @kernel.Thm
+
+pub fn cfun_sum_sing_numseg() -> @kernel.Thm
+
+pub fn cfun_sum_smul() -> @kernel.Thm
+
+pub fn cfun_sum_sub() -> @kernel.Thm
+
+pub fn cfun_sum_superset() -> @kernel.Thm
+
+pub fn cfun_sum_triv_numseg() -> @kernel.Thm
+
+pub fn cfun_summable() -> @kernel.Thm
+
+pub fn cfun_summable_offset() -> @kernel.Thm
+
+pub fn cfun_summable_reindex() -> @kernel.Thm
+
+pub fn cfun_sums() -> @kernel.Thm
+
+pub fn cfun_sums_finite_diff() -> @kernel.Thm
+
+pub fn cfun_sums_infsum() -> @kernel.Thm
+
+pub fn cfun_sums_inner_space() -> @kernel.Thm
+
+pub fn cfun_sums_offset() -> @kernel.Thm
+
+pub fn cfun_sums_reindex() -> @kernel.Thm
+
+pub fn cfun_sums_summable() -> @kernel.Thm
+
+pub fn cfun_to_complex() -> @kernel.Thm
+
+pub fn cfun_zero() -> @kernel.Thm
+
+pub fn cfun_zero_add() -> @kernel.Thm
+
+pub fn cfun_zero_clauses() -> @kernel.Thm
+
+pub fn commutaor_ulincop() -> @kernel.Thm
+
+pub fn commutator() -> @kernel.Thm
+
+pub fn commutator_anti_herm() -> @kernel.Thm
+
+pub fn commutator_anti_unbounded_herm() -> @kernel.Thm
+
+pub fn commutator_composit() -> @kernel.Thm
+
+pub fn commutator_neg() -> @kernel.Thm
+
+pub fn commutator_scalar() -> @kernel.Thm
+
+pub fn commutator_scalar_op() -> @kernel.Thm
+
+pub fn commutator_smul() -> @kernel.Thm
+
+pub fn commutator_zero() -> @kernel.Thm
+
+pub fn commutator_zero_sym() -> @kernel.Thm
+
+pub fn complex_of_cfun() -> @kernel.Thm
+
+pub fn complex_of_cfun_add() -> @kernel.Thm
+
+pub fn complex_of_cfun_neg() -> @kernel.Thm
+
+pub fn complex_of_cfun_of_complex() -> @kernel.Thm
+
+pub fn complex_of_cfun_smul() -> @kernel.Thm
+
+pub fn complex_of_cfun_sub() -> @kernel.Thm
+
+pub fn cop_add() -> @kernel.Thm
+
+pub fn cop_add_2() -> @kernel.Thm
+
+pub fn cop_add_ac() -> @kernel.Thm
+
+pub fn cop_add_assoc() -> @kernel.Thm
+
+pub fn cop_add_i_sym() -> @kernel.Thm
+
+pub fn cop_add_ldistrib() -> @kernel.Thm
+
+pub fn cop_add_lid() -> @kernel.Thm
+
+pub fn cop_add_mul_rdistrib() -> @kernel.Thm
+
+pub fn cop_add_rdistrib() -> @kernel.Thm
+
+pub fn cop_add_rid() -> @kernel.Thm
+
+pub fn cop_add_rsub() -> @kernel.Thm
+
+pub fn cop_add_sym() -> @kernel.Thm
+
+pub fn cop_add_thm() -> @kernel.Thm
+
+pub fn cop_add_v1() -> @kernel.Thm
+
+pub fn cop_arith(@kernel.Term) -> @kernel.Thm raise
+
+pub fn cop_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn cop_binomial_theorem() -> @kernel.Thm
+
+pub fn cop_cnj() -> @kernel.Thm
+
+pub fn cop_defs() -> @kernel.Thm
+
+pub fn cop_entire() -> @kernel.Thm
+
+pub fn cop_eq() -> @kernel.Thm
+
+pub fn cop_eq_add_lcancel() -> @kernel.Thm
+
+pub fn cop_eq_add_rcancel() -> @kernel.Thm
+
+pub fn cop_eq_lsmul() -> @kernel.Thm
+
+pub fn cop_eq_lsub() -> @kernel.Thm
+
+pub fn cop_eq_lsub_lsub() -> @kernel.Thm
+
+pub fn cop_eq_mul_lcancel2() -> @kernel.Thm
+
+pub fn cop_eq_rsub() -> @kernel.Thm
+
+pub fn cop_eq_sub_lcancel() -> @kernel.Thm
+
+pub fn cop_i_id() -> @kernel.Thm
+
+pub fn cop_i_scalar() -> @kernel.Thm
+
+pub fn cop_mul() -> @kernel.Thm
+
+pub fn cop_mul_assoc() -> @kernel.Thm
+
+pub fn cop_mul_i_sym() -> @kernel.Thm
+
+pub fn cop_mul_lid() -> @kernel.Thm
+
+pub fn cop_mul_lsmul() -> @kernel.Thm
+
+pub fn cop_mul_lzero() -> @kernel.Thm
+
+pub fn cop_mul_rid() -> @kernel.Thm
+
+pub fn cop_mul_thm() -> @kernel.Thm
+
+pub fn cop_mul_v1() -> @kernel.Thm
+
+pub fn cop_neg() -> @kernel.Thm
+
+pub fn cop_neg_add() -> @kernel.Thm
+
+pub fn cop_neg_clauses() -> @kernel.Thm
+
+pub fn cop_neg_inj() -> @kernel.Thm
+
+pub fn cop_neg_neg() -> @kernel.Thm
+
+pub fn cop_neg_sub() -> @kernel.Thm
+
+pub fn cop_pow() -> @kernel.Thm
+
+pub fn cop_pow_2() -> @kernel.Thm
+
+pub fn cop_pow_commute_n() -> @kernel.Thm
+
+pub fn cop_pow_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn cop_pow_i() -> @kernel.Thm
+
+pub fn cop_pow_scalar() -> @kernel.Thm
+
+pub fn cop_pow_smul() -> @kernel.Thm
+
+pub fn cop_pow_smul2() -> @kernel.Thm
+
+pub fn cop_pow_zero() -> @kernel.Thm
+
+pub fn cop_smul() -> @kernel.Thm
+
+pub fn cop_smul_alt() -> @kernel.Thm
+
+pub fn cop_smul_assoc() -> @kernel.Thm
+
+pub fn cop_smul_i_one() -> @kernel.Thm
+
+pub fn cop_smul_i_zero() -> @kernel.Thm
+
+pub fn cop_smul_inv_id() -> @kernel.Thm
+
+pub fn cop_smul_lid() -> @kernel.Thm
+
+pub fn cop_smul_lid_neg() -> @kernel.Thm
+
+pub fn cop_smul_lneg() -> @kernel.Thm
+
+pub fn cop_smul_lzero() -> @kernel.Thm
+
+pub fn cop_smul_rneg() -> @kernel.Thm
+
+pub fn cop_smul_rzero() -> @kernel.Thm
+
+pub fn cop_smul_sym() -> @kernel.Thm
+
+pub fn cop_smul_thm() -> @kernel.Thm
+
+pub fn cop_smul_v1() -> @kernel.Thm
+
+pub fn cop_sub() -> @kernel.Thm
+
+pub fn cop_sub_abs() -> @kernel.Thm
+
+pub fn cop_sub_add() -> @kernel.Thm
+
+pub fn cop_sub_ldistrib() -> @kernel.Thm
+
+pub fn cop_sub_lzero() -> @kernel.Thm
+
+pub fn cop_sub_mul_rdistrib() -> @kernel.Thm
+
+pub fn cop_sub_neg() -> @kernel.Thm
+
+pub fn cop_sub_radd() -> @kernel.Thm
+
+pub fn cop_sub_refl() -> @kernel.Thm
+
+pub fn cop_sub_rzero() -> @kernel.Thm
+
+pub fn cop_sub_sub() -> @kernel.Thm
+
+pub fn cop_sub_thm() -> @kernel.Thm
+
+pub fn cop_sub_v1() -> @kernel.Thm
+
+pub fn cop_sum() -> @kernel.Thm
+
+pub fn cop_to_cfun() -> @kernel.Thm
+
+pub fn cop_transpose() -> @kernel.Thm
+
+pub fn cop_zero() -> @kernel.Thm
+
+pub fn cop_zero_clauses() -> @kernel.Thm
+
+pub fn cop_zero_neq_id() -> @kernel.Thm
+
+pub fn cop_zero_thm() -> @kernel.Thm
+
+pub fn cop_zero_v1() -> @kernel.Thm
+
+pub fn cun_sum_add_numseg() -> @kernel.Thm
+
+pub fn deviation() -> @kernel.Thm
+
+pub fn deviation_alt() -> @kernel.Thm
+
+pub fn deviation_commutator() -> @kernel.Thm
+
+pub fn deviation_herm() -> @kernel.Thm
+
+pub fn deviation_unbounded_herm() -> @kernel.Thm
+
+pub fn deviation_unbounded_herm_alt() -> @kernel.Thm
+
+pub fn eigen_pair_add() -> @kernel.Thm
+
+pub fn eigen_pair_add_unbounded() -> @kernel.Thm
+
+pub fn eigen_pair_smul() -> @kernel.Thm
+
+pub fn eigen_pair_smul_unbounded() -> @kernel.Thm
+
+pub fn eigen_space_thm() -> @kernel.Thm
+
+pub fn equv_sub_zero() -> @kernel.Thm
+
+pub fn equv_zero() -> @kernel.Thm
+
+pub fn expec_herm_real() -> @kernel.Thm
+
+pub fn expec_unbounded_herm_real() -> @kernel.Thm
+
+pub fn expec_zero_state() -> @kernel.Thm
+
+pub fn expectation() -> @kernel.Thm
+
+pub fn forall_inner_space_thm() -> @kernel.Thm
+
+pub fn full_inner_space_g(String) -> @list.List[((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)] raise
+
+pub fn full_inner_space_parse(String) -> @kernel.Term raise
+
+pub fn full_inner_space_prove(String, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) -> @kernel.Thm raise
+
+pub fn fun_map2() -> @kernel.Thm
+
+pub fn fun_map2_thm() -> @kernel.Thm
+
+pub fn fun_map_defs() -> @kernel.Thm
+
+pub fn fun_map_thms() -> @kernel.Thm
+
+pub fn herm_is_closed_by_l() -> @kernel.Thm
+
+pub fn herm_is_closed_by_r() -> @kernel.Thm
+
+pub fn herm_itself() -> @kernel.Thm
+
+pub fn herm_itself_unbounded() -> @kernel.Thm
+
+pub fn herm_lincop() -> @kernel.Thm
+
+pub fn herm_lincop_l() -> @kernel.Thm
+
+pub fn herm_lincop_r() -> @kernel.Thm
+
+pub fn herm_prop_advanced() -> @kernel.Thm
+
+pub fn herm_sym() -> @kernel.Thm
+
+pub fn herm_sym_unbounded() -> @kernel.Thm
+
+pub fn herm_uniqueness() -> @kernel.Thm
+
+pub fn herm_uniqueness_alt() -> @kernel.Thm
+
+pub fn hermitain_inprod() -> @kernel.Thm
+
+pub fn hermitain_inprod_unbounded() -> @kernel.Thm
+
+pub fn i_lincop() -> @kernel.Thm
+
+pub fn i_self_adj() -> @kernel.Thm
+
+pub fn i_symmetric() -> @kernel.Thm
+
+pub fn i_ulincop() -> @kernel.Thm
+
+pub fn ii_commutator_herm() -> @kernel.Thm
+
+pub fn ii_commutator_unbounded_herm() -> @kernel.Thm
+
+pub fn infsum_in_spc() -> @kernel.Thm
+
+pub fn inner_space_add() -> @kernel.Thm
+
+pub fn inner_space_g(String) -> @list.List[((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)] raise
+
+pub fn inner_space_is_subspace() -> @kernel.Thm
+
+pub fn inner_space_neg() -> @kernel.Thm
+
+pub fn inner_space_parse(String) -> @kernel.Term raise
+
+pub fn inner_space_prove(String, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) -> @kernel.Thm raise
+
+pub fn inner_space_smul() -> @kernel.Thm
+
+pub fn inner_space_sub() -> @kernel.Thm
+
+pub fn inner_space_zero() -> @kernel.Thm
+
+pub fn inprod_add_cnj() -> @kernel.Thm
+
+pub fn inprod_add_ldist() -> @kernel.Thm
+
+pub fn inprod_add_rdist() -> @kernel.Thm
+
+pub fn inprod_add_self() -> @kernel.Thm
+
+pub fn inprod_cnj() -> @kernel.Thm
+
+pub fn inprod_equv_lreplace() -> @kernel.Thm
+
+pub fn inprod_equv_rreplace() -> @kernel.Thm
+
+pub fn inprod_equv_sym() -> @kernel.Thm
+
+pub fn inprod_equv_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn inprod_equv_transtive() -> @kernel.Thm
+
+pub fn inprod_inj_alt() -> @kernel.Thm
+
+pub fn inprod_lneg() -> @kernel.Thm
+
+pub fn inprod_lsmul() -> @kernel.Thm
+
+pub fn inprod_lzero() -> @kernel.Thm
+
+pub fn inprod_lzero_eq() -> @kernel.Thm
+
+pub fn inprod_neg() -> @kernel.Thm
+
+pub fn inprod_norm() -> @kernel.Thm
+
+pub fn inprod_not_zero() -> @kernel.Thm
+
+pub fn inprod_rneg() -> @kernel.Thm
+
+pub fn inprod_rsmul() -> @kernel.Thm
+
+pub fn inprod_rzero() -> @kernel.Thm
+
+pub fn inprod_self_cnj() -> @kernel.Thm
+
+pub fn inprod_self_norm() -> @kernel.Thm
+
+pub fn inprod_self_pos() -> @kernel.Thm
+
+pub fn inprod_self_re() -> @kernel.Thm
+
+pub fn inprod_self_real() -> @kernel.Thm
+
+pub fn inprod_sub_ldist() -> @kernel.Thm
+
+pub fn inprod_sub_rdist() -> @kernel.Thm
+
+pub fn inprod_sub_self() -> @kernel.Thm
+
+pub fn inprod_triangle_ineq() -> @kernel.Thm
+
+pub fn inprod_triangle_ineq2() -> @kernel.Thm
+
+pub fn inprod_zero() -> @kernel.Thm
+
+pub fn inprod_zero_eq() -> @kernel.Thm
+
+pub fn inprod_zero_equv() -> @kernel.Thm
+
+pub fn is_bounded() -> @kernel.Thm
+
+pub fn is_bounded_linear() -> @kernel.Thm
+
+pub fn is_cfun_subspace() -> @kernel.Thm
+
+pub fn is_closed_by() -> @kernel.Thm
+
+pub fn is_closed_by_commutator() -> @kernel.Thm
+
+pub fn is_closed_by_compose() -> @kernel.Thm
+
+pub fn is_closed_by_cop_add() -> @kernel.Thm
+
+pub fn is_closed_by_cop_mul() -> @kernel.Thm
+
+pub fn is_closed_by_cop_smul() -> @kernel.Thm
+
+pub fn is_closed_by_cop_sub() -> @kernel.Thm
+
+pub fn is_closed_by_i() -> @kernel.Thm
+
+pub fn is_closed_by_thm() -> @kernel.Thm
+
+pub fn is_closed_inprod_scalar() -> @kernel.Thm
+
+pub fn is_closed_scalar() -> @kernel.Thm
+
+pub fn is_eigen_fun() -> @kernel.Thm
+
+pub fn is_eigen_pair() -> @kernel.Thm
+
+pub fn is_eigen_pair_unbounded() -> @kernel.Thm
+
+pub fn is_eigen_val() -> @kernel.Thm
+
+pub fn is_hermitian() -> @kernel.Thm
+
+pub fn is_hermitian_unbounded() -> @kernel.Thm
+
+pub fn is_inner_space() -> @kernel.Thm
+
+pub fn is_linear_cop() -> @kernel.Thm
+
+pub fn is_self_adjoint() -> @kernel.Thm
+
+pub fn is_self_adjoint_v1() -> @kernel.Thm
+
+pub fn is_set_linear_cop() -> @kernel.Thm
+
+pub fn is_symmetric() -> @kernel.Thm
+
+pub fn is_symmetric_inprod() -> @kernel.Thm
+
+pub fn is_symmetric_v1() -> @kernel.Thm
+
+pub fn is_unbounded_linear_cop() -> @kernel.Thm
+
+pub fn k_def() -> @kernel.Thm
+
+pub fn k_thm() -> @kernel.Thm
+
+pub fn lincop_add() -> @kernel.Thm
+
+pub fn lincop_add_mul_ldistrib() -> @kernel.Thm
+
+pub fn lincop_cfun_zero() -> @kernel.Thm
+
+pub fn lincop_commutator() -> @kernel.Thm
+
+pub fn lincop_deviation() -> @kernel.Thm
+
+pub fn lincop_mul_distrib_clauses() -> @kernel.Thm
+
+pub fn lincop_mul_rmul() -> @kernel.Thm
+
+pub fn lincop_mul_rsmul() -> @kernel.Thm
+
+pub fn lincop_slincop() -> @kernel.Thm
+
+pub fn lincop_smul() -> @kernel.Thm
+
+pub fn lincop_smul_clauses() -> @kernel.Thm
+
+pub fn lincop_sub() -> @kernel.Thm
+
+pub fn lincop_sub_mul_ldistrib() -> @kernel.Thm
+
+pub fn linear_cfun_sum() -> @kernel.Thm
+
+pub fn linearity_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn linearity_thms() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn load() -> Unit
+
+pub fn monoidal_cfun_add() -> @kernel.Thm
+
+pub fn mul_herm() -> @kernel.Thm
+
+pub fn mul_herm_unbounded() -> @kernel.Thm
+
+pub fn mul_lemma() -> @kernel.Thm
+
+pub fn mul_lincop() -> @kernel.Thm
+
+pub fn mul_self_adj() -> @kernel.Thm
+
+pub fn mul_ulincop() -> @kernel.Thm
+
+pub fn neg_self_adj() -> @kernel.Thm
+
+pub fn neg_symmetric() -> @kernel.Thm
+
+pub fn neutral_cfun_add() -> @kernel.Thm
+
+pub fn norm2_add_real() -> @kernel.Thm
+
+pub fn numseg_empty_imp() -> @kernel.Thm
+
+pub fn orthogonal_decompos_wrt_cfun() -> @kernel.Thm
+
+pub fn orthogonal_decompos_wrt_cfun_decomposition() -> @kernel.Thm
+
+pub fn orthogonal_decompos_wrt_cfun_orthogonal() -> @kernel.Thm
+
+pub fn orthogonal_sum_norm() -> @kernel.Thm
+
+pub fn pow2_sym_unbounded() -> @kernel.Thm
+
+pub fn pow_lincop() -> @kernel.Thm
+
+pub fn prioritize_cfun(Unit) -> Unit raise
+
+pub fn prioritize_cop(Unit) -> Unit raise
+
+pub fn real_mul() -> @kernel.Thm
+
+pub fn real_of_complex() -> @kernel.Thm
+
+pub fn real_of_complex_add() -> @kernel.Thm
+
+pub fn real_of_complex_cx() -> @kernel.Thm
+
+pub fn real_of_complex_mul() -> @kernel.Thm
+
+pub fn real_of_complex_norm() -> @kernel.Thm
+
+pub fn real_of_complex_re() -> @kernel.Thm
+
+pub fn real_of_complex_sub() -> @kernel.Thm
+
+pub fn real_of_complex_v1() -> @kernel.Thm
+
+pub fn real_of_complex_zero() -> @kernel.Thm
+
+pub fn real_tac(@list.List[((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise]?) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn real_tac_v1(@list.List[((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise]?) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn real_tac_v2(@list.List[((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise]?) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn real_thms() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn scalar_bounded() -> @kernel.Thm
+
+pub fn scalar_ii_herm() -> @kernel.Thm
+
+pub fn scalar_ii_herm_unbound() -> @kernel.Thm
+
+pub fn scalar_lincop() -> @kernel.Thm
+
+pub fn schwarz_inequality() -> @kernel.Thm
+
+pub fn schwarz_inequality2() -> @kernel.Thm
+
+pub fn schwarz_inequality_enhanced() -> @kernel.Thm
+
+pub fn self_adj_inprod() -> @kernel.Thm
+
+pub fn self_adj_is_closed_by() -> @kernel.Thm
+
+pub fn self_adj_is_lincop() -> @kernel.Thm
+
+pub fn self_adjoint_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn selfadjoint_thms() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn sing_eq() -> @kernel.Thm
+
+pub fn sing_ind() -> @kernel.Thm
+
+pub fn sing_rec() -> @kernel.Thm
+
+pub fn slincop_add() -> @kernel.Thm
+
+pub fn slincop_cfun_zero() -> @kernel.Thm
+
+pub fn slincop_smul() -> @kernel.Thm
+
+pub fn slincop_sub() -> @kernel.Thm
+
+pub fn slinear_cfun_sum() -> @kernel.Thm
+
+pub fn slinear_cfun_sum_imp() -> @kernel.Thm
+
+pub fn smul_herm() -> @kernel.Thm
+
+pub fn smul_herm_unbounded() -> @kernel.Thm
+
+pub fn smul_lincop() -> @kernel.Thm
+
+pub fn smul_self_adj() -> @kernel.Thm
+
+pub fn smul_symmetric() -> @kernel.Thm
+
+pub fn smul_ulincop() -> @kernel.Thm
+
+pub fn sub_herm() -> @kernel.Thm
+
+pub fn sub_herm_unbounded() -> @kernel.Thm
+
+pub fn sub_lincop() -> @kernel.Thm
+
+pub fn sub_self_adj() -> @kernel.Thm
+
+pub fn sub_symmetric() -> @kernel.Thm
+
+pub fn sub_ulincop() -> @kernel.Thm
+
+pub fn subspace_inter() -> @kernel.Thm
+
+pub fn symmetric_closure() -> @kernel.Thm
+
+pub fn symmetric_is_lincop() -> @kernel.Thm
+
+pub fn symmetric_itself() -> @kernel.Thm
+
+pub fn symmetric_subset() -> @kernel.Thm
+
+pub fn symmetric_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn symmetric_thms() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn ulincop_add() -> @kernel.Thm
+
+pub fn ulincop_smul() -> @kernel.Thm
+
+pub fn ulincop_sub() -> @kernel.Thm
+
+pub fn ulincop_subspace() -> @kernel.Thm
+
+pub fn ulincop_subspace_v1() -> @kernel.Thm
+
+pub fn ulincop_zero() -> @kernel.Thm
+
+pub fn ulinearity_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn ulinearity_thms() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn variance() -> @kernel.Thm
+
+pub fn variance_real() -> @kernel.Thm
+
+pub fn variance_unbounded_real() -> @kernel.Thm
+
+pub fn zero_herm() -> @kernel.Thm
+
+pub fn zero_lincop() -> @kernel.Thm
+
+pub fn zero_self_adj() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
