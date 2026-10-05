@@ -1761,6 +1761,8 @@ module Lower = struct
       | "/" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.div63", [ a; b ]))
       | "mod" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.mod63", [ a; b ]))
       | "compare" -> (2, fun [ a; b ] _ -> widen (Call (Atom "@lib.compare", [ a; b ])))
+      (* lib's reproduction of OCaml's hash (Jordan/tactics_ext2.ml) *)
+      | "Hashtbl.hash" -> (1, fun [ a ] _ -> widen (Call (Atom "@lib.hash", [ a ])))
       | ("+." | "-." | "*." | "/.") as op -> (2, fun [ a; b ] _ -> Binop (String.sub op 0 1, a, b))
       | "~-." -> (1, fun [ a ] _ -> Call (Atom "@lib.float_neg", [ a ]))
       | "float_of_int" -> (1, fun [ a ] _ -> Call (Atom "Int64::to_double", [ a ]))
@@ -1902,7 +1904,7 @@ module Lower = struct
     (match name with
      | "Hashtbl.add" | "Hashtbl.replace" | "Hashtbl.find" | "Hashtbl.find_opt" | "Hashtbl.mem" | "Hashtbl.remove" | "Hashtbl.find_all" ->
          (match args with _ :: k :: _ -> note_bounds [ k ] | _ -> ())
-     | "=" | "<>" | "compare" | "<" | ">" | "<=" | ">=" | "min" | "max" ->
+     | "=" | "<>" | "compare" | "<" | ">" | "<=" | ">=" | "min" | "max" | "Hashtbl.hash" ->
          note_bounds args;
          (* a partial application: the parameter types of its instance *)
          if List.length args < arity then
