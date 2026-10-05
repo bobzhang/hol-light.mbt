@@ -1,0 +1,29 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/jordan/parse_ext_override_interface"
+
+// Values
+pub fn ambiguous_interface(Unit) -> Unit raise
+
+pub fn get_priority(Unit) -> String raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn pop_priority(Unit) -> Unit raise
+
+pub fn prioritize_int(Unit) -> Unit raise
+
+pub fn prioritize_num(Unit) -> Unit raise
+
+pub fn prioritize_real(Unit) -> Unit raise
+
+pub fn unambiguous_interface(Unit) -> Unit raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

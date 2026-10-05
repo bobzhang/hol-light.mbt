@@ -1,0 +1,64 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/jordan/num_ext_gcd"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn div_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn divide() -> @kernel.Thm
+
+pub fn divide_divide() -> @kernel.Thm
+
+pub fn divide_eq() -> @kernel.Thm
+
+pub fn divide_prod() -> @kernel.Thm
+
+pub fn divide_prod2() -> @kernel.Thm
+
+pub fn divide_sum() -> @kernel.Thm
+
+pub fn divide_summand() -> @kernel.Thm
+
+pub fn divide_v1() -> @kernel.Thm
+
+pub fn gcd() -> @kernel.Thm
+
+pub fn gcd_certificate() -> @kernel.Thm
+
+pub fn gcd_conv(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn gcd_conv_v1(@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn gcd_num(@num.Num, @num.Num) -> (@num.Num, @num.Num, @num.Num) raise
+
+pub fn gcd_num_v1(@num.Num, @num.Num) -> (@num.Num, @num.Num, @num.Num) raise
+
+pub fn gcd_numdata(@num.Num, @num.Num) -> (@num.Num, @num.Num, @num.Num, @num.Num, @num.Num, @num.Num, @num.Num, @num.Num, @num.Num) raise
+
+pub fn gcd_v1() -> @kernel.Thm
+
+pub fn hol_gcd(Int64, Int64) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn test_num_ext_gcd(Int64, Int64) -> Unit raise
+
+pub fn test_suite_num_ext_gcd() -> Unit
+
+// Errors
+pub(all) suberror Test_suite_num_ext_gcd {
+  Test_suite_num_ext_gcd(String)
+}
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,37 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/jordan/num_ext_nabs"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn int_is_int() -> @kernel.Thm
+
+pub fn int_num() -> @kernel.Thm
+
+pub fn int_num_real() -> @kernel.Thm
+
+pub fn int_of_num_dest() -> @kernel.Thm
+
+pub fn int_rep() -> @kernel.Thm
+
+pub fn int_rep2() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn nabs() -> @kernel.Thm
+
+pub fn nabs_neg() -> @kernel.Thm
+
+pub fn nabs_pos() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

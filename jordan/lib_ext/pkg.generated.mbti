@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/jordan/lib_ext"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn add_interface(String, @kernel.Term) -> Unit raise
+
+pub fn add_test((String, Bool)) -> Unit raise
+
+pub fn[TA, TB] cannot((TB) -> TA raise, TB) -> Bool raise
+
+pub fn[TA] drop_(Int64, @list.List[TA]) -> @list.List[TA] raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn local_definition(String, @kernel.Term) -> @kernel.Thm raise
+
+pub fn local_defs() -> @ref.Ref[@list.List[(String, (String, @kernel.Term))]]
+
+pub fn mk_local_interface(String) -> @list.List[Unit] raise
+
+pub fn new_test_suite(Unit) -> (((String, Bool)) -> Unit raise, (Unit) -> Unit raise) raise
+
+pub fn reduce_local_interface(String) -> @list.List[Unit] raise
+
+pub fn[TA] take(Int64, Int64, @list.List[TA]) -> @list.List[TA] raise
+
+pub fn test_(Unit) -> Unit raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

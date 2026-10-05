@@ -1,0 +1,25 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/jordan/real_ext_geom_series"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn geometric_sum() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn real_mul_rtimes() -> @kernel.Thm
+
+pub fn try_rule((@kernel.Thm) -> @kernel.Thm raise, @kernel.Thm) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

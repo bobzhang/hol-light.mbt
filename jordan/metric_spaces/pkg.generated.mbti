@@ -1,0 +1,585 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/jordan/metric_spaces"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn add_cont() -> @kernel.Thm
+
+pub fn ball_dist() -> @kernel.Thm
+
+pub fn ball_dist_closed() -> @kernel.Thm
+
+pub fn ball_subset_ball() -> @kernel.Thm
+
+pub fn ball_symm() -> @kernel.Thm
+
+pub fn bicont_homeomorphism() -> @kernel.Thm
+
+pub fn card_sing_conv() -> @kernel.Thm
+
+pub fn cauchy_schwartz() -> @kernel.Thm
+
+pub fn cauchy_seq() -> @kernel.Thm
+
+pub fn cauchy_seq_cauchy() -> @kernel.Thm
+
+pub fn cauchy_subseq() -> @kernel.Thm
+
+pub fn cauchy_subseq_sublemma() -> @kernel.Thm
+
+pub fn center_finite() -> @kernel.Thm
+
+pub fn closed() -> @kernel.Thm
+
+pub fn closed_ball() -> @kernel.Thm
+
+pub fn closed_ball_closed() -> @kernel.Thm
+
+pub fn closed_compact() -> @kernel.Thm
+
+pub fn closed_inter() -> @kernel.Thm
+
+pub fn closed_open() -> @kernel.Thm
+
+pub fn closed_univ() -> @kernel.Thm
+
+pub fn closure() -> @kernel.Thm
+
+pub fn closure_close() -> @kernel.Thm
+
+pub fn closure_closed() -> @kernel.Thm
+
+pub fn closure_open() -> @kernel.Thm
+
+pub fn closure_self() -> @kernel.Thm
+
+pub fn closure_subset() -> @kernel.Thm
+
+pub fn compact() -> @kernel.Thm
+
+pub fn compact_closed() -> @kernel.Thm
+
+pub fn compact_complete() -> @kernel.Thm
+
+pub fn compact_euclid() -> @kernel.Thm
+
+pub fn compact_max() -> @kernel.Thm
+
+pub fn compact_totally_bounded() -> @kernel.Thm
+
+pub fn compact_uniformly_continuous() -> @kernel.Thm
+
+pub fn complete() -> @kernel.Thm
+
+pub fn complete_closed() -> @kernel.Thm
+
+pub fn complete_compact() -> @kernel.Thm
+
+pub fn complete_euclid() -> @kernel.Thm
+
+pub fn complete_real() -> @kernel.Thm
+
+pub fn component_def() -> @kernel.Thm
+
+pub fn component_refl() -> @kernel.Thm
+
+pub fn component_symm() -> @kernel.Thm
+
+pub fn component_trans() -> @kernel.Thm
+
+pub fn connect_image() -> @kernel.Thm
+
+pub fn connect_real() -> @kernel.Thm
+
+pub fn connected() -> @kernel.Thm
+
+pub fn connected_sing() -> @kernel.Thm
+
+pub fn connected_unions() -> @kernel.Thm
+
+pub fn const_continuous() -> @kernel.Thm
+
+pub fn continuous() -> @kernel.Thm
+
+pub fn continuous_comp() -> @kernel.Thm
+
+pub fn continuous_euclid1() -> @kernel.Thm
+
+pub fn continuous_induced() -> @kernel.Thm
+
+pub fn continuous_lin_combo() -> @kernel.Thm
+
+pub fn continuous_scale() -> @kernel.Thm
+
+pub fn continuous_sum() -> @kernel.Thm
+
+pub fn converge() -> @kernel.Thm
+
+pub fn converge_cauchy() -> @kernel.Thm
+
+pub fn convergent_subseq() -> @kernel.Thm
+
+pub fn coord_dirac() -> @kernel.Thm
+
+pub fn countable_cover() -> @kernel.Thm
+
+pub fn countable_dense() -> @kernel.Thm
+
+pub fn countable_prod() -> @kernel.Thm
+
+pub fn d_euclid_bound() -> @kernel.Thm
+
+pub fn d_euclid_n() -> @kernel.Thm
+
+pub fn d_euclid_pos() -> @kernel.Thm
+
+pub fn d_euclid_pow2() -> @kernel.Thm
+
+pub fn d_real() -> @kernel.Thm
+
+pub fn delete_empty() -> @kernel.Thm
+
+pub fn delete_inters() -> @kernel.Thm
+
+pub fn dense() -> @kernel.Thm
+
+pub fn dense_open() -> @kernel.Thm
+
+pub fn dense_subset() -> @kernel.Thm
+
+pub fn diff_inter() -> @kernel.Thm
+
+pub fn diff_subset() -> @kernel.Thm
+
+pub fn diff_surj() -> @kernel.Thm
+
+pub fn dirac_0() -> @kernel.Thm
+
+pub fn dot_comm() -> @kernel.Thm
+
+pub fn dot_euclid() -> @kernel.Thm
+
+pub fn dot_linear() -> @kernel.Thm
+
+pub fn dot_linear2() -> @kernel.Thm
+
+pub fn dot_linear2_euclidean() -> @kernel.Thm
+
+pub fn dot_linear_euclidean() -> @kernel.Thm
+
+pub fn dot_lzero() -> @kernel.Thm
+
+pub fn dot_minus_linear() -> @kernel.Thm
+
+pub fn dot_minus_linear2() -> @kernel.Thm
+
+pub fn dot_minus_linear2_euclidean() -> @kernel.Thm
+
+pub fn dot_minus_linear_euclidean() -> @kernel.Thm
+
+pub fn dot_neg() -> @kernel.Thm
+
+pub fn dot_neg2() -> @kernel.Thm
+
+pub fn dot_nonneg() -> @kernel.Thm
+
+pub fn dot_rzero() -> @kernel.Thm
+
+pub fn dot_scale() -> @kernel.Thm
+
+pub fn dot_scale2() -> @kernel.Thm
+
+pub fn dot_scale2_euclidean() -> @kernel.Thm
+
+pub fn dot_scale_euclidean() -> @kernel.Thm
+
+pub fn dot_updim() -> @kernel.Thm
+
+pub fn dot_zero() -> @kernel.Thm
+
+pub fn dot_zero_euclidean() -> @kernel.Thm
+
+pub fn empty_closed() -> @kernel.Thm
+
+pub fn empty_not_exists() -> @kernel.Thm
+
+pub fn eq_empty() -> @kernel.Thm
+
+pub fn eq_empty_v1() -> @kernel.Thm
+
+pub fn euclid1_abs() -> @kernel.Thm
+
+pub fn euclid1_dirac() -> @kernel.Thm
+
+pub fn euclid_add_assoc() -> @kernel.Thm
+
+pub fn euclid_add_closure() -> @kernel.Thm
+
+pub fn euclid_add_comm() -> @kernel.Thm
+
+pub fn euclid_ball_cube() -> @kernel.Thm
+
+pub fn euclid_dirac() -> @kernel.Thm
+
+pub fn euclid_ldistrib() -> @kernel.Thm
+
+pub fn euclid_lzero() -> @kernel.Thm
+
+pub fn euclid_neg_closure() -> @kernel.Thm
+
+pub fn euclid_neg_sum() -> @kernel.Thm
+
+pub fn euclid_rdistrib() -> @kernel.Thm
+
+pub fn euclid_rzero() -> @kernel.Thm
+
+pub fn euclid_scale_act() -> @kernel.Thm
+
+pub fn euclid_scale_closure() -> @kernel.Thm
+
+pub fn euclid_scale_one() -> @kernel.Thm
+
+pub fn euclid_sub_closure() -> @kernel.Thm
+
+pub fn euclid_updim() -> @kernel.Thm
+
+pub fn euclidean_add_closure() -> @kernel.Thm
+
+pub fn euclidean_neg_closure() -> @kernel.Thm
+
+pub fn euclidean_scale_closure() -> @kernel.Thm
+
+pub fn euclidean_sub_closure() -> @kernel.Thm
+
+pub fn finite_inters() -> @kernel.Thm
+
+pub fn finite_scaled_lattice() -> @kernel.Thm
+
+pub fn finite_subset() -> @kernel.Thm
+
+pub fn gen() -> @kernel.Thm
+
+pub fn gen_induced() -> @kernel.Thm
+
+pub fn gen_subset() -> @kernel.Thm
+
+pub fn gen_subspace() -> @kernel.Thm
+
+pub fn half_open() -> @kernel.Thm
+
+pub fn half_open_above() -> @kernel.Thm
+
+pub fn hausdorff() -> @kernel.Thm
+
+pub fn hausdorff_homeomorphsim() -> @kernel.Thm
+
+pub fn homeomorphism() -> @kernel.Thm
+
+pub fn image_compact() -> @kernel.Thm
+
+pub fn image_i() -> @kernel.Thm
+
+pub fn image_top() -> @kernel.Thm
+
+pub fn induced_compact() -> @kernel.Thm
+
+pub fn induced_top() -> @kernel.Thm
+
+pub fn induced_top_open() -> @kernel.Thm
+
+pub fn induced_top_support() -> @kernel.Thm
+
+pub fn induced_top_top() -> @kernel.Thm
+
+pub fn induced_top_unions() -> @kernel.Thm
+
+pub fn induced_trans() -> @kernel.Thm
+
+pub fn integer_cube_finite() -> @kernel.Thm
+
+pub fn inter_thm() -> @kernel.Thm
+
+pub fn inters_eq_empty() -> @kernel.Thm
+
+pub fn inters_singleton() -> @kernel.Thm
+
+pub fn inters_subset() -> @kernel.Thm
+
+pub fn interval_closed_ball() -> @kernel.Thm
+
+pub fn interval_compact() -> @kernel.Thm
+
+pub fn interval_euclid1_bounded() -> @kernel.Thm
+
+pub fn interval_euclid1_closed() -> @kernel.Thm
+
+pub fn interval_euclid1_compact() -> @kernel.Thm
+
+pub fn interval_finite() -> @kernel.Thm
+
+pub fn interval_image() -> @kernel.Thm
+
+pub fn inv_homeomorphism() -> @kernel.Thm
+
+pub fn joinf() -> @kernel.Thm
+
+pub fn joinf_cont() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn loc_path_conn() -> @kernel.Thm
+
+pub fn loc_path_conn_euclid() -> @kernel.Thm
+
+pub fn loc_path_euclid_cor() -> @kernel.Thm
+
+pub fn metric_bounded() -> @kernel.Thm
+
+pub fn metric_cont() -> @kernel.Thm
+
+pub fn metric_continuous() -> @kernel.Thm
+
+pub fn metric_continuous_continuous() -> @kernel.Thm
+
+pub fn metric_continuous_pt() -> @kernel.Thm
+
+pub fn metric_continuous_pt_domain() -> @kernel.Thm
+
+pub fn metric_euclid() -> @kernel.Thm
+
+pub fn metric_euclidean() -> @kernel.Thm
+
+pub fn metric_hausdorff() -> @kernel.Thm
+
+pub fn metric_real() -> @kernel.Thm
+
+pub fn metric_space_symm() -> @kernel.Thm
+
+pub fn metric_space_triangle() -> @kernel.Thm
+
+pub fn metric_space_zero() -> @kernel.Thm
+
+pub fn metric_subspace() -> @kernel.Thm
+
+pub fn metric_translate() -> @kernel.Thm
+
+pub fn metric_translate_left() -> @kernel.Thm
+
+pub fn min_finite() -> @kernel.Thm
+
+pub fn min_finite_delta() -> @kernel.Thm
+
+pub fn neg_cont() -> @kernel.Thm
+
+pub fn neg_continuous() -> @kernel.Thm
+
+pub fn neg_dim() -> @kernel.Thm
+
+pub fn norm_dot() -> @kernel.Thm
+
+pub fn norm_n() -> @kernel.Thm
+
+pub fn norm_neg() -> @kernel.Thm
+
+pub fn norm_nonneg() -> @kernel.Thm
+
+pub fn norm_scale() -> @kernel.Thm
+
+pub fn norm_scale_vec() -> @kernel.Thm
+
+pub fn norm_triangle() -> @kernel.Thm
+
+pub fn open_and_closed() -> @kernel.Thm
+
+pub fn open_ball() -> @kernel.Thm
+
+pub fn open_ball_center() -> @kernel.Thm
+
+pub fn open_ball_dist() -> @kernel.Thm
+
+pub fn open_ball_empty() -> @kernel.Thm
+
+pub fn open_ball_inter() -> @kernel.Thm
+
+pub fn open_ball_intersect() -> @kernel.Thm
+
+pub fn open_ball_nbd() -> @kernel.Thm
+
+pub fn open_ball_neg_radius() -> @kernel.Thm
+
+pub fn open_ball_nest() -> @kernel.Thm
+
+pub fn open_ball_nonempty() -> @kernel.Thm
+
+pub fn open_ball_nonempty_center() -> @kernel.Thm
+
+pub fn open_ball_open() -> @kernel.Thm
+
+pub fn open_ball_path() -> @kernel.Thm
+
+pub fn open_ball_star() -> @kernel.Thm
+
+pub fn open_ball_sub_closed() -> @kernel.Thm
+
+pub fn open_ball_subset() -> @kernel.Thm
+
+pub fn open_ball_subspace() -> @kernel.Thm
+
+pub fn open_balls() -> @kernel.Thm
+
+pub fn open_closed() -> @kernel.Thm
+
+pub fn open_def() -> @kernel.Thm
+
+pub fn open_empty() -> @kernel.Thm
+
+pub fn open_inters() -> @kernel.Thm
+
+pub fn open_nbd() -> @kernel.Thm
+
+pub fn path() -> @kernel.Thm
+
+pub fn path_component() -> @kernel.Thm
+
+pub fn path_component_in() -> @kernel.Thm
+
+pub fn path_component_subspace() -> @kernel.Thm
+
+pub fn path_domain() -> @kernel.Thm
+
+pub fn path_eq_conn() -> @kernel.Thm
+
+pub fn path_refl() -> @kernel.Thm
+
+pub fn path_symm() -> @kernel.Thm
+
+pub fn path_symm_eq() -> @kernel.Thm
+
+pub fn path_trans() -> @kernel.Thm
+
+pub fn preimage_disjoint() -> @kernel.Thm
+
+pub fn preimage_subset() -> @kernel.Thm
+
+pub fn preimage_union() -> @kernel.Thm
+
+pub fn preimage_unions() -> @kernel.Thm
+
+pub fn proj() -> @kernel.Thm
+
+pub fn proj_cauchy() -> @kernel.Thm
+
+pub fn proj_contraction() -> @kernel.Thm
+
+pub fn proj_d_euclid() -> @kernel.Thm
+
+pub fn proj_euclid1() -> @kernel.Thm
+
+pub fn q_elim_thm() -> @kernel.Thm
+
+pub fn q_elim_thm_p() -> @kernel.Thm
+
+pub fn q_elim_thm_p_p() -> @kernel.Thm
+
+pub fn real_half_el() -> @kernel.Thm
+
+pub fn real_half_le() -> @kernel.Thm
+
+pub fn real_half_lle() -> @kernel.Thm
+
+pub fn real_half_lt() -> @kernel.Thm
+
+pub fn real_sum_square_pos() -> @kernel.Thm
+
+pub fn sequence() -> @kernel.Thm
+
+pub fn sequence_in() -> @kernel.Thm
+
+pub fn sequence_subseq() -> @kernel.Thm
+
+pub fn sub_imp_inter() -> @kernel.Thm
+
+pub fn subseq_cauchy() -> @kernel.Thm
+
+pub fn subsequence_rec() -> @kernel.Thm
+
+pub fn subset_cauchy() -> @kernel.Thm
+
+pub fn subset_closure() -> @kernel.Thm
+
+pub fn subset_inters() -> @kernel.Thm
+
+pub fn subset_preimage() -> @kernel.Thm
+
+pub fn subset_sequence() -> @kernel.Thm
+
+pub fn subset_unions_insert() -> @kernel.Thm
+
+pub fn top_inter() -> @kernel.Thm
+
+pub fn top_of_metric() -> @kernel.Thm
+
+pub fn top_of_metric_empty() -> @kernel.Thm
+
+pub fn top_of_metric_gen() -> @kernel.Thm
+
+pub fn top_of_metric_induced() -> @kernel.Thm
+
+pub fn top_of_metric_inter() -> @kernel.Thm
+
+pub fn top_of_metric_nbd() -> @kernel.Thm
+
+pub fn top_of_metric_open() -> @kernel.Thm
+
+pub fn top_of_metric_open_balls() -> @kernel.Thm
+
+pub fn top_of_metric_top() -> @kernel.Thm
+
+pub fn top_of_metric_union() -> @kernel.Thm
+
+pub fn top_of_metric_unions() -> @kernel.Thm
+
+pub fn top_unions() -> @kernel.Thm
+
+pub fn top_univ() -> @kernel.Thm
+
+pub fn topology() -> @kernel.Thm
+
+pub fn totally_bounded() -> @kernel.Thm
+
+pub fn totally_bounded_bounded() -> @kernel.Thm
+
+pub fn totally_bounded_cube() -> @kernel.Thm
+
+pub fn totally_bounded_euclid() -> @kernel.Thm
+
+pub fn totally_bounded_subset() -> @kernel.Thm
+
+pub fn trivial_lin_combo() -> @kernel.Thm
+
+pub fn twopow_double() -> @kernel.Thm
+
+pub fn twopow_pos() -> @kernel.Thm
+
+pub fn uniformly_continuous() -> @kernel.Thm
+
+pub fn union_closed_interval() -> @kernel.Thm
+
+pub fn union_subset() -> @kernel.Thm
+
+pub fn unions_delete2() -> @kernel.Thm
+
+pub fn unions_eq_empty() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
