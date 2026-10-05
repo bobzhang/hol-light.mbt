@@ -1,0 +1,849 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/autoformalization/hilbert_waring"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abs_int_has_size() -> @kernel.Thm
+
+pub fn abs_seg_card_le() -> @kernel.Thm
+
+pub fn abs_seg_finite() -> @kernel.Thm
+
+pub fn aconv_count_gen() -> @kernel.Thm
+
+pub fn adiag_count() -> @kernel.Thm
+
+pub fn afiber_card() -> @kernel.Thm
+
+pub fn afiber_card_gen() -> @kernel.Thm
+
+pub fn agen_fold() -> @kernel.Thm
+
+pub fn aijoin_head() -> @kernel.Thm
+
+pub fn aijoin_tail() -> @kernel.Thm
+
+pub fn amcount() -> @kernel.Thm
+
+pub fn amcount_vanish() -> @kernel.Thm
+
+pub fn amgm2() -> @kernel.Thm
+
+pub fn amreps() -> @kernel.Thm
+
+pub fn amreps_finite() -> @kernel.Thm
+
+pub fn ap_card_arith() -> @kernel.Thm
+
+pub fn ap_card_le_lmul() -> @kernel.Thm
+
+pub fn ap_count() -> @kernel.Thm
+
+pub fn ap_subset_image() -> @kernel.Thm
+
+pub fn aq_exact() -> @kernel.Thm
+
+pub fn arg_ii() -> @kernel.Thm
+
+pub fn argmax_abs() -> @kernel.Thm
+
+pub fn bbox_lower() -> @kernel.Thm
+
+pub fn blk() -> @kernel.Thm
+
+pub fn blk_full() -> @kernel.Thm
+
+pub fn blk_riffle_preimage() -> @kernel.Thm
+
+pub fn block_arith3() -> @kernel.Thm
+
+pub fn block_image_eq() -> @kernel.Thm
+
+pub fn block_in_wbox() -> @kernel.Thm
+
+pub fn block_inj_arith() -> @kernel.Thm
+
+pub fn block_map_inj() -> @kernel.Thm
+
+pub fn block_peel_card() -> @kernel.Thm
+
+pub fn block_ub() -> @kernel.Thm
+
+pub fn blocksum_jsplit() -> @kernel.Thm
+
+pub fn box_card_le() -> @kernel.Thm
+
+pub fn box_fiber_partition() -> @kernel.Thm
+
+pub fn box_h_card() -> @kernel.Thm
+
+pub fn box_hm1_card() -> @kernel.Thm
+
+pub fn boxreps() -> @kernel.Thm
+
+pub fn boxreps_finite() -> @kernel.Thm
+
+pub fn boxreps_image() -> @kernel.Thm
+
+pub fn boxreps_subset_numseg() -> @kernel.Thm
+
+pub fn boxreps_subset_sumpow() -> @kernel.Thm
+
+pub fn boxsum() -> @kernel.Thm
+
+pub fn boxsum_bound() -> @kernel.Thm
+
+pub fn boxtuples() -> @kernel.Thm
+
+pub fn boxtuples_card() -> @kernel.Thm
+
+pub fn boxtuples_finite() -> @kernel.Thm
+
+pub fn cancel_a_le() -> @kernel.Thm
+
+pub fn card2_nonempty() -> @kernel.Thm
+
+pub fn card_2e_gt2() -> @kernel.Thm
+
+pub fn card_boxreps_le() -> @kernel.Thm
+
+pub fn card_diff_lab() -> @kernel.Thm
+
+pub fn card_fibered_bnd() -> @kernel.Thm
+
+pub fn card_findiffset_pairs_dp() -> @kernel.Thm
+
+pub fn card_ibox_bnd() -> @kernel.Thm
+
+pub fn card_image_lab() -> @kernel.Thm
+
+pub fn card_intseg_3a() -> @kernel.Thm
+
+pub fn cardpow_cast() -> @kernel.Thm
+
+pub fn case_a_inj() -> @kernel.Thm
+
+pub fn case_a_unit() -> @kernel.Thm
+
+pub fn case_b_arith() -> @kernel.Thm
+
+pub fn case_b_core() -> @kernel.Thm
+
+pub fn cb_fact() -> @kernel.Thm
+
+pub fn cb_pow() -> @kernel.Thm
+
+pub fn childfam() -> @kernel.Thm
+
+pub fn childfam_sgnrelab() -> @kernel.Thm
+
+pub fn chq() -> @kernel.Thm
+
+pub fn chsg() -> @kernel.Thm
+
+pub fn chsg_pres() -> @kernel.Thm
+
+pub fn cnt_div_bound() -> @kernel.Thm
+
+pub fn coeffbox_finite() -> @kernel.Thm
+
+pub fn coprime_ah_delta() -> @kernel.Thm
+
+pub fn coprime_lincount_div() -> @kernel.Thm
+
+pub fn count_key_bound() -> @kernel.Thm
+
+pub fn count_mono_n() -> @kernel.Thm
+
+pub fn count_sumpow_ge1() -> @kernel.Thm
+
+pub fn dec_fact() -> @kernel.Thm
+
+pub fn delta_exists() -> @kernel.Thm
+
+pub fn delta_ge1() -> @kernel.Thm
+
+pub fn delta_inv() -> @kernel.Thm
+
+pub fn delta_step_arith() -> @kernel.Thm
+
+pub fn delta_tail() -> @kernel.Thm
+
+pub fn delta_tail_int() -> @kernel.Thm
+
+pub fn density_pos() -> @kernel.Thm
+
+pub fn density_pos_from_fund() -> @kernel.Thm
+
+pub fn diag_head_le_fdfs() -> @kernel.Thm
+
+pub fn diag_signed_eq() -> @kernel.Thm
+
+pub fn diag_signfam() -> @kernel.Thm
+
+pub fn diag_tail_le_fdfs() -> @kernel.Thm
+
+pub fn div_pow_ddm1_le() -> @kernel.Thm
+
+pub fn div_pow_mul_le() -> @kernel.Thm
+
+pub fn dp_fiber_close_w() -> @kernel.Thm
+
+pub fn dp_psi_fibersum_bnd_w() -> @kernel.Thm
+
+pub fn dp_red_to_close_ge2() -> @kernel.Thm
+
+pub fn dp_red_to_close_wide() -> @kernel.Thm
+
+pub fn dpwih2() -> @kernel.Thm
+
+pub fn dpwih2_all() -> @kernel.Thm
+
+pub fn dpwih2_base() -> @kernel.Thm
+
+pub fn dpwih2_step() -> @kernel.Thm
+
+pub fn epowers() -> @kernel.Thm
+
+pub fn epowers_0() -> @kernel.Thm
+
+pub fn epowers_1() -> @kernel.Thm
+
+pub fn exact_box_card() -> @kernel.Thm
+
+pub fn exact_int_interval_card() -> @kernel.Thm
+
+pub fn exists_max_pow() -> @kernel.Thm
+
+pub fn exp_2_le() -> @kernel.Thm
+
+pub fn exp_combine_ge2() -> @kernel.Thm
+
+pub fn exp_id_msupp_ge2() -> @kernel.Thm
+
+pub fn family_nonhomog_bnd() -> @kernel.Thm
+
+pub fn family_nonhomog_le() -> @kernel.Thm
+
+pub fn family_split() -> @kernel.Thm
+
+pub fn ff() -> @kernel.Thm
+
+pub fn ff_blk_image() -> @kernel.Thm
+
+pub fn ff_fibre_eq() -> @kernel.Thm
+
+pub fn ff_pair() -> @kernel.Thm
+
+pub fn fiber_as_psisum() -> @kernel.Thm
+
+pub fn fiber_card_bound() -> @kernel.Thm
+
+pub fn fiber_card_bound_int() -> @kernel.Thm
+
+pub fn fiber_eq_image() -> @kernel.Thm
+
+pub fn fiber_g_eq() -> @kernel.Thm
+
+pub fn fiber_imgset() -> @kernel.Thm
+
+pub fn fiber_le_lincount() -> @kernel.Thm
+
+pub fn fiber_linsum_partition() -> @kernel.Thm
+
+pub fn fiber_permute() -> @kernel.Thm
+
+pub fn fiber_psifam() -> @kernel.Thm
+
+pub fn fiber_rescale() -> @kernel.Thm
+
+pub fn fibersum_bp_inv() -> @kernel.Thm
+
+pub fn fibersum_to_psi() -> @kernel.Thm
+
+pub fn fibre_has_size_g() -> @kernel.Thm
+
+pub fn findiffset_as_pairs_dp() -> @kernel.Thm
+
+pub fn findiffset_dp() -> @kernel.Thm
+
+pub fn findiffset_fibersum_dp() -> @kernel.Thm
+
+pub fn finite_gbox() -> @kernel.Thm
+
+pub fn flat_from_leaf_riffle() -> @kernel.Thm
+
+pub fn flat_leaf_bnd_w() -> @kernel.Thm
+
+pub fn fold_to_signfam() -> @kernel.Thm
+
+pub fn four_exp_step() -> @kernel.Thm
+
+pub fn free_x_split() -> @kernel.Thm
+
+pub fn freex_fiber_size() -> @kernel.Thm
+
+pub fn fund_lemma_cf() -> @kernel.Thm
+
+pub fn funspace_bound() -> @kernel.Thm
+
+pub fn gcd_img_subset() -> @kernel.Thm
+
+pub fn gen_fold() -> @kernel.Thm
+
+pub fn gjoin() -> @kernel.Thm
+
+pub fn gjoin_headtail() -> @kernel.Thm
+
+pub fn glue() -> @kernel.Thm
+
+pub fn glue_inj() -> @kernel.Thm
+
+pub fn gn_unif_bnd_gen() -> @kernel.Thm
+
+pub fn group_mult_gen_dp_w() -> @kernel.Thm
+
+pub fn grouped_to_3factor_unif() -> @kernel.Thm
+
+pub fn grouped_to_target_arith_wide() -> @kernel.Thm
+
+pub fn gtail() -> @kernel.Thm
+
+pub fn gtail_fiber_card_v() -> @kernel.Thm
+
+pub fn gtail_in() -> @kernel.Thm
+
+pub fn gtail_sum_v() -> @kernel.Thm
+
+pub fn head_isum_ijoin() -> @kernel.Thm
+
+pub fn head_isum_w() -> @kernel.Thm
+
+pub fn head_pred_inv() -> @kernel.Thm
+
+pub fn head_split() -> @kernel.Thm
+
+pub fn headsum_signfam() -> @kernel.Thm
+
+pub fn hilbert_waring() -> @kernel.Thm
+
+pub fn hilbert_waring_repr() -> @kernel.Thm
+
+pub fn homog_scale_eq() -> @kernel.Thm
+
+pub fn hs_le_card_hm() -> @kernel.Thm
+
+pub fn ibox() -> @kernel.Thm
+
+pub fn ibox_0() -> @kernel.Thm
+
+pub fn ibox_finite() -> @kernel.Thm
+
+pub fn ibox_perm_mem() -> @kernel.Thm
+
+pub fn ibox_pull() -> @kernel.Thm
+
+pub fn ibox_pull_inj() -> @kernel.Thm
+
+pub fn ihead() -> @kernel.Thm
+
+pub fn ihead_in() -> @kernel.Thm
+
+pub fn ihead_in_add() -> @kernel.Thm
+
+pub fn ihead_in_le() -> @kernel.Thm
+
+pub fn ihead_sum_v() -> @kernel.Thm
+
+pub fn ihstep_findiff_dp() -> @kernel.Thm
+
+pub fn ijoin() -> @kernel.Thm
+
+pub fn ijoin_headtail() -> @kernel.Thm
+
+pub fn ijoin_in() -> @kernel.Thm
+
+pub fn ijoin_inj() -> @kernel.Thm
+
+pub fn image_ibox_perm() -> @kernel.Thm
+
+pub fn image_lab_eq_tset() -> @kernel.Thm
+
+pub fn image_mp_le() -> @kernel.Thm
+
+pub fn image_rstx_ibox() -> @kernel.Thm
+
+pub fn in_blk() -> @kernel.Thm
+
+pub fn inner_coprime_bound() -> @kernel.Thm
+
+pub fn inner_fiber_bound() -> @kernel.Thm
+
+pub fn inner_fiber_endgame() -> @kernel.Thm
+
+pub fn inner_img_subset() -> @kernel.Thm
+
+pub fn inner_reindex() -> @kernel.Thm
+
+pub fn int_finite_max_element() -> @kernel.Thm
+
+pub fn int_finite_min_element() -> @kernel.Thm
+
+pub fn int_interval_card_le() -> @kernel.Thm
+
+pub fn int_interval_image() -> @kernel.Thm
+
+pub fn int_le_rmul_cancel() -> @kernel.Thm
+
+pub fn int_one_le_mul() -> @kernel.Thm
+
+pub fn intseg_card_bnd() -> @kernel.Thm
+
+pub fn inv_le_div() -> @kernel.Thm
+
+pub fn ipoly() -> @kernel.Thm
+
+pub fn ipoly1() -> @kernel.Thm
+
+pub fn ipoly_abs_bound() -> @kernel.Thm
+
+pub fn ipoly_monom() -> @kernel.Thm
+
+pub fn ipoly_shift_sum() -> @kernel.Thm
+
+pub fn ipoly_suc() -> @kernel.Thm
+
+pub fn isum_12() -> @kernel.Thm
+
+pub fn isum_block_regroup() -> @kernel.Thm
+
+pub fn isum_const_lincount() -> @kernel.Thm
+
+pub fn isum_couple() -> @kernel.Thm
+
+pub fn isum_permute() -> @kernel.Thm
+
+pub fn isum_split_h() -> @kernel.Thm
+
+pub fn isum_tailshift() -> @kernel.Thm
+
+pub fn itail() -> @kernel.Thm
+
+pub fn itail_in() -> @kernel.Thm
+
+pub fn jsplit() -> @kernel.Thm
+
+pub fn jsplit_coord_lo() -> @kernel.Thm
+
+pub fn jsplit_hdtl() -> @kernel.Thm
+
+pub fn jsplit_in() -> @kernel.Thm
+
+pub fn jsplit_inj() -> @kernel.Thm
+
+pub fn jtl() -> @kernel.Thm
+
+pub fn jtl_in() -> @kernel.Thm
+
+pub fn kq_lb() -> @kernel.Thm
+
+pub fn kq_ub() -> @kernel.Thm
+
+pub fn lab_inj_lemma() -> @kernel.Thm
+
+pub fn labinv_exists() -> @kernel.Thm
+
+pub fn lastblock_isum() -> @kernel.Thm
+
+pub fn leaf_block_inj() -> @kernel.Thm
+
+pub fn leaf_block_perm() -> @kernel.Thm
+
+pub fn leaf_block_reindex() -> @kernel.Thm
+
+pub fn leaf_block_reindex_sk() -> @kernel.Thm
+
+pub fn leaf_count_reshape() -> @kernel.Thm
+
+pub fn leaf_parta_eq() -> @kernel.Thm
+
+pub fn leaf_perhh_wbnd_w() -> @kernel.Thm
+
+pub fn leaf_perx_bnd() -> @kernel.Thm
+
+pub fn leaf_riffle_grouped_bnd_w() -> @kernel.Thm
+
+pub fn leaf_summand_bp() -> @kernel.Thm
+
+pub fn leaf_summed_wbnd_w() -> @kernel.Thm
+
+pub fn leafidx() -> @kernel.Thm
+
+pub fn leafidx_bp_trans() -> @kernel.Thm
+
+pub fn leafidx_ff() -> @kernel.Thm
+
+pub fn leafidx_ff_count() -> @kernel.Thm
+
+pub fn leafidx_ff_image() -> @kernel.Thm
+
+pub fn leafidx_ff_rec() -> @kernel.Thm
+
+pub fn leafidx_ff_regroup() -> @kernel.Thm
+
+pub fn leafidx_into_tset() -> @kernel.Thm
+
+pub fn leafidx_regroup_residual_ff_clean() -> @kernel.Thm
+
+pub fn leafsg() -> @kernel.Thm
+
+pub fn leafsg_bp_inv() -> @kernel.Thm
+
+pub fn leafsg_ff_balance() -> @kernel.Thm
+
+pub fn leafsg_ff_fibre_split() -> @kernel.Thm
+
+pub fn leafsg_ff_regroup() -> @kernel.Thm
+
+pub fn leafsg_ff_sign_on_fibre() -> @kernel.Thm
+
+pub fn leafsg_ff_step() -> @kernel.Thm
+
+pub fn lemma1_lincount() -> @kernel.Thm
+
+pub fn lemma1_lincount_3a() -> @kernel.Thm
+
+pub fn lemma2_base_case() -> @kernel.Thm
+
+pub fn lemma2_card2() -> @kernel.Thm
+
+pub fn lemma2_case_a() -> @kernel.Thm
+
+pub fn lemma2_case_b() -> @kernel.Thm
+
+pub fn lemma2_lincount() -> @kernel.Thm
+
+pub fn lemma2_wf() -> @kernel.Thm
+
+pub fn lemma3_homog_family_1() -> @kernel.Thm
+
+pub fn lemma4() -> @kernel.Thm
+
+pub fn lin2_embed() -> @kernel.Thm
+
+pub fn lincount() -> @kernel.Thm
+
+pub fn lincount2() -> @kernel.Thm
+
+pub fn lincount_scale() -> @kernel.Thm
+
+pub fn lincount_translate() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn lval() -> @kernel.Thm
+
+pub fn lval_0() -> @kernel.Thm
+
+pub fn lval_lt() -> @kernel.Thm
+
+pub fn lval_rec() -> @kernel.Thm
+
+pub fn master_count_bound() -> @kernel.Thm
+
+pub fn maxmult_arith_bnd() -> @kernel.Thm
+
+pub fn mblock_fiber_card() -> @kernel.Thm
+
+pub fn mcount_split_dp() -> @kernel.Thm
+
+pub fn mcount_uniform_w() -> @kernel.Thm
+
+pub fn mfb_coeff_bnd() -> @kernel.Thm
+
+pub fn mono_findiff_lead_bnd() -> @kernel.Thm
+
+pub fn monom() -> @kernel.Thm
+
+pub fn mp_abs_bound() -> @kernel.Thm
+
+pub fn mvf() -> @kernel.Thm
+
+pub fn mvf_head() -> @kernel.Thm
+
+pub fn mvf_head_diag() -> @kernel.Thm
+
+pub fn mvf_tail() -> @kernel.Thm
+
+pub fn mvf_tail_diag() -> @kernel.Thm
+
+pub fn nat_mul_sub1_le() -> @kernel.Thm
+
+pub fn neg_ipoly() -> @kernel.Thm
+
+pub fn nonzero_family() -> @kernel.Thm
+
+pub fn nonzero_witness() -> @kernel.Thm
+
+pub fn nprod_maxmult() -> @kernel.Thm
+
+pub fn nsum_fiber_permute() -> @kernel.Thm
+
+pub fn nsum_ibox_perm() -> @kernel.Thm
+
+pub fn numsetmax_eq() -> @kernel.Thm
+
+pub fn outer_reindex() -> @kernel.Thm
+
+pub fn pair_coprime() -> @kernel.Thm
+
+pub fn pairset_fibersum_dp() -> @kernel.Thm
+
+pub fn pairset_finite_dp() -> @kernel.Thm
+
+pub fn per_group_mult_bnd_w() -> @kernel.Thm
+
+pub fn per_group_wbnd_w() -> @kernel.Thm
+
+pub fn perdn_bound() -> @kernel.Thm
+
+pub fn perhh_mblock_bnd() -> @kernel.Thm
+
+pub fn perm_extend() -> @kernel.Thm
+
+pub fn perterm() -> @kernel.Thm
+
+pub fn pgen_tower() -> @kernel.Thm
+
+pub fn phi_pack_e() -> @kernel.Thm
+
+pub fn phi_pack_lead_bnd() -> @kernel.Thm
+
+pub fn pigeonhole_boxreps() -> @kernel.Thm
+
+pub fn pleaf() -> @kernel.Thm
+
+pub fn pleaf_agrees() -> @kernel.Thm
+
+pub fn pleaf_cons() -> @kernel.Thm
+
+pub fn pleaf_sgnrelab() -> @kernel.Thm
+
+pub fn poly_reindex() -> @kernel.Thm
+
+pub fn pow_msupp_combine_ge2() -> @kernel.Thm
+
+pub fn power_gap() -> @kernel.Thm
+
+pub fn power_sum_le() -> @kernel.Thm
+
+pub fn proj1_inj_2_dp() -> @kernel.Thm
+
+pub fn ps_fiber_card_dp() -> @kernel.Thm
+
+pub fn psi_flat_fold_reduction_lr() -> @kernel.Thm
+
+pub fn psi_leaf_regroup_w() -> @kernel.Thm
+
+pub fn psifam_uniform() -> @kernel.Thm
+
+pub fn qj_nz() -> @kernel.Thm
+
+pub fn qle_abs() -> @kernel.Thm
+
+pub fn rbox() -> @kernel.Thm
+
+pub fn rcount() -> @kernel.Thm
+
+pub fn rcount_le_sym() -> @kernel.Thm
+
+pub fn redtup_bibound() -> @kernel.Thm
+
+pub fn redtup_nz() -> @kernel.Thm
+
+pub fn redtup_props() -> @kernel.Thm
+
+pub fn reparam() -> @kernel.Thm
+
+pub fn reparam_cond_dp() -> @kernel.Thm
+
+pub fn reparam_in() -> @kernel.Thm
+
+pub fn reparam_inj() -> @kernel.Thm
+
+pub fn rhswide_rstx_inv() -> @kernel.Thm
+
+pub fn riffle() -> @kernel.Thm
+
+pub fn riffle_blk() -> @kernel.Thm
+
+pub fn riffle_inj() -> @kernel.Thm
+
+pub fn riffle_permutes() -> @kernel.Thm
+
+pub fn riffle_shift() -> @kernel.Thm
+
+pub fn riffle_val() -> @kernel.Thm
+
+pub fn rstx() -> @kernel.Thm
+
+pub fn rstx_in_rbox() -> @kernel.Thm
+
+pub fn self_le_exp() -> @kernel.Thm
+
+pub fn setcoprime() -> @kernel.Thm
+
+pub fn setcoprime_q() -> @kernel.Thm
+
+pub fn setgcd() -> @kernel.Thm
+
+pub fn setgcd_exists() -> @kernel.Thm
+
+pub fn setgcd_v1() -> @kernel.Thm
+
+pub fn setlt_suc() -> @kernel.Thm
+
+pub fn setmax_char() -> @kernel.Thm
+
+pub fn setmaxabs() -> @kernel.Thm
+
+pub fn setmaxabs_bounds() -> @kernel.Thm
+
+pub fn setmaxabs_pos() -> @kernel.Thm
+
+pub fn setmaxabs_v1() -> @kernel.Thm
+
+pub fn sgnf() -> @kernel.Thm
+
+pub fn sgnf_abs() -> @kernel.Thm
+
+pub fn sgnf_ipoly() -> @kernel.Thm
+
+pub fn sgnf_lead() -> @kernel.Thm
+
+pub fn sgnrelab() -> @kernel.Thm
+
+pub fn sgnrelab_compose() -> @kernel.Thm
+
+pub fn sgnrelab_id() -> @kernel.Thm
+
+pub fn shell_card() -> @kernel.Thm
+
+pub fn shell_count_bound() -> @kernel.Thm
+
+pub fn shell_eq() -> @kernel.Thm
+
+pub fn sigma_exists() -> @kernel.Thm
+
+pub fn signed_fam() -> @kernel.Thm
+
+pub fn signed_group_mult_w() -> @kernel.Thm
+
+pub fn smallp_core_bnd() -> @kernel.Thm
+
+pub fn solset_finite() -> @kernel.Thm
+
+pub fn spacing_div() -> @kernel.Thm
+
+pub fn subadd_id() -> @kernel.Thm
+
+pub fn subset_image_lab() -> @kernel.Thm
+
+pub fn succ_pow_le() -> @kernel.Thm
+
+pub fn sucn_nm1() -> @kernel.Thm
+
+pub fn sumpow() -> @kernel.Thm
+
+pub fn sumpow_0() -> @kernel.Thm
+
+pub fn sumpow_basis() -> @kernel.Thm
+
+pub fn sumpow_contains_small() -> @kernel.Thm
+
+pub fn sumpow_nsum_epowers() -> @kernel.Thm
+
+pub fn sumpow_repr() -> @kernel.Thm
+
+pub fn sumpow_suc() -> @kernel.Thm
+
+pub fn t_bounds() -> @kernel.Thm
+
+pub fn tail_isum_ijoin() -> @kernel.Thm
+
+pub fn tail_isum_jsplit() -> @kernel.Thm
+
+pub fn tail_isum_jtl() -> @kernel.Thm
+
+pub fn tail_isum_w() -> @kernel.Thm
+
+pub fn tail_split() -> @kernel.Thm
+
+pub fn tailsum_signfam() -> @kernel.Thm
+
+pub fn telescope_close_ge2() -> @kernel.Thm
+
+pub fn tower_arith() -> @kernel.Thm
+
+pub fn trunc_fiber_eq() -> @kernel.Thm
+
+pub fn tset() -> @kernel.Thm
+
+pub fn tset_card() -> @kernel.Thm
+
+pub fn tset_eq_blk() -> @kernel.Thm
+
+pub fn tset_in_range() -> @kernel.Thm
+
+pub fn tset_shift_in_range() -> @kernel.Thm
+
+pub fn twob_facts() -> @kernel.Thm
+
+pub fn twoexp_suc_half() -> @kernel.Thm
+
+pub fn vac_if_sum() -> @kernel.Thm
+
+pub fn wacl_leaf_bound_from_flat() -> @kernel.Thm
+
+pub fn wacl_leaf_bound_w() -> @kernel.Thm
+
+pub fn waring_0() -> @kernel.Thm
+
+pub fn waring_add() -> @kernel.Thm
+
+pub fn waring_fold() -> @kernel.Thm
+
+pub fn waring_mono() -> @kernel.Thm
+
+pub fn waring_of_sumpow() -> @kernel.Thm
+
+pub fn waring_psi_fiber_tower_w() -> @kernel.Thm
+
+pub fn waring_repr() -> @kernel.Thm
+
+pub fn weighted_linear_bnd() -> @kernel.Thm
+
+pub fn wide_core_bnd_w() -> @kernel.Thm
+
+pub fn wide_linfac_factor() -> @kernel.Thm
+
+pub fn wnsum_fold() -> @kernel.Thm
+
+pub fn wtail() -> @kernel.Thm
+
+pub fn zerofn_lincount_le() -> @kernel.Thm
+
+pub fn zeroterm_bound() -> @kernel.Thm
+
+pub fn zeroterm_final() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
