@@ -1,0 +1,63 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/nistp384"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abelian_p384_group() -> @kernel.Thm
+
+pub fn b_384() -> @kernel.Thm
+
+pub fn c_384() -> @kernel.Thm
+
+pub fn cyclic_p384_group() -> @kernel.Thm
+
+pub fn finite_group_carrier_p384() -> @kernel.Thm
+
+pub fn g_384() -> @kernel.Thm
+
+pub fn generated_p384_group() -> @kernel.Thm
+
+pub fn generator_in_group_carrier_384() -> @kernel.Thm
+
+pub fn group_element_order_g384() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn n_384() -> @kernel.Thm
+
+pub fn nistp384() -> @kernel.Thm
+
+pub fn no_roots_p384() -> @kernel.Thm
+
+pub fn p384_group() -> @kernel.Thm
+
+pub fn p384_group_element_order() -> @kernel.Thm
+
+pub fn p384_group_order() -> @kernel.Thm
+
+pub fn p384_group_v1() -> @kernel.Thm
+
+pub fn p_384() -> @kernel.Thm
+
+pub fn p_384_v1() -> @kernel.Thm
+
+pub fn prime_n384() -> @kernel.Thm
+
+pub fn prime_p384() -> @kernel.Thm
+
+pub fn sanity_check_384() -> @kernel.Thm
+
+pub fn seed_384() -> @kernel.Thm
+
+pub fn size_p384_group() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
