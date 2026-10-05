@@ -1,0 +1,208 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ieee/fixed_thms"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn closer_between_1() -> @kernel.Thm
+
+pub fn closer_between_2() -> @kernel.Thm
+
+pub fn closer_eq() -> @kernel.Thm
+
+pub fn closer_higher() -> @kernel.Thm
+
+pub fn closer_lower() -> @kernel.Thm
+
+pub fn closer_neg() -> @kernel.Thm
+
+pub fn closer_trans() -> @kernel.Thm
+
+pub fn closer_trans_2() -> @kernel.Thm
+
+pub fn dump_glb_lub_info(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn fformat_prec_ipow_eq_exp() -> @kernel.Thm
+
+pub fn fformat_prec_lt_0() -> @kernel.Thm
+
+pub fn fformat_prec_minus_1() -> @kernel.Thm
+
+pub fn fformat_radix_even() -> @kernel.Thm
+
+pub fn fformat_radix_ipow_add_exp() -> @kernel.Thm
+
+pub fn fformat_radix_ipow_le_0() -> @kernel.Thm
+
+pub fn fformat_radix_ipow_lt_0() -> @kernel.Thm
+
+pub fn fformat_radix_ipow_neq_0() -> @kernel.Thm
+
+pub fn fformat_radix_lt_0() -> @kernel.Thm
+
+pub fn fformat_radix_lt_1() -> @kernel.Thm
+
+pub fn fformat_radix_ne_0() -> @kernel.Thm
+
+pub fn fformat_split() -> @kernel.Thm
+
+pub fn fformat_valid() -> @kernel.Thm
+
+pub fn fformat_valid_imp_prec_lt_0() -> @kernel.Thm
+
+pub fn fformat_valid_imp_radix_even() -> @kernel.Thm
+
+pub fn fformat_valid_imp_radix_lt_1() -> @kernel.Thm
+
+pub fn fixed_corr() -> @kernel.Thm
+
+pub fn fixed_ff_exists() -> @kernel.Thm
+
+pub fn fixed_ff_finf() -> @kernel.Thm
+
+pub fn fixed_ff_le() -> @kernel.Thm
+
+pub fn fixed_ff_lt() -> @kernel.Thm
+
+pub fn fixed_ff_neg() -> @kernel.Thm
+
+pub fn fixed_ff_rep() -> @kernel.Thm
+
+pub fn fixed_ff_unique() -> @kernel.Thm
+
+pub fn fixed_ff_zero() -> @kernel.Thm
+
+pub fn fixed_finf_bounds() -> @kernel.Thm
+
+pub fn fixed_finf_in_fixed() -> @kernel.Thm
+
+pub fn fixed_finite() -> @kernel.Thm
+
+pub fn fixed_frac_lt_0() -> @kernel.Thm
+
+pub fn fixed_fulp_distance() -> @kernel.Thm
+
+pub fn fixed_fulp_in_fixed() -> @kernel.Thm
+
+pub fn fixed_fulp_le_0() -> @kernel.Thm
+
+pub fn fixed_fulp_le_finf() -> @kernel.Thm
+
+pub fn fixed_fulp_lt_0() -> @kernel.Thm
+
+pub fn fixed_glb_exists() -> @kernel.Thm
+
+pub fn fixed_glb_is_fixed() -> @kernel.Thm
+
+pub fn fixed_glb_le_0() -> @kernel.Thm
+
+pub fn fixed_glb_le_0_2() -> @kernel.Thm
+
+pub fn fixed_glb_lub_bounds() -> @kernel.Thm
+
+pub fn fixed_glb_lub_discrete() -> @kernel.Thm
+
+pub fn fixed_glb_lub_dist() -> @kernel.Thm
+
+pub fn fixed_glb_lub_dist_2() -> @kernel.Thm
+
+pub fn fixed_glb_lub_frac() -> @kernel.Thm
+
+pub fn fixed_glb_unique() -> @kernel.Thm
+
+pub fn fixed_in_image() -> @kernel.Thm
+
+pub fn fixed_lub_exists() -> @kernel.Thm
+
+pub fn fixed_lub_is_fixed() -> @kernel.Thm
+
+pub fn fixed_lub_le_0() -> @kernel.Thm
+
+pub fn fixed_lub_le_0_2() -> @kernel.Thm
+
+pub fn fixed_lub_unique() -> @kernel.Thm
+
+pub fn fixed_neg_sym() -> @kernel.Thm
+
+pub fn fixed_nonempty() -> @kernel.Thm
+
+pub fn fixed_plus_fulp_neg() -> @kernel.Thm
+
+pub fn fixed_plus_fulp_nneg() -> @kernel.Thm
+
+pub fn fixed_preimage() -> @kernel.Thm
+
+pub fn fixed_rd_eq_0() -> @kernel.Thm
+
+pub fn fixed_rd_is_fixed() -> @kernel.Thm
+
+pub fn fixed_rd_is_glb_lub() -> @kernel.Thm
+
+pub fn fixed_rd_is_glb_lub_2() -> @kernel.Thm
+
+pub fn fixed_rd_le_0() -> @kernel.Thm
+
+pub fn fixed_rd_le_0_2() -> @kernel.Thm
+
+pub fn fixed_rd_mono() -> @kernel.Thm
+
+pub fn fixed_rd_mono_2() -> @kernel.Thm
+
+pub fn fixed_rd_nearest_abs_error() -> @kernel.Thm
+
+pub fn fixed_rd_nearest_closest() -> @kernel.Thm
+
+pub fn fixed_rd_nearest_even() -> @kernel.Thm
+
+pub fn fixed_rd_nearest_exists() -> @kernel.Thm
+
+pub fn fixed_rd_nearest_rel_error() -> @kernel.Thm
+
+pub fn fixed_rd_nearest_to_0() -> @kernel.Thm
+
+pub fn fixed_rd_nearest_to_glb() -> @kernel.Thm
+
+pub fn fixed_rd_nearest_to_lub() -> @kernel.Thm
+
+pub fn fixed_rd_ninf_abs_error() -> @kernel.Thm
+
+pub fn fixed_rd_ninf_exists() -> @kernel.Thm
+
+pub fn fixed_rd_pinf_abs_error() -> @kernel.Thm
+
+pub fn fixed_rd_pinf_exists() -> @kernel.Thm
+
+pub fn fixed_rd_zero_abs_error() -> @kernel.Thm
+
+pub fn fixed_rd_zero_exists() -> @kernel.Thm
+
+pub fn fixed_zero_in_fixed() -> @kernel.Thm
+
+pub fn glb_fixed_proof((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn is_closest() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn lub_fixed_proof((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn to_even() -> @kernel.Thm
+
+pub fn to_ninf() -> @kernel.Thm
+
+pub fn to_pinf() -> @kernel.Thm
+
+pub fn to_zero() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

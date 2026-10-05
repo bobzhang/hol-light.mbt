@@ -1,0 +1,82 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ieee/common"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn closer() -> @kernel.Thm
+
+pub fn double_neg_1_odd() -> @kernel.Thm
+
+pub fn double_not_odd() -> @kernel.Thm
+
+pub fn exp_le_1() -> @kernel.Thm
+
+pub fn ipow() -> @kernel.Thm
+
+pub fn ipow_add_exp() -> @kernel.Thm
+
+pub fn ipow_between() -> @kernel.Thm
+
+pub fn ipow_eq_exp() -> @kernel.Thm
+
+pub fn ipow_eq_exp_p() -> @kernel.Thm
+
+pub fn ipow_inv_neg() -> @kernel.Thm
+
+pub fn ipow_le_1() -> @kernel.Thm
+
+pub fn ipow_le_num() -> @kernel.Thm
+
+pub fn ipow_le_real() -> @kernel.Thm
+
+pub fn ipow_le_real_2() -> @kernel.Thm
+
+pub fn ipow_lt_0() -> @kernel.Thm
+
+pub fn ipow_lt_1() -> @kernel.Thm
+
+pub fn ipow_monotone() -> @kernel.Thm
+
+pub fn ipow_monotone_2() -> @kernel.Thm
+
+pub fn ipow_mul_inv_eq_1() -> @kernel.Thm
+
+pub fn ipow_to_0() -> @kernel.Thm
+
+pub fn ipow_to_1() -> @kernel.Thm
+
+pub fn is_sup_int() -> @kernel.Thm
+
+pub fn is_sup_num() -> @kernel.Thm
+
+pub fn label_conjuncts_tac(@list.List[String], @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn num_le_mul_1() -> @kernel.Thm
+
+pub fn real_mult_not_0() -> @kernel.Thm
+
+pub fn rerror() -> @kernel.Thm
+
+pub fn sup_int() -> @kernel.Thm
+
+pub fn sup_int_bounded() -> @kernel.Thm
+
+pub fn sup_num() -> @kernel.Thm
+
+pub fn sup_num_bounded() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

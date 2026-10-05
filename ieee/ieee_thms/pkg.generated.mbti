@@ -1,0 +1,83 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ieee/ieee_thms"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn ieee_format_disj_exp() -> @kernel.Thm
+
+pub fn ieee_format_emin_le_emax() -> @kernel.Thm
+
+pub fn ieee_format_prec_ipow_eq_exp() -> @kernel.Thm
+
+pub fn ieee_format_prec_le_1() -> @kernel.Thm
+
+pub fn ieee_format_prec_lt_0() -> @kernel.Thm
+
+pub fn ieee_format_prec_lt_1() -> @kernel.Thm
+
+pub fn ieee_format_prec_minus_1() -> @kernel.Thm
+
+pub fn ieee_format_prec_ne_0() -> @kernel.Thm
+
+pub fn ieee_format_radix_even() -> @kernel.Thm
+
+pub fn ieee_format_radix_ipow_add_exp() -> @kernel.Thm
+
+pub fn ieee_format_radix_ipow_le_0() -> @kernel.Thm
+
+pub fn ieee_format_radix_ipow_lt_0() -> @kernel.Thm
+
+pub fn ieee_format_radix_ipow_neq_0() -> @kernel.Thm
+
+pub fn ieee_format_radix_le_2() -> @kernel.Thm
+
+pub fn ieee_format_radix_lt_0() -> @kernel.Thm
+
+pub fn ieee_format_radix_lt_1() -> @kernel.Thm
+
+pub fn ieee_format_radix_ne_0() -> @kernel.Thm
+
+pub fn ieee_format_split() -> @kernel.Thm
+
+pub fn ieee_format_to_fformat() -> @kernel.Thm
+
+pub fn ieee_format_to_flformat() -> @kernel.Thm
+
+pub fn ieee_format_valid() -> @kernel.Thm
+
+pub fn ieee_format_valid_imp_emin_le_emax() -> @kernel.Thm
+
+pub fn ieee_format_valid_imp_prec_lt_1() -> @kernel.Thm
+
+pub fn ieee_format_valid_imp_radix_even() -> @kernel.Thm
+
+pub fn ieee_format_valid_imp_radix_lt_1() -> @kernel.Thm
+
+pub fn ieee_max_ieee_is_ieee() -> @kernel.Thm
+
+pub fn ieee_max_ieee_le_0() -> @kernel.Thm
+
+pub fn ieee_radix_exp_prec_lt_1() -> @kernel.Thm
+
+pub fn ieee_round_near_abs_err() -> @kernel.Thm
+
+pub fn ieee_round_near_rel_err() -> @kernel.Thm
+
+pub fn ieee_round_near_rel_err_v1() -> @kernel.Thm
+
+pub fn ieee_round_zero_abs_err() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
