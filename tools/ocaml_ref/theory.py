@@ -256,11 +256,18 @@ def make_pre(f):
     return []
 
 
+# Files that are loaded after another without naming it (a directory's
+# tests, run once its make.ml has been loaded)
+AFTER = {"Cadical/test.ml": "Cadical/cadical.ml"}
+
+
 def chain_prev(f):
     """The file loaded just before `f`'s own needs: its predecessor in
     make.ml's order, or an extra file's anchor. A directory with a make.ml
     is loaded as that loads it (some files name no `needs` and rely on it:
     Complex/complex_real.ml)."""
+    if f in AFTER:
+        return AFTER[f]
     if f in MAKE_ORDER:
         i = MAKE_ORDER.index(f)
         return MAKE_ORDER[i - 1] if i > 0 else None
