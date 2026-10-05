@@ -1,0 +1,97 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/probability/random_variables"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn distribution() -> @kernel.Thm
+
+pub fn distribution_countably_additive() -> @kernel.Thm
+
+pub fn distribution_empty() -> @kernel.Thm
+
+pub fn distribution_in_events() -> @kernel.Thm
+
+pub fn distribution_le_1() -> @kernel.Thm
+
+pub fn distribution_mono() -> @kernel.Thm
+
+pub fn distribution_pos() -> @kernel.Thm
+
+pub fn distribution_univ() -> @kernel.Thm
+
+pub fn increasing_a0_disjoint_diffs() -> @kernel.Thm
+
+pub fn increasing_mono() -> @kernel.Thm
+
+pub fn increasing_union_decomp() -> @kernel.Thm
+
+pub fn indicator_fn() -> @kernel.Thm
+
+pub fn joint_distribution_fn() -> @kernel.Thm
+
+pub fn joint_distribution_sym() -> @kernel.Thm
+
+pub fn joint_rectangle_in_events() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn prob_continuity_from_above() -> @kernel.Thm
+
+pub fn prob_continuity_from_below() -> @kernel.Thm
+
+pub fn prob_finite_indexed_union_in_events() -> @kernel.Thm
+
+pub fn prob_finite_subadditive() -> @kernel.Thm
+
+pub fn prob_indexed_inter_in_events() -> @kernel.Thm
+
+pub fn prob_indexed_union_in_events() -> @kernel.Thm
+
+pub fn random_variable() -> @kernel.Thm
+
+pub fn random_variable_borel_measurable_compose() -> @kernel.Thm
+
+pub fn random_variable_const() -> @kernel.Thm
+
+pub fn random_variable_continuous_map_compose() -> @kernel.Thm
+
+pub fn random_variable_gt_sufficient() -> @kernel.Thm
+
+pub fn random_variable_limit() -> @kernel.Thm
+
+pub fn random_variable_neg() -> @kernel.Thm
+
+pub fn random_variable_preimage_borel_in() -> @kernel.Thm
+
+pub fn random_variable_scale() -> @kernel.Thm
+
+pub fn real_open_countable_union_real_interval() -> @kernel.Thm
+
+pub fn rv_limit_gt_eq() -> @kernel.Thm
+
+pub fn rv_preimage_ge() -> @kernel.Thm
+
+pub fn rv_preimage_gt() -> @kernel.Thm
+
+pub fn rv_preimage_le() -> @kernel.Thm
+
+pub fn rv_preimage_lt() -> @kernel.Thm
+
+pub fn rv_preimage_lt_eq_unions() -> @kernel.Thm
+
+pub fn rv_preimage_real_interval() -> @kernel.Thm
+
+pub fn rv_preimage_real_open() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
