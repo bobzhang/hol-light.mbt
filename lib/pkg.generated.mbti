@@ -506,6 +506,8 @@ pub enum Func[K, V] {
   Leaf(Int, @list.List[(K, V)])
   Branch(Int, Int, Func[K, V], Func[K, V])
 } derive(Eq)
+pub impl[K : OCompare, V : OCompare] OCompare for Func[K, V]
+pub impl[K : OHash, V : OHash] OHash for Func[K, V]
 
 pub struct InChannel {
   text : String

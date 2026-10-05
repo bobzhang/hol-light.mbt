@@ -455,3 +455,63 @@ pub fn[K, V] choose(t : Func[K, V]) -> (K, V) raise {
   }
   raise Failure("choose: completely undefined function")
 }
+
+///|
+/// OCaml's structural order on `func` trees (Examples/sos.ml keys
+/// polynomials by monomials, which are `func`s): `Empty`, an immediate,
+/// is below the blocks; `Leaf` (tag 0) is below `Branch` (tag 1); two of
+/// the same constructor compare field by field.
+pub impl[K : OCompare, V : OCompare] OCompare for Func[K, V] with fn ocompare(
+  self,
+  other,
+) {
+  match (self, other) {
+    (Empty, Empty) => 0
+    (Empty, _) => -1
+    (_, Empty) => 1
+    (Leaf(h1, l1), Leaf(h2, l2)) => {
+      let c = h1.compare(h2)
+      if c != 0 {
+        return c
+      }
+      compare(l1, l2)
+    }
+    (Leaf(_, _), Branch(_, _, _, _)) => -1
+    (Branch(_, _, _, _), Leaf(_, _)) => 1
+    (Branch(p1, b1, l1, r1), Branch(p2, b2, l2, r2)) => {
+      let c = p1.compare(p2)
+      if c != 0 {
+        return c
+      }
+      let c = b1.compare(b2)
+      if c != 0 {
+        return c
+      }
+      let c = l1.ocompare(l2)
+      if c != 0 {
+        return c
+      }
+      r1.ocompare(r2)
+    }
+  }
+}
+
+///|
+/// OCaml's `Hashtbl.hash` on a `func` tree.
+pub impl[K : OHash, V : OHash] OHash for Func[K, V] with fn ohash_visit(self, h) {
+  match self {
+    Empty => h.int(0L)
+    Leaf(k, l) => {
+      h.block(0, 2)
+      h.field(k)
+      h.field(l)
+    }
+    Branch(p, b, l, r) => {
+      h.block(1, 4)
+      h.field(p)
+      h.field(b)
+      h.field(l)
+      h.field(r)
+    }
+  }
+}
