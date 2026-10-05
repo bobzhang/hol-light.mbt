@@ -827,6 +827,10 @@ pub fn begin_theory(name : String) -> Unit {
 
 ///|
 pub fn end_theory() -> Unit {
+  // OCaml's toplevel flushes the formatter after each phrase: what the
+  // file's last phrase printed (Jordan/real_ext_geom_series.ml ends with
+  // `pop_priority()`) is the file's output
+  @pp.std_formatter.print_flush()
   match current_theory.val {
     Some(name) =>
       theory_outputs[name] = @pp.stdout_backlog_since(theory_output_start.val)
