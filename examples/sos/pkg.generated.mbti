@@ -1,0 +1,358 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/sos"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/num",
+  "bobzhang/hol_light/realarith",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] allpermutations(@list.List[TA]) -> @list.List[@list.List[TA]] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] allvarorders(@list.List[TA]) -> @list.List[(TA) -> Int64 raise] raise
+
+pub fn blocks(@list.List[Int64], @lib.Func[(Int64, Int64, Int64), @num.Num]) -> @list.List[((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])] raise
+
+pub fn bmatrix_add(@lib.Func[(Int64, Int64, Int64), @num.Num]) -> ((@lib.Func[(Int64, Int64, Int64), @num.Num]) -> @lib.Func[(Int64, Int64, Int64), @num.Num] raise) raise
+
+pub fn[TA] bmatrix_cmul(@num.Num, @lib.Func[TA, @num.Num]) -> @lib.Func[TA, @num.Num] raise
+
+pub fn bmatrix_neg(@lib.Func[(Int64, Int64, Int64), @num.Num]) -> @lib.Func[(Int64, Int64, Int64), @num.Num] raise
+
+pub fn bmatrix_sub(@lib.Func[(Int64, Int64, Int64), @num.Num], @lib.Func[(Int64, Int64, Int64), @num.Num]) -> @lib.Func[(Int64, Int64, Int64), @num.Num] raise
+
+pub fn changevariables(@list.List[(@kernel.Term, @kernel.Term)], @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise
+
+pub fn changevariables_monomial(@list.List[(@kernel.Term, @kernel.Term)], @lib.Func[@kernel.Term, Int64]) -> @lib.Func[@kernel.Term, Int64] raise
+
+pub fn column(Int64, ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn csdp((Int64, @lib.Func[Int64, @num.Num]), @list.List[((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])]) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn csdp_default_parameters() -> String
+
+pub fn csdp_params() -> String
+
+pub fn csdp_v1((Int64, @lib.Func[Int64, @num.Num]), @list.List[((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])]) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn csdp_v2(Int64, @list.List[Int64], (Int64, @lib.Func[Int64, @num.Num]), @list.List[@lib.Func[(Int64, Int64, Int64), @num.Num]]) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn debugging() -> @ref.Ref[Bool]
+
+pub fn decimal(@list.List[String]) -> (@num.Num, @list.List[String]) raise
+
+pub fn decimalize(Int64) -> ((@num.Num) -> String raise) raise
+
+pub fn[TA] deepen((Int64) -> TA raise, Int64) -> TA raise
+
+pub fn degree(@kernel.Term, @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> Int64 raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] deration(@list.List[(@num.Num, (TA, @lib.Func[TB, @num.Num]))]) -> (@num.Num, @list.List[(@num.Num, (TA, @lib.Func[TB, @num.Num]))]) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] dest_monomial(@lib.Func[TA, TB]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] dest_poly(@lib.Func[@lib.Func[@kernel.Term, Int64], TA]) -> @list.List[(TA, @list.List[(@kernel.Term, Int64)])] raise
+
+pub fn diag(((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> @list.List[(@num.Num, (Int64, @lib.Func[Int64, @num.Num]))] raise
+
+pub fn diagonal((Int64, @lib.Func[Int64, @num.Num])) -> ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num]) raise
+
+pub fn dimensions(((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> (Int64, Int64) raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] element((TA, @lib.Func[TB, @num.Num]), TB) -> @num.Num raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] eliminate_all_equations(TA) -> ((@list.List[@lib.Func[TA, @num.Num]]) -> (@list.List[TA], @lib.Func[TA, @lib.Func[TA, @num.Num]]) raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] eliminate_equations(TA) -> ((@list.List[TA]) -> ((@list.List[@lib.Func[TA, @num.Num]]) -> (@list.List[TA], @lib.Func[TA, @lib.Func[TA, @num.Num]]) raise) raise) raise
+
+pub fn enumerate_monomials(Int64, @list.List[@kernel.Term]) -> @list.List[@lib.Func[@kernel.Term, Int64]] raise
+
+pub fn enumerate_products(Int64, @list.List[(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num], @realarith.Positivstellensatz)]) -> @list.List[(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num], @realarith.Positivstellensatz)] raise
+
+pub fn[TA, TB] epoly_cmul(@num.Num, @lib.Func[TA, @lib.Func[TB, @num.Num]]) -> @lib.Func[TA, @lib.Func[TB, @num.Num]] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] epoly_of_poly(@lib.Func[TA, @num.Num]) -> @lib.Func[TA, @lib.Func[(Int64, Int64, Int64), @num.Num]] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] epoly_pmul(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num], @lib.Func[@lib.Func[@kernel.Term, Int64], @lib.Func[TA, @num.Num]], @lib.Func[@lib.Func[@kernel.Term, Int64], @lib.Func[TA, @num.Num]]) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @lib.Func[TA, @num.Num]] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] equation_add(@lib.Func[TA, @num.Num], @lib.Func[TA, @num.Num]) -> @lib.Func[TA, @num.Num] raise
+
+pub fn[TA] equation_cmul(@num.Num, @lib.Func[TA, @num.Num]) -> @lib.Func[TA, @num.Num] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] equation_eval(@lib.Func[TA, @num.Num], @lib.Func[TA, @num.Num]) -> @num.Num raise
+
+pub fn eval(@lib.Func[@kernel.Term, @num.Num], @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @num.Num raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] humanorder_monomial(@lib.Func[TA, TB]) -> ((@lib.Func[TA, TB]) -> Bool raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] humanorder_varpow((TA, TB), (TA, TB)) -> Bool raise
+
+pub fn in_convex_hull(@list.List[@list.List[Int64]], @list.List[Int64]) -> Bool raise
+
+pub fn int_sos(@kernel.Term) -> @kernel.Thm raise
+
+pub fn[TA, TB, TC] is_zero(TA, @lib.Func[TB, TC]) -> Bool raise
+
+pub fn[TA] iter((Int64, Int64), (Int64) -> ((TA) -> TA raise) raise, TA) -> TA raise
+
+pub fn[TA, TB] itern(Int64, @list.List[TB], (TB) -> ((Int64) -> ((TA) -> TA raise) raise) raise, TA) -> TA raise
+
+pub fn linear_program(((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num]), (Int64, @lib.Func[Int64, @num.Num])) -> Bool raise
+
+pub fn linear_program_basic(((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> Bool raise
+
+pub fn load() -> Unit
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash, TC] mapa((TC) -> @num.Num raise, (TA, @lib.Func[TB, TC])) -> (TA, @lib.Func[TB, @num.Num]) raise
+
+pub fn matrix_0(Int64, Int64) -> ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num]) raise
+
+pub fn matrix_1((Int64, Int64)) -> ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num]) raise
+
+pub fn matrix_add(((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num]), ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num]) raise
+
+pub fn matrix_cmul(@num.Num, ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num]) raise
+
+pub fn matrix_const(@num.Num, (Int64, Int64)) -> ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num]) raise
+
+pub fn matrix_neg(((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num]) raise
+
+pub fn matrix_of_list(@list.List[@list.List[@num.Num]]) -> ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num]) raise
+
+pub fn matrix_sub(((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num]), ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num]) raise
+
+pub fn minimal_convex_hull(@list.List[@list.List[Int64]]) -> @list.List[@list.List[Int64]] raise
+
+pub fn[TA, TB] mkparser((@list.List[String]) -> (TA, @list.List[TB]) raise, String) -> TA raise
+
+pub fn monomial_1() -> @lib.Func[@kernel.Term, Int64]
+
+pub fn monomial_degree(@kernel.Term, @lib.Func[@kernel.Term, Int64]) -> Int64 raise
+
+pub fn monomial_div(@lib.Func[@kernel.Term, Int64], @lib.Func[@kernel.Term, Int64]) -> @lib.Func[@kernel.Term, Int64] raise
+
+pub fn monomial_divides(@lib.Func[@kernel.Term, Int64], @lib.Func[@kernel.Term, Int64]) -> Bool raise
+
+pub fn monomial_eval(@lib.Func[@kernel.Term, @num.Num], @lib.Func[@kernel.Term, Int64]) -> @num.Num raise
+
+pub fn monomial_lcm(@lib.Func[@kernel.Term, Int64], @lib.Func[@kernel.Term, Int64]) -> @lib.Func[@kernel.Term, Int64] raise
+
+pub fn monomial_mul(@lib.Func[@kernel.Term, Int64]) -> ((@lib.Func[@kernel.Term, Int64]) -> @lib.Func[@kernel.Term, Int64] raise) raise
+
+pub fn monomial_multidegree(@lib.Func[@kernel.Term, Int64]) -> Int64 raise
+
+pub fn monomial_order(@lib.Func[@kernel.Term, Int64]) -> ((@lib.Func[@kernel.Term, Int64]) -> Bool raise) raise
+
+pub fn monomial_pow(@lib.Func[@kernel.Term, Int64], Int64) -> @lib.Func[@kernel.Term, Int64] raise
+
+pub fn monomial_var(@kernel.Term) -> @lib.Func[@kernel.Term, Int64] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] monomial_variables(@lib.Func[TA, TB]) -> @list.List[TA] raise
+
+pub fn multidegree(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> Int64 raise
+
+pub fn newton_polytope(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @list.List[@lib.Func[@kernel.Term, Int64]] raise
+
+pub fn nice_rational(@num.Num, @num.Num) -> @num.Num raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] nice_vector(@num.Num) -> (((TA, @lib.Func[TB, @num.Num])) -> (TA, @lib.Func[TB, @num.Num]) raise) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] op_bar_minus_minus_gt(TA, @num.Num, @lib.Func[TA, @num.Num]) -> @lib.Func[TA, @num.Num] raise
+
+pub fn parse_csdpoutput(String) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn parse_decimal(String) -> @num.Num raise
+
+pub fn parse_sdpaoutput(String) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn poly_0() -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]
+
+pub fn poly_add(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num], @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise
+
+pub fn poly_cmmul((@num.Num, @lib.Func[@kernel.Term, Int64]), @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise
+
+pub fn poly_cmul(@num.Num, @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise
+
+pub fn poly_const(@num.Num) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise
+
+pub fn poly_div(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num], @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise
+
+pub fn poly_exp(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num], @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise
+
+pub fn poly_isconst(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> Bool raise
+
+pub fn poly_mul(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num], @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise
+
+pub fn poly_neg(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise
+
+pub fn poly_of_term(@kernel.Term) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise
+
+pub fn poly_pow(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num], Int64) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise
+
+pub fn poly_square(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise
+
+pub fn poly_sub(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num], @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise
+
+pub fn poly_var(@kernel.Term) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise
+
+pub fn poly_variables(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @list.List[@kernel.Term] raise
+
+pub fn print_matrix(((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> Unit raise
+
+pub fn print_monomial(@lib.Func[@kernel.Term, Int64]) -> Unit raise
+
+pub fn print_poly(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> Unit raise
+
+pub fn print_vector((Int64, @lib.Func[Int64, @num.Num])) -> Unit raise
+
+pub fn pure_sos(@kernel.Term) -> @kernel.Thm raise
+
+pub fn pure_sos_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn real_nonlinear_prover(((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> ((@realarith.Positivstellensatz) -> @kernel.Thm raise) raise, (@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> @kernel.Thm raise
+
+pub fn real_nonlinear_subst_prover(((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> ((@realarith.Positivstellensatz) -> @kernel.Thm raise) raise) -> (((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> @kernel.Thm raise) raise
+
+pub fn real_positivnullstellensatz_general(Bool, Int64, @list.List[@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]], @list.List[(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num], @realarith.Positivstellensatz)], @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> (@list.List[@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]], @list.List[(@realarith.Positivstellensatz, @list.List[(@num.Num, @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num])])]) raise
+
+pub fn real_sos(@kernel.Term) -> @kernel.Thm raise
+
+pub fn real_sosfield(@kernel.Term) -> @kernel.Thm raise
+
+pub fn row(Int64, ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn run_csdp(Bool, (Int64, @lib.Func[Int64, @num.Num]), @list.List[((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])]) -> (Int64, (Int64, @lib.Func[Int64, @num.Num])) raise
+
+pub fn run_csdp_v1(Bool, (Int64, @lib.Func[Int64, @num.Num]), @list.List[((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])]) -> (Int64, (Int64, @lib.Func[Int64, @num.Num])) raise
+
+pub fn run_csdp_v2(Bool, Int64, @list.List[Int64], (Int64, @lib.Func[Int64, @num.Num]), @list.List[@lib.Func[(Int64, Int64, Int64), @num.Num]]) -> (Int64, (Int64, @lib.Func[Int64, @num.Num])) raise
+
+pub fn run_sdpa(Bool, (Int64, @lib.Func[Int64, @num.Num]), @list.List[((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])]) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn run_sdpa_v1(Bool, (Int64, @lib.Func[Int64, @num.Num]), @list.List[((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])]) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn[TA, TB] scale_then(((Int64, @lib.Func[Int64, @num.Num])) -> ((@list.List[@lib.Func[TB, @num.Num]]) -> TA raise) raise) -> (((Int64, @lib.Func[Int64, @num.Num])) -> ((@list.List[@lib.Func[TB, @num.Num]]) -> TA raise) raise) raise
+
+pub fn sdpa((Int64, @lib.Func[Int64, @num.Num]), @list.List[((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])]) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn sdpa_alt_parameters() -> String
+
+pub fn sdpa_default_parameters() -> String
+
+pub fn sdpa_of_blockdiagonal(Int64, @lib.Func[(Int64, Int64, Int64), @num.Num]) -> String raise
+
+pub fn sdpa_of_blockdiagonal_v1(Int64, @lib.Func[(Int64, Int64, Int64), @num.Num]) -> String raise
+
+pub fn sdpa_of_blockdiagonal_v2(Int64, @lib.Func[(Int64, Int64, Int64), @num.Num]) -> String raise
+
+pub fn sdpa_of_blockproblem(String, Int64, @list.List[Int64], (Int64, @lib.Func[Int64, @num.Num]), @list.List[@lib.Func[(Int64, Int64, Int64), @num.Num]]) -> String raise
+
+pub fn sdpa_of_matrix(Int64, ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> String raise
+
+pub fn sdpa_of_matrix_v1(Int64, ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> String raise
+
+pub fn sdpa_of_problem(String, (Int64, @lib.Func[Int64, @num.Num]), @list.List[((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])]) -> String raise
+
+pub fn sdpa_of_problem_v1(String, (Int64, @lib.Func[Int64, @num.Num]), @list.List[((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])]) -> String raise
+
+pub fn sdpa_of_vector((Int64, @lib.Func[Int64, @num.Num])) -> String raise
+
+pub fn sdpa_of_vector_v1((Int64, @lib.Func[Int64, @num.Num])) -> String raise
+
+pub fn sdpa_params() -> String
+
+pub fn sdpa_run_succeeded(String) -> Bool raise
+
+pub fn sdpa_v1((Int64, @lib.Func[Int64, @num.Num]), @list.List[((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])]) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] solve_equations(TA, @list.List[@lib.Func[TA, @num.Num]]) -> @lib.Func[TA, @num.Num] raise
+
+pub fn sos_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn sos_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn string_of_cmonomial(@num.Num, @lib.Func[@kernel.Term, Int64]) -> String raise
+
+pub fn string_of_matrix(Int64, ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> String raise
+
+pub fn string_of_monomial(@lib.Func[@kernel.Term, Int64]) -> String raise
+
+pub fn string_of_poly(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> String raise
+
+pub fn string_of_term(@kernel.Term) -> String raise
+
+pub fn string_of_varpow(@kernel.Term, Int64) -> String raise
+
+pub fn string_of_vector(Int64, Int64, (Int64, @lib.Func[Int64, @num.Num])) -> String raise
+
+pub fn sumofsquares(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> (@num.Num, @list.List[(@num.Num, @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num])]) raise
+
+pub fn sumofsquares_general_symmetry(((Int64, @lib.Func[Int64, @num.Num])) -> ((@list.List[((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])]) -> (Int64, @lib.Func[Int64, @num.Num]) raise) raise, @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> (@num.Num, @list.List[(@num.Num, @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num])]) raise
+
+pub fn term_of_cmonomial((@lib.Func[@kernel.Term, Int64], @num.Num)) -> @kernel.Term raise
+
+pub fn term_of_monomial(@lib.Func[@kernel.Term, Int64]) -> @kernel.Term raise
+
+pub fn term_of_poly(@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @kernel.Term raise
+
+pub fn term_of_sos(@realarith.Positivstellensatz, @list.List[(@num.Num, @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num])]) -> @realarith.Positivstellensatz raise
+
+pub fn term_of_sqterm(@num.Num, @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]) -> @realarith.Positivstellensatz raise
+
+pub fn term_of_varpow(@kernel.Term) -> ((Int64) -> @kernel.Term raise) raise
+
+pub fn token(String) -> ((@list.List[String]) -> (String, @list.List[String]) raise) raise
+
+pub fn transp(((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num]) raise
+
+pub fn vec_0(Int64) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn vec_1(Int64) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn vec_add((Int64, @lib.Func[Int64, @num.Num]), (Int64, @lib.Func[Int64, @num.Num])) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn vec_cmul(@num.Num, (Int64, @lib.Func[Int64, @num.Num])) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn vec_const(@num.Num, Int64) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn vec_dim((Int64, @lib.Func[Int64, @num.Num])) -> Int64 raise
+
+pub fn vec_dot((Int64, @lib.Func[Int64, @num.Num]), (Int64, @lib.Func[Int64, @num.Num])) -> @num.Num raise
+
+pub fn vec_neg((Int64, @lib.Func[Int64, @num.Num])) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn vec_of_list(@list.List[@num.Num]) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn vec_sub((Int64, @lib.Func[Int64, @num.Num]), (Int64, @lib.Func[Int64, @num.Num])) -> (Int64, @lib.Func[Int64, @num.Num]) raise
+
+pub fn word(String) -> ((@list.List[String]) -> (String, @list.List[String]) raise) raise
+
+// Errors
+pub(all) suberror Csdp_error {
+  Csdp_error(Int64)
+}
+
+pub(all) suberror Sanity {
+  Sanity
+}
+
+pub(all) suberror Unsolvable {
+  Unsolvable
+}
+
+// Types and methods
+
+// Type aliases
+pub type Matrix = ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])
+
+pub type Monomial = @lib.Func[@kernel.Term, Int64]
+
+pub type Poly = @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]
+
+pub type Vector = (Int64, @lib.Func[Int64, @num.Num])
+
+// Traits
