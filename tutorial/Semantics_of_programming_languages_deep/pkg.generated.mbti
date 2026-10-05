@@ -1,0 +1,61 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/Semantics_of_programming_languages_deep"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn command_induct() -> @kernel.Thm
+
+pub fn command_recursion() -> @kernel.Thm
+
+pub fn correct() -> @kernel.Thm
+
+pub fn correct_postweak() -> @kernel.Thm
+
+pub fn correct_prestrength() -> @kernel.Thm
+
+pub fn correct_seq() -> @kernel.Thm
+
+pub fn determinism() -> @kernel.Thm
+
+pub fn expression_induct() -> @kernel.Thm
+
+pub fn expression_recursion() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn sem_cases() -> @kernel.Thm
+
+pub fn sem_induct() -> @kernel.Thm
+
+pub fn sem_rules() -> @kernel.Thm
+
+pub fn string_induct() -> @kernel.Thm
+
+pub fn string_recursion() -> @kernel.Thm
+
+pub fn terminates() -> @kernel.Thm
+
+pub fn value() -> @kernel.Thm
+
+pub fn wlp() -> @kernel.Thm
+
+pub fn wp() -> @kernel.Thm
+
+pub fn wp_disjunctive() -> @kernel.Thm
+
+pub fn wp_monotonic() -> @kernel.Thm
+
+pub fn wp_seq() -> @kernel.Thm
+
+pub fn wp_total() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

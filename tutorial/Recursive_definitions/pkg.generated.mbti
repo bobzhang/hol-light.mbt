@@ -1,0 +1,39 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/Recursive_definitions"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn binom() -> @kernel.Thm
+
+pub fn binom_fact() -> @kernel.Thm
+
+pub fn binom_lt() -> @kernel.Thm
+
+pub fn binom_refl() -> @kernel.Thm
+
+pub fn binomial_theorem() -> @kernel.Thm
+
+pub fn fib() -> @kernel.Thm
+
+pub fn fib2() -> @kernel.Thm
+
+pub fn fusc() -> @kernel.Thm
+
+pub fn fusc_def() -> @kernel.Thm
+
+pub fn halve() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn unknown() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,39 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/Number_theory"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cong_trivial() -> @kernel.Thm
+
+pub fn divides_binom_prime() -> @kernel.Thm
+
+pub fn divides_fact_prime() -> @kernel.Thm
+
+pub fn divides_nsum() -> @kernel.Thm
+
+pub fn fermat_little() -> @kernel.Thm
+
+pub fn fermat_little_coprime() -> @kernel.Thm
+
+pub fn fermat_little_variant() -> @kernel.Thm
+
+pub fn fermat_prime_conv(Int64) -> @kernel.Thm raise
+
+pub fn flt_lemma() -> @kernel.Thm
+
+pub fn little_check_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+pub fn rsa() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,35 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/Tactics_and_tacticals"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn sum_of_cubes() -> @kernel.Thm
+
+pub fn sum_of_numbers() -> @kernel.Thm
+
+pub fn sum_of_squares() -> @kernel.Thm
+
+pub fn trivial() -> @kernel.Thm
+
+pub fn trivial_v1() -> @kernel.Thm
+
+pub fn trivial_v2() -> @kernel.Thm
+
+pub fn trivial_v3() -> @kernel.Thm
+
+pub fn trivial_v4() -> @kernel.Thm
+
+pub fn trivial_v5() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

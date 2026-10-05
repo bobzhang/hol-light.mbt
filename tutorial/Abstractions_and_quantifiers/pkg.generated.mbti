@@ -1,0 +1,21 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/Abstractions_and_quantifiers"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn ewd1062() -> @kernel.Thm
+
+pub fn ewd1062_v1() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
