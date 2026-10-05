@@ -488,7 +488,11 @@ module Lower = struct
       "unsafe"; "use"; "where"; "await"; "dyn"; "abstract"; "do"; "final";
       "macro"; "override"; "package"; "private"; "protected"; "throw";
       "sizeof"; "virtual"; "yield"; "init"; "main"; "lazy"; "pure"; "drop";
-      "readonly"; "enumview"; "Self" ]
+      "readonly"; "enumview"; "Self";
+      (* prelude functions the generated test driver calls unqualified: a
+         package's own `ignore` (Rqe/rqe_tactics_ext.ml's IGNORE) would
+         capture them *)
+      "ignore"; "not" ]
 
   let rec sanitize name =
     match Names.op_name name with
