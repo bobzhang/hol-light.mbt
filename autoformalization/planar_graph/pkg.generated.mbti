@@ -1,0 +1,3912 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/autoformalization/planar_graph"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn arc_at_most_two_incident_components() -> @kernel.Thm
+
+pub fn arc_between_complement_component_frontier_points() -> @kernel.Thm
+
+pub fn arc_between_plane_graph_carrier_frontier_points() -> @kernel.Thm
+
+pub fn arc_component_frontier_propagation() -> @kernel.Thm
+
+pub fn arc_ends_in_closure_middle() -> @kernel.Thm
+
+pub fn arc_ends_in_frontier_middle() -> @kernel.Thm
+
+pub fn arc_join_linepath_from_sphere() -> @kernel.Thm
+
+pub fn arc_join_linepath_to_sphere() -> @kernel.Thm
+
+pub fn arc_middle_outside_disjoint_cballs() -> @kernel.Thm
+
+pub fn arc_pair_boundary_subset_closure_inside() -> @kernel.Thm
+
+pub fn arc_pair_outside_component_of_intermediate_carrier() -> @kernel.Thm
+
+pub fn arc_pair_outside_face_vertices_cycle() -> @kernel.Thm
+
+pub fn arc_radialize_between_disjoint_cballs() -> @kernel.Thm
+
+pub fn arc_subpath_to_frontier() -> @kernel.Thm
+
+pub fn base_subset_relative_rooted_edge_vertices() -> @kernel.Thm
+
+pub fn bezier_arc_point() -> @kernel.Thm
+
+pub fn bezier_arc_point_in_refined_cycle() -> @kernel.Thm
+
+pub fn bezier_arc_tangent() -> @kernel.Thm
+
+pub fn bezier_chain_parameter() -> @kernel.Thm
+
+pub fn bezier_chain_parameter_bounds() -> @kernel.Thm
+
+pub fn bezier_chain_parameter_mono() -> @kernel.Thm
+
+pub fn bezier_chain_point() -> @kernel.Thm
+
+pub fn bezier_chain_point_0() -> @kernel.Thm
+
+pub fn bezier_chain_point_interior() -> @kernel.Thm
+
+pub fn bezier_chain_point_last() -> @kernel.Thm
+
+pub fn bezier_parameter() -> @kernel.Thm
+
+pub fn bezier_parameter_bounds() -> @kernel.Thm
+
+pub fn bezier_parameter_inj() -> @kernel.Thm
+
+pub fn bezier_parameter_mono() -> @kernel.Thm
+
+pub fn bezier_refined_cycle() -> @kernel.Thm
+
+pub fn bezier_refined_cycle_arc_point() -> @kernel.Thm
+
+pub fn boundary_euler_rotation() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_chordless_last_offset() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_cong() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_cyclic_darts_eq() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_cyclic_fan() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_cyclic_fan_invariant() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_fan_delete_last() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_full_fan() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_imp_cyclic_face_successors() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_insert_edge_away_from_boundary() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_last_oriented_neighbor_enumeration() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_last_rotation_step() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_maximal_extension() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_no_alternating_chords() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_nonboundary_face_disjoint() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_of_cyclic_face_successors() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_of_cyclic_fan_invariant() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_offset() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_offset_spoke_interval() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_reverse_dart_nonfixed() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_split() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_spoke_interval() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_two_fans() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_two_fans_singleton() -> @kernel.Thm
+
+pub fn boundary_euler_rotation_two_fans_strict() -> @kernel.Thm
+
+pub fn boundary_euler_triangle_rotation() -> @kernel.Thm
+
+pub fn boundary_euler_triangle_rotation_exists() -> @kernel.Thm
+
+pub fn boundary_neighbor_of_last_without_chord() -> @kernel.Thm
+
+pub fn boundary_neighbors_of_last_without_chord() -> @kernel.Thm
+
+pub fn branch_split_subdivide_selected_set() -> @kernel.Thm
+
+pub fn branch_split_subdivide_set() -> @kernel.Thm
+
+pub fn card_complete_bipartite_edges() -> @kernel.Thm
+
+pub fn card_complete_graph_darts_le_2() -> @kernel.Thm
+
+pub fn card_complete_graph_edges() -> @kernel.Thm
+
+pub fn card_component_add_pair_delete_gt() -> @kernel.Thm
+
+pub fn card_component_add_pair_delete_gt_gen() -> @kernel.Thm
+
+pub fn card_cyclic_indices() -> @kernel.Thm
+
+pub fn card_cyclic_vertices() -> @kernel.Thm
+
+pub fn card_delete_in() -> @kernel.Thm
+
+pub fn card_graph_darts() -> @kernel.Thm
+
+pub fn card_graph_darts_as_degree_sum() -> @kernel.Thm
+
+pub fn card_graph_darts_as_face_sum() -> @kernel.Thm
+
+pub fn card_graph_darts_rotation_split() -> @kernel.Thm
+
+pub fn card_graph_faces_dart_disjoint_union() -> @kernel.Thm
+
+pub fn card_graph_faces_delete_consecutive_edge() -> @kernel.Thm
+
+pub fn card_graph_faces_delete_edge_bound() -> @kernel.Thm
+
+pub fn card_graph_faces_disjoint_union() -> @kernel.Thm
+
+pub fn card_graph_faces_insert_edge() -> @kernel.Thm
+
+pub fn card_graph_faces_insert_edge_distinct() -> @kernel.Thm
+
+pub fn card_graph_faces_insert_pendant() -> @kernel.Thm
+
+pub fn card_graph_faces_rotation_split() -> @kernel.Thm
+
+pub fn card_graph_faces_rotation_split_distinct_faces() -> @kernel.Thm
+
+pub fn card_graph_faces_rotation_split_same_face() -> @kernel.Thm
+
+pub fn card_graph_faces_singleton_amalgamation() -> @kernel.Thm
+
+pub fn card_graph_faces_split() -> @kernel.Thm
+
+pub fn card_graph_faces_suppress_subdivision() -> @kernel.Thm
+
+pub fn card_graph_split_face_permutation() -> @kernel.Thm
+
+pub fn card_insert_notin() -> @kernel.Thm
+
+pub fn card_involution_conjugate_permutation_orbits() -> @kernel.Thm
+
+pub fn card_outgoing_darts() -> @kernel.Thm
+
+pub fn card_permutation_orbits_disjoint_union() -> @kernel.Thm
+
+pub fn card_permutation_orbits_insert_fixed() -> @kernel.Thm
+
+pub fn card_permutation_orbits_swap_composition() -> @kernel.Thm
+
+pub fn card_replace_one() -> @kernel.Thm
+
+pub fn card_restricted_permutation_transport_orbits() -> @kernel.Thm
+
+pub fn card_rotation_split_edges() -> @kernel.Thm
+
+pub fn card_rotation_split_vertices() -> @kernel.Thm
+
+pub fn card_subdivided_edge_set() -> @kernel.Thm
+
+pub fn card_subdivision_tail_swap_permutation_orbits() -> @kernel.Thm
+
+pub fn card_subset_pair_le_2() -> @kernel.Thm
+
+pub fn card_triple_eq_3() -> @kernel.Thm
+
+pub fn card_union_add_inter_finite() -> @kernel.Thm
+
+pub fn closed_edge_polygonal_obstacles() -> @kernel.Thm
+
+pub fn closed_empty_interior_jordan_side_dense() -> @kernel.Thm
+
+pub fn closed_empty_interior_jordan_side_incident_component() -> @kernel.Thm
+
+pub fn closure_inter_unions_components() -> @kernel.Thm
+
+pub fn compact_embedding_vertex_obstacles() -> @kernel.Thm
+
+pub fn complement_component_persists_with_frontier() -> @kernel.Thm
+
+pub fn complete_bipartite_3_3_not_euler_planar() -> @kernel.Thm
+
+pub fn complete_bipartite_3_3_not_euler_planar_rotation() -> @kernel.Thm
+
+pub fn complete_bipartite_3_3_not_planar() -> @kernel.Thm
+
+pub fn complete_bipartite_3_3_subdivision_vertex_degree_le_3() -> @kernel.Thm
+
+pub fn complete_bipartite_3_3_subgraph_obstructs_planarity() -> @kernel.Thm
+
+pub fn complete_bipartite_3_3_topological_subgraph_obstructs_euler_planarity() -> @kernel.Thm
+
+pub fn complete_bipartite_3_3_topological_subgraph_obstructs_planarity() -> @kernel.Thm
+
+pub fn complete_bipartite_alternating_cycle_edges() -> @kernel.Thm
+
+pub fn complete_bipartite_alternating_remainder_subset() -> @kernel.Thm
+
+pub fn complete_bipartite_alternating_six_subset() -> @kernel.Thm
+
+pub fn complete_bipartite_dart() -> @kernel.Thm
+
+pub fn complete_bipartite_edges() -> @kernel.Thm
+
+pub fn complete_bipartite_face_successor_cube_no_fixedpoint() -> @kernel.Thm
+
+pub fn complete_bipartite_face_successor_no_fixedpoint() -> @kernel.Thm
+
+pub fn complete_bipartite_face_successor_no_fixedpoint_dart() -> @kernel.Thm
+
+pub fn complete_bipartite_face_successor_square_no_fixedpoint() -> @kernel.Thm
+
+pub fn complete_bipartite_face_successor_square_no_fixedpoint_dart() -> @kernel.Thm
+
+pub fn complete_bipartite_face_successor_switches_parts() -> @kernel.Thm
+
+pub fn complete_bipartite_graph_connected() -> @kernel.Thm
+
+pub fn complete_bipartite_graph_face_card_at_least_4() -> @kernel.Thm
+
+pub fn complete_bipartite_graph_face_count_le_4() -> @kernel.Thm
+
+pub fn complete_bipartite_kuratowski_obstruction() -> @kernel.Thm
+
+pub fn complete_graph_4_all_faces_card_at_least_3() -> @kernel.Thm
+
+pub fn complete_graph_4_face_sum() -> @kernel.Thm
+
+pub fn complete_graph_5_branch_split_k33() -> @kernel.Thm
+
+pub fn complete_graph_5_face_count_le_6() -> @kernel.Thm
+
+pub fn complete_graph_5_not_euler_planar() -> @kernel.Thm
+
+pub fn complete_graph_5_not_euler_planar_rotation() -> @kernel.Thm
+
+pub fn complete_graph_5_not_planar() -> @kernel.Thm
+
+pub fn complete_graph_5_not_recursive_planar() -> @kernel.Thm
+
+pub fn complete_graph_5_not_straight_line_planar() -> @kernel.Thm
+
+pub fn complete_graph_5_subdivision_source_vertex_degree() -> @kernel.Thm
+
+pub fn complete_graph_5_subgraph_obstructs_planarity() -> @kernel.Thm
+
+pub fn complete_graph_5_topological_subgraph_obstructs_euler_planarity() -> @kernel.Thm
+
+pub fn complete_graph_5_topological_subgraph_obstructs_planarity() -> @kernel.Thm
+
+pub fn complete_graph_branch_split_bipartite_edges() -> @kernel.Thm
+
+pub fn complete_graph_connected() -> @kernel.Thm
+
+pub fn complete_graph_dart() -> @kernel.Thm
+
+pub fn complete_graph_edges() -> @kernel.Thm
+
+pub fn complete_graph_edges_3() -> @kernel.Thm
+
+pub fn complete_graph_edges_four_subset() -> @kernel.Thm
+
+pub fn complete_graph_edges_subset_induced() -> @kernel.Thm
+
+pub fn complete_graph_face_card_at_least_3() -> @kernel.Thm
+
+pub fn complete_graph_face_successor_square_no_fixedpoint() -> @kernel.Thm
+
+pub fn complete_graph_face_successor_square_no_fixedpoint_dart() -> @kernel.Thm
+
+pub fn complete_graph_five_spokes_remainder_subset() -> @kernel.Thm
+
+pub fn complete_graph_five_spokes_subset() -> @kernel.Thm
+
+pub fn complete_graph_kuratowski_obstruction() -> @kernel.Thm
+
+pub fn complete_graph_vertex_degree() -> @kernel.Thm
+
+pub fn component_frontier_of_connected_approach() -> @kernel.Thm
+
+pub fn component_frontier_of_subset_away_from_difference() -> @kernel.Thm
+
+pub fn component_of_carrier_union_inside() -> @kernel.Thm
+
+pub fn component_subset_of_superset_component() -> @kernel.Thm
+
+pub fn compose_apply_eq() -> @kernel.Thm
+
+pub fn compose_image_fresh_inj_on() -> @kernel.Thm
+
+pub fn conjugate_fst_preserves() -> @kernel.Thm
+
+pub fn connected_closed_cover_meets_inter() -> @kernel.Thm
+
+pub fn connected_complement_component_delete_2() -> @kernel.Thm
+
+pub fn connected_crosscut_split() -> @kernel.Thm
+
+pub fn connected_crosscut_split_away_from_frontier() -> @kernel.Thm
+
+pub fn connected_euler_planar_graph_imp_recursive_planar_graph() -> @kernel.Thm
+
+pub fn connected_euler_planar_graph_rotation() -> @kernel.Thm
+
+pub fn connected_euler_planar_rotation_imp_euler_planar_graph() -> @kernel.Thm
+
+pub fn connected_euler_planar_rotation_imp_graph() -> @kernel.Thm
+
+pub fn connected_finite_closed_cover_crossing() -> @kernel.Thm
+
+pub fn connected_finite_simple_graph_not_2_connected_cut_vertex() -> @kernel.Thm
+
+pub fn connected_finite_simple_graph_pair_edge() -> @kernel.Thm
+
+pub fn connected_frontier_incident_inside() -> @kernel.Thm
+
+pub fn connected_graph() -> @kernel.Thm
+
+pub fn connected_graph_component() -> @kernel.Thm
+
+pub fn connected_graph_component_edges() -> @kernel.Thm
+
+pub fn connected_graph_contract() -> @kernel.Thm
+
+pub fn connected_graph_crossing_edge() -> @kernel.Thm
+
+pub fn connected_graph_cut_component_complement() -> @kernel.Thm
+
+pub fn connected_graph_cut_component_side() -> @kernel.Thm
+
+pub fn connected_graph_cycle_external_neighbor() -> @kernel.Thm
+
+pub fn connected_graph_delete_component_neighbor() -> @kernel.Thm
+
+pub fn connected_graph_delete_edge_of_alternate_path() -> @kernel.Thm
+
+pub fn connected_graph_delete_triangle_edge() -> @kernel.Thm
+
+pub fn connected_graph_delete_vertex_of_connected_neighbors() -> @kernel.Thm
+
+pub fn connected_graph_delete_vertex_of_cyclic_neighbors() -> @kernel.Thm
+
+pub fn connected_graph_delete_vertex_of_neighbor_chain() -> @kernel.Thm
+
+pub fn connected_graph_empty_edges_singleton() -> @kernel.Thm
+
+pub fn connected_graph_face_cyclic_walk() -> @kernel.Thm
+
+pub fn connected_graph_fan_delete_prefix_of_delete_vertex() -> @kernel.Thm
+
+pub fn connected_graph_fan_delete_prefix_of_delete_vertex_data() -> @kernel.Thm
+
+pub fn connected_graph_induced_contract() -> @kernel.Thm
+
+pub fn connected_graph_induced_contract_away() -> @kernel.Thm
+
+pub fn connected_graph_induced_image() -> @kernel.Thm
+
+pub fn connected_graph_induced_union_edge() -> @kernel.Thm
+
+pub fn connected_graph_induced_vertex_edge() -> @kernel.Thm
+
+pub fn connected_graph_insert_edge_vertex() -> @kernel.Thm
+
+pub fn connected_graph_map_faces_euler_bound() -> @kernel.Thm
+
+pub fn connected_graph_mono() -> @kernel.Thm
+
+pub fn connected_graph_nonempty_edge_outgoing_dart() -> @kernel.Thm
+
+pub fn connected_graph_outgoing_darts_injective() -> @kernel.Thm
+
+pub fn connected_graph_pendant_other_dart() -> @kernel.Thm
+
+pub fn connected_graph_relative_rooted_edge_list() -> @kernel.Thm
+
+pub fn connected_graph_relative_rooted_edge_set() -> @kernel.Thm
+
+pub fn connected_graph_reverse_rotation_euler_bound() -> @kernel.Thm
+
+pub fn connected_graph_rooted_edge_list() -> @kernel.Thm
+
+pub fn connected_graph_rotation_split() -> @kernel.Thm
+
+pub fn connected_graph_singleton() -> @kernel.Thm
+
+pub fn connected_graph_triangle_high_degree_vertex() -> @kernel.Thm
+
+pub fn connected_graph_two_distinct_neighbors() -> @kernel.Thm
+
+pub fn connected_graph_union_shared_vertex() -> @kernel.Thm
+
+pub fn connected_graph_vertex_has_outgoing_dart() -> @kernel.Thm
+
+pub fn connected_k4_branches_not_cofacial() -> @kernel.Thm
+
+pub fn connected_maximal_euler_planar_rotation_recursive_disk() -> @kernel.Thm
+
+pub fn connected_simple_graph_face_card_at_least_3() -> @kernel.Thm
+
+pub fn connected_simple_graph_face_sum_lower_bound() -> @kernel.Thm
+
+pub fn connected_simple_graph_face_vertices_card_at_least_3() -> @kernel.Thm
+
+pub fn connected_small_euler_rotation() -> @kernel.Thm
+
+pub fn connected_subset_graph_component() -> @kernel.Thm
+
+pub fn connected_subset_inside_or_outside() -> @kernel.Thm
+
+pub fn connected_subset_of_component() -> @kernel.Thm
+
+pub fn connected_subset_open_union() -> @kernel.Thm
+
+pub fn contract_split_side() -> @kernel.Thm
+
+pub fn contract_split_side_subset_neighbors() -> @kernel.Thm
+
+pub fn contract_split_side_swap_subset_complement() -> @kernel.Thm
+
+pub fn convex_hull_insert_bezier_refined_cycle() -> @kernel.Thm
+
+pub fn convex_hull_insert_eq() -> @kernel.Thm
+
+pub fn convex_hull_subset_plane_orientation_ge() -> @kernel.Thm
+
+pub fn convex_hull_subset_plane_orientation_le() -> @kernel.Thm
+
+pub fn convex_hull_union_eq() -> @kernel.Thm
+
+pub fn convex_plane_orientation_ge() -> @kernel.Thm
+
+pub fn convex_plane_orientation_le() -> @kernel.Thm
+
+pub fn crosscut_other_path_not_in_closure() -> @kernel.Thm
+
+pub fn cyclic_chain_endpoint_pair_to_neighbor_path() -> @kernel.Thm
+
+pub fn cyclic_chord_to_last_not_edge() -> @kernel.Thm
+
+pub fn cyclic_closing_path() -> @kernel.Thm
+
+pub fn cyclic_closing_path_inj() -> @kernel.Thm
+
+pub fn cyclic_closing_path_values() -> @kernel.Thm
+
+pub fn cyclic_dart() -> @kernel.Thm
+
+pub fn cyclic_dart_cong() -> @kernel.Thm
+
+pub fn cyclic_dart_distinct() -> @kernel.Thm
+
+pub fn cyclic_dart_entering_last() -> @kernel.Thm
+
+pub fn cyclic_dart_last() -> @kernel.Thm
+
+pub fn cyclic_dart_nowrap() -> @kernel.Thm
+
+pub fn cyclic_dart_offset() -> @kernel.Thm
+
+pub fn cyclic_dart_penultimate() -> @kernel.Thm
+
+pub fn cyclic_dart_split_left_chord() -> @kernel.Thm
+
+pub fn cyclic_dart_split_left_last() -> @kernel.Thm
+
+pub fn cyclic_dart_split_left_prefix() -> @kernel.Thm
+
+pub fn cyclic_dart_split_right_chord() -> @kernel.Thm
+
+pub fn cyclic_dart_split_right_first() -> @kernel.Thm
+
+pub fn cyclic_dart_split_right_prefix() -> @kernel.Thm
+
+pub fn cyclic_dart_third_last() -> @kernel.Thm
+
+pub fn cyclic_dart_zero() -> @kernel.Thm
+
+pub fn cyclic_darts() -> @kernel.Thm
+
+pub fn cyclic_darts_3() -> @kernel.Thm
+
+pub fn cyclic_darts_offset() -> @kernel.Thm
+
+pub fn cyclic_darts_subset_graph_darts() -> @kernel.Thm
+
+pub fn cyclic_delete_last() -> @kernel.Thm
+
+pub fn cyclic_delete_last_bezier_boundary() -> @kernel.Thm
+
+pub fn cyclic_delete_last_chain() -> @kernel.Thm
+
+pub fn cyclic_delete_last_chain_index() -> @kernel.Thm
+
+pub fn cyclic_delete_last_chain_index_bound() -> @kernel.Thm
+
+pub fn cyclic_delete_last_chain_index_inj() -> @kernel.Thm
+
+pub fn cyclic_delete_last_chain_index_value() -> @kernel.Thm
+
+pub fn cyclic_delete_last_face_successors_of_local() -> @kernel.Thm
+
+pub fn cyclic_delete_last_fan_after_last() -> @kernel.Thm
+
+pub fn cyclic_delete_last_fan_chain() -> @kernel.Thm
+
+pub fn cyclic_delete_last_fan_chain_suc() -> @kernel.Thm
+
+pub fn cyclic_delete_last_fan_chain_zero() -> @kernel.Thm
+
+pub fn cyclic_delete_last_fan_last() -> @kernel.Thm
+
+pub fn cyclic_delete_last_fan_p_dart() -> @kernel.Thm
+
+pub fn cyclic_delete_last_fan_path() -> @kernel.Thm
+
+pub fn cyclic_delete_last_fan_path_dart() -> @kernel.Thm
+
+pub fn cyclic_delete_last_fan_prefix_dart() -> @kernel.Thm
+
+pub fn cyclic_delete_last_fan_prefix_successor() -> @kernel.Thm
+
+pub fn cyclic_delete_last_first() -> @kernel.Thm
+
+pub fn cyclic_delete_last_image() -> @kernel.Thm
+
+pub fn cyclic_delete_last_penultimate() -> @kernel.Thm
+
+pub fn cyclic_delete_last_prefix() -> @kernel.Thm
+
+pub fn cyclic_edge_has_size() -> @kernel.Thm
+
+pub fn cyclic_edge_subset_vertices() -> @kernel.Thm
+
+pub fn cyclic_edges() -> @kernel.Thm
+
+pub fn cyclic_edges_3() -> @kernel.Thm
+
+pub fn cyclic_edges_chain_and_closing() -> @kernel.Thm
+
+pub fn cyclic_edges_chain_closing() -> @kernel.Thm
+
+pub fn cyclic_edges_cong() -> @kernel.Thm
+
+pub fn cyclic_edges_image() -> @kernel.Thm
+
+pub fn cyclic_edges_offset() -> @kernel.Thm
+
+pub fn cyclic_edges_reverse_subset() -> @kernel.Thm
+
+pub fn cyclic_edges_split_left_oriented() -> @kernel.Thm
+
+pub fn cyclic_edges_split_right_explicit() -> @kernel.Thm
+
+pub fn cyclic_edges_subset_cyclic_k4_edges() -> @kernel.Thm
+
+pub fn cyclic_edges_subset_four_indexed_paths() -> @kernel.Thm
+
+pub fn cyclic_edges_subset_of_chain_and_last() -> @kernel.Thm
+
+pub fn cyclic_face_successor_not_reverse() -> @kernel.Thm
+
+pub fn cyclic_face_successors() -> @kernel.Thm
+
+pub fn cyclic_face_successors_cong() -> @kernel.Thm
+
+pub fn cyclic_face_successors_imp_graph_face() -> @kernel.Thm
+
+pub fn cyclic_face_successors_iter() -> @kernel.Thm
+
+pub fn cyclic_face_successors_last() -> @kernel.Thm
+
+pub fn cyclic_face_successors_of_prefix_and_last() -> @kernel.Thm
+
+pub fn cyclic_face_successors_offset() -> @kernel.Thm
+
+pub fn cyclic_face_successors_prefix() -> @kernel.Thm
+
+pub fn cyclic_face_successors_split() -> @kernel.Thm
+
+pub fn cyclic_face_successors_third_last() -> @kernel.Thm
+
+pub fn cyclic_four_path_data() -> @kernel.Thm
+
+pub fn cyclic_four_path_fresh_with_two_outside() -> @kernel.Thm
+
+pub fn cyclic_graph_connected() -> @kernel.Thm
+
+pub fn cyclic_incident_edges_neighbor_enumeration() -> @kernel.Thm
+
+pub fn cyclic_index_has_predecessor() -> @kernel.Thm
+
+pub fn cyclic_index_images_eq() -> @kernel.Thm
+
+pub fn cyclic_index_last_case() -> @kernel.Thm
+
+pub fn cyclic_indices() -> @kernel.Thm
+
+pub fn cyclic_indices_2() -> @kernel.Thm
+
+pub fn cyclic_indices_3() -> @kernel.Thm
+
+pub fn cyclic_injective_index() -> @kernel.Thm
+
+pub fn cyclic_injective_index_eq() -> @kernel.Thm
+
+pub fn cyclic_injective_ne() -> @kernel.Thm
+
+pub fn cyclic_interval_rotate_boundary() -> @kernel.Thm
+
+pub fn cyclic_k4_edges() -> @kernel.Thm
+
+pub fn cyclic_k4_edges_subset_chords_union_cyclic() -> @kernel.Thm
+
+pub fn cyclic_k4_subdivision() -> @kernel.Thm
+
+pub fn cyclic_k4_subdivision_raw() -> @kernel.Thm
+
+pub fn cyclic_k4_vertices() -> @kernel.Thm
+
+pub fn cyclic_k4_vertices_eq() -> @kernel.Thm
+
+pub fn cyclic_offset_pair_to_last() -> @kernel.Thm
+
+pub fn cyclic_offset_path() -> @kernel.Thm
+
+pub fn cyclic_offset_path_inj() -> @kernel.Thm
+
+pub fn cyclic_offset_predicate_nonempty() -> @kernel.Thm
+
+pub fn cyclic_offset_sub() -> @kernel.Thm
+
+pub fn cyclic_offset_successor() -> @kernel.Thm
+
+pub fn cyclic_offset_zero() -> @kernel.Thm
+
+pub fn cyclic_prefix_path_inj() -> @kernel.Thm
+
+pub fn cyclic_reverse() -> @kernel.Thm
+
+pub fn cyclic_reverse_chain() -> @kernel.Thm
+
+pub fn cyclic_reverse_endpoints() -> @kernel.Thm
+
+pub fn cyclic_reverse_offset_rotation_steps() -> @kernel.Thm
+
+pub fn cyclic_second_successor_ne() -> @kernel.Thm
+
+pub fn cyclic_sparse_spoke_interval() -> @kernel.Thm
+
+pub fn cyclic_split_boundary_edges_disjoint() -> @kernel.Thm
+
+pub fn cyclic_split_boundary_edges_union() -> @kernel.Thm
+
+pub fn cyclic_split_left() -> @kernel.Thm
+
+pub fn cyclic_split_left_after_chord() -> @kernel.Thm
+
+pub fn cyclic_split_left_boundary_edges() -> @kernel.Thm
+
+pub fn cyclic_split_left_chord_endpoints() -> @kernel.Thm
+
+pub fn cyclic_split_left_edges() -> @kernel.Thm
+
+pub fn cyclic_split_left_image() -> @kernel.Thm
+
+pub fn cyclic_split_left_inj() -> @kernel.Thm
+
+pub fn cyclic_split_left_oriented() -> @kernel.Thm
+
+pub fn cyclic_split_left_oriented_inj() -> @kernel.Thm
+
+pub fn cyclic_split_left_whole_next() -> @kernel.Thm
+
+pub fn cyclic_split_right() -> @kernel.Thm
+
+pub fn cyclic_split_right_after_chord() -> @kernel.Thm
+
+pub fn cyclic_split_right_boundary_edges() -> @kernel.Thm
+
+pub fn cyclic_split_right_chord_endpoints() -> @kernel.Thm
+
+pub fn cyclic_split_right_edges() -> @kernel.Thm
+
+pub fn cyclic_split_right_image() -> @kernel.Thm
+
+pub fn cyclic_split_right_inj() -> @kernel.Thm
+
+pub fn cyclic_split_right_whole_next() -> @kernel.Thm
+
+pub fn cyclic_spoke_interval() -> @kernel.Thm
+
+pub fn cyclic_subset_index_card() -> @kernel.Thm
+
+pub fn cyclic_successor_ne() -> @kernel.Thm
+
+pub fn cyclic_successor_no_two_cycle() -> @kernel.Thm
+
+pub fn cyclic_three_path_data() -> @kernel.Thm
+
+pub fn cyclic_three_path_fresh_with_two_outside() -> @kernel.Thm
+
+pub fn cyclic_vertex_not_in_four() -> @kernel.Thm
+
+pub fn cyclic_vertex_not_in_offset_path() -> @kernel.Thm
+
+pub fn cyclic_vertex_not_in_prefix_path() -> @kernel.Thm
+
+pub fn cyclic_vertex_not_in_three() -> @kernel.Thm
+
+pub fn cyclic_vertices() -> @kernel.Thm
+
+pub fn cyclic_vertices_2() -> @kernel.Thm
+
+pub fn cyclic_vertices_3() -> @kernel.Thm
+
+pub fn cyclic_vertices_bezier_refined_subset_convex_hull() -> @kernel.Thm
+
+pub fn cyclic_vertices_cong() -> @kernel.Thm
+
+pub fn cyclic_vertices_cyclic_delete_last() -> @kernel.Thm
+
+pub fn cyclic_vertices_image() -> @kernel.Thm
+
+pub fn cyclic_vertices_image_subset() -> @kernel.Thm
+
+pub fn cyclic_vertices_mono() -> @kernel.Thm
+
+pub fn cyclic_vertices_offset() -> @kernel.Thm
+
+pub fn cyclic_vertices_reverse() -> @kernel.Thm
+
+pub fn cyclic_vertices_split_left_oriented() -> @kernel.Thm
+
+pub fn cyclic_vertices_split_union() -> @kernel.Thm
+
+pub fn dart_edge() -> @kernel.Thm
+
+pub fn dart_edge_eq_distinct() -> @kernel.Thm
+
+pub fn dart_edge_pair() -> @kernel.Thm
+
+pub fn dart_edge_reverse() -> @kernel.Thm
+
+pub fn delete_singleton_union() -> @kernel.Thm
+
+pub fn delete_vertex_edges_subset() -> @kernel.Thm
+
+pub fn disjoint_graph_rotation_tail() -> @kernel.Thm
+
+pub fn disjoint_image_injective() -> @kernel.Thm
+
+pub fn disjoint_permutation_orbits() -> @kernel.Thm
+
+pub fn disjoint_permutation_union() -> @kernel.Thm
+
+pub fn disjoint_permutation_union_iter_left() -> @kernel.Thm
+
+pub fn disjoint_permutation_union_iter_right() -> @kernel.Thm
+
+pub fn disjoint_permutation_union_orbit_left() -> @kernel.Thm
+
+pub fn disjoint_permutation_union_orbit_right() -> @kernel.Thm
+
+pub fn disjoint_permutation_union_permutes() -> @kernel.Thm
+
+pub fn disjoint_permutation_union_preserves_key() -> @kernel.Thm
+
+pub fn disjoint_sets_points_distinct() -> @kernel.Thm
+
+pub fn disjoint_union_graph_rotation_orbit_left() -> @kernel.Thm
+
+pub fn disjoint_union_graph_rotation_orbit_right() -> @kernel.Thm
+
+pub fn distinct_component_closures_inter_subset_frontiers() -> @kernel.Thm
+
+pub fn distinct_edge_darts_disjoint() -> @kernel.Thm
+
+pub fn distinct_graph_faces_disjoint() -> @kernel.Thm
+
+pub fn distinct_standard_plane_points() -> @kernel.Thm
+
+pub fn dot_vsum_affine() -> @kernel.Thm
+
+pub fn double_delete_inserts() -> @kernel.Thm
+
+pub fn double_delete_subset() -> @kernel.Thm
+
+pub fn edge_darts() -> @kernel.Thm
+
+pub fn edge_darts_has_size_2() -> @kernel.Thm
+
+pub fn edge_darts_pair() -> @kernel.Thm
+
+pub fn edge_image_unions_subset_plane_graph_carrier() -> @kernel.Thm
+
+pub fn edge_polygonal_obstacles() -> @kernel.Thm
+
+pub fn edge_polygonal_obstacles_contains_cball() -> @kernel.Thm
+
+pub fn edge_polygonal_obstacles_contains_vertices() -> @kernel.Thm
+
+pub fn edge_star_image_mem() -> @kernel.Thm
+
+pub fn edge_subdivision_induced_subgraph() -> @kernel.Thm
+
+pub fn embedded_dart_middle_avoids_vertices() -> @kernel.Thm
+
+pub fn embedded_dart_middle_outside_disjoint_cballs() -> @kernel.Thm
+
+pub fn embedded_dart_radialized_arc() -> @kernel.Thm
+
+pub fn embedded_middle_arcs_disjoint() -> @kernel.Thm
+
+pub fn embedding_edge_subset_vertex_obstacles() -> @kernel.Thm
+
+pub fn embedding_vertex_disjoint_balls() -> @kernel.Thm
+
+pub fn embedding_vertex_disjoint_closed_balls() -> @kernel.Thm
+
+pub fn embedding_vertex_not_in_obstacles() -> @kernel.Thm
+
+pub fn embedding_vertex_obstacle_ball() -> @kernel.Thm
+
+pub fn embedding_vertex_obstacle_balls() -> @kernel.Thm
+
+pub fn embedding_vertex_obstacles() -> @kernel.Thm
+
+pub fn euler_planar_complete_graph_4_face_card_eq_3() -> @kernel.Thm
+
+pub fn euler_planar_complete_graph_4_face_count() -> @kernel.Thm
+
+pub fn euler_planar_complete_graph_4_face_vertices_card_le_3() -> @kernel.Thm
+
+pub fn euler_planar_graph() -> @kernel.Thm
+
+pub fn euler_planar_graph_5_degenerate() -> @kernel.Thm
+
+pub fn euler_planar_graph_bridge_components() -> @kernel.Thm
+
+pub fn euler_planar_graph_componentwise() -> @kernel.Thm
+
+pub fn euler_planar_graph_componentwise_eq() -> @kernel.Thm
+
+pub fn euler_planar_graph_connected() -> @kernel.Thm
+
+pub fn euler_planar_graph_connected_edge_bound() -> @kernel.Thm
+
+pub fn euler_planar_graph_contract_edge() -> @kernel.Thm
+
+pub fn euler_planar_graph_delete_edge() -> @kernel.Thm
+
+pub fn euler_planar_graph_edge_amalgamation() -> @kernel.Thm
+
+pub fn euler_planar_graph_edge_bound() -> @kernel.Thm
+
+pub fn euler_planar_graph_eq_planar_graph() -> @kernel.Thm
+
+pub fn euler_planar_graph_eq_recursive_planar_graph() -> @kernel.Thm
+
+pub fn euler_planar_graph_eq_straight_line_planar() -> @kernel.Thm
+
+pub fn euler_planar_graph_finite_simple() -> @kernel.Thm
+
+pub fn euler_planar_graph_image() -> @kernel.Thm
+
+pub fn euler_planar_graph_image_eq() -> @kernel.Thm
+
+pub fn euler_planar_graph_imp_kuratowski_free() -> @kernel.Thm
+
+pub fn euler_planar_graph_imp_recursive_planar_graph() -> @kernel.Thm
+
+pub fn euler_planar_graph_induced_subgraph() -> @kernel.Thm
+
+pub fn euler_planar_graph_low_degree() -> @kernel.Thm
+
+pub fn euler_planar_graph_minor() -> @kernel.Thm
+
+pub fn euler_planar_graph_singleton_amalgamation() -> @kernel.Thm
+
+pub fn euler_planar_graph_subgraph() -> @kernel.Thm
+
+pub fn euler_planar_graph_subset_edges() -> @kernel.Thm
+
+pub fn euler_planar_rotation() -> @kernel.Thm
+
+pub fn euler_planar_rotation_bridge_connected() -> @kernel.Thm
+
+pub fn euler_planar_rotation_bridge_disjoint() -> @kernel.Thm
+
+pub fn euler_planar_rotation_connected() -> @kernel.Thm
+
+pub fn euler_planar_rotation_connected_edge_bound() -> @kernel.Thm
+
+pub fn euler_planar_rotation_connected_empty() -> @kernel.Thm
+
+pub fn euler_planar_rotation_connected_subgraph() -> @kernel.Thm
+
+pub fn euler_planar_rotation_connected_subgraph_preserves_cofacial() -> @kernel.Thm
+
+pub fn euler_planar_rotation_connected_subgraph_preserves_cofacial_set() -> @kernel.Thm
+
+pub fn euler_planar_rotation_delete_edge_connected() -> @kernel.Thm
+
+pub fn euler_planar_rotation_delete_edge_face_count() -> @kernel.Thm
+
+pub fn euler_planar_rotation_delete_pendant() -> @kernel.Thm
+
+pub fn euler_planar_rotation_delete_pendant_induced() -> @kernel.Thm
+
+pub fn euler_planar_rotation_delete_pendant_preserves_cofacial() -> @kernel.Thm
+
+pub fn euler_planar_rotation_delete_pendant_preserves_cofacial_set() -> @kernel.Thm
+
+pub fn euler_planar_rotation_fan() -> @kernel.Thm
+
+pub fn euler_planar_rotation_fan_base() -> @kernel.Thm
+
+pub fn euler_planar_rotation_fan_delete_last() -> @kernel.Thm
+
+pub fn euler_planar_rotation_fan_delete_prefix() -> @kernel.Thm
+
+pub fn euler_planar_rotation_fan_delete_prefix_graph_data() -> @kernel.Thm
+
+pub fn euler_planar_rotation_fan_delete_prefix_of_delete_vertex() -> @kernel.Thm
+
+pub fn euler_planar_rotation_fan_delete_prefix_of_delete_vertex_graph_data() -> @kernel.Thm
+
+pub fn euler_planar_rotation_fan_index() -> @kernel.Thm
+
+pub fn euler_planar_rotation_fan_step() -> @kernel.Thm
+
+pub fn euler_planar_rotation_insert_edge() -> @kernel.Thm
+
+pub fn euler_planar_rotation_insert_pendant() -> @kernel.Thm
+
+pub fn euler_planar_rotation_k4_subdivision_not_cofacial() -> @kernel.Thm
+
+pub fn euler_planar_rotation_maximizes_faces() -> @kernel.Thm
+
+pub fn euler_planar_rotation_nonseparating_edge_distinct_faces() -> @kernel.Thm
+
+pub fn euler_planar_rotation_nonseparating_edge_preserves_cofacial() -> @kernel.Thm
+
+pub fn euler_planar_rotation_nonseparating_edge_preserves_cofacial_set() -> @kernel.Thm
+
+pub fn euler_planar_rotation_relative_rooted_restrict() -> @kernel.Thm
+
+pub fn euler_planar_rotation_relative_rooted_restrict_preserves_cofacial() -> @kernel.Thm
+
+pub fn euler_planar_rotation_relative_rooted_restrict_preserves_cofacial_set() -> @kernel.Thm
+
+pub fn euler_planar_rotation_single_edge() -> @kernel.Thm
+
+pub fn euler_planar_rotation_singleton_amalgamation() -> @kernel.Thm
+
+pub fn euler_planar_rotation_singleton_i() -> @kernel.Thm
+
+pub fn euler_planar_rotation_split() -> @kernel.Thm
+
+pub fn euler_planar_rotation_subdivision_imp() -> @kernel.Thm
+
+pub fn euler_planar_rotation_subdivision_preserves_face_vertices() -> @kernel.Thm
+
+pub fn euler_planar_rotation_subset_connected() -> @kernel.Thm
+
+pub fn euler_planar_rotation_subset_connected_preserves_cofacial() -> @kernel.Thm
+
+pub fn euler_planar_rotation_subset_connected_preserves_cofacial_set() -> @kernel.Thm
+
+pub fn euler_planar_rotation_suppress_subdivision() -> @kernel.Thm
+
+pub fn euler_planar_rotation_suppress_subdivision_preserves_cofacial_set() -> @kernel.Thm
+
+pub fn euler_planar_rotation_suppress_subdivision_preserves_face_vertices() -> @kernel.Thm
+
+pub fn euler_planar_rotation_vertex_split_distinct_faces() -> @kernel.Thm
+
+pub fn euler_planar_triangle_rotation() -> @kernel.Thm
+
+pub fn euler_planar_triangle_rotation_exists() -> @kernel.Thm
+
+pub fn expand_fan_rotation_invariant_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn expand_fan_rotation_statement_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn face_sum_eq_twice_edges() -> @kernel.Thm
+
+pub fn fan_delete_chain_dart_remains() -> @kernel.Thm
+
+pub fn fan_delete_chain_successor() -> @kernel.Thm
+
+pub fn fan_delete_chain_successor_at_splice() -> @kernel.Thm
+
+pub fn fan_delete_delete_vertex_dart_remains() -> @kernel.Thm
+
+pub fn fan_delete_earlier_exits_cofacial() -> @kernel.Thm
+
+pub fn fan_delete_edge_remains() -> @kernel.Thm
+
+pub fn fan_delete_edge_removed() -> @kernel.Thm
+
+pub fn fan_delete_edges() -> @kernel.Thm
+
+pub fn fan_delete_edges_subset() -> @kernel.Thm
+
+pub fn fan_delete_face_successor_nonincident() -> @kernel.Thm
+
+pub fn fan_delete_face_successor_nonincident_from() -> @kernel.Thm
+
+pub fn fan_delete_forward_spoke_successor_of_delete_vertex() -> @kernel.Thm
+
+pub fn fan_delete_graph_neighbors_last() -> @kernel.Thm
+
+pub fn fan_delete_induced_subgraph_edges() -> @kernel.Thm
+
+pub fn fan_delete_last_cyclic_face_successors() -> @kernel.Thm
+
+pub fn fan_delete_last_edges() -> @kernel.Thm
+
+pub fn fan_delete_last_nonincident_successor() -> @kernel.Thm
+
+pub fn fan_delete_next_edge_remains() -> @kernel.Thm
+
+pub fn fan_delete_nonincident_dart_remains() -> @kernel.Thm
+
+pub fn fan_delete_nonincident_edge_remains() -> @kernel.Thm
+
+pub fn fan_delete_pendant_chain_successor() -> @kernel.Thm
+
+pub fn fan_delete_pendant_nonincident_successor() -> @kernel.Thm
+
+pub fn fan_delete_pendant_predecessor_successor() -> @kernel.Thm
+
+pub fn fan_delete_pendant_remainder_nonempty() -> @kernel.Thm
+
+pub fn fan_delete_pendant_tail_successor() -> @kernel.Thm
+
+pub fn fan_delete_predecessor_successor() -> @kernel.Thm
+
+pub fn fan_delete_predecessor_successor_at_first() -> @kernel.Thm
+
+pub fn fan_delete_reverse_spoke_successor_of_delete_vertex() -> @kernel.Thm
+
+pub fn fan_delete_rotation() -> @kernel.Thm
+
+pub fn fan_delete_spoke_darts_remain() -> @kernel.Thm
+
+pub fn fan_delete_spoke_successor_remains() -> @kernel.Thm
+
+pub fn fan_delete_tail_successor() -> @kernel.Thm
+
+pub fn fan_delete_undeleted_triangle() -> @kernel.Thm
+
+pub fn fan_edge_fresh() -> @kernel.Thm
+
+pub fn fan_edge_in() -> @kernel.Thm
+
+pub fn fan_edges() -> @kernel.Thm
+
+pub fn fan_edges_cyclic_vertices() -> @kernel.Thm
+
+pub fn fan_edges_explicit() -> @kernel.Thm
+
+pub fn fan_edges_mono() -> @kernel.Thm
+
+pub fn fan_graph_darts_mono() -> @kernel.Thm
+
+pub fn fan_path_dart_distinct() -> @kernel.Thm
+
+pub fn fan_rotation() -> @kernel.Thm
+
+pub fn fan_rotation_cyclic_face_successors() -> @kernel.Thm
+
+pub fn fan_rotation_cyclic_last_successor() -> @kernel.Thm
+
+pub fn fan_rotation_cyclic_penultimate_successor() -> @kernel.Thm
+
+pub fn fan_rotation_cyclic_predecessor_successor() -> @kernel.Thm
+
+pub fn fan_rotation_cyclic_prefix_successor() -> @kernel.Thm
+
+pub fn fan_rotation_induction_statement() -> @kernel.Thm
+
+pub fn fan_rotation_invariant() -> @kernel.Thm
+
+pub fn fan_rotation_invariant_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn fan_rotation_statement_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn fan_source_dart() -> @kernel.Thm
+
+pub fn fan_source_dart_last() -> @kernel.Thm
+
+pub fn fary() -> @kernel.Thm
+
+pub fn fary_reduction_to_large_recursive_triangulations() -> @kernel.Thm
+
+pub fn fary_reduction_to_recursive_triangulations() -> @kernel.Thm
+
+pub fn finite_card_four_subset_split() -> @kernel.Thm
+
+pub fn finite_card_insert_le_one() -> @kernel.Thm
+
+pub fn finite_card_one_singleton() -> @kernel.Thm
+
+pub fn finite_complement_component_frontier_cover() -> @kernel.Thm
+
+pub fn finite_complement_components_plane_graph_carrier() -> @kernel.Thm
+
+pub fn finite_complete_graph_edges() -> @kernel.Thm
+
+pub fn finite_connected_degree_2_relation_spanning_path() -> @kernel.Thm
+
+pub fn finite_contract_split_side() -> @kernel.Thm
+
+pub fn finite_cyclic_darts() -> @kernel.Thm
+
+pub fn finite_cyclic_edges() -> @kernel.Thm
+
+pub fn finite_cyclic_indices() -> @kernel.Thm
+
+pub fn finite_cyclic_permutation() -> @kernel.Thm
+
+pub fn finite_cyclic_vertices() -> @kernel.Thm
+
+pub fn finite_disjoint_arcs_polygonalize() -> @kernel.Thm
+
+pub fn finite_disjoint_compact_open_neighbourhoods() -> @kernel.Thm
+
+pub fn finite_graph_component() -> @kernel.Thm
+
+pub fn finite_graph_darts() -> @kernel.Thm
+
+pub fn finite_graph_deleted_component() -> @kernel.Thm
+
+pub fn finite_graph_face() -> @kernel.Thm
+
+pub fn finite_graph_faces() -> @kernel.Thm
+
+pub fn finite_graph_neighbors() -> @kernel.Thm
+
+pub fn finite_graph_rotation_face_vertices() -> @kernel.Thm
+
+pub fn finite_graph_two_distinct_neighbors_card() -> @kernel.Thm
+
+pub fn finite_maximal_element() -> @kernel.Thm
+
+pub fn finite_outgoing_darts() -> @kernel.Thm
+
+pub fn finite_permutation_one_orbit_transitive() -> @kernel.Thm
+
+pub fn finite_permutation_orbit() -> @kernel.Thm
+
+pub fn finite_permutation_orbit_successor_eq() -> @kernel.Thm
+
+pub fn finite_permutation_orbits() -> @kernel.Thm
+
+pub fn finite_permutes_least_period() -> @kernel.Thm
+
+pub fn finite_permutes_periodic() -> @kernel.Thm
+
+pub fn finite_plane_graph_face_vertices() -> @kernel.Thm
+
+pub fn finite_plane_graph_incident_faces() -> @kernel.Thm
+
+pub fn finite_relation_path() -> @kernel.Thm
+
+pub fn finite_relation_path_append() -> @kernel.Thm
+
+pub fn finite_relation_path_coverage_card() -> @kernel.Thm
+
+pub fn finite_relation_path_cyclic_chain() -> @kernel.Thm
+
+pub fn finite_relation_path_cyclic_offset() -> @kernel.Thm
+
+pub fn finite_relation_path_endpoints_related() -> @kernel.Thm
+
+pub fn finite_relation_path_endpoints_related_at_either() -> @kernel.Thm
+
+pub fn finite_relation_path_endpoints_related_at_first() -> @kernel.Thm
+
+pub fn finite_relation_path_length_le() -> @kernel.Thm
+
+pub fn finite_relation_path_prepend() -> @kernel.Thm
+
+pub fn finite_relation_path_reverse() -> @kernel.Thm
+
+pub fn finite_relative_rooted_edge_vertices() -> @kernel.Thm
+
+pub fn finite_rooted_edge_set() -> @kernel.Thm
+
+pub fn finite_rooted_edge_vertices() -> @kernel.Thm
+
+pub fn finite_rotation_split_edges() -> @kernel.Thm
+
+pub fn finite_rotation_split_vertices() -> @kernel.Thm
+
+pub fn finite_simple_complete_bipartite_graph() -> @kernel.Thm
+
+pub fn finite_simple_complete_graph() -> @kernel.Thm
+
+pub fn finite_simple_graph() -> @kernel.Thm
+
+pub fn finite_simple_graph_adjacent_separator_component() -> @kernel.Thm
+
+pub fn finite_simple_graph_branch_split() -> @kernel.Thm
+
+pub fn finite_simple_graph_card_4_euler_planar() -> @kernel.Thm
+
+pub fn finite_simple_graph_card_le_2_embedding() -> @kernel.Thm
+
+pub fn finite_simple_graph_card_le_2_imp_straight_line_planar() -> @kernel.Thm
+
+pub fn finite_simple_graph_card_le_3_euler_planar() -> @kernel.Thm
+
+pub fn finite_simple_graph_component() -> @kernel.Thm
+
+pub fn finite_simple_graph_contract() -> @kernel.Thm
+
+pub fn finite_simple_graph_cycle_vertices_subset() -> @kernel.Thm
+
+pub fn finite_simple_graph_cyclic() -> @kernel.Thm
+
+pub fn finite_simple_graph_dart() -> @kernel.Thm
+
+pub fn finite_simple_graph_dart_fst() -> @kernel.Thm
+
+pub fn finite_simple_graph_delete_edge() -> @kernel.Thm
+
+pub fn finite_simple_graph_delete_vertex_edges() -> @kernel.Thm
+
+pub fn finite_simple_graph_delete_vertex_edges_subset() -> @kernel.Thm
+
+pub fn finite_simple_graph_disjoint_darts() -> @kernel.Thm
+
+pub fn finite_simple_graph_disjoint_edges() -> @kernel.Thm
+
+pub fn finite_simple_graph_edge() -> @kernel.Thm
+
+pub fn finite_simple_graph_edge_component() -> @kernel.Thm
+
+pub fn finite_simple_graph_edge_darts() -> @kernel.Thm
+
+pub fn finite_simple_graph_edge_delete_nonempty_pair_proper() -> @kernel.Thm
+
+pub fn finite_simple_graph_edge_delete_pair_cases() -> @kernel.Thm
+
+pub fn finite_simple_graph_edge_eq_of_members() -> @kernel.Thm
+
+pub fn finite_simple_graph_edge_subdivision() -> @kernel.Thm
+
+pub fn finite_simple_graph_edge_subset() -> @kernel.Thm
+
+pub fn finite_simple_graph_edge_subset_component_union() -> @kernel.Thm
+
+pub fn finite_simple_graph_edge_subset_eq() -> @kernel.Thm
+
+pub fn finite_simple_graph_edge_through_member() -> @kernel.Thm
+
+pub fn finite_simple_graph_edge_through_vertex() -> @kernel.Thm
+
+pub fn finite_simple_graph_edge_vertices() -> @kernel.Thm
+
+pub fn finite_simple_graph_endpoint_functions() -> @kernel.Thm
+
+pub fn finite_simple_graph_eq() -> @kernel.Thm
+
+pub fn finite_simple_graph_fresh_edge() -> @kernel.Thm
+
+pub fn finite_simple_graph_fresh_no_edge() -> @kernel.Thm
+
+pub fn finite_simple_graph_handshaking() -> @kernel.Thm
+
+pub fn finite_simple_graph_has_rotation() -> @kernel.Thm
+
+pub fn finite_simple_graph_image() -> @kernel.Thm
+
+pub fn finite_simple_graph_image_inj() -> @kernel.Thm
+
+pub fn finite_simple_graph_incident_edge() -> @kernel.Thm
+
+pub fn finite_simple_graph_induced_subgraph() -> @kernel.Thm
+
+pub fn finite_simple_graph_induced_subgraph_self() -> @kernel.Thm
+
+pub fn finite_simple_graph_insert_edge() -> @kernel.Thm
+
+pub fn finite_simple_graph_insert_pendant() -> @kernel.Thm
+
+pub fn finite_simple_graph_insert_star_card() -> @kernel.Thm
+
+pub fn finite_simple_graph_insert_star_delete() -> @kernel.Thm
+
+pub fn finite_simple_graph_insert_star_neighbors() -> @kernel.Thm
+
+pub fn finite_simple_graph_insert_vertex_star() -> @kernel.Thm
+
+pub fn finite_simple_graph_kuratowski_free_euler_planar() -> @kernel.Thm
+
+pub fn finite_simple_graph_maximal_adjacent_separator_component() -> @kernel.Thm
+
+pub fn finite_simple_graph_neighbor() -> @kernel.Thm
+
+pub fn finite_simple_graph_neighbors_subset_delete() -> @kernel.Thm
+
+pub fn finite_simple_graph_nonempty_edge_has_vertex() -> @kernel.Thm
+
+pub fn finite_simple_graph_pendant_delete_edge() -> @kernel.Thm
+
+pub fn finite_simple_graph_pendant_remainder() -> @kernel.Thm
+
+pub fn finite_simple_graph_rotation_split() -> @kernel.Thm
+
+pub fn finite_simple_graph_shared_darts() -> @kernel.Thm
+
+pub fn finite_simple_graph_shared_edge_distinct() -> @kernel.Thm
+
+pub fn finite_simple_graph_shared_edge_intersection() -> @kernel.Thm
+
+pub fn finite_simple_graph_shared_outgoing_left() -> @kernel.Thm
+
+pub fn finite_simple_graph_shared_outgoing_right() -> @kernel.Thm
+
+pub fn finite_simple_graph_single_edge() -> @kernel.Thm
+
+pub fn finite_simple_graph_singleton_edges_empty() -> @kernel.Thm
+
+pub fn finite_simple_graph_singleton_inter_darts_disjoint() -> @kernel.Thm
+
+pub fn finite_simple_graph_singleton_inter_darts_shared_tail() -> @kernel.Thm
+
+pub fn finite_simple_graph_singleton_inter_edges_disjoint() -> @kernel.Thm
+
+pub fn finite_simple_graph_split_card() -> @kernel.Thm
+
+pub fn finite_simple_graph_subdivided_edge() -> @kernel.Thm
+
+pub fn finite_simple_graph_subset_edges() -> @kernel.Thm
+
+pub fn finite_simple_graph_triangular_cycle_recursive() -> @kernel.Thm
+
+pub fn finite_simple_graph_two_incident_edges_neighbors() -> @kernel.Thm
+
+pub fn finite_simple_graph_union() -> @kernel.Thm
+
+pub fn finite_small_subset_split() -> @kernel.Thm
+
+pub fn finite_transitive_permutation_cycle() -> @kernel.Thm
+
+pub fn five_distinct_graph_facts() -> @kernel.Thm
+
+pub fn four_distinct_graph_facts() -> @kernel.Thm
+
+pub fn four_indexed_paths_subset_cyclic_k4_edges() -> @kernel.Thm
+
+pub fn four_path_edges() -> @kernel.Thm
+
+pub fn four_path_edges_contain_paths() -> @kernel.Thm
+
+pub fn four_path_extension_edges() -> @kernel.Thm
+
+pub fn four_path_extension_edges_subset() -> @kernel.Thm
+
+pub fn four_path_extension_vertices() -> @kernel.Thm
+
+pub fn four_path_vertices() -> @kernel.Thm
+
+pub fn four_vertex_split_edges_distinct() -> @kernel.Thm
+
+pub fn frontier_point_of_subset_in_closure() -> @kernel.Thm
+
+pub fn fst_inj_on_pair_false_image() -> @kernel.Thm
+
+pub fn fst_reverse_dart() -> @kernel.Thm
+
+pub fn fst_rotation_split_dart() -> @kernel.Thm
+
+pub fn fst_rotation_split_vertex() -> @kernel.Thm
+
+pub fn fst_swap_same() -> @kernel.Thm
+
+pub fn graph_adjacent_separator_component() -> @kernel.Thm
+
+pub fn graph_adjacent_separator_component_data() -> @kernel.Thm
+
+pub fn graph_branch_model() -> @kernel.Thm
+
+pub fn graph_branch_model_compose() -> @kernel.Thm
+
+pub fn graph_branch_model_cong() -> @kernel.Thm
+
+pub fn graph_branch_model_contract() -> @kernel.Thm
+
+pub fn graph_branch_model_contract_source() -> @kernel.Thm
+
+pub fn graph_branch_model_image() -> @kernel.Thm
+
+pub fn graph_branch_model_image_eq() -> @kernel.Thm
+
+pub fn graph_branch_model_image_v1() -> @kernel.Thm
+
+pub fn graph_branch_model_imp_minor() -> @kernel.Thm
+
+pub fn graph_branch_model_refl() -> @kernel.Thm
+
+pub fn graph_branch_model_restrict() -> @kernel.Thm
+
+pub fn graph_branch_model_subgraph() -> @kernel.Thm
+
+pub fn graph_branch_split_edges() -> @kernel.Thm
+
+pub fn graph_branch_split_edges_subdivide_away() -> @kernel.Thm
+
+pub fn graph_branch_split_edges_subdivide_incident_selected() -> @kernel.Thm
+
+pub fn graph_branch_split_edges_subdivide_incident_unselected() -> @kernel.Thm
+
+pub fn graph_component() -> @kernel.Thm
+
+pub fn graph_component_add_adjacent_pair_connected() -> @kernel.Thm
+
+pub fn graph_component_add_vertex_connected() -> @kernel.Thm
+
+pub fn graph_component_closed() -> @kernel.Thm
+
+pub fn graph_component_edges() -> @kernel.Thm
+
+pub fn graph_component_edges_connected() -> @kernel.Thm
+
+pub fn graph_component_edges_eq() -> @kernel.Thm
+
+pub fn graph_component_edges_insert_bridge_merged() -> @kernel.Thm
+
+pub fn graph_component_edges_insert_bridge_outside() -> @kernel.Thm
+
+pub fn graph_component_edges_mono_induced() -> @kernel.Thm
+
+pub fn graph_component_edges_subset() -> @kernel.Thm
+
+pub fn graph_component_eq() -> @kernel.Thm
+
+pub fn graph_component_insert_bridge() -> @kernel.Thm
+
+pub fn graph_component_insert_bridge_merged() -> @kernel.Thm
+
+pub fn graph_component_insert_bridge_outside() -> @kernel.Thm
+
+pub fn graph_component_insert_bridge_outside_closed() -> @kernel.Thm
+
+pub fn graph_component_mono() -> @kernel.Thm
+
+pub fn graph_component_refl() -> @kernel.Thm
+
+pub fn graph_component_subset() -> @kernel.Thm
+
+pub fn graph_components_disjoint() -> @kernel.Thm
+
+pub fn graph_contract_branch_sets() -> @kernel.Thm
+
+pub fn graph_contract_complete_graph_5_subdivision_lift_k33() -> @kernel.Thm
+
+pub fn graph_contract_edge_homomorphism() -> @kernel.Thm
+
+pub fn graph_contract_edge_incident_spoke() -> @kernel.Thm
+
+pub fn graph_contract_edge_spoke_boundary_index() -> @kernel.Thm
+
+pub fn graph_contract_edge_spoke_forward() -> @kernel.Thm
+
+pub fn graph_contract_edges() -> @kernel.Thm
+
+pub fn graph_contract_edges_induced_subset() -> @kernel.Thm
+
+pub fn graph_contract_edges_old_subset() -> @kernel.Thm
+
+pub fn graph_contract_subdivision_lift_complement_one_swap() -> @kernel.Thm
+
+pub fn graph_contract_subdivision_lift_empty() -> @kernel.Thm
+
+pub fn graph_contract_subdivision_lift_full_swap() -> @kernel.Thm
+
+pub fn graph_contract_subdivision_lift_one() -> @kernel.Thm
+
+pub fn graph_contract_subdivision_lift_small_degree() -> @kernel.Thm
+
+pub fn graph_contract_subgraph_branch_split_edges() -> @kernel.Thm
+
+pub fn graph_contract_subgraph_edge_away() -> @kernel.Thm
+
+pub fn graph_contract_subgraph_lift_empty_edges() -> @kernel.Thm
+
+pub fn graph_contract_subgraph_lift_full_swap_edges() -> @kernel.Thm
+
+pub fn graph_contract_subgraph_lift_one_edges() -> @kernel.Thm
+
+pub fn graph_contract_subgraph_missing_edge() -> @kernel.Thm
+
+pub fn graph_contract_subgraph_split_data() -> @kernel.Thm
+
+pub fn graph_contract_subgraph_swap_edges() -> @kernel.Thm
+
+pub fn graph_contract_vertex() -> @kernel.Thm
+
+pub fn graph_contract_vertex_away() -> @kernel.Thm
+
+pub fn graph_contract_vertex_branch_member() -> @kernel.Thm
+
+pub fn graph_contract_vertex_left() -> @kernel.Thm
+
+pub fn graph_dart_ne_fresh_vertex() -> @kernel.Thm
+
+pub fn graph_darts() -> @kernel.Thm
+
+pub fn graph_darts_delete_edge() -> @kernel.Thm
+
+pub fn graph_darts_insert_edge() -> @kernel.Thm
+
+pub fn graph_darts_inter() -> @kernel.Thm
+
+pub fn graph_darts_mono() -> @kernel.Thm
+
+pub fn graph_darts_reverse() -> @kernel.Thm
+
+pub fn graph_darts_rotation_split_edges() -> @kernel.Thm
+
+pub fn graph_darts_single_edge() -> @kernel.Thm
+
+pub fn graph_darts_subdivision_no_old_edge() -> @kernel.Thm
+
+pub fn graph_darts_subdivision_retained_endpoints() -> @kernel.Thm
+
+pub fn graph_darts_subdivision_tail_swap() -> @kernel.Thm
+
+pub fn graph_darts_subset_cross() -> @kernel.Thm
+
+pub fn graph_darts_union() -> @kernel.Thm
+
+pub fn graph_darts_unions_edge_darts() -> @kernel.Thm
+
+pub fn graph_darts_unions_outgoing_darts() -> @kernel.Thm
+
+pub fn graph_degenerate() -> @kernel.Thm
+
+pub fn graph_degenerate_mono() -> @kernel.Thm
+
+pub fn graph_degree() -> @kernel.Thm
+
+pub fn graph_degree_induced_subgraph() -> @kernel.Thm
+
+pub fn graph_degree_le_card() -> @kernel.Thm
+
+pub fn graph_degree_le_card_delete() -> @kernel.Thm
+
+pub fn graph_degree_outgoing_darts() -> @kernel.Thm
+
+pub fn graph_degree_outside() -> @kernel.Thm
+
+pub fn graph_delete_rotation() -> @kernel.Thm
+
+pub fn graph_delete_rotation_permutes() -> @kernel.Thm
+
+pub fn graph_delete_rotation_tail() -> @kernel.Thm
+
+pub fn graph_delete_rotation_v1() -> @kernel.Thm
+
+pub fn graph_deleted_component_subset() -> @kernel.Thm
+
+pub fn graph_edge_connected_pair() -> @kernel.Thm
+
+pub fn graph_edge_imp_reachable() -> @kernel.Thm
+
+pub fn graph_edge_subdivision() -> @kernel.Thm
+
+pub fn graph_edge_subdivision_branch_split() -> @kernel.Thm
+
+pub fn graph_edge_subdivision_branch_split_incident() -> @kernel.Thm
+
+pub fn graph_edge_subdivision_contract() -> @kernel.Thm
+
+pub fn graph_edge_subdivision_image() -> @kernel.Thm
+
+pub fn graph_edge_subdivision_imp_minor() -> @kernel.Thm
+
+pub fn graph_edge_subdivision_new_vertex_degree() -> @kernel.Thm
+
+pub fn graph_edge_subdivision_new_vertex_neighbors() -> @kernel.Thm
+
+pub fn graph_edge_subdivision_old_vertex_degree() -> @kernel.Thm
+
+pub fn graph_edge_subdivision_old_vertex_neighbors() -> @kernel.Thm
+
+pub fn graph_edge_subdivision_source_subset() -> @kernel.Thm
+
+pub fn graph_euler_formula() -> @kernel.Thm
+
+pub fn graph_euler_formula_delete_pendant_counts() -> @kernel.Thm
+
+pub fn graph_euler_formula_eq_saturates_bound() -> @kernel.Thm
+
+pub fn graph_euler_formula_insert_edge() -> @kernel.Thm
+
+pub fn graph_euler_formula_insert_pendant() -> @kernel.Thm
+
+pub fn graph_euler_formula_single_edge() -> @kernel.Thm
+
+pub fn graph_face() -> @kernel.Thm
+
+pub fn graph_face_as_permutation_orbit() -> @kernel.Thm
+
+pub fn graph_face_cyclic_walk() -> @kernel.Thm
+
+pub fn graph_face_delete_consecutive_edge_preserves_cofacial() -> @kernel.Thm
+
+pub fn graph_face_delete_edge_merges_distinct_faces() -> @kernel.Thm
+
+pub fn graph_face_delete_edge_preserves_cofacial() -> @kernel.Thm
+
+pub fn graph_face_eq() -> @kernel.Thm
+
+pub fn graph_face_imp_cyclic_face_successors() -> @kernel.Thm
+
+pub fn graph_face_refl() -> @kernel.Thm
+
+pub fn graph_face_reverse_rotation_orbit_count() -> @kernel.Thm
+
+pub fn graph_face_single_edge() -> @kernel.Thm
+
+pub fn graph_face_subset_complete_face_darts() -> @kernel.Thm
+
+pub fn graph_face_subset_darts() -> @kernel.Thm
+
+pub fn graph_face_successor() -> @kernel.Thm
+
+pub fn graph_face_successor_dart() -> @kernel.Thm
+
+pub fn graph_face_successor_dart_disjoint_union() -> @kernel.Thm
+
+pub fn graph_face_successor_delete_consecutive_edge_as_delete_two() -> @kernel.Thm
+
+pub fn graph_face_successor_delete_edge() -> @kernel.Thm
+
+pub fn graph_face_successor_delete_edge_as_cross_delete() -> @kernel.Thm
+
+pub fn graph_face_successor_delete_edge_forward_splice() -> @kernel.Thm
+
+pub fn graph_face_successor_delete_edge_forward_splice_value() -> @kernel.Thm
+
+pub fn graph_face_successor_delete_edge_reverse_splice() -> @kernel.Thm
+
+pub fn graph_face_successor_delete_edge_reverse_splice_value() -> @kernel.Thm
+
+pub fn graph_face_successor_delete_edge_unchanged() -> @kernel.Thm
+
+pub fn graph_face_successor_delete_edge_unchanged_value() -> @kernel.Thm
+
+pub fn graph_face_successor_disjoint_union() -> @kernel.Thm
+
+pub fn graph_face_successor_image() -> @kernel.Thm
+
+pub fn graph_face_successor_in() -> @kernel.Thm
+
+pub fn graph_face_successor_in_face() -> @kernel.Thm
+
+pub fn graph_face_successor_insert_edge() -> @kernel.Thm
+
+pub fn graph_face_successor_insert_edge_unchanged() -> @kernel.Thm
+
+pub fn graph_face_successor_insert_edge_values() -> @kernel.Thm
+
+pub fn graph_face_successor_insert_pendant() -> @kernel.Thm
+
+pub fn graph_face_successor_insert_pendant_unchanged() -> @kernel.Thm
+
+pub fn graph_face_successor_insert_pendant_values() -> @kernel.Thm
+
+pub fn graph_face_successor_no_fixedpoint() -> @kernel.Thm
+
+pub fn graph_face_successor_pair() -> @kernel.Thm
+
+pub fn graph_face_successor_pendant() -> @kernel.Thm
+
+pub fn graph_face_successor_permutes() -> @kernel.Thm
+
+pub fn graph_face_successor_rotation_split() -> @kernel.Thm
+
+pub fn graph_face_successor_single_edge() -> @kernel.Thm
+
+pub fn graph_face_successor_split() -> @kernel.Thm
+
+pub fn graph_face_successor_split_last_boundary() -> @kernel.Thm
+
+pub fn graph_face_successor_split_left() -> @kernel.Thm
+
+pub fn graph_face_successor_split_left_boundary() -> @kernel.Thm
+
+pub fn graph_face_successor_split_right() -> @kernel.Thm
+
+pub fn graph_face_successor_split_right_boundary() -> @kernel.Thm
+
+pub fn graph_face_successor_square_fixed() -> @kernel.Thm
+
+pub fn graph_face_successor_square_no_fixedpoint_connected() -> @kernel.Thm
+
+pub fn graph_face_successor_square_no_fixedpoint_connected_dart() -> @kernel.Thm
+
+pub fn graph_face_successor_subdivision_values() -> @kernel.Thm
+
+pub fn graph_face_successor_suppress_conjugate() -> @kernel.Thm
+
+pub fn graph_face_successor_suppress_conjugate_formula() -> @kernel.Thm
+
+pub fn graph_face_successor_suppress_delete_two() -> @kernel.Thm
+
+pub fn graph_face_successor_tail() -> @kernel.Thm
+
+pub fn graph_face_successor_triangle_outer() -> @kernel.Thm
+
+pub fn graph_face_sym() -> @kernel.Thm
+
+pub fn graph_face_tails_eq_vertices() -> @kernel.Thm
+
+pub fn graph_face_trans() -> @kernel.Thm
+
+pub fn graph_face_triangle_outer() -> @kernel.Thm
+
+pub fn graph_faces() -> @kernel.Thm
+
+pub fn graph_faces_as_permutation_orbits() -> @kernel.Thm
+
+pub fn graph_faces_single_edge() -> @kernel.Thm
+
+pub fn graph_kuratowski_free_rotated_spoke_patterns() -> @kernel.Thm
+
+pub fn graph_kuratowski_free_sparse_spoke_interval() -> @kernel.Thm
+
+pub fn graph_kuratowski_free_spoke_interval() -> @kernel.Thm
+
+pub fn graph_kuratowski_free_spoke_patterns() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_alternating_spokes() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_card_at_least_5() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_common_spokes() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_contract_imp() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_four_alternating_spokes() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_imp_wagner() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_k33() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_k33_subgraph() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_k33_swap() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_k5() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_k5_subgraph() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_k5_swap() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_mono() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_three_common_spokes() -> @kernel.Thm
+
+pub fn graph_kuratowski_obstruction_transfer_across_inserted_edge() -> @kernel.Thm
+
+pub fn graph_map_faces() -> @kernel.Thm
+
+pub fn graph_minor_branch_model() -> @kernel.Thm
+
+pub fn graph_minor_branch_model_data() -> @kernel.Thm
+
+pub fn graph_minor_cases() -> @kernel.Thm
+
+pub fn graph_minor_contract() -> @kernel.Thm
+
+pub fn graph_minor_data() -> @kernel.Thm
+
+pub fn graph_minor_finite_simple() -> @kernel.Thm
+
+pub fn graph_minor_image() -> @kernel.Thm
+
+pub fn graph_minor_image_eq() -> @kernel.Thm
+
+pub fn graph_minor_imp_branch_model() -> @kernel.Thm
+
+pub fn graph_minor_induct() -> @kernel.Thm
+
+pub fn graph_minor_kuratowski_obstruction() -> @kernel.Thm
+
+pub fn graph_minor_refl() -> @kernel.Thm
+
+pub fn graph_minor_rules() -> @kernel.Thm
+
+pub fn graph_minor_subgraph() -> @kernel.Thm
+
+pub fn graph_minor_trans() -> @kernel.Thm
+
+pub fn graph_neighbors() -> @kernel.Thm
+
+pub fn graph_neighbors_as_incident_edge_image() -> @kernel.Thm
+
+pub fn graph_neighbors_complete_bipartite() -> @kernel.Thm
+
+pub fn graph_neighbors_complete_graph() -> @kernel.Thm
+
+pub fn graph_neighbors_image_swap() -> @kernel.Thm
+
+pub fn graph_neighbors_induced_subgraph() -> @kernel.Thm
+
+pub fn graph_neighbors_subset_delete() -> @kernel.Thm
+
+pub fn graph_neighbors_swap_fresh() -> @kernel.Thm
+
+pub fn graph_neighbors_sym() -> @kernel.Thm
+
+pub fn graph_outgoing_dart_neighbor_card_pos() -> @kernel.Thm
+
+pub fn graph_reachable() -> @kernel.Thm
+
+pub fn graph_reachable_chain_from_first() -> @kernel.Thm
+
+pub fn graph_reachable_closed() -> @kernel.Thm
+
+pub fn graph_reachable_closed_set() -> @kernel.Thm
+
+pub fn graph_reachable_delete_edge() -> @kernel.Thm
+
+pub fn graph_reachable_empty() -> @kernel.Thm
+
+pub fn graph_reachable_homomorphism() -> @kernel.Thm
+
+pub fn graph_reachable_imp_simple_indexed_path() -> @kernel.Thm
+
+pub fn graph_reachable_imp_simple_indexed_path_in() -> @kernel.Thm
+
+pub fn graph_reachable_mono() -> @kernel.Thm
+
+pub fn graph_reachable_nontrivial_vertices() -> @kernel.Thm
+
+pub fn graph_reachable_refl() -> @kernel.Thm
+
+pub fn graph_reachable_sym() -> @kernel.Thm
+
+pub fn graph_reachable_trans() -> @kernel.Thm
+
+pub fn graph_reachable_vertex() -> @kernel.Thm
+
+pub fn graph_reachable_vertices() -> @kernel.Thm
+
+pub fn graph_reverse_dart() -> @kernel.Thm
+
+pub fn graph_reverse_dart_extension_orbit_bound() -> @kernel.Thm
+
+pub fn graph_reverse_dart_in() -> @kernel.Thm
+
+pub fn graph_reverse_dart_insert_edge() -> @kernel.Thm
+
+pub fn graph_reverse_dart_involution() -> @kernel.Thm
+
+pub fn graph_reverse_dart_no_fixedpoint() -> @kernel.Thm
+
+pub fn graph_reverse_dart_out() -> @kernel.Thm
+
+pub fn graph_reverse_dart_permutes() -> @kernel.Thm
+
+pub fn graph_reverse_dart_preserves_vertex_set() -> @kernel.Thm
+
+pub fn graph_reverse_dart_subset_permutes() -> @kernel.Thm
+
+pub fn graph_reverse_dart_union_orbit_bound() -> @kernel.Thm
+
+pub fn graph_reverse_rotation_permutes() -> @kernel.Thm
+
+pub fn graph_rotation() -> @kernel.Thm
+
+pub fn graph_rotation_card_faces_one_cofacial() -> @kernel.Thm
+
+pub fn graph_rotation_disjoint_union() -> @kernel.Thm
+
+pub fn graph_rotation_face_tails_eq_vertices() -> @kernel.Thm
+
+pub fn graph_rotation_face_vertices() -> @kernel.Thm
+
+pub fn graph_rotation_face_vertices_subset() -> @kernel.Thm
+
+pub fn graph_rotation_fixed_dart_at_tail() -> @kernel.Thm
+
+pub fn graph_rotation_image_outgoing_darts() -> @kernel.Thm
+
+pub fn graph_rotation_in() -> @kernel.Thm
+
+pub fn graph_rotation_insert_edge() -> @kernel.Thm
+
+pub fn graph_rotation_insert_pendant() -> @kernel.Thm
+
+pub fn graph_rotation_iter() -> @kernel.Thm
+
+pub fn graph_rotation_neighbor_enumeration() -> @kernel.Thm
+
+pub fn graph_rotation_neighbor_enumeration_phased() -> @kernel.Thm
+
+pub fn graph_rotation_neighbor_enumeration_steps() -> @kernel.Thm
+
+pub fn graph_rotation_of_restricted_outgoing() -> @kernel.Thm
+
+pub fn graph_rotation_orbit() -> @kernel.Thm
+
+pub fn graph_rotation_orbit_count() -> @kernel.Thm
+
+pub fn graph_rotation_orbit_outgoing_darts() -> @kernel.Thm
+
+pub fn graph_rotation_orbits_as_outgoing_darts() -> @kernel.Thm
+
+pub fn graph_rotation_permutes() -> @kernel.Thm
+
+pub fn graph_rotation_restricted_outgoing_nonfixed() -> @kernel.Thm
+
+pub fn graph_rotation_restricted_outgoing_permutes() -> @kernel.Thm
+
+pub fn graph_rotation_restricted_outgoing_transitive() -> @kernel.Thm
+
+pub fn graph_rotation_restricted_tail() -> @kernel.Thm
+
+pub fn graph_rotation_restricted_transitive() -> @kernel.Thm
+
+pub fn graph_rotation_rotation_split() -> @kernel.Thm
+
+pub fn graph_rotation_same_tail_orbit() -> @kernel.Thm
+
+pub fn graph_rotation_single_edge() -> @kernel.Thm
+
+pub fn graph_rotation_singleton_amalgamation() -> @kernel.Thm
+
+pub fn graph_rotation_subdivision_retained_darts_invariant() -> @kernel.Thm
+
+pub fn graph_rotation_subdivision_vertex_values() -> @kernel.Thm
+
+pub fn graph_rotation_successive_heads_cofacial() -> @kernel.Thm
+
+pub fn graph_rotation_successive_neighbor_face_of_triangular_face() -> @kernel.Thm
+
+pub fn graph_rotation_successive_neighbor_triangular_face() -> @kernel.Thm
+
+pub fn graph_rotation_suppress_finish_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn graph_rotation_suppress_permutation_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn graph_rotation_suppress_setup_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn graph_rotation_suppress_subdivision() -> @kernel.Thm
+
+pub fn graph_rotation_suppress_tail_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn graph_rotation_suppress_transitive_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn graph_rotation_suppress_transport_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn graph_rotation_tail() -> @kernel.Thm
+
+pub fn graph_rotation_tail_all() -> @kernel.Thm
+
+pub fn graph_separator_component_complement_connected() -> @kernel.Thm
+
+pub fn graph_separator_component_edge_decomposition() -> @kernel.Thm
+
+pub fn graph_split_dart_partition() -> @kernel.Thm
+
+pub fn graph_split_face_permutation() -> @kernel.Thm
+
+pub fn graph_split_face_permutation_left() -> @kernel.Thm
+
+pub fn graph_split_face_permutation_permutes() -> @kernel.Thm
+
+pub fn graph_split_face_permutation_right() -> @kernel.Thm
+
+pub fn graph_split_face_permutation_swap_right() -> @kernel.Thm
+
+pub fn graph_split_local_rotation() -> @kernel.Thm
+
+pub fn graph_split_local_rotation_left_at_left() -> @kernel.Thm
+
+pub fn graph_split_local_rotation_left_at_right() -> @kernel.Thm
+
+pub fn graph_split_local_rotation_left_away() -> @kernel.Thm
+
+pub fn graph_split_local_rotation_permutes() -> @kernel.Thm
+
+pub fn graph_split_local_rotation_right_at_left() -> @kernel.Thm
+
+pub fn graph_split_local_rotation_right_at_right() -> @kernel.Thm
+
+pub fn graph_split_local_rotation_right_away() -> @kernel.Thm
+
+pub fn graph_split_local_rotation_transitive() -> @kernel.Thm
+
+pub fn graph_split_reverse_left_not_right() -> @kernel.Thm
+
+pub fn graph_split_reverse_right_not_left() -> @kernel.Thm
+
+pub fn graph_split_rotation() -> @kernel.Thm
+
+pub fn graph_split_rotation_v1() -> @kernel.Thm
+
+pub fn graph_subdivision_branch_split() -> @kernel.Thm
+
+pub fn graph_subdivision_cases() -> @kernel.Thm
+
+pub fn graph_subdivision_edges_subset_induced() -> @kernel.Thm
+
+pub fn graph_subdivision_extend_edge_by_indexed_path() -> @kernel.Thm
+
+pub fn graph_subdivision_extend_edge_by_indexed_path_length() -> @kernel.Thm
+
+pub fn graph_subdivision_extend_four_cycle_edges_by_paths() -> @kernel.Thm
+
+pub fn graph_subdivision_extend_three_cycle_edges_by_paths() -> @kernel.Thm
+
+pub fn graph_subdivision_finite_simple() -> @kernel.Thm
+
+pub fn graph_subdivision_image() -> @kernel.Thm
+
+pub fn graph_subdivision_imp_minor() -> @kernel.Thm
+
+pub fn graph_subdivision_induct() -> @kernel.Thm
+
+pub fn graph_subdivision_internal_vertex_degree() -> @kernel.Thm
+
+pub fn graph_subdivision_k4_from_four_paths() -> @kernel.Thm
+
+pub fn graph_subdivision_nonsource_vertex_degree_le_2() -> @kernel.Thm
+
+pub fn graph_subdivision_replace_edge_by_indexed_path() -> @kernel.Thm
+
+pub fn graph_subdivision_replace_edge_by_indexed_path_length() -> @kernel.Thm
+
+pub fn graph_subdivision_rules() -> @kernel.Thm
+
+pub fn graph_subdivision_source_subset() -> @kernel.Thm
+
+pub fn graph_subdivision_source_vertex_degree() -> @kernel.Thm
+
+pub fn graph_subdivision_step() -> @kernel.Thm
+
+pub fn graph_subdivision_subgraph() -> @kernel.Thm
+
+pub fn graph_subdivision_swap() -> @kernel.Thm
+
+pub fn graph_subdivision_trans() -> @kernel.Thm
+
+pub fn graph_subdivision_transfer_across_inserted_edge() -> @kernel.Thm
+
+pub fn graph_subdivision_vertex_degrees() -> @kernel.Thm
+
+pub fn graph_subdivision_vertex_structure() -> @kernel.Thm
+
+pub fn graph_subgraph_imp_topological_subgraph() -> @kernel.Thm
+
+pub fn graph_suppress_subdivision_preserves_cofacial_darts() -> @kernel.Thm
+
+pub fn graph_suppress_subdivision_preserves_cofacial_set() -> @kernel.Thm
+
+pub fn graph_suppress_subdivision_rotation() -> @kernel.Thm
+
+pub fn graph_topological_subgraph() -> @kernel.Thm
+
+pub fn graph_topological_subgraph_imp_minor() -> @kernel.Thm
+
+pub fn graph_vertex_separator() -> @kernel.Thm
+
+pub fn graph_vertex_separator_component_proper() -> @kernel.Thm
+
+pub fn graph_vertex_separator_component_witnesses() -> @kernel.Thm
+
+pub fn graph_wagner_branch_obstruction() -> @kernel.Thm
+
+pub fn graph_wagner_branch_obstruction_eq() -> @kernel.Thm
+
+pub fn graph_wagner_branch_obstruction_imp_wagner() -> @kernel.Thm
+
+pub fn graph_wagner_obstruction() -> @kernel.Thm
+
+pub fn graph_wagner_obstruction_eq_kuratowski() -> @kernel.Thm
+
+pub fn graph_wagner_obstruction_imp_branch_obstruction() -> @kernel.Thm
+
+pub fn graph_wagner_obstruction_imp_kuratowski() -> @kernel.Thm
+
+pub fn has_size_3_other() -> @kernel.Thm
+
+pub fn has_size_5_other_two() -> @kernel.Thm
+
+pub fn image_complete_bipartite_edges() -> @kernel.Thm
+
+pub fn image_complete_graph_edges_injective() -> @kernel.Thm
+
+pub fn image_edge_star_delete() -> @kernel.Thm
+
+pub fn image_fst_cyclic_darts() -> @kernel.Thm
+
+pub fn image_fst_pair_false() -> @kernel.Thm
+
+pub fn image_graph_contract_vertex() -> @kernel.Thm
+
+pub fn image_image_fst_pair_false() -> @kernel.Thm
+
+pub fn image_image_left_inverse() -> @kernel.Thm
+
+pub fn image_inter_inj_on() -> @kernel.Thm
+
+pub fn image_restricted_injective_eq() -> @kernel.Thm
+
+pub fn image_set_injective() -> @kernel.Thm
+
+pub fn image_star_image() -> @kernel.Thm
+
+pub fn image_subset_straight_edge() -> @kernel.Thm
+
+pub fn image_swap_fix_set() -> @kernel.Thm
+
+pub fn image_swap_replace() -> @kernel.Thm
+
+pub fn image_swap_replace_fresh() -> @kernel.Thm
+
+pub fn in_complete_bipartite_edges() -> @kernel.Thm
+
+pub fn in_complete_graph_edges() -> @kernel.Thm
+
+pub fn in_contract_split_side() -> @kernel.Thm
+
+pub fn in_convex_hull_supporting_hyperplane_ge() -> @kernel.Thm
+
+pub fn in_convex_hull_supporting_plane_orientation() -> @kernel.Thm
+
+pub fn in_cyclic_darts() -> @kernel.Thm
+
+pub fn in_cyclic_darts_cyclic_dart() -> @kernel.Thm
+
+pub fn in_cyclic_edges() -> @kernel.Thm
+
+pub fn in_cyclic_indices() -> @kernel.Thm
+
+pub fn in_cyclic_split_left_boundary_edges() -> @kernel.Thm
+
+pub fn in_cyclic_split_right_boundary_edges() -> @kernel.Thm
+
+pub fn in_cyclic_vertices() -> @kernel.Thm
+
+pub fn in_graph_branch_split_edges() -> @kernel.Thm
+
+pub fn in_graph_component() -> @kernel.Thm
+
+pub fn in_graph_component_edges() -> @kernel.Thm
+
+pub fn in_graph_contract_edges() -> @kernel.Thm
+
+pub fn in_graph_darts() -> @kernel.Thm
+
+pub fn in_graph_face() -> @kernel.Thm
+
+pub fn in_graph_faces() -> @kernel.Thm
+
+pub fn in_graph_neighbors() -> @kernel.Thm
+
+pub fn in_image_involution() -> @kernel.Thm
+
+pub fn in_indexed_path_edges() -> @kernel.Thm
+
+pub fn in_indexed_path_vertices() -> @kernel.Thm
+
+pub fn in_induced_subgraph_edges() -> @kernel.Thm
+
+pub fn in_open_unit_horizontal_segment() -> @kernel.Thm
+
+pub fn in_outgoing_darts() -> @kernel.Thm
+
+pub fn in_outgoing_darts_pair() -> @kernel.Thm
+
+pub fn in_permutation_orbit() -> @kernel.Thm
+
+pub fn in_permutation_orbits() -> @kernel.Thm
+
+pub fn in_unions_closure_inter() -> @kernel.Thm
+
+pub fn in_unit_horizontal_segment() -> @kernel.Thm
+
+pub fn incident_edges_equal_of_other_endpoint() -> @kernel.Thm
+
+pub fn indexed_closing_edges_subset_cyclic() -> @kernel.Thm
+
+pub fn indexed_closing_vertices_subset_cyclic() -> @kernel.Thm
+
+pub fn indexed_offset_edges_subset_cyclic() -> @kernel.Thm
+
+pub fn indexed_offset_vertices_subset_cyclic() -> @kernel.Thm
+
+pub fn indexed_path_avoids_other_branch_edge() -> @kernel.Thm
+
+pub fn indexed_path_edge_on_branch_vertices() -> @kernel.Thm
+
+pub fn indexed_path_edges() -> @kernel.Thm
+
+pub fn indexed_path_edges_0() -> @kernel.Thm
+
+pub fn indexed_path_edges_suc() -> @kernel.Thm
+
+pub fn indexed_path_vertices() -> @kernel.Thm
+
+pub fn indexed_path_vertices_0() -> @kernel.Thm
+
+pub fn indexed_path_vertices_suc() -> @kernel.Thm
+
+pub fn indexed_prefix_edges_subset_cyclic() -> @kernel.Thm
+
+pub fn indexed_prefix_vertices_subset_cyclic() -> @kernel.Thm
+
+pub fn induced_graph_contract_edges_away() -> @kernel.Thm
+
+pub fn induced_graph_contract_edges_delete_merged() -> @kernel.Thm
+
+pub fn induced_subgraph_edges() -> @kernel.Thm
+
+pub fn induced_subgraph_edges_contract_away_subset() -> @kernel.Thm
+
+pub fn induced_subgraph_edges_insert_deleted_pair() -> @kernel.Thm
+
+pub fn induced_subgraph_edges_insert_included() -> @kernel.Thm
+
+pub fn induced_subgraph_edges_mono() -> @kernel.Thm
+
+pub fn induced_subgraph_edges_mono_vertices() -> @kernel.Thm
+
+pub fn induced_subgraph_edges_subset() -> @kernel.Thm
+
+pub fn induced_subgraph_edges_union() -> @kernel.Thm
+
+pub fn induced_subgraph_edges_vertex_mono() -> @kernel.Thm
+
+pub fn inj_cyclic_delete_last() -> @kernel.Thm
+
+pub fn inj_cyclic_delete_last_imp_inj_chain() -> @kernel.Thm
+
+pub fn inj_cyclic_indices_3() -> @kernel.Thm
+
+pub fn inj_cyclic_indices_cong() -> @kernel.Thm
+
+pub fn inj_cyclic_indices_mono() -> @kernel.Thm
+
+pub fn inj_cyclic_indices_ne() -> @kernel.Thm
+
+pub fn inj_cyclic_offset() -> @kernel.Thm
+
+pub fn inj_cyclic_reverse() -> @kernel.Thm
+
+pub fn inj_on_compose() -> @kernel.Thm
+
+pub fn inj_on_subset() -> @kernel.Thm
+
+pub fn inj_union_straight_line_embeddings_along_edge() -> @kernel.Thm
+
+pub fn inter_edge_of_carrier_eq() -> @kernel.Thm
+
+pub fn inter_subset_carrier_eq() -> @kernel.Thm
+
+pub fn interior_union_eq_empty_left_closed() -> @kernel.Thm
+
+pub fn involution_conjugate_fst_transitive() -> @kernel.Thm
+
+pub fn involution_conjugate_reachable() -> @kernel.Thm
+
+pub fn involution_image_conjugate_permutation_orbit() -> @kernel.Thm
+
+pub fn involution_image_conjugate_permutation_orbits() -> @kernel.Thm
+
+pub fn involution_image_injective() -> @kernel.Thm
+
+pub fn involution_image_permutation_orbit() -> @kernel.Thm
+
+pub fn involution_image_permutation_orbits() -> @kernel.Thm
+
+pub fn involution_iter_swap_composition() -> @kernel.Thm
+
+pub fn iter_agrees_on() -> @kernel.Thm
+
+pub fn iter_conjugate_involution() -> @kernel.Thm
+
+pub fn iter_mod_periodic_point() -> @kernel.Thm
+
+pub fn jordan_outside_component_of_intermediate_carrier() -> @kernel.Thm
+
+pub fn k33_branch_model_obstructs_planarity() -> @kernel.Thm
+
+pub fn k5_branch_model_obstructs_planarity() -> @kernel.Thm
+
+pub fn kuratowski() -> @kernel.Thm
+
+pub fn kuratowski_alternating_edges() -> @kernel.Thm
+
+pub fn kuratowski_alternating_vertices() -> @kernel.Thm
+
+pub fn kuratowski_common_edges() -> @kernel.Thm
+
+pub fn kuratowski_common_vertices() -> @kernel.Thm
+
+pub fn kuratowski_euler() -> @kernel.Thm
+
+pub fn kuratowski_straight_line() -> @kernel.Thm
+
+pub fn linear_sparse_spoke_interval() -> @kernel.Thm
+
+pub fn linear_spoke_interval() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn local_half_ball_component_frontier() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_cyclic_darts_eq() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_delete_ear() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_delete_last() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_delete_last_boundary() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_delete_last_boundary_internal() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_delete_last_chordless() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_delete_last_chordless_internal() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_fan_remainder() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_imp_boundary() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_internal_cofacial_heads_adjacent() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_internal_face_vertices_card_eq_3() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_internal_face_vertices_card_le_3() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_internal_face_vertices_card_le_4() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_internal_face_vertices_clique() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_last_internal_neighbor_faces() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_last_neighbor_chain() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_last_neighbor_cycle() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_last_neighbor_faces() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_last_oriented_neighbor_path() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_offset() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_recursive_triangulated_disk() -> @kernel.Thm
+
+pub fn maximal_boundary_euler_rotation_triangle_high_degree_last() -> @kernel.Thm
+
+pub fn maximal_euler_planar_boundary_rotation() -> @kernel.Thm
+
+pub fn maximal_euler_planar_graph_extension() -> @kernel.Thm
+
+pub fn maximal_euler_planar_graph_extension_connected() -> @kernel.Thm
+
+pub fn maximal_euler_planar_rotation_cofacial_dart_heads_adjacent() -> @kernel.Thm
+
+pub fn maximal_euler_planar_rotation_extension() -> @kernel.Thm
+
+pub fn maximal_euler_planar_rotation_extension_connected() -> @kernel.Thm
+
+pub fn maximal_euler_planar_rotation_face_vertices_card_eq_3() -> @kernel.Thm
+
+pub fn maximal_euler_planar_rotation_face_vertices_card_le_3() -> @kernel.Thm
+
+pub fn maximal_euler_planar_rotation_face_vertices_card_le_4() -> @kernel.Thm
+
+pub fn maximal_euler_planar_rotation_face_vertices_clique() -> @kernel.Thm
+
+pub fn maximal_euler_planar_rotation_neighbor_cycle() -> @kernel.Thm
+
+pub fn maximal_euler_planar_rotation_nonempty_neighbor_cycle() -> @kernel.Thm
+
+pub fn maximal_euler_planar_rotation_oriented_neighbor_cycle() -> @kernel.Thm
+
+pub fn maximal_euler_planar_rotation_successive_neighbor_face() -> @kernel.Thm
+
+pub fn maximal_euler_planar_rotation_successive_neighbor_face_next() -> @kernel.Thm
+
+pub fn maximal_euler_planar_rotation_successive_neighbors_edge() -> @kernel.Thm
+
+pub fn maximal_euler_planar_rotation_triangular_boundary() -> @kernel.Thm
+
+pub fn maximal_kuratowski_free_graph_extension() -> @kernel.Thm
+
+pub fn maximal_planar_graph_card_3_recursive() -> @kernel.Thm
+
+pub fn maximal_planar_graph_cofacial_adjacent() -> @kernel.Thm
+
+pub fn maximal_planar_graph_edges_nonempty() -> @kernel.Thm
+
+pub fn maximal_planar_graph_every_face_triangular() -> @kernel.Thm
+
+pub fn maximal_planar_graph_every_face_triangular_cycle() -> @kernel.Thm
+
+pub fn maximal_planar_graph_extension() -> @kernel.Thm
+
+pub fn maximal_planar_graph_face_vertices_card_eq_3() -> @kernel.Thm
+
+pub fn maximal_planar_graph_face_vertices_card_le_3() -> @kernel.Thm
+
+pub fn maximal_planar_graph_face_vertices_clique() -> @kernel.Thm
+
+pub fn maximal_planar_graph_large_recursive() -> @kernel.Thm
+
+pub fn maximal_planar_graph_plane_triangulated_disk() -> @kernel.Thm
+
+pub fn mod_add_left_reduce() -> @kernel.Thm
+
+pub fn mod_add_wrap_sub() -> @kernel.Thm
+
+pub fn neighbor_path_from_reversed_cyclic_chain() -> @kernel.Thm
+
+pub fn non_euler_planar_imp_non_planar_graph() -> @kernel.Thm
+
+pub fn nonoutside_component_subset_inside() -> @kernel.Thm
+
+pub fn nsum_card_4_minimum_3_eq() -> @kernel.Thm
+
+pub fn num_add_sub_right() -> @kernel.Thm
+
+pub fn num_closing_interior_bound() -> @kernel.Thm
+
+pub fn num_offset_bound() -> @kernel.Thm
+
+pub fn open_connected_polygonal_connection() -> @kernel.Thm
+
+pub fn open_connected_subset_eq_of_frontier_disjoint() -> @kernel.Thm
+
+pub fn open_jordan_complement_component_eq_side() -> @kernel.Thm
+
+pub fn open_polygonal_connection() -> @kernel.Thm
+
+pub fn open_polygonal_connection_complement() -> @kernel.Thm
+
+pub fn outgoing_dart_heads() -> @kernel.Thm
+
+pub fn outgoing_darts() -> @kernel.Thm
+
+pub fn outgoing_darts_empty_outside_vertices() -> @kernel.Thm
+
+pub fn outgoing_darts_eq_singleton_neighbor() -> @kernel.Thm
+
+pub fn outgoing_darts_fresh_vertex() -> @kernel.Thm
+
+pub fn outgoing_darts_insert_edge_left() -> @kernel.Thm
+
+pub fn outgoing_darts_insert_edge_right() -> @kernel.Thm
+
+pub fn outgoing_darts_subdivision_vertex() -> @kernel.Thm
+
+pub fn outgoing_darts_subset() -> @kernel.Thm
+
+pub fn outgoing_darts_tail_unique() -> @kernel.Thm
+
+pub fn outgoing_darts_union() -> @kernel.Thm
+
+pub fn pair_edge_image_in() -> @kernel.Thm
+
+pub fn pair_edge_ne() -> @kernel.Thm
+
+pub fn pair_false_inj() -> @kernel.Thm
+
+pub fn pair_has_size_2() -> @kernel.Thm
+
+pub fn pair_not_in_edge_star_image() -> @kernel.Thm
+
+pub fn pair_set_eq() -> @kernel.Thm
+
+pub fn pair_set_eq_cross() -> @kernel.Thm
+
+pub fn pair_set_eq_distinct() -> @kernel.Thm
+
+pub fn pair_set_eq_left() -> @kernel.Thm
+
+pub fn pair_set_sym() -> @kernel.Thm
+
+pub fn pair_true_not_in_false_image() -> @kernel.Thm
+
+pub fn pairwise_adjacent_complete_graph_edges_subset() -> @kernel.Thm
+
+pub fn pairwise_disjoint_graph_faces() -> @kernel.Thm
+
+pub fn paste_functions_on_two_point_intersection() -> @kernel.Thm
+
+pub fn path_image_avoids_centre_from_sphere() -> @kernel.Thm
+
+pub fn path_image_avoids_centre_to_sphere() -> @kernel.Thm
+
+pub fn path_image_inter_cball_from_sphere() -> @kernel.Thm
+
+pub fn path_image_inter_cball_to_sphere() -> @kernel.Thm
+
+pub fn path_image_radialize() -> @kernel.Thm
+
+pub fn path_image_radialized_edge() -> @kernel.Thm
+
+pub fn path_image_subset_interior_until_finish() -> @kernel.Thm
+
+pub fn permutation_cycle_splice() -> @kernel.Thm
+
+pub fn permutation_cycle_splice_permutes() -> @kernel.Thm
+
+pub fn permutation_cycle_splice_preserves_key() -> @kernel.Thm
+
+pub fn permutation_cycle_splice_transitive() -> @kernel.Thm
+
+pub fn permutation_delete() -> @kernel.Thm
+
+pub fn permutation_delete_apply() -> @kernel.Thm
+
+pub fn permutation_delete_apply_in() -> @kernel.Thm
+
+pub fn permutation_delete_fix() -> @kernel.Thm
+
+pub fn permutation_delete_fixed_orbit_count() -> @kernel.Thm
+
+pub fn permutation_delete_iter_off_key() -> @kernel.Thm
+
+pub fn permutation_delete_orbit_count() -> @kernel.Thm
+
+pub fn permutation_delete_permutes() -> @kernel.Thm
+
+pub fn permutation_delete_preserves_key() -> @kernel.Thm
+
+pub fn permutation_delete_transitive() -> @kernel.Thm
+
+pub fn permutation_delete_transitive_key() -> @kernel.Thm
+
+pub fn permutation_delete_two() -> @kernel.Thm
+
+pub fn permutation_delete_two_after_consecutive_swap() -> @kernel.Thm
+
+pub fn permutation_delete_two_after_swap() -> @kernel.Thm
+
+pub fn permutation_delete_two_apply_in_different_keys() -> @kernel.Thm
+
+pub fn permutation_delete_two_known_predecessors() -> @kernel.Thm
+
+pub fn permutation_delete_two_orbit_count() -> @kernel.Thm
+
+pub fn permutation_delete_two_permutes() -> @kernel.Thm
+
+pub fn permutation_delete_two_preserves_key() -> @kernel.Thm
+
+pub fn permutation_delete_two_preserves_old_orbit() -> @kernel.Thm
+
+pub fn permutation_delete_two_transitive_key() -> @kernel.Thm
+
+pub fn permutation_insert() -> @kernel.Thm
+
+pub fn permutation_insert_orbit_count() -> @kernel.Thm
+
+pub fn permutation_insert_orbit_transitive() -> @kernel.Thm
+
+pub fn permutation_insert_permutes() -> @kernel.Thm
+
+pub fn permutation_insert_preserves_key() -> @kernel.Thm
+
+pub fn permutation_insert_preserves_key_transitive() -> @kernel.Thm
+
+pub fn permutation_insert_transitive() -> @kernel.Thm
+
+pub fn permutation_insert_transitive_restricted() -> @kernel.Thm
+
+pub fn permutation_insert_two_orbit_count() -> @kernel.Thm
+
+pub fn permutation_iter_preserves_key() -> @kernel.Thm
+
+pub fn permutation_orbit() -> @kernel.Thm
+
+pub fn permutation_orbit_disjoint_union_distinct() -> @kernel.Thm
+
+pub fn permutation_orbit_disjoint_union_left() -> @kernel.Thm
+
+pub fn permutation_orbit_disjoint_union_right() -> @kernel.Thm
+
+pub fn permutation_orbit_eq() -> @kernel.Thm
+
+pub fn permutation_orbit_eq_if_agree() -> @kernel.Thm
+
+pub fn permutation_orbit_eq_on_permuted_set() -> @kernel.Thm
+
+pub fn permutation_orbit_fixed() -> @kernel.Thm
+
+pub fn permutation_orbit_image() -> @kernel.Thm
+
+pub fn permutation_orbit_membership_invariant() -> @kernel.Thm
+
+pub fn permutation_orbit_refl() -> @kernel.Thm
+
+pub fn permutation_orbit_subset() -> @kernel.Thm
+
+pub fn permutation_orbit_successor() -> @kernel.Thm
+
+pub fn permutation_orbit_sym() -> @kernel.Thm
+
+pub fn permutation_orbit_trans() -> @kernel.Thm
+
+pub fn permutation_orbit_two_cycle_subset() -> @kernel.Thm
+
+pub fn permutation_orbits() -> @kernel.Thm
+
+pub fn permutation_orbits_disjoint_union() -> @kernel.Thm
+
+pub fn permutation_orbits_disjoint_union_transitive() -> @kernel.Thm
+
+pub fn permutation_orbits_distinct_by_invariant() -> @kernel.Thm
+
+pub fn permutation_orbits_eq_on() -> @kernel.Thm
+
+pub fn permutation_orbits_insert_fixed() -> @kernel.Thm
+
+pub fn permutation_orbits_swap_distinct() -> @kernel.Thm
+
+pub fn permutation_orbits_swap_le() -> @kernel.Thm
+
+pub fn permutation_orbits_swap_same() -> @kernel.Thm
+
+pub fn permutation_orbits_swap_subset() -> @kernel.Thm
+
+pub fn permutation_orbits_two_point_surgery_le() -> @kernel.Thm
+
+pub fn permutation_swap_affected_orbit_hits() -> @kernel.Thm
+
+pub fn permutation_swap_coalesces_distinct_orbits() -> @kernel.Thm
+
+pub fn permutation_swap_merged_affected_orbit() -> @kernel.Thm
+
+pub fn permutation_swap_merged_orbits() -> @kernel.Thm
+
+pub fn permutation_swap_merges_distinct_orbits() -> @kernel.Thm
+
+pub fn permutation_swap_permutes() -> @kernel.Thm
+
+pub fn permutation_swap_preserves_or_merges_orbit() -> @kernel.Thm
+
+pub fn permutation_swap_splits_same_orbit() -> @kernel.Thm
+
+pub fn permutation_swap_unaffected_orbit() -> @kernel.Thm
+
+pub fn permutes_commutes_swap_outside() -> @kernel.Thm
+
+pub fn permutes_iter() -> @kernel.Thm
+
+pub fn permutes_iter_equal_imp_period() -> @kernel.Thm
+
+pub fn planar_graph() -> @kernel.Thm
+
+pub fn planar_graph_5_degenerate() -> @kernel.Thm
+
+pub fn planar_graph_componentwise_eq() -> @kernel.Thm
+
+pub fn planar_graph_contract_edge() -> @kernel.Thm
+
+pub fn planar_graph_delete_edge() -> @kernel.Thm
+
+pub fn planar_graph_edge_amalgamation() -> @kernel.Thm
+
+pub fn planar_graph_edge_bound() -> @kernel.Thm
+
+pub fn planar_graph_edge_subdivision_imp() -> @kernel.Thm
+
+pub fn planar_graph_eq_euler_planar_graph() -> @kernel.Thm
+
+pub fn planar_graph_eq_euler_rotations() -> @kernel.Thm
+
+pub fn planar_graph_eq_polygonal() -> @kernel.Thm
+
+pub fn planar_graph_eq_polygonally_planar_graph() -> @kernel.Thm
+
+pub fn planar_graph_eq_recursive_planar_graph() -> @kernel.Thm
+
+pub fn planar_graph_eq_recursive_triangulation() -> @kernel.Thm
+
+pub fn planar_graph_eq_straight_line() -> @kernel.Thm
+
+pub fn planar_graph_eq_straight_line_planar_graph() -> @kernel.Thm
+
+pub fn planar_graph_image() -> @kernel.Thm
+
+pub fn planar_graph_image_eq() -> @kernel.Thm
+
+pub fn planar_graph_imp_euler_planar_graph() -> @kernel.Thm
+
+pub fn planar_graph_imp_polygonally_planar() -> @kernel.Thm
+
+pub fn planar_graph_imp_recursive_planar_graph() -> @kernel.Thm
+
+pub fn planar_graph_induced_subgraph() -> @kernel.Thm
+
+pub fn planar_graph_insert_cofacial_edge() -> @kernel.Thm
+
+pub fn planar_graph_insert_edge() -> @kernel.Thm
+
+pub fn planar_graph_low_degree() -> @kernel.Thm
+
+pub fn planar_graph_minor() -> @kernel.Thm
+
+pub fn planar_graph_singleton_amalgamation() -> @kernel.Thm
+
+pub fn planar_graph_subdivision_imp() -> @kernel.Thm
+
+pub fn planar_graph_subgraph() -> @kernel.Thm
+
+pub fn planar_graph_subset_edges() -> @kernel.Thm
+
+pub fn planar_graph_topological_subgraph() -> @kernel.Thm
+
+pub fn plane_graph_carrier() -> @kernel.Thm
+
+pub fn plane_graph_carrier_anr() -> @kernel.Thm
+
+pub fn plane_graph_carrier_closed() -> @kernel.Thm
+
+pub fn plane_graph_carrier_compact() -> @kernel.Thm
+
+pub fn plane_graph_carrier_complement_frontier_cover() -> @kernel.Thm
+
+pub fn plane_graph_carrier_delete_edge() -> @kernel.Thm
+
+pub fn plane_graph_carrier_delete_vertex_point_on_incident_edge() -> @kernel.Thm
+
+pub fn plane_graph_carrier_delete_vertex_subset_obstacles() -> @kernel.Thm
+
+pub fn plane_graph_carrier_edge_subset() -> @kernel.Thm
+
+pub fn plane_graph_carrier_empty_interior() -> @kernel.Thm
+
+pub fn plane_graph_carrier_enr() -> @kernel.Thm
+
+pub fn plane_graph_carrier_mono() -> @kernel.Thm
+
+pub fn plane_graph_carrier_point_incident_component() -> @kernel.Thm
+
+pub fn plane_graph_carrier_union() -> @kernel.Thm
+
+pub fn plane_graph_carrier_vertex_subset() -> @kernel.Thm
+
+pub fn plane_graph_closed_side_vertices() -> @kernel.Thm
+
+pub fn plane_graph_closed_side_vertices_inter() -> @kernel.Thm
+
+pub fn plane_graph_closed_side_vertices_union() -> @kernel.Thm
+
+pub fn plane_graph_cycle_carrier_decomposition() -> @kernel.Thm
+
+pub fn plane_graph_delete_vertex_component_adjoins_point() -> @kernel.Thm
+
+pub fn plane_graph_delete_vertex_incident_component_subset() -> @kernel.Thm
+
+pub fn plane_graph_delete_vertex_incident_components_merge() -> @kernel.Thm
+
+pub fn plane_graph_delete_vertex_incident_edge_remainder_connected() -> @kernel.Thm
+
+pub fn plane_graph_delete_vertex_incident_face_vertex() -> @kernel.Thm
+
+pub fn plane_graph_delete_vertex_new_face_vertex_old_face() -> @kernel.Thm
+
+pub fn plane_graph_delete_vertex_other_component_persists() -> @kernel.Thm
+
+pub fn plane_graph_delete_vertex_point_away_from_removed_carrier() -> @kernel.Thm
+
+pub fn plane_graph_delete_vertex_removed_carrier_subset_component() -> @kernel.Thm
+
+pub fn plane_graph_embedding() -> @kernel.Thm
+
+pub fn plane_graph_embedding_chord_boundary_arcs() -> @kernel.Thm
+
+pub fn plane_graph_embedding_chord_explicit_cycle_carriers() -> @kernel.Thm
+
+pub fn plane_graph_embedding_chord_explicit_side_boundaries() -> @kernel.Thm
+
+pub fn plane_graph_embedding_chord_explicit_theta() -> @kernel.Thm
+
+pub fn plane_graph_embedding_chord_inter_cycle_carrier() -> @kernel.Thm
+
+pub fn plane_graph_embedding_chordless_cycle_induced_carrier() -> @kernel.Thm
+
+pub fn plane_graph_embedding_closed_side_edge() -> @kernel.Thm
+
+pub fn plane_graph_embedding_closed_side_edge_partition() -> @kernel.Thm
+
+pub fn plane_graph_embedding_closed_side_induced_carrier() -> @kernel.Thm
+
+pub fn plane_graph_embedding_closed_side_induced_carriers() -> @kernel.Thm
+
+pub fn plane_graph_embedding_closed_side_induced_edge_carrier() -> @kernel.Thm
+
+pub fn plane_graph_embedding_cycle_carrier_subset_closed_side_induced_carrier() -> @kernel.Thm
+
+pub fn plane_graph_embedding_cycle_carrier_vertex_set() -> @kernel.Thm
+
+pub fn plane_graph_embedding_cycle_chain_endpoints() -> @kernel.Thm
+
+pub fn plane_graph_embedding_cycle_chain_inter_closing() -> @kernel.Thm
+
+pub fn plane_graph_embedding_cycle_chain_inter_closing_subset() -> @kernel.Thm
+
+pub fn plane_graph_embedding_cycle_chain_paths() -> @kernel.Thm
+
+pub fn plane_graph_embedding_cycle_prefix_arc() -> @kernel.Thm
+
+pub fn plane_graph_embedding_cycle_prefix_inter_next() -> @kernel.Thm
+
+pub fn plane_graph_embedding_cycle_vertices_subset_carrier() -> @kernel.Thm
+
+pub fn plane_graph_embedding_cycle_vertices_subset_closed_side() -> @kernel.Thm
+
+pub fn plane_graph_embedding_dart_path() -> @kernel.Thm
+
+pub fn plane_graph_embedding_delete_vertex_point_outside_carrier() -> @kernel.Thm
+
+pub fn plane_graph_embedding_disjoint_polygonal_middles() -> @kernel.Thm
+
+pub fn plane_graph_embedding_disjoint_radialized_darts() -> @kernel.Thm
+
+pub fn plane_graph_embedding_disjoint_radialized_edges() -> @kernel.Thm
+
+pub fn plane_graph_embedding_disjoint_trimmed_polygonal_middles() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_at_most_two_incident_components() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_at_most_two_incident_faces() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_compact() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_component_frontier() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_connected() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_empty_interior() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_endpoint_member() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_endpoints() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_incident_component_frontier() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_incident_face() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_incident_face_choice() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_inter() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_inter_cycle_carrier() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_inter_delete_carrier() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_inter_delete_vertex_carrier() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_interior_nonempty() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_member_point() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edge_unions_inter() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edges_inter_empty() -> @kernel.Thm
+
+pub fn plane_graph_embedding_edges_inter_sing() -> @kernel.Thm
+
+pub fn plane_graph_embedding_face_contains_edge_interior() -> @kernel.Thm
+
+pub fn plane_graph_embedding_face_frontier_subset_edge() -> @kernel.Thm
+
+pub fn plane_graph_embedding_face_frontier_subset_induced_carrier() -> @kernel.Thm
+
+pub fn plane_graph_embedding_face_vertices_card_ge_2() -> @kernel.Thm
+
+pub fn plane_graph_embedding_face_vertices_subset_edge() -> @kernel.Thm
+
+pub fn plane_graph_embedding_frontier_edge_subset_face_vertices() -> @kernel.Thm
+
+pub fn plane_graph_embedding_imp_polygonal_embedding() -> @kernel.Thm
+
+pub fn plane_graph_embedding_induced_subgraph() -> @kernel.Thm
+
+pub fn plane_graph_embedding_insert_edge() -> @kernel.Thm
+
+pub fn plane_graph_embedding_jordan_side_incident_component() -> @kernel.Thm
+
+pub fn plane_graph_embedding_k4_branch_intersections() -> @kernel.Thm
+
+pub fn plane_graph_embedding_k4_has_interior_vertex() -> @kernel.Thm
+
+pub fn plane_graph_embedding_k4_interior_vertex_not_cofacial() -> @kernel.Thm
+
+pub fn plane_graph_embedding_k4_not_cofacial() -> @kernel.Thm
+
+pub fn plane_graph_embedding_other_incident_face_unique() -> @kernel.Thm
+
+pub fn plane_graph_embedding_simple_cycle_jordan_exact() -> @kernel.Thm
+
+pub fn plane_graph_embedding_subset_edges() -> @kernel.Thm
+
+pub fn plane_graph_embedding_triangular_face_edge_frontier() -> @kernel.Thm
+
+pub fn plane_graph_embedding_triangular_face_frontier_edge() -> @kernel.Thm
+
+pub fn plane_graph_embedding_triangular_face_jordan_side() -> @kernel.Thm
+
+pub fn plane_graph_embedding_triangular_face_opposite_edge() -> @kernel.Thm
+
+pub fn plane_graph_embedding_two_edge_arc() -> @kernel.Thm
+
+pub fn plane_graph_embedding_vertex_incident_component() -> @kernel.Thm
+
+pub fn plane_graph_embedding_vertex_on_edge() -> @kernel.Thm
+
+pub fn plane_graph_face_adjacent_at() -> @kernel.Thm
+
+pub fn plane_graph_face_adjacent_at_irrefl() -> @kernel.Thm
+
+pub fn plane_graph_face_adjacent_at_sym() -> @kernel.Thm
+
+pub fn plane_graph_face_adjacent_cycle_edge_selection() -> @kernel.Thm
+
+pub fn plane_graph_face_adjacent_cycle_edges_inj() -> @kernel.Thm
+
+pub fn plane_graph_face_component_induced_subgraph() -> @kernel.Thm
+
+pub fn plane_graph_face_vertices() -> @kernel.Thm
+
+pub fn plane_graph_face_vertices_restrict() -> @kernel.Thm
+
+pub fn plane_graph_face_vertices_subset() -> @kernel.Thm
+
+pub fn plane_graph_face_vertices_subset_closed_side() -> @kernel.Thm
+
+pub fn plane_graph_incident_faces() -> @kernel.Thm
+
+pub fn plane_graph_theta_closed_side_vertices() -> @kernel.Thm
+
+pub fn plane_orientation() -> @kernel.Thm
+
+pub fn plane_orientation_bezier_arc_tangent_arc() -> @kernel.Thm
+
+pub fn plane_orientation_cyclic() -> @kernel.Thm
+
+pub fn plane_orientation_cyclic2() -> @kernel.Thm
+
+pub fn plane_orientation_dot() -> @kernel.Thm
+
+pub fn plane_orientation_eq_0_collinear() -> @kernel.Thm
+
+pub fn plane_orientation_quadratic_bezier_first_edge() -> @kernel.Thm
+
+pub fn plane_orientation_quadratic_bezier_last_edge() -> @kernel.Thm
+
+pub fn plane_orientation_quadratic_bezier_pair() -> @kernel.Thm
+
+pub fn plane_orientation_quadratic_bezier_pair_pos() -> @kernel.Thm
+
+pub fn plane_orientation_quadratic_bezier_right() -> @kernel.Thm
+
+pub fn plane_orientation_quadratic_bezier_right_pos() -> @kernel.Thm
+
+pub fn plane_orientation_quadratic_bezier_tangent() -> @kernel.Thm
+
+pub fn plane_orientation_quadratic_bezier_tangent_control() -> @kernel.Thm
+
+pub fn plane_orientation_quadratic_bezier_tangent_curve() -> @kernel.Thm
+
+pub fn plane_orientation_quadratic_bezier_tangent_pos() -> @kernel.Thm
+
+pub fn plane_orientation_quadratic_bezier_triple() -> @kernel.Thm
+
+pub fn plane_orientation_quadratic_bezier_triple_pos() -> @kernel.Thm
+
+pub fn plane_orientation_refl() -> @kernel.Thm
+
+pub fn plane_orientation_swap() -> @kernel.Thm
+
+pub fn plane_triangulated_disk() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_boundary_chord_inter_inside() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_boundary_subset() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_card_3_recursive() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_carrier_subset_closed_inside() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_chord_explicit_side_components() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_chord_explicit_side_disks() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_chord_explicit_side_outer_face_vertices() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_chord_explicit_side_partitions() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_chord_explicit_split() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_chord_inter_inside() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_chord_split_unbounded_recursive_step() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_chord_unbounded_recursive_step() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_chordless_outer_frontier_edges_at_last() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_chordless_unbounded_recursive_step() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_common_face_adjacent_or_boundary() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_delete_last_chordless() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_delete_last_large_incident_face_cycle() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_delete_last_outer_subset() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_delete_last_two_incident_faces() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_delete_last_with_neighbor_path() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_delete_vertex() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_delete_vertex_boundary_neighbors_subset() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_delete_vertex_face_vertices() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_delete_vertex_face_vertices_subset() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_delete_vertex_incident_face_closure_cover() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_delete_vertex_incident_face_subset() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_delete_vertex_incident_face_vertices() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_delete_vertex_other_face_triangular() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_delete_vertex_outer_component() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_edge_outer_frontier_small() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_adjacency_connected() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_adjacency_degree_2() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_adjacency_spanning_cycle_outer() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_adjacency_spanning_path() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_adjacency_spanning_path_outer() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_cycle_edges_enumerate() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_cycle_neighbor_path() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_cycle_outer_edge_pair() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_degree_at_least_2() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_edge_cycle_outer() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_frontier_edge_choice() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_opposites_distinct() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_patch_intersection_edge() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_path_endpoints_adjacent() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_path_endpoints_adjacent_chordless() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_shared_two_edges_exhaust() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_shared_two_edges_neighbors() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_face_spanning_cycle_outer_chordless() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_incident_faces_cross_partition() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_indexed_boundary_chord_inter_inside() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_induced_closed_side() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_internal_face_incident_edge_endpoints_adjacent() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_internal_face_two_edge_adjacencies() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_internal_incident_face_degree_at_least_2() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_invariants() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_last_incident_faces_card_at_least_2() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_nonincident_face_persists() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_offset() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_outer_edge_opposite_face_frontier() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_outer_eq_jordan_side() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_outer_face_two_edge_adjacencies_frontier() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_outer_frontier_edge_at_last() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_outer_frontier_subset_induced_carrier() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_outer_incident_face() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_outer_jordan_side() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_triangular_boundary_two_faces_vertices() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_triangular_face_opposite_edge() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_two_faces_boundary_length() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_two_incident_faces_data() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_unbounded_recursive() -> @kernel.Thm
+
+pub fn plane_triangulated_disk_unbounded_recursive_step_guarded() -> @kernel.Thm
+
+pub fn polygonal_arc() -> @kernel.Thm
+
+pub fn polygonal_arc_imp_arc() -> @kernel.Thm
+
+pub fn polygonal_arc_in_open_connected() -> @kernel.Thm
+
+pub fn polygonal_arc_linepath() -> @kernel.Thm
+
+pub fn polygonal_arc_middle_outside_disjoint_cballs() -> @kernel.Thm
+
+pub fn polygonal_arc_radialize_between_disjoint_cballs() -> @kernel.Thm
+
+pub fn polygonal_arc_radialized_edge() -> @kernel.Thm
+
+pub fn polygonal_arc_reversepath() -> @kernel.Thm
+
+pub fn polygonal_arc_subpath() -> @kernel.Thm
+
+pub fn polygonal_arc_subpath_to_frontier() -> @kernel.Thm
+
+pub fn polygonal_arc_subset_union() -> @kernel.Thm
+
+pub fn polygonal_connection() -> @kernel.Thm
+
+pub fn polygonal_connection_ball() -> @kernel.Thm
+
+pub fn polygonal_connection_imp_in() -> @kernel.Thm
+
+pub fn polygonal_connection_linepath() -> @kernel.Thm
+
+pub fn polygonal_connection_mono() -> @kernel.Thm
+
+pub fn polygonal_connection_refl() -> @kernel.Thm
+
+pub fn polygonal_connection_sym() -> @kernel.Thm
+
+pub fn polygonal_connection_trans() -> @kernel.Thm
+
+pub fn polygonal_plane_graph_embedding() -> @kernel.Thm
+
+pub fn polygonally_planar_graph() -> @kernel.Thm
+
+pub fn polygonally_planar_imp_planar_graph() -> @kernel.Thm
+
+pub fn prescribed_triangle_straight_line_embedding() -> @kernel.Thm
+
+pub fn quadratic_bezier() -> @kernel.Thm
+
+pub fn quadratic_bezier_0() -> @kernel.Thm
+
+pub fn quadratic_bezier_1() -> @kernel.Thm
+
+pub fn quadratic_bezier_in_convex_hull_3() -> @kernel.Thm
+
+pub fn quadratic_bezier_tangent() -> @kernel.Thm
+
+pub fn radial_segment_at_graph_vertex_inter_vertices() -> @kernel.Thm
+
+pub fn radial_segment_disjoint_edge_middle() -> @kernel.Thm
+
+pub fn radial_segment_disjoint_set_at_other_sphere_point() -> @kernel.Thm
+
+pub fn radial_segment_disjoint_set_outside_cball() -> @kernel.Thm
+
+pub fn radial_segment_inter_sphere() -> @kernel.Thm
+
+pub fn radial_segment_subset_cball() -> @kernel.Thm
+
+pub fn radial_segments_at_graph_vertices_inter() -> @kernel.Thm
+
+pub fn radial_segments_inter() -> @kernel.Thm
+
+pub fn radialized_edge() -> @kernel.Thm
+
+pub fn radialized_edge_endpoints() -> @kernel.Thm
+
+pub fn radialized_edge_incident_pair() -> @kernel.Thm
+
+pub fn radialized_edge_inter_vertices() -> @kernel.Thm
+
+pub fn radialized_edge_other_endpoint() -> @kernel.Thm
+
+pub fn radialized_edge_other_endpoint_pair() -> @kernel.Thm
+
+pub fn radialized_edges_inter() -> @kernel.Thm
+
+pub fn radialized_middle_avoids_edge_polygonal_obstacles() -> @kernel.Thm
+
+pub fn recursive_planar_graph() -> @kernel.Thm
+
+pub fn recursive_planar_graph_edge_bound() -> @kernel.Thm
+
+pub fn recursive_planar_graph_eq_planar_graph() -> @kernel.Thm
+
+pub fn recursive_planar_graph_eq_straight_line_planar() -> @kernel.Thm
+
+pub fn recursive_planar_graph_image() -> @kernel.Thm
+
+pub fn recursive_planar_graph_image_eq() -> @kernel.Thm
+
+pub fn recursive_planar_graph_imp_straight_line_planar() -> @kernel.Thm
+
+pub fn recursive_planar_graph_subset_edges() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_3_edge_bound() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_3_exposed_plane_disk() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_3_imp_straight_line_planar() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_3_maximal_planar_graph() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_boundary_cycle() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_boundary_edges() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_boundary_euler_rotation() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_boundary_euler_rotation_exists() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_cap() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_cases() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_cong() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_delete_boundary_vertex() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_delete_last_image() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_edge_bound() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_edge_count() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_embedding_strong() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_image() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_image_insert() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_image_insert_rule() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_image_split_rule() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_image_union() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_induct() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_insert_boundary_subset() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_insert_image_inj() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_invariants() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_offset() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_offset_fresh() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_rules() -> @kernel.Thm
+
+pub fn recursive_triangulated_disk_straight_line_embedding() -> @kernel.Thm
+
+pub fn relative_rooted_edge_list() -> @kernel.Thm
+
+pub fn relative_rooted_edge_list_head_neighbors() -> @kernel.Thm
+
+pub fn relative_rooted_edge_list_head_remainder() -> @kernel.Thm
+
+pub fn relative_rooted_edge_list_new_edge() -> @kernel.Thm
+
+pub fn relative_rooted_edge_list_new_edge_not_in_base() -> @kernel.Thm
+
+pub fn relative_rooted_edge_list_tail() -> @kernel.Thm
+
+pub fn relative_rooted_edge_list_vertices_subset() -> @kernel.Thm
+
+pub fn relative_rooted_edge_set_endpoints() -> @kernel.Thm
+
+pub fn relative_rooted_edge_set_subset() -> @kernel.Thm
+
+pub fn relative_rooted_edge_set_with_base_subset() -> @kernel.Thm
+
+pub fn relative_rooted_edge_vertices() -> @kernel.Thm
+
+pub fn relpow_imp_simple_indexed_path() -> @kernel.Thm
+
+pub fn restricted_graph_split_rotation() -> @kernel.Thm
+
+pub fn restricted_permutation() -> @kernel.Thm
+
+pub fn restricted_permutation_image() -> @kernel.Thm
+
+pub fn restricted_permutation_iter() -> @kernel.Thm
+
+pub fn restricted_permutation_outgoing_image() -> @kernel.Thm
+
+pub fn restricted_permutation_permutes() -> @kernel.Thm
+
+pub fn restricted_permutation_transitive() -> @kernel.Thm
+
+pub fn restricted_permutation_transitive_on() -> @kernel.Thm
+
+pub fn restricted_permutation_transport() -> @kernel.Thm
+
+pub fn restricted_permutation_transport_image() -> @kernel.Thm
+
+pub fn restricted_permutation_transport_iter() -> @kernel.Thm
+
+pub fn restricted_permutation_transport_orbit() -> @kernel.Thm
+
+pub fn restricted_permutation_transport_orbits() -> @kernel.Thm
+
+pub fn restricted_permutation_transport_outside() -> @kernel.Thm
+
+pub fn restricted_permutation_transport_permutes() -> @kernel.Thm
+
+pub fn reverse_dart() -> @kernel.Thm
+
+pub fn reverse_dart_avoids_subdivision_pairs() -> @kernel.Thm
+
+pub fn reverse_dart_involution() -> @kernel.Thm
+
+pub fn reverse_dart_no_fixedpoint() -> @kernel.Thm
+
+pub fn reverse_dart_pair() -> @kernel.Thm
+
+pub fn root_in_rooted_edge_vertices() -> @kernel.Thm
+
+pub fn rooted_edge_list() -> @kernel.Thm
+
+pub fn rooted_edge_list_card_edges() -> @kernel.Thm
+
+pub fn rooted_edge_list_card_vertices() -> @kernel.Thm
+
+pub fn rooted_edge_list_new_edge() -> @kernel.Thm
+
+pub fn rooted_edge_list_tail() -> @kernel.Thm
+
+pub fn rooted_edge_list_vertices_subset() -> @kernel.Thm
+
+pub fn rooted_edge_next_dart_orbits_distinct() -> @kernel.Thm
+
+pub fn rooted_edge_reversal() -> @kernel.Thm
+
+pub fn rooted_edge_reversal_eq_graph_reverse_dart() -> @kernel.Thm
+
+pub fn rooted_edge_reversal_orbit_count() -> @kernel.Thm
+
+pub fn rooted_edge_reversal_preserves_vertices() -> @kernel.Thm
+
+pub fn rooted_edge_reversal_rotation_permutes() -> @kernel.Thm
+
+pub fn rooted_edge_rotation_preserves_vertices() -> @kernel.Thm
+
+pub fn rooted_edge_set() -> @kernel.Thm
+
+pub fn rooted_edge_set_endpoints() -> @kernel.Thm
+
+pub fn rooted_edge_set_subset() -> @kernel.Thm
+
+pub fn rooted_edge_vertices() -> @kernel.Thm
+
+pub fn rotation_split_base_reachable() -> @kernel.Thm
+
+pub fn rotation_split_dart() -> @kernel.Thm
+
+pub fn rotation_split_dart_endpoints_distinct() -> @kernel.Thm
+
+pub fn rotation_split_dart_injective() -> @kernel.Thm
+
+pub fn rotation_split_dart_reverse() -> @kernel.Thm
+
+pub fn rotation_split_edge() -> @kernel.Thm
+
+pub fn rotation_split_edges() -> @kernel.Thm
+
+pub fn rotation_split_permutation() -> @kernel.Thm
+
+pub fn rotation_split_permutation_covers_vertex() -> @kernel.Thm
+
+pub fn rotation_split_permutation_orbits_distinct() -> @kernel.Thm
+
+pub fn rotation_split_permutation_permutes() -> @kernel.Thm
+
+pub fn rotation_split_permutation_tail() -> @kernel.Thm
+
+pub fn rotation_split_rotation() -> @kernel.Thm
+
+pub fn rotation_split_vertex() -> @kernel.Thm
+
+pub fn rotation_split_vertex_fiber_transitive() -> @kernel.Thm
+
+pub fn rotation_split_vertex_invariant() -> @kernel.Thm
+
+pub fn rotation_split_vertex_reaches_base() -> @kernel.Thm
+
+pub fn rotation_split_vertices() -> @kernel.Thm
+
+pub fn rotation_split_vertices_eq() -> @kernel.Thm
+
+pub fn rtc_stays_in_single_edge_endpoints() -> @kernel.Thm
+
+pub fn segment_inter_convex_hull_supporting_edge_orientation() -> @kernel.Thm
+
+pub fn segment_inter_convex_hull_supporting_plane_orientation() -> @kernel.Thm
+
+pub fn segment_inter_convex_hull_supporting_plane_orientation_le() -> @kernel.Thm
+
+pub fn set_subset_delete_union() -> @kernel.Thm
+
+pub fn simple_graph_cycle() -> @kernel.Thm
+
+pub fn simple_graph_cycle_3_distinct_vertices_edge() -> @kernel.Thm
+
+pub fn simple_graph_cycle_3_induced_edges() -> @kernel.Thm
+
+pub fn simple_graph_cycle_3_two_edges_at_vertex() -> @kernel.Thm
+
+pub fn simple_graph_cycle_carrier_subset_induced_carrier() -> @kernel.Thm
+
+pub fn simple_graph_cycle_chain_edge_ne_closing() -> @kernel.Thm
+
+pub fn simple_graph_cycle_chain_edges_distinct() -> @kernel.Thm
+
+pub fn simple_graph_cycle_closing_edge() -> @kernel.Thm
+
+pub fn simple_graph_cycle_cong() -> @kernel.Thm
+
+pub fn simple_graph_cycle_consecutive_edge() -> @kernel.Thm
+
+pub fn simple_graph_cycle_cyclic_dart() -> @kernel.Thm
+
+pub fn simple_graph_cycle_cyclic_darts_eq_offset() -> @kernel.Thm
+
+pub fn simple_graph_cycle_cyclic_delete_last() -> @kernel.Thm
+
+pub fn simple_graph_cycle_delete_last_induced() -> @kernel.Thm
+
+pub fn simple_graph_cycle_delete_last_induced_of_chain() -> @kernel.Thm
+
+pub fn simple_graph_cycle_induced_subgraph() -> @kernel.Thm
+
+pub fn simple_graph_cycle_insert_last_vertex() -> @kernel.Thm
+
+pub fn simple_graph_cycle_last_boundary_data() -> @kernel.Thm
+
+pub fn simple_graph_cycle_mono() -> @kernel.Thm
+
+pub fn simple_graph_cycle_no_chords_eq_induced_edges() -> @kernel.Thm
+
+pub fn simple_graph_cycle_offset() -> @kernel.Thm
+
+pub fn simple_graph_cycle_split_left() -> @kernel.Thm
+
+pub fn simple_graph_cycle_split_left_oriented() -> @kernel.Thm
+
+pub fn simple_graph_cycle_split_right() -> @kernel.Thm
+
+pub fn simple_graph_cycle_union_split() -> @kernel.Thm
+
+pub fn snd_reverse_dart() -> @kernel.Thm
+
+pub fn snd_rotation_split_dart() -> @kernel.Thm
+
+pub fn sparse_spoke_exclusive_point() -> @kernel.Thm
+
+pub fn split_fan_boundary() -> @kernel.Thm
+
+pub fn split_fan_boundary_apex() -> @kernel.Thm
+
+pub fn split_fan_boundary_delete_last() -> @kernel.Thm
+
+pub fn split_fan_boundary_injective() -> @kernel.Thm
+
+pub fn split_fan_boundary_last() -> @kernel.Thm
+
+pub fn split_fan_boundary_one_vertices_superset() -> @kernel.Thm
+
+pub fn split_fan_boundary_outside_vertex() -> @kernel.Thm
+
+pub fn split_fan_boundary_penultimate() -> @kernel.Thm
+
+pub fn split_fan_boundary_prefix() -> @kernel.Thm
+
+pub fn split_fan_boundary_vertices_subset() -> @kernel.Thm
+
+pub fn split_fan_boundary_zero() -> @kernel.Thm
+
+pub fn split_fan_boundary_zero_vertices_subset() -> @kernel.Thm
+
+pub fn spoke_exclusive_point() -> @kernel.Thm
+
+pub fn standard_triangle_strictly_convex() -> @kernel.Thm
+
+pub fn standard_triangle_support() -> @kernel.Thm
+
+pub fn straight_edge() -> @kernel.Thm
+
+pub fn straight_edge_pair() -> @kernel.Thm
+
+pub fn straight_edge_subset_convex_hull() -> @kernel.Thm
+
+pub fn straight_line_embedding() -> @kernel.Thm
+
+pub fn straight_line_embedding_edge_chord_endpoint() -> @kernel.Thm
+
+pub fn straight_line_embedding_eq_on_vertices() -> @kernel.Thm
+
+pub fn straight_line_embedding_imp_plane_graph_embedding() -> @kernel.Thm
+
+pub fn straight_line_embedding_imp_polygonal_plane_graph_embedding() -> @kernel.Thm
+
+pub fn straight_line_embedding_insert_vertex_bezier_chain() -> @kernel.Thm
+
+pub fn straight_line_embedding_insert_vertex_star() -> @kernel.Thm
+
+pub fn straight_line_embedding_insert_vertex_star_outside_hull() -> @kernel.Thm
+
+pub fn straight_line_embedding_ray_inter_edge() -> @kernel.Thm
+
+pub fn straight_line_embedding_subset_edges() -> @kernel.Thm
+
+pub fn straight_line_embedding_supporting_unbounded_face() -> @kernel.Thm
+
+pub fn straight_line_embedding_triangle() -> @kernel.Thm
+
+pub fn straight_line_embedding_union() -> @kernel.Thm
+
+pub fn straight_line_embedding_union_along_edge() -> @kernel.Thm
+
+pub fn straight_line_embedding_union_strictly_convex_cycle_split() -> @kernel.Thm
+
+pub fn straight_line_embeddings_along_edge_cross_inj() -> @kernel.Thm
+
+pub fn straight_line_embeddings_along_edge_inter_edges() -> @kernel.Thm
+
+pub fn straight_line_embeddings_along_edge_inter_vertices() -> @kernel.Thm
+
+pub fn straight_line_graph_carrier_subset_convex_hull() -> @kernel.Thm
+
+pub fn straight_line_planar_graph() -> @kernel.Thm
+
+pub fn straight_line_planar_graph_5_degenerate() -> @kernel.Thm
+
+pub fn straight_line_planar_graph_componentwise_eq() -> @kernel.Thm
+
+pub fn straight_line_planar_graph_contract_edge() -> @kernel.Thm
+
+pub fn straight_line_planar_graph_delete_edge() -> @kernel.Thm
+
+pub fn straight_line_planar_graph_edge_amalgamation() -> @kernel.Thm
+
+pub fn straight_line_planar_graph_edge_bound() -> @kernel.Thm
+
+pub fn straight_line_planar_graph_image() -> @kernel.Thm
+
+pub fn straight_line_planar_graph_image_eq() -> @kernel.Thm
+
+pub fn straight_line_planar_graph_induced_subgraph() -> @kernel.Thm
+
+pub fn straight_line_planar_graph_low_degree() -> @kernel.Thm
+
+pub fn straight_line_planar_graph_minor() -> @kernel.Thm
+
+pub fn straight_line_planar_graph_singleton_amalgamation() -> @kernel.Thm
+
+pub fn straight_line_planar_graph_subgraph() -> @kernel.Thm
+
+pub fn straight_line_planar_imp_planar_graph() -> @kernel.Thm
+
+pub fn straight_line_planar_imp_polygonally_planar() -> @kernel.Thm
+
+pub fn strictly_convex_cycle() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_3_exists() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_arc_tangent_at_old_vertex() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_arc_tangent_control() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_chain_control_pair() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_chain_fan_hull() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_chain_fan_inter() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined_control_outside_hull_general() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined_fan_hull() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined_first_endpoint_eq() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined_first_endpoint_fan_hull() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined_first_endpoint_side() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined_last_endpoint_eq() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined_last_endpoint_fan_hull() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined_last_endpoint_side() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined_tangent_eq() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined_tangent_side() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined_uniform() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined_zero_chord_eq() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined_zero_chord_side() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_bezier_refined_zero_endpoint_fan_hull() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_last_triangle() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_quadratic_bezier_orientations() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_quadratic_bezier_pair() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_quadratic_bezier_right() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_quadratic_bezier_tangent_at_old_vertex() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_quadratic_bezier_triple() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_split_hulls_inter() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_split_left() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_split_left_orientation() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_split_left_side() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_split_right() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_split_right_orientation() -> @kernel.Thm
+
+pub fn strictly_convex_cycle_split_right_side() -> @kernel.Thm
+
+pub fn subdivision_darts_distinct() -> @kernel.Thm
+
+pub fn subdivision_new_edges_disjoint() -> @kernel.Thm
+
+pub fn subdivision_pair_set_eq() -> @kernel.Thm
+
+pub fn subdivision_tail_swap() -> @kernel.Thm
+
+pub fn subdivision_tail_swap_fst() -> @kernel.Thm
+
+pub fn subdivision_tail_swap_image() -> @kernel.Thm
+
+pub fn subdivision_tail_swap_involution() -> @kernel.Thm
+
+pub fn subdivision_tail_swap_involution_apply() -> @kernel.Thm
+
+pub fn subdivision_tail_swap_other() -> @kernel.Thm
+
+pub fn subdivision_tail_swap_reverse_retained() -> @kernel.Thm
+
+pub fn subdivision_tail_swap_values() -> @kernel.Thm
+
+pub fn subdivision_vertices_distinct() -> @kernel.Thm
+
+pub fn swap_injective() -> @kernel.Thm
+
+pub fn swap_involution_apply() -> @kernel.Thm
+
+pub fn swap_permutation_delete_cancel() -> @kernel.Thm
+
+pub fn swap_permutation_delete_splice() -> @kernel.Thm
+
+pub fn swap_preserves_key() -> @kernel.Thm
+
+pub fn theta_split_closed_sides() -> @kernel.Thm
+
+pub fn three_ordered_indices() -> @kernel.Thm
+
+pub fn three_path_extension_edges() -> @kernel.Thm
+
+pub fn three_path_extension_edges_subset() -> @kernel.Thm
+
+pub fn three_path_extension_vertices() -> @kernel.Thm
+
+pub fn triangle_cyclic_edge_at_0() -> @kernel.Thm
+
+pub fn triangle_cyclic_edge_at_1() -> @kernel.Thm
+
+pub fn triangle_cyclic_edge_at_2() -> @kernel.Thm
+
+pub fn triangle_incident_edge_choice() -> @kernel.Thm
+
+pub fn triangle_offset_last() -> @kernel.Thm
+
+pub fn triangle_rotation() -> @kernel.Thm
+
+pub fn triangle_rotation_values() -> @kernel.Thm
+
+pub fn triangular_cycle_delete_vertex_neighbors() -> @kernel.Thm
+
+pub fn triangular_simple_graph_cycle_clique() -> @kernel.Thm
+
+pub fn two_choices_cover() -> @kernel.Thm
+
+pub fn two_edge_path_reverse() -> @kernel.Thm
+
+pub fn two_element_set_disjoint() -> @kernel.Thm
+
+pub fn two_point_transitive_values() -> @kernel.Thm
+
+pub fn two_standard_plane_points_has_size() -> @kernel.Thm
+
+pub fn two_vertex_neighbor_path() -> @kernel.Thm
+
+pub fn unbounded_connected_frontier_avoids_jordan_inside() -> @kernel.Thm
+
+pub fn unbounded_connected_frontier_avoids_two_arc_inside() -> @kernel.Thm
+
+pub fn union3_inter_union3() -> @kernel.Thm
+
+pub fn unions_cyclic_split_boundary_edges_inter() -> @kernel.Thm
+
+pub fn unions_cyclic_split_left_boundary_edges() -> @kernel.Thm
+
+pub fn unions_cyclic_split_right_boundary_edges() -> @kernel.Thm
+
+pub fn unions_graph_faces() -> @kernel.Thm
+
+pub fn unit_horizontal_segment_at_most_two_incident_components() -> @kernel.Thm
+
+pub fn unit_horizontal_segment_frontier() -> @kernel.Thm
+
+pub fn unit_horizontal_segment_frontier_locally() -> @kernel.Thm
+
+pub fn vertex_2_connected_delete_rotation_exit_dart() -> @kernel.Thm
+
+pub fn vertex_2_connected_delete_vertex_exits_cofacial() -> @kernel.Thm
+
+pub fn vertex_2_connected_delete_vertex_neighbors_on_face_cycle() -> @kernel.Thm
+
+pub fn vertex_2_connected_euler_planar_face_cyclic_walk() -> @kernel.Thm
+
+pub fn vertex_2_connected_euler_planar_rotation_face_tail_injective() -> @kernel.Thm
+
+pub fn vertex_2_connected_graph_component_neighbor() -> @kernel.Thm
+
+pub fn vertex_2_connected_graph_component_path() -> @kernel.Thm
+
+pub fn vertex_2_connected_graph_component_path_in() -> @kernel.Thm
+
+pub fn vertex_2_connected_graph_delete_vertex() -> @kernel.Thm
+
+pub fn vertex_2_connected_graph_edges_nonempty() -> @kernel.Thm
+
+pub fn vertex_2_connected_graph_not_3_connected_separator_pair() -> @kernel.Thm
+
+pub fn vertex_2_connected_graph_separator_component_complement() -> @kernel.Thm
+
+pub fn vertex_2_connected_graph_separator_component_side() -> @kernel.Thm
+
+pub fn vertex_3_connected_euler_planar_delete_vertex_face_cycle() -> @kernel.Thm
+
+pub fn vertex_3_connected_euler_planar_graph_eq_kuratowski_free() -> @kernel.Thm
+
+pub fn vertex_3_connected_graph_component_add_pair_delete_connected() -> @kernel.Thm
+
+pub fn vertex_3_connected_graph_contract_2_connected() -> @kernel.Thm
+
+pub fn vertex_3_connected_graph_contract_euler_planar() -> @kernel.Thm
+
+pub fn vertex_3_connected_graph_contract_small_separator() -> @kernel.Thm
+
+pub fn vertex_3_connected_graph_contractible_edge() -> @kernel.Thm
+
+pub fn vertex_3_connected_graph_delete_pair() -> @kernel.Thm
+
+pub fn vertex_3_connected_graph_delete_vertex_2_connected() -> @kernel.Thm
+
+pub fn vertex_3_connected_graph_failed_contraction_separator() -> @kernel.Thm
+
+pub fn vertex_3_connected_graph_has_adjacent_separator_component() -> @kernel.Thm
+
+pub fn vertex_3_connected_graph_minimum_degree() -> @kernel.Thm
+
+pub fn vertex_3_connected_graph_neighbor_away() -> @kernel.Thm
+
+pub fn vertex_3_connected_graph_separator_component_neighbor() -> @kernel.Thm
+
+pub fn vertex_3_connected_kuratowski_free_euler_planar() -> @kernel.Thm
+
+pub fn vertex_k_connected_graph() -> @kernel.Thm
+
+pub fn vertex_k_connected_graph_card() -> @kernel.Thm
+
+pub fn vertex_k_connected_graph_connected() -> @kernel.Thm
+
+pub fn vertex_k_connected_graph_contract() -> @kernel.Thm
+
+pub fn vertex_k_connected_graph_delete_lt() -> @kernel.Thm
+
+pub fn vertex_k_connected_graph_eq_no_small_separator() -> @kernel.Thm
+
+pub fn vertex_k_connected_graph_finite_simple() -> @kernel.Thm
+
+pub fn vertex_k_connected_graph_has_edge() -> @kernel.Thm
+
+pub fn vertex_k_connected_graph_mono() -> @kernel.Thm
+
+pub fn wagner() -> @kernel.Thm
+
+pub fn wagner_branch() -> @kernel.Thm
+
+pub fn wagner_branch_euler() -> @kernel.Thm
+
+pub fn wagner_branch_straight_line() -> @kernel.Thm
+
+pub fn wagner_euler() -> @kernel.Thm
+
+pub fn wagner_straight_line() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
