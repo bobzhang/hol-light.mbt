@@ -1,0 +1,125 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/divstep/idivstep"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn divstep_congruence() -> @kernel.Thm
+
+pub fn divstep_congruence_neg() -> @kernel.Thm
+
+pub fn divstep_d() -> @kernel.Thm
+
+pub fn divstep_d_bound() -> @kernel.Thm
+
+pub fn divstep_d_congruence() -> @kernel.Thm
+
+pub fn divstep_d_congruence_gen() -> @kernel.Thm
+
+pub fn divstep_d_mod() -> @kernel.Thm
+
+pub fn divstep_d_neg() -> @kernel.Thm
+
+pub fn divstep_d_parity() -> @kernel.Thm
+
+pub fn divstep_d_v1() -> @kernel.Thm
+
+pub fn divstep_dfg() -> @kernel.Thm
+
+pub fn divstep_dfg_add() -> @kernel.Thm
+
+pub fn divstep_f() -> @kernel.Thm
+
+pub fn divstep_f_bounds() -> @kernel.Thm
+
+pub fn divstep_f_bounds_lt() -> @kernel.Thm
+
+pub fn divstep_f_neg() -> @kernel.Thm
+
+pub fn divstep_f_odd() -> @kernel.Thm
+
+pub fn divstep_f_v1() -> @kernel.Thm
+
+pub fn divstep_fg_gcd() -> @kernel.Thm
+
+pub fn divstep_g() -> @kernel.Thm
+
+pub fn divstep_g_bounds() -> @kernel.Thm
+
+pub fn divstep_g_bounds_lt() -> @kernel.Thm
+
+pub fn divstep_g_neg() -> @kernel.Thm
+
+pub fn divstep_g_v1() -> @kernel.Thm
+
+pub fn divstep_g_zero() -> @kernel.Thm
+
+pub fn divstep_mat() -> @kernel.Thm
+
+pub fn divstep_mat_abs_bounds() -> @kernel.Thm
+
+pub fn divstep_mat_add() -> @kernel.Thm
+
+pub fn divstep_mat_bounds() -> @kernel.Thm
+
+pub fn divstep_mat_congruence() -> @kernel.Thm
+
+pub fn divstep_mat_congruence_gen() -> @kernel.Thm
+
+pub fn divstep_mat_diagonal() -> @kernel.Thm
+
+pub fn divstep_mat_diagonal_1() -> @kernel.Thm
+
+pub fn divstep_mat_diagonal_2() -> @kernel.Thm
+
+pub fn divstep_mat_mod() -> @kernel.Thm
+
+pub fn divstep_mat_neg() -> @kernel.Thm
+
+pub fn divstep_mat_v1() -> @kernel.Thm
+
+pub fn forall_2() -> @kernel.Thm
+
+pub fn hdivstep() -> @kernel.Thm
+
+pub fn hdivstep_divstep() -> @kernel.Thm
+
+pub fn hdivstep_idivstep() -> @kernel.Thm
+
+pub fn idivstep() -> @kernel.Thm
+
+pub fn idivstep_stays_odd() -> @kernel.Thm
+
+pub fn idivstep_stays_zero() -> @kernel.Thm
+
+pub fn imat_i() -> @kernel.Thm
+
+pub fn imat_i_v1() -> @kernel.Thm
+
+pub fn imat_mul() -> @kernel.Thm
+
+pub fn imat_mul_assoc() -> @kernel.Thm
+
+pub fn imat_mul_lid() -> @kernel.Thm
+
+pub fn imat_mul_v1() -> @kernel.Thm
+
+pub fn imat_vmul() -> @kernel.Thm
+
+pub fn isum_2() -> @kernel.Thm
+
+pub fn iter_divstep_integer() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn vector_2() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

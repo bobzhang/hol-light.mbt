@@ -1,0 +1,25 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/divstep/divstep_bounds"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn divstep_endtoend_bits_simple() -> @kernel.Thm
+
+pub fn idivstep_endtoend_bits_simple() -> @kernel.Thm
+
+pub fn integer_divstep_delta() -> @kernel.Thm
+
+pub fn iter_divstep_odd_alt() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
