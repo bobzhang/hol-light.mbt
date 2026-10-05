@@ -1551,6 +1551,12 @@ module Lower = struct
            | "lib.apply" | "lib.applyd" | "lib.defined" | "lib.undefine" | "lib.tryapplyd" | "lib.update"
            | "lib.single" ->
                (match args with a :: _ -> note_bounds [ a ] | [] -> ())
+           | _ when args = [] ->
+               (* passed as a value (`map sort_on_snd`, Boyer_Moore/
+                  irrelevance.ml): its instance's type variables *)
+               (match res with
+                | Some t -> List.iter (fun v -> Hashtbl.replace bound_tyvars v ()) (tyvars_of_text (show_ty t))
+                | None -> ())
            | _ -> note_bounds args
          end
      | _ -> ());
