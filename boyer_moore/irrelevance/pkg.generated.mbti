@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/boyer_moore/irrelevance"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] build_disj((@list.List[(@kernel.Term, TA)], @list.List[(@kernel.Term, TA)]), @kernel.Thm) -> @kernel.Thm raise
+
+pub fn contains_recursive_fun(@list.List[@kernel.Term]) -> Bool raise
+
+pub fn disj_disch(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn disj_imp(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn disj_undisch(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn find_irrelevant_literals(@kernel.Term) -> (@list.List[(@kernel.Term, Int64)], @list.List[(@kernel.Term, Int64)]) raise
+
+pub fn imp_elim(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn irrelevance_heuristic(@kernel.Term, Bool) -> (@list.List[(@kernel.Term, Bool)], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn is_singleton_rec_app(@list.List[@kernel.Term]) -> Bool raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] merge_numbered_lists(@list.List[(TA, TB)], @list.List[(TA, TB)]) -> @list.List[(TA, TB)] raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] partition_literals(@list.List[(@kernel.Term, TA)]) -> @list.List[@list.List[(@kernel.Term, TA)]] raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

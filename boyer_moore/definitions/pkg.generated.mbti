@@ -1,0 +1,34 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/boyer_moore/definitions"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn[TA, TB, TC, TD] good_properties(TA, TB, TC, TD) -> Bool raise
+
+pub fn hide_fun_call(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn is_explicit_value(@kernel.Term) -> Bool raise
+
+pub fn is_subterm(@kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn more_explicit_values(@kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn no_new_terms(@kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn recursive_calls(String, @kernel.Term) -> @list.List[@kernel.Term] raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

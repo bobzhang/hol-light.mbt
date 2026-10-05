@@ -1,0 +1,83 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/boyer_moore/clausal_form"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn and_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn clausal_form_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn cond_expand() -> @kernel.Thm
+
+pub fn cond_expand_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn conj_assoc_norm() -> @kernel.Thm
+
+pub fn conj_assoc_norm_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn conj_linear_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn conj_norm_form_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn disj_assoc_norm() -> @kernel.Thm
+
+pub fn disj_assoc_norm_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn eq_expand() -> @kernel.Thm
+
+pub fn eq_expand_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn eq_imp_cond_elim_conv((@kernel.Term) -> Bool raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn has_boolean_args_and_result(@kernel.Term) -> Bool raise
+
+pub fn imp_disj_thm() -> @kernel.Thm
+
+pub fn imp_expand() -> @kernel.Thm
+
+pub fn imp_expand_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn left_dist_norm() -> @kernel.Thm
+
+pub fn left_dist_norm_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn left_or_over_and() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn move_not_down_conv((@kernel.Term) -> Bool raise, (@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn not_conj_norm() -> @kernel.Thm
+
+pub fn not_conj_norm_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn not_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn not_disj_norm() -> @kernel.Thm
+
+pub fn not_disj_norm_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn not_not_norm() -> @kernel.Thm
+
+pub fn not_not_norm_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn or_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn right_dist_norm() -> @kernel.Thm
+
+pub fn right_dist_norm_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn right_or_over_and() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

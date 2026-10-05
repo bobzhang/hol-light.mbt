@@ -1,0 +1,59 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/boyer_moore/environment"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn bm_steps() -> @ref.Ref[(Int64, Int64)]
+
+pub fn conj_imp_imp_imp() -> @kernel.Thm
+
+pub fn conj_list(Int64, @kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn conj_undisch(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn defs(Unit) -> @list.List[@list.List[@kernel.Thm]] raise
+
+pub fn defs_names(Unit) -> @list.List[String] raise
+
+pub fn gen_lemmas(Unit) -> @list.List[@kernel.Thm] raise
+
+pub fn get_def(String) -> (Int64, @list.List[(String, @kernel.Thm)]) raise
+
+pub fn gspec(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn list_conj(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn max_var_depth(@kernel.Term) -> Int64 raise
+
+pub fn my_gen_terms() -> @ref.Ref[@list.List[@kernel.Term]]
+
+pub fn new_def(@kernel.Thm) -> Unit raise
+
+pub fn new_gen_lemma(@kernel.Thm) -> Unit raise
+
+pub fn new_rewrite_rule(@kernel.Thm) -> Unit raise
+
+pub fn rewrite_rules(Unit) -> @list.List[@kernel.Thm] raise
+
+pub fn system_defs() -> @ref.Ref[@list.List[(String, (Int64, @list.List[(String, @kernel.Thm)]))]]
+
+pub fn system_gen_lemmas() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn system_rewrites() -> @ref.Ref[@list.List[(@kernel.Thm, @kernel.Thm)]]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
