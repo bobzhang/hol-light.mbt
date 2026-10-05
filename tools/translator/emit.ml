@@ -483,7 +483,9 @@ module Emit = struct
     Hashtbl.replace own_ctors oname !current_pkg;
     (* a distinct suberror per exception (`Substlist.Unify` and
        `Substarray.Unify` are different exceptions) *)
-    let rec go i = let n = if i = 0 then oname else oname ^ string_of_int i in if Hashtbl.mem type_names n then go (i + 1) else n in
+    (* `Error` is MoonBit's own type (Formal_ineqs/misc/misc_functions.hl
+       has an `exception Error`) *)
+    let rec go i = let n = if i = 0 then oname else oname ^ string_of_int i in if Hashtbl.mem type_names n || n = "Error" then go (i + 1) else n in
     let sname = go 0 in
     Hashtbl.replace type_names sname ();
     Hashtbl.replace own_exns ("#" ^ Ident.unique_name ext.ext_id) (!current_pkg, sname);
@@ -556,7 +558,20 @@ module Emit = struct
      translated file being loaded as a prefix *)
   let register_path : string list ref = ref []
 
+  (* `module M : S = struct ... end` is a constraint (two, as camlp5 gives
+     it: Formal_ineqs/arith/arith_num.hl) around the structure: the module
+     and included-module shapes below are matched without them *)
+  let rec unconstrain (m : module_expr) =
+    match m.mod_desc with Tmod_constraint (m', _, _, _) -> unconstrain m' | _ -> m
+
+  let unconstrained (it : structure_item) =
+    match it.str_desc with
+    | Tstr_module mb -> { it with str_desc = Tstr_module { mb with mb_expr = unconstrain mb.mb_expr } }
+    | Tstr_include i -> { it with str_desc = Tstr_include { i with incl_mod = unconstrain i.incl_mod } }
+    | _ -> it
+
   let rec register pkg (it : structure_item) =
+    let it = unconstrained it in
     match it.str_desc with
     | Tstr_type (_, decls) ->
         List.iter
@@ -610,6 +625,7 @@ module Emit = struct
           (fun () -> emit_types ~prefix decls)
 
   let rec item ~(hand : hand list) (it : structure_item) =
+    let it = unconstrained it in
     item_env := Some it.str_env;
     Hashtbl.reset bound_tyvars;
     let _, line, _ = Location.get_pos_info it.str_loc.Location.loc_start in
@@ -862,7 +878,16 @@ module Emit = struct
                  named;
                pending_calls := []
            | Tstr_eval (e, _) -> emit_eval e
-           | _ -> unsupported it.str_loc "structure item"
+           | _ ->
+               let d = match it.str_desc with
+                 | Tstr_module { mb_expr = { mod_desc; _ }; _ } ->
+                     (match mod_desc with
+                      | Tmod_apply _ -> "a functor application" | Tmod_unpack _ -> "an unpacked module"
+                      | _ -> "a module")
+                 | Tstr_recmodule _ -> "recursive modules" | Tstr_include _ -> "include" | Tstr_class _ -> "a class"
+                 | Tstr_primitive _ -> "external" | Tstr_typext _ -> "a type extension"
+                 | _ -> "other" in
+               unsupported it.str_loc "structure item (%s)" d
          with Unsupported (msg, loc) ->
            incr errors;
            let file, l, c = Location.get_pos_info loc.Location.loc_start in

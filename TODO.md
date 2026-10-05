@@ -92,18 +92,22 @@ and file I/O before starting it.
      Then 100/thales and ceva.
    - miz3 (its own proof language, evaluated at run time), LP_arith.
    - Formal_ineqs (44K, 62 files in make.ml's closure): the tooling loads
-     it now (theory.ROOTS: one linear order; nested package paths). A
-     survey (`HOL_KEEP_GOING=1 batch.py --translate-only --files ...`)
-     left these for the translator, in order of weight:
-     `exception Error` (misc/misc_functions.hl: `Error` is a reserved type
-     name in MoonBit, rename it; every later file depends on this one);
-     "no provenance for <name>" for values of the file's own module used
-     from inside it (th_rule, case_rule, num_exp, ... about 250 uses: start
-     with arith/arith_num.hl); `Big_int.sign_big_int`; two "structure
-     item" and two "recursive value whose set-up uses itself". The
-     directory also writes log files (tests/log.hl: `Unix.mkdir`, output
-     channels, formats): port that module by hand, as
-     jordan/tactics_refine/dump.mbt.
+     it (theory.ROOTS: one linear order; nested package paths), and its
+     first four files translate (arith_options, misc_functions, misc_vars,
+     arith/arith_num: sealed modules and `exception Error` are handled).
+     Survey it with `HOL_KEEP_GOING=1 batch.py --translate-only --files
+     ...`; one file alone, without the Multivariate/ chain, with
+     `translate.sh translate Formal_ineqs/arith/arith_num.hl`. Next, in
+     order:
+     arith/arith_cache.hl's `reset_cache` has a local function used at two
+     types (`let clear = Hashtbl.clear in clear t1; clear t2`: MoonBit
+     closures are monomorphic, lift it as a generic function);
+     then whatever the survey still reports once that builds (the
+     "no provenance for th_rule/case_rule/RULE ..." lines come after
+     packages that failed to build, so they may be noise);
+     `Big_int.sign_big_int`; and tests/log.hl, which writes log files
+     (`Unix.mkdir`, output channels, formats): port that module by hand,
+     as jordan/tactics_refine/dump.mbt.
    - Tutorial/: the six files left need sos.ml, Rqe/make.ml or external
      tools.
    - Not theories, not ported: Proofrecording (a second kernel), ProofTrace,
