@@ -1,0 +1,25 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/sylvester_gallai"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cases_lemma() -> @kernel.Thm
+
+pub fn cases_quick() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn sylvester_gallai() -> @kernel.Thm
+
+pub fn sylvester_gallai_lemma() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
