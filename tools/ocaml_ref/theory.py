@@ -57,6 +57,11 @@ def pkg_of(f):
         return RENAMED[s]
     if "/" in s:
         d, b = s.split("/", 1)
+        if b == "make":
+            # `<dir>/make` is the directory's chain test package
+            # (chain_test.py); make.ml itself, when a file of another
+            # directory needs it, is `<dir>/<dir>_make`
+            return d.lower() + "/" + d.lower() + "_make"
         same = [x for x in os.listdir(HOL) if x.lower() == d.lower() and os.path.isdir(os.path.join(HOL, x))]
         if len(same) > 1:
             sys.exit(f"upstream directories {same} map to the same package directory")
