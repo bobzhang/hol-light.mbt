@@ -39,6 +39,20 @@ let quotation_trace = ref ([] : string list);;
 let parse_type s = quotation_trace := (":" ^ s) :: !quotation_trace; parse_type s;;
 let parse_term s = quotation_trace := s :: !quotation_trace; parse_term s;;
 let start_trace () = quotation_trace := [];;
+(* A quotation parsed 10000 times or more in a row is shown once, with the
+   count (Autoformalization/fifteen_theorem.ml parses `F` 2.4 million
+   times). *)
 let show_trace name =
   out (name ^ " quotations (" ^ string_of_int (length !quotation_trace) ^ "):");
-  List.iter (fun s -> out ("  " ^ String.escaped s)) (rev !quotation_trace);;
+  let rec go l =
+    match l with
+      [] -> ()
+    | s :: _ ->
+        let rec count n l = match l with x :: t when x = s -> count (n + 1) t | _ -> n, l in
+        let n, rest = count 0 l in
+        if n >= 10000 then
+          (out ("  " ^ String.escaped s); out ("  (" ^ string_of_int (n - 1) ^ " more times)"))
+        else
+          (for i = 1 to n do out ("  " ^ String.escaped s) done);
+        go rest in
+  go (rev !quotation_trace);;

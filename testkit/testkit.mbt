@@ -190,10 +190,32 @@ pub fn start_trace() -> Unit {
 pub fn Log::show_trace(self : Log, name : String) -> Unit {
   let t = @parser.quotation_trace.val.unwrap_or([])
   self.out(name + " quotations (" + t.length().to_string() + "):")
-  for s in t {
-    self.out("  " + ocaml_escaped(s))
-  }
+  self.out_quotations(t)
   @parser.quotation_trace.val = None
+}
+
+///|
+/// The quotations, one a line; one parsed 10000 times or more in a row is
+/// shown once, with the count (Autoformalization/fifteen_theorem.ml parses
+/// `F` 2.4 million times), as tools/ocaml_ref/prelude.ml's `show_trace`.
+fn Log::out_quotations(self : Log, t : Array[String]) -> Unit {
+  let mut i = 0
+  while i < t.length() {
+    let mut j = i + 1
+    while j < t.length() && t[j] == t[i] {
+      j += 1
+    }
+    let n = j - i
+    if n >= 10000 {
+      self.out("  " + ocaml_escaped(t[i]))
+      self.out("  (" + (n - 1).to_string() + " more times)")
+    } else {
+      for _ in 0..<n {
+        self.out("  " + ocaml_escaped(t[i]))
+      }
+    }
+    i = j
+  }
 }
 
 ///|
@@ -211,9 +233,7 @@ pub fn Log::show_theory_output(self : Log, name : String) -> Unit {
 pub fn Log::show_theory_trace(self : Log, name : String) -> Unit {
   let t = @parser.theory_trace(name)
   self.out(name + " quotations (" + t.length().to_string() + "):")
-  for s in t {
-    self.out("  " + ocaml_escaped(s))
-  }
+  self.out_quotations(t)
 }
 
 ///|
