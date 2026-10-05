@@ -105,6 +105,8 @@ pub fn[T] failure() -> T raise
 
 pub fn[T] failwith(String) -> T raise
 
+pub fn file_of_string(String, String) -> Unit
+
 pub fn[A] filter((A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
 
 pub fn[A] find((A) -> Bool raise?, @list.List[A]) -> A raise
@@ -334,6 +336,8 @@ pub fn remark(String) -> Unit
 pub fn[A] remove((A) -> Bool raise?, @list.List[A]) -> (A, @list.List[A]) raise
 
 pub fn[A] repeat((A) -> A raise, A) -> A raise
+
+pub fn replay_command(String, Array[String?], Int, Array[(Int, String)]) -> Unit
 
 pub fn[A] replicate(A, Int) -> @list.List[A]
 

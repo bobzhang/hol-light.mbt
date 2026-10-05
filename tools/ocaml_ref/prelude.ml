@@ -6,6 +6,56 @@ let loadt (_:string) = ();;
 let loads (_:string) = ();;
 let float_sqrt = sqrt;;
 let float_fabs = abs_float;;
+(* The external programs a file runs (csdp for Examples/sos.ml's REAL_SOS,
+   ...) are recorded for the MoonBit side to replay (lib/gp.mbt,
+   replay_command; wasm has no processes): each command's shape (its file
+   names, the words containing a `/`, replaced by <F1>, <F2>, ...), what
+   those files held before, its exit status and the files it wrote, into
+   the file `command_log` names (batch.py sets it for a target's load).
+   PARI/GP's factorizations are computed there, not replayed. *)
+let command_log = ref "";;
+module Sys = struct
+  include Sys
+  let command cmd =
+    let seps = " \t\n;()<>|&'\"" in
+    let n = String.length cmd in
+    let paths = ref [] and buf = Buffer.create n and tok = Buffer.create 64 in
+    let flush () =
+      let t = Buffer.contents tok in
+      Buffer.clear tok;
+      if String.contains t '/' then begin
+        (if not (List.mem t !paths) then paths := !paths @ [t]);
+        let rec idx i l = match l with x :: r -> if x = t then i else idx (i + 1) r | [] -> 0 in
+        Buffer.add_string buf ("<F" ^ string_of_int (idx 1 !paths) ^ ">")
+      end else Buffer.add_string buf t in
+    for i = 0 to n - 1 do
+      if String.contains seps (String.get cmd i) then (flush (); Buffer.add_char buf (String.get cmd i))
+      else Buffer.add_char tok (String.get cmd i)
+    done;
+    flush ();
+    let read p =
+      if Sys.file_exists p && not (Sys.is_directory p)
+         && not (String.length p >= 5 && String.sub p 0 5 = "/dev/") then begin
+        let ic = open_in_bin p in
+        let s = really_input_string ic (in_channel_length ic) in
+        close_in ic; Some s
+      end else None in
+    let before = List.map read !paths in
+    let st = Sys.command cmd in
+    let after = List.map read !paths in
+    (if !command_log <> "" && not (String.length cmd > 22 && String.sub cmd 0 22 = "echo 'print(factorint(") then begin
+       let oc = open_out_gen [Open_wronly; Open_creat; Open_append; Open_binary] 0o644 !command_log in
+       let blob tag s = output_string oc (tag ^ " " ^ string_of_int (String.length s) ^ "\n" ^ s ^ "\n") in
+       blob "CMD" (Buffer.contents buf);
+       List.iter (fun b -> match b with Some s -> blob "IN" s | None -> output_string oc "IN -1\n") before;
+       output_string oc ("ST " ^ string_of_int st ^ "\n");
+       List.iteri (fun i (b, a) -> match a with Some s when a <> b -> blob ("OUT " ^ string_of_int i) s | _ -> ())
+         (List.combine before after);
+       output_string oc "END\n";
+       close_out oc
+     end);
+    st
+end;;
 #use "lib.ml";;
 #use "fusion.ml";;
 #use "basics.ml";;
