@@ -1,0 +1,530 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/apery"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn aa() -> @kernel.Thm
+
+pub fn aa_increasing() -> @kernel.Thm
+
+pub fn aa_integer() -> @kernel.Thm
+
+pub fn aa_lemma() -> @kernel.Thm
+
+pub fn aa_lemma_p() -> @kernel.Thm
+
+pub fn aa_lowerbound() -> @kernel.Thm
+
+pub fn aa_monotonic() -> @kernel.Thm
+
+pub fn aa_nonzero() -> @kernel.Thm
+
+pub fn aa_pos_lt() -> @kernel.Thm
+
+pub fn aa_rec_row() -> @kernel.Thm
+
+pub fn aa_recurrence() -> @kernel.Thm
+
+pub fn aa_recurrence_scaled() -> @kernel.Thm
+
+pub fn add_tm() -> @kernel.Term
+
+pub fn apery_abstract_identity(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Thm raise
+
+pub fn apery_add(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn apery_atoms() -> @list.List[@kernel.Term]
+
+pub fn apery_bigd() -> @kernel.Term
+
+pub fn apery_bigd_nz() -> @kernel.Thm
+
+pub fn apery_bigd_poly() -> @kernel.Thm
+
+pub fn apery_coeffs() -> @list.List[@kernel.Term]
+
+pub fn apery_has_atom(@kernel.Term) -> Bool raise
+
+pub fn apery_hyp() -> @kernel.Term
+
+pub fn apery_k0_zero() -> @kernel.Thm
+
+pub fn apery_k1_zero() -> @kernel.Thm
+
+pub fn apery_k2_zero() -> @kernel.Thm
+
+pub fn apery_lift_recurrence(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn apery_linear_form() -> @kernel.Term
+
+pub fn apery_linear_form_zero() -> @kernel.Thm
+
+pub fn apery_linearize(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn apery_main_coeff_lim() -> @kernel.Thm
+
+pub fn apery_make_raw(@list.List[@kernel.Term]) -> @list.List[(@kernel.Thm, @kernel.Term, @kernel.Term)] raise
+
+pub fn apery_mul(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn apery_neg(@kernel.Term) -> @kernel.Term raise
+
+pub fn apery_normalize_coeff(@kernel.Term) -> @kernel.Thm raise
+
+pub fn apery_normalize_denoms(@kernel.Term) -> @kernel.Thm raise
+
+pub fn apery_normalized_coeffs() -> @list.List[@kernel.Term]
+
+pub fn apery_one() -> @kernel.Term
+
+pub fn apery_original_zero(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn apery_prove_coefficient(@kernel.Term, @list.List[(@kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term)]) -> @kernel.Thm raise
+
+pub fn apery_prove_nz_product(@kernel.Term) -> @kernel.Thm raise
+
+pub fn apery_prove_poly_eq(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn apery_rat_cancel() -> @kernel.Thm
+
+pub fn apery_rat_scale() -> @kernel.Thm
+
+pub fn apery_ratio_coeff_lim() -> @kernel.Thm
+
+pub fn apery_rational_leaves(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn apery_rational_summands(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn apery_reconstruction() -> @kernel.Thm
+
+pub fn apery_recurrences() -> @list.List[@kernel.Thm]
+
+pub fn[TA] apery_reduce_fractions(@list.List[(@kernel.Thm, @kernel.Term, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term, TA, @kernel.Term)]) -> @list.List[@kernel.Thm] raise
+
+pub fn apery_reduced() -> @kernel.Thm
+
+pub fn apery_scalar_leaves(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn[TA] apery_scale_fractions(@list.List[(@kernel.Term, @kernel.Term, @kernel.Term, TA)]) -> @list.List[@kernel.Thm] raise
+
+pub fn apery_scale_sum(@list.List[@kernel.Term], @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn apery_sub(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn apery_sub_eq_zero() -> @kernel.Thm
+
+pub fn apery_sum(@list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn apery_sum_theorems(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn apery_target() -> @kernel.Term
+
+pub fn apery_target_zero() -> @kernel.Thm
+
+pub fn apery_unfold_coeff(@kernel.Term) -> @kernel.Thm raise
+
+pub fn apery_vec_add(@list.List[@kernel.Term], @list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise
+
+pub fn apery_vec_neg(@list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise
+
+pub fn apery_vec_scale(@kernel.Term, @list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise
+
+pub fn apery_vec_sub(@list.List[@kernel.Term], @list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise
+
+pub fn apery_zero() -> @kernel.Term
+
+pub fn approximation_bound() -> @kernel.Thm
+
+pub fn bb() -> @kernel.Thm
+
+pub fn bb_alt() -> @kernel.Thm
+
+pub fn bb_as_aazz_ww() -> @kernel.Thm
+
+pub fn bb_integer() -> @kernel.Thm
+
+pub fn bb_over_aa_increases() -> @kernel.Thm
+
+pub fn bb_over_aa_lim() -> @kernel.Thm
+
+pub fn bb_over_aa_lt_zeta3() -> @kernel.Thm
+
+pub fn bb_recurrence() -> @kernel.Thm
+
+pub fn bdry_bigd_nz() -> @kernel.Thm
+
+pub fn bdry_bigd_tm() -> @kernel.Term
+
+pub fn bdry_cert_eq() -> @kernel.Thm
+
+pub fn bdry_cl_inst(@kernel.Thm, Int64, Int64) -> @kernel.Thm raise
+
+pub fn bdry_cof0_tm() -> @kernel.Term
+
+pub fn bdry_cof10_tm() -> @kernel.Term
+
+pub fn bdry_cof11_tm() -> @kernel.Term
+
+pub fn bdry_cof12_tm() -> @kernel.Term
+
+pub fn bdry_cof13_tm() -> @kernel.Term
+
+pub fn bdry_cof14_tm() -> @kernel.Term
+
+pub fn bdry_cof15_tm() -> @kernel.Term
+
+pub fn bdry_cof16_tm() -> @kernel.Term
+
+pub fn bdry_cof1_tm() -> @kernel.Term
+
+pub fn bdry_cof2_tm() -> @kernel.Term
+
+pub fn bdry_cof3_tm() -> @kernel.Term
+
+pub fn bdry_cof4_tm() -> @kernel.Term
+
+pub fn bdry_cof5_tm() -> @kernel.Term
+
+pub fn bdry_cof6_tm() -> @kernel.Term
+
+pub fn bdry_cof7_tm() -> @kernel.Term
+
+pub fn bdry_cof8_tm() -> @kernel.Term
+
+pub fn bdry_cof9_tm() -> @kernel.Term
+
+pub fn bdry_connect() -> @kernel.Thm
+
+pub fn bdry_dcom_nz() -> @kernel.Thm
+
+pub fn bdry_dcom_tm() -> @kernel.Term
+
+pub fn bdry_gen0_tm() -> @kernel.Term
+
+pub fn bdry_gen10_tm() -> @kernel.Term
+
+pub fn bdry_gen11_tm() -> @kernel.Term
+
+pub fn bdry_gen12_tm() -> @kernel.Term
+
+pub fn bdry_gen13_tm() -> @kernel.Term
+
+pub fn bdry_gen14_tm() -> @kernel.Term
+
+pub fn bdry_gen15_tm() -> @kernel.Term
+
+pub fn bdry_gen16_tm() -> @kernel.Term
+
+pub fn bdry_gen1_tm() -> @kernel.Term
+
+pub fn bdry_gen2_tm() -> @kernel.Term
+
+pub fn bdry_gen3_tm() -> @kernel.Term
+
+pub fn bdry_gen4_tm() -> @kernel.Term
+
+pub fn bdry_gen5_tm() -> @kernel.Term
+
+pub fn bdry_gen6_tm() -> @kernel.Term
+
+pub fn bdry_gen7_tm() -> @kernel.Term
+
+pub fn bdry_gen8_tm() -> @kernel.Term
+
+pub fn bdry_gen9_tm() -> @kernel.Term
+
+pub fn bdry_gz() -> @list.List[@kernel.Thm]
+
+pub fn bdry_target_tm() -> @kernel.Term
+
+pub fn bdry_target_zero() -> @kernel.Thm
+
+pub fn binom_multiple_divides_lcm() -> @kernel.Thm
+
+pub fn boundary() -> @kernel.Thm
+
+pub fn bsum_expand() -> @kernel.Thm
+
+pub fn cancel_lem() -> @kernel.Thm
+
+pub fn cc() -> @kernel.Thm
+
+pub fn cc_eq_0() -> @kernel.Thm
+
+pub fn cc_n2r() -> @kernel.Thm
+
+pub fn cc_nr() -> @kernel.Thm
+
+pub fn cc_pos_lt() -> @kernel.Thm
+
+pub fn cc_step_k() -> @kernel.Thm
+
+pub fn cc_step_n() -> @kernel.Thm
+
+pub fn cof_tms() -> @list.List[@kernel.Term]
+
+pub fn conn_rhs() -> @kernel.Term
+
+pub fn d_step_k() -> @kernel.Thm
+
+pub fn d_step_n() -> @kernel.Thm
+
+pub fn d_term() -> @kernel.Thm
+
+pub fn dd() -> @kernel.Thm
+
+pub fn dd_explicit() -> @kernel.Thm
+
+pub fn dd_recurrence() -> @kernel.Thm
+
+pub fn denom_factors(@kernel.Term, @list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise
+
+pub fn dest_div(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn div1() -> @kernel.Thm
+
+pub fn div_tm() -> @kernel.Term
+
+pub fn divides_lcm_numseg() -> @kernel.Thm
+
+pub fn divides_lcm_set() -> @kernel.Thm
+
+pub fn divides_nproduct_from_member() -> @kernel.Thm
+
+pub fn factor_collect(@kernel.Term, @list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise
+
+pub fn gen_specs() -> @list.List[(@kernel.Thm, Int64, Int64)]
+
+pub fn gen_tms() -> @list.List[@kernel.Term]
+
+pub fn gidx() -> @list.List[@kernel.Thm]
+
+pub fn has_div(@kernel.Term) -> Bool raise
+
+pub fn hyp1p() -> @kernel.Thm
+
+pub fn hyp_thm() -> @kernel.Thm
+
+pub fn idx_norm() -> @list.List[@kernel.Thm]
+
+pub fn interior_full() -> @kernel.Thm
+
+pub fn interior_tele() -> @kernel.Thm
+
+pub fn inv_tm() -> @kernel.Term
+
+pub fn irrational_zeta3() -> @kernel.Thm
+
+pub fn is_binop_op(@kernel.Term, @kernel.Term) -> Bool raise
+
+pub fn lcm_bound() -> @kernel.Thm
+
+pub fn lcm_bound_simple() -> @kernel.Thm
+
+pub fn lcm_clauses() -> @kernel.Thm
+
+pub fn lcm_clauses_numseg() -> @kernel.Thm
+
+pub fn lcm_def() -> @kernel.Thm
+
+pub fn lcm_eq_0() -> @kernel.Thm
+
+pub fn lcm_nonzero() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn log_lcm_bound() -> @kernel.Thm
+
+pub fn lop() -> @kernel.Thm
+
+pub fn lop_aazz() -> @kernel.Thm
+
+pub fn lop_bb_0() -> @kernel.Thm
+
+pub fn lop_bb_1() -> @kernel.Thm
+
+pub fn m0c() -> @kernel.Thm
+
+pub fn m1c() -> @kernel.Thm
+
+pub fn m2c() -> @kernel.Thm
+
+pub fn m2c_nonzero() -> @kernel.Thm
+
+pub fn m_kernel_trivial() -> @kernel.Thm
+
+pub fn mol_factor() -> @kernel.Thm
+
+pub fn mul_tm() -> @kernel.Term
+
+pub fn neg_tm() -> @kernel.Term
+
+pub fn nz_for(@kernel.Term) -> @list.List[@kernel.Thm] raise
+
+pub fn p_eq_delta_q() -> @kernel.Thm
+
+pub fn pflat() -> @kernel.Thm
+
+pub fn pflat2() -> @kernel.Thm
+
+pub fn pflat_aazz() -> @kernel.Thm
+
+pub fn pflat_bb() -> @kernel.Thm
+
+pub fn pflat_ww() -> @kernel.Thm
+
+pub fn pflat_ww_decomp() -> @kernel.Thm
+
+pub fn pflat_ww_ge3() -> @kernel.Thm
+
+pub fn pow_tm() -> @kernel.Term
+
+pub fn pp() -> @kernel.Thm
+
+pub fn primepow_divides_numseg_lcm() -> @kernel.Thm
+
+pub fn primepow_divides_numseg_lcm_simple() -> @kernel.Thm
+
+pub fn primepow_divides_set_lcm() -> @kernel.Thm
+
+pub fn prove_bdry_gen_zero2(@kernel.Thm, Int64, Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn prove_factor_nz_imp(@kernel.Term) -> @kernel.Thm raise
+
+pub fn prove_nz(@list.List[@kernel.Thm], @kernel.Term) -> @kernel.Thm raise
+
+pub fn prove_pnz(@kernel.Term) -> @kernel.Thm raise
+
+pub fn prove_rat_eq(@list.List[@kernel.Thm], @kernel.Term) -> @kernel.Thm raise
+
+pub fn qc00() -> @kernel.Thm
+
+pub fn qc01() -> @kernel.Thm
+
+pub fn qc10() -> @kernel.Thm
+
+pub fn qflat() -> @kernel.Thm
+
+pub fn qflat_n1_bracket() -> @kernel.Thm
+
+pub fn qflat_n1_zero() -> @kernel.Thm
+
+pub fn qq() -> @kernel.Thm
+
+pub fn rat_add() -> @kernel.Thm
+
+pub fn rat_div() -> @kernel.Thm
+
+pub fn rat_eq_cross() -> @kernel.Thm
+
+pub fn rat_inv() -> @kernel.Thm
+
+pub fn rat_mul() -> @kernel.Thm
+
+pub fn rat_neg() -> @kernel.Thm
+
+pub fn rat_sub() -> @kernel.Thm
+
+pub fn rationalize_conv(@list.List[@kernel.Thm], @kernel.Term) -> @kernel.Thm raise
+
+pub fn re_summand() -> @kernel.Thm
+
+pub fn real_mul_nz() -> @kernel.Thm
+
+pub fn real_pow_nz() -> @kernel.Thm
+
+pub fn sigma_1() -> @kernel.Thm
+
+pub fn sigma_def() -> @kernel.Thm
+
+pub fn sigma_kp1() -> @kernel.Thm
+
+pub fn ss() -> @kernel.Thm
+
+pub fn ss_as_dterm() -> @kernel.Thm
+
+pub fn ss_diff_k() -> @kernel.Thm
+
+pub fn ss_sk2() -> @kernel.Thm
+
+pub fn ss_sn2() -> @kernel.Thm
+
+pub fn ss_snsk() -> @kernel.Thm
+
+pub fn ssn2_lhs() -> @kernel.Thm
+
+pub fn ssn2_sumeq() -> @kernel.Thm
+
+pub fn ssn2_summand() -> @kernel.Thm
+
+pub fn sub_tm() -> @kernel.Term
+
+pub fn sum_6() -> @kernel.Thm
+
+pub fn supp_rules() -> @list.List[@kernel.Thm]
+
+pub fn telescoping_rational_sum() -> @kernel.Thm
+
+pub fn telescoping_rational_sum_p() -> @kernel.Thm
+
+pub fn tri_k0_reduced() -> @list.List[(@kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term)]
+
+pub fn tri_k1_reduced() -> @list.List[(@kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term)]
+
+pub fn tri_k2_reduced() -> @list.List[(@kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term)]
+
+pub fn v_sk2() -> @kernel.Thm
+
+pub fn v_sk2_cl() -> @kernel.Thm
+
+pub fn v_sk2_cl_g() -> @kernel.Thm
+
+pub fn v_sn2() -> @kernel.Thm
+
+pub fn v_sn2_cl() -> @kernel.Thm
+
+pub fn v_sn2_cl_g() -> @kernel.Thm
+
+pub fn v_snsk() -> @kernel.Thm
+
+pub fn v_snsk_cl() -> @kernel.Thm
+
+pub fn v_snsk_cl_g() -> @kernel.Thm
+
+pub fn vsk2_k0() -> @kernel.Thm
+
+pub fn vsnsk_k0() -> @kernel.Thm
+
+pub fn vv() -> @kernel.Thm
+
+pub fn vv_support() -> @kernel.Thm
+
+pub fn vv_zero_k() -> @kernel.Thm
+
+pub fn ww() -> @kernel.Thm
+
+pub fn ww_ext() -> @kernel.Thm
+
+pub fn zeta() -> @kernel.Thm
+
+pub fn zeta3_pos() -> @kernel.Thm
+
+pub fn zz() -> @kernel.Thm
+
+pub fn zz_lim() -> @kernel.Thm
+
+pub fn zz_step() -> @kernel.Thm
+
+pub fn zz_sums() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
