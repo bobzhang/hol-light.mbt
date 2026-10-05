@@ -1,0 +1,545 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/geometric_algebra/geometricalgebra"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn bilinear_eq_mvbasis() -> @kernel.Thm
+
+pub fn bilinear_geomga() -> @kernel.Thm
+
+pub fn bilinear_innerga() -> @kernel.Thm
+
+pub fn bilinear_lcinner() -> @kernel.Thm
+
+pub fn bilinear_outerga() -> @kernel.Thm
+
+pub fn bilinear_productga() -> @kernel.Thm
+
+pub fn bilinear_rcinner() -> @kernel.Thm
+
+pub fn bilinear_scalarinner() -> @kernel.Thm
+
+pub fn blade() -> @kernel.Thm
+
+pub fn conjugation() -> @kernel.Thm
+
+pub fn conjugation_linear() -> @kernel.Thm
+
+pub fn conjugation_mvbasis() -> @kernel.Thm
+
+pub fn cross_product() -> @kernel.Thm
+
+pub fn define_pseudo_finite_type(Int64) -> @kernel.Thm raise
+
+pub fn dest_mk_geomalg() -> @kernel.Thm
+
+pub fn dimindex_geomalg() -> @kernel.Thm
+
+pub fn dimindex_has_size_triple_finite_sum() -> @kernel.Thm
+
+pub fn dimindex_triple_finite_sum() -> @kernel.Thm
+
+pub fn dot_mvbasis() -> @kernel.Thm
+
+pub fn dot_mvbasis_mvbasis() -> @kernel.Thm
+
+pub fn dot_mvbasis_mvbasis_unequal() -> @kernel.Thm
+
+pub fn dual() -> @kernel.Thm
+
+pub fn even_pow_eq() -> @kernel.Thm
+
+pub fn finite_cart_subset_lemma1() -> @kernel.Thm
+
+pub fn finite_geomalg() -> @kernel.Thm
+
+pub fn finite_powerset_cart_subset_lemma() -> @kernel.Thm
+
+pub fn forall_geomalg() -> @kernel.Thm
+
+pub fn forall_multivectorga_vec0() -> @kernel.Thm
+
+pub fn g_p_q_r_with_g_n() -> @kernel.Thm
+
+pub fn ga_geom_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn geom_aci() -> @kernel.Thm
+
+pub fn geom_arith(@kernel.Term) -> @kernel.Thm raise
+
+pub fn geom_canon_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn geom_mbasis_lid() -> @kernel.Thm
+
+pub fn geom_mbasis_refl() -> @kernel.Thm
+
+pub fn geom_mbasis_rid() -> @kernel.Thm
+
+pub fn geom_mbasis_skewsym() -> @kernel.Thm
+
+pub fn geom_mvbasis() -> @kernel.Thm
+
+pub fn geom_mvbasis_lid() -> @kernel.Thm
+
+pub fn geom_mvbasis_merge_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn geom_mvbasis_refl() -> @kernel.Thm
+
+pub fn geom_mvbasis_rid() -> @kernel.Thm
+
+pub fn geom_mvbasis_sing() -> @kernel.Thm
+
+pub fn geom_mvbasis_skewsym() -> @kernel.Thm
+
+pub fn geom_mvbasis_split_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn geom_outer_mvbasis_eq() -> @kernel.Thm
+
+pub fn geomalg_add_component() -> @kernel.Thm
+
+pub fn geomalg_beta() -> @kernel.Thm
+
+pub fn geomalg_eq() -> @kernel.Thm
+
+pub fn geomalg_eta() -> @kernel.Thm
+
+pub fn geomalg_grade() -> @kernel.Thm
+
+pub fn geomalg_image() -> @kernel.Thm
+
+pub fn geomalg_mul_component() -> @kernel.Thm
+
+pub fn geomalg_tybij() -> @kernel.Thm
+
+pub fn geomalg_tybij_th() -> @kernel.Thm
+
+pub fn geomalg_unique() -> @kernel.Thm
+
+pub fn geomalg_vec_component() -> @kernel.Thm
+
+pub fn geomalg_vsum() -> @kernel.Thm
+
+pub fn geomalg_vsum_component() -> @kernel.Thm
+
+pub fn geomga_assoc() -> @kernel.Thm
+
+pub fn geomga_ladd() -> @kernel.Thm
+
+pub fn geomga_lmul() -> @kernel.Thm
+
+pub fn geomga_lneg() -> @kernel.Thm
+
+pub fn geomga_lzero() -> @kernel.Thm
+
+pub fn geomga_mul() -> @kernel.Thm
+
+pub fn geomga_radd() -> @kernel.Thm
+
+pub fn geomga_rmul() -> @kernel.Thm
+
+pub fn geomga_rneg() -> @kernel.Thm
+
+pub fn geomga_rzero() -> @kernel.Thm
+
+pub fn grade_add_geomalg() -> @kernel.Thm
+
+pub fn grade_cmul_geomalg() -> @kernel.Thm
+
+pub fn grade_geomalg() -> @kernel.Thm
+
+pub fn has_pseudo_size_0() -> @kernel.Thm
+
+pub fn has_pseudo_size_1() -> @kernel.Thm
+
+pub fn has_pseudo_size_2() -> @kernel.Thm
+
+pub fn has_pseudo_size_3() -> @kernel.Thm
+
+pub fn has_pseudo_size_4() -> @kernel.Thm
+
+pub fn has_size_geomalg() -> @kernel.Thm
+
+pub fn in_span_image_mvbasis() -> @kernel.Thm
+
+pub fn independent_stdmvbasis() -> @kernel.Thm
+
+pub fn independent_stdmvbasis_sing() -> @kernel.Thm
+
+pub fn inner_mvbasis() -> @kernel.Thm
+
+pub fn inner_mvbasis_refl() -> @kernel.Thm
+
+pub fn inner_mvbasis_sing() -> @kernel.Thm
+
+pub fn inner_mvbasis_skewsym() -> @kernel.Thm
+
+pub fn innerga() -> @kernel.Thm
+
+pub fn innerga_ladd() -> @kernel.Thm
+
+pub fn innerga_lmul() -> @kernel.Thm
+
+pub fn innerga_lneg() -> @kernel.Thm
+
+pub fn innerga_lzero() -> @kernel.Thm
+
+pub fn innerga_radd() -> @kernel.Thm
+
+pub fn innerga_rmul() -> @kernel.Thm
+
+pub fn innerga_rneg() -> @kernel.Thm
+
+pub fn innerga_rzero() -> @kernel.Thm
+
+pub fn is_blade() -> @kernel.Thm
+
+pub fn is_null() -> @kernel.Thm
+
+pub fn is_versor() -> @kernel.Thm
+
+pub fn lambdaset() -> @kernel.Thm
+
+pub fn lcinner() -> @kernel.Thm
+
+pub fn lcinner_ladd() -> @kernel.Thm
+
+pub fn lcinner_lmul() -> @kernel.Thm
+
+pub fn lcinner_lneg() -> @kernel.Thm
+
+pub fn lcinner_lzero() -> @kernel.Thm
+
+pub fn lcinner_radd() -> @kernel.Thm
+
+pub fn lcinner_rmul() -> @kernel.Thm
+
+pub fn lcinner_rneg() -> @kernel.Thm
+
+pub fn lcinner_rzero() -> @kernel.Thm
+
+pub fn linear_eq_mvbasis() -> @kernel.Thm
+
+pub fn linear_multivect() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn meet() -> @kernel.Thm
+
+pub fn multivect() -> @kernel.Thm
+
+pub fn multivect_0() -> @kernel.Thm
+
+pub fn multivect_add() -> @kernel.Thm
+
+pub fn multivect_basis() -> @kernel.Thm
+
+pub fn multivect_eq() -> @kernel.Thm
+
+pub fn multivect_eq_0() -> @kernel.Thm
+
+pub fn multivect_mul() -> @kernel.Thm
+
+pub fn multivectorga() -> @kernel.Thm
+
+pub fn mv_left_right_inverse() -> @kernel.Thm
+
+pub fn mvbasis() -> @kernel.Thm
+
+pub fn mvbasis_basis() -> @kernel.Thm
+
+pub fn mvbasis_component() -> @kernel.Thm
+
+pub fn mvbasis_eq_0() -> @kernel.Thm
+
+pub fn mvbasis_expansion() -> @kernel.Thm
+
+pub fn mvbasis_extension() -> @kernel.Thm
+
+pub fn mvbasis_inj() -> @kernel.Thm
+
+pub fn mvbasis_inj_sing() -> @kernel.Thm
+
+pub fn mvbasis_inner_geom() -> @kernel.Thm
+
+pub fn mvbasis_merge_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn mvbasis_nonzero() -> @kernel.Thm
+
+pub fn mvbasis_outer_geom() -> @kernel.Thm
+
+pub fn mvbasis_split() -> @kernel.Thm
+
+pub fn mvbasis_split_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn mvbasis_split_geom() -> @kernel.Thm
+
+pub fn mvinverse() -> @kernel.Thm
+
+pub fn mvinverse_geom() -> @kernel.Thm
+
+pub fn mvinvertible() -> @kernel.Thm
+
+pub fn mvinvertible_eq_lmul() -> @kernel.Thm
+
+pub fn mvinvertible_geom() -> @kernel.Thm
+
+pub fn mvinvertible_left_inverse() -> @kernel.Thm
+
+pub fn mvinvertible_lmul_eq() -> @kernel.Thm
+
+pub fn mvinvertible_mvinverse() -> @kernel.Thm
+
+pub fn mvinvertible_right_inverse() -> @kernel.Thm
+
+pub fn mvinvertible_vector_eq() -> @kernel.Thm
+
+pub fn mvinvertible_versor() -> @kernel.Thm
+
+pub fn neutral_geomga() -> @kernel.Thm
+
+pub fn neutral_outerga() -> @kernel.Thm
+
+pub fn norm_mvbasis() -> @kernel.Thm
+
+pub fn outer_geom_mvbasis_lassoc() -> @kernel.Thm
+
+pub fn outer_geom_mvbasis_rassoc() -> @kernel.Thm
+
+pub fn outer_mvbasis() -> @kernel.Thm
+
+pub fn outer_mvbasis_lscalar() -> @kernel.Thm
+
+pub fn outer_mvbasis_refl() -> @kernel.Thm
+
+pub fn outer_mvbasis_rscalar() -> @kernel.Thm
+
+pub fn outer_mvbasis_sing() -> @kernel.Thm
+
+pub fn outer_mvbasis_sing_eq_0() -> @kernel.Thm
+
+pub fn outer_mvbasis_skewsym() -> @kernel.Thm
+
+pub fn outer_seqiterate_sym() -> @kernel.Thm
+
+pub fn outerga() -> @kernel.Thm
+
+pub fn outerga_aci() -> @kernel.Thm
+
+pub fn outerga_assoc() -> @kernel.Thm
+
+pub fn outerga_canon_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn outerga_ladd() -> @kernel.Thm
+
+pub fn outerga_lmul() -> @kernel.Thm
+
+pub fn outerga_lneg() -> @kernel.Thm
+
+pub fn outerga_lzero() -> @kernel.Thm
+
+pub fn outerga_radd() -> @kernel.Thm
+
+pub fn outerga_rmul() -> @kernel.Thm
+
+pub fn outerga_rneg() -> @kernel.Thm
+
+pub fn outerga_rzero() -> @kernel.Thm
+
+pub fn outerga_vector_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn outergamorphism() -> @kernel.Thm
+
+pub fn outermorphism_mvbasis() -> @kernel.Thm
+
+pub fn outermorphism_mvbasis_empty() -> @kernel.Thm
+
+pub fn pdimindex() -> @kernel.Thm
+
+pub fn pdimindex_0() -> @kernel.Thm
+
+pub fn pdimindex_1() -> @kernel.Thm
+
+pub fn pdimindex_2() -> @kernel.Thm
+
+pub fn pdimindex_3() -> @kernel.Thm
+
+pub fn pdimindex_4() -> @kernel.Thm
+
+pub fn pdimindex_le_imp_dimindex_le() -> @kernel.Thm
+
+pub fn pdimindex_lt_dimindex() -> @kernel.Thm
+
+pub fn pdimindex_suc_dimindex() -> @kernel.Thm
+
+pub fn pdimindex_unique() -> @kernel.Thm
+
+pub fn productga_associative() -> @kernel.Thm
+
+pub fn productga_def() -> @kernel.Thm
+
+pub fn productga_ladd() -> @kernel.Thm
+
+pub fn productga_lmul() -> @kernel.Thm
+
+pub fn productga_lneg() -> @kernel.Thm
+
+pub fn productga_lzero() -> @kernel.Thm
+
+pub fn productga_mvbasis() -> @kernel.Thm
+
+pub fn productga_mvbasis_sing() -> @kernel.Thm
+
+pub fn productga_radd() -> @kernel.Thm
+
+pub fn productga_rmul() -> @kernel.Thm
+
+pub fn productga_rneg() -> @kernel.Thm
+
+pub fn productga_rzero() -> @kernel.Thm
+
+pub fn project() -> @kernel.Thm
+
+pub fn pseudoscalar() -> @kernel.Thm
+
+pub fn rcinner() -> @kernel.Thm
+
+pub fn rcinner_ladd() -> @kernel.Thm
+
+pub fn rcinner_lmul() -> @kernel.Thm
+
+pub fn rcinner_lneg() -> @kernel.Thm
+
+pub fn rcinner_lzero() -> @kernel.Thm
+
+pub fn rcinner_radd() -> @kernel.Thm
+
+pub fn rcinner_rmul() -> @kernel.Thm
+
+pub fn rcinner_rneg() -> @kernel.Thm
+
+pub fn rcinner_rzero() -> @kernel.Thm
+
+pub fn reject() -> @kernel.Thm
+
+pub fn reversion_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn reversion_mbasis() -> @kernel.Thm
+
+pub fn reversion_mvbasis() -> @kernel.Thm
+
+pub fn reversion_outerga() -> @kernel.Thm
+
+pub fn reversion_seqiterate_outerga() -> @kernel.Thm
+
+pub fn reversion_vector() -> @kernel.Thm
+
+pub fn reversion_vector_outer() -> @kernel.Thm
+
+pub fn reversionga() -> @kernel.Thm
+
+pub fn reversionga_linear() -> @kernel.Thm
+
+pub fn scalarinner() -> @kernel.Thm
+
+pub fn scalarinner_ladd() -> @kernel.Thm
+
+pub fn scalarinner_lmul() -> @kernel.Thm
+
+pub fn scalarinner_lneg() -> @kernel.Thm
+
+pub fn scalarinner_lzero() -> @kernel.Thm
+
+pub fn scalarinner_radd() -> @kernel.Thm
+
+pub fn scalarinner_rmul() -> @kernel.Thm
+
+pub fn scalarinner_rneg() -> @kernel.Thm
+
+pub fn scalarinner_rzero() -> @kernel.Thm
+
+pub fn seqiterate_add_outerga() -> @kernel.Thm
+
+pub fn seqiterate_dependent_outerga() -> @kernel.Thm
+
+pub fn seqiterate_geomga_lrec() -> @kernel.Thm
+
+pub fn seqiterate_geomga_rrec() -> @kernel.Thm
+
+pub fn seqiterate_identical_outerga() -> @kernel.Thm
+
+pub fn seqiterate_mul_outerga() -> @kernel.Thm
+
+pub fn seqiterate_numseg_image() -> @kernel.Thm
+
+pub fn seqiterate_numseg_suc() -> @kernel.Thm
+
+pub fn seqiterate_operation_outerga() -> @kernel.Thm
+
+pub fn seqiterate_outerga_eq_0() -> @kernel.Thm
+
+pub fn seqiterate_outerga_lrec() -> @kernel.Thm
+
+pub fn seqiterate_outerga_numseg_eq() -> @kernel.Thm
+
+pub fn seqiterate_outerga_rrec() -> @kernel.Thm
+
+pub fn seqiterate_outerga_split3() -> @kernel.Thm
+
+pub fn seqiterate_outerga_vsum() -> @kernel.Thm
+
+pub fn seqiterate_span_outerga() -> @kernel.Thm
+
+pub fn seqiterate_split_numseg_geomga() -> @kernel.Thm
+
+pub fn seqiterate_split_numseg_outerga() -> @kernel.Thm
+
+pub fn seqiterate_zero_outerga() -> @kernel.Thm
+
+pub fn setindex() -> @kernel.Thm
+
+pub fn span_mvbasis() -> @kernel.Thm
+
+pub fn superpose_transform() -> @kernel.Thm
+
+pub fn swappair() -> @kernel.Thm
+
+pub fn symdiff() -> @kernel.Thm
+
+pub fn symdiff_assoc() -> @kernel.Thm
+
+pub fn symdiff_comm() -> @kernel.Thm
+
+pub fn symdiff_empty() -> @kernel.Thm
+
+pub fn symdiff_subset() -> @kernel.Thm
+
+pub fn transform() -> @kernel.Thm
+
+pub fn trip_fin_sum_tybij() -> @kernel.Thm
+
+pub fn triple_finite_sum_image() -> @kernel.Thm
+
+pub fn vector_geom_eq_outer_add_inner() -> @kernel.Thm
+
+pub fn vector_geomga_inner_refl_eq() -> @kernel.Thm
+
+pub fn vector_geomga_refl() -> @kernel.Thm
+
+pub fn vector_innerga_refl() -> @kernel.Thm
+
+pub fn vector_outerga_refl() -> @kernel.Thm
+
+pub fn vector_outerga_skewsym() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
