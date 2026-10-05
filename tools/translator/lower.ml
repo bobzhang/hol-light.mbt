@@ -1899,6 +1899,8 @@ module Lower = struct
       | "close_in" -> (1, fun [ a ] _ -> Call (Atom "@lib.close_in", [ a ]))
       | "String.index_opt" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_index_opt", [ a; b ]))
       | "String.split_on_char" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_split_on_char", [ a; b ]))
+      | "String.map" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_map", [ a; b ]))
+      | "Filename.is_relative" -> (1, fun [ a ] _ -> Call (Atom "@lib.filename_is_relative", [ a ]))
       | "String.escaped" -> (1, fun [ a ] _ -> Call (Atom "@lib.string_escaped", [ a ]))
       | "String.concat" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_concat", [ a; b ]))
       | "Array.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_make", [ a; b ]))

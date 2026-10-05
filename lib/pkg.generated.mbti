@@ -113,6 +113,8 @@ pub fn file_of_string(String, String) -> Unit
 
 pub fn filename_concat(String, String) -> String
 
+pub fn filename_is_relative(String) -> Bool
+
 pub fn[A] filter((A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
 
 pub fn[A] find((A) -> Bool raise?, @list.List[A]) -> A raise
@@ -402,6 +404,8 @@ pub fn string_index_opt(String, Char) -> Int64?
 pub fn string_length(String) -> Int
 
 pub fn string_make(Int64, Char) -> String raise
+
+pub fn string_map((Char) -> Char raise?, String) -> String raise?
 
 pub fn string_of_file(String) -> String raise
 

@@ -135,3 +135,19 @@ pub fn string_split_on_char(c : Char, s : String) -> @list.List[String] {
   parts.push(s.view(start_offset=start).to_string())
   @list.from_array(parts)
 }
+
+///|
+/// `String.map f s`
+pub fn string_map(f : (Char) -> Char raise?, s : String) -> String raise? {
+  let b = StringBuilder()
+  for c in s {
+    b.write_char(f(c))
+  }
+  b.to_string()
+}
+
+///|
+/// `Filename.is_relative`
+pub fn filename_is_relative(name : String) -> Bool {
+  !name.has_prefix("/")
+}
