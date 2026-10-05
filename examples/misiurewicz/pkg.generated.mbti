@@ -1,0 +1,51 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/misiurewicz"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn complex_derivative_cexp_compose() -> @kernel.Thm
+
+pub fn complex_differentiable_cexp_compose() -> @kernel.Thm
+
+pub fn complex_differentiable_iter_cexp() -> @kernel.Thm
+
+pub fn continuous_iter_cexp() -> @kernel.Thm
+
+pub fn continuous_on_iter_cexp() -> @kernel.Thm
+
+pub fn corollary() -> @kernel.Thm
+
+pub fn has_complex_derivative_cexp_compose() -> @kernel.Thm
+
+pub fn holomorphic_on_iter_cexp() -> @kernel.Thm
+
+pub fn lemma_1() -> @kernel.Thm
+
+pub fn lemma_2a() -> @kernel.Thm
+
+pub fn lemma_2b() -> @kernel.Thm
+
+pub fn lemma_3() -> @kernel.Thm
+
+pub fn lemma_4() -> @kernel.Thm
+
+pub fn lemma_5() -> @kernel.Thm
+
+pub fn lemma_6() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn strong() -> @kernel.Thm
+
+pub fn theorem() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
