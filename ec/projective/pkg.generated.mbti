@@ -1,0 +1,79 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/projective"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn projective_0() -> @kernel.Thm
+
+pub fn projective_add() -> @kernel.Thm
+
+pub fn projective_curve() -> @kernel.Thm
+
+pub fn projective_curve_add() -> @kernel.Thm
+
+pub fn projective_curve_imp_point() -> @kernel.Thm
+
+pub fn projective_curve_neg() -> @kernel.Thm
+
+pub fn projective_eq() -> @kernel.Thm
+
+pub fn projective_eq_add() -> @kernel.Thm
+
+pub fn projective_eq_neg() -> @kernel.Thm
+
+pub fn projective_neg() -> @kernel.Thm
+
+pub fn projective_of_weierstrass() -> @kernel.Thm
+
+pub fn projective_of_weierstrass_add() -> @kernel.Thm
+
+pub fn projective_of_weierstrass_curve() -> @kernel.Thm
+
+pub fn projective_of_weierstrass_curve_eq() -> @kernel.Thm
+
+pub fn projective_of_weierstrass_eq() -> @kernel.Thm
+
+pub fn projective_of_weierstrass_neg() -> @kernel.Thm
+
+pub fn projective_of_weierstrass_of_projective() -> @kernel.Thm
+
+pub fn projective_of_weierstrass_point() -> @kernel.Thm
+
+pub fn projective_of_weierstrass_point_eq() -> @kernel.Thm
+
+pub fn projective_point() -> @kernel.Thm
+
+pub fn projective_point_add() -> @kernel.Thm
+
+pub fn projective_point_neg() -> @kernel.Thm
+
+pub fn weierstrass_of_projective() -> @kernel.Thm
+
+pub fn weierstrass_of_projective_add() -> @kernel.Thm
+
+pub fn weierstrass_of_projective_add_of_weierstrass() -> @kernel.Thm
+
+pub fn weierstrass_of_projective_curve() -> @kernel.Thm
+
+pub fn weierstrass_of_projective_eq() -> @kernel.Thm
+
+pub fn weierstrass_of_projective_neg() -> @kernel.Thm
+
+pub fn weierstrass_of_projective_neg_of_weierstrass() -> @kernel.Thm
+
+pub fn weierstrass_of_projective_of_weierstrass() -> @kernel.Thm
+
+pub fn weierstrass_of_projective_point() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

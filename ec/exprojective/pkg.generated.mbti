@@ -1,0 +1,73 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/exprojective"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn edwards_excurve() -> @kernel.Thm
+
+pub fn edwards_excurve_v1() -> @kernel.Thm
+
+pub fn edwards_exprojadd() -> @kernel.Thm
+
+pub fn edwards_exprojadd4() -> @kernel.Thm
+
+pub fn edwards_exprojadd4_v1() -> @kernel.Thm
+
+pub fn edwards_exprojadd_v1() -> @kernel.Thm
+
+pub fn edwards_exprojaddn() -> @kernel.Thm
+
+pub fn edwards_exprojaddn_v1() -> @kernel.Thm
+
+pub fn edwards_exprojdouble() -> @kernel.Thm
+
+pub fn edwards_exprojdouble_exprojadd() -> @kernel.Thm
+
+pub fn edwards_exprojdouble_v1() -> @kernel.Thm
+
+pub fn edwards_pcurve() -> @kernel.Thm
+
+pub fn edwards_pcurve_v1() -> @kernel.Thm
+
+pub fn edwards_prexprojdouble() -> @kernel.Thm
+
+pub fn edwards_prexprojdouble_exprojadd() -> @kernel.Thm
+
+pub fn edwards_prexprojdouble_v1() -> @kernel.Thm
+
+pub fn edwards_prexprojdoublen() -> @kernel.Thm
+
+pub fn edwards_prexprojdoublen_exprojaddn() -> @kernel.Thm
+
+pub fn edwards_prexprojdoublen_v1() -> @kernel.Thm
+
+pub fn edwards_projdouble() -> @kernel.Thm
+
+pub fn edwards_projdouble_v1() -> @kernel.Thm
+
+pub fn exprojective() -> @kernel.Thm
+
+pub fn exprojective_alt() -> @kernel.Thm
+
+pub fn exprojective_projective() -> @kernel.Thm
+
+pub fn exprojective_projective_alt() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn projective() -> @kernel.Thm
+
+pub fn projective_alt() -> @kernel.Thm
+
+pub fn projective_exprojective() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

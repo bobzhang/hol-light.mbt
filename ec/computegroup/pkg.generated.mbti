@@ -1,0 +1,55 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/computegroup"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn add_curve(@kernel.Thm) -> Unit raise
+
+pub fn add_curveadd(@kernel.Thm) -> Unit raise
+
+pub fn add_curveneg(@kernel.Thm) -> Unit raise
+
+pub fn add_curvezero(@kernel.Thm) -> Unit raise
+
+pub fn add_ecgroup(@list.List[@kernel.Thm], @kernel.Thm) -> Unit raise
+
+pub fn curve_clauses() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn curveadd_clauses() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn curveneg_clauses() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn curvezero_clauses() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn ecgroup_carrier_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ecgroup_carriers() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn ecgroup_id_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ecgroup_ids() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn ecgroup_inv_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ecgroup_invs() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn ecgroup_mul_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ecgroup_muls() -> @ref.Ref[@list.List[@kernel.Thm]]
+
+pub fn ecgroup_pow_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

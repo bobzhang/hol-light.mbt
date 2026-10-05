@@ -1,0 +1,73 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/edwards"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abelian_edwards_group() -> @kernel.Thm
+
+pub fn card_bound_edwards_curve() -> @kernel.Thm
+
+pub fn edwards_0() -> @kernel.Thm
+
+pub fn edwards_add() -> @kernel.Thm
+
+pub fn edwards_add_assoc() -> @kernel.Thm
+
+pub fn edwards_add_lid() -> @kernel.Thm
+
+pub fn edwards_add_lneg() -> @kernel.Thm
+
+pub fn edwards_add_sym() -> @kernel.Thm
+
+pub fn edwards_curve() -> @kernel.Thm
+
+pub fn edwards_curve_0() -> @kernel.Thm
+
+pub fn edwards_curve_add() -> @kernel.Thm
+
+pub fn edwards_curve_imp_point() -> @kernel.Thm
+
+pub fn edwards_curve_neg() -> @kernel.Thm
+
+pub fn edwards_group() -> @kernel.Thm
+
+pub fn edwards_group_element_order_eq_2() -> @kernel.Thm
+
+pub fn edwards_group_element_order_eq_4() -> @kernel.Thm
+
+pub fn edwards_group_element_order_eq_4_equiv() -> @kernel.Thm
+
+pub fn edwards_group_element_order_eq_8_equiv() -> @kernel.Thm
+
+pub fn edwards_group_v1() -> @kernel.Thm
+
+pub fn edwards_neg() -> @kernel.Thm
+
+pub fn edwards_nonsingular() -> @kernel.Thm
+
+pub fn edwards_nonsingular_alt() -> @kernel.Thm
+
+pub fn edwards_nonsingular_denominators() -> @kernel.Thm
+
+pub fn edwards_nonsingular_denominators_points() -> @kernel.Thm
+
+pub fn edwards_point() -> @kernel.Thm
+
+pub fn edwards_point_add() -> @kernel.Thm
+
+pub fn edwards_point_neg() -> @kernel.Thm
+
+pub fn finite_edwards_curve() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

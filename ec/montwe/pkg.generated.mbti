@@ -1,0 +1,47 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/montwe"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn group_isomorphisms_montgomery_weierstrass_group() -> @kernel.Thm
+
+pub fn group_isomorphisms_weierstrass_montgomery_group() -> @kernel.Thm
+
+pub fn isomorphic_montgomery_weierstrass_group() -> @kernel.Thm
+
+pub fn isomorphic_weierstrass_montgomery_group() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn montgomery_of_weierstrass() -> @kernel.Thm
+
+pub fn montgomery_of_weierstrass_of_montgomery() -> @kernel.Thm
+
+pub fn montgomery_of_weierstrass_v1() -> @kernel.Thm
+
+pub fn wcurve_of_mcurve() -> @kernel.Thm
+
+pub fn wcurve_of_mcurve_nonsingular() -> @kernel.Thm
+
+pub fn wcurve_of_mcurve_nonsingular_eq() -> @kernel.Thm
+
+pub fn weierstrass_of_montgomery() -> @kernel.Thm
+
+pub fn weierstrass_of_montgomery_add() -> @kernel.Thm
+
+pub fn weierstrass_of_montgomery_neg() -> @kernel.Thm
+
+pub fn weierstrass_of_montgomery_of_weierstrass() -> @kernel.Thm
+
+pub fn weierstrass_of_montgomery_v1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
