@@ -187,13 +187,30 @@ def needs_closure(f):
 # order: every EC file states what it needs, and the chain (thirty files,
 # the curves one after another) is more than three hours of proofs in one
 # OCaml session, where a curve by itself is at most forty minutes
-NEEDS_ONLY = {"EC", "Formal_ineqs"}
+NEEDS_ONLY = {"EC"}
 
-# What a directory's make.ml loads before any of its files, which name
-# only one another: every file of the directory is loaded after these
-# (Formal_ineqs/make.ml needs Multivariate/realanalysis.ml, then loads
-# verifier/m_verifier_main.hl, which needs the rest)
-DIR_PRE = {"Formal_ineqs": ["Multivariate/realanalysis.ml"]}
+# A directory whose make.ml loads one file that needs the rest, in nested
+# directories: its files load in the order that load visits them (each
+# file once, at its first `needs`, depth first), like a make.ml that lists
+# them. (Loaded by each file's own needs instead, two files reach a third
+# in different orders, and one session cannot translate them all.)
+ROOTS = {"Formal_ineqs": "Formal_ineqs/verifier/m_verifier_main.hl"}
+
+
+def top(f):
+    """The top-level directory of a file (`Formal_ineqs/arith/x.hl`)."""
+    return f.split("/")[0] if "/" in f else ""
+
+
+def needs_order(f, seen=None):
+    """`f` and what it needs, in upstream's load order (depth first)."""
+    seen = [] if seen is None else seen
+    for g in needs(f):
+        if g not in seen and stem(g) not in CORE and stem(g) not in LOADED:
+            needs_order(g, seen)
+    if f not in seen:
+        seen.append(f)
+    return seen
 
 
 # Directories whose loader computes its file list (`map (load_on_path
@@ -214,6 +231,10 @@ def make_plan(d):
     for Multivariate/ (MAKE_ORDER above)."""
     if d in ORDERS:
         return [(f"{d}/{f}.ml", []) for f in ORDERS[d]]
+    if d in ROOTS:
+        pre = [g for g in needs(d + "/make.ml") if not g.startswith(d + "/")]
+        order = [g for g in needs_order(ROOTS[d]) if g.startswith(d + "/")]
+        return [(g, pre if i == 0 else []) for i, g in enumerate(order)]
     if d == "Multivariate" or d in NEEDS_ONLY or not os.path.isfile(os.path.join(HOL, d, "make.ml")):
         return []
     plan, pre = [], []
@@ -229,10 +250,10 @@ def make_plan(d):
 def make_pre(f):
     """The files of other directories its directory's make.ml loads just
     before `f`: loaded before `f`, like what it needs."""
-    for g, pre in make_plan(os.path.dirname(f)):
+    for g, pre in make_plan(top(f)):
         if g == f:
             return pre
-    return DIR_PRE.get(f.split("/")[0], []) if "/" in f else []
+    return []
 
 
 def chain_prev(f):
@@ -246,7 +267,7 @@ def chain_prev(f):
     if f in EXTRAS:
         anchored = [g for g in needs_closure(f) if g in MAKE_ORDER]
         return max(anchored, key=MAKE_ORDER.index) if anchored else None
-    order = [g for g, _ in make_plan(os.path.dirname(f))]
+    order = [g for g, _ in make_plan(top(f))]
     if f in order:
         i = order.index(f)
         return order[i - 1] if i > 0 else None
@@ -259,8 +280,8 @@ def alone(g, frm):
     directory that needs it, as upstream's `needs` does. Jordan/make.ml loads
     Rqe/num_calc_simp.ml so, and fails after the Rqe files before it.
     Multivariate/ keeps its order from everywhere (MAKE_ORDER)."""
-    d = os.path.dirname(g)
-    return (g not in MV_ORDER and os.path.dirname(frm) != d
+    d = top(g)
+    return (g not in MV_ORDER and top(frm) != d
             and g in [x for x, _ in make_plan(d)])
 
 
@@ -362,7 +383,7 @@ def setup(f):
             text += ("\n///|\n/// Leave this file out of what is loaded after this call: a file that\n"
                      "/// upstream loads without it (tools/ocaml_ref/theory.py, CHAIN_SKIP).\n"
                      "pub fn skip_load() -> Unit {\n  loaded.val = true\n}\n")
-        if f in [x for x, _ in make_plan(os.path.dirname(f))]:
+        if f in [x for x, _ in make_plan(top(f))]:
             # a member of its directory's make.ml order: a file of another
             # directory that needs it loads it without the files before it
             text += (f"\n///|\n/// Load {name}.ml (once) as `needs` does: after what it needs itself, not\n"
