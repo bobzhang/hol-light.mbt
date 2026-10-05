@@ -1681,6 +1681,7 @@ module Lower = struct
       | "raise" -> (1, fun [ a ] _ -> Raise a)
       | "ignore" -> (1, fun [ a ] _ -> Call (Atom "ignore", [ a ]))
       | "string_of_int" -> (1, fun [ a ] _ -> Call (Atom "Int64::to_string", [ a ]))
+      | "string_of_float" -> (1, fun [ a ] _ -> Call (Atom "@lib.string_of_float", [ a ]))
       | "!" -> (1, fun [ a ] _ -> Deref a)
       | "ref" -> (1, fun [ a ] _ -> RefNew a)
       | ":=" -> (2, fun [ a; b ] _ -> Blk ([ Assign (a, b) ], Atom "()"))
