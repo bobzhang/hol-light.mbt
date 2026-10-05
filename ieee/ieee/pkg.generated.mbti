@@ -1,0 +1,51 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ieee/ieee"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn ieee_emax() -> @kernel.Thm
+
+pub fn ieee_emin() -> @kernel.Thm
+
+pub fn ieee_eps() -> @kernel.Thm
+
+pub fn ieee_exp() -> @kernel.Thm
+
+pub fn ieee_format_typbij() -> @kernel.Thm
+
+pub fn ieee_p() -> @kernel.Thm
+
+pub fn ieee_r() -> @kernel.Thm
+
+pub fn ieee_round() -> @kernel.Thm
+
+pub fn ieee_threshold() -> @kernel.Thm
+
+pub fn ieee_to_fformat() -> @kernel.Thm
+
+pub fn ieee_to_flformat() -> @kernel.Thm
+
+pub fn is_ieee() -> @kernel.Thm
+
+pub fn is_ieee_ninf() -> @kernel.Thm
+
+pub fn is_ieee_pinf() -> @kernel.Thm
+
+pub fn is_valid_ieee_format() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn max_ieee() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

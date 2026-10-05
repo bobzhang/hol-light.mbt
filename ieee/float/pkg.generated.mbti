@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ieee/float"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn fl_eps() -> @kernel.Thm
+
+pub fn flformat_typbij() -> @kernel.Thm
+
+pub fn flp() -> @kernel.Thm
+
+pub fn flr() -> @kernel.Thm
+
+pub fn flround() -> @kernel.Thm
+
+pub fn greatest_e() -> @kernel.Thm
+
+pub fn greatest_m() -> @kernel.Thm
+
+pub fn greatest_r() -> @kernel.Thm
+
+pub fn is_float() -> @kernel.Thm
+
+pub fn is_frac_and_exp() -> @kernel.Thm
+
+pub fn is_valid_flformat() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn to_fformat() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

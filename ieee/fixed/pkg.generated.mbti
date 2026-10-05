@@ -1,0 +1,61 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ieee/fixed"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn fe() -> @kernel.Thm
+
+pub fn ff() -> @kernel.Thm
+
+pub fn fformat_typbij() -> @kernel.Thm
+
+pub fn finf() -> @kernel.Thm
+
+pub fn fixed() -> @kernel.Thm
+
+pub fn fp() -> @kernel.Thm
+
+pub fn fr() -> @kernel.Thm
+
+pub fn fround() -> @kernel.Thm
+
+pub fn fulp() -> @kernel.Thm
+
+pub fn glb() -> @kernel.Thm
+
+pub fn is_finite_fixed() -> @kernel.Term
+
+pub fn is_fixed() -> @kernel.Thm
+
+pub fn is_frac() -> @kernel.Thm
+
+pub fn is_glb() -> @kernel.Thm
+
+pub fn is_lb() -> @kernel.Thm
+
+pub fn is_lub() -> @kernel.Thm
+
+pub fn is_ub() -> @kernel.Thm
+
+pub fn is_valid_fformat() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn lub() -> @kernel.Thm
+
+pub fn roundmode_induct() -> @kernel.Thm
+
+pub fn roundmode_recursion() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

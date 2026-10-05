@@ -1,0 +1,216 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ieee/float_thms"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn closer_between_3() -> @kernel.Thm
+
+pub fn closer_between_4() -> @kernel.Thm
+
+pub fn closer_between_5() -> @kernel.Thm
+
+pub fn closest_lemma_1() -> @kernel.Thm
+
+pub fn closest_lemma_2() -> @kernel.Thm
+
+pub fn dump_fl_ge_info(@kernel.Thm, String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn dump_fl_gm_info(@kernel.Thm, String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn dump_fl_gr_info(@kernel.Thm, String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn dump_flformat_conv(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn dump_float_defn(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn dump_ge_info(@kernel.Thm, String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn dump_gm_info(@kernel.Thm, String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn dump_gr_info(@kernel.Thm, String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn fl_is_closest() -> @kernel.Thm
+
+pub fn fl_norm_frac() -> @kernel.Thm
+
+pub fn fl_to_even() -> @kernel.Thm
+
+pub fn fl_to_ninf() -> @kernel.Thm
+
+pub fn fl_to_pinf() -> @kernel.Thm
+
+pub fn fl_to_zero() -> @kernel.Thm
+
+pub fn flformat_prec_exp_eq_ipow() -> @kernel.Thm
+
+pub fn flformat_prec_ipow_eq_exp() -> @kernel.Thm
+
+pub fn flformat_prec_lt_0() -> @kernel.Thm
+
+pub fn flformat_prec_lt_1() -> @kernel.Thm
+
+pub fn flformat_prec_minus_1() -> @kernel.Thm
+
+pub fn flformat_radix_even() -> @kernel.Thm
+
+pub fn flformat_radix_ipow_add_exp() -> @kernel.Thm
+
+pub fn flformat_radix_ipow_le_0() -> @kernel.Thm
+
+pub fn flformat_radix_ipow_lt_0() -> @kernel.Thm
+
+pub fn flformat_radix_ipow_neq_0() -> @kernel.Thm
+
+pub fn flformat_radix_le_2() -> @kernel.Thm
+
+pub fn flformat_radix_lt_0() -> @kernel.Thm
+
+pub fn flformat_radix_lt_1() -> @kernel.Thm
+
+pub fn flformat_radix_ne_0() -> @kernel.Thm
+
+pub fn flformat_split() -> @kernel.Thm
+
+pub fn flformat_to_fformat() -> @kernel.Thm
+
+pub fn flformat_to_fformat_2() -> @kernel.Thm
+
+pub fn flformat_valid() -> @kernel.Thm
+
+pub fn flformat_valid_imp_prec_lt_1() -> @kernel.Thm
+
+pub fn flformat_valid_imp_radix_even() -> @kernel.Thm
+
+pub fn flformat_valid_imp_radix_lt_1() -> @kernel.Thm
+
+pub fn float_between() -> @kernel.Thm
+
+pub fn float_eq_ipow() -> @kernel.Thm
+
+pub fn float_eq_ipow_r_0() -> @kernel.Thm
+
+pub fn float_greatest_e_exists() -> @kernel.Thm
+
+pub fn float_greatest_e_neg() -> @kernel.Thm
+
+pub fn float_greatest_e_of() -> @kernel.Thm
+
+pub fn float_greatest_e_unique() -> @kernel.Thm
+
+pub fn float_greatest_m_exists() -> @kernel.Thm
+
+pub fn float_greatest_m_neg() -> @kernel.Thm
+
+pub fn float_greatest_m_unique() -> @kernel.Thm
+
+pub fn float_greatest_r_exists() -> @kernel.Thm
+
+pub fn float_greatest_r_le_0() -> @kernel.Thm
+
+pub fn float_greatest_r_le_0_2() -> @kernel.Thm
+
+pub fn float_greatest_r_neg() -> @kernel.Thm
+
+pub fn float_ipow_le_real() -> @kernel.Thm
+
+pub fn float_ipow_le_real_2() -> @kernel.Thm
+
+pub fn float_is_closest_fixed() -> @kernel.Thm
+
+pub fn float_m_pow_e_is_float() -> @kernel.Thm
+
+pub fn float_neg() -> @kernel.Thm
+
+pub fn float_neg_is_float() -> @kernel.Thm
+
+pub fn float_norm_frac() -> @kernel.Thm
+
+pub fn float_norm_greatest() -> @kernel.Thm
+
+pub fn float_norm_m() -> @kernel.Thm
+
+pub fn float_normalize(@kernel.Thm, @kernel.Thm, String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn float_normalize_float() -> @kernel.Thm
+
+pub fn float_normalize_real() -> @kernel.Thm
+
+pub fn float_not_zero() -> @kernel.Thm
+
+pub fn float_plus_fixed_is_float() -> @kernel.Thm
+
+pub fn float_plus_fixed_is_float_2() -> @kernel.Thm
+
+pub fn float_rd_is_float() -> @kernel.Thm
+
+pub fn float_rd_le_0() -> @kernel.Thm
+
+pub fn float_rd_le_0_2() -> @kernel.Thm
+
+pub fn float_rd_mono() -> @kernel.Thm
+
+pub fn float_rd_near_abs_err() -> @kernel.Thm
+
+pub fn float_rd_near_rel_delta() -> @kernel.Thm
+
+pub fn float_rd_near_rel_error() -> @kernel.Thm
+
+pub fn float_rd_nearest_closest() -> @kernel.Thm
+
+pub fn float_rd_nearest_even() -> @kernel.Thm
+
+pub fn float_rd_ninf_abs_err() -> @kernel.Thm
+
+pub fn float_rd_ninf_exists() -> @kernel.Thm
+
+pub fn float_rd_ninf_rel_delta() -> @kernel.Thm
+
+pub fn float_rd_ninf_rel_error() -> @kernel.Thm
+
+pub fn float_rd_pinf_abs_err() -> @kernel.Thm
+
+pub fn float_rd_pinf_exists() -> @kernel.Thm
+
+pub fn float_rd_pinf_rel_delta() -> @kernel.Thm
+
+pub fn float_rd_pinf_rel_error() -> @kernel.Thm
+
+pub fn float_rd_zero_abs_err() -> @kernel.Thm
+
+pub fn float_rd_zero_exists() -> @kernel.Thm
+
+pub fn float_rd_zero_rel_delta() -> @kernel.Thm
+
+pub fn float_rd_zero_rel_error() -> @kernel.Thm
+
+pub fn float_reverse_normalize_float() -> @kernel.Thm
+
+pub fn float_reverse_normalize_le() -> @kernel.Thm
+
+pub fn float_reverse_normalize_le_2() -> @kernel.Thm
+
+pub fn is_greatest_e() -> @kernel.Thm
+
+pub fn is_greatest_m() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn old_dump_ge_gm_gr_info(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn old_dump_ge_gm_info(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn real_normalize(@kernel.Thm, @kernel.Thm, String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
