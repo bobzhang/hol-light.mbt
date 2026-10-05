@@ -8,6 +8,11 @@
 pub(all) suberror EndOfFile derive(Debug)
 
 ///|
+/// OCaml's `Sys.Break` (an interrupt from the keyboard): matched by code
+/// that cleans up after one (Minisat/sat_tools.ml), never raised here.
+pub(all) suberror Break derive(Debug)
+
+///|
 /// `out_channel`: the file is written when the channel is flushed or closed.
 pub struct OutChannel {
   name : String

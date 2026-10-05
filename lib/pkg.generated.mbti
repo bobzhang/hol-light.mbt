@@ -494,6 +494,8 @@ pub(all) suberror AssertFailure {
   AssertFailure(String)
 } derive(@debug.Debug)
 
+pub(all) suberror Break derive(@debug.Debug)
+
 pub(all) suberror EndOfFile derive(@debug.Debug)
 
 pub(all) suberror LazyUndefined derive(@debug.Debug)

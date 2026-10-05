@@ -2837,6 +2837,8 @@ module Lower = struct
            | "Not_found", [] when predef_exn cd -> "@lib.NotFound"
            | "End_of_file", [] when predef_exn cd -> "@lib.EndOfFile"
            | "Sys_error", [ a ] when predef_exn cd -> "@lib.SysError(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
+           (* Sys.Break (an interrupt from the keyboard: never raised here) *)
+           | "Break", [] when not (Hashtbl.mem own_ctors "Break") -> "@lib.Break"
            | "Match_failure", [ { pat_desc = Tpat_any; _ } ] -> "@lib.MatchFailure(_)"
            | name, [] when Hashtbl.mem own_ctors name -> ctor_name ~cd name
            | name, args when Hashtbl.mem own_ctors name ->
