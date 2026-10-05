@@ -758,7 +758,10 @@ module Emit = struct
                     let self =
                       { e with exp_desc = Texp_ident (Path.Pident id', { name with Location.txt = Longident.Lident (Ident.name id') }, vd) }
                     in
-                    emit_pattern { vb with vb_expr = { e with exp_desc = Texp_let (Asttypes.Recursive, [ inner ], self) } }
+                    (* as a definition of one name: polymorphic when the
+                       prefix is of functions only (Functionspaces/utils.ml's
+                       simp_horn_conv), a generic wrapper then *)
+                    emit_value ~id (Ident.name id) { e with exp_desc = Texp_let (Asttypes.Recursive, [ inner ], self) }
                 | _ ->
                     (* `let rec x = e` with `e` not a function cannot
                        mention `x`: an ordinary definition (Model/syntax.ml's
