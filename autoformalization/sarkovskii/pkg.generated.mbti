@@ -1,0 +1,345 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/autoformalization/sarkovskii"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn adjacent_interval_cover() -> @kernel.Thm
+
+pub fn adjacent_interval_cover_between() -> @kernel.Thm
+
+pub fn adjacent_interval_cover_bound() -> @kernel.Thm
+
+pub fn adjacent_interval_cover_convex() -> @kernel.Thm
+
+pub fn adjacent_interval_cover_minmax() -> @kernel.Thm
+
+pub fn adjacent_interval_cover_range() -> @kernel.Thm
+
+pub fn adjacent_interval_cover_range_reverse() -> @kernel.Thm
+
+pub fn adjacent_interval_path_bound() -> @kernel.Thm
+
+pub fn adjacent_interval_reachable() -> @kernel.Thm
+
+pub fn adjacent_interval_reachable_1() -> @kernel.Thm
+
+pub fn adjacent_interval_reachable_bound() -> @kernel.Thm
+
+pub fn adjacent_interval_reachable_convex() -> @kernel.Thm
+
+pub fn adjacent_interval_reachable_path() -> @kernel.Thm
+
+pub fn adjacent_interval_reachable_prepend() -> @kernel.Thm
+
+pub fn adjacent_interval_reachable_self() -> @kernel.Thm
+
+pub fn adjacent_interval_reachable_trans() -> @kernel.Thm
+
+pub fn divides_not_sub() -> @kernel.Thm
+
+pub fn even_pos_imp_gt_1() -> @kernel.Thm
+
+pub fn finite_ascending_chain_stabilizes() -> @kernel.Thm
+
+pub fn finite_cyclic_4_two_cycle() -> @kernel.Thm
+
+pub fn finite_cyclic_closed_interval() -> @kernel.Thm
+
+pub fn finite_cyclic_crossing() -> @kernel.Thm
+
+pub fn finite_cyclic_reachable_all() -> @kernel.Thm
+
+pub fn finite_cyclic_selfcover_exit() -> @kernel.Thm
+
+pub fn finite_index_enumeration() -> @kernel.Thm
+
+pub fn finite_injective_index_bound() -> @kernel.Thm
+
+pub fn finite_odd_cyclic_return() -> @kernel.Thm
+
+pub fn finite_odd_cyclic_return_cycle() -> @kernel.Thm
+
+pub fn finite_odd_cyclic_shortest_cycle() -> @kernel.Thm
+
+pub fn finite_orbit_transition_iter() -> @kernel.Thm
+
+pub fn finite_path_next_cover() -> @kernel.Thm
+
+pub fn finite_path_next_outside() -> @kernel.Thm
+
+pub fn finite_path_terminal_even_cycles() -> @kernel.Thm
+
+pub fn finite_path_zigzag_down() -> @kernel.Thm
+
+pub fn finite_path_zigzag_left() -> @kernel.Thm
+
+pub fn finite_path_zigzag_left_start() -> @kernel.Thm
+
+pub fn finite_path_zigzag_left_terminal() -> @kernel.Thm
+
+pub fn finite_path_zigzag_right() -> @kernel.Thm
+
+pub fn finite_path_zigzag_right_start() -> @kernel.Thm
+
+pub fn finite_path_zigzag_right_terminal() -> @kernel.Thm
+
+pub fn finite_path_zigzag_up() -> @kernel.Thm
+
+pub fn finite_real_cycle_descent() -> @kernel.Thm
+
+pub fn finite_simple_cycle_length() -> @kernel.Thm
+
+pub fn finite_strictly_increasing_inj() -> @kernel.Thm
+
+pub fn has_period() -> @kernel.Thm
+
+pub fn has_period_extension_eq() -> @kernel.Thm
+
+pub fn has_period_imp_period_1() -> @kernel.Thm
+
+pub fn has_period_iter() -> @kernel.Thm
+
+pub fn has_period_iter_power2_imp_multiple() -> @kernel.Thm
+
+pub fn has_period_on() -> @kernel.Thm
+
+pub fn has_period_on_conjugate() -> @kernel.Thm
+
+pub fn has_period_ordered_cycle() -> @kernel.Thm
+
+pub fn has_period_pos() -> @kernel.Thm
+
+pub fn has_period_power2_mono() -> @kernel.Thm
+
+pub fn has_period_power2_multiple_imp_iter() -> @kernel.Thm
+
+pub fn has_period_power2_suc_imp_power2() -> @kernel.Thm
+
+pub fn has_period_square_cases() -> @kernel.Thm
+
+pub fn has_period_square_imp_double() -> @kernel.Thm
+
+pub fn is_realinterval_homeomorphic_closed() -> @kernel.Thm
+
+pub fn iter_conjugate_on() -> @kernel.Thm
+
+pub fn iter_eq_on_extension() -> @kernel.Thm
+
+pub fn least_odd_period_imp_even_periods() -> @kernel.Thm
+
+pub fn least_odd_period_imp_even_periods_indexed() -> @kernel.Thm
+
+pub fn least_odd_period_ordered_cycle() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn minimal_period() -> @kernel.Thm
+
+pub fn minimal_period_conjugate_on() -> @kernel.Thm
+
+pub fn minimal_period_divides() -> @kernel.Thm
+
+pub fn minimal_period_divisibility() -> @kernel.Thm
+
+pub fn minimal_period_eq_on_extension() -> @kernel.Thm
+
+pub fn minimal_period_iter() -> @kernel.Thm
+
+pub fn minimal_period_iter_inj() -> @kernel.Thm
+
+pub fn minimal_period_iter_inj_le() -> @kernel.Thm
+
+pub fn minimal_period_iterate() -> @kernel.Thm
+
+pub fn minimal_period_orbit_card() -> @kernel.Thm
+
+pub fn minimal_period_orbit_image() -> @kernel.Thm
+
+pub fn minimal_period_orbit_minimal() -> @kernel.Thm
+
+pub fn minimal_period_ordered_orbit() -> @kernel.Thm
+
+pub fn minimal_period_ordered_orbit_transition() -> @kernel.Thm
+
+pub fn minimal_period_ordered_orbit_transition_minimal() -> @kernel.Thm
+
+pub fn minimal_period_periodic() -> @kernel.Thm
+
+pub fn minimal_period_pos() -> @kernel.Thm
+
+pub fn minimal_period_unique() -> @kernel.Thm
+
+pub fn odd_factor_period_imp_later_period() -> @kernel.Thm
+
+pub fn odd_gt_1_imp_gt_2() -> @kernel.Thm
+
+pub fn odd_period_imp_even_period() -> @kernel.Thm
+
+pub fn odd_period_imp_larger_nonmultiple_period() -> @kernel.Thm
+
+pub fn odd_period_imp_larger_period() -> @kernel.Thm
+
+pub fn odd_period_ordered_simple_cycle() -> @kernel.Thm
+
+pub fn odd_pos() -> @kernel.Thm
+
+pub fn odd_power2_factor_le() -> @kernel.Thm
+
+pub fn odd_power2_factor_unique() -> @kernel.Thm
+
+pub fn path_first_return_cycle() -> @kernel.Thm
+
+pub fn path_shortest_simple_cycle() -> @kernel.Thm
+
+pub fn path_simple_cycle() -> @kernel.Thm
+
+pub fn path_simple_cycle_wait() -> @kernel.Thm
+
+pub fn path_simple_cycle_waits() -> @kernel.Thm
+
+pub fn path_terminal_tail_cycle() -> @kernel.Thm
+
+pub fn period_3_imp_all_periods() -> @kernel.Thm
+
+pub fn period_3_imp_all_periods_on_realinterval() -> @kernel.Thm
+
+pub fn period_4_imp_period_2() -> @kernel.Thm
+
+pub fn periodic_point() -> @kernel.Thm
+
+pub fn periodic_point_0() -> @kernel.Thm
+
+pub fn periodic_point_imp_minimal_period() -> @kernel.Thm
+
+pub fn periodic_point_in_extension_range() -> @kernel.Thm
+
+pub fn periodic_point_iter() -> @kernel.Thm
+
+pub fn periodic_point_iter_add() -> @kernel.Thm
+
+pub fn periodic_point_iter_eq() -> @kernel.Thm
+
+pub fn periodic_point_iter_mod() -> @kernel.Thm
+
+pub fn periodic_point_iterate() -> @kernel.Thm
+
+pub fn periodic_point_multiple() -> @kernel.Thm
+
+pub fn periodic_points_image_inj() -> @kernel.Thm
+
+pub fn periodic_points_iter_inj() -> @kernel.Thm
+
+pub fn power2_split() -> @kernel.Thm
+
+pub fn real_affinity_homeomorphism() -> @kernel.Thm
+
+pub fn real_compact_levelset() -> @kernel.Thm
+
+pub fn real_continuous_extension_into_realinterval() -> @kernel.Thm
+
+pub fn real_continuous_on_eq_continuous_map() -> @kernel.Thm
+
+pub fn real_continuous_on_fixpoint() -> @kernel.Thm
+
+pub fn real_continuous_on_iter() -> @kernel.Thm
+
+pub fn real_exp_homeomorphism() -> @kernel.Thm
+
+pub fn real_homeomorphism() -> @kernel.Thm
+
+pub fn real_interval_adjacent_intersection() -> @kernel.Thm
+
+pub fn real_interval_cover_chain() -> @kernel.Thm
+
+pub fn real_interval_cover_cycle() -> @kernel.Thm
+
+pub fn real_interval_cover_cycle_minimal_period() -> @kernel.Thm
+
+pub fn real_interval_cover_cycle_minimal_period_gen() -> @kernel.Thm
+
+pub fn real_interval_cover_fixpoint() -> @kernel.Thm
+
+pub fn real_interval_cover_subinterval() -> @kernel.Thm
+
+pub fn real_interval_cyclic_selfcover() -> @kernel.Thm
+
+pub fn real_interval_endpoints_cover() -> @kernel.Thm
+
+pub fn real_interval_endpoints_subinterval() -> @kernel.Thm
+
+pub fn real_interval_ordered_cover() -> @kernel.Thm
+
+pub fn real_interval_ordered_first_return_cycle() -> @kernel.Thm
+
+pub fn real_interval_ordered_first_return_cycle_nonmultiple() -> @kernel.Thm
+
+pub fn real_interval_ordered_simple_cycle() -> @kernel.Thm
+
+pub fn real_interval_ordered_two_cycle() -> @kernel.Thm
+
+pub fn real_left_open_interval_homeomorphic_nonnegative() -> @kernel.Thm
+
+pub fn real_normalize_left_open_interval() -> @kernel.Thm
+
+pub fn real_normalize_open_interval() -> @kernel.Thm
+
+pub fn real_normalize_right_open_interval() -> @kernel.Thm
+
+pub fn real_open_interval_homeomorphic_univ() -> @kernel.Thm
+
+pub fn real_open_lower_ray_homeomorphic_univ() -> @kernel.Thm
+
+pub fn real_open_upper_ray_homeomorphic_univ() -> @kernel.Thm
+
+pub fn real_right_open_interval_homeomorphic_nonnegative() -> @kernel.Thm
+
+pub fn real_shrink_nonnegative_homeomorphism() -> @kernel.Thm
+
+pub fn real_unit_halfopen_homeomorphic_nonnegative() -> @kernel.Thm
+
+pub fn real_unit_open_homeomorphic_univ() -> @kernel.Thm
+
+pub fn sarkovskii_1_precedes() -> @kernel.Thm
+
+pub fn sarkovskii_3_precedes() -> @kernel.Thm
+
+pub fn sarkovskii_precedes() -> @kernel.Thm
+
+pub fn sarkovskii_precedes_1() -> @kernel.Thm
+
+pub fn sarkovskii_precedes_3() -> @kernel.Thm
+
+pub fn sarkovskii_precedes_asymmetric() -> @kernel.Thm
+
+pub fn sarkovskii_precedes_imp_period() -> @kernel.Thm
+
+pub fn sarkovskii_precedes_irreflexive() -> @kernel.Thm
+
+pub fn sarkovskii_precedes_odd_factors() -> @kernel.Thm
+
+pub fn sarkovskii_precedes_pos() -> @kernel.Thm
+
+pub fn sarkovskii_precedes_transitive() -> @kernel.Thm
+
+pub fn sarkovskii_precedes_trichotomy() -> @kernel.Thm
+
+pub fn sarkovskii_theorem() -> @kernel.Thm
+
+pub fn sarkovskii_theorem_closed_realinterval() -> @kernel.Thm
+
+pub fn sarkovskii_theorem_homeomorphic_closed() -> @kernel.Thm
+
+pub fn sarkovskii_theorem_on_realinterval() -> @kernel.Thm
+
+pub fn sub_not_divides() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
