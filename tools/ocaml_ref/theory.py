@@ -130,12 +130,19 @@ def needs_closure(f):
     return out
 
 
+# directories loaded by each file's own `needs`, not in their make.ml's
+# order: every EC file states what it needs, and the chain (thirty files,
+# the curves one after another) is more than three hours of proofs in one
+# OCaml session, where a curve by itself is at most forty minutes
+NEEDS_ONLY = {"EC"}
+
+
 @functools.lru_cache(maxsize=None)
 def make_plan(d):
     """What `d`/make.ml loads, in order: (file of `d`, the files of other
     directories make.ml loads just before it). Empty without a make.ml, and
     for Multivariate/ (MAKE_ORDER above)."""
-    if d == "Multivariate" or not os.path.isfile(os.path.join(HOL, d, "make.ml")):
+    if d == "Multivariate" or d in NEEDS_ONLY or not os.path.isfile(os.path.join(HOL, d, "make.ml")):
         return []
     plan, pre = [], []
     for g in needs(d + "/make.ml"):
