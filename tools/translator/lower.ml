@@ -1442,7 +1442,7 @@ module Lower = struct
         lower_printf ?expect whole ("Format." ^ snd (Option.get (Prov.lookup p))) args
     | Texp_ident (p, _, _)
       when (match Prov.lookup p with Some ("printer.ml", ("std_formatter" | "pp_print_string" | "pp_print_char" | "pp_print_int" | "pp_print_newline" | "pp_print_space" | "pp_print_cut" | "pp_print_break" | "pp_open_box" | "pp_close_box" | "pp_open_hvbox" | "pp_open_vbox" | "pp_print_flush"
-                                                   | "print_string" | "print_newline" | "print_int" | "print_float" | "print_as" | "print_break" | "print_space" | "print_cut" | "print_flush"
+                                                   | "print_string" | "print_newline" | "print_int" | "print_bool" | "print_float" | "print_as" | "print_break" | "print_space" | "print_cut" | "print_flush"
                                                    | "open_box" | "open_hbox" | "open_vbox" | "open_hvbox" | "open_hovbox" | "close_box")) -> true | _ -> false) ->
         (* printer.ml includes Format: an unqualified `print_string` after
            it is Format's (Complex/complex_grobner.ml) *)
@@ -1829,6 +1829,8 @@ module Lower = struct
       | "Format.print_newline" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_newline", [])))
       | "Format.print_flush" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "@pp.std_formatter.print_flush", [])))
       | "Format.print_int" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_string", [ Call (Atom "Int64::to_string", [ a ]) ]))
+      (* `true` / `false` (Boyer_Moore/waterfall.ml) *)
+      | "Format.print_bool" -> (1, fun [ a ] _ -> Call (Atom "@pp.std_formatter.print_string", [ Call (Atom "Bool::to_string", [ a ]) ]))
       | "print_string" -> (1, fun [ a ] _ -> Call (Atom "@pp.print_string", [ a ]))
       | "print_endline" -> (1, fun [ a ] _ -> Call (Atom "@pp.print_string", [ Binop ("+", a, Atom "\"\\n\"") ]))
       | "invalid_arg" -> (1, fun [ a ] _ -> Raise (Call (Atom "@num.InvalidArgument", [ a ])))
