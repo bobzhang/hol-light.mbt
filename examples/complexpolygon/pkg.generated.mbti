@@ -1,0 +1,33 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/complexpolygon"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abelian_circle_group() -> @kernel.Thm
+
+pub fn circle_group() -> @kernel.Thm
+
+pub fn circle_group_v1() -> @kernel.Thm
+
+pub fn dario() -> @kernel.Thm
+
+pub fn dario_lemma1() -> @kernel.Thm
+
+pub fn dario_lemma2() -> @kernel.Thm
+
+pub fn finite_subgroup_of_circle_group() -> @kernel.Thm
+
+pub fn group_pow_circle_group() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
