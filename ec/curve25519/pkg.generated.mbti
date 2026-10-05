@@ -1,0 +1,65 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/curve25519"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn a_25519() -> @kernel.Thm
+
+pub fn abelian_curve25519_group() -> @kernel.Thm
+
+pub fn b_25519() -> @kernel.Thm
+
+pub fn c_25519() -> @kernel.Thm
+
+pub fn cc_25519() -> @kernel.Thm
+
+pub fn curve25519() -> @kernel.Thm
+
+pub fn curve25519_group() -> @kernel.Thm
+
+pub fn curve25519_group_v1() -> @kernel.Thm
+
+pub fn cyclic_curve25519_group() -> @kernel.Thm
+
+pub fn finite_group_carrier_curve25519() -> @kernel.Thm
+
+pub fn fullgenerator_in_group_carrier_curve25519() -> @kernel.Thm
+
+pub fn generated_curve25519_group() -> @kernel.Thm
+
+pub fn generator_in_group_carrier_curve25519() -> @kernel.Thm
+
+pub fn group_element_order_curve25519_c25519() -> @kernel.Thm
+
+pub fn group_element_order_curve25519_cc25519() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn montgomery_nonsingular_curve25519() -> @kernel.Thm
+
+pub fn montgomery_strongly_nonsingular_curve25519() -> @kernel.Thm
+
+pub fn n_25519() -> @kernel.Thm
+
+pub fn n_25519_v1() -> @kernel.Thm
+
+pub fn p_25519() -> @kernel.Thm
+
+pub fn p_25519_v1() -> @kernel.Thm
+
+pub fn prime_n25519() -> @kernel.Thm
+
+pub fn prime_p25519() -> @kernel.Thm
+
+pub fn size_curve25519_group() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

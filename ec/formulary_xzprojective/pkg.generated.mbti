@@ -1,0 +1,25 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/formulary_xzprojective"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn mladd_1987_m() -> @kernel.Thm
+
+pub fn mladd_1987_m_v1() -> @kernel.Thm
+
+pub fn okeya_sakurai_1() -> @kernel.Thm
+
+pub fn okeya_sakurai_1_v1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
