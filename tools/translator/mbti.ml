@@ -178,7 +178,12 @@ module Mbti = struct
                         prerr_endline ("mbti: " ^ m ^ ": " ^ line); None) with
                | Some (name, d) ->
                    Hashtbl.replace t name d;
-                   if !last_bounded then Hashtbl.replace bounded_fns (pkg ^ "." ^ name) ()
+                   if !last_bounded then begin
+                     Hashtbl.replace bounded_fns (pkg ^ "." ^ name) ();
+                     (* as it is referred to: by the package's alias
+                        (`@support.sort_on_snd` of boyer_moore/support) *)
+                     Hashtbl.replace bounded_fns (Filename.basename pkg ^ "." ^ name) ()
+                   end
                | None -> ()
            done
          with End_of_file -> close_in ic)
