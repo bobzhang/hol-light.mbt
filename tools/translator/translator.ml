@@ -439,7 +439,19 @@ module Loader = struct
 
   (* Load `file` (path relative to the HOL Light root), calling `on_item`
      with every typed structure item before it is executed. *)
-  let load_file ?(on_item = fun _ -> ()) ~hol file =
+  (* The file being loaded, and what the session's `needs` does (a file
+     loaded part-way through another, theory.py's MID_NEEDS, is loaded
+     there: Main.translate_batch; any other `needs` does nothing, its file
+     being loaded before). *)
+  let current : string ref = ref ""
+  let needs_hook : (string -> unit) ref = ref (fun _ -> ())
+
+  let rec load_file ?(on_item = fun _ -> ()) ~hol file =
+    let outer = !current in
+    current := file;
+    Fun.protect ~finally:(fun () -> current := outer) (fun () -> load_file_ ~on_item ~hol file)
+
+  and load_file_ ~on_item ~hol file =
     let base = file in (* the path relative to the HOL Light root *)
     List.iter
       (fun p ->

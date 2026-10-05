@@ -124,7 +124,10 @@ def translate(targets, done=()):
             f"Main.Branch {ml(x)}" if kind == "branch" else
             f"Main.{'Target' if kind == 'target' and x.f not in done else 'Load'} {ml_str(x.f)}"
             for kind, x in st) + "]"
-    plan = ml(steps(trie(targets, [])))
+    # files a target loads part-way through (theory.MID_NEEDS)
+    mids = "".join(f"Main.Mid ({ml_str(t)}, {ml_str(x)}, [{'; '.join(ml_str(g) for g in new)}]); "
+                   for t in targets for x, new in theory.mid_plan(t))
+    plan = "[" + mids + ml(steps(trie(targets, [])))[1:]
     os.makedirs(OUT, exist_ok=True)
     pf = os.path.join(OUT, "plan.ml")
     open(pf, "w").write(plan)
@@ -271,7 +274,7 @@ def main():
         return os.path.exists(gen) and open(gen).read() != PLACEHOLDER
     expanded = []
     for t in targets:
-        for d in theory.deps(t) + [t]:
+        for d in theory.deps(t) + [g for _, new in theory.mid_plan(t) for g in new] + [t]:
             if d not in expanded and (d in targets or not translated(d)):
                 expanded.append(d)
     targets = expanded

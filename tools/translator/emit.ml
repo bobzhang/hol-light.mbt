@@ -531,6 +531,12 @@ module Emit = struct
 
   let emit_eval (e : expression) =
     match e.exp_desc with
+    (* `needs "f"` of a file loaded part-way through: loaded here *)
+    | Texp_apply ({ exp_desc = Texp_ident (p, _, _); _ }, [ (_, Some { exp_desc = Texp_constant (Asttypes.Const_string (f, _, _)); _ }) ])
+      when (Path.name p = "needs" || Path.name p = "loadt") && Hashtbl.mem mid_needs f ->
+        (match Names.package_of_file f with
+         | Some pkg -> add_step ("needs " ^ f) [ Do (Call (Atom ("@" ^ pkg_alias pkg ^ ".load"), [])) ]
+         | None -> failwith ("no package for " ^ f))
     (* `needs "f"` / `loadt "f"`: a dependency, loaded before (load()) *)
     | Texp_apply ({ exp_desc = Texp_ident (p, _, _); _ }, [ (_, Some { exp_desc = Texp_constant (Asttypes.Const_string _); _ }) ])
       when Path.name p = "needs" || Path.name p = "loadt" -> ()
