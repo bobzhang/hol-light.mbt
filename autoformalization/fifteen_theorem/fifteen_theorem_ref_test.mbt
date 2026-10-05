@@ -10,7 +10,23 @@ test "Autoformalization/fifteen_theorem matches Autoformalization/fifteen_theore
   @fifteen_theorem.load()
   let log = @testkit.Log::new()
   log.capture_reports()
-  for th in ["simp", "theorems", "ind_defs", "class", "trivia", "canon", "meson", "firstorder", "metis", "thecops", "quot", "impconv", "pair", "compute", "nums", "recursion", "arith", "wf", "calc_num", "normalizer", "grobner", "ind_types", "lists", "realax", "calc_int", "realarith", "real", "calc_rat", "int", "sets", "iterate", "cart", "define", "Library/isum", "Library/integer", "Library/binomial", "Library/iter", "Library/prime", "Library/pocklington", "Library/products", "Library/multiplicative", "Library/primitive", "Library/jacobi", "Library/agm", "Library/wo", "Library/card", "Library/floor", "Multivariate/misc", "Multivariate/metric", "Library/frag", "Library/grouptheory", "Multivariate/homology", "Library/matroids", "Multivariate/vectors", "Library/permutations", "Multivariate/determinants", "Multivariate/topology", "Multivariate/convex", "Multivariate/paths", "Multivariate/polytope", "Multivariate/degree", "Multivariate/derivatives", "Library/binary", "Multivariate/clifford", "Multivariate/integration", "Multivariate/measure", "Multivariate/complexes", "Multivariate/canal", "Multivariate/transcendentals", "Examples/mangoldt", "100/dirichlet", "Autoformalization/three_squares", "Autoformalization/fifteen_theorem"] {
+  for
+    th in [
+      "simp", "theorems", "ind_defs", "class", "trivia", "canon", "meson", "firstorder",
+      "metis", "thecops", "quot", "impconv", "pair", "compute", "nums", "recursion",
+      "arith", "wf", "calc_num", "normalizer", "grobner", "ind_types", "lists", "realax",
+      "calc_int", "realarith", "real", "calc_rat", "int", "sets", "iterate", "cart",
+      "define", "Library/isum", "Library/integer", "Library/binomial", "Library/iter",
+      "Library/prime", "Library/pocklington", "Library/products", "Library/multiplicative",
+      "Library/primitive", "Library/jacobi", "Library/agm", "Library/wo", "Library/card",
+      "Library/floor", "Multivariate/misc", "Multivariate/metric", "Library/frag",
+      "Library/grouptheory", "Multivariate/homology", "Library/matroids", "Multivariate/vectors",
+      "Library/permutations", "Multivariate/determinants", "Multivariate/topology",
+      "Multivariate/convex", "Multivariate/paths", "Multivariate/polytope", "Multivariate/degree",
+      "Multivariate/derivatives", "Library/binary", "Multivariate/clifford", "Multivariate/integration",
+      "Multivariate/measure", "Multivariate/complexes", "Multivariate/canal", "Multivariate/transcendentals",
+      "Examples/mangoldt", "100/dirichlet", "Autoformalization/three_squares", "Autoformalization/fifteen_theorem",
+    ] {
     log.show_theory_output(th)
   }
   log.show_theory_trace("Autoformalization/fifteen_theorem")
@@ -34,16 +50,28 @@ test "Autoformalization/fifteen_theorem matches Autoformalization/fifteen_theore
   log.attempt("IQBILIN_RMUL", () => sthm(@fifteen_theorem.iqbilin_rmul()))
   log.attempt("IQBILIN_SYM", () => sthm(@fifteen_theorem.iqbilin_sym()))
   log.attempt("IQEVAL_COMBO", () => sthm(@fifteen_theorem.iqeval_combo()))
-  log.attempt("IQEVAL_ZERO_ON_INDEX", () => sthm(@fifteen_theorem.iqeval_zero_on_index()))
-  log.attempt("IQ_POSITIVE_IMP_NONNEG", () => sthm(@fifteen_theorem.iq_positive_imp_nonneg()))
+  log.attempt("IQEVAL_ZERO_ON_INDEX", () => {
+    sthm(@fifteen_theorem.iqeval_zero_on_index())
+  })
+  log.attempt("IQ_POSITIVE_IMP_NONNEG", () => {
+    sthm(@fifteen_theorem.iq_positive_imp_nonneg())
+  })
   log.attempt("IQBILIN_SQ_LE", () => sthm(@fifteen_theorem.iqbilin_sq_le()))
-  log.attempt("IQ_POSITIVE_BILIN_SQ_LE", () => sthm(@fifteen_theorem.iq_positive_bilin_sq_le()))
+  log.attempt("IQ_POSITIVE_BILIN_SQ_LE", () => {
+    sthm(@fifteen_theorem.iq_positive_bilin_sq_le())
+  })
   log.attempt("IQBILIN_ISUM_L", () => sthm(@fifteen_theorem.iqbilin_isum_l()))
   log.attempt("IQBILIN_ISUM_R", () => sthm(@fifteen_theorem.iqbilin_isum_r()))
   log.attempt("IQEVAL_PULLBACK", () => sthm(@fifteen_theorem.iqeval_pullback()))
-  log.attempt("IQEVAL_EQ_ON_INDEX", () => sthm(@fifteen_theorem.iqeval_eq_on_index()))
-  log.attempt("IQ_REPRESENTS_OF_EMBEDS", () => sthm(@fifteen_theorem.iq_represents_of_embeds()))
-  log.attempt("IQ_UNIVERSAL_OF_EMBEDS", () => sthm(@fifteen_theorem.iq_universal_of_embeds()))
+  log.attempt("IQEVAL_EQ_ON_INDEX", () => {
+    sthm(@fifteen_theorem.iqeval_eq_on_index())
+  })
+  log.attempt("IQ_REPRESENTS_OF_EMBEDS", () => {
+    sthm(@fifteen_theorem.iq_represents_of_embeds())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_EMBEDS", () => {
+    sthm(@fifteen_theorem.iq_universal_of_embeds())
+  })
   log.attempt("iqsym", () => sthm(@fifteen_theorem.iqsym()))
   log.attempt("iqmat2", () => sthm(@fifteen_theorem.iqmat2()))
   log.attempt("iqmat3", () => sthm(@fifteen_theorem.iqmat3()))
@@ -51,1018 +79,2786 @@ test "Autoformalization/fifteen_theorem matches Autoformalization/fifteen_theore
   log.attempt("IQBILIN_MAT2", () => sthm(@fifteen_theorem.iqbilin_mat2()))
   log.attempt("IQBILIN_MAT3", () => sthm(@fifteen_theorem.iqbilin_mat3()))
   log.attempt("IQEVAL_MAT3", () => sthm(@fifteen_theorem.iqeval_mat3()))
-  log.attempt("IQBILIN_EQ_ON_INDEX", () => sthm(@fifteen_theorem.iqbilin_eq_on_index()))
-  log.attempt("IQBILIN_PULLBACK", () => sthm(@fifteen_theorem.iqbilin_pullback()))
+  log.attempt("IQBILIN_EQ_ON_INDEX", () => {
+    sthm(@fifteen_theorem.iqbilin_eq_on_index())
+  })
+  log.attempt("IQBILIN_PULLBACK", () => {
+    sthm(@fifteen_theorem.iqbilin_pullback())
+  })
   log.attempt("IQ_EMBEDS_EQ", () => sthm(@fifteen_theorem.iq_embeds_eq()))
-  log.attempt("IQ_EMBEDS_CONGRUENCE", () => sthm(@fifteen_theorem.iq_embeds_congruence()))
+  log.attempt("IQ_EMBEDS_CONGRUENCE", () => {
+    sthm(@fifteen_theorem.iq_embeds_congruence())
+  })
   log.attempt("iqappend", () => sthm(@fifteen_theorem.iqappend()))
   log.attempt("IQAPPEND_LT", () => sthm(@fifteen_theorem.iqappend_lt()))
   log.attempt("IQAPPEND_REFL", () => sthm(@fifteen_theorem.iqappend_refl()))
-  log.attempt("IQ_ESCALATION_STEP", () => sthm(@fifteen_theorem.iq_escalation_step()))
+  log.attempt("IQ_ESCALATION_STEP", () => {
+    sthm(@fifteen_theorem.iq_escalation_step())
+  })
   log.attempt("IQ_REM_9_CASES", () => sthm(@fifteen_theorem.iq_rem_9_cases()))
   log.attempt("IQ_SQ_MOD_9", () => sthm(@fifteen_theorem.iq_sq_mod_9()))
-  log.attempt("IQ_SQUARE_REM_16_OF_MOD8", () => sthm(@fifteen_theorem.iq_square_rem_16_of_mod8()))
+  log.attempt("IQ_SQUARE_REM_16_OF_MOD8", () => {
+    sthm(@fifteen_theorem.iq_square_rem_16_of_mod8())
+  })
   log.attempt("IQ_SQ_MOD_16", () => sthm(@fifteen_theorem.iq_sq_mod_16()))
-  log.attempt("IQ_122_MOD8_CORE", () => sthm(@fifteen_theorem.iq_122_mod8_core()))
+  log.attempt("IQ_122_MOD8_CORE", () => {
+    sthm(@fifteen_theorem.iq_122_mod8_core())
+  })
   log.attempt("INT_122_NOT_7", () => sthm(@fifteen_theorem.int_122_not_7()))
-  log.attempt("IQ_113_MOD9_CORE", () => sthm(@fifteen_theorem.iq_113_mod9_core()))
+  log.attempt("IQ_113_MOD9_CORE", () => {
+    sthm(@fifteen_theorem.iq_113_mod9_core())
+  })
   log.attempt("INT_113_NOT_6", () => sthm(@fifteen_theorem.int_113_not_6()))
-  log.attempt("IQ_112_MOD16_CORE", () => sthm(@fifteen_theorem.iq_112_mod16_core()))
+  log.attempt("IQ_112_MOD16_CORE", () => {
+    sthm(@fifteen_theorem.iq_112_mod16_core())
+  })
   log.attempt("INT_112_NOT_14", () => sthm(@fifteen_theorem.int_112_not_14()))
   log.attempt("iqrows2", () => sthm(@fifteen_theorem.iqrows2()))
   log.attempt("iqrows3", () => sthm(@fifteen_theorem.iqrows3()))
   log.attempt("iqclear2", () => sthm(@fifteen_theorem.iqclear2()))
   log.attempt("iqclear11", () => sthm(@fifteen_theorem.iqclear11()))
   log.attempt("iqclear12", () => sthm(@fifteen_theorem.iqclear12()))
-  log.attempt("INT_SQ_LE_2_CASES", () => sthm(@fifteen_theorem.int_sq_le_2_cases()))
-  log.attempt("INT_SQ_LE_3_CASES", () => sthm(@fifteen_theorem.int_sq_le_3_cases()))
-  log.attempt("INT_SQ_LE_5_CASES", () => sthm(@fifteen_theorem.int_sq_le_5_cases()))
-  log.attempt("INT_SQ_LE_10_CASES", () => sthm(@fifteen_theorem.int_sq_le_10_cases()))
-  log.attempt("IQ_EMBEDDED_NONNEG", () => sthm(@fifteen_theorem.iq_embedded_nonneg()))
-  log.attempt("IQ_EMBEDS_CLEAR_UNIT2", () => sthm(@fifteen_theorem.iq_embeds_clear_unit2()))
-  log.attempt("IQ_EMBEDS_CLEAR_11", () => sthm(@fifteen_theorem.iq_embeds_clear_11()))
-  log.attempt("IQ_EMBEDS_CLEAR_12", () => sthm(@fifteen_theorem.iq_embeds_clear_12()))
+  log.attempt("INT_SQ_LE_2_CASES", () => {
+    sthm(@fifteen_theorem.int_sq_le_2_cases())
+  })
+  log.attempt("INT_SQ_LE_3_CASES", () => {
+    sthm(@fifteen_theorem.int_sq_le_3_cases())
+  })
+  log.attempt("INT_SQ_LE_5_CASES", () => {
+    sthm(@fifteen_theorem.int_sq_le_5_cases())
+  })
+  log.attempt("INT_SQ_LE_10_CASES", () => {
+    sthm(@fifteen_theorem.int_sq_le_10_cases())
+  })
+  log.attempt("IQ_EMBEDDED_NONNEG", () => {
+    sthm(@fifteen_theorem.iq_embedded_nonneg())
+  })
+  log.attempt("IQ_EMBEDS_CLEAR_UNIT2", () => {
+    sthm(@fifteen_theorem.iq_embeds_clear_unit2())
+  })
+  log.attempt("IQ_EMBEDS_CLEAR_11", () => {
+    sthm(@fifteen_theorem.iq_embeds_clear_11())
+  })
+  log.attempt("IQ_EMBEDS_CLEAR_12", () => {
+    sthm(@fifteen_theorem.iq_embeds_clear_12())
+  })
   log.attempt("IQ_EMBEDS_ONE", () => sthm(@fifteen_theorem.iq_embeds_one()))
   log.attempt("IQGRAM_SWAP", () => sthm(@fifteen_theorem.iqgram_swap()))
-  log.attempt("IQ_EMBEDS_BINARY", () => sthm(@fifteen_theorem.iq_embeds_binary()))
-  log.attempt("IQ_ESCALATE_MAT2", () => sthm(@fifteen_theorem.iq_escalate_mat2()))
-  log.attempt("IQ_CORNER_11_CASES", () => sthm(@fifteen_theorem.iq_corner_11_cases()))
-  log.attempt("IQ_EMBEDS_TERNARY_11", () => sthm(@fifteen_theorem.iq_embeds_ternary_11()))
+  log.attempt("IQ_EMBEDS_BINARY", () => {
+    sthm(@fifteen_theorem.iq_embeds_binary())
+  })
+  log.attempt("IQ_ESCALATE_MAT2", () => {
+    sthm(@fifteen_theorem.iq_escalate_mat2())
+  })
+  log.attempt("IQ_CORNER_11_CASES", () => {
+    sthm(@fifteen_theorem.iq_corner_11_cases())
+  })
+  log.attempt("IQ_EMBEDS_TERNARY_11", () => {
+    sthm(@fifteen_theorem.iq_embeds_ternary_11())
+  })
   log.attempt("INT_DIV2_DECOMP", () => sthm(@fifteen_theorem.int_div2_decomp()))
-  log.attempt("IQ_12_PARAMETERS", () => sthm(@fifteen_theorem.iq_12_parameters()))
+  log.attempt("IQ_12_PARAMETERS", () => {
+    sthm(@fifteen_theorem.iq_12_parameters())
+  })
   log.attempt("iqswap12", () => sthm(@fifteen_theorem.iqswap12()))
   log.attempt("iqcross1", () => sthm(@fifteen_theorem.iqcross1()))
-  log.attempt("IQ_EMBEDS_121_TO_112", () => sthm(@fifteen_theorem.iq_embeds_121_to_112()))
-  log.attempt("IQ_EMBEDS_12X1_TO_111", () => sthm(@fifteen_theorem.iq_embeds_12x1_to_111()))
-  log.attempt("IQ_EMBEDS_TERNARY_12", () => sthm(@fifteen_theorem.iq_embeds_ternary_12()))
-  log.attempt("IQ_EMBEDS_TERNARY", () => sthm(@fifteen_theorem.iq_embeds_ternary()))
+  log.attempt("IQ_EMBEDS_121_TO_112", () => {
+    sthm(@fifteen_theorem.iq_embeds_121_to_112())
+  })
+  log.attempt("IQ_EMBEDS_12X1_TO_111", () => {
+    sthm(@fifteen_theorem.iq_embeds_12x1_to_111())
+  })
+  log.attempt("IQ_EMBEDS_TERNARY_12", () => {
+    sthm(@fifteen_theorem.iq_embeds_ternary_12())
+  })
+  log.attempt("IQ_EMBEDS_TERNARY", () => {
+    sthm(@fifteen_theorem.iq_embeds_ternary())
+  })
   log.attempt("iqdiag", () => sthm(@fifteen_theorem.iqdiag()))
   log.attempt("iqdiag4", () => sthm(@fifteen_theorem.iqdiag4()))
   log.attempt("IQEVAL_IQDIAG", () => sthm(@fifteen_theorem.iqeval_iqdiag()))
   log.attempt("IQEVAL_DIAG4", () => sthm(@fifteen_theorem.iqeval_diag4()))
-  log.attempt("IQ_REPRESENTS_DIAG4", () => sthm(@fifteen_theorem.iq_represents_diag4()))
-  log.attempt("INT_THREE_SQUARES_OF_LEGENDRE", () => sthm(@fifteen_theorem.int_three_squares_of_legendre()))
-  log.attempt("INT_SAME_PARITY_HALF", () => sthm(@fifteen_theorem.int_same_parity_half()))
-  log.attempt("INT_PARITY_WITNESS", () => sthm(@fifteen_theorem.int_parity_witness()))
-  log.attempt("INT_TWO_MUL_NE_ONE", () => sthm(@fifteen_theorem.int_two_mul_ne_one()))
-  log.attempt("INT_ONE_ODD_SQUARES_NE_DOUBLE", () => sthm(@fifteen_theorem.int_one_odd_squares_ne_double()))
-  log.attempt("INT_EVEN_EVEN_ODD_SQUARES_NE_DOUBLE", () => sthm(@fifteen_theorem.int_even_even_odd_squares_ne_double()))
-  log.attempt("INT_EVEN_ODD_EVEN_SQUARES_NE_DOUBLE", () => sthm(@fifteen_theorem.int_even_odd_even_squares_ne_double()))
-  log.attempt("INT_THREE_ODD_SQUARES_NE_DOUBLE", () => sthm(@fifteen_theorem.int_three_odd_squares_ne_double()))
-  log.attempt("INT_THREE_PARITY_PAIR", () => sthm(@fifteen_theorem.int_three_parity_pair()))
+  log.attempt("IQ_REPRESENTS_DIAG4", () => {
+    sthm(@fifteen_theorem.iq_represents_diag4())
+  })
+  log.attempt("INT_THREE_SQUARES_OF_LEGENDRE", () => {
+    sthm(@fifteen_theorem.int_three_squares_of_legendre())
+  })
+  log.attempt("INT_SAME_PARITY_HALF", () => {
+    sthm(@fifteen_theorem.int_same_parity_half())
+  })
+  log.attempt("INT_PARITY_WITNESS", () => {
+    sthm(@fifteen_theorem.int_parity_witness())
+  })
+  log.attempt("INT_TWO_MUL_NE_ONE", () => {
+    sthm(@fifteen_theorem.int_two_mul_ne_one())
+  })
+  log.attempt("INT_ONE_ODD_SQUARES_NE_DOUBLE", () => {
+    sthm(@fifteen_theorem.int_one_odd_squares_ne_double())
+  })
+  log.attempt("INT_EVEN_EVEN_ODD_SQUARES_NE_DOUBLE", () => {
+    sthm(@fifteen_theorem.int_even_even_odd_squares_ne_double())
+  })
+  log.attempt("INT_EVEN_ODD_EVEN_SQUARES_NE_DOUBLE", () => {
+    sthm(@fifteen_theorem.int_even_odd_even_squares_ne_double())
+  })
+  log.attempt("INT_THREE_ODD_SQUARES_NE_DOUBLE", () => {
+    sthm(@fifteen_theorem.int_three_odd_squares_ne_double())
+  })
+  log.attempt("INT_THREE_PARITY_PAIR", () => {
+    sthm(@fifteen_theorem.int_three_parity_pair())
+  })
   log.attempt("INT_PAIR_HALF", () => sthm(@fifteen_theorem.int_pair_half()))
-  log.attempt("REPR_112_OF_THREE_SQUARES", () => sthm(@fifteen_theorem.repr_112_of_three_squares()))
-  log.attempt("REPR_122_OF_THREE_SQUARES", () => sthm(@fifteen_theorem.repr_122_of_three_squares()))
-  log.attempt("THREE_SQUARES_AVOIDS_OF_MOD", () => sthm(@fifteen_theorem.three_squares_avoids_of_mod()))
-  log.attempt("THREE_SQUARES_AVOIDS_FOUR_MUL", () => sthm(@fifteen_theorem.three_squares_avoids_four_mul()))
-  log.attempt("IQ_UNIVERSAL_DIAG4_OF_NUM", () => sthm(@fifteen_theorem.iq_universal_diag4_of_num()))
-  log.attempt("IQ_DIAG4_REPRESENTATION_SCALE4", () => sthm(@fifteen_theorem.iq_diag4_representation_scale4()))
-  log.attempt("IQ_UNIVERSAL_122C_OF_111C", () => sthm(@fifteen_theorem.iq_universal_122c_of_111c()))
-  log.attempt("THREE_SQUARES_AVOIDS_SUB2", () => sthm(@fifteen_theorem.three_squares_avoids_sub2()))
-  log.attempt("IQ_UNIVERSAL_1112_NUM", () => sthm(@fifteen_theorem.iq_universal_1112_num()))
-  log.attempt("IQ_UNIVERSAL_1112", () => sthm(@fifteen_theorem.iq_universal_1112()))
-  log.attempt("INT_THREE_SQUARES_OF_MOD", () => sthm(@fifteen_theorem.int_three_squares_of_mod()))
-  log.attempt("IQ_DIAG4_REPRESENTATION_SCALE4_NUM", () => sthm(@fifteen_theorem.iq_diag4_representation_scale4_num()))
-  log.attempt("IQ_DIAG4_111C_REPRESENTATION_STEP", () => sthm(@fifteen_theorem.iq_diag4_111c_representation_step()))
+  log.attempt("REPR_112_OF_THREE_SQUARES", () => {
+    sthm(@fifteen_theorem.repr_112_of_three_squares())
+  })
+  log.attempt("REPR_122_OF_THREE_SQUARES", () => {
+    sthm(@fifteen_theorem.repr_122_of_three_squares())
+  })
+  log.attempt("THREE_SQUARES_AVOIDS_OF_MOD", () => {
+    sthm(@fifteen_theorem.three_squares_avoids_of_mod())
+  })
+  log.attempt("THREE_SQUARES_AVOIDS_FOUR_MUL", () => {
+    sthm(@fifteen_theorem.three_squares_avoids_four_mul())
+  })
+  log.attempt("IQ_UNIVERSAL_DIAG4_OF_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_diag4_of_num())
+  })
+  log.attempt("IQ_DIAG4_REPRESENTATION_SCALE4", () => {
+    sthm(@fifteen_theorem.iq_diag4_representation_scale4())
+  })
+  log.attempt("IQ_UNIVERSAL_122C_OF_111C", () => {
+    sthm(@fifteen_theorem.iq_universal_122c_of_111c())
+  })
+  log.attempt("THREE_SQUARES_AVOIDS_SUB2", () => {
+    sthm(@fifteen_theorem.three_squares_avoids_sub2())
+  })
+  log.attempt("IQ_UNIVERSAL_1112_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1112_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1112", () => {
+    sthm(@fifteen_theorem.iq_universal_1112())
+  })
+  log.attempt("INT_THREE_SQUARES_OF_MOD", () => {
+    sthm(@fifteen_theorem.int_three_squares_of_mod())
+  })
+  log.attempt("IQ_DIAG4_REPRESENTATION_SCALE4_NUM", () => {
+    sthm(@fifteen_theorem.iq_diag4_representation_scale4_num())
+  })
+  log.attempt("IQ_DIAG4_111C_REPRESENTATION_STEP", () => {
+    sthm(@fifteen_theorem.iq_diag4_111c_representation_step())
+  })
   log.attempt("MOD32_7_CASES", () => sthm(@fifteen_theorem.mod32_7_cases()))
-  log.attempt("INT_THREE_SQUARES_8Q_MOD", () => sthm(@fifteen_theorem.int_three_squares_8q_mod()))
-  log.attempt("INT_THREE_SQUARES_4MUL_8Q_MOD", () => sthm(@fifteen_theorem.int_three_squares_4mul_8q_mod()))
-  log.attempt("IQ_UNIVERSAL_1113_NUM", () => sthm(@fifteen_theorem.iq_universal_1113_num()))
-  log.attempt("IQ_UNIVERSAL_1114_NUM", () => sthm(@fifteen_theorem.iq_universal_1114_num()))
-  log.attempt("IQ_UNIVERSAL_1115_NUM", () => sthm(@fifteen_theorem.iq_universal_1115_num()))
-  log.attempt("IQ_UNIVERSAL_1116_NUM", () => sthm(@fifteen_theorem.iq_universal_1116_num()))
-  log.attempt("IQ_UNIVERSAL_1117_NUM", () => sthm(@fifteen_theorem.iq_universal_1117_num()))
-  log.attempt("IQ_UNIVERSAL_1113", () => sthm(@fifteen_theorem.iq_universal_1113()))
-  log.attempt("IQ_UNIVERSAL_1114", () => sthm(@fifteen_theorem.iq_universal_1114()))
-  log.attempt("IQ_UNIVERSAL_1115", () => sthm(@fifteen_theorem.iq_universal_1115()))
-  log.attempt("IQ_UNIVERSAL_1116", () => sthm(@fifteen_theorem.iq_universal_1116()))
-  log.attempt("IQ_UNIVERSAL_1117", () => sthm(@fifteen_theorem.iq_universal_1117()))
-  log.attempt("INT_REPRESENTS_112_OF_LEGENDRE", () => sthm(@fifteen_theorem.int_represents_112_of_legendre()))
+  log.attempt("INT_THREE_SQUARES_8Q_MOD", () => {
+    sthm(@fifteen_theorem.int_three_squares_8q_mod())
+  })
+  log.attempt("INT_THREE_SQUARES_4MUL_8Q_MOD", () => {
+    sthm(@fifteen_theorem.int_three_squares_4mul_8q_mod())
+  })
+  log.attempt("IQ_UNIVERSAL_1113_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1113_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1114_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1114_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1115_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1115_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1116_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1116_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1117_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1117_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1113", () => {
+    sthm(@fifteen_theorem.iq_universal_1113())
+  })
+  log.attempt("IQ_UNIVERSAL_1114", () => {
+    sthm(@fifteen_theorem.iq_universal_1114())
+  })
+  log.attempt("IQ_UNIVERSAL_1115", () => {
+    sthm(@fifteen_theorem.iq_universal_1115())
+  })
+  log.attempt("IQ_UNIVERSAL_1116", () => {
+    sthm(@fifteen_theorem.iq_universal_1116())
+  })
+  log.attempt("IQ_UNIVERSAL_1117", () => {
+    sthm(@fifteen_theorem.iq_universal_1117())
+  })
+  log.attempt("INT_REPRESENTS_112_OF_LEGENDRE", () => {
+    sthm(@fifteen_theorem.int_represents_112_of_legendre())
+  })
   log.attempt("MOD4_CASES", () => sthm(@fifteen_theorem.mod4_cases()))
   log.attempt("MOD2_OF_MOD4", () => sthm(@fifteen_theorem.mod2_of_mod4()))
-  log.attempt("NUM_MOD4_NONZERO_NONODD", () => sthm(@fifteen_theorem.num_mod4_nonzero_nonodd()))
+  log.attempt("NUM_MOD4_NONZERO_NONODD", () => {
+    sthm(@fifteen_theorem.num_mod4_nonzero_nonodd())
+  })
   log.attempt("MOD16_2_CASES", () => sthm(@fifteen_theorem.mod16_2_cases()))
-  log.attempt("INT_REPRESENTS_112_ODD", () => sthm(@fifteen_theorem.int_represents_112_odd()))
-  log.attempt("NUM_DECOMPOSE_MOD", () => sthm(@fifteen_theorem.num_decompose_mod()))
-  log.attempt("INT_REPRESENTS_112_TWICE_8Q_MOD", () => sthm(@fifteen_theorem.int_represents_112_twice_8q_mod()))
-  log.attempt("INT_REPRESENTS_112_TWO", () => sthm(@fifteen_theorem.int_represents_112_two()))
-  log.attempt("INT_REPRESENTS_112_SCALE4_NUM", () => sthm(@fifteen_theorem.int_represents_112_scale4_num()))
-  log.attempt("IQ_DIAG4_112C_REPRESENTATION_STEP", () => sthm(@fifteen_theorem.iq_diag4_112c_representation_step()))
-  log.attempt("IQ_UNIVERSAL_112C_NUM_OF_BAD", () => sthm(@fifteen_theorem.iq_universal_112c_num_of_bad()))
-  log.attempt("NUM_MOD2_SUB_ODD", () => sthm(@fifteen_theorem.num_mod2_sub_odd()))
-  log.attempt("NUM_MOD2_OF_MOD16_14", () => sthm(@fifteen_theorem.num_mod2_of_mod16_14()))
-  log.attempt("IQ_UNIVERSAL_112_ODD_NUM", () => sthm(@fifteen_theorem.iq_universal_112_odd_num()))
+  log.attempt("INT_REPRESENTS_112_ODD", () => {
+    sthm(@fifteen_theorem.int_represents_112_odd())
+  })
+  log.attempt("NUM_DECOMPOSE_MOD", () => {
+    sthm(@fifteen_theorem.num_decompose_mod())
+  })
+  log.attempt("INT_REPRESENTS_112_TWICE_8Q_MOD", () => {
+    sthm(@fifteen_theorem.int_represents_112_twice_8q_mod())
+  })
+  log.attempt("INT_REPRESENTS_112_TWO", () => {
+    sthm(@fifteen_theorem.int_represents_112_two())
+  })
+  log.attempt("INT_REPRESENTS_112_SCALE4_NUM", () => {
+    sthm(@fifteen_theorem.int_represents_112_scale4_num())
+  })
+  log.attempt("IQ_DIAG4_112C_REPRESENTATION_STEP", () => {
+    sthm(@fifteen_theorem.iq_diag4_112c_representation_step())
+  })
+  log.attempt("IQ_UNIVERSAL_112C_NUM_OF_BAD", () => {
+    sthm(@fifteen_theorem.iq_universal_112c_num_of_bad())
+  })
+  log.attempt("NUM_MOD2_SUB_ODD", () => {
+    sthm(@fifteen_theorem.num_mod2_sub_odd())
+  })
+  log.attempt("NUM_MOD2_OF_MOD16_14", () => {
+    sthm(@fifteen_theorem.num_mod2_of_mod16_14())
+  })
+  log.attempt("IQ_UNIVERSAL_112_ODD_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_112_odd_num())
+  })
   log.attempt("MOD32_14_CASES", () => sthm(@fifteen_theorem.mod32_14_cases()))
   log.attempt("MOD64_14_CASES", () => sthm(@fifteen_theorem.mod64_14_cases()))
-  log.attempt("IQ_UNIVERSAL_1124_NUM", () => sthm(@fifteen_theorem.iq_universal_1124_num()))
-  log.attempt("IQ_UNIVERSAL_1128_NUM", () => sthm(@fifteen_theorem.iq_universal_1128_num()))
-  log.attempt("IQ_UNIVERSAL_11212_NUM", () => sthm(@fifteen_theorem.iq_universal_11212_num()))
-  log.attempt("IQ_UNIVERSAL_11210_NUM", () => sthm(@fifteen_theorem.iq_universal_11210_num()))
-  log.attempt("IQ_UNIVERSAL_1122_NUM", () => sthm(@fifteen_theorem.iq_universal_1122_num()))
-  log.attempt("IQ_UNIVERSAL_1126_NUM", () => sthm(@fifteen_theorem.iq_universal_1126_num()))
-  log.attempt("IQ_UNIVERSAL_11214_NUM", () => sthm(@fifteen_theorem.iq_universal_11214_num()))
-  log.attempt("IQ_UNIVERSAL_1123_NUM", () => sthm(@fifteen_theorem.iq_universal_1123_num()))
-  log.attempt("IQ_UNIVERSAL_1125_NUM", () => sthm(@fifteen_theorem.iq_universal_1125_num()))
-  log.attempt("IQ_UNIVERSAL_1127_NUM", () => sthm(@fifteen_theorem.iq_universal_1127_num()))
-  log.attempt("IQ_UNIVERSAL_1129_NUM", () => sthm(@fifteen_theorem.iq_universal_1129_num()))
-  log.attempt("IQ_UNIVERSAL_11211_NUM", () => sthm(@fifteen_theorem.iq_universal_11211_num()))
-  log.attempt("IQ_UNIVERSAL_11213_NUM", () => sthm(@fifteen_theorem.iq_universal_11213_num()))
-  log.attempt("IQ_UNIVERSAL_1122", () => sthm(@fifteen_theorem.iq_universal_1122()))
-  log.attempt("IQ_UNIVERSAL_1123", () => sthm(@fifteen_theorem.iq_universal_1123()))
-  log.attempt("IQ_UNIVERSAL_1124", () => sthm(@fifteen_theorem.iq_universal_1124()))
-  log.attempt("IQ_UNIVERSAL_1125", () => sthm(@fifteen_theorem.iq_universal_1125()))
-  log.attempt("IQ_UNIVERSAL_1126", () => sthm(@fifteen_theorem.iq_universal_1126()))
-  log.attempt("IQ_UNIVERSAL_1127", () => sthm(@fifteen_theorem.iq_universal_1127()))
-  log.attempt("IQ_UNIVERSAL_1128", () => sthm(@fifteen_theorem.iq_universal_1128()))
-  log.attempt("IQ_UNIVERSAL_1129", () => sthm(@fifteen_theorem.iq_universal_1129()))
-  log.attempt("IQ_UNIVERSAL_11210", () => sthm(@fifteen_theorem.iq_universal_11210()))
-  log.attempt("IQ_UNIVERSAL_11211", () => sthm(@fifteen_theorem.iq_universal_11211()))
-  log.attempt("IQ_UNIVERSAL_11212", () => sthm(@fifteen_theorem.iq_universal_11212()))
-  log.attempt("IQ_UNIVERSAL_11213", () => sthm(@fifteen_theorem.iq_universal_11213()))
-  log.attempt("IQ_UNIVERSAL_11214", () => sthm(@fifteen_theorem.iq_universal_11214()))
-  log.attempt("IQ_UNIVERSAL_1222", () => sthm(@fifteen_theorem.iq_universal_1222()))
-  log.attempt("IQ_UNIVERSAL_1223", () => sthm(@fifteen_theorem.iq_universal_1223()))
-  log.attempt("IQ_UNIVERSAL_1224", () => sthm(@fifteen_theorem.iq_universal_1224()))
-  log.attempt("IQ_UNIVERSAL_1225", () => sthm(@fifteen_theorem.iq_universal_1225()))
-  log.attempt("IQ_UNIVERSAL_1226", () => sthm(@fifteen_theorem.iq_universal_1226()))
-  log.attempt("IQ_UNIVERSAL_1227", () => sthm(@fifteen_theorem.iq_universal_1227()))
+  log.attempt("IQ_UNIVERSAL_1124_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1124_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1128_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1128_num())
+  })
+  log.attempt("IQ_UNIVERSAL_11212_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_11212_num())
+  })
+  log.attempt("IQ_UNIVERSAL_11210_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_11210_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1122_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1122_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1126_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1126_num())
+  })
+  log.attempt("IQ_UNIVERSAL_11214_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_11214_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1123_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1123_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1125_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1125_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1127_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1127_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1129_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1129_num())
+  })
+  log.attempt("IQ_UNIVERSAL_11211_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_11211_num())
+  })
+  log.attempt("IQ_UNIVERSAL_11213_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_11213_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1122", () => {
+    sthm(@fifteen_theorem.iq_universal_1122())
+  })
+  log.attempt("IQ_UNIVERSAL_1123", () => {
+    sthm(@fifteen_theorem.iq_universal_1123())
+  })
+  log.attempt("IQ_UNIVERSAL_1124", () => {
+    sthm(@fifteen_theorem.iq_universal_1124())
+  })
+  log.attempt("IQ_UNIVERSAL_1125", () => {
+    sthm(@fifteen_theorem.iq_universal_1125())
+  })
+  log.attempt("IQ_UNIVERSAL_1126", () => {
+    sthm(@fifteen_theorem.iq_universal_1126())
+  })
+  log.attempt("IQ_UNIVERSAL_1127", () => {
+    sthm(@fifteen_theorem.iq_universal_1127())
+  })
+  log.attempt("IQ_UNIVERSAL_1128", () => {
+    sthm(@fifteen_theorem.iq_universal_1128())
+  })
+  log.attempt("IQ_UNIVERSAL_1129", () => {
+    sthm(@fifteen_theorem.iq_universal_1129())
+  })
+  log.attempt("IQ_UNIVERSAL_11210", () => {
+    sthm(@fifteen_theorem.iq_universal_11210())
+  })
+  log.attempt("IQ_UNIVERSAL_11211", () => {
+    sthm(@fifteen_theorem.iq_universal_11211())
+  })
+  log.attempt("IQ_UNIVERSAL_11212", () => {
+    sthm(@fifteen_theorem.iq_universal_11212())
+  })
+  log.attempt("IQ_UNIVERSAL_11213", () => {
+    sthm(@fifteen_theorem.iq_universal_11213())
+  })
+  log.attempt("IQ_UNIVERSAL_11214", () => {
+    sthm(@fifteen_theorem.iq_universal_11214())
+  })
+  log.attempt("IQ_UNIVERSAL_1222", () => {
+    sthm(@fifteen_theorem.iq_universal_1222())
+  })
+  log.attempt("IQ_UNIVERSAL_1223", () => {
+    sthm(@fifteen_theorem.iq_universal_1223())
+  })
+  log.attempt("IQ_UNIVERSAL_1224", () => {
+    sthm(@fifteen_theorem.iq_universal_1224())
+  })
+  log.attempt("IQ_UNIVERSAL_1225", () => {
+    sthm(@fifteen_theorem.iq_universal_1225())
+  })
+  log.attempt("IQ_UNIVERSAL_1226", () => {
+    sthm(@fifteen_theorem.iq_universal_1226())
+  })
+  log.attempt("IQ_UNIVERSAL_1227", () => {
+    sthm(@fifteen_theorem.iq_universal_1227())
+  })
   log.attempt("iqrows4", () => sthm(@fifteen_theorem.iqrows4()))
   log.attempt("IQBILIN_MAT4", () => sthm(@fifteen_theorem.iqbilin_mat4()))
   log.attempt("IQEVAL_MAT4", () => sthm(@fifteen_theorem.iqeval_mat4()))
-  log.attempt("IQ_ESCALATE_MAT3", () => sthm(@fifteen_theorem.iq_escalate_mat3()))
+  log.attempt("IQ_ESCALATE_MAT3", () => {
+    sthm(@fifteen_theorem.iq_escalate_mat3())
+  })
   log.attempt("iqclear111", () => sthm(@fifteen_theorem.iqclear111()))
-  log.attempt("IQ_EMBEDS_CLEAR_111", () => sthm(@fifteen_theorem.iq_embeds_clear_111()))
-  log.attempt("INT_SQ_LE_7_CASES", () => sthm(@fifteen_theorem.int_sq_le_7_cases()))
-  log.attempt("IQ_111_CORNER_CASES", () => sthm(@fifteen_theorem.iq_111_corner_cases()))
-  log.attempt("iqembed1122in1111", () => sthm(@fifteen_theorem.iqembed1122in1111()))
-  log.attempt("IQ_EMBEDS_1122_IN_1111", () => sthm(@fifteen_theorem.iq_embeds_1122_in_1111()))
-  log.attempt("IQ_UNIVERSAL_1111", () => sthm(@fifteen_theorem.iq_universal_1111()))
-  log.attempt("IQ_UNIVERSAL_OF_DIAG111_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_diag111_child()))
-  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_111", () => sthm(@fifteen_theorem.iq_universal_of_embeds_111()))
+  log.attempt("IQ_EMBEDS_CLEAR_111", () => {
+    sthm(@fifteen_theorem.iq_embeds_clear_111())
+  })
+  log.attempt("INT_SQ_LE_7_CASES", () => {
+    sthm(@fifteen_theorem.int_sq_le_7_cases())
+  })
+  log.attempt("IQ_111_CORNER_CASES", () => {
+    sthm(@fifteen_theorem.iq_111_corner_cases())
+  })
+  log.attempt("iqembed1122in1111", () => {
+    sthm(@fifteen_theorem.iqembed1122in1111())
+  })
+  log.attempt("IQ_EMBEDS_1122_IN_1111", () => {
+    sthm(@fifteen_theorem.iq_embeds_1122_in_1111())
+  })
+  log.attempt("IQ_UNIVERSAL_1111", () => {
+    sthm(@fifteen_theorem.iq_universal_1111())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_DIAG111_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_diag111_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_111", () => {
+    sthm(@fifteen_theorem.iq_universal_of_embeds_111())
+  })
   log.attempt("iqclear112", () => sthm(@fifteen_theorem.iqclear112()))
-  log.attempt("IQ_EMBEDS_CLEAR_112", () => sthm(@fifteen_theorem.iq_embeds_clear_112()))
-  log.attempt("IQ_EMBEDS_MAT4_DIAG", () => sthm(@fifteen_theorem.iq_embeds_mat4_diag()))
-  log.attempt("INT_SQ_LE_14_CASES", () => sthm(@fifteen_theorem.int_sq_le_14_cases()))
-  log.attempt("INT_SQ_LE_28_CASES", () => sthm(@fifteen_theorem.int_sq_le_28_cases()))
-  log.attempt("IQ_112_PARAMETERS", () => sthm(@fifteen_theorem.iq_112_parameters()))
-  log.attempt("IQ_EMBEDS_QUATERNARY_112", () => sthm(@fifteen_theorem.iq_embeds_quaternary_112()))
-  log.attempt("IQ_UNIVERSAL_1121_NUM", () => sthm(@fifteen_theorem.iq_universal_1121_num()))
-  log.attempt("IQ_UNIVERSAL_1121", () => sthm(@fifteen_theorem.iq_universal_1121()))
-  log.attempt("IQ_UNIVERSAL_OF_DIAG112_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_diag112_child()))
-  log.attempt("NUM_CROSS112_TARGET_AVOIDS", () => sthm(@fifteen_theorem.num_cross112_target_avoids()))
-  log.attempt("INT_REPRESENTS_CROSS112_BAD", () => sthm(@fifteen_theorem.int_represents_cross112_bad()))
-  log.attempt("INT_UNIVERSAL_CROSS112_NUM", () => sthm(@fifteen_theorem.int_universal_cross112_num()))
-  log.attempt("IQ_UNIVERSAL_CROSS112_NUM", () => sthm(@fifteen_theorem.iq_universal_cross112_num()))
-  log.attempt("IQ_UNIVERSAL_OF_CROSS112_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_cross112_child()))
-  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_112", () => sthm(@fifteen_theorem.iq_universal_of_embeds_112()))
+  log.attempt("IQ_EMBEDS_CLEAR_112", () => {
+    sthm(@fifteen_theorem.iq_embeds_clear_112())
+  })
+  log.attempt("IQ_EMBEDS_MAT4_DIAG", () => {
+    sthm(@fifteen_theorem.iq_embeds_mat4_diag())
+  })
+  log.attempt("INT_SQ_LE_14_CASES", () => {
+    sthm(@fifteen_theorem.int_sq_le_14_cases())
+  })
+  log.attempt("INT_SQ_LE_28_CASES", () => {
+    sthm(@fifteen_theorem.int_sq_le_28_cases())
+  })
+  log.attempt("IQ_112_PARAMETERS", () => {
+    sthm(@fifteen_theorem.iq_112_parameters())
+  })
+  log.attempt("IQ_EMBEDS_QUATERNARY_112", () => {
+    sthm(@fifteen_theorem.iq_embeds_quaternary_112())
+  })
+  log.attempt("IQ_UNIVERSAL_1121_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1121_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1121", () => {
+    sthm(@fifteen_theorem.iq_universal_1121())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_DIAG112_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_diag112_child())
+  })
+  log.attempt("NUM_CROSS112_TARGET_AVOIDS", () => {
+    sthm(@fifteen_theorem.num_cross112_target_avoids())
+  })
+  log.attempt("INT_REPRESENTS_CROSS112_BAD", () => {
+    sthm(@fifteen_theorem.int_represents_cross112_bad())
+  })
+  log.attempt("INT_UNIVERSAL_CROSS112_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_cross112_num())
+  })
+  log.attempt("IQ_UNIVERSAL_CROSS112_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_cross112_num())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_CROSS112_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_cross112_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_112", () => {
+    sthm(@fifteen_theorem.iq_universal_of_embeds_112())
+  })
   log.attempt("iqclear122", () => sthm(@fifteen_theorem.iqclear122()))
-  log.attempt("IQ_EMBEDS_CLEAR_122", () => sthm(@fifteen_theorem.iq_embeds_clear_122()))
-  log.attempt("IQ_122_PARAMETERS", () => sthm(@fifteen_theorem.iq_122_parameters()))
-  log.attempt("IQ_EMBEDS_QUATERNARY_122", () => sthm(@fifteen_theorem.iq_embeds_quaternary_122()))
-  log.attempt("IQ_UNIVERSAL_1221_NUM", () => sthm(@fifteen_theorem.iq_universal_1221_num()))
-  log.attempt("IQ_UNIVERSAL_1221", () => sthm(@fifteen_theorem.iq_universal_1221()))
-  log.attempt("IQ_UNIVERSAL_MAT4_DIAG", () => sthm(@fifteen_theorem.iq_universal_mat4_diag()))
-  log.attempt("IQ_UNIVERSAL_MAT1222", () => sthm(@fifteen_theorem.iq_universal_mat1222()))
-  log.attempt("IQ_UNIVERSAL_MAT1223", () => sthm(@fifteen_theorem.iq_universal_mat1223()))
-  log.attempt("IQ_UNIVERSAL_MAT1224", () => sthm(@fifteen_theorem.iq_universal_mat1224()))
-  log.attempt("IQ_UNIVERSAL_MAT1225", () => sthm(@fifteen_theorem.iq_universal_mat1225()))
-  log.attempt("IQ_UNIVERSAL_MAT1226", () => sthm(@fifteen_theorem.iq_universal_mat1226()))
-  log.attempt("IQ_UNIVERSAL_MAT1227", () => sthm(@fifteen_theorem.iq_universal_mat1227()))
-  log.attempt("IQ_UNIVERSAL_OF_DIAG122_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_diag122_child()))
-  log.attempt("INT_REPRESENTS_124_ODD", () => sthm(@fifteen_theorem.int_represents_124_odd()))
-  log.attempt("NUM_CROSSA122_TARGET_ODD", () => sthm(@fifteen_theorem.num_crossa122_target_odd()))
-  log.attempt("INT_UNIVERSAL_CROSSA122_NUM", () => sthm(@fifteen_theorem.int_universal_crossa122_num()))
-  log.attempt("INT_UNIVERSAL_CROSSA122_Z_NUM", () => sthm(@fifteen_theorem.int_universal_crossa122_z_num()))
-  log.attempt("IQ_UNIVERSAL_CROSSA122_Y_NUM", () => sthm(@fifteen_theorem.iq_universal_crossa122_y_num()))
-  log.attempt("IQ_UNIVERSAL_CROSSA122_Z_NUM", () => sthm(@fifteen_theorem.iq_universal_crossa122_z_num()))
-  log.attempt("IQ_UNIVERSAL_OF_CROSSA122_Y_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_crossa122_y_child()))
-  log.attempt("IQ_UNIVERSAL_OF_CROSSA122_Z_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_crossa122_z_child()))
-  log.attempt("INT_REPRESENTS_122_AVOIDS", () => sthm(@fifteen_theorem.int_represents_122_avoids()))
-  log.attempt("NUM_MOD4_1_AVOIDS", () => sthm(@fifteen_theorem.num_mod4_1_avoids()))
-  log.attempt("INT_CROSSB122_ASSEMBLE", () => sthm(@fifteen_theorem.int_crossb122_assemble()))
-  log.attempt("INT_REPRESENTS_CROSSB122_W1", () => sthm(@fifteen_theorem.int_represents_crossb122_w1()))
-  log.attempt("INT_CROSSB122_SHIFT_NUM", () => sthm(@fifteen_theorem.int_crossb122_shift_num()))
-  log.attempt("NUM_CROSSB122_SHIFT2", () => sthm(@fifteen_theorem.num_crossb122_shift2()))
-  log.attempt("NUM_CROSSB122_W1_3", () => sthm(@fifteen_theorem.num_crossb122_w1_3()))
-  log.attempt("NUM_CROSSB122_SHIFT6", () => sthm(@fifteen_theorem.num_crossb122_shift6()))
-  log.attempt("NUM_CROSSB122_W1_7", () => sthm(@fifteen_theorem.num_crossb122_w1_7()))
-  log.attempt("INT_UNIVERSAL_CROSSB122_NUM", () => sthm(@fifteen_theorem.int_universal_crossb122_num()))
-  log.attempt("IQ_UNIVERSAL_CROSSB122_NUM", () => sthm(@fifteen_theorem.iq_universal_crossb122_num()))
-  log.attempt("IQ_UNIVERSAL_CROSSB122_2", () => sthm(@fifteen_theorem.iq_universal_crossb122_2()))
-  log.attempt("IQ_UNIVERSAL_CROSSB122_3", () => sthm(@fifteen_theorem.iq_universal_crossb122_3()))
-  log.attempt("IQ_UNIVERSAL_CROSSB122_6", () => sthm(@fifteen_theorem.iq_universal_crossb122_6()))
-  log.attempt("IQ_UNIVERSAL_CROSSB122_7", () => sthm(@fifteen_theorem.iq_universal_crossb122_7()))
-  log.attempt("IQ_UNIVERSAL_OF_CROSSB122_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_crossb122_child()))
-  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_122", () => sthm(@fifteen_theorem.iq_universal_of_embeds_122()))
+  log.attempt("IQ_EMBEDS_CLEAR_122", () => {
+    sthm(@fifteen_theorem.iq_embeds_clear_122())
+  })
+  log.attempt("IQ_122_PARAMETERS", () => {
+    sthm(@fifteen_theorem.iq_122_parameters())
+  })
+  log.attempt("IQ_EMBEDS_QUATERNARY_122", () => {
+    sthm(@fifteen_theorem.iq_embeds_quaternary_122())
+  })
+  log.attempt("IQ_UNIVERSAL_1221_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_1221_num())
+  })
+  log.attempt("IQ_UNIVERSAL_1221", () => {
+    sthm(@fifteen_theorem.iq_universal_1221())
+  })
+  log.attempt("IQ_UNIVERSAL_MAT4_DIAG", () => {
+    sthm(@fifteen_theorem.iq_universal_mat4_diag())
+  })
+  log.attempt("IQ_UNIVERSAL_MAT1222", () => {
+    sthm(@fifteen_theorem.iq_universal_mat1222())
+  })
+  log.attempt("IQ_UNIVERSAL_MAT1223", () => {
+    sthm(@fifteen_theorem.iq_universal_mat1223())
+  })
+  log.attempt("IQ_UNIVERSAL_MAT1224", () => {
+    sthm(@fifteen_theorem.iq_universal_mat1224())
+  })
+  log.attempt("IQ_UNIVERSAL_MAT1225", () => {
+    sthm(@fifteen_theorem.iq_universal_mat1225())
+  })
+  log.attempt("IQ_UNIVERSAL_MAT1226", () => {
+    sthm(@fifteen_theorem.iq_universal_mat1226())
+  })
+  log.attempt("IQ_UNIVERSAL_MAT1227", () => {
+    sthm(@fifteen_theorem.iq_universal_mat1227())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_DIAG122_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_diag122_child())
+  })
+  log.attempt("INT_REPRESENTS_124_ODD", () => {
+    sthm(@fifteen_theorem.int_represents_124_odd())
+  })
+  log.attempt("NUM_CROSSA122_TARGET_ODD", () => {
+    sthm(@fifteen_theorem.num_crossa122_target_odd())
+  })
+  log.attempt("INT_UNIVERSAL_CROSSA122_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_crossa122_num())
+  })
+  log.attempt("INT_UNIVERSAL_CROSSA122_Z_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_crossa122_z_num())
+  })
+  log.attempt("IQ_UNIVERSAL_CROSSA122_Y_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_crossa122_y_num())
+  })
+  log.attempt("IQ_UNIVERSAL_CROSSA122_Z_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_crossa122_z_num())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_CROSSA122_Y_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_crossa122_y_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_CROSSA122_Z_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_crossa122_z_child())
+  })
+  log.attempt("INT_REPRESENTS_122_AVOIDS", () => {
+    sthm(@fifteen_theorem.int_represents_122_avoids())
+  })
+  log.attempt("NUM_MOD4_1_AVOIDS", () => {
+    sthm(@fifteen_theorem.num_mod4_1_avoids())
+  })
+  log.attempt("INT_CROSSB122_ASSEMBLE", () => {
+    sthm(@fifteen_theorem.int_crossb122_assemble())
+  })
+  log.attempt("INT_REPRESENTS_CROSSB122_W1", () => {
+    sthm(@fifteen_theorem.int_represents_crossb122_w1())
+  })
+  log.attempt("INT_CROSSB122_SHIFT_NUM", () => {
+    sthm(@fifteen_theorem.int_crossb122_shift_num())
+  })
+  log.attempt("NUM_CROSSB122_SHIFT2", () => {
+    sthm(@fifteen_theorem.num_crossb122_shift2())
+  })
+  log.attempt("NUM_CROSSB122_W1_3", () => {
+    sthm(@fifteen_theorem.num_crossb122_w1_3())
+  })
+  log.attempt("NUM_CROSSB122_SHIFT6", () => {
+    sthm(@fifteen_theorem.num_crossb122_shift6())
+  })
+  log.attempt("NUM_CROSSB122_W1_7", () => {
+    sthm(@fifteen_theorem.num_crossb122_w1_7())
+  })
+  log.attempt("INT_UNIVERSAL_CROSSB122_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_crossb122_num())
+  })
+  log.attempt("IQ_UNIVERSAL_CROSSB122_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_crossb122_num())
+  })
+  log.attempt("IQ_UNIVERSAL_CROSSB122_2", () => {
+    sthm(@fifteen_theorem.iq_universal_crossb122_2())
+  })
+  log.attempt("IQ_UNIVERSAL_CROSSB122_3", () => {
+    sthm(@fifteen_theorem.iq_universal_crossb122_3())
+  })
+  log.attempt("IQ_UNIVERSAL_CROSSB122_6", () => {
+    sthm(@fifteen_theorem.iq_universal_crossb122_6())
+  })
+  log.attempt("IQ_UNIVERSAL_CROSSB122_7", () => {
+    sthm(@fifteen_theorem.iq_universal_crossb122_7())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_CROSSB122_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_crossb122_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_122", () => {
+    sthm(@fifteen_theorem.iq_universal_of_embeds_122())
+  })
   log.attempt("BINARY_DISC3", () => sthm(@fifteen_theorem.binary_disc3()))
   log.attempt("tqeval", () => sthm(@fifteen_theorem.tqeval()))
   log.attempt("tqbilin", () => sthm(@fifteen_theorem.tqbilin()))
   log.attempt("ternary_type5", () => sthm(@fifteen_theorem.ternary_type5()))
   log.attempt("CONJ_TYPE5", () => sthm(@fifteen_theorem.conj_type5()))
-  log.attempt("INT_DISC3_OFFDIAG_ODD", () => sthm(@fifteen_theorem.int_disc3_offdiag_odd()))
-  log.attempt("INT_CHAR_BINARY_EVEN", () => sthm(@fifteen_theorem.int_char_binary_even()))
-  log.attempt("INT_ODDITY1_MOD8", () => sthm(@fifteen_theorem.int_oddity1_mod8()))
-  log.attempt("TYPE5_DISC3_BINARY_PRIMITIVE", () => sthm(@fifteen_theorem.type5_disc3_binary_primitive()))
-  log.attempt("HERMITE_CUBE_DISC3", () => sthm(@fifteen_theorem.hermite_cube_disc3()))
-  log.attempt("HERMITE_DISC3_A1", () => sthm(@fifteen_theorem.hermite_disc3_a1()))
-  log.attempt("TERNARY_DISC3_TYPE5_A11_1", () => sthm(@fifteen_theorem.ternary_disc3_type5_a11_1()))
-  log.attempt("TERNARY_DISC3_TYPE5", () => sthm(@fifteen_theorem.ternary_disc3_type5()))
-  log.attempt("INT_SQ_SUB_SELF_EVEN", () => sthm(@fifteen_theorem.int_sq_sub_self_even()))
-  log.attempt("TERNARY_CHARACTERISTIC", () => sthm(@fifteen_theorem.ternary_characteristic()))
-  log.attempt("TERNARY_TYPE5_OF_CHARACTERISTIC", () => sthm(@fifteen_theorem.ternary_type5_of_characteristic()))
-  log.attempt("INT_PARITY_DISC_EVEN", () => sthm(@fifteen_theorem.int_parity_disc_even()))
-  log.attempt("TERNARY_TYPE5_MODEL", () => sthm(@fifteen_theorem.ternary_type5_model()))
-  log.attempt("TERNARY_TYPE5_MODEL_3", () => sthm(@fifteen_theorem.ternary_type5_model_3()))
+  log.attempt("INT_DISC3_OFFDIAG_ODD", () => {
+    sthm(@fifteen_theorem.int_disc3_offdiag_odd())
+  })
+  log.attempt("INT_CHAR_BINARY_EVEN", () => {
+    sthm(@fifteen_theorem.int_char_binary_even())
+  })
+  log.attempt("INT_ODDITY1_MOD8", () => {
+    sthm(@fifteen_theorem.int_oddity1_mod8())
+  })
+  log.attempt("TYPE5_DISC3_BINARY_PRIMITIVE", () => {
+    sthm(@fifteen_theorem.type5_disc3_binary_primitive())
+  })
+  log.attempt("HERMITE_CUBE_DISC3", () => {
+    sthm(@fifteen_theorem.hermite_cube_disc3())
+  })
+  log.attempt("HERMITE_DISC3_A1", () => {
+    sthm(@fifteen_theorem.hermite_disc3_a1())
+  })
+  log.attempt("TERNARY_DISC3_TYPE5_A11_1", () => {
+    sthm(@fifteen_theorem.ternary_disc3_type5_a11_1())
+  })
+  log.attempt("TERNARY_DISC3_TYPE5", () => {
+    sthm(@fifteen_theorem.ternary_disc3_type5())
+  })
+  log.attempt("INT_SQ_SUB_SELF_EVEN", () => {
+    sthm(@fifteen_theorem.int_sq_sub_self_even())
+  })
+  log.attempt("TERNARY_CHARACTERISTIC", () => {
+    sthm(@fifteen_theorem.ternary_characteristic())
+  })
+  log.attempt("TERNARY_TYPE5_OF_CHARACTERISTIC", () => {
+    sthm(@fifteen_theorem.ternary_type5_of_characteristic())
+  })
+  log.attempt("INT_PARITY_DISC_EVEN", () => {
+    sthm(@fifteen_theorem.int_parity_disc_even())
+  })
+  log.attempt("TERNARY_TYPE5_MODEL", () => {
+    sthm(@fifteen_theorem.ternary_type5_model())
+  })
+  log.attempt("TERNARY_TYPE5_MODEL_3", () => {
+    sthm(@fifteen_theorem.ternary_type5_model_3())
+  })
   log.attempt("LEMMA_113", () => sthm(@fifteen_theorem.lemma_113()))
   log.attempt("LEMMA_113_3", () => sthm(@fifteen_theorem.lemma_113_3()))
   log.attempt("COPRIME_A_N", () => sthm(@fifteen_theorem.coprime_a_n()))
   log.attempt("CONG_A_3_TEST", () => sthm(@fifteen_theorem.cong_a_3_test()))
   log.attempt("COPRIME_A_24", () => sthm(@fifteen_theorem.coprime_a_24()))
-  log.attempt("COPRIME_DIRICHLET_113", () => sthm(@fifteen_theorem.coprime_dirichlet_113()))
+  log.attempt("COPRIME_DIRICHLET_113", () => {
+    sthm(@fifteen_theorem.coprime_dirichlet_113())
+  })
   log.attempt("COPRIME_3_6J1", () => sthm(@fifteen_theorem.coprime_3_6j1()))
   log.attempt("CONG_6J1_3", () => sthm(@fifteen_theorem.cong_6j1_3()))
   log.attempt("CONG_NEG3_6J1", () => sthm(@fifteen_theorem.cong_neg3_6j1()))
   log.attempt("JACOBI_3_6J1", () => sthm(@fifteen_theorem.jacobi_3_6j1()))
   log.attempt("JACOBI_NEG3_6J1", () => sthm(@fifteen_theorem.jacobi_neg3_6j1()))
-  log.attempt("DIRICHLET_PRIME_113", () => sthm(@fifteen_theorem.dirichlet_prime_113()))
+  log.attempt("DIRICHLET_PRIME_113", () => {
+    sthm(@fifteen_theorem.dirichlet_prime_113())
+  })
   log.attempt("COPRIME_P_H_113", () => sthm(@fifteen_theorem.coprime_p_h_113()))
-  log.attempt("CONG_P_1MOD4_113", () => sthm(@fifteen_theorem.cong_p_1mod4_113()))
+  log.attempt("CONG_P_1MOD4_113", () => {
+    sthm(@fifteen_theorem.cong_p_1mod4_113())
+  })
   log.attempt("QR_113", () => sthm(@fifteen_theorem.qr_113()))
   log.attempt("RESIDUE_113", () => sthm(@fifteen_theorem.residue_113()))
-  log.attempt("REGULAR_113_COPRIME3", () => sthm(@fifteen_theorem.regular_113_coprime3()))
-  log.attempt("COPRIME_DIRICHLET_113_3", () => sthm(@fifteen_theorem.coprime_dirichlet_113_3()))
-  log.attempt("DIRICHLET_PRIME_113_3", () => sthm(@fifteen_theorem.dirichlet_prime_113_3()))
+  log.attempt("REGULAR_113_COPRIME3", () => {
+    sthm(@fifteen_theorem.regular_113_coprime3())
+  })
+  log.attempt("COPRIME_DIRICHLET_113_3", () => {
+    sthm(@fifteen_theorem.coprime_dirichlet_113_3())
+  })
+  log.attempt("DIRICHLET_PRIME_113_3", () => {
+    sthm(@fifteen_theorem.dirichlet_prime_113_3())
+  })
   log.attempt("JACOBI_Q_113_3", () => sthm(@fifteen_theorem.jacobi_q_113_3()))
   log.attempt("QR_113_3", () => sthm(@fifteen_theorem.qr_113_3()))
   log.attempt("RESIDUE_113_3", () => sthm(@fifteen_theorem.residue_113_3()))
-  log.attempt("REGULAR_113_3MOD9", () => sthm(@fifteen_theorem.regular_113_3mod9()))
+  log.attempt("REGULAR_113_3MOD9", () => {
+    sthm(@fifteen_theorem.regular_113_3mod9())
+  })
   log.attempt("MOD9_COPRIME3", () => sthm(@fifteen_theorem.mod9_coprime3()))
   log.attempt("MOD9_3_REP_113", () => sthm(@fifteen_theorem.mod9_3_rep_113()))
   log.attempt("MOD9_6_FORM_113", () => sthm(@fifteen_theorem.mod9_6_form_113()))
   log.attempt("REP_113_MUL9", () => sthm(@fifteen_theorem.rep_113_mul9()))
-  log.attempt("DESCENT_113_NOT_FORM", () => sthm(@fifteen_theorem.descent_113_not_form()))
+  log.attempt("DESCENT_113_NOT_FORM", () => {
+    sthm(@fifteen_theorem.descent_113_not_form())
+  })
   log.attempt("DIV9_LESS", () => sthm(@fifteen_theorem.div9_less()))
-  log.attempt("REP_113_DESCEND9", () => sthm(@fifteen_theorem.rep_113_descend9()))
-  log.attempt("REGULAR_113_NOT_FORM", () => sthm(@fifteen_theorem.regular_113_not_form()))
+  log.attempt("REP_113_DESCEND9", () => {
+    sthm(@fifteen_theorem.rep_113_descend9())
+  })
+  log.attempt("REGULAR_113_NOT_FORM", () => {
+    sthm(@fifteen_theorem.regular_113_not_form())
+  })
   log.attempt("iqclear113", () => sthm(@fifteen_theorem.iqclear113()))
   log.attempt("iqflip113", () => sthm(@fifteen_theorem.iqflip113()))
-  log.attempt("IQ_EMBEDS_CLEAR_113", () => sthm(@fifteen_theorem.iq_embeds_clear_113()))
-  log.attempt("IQ_EMBEDS_FLIP_113", () => sthm(@fifteen_theorem.iq_embeds_flip_113()))
+  log.attempt("IQ_EMBEDS_CLEAR_113", () => {
+    sthm(@fifteen_theorem.iq_embeds_clear_113())
+  })
+  log.attempt("IQ_EMBEDS_FLIP_113", () => {
+    sthm(@fifteen_theorem.iq_embeds_flip_113())
+  })
   log.attempt("INT_DIV3_DECOMP", () => sthm(@fifteen_theorem.int_div3_decomp()))
-  log.attempt("INT_3Q2_ADD_2Q_NONNEG", () => sthm(@fifteen_theorem.int_3q2_add_2q_nonneg()))
-  log.attempt("INT_3Q2_SUB_2Q_NONNEG", () => sthm(@fifteen_theorem.int_3q2_sub_2q_nonneg()))
-  log.attempt("IQ_CROSS113_CORNER_LOWER", () => sthm(@fifteen_theorem.iq_cross113_corner_lower()))
-  log.attempt("IQ_EMBEDS_QUATERNARY_113", () => sthm(@fifteen_theorem.iq_embeds_quaternary_113()))
-  log.attempt("IQ_UNIVERSAL_CROSS113_OF_NUM", () => sthm(@fifteen_theorem.iq_universal_cross113_of_num()))
-  log.attempt("NUM_AVOIDS_113_OF_MOD9", () => sthm(@fifteen_theorem.num_avoids_113_of_mod9()))
-  log.attempt("NUM_AVOIDS_113_MUL9", () => sthm(@fifteen_theorem.num_avoids_113_mul9()))
+  log.attempt("INT_3Q2_ADD_2Q_NONNEG", () => {
+    sthm(@fifteen_theorem.int_3q2_add_2q_nonneg())
+  })
+  log.attempt("INT_3Q2_SUB_2Q_NONNEG", () => {
+    sthm(@fifteen_theorem.int_3q2_sub_2q_nonneg())
+  })
+  log.attempt("IQ_CROSS113_CORNER_LOWER", () => {
+    sthm(@fifteen_theorem.iq_cross113_corner_lower())
+  })
+  log.attempt("IQ_EMBEDS_QUATERNARY_113", () => {
+    sthm(@fifteen_theorem.iq_embeds_quaternary_113())
+  })
+  log.attempt("IQ_UNIVERSAL_CROSS113_OF_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_cross113_of_num())
+  })
+  log.attempt("NUM_AVOIDS_113_OF_MOD9", () => {
+    sthm(@fifteen_theorem.num_avoids_113_of_mod9())
+  })
+  log.attempt("NUM_AVOIDS_113_MUL9", () => {
+    sthm(@fifteen_theorem.num_avoids_113_mul9())
+  })
   log.attempt("INT_REM_3_CASES", () => sthm(@fifteen_theorem.int_rem_3_cases()))
-  log.attempt("INT_3_DIVIDES_SUM_SQUARES", () => sthm(@fifteen_theorem.int_3_divides_sum_squares()))
-  log.attempt("INT_SQUARE_1MOD3_DECOMP", () => sthm(@fifteen_theorem.int_square_1mod3_decomp()))
-  log.attempt("INT_REPR_133_ONE_MOD3_NUM", () => sthm(@fifteen_theorem.int_repr_133_one_mod3_num()))
-  log.attempt("INT_UNIVERSAL_CROSS113_NUM", () => sthm(@fifteen_theorem.int_universal_cross113_num()))
-  log.attempt("NUM_DIAG113_SHIFT_LT6", () => sthm(@fifteen_theorem.num_diag113_shift_lt6()))
-  log.attempt("NUM_113_FORM_SUB2_RESIDUE", () => sthm(@fifteen_theorem.num_113_form_sub2_residue()))
-  log.attempt("NUM_113_FORM_SUB2_AVOIDS", () => sthm(@fifteen_theorem.num_113_form_sub2_avoids()))
-  log.attempt("INT_UNIVERSAL_DIAG113_NUM", () => sthm(@fifteen_theorem.int_universal_diag113_num()))
-  log.attempt("IQ_UNIVERSAL_CROSS113_NUM", () => sthm(@fifteen_theorem.iq_universal_cross113_num()))
-  log.attempt("IQ_UNIVERSAL_DIAG113_NUM", () => sthm(@fifteen_theorem.iq_universal_diag113_num()))
-  log.attempt("IQ_UNIVERSAL_OF_DIAG113_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_diag113_child()))
-  log.attempt("IQ_UNIVERSAL_OF_CROSS113_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_cross113_child()))
-  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_113", () => sthm(@fifteen_theorem.iq_universal_of_embeds_113()))
-  log.attempt("INT_REPR123_OF_PATTERN", () => sthm(@fifteen_theorem.int_repr123_of_pattern()))
+  log.attempt("INT_3_DIVIDES_SUM_SQUARES", () => {
+    sthm(@fifteen_theorem.int_3_divides_sum_squares())
+  })
+  log.attempt("INT_SQUARE_1MOD3_DECOMP", () => {
+    sthm(@fifteen_theorem.int_square_1mod3_decomp())
+  })
+  log.attempt("INT_REPR_133_ONE_MOD3_NUM", () => {
+    sthm(@fifteen_theorem.int_repr_133_one_mod3_num())
+  })
+  log.attempt("INT_UNIVERSAL_CROSS113_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_cross113_num())
+  })
+  log.attempt("NUM_DIAG113_SHIFT_LT6", () => {
+    sthm(@fifteen_theorem.num_diag113_shift_lt6())
+  })
+  log.attempt("NUM_113_FORM_SUB2_RESIDUE", () => {
+    sthm(@fifteen_theorem.num_113_form_sub2_residue())
+  })
+  log.attempt("NUM_113_FORM_SUB2_AVOIDS", () => {
+    sthm(@fifteen_theorem.num_113_form_sub2_avoids())
+  })
+  log.attempt("INT_UNIVERSAL_DIAG113_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_diag113_num())
+  })
+  log.attempt("IQ_UNIVERSAL_CROSS113_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_cross113_num())
+  })
+  log.attempt("IQ_UNIVERSAL_DIAG113_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_diag113_num())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_DIAG113_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_diag113_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_CROSS113_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_cross113_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_113", () => {
+    sthm(@fifteen_theorem.iq_universal_of_embeds_113())
+  })
+  log.attempt("INT_REPR123_OF_PATTERN", () => {
+    sthm(@fifteen_theorem.int_repr123_of_pattern())
+  })
   log.attempt("INT_SIGN_MOD3_1", () => sthm(@fifteen_theorem.int_sign_mod3_1()))
   log.attempt("INT_SIGN_MOD3_2", () => sthm(@fifteen_theorem.int_sign_mod3_2()))
-  log.attempt("INT_DIVIDES_SQUARE", () => sthm(@fifteen_theorem.int_divides_square()))
-  log.attempt("INT_3_DIVIDES_SUM_THREE_SQUARES", () => sthm(@fifteen_theorem.int_3_divides_sum_three_squares()))
+  log.attempt("INT_DIVIDES_SQUARE", () => {
+    sthm(@fifteen_theorem.int_divides_square())
+  })
+  log.attempt("INT_3_DIVIDES_SUM_THREE_SQUARES", () => {
+    sthm(@fifteen_theorem.int_3_divides_sum_three_squares())
+  })
   log.attempt("INT_COPRIME_3_2", () => sthm(@fifteen_theorem.int_coprime_3_2()))
-  log.attempt("INT_6_DIVIDES_OF_2_3", () => sthm(@fifteen_theorem.int_6_divides_of_2_3()))
+  log.attempt("INT_6_DIVIDES_OF_2_3", () => {
+    sthm(@fifteen_theorem.int_6_divides_of_2_3())
+  })
   log.attempt("INT_NEG_REM2", () => sthm(@fifteen_theorem.int_neg_rem2()))
-  log.attempt("INT_DIVIDES_SUB_OF_REM_EQ", () => sthm(@fifteen_theorem.int_divides_sub_of_rem_eq()))
-  log.attempt("INT_PATTERN123_OF_SLOTS", () => sthm(@fifteen_theorem.int_pattern123_of_slots()))
-  log.attempt("INT_COPRIME3_OF_SUM_THREE_SQUARES", () => sthm(@fifteen_theorem.int_coprime3_of_sum_three_squares()))
-  log.attempt("INT_EXISTS_PATTERN123", () => sthm(@fifteen_theorem.int_exists_pattern123()))
-  log.attempt("NUM_TRIPLE_EQ_16B14_MOD16", () => sthm(@fifteen_theorem.num_triple_eq_16b14_mod16()))
-  log.attempt("NUM_6M_EQ_16T_IMP_DIV4", () => sthm(@fifteen_theorem.num_6m_eq_16t_imp_div4()))
-  log.attempt("NUM_6M_AVOIDS_THREE_SQUARE_FORM", () => sthm(@fifteen_theorem.num_6m_avoids_three_square_form()))
-  log.attempt("INT_REPR123_CORE", () => sthm(@fifteen_theorem.int_repr123_core()))
-  log.attempt("INT_REPR123_THREE_MUL", () => sthm(@fifteen_theorem.int_repr123_three_mul()))
-  log.attempt("REGULAR_123_NOT_FORM", () => sthm(@fifteen_theorem.regular_123_not_form()))
-  log.attempt("IQ_123_MOD16_CORE", () => sthm(@fifteen_theorem.iq_123_mod16_core()))
+  log.attempt("INT_DIVIDES_SUB_OF_REM_EQ", () => {
+    sthm(@fifteen_theorem.int_divides_sub_of_rem_eq())
+  })
+  log.attempt("INT_PATTERN123_OF_SLOTS", () => {
+    sthm(@fifteen_theorem.int_pattern123_of_slots())
+  })
+  log.attempt("INT_COPRIME3_OF_SUM_THREE_SQUARES", () => {
+    sthm(@fifteen_theorem.int_coprime3_of_sum_three_squares())
+  })
+  log.attempt("INT_EXISTS_PATTERN123", () => {
+    sthm(@fifteen_theorem.int_exists_pattern123())
+  })
+  log.attempt("NUM_TRIPLE_EQ_16B14_MOD16", () => {
+    sthm(@fifteen_theorem.num_triple_eq_16b14_mod16())
+  })
+  log.attempt("NUM_6M_EQ_16T_IMP_DIV4", () => {
+    sthm(@fifteen_theorem.num_6m_eq_16t_imp_div4())
+  })
+  log.attempt("NUM_6M_AVOIDS_THREE_SQUARE_FORM", () => {
+    sthm(@fifteen_theorem.num_6m_avoids_three_square_form())
+  })
+  log.attempt("INT_REPR123_CORE", () => {
+    sthm(@fifteen_theorem.int_repr123_core())
+  })
+  log.attempt("INT_REPR123_THREE_MUL", () => {
+    sthm(@fifteen_theorem.int_repr123_three_mul())
+  })
+  log.attempt("REGULAR_123_NOT_FORM", () => {
+    sthm(@fifteen_theorem.regular_123_not_form())
+  })
+  log.attempt("IQ_123_MOD16_CORE", () => {
+    sthm(@fifteen_theorem.iq_123_mod16_core())
+  })
   log.attempt("INT_123_NOT_10", () => sthm(@fifteen_theorem.int_123_not_10()))
   log.attempt("iqclear123", () => sthm(@fifteen_theorem.iqclear123()))
   log.attempt("iqflip123", () => sthm(@fifteen_theorem.iqflip123()))
-  log.attempt("IQ_EMBEDS_CLEAR_123", () => sthm(@fifteen_theorem.iq_embeds_clear_123()))
-  log.attempt("IQ_EMBEDS_FLIP_123", () => sthm(@fifteen_theorem.iq_embeds_flip_123()))
-  log.attempt("IQ_ZC123_CORNER_LOWER", () => sthm(@fifteen_theorem.iq_zc123_corner_lower()))
-  log.attempt("IQ_YC123_CORNER_LOWER", () => sthm(@fifteen_theorem.iq_yc123_corner_lower()))
-  log.attempt("IQ_DC123_CORNER_LOWER", () => sthm(@fifteen_theorem.iq_dc123_corner_lower()))
-  log.attempt("INT_2Q2_ADD_2Q_NONNEG", () => sthm(@fifteen_theorem.int_2q2_add_2q_nonneg()))
-  log.attempt("IQ_REPRESENTS_REDUCED_123", () => sthm(@fifteen_theorem.iq_represents_reduced_123()))
+  log.attempt("IQ_EMBEDS_CLEAR_123", () => {
+    sthm(@fifteen_theorem.iq_embeds_clear_123())
+  })
+  log.attempt("IQ_EMBEDS_FLIP_123", () => {
+    sthm(@fifteen_theorem.iq_embeds_flip_123())
+  })
+  log.attempt("IQ_ZC123_CORNER_LOWER", () => {
+    sthm(@fifteen_theorem.iq_zc123_corner_lower())
+  })
+  log.attempt("IQ_YC123_CORNER_LOWER", () => {
+    sthm(@fifteen_theorem.iq_yc123_corner_lower())
+  })
+  log.attempt("IQ_DC123_CORNER_LOWER", () => {
+    sthm(@fifteen_theorem.iq_dc123_corner_lower())
+  })
+  log.attempt("INT_2Q2_ADD_2Q_NONNEG", () => {
+    sthm(@fifteen_theorem.int_2q2_add_2q_nonneg())
+  })
+  log.attempt("IQ_REPRESENTS_REDUCED_123", () => {
+    sthm(@fifteen_theorem.iq_represents_reduced_123())
+  })
   log.attempt("INT_DIV2_QR", () => sthm(@fifteen_theorem.int_div2_qr()))
-  log.attempt("IQ_EMBEDS_QUATERNARY_123", () => sthm(@fifteen_theorem.iq_embeds_quaternary_123()))
-  log.attempt("INT_SQ_LE_20_CASES", () => sthm(@fifteen_theorem.int_sq_le_20_cases()))
-  log.attempt("INT_SQ_LE_30_CASES", () => sthm(@fifteen_theorem.int_sq_le_30_cases()))
-  log.attempt("INT_YC123_NOT_10_4", () => sthm(@fifteen_theorem.int_yc123_not_10_4()))
-  log.attempt("INT_YC123_NOT_10_8", () => sthm(@fifteen_theorem.int_yc123_not_10_8()))
-  log.attempt("INT_DC123_NOT_10_7", () => sthm(@fifteen_theorem.int_dc123_not_10_7()))
-  log.attempt("IQ_YC123_NOT_REPRESENTS_10_4", () => sthm(@fifteen_theorem.iq_yc123_not_represents_10_4()))
-  log.attempt("IQ_YC123_NOT_REPRESENTS_10_8", () => sthm(@fifteen_theorem.iq_yc123_not_represents_10_8()))
-  log.attempt("IQ_DC123_NOT_REPRESENTS_10_7", () => sthm(@fifteen_theorem.iq_dc123_not_represents_10_7()))
-  log.attempt("IQ_YC123_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_yc123_parameter_cases()))
-  log.attempt("IQ_DC123_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_dc123_parameter_cases()))
-  log.attempt("NUM_123_EXCEPTION_MOD16", () => sthm(@fifteen_theorem.num_123_exception_mod16()))
-  log.attempt("NUM_AVOIDS_123_OF_MOD16", () => sthm(@fifteen_theorem.num_avoids_123_of_mod16()))
-  log.attempt("NUM_DIV4_OF_MOD16_0_OR_8", () => sthm(@fifteen_theorem.num_div4_of_mod16_0_or_8()))
-  log.attempt("NUM_AVOIDS_123_SUB_SMALL", () => sthm(@fifteen_theorem.num_avoids_123_sub_small()))
-  log.attempt("INT_REPRESENTS_123_CHILD_SCALE4", () => sthm(@fifteen_theorem.int_represents_123_child_scale4()))
-  log.attempt("INT_UNIVERSAL_123_CHILD_OF_MOD16", () => sthm(@fifteen_theorem.int_universal_123_child_of_mod16()))
-  log.attempt("INT_REPRESENTS_DIAG123_SHIFT", () => sthm(@fifteen_theorem.int_represents_diag123_shift()))
-  log.attempt("INT_REPRESENTS_DIAG123_SMALL_SHIFT", () => sthm(@fifteen_theorem.int_represents_diag123_small_shift()))
-  log.attempt("INT_REPRESENTS_DIAG123_MOD16", () => sthm(@fifteen_theorem.int_represents_diag123_mod16()))
-  log.attempt("INT_UNIVERSAL_DIAG123_NUM", () => sthm(@fifteen_theorem.int_universal_diag123_num()))
-  log.attempt("IQ_UNIVERSAL_DIAG123_NUM", () => sthm(@fifteen_theorem.iq_universal_diag123_num()))
-  log.attempt("IQ_UNIVERSAL_OF_DIAG123_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_diag123_child()))
-  log.attempt("NUM_AVOIDS_123_SUB_OF_RESIDUE", () => sthm(@fifteen_theorem.num_avoids_123_sub_of_residue()))
-  log.attempt("INT_REPRESENTS_ZC123_SHIFT", () => sthm(@fifteen_theorem.int_represents_zc123_shift()))
-  log.attempt("INT_REPRESENTS_YC123_SHIFT", () => sthm(@fifteen_theorem.int_represents_yc123_shift()))
-  log.attempt("INT_REPRESENTS_DC123_SHIFT", () => sthm(@fifteen_theorem.int_represents_dc123_shift()))
-  log.attempt("INT_REPRESENTS_ZC123_SMALL", () => sthm(@fifteen_theorem.int_represents_zc123_small()))
-  log.attempt("INT_REPRESENTS_YC123_SMALL", () => sthm(@fifteen_theorem.int_represents_yc123_small()))
-  log.attempt("INT_REPRESENTS_DC123_SMALL_2", () => sthm(@fifteen_theorem.int_represents_dc123_small_2()))
-  log.attempt("INT_REPRESENTS_DC123_SMALL_3", () => sthm(@fifteen_theorem.int_represents_dc123_small_3()))
-  log.attempt("INT_REPRESENTS_DC123_SMALL_4", () => sthm(@fifteen_theorem.int_represents_dc123_small_4()))
-  log.attempt("INT_REPRESENTS_DC123_SMALL_5", () => sthm(@fifteen_theorem.int_represents_dc123_small_5()))
-  log.attempt("INT_REPRESENTS_DC123_SMALL_6", () => sthm(@fifteen_theorem.int_represents_dc123_small_6()))
-  log.attempt("INT_REPRESENTS_DC123_SMALL_8", () => sthm(@fifteen_theorem.int_represents_dc123_small_8()))
-  log.attempt("INT_REPRESENTS_DC123_SMALL_9", () => sthm(@fifteen_theorem.int_represents_dc123_small_9()))
-  log.attempt("INT_REPRESENTS_DC123_SMALL_10", () => sthm(@fifteen_theorem.int_represents_dc123_small_10()))
-  log.attempt("NUM_ZC123_OFFSET_RESIDUE", () => sthm(@fifteen_theorem.num_zc123_offset_residue()))
-  log.attempt("INT_REPRESENTS_ZC123_SHIFT_MOD16", () => sthm(@fifteen_theorem.int_represents_zc123_shift_mod16()))
-  log.attempt("INT_REPRESENTS_YC123_SHIFT_MOD16", () => sthm(@fifteen_theorem.int_represents_yc123_shift_mod16()))
-  log.attempt("INT_REPRESENTS_DC123_SHIFT_MOD16", () => sthm(@fifteen_theorem.int_represents_dc123_shift_mod16()))
-  log.attempt("INT_REPRESENTS_ZC123_MOD16", () => sthm(@fifteen_theorem.int_represents_zc123_mod16()))
-  log.attempt("INT_REPRESENTS_YC123_MOD16", () => sthm(@fifteen_theorem.int_represents_yc123_mod16()))
-  log.attempt("INT_REPRESENTS_DC123_MOD16", () => sthm(@fifteen_theorem.int_represents_dc123_mod16()))
-  log.attempt("INT_UNIVERSAL_ZC123_NUM", () => sthm(@fifteen_theorem.int_universal_zc123_num()))
-  log.attempt("INT_UNIVERSAL_YC123_NUM", () => sthm(@fifteen_theorem.int_universal_yc123_num()))
-  log.attempt("INT_UNIVERSAL_DC123_NUM", () => sthm(@fifteen_theorem.int_universal_dc123_num()))
-  log.attempt("IQ_UNIVERSAL_123_CHILD_OF_NUM", () => sthm(@fifteen_theorem.iq_universal_123_child_of_num()))
-  log.attempt("IQ_UNIVERSAL_ZC123_NUM", () => sthm(@fifteen_theorem.iq_universal_zc123_num()))
-  log.attempt("IQ_UNIVERSAL_YC123_NUM", () => sthm(@fifteen_theorem.iq_universal_yc123_num()))
-  log.attempt("IQ_UNIVERSAL_DC123_NUM", () => sthm(@fifteen_theorem.iq_universal_dc123_num()))
-  log.attempt("IQ_UNIVERSAL_OF_ZC123_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_zc123_child()))
-  log.attempt("IQ_UNIVERSAL_OF_YC123_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_yc123_child()))
-  log.attempt("IQ_UNIVERSAL_OF_DC123_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_dc123_child()))
-  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_123", () => sthm(@fifteen_theorem.iq_universal_of_embeds_123()))
-  log.attempt("INT_SIGN_NORMALIZE_MOD3", () => sthm(@fifteen_theorem.int_sign_normalize_mod3()))
-  log.attempt("INT_SAME_REM_MOD3_DIVIDES_SUB", () => sthm(@fifteen_theorem.int_same_rem_mod3_divides_sub()))
-  log.attempt("INT_THREE_SQUARES_MOD3_PAIR", () => sthm(@fifteen_theorem.int_three_squares_mod3_pair()))
-  log.attempt("REPR_CROSS125_OF_THREE_SQUARES", () => sthm(@fifteen_theorem.repr_cross125_of_three_squares()))
-  log.attempt("INT_REPRESENTS_CROSS125_OF_LEGENDRE", () => sthm(@fifteen_theorem.int_represents_cross125_of_legendre()))
-  log.attempt("INT_REPRESENTS_124_SCALE4", () => sthm(@fifteen_theorem.int_represents_124_scale4()))
-  log.attempt("NUM_DESCENT_NOT_124_FORM", () => sthm(@fifteen_theorem.num_descent_not_124_form()))
-  log.attempt("NUM_124_HALF_AVOIDS_122", () => sthm(@fifteen_theorem.num_124_half_avoids_122()))
-  log.attempt("INT_REPRESENTS_124_OF_LEGENDRE", () => sthm(@fifteen_theorem.int_represents_124_of_legendre()))
-  log.attempt("IQ_124_MOD16_CORE", () => sthm(@fifteen_theorem.iq_124_mod16_core()))
+  log.attempt("IQ_EMBEDS_QUATERNARY_123", () => {
+    sthm(@fifteen_theorem.iq_embeds_quaternary_123())
+  })
+  log.attempt("INT_SQ_LE_20_CASES", () => {
+    sthm(@fifteen_theorem.int_sq_le_20_cases())
+  })
+  log.attempt("INT_SQ_LE_30_CASES", () => {
+    sthm(@fifteen_theorem.int_sq_le_30_cases())
+  })
+  log.attempt("INT_YC123_NOT_10_4", () => {
+    sthm(@fifteen_theorem.int_yc123_not_10_4())
+  })
+  log.attempt("INT_YC123_NOT_10_8", () => {
+    sthm(@fifteen_theorem.int_yc123_not_10_8())
+  })
+  log.attempt("INT_DC123_NOT_10_7", () => {
+    sthm(@fifteen_theorem.int_dc123_not_10_7())
+  })
+  log.attempt("IQ_YC123_NOT_REPRESENTS_10_4", () => {
+    sthm(@fifteen_theorem.iq_yc123_not_represents_10_4())
+  })
+  log.attempt("IQ_YC123_NOT_REPRESENTS_10_8", () => {
+    sthm(@fifteen_theorem.iq_yc123_not_represents_10_8())
+  })
+  log.attempt("IQ_DC123_NOT_REPRESENTS_10_7", () => {
+    sthm(@fifteen_theorem.iq_dc123_not_represents_10_7())
+  })
+  log.attempt("IQ_YC123_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_yc123_parameter_cases())
+  })
+  log.attempt("IQ_DC123_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_dc123_parameter_cases())
+  })
+  log.attempt("NUM_123_EXCEPTION_MOD16", () => {
+    sthm(@fifteen_theorem.num_123_exception_mod16())
+  })
+  log.attempt("NUM_AVOIDS_123_OF_MOD16", () => {
+    sthm(@fifteen_theorem.num_avoids_123_of_mod16())
+  })
+  log.attempt("NUM_DIV4_OF_MOD16_0_OR_8", () => {
+    sthm(@fifteen_theorem.num_div4_of_mod16_0_or_8())
+  })
+  log.attempt("NUM_AVOIDS_123_SUB_SMALL", () => {
+    sthm(@fifteen_theorem.num_avoids_123_sub_small())
+  })
+  log.attempt("INT_REPRESENTS_123_CHILD_SCALE4", () => {
+    sthm(@fifteen_theorem.int_represents_123_child_scale4())
+  })
+  log.attempt("INT_UNIVERSAL_123_CHILD_OF_MOD16", () => {
+    sthm(@fifteen_theorem.int_universal_123_child_of_mod16())
+  })
+  log.attempt("INT_REPRESENTS_DIAG123_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_diag123_shift())
+  })
+  log.attempt("INT_REPRESENTS_DIAG123_SMALL_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_diag123_small_shift())
+  })
+  log.attempt("INT_REPRESENTS_DIAG123_MOD16", () => {
+    sthm(@fifteen_theorem.int_represents_diag123_mod16())
+  })
+  log.attempt("INT_UNIVERSAL_DIAG123_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_diag123_num())
+  })
+  log.attempt("IQ_UNIVERSAL_DIAG123_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_diag123_num())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_DIAG123_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_diag123_child())
+  })
+  log.attempt("NUM_AVOIDS_123_SUB_OF_RESIDUE", () => {
+    sthm(@fifteen_theorem.num_avoids_123_sub_of_residue())
+  })
+  log.attempt("INT_REPRESENTS_ZC123_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_zc123_shift())
+  })
+  log.attempt("INT_REPRESENTS_YC123_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_yc123_shift())
+  })
+  log.attempt("INT_REPRESENTS_DC123_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_dc123_shift())
+  })
+  log.attempt("INT_REPRESENTS_ZC123_SMALL", () => {
+    sthm(@fifteen_theorem.int_represents_zc123_small())
+  })
+  log.attempt("INT_REPRESENTS_YC123_SMALL", () => {
+    sthm(@fifteen_theorem.int_represents_yc123_small())
+  })
+  log.attempt("INT_REPRESENTS_DC123_SMALL_2", () => {
+    sthm(@fifteen_theorem.int_represents_dc123_small_2())
+  })
+  log.attempt("INT_REPRESENTS_DC123_SMALL_3", () => {
+    sthm(@fifteen_theorem.int_represents_dc123_small_3())
+  })
+  log.attempt("INT_REPRESENTS_DC123_SMALL_4", () => {
+    sthm(@fifteen_theorem.int_represents_dc123_small_4())
+  })
+  log.attempt("INT_REPRESENTS_DC123_SMALL_5", () => {
+    sthm(@fifteen_theorem.int_represents_dc123_small_5())
+  })
+  log.attempt("INT_REPRESENTS_DC123_SMALL_6", () => {
+    sthm(@fifteen_theorem.int_represents_dc123_small_6())
+  })
+  log.attempt("INT_REPRESENTS_DC123_SMALL_8", () => {
+    sthm(@fifteen_theorem.int_represents_dc123_small_8())
+  })
+  log.attempt("INT_REPRESENTS_DC123_SMALL_9", () => {
+    sthm(@fifteen_theorem.int_represents_dc123_small_9())
+  })
+  log.attempt("INT_REPRESENTS_DC123_SMALL_10", () => {
+    sthm(@fifteen_theorem.int_represents_dc123_small_10())
+  })
+  log.attempt("NUM_ZC123_OFFSET_RESIDUE", () => {
+    sthm(@fifteen_theorem.num_zc123_offset_residue())
+  })
+  log.attempt("INT_REPRESENTS_ZC123_SHIFT_MOD16", () => {
+    sthm(@fifteen_theorem.int_represents_zc123_shift_mod16())
+  })
+  log.attempt("INT_REPRESENTS_YC123_SHIFT_MOD16", () => {
+    sthm(@fifteen_theorem.int_represents_yc123_shift_mod16())
+  })
+  log.attempt("INT_REPRESENTS_DC123_SHIFT_MOD16", () => {
+    sthm(@fifteen_theorem.int_represents_dc123_shift_mod16())
+  })
+  log.attempt("INT_REPRESENTS_ZC123_MOD16", () => {
+    sthm(@fifteen_theorem.int_represents_zc123_mod16())
+  })
+  log.attempt("INT_REPRESENTS_YC123_MOD16", () => {
+    sthm(@fifteen_theorem.int_represents_yc123_mod16())
+  })
+  log.attempt("INT_REPRESENTS_DC123_MOD16", () => {
+    sthm(@fifteen_theorem.int_represents_dc123_mod16())
+  })
+  log.attempt("INT_UNIVERSAL_ZC123_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_zc123_num())
+  })
+  log.attempt("INT_UNIVERSAL_YC123_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_yc123_num())
+  })
+  log.attempt("INT_UNIVERSAL_DC123_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_dc123_num())
+  })
+  log.attempt("IQ_UNIVERSAL_123_CHILD_OF_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_123_child_of_num())
+  })
+  log.attempt("IQ_UNIVERSAL_ZC123_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_zc123_num())
+  })
+  log.attempt("IQ_UNIVERSAL_YC123_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_yc123_num())
+  })
+  log.attempt("IQ_UNIVERSAL_DC123_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_dc123_num())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_ZC123_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_zc123_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_YC123_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_yc123_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_DC123_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_dc123_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_123", () => {
+    sthm(@fifteen_theorem.iq_universal_of_embeds_123())
+  })
+  log.attempt("INT_SIGN_NORMALIZE_MOD3", () => {
+    sthm(@fifteen_theorem.int_sign_normalize_mod3())
+  })
+  log.attempt("INT_SAME_REM_MOD3_DIVIDES_SUB", () => {
+    sthm(@fifteen_theorem.int_same_rem_mod3_divides_sub())
+  })
+  log.attempt("INT_THREE_SQUARES_MOD3_PAIR", () => {
+    sthm(@fifteen_theorem.int_three_squares_mod3_pair())
+  })
+  log.attempt("REPR_CROSS125_OF_THREE_SQUARES", () => {
+    sthm(@fifteen_theorem.repr_cross125_of_three_squares())
+  })
+  log.attempt("INT_REPRESENTS_CROSS125_OF_LEGENDRE", () => {
+    sthm(@fifteen_theorem.int_represents_cross125_of_legendre())
+  })
+  log.attempt("INT_REPRESENTS_124_SCALE4", () => {
+    sthm(@fifteen_theorem.int_represents_124_scale4())
+  })
+  log.attempt("NUM_DESCENT_NOT_124_FORM", () => {
+    sthm(@fifteen_theorem.num_descent_not_124_form())
+  })
+  log.attempt("NUM_124_HALF_AVOIDS_122", () => {
+    sthm(@fifteen_theorem.num_124_half_avoids_122())
+  })
+  log.attempt("INT_REPRESENTS_124_OF_LEGENDRE", () => {
+    sthm(@fifteen_theorem.int_represents_124_of_legendre())
+  })
+  log.attempt("IQ_124_MOD16_CORE", () => {
+    sthm(@fifteen_theorem.iq_124_mod16_core())
+  })
   log.attempt("INT_124_NOT_14", () => sthm(@fifteen_theorem.int_124_not_14()))
-  log.attempt("INT_DIV4_BALANCED", () => sthm(@fifteen_theorem.int_div4_balanced()))
-  log.attempt("INT_QUAD2_REM_NONNEG", () => sthm(@fifteen_theorem.int_quad2_rem_nonneg()))
-  log.attempt("INT_QUAD4_BALANCED_NONNEG", () => sthm(@fifteen_theorem.int_quad4_balanced_nonneg()))
+  log.attempt("INT_DIV4_BALANCED", () => {
+    sthm(@fifteen_theorem.int_div4_balanced())
+  })
+  log.attempt("INT_QUAD2_REM_NONNEG", () => {
+    sthm(@fifteen_theorem.int_quad2_rem_nonneg())
+  })
+  log.attempt("INT_QUAD4_BALANCED_NONNEG", () => {
+    sthm(@fifteen_theorem.int_quad4_balanced_nonneg())
+  })
   log.attempt("iqclear124", () => sthm(@fifteen_theorem.iqclear124()))
   log.attempt("iqflip124", () => sthm(@fifteen_theorem.iqflip124()))
-  log.attempt("IQ_EMBEDS_CLEAR_124", () => sthm(@fifteen_theorem.iq_embeds_clear_124()))
-  log.attempt("IQ_EMBEDS_FLIP_124", () => sthm(@fifteen_theorem.iq_embeds_flip_124()))
-  log.attempt("IQ_EMBEDS_FLIP_124_NEG1", () => sthm(@fifteen_theorem.iq_embeds_flip_124_neg1()))
-  log.attempt("IQ_EMBEDS_FLIP_124_NEG2", () => sthm(@fifteen_theorem.iq_embeds_flip_124_neg2()))
-  log.attempt("IQ_REPRESENTS_FLIP_124", () => sthm(@fifteen_theorem.iq_represents_flip_124()))
-  log.attempt("IQ_REPRESENTS_FLIP_124_NEG1", () => sthm(@fifteen_theorem.iq_represents_flip_124_neg1()))
-  log.attempt("IQ_REPRESENTS_FLIP_124_NEG2", () => sthm(@fifteen_theorem.iq_represents_flip_124_neg2()))
-  log.attempt("IQ_124_REDUCED_K_NONNEG", () => sthm(@fifteen_theorem.iq_124_reduced_k_nonneg()))
-  log.attempt("IQ_124_ZERO_FORCES_RB", () => sthm(@fifteen_theorem.iq_124_zero_forces_rb()))
-  log.attempt("IQ_124_ZERO_FORCES_RC", () => sthm(@fifteen_theorem.iq_124_zero_forces_rc()))
-  log.attempt("IQ_124_REDUCED_K_UPPER", () => sthm(@fifteen_theorem.iq_124_reduced_k_upper()))
-  log.attempt("IQ_124_REDUCED_K_NONZERO", () => sthm(@fifteen_theorem.iq_124_reduced_k_nonzero()))
-  log.attempt("IQ_124_REDUCED_K_BOUNDS", () => sthm(@fifteen_theorem.iq_124_reduced_k_bounds()))
-  log.attempt("IQ_124_REDUCED_REPRESENTS_14", () => sthm(@fifteen_theorem.iq_124_reduced_represents_14()))
-  log.attempt("IQ_EMBEDS_QUATERNARY_124_RAW", () => sthm(@fifteen_theorem.iq_embeds_quaternary_124_raw()))
-  log.attempt("IQ_EMBEDS_QUATERNARY_124", () => sthm(@fifteen_theorem.iq_embeds_quaternary_124()))
-  log.attempt("NUM_124_EXCEPTION_MOD16", () => sthm(@fifteen_theorem.num_124_exception_mod16()))
-  log.attempt("INT_REPRESENTS_124_CHILD_SCALE4", () => sthm(@fifteen_theorem.int_represents_124_child_scale4()))
-  log.attempt("INT_UNIVERSAL_124_CHILD_OF_MOD16", () => sthm(@fifteen_theorem.int_universal_124_child_of_mod16()))
-  log.attempt("NUM_AVOIDS_124_SUB_OF_RESIDUE", () => sthm(@fifteen_theorem.num_avoids_124_sub_of_residue()))
-  log.attempt("INT_REPRESENTS_DIAG124_SHIFT", () => sthm(@fifteen_theorem.int_represents_diag124_shift()))
-  log.attempt("INT_REPRESENTS_ZC124_SHIFT", () => sthm(@fifteen_theorem.int_represents_zc124_shift()))
-  log.attempt("INT_REPRESENTS_YC124_SHIFT", () => sthm(@fifteen_theorem.int_represents_yc124_shift()))
-  log.attempt("INT_REPRESENTS_RC2_124_SHIFT", () => sthm(@fifteen_theorem.int_represents_rc2_124_shift()))
-  log.attempt("INT_REPRESENTS_DC1_124_SHIFT", () => sthm(@fifteen_theorem.int_represents_dc1_124_shift()))
-  log.attempt("INT_REPRESENTS_DC2_124_SHIFT", () => sthm(@fifteen_theorem.int_represents_dc2_124_shift()))
-  log.attempt("INT_REPRESENTS_DIAG124_SMALL", () => sthm(@fifteen_theorem.int_represents_diag124_small()))
-  log.attempt("INT_REPRESENTS_ZC124_SMALL", () => sthm(@fifteen_theorem.int_represents_zc124_small()))
-  log.attempt("INT_REPRESENTS_YC124_SMALL", () => sthm(@fifteen_theorem.int_represents_yc124_small()))
-  log.attempt("INT_REPRESENTS_RC2_124_SMALL", () => sthm(@fifteen_theorem.int_represents_rc2_124_small()))
-  log.attempt("INT_REPRESENTS_DC1_124_SMALL", () => sthm(@fifteen_theorem.int_represents_dc1_124_small()))
-  log.attempt("INT_REPRESENTS_DC2_124_SMALL", () => sthm(@fifteen_theorem.int_represents_dc2_124_small()))
-  log.attempt("INT_REPRESENTS_ZC124_MOD16", () => sthm(@fifteen_theorem.int_represents_zc124_mod16()))
-  log.attempt("INT_UNIVERSAL_ZC124_NUM", () => sthm(@fifteen_theorem.int_universal_zc124_num()))
-  log.attempt("INT_REPRESENTS_DC1_124_MOD16", () => sthm(@fifteen_theorem.int_represents_dc1_124_mod16()))
-  log.attempt("INT_UNIVERSAL_DC1_124_NUM", () => sthm(@fifteen_theorem.int_universal_dc1_124_num()))
-  log.attempt("NUM_DIAG124_OFFSET_CHOICE", () => sthm(@fifteen_theorem.num_diag124_offset_choice()))
-  log.attempt("NUM_YC124_OFFSET_CHOICE", () => sthm(@fifteen_theorem.num_yc124_offset_choice()))
-  log.attempt("NUM_RC2_124_OFFSET_CHOICE", () => sthm(@fifteen_theorem.num_rc2_124_offset_choice()))
-  log.attempt("NUM_DC2_124_OFFSET_CHOICE", () => sthm(@fifteen_theorem.num_dc2_124_offset_choice()))
-  log.attempt("NUM_LE_16Q14_OF_LE_216", () => sthm(@fifteen_theorem.num_le_16q14_of_le_216()))
-  log.attempt("NUM_LE_16Q14_OF_LE_184", () => sthm(@fifteen_theorem.num_le_16q14_of_le_184()))
-  log.attempt("NUM_LE_16Q14_OF_LE_52", () => sthm(@fifteen_theorem.num_le_16q14_of_le_52()))
+  log.attempt("IQ_EMBEDS_CLEAR_124", () => {
+    sthm(@fifteen_theorem.iq_embeds_clear_124())
+  })
+  log.attempt("IQ_EMBEDS_FLIP_124", () => {
+    sthm(@fifteen_theorem.iq_embeds_flip_124())
+  })
+  log.attempt("IQ_EMBEDS_FLIP_124_NEG1", () => {
+    sthm(@fifteen_theorem.iq_embeds_flip_124_neg1())
+  })
+  log.attempt("IQ_EMBEDS_FLIP_124_NEG2", () => {
+    sthm(@fifteen_theorem.iq_embeds_flip_124_neg2())
+  })
+  log.attempt("IQ_REPRESENTS_FLIP_124", () => {
+    sthm(@fifteen_theorem.iq_represents_flip_124())
+  })
+  log.attempt("IQ_REPRESENTS_FLIP_124_NEG1", () => {
+    sthm(@fifteen_theorem.iq_represents_flip_124_neg1())
+  })
+  log.attempt("IQ_REPRESENTS_FLIP_124_NEG2", () => {
+    sthm(@fifteen_theorem.iq_represents_flip_124_neg2())
+  })
+  log.attempt("IQ_124_REDUCED_K_NONNEG", () => {
+    sthm(@fifteen_theorem.iq_124_reduced_k_nonneg())
+  })
+  log.attempt("IQ_124_ZERO_FORCES_RB", () => {
+    sthm(@fifteen_theorem.iq_124_zero_forces_rb())
+  })
+  log.attempt("IQ_124_ZERO_FORCES_RC", () => {
+    sthm(@fifteen_theorem.iq_124_zero_forces_rc())
+  })
+  log.attempt("IQ_124_REDUCED_K_UPPER", () => {
+    sthm(@fifteen_theorem.iq_124_reduced_k_upper())
+  })
+  log.attempt("IQ_124_REDUCED_K_NONZERO", () => {
+    sthm(@fifteen_theorem.iq_124_reduced_k_nonzero())
+  })
+  log.attempt("IQ_124_REDUCED_K_BOUNDS", () => {
+    sthm(@fifteen_theorem.iq_124_reduced_k_bounds())
+  })
+  log.attempt("IQ_124_REDUCED_REPRESENTS_14", () => {
+    sthm(@fifteen_theorem.iq_124_reduced_represents_14())
+  })
+  log.attempt("IQ_EMBEDS_QUATERNARY_124_RAW", () => {
+    sthm(@fifteen_theorem.iq_embeds_quaternary_124_raw())
+  })
+  log.attempt("IQ_EMBEDS_QUATERNARY_124", () => {
+    sthm(@fifteen_theorem.iq_embeds_quaternary_124())
+  })
+  log.attempt("NUM_124_EXCEPTION_MOD16", () => {
+    sthm(@fifteen_theorem.num_124_exception_mod16())
+  })
+  log.attempt("INT_REPRESENTS_124_CHILD_SCALE4", () => {
+    sthm(@fifteen_theorem.int_represents_124_child_scale4())
+  })
+  log.attempt("INT_UNIVERSAL_124_CHILD_OF_MOD16", () => {
+    sthm(@fifteen_theorem.int_universal_124_child_of_mod16())
+  })
+  log.attempt("NUM_AVOIDS_124_SUB_OF_RESIDUE", () => {
+    sthm(@fifteen_theorem.num_avoids_124_sub_of_residue())
+  })
+  log.attempt("INT_REPRESENTS_DIAG124_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_diag124_shift())
+  })
+  log.attempt("INT_REPRESENTS_ZC124_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_zc124_shift())
+  })
+  log.attempt("INT_REPRESENTS_YC124_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_yc124_shift())
+  })
+  log.attempt("INT_REPRESENTS_RC2_124_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_rc2_124_shift())
+  })
+  log.attempt("INT_REPRESENTS_DC1_124_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_dc1_124_shift())
+  })
+  log.attempt("INT_REPRESENTS_DC2_124_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_dc2_124_shift())
+  })
+  log.attempt("INT_REPRESENTS_DIAG124_SMALL", () => {
+    sthm(@fifteen_theorem.int_represents_diag124_small())
+  })
+  log.attempt("INT_REPRESENTS_ZC124_SMALL", () => {
+    sthm(@fifteen_theorem.int_represents_zc124_small())
+  })
+  log.attempt("INT_REPRESENTS_YC124_SMALL", () => {
+    sthm(@fifteen_theorem.int_represents_yc124_small())
+  })
+  log.attempt("INT_REPRESENTS_RC2_124_SMALL", () => {
+    sthm(@fifteen_theorem.int_represents_rc2_124_small())
+  })
+  log.attempt("INT_REPRESENTS_DC1_124_SMALL", () => {
+    sthm(@fifteen_theorem.int_represents_dc1_124_small())
+  })
+  log.attempt("INT_REPRESENTS_DC2_124_SMALL", () => {
+    sthm(@fifteen_theorem.int_represents_dc2_124_small())
+  })
+  log.attempt("INT_REPRESENTS_ZC124_MOD16", () => {
+    sthm(@fifteen_theorem.int_represents_zc124_mod16())
+  })
+  log.attempt("INT_UNIVERSAL_ZC124_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_zc124_num())
+  })
+  log.attempt("INT_REPRESENTS_DC1_124_MOD16", () => {
+    sthm(@fifteen_theorem.int_represents_dc1_124_mod16())
+  })
+  log.attempt("INT_UNIVERSAL_DC1_124_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_dc1_124_num())
+  })
+  log.attempt("NUM_DIAG124_OFFSET_CHOICE", () => {
+    sthm(@fifteen_theorem.num_diag124_offset_choice())
+  })
+  log.attempt("NUM_YC124_OFFSET_CHOICE", () => {
+    sthm(@fifteen_theorem.num_yc124_offset_choice())
+  })
+  log.attempt("NUM_RC2_124_OFFSET_CHOICE", () => {
+    sthm(@fifteen_theorem.num_rc2_124_offset_choice())
+  })
+  log.attempt("NUM_DC2_124_OFFSET_CHOICE", () => {
+    sthm(@fifteen_theorem.num_dc2_124_offset_choice())
+  })
+  log.attempt("NUM_LE_16Q14_OF_LE_216", () => {
+    sthm(@fifteen_theorem.num_le_16q14_of_le_216())
+  })
+  log.attempt("NUM_LE_16Q14_OF_LE_184", () => {
+    sthm(@fifteen_theorem.num_le_16q14_of_le_184())
+  })
+  log.attempt("NUM_LE_16Q14_OF_LE_52", () => {
+    sthm(@fifteen_theorem.num_le_16q14_of_le_52())
+  })
   log.attempt("NUM_YC124_K_POS", () => sthm(@fifteen_theorem.num_yc124_k_pos()))
-  log.attempt("NUM_DC2_124_K_LOWER", () => sthm(@fifteen_theorem.num_dc2_124_k_lower()))
-  log.attempt("NUM_RC2_124_K_POS", () => sthm(@fifteen_theorem.num_rc2_124_k_pos()))
-  log.attempt("INT_REPRESENTS_DIAG124_MOD16", () => sthm(@fifteen_theorem.int_represents_diag124_mod16()))
-  log.attempt("INT_UNIVERSAL_DIAG124_NUM", () => sthm(@fifteen_theorem.int_universal_diag124_num()))
-  log.attempt("INT_REPRESENTS_YC124_LARGE", () => sthm(@fifteen_theorem.int_represents_yc124_large()))
-  log.attempt("INT_REPRESENTS_YC124_MOD16", () => sthm(@fifteen_theorem.int_represents_yc124_mod16()))
-  log.attempt("INT_UNIVERSAL_YC124_NUM", () => sthm(@fifteen_theorem.int_universal_yc124_num()))
-  log.attempt("INT_REPRESENTS_DC2_124_LARGE", () => sthm(@fifteen_theorem.int_represents_dc2_124_large()))
-  log.attempt("INT_REPRESENTS_DC2_124_MOD16", () => sthm(@fifteen_theorem.int_represents_dc2_124_mod16()))
-  log.attempt("INT_DOUBLE_TWO_MUL", () => sthm(@fifteen_theorem.int_double_two_mul()))
-  log.attempt("INT_UNIVERSAL_DC2_124_NUM", () => sthm(@fifteen_theorem.int_universal_dc2_124_num()))
-  log.attempt("INT_112_ALL_EVEN_NE_16Q2", () => sthm(@fifteen_theorem.int_112_all_even_ne_16q2()))
-  log.attempt("INT_112_ALL_EVEN_NE_16Q10", () => sthm(@fifteen_theorem.int_112_all_even_ne_16q10()))
-  log.attempt("INT_112_OPPOSITE_HALVES_NE_16Q2", () => sthm(@fifteen_theorem.int_112_opposite_halves_ne_16q2()))
-  log.attempt("INT_112_OPPOSITE_HALVES_NE_16Q10", () => sthm(@fifteen_theorem.int_112_opposite_halves_ne_16q10()))
-  log.attempt("INT_112_OPPOSITE_HALVES_SYM_NE_16Q2", () => sthm(@fifteen_theorem.int_112_opposite_halves_sym_ne_16q2()))
-  log.attempt("INT_112_OPPOSITE_HALVES_SYM_NE_16Q10", () => sthm(@fifteen_theorem.int_112_opposite_halves_sym_ne_16q10()))
-  log.attempt("INT_REPRESENTS_112_ODD_SECOND_16Q2", () => sthm(@fifteen_theorem.int_represents_112_odd_second_16q2()))
-  log.attempt("INT_REPRESENTS_112_ODD_SECOND_16Q10", () => sthm(@fifteen_theorem.int_represents_112_odd_second_16q10()))
-  log.attempt("INT_REPRESENTS_RC2_124_5", () => sthm(@fifteen_theorem.int_represents_rc2_124_5()))
-  log.attempt("INT_REPRESENTS_RC2_124_13", () => sthm(@fifteen_theorem.int_represents_rc2_124_13()))
-  log.attempt("INT_REPRESENTS_RC2_124_SPECIAL", () => sthm(@fifteen_theorem.int_represents_rc2_124_special()))
-  log.attempt("NUM_RC2_124_REDUCED_RANGE", () => sthm(@fifteen_theorem.num_rc2_124_reduced_range()))
-  log.attempt("INT_REPRESENTS_RC2_124_LARGE", () => sthm(@fifteen_theorem.int_represents_rc2_124_large()))
-  log.attempt("INT_REPRESENTS_RC2_124_LARGE_ALL", () => sthm(@fifteen_theorem.int_represents_rc2_124_large_all()))
-  log.attempt("INT_REPRESENTS_RC2_124_MOD16", () => sthm(@fifteen_theorem.int_represents_rc2_124_mod16()))
-  log.attempt("INT_UNIVERSAL_RC2_124_NUM", () => sthm(@fifteen_theorem.int_universal_rc2_124_num()))
-  log.attempt("IQ_UNIVERSAL_124_CHILD_OF_NUM", () => sthm(@fifteen_theorem.iq_universal_124_child_of_num()))
-  log.attempt("IQ_UNIVERSAL_DIAG124_NUM", () => sthm(@fifteen_theorem.iq_universal_diag124_num()))
-  log.attempt("IQ_UNIVERSAL_ZC124_NUM", () => sthm(@fifteen_theorem.iq_universal_zc124_num()))
-  log.attempt("IQ_UNIVERSAL_YC124_NUM", () => sthm(@fifteen_theorem.iq_universal_yc124_num()))
-  log.attempt("IQ_UNIVERSAL_RC2_124_NUM", () => sthm(@fifteen_theorem.iq_universal_rc2_124_num()))
-  log.attempt("IQ_UNIVERSAL_DC1_124_NUM", () => sthm(@fifteen_theorem.iq_universal_dc1_124_num()))
-  log.attempt("IQ_UNIVERSAL_DC2_124_NUM", () => sthm(@fifteen_theorem.iq_universal_dc2_124_num()))
-  log.attempt("INT_YC124_NOT_14_7", () => sthm(@fifteen_theorem.int_yc124_not_14_7()))
-  log.attempt("INT_YC124_NOT_14_8", () => sthm(@fifteen_theorem.int_yc124_not_14_8()))
-  log.attempt("INT_YC124_NOT_14_11", () => sthm(@fifteen_theorem.int_yc124_not_14_11()))
-  log.attempt("INT_YC124_NOT_14_12", () => sthm(@fifteen_theorem.int_yc124_not_14_12()))
-  log.attempt("INT_YC124_NOT_14", () => sthm(@fifteen_theorem.int_yc124_not_14()))
-  log.attempt("INT_RC2_124_NOT_14_1", () => sthm(@fifteen_theorem.int_rc2_124_not_14_1()))
-  log.attempt("INT_DOUBLE_SHIFT_SQ_BOUND_14", () => sthm(@fifteen_theorem.int_double_shift_sq_bound_14()))
-  log.attempt("INT_DOUBLE_SHIFT_SQ_BOUND_28", () => sthm(@fifteen_theorem.int_double_shift_sq_bound_28()))
-  log.attempt("INT_RC2_124_NOT_14_7", () => sthm(@fifteen_theorem.int_rc2_124_not_14_7()))
-  log.attempt("INT_RC2_124_NOT_14_9", () => sthm(@fifteen_theorem.int_rc2_124_not_14_9()))
-  log.attempt("INT_RC2_124_NOT_14_7_9", () => sthm(@fifteen_theorem.int_rc2_124_not_14_7_9()))
-  log.attempt("INT_DC2_124_NOT_14_7", () => sthm(@fifteen_theorem.int_dc2_124_not_14_7()))
-  log.attempt("INT_DC2_124_NOT_14_8", () => sthm(@fifteen_theorem.int_dc2_124_not_14_8()))
-  log.attempt("INT_DC2_124_NOT_14_11", () => sthm(@fifteen_theorem.int_dc2_124_not_14_11()))
-  log.attempt("INT_DC2_124_NOT_14_12", () => sthm(@fifteen_theorem.int_dc2_124_not_14_12()))
-  log.attempt("INT_DC2_124_NOT_14", () => sthm(@fifteen_theorem.int_dc2_124_not_14()))
-  log.attempt("IQ_YC124_NOT_REPRESENTS_14", () => sthm(@fifteen_theorem.iq_yc124_not_represents_14()))
-  log.attempt("IQ_RC2_124_NOT_REPRESENTS_14_1", () => sthm(@fifteen_theorem.iq_rc2_124_not_represents_14_1()))
-  log.attempt("IQ_RC2_124_NOT_REPRESENTS_14_7_9", () => sthm(@fifteen_theorem.iq_rc2_124_not_represents_14_7_9()))
-  log.attempt("IQ_DC2_124_NOT_REPRESENTS_14", () => sthm(@fifteen_theorem.iq_dc2_124_not_represents_14()))
-  log.attempt("IQ_DC2_124_NOT_EMBEDS_1", () => sthm(@fifteen_theorem.iq_dc2_124_not_embeds_1()))
-  log.attempt("IQ_YC124_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_yc124_parameter_cases()))
-  log.attempt("IQ_RC2_124_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_rc2_124_parameter_cases()))
-  log.attempt("IQ_DC2_124_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_dc2_124_parameter_cases()))
-  log.attempt("IQ_UNIVERSAL_OF_DIAG124_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_diag124_child()))
-  log.attempt("IQ_UNIVERSAL_OF_ZC124_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_zc124_child()))
-  log.attempt("IQ_UNIVERSAL_OF_YC124_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_yc124_child()))
-  log.attempt("IQ_UNIVERSAL_OF_RC2_124_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_rc2_124_child()))
-  log.attempt("IQ_UNIVERSAL_OF_DC1_124_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_dc1_124_child()))
-  log.attempt("IQ_UNIVERSAL_OF_DC2_124_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_dc2_124_child()))
-  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_124", () => sthm(@fifteen_theorem.iq_universal_of_embeds_124()))
+  log.attempt("NUM_DC2_124_K_LOWER", () => {
+    sthm(@fifteen_theorem.num_dc2_124_k_lower())
+  })
+  log.attempt("NUM_RC2_124_K_POS", () => {
+    sthm(@fifteen_theorem.num_rc2_124_k_pos())
+  })
+  log.attempt("INT_REPRESENTS_DIAG124_MOD16", () => {
+    sthm(@fifteen_theorem.int_represents_diag124_mod16())
+  })
+  log.attempt("INT_UNIVERSAL_DIAG124_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_diag124_num())
+  })
+  log.attempt("INT_REPRESENTS_YC124_LARGE", () => {
+    sthm(@fifteen_theorem.int_represents_yc124_large())
+  })
+  log.attempt("INT_REPRESENTS_YC124_MOD16", () => {
+    sthm(@fifteen_theorem.int_represents_yc124_mod16())
+  })
+  log.attempt("INT_UNIVERSAL_YC124_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_yc124_num())
+  })
+  log.attempt("INT_REPRESENTS_DC2_124_LARGE", () => {
+    sthm(@fifteen_theorem.int_represents_dc2_124_large())
+  })
+  log.attempt("INT_REPRESENTS_DC2_124_MOD16", () => {
+    sthm(@fifteen_theorem.int_represents_dc2_124_mod16())
+  })
+  log.attempt("INT_DOUBLE_TWO_MUL", () => {
+    sthm(@fifteen_theorem.int_double_two_mul())
+  })
+  log.attempt("INT_UNIVERSAL_DC2_124_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_dc2_124_num())
+  })
+  log.attempt("INT_112_ALL_EVEN_NE_16Q2", () => {
+    sthm(@fifteen_theorem.int_112_all_even_ne_16q2())
+  })
+  log.attempt("INT_112_ALL_EVEN_NE_16Q10", () => {
+    sthm(@fifteen_theorem.int_112_all_even_ne_16q10())
+  })
+  log.attempt("INT_112_OPPOSITE_HALVES_NE_16Q2", () => {
+    sthm(@fifteen_theorem.int_112_opposite_halves_ne_16q2())
+  })
+  log.attempt("INT_112_OPPOSITE_HALVES_NE_16Q10", () => {
+    sthm(@fifteen_theorem.int_112_opposite_halves_ne_16q10())
+  })
+  log.attempt("INT_112_OPPOSITE_HALVES_SYM_NE_16Q2", () => {
+    sthm(@fifteen_theorem.int_112_opposite_halves_sym_ne_16q2())
+  })
+  log.attempt("INT_112_OPPOSITE_HALVES_SYM_NE_16Q10", () => {
+    sthm(@fifteen_theorem.int_112_opposite_halves_sym_ne_16q10())
+  })
+  log.attempt("INT_REPRESENTS_112_ODD_SECOND_16Q2", () => {
+    sthm(@fifteen_theorem.int_represents_112_odd_second_16q2())
+  })
+  log.attempt("INT_REPRESENTS_112_ODD_SECOND_16Q10", () => {
+    sthm(@fifteen_theorem.int_represents_112_odd_second_16q10())
+  })
+  log.attempt("INT_REPRESENTS_RC2_124_5", () => {
+    sthm(@fifteen_theorem.int_represents_rc2_124_5())
+  })
+  log.attempt("INT_REPRESENTS_RC2_124_13", () => {
+    sthm(@fifteen_theorem.int_represents_rc2_124_13())
+  })
+  log.attempt("INT_REPRESENTS_RC2_124_SPECIAL", () => {
+    sthm(@fifteen_theorem.int_represents_rc2_124_special())
+  })
+  log.attempt("NUM_RC2_124_REDUCED_RANGE", () => {
+    sthm(@fifteen_theorem.num_rc2_124_reduced_range())
+  })
+  log.attempt("INT_REPRESENTS_RC2_124_LARGE", () => {
+    sthm(@fifteen_theorem.int_represents_rc2_124_large())
+  })
+  log.attempt("INT_REPRESENTS_RC2_124_LARGE_ALL", () => {
+    sthm(@fifteen_theorem.int_represents_rc2_124_large_all())
+  })
+  log.attempt("INT_REPRESENTS_RC2_124_MOD16", () => {
+    sthm(@fifteen_theorem.int_represents_rc2_124_mod16())
+  })
+  log.attempt("INT_UNIVERSAL_RC2_124_NUM", () => {
+    sthm(@fifteen_theorem.int_universal_rc2_124_num())
+  })
+  log.attempt("IQ_UNIVERSAL_124_CHILD_OF_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_124_child_of_num())
+  })
+  log.attempt("IQ_UNIVERSAL_DIAG124_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_diag124_num())
+  })
+  log.attempt("IQ_UNIVERSAL_ZC124_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_zc124_num())
+  })
+  log.attempt("IQ_UNIVERSAL_YC124_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_yc124_num())
+  })
+  log.attempt("IQ_UNIVERSAL_RC2_124_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_rc2_124_num())
+  })
+  log.attempt("IQ_UNIVERSAL_DC1_124_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_dc1_124_num())
+  })
+  log.attempt("IQ_UNIVERSAL_DC2_124_NUM", () => {
+    sthm(@fifteen_theorem.iq_universal_dc2_124_num())
+  })
+  log.attempt("INT_YC124_NOT_14_7", () => {
+    sthm(@fifteen_theorem.int_yc124_not_14_7())
+  })
+  log.attempt("INT_YC124_NOT_14_8", () => {
+    sthm(@fifteen_theorem.int_yc124_not_14_8())
+  })
+  log.attempt("INT_YC124_NOT_14_11", () => {
+    sthm(@fifteen_theorem.int_yc124_not_14_11())
+  })
+  log.attempt("INT_YC124_NOT_14_12", () => {
+    sthm(@fifteen_theorem.int_yc124_not_14_12())
+  })
+  log.attempt("INT_YC124_NOT_14", () => {
+    sthm(@fifteen_theorem.int_yc124_not_14())
+  })
+  log.attempt("INT_RC2_124_NOT_14_1", () => {
+    sthm(@fifteen_theorem.int_rc2_124_not_14_1())
+  })
+  log.attempt("INT_DOUBLE_SHIFT_SQ_BOUND_14", () => {
+    sthm(@fifteen_theorem.int_double_shift_sq_bound_14())
+  })
+  log.attempt("INT_DOUBLE_SHIFT_SQ_BOUND_28", () => {
+    sthm(@fifteen_theorem.int_double_shift_sq_bound_28())
+  })
+  log.attempt("INT_RC2_124_NOT_14_7", () => {
+    sthm(@fifteen_theorem.int_rc2_124_not_14_7())
+  })
+  log.attempt("INT_RC2_124_NOT_14_9", () => {
+    sthm(@fifteen_theorem.int_rc2_124_not_14_9())
+  })
+  log.attempt("INT_RC2_124_NOT_14_7_9", () => {
+    sthm(@fifteen_theorem.int_rc2_124_not_14_7_9())
+  })
+  log.attempt("INT_DC2_124_NOT_14_7", () => {
+    sthm(@fifteen_theorem.int_dc2_124_not_14_7())
+  })
+  log.attempt("INT_DC2_124_NOT_14_8", () => {
+    sthm(@fifteen_theorem.int_dc2_124_not_14_8())
+  })
+  log.attempt("INT_DC2_124_NOT_14_11", () => {
+    sthm(@fifteen_theorem.int_dc2_124_not_14_11())
+  })
+  log.attempt("INT_DC2_124_NOT_14_12", () => {
+    sthm(@fifteen_theorem.int_dc2_124_not_14_12())
+  })
+  log.attempt("INT_DC2_124_NOT_14", () => {
+    sthm(@fifteen_theorem.int_dc2_124_not_14())
+  })
+  log.attempt("IQ_YC124_NOT_REPRESENTS_14", () => {
+    sthm(@fifteen_theorem.iq_yc124_not_represents_14())
+  })
+  log.attempt("IQ_RC2_124_NOT_REPRESENTS_14_1", () => {
+    sthm(@fifteen_theorem.iq_rc2_124_not_represents_14_1())
+  })
+  log.attempt("IQ_RC2_124_NOT_REPRESENTS_14_7_9", () => {
+    sthm(@fifteen_theorem.iq_rc2_124_not_represents_14_7_9())
+  })
+  log.attempt("IQ_DC2_124_NOT_REPRESENTS_14", () => {
+    sthm(@fifteen_theorem.iq_dc2_124_not_represents_14())
+  })
+  log.attempt("IQ_DC2_124_NOT_EMBEDS_1", () => {
+    sthm(@fifteen_theorem.iq_dc2_124_not_embeds_1())
+  })
+  log.attempt("IQ_YC124_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_yc124_parameter_cases())
+  })
+  log.attempt("IQ_RC2_124_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_rc2_124_parameter_cases())
+  })
+  log.attempt("IQ_DC2_124_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_dc2_124_parameter_cases())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_DIAG124_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_diag124_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_ZC124_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_zc124_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_YC124_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_yc124_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_RC2_124_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_rc2_124_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_DC1_124_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_dc1_124_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_DC2_124_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_dc2_124_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_124", () => {
+    sthm(@fifteen_theorem.iq_universal_of_embeds_124())
+  })
   log.attempt("INT_125_NOT_10", () => sthm(@fifteen_theorem.int_125_not_10()))
-  log.attempt("INT_DIV5_BALANCED", () => sthm(@fifteen_theorem.int_div5_balanced()))
-  log.attempt("INT_QUAD5_BALANCED_NONNEG", () => sthm(@fifteen_theorem.int_quad5_balanced_nonneg()))
-  log.attempt("INT_QUAD2_REM_NONNEG_125", () => sthm(@fifteen_theorem.int_quad2_rem_nonneg_125()))
+  log.attempt("INT_DIV5_BALANCED", () => {
+    sthm(@fifteen_theorem.int_div5_balanced())
+  })
+  log.attempt("INT_QUAD5_BALANCED_NONNEG", () => {
+    sthm(@fifteen_theorem.int_quad5_balanced_nonneg())
+  })
+  log.attempt("INT_QUAD2_REM_NONNEG_125", () => {
+    sthm(@fifteen_theorem.int_quad2_rem_nonneg_125())
+  })
   log.attempt("iqclear125", () => sthm(@fifteen_theorem.iqclear125()))
   log.attempt("iqflip125", () => sthm(@fifteen_theorem.iqflip125()))
-  log.attempt("IQ_EMBEDS_CLEAR_125", () => sthm(@fifteen_theorem.iq_embeds_clear_125()))
-  log.attempt("IQ_EMBEDS_FLIP_125", () => sthm(@fifteen_theorem.iq_embeds_flip_125()))
-  log.attempt("IQ_REPRESENTS_FLIP_125", () => sthm(@fifteen_theorem.iq_represents_flip_125()))
-  log.attempt("IQ_125_REDUCED_K_NONNEG", () => sthm(@fifteen_theorem.iq_125_reduced_k_nonneg()))
-  log.attempt("IQ_125_ZERO_FORCES_RB", () => sthm(@fifteen_theorem.iq_125_zero_forces_rb()))
-  log.attempt("IQ_125_ZERO_FORCES_RC", () => sthm(@fifteen_theorem.iq_125_zero_forces_rc()))
-  log.attempt("IQ_125_REDUCED_K_UPPER", () => sthm(@fifteen_theorem.iq_125_reduced_k_upper()))
-  log.attempt("IQ_125_REDUCED_K_NONZERO", () => sthm(@fifteen_theorem.iq_125_reduced_k_nonzero()))
-  log.attempt("IQ_125_REDUCED_K_BOUNDS", () => sthm(@fifteen_theorem.iq_125_reduced_k_bounds()))
-  log.attempt("IQ_125_REDUCED_REPRESENTS_10", () => sthm(@fifteen_theorem.iq_125_reduced_represents_10()))
-  log.attempt("IQ_EMBEDS_FLIP_125_NEG1", () => sthm(@fifteen_theorem.iq_embeds_flip_125_neg1()))
-  log.attempt("IQ_EMBEDS_FLIP_125_NEG2", () => sthm(@fifteen_theorem.iq_embeds_flip_125_neg2()))
-  log.attempt("IQ_REPRESENTS_FLIP_125_NEG1", () => sthm(@fifteen_theorem.iq_represents_flip_125_neg1()))
-  log.attempt("IQ_REPRESENTS_FLIP_125_NEG2", () => sthm(@fifteen_theorem.iq_represents_flip_125_neg2()))
-  log.attempt("IQ_EMBEDS_QUATERNARY_125_RAW", () => sthm(@fifteen_theorem.iq_embeds_quaternary_125_raw()))
-  log.attempt("IQ_EMBEDS_QUATERNARY_125", () => sthm(@fifteen_theorem.iq_embeds_quaternary_125()))
-  log.attempt("INT_SQ_LE_50_CASES", () => sthm(@fifteen_theorem.int_sq_le_50_cases()))
-  log.attempt("INT_RB1_RC0_K7_125_NOT_10", () => sthm(@fifteen_theorem.int_rb1_rc0_k7_125_not_10()))
-  log.attempt("INT_RB1_RC0_K8_125_NOT_10", () => sthm(@fifteen_theorem.int_rb1_rc0_k8_125_not_10()))
-  log.attempt("INT_RB1_RC1_K4_125_NOT_10", () => sthm(@fifteen_theorem.int_rb1_rc1_k4_125_not_10()))
-  log.attempt("INT_RB1_RC1_K8_125_NOT_10", () => sthm(@fifteen_theorem.int_rb1_rc1_k8_125_not_10()))
-  log.attempt("INT_RB1_RC2_K7_125_NOT_10", () => sthm(@fifteen_theorem.int_rb1_rc2_k7_125_not_10()))
-  log.attempt("IQ_RB1_RC0_125_NOT_REPRESENTS_10", () => sthm(@fifteen_theorem.iq_rb1_rc0_125_not_represents_10()))
-  log.attempt("IQ_RB1_RC1_125_NOT_REPRESENTS_10", () => sthm(@fifteen_theorem.iq_rb1_rc1_125_not_represents_10()))
-  log.attempt("IQ_RB1_RC2_K7_125_NOT_REPRESENTS_10", () => sthm(@fifteen_theorem.iq_rb1_rc2_k7_125_not_represents_10()))
-  log.attempt("IQ_RB1_RC2_K1_125_NOT_EMBEDS", () => sthm(@fifteen_theorem.iq_rb1_rc2_k1_125_not_embeds()))
-  log.attempt("IQ_RB1_RC0_125_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_rb1_rc0_125_parameter_cases()))
-  log.attempt("IQ_RB1_RC1_125_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_rb1_rc1_125_parameter_cases()))
-  log.attempt("IQ_RB1_RC2_125_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_rb1_rc2_125_parameter_cases()))
-  log.attempt("INT_REPRESENTS_DIAG125_SHIFT", () => sthm(@fifteen_theorem.int_represents_diag125_shift()))
-  log.attempt("INT_REPRESENTS_RC1_125_SHIFT", () => sthm(@fifteen_theorem.int_represents_rc1_125_shift()))
-  log.attempt("INT_REPRESENTS_RC2_125_SHIFT", () => sthm(@fifteen_theorem.int_represents_rc2_125_shift()))
-  log.attempt("INT_REPRESENTS_RB1_125_SHIFT", () => sthm(@fifteen_theorem.int_represents_rb1_125_shift()))
-  log.attempt("INT_REPRESENTS_RB1_RC1_125_SHIFT", () => sthm(@fifteen_theorem.int_represents_rb1_rc1_125_shift()))
-  log.attempt("INT_REPRESENTS_RB1_RC2_125_SHIFT", () => sthm(@fifteen_theorem.int_represents_rb1_rc2_125_shift()))
-  log.attempt("num_125_exception", () => sthm(@fifteen_theorem.num_125_exception()))
-  log.attempt("NUM_MUL5_MOD25_2", () => sthm(@fifteen_theorem.num_mul5_mod25_2()))
-  log.attempt("NUM_MUL5_MOD25_3", () => sthm(@fifteen_theorem.num_mul5_mod25_3()))
-  log.attempt("NUM_125_HIGH_POWER_MOD25", () => sthm(@fifteen_theorem.num_125_high_power_mod25()))
-  log.attempt("NUM_125_EXCEPTION_MOD25", () => sthm(@fifteen_theorem.num_125_exception_mod25()))
-  log.attempt("NUM_125_EXCEPTION_NOT_DIV25", () => sthm(@fifteen_theorem.num_125_exception_not_div25()))
-  log.attempt("NUM_AVOIDS_125_SUB_OF_RESIDUES", () => sthm(@fifteen_theorem.num_avoids_125_sub_of_residues()))
-  log.attempt("num_125_shift_good", () => sthm(@fifteen_theorem.num_125_shift_good()))
-  log.attempt("NUM_125_SHIFT_GOOD_ONE_OR_FOUR", () => sthm(@fifteen_theorem.num_125_shift_good_one_or_four()))
-  log.attempt("NUM_AVOIDS_125_SUB_ONE_OR_FOUR", () => sthm(@fifteen_theorem.num_avoids_125_sub_one_or_four()))
-  log.attempt("NUM_DIAG125_SHIFT_COEFF", () => sthm(@fifteen_theorem.num_diag125_shift_coeff()))
-  log.attempt("NUM_RC1_125_SHIFT_COEFF", () => sthm(@fifteen_theorem.num_rc1_125_shift_coeff()))
-  log.attempt("NUM_RC2_125_SHIFT_COEFF", () => sthm(@fifteen_theorem.num_rc2_125_shift_coeff()))
-  log.attempt("NUM_RB1_125_SHIFT_COEFF", () => sthm(@fifteen_theorem.num_rb1_125_shift_coeff()))
-  log.attempt("NUM_RB1_RC1_125_SHIFT_COEFF", () => sthm(@fifteen_theorem.num_rb1_rc1_125_shift_coeff()))
-  log.attempt("NUM_RB1_RC2_125_SHIFT_COEFF", () => sthm(@fifteen_theorem.num_rb1_rc2_125_shift_coeff()))
-  log.attempt("INT_REPRESENTS_125_CHILD_SCALE25", () => sthm(@fifteen_theorem.int_represents_125_child_scale25()))
-  log.attempt("NUM_125_CHILD_DESCENT", () => sthm(@fifteen_theorem.num_125_child_descent()))
-  log.attempt("INT_REPRESENTS_DIAG125_BASE", () => sthm(@fifteen_theorem.int_represents_diag125_base()))
-  log.attempt("INT_REPRESENTS_RC1_125_BASE", () => sthm(@fifteen_theorem.int_represents_rc1_125_base()))
-  log.attempt("INT_REPRESENTS_RC2_125_BASE", () => sthm(@fifteen_theorem.int_represents_rc2_125_base()))
-  log.attempt("INT_REPRESENTS_RB1_125_BASE", () => sthm(@fifteen_theorem.int_represents_rb1_125_base()))
-  log.attempt("INT_REPRESENTS_RB1_RC1_125_BASE", () => sthm(@fifteen_theorem.int_represents_rb1_rc1_125_base()))
-  log.attempt("INT_REPRESENTS_RB1_RC2_125_BASE", () => sthm(@fifteen_theorem.int_represents_rb1_rc2_125_base()))
-  log.attempt("int125_child_rep", () => sthm(@fifteen_theorem.int125_child_rep()))
-  log.attempt("INT125_CHILD_REP_SCALE25", () => sthm(@fifteen_theorem.int125_child_rep_scale25()))
-  log.attempt("INT125_CHILD_REP_OF_TERNARY", () => sthm(@fifteen_theorem.int125_child_rep_of_ternary()))
-  log.attempt("INT125_CHILD_REP_DIAG", () => sthm(@fifteen_theorem.int125_child_rep_diag()))
-  log.attempt("INT_125_DOUBLE_TWO_MUL", () => sthm(@fifteen_theorem.int_125_double_two_mul()))
-  log.attempt("INT125_CHILD_REP_RC1", () => sthm(@fifteen_theorem.int125_child_rep_rc1()))
-  log.attempt("INT125_CHILD_REP_RC2", () => sthm(@fifteen_theorem.int125_child_rep_rc2()))
-  log.attempt("INT125_CHILD_REP_RB1", () => sthm(@fifteen_theorem.int125_child_rep_rb1()))
-  log.attempt("INT125_CHILD_REP_RB1_RC1", () => sthm(@fifteen_theorem.int125_child_rep_rb1_rc1()))
-  log.attempt("INT125_CHILD_REP_RB1_RC2", () => sthm(@fifteen_theorem.int125_child_rep_rb1_rc2()))
-  log.attempt("INT_ALMOST_UNIVERSAL_125_CHILD_OF_REGULAR", () => sthm(@fifteen_theorem.int_almost_universal_125_child_of_regular()))
-  log.attempt("INT_ALMOST_UNIVERSAL_DIAG125_REP", () => sthm(@fifteen_theorem.int_almost_universal_diag125_rep()))
-  log.attempt("INT_ALMOST_UNIVERSAL_RC1_125_REP", () => sthm(@fifteen_theorem.int_almost_universal_rc1_125_rep()))
-  log.attempt("INT_ALMOST_UNIVERSAL_RC2_125_REP", () => sthm(@fifteen_theorem.int_almost_universal_rc2_125_rep()))
-  log.attempt("INT_ALMOST_UNIVERSAL_RB1_125_REP", () => sthm(@fifteen_theorem.int_almost_universal_rb1_125_rep()))
-  log.attempt("INT_ALMOST_UNIVERSAL_RB1_RC1_125_REP", () => sthm(@fifteen_theorem.int_almost_universal_rb1_rc1_125_rep()))
-  log.attempt("INT_ALMOST_UNIVERSAL_RB1_RC2_125_REP", () => sthm(@fifteen_theorem.int_almost_universal_rb1_rc2_125_rep()))
-  log.attempt("INT_DISC10_NOT_FIRST3", () => sthm(@fifteen_theorem.int_disc10_not_first3()))
+  log.attempt("IQ_EMBEDS_CLEAR_125", () => {
+    sthm(@fifteen_theorem.iq_embeds_clear_125())
+  })
+  log.attempt("IQ_EMBEDS_FLIP_125", () => {
+    sthm(@fifteen_theorem.iq_embeds_flip_125())
+  })
+  log.attempt("IQ_REPRESENTS_FLIP_125", () => {
+    sthm(@fifteen_theorem.iq_represents_flip_125())
+  })
+  log.attempt("IQ_125_REDUCED_K_NONNEG", () => {
+    sthm(@fifteen_theorem.iq_125_reduced_k_nonneg())
+  })
+  log.attempt("IQ_125_ZERO_FORCES_RB", () => {
+    sthm(@fifteen_theorem.iq_125_zero_forces_rb())
+  })
+  log.attempt("IQ_125_ZERO_FORCES_RC", () => {
+    sthm(@fifteen_theorem.iq_125_zero_forces_rc())
+  })
+  log.attempt("IQ_125_REDUCED_K_UPPER", () => {
+    sthm(@fifteen_theorem.iq_125_reduced_k_upper())
+  })
+  log.attempt("IQ_125_REDUCED_K_NONZERO", () => {
+    sthm(@fifteen_theorem.iq_125_reduced_k_nonzero())
+  })
+  log.attempt("IQ_125_REDUCED_K_BOUNDS", () => {
+    sthm(@fifteen_theorem.iq_125_reduced_k_bounds())
+  })
+  log.attempt("IQ_125_REDUCED_REPRESENTS_10", () => {
+    sthm(@fifteen_theorem.iq_125_reduced_represents_10())
+  })
+  log.attempt("IQ_EMBEDS_FLIP_125_NEG1", () => {
+    sthm(@fifteen_theorem.iq_embeds_flip_125_neg1())
+  })
+  log.attempt("IQ_EMBEDS_FLIP_125_NEG2", () => {
+    sthm(@fifteen_theorem.iq_embeds_flip_125_neg2())
+  })
+  log.attempt("IQ_REPRESENTS_FLIP_125_NEG1", () => {
+    sthm(@fifteen_theorem.iq_represents_flip_125_neg1())
+  })
+  log.attempt("IQ_REPRESENTS_FLIP_125_NEG2", () => {
+    sthm(@fifteen_theorem.iq_represents_flip_125_neg2())
+  })
+  log.attempt("IQ_EMBEDS_QUATERNARY_125_RAW", () => {
+    sthm(@fifteen_theorem.iq_embeds_quaternary_125_raw())
+  })
+  log.attempt("IQ_EMBEDS_QUATERNARY_125", () => {
+    sthm(@fifteen_theorem.iq_embeds_quaternary_125())
+  })
+  log.attempt("INT_SQ_LE_50_CASES", () => {
+    sthm(@fifteen_theorem.int_sq_le_50_cases())
+  })
+  log.attempt("INT_RB1_RC0_K7_125_NOT_10", () => {
+    sthm(@fifteen_theorem.int_rb1_rc0_k7_125_not_10())
+  })
+  log.attempt("INT_RB1_RC0_K8_125_NOT_10", () => {
+    sthm(@fifteen_theorem.int_rb1_rc0_k8_125_not_10())
+  })
+  log.attempt("INT_RB1_RC1_K4_125_NOT_10", () => {
+    sthm(@fifteen_theorem.int_rb1_rc1_k4_125_not_10())
+  })
+  log.attempt("INT_RB1_RC1_K8_125_NOT_10", () => {
+    sthm(@fifteen_theorem.int_rb1_rc1_k8_125_not_10())
+  })
+  log.attempt("INT_RB1_RC2_K7_125_NOT_10", () => {
+    sthm(@fifteen_theorem.int_rb1_rc2_k7_125_not_10())
+  })
+  log.attempt("IQ_RB1_RC0_125_NOT_REPRESENTS_10", () => {
+    sthm(@fifteen_theorem.iq_rb1_rc0_125_not_represents_10())
+  })
+  log.attempt("IQ_RB1_RC1_125_NOT_REPRESENTS_10", () => {
+    sthm(@fifteen_theorem.iq_rb1_rc1_125_not_represents_10())
+  })
+  log.attempt("IQ_RB1_RC2_K7_125_NOT_REPRESENTS_10", () => {
+    sthm(@fifteen_theorem.iq_rb1_rc2_k7_125_not_represents_10())
+  })
+  log.attempt("IQ_RB1_RC2_K1_125_NOT_EMBEDS", () => {
+    sthm(@fifteen_theorem.iq_rb1_rc2_k1_125_not_embeds())
+  })
+  log.attempt("IQ_RB1_RC0_125_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_rb1_rc0_125_parameter_cases())
+  })
+  log.attempt("IQ_RB1_RC1_125_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_rb1_rc1_125_parameter_cases())
+  })
+  log.attempt("IQ_RB1_RC2_125_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_rb1_rc2_125_parameter_cases())
+  })
+  log.attempt("INT_REPRESENTS_DIAG125_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_diag125_shift())
+  })
+  log.attempt("INT_REPRESENTS_RC1_125_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_rc1_125_shift())
+  })
+  log.attempt("INT_REPRESENTS_RC2_125_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_rc2_125_shift())
+  })
+  log.attempt("INT_REPRESENTS_RB1_125_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_rb1_125_shift())
+  })
+  log.attempt("INT_REPRESENTS_RB1_RC1_125_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_rb1_rc1_125_shift())
+  })
+  log.attempt("INT_REPRESENTS_RB1_RC2_125_SHIFT", () => {
+    sthm(@fifteen_theorem.int_represents_rb1_rc2_125_shift())
+  })
+  log.attempt("num_125_exception", () => {
+    sthm(@fifteen_theorem.num_125_exception())
+  })
+  log.attempt("NUM_MUL5_MOD25_2", () => {
+    sthm(@fifteen_theorem.num_mul5_mod25_2())
+  })
+  log.attempt("NUM_MUL5_MOD25_3", () => {
+    sthm(@fifteen_theorem.num_mul5_mod25_3())
+  })
+  log.attempt("NUM_125_HIGH_POWER_MOD25", () => {
+    sthm(@fifteen_theorem.num_125_high_power_mod25())
+  })
+  log.attempt("NUM_125_EXCEPTION_MOD25", () => {
+    sthm(@fifteen_theorem.num_125_exception_mod25())
+  })
+  log.attempt("NUM_125_EXCEPTION_NOT_DIV25", () => {
+    sthm(@fifteen_theorem.num_125_exception_not_div25())
+  })
+  log.attempt("NUM_AVOIDS_125_SUB_OF_RESIDUES", () => {
+    sthm(@fifteen_theorem.num_avoids_125_sub_of_residues())
+  })
+  log.attempt("num_125_shift_good", () => {
+    sthm(@fifteen_theorem.num_125_shift_good())
+  })
+  log.attempt("NUM_125_SHIFT_GOOD_ONE_OR_FOUR", () => {
+    sthm(@fifteen_theorem.num_125_shift_good_one_or_four())
+  })
+  log.attempt("NUM_AVOIDS_125_SUB_ONE_OR_FOUR", () => {
+    sthm(@fifteen_theorem.num_avoids_125_sub_one_or_four())
+  })
+  log.attempt("NUM_DIAG125_SHIFT_COEFF", () => {
+    sthm(@fifteen_theorem.num_diag125_shift_coeff())
+  })
+  log.attempt("NUM_RC1_125_SHIFT_COEFF", () => {
+    sthm(@fifteen_theorem.num_rc1_125_shift_coeff())
+  })
+  log.attempt("NUM_RC2_125_SHIFT_COEFF", () => {
+    sthm(@fifteen_theorem.num_rc2_125_shift_coeff())
+  })
+  log.attempt("NUM_RB1_125_SHIFT_COEFF", () => {
+    sthm(@fifteen_theorem.num_rb1_125_shift_coeff())
+  })
+  log.attempt("NUM_RB1_RC1_125_SHIFT_COEFF", () => {
+    sthm(@fifteen_theorem.num_rb1_rc1_125_shift_coeff())
+  })
+  log.attempt("NUM_RB1_RC2_125_SHIFT_COEFF", () => {
+    sthm(@fifteen_theorem.num_rb1_rc2_125_shift_coeff())
+  })
+  log.attempt("INT_REPRESENTS_125_CHILD_SCALE25", () => {
+    sthm(@fifteen_theorem.int_represents_125_child_scale25())
+  })
+  log.attempt("NUM_125_CHILD_DESCENT", () => {
+    sthm(@fifteen_theorem.num_125_child_descent())
+  })
+  log.attempt("INT_REPRESENTS_DIAG125_BASE", () => {
+    sthm(@fifteen_theorem.int_represents_diag125_base())
+  })
+  log.attempt("INT_REPRESENTS_RC1_125_BASE", () => {
+    sthm(@fifteen_theorem.int_represents_rc1_125_base())
+  })
+  log.attempt("INT_REPRESENTS_RC2_125_BASE", () => {
+    sthm(@fifteen_theorem.int_represents_rc2_125_base())
+  })
+  log.attempt("INT_REPRESENTS_RB1_125_BASE", () => {
+    sthm(@fifteen_theorem.int_represents_rb1_125_base())
+  })
+  log.attempt("INT_REPRESENTS_RB1_RC1_125_BASE", () => {
+    sthm(@fifteen_theorem.int_represents_rb1_rc1_125_base())
+  })
+  log.attempt("INT_REPRESENTS_RB1_RC2_125_BASE", () => {
+    sthm(@fifteen_theorem.int_represents_rb1_rc2_125_base())
+  })
+  log.attempt("int125_child_rep", () => {
+    sthm(@fifteen_theorem.int125_child_rep())
+  })
+  log.attempt("INT125_CHILD_REP_SCALE25", () => {
+    sthm(@fifteen_theorem.int125_child_rep_scale25())
+  })
+  log.attempt("INT125_CHILD_REP_OF_TERNARY", () => {
+    sthm(@fifteen_theorem.int125_child_rep_of_ternary())
+  })
+  log.attempt("INT125_CHILD_REP_DIAG", () => {
+    sthm(@fifteen_theorem.int125_child_rep_diag())
+  })
+  log.attempt("INT_125_DOUBLE_TWO_MUL", () => {
+    sthm(@fifteen_theorem.int_125_double_two_mul())
+  })
+  log.attempt("INT125_CHILD_REP_RC1", () => {
+    sthm(@fifteen_theorem.int125_child_rep_rc1())
+  })
+  log.attempt("INT125_CHILD_REP_RC2", () => {
+    sthm(@fifteen_theorem.int125_child_rep_rc2())
+  })
+  log.attempt("INT125_CHILD_REP_RB1", () => {
+    sthm(@fifteen_theorem.int125_child_rep_rb1())
+  })
+  log.attempt("INT125_CHILD_REP_RB1_RC1", () => {
+    sthm(@fifteen_theorem.int125_child_rep_rb1_rc1())
+  })
+  log.attempt("INT125_CHILD_REP_RB1_RC2", () => {
+    sthm(@fifteen_theorem.int125_child_rep_rb1_rc2())
+  })
+  log.attempt("INT_ALMOST_UNIVERSAL_125_CHILD_OF_REGULAR", () => {
+    sthm(@fifteen_theorem.int_almost_universal_125_child_of_regular())
+  })
+  log.attempt("INT_ALMOST_UNIVERSAL_DIAG125_REP", () => {
+    sthm(@fifteen_theorem.int_almost_universal_diag125_rep())
+  })
+  log.attempt("INT_ALMOST_UNIVERSAL_RC1_125_REP", () => {
+    sthm(@fifteen_theorem.int_almost_universal_rc1_125_rep())
+  })
+  log.attempt("INT_ALMOST_UNIVERSAL_RC2_125_REP", () => {
+    sthm(@fifteen_theorem.int_almost_universal_rc2_125_rep())
+  })
+  log.attempt("INT_ALMOST_UNIVERSAL_RB1_125_REP", () => {
+    sthm(@fifteen_theorem.int_almost_universal_rb1_125_rep())
+  })
+  log.attempt("INT_ALMOST_UNIVERSAL_RB1_RC1_125_REP", () => {
+    sthm(@fifteen_theorem.int_almost_universal_rb1_rc1_125_rep())
+  })
+  log.attempt("INT_ALMOST_UNIVERSAL_RB1_RC2_125_REP", () => {
+    sthm(@fifteen_theorem.int_almost_universal_rb1_rc2_125_rep())
+  })
+  log.attempt("INT_DISC10_NOT_FIRST3", () => {
+    sthm(@fifteen_theorem.int_disc10_not_first3())
+  })
   log.attempt("BINARY_DISC10", () => sthm(@fifteen_theorem.binary_disc10()))
   log.attempt("ternary_type6", () => sthm(@fifteen_theorem.ternary_type6()))
   log.attempt("CONJ_TYPE6", () => sthm(@fifteen_theorem.conj_type6()))
-  log.attempt("TERNARY_TYPE6_OF_CHARACTERISTIC", () => sthm(@fifteen_theorem.ternary_type6_of_characteristic()))
-  log.attempt("INT_REM_8MUL_ADD6", () => sthm(@fifteen_theorem.int_rem_8mul_add6()))
-  log.attempt("INT_ODD_SQ_SQ_10_NOT_6MOD8", () => sthm(@fifteen_theorem.int_odd_sq_sq_10_not_6mod8()))
-  log.attempt("TYPE6_DISC10_BINARY_SECOND", () => sthm(@fifteen_theorem.type6_disc10_binary_second()))
-  log.attempt("TERNARY_DISC10_TYPE6_A11_1", () => sthm(@fifteen_theorem.ternary_disc10_type6_a11_1()))
+  log.attempt("TERNARY_TYPE6_OF_CHARACTERISTIC", () => {
+    sthm(@fifteen_theorem.ternary_type6_of_characteristic())
+  })
+  log.attempt("INT_REM_8MUL_ADD6", () => {
+    sthm(@fifteen_theorem.int_rem_8mul_add6())
+  })
+  log.attempt("INT_ODD_SQ_SQ_10_NOT_6MOD8", () => {
+    sthm(@fifteen_theorem.int_odd_sq_sq_10_not_6mod8())
+  })
+  log.attempt("TYPE6_DISC10_BINARY_SECOND", () => {
+    sthm(@fifteen_theorem.type6_disc10_binary_second())
+  })
+  log.attempt("TERNARY_DISC10_TYPE6_A11_1", () => {
+    sthm(@fifteen_theorem.ternary_disc10_type6_a11_1())
+  })
   log.attempt("CUBE_GE_27", () => sthm(@fifteen_theorem.cube_ge_27()))
-  log.attempt("HERMITE_CUBE_DISC10", () => sthm(@fifteen_theorem.hermite_cube_disc10()))
-  log.attempt("HERMITE_DISC10_LE2", () => sthm(@fifteen_theorem.hermite_disc10_le2()))
-  log.attempt("BINARY_HERMITE_PRIMITIVE", () => sthm(@fifteen_theorem.binary_hermite_primitive()))
-  log.attempt("INT_SQ_SQ_5_NOT_3MOD8", () => sthm(@fifteen_theorem.int_sq_sq_5_not_3mod8()))
-  log.attempt("HERMITE_DISC10_MIN2_PAIR", () => sthm(@fifteen_theorem.hermite_disc10_min2_pair()))
-  log.attempt("DISC10_BLOCK3_EVEN_VALUE", () => sthm(@fifteen_theorem.disc10_block3_even_value()))
-  log.attempt("INT_BLOCK5_CANONICAL_NOT6MOD16", () => sthm(@fifteen_theorem.int_block5_canonical_not6mod16()))
-  log.attempt("DISC10_BLOCK4_NOT6MOD16", () => sthm(@fifteen_theorem.disc10_block4_not6mod16()))
-  log.attempt("DISC10_BLOCK5_NOT6MOD16", () => sthm(@fifteen_theorem.disc10_block5_not6mod16()))
-  log.attempt("DISC10_MIN2_EXCLUDED", () => sthm(@fifteen_theorem.disc10_min2_excluded()))
-  log.attempt("TERNARY_DISC10_TYPE6_SPECIAL", () => sthm(@fifteen_theorem.ternary_disc10_type6_special()))
-  log.attempt("TERNARY_TYPE6_DICKSON", () => sthm(@fifteen_theorem.ternary_type6_dickson()))
+  log.attempt("HERMITE_CUBE_DISC10", () => {
+    sthm(@fifteen_theorem.hermite_cube_disc10())
+  })
+  log.attempt("HERMITE_DISC10_LE2", () => {
+    sthm(@fifteen_theorem.hermite_disc10_le2())
+  })
+  log.attempt("BINARY_HERMITE_PRIMITIVE", () => {
+    sthm(@fifteen_theorem.binary_hermite_primitive())
+  })
+  log.attempt("INT_SQ_SQ_5_NOT_3MOD8", () => {
+    sthm(@fifteen_theorem.int_sq_sq_5_not_3mod8())
+  })
+  log.attempt("HERMITE_DISC10_MIN2_PAIR", () => {
+    sthm(@fifteen_theorem.hermite_disc10_min2_pair())
+  })
+  log.attempt("DISC10_BLOCK3_EVEN_VALUE", () => {
+    sthm(@fifteen_theorem.disc10_block3_even_value())
+  })
+  log.attempt("INT_BLOCK5_CANONICAL_NOT6MOD16", () => {
+    sthm(@fifteen_theorem.int_block5_canonical_not6mod16())
+  })
+  log.attempt("DISC10_BLOCK4_NOT6MOD16", () => {
+    sthm(@fifteen_theorem.disc10_block4_not6mod16())
+  })
+  log.attempt("DISC10_BLOCK5_NOT6MOD16", () => {
+    sthm(@fifteen_theorem.disc10_block5_not6mod16())
+  })
+  log.attempt("DISC10_MIN2_EXCLUDED", () => {
+    sthm(@fifteen_theorem.disc10_min2_excluded())
+  })
+  log.attempt("TERNARY_DISC10_TYPE6_SPECIAL", () => {
+    sthm(@fifteen_theorem.ternary_disc10_type6_special())
+  })
+  log.attempt("TERNARY_TYPE6_DICKSON", () => {
+    sthm(@fifteen_theorem.ternary_type6_dickson())
+  })
   log.attempt("LEMMA_125", () => sthm(@fifteen_theorem.lemma_125()))
   log.attempt("COPRIME_5_OF_10", () => sthm(@fifteen_theorem.coprime_5_of_10()))
-  log.attempt("COPRIME_125_OFFSET_A", () => sthm(@fifteen_theorem.coprime_125_offset_a()))
-  log.attempt("COPRIME_125_OFFSET_80", () => sthm(@fifteen_theorem.coprime_125_offset_80()))
-  log.attempt("COPRIME_DIRICHLET_125", () => sthm(@fifteen_theorem.coprime_dirichlet_125()))
-  log.attempt("DIRICHLET_PRIME_125", () => sthm(@fifteen_theorem.dirichlet_prime_125()))
+  log.attempt("COPRIME_125_OFFSET_A", () => {
+    sthm(@fifteen_theorem.coprime_125_offset_a())
+  })
+  log.attempt("COPRIME_125_OFFSET_80", () => {
+    sthm(@fifteen_theorem.coprime_125_offset_80())
+  })
+  log.attempt("COPRIME_DIRICHLET_125", () => {
+    sthm(@fifteen_theorem.coprime_dirichlet_125())
+  })
+  log.attempt("DIRICHLET_PRIME_125", () => {
+    sthm(@fifteen_theorem.dirichlet_prime_125())
+  })
   log.attempt("COPRIME_5_10J3", () => sthm(@fifteen_theorem.coprime_5_10j3()))
   log.attempt("SQUARE_MOD_5", () => sthm(@fifteen_theorem.square_mod_5()))
-  log.attempt("NO_SQUARE_3_MOD_5", () => sthm(@fifteen_theorem.no_square_3_mod_5()))
+  log.attempt("NO_SQUARE_3_MOD_5", () => {
+    sthm(@fifteen_theorem.no_square_3_mod_5())
+  })
   log.attempt("JACOBI_3_5", () => sthm(@fifteen_theorem.jacobi_3_5()))
   log.attempt("JACOBI_5_10J3", () => sthm(@fifteen_theorem.jacobi_5_10j3()))
-  log.attempt("CONG_BETA_NEG5_125", () => sthm(@fifteen_theorem.cong_beta_neg5_125()))
-  log.attempt("JACOBI_BETA_10J3", () => sthm(@fifteen_theorem.jacobi_beta_10j3()))
-  log.attempt("CONG_BETA_3MOD4_125", () => sthm(@fifteen_theorem.cong_beta_3mod4_125()))
-  log.attempt("COPRIME_BETA_10J3", () => sthm(@fifteen_theorem.coprime_beta_10j3()))
-  log.attempt("JACOBI_NEGK_BETA_125", () => sthm(@fifteen_theorem.jacobi_negk_beta_125()))
+  log.attempt("CONG_BETA_NEG5_125", () => {
+    sthm(@fifteen_theorem.cong_beta_neg5_125())
+  })
+  log.attempt("JACOBI_BETA_10J3", () => {
+    sthm(@fifteen_theorem.jacobi_beta_10j3())
+  })
+  log.attempt("CONG_BETA_3MOD4_125", () => {
+    sthm(@fifteen_theorem.cong_beta_3mod4_125())
+  })
+  log.attempt("COPRIME_BETA_10J3", () => {
+    sthm(@fifteen_theorem.coprime_beta_10j3())
+  })
+  log.attempt("JACOBI_NEGK_BETA_125", () => {
+    sthm(@fifteen_theorem.jacobi_negk_beta_125())
+  })
   log.attempt("QR_125", () => sthm(@fifteen_theorem.qr_125()))
   log.attempt("RESIDUE_125", () => sthm(@fifteen_theorem.residue_125()))
-  log.attempt("REGULAR_125_COPRIME10", () => sthm(@fifteen_theorem.regular_125_coprime10()))
+  log.attempt("REGULAR_125_COPRIME10", () => {
+    sthm(@fifteen_theorem.regular_125_coprime10())
+  })
   log.attempt("BINARY_DISC5", () => sthm(@fifteen_theorem.binary_disc5()))
-  log.attempt("TERNARY_DISC5_A11_1_GLOBAL", () => sthm(@fifteen_theorem.ternary_disc5_a11_1_global()))
-  log.attempt("TERNARY_DISC5_A11_1_SECOND", () => sthm(@fifteen_theorem.ternary_disc5_a11_1_second()))
-  log.attempt("REP_125_DOUBLE_OF_T", () => sthm(@fifteen_theorem.rep_125_double_of_t()))
+  log.attempt("TERNARY_DISC5_A11_1_GLOBAL", () => {
+    sthm(@fifteen_theorem.ternary_disc5_a11_1_global())
+  })
+  log.attempt("TERNARY_DISC5_A11_1_SECOND", () => {
+    sthm(@fifteen_theorem.ternary_disc5_a11_1_second())
+  })
+  log.attempt("REP_125_DOUBLE_OF_T", () => {
+    sthm(@fifteen_theorem.rep_125_double_of_t())
+  })
   log.attempt("INT_SQ_EQ_ONE", () => sthm(@fifteen_theorem.int_sq_eq_one()))
-  log.attempt("DISC5_BLOCK2_FALSE", () => sthm(@fifteen_theorem.disc5_block2_false()))
-  log.attempt("HERMITE_CUBE_DISC5", () => sthm(@fifteen_theorem.hermite_cube_disc5()))
-  log.attempt("HERMITE_DISC5_LE2", () => sthm(@fifteen_theorem.hermite_disc5_le2()))
-  log.attempt("HERMITE_DISC5_MIN2_PAIR", () => sthm(@fifteen_theorem.hermite_disc5_min2_pair()))
-  log.attempt("DISC5_MIN2_EXCLUDED", () => sthm(@fifteen_theorem.disc5_min2_excluded()))
-  log.attempt("HERMITE_DISC5_A1", () => sthm(@fifteen_theorem.hermite_disc5_a1()))
-  log.attempt("TERNARY_DISC5_SECOND", () => sthm(@fifteen_theorem.ternary_disc5_second()))
-  log.attempt("TERNARY_DISC5_DOUBLE", () => sthm(@fifteen_theorem.ternary_disc5_double()))
-  log.attempt("LEMMA_125_DOUBLE", () => sthm(@fifteen_theorem.lemma_125_double()))
+  log.attempt("DISC5_BLOCK2_FALSE", () => {
+    sthm(@fifteen_theorem.disc5_block2_false())
+  })
+  log.attempt("HERMITE_CUBE_DISC5", () => {
+    sthm(@fifteen_theorem.hermite_cube_disc5())
+  })
+  log.attempt("HERMITE_DISC5_LE2", () => {
+    sthm(@fifteen_theorem.hermite_disc5_le2())
+  })
+  log.attempt("HERMITE_DISC5_MIN2_PAIR", () => {
+    sthm(@fifteen_theorem.hermite_disc5_min2_pair())
+  })
+  log.attempt("DISC5_MIN2_EXCLUDED", () => {
+    sthm(@fifteen_theorem.disc5_min2_excluded())
+  })
+  log.attempt("HERMITE_DISC5_A1", () => {
+    sthm(@fifteen_theorem.hermite_disc5_a1())
+  })
+  log.attempt("TERNARY_DISC5_SECOND", () => {
+    sthm(@fifteen_theorem.ternary_disc5_second())
+  })
+  log.attempt("TERNARY_DISC5_DOUBLE", () => {
+    sthm(@fifteen_theorem.ternary_disc5_double())
+  })
+  log.attempt("LEMMA_125_DOUBLE", () => {
+    sthm(@fifteen_theorem.lemma_125_double())
+  })
   log.attempt("COPRIME_5_20J1", () => sthm(@fifteen_theorem.coprime_5_20j1()))
   log.attempt("JACOBI_5_20J1", () => sthm(@fifteen_theorem.jacobi_5_20j1()))
-  log.attempt("CONG_BETA_NEG5_125_DOUBLE", () => sthm(@fifteen_theorem.cong_beta_neg5_125_double()))
-  log.attempt("JACOBI_BETA_20J1", () => sthm(@fifteen_theorem.jacobi_beta_20j1()))
-  log.attempt("COPRIME_BETA_20J1", () => sthm(@fifteen_theorem.coprime_beta_20j1()))
-  log.attempt("CONG_BETA_3MOD8_125_DOUBLE", () => sthm(@fifteen_theorem.cong_beta_3mod8_125_double()))
-  log.attempt("JACOBI_K_BETA_125_DOUBLE", () => sthm(@fifteen_theorem.jacobi_k_beta_125_double()))
-  log.attempt("JACOBI_NEG8K_BETA_125_DOUBLE", () => sthm(@fifteen_theorem.jacobi_neg8k_beta_125_double()))
+  log.attempt("CONG_BETA_NEG5_125_DOUBLE", () => {
+    sthm(@fifteen_theorem.cong_beta_neg5_125_double())
+  })
+  log.attempt("JACOBI_BETA_20J1", () => {
+    sthm(@fifteen_theorem.jacobi_beta_20j1())
+  })
+  log.attempt("COPRIME_BETA_20J1", () => {
+    sthm(@fifteen_theorem.coprime_beta_20j1())
+  })
+  log.attempt("CONG_BETA_3MOD8_125_DOUBLE", () => {
+    sthm(@fifteen_theorem.cong_beta_3mod8_125_double())
+  })
+  log.attempt("JACOBI_K_BETA_125_DOUBLE", () => {
+    sthm(@fifteen_theorem.jacobi_k_beta_125_double())
+  })
+  log.attempt("JACOBI_NEG8K_BETA_125_DOUBLE", () => {
+    sthm(@fifteen_theorem.jacobi_neg8k_beta_125_double())
+  })
   log.attempt("QR_125_DOUBLE", () => sthm(@fifteen_theorem.qr_125_double()))
-  log.attempt("COPRIME_125_DOUBLE_OFFSET_A", () => sthm(@fifteen_theorem.coprime_125_double_offset_a()))
-  log.attempt("COPRIME_125_DOUBLE_OFFSET_160", () => sthm(@fifteen_theorem.coprime_125_double_offset_160()))
-  log.attempt("COPRIME_DIRICHLET_125_DOUBLE", () => sthm(@fifteen_theorem.coprime_dirichlet_125_double()))
-  log.attempt("DIRICHLET_PRIME_125_DOUBLE", () => sthm(@fifteen_theorem.dirichlet_prime_125_double()))
-  log.attempt("RESIDUE_125_DOUBLE", () => sthm(@fifteen_theorem.residue_125_double()))
-  log.attempt("REGULAR_125_DOUBLE_COPRIME5", () => sthm(@fifteen_theorem.regular_125_double_coprime5()))
-  log.attempt("LEMMA_125_T_FIVE", () => sthm(@fifteen_theorem.lemma_125_t_five()))
-  log.attempt("LEMMA_125_T_FIVE_PLUS", () => sthm(@fifteen_theorem.lemma_125_t_five_plus()))
-  log.attempt("LEMMA_125_T_FIVE_MINUS", () => sthm(@fifteen_theorem.lemma_125_t_five_minus()))
+  log.attempt("COPRIME_125_DOUBLE_OFFSET_A", () => {
+    sthm(@fifteen_theorem.coprime_125_double_offset_a())
+  })
+  log.attempt("COPRIME_125_DOUBLE_OFFSET_160", () => {
+    sthm(@fifteen_theorem.coprime_125_double_offset_160())
+  })
+  log.attempt("COPRIME_DIRICHLET_125_DOUBLE", () => {
+    sthm(@fifteen_theorem.coprime_dirichlet_125_double())
+  })
+  log.attempt("DIRICHLET_PRIME_125_DOUBLE", () => {
+    sthm(@fifteen_theorem.dirichlet_prime_125_double())
+  })
+  log.attempt("RESIDUE_125_DOUBLE", () => {
+    sthm(@fifteen_theorem.residue_125_double())
+  })
+  log.attempt("REGULAR_125_DOUBLE_COPRIME5", () => {
+    sthm(@fifteen_theorem.regular_125_double_coprime5())
+  })
+  log.attempt("LEMMA_125_T_FIVE", () => {
+    sthm(@fifteen_theorem.lemma_125_t_five())
+  })
+  log.attempt("LEMMA_125_T_FIVE_PLUS", () => {
+    sthm(@fifteen_theorem.lemma_125_t_five_plus())
+  })
+  log.attempt("LEMMA_125_T_FIVE_MINUS", () => {
+    sthm(@fifteen_theorem.lemma_125_t_five_minus())
+  })
   log.attempt("JACOBI_4_5", () => sthm(@fifteen_theorem.jacobi_4_5()))
-  log.attempt("CONG_2_MOD_5_CASE", () => sthm(@fifteen_theorem.cong_2_mod_5_case()))
-  log.attempt("CONG_3_MOD_5_CASE", () => sthm(@fifteen_theorem.cong_3_mod_5_case()))
-  log.attempt("CONG_BETA_1MOD5_125_FIVE", () => sthm(@fifteen_theorem.cong_beta_1mod5_125_five()))
-  log.attempt("CONG_BETA_4MOD5_125_FIVE", () => sthm(@fifteen_theorem.cong_beta_4mod5_125_five()))
-  log.attempt("JACOBI_BETA_5_125_FIVE_PLUS", () => sthm(@fifteen_theorem.jacobi_beta_5_125_five_plus()))
-  log.attempt("JACOBI_BETA_5_125_FIVE_MINUS", () => sthm(@fifteen_theorem.jacobi_beta_5_125_five_minus()))
-  log.attempt("JACOBI_BETA_5_125_FIVE", () => sthm(@fifteen_theorem.jacobi_beta_5_125_five()))
-  log.attempt("JACOBI_5_BETA_OF_3MOD8", () => sthm(@fifteen_theorem.jacobi_5_beta_of_3mod8()))
-  log.attempt("JACOBI_5_BETA_125_FIVE", () => sthm(@fifteen_theorem.jacobi_5_beta_125_five()))
-  log.attempt("JACOBI_NEG40_OF_3MOD8", () => sthm(@fifteen_theorem.jacobi_neg40_of_3mod8()))
-  log.attempt("JACOBI_NEG40T_BETA_125_FIVE", () => sthm(@fifteen_theorem.jacobi_neg40t_beta_125_five()))
+  log.attempt("CONG_2_MOD_5_CASE", () => {
+    sthm(@fifteen_theorem.cong_2_mod_5_case())
+  })
+  log.attempt("CONG_3_MOD_5_CASE", () => {
+    sthm(@fifteen_theorem.cong_3_mod_5_case())
+  })
+  log.attempt("CONG_BETA_1MOD5_125_FIVE", () => {
+    sthm(@fifteen_theorem.cong_beta_1mod5_125_five())
+  })
+  log.attempt("CONG_BETA_4MOD5_125_FIVE", () => {
+    sthm(@fifteen_theorem.cong_beta_4mod5_125_five())
+  })
+  log.attempt("JACOBI_BETA_5_125_FIVE_PLUS", () => {
+    sthm(@fifteen_theorem.jacobi_beta_5_125_five_plus())
+  })
+  log.attempt("JACOBI_BETA_5_125_FIVE_MINUS", () => {
+    sthm(@fifteen_theorem.jacobi_beta_5_125_five_minus())
+  })
+  log.attempt("JACOBI_BETA_5_125_FIVE", () => {
+    sthm(@fifteen_theorem.jacobi_beta_5_125_five())
+  })
+  log.attempt("JACOBI_5_BETA_OF_3MOD8", () => {
+    sthm(@fifteen_theorem.jacobi_5_beta_of_3mod8())
+  })
+  log.attempt("JACOBI_5_BETA_125_FIVE", () => {
+    sthm(@fifteen_theorem.jacobi_5_beta_125_five())
+  })
+  log.attempt("JACOBI_NEG40_OF_3MOD8", () => {
+    sthm(@fifteen_theorem.jacobi_neg40_of_3mod8())
+  })
+  log.attempt("JACOBI_NEG40T_BETA_125_FIVE", () => {
+    sthm(@fifteen_theorem.jacobi_neg40t_beta_125_five())
+  })
   log.attempt("QR_125_T_FIVE", () => sthm(@fifteen_theorem.qr_125_t_five()))
   log.attempt("COPRIME_5_2", () => sthm(@fifteen_theorem.coprime_5_2()))
   log.attempt("COPRIME_5_3", () => sthm(@fifteen_theorem.coprime_5_3()))
-  log.attempt("COPRIME_5_OF_CONG_2_OR_3", () => sthm(@fifteen_theorem.coprime_5_of_cong_2_or_3()))
-  log.attempt("NOT_DIVIDES_5_OF_CONG_2_OR_3", () => sthm(@fifteen_theorem.not_divides_5_of_cong_2_or_3()))
-  log.attempt("COPRIME_5_BETA_125_FIVE", () => sthm(@fifteen_theorem.coprime_5_beta_125_five()))
-  log.attempt("DICKSON_RESIDUE_LIFT_125_FIVE", () => sthm(@fifteen_theorem.dickson_residue_lift_125_five()))
-  log.attempt("CONG_DICKSON_RHS_3", () => sthm(@fifteen_theorem.cong_dickson_rhs_3()))
-  log.attempt("CONG_DICKSON_P_3", () => sthm(@fifteen_theorem.cong_dickson_p_3()))
-  log.attempt("CONG_DICKSON_P_2", () => sthm(@fifteen_theorem.cong_dickson_p_2()))
-  log.attempt("DICKSON_DATA_125_T_FIVE", () => sthm(@fifteen_theorem.dickson_data_125_t_five()))
-  log.attempt("DICKSON_C_125_T_FIVE_PLUS", () => sthm(@fifteen_theorem.dickson_c_125_t_five_plus()))
-  log.attempt("DICKSON_C_125_T_FIVE_MINUS", () => sthm(@fifteen_theorem.dickson_c_125_t_five_minus()))
-  log.attempt("REGULAR_T_125_FIVE_PLUS", () => sthm(@fifteen_theorem.regular_t_125_five_plus()))
-  log.attempt("REGULAR_T_125_FIVE_MINUS", () => sthm(@fifteen_theorem.regular_t_125_five_minus()))
-  log.attempt("REGULAR_T_125_FIVE", () => sthm(@fifteen_theorem.regular_t_125_five()))
-  log.attempt("CONG_1_MOD_5_CASE_125", () => sthm(@fifteen_theorem.cong_1_mod_5_case_125()))
-  log.attempt("CONG_4_MOD_5_CASE_125", () => sthm(@fifteen_theorem.cong_4_mod_5_case_125()))
-  log.attempt("CONG_BETA_3MOD5_125_G_FIVE", () => sthm(@fifteen_theorem.cong_beta_3mod5_125_g_five()))
-  log.attempt("CONG_BETA_2MOD5_125_G_FIVE", () => sthm(@fifteen_theorem.cong_beta_2mod5_125_g_five()))
+  log.attempt("COPRIME_5_OF_CONG_2_OR_3", () => {
+    sthm(@fifteen_theorem.coprime_5_of_cong_2_or_3())
+  })
+  log.attempt("NOT_DIVIDES_5_OF_CONG_2_OR_3", () => {
+    sthm(@fifteen_theorem.not_divides_5_of_cong_2_or_3())
+  })
+  log.attempt("COPRIME_5_BETA_125_FIVE", () => {
+    sthm(@fifteen_theorem.coprime_5_beta_125_five())
+  })
+  log.attempt("DICKSON_RESIDUE_LIFT_125_FIVE", () => {
+    sthm(@fifteen_theorem.dickson_residue_lift_125_five())
+  })
+  log.attempt("CONG_DICKSON_RHS_3", () => {
+    sthm(@fifteen_theorem.cong_dickson_rhs_3())
+  })
+  log.attempt("CONG_DICKSON_P_3", () => {
+    sthm(@fifteen_theorem.cong_dickson_p_3())
+  })
+  log.attempt("CONG_DICKSON_P_2", () => {
+    sthm(@fifteen_theorem.cong_dickson_p_2())
+  })
+  log.attempt("DICKSON_DATA_125_T_FIVE", () => {
+    sthm(@fifteen_theorem.dickson_data_125_t_five())
+  })
+  log.attempt("DICKSON_C_125_T_FIVE_PLUS", () => {
+    sthm(@fifteen_theorem.dickson_c_125_t_five_plus())
+  })
+  log.attempt("DICKSON_C_125_T_FIVE_MINUS", () => {
+    sthm(@fifteen_theorem.dickson_c_125_t_five_minus())
+  })
+  log.attempt("REGULAR_T_125_FIVE_PLUS", () => {
+    sthm(@fifteen_theorem.regular_t_125_five_plus())
+  })
+  log.attempt("REGULAR_T_125_FIVE_MINUS", () => {
+    sthm(@fifteen_theorem.regular_t_125_five_minus())
+  })
+  log.attempt("REGULAR_T_125_FIVE", () => {
+    sthm(@fifteen_theorem.regular_t_125_five())
+  })
+  log.attempt("CONG_1_MOD_5_CASE_125", () => {
+    sthm(@fifteen_theorem.cong_1_mod_5_case_125())
+  })
+  log.attempt("CONG_4_MOD_5_CASE_125", () => {
+    sthm(@fifteen_theorem.cong_4_mod_5_case_125())
+  })
+  log.attempt("CONG_BETA_3MOD5_125_G_FIVE", () => {
+    sthm(@fifteen_theorem.cong_beta_3mod5_125_g_five())
+  })
+  log.attempt("CONG_BETA_2MOD5_125_G_FIVE", () => {
+    sthm(@fifteen_theorem.cong_beta_2mod5_125_g_five())
+  })
   log.attempt("JACOBI_2_5", () => sthm(@fifteen_theorem.jacobi_2_5()))
-  log.attempt("JACOBI_BETA_5_125_G_FIVE_PLUS", () => sthm(@fifteen_theorem.jacobi_beta_5_125_g_five_plus()))
-  log.attempt("JACOBI_BETA_5_125_G_FIVE_MINUS", () => sthm(@fifteen_theorem.jacobi_beta_5_125_g_five_minus()))
-  log.attempt("JACOBI_BETA_5_125_G_FIVE", () => sthm(@fifteen_theorem.jacobi_beta_5_125_g_five()))
-  log.attempt("JACOBI_5_BETA_OF_3MOD8_NEG", () => sthm(@fifteen_theorem.jacobi_5_beta_of_3mod8_neg()))
-  log.attempt("JACOBI_5_BETA_125_G_FIVE", () => sthm(@fifteen_theorem.jacobi_5_beta_125_g_five()))
-  log.attempt("JACOBI_NEG80_OF_3MOD8", () => sthm(@fifteen_theorem.jacobi_neg80_of_3mod8()))
-  log.attempt("JACOBI_NEG80T_BETA_125_G_FIVE", () => sthm(@fifteen_theorem.jacobi_neg80t_beta_125_g_five()))
+  log.attempt("JACOBI_BETA_5_125_G_FIVE_PLUS", () => {
+    sthm(@fifteen_theorem.jacobi_beta_5_125_g_five_plus())
+  })
+  log.attempt("JACOBI_BETA_5_125_G_FIVE_MINUS", () => {
+    sthm(@fifteen_theorem.jacobi_beta_5_125_g_five_minus())
+  })
+  log.attempt("JACOBI_BETA_5_125_G_FIVE", () => {
+    sthm(@fifteen_theorem.jacobi_beta_5_125_g_five())
+  })
+  log.attempt("JACOBI_5_BETA_OF_3MOD8_NEG", () => {
+    sthm(@fifteen_theorem.jacobi_5_beta_of_3mod8_neg())
+  })
+  log.attempt("JACOBI_5_BETA_125_G_FIVE", () => {
+    sthm(@fifteen_theorem.jacobi_5_beta_125_g_five())
+  })
+  log.attempt("JACOBI_NEG80_OF_3MOD8", () => {
+    sthm(@fifteen_theorem.jacobi_neg80_of_3mod8())
+  })
+  log.attempt("JACOBI_NEG80T_BETA_125_G_FIVE", () => {
+    sthm(@fifteen_theorem.jacobi_neg80t_beta_125_g_five())
+  })
   log.attempt("QR_125_G_FIVE", () => sthm(@fifteen_theorem.qr_125_g_five()))
-  log.attempt("COPRIME_10_BETA_125_G_FIVE", () => sthm(@fifteen_theorem.coprime_10_beta_125_g_five()))
-  log.attempt("ODD_NUM_SQ_CONG_1_MOD8", () => sthm(@fifteen_theorem.odd_num_sq_cong_1_mod8()))
-  log.attempt("DICKSON_ODD_RESIDUE_LIFT_125_G_FIVE", () => sthm(@fifteen_theorem.dickson_odd_residue_lift_125_g_five()))
-  log.attempt("CONG_DICKSON_P_MOD8_125_G_FIVE", () => sthm(@fifteen_theorem.cong_dickson_p_mod8_125_g_five()))
-  log.attempt("CONG_DICKSON_G_RHS_3", () => sthm(@fifteen_theorem.cong_dickson_g_rhs_3()))
-  log.attempt("CONG_DICKSON_P_1_125_G_FIVE", () => sthm(@fifteen_theorem.cong_dickson_p_1_125_g_five()))
-  log.attempt("CONG_DICKSON_P_4_125_G_FIVE", () => sthm(@fifteen_theorem.cong_dickson_p_4_125_g_five()))
-  log.attempt("DICKSON_C_125_G_FIVE_PLUS", () => sthm(@fifteen_theorem.dickson_c_125_g_five_plus()))
-  log.attempt("DICKSON_C_125_G_FIVE_MINUS", () => sthm(@fifteen_theorem.dickson_c_125_g_five_minus()))
-  log.attempt("DICKSON_NORM_125_G_FIVE_PLUS", () => sthm(@fifteen_theorem.dickson_norm_125_g_five_plus()))
-  log.attempt("DICKSON_NORM_125_G_FIVE_MINUS", () => sthm(@fifteen_theorem.dickson_norm_125_g_five_minus()))
-  log.attempt("TERNARY_TYPE6_DICKSON_G_FIVE", () => sthm(@fifteen_theorem.ternary_type6_dickson_g_five()))
-  log.attempt("INT_NOT_2_DIVIDES_5_125", () => sthm(@fifteen_theorem.int_not_2_divides_5_125()))
-  log.attempt("LEMMA_125_G_FIVE_PLUS", () => sthm(@fifteen_theorem.lemma_125_g_five_plus()))
-  log.attempt("LEMMA_125_G_FIVE_MINUS", () => sthm(@fifteen_theorem.lemma_125_g_five_minus()))
-  log.attempt("DICKSON_DATA_125_G_FIVE", () => sthm(@fifteen_theorem.dickson_data_125_g_five()))
-  log.attempt("REGULAR_125_ODD_FIVE_PLUS", () => sthm(@fifteen_theorem.regular_125_odd_five_plus()))
-  log.attempt("REGULAR_125_ODD_FIVE_MINUS", () => sthm(@fifteen_theorem.regular_125_odd_five_minus()))
-  log.attempt("REGULAR_125_ODD_FIVE", () => sthm(@fifteen_theorem.regular_125_odd_five()))
-  log.attempt("INT_REPRESENTS_125_SCALE25", () => sthm(@fifteen_theorem.int_represents_125_scale25()))
+  log.attempt("COPRIME_10_BETA_125_G_FIVE", () => {
+    sthm(@fifteen_theorem.coprime_10_beta_125_g_five())
+  })
+  log.attempt("ODD_NUM_SQ_CONG_1_MOD8", () => {
+    sthm(@fifteen_theorem.odd_num_sq_cong_1_mod8())
+  })
+  log.attempt("DICKSON_ODD_RESIDUE_LIFT_125_G_FIVE", () => {
+    sthm(@fifteen_theorem.dickson_odd_residue_lift_125_g_five())
+  })
+  log.attempt("CONG_DICKSON_P_MOD8_125_G_FIVE", () => {
+    sthm(@fifteen_theorem.cong_dickson_p_mod8_125_g_five())
+  })
+  log.attempt("CONG_DICKSON_G_RHS_3", () => {
+    sthm(@fifteen_theorem.cong_dickson_g_rhs_3())
+  })
+  log.attempt("CONG_DICKSON_P_1_125_G_FIVE", () => {
+    sthm(@fifteen_theorem.cong_dickson_p_1_125_g_five())
+  })
+  log.attempt("CONG_DICKSON_P_4_125_G_FIVE", () => {
+    sthm(@fifteen_theorem.cong_dickson_p_4_125_g_five())
+  })
+  log.attempt("DICKSON_C_125_G_FIVE_PLUS", () => {
+    sthm(@fifteen_theorem.dickson_c_125_g_five_plus())
+  })
+  log.attempt("DICKSON_C_125_G_FIVE_MINUS", () => {
+    sthm(@fifteen_theorem.dickson_c_125_g_five_minus())
+  })
+  log.attempt("DICKSON_NORM_125_G_FIVE_PLUS", () => {
+    sthm(@fifteen_theorem.dickson_norm_125_g_five_plus())
+  })
+  log.attempt("DICKSON_NORM_125_G_FIVE_MINUS", () => {
+    sthm(@fifteen_theorem.dickson_norm_125_g_five_minus())
+  })
+  log.attempt("TERNARY_TYPE6_DICKSON_G_FIVE", () => {
+    sthm(@fifteen_theorem.ternary_type6_dickson_g_five())
+  })
+  log.attempt("INT_NOT_2_DIVIDES_5_125", () => {
+    sthm(@fifteen_theorem.int_not_2_divides_5_125())
+  })
+  log.attempt("LEMMA_125_G_FIVE_PLUS", () => {
+    sthm(@fifteen_theorem.lemma_125_g_five_plus())
+  })
+  log.attempt("LEMMA_125_G_FIVE_MINUS", () => {
+    sthm(@fifteen_theorem.lemma_125_g_five_minus())
+  })
+  log.attempt("DICKSON_DATA_125_G_FIVE", () => {
+    sthm(@fifteen_theorem.dickson_data_125_g_five())
+  })
+  log.attempt("REGULAR_125_ODD_FIVE_PLUS", () => {
+    sthm(@fifteen_theorem.regular_125_odd_five_plus())
+  })
+  log.attempt("REGULAR_125_ODD_FIVE_MINUS", () => {
+    sthm(@fifteen_theorem.regular_125_odd_five_minus())
+  })
+  log.attempt("REGULAR_125_ODD_FIVE", () => {
+    sthm(@fifteen_theorem.regular_125_odd_five())
+  })
+  log.attempt("INT_REPRESENTS_125_SCALE25", () => {
+    sthm(@fifteen_theorem.int_represents_125_scale25())
+  })
   log.attempt("EXP_125_SCALE25", () => sthm(@fifteen_theorem.exp_125_scale25()))
-  log.attempt("NUM_125_EXCEPTION_SCALE25", () => sthm(@fifteen_theorem.num_125_exception_scale25()))
-  log.attempt("COPRIME_10_OF_ODD_NOT5", () => sthm(@fifteen_theorem.coprime_10_of_odd_not5()))
-  log.attempt("CONG_HALF_1_MOD5", () => sthm(@fifteen_theorem.cong_half_1_mod5()))
-  log.attempt("CONG_HALF_4_MOD5", () => sthm(@fifteen_theorem.cong_half_4_mod5()))
-  log.attempt("CONG_HALF_1_OR_4_MOD5", () => sthm(@fifteen_theorem.cong_half_1_or_4_mod5()))
-  log.attempt("NUM_125_UNIT_ALLOWED", () => sthm(@fifteen_theorem.num_125_unit_allowed()))
-  log.attempt("REGULAR_125_NOT_EXCEPTION_NOT25", () => sthm(@fifteen_theorem.regular_125_not_exception_not25()))
-  log.attempt("REGULAR_125_NOT_EXCEPTION", () => sthm(@fifteen_theorem.regular_125_not_exception()))
-  log.attempt("INT_DISC7_NOT_FIRST3", () => sthm(@fifteen_theorem.int_disc7_not_first3()))
+  log.attempt("NUM_125_EXCEPTION_SCALE25", () => {
+    sthm(@fifteen_theorem.num_125_exception_scale25())
+  })
+  log.attempt("COPRIME_10_OF_ODD_NOT5", () => {
+    sthm(@fifteen_theorem.coprime_10_of_odd_not5())
+  })
+  log.attempt("CONG_HALF_1_MOD5", () => {
+    sthm(@fifteen_theorem.cong_half_1_mod5())
+  })
+  log.attempt("CONG_HALF_4_MOD5", () => {
+    sthm(@fifteen_theorem.cong_half_4_mod5())
+  })
+  log.attempt("CONG_HALF_1_OR_4_MOD5", () => {
+    sthm(@fifteen_theorem.cong_half_1_or_4_mod5())
+  })
+  log.attempt("NUM_125_UNIT_ALLOWED", () => {
+    sthm(@fifteen_theorem.num_125_unit_allowed())
+  })
+  log.attempt("REGULAR_125_NOT_EXCEPTION_NOT25", () => {
+    sthm(@fifteen_theorem.regular_125_not_exception_not25())
+  })
+  log.attempt("REGULAR_125_NOT_EXCEPTION", () => {
+    sthm(@fifteen_theorem.regular_125_not_exception())
+  })
+  log.attempt("INT_DISC7_NOT_FIRST3", () => {
+    sthm(@fifteen_theorem.int_disc7_not_first3())
+  })
   log.attempt("BINARY_DISC7", () => sthm(@fifteen_theorem.binary_disc7()))
   log.attempt("ternary_type1", () => sthm(@fifteen_theorem.ternary_type1()))
   log.attempt("CONJ_TYPE1", () => sthm(@fifteen_theorem.conj_type1()))
-  log.attempt("TERNARY_TYPE1_OF_CHARACTERISTIC", () => sthm(@fifteen_theorem.ternary_type1_of_characteristic()))
-  log.attempt("HERMITE_CUBE_DISC7", () => sthm(@fifteen_theorem.hermite_cube_disc7()))
-  log.attempt("HERMITE_DISC7_LE2", () => sthm(@fifteen_theorem.hermite_disc7_le2()))
-  log.attempt("TERNARY_DISC7_A11_1", () => sthm(@fifteen_theorem.ternary_disc7_a11_1()))
-  log.attempt("HERMITE_DISC7_MIN2_PAIR", () => sthm(@fifteen_theorem.hermite_disc7_min2_pair()))
-  log.attempt("INT_ODD_DET_KERNEL_MOD2", () => sthm(@fifteen_theorem.int_odd_det_kernel_mod2()))
-  log.attempt("INT_CHARACTERISTIC_VALUES_CONG8", () => sthm(@fifteen_theorem.int_characteristic_values_cong8()))
-  log.attempt("INT_DISC7_BLOCK_CHARACTERISTIC", () => sthm(@fifteen_theorem.int_disc7_block_characteristic()))
-  log.attempt("INT_DISC7_BLOCK_ODDITY5", () => sthm(@fifteen_theorem.int_disc7_block_oddity5()))
-  log.attempt("DISC7_BLOCK2_TYPE1_FALSE", () => sthm(@fifteen_theorem.disc7_block2_type1_false()))
-  log.attempt("DISC7_MIN2_EXCLUDED", () => sthm(@fifteen_theorem.disc7_min2_excluded()))
-  log.attempt("TERNARY_DISC7_TYPE1", () => sthm(@fifteen_theorem.ternary_disc7_type1()))
-  log.attempt("DIAG7_TO_CROSS124_YZ", () => sthm(@fifteen_theorem.diag7_to_cross124_yz()))
-  log.attempt("DIAG7_TO_CROSS124_XZ", () => sthm(@fifteen_theorem.diag7_to_cross124_xz()))
-  log.attempt("DIAG7_EEO_NOT_MOD4_01", () => sthm(@fifteen_theorem.diag7_eeo_not_mod4_01()))
-  log.attempt("DIAG7_OOE_NOT_MOD4_01", () => sthm(@fifteen_theorem.diag7_ooe_not_mod4_01()))
-  log.attempt("DIAG7_MOD4_PARITY", () => sthm(@fifteen_theorem.diag7_mod4_parity()))
-  log.attempt("REPR_CROSS124_OF_DIAG7_MOD4", () => sthm(@fifteen_theorem.repr_cross124_of_diag7_mod4()))
-  log.attempt("CROSS124_TO_DIAG7_YZ", () => sthm(@fifteen_theorem.cross124_to_diag7_yz()))
-  log.attempt("CROSS124_TO_DIAG7_Y_EVEN", () => sthm(@fifteen_theorem.cross124_to_diag7_y_even()))
-  log.attempt("CROSS124_EOE_NOT_MOD4_01", () => sthm(@fifteen_theorem.cross124_eoe_not_mod4_01()))
-  log.attempt("CROSS124_OOE_NOT_MOD4_01", () => sthm(@fifteen_theorem.cross124_ooe_not_mod4_01()))
-  log.attempt("REPR_DIAG7_OF_CROSS124_MOD4", () => sthm(@fifteen_theorem.repr_diag7_of_cross124_mod4()))
-  log.attempt("INT_ODD_SQUARE_8_WITNESS", () => sthm(@fifteen_theorem.int_odd_square_8_witness()))
-  log.attempt("INT_DISC7_DIRICHLET_A11_PARITY", () => sthm(@fifteen_theorem.int_disc7_dirichlet_a11_parity()))
-  log.attempt("DISC7_DIRICHLET_TYPE1", () => sthm(@fifteen_theorem.disc7_dirichlet_type1()))
-  log.attempt("DISC7_DIRICHLET_GENUS_REPRESENTS", () => sthm(@fifteen_theorem.disc7_dirichlet_genus_represents()))
-  log.attempt("CONG_DISC7_OFFSET_7", () => sthm(@fifteen_theorem.cong_disc7_offset_7()))
-  log.attempt("COPRIME_DISC7_OFFSET_N", () => sthm(@fifteen_theorem.coprime_disc7_offset_n()))
-  log.attempt("COPRIME_DISC7_OFFSET_112", () => sthm(@fifteen_theorem.coprime_disc7_offset_112()))
-  log.attempt("COPRIME_DIRICHLET_DISC7", () => sthm(@fifteen_theorem.coprime_dirichlet_disc7()))
-  log.attempt("DIRICHLET_PRIME_DISC7", () => sthm(@fifteen_theorem.dirichlet_prime_disc7()))
+  log.attempt("TERNARY_TYPE1_OF_CHARACTERISTIC", () => {
+    sthm(@fifteen_theorem.ternary_type1_of_characteristic())
+  })
+  log.attempt("HERMITE_CUBE_DISC7", () => {
+    sthm(@fifteen_theorem.hermite_cube_disc7())
+  })
+  log.attempt("HERMITE_DISC7_LE2", () => {
+    sthm(@fifteen_theorem.hermite_disc7_le2())
+  })
+  log.attempt("TERNARY_DISC7_A11_1", () => {
+    sthm(@fifteen_theorem.ternary_disc7_a11_1())
+  })
+  log.attempt("HERMITE_DISC7_MIN2_PAIR", () => {
+    sthm(@fifteen_theorem.hermite_disc7_min2_pair())
+  })
+  log.attempt("INT_ODD_DET_KERNEL_MOD2", () => {
+    sthm(@fifteen_theorem.int_odd_det_kernel_mod2())
+  })
+  log.attempt("INT_CHARACTERISTIC_VALUES_CONG8", () => {
+    sthm(@fifteen_theorem.int_characteristic_values_cong8())
+  })
+  log.attempt("INT_DISC7_BLOCK_CHARACTERISTIC", () => {
+    sthm(@fifteen_theorem.int_disc7_block_characteristic())
+  })
+  log.attempt("INT_DISC7_BLOCK_ODDITY5", () => {
+    sthm(@fifteen_theorem.int_disc7_block_oddity5())
+  })
+  log.attempt("DISC7_BLOCK2_TYPE1_FALSE", () => {
+    sthm(@fifteen_theorem.disc7_block2_type1_false())
+  })
+  log.attempt("DISC7_MIN2_EXCLUDED", () => {
+    sthm(@fifteen_theorem.disc7_min2_excluded())
+  })
+  log.attempt("TERNARY_DISC7_TYPE1", () => {
+    sthm(@fifteen_theorem.ternary_disc7_type1())
+  })
+  log.attempt("DIAG7_TO_CROSS124_YZ", () => {
+    sthm(@fifteen_theorem.diag7_to_cross124_yz())
+  })
+  log.attempt("DIAG7_TO_CROSS124_XZ", () => {
+    sthm(@fifteen_theorem.diag7_to_cross124_xz())
+  })
+  log.attempt("DIAG7_EEO_NOT_MOD4_01", () => {
+    sthm(@fifteen_theorem.diag7_eeo_not_mod4_01())
+  })
+  log.attempt("DIAG7_OOE_NOT_MOD4_01", () => {
+    sthm(@fifteen_theorem.diag7_ooe_not_mod4_01())
+  })
+  log.attempt("DIAG7_MOD4_PARITY", () => {
+    sthm(@fifteen_theorem.diag7_mod4_parity())
+  })
+  log.attempt("REPR_CROSS124_OF_DIAG7_MOD4", () => {
+    sthm(@fifteen_theorem.repr_cross124_of_diag7_mod4())
+  })
+  log.attempt("CROSS124_TO_DIAG7_YZ", () => {
+    sthm(@fifteen_theorem.cross124_to_diag7_yz())
+  })
+  log.attempt("CROSS124_TO_DIAG7_Y_EVEN", () => {
+    sthm(@fifteen_theorem.cross124_to_diag7_y_even())
+  })
+  log.attempt("CROSS124_EOE_NOT_MOD4_01", () => {
+    sthm(@fifteen_theorem.cross124_eoe_not_mod4_01())
+  })
+  log.attempt("CROSS124_OOE_NOT_MOD4_01", () => {
+    sthm(@fifteen_theorem.cross124_ooe_not_mod4_01())
+  })
+  log.attempt("REPR_DIAG7_OF_CROSS124_MOD4", () => {
+    sthm(@fifteen_theorem.repr_diag7_of_cross124_mod4())
+  })
+  log.attempt("INT_ODD_SQUARE_8_WITNESS", () => {
+    sthm(@fifteen_theorem.int_odd_square_8_witness())
+  })
+  log.attempt("INT_DISC7_DIRICHLET_A11_PARITY", () => {
+    sthm(@fifteen_theorem.int_disc7_dirichlet_a11_parity())
+  })
+  log.attempt("DISC7_DIRICHLET_TYPE1", () => {
+    sthm(@fifteen_theorem.disc7_dirichlet_type1())
+  })
+  log.attempt("DISC7_DIRICHLET_GENUS_REPRESENTS", () => {
+    sthm(@fifteen_theorem.disc7_dirichlet_genus_represents())
+  })
+  log.attempt("CONG_DISC7_OFFSET_7", () => {
+    sthm(@fifteen_theorem.cong_disc7_offset_7())
+  })
+  log.attempt("COPRIME_DISC7_OFFSET_N", () => {
+    sthm(@fifteen_theorem.coprime_disc7_offset_n())
+  })
+  log.attempt("COPRIME_DISC7_OFFSET_112", () => {
+    sthm(@fifteen_theorem.coprime_disc7_offset_112())
+  })
+  log.attempt("COPRIME_DIRICHLET_DISC7", () => {
+    sthm(@fifteen_theorem.coprime_dirichlet_disc7())
+  })
+  log.attempt("DIRICHLET_PRIME_DISC7", () => {
+    sthm(@fifteen_theorem.dirichlet_prime_disc7())
+  })
   log.attempt("COPRIME_7_14J1", () => sthm(@fifteen_theorem.coprime_7_14j1()))
   log.attempt("CONG_14J1_7", () => sthm(@fifteen_theorem.cong_14j1_7()))
   log.attempt("CONG_NEG7_14J1", () => sthm(@fifteen_theorem.cong_neg7_14j1()))
   log.attempt("JACOBI_7_14J1", () => sthm(@fifteen_theorem.jacobi_7_14j1()))
-  log.attempt("JACOBI_NEG7_14J1", () => sthm(@fifteen_theorem.jacobi_neg7_14j1()))
-  log.attempt("CONG_P_1MOD8_DISC7", () => sthm(@fifteen_theorem.cong_p_1mod8_disc7()))
-  log.attempt("JACOBI_ONE_IMP_COPRIME", () => sthm(@fifteen_theorem.jacobi_one_imp_coprime()))
+  log.attempt("JACOBI_NEG7_14J1", () => {
+    sthm(@fifteen_theorem.jacobi_neg7_14j1())
+  })
+  log.attempt("CONG_P_1MOD8_DISC7", () => {
+    sthm(@fifteen_theorem.cong_p_1mod8_disc7())
+  })
+  log.attempt("JACOBI_ONE_IMP_COPRIME", () => {
+    sthm(@fifteen_theorem.jacobi_one_imp_coprime())
+  })
   log.attempt("QR_DISC7", () => sthm(@fifteen_theorem.qr_disc7()))
   log.attempt("RESIDUE_DISC7", () => sthm(@fifteen_theorem.residue_disc7()))
-  log.attempt("DISC7_GENUS_COPRIME7", () => sthm(@fifteen_theorem.disc7_genus_coprime7()))
+  log.attempt("DISC7_GENUS_COPRIME7", () => {
+    sthm(@fifteen_theorem.disc7_genus_coprime7())
+  })
   log.attempt("DISC7_ODD_TYPE1", () => sthm(@fifteen_theorem.disc7_odd_type1()))
-  log.attempt("DISC7_EVEN_TYPE1", () => sthm(@fifteen_theorem.disc7_even_type1()))
-  log.attempt("DISC7_MATRIX_GENUS_REPRESENTS", () => sthm(@fifteen_theorem.disc7_matrix_genus_represents()))
-  log.attempt("CONG_1_MOD_7_CASE_DISC7", () => sthm(@fifteen_theorem.cong_1_mod_7_case_disc7()))
-  log.attempt("CONG_2_MOD_7_CASE_DISC7", () => sthm(@fifteen_theorem.cong_2_mod_7_case_disc7()))
-  log.attempt("CONG_4_MOD_7_CASE_DISC7", () => sthm(@fifteen_theorem.cong_4_mod_7_case_disc7()))
-  log.attempt("DISC7_SQUARECLASS_OFFSET", () => sthm(@fifteen_theorem.disc7_squareclass_offset()))
-  log.attempt("DIRICHLET_PRIME_DISC7_MULTIPLE", () => sthm(@fifteen_theorem.dirichlet_prime_disc7_multiple()))
+  log.attempt("DISC7_EVEN_TYPE1", () => {
+    sthm(@fifteen_theorem.disc7_even_type1())
+  })
+  log.attempt("DISC7_MATRIX_GENUS_REPRESENTS", () => {
+    sthm(@fifteen_theorem.disc7_matrix_genus_represents())
+  })
+  log.attempt("CONG_1_MOD_7_CASE_DISC7", () => {
+    sthm(@fifteen_theorem.cong_1_mod_7_case_disc7())
+  })
+  log.attempt("CONG_2_MOD_7_CASE_DISC7", () => {
+    sthm(@fifteen_theorem.cong_2_mod_7_case_disc7())
+  })
+  log.attempt("CONG_4_MOD_7_CASE_DISC7", () => {
+    sthm(@fifteen_theorem.cong_4_mod_7_case_disc7())
+  })
+  log.attempt("DISC7_SQUARECLASS_OFFSET", () => {
+    sthm(@fifteen_theorem.disc7_squareclass_offset())
+  })
+  log.attempt("DIRICHLET_PRIME_DISC7_MULTIPLE", () => {
+    sthm(@fifteen_theorem.dirichlet_prime_disc7_multiple())
+  })
   log.attempt("JACOBI_2_7", () => sthm(@fifteen_theorem.jacobi_2_7()))
   log.attempt("JACOBI_4_7", () => sthm(@fifteen_theorem.jacobi_4_7()))
-  log.attempt("JACOBI_DISC7_SQUARECLASS", () => sthm(@fifteen_theorem.jacobi_disc7_squareclass()))
-  log.attempt("CONG_HALF_1_MOD7", () => sthm(@fifteen_theorem.cong_half_1_mod7()))
-  log.attempt("CONG_HALF_2_MOD7", () => sthm(@fifteen_theorem.cong_half_2_mod7()))
-  log.attempt("CONG_HALF_4_MOD7", () => sthm(@fifteen_theorem.cong_half_4_mod7()))
-  log.attempt("DISC7_ODDPART_SQUARECLASS", () => sthm(@fifteen_theorem.disc7_oddpart_squareclass()))
-  log.attempt("JACOBI_7_ODD_SQUARECLASS", () => sthm(@fifteen_theorem.jacobi_7_odd_squareclass()))
-  log.attempt("JACOBI_P_ODDPART_DISC7", () => sthm(@fifteen_theorem.jacobi_p_oddpart_disc7()))
-  log.attempt("QR_DISC7_MULTIPLE_CORE", () => sthm(@fifteen_theorem.qr_disc7_multiple_core()))
-  log.attempt("RESIDUE_DISC7_MULTIPLE_CORE", () => sthm(@fifteen_theorem.residue_disc7_multiple_core()))
-  log.attempt("DISC7_GENUS_REPRESENTS_7_CORE", () => sthm(@fifteen_theorem.disc7_genus_represents_7_core()))
-  log.attempt("DISC7_GENUS_REP_MUL4", () => sthm(@fifteen_theorem.disc7_genus_rep_mul4()))
-  log.attempt("CONG_QUARTER_1_MOD7", () => sthm(@fifteen_theorem.cong_quarter_1_mod7()))
-  log.attempt("CONG_QUARTER_2_MOD7", () => sthm(@fifteen_theorem.cong_quarter_2_mod7()))
-  log.attempt("CONG_QUARTER_4_MOD7", () => sthm(@fifteen_theorem.cong_quarter_4_mod7()))
-  log.attempt("DISC7_QUARTER_SQUARECLASS", () => sthm(@fifteen_theorem.disc7_quarter_squareclass()))
-  log.attempt("DISC7_ODDPART_NOT_DIV4", () => sthm(@fifteen_theorem.disc7_oddpart_not_div4()))
-  log.attempt("DISC7_GENUS_REPRESENTS_7_SQUARECLASS", () => sthm(@fifteen_theorem.disc7_genus_represents_7_squareclass()))
+  log.attempt("JACOBI_DISC7_SQUARECLASS", () => {
+    sthm(@fifteen_theorem.jacobi_disc7_squareclass())
+  })
+  log.attempt("CONG_HALF_1_MOD7", () => {
+    sthm(@fifteen_theorem.cong_half_1_mod7())
+  })
+  log.attempt("CONG_HALF_2_MOD7", () => {
+    sthm(@fifteen_theorem.cong_half_2_mod7())
+  })
+  log.attempt("CONG_HALF_4_MOD7", () => {
+    sthm(@fifteen_theorem.cong_half_4_mod7())
+  })
+  log.attempt("DISC7_ODDPART_SQUARECLASS", () => {
+    sthm(@fifteen_theorem.disc7_oddpart_squareclass())
+  })
+  log.attempt("JACOBI_7_ODD_SQUARECLASS", () => {
+    sthm(@fifteen_theorem.jacobi_7_odd_squareclass())
+  })
+  log.attempt("JACOBI_P_ODDPART_DISC7", () => {
+    sthm(@fifteen_theorem.jacobi_p_oddpart_disc7())
+  })
+  log.attempt("QR_DISC7_MULTIPLE_CORE", () => {
+    sthm(@fifteen_theorem.qr_disc7_multiple_core())
+  })
+  log.attempt("RESIDUE_DISC7_MULTIPLE_CORE", () => {
+    sthm(@fifteen_theorem.residue_disc7_multiple_core())
+  })
+  log.attempt("DISC7_GENUS_REPRESENTS_7_CORE", () => {
+    sthm(@fifteen_theorem.disc7_genus_represents_7_core())
+  })
+  log.attempt("DISC7_GENUS_REP_MUL4", () => {
+    sthm(@fifteen_theorem.disc7_genus_rep_mul4())
+  })
+  log.attempt("CONG_QUARTER_1_MOD7", () => {
+    sthm(@fifteen_theorem.cong_quarter_1_mod7())
+  })
+  log.attempt("CONG_QUARTER_2_MOD7", () => {
+    sthm(@fifteen_theorem.cong_quarter_2_mod7())
+  })
+  log.attempt("CONG_QUARTER_4_MOD7", () => {
+    sthm(@fifteen_theorem.cong_quarter_4_mod7())
+  })
+  log.attempt("DISC7_QUARTER_SQUARECLASS", () => {
+    sthm(@fifteen_theorem.disc7_quarter_squareclass())
+  })
+  log.attempt("DISC7_ODDPART_NOT_DIV4", () => {
+    sthm(@fifteen_theorem.disc7_oddpart_not_div4())
+  })
+  log.attempt("DISC7_GENUS_REPRESENTS_7_SQUARECLASS", () => {
+    sthm(@fifteen_theorem.disc7_genus_represents_7_squareclass())
+  })
   log.attempt("disc7_exception", () => sthm(@fifteen_theorem.disc7_exception()))
-  log.attempt("DISC7_EXCEPTION_BASE", () => sthm(@fifteen_theorem.disc7_exception_base()))
-  log.attempt("DISC7_EXCEPTION_MUL49", () => sthm(@fifteen_theorem.disc7_exception_mul49()))
-  log.attempt("DISC7_DESCENT_NOT_EXCEPTION", () => sthm(@fifteen_theorem.disc7_descent_not_exception()))
-  log.attempt("DISC7_GENUS_REP_MUL49", () => sthm(@fifteen_theorem.disc7_genus_rep_mul49()))
+  log.attempt("DISC7_EXCEPTION_BASE", () => {
+    sthm(@fifteen_theorem.disc7_exception_base())
+  })
+  log.attempt("DISC7_EXCEPTION_MUL49", () => {
+    sthm(@fifteen_theorem.disc7_exception_mul49())
+  })
+  log.attempt("DISC7_DESCENT_NOT_EXCEPTION", () => {
+    sthm(@fifteen_theorem.disc7_descent_not_exception())
+  })
+  log.attempt("DISC7_GENUS_REP_MUL49", () => {
+    sthm(@fifteen_theorem.disc7_genus_rep_mul49())
+  })
   log.attempt("DIV49_LESS", () => sthm(@fifteen_theorem.div49_less()))
   log.attempt("DIV49_POS", () => sthm(@fifteen_theorem.div49_pos()))
-  log.attempt("DISC7_GENUS_REP_DESCEND49", () => sthm(@fifteen_theorem.disc7_genus_rep_descend49()))
-  log.attempt("MOD7_SQUARECLASS_DISC7", () => sthm(@fifteen_theorem.mod7_squareclass_disc7()))
-  log.attempt("MOD7_ZERO_DISC7_DIV49", () => sthm(@fifteen_theorem.mod7_zero_disc7_div49()))
-  log.attempt("DISC7_GENUS_REGULAR", () => sthm(@fifteen_theorem.disc7_genus_regular()))
-  log.attempt("DISC7_MOD4_WITNESS", () => sthm(@fifteen_theorem.disc7_mod4_witness()))
-  log.attempt("DISC7_BOTH_REGULAR_MOD4", () => sthm(@fifteen_theorem.disc7_both_regular_mod4()))
-  log.attempt("DIAG7_TO_117_DOUBLE", () => sthm(@fifteen_theorem.diag7_to_117_double()))
-  log.attempt("INT_117_PAIR_TO_127", () => sthm(@fifteen_theorem.int_117_pair_to_127()))
-  log.attempt("INT_117_BAD_REM3", () => sthm(@fifteen_theorem.int_117_bad_rem3()))
-  log.attempt("REPR_127_OF_117_MOD3", () => sthm(@fifteen_theorem.repr_127_of_117_mod3()))
-  log.attempt("INT_127_DOUBLE_PARITY", () => sthm(@fifteen_theorem.int_127_double_parity()))
-  log.attempt("REPR_CROSS124_OF_127_DOUBLE", () => sthm(@fifteen_theorem.repr_cross124_of_127_double()))
-  log.attempt("DISC7_DOUBLE_MOD3_WITNESS", () => sthm(@fifteen_theorem.disc7_double_mod3_witness()))
-  log.attempt("DISC7_CROSS124_REGULAR_MOD3", () => sthm(@fifteen_theorem.disc7_cross124_regular_mod3()))
-  log.attempt("NUM_CROSS124_GOOD_RESIDUES", () => sthm(@fifteen_theorem.num_cross124_good_residues()))
-  log.attempt("DISC7_CROSS124_REGULAR", () => sthm(@fifteen_theorem.disc7_cross124_regular()))
-  log.attempt("IQ_125_CHILD_REP_OF_NUM", () => sthm(@fifteen_theorem.iq_125_child_rep_of_num()))
-  log.attempt("IQ_UNIVERSAL_OF_125_CHILD_ALMOST15", () => sthm(@fifteen_theorem.iq_universal_of_125_child_almost15()))
-  log.attempt("INT_ALMOST_UNIVERSAL_DIAG125", () => sthm(@fifteen_theorem.int_almost_universal_diag125()))
-  log.attempt("INT_ALMOST_UNIVERSAL_RC1_125", () => sthm(@fifteen_theorem.int_almost_universal_rc1_125()))
-  log.attempt("INT_ALMOST_UNIVERSAL_RC2_125", () => sthm(@fifteen_theorem.int_almost_universal_rc2_125()))
-  log.attempt("INT_ALMOST_UNIVERSAL_RB1_125", () => sthm(@fifteen_theorem.int_almost_universal_rb1_125()))
-  log.attempt("INT_ALMOST_UNIVERSAL_RB1_RC1_125", () => sthm(@fifteen_theorem.int_almost_universal_rb1_rc1_125()))
-  log.attempt("INT_ALMOST_UNIVERSAL_RB1_RC2_125", () => sthm(@fifteen_theorem.int_almost_universal_rb1_rc2_125()))
-  log.attempt("IQ_UNIVERSAL_OF_DIAG125_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_diag125_child()))
-  log.attempt("IQ_UNIVERSAL_OF_RC1_125_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_rc1_125_child()))
-  log.attempt("IQ_UNIVERSAL_OF_RC2_125_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_rc2_125_child()))
-  log.attempt("IQ_UNIVERSAL_OF_RB1_125_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_rb1_125_child()))
-  log.attempt("IQ_UNIVERSAL_OF_RB1_RC1_125_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_rb1_rc1_125_child()))
-  log.attempt("IQ_UNIVERSAL_OF_RB1_RC2_125_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_rb1_rc2_125_child()))
-  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_125", () => sthm(@fifteen_theorem.iq_universal_of_embeds_125()))
+  log.attempt("DISC7_GENUS_REP_DESCEND49", () => {
+    sthm(@fifteen_theorem.disc7_genus_rep_descend49())
+  })
+  log.attempt("MOD7_SQUARECLASS_DISC7", () => {
+    sthm(@fifteen_theorem.mod7_squareclass_disc7())
+  })
+  log.attempt("MOD7_ZERO_DISC7_DIV49", () => {
+    sthm(@fifteen_theorem.mod7_zero_disc7_div49())
+  })
+  log.attempt("DISC7_GENUS_REGULAR", () => {
+    sthm(@fifteen_theorem.disc7_genus_regular())
+  })
+  log.attempt("DISC7_MOD4_WITNESS", () => {
+    sthm(@fifteen_theorem.disc7_mod4_witness())
+  })
+  log.attempt("DISC7_BOTH_REGULAR_MOD4", () => {
+    sthm(@fifteen_theorem.disc7_both_regular_mod4())
+  })
+  log.attempt("DIAG7_TO_117_DOUBLE", () => {
+    sthm(@fifteen_theorem.diag7_to_117_double())
+  })
+  log.attempt("INT_117_PAIR_TO_127", () => {
+    sthm(@fifteen_theorem.int_117_pair_to_127())
+  })
+  log.attempt("INT_117_BAD_REM3", () => {
+    sthm(@fifteen_theorem.int_117_bad_rem3())
+  })
+  log.attempt("REPR_127_OF_117_MOD3", () => {
+    sthm(@fifteen_theorem.repr_127_of_117_mod3())
+  })
+  log.attempt("INT_127_DOUBLE_PARITY", () => {
+    sthm(@fifteen_theorem.int_127_double_parity())
+  })
+  log.attempt("REPR_CROSS124_OF_127_DOUBLE", () => {
+    sthm(@fifteen_theorem.repr_cross124_of_127_double())
+  })
+  log.attempt("DISC7_DOUBLE_MOD3_WITNESS", () => {
+    sthm(@fifteen_theorem.disc7_double_mod3_witness())
+  })
+  log.attempt("DISC7_CROSS124_REGULAR_MOD3", () => {
+    sthm(@fifteen_theorem.disc7_cross124_regular_mod3())
+  })
+  log.attempt("NUM_CROSS124_GOOD_RESIDUES", () => {
+    sthm(@fifteen_theorem.num_cross124_good_residues())
+  })
+  log.attempt("DISC7_CROSS124_REGULAR", () => {
+    sthm(@fifteen_theorem.disc7_cross124_regular())
+  })
+  log.attempt("IQ_125_CHILD_REP_OF_NUM", () => {
+    sthm(@fifteen_theorem.iq_125_child_rep_of_num())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_125_CHILD_ALMOST15", () => {
+    sthm(@fifteen_theorem.iq_universal_of_125_child_almost15())
+  })
+  log.attempt("INT_ALMOST_UNIVERSAL_DIAG125", () => {
+    sthm(@fifteen_theorem.int_almost_universal_diag125())
+  })
+  log.attempt("INT_ALMOST_UNIVERSAL_RC1_125", () => {
+    sthm(@fifteen_theorem.int_almost_universal_rc1_125())
+  })
+  log.attempt("INT_ALMOST_UNIVERSAL_RC2_125", () => {
+    sthm(@fifteen_theorem.int_almost_universal_rc2_125())
+  })
+  log.attempt("INT_ALMOST_UNIVERSAL_RB1_125", () => {
+    sthm(@fifteen_theorem.int_almost_universal_rb1_125())
+  })
+  log.attempt("INT_ALMOST_UNIVERSAL_RB1_RC1_125", () => {
+    sthm(@fifteen_theorem.int_almost_universal_rb1_rc1_125())
+  })
+  log.attempt("INT_ALMOST_UNIVERSAL_RB1_RC2_125", () => {
+    sthm(@fifteen_theorem.int_almost_universal_rb1_rc2_125())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_DIAG125_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_diag125_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_RC1_125_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_rc1_125_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_RC2_125_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_rc2_125_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_RB1_125_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_rb1_125_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_RB1_RC1_125_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_rb1_rc1_125_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_RB1_RC2_125_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_rb1_rc2_125_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_125", () => {
+    sthm(@fifteen_theorem.iq_universal_of_embeds_125())
+  })
   log.attempt("cross125_det", () => sthm(@fifteen_theorem.cross125_det()))
-  log.attempt("INT_CROSS125_REMAINDER", () => sthm(@fifteen_theorem.int_cross125_remainder()))
-  log.attempt("iqclear_cross125", () => sthm(@fifteen_theorem.iqclear_cross125()))
-  log.attempt("IQ_EMBEDS_CLEAR_CROSS125", () => sthm(@fifteen_theorem.iq_embeds_clear_cross125()))
-  log.attempt("IQ_CROSS125_REDUCED_REPRESENTS_7", () => sthm(@fifteen_theorem.iq_cross125_reduced_represents_7()))
+  log.attempt("INT_CROSS125_REMAINDER", () => {
+    sthm(@fifteen_theorem.int_cross125_remainder())
+  })
+  log.attempt("iqclear_cross125", () => {
+    sthm(@fifteen_theorem.iqclear_cross125())
+  })
+  log.attempt("IQ_EMBEDS_CLEAR_CROSS125", () => {
+    sthm(@fifteen_theorem.iq_embeds_clear_cross125())
+  })
+  log.attempt("IQ_CROSS125_REDUCED_REPRESENTS_7", () => {
+    sthm(@fifteen_theorem.iq_cross125_reduced_represents_7())
+  })
   log.attempt("iqflip_cross125", () => sthm(@fifteen_theorem.iqflip_cross125()))
-  log.attempt("IQ_EMBEDS_FLIP_CROSS125", () => sthm(@fifteen_theorem.iq_embeds_flip_cross125()))
-  log.attempt("IQ_REPRESENTS_FLIP_CROSS125", () => sthm(@fifteen_theorem.iq_represents_flip_cross125()))
-  log.attempt("IQ_EMBEDS_REPRESENTS_FLIP_CROSS125", () => sthm(@fifteen_theorem.iq_embeds_represents_flip_cross125()))
-  log.attempt("IQ_FLIP_CROSS125_02", () => sthm(@fifteen_theorem.iq_flip_cross125_02()))
-  log.attempt("IQ_FLIP_CROSS125_NEG11", () => sthm(@fifteen_theorem.iq_flip_cross125_neg11()))
-  log.attempt("IQ_FLIP_CROSS125_01", () => sthm(@fifteen_theorem.iq_flip_cross125_01()))
-  log.attempt("IQ_FLIP_CROSS125_NEG10", () => sthm(@fifteen_theorem.iq_flip_cross125_neg10()))
-  log.attempt("IQ_EMBEDS_QUATERNARY_CROSS125_RAW", () => sthm(@fifteen_theorem.iq_embeds_quaternary_cross125_raw()))
-  log.attempt("IQ_EMBEDS_QUATERNARY_CROSS125", () => sthm(@fifteen_theorem.iq_embeds_quaternary_cross125()))
-  log.attempt("INT_CROSS125_CHILD_DET_IDENTITY", () => sthm(@fifteen_theorem.int_cross125_child_det_identity()))
-  log.attempt("INT_THREE_SQUARES_7MOD8_CORE", () => sthm(@fifteen_theorem.int_three_squares_7mod8_core()))
-  log.attempt("INT_THREE_SQUARES_NOT_7MOD8", () => sthm(@fifteen_theorem.int_three_squares_not_7mod8()))
-  log.attempt("INT_CROSS125_NOT_7", () => sthm(@fifteen_theorem.int_cross125_not_7()))
-  log.attempt("IQ_CROSS125_DET_NONZERO_OF_REPRESENTS_7", () => sthm(@fifteen_theorem.iq_cross125_det_nonzero_of_represents_7()))
-  log.attempt("IQ_CROSS125_DET_NOT_DIV8_OF_REPRESENTS_7", () => sthm(@fifteen_theorem.iq_cross125_det_not_div8_of_represents_7()))
-  log.attempt("INT_CROSS125_ORTHOGONAL_VALUE", () => sthm(@fifteen_theorem.int_cross125_orthogonal_value()))
-  log.attempt("IQ_CROSS125_DET_NONNEG", () => sthm(@fifteen_theorem.iq_cross125_det_nonneg()))
-  log.attempt("IQ_CROSS125_DET_POSITIVE", () => sthm(@fifteen_theorem.iq_cross125_det_positive()))
-  log.attempt("IQ_CROSS125_DET_LE_63", () => sthm(@fifteen_theorem.iq_cross125_det_le_63()))
-  log.attempt("INT_CROSS125_1_NEG1_8_NOT_7", () => sthm(@fifteen_theorem.int_cross125_1_neg1_8_not_7()))
-  log.attempt("IQ_CROSS125_1_NEG1_8_NOT_REPRESENTS_7", () => sthm(@fifteen_theorem.iq_cross125_1_neg1_8_not_represents_7()))
-  log.attempt("IQ_CROSS125_DET_CONSTRAINTS", () => sthm(@fifteen_theorem.iq_cross125_det_constraints()))
-  log.attempt("IQ_CROSS125_00_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_cross125_00_parameter_cases()))
-  log.attempt("IQ_CROSS125_10_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_cross125_10_parameter_cases()))
-  log.attempt("IQ_CROSS125_0_NEG1_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_cross125_0_neg1_parameter_cases()))
-  log.attempt("IQ_CROSS125_1_NEG1_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_cross125_1_neg1_parameter_cases()))
-  log.attempt("IQ_CROSS125_0_NEG2_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_cross125_0_neg2_parameter_cases()))
-  log.attempt("INT_CROSS125_CHILD_SHIFT9", () => sthm(@fifteen_theorem.int_cross125_child_shift9()))
-  log.attempt("INT_REPRESENTS_CROSS125_CHILD_SHIFT9", () => sthm(@fifteen_theorem.int_represents_cross125_child_shift9()))
-  log.attempt("INT_REPRESENTS_CROSS125_CHILD_SCALE4", () => sthm(@fifteen_theorem.int_represents_cross125_child_scale4()))
-  log.attempt("cross125_child_rep", () => sthm(@fifteen_theorem.cross125_child_rep()))
-  log.attempt("CROSS125_CHILD_REP_SCALE4", () => sthm(@fifteen_theorem.cross125_child_rep_scale4()))
-  log.attempt("CROSS125_CHILD_REP_REGULAR", () => sthm(@fifteen_theorem.cross125_child_rep_regular()))
-  log.attempt("NUM_CROSS125_SUB_AVOIDS", () => sthm(@fifteen_theorem.num_cross125_sub_avoids()))
-  log.attempt("INT_CROSS125_OFFSET_COERCE", () => sthm(@fifteen_theorem.int_cross125_offset_coerce()))
-  log.attempt("INT_CROSS125_CHILD_OFFSET_COERCE", () => sthm(@fifteen_theorem.int_cross125_child_offset_coerce()))
-  log.attempt("CROSS125_CHILD_REP_RESIDUE7", () => sthm(@fifteen_theorem.cross125_child_rep_residue7()))
-  log.attempt("CROSS125_CHILD_ALMOST15", () => sthm(@fifteen_theorem.cross125_child_almost15()))
-  log.attempt("cross125_admissible", () => sthm(@fifteen_theorem.cross125_admissible()))
-  log.attempt("CROSS125_ADMISSIBLE_DATA", () => sthm(@fifteen_theorem.cross125_admissible_data()))
-  log.attempt("CROSS125_ADMISSIBLE_BASE", () => sthm(@fifteen_theorem.cross125_admissible_base()))
-  log.attempt("CROSS125_ADMISSIBLE_ALMOST15", () => sthm(@fifteen_theorem.cross125_admissible_almost15()))
-  log.attempt("IQ_CROSS125_CHILD_REP_OF_NUM", () => sthm(@fifteen_theorem.iq_cross125_child_rep_of_num()))
-  log.attempt("IQ_UNIVERSAL_OF_CROSS125_ADMISSIBLE_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_cross125_admissible_child()))
-  log.attempt("CROSS125_00_ADMISSIBLE", () => sthm(@fifteen_theorem.cross125_00_admissible()))
-  log.attempt("CROSS125_10_ADMISSIBLE", () => sthm(@fifteen_theorem.cross125_10_admissible()))
-  log.attempt("CROSS125_0_NEG1_ADMISSIBLE", () => sthm(@fifteen_theorem.cross125_0_neg1_admissible()))
-  log.attempt("CROSS125_1_NEG1_ADMISSIBLE", () => sthm(@fifteen_theorem.cross125_1_neg1_admissible()))
-  log.attempt("CROSS125_0_NEG2_ADMISSIBLE", () => sthm(@fifteen_theorem.cross125_0_neg2_admissible()))
-  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_CROSS125", () => sthm(@fifteen_theorem.iq_universal_of_embeds_cross125()))
+  log.attempt("IQ_EMBEDS_FLIP_CROSS125", () => {
+    sthm(@fifteen_theorem.iq_embeds_flip_cross125())
+  })
+  log.attempt("IQ_REPRESENTS_FLIP_CROSS125", () => {
+    sthm(@fifteen_theorem.iq_represents_flip_cross125())
+  })
+  log.attempt("IQ_EMBEDS_REPRESENTS_FLIP_CROSS125", () => {
+    sthm(@fifteen_theorem.iq_embeds_represents_flip_cross125())
+  })
+  log.attempt("IQ_FLIP_CROSS125_02", () => {
+    sthm(@fifteen_theorem.iq_flip_cross125_02())
+  })
+  log.attempt("IQ_FLIP_CROSS125_NEG11", () => {
+    sthm(@fifteen_theorem.iq_flip_cross125_neg11())
+  })
+  log.attempt("IQ_FLIP_CROSS125_01", () => {
+    sthm(@fifteen_theorem.iq_flip_cross125_01())
+  })
+  log.attempt("IQ_FLIP_CROSS125_NEG10", () => {
+    sthm(@fifteen_theorem.iq_flip_cross125_neg10())
+  })
+  log.attempt("IQ_EMBEDS_QUATERNARY_CROSS125_RAW", () => {
+    sthm(@fifteen_theorem.iq_embeds_quaternary_cross125_raw())
+  })
+  log.attempt("IQ_EMBEDS_QUATERNARY_CROSS125", () => {
+    sthm(@fifteen_theorem.iq_embeds_quaternary_cross125())
+  })
+  log.attempt("INT_CROSS125_CHILD_DET_IDENTITY", () => {
+    sthm(@fifteen_theorem.int_cross125_child_det_identity())
+  })
+  log.attempt("INT_THREE_SQUARES_7MOD8_CORE", () => {
+    sthm(@fifteen_theorem.int_three_squares_7mod8_core())
+  })
+  log.attempt("INT_THREE_SQUARES_NOT_7MOD8", () => {
+    sthm(@fifteen_theorem.int_three_squares_not_7mod8())
+  })
+  log.attempt("INT_CROSS125_NOT_7", () => {
+    sthm(@fifteen_theorem.int_cross125_not_7())
+  })
+  log.attempt("IQ_CROSS125_DET_NONZERO_OF_REPRESENTS_7", () => {
+    sthm(@fifteen_theorem.iq_cross125_det_nonzero_of_represents_7())
+  })
+  log.attempt("IQ_CROSS125_DET_NOT_DIV8_OF_REPRESENTS_7", () => {
+    sthm(@fifteen_theorem.iq_cross125_det_not_div8_of_represents_7())
+  })
+  log.attempt("INT_CROSS125_ORTHOGONAL_VALUE", () => {
+    sthm(@fifteen_theorem.int_cross125_orthogonal_value())
+  })
+  log.attempt("IQ_CROSS125_DET_NONNEG", () => {
+    sthm(@fifteen_theorem.iq_cross125_det_nonneg())
+  })
+  log.attempt("IQ_CROSS125_DET_POSITIVE", () => {
+    sthm(@fifteen_theorem.iq_cross125_det_positive())
+  })
+  log.attempt("IQ_CROSS125_DET_LE_63", () => {
+    sthm(@fifteen_theorem.iq_cross125_det_le_63())
+  })
+  log.attempt("INT_CROSS125_1_NEG1_8_NOT_7", () => {
+    sthm(@fifteen_theorem.int_cross125_1_neg1_8_not_7())
+  })
+  log.attempt("IQ_CROSS125_1_NEG1_8_NOT_REPRESENTS_7", () => {
+    sthm(@fifteen_theorem.iq_cross125_1_neg1_8_not_represents_7())
+  })
+  log.attempt("IQ_CROSS125_DET_CONSTRAINTS", () => {
+    sthm(@fifteen_theorem.iq_cross125_det_constraints())
+  })
+  log.attempt("IQ_CROSS125_00_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_cross125_00_parameter_cases())
+  })
+  log.attempt("IQ_CROSS125_10_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_cross125_10_parameter_cases())
+  })
+  log.attempt("IQ_CROSS125_0_NEG1_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_cross125_0_neg1_parameter_cases())
+  })
+  log.attempt("IQ_CROSS125_1_NEG1_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_cross125_1_neg1_parameter_cases())
+  })
+  log.attempt("IQ_CROSS125_0_NEG2_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_cross125_0_neg2_parameter_cases())
+  })
+  log.attempt("INT_CROSS125_CHILD_SHIFT9", () => {
+    sthm(@fifteen_theorem.int_cross125_child_shift9())
+  })
+  log.attempt("INT_REPRESENTS_CROSS125_CHILD_SHIFT9", () => {
+    sthm(@fifteen_theorem.int_represents_cross125_child_shift9())
+  })
+  log.attempt("INT_REPRESENTS_CROSS125_CHILD_SCALE4", () => {
+    sthm(@fifteen_theorem.int_represents_cross125_child_scale4())
+  })
+  log.attempt("cross125_child_rep", () => {
+    sthm(@fifteen_theorem.cross125_child_rep())
+  })
+  log.attempt("CROSS125_CHILD_REP_SCALE4", () => {
+    sthm(@fifteen_theorem.cross125_child_rep_scale4())
+  })
+  log.attempt("CROSS125_CHILD_REP_REGULAR", () => {
+    sthm(@fifteen_theorem.cross125_child_rep_regular())
+  })
+  log.attempt("NUM_CROSS125_SUB_AVOIDS", () => {
+    sthm(@fifteen_theorem.num_cross125_sub_avoids())
+  })
+  log.attempt("INT_CROSS125_OFFSET_COERCE", () => {
+    sthm(@fifteen_theorem.int_cross125_offset_coerce())
+  })
+  log.attempt("INT_CROSS125_CHILD_OFFSET_COERCE", () => {
+    sthm(@fifteen_theorem.int_cross125_child_offset_coerce())
+  })
+  log.attempt("CROSS125_CHILD_REP_RESIDUE7", () => {
+    sthm(@fifteen_theorem.cross125_child_rep_residue7())
+  })
+  log.attempt("CROSS125_CHILD_ALMOST15", () => {
+    sthm(@fifteen_theorem.cross125_child_almost15())
+  })
+  log.attempt("cross125_admissible", () => {
+    sthm(@fifteen_theorem.cross125_admissible())
+  })
+  log.attempt("CROSS125_ADMISSIBLE_DATA", () => {
+    sthm(@fifteen_theorem.cross125_admissible_data())
+  })
+  log.attempt("CROSS125_ADMISSIBLE_BASE", () => {
+    sthm(@fifteen_theorem.cross125_admissible_base())
+  })
+  log.attempt("CROSS125_ADMISSIBLE_ALMOST15", () => {
+    sthm(@fifteen_theorem.cross125_admissible_almost15())
+  })
+  log.attempt("IQ_CROSS125_CHILD_REP_OF_NUM", () => {
+    sthm(@fifteen_theorem.iq_cross125_child_rep_of_num())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_CROSS125_ADMISSIBLE_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_cross125_admissible_child())
+  })
+  log.attempt("CROSS125_00_ADMISSIBLE", () => {
+    sthm(@fifteen_theorem.cross125_00_admissible())
+  })
+  log.attempt("CROSS125_10_ADMISSIBLE", () => {
+    sthm(@fifteen_theorem.cross125_10_admissible())
+  })
+  log.attempt("CROSS125_0_NEG1_ADMISSIBLE", () => {
+    sthm(@fifteen_theorem.cross125_0_neg1_admissible())
+  })
+  log.attempt("CROSS125_1_NEG1_ADMISSIBLE", () => {
+    sthm(@fifteen_theorem.cross125_1_neg1_admissible())
+  })
+  log.attempt("CROSS125_0_NEG2_ADMISSIBLE", () => {
+    sthm(@fifteen_theorem.cross125_0_neg2_admissible())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_CROSS125", () => {
+    sthm(@fifteen_theorem.iq_universal_of_embeds_cross125())
+  })
   log.attempt("cross124_det", () => sthm(@fifteen_theorem.cross124_det()))
-  log.attempt("INT_CROSS124_REMAINDER", () => sthm(@fifteen_theorem.int_cross124_remainder()))
-  log.attempt("iqclear_cross124", () => sthm(@fifteen_theorem.iqclear_cross124()))
-  log.attempt("IQ_EMBEDS_CLEAR_CROSS124", () => sthm(@fifteen_theorem.iq_embeds_clear_cross124()))
-  log.attempt("IQ_CROSS124_REDUCED_REPRESENTS_7", () => sthm(@fifteen_theorem.iq_cross124_reduced_represents_7()))
+  log.attempt("INT_CROSS124_REMAINDER", () => {
+    sthm(@fifteen_theorem.int_cross124_remainder())
+  })
+  log.attempt("iqclear_cross124", () => {
+    sthm(@fifteen_theorem.iqclear_cross124())
+  })
+  log.attempt("IQ_EMBEDS_CLEAR_CROSS124", () => {
+    sthm(@fifteen_theorem.iq_embeds_clear_cross124())
+  })
+  log.attempt("IQ_CROSS124_REDUCED_REPRESENTS_7", () => {
+    sthm(@fifteen_theorem.iq_cross124_reduced_represents_7())
+  })
   log.attempt("iqflip_cross124", () => sthm(@fifteen_theorem.iqflip_cross124()))
-  log.attempt("IQ_EMBEDS_FLIP_CROSS124", () => sthm(@fifteen_theorem.iq_embeds_flip_cross124()))
-  log.attempt("IQ_REPRESENTS_FLIP_CROSS124", () => sthm(@fifteen_theorem.iq_represents_flip_cross124()))
-  log.attempt("INT_CROSS124_BINARY_NONNEG", () => sthm(@fifteen_theorem.int_cross124_binary_nonneg()))
-  log.attempt("INT_2SQ_NOT_7_CORE", () => sthm(@fifteen_theorem.int_2sq_not_7_core()))
+  log.attempt("IQ_EMBEDS_FLIP_CROSS124", () => {
+    sthm(@fifteen_theorem.iq_embeds_flip_cross124())
+  })
+  log.attempt("IQ_REPRESENTS_FLIP_CROSS124", () => {
+    sthm(@fifteen_theorem.iq_represents_flip_cross124())
+  })
+  log.attempt("INT_CROSS124_BINARY_NONNEG", () => {
+    sthm(@fifteen_theorem.int_cross124_binary_nonneg())
+  })
+  log.attempt("INT_2SQ_NOT_7_CORE", () => {
+    sthm(@fifteen_theorem.int_2sq_not_7_core())
+  })
   log.attempt("INT_2SQ_NOT_7", () => sthm(@fifteen_theorem.int_2sq_not_7()))
-  log.attempt("INT_CROSS124_NOT_7", () => sthm(@fifteen_theorem.int_cross124_not_7()))
-  log.attempt("INT_CROSS124_CHILD_DET_IDENTITY", () => sthm(@fifteen_theorem.int_cross124_child_det_identity()))
-  log.attempt("INT_CROSS124_ORTHOGONAL_VALUE", () => sthm(@fifteen_theorem.int_cross124_orthogonal_value()))
-  log.attempt("IQ_CROSS124_DET_NONNEG", () => sthm(@fifteen_theorem.iq_cross124_det_nonneg()))
-  log.attempt("INT_CROSS124_REDUCED_NORM_NOT_DIV7", () => sthm(@fifteen_theorem.int_cross124_reduced_norm_not_div7()))
-  log.attempt("IQ_CROSS124_DET_POSITIVE", () => sthm(@fifteen_theorem.iq_cross124_det_positive()))
-  log.attempt("IQ_CROSS124_DET_LE_49", () => sthm(@fifteen_theorem.iq_cross124_det_le_49()))
-  log.attempt("IQ_CROSS124_DET_CONSTRAINTS", () => sthm(@fifteen_theorem.iq_cross124_det_constraints()))
-  log.attempt("IQ_EMBEDS_QUATERNARY_CROSS124_RAW", () => sthm(@fifteen_theorem.iq_embeds_quaternary_cross124_raw()))
-  log.attempt("IQ_EMBEDS_REPRESENTS_FLIP_CROSS124", () => sthm(@fifteen_theorem.iq_embeds_represents_flip_cross124()))
-  log.attempt("IQ_EMBEDS_QUATERNARY_CROSS124", () => sthm(@fifteen_theorem.iq_embeds_quaternary_cross124()))
-  log.attempt("INT_2SQ_TWO_ODD_NOT_8", () => sthm(@fifteen_theorem.int_2sq_two_odd_not_8()))
-  log.attempt("INT_CROSS124_BINARY_NOT_7", () => sthm(@fifteen_theorem.int_cross124_binary_not_7()))
-  log.attempt("INT_CROSS124_0_NEG1_2_NOT_7", () => sthm(@fifteen_theorem.int_cross124_0_neg1_2_not_7()))
-  log.attempt("IQ_CROSS124_0_NEG1_2_NOT_REPRESENTS_7", () => sthm(@fifteen_theorem.iq_cross124_0_neg1_2_not_represents_7()))
-  log.attempt("INT_CROSS124_1_NEG1_8_NOT_7", () => sthm(@fifteen_theorem.int_cross124_1_neg1_8_not_7()))
-  log.attempt("IQ_CROSS124_1_NEG1_8_NOT_REPRESENTS_7", () => sthm(@fifteen_theorem.iq_cross124_1_neg1_8_not_represents_7()))
-  log.attempt("IQ_CROSS124_00_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_cross124_00_parameter_cases()))
-  log.attempt("IQ_CROSS124_10_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_cross124_10_parameter_cases()))
-  log.attempt("IQ_CROSS124_0_NEG1_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_cross124_0_neg1_parameter_cases()))
-  log.attempt("IQ_CROSS124_1_NEG1_PARAMETER_CASES", () => sthm(@fifteen_theorem.iq_cross124_1_neg1_parameter_cases()))
-  log.attempt("INT_CROSS124_CHILD_SHIFT7", () => sthm(@fifteen_theorem.int_cross124_child_shift7()))
-  log.attempt("INT_REPRESENTS_CROSS124_CHILD_SHIFT7", () => sthm(@fifteen_theorem.int_represents_cross124_child_shift7()))
-  log.attempt("DISC7_EXCEPTION_MOD49", () => sthm(@fifteen_theorem.disc7_exception_mod49()))
-  log.attempt("DISC7_NOT_EXCEPTION_OF_MOD49", () => sthm(@fifteen_theorem.disc7_not_exception_of_mod49()))
+  log.attempt("INT_CROSS124_NOT_7", () => {
+    sthm(@fifteen_theorem.int_cross124_not_7())
+  })
+  log.attempt("INT_CROSS124_CHILD_DET_IDENTITY", () => {
+    sthm(@fifteen_theorem.int_cross124_child_det_identity())
+  })
+  log.attempt("INT_CROSS124_ORTHOGONAL_VALUE", () => {
+    sthm(@fifteen_theorem.int_cross124_orthogonal_value())
+  })
+  log.attempt("IQ_CROSS124_DET_NONNEG", () => {
+    sthm(@fifteen_theorem.iq_cross124_det_nonneg())
+  })
+  log.attempt("INT_CROSS124_REDUCED_NORM_NOT_DIV7", () => {
+    sthm(@fifteen_theorem.int_cross124_reduced_norm_not_div7())
+  })
+  log.attempt("IQ_CROSS124_DET_POSITIVE", () => {
+    sthm(@fifteen_theorem.iq_cross124_det_positive())
+  })
+  log.attempt("IQ_CROSS124_DET_LE_49", () => {
+    sthm(@fifteen_theorem.iq_cross124_det_le_49())
+  })
+  log.attempt("IQ_CROSS124_DET_CONSTRAINTS", () => {
+    sthm(@fifteen_theorem.iq_cross124_det_constraints())
+  })
+  log.attempt("IQ_EMBEDS_QUATERNARY_CROSS124_RAW", () => {
+    sthm(@fifteen_theorem.iq_embeds_quaternary_cross124_raw())
+  })
+  log.attempt("IQ_EMBEDS_REPRESENTS_FLIP_CROSS124", () => {
+    sthm(@fifteen_theorem.iq_embeds_represents_flip_cross124())
+  })
+  log.attempt("IQ_EMBEDS_QUATERNARY_CROSS124", () => {
+    sthm(@fifteen_theorem.iq_embeds_quaternary_cross124())
+  })
+  log.attempt("INT_2SQ_TWO_ODD_NOT_8", () => {
+    sthm(@fifteen_theorem.int_2sq_two_odd_not_8())
+  })
+  log.attempt("INT_CROSS124_BINARY_NOT_7", () => {
+    sthm(@fifteen_theorem.int_cross124_binary_not_7())
+  })
+  log.attempt("INT_CROSS124_0_NEG1_2_NOT_7", () => {
+    sthm(@fifteen_theorem.int_cross124_0_neg1_2_not_7())
+  })
+  log.attempt("IQ_CROSS124_0_NEG1_2_NOT_REPRESENTS_7", () => {
+    sthm(@fifteen_theorem.iq_cross124_0_neg1_2_not_represents_7())
+  })
+  log.attempt("INT_CROSS124_1_NEG1_8_NOT_7", () => {
+    sthm(@fifteen_theorem.int_cross124_1_neg1_8_not_7())
+  })
+  log.attempt("IQ_CROSS124_1_NEG1_8_NOT_REPRESENTS_7", () => {
+    sthm(@fifteen_theorem.iq_cross124_1_neg1_8_not_represents_7())
+  })
+  log.attempt("IQ_CROSS124_00_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_cross124_00_parameter_cases())
+  })
+  log.attempt("IQ_CROSS124_10_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_cross124_10_parameter_cases())
+  })
+  log.attempt("IQ_CROSS124_0_NEG1_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_cross124_0_neg1_parameter_cases())
+  })
+  log.attempt("IQ_CROSS124_1_NEG1_PARAMETER_CASES", () => {
+    sthm(@fifteen_theorem.iq_cross124_1_neg1_parameter_cases())
+  })
+  log.attempt("INT_CROSS124_CHILD_SHIFT7", () => {
+    sthm(@fifteen_theorem.int_cross124_child_shift7())
+  })
+  log.attempt("INT_REPRESENTS_CROSS124_CHILD_SHIFT7", () => {
+    sthm(@fifteen_theorem.int_represents_cross124_child_shift7())
+  })
+  log.attempt("DISC7_EXCEPTION_MOD49", () => {
+    sthm(@fifteen_theorem.disc7_exception_mod49())
+  })
+  log.attempt("DISC7_NOT_EXCEPTION_OF_MOD49", () => {
+    sthm(@fifteen_theorem.disc7_not_exception_of_mod49())
+  })
   log.attempt("num_shift_rem", () => sthm(@fifteen_theorem.num_shift_rem()))
-  log.attempt("NUM_MOD_SUB_EXACT", () => sthm(@fifteen_theorem.num_mod_sub_exact()))
-  log.attempt("cross124_generic_offset", () => sthm(@fifteen_theorem.cross124_generic_offset()))
-  log.attempt("CROSS124_GENERIC_OFFSET_FINITE_SHIFT", () => sthm(@fifteen_theorem.cross124_generic_offset_finite_shift()))
-  log.attempt("CROSS124_GENERIC_OFFSET_SHIFT", () => sthm(@fifteen_theorem.cross124_generic_offset_shift()))
-  log.attempt("cross124_child_rep", () => sthm(@fifteen_theorem.cross124_child_rep()))
-  log.attempt("CROSS124_CHILD_REP_SCALE", () => sthm(@fifteen_theorem.cross124_child_rep_scale()))
-  log.attempt("cross124_generic_child", () => sthm(@fifteen_theorem.cross124_generic_child()))
-  log.attempt("CROSS124_GENERIC_CHILD_DATA", () => sthm(@fifteen_theorem.cross124_generic_child_data()))
-  log.attempt("INT_CROSS124_OFFSET_COERCE", () => sthm(@fifteen_theorem.int_cross124_offset_coerce()))
-  log.attempt("CROSS124_GENERIC_CHILD_REP_SHIFT", () => sthm(@fifteen_theorem.cross124_generic_child_rep_shift()))
-  log.attempt("CROSS124_GENERIC_CHILD_REP_LARGE", () => sthm(@fifteen_theorem.cross124_generic_child_rep_large()))
-  log.attempt("CROSS124_GENERIC_CHILD_REP_LARGE_OF_FINITE", () => sthm(@fifteen_theorem.cross124_generic_child_rep_large_of_finite()))
-  log.attempt("cross124_needs_check", () => sthm(@fifteen_theorem.cross124_needs_check()))
-  log.attempt("CROSS124_CHILD_REP_REGULAR", () => sthm(@fifteen_theorem.cross124_child_rep_regular()))
-  log.attempt("CROSS124_GENERIC_CHILD_REP_OF_BASE", () => sthm(@fifteen_theorem.cross124_generic_child_rep_of_base()))
-  log.attempt("cross124_maybe_check", () => sthm(@fifteen_theorem.cross124_maybe_check()))
-  log.attempt("CROSS124_NEEDS_IMP_MAYBE_CHECK", () => sthm(@fifteen_theorem.cross124_needs_imp_maybe_check()))
-  log.attempt("CROSS124_DIAG1_BASE", () => sthm(@fifteen_theorem.cross124_diag1_base()))
-  log.attempt("CROSS124_DIAG2_BASE", () => sthm(@fifteen_theorem.cross124_diag2_base()))
-  log.attempt("CROSS124_DIAG4_BASE", () => sthm(@fifteen_theorem.cross124_diag4_base()))
-  log.attempt("CROSS124_DIAG5_BASE", () => sthm(@fifteen_theorem.cross124_diag5_base()))
-  log.attempt("CROSS124_DIAG6_BASE", () => sthm(@fifteen_theorem.cross124_diag6_base()))
-  log.attempt("CROSS124_DIAG7_BASE", () => sthm(@fifteen_theorem.cross124_diag7_base()))
-  log.attempt("CROSS124_GENERIC_CHILD_UNIVERSAL_OF_MAYBE_BASE", () => sthm(@fifteen_theorem.cross124_generic_child_universal_of_maybe_base()))
-  log.attempt("CROSS124_GENERIC_CHILD_UNIVERSAL_OF_FINITE_BASE", () => sthm(@fifteen_theorem.cross124_generic_child_universal_of_finite_base()))
-  log.attempt("CROSS124_DIAG1_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_diag1_universal()))
-  log.attempt("CROSS124_DIAG2_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_diag2_universal()))
-  log.attempt("CROSS124_DIAG4_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_diag4_universal()))
-  log.attempt("CROSS124_DIAG5_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_diag5_universal()))
-  log.attempt("CROSS124_DIAG6_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_diag6_universal()))
-  log.attempt("CROSS124_DIAG7_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_diag7_universal()))
-  log.attempt("CROSS124_0_NEG1_1_BASE", () => sthm(@fifteen_theorem.cross124_0_neg1_1_base()))
-  log.attempt("CROSS124_0_NEG1_1_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_0_neg1_1_universal()))
-  log.attempt("CROSS124_1_NEG1_2_BASE", () => sthm(@fifteen_theorem.cross124_1_neg1_2_base()))
-  log.attempt("CROSS124_1_NEG1_2_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_1_neg1_2_universal()))
-  log.attempt("CROSS124_10_2_BASE", () => sthm(@fifteen_theorem.cross124_10_2_base()))
-  log.attempt("CROSS124_10_2_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_10_2_universal()))
-  log.attempt("CROSS124_1_NEG1_3_BASE", () => sthm(@fifteen_theorem.cross124_1_neg1_3_base()))
-  log.attempt("CROSS124_1_NEG1_3_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_1_neg1_3_universal()))
-  log.attempt("CROSS124_10_3_BASE", () => sthm(@fifteen_theorem.cross124_10_3_base()))
-  log.attempt("CROSS124_10_3_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_10_3_universal()))
-  log.attempt("CROSS124_0_NEG1_3_FINITE_SHIFT", () => sthm(@fifteen_theorem.cross124_0_neg1_3_finite_shift()))
-  log.attempt("CROSS124_0_NEG1_3_BASE", () => sthm(@fifteen_theorem.cross124_0_neg1_3_base()))
-  log.attempt("CROSS124_0_NEG1_3_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_0_neg1_3_universal()))
-  log.attempt("CROSS124_1_NEG1_4_FINITE_SHIFT", () => sthm(@fifteen_theorem.cross124_1_neg1_4_finite_shift()))
-  log.attempt("CROSS124_1_NEG1_4_BASE", () => sthm(@fifteen_theorem.cross124_1_neg1_4_base()))
-  log.attempt("CROSS124_1_NEG1_4_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_1_neg1_4_universal()))
-  log.attempt("CROSS124_0_NEG1_4_FINITE_SHIFT", () => sthm(@fifteen_theorem.cross124_0_neg1_4_finite_shift()))
-  log.attempt("CROSS124_0_NEG1_4_BASE", () => sthm(@fifteen_theorem.cross124_0_neg1_4_base()))
-  log.attempt("CROSS124_0_NEG1_4_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_0_neg1_4_universal()))
-  log.attempt("CROSS124_10_5_FINITE_SHIFT", () => sthm(@fifteen_theorem.cross124_10_5_finite_shift()))
-  log.attempt("CROSS124_10_5_BASE", () => sthm(@fifteen_theorem.cross124_10_5_base()))
-  log.attempt("CROSS124_10_5_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_10_5_universal()))
-  log.attempt("CROSS124_1_NEG1_6_FINITE_SHIFT", () => sthm(@fifteen_theorem.cross124_1_neg1_6_finite_shift()))
-  log.attempt("CROSS124_1_NEG1_6_BASE", () => sthm(@fifteen_theorem.cross124_1_neg1_6_base()))
-  log.attempt("CROSS124_1_NEG1_6_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_1_neg1_6_universal()))
-  log.attempt("CROSS124_10_6_FINITE_SHIFT", () => sthm(@fifteen_theorem.cross124_10_6_finite_shift()))
-  log.attempt("CROSS124_10_6_BASE", () => sthm(@fifteen_theorem.cross124_10_6_base()))
-  log.attempt("CROSS124_10_6_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_10_6_universal()))
-  log.attempt("CROSS124_0_NEG1_6_FINITE_SHIFT", () => sthm(@fifteen_theorem.cross124_0_neg1_6_finite_shift()))
-  log.attempt("CROSS124_0_NEG1_6_BASE", () => sthm(@fifteen_theorem.cross124_0_neg1_6_base()))
-  log.attempt("CROSS124_0_NEG1_6_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_0_neg1_6_universal()))
-  log.attempt("CROSS124_1_NEG1_7_FINITE_SHIFT", () => sthm(@fifteen_theorem.cross124_1_neg1_7_finite_shift()))
-  log.attempt("CROSS124_1_NEG1_7_BASE", () => sthm(@fifteen_theorem.cross124_1_neg1_7_base()))
-  log.attempt("CROSS124_1_NEG1_7_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_1_neg1_7_universal()))
-  log.attempt("CROSS124_0_NEG1_7_FINITE_SHIFT", () => sthm(@fifteen_theorem.cross124_0_neg1_7_finite_shift()))
-  log.attempt("CROSS124_0_NEG1_7_BASE", () => sthm(@fifteen_theorem.cross124_0_neg1_7_base()))
-  log.attempt("CROSS124_0_NEG1_7_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_0_neg1_7_universal()))
-  log.attempt("INT_REPRESENTS_DET3_COMPLEMENT", () => sthm(@fifteen_theorem.int_represents_det3_complement()))
-  log.attempt("CROSS124_10_4_REP_OF_1226", () => sthm(@fifteen_theorem.cross124_10_4_rep_of_1226()))
-  log.attempt("CROSS124_10_4_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_10_4_universal()))
+  log.attempt("NUM_MOD_SUB_EXACT", () => {
+    sthm(@fifteen_theorem.num_mod_sub_exact())
+  })
+  log.attempt("cross124_generic_offset", () => {
+    sthm(@fifteen_theorem.cross124_generic_offset())
+  })
+  log.attempt("CROSS124_GENERIC_OFFSET_FINITE_SHIFT", () => {
+    sthm(@fifteen_theorem.cross124_generic_offset_finite_shift())
+  })
+  log.attempt("CROSS124_GENERIC_OFFSET_SHIFT", () => {
+    sthm(@fifteen_theorem.cross124_generic_offset_shift())
+  })
+  log.attempt("cross124_child_rep", () => {
+    sthm(@fifteen_theorem.cross124_child_rep())
+  })
+  log.attempt("CROSS124_CHILD_REP_SCALE", () => {
+    sthm(@fifteen_theorem.cross124_child_rep_scale())
+  })
+  log.attempt("cross124_generic_child", () => {
+    sthm(@fifteen_theorem.cross124_generic_child())
+  })
+  log.attempt("CROSS124_GENERIC_CHILD_DATA", () => {
+    sthm(@fifteen_theorem.cross124_generic_child_data())
+  })
+  log.attempt("INT_CROSS124_OFFSET_COERCE", () => {
+    sthm(@fifteen_theorem.int_cross124_offset_coerce())
+  })
+  log.attempt("CROSS124_GENERIC_CHILD_REP_SHIFT", () => {
+    sthm(@fifteen_theorem.cross124_generic_child_rep_shift())
+  })
+  log.attempt("CROSS124_GENERIC_CHILD_REP_LARGE", () => {
+    sthm(@fifteen_theorem.cross124_generic_child_rep_large())
+  })
+  log.attempt("CROSS124_GENERIC_CHILD_REP_LARGE_OF_FINITE", () => {
+    sthm(@fifteen_theorem.cross124_generic_child_rep_large_of_finite())
+  })
+  log.attempt("cross124_needs_check", () => {
+    sthm(@fifteen_theorem.cross124_needs_check())
+  })
+  log.attempt("CROSS124_CHILD_REP_REGULAR", () => {
+    sthm(@fifteen_theorem.cross124_child_rep_regular())
+  })
+  log.attempt("CROSS124_GENERIC_CHILD_REP_OF_BASE", () => {
+    sthm(@fifteen_theorem.cross124_generic_child_rep_of_base())
+  })
+  log.attempt("cross124_maybe_check", () => {
+    sthm(@fifteen_theorem.cross124_maybe_check())
+  })
+  log.attempt("CROSS124_NEEDS_IMP_MAYBE_CHECK", () => {
+    sthm(@fifteen_theorem.cross124_needs_imp_maybe_check())
+  })
+  log.attempt("CROSS124_DIAG1_BASE", () => {
+    sthm(@fifteen_theorem.cross124_diag1_base())
+  })
+  log.attempt("CROSS124_DIAG2_BASE", () => {
+    sthm(@fifteen_theorem.cross124_diag2_base())
+  })
+  log.attempt("CROSS124_DIAG4_BASE", () => {
+    sthm(@fifteen_theorem.cross124_diag4_base())
+  })
+  log.attempt("CROSS124_DIAG5_BASE", () => {
+    sthm(@fifteen_theorem.cross124_diag5_base())
+  })
+  log.attempt("CROSS124_DIAG6_BASE", () => {
+    sthm(@fifteen_theorem.cross124_diag6_base())
+  })
+  log.attempt("CROSS124_DIAG7_BASE", () => {
+    sthm(@fifteen_theorem.cross124_diag7_base())
+  })
+  log.attempt("CROSS124_GENERIC_CHILD_UNIVERSAL_OF_MAYBE_BASE", () => {
+    sthm(@fifteen_theorem.cross124_generic_child_universal_of_maybe_base())
+  })
+  log.attempt("CROSS124_GENERIC_CHILD_UNIVERSAL_OF_FINITE_BASE", () => {
+    sthm(@fifteen_theorem.cross124_generic_child_universal_of_finite_base())
+  })
+  log.attempt("CROSS124_DIAG1_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_diag1_universal())
+  })
+  log.attempt("CROSS124_DIAG2_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_diag2_universal())
+  })
+  log.attempt("CROSS124_DIAG4_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_diag4_universal())
+  })
+  log.attempt("CROSS124_DIAG5_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_diag5_universal())
+  })
+  log.attempt("CROSS124_DIAG6_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_diag6_universal())
+  })
+  log.attempt("CROSS124_DIAG7_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_diag7_universal())
+  })
+  log.attempt("CROSS124_0_NEG1_1_BASE", () => {
+    sthm(@fifteen_theorem.cross124_0_neg1_1_base())
+  })
+  log.attempt("CROSS124_0_NEG1_1_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_0_neg1_1_universal())
+  })
+  log.attempt("CROSS124_1_NEG1_2_BASE", () => {
+    sthm(@fifteen_theorem.cross124_1_neg1_2_base())
+  })
+  log.attempt("CROSS124_1_NEG1_2_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_1_neg1_2_universal())
+  })
+  log.attempt("CROSS124_10_2_BASE", () => {
+    sthm(@fifteen_theorem.cross124_10_2_base())
+  })
+  log.attempt("CROSS124_10_2_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_10_2_universal())
+  })
+  log.attempt("CROSS124_1_NEG1_3_BASE", () => {
+    sthm(@fifteen_theorem.cross124_1_neg1_3_base())
+  })
+  log.attempt("CROSS124_1_NEG1_3_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_1_neg1_3_universal())
+  })
+  log.attempt("CROSS124_10_3_BASE", () => {
+    sthm(@fifteen_theorem.cross124_10_3_base())
+  })
+  log.attempt("CROSS124_10_3_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_10_3_universal())
+  })
+  log.attempt("CROSS124_0_NEG1_3_FINITE_SHIFT", () => {
+    sthm(@fifteen_theorem.cross124_0_neg1_3_finite_shift())
+  })
+  log.attempt("CROSS124_0_NEG1_3_BASE", () => {
+    sthm(@fifteen_theorem.cross124_0_neg1_3_base())
+  })
+  log.attempt("CROSS124_0_NEG1_3_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_0_neg1_3_universal())
+  })
+  log.attempt("CROSS124_1_NEG1_4_FINITE_SHIFT", () => {
+    sthm(@fifteen_theorem.cross124_1_neg1_4_finite_shift())
+  })
+  log.attempt("CROSS124_1_NEG1_4_BASE", () => {
+    sthm(@fifteen_theorem.cross124_1_neg1_4_base())
+  })
+  log.attempt("CROSS124_1_NEG1_4_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_1_neg1_4_universal())
+  })
+  log.attempt("CROSS124_0_NEG1_4_FINITE_SHIFT", () => {
+    sthm(@fifteen_theorem.cross124_0_neg1_4_finite_shift())
+  })
+  log.attempt("CROSS124_0_NEG1_4_BASE", () => {
+    sthm(@fifteen_theorem.cross124_0_neg1_4_base())
+  })
+  log.attempt("CROSS124_0_NEG1_4_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_0_neg1_4_universal())
+  })
+  log.attempt("CROSS124_10_5_FINITE_SHIFT", () => {
+    sthm(@fifteen_theorem.cross124_10_5_finite_shift())
+  })
+  log.attempt("CROSS124_10_5_BASE", () => {
+    sthm(@fifteen_theorem.cross124_10_5_base())
+  })
+  log.attempt("CROSS124_10_5_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_10_5_universal())
+  })
+  log.attempt("CROSS124_1_NEG1_6_FINITE_SHIFT", () => {
+    sthm(@fifteen_theorem.cross124_1_neg1_6_finite_shift())
+  })
+  log.attempt("CROSS124_1_NEG1_6_BASE", () => {
+    sthm(@fifteen_theorem.cross124_1_neg1_6_base())
+  })
+  log.attempt("CROSS124_1_NEG1_6_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_1_neg1_6_universal())
+  })
+  log.attempt("CROSS124_10_6_FINITE_SHIFT", () => {
+    sthm(@fifteen_theorem.cross124_10_6_finite_shift())
+  })
+  log.attempt("CROSS124_10_6_BASE", () => {
+    sthm(@fifteen_theorem.cross124_10_6_base())
+  })
+  log.attempt("CROSS124_10_6_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_10_6_universal())
+  })
+  log.attempt("CROSS124_0_NEG1_6_FINITE_SHIFT", () => {
+    sthm(@fifteen_theorem.cross124_0_neg1_6_finite_shift())
+  })
+  log.attempt("CROSS124_0_NEG1_6_BASE", () => {
+    sthm(@fifteen_theorem.cross124_0_neg1_6_base())
+  })
+  log.attempt("CROSS124_0_NEG1_6_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_0_neg1_6_universal())
+  })
+  log.attempt("CROSS124_1_NEG1_7_FINITE_SHIFT", () => {
+    sthm(@fifteen_theorem.cross124_1_neg1_7_finite_shift())
+  })
+  log.attempt("CROSS124_1_NEG1_7_BASE", () => {
+    sthm(@fifteen_theorem.cross124_1_neg1_7_base())
+  })
+  log.attempt("CROSS124_1_NEG1_7_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_1_neg1_7_universal())
+  })
+  log.attempt("CROSS124_0_NEG1_7_FINITE_SHIFT", () => {
+    sthm(@fifteen_theorem.cross124_0_neg1_7_finite_shift())
+  })
+  log.attempt("CROSS124_0_NEG1_7_BASE", () => {
+    sthm(@fifteen_theorem.cross124_0_neg1_7_base())
+  })
+  log.attempt("CROSS124_0_NEG1_7_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_0_neg1_7_universal())
+  })
+  log.attempt("INT_REPRESENTS_DET3_COMPLEMENT", () => {
+    sthm(@fifteen_theorem.int_represents_det3_complement())
+  })
+  log.attempt("CROSS124_10_4_REP_OF_1226", () => {
+    sthm(@fifteen_theorem.cross124_10_4_rep_of_1226())
+  })
+  log.attempt("CROSS124_10_4_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_10_4_universal())
+  })
   log.attempt("iqselect013", () => sthm(@fifteen_theorem.iqselect013()))
-  log.attempt("IQ_EMBEDS_CROSS124_SELECT013", () => sthm(@fifteen_theorem.iq_embeds_cross124_select013()))
-  log.attempt("iqselect111_cross124", () => sthm(@fifteen_theorem.iqselect111_cross124()))
-  log.attempt("IQ_EMBEDS_CROSS124_10_1_EMBEDS_111", () => sthm(@fifteen_theorem.iq_embeds_cross124_10_1_embeds_111()))
-  log.attempt("IQ_UNIVERSAL_OF_CROSS124_00_3_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_cross124_00_3_child()))
-  log.attempt("IQ_UNIVERSAL_OF_CROSS124_10_1_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_cross124_10_1_child()))
-  log.attempt("IQ_UNIVERSAL_OF_CROSS124_0_NEG1_5_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_cross124_0_neg1_5_child()))
-  log.attempt("IQ_UNIVERSAL_OF_CROSS124_1_NEG1_5_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_cross124_1_neg1_5_child()))
-  log.attempt("INT_CROSS124_10_7_TABLE2_IDENTITY", () => sthm(@fifteen_theorem.int_cross124_10_7_table2_identity()))
-  log.attempt("CROSS124_10_7_EVEN_SHIFT", () => sthm(@fifteen_theorem.cross124_10_7_even_shift()))
-  log.attempt("CROSS124_90_RESIDUE_SELECTOR", () => sthm(@fifteen_theorem.cross124_90_residue_selector()))
-  log.attempt("CROSS124_10_7_EVEN_LARGE", () => sthm(@fifteen_theorem.cross124_10_7_even_large()))
-  log.attempt("CROSS124_315_RESIDUE_SELECTOR", () => sthm(@fifteen_theorem.cross124_315_residue_selector()))
-  log.attempt("CROSS124_10_7_ODD_SHIFT", () => sthm(@fifteen_theorem.cross124_10_7_odd_shift()))
-  log.attempt("CROSS124_10_7_ODD_LARGE", () => sthm(@fifteen_theorem.cross124_10_7_odd_large()))
-  log.attempt("CROSS124_10_7_ODD_BASE", () => sthm(@fifteen_theorem.cross124_10_7_odd_base()))
-  log.attempt("CROSS124_10_7_ODD_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_10_7_odd_universal()))
-  log.attempt("CROSS124_10_7_SMALL", () => sthm(@fifteen_theorem.cross124_10_7_small()))
-  log.attempt("CROSS124_10_7_UNIVERSAL", () => sthm(@fifteen_theorem.cross124_10_7_universal()))
-  log.attempt("IQ_CROSS124_CHILD_REP_OF_NUM", () => sthm(@fifteen_theorem.iq_cross124_child_rep_of_num()))
-  log.attempt("IQ_UNIVERSAL_OF_CROSS124_REP_CHILD", () => sthm(@fifteen_theorem.iq_universal_of_cross124_rep_child()))
-  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_CROSS124", () => sthm(@fifteen_theorem.iq_universal_of_embeds_cross124()))
-  log.attempt("IQ_UNIVERSAL_OF_REPRESENTS_UP_TO_15", () => sthm(@fifteen_theorem.iq_universal_of_represents_up_to_15()))
+  log.attempt("IQ_EMBEDS_CROSS124_SELECT013", () => {
+    sthm(@fifteen_theorem.iq_embeds_cross124_select013())
+  })
+  log.attempt("iqselect111_cross124", () => {
+    sthm(@fifteen_theorem.iqselect111_cross124())
+  })
+  log.attempt("IQ_EMBEDS_CROSS124_10_1_EMBEDS_111", () => {
+    sthm(@fifteen_theorem.iq_embeds_cross124_10_1_embeds_111())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_CROSS124_00_3_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_cross124_00_3_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_CROSS124_10_1_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_cross124_10_1_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_CROSS124_0_NEG1_5_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_cross124_0_neg1_5_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_CROSS124_1_NEG1_5_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_cross124_1_neg1_5_child())
+  })
+  log.attempt("INT_CROSS124_10_7_TABLE2_IDENTITY", () => {
+    sthm(@fifteen_theorem.int_cross124_10_7_table2_identity())
+  })
+  log.attempt("CROSS124_10_7_EVEN_SHIFT", () => {
+    sthm(@fifteen_theorem.cross124_10_7_even_shift())
+  })
+  log.attempt("CROSS124_90_RESIDUE_SELECTOR", () => {
+    sthm(@fifteen_theorem.cross124_90_residue_selector())
+  })
+  log.attempt("CROSS124_10_7_EVEN_LARGE", () => {
+    sthm(@fifteen_theorem.cross124_10_7_even_large())
+  })
+  log.attempt("CROSS124_315_RESIDUE_SELECTOR", () => {
+    sthm(@fifteen_theorem.cross124_315_residue_selector())
+  })
+  log.attempt("CROSS124_10_7_ODD_SHIFT", () => {
+    sthm(@fifteen_theorem.cross124_10_7_odd_shift())
+  })
+  log.attempt("CROSS124_10_7_ODD_LARGE", () => {
+    sthm(@fifteen_theorem.cross124_10_7_odd_large())
+  })
+  log.attempt("CROSS124_10_7_ODD_BASE", () => {
+    sthm(@fifteen_theorem.cross124_10_7_odd_base())
+  })
+  log.attempt("CROSS124_10_7_ODD_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_10_7_odd_universal())
+  })
+  log.attempt("CROSS124_10_7_SMALL", () => {
+    sthm(@fifteen_theorem.cross124_10_7_small())
+  })
+  log.attempt("CROSS124_10_7_UNIVERSAL", () => {
+    sthm(@fifteen_theorem.cross124_10_7_universal())
+  })
+  log.attempt("IQ_CROSS124_CHILD_REP_OF_NUM", () => {
+    sthm(@fifteen_theorem.iq_cross124_child_rep_of_num())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_CROSS124_REP_CHILD", () => {
+    sthm(@fifteen_theorem.iq_universal_of_cross124_rep_child())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_EMBEDS_CROSS124", () => {
+    sthm(@fifteen_theorem.iq_universal_of_embeds_cross124())
+  })
+  log.attempt("IQ_UNIVERSAL_OF_REPRESENTS_UP_TO_15", () => {
+    sthm(@fifteen_theorem.iq_universal_of_represents_up_to_15())
+  })
   log.attempt("FIFTEEN_THEOREM", () => sthm(@fifteen_theorem.fifteen_theorem()))
   // END generated theorem list
   let tm = @parser.parse_term

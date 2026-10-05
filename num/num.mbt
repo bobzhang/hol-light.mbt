@@ -676,6 +676,48 @@ fn digit_value(c : Char) -> Int raise {
 }
 
 ///|
+/// The Num library's own `Num.num_of_string` (not lib.ml's, below): an
+/// optionally signed decimal integer, or two of them around a `/`
+/// (Examples/sos.ml reads the numerals of csdp's output with it).
+pub fn nums_num_of_string(s : String) -> Num raise {
+  fn integer(t : String) -> Num raise {
+    let chars = t.iter().collect()
+    let (neg, start) = match chars {
+      ['-', ..] => (true, 1)
+      ['+', ..] => (false, 1)
+      _ => (false, 0)
+    }
+    if start == chars.length() {
+      raise Failure("num_of_string")
+    }
+    let ten = @bigint.BigInt::from_int(10)
+    let mut acc = big_zero
+    for i in start..<chars.length() {
+      let c = chars[i]
+      if c < '0' || c > '9' {
+        raise Failure("num_of_string")
+      }
+      acc = acc * ten + @bigint.BigInt::from_int(c.to_int() - '0'.to_int())
+    }
+    let n = of_big(acc)
+    if neg {
+      minus_num(n)
+    } else {
+      n
+    }
+  }
+
+  match s.find("/") {
+    Some(i) =>
+      div_num(
+        integer(s.view(end_offset=i).to_string()),
+        integer(s.view(start_offset=i + 1).to_string()),
+      )
+    None => integer(s)
+  }
+}
+
+///|
 /// HOL Light's `num_of_string`: decimal, `0x` hex or `0b` binary numerals.
 pub fn num_of_string(s : String) -> Num raise {
   let chars = s.iter().collect()

@@ -153,6 +153,67 @@ def translate(targets, done=()):
         sys.exit("translation batch failed (tools/ocaml_ref/_build/batch/translate.log)")
 
 
+def command_log_path(t):
+    return os.path.join(OUT, "commands_" + t.replace("/", "__") + ".log")
+
+
+def mbt_str(s):
+    """A MoonBit string literal."""
+    esc = {"\\": "\\\\", '"': '\\"', "\n": "\\n", "\t": "\\t", "\r": "\\r"}
+    return '"' + "".join(esc.get(c) or ("\\u{%x}" % ord(c) if ord(c) < 32 or ord(c) == 127 else c) for c in s) + '"'
+
+
+def write_commands(t, pkg):
+    """`<pkg>/commands.mbt`: the external programs `t` ran upstream while it
+    loaded (csdp, ...), as prelude.ml's `Sys.command` recorded them, for
+    lib/gp.mbt to replay. No file when it ran none."""
+    dst, log = os.path.join(ROOT, pkg, "commands.mbt"), command_log_path(t)
+    if not os.path.exists(log) or os.path.getsize(log) == 0:
+        if os.path.exists(dst):
+            os.remove(dst)
+        return
+    data, pos, entries = open(log, "rb").read(), 0, []
+
+    def line():
+        nonlocal pos
+        j = data.index(b"\n", pos)
+        l, pos = data[pos:j].decode(), j + 1
+        return l.split()
+
+    def blob(n):
+        nonlocal pos
+        b, pos = data[pos:pos + n].decode(), pos + n + 1
+        return b
+
+    while pos < len(data):
+        tag, n = line()
+        assert tag == "CMD", tag
+        shape, ins, st, outs = blob(int(n)), [], 0, []
+        while True:
+            w = line()
+            if w[0] == "IN":
+                ins.append(None if w[1] == "-1" else blob(int(w[1])))
+            elif w[0] == "ST":
+                st = int(w[1])
+            elif w[0] == "OUT":
+                outs.append((int(w[1]), blob(int(w[2]))))
+            else:
+                break
+        e = (shape, tuple(ins), st, tuple(outs))
+        if e not in entries:
+            entries.append(e)
+    text = (f"// The external programs {t} ran upstream while it loaded, for\n"
+            "// @lib.sys_command to replay (wasm has no processes; the answers only guide\n"
+            "// proofs the kernel checks). Written by tools/ocaml_ref/batch.py; do not edit.\n\n"
+            "///|\nfn init {\n")
+    for shape, ins, st, outs in entries:
+        text += ("  @lib.replay_command(\n    " + mbt_str(shape) + ",\n    ["
+                 + ", ".join("None" if x is None else "Some(" + mbt_str(x) + ")" for x in ins) + "],\n    "
+                 + str(st) + ",\n    [" + ", ".join(f"({i}, {mbt_str(o)})" for i, o in outs) + "],\n  )\n")
+    open(dst, "w").write(text + "}\n")
+    print(f"{pkg}/commands.mbt: {len(entries)} recorded commands")
+
+
 def untested(t):
     """A directory's make.ml, when another directory needs it (as
     Geometric_Algebra/quaternions.ml needs Quaternions/make.ml): a package
@@ -168,7 +229,10 @@ def references(targets, refs):
         text = open(refs[t]).read()
         i = text.index("start_trace ();;")
         tails[t] = os.path.join(OUT, "tail_" + t.replace("/", "__"))
-        open(tails[t], "w").write(text[i:])
+        # the programs it runs are recorded (prelude.ml)
+        if os.path.exists(command_log_path(t)):
+            os.remove(command_log_path(t))
+        open(tails[t], "w").write(f"command_log := {ml_str(command_log_path(t))};;\n" + text[i:])
     # plain OCaml, before pa_j (HOL Light's syntax) is loaded
     helpers = [
         "let batch_flush () = flush_all (); Format.pp_print_flush Format.std_formatter ();;\n",
@@ -345,6 +409,8 @@ def main():
         theory.run(["python3", "tools/ocaml_ref/gen_theorems_test.py", pkgs[t], os.path.relpath(refs[t], ROOT),
                     os.path.relpath(tests[t], ROOT)])
     expected = references(targets, refs)
+    for t in refs:
+        write_commands(t, pkgs[t])
     for t in refs:
         e = refs[t][:-3] + ".expected"
         open(e, "w").write(expected[t])

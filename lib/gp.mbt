@@ -12,16 +12,103 @@
 let virtual_files : Map[String, String] = Map([])
 
 ///|
-/// `Sys.command`: the gp factorization above, else "command not found"
-/// (exit status 127, as on a host without the command).
+/// `Sys.command`: the gp factorization above; else what the command did
+/// upstream, if that was recorded (`replay_command`); else "command not
+/// found" (exit status 127, as on a host without the command).
 pub fn sys_command(cmd : String) -> Int {
   match gp_factorint_command(cmd) {
     Some((n, file)) => {
       virtual_files[file] = gp_factorint(n) + "\n"
-      0
+      return 0
     }
-    None => 127
+    None => ()
   }
+  let (shape, paths) = command_shape(cmd)
+  let inputs = paths.map(p => virtual_files.get(p))
+  for r in command_replays.get(shape).unwrap_or([]) {
+    if r.inputs == inputs {
+      for o in r.outputs {
+        virtual_files[paths[o.0]] = o.1
+      }
+      return r.status
+    }
+  }
+  127
+}
+
+///|
+/// What a command did when upstream ran it.
+priv struct Replay {
+  inputs : Array[String?]
+  status : Int
+  outputs : Array[(Int, String)]
+}
+
+///|
+let command_replays : Map[String, Array[Replay]] = Map([])
+
+///|
+/// Record a run of an external program (csdp for Examples/sos.ml's
+/// REAL_SOS, ...): wasm has no processes, so the answers upstream got are
+/// replayed (they only guide proofs the kernel checks). `shape` is the
+/// command with its file names replaced by `<F1>`, `<F2>`, ... (temporary
+/// names differ from run to run); `inputs` the contents of those files
+/// before the run (`None`: not a file then); `outputs` the files it wrote,
+/// by index. A command is answered when its shape and inputs are the same.
+/// tools/ocaml_ref/prelude.ml records them, batch.py writes the calls.
+pub fn replay_command(
+  shape : String,
+  inputs : Array[String?],
+  status : Int,
+  outputs : Array[(Int, String)],
+) -> Unit {
+  let r = Replay::{ inputs, status, outputs, }
+  match command_replays.get(shape) {
+    Some(l) => l.push(r)
+    None => command_replays[shape] = [r]
+  }
+}
+
+///|
+/// A command's shape and its file names, in order of appearance: the words
+/// (between blanks and `;()<>|&'"`) that contain a `/`.
+fn command_shape(cmd : String) -> (String, Array[String]) {
+  let paths : Array[String] = []
+  let out = StringBuilder()
+  let tok = StringBuilder()
+  fn flush() {
+    let t = tok.to_string()
+    tok.reset()
+    if t.contains("/") {
+      let i = match paths.search(t) {
+        Some(i) => i
+        None => {
+          paths.push(t)
+          paths.length() - 1
+        }
+      }
+      out.write_string("<F" + (i + 1).to_string() + ">")
+    } else {
+      out.write_string(t)
+    }
+  }
+
+  for c in cmd {
+    if " \t\n;()<>|&'\"".contains_char(c) {
+      flush()
+      out.write_char(c)
+    } else {
+      tok.write_char(c)
+    }
+  }
+  flush()
+  (out.to_string(), paths)
+}
+
+///|
+/// lib.ml's `file_of_string`: an in-memory file.
+pub fn file_of_string(name : String, s : String) -> Unit {
+  virtual_files[name] = s
 }
 
 ///|
@@ -41,10 +128,16 @@ pub fn sys_file_exists(name : String) -> Bool {
 }
 
 ///|
-/// lib.ml's `string_of_file`
+/// lib.ml's `string_of_file`: the file's lines joined by newlines (a final
+/// newline is not part of it, as upstream reads lines and joins them).
 pub fn string_of_file(name : String) -> String raise {
   match virtual_files.get(name) {
-    Some(s) => s
+    Some(s) =>
+      if s.has_suffix("\n") {
+        s.view(end_offset=s.length() - 1).to_string()
+      } else {
+        s
+      }
     None => raise SysError(name + ": No such file or directory")
   }
 }

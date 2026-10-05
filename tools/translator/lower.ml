@@ -268,6 +268,9 @@ module Lower = struct
     | "Hashtbl.t" | "Stdlib.Hashtbl.t" | "Stdlib__Hashtbl.t" -> Some "@lib.OHashtbl"
     | "Lazy.t" | "lazy_t" | "Stdlib.Lazy.t" | "CamlinternalLazy.t" -> Some "@lib.OLazy"
     | "Format.formatter" | "Stdlib__Format.formatter" | "Stdlib.Format.formatter" | "formatter" -> Some "@pp.Formatter"
+    (* channels on in-memory files (lib/channels.mbt) *)
+    | "out_channel" | "Stdlib.out_channel" -> Some "@lib.OutChannel"
+    | "in_channel" | "Stdlib.in_channel" -> Some "@lib.InChannel"
     | "net" -> Some "@nets.Net"
     | "gconv" -> Some "@simp.Gconv"
     | "prover" -> Some "@simp.Prover"
@@ -803,9 +806,14 @@ module Lower = struct
         (* the Num library (nums): the num package *)
         (match String.split_on_char '.' (Path.name path) with
          | [ "Num"; "num_of_string" ] ->
-             (* the Num library's parser differs from lib.ml's
-                `num_of_string`, the one the num package has *)
-             unsupported loc "Num library's own %s" (Path.name path)
+             (* the Num library's parser, not lib.ml's `num_of_string`
+                (Examples/sos.ml) *)
+             (match M.find ~root:!Names.root "num" "nums_num_of_string" with
+              | Some decl -> { hstmts = []; hexp = Atom "@num.nums_num_of_string"; hmty = mty_of_decl decl; hoty = Some oty }
+              | None -> unsupported loc "Num library's own %s" (Path.name path))
+         | [ "temp_path" ] ->
+             (* hol.ml's `temp_path` (the sessions define it) *)
+             { hstmts = []; hexp = Atom "@lib.temp_path"; hmty = mty_of oty; hoty = Some oty }
          | [ "Num"; n ] ->
              (* OCaml ints are 63-bit (Int64) *)
              let n = match n with "int_of_num" -> "int63_of_num" | "num_of_int" -> "num_of_int64" | n -> n in
@@ -1878,6 +1886,21 @@ module Lower = struct
       | "Sys.remove" -> (1, fun [ a ] _ -> Call (Atom "@lib.sys_remove", [ a ]))
       | "Sys.file_exists" -> (1, fun [ a ] _ -> Call (Atom "@lib.sys_file_exists", [ a ]))
       | "Filename.temp_file" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.temp_file", [ a; b ]))
+      | "Filename.concat" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.filename_concat", [ a; b ]))
+      (* channels on in-memory files (lib/channels.mbt) *)
+      | "open_out" -> (1, fun [ a ] _ -> Call (Atom "@lib.open_out", [ a ]))
+      | "output_string" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.output_string", [ a; b ]))
+      | "output_char" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.output_char", [ a; b ]))
+      | "flush" -> (1, fun [ a ] _ -> Call (Atom "@lib.flush_out", [ a ]))
+      | "close_out" -> (1, fun [ a ] _ -> Call (Atom "@lib.close_out", [ a ]))
+      | "open_in" -> (1, fun [ a ] _ -> Call (Atom "@lib.open_in", [ a ]))
+      | "input_line" -> (1, fun [ a ] _ -> Call (Atom "@lib.input_line", [ a ]))
+      | "input_char" -> (1, fun [ a ] _ -> Call (Atom "@lib.input_char", [ a ]))
+      | "close_in" -> (1, fun [ a ] _ -> Call (Atom "@lib.close_in", [ a ]))
+      | "String.index_opt" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_index_opt", [ a; b ]))
+      | "String.split_on_char" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_split_on_char", [ a; b ]))
+      | "String.map" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_map", [ a; b ]))
+      | "Filename.is_relative" -> (1, fun [ a ] _ -> Call (Atom "@lib.filename_is_relative", [ a ]))
       | "String.escaped" -> (1, fun [ a ] _ -> Call (Atom "@lib.string_escaped", [ a ]))
       | "String.concat" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_concat", [ a; b ]))
       | "Array.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_make", [ a; b ]))
@@ -2243,6 +2266,8 @@ module Lower = struct
     | "Noparse", [] -> ([], Atom "@parser.Noparse", mty_of e.exp_type)
     | "Unchanged", [] -> ([], Atom "@lib.Unchanged", mty_of e.exp_type)
     | "Not_found", [] when predef_exn cd -> ([], Atom "@lib.NotFound", mty_of e.exp_type)
+    | "End_of_file", [] when predef_exn cd -> ([], Atom "@lib.EndOfFile", mty_of e.exp_type)
+    | "Sys_error", [ a ] when predef_exn cd -> let ss, x, _ = lower a in (ss, Call (Atom "@lib.SysError", [ x ]), mty_of e.exp_type)
     | name, [] when Hashtbl.mem own_ctors name -> ([], Atom (ctor_name ~cd name), mty_of e.exp_type)
     | name, args when Hashtbl.mem own_ctors name ->
         (* constructor arguments are evaluated right to left *)
@@ -2782,6 +2807,8 @@ module Lower = struct
            | "Noparse", [] -> "@parser.Noparse"
            | "Unchanged", [] -> "@lib.Unchanged"
            | "Not_found", [] when predef_exn cd -> "@lib.NotFound"
+           | "End_of_file", [] when predef_exn cd -> "@lib.EndOfFile"
+           | "Sys_error", [ a ] when predef_exn cd -> "@lib.SysError(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
            | "Match_failure", [ { pat_desc = Tpat_any; _ } ] -> "@lib.MatchFailure(_)"
            | name, [] when Hashtbl.mem own_ctors name -> ctor_name ~cd name
            | name, args when Hashtbl.mem own_ctors name ->

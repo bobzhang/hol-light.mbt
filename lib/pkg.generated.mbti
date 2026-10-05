@@ -69,6 +69,10 @@ pub fn[K, V] choose(Func[K, V]) -> (K, V) raise
 
 pub fn[A] chop_list(Int, @list.List[A]) -> (@list.List[A], @list.List[A]) raise
 
+pub fn close_in(InChannel) -> Unit
+
+pub fn close_out(OutChannel) -> Unit
+
 pub fn[K : OCompare, V] combine((V, V) -> V raise?, (V) -> Bool raise?, Func[K, V], Func[K, V]) -> Func[K, V] raise?
 
 pub fn[T : OCompare] compare(T, T) -> Int
@@ -105,6 +109,12 @@ pub fn[T] failure() -> T raise
 
 pub fn[T] failwith(String) -> T raise
 
+pub fn file_of_string(String, String) -> Unit
+
+pub fn filename_concat(String, String) -> String
+
+pub fn filename_is_relative(String) -> Bool
+
 pub fn[A] filter((A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
 
 pub fn[A] find((A) -> Bool raise?, @list.List[A]) -> A raise
@@ -124,6 +134,8 @@ pub fn float_log(Double) -> Double
 pub fn float_neg(Double) -> Double
 
 pub fn float_pow(Double, Double) -> Double
+
+pub fn flush_out(OutChannel) -> Unit
 
 pub fn[A, B] fold_left((A, B) -> A raise?, A, @list.List[B]) -> A raise?
 
@@ -184,6 +196,10 @@ pub fn incr(@ref.Ref[Int64]) -> Unit
 pub fn[A, B : OCompare] increasing((A) -> B raise?, A, A) -> Bool raise?
 
 pub fn[A : OCompare] index(A, @list.List[A]) -> Int raise
+
+pub fn input_char(InChannel) -> Char raise
+
+pub fn input_line(InChannel) -> String raise
 
 pub fn[A : OCompare] insert(A, @list.List[A]) -> @list.List[A]
 
@@ -307,6 +323,14 @@ pub fn ocaml_string_get(String, Int) -> Char raise
 
 pub fn[A, B] op_bar_gt(A, (A) -> B raise) -> B raise
 
+pub fn open_in(String) -> InChannel raise
+
+pub fn open_out(String) -> OutChannel
+
+pub fn output_char(OutChannel, Char) -> Unit
+
+pub fn output_string(OutChannel, String) -> Unit
+
 pub fn[A, B, C, D] pair_map((A) -> C raise?, (B) -> D raise?, (A, B)) -> (C, D) raise?
 
 pub fn[A] partition((A) -> Bool raise?, @list.List[A]) -> (@list.List[A], @list.List[A]) raise?
@@ -334,6 +358,8 @@ pub fn remark(String) -> Unit
 pub fn[A] remove((A) -> Bool raise?, @list.List[A]) -> (A, @list.List[A]) raise
 
 pub fn[A] repeat((A) -> A raise, A) -> A raise
+
+pub fn replay_command(String, Array[String?], Int, Array[(Int, String)]) -> Unit
 
 pub fn[A] replicate(A, Int) -> @list.List[A]
 
@@ -373,15 +399,21 @@ pub fn string_concat(String, @list.List[String]) -> String
 
 pub fn string_escaped(String) -> String
 
+pub fn string_index_opt(String, Char) -> Int64?
+
 pub fn string_length(String) -> Int
 
 pub fn string_make(Int64, Char) -> String raise
+
+pub fn string_map((Char) -> Char raise?, String) -> String raise?
 
 pub fn string_of_file(String) -> String raise
 
 pub fn string_of_float(Double) -> String
 
 pub fn string_of_int(Int) -> String
+
+pub fn string_split_on_char(Char, String) -> @list.List[String]
 
 pub fn string_sub(String, Int, Int) -> String raise
 
@@ -404,6 +436,8 @@ pub fn sys_file_exists(String) -> Bool
 pub fn sys_remove(String) -> Unit raise
 
 pub fn temp_file(String, String) -> String
+
+pub let temp_path : @ref.Ref[String]
 
 pub fn[A, B] time((A) -> B raise, A) -> B raise
 
@@ -444,6 +478,8 @@ pub(all) suberror AssertFailure {
   AssertFailure(String)
 } derive(@debug.Debug)
 
+pub(all) suberror EndOfFile derive(@debug.Debug)
+
 pub(all) suberror LazyUndefined derive(@debug.Debug)
 
 pub(all) suberror MatchFailure {
@@ -474,6 +510,13 @@ pub enum Func[K, V] {
   Leaf(Int, @list.List[(K, V)])
   Branch(Int, Int, Func[K, V], Func[K, V])
 } derive(Eq)
+pub impl[K : OCompare, V : OCompare] OCompare for Func[K, V]
+pub impl[K : OHash, V : OHash] OHash for Func[K, V]
+
+pub struct InChannel {
+  text : String
+  mut pos : Int
+}
 
 pub struct OHasher {
   // private fields
@@ -491,6 +534,11 @@ pub struct OHashtbl[K, V] {
 
 pub struct OLazy[T] {
   // private fields
+}
+
+pub struct OutChannel {
+  name : String
+  buf : StringBuilder
 }
 
 // Type aliases
