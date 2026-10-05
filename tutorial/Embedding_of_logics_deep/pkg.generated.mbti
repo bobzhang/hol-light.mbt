@@ -1,0 +1,68 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/Embedding_of_logics_deep"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn form_induct() -> @kernel.Thm
+
+pub fn form_recursion() -> @kernel.Thm
+
+pub fn gl() -> @kernel.Thm
+
+pub fn holds() -> @kernel.Thm
+
+pub fn holds_forall_lemma() -> @kernel.Thm
+
+pub fn holds_in() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn ltl() -> @kernel.Thm
+
+pub fn modal_refl() -> @kernel.Thm
+
+pub fn modal_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn modal_schema_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn modal_serial() -> @kernel.Thm
+
+pub fn modal_sym() -> @kernel.Thm
+
+pub fn modal_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn modal_trans() -> @kernel.Thm
+
+pub fn modal_wftrans() -> @kernel.Thm
+
+pub fn s4() -> @kernel.Thm
+
+pub fn string_induct() -> @kernel.Thm
+
+pub fn string_recursion() -> @kernel.Thm
+
+pub fn taut_1() -> @kernel.Thm
+
+pub fn taut_2() -> @kernel.Thm
+
+pub fn taut_3() -> @kernel.Thm
+
+pub fn taut_4() -> @kernel.Thm
+
+pub fn taut_5() -> @kernel.Thm
+
+pub fn taut_6() -> @kernel.Thm
+
+pub fn valid() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

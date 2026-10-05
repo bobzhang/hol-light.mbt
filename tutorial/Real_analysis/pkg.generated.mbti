@@ -1,0 +1,37 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/Real_analysis"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cheb() -> @kernel.Thm
+
+pub fn cheb_2n1() -> @kernel.Thm
+
+pub fn cheb_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn cheb_cos() -> @kernel.Thm
+
+pub fn cheb_induct() -> @kernel.Thm
+
+pub fn cheb_ripple() -> @kernel.Thm
+
+pub fn ivt_lemma1() -> @kernel.Thm
+
+pub fn ivt_lemma2() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn num_add2_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn sarkovskii_trivial() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

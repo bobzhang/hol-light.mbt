@@ -1,0 +1,96 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/Semantics_of_programming_languages_shallow"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn assert_def() -> @kernel.Thm
+
+pub fn assign() -> @kernel.Thm
+
+pub fn correct() -> @kernel.Thm
+
+pub fn correct_assign() -> @kernel.Thm
+
+pub fn correct_if() -> @kernel.Thm
+
+pub fn correct_ite() -> @kernel.Thm
+
+pub fn correct_postweak() -> @kernel.Thm
+
+pub fn correct_prestrength() -> @kernel.Thm
+
+pub fn correct_seq() -> @kernel.Thm
+
+pub fn correct_seq_vc() -> @kernel.Thm
+
+pub fn correct_while() -> @kernel.Thm
+
+pub fn correct_while_vc() -> @kernel.Thm
+
+pub fn if_def() -> @kernel.Thm
+
+pub fn ite_def() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mono_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn monotonic() -> @kernel.Thm
+
+pub fn monotonic_assert() -> @kernel.Thm
+
+pub fn monotonic_assign() -> @kernel.Thm
+
+pub fn monotonic_if() -> @kernel.Thm
+
+pub fn monotonic_ite() -> @kernel.Thm
+
+pub fn monotonic_seq() -> @kernel.Thm
+
+pub fn monotonic_variant() -> @kernel.Thm
+
+pub fn monotonic_while() -> @kernel.Thm
+
+pub fn refines() -> @kernel.Thm
+
+pub fn refines_correct() -> @kernel.Thm
+
+pub fn refines_refl() -> @kernel.Thm
+
+pub fn refines_specification() -> @kernel.Thm
+
+pub fn refines_trans() -> @kernel.Thm
+
+pub fn refines_while() -> @kernel.Thm
+
+pub fn sequence() -> @kernel.Thm
+
+pub fn specification() -> @kernel.Thm
+
+pub fn variant_def() -> @kernel.Thm
+
+pub fn vc_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn while_cases() -> @kernel.Thm
+
+pub fn while_def() -> @kernel.Thm
+
+pub fn while_fix() -> @kernel.Thm
+
+pub fn while_induct() -> @kernel.Thm
+
+pub fn while_rules() -> @kernel.Thm
+
+pub fn while_thm() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,45 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/Inductive_definitions"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn impossibility_b() -> @kernel.Thm
+
+pub fn indinv() -> @kernel.Thm
+
+pub fn inductive_invariant() -> @kernel.Thm
+
+pub fn init_() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn move_() -> @kernel.Thm
+
+pub fn move_invariant() -> @kernel.Thm
+
+pub fn mutex() -> @kernel.Thm
+
+pub fn mutex_v1() -> @kernel.Thm
+
+pub fn oriented_area() -> @kernel.Thm
+
+pub fn reachable_cases() -> @kernel.Thm
+
+pub fn reachable_induct() -> @kernel.Thm
+
+pub fn reachable_invariant() -> @kernel.Thm
+
+pub fn reachable_rules() -> @kernel.Thm
+
+pub fn trans() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

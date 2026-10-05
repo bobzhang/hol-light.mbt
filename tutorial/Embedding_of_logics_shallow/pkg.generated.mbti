@@ -1,0 +1,39 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/Embedding_of_logics_shallow"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn and_def() -> @kernel.Thm
+
+pub fn false_def() -> @kernel.Thm
+
+pub fn forever() -> @kernel.Thm
+
+pub fn iff_def() -> @kernel.Thm
+
+pub fn imp_def() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn next() -> @kernel.Thm
+
+pub fn not_def() -> @kernel.Thm
+
+pub fn or_def() -> @kernel.Thm
+
+pub fn sometime() -> @kernel.Thm
+
+pub fn true_def() -> @kernel.Thm
+
+pub fn until() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

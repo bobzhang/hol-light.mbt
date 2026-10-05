@@ -1,0 +1,75 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/HOL_as_a_functional_programming_language"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn and_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn compute_depth_conv((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn cond_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn eth() -> @kernel.Thm
+
+pub fn eth_p() -> @kernel.Thm
+
+pub fn holds() -> @kernel.Thm
+
+pub fn holds_back() -> @kernel.Thm
+
+pub fn holds_norm() -> @kernel.Thm
+
+pub fn ite_induct() -> @kernel.Thm
+
+pub fn ite_induct_v1() -> @kernel.Thm
+
+pub fn ite_recursion() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn norm() -> @kernel.Thm
+
+pub fn norm_v1(Ite) -> Ite raise
+
+pub fn normalized() -> @kernel.Thm
+
+pub fn normalized_induct() -> @kernel.Thm
+
+pub fn normalized_norm() -> @kernel.Thm
+
+pub fn normalized_taut() -> @kernel.Thm
+
+pub fn or_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn sizeof_() -> @kernel.Thm
+
+pub fn sizeof_induct() -> @kernel.Thm
+
+pub fn sizeof_nz() -> @kernel.Thm
+
+pub fn taut() -> @kernel.Thm
+
+pub fn tautology() -> @kernel.Thm
+
+pub fn tautology_v1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+pub(all) enum Ite {
+  False
+  True
+  Atomic(Int64)
+  Ite(Ite, Ite, Ite)
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Ite
+pub impl @lib.OHash for Ite
+
+// Type aliases
+
+// Traits
