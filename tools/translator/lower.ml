@@ -848,9 +848,12 @@ module Lower = struct
       let stmts, e = hoist (stmts, e) in
       let wgs, wres = groups want in
       let hgs, hres = groups have in
-      (* a parameter is `Plain t` or `Split ts` (one tuple, k units) *)
-      let plain gs = List.map (List.map (fun t -> `Plain t)) gs in
-      let units p = match p with `Plain _ -> 1 | `Split ts -> List.length ts in
+      (* a parameter is `Plain t` or `Split ts` (one tuple, k units); a
+         group without parameters (`() -> T`, an OCaml `unit -> t`) is one
+         unit, `Zero: against `(Unit) -> T`, what a generic `(A) -> B` is at
+         unit (`(f o top_goal) ()` in Rqe/util.ml) *)
+      let plain gs = List.map (fun g -> if g = [] then [ `Zero ] else List.map (fun t -> `Plain t) g) gs in
+      let units p = match p with `Plain _ | `Zero -> 1 | `Split ts -> List.length ts in
       let count gs = List.fold_left (fun n g -> List.fold_left (fun n p -> n + units p) n g) 0 gs in
       let split_first gs =
         let found = ref false in
@@ -881,6 +884,11 @@ module Lower = struct
             let rec take g pending acc =
               match g with
               | [] -> (List.rev acc, pending)
+              | `Zero :: g' ->
+                  (* the unit argument is not passed *)
+                  (match pending with
+                   | _ :: rest -> take g' rest acc
+                   | [] -> assert false)
               | `Plain ht :: g' ->
                   (match pending with
                    | (x, wt) :: rest -> take g' rest (snd (adapt ([], x) wt ht) :: acc)
@@ -908,14 +916,15 @@ module Lower = struct
                      (fun p ->
                        let x = fresh "x" in
                        match p with
-                       | `Plain t -> (param x t, [ (Atom x, t) ])
-                       | `Split ts -> (param x (M.Tuple ts), List.mapi (fun i t -> (Field (Atom x, i), t)) ts))
+                       | `Zero -> ([], [ (Atom "()", M.Named ("Unit", [])) ])
+                       | `Plain t -> ([ param x t ], [ (Atom x, t) ])
+                       | `Split ts -> ([ param x (M.Tuple ts) ], List.mapi (fun i t -> (Field (Atom x, i), t)) ts))
                      g
                  in
                  let body = go cur hps (pending @ List.concat_map snd params) wrest in
-                 let ptype = function `Plain t -> t | `Split ts -> M.Tuple ts in
-                 let ret = List.fold_right (fun g acc -> M.Fun (List.map ptype g, acc, true)) wrest wres in
-                 ([], typed_lam (List.map fst params) ret body))
+                 let ptypes = function `Zero -> [] | `Plain t -> [ t ] | `Split ts -> [ M.Tuple ts ] in
+                 let ret = List.fold_right (fun g acc -> M.Fun (List.concat_map ptypes g, acc, true)) wrest wres in
+                 ([], typed_lam (List.concat_map fst params) ret body))
       in
       let ss, e' = go e hps [] wps in
       (stmts @ ss, e')
