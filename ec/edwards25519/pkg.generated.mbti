@@ -1,0 +1,63 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/ec/edwards25519"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abelian_edwards25519_group() -> @kernel.Thm
+
+pub fn cyclic_edwards25519_group() -> @kernel.Thm
+
+pub fn d_25519() -> @kernel.Thm
+
+pub fn e_25519() -> @kernel.Thm
+
+pub fn e_25519_v1() -> @kernel.Thm
+
+pub fn edwards25519() -> @kernel.Thm
+
+pub fn edwards25519_group() -> @kernel.Thm
+
+pub fn edwards25519_group_v1() -> @kernel.Thm
+
+pub fn edwards_nonsingular_25519() -> @kernel.Thm
+
+pub fn ee_25519() -> @kernel.Thm
+
+pub fn finite_group_carrier_edwards25519() -> @kernel.Thm
+
+pub fn fullgenerator_in_group_carrier_edwards25519() -> @kernel.Thm
+
+pub fn generated_edwards25519_group() -> @kernel.Thm
+
+pub fn generator_in_group_carrier_edwards25519() -> @kernel.Thm
+
+pub fn group_element_order_edwards25519_e25519() -> @kernel.Thm
+
+pub fn group_element_order_edwards25519_ee25519() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn n_25519() -> @kernel.Thm
+
+pub fn n_25519_v1() -> @kernel.Thm
+
+pub fn p_25519() -> @kernel.Thm
+
+pub fn p_25519_v1() -> @kernel.Thm
+
+pub fn prime_n25519() -> @kernel.Thm
+
+pub fn prime_p25519() -> @kernel.Thm
+
+pub fn size_edwards25519_group() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
