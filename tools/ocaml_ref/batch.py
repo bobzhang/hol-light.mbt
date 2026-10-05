@@ -6,6 +6,7 @@ side instead of three chain reloads per file (tools/ocaml_ref/theory.py):
     (from the first file to the last, inclusive, in theory.MV_ORDER)
   python3 tools/ocaml_ref/batch.py --files 100/ballot.ml 100/bertrand.ml ...
   python3 tools/ocaml_ref/batch.py --resume ...  (keeps a failed run's translations)
+  python3 tools/ocaml_ref/batch.py --translate-only [--resume] ...  (no references yet)
 
 1. Package set-up and test files for every target (theory.setup,
    theory.write_tests).
@@ -243,6 +244,12 @@ def main():
     if sys.argv[1] == "after":
         after(sys.argv[2])
         return
+    # --translate-only: stop after the translation session (the reference
+    # session is as long again: a batch on top of Multivariate/ does not fit
+    # in one two-hour job; run it again with --resume for the references)
+    translate_only = sys.argv[1] == "--translate-only"
+    if translate_only:
+        del sys.argv[1]
     # --resume: keep the translations a failed run of the same batch made
     resume = sys.argv[1] == "--resume"
     if resume:
@@ -306,6 +313,9 @@ def main():
         after("nothing: every target is already translated")
     else:
         translate(targets, done)
+    if translate_only:
+        print("translated; run again with --resume for the references and the tests")
+        return
     for t in targets:
         theory.run(["python3", "tools/ocaml_ref/gen_theorems_test.py", pkgs[t], os.path.relpath(refs[t], ROOT),
                     os.path.relpath(tests[t], ROOT)])
