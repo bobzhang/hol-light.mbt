@@ -1,0 +1,97 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/quaternions/qisom"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cmul_him() -> @kernel.Thm
+
+pub fn cnj_hv() -> @kernel.Thm
+
+pub fn dot_hv() -> @kernel.Thm
+
+pub fn him() -> @kernel.Thm
+
+pub fn him_add() -> @kernel.Thm
+
+pub fn him_cnj() -> @kernel.Thm
+
+pub fn him_component() -> @kernel.Thm
+
+pub fn him_def() -> @kernel.Thm
+
+pub fn him_eq() -> @kernel.Thm
+
+pub fn him_hv() -> @kernel.Thm
+
+pub fn him_hx() -> @kernel.Thm
+
+pub fn him_mul_hx() -> @kernel.Thm
+
+pub fn him_neg() -> @kernel.Thm
+
+pub fn him_sub() -> @kernel.Thm
+
+pub fn him_vsum() -> @kernel.Thm
+
+pub fn hv() -> @kernel.Thm
+
+pub fn hv_add() -> @kernel.Thm
+
+pub fn hv_basis() -> @kernel.Thm
+
+pub fn hv_cmul() -> @kernel.Thm
+
+pub fn hv_components() -> @kernel.Thm
+
+pub fn hv_eq_zero() -> @kernel.Thm
+
+pub fn hv_him() -> @kernel.Thm
+
+pub fn hv_him_eq() -> @kernel.Thm
+
+pub fn hv_inj() -> @kernel.Thm
+
+pub fn hv_neg() -> @kernel.Thm
+
+pub fn hv_sub() -> @kernel.Thm
+
+pub fn hv_vec() -> @kernel.Thm
+
+pub fn hv_vector() -> @kernel.Thm
+
+pub fn hv_vsum() -> @kernel.Thm
+
+pub fn hv_zero() -> @kernel.Thm
+
+pub fn linear_him() -> @kernel.Thm
+
+pub fn linear_hv() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mul_hv_eq_cross_dot() -> @kernel.Thm
+
+pub fn norm_hv() -> @kernel.Thm
+
+pub fn orthogonal_transformation_as_quat_conjugation() -> @kernel.Thm
+
+pub fn orthogonal_transformation_quat_congruence() -> @kernel.Thm
+
+pub fn orthogonal_transformation_quat_conjugation() -> @kernel.Thm
+
+pub fn reflect_along_eq_quat_conjugation() -> @kernel.Thm
+
+pub fn reflect_along_eq_quat_product() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
