@@ -483,7 +483,9 @@ module Emit = struct
     Hashtbl.replace own_ctors oname !current_pkg;
     (* a distinct suberror per exception (`Substlist.Unify` and
        `Substarray.Unify` are different exceptions) *)
-    let rec go i = let n = if i = 0 then oname else oname ^ string_of_int i in if Hashtbl.mem type_names n then go (i + 1) else n in
+    (* `Error` is MoonBit's own type (Formal_ineqs/misc/misc_functions.hl
+       has an `exception Error`) *)
+    let rec go i = let n = if i = 0 then oname else oname ^ string_of_int i in if Hashtbl.mem type_names n || n = "Error" then go (i + 1) else n in
     let sname = go 0 in
     Hashtbl.replace type_names sname ();
     Hashtbl.replace own_exns ("#" ^ Ident.unique_name ext.ext_id) (!current_pkg, sname);
