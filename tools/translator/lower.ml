@@ -1242,7 +1242,19 @@ module Lower = struct
   (* An expression of OCaml type int is an Int64 unless an `Int` is
      expected (a hand-ported parameter); scalar Int/Int64 mismatches are
      converted (lib/int63.mbt) *)
+  (* A local name for a polymorphic global (`let clear = Hashtbl.clear in
+     clear t1; clear t2`, Formal_ineqs/arith/arith_cache.hl) is used at more
+     than one type: a MoonBit closure has one. Its uses are the global. *)
+  let local_aliases : (string, expression) Hashtbl.t = Hashtbl.create 8
+
+  let dealias (e : expression) =
+    match e.exp_desc with
+    | Texp_ident (Path.Pident id, _, _) when Hashtbl.mem local_aliases (Ident.unique_name id) ->
+        { (Hashtbl.find local_aliases (Ident.unique_name id)) with exp_type = e.exp_type; exp_loc = e.exp_loc }
+    | _ -> e
+
   let rec lower ?expect (e : expression) : stmt list * exp * M.ty =
+    let e = dealias e in
     let ss, x, t = lower0 ?expect e in
     let want =
       match expect with
@@ -1326,6 +1338,12 @@ module Lower = struct
     | Texp_open ({ open_expr = { mod_desc = Tmod_ident _; _ }; _ }, body) -> lower ?expect body
     | Texp_open _ -> unsupported loc "local open of a module expression"
     | Texp_function _ -> lower_function ?expect e
+    | Texp_let (Asttypes.Nonrecursive, [ { vb_pat = { pat_desc = Tpat_var (id, _); pat_type; _ }; vb_expr = { exp_desc = Texp_ident (p, _, _); _ } as rhs; _ } ], body)
+      when (match p with Path.Pident pid -> not (Hashtbl.mem locals (Ident.unique_name pid)) | _ -> true)
+           && tyvars_of_text (show_ty pat_type) <> []
+           && is_arrow pat_type ->
+        Hashtbl.replace local_aliases (Ident.unique_name id) (dealias rhs);
+        lower ?expect body
     | Texp_let (Asttypes.Nonrecursive, vbs, body) -> lower_let ?expect vbs body
     | Texp_tuple es ->
         let mtys =
@@ -1455,6 +1473,7 @@ module Lower = struct
   (* --- Applications --- *)
 
   and lower_apply ?expect whole f args =
+    let f = dealias f in
     let loc = whole.exp_loc in
     match f.exp_desc with
     | Texp_ident (p, _, vd) when list_alias p vd <> None ->
