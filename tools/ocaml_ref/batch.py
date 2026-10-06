@@ -319,6 +319,9 @@ def references(targets, refs):
     for t in refs:
         nodes = path_to(root, t, before)
         parts = [os.path.join(OUT, "prelude.txt")] + [log(n) for n in nodes[:-1]] + [log(nodes[-1], True)]
+        if theory.own_output(t):
+            # the target's own output (theory.OWN_OUTPUT)
+            parts = parts[-1:]
         s = "".join(open(x).read() for x in parts)
         # run.sh's filters, then theory.py's normalization
         s = "\n".join(l for l in s.splitlines() if "HOL-Light syntax in effect" not in l and l != "") + "\n"

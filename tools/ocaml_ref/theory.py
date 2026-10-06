@@ -219,6 +219,17 @@ NEEDS_ONLY = {"EC"}
 # in different orders, and one session cannot translate them all.)
 ROOTS = {"Formal_ineqs": "Formal_ineqs/verifier/m_verifier_main.hl"}
 
+# Directories whose tests compare a file's own output only, not the output
+# of the files loaded before it (which those files' own tests compare): a
+# golden of Formal_ineqs/ would otherwise begin with the 79,000 lines that
+# loading hol.ml and Multivariate/realanalysis.ml prints, once for each of
+# its 62 files.
+OWN_OUTPUT = {"Formal_ineqs"}
+
+
+def own_output(f):
+    return f.split("/")[0] in OWN_OUTPUT
+
 
 def top(f):
     """The top-level directory of a file (`Formal_ineqs/arith/x.hl`)."""
@@ -477,7 +488,7 @@ def write_tests(f, pkg, alias, name):
            'attempt "counter_tyvar" (fun () -> stm (tm "zz_counter"));;\n',
            'attempt "counter_genvar" (fun () -> stm (genvar bool_ty));;\n']
     open(ref, "w").write("".join(ml))
-    theories = ["simp"] + before + [stem(d) for d in deps(f)] + [name]
+    theories = [name] if own_output(f) else ["simp"] + before + [stem(d) for d in deps(f)] + [name]
     quoted = ", ".join(f'"{t}"' for t in theories)
     load = f"  @{alias}.load()\n" if "/" in pkg else ""
     mbt = f"""// Load-fidelity test for {name}.ml: replays tools/ocaml_ref/{os.path.basename(ref)}
