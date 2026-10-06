@@ -77,3 +77,42 @@ test "command replay: file names inside the files" {
   inspect(sys_command("solve /tmp/x7.cnf > /tmp/x7.cnf.out"), content="0")
   inspect(string_of_file("/tmp/x7.cnf.out"), content="read /tmp/x7.cnf")
 }
+
+///|
+test "Filename.quote" {
+  inspect(filename_quote("a b"), content="'a b'")
+  inspect(filename_quote("it's"), content="'it'\\''s'")
+}
+
+///|
+test "Stream and Char.escaped" {
+  let st = stream_of_string("a b")
+  inspect(stream_peek(st).is_empty(), content="false")
+  inspect(stream_next(st), content="a")
+  stream_junk(st)
+  inspect(stream_next(st), content="b")
+  inspect(stream_peek(st).is_empty(), content="true")
+  let r = try {
+    ignore(stream_next(st))
+    "more"
+  } catch {
+    StreamFailure => "Stream.Failure"
+    _ => "other"
+  }
+  inspect(r, content="Stream.Failure")
+  inspect(
+    char_escaped('a') + char_escaped('\n') + char_escaped('\''),
+    content="a\\n\\'",
+  )
+}
+
+///|
+test "strings_of_file" {
+  file_of_string("/tmp/lines.txt", "a\n\nb\n")
+  inspect(
+    strings_of_file("/tmp/lines.txt").to_array().join("|"),
+    content="a||b",
+  )
+  file_of_string("/tmp/lines.txt", "a\nb")
+  inspect(strings_of_file("/tmp/lines.txt").to_array().join("|"), content="a|b")
+}

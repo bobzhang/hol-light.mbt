@@ -63,6 +63,8 @@ pub fn[A, B] can((A) -> B raise, A) -> Bool raise
 
 pub fn char_chr(Int) -> Char raise
 
+pub fn char_escaped(Char) -> String
+
 pub fn[A] check((A) -> Bool raise?, A) -> A raise
 
 pub fn[K, V] choose(Func[K, V]) -> (K, V) raise
@@ -114,6 +116,8 @@ pub fn file_of_string(String, String) -> Unit
 pub fn filename_concat(String, String) -> String
 
 pub fn filename_is_relative(String) -> Bool
+
+pub fn filename_quote(String) -> String
 
 pub fn[A] filter((A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
 
@@ -411,6 +415,16 @@ pub fn str_string_after(String, Int64) -> String
 
 pub fn str_string_before(String, Int64) -> String
 
+pub fn[A] stream_junk(Stream[A]) -> Unit
+
+pub fn[A] stream_next(Stream[A]) -> A raise
+
+pub fn stream_of_channel(InChannel) -> Stream[Char]
+
+pub fn stream_of_string(String) -> Stream[Char]
+
+pub fn[A] stream_peek(Stream[A]) -> A?
+
 pub fn string_concat(String, @list.List[String]) -> String
 
 pub fn string_escaped(String) -> String
@@ -432,6 +446,8 @@ pub fn string_of_int(Int) -> String
 pub fn string_split_on_char(Char, String) -> @list.List[String]
 
 pub fn string_sub(String, Int, Int) -> String raise
+
+pub fn strings_of_file(String) -> @list.List[String] raise
 
 pub fn[A] striplist((A) -> (A, A) raise, A) -> @list.List[A] raise
 
@@ -507,6 +523,8 @@ pub fn MatchFailure::to_repr(Self) -> @debug.Repr
 
 pub(all) suberror NotFound derive(@debug.Debug)
 
+pub(all) suberror StreamFailure derive(@debug.Debug)
+
 pub(all) suberror SysError {
   SysError(String)
 } derive(@debug.Debug)
@@ -562,6 +580,11 @@ pub struct OutChannel {
 pub enum StrRegexp {
   Literal(String)
   Set(String)
+}
+
+pub struct Stream[A] {
+  items : Array[A]
+  mut pos : Int
 }
 
 // Type aliases
