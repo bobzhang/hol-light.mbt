@@ -1,0 +1,86 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/arith/arith_nat"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_numeral_array(@num.Num) -> @kernel.Term raise
+
+pub fn mk_small_numeral_array(Int64) -> @kernel.Term raise
+
+pub fn num_add_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_div_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_eq0_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_eq_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_even_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_gt0_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_le_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_lt_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_mult_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_odd_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_pre_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_sub_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_suc_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_to_numeral_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn numeral_to_num_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn numerals_to_num(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn raw_add_conv_hash(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_dest_hash(@kernel.Term) -> @num.Num raise
+
+pub fn raw_div_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_eq0_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_eq_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_even_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_gt0_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_le_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_lt_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_mul_conv_hash(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_odd_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_pre_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_sub_and_le_hash_conv(@kernel.Term) -> ((@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise) raise
+
+pub fn raw_sub_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_suc_conv_hash(@kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

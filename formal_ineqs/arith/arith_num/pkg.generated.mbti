@@ -1,0 +1,391 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/arith/arith_num"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/num",
+}
+
+// Values
+pub fn add_0_n() -> @kernel.Thm
+
+pub fn add_assoc_p() -> @kernel.Thm
+
+pub fn add_n_0() -> @kernel.Thm
+
+pub fn add_num() -> @kernel.Thm
+
+pub fn arith_base() -> Int64
+
+pub fn b0_0() -> @kernel.Thm
+
+pub fn b0_add() -> @kernel.Thm
+
+pub fn b0_const() -> @kernel.Term
+
+pub fn b0_def() -> @kernel.Thm
+
+pub fn b0_explicit() -> @kernel.Thm
+
+pub fn b0_name() -> String
+
+pub fn b0_suc() -> @kernel.Thm
+
+pub fn b1_name() -> String
+
+pub fn b1_pre_thm() -> @kernel.Thm
+
+pub fn bit0_const() -> @kernel.Term
+
+pub fn bit1_const() -> @kernel.Term
+
+pub fn bit_max_name() -> String
+
+pub fn cadd_0_n() -> @kernel.Thm
+
+pub fn cadd_n_0() -> @kernel.Thm
+
+pub fn const_array() -> FixedArray[@kernel.Term]
+
+pub fn def_array() -> FixedArray[@kernel.Thm]
+
+pub fn def_basic_array() -> FixedArray[@kernel.Thm]
+
+pub fn def_basic_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn def_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn def_thm(Int64) -> @kernel.Thm raise
+
+pub fn def_thm_array() -> FixedArray[@kernel.Thm]
+
+pub fn dest_numeral_hash(@kernel.Term) -> @num.Num raise
+
+pub fn dest_op(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn dest_table_num() -> @lib.OHashtbl[String, @num.Num]
+
+pub fn div_base() -> @kernel.Thm
+
+pub fn div_num() -> @kernel.Thm
+
+pub fn div_uniq_p() -> @kernel.Thm
+
+pub fn eq_0_0() -> @kernel.Thm
+
+pub fn eq_0_i(Int64) -> @kernel.Thm raise
+
+pub fn eq_0_lemma() -> @kernel.Thm
+
+pub fn eq_0_num() -> @kernel.Thm
+
+pub fn eq_0_sym() -> @kernel.Thm
+
+pub fn eq_b0_0() -> @kernel.Thm
+
+pub fn eq_const() -> @kernel.Term
+
+pub fn eq_num() -> @kernel.Thm
+
+pub fn even_b0() -> @kernel.Thm
+
+pub fn even_const() -> @kernel.Term
+
+pub fn even_num() -> @kernel.Thm
+
+pub fn even_suc_f() -> @kernel.Thm
+
+pub fn even_suc_t() -> @kernel.Thm
+
+pub fn even_thm_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn even_zero() -> @kernel.Thm
+
+pub fn fnum_type() -> @kernel.HolType
+
+pub fn gen_0_lt_bi(Int64) -> @kernel.Thm raise
+
+pub fn gen_bi_eq_bj(Int64) -> ((Int64) -> @kernel.Thm raise) raise
+
+pub fn gen_bi_le_0(Int64) -> @kernel.Thm raise
+
+pub fn gen_bi_le_bj(Int64, Int64) -> @kernel.Thm raise
+
+pub fn gen_bi_lt_bj(Int64, Int64) -> @kernel.Thm raise
+
+pub fn gen_mul_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn gen_mul_thm(Int64, Int64) -> @kernel.Thm raise
+
+pub fn gen_next_eq_thm(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn gen_next_le_thm(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn gen_next_lt_thm(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn gt0_0() -> @kernel.Thm
+
+pub fn gt0_b0() -> @kernel.Thm
+
+pub fn gt0_num() -> @kernel.Thm
+
+pub fn gt0_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn gt0_th(Int64) -> @kernel.Thm raise
+
+pub fn le_0_n() -> @kernel.Thm
+
+pub fn le_lemma() -> @kernel.Thm
+
+pub fn le_num() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn lt_n_0() -> @kernel.Thm
+
+pub fn lt_num() -> @kernel.Thm
+
+pub fn max_const() -> @kernel.Term
+
+pub fn max_num() -> @num.Num
+
+pub fn max_num_v1() -> @num.Num
+
+pub fn maximum() -> Int64
+
+pub fn mk_bit_definition(Int64) -> @kernel.Thm raise
+
+pub fn mk_numeral_array(@num.Num) -> @kernel.Term raise
+
+pub fn mk_numeral_hash(@num.Num) -> @kernel.Term raise
+
+pub fn mk_small_numeral_array(Int64) -> @kernel.Term raise
+
+pub fn mk_table() -> @lib.OHashtbl[@num.Num, @kernel.Term]
+
+pub fn mod_op_num() -> @kernel.Term
+
+pub fn mul1_left_th(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn mul1_left_th_table() -> @lib.OHashtbl[String, (Bool, @kernel.Thm)]
+
+pub fn mul1_right_th(Int64, Int64) -> @kernel.Thm raise
+
+pub fn mul1_right_th_table() -> @lib.OHashtbl[String, (Bool, @kernel.Thm)]
+
+pub fn mul_0_n() -> @kernel.Thm
+
+pub fn mul_1_n() -> @kernel.Thm
+
+pub fn mul_array() -> FixedArray[@kernel.Thm]
+
+pub fn mul_b0_t() -> @kernel.Thm
+
+pub fn mul_n_0() -> @kernel.Thm
+
+pub fn mul_n_0_v1() -> @kernel.Thm
+
+pub fn mul_n_1() -> @kernel.Thm
+
+pub fn mul_num() -> @kernel.Thm
+
+pub fn mul_suc_right() -> @kernel.Thm
+
+pub fn mul_t_b0() -> @kernel.Thm
+
+pub fn mul_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn mul_th_next_right(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn mult_ac_p() -> @kernel.Thm
+
+pub fn names_array() -> FixedArray[String]
+
+pub fn next_even_th(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn next_odd_th(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn num_add_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_const() -> @kernel.Term
+
+pub fn num_def() -> @kernel.Thm
+
+pub fn num_def_sym() -> @kernel.Thm
+
+pub fn num_div_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_eq0_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_eq_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_even_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_gt0_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_le_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_lt_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_mult_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_name() -> String
+
+pub fn num_odd_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_pre_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_sub_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_suc_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn num_thm() -> @kernel.Thm
+
+pub fn num_to_numeral_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn numeral_const() -> @kernel.Term
+
+pub fn numeral_to_num_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn odd_b0() -> @kernel.Thm
+
+pub fn odd_const() -> @kernel.Term
+
+pub fn odd_num() -> @kernel.Thm
+
+pub fn odd_suc_f() -> @kernel.Thm
+
+pub fn odd_suc_t() -> @kernel.Thm
+
+pub fn odd_thm_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn odd_zero() -> @kernel.Thm
+
+pub fn pre_0() -> @kernel.Thm
+
+pub fn pre_b0_n0() -> @kernel.Thm
+
+pub fn pre_b0_n1() -> @kernel.Thm
+
+pub fn pre_b1_0() -> @kernel.Thm
+
+pub fn pre_lemma() -> @kernel.Thm
+
+pub fn pre_num() -> @kernel.Thm
+
+pub fn pre_th(Int64) -> @kernel.Thm raise
+
+pub fn prod_lemma() -> @kernel.Thm
+
+pub fn raw_adc_conv_hash(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_add_conv_hash(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_dest_hash(@kernel.Term) -> @num.Num raise
+
+pub fn raw_div_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_eq0_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_eq_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_even_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_gt0_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_le_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_lt_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_mul1_left_hash(@kernel.Term, String, @kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_mul1_right_hash(@kernel.Term, @kernel.Term, String) -> @kernel.Thm raise
+
+pub fn raw_mul_conv_hash(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_odd_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_pre_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_sub_and_le_hash_conv(@kernel.Term, @kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn raw_sub_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_suc_conv_hash(@kernel.Term) -> @kernel.Thm raise
+
+pub fn replace_numerals(@kernel.Term) -> @kernel.Term raise
+
+pub fn replace_numerals_v1(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn sub_lemma1() -> @kernel.Thm
+
+pub fn sub_lemma2() -> @kernel.Thm
+
+pub fn sub_num() -> @kernel.Thm
+
+pub fn suc_0() -> @kernel.Thm
+
+pub fn suc_add_right() -> @kernel.Thm
+
+pub fn suc_le_thm() -> @kernel.Thm
+
+pub fn suc_lt_thm() -> @kernel.Thm
+
+pub fn suc_max() -> @kernel.Thm
+
+pub fn suc_num() -> @kernel.Thm
+
+pub fn suc_th(Int64) -> @kernel.Thm raise
+
+pub fn sym_num_thm() -> @kernel.Thm
+
+pub fn sym_zero_eq_zero() -> @kernel.Thm
+
+pub fn th_add_array() -> FixedArray[@kernel.Thm]
+
+pub fn th_add_right_next(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn th_add_table() -> @lib.OHashtbl[String, (@kernel.Thm, Bool)]
+
+pub fn th_cadd(Int64, Int64) -> @kernel.Thm raise
+
+pub fn th_cadd_array() -> FixedArray[@kernel.Thm]
+
+pub fn th_cadd_table() -> @lib.OHashtbl[String, (@kernel.Thm, Bool)]
+
+pub fn th_eq0_array() -> FixedArray[@kernel.Thm]
+
+pub fn th_eq0_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn th_eq_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn th_le0_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn th_le_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn th_lt0_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn th_lt_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn th_num_conv() -> FixedArray[@kernel.Thm]
+
+pub fn th_pre_array() -> FixedArray[@kernel.Thm]
+
+pub fn th_pre_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn th_suc_array() -> FixedArray[@kernel.Thm]
+
+pub fn th_suc_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn zero_eq_zero() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

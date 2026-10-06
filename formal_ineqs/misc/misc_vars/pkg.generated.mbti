@@ -1,0 +1,280 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/misc/misc_vars"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn a1_var_real() -> @kernel.Term
+
+pub fn a2_var_real() -> @kernel.Term
+
+pub fn a_var_real() -> @kernel.Term
+
+pub fn add_op_num() -> @kernel.Term
+
+pub fn add_op_real() -> @kernel.Term
+
+pub fn amp_op_real() -> @kernel.Term
+
+pub fn b1_var_real() -> @kernel.Term
+
+pub fn b2_var_real() -> @kernel.Term
+
+pub fn b_var_real() -> @kernel.Term
+
+pub fn bounds_var() -> @kernel.Term
+
+pub fn c_var_real() -> @kernel.Term
+
+pub fn d_bounds_list_var() -> @kernel.Term
+
+pub fn d_bounds_var() -> @kernel.Term
+
+pub fn d_var_real() -> @kernel.Term
+
+pub fn dd_bounds_list_var() -> @kernel.Term
+
+pub fn dd_bounds_var() -> @kernel.Term
+
+pub fn dd_list_var() -> @kernel.Term
+
+pub fn dd_var_real() -> @kernel.Term
+
+pub fn df_bounds_list_var() -> @kernel.Term
+
+pub fn df_bounds_var() -> @kernel.Term
+
+pub fn df_hi_var() -> @kernel.Term
+
+pub fn df_lo_var() -> @kernel.Term
+
+pub fn df_var_real() -> @kernel.Term
+
+pub fn dg_bounds_var() -> @kernel.Term
+
+pub fn div_op_num() -> @kernel.Term
+
+pub fn div_op_real() -> @kernel.Term
+
+pub fn e1_var_num() -> @kernel.Term
+
+pub fn e2_var_num() -> @kernel.Term
+
+pub fn e_var_num() -> @kernel.Term
+
+pub fn eq_op_num() -> @kernel.Term
+
+pub fn eq_op_real() -> @kernel.Term
+
+pub fn error_var() -> @kernel.Term
+
+pub fn f1_var_fun() -> @kernel.Term
+
+pub fn f1_var_real() -> @kernel.Term
+
+pub fn f2_var_fun() -> @kernel.Term
+
+pub fn f2_var_real() -> @kernel.Term
+
+pub fn f_bounds_var() -> @kernel.Term
+
+pub fn f_const() -> @kernel.Term
+
+pub fn f_hi_var() -> @kernel.Term
+
+pub fn f_lo_var() -> @kernel.Term
+
+pub fn f_var_fun() -> @kernel.Term
+
+pub fn g_bounds_var() -> @kernel.Term
+
+pub fn g_var_fun() -> @kernel.Term
+
+pub fn ge_op_real() -> @kernel.Term
+
+pub fn h_var_real() -> @kernel.Term
+
+pub fn hi_var_real() -> @kernel.Term
+
+pub fn high_var_real() -> @kernel.Term
+
+pub fn i_var_num() -> @kernel.Term
+
+pub fn int_var() -> @kernel.Term
+
+pub fn inv_op_real() -> @kernel.Term
+
+pub fn j_var_num() -> @kernel.Term
+
+pub fn k_var_num() -> @kernel.Term
+
+pub fn le_op_num() -> @kernel.Term
+
+pub fn le_op_real() -> @kernel.Term
+
+pub fn list_var_real_pair() -> @kernel.Term
+
+pub fn lo_var_real() -> @kernel.Term
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn low_var_real() -> @kernel.Term
+
+pub fn lt_op_num() -> @kernel.Term
+
+pub fn lt_op_real() -> @kernel.Term
+
+pub fn m1_var_num() -> @kernel.Term
+
+pub fn m2_var_num() -> @kernel.Term
+
+pub fn m_var_num() -> @kernel.Term
+
+pub fn m_var_real() -> @kernel.Term
+
+pub fn mk_names(Int64, String) -> @list.List[String] raise
+
+pub fn mk_real_list(@list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn mk_real_vars(Int64, String) -> @list.List[@kernel.Term] raise
+
+pub fn mul_op_num() -> @kernel.Term
+
+pub fn mul_op_real() -> @kernel.Term
+
+pub fn n1_var_num() -> @kernel.Term
+
+pub fn n2_var_num() -> @kernel.Term
+
+pub fn n_var_num() -> @kernel.Term
+
+pub fn n_var_real() -> @kernel.Term
+
+pub fn neg_op_real() -> @kernel.Term
+
+pub fn nty() -> @kernel.HolType
+
+pub fn num_type() -> @kernel.HolType
+
+pub fn p_var_num() -> @kernel.Term
+
+pub fn pow_op_real() -> @kernel.Term
+
+pub fn pre_op_num() -> @kernel.Term
+
+pub fn q_var_num() -> @kernel.Term
+
+pub fn r1_var_num() -> @kernel.Term
+
+pub fn r2_var_num() -> @kernel.Term
+
+pub fn r_var_num() -> @kernel.Term
+
+pub fn r_var_real() -> @kernel.Term
+
+pub fn real_empty_list() -> @kernel.Term
+
+pub fn real_list_ty() -> @kernel.HolType
+
+pub fn real_pair_list_ty() -> @kernel.HolType
+
+pub fn real_pair_ty() -> @kernel.HolType
+
+pub fn real_ty() -> @kernel.HolType
+
+pub fn s1_var_bool() -> @kernel.Term
+
+pub fn s2_var_bool() -> @kernel.Term
+
+pub fn s_var_bool() -> @kernel.Term
+
+pub fn standardize(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn standardize_enable(Bool) -> Unit raise
+
+pub fn standardize_list(Unit) -> @list.List[@kernel.Term] raise
+
+pub fn standardize_reset(Unit) -> Unit raise
+
+pub fn standardize_tm(@kernel.Term) -> @kernel.Term raise
+
+pub fn sub_op_num() -> @kernel.Term
+
+pub fn sub_op_real() -> @kernel.Term
+
+pub fn suc_op_num() -> @kernel.Term
+
+pub fn t_const() -> @kernel.Term
+
+pub fn t_var_num() -> @kernel.Term
+
+pub fn t_var_real() -> @kernel.Term
+
+pub fn t_var_real_list() -> @kernel.Term
+
+pub fn w0_var_real() -> @kernel.Term
+
+pub fn w1_var_real() -> @kernel.Term
+
+pub fn w2_var_real() -> @kernel.Term
+
+pub fn w_var_real() -> @kernel.Term
+
+pub fn w_var_real_list() -> @kernel.Term
+
+pub fn x0_var_real() -> @kernel.Term
+
+pub fn x1_var_real() -> @kernel.Term
+
+pub fn x2_var_real() -> @kernel.Term
+
+pub fn x_hi_var() -> @kernel.Term
+
+pub fn x_lo_var() -> @kernel.Term
+
+pub fn x_var_num() -> @kernel.Term
+
+pub fn x_var_real() -> @kernel.Term
+
+pub fn x_var_real_list() -> @kernel.Term
+
+pub fn xz_pair_var() -> @kernel.Term
+
+pub fn xz_var() -> @kernel.Term
+
+pub fn y1_var_real() -> @kernel.Term
+
+pub fn y2_var_real() -> @kernel.Term
+
+pub fn y_var_num() -> @kernel.Term
+
+pub fn y_var_real() -> @kernel.Term
+
+pub fn y_var_real_list() -> @kernel.Term
+
+pub fn yw_pair_var() -> @kernel.Term
+
+pub fn yw_var() -> @kernel.Term
+
+pub fn z0_var_real() -> @kernel.Term
+
+pub fn z_var_real() -> @kernel.Term
+
+pub fn z_var_real_list() -> @kernel.Term
+
+pub fn zero_const() -> @kernel.Term
+
+pub fn zero_num() -> @kernel.Term
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

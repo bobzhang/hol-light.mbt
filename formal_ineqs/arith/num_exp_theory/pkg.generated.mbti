@@ -1,0 +1,73 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/arith/num_exp_theory"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn base_const() -> @kernel.Term
+
+pub fn exp_inv_lemma() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mul_op_num() -> @kernel.Term
+
+pub fn num_exp() -> @kernel.Thm
+
+pub fn num_exp_0() -> @kernel.Thm
+
+pub fn num_exp_add() -> @kernel.Thm
+
+pub fn num_exp_div1() -> @kernel.Thm
+
+pub fn num_exp_div2() -> @kernel.Thm
+
+pub fn num_exp_eq_0() -> @kernel.Thm
+
+pub fn num_exp_exp() -> @kernel.Thm
+
+pub fn num_exp_le() -> @kernel.Thm
+
+pub fn num_exp_le1() -> @kernel.Thm
+
+pub fn num_exp_le1_eq() -> @kernel.Thm
+
+pub fn num_exp_le2() -> @kernel.Thm
+
+pub fn num_exp_le2_eq() -> @kernel.Thm
+
+pub fn num_exp_lt() -> @kernel.Thm
+
+pub fn num_exp_lt1() -> @kernel.Thm
+
+pub fn num_exp_lt1_eq() -> @kernel.Thm
+
+pub fn num_exp_lt2() -> @kernel.Thm
+
+pub fn num_exp_lt2_eq() -> @kernel.Thm
+
+pub fn num_exp_mul() -> @kernel.Thm
+
+pub fn num_exp_sub1() -> @kernel.Thm
+
+pub fn num_exp_sub2() -> @kernel.Thm
+
+pub fn num_exp_sub_lemma() -> @kernel.Thm
+
+pub fn num_exp_sum() -> @kernel.Thm
+
+pub fn num_exp_sum1() -> @kernel.Thm
+
+pub fn num_exp_tm() -> @kernel.Term
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

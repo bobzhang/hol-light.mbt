@@ -1,0 +1,33 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/arith_options"
+
+import {
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn base() -> @ref.Ref[Int64]
+
+pub fn cached() -> @ref.Ref[Bool]
+
+pub fn float_cached() -> @ref.Ref[Bool]
+
+pub fn float_log() -> @ref.Ref[Bool]
+
+pub fn init_cache_size() -> @ref.Ref[Int64]
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn max_cache_size() -> @ref.Ref[Int64]
+
+pub fn min_exp() -> @ref.Ref[Int64]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

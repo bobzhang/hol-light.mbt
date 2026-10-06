@@ -1,0 +1,182 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/arith/more_float"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/num",
+}
+
+// Values
+pub fn add_ineq_hi() -> @kernel.Thm
+
+pub fn add_ineq_hi_v1(Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn add_ineq_lo() -> @kernel.Thm
+
+pub fn add_ineq_lo_v1(Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn bounded_on_int() -> @kernel.Thm
+
+pub fn bounded_on_int_add(Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn bounded_on_int_dest() -> @kernel.Thm
+
+pub fn bounded_on_int_div(Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn bounded_on_int_mul(Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn bounded_on_int_mul_int(Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn bounded_on_int_mul_raw(Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn bounded_on_int_neg(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn bounded_on_int_scale(Int64, @kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn bounded_on_int_sub(Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn check_interval_gt(@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn check_interval_iabs(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn check_interval_neg(@kernel.Term) -> @kernel.Thm raise
+
+pub fn check_interval_not_zero(@kernel.Term) -> @kernel.Thm raise
+
+pub fn check_interval_pos(@kernel.Term) -> @kernel.Thm raise
+
+pub fn dest_bounded_on_int(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn dest_bounded_on_int_raw(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn dest_le_op(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn float0_eq() -> @kernel.Thm
+
+pub fn float1_eq() -> @kernel.Thm
+
+pub fn float2_eq() -> @kernel.Thm
+
+pub fn float3_eq() -> @kernel.Thm
+
+pub fn float4_eq() -> @kernel.Thm
+
+pub fn float_eq0(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_eq_0_p() -> @kernel.Thm
+
+pub fn float_eq_th_of_num(@num.Num) -> (@kernel.Thm, @kernel.Term) raise
+
+pub fn float_f_const() -> @kernel.Term
+
+pub fn float_f_pos_p() -> @kernel.Thm
+
+pub fn float_iabs(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_iabs_ff() -> @kernel.Thm
+
+pub fn float_iabs_tt() -> @kernel.Thm
+
+pub fn float_interval_inv(Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn float_interval_lt0(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_interval_lt0_p() -> @kernel.Thm
+
+pub fn float_interval_scale(Int64, @kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_inv2() -> @kernel.Term
+
+pub fn float_inv2_th() -> @kernel.Thm
+
+pub fn float_inv_hi(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn float_inv_lo(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn float_neg(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_neg_f_p() -> @kernel.Thm
+
+pub fn float_neg_t_p() -> @kernel.Thm
+
+pub fn float_of_float_tm(@kernel.Term) -> Double raise
+
+pub fn float_pos(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_tm_of_float(Int64) -> ((Double) -> @kernel.Term raise) raise
+
+pub fn iabs_p() -> @kernel.Thm
+
+pub fn interval_neg_p() -> @kernel.Thm
+
+pub fn interval_not_zero1_p() -> @kernel.Thm
+
+pub fn interval_not_zero2_p() -> @kernel.Thm
+
+pub fn interval_pos_p() -> @kernel.Thm
+
+pub fn inv2_interval() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_bounded_on_int(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn mk_float_small(Int64) -> @kernel.Term raise
+
+pub fn mk_refl_ineq(@kernel.Term) -> @kernel.Thm raise
+
+pub fn mul_ineq_hi() -> @kernel.Thm
+
+pub fn mul_ineq_hi_v1(Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn mul_ineq_pos_const_hi() -> @kernel.Thm
+
+pub fn mul_ineq_pos_const_hi_v1(Int64, @kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn neg_two_interval() -> @kernel.Thm
+
+pub fn norm_derivative(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn norm_diff(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn norm_interval(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn norm_lin_approx(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn norm_second_derivative(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn num1_eq() -> @kernel.Thm
+
+pub fn num2_eq() -> @kernel.Thm
+
+pub fn num3_eq() -> @kernel.Thm
+
+pub fn num_of_float_tm(@kernel.Term) -> @num.Num raise
+
+pub fn one_float() -> @kernel.Term
+
+pub fn one_interval() -> @kernel.Thm
+
+pub fn rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn sub_ineq_hi() -> @kernel.Thm
+
+pub fn sub_ineq_hi_v1(Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn sub_ineq_lo() -> @kernel.Thm
+
+pub fn sub_ineq_lo_v1(Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn two_float() -> @kernel.Term
+
+pub fn two_interval() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
