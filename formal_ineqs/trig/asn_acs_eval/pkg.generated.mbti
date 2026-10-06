@@ -1,0 +1,57 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/trig/asn_acs_eval"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn acs_hi_th() -> @kernel.Thm
+
+pub fn acs_interval() -> @kernel.Thm
+
+pub fn acs_interval2() -> @kernel.Thm
+
+pub fn acs_lo_th() -> @kernel.Thm
+
+pub fn asn_interval() -> @kernel.Thm
+
+pub fn asn_neg_hi_th() -> @kernel.Thm
+
+pub fn asn_neg_lo_th() -> @kernel.Thm
+
+pub fn asn_pos_hi_th() -> @kernel.Thm
+
+pub fn asn_pos_lo_th() -> @kernel.Thm
+
+pub fn float_acs_hi(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_acs_lo(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_asn_hi(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_asn_lo(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_interval_acs(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_interval_acs2(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_interval_asn(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_neg1_eq() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn neg_one_float() -> @kernel.Term
+
+pub fn th_rule(@kernel.Thm) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

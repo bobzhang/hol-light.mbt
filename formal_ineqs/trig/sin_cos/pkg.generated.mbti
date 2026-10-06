@@ -1,0 +1,49 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/trig/sin_cos"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cos_derivatives() -> @kernel.Thm
+
+pub fn cos_pi_2() -> @kernel.Thm
+
+pub fn cos_poly_lower_bound() -> @kernel.Thm
+
+pub fn cos_poly_upper_bound() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn sin_derivatives() -> @kernel.Thm
+
+pub fn sin_neg_poly_lower_bound() -> @kernel.Thm
+
+pub fn sin_neg_poly_upper_bound() -> @kernel.Thm
+
+pub fn sin_pi_2() -> @kernel.Thm
+
+pub fn sin_pos_poly_lower_bound() -> @kernel.Thm
+
+pub fn sin_pos_poly_upper_bound() -> @kernel.Thm
+
+pub fn sum_pair_from_0() -> @kernel.Thm
+
+pub fn taylor_cos() -> @kernel.Thm
+
+pub fn taylor_cos_raw() -> @kernel.Thm
+
+pub fn taylor_sin() -> @kernel.Thm
+
+pub fn taylor_sin_raw() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

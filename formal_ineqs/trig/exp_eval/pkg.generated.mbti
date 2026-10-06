@@ -1,0 +1,79 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/trig/exp_eval"
+
+import {
+  "bobzhang/hol_light/formal_ineqs/trig/poly_eval",
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn bound_neg_high_trans() -> @kernel.Thm
+
+pub fn bound_neg_low_trans() -> @kernel.Thm
+
+pub fn bound_pos_low_trans() -> @kernel.Thm
+
+pub fn exp_interval() -> @kernel.Thm
+
+pub fn exp_max_x() -> Double
+
+pub fn exp_neg_high() -> @kernel.Thm
+
+pub fn exp_neg_low() -> @kernel.Thm
+
+pub fn exp_pos_high() -> @kernel.Thm
+
+pub fn exp_reduce_high() -> @kernel.Thm
+
+pub fn exp_reduce_low() -> @kernel.Thm
+
+pub fn float_exp_hi(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_exp_high_raw(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_exp_lo(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_exp_low_raw(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_exp_neg_high_raw(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn float_exp_neg_low_raw(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn float_exp_pos_low_raw(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn float_interval_exp(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_inv_hi(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_exp_bound_tables(@kernel.Thm) -> ((Int64) -> ((Int64) -> (@kernel.Thm, @list.List[(@kernel.Term, @list.List[@poly_eval.PolyCoeff])]) raise) raise) raise
+
+pub fn mk_exp_neg_lower(Int64) -> (@kernel.Thm, (@kernel.Term, @list.List[@poly_eval.PolyCoeff]), (@kernel.Term, @list.List[@poly_eval.PolyCoeff])) raise
+
+pub fn mk_exp_neg_upper(Int64) -> (@kernel.Thm, (@kernel.Term, @list.List[@poly_eval.PolyCoeff]), (@kernel.Term, @list.List[@poly_eval.PolyCoeff])) raise
+
+pub fn mk_exp_pos_lower(Int64) -> (@kernel.Thm, (@kernel.Term, @list.List[@poly_eval.PolyCoeff])) raise
+
+pub fn mk_float_eq(Int64) -> @kernel.Thm raise
+
+pub fn n_of_p_exp(Double, Int64, (Int64) -> Bool raise) -> Int64 raise
+
+pub fn raw_num_to_numeral(@kernel.Term) -> @kernel.Thm raise
+
+pub fn reduce_float(@kernel.Term) -> (Bool, Int64, @kernel.Thm) raise
+
+pub fn th_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn x_pow_over_fact(Double, Int64) -> Double raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

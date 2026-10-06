@@ -1,0 +1,58 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/trig/poly_eval"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn eval_high_poly_f_pos_pos(Int64) -> (((@kernel.Term, @list.List[PolyCoeff])) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise
+
+pub fn eval_interval_poly_f(Int64) -> (((@kernel.Term, @list.List[PolyCoeff])) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise
+
+pub fn eval_low_poly_f_pos_pos(Int64) -> (((@kernel.Term, @list.List[PolyCoeff])) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise
+
+pub fn eval_pow2_high(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn eval_pow2_low(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn eval_pow2_pow4_high(Int64) -> ((@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise) raise
+
+pub fn eval_pow2_pow4_low(Int64) -> ((@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise) raise
+
+pub fn eval_pow4_high(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn eval_pow4_low(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn float_interval_calc(Int64, @kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_interval_const(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_float_interval_decimal(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn mk_poly_coeffs(Int64) -> ((@kernel.Term) -> @list.List[PolyCoeff] raise) raise
+
+// Errors
+
+// Types and methods
+pub(all) struct PolyCoeff {
+  c_tm : @kernel.Term
+  bounds_tm : @kernel.Term
+  interval_th : @kernel.Thm
+  sign : Int64
+  sign_high_th : @kernel.Thm
+  sign_low_th : @kernel.Thm
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for PolyCoeff
+pub impl @lib.OHash for PolyCoeff
+
+// Type aliases
+
+// Traits

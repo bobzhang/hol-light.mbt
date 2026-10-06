@@ -1,0 +1,81 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/trig/atn_eval"
+
+import {
+  "bobzhang/hol_light/formal_ineqs/trig/poly_eval",
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn atn_high0() -> @kernel.Thm
+
+pub fn atn_interval_th() -> @kernel.Thm
+
+pub fn atn_low0() -> @kernel.Thm
+
+pub fn atn_low_trivial() -> @kernel.Thm
+
+pub fn atn_neg_high() -> @kernel.Thm
+
+pub fn atn_neg_low() -> @kernel.Thm
+
+pub fn bound_high_transformation() -> @kernel.Thm
+
+pub fn bound_low_transformation() -> @kernel.Thm
+
+pub fn eval_halfatn4_pos_hi(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_halfatn4_pos_lo(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_halfatn_pos_hi(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_halfatn_pos_lo(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float16() -> @kernel.Term
+
+pub fn float16_eq() -> @kernel.Thm
+
+pub fn float_atn_hi(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_atn_lo(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_atn_pos_high(Int64) -> ((@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise
+
+pub fn float_atn_pos_low(Int64) -> ((@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise
+
+pub fn float_interval_atn(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn halfatn4_eq() -> @kernel.Thm
+
+pub fn halfatn_pos_hi_th() -> @kernel.Thm
+
+pub fn halfatn_pos_lo_th() -> @kernel.Thm
+
+pub fn interval_pos_th() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_atn_lower(Int64) -> (@kernel.Thm, (@kernel.Term, @list.List[@poly_eval.PolyCoeff]), (@kernel.Term, @list.List[@poly_eval.PolyCoeff])) raise
+
+pub fn mk_atn_upper(Int64) -> (@kernel.Thm, (@kernel.Term, @list.List[@poly_eval.PolyCoeff]), (@kernel.Term, @list.List[@poly_eval.PolyCoeff])) raise
+
+pub fn mk_bound_tables(@kernel.Thm) -> ((Int64) -> ((Int64) -> (@kernel.Thm, @list.List[(@kernel.Term, @list.List[@poly_eval.PolyCoeff])]) raise) raise) raise
+
+pub fn n_of_p_atn(Double, Int64, (Int64) -> Bool raise) -> Int64 raise
+
+pub fn pi2_approx_array() -> FixedArray[@kernel.Thm]
+
+pub fn pi_approx_array() -> FixedArray[@kernel.Thm]
+
+pub fn th_rule(@kernel.Thm) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

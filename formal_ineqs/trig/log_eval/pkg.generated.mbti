@@ -1,0 +1,39 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/trig/log_eval"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn float_interval_log(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_log_hi(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_log_lo(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn log_interval() -> @kernel.Thm
+
+pub fn log_reduce() -> @kernel.Thm
+
+pub fn log_reduce_exp_high() -> @kernel.Thm
+
+pub fn log_reduce_exp_low() -> @kernel.Thm
+
+pub fn log_reduce_simple_high() -> @kernel.Thm
+
+pub fn log_reduce_simple_low() -> @kernel.Thm
+
+pub fn th_rule(@kernel.Thm) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

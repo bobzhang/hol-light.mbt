@@ -1,0 +1,47 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/trig/cos_bounds_eval"
+
+import {
+  "bobzhang/hol_light/formal_ineqs/trig/poly_eval",
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn bound_high_transformation() -> @kernel.Thm
+
+pub fn bound_low_transformation() -> @kernel.Thm
+
+pub fn case_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn cos_high_trivial() -> @kernel.Thm
+
+pub fn cos_low_trivial() -> @kernel.Thm
+
+pub fn float_cos_high_raw(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn float_cos_low_raw(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_cos_bound_tables(@kernel.Thm) -> ((Int64) -> ((Int64) -> (@kernel.Thm, @list.List[(@kernel.Term, @list.List[@poly_eval.PolyCoeff])]) raise) raise) raise
+
+pub fn mk_cos_lower(Int64) -> (@kernel.Thm, (@kernel.Term, @list.List[@poly_eval.PolyCoeff]), (@kernel.Term, @list.List[@poly_eval.PolyCoeff])) raise
+
+pub fn mk_cos_upper(Int64) -> (@kernel.Thm, (@kernel.Term, @list.List[@poly_eval.PolyCoeff]), (@kernel.Term, @list.List[@poly_eval.PolyCoeff])) raise
+
+pub fn n_of_p_cos(Double, Int64, (Int64) -> Bool raise) -> Int64 raise
+
+pub fn th_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn x_pow_over_fact(Double, Int64) -> Double raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
