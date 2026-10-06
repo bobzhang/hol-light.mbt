@@ -2379,6 +2379,14 @@ module Lower = struct
               (ssb @ ssa, Tuple [ a; b ], M.Tuple [ at; bt ])
           | _ -> unsupported loc "combinator %s" name
         in
+        if List.length vals > arity then begin
+          (* more arguments than its own: the rest go to its result
+             (`(f o g) tl g` in Mizarlight/miz2a.ml) *)
+          let own = List.filteri (fun i _ -> i < arity) vals and rest = List.filteri (fun i _ -> i >= arity) vals in
+          let ss1, v, vt = core own in
+          let ss2, v, vt = apply_val (v, vt) rest in
+          adapt_to ?expect (stmts @ ss1 @ ss2, v, vt)
+        end else
         let rec go wgs got : block =
           if List.length got >= needed then begin
             let now = List.filteri (fun i _ -> i < needed) got in

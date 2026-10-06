@@ -219,7 +219,7 @@ def untested(t):
     """A directory's make.ml, when another directory needs it (as
     Geometric_Algebra/quaternions.ml needs Quaternions/make.ml): a package
     that loads the directory's files, which have their own tests."""
-    return t.endswith("/make.ml")
+    return t.endswith("/make.ml") and t not in theory.HEADS
 
 
 def references(targets, refs):
@@ -262,6 +262,8 @@ def references(targets, refs):
     lines = [
         f"let () = batch_redirect {ml_str(os.path.join(OUT, 'prelude.txt'))};;\n",
         open(os.path.join(REF, "prelude.ml")).read(), "\n",
+        # by its full name: where Mizarlight/make.ml looks for pa_f.cmo
+        f"hol_dir := {ml_str(os.path.join(REF, '_build', 'hol_dir'))};;\n",
     ]
     before = theory.USE_BEFORE + theory.CORE
     root = trie(targets, before)
@@ -305,6 +307,7 @@ def references(targets, refs):
                             f"let () = if not (Toploop.use_silently Format.std_formatter (Toploop.File {ml_str(body)})) "
                             "then exit 1;;\n")
     subprocess.run(["./ensure_pa_j.sh"], cwd=REF, check=True)
+    subprocess.run(["./ensure_pa_f.sh"], cwd=REF, check=True)
     env = os.environ.copy()
     # the bytecode stack limit, as run.sh
     env.setdefault("OCAMLRUNPARAM", "l=256M")

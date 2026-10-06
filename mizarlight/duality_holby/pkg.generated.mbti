@@ -1,0 +1,80 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/mizarlight/duality_holby"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn axiom_1() -> @kernel.Thm
+
+pub fn axiom_1_p() -> @kernel.Thm
+
+pub fn axiom_2() -> @kernel.Thm
+
+pub fn axiom_3() -> @kernel.Thm
+
+pub fn axiom_4() -> @kernel.Thm
+
+pub fn dual_1() -> @kernel.Thm
+
+pub fn dual_2() -> @kernel.Thm
+
+pub fn dual_3() -> @kernel.Thm
+
+pub fn dual_4() -> @kernel.Thm
+
+pub fn exists_line() -> @kernel.Thm
+
+pub fn exists_point() -> @kernel.Thm
+
+pub fn fano_clause(Int64, Int64) -> @kernel.Term raise
+
+pub fn fano_incidence() -> @list.List[(Int64, Int64)]
+
+pub fn fano_line(Int64) -> @kernel.Term raise
+
+pub fn fano_point(Int64) -> @kernel.Term raise
+
+pub fn fano_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn forall_line() -> @kernel.Thm
+
+pub fn forall_point() -> @kernel.Thm
+
+pub fn holby_prover(@list.List[@kernel.Thm], (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn l() -> @kernel.Term
+
+pub fn lemma_1() -> @kernel.Thm
+
+pub fn line_distinct() -> @kernel.Thm
+
+pub fn line_induct() -> @kernel.Thm
+
+pub fn line_recursion() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn on() -> @kernel.Thm
+
+pub fn on_clauses() -> @kernel.Thm
+
+pub fn p() -> @kernel.Term
+
+pub fn point_distinct() -> @kernel.Thm
+
+pub fn point_induct() -> @kernel.Thm
+
+pub fn point_recursion() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

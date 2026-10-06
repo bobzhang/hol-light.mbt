@@ -106,6 +106,11 @@ def strip_comments(text):
 
 @functools.lru_cache(maxsize=None)
 def needs(f):
+    # a make.ml that is a file of its own (HEADS) loads nothing here
+    return [] if f in HEADS else loaded_by(f)
+
+
+def loaded_by(f):
     # `f` as named (`Quaternions/misc.hl`), else with `.ml`
     path = os.path.join(HOL, f)
     if not os.path.isfile(path):
@@ -236,7 +241,10 @@ OWN_OUTPUT = {"Formal_ineqs"}
 # of HOL Light's three (@testkit.check_axioms); the test of one of these
 # compares all the axioms there are after it with upstream's.
 ASSERTS_AXIOMS = {"RichterHilbertAxiomGeometry/HilbertAxiom_read.ml",
-                  "RichterHilbertAxiomGeometry/TarskiAxiomGeometry_read.ml"}
+                  "RichterHilbertAxiomGeometry/TarskiAxiomGeometry_read.ml",
+                  # the second half of duality.ml is proved with the
+                  # sketch prover (CHEAT_TAC)
+                  "Mizarlight/duality.ml", "Mizarlight/duality_holby.ml"}
 
 
 def own_output(f):
@@ -284,7 +292,7 @@ def make_plan(d):
     if d == "Multivariate" or d in NEEDS_ONLY or not os.path.isfile(os.path.join(HOL, d, "make.ml")):
         return []
     plan, pre = [], []
-    for g in needs(d + "/make.ml"):
+    for g in loaded_by(d + "/make.ml"):
         if g.startswith(d + "/"):
             plan.append((g, pre))
             pre = []
@@ -305,6 +313,11 @@ def make_pre(f):
 # Files that are loaded after another without naming it (a directory's
 # tests, run once its make.ml has been loaded)
 AFTER = {"Cadical/test.ml": "Cadical/cadical.ml"}
+# A make.ml that is itself the first file of its directory: its definitions
+# and the syntax extension it loads come before the files it then loads
+# (Mizarlight/make.ml). It is a file like the others, loading nothing.
+HEADS = {"Mizarlight/make.ml"}
+AFTER["Mizarlight/miz2a.ml"] = "Mizarlight/make.ml"
 # miz3's sample proofs (miz3/test.ml loads them, after miz3.ml)
 AFTER.update({"miz3/Samples/" + f + ".ml": "miz3/miz3.ml"
               for f in ["samples", "sample", "talk", "drinker", "irrat2", "lagrange", "lagrange1", "icms",

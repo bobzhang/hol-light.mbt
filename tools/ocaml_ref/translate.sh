@@ -15,6 +15,7 @@ export OCAMLRUNPARAM="${OCAMLRUNPARAM:-l=256M}"
 H="$(cd ../../.repos/hol-light && pwd)"
 ROOT="$(cd ../.. && pwd)"
 ./ensure_pa_j.sh
+./ensure_pa_f.sh
 [ -f _build/holtop ] || ocamlfind ocamlmktop -o _build/holtop
 grep -v 'pa_j.cmo' boot.ml > _build/tboot.ml
 {
@@ -34,6 +35,8 @@ grep -v 'pa_j.cmo' boot.ml > _build/tboot.ml
   echo 'let float_sqrt = sqrt;; let float_fabs = abs_float;;'
   # hol.ml's (the sessions load its files one by one)
   echo 'let temp_path = ref "/tmp";;'
+  # where Mizarlight/make.ml finds its syntax extension (ensure_pa_f.sh)
+  echo "let hol_dir = ref \"$(pwd)/_build/hol_dir\";;"
   if [ "$1" = batch ]; then
     # $2: a file with the plan: `[ ([pre...], target); ... ]` (batch.py)
     echo "let _ = Main.translate_batch ~hol:\"$H\" ~root:\"$ROOT\" ~after:\"$3\" ($(cat "$2"));;"
