@@ -113,11 +113,29 @@ pub fn ocaml_string_get(s : String, i : Int) -> Char raise {
 ///|
 /// `String.sub s start len`
 pub fn string_sub(s : String, start : Int, len : Int) -> String raise {
-  ascii_only(s, "String.sub")
-  if start < 0 || len < 0 || start > s.length() - len {
+  let mut ascii = true
+  for c in s {
+    if c.to_int() >= 128 {
+      ascii = false
+      break
+    }
+  }
+  if ascii {
+    if start < 0 || len < 0 || start > s.length() - len {
+      raise @num.InvalidArgument("String.sub / Bytes.sub")
+    }
+    return s.view(start_offset=start, end_offset=start + len).to_string()
+  }
+  // the bytes of its UTF-8 encoding, which must be whole characters (the
+  // proofs of RichterHilbertAxiomGeometry/ are strings with mathematical
+  // symbols)
+  let b = @utf8.encode(s)
+  if start < 0 || len < 0 || start > b.length() - len {
     raise @num.InvalidArgument("String.sub / Bytes.sub")
   }
-  s.view(start_offset=start, end_offset=start + len).to_string()
+  @utf8.decode(b[start:start + len]) catch {
+    _ => abort("String.sub: a string cut inside a non-ASCII character")
+  }
 }
 
 ///|

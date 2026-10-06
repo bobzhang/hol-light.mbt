@@ -930,6 +930,86 @@ module Emit = struct
            add_step (Printf.sprintf "UNSUPPORTED at line %d: %s" line msg) []);
         flush_lifted ()
 
+  (* --- phrases executed from strings --- *)
+
+  (* A phrase of the file may give the toplevel OCaml as a string while it
+     runs (Loader.executed: `exec "thm_ref := ((FORALL_PAIR_THM): thm);;"`
+     in RichterHilbertAxiomGeometry/readable.ml, for every theorem and
+     tactic a proof names). Each such string is translated here as a
+     function, in the environment before the phrase, and a step before the
+     phrase's own registers it under its text (@lib.register_phrase), where
+     the file's `exec` finds it (@lib.exec_phrase). A string that is not a
+     well-typed expression is not registered: running it fails, as it does
+     upstream. *)
+  let phrase_mark = ref 0
+  let begin_phrase () = phrase_mark := Buffer.length steps
+
+  (* text -> what its names stood for when it was translated *)
+  let exec_done : (string, string) Hashtbl.t = Hashtbl.create 64
+  let exec_count = ref 0
+
+  let exec_phrases (env : Env.t) (strs : string list) =
+    let tail = Buffer.sub steps !phrase_mark (Buffer.length steps - !phrase_mark) in
+    Buffer.truncate steps !phrase_mark;
+    let seen = Hashtbl.create 16 in
+    List.iter
+      (fun text ->
+        if not (Hashtbl.mem seen text) then begin
+          Hashtbl.add seen text ();
+          let parsed =
+            try
+              match !Toploop.parse_toplevel_phrase (Lexing.from_string text) with
+              | Parsetree.Ptop_def [ { Parsetree.pstr_desc = Parsetree.Pstr_eval (e, _); _ } ] -> Some e
+              (* camlp5 makes a binding of an expression phrase *)
+              | Parsetree.Ptop_def
+                  [ { Parsetree.pstr_desc = Parsetree.Pstr_value (Asttypes.Nonrecursive, [ { Parsetree.pvb_expr = e; _ } ]); _ } ] ->
+                  Some e
+              | _ -> None
+            with _ -> None
+          in
+          match parsed with
+          | None -> ()
+          | Some e ->
+              let oname = Printf.sprintf "exec_phrase_%d" (!exec_count + 1) in
+              let loc = Location.none in
+              let unit_pat = Ast_helper.Pat.construct { Location.txt = Longident.Lident "()"; loc } None in
+              let str =
+                [ Ast_helper.Str.value Asttypes.Nonrecursive
+                    [ Ast_helper.Vb.mk (Ast_helper.Pat.var { Location.txt = oname; loc })
+                        (Ast_helper.Exp.fun_ Asttypes.Nolabel None unit_pat e) ] ]
+              in
+              match (try Some (Typemod.type_toplevel_phrase env str) with _ -> None) with
+              | None -> ()
+              | Some (tstr, _, _, _, _) ->
+                  (* the bindings its names refer to *)
+                  let key =
+                    let acc = Buffer.create 64 in
+                    let open Tast_iterator in
+                    let expr sub e =
+                      (match e.exp_desc with
+                       | Texp_ident (Path.Pident id, _, _) -> Buffer.add_string acc (Ident.unique_name id ^ " ")
+                       | Texp_ident (p, _, _) -> Buffer.add_string acc (Path.name p ^ " ")
+                       | _ -> ());
+                      default_iterator.expr sub e
+                    in
+                    let it = { default_iterator with expr } in
+                    it.structure it tstr;
+                    Buffer.contents acc
+                  in
+                  if Hashtbl.find_opt exec_done text <> Some key then begin
+                    incr exec_count;
+                    Hashtbl.replace exec_done text key;
+                    List.iter (item ~hand:[]) tstr.str_items;
+                    match Hashtbl.find_opt own_by_name oname with
+                    | Some (mname, _) ->
+                        add_step ("the phrase " ^ String.escaped text)
+                          [ Do (Call (Atom "@lib.register_phrase", [ Atom (string_lit text); Atom mname ])) ]
+                    | None -> ()
+                  end
+        end)
+      strs;
+    Buffer.add_string steps tail
+
   (* The placeholders of weak type variables (Lower.weak_name) become their
      types as resolved by now. One that nothing resolved has no value whose
      type matters: Unit. *)

@@ -16,9 +16,9 @@ fn count_groups(pat : String) -> Int {
 fn groups(n : Int, s : String) -> String {
   let parts : Array[String] = []
   for i in 0..<n {
-    let part = try {
+    let part = try
       "[" + @lib.string_escaped(@lib.str_matched_group(i.to_int64(), s)) + "]"
-    } catch {
+    catch {
       @lib.NotFound => "-"
       _ => "!"
     }
@@ -29,9 +29,7 @@ fn groups(n : Int, s : String) -> String {
 
 ///|
 fn show(out : StringBuilder, name : String, f : () -> String raise) -> Unit {
-  let r = try {
-    f()
-  } catch {
+  let r = f() catch {
     @lib.NotFound => "Not_found"
     @num.InvalidArgument(m) => "Invalid_argument " + m
     Failure(m) => "Failure " + m
@@ -68,7 +66,7 @@ fn case(out : StringBuilder, pat : String, s : String) -> Unit {
     "\{p}-\{@lib.str_match_end(())} \{groups(ng, s)}"
   })
   show(out, "backward", () => {
-    let p = @lib.str_search_backward(re, s, s.length().to_int64())
+    let p = @lib.str_search_backward(re, s, @lib.string_length(s).to_int64())
     "\{p}-\{@lib.str_match_end(())} \{groups(ng, s)}"
   })
   show(out, "replace", () => {
@@ -153,15 +151,29 @@ test "Str matches OCaml's" {
   case(out, "\\(a\\|b\\)\\(c\\)?\\1", "aca bb")
   case(out, ";\\|\\[", "a [b]; c")
   case(out, "::[^\n]*", "x ::c\ny :: d")
-  case(out, "\\([ \t\n]+proof[ \t\n]+\\|[ \t\n]+qed[ \t\n]*;\\)", " proof\n  intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n qed;\n")
+  case(
+    out, "\\([ \t\n]+proof[ \t\n]+\\|[ \t\n]+qed[ \t\n]*;\\)", " proof\n  intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n qed;\n",
+  )
   case(out, "[ \t\n]+\\([^][ \t\n]+\\)", "  SUBGOAL_TAC [x]")
   case(out, "[ \t\n]+\\([a-zA-Z0-9_]+\\)", " fol H1 H2")
-  case(out, "[ \t\n]+case_split[ \t\n]+\\([^;]+\\)[ \t\n]+by", " case_split a | b by fol;")
-  case(out, "[ \t\n]+consider[ \t\n]+\\(\\(.\\|\n\\)+\\)[ \t\n]+such[ \t\n]+that[ \t\n]+\\(\\(.\\|\n\\)+\\)[ \t\n]+\\[\\(\\(.\\|\n\\)*\\)\\][ \t\n]+by", " consider x y such that\n x = y [H] by fol;")
-  case(out, "[ \t\n]+proof\\([ \t\n]+\\(.\\|\n\\)*\\)[ \t\n]+qed[ \t\n]*;[ \t\n]*", " proof\n  intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n qed;\n  x;\n")
+  case(
+    out, "[ \t\n]+case_split[ \t\n]+\\([^;]+\\)[ \t\n]+by", " case_split a | b by fol;",
+  )
+  case(
+    out, "[ \t\n]+consider[ \t\n]+\\(\\(.\\|\n\\)+\\)[ \t\n]+such[ \t\n]+that[ \t\n]+\\(\\(.\\|\n\\)+\\)[ \t\n]+\\[\\(\\(.\\|\n\\)*\\)\\][ \t\n]+by",
+    " consider x y such that\n x = y [H] by fol;",
+  )
+  case(
+    out, "[ \t\n]+proof\\([ \t\n]+\\(.\\|\n\\)*\\)[ \t\n]+qed[ \t\n]*;[ \t\n]*",
+    " proof\n  intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n qed;\n  x;\n",
+  )
   case(out, "[ \t\n]+\\(assume\\)[ \t\n]+", " assume A [H];")
   case(out, "[ \t\n]*", " \n\t")
   case(out, "[ \t\n]*", " a ")
+  case(out, "⇒", "a ⇒ b ⇒ c")
+  case(out, "[^;]*;", "∀x. P ⇒ Q; rest")
+  case(out, "[ \t\n]+\\([^ \t\n]+\\)", " α⇒β x")
+  case(out, "∧\\|∨", "p ∧ q ∨ r")
   inspect(
     out.to_string(),
     content=(
@@ -733,6 +745,38 @@ test "Str matches OCaml's" {
       #|replace1 = Failure Str.replace: reference to unmatched group
       #|first = #a 
       #|split = a
+      #|== \226\135\146 on a \226\135\146 b \226\135\146 c
+      #|match = no
+      #|forward = 2-5 [\226\135\146]
+      #|backward = 8-11 [\226\135\146]
+      #|replace = a <\226\135\146> b <\226\135\146> c
+      #|replace1 = Failure Str.replace: reference to unmatched group
+      #|first = a # b \226\135\146 c
+      #|split = a | b | c
+      #|== [^;]*; on \226\136\128x. P \226\135\146 Q; rest
+      #|match = 14 [\226\136\128x. P \226\135\146 Q;]
+      #|forward = 0-14 [\226\136\128x. P \226\135\146 Q;]
+      #|backward = 13-14 [;]
+      #|replace = <\226\136\128x. P \226\135\146 Q;> rest
+      #|replace1 = Failure Str.replace: reference to unmatched group
+      #|first = # rest
+      #|split =  rest
+      #|== [ \t\n]+\\([^ \t\n]+\\) on  \206\177\226\135\146\206\178 x
+      #|match = 8 [ \206\177\226\135\146\206\178],[\206\177\226\135\146\206\178]
+      #|forward = 0-8 [ \206\177\226\135\146\206\178],[\206\177\226\135\146\206\178]
+      #|backward = 8-10 [ x],[x]
+      #|replace = < \206\177\226\135\146\206\178>< x>
+      #|replace1 = [\206\177\226\135\146\206\178\\\\n][x\\\\n]
+      #|first = # x
+      #|split = 
+      #|== \226\136\167\\|\226\136\168 on p \226\136\167 q \226\136\168 r
+      #|match = no
+      #|forward = 2-5 [\226\136\167]
+      #|backward = 8-11 [\226\136\168]
+      #|replace = p <\226\136\167> q <\226\136\168> r
+      #|replace1 = Failure Str.replace: reference to unmatched group
+      #|first = p # q \226\136\168 r
+      #|split = p | q | r
       #|
     ),
   )

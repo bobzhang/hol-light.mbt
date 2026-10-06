@@ -103,6 +103,8 @@ pub fn[A] el(Int, @list.List[A]) -> A raise
 
 pub fn[A] end_itlist((A, A) -> A raise?, @list.List[A]) -> A raise
 
+pub fn exec_phrase(String) -> Unit raise
+
 pub fn[A] exists((A) -> Bool raise?, @list.List[A]) -> Bool raise?
 
 pub fn explode(String) -> @list.List[String]
@@ -349,6 +351,8 @@ pub fn[A] partition((A) -> Bool raise?, @list.List[A]) -> (@list.List[A], @list.
 
 pub fn pred63(Int64) -> Int64
 
+pub fn printexc_to_string(Error) -> String
+
 pub fn[A] qmap((A) -> A raise?, @list.List[A]) -> @list.List[A] raise?
 
 pub fn[T] raise_error(Error) -> T raise
@@ -364,6 +368,8 @@ pub fn random_init(Int64) -> Unit
 pub fn random_int(Int64) -> Int64 raise
 
 pub fn range(Int64, Int64) -> @list.List[Int64]
+
+pub fn register_phrase(String, (Unit) -> Unit raise) -> Unit
 
 pub fn remark(String) -> Unit
 

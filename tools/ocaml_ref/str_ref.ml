@@ -109,3 +109,7 @@ case "[ \t\n]+proof\\([ \t\n]+\\(.\\|\n\\)*\\)[ \t\n]+qed[ \t\n]*;[ \t\n]*" " pr
 case "[ \t\n]+\\(assume\\)[ \t\n]+" " assume A [H];";;
 case "[ \t\n]*" " \n\t";;
 case "[ \t\n]*" " a ";;
+case "⇒" "a ⇒ b ⇒ c";;
+case "[^;]*;" "∀x. P ⇒ Q; rest";;
+case "[ \t\n]+\\([^ \t\n]+\\)" " α⇒β x";;
+case "∧\\|∨" "p ∧ q ∨ r";;
