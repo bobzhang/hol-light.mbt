@@ -1,0 +1,85 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/wz/maxima"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn wz_maxima_binom() -> @kernel.Term
+
+pub fn wz_maxima_binops() -> @list.List[(@kernel.Term, String)]
+
+pub fn wz_maxima_certificate(@kernel.Term, @kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise
+
+pub fn wz_maxima_certificate_of_string(String) -> (@kernel.Term, @list.List[@kernel.Term]) raise
+
+pub fn wz_maxima_executable() -> @ref.Ref[String]
+
+pub fn wz_maxima_fact() -> @kernel.Term
+
+pub fn wz_maxima_mk_neg(@kernel.Term) -> @kernel.Term raise
+
+pub fn wz_maxima_mk_pow(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn wz_maxima_name(String) -> String raise
+
+pub fn wz_maxima_neg() -> @kernel.Term
+
+pub fn wz_maxima_output(String) -> String raise
+
+pub fn wz_maxima_parse_atom(@list.List[String]) -> (@kernel.Term, @list.List[String]) raise
+
+pub fn wz_maxima_parse_difference(@list.List[String]) -> (@kernel.Term, @list.List[String]) raise
+
+pub fn wz_maxima_parse_difference_tail(@kernel.Term, @list.List[String]) -> (@kernel.Term, @list.List[String]) raise
+
+pub fn wz_maxima_parse_expression(@list.List[String]) -> (@kernel.Term, @list.List[String]) raise
+
+pub fn wz_maxima_parse_list(@list.List[WzMaximaObject], @list.List[String]) -> (WzMaximaObject, @list.List[String]) raise
+
+pub fn wz_maxima_parse_object(@list.List[String]) -> (WzMaximaObject, @list.List[String]) raise
+
+pub fn wz_maxima_parse_power(@list.List[String]) -> (@kernel.Term, @list.List[String]) raise
+
+pub fn wz_maxima_parse_product(@list.List[String]) -> (@kernel.Term, @list.List[String]) raise
+
+pub fn wz_maxima_parse_quotient(@list.List[String]) -> (@kernel.Term, @list.List[String]) raise
+
+pub fn wz_maxima_parse_quotient_tail(@kernel.Term, @list.List[String]) -> (@kernel.Term, @list.List[String]) raise
+
+pub fn wz_maxima_parse_sum(@list.List[String]) -> (@kernel.Term, @list.List[String]) raise
+
+pub fn wz_maxima_parse_unary(@list.List[String]) -> (@kernel.Term, @list.List[String]) raise
+
+pub fn wz_maxima_prove(@kernel.Term, @kernel.Term, @list.List[@kernel.Term]) -> @kernel.Thm raise
+
+pub fn wz_maxima_rbinom() -> @kernel.Term
+
+pub fn wz_maxima_real_of_num() -> @kernel.Term
+
+pub fn wz_maxima_string_of_term(@kernel.Term) -> String raise
+
+pub fn wz_maxima_tokens(String) -> @list.List[String] raise
+
+// Errors
+
+// Types and methods
+pub(all) enum WzMaximaObject {
+  Wzterm(@kernel.Term)
+  Wzlist(@list.List[WzMaximaObject])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for WzMaximaObject
+pub impl @lib.OHash for WzMaximaObject
+
+// Type aliases
+
+// Traits
