@@ -1,0 +1,103 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/wz/examples"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn wz_example_1() -> @kernel.Thm
+
+pub fn wz_example_10() -> @kernel.Thm
+
+pub fn wz_example_11() -> @kernel.Thm
+
+pub fn wz_example_12() -> @kernel.Thm
+
+pub fn wz_example_13() -> @kernel.Thm
+
+pub fn wz_example_14() -> @kernel.Thm
+
+pub fn wz_example_15() -> @kernel.Thm
+
+pub fn wz_example_16() -> @kernel.Thm
+
+pub fn wz_example_17() -> @kernel.Thm
+
+pub fn wz_example_18() -> @kernel.Thm
+
+pub fn wz_example_19() -> @kernel.Thm
+
+pub fn wz_example_2() -> @kernel.Thm
+
+pub fn wz_example_20() -> @kernel.Thm
+
+pub fn wz_example_21() -> @kernel.Thm
+
+pub fn wz_example_22() -> @kernel.Thm
+
+pub fn wz_example_23() -> @kernel.Thm
+
+pub fn wz_example_24() -> @kernel.Thm
+
+pub fn wz_example_25() -> @kernel.Thm
+
+pub fn wz_example_26() -> @kernel.Thm
+
+pub fn wz_example_27() -> @kernel.Thm
+
+pub fn wz_example_28() -> @kernel.Thm
+
+pub fn wz_example_29() -> @kernel.Thm
+
+pub fn wz_example_3() -> @kernel.Thm
+
+pub fn wz_example_30() -> @kernel.Thm
+
+pub fn wz_example_31() -> @kernel.Thm
+
+pub fn wz_example_32() -> @kernel.Thm
+
+pub fn wz_example_33() -> @kernel.Thm
+
+pub fn wz_example_34() -> @kernel.Thm
+
+pub fn wz_example_35() -> @kernel.Thm
+
+pub fn wz_example_36() -> @kernel.Thm
+
+pub fn wz_example_37() -> @kernel.Thm
+
+pub fn wz_example_38() -> @kernel.Thm
+
+pub fn wz_example_39() -> @kernel.Thm
+
+pub fn wz_example_4() -> @kernel.Thm
+
+pub fn wz_example_40() -> @kernel.Thm
+
+pub fn wz_example_41() -> @kernel.Thm
+
+pub fn wz_example_42() -> @kernel.Thm
+
+pub fn wz_example_5() -> @kernel.Thm
+
+pub fn wz_example_6() -> @kernel.Thm
+
+pub fn wz_example_7() -> @kernel.Thm
+
+pub fn wz_example_8() -> @kernel.Thm
+
+pub fn wz_example_9() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
