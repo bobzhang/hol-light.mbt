@@ -27,8 +27,8 @@ constructs theorems only through its API.
 - **RichterHilbertAxiomGeometry/**: readable.ml and the six developments
   in its proof format that load upstream (`richterhilbertaxiomgeometry/<name>`).
 - **miz3/**: miz3.ml and its thirteen sample proofs (`miz3/miz3`,
-  `miz3/Samples/<name>`).
-- Not ported: Mizarlight/ (its own syntax extension), QBF/ (needs squolem);
+  `miz3/Samples/<name>`). **Mizarlight/**: its four files.
+- Not ported: QBF/ (needs squolem, which has no build for this platform);
   see [TODO.md](TODO.md).
 
 Files that run an external program (csdp for `Examples/sos.ml`'s REAL_SOS,
