@@ -663,3 +663,39 @@ pub fn[A] array_fill(
     a[i] = x
   }
 }
+
+///|
+/// `atan`
+pub fn float_atan(x : Double) -> Double {
+  @math.atan(x)
+}
+
+///|
+/// `Printf`'s `%.0f`: the nearest integer, a tie to the even one.
+pub fn float_fixed0(x : Double) -> String {
+  if x.is_nan() {
+    return "nan"
+  }
+  if x.is_inf() {
+    return if x > 0.0 { "inf" } else { "-inf" }
+  }
+  let neg = x < 0.0
+  let a = x.abs()
+  let f = a.floor()
+  let d = a - f
+  let r = if d > 0.5 || (d == 0.5 && f % 2.0 == 1.0) { f + 1.0 } else { f }
+  // (a double of 2^63 or more has no fraction: its own digits)
+  let digits = if r < 9.0e18 { r.to_int64().to_string() } else { r.to_string() }
+  // C prints the sign of a negative number that rounds to zero too
+  if neg {
+    "-" + digits
+  } else {
+    digits
+  }
+}
+
+///|
+/// `Unix.mkdir`: directories are not kept (files are in memory).
+pub fn unix_mkdir(_name : String, _perm : Int64) -> Unit {
+
+}

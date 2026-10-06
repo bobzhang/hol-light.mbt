@@ -113,6 +113,8 @@ pub fn[T] failwith(String) -> T raise
 
 pub fn file_of_string(String, String) -> Unit
 
+pub fn filename_basename(String) -> String
+
 pub fn filename_concat(String, String) -> String
 
 pub fn filename_is_relative(String) -> Bool
@@ -128,6 +130,10 @@ pub fn[A] find_index((A) -> Bool raise?, @list.List[A]) -> Int64? raise?
 pub fn[A] flat(@list.List[@list.List[A]]) -> @list.List[A]
 
 pub fn[A, B, C] flip((A, B) -> C raise?, B, A) -> C raise?
+
+pub fn float_atan(Double) -> Double
+
+pub fn float_fixed0(Double) -> String
 
 pub fn float_frexp(Double) -> (Double, Int64)
 
@@ -494,6 +500,8 @@ pub fn[A : OCompare] unions(@list.List[@list.List[A]]) -> @list.List[A]
 pub fn[A] unions_eq((A, A) -> Bool raise?, @list.List[@list.List[A]]) -> @list.List[A] raise?
 
 pub fn[A : OCompare] uniq(@list.List[A]) -> @list.List[A]
+
+pub fn unix_mkdir(String, Int64) -> Unit
 
 pub fn[A, B] unzip(@list.List[(A, B)]) -> (@list.List[A], @list.List[B])
 
