@@ -101,10 +101,19 @@ and file I/O before starting it.
      minisat_prove's test has three SAT_PROVE checks instead.
    - Left with a program: WZ/ and Tutorial/Linking_external_tools.ml
      (maxima), QBF/ (squolem), LP_arith/ (cdd), Examples/prover9.ml.
-   - miz3 (its own proof language, evaluated at run time; OCaml code in
-     miz3/, with Unix signals and a vi server to stub): then
-     RichterHilbertAxiomGeometry/ (36K) and
-     Examples/inverse_bug_puzzle_miz3.ml.
+   - miz3 (miz3/miz3.ml, 1.9K lines; then RichterHilbertAxiomGeometry/,
+     36K, and Examples/inverse_bug_puzzle_miz3.ml): not a matter of
+     installing a tool. A miz3 proof is a string, and the OCaml in it
+     (tactics, theorem names) is run through the toplevel while the proof
+     is checked (`exec_phrase`: `Toploop.execute_phrase` on
+     `Lexing.from_string`). There is no OCaml toplevel here. A way: in the
+     translation session, capture every phrase `exec_phrase` is given and
+     translate each as an item of the file (a table from the phrase's text
+     to its compiled value), which `exec_phrase` then looks up. Also to
+     stub: `Unix.alarm` and `Sys.signal` (step timeouts), the vi-server
+     functions (`Unix.fork`, pid files). A survey run
+     (`HOL_KEEP_GOING=1`) also hit a translator failure ("cannot adapt
+     ... to (TB)") in the file.
    - Formal_ineqs (44K, 62 files in make.ml's closure): the tooling loads
      it (theory.ROOTS: one linear order; nested package paths), and its
      first four files translate. Survey it with `HOL_KEEP_GOING=1 batch.py
