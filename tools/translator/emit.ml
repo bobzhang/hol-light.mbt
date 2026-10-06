@@ -872,6 +872,58 @@ module Emit = struct
                        mention `x`: an ordinary definition (Model/syntax.ml's
                        `let rec sizeof = define ...`) *)
                     emit_pattern vb)
+           | Tstr_value (Asttypes.Recursive, (_ :: _ :: _ as vbs))
+             when List.exists (fun vb -> not (is_function vb.vb_expr)) vbs ->
+               (* a member with a set-up: `let rec f x = ... g ... and g =
+                  let t = e in let rec h y = ... f ... in fun z -> ...`
+                  (term_of_now in miz3/miz3.ml). The closures of the set-up
+                  join the group; its other values, which cannot use the
+                  group, are defined once before it. *)
+               let rec peel e acc =
+                 match e.exp_desc with
+                 | Texp_let (_, pvbs, inner) -> peel inner (acc @ pvbs)
+                 | Texp_function _ -> Some (acc, e)
+                 | _ -> None
+               in
+               let ids pvbs = List.concat_map (fun vb -> List.map Ident.unique_name (pat_bound_idents vb.vb_pat)) pvbs in
+               let group = ref (ids vbs) in
+               let mentions pvb =
+                 let found = ref false in
+                 let open Tast_iterator in
+                 let expr sub e =
+                   (match e.exp_desc with
+                    | Texp_ident (Path.Pident id, _, _) when List.mem (Ident.unique_name id) !group -> found := true
+                    | _ -> ());
+                   default_iterator.expr sub e
+                 in
+                 let iter = { default_iterator with expr } in
+                 iter.expr iter pvb.vb_expr;
+                 !found
+               in
+               let joined = ref [] and values = ref [] in
+               let vbs' =
+                 List.map
+                   (fun vb ->
+                     if is_function vb.vb_expr then vb
+                     else
+                       match peel vb.vb_expr [] with
+                       | None -> unsupported vb.vb_loc "recursive value"
+                       | Some (pre, f) ->
+                           let owner = match vb.vb_pat.pat_desc with Tpat_var (id, _) -> Ident.name id | _ -> "rec" in
+                           List.iter
+                             (fun pvb ->
+                               match pvb.vb_pat.pat_desc with
+                               | Tpat_var _ when is_function pvb.vb_expr ->
+                                   group := ids [ pvb ] @ !group;
+                                   joined := !joined @ [ pvb ]
+                               | Tpat_var (id, _) when not (mentions pvb) -> values := !values @ [ (owner, id, pvb) ]
+                               | _ -> unsupported pvb.vb_loc "recursive value whose set-up uses itself")
+                             pre;
+                           { vb with vb_expr = f })
+                   vbs
+               in
+               List.iter (fun (owner, id, pvb) -> emit_value ~id (Ident.name id ^ "'" ^ owner) pvb.vb_expr) !values;
+               item ~hand { it with str_desc = Tstr_value (Asttypes.Recursive, vbs' @ !joined) }
            | Tstr_value (Asttypes.Recursive, vbs) ->
                (* name and register every function first: they may call
                   each other (and themselves, through local identifiers) *)

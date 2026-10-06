@@ -958,6 +958,10 @@ module Lower = struct
         || needs_eta r1 r2
     | M.Tuple hs, M.Tuple ws when List.length hs = List.length ws -> List.exists2 needs_eta hs ws
     | M.Named ("Int", []), M.Named ("Int64", []) | M.Named ("Int64", []), M.Named ("Int", []) -> true
+    (* a list of functions of another shape (tactics that return a
+       goalstate, whose justification takes two arguments, where its
+       canonical type is expected: thenl' in miz3/miz3.ml) *)
+    | M.Named ("@list.List", [ h ]), M.Named ("@list.List", [ w ]) -> needs_eta h w
     | _ -> false
 
   let rec groups = function
@@ -982,6 +986,12 @@ module Lower = struct
         let stmts, e = hoist (stmts, e) in
         let comps = List.mapi (fun i (h, w) -> snd (adapt ([], Field (e, i)) h w)) (List.combine hs ws) in
         (stmts, Tuple comps)
+    | M.Named ("@list.List", [ h ]), M.Named ("@list.List", [ w ]) ->
+        (* each element adapted *)
+        let x = fresh "x" in
+        (* the list first: it gives the function's parameter its type
+           where that cannot be written (a type variable of a value) *)
+        (stmts, Call (Atom "@list.List::map", [ e; typed_lam [ param x h ] w (adapt ([], Atom x) h w) ]))
     | _ ->
     begin
       let stmts, e = hoist (stmts, e) in
@@ -1256,6 +1266,14 @@ module Lower = struct
   (* ---------------------------------------------------------------- *)
 
   let path_name p = Path.name p
+
+  (* a constant constructor of a variant or an exception (not `()`, a
+     boolean, `[]` or `None`): OCaml's equality with one looks at the other
+     side's constructor only, whatever the type holds (functions too) *)
+  let constant_variant (e : expression) =
+    match e.exp_desc with
+    | Texp_construct (_, cd, []) -> not (List.mem cd.Types.cstr_name [ "()"; "true"; "false"; "[]"; "None" ])
+    | _ -> false
 
   let stdlib_name p =
     let n = path_name p in
@@ -1599,6 +1617,15 @@ module Lower = struct
         (* a polymorphic local is used at an instance of its type *)
         let hmty = refine l.mty (mty_of f.exp_type) in
         apply_head ?expect ~res:whole.exp_type loc { hstmts = []; hexp = Atom l.name; hmty; hoty = l.loty } args
+    | Texp_ident (p, _, _)
+      when (match Prov.lookup p with Some ("lib.ml", "mem") -> true | _ -> false)
+           && (match args with [ c; _ ] -> constant_variant c | _ -> false) ->
+        (* `mem Hole l`: whether an element is that constructor (miz3) *)
+        let c, l = match args with [ c; l ] -> (c, l) | _ -> assert false in
+        let _, cx, _ = lower c in
+        let ss, lx, _ = lower l in
+        let test = Lam ([ "x__" ], ([], Atom ("(x__ is " ^ string_of_exp cx ^ ")"))) in
+        adapt_to ?expect (ss, Call (Atom "@lib.exists", [ test; lx ]), M.Named ("Bool", []))
     | Texp_ident (p, _, vd)
       when (match Prov.lookup p with Some ("nets.ml", "lookup") -> true | _ -> false)
            && List.length args = 2
@@ -1893,6 +1920,14 @@ module Lower = struct
           if constant_ctor "[]" k then Call (Atom "@list.List::is_empty", [ x ])
           else Atom ("(" ^ string_of_exp x ^ " is None)")
         in
+        adapt_to ?expect (ss, (if name = "=" then test else Not test), M.Named ("Bool", []))
+    | ("=" | "<>"), [ a; b ] when List.exists constant_variant [ a; b ] ->
+        (* a test of the constructor: no equality on the type is needed
+           (`substep = Bracket_proof`, `x = Timeout` in miz3/miz3.ml) *)
+        let k, other = if constant_variant a then (a, b) else (b, a) in
+        let _, kx, _ = lower k in
+        let ss, x, _ = lower other in
+        let test = Atom ("(" ^ string_of_exp x ^ " is " ^ string_of_exp kx ^ ")") in
         adapt_to ?expect (ss, (if name = "=" then test else Not test), M.Named ("Bool", []))
     | ("fst" | "snd"), [ a ] ->
         (* the component's own type (an `Int` of a hand-ported tuple is

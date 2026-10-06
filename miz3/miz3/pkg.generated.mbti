@@ -1,0 +1,356 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/miz3/miz3"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/parser",
+  "bobzhang/hol_light/pp",
+  "bobzhang/hol_light/preterm",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn[TA, TB] a_p(String, @list.List[(TA, @parser.Lexcode, TB)]) -> ((TA, @parser.Lexcode, TB), @list.List[(TA, @parser.Lexcode, TB)]) raise
+
+pub fn a_semi(@list.List[(String, @parser.Lexcode, String)]) -> ((String, @parser.Lexcode, String), @list.List[(String, @parser.Lexcode, String)]) raise
+
+pub fn add_width(Int64, String) -> Int64 raise
+
+pub fn by_item_cache() -> @ref.Ref[@lib.Func[String, ByItem]]
+
+pub fn by_item_of_toks(@list.List[(String, @parser.Lexcode, String)]) -> ByItem raise
+
+pub fn case_of_toks(@list.List[@kernel.Term], Bool, @list.List[(String, @parser.Lexcode, String)]) -> (Just, @list.List[(String, @parser.Lexcode, String)]) raise
+
+pub fn check_file(String) -> @kernel.Thm raise
+
+pub fn check_file_verbose(String) -> ((String?) -> ((Int64, Int64, Int64), @kernel.Thm) raise) raise
+
+pub fn check_proof(@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> (@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)], (Int64, Int64, Int64), @kernel.Thm) raise
+
+pub fn connect_step((Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep), @list.List[String]) -> (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep) raise
+
+pub fn[TA] count_errors(@list.List[(Int64, TA)]) -> (Int64, Int64, Int64) raise
+
+pub fn[TA, TB] cut_step(@list.List[(TA, @parser.Lexcode, TB)]) -> (@list.List[(TA, @parser.Lexcode, TB)], @list.List[(TA, @parser.Lexcode, TB)]) raise
+
+pub fn[TA, TB] cut_steps(@list.List[(TA, @parser.Lexcode, TB)]) -> @list.List[@list.List[(TA, @parser.Lexcode, TB)]] raise
+
+pub fn[TA, TB] cut_to(Bool, Int64, @list.List[String], @list.List[String], @list.List[(TA, @parser.Lexcode, TB)]) -> (@list.List[(TA, @parser.Lexcode, TB)], @list.List[(TA, @parser.Lexcode, TB)]) raise
+
+pub fn default_prover() -> @ref.Ref[(String, (@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise)]
+
+pub fn ee(String) -> @list.List[((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)] raise
+
+pub fn eqtf_intro(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn error_line(@list.List[(Int64, Int64)], @list.List[Int64]) -> (String, @list.List[Int64]) raise
+
+pub fn errors() -> @list.List[String]
+
+pub fn exec_conv(String) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn exec_conv_out() -> @ref.Ref[(@kernel.Term) -> @kernel.Thm raise]
+
+pub fn exec_phrase(Bool) -> ((String) -> (Bool, String) raise) raise
+
+pub fn exec_tactic(String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn exec_tactic_out() -> @ref.Ref[((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise]
+
+pub fn exec_thm(String) -> @kernel.Thm raise
+
+pub fn exec_thm_out() -> @ref.Ref[@kernel.Thm]
+
+pub fn exec_thmlist_tactic(String) -> ((@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn exec_thmlist_tactic_out() -> @ref.Ref[(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise]
+
+pub fn exec_thmtactic(String) -> ((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn exec_thmtactic_out() -> @ref.Ref[(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise]
+
+pub fn exit_proc() -> @ref.Ref[(Unit) -> Unit raise]
+
+pub fn explain_errors() -> @ref.Ref[Int64]
+
+pub fn extra_labels() -> @ref.Ref[Int64]
+
+pub fn fake_tac(Bool, @list.List[@kernel.Thm], (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn filter_assums(((Int64, (String, @kernel.Thm))) -> Bool raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn fix_dots(@list.List[@kernel.Term], @kernel.Term) -> @kernel.Term raise
+
+pub fn[TA] fix_dots_p(@list.List[(TA, @kernel.Thm)], @kernel.Term) -> @kernel.Thm raise
+
+pub fn fix_semi(@list.List[(String, @parser.Lexcode, String)]) -> @list.List[(String, @parser.Lexcode, String)] raise
+
+pub fn[TA] goal_from((TA) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise, TA) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn goal_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn grow_duplicates() -> @ref.Ref[Int64]
+
+pub fn grow_haves() -> @ref.Ref[Bool]
+
+pub fn growth_mode() -> @ref.Ref[Bool]
+
+pub fn horizon() -> @ref.Ref[Int64]
+
+pub fn[TA, TB] ident_p(@list.List[(TA, @parser.Lexcode, TB)]) -> (String, @list.List[(TA, @parser.Lexcode, TB)]) raise
+
+pub fn indent_continued() -> @ref.Ref[Bool]
+
+pub fn insert_errors(Int64, String, @list.List[(Int64, Int64)], @list.List[Int64]) -> (String, Int64, @list.List[(Int64, Int64)], @list.List[Int64]) raise
+
+pub fn isnumber(String) -> Bool raise
+
+pub fn just_cache() -> @ref.Ref[@lib.Func[(String, (@list.List[@kernel.Term], @list.List[@kernel.Term]), @kernel.Term), (Int64, @kernel.Thm)]]
+
+pub fn just_of_toks(@list.List[@kernel.Term], @list.List[(String, @parser.Lexcode, String)]) -> (Just, @list.List[(String, @parser.Lexcode, String)]) raise
+
+pub fn labels_of_just(@list.List[(@list.List[String], @ref.Ref[Int64])], @list.List[(@list.List[String], @ref.Ref[Int64])], Just) -> @list.List[(@list.List[String], @ref.Ref[Int64])] raise
+
+pub fn labels_of_steps(@list.List[(@list.List[String], @ref.Ref[Int64])], @list.List[(@list.List[String], @ref.Ref[Int64])], @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> @list.List[(@list.List[String], @ref.Ref[Int64])] raise
+
+pub fn labels_tac(@list.List[String], @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn last_thm(Unit) -> @kernel.Thm raise
+
+pub fn last_thm_internal() -> @ref.Ref[@kernel.Thm?]
+
+pub fn last_thm_internal_p() -> @ref.Ref[@kernel.Thm?]
+
+pub fn lex1(@list.List[String]) -> @list.List[(String, @parser.Lexcode, String)] raise
+
+pub fn lex2(String) -> @list.List[(String, @parser.Lexcode, String)] raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn map_assums(((String, @kernel.Thm)) -> (String, @kernel.Thm) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn[TA] max_label(@list.List[(@list.List[String], TA)]) -> Int64 raise
+
+pub fn[TA, TB, TC] middle(TB, TA, TC) -> TA raise
+
+pub fn miz3_filename() -> @ref.Ref[String]
+
+pub fn miz3_pid() -> @ref.Ref[String]
+
+pub fn mizar_next(((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep), ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep), ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) raise) raise
+
+pub fn mizar_next_p(((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn mizar_skip_bracketed() -> @list.List[String]
+
+pub fn mizar_step_words() -> @list.List[String]
+
+pub fn mizar_step_words_v1() -> @list.List[String]
+
+pub fn mizar_words() -> @list.List[String]
+
+pub fn mp_all(((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise, @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn next_growth_label() -> @ref.Ref[Int64]
+
+pub fn now_of_toks(@list.List[@kernel.Term], @list.List[(String, @parser.Lexcode, String)]) -> (Just, @list.List[(String, @parser.Lexcode, String)]) raise
+
+pub fn number_labels(Int64, @list.List[(@list.List[String], @ref.Ref[Int64])]) -> @list.List[(@list.List[String], @list.List[String])] raise
+
+pub fn outdent(Int64, (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep) raise
+
+pub fn parse_by(@list.List[(String, @parser.Lexcode, String)]) -> (Just, @list.List[(String, @parser.Lexcode, String)]) raise
+
+pub fn[TA, TB] parse_labels(@list.List[(TA, @parser.Lexcode, TB)]) -> @list.List[String] raise
+
+pub fn parse_proof(String) -> @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)] raise
+
+pub fn parse_qproof(String) -> @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)] raise
+
+pub fn parse_step(@list.List[@kernel.Term], @list.List[(String, @parser.Lexcode, String)]) -> (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep) raise
+
+pub fn pp_just(String, Just) -> Just raise
+
+pub fn pp_step(String, (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep) raise
+
+pub fn print_boxed(@pp.Formatter, String) -> Unit raise
+
+pub fn print_qsteps(@pp.Formatter, @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> Unit raise
+
+pub fn print_step(@pp.Formatter, (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> Unit raise
+
+pub fn[TA, TB] print_to_string1((@pp.Formatter) -> ((TA) -> TB raise) raise) -> ((String) -> ((Int64) -> ((TA) -> String raise) raise) raise) raise
+
+pub fn proof_indent() -> @ref.Ref[String]
+
+pub fn proof_width() -> @ref.Ref[Int64]
+
+pub fn pure_exactly_once_rewrite_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn rawtoken(@list.List[String]) -> (String, @list.List[String]) raise
+
+pub fn renumber_just(@list.List[(@list.List[String], @list.List[String])], @list.List[(@list.List[String], @list.List[String])], @list.List[(String, @parser.Lexcode, String)], Just) -> (@list.List[(@list.List[String], @list.List[String])], @list.List[(String, @parser.Lexcode, String)], Just) raise
+
+pub fn renumber_labels() -> @ref.Ref[Bool]
+
+pub fn renumber_steps(@list.List[(@list.List[String], @list.List[String])], @list.List[(@list.List[String], @list.List[String])], @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> (@list.List[(@list.List[String], @list.List[String])], @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) raise
+
+pub fn renumber_steps1(@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)] raise
+
+pub fn replacement_steps((@list.List[(String, @kernel.Thm)], @kernel.Term), (String) -> ((Int64) -> (@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)], @list.List[String], Int64) raise) raise, (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)] raise
+
+pub fn reset_miz3(Int64) -> Unit raise
+
+pub fn rewrap_step((Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep) raise
+
+pub fn rewrite_thesis_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn server_down(Unit) -> Unit raise
+
+pub fn server_up(Unit) -> Unit raise
+
+pub fn silent_server() -> @ref.Ref[Int64]
+
+pub fn sketch_mode() -> @ref.Ref[Bool]
+
+pub fn split_step(@list.List[(String, @parser.Lexcode, String)]) -> @list.List[@list.List[(String, @parser.Lexcode, String)]] raise
+
+pub fn split_string(String) -> @list.List[String] raise
+
+pub fn src_of_just(Just) -> @list.List[(Int64, (String, String, String))] raise
+
+pub fn src_of_step(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep) -> @list.List[(Int64, (String, String, String))] raise
+
+pub fn src_of_steps(@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> @list.List[(Int64, (String, String, String))] raise
+
+pub fn start_label() -> @ref.Ref[Int64]
+
+pub fn step_of_obligation(String, String, @list.List[@kernel.Term], @list.List[@kernel.Term], @kernel.Term) -> (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep) raise
+
+pub fn step_of_substep(String, Substep) -> (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep) raise
+
+pub fn steps_of_goals((@list.List[(String, @kernel.Thm)], @kernel.Term), ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise), String, Int64) -> (@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)], @list.List[String], Int64) raise
+
+pub fn steps_of_toks(@list.List[(String, @parser.Lexcode, String)]) -> @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)] raise
+
+pub fn steps_of_toks1(Bool, Bool, @list.List[@kernel.Term], @list.List[(String, @parser.Lexcode, String)]) -> (@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)], (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)?, @list.List[(String, @parser.Lexcode, String)]) raise
+
+pub fn string_of_src(Int64, @list.List[(Int64, (String, String, String))]) -> String raise
+
+pub fn string_of_substep(String, Substep) -> String raise
+
+pub fn string_of_term1(String) -> ((Int64) -> ((@kernel.Term) -> String raise) raise) raise
+
+pub fn string_of_toks(@list.List[(String, @parser.Lexcode, String)]) -> String raise
+
+pub fn string_of_type1(String) -> ((Int64) -> ((@kernel.HolType) -> String raise) raise) raise
+
+pub fn strings_of_toks(@list.List[(String, @parser.Lexcode, String)]) -> (String, String, String) raise
+
+pub fn t_pterm_of_now() -> @kernel.Term
+
+pub fn tactic_of_by(Bool, @list.List[ByItem], @list.List[ByItem], Bool, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (Int64, ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) raise
+
+pub fn tactic_of_just(Bool, Just, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((Int64, Just), ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) raise
+
+pub fn tactic_of_step(Bool, (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep), (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep), ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) raise
+
+pub fn term_of_hol(Bool) -> ((@list.List[@kernel.Term]) -> ((@list.List[(String, @parser.Lexcode, String)]) -> (Int64, @kernel.Term) raise) raise) raise
+
+pub fn term_of_now(Just) -> @kernel.Term raise
+
+pub fn term_of_preterm1(@preterm.Preterm) -> @kernel.Term raise
+
+pub fn term_of_steps(@list.List[@kernel.Term], @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> @kernel.Term raise
+
+pub fn terms_of_cases(@list.List[Just]) -> (@list.List[Unit], @kernel.Term) raise
+
+pub fn terms_of_step(@list.List[@kernel.Term], (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> @list.List[@kernel.Term] raise
+
+pub fn[TA] thenl_p(((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) -> ((@list.List[((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (TA, ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) raise]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (@list.List[TA], ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) raise) raise) raise
+
+pub fn thesis_var() -> @kernel.Term
+
+pub fn thm(@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> @kernel.Thm raise
+
+pub fn thm_of_string(String) -> @kernel.Thm raise
+
+pub fn[TA, TB] timed_tac(Int64) -> (((TA) -> TB raise) -> ((TA) -> TB raise) raise) raise
+
+pub fn timeout() -> @ref.Ref[Int64]
+
+pub fn tok_of_toks(@list.List[(String, @parser.Lexcode, String)]) -> (String, @parser.Lexcode, String) raise
+
+pub fn type_of_hol(@list.List[(String, @parser.Lexcode, String)]) -> (Int64, @kernel.HolType) raise
+
+pub fn type_of_pretype1(@preterm.Pretype) -> @kernel.HolType raise
+
+pub fn unident_p(String) -> @list.List[(String, @parser.Lexcode, String)] raise
+
+pub fn use_thms(((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise, @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn usr2_handler() -> @ref.Ref[(Unit) -> Unit raise]
+
+pub fn verbose_tac(Bool, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise, (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn whitespace(Bool, @list.List[String]) -> (String, @list.List[String]) raise
+
+// Errors
+pub(all) suberror Grown {
+  Grown((String) -> ((Int64) -> (@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)], @list.List[String], Int64) raise) raise)
+}
+
+pub(all) suberror Mizar_error {
+  Mizar_error(@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)], (Int64, Int64, Int64))
+}
+
+pub(all) suberror Timeout {
+  Timeout
+}
+
+// Types and methods
+pub(all) enum ByItem {
+  Label(String)
+  Thm(String, @kernel.Thm)
+  Tactic(String, (@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise)
+  Grow(String, (@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise)
+  Hole
+}
+
+pub(all) enum Just {
+  By(@list.List[ByItem], @list.List[ByItem], Bool)
+  Proof((Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)?, @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)], (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)?)
+  Proof_expected(Bool)
+  No_steps
+}
+
+pub(all) enum Substep {
+  Have(@kernel.Term, @list.List[String], Just)
+  Now(@list.List[String], Just)
+  Let(@list.List[@kernel.Term])
+  Assume(@kernel.Term, @list.List[String])
+  Thus(@kernel.Term, @list.List[String], Just)
+  Qed(Just)
+  Bracket_proof
+  Bracket_end
+  Take(@kernel.Term)
+  Consider(@list.List[@kernel.Term], @kernel.Term, @list.List[String], Just)
+  Set(@kernel.Term, @list.List[String])
+  Cases(Just, @list.List[Just])
+  Bracket_case
+  Suppose(@kernel.Term, @list.List[String])
+  Exec(String, ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise)
+  Error(String, Just)
+  Error_point
+  Empty_step
+}
+
+// Type aliases
+pub type Step = (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)
+
+// Traits

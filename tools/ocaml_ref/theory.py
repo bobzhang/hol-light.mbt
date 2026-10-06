@@ -305,6 +305,10 @@ def make_pre(f):
 # Files that are loaded after another without naming it (a directory's
 # tests, run once its make.ml has been loaded)
 AFTER = {"Cadical/test.ml": "Cadical/cadical.ml"}
+# miz3's sample proofs (miz3/test.ml loads them, after miz3.ml)
+AFTER.update({"miz3/Samples/" + f + ".ml": "miz3/miz3.ml"
+              for f in ["samples", "sample", "talk", "drinker", "irrat2", "lagrange", "lagrange1", "icms",
+                        "other_mizs", "robbins", "forster", "luxury", "tobias"]})
 
 
 def chain_prev(f):
