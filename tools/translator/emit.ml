@@ -18,6 +18,27 @@ module Emit = struct
   (* the module path of the item being translated (`Meson.` ...) *)
   let module_prefix : string list ref = ref []
 
+  (* for each of those modules, the values its signature exports (None:
+     no signature, all of them) *)
+  let module_exports : string list option list ref = ref []
+
+  (* The name a script sees a value of a module by after the file is
+     loaded (`Arith_num.num_def`), as written in its doc comment: the
+     differential tests list the theorems from these
+     (gen_theorems_test.py). A value its module's signature hides has no
+     such name. *)
+  let doc_name oname =
+    let rec visible name = function
+      | [] -> true
+      | (m, exports) :: outer ->
+          (match exports with None -> true | Some ns -> List.mem name ns) && visible m outer
+    in
+    if !module_prefix = [] then "`" ^ oname ^ "`"
+    else if List.length !module_exports = List.length !module_prefix
+            && visible oname (List.combine !module_prefix !module_exports) then
+      "`" ^ String.concat "." (List.rev !module_prefix @ [ oname ]) ^ "`"
+    else "`" ^ oname ^ "` (not in the signature of its module)"
+
   (* registrations waiting until a `let ... and ...` is fully lowered *)
   let deferred : (unit -> unit) list option ref = ref None
 
@@ -172,13 +193,14 @@ module Emit = struct
                    (cell_of mname) ty (string_lit oname) oname (generics_of (show_ty a ^ " " ^ show_ty b)) mname (show_ty a) (paren_fn (show_ty b)) (cell_of mname)
              | None -> failwith "cell_decls")
      | _ ->
+         let doc = doc_name oname in
          add_decl (fun () ->
              Hashtbl.reset tyvar_names;
              let oty = installed_type slot oty0 in
              let ty = show_ty oty in
              Printf.sprintf
-               "\n///|\nlet %s : @lib.Cell[%s] = @lib.Cell::new(%s)\n\n///|\n/// `%s`\npub fn%s %s() -> %s {\n  %s.get()\n}\n"
-               (cell_of mname) ty (string_lit oname) oname (generics_of ty) mname ty (cell_of mname)));
+               "\n///|\nlet %s : @lib.Cell[%s] = @lib.Cell::new(%s)\n\n///|\n/// %s\npub fn%s %s() -> %s {\n  %s.get()\n}\n"
+               (cell_of mname) ty (string_lit oname) doc (generics_of ty) mname ty (cell_of mname)));
     register_own oname
       (mname, match mty with M.Fun _ -> Function mty | _ -> Accessor mty)
 
@@ -227,7 +249,7 @@ module Emit = struct
          add_decl (fun () -> text)
      | None ->
          let text =
-           Printf.sprintf "\n///|\n/// `%s`\npub fn%s %s() -> %s {\n  %s\n}\n" oname
+           Printf.sprintf "\n///|\n/// %s\npub fn%s %s() -> %s {\n  %s\n}\n" (doc_name oname)
              (generics_of ~body:body_text ty) mname ty body_text
          in
          add_decl (fun () -> text));
@@ -625,6 +647,16 @@ module Emit = struct
           (fun () -> emit_types ~prefix decls)
 
   let rec item ~(hand : hand list) (it : structure_item) =
+    (* what a module's signature exports, before the constraint goes *)
+    let exports =
+      match it.str_desc with
+      | Tstr_module { mb_expr = { mod_desc = Tmod_constraint _; mod_env; mod_type; _ }; _ } ->
+          (match Mtype.scrape mod_env mod_type with
+           | Types.Mty_signature sg ->
+               Some (List.filter_map (function Types.Sig_value (id, _, _) -> Some (Ident.name id) | _ -> None) sg)
+           | _ -> None)
+      | _ -> None
+    in
     let it = unconstrained it in
     item_env := Some it.str_env;
     Hashtbl.reset bound_tyvars;
@@ -750,7 +782,9 @@ module Emit = struct
                (* a module's members are flattened into the package *)
                let saved = !module_prefix in
                let name = match mb_id with Some id -> Ident.name id | None -> "_" in
+               let saved_exports = !module_exports in
                module_prefix := name :: saved;
+               module_exports := exports :: saved_exports;
                (* a new module of this name: aliases under the old one go,
                   once its body (which may still refer to them) is done *)
                let full = String.concat "." (List.rev !module_prefix) in
@@ -761,6 +795,7 @@ module Emit = struct
                Fun.protect
                  ~finally:(fun () ->
                    module_prefix := saved;
+                   module_exports := saved_exports;
                    (* stale entries the new body did not redefine *)
                    List.iter (fun (k, g) -> if Hashtbl.find_opt alias_gen k = g then Hashtbl.remove module_aliases k) stale)
                  (fun () -> List.iter (fun it -> item ~hand it) str.str_items)

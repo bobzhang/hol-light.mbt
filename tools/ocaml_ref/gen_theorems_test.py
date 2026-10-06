@@ -18,7 +18,9 @@ test = sys.argv[3] if len(sys.argv) > 3 else f'{pkg}/{pkg}_ref_test.mbt'
 # the translator names a file ending in "test" <name>_ml.mbt (moon's test suffix)
 gen = f'{pkg}/{alias}_ml.mbt' if alias.endswith('test') else f'{pkg}/{alias}.mbt'
 src = open(gen).read()
-pairs = re.findall(r'/// `([A-Za-z0-9_\']+)`\npub fn ([a-z0-9_]+)\(\) -> @kernel\.Thm', src)
+# a theorem of a module is listed by its path (`Arith_num.num_def`); one
+# its module's signature hides has other text after the name, and is not
+pairs = re.findall(r'/// `([A-Za-z0-9_\'.]+)`\npub fn ([a-z0-9_]+)\(\) -> @kernel\.Thm', src)
 # a redefined name: OCaml's scripts see only the last definition
 last = {o: i for i, (o, _) in enumerate(pairs)}
 pairs = [p for i, p in enumerate(pairs) if last[p[0]] == i]

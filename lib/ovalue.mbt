@@ -562,6 +562,10 @@ impl OHash for NatDigits with fn ohash_visit(self, h) {
   let base = @bigint.BigInt::from_int64(0x100000000L)
   let mut m = self.0
   let zero = @bigint.BigInt::from_int(0)
+  if m == zero {
+    // a nat has at least one digit
+    digits.mix(0U)
+  }
   while m > zero {
     let chunk = (m % base).to_int64()
     digits.mix(chunk.reinterpret_as_uint64().to_uint())
@@ -588,6 +592,41 @@ fn big_record(n : @num.Num) -> BigIntRecord {
     _ => @bigint.BigInt::from_int(0)
   }
   BigIntRecord((@num.sign_num(n), b))
+}
+
+///|
+fn big_int_sign(n : @bigint.BigInt) -> Int {
+  // `compare` gives a number of that sign, not always -1, 0 or 1
+  let c = n.compare(@bigint.BigInt::from_int(0))
+  if c < 0 {
+    -1
+  } else if c > 0 {
+    1
+  } else {
+    0
+  }
+}
+
+///|
+/// `compare` on a `Big_int.big_int` (`{ sign; abs_value : nat }`): by sign,
+/// then the (abstract) digits, where OCaml raises `Invalid_argument
+/// "compare: abstract value"` (here an abort).
+pub impl OCompare for @bigint.BigInt with fn ocompare(self, other) {
+  if physical_equal(self, other) {
+    return 0
+  }
+  let c = big_int_sign(self).compare(big_int_sign(other))
+  if c != 0 {
+    return c
+  }
+  abort("compare: abstract value")
+}
+
+///|
+/// `Hashtbl.hash` on a `Big_int.big_int` (checked against OCaml).
+pub impl OHash for @bigint.BigInt with fn ohash_visit(self, h) {
+  let abs = if big_int_sign(self) < 0 { -self } else { self }
+  BigIntRecord((big_int_sign(self), abs)).ohash_visit(h)
 }
 
 ///|

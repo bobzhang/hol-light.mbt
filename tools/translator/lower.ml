@@ -66,6 +66,25 @@ module Lower = struct
     | Some e -> e
     | None -> (match !item_env with Some e -> e | None -> !Toploop.toplevel_env)
 
+  (* A type's head with its abbreviations expanded, like Ctype.expand_head
+     but without its effects on the type. Ctype's unifies the
+     abbreviation's parameters with the arguments at the level of the node
+     it expands, and in a typed tree a node that the definition's type does
+     not reach keeps its level while a variable under it is generalized:
+     expanding `'a List.t` (the type of `[]` under `open List`) would make
+     that `'a` look weak (Formal_ineqs/informal/informal_search.hl:
+     find_max). *)
+  let expand_head env ty =
+    let rec go ty n =
+      match Types.get_desc ty with
+      | Types.Tconstr (p, args, _) when n > 0 ->
+          (match Env.find_type_expansion p env with
+           | params, body, _ -> (try go (Ctype.apply env params body args) (n - 1) with Ctype.Cannot_apply -> ty)
+           | exception Not_found -> ty)
+      | _ -> ty
+    in
+    go ty 100
+
   let tyvar_names : (int, string) Hashtbl.t = Hashtbl.create 16
 
   (* type variable id -> instance, while printing a monomorphised local
@@ -151,7 +170,7 @@ module Lower = struct
         List.iter2 note_instance l1 l2
     | (Types.Tconstr _, _ | _, Types.Tconstr _) ->
         (* an abbreviation on one side (`tactic`) *)
-        let s' = Ctype.expand_head (env ()) scheme and i' = Ctype.expand_head (env ()) inst in
+        let s' = expand_head (env ()) scheme and i' = expand_head (env ()) inst in
         if not (s' == scheme && i' == inst) then note_instance s' i'
     | _ -> ()
 
@@ -346,10 +365,10 @@ module Lower = struct
      'a is thm), expanded; its function part. `net_of_conv` takes any
      payload: a function of another type too (Complex/quelim.ml) *)
   let gconv_fun ty =
-    let name t = match Types.get_desc (Ctype.expand_head (env ()) t) with Types.Tconstr (p, [], _) -> Path.last p | _ -> "" in
-    match Types.get_desc (Ctype.expand_head (env ()) ty) with
+    let name t = match Types.get_desc (expand_head (env ()) t) with Types.Tconstr (p, [], _) -> Path.last p | _ -> "" in
+    match Types.get_desc (expand_head (env ()) ty) with
     | Types.Ttuple [ a; f ] when name a = "int" ->
-        (match Types.get_desc (Ctype.expand_head (env ()) f) with
+        (match Types.get_desc (expand_head (env ()) f) with
          | Types.Tarrow _ -> Some f
          | _ -> None)
     | _ -> None
@@ -392,8 +411,8 @@ module Lower = struct
                Types.get_id ty' = Types.get_id ty
                || (match Types.get_desc ty' with Types.Tconstr (p', _, _) -> Path.same p p' | _ -> false)
              in
-             let ty' = Ctype.expand_head (env ()) ty in
-             let ty' = if same ty' then Ctype.expand_head !Toploop.toplevel_env ty else ty' in
+             let ty' = expand_head (env ()) ty in
+             let ty' = if same ty' then expand_head !Toploop.toplevel_env ty else ty' in
              if same ty' && own <> None then M.Named (Option.get own, List.map mty_of args)
              else if same ty' then begin
                if Sys.getenv_opt "TRANSLATOR_DEBUG" <> None then
@@ -411,7 +430,7 @@ module Lower = struct
     match Types.get_desc ty with
     | Types.Tarrow _ -> true
     | Types.Tconstr (p, _, _) when alias (Path.name p) = None && base_type (Path.name p) = None ->
-        (match Types.get_desc (Ctype.expand_head (env ()) ty) with Types.Tarrow _ -> true | _ -> false)
+        (match Types.get_desc (expand_head (env ()) ty) with Types.Tarrow _ -> true | _ -> false)
     | _ -> false
 
   (* MoonBit source text of an OCaml type, using aliases where they exist. *)
@@ -444,12 +463,12 @@ module Lower = struct
              if args = [] then n
              else n ^ "[" ^ String.concat ", " (List.map show_ty args) ^ "]"
          | None, None ->
-             let ty' = Ctype.expand_head (env ()) ty in
+             let ty' = expand_head (env ()) ty in
              if Types.get_id ty' = Types.get_id ty then "?" ^ name else show_ty ty')
     | Types.Tpoly (t, _) -> show_ty t
     | _ -> "?"
 
-  let expand ty = Ctype.expand_head (env ()) ty
+  let expand ty = expand_head (env ()) ty
 
   let scope_tyvars_fwd : string list ref = ref []
 
@@ -982,6 +1001,11 @@ module Lower = struct
             (List.map (fun p ->
                  match p with
                  | `Plain (M.Tuple ts) when not !found && List.length ts > 1 -> found := true; `Split ts
+                 (* a pair its module keeps abstract (expand_named) *)
+                 | `Plain (M.Named (_, []) as t) when not !found ->
+                     (match expand_named t with
+                      | M.Tuple ts when List.length ts > 1 -> found := true; `Split ts
+                      | _ -> p)
                  | p -> p))
             gs
         in
@@ -1597,7 +1621,7 @@ module Lower = struct
                  OCaml compares the components (it differs only when the
                  same closure is stored with equal other components) *)
               let rec holds_fn t =
-                match Types.get_desc (Ctype.expand_head (env ()) t) with
+                match Types.get_desc (expand_head (env ()) t) with
                 | Types.Tarrow _ -> true
                 | Types.Ttuple ts -> List.exists holds_fn ts
                 (* a polymorphic element (`enter [] (tm, x) net` at 'a):
@@ -2111,7 +2135,7 @@ module Lower = struct
     else begin
       (* partial application: evaluate the supplied arguments, then a closure *)
       let rec has_optional t =
-        match Types.get_desc (Ctype.expand_head whole.exp_env t) with
+        match Types.get_desc (expand_head whole.exp_env t) with
         | Types.Tarrow (Asttypes.Optional _, _, _, _) -> true
         | Types.Tarrow (_, _, r, _) -> has_optional r
         | _ -> false
@@ -2170,7 +2194,7 @@ module Lower = struct
           while !i < String.length text - 1 do
             if text.[!i] = '%' then begin
               if !i + 3 < String.length text && String.sub text !i 4 = "%.0f" then (acc := "Double" :: !acc; i := !i + 2);
-              (match text.[!i + 1] with 's' -> acc := "String" :: !acc | 'd' | 'i' -> acc := "Int64" :: !acc | _ -> ());
+              (match text.[!i + 1] with 's' -> acc := "String" :: !acc | 'd' | 'i' -> acc := "Int64" :: !acc | 'b' | 'B' -> acc := "Bool" :: !acc | _ -> ());
               i := !i + 2
             end else incr i
           done;
@@ -2212,6 +2236,7 @@ module Lower = struct
              (match text.[!i + 1] with
               | 's' -> lit (); pieces := next () :: !pieces
               | 'd' | 'i' -> lit (); pieces := Call (Atom "Int64::to_string", [ next () ]) :: !pieces
+              | 'b' | 'B' -> lit (); pieces := Call (Atom "Bool::to_string", [ next () ]) :: !pieces
               | '!' -> close (); items := `Flush :: !items
               | '%' -> Buffer.add_char buf '%'
               | c -> unsupported loc "printf conversion %%%c" c);
@@ -2379,6 +2404,7 @@ module Lower = struct
     | "Unchanged", [] -> ([], Atom "@lib.Unchanged", mty_of e.exp_type)
     | "Not_found", [] when predef_exn cd -> ([], Atom "@lib.NotFound", mty_of e.exp_type)
     | "End_of_file", [] when predef_exn cd -> ([], Atom "@lib.EndOfFile", mty_of e.exp_type)
+    | "Division_by_zero", [] when predef_exn cd -> ([], Atom "@num.DivisionByZero", mty_of e.exp_type)
     | "Break", [] when not (Hashtbl.mem own_ctors "Break") -> ([], Atom "@lib.Break", mty_of e.exp_type)
     | "Sys_error", [ a ] when predef_exn cd -> let ss, x, _ = lower a in (ss, Call (Atom "@lib.SysError", [ x ]), mty_of e.exp_type)
     | name, [] when Hashtbl.mem own_ctors name -> ([], Atom (ctor_name ~cd name), mty_of e.exp_type)
@@ -2608,14 +2634,14 @@ module Lower = struct
     let rec_ids =
       List.concat_map (fun vb -> List.map Ident.unique_name (pat_bound_idents vb.vb_pat)) vbs
     in
-    let mentions_group pvbs =
+    let mentions ids pvbs =
       List.exists
         (fun pvb ->
           let found = ref false in
           let open Tast_iterator in
           let expr sub e =
             (match e.exp_desc with
-             | Texp_ident (Path.Pident id, _, _) when List.mem (Ident.unique_name id) rec_ids -> found := true
+             | Texp_ident (Path.Pident id, _, _) when List.mem (Ident.unique_name id) ids -> found := true
              | _ -> ());
             default_iterator.expr sub e
           in
@@ -2624,6 +2650,7 @@ module Lower = struct
           !found)
         pvbs
     in
+    let mentions_group = mentions rec_ids in
     (* a non-function binding that does not mention the group
        (`let rec f x = ... and v = e`): evaluated first, as an ordinary
        `let` (making the group's closures has no effects) *)
@@ -2666,8 +2693,33 @@ module Lower = struct
     else
     let peeled = List.map (fun vb -> (vb, peel vb.vb_expr [])) vbs in
     if List.exists (fun (_, p) -> match p with Some (pre, _) -> pre <> [] | None -> false) peeled then begin
-      let prefixes = List.concat_map (fun (_, p) -> match p with Some (pre, _) -> pre | None -> []) peeled in
-      if List.exists (fun (_, pvbs) -> mentions_group pvbs) prefixes then unsupported loc "recursive value whose set-up uses itself";
+      (* a closure of the set-up that calls the group (`let rec test = let
+         test_unary tm = ... test rhs ... in fun tm -> ...`,
+         Formal_ineqs/verifier/m_verifier_main.hl): making it has no
+         effects, so it joins the group, and so does a closure that uses it *)
+      let group_ids = ref rec_ids and joined = ref [] in
+      let is_closure pvb = match pvb.vb_pat.pat_desc, pvb.vb_expr.exp_desc with Tpat_var _, Texp_function _ -> true | _ -> false in
+      let peeled =
+        List.map
+          (fun (vb, p) ->
+            match p with
+            | None -> (vb, p)
+            | Some (pre, f) ->
+                let pre =
+                  List.filter
+                    (fun (_, pvbs) ->
+                      if not (mentions !group_ids pvbs) then true
+                      else if List.for_all is_closure pvbs then begin
+                        group_ids := List.concat_map (fun pvb -> List.map Ident.unique_name (pat_bound_idents pvb.vb_pat)) pvbs @ !group_ids;
+                        joined := !joined @ pvbs;
+                        false
+                      end
+                      else unsupported loc "recursive value whose set-up uses itself")
+                    pre
+                in
+                (vb, Some (pre, f)))
+          peeled
+      in
       let steps =
         List.map (fun vb -> (Asttypes.Nonrecursive, [ vb ])) dynamic
         @ List.concat_map
@@ -2684,6 +2736,7 @@ module Lower = struct
             | Some (_, f) -> Some { vb with vb_expr = f }
             | None -> if List.memq vb values then None else Some vb)
           peeled
+        @ !joined
       in
       let inner = { body with exp_desc = Texp_let (Asttypes.Recursive, vbs', body) } in
       let nested = List.fold_right (fun (rf, pvbs) acc -> { body with exp_desc = Texp_let (rf, pvbs, acc) }) steps inner in
@@ -2921,6 +2974,7 @@ module Lower = struct
            | "Unchanged", [] -> "@lib.Unchanged"
            | "Not_found", [] when predef_exn cd -> "@lib.NotFound"
            | "End_of_file", [] when predef_exn cd -> "@lib.EndOfFile"
+           | "Division_by_zero", [] when predef_exn cd -> "@num.DivisionByZero"
            | "Sys_error", [ a ] when predef_exn cd -> "@lib.SysError(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
            (* Stream.Failure (Stdlib's Failure takes a string) *)
            | "Failure", [] when not (predef_exn cd) && not (Hashtbl.mem own_ctors "Failure") -> "@lib.StreamFailure"

@@ -49,7 +49,7 @@ pub fn quomod_big_int(
   b : @bigint.BigInt,
 ) -> (@bigint.BigInt, @bigint.BigInt) raise {
   if b.is_zero() {
-    raise Failure("Division_by_zero")
+    raise DivisionByZero
   }
   let q = a / b
   let r = a % b

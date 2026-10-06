@@ -614,6 +614,7 @@ pub impl OCompare for @kernel.HolType
 pub impl OCompare for @kernel.Term
 pub impl OCompare for @kernel.Thm
 pub impl OCompare for @num.Num
+pub impl OCompare for @bigint.BigInt
 pub impl[A : OCompare] OCompare for @list.List[A]
 pub impl[A : OCompare] OCompare for @ref.Ref[A]
 pub impl[A : OCompare, B : OCompare] OCompare for (A, B)
@@ -636,6 +637,7 @@ pub impl OHash for @kernel.HolType
 pub impl OHash for @kernel.Term
 pub impl OHash for @kernel.Thm
 pub impl OHash for @num.Num
+pub impl OHash for @bigint.BigInt
 pub impl[A : OHash] OHash for @list.List[A]
 pub impl[A : OHash] OHash for @ref.Ref[A]
 pub impl[A : OHash, B : OHash] OHash for (A, B)
