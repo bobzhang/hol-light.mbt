@@ -1,0 +1,31 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/100/ceva"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn between_metrical() -> @kernel.Thm
+
+pub fn between_sym() -> @kernel.Thm
+
+pub fn between_thm() -> @kernel.Thm
+
+pub fn ceva() -> @kernel.Thm
+
+pub fn ceva_weak() -> @kernel.Thm
+
+pub fn collinear() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn norm_cross() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
