@@ -845,7 +845,16 @@ module Lower = struct
              { hstmts = []; hexp = Atom "@lib.temp_path"; hmty = mty_of oty; hoty = Some oty }
          | [ "Num"; n ] ->
              (* OCaml ints are 63-bit (Int64) *)
-             let n = match n with "int_of_num" -> "int63_of_num" | "num_of_int" -> "num_of_int64" | n -> n in
+             let n =
+               match n with
+               | "int_of_num" -> "int63_of_num" | "num_of_int" -> "num_of_int64"
+               (* the operators, by their qualified names (`Num.( */ )`,
+                  Formal_ineqs/informal/informal_float.hl) *)
+               | "+/" -> "add_num" | "-/" -> "sub_num" | "*/" -> "mult_num" | "//" -> "div_num"
+               | "**/" -> "power_num" | "=/" -> "eq_num" | "</" -> "lt_num" | "<=/" -> "le_num"
+               | ">/" -> "gt_num" | ">=/" -> "ge_num" | "<>/" -> "neq_num"
+               | n -> n
+             in
              (match M.find ~root:!Names.root "num" n with
               | Some decl -> { hstmts = []; hexp = Atom ("@num." ^ n); hmty = mty_of_decl decl; hoty = Some oty }
               | None -> unsupported loc "no MoonBit declaration for Num.%s" n)
