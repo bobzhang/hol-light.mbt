@@ -982,6 +982,11 @@ module Lower = struct
             (List.map (fun p ->
                  match p with
                  | `Plain (M.Tuple ts) when not !found && List.length ts > 1 -> found := true; `Split ts
+                 (* a pair its module keeps abstract (expand_named) *)
+                 | `Plain (M.Named (_, []) as t) when not !found ->
+                     (match expand_named t with
+                      | M.Tuple ts when List.length ts > 1 -> found := true; `Split ts
+                      | _ -> p)
                  | p -> p))
             gs
         in
