@@ -11,6 +11,14 @@ module Emit = struct
      it defines (OCaml name -> MoonBit name). *)
   type hand = { line : int; setup : string option; names : (string * string) list }
 
+  (* The parser's line count starts again after a directive (`#load`,
+     `#install_printer`). The line of a hand entry is `n * part + line`,
+     n being the number of times the line of an item has been lower than
+     that of the item before it. *)
+  let part = 100000
+  let last_line = ref 0
+  let parts = ref 0
+
   (* declarations are printed at output time, when later phrases have
      resolved weak type variables (e.g. of `ref []`) *)
   let decls : (unit -> string) list ref = ref []
@@ -662,7 +670,13 @@ module Emit = struct
     Hashtbl.reset bound_tyvars;
     let _, line, _ = Location.get_pos_info it.str_loc.Location.loc_start in
     if trace then Printf.eprintf "item at line %d\n%!" line;
-    match List.find_opt (fun h -> h.line = line) hand with
+    (* an item made here (exec_phrases) has no place in the file *)
+    let synthetic = it.str_loc.Location.loc_ghost in
+    if not synthetic then begin
+      if line < !last_line then incr parts;
+      last_line := line
+    end;
+    match List.find_opt (fun h -> (not synthetic) && h.line = !parts * part + line) hand with
     | Some h ->
         (match h.setup with
          | Some f -> add_step (Printf.sprintf "hand-ported (line %d)" line) [ Do (Call (Atom f, [])) ]
@@ -956,9 +970,10 @@ module Emit = struct
       (fun text ->
         if not (Hashtbl.mem seen text) then begin
           Hashtbl.add seen text ();
+          let lb = Lexing.from_string text in
           let parsed =
             try
-              match !Toploop.parse_toplevel_phrase (Lexing.from_string text) with
+              match !Toploop.parse_toplevel_phrase lb with
               | Parsetree.Ptop_def [ { Parsetree.pstr_desc = Parsetree.Pstr_eval (e, _); _ } ] -> Some e
               (* camlp5 makes a binding of an expression phrase *)
               | Parsetree.Ptop_def
@@ -1002,8 +1017,14 @@ module Emit = struct
                     List.iter (item ~hand:[]) tstr.str_items;
                     match Hashtbl.find_opt own_by_name oname with
                     | Some (mname, _) ->
+                        (* what the parser leaves of the string (miz3's
+                           exec_phrase returns it) *)
+                        let pos = min lb.Lexing.lex_curr_pos (String.length text) in
+                        let rest = String.sub text pos (String.length text - pos) in
                         add_step ("the phrase " ^ String.escaped text)
-                          [ Do (Call (Atom "@lib.register_phrase", [ Atom (string_lit text); Atom mname ])) ]
+                          ([ Do (Call (Atom "@lib.register_phrase", [ Atom (string_lit text); Atom mname ])) ]
+                           @ (if rest = "" then []
+                              else [ Do (Call (Atom "@lib.register_phrase_rest", [ Atom (string_lit text); Atom (string_lit rest) ])) ]))
                     | None -> ()
                   end
         end)

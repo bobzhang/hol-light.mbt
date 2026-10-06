@@ -40,3 +40,20 @@ pub fn printexc_to_string(e : Error) -> String {
     _ => e.to_string()
   }
 }
+
+///|
+let phrase_rests : Map[String, String] = {}
+
+///|
+/// The parser leaves `rest` of the string `text` after its first phrase.
+pub fn register_phrase_rest(text : String, rest : String) -> Unit {
+  phrase_rests[text] = rest
+}
+
+///|
+/// What the toplevel's parser leaves of `text` after the phrase it runs
+/// (miz3's `exec_phrase` returns it): nothing, for a string that is one
+/// phrase.
+pub fn phrase_rest(text : String) -> String {
+  phrase_rests.get(text).unwrap_or("")
+}

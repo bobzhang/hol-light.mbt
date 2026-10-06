@@ -50,10 +50,29 @@ module Main = struct
         (* `exec` gives a string to the toplevel: by hand
            (richterhilbertaxiomgeometry/readable/exec.mbt), it runs what
            the translation made of that string (Emit.exec_phrases). It is
-           at line 81, the fifth after a directive (`#install_printer`),
-           where the parser's line count starts again *)
+           at line 81, the fifth after the second directive (nothing is
+           defined before the first: one restart is seen) *)
         ( "richterhilbertaxiomgeometry/readable/readable.mbt",
-          [ { Emit.line = 5; setup = None; names = [ ("exec", "exec") ] } ] )
+          [ { Emit.line = Emit.part + 5; setup = None; names = [ ("exec", "exec") ] } ] )
+    | "miz3/miz3.ml" ->
+        (* by hand (miz3/miz3/hand.mbt): what is the operating system's
+           (signals, the timer of TIMED_TAC, the server an editor talks
+           to), exec_phrase (the toplevel: Emit.exec_phrases) and
+           print_to_string1 (a formatter on a string). The file has
+           two directives at lines 1500 and 1501: one more part. *)
+        let skip line = { Emit.line; setup = None; names = [] } in
+        let hand line names = { Emit.line; setup = None; names } in
+        ( "miz3/miz3/miz3.mbt",
+          [ skip 85; skip 86; skip 88;
+            hand 216 [ ("exec_phrase", "exec_phrase") ];
+            skip 675;
+            hand 677 [ ("TIMED_TAC", "timed_tac") ];
+            hand 788 [ ("print_to_string1", "print_to_string1") ];
+            hand (Emit.part + 289) [ ("check_file_verbose", "check_file_verbose") ];
+            skip (Emit.part + 339);
+            hand (Emit.part + 352) [ ("server_up", "server_up") ];
+            hand (Emit.part + 363) [ ("server_down", "server_down") ];
+            skip (Emit.part + 379) ] )
     | "Minisat/dimacs_tools.ml" ->
         (* readDimacs reads a file through the Stream and Genlex libraries:
            by hand (minisat/dimacs_tools/read_dimacs.mbt), the functions
