@@ -1,0 +1,203 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/richterhilbertaxiomgeometry/TarskiAxiomGeometry_read"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn a1() -> @kernel.Thm
+
+pub fn a2() -> @kernel.Thm
+
+pub fn a3() -> @kernel.Thm
+
+pub fn a4() -> @kernel.Thm
+
+pub fn a5() -> @kernel.Thm
+
+pub fn a6() -> @kernel.Thm
+
+pub fn a7() -> @kernel.Thm
+
+pub fn b123and134ordered_thm() -> @kernel.Thm
+
+pub fn b124and234ordered_thm() -> @kernel.Thm
+
+pub fn b124and234then123_thm() -> @kernel.Thm
+
+pub fn baaa_thm() -> @kernel.Thm
+
+pub fn baaq_thm() -> @kernel.Thm
+
+pub fn bequality_thm() -> @kernel.Thm
+
+pub fn bextendtoline_thm() -> @kernel.Thm
+
+pub fn bqaa_thm() -> @kernel.Thm
+
+pub fn bsymmetry_thm() -> @kernel.Thm
+
+pub fn btransitivity_thm() -> @kernel.Thm
+
+pub fn btransitivityordered_thm() -> @kernel.Thm
+
+pub fn c1_thm() -> @kernel.Thm
+
+pub fn c1prime_thm() -> @kernel.Thm
+
+pub fn cong_def() -> @kernel.Thm
+
+pub fn congruencedoublesymmetry_thm() -> @kernel.Thm
+
+pub fn easyangletransport_thm() -> @kernel.Thm
+
+pub fn eqdist2pointsbetween_thm() -> @kernel.Thm
+
+pub fn eqdist2pointsinnerbetween_thm() -> @kernel.Thm
+
+pub fn equivreflexive() -> @kernel.Thm
+
+pub fn equivsymmetric() -> @kernel.Thm
+
+pub fn equivtransitive() -> @kernel.Thm
+
+pub fn exec_phrase_1(Unit) -> Unit raise
+
+pub fn exec_phrase_10(Unit) -> Unit raise
+
+pub fn exec_phrase_11(Unit) -> Unit raise
+
+pub fn exec_phrase_12(Unit) -> Unit raise
+
+pub fn exec_phrase_13(Unit) -> Unit raise
+
+pub fn exec_phrase_14(Unit) -> Unit raise
+
+pub fn exec_phrase_15(Unit) -> Unit raise
+
+pub fn exec_phrase_16(Unit) -> Unit raise
+
+pub fn exec_phrase_17(Unit) -> Unit raise
+
+pub fn exec_phrase_18(Unit) -> Unit raise
+
+pub fn exec_phrase_19(Unit) -> Unit raise
+
+pub fn exec_phrase_2(Unit) -> Unit raise
+
+pub fn exec_phrase_20(Unit) -> Unit raise
+
+pub fn exec_phrase_21(Unit) -> Unit raise
+
+pub fn exec_phrase_22(Unit) -> Unit raise
+
+pub fn exec_phrase_23(Unit) -> Unit raise
+
+pub fn exec_phrase_24(Unit) -> Unit raise
+
+pub fn exec_phrase_25(Unit) -> Unit raise
+
+pub fn exec_phrase_26(Unit) -> Unit raise
+
+pub fn exec_phrase_27(Unit) -> Unit raise
+
+pub fn exec_phrase_28(Unit) -> Unit raise
+
+pub fn exec_phrase_29(Unit) -> Unit raise
+
+pub fn exec_phrase_3(Unit) -> Unit raise
+
+pub fn exec_phrase_30(Unit) -> Unit raise
+
+pub fn exec_phrase_31(Unit) -> Unit raise
+
+pub fn exec_phrase_32(Unit) -> Unit raise
+
+pub fn exec_phrase_33(Unit) -> Unit raise
+
+pub fn exec_phrase_34(Unit) -> Unit raise
+
+pub fn exec_phrase_35(Unit) -> Unit raise
+
+pub fn exec_phrase_36(Unit) -> Unit raise
+
+pub fn exec_phrase_37(Unit) -> Unit raise
+
+pub fn exec_phrase_38(Unit) -> Unit raise
+
+pub fn exec_phrase_39(Unit) -> Unit raise
+
+pub fn exec_phrase_4(Unit) -> Unit raise
+
+pub fn exec_phrase_40(Unit) -> Unit raise
+
+pub fn exec_phrase_41(Unit) -> Unit raise
+
+pub fn exec_phrase_42(Unit) -> Unit raise
+
+pub fn exec_phrase_43(Unit) -> Unit raise
+
+pub fn exec_phrase_44(Unit) -> Unit raise
+
+pub fn exec_phrase_45(Unit) -> Unit raise
+
+pub fn exec_phrase_46(Unit) -> Unit raise
+
+pub fn exec_phrase_5(Unit) -> Unit raise
+
+pub fn exec_phrase_6(Unit) -> Unit raise
+
+pub fn exec_phrase_7(Unit) -> Unit raise
+
+pub fn exec_phrase_8(Unit) -> Unit raise
+
+pub fn exec_phrase_9(Unit) -> Unit raise
+
+pub fn flatnormal_thm() -> @kernel.Thm
+
+pub fn gupta_thm() -> @kernel.Thm
+
+pub fn guptaeasy_thm() -> @kernel.Thm
+
+pub fn i1_thm() -> @kernel.Thm
+
+pub fn i1part1_thm() -> @kernel.Thm
+
+pub fn i1part2_thm() -> @kernel.Thm
+
+pub fn i1part2reverse_thm() -> @kernel.Thm
+
+pub fn inner5segments_thm() -> @kernel.Thm
+
+pub fn is_ordered_def() -> @kernel.Thm
+
+pub fn line_def() -> @kernel.Thm
+
+pub fn lineeq_def() -> @kernel.Thm
+
+pub fn lineeqa1_thm() -> @kernel.Thm
+
+pub fn lineeqrefl_thm() -> @kernel.Thm
+
+pub fn lineeqsymmetric_thm() -> @kernel.Thm
+
+pub fn lineeqtrans_thm() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn onlineeq_thm() -> @kernel.Thm
+
+pub fn rhombusdiagbisect_thm() -> @kernel.Thm
+
+pub fn segmentaddition_thm() -> @kernel.Thm
+
+pub fn segmentsubtraction_thm() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

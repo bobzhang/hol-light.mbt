@@ -1,0 +1,845 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/richterhilbertaxiomgeometry/HilbertAxiom_read"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn aas() -> @kernel.Thm
+
+pub fn alternateconversecrossbar() -> @kernel.Thm
+
+pub fn alternateinteriorangles() -> @kernel.Thm
+
+pub fn ama() -> @kernel.Thm
+
+pub fn amb() -> @kernel.Thm
+
+pub fn amc() -> @kernel.Thm
+
+pub fn amd() -> @kernel.Thm
+
+pub fn angle() -> @kernel.Thm
+
+pub fn angle_def() -> @kernel.Thm
+
+pub fn angleaddition() -> @kernel.Thm
+
+pub fn anglebisector() -> @kernel.Thm
+
+pub fn angleordering() -> @kernel.Thm
+
+pub fn angleordering_def() -> @kernel.Thm
+
+pub fn angleorderinguse() -> @kernel.Thm
+
+pub fn angleordertransitivity() -> @kernel.Thm
+
+pub fn anglesubtraction() -> @kernel.Thm
+
+pub fn anglesymmetry() -> @kernel.Thm
+
+pub fn angletrichotomy() -> @kernel.Thm
+
+pub fn angletrichotomy1() -> @kernel.Thm
+
+pub fn angletrichotomy2() -> @kernel.Thm
+
+pub fn angletrichotomy3() -> @kernel.Thm
+
+pub fn asa() -> @kernel.Thm
+
+pub fn atmost2sides() -> @kernel.Thm
+
+pub fn b1() -> @kernel.Thm
+
+pub fn b1_p() -> @kernel.Thm
+
+pub fn b2() -> @kernel.Thm
+
+pub fn b2_p() -> @kernel.Thm
+
+pub fn b3() -> @kernel.Thm
+
+pub fn b3_p() -> @kernel.Thm
+
+pub fn b4() -> @kernel.Thm
+
+pub fn b4_p() -> @kernel.Thm
+
+pub fn b4_p_p() -> @kernel.Thm
+
+pub fn betweenlinear() -> @kernel.Thm
+
+pub fn c1() -> @kernel.Thm
+
+pub fn c1oppositeray() -> @kernel.Thm
+
+pub fn c2reflexive() -> @kernel.Thm
+
+pub fn c2symmetric() -> @kernel.Thm
+
+pub fn c2transitive() -> @kernel.Thm
+
+pub fn c3() -> @kernel.Thm
+
+pub fn c4() -> @kernel.Thm
+
+pub fn c4oppositeside() -> @kernel.Thm
+
+pub fn c4uniqueness() -> @kernel.Thm
+
+pub fn c4withc1() -> @kernel.Thm
+
+pub fn c5reflexive() -> @kernel.Thm
+
+pub fn c5symmetric() -> @kernel.Thm
+
+pub fn c5transitive() -> @kernel.Thm
+
+pub fn c6() -> @kernel.Thm
+
+pub fn circleconvex2_thm() -> @kernel.Thm
+
+pub fn collinear_def() -> @kernel.Thm
+
+pub fn collinearlinear() -> @kernel.Thm
+
+pub fn collinearsymmetry() -> @kernel.Thm
+
+pub fn congrightimpliesright() -> @kernel.Thm
+
+pub fn conversealternateinteriorangles() -> @kernel.Thm
+
+pub fn conversecrossbar() -> @kernel.Thm
+
+pub fn convex() -> @kernel.Thm
+
+pub fn conveximpliesquad() -> @kernel.Thm
+
+pub fn convexquad_def() -> @kernel.Thm
+
+pub fn convexquadimpliesdiagonalsintersect() -> @kernel.Thm
+
+pub fn crossbar_thm() -> @kernel.Thm
+
+pub fn diagonalsintersectimpliesconvexquad() -> @kernel.Thm
+
+pub fn disjointlinesimplysameside() -> @kernel.Thm
+
+pub fn disjointonenotother() -> @kernel.Thm
+
+pub fn doublenotsimimpliesdiagonalsintersect() -> @kernel.Thm
+
+pub fn dropperpendiculartoline() -> @kernel.Thm
+
+pub fn easyemptyintersectionstetralateral() -> @kernel.Thm
+
+pub fn easyemptyintersectionstetralateralhelp() -> @kernel.Thm
+
+pub fn endpointinray() -> @kernel.Thm
+
+pub fn equivintersection() -> @kernel.Thm
+
+pub fn equivintersectionhelp() -> @kernel.Thm
+
+pub fn euclidpropositioni_11() -> @kernel.Thm
+
+pub fn euclidpropositioni_13() -> @kernel.Thm
+
+pub fn euclidpropositioni_14() -> @kernel.Thm
+
+pub fn euclidpropositioni_16() -> @kernel.Thm
+
+pub fn euclidpropositioni_17() -> @kernel.Thm
+
+pub fn euclidpropositioni_18() -> @kernel.Thm
+
+pub fn euclidpropositioni_19() -> @kernel.Thm
+
+pub fn euclidpropositioni_20() -> @kernel.Thm
+
+pub fn euclidpropositioni_21() -> @kernel.Thm
+
+pub fn euclidpropositioni_24() -> @kernel.Thm
+
+pub fn euclidpropositioni_24help() -> @kernel.Thm
+
+pub fn euclidpropositioni_25() -> @kernel.Thm
+
+pub fn euclidpropositioni_28() -> @kernel.Thm
+
+pub fn euclidpropositioni_6() -> @kernel.Thm
+
+pub fn euclidpropositioni_7() -> @kernel.Thm
+
+pub fn euclidpropositioni_7help() -> @kernel.Thm
+
+pub fn euclidpropositioni_7short() -> @kernel.Thm
+
+pub fn exec_phrase_1(Unit) -> Unit raise
+
+pub fn exec_phrase_10(Unit) -> Unit raise
+
+pub fn exec_phrase_100(Unit) -> Unit raise
+
+pub fn exec_phrase_101(Unit) -> Unit raise
+
+pub fn exec_phrase_102(Unit) -> Unit raise
+
+pub fn exec_phrase_103(Unit) -> Unit raise
+
+pub fn exec_phrase_104(Unit) -> Unit raise
+
+pub fn exec_phrase_105(Unit) -> Unit raise
+
+pub fn exec_phrase_106(Unit) -> Unit raise
+
+pub fn exec_phrase_107(Unit) -> Unit raise
+
+pub fn exec_phrase_108(Unit) -> Unit raise
+
+pub fn exec_phrase_109(Unit) -> Unit raise
+
+pub fn exec_phrase_11(Unit) -> Unit raise
+
+pub fn exec_phrase_110(Unit) -> Unit raise
+
+pub fn exec_phrase_111(Unit) -> Unit raise
+
+pub fn exec_phrase_112(Unit) -> Unit raise
+
+pub fn exec_phrase_113(Unit) -> Unit raise
+
+pub fn exec_phrase_114(Unit) -> Unit raise
+
+pub fn exec_phrase_115(Unit) -> Unit raise
+
+pub fn exec_phrase_116(Unit) -> Unit raise
+
+pub fn exec_phrase_117(Unit) -> Unit raise
+
+pub fn exec_phrase_118(Unit) -> Unit raise
+
+pub fn exec_phrase_119(Unit) -> Unit raise
+
+pub fn exec_phrase_12(Unit) -> Unit raise
+
+pub fn exec_phrase_120(Unit) -> Unit raise
+
+pub fn exec_phrase_121(Unit) -> Unit raise
+
+pub fn exec_phrase_122(Unit) -> Unit raise
+
+pub fn exec_phrase_123(Unit) -> Unit raise
+
+pub fn exec_phrase_124(Unit) -> Unit raise
+
+pub fn exec_phrase_125(Unit) -> Unit raise
+
+pub fn exec_phrase_126(Unit) -> Unit raise
+
+pub fn exec_phrase_127(Unit) -> Unit raise
+
+pub fn exec_phrase_128(Unit) -> Unit raise
+
+pub fn exec_phrase_129(Unit) -> Unit raise
+
+pub fn exec_phrase_13(Unit) -> Unit raise
+
+pub fn exec_phrase_130(Unit) -> Unit raise
+
+pub fn exec_phrase_131(Unit) -> Unit raise
+
+pub fn exec_phrase_132(Unit) -> Unit raise
+
+pub fn exec_phrase_133(Unit) -> Unit raise
+
+pub fn exec_phrase_134(Unit) -> Unit raise
+
+pub fn exec_phrase_135(Unit) -> Unit raise
+
+pub fn exec_phrase_136(Unit) -> Unit raise
+
+pub fn exec_phrase_137(Unit) -> Unit raise
+
+pub fn exec_phrase_138(Unit) -> Unit raise
+
+pub fn exec_phrase_139(Unit) -> Unit raise
+
+pub fn exec_phrase_14(Unit) -> Unit raise
+
+pub fn exec_phrase_140(Unit) -> Unit raise
+
+pub fn exec_phrase_141(Unit) -> Unit raise
+
+pub fn exec_phrase_142(Unit) -> Unit raise
+
+pub fn exec_phrase_143(Unit) -> Unit raise
+
+pub fn exec_phrase_144(Unit) -> Unit raise
+
+pub fn exec_phrase_145(Unit) -> Unit raise
+
+pub fn exec_phrase_146(Unit) -> Unit raise
+
+pub fn exec_phrase_147(Unit) -> Unit raise
+
+pub fn exec_phrase_148(Unit) -> Unit raise
+
+pub fn exec_phrase_149(Unit) -> Unit raise
+
+pub fn exec_phrase_15(Unit) -> Unit raise
+
+pub fn exec_phrase_150(Unit) -> Unit raise
+
+pub fn exec_phrase_151(Unit) -> Unit raise
+
+pub fn exec_phrase_152(Unit) -> Unit raise
+
+pub fn exec_phrase_153(Unit) -> Unit raise
+
+pub fn exec_phrase_154(Unit) -> Unit raise
+
+pub fn exec_phrase_155(Unit) -> Unit raise
+
+pub fn exec_phrase_156(Unit) -> Unit raise
+
+pub fn exec_phrase_157(Unit) -> Unit raise
+
+pub fn exec_phrase_158(Unit) -> Unit raise
+
+pub fn exec_phrase_159(Unit) -> Unit raise
+
+pub fn exec_phrase_16(Unit) -> Unit raise
+
+pub fn exec_phrase_160(Unit) -> Unit raise
+
+pub fn exec_phrase_161(Unit) -> Unit raise
+
+pub fn exec_phrase_162(Unit) -> Unit raise
+
+pub fn exec_phrase_163(Unit) -> Unit raise
+
+pub fn exec_phrase_164(Unit) -> Unit raise
+
+pub fn exec_phrase_165(Unit) -> Unit raise
+
+pub fn exec_phrase_166(Unit) -> Unit raise
+
+pub fn exec_phrase_167(Unit) -> Unit raise
+
+pub fn exec_phrase_168(Unit) -> Unit raise
+
+pub fn exec_phrase_169(Unit) -> Unit raise
+
+pub fn exec_phrase_17(Unit) -> Unit raise
+
+pub fn exec_phrase_170(Unit) -> Unit raise
+
+pub fn exec_phrase_171(Unit) -> Unit raise
+
+pub fn exec_phrase_172(Unit) -> Unit raise
+
+pub fn exec_phrase_173(Unit) -> Unit raise
+
+pub fn exec_phrase_174(Unit) -> Unit raise
+
+pub fn exec_phrase_175(Unit) -> Unit raise
+
+pub fn exec_phrase_176(Unit) -> Unit raise
+
+pub fn exec_phrase_177(Unit) -> Unit raise
+
+pub fn exec_phrase_178(Unit) -> Unit raise
+
+pub fn exec_phrase_179(Unit) -> Unit raise
+
+pub fn exec_phrase_18(Unit) -> Unit raise
+
+pub fn exec_phrase_180(Unit) -> Unit raise
+
+pub fn exec_phrase_181(Unit) -> Unit raise
+
+pub fn exec_phrase_182(Unit) -> Unit raise
+
+pub fn exec_phrase_183(Unit) -> Unit raise
+
+pub fn exec_phrase_184(Unit) -> Unit raise
+
+pub fn exec_phrase_185(Unit) -> Unit raise
+
+pub fn exec_phrase_186(Unit) -> Unit raise
+
+pub fn exec_phrase_187(Unit) -> Unit raise
+
+pub fn exec_phrase_188(Unit) -> Unit raise
+
+pub fn exec_phrase_189(Unit) -> Unit raise
+
+pub fn exec_phrase_19(Unit) -> Unit raise
+
+pub fn exec_phrase_190(Unit) -> Unit raise
+
+pub fn exec_phrase_191(Unit) -> Unit raise
+
+pub fn exec_phrase_192(Unit) -> Unit raise
+
+pub fn exec_phrase_193(Unit) -> Unit raise
+
+pub fn exec_phrase_194(Unit) -> Unit raise
+
+pub fn exec_phrase_195(Unit) -> Unit raise
+
+pub fn exec_phrase_196(Unit) -> Unit raise
+
+pub fn exec_phrase_197(Unit) -> Unit raise
+
+pub fn exec_phrase_198(Unit) -> Unit raise
+
+pub fn exec_phrase_199(Unit) -> Unit raise
+
+pub fn exec_phrase_2(Unit) -> Unit raise
+
+pub fn exec_phrase_20(Unit) -> Unit raise
+
+pub fn exec_phrase_200(Unit) -> Unit raise
+
+pub fn exec_phrase_201(Unit) -> Unit raise
+
+pub fn exec_phrase_202(Unit) -> Unit raise
+
+pub fn exec_phrase_203(Unit) -> Unit raise
+
+pub fn exec_phrase_204(Unit) -> Unit raise
+
+pub fn exec_phrase_205(Unit) -> Unit raise
+
+pub fn exec_phrase_206(Unit) -> Unit raise
+
+pub fn exec_phrase_207(Unit) -> Unit raise
+
+pub fn exec_phrase_208(Unit) -> Unit raise
+
+pub fn exec_phrase_209(Unit) -> Unit raise
+
+pub fn exec_phrase_21(Unit) -> Unit raise
+
+pub fn exec_phrase_210(Unit) -> Unit raise
+
+pub fn exec_phrase_22(Unit) -> Unit raise
+
+pub fn exec_phrase_23(Unit) -> Unit raise
+
+pub fn exec_phrase_24(Unit) -> Unit raise
+
+pub fn exec_phrase_25(Unit) -> Unit raise
+
+pub fn exec_phrase_26(Unit) -> Unit raise
+
+pub fn exec_phrase_27(Unit) -> Unit raise
+
+pub fn exec_phrase_28(Unit) -> Unit raise
+
+pub fn exec_phrase_29(Unit) -> Unit raise
+
+pub fn exec_phrase_3(Unit) -> Unit raise
+
+pub fn exec_phrase_30(Unit) -> Unit raise
+
+pub fn exec_phrase_31(Unit) -> Unit raise
+
+pub fn exec_phrase_32(Unit) -> Unit raise
+
+pub fn exec_phrase_33(Unit) -> Unit raise
+
+pub fn exec_phrase_34(Unit) -> Unit raise
+
+pub fn exec_phrase_35(Unit) -> Unit raise
+
+pub fn exec_phrase_36(Unit) -> Unit raise
+
+pub fn exec_phrase_37(Unit) -> Unit raise
+
+pub fn exec_phrase_38(Unit) -> Unit raise
+
+pub fn exec_phrase_39(Unit) -> Unit raise
+
+pub fn exec_phrase_4(Unit) -> Unit raise
+
+pub fn exec_phrase_40(Unit) -> Unit raise
+
+pub fn exec_phrase_41(Unit) -> Unit raise
+
+pub fn exec_phrase_42(Unit) -> Unit raise
+
+pub fn exec_phrase_43(Unit) -> Unit raise
+
+pub fn exec_phrase_44(Unit) -> Unit raise
+
+pub fn exec_phrase_45(Unit) -> Unit raise
+
+pub fn exec_phrase_46(Unit) -> Unit raise
+
+pub fn exec_phrase_47(Unit) -> Unit raise
+
+pub fn exec_phrase_48(Unit) -> Unit raise
+
+pub fn exec_phrase_49(Unit) -> Unit raise
+
+pub fn exec_phrase_5(Unit) -> Unit raise
+
+pub fn exec_phrase_50(Unit) -> Unit raise
+
+pub fn exec_phrase_51(Unit) -> Unit raise
+
+pub fn exec_phrase_52(Unit) -> Unit raise
+
+pub fn exec_phrase_53(Unit) -> Unit raise
+
+pub fn exec_phrase_54(Unit) -> Unit raise
+
+pub fn exec_phrase_55(Unit) -> Unit raise
+
+pub fn exec_phrase_56(Unit) -> Unit raise
+
+pub fn exec_phrase_57(Unit) -> Unit raise
+
+pub fn exec_phrase_58(Unit) -> Unit raise
+
+pub fn exec_phrase_59(Unit) -> Unit raise
+
+pub fn exec_phrase_6(Unit) -> Unit raise
+
+pub fn exec_phrase_60(Unit) -> Unit raise
+
+pub fn exec_phrase_61(Unit) -> Unit raise
+
+pub fn exec_phrase_62(Unit) -> Unit raise
+
+pub fn exec_phrase_63(Unit) -> Unit raise
+
+pub fn exec_phrase_64(Unit) -> Unit raise
+
+pub fn exec_phrase_65(Unit) -> Unit raise
+
+pub fn exec_phrase_66(Unit) -> Unit raise
+
+pub fn exec_phrase_67(Unit) -> Unit raise
+
+pub fn exec_phrase_68(Unit) -> Unit raise
+
+pub fn exec_phrase_69(Unit) -> Unit raise
+
+pub fn exec_phrase_7(Unit) -> Unit raise
+
+pub fn exec_phrase_70(Unit) -> Unit raise
+
+pub fn exec_phrase_71(Unit) -> Unit raise
+
+pub fn exec_phrase_72(Unit) -> Unit raise
+
+pub fn exec_phrase_73(Unit) -> Unit raise
+
+pub fn exec_phrase_74(Unit) -> Unit raise
+
+pub fn exec_phrase_75(Unit) -> Unit raise
+
+pub fn exec_phrase_76(Unit) -> Unit raise
+
+pub fn exec_phrase_77(Unit) -> Unit raise
+
+pub fn exec_phrase_78(Unit) -> Unit raise
+
+pub fn exec_phrase_79(Unit) -> Unit raise
+
+pub fn exec_phrase_8(Unit) -> Unit raise
+
+pub fn exec_phrase_80(Unit) -> Unit raise
+
+pub fn exec_phrase_81(Unit) -> Unit raise
+
+pub fn exec_phrase_82(Unit) -> Unit raise
+
+pub fn exec_phrase_83(Unit) -> Unit raise
+
+pub fn exec_phrase_84(Unit) -> Unit raise
+
+pub fn exec_phrase_85(Unit) -> Unit raise
+
+pub fn exec_phrase_86(Unit) -> Unit raise
+
+pub fn exec_phrase_87(Unit) -> Unit raise
+
+pub fn exec_phrase_88(Unit) -> Unit raise
+
+pub fn exec_phrase_89(Unit) -> Unit raise
+
+pub fn exec_phrase_9(Unit) -> Unit raise
+
+pub fn exec_phrase_90(Unit) -> Unit raise
+
+pub fn exec_phrase_91(Unit) -> Unit raise
+
+pub fn exec_phrase_92(Unit) -> Unit raise
+
+pub fn exec_phrase_93(Unit) -> Unit raise
+
+pub fn exec_phrase_94(Unit) -> Unit raise
+
+pub fn exec_phrase_95(Unit) -> Unit raise
+
+pub fn exec_phrase_96(Unit) -> Unit raise
+
+pub fn exec_phrase_97(Unit) -> Unit raise
+
+pub fn exec_phrase_98(Unit) -> Unit raise
+
+pub fn exec_phrase_99(Unit) -> Unit raise
+
+pub fn existsnewpointonline() -> @kernel.Thm
+
+pub fn existspointoffline() -> @kernel.Thm
+
+pub fn exteriorangle() -> @kernel.Thm
+
+pub fn fivechoicesquadrilateral() -> @kernel.Thm
+
+pub fn fourchoicestetralateral() -> @kernel.Thm
+
+pub fn fourchoicestetralateralhelp() -> @kernel.Thm
+
+pub fn fourchoicestetralateralhelp_v1() -> @kernel.Thm
+
+pub fn fourpointsorder() -> @kernel.Thm
+
+pub fn halfplaneconvexnonempty() -> @kernel.Thm
+
+pub fn hilbertaxiomredundantbymoore() -> @kernel.Thm
+
+pub fn hilberttrianglesum() -> @kernel.Thm
+
+pub fn i1() -> @kernel.Thm
+
+pub fn i1uniqueness() -> @kernel.Thm
+
+pub fn i2() -> @kernel.Thm
+
+pub fn i3() -> @kernel.Thm
+
+pub fn in_interiorangle() -> @kernel.Thm
+
+pub fn in_interiorcircle() -> @kernel.Thm
+
+pub fn in_interiortriangle() -> @kernel.Thm
+
+pub fn in_interval() -> @kernel.Thm
+
+pub fn in_planecomplement() -> @kernel.Thm
+
+pub fn in_ray() -> @kernel.Thm
+
+pub fn inter_tensor() -> @kernel.Thm
+
+pub fn interiorangle_def() -> @kernel.Thm
+
+pub fn interioranglesymmetry() -> @kernel.Thm
+
+pub fn interiorcircle_def() -> @kernel.Thm
+
+pub fn interiorcircleconvex() -> @kernel.Thm
+
+pub fn interiorcircleconvexhelp() -> @kernel.Thm
+
+pub fn interiorezhelp() -> @kernel.Thm
+
+pub fn interioropposite() -> @kernel.Thm
+
+pub fn interiorreflectioninterior() -> @kernel.Thm
+
+pub fn interiorsdisjointsupplement() -> @kernel.Thm
+
+pub fn interiortransitivity() -> @kernel.Thm
+
+pub fn interiortriangle_def() -> @kernel.Thm
+
+pub fn interiortrianglesymmetry() -> @kernel.Thm
+
+pub fn interioruse() -> @kernel.Thm
+
+pub fn interiorwelldefined() -> @kernel.Thm
+
+pub fn interval2sides2aline() -> @kernel.Thm
+
+pub fn interval2sides2alinehelp() -> @kernel.Thm
+
+pub fn interval_def() -> @kernel.Thm
+
+pub fn intervalray() -> @kernel.Thm
+
+pub fn intervalrayez() -> @kernel.Thm
+
+pub fn intervalsareconvex() -> @kernel.Thm
+
+pub fn intervalsymmetry() -> @kernel.Thm
+
+pub fn intervaltransitivity() -> @kernel.Thm
+
+pub fn isoscelescongbaseangles() -> @kernel.Thm
+
+pub fn isoscelesexists() -> @kernel.Thm
+
+pub fn lineunionof2rays() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn midpointexists() -> @kernel.Thm
+
+pub fn noncollinearimpliesdistinct() -> @kernel.Thm
+
+pub fn noncollinearityextendstoline() -> @kernel.Thm
+
+pub fn noncollinearraa() -> @kernel.Thm
+
+pub fn notin() -> @kernel.Thm
+
+pub fn oppositeanglescongimpliesparallelogram() -> @kernel.Thm
+
+pub fn oppositeanglescongimpliesparallelogramhelp() -> @kernel.Thm
+
+pub fn oppositeraysintersect1point() -> @kernel.Thm
+
+pub fn oppositeraysintersect1pointhelp() -> @kernel.Thm
+
+pub fn oppositerightangleslinear() -> @kernel.Thm
+
+pub fn oppositesidescongimpliesparallelogram() -> @kernel.Thm
+
+pub fn ordered_def() -> @kernel.Thm
+
+pub fn orderedcongruentangles() -> @kernel.Thm
+
+pub fn orderedcongruentsegments() -> @kernel.Thm
+
+pub fn origininray() -> @kernel.Thm
+
+pub fn p() -> @kernel.Thm
+
+pub fn parallel() -> @kernel.Thm
+
+pub fn parallelogram_def() -> @kernel.Thm
+
+pub fn parallelsymmetry() -> @kernel.Thm
+
+pub fn planecomplement_def() -> @kernel.Thm
+
+pub fn planeseparation() -> @kernel.Thm
+
+pub fn quadrilateral_def() -> @kernel.Thm
+
+pub fn quadrilateralsymmetry() -> @kernel.Thm
+
+pub fn ray() -> @kernel.Thm
+
+pub fn ray_def() -> @kernel.Thm
+
+pub fn rayline() -> @kernel.Thm
+
+pub fn raysameside() -> @kernel.Thm
+
+pub fn raywelldefined() -> @kernel.Thm
+
+pub fn raywelldefinedhalfway() -> @kernel.Thm
+
+pub fn reverse4order() -> @kernel.Thm
+
+pub fn rightangle_def() -> @kernel.Thm
+
+pub fn rightanglescongruent() -> @kernel.Thm
+
+pub fn rightanglescongruenthelp() -> @kernel.Thm
+
+pub fn rightimpliesangle() -> @kernel.Thm
+
+pub fn rightimpliessupplright() -> @kernel.Thm
+
+pub fn sameside_def() -> @kernel.Thm
+
+pub fn samesidereflexive() -> @kernel.Thm
+
+pub fn samesidesymmetric() -> @kernel.Thm
+
+pub fn samesidetransitive() -> @kernel.Thm
+
+pub fn sas() -> @kernel.Thm
+
+pub fn segment() -> @kernel.Thm
+
+pub fn segment_def() -> @kernel.Thm
+
+pub fn segmentordering_def() -> @kernel.Thm
+
+pub fn segmentorderinguse() -> @kernel.Thm
+
+pub fn segmentordertransitivity() -> @kernel.Thm
+
+pub fn segmentsamesideoppositeline() -> @kernel.Thm
+
+pub fn segmentsubtraction() -> @kernel.Thm
+
+pub fn segmentsymmetry() -> @kernel.Thm
+
+pub fn segmenttrichotomy() -> @kernel.Thm
+
+pub fn segmenttrichotomy1() -> @kernel.Thm
+
+pub fn segmenttrichotomy2() -> @kernel.Thm
+
+pub fn segmenttrichotomy3() -> @kernel.Thm
+
+pub fn sss() -> @kernel.Thm
+
+pub fn supplementaryangles_def() -> @kernel.Thm
+
+pub fn supplementexists() -> @kernel.Thm
+
+pub fn supplementimpliesangle() -> @kernel.Thm
+
+pub fn supplementsconganglescong() -> @kernel.Thm
+
+pub fn supplementsymmetry() -> @kernel.Thm
+
+pub fn supplementunique() -> @kernel.Thm
+
+pub fn tetralateral_def() -> @kernel.Thm
+
+pub fn tetralateralsymmetry() -> @kernel.Thm
+
+pub fn transitivitybetweenness() -> @kernel.Thm
+
+pub fn transitivitybetweennesshelp() -> @kernel.Thm
+
+pub fn transitivitybetweennessvariant() -> @kernel.Thm
+
+pub fn trianglecong_def() -> @kernel.Thm
+
+pub fn trianglecongsymmetry() -> @kernel.Thm
+
+pub fn trianglesum() -> @kernel.Thm
+
+pub fn twosidestriangle1intersection() -> @kernel.Thm
+
+pub fn twosidestriangle2aline() -> @kernel.Thm
+
+pub fn verticalanglescong() -> @kernel.Thm
+
+pub fn wholerayinterior() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
