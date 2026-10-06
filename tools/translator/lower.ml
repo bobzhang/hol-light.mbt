@@ -1020,7 +1020,31 @@ module Lower = struct
       and fail_adapt () =
         failwith (Printf.sprintf "cannot adapt %s to %s" (M.show have) (M.show want))
       in
-      let wps, hps = balance (plain wgs) (plain hgs) in
+      let wps, hps, wres, hres =
+        try let w, h = balance (plain wgs) (plain hgs) in (w, h, wres, hres)
+        with Failure _ as e ->
+          (* one side's result is a type variable and the other takes more
+             arguments: the variable stands for the function of the rest,
+             curried (a justification, `instantiation -> thm list -> thm`,
+             where `'a -> 'b` is expected, or the reverse: thenl' in
+             miz3/miz3.ml) *)
+          let units gs = List.concat_map (fun g -> if g = [] then [ None ] else List.map (fun t -> Some t) g) gs in
+          let is_var = function
+            | M.Named (v, []) -> (String.length v = 1 && v.[0] >= 'A' && v.[0] <= 'Z') || is_our_tyvar v
+            | _ -> false
+          in
+          let extend gs n others =
+            gs @ List.map (function Some t -> [ t ] | None -> []) (List.filteri (fun i _ -> i >= n) others)
+          in
+          let cw = count (plain wgs) and ch = count (plain hgs) in
+          if is_var wres && cw > 0 && cw < List.length (units hgs) then
+            let w, h = balance (plain (extend wgs cw (units hgs))) (plain hgs) in
+            (w, h, hres, hres)
+          else if is_var hres && ch > 0 && ch < List.length (units wgs) then
+            let w, h = balance (plain wgs) (plain (extend hgs ch (units wgs))) in
+            (w, h, wres, wres)
+          else raise e
+      in
       (* pending: OCaml-level argument units received but not yet passed *)
       let rec go cur hps pending wps : stmt list * exp =
         match hps with
