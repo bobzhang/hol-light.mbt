@@ -23,18 +23,21 @@ constructs theorems only through its API.
   Minisat/, WZ/, LP_arith/**: their theory files (`complex/<name>`, ...).
 - **Formal_ineqs/**: the 62 files its make.ml loads (the verifier of
   nonlinear inequalities; `formal_ineqs/<dir>/<name>`).
-- **Examples/**: 48 of 50. **Tutorial/**: 23 of 24.
-- **RichterHilbertAxiomGeometry/** (in progress): readable.ml and the
-  developments written in its proof format.
-- Not yet: miz3, Mizarlight/, QBF/ (see [TODO.md](TODO.md)).
+- **Examples/**: 49 of 50. **Tutorial/**: 23 of 24.
+- **RichterHilbertAxiomGeometry/**: readable.ml and the six developments
+  in its proof format that load upstream (`richterhilbertaxiomgeometry/<name>`).
+- **miz3/**: miz3.ml and its thirteen sample proofs (`miz3/miz3`,
+  `miz3/Samples/<name>`).
+- Not ported: Mizarlight/ (its own syntax extension), QBF/ (needs squolem);
+  see [TODO.md](TODO.md).
 
 Files that run an external program (csdp for `Examples/sos.ml`'s REAL_SOS,
 cadical, MiniSat, maxima for WZ/, cdd for LP_arith/, Prover9) load without
 it: the program's runs are recorded when the reference output is made and
 replayed (`<pkg>/commands.mbt`); the kernel checks the proofs they lead to.
-Files that give OCaml to the toplevel as strings (readable.ml's proofs name
-their theorems and tactics so) run what the translator made of each string
-the reference session ran (`@lib.exec_phrase`).
+Files that give OCaml to the toplevel as strings (the proofs of readable.ml
+and miz3 name their theorems and tactics so) run what the translator made of
+each string the reference session ran (`@lib.exec_phrase`).
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the
 registry caps a module at 100 MB); Multivariate/, 100/ and the translation
