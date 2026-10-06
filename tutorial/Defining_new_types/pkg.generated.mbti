@@ -1,0 +1,80 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/Defining_new_types"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn axiom_1() -> @kernel.Thm
+
+pub fn axiom_2() -> @kernel.Thm
+
+pub fn axiom_3() -> @kernel.Thm
+
+pub fn axiom_4() -> @kernel.Thm
+
+pub fn cross_0() -> @kernel.Thm
+
+pub fn direction_axiom_1() -> @kernel.Thm
+
+pub fn direction_axiom_2() -> @kernel.Thm
+
+pub fn direction_axiom_3() -> @kernel.Thm
+
+pub fn direction_axiom_4() -> @kernel.Thm
+
+pub fn direction_axiom_4_weak() -> @kernel.Thm
+
+pub fn direction_clauses() -> @kernel.Thm
+
+pub fn direction_tybij() -> @kernel.Thm
+
+pub fn line_axiom_1() -> @kernel.Thm
+
+pub fn line_axiom_2() -> @kernel.Thm
+
+pub fn line_axiom_3() -> @kernel.Thm
+
+pub fn line_axiom_4() -> @kernel.Thm
+
+pub fn line_lift_thm(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn line_tybij() -> (@kernel.Thm, @kernel.Thm)
+
+pub fn load() -> Unit
+
+pub fn on() -> @kernel.Thm
+
+pub fn orthogonal_combine() -> @kernel.Thm
+
+pub fn pardir() -> @kernel.Thm
+
+pub fn pardir_refl() -> @kernel.Thm
+
+pub fn pardir_sym() -> @kernel.Thm
+
+pub fn pardir_trans() -> @kernel.Thm
+
+pub fn perpdir() -> @kernel.Thm
+
+pub fn perpdir_welldef() -> @kernel.Thm
+
+pub fn perpl() -> @kernel.Thm
+
+pub fn perpl_th() -> @kernel.Thm
+
+pub fn point_clauses() -> @kernel.Thm
+
+pub fn point_tac(@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn point_tybij() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
