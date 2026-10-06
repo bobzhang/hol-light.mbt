@@ -64,3 +64,16 @@ test "the Str subset" {
   }
   inspect(r, content="refused")
 }
+
+///|
+test "command replay: file names inside the files" {
+  replay_command(
+    "solve <F1> > <F2>",
+    [Some("c File <F1>\np cnf 1 1\n"), None],
+    0,
+    [(1, "read <F1>\n")],
+  )
+  file_of_string("/tmp/x7.cnf", "c File /tmp/x7.cnf\np cnf 1 1\n")
+  inspect(sys_command("solve /tmp/x7.cnf > /tmp/x7.cnf.out"), content="0")
+  inspect(string_of_file("/tmp/x7.cnf.out"), content="read /tmp/x7.cnf")
+}

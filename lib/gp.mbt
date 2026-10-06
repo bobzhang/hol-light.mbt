@@ -24,16 +24,42 @@ pub fn sys_command(cmd : String) -> Int {
     None => ()
   }
   let (shape, paths) = command_shape(cmd)
-  let inputs = paths.map(p => virtual_files.get(p))
+  let inputs = paths.map(p => {
+    virtual_files.get(p).map(s => name_paths(s, paths))
+  })
   for r in command_replays.get(shape).unwrap_or([]) {
     if r.inputs == inputs {
       for o in r.outputs {
-        virtual_files[paths[o.0]] = o.1
+        virtual_files[paths[o.0]] = unname_paths(o.1, paths)
       }
       return r.status
     }
   }
   127
+}
+
+///|
+/// A file's text with the command's file names replaced by their `<Fi>`
+/// (a file may name itself: Minisat/ writes the problem's file name into
+/// it), the longest first (one may be a prefix of another).
+fn name_paths(text : String, paths : Array[String]) -> String {
+  let order = Array::makei(paths.length(), i => i)
+  order.sort_by((a, b) => paths[b].length().compare(paths[a].length()))
+  let mut t = text
+  for i in order {
+    t = t.replace_all(old=paths[i], new="<F" + (i + 1).to_string() + ">")
+  }
+  t
+}
+
+///|
+/// The other way round, for the files a replayed command writes.
+fn unname_paths(text : String, paths : Array[String]) -> String {
+  let mut t = text
+  for i in 0..<paths.length() {
+    t = t.replace_all(old="<F" + (i + 1).to_string() + ">", new=paths[i])
+  }
+  t
 }
 
 ///|
@@ -54,7 +80,8 @@ let command_replays : Map[String, Array[Replay]] = Map([])
 /// command with its file names replaced by `<F1>`, `<F2>`, ... (temporary
 /// names differ from run to run); `inputs` the contents of those files
 /// before the run (`None`: not a file then); `outputs` the files it wrote,
-/// by index. A command is answered when its shape and inputs are the same.
+/// by index; file names inside those contents are `<Fi>` too. A command
+/// is answered when its shape and inputs are the same.
 /// tools/ocaml_ref/prelude.ml records them, batch.py writes the calls.
 pub fn replay_command(
   shape : String,
