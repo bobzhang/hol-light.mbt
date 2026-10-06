@@ -162,3 +162,10 @@ pub fn filename_is_relative(name : String) -> Bool {
 pub fn input_byte(ic : InChannel) -> Int64 raise {
   input_char(ic).to_int().to_int64()
 }
+
+///|
+/// `Filename.quote` (Unix): the name between single quotes, each single
+/// quote inside written `'\''`.
+pub fn filename_quote(name : String) -> String {
+  "'" + name.replace_all(old="'", new="'\\''") + "'"
+}

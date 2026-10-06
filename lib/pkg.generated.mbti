@@ -115,6 +115,8 @@ pub fn filename_concat(String, String) -> String
 
 pub fn filename_is_relative(String) -> Bool
 
+pub fn filename_quote(String) -> String
+
 pub fn[A] filter((A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
 
 pub fn[A] find((A) -> Bool raise?, @list.List[A]) -> A raise

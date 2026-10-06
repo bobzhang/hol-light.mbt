@@ -77,3 +77,9 @@ test "command replay: file names inside the files" {
   inspect(sys_command("solve /tmp/x7.cnf > /tmp/x7.cnf.out"), content="0")
   inspect(string_of_file("/tmp/x7.cnf.out"), content="read /tmp/x7.cnf")
 }
+
+///|
+test "Filename.quote" {
+  inspect(filename_quote("a b"), content="'a b'")
+  inspect(filename_quote("it's"), content="'it'\\''s'")
+}
