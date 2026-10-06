@@ -2563,7 +2563,35 @@ module Lower = struct
            its body (another binding of that name has another identifier) *)
         lower_letrec ?expect vb.vb_loc [ vb ] { body with exp_desc = Texp_let (Asttypes.Nonrecursive, rest, body) }
     | vb :: rest ->
-        let ss, x, t = lower vb.vb_expr in
+        (* a local value that OCaml generalizes (a list of polymorphic
+           functions: `bin_ops` in Formal_ineqs/verifier/m_verifier_main.hl)
+           is one MoonBit value, of the type its first use takes it at *)
+        let instance =
+          match vb.vb_pat.pat_desc with
+          | Tpat_var (id, _)
+            when List.exists (fun v -> not (List.mem v !scope_tyvars)) (tyvars_of_text (show_ty vb.vb_expr.exp_type)) ->
+              let u = Ident.unique_name id in
+              let found = ref None in
+              let open Tast_iterator in
+              let expr sub e =
+                (match e.exp_desc with
+                 | Texp_ident (Path.Pident id', _, _) when !found = None && Ident.unique_name id' = u -> found := Some e.exp_type
+                 | _ -> ());
+                default_iterator.expr sub e
+              in
+              let it = { default_iterator with expr } in
+              List.iter (fun vb -> it.expr it vb.vb_expr) rest;
+              it.expr it body;
+              (match !found with
+               | Some ity -> let m = mty_of ity in if show_mty m <> None then Some m else None
+               | None -> None)
+          | _ -> None
+        in
+        let ss, x, t =
+          match instance with
+          | Some m -> let ss, x, _ = lower ~expect:m vb.vb_expr in (ss, x, m)
+          | None -> lower vb.vb_expr
+        in
         (match vb.vb_pat.pat_desc with
          | Tpat_var (id, _) ->
              let name = bind_local ~oty:vb.vb_expr.exp_type id t in
@@ -2572,6 +2600,8 @@ module Lower = struct
                 MoonBit value has exactly that type *)
              let bind =
                match t with
+               | _ when instance <> None ->
+                   (match show_mty t with Some ts -> LetTyped (name, ts, x) | None -> Let (name, x))
                | M.Fun _ ->
                    partial_types := true;
                    let ts = show_mty t in
