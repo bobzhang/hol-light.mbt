@@ -1,0 +1,38 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/informal/informal_poly"
+
+import {
+  "moonbitlang/core/bigint",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn eval_high_poly_f_pos_pos(Int64) -> ((@list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]) -> (((Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise) raise) raise
+
+pub fn eval_interval_poly_f(Int64, @list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))], ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+pub fn eval_low_poly_f_pos_pos(Int64) -> ((@list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]) -> (((Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise) raise) raise
+
+pub fn eval_pow2_high(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn eval_pow2_low(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn eval_pow2_pow4_high(Int64, (Bool, @bigint.BigInt, Int64)) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+pub fn eval_pow2_pow4_low(Int64, (Bool, @bigint.BigInt, Int64)) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+pub fn eval_pow4_high(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn eval_pow4_low(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

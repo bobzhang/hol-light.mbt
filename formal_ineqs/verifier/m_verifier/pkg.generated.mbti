@@ -1,0 +1,202 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/verifier/m_verifier"
+
+import {
+  "bobzhang/hol_light/formal_ineqs/verifier/certificate",
+  "bobzhang/hol_light/formal_ineqs/verifier/m_verifier_build",
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn bounded_interval_arith_imp_hi_p() -> @kernel.Thm
+
+pub fn bounded_interval_arith_imp_lo_p() -> @kernel.Thm
+
+pub fn cell_list_pass_acc_elim() -> @kernel.Thm
+
+pub fn cell_list_pass_acc_intro() -> @kernel.Thm
+
+pub fn cell_list_pass_acc_rev() -> @kernel.Thm
+
+pub fn cell_list_pass_move1() -> @kernel.Thm
+
+pub fn cell_list_pass_move2() -> @kernel.Thm
+
+pub fn cell_list_pass_nil1() -> @kernel.Thm
+
+pub fn cell_list_pass_nil2() -> @kernel.Thm
+
+pub fn cell_list_pass_same_hd() -> @kernel.Thm
+
+pub fn convex_thms_array() -> FixedArray[FixedArray[@kernel.Thm]]
+
+pub fn decr_gen_thms_array() -> FixedArray[FixedArray[@kernel.Thm]]
+
+pub fn decr_thms_array() -> FixedArray[FixedArray[@kernel.Thm]]
+
+pub fn dest_m_cell_list_pass(@kernel.Term) -> (@list.List[@kernel.Term], @kernel.Term) raise
+
+pub fn dest_m_cell_pass(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn diff2_domain_imp_continuous_on() -> @kernel.Thm
+
+pub fn eval_interval_arith_hi(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_interval_arith_lo(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_subset_refl(@kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_subset_trans(@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn gen_convex_max_lemma(Int64, Int64) -> @kernel.Thm raise
+
+pub fn gen_decreasing_lemma(Int64, Int64) -> @kernel.Thm raise
+
+pub fn gen_glue_lemma(Int64, Int64) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn gen_increasing_lemma(Int64, Int64) -> @kernel.Thm raise
+
+pub fn gen_mono_lemma0(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn gen_restrict_lemma(Int64, Int64, Bool) -> @kernel.Thm raise
+
+pub fn gen_subset_interval_lemma(Int64) -> @kernel.Thm raise
+
+pub fn glue_lemma() -> @kernel.Thm
+
+pub fn glue_thms_array() -> FixedArray[FixedArray[(@kernel.Thm, @kernel.Thm)]]
+
+pub fn incr_gen_thms_array() -> FixedArray[FixedArray[@kernel.Thm]]
+
+pub fn incr_thms_array() -> FixedArray[FixedArray[@kernel.Thm]]
+
+pub fn itlist_disj_append() -> @kernel.Thm
+
+pub fn itlist_disj_exists() -> @kernel.Thm
+
+pub fn left_restrict_thms_array() -> FixedArray[FixedArray[@kernel.Thm]]
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn m_cell_convex_pass_lemma() -> @kernel.Thm
+
+pub fn m_cell_decreasing_pass_lemma() -> @kernel.Thm
+
+pub fn m_cell_increasing_pass_lemma() -> @kernel.Thm
+
+pub fn m_cell_list_decreasing_pass_lemma() -> @kernel.Thm
+
+pub fn m_cell_list_increasing_pass_lemma() -> @kernel.Thm
+
+pub fn m_cell_list_pass() -> @kernel.Thm
+
+pub fn m_cell_list_pass1_interval_lemma_p() -> @kernel.Thm
+
+pub fn m_cell_list_pass1_lemma() -> @kernel.Thm
+
+pub fn m_cell_list_pass1_lemma_p() -> @kernel.Thm
+
+pub fn m_cell_list_pass_alt() -> @kernel.Thm
+
+pub fn m_cell_list_pass_append() -> @kernel.Thm
+
+pub fn m_cell_list_pass_glue_lemma() -> @kernel.Thm
+
+pub fn m_cell_list_pass_subdomain(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn m_cell_list_pass_subdomain_p() -> @kernel.Thm
+
+pub fn m_cell_pass() -> @kernel.Thm
+
+pub fn m_cell_pass_eq_list_pass1() -> @kernel.Thm
+
+pub fn m_cell_pass_glue_lemma() -> @kernel.Thm
+
+pub fn m_cell_pass_imp_list_pass1() -> @kernel.Thm
+
+pub fn m_cell_pass_interval_lemma_p() -> @kernel.Thm
+
+pub fn m_cell_pass_lemma() -> @kernel.Thm
+
+pub fn m_cell_pass_lemma_p() -> @kernel.Thm
+
+pub fn m_cell_pass_subdomain(@kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn m_cell_pass_subdomain_p() -> @kernel.Thm
+
+pub fn m_cell_sup() -> @kernel.Thm
+
+pub fn m_convex_pass(Int64, Int64, @kernel.Thm, @kernel.Thm, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn m_decr_pass(Int64, Int64, Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn m_glue_cells(Int64, Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn m_glue_cells_list(Int64, Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn m_incr_pass(Int64, Int64, Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn m_mono_pass_gen(Int64, Int64, Bool, @kernel.Thm, @kernel.Thm, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn m_p_verify_disj_raw((Int64, Int64), Int64, Int64, @list.List[@m_verifier_build.VerificationFuns], @certificate.PResultTree, @kernel.Thm, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn m_p_verify_disj_raw0(Int64, Int64, @list.List[@m_verifier_build.VerificationFuns], @certificate.PResultTree, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn m_p_verify_list(Int64, Int64, @m_verifier_build.VerificationFuns, @list.List[(@list.List[(String, Int64)], @certificate.PResultTree)], @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn m_p_verify_raw((Int64, Int64), Int64, Int64, @m_verifier_build.VerificationFuns, @certificate.PResultTree, @kernel.Thm, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn m_p_verify_raw0(Int64, Int64, @m_verifier_build.VerificationFuns, @certificate.PResultTree, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn m_restrict_left_lemma() -> @kernel.Thm
+
+pub fn m_restrict_right_lemma() -> @kernel.Thm
+
+pub fn m_subset_interval(Int64, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn m_taylor_cell_list_pass(Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn m_taylor_cell_list_pass0(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn m_taylor_cell_pass(Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn m_taylor_cell_pass0(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn m_verify_disj_raw((Int64, Int64), Int64, Int64, @list.List[@m_verifier_build.VerificationFuns], @certificate.ResultTree, @kernel.Thm, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn m_verify_disj_raw0(Int64, Int64, @list.List[@m_verifier_build.VerificationFuns], @certificate.ResultTree, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn m_verify_list(Int64, Int64, @m_verifier_build.VerificationFuns, @list.List[(@list.List[(String, Int64)], @certificate.ResultTree)], @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn m_verify_raw((Int64, Int64), Int64, Int64, @m_verifier_build.VerificationFuns, @certificate.ResultTree, @kernel.Thm, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn m_verify_raw0(Int64, Int64, @m_verifier_build.VerificationFuns, @certificate.ResultTree, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn merge_m_cell_list_pass(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn mk_real_vars(Int64, String) -> @list.List[@kernel.Term] raise
+
+pub fn one_point_interval() -> @kernel.Thm
+
+pub fn restrict_domain(Int64, Int64, Bool, @kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn right_restrict_thms_array() -> FixedArray[FixedArray[@kernel.Thm]]
+
+pub fn split_domain(Int64, Int64, Int64, @kernel.Thm) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn subset_interval_imp() -> @kernel.Thm
+
+pub fn subset_interval_thms_array() -> FixedArray[@kernel.Thm]
+
+pub fn zero_eq_zero_const() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

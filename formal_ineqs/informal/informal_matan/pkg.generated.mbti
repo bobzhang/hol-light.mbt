@@ -1,0 +1,36 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/informal/informal_matan"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/bigint",
+}
+
+// Values
+pub fn ddmatan_interval(Int64) -> ((((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise) raise
+
+pub fn dmatan_interval(Int64) -> ((((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise) raise
+
+pub fn float_1e8() -> (Bool, @bigint.BigInt, Int64)
+
+pub fn interval_09() -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))
+
+pub fn interval_1e8() -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))
+
+pub fn interval_neg_02() -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn matan_interval(Int64) -> ((((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise) raise
+
+pub fn mk_float_interval_decimal(Int64, @kernel.Term) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

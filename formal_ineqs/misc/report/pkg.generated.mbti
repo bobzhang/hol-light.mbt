@@ -1,0 +1,42 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/misc/report"
+
+// Values
+pub fn diagnostic_string(Unit) -> String raise
+
+pub fn get_corner_count(Unit) -> Int64 raise
+
+pub fn get_error_count(Unit) -> Int64 raise
+
+pub fn inc_corner_count(Unit) -> Unit raise
+
+pub fn inc_error_count(Unit) -> Unit raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn report(String) -> Unit raise
+
+pub fn report_error(String) -> Unit raise
+
+pub fn[TA] report_fatal(String) -> TA raise
+
+pub fn report_timed(String) -> Unit raise
+
+pub fn reset_corner_count(Unit) -> Unit raise
+
+pub fn reset_error_count(Unit) -> Unit raise
+
+pub fn time_string(Unit) -> String raise
+
+// Errors
+pub(all) suberror Fatal {
+  Fatal
+}
+
+// Types and methods
+
+// Type aliases
+
+// Traits

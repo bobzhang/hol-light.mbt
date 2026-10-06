@@ -1,0 +1,114 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/taylor/m_taylor_arith2"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn acs_ths_array() -> FixedArray[@kernel.Thm]
+
+pub fn add_ths_array() -> FixedArray[@kernel.Thm]
+
+pub fn all_n_components2(Int64, @kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn asn_ths_array() -> FixedArray[@kernel.Thm]
+
+pub fn atn_ths_array() -> FixedArray[@kernel.Thm]
+
+pub fn cos_ths_array() -> FixedArray[@kernel.Thm]
+
+pub fn eval_m_taylor_abs2(Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_acs2(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_add2(Int64, Int64, Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_asn2(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_atn2(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_cos2(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_exp2(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_inv2(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_log2(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_matan2(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_mul2(Int64, Int64, Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_neg2(Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn eval_m_taylor_neg2_raw(Bool, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_sin2(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_sqrt2(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_sub2(Int64, Int64, Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn exp_ths_array() -> FixedArray[@kernel.Thm]
+
+pub fn gen_acs_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_add_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_asn_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_atn_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_cos_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_exp_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_inv_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_log_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_matan_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_mul_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_neg_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_sin_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_sqrt_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_sub_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_taylor_arith_thm(@kernel.Thm, (@kernel.Thm) -> @kernel.Thm raise, Int64) -> @kernel.Thm raise
+
+pub fn inv_ths_array() -> FixedArray[@kernel.Thm]
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn log_ths_array() -> FixedArray[@kernel.Thm]
+
+pub fn matan_ths_array() -> FixedArray[@kernel.Thm]
+
+pub fn mk_vars(Int64, String, @kernel.HolType) -> @list.List[@kernel.Term] raise
+
+pub fn mul_ths_array() -> FixedArray[@kernel.Thm]
+
+pub fn neg_ths_array() -> FixedArray[@kernel.Thm]
+
+pub fn sin_ths_array() -> FixedArray[@kernel.Thm]
+
+pub fn sqrt_ths_array() -> FixedArray[@kernel.Thm]
+
+pub fn sub_ths_array() -> FixedArray[@kernel.Thm]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

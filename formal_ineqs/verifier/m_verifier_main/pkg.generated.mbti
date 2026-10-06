@@ -1,0 +1,88 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/verifier/m_verifier_main"
+
+import {
+  "bobzhang/hol_light/formal_ineqs/informal/informal_taylor",
+  "bobzhang/hol_light/formal_ineqs/informal/informal_verifier",
+  "bobzhang/hol_light/formal_ineqs/verifier/certificate",
+  "bobzhang/hol_light/formal_ineqs/verifier/m_verifier_build",
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn add_constant_interval(@kernel.Thm) -> Unit raise
+
+pub fn convert_to_float_list(Int64, Bool, @kernel.Term) -> @kernel.Term raise
+
+pub fn default_params() -> VerificationParameters
+
+pub fn dest_ineq(@kernel.Term) -> (@kernel.Term, @list.List[String], (@kernel.Term, @kernel.Term)) raise
+
+pub fn expr_to_vector_fun(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn exprs_to_vector_fun(@list.List[@kernel.Term]) -> (@list.List[@kernel.Term], @kernel.Term) raise
+
+pub fn is_poly(@kernel.Term) -> Bool raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_float_domain(Int64, (@kernel.Term, @kernel.Term)) -> (@kernel.Thm, (@kernel.Term, @kernel.Term)) raise
+
+pub fn mk_funs(Int64) -> ((Int64) -> ((@kernel.Term) -> ((Int64) -> ((Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise, (Int64) -> ((Int64) -> ((@informal_taylor.MCellDomain) -> @informal_taylor.MTaylorInterval raise) raise) raise) raise) raise) raise
+
+pub fn mk_ineq(@kernel.Term, @list.List[String], (@kernel.Term, @kernel.Term)) -> @kernel.Term raise
+
+pub fn mk_standard_ineq(@list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn mk_verification_functions(@ref.Ref[VerificationParameters]) -> ((Int64) -> ((@kernel.Term) -> (@m_verifier_build.VerificationFuns, @informal_verifier.VerificationFuns) raise) raise) raise
+
+pub fn normalize_disj_result(Bool, @list.List[@kernel.Term], @kernel.Term, @kernel.Thm, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn normalize_result(Bool, @kernel.Term, @kernel.Thm, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn test_expression(@list.List[String], @list.List[String]) -> ((@kernel.Term) -> Bool raise) raise
+
+pub fn[TA, TB, TC] unzip3(@list.List[(TA, TB, TC)]) -> (@list.List[TA], @list.List[TB], @list.List[TC]) raise
+
+pub fn verify_disj_ineq0(VerificationParameters, Bool, Int64, @kernel.Term, @list.List[String], (@kernel.Term, @kernel.Term), @list.List[@kernel.Thm]) -> (@kernel.Thm, VerificationStats) raise
+
+pub fn verify_ineq(VerificationParameters) -> ((Int64) -> ((@kernel.Term) -> (@kernel.Thm, VerificationStats) raise) raise) raise
+
+pub fn verify_ineq0(VerificationParameters, Bool, Int64, @kernel.Term, @list.List[String], (@kernel.Term, @kernel.Term), @list.List[@kernel.Thm]) -> (@kernel.Thm, VerificationStats) raise
+
+pub fn verify_ineq_and_rewrite(@list.List[@kernel.Thm], VerificationParameters, Int64, @kernel.Term) -> (@kernel.Thm, VerificationStats) raise
+
+// Errors
+
+// Types and methods
+pub(all) struct VerificationParameters {
+  allow_derivatives : Bool
+  convex_flag : Bool
+  mono_pass_flag : Bool
+  raw_intervals0 : Bool
+  raw_intervals1 : Bool
+  adaptive_precision : Bool
+  eps : Double
+  eps_width : Double
+  test_certificate : Bool
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for VerificationParameters
+pub impl @lib.OHash for VerificationParameters
+
+pub(all) struct VerificationStats {
+  total_time : Double
+  formal_verification_time : Double
+  certificate : @certificate.CertificateStats
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for VerificationStats
+pub impl @lib.OHash for VerificationStats
+
+// Type aliases
+
+// Traits

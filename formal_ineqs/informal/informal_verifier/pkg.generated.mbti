@@ -1,0 +1,62 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/informal/informal_verifier"
+
+import {
+  "bobzhang/hol_light/formal_ineqs/informal/informal_taylor",
+  "bobzhang/hol_light/formal_ineqs/verifier/certificate",
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/bigint",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn m_cell_pass_subdomain(@informal_taylor.MCellDomain, @informal_taylor.MCellDomain) -> Bool raise
+
+pub fn m_convex_pass(((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))) -> Bool raise
+
+pub fn m_decr_pass(Int64, Int64, @informal_taylor.MTaylorInterval) -> Bool raise
+
+pub fn m_incr_pass(Int64, Int64, @informal_taylor.MTaylorInterval) -> Bool raise
+
+pub fn m_mono_pass_gen(Bool, (Bool, @bigint.BigInt, Int64)) -> Bool raise
+
+pub fn m_subset_interval(@list.List[(Bool, @bigint.BigInt, Int64)], @list.List[(Bool, @bigint.BigInt, Int64)], @list.List[(Bool, @bigint.BigInt, Int64)], @list.List[(Bool, @bigint.BigInt, Int64)]) -> Bool raise
+
+pub fn m_taylor_cell_pass(Int64, @informal_taylor.MTaylorInterval) -> Bool raise
+
+pub fn m_taylor_cell_pass0(((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))) -> Bool raise
+
+pub fn m_verify_list(Int64, Int64, Int64, @list.List[VerificationFuns], @list.List[(@list.List[(String, Int64)], @certificate.ResultTree)], @list.List[(Bool, @bigint.BigInt, Int64)], @list.List[(Bool, @bigint.BigInt, Int64)]) -> @list.List[(@list.List[(String, Int64)], @certificate.PResultTree)] raise
+
+pub fn m_verify_raw((Int64, Int64), Int64, Int64, Int64, @list.List[VerificationFuns], @certificate.ResultTree, @informal_taylor.MCellDomain, @list.List[(@informal_taylor.MCellDomain, @list.List[Int64])]) -> (@certificate.PResultTree, @list.List[Int64]) raise
+
+pub fn m_verify_raw0(Int64, Int64, Int64, @list.List[VerificationFuns], @certificate.ResultTree, @list.List[(Bool, @bigint.BigInt, Int64)], @list.List[(Bool, @bigint.BigInt, Int64)]) -> (@certificate.PResultTree, @list.List[Int64]) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] merge_indices(@list.List[TA], @list.List[TA]) -> @list.List[TA] raise
+
+pub fn mk_verification_functions_poly(Int64, @kernel.Term, @list.List[@kernel.Thm], @list.List[@list.List[@kernel.Thm]]) -> VerificationFuns raise
+
+pub fn restrict_domain(Int64, Bool, @informal_taylor.MCellDomain) -> @informal_taylor.MCellDomain raise
+
+pub fn split_domain(Int64, Int64, @informal_taylor.MCellDomain) -> (@informal_taylor.MCellDomain, @informal_taylor.MCellDomain) raise
+
+pub fn[TA] take_all(@list.List[TA], @list.List[Int64]) -> @list.List[TA] raise
+
+// Errors
+
+// Types and methods
+pub(all) struct VerificationFuns {
+  taylor : (Int64) -> ((Int64) -> ((@informal_taylor.MCellDomain) -> @informal_taylor.MTaylorInterval raise) raise) raise
+  f : (Int64) -> ((@list.List[(Bool, @bigint.BigInt, Int64)]) -> ((@list.List[(Bool, @bigint.BigInt, Int64)]) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise) raise) raise
+  df : (Int64) -> ((Int64) -> ((@list.List[(Bool, @bigint.BigInt, Int64)]) -> ((@list.List[(Bool, @bigint.BigInt, Int64)]) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise) raise) raise) raise
+  ddf : (Int64) -> ((Int64) -> ((Int64) -> ((@list.List[(Bool, @bigint.BigInt, Int64)]) -> ((@list.List[(Bool, @bigint.BigInt, Int64)]) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise) raise) raise) raise) raise
+}
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,23 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/verifier_options"
+
+import {
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn info_print_level() -> @ref.Ref[Int64]
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn report0(String) -> Unit raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

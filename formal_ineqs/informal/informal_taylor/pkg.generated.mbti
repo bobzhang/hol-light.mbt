@@ -1,0 +1,107 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/informal/informal_taylor"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/bigint",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn convert_to_float_list(Int64, Bool, @kernel.Term) -> @list.List[(Bool, @bigint.BigInt, Int64)] raise
+
+pub fn error_mul_f2_hi(Int64, (Bool, @bigint.BigInt, Int64), ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn eval_m_taylor(Int64, @kernel.Term, @list.List[@kernel.Thm], @list.List[@list.List[@kernel.Thm]]) -> ((Int64) -> ((Int64) -> ((MCellDomain) -> MTaylorInterval raise) raise) raise) raise
+
+pub fn eval_m_taylor_abs(Int64, MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_acs(Int64, Int64, MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_add(Int64, Int64, MTaylorInterval, MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_asn(Int64, Int64, MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_atn(Int64) -> ((Int64) -> ((MTaylorInterval) -> MTaylorInterval raise) raise) raise
+
+pub fn eval_m_taylor_bound(Int64, MTaylorInterval) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+pub fn eval_m_taylor_cos(Int64, Int64, MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_error(Int64, MTaylorInterval) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn eval_m_taylor_exp(Int64, Int64, MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_inv(Int64, Int64, MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_log(Int64, Int64, MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_lower_bound(Int64, MTaylorInterval) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn eval_m_taylor_matan(Int64, Int64, MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_mul(Int64, Int64, MTaylorInterval, MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_neg(MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_partial_bound(Int64, Int64, MTaylorInterval) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+pub fn eval_m_taylor_partial_lower(Int64, Int64, MTaylorInterval) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn eval_m_taylor_partial_upper(Int64, Int64, MTaylorInterval) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn eval_m_taylor_pow(Int64) -> ((Int64) -> ((Int64) -> ((MTaylorInterval) -> MTaylorInterval raise) raise) raise) raise
+
+pub fn eval_m_taylor_pow2(Int64, Int64, MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_sin(Int64, Int64, MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_sqrt(Int64, Int64, MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_sub(Int64, Int64, MTaylorInterval, MTaylorInterval) -> MTaylorInterval raise
+
+pub fn eval_m_taylor_upper_bound(Int64, MTaylorInterval) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn float_0() -> (Bool, @bigint.BigInt, Int64)
+
+pub fn float_1() -> (Bool, @bigint.BigInt, Int64)
+
+pub fn float_2() -> (Bool, @bigint.BigInt, Int64)
+
+pub fn float_inv2() -> (Bool, @bigint.BigInt, Int64)
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_eval_function(Int64, @kernel.Term) -> ((Int64) -> ((@list.List[(Bool, @bigint.BigInt, Int64)]) -> ((@list.List[(Bool, @bigint.BigInt, Int64)]) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise) raise) raise) raise
+
+pub fn mk_m_center_domain(Int64, @list.List[(Bool, @bigint.BigInt, Int64)], @list.List[(Bool, @bigint.BigInt, Int64)]) -> MCellDomain raise
+
+// Errors
+
+// Types and methods
+pub(all) struct MCellDomain {
+  lo : @list.List[(Bool, @bigint.BigInt, Int64)]
+  hi : @list.List[(Bool, @bigint.BigInt, Int64)]
+  y : @list.List[(Bool, @bigint.BigInt, Int64)]
+  w : @list.List[(Bool, @bigint.BigInt, Int64)]
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for MCellDomain
+pub impl @lib.OHash for MCellDomain
+
+pub(all) struct MTaylorInterval {
+  n : Int64
+  domain : MCellDomain
+  f : ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))
+  df : @list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]
+  ddf : @list.List[@list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]]
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for MTaylorInterval
+pub impl @lib.OHash for MTaylorInterval
+
+// Type aliases
+
+// Traits
