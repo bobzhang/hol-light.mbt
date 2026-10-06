@@ -1,0 +1,48 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/Custom_tactics"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn deduce_point_tac(@list.List[((Int64, Int64), (Int64, Int64), (Int64, Int64))]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn hol_of_point(((Int64, Int64), (Int64, Int64), (Int64, Int64))) -> @kernel.Term raise
+
+pub fn hol_of_value((Int64, Int64)) -> @kernel.Term raise
+
+pub fn kochen_specker_lemma() -> @kernel.Thm
+
+pub fn kochen_specker_paradox() -> @kernel.Thm
+
+pub fn kochen_specker_tac(@list.List[((Int64, Int64), (Int64, Int64), (Int64, Int64))], @list.List[((Int64, Int64), (Int64, Int64), (Int64, Int64))]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+pub fn load() -> Unit
+
+pub fn nontrivial_cross() -> @kernel.Thm
+
+pub fn opairs() -> @list.List[(((Int64, Int64), (Int64, Int64), (Int64, Int64)), ((Int64, Int64), (Int64, Int64), (Int64, Int64)))]
+
+pub fn ortho((((Int64, Int64), (Int64, Int64), (Int64, Int64)), ((Int64, Int64), (Int64, Int64), (Int64, Int64)))) -> Bool raise
+
+pub fn otrips() -> @list.List[(((Int64, Int64), (Int64, Int64), (Int64, Int64)), ((Int64, Int64), (Int64, Int64), (Int64, Int64)), ((Int64, Int64), (Int64, Int64), (Int64, Int64)))]
+
+pub fn points() -> @list.List[((Int64, Int64), (Int64, Int64), (Int64, Int64))]
+
+pub fn ppoint(((Int64, Int64), (Int64, Int64), (Int64, Int64))) -> @kernel.Term raise
+
+pub fn prove_nontrivial(((Int64, Int64), (Int64, Int64), (Int64, Int64))) -> @kernel.Thm raise
+
+pub fn prove_orthogonal((((Int64, Int64), (Int64, Int64), (Int64, Int64)), ((Int64, Int64), (Int64, Int64), (Int64, Int64)))) -> @kernel.Thm raise
+
+pub fn sqrt_2_pow() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

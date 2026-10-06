@@ -1,0 +1,56 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/Vectors"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn cross() -> @kernel.Thm
+
+pub fn dot_vector() -> @kernel.Thm
+
+pub fn forall_3() -> @kernel.Thm
+
+pub fn lemma_0() -> @kernel.Thm
+
+pub fn lemma_1() -> @kernel.Thm
+
+pub fn lemma_2() -> @kernel.Thm
+
+pub fn lemma_3() -> @kernel.Thm
+
+pub fn lemma_4() -> @kernel.Thm
+
+pub fn lemma_5() -> @kernel.Thm
+
+pub fn lemma_6() -> @kernel.Thm
+
+pub fn lemma_7() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn normal_exists() -> @kernel.Thm
+
+pub fn orthogonal_cross() -> @kernel.Thm
+
+pub fn orthogonal_vector() -> @kernel.Thm
+
+pub fn sum_3() -> @kernel.Thm
+
+pub fn vec3_rule(@kernel.Term) -> @kernel.Thm raise
+
+pub fn vec3_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn vector_3() -> @kernel.Thm
+
+pub fn vector_zero() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
