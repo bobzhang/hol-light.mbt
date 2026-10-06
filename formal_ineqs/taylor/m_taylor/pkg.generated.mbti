@@ -1,0 +1,229 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/taylor/m_taylor"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] add_to_hash(@lib.OHashtbl[TA, TB], Int64, TA, TB) -> Unit raise
+
+pub fn all2_all_zip() -> @kernel.Thm
+
+pub fn all_n_all2() -> @kernel.Thm
+
+pub fn all_n_el() -> @kernel.Thm
+
+pub fn comp_thms_array() -> FixedArray[FixedArray[@kernel.Thm]]
+
+pub fn const_interval_p() -> @kernel.Thm
+
+pub fn dd_vars_array() -> FixedArray[FixedArray[@kernel.Term]]
+
+pub fn dest_lin_approx(@kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn dest_m_cell_domain(@kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn dest_m_taylor(@kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn dest_m_taylor_thms(Int64) -> ((@kernel.Thm) -> (@kernel.Thm, @kernel.Thm, @kernel.Thm, @kernel.Thm) raise) raise
+
+pub fn dest_vector(@kernel.Term) -> @list.List[@kernel.Term] raise
+
+pub fn df_vars_array() -> FixedArray[@kernel.Term]
+
+pub fn diff2c_domain_pow() -> @kernel.Thm
+
+pub fn diff2c_domain_tm() -> @kernel.Term
+
+pub fn diff2c_pow() -> @kernel.Thm
+
+pub fn dimindex_array() -> FixedArray[@kernel.Thm]
+
+pub fn el_thms_array() -> FixedArray[FixedArray[@kernel.Thm]]
+
+pub fn el_zip() -> @kernel.Thm
+
+pub fn eval_diff2_poly(@kernel.Thm, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_lin_approx(Int64, @kernel.Thm) -> ((Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn eval_lin_approx_poly0(Int64, @kernel.Term) -> ((Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn eval_m_taylor(Int64, @kernel.Thm, @kernel.Thm, @kernel.Thm) -> ((Int64) -> ((Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn eval_m_taylor_bound(Int64) -> ((Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise
+
+pub fn eval_m_taylor_bounds0(String, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_lower_bound(Int64) -> ((Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise
+
+pub fn eval_m_taylor_partial_bound(Int64) -> ((Int64) -> ((Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn eval_m_taylor_partial_bounds0(String, Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_partial_lower(Int64) -> ((Int64) -> ((Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn eval_m_taylor_partial_upper(Int64) -> ((Int64) -> ((Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn eval_m_taylor_poly0(Int64, @kernel.Term) -> ((Int64) -> ((Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn eval_m_taylor_upper_bound(Int64) -> ((Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise
+
+pub fn eval_second_bounded(Int64, @kernel.Thm) -> ((Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn eval_second_bounded_poly0(Int64, @kernel.Term) -> ((Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn eval_test_domain_xi(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float0() -> @kernel.Term
+
+pub fn gen_comp_thm(Int64, Int64) -> @kernel.Thm raise
+
+pub fn gen_diff2c_domain_poly(@kernel.Term) -> @kernel.Thm raise
+
+pub fn gen_diff2c_poly(@kernel.Term) -> @kernel.Thm raise
+
+pub fn gen_diff_poly(@kernel.Term) -> @kernel.Thm raise
+
+pub fn gen_in_interval(Int64) -> @kernel.Thm raise
+
+pub fn gen_lin_approx_eq_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_lin_approx_poly_thm(@kernel.Term, @kernel.Thm, @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn gen_lin_approx_poly_thm0(@kernel.Term) -> @kernel.Thm raise
+
+pub fn gen_partial2_poly(Int64, Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn gen_partial_poly(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn gen_second_bounded_eq_thm(Int64) -> @kernel.Thm raise
+
+pub fn gen_second_bounded_poly_thm(@kernel.Term, @list.List[@list.List[@kernel.Thm]]) -> @kernel.Thm raise
+
+pub fn gen_second_bounded_poly_thm0(@kernel.Term) -> @kernel.Thm raise
+
+pub fn gen_taylor_bound_th(@kernel.Thm, Int64) -> @kernel.Thm raise
+
+pub fn gen_taylor_partial_bound_th(@kernel.Thm) -> ((Int64) -> ((Int64) -> @kernel.Thm raise) raise) raise
+
+pub fn get_dim(@kernel.Term) -> Int64 raise
+
+pub fn get_types_and_vars(Int64) -> (@kernel.HolType, @kernel.HolType, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn has_size_array() -> FixedArray[@kernel.Thm]
+
+pub fn i_in_array() -> FixedArray[FixedArray[@kernel.Thm]]
+
+pub fn i_int_array() -> FixedArray[@kernel.Thm]
+
+pub fn in_tm() -> @kernel.Term
+
+pub fn inst_first_type_var(@kernel.HolType, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn interval0() -> @kernel.Thm
+
+pub fn interval_arith_abs_le() -> @kernel.Thm
+
+pub fn itlist2_eq_sum() -> @kernel.Thm
+
+pub fn length_zip() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn m_taylor_bound_array() -> FixedArray[@kernel.Thm]
+
+pub fn m_taylor_bound_p() -> @kernel.Thm
+
+pub fn m_taylor_error_itlist2() -> @kernel.Thm
+
+pub fn m_taylor_error_itlist2_alt() -> @kernel.Thm
+
+pub fn m_taylor_interval_p() -> @kernel.Thm
+
+pub fn m_taylor_lower_array() -> FixedArray[@kernel.Thm]
+
+pub fn m_taylor_lower_bound_p() -> @kernel.Thm
+
+pub fn m_taylor_partial_bound_array() -> FixedArray[FixedArray[@kernel.Thm]]
+
+pub fn m_taylor_partial_bound_p() -> @kernel.Thm
+
+pub fn m_taylor_partial_lower_array() -> FixedArray[FixedArray[@kernel.Thm]]
+
+pub fn m_taylor_partial_lower_p() -> @kernel.Thm
+
+pub fn m_taylor_partial_upper_array() -> FixedArray[FixedArray[@kernel.Thm]]
+
+pub fn m_taylor_partial_upper_p() -> @kernel.Thm
+
+pub fn m_taylor_upper_array() -> FixedArray[@kernel.Thm]
+
+pub fn m_taylor_upper_bound_p() -> @kernel.Thm
+
+pub fn max_dim() -> Int64
+
+pub fn mk_cell_domain() -> @kernel.Thm
+
+pub fn mk_eval_function(Int64, @kernel.Term) -> ((Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn mk_eval_function_eq(Int64, @kernel.Thm) -> ((Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise) raise
+
+pub fn mk_m_center_domain(Int64, Int64, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn mk_m_domain_array() -> FixedArray[@kernel.Thm]
+
+pub fn mk_m_taylor_interval_p() -> @kernel.Thm
+
+pub fn mk_vector(@kernel.Term) -> @kernel.Term raise
+
+pub fn mk_vector_list(@list.List[@kernel.Term]) -> @kernel.Term raise
+
+pub fn my_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn my_rule_float(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn my_rule_num(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn n_type_array() -> FixedArray[@kernel.HolType]
+
+pub fn n_vector_type_array() -> FixedArray[@kernel.HolType]
+
+pub fn nth_diff2_pow() -> @kernel.Thm
+
+pub fn partial_pow() -> @kernel.Thm
+
+pub fn test_domain_xi() -> @kernel.Thm
+
+pub fn test_domain_xi_p() -> @kernel.Thm
+
+pub fn vector_component() -> @kernel.Thm
+
+pub fn w_var_names() -> FixedArray[String]
+
+pub fn w_vars_array() -> FixedArray[@kernel.Term]
+
+pub fn x_var_names() -> FixedArray[String]
+
+pub fn x_vars_array() -> FixedArray[@kernel.Term]
+
+pub fn y_var_names() -> FixedArray[String]
+
+pub fn y_vars_array() -> FixedArray[@kernel.Term]
+
+pub fn z_var_names() -> FixedArray[String]
+
+pub fn z_vars_array() -> FixedArray[@kernel.Term]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
