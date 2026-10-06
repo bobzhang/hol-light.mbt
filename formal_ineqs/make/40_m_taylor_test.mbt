@@ -1,0 +1,573 @@
+// Formal_ineqs/taylor/m_taylor.hl in its directory's load order: the test block of
+// formal_ineqs/taylor/m_taylor/m_taylor_ref_test.mbt (tools/ocaml_ref/chain_test.py), with the same golden
+// (tools/ocaml_ref/Formal_ineqs_taylor_m_taylor_ref.expected).
+
+///|
+test "Formal_ineqs/taylor/m_taylor matches Formal_ineqs/taylor/m_taylor.ml" {
+  @testkit.release_output()
+  @m_taylor.load()
+  let log = @testkit.Log::new()
+  log.capture_reports()
+  for th in ["Formal_ineqs/taylor/m_taylor"] {
+    log.show_theory_output(th)
+  }
+  log.show_theory_trace("Formal_ineqs/taylor/m_taylor")
+  log.capture_stdout()
+  // BEGIN generated theorem list
+  log.attempt("M_taylor.interval0", () => sthm(@m_taylor.interval0()))
+  log.attempt("M_taylor.VECTOR_COMPONENT", () => {
+    sthm(@m_taylor.vector_component())
+  })
+  log.attempt("M_taylor.ALL2_ALL_ZIP", () => sthm(@m_taylor.all2_all_zip()))
+  log.attempt("M_taylor.EL_ZIP", () => sthm(@m_taylor.el_zip()))
+  log.attempt("M_taylor.LENGTH_ZIP", () => sthm(@m_taylor.length_zip()))
+  log.attempt("M_taylor.test_domain_xi", () => sthm(@m_taylor.test_domain_xi()))
+  log.attempt("M_taylor.MK_CELL_DOMAIN", () => sthm(@m_taylor.mk_cell_domain()))
+  log.attempt("M_taylor.TEST_DOMAIN_XI'", () => {
+    sthm(@m_taylor.test_domain_xi_p())
+  })
+  log.attempt("M_taylor.MK_M_TAYLOR_INTERVAL'", () => {
+    sthm(@m_taylor.mk_m_taylor_interval_p())
+  })
+  log.attempt("M_taylor.partial_pow", () => sthm(@m_taylor.partial_pow()))
+  log.attempt("M_taylor.nth_diff2_pow", () => sthm(@m_taylor.nth_diff2_pow()))
+  log.attempt("M_taylor.diff2c_pow", () => sthm(@m_taylor.diff2c_pow()))
+  log.attempt("M_taylor.diff2c_domain_pow", () => {
+    sthm(@m_taylor.diff2c_domain_pow())
+  })
+  log.attempt("M_taylor.CONST_INTERVAL'", () => {
+    sthm(@m_taylor.const_interval_p())
+  })
+  log.attempt("M_taylor.ITLIST2_EQ_SUM", () => sthm(@m_taylor.itlist2_eq_sum()))
+  log.attempt("M_taylor.interval_arith_abs_le", () => {
+    sthm(@m_taylor.interval_arith_abs_le())
+  })
+  log.attempt("M_taylor.ALL_N_ALL2", () => sthm(@m_taylor.all_n_all2()))
+  log.attempt("M_taylor.ALL_N_EL", () => sthm(@m_taylor.all_n_el()))
+  log.attempt("M_taylor.M_TAYLOR_ERROR_ITLIST2", () => {
+    sthm(@m_taylor.m_taylor_error_itlist2())
+  })
+  log.attempt("M_taylor.M_TAYLOR_ERROR_ITLIST2_ALT", () => {
+    sthm(@m_taylor.m_taylor_error_itlist2_alt())
+  })
+  log.attempt("M_taylor.M_TAYLOR_INTERVAL'", () => {
+    sthm(@m_taylor.m_taylor_interval_p())
+  })
+  log.attempt("M_taylor.M_TAYLOR_BOUND'", () => {
+    sthm(@m_taylor.m_taylor_bound_p())
+  })
+  log.attempt("M_taylor.M_TAYLOR_UPPER_BOUND'", () => {
+    sthm(@m_taylor.m_taylor_upper_bound_p())
+  })
+  log.attempt("M_taylor.M_TAYLOR_LOWER_BOUND'", () => {
+    sthm(@m_taylor.m_taylor_lower_bound_p())
+  })
+  log.attempt("M_taylor.M_TAYLOR_PARTIAL_BOUND'", () => {
+    sthm(@m_taylor.m_taylor_partial_bound_p())
+  })
+  log.attempt("M_taylor.M_TAYLOR_PARTIAL_UPPER'", () => {
+    sthm(@m_taylor.m_taylor_partial_upper_p())
+  })
+  log.attempt("M_taylor.M_TAYLOR_PARTIAL_LOWER'", () => {
+    sthm(@m_taylor.m_taylor_partial_lower_p())
+  })
+  // END generated theorem list
+  let tm = @parser.parse_term
+  log.attempt("types", () => {
+    @kernel.types().map(p => p.0 + "/" + p.1.to_string()).to_array().join(" ")
+  })
+  log.attempt("constants", () => {
+    @kernel.constants().map(c => c.0).to_array().join(" ")
+  })
+  log.attempt("definitions", () => @kernel.definitions().length().to_string())
+  // BEGIN EXTRA
+  // END EXTRA
+  log.probe_counters()
+  @testkit.check_axioms()
+  inspect(
+    @testkit.normalize_times(log.contents()),
+    content=(
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|0..0..1..solved at 5
+      #|0..0..1..solved at 4
+      #|0..0..solved at 2
+      #|0..0..1..solved at 4
+      #|0..0..1..solved at 4
+      #|0..0..solved at 2
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Warning: inventing type variables
+      #|Formal_ineqs/taylor/m_taylor quotations (433):
+      #|  EL : num->(A)list->A
+      #|  0
+      #|  0
+      #|  0
+      #|  0
+      #|  0
+      #|  0
+      #|  0
+      #|  0
+      #|  0
+      #|  !l i. i IN 1..dimindex (:N) ==>\n\t\t\t       (vector l:A^N)$i = EL (i - 1) l
+      #|  !(P:A->B->bool) l1 l2. LENGTH l1 = LENGTH l2 ==> \n    (ALL2 P l1 l2 <=> ALL (\\p. P (FST p) (SND p)) (ZIP l1 l2))
+      #|  SUC n < SUC x <=> n < x
+      #|  !(l1:(A)list) (l2:(B)list) i. LENGTH l1 = LENGTH l2 /\\ i < LENGTH l1 ==> \n    EL i (ZIP l1 l2) = (EL i l1, EL i l2)
+      #|  !l1 l2. LENGTH l1 = LENGTH l2 ==> LENGTH (ZIP l1 l2) = LENGTH l1
+      #|  test_domain_xi xz yw <=> FST xz <= FST yw /\\ FST yw <= SND xz /\\ \n  FST yw - FST xz <= SND yw /\\ SND xz - FST yw <= SND yw
+      #|  j:num
+      #|  j < dimindex (:N)
+      #|  j = i - 1
+      #|  LENGTH (xz:(real#real)list) = dimindex (:N) /\\ LENGTH (yw:(real#real)list) = dimindex (:N)
+      #|  !xz (yw:(real#real)list) x z y w.\n    LENGTH x = dimindex (:N) /\\ LENGTH z = dimindex (:N) /\\\n    LENGTH y = dimindex (:N) /\\ LENGTH w = dimindex (:N) /\\\n    ZIP y w = yw /\\ ZIP x z = xz /\\\n    ALL2 test_domain_xi xz yw ==>\n    m_cell_domain (vector x, vector z:real^N) (vector y) (vector w)
+      #|  :N
+      #|  :N
+      #|  :N
+      #|  :N
+      #|  :N
+      #|  :N
+      #|  :N
+      #|  :N
+      #|  xz = (x,z) /\\ yw = (y,w) /\\\n    x <= y /\\ y <= z /\\ y - x <= w1 /\\ z - y <= w2 /\\ w1 <= w /\\ w2 <= w ==> test_domain_xi xz yw
+      #|  (\\x:real^N. f x pow n) = (\\t. t pow n) o f
+      #|  !i f n (y:real^N). lift o f differentiable at y ==>\n\t\t\t  partial i (\\x. f x pow n) y = &n * f y pow (n - 1) * partial i f y
+      #|  (:real)
+      #|  \\x. &n * x pow (n - 1)
+      #|  (:real)
+      #|  !n y. nth_diff_strong 2 (\\x. x pow n) y
+      #|  !n. derivative (\\t. &n * t pow (n - 1)) = (\\t. &n * derivative (\\t. t pow (n - 1)) t)
+      #|  !n. derivative (\\t. t pow n) = (\\t. &n * t pow (n - 1))
+      #|  (\\x:real^N. f x pow n) = (\\t. t pow n) o f
+      #|  !f n (x:real^N). diff2c f x ==> diff2c (\\x. f x pow n) x
+      #|  !f n domain. diff2c_domain domain f ==> \n\t\t\t       diff2c_domain domain (\\x. f x pow n)
+      #|  diff2c_domain domain
+      #|  (x:real^N, x:real^N)
+      #|  !f. (!domain. diff2c_domain domain f) ==> !x:real^N. diff2c f x
+      #|  x:real^N
+      #|  x:real^N
+      #|  x:real^N, x:real^N
+      #|  !f. (!domain. diff2c_domain domain f) ==> !x:real^N. lift o f differentiable at x
+      #|  IN
+      #|  i:num
+      #|  1 <= i /\\ i <= SUC n <=> (1 <= i /\\ i <= n) \\/ i = SUC n
+      #|  1 <= i /\\ i <= 1 <=> i = 1
+      #|  1 <= i
+      #|  1 <= i
+      #|  1 <= i
+      #|  1 <= i
+      #|  1 <= i
+      #|  1 <= i
+      #|  1 <= i
+      #|  (!i:num. (i = k \\/ Q i) ==> P i) <=> (P k /\\ (!i. Q i ==> P i))
+      #|  (!i:num. (i = k ==> P i)) <=> P k
+      #|  1 <= i ==> (i + 1) - 1 = SUC (i - 1)
+      #|  t':(B)list
+      #|  !(f:A->B->real) l1 l2. LENGTH l1 <= LENGTH l2 ==>\n\t\t\t       ITLIST2 (\\x y z. f x y + z) l1 l2 (&0) =\n\t\t\t       sum (1..(LENGTH l1)) (\\i. f (EL (i - 1) l1) (EL (i - 1) l2))
+      #|  !x int y. interval_arith x int ==> iabs int <= y ==> abs x <= y
+      #|  SUC i0 - 1 < SUC i0
+      #|  SUC i0 - 1
+      #|  SUC i0
+      #|  t:(A)list
+      #|  t:(A)list
+      #|  !P (l:(A)list) i0.\n\t\t\t (all_n i0 l P <=> if l = [] then T else ALL2 P (l_seq i0 ((i0 + LENGTH l) - 1)) l)
+      #|  i:num
+      #|  ((i0 + SUC a) - 1 + 1) - i0 = SUC a
+      #|  l:(A)list
+      #|  l:(A)list
+      #|  !P (l:(A)list) i0. all_n i0 l P <=> (!i. i < LENGTH l ==> P (i0 + i) (EL i l))
+      #|  1 + j - 1 = j /\\ 1 + i - 1 = i
+      #|  j - 1
+      #|  i - 1
+      #|  x:real^N
+      #|  j IN 1..dimindex (:N)
+      #|  1 + i - 1 = i /\\ 1 + i - 1 = i
+      #|  1 <= i /\\ i <= dimindex (:N)
+      #|  i - 1
+      #|  i - 1
+      #|  x:real^N
+      #|  i - 1
+      #|  LENGTH (EL (i - 1) dd_bounds_list:(real#real)list) = i
+      #|  s:real
+      #|  i:num
+      #|  !i. i IN 1..dimindex (:N) ==> &0 <= EL (i - 1) w
+      #|  ITLIST2 _1 _2 _3 _4
+      #|  !f domain y w dd_bounds_list error. \n\t     m_cell_domain domain y (vector w) ==>\n\t     diff2c_domain domain f ==>\n\t     second_bounded (f:real^N->real) domain dd_bounds_list ==>\n\t     LENGTH w = dimindex (:N) ==>\n\t\t LENGTH dd_bounds_list = dimindex (:N) ==>\n\t\t all_n 1 dd_bounds_list (\\i list. LENGTH list = i) ==>\n\t\t ITLIST2 (\\list x z. x * (x * iabs (LAST list)\n\t\t\t\t\t  + &2 * ITLIST2 (\\a b c. b * iabs a + c) (BUTLAST list) w (&0)) + z)\n\t\t dd_bounds_list w (&0) <= error ==>\n\t\t m_taylor_error f domain (vector w) error
+      #|  !f domain y w f_lo f_hi d_bounds_list dd_bounds_list error. \n\t m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) d_bounds_list dd_bounds_list ==>\n\t LENGTH w = dimindex (:N) ==>\n\t     LENGTH dd_bounds_list = dimindex (:N) ==>\n\t     all_n 1 dd_bounds_list (\\i list. LENGTH list = i) ==>\n\t     ITLIST2 (\\list x z. x * (x * iabs (LAST list)\n\t\t\t\t      + &2 * ITLIST2 (\\a b c. b * iabs a + c) (BUTLAST list) w (&0)) + z)\n\t     dd_bounds_list w (&0) <= error ==>\n\t     m_taylor_error f domain (vector w) error
+      #|  1 + x - 1 = x
+      #|  x - 1
+      #|  x:num
+      #|  m_cell_domain domain (y:real^N) (vector w)
+      #|  s:real
+      #|  b + inv (&2) * error
+      #|  a:real
+      #|  f_hi:real
+      #|  f_lo:real
+      #|  error:real
+      #|  vector w:real^N
+      #|  y:real^N
+      #|  diff2c_domain domain (f:real^N->real)
+      #|  diff2_domain domain (f:real^N->real)
+      #|  ITLIST2 _1 _2 _3 _4
+      #|  m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) d_bounds_list dd_bounds_list /\\\n\t  m_taylor_error f domain (vector w) error /\\\n\t  ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t  b + inv(&2) * error <= a /\\\n\t  lo <= f_lo - a /\\\n\t  f_hi + a <= hi /\\\n\t  LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t      (!x. x IN interval [domain] ==> interval_arith (f x) (lo, hi))
+      #|  lo:real
+      #|  f_lo - a:real
+      #|  m_taylor_interval f domain y (vector w) (f_lo, f_hi) \n\t\t\t\t    d_bounds_list dd_bounds_list /\\\n\t\t\t\t    m_taylor_error f domain (vector w:real^N) error /\\\n\t\t\t\t    ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t\t\t\t    b + inv(&2) * error <= a /\\\n\t\t\t\t    f_hi + a <= hi /\\\n\t\t\t\t    LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t\t\t\t\t(!p. p IN interval [domain] ==> f p <= hi)
+      #|  hi:real
+      #|  f_hi + a:real
+      #|  m_taylor_interval f domain y (vector w:real^N) (f_lo, f_hi) \n\t\t\t\t    d_bounds_list dd_bounds_list /\\\n\t\t\t\t    m_taylor_error f domain (vector w) error /\\\n\t\t\t\t    ITLIST2 (\\a b c. b * iabs a + c) d_bounds_list w (&0) <= b /\\\n\t\t\t\t    b + inv(&2) * error <= a /\\\n\t\t\t\t    lo <= f_lo - a /\\\n\t\t\t\t    LENGTH w = dimindex (:N) /\\ LENGTH d_bounds_list = dimindex (:N) ==>\n\t\t\t\t    (!p. p IN interval [domain] ==> lo <= f p)
+      #|  diff2c_domain domain (f:real^N->real)
+      #|  !i. 1 <= i ==> 1 + i - 1 = i
+      #|  1 <= j /\\ j <= n ==> j - 1 < n
+      #|  j - 1
+      #|  x:real^N
+      #|  j:num
+      #|  m_cell_domain domain (y:real^N) (vector w)
+      #|  s:real
+      #|  1 <= i ==> 1 + i - 1 = i
+      #|  1 <= i /\\ i <= n ==> i - 1 < n
+      #|  i - 1
+      #|  df_hi:real
+      #|  df_lo:real
+      #|  error:real
+      #|  vector w:real^N
+      #|  y:real^N
+      #|  diff2c_domain domain (f:real^N->real)
+      #|  diff2_domain domain (f:real^N->real)
+      #|  1 <= i /\\ i <= dimindex (:N)
+      #|  ITLIST2 _1 _2 _3 _4
+      #|  m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (!x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  df_hi + error <= hi ==>\n\t  lo <= df_lo - error ==>\n\t  (!x. x IN interval [domain] ==> interval_arith (partial i f x) (lo, hi))
+      #|  lo:real
+      #|  df_lo - error
+      #|  m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (!x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  df_hi + error <= hi ==>\n\t  (!x. x IN interval [domain] ==> partial i f x <= hi)
+      #|  hi:real
+      #|  df_hi + error
+      #|  m_taylor_interval f domain (y:real^N) (vector w) f_bounds d_bounds_list dd_bounds_list /\\\n\t  i IN 1..dimindex (:N) /\\\n\t  EL (i - 1) d_bounds_list = (df_lo, df_hi) /\\\n          (!x. x IN interval [domain] ==> all_n 1 dd_list \n\t     (\\j int. interval_arith (if j <= i then partial2 j i f x else partial2 i j f x) int)) /\\\n\t  LENGTH dd_list = dimindex (:N) /\\\n          LENGTH d_bounds_list = dimindex (:N) /\\ \n          LENGTH w = dimindex (:N) /\\\n          ITLIST2 (\\a b c. b * iabs a + c) dd_list w (&0) <= error /\\\n\t  lo <= df_lo - error ==>\n\t  (!x. x IN interval [domain] ==> lo <= partial i f x)
+      #|  ((P ==> Q) /\\ (P ==> R)) <=> (P ==> Q /\\ R)
+      #|  dd_list : (real#real)list
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  j IN 1..dimindex (:N)
+      #|  j:num
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|  i:num
+      #|  df_lo:real, df_hi:real
+      #|M_taylor.interval0 =  |- ((#interval_arith:fun(real,fun(prod(real,real),bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) ((#,:fun(real,fun(real,prod(real,real))) (((#float_num:fun(bool,fun(num,fun(num,real))) #F:bool) #_0:num) (#D50:fun(num,num) #_0:num))) (((#float_num:fun(bool,fun(num,fun(num,real))) #F:bool) #_0:num) (#D50:fun(num,num) #_0:num))))
+      #|M_taylor.VECTOR_COMPONENT =  |- (#!:fun(fun(list('A),bool),bool) (\l:list('A). (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#=:fun('A,fun('A,bool)) ((#$:fun(cart('A,'N),fun(num,'A)) (#vector:fun(list('A),cart('A,'N)) l:list('A))) i:num)) ((#EL:fun(num,fun(list('A),'A)) ((#-:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) l:list('A))))))))
+      #|M_taylor.ALL2_ALL_ZIP =  |- (#!:fun(fun(fun('A,fun('B,bool)),bool),bool) (\P:fun('A,fun('B,bool)). (#!:fun(fun(list('A),bool),bool) (\l1:list('A). (#!:fun(fun(list('B),bool),bool) (\l2:list('B). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list('A),num) l1:list('A))) (#LENGTH:fun(list('B),num) l2:list('B)))) ((#=:fun(bool,fun(bool,bool)) (((#ALL2:fun(fun('A,fun('B,bool)),fun(list('A),fun(list('B),bool))) P:fun('A,fun('B,bool))) l1:list('A)) l2:list('B))) ((#ALL:fun(fun(prod('A,'B),bool),fun(list(prod('A,'B)),bool)) (\p:prod('A,'B). ((P:fun('A,fun('B,bool)) (#FST:fun(prod('A,'B),'A) p:prod('A,'B))) (#SND:fun(prod('A,'B),'B) p:prod('A,'B))))) ((#ZIP:fun(list('A),fun(list('B),list(prod('A,'B)))) l1:list('A)) l2:list('B)))))))))))
+      #|M_taylor.EL_ZIP =  |- (#!:fun(fun(list('A),bool),bool) (\l1:list('A). (#!:fun(fun(list('B),bool),bool) (\l2:list('B). (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list('A),num) l1:list('A))) (#LENGTH:fun(list('B),num) l2:list('B)))) ((#<:fun(num,fun(num,bool)) i:num) (#LENGTH:fun(list('A),num) l1:list('A))))) ((#=:fun(prod('A,'B),fun(prod('A,'B),bool)) ((#EL:fun(num,fun(list(prod('A,'B)),prod('A,'B))) i:num) ((#ZIP:fun(list('A),fun(list('B),list(prod('A,'B)))) l1:list('A)) l2:list('B)))) ((#,:fun('A,fun('B,prod('A,'B))) ((#EL:fun(num,fun(list('A),'A)) i:num) l1:list('A))) ((#EL:fun(num,fun(list('B),'B)) i:num) l2:list('B)))))))))))
+      #|M_taylor.LENGTH_ZIP =  |- (#!:fun(fun(list('?2003109),bool),bool) (\l1:list('?2003109). (#!:fun(fun(list('?2003111),bool),bool) (\l2:list('?2003111). ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list('?2003109),num) l1:list('?2003109))) (#LENGTH:fun(list('?2003111),num) l2:list('?2003111)))) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(prod('?2003109,'?2003111)),num) ((#ZIP:fun(list('?2003109),fun(list('?2003111),list(prod('?2003109,'?2003111)))) l1:list('?2003109)) l2:list('?2003111)))) (#LENGTH:fun(list('?2003109),num) l1:list('?2003109))))))))
+      #|M_taylor.test_domain_xi =  |- (#!:fun(fun(prod(real,real),bool),bool) (\xz:prod(real,real). (#!:fun(fun(prod(real,real),bool),bool) (\yw:prod(real,real). ((#=:fun(bool,fun(bool,bool)) ((#test_domain_xi:fun(prod(real,real),fun(prod(real,real),bool)) xz:prod(real,real)) yw:prod(real,real))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#FST:fun(prod(real,real),real) xz:prod(real,real))) (#FST:fun(prod(real,real),real) yw:prod(real,real)))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#FST:fun(prod(real,real),real) yw:prod(real,real))) (#SND:fun(prod(real,real),real) xz:prod(real,real)))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_sub:fun(real,fun(real,real)) (#FST:fun(prod(real,real),real) yw:prod(real,real))) (#FST:fun(prod(real,real),real) xz:prod(real,real)))) (#SND:fun(prod(real,real),real) yw:prod(real,real)))) ((#real_le:fun(real,fun(real,bool)) ((#real_sub:fun(real,fun(real,real)) (#SND:fun(prod(real,real),real) xz:prod(real,real))) (#FST:fun(prod(real,real),real) yw:prod(real,real)))) (#SND:fun(prod(real,real),real) yw:prod(real,real)))))))))))
+      #|M_taylor.MK_CELL_DOMAIN =  |- (#!:fun(fun(list(prod(real,real)),bool),bool) (\xz:list(prod(real,real)). (#!:fun(fun(list(prod(real,real)),bool),bool) (\yw:list(prod(real,real)). (#!:fun(fun(list(real),bool),bool) (\x:list(real). (#!:fun(fun(list(real),bool),bool) (\z:list(real). (#!:fun(fun(list(real),bool),bool) (\y:list(real). (#!:fun(fun(list(real),bool),bool) (\w:list(real). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(real),num) x:list(real))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(real),num) z:list(real))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(real),num) y:list(real))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(real),num) w:list(real))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list(prod(real,real)),fun(list(prod(real,real)),bool)) ((#ZIP:fun(list(real),fun(list(real),list(prod(real,real)))) y:list(real)) w:list(real))) yw:list(prod(real,real)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(list(prod(real,real)),fun(list(prod(real,real)),bool)) ((#ZIP:fun(list(real),fun(list(real),list(prod(real,real)))) x:list(real)) z:list(real))) xz:list(prod(real,real)))) (((#ALL2:fun(fun(prod(real,real),fun(prod(real,real),bool)),fun(list(prod(real,real)),fun(list(prod(real,real)),bool))) #test_domain_xi:fun(prod(real,real),fun(prod(real,real),bool))) xz:list(prod(real,real))) yw:list(prod(real,real)))))))))) (((#m_cell_domain:fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(cart(real,'N),bool))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) (#vector:fun(list(real),cart(real,'N)) x:list(real))) (#vector:fun(list(real),cart(real,'N)) z:list(real)))) (#vector:fun(list(real),cart(real,'N)) y:list(real))) (#vector:fun(list(real),cart(real,'N)) w:list(real))))))))))))))))
+      #|M_taylor.TEST_DOMAIN_XI' = ((#=:fun(prod(real,real),fun(prod(real,real),bool)) xz:prod(real,real)) ((#,:fun(real,fun(real,prod(real,real))) x:real) z:real)), ((#=:fun(prod(real,real),fun(prod(real,real),bool)) yw:prod(real,real)) ((#,:fun(real,fun(real,prod(real,real))) y:real) w:real)), ((#real_le:fun(real,fun(real,bool)) w1:real) w:real), ((#real_le:fun(real,fun(real,bool)) w2:real) w:real), ((#real_le:fun(real,fun(real,bool)) x:real) y:real), ((#real_le:fun(real,fun(real,bool)) y:real) z:real), ((#real_le:fun(real,fun(real,bool)) ((#real_sub:fun(real,fun(real,real)) y:real) x:real)) w1:real), ((#real_le:fun(real,fun(real,bool)) ((#real_sub:fun(real,fun(real,real)) z:real) y:real)) w2:real) |- ((#=:fun(bool,fun(bool,bool)) ((#test_domain_xi:fun(prod(real,real),fun(prod(real,real),bool)) xz:prod(real,real)) yw:prod(real,real))) #T:bool)
+      #|M_taylor.MK_M_TAYLOR_INTERVAL' = ((#diff2c_domain:fun(prod(cart(real,'?2000945),cart(real,'?2000945)),fun(fun(cart(real,'?2000945),real),bool)) domain:prod(cart(real,'?2000945),cart(real,'?2000945))) f:fun(cart(real,'?2000945),real)), (((#m_cell_domain:fun(prod(cart(real,'?2000945),cart(real,'?2000945)),fun(cart(real,'?2000945),fun(cart(real,'?2000945),bool))) domain:prod(cart(real,'?2000945),cart(real,'?2000945))) y:cart(real,'?2000945)) w:cart(real,'?2000945)), (((#second_bounded:fun(fun(cart(real,'?2000945),real),fun(prod(cart(real,'?2000945),cart(real,'?2000945)),fun(list(list(prod(real,real))),bool))) f:fun(cart(real,'?2000945),real)) domain:prod(cart(real,'?2000945),cart(real,'?2000945))) dd_bounds_list:list(list(prod(real,real)))), ((((#m_lin_approx:fun(fun(cart(real,'?2000945),real),fun(cart(real,'?2000945),fun(prod(real,real),fun(list(prod(real,real)),bool)))) f:fun(cart(real,'?2000945),real)) y:cart(real,'?2000945)) f_bounds:prod(real,real)) d_bounds_list:list(prod(real,real))) |- (((((((#m_taylor_interval:fun(fun(cart(real,'?2000945),real),fun(prod(cart(real,'?2000945),cart(real,'?2000945)),fun(cart(real,'?2000945),fun(cart(real,'?2000945),fun(prod(real,real),fun(list(prod(real,real)),fun(list(list(prod(real,real))),bool))))))) f:fun(cart(real,'?2000945),real)) domain:prod(cart(real,'?2000945),cart(real,'?2000945))) y:cart(real,'?2000945)) w:cart(real,'?2000945)) f_bounds:prod(real,real)) d_bounds_list:list(prod(real,real))) dd_bounds_list:list(list(prod(real,real))))
+      #|M_taylor.partial_pow =  |- (#!:fun(fun(num,bool),bool) (\i:num. (#!:fun(fun(fun(cart(real,'N),real),bool),bool) (\f:fun(cart(real,'N),real). (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#differentiable:fun(fun(cart(real,'N),cart(real,1)),fun(net(cart(real,'N)),bool)) ((#o:fun(fun(real,cart(real,1)),fun(fun(cart(real,'N),real),fun(cart(real,'N),cart(real,1)))) #lift:fun(real,cart(real,1))) f:fun(cart(real,'N),real))) (#at:fun(cart(real,'N),net(cart(real,'N))) y:cart(real,'N)))) ((#=:fun(real,fun(real,bool)) (((#partial:fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real))) i:num) (\x:cart(real,'N). ((#real_pow:fun(real,fun(num,real)) (f:fun(cart(real,'N),real) x:cart(real,'N))) n:num))) y:cart(real,'N))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) n:num)) ((#real_mul:fun(real,fun(real,real)) ((#real_pow:fun(real,fun(num,real)) (f:fun(cart(real,'N),real) y:cart(real,'N))) ((#-:fun(num,fun(num,num)) n:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) (((#partial:fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real))) i:num) f:fun(cart(real,'N),real)) y:cart(real,'N))))))))))))))
+      #|M_taylor.nth_diff2_pow =  |- (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(real,bool),bool) (\y:real. (((#nth_diff_strong:fun(num,fun(fun(real,real),fun(real,bool))) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) (\x:real. ((#real_pow:fun(real,fun(num,real)) x:real) n:num))) y:real)))))
+      #|M_taylor.diff2c_pow =  |- (#!:fun(fun(fun(cart(real,'N),real),bool),bool) (\f:fun(cart(real,'N),real). (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#diff2c:fun(fun(cart(real,'N),real),fun(cart(real,'N),bool)) f:fun(cart(real,'N),real)) x:cart(real,'N))) ((#diff2c:fun(fun(cart(real,'N),real),fun(cart(real,'N),bool)) (\x:cart(real,'N). ((#real_pow:fun(real,fun(num,real)) (f:fun(cart(real,'N),real) x:cart(real,'N))) n:num))) x:cart(real,'N)))))))))
+      #|M_taylor.diff2c_domain_pow =  |- (#!:fun(fun(fun(cart(real,'?2003642),real),bool),bool) (\f:fun(cart(real,'?2003642),real). (#!:fun(fun(num,bool),bool) (\n:num. (#!:fun(fun(prod(cart(real,'?2003642),cart(real,'?2003642)),bool),bool) (\domain:prod(cart(real,'?2003642),cart(real,'?2003642)). ((#==>:fun(bool,fun(bool,bool)) ((#diff2c_domain:fun(prod(cart(real,'?2003642),cart(real,'?2003642)),fun(fun(cart(real,'?2003642),real),bool)) domain:prod(cart(real,'?2003642),cart(real,'?2003642))) f:fun(cart(real,'?2003642),real))) ((#diff2c_domain:fun(prod(cart(real,'?2003642),cart(real,'?2003642)),fun(fun(cart(real,'?2003642),real),bool)) domain:prod(cart(real,'?2003642),cart(real,'?2003642))) (\x:cart(real,'?2003642). ((#real_pow:fun(real,fun(num,real)) (f:fun(cart(real,'?2003642),real) x:cart(real,'?2003642))) n:num))))))))))
+      #|M_taylor.CONST_INTERVAL' =  |- ((#interval_arith:fun(real,fun(prod(real,real),bool)) x:real) ((#,:fun(real,fun(real,prod(real,real))) x:real) x:real))
+      #|M_taylor.ITLIST2_EQ_SUM =  |- (#!:fun(fun(fun('A,fun('B,real)),bool),bool) (\f:fun('A,fun('B,real)). (#!:fun(fun(list('A),bool),bool) (\l1:list('A). (#!:fun(fun(list('B),bool),bool) (\l2:list('B). ((#==>:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#LENGTH:fun(list('A),num) l1:list('A))) (#LENGTH:fun(list('B),num) l2:list('B)))) ((#=:fun(real,fun(real,bool)) ((((#ITLIST2:fun(fun('A,fun('B,fun(real,real))),fun(list('A),fun(list('B),fun(real,real)))) (\x:'A. (\y:'B. (\z:real. ((#real_add:fun(real,fun(real,real)) ((f:fun('A,fun('B,real)) x:'A) y:'B)) z:real))))) l1:list('A)) l2:list('B)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#sum:fun(fun(num,bool),fun(fun(num,real),real)) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#LENGTH:fun(list('A),num) l1:list('A)))) (\i:num. ((f:fun('A,fun('B,real)) ((#EL:fun(num,fun(list('A),'A)) ((#-:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) l1:list('A))) ((#EL:fun(num,fun(list('B),'B)) ((#-:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) l2:list('B)))))))))))))
+      #|M_taylor.interval_arith_abs_le =  |- (#!:fun(fun(real,bool),bool) (\x:real. (#!:fun(fun(prod(real,real),bool),bool) (\int:prod(real,real). (#!:fun(fun(real,bool),bool) (\y:real. ((#==>:fun(bool,fun(bool,bool)) ((#interval_arith:fun(real,fun(prod(real,real),bool)) x:real) int:prod(real,real))) ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#iabs:fun(prod(real,real),real) int:prod(real,real))) y:real)) ((#real_le:fun(real,fun(real,bool)) (#real_abs:fun(real,real) x:real)) y:real)))))))))
+      #|M_taylor.ALL_N_ALL2 =  |- (#!:fun(fun(fun(num,fun('A,bool)),bool),bool) (\P:fun(num,fun('A,bool)). (#!:fun(fun(list('A),bool),bool) (\l:list('A). (#!:fun(fun(num,bool),bool) (\i0:num. ((#=:fun(bool,fun(bool,bool)) (((#all_n:fun(num,fun(list('A),fun(fun(num,fun('A,bool)),bool))) i0:num) l:list('A)) P:fun(num,fun('A,bool)))) (((#COND:fun(bool,fun(bool,fun(bool,bool))) ((#=:fun(list('A),fun(list('A),bool)) l:list('A)) #NIL:list('A))) #T:bool) (((#ALL2:fun(fun(num,fun('A,bool)),fun(list(num),fun(list('A),bool))) P:fun(num,fun('A,bool))) ((#l_seq:fun(num,fun(num,list(num))) i0:num) ((#-:fun(num,fun(num,num)) ((#+:fun(num,fun(num,num)) i0:num) (#LENGTH:fun(list('A),num) l:list('A)))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) l:list('A))))))))))
+      #|M_taylor.ALL_N_EL =  |- (#!:fun(fun(fun(num,fun('A,bool)),bool),bool) (\P:fun(num,fun('A,bool)). (#!:fun(fun(list('A),bool),bool) (\l:list('A). (#!:fun(fun(num,bool),bool) (\i0:num. ((#=:fun(bool,fun(bool,bool)) (((#all_n:fun(num,fun(list('A),fun(fun(num,fun('A,bool)),bool))) i0:num) l:list('A)) P:fun(num,fun('A,bool)))) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#<:fun(num,fun(num,bool)) i:num) (#LENGTH:fun(list('A),num) l:list('A)))) ((P:fun(num,fun('A,bool)) ((#+:fun(num,fun(num,num)) i0:num) i:num)) ((#EL:fun(num,fun(list('A),'A)) i:num) l:list('A)))))))))))))
+      #|M_taylor.M_TAYLOR_ERROR_ITLIST2 =  |- (#!:fun(fun(fun(cart(real,'N),real),bool),bool) (\f:fun(cart(real,'N),real). (#!:fun(fun(prod(cart(real,'N),cart(real,'N)),bool),bool) (\domain:prod(cart(real,'N),cart(real,'N)). (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). (#!:fun(fun(list(real),bool),bool) (\w:list(real). (#!:fun(fun(list(list(prod(real,real))),bool),bool) (\dd_bounds_list:list(list(prod(real,real))). (#!:fun(fun(real,bool),bool) (\error:real. ((#==>:fun(bool,fun(bool,bool)) (((#m_cell_domain:fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(cart(real,'N),bool))) domain:prod(cart(real,'N),cart(real,'N))) y:cart(real,'N)) (#vector:fun(list(real),cart(real,'N)) w:list(real)))) ((#==>:fun(bool,fun(bool,bool)) ((#diff2c_domain:fun(prod(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),real),bool)) domain:prod(cart(real,'N),cart(real,'N))) f:fun(cart(real,'N),real))) ((#==>:fun(bool,fun(bool,bool)) (((#second_bounded:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),fun(list(list(prod(real,real))),bool))) f:fun(cart(real,'N),real)) domain:prod(cart(real,'N),cart(real,'N))) dd_bounds_list:list(list(prod(real,real))))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(real),num) w:list(real))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(list(prod(real,real))),num) dd_bounds_list:list(list(prod(real,real))))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#==>:fun(bool,fun(bool,bool)) (((#all_n:fun(num,fun(list(list(prod(real,real))),fun(fun(num,fun(list(prod(real,real)),bool)),bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) dd_bounds_list:list(list(prod(real,real)))) (\i:num. (\list:list(prod(real,real)). ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(prod(real,real)),num) list:list(prod(real,real)))) i:num))))) ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((((#ITLIST2:fun(fun(list(prod(real,real)),fun(real,fun(real,real))),fun(list(list(prod(real,real))),fun(list(real),fun(real,real)))) (\list:list(prod(real,real)). (\x:real. (\z:real. ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) x:real) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) x:real) (#iabs:fun(prod(real,real),real) (#LAST:fun(list(prod(real,real)),prod(real,real)) list:list(prod(real,real)))))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((((#ITLIST2:fun(fun(prod(real,real),fun(real,fun(real,real))),fun(list(prod(real,real)),fun(list(real),fun(real,real)))) (\a:prod(real,real). (\b:real. (\c:real. ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) b:real) (#iabs:fun(prod(real,real),real) a:prod(real,real)))) c:real))))) (#BUTLAST:fun(list(prod(real,real)),list(prod(real,real))) list:list(prod(real,real)))) w:list(real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))) z:real))))) dd_bounds_list:list(list(prod(real,real)))) w:list(real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) error:real)) ((((#m_taylor_error:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(real,bool)))) f:fun(cart(real,'N),real)) domain:prod(cart(real,'N),cart(real,'N))) (#vector:fun(list(real),cart(real,'N)) w:list(real))) error:real))))))))))))))))))))
+      #|M_taylor.M_TAYLOR_ERROR_ITLIST2_ALT =  |- (#!:fun(fun(fun(cart(real,'N),real),bool),bool) (\f:fun(cart(real,'N),real). (#!:fun(fun(prod(cart(real,'N),cart(real,'N)),bool),bool) (\domain:prod(cart(real,'N),cart(real,'N)). (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). (#!:fun(fun(list(real),bool),bool) (\w:list(real). (#!:fun(fun(real,bool),bool) (\f_lo:real. (#!:fun(fun(real,bool),bool) (\f_hi:real. (#!:fun(fun(list(prod(real,real)),bool),bool) (\d_bounds_list:list(prod(real,real)). (#!:fun(fun(list(list(prod(real,real))),bool),bool) (\dd_bounds_list:list(list(prod(real,real))). (#!:fun(fun(real,bool),bool) (\error:real. ((#==>:fun(bool,fun(bool,bool)) (((((((#m_taylor_interval:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(cart(real,'N),fun(prod(real,real),fun(list(prod(real,real)),fun(list(list(prod(real,real))),bool))))))) f:fun(cart(real,'N),real)) domain:prod(cart(real,'N),cart(real,'N))) y:cart(real,'N)) (#vector:fun(list(real),cart(real,'N)) w:list(real))) ((#,:fun(real,fun(real,prod(real,real))) f_lo:real) f_hi:real)) d_bounds_list:list(prod(real,real))) dd_bounds_list:list(list(prod(real,real))))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(real),num) w:list(real))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(list(prod(real,real))),num) dd_bounds_list:list(list(prod(real,real))))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#==>:fun(bool,fun(bool,bool)) (((#all_n:fun(num,fun(list(list(prod(real,real))),fun(fun(num,fun(list(prod(real,real)),bool)),bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) dd_bounds_list:list(list(prod(real,real)))) (\i:num. (\list:list(prod(real,real)). ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(prod(real,real)),num) list:list(prod(real,real)))) i:num))))) ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((((#ITLIST2:fun(fun(list(prod(real,real)),fun(real,fun(real,real))),fun(list(list(prod(real,real))),fun(list(real),fun(real,real)))) (\list:list(prod(real,real)). (\x:real. (\z:real. ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) x:real) ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) x:real) (#iabs:fun(prod(real,real),real) (#LAST:fun(list(prod(real,real)),prod(real,real)) list:list(prod(real,real)))))) ((#real_mul:fun(real,fun(real,real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num))))) ((((#ITLIST2:fun(fun(prod(real,real),fun(real,fun(real,real))),fun(list(prod(real,real)),fun(list(real),fun(real,real)))) (\a:prod(real,real). (\b:real. (\c:real. ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) b:real) (#iabs:fun(prod(real,real),real) a:prod(real,real)))) c:real))))) (#BUTLAST:fun(list(prod(real,real)),list(prod(real,real))) list:list(prod(real,real)))) w:list(real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))) z:real))))) dd_bounds_list:list(list(prod(real,real)))) w:list(real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) error:real)) ((((#m_taylor_error:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(real,bool)))) f:fun(cart(real,'N),real)) domain:prod(cart(real,'N),cart(real,'N))) (#vector:fun(list(real),cart(real,'N)) w:list(real))) error:real))))))))))))))))))))))))
+      #|M_taylor.M_TAYLOR_INTERVAL' =  |- ((#=:fun(bool,fun(bool,bool)) (((((((#m_taylor_interval:fun(fun(cart(real,'?2000945),real),fun(prod(cart(real,'?2000945),cart(real,'?2000945)),fun(cart(real,'?2000945),fun(cart(real,'?2000945),fun(prod(real,real),fun(list(prod(real,real)),fun(list(list(prod(real,real))),bool))))))) f:fun(cart(real,'?2000945),real)) domain:prod(cart(real,'?2000945),cart(real,'?2000945))) y:cart(real,'?2000945)) w:cart(real,'?2000945)) f_bounds:prod(real,real)) d_bounds_list:list(prod(real,real))) dd_bounds_list:list(list(prod(real,real))))) ((#/\:fun(bool,fun(bool,bool)) (((#m_cell_domain:fun(prod(cart(real,'?2000945),cart(real,'?2000945)),fun(cart(real,'?2000945),fun(cart(real,'?2000945),bool))) domain:prod(cart(real,'?2000945),cart(real,'?2000945))) y:cart(real,'?2000945)) w:cart(real,'?2000945))) ((#/\:fun(bool,fun(bool,bool)) ((#diff2c_domain:fun(prod(cart(real,'?2000945),cart(real,'?2000945)),fun(fun(cart(real,'?2000945),real),bool)) domain:prod(cart(real,'?2000945),cart(real,'?2000945))) f:fun(cart(real,'?2000945),real))) ((#/\:fun(bool,fun(bool,bool)) ((((#m_lin_approx:fun(fun(cart(real,'?2000945),real),fun(cart(real,'?2000945),fun(prod(real,real),fun(list(prod(real,real)),bool)))) f:fun(cart(real,'?2000945),real)) y:cart(real,'?2000945)) f_bounds:prod(real,real)) d_bounds_list:list(prod(real,real)))) (((#second_bounded:fun(fun(cart(real,'?2000945),real),fun(prod(cart(real,'?2000945),cart(real,'?2000945)),fun(list(list(prod(real,real))),bool))) f:fun(cart(real,'?2000945),real)) domain:prod(cart(real,'?2000945),cart(real,'?2000945))) dd_bounds_list:list(list(prod(real,real))))))))
+      #|M_taylor.M_TAYLOR_BOUND' =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((((((#m_taylor_interval:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(cart(real,'N),fun(prod(real,real),fun(list(prod(real,real)),fun(list(list(prod(real,real))),bool))))))) f:fun(cart(real,'N),real)) domain:prod(cart(real,'N),cart(real,'N))) y:cart(real,'N)) (#vector:fun(list(real),cart(real,'N)) w:list(real))) ((#,:fun(real,fun(real,prod(real,real))) f_lo:real) f_hi:real)) d_bounds_list:list(prod(real,real))) dd_bounds_list:list(list(prod(real,real))))) ((#/\:fun(bool,fun(bool,bool)) ((((#m_taylor_error:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(real,bool)))) f:fun(cart(real,'N),real)) domain:prod(cart(real,'N),cart(real,'N))) (#vector:fun(list(real),cart(real,'N)) w:list(real))) error:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((((#ITLIST2:fun(fun(prod(real,real),fun(real,fun(real,real))),fun(list(prod(real,real)),fun(list(real),fun(real,real)))) (\a:prod(real,real). (\b:real. (\c:real. ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) b:real) (#iabs:fun(prod(real,real),real) a:prod(real,real)))) c:real))))) d_bounds_list:list(prod(real,real))) w:list(real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) b:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) b:real) ((#real_mul:fun(real,fun(real,real)) (#real_inv:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) error:real))) a:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) lo:real) ((#real_sub:fun(real,fun(real,real)) f_lo:real) a:real))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) f_hi:real) a:real)) hi:real)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(real),num) w:list(real))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(prod(real,real)),num) d_bounds_list:list(prod(real,real)))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))))))))) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#interval_arith:fun(real,fun(prod(real,real),bool)) (f:fun(cart(real,'N),real) x:cart(real,'N))) ((#,:fun(real,fun(real,prod(real,real))) lo:real) hi:real))))))
+      #|M_taylor.M_TAYLOR_UPPER_BOUND' =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((((((#m_taylor_interval:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(cart(real,'N),fun(prod(real,real),fun(list(prod(real,real)),fun(list(list(prod(real,real))),bool))))))) f:fun(cart(real,'N),real)) domain:prod(cart(real,'N),cart(real,'N))) y:cart(real,'N)) (#vector:fun(list(real),cart(real,'N)) w:list(real))) ((#,:fun(real,fun(real,prod(real,real))) f_lo:real) f_hi:real)) d_bounds_list:list(prod(real,real))) dd_bounds_list:list(list(prod(real,real))))) ((#/\:fun(bool,fun(bool,bool)) ((((#m_taylor_error:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(real,bool)))) f:fun(cart(real,'N),real)) domain:prod(cart(real,'N),cart(real,'N))) (#vector:fun(list(real),cart(real,'N)) w:list(real))) error:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((((#ITLIST2:fun(fun(prod(real,real),fun(real,fun(real,real))),fun(list(prod(real,real)),fun(list(real),fun(real,real)))) (\a:prod(real,real). (\b:real. (\c:real. ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) b:real) (#iabs:fun(prod(real,real),real) a:prod(real,real)))) c:real))))) d_bounds_list:list(prod(real,real))) w:list(real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) b:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) b:real) ((#real_mul:fun(real,fun(real,real)) (#real_inv:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) error:real))) a:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) f_hi:real) a:real)) hi:real)) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(real),num) w:list(real))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(prod(real,real)),num) d_bounds_list:list(prod(real,real)))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))))))))) (#!:fun(fun(cart(real,'N),bool),bool) (\p:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) p:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#real_le:fun(real,fun(real,bool)) (f:fun(cart(real,'N),real) p:cart(real,'N))) hi:real)))))
+      #|M_taylor.M_TAYLOR_LOWER_BOUND' =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((((((#m_taylor_interval:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(cart(real,'N),fun(prod(real,real),fun(list(prod(real,real)),fun(list(list(prod(real,real))),bool))))))) f:fun(cart(real,'N),real)) domain:prod(cart(real,'N),cart(real,'N))) y:cart(real,'N)) (#vector:fun(list(real),cart(real,'N)) w:list(real))) ((#,:fun(real,fun(real,prod(real,real))) f_lo:real) f_hi:real)) d_bounds_list:list(prod(real,real))) dd_bounds_list:list(list(prod(real,real))))) ((#/\:fun(bool,fun(bool,bool)) ((((#m_taylor_error:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(real,bool)))) f:fun(cart(real,'N),real)) domain:prod(cart(real,'N),cart(real,'N))) (#vector:fun(list(real),cart(real,'N)) w:list(real))) error:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((((#ITLIST2:fun(fun(prod(real,real),fun(real,fun(real,real))),fun(list(prod(real,real)),fun(list(real),fun(real,real)))) (\a:prod(real,real). (\b:real. (\c:real. ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) b:real) (#iabs:fun(prod(real,real),real) a:prod(real,real)))) c:real))))) d_bounds_list:list(prod(real,real))) w:list(real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) b:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) b:real) ((#real_mul:fun(real,fun(real,real)) (#real_inv:fun(real,real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) (#BIT0:fun(num,num) (#BIT1:fun(num,num) #_0:num)))))) error:real))) a:real)) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) lo:real) ((#real_sub:fun(real,fun(real,real)) f_lo:real) a:real))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(real),num) w:list(real))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(prod(real,real)),num) d_bounds_list:list(prod(real,real)))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))))))))) (#!:fun(fun(cart(real,'N),bool),bool) (\p:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) p:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#real_le:fun(real,fun(real,bool)) lo:real) (f:fun(cart(real,'N),real) p:cart(real,'N)))))))
+      #|M_taylor.M_TAYLOR_PARTIAL_BOUND' =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((((((#m_taylor_interval:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(cart(real,'N),fun(prod(real,real),fun(list(prod(real,real)),fun(list(list(prod(real,real))),bool))))))) f:fun(cart(real,'N),real)) domain:prod(cart(real,'N),cart(real,'N))) y:cart(real,'N)) (#vector:fun(list(real),cart(real,'N)) w:list(real))) f_bounds:prod(real,real)) d_bounds_list:list(prod(real,real))) dd_bounds_list:list(list(prod(real,real))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(prod(real,real),fun(prod(real,real),bool)) ((#EL:fun(num,fun(list(prod(real,real)),prod(real,real))) ((#-:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d_bounds_list:list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) df_lo:real) df_hi:real))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) (((#all_n:fun(num,fun(list(prod(real,real)),fun(fun(num,fun(prod(real,real),bool)),bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) dd_list:list(prod(real,real))) (\j:num. (\int:prod(real,real). ((#interval_arith:fun(real,fun(prod(real,real),bool)) (((#COND:fun(bool,fun(real,fun(real,real))) ((#<=:fun(num,fun(num,bool)) j:num) i:num)) ((((#partial2:fun(num,fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real)))) j:num) i:num) f:fun(cart(real,'N),real)) x:cart(real,'N))) ((((#partial2:fun(num,fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real)))) i:num) j:num) f:fun(cart(real,'N),real)) x:cart(real,'N)))) int:prod(real,real))))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(prod(real,real)),num) dd_list:list(prod(real,real)))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(prod(real,real)),num) d_bounds_list:list(prod(real,real)))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(real),num) w:list(real))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((((#ITLIST2:fun(fun(prod(real,real),fun(real,fun(real,real))),fun(list(prod(real,real)),fun(list(real),fun(real,real)))) (\a:prod(real,real). (\b:real. (\c:real. ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) b:real) (#iabs:fun(prod(real,real),real) a:prod(real,real)))) c:real))))) dd_list:list(prod(real,real))) w:list(real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) error:real)) ((#real_le:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) df_hi:real) error:real)) hi:real)))))))))) ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) lo:real) ((#real_sub:fun(real,fun(real,real)) df_lo:real) error:real))) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#interval_arith:fun(real,fun(prod(real,real),bool)) (((#partial:fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real))) i:num) f:fun(cart(real,'N),real)) x:cart(real,'N))) ((#,:fun(real,fun(real,prod(real,real))) lo:real) hi:real)))))))
+      #|M_taylor.M_TAYLOR_PARTIAL_UPPER' =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((((((#m_taylor_interval:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(cart(real,'N),fun(prod(real,real),fun(list(prod(real,real)),fun(list(list(prod(real,real))),bool))))))) f:fun(cart(real,'N),real)) domain:prod(cart(real,'N),cart(real,'N))) y:cart(real,'N)) (#vector:fun(list(real),cart(real,'N)) w:list(real))) f_bounds:prod(real,real)) d_bounds_list:list(prod(real,real))) dd_bounds_list:list(list(prod(real,real))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(prod(real,real),fun(prod(real,real),bool)) ((#EL:fun(num,fun(list(prod(real,real)),prod(real,real))) ((#-:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d_bounds_list:list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) df_lo:real) df_hi:real))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) (((#all_n:fun(num,fun(list(prod(real,real)),fun(fun(num,fun(prod(real,real),bool)),bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) dd_list:list(prod(real,real))) (\j:num. (\int:prod(real,real). ((#interval_arith:fun(real,fun(prod(real,real),bool)) (((#COND:fun(bool,fun(real,fun(real,real))) ((#<=:fun(num,fun(num,bool)) j:num) i:num)) ((((#partial2:fun(num,fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real)))) j:num) i:num) f:fun(cart(real,'N),real)) x:cart(real,'N))) ((((#partial2:fun(num,fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real)))) i:num) j:num) f:fun(cart(real,'N),real)) x:cart(real,'N)))) int:prod(real,real))))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(prod(real,real)),num) dd_list:list(prod(real,real)))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(prod(real,real)),num) d_bounds_list:list(prod(real,real)))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(real),num) w:list(real))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((((#ITLIST2:fun(fun(prod(real,real),fun(real,fun(real,real))),fun(list(prod(real,real)),fun(list(real),fun(real,real)))) (\a:prod(real,real). (\b:real. (\c:real. ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) b:real) (#iabs:fun(prod(real,real),real) a:prod(real,real)))) c:real))))) dd_list:list(prod(real,real))) w:list(real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) error:real)) ((#real_le:fun(real,fun(real,bool)) ((#real_add:fun(real,fun(real,real)) df_hi:real) error:real)) hi:real)))))))))) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#real_le:fun(real,fun(real,bool)) (((#partial:fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real))) i:num) f:fun(cart(real,'N),real)) x:cart(real,'N))) hi:real)))))
+      #|M_taylor.M_TAYLOR_PARTIAL_LOWER' =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((((((#m_taylor_interval:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(cart(real,'N),fun(prod(real,real),fun(list(prod(real,real)),fun(list(list(prod(real,real))),bool))))))) f:fun(cart(real,'N),real)) domain:prod(cart(real,'N),cart(real,'N))) y:cart(real,'N)) (#vector:fun(list(real),cart(real,'N)) w:list(real))) f_bounds:prod(real,real)) d_bounds_list:list(prod(real,real))) dd_bounds_list:list(list(prod(real,real))))) ((#/\:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(prod(real,real),fun(prod(real,real),bool)) ((#EL:fun(num,fun(list(prod(real,real)),prod(real,real))) ((#-:fun(num,fun(num,num)) i:num) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num)))) d_bounds_list:list(prod(real,real)))) ((#,:fun(real,fun(real,prod(real,real))) df_lo:real) df_hi:real))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) (((#all_n:fun(num,fun(list(prod(real,real)),fun(fun(num,fun(prod(real,real),bool)),bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) dd_list:list(prod(real,real))) (\j:num. (\int:prod(real,real). ((#interval_arith:fun(real,fun(prod(real,real),bool)) (((#COND:fun(bool,fun(real,fun(real,real))) ((#<=:fun(num,fun(num,bool)) j:num) i:num)) ((((#partial2:fun(num,fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real)))) j:num) i:num) f:fun(cart(real,'N),real)) x:cart(real,'N))) ((((#partial2:fun(num,fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real)))) i:num) j:num) f:fun(cart(real,'N),real)) x:cart(real,'N)))) int:prod(real,real))))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(prod(real,real)),num) dd_list:list(prod(real,real)))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(prod(real,real)),num) d_bounds_list:list(prod(real,real)))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(num,fun(num,bool)) (#LENGTH:fun(list(real),num) w:list(real))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool)))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((((#ITLIST2:fun(fun(prod(real,real),fun(real,fun(real,real))),fun(list(prod(real,real)),fun(list(real),fun(real,real)))) (\a:prod(real,real). (\b:real. (\c:real. ((#real_add:fun(real,fun(real,real)) ((#real_mul:fun(real,fun(real,real)) b:real) (#iabs:fun(prod(real,real),real) a:prod(real,real)))) c:real))))) dd_list:list(prod(real,real))) w:list(real)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) error:real)) ((#real_le:fun(real,fun(real,bool)) lo:real) ((#real_sub:fun(real,fun(real,real)) df_lo:real) error:real))))))))))) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#real_le:fun(real,fun(real,bool)) lo:real) (((#partial:fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real))) i:num) f:fun(cart(real,'N),real)) x:cart(real,'N)))))))
+      #|types = multivector/1 matroid/1 group/1 frag/1 metric/1 net/1 topology/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
+      #|constants = test_domain_xi m_taylor_interval second_bounded diff2c_domain diff2_domain m_bounded_on_int m_cell_domain diff2c diff2 partial2 m_taylor_partial_error m_taylor_error m_lin_approx all_n partial cell_domain taylor_interval has_bounded_second_derivative lin_approx nth_diff_strong_int nth_diff_strong nth_diff_weak nth_differentiable_on_int nth_differentiable_on nth_differentiable nth_derivative derivative distn leqif uphalf half HALF double odd iteri iter minn maxn relU preim predD predC predU predI predT pred0 subrel subpred XOR isSome associative idempotent commutative self_inverse rev_left_loop left_loop right_distributive left_commutative right_zero left_id rev_right_loop right_loop left_distributive right_commutative left_zero right_id right_injective left_injective right_inverse left_inverse involutive bijective ocancel pcancel cancel injective pcomp omap obind odflt oapp ssreflect_eq error_mul_f1 error_mul_f2 list_sum2 list_sum ddmatan dmatan matan halfatn4 halfatn poly_f_odd poly_f_even poly_f real_zero l_seq TABLE REVERSE_TABLE mod_plus arith_base float_num min_exp interval_gt interval_neg interval_pos interval_not_zero iabs bounded_on_int bounded_on interval_arith num_exp D199 D198 D197 D196 D195 D194 D193 D192 D191 D190 D189 D188 D187 D186 D185 D184 D183 D182 D181 D180 D179 D178 D177 D176 D175 D174 D173 D172 D171 D170 D169 D168 D167 D166 D165 D164 D163 D162 D161 D160 D159 D158 D157 D156 D155 D154 D153 D152 D151 D150 D149 D148 D147 D146 D145 D144 D143 D142 D141 D140 D139 D138 D137 D136 D135 D134 D133 D132 D131 D130 D129 D128 D127 D126 D125 D124 D123 D122 D121 D120 D119 D118 D117 D116 D115 D114 D113 D112 D111 D110 D109 D108 D107 D106 D105 D104 D103 D102 D101 D100 D99 D98 D97 D96 D95 D94 D93 D92 D91 D90 D89 D88 D87 D86 D85 D84 D83 D82 D81 D80 D79 D78 D77 D76 D75 D74 D73 D72 D71 D70 D69 D68 D67 D66 D65 D64 D63 D62 D61 D60 D59 D58 D57 D56 D55 D54 D53 D52 D51 D50 D49 D48 D47 D46 D45 D44 D43 D42 D41 D40 D39 D38 D37 D36 D35 D34 D33 D32 D31 D30 D29 D28 D27 D26 D25 D24 D23 D22 D21 D20 D19 D18 D17 D16 D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 NUM200 real_variation has_bounded_real_variation_on real_lebesgue_measurable real_measurable_on bernoulli vector_polynomial_function real_polynomial_function bernstein slice real_measure real_measurable has_real_measure absolutely_real_integrable_on real_negligible real_integral real_integrable_on has_real_integral real_log_convex_on log_convex_on real_convex_on open_real_segment closed_real_segment has_liminf has_limsup real_differentiable_on higher_real_derivative real_derivative real_differentiable has_real_derivative real_uniformly_continuous_on real_continuous_on real_continuous atreal binom rpow root acs asn cacs casn atn catn unwinding cpow clog tan ctan rotate2d Arg pi log cos sin exp csin ccos cexp analytic_on holomorphic_on higher_complex_derivative complex_derivative complex_differentiable has_complex_derivative cproduct real csqrt cnj complex_pow complex_div complex_inv complex_mul ii Cx complex Im Re lebesgue_measurable measurable_on measure measurable has_measure path_length rectifiable_path absolutely_continuous_on absolutely_setcontinuous_on vector_variation has_bounded_variation_on equiintegrable_on absolutely_integrable_on has_bounded_setvariation_on set_variation negligible division_points lifted operative integral integrable_on has_integral has_integral_compact_interval fine tagged_division_of tagged_partial_division_of division_of gauge content interval_lowerbound interval_upperbound reversion outermorphism seqiterate inner outer geom_mul Product grade multivector multivec mbasis lambdas $$ codeset setcode dest_multivector mk_multivector binarysum bitset vector_derivative has_vector_derivative jacobian frechet_derivative differentiable_on differentiable has_derivative interval_bij ENR ANR AR retract_of retraction brouwer_degree brouwer_degree1 triangulation simplicial_complex simplex polyhedron polytope edge_of facet_of extreme_point_of exposed_face_of face_of covering_space dimension contractible homotopy_equivalent fundamental_group simply_connected homotopic_loops homotopic_paths outside inside path_connected path_components path_component linepath subpath shiftpath arc simple_path ++ reversepath path_image pathfinish pathstart path barycentre relative_frontier relative_interior starlike epigraph convex_cone polar_dual aff_dim convex_on coplanar affine_dependent conic convex affine analytic borel_measurable_on baire borel fsigma gdelta locally hausdist setdist closest_point summable infsum sums homeomorphic homeomorphism is_interval diameter components connected_component uniformly_continuous_on continuous_on continuous complete cauchy compact bounded condensation_point_of lim --> in_direction at_neginfinity at_posinfinity at_infinity at frontier closure interior limit_point_of connected open_segment closed_segment manhattan sphere cball ball closed euclidean_metric euclidean open reflect_along rotoinversion_matrix rotation_matrix orthogonal_matrix orthogonal_transformation positive_definite positive_semidefinite diagonal_matrix cofactor det trace sign evenperm permutation swapseq three_cycle swap inverse permutes closed_interval open_interval midpoint between collinear infnorm matrix_inv rank columnvector rowvector euclidean_matroid dim independent dependent span subspace pushin dropout indicator drop lift onorm matrix invertible normal_matrix symmetric_matrix columns rows column row transp mat vector_matrix_mul matrix_vector_mul matrix_mul matrix_sub matrix_add matrix_neg %% adjoint bilinear linear orthogonal basis vsum distance vector_norm dot vec % vector_neg vector_sub vector_add matroid_dim matroid_finite_dim matroid_dimension matroid_finite_dimensional submatroid matroid_subspace matroid_dependent matroid_basis matroid_independent matroid_spanning matroid_span matroid_set dest_matroid matroid brouwer_degree2 reduced_homology_group hom_relboundary hom_induced hom_boundary homology_group relative_homology_group relcycle_group chain_group singular_subdivision simplicial_subdivision simplicial_vertex simplicial_cone simplex_cone simplicial_chain simplicial_simplex oriented_simplex chain_map simplex_map homologous_rel singular_relboundary singular_relcycle mod_subset chain_boundary singular_chain singular_face singular_simplex simplicial_face standard_simplex short_exact_sequence group_exactness solvable_group free_abelian_group pgroup integer_mod_group integer_group finitely_generated_group cyclic_group group_element_order trivial_homomorphism group_image group_kernel quotient_group group_normalizer group_centralizer group_conjugate normal_subgroup_of left_coset right_coset group_orbit group_stabilizer group_action group_setmul group_setinv isomorphic_group group_automorphism group_isomorphism group_isomorphisms group_endomorphism group_epimorphism group_monomorphism group_homomorphism sum_group product_group prod_group subgroup_generated subgroup_of group_conjugation group_sum group_product group_nmul group_add group_neg abelian_group group_zpow group_pow group_div opposite_group trivial_group singleton_group group_mul group_inv group_id group_carrier group_operations group index frag_extend frag_sub frag_add frag_cmul frag_neg frag_of frag_0 frag_support dest_frag mk_frag cantor_set cantor_map cantor_term cantor_space dimension_le sigma_locally_finite_in paracompact_space cfunspace funspace nsphere euclidean_space capped_metric fccoverable_in ulc_space fccoverable_space mdiameter cauchy_continuous_map uniformly_continuous_map lipschitz_continuous_map prod_metric completely_metrizable_space contractible_space homotopy_equivalent_space homotopic_with alexandroff_compactification kification k_space quasi_components_of quasi_component_of locally_connected_space locally_connected_at weakly_locally_connected_at locally_path_connected_space locally_path_connected_at weakly_locally_path_connected_at completely_regular_space normal_space path_components_of path_component_of path_connected_in path_connected_space path_in real_summable real_infsum real_sums reallim ---> topcontinuous_at totally_bounded_in mcomplete cauchy_in limit atpointof real_compact real_bounded real_euclidean_metric euclideanreal real_closed real_open locally_compact_space regular_space kolmogorov_quotient t0_space neighbourhood_base_of neighbourhood_base_at monotone_map connected_components_of connected_component_of separated_between connected_in connected_space metrizable_space discrete_metric mbounded msphere mcball mtopology submetric mball mdist mspace dest_metric metric is_metric_space borel_measurable_map borel_in gdelta_in fsigma_in sequentially trivial_limit eventually within netlimit netlimits netfilter dest_net mk_net separable_space first_countable second_countable lindelof_space perfect_map proper_map kc_space hausdorff_space t1_space separated_in compact_space compact_in retract_of_space retraction_map section_map retraction_maps embedding_map homeomorphic_space homeomorphic_maps homeomorphic_map sum_topology product_topology prod_topology quotient_map closed_map open_map continuous_map locally_finite_in frontier_of interior_of closure_of derived_set_of hereditarily subtopology discrete_space discrete_topology closed_in topspace open_in topology istopology ITER suslin suslin_operation relative_to from hull matrify vectorize closed_real_interval open_real_interval is_realinterval frac floor rational ^_c *_c +_c ordinal linseg inseg properly strictly antichain chain wqoset woset toset poset qoset fld superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? ! ==> /\ T =
+      #|definitions = 1150
+      #|Warning: inventing type variables
+      #|counter_tyvar = zz_counter:'?2006726
+      #|counter_genvar = _3726768:bool
+      #|
+    ),
+  )
+}
