@@ -678,6 +678,8 @@ pub fn singular_subdivision_sub() -> @kernel.Thm
 
 pub fn singular_subdivision_zero() -> @kernel.Thm
 
+pub fn skip_load() -> Unit
+
 pub fn small_homologous_rel_relcycle_exists() -> @kernel.Thm
 
 pub fn standard_simplex() -> @kernel.Thm

@@ -238,6 +238,8 @@ pub fn setenum_norm_conv(@kernel.Term) -> @kernel.Thm raise
 
 pub fn sindex() -> @kernel.Thm
 
+pub fn skip_load() -> Unit
+
 pub fn span_mbasis() -> @kernel.Thm
 
 pub fn symdiff_parity_lemma() -> @kernel.Thm

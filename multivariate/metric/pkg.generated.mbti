@@ -4799,6 +4799,8 @@ pub fn sigma_locally_finite_imp_locally_finite_covering() -> @kernel.Thm
 
 pub fn sigma_locally_finite_in() -> @kernel.Thm
 
+pub fn skip_load() -> Unit
+
 pub fn subbase_subtopology_euclideanreal() -> @kernel.Thm
 
 pub fn submetric() -> @kernel.Thm

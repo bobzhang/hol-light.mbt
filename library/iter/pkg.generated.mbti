@@ -34,6 +34,8 @@ pub fn order_existence_gen() -> @kernel.Thm
 
 pub fn order_existence_iter() -> @kernel.Thm
 
+pub fn skip_load() -> Unit
+
 // Errors
 
 // Types and methods

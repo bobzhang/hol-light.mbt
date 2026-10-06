@@ -574,6 +574,8 @@ pub fn primepow_factor() -> @kernel.Thm
 
 pub fn primes_infinite() -> @kernel.Thm
 
+pub fn skip_load() -> Unit
+
 // Errors
 
 // Types and methods
