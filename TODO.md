@@ -33,9 +33,13 @@ session (forked children per file), then runs the new tests with
 ## Plan to finish
 
 Upstream has about 1.31M lines; 1.175M are ported (90%). Of the rest,
-about 19K are files that do not load upstream and 110K are not theories
-(see step 8 and Open issues). What is left to port is small (Mizarlight,
-QBF, zChaff's half of Minisat/test.ml) and step 9. The steps, in the
+23K are files that do not load upstream (from_topology.ml is 18K of
+them), 42K are the theorem search databases (database.ml, help.ml,
+Multivariate/*_database.ml) and 6K the Proofrecording kernel; the
+remainder is loaders, syntax extensions and test scripts (see step 8 and
+Open issues: not counted file by file). What is left to port is small
+(Mizarlight, QBF, zChaff's half of Minisat/test.ml) and step 9. The
+steps, in the
 order to do it (dependencies first, cheap before expensive). Every step
 is the same loop: `batch.py --files ...` in batches of 10-15 files,
 `tools/test.py <tier>`, commit. Check a directory for external programs
