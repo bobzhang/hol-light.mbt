@@ -1,0 +1,568 @@
+== a* on aaab
+match = 3 [aaa]
+forward = 0-3 [aaa]
+backward = 4-4 []
+replace = <aaa><>b<>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #b
+split = b
+== a* on b
+match = 0 []
+forward = 0-0 []
+backward = 1-1 []
+replace = <>b<>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #b
+split = b
+== a+b on xaab
+match = no
+forward = 1-4 [aab]
+backward = 2-4 [ab]
+replace = x<aab>
+replace1 = Failure Str.replace: reference to unmatched group
+first = x#
+split = x
+== a?b on ab b
+match = 2 [ab]
+forward = 0-2 [ab]
+backward = 3-4 [b]
+replace = <ab> <b>
+replace1 = Failure Str.replace: reference to unmatched group
+first = # b
+split =  
+== x* on abc
+match = 0 []
+forward = 0-0 []
+backward = 3-3 []
+replace = <>a<>b<>c<>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #abc
+split = a|b|c
+==  on abc
+match = 0 []
+forward = 0-0 []
+backward = 3-3 []
+replace = <>a<>b<>c<>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #abc
+split = a|b|c
+== [a-c]+ on xxabcabcx
+match = no
+forward = 2-8 [abcabc]
+backward = 7-8 [c]
+replace = xx<abcabc>x
+replace1 = Failure Str.replace: reference to unmatched group
+first = xx#x
+split = xx|x
+== [^;]*; on foo; bar; baz
+match = 4 [foo;]
+forward = 0-4 [foo;]
+backward = 8-9 [;]
+replace = <foo;>< bar;> baz
+replace1 = Failure Str.replace: reference to unmatched group
+first = # bar; baz
+split = | baz
+== []a]+ on a]]b
+match = 3 [a]]]
+forward = 0-3 [a]]]
+backward = 2-3 []]
+replace = <a]]>b
+replace1 = Failure Str.replace: reference to unmatched group
+first = #b
+split = b
+== [a-]+ on -a-b
+match = 3 [-a-]
+forward = 0-3 [-a-]
+backward = 2-3 [-]
+replace = <-a->b
+replace1 = Failure Str.replace: reference to unmatched group
+first = #b
+split = b
+== [^]a]+ on xy]a
+match = 2 [xy]
+forward = 0-2 [xy]
+backward = 1-2 [y]
+replace = <xy>]a
+replace1 = Failure Str.replace: reference to unmatched group
+first = #]a
+split = ]a
+== [^a-c] on abcd
+match = no
+forward = 3-4 [d]
+backward = 3-4 [d]
+replace = abc<d>
+replace1 = Failure Str.replace: reference to unmatched group
+first = abc#
+split = abc
+== \\(a\\|ab\\)\\(c\\|bcd\\)\\(d*\\) on abcd
+match = 4 [abcd],[a],[bcd],[]
+forward = 0-4 [abcd],[a],[bcd],[]
+backward = 0-4 [abcd],[a],[bcd],[]
+replace = <abcd>
+replace1 = [a\\\\n]
+first = #
+split = 
+== \\(a*\\)* on aaa
+match = 3 [aaa],[aaa]
+forward = 0-3 [aaa],[aaa]
+backward = 3-3 [],-
+replace = <aaa><>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #
+split = 
+== \\(a*\\)* on b
+match = 0 [],-
+forward = 0-0 [],-
+backward = 1-1 [],-
+replace = <>b<>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #b
+split = b
+== \\(a*\\)+ on aa
+match = 2 [aa],[aa]
+forward = 0-2 [aa],[aa]
+backward = 2-2 [],[]
+replace = <aa><>
+replace1 = [aa\\\\n][\\\\n]
+first = #
+split = 
+== \\(a*\\)+ on b
+match = 0 [],[]
+forward = 0-0 [],[]
+backward = 1-1 [],[]
+replace = <>b<>
+replace1 = [\\\\n]b[\\\\n]
+first = #b
+split = b
+== \\(a\\|\\)* on aa
+match = 2 [aa],[a]
+forward = 0-2 [aa],[a]
+backward = 2-2 [],-
+replace = <aa><>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #
+split = 
+== \\(a\\|\\)+b on aab
+match = 3 [aab],[a]
+forward = 0-3 [aab],[a]
+backward = 2-3 [b],[]
+replace = <aab>
+replace1 = [a\\\\n]
+first = #
+split = 
+== \\(a\\|b\\)*c on ababc
+match = 5 [ababc],[b]
+forward = 0-5 [ababc],[b]
+backward = 4-5 [c],-
+replace = <ababc>
+replace1 = [b\\\\n]
+first = #
+split = 
+== \\(a+\\)+b on aaab
+match = 4 [aaab],[aaa]
+forward = 0-4 [aaab],[aaa]
+backward = 2-4 [ab],[a]
+replace = <aaab>
+replace1 = [aaa\\\\n]
+first = #
+split = 
+== \\(x\\|a*\\)+y on aaxay
+match = 5 [aaxay],[a]
+forward = 0-5 [aaxay],[a]
+backward = 4-5 [y],[]
+replace = <aaxay>
+replace1 = [a\\\\n]
+first = #
+split = 
+== \\(\\(a\\)\\|\\(b\\)\\)* on ab
+match = 2 [ab],[b],[a],[b]
+forward = 0-2 [ab],[b],[a],[b]
+backward = 2-2 [],-,-,-
+replace = <ab><>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #
+split = 
+== \\(\\(a\\)\\|\\(b\\)\\)+c on abac
+match = 4 [abac],[a],[a],[b]
+forward = 0-4 [abac],[a],[a],[b]
+backward = 2-4 [ac],[a],[a],-
+replace = <abac>
+replace1 = [a\\\\n]
+first = #
+split = 
+== \\(.\\)\\1 on abccd
+match = no
+forward = 2-4 [cc],[c]
+backward = 2-4 [cc],[c]
+replace = ab<cc>d
+replace1 = ab[c\\\\n]d
+first = ab#d
+split = ab|d
+== \\(a*\\)b\\1 on aabaa aba
+match = 5 [aabaa],[aa]
+forward = 0-5 [aabaa],[aa]
+backward = 7-8 [b],[]
+replace = <aabaa> <aba>
+replace1 = [aa\\\\n] [a\\\\n]
+first = # aba
+split =  
+== \\(a\\)\\|b\\1 on ba
+match = no
+forward = 1-2 [a],[a]
+backward = 1-2 [a],[a]
+replace = b<a>
+replace1 = b[a\\\\n]
+first = b#
+split = b
+== ^b on a\nb
+match = no
+forward = 2-3 [b]
+backward = 2-3 [b]
+replace = a\n<b>
+replace1 = Failure Str.replace: reference to unmatched group
+first = a\n#
+split = a\n
+== b$ on ab\nc
+match = no
+forward = 1-2 [b]
+backward = 1-2 [b]
+replace = a<b>\nc
+replace1 = Failure Str.replace: reference to unmatched group
+first = a#\nc
+split = a|\nc
+== ^$ on a\n\nb
+match = no
+forward = 2-2 []
+backward = 2-2 []
+replace = a\n<>\nb
+replace1 = Failure Str.replace: reference to unmatched group
+first = a\n#\nb
+split = a\n|\nb
+== a^b on a^b
+match = no
+forward = Not_found
+backward = Not_found
+replace = a^b
+replace1 = a^b
+first = a^b
+split = a^b
+== a$b on a$b
+match = no
+forward = Not_found
+backward = Not_found
+replace = a$b
+replace1 = a$b
+first = a$b
+split = a$b
+== \\$ on a$b
+match = no
+forward = 1-2 [$]
+backward = 1-2 [$]
+replace = a<$>b
+replace1 = Failure Str.replace: reference to unmatched group
+first = a#b
+split = a|b
+== \\bfoo\\b on a foo b
+match = no
+forward = 2-5 [foo]
+backward = 2-5 [foo]
+replace = a <foo> b
+replace1 = Failure Str.replace: reference to unmatched group
+first = a # b
+split = a | b
+== \\bfoo\\b on afoo foo_ foo
+match = no
+forward = 10-13 [foo]
+backward = 10-13 [foo]
+replace = afoo foo_ <foo>
+replace1 = Failure Str.replace: reference to unmatched group
+first = afoo foo_ #
+split = afoo foo_ 
+== \\b on 
+match = no
+forward = Not_found
+backward = Not_found
+replace = 
+replace1 = 
+first = 
+split = 
+== o\\b on foo bar
+match = no
+forward = 2-3 [o]
+backward = 2-3 [o]
+replace = fo<o> bar
+replace1 = Failure Str.replace: reference to unmatched group
+first = fo# bar
+split = fo| bar
+== a\\|b\\|c on xcbax
+match = no
+forward = 1-2 [c]
+backward = 3-4 [a]
+replace = x<c><b><a>x
+replace1 = Failure Str.replace: reference to unmatched group
+first = x#bax
+split = x|||x
+== .* on ab\ncd
+match = 2 [ab]
+forward = 0-2 [ab]
+backward = 5-5 []
+replace = <ab><>\n<cd><>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #\ncd
+split = \n
+== a.c on a\nc abc
+match = no
+forward = 4-7 [abc]
+backward = 4-7 [abc]
+replace = a\nc <abc>
+replace1 = Failure Str.replace: reference to unmatched group
+first = a\nc #
+split = a\nc 
+== \\(.\\|\n\\)* on ab\ncd
+match = 5 [ab\ncd],[d]
+forward = 0-5 [ab\ncd],[d]
+backward = 5-5 [],-
+replace = <ab\ncd><>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #
+split = 
+== \\(.\\|\n\\)+d on ab\ncd e
+match = 5 [ab\ncd],[c]
+forward = 0-5 [ab\ncd],[c]
+backward = 3-5 [cd],[c]
+replace = <ab\ncd> e
+replace1 = [c\\\\n] e
+first = # e
+split =  e
+== \\(foo\\)?bar on bar foobar
+match = 3 [bar],-
+forward = 0-3 [bar],-
+backward = 7-10 [bar],-
+replace = <bar> <foobar>
+replace1 = Failure Str.replace: reference to unmatched group
+first = # foobar
+split =  
+== [ \t\n]+ on a  b\t\nc
+match = no
+forward = 1-3 [  ]
+backward = 5-6 [\n]
+replace = a<  >b<\t\n>c
+replace1 = Failure Str.replace: reference to unmatched group
+first = a#b\t\nc
+split = a|b|c
+== [ \t\n]+ on   a b  
+match = 2 [  ]
+forward = 0-2 [  ]
+backward = 6-7 [ ]
+replace = <  >a< >b<  >
+replace1 = Failure Str.replace: reference to unmatched group
+first = #a b  
+split = a|b
+== ,[ ]* on a, b,c,  d
+match = no
+forward = 1-3 [, ]
+backward = 6-9 [,  ]
+replace = a<, >b<,>c<,  >d
+replace1 = Failure Str.replace: reference to unmatched group
+first = a#b,c,  d
+split = a|b|c|d
+== , on ,a,,b,
+match = 1 [,]
+forward = 0-1 [,]
+backward = 5-6 [,]
+replace = <,>a<,><,>b<,>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #a,,b,
+split = a||b
+== +a on x+a
+match = no
+forward = 1-3 [+a]
+backward = 1-3 [+a]
+replace = x<+a>
+replace1 = Failure Str.replace: reference to unmatched group
+first = x#
+split = x
+== *a on *a
+match = 2 [*a]
+forward = 0-2 [*a]
+backward = 0-2 [*a]
+replace = <*a>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #
+split = 
+== a** on aa
+match = 2 [aa]
+forward = 0-2 [aa]
+backward = 2-2 []
+replace = <aa><>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #
+split = 
+== a+? on aa
+match = 2 [aa]
+forward = 0-2 [aa]
+backward = 2-2 []
+replace = <aa><>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #
+split = 
+== \\. on a.b
+match = no
+forward = 1-2 [.]
+backward = 1-2 [.]
+replace = a<.>b
+replace1 = Failure Str.replace: reference to unmatched group
+first = a#b
+split = a|b
+== a\\ on a\\
+match = 2 [a\\]
+forward = 0-2 [a\\]
+backward = 0-2 [a\\]
+replace = <a\\>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #
+split = 
+== \\( on x
+regexp: Failure \( group not closed by \)
+== [abc on x
+regexp: Failure [ class not closed by ]
+== a\\) on a)
+regexp: Failure spurious \) in regular expression
+== \\(a on a
+regexp: Failure \( group not closed by \)
+== a\\| on ba
+match = 0 []
+forward = 0-0 []
+backward = 2-2 []
+replace = <>b<a><>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #ba
+split = b
+== \\|a on ba
+match = 0 []
+forward = 0-0 []
+backward = 2-2 []
+replace = <>b<>a<>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #ba
+split = b|a
+== [0-9]+\\(\\.[0-9]+\\)? on pi 3.14 and 42
+match = no
+forward = 3-7 [3.14],[.14]
+backward = 13-14 [2],-
+replace = pi <3.14> and <42>
+replace1 = Failure Str.replace: reference to unmatched group
+first = pi # and 42
+split = pi | and 
+== \\([a-z]+\\) \\([a-z]+\\) on hello world foo
+match = 11 [hello world],[hello],[world]
+forward = 0-11 [hello world],[hello],[world]
+backward = 10-15 [d foo],[d],[foo]
+replace = <hello world> foo
+replace1 = [hello\\\\n] foo
+first = # foo
+split =  foo
+== \\(a\\)\\(b\\)? on a ab
+match = 1 [a],[a],-
+forward = 0-1 [a],[a],-
+backward = 2-4 [ab],[a],[b]
+replace = <a> <ab>
+replace1 = [a\\\\n] [a\\\\n]
+first = # ab
+split =  
+== \\(a\\|b\\)\\(c\\)?\\1 on aca bb
+match = 3 [aca],[a],[c]
+forward = 0-3 [aca],[a],[c]
+backward = 4-6 [bb],[b],-
+replace = <aca> <bb>
+replace1 = [a\\\\n] [b\\\\n]
+first = # bb
+split =  
+== ;\\|\\[ on a [b]; c
+match = no
+forward = 2-3 [[]
+backward = 5-6 [;]
+replace = a <[>b]<;> c
+replace1 = Failure Str.replace: reference to unmatched group
+first = a #b]; c
+split = a |b]| c
+== ::[^\n]* on x ::c\ny :: d
+match = no
+forward = 2-5 [::c]
+backward = 8-12 [:: d]
+replace = x <::c>\ny <:: d>
+replace1 = Failure Str.replace: reference to unmatched group
+first = x #\ny :: d
+split = x |\ny 
+== \\([ \t\n]+proof[ \t\n]+\\|[ \t\n]+qed[ \t\n]*;\\) on  proof\n  intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n qed;\n
+match = 9 [ proof\n  ],[ proof\n  ]
+forward = 0-9 [ proof\n  ],[ proof\n  ]
+backward = 62-67 [ qed;],[ qed;]
+replace = < proof\n  >intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;<\n qed;>\n
+replace1 = [ proof\n  \\\\n]intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;[\n qed;\\\\n]\n
+first = #intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n qed;\n
+split = intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;|\n
+== [ \t\n]+\\([^][ \t\n]+\\) on   SUBGOAL_TAC [x]
+match = 13 [  SUBGOAL_TAC],[SUBGOAL_TAC]
+forward = 0-13 [  SUBGOAL_TAC],[SUBGOAL_TAC]
+backward = 1-13 [ SUBGOAL_TAC],[SUBGOAL_TAC]
+replace = <  SUBGOAL_TAC> [x]
+replace1 = [SUBGOAL_TAC\\\\n] [x]
+first = # [x]
+split =  [x]
+== [ \t\n]+\\([a-zA-Z0-9_]+\\) on  fol H1 H2
+match = 4 [ fol],[fol]
+forward = 0-4 [ fol],[fol]
+backward = 7-10 [ H2],[H2]
+replace = < fol>< H1>< H2>
+replace1 = [fol\\\\n][H1\\\\n][H2\\\\n]
+first = # H1 H2
+split = |
+== [ \t\n]+case_split[ \t\n]+\\([^;]+\\)[ \t\n]+by on  case_split a | b by fol;
+match = 20 [ case_split a | b by],[a | b]
+forward = 0-20 [ case_split a | b by],[a | b]
+backward = 0-20 [ case_split a | b by],[a | b]
+replace = < case_split a | b by> fol;
+replace1 = [a | b\\\\n] fol;
+first = # fol;
+split =  fol;
+== [ \t\n]+consider[ \t\n]+\\(\\(.\\|\n\\)+\\)[ \t\n]+such[ \t\n]+that[ \t\n]+\\(\\(.\\|\n\\)+\\)[ \t\n]+\\[\\(\\(.\\|\n\\)*\\)\\][ \t\n]+by on  consider x y such that\n x = y [H] by fol;
+match = 37 [ consider x y such that\n x = y [H] by],[x y],[y],[x = y],[y],[H],[H]
+forward = 0-37 [ consider x y such that\n x = y [H] by],[x y],[y],[x = y],[y],[H],[H]
+backward = 0-37 [ consider x y such that\n x = y [H] by],[x y],[y],[x = y],[y],[H],[H]
+replace = < consider x y such that\n x = y [H] by> fol;
+replace1 = [x y\\\\n] fol;
+first = # fol;
+split =  fol;
+== [ \t\n]+proof\\([ \t\n]+\\(.\\|\n\\)*\\)[ \t\n]+qed[ \t\n]*;[ \t\n]* on  proof\n  intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n qed;\n  x;\n
+match = 70 [ proof\n  intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n qed;\n  ],[\n  intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n],[\n]
+forward = 0-70 [ proof\n  intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n qed;\n  ],[\n  intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n],[\n]
+backward = 0-70 [ proof\n  intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n qed;\n  ],[\n  intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n],[\n]
+replace = < proof\n  intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n qed;\n  >x;\n
+replace1 = [\n  intro_TAC H1, H2;\n  A = B [X] by fol H1;\n  fol - H2;\n\\\\n]x;\n
+first = #x;\n
+split = x;\n
+== [ \t\n]+\\(assume\\)[ \t\n]+ on  assume A [H];
+match = 8 [ assume ],[assume]
+forward = 0-8 [ assume ],[assume]
+backward = 0-8 [ assume ],[assume]
+replace = < assume >A [H];
+replace1 = [assume\\\\n]A [H];
+first = #A [H];
+split = A [H];
+== [ \t\n]* on  \n\t
+match = 3 [ \n\t]
+forward = 0-3 [ \n\t]
+backward = 3-3 []
+replace = < \n\t><>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #
+split = 
+== [ \t\n]* on  a 
+match = 1 [ ]
+forward = 0-1 [ ]
+backward = 3-3 []
+replace = < ><>a< ><>
+replace1 = Failure Str.replace: reference to unmatched group
+first = #a 
+split = a

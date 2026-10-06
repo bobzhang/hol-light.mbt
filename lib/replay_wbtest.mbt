@@ -46,7 +46,7 @@ test "channels on in-memory files" {
 }
 
 ///|
-test "the Str subset" {
+test "Str on Minisat's uses" {
   let blank = str_regexp("[ \n\t\r]")
   inspect(str_split(blank, " a  b c ").to_array().join("|"), content="a||b|c")
   inspect(str_split(blank, "").to_array().length(), content="0")
@@ -57,12 +57,13 @@ test "the Str subset" {
   inspect(str_string_before("abcdef", 2L), content="ab")
   inspect(str_string_after("abcdef", 2L), content="cdef")
   let r = try {
-    ignore(str_regexp("a*"))
+    ignore(str_regexp("\\(a"))
     "made"
   } catch {
+    Failure(m) => m
     _ => "refused"
   }
-  inspect(r, content="refused")
+  inspect(r, content="\\( group not closed by \\)")
 }
 
 ///|
