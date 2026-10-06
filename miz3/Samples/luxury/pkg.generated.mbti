@@ -1,0 +1,81 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/miz3/Samples/luxury"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn exec_phrase_1(Unit) -> Unit raise
+
+pub fn exec_phrase_10(Unit) -> Unit raise
+
+pub fn exec_phrase_11(Unit) -> Unit raise
+
+pub fn exec_phrase_12(Unit) -> Unit raise
+
+pub fn exec_phrase_13(Unit) -> Unit raise
+
+pub fn exec_phrase_14(Unit) -> Unit raise
+
+pub fn exec_phrase_15(Unit) -> Unit raise
+
+pub fn exec_phrase_16(Unit) -> Unit raise
+
+pub fn exec_phrase_17(Unit) -> Unit raise
+
+pub fn exec_phrase_18(Unit) -> Unit raise
+
+pub fn exec_phrase_19(Unit) -> Unit raise
+
+pub fn exec_phrase_2(Unit) -> Unit raise
+
+pub fn exec_phrase_20(Unit) -> Unit raise
+
+pub fn exec_phrase_21(Unit) -> Unit raise
+
+pub fn exec_phrase_22(Unit) -> Unit raise
+
+pub fn exec_phrase_23(Unit) -> Unit raise
+
+pub fn exec_phrase_24(Unit) -> Unit raise
+
+pub fn exec_phrase_25(Unit) -> Unit raise
+
+pub fn exec_phrase_26(Unit) -> Unit raise
+
+pub fn exec_phrase_27(Unit) -> Unit raise
+
+pub fn exec_phrase_28(Unit) -> Unit raise
+
+pub fn exec_phrase_3(Unit) -> Unit raise
+
+pub fn exec_phrase_4(Unit) -> Unit raise
+
+pub fn exec_phrase_5(Unit) -> Unit raise
+
+pub fn exec_phrase_6(Unit) -> Unit raise
+
+pub fn exec_phrase_7(Unit) -> Unit raise
+
+pub fn exec_phrase_8(Unit) -> Unit raise
+
+pub fn exec_phrase_9(Unit) -> Unit raise
+
+pub fn load() -> Unit
+
+pub fn num_induction_() -> @kernel.Thm
+
+pub fn num_recursion_std() -> @kernel.Thm
+
+pub fn suc_inj_1() -> @kernel.Thm
+
+pub fn suc_inj_2() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

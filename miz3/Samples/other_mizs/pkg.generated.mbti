@@ -1,0 +1,152 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/miz3/Samples/other_mizs"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn axiom_1() -> @kernel.Thm
+
+pub fn axiom_1_p() -> @kernel.Thm
+
+pub fn axiom_2() -> @kernel.Thm
+
+pub fn axiom_3() -> @kernel.Thm
+
+pub fn axiom_4() -> @kernel.Thm
+
+pub fn dual_1() -> @kernel.Thm
+
+pub fn dual_2() -> @kernel.Thm
+
+pub fn dual_3() -> @kernel.Thm
+
+pub fn dual_4() -> @kernel.Thm
+
+pub fn exec_phrase_1(Unit) -> Unit raise
+
+pub fn exec_phrase_10(Unit) -> Unit raise
+
+pub fn exec_phrase_11(Unit) -> Unit raise
+
+pub fn exec_phrase_12(Unit) -> Unit raise
+
+pub fn exec_phrase_13(Unit) -> Unit raise
+
+pub fn exec_phrase_14(Unit) -> Unit raise
+
+pub fn exec_phrase_15(Unit) -> Unit raise
+
+pub fn exec_phrase_16(Unit) -> Unit raise
+
+pub fn exec_phrase_17(Unit) -> Unit raise
+
+pub fn exec_phrase_18(Unit) -> Unit raise
+
+pub fn exec_phrase_19(Unit) -> Unit raise
+
+pub fn exec_phrase_2(Unit) -> Unit raise
+
+pub fn exec_phrase_20(Unit) -> Unit raise
+
+pub fn exec_phrase_21(Unit) -> Unit raise
+
+pub fn exec_phrase_22(Unit) -> Unit raise
+
+pub fn exec_phrase_23(Unit) -> Unit raise
+
+pub fn exec_phrase_24(Unit) -> Unit raise
+
+pub fn exec_phrase_25(Unit) -> Unit raise
+
+pub fn exec_phrase_26(Unit) -> Unit raise
+
+pub fn exec_phrase_27(Unit) -> Unit raise
+
+pub fn exec_phrase_28(Unit) -> Unit raise
+
+pub fn exec_phrase_29(Unit) -> Unit raise
+
+pub fn exec_phrase_3(Unit) -> Unit raise
+
+pub fn exec_phrase_30(Unit) -> Unit raise
+
+pub fn exec_phrase_31(Unit) -> Unit raise
+
+pub fn exec_phrase_32(Unit) -> Unit raise
+
+pub fn exec_phrase_33(Unit) -> Unit raise
+
+pub fn exec_phrase_34(Unit) -> Unit raise
+
+pub fn exec_phrase_4(Unit) -> Unit raise
+
+pub fn exec_phrase_5(Unit) -> Unit raise
+
+pub fn exec_phrase_6(Unit) -> Unit raise
+
+pub fn exec_phrase_7(Unit) -> Unit raise
+
+pub fn exec_phrase_8(Unit) -> Unit raise
+
+pub fn exec_phrase_9(Unit) -> Unit raise
+
+pub fn exists_line() -> @kernel.Thm
+
+pub fn exists_point() -> @kernel.Thm
+
+pub fn fano_clause(Int64, Int64) -> @kernel.Term raise
+
+pub fn fano_incidence() -> @list.List[(Int64, Int64)]
+
+pub fn fano_line(Int64) -> @kernel.Term raise
+
+pub fn fano_point(Int64) -> @kernel.Term raise
+
+pub fn fano_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn forall_line() -> @kernel.Thm
+
+pub fn forall_point() -> @kernel.Thm
+
+pub fn knaster_tarski() -> @kernel.Thm
+
+pub fn lemma_1() -> @kernel.Thm
+
+pub fn lemma_1_p() -> @kernel.Thm
+
+pub fn lemma_2() -> @kernel.Thm
+
+pub fn line_distinct() -> @kernel.Thm
+
+pub fn line_induct() -> @kernel.Thm
+
+pub fn line_recursion() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn nsqrt_2_4() -> @kernel.Thm
+
+pub fn on() -> @kernel.Thm
+
+pub fn on_clauses() -> @kernel.Thm
+
+pub fn point_distinct() -> @kernel.Thm
+
+pub fn point_induct() -> @kernel.Thm
+
+pub fn point_recursion() -> @kernel.Thm
+
+pub fn projective() -> @kernel.Thm
+
+pub fn projective_duality() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
