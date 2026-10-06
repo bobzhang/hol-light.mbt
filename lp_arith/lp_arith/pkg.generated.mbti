@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/lp_arith/lp_arith"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/num",
+  "bobzhang/hol_light/realarith",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn cdd(String) -> String raise
+
+pub fn cddwrapper() -> String
+
+pub fn[TA] drop_(Int64, @list.List[TA]) -> @list.List[TA] raise
+
+pub fn lin_of_hol(@kernel.Term) -> @lib.Func[@kernel.Term, @num.Num] raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn lp_arith(@kernel.Term) -> @kernel.Thm raise
+
+pub fn lp_arith_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn lp_prover(@list.List[@lib.Func[@kernel.Term, @num.Num]], @list.List[@lib.Func[@kernel.Term, @num.Num]], @list.List[@lib.Func[@kernel.Term, @num.Num]]) -> @realarith.Positivstellensatz raise
+
+pub fn lp_prover_v1(((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> ((@realarith.Positivstellensatz) -> @kernel.Thm raise) raise) -> (((@list.List[@kernel.Thm], @list.List[@kernel.Thm], @list.List[@kernel.Thm])) -> @kernel.Thm raise) raise
+
+pub fn[TA] take(Int64, @list.List[TA]) -> @list.List[TA] raise
+
+pub fn words(String) -> @list.List[String] raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

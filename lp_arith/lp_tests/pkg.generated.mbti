@@ -1,0 +1,25 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/lp_arith/lp_tests"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn gale() -> @kernel.Term
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn rec_seq() -> @kernel.Term
+
+pub fn test_std() -> @kernel.Term
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
