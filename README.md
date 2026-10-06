@@ -20,13 +20,15 @@ constructs theorems only through its API.
   Unity/, Logic/, Jordan/** (with the Jordan curve theorem),
   **Functionspaces/, Quaternions/, Geometric_Algebra/, Probability/, IEEE/,
   IsabelleLight/, Boyer_Moore/, EC/, Autoformalization/, Cadical/,
-  Minisat/**: their theory files (`complex/<name>`, ...).
-- **Examples/**: 47 of 50. **Tutorial/**: 21 of 24.
+  Minisat/, WZ/, LP_arith/**: their theory files (`complex/<name>`, ...).
+- **Examples/**: 48 of 50. **Tutorial/**: 23 of 24.
+- Not yet: Formal_ineqs/ (in progress), miz3 and what is written in it
+  (RichterHilbertAxiomGeometry/), Mizarlight/, QBF/ (see [TODO.md](TODO.md)).
 
-Files that run an external solver (csdp for `Examples/sos.ml`'s REAL_SOS,
-cadical, MiniSat) load without one: the solver's runs are recorded when the
-reference output is made and replayed (`<pkg>/commands.mbt`); the kernel
-checks the proofs they lead to.
+Files that run an external program (csdp for `Examples/sos.ml`'s REAL_SOS,
+cadical, MiniSat, maxima for WZ/, cdd for LP_arith/, Prover9) load without
+it: the program's runs are recorded when the reference output is made and
+replayed (`<pkg>/commands.mbt`); the kernel checks the proofs they lead to.
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the
 registry caps a module at 100 MB); Multivariate/, 100/ and the translation
@@ -78,8 +80,11 @@ opam switch create hol-light ocaml-base-compiler.4.14.1 --no-switch
 opam install --switch=hol-light camlp5.8.02.01 num camlp-streams ocamlfind
 brew install pari    # upstream's PRIME_CONV calls gp (Library/pocklington.ml)
 brew install cadical # Cadical/ (also lrat-trim, github.com/arminbiere/lrat-trim)
+brew install maxima  # WZ/, Tutorial/Linking_external_tools.ml
 # on PATH too, built from source: csdp (github.com/coin-or/Csdp, for
-# Examples/sos.ml) and MiniSat-p 1.14 as `minisat` (minisat.se, for Minisat/)
+# Examples/sos.ml), MiniSat-p 1.14 as `minisat` (minisat.se, for Minisat/),
+# cddlib with LP_arith/cdd_cert.c as `cdd_cert` (LP_arith/), and Prover9
+# with `prooftrans` (LADR, for Examples/prover9.ml)
 ```
 
 [PLAN.md](PLAN.md) has the design, decisions and known limitations;
