@@ -1,0 +1,71 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/informal/informal_nat"
+
+import {
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/bigint",
+}
+
+// Values
+pub fn add_nat(@bigint.BigInt) -> ((@bigint.BigInt) -> @bigint.BigInt raise) raise
+
+pub fn arith_base() -> Int64
+
+pub fn base_nat() -> @bigint.BigInt
+
+pub fn denormalize_nat(@bigint.BigInt, Int64) -> @bigint.BigInt raise
+
+pub fn dest_nat(@bigint.BigInt) -> @num.Num raise
+
+pub fn div_nat(@bigint.BigInt) -> ((@bigint.BigInt) -> @bigint.BigInt raise) raise
+
+pub fn eq0_nat(@bigint.BigInt) -> Bool raise
+
+pub fn eq_nat(@bigint.BigInt) -> ((@bigint.BigInt) -> Bool raise) raise
+
+pub fn even_nat(@bigint.BigInt) -> Bool raise
+
+pub fn gt0_nat(@bigint.BigInt) -> Bool raise
+
+pub fn hi_lt_nat(Int64, @bigint.BigInt) -> (@bigint.BigInt, Int64) raise
+
+pub fn hi_nat(Int64) -> ((@bigint.BigInt) -> (@bigint.BigInt, Int64) raise) raise
+
+pub fn le_nat(@bigint.BigInt) -> ((@bigint.BigInt) -> Bool raise) raise
+
+pub fn lo_nat(Int64) -> ((@bigint.BigInt) -> (@bigint.BigInt, Int64) raise) raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn lt_nat(@bigint.BigInt) -> ((@bigint.BigInt) -> Bool raise) raise
+
+pub fn mk_nat(@num.Num) -> @bigint.BigInt raise
+
+pub fn mk_small_nat(Int64) -> @bigint.BigInt raise
+
+pub fn mul_nat(@bigint.BigInt) -> ((@bigint.BigInt) -> @bigint.BigInt raise) raise
+
+pub fn normalize_nat(@bigint.BigInt) -> (@bigint.BigInt, Int64) raise
+
+pub fn odd_nat(@bigint.BigInt) -> Bool raise
+
+pub fn pre_nat(@bigint.BigInt) -> @bigint.BigInt raise
+
+pub fn sub_and_le_nat(@bigint.BigInt, @bigint.BigInt) -> (@bigint.BigInt, Bool) raise
+
+pub fn sub_nat(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt raise
+
+pub fn suc_nat(@bigint.BigInt) -> @bigint.BigInt raise
+
+pub fn two_big_int() -> @bigint.BigInt
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+pub using @bigint {type BigInt as Nat}
+
+// Traits

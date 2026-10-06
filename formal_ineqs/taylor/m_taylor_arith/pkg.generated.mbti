@@ -1,0 +1,256 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/taylor/m_taylor_arith"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn abs_tm() -> @kernel.Term
+
+pub fn acs_partial_lemma_p() -> @kernel.Thm
+
+pub fn acs_second_lemma_p() -> @kernel.Thm
+
+pub fn acs_second_lemma_p_p() -> @kernel.Thm
+
+pub fn acs_tm() -> @kernel.Term
+
+pub fn add_partial_lemma_p() -> @kernel.Thm
+
+pub fn add_second_lemma_p() -> @kernel.Thm
+
+pub fn add_second_lemma_p_p() -> @kernel.Thm
+
+pub fn all_n1_raw() -> @kernel.Thm
+
+pub fn all_n_array() -> FixedArray[@kernel.Thm]
+
+pub fn all_n_components(@kernel.Thm) -> (@list.List[@kernel.Thm], @list.List[@kernel.Thm]) raise
+
+pub fn all_n_cons_eq_p() -> @kernel.Thm
+
+pub fn all_n_cons_imp_p() -> @kernel.Thm
+
+pub fn all_n_empty_p() -> @kernel.Thm
+
+pub fn asn_partial_lemma_p() -> @kernel.Thm
+
+pub fn asn_second_lemma_p() -> @kernel.Thm
+
+pub fn asn_second_lemma_p_p() -> @kernel.Thm
+
+pub fn asn_tm() -> @kernel.Term
+
+pub fn atn_partial_lemma_p() -> @kernel.Thm
+
+pub fn atn_second_lemma_p() -> @kernel.Thm
+
+pub fn atn_second_lemma_p_p() -> @kernel.Thm
+
+pub fn atn_tm() -> @kernel.Term
+
+pub fn binary_beta_gen_eq(@kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn build2(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn build_all_n(@list.List[@kernel.Thm], @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn cos_partial_lemma_p() -> @kernel.Thm
+
+pub fn cos_second_lemma_p() -> @kernel.Thm
+
+pub fn cos_second_lemma_p_p() -> @kernel.Thm
+
+pub fn cos_tm() -> @kernel.Term
+
+pub fn dest_all_n(@kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn dest_m_lin_approx_p() -> @kernel.Thm
+
+pub fn dest_second_bounded(@kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn eval_all_n(@kernel.Thm, Bool, (@kernel.Thm) -> @kernel.Thm raise) -> @kernel.Thm raise
+
+pub fn eval_all_n2(@kernel.Thm, @kernel.Thm, Bool, (@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_acs(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_add(Int64, Int64, Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_asn(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_atn(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_cos(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_exp(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_inv(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_log(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_matan(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_mul(Int64, Int64, Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_pow(Int64) -> ((Int64) -> ((Int64) -> ((Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise) raise) raise
+
+pub fn eval_m_taylor_pow2(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_sin(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_sqrt(Int64, Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn eval_m_taylor_sub(Int64, Int64, Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn exp_partial_lemma_p() -> @kernel.Thm
+
+pub fn exp_second_lemma_p() -> @kernel.Thm
+
+pub fn exp_second_lemma_p_p() -> @kernel.Thm
+
+pub fn exp_tm() -> @kernel.Term
+
+pub fn float_neg1_eq() -> @kernel.Thm
+
+pub fn gen_all_n_th(Int64) -> @kernel.Thm raise
+
+pub fn iabs_lemma() -> @kernel.Thm
+
+pub fn inv_partial_lemma_p() -> @kernel.Thm
+
+pub fn inv_second_lemma_p() -> @kernel.Thm
+
+pub fn inv_second_lemma_p_p() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn log_partial_lemma_p() -> @kernel.Thm
+
+pub fn log_second_lemma_p() -> @kernel.Thm
+
+pub fn log_second_lemma_p_p() -> @kernel.Thm
+
+pub fn log_tm() -> @kernel.Term
+
+pub fn m_lin_approx_components(Int64, @kernel.Thm) -> (@kernel.Thm, @kernel.Thm, @kernel.Thm) raise
+
+pub fn m_taylor_interval_norm(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn matan_partial_lemma_p() -> @kernel.Thm
+
+pub fn matan_second_lemma_p() -> @kernel.Thm
+
+pub fn matan_second_lemma_p_p() -> @kernel.Thm
+
+pub fn matan_tm() -> @kernel.Term
+
+pub fn mk_m_lin_approx_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_abs_neg_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_abs_pos_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_acs_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_add_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_asn_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_atn_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_cos_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_exp_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_inv_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_log_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_matan_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_mul_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_neg_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_pow() -> @kernel.Thm
+
+pub fn mk_m_taylor_pow2_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_pow_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_sin_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_sqrt_p() -> @kernel.Thm
+
+pub fn mk_m_taylor_sub_p() -> @kernel.Thm
+
+pub fn mul_partial_lemma_p() -> @kernel.Thm
+
+pub fn mul_second_lemma_p() -> @kernel.Thm
+
+pub fn mul_second_lemma_p_p() -> @kernel.Thm
+
+pub fn neg_one_float() -> @kernel.Term
+
+pub fn partial_uni_compose_p() -> @kernel.Thm
+
+pub fn pow2_partial_lemma_p() -> @kernel.Thm
+
+pub fn pow2_second_lemma_p() -> @kernel.Thm
+
+pub fn pow2_second_lemma_p_p() -> @kernel.Thm
+
+pub fn pow_beta_gen_eq(@kernel.Term, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn pow_partial_lemma_p() -> @kernel.Thm
+
+pub fn pow_second_lemma_p() -> @kernel.Thm
+
+pub fn pow_second_lemma_p_p() -> @kernel.Thm
+
+pub fn pow_tm() -> @kernel.Term
+
+pub fn real_differentiable_at_pow() -> @kernel.Thm
+
+pub fn second_bounded_components(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn second_bounded_p() -> @kernel.Thm
+
+pub fn second_partial_uni_compose_p() -> @kernel.Thm
+
+pub fn sin_partial_lemma_p() -> @kernel.Thm
+
+pub fn sin_second_lemma_p() -> @kernel.Thm
+
+pub fn sin_second_lemma_p_p() -> @kernel.Thm
+
+pub fn sin_tm() -> @kernel.Term
+
+pub fn sqrt_partial_lemma_p() -> @kernel.Thm
+
+pub fn sqrt_second_lemma_p() -> @kernel.Thm
+
+pub fn sqrt_second_lemma_p_p() -> @kernel.Thm
+
+pub fn sqrt_tm() -> @kernel.Term
+
+pub fn sub_partial_lemma_p() -> @kernel.Thm
+
+pub fn sub_second_lemma_p() -> @kernel.Thm
+
+pub fn sub_second_lemma_p_p() -> @kernel.Thm
+
+pub fn unary_beta_gen_eq(@kernel.Term, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

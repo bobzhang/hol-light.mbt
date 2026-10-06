@@ -1,0 +1,29 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/verifier/m_verifier_build"
+
+import {
+  "bobzhang/hol_light/formal_ineqs/informal/informal_verifier",
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_verification_functions_poly(Int64, @kernel.Term) -> (VerificationFuns, @informal_verifier.VerificationFuns) raise
+
+// Errors
+
+// Types and methods
+pub(all) struct VerificationFuns {
+  taylor : (Int64) -> ((Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise
+  f : (Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+  df : (Int64) -> ((Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise) raise
+  ddf : (Int64) -> ((Int64) -> ((Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise) raise) raise
+  diff2_f : (@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+}
+
+// Type aliases
+
+// Traits

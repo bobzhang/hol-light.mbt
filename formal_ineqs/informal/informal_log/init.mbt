@@ -1,0 +1,46 @@
+// Formal_ineqs/informal/informal_log.ml: the load steps are generated (informal_log.mbt).
+
+///|
+let loaded : Ref[Bool] = Ref::{ val: false, }
+
+///|
+/// Load Formal_ineqs/informal/informal_log.ml (once), after the files it needs.
+pub fn load() -> Unit {
+  if loaded.val {
+    return
+  }
+  loaded.val = true
+  @informal_exp.load()
+  @informal_interval.load()
+  @informal_exp.load()
+  @parser.begin_theory("Formal_ineqs/informal/informal_log")
+  load_steps() catch {
+    e =>
+      abort(
+        "HOL Light: loading Formal_ineqs/informal/informal_log.ml failed: " +
+        e.to_string(),
+      )
+  }
+  @parser.end_theory()
+}
+
+///|
+/// Load Formal_ineqs/informal/informal_log.ml (once) as `needs` does: after what it needs itself, not
+/// after the files its directory's make.ml loads before it.
+pub fn load_alone() -> Unit {
+  if loaded.val {
+    return
+  }
+  loaded.val = true
+  @informal_interval.load()
+  @informal_exp.load()
+  @parser.begin_theory("Formal_ineqs/informal/informal_log")
+  load_steps() catch {
+    e =>
+      abort(
+        "HOL Light: loading Formal_ineqs/informal/informal_log.ml failed: " +
+        e.to_string(),
+      )
+  }
+  @parser.end_theory()
+}

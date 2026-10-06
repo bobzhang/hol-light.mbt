@@ -1,0 +1,25 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/informal/informal_log"
+
+import {
+  "moonbitlang/core/bigint",
+}
+
+// Values
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn log_float_hi(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn log_float_lo(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn log_interval(Int64, ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

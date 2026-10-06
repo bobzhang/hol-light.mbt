@@ -1,0 +1,59 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/informal/informal_exp"
+
+import {
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/bigint",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn exp_float_hi(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn exp_float_lo(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn exp_high_raw(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn exp_interval(Int64, ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+pub fn exp_low_raw(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn exp_max_x() -> Double
+
+pub fn exp_neg_high_raw(Int64) -> (((Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise) raise
+
+pub fn exp_neg_low_raw(Int64) -> (((Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise) raise
+
+pub fn exp_neg_tables(Int64, Int64) -> (@list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))], @list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]) raise
+
+pub fn exp_pos_low_raw(Int64) -> (((Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise) raise
+
+pub fn exp_pos_tables(Int64, Int64) -> @list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))] raise
+
+pub fn fact(@num.Num) -> @num.Num raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_exp_neg_lower(Int64) -> (@list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))], @list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]) raise
+
+pub fn mk_exp_neg_upper(Int64) -> (@list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))], @list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]) raise
+
+pub fn mk_exp_pos_lower(Int64) -> @list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))] raise
+
+pub fn n_of_p_exp(Double, Int64, (Int64) -> Bool raise) -> Int64 raise
+
+pub fn num_1() -> @num.Num
+
+pub fn reduce_float((Bool, @bigint.BigInt, Int64)) -> (Bool, Int64) raise
+
+pub fn x_pow_over_fact(Double, Int64) -> Double raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,1129 @@
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+Warning: inventing type variables
+0..0..1..3..6..13..22..40..76..134..249..solved at 267
+Formal_ineqs/verifier/m_verifier quotations (1060):
+  (!x. x IN interval [domain] ==> interval_arith (f x) (lo, hi)) ==>\n     (!x. x IN interval [domain] ==> f x <= hi)
+  (!x. x IN interval [domain] ==> interval_arith (f x) (lo, hi)) ==>\n     (!x. x IN interval [domain] ==> lo <= f x)
+  !a b c d. (!i. i IN 1..dimindex (:N) ==> a$i <= c$i /\\ d$i <= b$i) ==>\n\t\t\t\t  interval [c:real^N,d] SUBSET interval [a,b]
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  j:num
+  i = j:num
+  i = j:num
+  !j x z y w u y' w'. m_cell_domain (x:real^N,z) y w /\\\n\t\t\t\t    (!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> \n\t\t\t\t       u$i = x$i /\\ y'$i = y$i /\\ w'$i = w$i) /\\\n\t\t\t\t    u$j = z$j /\\ y'$j = z$j /\\ w'$j = &0 ==>  \n    m_cell_domain (u,z) y' w' /\\ interval [u,z] SUBSET interval [x,z]
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  j:num
+  i = j:num
+  i = j:num
+  !j x z y w u y' w'. m_cell_domain (x:real^N,z) y w /\\\n\t\t\t\t    (!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> \n\t\t\t\t       u$i = z$i /\\ y'$i = y$i /\\ w'$i = w$i) /\\\n\t\t\t\t    u$j = x$j /\\ y'$j = x$j /\\ w'$j = &0 ==> \n    m_cell_domain (x,u) y' w' /\\ interval [x,u] SUBSET interval [x,z]
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  &0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  m_cell_pass f domain <=> (!x. x IN interval [domain] ==> f x < &0)
+  m_cell_list_pass fs domain <=>\n  (!x:real^N. x IN interval [domain] ==> ITLIST (\\f r. f x < &0 \\/ r) fs F)
+  m_cell_pass f domain <=> m_cell_list_pass [f] domain
+  m_cell_pass f domain ==> m_cell_list_pass [f] domain
+  hi:real
+  (!x. x IN interval [domain] ==> f x <= hi) /\\ (hi < &0 <=> T) ==>\n\t\t\t\tm_cell_pass f domain
+  (!x. x IN interval [domain] ==> f x <= hi) /\\ (hi < &0 <=> T) ==>\n\t\t\t\tm_cell_list_pass [f] domain
+  (!x. x IN interval [domain] ==> interval_arith (f x) (lo, hi)) /\\ hi < &0 ==> m_cell_pass f domain
+  (!x. x IN interval [domain] ==> interval_arith (f x) (lo, hi)) /\\ hi < &0 ==> m_cell_list_pass [f] domain
+  interval [domain2] SUBSET interval [domain] /\\\n\t\t\t\t\t\t m_cell_pass f domain ==> m_cell_pass f domain2
+  interval [domain2] SUBSET interval [domain] /\\\n\t\t\t\t\t\t m_cell_list_pass fs domain ==> m_cell_list_pass fs domain2
+  i = j:num
+  ~(a <= b) ==> b <= a:real
+  i = j:num
+  (y:real^N)$j <= (v:real^N)$j
+  !j x z v u P Q. \n\t\t\t (!i. 1 <= i /\\ i <= dimindex (:N) ==> ~(i = j) ==> \n\t\t\t    u$i = x$i /\\ v$i = z$i) ==>\n\t\t\t v$j = u$j ==>\n\t\t\t     (!p. p IN interval [x,v] ==> P p) ==>\n\t\t\t     (!p. p IN interval [u,z] ==> Q p) ==>\n\t\t\t     (!p. p IN interval [x,z:real^N] ==> P p \\/ Q p)
+  \\x:real^N. f x < &0
+  \\x:real^N. f x < &0
+  !j x z v u f. \n\t\t\t\t     (!i. 1 <= i /\\ i <= dimindex (:N) ==> ~(i = j) ==> \n\t\t\t\t\tu$i = x$i /\\ v$i = z$i) ==>\n\t\t\t\t     v$j = u$j ==>\n\t\t\t\t\t m_cell_pass f (x,v) ==> \n\t\t\t\t\t m_cell_pass f (u,z) ==>\n\t\t\t\t\t m_cell_pass f (x,z:real^N)
+  !P l1 l2. ITLIST (\\a r. P a \\/ r) (APPEND l1 l2) F\n\t\t\t       <=> ITLIST (\\a r. P a \\/ r) l1 F \\/ ITLIST (\\a r. P a \\/ r) l2 F
+  !j x z v u fs1 fs2. \n\t\t\t\t     (!i. 1 <= i /\\ i <= dimindex (:N) ==> ~(i = j) ==> \n\t\t\t\t\tu$i = x$i /\\ v$i = z$i) ==>\n\t\t\t\t     v$j = u$j ==>\n\t\t\t\t\t m_cell_list_pass fs1 (x,v) ==> \n\t\t\t\t\t m_cell_list_pass fs2 (u,z) ==>\n\t\t\t\t\t m_cell_list_pass (APPEND fs1 fs2) (x,z:real^N)
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  m_cell_list_pass fs1 domain <=> m_cell_list_pass (APPEND fs1 []) domain
+  m_cell_list_pass (APPEND acc (CONS h fs2)) domain \n\t\t\t\t   <=> m_cell_list_pass (APPEND (CONS h acc) fs2) domain
+  m_cell_list_pass (APPEND (APPEND [] fs2) acc) domain \n\t\t\t\t<=> m_cell_list_pass (APPEND fs2 acc) domain
+  m_cell_list_pass (APPEND (APPEND fs1 []) acc) domain \n\t\t\t\t<=> m_cell_list_pass (APPEND fs1 acc) domain
+  m_cell_list_pass (APPEND (APPEND (CONS h fs1) (CONS h fs2)) acc) domain\n\t\t\t\t     <=> m_cell_list_pass (APPEND (APPEND fs1 fs2) (CONS h acc)) domain
+  m_cell_list_pass (APPEND (APPEND (CONS h fs1) fs2) acc) domain\n\t\t\t\t   <=> m_cell_list_pass (APPEND (APPEND fs1 fs2) (CONS h acc)) domain
+  m_cell_list_pass (APPEND (APPEND fs1 (CONS h fs2)) acc) domain\n\t\t\t\t   <=> m_cell_list_pass (APPEND (APPEND fs1 fs2) (CONS h acc)) domain
+  (f:real^N->real) y
+  y:real^N
+  interval [x,z:real^N]
+  f:real^N->real
+  -- &1
+  interval [x:real^N,z] = {}
+  !f x z. lift o f continuous_on interval [x,z:real^N] /\\ m_cell_pass f (x,z) ==>\n\t\t\t ?a. a < &0 /\\ !y. y IN interval [x,z] ==> f y <= a
+  !(f:real^N->real) domain. diff2_domain domain f ==>\n\t\t\t\t\t     lift o f continuous_on interval [domain]
+  a:real
+  lo:real
+  diff2_domain domain (f:real^N->real)
+  a:real
+  z:real^N
+  x:real^N
+  u:real^N
+  j:num
+  f:real^N->real
+  i = j:num
+  i:num
+  i:num
+  diff2_domain domain (f:real^N->real)
+  z:real^N
+  u:real^N
+  f:real^N->real
+  diff2c_domain domain (f:real^N->real)
+  diff2_domain domain (f:real^N->real)
+  i:num
+  ~(!i. i IN 1..dimindex (:N) ==> (x:real^N)$i <= (z:real^N)$i)
+  y:real^N
+  !j x z u domain lo f. \n\t\t\t\t\t   interval [x,z] SUBSET interval [domain] ==>\n\t\t\t\t\t   diff2c_domain domain f ==>\n\t\t\t\t\t   (!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = x$i) ==>\n\t\t\t\t\t   u$j = z$j ==>\n\t\t\t\t\t       &0 <= lo ==>\n\t\t\t\t\t       (!y. y IN interval [domain] ==> lo <= partial j f y) ==>\n\t\t\t\t\t       m_cell_pass f (u,z) ==>\n\t\t\t\t\t       m_cell_pass f (x,z:real^N)
+  ~P <=> (P <=> F)
+  a:real
+  hi:real
+  diff2_domain domain (f:real^N->real)
+  a:real
+  z:real^N
+  x:real^N
+  u:real^N
+  j:num
+  f:real^N->real
+  i = j:num
+  i:num
+  i:num
+  diff2_domain domain (f:real^N->real)
+  u:real^N
+  x:real^N
+  f:real^N->real
+  diff2c_domain domain (f:real^N->real)
+  diff2_domain domain (f:real^N->real)
+  i:num
+  ~(!i. i IN 1..dimindex (:N) ==> (x:real^N)$i <= (z:real^N)$i)
+  y:real^N
+  !j x z u domain hi f. \n\t\t\t\t\t   interval [x,z] SUBSET interval [domain] ==>\n\t\t\t\t\t   diff2c_domain domain f ==>\n\t\t\t\t\t   (!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i) ==>\n\t\t\t\t\t   u$j = x$j ==>\n\t\t\t\t\t       hi <= &0 ==>\n\t\t\t\t\t       (!y. y IN interval [domain] ==> partial j f y <= hi) ==>\n\t\t\t\t\t       m_cell_pass f (x,u) ==>\n\t\t\t\t\t       m_cell_pass f (x,z:real^N)
+  ~P <=> (P <=> F)
+  max a a'
+  a:real
+  a':real
+  lo:real
+  max a a'
+  v:real^N
+  u:real^N
+  z:real^N
+  x:real^N
+  j:num
+  f:real^N->real
+  i = j:num
+  i:num
+  i:num
+  diff2_domain (x,z) (f:real^N->real)
+  u:real^N
+  x:real^N
+  f:real^N->real
+  i = j:num
+  i:num
+  i:num
+  diff2_domain (x,z) (f:real^N->real)
+  z:real^N
+  v:real^N
+  f:real^N->real
+  diff2c_domain (x,z) (f:real^N->real)
+  diff2_domain (x,z) (f:real^N->real)
+  (y:real^N)$i
+  !i. i IN 1..dimindex (:N) ==> (x:real^N)$i <= (z:real^N)$i
+  y:real^N
+  !j x z u v lo f. \n\t\tdiff2c_domain (x,z) f ==>\n\t\t(!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i /\\ v$i = x$i) ==>\n\t\tu$j = x$j ==> v$j = z$j ==>\n\t\t    &0 <= lo ==>\n\t\t    (!y. y IN interval [x,z] ==> lo <= partial2 j j f y) ==>\n\t\t    m_cell_pass f (x,u) ==>\n\t\t    m_cell_pass f (v,z) ==>\n\t\t    m_cell_pass f (x:real^N,z)
+  ~P <=> (P <=> F)
+  ~P <=> (P <=> F)
+  x:A
+  x:A
+  h:A
+  !P l. ITLIST (\\x r. P x \\/ r) l F <=> ?x:A. MEM x l /\\ P x
+  !fs domain. m_cell_list_pass fs domain <=> \n\t\t\t\t   (!y:real^N. y IN interval [domain] ==> ?f. MEM f fs /\\ f y < &0)
+  !fs fs2 domain. m_cell_list_pass fs domain\n\t\t\t\t      ==> m_cell_list_pass (APPEND fs fs2) domain
+  i:num
+  y:real^N
+  !x:real^N. interval [x,x] = {x}
+  f:real^N->real
+  &0
+  domain:real^N#real^N
+  zz:real^N
+  zz:real^N
+  xx:real^N
+  j:num
+  f:real^N->real
+  f:real^N->real
+  i:num
+  y IN interval[x:real^N,z]
+  i:num
+  zz:real^N
+  i:num
+  y IN interval[x:real^N,z]
+  y IN interval [xx:real^N,zz]
+  i:num
+  y IN interval[x:real^N,z]
+  i:num
+  t:real^N
+  interval [x:real^N,z]
+  interval [xx:real^N,zz] SUBSET interval [domain]
+  (zz:real^N) = lambda i. if i = j then (z:real^N)$i else (y:real^N)$i
+  (xx:real^N) = lambda i. if i = j then (x:real^N)$i else (y:real^N)$i
+  !j x z u domain fs. \n\t\t\t\t\t\tinterval [x,z] SUBSET interval [domain] ==>\n\t\t\t\t\t\t(!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = x$i) ==>\n\t\t\t\t\t\tu$j = z$j ==>\n\t\t\t\t\t\t    ALL (\\f. diff2c_domain domain f /\\ \n\t\t\t\t\t\t\t   (!y. y IN interval [domain] ==> &0 <= partial j f y)) fs ==>\n\t\t\t\t\t\t    m_cell_list_pass fs (u,z) ==>\n\t\t\t\t\t\t    m_cell_list_pass fs (x,z:real^N)
+  f:real^N->real
+  &0
+  domain:real^N#real^N
+  xx:real^N
+  zz:real^N
+  xx:real^N
+  j:num
+  f:real^N->real
+  f:real^N->real
+  i:num
+  y IN interval[x:real^N,z]
+  i:num
+  xx:real^N
+  i:num
+  y IN interval[x:real^N,z]
+  y IN interval [xx:real^N,zz]
+  i:num
+  y IN interval[x:real^N,z]
+  i:num
+  t:real^N
+  interval [x:real^N,z]
+  interval [xx:real^N,zz] SUBSET interval [domain]
+  (zz:real^N) = lambda i. if i = j then (z:real^N)$i else (y:real^N)$i
+  (xx:real^N) = lambda i. if i = j then (x:real^N)$i else (y:real^N)$i
+  !j x z u domain fs. \n\t\t\t\t\t\tinterval [x,z] SUBSET interval [domain] ==>\n\t\t\t\t\t\t(!i. i IN 1..dimindex (:N) ==> ~(i = j) ==> u$i = z$i) ==>\n\t\t\t\t\t\tu$j = x$j ==>\n\t\t\t\t\t\t    ALL (\\f. diff2c_domain domain f /\\ \n\t\t\t\t\t\t\t   (!y. y IN interval [domain] ==> partial j f y <= &0)) fs ==>\n\t\t\t\t\t\t    m_cell_list_pass fs (x,u) ==>\n\t\t\t\t\t\t    m_cell_list_pass fs (x,z:real^N)
+  0 = _0
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+  i:num
+  1 <= i
+  (P:num->bool) i
+M_verifier.BOUNDED_INTERVAL_ARITH_IMP_HI' = (#!:fun(fun(cart(real,'?2006785),bool),bool) (\x:cart(real,'?2006785). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?2006785),fun(fun(cart(real,'?2006785),bool),bool)) x:cart(real,'?2006785)) (#closed_interval:fun(list(prod(cart(real,'?2006785),cart(real,'?2006785))),fun(cart(real,'?2006785),bool)) ((#CONS:fun(prod(cart(real,'?2006785),cart(real,'?2006785)),fun(list(prod(cart(real,'?2006785),cart(real,'?2006785))),list(prod(cart(real,'?2006785),cart(real,'?2006785))))) domain:prod(cart(real,'?2006785),cart(real,'?2006785))) #NIL:list(prod(cart(real,'?2006785),cart(real,'?2006785))))))) ((#interval_arith:fun(real,fun(prod(real,real),bool)) (f:fun(cart(real,'?2006785),real) x:cart(real,'?2006785))) ((#,:fun(real,fun(real,prod(real,real))) lo:real) hi:real))))) |- (#!:fun(fun(cart(real,'?2006785),bool),bool) (\x:cart(real,'?2006785). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?2006785),fun(fun(cart(real,'?2006785),bool),bool)) x:cart(real,'?2006785)) (#closed_interval:fun(list(prod(cart(real,'?2006785),cart(real,'?2006785))),fun(cart(real,'?2006785),bool)) ((#CONS:fun(prod(cart(real,'?2006785),cart(real,'?2006785)),fun(list(prod(cart(real,'?2006785),cart(real,'?2006785))),list(prod(cart(real,'?2006785),cart(real,'?2006785))))) domain:prod(cart(real,'?2006785),cart(real,'?2006785))) #NIL:list(prod(cart(real,'?2006785),cart(real,'?2006785))))))) ((#real_le:fun(real,fun(real,bool)) (f:fun(cart(real,'?2006785),real) x:cart(real,'?2006785))) hi:real))))
+M_verifier.BOUNDED_INTERVAL_ARITH_IMP_LO' = (#!:fun(fun(cart(real,'?2006833),bool),bool) (\x:cart(real,'?2006833). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?2006833),fun(fun(cart(real,'?2006833),bool),bool)) x:cart(real,'?2006833)) (#closed_interval:fun(list(prod(cart(real,'?2006833),cart(real,'?2006833))),fun(cart(real,'?2006833),bool)) ((#CONS:fun(prod(cart(real,'?2006833),cart(real,'?2006833)),fun(list(prod(cart(real,'?2006833),cart(real,'?2006833))),list(prod(cart(real,'?2006833),cart(real,'?2006833))))) domain:prod(cart(real,'?2006833),cart(real,'?2006833))) #NIL:list(prod(cart(real,'?2006833),cart(real,'?2006833))))))) ((#interval_arith:fun(real,fun(prod(real,real),bool)) (f:fun(cart(real,'?2006833),real) x:cart(real,'?2006833))) ((#,:fun(real,fun(real,prod(real,real))) lo:real) hi:real))))) |- (#!:fun(fun(cart(real,'?2006833),bool),bool) (\x:cart(real,'?2006833). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?2006833),fun(fun(cart(real,'?2006833),bool),bool)) x:cart(real,'?2006833)) (#closed_interval:fun(list(prod(cart(real,'?2006833),cart(real,'?2006833))),fun(cart(real,'?2006833),bool)) ((#CONS:fun(prod(cart(real,'?2006833),cart(real,'?2006833)),fun(list(prod(cart(real,'?2006833),cart(real,'?2006833))),list(prod(cart(real,'?2006833),cart(real,'?2006833))))) domain:prod(cart(real,'?2006833),cart(real,'?2006833))) #NIL:list(prod(cart(real,'?2006833),cart(real,'?2006833))))))) ((#real_le:fun(real,fun(real,bool)) lo:real) (f:fun(cart(real,'?2006833),real) x:cart(real,'?2006833))))))
+M_verifier.SUBSET_INTERVAL_IMP =  |- (#!:fun(fun(cart(real,'N),bool),bool) (\a:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\b:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\c:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\d:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#/\:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) a:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) c:cart(real,'N)) i:num))) ((#real_le:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) d:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) b:cart(real,'N)) i:num))))))) ((#SUBSET:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) c:cart(real,'N)) d:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) a:cart(real,'N)) b:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))))))))))))
+M_verifier.M_RESTRICT_RIGHT_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\j:num. (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\z:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\w:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\u:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\y':cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\w':cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#m_cell_domain:fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(cart(real,'N),bool))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))) y:cart(real,'N)) w:cart(real,'N))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) i:num) j:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) i:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) y':cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) y:cart(real,'N)) i:num))) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) w':cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) w:cart(real,'N)) i:num))))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) j:num)) ((#$:fun(cart(real,'N),fun(num,real)) z:cart(real,'N)) j:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) y':cart(real,'N)) j:num)) ((#$:fun(cart(real,'N),fun(num,real)) z:cart(real,'N)) j:num))) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) w':cart(real,'N)) j:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))) ((#/\:fun(bool,fun(bool,bool)) (((#m_cell_domain:fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(cart(real,'N),bool))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) u:cart(real,'N)) z:cart(real,'N))) y':cart(real,'N)) w':cart(real,'N))) ((#SUBSET:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) u:cart(real,'N)) z:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))))))))))))))))))))
+M_verifier.M_RESTRICT_LEFT_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\j:num. (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\z:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\w:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\u:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\y':cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\w':cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (((#m_cell_domain:fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(cart(real,'N),bool))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))) y:cart(real,'N)) w:cart(real,'N))) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) i:num) j:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) z:cart(real,'N)) i:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) y':cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) y:cart(real,'N)) i:num))) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) w':cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) w:cart(real,'N)) i:num))))))))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) j:num)) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) j:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) y':cart(real,'N)) j:num)) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) j:num))) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) w':cart(real,'N)) j:num)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))) ((#/\:fun(bool,fun(bool,bool)) (((#m_cell_domain:fun(prod(cart(real,'N),cart(real,'N)),fun(cart(real,'N),fun(cart(real,'N),bool))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) u:cart(real,'N))) y':cart(real,'N)) w':cart(real,'N))) ((#SUBSET:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) u:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))))))))))))))))))))
+M_verifier.m_cell_pass =  |- (#!:fun(fun(prod(cart(real,'?2008224),cart(real,'?2008224)),bool),bool) (\domain:prod(cart(real,'?2008224),cart(real,'?2008224)). (#!:fun(fun(fun(cart(real,'?2008224),real),bool),bool) (\f:fun(cart(real,'?2008224),real). ((#=:fun(bool,fun(bool,bool)) ((#m_cell_pass:fun(fun(cart(real,'?2008224),real),fun(prod(cart(real,'?2008224),cart(real,'?2008224)),bool)) f:fun(cart(real,'?2008224),real)) domain:prod(cart(real,'?2008224),cart(real,'?2008224)))) (#!:fun(fun(cart(real,'?2008224),bool),bool) (\x:cart(real,'?2008224). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?2008224),fun(fun(cart(real,'?2008224),bool),bool)) x:cart(real,'?2008224)) (#closed_interval:fun(list(prod(cart(real,'?2008224),cart(real,'?2008224))),fun(cart(real,'?2008224),bool)) ((#CONS:fun(prod(cart(real,'?2008224),cart(real,'?2008224)),fun(list(prod(cart(real,'?2008224),cart(real,'?2008224))),list(prod(cart(real,'?2008224),cart(real,'?2008224))))) domain:prod(cart(real,'?2008224),cart(real,'?2008224))) #NIL:list(prod(cart(real,'?2008224),cart(real,'?2008224))))))) ((#real_lt:fun(real,fun(real,bool)) (f:fun(cart(real,'?2008224),real) x:cart(real,'?2008224))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))))))))))
+M_verifier.m_cell_list_pass =  |- (#!:fun(fun(prod(cart(real,'N),cart(real,'N)),bool),bool) (\domain:prod(cart(real,'N),cart(real,'N)). (#!:fun(fun(list(fun(cart(real,'N),real)),bool),bool) (\fs:list(fun(cart(real,'N),real)). ((#=:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'N),real)),fun(prod(cart(real,'N),cart(real,'N)),bool)) fs:list(fun(cart(real,'N),real))) domain:prod(cart(real,'N),cart(real,'N)))) (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) x:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) (((#ITLIST:fun(fun(fun(cart(real,'N),real),fun(bool,bool)),fun(list(fun(cart(real,'N),real)),fun(bool,bool))) (\f:fun(cart(real,'N),real). (\r:bool. ((#\/:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) (f:fun(cart(real,'N),real) x:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) r:bool)))) fs:list(fun(cart(real,'N),real))) #F:bool)))))))))
+M_verifier.M_CELL_PASS_EQ_LIST_PASS1 =  |- ((#=:fun(bool,fun(bool,bool)) ((#m_cell_pass:fun(fun(cart(real,'?2008270),real),fun(prod(cart(real,'?2008270),cart(real,'?2008270)),bool)) f:fun(cart(real,'?2008270),real)) domain:prod(cart(real,'?2008270),cart(real,'?2008270)))) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2008270),real)),fun(prod(cart(real,'?2008270),cart(real,'?2008270)),bool)) ((#CONS:fun(fun(cart(real,'?2008270),real),fun(list(fun(cart(real,'?2008270),real)),list(fun(cart(real,'?2008270),real)))) f:fun(cart(real,'?2008270),real)) #NIL:list(fun(cart(real,'?2008270),real)))) domain:prod(cart(real,'?2008270),cart(real,'?2008270))))
+M_verifier.M_CELL_PASS_IMP_LIST_PASS1 =  |- ((#==>:fun(bool,fun(bool,bool)) ((#m_cell_pass:fun(fun(cart(real,'?2008283),real),fun(prod(cart(real,'?2008283),cart(real,'?2008283)),bool)) f:fun(cart(real,'?2008283),real)) domain:prod(cart(real,'?2008283),cart(real,'?2008283)))) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2008283),real)),fun(prod(cart(real,'?2008283),cart(real,'?2008283)),bool)) ((#CONS:fun(fun(cart(real,'?2008283),real),fun(list(fun(cart(real,'?2008283),real)),list(fun(cart(real,'?2008283),real)))) f:fun(cart(real,'?2008283),real)) #NIL:list(fun(cart(real,'?2008283),real)))) domain:prod(cart(real,'?2008283),cart(real,'?2008283))))
+M_verifier.M_CELL_PASS_LEMMA =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,'?2008326),bool),bool) (\x:cart(real,'?2008326). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?2008326),fun(fun(cart(real,'?2008326),bool),bool)) x:cart(real,'?2008326)) (#closed_interval:fun(list(prod(cart(real,'?2008326),cart(real,'?2008326))),fun(cart(real,'?2008326),bool)) ((#CONS:fun(prod(cart(real,'?2008326),cart(real,'?2008326)),fun(list(prod(cart(real,'?2008326),cart(real,'?2008326))),list(prod(cart(real,'?2008326),cart(real,'?2008326))))) domain:prod(cart(real,'?2008326),cart(real,'?2008326))) #NIL:list(prod(cart(real,'?2008326),cart(real,'?2008326))))))) ((#real_le:fun(real,fun(real,bool)) (f:fun(cart(real,'?2008326),real) x:cart(real,'?2008326))) hi:real))))) ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) hi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) #T:bool))) ((#m_cell_pass:fun(fun(cart(real,'?2008326),real),fun(prod(cart(real,'?2008326),cart(real,'?2008326)),bool)) f:fun(cart(real,'?2008326),real)) domain:prod(cart(real,'?2008326),cart(real,'?2008326))))
+M_verifier.M_CELL_LIST_PASS1_LEMMA =  |- ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,'?2008366),bool),bool) (\x:cart(real,'?2008366). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?2008366),fun(fun(cart(real,'?2008366),bool),bool)) x:cart(real,'?2008366)) (#closed_interval:fun(list(prod(cart(real,'?2008366),cart(real,'?2008366))),fun(cart(real,'?2008366),bool)) ((#CONS:fun(prod(cart(real,'?2008366),cart(real,'?2008366)),fun(list(prod(cart(real,'?2008366),cart(real,'?2008366))),list(prod(cart(real,'?2008366),cart(real,'?2008366))))) domain:prod(cart(real,'?2008366),cart(real,'?2008366))) #NIL:list(prod(cart(real,'?2008366),cart(real,'?2008366))))))) ((#real_le:fun(real,fun(real,bool)) (f:fun(cart(real,'?2008366),real) x:cart(real,'?2008366))) hi:real))))) ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) hi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) #T:bool))) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2008366),real)),fun(prod(cart(real,'?2008366),cart(real,'?2008366)),bool)) ((#CONS:fun(fun(cart(real,'?2008366),real),fun(list(fun(cart(real,'?2008366),real)),list(fun(cart(real,'?2008366),real)))) f:fun(cart(real,'?2008366),real)) #NIL:list(fun(cart(real,'?2008366),real)))) domain:prod(cart(real,'?2008366),cart(real,'?2008366))))
+M_verifier.M_CELL_PASS_LEMMA' = (#!:fun(fun(cart(real,'?2008326),bool),bool) (\x:cart(real,'?2008326). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?2008326),fun(fun(cart(real,'?2008326),bool),bool)) x:cart(real,'?2008326)) (#closed_interval:fun(list(prod(cart(real,'?2008326),cart(real,'?2008326))),fun(cart(real,'?2008326),bool)) ((#CONS:fun(prod(cart(real,'?2008326),cart(real,'?2008326)),fun(list(prod(cart(real,'?2008326),cart(real,'?2008326))),list(prod(cart(real,'?2008326),cart(real,'?2008326))))) domain:prod(cart(real,'?2008326),cart(real,'?2008326))) #NIL:list(prod(cart(real,'?2008326),cart(real,'?2008326))))))) ((#real_le:fun(real,fun(real,bool)) (f:fun(cart(real,'?2008326),real) x:cart(real,'?2008326))) hi:real)))), ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) hi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) #T:bool) |- ((#m_cell_pass:fun(fun(cart(real,'?2008326),real),fun(prod(cart(real,'?2008326),cart(real,'?2008326)),bool)) f:fun(cart(real,'?2008326),real)) domain:prod(cart(real,'?2008326),cart(real,'?2008326)))
+M_verifier.M_CELL_LIST_PASS1_LEMMA' = (#!:fun(fun(cart(real,'?2008366),bool),bool) (\x:cart(real,'?2008366). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?2008366),fun(fun(cart(real,'?2008366),bool),bool)) x:cart(real,'?2008366)) (#closed_interval:fun(list(prod(cart(real,'?2008366),cart(real,'?2008366))),fun(cart(real,'?2008366),bool)) ((#CONS:fun(prod(cart(real,'?2008366),cart(real,'?2008366)),fun(list(prod(cart(real,'?2008366),cart(real,'?2008366))),list(prod(cart(real,'?2008366),cart(real,'?2008366))))) domain:prod(cart(real,'?2008366),cart(real,'?2008366))) #NIL:list(prod(cart(real,'?2008366),cart(real,'?2008366))))))) ((#real_le:fun(real,fun(real,bool)) (f:fun(cart(real,'?2008366),real) x:cart(real,'?2008366))) hi:real)))), ((#=:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) hi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) #T:bool) |- ((#m_cell_list_pass:fun(list(fun(cart(real,'?2008366),real)),fun(prod(cart(real,'?2008366),cart(real,'?2008366)),bool)) ((#CONS:fun(fun(cart(real,'?2008366),real),fun(list(fun(cart(real,'?2008366),real)),list(fun(cart(real,'?2008366),real)))) f:fun(cart(real,'?2008366),real)) #NIL:list(fun(cart(real,'?2008366),real)))) domain:prod(cart(real,'?2008366),cart(real,'?2008366)))
+M_verifier.M_CELL_PASS_INTERVAL_LEMMA' = (#!:fun(fun(cart(real,'?2008403),bool),bool) (\x:cart(real,'?2008403). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?2008403),fun(fun(cart(real,'?2008403),bool),bool)) x:cart(real,'?2008403)) (#closed_interval:fun(list(prod(cart(real,'?2008403),cart(real,'?2008403))),fun(cart(real,'?2008403),bool)) ((#CONS:fun(prod(cart(real,'?2008403),cart(real,'?2008403)),fun(list(prod(cart(real,'?2008403),cart(real,'?2008403))),list(prod(cart(real,'?2008403),cart(real,'?2008403))))) domain:prod(cart(real,'?2008403),cart(real,'?2008403))) #NIL:list(prod(cart(real,'?2008403),cart(real,'?2008403))))))) ((#interval_arith:fun(real,fun(prod(real,real),bool)) (f:fun(cart(real,'?2008403),real) x:cart(real,'?2008403))) ((#,:fun(real,fun(real,prod(real,real))) lo:real) hi:real))))), ((#real_lt:fun(real,fun(real,bool)) hi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) |- ((#m_cell_pass:fun(fun(cart(real,'?2008403),real),fun(prod(cart(real,'?2008403),cart(real,'?2008403)),bool)) f:fun(cart(real,'?2008403),real)) domain:prod(cart(real,'?2008403),cart(real,'?2008403)))
+M_verifier.M_CELL_LIST_PASS1_INTERVAL_LEMMA' = (#!:fun(fun(cart(real,'?2008444),bool),bool) (\x:cart(real,'?2008444). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'?2008444),fun(fun(cart(real,'?2008444),bool),bool)) x:cart(real,'?2008444)) (#closed_interval:fun(list(prod(cart(real,'?2008444),cart(real,'?2008444))),fun(cart(real,'?2008444),bool)) ((#CONS:fun(prod(cart(real,'?2008444),cart(real,'?2008444)),fun(list(prod(cart(real,'?2008444),cart(real,'?2008444))),list(prod(cart(real,'?2008444),cart(real,'?2008444))))) domain:prod(cart(real,'?2008444),cart(real,'?2008444))) #NIL:list(prod(cart(real,'?2008444),cart(real,'?2008444))))))) ((#interval_arith:fun(real,fun(prod(real,real),bool)) (f:fun(cart(real,'?2008444),real) x:cart(real,'?2008444))) ((#,:fun(real,fun(real,prod(real,real))) lo:real) hi:real))))), ((#real_lt:fun(real,fun(real,bool)) hi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) |- ((#m_cell_list_pass:fun(list(fun(cart(real,'?2008444),real)),fun(prod(cart(real,'?2008444),cart(real,'?2008444)),bool)) ((#CONS:fun(fun(cart(real,'?2008444),real),fun(list(fun(cart(real,'?2008444),real)),list(fun(cart(real,'?2008444),real)))) f:fun(cart(real,'?2008444),real)) #NIL:list(fun(cart(real,'?2008444),real)))) domain:prod(cart(real,'?2008444),cart(real,'?2008444)))
+M_verifier.M_CELL_PASS_SUBDOMAIN' = ((#SUBSET:fun(fun(cart(real,'?2008473),bool),fun(fun(cart(real,'?2008473),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'?2008473),cart(real,'?2008473))),fun(cart(real,'?2008473),bool)) ((#CONS:fun(prod(cart(real,'?2008473),cart(real,'?2008473)),fun(list(prod(cart(real,'?2008473),cart(real,'?2008473))),list(prod(cart(real,'?2008473),cart(real,'?2008473))))) domain2:prod(cart(real,'?2008473),cart(real,'?2008473))) #NIL:list(prod(cart(real,'?2008473),cart(real,'?2008473)))))) (#closed_interval:fun(list(prod(cart(real,'?2008473),cart(real,'?2008473))),fun(cart(real,'?2008473),bool)) ((#CONS:fun(prod(cart(real,'?2008473),cart(real,'?2008473)),fun(list(prod(cart(real,'?2008473),cart(real,'?2008473))),list(prod(cart(real,'?2008473),cart(real,'?2008473))))) domain:prod(cart(real,'?2008473),cart(real,'?2008473))) #NIL:list(prod(cart(real,'?2008473),cart(real,'?2008473)))))), ((#m_cell_pass:fun(fun(cart(real,'?2008473),real),fun(prod(cart(real,'?2008473),cart(real,'?2008473)),bool)) f:fun(cart(real,'?2008473),real)) domain:prod(cart(real,'?2008473),cart(real,'?2008473))) |- ((#m_cell_pass:fun(fun(cart(real,'?2008473),real),fun(prod(cart(real,'?2008473),cart(real,'?2008473)),bool)) f:fun(cart(real,'?2008473),real)) domain2:prod(cart(real,'?2008473),cart(real,'?2008473)))
+M_verifier.M_CELL_LIST_PASS_SUBDOMAIN' = ((#SUBSET:fun(fun(cart(real,'?2008503),bool),fun(fun(cart(real,'?2008503),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'?2008503),cart(real,'?2008503))),fun(cart(real,'?2008503),bool)) ((#CONS:fun(prod(cart(real,'?2008503),cart(real,'?2008503)),fun(list(prod(cart(real,'?2008503),cart(real,'?2008503))),list(prod(cart(real,'?2008503),cart(real,'?2008503))))) domain2:prod(cart(real,'?2008503),cart(real,'?2008503))) #NIL:list(prod(cart(real,'?2008503),cart(real,'?2008503)))))) (#closed_interval:fun(list(prod(cart(real,'?2008503),cart(real,'?2008503))),fun(cart(real,'?2008503),bool)) ((#CONS:fun(prod(cart(real,'?2008503),cart(real,'?2008503)),fun(list(prod(cart(real,'?2008503),cart(real,'?2008503))),list(prod(cart(real,'?2008503),cart(real,'?2008503))))) domain:prod(cart(real,'?2008503),cart(real,'?2008503))) #NIL:list(prod(cart(real,'?2008503),cart(real,'?2008503)))))), ((#m_cell_list_pass:fun(list(fun(cart(real,'?2008503),real)),fun(prod(cart(real,'?2008503),cart(real,'?2008503)),bool)) fs:list(fun(cart(real,'?2008503),real))) domain:prod(cart(real,'?2008503),cart(real,'?2008503))) |- ((#m_cell_list_pass:fun(list(fun(cart(real,'?2008503),real)),fun(prod(cart(real,'?2008503),cart(real,'?2008503)),bool)) fs:list(fun(cart(real,'?2008503),real))) domain2:prod(cart(real,'?2008503),cart(real,'?2008503)))
+M_verifier.GLUE_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\j:num. (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\z:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\v:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\u:cart(real,'N). (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\P:fun(cart(real,'N),bool). (#!:fun(fun(fun(cart(real,'N),bool),bool),bool) (\Q:fun(cart(real,'N),bool). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) i:num) j:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) i:num))) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) v:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) z:cart(real,'N)) i:num)))))))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) v:cart(real,'N)) j:num)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) j:num))) ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,'N),bool),bool) (\p:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) p:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) v:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) (P:fun(cart(real,'N),bool) p:cart(real,'N)))))) ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,'N),bool),bool) (\p:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) p:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) u:cart(real,'N)) z:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) (Q:fun(cart(real,'N),bool) p:cart(real,'N)))))) (#!:fun(fun(cart(real,'N),bool),bool) (\p:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) p:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#\/:fun(bool,fun(bool,bool)) (P:fun(cart(real,'N),bool) p:cart(real,'N))) (Q:fun(cart(real,'N),bool) p:cart(real,'N))))))))))))))))))))))))
+M_verifier.M_CELL_PASS_GLUE_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\j:num. (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\z:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\v:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\u:cart(real,'N). (#!:fun(fun(fun(cart(real,'N),real),bool),bool) (\f:fun(cart(real,'N),real). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) i:num) j:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) i:num))) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) v:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) z:cart(real,'N)) i:num)))))))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) v:cart(real,'N)) j:num)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) j:num))) ((#==>:fun(bool,fun(bool,bool)) ((#m_cell_pass:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),bool)) f:fun(cart(real,'N),real)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) v:cart(real,'N)))) ((#==>:fun(bool,fun(bool,bool)) ((#m_cell_pass:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),bool)) f:fun(cart(real,'N),real)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) u:cart(real,'N)) z:cart(real,'N)))) ((#m_cell_pass:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),bool)) f:fun(cart(real,'N),real)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N)))))))))))))))))))
+M_verifier.ITLIST_DISJ_APPEND =  |- (#!:fun(fun(fun('?2008885,bool),bool),bool) (\P:fun('?2008885,bool). (#!:fun(fun(list('?2008885),bool),bool) (\l1:list('?2008885). (#!:fun(fun(list('?2008885),bool),bool) (\l2:list('?2008885). ((#=:fun(bool,fun(bool,bool)) (((#ITLIST:fun(fun('?2008885,fun(bool,bool)),fun(list('?2008885),fun(bool,bool))) (\a:'?2008885. (\r:bool. ((#\/:fun(bool,fun(bool,bool)) (P:fun('?2008885,bool) a:'?2008885)) r:bool)))) ((#APPEND:fun(list('?2008885),fun(list('?2008885),list('?2008885))) l1:list('?2008885)) l2:list('?2008885))) #F:bool)) ((#\/:fun(bool,fun(bool,bool)) (((#ITLIST:fun(fun('?2008885,fun(bool,bool)),fun(list('?2008885),fun(bool,bool))) (\a:'?2008885. (\r:bool. ((#\/:fun(bool,fun(bool,bool)) (P:fun('?2008885,bool) a:'?2008885)) r:bool)))) l1:list('?2008885)) #F:bool)) (((#ITLIST:fun(fun('?2008885,fun(bool,bool)),fun(list('?2008885),fun(bool,bool))) (\a:'?2008885. (\r:bool. ((#\/:fun(bool,fun(bool,bool)) (P:fun('?2008885,bool) a:'?2008885)) r:bool)))) l2:list('?2008885)) #F:bool)))))))))
+M_verifier.M_CELL_LIST_PASS_GLUE_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\j:num. (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\z:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\v:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\u:cart(real,'N). (#!:fun(fun(list(fun(cart(real,'N),real)),bool),bool) (\fs1:list(fun(cart(real,'N),real)). (#!:fun(fun(list(fun(cart(real,'N),real)),bool),bool) (\fs2:list(fun(cart(real,'N),real)). ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#<=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) i:num)) ((#<=:fun(num,fun(num,bool)) i:num) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) i:num) j:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) i:num))) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) v:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) z:cart(real,'N)) i:num)))))))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) v:cart(real,'N)) j:num)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) j:num))) ((#==>:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'N),real)),fun(prod(cart(real,'N),cart(real,'N)),bool)) fs1:list(fun(cart(real,'N),real))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) v:cart(real,'N)))) ((#==>:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'N),real)),fun(prod(cart(real,'N),cart(real,'N)),bool)) fs2:list(fun(cart(real,'N),real))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) u:cart(real,'N)) z:cart(real,'N)))) ((#m_cell_list_pass:fun(list(fun(cart(real,'N),real)),fun(prod(cart(real,'N),cart(real,'N)),bool)) ((#APPEND:fun(list(fun(cart(real,'N),real)),fun(list(fun(cart(real,'N),real)),list(fun(cart(real,'N),real)))) fs1:list(fun(cart(real,'N),real))) fs2:list(fun(cart(real,'N),real)))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N)))))))))))))))))))))
+M_verifier.CELL_LIST_PASS_ACC_INTRO =  |- ((#=:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009514),real)),fun(prod(cart(real,'?2009514),cart(real,'?2009514)),bool)) fs1:list(fun(cart(real,'?2009514),real))) domain:prod(cart(real,'?2009514),cart(real,'?2009514)))) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009514),real)),fun(prod(cart(real,'?2009514),cart(real,'?2009514)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2009514),real)),fun(list(fun(cart(real,'?2009514),real)),list(fun(cart(real,'?2009514),real)))) fs1:list(fun(cart(real,'?2009514),real))) #NIL:list(fun(cart(real,'?2009514),real)))) domain:prod(cart(real,'?2009514),cart(real,'?2009514))))
+M_verifier.CELL_LIST_PASS_ACC_ELIM =  |- ((#=:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009514),real)),fun(prod(cart(real,'?2009514),cart(real,'?2009514)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2009514),real)),fun(list(fun(cart(real,'?2009514),real)),list(fun(cart(real,'?2009514),real)))) fs1:list(fun(cart(real,'?2009514),real))) #NIL:list(fun(cart(real,'?2009514),real)))) domain:prod(cart(real,'?2009514),cart(real,'?2009514)))) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009514),real)),fun(prod(cart(real,'?2009514),cart(real,'?2009514)),bool)) fs1:list(fun(cart(real,'?2009514),real))) domain:prod(cart(real,'?2009514),cart(real,'?2009514))))
+M_verifier.CELL_LIST_PASS_ACC_REV =  |- ((#=:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009527),real)),fun(prod(cart(real,'?2009527),cart(real,'?2009527)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2009527),real)),fun(list(fun(cart(real,'?2009527),real)),list(fun(cart(real,'?2009527),real)))) acc:list(fun(cart(real,'?2009527),real))) ((#CONS:fun(fun(cart(real,'?2009527),real),fun(list(fun(cart(real,'?2009527),real)),list(fun(cart(real,'?2009527),real)))) h:fun(cart(real,'?2009527),real)) fs2:list(fun(cart(real,'?2009527),real))))) domain:prod(cart(real,'?2009527),cart(real,'?2009527)))) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009527),real)),fun(prod(cart(real,'?2009527),cart(real,'?2009527)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2009527),real)),fun(list(fun(cart(real,'?2009527),real)),list(fun(cart(real,'?2009527),real)))) ((#CONS:fun(fun(cart(real,'?2009527),real),fun(list(fun(cart(real,'?2009527),real)),list(fun(cart(real,'?2009527),real)))) h:fun(cart(real,'?2009527),real)) acc:list(fun(cart(real,'?2009527),real)))) fs2:list(fun(cart(real,'?2009527),real)))) domain:prod(cart(real,'?2009527),cart(real,'?2009527))))
+M_verifier.CELL_LIST_PASS_NIL1 =  |- ((#=:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009558),real)),fun(prod(cart(real,'?2009558),cart(real,'?2009558)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2009558),real)),fun(list(fun(cart(real,'?2009558),real)),list(fun(cart(real,'?2009558),real)))) ((#APPEND:fun(list(fun(cart(real,'?2009558),real)),fun(list(fun(cart(real,'?2009558),real)),list(fun(cart(real,'?2009558),real)))) #NIL:list(fun(cart(real,'?2009558),real))) fs2:list(fun(cart(real,'?2009558),real)))) acc:list(fun(cart(real,'?2009558),real)))) domain:prod(cart(real,'?2009558),cart(real,'?2009558)))) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009558),real)),fun(prod(cart(real,'?2009558),cart(real,'?2009558)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2009558),real)),fun(list(fun(cart(real,'?2009558),real)),list(fun(cart(real,'?2009558),real)))) fs2:list(fun(cart(real,'?2009558),real))) acc:list(fun(cart(real,'?2009558),real)))) domain:prod(cart(real,'?2009558),cart(real,'?2009558))))
+M_verifier.CELL_LIST_PASS_NIL2 =  |- ((#=:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009577),real)),fun(prod(cart(real,'?2009577),cart(real,'?2009577)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2009577),real)),fun(list(fun(cart(real,'?2009577),real)),list(fun(cart(real,'?2009577),real)))) ((#APPEND:fun(list(fun(cart(real,'?2009577),real)),fun(list(fun(cart(real,'?2009577),real)),list(fun(cart(real,'?2009577),real)))) fs1:list(fun(cart(real,'?2009577),real))) #NIL:list(fun(cart(real,'?2009577),real)))) acc:list(fun(cart(real,'?2009577),real)))) domain:prod(cart(real,'?2009577),cart(real,'?2009577)))) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009577),real)),fun(prod(cart(real,'?2009577),cart(real,'?2009577)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2009577),real)),fun(list(fun(cart(real,'?2009577),real)),list(fun(cart(real,'?2009577),real)))) fs1:list(fun(cart(real,'?2009577),real))) acc:list(fun(cart(real,'?2009577),real)))) domain:prod(cart(real,'?2009577),cart(real,'?2009577))))
+M_verifier.CELL_LIST_PASS_SAME_HD =  |- ((#=:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009601),real)),fun(prod(cart(real,'?2009601),cart(real,'?2009601)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2009601),real)),fun(list(fun(cart(real,'?2009601),real)),list(fun(cart(real,'?2009601),real)))) ((#APPEND:fun(list(fun(cart(real,'?2009601),real)),fun(list(fun(cart(real,'?2009601),real)),list(fun(cart(real,'?2009601),real)))) ((#CONS:fun(fun(cart(real,'?2009601),real),fun(list(fun(cart(real,'?2009601),real)),list(fun(cart(real,'?2009601),real)))) h:fun(cart(real,'?2009601),real)) fs1:list(fun(cart(real,'?2009601),real)))) ((#CONS:fun(fun(cart(real,'?2009601),real),fun(list(fun(cart(real,'?2009601),real)),list(fun(cart(real,'?2009601),real)))) h:fun(cart(real,'?2009601),real)) fs2:list(fun(cart(real,'?2009601),real))))) acc:list(fun(cart(real,'?2009601),real)))) domain:prod(cart(real,'?2009601),cart(real,'?2009601)))) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009601),real)),fun(prod(cart(real,'?2009601),cart(real,'?2009601)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2009601),real)),fun(list(fun(cart(real,'?2009601),real)),list(fun(cart(real,'?2009601),real)))) ((#APPEND:fun(list(fun(cart(real,'?2009601),real)),fun(list(fun(cart(real,'?2009601),real)),list(fun(cart(real,'?2009601),real)))) fs1:list(fun(cart(real,'?2009601),real))) fs2:list(fun(cart(real,'?2009601),real)))) ((#CONS:fun(fun(cart(real,'?2009601),real),fun(list(fun(cart(real,'?2009601),real)),list(fun(cart(real,'?2009601),real)))) h:fun(cart(real,'?2009601),real)) acc:list(fun(cart(real,'?2009601),real))))) domain:prod(cart(real,'?2009601),cart(real,'?2009601))))
+M_verifier.CELL_LIST_PASS_MOVE1 =  |- ((#=:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009628),real)),fun(prod(cart(real,'?2009628),cart(real,'?2009628)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2009628),real)),fun(list(fun(cart(real,'?2009628),real)),list(fun(cart(real,'?2009628),real)))) ((#APPEND:fun(list(fun(cart(real,'?2009628),real)),fun(list(fun(cart(real,'?2009628),real)),list(fun(cart(real,'?2009628),real)))) ((#CONS:fun(fun(cart(real,'?2009628),real),fun(list(fun(cart(real,'?2009628),real)),list(fun(cart(real,'?2009628),real)))) h:fun(cart(real,'?2009628),real)) fs1:list(fun(cart(real,'?2009628),real)))) fs2:list(fun(cart(real,'?2009628),real)))) acc:list(fun(cart(real,'?2009628),real)))) domain:prod(cart(real,'?2009628),cart(real,'?2009628)))) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009628),real)),fun(prod(cart(real,'?2009628),cart(real,'?2009628)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2009628),real)),fun(list(fun(cart(real,'?2009628),real)),list(fun(cart(real,'?2009628),real)))) ((#APPEND:fun(list(fun(cart(real,'?2009628),real)),fun(list(fun(cart(real,'?2009628),real)),list(fun(cart(real,'?2009628),real)))) fs1:list(fun(cart(real,'?2009628),real))) fs2:list(fun(cart(real,'?2009628),real)))) ((#CONS:fun(fun(cart(real,'?2009628),real),fun(list(fun(cart(real,'?2009628),real)),list(fun(cart(real,'?2009628),real)))) h:fun(cart(real,'?2009628),real)) acc:list(fun(cart(real,'?2009628),real))))) domain:prod(cart(real,'?2009628),cart(real,'?2009628))))
+M_verifier.CELL_LIST_PASS_MOVE2 =  |- ((#=:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009655),real)),fun(prod(cart(real,'?2009655),cart(real,'?2009655)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2009655),real)),fun(list(fun(cart(real,'?2009655),real)),list(fun(cart(real,'?2009655),real)))) ((#APPEND:fun(list(fun(cart(real,'?2009655),real)),fun(list(fun(cart(real,'?2009655),real)),list(fun(cart(real,'?2009655),real)))) fs1:list(fun(cart(real,'?2009655),real))) ((#CONS:fun(fun(cart(real,'?2009655),real),fun(list(fun(cart(real,'?2009655),real)),list(fun(cart(real,'?2009655),real)))) h:fun(cart(real,'?2009655),real)) fs2:list(fun(cart(real,'?2009655),real))))) acc:list(fun(cart(real,'?2009655),real)))) domain:prod(cart(real,'?2009655),cart(real,'?2009655)))) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2009655),real)),fun(prod(cart(real,'?2009655),cart(real,'?2009655)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2009655),real)),fun(list(fun(cart(real,'?2009655),real)),list(fun(cart(real,'?2009655),real)))) ((#APPEND:fun(list(fun(cart(real,'?2009655),real)),fun(list(fun(cart(real,'?2009655),real)),list(fun(cart(real,'?2009655),real)))) fs1:list(fun(cart(real,'?2009655),real))) fs2:list(fun(cart(real,'?2009655),real)))) ((#CONS:fun(fun(cart(real,'?2009655),real),fun(list(fun(cart(real,'?2009655),real)),list(fun(cart(real,'?2009655),real)))) h:fun(cart(real,'?2009655),real)) acc:list(fun(cart(real,'?2009655),real))))) domain:prod(cart(real,'?2009655),cart(real,'?2009655))))
+M_verifier.M_CELL_SUP =  |- (#!:fun(fun(fun(cart(real,'N),real),bool),bool) (\f:fun(cart(real,'N),real). (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\z:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) ((#continuous_on:fun(fun(cart(real,'N),cart(real,1)),fun(fun(cart(real,'N),bool),bool)) ((#o:fun(fun(real,cart(real,1)),fun(fun(cart(real,'N),real),fun(cart(real,'N),cart(real,1)))) #lift:fun(real,cart(real,1))) f:fun(cart(real,'N),real))) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#m_cell_pass:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),bool)) f:fun(cart(real,'N),real)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))))) (#?:fun(fun(real,bool),bool) (\a:real. ((#/\:fun(bool,fun(bool,bool)) ((#real_lt:fun(real,fun(real,bool)) a:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#real_le:fun(real,fun(real,bool)) (f:fun(cart(real,'N),real) y:cart(real,'N))) a:real))))))))))))))
+M_verifier.DIFF2_DOMAIN_IMP_CONTINUOUS_ON =  |- (#!:fun(fun(fun(cart(real,'N),real),bool),bool) (\f:fun(cart(real,'N),real). (#!:fun(fun(prod(cart(real,'N),cart(real,'N)),bool),bool) (\domain:prod(cart(real,'N),cart(real,'N)). ((#==>:fun(bool,fun(bool,bool)) ((#diff2_domain:fun(prod(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),real),bool)) domain:prod(cart(real,'N),cart(real,'N))) f:fun(cart(real,'N),real))) ((#continuous_on:fun(fun(cart(real,'N),cart(real,1)),fun(fun(cart(real,'N),bool),bool)) ((#o:fun(fun(real,cart(real,1)),fun(fun(cart(real,'N),real),fun(cart(real,'N),cart(real,1)))) #lift:fun(real,cart(real,1))) f:fun(cart(real,'N),real))) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))))))))
+M_verifier.M_CELL_INCREASING_PASS_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\j:num. (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\z:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\u:cart(real,'N). (#!:fun(fun(prod(cart(real,'N),cart(real,'N)),bool),bool) (\domain:prod(cart(real,'N),cart(real,'N)). (#!:fun(fun(real,bool),bool) (\lo:real. (#!:fun(fun(fun(cart(real,'N),real),bool),bool) (\f:fun(cart(real,'N),real). ((#==>:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#==>:fun(bool,fun(bool,bool)) ((#diff2c_domain:fun(prod(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),real),bool)) domain:prod(cart(real,'N),cart(real,'N))) f:fun(cart(real,'N),real))) ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) i:num) j:num))) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) i:num))))))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) j:num)) ((#$:fun(cart(real,'N),fun(num,real)) z:cart(real,'N)) j:num))) ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) lo:real)) ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#real_le:fun(real,fun(real,bool)) lo:real) (((#partial:fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real))) j:num) f:fun(cart(real,'N),real)) y:cart(real,'N))))))) ((#==>:fun(bool,fun(bool,bool)) ((#m_cell_pass:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),bool)) f:fun(cart(real,'N),real)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) u:cart(real,'N)) z:cart(real,'N)))) ((#m_cell_pass:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),bool)) f:fun(cart(real,'N),real)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))))))))))))))))))))))))
+M_verifier.M_CELL_DECREASING_PASS_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\j:num. (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\z:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\u:cart(real,'N). (#!:fun(fun(prod(cart(real,'N),cart(real,'N)),bool),bool) (\domain:prod(cart(real,'N),cart(real,'N)). (#!:fun(fun(real,bool),bool) (\hi:real. (#!:fun(fun(fun(cart(real,'N),real),bool),bool) (\f:fun(cart(real,'N),real). ((#==>:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#==>:fun(bool,fun(bool,bool)) ((#diff2c_domain:fun(prod(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),real),bool)) domain:prod(cart(real,'N),cart(real,'N))) f:fun(cart(real,'N),real))) ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) i:num) j:num))) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) z:cart(real,'N)) i:num))))))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) j:num)) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) j:num))) ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) hi:real) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num)))) ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#real_le:fun(real,fun(real,bool)) (((#partial:fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real))) j:num) f:fun(cart(real,'N),real)) y:cart(real,'N))) hi:real))))) ((#==>:fun(bool,fun(bool,bool)) ((#m_cell_pass:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),bool)) f:fun(cart(real,'N),real)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) u:cart(real,'N)))) ((#m_cell_pass:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),bool)) f:fun(cart(real,'N),real)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))))))))))))))))))))))))
+M_verifier.M_CELL_CONVEX_PASS_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\j:num. (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\z:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\u:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\v:cart(real,'N). (#!:fun(fun(real,bool),bool) (\lo:real. (#!:fun(fun(fun(cart(real,'N),real),bool),bool) (\f:fun(cart(real,'N),real). ((#==>:fun(bool,fun(bool,bool)) ((#diff2c_domain:fun(prod(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),real),bool)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))) f:fun(cart(real,'N),real))) ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) i:num) j:num))) ((#/\:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) z:cart(real,'N)) i:num))) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) v:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) i:num)))))))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) j:num)) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) j:num))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) v:cart(real,'N)) j:num)) ((#$:fun(cart(real,'N),fun(num,real)) z:cart(real,'N)) j:num))) ((#==>:fun(bool,fun(bool,bool)) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) lo:real)) ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#real_le:fun(real,fun(real,bool)) lo:real) ((((#partial2:fun(num,fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real)))) j:num) j:num) f:fun(cart(real,'N),real)) y:cart(real,'N))))))) ((#==>:fun(bool,fun(bool,bool)) ((#m_cell_pass:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),bool)) f:fun(cart(real,'N),real)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) u:cart(real,'N)))) ((#==>:fun(bool,fun(bool,bool)) ((#m_cell_pass:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),bool)) f:fun(cart(real,'N),real)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) v:cart(real,'N)) z:cart(real,'N)))) ((#m_cell_pass:fun(fun(cart(real,'N),real),fun(prod(cart(real,'N),cart(real,'N)),bool)) f:fun(cart(real,'N),real)) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N)))))))))))))))))))))))))
+M_verifier.ITLIST_DISJ_EXISTS =  |- (#!:fun(fun(fun('A,bool),bool),bool) (\P:fun('A,bool). (#!:fun(fun(list('A),bool),bool) (\l:list('A). ((#=:fun(bool,fun(bool,bool)) (((#ITLIST:fun(fun('A,fun(bool,bool)),fun(list('A),fun(bool,bool))) (\x:'A. (\r:bool. ((#\/:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) r:bool)))) l:list('A)) #F:bool)) (#?:fun(fun('A,bool),bool) (\x:'A. ((#/\:fun(bool,fun(bool,bool)) ((#MEM:fun('A,fun(list('A),bool)) x:'A) l:list('A))) (P:fun('A,bool) x:'A)))))))))
+M_verifier.M_CELL_LIST_PASS_ALT =  |- (#!:fun(fun(list(fun(cart(real,'N),real)),bool),bool) (\fs:list(fun(cart(real,'N),real)). (#!:fun(fun(prod(cart(real,'N),cart(real,'N)),bool),bool) (\domain:prod(cart(real,'N),cart(real,'N)). ((#=:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'N),real)),fun(prod(cart(real,'N),cart(real,'N)),bool)) fs:list(fun(cart(real,'N),real))) domain:prod(cart(real,'N),cart(real,'N)))) (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) (#?:fun(fun(fun(cart(real,'N),real),bool),bool) (\f:fun(cart(real,'N),real). ((#/\:fun(bool,fun(bool,bool)) ((#MEM:fun(fun(cart(real,'N),real),fun(list(fun(cart(real,'N),real)),bool)) f:fun(cart(real,'N),real)) fs:list(fun(cart(real,'N),real)))) ((#real_lt:fun(real,fun(real,bool)) (f:fun(cart(real,'N),real) y:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))))))))
+M_verifier.M_CELL_LIST_PASS_APPEND =  |- (#!:fun(fun(list(fun(cart(real,'?2010643),real)),bool),bool) (\fs:list(fun(cart(real,'?2010643),real)). (#!:fun(fun(list(fun(cart(real,'?2010643),real)),bool),bool) (\fs2:list(fun(cart(real,'?2010643),real)). (#!:fun(fun(prod(cart(real,'?2010643),cart(real,'?2010643)),bool),bool) (\domain:prod(cart(real,'?2010643),cart(real,'?2010643)). ((#==>:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2010643),real)),fun(prod(cart(real,'?2010643),cart(real,'?2010643)),bool)) fs:list(fun(cart(real,'?2010643),real))) domain:prod(cart(real,'?2010643),cart(real,'?2010643)))) ((#m_cell_list_pass:fun(list(fun(cart(real,'?2010643),real)),fun(prod(cart(real,'?2010643),cart(real,'?2010643)),bool)) ((#APPEND:fun(list(fun(cart(real,'?2010643),real)),fun(list(fun(cart(real,'?2010643),real)),list(fun(cart(real,'?2010643),real)))) fs:list(fun(cart(real,'?2010643),real))) fs2:list(fun(cart(real,'?2010643),real)))) domain:prod(cart(real,'?2010643),cart(real,'?2010643))))))))))
+M_verifier.ONE_POINT_INTERVAL =  |- (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). ((#=:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) x:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))) ((#INSERT:fun(cart(real,'N),fun(fun(cart(real,'N),bool),fun(cart(real,'N),bool))) x:cart(real,'N)) #EMPTY:fun(cart(real,'N),bool)))))
+M_verifier.M_CELL_LIST_INCREASING_PASS_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\j:num. (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\z:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\u:cart(real,'N). (#!:fun(fun(prod(cart(real,'N),cart(real,'N)),bool),bool) (\domain:prod(cart(real,'N),cart(real,'N)). (#!:fun(fun(list(fun(cart(real,'N),real)),bool),bool) (\fs:list(fun(cart(real,'N),real)). ((#==>:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) i:num) j:num))) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) i:num))))))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) j:num)) ((#$:fun(cart(real,'N),fun(num,real)) z:cart(real,'N)) j:num))) ((#==>:fun(bool,fun(bool,bool)) ((#ALL:fun(fun(fun(cart(real,'N),real),bool),fun(list(fun(cart(real,'N),real)),bool)) (\f:fun(cart(real,'N),real). ((#/\:fun(bool,fun(bool,bool)) ((#diff2c_domain:fun(prod(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),real),bool)) domain:prod(cart(real,'N),cart(real,'N))) f:fun(cart(real,'N),real))) (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#real_le:fun(real,fun(real,bool)) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))) (((#partial:fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real))) j:num) f:fun(cart(real,'N),real)) y:cart(real,'N))))))))) fs:list(fun(cart(real,'N),real)))) ((#==>:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'N),real)),fun(prod(cart(real,'N),cart(real,'N)),bool)) fs:list(fun(cart(real,'N),real))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) u:cart(real,'N)) z:cart(real,'N)))) ((#m_cell_list_pass:fun(list(fun(cart(real,'N),real)),fun(prod(cart(real,'N),cart(real,'N)),bool)) fs:list(fun(cart(real,'N),real))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))))))))))))))))))))
+M_verifier.M_CELL_LIST_DECREASING_PASS_LEMMA =  |- (#!:fun(fun(num,bool),bool) (\j:num. (#!:fun(fun(cart(real,'N),bool),bool) (\x:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\z:cart(real,'N). (#!:fun(fun(cart(real,'N),bool),bool) (\u:cart(real,'N). (#!:fun(fun(prod(cart(real,'N),cart(real,'N)),bool),bool) (\domain:prod(cart(real,'N),cart(real,'N)). (#!:fun(fun(list(fun(cart(real,'N),real)),bool),bool) (\fs:list(fun(cart(real,'N),real)). ((#==>:fun(bool,fun(bool,bool)) ((#SUBSET:fun(fun(cart(real,'N),bool),fun(fun(cart(real,'N),bool),bool)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N)))))) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun(num,bool),bool) (\i:num. ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(num,fun(fun(num,bool),bool)) i:num) ((#..:fun(num,fun(num,fun(num,bool))) (#NUMERAL:fun(num,num) (#BIT1:fun(num,num) #_0:num))) (#dimindex:fun(fun('N,bool),num) #UNIV:fun('N,bool))))) ((#==>:fun(bool,fun(bool,bool)) (#~:fun(bool,bool) ((#=:fun(num,fun(num,bool)) i:num) j:num))) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) i:num)) ((#$:fun(cart(real,'N),fun(num,real)) z:cart(real,'N)) i:num))))))) ((#==>:fun(bool,fun(bool,bool)) ((#=:fun(real,fun(real,bool)) ((#$:fun(cart(real,'N),fun(num,real)) u:cart(real,'N)) j:num)) ((#$:fun(cart(real,'N),fun(num,real)) x:cart(real,'N)) j:num))) ((#==>:fun(bool,fun(bool,bool)) ((#ALL:fun(fun(fun(cart(real,'N),real),bool),fun(list(fun(cart(real,'N),real)),bool)) (\f:fun(cart(real,'N),real). ((#/\:fun(bool,fun(bool,bool)) ((#diff2c_domain:fun(prod(cart(real,'N),cart(real,'N)),fun(fun(cart(real,'N),real),bool)) domain:prod(cart(real,'N),cart(real,'N))) f:fun(cart(real,'N),real))) (#!:fun(fun(cart(real,'N),bool),bool) (\y:cart(real,'N). ((#==>:fun(bool,fun(bool,bool)) ((#IN:fun(cart(real,'N),fun(fun(cart(real,'N),bool),bool)) y:cart(real,'N)) (#closed_interval:fun(list(prod(cart(real,'N),cart(real,'N))),fun(cart(real,'N),bool)) ((#CONS:fun(prod(cart(real,'N),cart(real,'N)),fun(list(prod(cart(real,'N),cart(real,'N))),list(prod(cart(real,'N),cart(real,'N))))) domain:prod(cart(real,'N),cart(real,'N))) #NIL:list(prod(cart(real,'N),cart(real,'N))))))) ((#real_le:fun(real,fun(real,bool)) (((#partial:fun(num,fun(fun(cart(real,'N),real),fun(cart(real,'N),real))) j:num) f:fun(cart(real,'N),real)) y:cart(real,'N))) (#real_of_num:fun(num,real) (#NUMERAL:fun(num,num) #_0:num))))))))) fs:list(fun(cart(real,'N),real)))) ((#==>:fun(bool,fun(bool,bool)) ((#m_cell_list_pass:fun(list(fun(cart(real,'N),real)),fun(prod(cart(real,'N),cart(real,'N)),bool)) fs:list(fun(cart(real,'N),real))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) u:cart(real,'N)))) ((#m_cell_list_pass:fun(list(fun(cart(real,'N),real)),fun(prod(cart(real,'N),cart(real,'N)),bool)) fs:list(fun(cart(real,'N),real))) ((#,:fun(cart(real,'N),fun(cart(real,'N),prod(cart(real,'N),cart(real,'N)))) x:cart(real,'N)) z:cart(real,'N))))))))))))))))))))
+M_verifier.ZERO_EQ_ZERO_CONST =  |- ((#=:fun(num,fun(num,bool)) (#NUMERAL:fun(num,num) #_0:num)) #_0:num)
+types = multivector/1 matroid/1 group/1 frag/1 metric/1 net/1 topology/1 tybit1/1 tybit0/1 finite_prod/2 finite_diff/2 finite_sum/2 cart/2 finite_image/1 int/0 real/0 hreal/0 nadd/0 char/0 list/1 option/1 sum/2 recspace/1 num/0 ind/0 prod/2 1/0 bool/0 fun/2
+constants = m_cell_list_pass m_cell_pass test_domain_xi m_taylor_interval second_bounded diff2c_domain diff2_domain m_bounded_on_int m_cell_domain diff2c diff2 partial2 m_taylor_partial_error m_taylor_error m_lin_approx all_n partial cell_domain taylor_interval has_bounded_second_derivative lin_approx nth_diff_strong_int nth_diff_strong nth_diff_weak nth_differentiable_on_int nth_differentiable_on nth_differentiable nth_derivative derivative distn leqif uphalf half HALF double odd iteri iter minn maxn relU preim predD predC predU predI predT pred0 subrel subpred XOR isSome associative idempotent commutative self_inverse rev_left_loop left_loop right_distributive left_commutative right_zero left_id rev_right_loop right_loop left_distributive right_commutative left_zero right_id right_injective left_injective right_inverse left_inverse involutive bijective ocancel pcancel cancel injective pcomp omap obind odflt oapp ssreflect_eq error_mul_f1 error_mul_f2 list_sum2 list_sum ddmatan dmatan matan halfatn4 halfatn poly_f_odd poly_f_even poly_f real_zero l_seq TABLE REVERSE_TABLE mod_plus arith_base float_num min_exp interval_gt interval_neg interval_pos interval_not_zero iabs bounded_on_int bounded_on interval_arith num_exp D199 D198 D197 D196 D195 D194 D193 D192 D191 D190 D189 D188 D187 D186 D185 D184 D183 D182 D181 D180 D179 D178 D177 D176 D175 D174 D173 D172 D171 D170 D169 D168 D167 D166 D165 D164 D163 D162 D161 D160 D159 D158 D157 D156 D155 D154 D153 D152 D151 D150 D149 D148 D147 D146 D145 D144 D143 D142 D141 D140 D139 D138 D137 D136 D135 D134 D133 D132 D131 D130 D129 D128 D127 D126 D125 D124 D123 D122 D121 D120 D119 D118 D117 D116 D115 D114 D113 D112 D111 D110 D109 D108 D107 D106 D105 D104 D103 D102 D101 D100 D99 D98 D97 D96 D95 D94 D93 D92 D91 D90 D89 D88 D87 D86 D85 D84 D83 D82 D81 D80 D79 D78 D77 D76 D75 D74 D73 D72 D71 D70 D69 D68 D67 D66 D65 D64 D63 D62 D61 D60 D59 D58 D57 D56 D55 D54 D53 D52 D51 D50 D49 D48 D47 D46 D45 D44 D43 D42 D41 D40 D39 D38 D37 D36 D35 D34 D33 D32 D31 D30 D29 D28 D27 D26 D25 D24 D23 D22 D21 D20 D19 D18 D17 D16 D15 D14 D13 D12 D11 D10 D9 D8 D7 D6 D5 D4 D3 D2 D1 D0 NUM200 real_variation has_bounded_real_variation_on real_lebesgue_measurable real_measurable_on bernoulli vector_polynomial_function real_polynomial_function bernstein slice real_measure real_measurable has_real_measure absolutely_real_integrable_on real_negligible real_integral real_integrable_on has_real_integral real_log_convex_on log_convex_on real_convex_on open_real_segment closed_real_segment has_liminf has_limsup real_differentiable_on higher_real_derivative real_derivative real_differentiable has_real_derivative real_uniformly_continuous_on real_continuous_on real_continuous atreal binom rpow root acs asn cacs casn atn catn unwinding cpow clog tan ctan rotate2d Arg pi log cos sin exp csin ccos cexp analytic_on holomorphic_on higher_complex_derivative complex_derivative complex_differentiable has_complex_derivative cproduct real csqrt cnj complex_pow complex_div complex_inv complex_mul ii Cx complex Im Re lebesgue_measurable measurable_on measure measurable has_measure path_length rectifiable_path absolutely_continuous_on absolutely_setcontinuous_on vector_variation has_bounded_variation_on equiintegrable_on absolutely_integrable_on has_bounded_setvariation_on set_variation negligible division_points lifted operative integral integrable_on has_integral has_integral_compact_interval fine tagged_division_of tagged_partial_division_of division_of gauge content interval_lowerbound interval_upperbound reversion outermorphism seqiterate inner outer geom_mul Product grade multivector multivec mbasis lambdas $$ codeset setcode dest_multivector mk_multivector binarysum bitset vector_derivative has_vector_derivative jacobian frechet_derivative differentiable_on differentiable has_derivative interval_bij ENR ANR AR retract_of retraction brouwer_degree brouwer_degree1 triangulation simplicial_complex simplex polyhedron polytope edge_of facet_of extreme_point_of exposed_face_of face_of covering_space dimension contractible homotopy_equivalent fundamental_group simply_connected homotopic_loops homotopic_paths outside inside path_connected path_components path_component linepath subpath shiftpath arc simple_path ++ reversepath path_image pathfinish pathstart path barycentre relative_frontier relative_interior starlike epigraph convex_cone polar_dual aff_dim convex_on coplanar affine_dependent conic convex affine analytic borel_measurable_on baire borel fsigma gdelta locally hausdist setdist closest_point summable infsum sums homeomorphic homeomorphism is_interval diameter components connected_component uniformly_continuous_on continuous_on continuous complete cauchy compact bounded condensation_point_of lim --> in_direction at_neginfinity at_posinfinity at_infinity at frontier closure interior limit_point_of connected open_segment closed_segment manhattan sphere cball ball closed euclidean_metric euclidean open reflect_along rotoinversion_matrix rotation_matrix orthogonal_matrix orthogonal_transformation positive_definite positive_semidefinite diagonal_matrix cofactor det trace sign evenperm permutation swapseq three_cycle swap inverse permutes closed_interval open_interval midpoint between collinear infnorm matrix_inv rank columnvector rowvector euclidean_matroid dim independent dependent span subspace pushin dropout indicator drop lift onorm matrix invertible normal_matrix symmetric_matrix columns rows column row transp mat vector_matrix_mul matrix_vector_mul matrix_mul matrix_sub matrix_add matrix_neg %% adjoint bilinear linear orthogonal basis vsum distance vector_norm dot vec % vector_neg vector_sub vector_add matroid_dim matroid_finite_dim matroid_dimension matroid_finite_dimensional submatroid matroid_subspace matroid_dependent matroid_basis matroid_independent matroid_spanning matroid_span matroid_set dest_matroid matroid brouwer_degree2 reduced_homology_group hom_relboundary hom_induced hom_boundary homology_group relative_homology_group relcycle_group chain_group singular_subdivision simplicial_subdivision simplicial_vertex simplicial_cone simplex_cone simplicial_chain simplicial_simplex oriented_simplex chain_map simplex_map homologous_rel singular_relboundary singular_relcycle mod_subset chain_boundary singular_chain singular_face singular_simplex simplicial_face standard_simplex short_exact_sequence group_exactness solvable_group free_abelian_group pgroup integer_mod_group integer_group finitely_generated_group cyclic_group group_element_order trivial_homomorphism group_image group_kernel quotient_group group_normalizer group_centralizer group_conjugate normal_subgroup_of left_coset right_coset group_orbit group_stabilizer group_action group_setmul group_setinv isomorphic_group group_automorphism group_isomorphism group_isomorphisms group_endomorphism group_epimorphism group_monomorphism group_homomorphism sum_group product_group prod_group subgroup_generated subgroup_of group_conjugation group_sum group_product group_nmul group_add group_neg abelian_group group_zpow group_pow group_div opposite_group trivial_group singleton_group group_mul group_inv group_id group_carrier group_operations group index frag_extend frag_sub frag_add frag_cmul frag_neg frag_of frag_0 frag_support dest_frag mk_frag cantor_set cantor_map cantor_term cantor_space dimension_le sigma_locally_finite_in paracompact_space cfunspace funspace nsphere euclidean_space capped_metric fccoverable_in ulc_space fccoverable_space mdiameter cauchy_continuous_map uniformly_continuous_map lipschitz_continuous_map prod_metric completely_metrizable_space contractible_space homotopy_equivalent_space homotopic_with alexandroff_compactification kification k_space quasi_components_of quasi_component_of locally_connected_space locally_connected_at weakly_locally_connected_at locally_path_connected_space locally_path_connected_at weakly_locally_path_connected_at completely_regular_space normal_space path_components_of path_component_of path_connected_in path_connected_space path_in real_summable real_infsum real_sums reallim ---> topcontinuous_at totally_bounded_in mcomplete cauchy_in limit atpointof real_compact real_bounded real_euclidean_metric euclideanreal real_closed real_open locally_compact_space regular_space kolmogorov_quotient t0_space neighbourhood_base_of neighbourhood_base_at monotone_map connected_components_of connected_component_of separated_between connected_in connected_space metrizable_space discrete_metric mbounded msphere mcball mtopology submetric mball mdist mspace dest_metric metric is_metric_space borel_measurable_map borel_in gdelta_in fsigma_in sequentially trivial_limit eventually within netlimit netlimits netfilter dest_net mk_net separable_space first_countable second_countable lindelof_space perfect_map proper_map kc_space hausdorff_space t1_space separated_in compact_space compact_in retract_of_space retraction_map section_map retraction_maps embedding_map homeomorphic_space homeomorphic_maps homeomorphic_map sum_topology product_topology prod_topology quotient_map closed_map open_map continuous_map locally_finite_in frontier_of interior_of closure_of derived_set_of hereditarily subtopology discrete_space discrete_topology closed_in topspace open_in topology istopology ITER suslin suslin_operation relative_to from hull matrify vectorize closed_real_interval open_real_interval is_realinterval frac floor rational ^_c *_c +_c ordinal linseg inseg properly strictly antichain chain wqoset woset toset poset qoset fld superadmissible tailadmissible admissible CASEWISE PCROSS vector mktybit1 _100531 _dest_tybit1 _mk_tybit1 mktybit0 _100512 _dest_tybit0 _mk_tybit0 dest_finite_prod mk_finite_prod dest_finite_diff mk_finite_diff sndcart fstcart pastecart dest_finite_sum mk_finite_sum lambda $ dest_cart mk_cart dest_finite_image finite_index dimindex polynomial_function sum nsum isum product iproduct nproduct iterato iterate support monoidal neutral .. has_sup has_inf inf sup COUNTABLE >_c >=_c =_c <_c <=_c ARBITRARY INTERSECTION_OF UNION_OF pairwise list_of_set set_of_list disjoint_union product_map cartesian_product RESTRICTION EXTENSIONAL ARB CROSS HAS_SIZE CARD ITSET FINREC REST CHOICE BIJ SURJ INJ IMAGE INFINITE FINITE SING DISJOINT PSUBSET SUBSET DELETE DIFF INTERS INTER UNIONS UNION UNIV INSERT EMPTY SETSPEC GSPEC IN real_zpow prime num_lcm num_gcd num_coprime num_mod num_divides num_of_int int_lcm int_gcd int_coprime int_mod int_divides real_mod == rem div int_pow int_min int_max int_sgn int_abs int_mul int_sub int_add int_neg int_of_num int_gt int_ge int_lt int_le real_of_int int_of_real integer DECIMAL sqrt real_sgn real_min real_max real_div real_pow real_abs real_gt real_ge real_lt real_sub real_inv real_le real_mul real_add real_neg real_of_num dest_real mk_real treal_eq treal_inv treal_le treal_mul treal_add treal_neg treal_of_num hreal_inv hreal_le hreal_mul hreal_add hreal_of_num dest_hreal mk_hreal nadd_inv nadd_rinv nadd_mul nadd_add nadd_le nadd_of_num nadd_eq dest_nadd mk_nadd is_nadd dist ASCII _22943 _dest_char _mk_char list_of_seq PAIRWISE ALLPAIRS ZIP ITLIST2 ASSOC FILTER EL MAP2 ALL2 MEM ITLIST EX ALL NULL REPLICATE BUTLAST LAST MAP LENGTH REVERSE APPEND TL HD ISO CONS NIL _dest_list _mk_list SOME NONE _dest_option _mk_option OUTR OUTL INR INL _dest_sum _mk_sum FNIL FCONS CONSTR BOTTOM _dest_rec _mk_rec ZRECSPACE ZBOT ZCONSTR INJP INJF INJA INJN NUMRIGHT NUMLEFT NUMSUM NUMSND NUMFST NUMPAIR MEASURE WF minimal MOD DIV FACT - ODD EVEN MIN MAX > >= < <= EXP * + PRE BIT1 BIT0 NUMERAL SUC _0 dest_num mk_num NUM_REP IND_0 IND_SUC ONTO ONE_ONE PASSOC UNCURRY CURRY SND FST , REP_prod ABS_prod mk_pair _FUNCTION _MATCH _GUARDED_PATTERN _UNGUARDED_PATTERN _SEQPATTERN GEQ GABS LET_END LET hashek one one_REP one_ABS I o COND @ _FALSITY_ ?! ~ F \/ ? ! ==> /\ T =
+definitions = 1152
+Warning: inventing type variables
+counter_tyvar = zz_counter:'?2012070
+counter_genvar = _3726905:bool

@@ -1,0 +1,69 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/informal/informal_search"
+
+import {
+  "bobzhang/hol_light/formal_ineqs/informal/informal_taylor",
+  "bobzhang/hol_light/formal_ineqs/verifier/certificate",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/bigint",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn check_cell(SearchOptions, @informal_taylor.MCellDomain) -> ((@list.List[FunctionInfo]) -> Result raise) raise
+
+pub fn construct_certificate(SearchOptions, @informal_taylor.MCellDomain, @list.List[((Int64) -> ((@list.List[(Bool, @bigint.BigInt, Int64)]) -> ((@list.List[(Bool, @bigint.BigInt, Int64)]) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise) raise) raise, (Int64) -> ((Int64) -> ((@informal_taylor.MCellDomain) -> @informal_taylor.MTaylorInterval raise) raise) raise)]) -> @certificate.ResultTree raise
+
+pub fn construct_certificate0(SearchOptions) -> ((@informal_taylor.MCellDomain) -> ((@list.List[FunctionInfo]) -> @certificate.ResultTree raise) raise) raise
+
+pub fn[TA] error(String, @informal_taylor.MCellDomain, @list.List[FunctionInfo]) -> TA raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash] find_max(@list.List[TA]) -> (TA, Int64) raise
+
+pub fn init_vol(@informal_taylor.MCellDomain) -> Unit raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn restrict_domain(Int64, Bool, @informal_taylor.MCellDomain) -> @informal_taylor.MCellDomain raise
+
+pub fn split_domain(Int64, Int64, @informal_taylor.MCellDomain) -> (@informal_taylor.MCellDomain, @informal_taylor.MCellDomain) raise
+
+pub fn try_mono(SearchOptions, @informal_taylor.MCellDomain, FunctionInfo, @informal_taylor.MTaylorInterval) -> Result raise
+
+pub fn update_verified_vol(@informal_taylor.MCellDomain) -> Unit raise
+
+// Errors
+pub(all) suberror Construction_error {
+  Construction_error(String, @informal_taylor.MCellDomain, @list.List[FunctionInfo])
+}
+
+// Types and methods
+pub(all) struct FunctionInfo {
+  eval0 : (Int64) -> ((@list.List[(Bool, @bigint.BigInt, Int64)]) -> ((@list.List[(Bool, @bigint.BigInt, Int64)]) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise) raise) raise
+  taylor : (Int64) -> ((Int64) -> ((@informal_taylor.MCellDomain) -> @informal_taylor.MTaylorInterval raise) raise) raise
+  index : Int64
+}
+
+pub(all) enum Result {
+  Cell_inconclusive
+  Cell_false
+  Cell_result(@certificate.ResultTree)
+  Cell_pass(Bool, FunctionInfo)
+}
+
+pub(all) struct SearchOptions {
+  raw_intervals0 : Bool
+  max_width : Double
+  max_depth : Int64
+  mono_depth : Int64
+  pp : Int64
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for SearchOptions
+pub impl @lib.OHash for SearchOptions
+
+// Type aliases
+
+// Traits

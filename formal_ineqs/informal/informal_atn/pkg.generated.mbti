@@ -1,0 +1,55 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/informal/informal_atn"
+
+import {
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/bigint",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn atn_float_hi(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn atn_float_lo(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn atn_float_pos_high(Int64) -> (((Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise) raise
+
+pub fn atn_float_pos_low(Int64) -> (((Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise) raise
+
+pub fn atn_interval(Int64, ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+pub fn atn_tables(Int64, Int64) -> (@list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))], @list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]) raise
+
+pub fn fact(@num.Num) -> @num.Num raise
+
+pub fn halfatn4_pos_hi(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn halfatn4_pos_lo(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn halfatn_pos_hi(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn halfatn_pos_lo(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_atn_lower(Int64) -> (@list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))], @list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]) raise
+
+pub fn mk_atn_upper(Int64) -> (@list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))], @list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]) raise
+
+pub fn n_of_p_atn(Double, Int64, (Int64) -> Bool raise) -> Int64 raise
+
+pub fn pi2_approx_array() -> FixedArray[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]
+
+pub fn pi_approx_array() -> FixedArray[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]
+
+pub fn x_pow_over_fact(Double, Int64) -> Double raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

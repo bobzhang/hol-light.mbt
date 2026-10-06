@@ -1,0 +1,127 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/informal/informal_float"
+
+import {
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/num",
+  "bobzhang/hol_light/pp",
+  "moonbitlang/core/bigint",
+}
+
+// Values
+pub fn[TA, TB, TC] abs_float(TC, TA, TB) -> (Bool, TA, TB) raise
+
+pub fn add_float_hi(Int64, (Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn add_float_lo(Int64, (Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn badd(Bool, Bool) -> Bool raise
+
+pub fn dest_float(Bool, @bigint.BigInt, Int64) -> (Bool, @num.Num, Int64) raise
+
+pub fn div_float_hi(Int64, (Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn div_float_lo(Int64, (Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] eq_float((TA, @bigint.BigInt, TB), (TA, @bigint.BigInt, TB)) -> Bool raise
+
+pub fn float0() -> (Bool, @bigint.BigInt, Int64)
+
+pub fn float1() -> (Bool, @bigint.BigInt, Int64)
+
+pub fn float2() -> (Bool, @bigint.BigInt, Int64)
+
+pub fn float3() -> (Bool, @bigint.BigInt, Int64)
+
+pub fn float4() -> (Bool, @bigint.BigInt, Int64)
+
+pub fn float_of_ifloat((Bool, @bigint.BigInt, Int64)) -> Double raise
+
+pub fn[TA] ge0_float(Bool, @bigint.BigInt, TA) -> Bool raise
+
+pub fn[TA] gt0_float(Bool, @bigint.BigInt, TA) -> Bool raise
+
+pub fn hi_float(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn ifloat_of_float(Int64) -> ((Double) -> (Bool, @bigint.BigInt, Int64) raise) raise
+
+pub fn inv_float_hi(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn inv_float_lo(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn[TA] le0_float(Bool, @bigint.BigInt, TA) -> Bool raise
+
+pub fn le_float((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> Bool raise
+
+pub fn lo_float(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn[TA] lt0_float(Bool, @bigint.BigInt, TA) -> Bool raise
+
+pub fn lt_float((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> Bool raise
+
+pub fn make_float(Bool, @num.Num, Int64) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn max_float((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn min_exp() -> Int64
+
+pub fn min_float((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn mk_float(Int64, Int64) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn mk_num_float(@num.Num) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn mk_small_num_float(Int64) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn mul_float_eq((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn mul_float_hi(Int64, (Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn mul_float_lo(Int64, (Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn[TA, TB] neg_float(Bool, TA, TB) -> (Bool, TA, TB) raise
+
+pub fn num_exp_add((@bigint.BigInt, Int64)) -> (((@bigint.BigInt, Int64)) -> (@bigint.BigInt, Int64) raise) raise
+
+pub fn num_exp_le((@bigint.BigInt, Int64)) -> (((@bigint.BigInt, Int64)) -> Bool raise) raise
+
+pub fn num_exp_lt((@bigint.BigInt, Int64)) -> (((@bigint.BigInt, Int64)) -> Bool raise) raise
+
+pub fn num_exp_sub((@bigint.BigInt, Int64)) -> (((@bigint.BigInt, Int64)) -> ((@bigint.BigInt, Int64), Bool) raise) raise
+
+pub fn num_of_ifloat((Bool, @bigint.BigInt, Int64)) -> @num.Num raise
+
+pub fn pow_float_hi(Int64, Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn pow_float_lo(Int64, Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn pow_float_pos_hi(Int64, Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn pow_float_pos_lo(Int64, Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn print_ifloat((Bool, @bigint.BigInt, Int64)) -> Unit raise
+
+pub fn print_ifloat_fmt(@pp.Formatter, (Bool, @bigint.BigInt, Int64)) -> Unit raise
+
+pub fn sign_float(Bool, @bigint.BigInt, Int64) -> Bool raise
+
+pub fn sqrt_float_hi(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn sqrt_float_lo(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn sub_float_hi(Int64, (Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn sub_float_lo(Int64, (Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+pub type Ifloat = (Bool, @bigint.BigInt, Int64)
+
+// Traits

@@ -1,0 +1,82 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/informal/informal_sin_cos"
+
+import {
+  "bobzhang/hol_light/num",
+  "moonbitlang/core/bigint",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn correct_ab_sum(Int64, (Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> (Int64, (Bool, @bigint.BigInt, Int64)) raise
+
+pub fn correct_neg_pi(Int64, (Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+pub fn correct_pi(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn cos_high_raw(Int64) -> (((Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise) raise
+
+pub fn cos_interval(Int64, ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+pub fn cos_low_raw(Int64) -> (((Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise) raise
+
+pub fn cos_tables(Int64, Int64) -> (@list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))], @list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]) raise
+
+pub fn eval_high_0_pi(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn eval_high_neg_pi_0(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn eval_high_pi_2pi(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn eval_low_0_pi(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn eval_low_neg_pi_0(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn eval_low_pi_2pi(Int64, (Bool, @bigint.BigInt, Int64)) -> (Bool, @bigint.BigInt, Int64) raise
+
+pub fn fact(@num.Num) -> @num.Num raise
+
+pub fn get_i((Bool, @bigint.BigInt, Int64)) -> Int64 raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_cos_lower(Int64) -> (@list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))], @list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]) raise
+
+pub fn mk_cos_upper(Int64) -> (@list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))], @list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]) raise
+
+pub fn n_of_p_cos(Double, Int64, (Int64) -> Bool raise) -> Int64 raise
+
+pub fn neg_one() -> (Bool, @bigint.BigInt, Int64)
+
+pub fn neg_pi_array() -> FixedArray[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]
+
+pub fn one() -> (Bool, @bigint.BigInt, Int64)
+
+pub fn pi32_array() -> FixedArray[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]
+
+pub fn reduction_neg(Int64, Int64, (Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+pub fn reduction_pos(Int64, Int64, (Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+pub fn[TA, TB] reduction_zero(TA, TB) -> (TA, TB) raise
+
+pub fn sin_interval(Int64, ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+pub fn translate_pi2(Int64, ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))) -> ((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64)) raise
+
+pub fn two_pi_array() -> FixedArray[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]
+
+pub fn x_pow_over_fact(Double, Int64) -> Double raise
+
+// Errors
+pub(all) suberror Correction_failed {
+  Correction_failed
+}
+
+// Types and methods
+
+// Type aliases
+
+// Traits
