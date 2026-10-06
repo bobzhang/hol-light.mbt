@@ -1,7 +1,7 @@
 # TODO
 
-State at the pause (2026-10-04). PLAN.md has the design and the history;
-this file is what to do next.
+State on 2026-10-06. PLAN.md has the design and the history; this file is
+what to do next.
 
 ## Done
 
@@ -9,11 +9,8 @@ this file is what to do next.
 - Library/: every file except `tactician_light.ml`.
 - Multivariate/: all 32 theory files (make.ml/make_complex.ml order, plus the
   12 others loaded after their anchor).
-- 100/: 59 of 67 files. Left: cubic (Complex, now possible), buffon
-  (Probability), dirichlet and pnt (Examples/mangoldt.ml), piseries
-  (Examples/machin.ml), thales and ceva (Examples/sos.ml), and
-  e_is_transcendental (fails upstream).
-- Complex/: all 9 files, loaded in make.ml's order.
+- 100/: 66 of 67 files (e_is_transcendental fails upstream).
+- The directories README.md lists, each in its make.ml's order.
 - Each translated file loads identically to upstream (theorem statements,
   constants, counters) and asserts no axiom but upstream's three
   (`@testkit.check_axioms`): `tools/test.py all` (wasm-gc, 25 min on 24
@@ -35,7 +32,9 @@ session (forked children per file), then runs the new tests with
 
 ## Plan to finish
 
-Upstream has about 1.25M lines; 500K are ported. What is left, in the
+Upstream has about 1.31M lines; 1.12M are ported (85%). What is left
+is in steps 8 and 9: Formal_ineqs (44K), miz3 with
+RichterHilbertAxiomGeometry (36K), Mizarlight, QBF. The steps, in the
 order to do it (dependencies first, cheap before expensive). Every step
 is the same loop: `batch.py --files ...` in batches of 10-15 files,
 `tools/test.py <tier>`, commit. Check a directory for external programs
@@ -64,13 +63,12 @@ and file I/O before starting it.
    work per directory: Complex needed five additions (over-applied
    primitives, unqualified Format functions, `Num.string_of_num`, weak type
    variables in lifted local functions, rewrite nets with other payloads).
-5. **Examples/** (30K; 45 of 50 done) and Logic/ (done). The other five
-   Examples/ files and 100/thales, ceva wait for step 8 (csdp, Minisat,
-   Cadical, miz3, Rqe's examples).
+5. **Examples/** (30K; 48 of 50 done) and Logic/ (done). Left:
+   inverse_bug_puzzle_miz3.ml (miz3, step 8) and update_database.ml (not a
+   theory).
 6. **Directories on top of Multivariate/**: Quaternions, Geometric_Algebra,
-   Functionspaces, Unity, Jordan and Probability are done. Mizarlight,
-   RichterHilbertAxiomGeometry (36K; needs miz3) and WZ (maxima) wait for
-   step 8.
+   Functionspaces, Unity, Jordan and Probability are done. Mizarlight and
+   RichterHilbertAxiomGeometry (36K; needs miz3) wait for step 8.
    A background job is stopped after two hours: split a long batch with
    `--translate-only`, then `--resume` (and check finished files in a
    second clone meanwhile); a single file that takes longer
@@ -97,10 +95,14 @@ and file I/O before starting it.
      uses it (csdp): 100/thales, ceva, Examples/solovay, Tutorial/Vectors,
      Custom_tactics, Defining_new_types. The reference toolchain needs
      those programs on PATH (README).
-   - Minisat/test.ml also runs zChaff (licence to accept: not installed);
-     minisat_prove's test has three SAT_PROVE checks instead.
-   - Left with a program: WZ/ and Tutorial/Linking_external_tools.ml
-     (maxima), QBF/ (squolem), LP_arith/ (cdd), Examples/prover9.ml.
+     Also done with it: WZ/ and Tutorial/Linking_external_tools.ml
+     (maxima), LP_arith/ (cddlib's `cdd_cert`), Examples/prover9.ml
+     (Prover9, prooftrans).
+   - Minisat/test.ml also runs zChaff (to download by hand from Princeton,
+     licence to accept: not installed); minisat_prove's test has three
+     SAT_PROVE checks instead.
+   - QBF/ needs squolem, which exists only as x86 Linux and Windows
+     binaries: not on this machine.
    - miz3 (miz3/miz3.ml, 1.9K lines; then RichterHilbertAxiomGeometry/,
      36K, and Examples/inverse_bug_puzzle_miz3.ml): not a matter of
      installing a tool. A miz3 proof is a string, and the OCaml in it
