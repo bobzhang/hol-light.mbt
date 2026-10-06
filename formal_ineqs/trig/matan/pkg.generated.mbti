@@ -1,0 +1,59 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/trig/matan"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn ddmatan() -> @kernel.Thm
+
+pub fn dmatan() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn log_matan_series() -> @kernel.Thm
+
+pub fn matan() -> @kernel.Thm
+
+pub fn matan_abs1_bound() -> @kernel.Thm
+
+pub fn matan_d2_bound() -> @kernel.Thm
+
+pub fn matan_d2_bound_01() -> @kernel.Thm
+
+pub fn matan_d2_bound_ge1_high() -> @kernel.Thm
+
+pub fn matan_d2_bound_ge1_low() -> @kernel.Thm
+
+pub fn matan_d2_bound_neg_high() -> @kernel.Thm
+
+pub fn matan_d2_bound_neg_low() -> @kernel.Thm
+
+pub fn matan_has_derivative2_gt0() -> @kernel.Thm
+
+pub fn matan_has_derivative_gt0() -> @kernel.Thm
+
+pub fn matan_power_series() -> @kernel.Thm
+
+pub fn matan_real_derivative_abs1() -> @kernel.Thm
+
+pub fn matan_real_derivative_abs1_bound() -> @kernel.Thm
+
+pub fn matan_real_derivative_gt0() -> @kernel.Thm
+
+pub fn matan_second_derivative_abs1() -> @kernel.Thm
+
+pub fn matan_second_derivative_abs1_alt() -> @kernel.Thm
+
+pub fn matan_second_derivative_gt0() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

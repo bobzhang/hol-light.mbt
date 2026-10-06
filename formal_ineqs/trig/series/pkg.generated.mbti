@@ -1,0 +1,147 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/trig/series"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abs_neg_one_pow() -> @kernel.Thm
+
+pub fn abs_neg_one_pow_v1() -> @kernel.Thm
+
+pub fn abs_neg_pow() -> @kernel.Thm
+
+pub fn abs_neg_pow_v1() -> @kernel.Thm
+
+pub fn abs_sum_lemma_neg() -> @kernel.Thm
+
+pub fn abs_sum_lemma_pos() -> @kernel.Thm
+
+pub fn alt_sign_abs_bound() -> @kernel.Thm
+
+pub fn alt_sign_bound() -> @kernel.Thm
+
+pub fn alt_sign_converges() -> @kernel.Thm
+
+pub fn alt_sign_converges2() -> @kernel.Thm
+
+pub fn alt_sign_lower_bound() -> @kernel.Thm
+
+pub fn alt_sign_summable() -> @kernel.Thm
+
+pub fn alt_sign_upper_bound() -> @kernel.Thm
+
+pub fn atn_derivative_series() -> @kernel.Thm
+
+pub fn atn_infsum() -> @kernel.Thm
+
+pub fn atn_series() -> @kernel.Thm
+
+pub fn cos_infsum() -> @kernel.Thm
+
+pub fn cos_series() -> @kernel.Thm
+
+pub fn exp_infsum() -> @kernel.Thm
+
+pub fn exp_series() -> @kernel.Thm
+
+pub fn has_real_integral_pow_neg() -> @kernel.Thm
+
+pub fn has_real_integral_pow_pos() -> @kernel.Thm
+
+pub fn integral_series() -> @kernel.Thm
+
+pub fn integral_uniform_limit() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn log_derivative_series() -> @kernel.Thm
+
+pub fn log_infsum() -> @kernel.Thm
+
+pub fn log_series() -> @kernel.Thm
+
+pub fn n_le_pow_lemma() -> @kernel.Thm
+
+pub fn power_series_derivative_shift() -> @kernel.Thm
+
+pub fn power_series_derivative_shift_lemma() -> @kernel.Thm
+
+pub fn power_series_has_derivative() -> @kernel.Thm
+
+pub fn power_series_has_derivative2() -> @kernel.Thm
+
+pub fn power_series_integral() -> @kernel.Thm
+
+pub fn power_series_integral2() -> @kernel.Thm
+
+pub fn power_series_simple_bound() -> @kernel.Thm
+
+pub fn power_series_simple_bound2() -> @kernel.Thm
+
+pub fn power_series_uniform() -> @kernel.Thm
+
+pub fn power_sum_derivative_shift_lemma() -> @kernel.Thm
+
+pub fn power_sum_derivative_shift_lemma2() -> @kernel.Thm
+
+pub fn power_sum_derivative_shift_lemma3() -> @kernel.Thm
+
+pub fn real_infsum_offset() -> @kernel.Thm
+
+pub fn real_infsum_offset_alt() -> @kernel.Thm
+
+pub fn real_summable_image() -> @kernel.Thm
+
+pub fn real_summable_lmul_eq() -> @kernel.Thm
+
+pub fn real_sums_i_xi() -> @kernel.Thm
+
+pub fn real_sums_image() -> @kernel.Thm
+
+pub fn real_sums_image_even() -> @kernel.Thm
+
+pub fn real_sums_image_odd() -> @kernel.Thm
+
+pub fn real_sums_neg_i_xi() -> @kernel.Thm
+
+pub fn real_sums_neg_xi() -> @kernel.Thm
+
+pub fn real_sums_simple_bound() -> @kernel.Thm
+
+pub fn real_sums_simple_bound2() -> @kernel.Thm
+
+pub fn sign_mul_lemma() -> @kernel.Thm
+
+pub fn sin_infsum() -> @kernel.Thm
+
+pub fn sin_series() -> @kernel.Thm
+
+pub fn strict_increasing_num_inj() -> @kernel.Thm
+
+pub fn strict_increasing_num_le() -> @kernel.Thm
+
+pub fn strict_increasing_num_le2() -> @kernel.Thm
+
+pub fn strict_increasing_num_le_eq() -> @kernel.Thm
+
+pub fn strict_increasing_num_lt() -> @kernel.Thm
+
+pub fn strict_increasing_num_lt_eq() -> @kernel.Thm
+
+pub fn sum_bound_lemma() -> @kernel.Thm
+
+pub fn summable_power_series_derivative() -> @kernel.Thm
+
+pub fn summable_power_series_shift() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

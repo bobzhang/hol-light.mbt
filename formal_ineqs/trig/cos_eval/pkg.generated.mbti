@@ -1,0 +1,173 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/trig/cos_eval"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn a1_case1() -> @kernel.Thm
+
+pub fn a1_case2() -> @kernel.Thm
+
+pub fn a_b_correction() -> @kernel.Thm
+
+pub fn a_neg_pi_correction() -> @kernel.Thm
+
+pub fn a_pi_correction1() -> @kernel.Thm
+
+pub fn a_pi_correction2() -> @kernel.Thm
+
+pub fn ab_sum1_correction() -> @kernel.Thm
+
+pub fn ab_sum2_correction() -> @kernel.Thm
+
+pub fn ab_sum3_correction() -> @kernel.Thm
+
+pub fn ab_sum4_correction() -> @kernel.Thm
+
+pub fn b1_interval_0_pi_1() -> @kernel.Thm
+
+pub fn b1_interval_0_pi_2() -> @kernel.Thm
+
+pub fn b1_interval_neg_pi_0() -> @kernel.Thm
+
+pub fn b1_interval_pi_2pi() -> @kernel.Thm
+
+pub fn case_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn correct_ab(@kernel.Thm) -> ((@kernel.Term) -> ((@kernel.Term) -> ((@kernel.Term) -> ((@kernel.Term) -> ((@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise) raise) raise) raise
+
+pub fn correct_ab_sum(Int64, @kernel.Term, @kernel.Term) -> (Int64, @list.List[@kernel.Thm], @kernel.Term, @kernel.Thm) raise
+
+pub fn correct_neg_pi(Int64, @kernel.Thm, @kernel.Term, @kernel.Term, @kernel.Term, @kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Thm) raise
+
+pub fn correct_pi(Int64, @kernel.Term, @kernel.Thm) -> (@list.List[@kernel.Thm], @kernel.Term, @kernel.Thm, @kernel.Thm) raise
+
+pub fn cos_2pi_minus() -> @kernel.Thm
+
+pub fn cos_case0() -> @kernel.Thm
+
+pub fn cos_case1() -> @kernel.Thm
+
+pub fn cos_case2() -> @kernel.Thm
+
+pub fn cos_case3() -> @kernel.Thm
+
+pub fn cos_case4() -> @kernel.Thm
+
+pub fn cos_case5() -> @kernel.Thm
+
+pub fn cos_case6() -> @kernel.Thm
+
+pub fn cos_case7() -> @kernel.Thm
+
+pub fn cos_case_neg1() -> @kernel.Thm
+
+pub fn cos_full_interval() -> @kernel.Thm
+
+pub fn cos_high_trivial() -> @kernel.Thm
+
+pub fn cos_low_trivial() -> @kernel.Thm
+
+pub fn cos_minus_pi() -> @kernel.Thm
+
+pub fn cos_pi_minus() -> @kernel.Thm
+
+pub fn cos_reduction_0_pi_1() -> @kernel.Thm
+
+pub fn cos_reduction_0_pi_2() -> @kernel.Thm
+
+pub fn cos_reduction_0_pi_2a() -> @kernel.Thm
+
+pub fn cos_reduction_0_pi_2b() -> @kernel.Thm
+
+pub fn cos_reduction_neg_pi_0_1() -> @kernel.Thm
+
+pub fn cos_reduction_neg_pi_0_2() -> @kernel.Thm
+
+pub fn cos_reduction_neg_pi_0_2a() -> @kernel.Thm
+
+pub fn cos_reduction_neg_pi_0_2b() -> @kernel.Thm
+
+pub fn eval_high_0_pi(Int64, @kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_high_neg_pi_0(Int64, @kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_high_pi_2pi(Int64, @kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_low_0_pi(Int64, @kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_low_neg_pi_0(Int64, @kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_low_pi_2pi(Int64, @kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn f_2_pi() -> Double
+
+pub fn f_pi() -> Double
+
+pub fn f_pi_2() -> Double
+
+pub fn float_interval_cos(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn get_i(@kernel.Term) -> Int64 raise
+
+pub fn interval_neg_pi_0() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn neg_pi_array() -> FixedArray[@kernel.Thm]
+
+pub fn neg_pi_le_pi_lo_array() -> FixedArray[@kernel.Thm]
+
+pub fn pi32_array() -> FixedArray[(@kernel.Thm, (@kernel.Term, @kernel.Term))]
+
+pub fn reduction_high_0_pi() -> @kernel.Thm
+
+pub fn reduction_high_neg() -> @kernel.Thm
+
+pub fn reduction_high_pi_2pi_1() -> @kernel.Thm
+
+pub fn reduction_high_pi_2pi_2() -> @kernel.Thm
+
+pub fn reduction_low_0_pi() -> @kernel.Thm
+
+pub fn reduction_low_neg() -> @kernel.Thm
+
+pub fn reduction_low_pi_2pi_1() -> @kernel.Thm
+
+pub fn reduction_low_pi_2pi_2() -> @kernel.Thm
+
+pub fn reduction_neg(Int64, Int64, @kernel.Term, @kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Thm) raise
+
+pub fn reduction_neg_th() -> @kernel.Thm
+
+pub fn reduction_pos(Int64, Int64, @kernel.Term, @kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Thm) raise
+
+pub fn reduction_pos_th() -> @kernel.Thm
+
+pub fn reduction_zero(@kernel.Term, @kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Thm) raise
+
+pub fn reduction_zero_th() -> @kernel.Thm
+
+pub fn th_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn two_pi_array() -> FixedArray[(@kernel.Thm, @kernel.Thm, (@kernel.Term, @kernel.Term))]
+
+pub fn two_pi_high() -> FixedArray[@kernel.Thm]
+
+pub fn two_pi_low() -> FixedArray[@kernel.Thm]
+
+// Errors
+pub(all) suberror Correction_failed {
+  Correction_failed
+}
+
+// Types and methods
+
+// Type aliases
+
+// Traits

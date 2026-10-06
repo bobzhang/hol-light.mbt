@@ -1,0 +1,77 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/trig/poly"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn alt_sum_eq_poly_f() -> @kernel.Thm
+
+pub fn alt_sum_eq_poly_f_even() -> @kernel.Thm
+
+pub fn alt_sum_eq_poly_f_odd() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn poly_f() -> @kernel.Thm
+
+pub fn poly_f_append() -> @kernel.Thm
+
+pub fn poly_f_cons() -> @kernel.Thm
+
+pub fn poly_f_cons_high_pos_pos() -> @kernel.Thm
+
+pub fn poly_f_cons_low_pos_pos() -> @kernel.Thm
+
+pub fn poly_f_empty() -> @kernel.Thm
+
+pub fn poly_f_empty_high_pos() -> @kernel.Thm
+
+pub fn poly_f_empty_interval() -> @kernel.Thm
+
+pub fn poly_f_empty_low_pos() -> @kernel.Thm
+
+pub fn poly_f_even() -> @kernel.Thm
+
+pub fn poly_f_even_append() -> @kernel.Thm
+
+pub fn poly_f_even_cons() -> @kernel.Thm
+
+pub fn poly_f_even_empty() -> @kernel.Thm
+
+pub fn poly_f_even_sing() -> @kernel.Thm
+
+pub fn poly_f_odd() -> @kernel.Thm
+
+pub fn poly_f_odd_append() -> @kernel.Thm
+
+pub fn poly_f_odd_empty() -> @kernel.Thm
+
+pub fn poly_f_odd_sing() -> @kernel.Thm
+
+pub fn poly_f_sing() -> @kernel.Thm
+
+pub fn poly_f_sing_high_pos() -> @kernel.Thm
+
+pub fn poly_f_sing_low_pos() -> @kernel.Thm
+
+pub fn real_zero() -> @kernel.Thm
+
+pub fn sum_eq_poly_f() -> @kernel.Thm
+
+pub fn sum_eq_poly_f_even() -> @kernel.Thm
+
+pub fn sum_eq_poly_f_odd() -> @kernel.Thm
+
+pub fn two_induct() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

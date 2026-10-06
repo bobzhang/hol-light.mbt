@@ -1,0 +1,85 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/trig/atn"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn abs_lemma() -> @kernel.Thm
+
+pub fn atn_half() -> @kernel.Thm
+
+pub fn atn_halfatn4() -> @kernel.Thm
+
+pub fn atn_halfatn4_pos_lower_bound() -> @kernel.Thm
+
+pub fn atn_halfatn4_pos_upper_bound() -> @kernel.Thm
+
+pub fn atn_poly_bound() -> @kernel.Thm
+
+pub fn atn_poly_pos_lower_bound() -> @kernel.Thm
+
+pub fn atn_poly_pos_upper_bound() -> @kernel.Thm
+
+pub fn atn_series_alt_sign() -> @kernel.Thm
+
+pub fn eq_lemma() -> @kernel.Thm
+
+pub fn halfatn() -> @kernel.Thm
+
+pub fn halfatn4() -> @kernel.Thm
+
+pub fn halfatn4_bound() -> @kernel.Thm
+
+pub fn halfatn4_pos() -> @kernel.Thm
+
+pub fn halfatn4_pos_eq() -> @kernel.Thm
+
+pub fn halfatn4_pos_lt_eq() -> @kernel.Thm
+
+pub fn halfatn_bounds_abs() -> @kernel.Thm
+
+pub fn halfatn_half() -> @kernel.Thm
+
+pub fn halfatn_mono() -> @kernel.Thm
+
+pub fn halfatn_mono_lt() -> @kernel.Thm
+
+pub fn halfatn_neg() -> @kernel.Thm
+
+pub fn halfatn_odd() -> @kernel.Thm
+
+pub fn halfatn_pos() -> @kernel.Thm
+
+pub fn halfatn_pos_eq() -> @kernel.Thm
+
+pub fn halfatn_pos_lt_eq() -> @kernel.Thm
+
+pub fn halfatn_sgn() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn pos_lemma() -> @kernel.Thm
+
+pub fn pos_lemma2() -> @kernel.Thm
+
+pub fn rat_lemma4_lt() -> @kernel.Thm
+
+pub fn real_sgn_eq_pos() -> @kernel.Thm
+
+pub fn real_sgn_eq_pos_lt() -> @kernel.Thm
+
+pub fn real_sgn_imp() -> @kernel.Thm
+
+pub fn real_taylor_atn_halfatn4() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

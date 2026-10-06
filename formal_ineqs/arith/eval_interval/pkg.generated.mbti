@@ -1,0 +1,60 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/arith/eval_interval"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn add_constant_interval(@kernel.Thm) -> Unit raise
+
+pub fn binary_interval_operations() -> @lib.OHashtbl[@kernel.Term, (Int64) -> ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise]
+
+pub fn build_interval_fun(@kernel.Term) -> IntervalFun raise
+
+pub fn eval_constants(Int64, IntervalFun) -> IntervalFun raise
+
+pub fn eval_interval_fun(Int64, IntervalFun, @list.List[(@kernel.Term, @kernel.Thm)], @list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn eval_interval_fun_list(Int64, (@list.List[IntervalFun], @list.List[IntervalFun]), @list.List[(@kernel.Term, @kernel.Thm)]) -> @list.List[@kernel.Thm] raise
+
+pub fn find_and_replace_all(@list.List[IntervalFun], @list.List[IntervalFun]) -> (@list.List[IntervalFun], @list.List[IntervalFun]) raise
+
+pub fn interval_constants() -> @lib.OHashtbl[@kernel.Term, (Int64) -> @kernel.Thm raise]
+
+pub fn interval_to_float_interval(Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn is_leaf(IntervalFun) -> Bool raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_float_interval_decimal(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn replace_subexpr(IntervalFun, Int64, @list.List[IntervalFun]) -> (Int64, @list.List[IntervalFun]) raise
+
+pub fn unary_interval_operations() -> @lib.OHashtbl[@kernel.Term, (Int64) -> ((@kernel.Thm) -> @kernel.Thm raise) raise]
+
+// Errors
+
+// Types and methods
+pub(all) enum IntervalFun {
+  Int_ref(Int64)
+  Int_var(@kernel.Term)
+  Int_const(@kernel.Thm)
+  Int_decimal_const(@kernel.Term)
+  Int_named_const(@kernel.Term)
+  Int_pow(Int64, IntervalFun)
+  Int_unary(@kernel.Term, IntervalFun)
+  Int_binary(@kernel.Term, IntervalFun, IntervalFun)
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for IntervalFun
+pub impl @lib.OHash for IntervalFun
+
+// Type aliases
+
+// Traits

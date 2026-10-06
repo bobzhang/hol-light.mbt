@@ -1,0 +1,51 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/trig/exp_log"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn exp_alt_sign_lemma() -> @kernel.Thm
+
+pub fn exp_full_reduce() -> @kernel.Thm
+
+pub fn exp_ge1() -> @kernel.Thm
+
+pub fn exp_neg_poly_lower_bound() -> @kernel.Thm
+
+pub fn exp_neg_poly_upper_bound() -> @kernel.Thm
+
+pub fn exp_pos_poly_lower_bound() -> @kernel.Thm
+
+pub fn exp_reduce() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn log_alt_sign_lemma() -> @kernel.Thm
+
+pub fn log_poly_lower_bound() -> @kernel.Thm
+
+pub fn log_poly_upper_bound() -> @kernel.Thm
+
+pub fn log_reduce_neg_pow() -> @kernel.Thm
+
+pub fn log_reduce_pos_pow() -> @kernel.Thm
+
+pub fn n_le_fact() -> @kernel.Thm
+
+pub fn neg_exp_infsum() -> @kernel.Thm
+
+pub fn neg_exp_le1() -> @kernel.Thm
+
+pub fn neg_exp_series() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

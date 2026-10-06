@@ -1,0 +1,53 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/list/more_list"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn el_butlast() -> @kernel.Thm
+
+pub fn el_l_seq() -> @kernel.Thm
+
+pub fn el_table() -> @kernel.Thm
+
+pub fn l_seq() -> @kernel.Thm
+
+pub fn l_seq_cons() -> @kernel.Thm
+
+pub fn l_seq_nil() -> @kernel.Thm
+
+pub fn l_seq_nn() -> @kernel.Thm
+
+pub fn length_butlast() -> @kernel.Thm
+
+pub fn length_l_seq() -> @kernel.Thm
+
+pub fn length_reverse() -> @kernel.Thm
+
+pub fn length_reverse_table() -> @kernel.Thm
+
+pub fn length_table() -> @kernel.Thm
+
+pub fn list_el_eq() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn reverse_table() -> @kernel.Thm
+
+pub fn table() -> @kernel.Thm
+
+pub fn table_0() -> @kernel.Thm
+
+pub fn table_suc() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
