@@ -1,0 +1,49 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/miz3/Samples/talk"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/miz3/miz3",
+  "bobzhang/hol_light/parser",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn arithmetic_progression_simple() -> @kernel.Thm
+
+pub fn example() -> @ref.Ref[@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], @miz3.Substep)]?]
+
+pub fn exec_phrase_1(Unit) -> Unit raise
+
+pub fn exec_phrase_10(Unit) -> Unit raise
+
+pub fn exec_phrase_2(Unit) -> Unit raise
+
+pub fn exec_phrase_3(Unit) -> Unit raise
+
+pub fn exec_phrase_4(Unit) -> Unit raise
+
+pub fn exec_phrase_5(Unit) -> Unit raise
+
+pub fn exec_phrase_6(Unit) -> Unit raise
+
+pub fn exec_phrase_7(Unit) -> Unit raise
+
+pub fn exec_phrase_8(Unit) -> Unit raise
+
+pub fn exec_phrase_9(Unit) -> Unit raise
+
+pub fn load() -> Unit
+
+pub fn nsum_clauses_numseg_p() -> @kernel.Thm
+
+pub fn num_induction_p() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
