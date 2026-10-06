@@ -37,9 +37,9 @@ Upstream has about 1.31M lines; 1.175M are ported (90%). Of the rest,
 them), 42K are the theorem search databases (database.ml, help.ml,
 Multivariate/*_database.ml) and 6K the Proofrecording kernel; the
 remainder is loaders, syntax extensions and test scripts (see step 8 and
-Open issues: not counted file by file). What is left to port is small
-(Mizarlight, QBF, zChaff's half of Minisat/test.ml) and step 9. The
-steps, in the
+Open issues: not counted file by file). What is left to port needs a
+program that is not here (QBF: squolem; zChaff's half of Minisat/test.ml);
+then step 9. The steps, in the
 order to do it (dependencies first, cheap before expensive). Every step
 is the same loop: `batch.py --files ...` in batches of 10-15 files,
 `tools/test.py <tier>`, commit. Check a directory for external programs
@@ -141,7 +141,12 @@ and file I/O before starting it.
      `print_to_string1`, and the editor server's functions (nothing).
      Not ported: miz3_of_hol.ml and Samples/wishes.ml (not loaded by
      test.ml).
-   - Mizarlight (its own camlp5 syntax extension, pa_f.ml).
+   - Done: Mizarlight/ (make, miz2a, duality, duality_holby). Its camlp5
+     extension (pa_f.ml: infix `by`, `st`, ...) is built by
+     tools/ocaml_ref/ensure_pa_f.sh into _build/hol_dir, the sessions'
+     `hol_dir`; make.ml is a file of its own (theory.HEADS); the two
+     duality files use the sketch prover (CHEAT_TAC) upstream
+     (theory.ASSERTS_AXIOMS).
    - Not theories, not ported: Proofrecording (a second kernel), ProofTrace,
      mcp, update_database, help.ml/database.ml, tactician_light.ml,
      UnitTests/ (test scripts; basic_tests.ml needs the zarith backend).
