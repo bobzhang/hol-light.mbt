@@ -1,0 +1,264 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/richterhilbertaxiomgeometry/inverse_bug_puzzle_read"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn basic2move_thm() -> @kernel.Thm
+
+pub fn collinear_3_2dzero() -> @kernel.Thm
+
+pub fn collinearsymmetry() -> @kernel.Thm
+
+pub fn correctfinalpoint() -> @kernel.Thm
+
+pub fn distinctimplies2moveable() -> @kernel.Thm
+
+pub fn exec_phrase_1(Unit) -> Unit raise
+
+pub fn exec_phrase_10(Unit) -> Unit raise
+
+pub fn exec_phrase_11(Unit) -> Unit raise
+
+pub fn exec_phrase_12(Unit) -> Unit raise
+
+pub fn exec_phrase_13(Unit) -> Unit raise
+
+pub fn exec_phrase_14(Unit) -> Unit raise
+
+pub fn exec_phrase_15(Unit) -> Unit raise
+
+pub fn exec_phrase_16(Unit) -> Unit raise
+
+pub fn exec_phrase_17(Unit) -> Unit raise
+
+pub fn exec_phrase_18(Unit) -> Unit raise
+
+pub fn exec_phrase_19(Unit) -> Unit raise
+
+pub fn exec_phrase_2(Unit) -> Unit raise
+
+pub fn exec_phrase_20(Unit) -> Unit raise
+
+pub fn exec_phrase_21(Unit) -> Unit raise
+
+pub fn exec_phrase_22(Unit) -> Unit raise
+
+pub fn exec_phrase_23(Unit) -> Unit raise
+
+pub fn exec_phrase_24(Unit) -> Unit raise
+
+pub fn exec_phrase_25(Unit) -> Unit raise
+
+pub fn exec_phrase_26(Unit) -> Unit raise
+
+pub fn exec_phrase_27(Unit) -> Unit raise
+
+pub fn exec_phrase_28(Unit) -> Unit raise
+
+pub fn exec_phrase_29(Unit) -> Unit raise
+
+pub fn exec_phrase_3(Unit) -> Unit raise
+
+pub fn exec_phrase_30(Unit) -> Unit raise
+
+pub fn exec_phrase_31(Unit) -> Unit raise
+
+pub fn exec_phrase_32(Unit) -> Unit raise
+
+pub fn exec_phrase_33(Unit) -> Unit raise
+
+pub fn exec_phrase_34(Unit) -> Unit raise
+
+pub fn exec_phrase_35(Unit) -> Unit raise
+
+pub fn exec_phrase_36(Unit) -> Unit raise
+
+pub fn exec_phrase_37(Unit) -> Unit raise
+
+pub fn exec_phrase_38(Unit) -> Unit raise
+
+pub fn exec_phrase_39(Unit) -> Unit raise
+
+pub fn exec_phrase_4(Unit) -> Unit raise
+
+pub fn exec_phrase_40(Unit) -> Unit raise
+
+pub fn exec_phrase_41(Unit) -> Unit raise
+
+pub fn exec_phrase_42(Unit) -> Unit raise
+
+pub fn exec_phrase_43(Unit) -> Unit raise
+
+pub fn exec_phrase_44(Unit) -> Unit raise
+
+pub fn exec_phrase_45(Unit) -> Unit raise
+
+pub fn exec_phrase_46(Unit) -> Unit raise
+
+pub fn exec_phrase_47(Unit) -> Unit raise
+
+pub fn exec_phrase_48(Unit) -> Unit raise
+
+pub fn exec_phrase_49(Unit) -> Unit raise
+
+pub fn exec_phrase_5(Unit) -> Unit raise
+
+pub fn exec_phrase_50(Unit) -> Unit raise
+
+pub fn exec_phrase_51(Unit) -> Unit raise
+
+pub fn exec_phrase_52(Unit) -> Unit raise
+
+pub fn exec_phrase_53(Unit) -> Unit raise
+
+pub fn exec_phrase_54(Unit) -> Unit raise
+
+pub fn exec_phrase_55(Unit) -> Unit raise
+
+pub fn exec_phrase_56(Unit) -> Unit raise
+
+pub fn exec_phrase_57(Unit) -> Unit raise
+
+pub fn exec_phrase_58(Unit) -> Unit raise
+
+pub fn exec_phrase_59(Unit) -> Unit raise
+
+pub fn exec_phrase_6(Unit) -> Unit raise
+
+pub fn exec_phrase_60(Unit) -> Unit raise
+
+pub fn exec_phrase_61(Unit) -> Unit raise
+
+pub fn exec_phrase_62(Unit) -> Unit raise
+
+pub fn exec_phrase_63(Unit) -> Unit raise
+
+pub fn exec_phrase_64(Unit) -> Unit raise
+
+pub fn exec_phrase_65(Unit) -> Unit raise
+
+pub fn exec_phrase_66(Unit) -> Unit raise
+
+pub fn exec_phrase_67(Unit) -> Unit raise
+
+pub fn exec_phrase_68(Unit) -> Unit raise
+
+pub fn exec_phrase_69(Unit) -> Unit raise
+
+pub fn exec_phrase_7(Unit) -> Unit raise
+
+pub fn exec_phrase_70(Unit) -> Unit raise
+
+pub fn exec_phrase_71(Unit) -> Unit raise
+
+pub fn exec_phrase_72(Unit) -> Unit raise
+
+pub fn exec_phrase_73(Unit) -> Unit raise
+
+pub fn exec_phrase_74(Unit) -> Unit raise
+
+pub fn exec_phrase_75(Unit) -> Unit raise
+
+pub fn exec_phrase_76(Unit) -> Unit raise
+
+pub fn exec_phrase_77(Unit) -> Unit raise
+
+pub fn exec_phrase_78(Unit) -> Unit raise
+
+pub fn exec_phrase_79(Unit) -> Unit raise
+
+pub fn exec_phrase_8(Unit) -> Unit raise
+
+pub fn exec_phrase_80(Unit) -> Unit raise
+
+pub fn exec_phrase_81(Unit) -> Unit raise
+
+pub fn exec_phrase_82(Unit) -> Unit raise
+
+pub fn exec_phrase_83(Unit) -> Unit raise
+
+pub fn exec_phrase_84(Unit) -> Unit raise
+
+pub fn exec_phrase_85(Unit) -> Unit raise
+
+pub fn exec_phrase_86(Unit) -> Unit raise
+
+pub fn exec_phrase_87(Unit) -> Unit raise
+
+pub fn exec_phrase_88(Unit) -> Unit raise
+
+pub fn exec_phrase_9(Unit) -> Unit raise
+
+pub fn fivemovesorless() -> @kernel.Thm
+
+pub fn fivemovesorless_strong() -> @kernel.Thm
+
+pub fn fourmovestocorrecttwo() -> @kernel.Thm
+
+pub fn fourstepmoveab() -> @kernel.Thm
+
+pub fn fourstepmoveabbareach() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn move2cond() -> @kernel.Thm
+
+pub fn move_() -> @kernel.Thm
+
+pub fn moveinvariant() -> @kernel.Thm
+
+pub fn movesymmetry() -> @kernel.Thm
+
+pub fn noncollinear_2span() -> @kernel.Thm
+
+pub fn noncollinear_3impliesdistinct() -> @kernel.Thm
+
+pub fn notenough_4() -> @kernel.Thm
+
+pub fn notmove2impliescollinear() -> @kernel.Thm
+
+pub fn notmove2impliescollinear_v1() -> @kernel.Thm
+
+pub fn oriented_area() -> @kernel.Thm
+
+pub fn oriented_area_collinear_cong() -> @kernel.Thm
+
+pub fn oriented_areasymmetry() -> @kernel.Thm
+
+pub fn reachable() -> @kernel.Thm
+
+pub fn reachableinvariant() -> @kernel.Thm
+
+pub fn reachablen() -> @kernel.Thm
+
+pub fn reachablen_clauses() -> @kernel.Thm
+
+pub fn reachablen_five() -> @kernel.Thm
+
+pub fn reachablen_four() -> @kernel.Thm
+
+pub fn reachablen_one() -> @kernel.Thm
+
+pub fn reachablen_three() -> @kernel.Thm
+
+pub fn reachablen_two() -> @kernel.Thm
+
+pub fn reachablensymmetry() -> @kernel.Thm
+
+pub fn reachlemma() -> @kernel.Thm
+
+pub fn samecdiffab() -> @kernel.Thm
+
+pub fn vec2_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

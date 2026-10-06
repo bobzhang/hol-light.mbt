@@ -141,7 +141,12 @@ CHAIN_SKIP = {"Autoformalization/planar_graph.ml": ["Library/binary.ml", "Multiv
 # Rqe/make.ml: the chain before vectors.ml has Multivariate/metric.ml, whose
 # `istopology` Library/analysis.ml (for Rqe/) then cannot define.
 UPSTREAM_CLOSURE = {"Examples/solovay.ml", "Tutorial/Vectors.ml", "Tutorial/Custom_tactics.ml",
-                    "Tutorial/Defining_new_types.ml"}
+                    "Tutorial/Defining_new_types.ml",
+                    # Topology.ml defines `istopology` itself, on
+                    # Multivariate/determinants.ml
+                    "RichterHilbertAxiomGeometry/inverse_bug_puzzle_read.ml",
+                    "RichterHilbertAxiomGeometry/Topology.ml",
+                    "RichterHilbertAxiomGeometry/from_topology.ml"}
 
 
 def chain_skip(f):

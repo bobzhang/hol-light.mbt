@@ -1,0 +1,1639 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/richterhilbertaxiomgeometry/Topology"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn ball() -> @kernel.Thm
+
+pub fn ball_subset_cball() -> @kernel.Thm
+
+pub fn cball() -> @kernel.Thm
+
+pub fn centre_in_ball() -> @kernel.Thm
+
+pub fn closed() -> @kernel.Thm
+
+pub fn closed_closure() -> @kernel.Thm
+
+pub fn closed_diff() -> @kernel.Thm
+
+pub fn closed_empty() -> @kernel.Thm
+
+pub fn closed_forall() -> @kernel.Thm
+
+pub fn closed_forall_in() -> @kernel.Thm
+
+pub fn closed_in() -> @kernel.Thm
+
+pub fn closed_in_closed() -> @kernel.Thm
+
+pub fn closed_in_closed_eq() -> @kernel.Thm
+
+pub fn closed_in_closed_inter() -> @kernel.Thm
+
+pub fn closed_in_closed_trans() -> @kernel.Thm
+
+pub fn closed_in_diff() -> @kernel.Thm
+
+pub fn closed_in_empty() -> @kernel.Thm
+
+pub fn closed_in_forall_in() -> @kernel.Thm
+
+pub fn closed_in_imp_subset() -> @kernel.Thm
+
+pub fn closed_in_injective_linear_image() -> @kernel.Thm
+
+pub fn closed_in_inter() -> @kernel.Thm
+
+pub fn closed_in_inter_closed() -> @kernel.Thm
+
+pub fn closed_in_inter_closure() -> @kernel.Thm
+
+pub fn closed_in_inters() -> @kernel.Thm
+
+pub fn closed_in_limpt() -> @kernel.Thm
+
+pub fn closed_in_refl() -> @kernel.Thm
+
+pub fn closed_in_subset() -> @kernel.Thm
+
+pub fn closed_in_subset_trans() -> @kernel.Thm
+
+pub fn closed_in_subtopology() -> @kernel.Thm
+
+pub fn closed_in_subtopology_empty() -> @kernel.Thm
+
+pub fn closed_in_subtopology_refl() -> @kernel.Thm
+
+pub fn closed_in_subtopology_union() -> @kernel.Thm
+
+pub fn closed_in_topspace() -> @kernel.Thm
+
+pub fn closed_in_trans() -> @kernel.Thm
+
+pub fn closed_in_trans_eq() -> @kernel.Thm
+
+pub fn closed_in_union() -> @kernel.Thm
+
+pub fn closed_in_unions() -> @kernel.Thm
+
+pub fn closed_in_v1() -> @kernel.Thm
+
+pub fn closed_inter() -> @kernel.Thm
+
+pub fn closed_inters() -> @kernel.Thm
+
+pub fn closed_limpt() -> @kernel.Thm
+
+pub fn closed_subset() -> @kernel.Thm
+
+pub fn closed_subset_eq() -> @kernel.Thm
+
+pub fn closed_union() -> @kernel.Thm
+
+pub fn closed_unions() -> @kernel.Thm
+
+pub fn closed_univ() -> @kernel.Thm
+
+pub fn closedclosedintrans() -> @kernel.Thm
+
+pub fn closedclosure() -> @kernel.Thm
+
+pub fn closedinclosedeq() -> @kernel.Thm
+
+pub fn closedinclosedinter() -> @kernel.Thm
+
+pub fn closedinclosedtrans() -> @kernel.Thm
+
+pub fn closedinimpsubset() -> @kernel.Thm
+
+pub fn closedininterclosed() -> @kernel.Thm
+
+pub fn closedininterclosure() -> @kernel.Thm
+
+pub fn closedinlimpt() -> @kernel.Thm
+
+pub fn closedinlimpt_alt() -> @kernel.Thm
+
+pub fn closedinrefl() -> @kernel.Thm
+
+pub fn closedinsubsettrans() -> @kernel.Thm
+
+pub fn closedinsubtopology() -> @kernel.Thm
+
+pub fn closedinsubtopologytrans() -> @kernel.Thm
+
+pub fn closedinsubtopologytranseq() -> @kernel.Thm
+
+pub fn closedinsubtopologyunion() -> @kernel.Thm
+
+pub fn closedlimpt() -> @kernel.Thm
+
+pub fn closedsubset() -> @kernel.Thm
+
+pub fn closedsubseteq() -> @kernel.Thm
+
+pub fn closure() -> @kernel.Thm
+
+pub fn closure_closed() -> @kernel.Thm
+
+pub fn closure_closure() -> @kernel.Thm
+
+pub fn closure_complement() -> @kernel.Thm
+
+pub fn closure_def() -> @kernel.Thm
+
+pub fn closure_def_v1() -> @kernel.Thm
+
+pub fn closure_empty() -> @kernel.Thm
+
+pub fn closure_eq() -> @kernel.Thm
+
+pub fn closure_eq_empty() -> @kernel.Thm
+
+pub fn closure_hull() -> @kernel.Thm
+
+pub fn closure_inter_subset() -> @kernel.Thm
+
+pub fn closure_interior() -> @kernel.Thm
+
+pub fn closure_interior_idemp() -> @kernel.Thm
+
+pub fn closure_interior_union_closed() -> @kernel.Thm
+
+pub fn closure_inters_subset() -> @kernel.Thm
+
+pub fn closure_minimal() -> @kernel.Thm
+
+pub fn closure_minimal_eq() -> @kernel.Thm
+
+pub fn closure_open_inter_superset() -> @kernel.Thm
+
+pub fn closure_subset() -> @kernel.Thm
+
+pub fn closure_subset_eq() -> @kernel.Thm
+
+pub fn closure_thm() -> @kernel.Thm
+
+pub fn closure_union() -> @kernel.Thm
+
+pub fn closure_union_frontier() -> @kernel.Thm
+
+pub fn closure_unions() -> @kernel.Thm
+
+pub fn closure_unique() -> @kernel.Thm
+
+pub fn closure_univ() -> @kernel.Thm
+
+pub fn closureclosed() -> @kernel.Thm
+
+pub fn closureclosure() -> @kernel.Thm
+
+pub fn closurecomplement() -> @kernel.Thm
+
+pub fn closureempty() -> @kernel.Thm
+
+pub fn closureeq() -> @kernel.Thm
+
+pub fn closureeqempty() -> @kernel.Thm
+
+pub fn closurehull() -> @kernel.Thm
+
+pub fn closureinterior() -> @kernel.Thm
+
+pub fn closureinteriorcomplement() -> @kernel.Thm
+
+pub fn closureinterioridemp() -> @kernel.Thm
+
+pub fn closureinteriorunionclosed() -> @kernel.Thm
+
+pub fn closureinterssubset() -> @kernel.Thm
+
+pub fn closureintersubset() -> @kernel.Thm
+
+pub fn closureminimal() -> @kernel.Thm
+
+pub fn closureminimaleq() -> @kernel.Thm
+
+pub fn closureopenintersuperset() -> @kernel.Thm
+
+pub fn closuresubset() -> @kernel.Thm
+
+pub fn closuresubseteq() -> @kernel.Thm
+
+pub fn closuretopspace() -> @kernel.Thm
+
+pub fn closureunion() -> @kernel.Thm
+
+pub fn closureunionfrontier() -> @kernel.Thm
+
+pub fn closureunions() -> @kernel.Thm
+
+pub fn closureunique() -> @kernel.Thm
+
+pub fn closureuniv() -> @kernel.Thm
+
+pub fn complement_disjoint() -> @kernel.Thm
+
+pub fn complement_duality() -> @kernel.Thm
+
+pub fn complement_duality_union() -> @kernel.Thm
+
+pub fn complement_inter_diff() -> @kernel.Thm
+
+pub fn connected() -> @kernel.Thm
+
+pub fn connected_clopen() -> @kernel.Thm
+
+pub fn connected_closed() -> @kernel.Thm
+
+pub fn connected_closed_in() -> @kernel.Thm
+
+pub fn connected_closed_in_eq() -> @kernel.Thm
+
+pub fn connected_closed_set() -> @kernel.Thm
+
+pub fn connected_closure() -> @kernel.Thm
+
+pub fn connected_def() -> @kernel.Thm
+
+pub fn connected_def_v1() -> @kernel.Thm
+
+pub fn connected_diff_open_from_closed() -> @kernel.Thm
+
+pub fn connected_disjoint_unions_open_unique() -> @kernel.Thm
+
+pub fn connected_empty() -> @kernel.Thm
+
+pub fn connected_equivalence_relation() -> @kernel.Thm
+
+pub fn connected_equivalence_relation_gen() -> @kernel.Thm
+
+pub fn connected_equivalence_relation_gen_lemma() -> @kernel.Thm
+
+pub fn connected_from_closed_union_and_inter() -> @kernel.Thm
+
+pub fn connected_from_open_union_and_inter() -> @kernel.Thm
+
+pub fn connected_induction() -> @kernel.Thm
+
+pub fn connected_induction_simple() -> @kernel.Thm
+
+pub fn connected_inter_frontier() -> @kernel.Thm
+
+pub fn connected_intermediate_closure() -> @kernel.Thm
+
+pub fn connected_open_in() -> @kernel.Thm
+
+pub fn connected_open_in_eq() -> @kernel.Thm
+
+pub fn connected_open_set() -> @kernel.Thm
+
+pub fn connected_sing() -> @kernel.Thm
+
+pub fn connected_union() -> @kernel.Thm
+
+pub fn connected_union_strong() -> @kernel.Thm
+
+pub fn connected_unions() -> @kernel.Thm
+
+pub fn connectedclopen() -> @kernel.Thm
+
+pub fn connectedclosed() -> @kernel.Thm
+
+pub fn connectedclosedhelp() -> @kernel.Thm
+
+pub fn connectedclosedin() -> @kernel.Thm
+
+pub fn connectedclosedset() -> @kernel.Thm
+
+pub fn connectedclosedsubtopology() -> @kernel.Thm
+
+pub fn connectedclosedsubtopology_alt() -> @kernel.Thm
+
+pub fn connectedclosure() -> @kernel.Thm
+
+pub fn connecteddiffopenfromclosed() -> @kernel.Thm
+
+pub fn connecteddisjointunionsopenunique() -> @kernel.Thm
+
+pub fn connecteddisjointunionsopenuniquepart1() -> @kernel.Thm
+
+pub fn connectedempty() -> @kernel.Thm
+
+pub fn connectedequivalencerelation() -> @kernel.Thm
+
+pub fn connectedequivalencerelationgen() -> @kernel.Thm
+
+pub fn connectedfromclosedunionandinter() -> @kernel.Thm
+
+pub fn connectedfromopenunionandinter() -> @kernel.Thm
+
+pub fn connectedinduction() -> @kernel.Thm
+
+pub fn connectedinductionsimple() -> @kernel.Thm
+
+pub fn connectedinterfrontier() -> @kernel.Thm
+
+pub fn connectedintermediateclosure() -> @kernel.Thm
+
+pub fn connectedopenin() -> @kernel.Thm
+
+pub fn connectedopenset() -> @kernel.Thm
+
+pub fn connectedsing() -> @kernel.Thm
+
+pub fn connectedsubtopology() -> @kernel.Thm
+
+pub fn connectedsubtopology_alt() -> @kernel.Thm
+
+pub fn connectedunion() -> @kernel.Thm
+
+pub fn connectedunions() -> @kernel.Thm
+
+pub fn connectedunionstrong() -> @kernel.Thm
+
+pub fn diff_closure_subset() -> @kernel.Thm
+
+pub fn diff_inter() -> @kernel.Thm
+
+pub fn diff_refl() -> @kernel.Thm
+
+pub fn diff_subset() -> @kernel.Thm
+
+pub fn diff_union() -> @kernel.Thm
+
+pub fn diffclosuresubset() -> @kernel.Thm
+
+pub fn double_diff_union() -> @kernel.Thm
+
+pub fn euclidean() -> @kernel.Thm
+
+pub fn exec_phrase_1(Unit) -> Unit raise
+
+pub fn exec_phrase_10(Unit) -> Unit raise
+
+pub fn exec_phrase_100(Unit) -> Unit raise
+
+pub fn exec_phrase_101(Unit) -> Unit raise
+
+pub fn exec_phrase_102(Unit) -> Unit raise
+
+pub fn exec_phrase_103(Unit) -> Unit raise
+
+pub fn exec_phrase_104(Unit) -> Unit raise
+
+pub fn exec_phrase_105(Unit) -> Unit raise
+
+pub fn exec_phrase_106(Unit) -> Unit raise
+
+pub fn exec_phrase_107(Unit) -> Unit raise
+
+pub fn exec_phrase_108(Unit) -> Unit raise
+
+pub fn exec_phrase_109(Unit) -> Unit raise
+
+pub fn exec_phrase_11(Unit) -> Unit raise
+
+pub fn exec_phrase_110(Unit) -> Unit raise
+
+pub fn exec_phrase_111(Unit) -> Unit raise
+
+pub fn exec_phrase_112(Unit) -> Unit raise
+
+pub fn exec_phrase_113(Unit) -> Unit raise
+
+pub fn exec_phrase_114(Unit) -> Unit raise
+
+pub fn exec_phrase_115(Unit) -> Unit raise
+
+pub fn exec_phrase_116(Unit) -> Unit raise
+
+pub fn exec_phrase_117(Unit) -> Unit raise
+
+pub fn exec_phrase_118(Unit) -> Unit raise
+
+pub fn exec_phrase_119(Unit) -> Unit raise
+
+pub fn exec_phrase_12(Unit) -> Unit raise
+
+pub fn exec_phrase_120(Unit) -> Unit raise
+
+pub fn exec_phrase_121(Unit) -> Unit raise
+
+pub fn exec_phrase_122(Unit) -> Unit raise
+
+pub fn exec_phrase_123(Unit) -> Unit raise
+
+pub fn exec_phrase_124(Unit) -> Unit raise
+
+pub fn exec_phrase_125(Unit) -> Unit raise
+
+pub fn exec_phrase_126(Unit) -> Unit raise
+
+pub fn exec_phrase_127(Unit) -> Unit raise
+
+pub fn exec_phrase_128(Unit) -> Unit raise
+
+pub fn exec_phrase_129(Unit) -> Unit raise
+
+pub fn exec_phrase_13(Unit) -> Unit raise
+
+pub fn exec_phrase_130(Unit) -> Unit raise
+
+pub fn exec_phrase_131(Unit) -> Unit raise
+
+pub fn exec_phrase_132(Unit) -> Unit raise
+
+pub fn exec_phrase_133(Unit) -> Unit raise
+
+pub fn exec_phrase_134(Unit) -> Unit raise
+
+pub fn exec_phrase_135(Unit) -> Unit raise
+
+pub fn exec_phrase_136(Unit) -> Unit raise
+
+pub fn exec_phrase_137(Unit) -> Unit raise
+
+pub fn exec_phrase_138(Unit) -> Unit raise
+
+pub fn exec_phrase_139(Unit) -> Unit raise
+
+pub fn exec_phrase_14(Unit) -> Unit raise
+
+pub fn exec_phrase_140(Unit) -> Unit raise
+
+pub fn exec_phrase_141(Unit) -> Unit raise
+
+pub fn exec_phrase_142(Unit) -> Unit raise
+
+pub fn exec_phrase_143(Unit) -> Unit raise
+
+pub fn exec_phrase_144(Unit) -> Unit raise
+
+pub fn exec_phrase_145(Unit) -> Unit raise
+
+pub fn exec_phrase_146(Unit) -> Unit raise
+
+pub fn exec_phrase_147(Unit) -> Unit raise
+
+pub fn exec_phrase_148(Unit) -> Unit raise
+
+pub fn exec_phrase_149(Unit) -> Unit raise
+
+pub fn exec_phrase_15(Unit) -> Unit raise
+
+pub fn exec_phrase_150(Unit) -> Unit raise
+
+pub fn exec_phrase_151(Unit) -> Unit raise
+
+pub fn exec_phrase_152(Unit) -> Unit raise
+
+pub fn exec_phrase_153(Unit) -> Unit raise
+
+pub fn exec_phrase_154(Unit) -> Unit raise
+
+pub fn exec_phrase_155(Unit) -> Unit raise
+
+pub fn exec_phrase_156(Unit) -> Unit raise
+
+pub fn exec_phrase_157(Unit) -> Unit raise
+
+pub fn exec_phrase_158(Unit) -> Unit raise
+
+pub fn exec_phrase_159(Unit) -> Unit raise
+
+pub fn exec_phrase_16(Unit) -> Unit raise
+
+pub fn exec_phrase_160(Unit) -> Unit raise
+
+pub fn exec_phrase_161(Unit) -> Unit raise
+
+pub fn exec_phrase_162(Unit) -> Unit raise
+
+pub fn exec_phrase_163(Unit) -> Unit raise
+
+pub fn exec_phrase_164(Unit) -> Unit raise
+
+pub fn exec_phrase_165(Unit) -> Unit raise
+
+pub fn exec_phrase_166(Unit) -> Unit raise
+
+pub fn exec_phrase_167(Unit) -> Unit raise
+
+pub fn exec_phrase_168(Unit) -> Unit raise
+
+pub fn exec_phrase_169(Unit) -> Unit raise
+
+pub fn exec_phrase_17(Unit) -> Unit raise
+
+pub fn exec_phrase_170(Unit) -> Unit raise
+
+pub fn exec_phrase_171(Unit) -> Unit raise
+
+pub fn exec_phrase_172(Unit) -> Unit raise
+
+pub fn exec_phrase_173(Unit) -> Unit raise
+
+pub fn exec_phrase_174(Unit) -> Unit raise
+
+pub fn exec_phrase_175(Unit) -> Unit raise
+
+pub fn exec_phrase_176(Unit) -> Unit raise
+
+pub fn exec_phrase_177(Unit) -> Unit raise
+
+pub fn exec_phrase_178(Unit) -> Unit raise
+
+pub fn exec_phrase_179(Unit) -> Unit raise
+
+pub fn exec_phrase_18(Unit) -> Unit raise
+
+pub fn exec_phrase_180(Unit) -> Unit raise
+
+pub fn exec_phrase_181(Unit) -> Unit raise
+
+pub fn exec_phrase_182(Unit) -> Unit raise
+
+pub fn exec_phrase_183(Unit) -> Unit raise
+
+pub fn exec_phrase_184(Unit) -> Unit raise
+
+pub fn exec_phrase_185(Unit) -> Unit raise
+
+pub fn exec_phrase_186(Unit) -> Unit raise
+
+pub fn exec_phrase_187(Unit) -> Unit raise
+
+pub fn exec_phrase_188(Unit) -> Unit raise
+
+pub fn exec_phrase_189(Unit) -> Unit raise
+
+pub fn exec_phrase_19(Unit) -> Unit raise
+
+pub fn exec_phrase_190(Unit) -> Unit raise
+
+pub fn exec_phrase_191(Unit) -> Unit raise
+
+pub fn exec_phrase_192(Unit) -> Unit raise
+
+pub fn exec_phrase_193(Unit) -> Unit raise
+
+pub fn exec_phrase_194(Unit) -> Unit raise
+
+pub fn exec_phrase_195(Unit) -> Unit raise
+
+pub fn exec_phrase_196(Unit) -> Unit raise
+
+pub fn exec_phrase_197(Unit) -> Unit raise
+
+pub fn exec_phrase_198(Unit) -> Unit raise
+
+pub fn exec_phrase_199(Unit) -> Unit raise
+
+pub fn exec_phrase_2(Unit) -> Unit raise
+
+pub fn exec_phrase_20(Unit) -> Unit raise
+
+pub fn exec_phrase_200(Unit) -> Unit raise
+
+pub fn exec_phrase_201(Unit) -> Unit raise
+
+pub fn exec_phrase_202(Unit) -> Unit raise
+
+pub fn exec_phrase_203(Unit) -> Unit raise
+
+pub fn exec_phrase_204(Unit) -> Unit raise
+
+pub fn exec_phrase_205(Unit) -> Unit raise
+
+pub fn exec_phrase_206(Unit) -> Unit raise
+
+pub fn exec_phrase_207(Unit) -> Unit raise
+
+pub fn exec_phrase_208(Unit) -> Unit raise
+
+pub fn exec_phrase_209(Unit) -> Unit raise
+
+pub fn exec_phrase_21(Unit) -> Unit raise
+
+pub fn exec_phrase_210(Unit) -> Unit raise
+
+pub fn exec_phrase_211(Unit) -> Unit raise
+
+pub fn exec_phrase_212(Unit) -> Unit raise
+
+pub fn exec_phrase_213(Unit) -> Unit raise
+
+pub fn exec_phrase_214(Unit) -> Unit raise
+
+pub fn exec_phrase_215(Unit) -> Unit raise
+
+pub fn exec_phrase_216(Unit) -> Unit raise
+
+pub fn exec_phrase_217(Unit) -> Unit raise
+
+pub fn exec_phrase_218(Unit) -> Unit raise
+
+pub fn exec_phrase_219(Unit) -> Unit raise
+
+pub fn exec_phrase_22(Unit) -> Unit raise
+
+pub fn exec_phrase_220(Unit) -> Unit raise
+
+pub fn exec_phrase_221(Unit) -> Unit raise
+
+pub fn exec_phrase_222(Unit) -> Unit raise
+
+pub fn exec_phrase_223(Unit) -> Unit raise
+
+pub fn exec_phrase_224(Unit) -> Unit raise
+
+pub fn exec_phrase_225(Unit) -> Unit raise
+
+pub fn exec_phrase_226(Unit) -> Unit raise
+
+pub fn exec_phrase_227(Unit) -> Unit raise
+
+pub fn exec_phrase_228(Unit) -> Unit raise
+
+pub fn exec_phrase_229(Unit) -> Unit raise
+
+pub fn exec_phrase_23(Unit) -> Unit raise
+
+pub fn exec_phrase_230(Unit) -> Unit raise
+
+pub fn exec_phrase_231(Unit) -> Unit raise
+
+pub fn exec_phrase_232(Unit) -> Unit raise
+
+pub fn exec_phrase_233(Unit) -> Unit raise
+
+pub fn exec_phrase_234(Unit) -> Unit raise
+
+pub fn exec_phrase_235(Unit) -> Unit raise
+
+pub fn exec_phrase_236(Unit) -> Unit raise
+
+pub fn exec_phrase_237(Unit) -> Unit raise
+
+pub fn exec_phrase_238(Unit) -> Unit raise
+
+pub fn exec_phrase_239(Unit) -> Unit raise
+
+pub fn exec_phrase_24(Unit) -> Unit raise
+
+pub fn exec_phrase_240(Unit) -> Unit raise
+
+pub fn exec_phrase_241(Unit) -> Unit raise
+
+pub fn exec_phrase_242(Unit) -> Unit raise
+
+pub fn exec_phrase_243(Unit) -> Unit raise
+
+pub fn exec_phrase_244(Unit) -> Unit raise
+
+pub fn exec_phrase_245(Unit) -> Unit raise
+
+pub fn exec_phrase_246(Unit) -> Unit raise
+
+pub fn exec_phrase_247(Unit) -> Unit raise
+
+pub fn exec_phrase_248(Unit) -> Unit raise
+
+pub fn exec_phrase_249(Unit) -> Unit raise
+
+pub fn exec_phrase_25(Unit) -> Unit raise
+
+pub fn exec_phrase_250(Unit) -> Unit raise
+
+pub fn exec_phrase_251(Unit) -> Unit raise
+
+pub fn exec_phrase_252(Unit) -> Unit raise
+
+pub fn exec_phrase_253(Unit) -> Unit raise
+
+pub fn exec_phrase_254(Unit) -> Unit raise
+
+pub fn exec_phrase_255(Unit) -> Unit raise
+
+pub fn exec_phrase_256(Unit) -> Unit raise
+
+pub fn exec_phrase_257(Unit) -> Unit raise
+
+pub fn exec_phrase_258(Unit) -> Unit raise
+
+pub fn exec_phrase_259(Unit) -> Unit raise
+
+pub fn exec_phrase_26(Unit) -> Unit raise
+
+pub fn exec_phrase_260(Unit) -> Unit raise
+
+pub fn exec_phrase_261(Unit) -> Unit raise
+
+pub fn exec_phrase_262(Unit) -> Unit raise
+
+pub fn exec_phrase_263(Unit) -> Unit raise
+
+pub fn exec_phrase_264(Unit) -> Unit raise
+
+pub fn exec_phrase_265(Unit) -> Unit raise
+
+pub fn exec_phrase_266(Unit) -> Unit raise
+
+pub fn exec_phrase_267(Unit) -> Unit raise
+
+pub fn exec_phrase_268(Unit) -> Unit raise
+
+pub fn exec_phrase_269(Unit) -> Unit raise
+
+pub fn exec_phrase_27(Unit) -> Unit raise
+
+pub fn exec_phrase_270(Unit) -> Unit raise
+
+pub fn exec_phrase_271(Unit) -> Unit raise
+
+pub fn exec_phrase_272(Unit) -> Unit raise
+
+pub fn exec_phrase_273(Unit) -> Unit raise
+
+pub fn exec_phrase_274(Unit) -> Unit raise
+
+pub fn exec_phrase_275(Unit) -> Unit raise
+
+pub fn exec_phrase_276(Unit) -> Unit raise
+
+pub fn exec_phrase_277(Unit) -> Unit raise
+
+pub fn exec_phrase_278(Unit) -> Unit raise
+
+pub fn exec_phrase_279(Unit) -> Unit raise
+
+pub fn exec_phrase_28(Unit) -> Unit raise
+
+pub fn exec_phrase_280(Unit) -> Unit raise
+
+pub fn exec_phrase_281(Unit) -> Unit raise
+
+pub fn exec_phrase_282(Unit) -> Unit raise
+
+pub fn exec_phrase_283(Unit) -> Unit raise
+
+pub fn exec_phrase_284(Unit) -> Unit raise
+
+pub fn exec_phrase_285(Unit) -> Unit raise
+
+pub fn exec_phrase_286(Unit) -> Unit raise
+
+pub fn exec_phrase_287(Unit) -> Unit raise
+
+pub fn exec_phrase_288(Unit) -> Unit raise
+
+pub fn exec_phrase_289(Unit) -> Unit raise
+
+pub fn exec_phrase_29(Unit) -> Unit raise
+
+pub fn exec_phrase_290(Unit) -> Unit raise
+
+pub fn exec_phrase_291(Unit) -> Unit raise
+
+pub fn exec_phrase_292(Unit) -> Unit raise
+
+pub fn exec_phrase_293(Unit) -> Unit raise
+
+pub fn exec_phrase_294(Unit) -> Unit raise
+
+pub fn exec_phrase_295(Unit) -> Unit raise
+
+pub fn exec_phrase_296(Unit) -> Unit raise
+
+pub fn exec_phrase_297(Unit) -> Unit raise
+
+pub fn exec_phrase_298(Unit) -> Unit raise
+
+pub fn exec_phrase_299(Unit) -> Unit raise
+
+pub fn exec_phrase_3(Unit) -> Unit raise
+
+pub fn exec_phrase_30(Unit) -> Unit raise
+
+pub fn exec_phrase_300(Unit) -> Unit raise
+
+pub fn exec_phrase_301(Unit) -> Unit raise
+
+pub fn exec_phrase_302(Unit) -> Unit raise
+
+pub fn exec_phrase_303(Unit) -> Unit raise
+
+pub fn exec_phrase_304(Unit) -> Unit raise
+
+pub fn exec_phrase_305(Unit) -> Unit raise
+
+pub fn exec_phrase_306(Unit) -> Unit raise
+
+pub fn exec_phrase_307(Unit) -> Unit raise
+
+pub fn exec_phrase_308(Unit) -> Unit raise
+
+pub fn exec_phrase_309(Unit) -> Unit raise
+
+pub fn exec_phrase_31(Unit) -> Unit raise
+
+pub fn exec_phrase_310(Unit) -> Unit raise
+
+pub fn exec_phrase_311(Unit) -> Unit raise
+
+pub fn exec_phrase_312(Unit) -> Unit raise
+
+pub fn exec_phrase_313(Unit) -> Unit raise
+
+pub fn exec_phrase_314(Unit) -> Unit raise
+
+pub fn exec_phrase_315(Unit) -> Unit raise
+
+pub fn exec_phrase_316(Unit) -> Unit raise
+
+pub fn exec_phrase_317(Unit) -> Unit raise
+
+pub fn exec_phrase_318(Unit) -> Unit raise
+
+pub fn exec_phrase_319(Unit) -> Unit raise
+
+pub fn exec_phrase_32(Unit) -> Unit raise
+
+pub fn exec_phrase_320(Unit) -> Unit raise
+
+pub fn exec_phrase_321(Unit) -> Unit raise
+
+pub fn exec_phrase_322(Unit) -> Unit raise
+
+pub fn exec_phrase_323(Unit) -> Unit raise
+
+pub fn exec_phrase_324(Unit) -> Unit raise
+
+pub fn exec_phrase_325(Unit) -> Unit raise
+
+pub fn exec_phrase_326(Unit) -> Unit raise
+
+pub fn exec_phrase_327(Unit) -> Unit raise
+
+pub fn exec_phrase_328(Unit) -> Unit raise
+
+pub fn exec_phrase_329(Unit) -> Unit raise
+
+pub fn exec_phrase_33(Unit) -> Unit raise
+
+pub fn exec_phrase_330(Unit) -> Unit raise
+
+pub fn exec_phrase_331(Unit) -> Unit raise
+
+pub fn exec_phrase_332(Unit) -> Unit raise
+
+pub fn exec_phrase_333(Unit) -> Unit raise
+
+pub fn exec_phrase_334(Unit) -> Unit raise
+
+pub fn exec_phrase_335(Unit) -> Unit raise
+
+pub fn exec_phrase_336(Unit) -> Unit raise
+
+pub fn exec_phrase_337(Unit) -> Unit raise
+
+pub fn exec_phrase_338(Unit) -> Unit raise
+
+pub fn exec_phrase_339(Unit) -> Unit raise
+
+pub fn exec_phrase_34(Unit) -> Unit raise
+
+pub fn exec_phrase_340(Unit) -> Unit raise
+
+pub fn exec_phrase_341(Unit) -> Unit raise
+
+pub fn exec_phrase_342(Unit) -> Unit raise
+
+pub fn exec_phrase_343(Unit) -> Unit raise
+
+pub fn exec_phrase_344(Unit) -> Unit raise
+
+pub fn exec_phrase_345(Unit) -> Unit raise
+
+pub fn exec_phrase_346(Unit) -> Unit raise
+
+pub fn exec_phrase_347(Unit) -> Unit raise
+
+pub fn exec_phrase_348(Unit) -> Unit raise
+
+pub fn exec_phrase_349(Unit) -> Unit raise
+
+pub fn exec_phrase_35(Unit) -> Unit raise
+
+pub fn exec_phrase_350(Unit) -> Unit raise
+
+pub fn exec_phrase_351(Unit) -> Unit raise
+
+pub fn exec_phrase_352(Unit) -> Unit raise
+
+pub fn exec_phrase_353(Unit) -> Unit raise
+
+pub fn exec_phrase_354(Unit) -> Unit raise
+
+pub fn exec_phrase_355(Unit) -> Unit raise
+
+pub fn exec_phrase_356(Unit) -> Unit raise
+
+pub fn exec_phrase_357(Unit) -> Unit raise
+
+pub fn exec_phrase_358(Unit) -> Unit raise
+
+pub fn exec_phrase_359(Unit) -> Unit raise
+
+pub fn exec_phrase_36(Unit) -> Unit raise
+
+pub fn exec_phrase_360(Unit) -> Unit raise
+
+pub fn exec_phrase_361(Unit) -> Unit raise
+
+pub fn exec_phrase_362(Unit) -> Unit raise
+
+pub fn exec_phrase_363(Unit) -> Unit raise
+
+pub fn exec_phrase_364(Unit) -> Unit raise
+
+pub fn exec_phrase_365(Unit) -> Unit raise
+
+pub fn exec_phrase_366(Unit) -> Unit raise
+
+pub fn exec_phrase_367(Unit) -> Unit raise
+
+pub fn exec_phrase_368(Unit) -> Unit raise
+
+pub fn exec_phrase_369(Unit) -> Unit raise
+
+pub fn exec_phrase_37(Unit) -> Unit raise
+
+pub fn exec_phrase_370(Unit) -> Unit raise
+
+pub fn exec_phrase_371(Unit) -> Unit raise
+
+pub fn exec_phrase_372(Unit) -> Unit raise
+
+pub fn exec_phrase_373(Unit) -> Unit raise
+
+pub fn exec_phrase_374(Unit) -> Unit raise
+
+pub fn exec_phrase_375(Unit) -> Unit raise
+
+pub fn exec_phrase_376(Unit) -> Unit raise
+
+pub fn exec_phrase_377(Unit) -> Unit raise
+
+pub fn exec_phrase_378(Unit) -> Unit raise
+
+pub fn exec_phrase_379(Unit) -> Unit raise
+
+pub fn exec_phrase_38(Unit) -> Unit raise
+
+pub fn exec_phrase_380(Unit) -> Unit raise
+
+pub fn exec_phrase_39(Unit) -> Unit raise
+
+pub fn exec_phrase_4(Unit) -> Unit raise
+
+pub fn exec_phrase_40(Unit) -> Unit raise
+
+pub fn exec_phrase_41(Unit) -> Unit raise
+
+pub fn exec_phrase_42(Unit) -> Unit raise
+
+pub fn exec_phrase_43(Unit) -> Unit raise
+
+pub fn exec_phrase_44(Unit) -> Unit raise
+
+pub fn exec_phrase_45(Unit) -> Unit raise
+
+pub fn exec_phrase_46(Unit) -> Unit raise
+
+pub fn exec_phrase_47(Unit) -> Unit raise
+
+pub fn exec_phrase_48(Unit) -> Unit raise
+
+pub fn exec_phrase_49(Unit) -> Unit raise
+
+pub fn exec_phrase_5(Unit) -> Unit raise
+
+pub fn exec_phrase_50(Unit) -> Unit raise
+
+pub fn exec_phrase_51(Unit) -> Unit raise
+
+pub fn exec_phrase_52(Unit) -> Unit raise
+
+pub fn exec_phrase_53(Unit) -> Unit raise
+
+pub fn exec_phrase_54(Unit) -> Unit raise
+
+pub fn exec_phrase_55(Unit) -> Unit raise
+
+pub fn exec_phrase_56(Unit) -> Unit raise
+
+pub fn exec_phrase_57(Unit) -> Unit raise
+
+pub fn exec_phrase_58(Unit) -> Unit raise
+
+pub fn exec_phrase_59(Unit) -> Unit raise
+
+pub fn exec_phrase_6(Unit) -> Unit raise
+
+pub fn exec_phrase_60(Unit) -> Unit raise
+
+pub fn exec_phrase_61(Unit) -> Unit raise
+
+pub fn exec_phrase_62(Unit) -> Unit raise
+
+pub fn exec_phrase_63(Unit) -> Unit raise
+
+pub fn exec_phrase_64(Unit) -> Unit raise
+
+pub fn exec_phrase_65(Unit) -> Unit raise
+
+pub fn exec_phrase_66(Unit) -> Unit raise
+
+pub fn exec_phrase_67(Unit) -> Unit raise
+
+pub fn exec_phrase_68(Unit) -> Unit raise
+
+pub fn exec_phrase_69(Unit) -> Unit raise
+
+pub fn exec_phrase_7(Unit) -> Unit raise
+
+pub fn exec_phrase_70(Unit) -> Unit raise
+
+pub fn exec_phrase_71(Unit) -> Unit raise
+
+pub fn exec_phrase_72(Unit) -> Unit raise
+
+pub fn exec_phrase_73(Unit) -> Unit raise
+
+pub fn exec_phrase_74(Unit) -> Unit raise
+
+pub fn exec_phrase_75(Unit) -> Unit raise
+
+pub fn exec_phrase_76(Unit) -> Unit raise
+
+pub fn exec_phrase_77(Unit) -> Unit raise
+
+pub fn exec_phrase_78(Unit) -> Unit raise
+
+pub fn exec_phrase_79(Unit) -> Unit raise
+
+pub fn exec_phrase_8(Unit) -> Unit raise
+
+pub fn exec_phrase_80(Unit) -> Unit raise
+
+pub fn exec_phrase_81(Unit) -> Unit raise
+
+pub fn exec_phrase_82(Unit) -> Unit raise
+
+pub fn exec_phrase_83(Unit) -> Unit raise
+
+pub fn exec_phrase_84(Unit) -> Unit raise
+
+pub fn exec_phrase_85(Unit) -> Unit raise
+
+pub fn exec_phrase_86(Unit) -> Unit raise
+
+pub fn exec_phrase_87(Unit) -> Unit raise
+
+pub fn exec_phrase_88(Unit) -> Unit raise
+
+pub fn exec_phrase_89(Unit) -> Unit raise
+
+pub fn exec_phrase_9(Unit) -> Unit raise
+
+pub fn exec_phrase_90(Unit) -> Unit raise
+
+pub fn exec_phrase_91(Unit) -> Unit raise
+
+pub fn exec_phrase_92(Unit) -> Unit raise
+
+pub fn exec_phrase_93(Unit) -> Unit raise
+
+pub fn exec_phrase_94(Unit) -> Unit raise
+
+pub fn exec_phrase_95(Unit) -> Unit raise
+
+pub fn exec_phrase_96(Unit) -> Unit raise
+
+pub fn exec_phrase_97(Unit) -> Unit raise
+
+pub fn exec_phrase_98(Unit) -> Unit raise
+
+pub fn exec_phrase_99(Unit) -> Unit raise
+
+pub fn existstensorinter() -> @kernel.Thm
+
+pub fn existstopology() -> @kernel.Thm
+
+pub fn frontier() -> @kernel.Thm
+
+pub fn frontier_closed() -> @kernel.Thm
+
+pub fn frontier_closure_subset() -> @kernel.Thm
+
+pub fn frontier_closures() -> @kernel.Thm
+
+pub fn frontier_complement() -> @kernel.Thm
+
+pub fn frontier_def() -> @kernel.Thm
+
+pub fn frontier_def_v1() -> @kernel.Thm
+
+pub fn frontier_disjoint_eq() -> @kernel.Thm
+
+pub fn frontier_empty() -> @kernel.Thm
+
+pub fn frontier_frontier_subset() -> @kernel.Thm
+
+pub fn frontier_inter_subset() -> @kernel.Thm
+
+pub fn frontier_inter_subset_inter() -> @kernel.Thm
+
+pub fn frontier_interior_subset() -> @kernel.Thm
+
+pub fn frontier_interiors() -> @kernel.Thm
+
+pub fn frontier_straddle() -> @kernel.Thm
+
+pub fn frontier_subset_closed() -> @kernel.Thm
+
+pub fn frontier_subset_eq() -> @kernel.Thm
+
+pub fn frontier_thm() -> @kernel.Thm
+
+pub fn frontier_union() -> @kernel.Thm
+
+pub fn frontier_union_subset() -> @kernel.Thm
+
+pub fn frontier_univ() -> @kernel.Thm
+
+pub fn frontierclosed() -> @kernel.Thm
+
+pub fn frontierclosures() -> @kernel.Thm
+
+pub fn frontierclosuresubset() -> @kernel.Thm
+
+pub fn frontiercomplement() -> @kernel.Thm
+
+pub fn frontiercomplement_v1() -> @kernel.Thm
+
+pub fn frontierdisjointeq() -> @kernel.Thm
+
+pub fn frontierempty() -> @kernel.Thm
+
+pub fn frontierfrontier() -> @kernel.Thm
+
+pub fn frontierfrontiersubset() -> @kernel.Thm
+
+pub fn frontierinteriors() -> @kernel.Thm
+
+pub fn frontierinteriorsubset() -> @kernel.Thm
+
+pub fn frontierintersubset() -> @kernel.Thm
+
+pub fn frontierintersubsetinter() -> @kernel.Thm
+
+pub fn frontierstraddle() -> @kernel.Thm
+
+pub fn frontiersubsetclosed() -> @kernel.Thm
+
+pub fn frontiersubseteq() -> @kernel.Thm
+
+pub fn frontiertopspace() -> @kernel.Thm
+
+pub fn frontierunion() -> @kernel.Thm
+
+pub fn frontierunionpart1() -> @kernel.Thm
+
+pub fn frontierunionsubset() -> @kernel.Thm
+
+pub fn frontieruniv() -> @kernel.Thm
+
+pub fn half_cball_in_ball() -> @kernel.Thm
+
+pub fn in_ball() -> @kernel.Thm
+
+pub fn in_cball() -> @kernel.Thm
+
+pub fn in_closure() -> @kernel.Thm
+
+pub fn in_interior() -> @kernel.Thm
+
+pub fn in_interior_v1() -> @kernel.Thm
+
+pub fn in_limitpointof() -> @kernel.Thm
+
+pub fn in_set_function_predicate() -> @kernel.Thm
+
+pub fn inter_tensor() -> @kernel.Thm
+
+pub fn interior() -> @kernel.Thm
+
+pub fn interior_closed_eq_empty_as_frontier() -> @kernel.Thm
+
+pub fn interior_closed_union_empty_interior() -> @kernel.Thm
+
+pub fn interior_closure() -> @kernel.Thm
+
+pub fn interior_closure_idemp() -> @kernel.Thm
+
+pub fn interior_closure_inter_open() -> @kernel.Thm
+
+pub fn interior_complement() -> @kernel.Thm
+
+pub fn interior_def() -> @kernel.Thm
+
+pub fn interior_def_v1() -> @kernel.Thm
+
+pub fn interior_diff() -> @kernel.Thm
+
+pub fn interior_empty() -> @kernel.Thm
+
+pub fn interior_eq() -> @kernel.Thm
+
+pub fn interior_eq_empty() -> @kernel.Thm
+
+pub fn interior_eq_empty_alt() -> @kernel.Thm
+
+pub fn interior_finite_inters() -> @kernel.Thm
+
+pub fn interior_finite_inters_v1() -> @kernel.Thm
+
+pub fn interior_frontier() -> @kernel.Thm
+
+pub fn interior_frontier_empty() -> @kernel.Thm
+
+pub fn interior_inter() -> @kernel.Thm
+
+pub fn interior_interior() -> @kernel.Thm
+
+pub fn interior_inters_subset() -> @kernel.Thm
+
+pub fn interior_maximal() -> @kernel.Thm
+
+pub fn interior_maximal_eq() -> @kernel.Thm
+
+pub fn interior_open() -> @kernel.Thm
+
+pub fn interior_subset() -> @kernel.Thm
+
+pub fn interior_thm() -> @kernel.Thm
+
+pub fn interior_union_eq_empty() -> @kernel.Thm
+
+pub fn interior_unions_open_subsets() -> @kernel.Thm
+
+pub fn interior_unique() -> @kernel.Thm
+
+pub fn interior_univ() -> @kernel.Thm
+
+pub fn interiorclosedeqemptyasfrontier() -> @kernel.Thm
+
+pub fn interiorclosedunionemptyinterior() -> @kernel.Thm
+
+pub fn interiorclosure() -> @kernel.Thm
+
+pub fn interiorclosurecomplement() -> @kernel.Thm
+
+pub fn interiorclosurediffspaceempty() -> @kernel.Thm
+
+pub fn interiorclosureidemp() -> @kernel.Thm
+
+pub fn interiorclosureidemp_v1() -> @kernel.Thm
+
+pub fn interiorclosureinteropen() -> @kernel.Thm
+
+pub fn interiorcomplement() -> @kernel.Thm
+
+pub fn interiordiff() -> @kernel.Thm
+
+pub fn interiorempty() -> @kernel.Thm
+
+pub fn interioreq() -> @kernel.Thm
+
+pub fn interioreqempty() -> @kernel.Thm
+
+pub fn interioreqemptyalt() -> @kernel.Thm
+
+pub fn interiorfiniteinters() -> @kernel.Thm
+
+pub fn interiorfrontier() -> @kernel.Thm
+
+pub fn interiorfrontierempty() -> @kernel.Thm
+
+pub fn interiorinter() -> @kernel.Thm
+
+pub fn interiorinterior() -> @kernel.Thm
+
+pub fn interiorinterssubset() -> @kernel.Thm
+
+pub fn interiormaximal() -> @kernel.Thm
+
+pub fn interiormaximaleq() -> @kernel.Thm
+
+pub fn interioropen() -> @kernel.Thm
+
+pub fn interiorsubset() -> @kernel.Thm
+
+pub fn interiortopspace() -> @kernel.Thm
+
+pub fn interiorunioneqempty() -> @kernel.Thm
+
+pub fn interiorunionsopensubsets() -> @kernel.Thm
+
+pub fn interiorunique() -> @kernel.Thm
+
+pub fn interioruniv() -> @kernel.Thm
+
+pub fn inters_subset() -> @kernel.Thm
+
+pub fn istopology() -> @kernel.Thm
+
+pub fn istopologydest_topology() -> @kernel.Thm
+
+pub fn istopologyeuclidean() -> @kernel.Thm
+
+pub fn istopologysubtopology() -> @kernel.Thm
+
+pub fn limit_point_of() -> @kernel.Thm
+
+pub fn limit_point_of_def() -> @kernel.Thm
+
+pub fn limit_point_union() -> @kernel.Thm
+
+pub fn limitpointof() -> @kernel.Thm
+
+pub fn limitpointof_euclidean() -> @kernel.Thm
+
+pub fn limitpointunion() -> @kernel.Thm
+
+pub fn limpt_empty() -> @kernel.Thm
+
+pub fn limpt_subset() -> @kernel.Thm
+
+pub fn limptempty() -> @kernel.Thm
+
+pub fn limptsubset() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn no_limit_point_imp_closed() -> @kernel.Thm
+
+pub fn nolimitpointimpclosed() -> @kernel.Thm
+
+pub fn notin() -> @kernel.Thm
+
+pub fn notlimitpointof() -> @kernel.Thm
+
+pub fn nowhere_dense() -> @kernel.Thm
+
+pub fn nowhere_dense_union() -> @kernel.Thm
+
+pub fn nowheredense() -> @kernel.Thm
+
+pub fn nowheredenseunion() -> @kernel.Thm
+
+pub fn open_ball() -> @kernel.Thm
+
+pub fn open_closed() -> @kernel.Thm
+
+pub fn open_contains_ball() -> @kernel.Thm
+
+pub fn open_def() -> @kernel.Thm
+
+pub fn open_diff() -> @kernel.Thm
+
+pub fn open_empty() -> @kernel.Thm
+
+pub fn open_exists() -> @kernel.Thm
+
+pub fn open_exists_in() -> @kernel.Thm
+
+pub fn open_in() -> @kernel.Thm
+
+pub fn open_in_closed_in() -> @kernel.Thm
+
+pub fn open_in_closed_in_eq() -> @kernel.Thm
+
+pub fn open_in_contains_ball() -> @kernel.Thm
+
+pub fn open_in_contains_ball_lemma() -> @kernel.Thm
+
+pub fn open_in_contains_cball() -> @kernel.Thm
+
+pub fn open_in_contains_cball_lemma() -> @kernel.Thm
+
+pub fn open_in_diff() -> @kernel.Thm
+
+pub fn open_in_empty() -> @kernel.Thm
+
+pub fn open_in_exists_in() -> @kernel.Thm
+
+pub fn open_in_imp_subset() -> @kernel.Thm
+
+pub fn open_in_injective_linear_image() -> @kernel.Thm
+
+pub fn open_in_inter() -> @kernel.Thm
+
+pub fn open_in_inter_open() -> @kernel.Thm
+
+pub fn open_in_inters() -> @kernel.Thm
+
+pub fn open_in_open() -> @kernel.Thm
+
+pub fn open_in_open_eq() -> @kernel.Thm
+
+pub fn open_in_open_inter() -> @kernel.Thm
+
+pub fn open_in_open_trans() -> @kernel.Thm
+
+pub fn open_in_refl() -> @kernel.Thm
+
+pub fn open_in_subopen() -> @kernel.Thm
+
+pub fn open_in_subset() -> @kernel.Thm
+
+pub fn open_in_subset_trans() -> @kernel.Thm
+
+pub fn open_in_subtopology() -> @kernel.Thm
+
+pub fn open_in_subtopology_empty() -> @kernel.Thm
+
+pub fn open_in_subtopology_inter_subset() -> @kernel.Thm
+
+pub fn open_in_subtopology_refl() -> @kernel.Thm
+
+pub fn open_in_subtopology_union() -> @kernel.Thm
+
+pub fn open_in_topspace() -> @kernel.Thm
+
+pub fn open_in_trans() -> @kernel.Thm
+
+pub fn open_in_trans_eq() -> @kernel.Thm
+
+pub fn open_in_union() -> @kernel.Thm
+
+pub fn open_in_unions() -> @kernel.Thm
+
+pub fn open_in_v1() -> @kernel.Thm
+
+pub fn open_inter() -> @kernel.Thm
+
+pub fn open_inter_closure_eq_empty() -> @kernel.Thm
+
+pub fn open_inter_closure_subset() -> @kernel.Thm
+
+pub fn open_interior() -> @kernel.Thm
+
+pub fn open_inters() -> @kernel.Thm
+
+pub fn open_open_in_trans() -> @kernel.Thm
+
+pub fn open_subopen() -> @kernel.Thm
+
+pub fn open_subset() -> @kernel.Thm
+
+pub fn open_subset_interior() -> @kernel.Thm
+
+pub fn open_union() -> @kernel.Thm
+
+pub fn open_unions() -> @kernel.Thm
+
+pub fn open_univ() -> @kernel.Thm
+
+pub fn openimpliessubtopologyinteropen() -> @kernel.Thm
+
+pub fn openin() -> @kernel.Thm
+
+pub fn openinclauses() -> @kernel.Thm
+
+pub fn openinimpsubset() -> @kernel.Thm
+
+pub fn openinopeneq() -> @kernel.Thm
+
+pub fn openinopeninter() -> @kernel.Thm
+
+pub fn openinopentrans() -> @kernel.Thm
+
+pub fn openinrefl() -> @kernel.Thm
+
+pub fn openinsubsettrans() -> @kernel.Thm
+
+pub fn openinsubtopology() -> @kernel.Thm
+
+pub fn openinsubtopologyinteropen() -> @kernel.Thm
+
+pub fn openinsubtopologyintersubset() -> @kernel.Thm
+
+pub fn openinsubtopologytrans() -> @kernel.Thm
+
+pub fn openinsubtopologyunion() -> @kernel.Thm
+
+pub fn openinterclosureeqempty() -> @kernel.Thm
+
+pub fn openinterclosuresubset() -> @kernel.Thm
+
+pub fn openinterior() -> @kernel.Thm
+
+pub fn openintopspace() -> @kernel.Thm
+
+pub fn openintrans() -> @kernel.Thm
+
+pub fn openintranseq() -> @kernel.Thm
+
+pub fn openopenintrans() -> @kernel.Thm
+
+pub fn opensets() -> @kernel.Thm
+
+pub fn opensubset() -> @kernel.Thm
+
+pub fn opensubsetinterior() -> @kernel.Thm
+
+pub fn regular_closed_union() -> @kernel.Thm
+
+pub fn regular_open_inter() -> @kernel.Thm
+
+pub fn regularclosedunion() -> @kernel.Thm
+
+pub fn regularopeninter() -> @kernel.Thm
+
+pub fn set_diff_frontier() -> @kernel.Thm
+
+pub fn setdifffrontier() -> @kernel.Thm
+
+pub fn subset_closure() -> @kernel.Thm
+
+pub fn subset_complement() -> @kernel.Thm
+
+pub fn subset_duality() -> @kernel.Thm
+
+pub fn subset_interior() -> @kernel.Thm
+
+pub fn subsetclosure() -> @kernel.Thm
+
+pub fn subsetinterior() -> @kernel.Thm
+
+pub fn subtopology() -> @kernel.Thm
+
+pub fn subtopology_superset() -> @kernel.Thm
+
+pub fn subtopology_topspace() -> @kernel.Thm
+
+pub fn subtopology_univ() -> @kernel.Thm
+
+pub fn subtopologyopeninsubopen() -> @kernel.Thm
+
+pub fn topology_eq() -> @kernel.Thm
+
+pub fn topology_tybij() -> @kernel.Thm
+
+pub fn topology_tybij_th() -> @kernel.Thm
+
+pub fn topologypair() -> @kernel.Thm
+
+pub fn topspace() -> @kernel.Thm
+
+pub fn topspace_euclidean() -> @kernel.Thm
+
+pub fn topspace_euclidean_subtopology() -> @kernel.Thm
+
+pub fn topspace_subtopology() -> @kernel.Thm
+
+pub fn topspacesubtopology() -> @kernel.Thm
+
+pub fn underlyingspace() -> @kernel.Thm
+
+pub fn union_frontier() -> @kernel.Thm
+
+pub fn union_interior_subset() -> @kernel.Thm
+
+pub fn union_tensor() -> @kernel.Thm
+
+pub fn unionfrontier() -> @kernel.Thm
+
+pub fn unionfrontierpart1() -> @kernel.Thm
+
+pub fn unionfrontierpart2() -> @kernel.Thm
+
+pub fn unionfrontierpart3() -> @kernel.Thm
+
+pub fn unioninteriorsubset() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
