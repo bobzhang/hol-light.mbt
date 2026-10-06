@@ -1,0 +1,137 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/richterhilbertaxiomgeometry/UniversalPropCartProd"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn cartesianfstsnd() -> @kernel.Thm
+
+pub fn cartesianproduct() -> @kernel.Thm
+
+pub fn exec_phrase_1(Unit) -> Unit raise
+
+pub fn exec_phrase_10(Unit) -> Unit raise
+
+pub fn exec_phrase_11(Unit) -> Unit raise
+
+pub fn exec_phrase_12(Unit) -> Unit raise
+
+pub fn exec_phrase_13(Unit) -> Unit raise
+
+pub fn exec_phrase_14(Unit) -> Unit raise
+
+pub fn exec_phrase_15(Unit) -> Unit raise
+
+pub fn exec_phrase_16(Unit) -> Unit raise
+
+pub fn exec_phrase_17(Unit) -> Unit raise
+
+pub fn exec_phrase_18(Unit) -> Unit raise
+
+pub fn exec_phrase_19(Unit) -> Unit raise
+
+pub fn exec_phrase_2(Unit) -> Unit raise
+
+pub fn exec_phrase_20(Unit) -> Unit raise
+
+pub fn exec_phrase_21(Unit) -> Unit raise
+
+pub fn exec_phrase_22(Unit) -> Unit raise
+
+pub fn exec_phrase_23(Unit) -> Unit raise
+
+pub fn exec_phrase_24(Unit) -> Unit raise
+
+pub fn exec_phrase_25(Unit) -> Unit raise
+
+pub fn exec_phrase_26(Unit) -> Unit raise
+
+pub fn exec_phrase_27(Unit) -> Unit raise
+
+pub fn exec_phrase_28(Unit) -> Unit raise
+
+pub fn exec_phrase_29(Unit) -> Unit raise
+
+pub fn exec_phrase_3(Unit) -> Unit raise
+
+pub fn exec_phrase_30(Unit) -> Unit raise
+
+pub fn exec_phrase_31(Unit) -> Unit raise
+
+pub fn exec_phrase_32(Unit) -> Unit raise
+
+pub fn exec_phrase_33(Unit) -> Unit raise
+
+pub fn exec_phrase_34(Unit) -> Unit raise
+
+pub fn exec_phrase_4(Unit) -> Unit raise
+
+pub fn exec_phrase_5(Unit) -> Unit raise
+
+pub fn exec_phrase_6(Unit) -> Unit raise
+
+pub fn exec_phrase_7(Unit) -> Unit raise
+
+pub fn exec_phrase_8(Unit) -> Unit raise
+
+pub fn exec_phrase_9(Unit) -> Unit raise
+
+pub fn fun() -> @kernel.Thm
+
+pub fn function() -> @kernel.Thm
+
+pub fn function_eq() -> @kernel.Thm
+
+pub fn functioncomposition() -> @kernel.Thm
+
+pub fn functionspace() -> @kernel.Thm
+
+pub fn functionspaceonoffsource() -> @kernel.Thm
+
+pub fn functionspaceonsource() -> @kernel.Thm
+
+pub fn funfunctionspaceimplyfunction() -> @kernel.Thm
+
+pub fn impliestruncatedfunctionspace() -> @kernel.Thm
+
+pub fn in_cartesianproduct() -> @kernel.Thm
+
+pub fn in_cartesianproduct_v1() -> @kernel.Thm
+
+pub fn in_functionspace() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn makefunction() -> @kernel.Thm
+
+pub fn makefunction_eq() -> @kernel.Thm
+
+pub fn makefunctioneq() -> @kernel.Thm
+
+pub fn makefunctionyieldsfun() -> @kernel.Thm
+
+pub fn notin() -> @kernel.Thm
+
+pub fn pairprojectionfunctions() -> @kernel.Thm
+
+pub fn projection1function() -> @kernel.Thm
+
+pub fn projection2function() -> @kernel.Thm
+
+pub fn source() -> @kernel.Thm
+
+pub fn target() -> @kernel.Thm
+
+pub fn universalpropertyproduct() -> @kernel.Thm
+
+pub fn usefunctioncomposition() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
