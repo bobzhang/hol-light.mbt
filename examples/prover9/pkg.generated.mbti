@@ -1,0 +1,141 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/prover9"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/parser",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn aci_correct(@kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn ap_imp(@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn atom(@list.List[@parser.Lexcode]) -> (Sexp, @list.List[@parser.Lexcode]) raise
+
+pub fn conway_1() -> @kernel.Thm
+
+pub fn conway_2() -> @kernel.Thm
+
+pub fn double_distrib() -> @kernel.Thm
+
+pub fn eckman_hilton_1() -> @kernel.Thm
+
+pub fn eckman_hilton_2() -> @kernel.Thm
+
+pub fn eckman_hilton_3() -> @kernel.Thm
+
+pub fn eckman_hilton_4() -> @kernel.Thm
+
+pub fn folatom_of_sexp(Sexp) -> Literal raise
+
+pub fn folclause_of_sexp(Sexp) -> @list.List[Literal] raise
+
+pub fn folliteral_of_sexp(Sexp) -> Literal raise
+
+pub fn folterm_of_sexp(Sexp) -> Folterm raise
+
+pub fn friend_0() -> @kernel.Thm
+
+pub fn friend_1() -> @kernel.Thm
+
+pub fn front1_disj_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn front_disj_conv(@list.List[Sexp], @kernel.Term) -> @kernel.Thm raise
+
+pub fn[TA] functions(@list.List[@kernel.Term], @kernel.Term, (@list.List[@kernel.Term], @list.List[@kernel.Term], TA)) -> (@list.List[@kernel.Term], @list.List[@kernel.Term], TA) raise
+
+pub fn hol_of_clause((@lib.Func[String, @kernel.Term], @lib.Func[String, @kernel.Term]), Sexp) -> @kernel.Term raise
+
+pub fn hol_of_folclause((@lib.Func[String, @kernel.Term], @lib.Func[String, @kernel.Term]), @list.List[Literal]) -> @kernel.Term raise
+
+pub fn hol_of_folliteral((@lib.Func[String, @kernel.Term], @lib.Func[String, @kernel.Term]), Literal) -> @kernel.Term raise
+
+pub fn[TA] hol_of_folterm((@lib.Func[String, @kernel.Term], TA), @kernel.HolType, Folterm) -> @kernel.Term raise
+
+pub fn hol_of_literal((@lib.Func[String, @kernel.Term], @lib.Func[String, @kernel.Term]), Sexp) -> @kernel.Term raise
+
+pub fn[TA] hol_of_term((@lib.Func[String, @kernel.Term], TA), @kernel.HolType, Sexp) -> @kernel.Term raise
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] is_truevar((@lib.Func[TA, @kernel.Term], TB), @kernel.Term) -> Bool raise
+
+pub fn load() -> Unit
+
+pub fn los() -> @kernel.Thm
+
+pub fn moore_penrose_pseudoinverse_unique() -> @kernel.Thm
+
+pub fn para_back_conv(@list.List[Sexp], @kernel.Term) -> @kernel.Thm raise
+
+pub fn para_subs_conv(@list.List[Int64], @kernel.Thm, @kernel.Term) -> @kernel.Thm raise
+
+pub fn parse_proofstep(Sexp) -> (String, Sexp, Sexp) raise
+
+pub fn[TA] process_proofstep(@list.List[@kernel.Thm], (@lib.Func[String, @kernel.Term], @lib.Func[String, @kernel.Term]), @lib.Func[String, @kernel.Thm], (TA, Sexp, Sexp)) -> @kernel.Thm raise
+
+pub fn process_proofsteps(@list.List[@kernel.Thm], (@lib.Func[String, @kernel.Term], @lib.Func[String, @kernel.Term]), @lib.Func[String, @kernel.Thm], @list.List[(String, Sexp, Sexp)]) -> (@lib.Func[String, @kernel.Thm], @list.List[(String, Sexp, Sexp)]) raise
+
+pub fn prover9() -> String
+
+pub fn prover9_debugging() -> @ref.Ref[Bool]
+
+pub fn prover9_flip_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn prover9_of_clause(@list.List[Literal]) -> String raise
+
+pub fn prover9_of_literal(Literal) -> String raise
+
+pub fn prover9_of_term(Folterm) -> String raise
+
+pub fn prover9_options() -> @ref.Ref[String]
+
+pub fn prover9_path_conv(@list.List[Sexp], (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn prover9_refute(@list.List[@kernel.Thm]) -> @kernel.Thm raise
+
+pub fn prover9_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn resolve(@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise
+
+pub fn sexpression(@list.List[@parser.Lexcode]) -> (Sexp, @list.List[@parser.Lexcode]) raise
+
+pub fn signature(@list.List[@kernel.Term], @kernel.Term, (@list.List[@kernel.Term], @list.List[@kernel.Term], @list.List[@kernel.Term])) -> (@list.List[@kernel.Term], @list.List[@kernel.Term], @list.List[@kernel.Term]) raise
+
+pub fn skipheader(Int64, String) -> String raise
+
+pub fn translate_atom((@lib.Func[@kernel.Term, String], @lib.Func[@kernel.Term, String], @lib.Func[@kernel.Term, String]), @kernel.Term) -> Literal raise
+
+pub fn translate_clause((@lib.Func[@kernel.Term, String], @lib.Func[@kernel.Term, String], @lib.Func[@kernel.Term, String]), @kernel.Term) -> @list.List[Literal] raise
+
+pub fn[TA] translate_term((@lib.Func[@kernel.Term, String], @lib.Func[@kernel.Term, String], TA), @kernel.Term) -> Folterm raise
+
+// Errors
+
+// Types and methods
+pub(all) enum Folterm {
+  Variable(String)
+  Function(String, @list.List[Folterm])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Folterm
+pub impl @lib.OHash for Folterm
+
+pub(all) enum Literal {
+  Literal(Bool, String, @list.List[Folterm])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Literal
+pub impl @lib.OHash for Literal
+
+pub(all) enum Sexp {
+  Atom(String)
+  List(@list.List[Sexp])
+} derive(Eq, @debug.Debug)
+pub impl @lib.OCompare for Sexp
+pub impl @lib.OHash for Sexp
+
+// Type aliases
+
+// Traits
