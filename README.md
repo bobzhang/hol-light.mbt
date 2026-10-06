@@ -14,14 +14,19 @@ constructs theorems only through its API.
   `define`) are translated.
 - **Library/**: every file but `tactician_light.ml` (`library/<name>`).
 - **Multivariate/**: all 32 theory files (`multivariate/<name>`).
-- **100/**: 64 of 67 files (`100/<name>`): `thales` and `ceva` need csdp,
-  `e_is_transcendental` does not load upstream.
+- **100/**: 66 of 67 files (`100/<name>`): `e_is_transcendental` does not
+  load upstream.
 - **Complex/, Arithmetic/, Permutation/, Ntrie/, Model/, GL/, Divstep/, Rqe/,
   Unity/, Logic/, Jordan/** (with the Jordan curve theorem),
   **Functionspaces/, Quaternions/, Geometric_Algebra/, Probability/, IEEE/,
-  IsabelleLight/, Boyer_Moore/, EC/, Autoformalization/**: their theory
-  files (`complex/<name>`, ...).
-- **Examples/**: 45 of 50. **Tutorial/**: 18 of 24.
+  IsabelleLight/, Boyer_Moore/, EC/, Autoformalization/, Cadical/,
+  Minisat/**: their theory files (`complex/<name>`, ...).
+- **Examples/**: 47 of 50. **Tutorial/**: 21 of 24.
+
+Files that run an external solver (csdp for `Examples/sos.ml`'s REAL_SOS,
+cadical, MiniSat) load without one: the solver's runs are recorded when the
+reference output is made and replayed (`<pkg>/commands.mbt`); the kernel
+checks the proofs they lead to.
 
 The mooncakes package `bobzhang/hol_light` has the core and Library/ (the
 registry caps a module at 100 MB); Multivariate/, 100/ and the translation
@@ -72,6 +77,9 @@ opam switch `hol-light` (or `$HOL_LIGHT_SWITCH`):
 opam switch create hol-light ocaml-base-compiler.4.14.1 --no-switch
 opam install --switch=hol-light camlp5.8.02.01 num camlp-streams ocamlfind
 brew install pari    # upstream's PRIME_CONV calls gp (Library/pocklington.ml)
+brew install cadical # Cadical/ (also lrat-trim, github.com/arminbiere/lrat-trim)
+# on PATH too, built from source: csdp (github.com/coin-or/Csdp, for
+# Examples/sos.ml) and MiniSat-p 1.14 as `minisat` (minisat.se, for Minisat/)
 ```
 
 [PLAN.md](PLAN.md) has the design, decisions and known limitations;
