@@ -1,0 +1,629 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/lib/ssrnat"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn add0n() -> @kernel.Thm
+
+pub fn add1n() -> @kernel.Thm
+
+pub fn add_sub_maxn() -> @kernel.Thm
+
+pub fn addin() -> @kernel.Thm
+
+pub fn addkn() -> @kernel.Thm
+
+pub fn addn0() -> @kernel.Thm
+
+pub fn addn1() -> @kernel.Thm
+
+pub fn addn_eq0() -> @kernel.Thm
+
+pub fn addn_gt0() -> @kernel.Thm
+
+pub fn addn_maxl() -> @kernel.Thm
+
+pub fn addn_maxr() -> @kernel.Thm
+
+pub fn addn_min_max() -> @kernel.Thm
+
+pub fn addn_minl() -> @kernel.Thm
+
+pub fn addn_minr() -> @kernel.Thm
+
+pub fn addn_suba() -> @kernel.Thm
+
+pub fn addna() -> @kernel.Thm
+
+pub fn addnac() -> @kernel.Thm
+
+pub fn addnc() -> @kernel.Thm
+
+pub fn addnca() -> @kernel.Thm
+
+pub fn addni() -> @kernel.Thm
+
+pub fn addnk() -> @kernel.Thm
+
+pub fn addnn() -> @kernel.Thm
+
+pub fn addns() -> @kernel.Thm
+
+pub fn addsn() -> @kernel.Thm
+
+pub fn addsnns() -> @kernel.Thm
+
+pub fn anti_leq() -> @kernel.Thm
+
+pub fn dist0n() -> @kernel.Thm
+
+pub fn distn() -> @kernel.Thm
+
+pub fn distn0() -> @kernel.Thm
+
+pub fn distn_add2l() -> @kernel.Thm
+
+pub fn distn_add2r() -> @kernel.Thm
+
+pub fn distn_eq0() -> @kernel.Thm
+
+pub fn distn_eq1() -> @kernel.Thm
+
+pub fn distnc() -> @kernel.Thm
+
+pub fn distnel() -> @kernel.Thm
+
+pub fn distner() -> @kernel.Thm
+
+pub fn distnn() -> @kernel.Thm
+
+pub fn distns() -> @kernel.Thm
+
+pub fn distsn() -> @kernel.Thm
+
+pub fn double() -> @kernel.Thm
+
+pub fn double0() -> @kernel.Thm
+
+pub fn double_add() -> @kernel.Thm
+
+pub fn double_eq0() -> @kernel.Thm
+
+pub fn double_gt0() -> @kernel.Thm
+
+pub fn double_inj() -> @kernel.Thm
+
+pub fn double_mull() -> @kernel.Thm
+
+pub fn double_mulr() -> @kernel.Thm
+
+pub fn double_sub() -> @kernel.Thm
+
+pub fn doublek() -> @kernel.Thm
+
+pub fn doubles() -> @kernel.Thm
+
+pub fn eq_leq() -> @kernel.Thm
+
+pub fn eq_sym() -> @kernel.Thm
+
+pub fn eqn0ngt() -> @kernel.Thm
+
+pub fn eqn_addl() -> @kernel.Thm
+
+pub fn eqn_addr() -> @kernel.Thm
+
+pub fn eqn_exp2l() -> @kernel.Thm
+
+pub fn eqn_exp2r() -> @kernel.Thm
+
+pub fn eqn_leq() -> @kernel.Thm
+
+pub fn eqn_maxl() -> @kernel.Thm
+
+pub fn eqn_maxr() -> @kernel.Thm
+
+pub fn eqn_minl() -> @kernel.Thm
+
+pub fn eqn_minr() -> @kernel.Thm
+
+pub fn eqn_mul1() -> @kernel.Thm
+
+pub fn eqn_mul2l() -> @kernel.Thm
+
+pub fn eqn_mul2r() -> @kernel.Thm
+
+pub fn eqn_pmul2l() -> @kernel.Thm
+
+pub fn eqn_pmul2r() -> @kernel.Thm
+
+pub fn eqn_sqr() -> @kernel.Thm
+
+pub fn eqss() -> @kernel.Thm
+
+pub fn exp0n() -> @kernel.Thm
+
+pub fn exp1n() -> @kernel.Thm
+
+pub fn expin() -> @kernel.Thm
+
+pub fn expn0() -> @kernel.Thm
+
+pub fn expn1() -> @kernel.Thm
+
+pub fn expn_add() -> @kernel.Thm
+
+pub fn expn_eq0() -> @kernel.Thm
+
+pub fn expn_gt0() -> @kernel.Thm
+
+pub fn expn_mull() -> @kernel.Thm
+
+pub fn expn_mulr() -> @kernel.Thm
+
+pub fn expni() -> @kernel.Thm
+
+pub fn expns() -> @kernel.Thm
+
+pub fn expnsr() -> @kernel.Thm
+
+pub fn fact0() -> @kernel.Thm
+
+pub fn fact_gt0() -> @kernel.Thm
+
+pub fn facts() -> @kernel.Thm
+
+pub fn geq_leqif() -> @kernel.Thm
+
+pub fn geqe() -> @kernel.Thm
+
+pub fn gte() -> @kernel.Thm
+
+pub fn half() -> @kernel.Thm
+
+pub fn half0() -> @kernel.Thm
+
+pub fn half_add() -> @kernel.Thm
+
+pub fn half_bit_double() -> @kernel.Thm
+
+pub fn half_def() -> @kernel.Thm
+
+pub fn half_double() -> @kernel.Thm
+
+pub fn half_gt0() -> @kernel.Thm
+
+pub fn half_leq() -> @kernel.Thm
+
+pub fn halfs() -> @kernel.Thm
+
+pub fn iter() -> @kernel.Thm
+
+pub fn iter_add() -> @kernel.Thm
+
+pub fn iter_add_v1() -> @kernel.Thm
+
+pub fn iteri() -> @kernel.Thm
+
+pub fn iteris() -> @kernel.Thm
+
+pub fn iteris_v1() -> @kernel.Thm
+
+pub fn iters() -> @kernel.Thm
+
+pub fn iters_v1() -> @kernel.Thm
+
+pub fn itersr() -> @kernel.Thm
+
+pub fn itersr_v1() -> @kernel.Thm
+
+pub fn leq0n() -> @kernel.Thm
+
+pub fn leq_add() -> @kernel.Thm
+
+pub fn leq_add2l() -> @kernel.Thm
+
+pub fn leq_add2r() -> @kernel.Thm
+
+pub fn leq_add_distn() -> @kernel.Thm
+
+pub fn leq_addl() -> @kernel.Thm
+
+pub fn leq_addr() -> @kernel.Thm
+
+pub fn leq_double() -> @kernel.Thm
+
+pub fn leq_eqvlt() -> @kernel.Thm
+
+pub fn leq_exp2l() -> @kernel.Thm
+
+pub fn leq_exp2r() -> @kernel.Thm
+
+pub fn leq_ltn_trans() -> @kernel.Thm
+
+pub fn leq_maxl() -> @kernel.Thm
+
+pub fn leq_maxr() -> @kernel.Thm
+
+pub fn leq_minl() -> @kernel.Thm
+
+pub fn leq_minr() -> @kernel.Thm
+
+pub fn leq_mul() -> @kernel.Thm
+
+pub fn leq_mul2l() -> @kernel.Thm
+
+pub fn leq_mul2r() -> @kernel.Thm
+
+pub fn leq_pexp2l() -> @kernel.Thm
+
+pub fn leq_pmul2l() -> @kernel.Thm
+
+pub fn leq_pmul2r() -> @kernel.Thm
+
+pub fn leq_pmull() -> @kernel.Thm
+
+pub fn leq_pmulr() -> @kernel.Thm
+
+pub fn leq_pred() -> @kernel.Thm
+
+pub fn leq_sdouble() -> @kernel.Thm
+
+pub fn leq_sqr() -> @kernel.Thm
+
+pub fn leq_sub2() -> @kernel.Thm
+
+pub fn leq_sub2l() -> @kernel.Thm
+
+pub fn leq_sub2r() -> @kernel.Thm
+
+pub fn leq_sub_add() -> @kernel.Thm
+
+pub fn leq_subr() -> @kernel.Thm
+
+pub fn leq_subs() -> @kernel.Thm
+
+pub fn leq_total() -> @kernel.Thm
+
+pub fn leq_trans() -> @kernel.Thm
+
+pub fn leqe() -> @kernel.Thm
+
+pub fn leqif() -> @kernel.Thm
+
+pub fn leqif_add() -> @kernel.Thm
+
+pub fn leqif_add_distn() -> @kernel.Thm
+
+pub fn leqif_eq() -> @kernel.Thm
+
+pub fn leqif_geq() -> @kernel.Thm
+
+pub fn leqif_imp_eq() -> @kernel.Thm
+
+pub fn leqif_imp_le() -> @kernel.Thm
+
+pub fn leqif_mul() -> @kernel.Thm
+
+pub fn leqif_refl() -> @kernel.Thm
+
+pub fn leqif_trans() -> @kernel.Thm
+
+pub fn leqifp() -> @kernel.Thm
+
+pub fn leqn0() -> @kernel.Thm
+
+pub fn leqngt() -> @kernel.Thm
+
+pub fn leqnn() -> @kernel.Thm
+
+pub fn leqnsn() -> @kernel.Thm
+
+pub fn leqp() -> @kernel.Thm
+
+pub fn leqspred() -> @kernel.Thm
+
+pub fn leqss() -> @kernel.Thm
+
+pub fn leqw() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn lt0n() -> @kernel.Thm
+
+pub fn lt0n_neq0() -> @kernel.Thm
+
+pub fn lte() -> @kernel.Thm
+
+pub fn ltn0() -> @kernel.Thm
+
+pub fn ltn0sn() -> @kernel.Thm
+
+pub fn ltn_add2l() -> @kernel.Thm
+
+pub fn ltn_add2r() -> @kernel.Thm
+
+pub fn ltn_add_sub() -> @kernel.Thm
+
+pub fn ltn_addl() -> @kernel.Thm
+
+pub fn ltn_addr() -> @kernel.Thm
+
+pub fn ltn_double() -> @kernel.Thm
+
+pub fn ltn_exp2l() -> @kernel.Thm
+
+pub fn ltn_exp2r() -> @kernel.Thm
+
+pub fn ltn_expl() -> @kernel.Thm
+
+pub fn ltn_leq_trans() -> @kernel.Thm
+
+pub fn ltn_leqif() -> @kernel.Thm
+
+pub fn ltn_mul() -> @kernel.Thm
+
+pub fn ltn_mul2l() -> @kernel.Thm
+
+pub fn ltn_mul2r() -> @kernel.Thm
+
+pub fn ltn_neqale() -> @kernel.Thm
+
+pub fn ltn_pexp2l() -> @kernel.Thm
+
+pub fn ltn_pmul2l() -> @kernel.Thm
+
+pub fn ltn_pmul2r() -> @kernel.Thm
+
+pub fn ltn_pmull() -> @kernel.Thm
+
+pub fn ltn_pmulr() -> @kernel.Thm
+
+pub fn ltn_predk() -> @kernel.Thm
+
+pub fn ltn_sdouble() -> @kernel.Thm
+
+pub fn ltn_sqr() -> @kernel.Thm
+
+pub fn ltn_sub2l() -> @kernel.Thm
+
+pub fn ltn_sub2r() -> @kernel.Thm
+
+pub fn ltn_subs() -> @kernel.Thm
+
+pub fn ltn_trans() -> @kernel.Thm
+
+pub fn ltngtp() -> @kernel.Thm
+
+pub fn ltnn() -> @kernel.Thm
+
+pub fn ltnnge() -> @kernel.Thm
+
+pub fn ltnp() -> @kernel.Thm
+
+pub fn ltns() -> @kernel.Thm
+
+pub fn ltnsn() -> @kernel.Thm
+
+pub fn ltnw() -> @kernel.Thm
+
+pub fn max0n() -> @kernel.Thm
+
+pub fn maxkn() -> @kernel.Thm
+
+pub fn maxn() -> @kernel.Thm
+
+pub fn maxn0() -> @kernel.Thm
+
+pub fn maxn_minl() -> @kernel.Thm
+
+pub fn maxn_minr() -> @kernel.Thm
+
+pub fn maxn_mull() -> @kernel.Thm
+
+pub fn maxn_mulr() -> @kernel.Thm
+
+pub fn maxna() -> @kernel.Thm
+
+pub fn maxnac() -> @kernel.Thm
+
+pub fn maxnc() -> @kernel.Thm
+
+pub fn maxnca() -> @kernel.Thm
+
+pub fn maxnk() -> @kernel.Thm
+
+pub fn maxnl() -> @kernel.Thm
+
+pub fn maxnn() -> @kernel.Thm
+
+pub fn maxnr() -> @kernel.Thm
+
+pub fn min0n() -> @kernel.Thm
+
+pub fn minkn() -> @kernel.Thm
+
+pub fn minn() -> @kernel.Thm
+
+pub fn minn0() -> @kernel.Thm
+
+pub fn minn_maxl() -> @kernel.Thm
+
+pub fn minn_maxr() -> @kernel.Thm
+
+pub fn minn_mull() -> @kernel.Thm
+
+pub fn minn_mulr() -> @kernel.Thm
+
+pub fn minn_to_maxn() -> @kernel.Thm
+
+pub fn minna() -> @kernel.Thm
+
+pub fn minnac() -> @kernel.Thm
+
+pub fn minnc() -> @kernel.Thm
+
+pub fn minnca() -> @kernel.Thm
+
+pub fn minnk() -> @kernel.Thm
+
+pub fn minnl() -> @kernel.Thm
+
+pub fn minnn() -> @kernel.Thm
+
+pub fn minnr() -> @kernel.Thm
+
+pub fn monotone_leqif() -> @kernel.Thm
+
+pub fn mul0n() -> @kernel.Thm
+
+pub fn mul1n() -> @kernel.Thm
+
+pub fn mul2n() -> @kernel.Thm
+
+pub fn muln0() -> @kernel.Thm
+
+pub fn muln1() -> @kernel.Thm
+
+pub fn muln2() -> @kernel.Thm
+
+pub fn muln_addl() -> @kernel.Thm
+
+pub fn muln_addr() -> @kernel.Thm
+
+pub fn muln_eq0() -> @kernel.Thm
+
+pub fn muln_gt0() -> @kernel.Thm
+
+pub fn muln_subl() -> @kernel.Thm
+
+pub fn muln_subr() -> @kernel.Thm
+
+pub fn mulna() -> @kernel.Thm
+
+pub fn mulnac() -> @kernel.Thm
+
+pub fn mulnc() -> @kernel.Thm
+
+pub fn mulnca() -> @kernel.Thm
+
+pub fn mulnn() -> @kernel.Thm
+
+pub fn mulns() -> @kernel.Thm
+
+pub fn mulnsr() -> @kernel.Thm
+
+pub fn mulsn() -> @kernel.Thm
+
+pub fn mulsnr() -> @kernel.Thm
+
+pub fn nat_agm2() -> @kernel.Thm
+
+pub fn nat_cauchy() -> @kernel.Thm
+
+pub fn neq0_lt0n() -> @kernel.Thm
+
+pub fn neq_ltn() -> @kernel.Thm
+
+pub fn odd() -> @kernel.Thm
+
+pub fn odd0() -> @kernel.Thm
+
+pub fn odd1() -> @kernel.Thm
+
+pub fn odd_add() -> @kernel.Thm
+
+pub fn odd_double() -> @kernel.Thm
+
+pub fn odd_double_half() -> @kernel.Thm
+
+pub fn odd_exp() -> @kernel.Thm
+
+pub fn odd_mul() -> @kernel.Thm
+
+pub fn odd_opp() -> @kernel.Thm
+
+pub fn odd_sub() -> @kernel.Thm
+
+pub fn odds() -> @kernel.Thm
+
+pub fn posnp() -> @kernel.Thm
+
+pub fn predn_sub() -> @kernel.Thm
+
+pub fn predn_subs() -> @kernel.Thm
+
+pub fn prednk() -> @kernel.Thm
+
+pub fn sqrn_add() -> @kernel.Thm
+
+pub fn sqrn_add_sub() -> @kernel.Thm
+
+pub fn sqrn_distn() -> @kernel.Thm
+
+pub fn sqrn_gt0() -> @kernel.Thm
+
+pub fn sqrn_inj() -> @kernel.Thm
+
+pub fn sqrn_sub() -> @kernel.Thm
+
+pub fn sub0n() -> @kernel.Thm
+
+pub fn sub_sub_minn() -> @kernel.Thm
+
+pub fn subkn() -> @kernel.Thm
+
+pub fn subn0() -> @kernel.Thm
+
+pub fn subn_add2l() -> @kernel.Thm
+
+pub fn subn_add2r() -> @kernel.Thm
+
+pub fn subn_eq0() -> @kernel.Thm
+
+pub fn subn_gt0() -> @kernel.Thm
+
+pub fn subn_sqr() -> @kernel.Thm
+
+pub fn subn_sub() -> @kernel.Thm
+
+pub fn subn_suba() -> @kernel.Thm
+
+pub fn subnac() -> @kernel.Thm
+
+pub fn subnk() -> @kernel.Thm
+
+pub fn subnkc() -> @kernel.Thm
+
+pub fn subnn() -> @kernel.Thm
+
+pub fn subsnn() -> @kernel.Thm
+
+pub fn subss() -> @kernel.Thm
+
+pub fn succn_inj() -> @kernel.Thm
+
+pub fn succnk() -> @kernel.Thm
+
+pub fn uphalf() -> @kernel.Thm
+
+pub fn uphalf0() -> @kernel.Thm
+
+pub fn uphalf_double() -> @kernel.Thm
+
+pub fn uphalf_half() -> @kernel.Thm
+
+pub fn uphalfs() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

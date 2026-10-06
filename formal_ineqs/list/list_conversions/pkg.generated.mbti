@@ -1,0 +1,120 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/list/list_conversions"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn all2_0_p() -> @kernel.Thm
+
+pub fn all2_cons_f1_p() -> @kernel.Thm
+
+pub fn all2_cons_f2_p() -> @kernel.Thm
+
+pub fn all2_cons_t_p() -> @kernel.Thm
+
+pub fn all2_conv_univ((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn all_0_p() -> @kernel.Thm
+
+pub fn all_a_hd() -> @kernel.Thm
+
+pub fn all_a_tl() -> @kernel.Thm
+
+pub fn all_cons_f1_p() -> @kernel.Thm
+
+pub fn all_cons_f2_p() -> @kernel.Thm
+
+pub fn all_cons_t_p() -> @kernel.Thm
+
+pub fn all_conv_univ((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn el_0_p() -> @kernel.Thm
+
+pub fn el_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn el_n_p() -> @kernel.Thm
+
+pub fn eval_el(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_hd(@kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_length(@kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_mem_univ((@kernel.Term) -> @kernel.Thm raise, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_zip(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn filter_a_empty() -> @kernel.Thm
+
+pub fn filter_a_hd() -> @kernel.Thm
+
+pub fn filter_a_tl() -> @kernel.Thm
+
+pub fn filter_conv_univ((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn fst_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn fst_p() -> @kernel.Thm
+
+pub fn get_all(@kernel.Thm) -> @list.List[@kernel.Thm] raise
+
+pub fn hd_a_cons() -> @kernel.Thm
+
+pub fn hd_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn length_0_p() -> @kernel.Thm
+
+pub fn length_cons_p() -> @kernel.Thm
+
+pub fn length_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn map_ab_cons() -> @kernel.Thm
+
+pub fn map_ab_empty() -> @kernel.Thm
+
+pub fn map_conv_univ((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn mem_a_empty() -> @kernel.Thm
+
+pub fn mem_a_hd() -> @kernel.Thm
+
+pub fn mem_a_tl() -> @kernel.Thm
+
+pub fn mem_conv_univ((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn my_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn my_rule_num(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn select_all(@kernel.Thm, @list.List[Int64]) -> @list.List[@kernel.Thm] raise
+
+pub fn set_of_list_a_cons() -> @kernel.Thm
+
+pub fn set_of_list_a_empty() -> @kernel.Thm
+
+pub fn set_of_list_a_h() -> @kernel.Thm
+
+pub fn set_of_list_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn snd_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn snd_p() -> @kernel.Thm
+
+pub fn zip_0_p() -> @kernel.Thm
+
+pub fn zip_cons_p() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

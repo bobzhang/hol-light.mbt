@@ -1,0 +1,193 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/lib/ssrfun"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn associative() -> @kernel.Thm
+
+pub fn bij_can_bij() -> @kernel.Thm
+
+pub fn bij_can_bij_v1() -> @kernel.Thm
+
+pub fn bij_can_eq() -> @kernel.Thm
+
+pub fn bij_can_eq_v1() -> @kernel.Thm
+
+pub fn bij_can_sym() -> @kernel.Thm
+
+pub fn bij_can_sym_v1() -> @kernel.Thm
+
+pub fn bij_comp() -> @kernel.Thm
+
+pub fn bij_comp_v1() -> @kernel.Thm
+
+pub fn bij_inj() -> @kernel.Thm
+
+pub fn bij_inj_v1() -> @kernel.Thm
+
+pub fn bijective() -> @kernel.Thm
+
+pub fn can_comp() -> @kernel.Thm
+
+pub fn can_comp_v1() -> @kernel.Thm
+
+pub fn can_inj() -> @kernel.Thm
+
+pub fn can_inj_v1() -> @kernel.Thm
+
+pub fn can_pcan() -> @kernel.Thm
+
+pub fn can_pcan_v1() -> @kernel.Thm
+
+pub fn cancel() -> @kernel.Thm
+
+pub fn canlr() -> @kernel.Thm
+
+pub fn canlr_v1() -> @kernel.Thm
+
+pub fn canrl() -> @kernel.Thm
+
+pub fn canrl_v1() -> @kernel.Thm
+
+pub fn commutative() -> @kernel.Thm
+
+pub fn congr1() -> @kernel.Thm
+
+pub fn congr2() -> @kernel.Thm
+
+pub fn eq_bij() -> @kernel.Thm
+
+pub fn eq_bij_v1() -> @kernel.Thm
+
+pub fn eq_can() -> @kernel.Thm
+
+pub fn eq_can_v1() -> @kernel.Thm
+
+pub fn eq_ext() -> @kernel.Thm
+
+pub fn eq_inj() -> @kernel.Thm
+
+pub fn eq_inj_v1() -> @kernel.Thm
+
+pub fn eq_sym() -> @kernel.Thm
+
+pub fn eq_trans() -> @kernel.Thm
+
+pub fn erefl() -> @kernel.Thm
+
+pub fn esym() -> @kernel.Thm
+
+pub fn etrans() -> @kernel.Thm
+
+pub fn f_equal() -> @kernel.Thm
+
+pub fn f_equal2() -> @kernel.Thm
+
+pub fn idempotent() -> @kernel.Thm
+
+pub fn inj_can_eq() -> @kernel.Thm
+
+pub fn inj_can_eq_v1() -> @kernel.Thm
+
+pub fn inj_can_sym() -> @kernel.Thm
+
+pub fn inj_can_sym_v1() -> @kernel.Thm
+
+pub fn inj_comp() -> @kernel.Thm
+
+pub fn inj_comp_v1() -> @kernel.Thm
+
+pub fn inj_id() -> @kernel.Thm
+
+pub fn inj_id_v1() -> @kernel.Thm
+
+pub fn injective() -> @kernel.Thm
+
+pub fn inv_bij() -> @kernel.Thm
+
+pub fn inv_bij_v1() -> @kernel.Thm
+
+pub fn inv_inj() -> @kernel.Thm
+
+pub fn inv_inj_v1() -> @kernel.Thm
+
+pub fn involutive() -> @kernel.Thm
+
+pub fn left_commutative() -> @kernel.Thm
+
+pub fn left_distributive() -> @kernel.Thm
+
+pub fn left_id() -> @kernel.Thm
+
+pub fn left_injective() -> @kernel.Thm
+
+pub fn left_inverse() -> @kernel.Thm
+
+pub fn left_loop() -> @kernel.Thm
+
+pub fn left_zero() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn oapp() -> @kernel.Thm
+
+pub fn obind() -> @kernel.Thm
+
+pub fn obind_alt() -> @kernel.Thm
+
+pub fn ocancel() -> @kernel.Thm
+
+pub fn odflt() -> @kernel.Thm
+
+pub fn odflt_alt() -> @kernel.Thm
+
+pub fn omap() -> @kernel.Thm
+
+pub fn omap_alt() -> @kernel.Thm
+
+pub fn pcan_inj() -> @kernel.Thm
+
+pub fn pcan_inj_v1() -> @kernel.Thm
+
+pub fn pcan_pcomp() -> @kernel.Thm
+
+pub fn pcan_pcomp_v1() -> @kernel.Thm
+
+pub fn pcancel() -> @kernel.Thm
+
+pub fn pcomp() -> @kernel.Thm
+
+pub fn rev_left_loop() -> @kernel.Thm
+
+pub fn rev_right_loop() -> @kernel.Thm
+
+pub fn right_commutative() -> @kernel.Thm
+
+pub fn right_distributive() -> @kernel.Thm
+
+pub fn right_id() -> @kernel.Thm
+
+pub fn right_injective() -> @kernel.Thm
+
+pub fn right_inverse() -> @kernel.Thm
+
+pub fn right_loop() -> @kernel.Thm
+
+pub fn right_zero() -> @kernel.Thm
+
+pub fn self_inverse() -> @kernel.Thm
+
+pub fn some_inj() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
