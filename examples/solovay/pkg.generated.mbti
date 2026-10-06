@@ -1,0 +1,74 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/examples/solovay"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn component() -> @kernel.Thm
+
+pub fn component_orthogonal() -> @kernel.Thm
+
+pub fn example_1() -> @kernel.Thm
+
+pub fn example_10() -> @kernel.Thm
+
+pub fn example_2() -> @kernel.Thm
+
+pub fn example_4() -> @kernel.Thm
+
+pub fn example_5() -> @kernel.Thm
+
+pub fn example_7() -> @kernel.Thm
+
+pub fn example_9() -> @kernel.Thm
+
+pub fn forall_length_clauses() -> @kernel.Thm
+
+pub fn gram_schmidt_lemma() -> @kernel.Thm
+
+pub fn is_vector_ty(@kernel.HolType) -> Bool raise
+
+pub fn itlist2_0_lemma() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn mk_solovay_proforma(Int64) -> @kernel.Thm raise
+
+pub fn norm_elim_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn norm_elim_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn norm_elim_thm() -> @kernel.Thm
+
+pub fn orthogonal_simp_clauses() -> @kernel.Thm
+
+pub fn orthogonal_sum_lemma() -> @kernel.Thm
+
+pub fn pythagoras() -> @kernel.Thm
+
+pub fn solovay_lemma() -> @kernel.Thm
+
+pub fn solovay_proforma() -> @kernel.Thm
+
+pub fn solovay_proforma_eq() -> @kernel.Thm
+
+pub fn solovay_reduce_tac(@list.List[(String, @kernel.Thm)], @kernel.Term) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn solovay_rule(Int64) -> @kernel.Thm raise
+
+pub fn solovay_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn solovay_vector_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn vector_sub_elim_thm() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
