@@ -3,6 +3,7 @@ package "bobzhang/hol_light/printer"
 
 import {
   "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
   "bobzhang/hol_light/pp",
   "moonbitlang/core/list",
   "moonbitlang/core/ref",
@@ -14,6 +15,8 @@ pub fn binders() -> @list.List[String]
 pub fn delete_user_color_printer(String) -> Unit raise
 
 pub fn delete_user_printer(String) -> Unit raise
+
+pub fn formatter_of_out_channel(@lib.OutChannel) -> @pp.Formatter
 
 pub fn get_infix_status(String) -> (Int64, String) raise
 
