@@ -7,6 +7,8 @@ import {
 }
 
 // Values
+pub fn abs_big_int(@bigint.BigInt) -> @bigint.BigInt
+
 pub fn abs_num(Num) -> Num
 
 pub fn add_big_int(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt
@@ -69,7 +71,11 @@ pub fn max_num(Num, Num) -> Num
 
 pub fn min_num(Num, Num) -> Num
 
+pub fn minus_big_int(@bigint.BigInt) -> @bigint.BigInt
+
 pub fn minus_num(Num) -> Num
+
+pub fn mod_big_int(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt raise
 
 pub fn mod_num(Num, Num) -> Num raise
 

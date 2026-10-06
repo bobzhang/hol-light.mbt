@@ -508,6 +508,24 @@ module Lower = struct
     | Types.Ttuple ts -> List.length ts
     | _ -> 0
 
+  (* A type of an earlier file that its module's signature keeps abstract
+     (`type ifloat` of Formal_ineqs/informal/informal_float.hl, a triple
+     inside the module) is here the MoonBit alias the package declares:
+     its expansion, read from the interface. *)
+  let expand_named (t : M.ty) : M.ty =
+    match t with
+    | M.Named (q, []) ->
+        let found = ref None in
+        Hashtbl.iter
+          (fun _ (pkg, mname) ->
+            if !found = None && qualified (pkg, mname) = q then
+              match M.find ~root:!Names.root pkg mname with
+              | Some (M.Alias t') -> found := Some t'
+              | _ -> ())
+          own_types;
+        (match !found with Some t' -> t' | None -> t)
+    | _ -> t
+
   let is_unit ty =
     match Types.get_desc (expand ty) with
     | Types.Tconstr (p, [], _) -> Path.name p = "unit"
@@ -827,7 +845,16 @@ module Lower = struct
              { hstmts = []; hexp = Atom "@lib.temp_path"; hmty = mty_of oty; hoty = Some oty }
          | [ "Num"; n ] ->
              (* OCaml ints are 63-bit (Int64) *)
-             let n = match n with "int_of_num" -> "int63_of_num" | "num_of_int" -> "num_of_int64" | n -> n in
+             let n =
+               match n with
+               | "int_of_num" -> "int63_of_num" | "num_of_int" -> "num_of_int64"
+               (* the operators, by their qualified names (`Num.( */ )`,
+                  Formal_ineqs/informal/informal_float.hl) *)
+               | "+/" -> "add_num" | "-/" -> "sub_num" | "*/" -> "mult_num" | "//" -> "div_num"
+               | "**/" -> "power_num" | "=/" -> "eq_num" | "</" -> "lt_num" | "<=/" -> "le_num"
+               | ">/" -> "gt_num" | ">=/" -> "ge_num" | "<>/" -> "neq_num"
+               | n -> n
+             in
              (match M.find ~root:!Names.root "num" n with
               | Some decl -> { hstmts = []; hexp = Atom ("@num." ^ n); hmty = mty_of_decl decl; hoty = Some oty }
               | None -> unsupported loc "no MoonBit declaration for Num.%s" n)
@@ -1642,7 +1669,14 @@ module Lower = struct
           match otys with
           | [] -> None
           | o :: rest ->
-              let sz = match o with Some a -> tuple_size a | None -> 0 in
+              let sz =
+                match o with
+                | Some a ->
+                    (match tuple_size a with
+                     | 0 -> (match expand_named (mty_of a) with M.Tuple ts -> List.length ts | _ -> 0)
+                     | n -> n)
+                | None -> 0
+              in
               let tuple_param = match List.nth ps pos with M.Tuple ts -> List.length ts = sz | _ -> false in
               let options = if sz > 1 && not tuple_param then [ sz; 1 ] else if sz > 1 then [ 1; sz ] else [ 1 ] in
               List.fold_left
@@ -1909,6 +1943,7 @@ module Lower = struct
       | "lnot" -> (1, fun [ a ] _ -> Call (Atom "@lib.lnot63", [ a ]))
       | "log" -> (1, fun [ a ] _ -> Call (Atom "@lib.float_log", [ a ]))
       | "atan" -> (1, fun [ a ] _ -> Call (Atom "@lib.float_atan", [ a ]))
+      | "nan" -> (0, fun [] _ -> Atom "@double.not_a_number")
       | "infinity" -> (0, fun [] _ -> Atom "@double.infinity")
       | "Unix.mkdir" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.unix_mkdir", [ a; b ]))
       | "frexp" -> (1, fun [ a ] _ -> Call (Atom "@lib.float_frexp", [ a ]))
@@ -2275,6 +2310,8 @@ module Lower = struct
      arguments, or one k-tuple argument (spread). Completed stages and the
      arguments are bound before a partial closure is built. *)
   and apply_values loc (v, t) xs : stmt list * exp * M.ty =
+    (* an argument of an abstract type that is a tuple here *)
+    let xs = List.map (fun (x, xt) -> match xt with M.Named (_, []) -> (x, expand_named xt) | _ -> (x, xt)) xs in
     match xs with
     | [] -> ([], v, t)
     | _ ->

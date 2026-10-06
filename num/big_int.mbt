@@ -153,3 +153,28 @@ pub fn mult_int_big_int(n : Int64, a : @bigint.BigInt) -> @bigint.BigInt {
 pub fn add_int_big_int(n : Int64, a : @bigint.BigInt) -> @bigint.BigInt {
   @bigint.BigInt::from_int64(n) + a
 }
+
+///|
+/// `Big_int.mod_big_int`: the remainder of `quomod_big_int` (not negative).
+pub fn mod_big_int(
+  a : @bigint.BigInt,
+  b : @bigint.BigInt,
+) -> @bigint.BigInt raise {
+  quomod_big_int(a, b).1
+}
+
+///|
+/// `Big_int.abs_big_int`
+pub fn abs_big_int(a : @bigint.BigInt) -> @bigint.BigInt {
+  if a < big_zero {
+    -a
+  } else {
+    a
+  }
+}
+
+///|
+/// `Big_int.minus_big_int`
+pub fn minus_big_int(a : @bigint.BigInt) -> @bigint.BigInt {
+  -a
+}
