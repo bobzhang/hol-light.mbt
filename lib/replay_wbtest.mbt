@@ -105,3 +105,14 @@ test "Stream and Char.escaped" {
     content="a\\n\\'",
   )
 }
+
+///|
+test "strings_of_file" {
+  file_of_string("/tmp/lines.txt", "a\n\nb\n")
+  inspect(
+    strings_of_file("/tmp/lines.txt").to_array().join("|"),
+    content="a||b",
+  )
+  file_of_string("/tmp/lines.txt", "a\nb")
+  inspect(strings_of_file("/tmp/lines.txt").to_array().join("|"), content="a|b")
+}

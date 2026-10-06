@@ -133,6 +133,29 @@ fn command_shape(cmd : String) -> (String, Array[String]) {
 }
 
 ///|
+/// lib.ml's `strings_of_file`: the file's lines (a final newline ends the
+/// last line; it does not start an empty one).
+pub fn strings_of_file(name : String) -> @list.List[String] raise {
+  match virtual_files.get(name) {
+    Some(s) => {
+      let lines : Array[String] = []
+      let mut start = 0
+      for i in 0..<s.length() {
+        if s[i].to_int() == 10 {
+          lines.push(s.view(start_offset=start, end_offset=i).to_string())
+          start = i + 1
+        }
+      }
+      if start < s.length() {
+        lines.push(s.view(start_offset=start).to_string())
+      }
+      @list.from_array(lines)
+    }
+    None => raise Failure("strings_of_file: can't open " + name)
+  }
+}
+
+///|
 /// lib.ml's `file_of_string`: an in-memory file.
 pub fn file_of_string(name : String, s : String) -> Unit {
   virtual_files[name] = s

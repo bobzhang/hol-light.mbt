@@ -447,6 +447,8 @@ pub fn string_split_on_char(Char, String) -> @list.List[String]
 
 pub fn string_sub(String, Int, Int) -> String raise
 
+pub fn strings_of_file(String) -> @list.List[String] raise
+
 pub fn[A] striplist((A) -> (A, A) raise, A) -> @list.List[A] raise
 
 pub fn sub63(Int64, Int64) -> Int64
