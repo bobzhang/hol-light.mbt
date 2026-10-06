@@ -87,32 +87,37 @@ and file I/O before starting it.
    Tutorial/ files. Not ported from UnitTests/: basic_tests.ml needs the
    zarith bignum backend (`pow`), printer_tests.ml and records.ml are test
    scripts (`Format.set_margin`, `Printexc`, `exit`, `Assert_failure`).
-8. **External programs and other formats**: each needs a decision first.
-   - Minisat, Cadical, QBF (SAT/QBF solver proofs) and Examples/sos.ml
-     (csdp): replay recorded solver output, as lib/gp.mbt does for PARI/GP.
-     Then 100/thales and ceva.
-   - miz3 (its own proof language, evaluated at run time), LP_arith.
+8. **External programs and other formats**.
+   - Done: a file's external commands are recorded in the reference session
+     (tools/ocaml_ref/prelude.ml wraps `Sys.command`) and replayed
+     (`@lib.sys_command`, `<pkg>/commands.mbt`), with in-memory files and
+     channels (lib/gp.mbt, lib/channels.mbt). With it: Cadical/ and its
+     test.ml (cadical, lrat-trim), Minisat/ (MiniSat-p 1.14; `readDimacs`
+     by hand: upstream uses Stream and Genlex), Examples/sos.ml and what
+     uses it (csdp): 100/thales, ceva, Examples/solovay, Tutorial/Vectors,
+     Custom_tactics, Defining_new_types. The reference toolchain needs
+     those programs on PATH (README).
+   - Minisat/test.ml also runs zChaff (licence to accept: not installed);
+     minisat_prove's test has three SAT_PROVE checks instead.
+   - Left with a program: WZ/ and Tutorial/Linking_external_tools.ml
+     (maxima), QBF/ (squolem), LP_arith/ (cdd), Examples/prover9.ml.
+   - miz3 (its own proof language, evaluated at run time; OCaml code in
+     miz3/, with Unix signals and a vi server to stub): then
+     RichterHilbertAxiomGeometry/ (36K) and
+     Examples/inverse_bug_puzzle_miz3.ml.
    - Formal_ineqs (44K, 62 files in make.ml's closure): the tooling loads
      it (theory.ROOTS: one linear order; nested package paths), and its
-     first four files translate (arith_options, misc_functions, misc_vars,
-     arith/arith_num: sealed modules and `exception Error` are handled).
-     Survey it with `HOL_KEEP_GOING=1 batch.py --translate-only --files
-     ...`; one file alone, without the Multivariate/ chain, with
-     `translate.sh translate Formal_ineqs/arith/arith_num.hl`. Next, in
-     order:
-     arith/arith_cache.hl's `reset_cache` has a local function used at two
-     types (`let clear = Hashtbl.clear in clear t1; clear t2`: MoonBit
-     closures are monomorphic, lift it as a generic function);
-     then whatever the survey still reports once that builds (the
-     "no provenance for th_rule/case_rule/RULE ..." lines come after
-     packages that failed to build, so they may be noise);
-     `Big_int.sign_big_int`; and tests/log.hl, which writes log files
-     (`Unix.mkdir`, output channels, formats): port that module by hand,
-     as jordan/tactics_refine/dump.mbt.
-   - Tutorial/: the six files left need sos.ml, Rqe/make.ml or external
-     tools.
+     first four files translate. Survey it with `HOL_KEEP_GOING=1 batch.py
+     --translate-only --files ...`; one file alone with `translate.sh
+     translate Formal_ineqs/arith/arith_num.hl`. Next: arith/arith_cache.hl's
+     `reset_cache` has a local function used at two types (`let clear =
+     Hashtbl.clear in clear t1; clear t2`: lift it as a generic function);
+     `Big_int.sign_big_int`; tests/log.hl writes log files (the channels
+     of lib/channels.mbt may now do; formats are not supported).
+   - Mizarlight (its own camlp5 syntax extension, pa_f.ml).
    - Not theories, not ported: Proofrecording (a second kernel), ProofTrace,
-     mcp, update_database, help.ml/database.ml, tactician_light.ml.
+     mcp, update_database, help.ml/database.ml, tactician_light.ml,
+     UnitTests/ (test scripts; basic_tests.ml needs the zarith backend).
 9. **Closing**: regenerate everything once (retranslate_all.py), the whole
    suite on wasm (`tools/test.py all --target wasm`), CI with shards,
    separate mooncakes modules per directory, README.
