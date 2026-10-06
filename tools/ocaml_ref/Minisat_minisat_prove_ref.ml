@@ -55,6 +55,11 @@ attempt "types" (fun () -> String.concat " " (List.map (fun (s,n) -> s ^ "/" ^ s
 attempt "constants" (fun () -> String.concat " " (List.map fst (constants())));;
 attempt "definitions" (fun () -> string_of_int (List.length (definitions())));;
 (* BEGIN EXTRA *)
+(* SAT_PROVE runs MiniSat (the directory's own test.ml also needs zChaff):
+   three small problems, the runs recorded and replayed *)
+attempt "SAT_PROVE 1" (fun () -> sthm (SAT_PROVE (tm "(p ==> q) <=> (p <=> p /\\ q)")));;
+attempt "SAT_PROVE 2" (fun () -> sthm (SAT_PROVE (tm "((p ==> q) ==> p) ==> p")));;
+attempt "SAT_PROVE 3" (fun () -> sthm (SAT_PROVE (tm "(a \\/ b) /\\ (~a \\/ c) /\\ (~b \\/ c) ==> c")));;
 (* END EXTRA *)
 attempt "counter_tyvar" (fun () -> stm (tm "zz_counter"));;
 attempt "counter_genvar" (fun () -> stm (genvar bool_ty));;
