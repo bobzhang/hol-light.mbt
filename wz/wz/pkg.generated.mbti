@@ -1,0 +1,246 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/wz/wz"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn add_tm() -> @kernel.Term
+
+pub fn apply_fbpow_conv((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn approachable_within_augmented_magical_set() -> @kernel.Thm
+
+pub fn countable_ratpoly() -> @kernel.Thm
+
+pub fn countable_ratpolyfun() -> @kernel.Thm
+
+pub fn dense_magical_set() -> @kernel.Thm
+
+pub fn finite_support(@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise
+
+pub fn finite_support_add() -> @kernel.Thm
+
+pub fn finite_support_binom() -> @kernel.Thm
+
+pub fn finite_support_mul() -> @kernel.Thm
+
+pub fn finite_support_real_add() -> @kernel.Thm
+
+pub fn finite_support_real_div() -> @kernel.Thm
+
+pub fn finite_support_real_inv() -> @kernel.Thm
+
+pub fn finite_support_real_mul() -> @kernel.Thm
+
+pub fn finite_support_real_of_num() -> @kernel.Thm
+
+pub fn finite_support_real_pow() -> @kernel.Thm
+
+pub fn finite_support_real_sub() -> @kernel.Thm
+
+pub fn finite_support_spow() -> @kernel.Thm
+
+pub fn finite_support_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn in_magical_set_imp_not_ratty() -> @kernel.Thm
+
+pub fn lim_inv_rfact() -> @kernel.Thm
+
+pub fn lim_rbinom() -> @kernel.Thm
+
+pub fn lim_rfact() -> @kernel.Thm
+
+pub fn limit_variant(@kernel.Term, @kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn magical_set() -> @kernel.Thm
+
+pub fn nonzero_adhoc_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn nonzero_divis_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn nonzero_ineq_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn nonzero_ratty_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn output_simp_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn pat_rbinom() -> @kernel.Term
+
+pub fn pat_rfact() -> @kernel.Term
+
+pub fn pat_spow() -> @kernel.Term
+
+pub fn pats() -> @list.List[(@kernel.Term, @kernel.Term)]
+
+pub fn poly_eval() -> @kernel.Thm
+
+pub fn poly_eval_ratpoly() -> @kernel.Thm
+
+pub fn pth() -> @kernel.Thm
+
+pub fn pth_add() -> @kernel.Thm
+
+pub fn pth_both_down() -> @kernel.Thm
+
+pub fn pth_both_up() -> @kernel.Thm
+
+pub fn pth_bottom_down() -> @kernel.Thm
+
+pub fn pth_bottom_up() -> @kernel.Thm
+
+pub fn pth_down() -> @kernel.Thm
+
+pub fn pth_main() -> @kernel.Thm
+
+pub fn pth_mult() -> @kernel.Thm
+
+pub fn pth_rbinom() -> @kernel.Thm
+
+pub fn pth_rfact() -> @kernel.Thm
+
+pub fn pth_spow() -> @kernel.Thm
+
+pub fn pth_top_down() -> @kernel.Thm
+
+pub fn pth_top_up() -> @kernel.Thm
+
+pub fn pth_up() -> @kernel.Thm
+
+pub fn pth_zero() -> @kernel.Thm
+
+pub fn ratpoly() -> @kernel.Thm
+
+pub fn ratpolyfun() -> @kernel.Thm
+
+pub fn ratpolyfun_add() -> @kernel.Thm
+
+pub fn ratpolyfun_const() -> @kernel.Thm
+
+pub fn ratpolyfun_mul() -> @kernel.Thm
+
+pub fn ratpolyfun_neg() -> @kernel.Thm
+
+pub fn ratpolyfun_parameter() -> @kernel.Thm
+
+pub fn ratpolyfun_pow() -> @kernel.Thm
+
+pub fn ratpolyfun_sub() -> @kernel.Thm
+
+pub fn ratpolyfun_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn ratpolyfun_var() -> @kernel.Thm
+
+pub fn ratty() -> @kernel.Thm
+
+pub fn rbinom() -> @kernel.Thm
+
+pub fn rbinom_bottom_step() -> @kernel.Thm
+
+pub fn rbinom_bottom_step_down() -> @kernel.Thm
+
+pub fn rbinom_step_both_down() -> @kernel.Thm
+
+pub fn rbinom_step_both_up() -> @kernel.Thm
+
+pub fn rbinom_step_conv(@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn rbinom_top_step() -> @kernel.Thm
+
+pub fn rbinom_top_step_down() -> @kernel.Thm
+
+pub fn real_add_tm() -> @kernel.Term
+
+pub fn real_continuous_adhoc_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn real_continuous_at_inv_rfact() -> @kernel.Thm
+
+pub fn real_continuous_at_rfact() -> @kernel.Thm
+
+pub fn real_continuous_inv_rfact_compose_within() -> @kernel.Thm
+
+pub fn real_continuous_rbinom_compose_within() -> @kernel.Thm
+
+pub fn real_continuous_rfact_compose_within() -> @kernel.Thm
+
+pub fn real_finite_support_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn real_mul_tm() -> @kernel.Term
+
+pub fn real_ty() -> @kernel.HolType
+
+pub fn reallim_continuous_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn reallim_ineq_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn reallim_nonzero_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn reallim_spow() -> @kernel.Thm
+
+pub fn reallim_spow_compose() -> @kernel.Thm
+
+pub fn repper(@kernel.Term) -> @kernel.Term raise
+
+pub fn rfact() -> @kernel.Thm
+
+pub fn rfact_eq_0() -> @kernel.Thm
+
+pub fn rfact_step_conv(@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn rfact_step_down() -> @kernel.Thm
+
+pub fn rfact_step_up() -> @kernel.Thm
+
+pub fn ron_tm() -> @kernel.Term
+
+pub fn separate_constant_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn sidecond_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn special_real_field_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn spow() -> @kernel.Thm
+
+pub fn spow_eq_0() -> @kernel.Thm
+
+pub fn spow_step_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn spow_step_down() -> @kernel.Thm
+
+pub fn spow_step_up() -> @kernel.Thm
+
+pub fn support_containment(@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise
+
+pub fn support_containment_imp_finite() -> @kernel.Thm
+
+pub fn support_containment_imp_universalize() -> @kernel.Thm
+
+pub fn support_containment_tac((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn support_rule(@kernel.Term, @kernel.Term) -> (@kernel.Thm, @kernel.Thm, @kernel.Thm) raise
+
+pub fn tactic_1((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn tactic_4(@list.List[(String, @kernel.Thm)], @kernel.Term) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise
+
+pub fn wz_initial_reductions(@kernel.Term, @kernel.Term, @kernel.Term, @list.List[@kernel.Term], @list.List[@kernel.Term]) -> (@list.List[@kernel.Term], @kernel.Thm) raise
+
+pub fn wz_prove(@kernel.Term, @kernel.Term, @kernel.Term, @list.List[@kernel.Term], @list.List[@kernel.Term]) -> @kernel.Thm raise
+
+pub fn zeilberger() -> @kernel.Thm
+
+pub fn zeilberger_gen() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
