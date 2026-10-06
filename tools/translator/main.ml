@@ -73,6 +73,20 @@ module Main = struct
             hand (Emit.part + 352) [ ("server_up", "server_up") ];
             hand (Emit.part + 363) [ ("server_down", "server_down") ];
             skip (Emit.part + 379) ] )
+    | "Mizarlight/make.ml" ->
+        (* its definitions (GOAL_TAC, e), before the files it loads. By
+           hand: the three phrases that load the syntax extension into the
+           toplevel (the session has it; here it prints its greeting), and
+           nothing for the `loadt`s (the files load after this one) *)
+        let skip line = { Emit.line; setup = None; names = [] } in
+        ( "mizarlight/mizarlight_make/mizarlight_make.mbt",
+          [ skip 22; { Emit.line = 24; setup = Some "infixes_set_up"; names = [] }; skip 27;
+            skip 34; skip 40; skip 46; skip 52 ] )
+    | "Mizarlight/miz2a.ml" ->
+        (* `let sketch_prover = K CHEAT_TAC`: the type of its argument is
+           open in this file (duality.ml uses it at `thm list`): by hand *)
+        ( "mizarlight/miz2a/miz2a.mbt",
+          [ { Emit.line = 46; setup = None; names = [ ("sketch_prover", "sketch_prover") ] } ] )
     | "Minisat/dimacs_tools.ml" ->
         (* readDimacs reads a file through the Stream and Genlex libraries:
            by hand (minisat/dimacs_tools/read_dimacs.mbt), the functions

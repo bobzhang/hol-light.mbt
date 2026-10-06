@@ -757,7 +757,9 @@ module Translator = struct
   (* the files a file `needs` (Library/, Multivariate/ ...) *)
   let needs_of ~hol file =
     let path = Filename.concat hol file in
-    if not (Sys.file_exists path) then []
+    (* a make.ml that is a file of its own (theory.py's HEADS) *)
+    if file = "Mizarlight/make.ml" then []
+    else if not (Sys.file_exists path) then []
     else begin
       let ic = open_in path in
       let text = really_input_string ic (in_channel_length ic) in
