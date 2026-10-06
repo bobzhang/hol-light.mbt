@@ -566,3 +566,35 @@ replace = < ><>a< ><>
 replace1 = Failure Str.replace: reference to unmatched group
 first = #a 
 split = a
+== \226\135\146 on a \226\135\146 b \226\135\146 c
+match = no
+forward = 2-5 [\226\135\146]
+backward = 8-11 [\226\135\146]
+replace = a <\226\135\146> b <\226\135\146> c
+replace1 = Failure Str.replace: reference to unmatched group
+first = a # b \226\135\146 c
+split = a | b | c
+== [^;]*; on \226\136\128x. P \226\135\146 Q; rest
+match = 14 [\226\136\128x. P \226\135\146 Q;]
+forward = 0-14 [\226\136\128x. P \226\135\146 Q;]
+backward = 13-14 [;]
+replace = <\226\136\128x. P \226\135\146 Q;> rest
+replace1 = Failure Str.replace: reference to unmatched group
+first = # rest
+split =  rest
+== [ \t\n]+\\([^ \t\n]+\\) on  \206\177\226\135\146\206\178 x
+match = 8 [ \206\177\226\135\146\206\178],[\206\177\226\135\146\206\178]
+forward = 0-8 [ \206\177\226\135\146\206\178],[\206\177\226\135\146\206\178]
+backward = 8-10 [ x],[x]
+replace = < \206\177\226\135\146\206\178>< x>
+replace1 = [\206\177\226\135\146\206\178\\\\n][x\\\\n]
+first = # x
+split = 
+== \226\136\167\\|\226\136\168 on p \226\136\167 q \226\136\168 r
+match = no
+forward = 2-5 [\226\136\167]
+backward = 8-11 [\226\136\168]
+replace = p <\226\136\167> q <\226\136\168> r
+replace1 = Failure Str.replace: reference to unmatched group
+first = p # q \226\136\168 r
+split = p | q | r

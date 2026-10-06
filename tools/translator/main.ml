@@ -46,6 +46,14 @@ module Main = struct
         ( "jordan/tactics_refine/tactics_refine.mbt",
           [ { Emit.line = 71; setup = None; names = [ ("dump_thm", "dump_thm") ] };
             { Emit.line = 76; setup = None; names = [ ("load_thm", "load_thm") ] } ] )
+    | "RichterHilbertAxiomGeometry/readable.ml" ->
+        (* `exec` gives a string to the toplevel: by hand
+           (richterhilbertaxiomgeometry/readable/exec.mbt), it runs what
+           the translation made of that string (Emit.exec_phrases). It is
+           at line 81, the fifth after a directive (`#install_printer`),
+           where the parser's line count starts again *)
+        ( "richterhilbertaxiomgeometry/readable/readable.mbt",
+          [ { Emit.line = 5; setup = None; names = [ ("exec", "exec") ] } ] )
     | "Minisat/dimacs_tools.ml" ->
         (* readDimacs reads a file through the Stream and Genlex libraries:
            by hand (minisat/dimacs_tools/read_dimacs.mbt), the functions
@@ -120,7 +128,7 @@ module Main = struct
               str
         | _ -> ())
       (Loader.phrases (Loader.source ~hol target));
-    Loader.load_file ~hol ~on_item:(Emit.item ~hand) target;
+    Loader.load_file ~hol ~on_item:(Emit.item ~hand) ~on_phrase:Emit.begin_phrase ~on_exec:Emit.exec_phrases target;
     Emit.output ~source:target ~out:(Filename.concat root out);
     Printf.printf "wrote %s; %d unsupported items\n" out !Emit.errors
 

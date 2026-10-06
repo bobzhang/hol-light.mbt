@@ -449,12 +449,34 @@ module Loader = struct
   let current : string ref = ref ""
   let needs_hook : (string -> unit) ref = ref (fun _ -> ())
 
-  let rec load_file ?(on_item = fun _ -> ()) ~hol file =
+  (* The phrases a phrase of the file gives the toplevel as strings while
+     it runs (`exec` of RichterHilbertAxiomGeometry/readable.ml: its proofs
+     name theorems and tactics in strings). There is no toplevel in the
+     translation: `on_exec` gets the environment before the phrase and the
+     strings, to translate each (Emit.exec_phrases). The parser is wrapped
+     at the first load, when pa_j has installed its own. *)
+  let executed : string list ref = ref []
+  let recording = ref false
+  let wrapped = ref false
+
+  let wrap_parser () =
+    if not !wrapped then begin
+      wrapped := true;
+      let parse = !Toploop.parse_toplevel_phrase in
+      Toploop.parse_toplevel_phrase :=
+        fun lb ->
+          if !recording then
+            executed := Bytes.sub_string lb.Lexing.lex_buffer 0 lb.Lexing.lex_buffer_len :: !executed;
+          parse lb
+    end
+
+  let rec load_file ?(on_item = fun _ -> ()) ?(on_phrase = fun () -> ()) ?(on_exec = fun _ _ -> ()) ~hol file =
     let outer = !current in
     current := file;
-    Fun.protect ~finally:(fun () -> current := outer) (fun () -> load_file_ ~on_item ~hol file)
+    wrap_parser ();
+    Fun.protect ~finally:(fun () -> current := outer) (fun () -> load_file_ ~on_item ~on_phrase ~on_exec ~hol file)
 
-  and load_file_ ~on_item ~hol file =
+  and load_file_ ~on_item ~on_phrase ~on_exec ~hol file =
     let base = file in (* the path relative to the HOL Light root *)
     List.iter
       (fun p ->
@@ -463,11 +485,25 @@ module Loader = struct
             let str = Functors.rewrite str in
             let p = Parsetree.Ptop_def str in
             let tstr = typecheck str in
+            on_phrase ();
             List.iter on_item tstr.Typedtree.str_items;
-            if not (Toploop.execute_phrase false Format.err_formatter p) then begin
+            let env_before = !Toploop.toplevel_env in
+            (* a file loaded inside the phrase records its own *)
+            let outer_recording = !recording and outer_executed = !executed in
+            recording := true;
+            executed := [];
+            let ok =
+              Fun.protect
+                ~finally:(fun () -> recording := outer_recording)
+                (fun () -> Toploop.execute_phrase false Format.err_formatter p)
+            in
+            let strs = List.rev !executed in
+            executed := outer_executed;
+            if not ok then begin
               let line = match str with it :: _ -> it.Parsetree.pstr_loc.Location.loc_start.Lexing.pos_lnum | [] -> 0 in
               failwith (Printf.sprintf "phrase failed in %s (line %d)" base line)
             end;
+            if strs <> [] then on_exec env_before strs;
             List.iter
               (fun item ->
                 List.iter (Prov.record base) (bound_names item);

@@ -1,8 +1,8 @@
 // OCaml's Str library: regular expressions in its syntax, matched as its
 // backtracking matcher does (otherlibs/str/str.ml, strstubs.c): the first
 // alternative that leads to a match, the longest repetition that does.
-// A string is matched by its UTF-16 code units, where OCaml has bytes:
-// positions agree on ASCII text.
+// A string is matched by the bytes of its UTF-8 encoding, as OCaml's is,
+// and positions are byte offsets (as `String.length` counts, lib/stdlib.mbt).
 
 ///|
 priv enum Re {
@@ -31,7 +31,7 @@ struct StrRegexp {
 
 ///|
 priv struct ReParser {
-  s : String
+  s : Bytes
   len : Int
   mut groups : Int
 }
@@ -44,7 +44,9 @@ fn ReParser::at(self : ReParser, i : Int) -> Int {
 ///|
 /// Whether `\c` is at `i`.
 fn ReParser::backslash(self : ReParser, i : Int, c : Char) -> Bool {
-  i + 2 <= self.len && self.at(i) == '\\'.to_int() && self.at(i + 1) == c.to_int()
+  i + 2 <= self.len &&
+  self.at(i) == '\\'.to_int() &&
+  self.at(i + 1) == c.to_int()
 }
 
 ///|
@@ -172,22 +174,24 @@ fn ReParser::regexpclass(self : ReParser, i : Int) -> (Re, Int) raise {
 ///|
 /// `Str.regexp s`
 pub fn str_regexp(s : String) -> StrRegexp raise {
-  let p : ReParser = { s, len: s.length(), groups: 1 }
+  let b = @utf8.encode(s)
+  let p : ReParser = { s: b, len: b.length(), groups: 1, }
   let (re, j) = p.regexp0(0)
   if j != p.len {
     raise Failure("spurious \\) in regular expression")
   }
-  { re, ngroups: p.groups }
+  { re, ngroups: p.groups, }
 }
 
 ///|
 /// `Str.regexp_string s`: matches `s` and nothing else.
 pub fn str_regexp_string(s : String) -> StrRegexp {
   let items : Array[Re] = []
-  for i in 0..<s.length() {
-    items.push(Chr(s[i].to_int()))
+  let b = @utf8.encode(s)
+  for i in 0..<b.length() {
+    items.push(Chr(b[i].to_int()))
   }
-  { re: Seq(items), ngroups: 1 }
+  { re: Seq(items), ngroups: 1, }
 }
 
 ///|
@@ -207,7 +211,7 @@ pub fn str_quote(s : String) -> String {
 /// One attempt to match at a position of `s`; `groups` has the start and
 /// the end of each group (-1 without one).
 priv struct ReMatcher {
-  s : String
+  s : Bytes
   n : Int
   groups : Array[Int]
 }
@@ -413,11 +417,11 @@ fn ReMatcher::star(
 ///|
 /// The positions of the groups of the last match (`Str`'s
 /// `last_search_result`): empty after a failed one.
-let last_search_result : Ref[Array[Int]] = Ref::{ val: [] }
+let last_search_result : Ref[Array[Int]] = Ref::{ val: [], }
 
 ///|
 /// A match of `re` at `pos`: the groups, or nothing.
-fn re_match_at(re : StrRegexp, s : String, pos : Int) -> Array[Int]? {
+fn re_match_at(re : StrRegexp, s : Bytes, pos : Int) -> Array[Int]? {
   let m : ReMatcher = {
     s,
     n: s.length(),
@@ -437,6 +441,7 @@ fn re_match_at(re : StrRegexp, s : String, pos : Int) -> Array[Int]? {
 ///|
 /// `Str.string_match re s pos`: whether `re` matches at `pos`.
 pub fn str_string_match(re : StrRegexp, s : String, pos : Int64) -> Bool raise {
+  let s = @utf8.encode(s)
   if pos < 0L || pos > s.length().to_int64() {
     raise @num.InvalidArgument("Str.string_match")
   }
@@ -453,7 +458,7 @@ pub fn str_string_match(re : StrRegexp, s : String, pos : Int64) -> Bool raise {
 }
 
 ///|
-fn opt_search_forward(re : StrRegexp, s : String, start : Int) -> Int? {
+fn opt_search_forward(re : StrRegexp, s : Bytes, start : Int) -> Int? {
   for pos in start..<=s.length() {
     if re_match_at(re, s, pos) is Some(groups) {
       last_search_result.val = groups
@@ -472,6 +477,7 @@ pub fn str_search_forward(
   s : String,
   start : Int64,
 ) -> Int64 raise {
+  let s = @utf8.encode(s)
   if start < 0L || start > s.length().to_int64() {
     raise @num.InvalidArgument("Str.search_forward")
   }
@@ -489,6 +495,7 @@ pub fn str_search_backward(
   s : String,
   last : Int64,
 ) -> Int64 raise {
+  let s = @utf8.encode(s)
   if last < 0L || last > s.length().to_int64() {
     raise @num.InvalidArgument("Str.search_backward")
   }
@@ -545,11 +552,22 @@ pub fn str_match_end(_ : Unit) -> Int64 raise {
 }
 
 ///|
+/// The bytes from `start` to `stop` as a string (they are whole characters
+/// wherever a file cuts its text).
+fn utf8_slice(b : Bytes, start : Int, stop : Int) -> String {
+  @utf8.decode(b[start:stop]) catch {
+    _ => abort("Str: a string cut inside a non-ASCII character")
+  }
+}
+
+///|
+/// `String.sub` on the bytes of a string.
 fn str_sub(s : String, start : Int, len : Int) -> String raise {
-  if start < 0 || len < 0 || start > s.length() - len {
+  let b = @utf8.encode(s)
+  if start < 0 || len < 0 || start > b.length() - len {
     raise @num.InvalidArgument("String.sub / Bytes.sub")
   }
-  s.view(start_offset=start, end_offset=start + len).to_string()
+  utf8_slice(b, start, start + len)
 }
 
 ///|
@@ -580,35 +598,35 @@ pub fn str_matched_string(s : String) -> String raise {
 ///|
 /// The text `templ` stands for after the last match (in `s`): `\0` to `\9`
 /// are its groups, `\\` a backslash.
-fn replacement_text(templ : String, s : String) -> String raise {
+fn replacement_text(templ : String, s : Bytes) -> String raise {
   let groups = last_search_result.val
   let out = StringBuilder::new()
-  let n = templ.length()
+  let t = templ.to_array()
+  let n = t.length()
   let mut i = 0
   while i < n {
-    let c = templ[i].to_int()
+    let c = t[i]
     i += 1
-    if c != '\\'.to_int() {
-      out.write_string(templ.view(start_offset=i - 1, end_offset=i).to_string())
+    if c != '\\' {
+      out.write_char(c)
       continue
     }
     if i == n {
       raise Failure("Str.replace: illegal backslash sequence")
     }
-    let d = templ[i].to_int()
+    let d = t[i]
     i += 1
-    if d == '\\'.to_int() {
+    if d == '\\' {
       out.write_char('\\')
-    } else if d >= '0'.to_int() && d <= '9'.to_int() {
-      let g = d - 48
+    } else if d >= '0' && d <= '9' {
+      let g = d.to_int() - 48
       if g * 2 >= groups.length() || groups[g * 2] == -1 {
         raise Failure("Str.replace: reference to unmatched group")
       }
-      out.write_string(
-        s.view(start_offset=groups[g * 2], end_offset=groups[g * 2 + 1]).to_string(),
-      )
+      out.write_string(utf8_slice(s, groups[g * 2], groups[g * 2 + 1]))
     } else {
-      out.write_string(templ.view(start_offset=i - 2, end_offset=i).to_string())
+      out.write_char('\\')
+      out.write_char(d)
     }
   }
   out.to_string()
@@ -622,8 +640,9 @@ pub fn str_global_replace(
   templ : String,
   s : String,
 ) -> String raise {
+  let b = @utf8.encode(s)
   let out = StringBuilder::new()
-  let n = s.length()
+  let n = b.length()
   let mut start = 0
   let mut last_was_empty = false
   while true {
@@ -631,19 +650,19 @@ pub fn str_global_replace(
     if startpos > n {
       break
     }
-    match opt_search_forward(re, s, startpos) {
+    match opt_search_forward(re, b, startpos) {
       None => break
       Some(pos) => {
         let end_pos = last_search_result.val[1]
-        let repl = replacement_text(templ, s)
-        out.write_string(s.view(start_offset=start, end_offset=pos).to_string())
+        let repl = replacement_text(templ, b)
+        out.write_string(utf8_slice(b, start, pos))
         out.write_string(repl)
         start = end_pos
         last_was_empty = end_pos == pos
       }
     }
   }
-  out.write_string(s.view(start_offset=start).to_string())
+  out.write_string(utf8_slice(b, start, n))
   out.to_string()
 }
 
@@ -654,13 +673,14 @@ pub fn str_replace_first(
   templ : String,
   s : String,
 ) -> String raise {
-  match opt_search_forward(re, s, 0) {
+  let b = @utf8.encode(s)
+  match opt_search_forward(re, b, 0) {
     None => s
     Some(pos) => {
       let end_pos = last_search_result.val[1]
-      s.view(end_offset=pos).to_string() +
-      replacement_text(templ, s) +
-      s.view(start_offset=end_pos).to_string()
+      utf8_slice(b, 0, pos) +
+      replacement_text(templ, b) +
+      utf8_slice(b, end_pos, b.length())
     }
   }
 }
@@ -668,13 +688,14 @@ pub fn str_replace_first(
 ///|
 /// `Str.string_before s n`
 pub fn str_string_before(s : String, n : Int64) -> String {
-  s.view(end_offset=n.to_int()).to_string()
+  utf8_slice(@utf8.encode(s), 0, n.to_int())
 }
 
 ///|
 /// `Str.string_after s n`
 pub fn str_string_after(s : String, n : Int64) -> String {
-  s.view(start_offset=n.to_int()).to_string()
+  let b = @utf8.encode(s)
+  utf8_slice(b, n.to_int(), b.length())
 }
 
 ///|
@@ -686,7 +707,7 @@ pub fn str_first_chars(s : String, n : Int64) -> String raise {
 ///|
 /// `Str.last_chars s n`
 pub fn str_last_chars(s : String, n : Int64) -> String raise {
-  str_sub(s, s.length() - n.to_int(), n.to_int())
+  str_sub(s, @utf8.encode(s).length() - n.to_int(), n.to_int())
 }
 
 ///|
@@ -694,26 +715,31 @@ pub fn str_last_chars(s : String, n : Int64) -> String raise {
 /// the very beginning is skipped and nothing follows a match at the end; a
 /// match counts when it gets further than where the piece starts.
 pub fn str_split(re : StrRegexp, s : String) -> @list.List[String] {
+  let b = @utf8.encode(s)
   let parts : Array[String] = []
-  let n = s.length()
-  let mut start = match re_match_at(re, s, 0) {
+  let n = b.length()
+  let mut start = match re_match_at(re, b, 0) {
     Some(groups) => groups[1]
     None => 0
   }
   while start < n {
     // the first match from `start` on, or from the next position when it
     // ends where the piece starts
-    let mut found = opt_search_forward(re, s, start)
+    let mut found = opt_search_forward(re, b, start)
     if found is Some(_) && last_search_result.val[1] <= start {
-      found = if start < n { opt_search_forward(re, s, start + 1) } else { None }
+      found = if start < n {
+        opt_search_forward(re, b, start + 1)
+      } else {
+        None
+      }
     }
     match found {
       Some(pos) => {
-        parts.push(s.view(start_offset=start, end_offset=pos).to_string())
+        parts.push(utf8_slice(b, start, pos))
         start = last_search_result.val[1]
       }
       None => {
-        parts.push(s.view(start_offset=start).to_string())
+        parts.push(utf8_slice(b, start, n))
         break
       }
     }

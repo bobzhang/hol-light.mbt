@@ -44,6 +44,9 @@ CASES = [
      "\\[\\(\\(.\\|\n\\)*\\)\\]" + WS + "by", " consider x y such that\n x = y [H] by fol;"),
     (WS + "proof\\(" + WS + "\\(.\\|\n\\)*\\)" + WS + "qed" + WS0 + ";" + WS0, PROOF + "  x;\n"),
     (WS + "\\(assume\\)" + WS, " assume A [H];"), (WS0, " \n\t"), (WS0, " a "),
+    # strings with other characters than ASCII's are matched by their bytes
+    ("⇒", "a ⇒ b ⇒ c"), ("[^;]*;", "∀x. P ⇒ Q; rest"),
+    (WS + "\\([^ \t\n]+\\)", " α⇒β x"), ("∧\\|∨", "p ∧ q ∨ r"),
 ]
 
 
@@ -160,7 +163,11 @@ fn case(out : StringBuilder, pat : String, s : String) -> Unit {
     "\{p}-\{@lib.str_match_end(())} \{groups(ng, s)}"
   })
   show(out, "backward", () => {
-    let p = @lib.str_search_backward(re, s, s.length().to_int64())
+    let p = @lib.str_search_backward(
+      re,
+      s,
+      @lib.string_length(s).to_int64(),
+    )
     "\{p}-\{@lib.str_match_end(())} \{groups(ng, s)}"
   })
   show(out, "replace", () => {

@@ -2020,6 +2020,7 @@ module Lower = struct
       | "Str.first_chars" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.str_first_chars", [ a; b ]))
       | "Str.last_chars" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.str_last_chars", [ a; b ]))
       | "Str.quote" -> (1, fun [ a ] _ -> Call (Atom "@lib.str_quote", [ a ]))
+      | "Printexc.to_string" -> (1, fun [ a ] _ -> Call (Atom "@lib.printexc_to_string", [ a ]))
       (* Buffer: a StringBuilder *)
       | "Buffer.create" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "StringBuilder::new", [])))
       | "Buffer.add_char" -> (2, fun [ a; b ] _ -> Call (Atom "StringBuilder::write_char", [ a; b ]))
