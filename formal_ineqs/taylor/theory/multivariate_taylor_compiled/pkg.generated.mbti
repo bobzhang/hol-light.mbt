@@ -1,0 +1,1231 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/taylor/theory/multivariate_taylor_compiled"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn all_n() -> @kernel.Thm
+
+pub fn derivative_compose() -> @kernel.Thm
+
+pub fn derivative_compose_v1() -> @kernel.Thm
+
+pub fn derivative_translation() -> @kernel.Thm
+
+pub fn derivative_translation_v1() -> @kernel.Thm
+
+pub fn derivative_vector_jacobian() -> @kernel.Thm
+
+pub fn derivative_vector_jacobian_v1() -> @kernel.Thm
+
+pub fn diff2() -> @kernel.Thm
+
+pub fn diff2_abs_neg_compose() -> @kernel.Thm
+
+pub fn diff2_abs_neg_compose_v1() -> @kernel.Thm
+
+pub fn diff2_abs_neg_compose_v2() -> @kernel.Thm
+
+pub fn diff2_abs_neg_compose_v3() -> @kernel.Thm
+
+pub fn diff2_abs_pos_compose() -> @kernel.Thm
+
+pub fn diff2_abs_pos_compose_v1() -> @kernel.Thm
+
+pub fn diff2_abs_pos_compose_v2() -> @kernel.Thm
+
+pub fn diff2_abs_pos_compose_v3() -> @kernel.Thm
+
+pub fn diff2_acs_compose() -> @kernel.Thm
+
+pub fn diff2_acs_compose_v1() -> @kernel.Thm
+
+pub fn diff2_acs_compose_v2() -> @kernel.Thm
+
+pub fn diff2_acs_compose_v3() -> @kernel.Thm
+
+pub fn diff2_add() -> @kernel.Thm
+
+pub fn diff2_add_v1() -> @kernel.Thm
+
+pub fn diff2_add_v2() -> @kernel.Thm
+
+pub fn diff2_asn_compose() -> @kernel.Thm
+
+pub fn diff2_asn_compose_v1() -> @kernel.Thm
+
+pub fn diff2_asn_compose_v2() -> @kernel.Thm
+
+pub fn diff2_asn_compose_v3() -> @kernel.Thm
+
+pub fn diff2_atn_compose() -> @kernel.Thm
+
+pub fn diff2_atn_compose_v1() -> @kernel.Thm
+
+pub fn diff2_atn_compose_v2() -> @kernel.Thm
+
+pub fn diff2_atn_compose_v3() -> @kernel.Thm
+
+pub fn diff2_const() -> @kernel.Thm
+
+pub fn diff2_const_v1() -> @kernel.Thm
+
+pub fn diff2_cos_compose() -> @kernel.Thm
+
+pub fn diff2_cos_compose_v1() -> @kernel.Thm
+
+pub fn diff2_cos_compose_v2() -> @kernel.Thm
+
+pub fn diff2_cos_compose_v3() -> @kernel.Thm
+
+pub fn diff2_derivative2_bound() -> @kernel.Thm
+
+pub fn diff2_derivative2_bound_v1() -> @kernel.Thm
+
+pub fn diff2_derivative_partial() -> @kernel.Thm
+
+pub fn diff2_derivative_partial_bound() -> @kernel.Thm
+
+pub fn diff2_derivative_partial_bound_v1() -> @kernel.Thm
+
+pub fn diff2_derivative_partial_v1() -> @kernel.Thm
+
+pub fn diff2_dir() -> @kernel.Thm
+
+pub fn diff2_dir_derivative() -> @kernel.Thm
+
+pub fn diff2_dir_derivative2() -> @kernel.Thm
+
+pub fn diff2_dir_derivative2_v1() -> @kernel.Thm
+
+pub fn diff2_dir_derivative_v1() -> @kernel.Thm
+
+pub fn diff2_dir_v1() -> @kernel.Thm
+
+pub fn diff2_domain() -> @kernel.Thm
+
+pub fn diff2_domain_abs_neg_compose() -> @kernel.Thm
+
+pub fn diff2_domain_abs_neg_compose_v1() -> @kernel.Thm
+
+pub fn diff2_domain_abs_neg_compose_v2() -> @kernel.Thm
+
+pub fn diff2_domain_abs_pos_compose() -> @kernel.Thm
+
+pub fn diff2_domain_abs_pos_compose_v1() -> @kernel.Thm
+
+pub fn diff2_domain_abs_pos_compose_v2() -> @kernel.Thm
+
+pub fn diff2_domain_acs_compose() -> @kernel.Thm
+
+pub fn diff2_domain_acs_compose_v1() -> @kernel.Thm
+
+pub fn diff2_domain_acs_compose_v2() -> @kernel.Thm
+
+pub fn diff2_domain_add() -> @kernel.Thm
+
+pub fn diff2_domain_add_v1() -> @kernel.Thm
+
+pub fn diff2_domain_add_v2() -> @kernel.Thm
+
+pub fn diff2_domain_asn_compose() -> @kernel.Thm
+
+pub fn diff2_domain_asn_compose_v1() -> @kernel.Thm
+
+pub fn diff2_domain_asn_compose_v2() -> @kernel.Thm
+
+pub fn diff2_domain_atn_compose() -> @kernel.Thm
+
+pub fn diff2_domain_atn_compose_v1() -> @kernel.Thm
+
+pub fn diff2_domain_atn_compose_v2() -> @kernel.Thm
+
+pub fn diff2_domain_const() -> @kernel.Thm
+
+pub fn diff2_domain_const_v1() -> @kernel.Thm
+
+pub fn diff2_domain_cos_compose() -> @kernel.Thm
+
+pub fn diff2_domain_cos_compose_v1() -> @kernel.Thm
+
+pub fn diff2_domain_cos_compose_v2() -> @kernel.Thm
+
+pub fn diff2_domain_exp_compose() -> @kernel.Thm
+
+pub fn diff2_domain_exp_compose_v1() -> @kernel.Thm
+
+pub fn diff2_domain_exp_compose_v2() -> @kernel.Thm
+
+pub fn diff2_domain_inv_compose() -> @kernel.Thm
+
+pub fn diff2_domain_inv_compose_v1() -> @kernel.Thm
+
+pub fn diff2_domain_inv_compose_v2() -> @kernel.Thm
+
+pub fn diff2_domain_log_compose() -> @kernel.Thm
+
+pub fn diff2_domain_log_compose_v1() -> @kernel.Thm
+
+pub fn diff2_domain_log_compose_v2() -> @kernel.Thm
+
+pub fn diff2_domain_matan_compose() -> @kernel.Thm
+
+pub fn diff2_domain_matan_compose_v1() -> @kernel.Thm
+
+pub fn diff2_domain_matan_compose_v2() -> @kernel.Thm
+
+pub fn diff2_domain_mul() -> @kernel.Thm
+
+pub fn diff2_domain_mul_v1() -> @kernel.Thm
+
+pub fn diff2_domain_mul_v2() -> @kernel.Thm
+
+pub fn diff2_domain_neg() -> @kernel.Thm
+
+pub fn diff2_domain_neg_v1() -> @kernel.Thm
+
+pub fn diff2_domain_neg_v2() -> @kernel.Thm
+
+pub fn diff2_domain_pow_compose() -> @kernel.Thm
+
+pub fn diff2_domain_pow_compose_v1() -> @kernel.Thm
+
+pub fn diff2_domain_pow_compose_v2() -> @kernel.Thm
+
+pub fn diff2_domain_scale() -> @kernel.Thm
+
+pub fn diff2_domain_scale_v1() -> @kernel.Thm
+
+pub fn diff2_domain_scale_v2() -> @kernel.Thm
+
+pub fn diff2_domain_sin_compose() -> @kernel.Thm
+
+pub fn diff2_domain_sin_compose_v1() -> @kernel.Thm
+
+pub fn diff2_domain_sin_compose_v2() -> @kernel.Thm
+
+pub fn diff2_domain_sqrt_compose() -> @kernel.Thm
+
+pub fn diff2_domain_sqrt_compose_v1() -> @kernel.Thm
+
+pub fn diff2_domain_sqrt_compose_v2() -> @kernel.Thm
+
+pub fn diff2_domain_sub() -> @kernel.Thm
+
+pub fn diff2_domain_sub_v1() -> @kernel.Thm
+
+pub fn diff2_domain_sub_v2() -> @kernel.Thm
+
+pub fn diff2_domain_x() -> @kernel.Thm
+
+pub fn diff2_domain_x_v1() -> @kernel.Thm
+
+pub fn diff2_eq_diff2_on_open() -> @kernel.Thm
+
+pub fn diff2_eq_diff2_on_open_v1() -> @kernel.Thm
+
+pub fn diff2_exp_compose() -> @kernel.Thm
+
+pub fn diff2_exp_compose_v1() -> @kernel.Thm
+
+pub fn diff2_exp_compose_v2() -> @kernel.Thm
+
+pub fn diff2_exp_compose_v3() -> @kernel.Thm
+
+pub fn diff2_has_derivative_partial() -> @kernel.Thm
+
+pub fn diff2_has_derivative_partial_v1() -> @kernel.Thm
+
+pub fn diff2_imp_cont() -> @kernel.Thm
+
+pub fn diff2_imp_cont_v1() -> @kernel.Thm
+
+pub fn diff2_imp_cont_v2() -> @kernel.Thm
+
+pub fn diff2_imp_cont_v3() -> @kernel.Thm
+
+pub fn diff2_imp_diff() -> @kernel.Thm
+
+pub fn diff2_imp_diff_v1() -> @kernel.Thm
+
+pub fn diff2_imp_diff_v2() -> @kernel.Thm
+
+pub fn diff2_imp_partial_cont() -> @kernel.Thm
+
+pub fn diff2_imp_partial_cont_v1() -> @kernel.Thm
+
+pub fn diff2_imp_partial_cont_v2() -> @kernel.Thm
+
+pub fn diff2_imp_partial_cont_v3() -> @kernel.Thm
+
+pub fn diff2_imp_partial_diff() -> @kernel.Thm
+
+pub fn diff2_imp_partial_diff_v1() -> @kernel.Thm
+
+pub fn diff2_imp_partial_diff_v2() -> @kernel.Thm
+
+pub fn diff2_imp_real_diff() -> @kernel.Thm
+
+pub fn diff2_imp_real_diff_v1() -> @kernel.Thm
+
+pub fn diff2_inv_compose() -> @kernel.Thm
+
+pub fn diff2_inv_compose_v1() -> @kernel.Thm
+
+pub fn diff2_inv_compose_v2() -> @kernel.Thm
+
+pub fn diff2_inv_compose_v3() -> @kernel.Thm
+
+pub fn diff2_log_compose() -> @kernel.Thm
+
+pub fn diff2_log_compose_v1() -> @kernel.Thm
+
+pub fn diff2_log_compose_v2() -> @kernel.Thm
+
+pub fn diff2_log_compose_v3() -> @kernel.Thm
+
+pub fn diff2_matan_compose() -> @kernel.Thm
+
+pub fn diff2_matan_compose_v1() -> @kernel.Thm
+
+pub fn diff2_matan_compose_v2() -> @kernel.Thm
+
+pub fn diff2_matan_compose_v3() -> @kernel.Thm
+
+pub fn diff2_mul() -> @kernel.Thm
+
+pub fn diff2_mul_v1() -> @kernel.Thm
+
+pub fn diff2_mul_v2() -> @kernel.Thm
+
+pub fn diff2_neg() -> @kernel.Thm
+
+pub fn diff2_neg_v1() -> @kernel.Thm
+
+pub fn diff2_neg_v2() -> @kernel.Thm
+
+pub fn diff2_partial_real_diff() -> @kernel.Thm
+
+pub fn diff2_partial_real_diff_v1() -> @kernel.Thm
+
+pub fn diff2_pow_compose() -> @kernel.Thm
+
+pub fn diff2_pow_compose_v1() -> @kernel.Thm
+
+pub fn diff2_pow_compose_v2() -> @kernel.Thm
+
+pub fn diff2_pow_compose_v3() -> @kernel.Thm
+
+pub fn diff2_real_diff_partial() -> @kernel.Thm
+
+pub fn diff2_real_diff_partial_v1() -> @kernel.Thm
+
+pub fn diff2_scale() -> @kernel.Thm
+
+pub fn diff2_scale_v1() -> @kernel.Thm
+
+pub fn diff2_scale_v2() -> @kernel.Thm
+
+pub fn diff2_sin_compose() -> @kernel.Thm
+
+pub fn diff2_sin_compose_v1() -> @kernel.Thm
+
+pub fn diff2_sin_compose_v2() -> @kernel.Thm
+
+pub fn diff2_sin_compose_v3() -> @kernel.Thm
+
+pub fn diff2_sqrt_compose() -> @kernel.Thm
+
+pub fn diff2_sqrt_compose_v1() -> @kernel.Thm
+
+pub fn diff2_sqrt_compose_v2() -> @kernel.Thm
+
+pub fn diff2_sqrt_compose_v3() -> @kernel.Thm
+
+pub fn diff2_sub() -> @kernel.Thm
+
+pub fn diff2_sub_v1() -> @kernel.Thm
+
+pub fn diff2_sub_v2() -> @kernel.Thm
+
+pub fn diff2_uni_compose() -> @kernel.Thm
+
+pub fn diff2_uni_compose_v1() -> @kernel.Thm
+
+pub fn diff2_uni_compose_v2() -> @kernel.Thm
+
+pub fn diff2_uni_compose_v3() -> @kernel.Thm
+
+pub fn diff2_x() -> @kernel.Thm
+
+pub fn diff2_x_v1() -> @kernel.Thm
+
+pub fn diff2c() -> @kernel.Thm
+
+pub fn diff2c_abs_neg_compose() -> @kernel.Thm
+
+pub fn diff2c_abs_neg_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_abs_neg_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_abs_neg_compose_v3() -> @kernel.Thm
+
+pub fn diff2c_abs_pos_compose() -> @kernel.Thm
+
+pub fn diff2c_abs_pos_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_abs_pos_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_abs_pos_compose_v3() -> @kernel.Thm
+
+pub fn diff2c_acs_compose() -> @kernel.Thm
+
+pub fn diff2c_acs_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_acs_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_acs_compose_v3() -> @kernel.Thm
+
+pub fn diff2c_add() -> @kernel.Thm
+
+pub fn diff2c_add_v1() -> @kernel.Thm
+
+pub fn diff2c_add_v2() -> @kernel.Thm
+
+pub fn diff2c_asn_compose() -> @kernel.Thm
+
+pub fn diff2c_asn_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_asn_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_asn_compose_v3() -> @kernel.Thm
+
+pub fn diff2c_atn_compose() -> @kernel.Thm
+
+pub fn diff2c_atn_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_atn_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_atn_compose_v3() -> @kernel.Thm
+
+pub fn diff2c_const() -> @kernel.Thm
+
+pub fn diff2c_const_v1() -> @kernel.Thm
+
+pub fn diff2c_cos_compose() -> @kernel.Thm
+
+pub fn diff2c_cos_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_cos_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_cos_compose_v3() -> @kernel.Thm
+
+pub fn diff2c_domain() -> @kernel.Thm
+
+pub fn diff2c_domain_abs_neg_compose() -> @kernel.Thm
+
+pub fn diff2c_domain_abs_neg_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_abs_neg_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_abs_pos_compose() -> @kernel.Thm
+
+pub fn diff2c_domain_abs_pos_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_abs_pos_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_acs_compose() -> @kernel.Thm
+
+pub fn diff2c_domain_acs_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_acs_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_add() -> @kernel.Thm
+
+pub fn diff2c_domain_add_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_add_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_alt() -> @kernel.Thm
+
+pub fn diff2c_domain_alt_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_asn_compose() -> @kernel.Thm
+
+pub fn diff2c_domain_asn_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_asn_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_atn_compose() -> @kernel.Thm
+
+pub fn diff2c_domain_atn_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_atn_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_const() -> @kernel.Thm
+
+pub fn diff2c_domain_const_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_cos_compose() -> @kernel.Thm
+
+pub fn diff2c_domain_cos_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_cos_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_exp_compose() -> @kernel.Thm
+
+pub fn diff2c_domain_exp_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_exp_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_inv_compose() -> @kernel.Thm
+
+pub fn diff2c_domain_inv_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_inv_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_log_compose() -> @kernel.Thm
+
+pub fn diff2c_domain_log_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_log_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_matan_compose() -> @kernel.Thm
+
+pub fn diff2c_domain_matan_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_matan_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_mul() -> @kernel.Thm
+
+pub fn diff2c_domain_mul_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_mul_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_neg() -> @kernel.Thm
+
+pub fn diff2c_domain_neg_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_neg_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_pow_compose() -> @kernel.Thm
+
+pub fn diff2c_domain_pow_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_pow_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_scale() -> @kernel.Thm
+
+pub fn diff2c_domain_scale_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_scale_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_sin_compose() -> @kernel.Thm
+
+pub fn diff2c_domain_sin_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_sin_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_sqrt_compose() -> @kernel.Thm
+
+pub fn diff2c_domain_sqrt_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_sqrt_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_sub() -> @kernel.Thm
+
+pub fn diff2c_domain_sub_v1() -> @kernel.Thm
+
+pub fn diff2c_domain_sub_v2() -> @kernel.Thm
+
+pub fn diff2c_domain_x() -> @kernel.Thm
+
+pub fn diff2c_domain_x_v1() -> @kernel.Thm
+
+pub fn diff2c_exp_compose() -> @kernel.Thm
+
+pub fn diff2c_exp_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_exp_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_exp_compose_v3() -> @kernel.Thm
+
+pub fn diff2c_imp_diff2() -> @kernel.Thm
+
+pub fn diff2c_imp_diff2_v1() -> @kernel.Thm
+
+pub fn diff2c_inv_compose() -> @kernel.Thm
+
+pub fn diff2c_inv_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_inv_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_inv_compose_v3() -> @kernel.Thm
+
+pub fn diff2c_log_compose() -> @kernel.Thm
+
+pub fn diff2c_log_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_log_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_log_compose_v3() -> @kernel.Thm
+
+pub fn diff2c_matan_compose() -> @kernel.Thm
+
+pub fn diff2c_matan_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_matan_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_matan_compose_v3() -> @kernel.Thm
+
+pub fn diff2c_mul() -> @kernel.Thm
+
+pub fn diff2c_mul_v1() -> @kernel.Thm
+
+pub fn diff2c_mul_v2() -> @kernel.Thm
+
+pub fn diff2c_neg() -> @kernel.Thm
+
+pub fn diff2c_neg_v1() -> @kernel.Thm
+
+pub fn diff2c_neg_v2() -> @kernel.Thm
+
+pub fn diff2c_pow_compose() -> @kernel.Thm
+
+pub fn diff2c_pow_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_pow_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_pow_compose_v3() -> @kernel.Thm
+
+pub fn diff2c_scale() -> @kernel.Thm
+
+pub fn diff2c_scale_v1() -> @kernel.Thm
+
+pub fn diff2c_scale_v2() -> @kernel.Thm
+
+pub fn diff2c_sin_compose() -> @kernel.Thm
+
+pub fn diff2c_sin_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_sin_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_sin_compose_v3() -> @kernel.Thm
+
+pub fn diff2c_sqrt_compose() -> @kernel.Thm
+
+pub fn diff2c_sqrt_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_sqrt_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_sqrt_compose_v3() -> @kernel.Thm
+
+pub fn diff2c_sub() -> @kernel.Thm
+
+pub fn diff2c_sub_v1() -> @kernel.Thm
+
+pub fn diff2c_sub_v2() -> @kernel.Thm
+
+pub fn diff2c_uni_compose() -> @kernel.Thm
+
+pub fn diff2c_uni_compose_v1() -> @kernel.Thm
+
+pub fn diff2c_uni_compose_v2() -> @kernel.Thm
+
+pub fn diff2c_uni_compose_v3() -> @kernel.Thm
+
+pub fn diff2c_x() -> @kernel.Thm
+
+pub fn diff2c_x_v1() -> @kernel.Thm
+
+pub fn diff_direction() -> @kernel.Thm
+
+pub fn diff_direction_v1() -> @kernel.Thm
+
+pub fn diff_imp_real_diff() -> @kernel.Thm
+
+pub fn diff_imp_real_diff_v1() -> @kernel.Thm
+
+pub fn diff_uni_compose() -> @kernel.Thm
+
+pub fn diff_uni_compose_v1() -> @kernel.Thm
+
+pub fn diff_uni_compose_v2() -> @kernel.Thm
+
+pub fn diff_uni_compose_v3() -> @kernel.Thm
+
+pub fn differentiable_compose_at() -> @kernel.Thm
+
+pub fn differentiable_compose_at_v1() -> @kernel.Thm
+
+pub fn differentiable_local_at() -> @kernel.Thm
+
+pub fn differentiable_local_at_v1() -> @kernel.Thm
+
+pub fn differentiable_mul() -> @kernel.Thm
+
+pub fn differentiable_mul_v1() -> @kernel.Thm
+
+pub fn differentiable_mul_v2() -> @kernel.Thm
+
+pub fn domain_width() -> @kernel.Thm
+
+pub fn domain_width_v1() -> @kernel.Thm
+
+pub fn f_binary_drop() -> @kernel.Thm
+
+pub fn f_binary_drop_v1() -> @kernel.Thm
+
+pub fn f_eq_lift_drop() -> @kernel.Thm
+
+pub fn f_eq_lift_drop_v1() -> @kernel.Thm
+
+pub fn f_eq_lift_drop_v2() -> @kernel.Thm
+
+pub fn f_lift_add() -> @kernel.Thm
+
+pub fn f_lift_add_v1() -> @kernel.Thm
+
+pub fn f_lift_const() -> @kernel.Thm
+
+pub fn f_lift_const_v1() -> @kernel.Thm
+
+pub fn f_lift_neg() -> @kernel.Thm
+
+pub fn f_lift_neg_v1() -> @kernel.Thm
+
+pub fn f_lift_scale() -> @kernel.Thm
+
+pub fn f_lift_scale_v1() -> @kernel.Thm
+
+pub fn f_lift_sub() -> @kernel.Thm
+
+pub fn f_lift_sub_v1() -> @kernel.Thm
+
+pub fn f_lift_unary() -> @kernel.Thm
+
+pub fn f_lift_unary_v1() -> @kernel.Thm
+
+pub fn f_unary_drop() -> @kernel.Thm
+
+pub fn f_unary_drop_v1() -> @kernel.Thm
+
+pub fn frechet_add() -> @kernel.Thm
+
+pub fn frechet_add_v1() -> @kernel.Thm
+
+pub fn frechet_add_v2() -> @kernel.Thm
+
+pub fn frechet_compose() -> @kernel.Thm
+
+pub fn frechet_compose_v1() -> @kernel.Thm
+
+pub fn frechet_compose_v2() -> @kernel.Thm
+
+pub fn frechet_const() -> @kernel.Thm
+
+pub fn frechet_const_v1() -> @kernel.Thm
+
+pub fn frechet_const_v2() -> @kernel.Thm
+
+pub fn frechet_direction() -> @kernel.Thm
+
+pub fn frechet_direction_v1() -> @kernel.Thm
+
+pub fn frechet_eq_jacobian() -> @kernel.Thm
+
+pub fn frechet_eq_jacobian_v1() -> @kernel.Thm
+
+pub fn frechet_id() -> @kernel.Thm
+
+pub fn frechet_id_v1() -> @kernel.Thm
+
+pub fn frechet_id_v2() -> @kernel.Thm
+
+pub fn frechet_mul() -> @kernel.Thm
+
+pub fn frechet_mul_v1() -> @kernel.Thm
+
+pub fn frechet_mul_v2() -> @kernel.Thm
+
+pub fn frechet_neg() -> @kernel.Thm
+
+pub fn frechet_neg_v1() -> @kernel.Thm
+
+pub fn frechet_neg_v2() -> @kernel.Thm
+
+pub fn frechet_projection() -> @kernel.Thm
+
+pub fn frechet_projection_v1() -> @kernel.Thm
+
+pub fn frechet_scale() -> @kernel.Thm
+
+pub fn frechet_scale_v1() -> @kernel.Thm
+
+pub fn frechet_scale_v2() -> @kernel.Thm
+
+pub fn frechet_sub() -> @kernel.Thm
+
+pub fn frechet_sub_v1() -> @kernel.Thm
+
+pub fn frechet_sub_v2() -> @kernel.Thm
+
+pub fn frechet_vmul() -> @kernel.Thm
+
+pub fn frechet_vmul_v1() -> @kernel.Thm
+
+pub fn frechet_vmul_v2() -> @kernel.Thm
+
+pub fn has_derivative_lambda() -> @kernel.Thm
+
+pub fn has_derivative_lambda_v1() -> @kernel.Thm
+
+pub fn has_derivative_lambda_v2() -> @kernel.Thm
+
+pub fn has_derivative_mul() -> @kernel.Thm
+
+pub fn has_derivative_mul_v1() -> @kernel.Thm
+
+pub fn has_derivative_mul_v2() -> @kernel.Thm
+
+pub fn has_derivative_uni_compose() -> @kernel.Thm
+
+pub fn has_derivative_uni_compose_v1() -> @kernel.Thm
+
+pub fn has_derivative_uni_compose_v2() -> @kernel.Thm
+
+pub fn has_derivative_uni_compose_v3() -> @kernel.Thm
+
+pub fn has_derivative_vector2() -> @kernel.Thm
+
+pub fn has_derivative_vector2_v1() -> @kernel.Thm
+
+pub fn has_derivative_vector2_v2() -> @kernel.Thm
+
+pub fn has_derivative_vector_frechet() -> @kernel.Thm
+
+pub fn has_derivative_vector_frechet_v1() -> @kernel.Thm
+
+pub fn has_derivative_vector_jacobian() -> @kernel.Thm
+
+pub fn has_derivative_vector_jacobian_v1() -> @kernel.Thm
+
+pub fn has_derivative_x12() -> @kernel.Thm
+
+pub fn has_derivative_x12_v1() -> @kernel.Thm
+
+pub fn has_derivative_x12_v2() -> @kernel.Thm
+
+pub fn image_delete_inj_compat() -> @kernel.Thm
+
+pub fn in_trans() -> @kernel.Thm
+
+pub fn in_trans_v1() -> @kernel.Thm
+
+pub fn jacobian_compose() -> @kernel.Thm
+
+pub fn jacobian_compose_v1() -> @kernel.Thm
+
+pub fn lambda_eq_vsum() -> @kernel.Thm
+
+pub fn lambda_eq_vsum_v1() -> @kernel.Thm
+
+pub fn lambda_eq_vsum_v2() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn m_bounded_on_int() -> @kernel.Thm
+
+pub fn m_cell_domain() -> @kernel.Thm
+
+pub fn m_lin_approx() -> @kernel.Thm
+
+pub fn m_lin_approx_add() -> @kernel.Thm
+
+pub fn m_lin_approx_add_v1() -> @kernel.Thm
+
+pub fn m_lin_approx_mul() -> @kernel.Thm
+
+pub fn m_lin_approx_mul_v1() -> @kernel.Thm
+
+pub fn m_lin_approx_neg() -> @kernel.Thm
+
+pub fn m_lin_approx_neg_v1() -> @kernel.Thm
+
+pub fn m_lin_approx_scale() -> @kernel.Thm
+
+pub fn m_lin_approx_scale_v1() -> @kernel.Thm
+
+pub fn m_lin_approx_sub() -> @kernel.Thm
+
+pub fn m_lin_approx_sub_v1() -> @kernel.Thm
+
+pub fn m_taylor_abs_neg_compose() -> @kernel.Thm
+
+pub fn m_taylor_abs_neg_compose_v1() -> @kernel.Thm
+
+pub fn m_taylor_abs_pos_compose() -> @kernel.Thm
+
+pub fn m_taylor_abs_pos_compose_v1() -> @kernel.Thm
+
+pub fn m_taylor_acs_compose() -> @kernel.Thm
+
+pub fn m_taylor_acs_compose_v1() -> @kernel.Thm
+
+pub fn m_taylor_add() -> @kernel.Thm
+
+pub fn m_taylor_add_v1() -> @kernel.Thm
+
+pub fn m_taylor_asn_compose() -> @kernel.Thm
+
+pub fn m_taylor_asn_compose_v1() -> @kernel.Thm
+
+pub fn m_taylor_atn_compose() -> @kernel.Thm
+
+pub fn m_taylor_atn_compose_v1() -> @kernel.Thm
+
+pub fn m_taylor_bounds() -> @kernel.Thm
+
+pub fn m_taylor_bounds_v1() -> @kernel.Thm
+
+pub fn m_taylor_cos_compose() -> @kernel.Thm
+
+pub fn m_taylor_cos_compose_v1() -> @kernel.Thm
+
+pub fn m_taylor_error() -> @kernel.Thm
+
+pub fn m_taylor_error_eq() -> @kernel.Thm
+
+pub fn m_taylor_error_eq_v1() -> @kernel.Thm
+
+pub fn m_taylor_error_lemma() -> @kernel.Thm
+
+pub fn m_taylor_error_lemma_v1() -> @kernel.Thm
+
+pub fn m_taylor_exp_compose() -> @kernel.Thm
+
+pub fn m_taylor_exp_compose_v1() -> @kernel.Thm
+
+pub fn m_taylor_interval() -> @kernel.Thm
+
+pub fn m_taylor_inv_compose() -> @kernel.Thm
+
+pub fn m_taylor_inv_compose_v1() -> @kernel.Thm
+
+pub fn m_taylor_log_compose() -> @kernel.Thm
+
+pub fn m_taylor_log_compose_v1() -> @kernel.Thm
+
+pub fn m_taylor_lower_bound() -> @kernel.Thm
+
+pub fn m_taylor_lower_bound_v1() -> @kernel.Thm
+
+pub fn m_taylor_lower_partial_bound() -> @kernel.Thm
+
+pub fn m_taylor_lower_partial_bound_v1() -> @kernel.Thm
+
+pub fn m_taylor_matan_compose() -> @kernel.Thm
+
+pub fn m_taylor_matan_compose_v1() -> @kernel.Thm
+
+pub fn m_taylor_mul() -> @kernel.Thm
+
+pub fn m_taylor_mul_v1() -> @kernel.Thm
+
+pub fn m_taylor_neg() -> @kernel.Thm
+
+pub fn m_taylor_neg_v1() -> @kernel.Thm
+
+pub fn m_taylor_partial_bounds() -> @kernel.Thm
+
+pub fn m_taylor_partial_bounds_v1() -> @kernel.Thm
+
+pub fn m_taylor_partial_error() -> @kernel.Thm
+
+pub fn m_taylor_partial_error_lemma() -> @kernel.Thm
+
+pub fn m_taylor_partial_error_lemma_v1() -> @kernel.Thm
+
+pub fn m_taylor_pow_compose() -> @kernel.Thm
+
+pub fn m_taylor_pow_compose_v1() -> @kernel.Thm
+
+pub fn m_taylor_scale() -> @kernel.Thm
+
+pub fn m_taylor_scale_v1() -> @kernel.Thm
+
+pub fn m_taylor_sin_compose() -> @kernel.Thm
+
+pub fn m_taylor_sin_compose_v1() -> @kernel.Thm
+
+pub fn m_taylor_sqrt_compose() -> @kernel.Thm
+
+pub fn m_taylor_sqrt_compose_v1() -> @kernel.Thm
+
+pub fn m_taylor_sub() -> @kernel.Thm
+
+pub fn m_taylor_sub_v1() -> @kernel.Thm
+
+pub fn m_taylor_upper_bound() -> @kernel.Thm
+
+pub fn m_taylor_upper_bound_v1() -> @kernel.Thm
+
+pub fn m_taylor_upper_partial_bound() -> @kernel.Thm
+
+pub fn m_taylor_upper_partial_bound_v1() -> @kernel.Thm
+
+pub fn mixed_second_partials() -> @kernel.Thm
+
+pub fn mixed_second_partials_v1() -> @kernel.Thm
+
+pub fn nth_diff_strong_eq_on_open() -> @kernel.Thm
+
+pub fn nth_diff_strong_eq_on_open_v1() -> @kernel.Thm
+
+pub fn nth_diff_strong_eq_on_open_v2() -> @kernel.Thm
+
+pub fn nth_diff_strong_eq_on_open_v3() -> @kernel.Thm
+
+pub fn open_contains_open_interval() -> @kernel.Thm
+
+pub fn open_contains_open_interval_v1() -> @kernel.Thm
+
+pub fn partial() -> @kernel.Thm
+
+pub fn partial2() -> @kernel.Thm
+
+pub fn partial2_const() -> @kernel.Thm
+
+pub fn partial2_const_v1() -> @kernel.Thm
+
+pub fn partial2_x() -> @kernel.Thm
+
+pub fn partial2_x_v1() -> @kernel.Thm
+
+pub fn partial_add() -> @kernel.Thm
+
+pub fn partial_add_v1() -> @kernel.Thm
+
+pub fn partial_const() -> @kernel.Thm
+
+pub fn partial_const_v1() -> @kernel.Thm
+
+pub fn partial_convex_max() -> @kernel.Thm
+
+pub fn partial_convex_max_v1() -> @kernel.Thm
+
+pub fn partial_decreasing_left() -> @kernel.Thm
+
+pub fn partial_decreasing_left_v1() -> @kernel.Thm
+
+pub fn partial_eq0() -> @kernel.Thm
+
+pub fn partial_eq0_alt() -> @kernel.Thm
+
+pub fn partial_eq0_alt_v1() -> @kernel.Thm
+
+pub fn partial_eq0_v1() -> @kernel.Thm
+
+pub fn partial_eq_frechet() -> @kernel.Thm
+
+pub fn partial_eq_frechet_v1() -> @kernel.Thm
+
+pub fn partial_eq_jacobian() -> @kernel.Thm
+
+pub fn partial_eq_jacobian_column() -> @kernel.Thm
+
+pub fn partial_eq_jacobian_column_v1() -> @kernel.Thm
+
+pub fn partial_eq_jacobian_entry() -> @kernel.Thm
+
+pub fn partial_eq_jacobian_entry_v1() -> @kernel.Thm
+
+pub fn partial_eq_jacobian_v1() -> @kernel.Thm
+
+pub fn partial_increasing_left() -> @kernel.Thm
+
+pub fn partial_increasing_left_v1() -> @kernel.Thm
+
+pub fn partial_increasing_right() -> @kernel.Thm
+
+pub fn partial_increasing_right_v1() -> @kernel.Thm
+
+pub fn partial_local() -> @kernel.Thm
+
+pub fn partial_local_v1() -> @kernel.Thm
+
+pub fn partial_local_v2() -> @kernel.Thm
+
+pub fn partial_mul() -> @kernel.Thm
+
+pub fn partial_mul_v1() -> @kernel.Thm
+
+pub fn partial_neg() -> @kernel.Thm
+
+pub fn partial_neg_v1() -> @kernel.Thm
+
+pub fn partial_rev_translation() -> @kernel.Thm
+
+pub fn partial_rev_translation_v1() -> @kernel.Thm
+
+pub fn partial_scale() -> @kernel.Thm
+
+pub fn partial_scale_v1() -> @kernel.Thm
+
+pub fn partial_sub() -> @kernel.Thm
+
+pub fn partial_sub_v1() -> @kernel.Thm
+
+pub fn partial_translation() -> @kernel.Thm
+
+pub fn partial_translation_v1() -> @kernel.Thm
+
+pub fn partial_uni_compose() -> @kernel.Thm
+
+pub fn partial_uni_compose_v1() -> @kernel.Thm
+
+pub fn partial_x() -> @kernel.Thm
+
+pub fn partial_x_lemma() -> @kernel.Thm
+
+pub fn partial_x_lemma_v1() -> @kernel.Thm
+
+pub fn partial_x_v1() -> @kernel.Thm
+
+pub fn projection_diff() -> @kernel.Thm
+
+pub fn projection_diff_v1() -> @kernel.Thm
+
+pub fn projection_has_derivative() -> @kernel.Thm
+
+pub fn projection_has_derivative_v1() -> @kernel.Thm
+
+pub fn real_cont_at_local() -> @kernel.Thm
+
+pub fn real_cont_at_local_v1() -> @kernel.Thm
+
+pub fn real_cont_atreal_local() -> @kernel.Thm
+
+pub fn real_cont_atreal_local_v1() -> @kernel.Thm
+
+pub fn real_derivative_compose_frechet() -> @kernel.Thm
+
+pub fn real_derivative_compose_frechet_v1() -> @kernel.Thm
+
+pub fn real_derivative_compose_jacobian() -> @kernel.Thm
+
+pub fn real_derivative_compose_jacobian_v1() -> @kernel.Thm
+
+pub fn real_derivative_compose_partial() -> @kernel.Thm
+
+pub fn real_derivative_compose_partial_v1() -> @kernel.Thm
+
+pub fn real_dir_derivative_frechet() -> @kernel.Thm
+
+pub fn real_dir_derivative_frechet_v1() -> @kernel.Thm
+
+pub fn real_dir_derivative_jacobian() -> @kernel.Thm
+
+pub fn real_dir_derivative_jacobian_v1() -> @kernel.Thm
+
+pub fn real_dir_derivative_partial() -> @kernel.Thm
+
+pub fn real_dir_derivative_partial_v1() -> @kernel.Thm
+
+pub fn real_le_div_1() -> @kernel.Thm
+
+pub fn real_le_div_1_v1() -> @kernel.Thm
+
+pub fn real_let_mul2() -> @kernel.Thm
+
+pub fn real_let_mul2_v1() -> @kernel.Thm
+
+pub fn real_let_mul2_v2() -> @kernel.Thm
+
+pub fn real_mvt0() -> @kernel.Thm
+
+pub fn real_mvt0_v1() -> @kernel.Thm
+
+pub fn real_open_delete() -> @kernel.Thm
+
+pub fn real_open_delete_v1() -> @kernel.Thm
+
+pub fn real_open_delete_v2() -> @kernel.Thm
+
+pub fn real_open_delete_v3() -> @kernel.Thm
+
+pub fn real_taylor1_bound() -> @kernel.Thm
+
+pub fn real_taylor1_bound_v1() -> @kernel.Thm
+
+pub fn real_taylor2_bound() -> @kernel.Thm
+
+pub fn real_taylor2_bound_v1() -> @kernel.Thm
+
+pub fn second_bounded() -> @kernel.Thm
+
+pub fn second_partial_add() -> @kernel.Thm
+
+pub fn second_partial_add_v1() -> @kernel.Thm
+
+pub fn second_partial_add_v2() -> @kernel.Thm
+
+pub fn second_partial_mul() -> @kernel.Thm
+
+pub fn second_partial_mul_v1() -> @kernel.Thm
+
+pub fn second_partial_mul_v2() -> @kernel.Thm
+
+pub fn second_partial_neg() -> @kernel.Thm
+
+pub fn second_partial_neg_v1() -> @kernel.Thm
+
+pub fn second_partial_neg_v2() -> @kernel.Thm
+
+pub fn second_partial_scale() -> @kernel.Thm
+
+pub fn second_partial_scale_v1() -> @kernel.Thm
+
+pub fn second_partial_scale_v2() -> @kernel.Thm
+
+pub fn second_partial_sub() -> @kernel.Thm
+
+pub fn second_partial_sub_v1() -> @kernel.Thm
+
+pub fn second_partial_sub_v2() -> @kernel.Thm
+
+pub fn second_partial_uni_compose() -> @kernel.Thm
+
+pub fn second_partial_uni_compose_v1() -> @kernel.Thm
+
+pub fn second_partial_uni_compose_v2() -> @kernel.Thm
+
+pub fn sum_swap1() -> @kernel.Thm
+
+pub fn sum_swap1_v1() -> @kernel.Thm
+
+pub fn taylor_error_eq_sum_partial_errors() -> @kernel.Thm
+
+pub fn taylor_error_eq_sum_partial_errors_v1() -> @kernel.Thm
+
+pub fn vector2_eq_lambda() -> @kernel.Thm
+
+pub fn vector2_eq_lambda_v1() -> @kernel.Thm
+
+pub fn vector2_eq_lambda_v2() -> @kernel.Thm
+
+pub fn y_in_domain() -> @kernel.Thm
+
+pub fn y_in_domain_v1() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
