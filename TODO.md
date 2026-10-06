@@ -32,9 +32,10 @@ session (forked children per file), then runs the new tests with
 
 ## Plan to finish
 
-Upstream has about 1.31M lines; 1.17M are ported (89%). What is left
-is in steps 8 and 9: the rest of RichterHilbertAxiomGeometry (Topology,
-from_topology: 22K), miz3, Mizarlight, QBF. The steps, in the
+Upstream has about 1.31M lines; 1.175M are ported (90%). Of the rest,
+about 19K are files that do not load upstream and 110K are not theories
+(see step 8 and Open issues). What is left to port is small (Mizarlight,
+QBF, zChaff's half of Minisat/test.ml) and step 9. The steps, in the
 order to do it (dependencies first, cheap before expensive). Every step
 is the same loop: `batch.py --files ...` in batches of 10-15 files,
 `tools/test.py <tier>`, commit. Check a directory for external programs
@@ -120,20 +121,22 @@ and file I/O before starting it.
      file's `exec` (by hand) looks it up (lib/toplevel.mbt). Str is the
      whole library now (lib/str.mbt, tools/ocaml_ref/str_ref.py), on
      bytes, as String.sub.
-   - RichterHilbertAxiomGeometry/: readable, UniversalPropCartProd,
-     HilbertAxiom_read and TarskiAxiomGeometry_read are done (the last two
-     assert axioms upstream: theory.ASSERTS_AXIOMS compares the whole
-     list). Left: inverse_bug_puzzle_read, Topology and from_topology (on
-     Multivariate/determinants.ml); thmFontHilbertAxiom.ml needs miz3;
-     error-checking.ml raises on purpose (not a file that loads).
-   - miz3 (miz3/miz3.ml, 1.9K lines; then thmFontHilbertAxiom.ml,
-     Examples/inverse_bug_puzzle_miz3.ml and miz3/Samples/): its
-     `exec_phrase` is readable.ml's `exec` returning also what the parser
-     left of the string: record that with the phrase. Also to stub:
-     `Unix.alarm` and `Sys.signal` (step timeouts), the vi-server
-     functions (`Unix.fork`, pid files). A survey run
-     (`HOL_KEEP_GOING=1`) hit a translator failure ("cannot adapt ... to
-     (TB)") in the file.
+   - Done: RichterHilbertAxiomGeometry/: readable, UniversalPropCartProd,
+     HilbertAxiom_read, TarskiAxiomGeometry_read (these two assert axioms
+     upstream: theory.ASSERTS_AXIOMS compares the whole list),
+     inverse_bug_puzzle_read and Topology (loaded with upstream's own
+     closure, theory.UPSTREAM_CLOSURE: Topology.ml defines `istopology`).
+     Not ported, because they are not files that load: from_topology.ml
+     (18K lines; fails upstream in BOUNDED_INCREASING_CONVERGENT:
+     "MATCH_MP_TAC: No match"), error-checking.ml (raises on purpose),
+     thmFontHilbertAxiom.ml (a text of proof templates, not OCaml).
+   - Done: miz3/miz3.ml, the thirteen samples miz3/test.ml loads
+     (theory.AFTER) and Examples/inverse_bug_puzzle_miz3.ml. By hand
+     (miz3/miz3/hand.mbt): `exec_phrase`, `TIMED_TAC` (no timer: a step
+     is never timed out, where upstream gives it `!timeout` seconds),
+     `print_to_string1`, and the editor server's functions (nothing).
+     Not ported: miz3_of_hol.ml and Samples/wishes.ml (not loaded by
+     test.ml).
    - Mizarlight (its own camlp5 syntax extension, pa_f.ml).
    - Not theories, not ported: Proofrecording (a second kernel), ProofTrace,
      mcp, update_database, help.ml/database.ml, tactician_light.ml,
