@@ -32,9 +32,9 @@ session (forked children per file), then runs the new tests with
 
 ## Plan to finish
 
-Upstream has about 1.31M lines; 1.12M are ported (85%). What is left
-is in steps 8 and 9: Formal_ineqs (44K), miz3 with
-RichterHilbertAxiomGeometry (36K), Mizarlight, QBF. The steps, in the
+Upstream has about 1.31M lines; 1.17M are ported (89%). What is left
+is in steps 8 and 9: the rest of RichterHilbertAxiomGeometry (Topology,
+from_topology: 22K), miz3, Mizarlight, QBF. The steps, in the
 order to do it (dependencies first, cheap before expensive). Every step
 is the same loop: `batch.py --files ...` in batches of 10-15 files,
 `tools/test.py <tier>`, commit. Check a directory for external programs
@@ -103,28 +103,37 @@ and file I/O before starting it.
      SAT_PROVE checks instead.
    - QBF/ needs squolem, which exists only as x86 Linux and Windows
      binaries: not on this machine.
-   - miz3 (miz3/miz3.ml, 1.9K lines; then RichterHilbertAxiomGeometry/,
-     36K, and Examples/inverse_bug_puzzle_miz3.ml): not a matter of
-     installing a tool. A miz3 proof is a string, and the OCaml in it
-     (tactics, theorem names) is run through the toplevel while the proof
-     is checked (`exec_phrase`: `Toploop.execute_phrase` on
-     `Lexing.from_string`). There is no OCaml toplevel here. A way: in the
-     translation session, capture every phrase `exec_phrase` is given and
-     translate each as an item of the file (a table from the phrase's text
-     to its compiled value), which `exec_phrase` then looks up. Also to
-     stub: `Unix.alarm` and `Sys.signal` (step timeouts), the vi-server
+   - Done: Formal_ineqs/, the 62 files of make.ml's closure (one linear
+     order, theory.ROOTS). Its files keep their theorems in modules: a
+     test lists what the module's signature exports. Its tests compare a
+     file's own output only (theory.OWN_OUTPUT: the output of what is
+     loaded before, 79K lines, is not repeated in each golden);
+     m_verifier_main's also runs the verifier on two of upstream's
+     examples. Not ported: the examples*.hl files (they set the
+     arithmetic base before loading the library) and tests/.
+   - OCaml run from strings: RichterHilbertAxiomGeometry/readable.ml (and
+     miz3) give the toplevel the theorem and tactic names of a proof as
+     OCaml (`exec`: `Toploop.execute_phrase` on `Lexing.from_string`).
+     Done for readable.ml: the translation session records every such
+     string (Loader.executed), Emit.exec_phrases translates each as a
+     function and registers it before the phrase that runs it, and the
+     file's `exec` (by hand) looks it up (lib/toplevel.mbt). Str is the
+     whole library now (lib/str.mbt, tools/ocaml_ref/str_ref.py), on
+     bytes, as String.sub.
+   - RichterHilbertAxiomGeometry/: readable, UniversalPropCartProd,
+     HilbertAxiom_read and TarskiAxiomGeometry_read are done (the last two
+     assert axioms upstream: theory.ASSERTS_AXIOMS compares the whole
+     list). Left: inverse_bug_puzzle_read, Topology and from_topology (on
+     Multivariate/determinants.ml); thmFontHilbertAxiom.ml needs miz3;
+     error-checking.ml raises on purpose (not a file that loads).
+   - miz3 (miz3/miz3.ml, 1.9K lines; then thmFontHilbertAxiom.ml,
+     Examples/inverse_bug_puzzle_miz3.ml and miz3/Samples/): its
+     `exec_phrase` is readable.ml's `exec` returning also what the parser
+     left of the string: record that with the phrase. Also to stub:
+     `Unix.alarm` and `Sys.signal` (step timeouts), the vi-server
      functions (`Unix.fork`, pid files). A survey run
-     (`HOL_KEEP_GOING=1`) also hit a translator failure ("cannot adapt
-     ... to (TB)") in the file.
-   - Formal_ineqs (44K, 62 files in make.ml's closure): the tooling loads
-     it (theory.ROOTS: one linear order; nested package paths), and its
-     first four files translate. Survey it with `HOL_KEEP_GOING=1 batch.py
-     --translate-only --files ...`; one file alone with `translate.sh
-     translate Formal_ineqs/arith/arith_num.hl`. Next: arith/arith_cache.hl's
-     `reset_cache` has a local function used at two types (`let clear =
-     Hashtbl.clear in clear t1; clear t2`: lift it as a generic function);
-     `Big_int.sign_big_int`; tests/log.hl writes log files (the channels
-     of lib/channels.mbt may now do; formats are not supported).
+     (`HOL_KEEP_GOING=1`) hit a translator failure ("cannot adapt ... to
+     (TB)") in the file.
    - Mizarlight (its own camlp5 syntax extension, pa_f.ml).
    - Not theories, not ported: Proofrecording (a second kernel), ProofTrace,
      mcp, update_database, help.ml/database.ml, tactician_light.ml,
