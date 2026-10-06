@@ -48,6 +48,8 @@ pub fn finite_bitset() -> @kernel.Thm
 
 pub fn load() -> Unit
 
+pub fn skip_load() -> Unit
+
 // Errors
 
 // Types and methods

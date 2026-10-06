@@ -302,6 +302,8 @@ pub fn real_of_num_nproduct() -> @kernel.Thm
 
 pub fn real_pow_nsum() -> @kernel.Thm
 
+pub fn skip_load() -> Unit
+
 // Errors
 
 // Types and methods

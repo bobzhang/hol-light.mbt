@@ -104,6 +104,8 @@ pub fn monoidal_frag_add() -> @kernel.Thm
 
 pub fn neutral_frag_add() -> @kernel.Thm
 
+pub fn skip_load() -> Unit
+
 // Errors
 
 // Types and methods

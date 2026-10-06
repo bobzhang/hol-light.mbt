@@ -14,6 +14,9 @@ pub fn load() -> Unit {
   @frag.load()
   @grouptheory.load()
   @metric.load()
+  if skipped.val {
+    return
+  }
   @parser.begin_theory("Multivariate/homology")
   load_steps() catch {
     e =>
@@ -22,4 +25,15 @@ pub fn load() -> Unit {
       )
   }
   @parser.end_theory()
+}
+
+///|
+let skipped : Ref[Bool] = Ref::{ val: false, }
+
+///|
+/// Leave this file's own steps out of what is loaded after this call: a
+/// file that upstream loads without it (tools/ocaml_ref/theory.py,
+/// CHAIN_SKIP).
+pub fn skip_load() -> Unit {
+  skipped.val = true
 }

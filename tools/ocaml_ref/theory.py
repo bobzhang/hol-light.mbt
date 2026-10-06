@@ -135,6 +135,29 @@ MID_NEEDS = {"Autoformalization/planar_graph.ml": ["Multivariate/cauchy.ml"]}
 CHAIN_SKIP = {"Autoformalization/planar_graph.ml": ["Library/binary.ml", "Multivariate/clifford.ml"]}
 
 
+# Files loaded with exactly what upstream loads for them (its `needs`,
+# transitively) and no other chain member: every file our orders add is
+# skipped. Examples/solovay.ml needs Multivariate/vectors.ml and
+# Rqe/make.ml: the chain before vectors.ml has Multivariate/metric.ml, whose
+# `istopology` Library/analysis.ml (for Rqe/) then cannot define.
+UPSTREAM_CLOSURE = {"Examples/solovay.ml", "Tutorial/Vectors.ml", "Tutorial/Custom_tactics.ml",
+                    "Tutorial/Defining_new_types.ml"}
+
+
+def chain_skip(f):
+    """The files our load orders bring in before `f` that upstream does not
+    load for it: left out of what is loaded (their packages' `skip_load`)."""
+    if f in UPSTREAM_CLOSURE:
+        wanted = needs_order(f)
+        return [g for g in _deps(f) if g not in wanted]
+    return CHAIN_SKIP.get(f, [])
+
+
+def skippable(g):
+    """Whether some file leaves `g` out (its package then has `skip_load`)."""
+    return any(g in v for v in CHAIN_SKIP.values()) or any(g in chain_skip(f) for f in UPSTREAM_CLOSURE)
+
+
 def head_needs(f):
     """What `f` needs before its first phrase (all but MID_NEEDS)."""
     return [n for n in needs(f) if n not in MID_NEEDS.get(f, [])]
@@ -143,7 +166,7 @@ def head_needs(f):
 def mid_plan(f):
     """[(file `f` loads part-way through, the files that load brings in, in
     order: what it needs that is not loaded yet, then itself)]."""
-    seen, out = deps(f) + CHAIN_SKIP.get(f, []), []
+    seen, out = deps(f) + chain_skip(f), []
     for x in MID_NEEDS.get(f, []):
         new = [g for g in deps(x) + [x] if g not in seen]
         out.append((x, new))
@@ -324,7 +347,7 @@ def _deps(f):
 
 
 def deps(f):
-    return [g for g in _deps(f) if g not in CHAIN_SKIP.get(f, [])]
+    return [g for g in _deps(f) if g not in chain_skip(f)]
 
 
 def run(cmd, **kw):
@@ -351,7 +374,7 @@ def setup(f):
     before = CORE[:CORE.index(name)] if name in CORE else CORE
     # translated packages, including the Stdlib replacements
     mids = [g for _, new in mid_plan(f) for g in new]
-    skips = CHAIN_SKIP.get(f, [])
+    skips = chain_skip(f)
     imports = HAND + ["omap", "oset"] + before + [pkg_of(d) for d in deps(f) + mids + skips]
     # MoonBit imports packages by their last path component: no clashes
     aliases = [os.path.basename(p) for p in imports + [pkg]] + ["list", "testkit"]
@@ -380,7 +403,7 @@ def setup(f):
         body = (f'  @parser.begin_theory("{name}")\n  load_steps() catch {{\n'
                 f'    e => abort("HOL Light: loading {name}.ml failed: " + e.to_string())\n  }}\n'
                 "  @parser.end_theory()\n}\n")
-        skippable = any(f in v for v in CHAIN_SKIP.values())
+        can_skip = skippable(f)
         text = (f"// {name}.ml: the load steps are generated ({alias}{'_ml' if alias.endswith('test') else ''}.mbt).\n\n"
                 "///|\nlet loaded : Ref[Bool] = Ref::{ val: false }\n\n"
                 f"///|\n/// Load {name}.ml (once), after the files it needs.\npub fn load() -> Unit {{\n"
@@ -389,8 +412,8 @@ def setup(f):
                 + "".join(call(n) for n in chain + own)
                 # what it needs is loaded all the same, at this place in the
                 # order (theory.deps keeps those files where they are)
-                + ("  if skipped.val {\n    return\n  }\n" if skippable else "") + body)
-        if skippable:
+                + ("  if skipped.val {\n    return\n  }\n" if can_skip else "") + body)
+        if can_skip:
             text += ("\n///|\nlet skipped : Ref[Bool] = Ref::{ val: false }\n"
                      "\n///|\n/// Leave this file's own steps out of what is loaded after this call: a\n"
                      "/// file that upstream loads without it (tools/ocaml_ref/theory.py,\n"
