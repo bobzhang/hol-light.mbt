@@ -1240,7 +1240,7 @@ module Lower = struct
     (* a clock, as Sys.time (Formal_ineqs/ times its runs with it) *)
     else if n = "Unix.gettimeofday" then Some "Sys.time"
     else if n = "Unix.mkdir" then Some n
-    (* the Str library (lib/str.mbt has what Minisat/ uses of it) *)
+    (* the Str library (lib/str.mbt) *)
     else if String.length n > 4 && String.sub n 0 4 = "Str." then Some n
     (* Stream (camlp-streams; lib/stream.mbt) *)
     else if String.length n > 7 && String.sub n 0 7 = "Stream." then Some n
@@ -2000,7 +2000,7 @@ module Lower = struct
       | "String.map" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_map", [ a; b ]))
       | "open_in_bin" -> (1, fun [ a ] _ -> Call (Atom "@lib.open_in", [ a ]))
       | "input_byte" -> (1, fun [ a ] _ -> Call (Atom "@lib.input_byte", [ a ]))
-      (* the Str subset of lib/str.mbt (Minisat/) *)
+      (* the Str library (lib/str.mbt) *)
       | "Str.regexp" -> (1, fun [ a ] _ -> Call (Atom "@lib.str_regexp", [ a ]))
       | "Str.regexp_string" -> (1, fun [ a ] _ -> Call (Atom "@lib.str_regexp_string", [ a ]))
       | "Str.search_forward" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.str_search_forward", [ a; b; c ]))
@@ -2008,6 +2008,18 @@ module Lower = struct
       | "Str.string_before" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.str_string_before", [ a; b ]))
       | "Str.string_after" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.str_string_after", [ a; b ]))
       | "Str.split" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.str_split", [ a; b ]))
+      | "Str.string_match" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.str_string_match", [ a; b; c ]))
+      | "Str.matched_string" -> (1, fun [ a ] _ -> Call (Atom "@lib.str_matched_string", [ a ]))
+      | "Str.matched_group" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.str_matched_group", [ a; b ]))
+      | "Str.match_beginning" -> (1, fun [ a ] _ -> Call (Atom "@lib.str_match_beginning", [ a ]))
+      | "Str.match_end" -> (1, fun [ a ] _ -> Call (Atom "@lib.str_match_end", [ a ]))
+      | "Str.group_beginning" -> (1, fun [ a ] _ -> Call (Atom "@lib.str_group_beginning", [ a ]))
+      | "Str.group_end" -> (1, fun [ a ] _ -> Call (Atom "@lib.str_group_end", [ a ]))
+      | "Str.global_replace" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.str_global_replace", [ a; b; c ]))
+      | "Str.replace_first" -> (3, fun [ a; b; c ] _ -> Call (Atom "@lib.str_replace_first", [ a; b; c ]))
+      | "Str.first_chars" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.str_first_chars", [ a; b ]))
+      | "Str.last_chars" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.str_last_chars", [ a; b ]))
+      | "Str.quote" -> (1, fun [ a ] _ -> Call (Atom "@lib.str_quote", [ a ]))
       (* Buffer: a StringBuilder *)
       | "Buffer.create" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "StringBuilder::new", [])))
       | "Buffer.add_char" -> (2, fun [ a; b ] _ -> Call (Atom "StringBuilder::write_char", [ a; b ]))

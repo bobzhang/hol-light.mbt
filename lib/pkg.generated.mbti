@@ -407,9 +407,31 @@ pub fn[A] sort((A, A) -> Bool raise?, @list.List[A]) -> @list.List[A] raise?
 
 pub fn[A, B] splitlist((A) -> (B, A) raise, A) -> (@list.List[B], A) raise
 
+pub fn str_first_chars(String, Int64) -> String raise
+
+pub fn str_global_replace(StrRegexp, String, String) -> String raise
+
+pub fn str_group_beginning(Int64) -> Int64 raise
+
+pub fn str_group_end(Int64) -> Int64 raise
+
+pub fn str_last_chars(String, Int64) -> String raise
+
+pub fn str_match_beginning(Unit) -> Int64 raise
+
+pub fn str_match_end(Unit) -> Int64 raise
+
+pub fn str_matched_group(Int64, String) -> String raise
+
+pub fn str_matched_string(String) -> String raise
+
+pub fn str_quote(String) -> String
+
 pub fn str_regexp(String) -> StrRegexp raise
 
 pub fn str_regexp_string(String) -> StrRegexp
+
+pub fn str_replace_first(StrRegexp, String, String) -> String raise
 
 pub fn str_search_backward(StrRegexp, String, Int64) -> Int64 raise
 
@@ -420,6 +442,8 @@ pub fn str_split(StrRegexp, String) -> @list.List[String]
 pub fn str_string_after(String, Int64) -> String
 
 pub fn str_string_before(String, Int64) -> String
+
+pub fn str_string_match(StrRegexp, String, Int64) -> Bool raise
 
 pub fn[A] stream_junk(Stream[A]) -> Unit
 
@@ -585,10 +609,7 @@ pub struct OutChannel {
   buf : StringBuilder
 }
 
-pub enum StrRegexp {
-  Literal(String)
-  Set(String)
-}
+type StrRegexp
 
 pub struct Stream[A] {
   items : Array[A]

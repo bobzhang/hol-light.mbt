@@ -1,65 +1,467 @@
-// The part of OCaml's Str library that upstream's files use (Minisat/): a
-// regular expression is a literal string or one bracketed set of
-// characters. Anything else is refused when the expression is made.
+// OCaml's Str library: regular expressions in its syntax, matched as its
+// backtracking matcher does (otherlibs/str/str.ml, strstubs.c): the first
+// alternative that leads to a match, the longest repetition that does.
+// A string is matched by its UTF-16 code units, where OCaml has bytes:
+// positions agree on ASCII text.
+
+///|
+priv enum Re {
+  Chr(Int)
+  // ranges of characters; complemented or not
+  Cls(Array[(Int, Int)], Bool)
+  Seq(Array[Re])
+  Alt(Re, Re)
+  Star(Re)
+  Plus(Re)
+  Opt(Re)
+  Group(Int, Re)
+  Refgroup(Int)
+  Bol
+  Eol
+  Wordboundary
+}
 
 ///|
 /// `Str.regexp`
-pub enum StrRegexp {
-  Literal(String)
-  Set(String)
+struct StrRegexp {
+  re : Re
+  // the groups, with group 0 (the whole match)
+  ngroups : Int
+}
+
+///|
+priv struct ReParser {
+  s : String
+  len : Int
+  mut groups : Int
+}
+
+///|
+fn ReParser::at(self : ReParser, i : Int) -> Int {
+  self.s[i].to_int()
+}
+
+///|
+/// Whether `\c` is at `i`.
+fn ReParser::backslash(self : ReParser, i : Int, c : Char) -> Bool {
+  i + 2 <= self.len && self.at(i) == '\\'.to_int() && self.at(i + 1) == c.to_int()
+}
+
+///|
+/// Alternatives: `r1 \| r2 \| ...`
+fn ReParser::regexp0(self : ReParser, i : Int) -> (Re, Int) raise {
+  let (r, j) = self.regexp1(i)
+  let mut r = r
+  let mut j = j
+  while self.backslash(j, '|') {
+    let (r2, j2) = self.regexp1(j + 2)
+    r = Alt(r, r2)
+    j = j2
+  }
+  (r, j)
+}
+
+///|
+/// A sequence, up to the end, `\|` or `\)`.
+fn ReParser::regexp1(self : ReParser, i : Int) -> (Re, Int) raise {
+  let items : Array[Re] = []
+  let mut i = i
+  while !(i >= self.len || self.backslash(i, '|') || self.backslash(i, ')')) {
+    let (r, j) = self.regexp2(i)
+    items.push(r)
+    i = j
+  }
+  (Seq(items), i)
+}
+
+///|
+/// An item and its postfix operators.
+fn ReParser::regexp2(self : ReParser, i : Int) -> (Re, Int) raise {
+  let (r, j) = self.regexp3(i)
+  let mut r = r
+  let mut j = j
+  while j < self.len {
+    let c = self.at(j)
+    if c == '?'.to_int() {
+      r = Opt(r)
+    } else if c == '*'.to_int() {
+      r = Star(r)
+    } else if c == '+'.to_int() {
+      r = Plus(r)
+    } else {
+      break
+    }
+    j += 1
+  }
+  (r, j)
+}
+
+///|
+fn ReParser::regexp3(self : ReParser, i : Int) -> (Re, Int) raise {
+  let c = self.at(i)
+  if c == '\\'.to_int() {
+    self.regexpbackslash(i + 1)
+  } else if c == '['.to_int() {
+    self.regexpclass(i + 1)
+  } else if c == '^'.to_int() {
+    (Bol, i + 1)
+  } else if c == '$'.to_int() {
+    (Eol, i + 1)
+  } else if c == '.'.to_int() {
+    // any character but a newline
+    (Cls([(10, 10)], true), i + 1)
+  } else {
+    (Chr(c), i + 1)
+  }
+}
+
+///|
+fn ReParser::regexpbackslash(self : ReParser, i : Int) -> (Re, Int) raise {
+  if i >= self.len {
+    return (Chr('\\'.to_int()), i)
+  }
+  let c = self.at(i)
+  if c == '('.to_int() {
+    let group_no = self.groups
+    self.groups += 1
+    let (r, j) = self.regexp0(i + 1)
+    if self.backslash(j, ')') {
+      (Group(group_no, r), j + 2)
+    } else {
+      raise Failure("\\( group not closed by \\)")
+    }
+  } else if c >= '1'.to_int() && c <= '9'.to_int() {
+    (Refgroup(c - 48), i + 1)
+  } else if c == 'b'.to_int() {
+    (Wordboundary, i + 1)
+  } else {
+    // `\|` and `\)` do not get here: regexp1 stops at them
+    (Chr(c), i + 1)
+  }
+}
+
+///|
+/// A class, after its `[`: `]` first is a member, `a-z` a range.
+fn ReParser::regexpclass(self : ReParser, i : Int) -> (Re, Int) raise {
+  let complemented = i < self.len && self.at(i) == '^'.to_int()
+  let start = if complemented { i + 1 } else { i }
+  let ranges : Array[(Int, Int)] = []
+  let mut i = start
+  while true {
+    if i >= self.len {
+      raise Failure("[ class not closed by ]")
+    }
+    if self.at(i) == ']'.to_int() && i > start {
+      return (Cls(ranges, complemented), i + 1)
+    }
+    let c1 = self.at(i)
+    if i + 2 < self.len &&
+      self.at(i + 1) == '-'.to_int() &&
+      self.at(i + 2) != ']'.to_int() {
+      ranges.push((c1, self.at(i + 2)))
+      i += 3
+    } else {
+      ranges.push((c1, c1))
+      i += 1
+    }
+  }
+  // not reached
+  (Cls(ranges, complemented), i)
+}
+
+///|
+/// `Str.regexp s`
+pub fn str_regexp(s : String) -> StrRegexp raise {
+  let p : ReParser = { s, len: s.length(), groups: 1 }
+  let (re, j) = p.regexp0(0)
+  if j != p.len {
+    raise Failure("spurious \\) in regular expression")
+  }
+  { re, ngroups: p.groups }
 }
 
 ///|
 /// `Str.regexp_string s`: matches `s` and nothing else.
 pub fn str_regexp_string(s : String) -> StrRegexp {
-  Literal(s)
+  let items : Array[Re] = []
+  for i in 0..<s.length() {
+    items.push(Chr(s[i].to_int()))
+  }
+  { re: Seq(items), ngroups: 1 }
 }
 
 ///|
-/// `Str.regexp s`, for `[...]` (a set of characters, without ranges or
-/// negation) and for strings without special characters.
-pub fn str_regexp(s : String) -> StrRegexp raise {
-  let special = "$^.*+?[]\\"
-  let n = s.length()
-  if n >= 2 &&
-    s[0].to_int() == '['.to_int() &&
-    s[n - 1].to_int() == ']'.to_int() {
-    let set = s.view(start_offset=1, end_offset=n - 1).to_string()
-    if set.contains("-") || set.has_prefix("^") || set.contains("]") {
-      raise Failure("Str.regexp: not supported: " + s)
-    }
-    return Set(set)
-  }
+/// `Str.quote s`: a regular expression source that matches `s`.
+pub fn str_quote(s : String) -> String {
+  let out = StringBuilder::new()
   for c in s {
-    if special.contains_char(c) {
-      raise Failure("Str.regexp: not supported: " + s)
+    if "$^.*+?[]\\".contains_char(c) {
+      out.write_char('\\')
     }
+    out.write_char(c)
   }
-  Literal(s)
+  out.to_string()
 }
 
 ///|
-/// The end of a match of `re` at `pos`, if there is one.
-fn str_match_at(re : StrRegexp, s : String, pos : Int) -> Int? {
+/// One attempt to match at a position of `s`; `groups` has the start and
+/// the end of each group (-1 without one).
+priv struct ReMatcher {
+  s : String
+  n : Int
+  groups : Array[Int]
+}
+
+///|
+fn ReMatcher::at(self : ReMatcher, i : Int) -> Int {
+  self.s[i].to_int()
+}
+
+///|
+/// The letters of `\b`: ASCII letters, digits, `_`, and Latin-1's letters.
+fn is_word_letter(c : Int) -> Bool {
+  (c >= 'a'.to_int() && c <= 'z'.to_int()) ||
+  (c >= 'A'.to_int() && c <= 'Z'.to_int()) ||
+  (c >= '0'.to_int() && c <= '9'.to_int()) ||
+  c == '_'.to_int() ||
+  (c >= 0xC0 && c <= 0xFF && c != 0xD7 && c != 0xF7)
+}
+
+///|
+/// Whether `re` matches exactly one character and has no group.
+fn re_is_single(re : Re) -> Bool {
   match re {
-    Literal(l) => {
-      if pos + l.length() > s.length() {
-        return None
-      }
-      for i in 0..<l.length() {
-        if s[pos + i] != l[i] {
-          return None
+    Chr(_) | Cls(_, _) => true
+    Alt(a, b) => re_is_single(a) && re_is_single(b)
+    Seq(items) => items.length() == 1 && re_is_single(items[0])
+    _ => false
+  }
+}
+
+///|
+/// A one-character expression, possibly as a group (`\(.\|\n\)`): the
+/// group (or -1) and the expression. Its repetitions are matched by a loop
+/// (the general case recurses once per repetition).
+fn re_simple(re : Re) -> (Int, Re)? {
+  match re {
+    Group(n, r) => if re_is_single(r) { Some((n, r)) } else { None }
+    _ => if re_is_single(re) { Some((-1, re)) } else { None }
+  }
+}
+
+///|
+fn ReMatcher::single(self : ReMatcher, re : Re, pos : Int) -> Bool {
+  if pos >= self.n {
+    return false
+  }
+  let c = self.at(pos)
+  match re {
+    Chr(d) => c == d
+    Cls(ranges, complemented) => {
+      let mut found = false
+      for r in ranges {
+        if c >= r.0 && c <= r.1 {
+          found = true
+          break
         }
       }
-      Some(pos + l.length())
+      found != complemented
     }
-    Set(set) =>
-      if pos < s.length() && set.contains_char(s[pos].to_int().unsafe_to_char()) {
-        Some(pos + 1)
-      } else {
-        None
-      }
+    Alt(a, b) => self.single(a, pos) || self.single(b, pos)
+    Seq(items) => items.length() == 1 && self.single(items[0], pos)
+    _ => false
   }
+}
+
+///|
+/// Match `re` at `pos`, then the rest (`k`, given the position reached):
+/// false sends the matcher back to its last choice.
+fn ReMatcher::run(
+  self : ReMatcher,
+  re : Re,
+  pos : Int,
+  k : (Int) -> Bool,
+) -> Bool {
+  match re {
+    Chr(_) | Cls(_, _) => self.single(re, pos) && k(pos + 1)
+    Seq(items) => self.seq(items, 0, pos, k)
+    Alt(a, b) => self.run(a, pos, k) || self.run(b, pos, k)
+    Opt(r) => self.run(r, pos, k) || k(pos)
+    Star(r) =>
+      match re_simple(r) {
+        Some((group, x)) => self.simple_star(group, x, pos, pos, k)
+        None => self.star(r, pos, k)
+      }
+    Plus(r) =>
+      match re_simple(r) {
+        Some((group, x)) =>
+          self.single(x, pos) && self.simple_star(group, x, pos + 1, pos, k)
+        None => self.run(r, pos, p => self.star(r, p, k))
+      }
+    Group(n, r) => {
+      let old_start = self.groups[2 * n]
+      self.groups[2 * n] = pos
+      let ok = self.run(r, pos, p => {
+        let old_end = self.groups[2 * n + 1]
+        self.groups[2 * n + 1] = p
+        if k(p) {
+          true
+        } else {
+          self.groups[2 * n + 1] = old_end
+          false
+        }
+      })
+      if !ok {
+        self.groups[2 * n] = old_start
+      }
+      ok
+    }
+    Refgroup(n) => {
+      if 2 * n + 1 >= self.groups.length() {
+        return false
+      }
+      let b = self.groups[2 * n]
+      let e = self.groups[2 * n + 1]
+      if b < 0 || e < 0 || pos + (e - b) > self.n {
+        return false
+      }
+      for i in 0..<(e - b) {
+        if self.at(b + i) != self.at(pos + i) {
+          return false
+        }
+      }
+      k(pos + (e - b))
+    }
+    Bol => (pos == 0 || self.at(pos - 1) == 10) && k(pos)
+    Eol => (pos == self.n || self.at(pos) == 10) && k(pos)
+    Wordboundary => {
+      let ok = if pos == 0 {
+        pos < self.n && is_word_letter(self.at(0))
+      } else if pos == self.n {
+        is_word_letter(self.at(pos - 1))
+      } else {
+        is_word_letter(self.at(pos - 1)) != is_word_letter(self.at(pos))
+      }
+      ok && k(pos)
+    }
+  }
+}
+
+///|
+fn ReMatcher::seq(
+  self : ReMatcher,
+  items : Array[Re],
+  i : Int,
+  pos : Int,
+  k : (Int) -> Bool,
+) -> Bool {
+  if i == items.length() {
+    k(pos)
+  } else {
+    self.run(items[i], pos, p => self.seq(items, i + 1, p, k))
+  }
+}
+
+///|
+/// As many of a one-character `r` as there are from `pos`, then fewer,
+/// down to the position `least`. `group` (if not -1) is the last one.
+fn ReMatcher::simple_star(
+  self : ReMatcher,
+  group : Int,
+  r : Re,
+  least : Int,
+  pos : Int,
+  k : (Int) -> Bool,
+) -> Bool {
+  let mut p = pos
+  while self.single(r, p) {
+    p += 1
+  }
+  let old_start = if group >= 0 { self.groups[2 * group] } else { -1 }
+  let old_end = if group >= 0 { self.groups[2 * group + 1] } else { -1 }
+  while p >= least {
+    if group >= 0 && p > pos {
+      self.groups[2 * group] = p - 1
+      self.groups[2 * group + 1] = p
+    } else if group >= 0 {
+      self.groups[2 * group] = old_start
+      self.groups[2 * group + 1] = old_end
+    }
+    if k(p) {
+      return true
+    }
+    p -= 1
+  }
+  if group >= 0 {
+    self.groups[2 * group] = old_start
+    self.groups[2 * group + 1] = old_end
+  }
+  false
+}
+
+///|
+/// One more `r`, if it gets further, or none.
+fn ReMatcher::star(
+  self : ReMatcher,
+  r : Re,
+  pos : Int,
+  k : (Int) -> Bool,
+) -> Bool {
+  self.run(r, pos, p => p != pos && self.star(r, p, k)) || k(pos)
+}
+
+///|
+/// The positions of the groups of the last match (`Str`'s
+/// `last_search_result`): empty after a failed one.
+let last_search_result : Ref[Array[Int]] = Ref::{ val: [] }
+
+///|
+/// A match of `re` at `pos`: the groups, or nothing.
+fn re_match_at(re : StrRegexp, s : String, pos : Int) -> Array[Int]? {
+  let m : ReMatcher = {
+    s,
+    n: s.length(),
+    groups: Array::make(2 * re.ngroups, -1),
+  }
+  if m.run(re.re, pos, p => {
+      m.groups[1] = p
+      true
+    }) {
+    m.groups[0] = pos
+    Some(m.groups)
+  } else {
+    None
+  }
+}
+
+///|
+/// `Str.string_match re s pos`: whether `re` matches at `pos`.
+pub fn str_string_match(re : StrRegexp, s : String, pos : Int64) -> Bool raise {
+  if pos < 0L || pos > s.length().to_int64() {
+    raise @num.InvalidArgument("Str.string_match")
+  }
+  match re_match_at(re, s, pos.to_int()) {
+    Some(groups) => {
+      last_search_result.val = groups
+      true
+    }
+    None => {
+      last_search_result.val = []
+      false
+    }
+  }
+}
+
+///|
+fn opt_search_forward(re : StrRegexp, s : String, start : Int) -> Int? {
+  for pos in start..<=s.length() {
+    if re_match_at(re, s, pos) is Some(groups) {
+      last_search_result.val = groups
+      return Some(pos)
+    }
+  }
+  last_search_result.val = []
+  None
 }
 
 ///|
@@ -70,12 +472,13 @@ pub fn str_search_forward(
   s : String,
   start : Int64,
 ) -> Int64 raise {
-  for pos in start.to_int()..<=s.length() {
-    if str_match_at(re, s, pos) is Some(_) {
-      return pos.to_int64()
-    }
+  if start < 0L || start > s.length().to_int64() {
+    raise @num.InvalidArgument("Str.search_forward")
   }
-  raise NotFound
+  match opt_search_forward(re, s, start.to_int()) {
+    Some(pos) => pos.to_int64()
+    None => raise NotFound
+  }
 }
 
 ///|
@@ -86,14 +489,180 @@ pub fn str_search_backward(
   s : String,
   last : Int64,
 ) -> Int64 raise {
-  let mut pos = @cmp.minimum(last.to_int(), s.length())
+  if last < 0L || last > s.length().to_int64() {
+    raise @num.InvalidArgument("Str.search_backward")
+  }
+  let mut pos = last.to_int()
   while pos >= 0 {
-    if str_match_at(re, s, pos) is Some(_) {
+    if re_match_at(re, s, pos) is Some(groups) {
+      last_search_result.val = groups
       return pos.to_int64()
     }
     pos -= 1
   }
+  last_search_result.val = []
   raise NotFound
+}
+
+///|
+/// `Str.group_beginning n`
+pub fn str_group_beginning(n : Int64) -> Int64 raise {
+  let r = last_search_result.val
+  if n < 0L || n * 2L >= r.length().to_int64() {
+    raise @num.InvalidArgument("Str.group_beginning")
+  }
+  let pos = r[n.to_int() * 2]
+  if pos == -1 {
+    raise NotFound
+  }
+  pos.to_int64()
+}
+
+///|
+/// `Str.group_end n`
+pub fn str_group_end(n : Int64) -> Int64 raise {
+  let r = last_search_result.val
+  if n < 0L || n * 2L >= r.length().to_int64() {
+    raise @num.InvalidArgument("Str.group_end")
+  }
+  let pos = r[n.to_int() * 2 + 1]
+  if pos == -1 {
+    raise NotFound
+  }
+  pos.to_int64()
+}
+
+///|
+/// `Str.match_beginning ()`
+pub fn str_match_beginning(_ : Unit) -> Int64 raise {
+  str_group_beginning(0L)
+}
+
+///|
+/// `Str.match_end ()`
+pub fn str_match_end(_ : Unit) -> Int64 raise {
+  str_group_end(0L)
+}
+
+///|
+fn str_sub(s : String, start : Int, len : Int) -> String raise {
+  if start < 0 || len < 0 || start > s.length() - len {
+    raise @num.InvalidArgument("String.sub / Bytes.sub")
+  }
+  s.view(start_offset=start, end_offset=start + len).to_string()
+}
+
+///|
+/// `Str.matched_group n s`: what group `n` of the last match matched, `s`
+/// being the string that was matched.
+pub fn str_matched_group(n : Int64, s : String) -> String raise {
+  let r = last_search_result.val
+  if n < 0L || n * 2L + 1L >= r.length().to_int64() {
+    raise @num.InvalidArgument("Str.matched_group")
+  }
+  let b = r[n.to_int() * 2]
+  let e = r[n.to_int() * 2 + 1]
+  if b == -1 {
+    raise NotFound
+  }
+  str_sub(s, b, e - b)
+}
+
+///|
+/// `Str.matched_string s`
+pub fn str_matched_string(s : String) -> String raise {
+  if last_search_result.val.length() < 2 {
+    raise @num.InvalidArgument("Str.matched_string")
+  }
+  str_matched_group(0L, s)
+}
+
+///|
+/// The text `templ` stands for after the last match (in `s`): `\0` to `\9`
+/// are its groups, `\\` a backslash.
+fn replacement_text(templ : String, s : String) -> String raise {
+  let groups = last_search_result.val
+  let out = StringBuilder::new()
+  let n = templ.length()
+  let mut i = 0
+  while i < n {
+    let c = templ[i].to_int()
+    i += 1
+    if c != '\\'.to_int() {
+      out.write_string(templ.view(start_offset=i - 1, end_offset=i).to_string())
+      continue
+    }
+    if i == n {
+      raise Failure("Str.replace: illegal backslash sequence")
+    }
+    let d = templ[i].to_int()
+    i += 1
+    if d == '\\'.to_int() {
+      out.write_char('\\')
+    } else if d >= '0'.to_int() && d <= '9'.to_int() {
+      let g = d - 48
+      if g * 2 >= groups.length() || groups[g * 2] == -1 {
+        raise Failure("Str.replace: reference to unmatched group")
+      }
+      out.write_string(
+        s.view(start_offset=groups[g * 2], end_offset=groups[g * 2 + 1]).to_string(),
+      )
+    } else {
+      out.write_string(templ.view(start_offset=i - 2, end_offset=i).to_string())
+    }
+  }
+  out.to_string()
+}
+
+///|
+/// `Str.global_replace re templ s`: `s` with every match of `re` replaced
+/// by `templ`'s text.
+pub fn str_global_replace(
+  re : StrRegexp,
+  templ : String,
+  s : String,
+) -> String raise {
+  let out = StringBuilder::new()
+  let n = s.length()
+  let mut start = 0
+  let mut last_was_empty = false
+  while true {
+    let startpos = if last_was_empty { start + 1 } else { start }
+    if startpos > n {
+      break
+    }
+    match opt_search_forward(re, s, startpos) {
+      None => break
+      Some(pos) => {
+        let end_pos = last_search_result.val[1]
+        let repl = replacement_text(templ, s)
+        out.write_string(s.view(start_offset=start, end_offset=pos).to_string())
+        out.write_string(repl)
+        start = end_pos
+        last_was_empty = end_pos == pos
+      }
+    }
+  }
+  out.write_string(s.view(start_offset=start).to_string())
+  out.to_string()
+}
+
+///|
+/// `Str.replace_first re templ s`: `s` with the first match replaced.
+pub fn str_replace_first(
+  re : StrRegexp,
+  templ : String,
+  s : String,
+) -> String raise {
+  match opt_search_forward(re, s, 0) {
+    None => s
+    Some(pos) => {
+      let end_pos = last_search_result.val[1]
+      s.view(end_offset=pos).to_string() +
+      replacement_text(templ, s) +
+      s.view(start_offset=end_pos).to_string()
+    }
+  }
 }
 
 ///|
@@ -109,33 +678,39 @@ pub fn str_string_after(s : String, n : Int64) -> String {
 }
 
 ///|
-/// `Str.split re s`: the pieces of `s` between matches of `re`. One match at
-/// the very beginning is skipped and nothing follows a match at the end;
-/// two matches in a row have an empty piece between them (as Str's).
+/// `Str.first_chars s n`
+pub fn str_first_chars(s : String, n : Int64) -> String raise {
+  str_sub(s, 0, n.to_int())
+}
+
+///|
+/// `Str.last_chars s n`
+pub fn str_last_chars(s : String, n : Int64) -> String raise {
+  str_sub(s, s.length() - n.to_int(), n.to_int())
+}
+
+///|
+/// `Str.split re s`: the pieces of `s` between matches of `re`. A match at
+/// the very beginning is skipped and nothing follows a match at the end; a
+/// match counts when it gets further than where the piece starts.
 pub fn str_split(re : StrRegexp, s : String) -> @list.List[String] {
   let parts : Array[String] = []
   let n = s.length()
-  let mut start = match str_match_at(re, s, 0) {
-    Some(e) => e
+  let mut start = match re_match_at(re, s, 0) {
+    Some(groups) => groups[1]
     None => 0
   }
   while start < n {
-    let mut pos = start
-    let mut found : (Int, Int)? = None
-    while pos <= n {
-      match str_match_at(re, s, pos) {
-        // an empty match where the search starts does not count
-        Some(e) if e > pos || pos > start => {
-          found = Some((pos, e))
-          break
-        }
-        _ => pos += 1
-      }
+    // the first match from `start` on, or from the next position when it
+    // ends where the piece starts
+    let mut found = opt_search_forward(re, s, start)
+    if found is Some(_) && last_search_result.val[1] <= start {
+      found = if start < n { opt_search_forward(re, s, start + 1) } else { None }
     }
     match found {
-      Some((p, e)) => {
-        parts.push(s.view(start_offset=start, end_offset=p).to_string())
-        start = e
+      Some(pos) => {
+        parts.push(s.view(start_offset=start, end_offset=pos).to_string())
+        start = last_search_result.val[1]
       }
       None => {
         parts.push(s.view(start_offset=start).to_string())
