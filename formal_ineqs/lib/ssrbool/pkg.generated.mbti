@@ -1,0 +1,269 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/lib/ssrbool"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn addba() -> @kernel.Thm
+
+pub fn addbac() -> @kernel.Thm
+
+pub fn addbb() -> @kernel.Thm
+
+pub fn addbc() -> @kernel.Thm
+
+pub fn addbca() -> @kernel.Thm
+
+pub fn addbf() -> @kernel.Thm
+
+pub fn addbi() -> @kernel.Thm
+
+pub fn addbk() -> @kernel.Thm
+
+pub fn addbn() -> @kernel.Thm
+
+pub fn addbt() -> @kernel.Thm
+
+pub fn addfb() -> @kernel.Thm
+
+pub fn addib() -> @kernel.Thm
+
+pub fn addkb() -> @kernel.Thm
+
+pub fn addnb() -> @kernel.Thm
+
+pub fn addtb() -> @kernel.Thm
+
+pub fn andb_addl() -> @kernel.Thm
+
+pub fn andb_addr() -> @kernel.Thm
+
+pub fn andb_id2l() -> @kernel.Thm
+
+pub fn andb_id2r() -> @kernel.Thm
+
+pub fn andb_idl() -> @kernel.Thm
+
+pub fn andb_idr() -> @kernel.Thm
+
+pub fn andb_orl() -> @kernel.Thm
+
+pub fn andb_orr() -> @kernel.Thm
+
+pub fn andba() -> @kernel.Thm
+
+pub fn andbac() -> @kernel.Thm
+
+pub fn andbb() -> @kernel.Thm
+
+pub fn andbc() -> @kernel.Thm
+
+pub fn andbca() -> @kernel.Thm
+
+pub fn andbf() -> @kernel.Thm
+
+pub fn andbk() -> @kernel.Thm
+
+pub fn andbn() -> @kernel.Thm
+
+pub fn andbt() -> @kernel.Thm
+
+pub fn andfb() -> @kernel.Thm
+
+pub fn andkb() -> @kernel.Thm
+
+pub fn andnb() -> @kernel.Thm
+
+pub fn andtb() -> @kernel.Thm
+
+pub fn contra() -> @kernel.Thm
+
+pub fn contraff() -> @kernel.Thm
+
+pub fn contrafn() -> @kernel.Thm
+
+pub fn contraft() -> @kernel.Thm
+
+pub fn contral() -> @kernel.Thm
+
+pub fn contralr() -> @kernel.Thm
+
+pub fn contranf() -> @kernel.Thm
+
+pub fn contrann() -> @kernel.Thm
+
+pub fn contrar() -> @kernel.Thm
+
+pub fn contrat() -> @kernel.Thm
+
+pub fn contratf() -> @kernel.Thm
+
+pub fn fun_if() -> @kernel.Thm
+
+pub fn fun_if_v1() -> @kernel.Thm
+
+pub fn if_arg() -> @kernel.Thm
+
+pub fn if_arg_v1() -> @kernel.Thm
+
+pub fn if_neg() -> @kernel.Thm
+
+pub fn if_neg_v1() -> @kernel.Thm
+
+pub fn if_same() -> @kernel.Thm
+
+pub fn if_same_v1() -> @kernel.Thm
+
+pub fn ifflr() -> @kernel.Thm
+
+pub fn ifflr_v1() -> @kernel.Thm
+
+pub fn ifflrn() -> @kernel.Thm
+
+pub fn ifflrn_v1() -> @kernel.Thm
+
+pub fn iffrl() -> @kernel.Thm
+
+pub fn iffrl_v1() -> @kernel.Thm
+
+pub fn iffrln() -> @kernel.Thm
+
+pub fn iffrln_v1() -> @kernel.Thm
+
+pub fn implyb_id2l() -> @kernel.Thm
+
+pub fn implyb_idl() -> @kernel.Thm
+
+pub fn implyb_idr() -> @kernel.Thm
+
+pub fn implybb() -> @kernel.Thm
+
+pub fn implybe() -> @kernel.Thm
+
+pub fn implybf() -> @kernel.Thm
+
+pub fn implybn() -> @kernel.Thm
+
+pub fn implybnn() -> @kernel.Thm
+
+pub fn implybt() -> @kernel.Thm
+
+pub fn implyfb() -> @kernel.Thm
+
+pub fn implynb() -> @kernel.Thm
+
+pub fn implytb() -> @kernel.Thm
+
+pub fn is_true_true() -> @kernel.Thm
+
+pub fn issome() -> @kernel.Thm
+
+pub fn ist() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn negb_and() -> @kernel.Thm
+
+pub fn negb_imply() -> @kernel.Thm
+
+pub fn negb_inj() -> @kernel.Thm
+
+pub fn negb_or() -> @kernel.Thm
+
+pub fn negbf() -> @kernel.Thm
+
+pub fn negbfe() -> @kernel.Thm
+
+pub fn negbk() -> @kernel.Thm
+
+pub fn negblr() -> @kernel.Thm
+
+pub fn negbne() -> @kernel.Thm
+
+pub fn negbrl() -> @kernel.Thm
+
+pub fn negbt() -> @kernel.Thm
+
+pub fn negbte() -> @kernel.Thm
+
+pub fn not_false_is_true() -> @kernel.Thm
+
+pub fn notf() -> @kernel.Thm
+
+pub fn orb_andl() -> @kernel.Thm
+
+pub fn orb_andr() -> @kernel.Thm
+
+pub fn orb_id2l() -> @kernel.Thm
+
+pub fn orb_id2r() -> @kernel.Thm
+
+pub fn orb_idl() -> @kernel.Thm
+
+pub fn orba() -> @kernel.Thm
+
+pub fn orbac() -> @kernel.Thm
+
+pub fn orbb() -> @kernel.Thm
+
+pub fn orbb_idr() -> @kernel.Thm
+
+pub fn orbc() -> @kernel.Thm
+
+pub fn orbca() -> @kernel.Thm
+
+pub fn orbf() -> @kernel.Thm
+
+pub fn orbk() -> @kernel.Thm
+
+pub fn orbn() -> @kernel.Thm
+
+pub fn orbt() -> @kernel.Thm
+
+pub fn orfb() -> @kernel.Thm
+
+pub fn orkb() -> @kernel.Thm
+
+pub fn ornb() -> @kernel.Thm
+
+pub fn ortb() -> @kernel.Thm
+
+pub fn pred0() -> @kernel.Thm
+
+pub fn predc() -> @kernel.Thm
+
+pub fn predd() -> @kernel.Thm
+
+pub fn predi() -> @kernel.Thm
+
+pub fn predt() -> @kernel.Thm
+
+pub fn predu() -> @kernel.Thm
+
+pub fn preim() -> @kernel.Thm
+
+pub fn relu() -> @kernel.Thm
+
+pub fn subpred() -> @kernel.Thm
+
+pub fn subrel() -> @kernel.Thm
+
+pub fn subrelul() -> @kernel.Thm
+
+pub fn subrelur() -> @kernel.Thm
+
+pub fn wlog_neg() -> @kernel.Thm
+
+pub fn xor_def() -> @kernel.Thm
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

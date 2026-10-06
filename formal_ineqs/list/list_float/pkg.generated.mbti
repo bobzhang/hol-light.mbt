@@ -1,0 +1,65 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/list/list_float"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn error_mul_f1() -> @kernel.Thm
+
+pub fn error_mul_f1_le_conv(@kernel.Term, Int64, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn error_mul_f1_lemma_p() -> @kernel.Thm
+
+pub fn error_mul_f2() -> @kernel.Thm
+
+pub fn error_mul_f2_le_conv(Int64, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn error_mul_f2_le_conv2(Int64, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn error_mul_f2_lemma_p() -> @kernel.Thm
+
+pub fn error_mul_f2_p() -> @kernel.Thm
+
+pub fn list_sum() -> @kernel.Thm
+
+pub fn list_sum2() -> @kernel.Thm
+
+pub fn list_sum2_0_le_p() -> @kernel.Thm
+
+pub fn list_sum2_1_le_p() -> @kernel.Thm
+
+pub fn list_sum2_error2_const() -> @kernel.Term
+
+pub fn list_sum2_le_conv(Int64, (Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn list_sum2_le_p() -> @kernel.Thm
+
+pub fn list_sum_a_cons() -> @kernel.Thm
+
+pub fn list_sum_a_empty() -> @kernel.Thm
+
+pub fn list_sum_a_h() -> @kernel.Thm
+
+pub fn list_sum_conv((@kernel.Term) -> @kernel.Thm raise, @kernel.Term) -> @kernel.Thm raise
+
+pub fn list_var() -> @kernel.Term
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn my_rule_float(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn rewrite_lhs(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn w_var_list() -> @kernel.Term
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
