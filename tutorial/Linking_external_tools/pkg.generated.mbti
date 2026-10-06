@@ -1,0 +1,67 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/tutorial/Linking_external_tools"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn antideriv_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn antideriv_conv_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn dest_uneg(@kernel.Term) -> @kernel.Term raise
+
+pub fn factor_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn fct1_weak() -> @kernel.Thm
+
+pub fn hol_of_string(String) -> @kernel.Term raise
+
+pub fn integral_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn lexe(String) -> @list.List[String] raise
+
+pub fn load() -> Unit
+
+pub fn maxima_funs() -> @list.List[(String, @kernel.Term)]
+
+pub fn maxima_ops() -> @list.List[(String, @kernel.Term)]
+
+pub fn maximas(String) -> String raise
+
+pub fn mk_pow(@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise
+
+pub fn mk_realvar(String) -> @kernel.Term raise
+
+pub fn mk_uneg(@kernel.Term) -> @kernel.Term raise
+
+pub fn parse_atomic_expression(@list.List[String]) -> (@kernel.Term, @list.List[String]) raise
+
+pub fn[TA, TB] parse_bracketed((TB) -> (TA, @list.List[String]) raise, TB) -> (TA, @list.List[String]) raise
+
+pub fn parse_exp(@list.List[String]) -> (@kernel.Term, @list.List[String]) raise
+
+pub fn parse_expression(@list.List[String]) -> (@kernel.Term, @list.List[String]) raise
+
+pub fn parse_general_infix(String) -> (((@list.List[String]) -> (@kernel.Term, @list.List[String]) raise) -> ((@list.List[String]) -> (@kernel.Term, @list.List[String]) raise) raise) raise
+
+pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash, TC] parse_ginfix(TB, ((TC) -> TA raise) -> ((TC) -> ((TC) -> TA raise) raise) raise, (TC) -> TA raise, (@list.List[TB]) -> (TC, @list.List[TB]) raise, @list.List[TB]) -> (TA, @list.List[TB]) raise
+
+pub fn parse_neg(@list.List[String]) -> (@kernel.Term, @list.List[String]) raise
+
+pub fn sin_n_clauses() -> @kernel.Thm
+
+pub fn string_of_hol(@kernel.Term) -> String raise
+
+pub fn trig_ident_tac(@kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
