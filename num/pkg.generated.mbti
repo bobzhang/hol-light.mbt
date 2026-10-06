@@ -9,9 +9,13 @@ import {
 // Values
 pub fn abs_num(Num) -> Num
 
+pub fn add_big_int(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt
+
 pub fn add_num(Num, Num) -> Num
 
 pub fn big_gcd(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt
+
+pub fn big_int_of_int(Int64) -> @bigint.BigInt
 
 pub fn big_int_of_num(Num) -> @bigint.BigInt raise
 
@@ -21,7 +25,11 @@ pub fn compare_num(Num, Num) -> Int
 
 pub fn denominator(Num) -> Num
 
+pub fn div_big_int(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt raise
+
 pub fn div_num(Num, Num) -> Num raise
+
+pub fn eq_big_int(@bigint.BigInt, @bigint.BigInt) -> Bool
 
 pub fn eq_num(Num, Num) -> Bool
 
@@ -47,7 +55,11 @@ pub fn is_integer_num(Num) -> Bool
 
 pub fn lcm_num(Num, Num) -> Num raise
 
+pub fn le_big_int(@bigint.BigInt, @bigint.BigInt) -> Bool
+
 pub fn le_num(Num, Num) -> Bool
+
+pub fn lt_big_int(@bigint.BigInt, @bigint.BigInt) -> Bool
 
 pub fn lt_num(Num, Num) -> Bool
 
@@ -58,6 +70,8 @@ pub fn min_num(Num, Num) -> Num
 pub fn minus_num(Num) -> Num
 
 pub fn mod_num(Num, Num) -> Num raise
+
+pub fn mult_big_int(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt
 
 pub fn mult_num(Num, Num) -> Num
 
@@ -93,15 +107,25 @@ pub fn pow10(Int) -> Num raise
 
 pub fn pow2(Int) -> Num raise
 
+pub fn power_int_positive_int(Int64, Int64) -> @bigint.BigInt raise
+
 pub fn power_num(Num, Num) -> Num raise
+
+pub fn pred_big_int(@bigint.BigInt) -> @bigint.BigInt
 
 pub fn pred_num(Num) -> Num
 
 pub fn quo_num(Num, Num) -> Num raise
 
+pub fn quomod_big_int(@bigint.BigInt, @bigint.BigInt) -> (@bigint.BigInt, @bigint.BigInt) raise
+
 pub fn round_num(Num) -> Num
 
+pub fn sign_big_int(@bigint.BigInt) -> Int64
+
 pub fn sign_num(Num) -> Int
+
+pub fn sqrt_big_int(@bigint.BigInt) -> @bigint.BigInt raise
 
 pub fn string_of_num(Num) -> String
 
@@ -109,9 +133,15 @@ pub fn string_of_num_hex(Num) -> String raise
 
 pub fn string_of_num_nary(Int, Num) -> String raise
 
+pub fn sub_big_int(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt
+
 pub fn sub_num(Num, Num) -> Num
 
+pub fn succ_big_int(@bigint.BigInt) -> @bigint.BigInt
+
 pub fn succ_num(Num) -> Num
+
+pub let zero_big_int : @bigint.BigInt
 
 // Errors
 pub(all) suberror DivisionByZero derive(@debug.Debug)

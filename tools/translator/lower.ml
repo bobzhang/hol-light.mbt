@@ -272,6 +272,7 @@ module Lower = struct
     | "out_channel" | "Stdlib.out_channel" -> Some "@lib.OutChannel"
     | "Str.regexp" -> Some "@lib.StrRegexp"
     | "Stream.t" -> Some "@lib.Stream"
+    | "Big_int.big_int" | "big_int" -> Some "@bigint.BigInt"
     | "Buffer.t" | "Stdlib.Buffer.t" | "Stdlib__Buffer.t" -> Some "StringBuilder"
     | "int32" | "Int32.t" | "Stdlib.Int32.t" | "Stdlib__Int32.t" -> Some "Int"
     | "in_channel" | "Stdlib.in_channel" -> Some "@lib.InChannel"
@@ -815,6 +816,12 @@ module Lower = struct
              (match M.find ~root:!Names.root "num" "nums_num_of_string" with
               | Some decl -> { hstmts = []; hexp = Atom "@num.nums_num_of_string"; hmty = mty_of_decl decl; hoty = Some oty }
               | None -> unsupported loc "Num library's own %s" (Path.name path))
+         | [ "Big_int"; n ] ->
+             (* the Num library's Big_int (num/big_int.mbt) *)
+             (match M.find ~root:!Names.root "num" n with
+              | Some (M.Value t) -> { hstmts = []; hexp = Atom ("@num." ^ n); hmty = t; hoty = Some oty }
+              | Some decl -> { hstmts = []; hexp = Atom ("@num." ^ n); hmty = mty_of_decl decl; hoty = Some oty }
+              | None -> unsupported loc "no provenance for %s" (Path.name path))
          | [ "temp_path" ] ->
              (* hol.ml's `temp_path` (the sessions define it) *)
              { hstmts = []; hexp = Atom "@lib.temp_path"; hmty = mty_of oty; hoty = Some oty }
@@ -1181,6 +1188,7 @@ module Lower = struct
       Some (String.sub n 7 (String.length n - 7))
     (* a clock, as Sys.time (Formal_ineqs/ times its runs with it) *)
     else if n = "Unix.gettimeofday" then Some "Sys.time"
+    else if n = "Unix.mkdir" then Some n
     (* the Str library (lib/str.mbt has what Minisat/ uses of it) *)
     else if String.length n > 4 && String.sub n 0 4 = "Str." then Some n
     (* Stream (camlp-streams; lib/stream.mbt) *)
@@ -1900,6 +1908,9 @@ module Lower = struct
       | "lxor" -> (2, fun [ a; b ] _ -> Binop ("^", a, b))
       | "lnot" -> (1, fun [ a ] _ -> Call (Atom "@lib.lnot63", [ a ]))
       | "log" -> (1, fun [ a ] _ -> Call (Atom "@lib.float_log", [ a ]))
+      | "atan" -> (1, fun [ a ] _ -> Call (Atom "@lib.float_atan", [ a ]))
+      | "infinity" -> (0, fun [] _ -> Atom "@double.infinity")
+      | "Unix.mkdir" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.unix_mkdir", [ a; b ]))
       | "frexp" -> (1, fun [ a ] _ -> Call (Atom "@lib.float_frexp", [ a ]))
       | "**" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.float_pow", [ a; b ]))
       | "int_of_string" -> (1, fun [ a ] _ -> Call (Atom "@lib.int63_of_string", [ a ]))
@@ -2122,6 +2133,7 @@ module Lower = struct
           let acc = ref [] and i = ref 0 in
           while !i < String.length text - 1 do
             if text.[!i] = '%' then begin
+              if !i + 3 < String.length text && String.sub text !i 4 = "%.0f" then (acc := "Double" :: !acc; i := !i + 2);
               (match text.[!i + 1] with 's' -> acc := "String" :: !acc | 'd' | 'i' -> acc := "Int64" :: !acc | _ -> ());
               i := !i + 2
             end else incr i
@@ -2155,7 +2167,12 @@ module Lower = struct
         let n = String.length text in
         let i = ref 0 in
         while !i < n do
-          (if text.[!i] = '%' && !i + 1 < n then begin
+          (if text.[!i] = '%' && !i + 3 < n && String.sub text !i 4 = "%.0f" then begin
+             (* a float to the nearest integer (Formal_ineqs/misc/report.hl) *)
+             lit (); pieces := Call (Atom "@lib.float_fixed0", [ next () ]) :: !pieces;
+             i := !i + 4
+           end
+           else if text.[!i] = '%' && !i + 1 < n then begin
              (match text.[!i + 1] with
               | 's' -> lit (); pieces := next () :: !pieces
               | 'd' | 'i' -> lit (); pieces := Call (Atom "Int64::to_string", [ next () ]) :: !pieces

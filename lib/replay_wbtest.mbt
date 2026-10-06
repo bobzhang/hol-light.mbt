@@ -116,3 +116,15 @@ test "strings_of_file" {
   file_of_string("/tmp/lines.txt", "a\nb")
   inspect(strings_of_file("/tmp/lines.txt").to_array().join("|"), content="a|b")
 }
+
+///|
+test "%.0f" {
+  inspect(
+    float_fixed0(0.5) + " " + float_fixed0(1.5) + " " + float_fixed0(2.5),
+    content="0 2 2",
+  )
+  inspect(
+    float_fixed0(12.49) + " " + float_fixed0(-3.7) + " " + float_fixed0(0.0),
+    content="12 -4 0",
+  )
+}
