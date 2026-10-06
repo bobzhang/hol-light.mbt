@@ -1963,6 +1963,7 @@ module Lower = struct
       | "Int32.shift_right" -> (2, fun [ a; b ] _ -> Binop (">>", a, narrow b))
       | "Filename.is_relative" -> (1, fun [ a ] _ -> Call (Atom "@lib.filename_is_relative", [ a ]))
       | "Filename.quote" -> (1, fun [ a ] _ -> Call (Atom "@lib.filename_quote", [ a ]))
+      | "Filename.basename" -> (1, fun [ a ] _ -> Call (Atom "@lib.filename_basename", [ a ]))
       | "Char.escaped" -> (1, fun [ a ] _ -> Call (Atom "@lib.char_escaped", [ a ]))
       | "Stream.of_string" -> (1, fun [ a ] _ -> Call (Atom "@lib.stream_of_string", [ a ]))
       | "Stream.of_channel" -> (1, fun [ a ] _ -> Call (Atom "@lib.stream_of_channel", [ a ]))

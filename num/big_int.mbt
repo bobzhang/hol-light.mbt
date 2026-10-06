@@ -141,3 +141,15 @@ pub fn power_int_positive_int(a : Int64, n : Int64) -> @bigint.BigInt raise {
   }
   r
 }
+
+///|
+/// `Big_int.mult_int_big_int`
+pub fn mult_int_big_int(n : Int64, a : @bigint.BigInt) -> @bigint.BigInt {
+  @bigint.BigInt::from_int64(n) * a
+}
+
+///|
+/// `Big_int.add_int_big_int`
+pub fn add_int_big_int(n : Int64, a : @bigint.BigInt) -> @bigint.BigInt {
+  @bigint.BigInt::from_int64(n) + a
+}

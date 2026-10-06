@@ -113,6 +113,8 @@ pub fn[T] failwith(String) -> T raise
 
 pub fn file_of_string(String, String) -> Unit
 
+pub fn filename_basename(String) -> String
+
 pub fn filename_concat(String, String) -> String
 
 pub fn filename_is_relative(String) -> Bool

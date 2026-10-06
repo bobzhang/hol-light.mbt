@@ -11,6 +11,8 @@ pub fn abs_num(Num) -> Num
 
 pub fn add_big_int(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt
 
+pub fn add_int_big_int(Int64, @bigint.BigInt) -> @bigint.BigInt
+
 pub fn add_num(Num, Num) -> Num
 
 pub fn big_gcd(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt
@@ -72,6 +74,8 @@ pub fn minus_num(Num) -> Num
 pub fn mod_num(Num, Num) -> Num raise
 
 pub fn mult_big_int(@bigint.BigInt, @bigint.BigInt) -> @bigint.BigInt
+
+pub fn mult_int_big_int(Int64, @bigint.BigInt) -> @bigint.BigInt
 
 pub fn mult_num(Num, Num) -> Num
 

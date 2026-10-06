@@ -169,3 +169,22 @@ pub fn input_byte(ic : InChannel) -> Int64 raise {
 pub fn filename_quote(name : String) -> String {
   "'" + name.replace_all(old="'", new="'\\''") + "'"
 }
+
+///|
+/// `Filename.basename`: what follows the last `/` (of a name that does not
+/// end with one).
+pub fn filename_basename(name : String) -> String {
+  let mut n = name.length()
+  while n > 1 && name[n - 1].to_int() == '/'.to_int() {
+    n -= 1
+  }
+  let mut i = n
+  while i > 0 && name[i - 1].to_int() != '/'.to_int() {
+    i -= 1
+  }
+  if n == 0 {
+    "."
+  } else {
+    name.view(start_offset=i, end_offset=n).to_string()
+  }
+}
