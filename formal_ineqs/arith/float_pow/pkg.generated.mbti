@@ -1,0 +1,93 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/arith/float_pow"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn eval_eq0(@kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_even(@kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_mul2(@kernel.Term) -> @kernel.Thm raise
+
+pub fn eval_suc(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_eq(Int64) -> @kernel.Thm raise
+
+pub fn float_interval_pow(Int64, Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_interval_pow0() -> @kernel.Thm
+
+pub fn float_interval_pow1() -> @kernel.Thm
+
+pub fn float_interval_pow_even_tf() -> @kernel.Thm
+
+pub fn float_interval_pow_even_tt() -> @kernel.Thm
+
+pub fn float_interval_pow_ff() -> @kernel.Thm
+
+pub fn float_interval_pow_ft() -> @kernel.Thm
+
+pub fn float_interval_pow_odd() -> @kernel.Thm
+
+pub fn float_pow0_hi() -> @kernel.Thm
+
+pub fn float_pow0_lo() -> @kernel.Thm
+
+pub fn float_pow1_hi() -> @kernel.Thm
+
+pub fn float_pow1_lo() -> @kernel.Thm
+
+pub fn float_pow2_hi() -> @kernel.Thm
+
+pub fn float_pow2_lo() -> @kernel.Thm
+
+pub fn float_pow_hi(Int64, Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_pow_lo(Int64, Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_pow_neg_even_hi_th() -> @kernel.Thm
+
+pub fn float_pow_neg_even_lo_th() -> @kernel.Thm
+
+pub fn float_pow_neg_odd_hi_th() -> @kernel.Thm
+
+pub fn float_pow_neg_odd_lo_th() -> @kernel.Thm
+
+pub fn float_pow_pos_double_hi(Int64, @kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_pow_pos_double_hi_th() -> @kernel.Thm
+
+pub fn float_pow_pos_double_lo(Int64, @kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_pow_pos_double_lo_th() -> @kernel.Thm
+
+pub fn float_pow_pos_hi(Int64, @kernel.Term, Int64) -> @kernel.Thm raise
+
+pub fn float_pow_pos_lo(Int64, @kernel.Term, Int64) -> @kernel.Thm raise
+
+pub fn float_pow_pos_suc_hi(Int64, @kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_pow_pos_suc_hi_th() -> @kernel.Thm
+
+pub fn float_pow_pos_suc_lo(Int64, @kernel.Term, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_pow_pos_suc_lo_th() -> @kernel.Thm
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn th_rule(@kernel.Thm) -> @kernel.Thm raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,31 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/tests/log"
+
+import {
+  "bobzhang/hol_light/pp",
+}
+
+// Values
+pub fn append_to_log(String) -> ((String) -> Unit raise) raise
+
+pub fn close_all_logs(Unit) -> Unit raise
+
+pub fn close_log(String) -> Unit raise
+
+pub fn get_dir(String) -> String raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn log_fmt(String) -> @pp.Formatter? raise
+
+pub fn open_log(String) -> Unit raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

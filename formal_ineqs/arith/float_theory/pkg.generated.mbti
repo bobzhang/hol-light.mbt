@@ -1,0 +1,61 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/arith/float_theory"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn arith_base_def() -> @kernel.Thm
+
+pub fn arith_base_neq0() -> @kernel.Thm
+
+pub fn float() -> @kernel.Thm
+
+pub fn float_0() -> @kernel.Thm
+
+pub fn float_abs() -> @kernel.Thm
+
+pub fn float_alt() -> @kernel.Thm
+
+pub fn float_eq_0() -> @kernel.Thm
+
+pub fn float_f_bound() -> @kernel.Thm
+
+pub fn float_f_pos() -> @kernel.Thm
+
+pub fn float_interval_ft_imp_0() -> @kernel.Thm
+
+pub fn float_neg() -> @kernel.Thm
+
+pub fn float_neg_f() -> @kernel.Thm
+
+pub fn float_neg_t() -> @kernel.Thm
+
+pub fn float_of_num() -> @kernel.Thm
+
+pub fn float_t_bound() -> @kernel.Thm
+
+pub fn float_t_neg() -> @kernel.Thm
+
+pub fn float_tm() -> @kernel.Term
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn min_exp() -> Int64
+
+pub fn min_exp_const() -> @kernel.Term
+
+pub fn min_exp_def() -> @kernel.Thm
+
+pub fn min_exp_num_const() -> @kernel.Term
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/misc/misc_functions"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "moonbitlang/core/list",
+}
+
+// Values
+pub fn assert_msg(Bool, String) -> Unit raise
+
+pub fn[TA] error(String, @list.List[@kernel.Term], @list.List[@kernel.Thm]) -> TA raise
+
+pub fn[TA] error_msg(String) -> TA raise
+
+pub fn[TA] gen_pow((TA) -> ((TA) -> TA raise) raise, TA) -> ((Int64) -> ((TA) -> TA raise) raise) raise
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn my_beta_rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn[TA, TB, TC] my_map2((TC) -> ((TB) -> TA raise) raise, @list.List[TC], @list.List[TB]) -> @list.List[TA] raise
+
+pub fn my_prove_hyp(@kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn[TA] pair_of_list(@list.List[TA]) -> (TA, TA) raise
+
+pub fn[TA] shape_list(Int64, @list.List[TA]) -> @list.List[@list.List[TA]] raise
+
+pub fn[TA, TB] test_(Int64, (TB) -> TA raise, TB) -> (TA, Double) raise
+
+// Errors
+pub(all) suberror Error1 {
+  Error(String, @list.List[@kernel.Term], @list.List[@kernel.Thm])
+}
+
+// Types and methods
+
+// Type aliases
+
+// Traits

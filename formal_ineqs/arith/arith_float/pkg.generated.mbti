@@ -1,0 +1,737 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/arith/arith_float"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "bobzhang/hol_light/num",
+  "bobzhang/hol_light/pp",
+  "moonbitlang/core/bigint",
+  "moonbitlang/core/list",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn add_comm() -> @kernel.Thm
+
+pub fn add_hi_c() -> @ref.Ref[Int64]
+
+pub fn add_lo_c() -> @ref.Ref[Int64]
+
+pub fn add_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn approx_interval_p() -> @kernel.Thm
+
+pub fn b0_const() -> @kernel.Term
+
+pub fn b0_name() -> String
+
+pub fn b0_thm() -> @kernel.Thm
+
+pub fn base_const() -> @kernel.Term
+
+pub fn big_int_from_list(Int64, @list.List[@bigint.BigInt]) -> @bigint.BigInt raise
+
+pub fn big_int_round_hi(Int64, Int64, @bigint.BigInt) -> @bigint.BigInt raise
+
+pub fn big_int_round_lo(Int64, Int64, @bigint.BigInt) -> @bigint.BigInt raise
+
+pub fn cache_size() -> Int64
+
+pub fn comb_number(@kernel.Term, Int64) -> Int64 raise
+
+pub fn compare_floats_raw(@kernel.Term) -> ((@kernel.Term) -> Int64 raise) raise
+
+pub fn denormalize(@kernel.Term) -> @kernel.Thm raise
+
+pub fn dest_float(@kernel.Term) -> (String, @kernel.Term, @kernel.Term) raise
+
+pub fn dest_float_interval(@kernel.Term) -> (@kernel.Term, @kernel.Term, @kernel.Term) raise
+
+pub fn dest_float_raw(@kernel.Term) -> (Bool, @num.Num, @num.Num) raise
+
+pub fn dest_num_exp(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn div2_even_lemma() -> @kernel.Thm
+
+pub fn div_hi_c() -> @ref.Ref[Int64]
+
+pub fn div_lemma() -> @kernel.Thm
+
+pub fn div_lo_c() -> @ref.Ref[Int64]
+
+pub fn div_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn even_const() -> @kernel.Term
+
+pub fn f1_1_var() -> @kernel.Term
+
+pub fn f1_2_var() -> @kernel.Term
+
+pub fn f1_var_num() -> @kernel.Term
+
+pub fn f2_1_var() -> @kernel.Term
+
+pub fn f2_2_var() -> @kernel.Term
+
+pub fn f2_var_num() -> @kernel.Term
+
+pub fn float_abs(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_add_ff() -> @kernel.Thm
+
+pub fn float_add_ff_hi() -> @kernel.Thm
+
+pub fn float_add_ff_hi_p() -> @kernel.Thm
+
+pub fn float_add_ff_lo() -> @kernel.Thm
+
+pub fn float_add_ff_lo_p() -> @kernel.Thm
+
+pub fn float_add_ft_f_hi() -> @kernel.Thm
+
+pub fn float_add_ft_f_hi_p() -> @kernel.Thm
+
+pub fn float_add_ft_f_lo() -> @kernel.Thm
+
+pub fn float_add_ft_f_lo_p() -> @kernel.Thm
+
+pub fn float_add_ft_t_hi() -> @kernel.Thm
+
+pub fn float_add_ft_t_hi_p() -> @kernel.Thm
+
+pub fn float_add_ft_t_lo() -> @kernel.Thm
+
+pub fn float_add_ft_t_lo_p() -> @kernel.Thm
+
+pub fn float_add_hi(Int64, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_add_hi_v1(Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn float_add_lo(Int64, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_add_lo_v1(Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn float_add_tt() -> @kernel.Thm
+
+pub fn float_add_tt_hi() -> @kernel.Thm
+
+pub fn float_add_tt_hi_p() -> @kernel.Thm
+
+pub fn float_add_tt_lo() -> @kernel.Thm
+
+pub fn float_add_tt_lo_p() -> @kernel.Thm
+
+pub fn float_compare_interval(@kernel.Term) -> ((@kernel.Thm) -> (Int64, @kernel.Thm) raise) raise
+
+pub fn float_div_0x_hi() -> @kernel.Thm
+
+pub fn float_div_0x_hi_p() -> @kernel.Thm
+
+pub fn float_div_0x_lo() -> @kernel.Thm
+
+pub fn float_div_0x_lo_p() -> @kernel.Thm
+
+pub fn float_div_ff() -> @kernel.Thm
+
+pub fn float_div_ff_hi() -> @kernel.Thm
+
+pub fn float_div_ff_hi_p() -> @kernel.Thm
+
+pub fn float_div_ff_lo() -> @kernel.Thm
+
+pub fn float_div_ff_lo_p() -> @kernel.Thm
+
+pub fn float_div_ft_hi() -> @kernel.Thm
+
+pub fn float_div_ft_hi_p() -> @kernel.Thm
+
+pub fn float_div_ft_lo() -> @kernel.Thm
+
+pub fn float_div_ft_lo_p() -> @kernel.Thm
+
+pub fn float_div_hi(Int64, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_div_hi_v1(Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn float_div_lo(Int64, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_div_lo_v1(Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn float_div_tf_hi() -> @kernel.Thm
+
+pub fn float_div_tf_hi_p() -> @kernel.Thm
+
+pub fn float_div_tf_lo() -> @kernel.Thm
+
+pub fn float_div_tf_lo_p() -> @kernel.Thm
+
+pub fn float_div_tt_hi() -> @kernel.Thm
+
+pub fn float_div_tt_hi_p() -> @kernel.Thm
+
+pub fn float_div_tt_lo() -> @kernel.Thm
+
+pub fn float_div_tt_lo_p() -> @kernel.Thm
+
+pub fn float_f_bound_p() -> @kernel.Thm
+
+pub fn float_f_ge_0() -> @kernel.Thm
+
+pub fn float_f_gt_0() -> @kernel.Thm
+
+pub fn float_f_le_0() -> @kernel.Thm
+
+pub fn float_f_lt_0() -> @kernel.Thm
+
+pub fn float_ge0(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_ge0_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_gt0(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_gt0_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_hash(@kernel.Term) -> String raise
+
+pub fn float_hi(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_interval_abs(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_interval_abs_ff() -> @kernel.Thm
+
+pub fn float_interval_abs_ft() -> @kernel.Thm
+
+pub fn float_interval_abs_tf() -> @kernel.Thm
+
+pub fn float_interval_abs_tt() -> @kernel.Thm
+
+pub fn float_interval_add(Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_interval_div(Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_interval_div_ff_ff() -> @kernel.Thm
+
+pub fn float_interval_div_ff_ff_p() -> @kernel.Thm
+
+pub fn float_interval_div_ff_tt() -> @kernel.Thm
+
+pub fn float_interval_div_ff_tt_p() -> @kernel.Thm
+
+pub fn float_interval_div_ft_xx() -> @kernel.Thm
+
+pub fn float_interval_div_ft_xx_p() -> @kernel.Thm
+
+pub fn float_interval_div_tf_ff() -> @kernel.Thm
+
+pub fn float_interval_div_tf_ff_p() -> @kernel.Thm
+
+pub fn float_interval_div_tf_tt() -> @kernel.Thm
+
+pub fn float_interval_div_tf_tt_p() -> @kernel.Thm
+
+pub fn float_interval_div_tt_ff() -> @kernel.Thm
+
+pub fn float_interval_div_tt_ff_p() -> @kernel.Thm
+
+pub fn float_interval_div_tt_tt() -> @kernel.Thm
+
+pub fn float_interval_div_tt_tt_p() -> @kernel.Thm
+
+pub fn float_interval_lt() -> @kernel.Thm
+
+pub fn float_interval_mul(Int64) -> ((@kernel.Thm) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise
+
+pub fn float_interval_mul_ff_ff() -> @kernel.Thm
+
+pub fn float_interval_mul_ff_tf() -> @kernel.Thm
+
+pub fn float_interval_mul_ff_tt() -> @kernel.Thm
+
+pub fn float_interval_mul_ft_xx() -> @kernel.Thm
+
+pub fn float_interval_mul_tf_ff() -> @kernel.Thm
+
+pub fn float_interval_mul_tf_tf() -> @kernel.Thm
+
+pub fn float_interval_mul_tf_tt() -> @kernel.Thm
+
+pub fn float_interval_mul_tt_ff() -> @kernel.Thm
+
+pub fn float_interval_mul_tt_tf() -> @kernel.Thm
+
+pub fn float_interval_mul_tt_tt() -> @kernel.Thm
+
+pub fn float_interval_mul_xx_ft() -> @kernel.Thm
+
+pub fn float_interval_neg() -> @kernel.Thm
+
+pub fn float_interval_neg_ff() -> @kernel.Thm
+
+pub fn float_interval_neg_ft() -> @kernel.Thm
+
+pub fn float_interval_neg_tf() -> @kernel.Thm
+
+pub fn float_interval_neg_tt() -> @kernel.Thm
+
+pub fn float_interval_neg_v1(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_interval_of_num() -> @kernel.Thm
+
+pub fn float_interval_round(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_interval_sqrt() -> @kernel.Thm
+
+pub fn float_interval_sqrt_p() -> @kernel.Thm
+
+pub fn float_interval_sqrt_v1(Int64, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_interval_sub(Int64, @kernel.Thm, @kernel.Thm) -> @kernel.Thm raise
+
+pub fn float_le(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_le0(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_le0_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_le_ff() -> @kernel.Thm
+
+pub fn float_le_ft() -> @kernel.Thm
+
+pub fn float_le_ft_00() -> @kernel.Thm
+
+pub fn float_le_ft_1() -> @kernel.Thm
+
+pub fn float_le_ft_2() -> @kernel.Thm
+
+pub fn float_le_tf() -> @kernel.Thm
+
+pub fn float_le_tt() -> @kernel.Thm
+
+pub fn float_le_v1(@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn float_lo(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_lt(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_lt0(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_lt0_v1(@kernel.Term) -> @kernel.Thm raise
+
+pub fn float_lt_ff() -> @kernel.Thm
+
+pub fn float_lt_ft() -> @kernel.Thm
+
+pub fn float_lt_tf_00() -> @kernel.Thm
+
+pub fn float_lt_tf_1() -> @kernel.Thm
+
+pub fn float_lt_tf_2() -> @kernel.Thm
+
+pub fn float_lt_tt() -> @kernel.Thm
+
+pub fn float_lt_v1(@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn float_max(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_max_1() -> @kernel.Thm
+
+pub fn float_max_2() -> @kernel.Thm
+
+pub fn float_max_v1(@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn float_min(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_min_1() -> @kernel.Thm
+
+pub fn float_min_2() -> @kernel.Thm
+
+pub fn float_min_max(@kernel.Term, @kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn float_min_max_v1(@kernel.Term) -> ((@kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise) raise
+
+pub fn float_min_v1(@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn float_mul() -> @kernel.Thm
+
+pub fn float_mul_0x_hi() -> @kernel.Thm
+
+pub fn float_mul_0x_hi_p() -> @kernel.Thm
+
+pub fn float_mul_0x_lo() -> @kernel.Thm
+
+pub fn float_mul_0x_lo_p() -> @kernel.Thm
+
+pub fn float_mul_eq(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_mul_eq_v1(@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn float_mul_ff() -> @kernel.Thm
+
+pub fn float_mul_ff_hi() -> @kernel.Thm
+
+pub fn float_mul_ff_hi_p() -> @kernel.Thm
+
+pub fn float_mul_ff_lo() -> @kernel.Thm
+
+pub fn float_mul_ff_lo_p() -> @kernel.Thm
+
+pub fn float_mul_ff_p() -> @kernel.Thm
+
+pub fn float_mul_ft() -> @kernel.Thm
+
+pub fn float_mul_ft_hi() -> @kernel.Thm
+
+pub fn float_mul_ft_hi_p() -> @kernel.Thm
+
+pub fn float_mul_ft_lo() -> @kernel.Thm
+
+pub fn float_mul_ft_lo_p() -> @kernel.Thm
+
+pub fn float_mul_ft_p() -> @kernel.Thm
+
+pub fn float_mul_hi(Int64, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_mul_hi_v1(Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn float_mul_lo(Int64, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_mul_lo_v1(Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn float_mul_tf() -> @kernel.Thm
+
+pub fn float_mul_tf_hi() -> @kernel.Thm
+
+pub fn float_mul_tf_hi_p() -> @kernel.Thm
+
+pub fn float_mul_tf_lo() -> @kernel.Thm
+
+pub fn float_mul_tf_lo_p() -> @kernel.Thm
+
+pub fn float_mul_tf_p() -> @kernel.Thm
+
+pub fn float_mul_tt() -> @kernel.Thm
+
+pub fn float_mul_tt_hi() -> @kernel.Thm
+
+pub fn float_mul_tt_hi_p() -> @kernel.Thm
+
+pub fn float_mul_tt_lo() -> @kernel.Thm
+
+pub fn float_mul_tt_lo_p() -> @kernel.Thm
+
+pub fn float_mul_tt_p() -> @kernel.Thm
+
+pub fn float_mul_x0_hi() -> @kernel.Thm
+
+pub fn float_mul_x0_hi_p() -> @kernel.Thm
+
+pub fn float_mul_x0_lo() -> @kernel.Thm
+
+pub fn float_mul_x0_lo_p() -> @kernel.Thm
+
+pub fn float_of_num_p() -> @kernel.Thm
+
+pub fn float_op_hash(Int64, @kernel.Term, @kernel.Term) -> String raise
+
+pub fn float_op_hash1(Int64, @kernel.Term) -> String raise
+
+pub fn float_pre_exp() -> @kernel.Thm
+
+pub fn float_pre_exp_p() -> @kernel.Thm
+
+pub fn float_prove_ge_interval(@kernel.Term) -> ((@kernel.Thm) -> (Bool, @kernel.Thm) raise) raise
+
+pub fn float_prove_gt_interval(@kernel.Term) -> ((@kernel.Thm) -> (Bool, @kernel.Thm) raise) raise
+
+pub fn float_prove_le(@kernel.Term, @kernel.Term) -> (Bool, @kernel.Thm) raise
+
+pub fn float_prove_le_interval(@kernel.Term) -> ((@kernel.Thm) -> (Bool, @kernel.Thm) raise) raise
+
+pub fn float_prove_lt(@kernel.Term, @kernel.Term) -> (Bool, @kernel.Thm) raise
+
+pub fn float_prove_lt_interval(@kernel.Term) -> ((@kernel.Thm) -> (Bool, @kernel.Thm) raise) raise
+
+pub fn float_sqrt_even_hi() -> @kernel.Thm
+
+pub fn float_sqrt_even_hi_p() -> @kernel.Thm
+
+pub fn float_sqrt_even_lo() -> @kernel.Thm
+
+pub fn float_sqrt_even_lo_p() -> @kernel.Thm
+
+pub fn float_sqrt_hi(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_sqrt_hi_v1(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn float_sqrt_lo(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_sqrt_lo_v1(Int64) -> ((@kernel.Term) -> @kernel.Thm raise) raise
+
+pub fn float_sub_f_eq_add() -> @kernel.Thm
+
+pub fn float_sub_hi(Int64, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_sub_hi_v1(Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn float_sub_lo(Int64, @kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn float_sub_lo_v1(Int64) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise
+
+pub fn float_sub_t_eq_add() -> @kernel.Thm
+
+pub fn float_t_bound_p() -> @kernel.Thm
+
+pub fn float_t_ge_0() -> @kernel.Thm
+
+pub fn float_t_gt_0() -> @kernel.Thm
+
+pub fn float_t_le_0() -> @kernel.Thm
+
+pub fn float_t_lt_0() -> @kernel.Thm
+
+pub fn float_to_log_string(@kernel.Term) -> String raise
+
+pub fn float_to_num_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn ge0_c() -> @ref.Ref[Int64]
+
+pub fn get_big_int_digits(Int64, @bigint.BigInt) -> @list.List[@bigint.BigInt] raise
+
+pub fn gt0_c() -> @ref.Ref[Int64]
+
+pub fn hi_lt_num_conv(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn hi_num_conv(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn hi_thm_array() -> FixedArray[@kernel.Thm]
+
+pub fn hi_thm_table() -> @lib.OHashtbl[@kernel.Term, @kernel.Thm]
+
+pub fn init_logs(Unit) -> Unit raise
+
+pub fn interval_add() -> @kernel.Thm
+
+pub fn interval_const() -> @kernel.Term
+
+pub fn interval_sub() -> @kernel.Thm
+
+pub fn le0_c() -> @ref.Ref[Int64]
+
+pub fn le_c() -> @ref.Ref[Int64]
+
+pub fn le_refl_p() -> @kernel.Thm
+
+pub fn le_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn le_trans_p() -> @kernel.Thm
+
+pub fn lo_num_conv(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn lo_thm2_array() -> FixedArray[@kernel.Thm]
+
+pub fn lo_thm2_table() -> @lib.OHashtbl[@kernel.Term, @kernel.Thm]
+
+pub fn lo_thm_array() -> FixedArray[@kernel.Thm]
+
+pub fn lo_thm_table() -> @lib.OHashtbl[@kernel.Term, @kernel.Thm]
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn log_binop(String, Int64, @kernel.Term, @kernel.Term) -> Unit raise
+
+pub fn lt0_c() -> @ref.Ref[Int64]
+
+pub fn lt_c() -> @ref.Ref[Int64]
+
+pub fn lt_imp_le_p() -> @kernel.Thm
+
+pub fn lt_le_trans() -> @kernel.Thm
+
+pub fn m1_var_real() -> @kernel.Term
+
+pub fn m2_var_real() -> @kernel.Term
+
+pub fn m_var_real() -> @kernel.Term
+
+pub fn make_float(String) -> ((@kernel.Term) -> ((@kernel.Term) -> @kernel.Term raise) raise) raise
+
+pub fn make_hi_thm(Int64) -> @kernel.Thm raise
+
+pub fn make_lo_thm(Int64) -> @kernel.Thm raise
+
+pub fn make_lo_thm2(Int64) -> @kernel.Thm raise
+
+pub fn max_c() -> @ref.Ref[Int64]
+
+pub fn max_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn min_c() -> @ref.Ref[Int64]
+
+pub fn min_exp_div2() -> @kernel.Term
+
+pub fn min_max_c() -> @ref.Ref[Int64]
+
+pub fn mk_float(Int64) -> ((Int64) -> @kernel.Term raise) raise
+
+pub fn mk_float_interval_num(@num.Num) -> @kernel.Thm raise
+
+pub fn mk_float_interval_small_num(Int64) -> @kernel.Thm raise
+
+pub fn mk_num_exp(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+pub fn mod_plus() -> @kernel.Thm
+
+pub fn mul_hi_c() -> @ref.Ref[Int64]
+
+pub fn mul_lo_c() -> @ref.Ref[Int64]
+
+pub fn mul_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] my_add(@lib.OHashtbl[TA, TB], TA, TB) -> Unit raise
+
+pub fn n1_var_real() -> @kernel.Term
+
+pub fn n2_var_real() -> @kernel.Term
+
+pub fn n_lt_suc() -> @kernel.Thm
+
+pub fn n_lt_suc_v1() -> @kernel.Thm
+
+pub fn n_var_real() -> @kernel.Term
+
+pub fn normal_lemma1() -> @kernel.Thm
+
+pub fn normal_lemma1_v1() -> @kernel.Thm
+
+pub fn normal_lemma2() -> @kernel.Thm
+
+pub fn normalize(@kernel.Term) -> (@kernel.Thm, Bool) raise
+
+pub fn num_exp_0_p() -> @kernel.Thm
+
+pub fn num_exp_add(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn num_exp_add_p() -> @kernel.Thm
+
+pub fn num_exp_const() -> @kernel.Term
+
+pub fn num_exp_const_v1() -> @kernel.Term
+
+pub fn num_exp_denorm() -> @kernel.Thm
+
+pub fn num_exp_div(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn num_exp_div1_p() -> @kernel.Thm
+
+pub fn num_exp_div2_p() -> @kernel.Thm
+
+pub fn num_exp_exp_p() -> @kernel.Thm
+
+pub fn num_exp_hi(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn num_exp_hi_lt(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn num_exp_le(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn num_exp_le1_eq_p() -> @kernel.Thm
+
+pub fn num_exp_le1_p() -> @kernel.Thm
+
+pub fn num_exp_le2_eq_p() -> @kernel.Thm
+
+pub fn num_exp_le2_p() -> @kernel.Thm
+
+pub fn num_exp_le_p() -> @kernel.Thm
+
+pub fn num_exp_lo(Int64, @kernel.Term) -> @kernel.Thm raise
+
+pub fn num_exp_lt(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn num_exp_lt1_eq_p() -> @kernel.Thm
+
+pub fn num_exp_lt2_eq_p() -> @kernel.Thm
+
+pub fn num_exp_lt_p() -> @kernel.Thm
+
+pub fn num_exp_mul(@kernel.Term, @kernel.Term) -> @kernel.Thm raise
+
+pub fn num_exp_mul_p() -> @kernel.Thm
+
+pub fn num_exp_n0() -> @kernel.Thm
+
+pub fn num_exp_n0_p() -> @kernel.Thm
+
+pub fn[TA, TB] num_exp_op_hi(Int64, (TB) -> ((TA) -> @kernel.Thm raise) raise, TB, TA) -> @kernel.Thm raise
+
+pub fn[TA, TB] num_exp_op_hi_lt(Int64, (TB) -> ((TA) -> @kernel.Thm raise) raise, TB, TA) -> @kernel.Thm raise
+
+pub fn[TA, TB] num_exp_op_lo(Int64, (TB) -> ((TA) -> @kernel.Thm raise) raise, TB, TA) -> @kernel.Thm raise
+
+pub fn num_exp_sub(@kernel.Term, @kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn num_exp_sub1_p() -> @kernel.Thm
+
+pub fn num_exp_sub2_p() -> @kernel.Thm
+
+pub fn num_remove() -> @kernel.Thm
+
+pub fn p_var_num() -> @kernel.Term
+
+pub fn pre_const() -> @kernel.Term
+
+pub fn print_float(@pp.Formatter, @kernel.Term) -> Unit raise
+
+pub fn print_stat(Unit) -> Unit raise
+
+pub fn real_add_comm() -> @kernel.Thm
+
+pub fn reset_cache(Unit) -> Unit raise
+
+pub fn reset_stat(Unit) -> Unit raise
+
+pub fn rule(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn s_var_bool() -> @kernel.Term
+
+pub fn sqrt_hi_c() -> @ref.Ref[Int64]
+
+pub fn sqrt_lo_c() -> @ref.Ref[Int64]
+
+pub fn sqrt_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn sub_hi_c() -> @ref.Ref[Int64]
+
+pub fn sub_lo_c() -> @ref.Ref[Int64]
+
+pub fn sub_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn sym_num_exp_0_p() -> @kernel.Thm
+
+pub fn[TA] take(Int64, @list.List[TA]) -> @list.List[TA] raise
+
+pub fn to_num_exp(@kernel.Term) -> @kernel.Thm raise
+
+pub fn transform(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn transform_v1(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn transform_v2(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn transform_v3(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn transform_v4(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn transform_v5(@kernel.Thm) -> @kernel.Thm raise
+
+pub fn two_num() -> @kernel.Term
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

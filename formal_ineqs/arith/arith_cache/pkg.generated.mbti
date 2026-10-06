@@ -1,0 +1,101 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/arith/arith_cache"
+
+import {
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lib",
+  "moonbitlang/core/ref",
+}
+
+// Values
+pub fn add_counter() -> @ref.Ref[Int64]
+
+pub fn add_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn cache_size() -> Int64
+
+pub fn div_counter() -> @ref.Ref[Int64]
+
+pub fn div_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn eq0_counter() -> @ref.Ref[Int64]
+
+pub fn even_counter() -> @ref.Ref[Int64]
+
+pub fn gt0_counter() -> @ref.Ref[Int64]
+
+pub fn le_counter() -> @ref.Ref[Int64]
+
+pub fn le_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn lt_counter() -> @ref.Ref[Int64]
+
+pub fn mul_counter() -> @ref.Ref[Int64]
+
+pub fn mul_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn[TA : Eq + @lib.OCompare + @lib.OHash, TB] my_add(@lib.OHashtbl[TA, TB], TA, TB) -> Unit raise
+
+pub fn num_tm_hash(@kernel.Term) -> String raise
+
+pub fn odd_counter() -> @ref.Ref[Int64]
+
+pub fn op_tm_hash(@kernel.Term) -> String raise
+
+pub fn pre_counter() -> @ref.Ref[Int64]
+
+pub fn print_stat(Unit) -> Unit raise
+
+pub fn raw_add_conv_hash(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_div_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_eq0_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_even_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_gt0_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_le_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_lt_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_mul_conv_hash(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_odd_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_pre_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_sub_and_le_hash_conv(@kernel.Term, @kernel.Term) -> (@kernel.Thm, @kernel.Thm) raise
+
+pub fn raw_sub_hash_conv(@kernel.Term) -> @kernel.Thm raise
+
+pub fn raw_suc_conv_hash(@kernel.Term) -> @kernel.Thm raise
+
+pub fn reset_cache(Unit) -> Unit raise
+
+pub fn reset_stat(Unit) -> Unit raise
+
+pub fn sub_counter() -> @ref.Ref[Int64]
+
+pub fn sub_le_counter() -> @ref.Ref[Int64]
+
+pub fn sub_le_table() -> @lib.OHashtbl[String, (@kernel.Thm, @kernel.Thm)]
+
+pub fn sub_table() -> @lib.OHashtbl[String, @kernel.Thm]
+
+pub fn suc_counter() -> @ref.Ref[Int64]
+
+pub fn tm1_tm2_hash(@kernel.Term, @kernel.Term) -> String raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

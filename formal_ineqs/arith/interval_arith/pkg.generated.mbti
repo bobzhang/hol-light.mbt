@@ -1,0 +1,51 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/formal_ineqs/arith/interval_arith"
+
+import {
+  "bobzhang/hol_light/kernel",
+}
+
+// Values
+pub fn approx_interval() -> @kernel.Thm
+
+pub fn bounded_on() -> @kernel.Thm
+
+pub fn bounded_on_int() -> @kernel.Thm
+
+pub fn const_interval() -> @kernel.Thm
+
+pub fn dest_interval_arith(@kernel.Term) -> (@kernel.Term, @kernel.Term) raise
+
+pub fn iabs() -> @kernel.Thm
+
+pub fn interval_arith() -> @kernel.Thm
+
+pub fn interval_gt() -> @kernel.Thm
+
+pub fn interval_neg() -> @kernel.Thm
+
+pub fn interval_neg_eq() -> @kernel.Thm
+
+pub fn interval_neg_v1() -> @kernel.Thm
+
+pub fn interval_not_zero() -> @kernel.Thm
+
+pub fn interval_pos() -> @kernel.Thm
+
+pub fn interval_tm() -> @kernel.Term
+
+pub fn load() -> Unit
+
+pub fn load_alone() -> Unit
+
+pub fn mk_const_interval(@kernel.Term) -> @kernel.Thm raise
+
+pub fn mk_interval(@kernel.Term, @kernel.Term) -> @kernel.Term raise
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
