@@ -139,6 +139,11 @@ attempt "types" (fun () -> String.concat " " (List.map (fun (s,n) -> s ^ "/" ^ s
 attempt "constants" (fun () -> String.concat " " (List.map fst (constants())));;
 attempt "definitions" (fun () -> string_of_int (List.length (definitions())));;
 (* BEGIN EXTRA *)
+(* the verifier at work: upstream's examples.hl (test1) and the one in
+   make.ml; without its progress reports, which have times in them *)
+Verifier_options.info_print_level := 0;;
+attempt "verify sqrt(pi)" (fun () -> sthm (fst (M_verifier_main.verify_ineq M_verifier_main.default_params 5 (tm "sqrt(pi) < #1.773"))));;
+attempt "verify polynomial" (fun () -> sthm (fst (M_verifier_main.verify_ineq M_verifier_main.default_params 5 (tm "-- &1 / sqrt(&3) <= x /\\ x <= sqrt(&2) /\\ -- sqrt(pi) <= y /\\ y <= &1 ==> x pow 2 * y - x * y pow 4 + y pow 6 - &7 + x pow 4 > -- #7.17995"))));;
 (* END EXTRA *)
 attempt "counter_tyvar" (fun () -> stm (tm "zz_counter"));;
 attempt "counter_genvar" (fun () -> stm (genvar bool_ty));;
