@@ -271,6 +271,7 @@ module Lower = struct
     (* channels on in-memory files (lib/channels.mbt) *)
     | "out_channel" | "Stdlib.out_channel" -> Some "@lib.OutChannel"
     | "Str.regexp" -> Some "@lib.StrRegexp"
+    | "Stream.t" -> Some "@lib.Stream"
     | "Buffer.t" | "Stdlib.Buffer.t" | "Stdlib__Buffer.t" -> Some "StringBuilder"
     | "int32" | "Int32.t" | "Stdlib.Int32.t" | "Stdlib__Int32.t" -> Some "Int"
     | "in_channel" | "Stdlib.in_channel" -> Some "@lib.InChannel"
@@ -1182,6 +1183,8 @@ module Lower = struct
     else if n = "Unix.gettimeofday" then Some "Sys.time"
     (* the Str library (lib/str.mbt has what Minisat/ uses of it) *)
     else if String.length n > 4 && String.sub n 0 4 = "Str." then Some n
+    (* Stream (camlp-streams; lib/stream.mbt) *)
+    else if String.length n > 7 && String.sub n 0 7 = "Stream." then Some n
     else None
 
   (* Stdlib (or a module including it) `List.f` with the same meaning as
@@ -1949,6 +1952,12 @@ module Lower = struct
       | "Int32.shift_right" -> (2, fun [ a; b ] _ -> Binop (">>", a, narrow b))
       | "Filename.is_relative" -> (1, fun [ a ] _ -> Call (Atom "@lib.filename_is_relative", [ a ]))
       | "Filename.quote" -> (1, fun [ a ] _ -> Call (Atom "@lib.filename_quote", [ a ]))
+      | "Char.escaped" -> (1, fun [ a ] _ -> Call (Atom "@lib.char_escaped", [ a ]))
+      | "Stream.of_string" -> (1, fun [ a ] _ -> Call (Atom "@lib.stream_of_string", [ a ]))
+      | "Stream.of_channel" -> (1, fun [ a ] _ -> Call (Atom "@lib.stream_of_channel", [ a ]))
+      | "Stream.peek" -> (1, fun [ a ] _ -> Call (Atom "@lib.stream_peek", [ a ]))
+      | "Stream.next" -> (1, fun [ a ] _ -> Call (Atom "@lib.stream_next", [ a ]))
+      | "Stream.junk" -> (1, fun [ a ] _ -> Call (Atom "@lib.stream_junk", [ a ]))
       | "String.escaped" -> (1, fun [ a ] _ -> Call (Atom "@lib.string_escaped", [ a ]))
       | "String.concat" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.string_concat", [ a; b ]))
       | "Array.make" -> (2, fun [ a; b ] _ -> Call (Atom "@lib.array_make", [ a; b ]))
@@ -2858,6 +2867,8 @@ module Lower = struct
            | "Not_found", [] when predef_exn cd -> "@lib.NotFound"
            | "End_of_file", [] when predef_exn cd -> "@lib.EndOfFile"
            | "Sys_error", [ a ] when predef_exn cd -> "@lib.SysError(" ^ pattern ~mty:(M.Named ("String", [])) a ^ ")"
+           (* Stream.Failure (Stdlib's Failure takes a string) *)
+           | "Failure", [] when not (predef_exn cd) && not (Hashtbl.mem own_ctors "Failure") -> "@lib.StreamFailure"
            (* Sys.Break (an interrupt from the keyboard: never raised here) *)
            | "Break", [] when not (Hashtbl.mem own_ctors "Break") -> "@lib.Break"
            | "Match_failure", [ { pat_desc = Tpat_any; _ } ] -> "@lib.MatchFailure(_)"
