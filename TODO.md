@@ -182,12 +182,15 @@ and file I/O before starting it.
   before using it. The translation session is still serial (each
   translation needs the previous interfaces from `moon info`).
 - **CI**: `.github/workflows/ci.yml` runs the core tier on every push
-  and pull request (upstream's practice: its CI loads hol.ml, and
-  `holtest` is run by hand). Not done: the theory tiers in CI. If wanted,
-  `tools/test.py <tier> --shard I/N` is meant for a matrix (a nightly or a
-  manual run), and a test whose package and dependencies did not change
-  need not run again; linking the test of a long chain takes about 14 GB,
-  near the 16 GB of a hosted runner.
+  and pull request (upstream's practice: its CI loads hol.ml), and
+  `.github/workflows/full.yml` the whole suite on wasm-gc nightly and by
+  hand, in 20 shards. Each shard uploads the seconds its packages took
+  (tools/test_times.tsv, which balances the shards: many packages have no
+  recorded time yet). Not done: skipping a test whose package and
+  dependencies did not change. Native would not be faster: debug native
+  takes three times as long as wasm-gc on the core tier, and release
+  native does not build (the C backend bug in tools/moonbit_bugs/, in
+  metis.mbt).
 - **Stale references**: tools/ocaml_ref/num_ref.expected has three lines
   the test no longer embeds (`int_big`, `int_too_big`, `max_min`), and
   parser_ref.expected is not what parser_ref_test.mbt embeds; regenerate
