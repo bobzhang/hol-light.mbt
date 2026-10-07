@@ -60,6 +60,15 @@ Library and Multivariate packages load on demand, after what they need:
 let th = @prime.prime_2()
 ```
 
+`quickstart/` is a first proof session to read and run: the binary-search
+midpoint, proved in range on the naturals (in one call, then tactic by
+tactic), and on 32-bit words, where `(lo + hi) / 2` overflows and
+`lo + (hi - lo) / 2` is proved correct for every input.
+
+```
+moon run quickstart --target wasm-gc -j 4    # 30 s, most of it loading Library/words.ml
+```
+
 ## Develop
 
 ```
