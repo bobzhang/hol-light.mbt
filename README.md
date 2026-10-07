@@ -62,11 +62,14 @@ let th = @prime.prime_2()
 
 `quickstart/` is a first proof session to read and run: the binary-search
 midpoint, proved in range on the naturals (in one call, then tactic by
-tactic), and on 32-bit words, where `(lo + hi) / 2` overflows and
-`lo + (hi - lo) / 2` is proved correct for every input.
+tactic), and in `quickstart/overflow` on 32-bit words, where `(lo + hi) / 2`
+overflows and `lo + (hi - lo) / 2` is proved correct for every input. The
+proofs are test blocks whose `inspect` snapshots hold the goals after each
+tactic; change a step and `-u` writes the new state back into the file:
 
 ```
-moon run quickstart --target wasm-gc -j 4    # 30 s, most of it loading Library/words.ml
+moon test quickstart --target wasm-gc -j 4 -u
+moon test quickstart/overflow --target wasm-gc -j 4    # 30 s, most of it loading Library/words.ml
 ```
 
 ## Develop
