@@ -170,6 +170,10 @@ fn raw_token(chars : Array[Char], i : Int) -> (Lexcode, Int)? raise {
       None => ()
     }
   }
+  match unicode_symbol(chars, i) {
+    Some(r) => return Some(r)
+    None => ()
+  }
   if is_class(@printer.isbra, chars[i]) {
     return Some((Ident(char_str(chars[i])), i + 1))
   }
@@ -179,6 +183,55 @@ fn raw_token(chars : Array[Char], i : Int) -> (Lexcode, Int)? raise {
   }
   match ident(chars, i) {
     Some(j) => Some((Ident(String::from_array(chars[i:j])), j))
+    None => None
+  }
+}
+
+///|
+/// Not in upstream: Unicode spellings of upstream's symbols.
+let unicode_symbols : Map[Char, String] = {
+  '∀': "!",
+  '∃': "?",
+  '∧': "/\\",
+  '∨': "\\/",
+  '¬': "~",
+  '⇒': "==>",
+  '⇔': "<=>",
+  '≤': "<=",
+  '≥': ">=",
+  'λ': "\\",
+}
+
+///|
+/// Not in upstream: the token for the Unicode symbol whose UTF-8 encoding
+/// starts at `chars[i]`, and the end index. A symbol is a token by itself
+/// and gives upstream's token, so the parser sees nothing new (and `¬¬p`
+/// is `~ ~p`, where `~~p` is one unknown symbol). Any other non-ASCII
+/// character is left unparsed, as upstream leaves them all.
+fn unicode_symbol(chars : Array[Char], i : Int) -> (Lexcode, Int)? {
+  let b0 = chars[i].to_int()
+  let (n, lead) = if b0 >= 0xF0 {
+    (4, b0 & 0x07)
+  } else if b0 >= 0xE0 {
+    (3, b0 & 0x0F)
+  } else if b0 >= 0xC0 {
+    (2, b0 & 0x1F)
+  } else {
+    return None
+  }
+  if i + n > chars.length() {
+    return None
+  }
+  let mut cp = lead
+  for k in 1..<n {
+    let b = chars[i + k].to_int()
+    if (b & 0xC0) != 0x80 {
+      return None
+    }
+    cp = (cp << 6) | (b & 0x3F)
+  }
+  match unicode_symbols.get(cp.unsafe_to_char()) {
+    Some(tok) => Some((Ident(tok), i + n))
     None => None
   }
 }

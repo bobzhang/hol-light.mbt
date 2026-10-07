@@ -60,6 +60,15 @@ Library and Multivariate packages load on demand, after what they need:
 let th = @prime.prime_2()
 ```
 
+Terms may be written with `∀ ∃ ∧ ∨ ¬ ⇒ ⇔ ≤ ≥ λ` for upstream's
+`! ? /\ \/ ~ ==> <=> <= >= \` (the lexer gives the same tokens; the
+printer keeps upstream's spelling):
+
+```moonbit
+let th = @int.arith_rule(@parser.parse_term("∀m n. m ≤ n ⇒ ¬(n < m)"))
+println(@printer.string_of_thm(th))    // |- forall m n. m <= n ==> ~(n < m)
+```
+
 ## Develop
 
 ```
