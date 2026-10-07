@@ -230,6 +230,13 @@ pub let the_overload_skeletons : Ref[List[(String, HolType)]] = Ref::{
 }
 
 ///|
+/// Not in upstream: whether Unicode symbols are in use (see `unicode/`).
+/// When set, the lexer takes each non-ASCII character as a token by itself
+/// (`λ` as the `\` of an abstraction), and abstractions and theorems print
+/// with `λ` and `⊢`. Unset, non-ASCII input is unparsed, as upstream's.
+pub let unicode_symbols : Ref[Bool] = Ref::{ val: false, }
+
+///|
 /// Whether interface/overloading is reversed on printing.
 pub let reverse_interface_mapping : Ref[Bool] = Ref::{ val: true, }
 

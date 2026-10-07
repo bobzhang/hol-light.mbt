@@ -170,6 +170,12 @@ fn raw_token(chars : Array[Char], i : Int) -> (Lexcode, Int)? raise {
       None => ()
     }
   }
+  if @printer.unicode_symbols.val {
+    match unicode_symbol(chars, i) {
+      Some(r) => return Some(r)
+      None => ()
+    }
+  }
   if is_class(@printer.isbra, chars[i]) {
     return Some((Ident(char_str(chars[i])), i + 1))
   }
@@ -181,6 +187,36 @@ fn raw_token(chars : Array[Char], i : Int) -> (Lexcode, Int)? raise {
     Some(j) => Some((Ident(String::from_array(chars[i:j])), j))
     None => None
   }
+}
+
+///|
+/// Not in upstream (`@printer.unicode_symbols`): the non-ASCII character
+/// whose UTF-8 encoding starts at `chars[i]`, as a token by itself, and the
+/// end index. `λ` is the `\` of an abstraction.
+fn unicode_symbol(chars : Array[Char], i : Int) -> (Lexcode, Int)? {
+  let b0 = chars[i].to_int()
+  let (n, lead) = if b0 >= 0xF0 {
+    (4, b0 & 0x07)
+  } else if b0 >= 0xE0 {
+    (3, b0 & 0x0F)
+  } else if b0 >= 0xC0 {
+    (2, b0 & 0x1F)
+  } else {
+    return None
+  }
+  if i + n > chars.length() {
+    return None
+  }
+  let mut cp = lead
+  for k in 1..<n {
+    let b = chars[i + k].to_int()
+    if (b & 0xC0) != 0x80 {
+      return None
+    }
+    cp = (cp << 6) | (b & 0x3F)
+  }
+  let c = cp.unsafe_to_char()
+  Some((Ident(if c == 'λ' { "\\" } else { c.to_string() }), i + n))
 }
 
 ///|

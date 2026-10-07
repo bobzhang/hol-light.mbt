@@ -752,7 +752,7 @@ fn Ctx::print_term_sequence(
 fn Ctx::print_binder(self : Ctx, prec : Int, tm : Term) -> Unit raise {
   let absf = @basics.is_gabs(tm)
   let (s, s1) = if absf {
-    ("\\", "\\")
+    ("\\", if unicode_symbols.val { "λ" } else { "\\" })
   } else {
     let bt = @kernel.rator(tm)
     let sn = name_of(bt)
@@ -924,7 +924,7 @@ fn print_thm_gen(
     fmt.print_space()
   }
   fmt.open_hbox()
-  fmt.print_string("|- ")
+  fmt.print_string(if unicode_symbols.val { "⊢ " } else { "|- " })
   pt(tm)
   fmt.close_box()
 }

@@ -1,0 +1,19 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "bobzhang/hol_light/unicode"
+
+// Values
+pub fn add_symbol(String, String) -> Unit raise
+
+pub fn set_symbols() -> Unit raise
+
+pub let symbols : Array[(String, String)]
+
+pub fn unset_symbols() -> Unit
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
