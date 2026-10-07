@@ -52,22 +52,20 @@ test "the buggy midpoint in range: no proof" {
 test "the fixed midpoint is in range, for all 2^64 pairs" {
   // BITBLAST_RULE turns the statement into a formula over the 64 bits and
   // checks it with BDDs (word_ule is unsigned <=).
-  let lower = "!lo hi:int32. word_ule lo hi ==> word_ule lo (\{MID})"
-  let upper = "!lo hi:int32. word_ule lo hi ==> word_ule (\{MID}) hi"
+  let stmt =
+    #|!lo hi:int32.
+    #|  word_ule lo hi ==>
+    $|    word_ule lo (\{MID})
+    #|    /\
+    $|    word_ule (\{MID}) hi
+  let th = @words.bitblast_rule(tm(stmt))
   inspect(
-    @printer.string_of_thm(@words.bitblast_rule(tm(lower))),
+    @printer.string_of_thm(th),
     content=(
       #||- forall lo hi.
       #|       word_ule lo hi
-      #|       ==> word_ule lo (word_add lo (word_ushr (word_sub hi lo) 1))
-    ),
-  )
-  inspect(
-    @printer.string_of_thm(@words.bitblast_rule(tm(upper))),
-    content=(
-      #||- forall lo hi.
-      #|       word_ule lo hi
-      #|       ==> word_ule (word_add lo (word_ushr (word_sub hi lo) 1)) hi
+      #|       ==> word_ule lo (word_add lo (word_ushr (word_sub hi lo) 1)) /\
+      #|           word_ule (word_add lo (word_ushr (word_sub hi lo) 1)) hi
     ),
   )
 }
