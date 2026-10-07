@@ -1,0 +1,105 @@
+# The whole suite (every translated file against upstream's output), as
+# upstream's holtest: not on every push, but each night that follows a
+# change to main, and by hand (Actions > Full suite > Run workflow, or
+# `gh workflow run "Full suite"`). It is split over machines with
+# `tools/test.py --shard I/N`.
+name: Full suite
+
+on:
+  workflow_dispatch:
+    inputs:
+      tiers:
+        description: "What to run: tiers or package directories (tools/test.py)"
+        default: "all"
+      shards:
+        description: "Machines to split it over"
+        default: "20"
+
+  schedule:
+    # 18:00 UTC
+    - cron: "0 18 * * *"
+
+jobs:
+  plan:
+    name: plan
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.plan.outputs.run }}
+      shards: ${{ steps.plan.outputs.shards }}
+      count: ${{ steps.plan.outputs.count }}
+      tiers: ${{ steps.plan.outputs.tiers }}
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v7
+
+      - name: Plan
+        id: plan
+        env:
+          EVENT: ${{ github.event_name }}
+          TIERS: ${{ inputs.tiers }}
+          SHARDS: ${{ inputs.shards }}
+        run: |
+          count=${SHARDS:-20}
+          echo "count=$count" >> "$GITHUB_OUTPUT"
+          echo "tiers=${TIERS:-all}" >> "$GITHUB_OUTPUT"
+          echo "shards=$(python3 -c "import json,sys; print(json.dumps(list(range(1, int(sys.argv[1]) + 1))))" "$count")" >> "$GITHUB_OUTPUT"
+          # a nightly run only when main changed in the last 25 hours
+          age=$(( $(date +%s) - $(git log -1 --format=%ct) ))
+          if [ "$EVENT" = schedule ] && [ "$age" -gt 90000 ]; then
+            echo "run=false" >> "$GITHUB_OUTPUT"
+            echo "main has not changed for $(( age / 3600 )) hours: nothing to run"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  test:
+    name: shard ${{ matrix.shard }}
+    needs: plan
+    if: needs.plan.outputs.run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(needs.plan.outputs.shards) }}
+
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v7
+
+      - name: Install MoonBit
+        env:
+          # as .github/workflows/ci.yml
+          MOONBIT_INSTALL_VERSION: 0.10.14+7d59c7ec9
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+
+      - name: More swap
+        # linking the test of a long chain takes about 14 GB; the machine
+        # has 16 GB
+        run: |
+          sudo fallocate -l 16G /mnt/hol-swap
+          sudo chmod 600 /mnt/hol-swap
+          sudo mkswap /mnt/hol-swap
+          sudo swapon /mnt/hol-swap
+          free -g
+          df -h / /mnt
+
+      - name: Run
+        env:
+          TIERS: ${{ needs.plan.outputs.tiers }}
+          SHARD: ${{ matrix.shard }}/${{ needs.plan.outputs.count }}
+        # two compiler processes and three tests at once (a test takes up
+        # to 4 GB); the seconds each package took are recorded
+        run: python3 tools/test.py $TIERS --shard "$SHARD" --build-jobs 2 -j 3 --max-rss-gb 12 --times
+
+      - name: Keep the times and the log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shard-${{ matrix.shard }}
+          path: |
+            tools/test_times.tsv
+            _build/test_wasm-gc.log
+          if-no-files-found: ignore

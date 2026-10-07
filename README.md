@@ -82,9 +82,16 @@ across machines. Builds run 4 compiler processes at once (`--build-jobs`,
 14 GB, so moon's default of one per core is not safe here.
 
 CI (`.github/workflows/ci.yml`) runs the core tier on every push and pull
-request, as upstream's CI builds HOL Light and loads hol.ml. The theory
-tiers are not run there: run the tier you touch, and `tools/test.py all`
-before a release (upstream's `holtest` is likewise run by hand).
+request, as upstream's CI builds HOL Light and loads hol.ml. The whole
+suite (`.github/workflows/full.yml`, upstream's `holtest`) runs each night
+after a change to main, split over 20 machines, and by hand:
+
+```
+gh workflow run "Full suite"                        # everything
+gh workflow run "Full suite" -f tiers=multivariate -f shards=8
+```
+
+Locally, run the tier you touch.
 
 The upstream sources go in `.repos/hol-light`. The reference runs use the
 opam switch `hol-light` (or `$HOL_LIGHT_SWITCH`):
