@@ -1,0 +1,42 @@
+# As upstream HOL Light's CI, which builds the system and loads hol.ml: the
+# core tier (the hand-ported core on wasm and wasm-gc, every file hol.ml
+# loads on wasm-gc). The theory directories are hours of CPU and are not
+# run here: `python3 tools/test.py all` by hand, as upstream's holtest.
+name: CI
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+  pull_request:
+    branches:
+      - main
+
+  push:
+    branches:
+      - main
+
+jobs:
+  core:
+    name: core tier (wasm, wasm-gc)
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout this repo
+        uses: actions/checkout@v7
+
+      - name: Install MoonBit
+        env:
+          # the toolchain the committed code is built and tested with
+          # (`moonc -v`); update it together with the code
+          MOONBIT_INSTALL_VERSION: 0.10.14+7d59c7ec9
+        run: |
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+
+      - name: Toolchain
+        run: moon version --all
+
+      - name: Core tier
+        run: python3 tools/test.py core --build-jobs 4 -j 4
