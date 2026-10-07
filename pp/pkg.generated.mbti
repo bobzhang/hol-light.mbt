@@ -24,8 +24,6 @@ pub fn stdout_backlog_since(Int) -> Array[String]
 
 pub let stdout_sink : @ref.Ref[(String) -> Unit]
 
-pub let width_in_chars : @ref.Ref[Bool]
-
 // Errors
 
 // Types and methods

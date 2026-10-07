@@ -148,8 +148,6 @@ pub fn try_user_printer(@pp.Formatter, @kernel.Term) -> Unit raise
 
 pub let typify_universal_set : @ref.Ref[Bool]
 
-pub let unicode_symbols : @ref.Ref[Bool]
-
 pub fn unparse_as_binder(String) -> Unit
 
 pub fn unparse_as_infix(String) -> Unit

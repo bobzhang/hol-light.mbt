@@ -77,18 +77,9 @@ let pp_infinity = 1000000010
 let max_int = 2147483647
 
 ///|
-/// Not in upstream: measure a string by its characters, not its bytes, so
-/// that text with non-ASCII symbols is laid out by what it shows (set with
-/// `@printer.unicode_symbols`, see `unicode/`).
-pub let width_in_chars : Ref[Bool] = Ref::{ val: false, }
-
-///|
 /// Length of a string in bytes, as OCaml's `String.length` on its UTF-8
 /// encoding.
 fn byte_length(s : String) -> Int {
-  if width_in_chars.val {
-    return s.char_length()
-  }
   let mut n = 0
   let len = s.length()
   let mut i = 0

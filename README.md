@@ -60,13 +60,13 @@ Library and Multivariate packages load on demand, after what they need:
 let th = @prime.prime_2()
 ```
 
-`@unicode.set_symbols()` turns on `∀ ∃ ∧ ∨ ¬ ⇒ ⇔ ≤ ≥ λ` in terms, beside
-upstream's spelling, and the printer then gives them (and `⊢`):
+Terms may be written with `∀ ∃ ∧ ∨ ¬ ⇒ ⇔ ≤ ≥ λ` for upstream's
+`! ? /\ \/ ~ ==> <=> <= >= \` (the lexer gives the same tokens; the
+printer keeps upstream's spelling):
 
 ```moonbit
-@unicode.set_symbols()
 let th = @int.arith_rule(@parser.parse_term("∀m n. m ≤ n ⇒ ¬(n < m)"))
-println(@printer.string_of_thm(th))    // ⊢ ∀m n. m ≤ n ⇒ ¬(n < m)
+println(@printer.string_of_thm(th))    // |- forall m n. m <= n ==> ~(n < m)
 ```
 
 ## Develop
