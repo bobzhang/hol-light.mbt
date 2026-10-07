@@ -81,6 +81,11 @@ across machines. Builds run 4 compiler processes at once (`--build-jobs`,
 `$HOL_MOON_JOBS`): linking the test executable of a long chain takes about
 14 GB, so moon's default of one per core is not safe here.
 
+CI (`.github/workflows/ci.yml`) runs the core tier on every push and pull
+request, as upstream's CI builds HOL Light and loads hol.ml. The theory
+tiers are not run there: run the tier you touch, and `tools/test.py all`
+before a release (upstream's `holtest` is likewise run by hand).
+
 The upstream sources go in `.repos/hol-light`. The reference runs use the
 opam switch `hol-light` (or `$HOL_LIGHT_SWITCH`):
 
