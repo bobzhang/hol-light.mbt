@@ -36,7 +36,7 @@ pub fn fformat_valid_imp_radix_lt_1() -> @kernel.Thm {
 ///|
 /// FFORMAT_VALID_IMP_RADIX_EVEN
 fn step_3() -> Unit raise {
-  let t4 = @meson.meson_tac(@list.empty())
+  let t4 = @meson.meson_tac(@list.List([]))
   let t3 = @simp.rewrite_tac(@list.List([@fixed.is_valid_fformat()]))
   let t5 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t3), t4)
   fformat_valid_imp_radix_even_c.set(@tactics.prove(@parser.parse_term("!(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      EVEN (FST (r,p,e)))"), t5))
@@ -54,7 +54,7 @@ pub fn fformat_valid_imp_radix_even() -> @kernel.Thm {
 ///|
 /// FFORMAT_VALID_IMP_PREC_LT_0
 fn step_4() -> Unit raise {
-  let t7 = @meson.meson_tac(@list.empty())
+  let t7 = @meson.meson_tac(@list.List([]))
   let t6 = @simp.rewrite_tac(@list.List([@fixed.is_valid_fformat()]))
   let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6), t7)
   fformat_valid_imp_prec_lt_0_c.set(@tactics.prove(@parser.parse_term("!(r:num) (p:num) (e:int). ((is_valid_fformat (r,p,e)) ==>\n                                      0 < (FST (SND (r,p,e))))"), t8))
@@ -319,7 +319,7 @@ fn step_18() -> Unit raise {
     let infixed = x79
     @simp.rewrite_tac(@list.List([@simp.once_rewrite_rule(@list.List([@bool.spec(@parser.parse_term("fmt:fformat"), fixed_neg_sym())]))(infixed)]))
   })
-  let t78 = @simp.asm_rewrite_tac(@list.empty())
+  let t78 = @simp.asm_rewrite_tac(@list.List([]))
   let t71 = @bool.spec(@parser.parse_term("fmt:fformat"), fformat_radix_lt_0())
   let t72 = @simp.rewrite_rule(@list.List([@equal.gsym(@real.real_of_num_lt())]))(t71)
   let t73 = @drule.match_mp(@common.ipow_lt_0())(t72)
@@ -405,16 +405,16 @@ pub fn fixed_fulp_in_fixed() -> @kernel.Thm {
 ///|
 /// FIXED_FINF_BOUNDS
 fn step_21() -> Unit raise {
-  let t142 = @simp.asm_rewrite_tac(@list.empty())
+  let t142 = @simp.asm_rewrite_tac(@list.List([]))
   let t141 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("(z:real) <= abs(z)"))]))
   let t140 = @tactics.exists_tac(@parser.parse_term("abs(x)"))
   let t143 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@realax.real_le_trans()), t140), t141), t142)
-  let t139 = @simp.asm_rewrite_tac(@list.empty())
+  let t139 = @simp.asm_rewrite_tac(@list.List([]))
   let t138 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("-- (z:real) <= abs(z)"))]))
   let t137 = @tactics.exists_tac(@parser.parse_term("abs(x)"))
   let t136 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t144 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("-- (x:real) <= y <=> -- y <= x"))])), t136), t137), t138), t139), t143])
-  let t134 = @simp.asm_rewrite_tac(@list.empty())
+  let t134 = @simp.asm_rewrite_tac(@list.List([]))
   let t133 = @simp.rewrite_tac(@list.List([@realax.real_of_num_le()]))
   let t132 = @simp.rewrite_tac(@list.List([fformat_prec_ipow_eq_exp()]))
   let t131 = @simp.rewrite_tac(@list.List([fformat_radix_ipow_le_0()]))
@@ -507,7 +507,7 @@ pub fn fixed_frac_lt_0() -> @kernel.Thm {
 ///|
 /// FIXED_FF_EXISTS
 fn step_23() -> Unit raise {
-  let t176 = @simp.asm_rewrite_tac(@list.empty())
+  let t176 = @simp.asm_rewrite_tac(@list.List([]))
   let t175 = @tactics.exists_tac(@parser.parse_term("f:num"))
   let t174 = @tactics.use_then("xfixed", fn(x166 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let xfixed = x166
@@ -522,7 +522,7 @@ fn step_23() -> Unit raise {
     })(t173)
   })
   let t165 = @simp.rewrite_tac(@list.List([@fixed.ff()]))
-  let t164 = @simp.rewrite_tac(@list.empty())
+  let t164 = @simp.rewrite_tac(@list.List([]))
   let t163 = @tactics.exists_tac(@parser.parse_term("ff(fmt) x"))
   let t162 = @tactics.disch_then(fn(x159 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s160 = ((x158 : @kernel.Thm) => @tactics.label_tac("xfixed", x158))(x159)
@@ -712,7 +712,7 @@ pub fn fixed_ff_le() -> @kernel.Thm {
 ///|
 /// FIXED_FF_LT
 fn step_29() -> Unit raise {
-  let t280 = @simp.asm_rewrite_tac(@list.empty())
+  let t280 = @simp.asm_rewrite_tac(@list.List([]))
   let t279 = @simp.rewrite_tac(@list.List([@equal.gsym(@fixed.finf())]))
   let t278 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("(e:int) - &1 + e2 - e + &1 = e2"))]))
   let t276 = @bool.spec(@parser.parse_term("fmt:fformat"), fformat_radix_ne_0())
@@ -822,7 +822,7 @@ pub fn fixed_ff_finf() -> @kernel.Thm {
 ///|
 /// FIXED_FF_NEG
 fn step_31() -> Unit raise {
-  let t354 = @simp.asm_rewrite_tac(@list.empty())
+  let t354 = @simp.asm_rewrite_tac(@list.List([]))
   let t353 = @tactics.exists_tac(@parser.parse_term("x:real"))
   let t352 = @tactics.exists_tac(@parser.parse_term("fmt:fformat"))
   let t351 = @tactics.match_mp_tac(fixed_ff_unique())
@@ -1089,7 +1089,7 @@ pub fn fixed_in_image() -> @kernel.Thm {
 ///|
 /// FIXED_FINITE
 fn step_37() -> Unit raise {
-  let t534 = @simp.asm_rewrite_tac(@list.empty())
+  let t534 = @simp.asm_rewrite_tac(@list.List([]))
   let t533 = @tactics.exists_tac(@parser.parse_term("{y | ?n. n IN fixed_preimage fmt /\\\n                           y = fixed_corr fmt n}"))
   let t532 = @tactics.match_mp_tac(@sets.finite_subset())
   let t530 = @simp.rewrite_tac(@list.List([@bool.spec(@parser.parse_term("fmt:fformat"), fixed_in_image())]))
@@ -1253,7 +1253,7 @@ fn step_39() -> Unit raise {
   })
   let t588 = @simp.rewrite_tac(@list.List([@fixed.is_lb()]))
   let t587 = @simp.rewrite_tac(@list.List([@fixed.is_glb()]))
-  let t586 = @simp.rewrite_tac(@list.empty())
+  let t586 = @simp.rewrite_tac(@list.List([]))
   let t585 = @tactics.exists_tac(@parser.parse_term("sup ({z | z IN (fixed fmt) /\\ z <= (x:real)})"))
   let t584 = @tactics.use_then("fin", fn(x579 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let fin = x579
@@ -1327,7 +1327,7 @@ fn step_40() -> Unit raise {
   })
   let t638 = @simp.rewrite_tac(@list.List([@fixed.is_ub()]))
   let t637 = @simp.rewrite_tac(@list.List([@fixed.is_lub()]))
-  let t636 = @simp.rewrite_tac(@list.empty())
+  let t636 = @simp.rewrite_tac(@list.List([]))
   let t635 = @tactics.exists_tac(@parser.parse_term("inf ({z | z IN (fixed fmt) /\\ x <= (z:real)})"))
   let t634 = @tactics.use_then("fin", fn(x629 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let fin = x629
@@ -1387,7 +1387,7 @@ pub fn fixed_lub_exists() -> @kernel.Thm {
 ///|
 /// FIXED_GLB_UNIQUE
 fn step_41() -> Unit raise {
-  let t671 = @simp.asm_rewrite_tac(@list.empty())
+  let t671 = @simp.asm_rewrite_tac(@list.List([]))
   let t672 = @list.List([@tactics.then_tac(@tactics.use_then("glby13", fn(x669 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let glby13 = x669
     @tactics.match_mp_tac(glby13)
@@ -1398,7 +1398,7 @@ fn step_41() -> Unit raise {
       s666(x667)
     }
   })
-  let t663 = @simp.asm_rewrite_tac(@list.empty())
+  let t663 = @simp.asm_rewrite_tac(@list.List([]))
   let t664 = @list.List([@tactics.then_tac(@tactics.use_then("glby23", fn(x661 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let glby23 = x661
     @tactics.match_mp_tac(glby23)
@@ -1434,7 +1434,7 @@ pub fn fixed_glb_unique() -> @kernel.Thm {
 ///|
 /// FIXED_LUB_UNIQUE
 fn step_42() -> Unit raise {
-  let t696 = @simp.asm_rewrite_tac(@list.empty())
+  let t696 = @simp.asm_rewrite_tac(@list.List([]))
   let t697 = @list.List([@tactics.then_tac(@tactics.use_then("luby23", fn(x694 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let luby23 = x694
     @tactics.match_mp_tac(luby23)
@@ -1445,7 +1445,7 @@ fn step_42() -> Unit raise {
       s691(x692)
     }
   })
-  let t688 = @simp.asm_rewrite_tac(@list.empty())
+  let t688 = @simp.asm_rewrite_tac(@list.List([]))
   let t689 = @list.List([@tactics.then_tac(@tactics.use_then("luby13", fn(x686 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let luby13 = x686
     @tactics.match_mp_tac(luby13)
@@ -1486,7 +1486,7 @@ fn step_43() -> Unit raise {
     let t707 = @simp.rewrite_rule(@list.List([@fixed.is_glb()]))(isglb)
     @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@fixed.is_lb()]))(t707)]))
   })
-  let t704 = @simp.asm_rewrite_tac(@list.empty())
+  let t704 = @simp.asm_rewrite_tac(@list.List([]))
   let t703 = @tactics.disch_then(fn(x699 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let thm = x699
     let t702 = @drule.match_mp(fixed_glb_exists())(thm)
@@ -1513,7 +1513,7 @@ fn step_44() -> Unit raise {
     let t718 = @simp.rewrite_rule(@list.List([@fixed.is_lub()]))(islub)
     @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@fixed.is_ub()]))(t718)]))
   })
-  let t715 = @simp.asm_rewrite_tac(@list.empty())
+  let t715 = @simp.asm_rewrite_tac(@list.List([]))
   let t714 = @tactics.disch_then(fn(x710 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let thm = x710
     let t713 = @drule.match_mp(fixed_lub_exists())(thm)
@@ -1613,7 +1613,7 @@ pub fn fixed_plus_fulp_neg() -> @kernel.Thm {
 fn step_47() -> Unit raise {
   let t913 = @simp.rewrite_tac(@list.List([fformat_radix_lt_0()]))
   let t912 = @simp.rewrite_tac(@list.List([@real.real_of_num_lt()]))
-  let t911 = @simp.asm_rewrite_tac(@list.empty())
+  let t911 = @simp.asm_rewrite_tac(@list.List([]))
   let t910 = @tactics.use_then("veq", fn(x908 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let veq_1 = x908
     @simp.rewrite_tac(@list.List([@equal.gsym(veq_1)]))
@@ -1653,7 +1653,7 @@ fn step_47() -> Unit raise {
   let t879 = @simp.rewrite_tac(@list.List([@real.real_eq_mul_rcancel()]))
   let t878 = @simp.rewrite_tac(@list.List([@real.real_eq_neg2()]))
   let t877 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("(-- (a:real) * b) = -- (a * b)"))]))
-  let t876 = @simp.asm_rewrite_tac(@list.empty())
+  let t876 = @simp.asm_rewrite_tac(@list.List([]))
   let t875 = @tactics.use_then("vle0", fn(x871 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let vle0 = x871
     @tactics.use_then("vfrac2", fn(x873 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1668,7 +1668,7 @@ fn step_47() -> Unit raise {
       @tactics.label_tac("ueq", @simp.rewrite_rule(@list.List([@drule.match_mp(@int.arith_rule(@parser.parse_term("(x:real) < &0 ==> (abs(x) = z <=> x = --z)")))(ul0_1)]))(ufrac2_1))
     })
   })
-  let t865 = @simp.asm_rewrite_tac(@list.empty())
+  let t865 = @simp.asm_rewrite_tac(@list.List([]))
   let t863 = @tactics.exists_tac(@parser.parse_term("u + (fulp fmt)"))
   let t864 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@realax.real_le_trans()), t863), @int.asm_arith_tac), @tactics.all_tac])
   let t862 = @tactics.subgoal_then(@parser.parse_term("(v:real) <= &0"), fn(x859 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1689,7 +1689,7 @@ fn step_47() -> Unit raise {
   let t848 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("&0 <= (x:real) * y <=> &0 * y <= x * y"))]))
   let t847 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("-- (x:real) <= &0 <=> &0 <= x"))]))
   let t846 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("(-- (a:real)) * b = -- (a * b)"))]))
-  let t857 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t846), t847), t848), t849), t850), t854), t855), t856), @int.asm_arith_tac), @tactics.all_tac])
+  let t857 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t846), t847), t848), t849), t850), t854), t855), t856), @int.asm_arith_tac), @tactics.all_tac])
   let t845 = @tactics.subgoal_then(@parser.parse_term("(u:real) + (fulp fmt) <= &0"), fn(x842 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s843 = ((x841 : @kernel.Thm) => @tactics.label_tac("ulpleq0", x841))(x842)
     fn(x844 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -1719,7 +1719,7 @@ fn step_47() -> Unit raise {
   let t914 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.label_tac("unleq0", @kernel.assume_rule(@parser.parse_term("~(&0 <= (u:real))"))), t828), t834), t840), t845), t857), t862), t864), t865), t870), t875), t876), t877), t878), t879), t880), t884), t885), t886), t887), t888), t889), t890), t891), t892), t893), t894), t895), t896), t900), t903), t904), t907), t910), t911), t912), t913)
   let t825 = @simp.rewrite_tac(@list.List([fformat_radix_lt_0()]))
   let t824 = @simp.rewrite_tac(@list.List([@real.real_of_num_lt()]))
-  let t823 = @simp.asm_rewrite_tac(@list.empty())
+  let t823 = @simp.asm_rewrite_tac(@list.List([]))
   let t822 = @tactics.use_then("veq", fn(x820 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let veq = x820
     @simp.rewrite_tac(@list.List([@equal.gsym(veq)]))
@@ -1739,7 +1739,7 @@ fn step_47() -> Unit raise {
   let t809 = @simp.rewrite_tac(@list.List([@realax.real_of_num_eq()]))
   let t808 = @simp.rewrite_tac(@list.List([fformat_radix_ipow_neq_0()]))
   let t807 = @simp.rewrite_tac(@list.List([@real.real_eq_mul_rcancel()]))
-  let t806 = @simp.asm_rewrite_tac(@list.empty())
+  let t806 = @simp.asm_rewrite_tac(@list.List([]))
   let t805 = @tactics.use_then("vge0", fn(x801 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let vge0 = x801
     @tactics.use_then("vfrac2", fn(x803 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1754,7 +1754,7 @@ fn step_47() -> Unit raise {
       @tactics.label_tac("ueq", @simp.rewrite_rule(@list.List([@drule.match_mp(@int.arith_rule(@parser.parse_term("&0 <= (x:real) ==> abs(x) = x")))(uge0_1)]))(ufrac2))
     })
   })
-  let t795 = @list.List([@simp.asm_rewrite_tac(@list.empty()), @tactics.all_tac])
+  let t795 = @list.List([@simp.asm_rewrite_tac(@list.List([])), @tactics.all_tac])
   let t794 = @tactics.subgoal_then(@parser.parse_term("&0 <= (u:real) /\\ (is_frac(fmt) u f1)"), fn(x792 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let thm = x792
     @tactics.label_tac("ulp", @drule.match_mp(fixed_plus_fulp_nneg())(thm))
@@ -1818,7 +1818,7 @@ pub fn fixed_fulp_distance() -> @kernel.Thm {
 ///|
 /// FIXED_GLB_LUB_BOUNDS
 fn step_48() -> Unit raise {
-  let t1162 = @simp.asm_rewrite_tac(@list.empty())
+  let t1162 = @simp.asm_rewrite_tac(@list.List([]))
   let t1161 = @tactics.use_then("isleast", fn(x1159 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let isleast_1 = x1159
     @tactics.match_mp_tac(isleast_1)
@@ -1827,7 +1827,7 @@ fn step_48() -> Unit raise {
     let islub_3 = x1156
     @common.label_conjuncts_tac(@list.List(["islb", "isleast"]), @simp.rewrite_rule(@list.List([@fixed.is_lub()]))(islub_3))
   })
-  let t1154 = @simp.asm_rewrite_tac(@list.empty())
+  let t1154 = @simp.asm_rewrite_tac(@list.List([]))
   let t1155 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@fixed.is_ub()])), t1154), @tactics.all_tac])
   let t1153 = @tactics.subgoal_then(@parser.parse_term("is_ub(fmt) x (y1 + (fulp fmt))"), fn(x1150 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1151 = ((x1149 : @kernel.Thm) => @tactics.label_tac("ulpisub", x1149))(x1150)
@@ -1853,7 +1853,7 @@ fn step_48() -> Unit raise {
       s1137(x1138)
     }
   })
-  let t1133 = @simp.asm_rewrite_tac(@list.empty())
+  let t1133 = @simp.asm_rewrite_tac(@list.List([]))
   let t1134 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@fixed.is_lb()])), t1133), @tactics.all_tac])
   let t1132 = @tactics.subgoal_then(@parser.parse_term("is_lb(fmt) x (y1 + (fulp fmt))"), fn(x1129 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1130 = ((x1128 : @kernel.Thm) => @tactics.label_tac("ulpislb", x1128))(x1129)
@@ -1863,7 +1863,7 @@ fn step_48() -> Unit raise {
   })
   let t1164 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.label_tac("ulpleqx", @kernel.assume_rule(@parser.parse_term("y1 + (fulp fmt) <= x"))), t1132), t1134), t1139), t1142), t1147), @int.asm_arith_tac), t1163])
   let t1127 = @class.asm_cases_tac(@parser.parse_term("(y1 + (fulp fmt)) <= x"))
-  let t1123 = @simp.asm_rewrite_tac(@list.empty())
+  let t1123 = @simp.asm_rewrite_tac(@list.List([]))
   let t1122 = @tactics.match_mp_tac(fixed_plus_fulp_neg())
   let t1124 = @tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("-- (x:real) = a * b <=> x = (-- a) * b"))])), t1122), t1123)
   let t1121 = @simp.rewrite_tac(@list.List([@realax.real_of_num_le()]))
@@ -1879,7 +1879,7 @@ fn step_48() -> Unit raise {
     })
   }), t1118), t1119), t1120), t1121), @int.arith_tac), t1124])
   let t1112 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("x <= &0 /\\ -- x = y ==> abs(x) = y")))
-  let t1111 = @simp.asm_rewrite_tac(@list.empty())
+  let t1111 = @simp.asm_rewrite_tac(@list.List([]))
   let t1110 = @tactics.exists_tac(@parser.parse_term("f1 - 1"))
   let t1109 = @simp.rewrite_tac(@list.List([@fixed.is_frac()]))
   let t1108 = @simp.rewrite_tac(@list.List([@fixed.is_fixed()]))
@@ -1891,7 +1891,7 @@ fn step_48() -> Unit raise {
       s1104(x1105)
     }
   })
-  let t1100 = @simp.asm_rewrite_tac(@list.empty())
+  let t1100 = @simp.asm_rewrite_tac(@list.List([]))
   let t1099 = @simp.rewrite_tac(@list.List([@equal.gsym(fformat_prec_ipow_eq_exp())]))
   let t1098 = @simp.rewrite_tac(@list.List([@equal.gsym(@real.real_of_num_lt())]))
   let t1101 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("x <= y ==> x - 1 <= y"))), t1098), t1099), t1100), @tactics.all_tac])
@@ -1901,7 +1901,7 @@ fn step_48() -> Unit raise {
       s1095(x1096)
     }
   })
-  let t1091 = @simp.asm_rewrite_tac(@list.empty())
+  let t1091 = @simp.asm_rewrite_tac(@list.List([]))
   let t1090 = @tactics.exists_tac(@parser.parse_term("y1:real"))
   let t1092 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@bool.spec(@parser.parse_term("fmt:fformat"), fixed_frac_lt_0())), t1090), t1091), @int.asm_arith_tac), @tactics.all_tac])
   let t1089 = @tactics.subgoal_then(@parser.parse_term("0 < f1"), fn(x1086 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1940,7 +1940,7 @@ fn step_48() -> Unit raise {
   let t1060 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("--(finf fmt) <= x /\\ x <= (finf fmt) ==>\n              x <= (finf fmt)")))
   let t1059 = @simp.rewrite_tac(@list.List([fformat_radix_ipow_le_0()]))
   let t1058 = @simp.rewrite_tac(@list.List([@fixed.fulp()]))
-  let t1057 = @simp.asm_rewrite_tac(@list.empty())
+  let t1057 = @simp.asm_rewrite_tac(@list.List([]))
   let t1056 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("&0 <= z /\\ (x:real) <= y ==> x <= y + z")))
   let t1054 = @tactics.use_then("isglb", fn(x1051 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let isglb_2 = x1051
@@ -1949,7 +1949,7 @@ fn step_48() -> Unit raise {
   })
   let t1050 = @tactics.match_mp_tac(fixed_finf_bounds())
   let t1049 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("--(finf fmt) <= x /\\ x <= (finf fmt) ==>\n              x <= (finf fmt)")))
-  let t1048 = @simp.asm_rewrite_tac(@list.empty())
+  let t1048 = @simp.asm_rewrite_tac(@list.List([]))
   let t1047 = @simp.gen_rewrite_tac(fn(x1046 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     (fn(x1040 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       let s1041 = @equal.rand_conv(x1040)
@@ -1970,7 +1970,7 @@ fn step_48() -> Unit raise {
       s1038(x1039)
     }
   }), t1055), t1056), t1057), t1058), t1059), t1060), t1061), t1065)
-  let t1033 = @simp.asm_rewrite_tac(@list.empty())
+  let t1033 = @simp.asm_rewrite_tac(@list.List([]))
   let t1032 = @tactics.use_then("isleast", fn(x1030 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let isleast = x1030
     @tactics.match_mp_tac(isleast)
@@ -1979,7 +1979,7 @@ fn step_48() -> Unit raise {
     let islub_1 = x1027
     @common.label_conjuncts_tac(@list.List(["islb", "isleast"]), @simp.rewrite_rule(@list.List([@fixed.is_lub()]))(islub_1))
   })
-  let t1025 = @simp.asm_rewrite_tac(@list.empty())
+  let t1025 = @simp.asm_rewrite_tac(@list.List([]))
   let t1026 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@fixed.is_ub()])), t1025), @tactics.all_tac])
   let t1024 = @tactics.subgoal_then(@parser.parse_term("is_ub(fmt) x (y1 + (fulp fmt))"), fn(x1021 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1022 = ((x1020 : @kernel.Thm) => @tactics.label_tac("ulpisub", x1020))(x1021)
@@ -2005,7 +2005,7 @@ fn step_48() -> Unit raise {
       s1008(x1009)
     }
   })
-  let t1004 = @simp.asm_rewrite_tac(@list.empty())
+  let t1004 = @simp.asm_rewrite_tac(@list.List([]))
   let t1005 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@fixed.is_lb()])), t1004), @tactics.all_tac])
   let t1003 = @tactics.subgoal_then(@parser.parse_term("is_lb(fmt) x (y1 + (fulp fmt))"), fn(x1000 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1001 = ((x999 : @kernel.Thm) => @tactics.label_tac("ulpislb", x999))(x1000)
@@ -2015,16 +2015,16 @@ fn step_48() -> Unit raise {
   })
   let t1035 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.label_tac("ulpleqx", @kernel.assume_rule(@parser.parse_term("y1 + (fulp fmt) <= x"))), t1003), t1005), t1010), t1013), t1018), @int.asm_arith_tac), t1034])
   let t998 = @class.asm_cases_tac(@parser.parse_term("(y1 + (fulp fmt)) <= x"))
-  let t994 = @simp.asm_rewrite_tac(@list.empty())
+  let t994 = @simp.asm_rewrite_tac(@list.List([]))
   let t993 = @simp.rewrite_tac(@list.List([@fixed.is_frac()]))
-  let t992 = @simp.asm_rewrite_tac(@list.empty())
+  let t992 = @simp.asm_rewrite_tac(@list.List([]))
   let t995 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(fixed_plus_fulp_nneg()), t992), t993), t994)
   let t991 = @simp.rewrite_tac(@list.List([fformat_radix_ipow_le_0()]))
   let t990 = @simp.rewrite_tac(@list.List([@fixed.fulp()]))
-  let t989 = @simp.asm_rewrite_tac(@list.empty())
+  let t989 = @simp.asm_rewrite_tac(@list.List([]))
   let t996 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("&0 <= x /\\ &0 <= y ==> &0 <= x + y"))), t989), t990), t991), t995])
   let t988 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("&0 <= x /\\ x = y ==> abs(x) = y")))
-  let t987 = @simp.asm_rewrite_tac(@list.empty())
+  let t987 = @simp.asm_rewrite_tac(@list.List([]))
   let t986 = @tactics.exists_tac(@parser.parse_term("f1 + 1"))
   let t985 = @simp.rewrite_tac(@list.List([@fixed.is_frac()]))
   let t984 = @simp.rewrite_tac(@list.List([@fixed.is_fixed()]))
@@ -2036,7 +2036,7 @@ fn step_48() -> Unit raise {
       s980(x981)
     }
   })
-  let t976 = @simp.asm_rewrite_tac(@list.empty())
+  let t976 = @simp.asm_rewrite_tac(@list.List([]))
   let t975 = @tactics.use_then("y1geq0", fn(x971 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let y1geq0 = x971
     @tactics.use_then("y1frac2", fn(x973 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -2096,7 +2096,7 @@ fn step_48() -> Unit raise {
     let isglb = x931
     @common.label_conjuncts_tac(@list.List(["islb", "isgreat"]), @simp.rewrite_rule(@list.List([@fixed.is_glb()]))(isglb))
   }), t935), t938), t941), @int.asm_arith_tac), t1167])
-  let t930 = @simp.asm_rewrite_tac(@list.empty())
+  let t930 = @simp.asm_rewrite_tac(@list.List([]))
   let t929 = @tactics.use_then("absx", fn(x925 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_1 = x925
     let t928 = @drule.match_mp(@bool.spec(@parser.parse_term("fmt:fformat"), fixed_lub_exists()))(absx_1)
@@ -2127,11 +2127,11 @@ pub fn fixed_glb_lub_bounds() -> @kernel.Thm {
 ///|
 /// FIXED_GLB_LUB_DIST
 fn step_49() -> Unit raise {
-  let t1175 = @simp.asm_rewrite_tac(@list.empty())
+  let t1175 = @simp.asm_rewrite_tac(@list.List([]))
   let t1176 = @tactics.then_tac(@tactics.match_mp_tac(fixed_glb_lub_bounds()), t1175)
-  let t1173 = @simp.asm_rewrite_tac(@list.empty())
+  let t1173 = @simp.asm_rewrite_tac(@list.List([]))
   let t1174 = @tactics.then_tac(@tactics.match_mp_tac(fixed_lub_is_fixed()), t1173)
-  let t1172 = @simp.asm_rewrite_tac(@list.empty())
+  let t1172 = @simp.asm_rewrite_tac(@list.List([]))
   let t1177 = @list.List([@tactics.thenl(@tactics.conj_tac, @list.List([@tactics.then_tac(@tactics.match_mp_tac(fixed_glb_is_fixed()), t1172), t1174])), t1176])
   let t1171 = @simp.rewrite_tac(@list.List([@class.taut(@parser.parse_term("a /\\ b /\\ c /\\ d <=> (a /\\ b) /\\ (c /\\ d)"))]))
   let t1170 = @tactics.match_mp_tac(fixed_fulp_distance())
@@ -2154,10 +2154,10 @@ fn step_50() -> Unit raise {
   let t1185 = @bool.spec(@parser.parse_term("fmt:fformat"), fixed_fulp_le_0())
   let t1186 = @simp.rewrite_tac(@list.List([@drule.match_mp(@int.arith_rule(@parser.parse_term("&0 <= (x:real) ==> abs(x) = x")))(t1185)]))
   let t1184 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("((x:real) + y) - x = y"))]))
-  let t1187 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t1184), t1186), @int.arith_tac)
+  let t1187 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t1184), t1186), @int.arith_tac)
   let t1183 = @simp.rewrite_tac(@list.List([@bool.spec(@parser.parse_term("fmt:fformat"), fixed_fulp_le_0())]))
   let t1182 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("abs((x:real) - x) = &0"))]))
-  let t1188 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t1182), t1183), t1187])
+  let t1188 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t1182), t1183), t1187])
   let t1181 = @tactics.disch_then(fn(x1179 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let thm = x1179
     @tactics.disj_cases_tac(@drule.match_mp(fixed_glb_lub_dist())(thm))
@@ -2243,7 +2243,7 @@ fn step_51() -> Unit raise {
   let t1354 = @simp.rewrite_tac(@list.List([@bool.spec(@parser.parse_term("fmt:fformat"), fformat_radix_ipow_le_0())]))
   let t1353 = @tactics.match_mp_tac(@realax.real_le_mul())
   let t1352 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("(-- a) * (b:real) <= &0 <=> &0 <= (a * b)"))]))
-  let t1351 = @simp.asm_rewrite_tac(@list.empty())
+  let t1351 = @simp.asm_rewrite_tac(@list.List([]))
   let t1355 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@kernel.assume_rule(@parser.parse_term("lub(fmt) x = glb(fmt) x + (fulp fmt)"))])), t1351), t1352), t1353), t1354), @int.arith_tac), @tactics.all_tac])
   let t1350 = @tactics.subgoal_then(@parser.parse_term("lub(fmt) x <= &0"), fn(x1347 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1348 = ((x1346 : @kernel.Thm) => @tactics.label_tac("lubgeq0", x1346))(x1347)
@@ -2297,7 +2297,7 @@ fn step_51() -> Unit raise {
   })
   let t1310 = @tactics.exists_tac(@parser.parse_term("x:real"))
   let t1311 = @tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@realax.real_le_trans()), t1310), @int.asm_arith_tac)
-  let t1312 = @list.List([@simp.asm_rewrite_tac(@list.empty()), t1311])
+  let t1312 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t1311])
   let t1309 = @tactics.exists_tac(@parser.parse_term("glb(fmt) x"))
   let t1313 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("!x. &0 <= x /\\ x <= y ==> &0 <= (y:real)"))), t1309), @tactics.conj_tac), t1312), @tactics.all_tac])
   let t1308 = @tactics.subgoal_then(@parser.parse_term("&0 <= lub(fmt) x"), fn(x1305 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -2364,8 +2364,8 @@ fn step_51() -> Unit raise {
     let absx_1 = x1262
     @tactics.disj_cases_tac(@drule.match_mp(@bool.spec(@parser.parse_term("fmt:fformat"), fixed_glb_lub_dist()))(absx_1))
   })
-  let t1261 = @simp.asm_rewrite_tac(@list.empty())
-  let t1259 = @simp.asm_rewrite_tac(@list.empty())
+  let t1261 = @simp.asm_rewrite_tac(@list.List([]))
+  let t1259 = @simp.asm_rewrite_tac(@list.List([]))
   let t1258 = @tactics.exists_tac(@parser.parse_term("glb(fmt) x"))
   let t1260 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@bool.spec(@parser.parse_term("fmt:fformat"), fixed_ff_unique())), t1258), t1259), @tactics.all_tac])
   let t1257 = @tactics.subgoal_then(@parser.parse_term("(f2:num) = f"), fn(x1254 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -2374,7 +2374,7 @@ fn step_51() -> Unit raise {
       s1255(x1256)
     }
   })
-  let t1251 = @simp.asm_rewrite_tac(@list.empty())
+  let t1251 = @simp.asm_rewrite_tac(@list.List([]))
   let t1250 = @tactics.exists_tac(@parser.parse_term("lub(fmt) x"))
   let t1252 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@bool.spec(@parser.parse_term("fmt:fformat"), fixed_ff_unique())), t1250), t1251), @tactics.all_tac])
   let t1249 = @tactics.subgoal_then(@parser.parse_term("(f1:num) = f'"), fn(x1246 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -2423,8 +2423,8 @@ fn step_52() -> Unit raise {
   let t1374 = @kernel.assume_rule(@parser.parse_term("~((s:real) < glb(fmt) x \\/ lub(fmt) x < s)"))
   let t1375 = @simp.rewrite_rule(@list.List([@int.arith_rule(@parser.parse_term("~((x:real) < y \\/ z < x) <=> (y <= x /\\ x <= z)"))]))(t1374)
   let t1376 = @tactics.label_tac("sbounds", @simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("lub(fmt) x = glb(fmt) x + (fulp fmt)"))]))(t1375))
-  let t1385 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t1376), t1377), t1384)
-  let t1386 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), @int.arith_tac), t1385])
+  let t1385 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t1376), t1377), t1384)
+  let t1386 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), @int.arith_tac), t1385])
   let t1387 = @list.List([@int.asm_arith_tac, @tactics.thenl(@tactics.use_then("absx", fn(x1372 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx = x1372
     @tactics.disj_cases_tac(@drule.match_mp(fixed_glb_lub_dist())(absx))
@@ -2459,7 +2459,7 @@ fn step_53() -> Unit raise {
       @simp.rewrite_tac(@list.List([@drule.match_mp(glb4)(zerolb)]))
     })
   })
-  let t1401 = @simp.asm_rewrite_tac(@list.empty())
+  let t1401 = @simp.asm_rewrite_tac(@list.List([]))
   let t1400 = @simp.rewrite_tac(@list.List([fixed_zero_in_fixed()]))
   let t1402 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@fixed.is_lb()])), t1400), t1401), @tactics.all_tac])
   let t1399 = @tactics.subgoal_then(@parser.parse_term("is_lb(fmt) x (&0)"), fn(x1396 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -2468,7 +2468,7 @@ fn step_53() -> Unit raise {
       s1397(x1398)
     }
   })
-  let t1394 = @simp.asm_rewrite_tac(@list.empty())
+  let t1394 = @simp.asm_rewrite_tac(@list.List([]))
   let t1393 = @tactics.use_then("absx", fn(x1391 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx = x1391
     dump_glb_lub_info(absx)
@@ -2490,10 +2490,10 @@ pub fn fixed_glb_le_0() -> @kernel.Thm {
 ///|
 /// FIXED_GLB_LE_0_2
 fn step_54() -> Unit raise {
-  let t1417 = @simp.asm_rewrite_tac(@list.empty())
+  let t1417 = @simp.asm_rewrite_tac(@list.List([]))
   let t1416 = @tactics.exists_tac(@parser.parse_term("x:real"))
   let t1415 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t1414 = @simp.asm_rewrite_tac(@list.empty())
+  let t1414 = @simp.asm_rewrite_tac(@list.List([]))
   let t1413 = @tactics.use_then("absx", fn(x1411 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx = x1411
     dump_glb_lub_info(absx)
@@ -2515,10 +2515,10 @@ pub fn fixed_glb_le_0_2() -> @kernel.Thm {
 ///|
 /// FIXED_LUB_LE_0
 fn step_55() -> Unit raise {
-  let t1427 = @simp.asm_rewrite_tac(@list.empty())
+  let t1427 = @simp.asm_rewrite_tac(@list.List([]))
   let t1426 = @tactics.exists_tac(@parser.parse_term("x:real"))
   let t1425 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t1424 = @simp.asm_rewrite_tac(@list.empty())
+  let t1424 = @simp.asm_rewrite_tac(@list.List([]))
   let t1423 = @tactics.use_then("absx", fn(x1421 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx = x1421
     dump_glb_lub_info(absx)
@@ -2547,7 +2547,7 @@ fn step_56() -> Unit raise {
       @simp.rewrite_tac(@list.List([@drule.match_mp(lub4)(zerolb)]))
     })
   })
-  let t1441 = @simp.asm_rewrite_tac(@list.empty())
+  let t1441 = @simp.asm_rewrite_tac(@list.List([]))
   let t1440 = @simp.rewrite_tac(@list.List([fixed_zero_in_fixed()]))
   let t1442 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@fixed.is_ub()])), t1440), t1441), @tactics.all_tac])
   let t1439 = @tactics.subgoal_then(@parser.parse_term("is_ub(fmt) x (&0)"), fn(x1436 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -2556,7 +2556,7 @@ fn step_56() -> Unit raise {
       s1437(x1438)
     }
   })
-  let t1434 = @simp.asm_rewrite_tac(@list.empty())
+  let t1434 = @simp.asm_rewrite_tac(@list.List([]))
   let t1433 = @tactics.use_then("absx", fn(x1431 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx = x1431
     dump_glb_lub_info(absx)
@@ -2578,14 +2578,14 @@ pub fn fixed_lub_le_0_2() -> @kernel.Thm {
 ///|
 /// CLOSER_LOWER
 fn step_57() -> Unit raise {
-  let t1463 = @simp.asm_rewrite_tac(@list.empty())
+  let t1463 = @simp.asm_rewrite_tac(@list.List([]))
   let t1462 = @tactics.subgoal_then(@parser.parse_term("abs(y - z) = z - (y:real)"), fn(x1459 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1460 = @tactics.assume_tac(x1459)
     fn(x1461 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1460(x1461)
     }
   })
-  let t1458 = @simp.asm_rewrite_tac(@list.empty())
+  let t1458 = @simp.asm_rewrite_tac(@list.List([]))
   let t1457 = @tactics.subgoal_then(@parser.parse_term("abs(x - z) = z - (x:real)"), fn(x1454 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1455 = @tactics.assume_tac(x1454)
     fn(x1456 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -2615,14 +2615,14 @@ pub fn closer_lower() -> @kernel.Thm {
 ///|
 /// CLOSER_HIGHER
 fn step_58() -> Unit raise {
-  let t1479 = @simp.asm_rewrite_tac(@list.empty())
+  let t1479 = @simp.asm_rewrite_tac(@list.List([]))
   let t1478 = @tactics.subgoal_then(@parser.parse_term("abs(y - z) = z - (y:real)"), fn(x1475 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1476 = @tactics.assume_tac(x1475)
     fn(x1477 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s1476(x1477)
     }
   })
-  let t1474 = @simp.asm_rewrite_tac(@list.empty())
+  let t1474 = @simp.asm_rewrite_tac(@list.List([]))
   let t1473 = @tactics.subgoal_then(@parser.parse_term("abs(x - z) = z - (x:real)"), fn(x1470 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1471 = @tactics.assume_tac(x1470)
     fn(x1472 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -2847,19 +2847,19 @@ fn step_69() -> Unit raise {
     let lub1_3 = x1627
     @simp.once_rewrite_tac(@list.List([lub1_3]))
   })
-  let t1633 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.empty()), t1629), t1630), t1632])
+  let t1633 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.List([])), t1629), t1630), t1632])
   let t1634 = @tactics.thenl(@class.asm_cases_tac(@parser.parse_term("s = lub(fmt) x")), t1633)
   let t1624 = @tactics.match_mp_tac(closer_lower())
-  let t1623 = @simp.asm_rewrite_tac(@list.empty())
+  let t1623 = @simp.asm_rewrite_tac(@list.List([]))
   let t1622 = @tactics.exists_tac(@parser.parse_term("y:real"))
   let t1621 = @tactics.match_mp_tac(closer_trans_2())
   let t1625 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_neg()), t1621), t1622), t1623), t1624), @int.asm_arith_tac)
-  let t1620 = @simp.asm_rewrite_tac(@list.empty())
+  let t1620 = @simp.asm_rewrite_tac(@list.List([]))
   let t1619 = @tactics.use_then("glb1", fn(x1617 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let glb1_3 = x1617
     @simp.rewrite_tac(@list.List([glb1_3]))
   })
-  let t1626 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.empty()), t1619), t1620), t1625])
+  let t1626 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.List([])), t1619), t1620), t1625])
   let t1635 = @list.List([@tactics.thenl(@class.asm_cases_tac(@parser.parse_term("s = glb(fmt) x")), t1626), t1634])
   let t1616 = @tactics.use_then("absx", fn(x1612 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_4 = x1612
@@ -2869,19 +2869,19 @@ fn step_69() -> Unit raise {
     })
   })
   let t1611 = @tactics.disch_then((x1610 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["sfixed", "sneqyp"]), x1610))
-  let t1609 = @simp.asm_rewrite_tac(@list.empty())
+  let t1609 = @simp.asm_rewrite_tac(@list.List([]))
   let t1636 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("y':real")), t1609), @tactics.conj_tac), @list.List([lub_fixed_proof, @tactics.all_tac])), @tactics.gen_tac), t1611), @tactics.disj2_tac), t1616), t1635)
   let t1604 = @tactics.match_mp_tac(closer_higher())
-  let t1603 = @simp.asm_rewrite_tac(@list.empty())
+  let t1603 = @simp.asm_rewrite_tac(@list.List([]))
   let t1602 = @tactics.exists_tac(@parser.parse_term("y':real"))
   let t1601 = @tactics.match_mp_tac(closer_trans_2())
   let t1605 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_neg()), t1601), t1602), t1603), t1604), @int.asm_arith_tac)
-  let t1600 = @simp.asm_rewrite_tac(@list.empty())
+  let t1600 = @simp.asm_rewrite_tac(@list.List([]))
   let t1599 = @tactics.use_then("lub1", fn(x1597 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let lub1_2 = x1597
     @simp.once_rewrite_tac(@list.List([lub1_2]))
   })
-  let t1606 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.empty()), t1599), t1600), t1605])
+  let t1606 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.List([])), t1599), t1600), t1605])
   let t1607 = @tactics.thenl(@class.asm_cases_tac(@parser.parse_term("s = lub(fmt) x")), t1606)
   let t1594 = @tactics.match_mp_tac(closer_lower())
   let t1595 = @tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_neg()), t1594), @int.asm_arith_tac)
@@ -2890,7 +2890,7 @@ fn step_69() -> Unit raise {
     let glb1_2 = x1590
     @simp.rewrite_tac(@list.List([glb1_2]))
   })
-  let t1596 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.empty()), t1592), t1593), t1595])
+  let t1596 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.List([])), t1592), t1593), t1595])
   let t1608 = @list.List([@tactics.thenl(@class.asm_cases_tac(@parser.parse_term("s = glb(fmt) x")), t1596), t1607])
   let t1589 = @tactics.use_then("absx", fn(x1585 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_3 = x1585
@@ -2900,19 +2900,19 @@ fn step_69() -> Unit raise {
     })
   })
   let t1584 = @tactics.disch_then((x1583 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["sfixed", "sneqy"]), x1583))
-  let t1582 = @simp.asm_rewrite_tac(@list.empty())
+  let t1582 = @simp.asm_rewrite_tac(@list.List([]))
   let t1637 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("y:real")), t1582), @tactics.conj_tac), @list.List([glb_fixed_proof, @tactics.all_tac])), @tactics.gen_tac), t1584), @tactics.disj2_tac), t1589), t1608), t1636])
   let t1579 = @tactics.then_tac(@tactics.match_mp_tac(closer_higher()), @int.asm_arith_tac)
   let t1576 = @tactics.match_mp_tac(closer_lower())
-  let t1575 = @simp.asm_rewrite_tac(@list.empty())
+  let t1575 = @simp.asm_rewrite_tac(@list.List([]))
   let t1574 = @tactics.exists_tac(@parser.parse_term("y:real"))
   let t1577 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_trans()), t1574), t1575), t1576), @int.asm_arith_tac)
-  let t1573 = @simp.asm_rewrite_tac(@list.empty())
+  let t1573 = @simp.asm_rewrite_tac(@list.List([]))
   let t1572 = @tactics.use_then("glb1", fn(x1570 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let glb1_1 = x1570
     @simp.rewrite_tac(@list.List([glb1_1]))
   })
-  let t1578 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.empty()), t1572), t1573), t1577])
+  let t1578 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.List([])), t1572), t1573), t1577])
   let t1580 = @list.List([@tactics.thenl(@class.asm_cases_tac(@parser.parse_term("s = glb(fmt) x")), t1578), t1579])
   let t1569 = @tactics.use_then("absx", fn(x1565 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_2 = x1565
@@ -2922,18 +2922,18 @@ fn step_69() -> Unit raise {
     })
   })
   let t1564 = @tactics.disch_then((x1563 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["sfixed", "sneqyp"]), x1563))
-  let t1562 = @simp.asm_rewrite_tac(@list.empty())
+  let t1562 = @simp.asm_rewrite_tac(@list.List([]))
   let t1581 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("y':real")), t1562), @tactics.conj_tac), @list.List([lub_fixed_proof, @tactics.all_tac])), @tactics.gen_tac), t1564), @tactics.disj1_tac), t1569), t1580), @tactics.all_tac])
   let t1556 = @tactics.match_mp_tac(closer_higher())
-  let t1555 = @simp.asm_rewrite_tac(@list.empty())
+  let t1555 = @simp.asm_rewrite_tac(@list.List([]))
   let t1554 = @tactics.exists_tac(@parser.parse_term("y':real"))
   let t1557 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_trans()), t1554), t1555), t1556), @int.asm_arith_tac)
-  let t1553 = @simp.asm_rewrite_tac(@list.empty())
+  let t1553 = @simp.asm_rewrite_tac(@list.List([]))
   let t1552 = @tactics.use_then("lub1", fn(x1550 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let lub1_1 = x1550
     @simp.rewrite_tac(@list.List([lub1_1]))
   })
-  let t1558 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.empty()), t1552), t1553), t1557])
+  let t1558 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.List([])), t1552), t1553), t1557])
   let t1559 = @tactics.thenl(@class.asm_cases_tac(@parser.parse_term("s = lub(fmt) x")), t1558)
   let t1549 = @tactics.match_mp_tac(closer_lower())
   let t1560 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("s < glb fmt x"), fn(x1546 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -2951,7 +2951,7 @@ fn step_69() -> Unit raise {
   })
   let t1540 = @tactics.disch_then((x1539 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["sfixed", "sneqy"]), x1539))
   let t1538 = @simp.rewrite_tac(@list.List([is_closest()]))
-  let t1537 = @simp.asm_rewrite_tac(@list.empty())
+  let t1537 = @simp.asm_rewrite_tac(@list.List([]))
   let t1561 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("y:real")), t1537), @tactics.conj_tac), @list.List([glb_fixed_proof, @tactics.all_tac])), t1538), @tactics.gen_tac), t1540), @tactics.disj1_tac), t1545), t1560), @tactics.all_tac])
   let t1536 = @tactics.use_then("lub1", fn(x1534 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let lub1 = x1534
@@ -2999,12 +2999,12 @@ pub fn fixed_rd_nearest_closest() -> @kernel.Thm {
 ///|
 /// FIXED_RD_NEAREST_EVEN
 fn step_70() -> Unit raise {
-  let t1949 = @simp.asm_rewrite_tac(@list.empty())
+  let t1949 = @simp.asm_rewrite_tac(@list.List([]))
   let t1948 = @tactics.use_then("e1", fn(x1946 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let e1_2 = x1946
     @simp.rewrite_tac(@list.List([@equal.gsym(e1_2)]))
   })
-  let t1945 = @simp.rewrite_tac(@list.empty())
+  let t1945 = @simp.rewrite_tac(@list.List([]))
   let t1944 = @simp.gen_rewrite_tac(fn(x1943 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     (fn(x1937 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       let s1938 = @equal.rand_conv(x1937)
@@ -3033,16 +3033,16 @@ fn step_70() -> Unit raise {
   }, @list.List([@arith.even()]))
   let t1928 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("1 = SUC(0)"))]))
   let t1927 = @simp.rewrite_tac(@list.List([@arith.even_sub()]))
-  let t1926 = @simp.asm_rewrite_tac(@list.empty())
+  let t1926 = @simp.asm_rewrite_tac(@list.List([]))
   let t1950 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@kernel.assume_rule(@parser.parse_term("f':num = f - 1"))])), t1926), t1927), @tactics.disj2_tac), t1928), t1936), t1944), t1945), t1948), t1949)
-  let t1925 = @simp.asm_rewrite_tac(@list.empty())
+  let t1925 = @simp.asm_rewrite_tac(@list.List([]))
   let t1924 = @simp.rewrite_tac(@list.List([@arith.even()]))
   let t1923 = @simp.rewrite_tac(@list.List([@equal.gsym(@arith.add1())]))
   let t1922 = @tactics.use_then("e1", fn(x1920 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let e1_1 = x1920
     @simp.once_rewrite_tac(@list.List([@equal.gsym(e1_1)]))
   })
-  let t1919 = @simp.asm_rewrite_tac(@list.empty())
+  let t1919 = @simp.asm_rewrite_tac(@list.List([]))
   let t1951 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@kernel.assume_rule(@parser.parse_term("f':num = f + 1"))])), t1919), t1922), t1923), t1924), t1925), t1950])
   let t1918 = @tactics.disj_cases_tac(@kernel.assume_rule(@parser.parse_term("f':num = f + 1 \\/ f' = f - 1")))
   let t1917 = @tactics.use_then("absx", fn(x1905 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -3100,7 +3100,7 @@ fn step_70() -> Unit raise {
   let t1870 = @tactics.match_mp_tac(closer_higher())
   let t1872 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_neg()), t1870), @int.asm_arith_tac), t1871])
   let t1869 = @simp.rewrite_tac(@list.List([@class.de_morgan_thm()]))
-  let t1868 = @simp.asm_rewrite_tac(@list.empty())
+  let t1868 = @simp.asm_rewrite_tac(@list.List([]))
   let t1867 = @simp.rewrite_tac(@list.List([@class.not_imp()]))
   let t1866 = @tactics.exists_tac(@parser.parse_term("y':real"))
   let t1865 = @simp.rewrite_tac(@list.List([@class.not_forall_thm()]))
@@ -3130,16 +3130,16 @@ fn step_70() -> Unit raise {
     })
   })
   let t1843 = @tactics.match_mp_tac(closer_lower())
-  let t1842 = @simp.asm_rewrite_tac(@list.empty())
+  let t1842 = @simp.asm_rewrite_tac(@list.List([]))
   let t1841 = @tactics.exists_tac(@parser.parse_term("y:real"))
   let t1844 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_trans_2()), t1841), t1842), t1843), @int.asm_arith_tac)
   let t1840 = @tactics.match_mp_tac(closer_lower())
-  let t1839 = @simp.asm_rewrite_tac(@list.empty())
+  let t1839 = @simp.asm_rewrite_tac(@list.List([]))
   let t1838 = @tactics.exists_tac(@parser.parse_term("y:real"))
   let t1837 = @tactics.match_mp_tac(closer_trans_2())
   let t1845 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_neg()), t1837), t1838), t1839), t1840), @int.asm_arith_tac), t1844])
   let t1836 = @simp.rewrite_tac(@list.List([@class.de_morgan_thm()]))
-  let t1835 = @simp.asm_rewrite_tac(@list.empty())
+  let t1835 = @simp.asm_rewrite_tac(@list.List([]))
   let t1834 = @simp.rewrite_tac(@list.List([@class.not_imp()]))
   let t1833 = @tactics.exists_tac(@parser.parse_term("y':real"))
   let t1832 = @simp.rewrite_tac(@list.List([@class.not_forall_thm()]))
@@ -3150,7 +3150,7 @@ fn step_70() -> Unit raise {
       s1830(x1831)
     }
   }), t1846), t1852)
-  let t1827 = @simp.asm_rewrite_tac(@list.empty())
+  let t1827 = @simp.asm_rewrite_tac(@list.List([]))
   let t1826 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@kernel.assume_rule(@parser.parse_term("y2 = glb(fmt) x")))]))
   let t1825 = @tactics.use_then("glb1", fn(x1823 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let glb1_3 = x1823
@@ -3174,9 +3174,9 @@ fn step_70() -> Unit raise {
   let t1813 = @tactics.disch_then((x1812 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["y2fixed", "yclosest", "y2closest", "y2neqy", "yfrac"]), x1812))
   let t1811 = @tactics.repeat_tac(@tactics.gen_tac)
   let t1810 = @simp.rewrite_tac(@list.List([to_even()]))
-  let t1809 = @simp.asm_rewrite_tac(@list.empty())
+  let t1809 = @simp.asm_rewrite_tac(@list.List([]))
   let t1808 = @tactics.exists_tac(@parser.parse_term("y':real"))
-  let t1806 = @simp.asm_rewrite_tac(@list.empty())
+  let t1806 = @simp.asm_rewrite_tac(@list.List([]))
   let t1805 = @tactics.use_then("e1", fn(x1803 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let e1 = x1803
     @simp.rewrite_tac(@list.List([@equal.gsym(e1)]))
@@ -3213,7 +3213,7 @@ fn step_70() -> Unit raise {
   let t1779 = @tactics.disch_then((x1778 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["y2fixed", "yclosest", "y2closest", "y2neqy", "yfrac"]), x1778))
   let t1777 = @tactics.repeat_tac(@tactics.gen_tac)
   let t1776 = @simp.rewrite_tac(@list.List([to_even()]))
-  let t1775 = @simp.asm_rewrite_tac(@list.empty())
+  let t1775 = @simp.asm_rewrite_tac(@list.List([]))
   let t1807 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("y:real")), t1775), @tactics.conj_tac), @list.List([glb_fixed_proof, @tactics.all_tac])), t1776), t1777), t1779), t1785), t1788), t1793), t1799), t1802), t1805), t1806), @tactics.all_tac])
   let t1773 = @tactics.use_then("y2closest", fn(x1768 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let y2closest_1 = x1768
@@ -3226,7 +3226,7 @@ fn step_70() -> Unit raise {
   let t1763 = @tactics.then_tac(@tactics.match_mp_tac(closer_higher()), @int.asm_arith_tac)
   let t1762 = @tactics.match_mp_tac(closer_higher())
   let t1764 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_neg()), t1762), @int.asm_arith_tac), t1763])
-  let t1760 = @simp.asm_rewrite_tac(@list.empty())
+  let t1760 = @simp.asm_rewrite_tac(@list.List([]))
   let t1761 = @list.List([@tactics.then_tac(@tactics.use_then("lub1", fn(x1758 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let lub1_2 = x1758
     @simp.rewrite_tac(@list.List([lub1_2]))
@@ -3238,22 +3238,22 @@ fn step_70() -> Unit raise {
     }
   }), t1761), @tactics.conj_tac), t1764)
   let t1751 = @tactics.match_mp_tac(closer_lower())
-  let t1750 = @simp.asm_rewrite_tac(@list.empty())
+  let t1750 = @simp.asm_rewrite_tac(@list.List([]))
   let t1749 = @tactics.exists_tac(@parser.parse_term("y:real"))
   let t1752 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_trans()), t1749), t1750), t1751), @int.asm_arith_tac)
   let t1748 = @tactics.match_mp_tac(closer_lower())
-  let t1747 = @simp.asm_rewrite_tac(@list.empty())
+  let t1747 = @simp.asm_rewrite_tac(@list.List([]))
   let t1746 = @tactics.exists_tac(@parser.parse_term("y:real"))
   let t1745 = @tactics.match_mp_tac(closer_trans())
   let t1753 = @tactics.thenl(@tactics.conj_tac, @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_neg()), t1745), t1746), t1747), t1748), @int.asm_arith_tac), t1752]))
-  let t1744 = @simp.asm_rewrite_tac(@list.empty())
+  let t1744 = @simp.asm_rewrite_tac(@list.List([]))
   let t1743 = @tactics.match_mp_tac(closer_neg())
-  let t1742 = @simp.asm_rewrite_tac(@list.empty())
+  let t1742 = @simp.asm_rewrite_tac(@list.List([]))
   let t1741 = @tactics.use_then("glb1", fn(x1739 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let glb1_2 = x1739
     @simp.rewrite_tac(@list.List([glb1_2]))
   })
-  let t1754 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.empty()), t1741), t1742), t1743), t1744), t1753])
+  let t1754 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.List([])), t1741), t1742), t1743), t1744), t1753])
   let t1766 = @list.List([@tactics.thenl(@class.asm_cases_tac(@parser.parse_term("y2 = glb(fmt) x")), t1754), t1765])
   let t1738 = @tactics.use_then("absx", fn(x1734 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_2 = x1734
@@ -3263,7 +3263,7 @@ fn step_70() -> Unit raise {
     })
   })
   let t1733 = @simp.rewrite_tac(@list.List([@class.de_morgan_thm()]))
-  let t1732 = @simp.asm_rewrite_tac(@list.empty())
+  let t1732 = @simp.asm_rewrite_tac(@list.List([]))
   let t1731 = @simp.rewrite_tac(@list.List([@class.not_imp()]))
   let t1730 = @tactics.exists_tac(@parser.parse_term("y':real"))
   let t1729 = @simp.rewrite_tac(@list.List([@class.not_forall_thm()]))
@@ -3277,7 +3277,7 @@ fn step_70() -> Unit raise {
   let t1723 = @tactics.disch_then((x1722 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["y2fixed", "yclosest", "y2closest", "y2neqy", "yfrac"]), x1722))
   let t1721 = @tactics.repeat_tac(@tactics.gen_tac)
   let t1720 = @simp.rewrite_tac(@list.List([to_even()]))
-  let t1719 = @simp.asm_rewrite_tac(@list.empty())
+  let t1719 = @simp.asm_rewrite_tac(@list.List([]))
   let t1774 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("y':real")), t1719), @tactics.conj_tac), @list.List([lub_fixed_proof, @tactics.all_tac])), t1720), t1721), t1723), t1728), t1767), t1773), @tactics.all_tac])
   let t1717 = @tactics.use_then("y2closest", fn(x1712 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let y2closest = x1712
@@ -3288,27 +3288,27 @@ fn step_70() -> Unit raise {
     })
   })
   let t1705 = @tactics.match_mp_tac(closer_higher())
-  let t1704 = @simp.asm_rewrite_tac(@list.empty())
+  let t1704 = @simp.asm_rewrite_tac(@list.List([]))
   let t1703 = @tactics.exists_tac(@parser.parse_term("y':real"))
   let t1706 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_trans()), t1703), t1704), t1705), @int.asm_arith_tac)
   let t1702 = @tactics.match_mp_tac(closer_higher())
-  let t1701 = @simp.asm_rewrite_tac(@list.empty())
+  let t1701 = @simp.asm_rewrite_tac(@list.List([]))
   let t1700 = @tactics.exists_tac(@parser.parse_term("y':real"))
   let t1699 = @tactics.match_mp_tac(closer_trans())
   let t1707 = @tactics.thenl(@tactics.conj_tac, @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_neg()), t1699), t1700), t1701), t1702), @int.asm_arith_tac), t1706]))
-  let t1698 = @simp.asm_rewrite_tac(@list.empty())
+  let t1698 = @simp.asm_rewrite_tac(@list.List([]))
   let t1697 = @tactics.match_mp_tac(closer_neg())
-  let t1696 = @simp.asm_rewrite_tac(@list.empty())
+  let t1696 = @simp.asm_rewrite_tac(@list.List([]))
   let t1695 = @tactics.use_then("lub1", fn(x1693 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let lub1_1 = x1693
     @simp.rewrite_tac(@list.List([lub1_1]))
   })
-  let t1708 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.empty()), t1695), t1696), t1697), t1698), t1707])
+  let t1708 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_asm_rewrite_tac(@list.List([])), t1695), t1696), t1697), t1698), t1707])
   let t1709 = @tactics.thenl(@class.asm_cases_tac(@parser.parse_term("y2 = lub(fmt) x")), t1708)
   let t1691 = @tactics.then_tac(@tactics.match_mp_tac(closer_lower()), @int.asm_arith_tac)
   let t1690 = @tactics.match_mp_tac(closer_lower())
   let t1692 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_neg()), t1690), @int.asm_arith_tac), t1691])
-  let t1688 = @simp.asm_rewrite_tac(@list.empty())
+  let t1688 = @simp.asm_rewrite_tac(@list.List([]))
   let t1689 = @list.List([@tactics.then_tac(@tactics.use_then("glb1", fn(x1686 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let glb1_1 = x1686
     @simp.rewrite_tac(@list.List([glb1_1]))
@@ -3327,7 +3327,7 @@ fn step_70() -> Unit raise {
     })
   })
   let t1676 = @simp.rewrite_tac(@list.List([@class.de_morgan_thm()]))
-  let t1675 = @simp.asm_rewrite_tac(@list.empty())
+  let t1675 = @simp.asm_rewrite_tac(@list.List([]))
   let t1674 = @simp.rewrite_tac(@list.List([@class.not_imp()]))
   let t1673 = @tactics.exists_tac(@parser.parse_term("y:real"))
   let t1672 = @simp.rewrite_tac(@list.List([@class.not_forall_thm()]))
@@ -3341,7 +3341,7 @@ fn step_70() -> Unit raise {
   let t1666 = @tactics.disch_then((x1665 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["y2fixed", "yclosest", "y2closest", "y2neqy", "yfrac"]), x1665))
   let t1664 = @tactics.repeat_tac(@tactics.gen_tac)
   let t1663 = @simp.rewrite_tac(@list.List([to_even()]))
-  let t1662 = @simp.asm_rewrite_tac(@list.empty())
+  let t1662 = @simp.asm_rewrite_tac(@list.List([]))
   let t1718 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("y:real")), t1662), @tactics.conj_tac), @list.List([glb_fixed_proof, @tactics.all_tac])), t1663), t1664), t1666), t1671), t1711), t1717), @tactics.all_tac])
   let t1661 = @tactics.use_then("lub1", fn(x1659 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let lub1 = x1659
@@ -3388,13 +3388,13 @@ pub fn fixed_rd_nearest_even() -> @kernel.Thm {
 ///|
 /// FIXED_RD_NEAREST_EXISTS
 fn step_71() -> Unit raise {
-  let t1975 = @simp.asm_rewrite_tac(@list.empty())
+  let t1975 = @simp.asm_rewrite_tac(@list.List([]))
   let t1974 = @tactics.use_then("eq2", fn(x1972 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let eq2 = x1972
     @simp.rewrite_tac(@list.List([eq2]))
   })
   let t1971 = @simp.expand_tac("y")
-  let t1970 = @simp.asm_rewrite_tac(@list.empty())
+  let t1970 = @simp.asm_rewrite_tac(@list.List([]))
   let t1969 = @simp.expand_tac("y")
   let t1968 = @tactics.exists_tac(@parser.parse_term("y:real"))
   let t1967 = @tactics.use_then("absx", fn(x1963 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -3444,7 +3444,7 @@ pub fn to_zero() -> @kernel.Thm {
 ///|
 /// FIXED_RD_ZERO_EXISTS
 fn step_73() -> Unit raise {
-  let t2022 = @simp.asm_rewrite_tac(@list.empty())
+  let t2022 = @simp.asm_rewrite_tac(@list.List([]))
   let t2023 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@fixed.is_ub())])), t2022)
   let t2021 = @tactics.use_then("zeroub", fn(x2017 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let zeroub = x2017
@@ -3453,7 +3453,7 @@ fn step_73() -> Unit raise {
       @simp.rewrite_tac(@list.List([@drule.match_mp(lub4)(zeroub)]))
     })
   })
-  let t2015 = @simp.asm_rewrite_tac(@list.empty())
+  let t2015 = @simp.asm_rewrite_tac(@list.List([]))
   let t2014 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("~(&0 <= (x:real)) ==> x <= &0")))
   let t2013 = @simp.rewrite_tac(@list.List([fixed_zero_in_fixed()]))
   let t2016 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@fixed.is_ub()])), t2013), t2014), t2015), @tactics.all_tac])
@@ -3463,11 +3463,11 @@ fn step_73() -> Unit raise {
       s2011(x2012)
     }
   }), t2016), t2021), t2023])
-  let t2008 = @simp.asm_rewrite_tac(@list.empty())
+  let t2008 = @simp.asm_rewrite_tac(@list.List([]))
   let t2007 = @simp.rewrite_tac(@list.List([to_zero()]))
-  let t2006 = @simp.asm_rewrite_tac(@list.empty())
+  let t2006 = @simp.asm_rewrite_tac(@list.List([]))
   let t2005 = @tactics.exists_tac(@parser.parse_term("y':real"))
-  let t2001 = @simp.asm_rewrite_tac(@list.empty())
+  let t2001 = @simp.asm_rewrite_tac(@list.List([]))
   let t2002 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@fixed.is_lb())])), t2001)
   let t2000 = @tactics.use_then("zerolb", fn(x1996 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let zerolb = x1996
@@ -3477,7 +3477,7 @@ fn step_73() -> Unit raise {
     })
   })
   let t1994 = @simp.rewrite_tac(@list.List([fixed_zero_in_fixed()]))
-  let t1993 = @simp.asm_rewrite_tac(@list.empty())
+  let t1993 = @simp.asm_rewrite_tac(@list.List([]))
   let t1995 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@fixed.is_lb()])), t1993), t1994), @tactics.all_tac])
   let t2003 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("is_lb(fmt) x (&0)"), fn(x1990 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s1991 = ((x1989 : @kernel.Thm) => @tactics.label_tac("zerolb", x1989))(x1990)
@@ -3485,9 +3485,9 @@ fn step_73() -> Unit raise {
       s1991(x1992)
     }
   }), t1995), t2000), t2002])
-  let t1988 = @simp.asm_rewrite_tac(@list.empty())
+  let t1988 = @simp.asm_rewrite_tac(@list.List([]))
   let t1987 = @simp.rewrite_tac(@list.List([to_zero()]))
-  let t1986 = @simp.asm_rewrite_tac(@list.empty())
+  let t1986 = @simp.asm_rewrite_tac(@list.List([]))
   let t2004 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("y:real")), t1986), @tactics.conj_tac), @list.List([glb_fixed_proof, @tactics.all_tac])), t1987), t1988), @tactics.conj_tac), t2003), @tactics.all_tac])
   let t1985 = @simp.rewrite_tac(@list.List([@fixed.fround()]))
   let t1984 = @tactics.use_then("absx", fn(x1982 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -3531,11 +3531,11 @@ pub fn to_pinf() -> @kernel.Thm {
 ///|
 /// FIXED_RD_PINF_EXISTS
 fn step_75() -> Unit raise {
-  let t2040 = @simp.asm_rewrite_tac(@list.empty())
+  let t2040 = @simp.asm_rewrite_tac(@list.List([]))
   let t2039 = @simp.rewrite_tac(@list.List([@equal.gsym(@fixed.is_ub())]))
-  let t2038 = @simp.asm_rewrite_tac(@list.empty())
+  let t2038 = @simp.asm_rewrite_tac(@list.List([]))
   let t2037 = @simp.rewrite_tac(@list.List([to_pinf()]))
-  let t2036 = @simp.asm_rewrite_tac(@list.empty())
+  let t2036 = @simp.asm_rewrite_tac(@list.List([]))
   let t2035 = @tactics.exists_tac(@parser.parse_term("y':real"))
   let t2034 = @simp.rewrite_tac(@list.List([@fixed.fround()]))
   let t2033 = @tactics.use_then("absx", fn(x2031 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -3579,11 +3579,11 @@ pub fn to_ninf() -> @kernel.Thm {
 ///|
 /// FIXED_RD_NINF_EXISTS
 fn step_77() -> Unit raise {
-  let t2056 = @simp.asm_rewrite_tac(@list.empty())
+  let t2056 = @simp.asm_rewrite_tac(@list.List([]))
   let t2055 = @simp.rewrite_tac(@list.List([@equal.gsym(@fixed.is_lb())]))
-  let t2054 = @simp.asm_rewrite_tac(@list.empty())
+  let t2054 = @simp.asm_rewrite_tac(@list.List([]))
   let t2053 = @simp.rewrite_tac(@list.List([to_ninf()]))
-  let t2052 = @simp.asm_rewrite_tac(@list.empty())
+  let t2052 = @simp.asm_rewrite_tac(@list.List([]))
   let t2051 = @tactics.exists_tac(@parser.parse_term("y:real"))
   let t2050 = @simp.rewrite_tac(@list.List([@fixed.fround()]))
   let t2049 = @tactics.use_then("absx", fn(x2047 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -3612,14 +3612,14 @@ pub fn fixed_rd_ninf_exists() -> @kernel.Thm {
 ///|
 /// FIXED_RD_IS_GLB_LUB
 fn step_78() -> Unit raise {
-  let t2065 = @simp.simp_tac(@list.empty())
-  let t2066 = @tactics.then_tac(@tactics.thenl(@class.cond_cases_tac, @list.List([@simp.simp_tac(@list.empty()), @tactics.all_tac])), t2065)
-  let t2064 = @simp.simp_tac(@list.empty())
-  let t2063 = @list.List([@simp.simp_tac(@list.empty()), @tactics.all_tac])
-  let t2062 = @list.List([@simp.simp_tac(@list.empty()), @tactics.all_tac])
-  let t2061 = @list.List([@simp.simp_tac(@list.empty()), @tactics.all_tac])
+  let t2065 = @simp.simp_tac(@list.List([]))
+  let t2066 = @tactics.then_tac(@tactics.thenl(@class.cond_cases_tac, @list.List([@simp.simp_tac(@list.List([])), @tactics.all_tac])), t2065)
+  let t2064 = @simp.simp_tac(@list.List([]))
+  let t2063 = @list.List([@simp.simp_tac(@list.List([])), @tactics.all_tac])
+  let t2062 = @list.List([@simp.simp_tac(@list.List([])), @tactics.all_tac])
+  let t2061 = @list.List([@simp.simp_tac(@list.List([])), @tactics.all_tac])
   let t2067 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@pair.let_tac, @class.cond_cases_tac), t2061), @class.cond_cases_tac), t2062), @class.cond_cases_tac), t2063), t2064), t2066])
-  let t2060 = @simp.simp_tac(@list.empty())
+  let t2060 = @simp.simp_tac(@list.List([]))
   let t2059 = @simp.rewrite_tac(@list.List([@fixed.fround()]))
   let t2058 = @tactics.match_mp_tac(@fixed.roundmode_induct())
   let t2068 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), t2058), t2059), t2060), @tactics.conj_tac), t2067)
@@ -3638,12 +3638,12 @@ pub fn fixed_rd_is_glb_lub() -> @kernel.Thm {
 ///|
 /// FIXED_RD_IS_GLB_LUB_2
 fn step_79() -> Unit raise {
-  let t2075 = @simp.simp_tac(@list.empty())
-  let t2076 = @tactics.then_tac(@tactics.thenl(@class.cond_cases_tac, @list.List([@simp.simp_tac(@list.empty()), @tactics.all_tac])), t2075)
-  let t2074 = @simp.simp_tac(@list.empty())
-  let t2073 = @list.List([@simp.simp_tac(@list.empty()), @tactics.all_tac])
-  let t2072 = @list.List([@simp.simp_tac(@list.empty()), @tactics.all_tac])
-  let t2071 = @list.List([@simp.simp_tac(@list.empty()), @tactics.all_tac])
+  let t2075 = @simp.simp_tac(@list.List([]))
+  let t2076 = @tactics.then_tac(@tactics.thenl(@class.cond_cases_tac, @list.List([@simp.simp_tac(@list.List([])), @tactics.all_tac])), t2075)
+  let t2074 = @simp.simp_tac(@list.List([]))
+  let t2073 = @list.List([@simp.simp_tac(@list.List([])), @tactics.all_tac])
+  let t2072 = @list.List([@simp.simp_tac(@list.List([])), @tactics.all_tac])
+  let t2071 = @list.List([@simp.simp_tac(@list.List([])), @tactics.all_tac])
   let t2077 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@pair.let_tac, @pair.let_tac), @class.cond_cases_tac), t2071), @class.cond_cases_tac), t2072), @class.cond_cases_tac), t2073), t2074), t2076])
   let t2070 = @simp.rewrite_tac(@list.List([@fixed.fround()]))
   let t2069 = @tactics.match_mp_tac(@fixed.roundmode_induct())
@@ -3664,9 +3664,9 @@ pub fn fixed_rd_is_glb_lub_2() -> @kernel.Thm {
 /// FIXED_RD_LE_0
 fn step_80() -> Unit raise {
   let t2083 = @simp.rewrite_tac(@list.List([fixed_lub_le_0()]))
-  let t2084 = @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2083)
+  let t2084 = @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2083)
   let t2082 = @simp.rewrite_tac(@list.List([fixed_glb_le_0()]))
-  let t2085 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2082), t2084])
+  let t2085 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2082), t2084])
   let t2079 = @parser.parse_term("m:roundmode")
   let t2080 = @parser.parse_term("x:real")
   let t2081 = @tactics.disj_cases_tac(@bool.specl(@list.List([@parser.parse_term("fmt:fformat"), t2080, t2079]), fixed_rd_is_glb_lub_2()))
@@ -3687,9 +3687,9 @@ pub fn fixed_rd_le_0() -> @kernel.Thm {
 /// FIXED_RD_LE_0_2
 fn step_81() -> Unit raise {
   let t2091 = @simp.rewrite_tac(@list.List([fixed_lub_le_0_2()]))
-  let t2092 = @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2091)
+  let t2092 = @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2091)
   let t2090 = @simp.rewrite_tac(@list.List([fixed_glb_le_0_2()]))
-  let t2093 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2090), t2092])
+  let t2093 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2090), t2092])
   let t2087 = @parser.parse_term("m:roundmode")
   let t2088 = @parser.parse_term("x:real")
   let t2089 = @tactics.disj_cases_tac(@bool.specl(@list.List([@parser.parse_term("fmt:fformat"), t2088, t2087]), fixed_rd_is_glb_lub_2()))
@@ -3709,7 +3709,7 @@ pub fn fixed_rd_le_0_2() -> @kernel.Thm {
 ///|
 /// FIXED_RD_MONO
 fn step_82() -> Unit raise {
-  let t2114 = @simp.asm_rewrite_tac(@list.empty())
+  let t2114 = @simp.asm_rewrite_tac(@list.List([]))
   let t2113 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t2112 = @simp.rewrite_tac(@list.List([@fixed.fixed()]))
   let t2111 = @simp.rewrite_tac(@list.List([@fixed.is_ub()]))
@@ -3717,7 +3717,7 @@ fn step_82() -> Unit raise {
     let lub4 = x2108
     @tactics.match_mp_tac(lub4)
   })
-  let t2107 = @simp.asm_rewrite_tac(@list.empty())
+  let t2107 = @simp.asm_rewrite_tac(@list.List([]))
   let t2115 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.use_then("absx", fn(x2105 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_1 = x2105
     dump_glb_lub_info(absx_1)
@@ -3726,7 +3726,7 @@ fn step_82() -> Unit raise {
     let absx = x2101
     @simp.rewrite_tac(@list.List([@drule.match_mp(fixed_glb_lub_bounds())(absx)]))
   })
-  let t2104 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2103), @int.asm_arith_tac])
+  let t2104 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2103), @int.asm_arith_tac])
   let t2099 = @parser.parse_term("m:roundmode")
   let t2100 = @parser.parse_term("x:real")
   let t2116 = @list.List([@tactics.thenl(@tactics.disj_cases_tac(@bool.specl(@list.List([@parser.parse_term("fmt:fformat"), t2100, t2099]), fixed_rd_is_glb_lub_2())), t2104), t2115])
@@ -3753,11 +3753,11 @@ fn step_83() -> Unit raise {
     let absx_1 = x2134
     @simp.rewrite_tac(@list.List([@drule.match_mp(fixed_glb_lub_bounds())(absx_1)]))
   })
-  let t2137 = @list.List([@int.asm_arith_tac, @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2136)])
+  let t2137 = @list.List([@int.asm_arith_tac, @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2136)])
   let t2132 = @parser.parse_term("m:roundmode")
   let t2133 = @parser.parse_term("x:real")
   let t2138 = @tactics.thenl(@tactics.disj_cases_tac(@bool.specl(@list.List([@parser.parse_term("fmt:fformat"), t2133, t2132]), fixed_rd_is_glb_lub_2())), t2137)
-  let t2131 = @simp.asm_rewrite_tac(@list.empty())
+  let t2131 = @simp.asm_rewrite_tac(@list.List([]))
   let t2130 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm()]))
   let t2129 = @simp.rewrite_tac(@list.List([@fixed.fixed()]))
   let t2128 = @simp.rewrite_tac(@list.List([@fixed.is_lb()]))
@@ -3765,7 +3765,7 @@ fn step_83() -> Unit raise {
     let glb4 = x2125
     @tactics.match_mp_tac(glb4)
   })
-  let t2124 = @simp.asm_rewrite_tac(@list.empty())
+  let t2124 = @simp.asm_rewrite_tac(@list.List([]))
   let t2139 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.use_then("absx", fn(x2122 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx = x2122
     dump_glb_lub_info(absx)
@@ -3831,14 +3831,14 @@ fn step_85() -> Unit raise {
     let t2174 = @simp.rewrite_rule(@list.List([@fixed.fixed()]))(t2173)
     @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@sets.in_elim_thm()]))(t2174)]))
   })
-  let t2176 = @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2175)
+  let t2176 = @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2175)
   let t2170 = @tactics.use_then("absx", fn(x2166 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx = x2166
     let t2168 = @drule.match_mp(fixed_glb_is_fixed())(absx)
     let t2169 = @simp.rewrite_rule(@list.List([@fixed.fixed()]))(t2168)
     @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@sets.in_elim_thm()]))(t2169)]))
   })
-  let t2177 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2170), t2176])
+  let t2177 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2170), t2176])
   let t2163 = @parser.parse_term("m:roundmode")
   let t2164 = @parser.parse_term("x:real")
   let t2165 = @tactics.disj_cases_tac(@bool.specl(@list.List([@parser.parse_term("fmt:fformat"), t2164, t2163]), fixed_rd_is_glb_lub_2()))
@@ -3867,7 +3867,7 @@ fn step_86() -> Unit raise {
   let t2293 = @bool.spec(@parser.parse_term("fmt:fformat"), fixed_fulp_le_0())
   let t2294 = @simp.rewrite_tac(@list.List([@drule.match_mp(@int.arith_rule(@parser.parse_term("&0 <= (x:real) ==> abs(x) = x")))(t2293)]))
   let t2292 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("((y:real) + x) - y = x"))]))
-  let t2291 = @simp.asm_rewrite_tac(@list.empty())
+  let t2291 = @simp.asm_rewrite_tac(@list.List([]))
   let t2289 = @tactics.use_then("absx", fn(x2287 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_3 = x2287
     @simp.rewrite_tac(@list.List([@drule.match_mp(fixed_glb_lub_dist())(absx_3)]))
@@ -3896,7 +3896,7 @@ fn step_86() -> Unit raise {
       s2272(x2273)
     }
   }), t2290), t2291), t2292), t2294), @int.arith_tac)
-  let t2270 = @simp.asm_rewrite_tac(@list.empty())
+  let t2270 = @simp.asm_rewrite_tac(@list.List([]))
   let t2269 = @tactics.use_then("closeassum", fn(x2263 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let closeassum_1 = x2263
     @tactics.use_then("lub1", fn(x2265 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -3906,13 +3906,13 @@ fn step_86() -> Unit raise {
       @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([is_closest()]))(t2268))
     })
   })
-  let t2262 = @simp.asm_rewrite_tac(@list.empty())
+  let t2262 = @simp.asm_rewrite_tac(@list.List([]))
   let t2296 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_between_2()), t2262), t2269), t2270), t2295])
   let t2261 = @tactics.exists_tac(@parser.parse_term("abs(y' - y) / &2"))
   let t2260 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t2258 = @simp.asm_rewrite_tac(@list.empty())
+  let t2258 = @simp.asm_rewrite_tac(@list.List([]))
   let t2257 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("(x:real) <= y /\\ ~(x = y) ==> x < y")))
-  let t2256 = @simp.asm_rewrite_tac(@list.empty())
+  let t2256 = @simp.asm_rewrite_tac(@list.List([]))
   let t2255 = @tactics.exists_tac(@parser.parse_term("x:real"))
   let t2259 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("!(x:real). z1 <= x /\\ x < z2 ==> ~(z2 = z1)"))), t2255), t2256), t2257), t2258), @tactics.all_tac])
   let t2297 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("~(y' = (y:real))"), fn(x2252 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -3924,13 +3924,13 @@ fn step_86() -> Unit raise {
   let t2251 = @simp.rewrite_tac(@list.List([@bool.spec(@parser.parse_term("fmt:fformat"), fixed_fulp_le_0())]))
   let t2250 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("&0 <= (x:real) ==> &0 <= x / &2")))
   let t2249 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("abs((y':real) - y') = &0"))]))
-  let t2298 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2249), t2250), t2251), t2297])
+  let t2298 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2249), t2250), t2251), t2297])
   let t2248 = @class.asm_cases_tac(@parser.parse_term("(x:real) = (y':real)"))
-  let t2299 = @tactics.thenl(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2248), t2298)
+  let t2299 = @tactics.thenl(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2248), t2298)
   let t2242 = @bool.spec(@parser.parse_term("fmt:fformat"), fixed_fulp_le_0())
   let t2243 = @simp.rewrite_tac(@list.List([@drule.match_mp(@int.arith_rule(@parser.parse_term("&0 <= (x:real) ==> abs(x) = x")))(t2242)]))
   let t2241 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("((y:real) + x) - y = x"))]))
-  let t2240 = @simp.asm_rewrite_tac(@list.empty())
+  let t2240 = @simp.asm_rewrite_tac(@list.List([]))
   let t2238 = @tactics.use_then("absx", fn(x2236 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_2 = x2236
     @simp.rewrite_tac(@list.List([@drule.match_mp(fixed_glb_lub_dist())(absx_2)]))
@@ -3959,7 +3959,7 @@ fn step_86() -> Unit raise {
       s2221(x2222)
     }
   }), t2239), t2240), t2241), t2243), @int.arith_tac)
-  let t2219 = @simp.asm_rewrite_tac(@list.empty())
+  let t2219 = @simp.asm_rewrite_tac(@list.List([]))
   let t2218 = @tactics.use_then("closeassum", fn(x2212 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let closeassum = x2212
     @tactics.use_then("glb1", fn(x2214 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -3969,13 +3969,13 @@ fn step_86() -> Unit raise {
       @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([is_closest()]))(t2217))
     })
   })
-  let t2211 = @simp.asm_rewrite_tac(@list.empty())
+  let t2211 = @simp.asm_rewrite_tac(@list.List([]))
   let t2245 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(closer_between_1()), t2211), t2218), t2219), t2244])
   let t2210 = @tactics.exists_tac(@parser.parse_term("abs(y' - y) / &2"))
   let t2209 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t2207 = @simp.asm_rewrite_tac(@list.empty())
+  let t2207 = @simp.asm_rewrite_tac(@list.List([]))
   let t2206 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("(y:real) <= x /\\ ~(x = y) ==> y < x")))
-  let t2205 = @simp.asm_rewrite_tac(@list.empty())
+  let t2205 = @simp.asm_rewrite_tac(@list.List([]))
   let t2204 = @tactics.exists_tac(@parser.parse_term("x:real"))
   let t2208 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("!(x:real). z1 < x /\\ x <= z2 ==> ~(z2 = z1)"))), t2204), t2205), t2206), t2207), @tactics.all_tac])
   let t2246 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("~(y' = (y:real))"), fn(x2201 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -3988,14 +3988,14 @@ fn step_86() -> Unit raise {
   let t2199 = @simp.rewrite_tac(@list.List([@fixed.fulp()]))
   let t2198 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("&0 <= (x:real) ==> &0 <= x / &2")))
   let t2197 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("abs((y:real) - y) = &0"))]))
-  let t2247 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2197), t2198), t2199), t2200), t2246])
+  let t2247 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2197), t2198), t2199), t2200), t2246])
   let t2196 = @class.asm_cases_tac(@parser.parse_term("(x:real) = (y:real)"))
-  let t2300 = @list.List([@tactics.thenl(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2196), t2247), t2299])
+  let t2300 = @list.List([@tactics.thenl(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2196), t2247), t2299])
   let t2195 = @tactics.use_then("freq", fn(x2193 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let freq = x2193
     @tactics.disj_cases_tac(@drule.match_mp(fixed_rd_is_glb_lub())(freq))
   })
-  let t2192 = @simp.asm_rewrite_tac(@list.empty())
+  let t2192 = @simp.asm_rewrite_tac(@list.List([]))
   let t2191 = @tactics.use_then("absx", fn(x2187 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_1 = x2187
     let t2190 = @drule.match_mp(fixed_rd_nearest_closest())(absx_1)
@@ -4040,11 +4040,11 @@ fn step_87() -> Unit raise {
       })
     })
   })
-  let t2335 = @simp.asm_rewrite_tac(@list.empty())
+  let t2335 = @simp.asm_rewrite_tac(@list.List([]))
   let t2346 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("(z:real) <= a /\\ a <= w ==> abs(w - a) <= abs(w - z)"))), t2335), t2345])
   let t2334 = @tactics.exists_tac(@parser.parse_term("abs(y' - (y:real))"))
   let t2333 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t2347 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2333), t2334), @tactics.conj_tac), t2346)
+  let t2347 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2333), t2334), @tactics.conj_tac), t2346)
   let t2331 = @tactics.use_then("absx", fn(x2322 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_2 = x2322
     @tactics.use_then("glb1", fn(x2324 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -4058,16 +4058,16 @@ fn step_87() -> Unit raise {
       })
     })
   })
-  let t2321 = @simp.asm_rewrite_tac(@list.empty())
+  let t2321 = @simp.asm_rewrite_tac(@list.List([]))
   let t2332 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("(z:real) <= a /\\ a <= w ==> abs(z - a) <= abs(w - z)"))), t2321), t2331])
   let t2320 = @tactics.exists_tac(@parser.parse_term("abs(y' - (y:real))"))
   let t2319 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t2348 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2319), t2320), @tactics.conj_tac), t2332), t2347])
+  let t2348 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2319), t2320), @tactics.conj_tac), t2332), t2347])
   let t2318 = @tactics.use_then("freq", fn(x2316 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let freq = x2316
     @tactics.disj_cases_tac(@drule.match_mp(fixed_rd_is_glb_lub())(freq))
   })
-  let t2315 = @simp.asm_rewrite_tac(@list.empty())
+  let t2315 = @simp.asm_rewrite_tac(@list.List([]))
   let t2314 = @tactics.use_then("absx", fn(x2310 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_1 = x2310
     let t2313 = @drule.match_mp(fixed_rd_zero_exists())(absx_1)
@@ -4112,11 +4112,11 @@ fn step_88() -> Unit raise {
       })
     })
   })
-  let t2383 = @simp.asm_rewrite_tac(@list.empty())
+  let t2383 = @simp.asm_rewrite_tac(@list.List([]))
   let t2394 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("(z:real) <= a /\\ a <= w ==> abs(w - a) <= abs(w - z)"))), t2383), t2393])
   let t2382 = @tactics.exists_tac(@parser.parse_term("abs(y' - (y:real))"))
   let t2381 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t2395 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2381), t2382), @tactics.conj_tac), t2394)
+  let t2395 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2381), t2382), @tactics.conj_tac), t2394)
   let t2379 = @tactics.use_then("absx", fn(x2370 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_2 = x2370
     @tactics.use_then("glb1", fn(x2372 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -4130,16 +4130,16 @@ fn step_88() -> Unit raise {
       })
     })
   })
-  let t2369 = @simp.asm_rewrite_tac(@list.empty())
+  let t2369 = @simp.asm_rewrite_tac(@list.List([]))
   let t2380 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("(z:real) <= a /\\ a <= w ==> abs(z - a) <= abs(w - z)"))), t2369), t2379])
   let t2368 = @tactics.exists_tac(@parser.parse_term("abs(y' - (y:real))"))
   let t2367 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t2396 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2367), t2368), @tactics.conj_tac), t2380), t2395])
+  let t2396 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2367), t2368), @tactics.conj_tac), t2380), t2395])
   let t2366 = @tactics.use_then("freq", fn(x2364 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let freq = x2364
     @tactics.disj_cases_tac(@drule.match_mp(fixed_rd_is_glb_lub())(freq))
   })
-  let t2363 = @simp.asm_rewrite_tac(@list.empty())
+  let t2363 = @simp.asm_rewrite_tac(@list.List([]))
   let t2362 = @tactics.use_then("absx", fn(x2358 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_1 = x2358
     let t2361 = @drule.match_mp(fixed_rd_pinf_exists())(absx_1)
@@ -4184,11 +4184,11 @@ fn step_89() -> Unit raise {
       })
     })
   })
-  let t2431 = @simp.asm_rewrite_tac(@list.empty())
+  let t2431 = @simp.asm_rewrite_tac(@list.List([]))
   let t2442 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("(z:real) <= a /\\ a <= w ==> abs(w - a) <= abs(w - z)"))), t2431), t2441])
   let t2430 = @tactics.exists_tac(@parser.parse_term("abs(y' - (y:real))"))
   let t2429 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t2443 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2429), t2430), @tactics.conj_tac), t2442)
+  let t2443 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2429), t2430), @tactics.conj_tac), t2442)
   let t2427 = @tactics.use_then("absx", fn(x2418 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_2 = x2418
     @tactics.use_then("glb1", fn(x2420 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -4202,16 +4202,16 @@ fn step_89() -> Unit raise {
       })
     })
   })
-  let t2417 = @simp.asm_rewrite_tac(@list.empty())
+  let t2417 = @simp.asm_rewrite_tac(@list.List([]))
   let t2428 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("(z:real) <= a /\\ a <= w ==> abs(z - a) <= abs(w - z)"))), t2417), t2427])
   let t2416 = @tactics.exists_tac(@parser.parse_term("abs(y' - (y:real))"))
   let t2415 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t2444 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2415), t2416), @tactics.conj_tac), t2428), t2443])
+  let t2444 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2415), t2416), @tactics.conj_tac), t2428), t2443])
   let t2414 = @tactics.use_then("freq", fn(x2412 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let freq = x2412
     @tactics.disj_cases_tac(@drule.match_mp(fixed_rd_is_glb_lub())(freq))
   })
-  let t2411 = @simp.asm_rewrite_tac(@list.empty())
+  let t2411 = @simp.asm_rewrite_tac(@list.List([]))
   let t2410 = @tactics.use_then("absx", fn(x2406 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_1 = x2406
     let t2409 = @drule.match_mp(fixed_rd_ninf_exists())(absx_1)
@@ -4243,13 +4243,13 @@ pub fn fixed_rd_ninf_abs_error() -> @kernel.Thm {
 ///|
 /// FIXED_RD_NEAREST_TO_GLB
 fn step_90() -> Unit raise {
-  let t2501 = @simp.asm_rewrite_tac(@list.empty())
+  let t2501 = @simp.asm_rewrite_tac(@list.List([]))
   let t2500 = @simp.rewrite_tac(@list.List([@fixed.fround()]))
   let t2499 = @tactics.use_then("freq", fn(x2497 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let freq_1 = x2497
     @simp.rewrite_tac(@list.List([@equal.gsym(freq_1)]))
   })
-  let t2495 = @simp.asm_rewrite_tac(@list.empty())
+  let t2495 = @simp.asm_rewrite_tac(@list.List([]))
   let t2494 = @simp.once_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("(x:real) - z < y <=> x < z + y"))]))
   let t2493 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("((x:real) + y) - x = y"))]))
   let t2492 = @simp.rewrite_tac(@list.List([@kernel.assume_rule(@parser.parse_term("lub(fmt) x = glb(fmt) x + (fulp fmt)"))]))
@@ -4274,7 +4274,7 @@ fn step_90() -> Unit raise {
     @simp.rewrite_tac(@list.List([@drule.match_mp(@int.arith_rule(@parser.parse_term("(y:real) <= x ==> abs(y - x) = x - y")))(glb6)]))
   })
   let t2475 = @simp.rewrite_tac(@list.List([@common.closer()]))
-  let t2496 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2475), t2478), t2481), t2482), t2483), t2484), t2485), t2488), t2491), t2492), t2493), t2494), t2495), @tactics.all_tac])
+  let t2496 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2475), t2478), t2481), t2482), t2483), t2484), t2485), t2488), t2491), t2492), t2493), t2494), t2495), @tactics.all_tac])
   let t2502 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("(closer (glb(fmt) x) (lub(fmt) x) x)"), fn(x2472 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2473 = ((x2471 : @kernel.Thm) => @tactics.label_tac("glbcloser", x2471))(x2472)
     fn(x2474 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -4290,8 +4290,8 @@ fn step_90() -> Unit raise {
     let glb1 = x2462
     @simp.rewrite_tac(@list.List([@equal.gsym(glb1)]))
   })
-  let t2469 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2464), t2467), t2468)
-  let t2470 = @list.List([@simp.asm_rewrite_tac(@list.empty()), t2469])
+  let t2469 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2464), t2467), t2468)
+  let t2470 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t2469])
   let t2503 = @list.List([@tactics.thenl(@tactics.use_then("freq", fn(x2460 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let freq = x2460
     @tactics.disj_cases_tac(@drule.match_mp(fixed_rd_is_glb_lub())(freq))
@@ -4300,7 +4300,7 @@ fn step_90() -> Unit raise {
     let absx_2 = x2457
     @tactics.disj_cases_tac(@drule.match_mp(fixed_glb_lub_dist())(absx_2))
   })
-  let t2456 = @simp.asm_rewrite_tac(@list.empty())
+  let t2456 = @simp.asm_rewrite_tac(@list.List([]))
   let t2455 = @tactics.use_then("absx", fn(x2451 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_1 = x2451
     let t2454 = @drule.match_mp(fixed_rd_nearest_closest())(absx_1)
@@ -4327,7 +4327,7 @@ pub fn fixed_rd_nearest_to_glb() -> @kernel.Thm {
 ///|
 /// FIXED_RD_NEAREST_TO_LUB
 fn step_91() -> Unit raise {
-  let t2567 = @simp.asm_rewrite_tac(@list.empty())
+  let t2567 = @simp.asm_rewrite_tac(@list.List([]))
   let t2566 = @tactics.use_then("lubcloser", fn(x2564 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let lubcloser = x2564
     @tactics.assume_tac(@drule.match_mp(closer_neg())(lubcloser))
@@ -4337,7 +4337,7 @@ fn step_91() -> Unit raise {
     let freq_1 = x2560
     @simp.rewrite_tac(@list.List([@equal.gsym(freq_1)]))
   })
-  let t2558 = @simp.asm_rewrite_tac(@list.empty())
+  let t2558 = @simp.asm_rewrite_tac(@list.List([]))
   let t2557 = @simp.once_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("(x:real) - z < y <=> x - y < z"))]))
   let t2556 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("((x:real) + y) - x = y"))]))
   let t2555 = @simp.gen_rewrite_tac(fn(x2554 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -4371,14 +4371,14 @@ fn step_91() -> Unit raise {
     @simp.rewrite_tac(@list.List([@drule.match_mp(@int.arith_rule(@parser.parse_term("(y:real) <= x ==> abs(y - x) = x - y")))(glb6)]))
   })
   let t2534 = @simp.rewrite_tac(@list.List([@common.closer()]))
-  let t2559 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2534), t2537), t2540), t2541), t2544), t2547), t2555), t2556), t2557), t2558), @tactics.all_tac])
+  let t2559 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2534), t2537), t2540), t2541), t2544), t2547), t2555), t2556), t2557), t2558), @tactics.all_tac])
   let t2568 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("(closer (lub(fmt) x) (glb(fmt) x) x)"), fn(x2531 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2532 = ((x2530 : @kernel.Thm) => @tactics.label_tac("lubcloser", x2530))(x2531)
     fn(x2533 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       s2532(x2533)
     }
   }), t2559), t2562), t2563), t2566), @pair.let_tac), t2567)
-  let t2528 = @simp.asm_rewrite_tac(@list.empty())
+  let t2528 = @simp.asm_rewrite_tac(@list.List([]))
   let t2527 = @simp.rewrite_tac(@list.List([@kernel.assume_rule(@parser.parse_term("lub(fmt) x = glb(fmt) x"))]))
   let t2526 = @tactics.use_then("lub1", fn(x2524 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let lub1 = x2524
@@ -4388,7 +4388,7 @@ fn step_91() -> Unit raise {
     let glb1 = x2521
     @simp.rewrite_tac(@list.List([@equal.gsym(glb1)]))
   })
-  let t2529 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2523), t2526), t2527), t2528])
+  let t2529 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2523), t2526), t2527), t2528])
   let t2569 = @list.List([@tactics.thenl(@tactics.use_then("freq", fn(x2519 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let freq = x2519
     @tactics.disj_cases_tac(@drule.match_mp(fixed_rd_is_glb_lub())(freq))
@@ -4397,7 +4397,7 @@ fn step_91() -> Unit raise {
     let absx_2 = x2516
     @tactics.disj_cases_tac(@drule.match_mp(fixed_glb_lub_dist())(absx_2))
   })
-  let t2515 = @simp.asm_rewrite_tac(@list.empty())
+  let t2515 = @simp.asm_rewrite_tac(@list.List([]))
   let t2514 = @tactics.use_then("absx", fn(x2510 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_1 = x2510
     let t2513 = @drule.match_mp(fixed_rd_nearest_closest())(absx_1)
@@ -4424,7 +4424,7 @@ pub fn fixed_rd_nearest_to_lub() -> @kernel.Thm {
 ///|
 /// FIXED_RD_NEAREST_TO_0
 fn step_92() -> Unit raise {
-  let t2745 = @simp.asm_rewrite_tac(@list.empty())
+  let t2745 = @simp.asm_rewrite_tac(@list.List([]))
   let t2744 = @tactics.use_then("absx", fn(x2739 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_5 = x2739
     @tactics.use_then("fulpleqx", fn(x2741 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -4439,7 +4439,7 @@ fn step_92() -> Unit raise {
     @tactics.assume_tac(@simp.rewrite_rule(@list.List([@drule.match_mp(@int.arith_rule(@parser.parse_term("~(&0 <= (x:real)) ==>\n                                  (abs(x) < z <=> x > -- z)")))(t2736)]))(absxleqfulp_2))
   })
   let t2733 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("&0 - (x:real) = -- x"))]))
-  let t2738 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2733), t2737), @int.asm_arith_tac), @tactics.all_tac])
+  let t2738 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2733), t2737), @int.asm_arith_tac), @tactics.all_tac])
   let t2732 = @tactics.subgoal_then(@parser.parse_term("lub(fmt) x - (fulp fmt) / &2 < x"), fn(x2729 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2730 = ((x2728 : @kernel.Thm) => @tactics.label_tac("fulpleqx", x2728))(x2729)
     fn(x2731 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -4489,7 +4489,7 @@ fn step_92() -> Unit raise {
       })
     })
   })
-  let t2692 = @simp.asm_rewrite_tac(@list.empty())
+  let t2692 = @simp.asm_rewrite_tac(@list.List([]))
   let t2693 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("-- (x:real) + x = &0"))])), t2692), @tactics.all_tac])
   let t2691 = @tactics.subgoal_then(@parser.parse_term("(y':real) <= -- (fulp fmt) + (fulp fmt)"), fn(x2688 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2689 = ((x2687 : @kernel.Thm) => @tactics.label_tac("yleqfulp0", x2687))(x2688)
@@ -4516,7 +4516,7 @@ fn step_92() -> Unit raise {
   let t2671 = @kernel.assume_rule(@parser.parse_term("~(&0 <= (x:real))"))
   let t2672 = @simp.rewrite_tac(@list.List([@drule.match_mp(@int.arith_rule(@parser.parse_term("~(&0 <= (x:real)) ==> x <= &0")))(t2671)]))
   let t2670 = @simp.rewrite_tac(@list.List([fixed_zero_in_fixed()]))
-  let t2669 = @simp.asm_rewrite_tac(@list.empty())
+  let t2669 = @simp.asm_rewrite_tac(@list.List([]))
   let t2668 = @simp.rewrite_tac(@list.List([@fixed.is_ub()]))
   let t2716 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@fixed.is_lub()])), t2668), t2669), t2670), t2672), @tactics.gen_tac), t2674), t2675), t2715), @tactics.all_tac])
   let t2746 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("is_lub(fmt) x (&0)"), fn(x2665 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -4525,7 +4525,7 @@ fn step_92() -> Unit raise {
       s2666(x2667)
     }
   }), t2716), t2719), t2727), t2732), t2738), t2744), t2745)
-  let t2663 = @simp.asm_rewrite_tac(@list.empty())
+  let t2663 = @simp.asm_rewrite_tac(@list.List([]))
   let t2662 = @tactics.use_then("absx", fn(x2657 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let absx_2 = x2657
     @tactics.use_then("xleqfulp", fn(x2659 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -4534,7 +4534,7 @@ fn step_92() -> Unit raise {
       @simp.rewrite_tac(@list.List([@drule.match_mp(fixed_rd_nearest_to_glb())(t2661)]))
     })
   })
-  let t2655 = @simp.asm_rewrite_tac(@list.empty())
+  let t2655 = @simp.asm_rewrite_tac(@list.List([]))
   let t2653 = @kernel.assume_rule(@parser.parse_term("&0 <= (x:real)"))
   let t2654 = @simp.gen_rewrite_tac(fn(x2652 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     (fn(x2648 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -4557,7 +4557,7 @@ fn step_92() -> Unit raise {
     })(x2652))
   }, @list.List([@drule.match_mp(@int.arith_rule(@parser.parse_term("&0 <= (x:real) ==> x = abs(x)")))(t2653)]))
   let t2641 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("&0 + (x:real) = x"))]))
-  let t2656 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2641), t2654), t2655), @tactics.all_tac])
+  let t2656 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2641), t2654), t2655), @tactics.all_tac])
   let t2640 = @tactics.subgoal_then(@parser.parse_term("x < glb(fmt) x + (fulp fmt) / &2"), fn(x2637 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s2638 = ((x2636 : @kernel.Thm) => @tactics.label_tac("xleqfulp", x2636))(x2637)
     fn(x2639 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -4596,7 +4596,7 @@ fn step_92() -> Unit raise {
       s2609(x2610)
     }
   }), t2620), @int.asm_arith_tac)
-  let t2622 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), @int.arith_tac), t2621])
+  let t2622 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), @int.arith_tac), t2621])
   let t2607 = @tactics.use_then("yleqfulp", fn(x2600 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let yleqfulp = x2600
     @tactics.use_then("zerofixed", fn(x2602 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -4617,7 +4617,7 @@ fn step_92() -> Unit raise {
   let t2595 = @class.asm_cases_tac(@parser.parse_term("&0 <= (y':real)"))
   let t2594 = @tactics.disch_then((x2593 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["yfixed", "yleqx"]), x2593))
   let t2592 = @simp.rewrite_tac(@list.List([fixed_zero_in_fixed()]))
-  let t2591 = @simp.asm_rewrite_tac(@list.empty())
+  let t2591 = @simp.asm_rewrite_tac(@list.List([]))
   let t2590 = @simp.rewrite_tac(@list.List([@fixed.is_lb()]))
   let t2624 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@fixed.is_glb()])), t2590), t2591), t2592), @tactics.gen_tac), t2594), t2595), t2623), @tactics.all_tac])
   let t2747 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.subgoal_then(@parser.parse_term("is_glb(fmt) x (&0)"), fn(x2587 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -4659,7 +4659,7 @@ pub fn fixed_rd_nearest_to_0() -> @kernel.Thm {
 ///|
 /// FIXED_RD_NEAREST_REL_ERROR
 fn step_93() -> Unit raise {
-  let t2771 = @simp.asm_rewrite_tac(@list.empty())
+  let t2771 = @simp.asm_rewrite_tac(@list.List([]))
   let t2772 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(fixed_rd_nearest_abs_error()), t2771), @int.asm_arith_tac])
   let t2770 = @tactics.exists_tac(@parser.parse_term("(fulp fmt) / &2"))
   let t2769 = @tactics.match_mp_tac(@realax.real_le_trans())
@@ -4682,7 +4682,7 @@ fn step_93() -> Unit raise {
   let t2756 = @simp.once_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("abs(-- x) = abs(x)"))]))
   let t2755 = @simp.once_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("(&0 - x) / x = -- (x / x)"))]))
   let t2754 = @simp.rewrite_tac(@list.List([@common.rerror()]))
-  let t2753 = @simp.asm_rewrite_tac(@list.empty())
+  let t2753 = @simp.asm_rewrite_tac(@list.List([]))
   let t2752 = @kernel.assume_rule(@parser.parse_term("abs(x) < (fulp fmt) / &2"))
   let t2775 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.assume_tac(@drule.match_mp(fixed_rd_nearest_to_0())(t2752)), t2753), t2754), t2755), t2756), t2759), @int.arith_tac), t2774])
   let t2751 = @class.asm_cases_tac(@parser.parse_term("abs(x) < (fulp fmt) / &2"))

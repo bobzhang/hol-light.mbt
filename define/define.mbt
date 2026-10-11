@@ -47,7 +47,7 @@ pub fn casewise() -> @kernel.Thm {
 ///|
 /// CASEWISE_CASES
 fn step_3() -> Unit raise {
-  let t5 = @meson.asm_meson_tac(@list.empty())
+  let t5 = @meson.asm_meson_tac(@list.List([]))
   let t4 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3 = @simp.rewrite_tac(
     @list.List([
@@ -183,7 +183,7 @@ pub fn superadmissible() -> @kernel.Thm {
 ///|
 /// MATCH_SEQPATTERN
 fn step_8() -> Unit raise {
-  let t9 = @meson.meson_tac(@list.empty())
+  let t9 = @meson.meson_tac(@list.List([]))
   let t10 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@pair._match(), @pair._seqpattern()])),
     t9,
@@ -235,7 +235,7 @@ pub fn admissible_const() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_BASE
 fn step_10() -> Unit raise {
-  let t12 = @meson.meson_tac(@list.empty())
+  let t12 = @meson.meson_tac(@list.List([]))
   let t13 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([admissible()])),
     t12,
@@ -264,7 +264,7 @@ pub fn admissible_base() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_COMB
 fn step_11() -> Unit raise {
-  let t14 = @meson.meson_tac(@list.empty())
+  let t14 = @meson.meson_tac(@list.List([]))
   let t15 = @tactics.then_tac(@simp.simp_tac(@list.List([admissible()])), t14)
   admissible_comb_c.set(
     @tactics.prove(
@@ -290,7 +290,7 @@ pub fn admissible_comb() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_RAND
 fn step_12() -> Unit raise {
-  let t16 = @meson.meson_tac(@list.empty())
+  let t16 = @meson.meson_tac(@list.List([]))
   let t17 = @tactics.then_tac(@simp.simp_tac(@list.List([admissible()])), t16)
   admissible_rand_c.set(
     @tactics.prove(
@@ -316,7 +316,7 @@ pub fn admissible_rand() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_LAMBDA
 fn step_13() -> Unit raise {
-  let t18 = @meson.meson_tac(@list.empty())
+  let t18 = @meson.meson_tac(@list.List([]))
   let t19 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([admissible(), @class.fun_eq_thm(), @pair.forall_pair_thm()]),
@@ -347,7 +347,7 @@ pub fn admissible_lambda() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_NEST
 fn step_14() -> Unit raise {
-  let t20 = @meson.meson_tac(@list.empty())
+  let t20 = @meson.meson_tac(@list.List([]))
   let t21 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([admissible()])),
     t20,
@@ -376,8 +376,8 @@ pub fn admissible_nest() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_COND
 fn step_15() -> Unit raise {
-  let t28 = @meson.asm_meson_tac(@list.empty())
-  let t27 = @simp.asm_rewrite_tac(@list.empty())
+  let t28 = @meson.asm_meson_tac(@list.List([]))
+  let t27 = @simp.asm_rewrite_tac(@list.List([]))
   let t26 = @tactics.disch_then(fn(
     x24 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -448,7 +448,7 @@ pub fn admissible_cond() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_MATCH
 fn step_16() -> Unit raise {
-  let t32 = @meson.asm_meson_tac(@list.empty())
+  let t32 = @meson.asm_meson_tac(@list.List([]))
   let t31 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t30 = @tactics.repeat_tac(@tactics.strip_tac)
   let t33 = @tactics.then_tac(
@@ -485,7 +485,7 @@ pub fn admissible_match() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_SEQPATTERN
 fn step_17() -> Unit raise {
-  let t34 = @meson.meson_tac(@list.empty())
+  let t34 = @meson.meson_tac(@list.List([]))
   let t35 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@pair._seqpattern(), admissible()])),
     t34,
@@ -514,7 +514,7 @@ pub fn admissible_seqpattern() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_UNGUARDED_PATTERN
 fn step_18() -> Unit raise {
-  let t40 = @meson.asm_meson_tac(@list.empty())
+  let t40 = @meson.asm_meson_tac(@list.List([]))
   let t39 = @tactics.match_mp_tac(
     @class.taut(
       @parser.parse_term(
@@ -568,11 +568,11 @@ pub fn admissible_unguarded_pattern() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_GUARDED_PATTERN
 fn step_19() -> Unit raise {
-  let t48 = @meson.asm_meson_tac(@list.empty())
+  let t48 = @meson.asm_meson_tac(@list.List([]))
   let t47 = @tactics.try_tac(
     @tactics.match_mp_tac(
       @meson.meson(
-        @list.empty(),
+        @list.List([]),
         @parser.parse_term("x = x' /\\ y = y' ==> (x = y <=> x' = y')"),
       ),
     ),
@@ -635,7 +635,7 @@ pub fn admissible_guarded_pattern() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_NSUM
 fn step_20() -> Unit raise {
-  let t52 = @meson.asm_meson_tac(@list.empty())
+  let t52 = @meson.asm_meson_tac(@list.List([]))
   let t51 = @tactics.match_mp_tac(@iterate.nsum_eq_numseg())
   let t50 = @tactics.repeat_tac(@tactics.strip_tac)
   let t53 = @tactics.then_tac(
@@ -672,7 +672,7 @@ pub fn admissible_nsum() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_SUM
 fn step_21() -> Unit raise {
-  let t56 = @meson.asm_meson_tac(@list.empty())
+  let t56 = @meson.asm_meson_tac(@list.List([]))
   let t55 = @tactics.match_mp_tac(@iterate.sum_eq_numseg())
   let t54 = @tactics.repeat_tac(@tactics.strip_tac)
   let t57 = @tactics.then_tac(
@@ -707,16 +707,16 @@ pub fn admissible_sum() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_MAP
 fn step_22() -> Unit raise {
-  let t66 = @meson.asm_meson_tac(@list.empty())
+  let t66 = @meson.asm_meson_tac(@list.List([]))
   let t65 = @simp.asm_rewrite_tac(@list.List([@pair.forall_pair_thm()]))
   let t64 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t63 = @tactics.repeat_tac(@tactics.strip_tac)
   let t62 = @simp.rewrite_tac(@list.List([@equal.gsym(@lists.all_mem())]))
   let t61 = @tactics.match_mp_tac(@lists.map_eq())
-  let t60 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t60 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t59 = @tactics.match_mp_tac(
     @meson.meson(
-      @list.empty(),
+      @list.List([]),
       @parser.parse_term("x = y /\\ MAP f x = MAP g x ==> MAP f x = MAP g y"),
     ),
   )
@@ -803,8 +803,8 @@ pub fn admissible_match_seqpattern() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_IMP_SUPERADMISSIBLE
 fn step_24() -> Unit raise {
-  let t77 = @meson.asm_meson_tac(@list.empty())
-  let t76 = @simp.asm_rewrite_tac(@list.empty())
+  let t77 = @meson.asm_meson_tac(@list.List([]))
+  let t76 = @simp.asm_rewrite_tac(@list.List([]))
   let t73 = @parser.parse_term(
     "\\f:A->B a:P. if p f a then t f a :B else fixed",
   )
@@ -926,8 +926,8 @@ pub fn superadmissible_const() -> @kernel.Thm {
 ///|
 /// SUPERADMISSIBLE_TAIL
 fn step_26() -> Unit raise {
-  let t90 = @meson.asm_meson_tac(@list.empty())
-  let t89 = @simp.asm_rewrite_tac(@list.empty())
+  let t90 = @meson.asm_meson_tac(@list.List([]))
+  let t89 = @simp.asm_rewrite_tac(@list.List([]))
   let t86 = @parser.parse_term("\\f:A->B. anything:P->B")
   let t87 = @parser.parse_term("\\f:A->B a:P. if p f a then t f a :A else s a")
   let t88 = @tactics.map_every(
@@ -1019,8 +1019,8 @@ pub fn superadmissible_tail() -> @kernel.Thm {
 ///|
 /// SUPERADMISSIBLE_COND
 fn step_27() -> Unit raise {
-  let t144 = @meson.asm_meson_tac(@list.empty())
-  let t143 = @simp.asm_rewrite_tac(@list.empty())
+  let t144 = @meson.asm_meson_tac(@list.List([]))
+  let t143 = @simp.asm_rewrite_tac(@list.List([]))
   let t142 = @tactics.disch_then(fn(
     x140 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1127,7 +1127,7 @@ fn step_27() -> Unit raise {
     )
   })
   let t137 = @list.List([
-    @meson.asm_meson_tac(@list.empty()),
+    @meson.asm_meson_tac(@list.List([])),
     t136,
     @tactics.all_tac,
   ])
@@ -1137,7 +1137,7 @@ fn step_27() -> Unit raise {
       @tactics.conj_tac,
     ),
   )
-  let t129 = @simp.rewrite_tac(@list.empty())
+  let t129 = @simp.rewrite_tac(@list.List([]))
   let t128 = @tactics.disch_then(fn(
     x120 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1283,10 +1283,10 @@ fn step_27() -> Unit raise {
     let t109 = @tactics.mp_tac(th_1)
     @tactics.thenl(
       @tactics.ants_tac,
-      @list.List([@meson.asm_meson_tac(@list.empty()), t109]),
+      @list.List([@meson.asm_meson_tac(@list.List([])), t109]),
     )
   })
-  let t106 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t106 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t105 = @tactics.disch_then(fn(
     x100 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1570,8 +1570,8 @@ pub fn superadmissible_match_seqpattern() -> @kernel.Thm {
 ///|
 /// SUPERADMISSIBLE_MATCH_UNGUARDED_PATTERN
 fn step_29() -> Unit raise {
-  let t162 = @meson.asm_meson_tac(@list.empty())
-  let t161 = @simp.simp_tac(@list.empty())
+  let t162 = @meson.asm_meson_tac(@list.List([]))
+  let t161 = @simp.simp_tac(@list.List([]))
   let t160 = @tactics.rule_assum_tac(
     @simp.rewrite_rule(@list.List([admissible()])),
   )
@@ -1632,7 +1632,7 @@ fn step_29() -> Unit raise {
       t157,
     ]),
   )
-  let t153 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t153 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t152 = @tactics.subgoal_then(
     @parser.parse_term(
       "!f:A->B x:P.\n     p f x ==> ((?!v. ?t:Q. pat t:D = e x /\\ f(arg x t) = v) <=>\n                ?t. pat t = e x)",
@@ -1725,8 +1725,8 @@ pub fn superadmissible_match_unguarded_pattern() -> @kernel.Thm {
 ///|
 /// SUPERADMISSIBLE_MATCH_GUARDED_PATTERN
 fn step_30() -> Unit raise {
-  let t179 = @meson.asm_meson_tac(@list.empty())
-  let t178 = @simp.simp_tac(@list.empty())
+  let t179 = @meson.asm_meson_tac(@list.List([]))
+  let t178 = @simp.simp_tac(@list.List([]))
   let t177 = @tactics.rule_assum_tac(
     @simp.rewrite_rule(@list.List([admissible()])),
   )
@@ -1789,7 +1789,7 @@ fn step_30() -> Unit raise {
       t174,
     ]),
   )
-  let t170 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t170 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t169 = @tactics.subgoal_then(
     @parser.parse_term(
       "!f:A->B x:P.\n     p f x ==> ((?!v. ?t:Q. pat t:D = e x /\\ q x t /\\ f(arg x t) = v) <=>\n                ?t. pat t = e x /\\ q x t)",
@@ -1882,9 +1882,9 @@ pub fn superadmissible_match_guarded_pattern() -> @kernel.Thm {
 ///|
 /// WF_REC_TAIL_GENERAL'
 fn step_31() -> Unit raise {
-  let t183 = @meson.asm_meson_tac(@list.empty())
+  let t183 = @meson.asm_meson_tac(@list.List([]))
   let t182 = @tactics.match_mp_tac(@wf.wf_rec_tail_general())
-  let t181 = @simp.asm_rewrite_tac(@list.empty())
+  let t181 = @simp.asm_rewrite_tac(@list.List([]))
   let t184 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t181),
@@ -1916,7 +1916,7 @@ pub fn wf_rec_tail_general_p() -> @kernel.Thm {
 ///|
 /// WF_REC_CASES
 fn step_32() -> Unit raise {
-  let t239 = @meson.asm_meson_tac(@list.empty())
+  let t239 = @meson.asm_meson_tac(@list.List([]))
   let t238 = @tactics.exists_tac(
     @parser.parse_term(
       "\\f:A->B x:A. if ?y:P. s y = x\n                           then H2 f (@y. s y = x) else H1 f x:B",
@@ -1932,7 +1932,7 @@ fn step_32() -> Unit raise {
       "\\f:A->B x:A. if ?y:P. s y = x then P2 f (@y. s y = x) else P1 f x:bool",
     ),
   )
-  let t235 = @simp.asm_rewrite_tac(@list.empty())
+  let t235 = @simp.asm_rewrite_tac(@list.List([]))
   let t234 = @tactics.repeat_tac(@tactics.strip_tac)
   let t228 = @parser.parse_term("H2:(A->B)->P->B")
   let t229 = @parser.parse_term("G2:(A->B)->P->A")
@@ -1975,7 +1975,7 @@ fn step_32() -> Unit raise {
   ) raise) raise {
     @tactics.all_tac
   })
-  let t223 = @simp.asm_rewrite_tac(@list.empty())
+  let t223 = @simp.asm_rewrite_tac(@list.List([]))
   let t222 = @tactics.disch_then(fn(
     x213 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2105,7 +2105,7 @@ fn step_32() -> Unit raise {
     @tactics.x_gen_tac,
     @list.List([@parser.parse_term("s:P->A"), t211, t210]),
   )
-  let t208 = @simp.rewrite_tac(@list.empty())
+  let t208 = @simp.rewrite_tac(@list.List([]))
   let t206 = @parser.parse_term("\\f:A->B x:A. @y:B. T")
   let t207 = @parser.parse_term("\\f:A->B. anything:A->A")
   let t209 = @list.List([
@@ -2190,7 +2190,7 @@ fn step_32() -> Unit raise {
   ) raise) raise {
     @tactics.all_tac
   })
-  let t198 = @simp.asm_rewrite_tac(@list.empty())
+  let t198 = @simp.asm_rewrite_tac(@list.List([]))
   let t196 = @parser.parse_term("clauses:((P->A)#((A->B)->P->B))list")
   let t197 = @tactics.spec_tac(
     @parser.parse_term("clauses:((P->A)#((A->B)->P->B))list"),
@@ -2395,7 +2395,7 @@ pub fn wf_rec_cases_p() -> @kernel.Thm {
 /// RECURSION_CASEWISE
 fn step_34() -> Unit raise {
   let t259 = @meson.asm_meson_tac(@list.List([casewise_works()]))
-  let t258 = @simp.asm_rewrite_tac(@list.empty())
+  let t258 = @simp.asm_rewrite_tac(@list.List([]))
   let t257 = @tactics.repeat_tac(@tactics.strip_tac)
   let t256 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t253 = @drule.match_mp(wf_rec_cases_p())
@@ -2611,7 +2611,7 @@ pub fn recursion_casewise() -> @kernel.Thm {
 ///|
 /// RECURSION_CASEWISE_PAIRWISE
 fn step_35() -> Unit raise {
-  let t263 = @meson.asm_meson_tac(@list.empty())
+  let t263 = @meson.asm_meson_tac(@list.List([]))
   let t262 = @simp.rewrite_tac(
     @list.List([@lists.pairwise(), @lists.mem(), @equal.gsym(@lists.all_mem())]),
   )
@@ -2660,7 +2660,7 @@ fn step_35() -> Unit raise {
   let pth = @simp.rewrite_rule(
     @list.List([@pair.forall_pair_thm(), paired_lambda]),
   )(t266)
-  let t267 = @meson.meson_tac(@list.empty())
+  let t267 = @meson.meson_tac(@list.List([]))
   let cth = @tactics.prove(@equal.lhand(@kernel.concl(pth)), t267)
   let t268 = @simp.rewrite_tac(@list.List([recursion_casewise()]))
   let t269 = @tactics.then_tac(
@@ -2869,7 +2869,7 @@ fn step_38() -> Unit raise {
   let t275 = @tactics.repeat_tac(@tactics.conj_tac)
   let t284 = @tactics.then_tac(
     @tactics.then_tac(
-      @tactics.then_tac(@simp.rewrite_tac(@list.empty()), t275),
+      @tactics.then_tac(@simp.rewrite_tac(@list.List([])), t275),
       t282,
     ),
     t283,
@@ -2920,7 +2920,7 @@ fn step_38() -> Unit raise {
       evensimps,
       @calc_num.arith_eq(),
     ]),
-    @list.empty(),
+    @list.List([]),
   )
   let simplify_welldefinedness_conv : (@kernel.Term) -> @kernel.Thm raise = match
     @lib.map(
@@ -3008,7 +3008,7 @@ fn step_38() -> Unit raise {
     }
     _ => raise @lib.MatchFailure("tscript.ml:500")
   }
-  let t306 = @meson.meson_tac(@list.empty())
+  let t306 = @meson.meson_tac(@list.List([]))
   let t307 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -3282,7 +3282,7 @@ fn step_38() -> Unit raise {
     t334,
     t333,
   ])
-  let t314 = @simp.asm_rewrite_tac(@list.empty())
+  let t314 = @simp.asm_rewrite_tac(@list.List([]))
   let t313 = @tactics.repeat_tac(@tactics.strip_tac)
   let t338 = @tactics.then_tac(
     @tactics.then_tac(
@@ -3544,13 +3544,13 @@ fn step_38() -> Unit raise {
     }
   }
   let pth0 = @meson.meson(
-    @list.empty(),
+    @list.List([]),
     @parser.parse_term(
       "(a /\\ x = k ==> x = y ==> d) ==> (a /\\ x = k /\\ y = k ==> d)",
     ),
   )
   let pth1 = @meson.meson(
-    @list.empty(),
+    @list.List([]),
     @parser.parse_term(
       "(a /\\ b /\\ c /\\ x = k ==> x = y ==> d)\n      ==> (a /\\ x = k /\\ b /\\ y = k /\\ c ==> d)",
     ),
@@ -4092,7 +4092,7 @@ fn step_38() -> Unit raise {
           lefts,
         )
         let parms0 = @kernel.freesl(@lib.unions(arglists))
-        let parms_2 = if parms0 != @list.empty() {
+        let parms_2 = if parms0 != @list.List([]) {
           parms0
         } else {
           @list.List([@basics.genvar(@kernel.aty)])
@@ -4369,7 +4369,7 @@ fn step_38() -> Unit raise {
     x500 : @kernel.Thm,
   ) -> @kernel.Thm raise {
     let th1_5 = x500
-    if @kernel.hyp(th1_5) == @list.empty() {
+    if @kernel.hyp(th1_5) == @list.List([]) {
       th1_5
     } else {
       let def_2 = @kernel.concl(th1_5)
@@ -4409,7 +4409,7 @@ fn step_38() -> Unit raise {
         lefts_1,
       )
       let parms0_1 = @kernel.freesl(@lib.unions(arglists_1))
-      let parms_3 = if parms0_1 != @list.empty() {
+      let parms_3 = if parms0_1 != @list.List([]) {
         parms0_1
       } else {
         @list.List([@basics.genvar(@kernel.aty)])
@@ -4696,7 +4696,7 @@ fn step_38() -> Unit raise {
           })(x530)(x530)
         },
       )
-      let th2_5 = @tactics.tac_proof((@list.empty(), bod_5), simp_admiss_tac)
+      let th2_5 = @tactics.tac_proof((@list.List([]), bod_5), simp_admiss_tac)
       let th3_3 = @bool.simple_exists(ord, th2_5)
       let allasms = @kernel.hyp(th3_3)
       let wfasm_2 = @equal.lhand(@kernel.concl(th2_5))
@@ -4892,7 +4892,7 @@ fn step_38() -> Unit raise {
       let (ev_p, bod_p) = @basics.dest_exists(@kernel.concl(th_9))
       let t546 = @kernel.type_of(ev_1)
       let th_p = @kernel.inst_type(
-        @basics.type_match(@kernel.type_of(ev_p), t546, @list.empty()),
+        @basics.type_match(@kernel.type_of(ev_p), t546, @list.List([])),
         th_9,
       )
       let t550 = @tactics.disch_then(fn(
@@ -5573,7 +5573,7 @@ fn step_39() -> Unit raise {
           let f_p = x610
           let t_updated = x611
           @drule.instantiate(
-            @drule.term_match(@list.empty(), f_p, f_1),
+            @drule.term_match(@list.List([]), f_p, f_1),
             t_updated,
           )
         },

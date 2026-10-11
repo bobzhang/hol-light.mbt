@@ -330,7 +330,7 @@ fn step_24() -> Unit raise {
     }
   })
   let t66 = @simp.asm_simp_tac(@list.List([@arith.mod_exp_mod(), @arith.mult_eq_0(), @prime.prime_imp_nz(), @arith.exp_exp()]))
-  let t65 = @simp.asm_rewrite_tac(@list.empty())
+  let t65 = @simp.asm_rewrite_tac(@list.List([]))
   let t88 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t65), t66), t70), t71), t79), t83), t84), t85), t86), t87)
   rsa_c.set(@tactics.prove(@parser.parse_term("prime p /\\ prime q /\\ ~(p = q) /\\\n   (d * e == 1) (mod ((p - 1) * (q - 1))) /\\\n   plaintext < p * q /\\ (ciphertext = (plaintext EXP e) MOD (p * q))\n   ==> (plaintext = (ciphertext EXP d) MOD (p * q))"), t88))
 }

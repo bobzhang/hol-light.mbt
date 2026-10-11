@@ -75,7 +75,7 @@ test "tactics matches tactics.ml" {
   let st = (name : String, f : () -> (Term, Tactic) raise) => {
     log.attempt(name, () => {
       let (w, tac) = f()
-      sgls(tac((@list.empty(), w)))
+      sgls(tac((@list.List([]), w)))
     })
   }
   let truth = @bool.truth()
@@ -318,7 +318,7 @@ test "tactics matches tactics.ml" {
   st("SUBGOAL_TAC_none", () => {
     let w = tm("p:bool")
     let q = tm("q:bool")
-    (w, @tactics.subgoal_tac("lab", q, @list.empty()))
+    (w, @tactics.subgoal_tac("lab", q, @list.List([])))
   })
   pv("FREEZE_THEN", () => {
     let w = tm("p ==> p")
@@ -387,14 +387,14 @@ test "tactics matches tactics.ml" {
   pv("HYP", () => {
     let w = tm("p ==> p")
     let h = @tactics.hyp_tac(ths => accept_tac(@lib.hd(ths)), "h1")(
-      @list.empty(),
+      @list.List([]),
     )
     (w, then_tac(disch_then(th => label_tac("h1", th)), h))
   })
   pv("HYP_bad", () => {
     let w = tm("p ==> p")
     let h = @tactics.hyp_tac(ths => accept_tac(@lib.hd(ths)), "h1 +")(
-      @list.empty(),
+      @list.List([]),
     )
     (w, then_tac(disch_then(th => label_tac("h1", th)), h))
   })
@@ -467,11 +467,11 @@ test "tactics matches tactics.ml" {
   })
   st("FIRST_empty", () => {
     let w = tm("p:bool")
-    (w, @tactics.first(@list.empty()))
+    (w, @tactics.first(@list.List([])))
   })
   st("EVERY_empty", () => {
     let w = tm("p:bool")
-    (w, @tactics.every(@list.empty()))
+    (w, @tactics.every(@list.List([])))
   })
   st("FIRST", () => {
     let w = tm("p /\\ q")
@@ -552,7 +552,7 @@ test "tactics matches tactics.ml" {
       then_tac(
         disch_tac,
         @tactics.asm_tac(ths => @tactics.map_every(th => mp_tac(th), ths))(
-          @list.empty(),
+          @list.List([]),
         ),
       ),
     )
@@ -594,7 +594,7 @@ test "tactics matches tactics.ml" {
   })
   st("FIRST_TCL_empty", () => {
     let w = tm("a ==> c")
-    (w, disch_then(@tactics.first_tcl(@list.empty())(th => assume_tac(th))))
+    (w, disch_then(@tactics.first_tcl(@list.List([]))(th => assume_tac(th))))
   })
   st("TRANS_TAC", () => {
     let tw = tm("!x y z:A. x = y /\\ y = z ==> x = z")
@@ -689,9 +689,9 @@ test "tactics matches tactics.ml" {
     let b = tm("b:A")
     let y = tm("y:A")
     let (_, tmin, tyin) = @tactics.compose_insts(
-      (@list.empty(), @list.singleton((a, x)), @list.empty()),
+      (@list.List([]), @list.singleton((a, x)), @list.List([])),
       (
-        @list.empty(),
+        @list.List([]),
         @list.List([(b, y), (a, x)]),
         @list.singleton((@kernel.bool_ty, @kernel.aty)),
       ),
@@ -708,7 +708,7 @@ test "tactics matches tactics.ml" {
     let p = tm("p:bool")
     sgoal(
       @tactics.inst_goal(
-        (@list.empty(), @list.singleton((a, p)), @list.empty()),
+        (@list.List([]), @list.singleton((a, p)), @list.List([])),
         (@list.singleton(("h", @kernel.assume_rule(p))), p),
       ),
     )
@@ -733,7 +733,7 @@ test "tactics matches tactics.ml" {
   log.attempt("r_neg", () => sgs(@tactics.r(-1)))
   log.attempt("b1", () => sgs(@tactics.b()))
   log.attempt("e_valid", () => {
-    sgs(@tactics.e(_ => (@tactics.null_meta, @list.empty(), (_, _) => truth)))
+    sgs(@tactics.e(_ => (@tactics.null_meta, @list.List([]), (_, _) => truth)))
   })
   log.attempt("e4", () => sgs(@tactics.e(accept)))
   log.attempt("e_bad", () => sgs(@tactics.e(accept)))
@@ -777,13 +777,13 @@ test "tactics matches tactics.ml" {
     sgoal((@list.singleton(("", @kernel.assume_rule(a))), w))
   })
   @tactics.print_goal_hyp_max_boxes.val = None
-  log.attempt("empty_goalstack", () => sgs(@list.empty()))
+  log.attempt("empty_goalstack", () => sgs(@list.List([])))
   log.attempt("top_thm_open", () => sthm(@tactics.top_thm()))
-  @tactics.current_goalstack.val = @list.empty()
+  @tactics.current_goalstack.val = @list.List([])
   log.attempt("e_nogoal", () => sgs(@tactics.e(all_tac)))
   log.attempt("by_nogoal", () => {
     let w = tm("T")
-    let gs = @tactics.mk_goalstate((@list.empty(), w))
+    let gs = @tactics.mk_goalstate((@list.List([]), w))
     sgls(@tactics.by(all_tac)(@tactics.by(accept_tac(truth))(gs)))
   })
   log.attempt("axioms", () => @kernel.axioms().map(sthm).to_array().join(" ;; "))

@@ -149,7 +149,7 @@ pub fn eq_sym_eq() -> @kernel.Thm {
 ///|
 /// EQ_TRANS
 fn step_5() -> Unit raise {
-  let t11 = @simp.pure_asm_rewrite_tac(@list.empty())
+  let t11 = @simp.pure_asm_rewrite_tac(@list.List([]))
   let t12 = @tactics.then_tac(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t11),
     @tactics.refl_tac,
@@ -697,7 +697,7 @@ pub fn exists_refl() -> @kernel.Thm {
 ///|
 /// EXISTS_UNIQUE_REFL
 fn step_31() -> Unit raise {
-  let t24 = @simp.asm_rewrite_tac(@list.empty())
+  let t24 = @simp.asm_rewrite_tac(@list.List([]))
   let t25 = @list.List([@tactics.exists_tac(@parser.parse_term("a:A")), t24])
   let t23 = @tactics.repeat_tac(
     @tactics.orelse_tac(@tactics.eq_tac, @tactics.strip_tac),
@@ -948,7 +948,7 @@ pub fn unwind_thm2() -> @kernel.Thm {
 ///|
 /// FORALL_UNWIND_THM2
 fn step_34() -> Unit raise {
-  let t54 = @simp.asm_rewrite_tac(@list.empty())
+  let t54 = @simp.asm_rewrite_tac(@list.List([]))
   let t53 = @tactics.disch_then(fn(
     x50 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1002,7 +1002,7 @@ fn step_34() -> Unit raise {
     ),
     t54,
   )
-  let t49 = @simp.rewrite_tac(@list.empty())
+  let t49 = @simp.rewrite_tac(@list.List([]))
   let t46 = @parser.parse_term("a:A")
   let t56 = @list.List([
     @tactics.then_tac(
@@ -1736,7 +1736,7 @@ pub fn mono_not() -> @kernel.Thm {
 ///|
 /// MONO_FORALL
 fn step_64() -> Unit raise {
-  let t62 = @simp.asm_rewrite_tac(@list.empty())
+  let t62 = @simp.asm_rewrite_tac(@list.List([]))
   let t61 = @tactics.first_assum(@tactics.match_mp_tac)
   let t63 = @tactics.then_tac(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t61),
@@ -1762,7 +1762,7 @@ pub fn mono_forall() -> @kernel.Thm {
 ///|
 /// MONO_EXISTS
 fn step_65() -> Unit raise {
-  let t68 = @simp.asm_rewrite_tac(@list.empty())
+  let t68 = @simp.asm_rewrite_tac(@list.List([]))
   let t67 = @tactics.first_assum(@tactics.match_mp_tac)
   let t66 = @tactics.exists_tac(@parser.parse_term("x:A"))
   let t64 = @parser.parse_term("x:A")
@@ -1801,7 +1801,7 @@ pub fn mono_exists() -> @kernel.Thm {
 ///|
 /// WLOG_RELATION
 fn step_66() -> Unit raise {
-  let t81 = @simp.asm_simp_tac(@list.empty())
+  let t81 = @simp.asm_simp_tac(@list.List([]))
   let t80 = @tactics.repeat_tac(
     @tactics.then_tac(@tactics.match_mp_tac(mono_forall()), @tactics.gen_tac),
   )
@@ -2186,7 +2186,7 @@ fn step_67() -> Unit raise {
     }),
     t97,
   )
-  let t89 = @simp.asm_rewrite_tac(@list.empty())
+  let t89 = @simp.asm_rewrite_tac(@list.List([]))
   let t99 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -2303,7 +2303,7 @@ fn step_68() -> Unit raise {
   let t130 = @simp.rewrite_tac(
     @list.List([left_forall_imp_thm(), exists_refl()]),
   )
-  let t129 = @simp.simp_tac(@list.empty())
+  let t129 = @simp.simp_tac(@list.List([]))
   let t128 = @simp.rewrite_tac(@list.List([forall_and_thm()]))
   let t127 = @simp.gen_rewrite_tac(
     fn(

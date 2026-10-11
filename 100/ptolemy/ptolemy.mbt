@@ -31,7 +31,7 @@ fn step_2() -> Unit raise {
   let t10 = @simp.rewrite_tac(@list.List([@vectors.vector_arith(@parser.parse_term("(r % x) dot (r % x) = (r pow 2) * (x dot x)"))]))
   let t9 = @simp.rewrite_tac(@list.List([@vectors.vector_arith(@parser.parse_term("(c + r % x) - (c + r % y) = r % (x - y)"))]))
   let t7 = @tactics.match_mp_tac(@transcendentals.sin_pos_pi_le())
-  let t6 = @simp.asm_rewrite_tac(@list.empty())
+  let t6 = @simp.asm_rewrite_tac(@list.List([]))
   let t5 = @tactics.match_mp_tac(@realax.real_le_mul())
   let t4 = @simp.rewrite_tac(@list.List([@realarith.real_pos()]))
   let t8 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@realax.real_le_mul()), t4), t5), t6), t7), @calc_rat.asm_real_arith_tac), @tactics.all_tac])

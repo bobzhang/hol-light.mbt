@@ -4,7 +4,7 @@
 ///|
 /// INJ_INVERSE2
 fn step_1() -> Unit raise {
-  let t6 = @simp.asm_rewrite_tac(@list.empty())
+  let t6 = @simp.asm_rewrite_tac(@list.List([]))
   let t5 = @tactics.match_mp_tac(@class.select_unique())
   let t4 = @simp.asm_rewrite_tac(@list.List([@theorems.beta_thm()]))
   let t3 = @tactics.repeat_tac(@tactics.gen_tac)
@@ -509,7 +509,7 @@ fn step_4() -> Unit raise {
       }
     })(t34(x35))
   })
-  let t30 = @simp.asm_rewrite_tac(@list.empty())
+  let t30 = @simp.asm_rewrite_tac(@list.List([]))
   let t43 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -690,7 +690,7 @@ fn step_7() -> Unit raise {
       }
     })(t49(x50))
   })
-  let t45 = @simp.asm_rewrite_tac(@list.empty())
+  let t45 = @simp.asm_rewrite_tac(@list.List([]))
   let t59 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -955,7 +955,7 @@ fn step_10() -> Unit raise {
       )
     })(t70(x71))
   })
-  let t61 = @simp.asm_rewrite_tac(@list.empty())
+  let t61 = @simp.asm_rewrite_tac(@list.List([]))
   let t83 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1014,7 +1014,7 @@ pub fn inja() -> @kernel.Thm {
 ///|
 /// INJA_INJ
 fn step_12() -> Unit raise {
-  let t95 = @simp.rewrite_tac(@list.empty())
+  let t95 = @simp.rewrite_tac(@list.List([]))
   let t96 = @tactics.then_tac(
     @tactics.disch_then(fn(
       x92 : @kernel.Thm,
@@ -1064,7 +1064,7 @@ fn step_12() -> Unit raise {
     }),
     t95,
   )
-  let t91 = @simp.rewrite_tac(@list.empty())
+  let t91 = @simp.rewrite_tac(@list.List([]))
   let t88 = @parser.parse_term("a1:A")
   let t97 = @list.List([
     @tactics.then_tac(
@@ -1376,7 +1376,7 @@ fn step_14() -> Unit raise {
     @list.List([@parser.parse_term("n:num"), t102, t101]),
   )
   let t100 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
-  let t99 = @simp.asm_rewrite_tac(@list.empty())
+  let t99 = @simp.asm_rewrite_tac(@list.List([]))
   let t125 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1646,7 +1646,7 @@ fn step_16() -> Unit raise {
   let t129 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t128 = @simp.rewrite_tac(@list.List([@theorems.and_forall_thm()]))
   let t127 = @simp.once_rewrite_tac(@list.List([@class.fun_eq_thm()]))
-  let t126 = @simp.asm_rewrite_tac(@list.empty())
+  let t126 = @simp.asm_rewrite_tac(@list.List([]))
   let t153 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1873,7 +1873,7 @@ pub fn constr() -> @kernel.Thm {
 ///|
 /// MK_REC_INJ
 fn step_24() -> Unit raise {
-  let t159 = @simp.asm_rewrite_tac(@list.empty())
+  let t159 = @simp.asm_rewrite_tac(@list.List([]))
   let t158 = @tactics.disch_then(fn(
     x156 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2004,7 +2004,7 @@ fn step_25() -> Unit raise {
       }
     })(((x166 : @kernel.Thm) => @equal.ap_term(t165, x166))(x167))
   })
-  let t161 = @simp.asm_rewrite_tac(@list.empty())
+  let t161 = @simp.asm_rewrite_tac(@list.List([]))
   let t170 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -2161,7 +2161,7 @@ fn step_27() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
-          @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t209),
+          @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t209),
           t210,
         ),
         t211,
@@ -2321,7 +2321,7 @@ fn step_27() -> Unit raise {
       }
     })(t186(x187))
   })
-  let t182 = @simp.asm_rewrite_tac(@list.empty())
+  let t182 = @simp.asm_rewrite_tac(@list.List([]))
   let t215 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -2705,7 +2705,7 @@ fn step_28() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
-          @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t248),
+          @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t248),
           t249,
         ),
         t250,
@@ -2776,7 +2776,7 @@ fn step_28() -> Unit raise {
     ),
     t239,
   )
-  let t233 = @simp.asm_rewrite_tac(@list.empty())
+  let t233 = @simp.asm_rewrite_tac(@list.List([]))
   let t241 = @list.List([
     @tactics.then_tac(
       @tactics.match_mp_tac(@bool.conjunct2(zrecspace_rules())),
@@ -3130,7 +3130,7 @@ fn step_29() -> Unit raise {
   })
   let t344 = @tactics.first_assum(@tactics.match_mp_tac)
   let t343 = @tactics.repeat_tac(@tactics.gen_tac)
-  let t342 = @simp.asm_rewrite_tac(@list.empty())
+  let t342 = @simp.asm_rewrite_tac(@list.List([]))
   let t341 = @tactics.exists_tac(@parser.parse_term("fn:(A)recspace->B"))
   let t340 = @tactics.disch_then(
     @tactics.x_choose_then(@parser.parse_term("fn:(A)recspace->B"))(fn(
@@ -3227,13 +3227,13 @@ fn step_29() -> Unit raise {
     ),
     t349,
   )
-  let t331 = @simp.asm_rewrite_tac(@list.empty())
+  let t331 = @simp.asm_rewrite_tac(@list.List([]))
   let t330 = @tactics.exists_tac(@parser.parse_term("w:num"))
   let t329 = @tactics.first_assum(@tactics.match_mp_tac)
   let t328 = @tactics.x_gen_tac(@parser.parse_term("w:num"))
   let t327 = @simp.once_rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t326 = @tactics.repeat_tac(@tactics.ap_term_tac)
-  let t325 = @simp.asm_rewrite_tac(@list.empty())
+  let t325 = @simp.asm_rewrite_tac(@list.List([]))
   let t324 = @tactics.repeat_tac(@tactics.strip_tac)
   let t323 = @simp.rewrite_tac(
     @list.List([@theorems.unwind_thm1(), @theorems.right_exists_and_thm()]),
@@ -3272,7 +3272,7 @@ fn step_29() -> Unit raise {
     ),
     t331,
   )
-  let t322 = @simp.asm_rewrite_tac(@list.empty())
+  let t322 = @simp.asm_rewrite_tac(@list.List([]))
   let t321 = @tactics.exists_tac(@parser.parse_term("y:num->B"))
   let t320 = @simp.rewrite_tac(
     @list.List([@theorems.unwind_thm1(), @theorems.right_exists_and_thm()]),
@@ -4280,7 +4280,7 @@ fn step_33() -> Unit raise {
         )(x372)
       },
       rights,
-      @list.empty(),
+      @list.List([]),
     )
     let alltys = @lib.itlist(
       fn(
@@ -4312,7 +4312,7 @@ fn step_33() -> Unit raise {
         )(x379)
       },
       tyargls,
-      @list.empty(),
+      @list.List([]),
     )
     let epstms = @lib.map(
       fn(x380 : @kernel.HolType) -> @kernel.Term raise {
@@ -4357,7 +4357,7 @@ fn step_33() -> Unit raise {
           },
           cargs,
         )
-        let args = @basics.make_args("a", @list.empty(), ttys)
+        let args = @basics.make_args("a", @list.List([]), ttys)
         let (rargs, iargs) = @lib.partition(
           fn(x386 : @kernel.Term) -> Bool raise {
             let t_1 = x386
@@ -4373,8 +4373,8 @@ fn step_33() -> Unit raise {
           let epstms_1 = x387
           let alltys_1 = x388
           let iargs_1 = x389
-          if alltys_1 == @list.empty() {
-            @list.empty()
+          if alltys_1 == @list.List([]) {
+            @list.List([])
           } else {
             let ty_2 = @lib.hd(alltys_1)
             try {
@@ -4437,8 +4437,8 @@ fn step_33() -> Unit raise {
     ) -> @list.List[@kernel.Term] raise {
       let n_2 = x400
       let rights_1 = x401
-      if rights_1 == @list.empty() {
-        @list.empty()
+      if rights_1 == @list.List([]) {
+        @list.List([])
       } else {
         let t403 = @lib.tl(rights_1)
         let t404 = mk_constructors(@lib.add63(n_2, 1L), t403)
@@ -4467,7 +4467,7 @@ fn step_33() -> Unit raise {
           s409(x408)
         },
         rights,
-        @list.empty(),
+        @list.List([]),
       ),
     )
     let conths = @lib.map(@kernel.assume_rule, condefs)
@@ -4495,7 +4495,7 @@ fn step_33() -> Unit raise {
         ).concat(acc)
       },
       def,
-      @list.empty(),
+      @list.List([]),
     )
     let idefs = @lib.map2(
       fn(
@@ -4540,13 +4540,13 @@ fn step_33() -> Unit raise {
         },
         args_1,
         a_1,
-        @list.empty(),
+        @list.List([]),
       )
       let conc = @kernel.mk_comb(
         @kernel.mk_var(@kernel.dest_vartype(r_2), predty),
         lapp,
       )
-      let rule = if conds == @list.empty() {
+      let rule = if conds == @list.List([]) {
         conc
       } else {
         @bool.mk_imp(@bool.list_mk_conj(conds), conc)
@@ -4632,7 +4632,7 @@ fn step_33() -> Unit raise {
         },
         ths,
       )
-      if useful == @list.empty() {
+      if useful == @list.List([]) {
         sofar_1
       } else {
         let follow_horn : (@kernel.Thm) -> @kernel.Thm raise = fn(
@@ -4724,7 +4724,7 @@ fn step_33() -> Unit raise {
           s451(x450)
         },
         @kernel.hyp(th3),
-        (th3, @list.empty()),
+        (th3, @list.List([])),
       )
       let mkname = "_mk_" + ename
       let destname = "_dest_" + ename
@@ -4758,7 +4758,7 @@ fn step_33() -> Unit raise {
           let t455 = @kernel.rand(bod_1)
           (@basics.conjuncts(@equal.lhand(bod_1)), t455)
         } else {
-          (@list.empty(), bod_1)
+          (@list.List([]), bod_1)
         }
         let asmlist = @lib.map(@kernel.dest_comb, asms_1)
         let (cpred, cterm) = @kernel.dest_comb(conc_1)
@@ -4927,10 +4927,10 @@ fn step_33() -> Unit raise {
         },
         newtys_1,
       )
-      let preds_2 = @basics.make_args("P", @list.empty(), ptypes)
+      let preds_2 = @basics.make_args("P", @list.List([]), ptypes)
       let args_2 = @basics.make_args(
         "x",
-        @list.empty(),
+        @list.List([]),
         @lib.map(
           fn(x490 : @kernel.Term) -> @kernel.HolType raise { recty_1 },
           preds_2,
@@ -5051,7 +5051,7 @@ fn step_33() -> Unit raise {
           let fn_ = @kernel.mk_var("fn", @basics.mk_fun_ty(recty_2, ranty))
           let fns = @basics.make_args(
             "fn",
-            @list.empty(),
+            @list.List([]),
             @lib.map(
               fn(x597 : @kernel.HolType) -> @kernel.HolType raise {
                 (fn(
@@ -5065,7 +5065,7 @@ fn step_33() -> Unit raise {
               domtys,
             ),
           )
-          let args_3 = @basics.make_args("a", @list.empty(), domtys)
+          let args_3 = @basics.make_args("a", @list.List([]), domtys)
           let rights_2 = @lib.map2(
             fn(
               x598 : (@kernel.Term, (@kernel.Term, @kernel.Term)),
@@ -5292,9 +5292,9 @@ fn step_33() -> Unit raise {
                 )(x645)
               },
               conthms_2,
-              @list.empty(),
+              @list.List([]),
             ),
-            (fxth6, @list.empty()),
+            (fxth6, @list.List([])),
           )
           let fxth8 = @bool.undisch_all(fxth7)
           @lib.itlist(
@@ -5306,7 +5306,7 @@ fn step_33() -> Unit raise {
               s648(x647)
             },
             @lib.subtract(@kernel.hyp(fxth8), eqs),
-            (fxth8, @list.empty()),
+            (fxth8, @list.List([])),
           ).0
         }
       }
@@ -5802,7 +5802,7 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash] munion_l(
 ) -> @list.List[TA] raise {
   let s1 = x363
   let s2 = x364
-  if s1 == @list.empty() {
+  if s1 == @list.List([]) {
     s2
   } else {
     let h1 = @lib.hd(s1)
@@ -6109,7 +6109,7 @@ fn[TD] derive_induction_theorem_l(
       s569(x568)
     },
     @kernel.hyp(th5),
-    (th5, @list.empty()),
+    (th5, @list.List([])),
   )
   let th7 = @bool.undisch_all(th6)
   @lib.itlist(
@@ -6121,7 +6121,7 @@ fn[TD] derive_induction_theorem_l(
       s572(x571)
     },
     @kernel.hyp(th7),
-    (th7, @list.empty()),
+    (th7, @list.List([])),
   ).0
 }
 
@@ -6212,7 +6212,7 @@ fn step_34() -> Unit raise {
     })(
       (fn(x735 : String) -> @list.List[String] raise { @lib.explode(x735) })(s),
     )
-    if rst_3 == @list.empty() {
+    if rst_3 == @list.List([]) {
       spec
     } else {
       raise Failure("parse_inductive_type_specification: junk after def")
@@ -6758,7 +6758,7 @@ fn step_40() -> Unit raise {
 ///|
 /// FORALL_OPTION_THM
 fn step_41() -> Unit raise {
-  let t796 = @simp.simp_tac(@list.empty())
+  let t796 = @simp.simp_tac(@list.List([]))
   let t795 = @simp.rewrite_tac(@list.List([option_induct()]))
   let t797 = @tactics.then_tac(
     @tactics.then_tac(
@@ -6791,7 +6791,7 @@ pub fn forall_option_thm() -> @kernel.Thm {
 ///|
 /// EXISTS_OPTION_THM
 fn step_42() -> Unit raise {
-  let t799 = @meson.meson_tac(@list.empty())
+  let t799 = @meson.meson_tac(@list.List([]))
   let t798 = @simp.rewrite_tac(@list.List([forall_option_thm()]))
   let t800 = @tactics.then_tac(
     @tactics.then_tac(
@@ -6800,7 +6800,7 @@ fn step_42() -> Unit raise {
         @simp.rewrite_tac(
           @list.List([
             @meson.meson(
-              @list.empty(),
+              @list.List([]),
               @parser.parse_term("(?x. P x) <=> ~(!x. ~P x)"),
             ),
           ]),
@@ -7014,7 +7014,7 @@ fn step_44() -> Unit raise {
         fn(x845 : @kernel.Term) -> @kernel.Term raise {
           let t = x845
           let (f_1, args) = if @nums.is_numeral(t) {
-            (t, @list.empty())
+            (t, @list.List([]))
           } else {
             @basics.strip_comb(t)
           }
@@ -7117,7 +7117,7 @@ fn step_44() -> Unit raise {
         )(x866)
       },
       lefts,
-      @list.empty(),
+      @list.List([]),
     )
     let pats = @lib.map(
       fn(x867 : @kernel.Term) -> @list.List[@kernel.Term] raise {
@@ -7184,8 +7184,8 @@ fn[TA, TB, TC : Eq + @lib.OCompare + @lib.OHash] allopairs_l(
   let f = x825
   let l = x826
   let m = x827
-  if l == @list.empty() {
-    @list.empty()
+  if l == @list.List([]) {
+    @list.List([])
   } else {
     let t829 = @lib.tl(m)
     let t830 = allopairs_l(f, @lib.tl(l), t829)
@@ -7351,7 +7351,7 @@ fn step_45() -> Unit raise {
         )(x907)
       },
       spats,
-      @list.empty(),
+      @list.List([]),
     )
     let rpatlist = @lib.map(
       fn(x908 : @kernel.Term) -> @list.List[@kernel.Term] raise {
@@ -7466,7 +7466,7 @@ pub fn distinctness_store() -> Ref[@list.List[(String, @kernel.Thm)]] {
 ///|
 /// injectivity_store
 fn step_49() -> Unit raise {
-  injectivity_store_c.set(Ref::{ val: @list.empty(), })
+  injectivity_store_c.set(Ref::{ val: @list.List([]), })
 }
 
 ///|
@@ -7488,11 +7488,11 @@ pub fn[TA, TB] extend_rectype_net(
 ) -> Unit raise {
   let (tyname, (_, _, rth)) = (x918, x919)
   let ths1 = @list.List([prove_constructors_distinct(rth)]) catch {
-    Failure(_) => @list.empty()
+    Failure(_) => @list.List([])
     e => raise e
   }
   let ths2 = @list.List([prove_constructors_injective(rth)]) catch {
-    Failure(_) => @list.empty()
+    Failure(_) => @list.List([])
     e => raise e
   }
   let canon_thl = @lib.itlist(
@@ -7500,7 +7500,7 @@ pub fn[TA, TB] extend_rectype_net(
       @simp.mk_rewrites(false, x920, x921)
     },
     ths1.concat(ths2),
-    @list.empty(),
+    @list.List([]),
   )
   let t923 = distinctness_store().val
   {
@@ -7655,7 +7655,7 @@ pub fn iso_refl() -> @kernel.Thm {
 ///|
 /// ISO_FUN
 fn step_55() -> Unit raise {
-  let t935 = @meson.meson_tac(@list.empty())
+  let t935 = @meson.meson_tac(@list.List([]))
   let t936 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([iso(), @class.fun_eq_thm()])),
     t935,
@@ -7682,7 +7682,7 @@ pub fn iso_fun() -> @kernel.Thm {
 ///|
 /// ISO_USAGE
 fn step_56() -> Unit raise {
-  let t937 = @meson.meson_tac(@list.empty())
+  let t937 = @meson.meson_tac(@list.List([]))
   let t938 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([iso(), @class.fun_eq_thm()])),
     t937,
@@ -7950,7 +7950,7 @@ fn step_57() -> Unit raise {
   ) -> (@list.List[@kernel.Term], @kernel.Thm) raise {
     let th_1 = x974
     if !@basics.is_exists(@kernel.concl(th_1)) {
-      (@list.empty(), th_1)
+      (@list.List([]), th_1)
     } else {
       let th1 = use_pth(th_1)
       let v1 = @kernel.rand(@kernel.rand(@kernel.concl(th1)))
@@ -8360,7 +8360,7 @@ fn step_57() -> Unit raise {
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ) raise {
                   let vtm = x1041
-                  @drule.term_match(@list.empty(), vtm, tm_2)
+                  @drule.term_match(@list.List([]), vtm, tm_2)
                 },
                 icjs,
               )
@@ -8392,7 +8392,7 @@ fn step_57() -> Unit raise {
               })(x1043)
             },
             cinsts,
-            @list.empty(),
+            @list.List([]),
           )
           let tvs = @lib.subtract(
             @basics.strip_forall(@kernel.concl(ith0)).0,
@@ -8435,7 +8435,7 @@ fn step_57() -> Unit raise {
                   @list.List[(@kernel.HolType, @kernel.HolType)],
                 ) raise {
                   let vtm_1 = x1051
-                  @drule.term_match(@list.empty(), vtm_1, tm_3)
+                  @drule.term_match(@list.List([]), vtm_1, tm_3)
                 },
                 icjs_1,
               )
@@ -8467,7 +8467,7 @@ fn step_57() -> Unit raise {
               })(x1053)
             },
             cinsts_1,
-            @list.empty(),
+            @list.List([]),
           )
           let tvs_1 = @lib.subtract(
             @basics.strip_forall(@kernel.concl(ith1)).0,
@@ -8548,7 +8548,7 @@ fn step_57() -> Unit raise {
       @simp.mk_rewrites(false, x1078, x1079)
     },
     @list.List([@class.fun_eq_thm()]),
-    @list.empty(),
+    @list.List([]),
   )
   let net = @lib.itlist(
     (
@@ -8590,7 +8590,7 @@ fn step_57() -> Unit raise {
     fn(x1090 : @kernel.HolType) -> Bool raise {
       let ty = x1090
       !@kernel.is_vartype(ty) &&
-      !(@lib.intersect(@kernel.tyvars(ty), vs_1) == @list.empty())
+      !(@lib.intersect(@kernel.tyvars(ty), vs_1) == @list.List([]))
     }
   }
   fn modify_type(
@@ -8710,7 +8710,7 @@ fn step_57() -> Unit raise {
         x1114 : @kernel.HolType,
       ) -> @list.List[(@kernel.HolType, @kernel.HolType)] raise {
         let vty = x1114
-        @basics.type_match(vty, nty, @list.empty())
+        @basics.type_match(vty, nty, @list.List([]))
       },
       rtys,
     )
@@ -8742,7 +8742,7 @@ fn step_57() -> Unit raise {
         )(x1122)
       },
       cjs_p,
-      @list.empty(),
+      @list.List([]),
     )
     let pcons = @lib.map(
       fn(x1123 : @kernel.HolType) -> @list.List[@kernel.Term] raise {
@@ -8850,7 +8850,7 @@ fn step_57() -> Unit raise {
             },
             def_1,
           ),
-          @list.empty(),
+          @list.List([]),
         ),
       ),
     )
@@ -8913,11 +8913,11 @@ fn step_57() -> Unit raise {
           )(x1152)
         },
         def_1,
-        @list.empty(),
+        @list.List([]),
       ),
     )
     let rectys = @lib.filter(is_nested(newtys), utys)
-    if rectys == @list.empty() {
+    if rectys == @list.List([]) {
       let (th1_1, th2_1) = define_type_basecase_l(def_1)
       (n_2, th1_1, th2_1)
     } else {
@@ -9023,7 +9023,7 @@ fn step_57() -> Unit raise {
           )(x1168)
         },
         @basics.variables(@kernel.concl(irth3)),
-        @list.empty(),
+        @list.List([]),
       )
       let isoths = @bool.conjuncts_rule(isoth)
       let isotys_1 = @lib.map(
@@ -9089,7 +9089,7 @@ fn step_57() -> Unit raise {
           )(x1183)
         },
         ctylist,
-        @list.empty(),
+        @list.List([]),
       )
       let isoths_p = @lib.map(
         (x1184 : @kernel.HolType) => lift_type_bijections(isoths, x1184),
@@ -9236,7 +9236,7 @@ fn step_57() -> Unit raise {
         },
         def_3,
       ),
-      @list.empty(),
+      @list.List([]),
     )
     let (p_2, ith0_2, rth0_2) = define_type_nested(def_3)
     let (avs_1, etm) = @basics.strip_forall(@kernel.concl(rth0_2))
@@ -9285,7 +9285,7 @@ fn step_57() -> Unit raise {
     )
     let tavs = @basics.make_args(
       "f",
-      @list.empty(),
+      @list.List([]),
       @lib.map(
         fn(x1214 : @kernel.Term) -> @kernel.HolType raise {
           @kernel.type_of(x1214)
@@ -9504,7 +9504,7 @@ pub fn define_type(x1217 : String) -> (@kernel.Thm, @kernel.Thm) raise {
           },
           defspec,
         ),
-        @list.empty(),
+        @list.List([]),
       )
       let t1226 = Int::to_int64(@lib.length(newtypes))
       if !(Int::to_int64(@lib.length(@lib.setify(newtypes))) == t1226) {
@@ -9572,7 +9572,7 @@ pub fn match_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// UNWIND_CONV, MATCH_CONV
 fn step_59() -> Unit raise {
-  let t1234 = @meson.meson_tac(@list.empty())
+  let t1234 = @meson.meson_tac(@list.List([]))
   let t1233 = @simp.asm_rewrite_tac(@list.List([@class.cond_id()]))
   let t1235 = @tactics.then_tac(
     @tactics.then_tac(
@@ -9587,7 +9587,7 @@ fn step_59() -> Unit raise {
     ),
     t1235,
   )
-  let t1236 = @meson.meson_tac(@list.empty())
+  let t1236 = @meson.meson_tac(@list.List([]))
   let t1237 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([@pair._match(), @pair._seqpattern(), @pair._function()]),
@@ -9600,7 +9600,7 @@ fn step_59() -> Unit raise {
     ),
     t1237,
   )
-  let t1238 = @meson.meson_tac(@list.empty())
+  let t1238 = @meson.meson_tac(@list.List([]))
   let t1239 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -9624,7 +9624,7 @@ fn step_59() -> Unit raise {
     ),
     t1240,
   )
-  let t1241 = @meson.meson_tac(@list.empty())
+  let t1241 = @meson.meson_tac(@list.List([]))
   let t1242 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -9641,7 +9641,7 @@ fn step_59() -> Unit raise {
     ),
     t1242,
   )
-  let t1243 = @meson.meson_tac(@list.empty())
+  let t1243 = @meson.meson_tac(@list.List([]))
   let pth_5 = @tactics.prove(
     @parser.parse_term("(if ?!z. z = k then @z. z = k else @x. F) = k"),
     t1243,
@@ -10042,15 +10042,15 @@ fn step_60() -> Unit raise {
     fn(x1313 : @kernel.Term) -> @kernel.Thm raise { conv(x1312, x1313) }
   }
   let t1315 = @meson.meson(
-    @list.empty(),
+    @list.List([]),
     @parser.parse_term("(!x. a = x ==> q x) <=> q a"),
   )
   let t1316 = @meson.meson(
-    @list.empty(),
+    @list.List([]),
     @parser.parse_term("(!x. x = a ==> q x) <=> q a"),
   )
   let t1317 = @meson.meson(
-    @list.empty(),
+    @list.List([]),
     @parser.parse_term("(!x. a = x /\\ p x ==> q x) <=> (p a ==> q a)"),
   )
   let baseconv : (@kernel.Term) -> @kernel.Thm raise = @simp.gen_rewrite_conv(
@@ -10061,7 +10061,7 @@ fn step_60() -> Unit raise {
     },
     @list.List([
       @meson.meson(
-        @list.empty(),
+        @list.List([]),
         @parser.parse_term("(!x. x = a /\\ p x ==> q x) <=> (p a ==> q a)"),
       ),
       t1317,

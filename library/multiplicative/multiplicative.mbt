@@ -63,7 +63,7 @@ fn step_3() -> Unit raise {
     @tactics.x_gen_tac,
     @list.List([@parser.parse_term("m:num"), t3]),
   )
-  let t2 = @simp.asm_simp_tac(@list.empty())
+  let t2 = @simp.asm_simp_tac(@list.List([]))
   let t11 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -120,7 +120,7 @@ pub fn multiplicative_v1() -> @kernel.Thm {
 /// MULTIPLICATIVE_IGNOREZERO
 fn step_4() -> Unit raise {
   let t25 = @meson.asm_meson_tac(@list.List([@arith.mult_eq_0()]))
-  let t24 = @simp.asm_rewrite_tac(@list.empty())
+  let t24 = @simp.asm_rewrite_tac(@list.List([]))
   let t23 = @tactics.disch_then(fn(
     x21 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -584,7 +584,7 @@ fn step_5() -> Unit raise {
       ),
     ),
   )
-  let t41 = @simp.asm_simp_tac(@list.empty())
+  let t41 = @simp.asm_simp_tac(@list.List([]))
   let t40 = @parser.parse_term("b:num")
   let t85 = @list.List([
     @tactics.then_tac(
@@ -1087,7 +1087,7 @@ pub fn multiplicative_expand() -> @kernel.Thm {
 ///|
 /// MULTIPLICATIVE_CONVOLUTION
 fn step_6() -> Unit raise {
-  let t166 = @simp.asm_simp_tac(@list.empty())
+  let t166 = @simp.asm_simp_tac(@list.List([]))
   let t163 = @drule.match_mp(
     @int.number_rule(
       @parser.parse_term(
@@ -2562,7 +2562,7 @@ fn step_22() -> Unit raise {
     @tactics.x_gen_tac,
     @list.List([@parser.parse_term("m:num"), t237]),
   )
-  let t236 = @simp.asm_simp_tac(@list.empty())
+  let t236 = @simp.asm_simp_tac(@list.List([]))
   let t245 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -2681,7 +2681,7 @@ pub fn real_multiplicative_delta() -> @kernel.Thm {
 /// REAL_MULTIPLICATIVE_IGNOREZERO
 fn step_25() -> Unit raise {
   let t263 = @meson.asm_meson_tac(@list.List([@arith.mult_eq_0()]))
-  let t262 = @simp.asm_rewrite_tac(@list.empty())
+  let t262 = @simp.asm_rewrite_tac(@list.List([]))
   let t261 = @tactics.disch_then(fn(
     x259 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2853,7 +2853,7 @@ pub fn real_multiplicative_ignorezero() -> @kernel.Thm {
 ///|
 /// REAL_MULTIPLICATIVE_CONVOLUTION
 fn step_26() -> Unit raise {
-  let t342 = @simp.asm_simp_tac(@list.empty())
+  let t342 = @simp.asm_simp_tac(@list.List([]))
   let t339 = @drule.match_mp(
     @int.number_rule(
       @parser.parse_term(
@@ -3591,7 +3591,7 @@ fn step_30() -> Unit raise {
   let t350 = @simp.rewrite_tac(
     @list.List([
       @meson.meson(
-        @list.empty(),
+        @list.List([]),
         @parser.parse_term("~(?x. P x /\\ Q x) <=> !x. P x ==> ~Q x"),
       ),
     ]),
@@ -3736,9 +3736,9 @@ pub fn real_abs_mobius() -> @kernel.Thm {
 ///|
 /// MOBIUS_MULT
 fn step_34() -> Unit raise {
-  let t381 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t381 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t382 = @tactics.then_tac(@tactics.mp_tac(@prime.prime_divprod_eq()), t381)
-  let t380 = @sets.set_tac(@list.empty())
+  let t380 = @sets.set_tac(@list.List([]))
   let t378 = @drule.match_mp(@prime.coprime_prime())
   let t383 = @list.List([
     @tactics.then_tac(
@@ -4079,7 +4079,7 @@ fn step_38() -> Unit raise {
     t419,
     t418,
   ])
-  let t416 = @simp.asm_rewrite_tac(@list.empty())
+  let t416 = @simp.asm_rewrite_tac(@list.List([]))
   let t415 = @tactics.repeat_tac(@tactics.strip_tac)
   let t414 = @simp.rewrite_tac(
     @list.List([

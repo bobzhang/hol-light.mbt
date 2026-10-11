@@ -27,7 +27,7 @@ pub fn[TA, TB, TC] allpairs(x1 : (TC) -> ((TB) -> TA raise) raise, x2 : @list.Li
         })(x8)(l2)
       })(x9))
     })(f(x10))(x11)
-  }, l1, @list.empty())
+  }, l1, @list.List([]))
 }
 
 ///|
@@ -62,17 +62,17 @@ pub fn[TA] sort(x15 : (TA) -> ((TA) -> Bool raise) raise) -> ((@list.List[TA]) -
     let l2 = x18
     match (l1, l2) {
       (More(s, tail=Empty), Empty) => s
-      (l, Empty) => mergepairs(@list.empty(), l)
-      (l_1, More(s1, tail=Empty)) => mergepairs(l_1.prepend(s1), @list.empty())
+      (l, Empty) => mergepairs(@list.List([]), l)
+      (l_1, More(s1, tail=Empty)) => mergepairs(l_1.prepend(s1), @list.List([]))
       (l_2, More(s1_1, tail=More(s2, tail=ss))) => mergepairs(l_2.prepend(merge(ord, s1_1, s2)), ss)
     }
   }
   fn(x19 : @list.List[TA]) -> @list.List[TA] raise {
     let l_3 = x19
     if @list.List::is_empty(l_3) {
-      @list.empty()
+      @list.List([])
     } else {
-      mergepairs(@list.empty(), @lib.map(fn(x20 : TA) -> @list.List[TA] raise {
+      mergepairs(@list.List([]), @lib.map(fn(x20 : TA) -> @list.List[TA] raise {
         let x = x20
         @list.List([x])
       }, l_3))
@@ -178,7 +178,7 @@ fn step_2() -> Unit raise {
         if (l == cx_tm) {
           let x = @calc_int.rat_of_term(r)
           if @num.eq_num(x, @num.num_of_int64(0L)) {
-            @list.empty()
+            @list.List([])
           } else {
             @list.List([(x, @lib.map(fn(x27 : @kernel.Term) -> Int64 raise {
               let v = x27
@@ -353,7 +353,7 @@ pub fn grob_mul(x63 : @list.List[(@num.Num, @list.List[Int64])], x64 : @list.Lis
   let l1 = x63
   let l2 = x64
   match l1 {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(h1, tail=t1) => {
       let t65 = grob_mul(t1, l2)
       grob_add(grob_cmul(h1, l2), t65)
@@ -490,8 +490,8 @@ pub fn spoly(x97 : (@num.Num, @list.List[Int64]), x98 : (@list.List[(@num.Num, @
   let ph1 = x98
   let ph2 = x99
   match (ph1, ph2) {
-    ((Empty, h), p) => (@list.empty(), h)
-    (p_1, (Empty, h_1)) => (@list.empty(), h_1)
+    ((Empty, h), p) => (@list.List([]), h)
+    (p_1, (Empty, h_1)) => (@list.List([]), h_1)
     ((More(cm1, tail=ptl1), his1), (More(cm2, tail=ptl2), his2)) => {
       let t101 = History::Mmul(mdiv((@num.minus_num(cm.0), cm.1), cm2), his2)
       let t102 = History::Add(History::Mmul(mdiv(cm, cm1), his1), t101)
@@ -630,7 +630,7 @@ pub fn grobner(x133 : @list.List[(@list.List[(@num.Num, @list.List[Int64])], His
       } else {
         let sph = (sp, History::Start(Int::to_int64(@lib.length(histories))))
         if constant_poly(sp) {
-          grobner(histories.prepend((sp, hist)), basis.prepend(sph), @list.empty())
+          grobner(histories.prepend((sp, hist)), basis.prepend(sph), @list.List([]))
         } else {
           let rawcps = @lib.map(fn(x138 : (@list.List[(@num.Num, @list.List[Int64])], History)) -> ((@num.Num, @list.List[Int64]), ((@list.List[(@num.Num, @list.List[Int64])], History), (@list.List[(@num.Num, @list.List[Int64])], History))) raise {
             let p = x138
@@ -847,7 +847,7 @@ fn step_7() -> Unit raise {
   }
   grobvars_c.set(fn(x177 : @kernel.Term) -> @list.List[@kernel.Term] raise {
     let tm_1 = x177
-    @lib.setify(grobvars_1(tm_1, @list.empty()))
+    @lib.setify(grobvars_1(tm_1, @list.List([])))
   })
 }
 
@@ -888,7 +888,7 @@ fn step_8() -> Unit raise {
       let (l_1, r_1) = @kernel.dest_eq(eq)
       let t184 = grobvars(r_1)
       @lib.union(@lib.union(grobvars(l_1), t184), acc)
-    }, cjs, @list.empty())
+    }, cjs, @list.List([]))
     let vars_1 = sort(fn(x185 : @kernel.Term) -> ((@kernel.Term) -> Bool raise) raise {
       let x = x185
       fn(x186 : @kernel.Term) -> Bool raise {
@@ -995,13 +995,13 @@ pub fn[TA] resolve_proof(x200 : @list.List[TA], x201 : History) -> @list.List[(I
         let a = try {
           @lib.assoc(n_2, lis1)
         } catch {
-          Failure(_) => @list.empty()
+          Failure(_) => @list.List([])
           e => raise e
         }
         let b = try {
           @lib.assoc(n_2, lis2)
         } catch {
-          Failure(_) => @list.empty()
+          Failure(_) => @list.List([])
           e => raise e
         }
         (n_2, grob_add(a, b))
@@ -1098,7 +1098,7 @@ fn step_10() -> Unit raise {
   }
   dependencies_c.set(fn(x237 : History) -> @list.List[Int64] raise {
     let prf_1 = x237
-    @lib.setify(dependencies_1(prf_1, @list.empty()))
+    @lib.setify(dependencies_1(prf_1, @list.List([])))
   })
 }
 
@@ -1191,14 +1191,14 @@ fn step_11() -> Unit raise {
       })(x259))
     }, prfs_1)
     let depl = dependencies(prf)
-    let need = involved(deps, @list.empty(), depl)
+    let need = involved(deps, @list.List([]), depl)
     let pprfs = @lib.map2(fn(x260 : (@list.List[(@num.Num, @list.List[Int64])], History), x261 : Int64) -> @list.List[(Int64, @list.List[(@num.Num, @list.List[Int64])])] raise {
       let p_2 = x260
       let n_2 = x261
       if @lib.mem(n_2, need) {
         resolve_proof(vars_1, p_2.1)
       } else {
-        @list.empty()
+        @list.List([])
       }
     }, prfs_1, @lib.range(0L, @lib.sub63(Int::to_int64(@lib.length(prfs_1)), 1L)))
     let ppr = resolve_proof(vars_1, prf)

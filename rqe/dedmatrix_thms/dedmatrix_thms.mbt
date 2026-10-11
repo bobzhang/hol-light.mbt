@@ -218,7 +218,7 @@ pub fn rest_int_gt_lem() -> @kernel.Thm {
 ///|
 /// INTERPSIGN_SUBSET
 fn step_11() -> Unit raise {
-  let t54 = @meson.meson_tac(@list.empty())
+  let t54 = @meson.meson_tac(@list.List([]))
   let t53 = @simp.rewrite_tac(@list.List([@defs.interpsign()]))
   let t55 = @tactics.then_tac(@tactics.then_tac(@tactics.struct_cases_tac(@bool.ispec(@parser.parse_term("s:sign"), @defs.sign_cases())), t53), t54)
   let t56 = @rqe_tactics_ext.repeat_n(4L, @tactics.strip_tac)
@@ -238,7 +238,7 @@ pub fn interpsign_subset() -> @kernel.Thm {
 ///|
 /// INTERPSIGNS_SUBSET
 fn step_12() -> Unit raise {
-  let t58 = @simp.asm_rewrite_tac(@list.empty())
+  let t58 = @simp.asm_rewrite_tac(@list.List([]))
   let t59 = @tactics.first_assum(@tactics.match_mp_tac)
   let t60 = @rqe_tactics_ext.rewrite_assums(@list.List([@lists.all2(), @defs.interpsigns(), @defs.interpsign()]))
   let t61 = @meson.asm_meson_tac(@list.List([@sets.subset(), @sets.in_()]))

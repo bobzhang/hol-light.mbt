@@ -566,7 +566,7 @@ fn step_20() -> Unit raise {
       }
     })(((x44 : @kernel.Thm) => @equal.ap_term(t43, x44))(x45))
   })
-  let t39 = @simp.asm_rewrite_tac(@list.empty())
+  let t39 = @simp.asm_rewrite_tac(@list.List([]))
   let t38 = @class.asm_cases_tac(@parser.parse_term("x = &0"))
   let t37 = @simp.asm_rewrite_tac(
     @list.List([@calc_int.real_mul_lzero(), @calc_int.real_mul_rzero()]),
@@ -1700,7 +1700,7 @@ fn step_30() -> Unit raise {
               @equal.depth_binop_conv(or_tm, absremover)(ibod),
             )
             let th2_2 = overall(
-              @list.empty(),
+              @list.List([]),
               @list.List([
                 @bool.specl(
                   avs,
@@ -1866,7 +1866,7 @@ fn step_31() -> Unit raise {
           les,
         ) catch {
           Failure(_) =>
-            if vars == @list.empty() {
+            if vars == @list.List([]) {
               raise Failure("linear_ineqs: no contradiction")
             } else {
               let ineqs = les.concat(lts)
@@ -2226,7 +2226,7 @@ fn step_31() -> Unit raise {
                   )(x238)
                 },
                 les_1.concat(lts_1),
-                @list.empty(),
+                @list.List([]),
               ),
               @list.List([one_tm]),
             )
@@ -2472,7 +2472,7 @@ fn step_31() -> Unit raise {
             )(x273)
           },
           eq_pols.concat(le_pols.concat(lt_pols)),
-          @list.empty(),
+          @list.List([]),
         ),
       )
       let (suc_aliens, aliens) = @lib.partition(is_suc_alien, all_aliens)

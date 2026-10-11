@@ -451,7 +451,7 @@ fn step_21() -> Unit raise {
   }))
   let t100 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@transcendentals.cos_mono_le()), t98), t99), @calc_rat.real_arith_tac), @tactics.all_tac])
   let t94 = @class.asm_cases_tac(@parser.parse_term("b1 <= pi"))
-  let t93 = @simp.asm_rewrite_tac(@list.empty())
+  let t93 = @simp.asm_rewrite_tac(@list.List([]))
   let t92 = @tactics.exists_tac(@parser.parse_term("cos a1"))
   let t91 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t88 = @simp.rewrite_tac(@list.List([@interval_arith.interval_arith()]))
@@ -461,7 +461,7 @@ fn step_21() -> Unit raise {
       s86(x87)
     }
   })), t88), @calc_rat.real_arith_tac)
-  let t84 = @simp.asm_rewrite_tac(@list.empty())
+  let t84 = @simp.asm_rewrite_tac(@list.List([]))
   let t90 = @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("k:real")), t84), t89, @tactics.all_tac])
   let t83 = @tactics.repeat_tac(@tactics.conj_tac)
   let t82 = @simp.asm_rewrite_tac(@list.List([@real.real_max_aci()]))
@@ -523,10 +523,10 @@ fn step_23() -> Unit raise {
   })
   let t132 = @simp.rewrite_tac(@list.List([@equal.gsym(cos_minus_pi())]))
   let t131 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@calc_int.real_le_neg2())]))
-  let t130 = @simp.asm_rewrite_tac(@list.empty())
+  let t130 = @simp.asm_rewrite_tac(@list.List([]))
   let t129 = @tactics.exists_tac(@parser.parse_term("cos b1"))
   let t128 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t126 = @simp.asm_rewrite_tac(@list.empty())
+  let t126 = @simp.asm_rewrite_tac(@list.List([]))
   let t127 = @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("k:real")), t126), @tactics.all_tac])
   let t125 = @tactics.repeat_tac(@tactics.conj_tac)
   let t124 = @simp.asm_rewrite_tac(@list.List([@real.real_max_aci()]))
@@ -574,7 +574,7 @@ pub fn cos_case3() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   let t163 = @simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(a + pi) + b = (a + b) + pi")), @real.real_le_radd()]))
   let t164 = @list.List([@simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(a + pi) + b = (a + b) + pi")), @real.real_le_radd()])), t163])
-  let t162 = @simp.asm_rewrite_tac(@list.empty())
+  let t162 = @simp.asm_rewrite_tac(@list.List([]))
   let t161 = @tactics.exists_tac(@parser.parse_term("k:real"))
   let t159 = @simp.rewrite_tac(@list.List([@interval_arith.interval_arith()]))
   let t160 = @tactics.try_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.pop_assum(fn(x156 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -629,7 +629,7 @@ pub fn cos_case4() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let t186 = @simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(a + pi) + b = (a + b) + pi")), @real.real_le_radd()]))
   let t187 = @list.List([@simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(a + pi) + b = (a + b) + pi")), @real.real_le_radd()])), t186])
-  let t185 = @simp.asm_rewrite_tac(@list.empty())
+  let t185 = @simp.asm_rewrite_tac(@list.List([]))
   let t184 = @tactics.exists_tac(@parser.parse_term("k:real"))
   let t182 = @simp.rewrite_tac(@list.List([@interval_arith.interval_arith()]))
   let t183 = @tactics.try_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.pop_assum(fn(x179 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -686,7 +686,7 @@ pub fn cos_case5() -> @kernel.Thm {
 fn step_29() -> Unit raise {
   let t207 = @simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(a + pi) + b = (a + b) + pi")), @real.real_le_radd()]))
   let t208 = @list.List([@simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(a + pi) + b = (a + b) + pi")), @real.real_le_radd()])), t207])
-  let t206 = @simp.asm_rewrite_tac(@list.empty())
+  let t206 = @simp.asm_rewrite_tac(@list.List([]))
   let t205 = @tactics.exists_tac(@parser.parse_term("k:real"))
   let t203 = @simp.rewrite_tac(@list.List([@interval_arith.interval_arith()]))
   let t204 = @tactics.try_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.pop_assum(fn(x200 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -741,7 +741,7 @@ pub fn cos_case6() -> @kernel.Thm {
 fn step_31() -> Unit raise {
   let t228 = @simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(a + pi) + b = (a + b) + pi")), @real.real_le_radd()]))
   let t229 = @list.List([@simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(a + pi) + b = (a + b) + pi")), @real.real_le_radd()])), t228])
-  let t227 = @simp.asm_rewrite_tac(@list.empty())
+  let t227 = @simp.asm_rewrite_tac(@list.List([]))
   let t226 = @tactics.exists_tac(@parser.parse_term("k:real"))
   let t224 = @simp.rewrite_tac(@list.List([@interval_arith.interval_arith()]))
   let t225 = @tactics.try_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.pop_assum(fn(x221 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -907,7 +907,7 @@ fn step_38() -> Unit raise {
       s263(x264)
     }
   }))
-  let t261 = @simp.asm_rewrite_tac(@list.empty())
+  let t261 = @simp.asm_rewrite_tac(@list.List([]))
   let t260 = @tactics.match_mp_tac(@transcendentals.cos_mono_le())
   let t259 = @simp.rewrite_tac(@list.List([@equal.gsym(cos_pi_minus())]))
   let t258 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_le_neg2()]))
@@ -939,7 +939,7 @@ fn step_39() -> Unit raise {
       s277(x278)
     }
   }))
-  let t275 = @simp.asm_rewrite_tac(@list.empty())
+  let t275 = @simp.asm_rewrite_tac(@list.List([]))
   let t274 = @tactics.match_mp_tac(@transcendentals.cos_mono_le())
   let t273 = @simp.rewrite_tac(@list.List([@equal.gsym(cos_pi_minus())]))
   let t272 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_le_neg2()]))
@@ -971,14 +971,14 @@ fn step_40() -> Unit raise {
       s294(x295)
     }
   }))
-  let t292 = @simp.asm_rewrite_tac(@list.empty())
+  let t292 = @simp.asm_rewrite_tac(@list.List([]))
   let t291 = @tactics.match_mp_tac(@transcendentals.cos_mono_le())
   let t290 = @list.List([@simp.rewrite_tac(@list.List([cos_2pi_minus()])), @tactics.all_tac])
   let t289 = @tactics.subgoal_then(@parser.parse_term("cos x = cos (&2 * pi - x)"), fn(x287 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x287
     @simp.once_rewrite_tac(@list.List([th]))
   })
-  let t286 = @simp.asm_rewrite_tac(@list.empty())
+  let t286 = @simp.asm_rewrite_tac(@list.List([]))
   let t285 = @tactics.exists_tac(@parser.parse_term("cos t"))
   let t284 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t283 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -1007,14 +1007,14 @@ fn step_41() -> Unit raise {
       s311(x312)
     }
   }))
-  let t309 = @simp.asm_rewrite_tac(@list.empty())
+  let t309 = @simp.asm_rewrite_tac(@list.List([]))
   let t308 = @tactics.match_mp_tac(@transcendentals.cos_mono_le())
   let t307 = @list.List([@simp.rewrite_tac(@list.List([cos_2pi_minus()])), @tactics.all_tac])
   let t306 = @tactics.subgoal_then(@parser.parse_term("cos x = cos (&2 * pi - x)"), fn(x304 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x304
     @simp.once_rewrite_tac(@list.List([th]))
   })
-  let t303 = @simp.asm_rewrite_tac(@list.empty())
+  let t303 = @simp.asm_rewrite_tac(@list.List([]))
   let t302 = @tactics.exists_tac(@parser.parse_term("cos t"))
   let t301 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t300 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -1043,9 +1043,9 @@ fn step_42() -> Unit raise {
       s329(x330)
     }
   }))
-  let t327 = @simp.asm_rewrite_tac(@list.empty())
+  let t327 = @simp.asm_rewrite_tac(@list.List([]))
   let t326 = @tactics.match_mp_tac(@transcendentals.cos_mono_le())
-  let t325 = @simp.asm_rewrite_tac(@list.empty())
+  let t325 = @simp.asm_rewrite_tac(@list.List([]))
   let t324 = @tactics.exists_tac(@parser.parse_term("cos t"))
   let t323 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t322 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_le_neg2()]))
@@ -1080,9 +1080,9 @@ fn step_43() -> Unit raise {
       s347(x348)
     }
   }))
-  let t345 = @simp.asm_rewrite_tac(@list.empty())
+  let t345 = @simp.asm_rewrite_tac(@list.List([]))
   let t344 = @tactics.match_mp_tac(@transcendentals.cos_mono_le())
-  let t343 = @simp.asm_rewrite_tac(@list.empty())
+  let t343 = @simp.asm_rewrite_tac(@list.List([]))
   let t342 = @tactics.exists_tac(@parser.parse_term("cos t"))
   let t341 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t340 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_le_neg2()]))
@@ -1138,7 +1138,7 @@ fn step_45() -> Unit raise {
       s380(x381)
     }
   }))
-  let t378 = @simp.asm_rewrite_tac(@list.empty())
+  let t378 = @simp.asm_rewrite_tac(@list.List([]))
   let t377 = @tactics.match_mp_tac(@real.real_le_mul2())
   let t376 = @simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(&2 * pi) * z = z * (&2 * pi)"))]))
   let t375 = @tactics.exists_tac(@parser.parse_term("z * lo:real"))
@@ -1153,7 +1153,7 @@ fn step_45() -> Unit raise {
       s368(x369)
     }
   }))
-  let t366 = @simp.asm_rewrite_tac(@list.empty())
+  let t366 = @simp.asm_rewrite_tac(@list.List([]))
   let t365 = @tactics.match_mp_tac(@real.real_le_mul2())
   let t364 = @simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(&2 * pi) * z = z * (&2 * pi)"))]))
   let t363 = @tactics.exists_tac(@parser.parse_term("z * hi:real"))
@@ -1190,7 +1190,7 @@ fn step_46() -> Unit raise {
       s411(x412)
     }
   }))
-  let t409 = @simp.asm_rewrite_tac(@list.empty())
+  let t409 = @simp.asm_rewrite_tac(@list.List([]))
   let t408 = @tactics.match_mp_tac(@real.real_le_mul2())
   let t407 = @simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(&2 * pi) * z = z * (&2 * pi)"))]))
   let t406 = @tactics.exists_tac(@parser.parse_term("z * hi:real"))
@@ -1204,7 +1204,7 @@ fn step_46() -> Unit raise {
       s400(x401)
     }
   }))
-  let t398 = @simp.asm_rewrite_tac(@list.empty())
+  let t398 = @simp.asm_rewrite_tac(@list.List([]))
   let t397 = @tactics.match_mp_tac(@real.real_le_mul2())
   let t396 = @simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(&2 * pi) * z = z * (&2 * pi)"))]))
   let t395 = @tactics.exists_tac(@parser.parse_term("z * lo:real"))
@@ -1378,7 +1378,7 @@ fn step_53() -> Unit raise {
       s450(x451)
     }
   }))
-  let t448 = @simp.asm_rewrite_tac(@list.empty())
+  let t448 = @simp.asm_rewrite_tac(@list.List([]))
   let t447 = @tactics.exists_tac(@parser.parse_term("k:real"))
   let t453 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t447), t448), t452), @calc_rat.real_arith_tac)
   let t454 = (@parser.parse_term("a2 <= a1 /\\ b1 <= b2 /\\\n     (?k. integer k /\\ a1 <= a + (&2 * pi) * k /\\ b + (&2 * pi) * k <= b1)\n   ==> (?k. integer k /\\ a2 <= a + (&2 * pi) * k /\\ b + (&2 * pi) * k <= b2)"), t453)
@@ -1822,7 +1822,7 @@ pub fn correct_pi(x520 : Int64, x521 : @kernel.Term, x522 : @kernel.Thm) -> ((@l
   let pi_th = @lib.array_get(@atn_eval.pi_approx_array(), @lib.int63_to_int(pp))
   let (flag, le_th) = @arith_float.float_prove_le_interval(a1_tm)(pi_th)
   if flag {
-    (@list.empty(), a1_tm, neg_pi_le_a1_th, le_th)
+    (@list.List([]), a1_tm, neg_pi_le_a1_th, le_th)
   } else {
     let bounds = @kernel.rand(@kernel.concl(pi_th))
     let (ltm, hi_tm) = @kernel.dest_comb(bounds)
@@ -1850,7 +1850,7 @@ pub fn correct_ab_sum(x527 : Int64, x528 : @kernel.Term, x529 : @kernel.Term) ->
   if flag {
     let th0 = @kernel.inst_rule(@list.List([(lo_tm, @misc_vars.lo_var_real()), (hi_tm, @misc_vars.hi_var_real()), (n_tm, @misc_vars.n_var_real()), (a1_tm, @misc_vars.a1_var_real()), (b1_tm, @misc_vars.b1_var_real())]), ab_sum2_correction())
     let th1 = @lib.itlist(@misc_functions.my_prove_hyp, @list.List([two_pi_th, a1_add_b1_hi, n_le_th]), th0)
-    ((-1L), @list.empty(), b1_tm, th1)
+    ((-1L), @list.List([]), b1_tm, th1)
   } else {
     let a1_add_b1_lo = @arith_float.float_add_lo_v1(pp)(a1_tm)(b1_tm)
     let m_tm = @kernel.rand(@kernel.rator(@kernel.concl(a1_add_b1_lo)))
@@ -1858,7 +1858,7 @@ pub fn correct_ab_sum(x527 : Int64, x528 : @kernel.Term, x529 : @kernel.Term) ->
     if flag_1 {
       let th0_1 = @kernel.inst_rule(@list.List([(lo_tm, @misc_vars.lo_var_real()), (hi_tm, @misc_vars.hi_var_real()), (m_tm, @misc_vars.m_var_real()), (a1_tm, @misc_vars.a1_var_real()), (b1_tm, @misc_vars.b1_var_real())]), ab_sum4_correction())
       let th1_1 = @lib.itlist(@misc_functions.my_prove_hyp, @list.List([two_pi_th, a1_add_b1_lo, m_ge_th]), th0_1)
-      (1L, @list.empty(), b1_tm, th1_1)
+      (1L, @list.List([]), b1_tm, th1_1)
     } else {
       let t_tm = @kernel.rand(@kernel.concl(sub_th))
       let n_sub_m = @arith_float.float_sub_hi_v1(pp)(n_tm)(m_tm)

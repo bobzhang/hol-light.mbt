@@ -79,7 +79,7 @@ pub fn[A] empty_net() -> Net[A] {
     cnets: @hashmap.HashMap::new(),
     lcnets: @hashmap.HashMap::new(),
     lnets: @hashmap.HashMap::new(),
-    tips: @list.empty(),
+    tips: @list.List([]),
   }
 }
 
@@ -109,7 +109,7 @@ fn label_to_store(lconsts : List[Term], tm : Term) -> (Label, List[Term]) {
       (Lnet(args.length()), args.prepend(bod1))
     }
     Var(name, _) if @lib.mem(op, lconsts) => (Lcnet(name, args.length()), args)
-    _ => (Vnet, @list.empty())
+    _ => (Vnet, @list.List([]))
   }
 }
 
@@ -243,7 +243,7 @@ fn[A] follow(tms : List[Term], net : Net[A]) -> List[A] {
       }
       let collection = match child {
         Some(c) => follow(ntms.concat(rtms), c)
-        None => @list.empty()
+        None => @list.List([])
       }
       match net.vnet {
         None => collection

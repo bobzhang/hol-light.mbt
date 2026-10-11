@@ -7,8 +7,8 @@ pub fn is_permutative(x1 : @kernel.Term) -> Bool raise {
   let tm = x1
   try {
     let (l, r) = @kernel.dest_eq(tm)
-    let bind1 = @drule.term_match(@list.empty(), l, r)
-    let bind2 = @drule.term_match(@list.empty(), r, l)
+    let bind1 = @drule.term_match(@list.List([]), l, r)
+    let bind2 = @drule.term_match(@list.List([]), r, l)
     true
   } catch {
     Failure(_) => false
@@ -97,7 +97,7 @@ pub fn applicable_rewrites(x13 : @kernel.Term) -> @list.List[@kernel.Thm] raise 
     fn(x15 : @kernel.Thm) -> @kernel.Thm raise {
       let th = x15
       let conc = @kernel.concl(th)
-      let (_, tm_bind, ty_bind) = @drule.term_match(@list.empty(), @equal.lhs(conc), tm_1)
+      let (_, tm_bind, ty_bind) = @drule.term_match(@list.List([]), @equal.lhs(conc), tm_1)
       let instth = inst_eq_thm((tm_bind, ty_bind), th)
       if is_permutative(conc) {
         let (l, r) = @kernel.dest_eq(@kernel.concl(instth))
@@ -141,7 +141,7 @@ pub fn assump_inst_hyps(x24 : @list.List[@kernel.Term], x25 : @kernel.Term, x26 
   let assump = x25
   let hyps = x26
   try {
-    let (_, tm_bind, ty_bind) = @drule.term_match(@list.empty(), @lib.hd(hyps), assump)
+    let (_, tm_bind, ty_bind) = @drule.term_match(@list.List([]), @lib.hd(hyps), assump)
     let bind = (tm_bind, ty_bind)
     if @lib.set_eq(vars, @lib.map(fn(x27 : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
       x27.1
@@ -210,7 +210,7 @@ pub fn inst_frees_in_hyps(x31 : @list.List[@kernel.Term], x32 : @kernel.Thm) -> 
 ///|
 /// NOT_IMP_EQ_EQ_EQ_OR
 fn step_1() -> Unit raise {
-  let t36 = @simp.rewrite_tac(@list.empty())
+  let t36 = @simp.rewrite_tac(@list.List([]))
   let t35 = @class.bool_cases_tac(@parser.parse_term("y':bool"))
   let t34 = @class.bool_cases_tac(@parser.parse_term("y:bool"))
   let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t34), t35), t36)
@@ -229,7 +229,7 @@ pub fn not_imp_eq_eq_eq_or() -> @kernel.Thm {
 ///|
 /// IMP_EQ_EQ_EQ_OR_NOT
 fn step_2() -> Unit raise {
-  let t40 = @simp.rewrite_tac(@list.empty())
+  let t40 = @simp.rewrite_tac(@list.List([]))
   let t39 = @class.bool_cases_tac(@parser.parse_term("y':bool"))
   let t38 = @class.bool_cases_tac(@parser.parse_term("y:bool"))
   let t41 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t38), t39), t40)
@@ -248,7 +248,7 @@ pub fn imp_eq_eq_eq_or_not() -> @kernel.Thm {
 ///|
 /// NOT_IMP_EQ_OR_EQ_EQ_OR_OR
 fn step_3() -> Unit raise {
-  let t45 = @simp.rewrite_tac(@list.empty())
+  let t45 = @simp.rewrite_tac(@list.List([]))
   let t44 = @class.bool_cases_tac(@parser.parse_term("t:bool"))
   let t43 = @class.bool_cases_tac(@parser.parse_term("y':bool"))
   let t42 = @class.bool_cases_tac(@parser.parse_term("y:bool"))
@@ -268,7 +268,7 @@ pub fn not_imp_eq_or_eq_eq_or_or() -> @kernel.Thm {
 ///|
 /// IMP_EQ_OR_EQ_EQ_OR_NOT_OR
 fn step_4() -> Unit raise {
-  let t50 = @simp.rewrite_tac(@list.empty())
+  let t50 = @simp.rewrite_tac(@list.List([]))
   let t49 = @class.bool_cases_tac(@parser.parse_term("t:bool"))
   let t48 = @class.bool_cases_tac(@parser.parse_term("y':bool"))
   let t47 = @class.bool_cases_tac(@parser.parse_term("y:bool"))
@@ -288,7 +288,7 @@ pub fn imp_eq_or_eq_eq_or_not_or() -> @kernel.Thm {
 ///|
 /// IMP_EQ_EQ_EQ_NOT_OR
 fn step_5() -> Unit raise {
-  let t54 = @simp.rewrite_tac(@list.empty())
+  let t54 = @simp.rewrite_tac(@list.List([]))
   let t53 = @class.bool_cases_tac(@parser.parse_term("t':bool"))
   let t52 = @class.bool_cases_tac(@parser.parse_term("t:bool"))
   let t55 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t52), t53), t54)
@@ -307,7 +307,7 @@ pub fn imp_eq_eq_eq_not_or() -> @kernel.Thm {
 ///|
 /// IMP_NOT_EQ_EQ_EQ_OR
 fn step_6() -> Unit raise {
-  let t58 = @simp.rewrite_tac(@list.empty())
+  let t58 = @simp.rewrite_tac(@list.List([]))
   let t57 = @class.bool_cases_tac(@parser.parse_term("t':bool"))
   let t56 = @class.bool_cases_tac(@parser.parse_term("t:bool"))
   let t59 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t56), t57), t58)

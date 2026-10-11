@@ -94,7 +94,7 @@ fn[TB] merge_partitions_l(x4 : @list.List[(@kernel.Term, TB)], x5 : @list.List[@
 fn[TB] repeated_merge_l(x13 : @list.List[@list.List[(@kernel.Term, TB)]]) -> @list.List[@list.List[(@kernel.Term, TB)]] raise {
   let partitions_1 = x13
   if @list.List::is_empty(partitions_1) {
-    @list.empty()
+    @list.List([])
   } else {
     match partitions_1 {
       More(h_1, tail=t_1) => {
@@ -199,8 +199,8 @@ pub fn find_irrelevant_literals(x27 : @kernel.Term) -> ((@list.List[(@kernel.Ter
   let tm = x27
   let tmnll = partition_literals(@support.number_list(@support.disj_list(tm)))
   let (irrels, rels) = @lib.partition(can_be_falsified_l, tmnll)
-  let t30 = @lib.itlist(merge_numbered_lists, rels, @list.empty())
-  (@lib.itlist(merge_numbered_lists, irrels, @list.empty()), t30)
+  let t30 = @lib.itlist(merge_numbered_lists, rels, @list.List([]))
+  (@lib.itlist(merge_numbered_lists, irrels, @list.List([])), t30)
 }
 
 ///|

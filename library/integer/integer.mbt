@@ -3147,7 +3147,7 @@ fn step_111() -> Unit raise {
   let t167 = @simp.rewrite_tac(
     @list.List([@int.int_pow_mul(), int_gcd_rmul(), @int.int_abs_pow()]),
   )
-  let t166 = @simp.once_asm_rewrite_tac(@list.empty())
+  let t166 = @simp.once_asm_rewrite_tac(@list.List([]))
   let t164 = @parser.parse_term("b':int")
   let t165 = @tactics.map_every(
     @tactics.x_gen_tac,
@@ -5116,7 +5116,7 @@ fn step_172() -> Unit raise {
     }),
   )
   let t244 = @tactics.match_mp_tac(int_cong_div())
-  let t243 = @simp.asm_rewrite_tac(@list.empty())
+  let t243 = @simp.asm_rewrite_tac(@list.List([]))
   let t242 = @simp.asm_simp_tac(@list.List([int_coprime_0(), int_cong_mod_1()]))
   let t241 = @class.asm_cases_tac(@parser.parse_term("m:int = &0"))
   let t250 = @tactics.then_tac(
@@ -5253,9 +5253,9 @@ pub fn odd_square_mod4() -> @kernel.Thm {
 /// INT_DIVIDES_LE
 fn step_177() -> Unit raise {
   let t264 = @tactics.match_mp_tac(@int.int_le_mul())
-  let t263 = @simp.asm_rewrite_tac(@list.empty())
+  let t263 = @simp.asm_rewrite_tac(@list.List([]))
   let t262 = @class.asm_cases_tac(@parser.parse_term("z = &0"))
-  let t261 = @simp.asm_rewrite_tac(@list.empty())
+  let t261 = @simp.asm_rewrite_tac(@list.List([]))
   let t260 = @class.asm_cases_tac(@parser.parse_term("x = &0"))
   let t259 = @simp.rewrite_tac(
     @list.List([
@@ -5763,7 +5763,7 @@ pub fn int_prime_2() -> @kernel.Thm {
 /// INT_PRIME_FACTOR
 fn step_186() -> Unit raise {
   let t337 = @tactics.undisch_tac(@parser.parse_term("y divides x"))
-  let t336 = @simp.simp_tac(@list.empty())
+  let t336 = @simp.simp_tac(@list.List([]))
   let t338 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -5852,7 +5852,7 @@ fn step_186() -> Unit raise {
     ),
     t338,
   ])
-  let t330 = @simp.asm_rewrite_tac(@list.empty())
+  let t330 = @simp.asm_rewrite_tac(@list.List([]))
   let t326 = @parser.parse_term("y:int")
   let t329 = @tactics.first_x_assum(fn(
     x328 : @kernel.Thm,
@@ -6023,7 +6023,7 @@ fn step_186() -> Unit raise {
     @tactics.then_tac(@tactics.exists_tac(@parser.parse_term("&2")), t309),
     @tactics.all_tac,
   ])
-  let t308 = @simp.asm_rewrite_tac(@list.empty())
+  let t308 = @simp.asm_rewrite_tac(@list.List([]))
   let t307 = @class.asm_cases_tac(@parser.parse_term("x = &0"))
   let t305 = @tactics.repeat_tac(
     @tactics.pop_assum(fn(
@@ -6073,7 +6073,7 @@ fn step_186() -> Unit raise {
       }
     }),
   )
-  let t301 = @simp.asm_rewrite_tac(@list.empty())
+  let t301 = @simp.asm_rewrite_tac(@list.List([]))
   let t306 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -6330,7 +6330,7 @@ fn step_188() -> Unit raise {
     @list.List([int_prime_factor_lt(), @int.int_entire()]),
   )
   let t387 = @tactics.first_x_assum(@tactics.match_mp_tac)
-  let t386 = @simp.asm_rewrite_tac(@list.empty())
+  let t386 = @simp.asm_rewrite_tac(@list.List([]))
   let t385 = @tactics.disch_then(@tactics.match_mp_tac)
   let t384 = @tactics.rule_assum_tac(
     @simp.rewrite_rule(@list.List([@int.int_entire(), @class.de_morgan_thm()])),
@@ -6520,7 +6520,7 @@ fn step_188() -> Unit raise {
     @tactics.all_tac,
   ])
   let t362 = @class.asm_cases_tac(@parser.parse_term("abs n = &1"))
-  let t361 = @simp.asm_rewrite_tac(@list.empty())
+  let t361 = @simp.asm_rewrite_tac(@list.List([]))
   let t360 = @class.asm_cases_tac(@parser.parse_term("n = &0"))
   let t359 = @tactics.x_gen_tac(@parser.parse_term("n:int"))
   let t358 = @simp.rewrite_tac(@list.List([@int.int_abs_pos()]))
@@ -7013,7 +7013,7 @@ fn step_191() -> Unit raise {
       }
     }),
   )
-  let t438 = @simp.simp_tac(@list.empty())
+  let t438 = @simp.simp_tac(@list.List([]))
   let t437 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t436 = @tactics.disch_then(fn(
     x434 : @kernel.Thm,
@@ -7115,7 +7115,7 @@ fn step_192() -> Unit raise {
     ),
     t455,
   )
-  let t453 = @simp.simp_tac(@list.empty())
+  let t453 = @simp.simp_tac(@list.List([]))
   let t452 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t451 = @tactics.match_mp_tac(@theorems.mono_forall())
   let t450 = @tactics.mp_tac(int_euclid_bound())
@@ -7377,7 +7377,7 @@ fn step_195() -> Unit raise {
       @int.int_divides_rabs(),
     ]),
   )
-  let t494 = @simp.asm_rewrite_tac(@list.empty())
+  let t494 = @simp.asm_rewrite_tac(@list.List([]))
   let t489 = @parser.parse_term("d:int")
   let t493 = @tactics.disch_then(fn(
     x492 : @kernel.Thm,
@@ -8447,7 +8447,7 @@ fn step_213() -> Unit raise {
     @list.List([@int.int_pow_eq_0(), int_divides_rmul2_eq()]),
   )
   let t555 = @simp.rewrite_tac(@list.List([@int.int_pow_mul()]))
-  let t554 = @simp.once_asm_rewrite_tac(@list.empty())
+  let t554 = @simp.once_asm_rewrite_tac(@list.List([]))
   let t553 = @tactics.disch_then(
     @tactics.conjuncts_then2(
       fn(
@@ -8641,7 +8641,7 @@ pub fn int_divides_pow2_eq() -> @kernel.Thm {
 ///|
 /// INT_POW_MUL_EXISTS
 fn step_215() -> Unit raise {
-  let t585 = @meson.meson_tac(@list.empty())
+  let t585 = @meson.meson_tac(@list.List([]))
   let t584 = @simp.asm_simp_tac(
     @list.List([
       @int.int_pow_mul(),
@@ -8770,7 +8770,7 @@ fn step_215() -> Unit raise {
     @meson.asm_meson_tac(@list.List([@int.int_divides(), @int.int_mul_sym()])),
     @tactics.all_tac,
   ])
-  let t572 = @simp.asm_rewrite_tac(@list.empty())
+  let t572 = @simp.asm_rewrite_tac(@list.List([]))
   let t569 = @parser.parse_term("p:int")
   let t570 = @parser.parse_term("m:int")
   let t571 = @tactics.mp_tac(
@@ -8844,7 +8844,7 @@ pub fn int_pow_mul_exists() -> @kernel.Thm {
 ///|
 /// INT_COPRIME_POW_ABS
 fn step_216() -> Unit raise {
-  let t666 = @meson.meson_tac(@list.empty())
+  let t666 = @meson.meson_tac(@list.List([]))
   let t667 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.strip_tac,
@@ -8956,7 +8956,7 @@ fn step_216() -> Unit raise {
       t667,
     ]),
   )
-  let t657 = @simp.asm_rewrite_tac(@list.empty())
+  let t657 = @simp.asm_rewrite_tac(@list.List([]))
   let t651 = @parser.parse_term("a:int")
   let t652 = @list.List([@parser.parse_term("d:int"), t651])
   let t655 = @tactics.first_x_assum(fn(
@@ -9791,7 +9791,7 @@ pub fn int_divides_prime_pow_le() -> @kernel.Thm {
 ///|
 /// INT_EQ_PRIME_POW_ABS
 fn step_219() -> Unit raise {
-  let t705 = @simp.asm_rewrite_tac(@list.empty())
+  let t705 = @simp.asm_rewrite_tac(@list.List([]))
   let t704 = @class.asm_cases_tac(@parser.parse_term("abs p = abs q"))
   let t703 = @simp.asm_simp_tac(
     @list.List([int_divides_prime_pow_le(), int_prime_abs()]),

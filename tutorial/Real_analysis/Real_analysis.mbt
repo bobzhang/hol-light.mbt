@@ -185,7 +185,7 @@ pub fn ivt_lemma1() -> @kernel.Thm {
 ///|
 /// IVT_LEMMA2
 fn step_10() -> Unit raise {
-  let t40 = @meson.asm_meson_tac(@list.empty())
+  let t40 = @meson.asm_meson_tac(@list.List([]))
   let t39 = @simp.simp_tac(@list.List([@analysis.real_le_sub_ladd(), @analysis.real_le_sub_radd(), @analysis.real_sub_0(), @realax.real_add_lid()]))
   let t38 = @simp.asm_simp_tac(@list.List([@analysis.cont_sub(), @analysis.cont_x()]))
   let t37 = @tactics.mp_tac(@bool.spec(@parser.parse_term("\\x. f x - x"), ivt_lemma1()))
@@ -219,8 +219,8 @@ fn step_11() -> Unit raise {
       @kernel.concl(x51)
     })(x52))
   })
-  let t44 = @tactics.match_mp_tac(@meson.meson(@list.empty(), @parser.parse_term("P x \\/ P (f x) \\/ P (f(f x)) ==> ?x:real. P x")))
-  let t43 = @simp.asm_rewrite_tac(@list.empty())
+  let t44 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("P x \\/ P (f x) \\/ P (f(f x)) ==> ?x:real. P x")))
+  let t43 = @simp.asm_rewrite_tac(@list.List([]))
   let t42 = @tactics.match_mp_tac(ivt_lemma2())
   let t54 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t42), t43), @tactics.conj_tac), t44), t53), @calc_rat.real_arith_tac)
   sarkovskii_trivial_c.set(@tactics.prove(@parser.parse_term("!f:real->real. (!x. f contl x) /\\ (?x. f(f(f(x))) = x) ==> ?x. f(x) = x"), t54))

@@ -676,7 +676,7 @@ fn step_16() -> Unit raise {
 ///|
 /// the_type_definitions
 fn step_17() -> Unit raise {
-  the_type_definitions_c.set(Ref::{ val: @list.empty(), })
+  the_type_definitions_c.set(Ref::{ val: @list.List([]), })
 }
 
 ///|
@@ -751,7 +751,7 @@ fn step_18() -> Unit raise {
   let t84 = @simp.asm_rewrite_tac(
     @list.List([@itab.itaut(@parser.parse_term("p \\/ T <=> T"))]),
   )
-  let t83 = @simp.pure_once_asm_rewrite_tac(@list.empty())
+  let t83 = @simp.pure_once_asm_rewrite_tac(@list.List([]))
   let t82 = @tactics.mp_tac(@itab.itaut(@parser.parse_term("~(T <=> F)")))
   let t81 = @tactics.try_tac(
     @tactics.then_tac(
@@ -934,7 +934,7 @@ pub fn excluded_middle() -> @kernel.Thm {
 ///|
 /// BOOL_CASES_AX
 fn step_19() -> Unit raise {
-  let t88 = @simp.asm_rewrite_tac(@list.empty())
+  let t88 = @simp.asm_rewrite_tac(@list.List([]))
   let t89 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.gen_tac,
@@ -993,7 +993,7 @@ fn step_20() -> Unit raise {
       ),
       @list.List[@kernel.Thm],
     ) -> @kernel.Thm raise,
-  ) raise = @simp.rewrite_tac(@list.empty())
+  ) raise = @simp.rewrite_tac(@list.List([]))
   let rtaut_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
       @list.List[@kernel.Term],
@@ -1152,7 +1152,7 @@ fn step_20() -> Unit raise {
         let t2 = x99
         @tactics.then_tac(t1, t2)
       }
-    })(@simp.rewrite_tac(@list.empty()))
+    })(@simp.rewrite_tac(@list.List([])))
     @tactics.then_tac(prop_rewrite_tac, fn(
       x112 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
     ) -> (
@@ -1584,7 +1584,7 @@ pub fn refute_then(
 ///|
 /// NOT_EXISTS_THM
 fn step_29() -> Unit raise {
-  let t132 = @simp.asm_rewrite_tac(@list.empty())
+  let t132 = @simp.asm_rewrite_tac(@list.List([]))
   let t133 = @tactics.then_tac(
     @tactics.disch_then(
       @tactics.choose_then(fn(
@@ -1683,7 +1683,7 @@ fn step_29() -> Unit raise {
     }
   })
   let t124 = @tactics.exists_tac(@parser.parse_term("x:A"))
-  let t123 = @simp.rewrite_tac(@list.empty())
+  let t123 = @simp.rewrite_tac(@list.List([]))
   let t122 = @tactics.undisch_tac(@parser.parse_term("~(?x:A. P x)"))
   let t134 = @list.List([
     @tactics.then_tac(
@@ -1797,9 +1797,9 @@ pub fn forall_not_thm() -> @kernel.Thm {
 ///|
 /// FORALL_BOOL_THM
 fn step_33() -> Unit raise {
-  let t142 = @simp.asm_rewrite_tac(@list.empty())
+  let t142 = @simp.asm_rewrite_tac(@list.List([]))
   let t141 = bool_cases_tac(@parser.parse_term("b:bool"))
-  let t140 = @simp.asm_rewrite_tac(@list.empty())
+  let t140 = @simp.asm_rewrite_tac(@list.List([]))
   let t143 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -2192,7 +2192,7 @@ fn step_45() -> Unit raise {
 ///|
 /// COND_EXPAND
 fn step_46() -> Unit raise {
-  let t169 = @simp.rewrite_tac(@list.empty())
+  let t169 = @simp.rewrite_tac(@list.List([]))
   let t168 = bool_cases_tac(@parser.parse_term("b:bool"))
   let t170 = @tactics.then_tac(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t168),
@@ -2220,7 +2220,7 @@ pub fn cond_expand() -> @kernel.Thm {
 ///|
 /// COND_ID
 fn step_47() -> Unit raise {
-  let t172 = @simp.rewrite_tac(@list.empty())
+  let t172 = @simp.rewrite_tac(@list.List([]))
   let t171 = bool_cases_tac(@parser.parse_term("b:bool"))
   let t173 = @tactics.then_tac(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t171),
@@ -2246,7 +2246,7 @@ pub fn cond_id() -> @kernel.Thm {
 ///|
 /// COND_RAND
 fn step_48() -> Unit raise {
-  let t175 = @simp.rewrite_tac(@list.empty())
+  let t175 = @simp.rewrite_tac(@list.List([]))
   let t174 = bool_cases_tac(@parser.parse_term("b:bool"))
   let t176 = @tactics.then_tac(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t174),
@@ -2274,7 +2274,7 @@ pub fn cond_rand() -> @kernel.Thm {
 ///|
 /// COND_RATOR
 fn step_49() -> Unit raise {
-  let t178 = @simp.rewrite_tac(@list.empty())
+  let t178 = @simp.rewrite_tac(@list.List([]))
   let t177 = bool_cases_tac(@parser.parse_term("b:bool"))
   let t179 = @tactics.then_tac(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t177),
@@ -2330,7 +2330,7 @@ pub fn cond_abs() -> @kernel.Thm {
 ///|
 /// COND_SWAP
 fn step_51() -> Unit raise {
-  let t184 = @simp.rewrite_tac(@list.empty())
+  let t184 = @simp.rewrite_tac(@list.List([]))
   let t183 = bool_cases_tac(@parser.parse_term("p:bool"))
   let t185 = @tactics.then_tac(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t183),
@@ -2376,7 +2376,7 @@ fn step_52() -> Unit raise {
       ),
       @list.List[@kernel.Thm],
     ) -> @kernel.Thm raise,
-  ) raise = @simp.rewrite_tac(@list.empty())
+  ) raise = @simp.rewrite_tac(@list.List([]))
   let rtaut_tac : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
     (
       @list.List[@kernel.Term],
@@ -2535,7 +2535,7 @@ fn step_52() -> Unit raise {
         let t2 = x191
         @tactics.then_tac(t1, t2)
       }
-    })(@simp.rewrite_tac(@list.empty()))
+    })(@simp.rewrite_tac(@list.List([])))
     @tactics.then_tac(prop_rewrite_tac, fn(
       x204 : (@list.List[(String, @kernel.Thm)], @kernel.Term),
     ) -> (
@@ -2736,7 +2736,7 @@ pub fn taut(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// MONO_COND
 fn step_53() -> Unit raise {
-  let t207 = @simp.asm_rewrite_tac(@list.empty())
+  let t207 = @simp.asm_rewrite_tac(@list.List([]))
   let t208 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.strip_tac,
@@ -2775,7 +2775,7 @@ fn step_54() -> Unit raise {
 ///|
 /// COND_ELIM_THM
 fn step_55() -> Unit raise {
-  let t209 = @simp.rewrite_tac(@list.empty())
+  let t209 = @simp.rewrite_tac(@list.List([]))
   let t210 = @tactics.then_tac(
     bool_cases_tac(@parser.parse_term("c:bool")),
     t209,
@@ -3056,7 +3056,7 @@ pub fn unique_skolem_alt() -> @kernel.Thm {
 ///|
 /// UNIQUE_SKOLEM_THM
 fn step_61() -> Unit raise {
-  let t260 = @simp.rewrite_tac(@list.empty())
+  let t260 = @simp.rewrite_tac(@list.List([]))
   let t257 = @parser.parse_term("x:A")
   let t261 = @tactics.then_tac(
     @tactics.disch_then(fn(
@@ -3139,7 +3139,7 @@ fn step_61() -> Unit raise {
     }),
     t260,
   )
-  let t251 = @simp.asm_rewrite_tac(@list.empty())
+  let t251 = @simp.asm_rewrite_tac(@list.List([]))
   let t250 = @tactics.repeat_tac(@tactics.strip_tac)
   let t262 = @list.List([
     @tactics.then_tac(
@@ -3227,7 +3227,7 @@ fn step_61() -> Unit raise {
     ),
     t262,
   )
-  let t240 = @simp.asm_rewrite_tac(@list.empty())
+  let t240 = @simp.asm_rewrite_tac(@list.List([]))
   let t239 = @tactics.exists_tac(@parser.parse_term("x:A"))
   let t238 = @tactics.first_assum(@tactics.match_mp_tac)
   let t237 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
@@ -3248,7 +3248,7 @@ fn step_61() -> Unit raise {
     ),
     t263,
   ])
-  let t235 = @simp.asm_rewrite_tac(@list.empty())
+  let t235 = @simp.asm_rewrite_tac(@list.List([]))
   let t234 = @tactics.disch_then(
     @tactics.conjuncts_then(fn(
       x231 : @kernel.Thm,
@@ -3352,7 +3352,7 @@ fn step_62() -> Unit raise {
 ///|
 /// class.ml:470
 fn step_63() -> Unit raise {
-  let t266 = @simp.rewrite_tac(@list.empty())
+  let t266 = @simp.rewrite_tac(@list.List([]))
   let cond_eq_clause = @tactics.prove(
     @parser.parse_term("(if x = x then y else z) = y"),
     t266,
@@ -3363,7 +3363,7 @@ fn step_63() -> Unit raise {
 ///|
 /// bool_INDUCT
 fn step_64() -> Unit raise {
-  let t268 = @simp.asm_rewrite_tac(@list.empty())
+  let t268 = @simp.asm_rewrite_tac(@list.List([]))
   let t267 = @tactics.disj_cases_tac(
     @bool.spec(@parser.parse_term("x:bool"), bool_cases_ax()),
   )
@@ -3388,7 +3388,7 @@ pub fn bool_induct() -> @kernel.Thm {
 ///|
 /// bool_RECURSION
 fn step_65() -> Unit raise {
-  let t271 = @simp.rewrite_tac(@list.empty())
+  let t271 = @simp.rewrite_tac(@list.List([]))
   let t270 = @tactics.exists_tac(
     @parser.parse_term("\\x. if x then b:A else a"),
   )

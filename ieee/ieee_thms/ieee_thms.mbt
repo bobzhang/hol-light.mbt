@@ -36,7 +36,7 @@ pub fn ieee_format_valid_imp_radix_lt_1() -> @kernel.Thm {
 ///|
 /// IEEE_FORMAT_VALID_IMP_RADIX_EVEN
 fn step_3() -> Unit raise {
-  let t4 = @meson.meson_tac(@list.empty())
+  let t4 = @meson.meson_tac(@list.List([]))
   let t3 = @simp.rewrite_tac(@list.List([@ieee.is_valid_ieee_format()]))
   let t5 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t3), t4)
   ieee_format_valid_imp_radix_even_c.set(@tactics.prove(@parser.parse_term("!(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             EVEN (FST (r,p,emin,emax)))"), t5))
@@ -54,7 +54,7 @@ pub fn ieee_format_valid_imp_radix_even() -> @kernel.Thm {
 ///|
 /// IEEE_FORMAT_VALID_IMP_PREC_LT_1
 fn step_4() -> Unit raise {
-  let t7 = @meson.meson_tac(@list.empty())
+  let t7 = @meson.meson_tac(@list.List([]))
   let t6 = @simp.rewrite_tac(@list.List([@ieee.is_valid_ieee_format()]))
   let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t6), t7)
   ieee_format_valid_imp_prec_lt_1_c.set(@tactics.prove(@parser.parse_term("!(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             1 < (FST (SND (r,p,emin,emax))))"), t8))
@@ -72,7 +72,7 @@ pub fn ieee_format_valid_imp_prec_lt_1() -> @kernel.Thm {
 ///|
 /// IEEE_FORMAT_VALID_IMP_EMIN_LE_EMAX
 fn step_5() -> Unit raise {
-  let t10 = @meson.meson_tac(@list.empty())
+  let t10 = @meson.meson_tac(@list.List([]))
   let t9 = @simp.rewrite_tac(@list.List([@ieee.is_valid_ieee_format()]))
   let t11 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9), t10)
   ieee_format_valid_imp_emin_le_emax_c.set(@tactics.prove(@parser.parse_term("!(r:num) (p:num) (emin:int) (emax:int).\n          ((is_valid_ieee_format (r,p,emin,emax)) ==>\n             (FST (SND (SND (r,p,emin,emax)))) <=\n             (SND (SND (SND (r,p,emin,emax)))))"), t11))
@@ -410,7 +410,7 @@ pub fn ieee_format_emin_le_emax() -> @kernel.Thm {
 ///|
 /// IEEE_FORMAT_TO_FFORMAT
 fn step_23() -> Unit raise {
-  let t85 = @simp.asm_rewrite_tac(@list.empty())
+  let t85 = @simp.asm_rewrite_tac(@list.List([]))
   let t84 = @simp.rewrite_tac(@list.List([@fixed.fr(), @fixed.fp(), @fixed.fe()]))
   let t82 = @simp.rewrite_tac(@list.List([ieee_format_prec_lt_0()]))
   let t81 = @simp.rewrite_tac(@list.List([ieee_format_radix_even()]))
@@ -436,7 +436,7 @@ pub fn ieee_format_to_fformat() -> @kernel.Thm {
 ///|
 /// IEEE_FORMAT_TO_FLFORMAT
 fn step_24() -> Unit raise {
-  let t95 = @simp.asm_rewrite_tac(@list.empty())
+  let t95 = @simp.asm_rewrite_tac(@list.List([]))
   let t94 = @simp.rewrite_tac(@list.List([@float.flr(), @float.flp()]))
   let t92 = @simp.rewrite_tac(@list.List([ieee_format_prec_lt_1()]))
   let t91 = @simp.rewrite_tac(@list.List([ieee_format_radix_even()]))
@@ -679,15 +679,15 @@ fn step_29() -> Unit raise {
     @simp.rewrite_tac(@list.List([thm]))
   })
   let t224 = @simp.once_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("abs(x - y) = abs(y - x)"))]))
-  let t223 = @simp.asm_rewrite_tac(@list.empty())
+  let t223 = @simp.asm_rewrite_tac(@list.List([]))
   let t222 = @simp.rewrite_tac(@list.List([@ieee.ieee_exp()]))
-  let t237 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t222), t223), t224), t227), t230), t231), t232), t233), t234), @tactics.conj_tac), t236)
-  let t221 = @simp.asm_rewrite_tac(@list.empty())
+  let t237 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t222), t223), t224), t227), t230), t231), t232), t233), t234), @tactics.conj_tac), t236)
+  let t221 = @simp.asm_rewrite_tac(@list.List([]))
   let t220 = @tactics.match_mp_tac(@fixed_thms.fixed_rd_nearest_abs_error())
   let t219 = @simp.once_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("abs(x - y) = abs(y - x)"))]))
   let t218 = @simp.rewrite_tac(@list.List([@equal.gsym(@fixed.fulp())]))
   let t217 = @simp.once_rewrite_tac(@list.List([@equal.gsym(ieee_format_to_fformat())]))
-  let t216 = @simp.asm_rewrite_tac(@list.empty())
+  let t216 = @simp.asm_rewrite_tac(@list.List([]))
   let t238 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ieee.ieee_exp()])), t216), t217), t218), t219), t220), t221), t237])
   let t215 = @simp.rewrite_tac(@list.List([@ieee.ieee_round()]))
   let t214 = @tactics.disch_then(fn(x211 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -726,15 +726,15 @@ fn step_30() -> Unit raise {
     @simp.rewrite_tac(@list.List([thm]))
   })
   let t254 = @simp.once_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("abs(x - y) = abs(y - x)"))]))
-  let t253 = @simp.asm_rewrite_tac(@list.empty())
+  let t253 = @simp.asm_rewrite_tac(@list.List([]))
   let t252 = @simp.rewrite_tac(@list.List([@ieee.ieee_exp()]))
-  let t267 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t252), t253), t254), t257), t260), t261), t262), t263), t264), @tactics.conj_tac), t266)
-  let t251 = @simp.asm_rewrite_tac(@list.empty())
+  let t267 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t252), t253), t254), t257), t260), t261), t262), t263), t264), @tactics.conj_tac), t266)
+  let t251 = @simp.asm_rewrite_tac(@list.List([]))
   let t250 = @tactics.match_mp_tac(@fixed_thms.fixed_rd_zero_abs_error())
   let t249 = @simp.once_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("abs(x - y) = abs(y - x)"))]))
   let t248 = @simp.rewrite_tac(@list.List([@equal.gsym(@fixed.fulp())]))
   let t247 = @simp.once_rewrite_tac(@list.List([@equal.gsym(ieee_format_to_fformat())]))
-  let t246 = @simp.asm_rewrite_tac(@list.empty())
+  let t246 = @simp.asm_rewrite_tac(@list.List([]))
   let t268 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ieee.ieee_exp()])), t246), t247), t248), t249), t250), t251), t267])
   let t245 = @simp.rewrite_tac(@list.List([@ieee.ieee_round()]))
   let t244 = @tactics.disch_then(fn(x241 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -766,7 +766,7 @@ fn step_31() -> Unit raise {
   let t276 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("&0 < abs(x) ==> ~(x = &0)")))
   let t275 = @tactics.match_mp_tac(@float_thms.float_rd_near_rel_error())
   let t274 = @simp.rewrite_tac(@list.List([@ieee.ieee_eps()]))
-  let t273 = @simp.asm_rewrite_tac(@list.empty())
+  let t273 = @simp.asm_rewrite_tac(@list.List([]))
   let t272 = @simp.rewrite_tac(@list.List([@ieee.ieee_round()]))
   let t271 = @tactics.disch_then((x270 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absxlow", "absxhi"]), x270))
   let t281 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t271), t272), t273), t274), t275), t276), t277), t278), @tactics.conj_tac), t280)
@@ -785,9 +785,9 @@ pub fn ieee_round_near_rel_err_v1() -> @kernel.Thm {
 ///|
 /// IEEE_ROUND_NEAR_REL_ERR
 fn step_32() -> Unit raise {
-  let t287 = @simp.asm_rewrite_tac(@list.empty())
+  let t287 = @simp.asm_rewrite_tac(@list.List([]))
   let t286 = @tactics.match_mp_tac(@fixed_thms.fixed_rd_nearest_rel_error())
-  let t285 = @simp.asm_rewrite_tac(@list.empty())
+  let t285 = @simp.asm_rewrite_tac(@list.List([]))
   let t284 = @simp.rewrite_tac(@list.List([@ieee.ieee_round()]))
   let t283 = @tactics.disch_then((x282 : @kernel.Thm) => @common.label_conjuncts_tac(@list.List(["absxlow", "absxhi"]), x282))
   let t288 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t283), t284), t285), t286), t287)

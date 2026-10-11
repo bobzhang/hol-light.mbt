@@ -133,7 +133,7 @@ pub fn leadsto_thm2a() -> @kernel.Thm {
 /// LEADSTO_thm3_lemma01
 fn step_9() -> Unit raise {
   let t9 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac)
-  leadsto_thm3_lemma01_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("(!p:'a->bool.\n        p In P ==>\n        (!R.\n          (!p q.\n            ((p ENSURES q)Pr ==> R p q Pr) /\\\n            (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n            (!P.\n              (p = LUB P) /\\ (!p'. p' In P ==> R p' q Pr) ==> R p q Pr)) ==>\n          R p q Pr))\n        ==>\n       (!p:'a->bool.\n        p In P ==>\n        ((!p q.\n            ((p ENSURES q)Pr ==> R p q Pr) /\\\n            (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n            (!P.\n              (p = LUB P) /\\ (!p'. p' In P ==> R p' q Pr) ==> R p q Pr)) ==>\n          R p q Pr))")), t9))
+  leadsto_thm3_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("(!p:'a->bool.\n        p In P ==>\n        (!R.\n          (!p q.\n            ((p ENSURES q)Pr ==> R p q Pr) /\\\n            (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n            (!P.\n              (p = LUB P) /\\ (!p'. p' In P ==> R p' q Pr) ==> R p q Pr)) ==>\n          R p q Pr))\n        ==>\n       (!p:'a->bool.\n        p In P ==>\n        ((!p q.\n            ((p ENSURES q)Pr ==> R p q Pr) /\\\n            (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n            (!P.\n              (p = LUB P) /\\ (!p'. p' In P ==> R p' q Pr) ==> R p q Pr)) ==>\n          R p q Pr))")), t9))
 }
 
 ///|
@@ -170,7 +170,7 @@ pub fn leadsto_thm3() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let t15 = @parser.parse_term("P:('a->bool)->bool")
   let t16 = @bool.specl(@list.List([@parser.parse_term("LUB (P:('a->bool)->bool)"), t15]), leadsto_thm3())
-  let t17 = @tactics.accept_tac(@bool.spec_all(@simp.rewrite_rule(@list.empty())(t16)))
+  let t17 = @tactics.accept_tac(@bool.spec_all(@simp.rewrite_rule(@list.List([]))(t16)))
   let t18 = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t17)
   leadsto_thm3a_c.set(@aux_definitions.prove_thm("LEADSTO_thm3a", @parser.parse_term("!(P:('a->bool)->bool) q Pr.\n       (!p. (p In P) ==> (p LEADSTO q)Pr) ==> ((LUB P) LEADSTO q)Pr"), t18))
 }
@@ -187,9 +187,9 @@ pub fn leadsto_thm3a() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm3c_lemma01
 fn step_12() -> Unit raise {
-  let t19 = @simp.rewrite_tac(@list.empty())
+  let t19 = @simp.rewrite_tac(@list.List([]))
   let t20 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([in_()])), @tactics.beta_tac), t19)
-  leadsto_thm3c_lemma01_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!p:'a->bool. p In (\\p. ?i. p = P (i:num)) = (?i. p = P i)")), t20))
+  leadsto_thm3c_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!p:'a->bool. p In (\\p. ?i. p = P (i:num)) = (?i. p = P i)")), t20))
 }
 
 ///|
@@ -209,7 +209,7 @@ fn step_13() -> Unit raise {
   let t24 = @list.List([@tactics.then_tac(@class.asm_cases_tac(@parser.parse_term("?i'. (P:num->'a->bool) i = P i'")), @hol88.res_tac), t23])
   let t21 = @tactics.repeat_tac(@tactics.strip_tac)
   let t25 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t21), t24)
-  leadsto_thm3c_lemma02_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(P:num->'a->bool) q i.\n       ((?i'. P i = P i') ==> q) = (!i'. (P i = P i') ==> q)")), t25))
+  leadsto_thm3c_lemma02_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(P:num->'a->bool) q i.\n       ((?i'. P i = P i') ==> q) = (!i'. (P i = P i') ==> q)")), t25))
 }
 
 ///|
@@ -224,14 +224,14 @@ pub fn leadsto_thm3c_lemma02() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm3c_lemma03
 fn step_14() -> Unit raise {
-  let t30 = @simp.asm_rewrite_tac(@list.empty())
+  let t30 = @simp.asm_rewrite_tac(@list.List([]))
   let t26 = @kernel.assume_rule(@parser.parse_term("!p:'a->bool. (?i:num. p = P i) ==> (p LEADSTO q)Pr"))
   let t27 = @bool.spec(@parser.parse_term("(P:num->'a->bool)i"), t26)
   let t28 = @simp.rewrite_rule(@list.List([leadsto_thm3c_lemma02()]))(t27)
   let t29 = @bool.spec(@parser.parse_term("i:num"), t28)
-  let t31 = @list.List([@tactics.accept_tac(@simp.rewrite_rule(@list.empty())(t29)), t30])
+  let t31 = @list.List([@tactics.accept_tac(@simp.rewrite_rule(@list.List([]))(t29)), t30])
   let t32 = @tactics.thenl(@tactics.then_tac(@tactics.eq_tac, @tactics.repeat_tac(@tactics.strip_tac)), t31)
-  leadsto_thm3c_lemma03_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("(!p:'a->bool. (?i. p = P i) ==> (p LEADSTO q)Pr) =\n    (!i:num. ((P i) LEADSTO q)Pr)")), t32))
+  leadsto_thm3c_lemma03_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("(!p:'a->bool. (?i. p = P i) ==> (p LEADSTO q)Pr) =\n    (!i:num. ((P i) LEADSTO q)Pr)")), t32))
 }
 
 ///|
@@ -250,12 +250,12 @@ fn step_15() -> Unit raise {
   let t38 = @tactics.accept_tac(@simp.once_rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("p = (P:num->'a->bool)i"))]))(t37))
   let t39 = @tactics.then_tac(@tactics.exists_tac(@parser.parse_term("i:num")), t38)
   let t36 = @tactics.exists_tac(@parser.parse_term("x:num"))
-  let t35 = @simp.asm_rewrite_tac(@list.empty())
+  let t35 = @simp.asm_rewrite_tac(@list.List([]))
   let t40 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("(P:num->'a->bool)x")), t35), t36), @tactics.refl_tac), t39])
   let t34 = @tactics.repeat_tac(@tactics.strip_tac)
   let t33 = @simp.rewrite_tac(@list.List([@mk_state_logic.exists_def(), lub()]))
   let t41 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t33), @tactics.beta_tac), @tactics.eq_tac), t34), t40)
-  leadsto_thm3c_lemma04_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!s. ((?*) (P:num->'a->bool))s <=> (LUB(\\p. ?i. p = P i))s")), t41))
+  leadsto_thm3c_lemma04_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!s. ((?*) (P:num->'a->bool))s <=> (LUB(\\p. ?i. p = P i))s")), t41))
 }
 
 ///|
@@ -295,13 +295,13 @@ fn step_17() -> Unit raise {
   let t54 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("(p:'a->bool) = p2"))]))(t53)]))
   let t52 = @kernel.assume_rule(@parser.parse_term("(p:'a->bool) s"))
   let t55 = @tactics.thenl(@tactics.strip_tac, @list.List([@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("(p:'a->bool) = p1"))]))(t52)])), t54]))
-  let t50 = @simp.asm_rewrite_tac(@list.empty())
+  let t50 = @simp.asm_rewrite_tac(@list.List([]))
   let t51 = @tactics.then_tac(@tactics.exists_tac(@parser.parse_term("p2:'a->bool")), t50)
-  let t49 = @simp.asm_rewrite_tac(@list.empty())
+  let t49 = @simp.asm_rewrite_tac(@list.List([]))
   let t56 = @list.List([@tactics.thenl(@tactics.strip_tac, @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("p1:'a->bool")), t49), t51])), t55])
   let t48 = @simp.rewrite_tac(@list.List([lub(), @mk_state_logic.or_def()]))
   let t57 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t48), @tactics.beta_tac), @tactics.eq_tac), t56)
-  leadsto_thm4_lemma1a_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p1:'a->bool) p2 s.\n        (p1 \\/* p2) s = (LUB (\\p. (p = p1) \\/ (p = p2))) s")), t57))
+  leadsto_thm4_lemma1a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p1:'a->bool) p2 s.\n        (p1 \\/* p2) s = (LUB (\\p. (p = p1) \\/ (p = p2))) s")), t57))
 }
 
 ///|
@@ -333,9 +333,9 @@ pub fn leadsto_thm4_lemma1() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm4_lemma2
 fn step_19() -> Unit raise {
-  let t60 = @simp.asm_rewrite_tac(@list.empty())
+  let t60 = @simp.asm_rewrite_tac(@list.List([]))
   let t61 = @tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @tactics.repeat_tac(@tactics.strip_tac)), t60)
-  leadsto_thm4_lemma2_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!R (p1:'a->bool) p2 (q:'a->bool) (Pr:('a->'a)list).\n      R p1 q Pr ==> R p2 q Pr ==>\n       (!p. (\\p. (p = p1) \\/ (p = p2))p ==> R p q Pr)")), t61))
+  leadsto_thm4_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!R (p1:'a->bool) p2 (q:'a->bool) (Pr:('a->'a)list).\n      R p1 q Pr ==> R p2 q Pr ==>\n       (!p. (\\p. (p = p1) \\/ (p = p2))p ==> R p q Pr)")), t61))
 }
 
 ///|
@@ -357,7 +357,7 @@ fn step_20() -> Unit raise {
   let t62 = @bool.undisch_all(@bool.spec_all(leadsto_thm4_lemma2()))
   let t67 = @tactics.accept_tac(@simp.rewrite_rule(@list.List([@equal.sym(@bool.spec_all(leadsto_thm4_lemma1())), t62]))(t66))
   let t68 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t67)
-  leadsto_thm4_lemma3_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!R (p1:'a->bool) p2 (q:'a->bool) (Pr:('a->'a)list).\n     R p1 q Pr ==> R p2 q Pr ==>\n       (!p q P. (p = LUB P) /\\ (!p. P p ==> R p q Pr) ==> R p q Pr) ==>\n          R (p1 \\/* p2) q Pr")), t68))
+  leadsto_thm4_lemma3_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!R (p1:'a->bool) p2 (q:'a->bool) (Pr:('a->'a)list).\n     R p1 q Pr ==> R p2 q Pr ==>\n       (!p q P. (p = LUB P) /\\ (!p. P p ==> R p q Pr) ==> R p q Pr) ==>\n          R (p1 \\/* p2) q Pr")), t68))
 }
 
 ///|
@@ -394,14 +394,14 @@ pub fn leadsto_thm4() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm5_lemma1
 fn step_22() -> Unit raise {
-  let t79 = @simp.asm_rewrite_tac(@list.empty())
+  let t79 = @simp.asm_rewrite_tac(@list.List([]))
   let t78 = @tactics.repeat_tac(@hol88.cond_cases_tac)
   let t80 = @tactics.then_tac(@tactics.then_tac(@tactics.undisch_tac(@parser.parse_term("(if ((p:'a->bool) = p') then T else F)")), t78), t79)
-  let t77 = @simp.asm_rewrite_tac(@list.empty())
+  let t77 = @simp.asm_rewrite_tac(@list.List([]))
   let t81 = @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("p:'a->bool")), t77), t80])
   let t76 = @tactics.repeat_tac(@tactics.strip_tac)
   let t82 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.beta_tac), @tactics.eq_tac), t76), t81)
-  leadsto_thm5_lemma1_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) s. (p s = (\\s. ?p'. (if (p = p') then T else F) /\\ p' s)s)")), t82))
+  leadsto_thm5_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) s. (p s = (\\s. ?p'. (if (p = p') then T else F) /\\ p' s)s)")), t82))
 }
 
 ///|
@@ -432,10 +432,10 @@ pub fn leadsto_thm5_lemma2() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm5_lemma3
 fn step_24() -> Unit raise {
-  let t85 = @simp.rewrite_tac(@list.empty())
+  let t85 = @simp.rewrite_tac(@list.List([]))
   let t84 = @tactics.repeat_tac(@hol88.cond_cases_tac)
   let t86 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t84), t85)
-  leadsto_thm5_lemma3_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) p'. (if (p = p') then T else F) = (p = p')")), t86))
+  leadsto_thm5_lemma3_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) p'. (if (p = p') then T else F) = (p = p')")), t86))
 }
 
 ///|
@@ -532,7 +532,7 @@ fn step_28() -> Unit raise {
   let t127 = @simp.rewrite_tac(@list.List([lub(), in_()]))
   let t126 = @tactics.exists_tac(@parser.parse_term("\\(p':'a->bool). if (p = p') then T else F"))
   let t132 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.disj2_tac), t126), t127), @tactics.beta_tac), @tactics.conj_tac), t131)
-  let t124 = @tactics.then_tac((x123 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm3(), x123), @simp.asm_rewrite_tac(@list.empty()))
+  let t124 = @tactics.then_tac((x123 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm3(), x123), @simp.asm_rewrite_tac(@list.List([])))
   let t125 = @list.List([@tactics.accept_tac(@bool.undisch(@bool.spec_all(leadsto_thm0()))), t124])
   let t133 = @list.List([@tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t125), t132])
   let t134 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t133)
@@ -558,7 +558,7 @@ fn step_29() -> Unit raise {
   let t138 = @simp.rewrite_tac(@list.List([lub(), in_()]))
   let t137 = @tactics.exists_tac(@parser.parse_term("\\(p':'a->bool). if (p = p') then T else F"))
   let t143 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t137), t138), @tactics.beta_tac), @tactics.conj_tac), t142)
-  let t136 = @simp.asm_rewrite_tac(@list.empty())
+  let t136 = @simp.asm_rewrite_tac(@list.List([]))
   let t144 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), (x135 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm3(), x135)), t136), t143])
   let t145 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t144)
   leadsto_thm9_c.set(@aux_definitions.prove_thm("LEADSTO_thm9", @parser.parse_term("!(p:'a->bool) q Pr.\n      (?P. (p = LUB P) /\\\n       (!p. p In P ==> (p LEADSTO q)Pr)) = (p LEADSTO q)Pr"), t145))
@@ -701,7 +701,7 @@ pub fn leadsto_thm16() -> @kernel.Thm {
 /// STRUCT_lemma0
 fn step_36() -> Unit raise {
   let t185 = @tactics.then_tac(@tactics.then_tac(@tactics.eq_tac, @tactics.repeat_tac(@tactics.strip_tac)), @hol88.res_tac)
-  struct_lemma0_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term(" (!p:'a->bool. p In P ==>\n          (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr))\n       =\n        ((!p. p In P ==> (p LEADSTO q)Pr) /\\\n         (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr))")), t185))
+  struct_lemma0_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term(" (!p:'a->bool. p In P ==>\n          (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr))\n       =\n        ((!p. p In P ==> (p LEADSTO q)Pr) /\\\n         (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr))")), t185))
 }
 
 ///|
@@ -723,13 +723,13 @@ fn step_37() -> Unit raise {
   let t195 = @kernel.assume_rule(@parser.parse_term("!p:'a->bool. p In P ==> (p LEADSTO q)Pr ==> X p q Pr"))
   let t196 = @bool.conj(@kernel.assume_rule(@parser.parse_term("!p:'a->bool. p In P ==> (p LEADSTO q)Pr")), t195)
   let t201 = @tactics.then_tac(@tactics.assume_tac(@simp.rewrite_rule(@list.List([@equal.sym(@bool.spec_all(struct_lemma0()))]))(t196)), t200)
-  let t194 = @simp.asm_rewrite_tac(@list.empty())
+  let t194 = @simp.asm_rewrite_tac(@list.List([]))
   let t202 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x192 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(struct_lemma0(), x192), (x193 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm3a(), x193)), @hol88.res_tac), t194)
-  let t191 = @simp.asm_rewrite_tac(@list.empty())
+  let t191 = @simp.asm_rewrite_tac(@list.List([]))
   let t203 = @list.List([(x187 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm0(), x187), @hol88.res_tac, (x188 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm1(), x188), @hol88.res_tac, @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x189 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(struct_lemma0(), x189), (x190 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm3a(), x190)), @hol88.res_tac), t191), t202, @hol88.res_tac, @hol88.res_tac, t201])
   let t186 = @tactics.repeat_tac(@tactics.strip_tac)
   let t204 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t186), t203)
-  struct_lemma00_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!X Pr.\n      (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r.\n          (p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr) /\\\n          (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n             ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n        (!P.\n          (!p. p In P ==> (p LEADSTO q)Pr) /\\\n          (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n             ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))\n     =\n      (!p q.\n         ((p ENSURES q)Pr ==>\n          (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n         (!r.\n           ((p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr)) /\\\n           (r LEADSTO q)Pr /\\\n           ((r LEADSTO q)Pr ==> X r q Pr) ==>\n           (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n         (!P.\n           (p = LUB P) /\\\n           (!p'.\n             p' In P ==> (p' LEADSTO q)Pr /\\ ((p' LEADSTO q)Pr ==> X p' q Pr))\n                ==> (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)))")), t204))
+  struct_lemma00_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!X Pr.\n      (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r.\n          (p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr) /\\\n          (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n             ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n        (!P.\n          (!p. p In P ==> (p LEADSTO q)Pr) /\\\n          (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n             ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))\n     =\n      (!p q.\n         ((p ENSURES q)Pr ==>\n          (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n         (!r.\n           ((p LEADSTO r)Pr /\\ ((p LEADSTO r)Pr ==> X p r Pr)) /\\\n           (r LEADSTO q)Pr /\\\n           ((r LEADSTO q)Pr ==> X r q Pr) ==>\n           (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)) /\\\n         (!P.\n           (p = LUB P) /\\\n           (!p'.\n             p' In P ==> (p' LEADSTO q)Pr /\\ ((p' LEADSTO q)Pr ==> X p' q Pr))\n                ==> (p LEADSTO q)Pr /\\ ((p LEADSTO q)Pr ==> X p q Pr)))")), t204))
 }
 
 ///|
@@ -791,7 +791,7 @@ pub fn leadsto_thm18() -> @kernel.Thm {
 /// STRUCT_lemma1
 fn step_40() -> Unit raise {
   let t221 = @tactics.then_tac(@tactics.then_tac(@tactics.eq_tac, @tactics.repeat_tac(@tactics.strip_tac)), @hol88.res_tac)
-  struct_lemma1_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("(!p:'a->bool. p In P ==> (p LEADSTO q)Pr /\\ X p q Pr)\n    =\n    ((!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr))")), t221))
+  struct_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("(!p:'a->bool. p In P ==> (p LEADSTO q)Pr /\\ X p q Pr)\n    =\n    ((!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr))")), t221))
 }
 
 ///|
@@ -806,19 +806,19 @@ pub fn struct_lemma1() -> @kernel.Thm {
 ///|
 /// STRUCT_lemma01
 fn step_41() -> Unit raise {
-  let t235 = @simp.asm_rewrite_tac(@list.empty())
+  let t235 = @simp.asm_rewrite_tac(@list.List([]))
   let t236 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac((x233 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(struct_lemma1(), x233), (x234 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm3a(), x234)), @hol88.res_tac), t235)
   let t237 = @tactics.then_tac((x231 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(struct_lemma1(), x231), (x232 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm3(), x232))
   let t238 = @tactics.then_tac((x230 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm1(), x230), @hol88.res_tac)
   let t225 = @kernel.assume_rule(@parser.parse_term("!p. (p = LUB P) ==> (X:('a->bool)->('a->bool)->('a->'a)list->bool)p q Pr"))
   let t226 = @bool.spec(@parser.parse_term("LUB (P:('a->bool)->bool)"), t225)
-  let t227 = @tactics.accept_tac(@simp.rewrite_rule(@list.empty())(t226))
+  let t227 = @tactics.accept_tac(@simp.rewrite_rule(@list.List([]))(t226))
   let t223 = @kernel.assume_rule(@parser.parse_term("!p. p In P\n         ==> (X:('a->bool)->('a->bool)->('a->'a)list->bool) p q Pr"))
   let t224 = @bool.conj(@kernel.assume_rule(@parser.parse_term("!p:'a->bool. p In P ==> (p LEADSTO q)Pr")), t223)
   let t239 = @list.List([@hol88.res_tac, @hol88.res_tac, @tactics.then_tac(@tactics.then_tac(@tactics.assume_tac(@simp.rewrite_rule(@list.List([@equal.sym(@bool.spec_all(struct_lemma1()))]))(t224)), @hol88.res_tac), t227), (x228 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm0(), x228), @hol88.res_tac, (x229 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm1(), x229), t238, t237, t236])
   let t222 = @tactics.repeat_tac(@tactics.strip_tac)
   let t240 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t222), t239)
-  struct_lemma01_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!X Pr.\n      (!(p:'a->bool) q.\n         ((p ENSURES q)Pr ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (!r. ((p LEADSTO r)Pr /\\ X p r Pr) /\\ (r LEADSTO q)Pr /\\ X r q Pr\n              ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (!P. (p = LUB P) /\\ (!p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q Pr)\n              ==> (p LEADSTO q)Pr /\\ X p q Pr))\n     =\n      (!p q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r. (p LEADSTO r)Pr /\\ X p r Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr\n              ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n        (!P. (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n               ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))")), t240))
+  struct_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!X Pr.\n      (!(p:'a->bool) q.\n         ((p ENSURES q)Pr ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (!r. ((p LEADSTO r)Pr /\\ X p r Pr) /\\ (r LEADSTO q)Pr /\\ X r q Pr\n              ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (!P. (p = LUB P) /\\ (!p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q Pr)\n              ==> (p LEADSTO q)Pr /\\ X p q Pr))\n     =\n      (!p q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r. (p LEADSTO r)Pr /\\ X p r Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr\n              ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n        (!P. (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n               ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))")), t240))
 }
 
 ///|
@@ -922,7 +922,7 @@ pub fn leadsto_thm22() -> @kernel.Thm {
 fn step_46() -> Unit raise {
   let t268 = @tactics.repeat_tac(@tactics.strip_tac)
   let t269 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t268), @hol88.res_tac)
-  leadsto_thm23_lemma00_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!X Pr.\n      ((!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)) =\n       (!p:'a->bool. p In P ==> (p LEADSTO q)Pr /\\ X p q Pr)")), t269))
+  leadsto_thm23_lemma00_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!X Pr.\n      ((!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)) =\n       (!p:'a->bool. p In P ==> (p LEADSTO q)Pr /\\ X p q Pr)")), t269))
 }
 
 ///|
@@ -939,7 +939,7 @@ pub fn leadsto_thm23_lemma00() -> @kernel.Thm {
 fn step_47() -> Unit raise {
   let t278 = @kernel.assume_rule(@parser.parse_term("!p':'a->bool. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q Pr"))
   let t279 = @tactics.then_tac(@tactics.strip_assume_tac(@simp.rewrite_rule(@list.List([@equal.sym(@bool.spec_all(leadsto_thm23_lemma00()))]))(t278)), @hol88.res_tac)
-  let t277 = @simp.asm_rewrite_tac(@list.empty())
+  let t277 = @simp.asm_rewrite_tac(@list.List([]))
   let t275 = @kernel.assume_rule(@parser.parse_term("!p':'a->bool. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q Pr"))
   let t280 = @tactics.then_tac(@tactics.then_tac(@tactics.strip_assume_tac(@simp.rewrite_rule(@list.List([@equal.sym(@bool.spec_all(leadsto_thm23_lemma00()))]))(t275)), (x276 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm3a(), x276)), t277)
   let t271 = @kernel.assume_rule(@parser.parse_term("!p. p In P\n                 ==> (X:('a->bool)->('a->bool)->('a->'a)list->bool) p q Pr"))
@@ -947,7 +947,7 @@ fn step_47() -> Unit raise {
   let t281 = @list.List([@hol88.res_tac, @hol88.res_tac, @tactics.then_tac(@tactics.assume_tac(@simp.rewrite_rule(@list.List([leadsto_thm23_lemma00()]))(t272)), @hol88.res_tac), (x273 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm0(), x273), @hol88.res_tac, (x274 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm1(), x274), @hol88.res_tac, t280, t279])
   let t270 = @tactics.repeat_tac(@tactics.strip_tac)
   let t282 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t270), t281)
-  leadsto_thm23_lemma01_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!X Pr.\n      (!(p:'a->bool) q.\n         ((p ENSURES q)Pr ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (!r.\n           ((p LEADSTO r)Pr /\\ X p r Pr) /\\ (r LEADSTO q)Pr /\\ X r q Pr\n                          ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (!P. (p = LUB P) /\\\n              (!p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q Pr)\n                          ==> (p LEADSTO q)Pr /\\ X p q Pr))\n      =\n       (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r.\n          (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                         ==> X p q Pr) /\\\n        (!P. (p = LUB P) /\\\n             (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n                         ==> X p q Pr))")), t282))
+  leadsto_thm23_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!X Pr.\n      (!(p:'a->bool) q.\n         ((p ENSURES q)Pr ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (!r.\n           ((p LEADSTO r)Pr /\\ X p r Pr) /\\ (r LEADSTO q)Pr /\\ X r q Pr\n                          ==> (p LEADSTO q)Pr /\\ X p q Pr) /\\\n         (!P. (p = LUB P) /\\\n              (!p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q Pr)\n                          ==> (p LEADSTO q)Pr /\\ X p q Pr))\n      =\n       (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r.\n          (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                         ==> X p q Pr) /\\\n        (!P. (p = LUB P) /\\\n             (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n                         ==> X p q Pr))")), t282))
 }
 
 ///|
@@ -982,13 +982,13 @@ pub fn leadsto_thm23() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm24_lemma01
 fn step_49() -> Unit raise {
-  let t291 = @simp.asm_rewrite_tac(@list.empty())
+  let t291 = @simp.asm_rewrite_tac(@list.List([]))
   let t289 = @kernel.assume_rule(@parser.parse_term("!p. (p = LUB P) ==> (X:('a->bool)->('a->bool)->('a->'a)list->bool) p q Pr"))
   let t290 = @bool.spec(@parser.parse_term("LUB (P:('a->bool)->bool)"), t289)
-  let t292 = @list.List([@tactics.accept_tac(@simp.rewrite_rule(@list.empty())(t290)), t291])
+  let t292 = @list.List([@tactics.accept_tac(@simp.rewrite_rule(@list.List([]))(t290)), t291])
   let t288 = @tactics.repeat_tac(@tactics.strip_tac)
   let t293 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t288), @hol88.res_tac), t292)
-  leadsto_thm24_lemma01_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!X Pr.\n     (!(p:'a->bool) q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (!r. (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                        ==> X p q Pr) /\\\n       (!P. (p = LUB P) /\\\n            (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n                        ==> X p q Pr))\n     =\n     (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r.\n          (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr ==>\n          X p q Pr) /\\\n        (!P.\n          (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr) ==>\n          X(LUB P)q Pr))")), t293))
+  leadsto_thm24_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!X Pr.\n     (!(p:'a->bool) q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (!r. (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n                        ==> X p q Pr) /\\\n       (!P. (p = LUB P) /\\\n            (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n                        ==> X p q Pr))\n     =\n     (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r.\n          (p LEADSTO r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr ==>\n          X p q Pr) /\\\n        (!P.\n          (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr) ==>\n          X(LUB P)q Pr))")), t293))
 }
 
 ///|
@@ -1149,7 +1149,7 @@ pub fn leadsto_thm29_lemma00() -> @kernel.Thm {
 /// LEADSTO_thm29_lemma05_1
 fn step_56() -> Unit raise {
   let t351 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac), @hol88.res_tac)
-  leadsto_thm29_lemma05_1_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("(!p'':'a->bool. p'' In P ==> (p'' LEADSTO q')(CONS st Pr)) ==>\n       (!p''. p'' In P ==>\n        (p'' LEADSTO q')(CONS st Pr) ==> (r UNLESS b)(CONS st Pr) ==>\n        ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) ==>\n       (!p''. p'' In P ==> (r UNLESS b)(CONS st Pr) ==>\n        ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))")), t351))
+  leadsto_thm29_lemma05_1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("(!p'':'a->bool. p'' In P ==> (p'' LEADSTO q')(CONS st Pr)) ==>\n       (!p''. p'' In P ==>\n        (p'' LEADSTO q')(CONS st Pr) ==> (r UNLESS b)(CONS st Pr) ==>\n        ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) ==>\n       (!p''. p'' In P ==> (r UNLESS b)(CONS st Pr) ==>\n        ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))")), t351))
 }
 
 ///|
@@ -1169,7 +1169,7 @@ fn step_57() -> Unit raise {
   let t353 = @parser.parse_term("r:'a->bool")
   let t354 = @tactics.assume_tac(@bool.specl(@list.List([@parser.parse_term("LUB (P:('a->bool)->bool)"), t353]), @mk_state_logic.sym_and_imply_weak_lemma()))
   let t359 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), (x352 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm3a(), x352)), t354), t356), (x357 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm0(), x357)), (x358 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm1(), x358))
-  leadsto_thm29_lemma05_2_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(P:('a->bool)->bool) r q st Pr.\n    (!p. p In P ==> ((p  /\\*  r) LEADSTO q)(CONS st Pr)) ==>\n    (!p. p In P ==> (p LEADSTO q)(CONS st Pr)) ==>\n    (((LUB P)  /\\*  r) LEADSTO q)(CONS st Pr)")), t359))
+  leadsto_thm29_lemma05_2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(P:('a->bool)->bool) r q st Pr.\n    (!p. p In P ==> ((p  /\\*  r) LEADSTO q)(CONS st Pr)) ==>\n    (!p. p In P ==> (p LEADSTO q)(CONS st Pr)) ==>\n    (((LUB P)  /\\*  r) LEADSTO q)(CONS st Pr)")), t359))
 }
 
 ///|
@@ -1184,9 +1184,9 @@ pub fn leadsto_thm29_lemma05_2() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm29_lemma05_3
 fn step_58() -> Unit raise {
-  let t360 = @simp.rewrite_tac(@list.empty())
+  let t360 = @simp.rewrite_tac(@list.List([]))
   let t361 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([in_()])), @tactics.beta_tac), t360)
-  leadsto_thm29_lemma05_3_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) P r.\n      p In (\\p''. ?p'. p' In P /\\ (p'' = p'  /\\*  r))\n     =\n      (?p'. p' In P /\\ (p = p'  /\\*  r))")), t361))
+  leadsto_thm29_lemma05_3_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) P r.\n      p In (\\p''. ?p'. p' In P /\\ (p'' = p'  /\\*  r))\n     =\n      (?p'. p' In P /\\ (p = p'  /\\*  r))")), t361))
 }
 
 ///|
@@ -1210,12 +1210,12 @@ fn step_59() -> Unit raise {
   let t373 = @tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("p':'a->bool")), t368), t370)
   let t366 = @simp.asm_rewrite_tac(@list.List([in_()]))
   let t365 = @tactics.exists_tac(@parser.parse_term("p:'a->bool"))
-  let t364 = @simp.asm_rewrite_tac(@list.empty())
+  let t364 = @simp.asm_rewrite_tac(@list.List([]))
   let t374 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("\\s:'a. p s /\\ r s")), @tactics.beta_tac), t364), t365), t366), t373, t372])
   let t363 = @tactics.repeat_tac(@tactics.strip_tac)
   let t362 = @simp.rewrite_tac(@list.List([lub(), @mk_state_logic.and_def()]))
   let t375 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t362), @tactics.beta_tac), @tactics.eq_tac), t363), t374)
-  leadsto_thm29_lemma05_4_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!s:'a.\n      ((LUB P)  /\\*  r)s =\n      (LUB(\\p. ?p'. p' In P /\\ (p = p'  /\\*  r)))s")), t375))
+  leadsto_thm29_lemma05_4_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!s:'a.\n      ((LUB P)  /\\*  r)s =\n      (LUB(\\p. ?p'. p' In P /\\ (p = p'  /\\*  r)))s")), t375))
 }
 
 ///|
@@ -1230,9 +1230,9 @@ pub fn leadsto_thm29_lemma05_4() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm29_lemma05_5
 fn step_60() -> Unit raise {
-  let t376 = @simp.asm_rewrite_tac(@list.empty())
+  let t376 = @simp.asm_rewrite_tac(@list.List([]))
   let t377 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac), t376)
-  leadsto_thm29_lemma05_5_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(P:('a->bool)->bool) r q' b st Pr.\n    (!p''. p'' In P ==> ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))\n      ==>\n        (!p. (?p'. p' In P /\\ (p = p'  /\\*  r)) ==>\n                 (p LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))")), t377))
+  leadsto_thm29_lemma05_5_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(P:('a->bool)->bool) r q' b st Pr.\n    (!p''. p'' In P ==> ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))\n      ==>\n        (!p. (?p'. p' In P /\\ (p = p'  /\\*  r)) ==>\n                 (p LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))")), t377))
 }
 
 ///|
@@ -1256,7 +1256,7 @@ fn step_61() -> Unit raise {
   let t380 = @bool.specl(@list.List([@parser.parse_term("\\p:'a->bool. ?p'. p' In P /\\ (p = (p'  /\\*  r))"), t379, t378]), leadsto_thm3a())
   let t381 = @tactics.assume_tac(@simp.rewrite_rule(@list.List([leadsto_thm29_lemma05_3()]))(t380))
   let t386 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t381), t383), t385)
-  leadsto_thm29_lemma05_6_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(P:('a->bool)->bool) r q' b st Pr.\n       (!p''.\n        p'' In P ==>\n        ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))\n           ==> ((((LUB P)  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))")), t386))
+  leadsto_thm29_lemma05_6_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(P:('a->bool)->bool) r q' b st Pr.\n       (!p''.\n        p'' In P ==>\n        ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))\n           ==> ((((LUB P)  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))")), t386))
 }
 
 ///|
@@ -1311,7 +1311,7 @@ fn step_62() -> Unit raise {
   let t428 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), (x388 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(@mk_ensures.ensures_thm4(), x388)), t392), t399), t400), t401), (x405 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(t404, x405)), t427, t426])
   let t387 = @tactics.repeat_tac(@tactics.conj_tac)
   let t429 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t387), t428)
-  leadsto_thm29_lemma05_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p':'a->bool) q' r b st Pr.\n     ((p' ENSURES q')(CONS st Pr) ==>\n      (r UNLESS b)(CONS st Pr) ==>\n      ((p'  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) /\\\n     (!r'.\n       (p' LEADSTO r')(CONS st Pr) /\\\n       ((p' LEADSTO r')(CONS st Pr) ==>\n        (r UNLESS b)(CONS st Pr) ==>\n        ((p'  /\\*  r) LEADSTO ((r'  /\\*  r) \\/* b))(CONS st Pr)) /\\\n       (r' LEADSTO q')(CONS st Pr) /\\\n       ((r' LEADSTO q')(CONS st Pr) ==>\n        (r UNLESS b)(CONS st Pr) ==>\n        ((r'  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) ==>\n       (p' LEADSTO q')(CONS st Pr) ==>\n       (r UNLESS b)(CONS st Pr) ==>\n       ((p'  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) /\\\n     (!P.\n       (!p''. p'' In P ==> (p'' LEADSTO q')(CONS st Pr)) /\\\n       (!p''.\n         p'' In P ==>\n         (p'' LEADSTO q')(CONS st Pr) ==>\n         (r UNLESS b)(CONS st Pr) ==>\n         ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) ==>\n       ((LUB P) LEADSTO q')(CONS st Pr) ==>\n       (r UNLESS b)(CONS st Pr) ==>\n       (((LUB P)  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))")), t429))
+  leadsto_thm29_lemma05_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p':'a->bool) q' r b st Pr.\n     ((p' ENSURES q')(CONS st Pr) ==>\n      (r UNLESS b)(CONS st Pr) ==>\n      ((p'  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) /\\\n     (!r'.\n       (p' LEADSTO r')(CONS st Pr) /\\\n       ((p' LEADSTO r')(CONS st Pr) ==>\n        (r UNLESS b)(CONS st Pr) ==>\n        ((p'  /\\*  r) LEADSTO ((r'  /\\*  r) \\/* b))(CONS st Pr)) /\\\n       (r' LEADSTO q')(CONS st Pr) /\\\n       ((r' LEADSTO q')(CONS st Pr) ==>\n        (r UNLESS b)(CONS st Pr) ==>\n        ((r'  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) ==>\n       (p' LEADSTO q')(CONS st Pr) ==>\n       (r UNLESS b)(CONS st Pr) ==>\n       ((p'  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) /\\\n     (!P.\n       (!p''. p'' In P ==> (p'' LEADSTO q')(CONS st Pr)) /\\\n       (!p''.\n         p'' In P ==>\n         (p'' LEADSTO q')(CONS st Pr) ==>\n         (r UNLESS b)(CONS st Pr) ==>\n         ((p''  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr)) ==>\n       ((LUB P) LEADSTO q')(CONS st Pr) ==>\n       (r UNLESS b)(CONS st Pr) ==>\n       (((LUB P)  /\\*  r) LEADSTO ((q'  /\\*  r) \\/* b))(CONS st Pr))")), t429))
 }
 
 ///|
@@ -1378,9 +1378,9 @@ pub fn leadsto_thm30_lemma00() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm30_lemma01
 fn step_66() -> Unit raise {
-  let t437 = @simp.rewrite_tac(@list.empty())
+  let t437 = @simp.rewrite_tac(@list.List([]))
   let t438 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@mk_state_logic.not_def1(), @mk_state_logic.false_def()])), @tactics.beta_tac), t437)
-  leadsto_thm30_lemma01_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(r:'a->bool). (!s. Not r s) ==> (!s. r s = False s)")), t438))
+  leadsto_thm30_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(r:'a->bool). (!s. Not r s) ==> (!s. r s = False s)")), t438))
 }
 
 ///|
@@ -1411,9 +1411,9 @@ pub fn leadsto_thm30_lemma02() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm30_lemma03
 fn step_68() -> Unit raise {
-  let t440 = @simp.once_asm_rewrite_tac(@list.empty())
+  let t440 = @simp.once_asm_rewrite_tac(@list.List([]))
   let t441 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), @tactics.gen_tac), t440), @tactics.beta_tac), @tactics.refl_tac)
-  leadsto_thm30_lemma03_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!p:'a->bool.\n    (p' = (\\s:'a->'a. ?p. P p /\\ p s)) ==> (!s. p' s = ?p. P p /\\ p s)")), t441))
+  leadsto_thm30_lemma03_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!p:'a->bool.\n    (p' = (\\s:'a->'a. ?p. P p /\\ p s)) ==> (!s. p' s = ?p. P p /\\ p s)")), t441))
 }
 
 ///|
@@ -1429,22 +1429,22 @@ pub fn leadsto_thm30_lemma03() -> @kernel.Thm {
 /// LEADSTO_thm30_lemma04
 fn step_69() -> Unit raise {
   let t456 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t455 = @simp.asm_rewrite_tac(@list.empty())
+  let t455 = @simp.asm_rewrite_tac(@list.List([]))
   let t454 = @tactics.undisch_tac(@parser.parse_term("(p':'a->bool)s"))
   let t451 = @kernel.assume_rule(@parser.parse_term("!p'':'a->bool. P p''\n            ==> ((q':'a->bool) = \\s. F) ==> (!s. ~p'' s)"))
   let t452 = @tactics.assume_tac(@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("(q':'a->bool) = \\s. F"))]))(t451))
   let t450 = @tactics.repeat_tac(@tactics.strip_tac)
   let t449 = @simp.rewrite_tac(@list.List([lub(), in_(), @mk_state_logic.not_def1(), @mk_state_logic.false_def()]))
   let t457 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t449), @tactics.beta_tac), t450), t452), (x453 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm30_lemma03(), x453)), t454), t455), @tactics.beta_tac), t456), @hol88.res_tac)
-  let t448 = @simp.asm_rewrite_tac(@list.empty())
+  let t448 = @simp.asm_rewrite_tac(@list.List([]))
   let t458 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac), (x447 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm30_lemma02(), x447)), @hol88.res_tac), t448)
-  let t446 = @simp.asm_rewrite_tac(@list.empty())
+  let t446 = @simp.asm_rewrite_tac(@list.List([]))
   let t443 = @kernel.assume_rule(@parser.parse_term("((p':'a->bool) ENSURES q')(CONS st Pr)"))
   let t444 = @tactics.assume_tac(@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("(q':'a->bool) = False"))]))(t443))
   let t459 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t444), (x445 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(@mk_ensures.ensures_thm3(), x445)), t446), t458, t457])
   let t442 = @tactics.repeat_tac(@tactics.conj_tac)
   let t460 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t442), t459)
-  leadsto_thm30_lemma04_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p':'a->bool) (q':'a->bool).\n     ((p' ENSURES q')(CONS st Pr) ==> (q' = False) ==> (!s. Not p' s)) /\\\n     (!r:'a->bool.\n       ((r = False) ==> (!s. Not p' s)) /\\\n       ((q' = False) ==> (!s. Not r s)) ==>\n       (q' = False) ==> (!s. Not p' s)) /\\\n     (!P:('a->bool)->bool.\n       (p' = LUB P) /\\\n       (!p''. p'' In P ==> (q' = False) ==> (!s. Not p'' s)) ==>\n       (q' = False) ==> (!s. Not p' s))")), t460))
+  leadsto_thm30_lemma04_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p':'a->bool) (q':'a->bool).\n     ((p' ENSURES q')(CONS st Pr) ==> (q' = False) ==> (!s. Not p' s)) /\\\n     (!r:'a->bool.\n       ((r = False) ==> (!s. Not p' s)) /\\\n       ((q' = False) ==> (!s. Not r s)) ==>\n       (q' = False) ==> (!s. Not p' s)) /\\\n     (!P:('a->bool)->bool.\n       (p' = LUB P) /\\\n       (!p''. p'' In P ==> (q' = False) ==> (!s. Not p'' s)) ==>\n       (q' = False) ==> (!s. Not p' s))")), t460))
 }
 
 ///|
@@ -1474,10 +1474,10 @@ pub fn leadsto_thm30_lemma05() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm30_lemma06
 fn step_71() -> Unit raise {
-  let t462 = @simp.asm_rewrite_tac(@list.empty())
+  let t462 = @simp.asm_rewrite_tac(@list.List([]))
   let t461 = @tactics.exists_tac(@parser.parse_term("False:'a->bool"))
   let t463 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t461), t462)
-  leadsto_thm30_lemma06_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) st Pr.\n       (p LEADSTO False)(CONS st Pr)\n          ==> (?q. (q = False) /\\ (p LEADSTO q)(CONS st Pr))")), t463))
+  leadsto_thm30_lemma06_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) st Pr.\n       (p LEADSTO False)(CONS st Pr)\n          ==> (?q. (q = False) /\\ (p LEADSTO q)(CONS st Pr))")), t463))
 }
 
 ///|
@@ -1649,7 +1649,7 @@ pub fn leadsto_cor6() -> @kernel.Thm {
 ///|
 /// LEADSTO_cor7
 fn step_79() -> Unit raise {
-  let t538 = @simp.asm_rewrite_tac(@list.empty())
+  let t538 = @simp.asm_rewrite_tac(@list.List([]))
   let t537 = @tactics.repeat_tac(@tactics.strip_tac)
   let t536 = @simp.rewrite_tac(@list.List([@class.de_morgan_thm()]))
   let t535 = @simp.rewrite_tac(@list.List([@mk_state_logic.not_def1(), @mk_state_logic.and_def()]))
@@ -1817,7 +1817,7 @@ pub fn leadsto2() -> @kernel.Thm {
 /// LEADSTO2Imply_1
 fn step_87() -> Unit raise {
   let t578 = @tactics.then_tac(@tactics.then_tac(@tactics.beta_tac, @tactics.repeat_tac(@tactics.strip_tac)), @hol88.res_tac)
-  leadsto2imply_1_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!R (p:'a->bool) (q:'a->bool) (Pr:('a->'a)list).\n       (!p q. LEADSTO2Fn R p q Pr ==> R p q Pr) ==>\n          (!p q. (\\p q Pr. !R. (!p q. LEADSTO2Fn R p q Pr ==> R p q Pr)\n                           ==> R p q Pr) p q Pr\n                   ==> R p q Pr)")), t578))
+  leadsto2imply_1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!R (p:'a->bool) (q:'a->bool) (Pr:('a->'a)list).\n       (!p q. LEADSTO2Fn R p q Pr ==> R p q Pr) ==>\n          (!p q. (\\p q Pr. !R. (!p q. LEADSTO2Fn R p q Pr ==> R p q Pr)\n                           ==> R p q Pr) p q Pr\n                   ==> R p q Pr)")), t578))
 }
 
 ///|
@@ -1833,16 +1833,16 @@ pub fn leadsto2imply_1() -> @kernel.Thm {
 /// IsMonoLEADSTO2
 fn step_88() -> Unit raise {
   let t584 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t583 = @simp.asm_rewrite_tac(@list.empty())
+  let t583 = @simp.asm_rewrite_tac(@list.List([]))
   let t582 = @tactics.exists_tac(@parser.parse_term("P:('a->bool)->bool"))
   let t585 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disj2_tac, @tactics.disj2_tac), t582), t583), t584), @hol88.res_tac), @hol88.res_tac)
-  let t581 = @simp.asm_rewrite_tac(@list.empty())
+  let t581 = @simp.asm_rewrite_tac(@list.List([]))
   let t580 = @tactics.exists_tac(@parser.parse_term("r:'a->bool"))
   let t586 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@hol88.res_tac, @tactics.disj2_tac), @tactics.disj1_tac), t580), t581)
-  let t587 = @list.List([@simp.asm_rewrite_tac(@list.empty()), t586, t585])
+  let t587 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t586, t585])
   let t579 = @tactics.repeat_tac(@tactics.strip_tac)
   let t588 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([leadsto2fn()])), @tactics.beta_tac), t579), t587)
-  ismonoleadsto2_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!R1 R2 (Pr:('a->'a)list).\n      (!p q. R1 p q Pr ==> R2 p q Pr)\n            ==> (!p q. LEADSTO2Fn R1 p q Pr ==> LEADSTO2Fn R2 p q Pr)")), t588))
+  ismonoleadsto2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!R1 R2 (Pr:('a->'a)list).\n      (!p q. R1 p q Pr ==> R2 p q Pr)\n            ==> (!p q. LEADSTO2Fn R1 p q Pr ==> LEADSTO2Fn R2 p q Pr)")), t588))
 }
 
 ///|
@@ -1887,7 +1887,7 @@ fn step_90() -> Unit raise {
   let t593 = @parser.parse_term("R2:('a->bool)->('a->bool)->(('a->'a)list)->bool")
   let t595 = @tactics.assume_tac(@bool.genl(@list.List([@parser.parse_term("R1:('a->bool)->('a->bool)->(('a->'a)list)->bool"), t593]), t594))
   let t603 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t595), t596), @tactics.beta_tac), t597), t602), @hol88.res_tac)
-  leadsto2imply1_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) q Pr.\n       LEADSTO2Fn LEADSTO2 p q Pr ==> LEADSTO2 p q Pr")), t603))
+  leadsto2imply1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q Pr.\n       LEADSTO2Fn LEADSTO2 p q Pr ==> LEADSTO2 p q Pr")), t603))
 }
 
 ///|
@@ -1913,7 +1913,7 @@ fn step_91() -> Unit raise {
   let t609 = @bool.mp(@equal.beta_rule(@bool.specl(@list.List([@parser.parse_term("\\p q Pr. LEADSTO2Fn LEADSTO2 (p:'a->bool) q Pr"), t605, t604]), ismonoleadsto2())), t608)
   let t610 = @tactics.assume_tac(@simp.rewrite_rule(@list.List([@class.eta_ax()]))(t609))
   let t614 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t610), t613)
-  leadsto2imply2_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) q Pr. LEADSTO2 p q Pr ==> LEADSTO2Fn LEADSTO2 p q Pr")), t614))
+  leadsto2imply2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q Pr. LEADSTO2 p q Pr ==> LEADSTO2Fn LEADSTO2 p q Pr")), t614))
 }
 
 ///|
@@ -1931,7 +1931,7 @@ fn step_92() -> Unit raise {
   let t615 = @tactics.accept_tac(@bool.spec_all(leadsto2imply1()))
   let t616 = @list.List([@tactics.accept_tac(@bool.spec_all(leadsto2imply2())), t615])
   let t617 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t616)
-  leadsto2eqs_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) q Pr. LEADSTO2 p q Pr = LEADSTO2Fn LEADSTO2 p q Pr")), t617))
+  leadsto2eqs_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q Pr. LEADSTO2 p q Pr = LEADSTO2Fn LEADSTO2 p q Pr")), t617))
 }
 
 ///|
@@ -1968,7 +1968,7 @@ fn step_94() -> Unit raise {
   let t623 = @simp.rewrite_tac(@list.List([@kernel.assume_rule(@parser.parse_term("LEADSTO2Fn R (p:'a->bool) q Pr"))]))
   let t622 = @simp.once_rewrite_tac(@list.List([@kernel.assume_rule(@parser.parse_term("R = LEADSTO2Fn (R:('a->bool)->('a->bool)->(('a->'a)list)->bool)"))]))
   let t624 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t622), t623)
-  leadsto2thm1_1_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!R. (R = LEADSTO2Fn R)\n           ==> (!(p:'a->bool) q Pr. LEADSTO2Fn R p q Pr ==> R p q Pr)")), t624))
+  leadsto2thm1_1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!R. (R = LEADSTO2Fn R)\n           ==> (!(p:'a->bool) q Pr. LEADSTO2Fn R p q Pr ==> R p q Pr)")), t624))
 }
 
 ///|
@@ -1989,7 +1989,7 @@ fn step_95() -> Unit raise {
   let t626 = @tactics.assume_tac(@bool.spec_all(@kernel.assume_rule(@parser.parse_term("!R. (!(p':'a->bool) q'. LEADSTO2Fn R p' q' Pr ==> R p' q' Pr)\n              ==> R p q Pr"))))
   let t625 = @tactics.repeat_tac(@tactics.strip_tac)
   let t630 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([leadsto2()])), t625), t626), t629), @hol88.res_tac)
-  leadsto2minfixthm_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!R. (R = LEADSTO2Fn R)\n           ==> (!(p:'a->bool) q Pr. LEADSTO2 p q Pr ==> R p q Pr)")), t630))
+  leadsto2minfixthm_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!R. (R = LEADSTO2Fn R)\n           ==> (!(p:'a->bool) q Pr. LEADSTO2 p q Pr ==> R p q Pr)")), t630))
 }
 
 ///|
@@ -2010,7 +2010,7 @@ fn step_96() -> Unit raise {
   let t632 = @tactics.repeat_tac(@tactics.strip_tac)
   let t631 = @simp.rewrite_tac(@list.List([leadsto2()]))
   let t636 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t631), t632), t635), @hol88.res_tac)
-  leadsto2inductthm_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!R. (!(p:'a->bool) q Pr. LEADSTO2Fn R p q Pr ==> R p q Pr)\n             ==> (!p q Pr. LEADSTO2 p q Pr ==> R p q Pr)")), t636))
+  leadsto2inductthm_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!R. (!(p:'a->bool) q Pr. LEADSTO2Fn R p q Pr ==> R p q Pr)\n             ==> (!p q Pr. LEADSTO2 p q Pr ==> R p q Pr)")), t636))
 }
 
 ///|
@@ -2040,14 +2040,14 @@ pub fn leadsto2fam() -> @kernel.Thm {
 ///|
 /// LEADSTO2Fn_EQ_LEADSTO2Fam
 fn step_98() -> Unit raise {
-  let t641 = @simp.asm_rewrite_tac(@list.empty())
+  let t641 = @simp.asm_rewrite_tac(@list.List([]))
   let t639 = @kernel.assume_rule(@parser.parse_term("!p. (p = LUB (P:('a->bool)->bool)) ==>\n             (R:('a->bool)->('a->bool)->(('a->'a)list)->bool) p q Pr"))
   let t640 = @bool.spec(@parser.parse_term("LUB (P:('a->bool)->bool)"), t639)
-  let t642 = @list.List([@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.empty())(t640)])), t641])
+  let t642 = @list.List([@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([]))(t640)])), t641])
   let t638 = @tactics.repeat_tac(@tactics.strip_tac)
   let t637 = @tactics.repeat_tac(@tactics.gen_tac)
   let t643 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([leadsto2fam(), leadsto2fn()])), @tactics.beta_tac), t637), @tactics.eq_tac), t638), @hol88.res_tac), t642)
-  leadsto2fn_eq_leadsto2fam_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!R Pr.\n      (!(p:'a->bool) q. LEADSTO2Fn R p q Pr ==> R p q Pr) = LEADSTO2Fam R Pr")), t643))
+  leadsto2fn_eq_leadsto2fam_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!R Pr.\n      (!(p:'a->bool) q. LEADSTO2Fn R p q Pr ==> R p q Pr) = LEADSTO2Fam R Pr")), t643))
 }
 
 ///|
@@ -2097,7 +2097,7 @@ pub fn leadsto2_thm1() -> @kernel.Thm {
 /// LEADSTO2_thm3_lemma1
 fn step_101() -> Unit raise {
   let t648 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac)
-  leadsto2_thm3_lemma1_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("(!p:'a->bool. p In P ==>\n     (!R.\n       (!p q.\n         ((p ENSURES q)Pr ==> R p q Pr) /\\\n         (!r. (p ENSURES r)Pr /\\ R r q Pr ==> R p q Pr) /\\\n         (!P. (!p'. p' In P ==> R p' q Pr) ==> R (LUB P) q Pr)) ==>\n       R p q Pr)) ==>\n   (!p. p In P ==>\n     (!p q.\n       ((p ENSURES q)Pr ==> R p q Pr) /\\\n       (!r. (p ENSURES r)Pr /\\ R r q Pr ==> R p q Pr) /\\\n       (!P. (!p'. p' In P ==> R p' q Pr) ==> R (LUB P) q Pr)) ==>\n     R p q Pr)")), t648))
+  leadsto2_thm3_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("(!p:'a->bool. p In P ==>\n     (!R.\n       (!p q.\n         ((p ENSURES q)Pr ==> R p q Pr) /\\\n         (!r. (p ENSURES r)Pr /\\ R r q Pr ==> R p q Pr) /\\\n         (!P. (!p'. p' In P ==> R p' q Pr) ==> R (LUB P) q Pr)) ==>\n       R p q Pr)) ==>\n   (!p. p In P ==>\n     (!p q.\n       ((p ENSURES q)Pr ==> R p q Pr) /\\\n       (!r. (p ENSURES r)Pr /\\ R r q Pr ==> R p q Pr) /\\\n       (!P. (!p'. p' In P ==> R p' q Pr) ==> R (LUB P) q Pr)) ==>\n     R p q Pr)")), t648))
 }
 
 ///|
@@ -2132,7 +2132,7 @@ pub fn leadsto2_thm3() -> @kernel.Thm {
 ///|
 /// LEADSTO2_thm3a
 fn step_103() -> Unit raise {
-  let t655 = @simp.asm_rewrite_tac(@list.empty())
+  let t655 = @simp.asm_rewrite_tac(@list.List([]))
   let t656 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), (x654 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm3(), x654)), t655)
   leadsto2_thm3a_c.set(@aux_definitions.prove_thm("LEADSTO2_thm3a", @parser.parse_term("!(P:('a->bool)->bool) q Pr.\n       (p = LUB P) /\\ (!p. p In P ==> LEADSTO2 p q Pr)\n             ==> LEADSTO2 p q Pr"), t656))
 }
@@ -2153,13 +2153,13 @@ fn step_104() -> Unit raise {
   let t663 = @simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("(p:'a->bool) = p2"))]))(t662)]))
   let t661 = @kernel.assume_rule(@parser.parse_term("(p:'a->bool) s"))
   let t664 = @tactics.thenl(@tactics.strip_tac, @list.List([@simp.rewrite_tac(@list.List([@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("(p:'a->bool) = p1"))]))(t661)])), t663]))
-  let t659 = @simp.asm_rewrite_tac(@list.empty())
+  let t659 = @simp.asm_rewrite_tac(@list.List([]))
   let t660 = @tactics.then_tac(@tactics.exists_tac(@parser.parse_term("p2:'a->bool")), t659)
-  let t658 = @simp.asm_rewrite_tac(@list.empty())
+  let t658 = @simp.asm_rewrite_tac(@list.List([]))
   let t665 = @list.List([@tactics.thenl(@tactics.strip_tac, @list.List([@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("p1:'a->bool")), t658), t660])), t664])
   let t657 = @simp.rewrite_tac(@list.List([lub(), @mk_state_logic.or_def()]))
   let t666 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t657), @tactics.beta_tac), @tactics.eq_tac), t665)
-  leadsto2_thm4_lemma1a_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p1:'a->bool) p2 s. (p1 \\/* p2) s = (LUB (\\p. (p = p1) \\/ (p = p2))) s")), t666))
+  leadsto2_thm4_lemma1a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p1:'a->bool) p2 s. (p1 \\/* p2) s = (LUB (\\p. (p = p1) \\/ (p = p2))) s")), t666))
 }
 
 ///|
@@ -2192,7 +2192,7 @@ pub fn leadsto2_thm4_lemma1() -> @kernel.Thm {
 /// LEADSTO2_thm4_lemma2
 fn step_106() -> Unit raise {
   let t669 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac)
-  leadsto2_thm4_lemma2_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(R:('a->bool)->('a->bool)->(('a->'a)list)->bool) Pr.\n     (!p' q'.\n        (p' ENSURES q') Pr \\/ (?r. (p' ENSURES r) Pr /\\ R r q' Pr) \\/\n        (?P. (p' = LUB P) /\\ (!p. p In P ==> R p q' Pr)) ==> R p' q' Pr)\n      ==> (!p q P. ((p = LUB P) /\\ (!p. p In P ==> R p q Pr)) ==> R p q Pr)")), t669))
+  leadsto2_thm4_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(R:('a->bool)->('a->bool)->(('a->'a)list)->bool) Pr.\n     (!p' q'.\n        (p' ENSURES q') Pr \\/ (?r. (p' ENSURES r) Pr /\\ R r q' Pr) \\/\n        (?P. (p' = LUB P) /\\ (!p. p In P ==> R p q' Pr)) ==> R p' q' Pr)\n      ==> (!p q P. ((p = LUB P) /\\ (!p. p In P ==> R p q Pr)) ==> R p q Pr)")), t669))
 }
 
 ///|
@@ -2207,10 +2207,10 @@ pub fn leadsto2_thm4_lemma2() -> @kernel.Thm {
 ///|
 /// LEADSTO2_thm4_lemma3
 fn step_107() -> Unit raise {
-  let t670 = @simp.asm_rewrite_tac(@list.empty())
-  let t671 = @list.List([@simp.asm_rewrite_tac(@list.empty()), t670])
+  let t670 = @simp.asm_rewrite_tac(@list.List([]))
+  let t671 = @list.List([@simp.asm_rewrite_tac(@list.List([])), t670])
   let t672 = @tactics.thenl(@tactics.then_tac(@tactics.beta_tac, @tactics.repeat_tac(@tactics.strip_tac)), t671)
-  leadsto2_thm4_lemma3_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!R (p1:'a->bool) p2 (q:'a->bool) (Pr:('a->'a)list) (Pr:('a->'a)list).\n      R p1 q Pr ==> R p2 q Pr ==>\n       (!p. (\\p. (p = p1) \\/ (p = p2))p ==> R p q Pr)")), t672))
+  leadsto2_thm4_lemma3_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!R (p1:'a->bool) p2 (q:'a->bool) (Pr:('a->'a)list) (Pr:('a->'a)list).\n      R p1 q Pr ==> R p2 q Pr ==>\n       (!p. (\\p. (p = p1) \\/ (p = p2))p ==> R p q Pr)")), t672))
 }
 
 ///|
@@ -2233,7 +2233,7 @@ fn step_108() -> Unit raise {
   let t679 = @tactics.accept_tac(@simp.rewrite_rule(@list.List([@equal.sym(@bool.spec_all(leadsto2_thm4_lemma1())), t674]))(t678))
   let t673 = @tactics.repeat_tac(@tactics.strip_tac)
   let t680 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([in_()])), t673), t679)
-  leadsto2_thm4_lemma4_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!R (p1:'a->bool) (p2:'a->bool) (q:'a->bool)  (Pr:('a->'a)list).\n      R p1 q Pr ==> R p2 q Pr ==>\n       (!p q P. (p = LUB P) /\\ (!p. p In P ==> R p q Pr) ==> R p q Pr) ==>\n          R (p1 \\/* p2) q Pr")), t680))
+  leadsto2_thm4_lemma4_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!R (p1:'a->bool) (p2:'a->bool) (q:'a->bool)  (Pr:('a->'a)list).\n      R p1 q Pr ==> R p2 q Pr ==>\n       (!p q P. (p = LUB P) /\\ (!p. p In P ==> R p q Pr) ==> R p q Pr) ==>\n          R (p1 \\/* p2) q Pr")), t680))
 }
 
 ///|
@@ -2307,7 +2307,7 @@ pub fn leadsto2_thm2a() -> @kernel.Thm {
 /// LEADSTO2_thm2b
 fn step_112() -> Unit raise {
   let t695 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), (x694 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm1(), x694))
-  leadsto2_thm2b_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p':'a->bool) q'.\n     ((p' ENSURES q')Pr ==> (!r. LEADSTO2 q' r Pr ==> LEADSTO2 p' r Pr))")), t695))
+  leadsto2_thm2b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p':'a->bool) q'.\n     ((p' ENSURES q')Pr ==> (!r. LEADSTO2 q' r Pr ==> LEADSTO2 p' r Pr))")), t695))
 }
 
 ///|
@@ -2323,7 +2323,7 @@ pub fn leadsto2_thm2b() -> @kernel.Thm {
 /// LEADSTO2_thm2c
 fn step_113() -> Unit raise {
   let t697 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac), (x696 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm1(), x696))
-  leadsto2_thm2c_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p':'a->bool) q'.\n     (!r.\n       (p' ENSURES r)Pr /\\ (!r'. LEADSTO2 q' r' Pr ==> LEADSTO2 r r' Pr) ==>\n       (!r. LEADSTO2 q' r Pr ==> LEADSTO2 p' r Pr))")), t697))
+  leadsto2_thm2c_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p':'a->bool) q'.\n     (!r.\n       (p' ENSURES r)Pr /\\ (!r'. LEADSTO2 q' r' Pr ==> LEADSTO2 r r' Pr) ==>\n       (!r. LEADSTO2 q' r Pr ==> LEADSTO2 p' r Pr))")), t697))
 }
 
 ///|
@@ -2339,7 +2339,7 @@ pub fn leadsto2_thm2c() -> @kernel.Thm {
 /// LEADSTO2_thm2d_lemma1
 fn step_114() -> Unit raise {
   let t698 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac)
-  leadsto2_thm2d_lemma1_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(q':'a->bool) r Pr.\n     LEADSTO2 q' r Pr ==>\n      (!p'':'a->bool. p'' In P ==> (!r. LEADSTO2 q' r Pr ==> LEADSTO2 p'' r Pr))\n          ==> (!p'':'a->bool. p'' In P ==> LEADSTO2 p'' r Pr)")), t698))
+  leadsto2_thm2d_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(q':'a->bool) r Pr.\n     LEADSTO2 q' r Pr ==>\n      (!p'':'a->bool. p'' In P ==> (!r. LEADSTO2 q' r Pr ==> LEADSTO2 p'' r Pr))\n          ==> (!p'':'a->bool. p'' In P ==> LEADSTO2 p'' r Pr)")), t698))
 }
 
 ///|
@@ -2355,7 +2355,7 @@ pub fn leadsto2_thm2d_lemma1() -> @kernel.Thm {
 /// LEADSTO2_thm2d
 fn step_115() -> Unit raise {
   let t701 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), (x699 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm2d_lemma1(), x699)), (x700 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm3(), x700))
-  leadsto2_thm2d_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p':'a->bool) q'.\n      (!P:('a->bool)->bool.\n       (!p''. p'' In P ==> (!r. LEADSTO2 q' r Pr ==> LEADSTO2 p'' r Pr)) ==>\n       (!r. LEADSTO2 q' r Pr ==> LEADSTO2(LUB P)r Pr))")), t701))
+  leadsto2_thm2d_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p':'a->bool) q'.\n      (!P:('a->bool)->bool.\n       (!p''. p'' In P ==> (!r. LEADSTO2 q' r Pr ==> LEADSTO2 p'' r Pr)) ==>\n       (!r. LEADSTO2 q' r Pr ==> LEADSTO2(LUB P)r Pr))")), t701))
 }
 
 ///|
@@ -2409,7 +2409,7 @@ fn step_118() -> Unit raise {
   let t709 = @simp.rewrite_tac(@list.List([lub(), in_()]))
   let t708 = @tactics.exists_tac(@parser.parse_term("\\(p':'a->bool). if (p = p') then T else F"))
   let t715 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.disj2_tac), @tactics.disj2_tac), t708), t709), @tactics.beta_tac), @tactics.conj_tac), t714)
-  let t706 = @tactics.then_tac((x705 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm3(), x705), @simp.asm_rewrite_tac(@list.empty()))
+  let t706 = @tactics.then_tac((x705 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm3(), x705), @simp.asm_rewrite_tac(@list.List([])))
   let t707 = @list.List([@tactics.accept_tac(@bool.undisch(@bool.spec_all(leadsto2_thm0()))), (x704 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm2(), x704), t706])
   let t716 = @list.List([@tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t707), t715])
   let t717 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t716)
@@ -2436,7 +2436,7 @@ fn step_119() -> Unit raise {
   let t723 = @simp.rewrite_tac(@list.List([lub(), in_()]))
   let t722 = @tactics.exists_tac(@parser.parse_term("\\(p':'a->bool). if (p = p') then T else F"))
   let t729 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.disj2_tac), @tactics.disj2_tac), t722), t723), @tactics.beta_tac), @tactics.conj_tac), t728)
-  let t720 = @tactics.then_tac((x719 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm3(), x719), @simp.asm_rewrite_tac(@list.empty()))
+  let t720 = @tactics.then_tac((x719 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm3(), x719), @simp.asm_rewrite_tac(@list.List([])))
   let t721 = @list.List([@tactics.accept_tac(@bool.undisch(@bool.spec_all(leadsto2_thm0()))), (x718 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm1(), x718), t720])
   let t730 = @list.List([@tactics.thenl(@tactics.repeat_tac(@tactics.strip_tac), t721), t729])
   let t731 = @tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @tactics.eq_tac), t730)
@@ -2456,7 +2456,7 @@ pub fn leadsto2_thm6() -> @kernel.Thm {
 /// LEADSTO2_thm7_lemma01
 fn step_120() -> Unit raise {
   let t732 = @tactics.then_tac(@tactics.then_tac(@tactics.eq_tac, @tactics.repeat_tac(@tactics.strip_tac)), @hol88.res_tac)
-  leadsto2_thm7_lemma01_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("(!p':'a->bool.\n      p' In P ==> LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q Pr))\n    =\n     ((!p'. p' In P ==> LEADSTO2 p' q Pr) /\\\n      (!p'. p' In P ==> LEADSTO2 p' q Pr ==> X p' q Pr))")), t732))
+  leadsto2_thm7_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("(!p':'a->bool.\n      p' In P ==> LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q Pr))\n    =\n     ((!p'. p' In P ==> LEADSTO2 p' q Pr) /\\\n      (!p'. p' In P ==> LEADSTO2 p' q Pr ==> X p' q Pr))")), t732))
 }
 
 ///|
@@ -2480,7 +2480,7 @@ fn step_121() -> Unit raise {
   let t743 = @list.List([(x734 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm0(), x734), @hol88.res_tac, (x735 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm1(), x735), @hol88.res_tac, @tactics.then_tac(@tactics.strip_assume_tac(@simp.rewrite_rule(@list.List([leadsto2_thm7_lemma01()]))(t736)), (x737 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm3(), x737)), t742, @hol88.res_tac, @hol88.res_tac, t741])
   let t733 = @tactics.repeat_tac(@tactics.strip_tac)
   let t744 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t733), t743)
-  leadsto2_thm7_lemma_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!X Pr.\n     (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r.\n          (p ENSURES r)Pr /\\\n          LEADSTO2 r q Pr /\\\n          (LEADSTO2 r q Pr ==> X r q Pr) ==>\n          LEADSTO2 p q Pr ==>\n          X p q Pr) /\\\n        (!P.\n          (!p. p In P ==> LEADSTO2 p q Pr) /\\\n          (!p. p In P ==> LEADSTO2 p q Pr ==> X p q Pr) ==>\n          LEADSTO2(LUB P)q Pr ==>\n          X(LUB P)q Pr))\n    =\n     (!(p:'a->bool) q.\n         ((p ENSURES q)Pr ==>\n          LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q Pr)) /\\\n         (!r.\n           (p ENSURES r)Pr /\\\n           LEADSTO2 r q Pr /\\\n           (LEADSTO2 r q Pr ==> X r q Pr) ==>\n           LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q Pr)) /\\\n         (!P.\n           (!p'.\n             p' In P ==>\n             LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q Pr)) ==>\n           LEADSTO2(LUB P)q Pr /\\ (LEADSTO2(LUB P)q Pr ==> X(LUB P)q Pr)))")), t744))
+  leadsto2_thm7_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!X Pr.\n     (!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> X p q Pr) /\\\n        (!r.\n          (p ENSURES r)Pr /\\\n          LEADSTO2 r q Pr /\\\n          (LEADSTO2 r q Pr ==> X r q Pr) ==>\n          LEADSTO2 p q Pr ==>\n          X p q Pr) /\\\n        (!P.\n          (!p. p In P ==> LEADSTO2 p q Pr) /\\\n          (!p. p In P ==> LEADSTO2 p q Pr ==> X p q Pr) ==>\n          LEADSTO2(LUB P)q Pr ==>\n          X(LUB P)q Pr))\n    =\n     (!(p:'a->bool) q.\n         ((p ENSURES q)Pr ==>\n          LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q Pr)) /\\\n         (!r.\n           (p ENSURES r)Pr /\\\n           LEADSTO2 r q Pr /\\\n           (LEADSTO2 r q Pr ==> X r q Pr) ==>\n           LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q Pr)) /\\\n         (!P.\n           (!p'.\n             p' In P ==>\n             LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q Pr)) ==>\n           LEADSTO2(LUB P)q Pr /\\ (LEADSTO2(LUB P)q Pr ==> X(LUB P)q Pr)))")), t744))
 }
 
 ///|
@@ -2517,7 +2517,7 @@ pub fn leadsto2_thm7() -> @kernel.Thm {
 /// LEADSTO_EQ_LEADSTO2a
 fn step_123() -> Unit raise {
   let t751 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac)
-  leadsto_eq_leadsto2a_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!R (Pr:('a->'a)list).\n       (!p q. ((p ENSURES q)Pr ==> R p q Pr) /\\\n              (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n              (!P. (!p. p In P ==> R p q Pr) ==> R (LUB P) q Pr))\n            ==>\n       (!p q. ((p ENSURES q)Pr ==> R p q Pr) /\\\n              (!r. (p ENSURES r)Pr /\\ R r q Pr ==> R p q Pr) /\\\n              (!P. (!p. p In P ==> R p q Pr) ==> R (LUB P) q Pr))")), t751))
+  leadsto_eq_leadsto2a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!R (Pr:('a->'a)list).\n       (!p q. ((p ENSURES q)Pr ==> R p q Pr) /\\\n              (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n              (!P. (!p. p In P ==> R p q Pr) ==> R (LUB P) q Pr))\n            ==>\n       (!p q. ((p ENSURES q)Pr ==> R p q Pr) /\\\n              (!r. (p ENSURES r)Pr /\\ R r q Pr ==> R p q Pr) /\\\n              (!P. (!p. p In P ==> R p q Pr) ==> R (LUB P) q Pr))")), t751))
 }
 
 ///|
@@ -2534,9 +2534,9 @@ pub fn leadsto_eq_leadsto2a() -> @kernel.Thm {
 fn step_124() -> Unit raise {
   let t752 = @kernel.assume_rule(@parser.parse_term("!p:'a->bool. (p = LUB P) ==> R p (q:'a->bool) (Pr:('a->'a)list)"))
   let t753 = @bool.spec(@parser.parse_term("LUB (P:('a->bool)->bool)"), t752)
-  let t754 = @tactics.accept_tac(@simp.rewrite_rule(@list.empty())(t753))
+  let t754 = @tactics.accept_tac(@simp.rewrite_rule(@list.List([]))(t753))
   let t755 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac), t754)
-  leadsto_eq_leadsto2b_lemma_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("(!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> R p q Pr) /\\\n        (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n        (!P. (p = LUB P) /\\ (!p'. p' In P ==> R p' q Pr) ==> R p q Pr))\n   ==>\n    (!p q.\n        ((p ENSURES q)Pr ==> R p q Pr) /\\\n        (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n        (!P. (!p'. p' In P ==> R p' q Pr) ==> R (LUB P) q Pr))")), t755))
+  leadsto_eq_leadsto2b_lemma_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("(!(p:'a->bool) q.\n        ((p ENSURES q)Pr ==> R p q Pr) /\\\n        (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n        (!P. (p = LUB P) /\\ (!p'. p' In P ==> R p' q Pr) ==> R p q Pr))\n   ==>\n    (!p q.\n        ((p ENSURES q)Pr ==> R p q Pr) /\\\n        (!r. R p r Pr /\\ R r q Pr ==> R p q Pr) /\\\n        (!P. (!p'. p' In P ==> R p' q Pr) ==> R (LUB P) q Pr))")), t755))
 }
 
 ///|
@@ -2555,7 +2555,7 @@ fn step_125() -> Unit raise {
   let t757 = @tactics.assume_tac(@bool.undisch(@bool.spec_all(leadsto_eq_leadsto2b_lemma())))
   let t756 = @tactics.repeat_tac(@tactics.strip_tac)
   let t759 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([leadsto(), leadstorel(), leadsto2(), leadsto2fn_eq_leadsto2fam(), leadsto2fam()])), t756), t757), t758), @hol88.res_tac)
-  leadsto_eq_leadsto2b_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) q Pr. LEADSTO2 p q Pr ==> (p LEADSTO q) Pr")), t759))
+  leadsto_eq_leadsto2b_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q Pr. LEADSTO2 p q Pr ==> (p LEADSTO q) Pr")), t759))
 }
 
 ///|
@@ -2694,7 +2694,7 @@ pub fn leadsto_thm34() -> @kernel.Thm {
 /// LEADSTO_thm34a_lemma1
 fn step_133() -> Unit raise {
   let t778 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac), @hol88.res_tac)
-  leadsto_thm34a_lemma1_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!P q Pr. (!p:'a->bool. p In P ==> (p LEADSTO q)Pr) ==>\n       (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n          ==> (!p. p In P ==> X p q Pr)")), t778))
+  leadsto_thm34a_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!P q Pr. (!p:'a->bool. p In P ==> (p LEADSTO q)Pr) ==>\n       (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n          ==> (!p. p In P ==> X p q Pr)")), t778))
 }
 
 ///|
@@ -2710,7 +2710,7 @@ pub fn leadsto_thm34a_lemma1() -> @kernel.Thm {
 /// LEADSTO_thm34a_lemma2
 fn step_134() -> Unit raise {
   let t779 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac)
-  leadsto_thm34a_lemma2_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!P q Pr. (!p:'a->bool. p In P ==> (p LEADSTO q)Pr) ==>\n                   (!p. p In P ==> X p q Pr) ==>\n                       (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)")), t779))
+  leadsto_thm34a_lemma2_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!P q Pr. (!p:'a->bool. p In P ==> (p LEADSTO q)Pr) ==>\n                   (!p. p In P ==> X p q Pr) ==>\n                       (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)")), t779))
 }
 
 ///|
@@ -2737,7 +2737,7 @@ fn step_135() -> Unit raise {
   let t791 = @tactics.then_tac((x780 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm2(), x780), @tactics.accept_tac(@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("((p:'a->bool) ENSURES r)Pr")), t783, t782, t781]))(t784)))
   let t792 = @list.List([@hol88.res_tac, @hol88.res_tac, @tactics.then_tac(@tactics.assume_tac(@bool.undisch_all(@bool.spec_all(leadsto_thm34a_lemma1()))), @hol88.res_tac), @hol88.res_tac, t791, t790])
   let t793 = @tactics.thenl(@tactics.then_tac(@tactics.eq_tac, @tactics.repeat_tac(@tactics.strip_tac)), t792)
-  leadsto_thm34a_lemma3_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("((!(p:'a->bool) q. (p ENSURES q)Pr ==> X p q Pr) /\\\n       (!p r q.\n         (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr ==> X p q Pr) /\\\n       (!P q.\n         (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr) ==>\n         X(LUB P)q Pr))\n     =\n    (!p q.\n     ((p ENSURES q)Pr ==> X p q Pr) /\\\n     (!r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n                      ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n     (!P. (!p. p In P ==> (p LEADSTO q)Pr) /\\\n          (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n                      ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))")), t793))
+  leadsto_thm34a_lemma3_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("((!(p:'a->bool) q. (p ENSURES q)Pr ==> X p q Pr) /\\\n       (!p r q.\n         (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr ==> X p q Pr) /\\\n       (!P q.\n         (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr) ==>\n         X(LUB P)q Pr))\n     =\n    (!p q.\n     ((p ENSURES q)Pr ==> X p q Pr) /\\\n     (!r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ ((r LEADSTO q)Pr ==> X r q Pr)\n                      ==> (p LEADSTO q)Pr ==> X p q Pr) /\\\n     (!P. (!p. p In P ==> (p LEADSTO q)Pr) /\\\n          (!p. p In P ==> (p LEADSTO q)Pr ==> X p q Pr)\n                      ==> ((LUB P) LEADSTO q)Pr ==> X(LUB P)q Pr))")), t793))
 }
 
 ///|
@@ -2798,7 +2798,7 @@ pub fn leadsto_thm34b() -> @kernel.Thm {
 fn step_138() -> Unit raise {
   let t808 = @bool.spec_all(leadsto_thm34a())
   let t810 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), (x809 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(t808, x809))
-  leadsto_thm34a_lemma00_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) q Pr X.\n       (!p q. (p ENSURES q) Pr ==> X p q Pr) /\\\n       (!p r q.\n            (p ENSURES r) Pr /\\ (r LEADSTO q) Pr /\\ X r q Pr ==> X p q Pr) /\\\n       (!P q.\n            (!p. p In P ==> (p LEADSTO q) Pr) /\\ (!p. p In P ==> X p q Pr)\n            ==> X (LUB P) q Pr)\n       ==> ((p LEADSTO q) Pr ==> X p q Pr)")), t810))
+  leadsto_thm34a_lemma00_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q Pr X.\n       (!p q. (p ENSURES q) Pr ==> X p q Pr) /\\\n       (!p r q.\n            (p ENSURES r) Pr /\\ (r LEADSTO q) Pr /\\ X r q Pr ==> X p q Pr) /\\\n       (!P q.\n            (!p. p In P ==> (p LEADSTO q) Pr) /\\ (!p. p In P ==> X p q Pr)\n            ==> X (LUB P) q Pr)\n       ==> ((p LEADSTO q) Pr ==> X p q Pr)")), t810))
 }
 
 ///|
@@ -2912,7 +2912,7 @@ fn step_140() -> Unit raise {
   let t820 = @parser.parse_term("q:'a->bool")
   let t822 = @tactics.assume_tac(@bool.mp(@bool.specl(@list.List([@parser.parse_term("p:'a->bool"), t820, t819]), @mk_ensures.ensures_cor2()), t821))
   let t894 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t822), t831), t839), t844), t851), t857), t868), t876), t893)
-  leadsto_thm35_lemma00_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) q r st Pr.\n     (p ENSURES q)(CONS st Pr) /\\ (p' LEADSTO q')(CONS st Pr) /\\\n     (q UNLESS r)(CONS st Pr) /\\ (q' UNLESS r)(CONS st Pr)\n         ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)")), t894))
+  leadsto_thm35_lemma00_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q r st Pr.\n     (p ENSURES q)(CONS st Pr) /\\ (p' LEADSTO q')(CONS st Pr) /\\\n     (q UNLESS r)(CONS st Pr) /\\ (q' UNLESS r)(CONS st Pr)\n         ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)")), t894))
 }
 
 ///|
@@ -2927,11 +2927,11 @@ pub fn leadsto_thm35_lemma00() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm35_lemma01_1
 fn step_141() -> Unit raise {
-  let t897 = @simp.asm_rewrite_tac(@list.empty())
+  let t897 = @simp.asm_rewrite_tac(@list.List([]))
   let t896 = @tactics.repeat_tac(@tactics.strip_tac)
   let t895 = @tactics.repeat_tac(@tactics.gen_tac)
   let t898 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@mk_state_logic.or_def(), @mk_state_logic.and_def()])), @tactics.beta_tac), t895), @tactics.eq_tac), t896), t897)
-  leadsto_thm35_lemma01_1_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(q:'a->bool) (q':'a->bool) r'' p r s.\n        ((((q /\\* q') \\/* r'') \\/* (p /\\* r)) \\/* ((q' /\\* q) \\/* r''))s =\n        (((q /\\* q') \\/* r'') \\/* (p /\\* r))s")), t898))
+  leadsto_thm35_lemma01_1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(q:'a->bool) (q':'a->bool) r'' p r s.\n        ((((q /\\* q') \\/* r'') \\/* (p /\\* r)) \\/* ((q' /\\* q) \\/* r''))s =\n        (((q /\\* q') \\/* r'') \\/* (p /\\* r))s")), t898))
 }
 
 ///|
@@ -2964,7 +2964,7 @@ pub fn leadsto_thm35_lemma01_2() -> @kernel.Thm {
 /// LEADSTO_thm35_lemma01_3
 fn step_143() -> Unit raise {
   let t901 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac)
-  leadsto_thm35_lemma01_3_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("(!p:'a->bool. p In P ==>\n        (!p'' q r r'.\n          (r LEADSTO q)(CONS st Pr) ==>\n          (p'' ENSURES r)(CONS st Pr) ==>\n          (q' UNLESS r')(CONS st Pr) ==>\n          (q UNLESS r')(CONS st Pr) ==>\n          (!p' q' r''.\n            (p' LEADSTO q')(CONS st Pr) ==>\n            (q UNLESS r'')(CONS st Pr) ==>\n            (q' UNLESS r'')(CONS st Pr) ==>\n            ((r /\\* p') LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr)) ==>\n          ((p'' /\\* p) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)))\n      ==>\n      (!p'' q r r'.\n          (r LEADSTO q)(CONS st Pr) ==>\n          (p'' ENSURES r)(CONS st Pr) ==>\n          (q' UNLESS r')(CONS st Pr) ==>\n          (q UNLESS r')(CONS st Pr) ==>\n          (!p' q' r''.\n            (p' LEADSTO q')(CONS st Pr) ==>\n            (q UNLESS r'')(CONS st Pr) ==>\n            (q' UNLESS r'')(CONS st Pr) ==>\n            ((r /\\* p') LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr)) ==>\n          (!p. p In P ==>\n                 ((p'' /\\* p) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)))")), t901))
+  leadsto_thm35_lemma01_3_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("(!p:'a->bool. p In P ==>\n        (!p'' q r r'.\n          (r LEADSTO q)(CONS st Pr) ==>\n          (p'' ENSURES r)(CONS st Pr) ==>\n          (q' UNLESS r')(CONS st Pr) ==>\n          (q UNLESS r')(CONS st Pr) ==>\n          (!p' q' r''.\n            (p' LEADSTO q')(CONS st Pr) ==>\n            (q UNLESS r'')(CONS st Pr) ==>\n            (q' UNLESS r'')(CONS st Pr) ==>\n            ((r /\\* p') LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr)) ==>\n          ((p'' /\\* p) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)))\n      ==>\n      (!p'' q r r'.\n          (r LEADSTO q)(CONS st Pr) ==>\n          (p'' ENSURES r)(CONS st Pr) ==>\n          (q' UNLESS r')(CONS st Pr) ==>\n          (q UNLESS r')(CONS st Pr) ==>\n          (!p' q' r''.\n            (p' LEADSTO q')(CONS st Pr) ==>\n            (q UNLESS r'')(CONS st Pr) ==>\n            (q' UNLESS r'')(CONS st Pr) ==>\n            ((r /\\* p') LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr)) ==>\n          (!p. p In P ==>\n                 ((p'' /\\* p) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)))")), t901))
 }
 
 ///|
@@ -2984,7 +2984,7 @@ fn step_144() -> Unit raise {
   let t903 = @parser.parse_term("r:'a->bool")
   let t904 = @tactics.assume_tac(@bool.specl(@list.List([@parser.parse_term("LUB (P:('a->bool)->bool)"), t903]), @mk_state_logic.sym_and_imply_weak_lemma()))
   let t909 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), (x902 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm3a(), x902)), t904), t906), (x907 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm0(), x907)), (x908 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm1(), x908))
-  leadsto_thm35_lemma01_4_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(P:('a->bool)->bool) r q st Pr.\n    (!p. p In P ==> ((p /\\* r) LEADSTO q)(CONS st Pr)) ==>\n    (!p. p In P ==> (p LEADSTO q)(CONS st Pr)) ==>\n    (((LUB P) /\\* r) LEADSTO q)(CONS st Pr)")), t909))
+  leadsto_thm35_lemma01_4_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(P:('a->bool)->bool) r q st Pr.\n    (!p. p In P ==> ((p /\\* r) LEADSTO q)(CONS st Pr)) ==>\n    (!p. p In P ==> (p LEADSTO q)(CONS st Pr)) ==>\n    (((LUB P) /\\* r) LEADSTO q)(CONS st Pr)")), t909))
 }
 
 ///|
@@ -2999,9 +2999,9 @@ pub fn leadsto_thm35_lemma01_4() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm35_lemma01_5
 fn step_145() -> Unit raise {
-  let t910 = @simp.rewrite_tac(@list.empty())
+  let t910 = @simp.rewrite_tac(@list.List([]))
   let t911 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([in_()])), @tactics.beta_tac), t910)
-  leadsto_thm35_lemma01_5_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p':'a->bool) P p (p'':'a->bool).\n      p' In (\\p''. ?p'''. p''' In P /\\ (p'' = p /\\* p'''))\n     =\n      (?p'''. p''' In P /\\ (p' = p /\\* p'''))")), t911))
+  leadsto_thm35_lemma01_5_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p':'a->bool) P p (p'':'a->bool).\n      p' In (\\p''. ?p'''. p''' In P /\\ (p'' = p /\\* p'''))\n     =\n      (?p'''. p''' In P /\\ (p' = p /\\* p'''))")), t911))
 }
 
 ///|
@@ -3025,12 +3025,12 @@ fn step_146() -> Unit raise {
   let t923 = @tactics.strip_assume_tac(@equal.beta_rule(@equal.subs(@list.List([@kernel.assume_rule(@parser.parse_term("p' = (\\s:'a. p s /\\ p'' s)"))]), t917)))
   let t916 = @simp.asm_rewrite_tac(@list.List([in_()]))
   let t915 = @tactics.exists_tac(@parser.parse_term("p':'a->bool"))
-  let t914 = @simp.asm_rewrite_tac(@list.empty())
+  let t914 = @simp.asm_rewrite_tac(@list.List([]))
   let t924 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("\\s:'a. p s /\\ p' s")), @tactics.beta_tac), t914), t915), t916), t923, t922])
   let t913 = @tactics.repeat_tac(@tactics.strip_tac)
   let t912 = @simp.rewrite_tac(@list.List([lub(), @mk_state_logic.and_def()]))
   let t925 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t912), @tactics.beta_tac), @tactics.eq_tac), t913), t924)
-  leadsto_thm35_lemma01_6_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!s:'a.\n      (p /\\* (LUB P))s =\n      (LUB(\\p''. ?p'. p' In P /\\ (p'' = p /\\* p')))s")), t925))
+  leadsto_thm35_lemma01_6_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!s:'a.\n      (p /\\* (LUB P))s =\n      (LUB(\\p''. ?p'. p' In P /\\ (p'' = p /\\* p')))s")), t925))
 }
 
 ///|
@@ -3045,9 +3045,9 @@ pub fn leadsto_thm35_lemma01_6() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm35_lemma01_7
 fn step_147() -> Unit raise {
-  let t926 = @simp.asm_rewrite_tac(@list.empty())
+  let t926 = @simp.asm_rewrite_tac(@list.List([]))
   let t927 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac), t926)
-  leadsto_thm35_lemma01_7_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(P:('a->bool)->bool) r' q q' st Pr.\n    (!p'. p' In P ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))\n      ==>\n        (!p'. (?p'''. p''' In P /\\ (p' = p /\\* p''')) ==>\n                             (p' LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))")), t927))
+  leadsto_thm35_lemma01_7_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(P:('a->bool)->bool) r' q q' st Pr.\n    (!p'. p' In P ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))\n      ==>\n        (!p'. (?p'''. p''' In P /\\ (p' = p /\\* p''')) ==>\n                             (p' LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))")), t927))
 }
 
 ///|
@@ -3071,7 +3071,7 @@ fn step_148() -> Unit raise {
   let t930 = @bool.specl(@list.List([@parser.parse_term("\\p'':'a->bool. ?p'. p' In P /\\ (p'' = (p /\\* p'))"), t929, t928]), leadsto_thm3a())
   let t931 = @tactics.assume_tac(@simp.rewrite_rule(@list.List([leadsto_thm35_lemma01_5()]))(t930))
   let t936 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t931), t933), t935)
-  leadsto_thm35_lemma01_8_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(P:('a->bool)->bool) r' q q' st Pr.\n       (!p'.\n        p' In P ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))\n          ==> (((p /\\* (LUB P)) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))")), t936))
+  leadsto_thm35_lemma01_8_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(P:('a->bool)->bool) r' q q' st Pr.\n       (!p'.\n        p' In P ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))\n          ==> (((p /\\* (LUB P)) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))")), t936))
 }
 
 ///|
@@ -3087,7 +3087,7 @@ pub fn leadsto_thm35_lemma01_8() -> @kernel.Thm {
 /// LEADSTO_thm35_lemma01_9
 fn step_149() -> Unit raise {
   let t937 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac)
-  leadsto_thm35_lemma01_9_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("(!p:'a->bool.\n        p In P ==>\n        (!p' q' r.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r)(CONS st Pr) ==>\n          (q' UNLESS r)(CONS st Pr) ==>\n          ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)))\n     ==>\n     ((!p' q' r.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r)(CONS st Pr) ==>\n          (q' UNLESS r)(CONS st Pr) ==>\n       (!p. p In P ==>\n          ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr))))")), t937))
+  leadsto_thm35_lemma01_9_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("(!p:'a->bool.\n        p In P ==>\n        (!p' q' r.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r)(CONS st Pr) ==>\n          (q' UNLESS r)(CONS st Pr) ==>\n          ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)))\n     ==>\n     ((!p' q' r.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r)(CONS st Pr) ==>\n          (q' UNLESS r)(CONS st Pr) ==>\n       (!p. p In P ==>\n          ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr))))")), t937))
 }
 
 ///|
@@ -3102,12 +3102,12 @@ pub fn leadsto_thm35_lemma01_9() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm35_lemma01_10
 fn step_150() -> Unit raise {
-  let t941 = @simp.asm_rewrite_tac(@list.empty())
+  let t941 = @simp.asm_rewrite_tac(@list.List([]))
   let t940 = @simp.once_rewrite_tac(@list.List([@mk_state_logic.and_comm_or_lemma()]))
   let t938 = @parser.parse_term("p:'a->bool")
   let t939 = @simp.once_rewrite_tac(@list.List([@bool.specl(@list.List([@parser.parse_term("p':'a->bool"), t938]), @mk_state_logic.and_comm_lemma())]))
   let t942 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac), t939), t940), t941)
-  leadsto_thm35_lemma01_10_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("(!p:'a->bool. p In P ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr))\n      ==>\n    (!p. p In P ==> ((p' /\\* p) LEADSTO ((q /\\* q') \\/* r))(CONS st Pr))")), t942))
+  leadsto_thm35_lemma01_10_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("(!p:'a->bool. p In P ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr))\n      ==>\n    (!p. p In P ==> ((p' /\\* p) LEADSTO ((q /\\* q') \\/* r))(CONS st Pr))")), t942))
 }
 
 ///|
@@ -3122,9 +3122,9 @@ pub fn leadsto_thm35_lemma01_10() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm35_lemma01a
 fn step_151() -> Unit raise {
-  let t943 = @simp.asm_rewrite_tac(@list.empty())
+  let t943 = @simp.asm_rewrite_tac(@list.List([]))
   let t944 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), @hol88.res_tac), t943)
-  leadsto_thm35_lemma01a_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("(!(p:'a->bool) q r'' r'.\n        (r'' LEADSTO q)(CONS st Pr) ==>\n        (p ENSURES r'')(CONS st Pr) ==>\n        (q' UNLESS r')(CONS st Pr) ==>\n        (q UNLESS r')(CONS st Pr) ==>\n        (!p' q' r'.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r')(CONS st Pr) ==>\n          (q' UNLESS r')(CONS st Pr) ==>\n          ((r'' /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)) ==>\n        ((p /\\* r) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))\n       ==>\n        (!(p:'a->bool) q r' r''.\n        (r' LEADSTO q)(CONS st Pr) ==>\n        (p ENSURES r')(CONS st Pr) ==>\n        (q' UNLESS r'')(CONS st Pr) ==>\n        (q UNLESS r'')(CONS st Pr) ==>\n        (!p' q' r''.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r'')(CONS st Pr) ==>\n          (q' UNLESS r'')(CONS st Pr) ==>\n          ((r' /\\* p') LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr)) ==>\n        ((p /\\* r) LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr))")), t944))
+  leadsto_thm35_lemma01a_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("(!(p:'a->bool) q r'' r'.\n        (r'' LEADSTO q)(CONS st Pr) ==>\n        (p ENSURES r'')(CONS st Pr) ==>\n        (q' UNLESS r')(CONS st Pr) ==>\n        (q UNLESS r')(CONS st Pr) ==>\n        (!p' q' r'.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r')(CONS st Pr) ==>\n          (q' UNLESS r')(CONS st Pr) ==>\n          ((r'' /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)) ==>\n        ((p /\\* r) LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr))\n       ==>\n        (!(p:'a->bool) q r' r''.\n        (r' LEADSTO q)(CONS st Pr) ==>\n        (p ENSURES r')(CONS st Pr) ==>\n        (q' UNLESS r'')(CONS st Pr) ==>\n        (q UNLESS r'')(CONS st Pr) ==>\n        (!p' q' r''.\n          (p' LEADSTO q')(CONS st Pr) ==>\n          (q UNLESS r'')(CONS st Pr) ==>\n          (q' UNLESS r'')(CONS st Pr) ==>\n          ((r' /\\* p') LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr)) ==>\n        ((p /\\* r) LEADSTO ((q /\\* q') \\/* r''))(CONS st Pr))")), t944))
 }
 
 ///|
@@ -3160,7 +3160,7 @@ pub fn leadsto_induct0_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 ///|
 /// LEADSTO_thm35_lemma01
 fn step_153() -> Unit raise {
-  let t1031 = @simp.asm_rewrite_tac(@list.empty())
+  let t1031 = @simp.asm_rewrite_tac(@list.List([]))
   let t1029 = @parser.parse_term("p':'a->bool")
   let t1030 = @simp.once_rewrite_tac(@list.List([@bool.specl(@list.List([@parser.parse_term("LUB (P:('a->bool)->bool)"), t1029]), @mk_state_logic.and_comm_lemma())]))
   let t1032 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), (x1026 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm35_lemma01_9(), x1026)), (x1027 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm35_lemma01_10(), x1027)), (x1028 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm35_lemma01_8(), x1028)), t1030), t1031)
@@ -3236,7 +3236,7 @@ fn step_153() -> Unit raise {
   let t947 = @tactics.undisch_tac(@parser.parse_term("!(p':'a->bool) q' r'.\n        (p' LEADSTO q')(CONS st Pr) ==>\n        (q UNLESS r')(CONS st Pr) ==>\n        (q' UNLESS r')(CONS st Pr) ==>\n        ((r /\\* p') LEADSTO ((q /\\* q') \\/* r'))(CONS st Pr)"))
   let t1033 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t947), t948), t949), t950), t951), t953), t955), t957), t959), t960), t962), t964), t966), t968), leadsto_induct0_tac), t1025)
   let t1034 = @tactics.thenl(leadsto_induct0_tac, @list.List([@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), (x946 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm35_lemma00(), x946)), t1033, t1032]))
-  leadsto_thm35_lemma01_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) q st Pr.\n     (p LEADSTO q)(CONS st Pr) ==>\n       !p' q' r. (p' LEADSTO q')(CONS st Pr)\n           ==> (q UNLESS r)(CONS st Pr) ==> (q' UNLESS r)(CONS st Pr)\n                  ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)")), t1034))
+  leadsto_thm35_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q st Pr.\n     (p LEADSTO q)(CONS st Pr) ==>\n       !p' q' r. (p' LEADSTO q')(CONS st Pr)\n           ==> (q UNLESS r)(CONS st Pr) ==> (q' UNLESS r)(CONS st Pr)\n                  ==> ((p /\\* p') LEADSTO ((q /\\* q') \\/* r))(CONS st Pr)")), t1034))
 }
 
 ///|
@@ -3312,8 +3312,8 @@ pub fn leadsto_thm36_lemma00() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm36_lemma01
 fn step_158() -> Unit raise {
-  let t1037 = @tactics.then_tac(@tactics.beta_tac, @simp.rewrite_tac(@list.empty()))
-  leadsto_thm36_lemma01_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(M:'a->num) m. (p /\\* (M EQmetric m)) = ((\\i. p /\\* (M EQmetric i))m)")), t1037))
+  let t1037 = @tactics.then_tac(@tactics.beta_tac, @simp.rewrite_tac(@list.List([])))
+  leadsto_thm36_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(M:'a->num) m. (p /\\* (M EQmetric m)) = ((\\i. p /\\* (M EQmetric i))m)")), t1037))
 }
 
 ///|
@@ -3334,7 +3334,7 @@ fn step_159() -> Unit raise {
   let t1038 = @kernel.assume_rule(@parser.parse_term("!n. n < (SUC m) ==>\n           (((p:'a->bool) /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)"))
   let t1042 = @tactics.strip_assume_tac(@bool.mp(@bool.spec(@parser.parse_term("n:num"), t1038), t1041))
   let t1043 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1042)
-  leadsto_thm36_lemma02_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) q st Pr M m.\n       (!n. n < (SUC m) ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)) ==>\n             (!n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr))")), t1043))
+  leadsto_thm36_lemma02_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q st Pr M m.\n       (!n. n < (SUC m) ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)) ==>\n             (!n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr))")), t1043))
 }
 
 ///|
@@ -3364,7 +3364,7 @@ fn step_160() -> Unit raise {
   let t1056 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @simp.rewrite_tac(@list.List([@mk_state_logic.or_lt_n_def()]))), @tactics.beta_tac), t1044), t1046), t1049), t1055)
   let t1057 = @list.List([@simp.rewrite_tac(@list.List([@mk_state_logic.or_lt_n_def(), leadsto_cor12(), leadsto_cor11(), @hol88.not_less_0()])), t1056])
   let t1058 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @tactics.gen_tac), @tactics.gen_tac), @tactics.gen_tac), @nums.induct_tac), t1057)
-  leadsto_thm36_lemma03_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) q st Pr M m.\n      (!n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q) (CONS st Pr)) ==>\n         (( \\</*  (\\i. p /\\* (M EQmetric i))m) LEADSTO q) (CONS st Pr)")), t1058))
+  leadsto_thm36_lemma03_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q st Pr M m.\n      (!n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q) (CONS st Pr)) ==>\n         (( \\</*  (\\i. p /\\* (M EQmetric i))m) LEADSTO q) (CONS st Pr)")), t1058))
 }
 
 ///|
@@ -3385,12 +3385,12 @@ fn step_161() -> Unit raise {
   let t1065 = @tactics.thenl(@tactics.strip_tac, @list.List([@tactics.then_tac(@tactics.disj2_tac, @simp.asm_rewrite_tac(@list.List([@bool.spec_all(@equal.beta_rule(@simp.rewrite_rule(@list.List([lessmetric()]))(t1062)))]))), t1064]))
   let t1060 = @kernel.assume_rule(@parser.parse_term("!s:'a. (M LESSmetric m)s =  \\</* (\\i. M EQmetric i)m s"))
   let t1061 = @tactics.then_tac(@tactics.disj1_tac, @simp.asm_rewrite_tac(@list.List([@equal.sym(@bool.spec_all(@equal.beta_rule(@simp.rewrite_rule(@list.List([lessmetric()]))(t1060))))])))
-  let t1059 = @simp.asm_rewrite_tac(@list.empty())
+  let t1059 = @simp.asm_rewrite_tac(@list.List([]))
   let t1066 = @list.List([@tactics.thenl(@tactics.strip_tac, @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disj2_tac, @simp.rewrite_tac(@list.List([eqmetric()]))), @tactics.beta_tac), t1059), t1061])), t1065])
   let t1067 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@mk_state_logic.or_lt_n_def(), @mk_state_logic.or_def(), lessmetric(), @hol88.less_thm()]))), @tactics.beta_tac), @tactics.eq_tac), t1066)
   let t1068 = @list.List([@simp.rewrite_tac(@list.List([lessmetric(), eqmetric(), @mk_state_logic.or_lt_n_def(), @mk_state_logic.false_def(), @hol88.not_less_0()])), t1067])
   let t1069 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @nums.induct_tac), t1068)
-  leadsto_thm36_lemma04_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!M:'a->num. (!m s. (M LESSmetric m)s = ( \\</*  (\\i. M EQmetric i) m) s)")), t1069))
+  leadsto_thm36_lemma04_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!M:'a->num. (!m s. (M LESSmetric m)s = ( \\</*  (\\i. M EQmetric i) m) s)")), t1069))
 }
 
 ///|
@@ -3409,7 +3409,7 @@ fn step_162() -> Unit raise {
   let t1070 = @parser.parse_term("m:num")
   let t1071 = @hol88.mk_abs(@bool.specl(@list.List([@parser.parse_term("M:'a->num"), t1070]), leadsto_thm36_lemma04()))
   let t1073 = @tactics.then_tac(@simp.rewrite_tac(@list.List([lessmetric(), eqmetric(), @equal.beta_rule(@simp.rewrite_rule(@list.List([lessmetric(), eqmetric()]))(t1071))])), t1072)
-  leadsto_thm36_lemma05_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(M:'a->num) m. (M LESSmetric m) = ( \\</*  (\\i. M EQmetric i) m)")), t1073))
+  leadsto_thm36_lemma05_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(M:'a->num) m. (M LESSmetric m) = ( \\</*  (\\i. M EQmetric i) m)")), t1073))
 }
 
 ///|
@@ -3425,7 +3425,7 @@ pub fn leadsto_thm36_lemma05() -> @kernel.Thm {
 /// LEADSTO_thm36_lemma06
 fn step_163() -> Unit raise {
   let t1074 = @simp.rewrite_tac(@list.List([leadsto_thm36_lemma05()]))
-  leadsto_thm36_lemma06_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) M q Pr.\n   (!m. ((p /\\* (M EQmetric m)) LEADSTO ((p /\\* (M LESSmetric m)) \\/* q))Pr)\n      ==> (!m. ((p /\\* (M EQmetric m)) LEADSTO\n               ((p /\\* ( \\</* (\\i. M EQmetric i)m)) \\/* q))Pr)")), t1074))
+  leadsto_thm36_lemma06_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) M q Pr.\n   (!m. ((p /\\* (M EQmetric m)) LEADSTO ((p /\\* (M LESSmetric m)) \\/* q))Pr)\n      ==> (!m. ((p /\\* (M EQmetric m)) LEADSTO\n               ((p /\\* ( \\</* (\\i. M EQmetric i)m)) \\/* q))Pr)")), t1074))
 }
 
 ///|
@@ -3444,7 +3444,7 @@ fn step_164() -> Unit raise {
   let t1076 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@mk_state_logic.or_lt_n_def()])), @tactics.beta_tac), t1075)
   let t1077 = @list.List([@simp.rewrite_tac(@list.List([@mk_state_logic.or_lt_n_def(), @mk_state_logic.and_false_lemma()])), t1076])
   let t1078 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @nums.induct_tac), t1077)
-  leadsto_thm36_lemma07_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) M m.\n      ( \\</* (\\i. p /\\* (M EQmetric i))m) = (p /\\* ( \\</* (\\i. M EQmetric i)m))")), t1078))
+  leadsto_thm36_lemma07_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) M m.\n      ( \\</* (\\i. p /\\* (M EQmetric i))m) = (p /\\* ( \\</* (\\i. M EQmetric i)m))")), t1078))
 }
 
 ///|
@@ -3477,7 +3477,7 @@ fn step_165() -> Unit raise {
   let t1080 = @bool.mp(@bool.spec_all(leadsto_thm36_lemma03()), t1079)
   let t1081 = @tactics.assume_tac(@simp.rewrite_rule(@list.List([leadsto_thm36_lemma07()]))(t1080))
   let t1096 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1081), t1086), t1095)
-  leadsto_thm36_lemma08_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) q st Pr M.\n       (!m. ((p /\\* (M EQmetric m)) LEADSTO\n           ((p /\\* (M LESSmetric m)) \\/* q)) (CONS st Pr)) ==>\n       (!m. (!n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)) ==>\n                   ((p /\\* (M EQmetric m)) LEADSTO q) (CONS st Pr))")), t1096))
+  leadsto_thm36_lemma08_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q st Pr M.\n       (!m. ((p /\\* (M EQmetric m)) LEADSTO\n           ((p /\\* (M LESSmetric m)) \\/* q)) (CONS st Pr)) ==>\n       (!m. (!n. n < m ==> ((p /\\* (M EQmetric n)) LEADSTO q)(CONS st Pr)) ==>\n                   ((p /\\* (M EQmetric m)) LEADSTO q) (CONS st Pr))")), t1096))
 }
 
 ///|
@@ -3496,7 +3496,7 @@ fn step_166() -> Unit raise {
   let t1099 = @tactics.strip_assume_tac(@bool.spec(@parser.parse_term("m:num"), t1098))
   let t1097 = @tactics.assume_tac(@bool.undisch(@bool.spec_all(leadsto_thm36_lemma08())))
   let t1100 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1097), t1099)
-  leadsto_thm36_lemma09_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) q st Pr M.\n       (!m. ((p /\\* (M EQmetric m)) LEADSTO\n            ((p /\\* (M LESSmetric m)) \\/* q)) (CONS st Pr)) ==>\n                (!m. ((p /\\* (M EQmetric m)) LEADSTO q) (CONS st Pr))")), t1100))
+  leadsto_thm36_lemma09_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q st Pr M.\n       (!m. ((p /\\* (M EQmetric m)) LEADSTO\n            ((p /\\* (M LESSmetric m)) \\/* q)) (CONS st Pr)) ==>\n                (!m. ((p /\\* (M EQmetric m)) LEADSTO q) (CONS st Pr))")), t1100))
 }
 
 ///|
@@ -3511,14 +3511,14 @@ pub fn leadsto_thm36_lemma09() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm36_lemma10s
 fn step_167() -> Unit raise {
-  let t1104 = @simp.asm_rewrite_tac(@list.empty())
+  let t1104 = @simp.asm_rewrite_tac(@list.List([]))
   let t1103 = @tactics.exists_tac(@parser.parse_term("x:num"))
-  let t1105 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @simp.asm_rewrite_tac(@list.empty())), t1103), t1104)
-  let t1102 = @simp.asm_rewrite_tac(@list.empty())
+  let t1105 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @simp.asm_rewrite_tac(@list.List([]))), t1103), t1104)
+  let t1102 = @simp.asm_rewrite_tac(@list.List([]))
   let t1106 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.strip_tac, @tactics.exists_tac(@parser.parse_term("x:num"))), t1102), t1105])
   let t1101 = @simp.rewrite_tac(@list.List([@mk_state_logic.and_def(), @mk_state_logic.exists_def(), eqmetric()]))
   let t1107 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1101), @tactics.beta_tac), @tactics.eq_tac), t1106)
-  leadsto_thm36_lemma10s_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) M s.\n     (p /\\* ((?*) (\\n. M EQmetric n)))s = ((?*) (\\i. p /\\* (M EQmetric i)))s")), t1107))
+  leadsto_thm36_lemma10s_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) M s.\n     (p /\\* ((?*) (\\n. M EQmetric n)))s = ((?*) (\\i. p /\\* (M EQmetric i)))s")), t1107))
 }
 
 ///|
@@ -3555,7 +3555,7 @@ fn step_169() -> Unit raise {
   let t1113 = @tactics.exists_tac(@parser.parse_term("(M:'a->num) s"))
   let t1112 = @tactics.repeat_tac(@tactics.gen_tac)
   let t1114 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@mk_state_logic.exists_def(), eqmetric(), @mk_state_logic.true_def()])), @tactics.beta_tac), t1112), t1113), @tactics.refl_tac)
-  leadsto_thm36_lemma11s_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(M:'a->num) s. ((?*)  (\\n. M EQmetric n))s = True s")), t1114))
+  leadsto_thm36_lemma11s_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(M:'a->num) s. ((?*)  (\\n. M EQmetric n))s = True s")), t1114))
 }
 
 ///|
@@ -3593,7 +3593,7 @@ fn step_171() -> Unit raise {
   let t1118 = @bool.mp(@bool.spec_all(leadsto_thm36_lemma09()), t1117)
   let t1119 = @tactics.assume_tac(@simp.once_rewrite_rule(@list.List([leadsto_thm36_lemma01()]))(t1118))
   let t1123 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1119), (x1121 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(t1120, x1121)), t1122)
-  leadsto_thm36_lemma12_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(p:'a->bool) q st Pr M.\n      (!m. ((p /\\* (M EQmetric m)) LEADSTO\n           ((p /\\* (M LESSmetric m)) \\/* q))(CONS st Pr))\n             ==> ((p /\\* ((?*)  (\\n. M EQmetric n))) LEADSTO q)(CONS st Pr)")), t1123))
+  leadsto_thm36_lemma12_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(p:'a->bool) q st Pr M.\n      (!m. ((p /\\* (M EQmetric m)) LEADSTO\n           ((p /\\* (M LESSmetric m)) \\/* q))(CONS st Pr))\n             ==> ((p /\\* ((?*)  (\\n. M EQmetric n))) LEADSTO q)(CONS st Pr)")), t1123))
 }
 
 ///|
@@ -3627,7 +3627,7 @@ pub fn leadsto_thm36() -> @kernel.Thm {
 /// LEADSTO_thm37_lemma00
 fn step_173() -> Unit raise {
   let t1128 = @tactics.then_tac(@tactics.then_tac(@tactics.eq_tac, @tactics.repeat_tac(@tactics.strip_tac)), @hol88.res_tac)
-  leadsto_thm37_lemma00_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("((!p:'a->bool. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q)) =\n    (!p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q)")), t1128))
+  leadsto_thm37_lemma00_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("((!p:'a->bool. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q)) =\n    (!p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q)")), t1128))
 }
 
 ///|
@@ -3643,7 +3643,7 @@ pub fn leadsto_thm37_lemma00() -> @kernel.Thm {
 /// LEADSTO_thm37_lemma01
 fn step_174() -> Unit raise {
   let t1129 = @tactics.then_tac(@tactics.then_tac(@tactics.eq_tac, @tactics.repeat_tac(@tactics.strip_tac)), @hol88.res_tac)
-  leadsto_thm37_lemma01_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("(!p':'a->bool. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q) =\n    ((!p'. p' In P ==> (p' LEADSTO q)Pr) /\\ (!p'. p' In P ==> X p' q))")), t1129))
+  leadsto_thm37_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("(!p':'a->bool. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q) =\n    ((!p'. p' In P ==> (p' LEADSTO q)Pr) /\\ (!p'. p' In P ==> X p' q))")), t1129))
 }
 
 ///|
@@ -3658,20 +3658,20 @@ pub fn leadsto_thm37_lemma01() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm37_lemma02
 fn step_175() -> Unit raise {
-  let t1142 = @simp.asm_rewrite_tac(@list.empty())
+  let t1142 = @simp.asm_rewrite_tac(@list.List([]))
   let t1143 = @tactics.then_tac(@tactics.then_tac((x1141 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm37_lemma01(), x1141), @hol88.res_tac), t1142)
   let t1144 = @tactics.then_tac((x1139 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm37_lemma01(), x1139), (x1140 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm3(), x1140))
   let t1145 = @tactics.then_tac((x1138 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm1(), x1138), @hol88.res_tac)
   let t1146 = @tactics.then_tac((x1137 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm1(), x1137), @hol88.res_tac)
   let t1133 = @kernel.assume_rule(@parser.parse_term("!p. (p = LUB P) ==> (X:('a->bool)->('a->bool)->bool) p q"))
   let t1134 = @bool.spec(@parser.parse_term("LUB (P:('a->bool)->bool)"), t1133)
-  let t1135 = @tactics.accept_tac(@simp.rewrite_rule(@list.empty())(t1134))
+  let t1135 = @tactics.accept_tac(@simp.rewrite_rule(@list.List([]))(t1134))
   let t1131 = @kernel.assume_rule(@parser.parse_term("!p. p In P ==> (X:('a->bool)->('a->bool)->bool) p q"))
   let t1132 = @bool.conj(@kernel.assume_rule(@parser.parse_term("!p:'a->bool. p In P ==> (p LEADSTO q)Pr")), t1131)
   let t1147 = @list.List([@hol88.res_tac, @hol88.res_tac, @tactics.then_tac(@tactics.then_tac(@tactics.assume_tac(@simp.rewrite_rule(@list.List([leadsto_thm37_lemma00()]))(t1132)), @hol88.res_tac), t1135), (x1136 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto_thm0(), x1136), @hol88.res_tac, t1146, t1145, t1144, t1143])
   let t1130 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1148 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t1130), t1147)
-  leadsto_thm37_lemma02_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(X:('a->bool)->('a->bool)->bool) Pr.\n       (!p q.\n         ((p ENSURES q)Pr ==> (p LEADSTO q)Pr /\\ X p q) /\\\n         (!r.\n           (p LEADSTO r)Pr /\\ X p r /\\ (r LEADSTO q)Pr /\\ X r q ==>\n           (p LEADSTO q)Pr /\\ X p q) /\\\n         (!P.\n           (p = LUB P) /\\ (!p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q) ==>\n           (p LEADSTO q)Pr /\\ X p q))\n      =\n        (!p q.\n        ((p ENSURES q)Pr ==> X p q) /\\\n        (!r.\n          (p LEADSTO r)Pr /\\ X p r /\\ (r LEADSTO q)Pr /\\ X r q ==> X p q) /\\\n        (!P.\n          (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q) ==>\n          X(LUB P)q))")), t1148))
+  leadsto_thm37_lemma02_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(X:('a->bool)->('a->bool)->bool) Pr.\n       (!p q.\n         ((p ENSURES q)Pr ==> (p LEADSTO q)Pr /\\ X p q) /\\\n         (!r.\n           (p LEADSTO r)Pr /\\ X p r /\\ (r LEADSTO q)Pr /\\ X r q ==>\n           (p LEADSTO q)Pr /\\ X p q) /\\\n         (!P.\n           (p = LUB P) /\\ (!p'. p' In P ==> (p' LEADSTO q)Pr /\\ X p' q) ==>\n           (p LEADSTO q)Pr /\\ X p q))\n      =\n        (!p q.\n        ((p ENSURES q)Pr ==> X p q) /\\\n        (!r.\n          (p LEADSTO r)Pr /\\ X p r /\\ (r LEADSTO q)Pr /\\ X r q ==> X p q) /\\\n        (!P.\n          (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q) ==>\n          X(LUB P)q))")), t1148))
 }
 
 ///|
@@ -3730,7 +3730,7 @@ pub fn leadsto_thm38() -> @kernel.Thm {
 fn step_178() -> Unit raise {
   let t1161 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1162 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t1161), @hol88.res_tac)
-  leadsto_thm39_lemma00_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(X:('a->bool)->('a->bool)->bool) Pr.\n       ((!p. p In P ==> LEADSTO2 p q Pr) /\\ (!p. p In P ==> X p q)) =\n        (!p. p In P ==> LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q))")), t1162))
+  leadsto_thm39_lemma00_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(X:('a->bool)->('a->bool)->bool) Pr.\n       ((!p. p In P ==> LEADSTO2 p q Pr) /\\ (!p. p In P ==> X p q)) =\n        (!p. p In P ==> LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q))")), t1162))
 }
 
 ///|
@@ -3749,12 +3749,12 @@ fn step_179() -> Unit raise {
   let t1183 = @tactics.then_tac(@tactics.strip_assume_tac(@simp.rewrite_rule(@list.List([@equal.sym(@bool.spec_all(leadsto_thm39_lemma00()))]))(t1182)), @hol88.res_tac)
   let t1179 = @kernel.assume_rule(@parser.parse_term("!p:'a->bool. (p = LUB P) ==> LEADSTO2 p q Pr"))
   let t1180 = @bool.spec(@parser.parse_term("LUB (P:('a->bool)->bool)"), t1179)
-  let t1181 = @tactics.accept_tac(@simp.rewrite_rule(@list.empty())(t1180))
+  let t1181 = @tactics.accept_tac(@simp.rewrite_rule(@list.List([]))(t1180))
   let t1177 = @kernel.assume_rule(@parser.parse_term("!p':'a->bool. p' In P ==> (LEADSTO2 p' q)Pr /\\\n                                        (LEADSTO2 p' q Pr ==> X p' q)"))
   let t1184 = @tactics.then_tac(@tactics.then_tac(@tactics.strip_assume_tac(@simp.rewrite_rule(@list.List([@equal.sym(@bool.spec_all(leadsto_thm39_lemma00()))]))(t1177)), (x1178 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm3a(), x1178)), t1181)
   let t1172 = @kernel.assume_rule(@parser.parse_term("!p:'a->bool. (p = LUB P) ==> LEADSTO2 p q Pr"))
   let t1173 = @bool.spec(@parser.parse_term("LUB (P:('a->bool)->bool)"), t1172)
-  let t1174 = @tactics.assume_tac(@simp.rewrite_rule(@list.empty())(t1173))
+  let t1174 = @tactics.assume_tac(@simp.rewrite_rule(@list.List([]))(t1173))
   let t1169 = @kernel.assume_rule(@parser.parse_term("!p. p In P ==> (X:('a->bool)->('a->bool)->bool) p q"))
   let t1170 = @bool.conj(@kernel.assume_rule(@parser.parse_term("!p:'a->bool. p In P ==> LEADSTO2 p q Pr")), t1169)
   let t1185 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.assume_tac(@simp.rewrite_rule(@list.List([leadsto_thm39_lemma00()]))(t1170)), (x1171 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm3a(), x1171)), t1174), @hol88.res_tac)
@@ -3765,7 +3765,7 @@ fn step_179() -> Unit raise {
   let t1186 = @list.List([@hol88.res_tac, @tactics.then_tac((x1164 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm1(), x1164), @tactics.accept_tac(@simp.rewrite_rule(@list.List([@kernel.assume_rule(@parser.parse_term("((p:'a->bool) ENSURES r)Pr")), t1167, t1166, t1165]))(t1168))), t1185, (x1175 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm0(), x1175), @hol88.res_tac, (x1176 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm1(), x1176), @hol88.res_tac, t1184, t1183])
   let t1163 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1187 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t1163), t1186)
-  leadsto_thm39_lemma01_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(X:('a->bool)->('a->bool)->bool) Pr.\n       (!p q.\n         ((p ENSURES q)Pr ==>\n          LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q)) /\\\n         (!r.\n           (p ENSURES r)Pr /\\\n           LEADSTO2 r q Pr /\\\n           (LEADSTO2 r q Pr ==> X r q) ==>\n           LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q)) /\\\n         (!P.\n           (!p'.\n             p' In P ==>\n             LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q)) ==>\n           LEADSTO2(LUB P)q Pr /\\ (LEADSTO2(LUB P)q Pr ==> X(LUB P)q)))\n      =\n      (!p q.\n        ((p ENSURES q)Pr ==> X p q) /\\\n        (!r. (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\ X r q ==> X p q) /\\\n        (!P.\n          (!p. p In P ==> LEADSTO2 p q Pr) /\\ (!p. p In P ==> X p q) ==>\n          X(LUB P)q))")), t1187))
+  leadsto_thm39_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(X:('a->bool)->('a->bool)->bool) Pr.\n       (!p q.\n         ((p ENSURES q)Pr ==>\n          LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q)) /\\\n         (!r.\n           (p ENSURES r)Pr /\\\n           LEADSTO2 r q Pr /\\\n           (LEADSTO2 r q Pr ==> X r q) ==>\n           LEADSTO2 p q Pr /\\ (LEADSTO2 p q Pr ==> X p q)) /\\\n         (!P.\n           (!p'.\n             p' In P ==>\n             LEADSTO2 p' q Pr /\\ (LEADSTO2 p' q Pr ==> X p' q)) ==>\n           LEADSTO2(LUB P)q Pr /\\ (LEADSTO2(LUB P)q Pr ==> X(LUB P)q)))\n      =\n      (!p q.\n        ((p ENSURES q)Pr ==> X p q) /\\\n        (!r. (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\ X r q ==> X p q) /\\\n        (!P.\n          (!p. p In P ==> LEADSTO2 p q Pr) /\\ (!p. p In P ==> X p q) ==>\n          X(LUB P)q))")), t1187))
 }
 
 ///|
@@ -3845,7 +3845,7 @@ pub fn leadsto_thm41() -> @kernel.Thm {
 fn step_183() -> Unit raise {
   let t1206 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1207 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t1206), @hol88.res_tac)
-  leadsto_thm42_lemma00_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!X Pr.\n       (!p:'a->bool. p In P ==> LEADSTO2 p q Pr /\\ X p q Pr) =\n      ((!p. p In P ==> LEADSTO2 p q Pr) /\\ (!p. p In P ==> X p q Pr))")), t1207))
+  leadsto_thm42_lemma00_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!X Pr.\n       (!p:'a->bool. p In P ==> LEADSTO2 p q Pr /\\ X p q Pr) =\n      ((!p. p In P ==> LEADSTO2 p q Pr) /\\ (!p. p In P ==> X p q Pr))")), t1207))
 }
 
 ///|
@@ -3862,7 +3862,7 @@ pub fn leadsto_thm42_lemma00() -> @kernel.Thm {
 fn step_184() -> Unit raise {
   let t1208 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1209 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t1208), @hol88.res_tac)
-  leadsto_thm42_lemma01_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!X Pr.\n      (!(p:'a->bool) q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (!r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n            ==> X p q Pr) /\\\n       (!P. (p = (LUB P)) /\\\n            (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n            ==> X p q Pr))\n      =\n      (!p q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (!r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr ==> X p q Pr) /\\\n       (!P. (p = (LUB P)) /\\\n            (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n            ==> X p q Pr))")), t1209))
+  leadsto_thm42_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!X Pr.\n      (!(p:'a->bool) q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (!r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X p r Pr /\\ X r q Pr\n            ==> X p q Pr) /\\\n       (!P. (p = (LUB P)) /\\\n            (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n            ==> X p q Pr))\n      =\n      (!p q.\n       ((p ENSURES q)Pr ==> X p q Pr) /\\\n       (!r. (p ENSURES r)Pr /\\ (r LEADSTO q)Pr /\\ X r q Pr ==> X p q Pr) /\\\n       (!P. (p = (LUB P)) /\\\n            (!p. p In P ==> (p LEADSTO q)Pr) /\\ (!p. p In P ==> X p q Pr)\n            ==> X p q Pr))")), t1209))
 }
 
 ///|
@@ -3877,20 +3877,20 @@ pub fn leadsto_thm42_lemma01() -> @kernel.Thm {
 ///|
 /// LEADSTO_thm42_lemma02
 fn step_185() -> Unit raise {
-  let t1221 = @simp.asm_rewrite_tac(@list.empty())
+  let t1221 = @simp.asm_rewrite_tac(@list.List([]))
   let t1219 = @kernel.assume_rule(@parser.parse_term("!p. p In P\n            ==> (X:('a->bool)->('a->bool)->(('a->'a)list)->bool) p q Pr"))
   let t1220 = @bool.conj(@kernel.assume_rule(@parser.parse_term("!p:'a->bool. p In P ==> LEADSTO2 p q Pr")), t1219)
   let t1222 = @tactics.then_tac(@tactics.then_tac(@tactics.assume_tac(@simp.rewrite_rule(@list.List([@equal.sym(@bool.spec_all(leadsto_thm42_lemma00()))]))(t1220)), @hol88.res_tac), t1221)
   let t1216 = @kernel.assume_rule(@parser.parse_term("!p. (p = LUB P)\n        ==> (X:('a->bool)->('a->bool)->(('a->'a)list)->bool)p q Pr"))
   let t1217 = @bool.spec(@parser.parse_term("LUB (P:('a->bool)->bool)"), t1216)
-  let t1218 = @tactics.accept_tac(@simp.rewrite_rule(@list.empty())(t1217))
+  let t1218 = @tactics.accept_tac(@simp.rewrite_rule(@list.List([]))(t1217))
   let t1215 = @kernel.assume_rule(@parser.parse_term("!p:'a->bool. p In P ==> LEADSTO2 p q Pr /\\ X p q Pr"))
   let t1223 = @tactics.then_tac(@tactics.then_tac(@tactics.strip_assume_tac(@simp.rewrite_rule(@list.List([leadsto_thm42_lemma00()]))(t1215)), @hol88.res_tac), t1218)
   let t1213 = @kernel.assume_rule(@parser.parse_term("!p:'a->bool. p In P ==> LEADSTO2 p q Pr /\\ X p q Pr"))
   let t1224 = @list.List([(x1211 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm0(), x1211), (x1212 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm1(), x1212), @tactics.then_tac(@tactics.strip_assume_tac(@simp.rewrite_rule(@list.List([leadsto_thm42_lemma00()]))(t1213)), (x1214 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @hol88.imp_res_tac(leadsto2_thm3(), x1214)), t1223, t1222])
   let t1210 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1225 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t1210), @hol88.res_tac), t1224)
-  leadsto_thm42_lemma02_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!X Pr.\n     (!(p:'a->bool) q.\n      ((p ENSURES q)Pr ==> X p q Pr) /\\\n      (!r. (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\ X r q Pr ==> X p q Pr) /\\\n      (!P. (p = LUB P) /\\\n           (!p. p In P ==> LEADSTO2 p q Pr) /\\\n           (!p. p In P ==> X p q Pr) ==> X p q Pr))\n    =\n     (!p q.\n      ((p ENSURES q)Pr ==> LEADSTO2 p q Pr /\\ X p q Pr) /\\\n      (!r. (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\ X r q Pr\n               ==> LEADSTO2 p q Pr /\\ X p q Pr) /\\\n      (!P. (!p. p In P ==> LEADSTO2 p q Pr /\\ X p q Pr)\n               ==> LEADSTO2 (LUB P) q Pr /\\ X (LUB P) q Pr))")), t1225))
+  leadsto_thm42_lemma02_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!X Pr.\n     (!(p:'a->bool) q.\n      ((p ENSURES q)Pr ==> X p q Pr) /\\\n      (!r. (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\ X r q Pr ==> X p q Pr) /\\\n      (!P. (p = LUB P) /\\\n           (!p. p In P ==> LEADSTO2 p q Pr) /\\\n           (!p. p In P ==> X p q Pr) ==> X p q Pr))\n    =\n     (!p q.\n      ((p ENSURES q)Pr ==> LEADSTO2 p q Pr /\\ X p q Pr) /\\\n      (!r. (p ENSURES r)Pr /\\ LEADSTO2 r q Pr /\\ X r q Pr\n               ==> LEADSTO2 p q Pr /\\ X p q Pr) /\\\n      (!P. (!p. p In P ==> LEADSTO2 p q Pr /\\ X p q Pr)\n               ==> LEADSTO2 (LUB P) q Pr /\\ X (LUB P) q Pr))")), t1225))
 }
 
 ///|
@@ -3949,11 +3949,11 @@ pub fn leadsto_thm43() -> @kernel.Thm {
 ///|
 /// LEADSTO_cor13_lemma01
 fn step_188() -> Unit raise {
-  let t1242 = @simp.asm_rewrite_tac(@list.empty())
+  let t1242 = @simp.asm_rewrite_tac(@list.List([]))
   let t1241 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1240 = @simp.rewrite_tac(@list.List([@mk_state_logic.and_le_n_def(), @mk_state_logic.or_def(), @mk_state_logic.and_def()]))
   let t1243 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1240), @tactics.beta_tac), @tactics.eq_tac), t1241), @hol88.res_tac), t1242)
-  leadsto_cor13_lemma01_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(Q:num->('a->bool)) r s.\n       ((((/<=\\* Q i) \\/* r) /\\* ((Q(SUC i)) \\/* r)) \\/* r)s\n      =\n       ((/<=\\* Q (SUC i)) \\/* r)s")), t1243))
+  leadsto_cor13_lemma01_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(Q:num->('a->bool)) r s.\n       ((((/<=\\* Q i) \\/* r) /\\* ((Q(SUC i)) \\/* r)) \\/* r)s\n      =\n       ((/<=\\* Q (SUC i)) \\/* r)s")), t1243))
 }
 
 ///|
@@ -4169,11 +4169,11 @@ pub fn leadsto_cor15() -> @kernel.Thm {
 ///|
 /// LEADSTO_cor16_lemma1
 fn step_192() -> Unit raise {
-  let t1403 = @simp.asm_rewrite_tac(@list.empty())
+  let t1403 = @simp.asm_rewrite_tac(@list.List([]))
   let t1402 = @tactics.repeat_tac(@tactics.strip_tac)
   let t1401 = @simp.rewrite_tac(@list.List([@mk_state_logic.or_def(), @mk_state_logic.and_le_n_def(), @mk_state_logic.or_le_n_def(), @mk_state_logic.and_def()]))
   let t1404 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1401), @tactics.beta_tac), @tactics.eq_tac), t1402), @hol88.res_tac), t1403)
-  leadsto_cor16_lemma1_c.set(@tactics.tac_proof((@list.empty(), @parser.parse_term("!(Q:num->('a->bool)) R B i s.\n      ((/<=\\* Q(SUC i))  \\/*\n         (((( \\<=/*  R i) \\/* ( \\<=/*  B i)) \\/* ( \\<=/*  B i))  \\/*\n          ((R(SUC i)) \\/* (B(SUC i)))))s =\n      ((/<=\\* Q(SUC i)) \\/* (( \\<=/*  R(SUC i)) \\/* ( \\<=/*  B(SUC i))))s")), t1404))
+  leadsto_cor16_lemma1_c.set(@tactics.tac_proof((@list.List([]), @parser.parse_term("!(Q:num->('a->bool)) R B i s.\n      ((/<=\\* Q(SUC i))  \\/*\n         (((( \\<=/*  R i) \\/* ( \\<=/*  B i)) \\/* ( \\<=/*  B i))  \\/*\n          ((R(SUC i)) \\/* (B(SUC i)))))s =\n      ((/<=\\* Q(SUC i)) \\/* (( \\<=/*  R(SUC i)) \\/* ( \\<=/*  B(SUC i))))s")), t1404))
 }
 
 ///|

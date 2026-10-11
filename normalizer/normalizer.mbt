@@ -32,7 +32,7 @@ fn step_1() -> Unit raise {
       @meson.asm_meson_tac(@list.List([th]))
     },
   )
-  let t24 = @simp.asm_rewrite_tac(@list.empty())
+  let t24 = @simp.asm_rewrite_tac(@list.List([]))
   let t25 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -217,7 +217,7 @@ fn step_1() -> Unit raise {
     ),
     @tactics.strip_tac,
   )
-  let t11 = @list.List([@meson.asm_meson_tac(@list.empty()), t10])
+  let t11 = @list.List([@meson.asm_meson_tac(@list.List([])), t10])
   let t30 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(

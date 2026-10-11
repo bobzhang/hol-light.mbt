@@ -232,7 +232,7 @@ fn step_11() -> Unit raise {
   let t9 = @simp.rewrite_tac(
     @list.List([
       @meson.meson(
-        @list.empty(),
+        @list.List([]),
         @parser.parse_term("~(if p then F else T) <=> p"),
       ),
     ]),
@@ -488,7 +488,7 @@ fn step_16() -> Unit raise {
   let t43 = @simp.rewrite_tac(@list.List([dest_frag_of(), dest_frag_0()]))
   let t41 = @drule.match_mp(
     @meson.meson(
-      @list.empty(),
+      @list.List([]),
       @parser.parse_term("c = d ==> !a:A. dest_frag c a = dest_frag d a"),
     ),
   )
@@ -773,7 +773,7 @@ fn step_20() -> Unit raise {
   let t68 = @simp.rewrite_tac(
     @list.List([
       @meson.meson(
-        @list.empty(),
+        @list.List([]),
         @parser.parse_term("~(if p then F else T) <=> p"),
       ),
     ]),
@@ -1037,7 +1037,7 @@ pub fn frag_of_eq() -> @kernel.Thm {
 ///|
 /// FRAG_ADD_EQ_0
 fn step_27() -> Unit raise {
-  let t96 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t96 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t95 = @tactics.match_mp_tac(
     @int.int_arith(
       @parser.parse_term(
@@ -1369,7 +1369,7 @@ fn step_31() -> Unit raise {
     ),
     t142,
   )
-  let t140 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t140 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t134 = @drule.part_match(@equal.lhand, frag_support_add())
   let t130 = @tactics.repeat_tac(@tactics.strip_tac)
   let t129 = @simp.rewrite_tac(
@@ -2026,7 +2026,7 @@ fn step_38() -> Unit raise {
     ),
     t193,
   ])
-  let t178 = @simp.rewrite_tac(@list.empty())
+  let t178 = @simp.rewrite_tac(@list.List([]))
   let t172 = @drule.part_match(
     fn(x171 : @kernel.Term) -> @kernel.Term raise {
       @kernel.rand(@kernel.rand(x171))
@@ -2303,7 +2303,7 @@ pub fn frag_extend_sum() -> @kernel.Thm {
 ///|
 /// FRAG_EXTEND_EQ
 fn step_41() -> Unit raise {
-  let t205 = @simp.asm_simp_tac(@list.empty())
+  let t205 = @simp.asm_simp_tac(@list.List([]))
   let t204 = @tactics.match_mp_tac(
     @drule.match_mp(@iterate.iterate_eq())(monoidal_frag_add()),
   )
@@ -2580,7 +2580,7 @@ pub fn frag_support_frag_extend() -> @kernel.Thm {
 ///|
 /// FRAG_EXPANSION
 fn step_44() -> Unit raise {
-  let t242 = @meson.meson_tac(@list.empty())
+  let t242 = @meson.meson_tac(@list.List([]))
   let t243 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([frag_support(), @sets.in_elim_thm()])),
     t242,
@@ -2879,9 +2879,9 @@ pub fn frag_closure_sub_cmul() -> @kernel.Thm {
 ///|
 /// FRAG_INDUCTION
 fn step_46() -> Unit raise {
-  let t294 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t294 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t293 = @tactics.first_x_assum(@tactics.match_mp_tac)
-  let t292 = @simp.asm_rewrite_tac(@list.empty())
+  let t292 = @simp.asm_rewrite_tac(@list.List([]))
   let t291 = @tactics.repeat_tac(
     @tactics.then_tac(
       @tactics.first_assum(@tactics.match_mp_tac),
@@ -2946,7 +2946,7 @@ fn step_46() -> Unit raise {
     },
     @list.List([frag_expansion()]),
   )
-  let t268 = @simp.asm_rewrite_tac(@list.empty())
+  let t268 = @simp.asm_rewrite_tac(@list.List([]))
   let t267 = @tactics.mp_tac(
     @bool.ispec(@parser.parse_term("P:A frag->bool"), frag_closure_sub_cmul()),
   )
@@ -3079,7 +3079,7 @@ pub fn frag_extend_compose() -> @kernel.Thm {
 /// FRAG_SPLIT
 fn step_48() -> Unit raise {
   let t331 = @tactics.conv_tac(frag_module)
-  let t330 = @simp.asm_rewrite_tac(@list.empty())
+  let t330 = @simp.asm_rewrite_tac(@list.List([]))
   let t329 = @tactics.repeat_tac(@tactics.strip_tac)
   let t328 = @list.List([@tactics.all_tac, @tactics.conv_tac(frag_module)])
   let t327 = @list.List([@tactics.conv_tac(frag_module), @tactics.all_tac])
@@ -3177,7 +3177,7 @@ fn step_48() -> Unit raise {
     ),
     t331,
   )
-  let t319 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t319 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t318 = @simp.asm_rewrite_tac(
     @list.List([frag_support_0(), @sets.empty_subset(), frag_support_of()]),
   )

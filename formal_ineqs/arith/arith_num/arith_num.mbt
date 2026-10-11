@@ -142,7 +142,7 @@ pub fn num_def() -> @kernel.Thm {
 ///|
 /// num_const
 fn step_10() -> Unit raise {
-  num_const_c.set(@kernel.mk_const(num_name(), @list.empty()))
+  num_const_c.set(@kernel.mk_const(num_name(), @list.List([])))
 }
 
 ///|
@@ -288,7 +288,7 @@ fn step_17() -> Unit raise {
 fn step_18() -> Unit raise {
   const_array_c.set(@lib.array_init(maximum(), fn(x9 : Int64) -> @kernel.Term raise {
     let i = x9
-    @kernel.mk_const(@lib.array_get(names_array(), @lib.int63_to_int(i)), @list.empty())
+    @kernel.mk_const(@lib.array_get(names_array(), @lib.int63_to_int(i)), @list.List([]))
   }))
 }
 
@@ -1682,10 +1682,10 @@ pub fn eq_num() -> @kernel.Thm {
 ///|
 /// gen_bi_eq_bj
 fn step_77() -> Unit raise {
-  let t194 = @simp.asm_rewrite_tac(@list.empty())
+  let t194 = @simp.asm_rewrite_tac(@list.List([]))
   let t193 = @tactics.undisch_tac(@parser.parse_term("m * b + i = n * b + j:num"))
   let t192 = @simp.rewrite_tac(@list.List([@arith.add_0()]))
-  let t190 = @simp.asm_rewrite_tac(@list.empty())
+  let t190 = @simp.asm_rewrite_tac(@list.List([]))
   let t188 = @drule.match_mp(@arith.div_eq_0())
   let t191 = @list.List([@tactics.then_tac(@tactics.first_assum(fn(x189 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x185 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1712,7 +1712,7 @@ fn step_77() -> Unit raise {
       }
     })(t176(x177))
   })
-  let t172 = @simp.rewrite_tac(@list.empty())
+  let t172 = @simp.rewrite_tac(@list.List([]))
   let t168 = @parser.parse_term("\\x. x DIV b")
   let t171 = @tactics.first_assum(fn(x170 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x165 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {

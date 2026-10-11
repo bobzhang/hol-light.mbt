@@ -323,14 +323,14 @@ pub fn parseasinfix(x39 : String, x40 : (Int64, String)) -> Unit raise {
 /// `NewDefinition`
 pub fn newdefinition(x41 : String) -> @kernel.Thm raise {
   let s = x41
-  @pair.new_definition(parse_env_string(@list.empty(), cleanmathfontsforhol_light(s)))
+  @pair.new_definition(parse_env_string(@list.List([]), cleanmathfontsforhol_light(s)))
 }
 
 ///|
 /// `NewAxiom`
 pub fn newaxiom(x42 : String) -> @kernel.Thm raise {
   let s = x42
-  @kernel.new_axiom(parse_env_string(@list.empty(), cleanmathfontsforhol_light(s)))
+  @kernel.new_axiom(parse_env_string(@list.List([]), cleanmathfontsforhol_light(s)))
 }
 
 ///|
@@ -403,7 +403,7 @@ pub fn assume(x64 : String, x65 : String, x66 : ((@list.List[(String, @kernel.Th
   let tac = x66
   let (asl, w) as gl = x67
   let t = parse_env_string(make_env(gl.0, gl.1), statement)
-  let t77 = @tactics.hyp_tac(@simp.simp_tac, lab)(@list.empty())
+  let t77 = @tactics.hyp_tac(@simp.simp_tac, lab)(@list.List([]))
   let t76 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.first_assum(fn(x73 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s74 = @tactics.mp_tac(x73)
     fn(x75 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -825,7 +825,7 @@ pub fn findcases(x144 : String) -> @list.List[String] raise {
     let rest = @lib.str_string_after(caseendrest, posafterend)
     findcases(rest).prepend(case)
   } else {
-    @list.empty()
+    @list.List([])
   }
 }
 
@@ -834,7 +834,7 @@ pub fn findcases(x144 : String) -> @list.List[String] raise {
 pub fn stringtolist(x146 : String) -> @list.List[String] raise {
   let s = x146
   if stringregexpequal(@lib.str_regexp(ws0()), s) {
-    @list.empty()
+    @list.List([])
   } else {
     if @lib.str_string_match(@lib.str_regexp("[^;]*;"), s, 0L) {
       let pos = findsemicolon(s)
@@ -1044,7 +1044,7 @@ pub fn combthmlisttactic_thmlist(x171 : String) -> ((@tactics.Goal) -> @tactics.
     let labthmstring = @lib.str_string_after(step, @lib.str_match_end(()))
     fn(x176 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       let gl_1 = x176
-      let labthmlist = @lib.rev(makethmlistaccum(labthmstring, @list.empty(), gl_1))
+      let labthmlist = @lib.rev(makethmlistaccum(labthmstring, @list.List([]), gl_1))
       ttac(labthmlist)(gl_1)
     }
   } else {
@@ -1227,7 +1227,7 @@ pub fn theorem(x200 : String) -> @kernel.Thm raise {
     let rest = @lib.str_string_after(s_1, @lib.str_match_end(()))
     if (rest == "") {
       let t201 = stringtotactic(proof)
-      @tactics.prove(parse_env_string(@list.empty(), thm), t201)
+      @tactics.prove(parse_env_string(@list.List([]), thm), t201)
     } else {
       raise Readable_fail::Readable_fail(("Trailing garbage after the proof...qed:\n" + rest))
     }
@@ -1239,7 +1239,7 @@ pub fn theorem(x200 : String) -> @kernel.Thm raise {
         let proof_1 = @lib.str_string_after(s_1, @lib.str_match_end(()))
         try {
           let t202 = steptotactic(proof_1)
-          @tactics.prove(parse_env_string(@list.empty(), thm_1), t202)
+          @tactics.prove(parse_env_string(@list.List([]), thm_1), t202)
         } catch {
           @lib.NotFound => raise Readable_fail::Readable_fail(("Not a proof:\n" + proof_1))
           e => raise e
@@ -1258,7 +1258,7 @@ pub fn theorem(x200 : String) -> @kernel.Thm raise {
 pub fn interactive_goal(x203 : String) -> @tactics.Goalstack raise {
   let s = x203
   let thm = cleanmathfontsforhol_light(s)
-  @tactics.g(parse_env_string(@list.empty(), thm))
+  @tactics.g(parse_env_string(@list.List([]), thm))
 }
 
 ///|

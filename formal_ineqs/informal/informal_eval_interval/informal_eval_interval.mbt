@@ -589,7 +589,7 @@ pub fn find_and_replace_all(x77 : @list.List[IntervalFun], x78 : @list.List[Inte
       }
     }
   }
-  iterate_all(f_list, acc, @list.empty())
+  iterate_all(f_list, acc, @list.List([]))
 }
 
 ///|
@@ -609,7 +609,7 @@ pub fn eval_interval_fun_list(x88 : Int64, x89 : (@list.List[IntervalFun], @list
       }
     }
   }
-  let rs_1 = eval_refs(refs, @list.empty())
+  let rs_1 = eval_refs(refs, @list.List([]))
   @lib.map(fn(x93 : IntervalFun) -> @informal_interval.Interval raise {
     let f = x93
     eval_interval_fun(pp)(f)(vars)(rs_1)
@@ -628,8 +628,8 @@ pub fn interval_to_float_interval(x94 : Int64, x95 : @kernel.Thm) -> @informal_i
   })(int_th))
   let f_lo = build_interval_fun(lo_tm)
   let f_hi = build_interval_fun(hi_tm)
-  let int_lo = eval_interval_fun(pp)(f_lo)(@list.empty())(@list.empty())
-  let int_hi = eval_interval_fun(pp)(f_hi)(@list.empty())(@list.empty())
+  let int_lo = eval_interval_fun(pp)(f_lo)(@list.List([]))(@list.List([]))
+  let int_hi = eval_interval_fun(pp)(f_hi)(@list.List([]))(@list.List([]))
   let (a, _) = @informal_interval.dest_interval(int_lo.0, int_lo.1)
   let (_, b) = @informal_interval.dest_interval(int_hi.0, int_hi.1)
   @informal_interval.mk_interval(a, b)

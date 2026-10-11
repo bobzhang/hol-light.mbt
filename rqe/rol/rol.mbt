@@ -174,7 +174,7 @@ fn step_9() -> Unit raise {
       s37(x38)
     }
   })
-  let t46 = @meson.asm_meson_tac(@list.empty())
+  let t46 = @meson.asm_meson_tac(@list.List([]))
   let t47 = @simp.asm_rewrite_tac(@list.List([rol_cons_cons()]))
   let t48 = @simp.rewrite_tac(@list.List([@list_rewrites.not_nil()]))
   let t49 = @tactics.pop_assum(fn(x33 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -185,8 +185,8 @@ fn step_9() -> Unit raise {
   })
   let t50 = @meson.asm_meson_tac(@list.List([real_ordered_list()]))
   let t51 = @rqe_tactics_ext.cases_on(@parser.parse_term("t = []"))
-  let t52 = @simp.asm_rewrite_tac(@list.empty())
-  let t53 = @meson.asm_meson_tac(@list.empty())
+  let t52 = @simp.asm_rewrite_tac(@list.List([]))
+  let t53 = @meson.asm_meson_tac(@list.List([]))
   let t54 = @rqe_tactics_ext.claim(@parser.parse_term("real_ordered_list t /\\ real_ordered_list l2"))
   let t55 = @meson.asm_meson_tac(@list.List([rol_cons()]))
   let t56 = @rqe_tactics_ext.claim(@parser.parse_term("real_ordered_list (APPEND t l2)"))
@@ -242,7 +242,7 @@ fn step_11() -> Unit raise {
       }
     })(@equal.gsym(x74))
   })
-  let t83 = @simp.asm_rewrite_tac(@list.empty())
+  let t83 = @simp.asm_rewrite_tac(@list.List([]))
   let t84 = @tactics.first_assum(fn(x68 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s69 = @tactics.match_accept_tac(x68)
     fn(x70 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -264,7 +264,7 @@ fn step_11() -> Unit raise {
   let t92 = @rqe_tactics_ext.rewrite_assums(@list.List([@class.taut(@parser.parse_term("(p ==> q ==> r) <=> (p /\\ q ==> r)"))]))
   let t93 = @rqe_tactics_ext.claim(@parser.parse_term("real_ordered_list (APPEND t (CONS x l2))"))
   let t94 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t95 = @simp.asm_rewrite_tac(@list.empty())
+  let t95 = @simp.asm_rewrite_tac(@list.List([]))
   let t96 = @simp.rewrite_tac(@list.List([@list_rewrites.not_nil()]))
   let t97 = @tactics.pop_assum(fn(x62 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s63 = @tactics.mp_tac(x62)
@@ -293,7 +293,7 @@ pub fn rol_insert_thm() -> @kernel.Thm {
 /// ROL_INSERT_FRONT_THM
 fn step_12() -> Unit raise {
   let t103 = @meson.asm_meson_tac(@list.List([rol_cons_cons(), @lists.hd()]))
-  let t104 = @simp.asm_rewrite_tac(@list.empty())
+  let t104 = @simp.asm_rewrite_tac(@list.List([]))
   let t105 = @tactics.repeat_tac(@tactics.strip_tac)
   let t106 = @list.List([@simp.rewrite_tac(@list.List([@list_rewrites.not_nil(), @basic.and_imp_thm()])), t105, t104, t103])
   rol_insert_front_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x l. real_ordered_list l /\\ ~(l = []) /\\ x < HD l ==>\n    real_ordered_list (CONS x l)"), t106))
@@ -314,7 +314,7 @@ fn step_13() -> Unit raise {
   let t108 = @meson.asm_meson_tac(@list.List([@realarith.real_lt_trans()]))
   let t109 = @rqe_tactics_ext.rewrite_assums(@list.List([@lists.hd()]))
   let t110 = @meson.asm_meson_tac(@list.List([@lists.not_cons_nil()]))
-  let t107 = @simp.asm_rewrite_tac(@list.empty())
+  let t107 = @simp.asm_rewrite_tac(@list.List([]))
   let t111 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t107)
   let t112 = @list.List([@simp.rewrite_tac(@list.List([real_ordered_list()])), t111, t110, t109, t108])
   rol_cons_cons_delete_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!h1 h2 t. real_ordered_list (CONS h1 (CONS h2 t)) ==>\n     real_ordered_list (CONS h1 t)"), t112))
@@ -375,7 +375,7 @@ fn step_15() -> Unit raise {
   let t135 = @simp.rewrite_tac(@list.List([real_ordered_list()]))
   let t136 = @simp.rewrite_tac(@list.List([@lists.append()]))
   let t137 = @meson.asm_meson_tac(@list.List([@rqe_list.last_cons()]))
-  let t138 = @meson.asm_meson_tac(@list.empty())
+  let t138 = @meson.asm_meson_tac(@list.List([]))
   let t139 = @meson.asm_meson_tac(@list.List([rol_cons()]))
   let t140 = @tactics.repeat_tac(@tactics.strip_tac)
   let t141 = @meson.asm_meson_tac(@list.List([@lists.last(), @class.cond_clauses()]))
@@ -454,7 +454,7 @@ pub fn rol_chop_list(x152 : Int64, x153 : @kernel.Thm) -> ((@kernel.Thm, @kernel
 ///|
 /// lem1
 fn step_17() -> Unit raise {
-  let t154 = @meson.meson_tac(@list.empty())
+  let t154 = @meson.meson_tac(@list.List([]))
   lem1_v1_c.set(@tactics.prove(@parser.parse_term("!e x l. e < x /\\ (LAST l = e) ==> LAST l < x"), t154))
 }
 
@@ -573,7 +573,7 @@ pub fn rol_thms(x170 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
 ///|
 /// lem
 fn step_18() -> Unit raise {
-  let t171 = @meson.meson_tac(@list.empty())
+  let t171 = @meson.meson_tac(@list.List([]))
   lem_v1_c.set(@tactics.prove(@parser.parse_term("!x. ?y. y = x"), t171))
 }
 
@@ -605,7 +605,7 @@ pub fn[TA] interleave(x172 : @list.List[TA], x173 : @list.List[TA]) -> @list.Lis
 ///|
 /// lem0
 fn step_19() -> Unit raise {
-  let t174 = @meson.meson_tac(@list.empty())
+  let t174 = @meson.meson_tac(@list.List([]))
   lem0_v1_c.set(@tactics.prove(@parser.parse_term("?x:real. T"), t174))
 }
 
@@ -622,7 +622,7 @@ pub fn lem0_v1() -> @kernel.Thm {
 /// lem1
 fn step_20() -> Unit raise {
   let t175 = @rqe_tactics_ext.exists_tac(@parser.parse_term("x + &1"))
-  let t176 = @meson.meson_tac(@list.empty())
+  let t176 = @meson.meson_tac(@list.List([]))
   let t177 = @rqe_tactics_ext.exists_tac(@parser.parse_term("x - &1"))
   let t178 = @list.List([@tactics.repeat_tac(@tactics.strip_tac), t177, @calc_rat.real_arith_tac, t176, t175, @calc_rat.real_arith_tac])
   lem1_v2_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!x. (?y. y < x) /\\ (?y. y = x) /\\ (?y. x < y)"), t178))

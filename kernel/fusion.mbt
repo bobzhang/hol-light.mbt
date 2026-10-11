@@ -196,7 +196,7 @@ pub fn is_vartype(ty : HolType) -> Bool {
 pub fn tyvars(ty : HolType) -> @list.List[HolType] {
   match ty {
     Tyapp(_, args) =>
-      args.rev().fold(init=@list.empty(), (acc, arg) => union(tyvars(arg), acc))
+      args.rev().fold(init=@list.List([]), (acc, arg) => union(tyvars(arg), acc))
     Tyvar(_) => @list.singleton(ty)
   }
 }
@@ -219,7 +219,7 @@ pub fn type_subst(i : @list.List[(HolType, HolType)], ty : HolType) -> HolType {
 }
 
 ///|
-pub let bool_ty : HolType = Tyapp("bool", @list.empty())
+pub let bool_ty : HolType = Tyapp("bool", @list.List([]))
 
 ///|
 pub let aty : HolType = Tyvar("A")
@@ -376,7 +376,7 @@ pub fn dest_abs(tm : Term) -> (Term, Term) raise {
 pub fn frees(tm : Term) -> @list.List[Term] {
   match tm {
     Var(_) => @list.singleton(tm)
-    Const(_) => @list.empty()
+    Const(_) => @list.List([])
     Abs(bv, bod) => subtract(frees(bod), @list.singleton(bv))
     Comb(s, t) => union(frees(s), frees(t))
   }
@@ -385,7 +385,7 @@ pub fn frees(tm : Term) -> @list.List[Term] {
 ///|
 /// Free variables of a list of terms.
 pub fn freesl(tml : @list.List[Term]) -> @list.List[Term] {
-  tml.rev().fold(init=@list.empty(), (acc, t) => union(frees(t), acc))
+  tml.rev().fold(init=@list.List([]), (acc, t) => union(frees(t), acc))
 }
 
 ///|
@@ -535,14 +535,14 @@ fn inst_rec(
       }
     }
     Abs(y, t) => {
-      let y1 = inst_rec(@list.empty(), tyin, y)
+      let y1 = inst_rec(@list.List([]), tyin, y)
       let env1 = env.prepend((y, y1))
       try inst_rec(env1, tyin, t) catch {
         Clash(w1) => {
           if w1 != y1 {
             raise Clash(w1)
           }
-          let ifrees = qmap(u => inst_rec(@list.empty(), tyin, u), frees(t))
+          let ifrees = qmap(u => inst_rec(@list.List([]), tyin, u), frees(t))
           let y2 = variant(ifrees, y1) catch {
             _ => abort("inst: variant of a non-variable")
           }
@@ -573,7 +573,7 @@ pub fn inst(tyin : @list.List[(HolType, HolType)], tm : Term) -> Term {
   if tyin.is_empty() {
     return tm
   }
-  inst_rec(@list.empty(), tyin, tm) catch {
+  inst_rec(@list.List([]), tyin, tm) catch {
     // A clash with an empty environment is impossible: every variable in
     // `env` was bound by an enclosing abstraction.
     _ => abort("inst: unexpected clash")
@@ -669,7 +669,7 @@ fn orda(env : @list.List[(Term, Term)], tm1 : Term, tm2 : Term) -> Int {
 ///|
 /// Total order on terms that identifies alpha-equivalent terms.
 pub fn alphaorder(tm1 : Term, tm2 : Term) -> Int {
-  orda(@list.empty(), tm1, tm2)
+  orda(@list.List([]), tm1, tm2)
 }
 
 ///|
@@ -801,7 +801,7 @@ pub fn concl(th : Thm) -> Term {
 ///|
 /// `REFL`: `|- t = t`
 pub fn refl(tm : Term) -> Thm {
-  { hyps: @list.empty(), concl: safe_mk_eq(tm, tm), }
+  { hyps: @list.List([]), concl: safe_mk_eq(tm, tm), }
 }
 
 ///|
@@ -850,7 +850,7 @@ pub fn abs_rule(v : Term, th : Thm) -> Thm raise {
 pub fn beta(tm : Term) -> Thm raise {
   match tm {
     Comb(Abs(v, bod), arg) if arg == v =>
-      { hyps: @list.empty(), concl: safe_mk_eq(tm, bod), }
+      { hyps: @list.List([]), concl: safe_mk_eq(tm, bod), }
     _ => failwith("BETA: not a trivial beta-redex")
   }
 }
@@ -904,7 +904,7 @@ pub fn inst_rule(theta : @list.List[(Term, Term)], th : Thm) -> Thm raise {
 // ---------------------------------------------------------------------------
 
 ///|
-let the_axioms : Ref[@list.List[Thm]] = Ref::{ val: @list.empty(), }
+let the_axioms : Ref[@list.List[Thm]] = Ref::{ val: @list.List([]), }
 
 ///|
 pub fn axioms() -> @list.List[Thm] {
@@ -914,7 +914,7 @@ pub fn axioms() -> @list.List[Thm] {
 ///|
 pub fn new_axiom(tm : Term) -> Thm raise {
   if type_of(tm) == bool_ty {
-    let th = { hyps: @list.empty(), concl: tm, }
+    let th = { hyps: @list.List([]), concl: tm, }
     the_axioms.val = the_axioms.val.prepend(th)
     th
   } else {
@@ -927,7 +927,7 @@ pub fn new_axiom(tm : Term) -> Thm raise {
 // ---------------------------------------------------------------------------
 
 ///|
-let the_definitions : Ref[@list.List[Thm]] = Ref::{ val: @list.empty(), }
+let the_definitions : Ref[@list.List[Thm]] = Ref::{ val: @list.List([]), }
 
 ///|
 pub fn definitions() -> @list.List[Thm] {
@@ -940,7 +940,7 @@ pub fn definitions() -> @list.List[Thm] {
 pub fn new_basic_definition(tm : Term) -> Thm raise {
   match tm {
     Comb(Comb(Const("=", _), Var(cname, ty)), r) => {
-      if !freesin(@list.empty(), r) {
+      if !freesin(@list.List([]), r) {
         let names = frees(r).map(v => {
           match v {
             Var(name, _) => name
@@ -957,7 +957,7 @@ pub fn new_basic_definition(tm : Term) -> Thm raise {
       }
       check_new_constant(cname)
       let c = Const(cname, ty)
-      let dth = { hyps: @list.empty(), concl: safe_mk_eq(c, r), }
+      let dth = { hyps: @list.List([]), concl: safe_mk_eq(c, r), }
       // Publish only after every check has passed and the theorem exists.
       the_term_constants.val = the_term_constants.val.prepend((cname, ty))
       the_definitions.val = the_definitions.val.prepend(dth)
@@ -1005,7 +1005,7 @@ pub fn new_basic_type_definition(
     Comb(p, x) => (p, x)
     _ => failwith("new_basic_type_definition: Not a combination")
   }
-  if !freesin(@list.empty(), p) {
+  if !freesin(@list.List([]), p) {
     failwith("new_basic_type_definition: Predicate is not closed")
   }
   let tyvars = sort_types(type_vars_in_term(p))
@@ -1027,11 +1027,11 @@ pub fn new_basic_type_definition(
   let a = Var("a", aty)
   let r = Var("r", rty)
   let th1 = {
-    hyps: @list.empty(),
+    hyps: @list.List([]),
     concl: safe_mk_eq(Comb(abs, Comb(rep, a)), a),
   }
   let th2 = {
-    hyps: @list.empty(),
+    hyps: @list.List([]),
     concl: safe_mk_eq(Comb(p, r), safe_mk_eq(Comb(rep, Comb(abs, r)), r)),
   }
   // Publish only after every check has passed and both theorems exist.

@@ -56,7 +56,7 @@ test "basics matches basics.ml" {
   let b = @kernel.mk_vartype("B")
   let fn_ = @basics.mk_fun_ty
   @kernel.new_type("num", 0)
-  let num_ty = @kernel.mk_type("num", @list.empty())
+  let num_ty = @kernel.mk_type("num", @list.List([]))
   let bb = fn_(@kernel.bool_ty, fn_(@kernel.bool_ty, @kernel.bool_ty))
   let consts : Array[(String, HolType)] = [
     ("/\\", bb),
@@ -92,7 +92,7 @@ test "basics matches basics.ml" {
   let mk_var = @kernel.mk_var
   let mk_comb = @kernel.mk_comb
   let mk_abs = @kernel.mk_abs
-  let mk_const = (s : String) => @kernel.mk_const(s, @list.empty())
+  let mk_const = (s : String) => @kernel.mk_const(s, @list.List([]))
   let p = mk_var("p", @kernel.bool_ty)
   let q = mk_var("q", @kernel.bool_ty)
   let r = mk_var("r", @kernel.bool_ty)
@@ -182,7 +182,7 @@ test "basics matches basics.ml" {
       @basics.type_match(
         fn_(a, fn_(b, a)),
         fn_(num_ty, fn_(@kernel.bool_ty, num_ty)),
-        @list.empty(),
+        @list.List([]),
       ),
     )
   })
@@ -192,12 +192,12 @@ test "basics matches basics.ml" {
       @basics.type_match(
         fn_(a, fn_(b, a)),
         fn_(num_ty, fn_(@kernel.bool_ty, @kernel.bool_ty)),
-        @list.empty(),
+        @list.List([]),
       ),
     )
   })
   log.attempt("type_match_bad2", () => {
-    sl(stv, @basics.type_match(fn_(a, a), @kernel.bool_ty, @list.empty()))
+    sl(stv, @basics.type_match(fn_(a, a), @kernel.bool_ty, @list.List([])))
   })
   log.attempt("mk_mconst", () => {
     stm(

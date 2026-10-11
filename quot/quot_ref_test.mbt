@@ -18,7 +18,7 @@ test "quot matches quot.ml" {
   log.show_theory_trace("quot")
   let tm = @parser.parse_term
   let rw = (ths : Array[@kernel.Thm]) => @simp.rewrite_tac(@list.List(ths))
-  let meson = @meson.meson_tac(@list.empty()) catch { e => fail("\{e}") }
+  let meson = @meson.meson_tac(@list.List([])) catch { e => fail("\{e}") }
   try {
     let beq = @drule.new_definition(tm("BEQ x y <=> (x:bool <=> y)"))
     let refl_th = @tactics.prove(tm("!x. BEQ x x"), rw([beq]))

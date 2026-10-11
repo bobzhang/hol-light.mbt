@@ -137,7 +137,7 @@ fn step_8() -> Unit raise {
 pub fn exec_phrase_2(x25 : Unit) -> Unit raise {
   let _ = x25
   {
-    @miz3.exec_tactic_out().val = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+    @miz3.exec_tactic_out().val = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
     ()
   }
 }

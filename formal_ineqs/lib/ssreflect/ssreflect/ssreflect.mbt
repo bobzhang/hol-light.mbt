@@ -201,7 +201,7 @@ fn step_2() -> Unit raise {
     let l1 = x38
     let l2 = x39
     match (l1, l2) {
-      (Empty, Empty) => (@tactics.null_meta, @list.empty(), fn(x40 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> ((@list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise) raise {
+      (Empty, Empty) => (@tactics.null_meta, @list.List([]), fn(x40 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> ((@list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise) raise {
         fn(x41 : @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise {
           propagate_empty_l(x40, x41)
         }
@@ -232,7 +232,7 @@ fn step_2() -> Unit raise {
         }
       }
       let just : ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = if @list.List::is_empty(gls2_1) {
-        let t63 = jst(@tactics.null_inst)(@list.empty())
+        let t63 = jst(@tactics.null_inst)(@list.List([]))
         fn(x66 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
           fn(x67 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
             ((x64 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), x65 : @list.List[@kernel.Thm]) => propagate_thm_l(t63, x64, x65))(x66, x67)
@@ -302,7 +302,7 @@ fn step_2() -> Unit raise {
 fn[TA, TB, TC] propagate_empty_l(x27 : TC, x28 : @list.List[TB]) -> @list.List[TA] raise {
   let i = x27
   match x28 {
-    Empty => @list.empty()
+    Empty => @list.List([])
     _ => raise @lib.MatchFailure("tscript.ml:60")
   }
 }
@@ -582,7 +582,7 @@ pub fn find_all_paths(x157 : (@kernel.Term) -> Bool raise, x158 : @kernel.Term) 
         let t162 = find_path(p_1, r_tm, (path + "r"))
         find_path(p_1, l_tm, (path + "l")).concat(t162)
       }
-      _ => @list.empty()
+      _ => @list.List([])
     }
     if p_1(tm_1) {
       paths.prepend(path)
@@ -610,7 +610,7 @@ pub fn inst_context_vars(x163 : @list.List[(String, @kernel.Term)], x164 : @list
     }
   }
   let (ty_src, ty_dst) = @lib.unzip(@lib.map(find_type, tm_vars))
-  let ty_inst = @lib.itlist2(@basics.type_match, ty_src, ty_dst, @list.empty())
+  let ty_inst = @lib.itlist2(@basics.type_match, ty_src, ty_dst, @list.List([]))
   @kernel.inst(ty_inst, tm)
 }
 
@@ -697,7 +697,7 @@ pub fn find_term_inst(x178 : @list.List[@kernel.Term], x179 : @kernel.Term, x180
           }
         }
         @kernel.Term::Abs(_, b_tm) => find_term_inst(local_consts, tm, b_tm, (path + "b"))
-        _ => ((@list.empty(), @list.empty(), @list.empty()), false, path)
+        _ => ((@list.List([]), @list.List([]), @list.List([])), false, path)
       }
     }
     e => raise e
@@ -985,7 +985,7 @@ pub fn rewrite(x212 : @list.List[Int64], x213 : @list.List[@kernel.Term], x214 :
 /// done_tac
 fn step_3() -> Unit raise {
   let t240 = @tactics.fail_tac("done: not all subgoals are proved")
-  done_tac_c.set(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t240))
+  done_tac_c.set(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t240))
 }
 
 ///|
@@ -1000,7 +1000,7 @@ pub fn done_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 ///|
 /// simp_tac
 fn step_4() -> Unit raise {
-  simp_tac_c.set(@simp.simp_tac(@list.empty()))
+  simp_tac_c.set(@simp.simp_tac(@list.List([])))
 }
 
 ///|
@@ -1154,7 +1154,7 @@ pub fn disch_tm_tac(x264 : @list.List[Int64], x265 : @kernel.Term, x266 : (@list
   let t277 = @tactics.spec_tac(new_tm, new_tm1)
   let t276 = @tactics.pop_assum(fn(x273 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x273
-    @tactics.try_tac((x275 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => new_rewrite(occs, @list.empty(), th, x275))
+    @tactics.try_tac((x275 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => new_rewrite(occs, @list.List([]), th, x275))
   })
   let t272 = @simp.expand_tac(name)
   @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.abbrev_tac(abbrev_tm), t272), t276), t277)(g)
@@ -1201,7 +1201,7 @@ fn step_7() -> Unit raise {
             (list_2.prepend(("undisch", ant_tm)), th0_2)
           }
         } else {
-          (@list.empty(), th)
+          (@list.List([]), th)
         }
       }
     }
@@ -1270,11 +1270,11 @@ pub fn spec_var_th(x288 : @kernel.Thm, x289 : Int64, x290 : @kernel.Term) -> @ke
     match list {
       More(("spec", _ as var_tm), tail=t) => {
         try {
-          let ty_ii = @basics.type_match(@kernel.type_of(var_tm), ty, @list.empty())
+          let ty_ii = @basics.type_match(@kernel.type_of(var_tm), ty, @list.List([]))
           if (n_1 <= 1L) {
             let th1 = reconstruct_thm((list, th0))
             let th2 = @bool.ispec(tm, th1)
-            let (tail, th0_1) = process_thm(@list.empty())(th2)
+            let (tail, th0_1) = process_thm(@list.List([]))(th2)
             let head1 = @lib.map(fn(x294 : (String, @kernel.Term)) -> (String, @kernel.Term) raise {
               let (s, tm_1) = x294
               (s, @kernel.inst(ty_ii, tm_1))
@@ -1293,7 +1293,7 @@ pub fn spec_var_th(x288 : @kernel.Thm, x289 : Int64, x290 : @kernel.Term) -> @ke
       Empty => raise Failure("spec_var_th")
     }
   }
-  reconstruct_thm(spec(n, cmd, @list.empty()))
+  reconstruct_thm(spec(n, cmd, @list.List([])))
 }
 
 ///|
@@ -1340,7 +1340,7 @@ pub fn match_mp_th(x296 : @kernel.Thm, x297 : Int64, x298 : @kernel.Thm) -> @ker
       Empty => raise Failure("match_mp_th: no match")
     }
   }
-  let r = rec_match(n, cmd, @list.empty())
+  let r = rec_match(n, cmd, @list.List([]))
   reconstruct_thm(r)
 }
 
@@ -1411,7 +1411,7 @@ pub fn exists_tac(x325 : @kernel.Term, x326 : (@list.List[(String, @kernel.Thm)]
   })((fn(x331 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @kernel.Term raise {
     x331.1
   })(g))
-  let inst_ty = @basics.type_match(@kernel.type_of(tm0), target_ty, @list.empty())
+  let inst_ty = @basics.type_match(@kernel.type_of(tm0), target_ty, @list.List([]))
   let tm1 = @kernel.inst(inst_ty, tm0)
   @tactics.exists_tac(tm1)(g)
 }
@@ -1686,7 +1686,7 @@ pub fn spec0(x374 : @list.List[String], x375 : @list.List[(String, @kernel.Term)
   let inst_term : (@kernel.Term) -> @kernel.Term raise = fn(x380 : @kernel.Term) -> @kernel.Term raise {
     let tm = x380
     let (ty_src, ty_dst) = @lib.unzip(@lib.map(find_type, @kernel.frees(tm)))
-    let ty_inst = @lib.itlist2(@basics.type_match, ty_src, ty_dst, @list.empty())
+    let ty_inst = @lib.itlist2(@basics.type_match, ty_src, ty_dst, @list.List([]))
     @kernel.inst(ty_inst, tm)
   }
   let list = @lib.map(find, names)
@@ -1751,7 +1751,7 @@ fn step_12() -> Unit raise {
       s392(x393)
     }
   }))
-  let t390 = @simp.asm_rewrite_tac(@list.empty())
+  let t390 = @simp.asm_rewrite_tac(@list.List([]))
   let t389 = @tactics.disch_then(@tactics.disj_cases_tac)
   let t388 = @tactics.mp_tac(@bool.spec(@parser.parse_term("l:(A)list"), @lists.list_cases()))
   let t402 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t388), t389), t390), t394), t398), t401)
@@ -1789,7 +1789,7 @@ fn step_14() -> Unit raise {
     let th = x406
     @simp.asm_rewrite_tac(@list.List([th]))
   }))
-  let t405 = @simp.asm_rewrite_tac(@list.empty())
+  let t405 = @simp.asm_rewrite_tac(@list.List([]))
   let t404 = @tactics.disch_then(@tactics.disj_cases_tac)
   let t403 = @tactics.mp_tac(@bool.spec(@parser.parse_term("m:num"), @nums.num_cases()))
   let t409 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t403), t404), t405), t408)
@@ -2169,7 +2169,7 @@ pub fn congr_tac(x451 : @kernel.Term, x452 : (@list.List[(String, @kernel.Thm)],
   let eq_tm = @lib.itlist((x457 : @kernel.Term, x458 : @kernel.Term) => @lib.curry(fn(x456 : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
     @bool.mk_imp(x456.0, x456.1)
   }, x457, x458), eq_tms, goal_tm)
-  let eq_thm = @bool.eqt_elim(@simp.simp_conv(@list.empty())(eq_tm))
+  let eq_thm = @bool.eqt_elim(@simp.simp_conv(@list.List([]))(eq_tm))
   @tactics.then_tac((x459 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => apply_tac(eq_thm, x459), @tactics.repeat_tac(@tactics.conj_tac))(goal)
 }
 
@@ -2276,7 +2276,7 @@ pub fn disch_tm_eq_tac(x478 : String, x479 : @list.List[Int64], x480 : @kernel.T
   })
   let t489 = @tactics.first_assum(fn(x486 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x486
-    @tactics.try_tac((x488 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => new_rewrite(occs, @list.empty(), th, x488))
+    @tactics.try_tac((x488 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => new_rewrite(occs, @list.List([]), th, x488))
   })
   let t485 = @simp.expand_tac(name)
   @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.abbrev_tac(abbrev_tm), t485), t489), t495), t496)(g)

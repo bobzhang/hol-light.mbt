@@ -98,7 +98,7 @@ pub fn ntrie_in() -> @kernel.Thm {
 ///|
 /// NTRIE_SUBSET
 fn step_7() -> Unit raise {
-  let t6 = @sets.set_tac(@list.empty())
+  let t6 = @sets.set_tac(@list.List([]))
   let t5 = @simp.rewrite_tac(@list.List([@sets.in_union(), @sets.in_image(), @sets.in_insert(), @sets.not_in_empty(), @calc_num.arith_eq()]))
   let t7 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie(), nempty(), nzero(), nnode(), @sets.subset(), @sets.forall_in_union(), @sets.forall_in_image(), @sets.forall_in_insert()])), t5), t6)
   ntrie_subset_c.set(@tactics.prove(@parser.parse_term("(!s t. NTRIE s SUBSET NTRIE t <=> s SUBSET t) /\\\n   (!s. NEMPTY SUBSET s) /\\\n   (!s:num->bool. s SUBSET s) /\\\n   ~(NZERO SUBSET NEMPTY) /\\\n   (!s t. NNODE s t SUBSET NEMPTY <=> s SUBSET NEMPTY /\\ t SUBSET NEMPTY) /\\\n   (!s t. NNODE s t SUBSET NZERO <=> s SUBSET NZERO /\\ t SUBSET NEMPTY) /\\\n   (!s t. NZERO SUBSET NNODE s t <=> NZERO SUBSET s) /\\\n   (!s1 s2 t1 t2.\n      NNODE s1 t1 SUBSET NNODE s2 t2 <=> s1 SUBSET s2 /\\ t1 SUBSET t2)"), t7))
@@ -116,7 +116,7 @@ pub fn ntrie_subset() -> @kernel.Thm {
 ///|
 /// NTRIE_EQ
 fn step_8() -> Unit raise {
-  let t8 = @sets.set_tac(@list.empty())
+  let t8 = @sets.set_tac(@list.List([]))
   let t9 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@equal.gsym(@sets.subset_antisym_eq()), ntrie_subset(), nempty(), nzero()])), t8)
   ntrie_eq_c.set(@tactics.prove(@parser.parse_term("(!s t. NTRIE s = NTRIE t <=> s = t) /\\\n   ~(NZERO = NEMPTY) /\\\n   ~(NEMPTY = NZERO) /\\\n   (!s t. NNODE s t = NEMPTY <=> s = NEMPTY /\\ t = NEMPTY) /\\\n   (!s t. NEMPTY = NNODE s t <=> s = NEMPTY /\\ t = NEMPTY) /\\\n   (!s t. NNODE s t = NZERO <=> s = NZERO /\\ t = NEMPTY) /\\\n   (!s t. NZERO = NNODE s t <=> s = NZERO /\\ t = NEMPTY) /\\\n   (!s1 s2 t1 t2. NNODE s1 t1 = NNODE s2 t2 <=> s1 = s2 /\\ t1 = t2)"), t9))
 }
@@ -134,7 +134,7 @@ pub fn ntrie_eq() -> @kernel.Thm {
 /// NTRIE_SING
 fn step_9() -> Unit raise {
   let t13 = @sets.set_tac(@list.List([@calc_num.arith_eq()]))
-  let t12 = @simp.asm_rewrite_tac(@list.empty())
+  let t12 = @simp.asm_rewrite_tac(@list.List([]))
   let t11 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t10 = @tactics.repeat_tac(@tactics.strip_tac)
   let t14 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), nempty(), nzero(), nnode()])), t10), t11), t12), t13)
@@ -154,7 +154,7 @@ pub fn ntrie_sing() -> @kernel.Thm {
 /// NTRIE_INSERT
 fn step_10() -> Unit raise {
   let t18 = @sets.set_tac(@list.List([@calc_num.arith_eq()]))
-  let t17 = @simp.asm_rewrite_tac(@list.empty())
+  let t17 = @simp.asm_rewrite_tac(@list.List([]))
   let t16 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t15 = @tactics.repeat_tac(@tactics.strip_tac)
   let t19 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), nempty(), nzero(), nnode()])), t15), t16), t17), t18)
@@ -208,7 +208,7 @@ pub fn ntrie_inter() -> @kernel.Thm {
 /// NTRIE_DELETE
 fn step_13() -> Unit raise {
   let t27 = @tactics.asm_tac(@sets.set_tac)(@list.List([@calc_num.arith_eq(), @calc_num.arith_zero()]))
-  let t26 = @simp.asm_rewrite_tac(@list.empty())
+  let t26 = @simp.asm_rewrite_tac(@list.List([]))
   let t25 = @tactics.repeat_tac(@class.cond_cases_tac)
   let t24 = @tactics.repeat_tac(@tactics.strip_tac)
   let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@nums.numeral(), ntrie(), nempty(), nzero(), nnode()])), t24), t25), t26), t27)
@@ -275,7 +275,7 @@ pub fn ntrie_image_def() -> @kernel.Thm {
 ///|
 /// NTRIE_IMAGE
 fn step_17() -> Unit raise {
-  let t32 = @sets.set_tac(@list.empty())
+  let t32 = @sets.set_tac(@list.List([]))
   let t33 = @tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie(), nempty(), nzero(), nnode(), ntrie_image_def()])), t32)
   ntrie_image_c.set(@tactics.prove(@parser.parse_term("(!f:num->A acc. NTRIE_IMAGE f acc NEMPTY = acc) /\\\n   (!f:num->A acc. NTRIE_IMAGE f acc NZERO = f _0 INSERT acc) /\\\n   (!f:num->A acc s t.\n      NTRIE_IMAGE f acc (NNODE s t) =\n      NTRIE_IMAGE (\\n. f (BIT1 n)) (NTRIE_IMAGE (\\n. f (BIT0 n)) acc s) t)"), t33))
 }
@@ -436,7 +436,7 @@ fn step_21() -> Unit raise {
       More(n_1, tail=Empty) => mk_sing(n_1)
       More(m, tail=More(n_2, tail=_) as t_1) if physical_equal(n_2, m) => recur_(t_1)
       s => {
-        let (evens, odds) = part((@list.empty(), @list.empty()), s)
+        let (evens, odds) = part((@list.List([]), @list.List([])), s)
         let t55 = recur_(odds)
         mk_nnode(recur_(evens))(t55)
       }
@@ -497,7 +497,7 @@ fn step_22() -> Unit raise {
       More(n_1, tail=Empty) => mk_sing(n_1)
       More(m, tail=More(n_2, tail=_) as t_1) if @num.eq_num(n_2, m) => recur_(t_1)
       s => {
-        let (evens, odds) = part((@list.empty(), @list.empty()), s)
+        let (evens, odds) = part((@list.List([]), @list.List([])), s)
         let t63 = recur_(odds)
         mk_nnode(recur_(evens))(t63)
       }
@@ -578,7 +578,7 @@ fn step_23() -> Unit raise {
         _ => raise Failure("malformed ntrie")
       }
     }
-    recur_(@list.empty(), @list.empty(), ntrie_strip_tag(tm_1))
+    recur_(@list.List([]), @list.List([]), ntrie_strip_tag(tm_1))
   }
   let dest_ntrie : (@kernel.Term) -> @list.List[@num.Num] raise = fn(x73 : @kernel.Term) -> @list.List[@num.Num] raise {
     let tm_2 = x73
@@ -606,7 +606,7 @@ fn step_23() -> Unit raise {
         _ => raise Failure("malformed ntrie")
       }
     }
-    recur__1(@list.empty(), @list.empty(), ntrie_strip_tag(tm_2))
+    recur__1(@list.List([]), @list.List([]), ntrie_strip_tag(tm_2))
   }
   let (dest_small_ntrie_1, dest_ntrie_1) = (dest_small_ntrie, dest_ntrie)
   dest_small_ntrie_c.set(dest_small_ntrie_1)
@@ -801,7 +801,7 @@ fn step_29() -> Unit raise {
       More(n_1, tail=Empty) => pmk_sing(n_1)
       More(m, tail=More(n_2, tail=_) as t_1) if @num.eq_num(n_2, m) => recur_(t_1)
       s => {
-        let (evens, odds) = part((@list.empty(), @list.empty()), s)
+        let (evens, odds) = part((@list.List([]), @list.List([])), s)
         let t102 = recur_(odds)
         pmk_nnode(recur_(evens))(t102)
       }
@@ -841,7 +841,7 @@ fn step_29() -> Unit raise {
       @lib.explode(x111)
     })(s_2))
     if @list.List::is_empty(l) {
-      @preterm.term_of_preterm(@preterm.retypecheck(@list.empty(), ptm))
+      @preterm.term_of_preterm(@preterm.retypecheck(@list.List([]), ptm))
     } else {
       raise Failure("Unparsed input following term")
     }
@@ -1493,7 +1493,7 @@ fn step_51() -> Unit raise {
 ///|
 /// NTRIE_SUBSET_CONV
 fn step_52() -> Unit raise {
-  let t143 = @sets.set_tac(@list.empty())
+  let t143 = @sets.set_tac(@list.List([]))
   let t142 = @simp.rewrite_tac(@list.List([nempty()]))
   let t144 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([ntrie_subset()])), t142), t143)
   let t145 = (@parser.parse_term("s SUBSET s /\\\n     NEMPTY SUBSET NEMPTY /\\\n     NZERO SUBSET NZERO /\\\n     NEMPTY SUBSET NZERO /\\\n     NEMPTY SUBSET t /\\\n     ~(NZERO SUBSET NEMPTY) /\\\n     (n IN s ==> ~(s SUBSET NEMPTY)) /\\\n     (NZERO SUBSET s <=> NZERO SUBSET NNODE s t) /\\\n     (~(NZERO SUBSET s) <=> ~(NZERO SUBSET NNODE s t)) /\\\n     (s SUBSET NZERO <=> NNODE s NEMPTY SUBSET NZERO) /\\\n     (~(s SUBSET NZERO) <=> ~(NNODE s NEMPTY SUBSET NZERO)) /\\\n     (n IN t ==> ~(NNODE s t SUBSET NZERO)) /\\\n     (s1 SUBSET s2 /\\ t1 SUBSET t2 <=> NNODE s1 t1 SUBSET NNODE s2 t2) /\\\n     (~(s1 SUBSET s2) ==> ~(NNODE s1 t1 SUBSET NNODE s2 t2)) /\\\n     (~(t1 SUBSET t2) ==> ~(NNODE s1 t1 SUBSET NNODE s2 t2))"), t144)
@@ -1993,7 +1993,7 @@ pub fn mk_nnode_rule(x : (@kernel.Term, @kernel.Term)) -> @kernel.Thm raise {
 ///|
 /// NTRIE_INTER_CONV
 fn step_58() -> Unit raise {
-  let t206 = @sets.set_tac(@list.empty())
+  let t206 = @sets.set_tac(@list.List([]))
   let t207 = @tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie_inter(), ntrie_eq(), ntrie(), nzero(), nempty()])), t206)
   let t208 = (@parser.parse_term("(s1 INTER s2 = s <=> NTRIE s1 INTER NTRIE s2 = NTRIE s) /\\\n     NEMPTY INTER NEMPTY = NEMPTY /\\\n     NEMPTY INTER NZERO = NEMPTY /\\\n     NZERO INTER NEMPTY = NEMPTY /\\\n     s INTER NEMPTY = NEMPTY /\\\n     NEMPTY INTER t = NEMPTY /\\\n     NZERO INTER NZERO = NZERO /\\\n     (s INTER NZERO = s1 <=> NNODE s t INTER NZERO = s1) /\\\n     (s INTER NZERO = s1 <=> NZERO INTER NNODE s t = s1) /\\\n     (_0 IN t <=> NZERO INTER t = NZERO) /\\\n     (~(_0 IN t) <=> NZERO INTER t = NEMPTY) /\\\n     (s1 INTER s2 = s /\\ t1 INTER t2 = t <=>\n      NNODE s1 t1 INTER NNODE s2 t2 = NNODE s t)"), t207)
   ntrie_inter_conv_c.set(match (fn(x204 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
@@ -2221,7 +2221,7 @@ fn ntrie_nnode_delete_zero_l(pth1 : @kernel.Thm, pth3 : @kernel.Thm, pth6 : @ker
 ///|
 /// NTRIE_DISJOINT_CONV
 fn step_60() -> Unit raise {
-  let t230 = @sets.set_tac(@list.empty())
+  let t230 = @sets.set_tac(@list.List([]))
   let t229 = @simp.rewrite_tac(@list.List([nzero()]))
   let t231 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([ntrie_disjoint()])), t229), t230)
   let t232 = (@parser.parse_term("DISJOINT NEMPTY NEMPTY /\\\n     DISJOINT NEMPTY NZERO /\\\n     DISJOINT NZERO NEMPTY /\\\n     ~DISJOINT NZERO NZERO /\\\n     DISJOINT s NEMPTY /\\\n     DISJOINT NEMPTY t /\\\n     (_0 IN s <=> ~DISJOINT s NZERO) /\\\n     (~(_0 IN s) <=> DISJOINT s NZERO) /\\\n     (_0 IN t <=> ~DISJOINT NZERO t) /\\\n     (~(_0 IN t) <=> DISJOINT NZERO t) /\\\n     (DISJOINT s1 s2 /\\ DISJOINT t1 t2 <=>\n     DISJOINT (NNODE s1 t1) (NNODE s2 t2)) /\\\n     (~DISJOINT s1 s2 ==> ~DISJOINT (NNODE s1 t1) (NNODE s2 t2)) /\\\n     (~DISJOINT t1 t2 ==> ~DISJOINT (NNODE s1 t1) (NNODE s2 t2))"), t231)
@@ -2315,7 +2315,7 @@ pub fn ntrie_disjoint_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// NTRIE_DIFF_CONV
 fn step_61() -> Unit raise {
-  let t246 = @sets.set_tac(@list.empty())
+  let t246 = @sets.set_tac(@list.List([]))
   let t245 = @simp.rewrite_tac(@list.List([nzero(), nempty()]))
   let t247 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([ntrie_diff(), ntrie_eq()])), t245), t246)
   let t248 = (@parser.parse_term("NEMPTY DIFF NEMPTY = NEMPTY /\\\n     NEMPTY DIFF NZERO = NEMPTY /\\\n     NZERO DIFF NEMPTY = NZERO /\\\n     NZERO DIFF NZERO = NEMPTY /\\\n     NEMPTY DIFF t = NEMPTY /\\\n     s DIFF NEMPTY = s /\\\n     s DIFF NZERO = s DELETE _0 /\\\n     (_0 IN t <=> NZERO DIFF t = NEMPTY) /\\\n     (~(_0 IN t) <=> NZERO DIFF t = NZERO) /\\\n     (s1 DIFF s2 = s /\\ t1 DIFF t2 = t <=>\n      NNODE s1 t1 DIFF NNODE s2 t2 = NNODE s t)"), t247)

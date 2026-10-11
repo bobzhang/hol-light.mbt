@@ -169,7 +169,7 @@ fn step_11() -> Unit raise {
 ///|
 /// DETERMINISM
 fn step_12() -> Unit raise {
-  let t8 = @meson.asm_meson_tac(@list.empty())
+  let t8 = @meson.asm_meson_tac(@list.List([]))
   let t7 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t5 = @ind_types.injectivity("command")
   let t6 = @simp.rewrite_tac(@list.List([@ind_types.distinctness("command"), t5]))
@@ -238,7 +238,7 @@ pub fn wp() -> @kernel.Thm {
 ///|
 /// WP_TOTAL
 fn step_16() -> Unit raise {
-  let t10 = @meson.meson_tac(@list.empty())
+  let t10 = @meson.meson_tac(@list.List([]))
   let t11 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), wp(), wlp(), terminates(), @sets.empty()])), t10)
   wp_total_c.set(@tactics.prove(@parser.parse_term("!c. (wp c EMPTY = EMPTY)"), t11))
 }
@@ -255,7 +255,7 @@ pub fn wp_total() -> @kernel.Thm {
 ///|
 /// WP_MONOTONIC
 fn step_17() -> Unit raise {
-  let t12 = @meson.meson_tac(@list.empty())
+  let t12 = @meson.meson_tac(@list.List([]))
   let t13 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_(), wp(), wlp(), terminates()])), t12)
   wp_monotonic_c.set(@tactics.prove(@parser.parse_term("q SUBSET r ==> wp c q SUBSET wp c r"), t13))
 }

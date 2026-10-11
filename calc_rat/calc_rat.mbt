@@ -21,7 +21,7 @@ pub fn decimal() -> @kernel.Thm {
 ///|
 /// RAT_LEMMA1
 fn step_2() -> Unit raise {
-  let t13 = @simp.asm_rewrite_tac(@list.empty())
+  let t13 = @simp.asm_rewrite_tac(@list.List([]))
   let t12 = @tactics.match_mp_tac(@real.real_mul_rinv())
   let t11 = @tactics.conv_tac(@equal.sym_conv)
   let t10 = @simp.rewrite_tac(@list.List([@real.real_eq_mul_lcancel()]))
@@ -334,9 +334,9 @@ pub fn rat_lemma3() -> @kernel.Thm {
 ///|
 /// RAT_LEMMA4
 fn step_5() -> Unit raise {
-  let t48 = @simp.asm_rewrite_tac(@list.empty())
+  let t48 = @simp.asm_rewrite_tac(@list.List([]))
   let t47 = @tactics.match_mp_tac(@realarith.real_lt_imp_le())
-  let t46 = @simp.asm_rewrite_tac(@list.empty())
+  let t46 = @simp.asm_rewrite_tac(@list.List([]))
   let t49 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(@tactics.match_mp_tac(@realax.real_le_mul()), t46),
@@ -379,10 +379,10 @@ fn step_5() -> Unit raise {
     ),
     @real.real_arith_tac,
   )
-  let t39 = @simp.asm_rewrite_tac(@list.empty())
+  let t39 = @simp.asm_rewrite_tac(@list.List([]))
   let t38 = @tactics.match_mp_tac(@realarith.real_lt_imp_le())
   let t37 = @tactics.match_mp_tac(@real.real_le_inv())
-  let t36 = @simp.asm_rewrite_tac(@list.empty())
+  let t36 = @simp.asm_rewrite_tac(@list.List([]))
   let t35 = @tactics.match_mp_tac(@realax.real_le_mul())
   let t45 = @list.List([
     @tactics.then_tac(
@@ -466,7 +466,7 @@ fn step_5() -> Unit raise {
     @parser.parse_term("&0 < y ==> (&0 <= x * y <=> &0 <= x)"),
     t51,
   )
-  let t61 = @simp.asm_rewrite_tac(@list.empty())
+  let t61 = @simp.asm_rewrite_tac(@list.List([]))
   let t60 = @tactics.match_mp_tac(@real.real_lt_inv())
   let t59 = @tactics.match_mp_tac(lemma)
   let t58 = @simp.rewrite_tac(@list.List([@realax.real_mul_assoc()]))
@@ -556,7 +556,7 @@ pub fn rat_lemma4() -> @kernel.Thm {
 ///|
 /// RAT_LEMMA5
 fn step_6() -> Unit raise {
-  let t66 = @simp.asm_rewrite_tac(@list.empty())
+  let t66 = @simp.asm_rewrite_tac(@list.List([]))
   let t65 = @tactics.match_mp_tac(rat_lemma4())
   let t64 = @tactics.match_mp_tac(
     @class.taut(
@@ -1192,11 +1192,11 @@ fn step_17() -> Unit raise {
     let th = x141
     @simp.asm_rewrite_tac(@list.List([@drule.match_mp(rat_lemma5())(th)]))
   })
-  let t140 = @simp.asm_rewrite_tac(@list.empty())
+  let t140 = @simp.asm_rewrite_tac(@list.List([]))
   let t139 = @tactics.match_mp_tac(@real.real_lt_mul())
   let t144 = @list.List([
     @tactics.then_tac(
-      @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t139),
+      @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t139),
       t140,
     ),
     t143,
@@ -1300,7 +1300,7 @@ fn step_17() -> Unit raise {
       s130(x131)
     }
   })
-  let t128 = @simp.asm_rewrite_tac(@list.empty())
+  let t128 = @simp.asm_rewrite_tac(@list.List([]))
   let t127 = @tactics.mp_tac(rat_lemma2())
   let t145 = @tactics.thenl(
     @tactics.then_tac(
@@ -3283,7 +3283,7 @@ fn step_41() -> Unit raise {
   let t370 = @simp.rewrite_tac(
     @list.List([
       @meson.meson(
-        @list.empty(),
+        @list.List([]),
         @parser.parse_term("(!x y. P x y /\\ P y x) <=> (!x y. P x y)"),
       ),
     ]),

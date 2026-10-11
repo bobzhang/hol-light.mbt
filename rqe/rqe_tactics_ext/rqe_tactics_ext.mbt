@@ -70,7 +70,7 @@ fn[TB] f_at_i_l(x6 : (TB) -> TB raise, x7 : Int64, x8 : @list.List[TB]) -> @list
   let f = x6
   let j = x7
   match x8 {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(a, tail=b) => {
       if (j == 0L) {
         b.prepend(f(a))
@@ -115,7 +115,7 @@ pub fn e(x14 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.Li
 /// `prove_by_refinement`
 pub fn prove_by_refinement(x15 : @kernel.Term, x16 : @list.List[((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise]) -> @kernel.Thm raise {
   let (t, _ as tacl) = (x15, x16)
-  let gstate = @tactics.mk_goalstate((@list.empty(), t))
+  let gstate = @tactics.mk_goalstate((@list.List([]), t))
   let (_, sgs, just) = @lib.rev_itlist(fn(x17 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise, x18 : ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     let tac = x17
     let gs = x18
@@ -126,7 +126,7 @@ pub fn prove_by_refinement(x15 : @kernel.Term, x16 : @list.List[((@list.List[(St
     })(gs)
   }, tacl, gstate)
   let th = if @list.List::is_empty(sgs) {
-    just(@tactics.null_inst, @list.empty())
+    just(@tactics.null_inst, @list.List([]))
   } else {
     raise Failure("BY_REFINEMENT_PROOF: Unsolved goals")
   }
@@ -205,7 +205,7 @@ pub fn auto_theta(x24 : @kernel.HolType, x25 : @kernel.HolType) -> @list.List[(@
           if is_generated(ns) {
             @list.List([(old_type, new_type)])
           } else {
-            @list.empty()
+            @list.List([])
           }
         }
         @kernel.HolType::Tyapp(old_name, old_list) => @list.List([(old_type, new_type)])
@@ -213,7 +213,7 @@ pub fn auto_theta(x24 : @kernel.HolType, x25 : @kernel.HolType) -> @list.List[(@
     }
     @kernel.HolType::Tyapp(new_ty_op, new_ty_list) => {
       match old_type {
-        @kernel.HolType::Tyvar(_) => @list.empty()
+        @kernel.HolType::Tyvar(_) => @list.List([])
         @kernel.HolType::Tyapp(old_ty_op, old_ty_list) => {
           if (new_ty_op == old_ty_op) {
             @lib.itlist2(fn(x27 : @kernel.HolType, x28 : @kernel.HolType, x29 : @list.List[(@kernel.HolType, @kernel.HolType)]) -> @list.List[(@kernel.HolType, @kernel.HolType)] raise {
@@ -221,9 +221,9 @@ pub fn auto_theta(x24 : @kernel.HolType, x25 : @kernel.HolType) -> @list.List[(@
               let oldt = x28
               let b = x29
               @lib.union(auto_theta(newt, oldt), b)
-            }, new_ty_list, old_ty_list, @list.empty())
+            }, new_ty_list, old_ty_list, @list.List([]))
           } else {
-            @list.empty()
+            @list.List([])
           }
         }
       }
@@ -237,14 +237,14 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] auto_theta_list(x30 : @list.List[(T
   let newl = x30
   let oldl = x31
   match newl {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(h, tail=t) => {
       let head_list = try {
         let (new_name, new_type) = h
         let old_type = @lib.assoc(new_name, oldl)
         auto_theta(new_type, old_type)
       } catch {
-        Failure(_) => @list.empty()
+        Failure(_) => @list.List([])
         e => raise e
       }
       @lib.union(head_list, auto_theta_list(t, oldl))

@@ -30,7 +30,7 @@ fn step_3() -> Unit raise {
   let t3 = @equal.gsym(@complex_transc.cexp_add())
   let t4 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_field(@parser.parse_term("z pow 3 = z * z * z:complex")), t3]))
   let t2 = @list.List([@tactics.conv_tac(@complexnumbers.complex_ring), @tactics.all_tac])
-  let t1 = @simp.asm_rewrite_tac(@list.empty())
+  let t1 = @simp.asm_rewrite_tac(@list.List([]))
   let t7 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([ccbrt()]))), @class.cond_cases_tac), t1), t2), t4), t5), t6)
   ccbrt_v1_c.set(@tactics.prove(@parser.parse_term("!z. ccbrt(z) pow 3 = z"), t7))
 }
@@ -83,7 +83,7 @@ fn step_6() -> Unit raise {
   let t31 = @meson.asm_meson_tac(@list.List([ccbrt_v1()]))
   let t32 = @list.List([@meson.asm_meson_tac(@list.List([@complex_transc.csqrt_v1()])), t31, t30, t29])
   let t27 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t26 = @simp.asm_rewrite_tac(@list.empty())
+  let t26 = @simp.asm_rewrite_tac(@list.List([]))
   let t23 = @parser.parse_term("csqrt (q pow 2 + p pow 3)")
   let t24 = @parser.parse_term("csqrt(Cx(&3))")
   let t25 = @tactics.map_every(fn(x20 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -93,11 +93,11 @@ fn step_6() -> Unit raise {
     }
   }, @list.List([@parser.parse_term("ii"), t24, t23]))
   let t19 = @tactics.match_mp_tac(cubic_basic())
-  let t18 = @simp.asm_rewrite_tac(@list.empty())
+  let t18 = @simp.asm_rewrite_tac(@list.List([]))
   let t17 = @simp.once_rewrite_tac(@list.List([@complexnumbers.complex_ring(@parser.parse_term("x = a - b <=> x + b = (a:complex)"))]))
   let t15 = @tactics.conv_tac(@complexnumbers.complex_ring)
   let t14 = @analysis.expand_tac("y")
-  let t13 = @simp.asm_rewrite_tac(@list.empty())
+  let t13 = @simp.asm_rewrite_tac(@list.List([]))
   let t16 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(cubic_reduction()), t13), t14), t15), @tactics.all_tac])
   let t12 = @tactics.subgoal_then(@parser.parse_term("a * x pow 3 + b * x pow 2 + c * x + d = Cx(&0) <=>\n    y pow 3 + Cx(&3) * p * y - Cx(&2) * q = Cx(&0)"), fn(x9 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s10 = @tactics.subst1_tac(x9)

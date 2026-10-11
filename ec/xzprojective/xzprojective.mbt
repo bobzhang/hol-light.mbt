@@ -68,7 +68,7 @@ fn step_5() -> Unit raise {
   let t9 = @tactics.try_tac(@ringtheory.ring_carrier_tac)
   let t8 = @tactics.repeat_tac(@tactics.strip_tac)
   let t7 = @simp.rewrite_tac(@list.List([@pair.let_def(), @pair.let_end_def(), montgomery_xz()]))
-  let t6 = @tactics.try_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.empty())))
+  let t6 = @tactics.try_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))))
   let t5 = @simp.rewrite_tac(@list.List([@class.cond_swap()]))
   let t4 = @tactics.repeat_tac(@tactics.strip_tac)
   let t3 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_curve(), @montgomery.montgomery_add(), montgomery_xz(), @equal.gsym(@class.de_morgan_thm()), montgomery_xzdouble(), @montgomery.montgomery_nonsingular()]))
@@ -99,7 +99,7 @@ fn step_6() -> Unit raise {
   let t15 = @tactics.pop_assum(fn(x14 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
   })
-  let t13 = @simp.asm_rewrite_tac(@list.empty())
+  let t13 = @simp.asm_rewrite_tac(@list.List([]))
   let t12 = @class.asm_cases_tac(@parser.parse_term("p = montgomery_add (f,a:A,b) pm (montgomery_neg (f,a,b) pn)"))
   let t11 = @tactics.repeat_tac(@tactics.gen_tac)
   let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@misc.field_char_not23()])), t11), t12), t13), t15), fn(x20 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -140,7 +140,7 @@ fn step_7() -> Unit raise {
       })(((x37 : @kernel.Thm) => @bool.spec(t36, x37))(x38))
     })(t39(x40))
   })
-  let t32 = @simp.asm_rewrite_tac(@list.empty())
+  let t32 = @simp.asm_rewrite_tac(@list.List([]))
   let t31 = @tactics.match_mp_tac(montgomery_xzdouble_v1())
   let t30 = @simp.asm_simp_tac(@list.List([@montgomery.montgomery_group_v1()]))
   let t29 = @simp.asm_simp_tac(@list.List([@arith.mult_2(), @grouptheory.group_pow_add()]))
@@ -169,7 +169,7 @@ fn step_8() -> Unit raise {
     let th = x64
     @simp.rewrite_tac(@list.List([@equal.gsym(th)]))
   })
-  let t63 = @simp.asm_rewrite_tac(@list.empty())
+  let t63 = @simp.asm_rewrite_tac(@list.List([]))
   let t60 = @parser.parse_term("b:A")
   let t61 = @parser.parse_term("a:A")
   let t62 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("f:A ring"), t61, t60]), @montgomery.montgomery_group_v1()))
@@ -186,7 +186,7 @@ fn step_8() -> Unit raise {
       })(@lib.last(x54))
     })(@bool.conjuncts_rule(x55))
   })
-  let t50 = @simp.asm_rewrite_tac(@list.empty())
+  let t50 = @simp.asm_rewrite_tac(@list.List([]))
   let t47 = @parser.parse_term("b:A")
   let t48 = @parser.parse_term("a:A")
   let t49 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("f:A ring"), t48, t47]), @montgomery.montgomery_group_v1()))
@@ -223,7 +223,7 @@ pub fn montgomery_xmap() -> @kernel.Thm {
 ///|
 /// MONTGOMERY_XZ_XMAP
 fn step_10() -> Unit raise {
-  let t75 = @meson.meson_tac(@list.empty())
+  let t75 = @meson.meson_tac(@list.List([]))
   let t74 = @simp.simp_tac(@list.List([@ringtheory.ring_div(), @ringtheory.ring_inv_1(), @ringtheory.ring_mul_rid()]))
   let t73 = @simp.simp_tac(@list.List([montgomery_xz(), montgomery_xmap(), @ringtheory.field_nontrivial(), @ringtheory.ring_1_v1()]))
   let t76 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@ind_types.forall_option_thm(), @pair.forall_pair_thm()])), t73), t74), t75)
@@ -253,7 +253,7 @@ fn step_11() -> Unit raise {
       })(x108))
     }, x109))(x110))
   })
-  let t104 = @simp.asm_rewrite_tac(@list.empty())
+  let t104 = @simp.asm_rewrite_tac(@list.List([]))
   let t101 = @simp.gen_rewrite_rule(fn(x100 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x100
   }, @list.List([@montgomery.montgomery_nonsingular()]))
@@ -279,7 +279,7 @@ fn step_11() -> Unit raise {
     }
   })))
   let t88 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_curve()]))
-  let t87 = @simp.asm_rewrite_tac(@list.empty())
+  let t87 = @simp.asm_rewrite_tac(@list.List([]))
   let t86 = @class.asm_cases_tac(@parser.parse_term("x:A = ring_0 f"))
   let t85 = @simp.rewrite_tac(@list.List([@sets.in_()]))
   let t84 = @tactics.replicate_tac(5, @tactics.disch_tac)
@@ -312,7 +312,7 @@ fn step_12() -> Unit raise {
       @kernel.rator(@kernel.rator(x132))
     })(@equal.lhand(x133))
   }, @grouptheory.group_pow_id())
-  let t128 = @list.List([@tactics.disj1_tac, @meson.meson_tac(@list.empty())])
+  let t128 = @list.List([@tactics.disj1_tac, @meson.meson_tac(@list.List([]))])
   let t127 = @simp.asm_simp_tac(@list.List([@montgomery.group_pow_montgomery_torsion()]))
   let t126 = @tactics.repeat_tac(@tactics.strip_tac)
   let t125 = @tactics.disch_then(fn(x124 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {

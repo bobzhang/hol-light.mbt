@@ -158,7 +158,7 @@ pub fn diff_bernpoly() -> @kernel.Thm {
 ///|
 /// INTEGRALS_EQ
 fn step_8() -> Unit raise {
-  let t55 = @simp.asm_rewrite_tac(@list.empty())
+  let t55 = @simp.asm_rewrite_tac(@list.List([]))
   let t52 = @parser.parse_term("&0")
   let t53 = @parser.parse_term("x:real")
   let t54 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("\\x:real. f(x) - g(x)"), t53, t52]), @analysis.diff_isconst_all()))

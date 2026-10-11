@@ -47,7 +47,7 @@ pub fn cos_derivatives() -> @kernel.Thm {
 /// taylor_cos_raw
 fn step_4() -> Unit raise {
   let t46 = @simp.rewrite_tac(@list.List([@calc_int.real_mul_lzero()]))
-  let t44 = @simp.asm_rewrite_tac(@list.empty())
+  let t44 = @simp.asm_rewrite_tac(@list.List([]))
   let t43 = @tactics.exists_tac(@parser.parse_term("i:num"))
   let t45 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@transcendentals.cos_zero()])), @tactics.disj1_tac), t43), t44), @tactics.all_tac])
   let t42 = @tactics.subgoal_then(@parser.parse_term("cos (&i * pi / &2) = &0"), fn(x40 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -62,7 +62,7 @@ fn step_4() -> Unit raise {
     let th_1 = x32
     @simp.rewrite_tac(@list.List([th_1]))
   })
-  let t31 = @simp.asm_rewrite_tac(@list.empty())
+  let t31 = @simp.asm_rewrite_tac(@list.List([]))
   let t30 = @simp.rewrite_tac(@list.List([@arith.even_exists()]))
   let t39 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.pop_assum(fn(x27 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s28 = @tactics.mp_tac(x27)
@@ -70,7 +70,7 @@ fn step_4() -> Unit raise {
       s28(x29)
     }
   }), t30), @tactics.strip_tac), t31), t34), t35), t36), t37), t38), @calc_rat.real_arith_tac), @tactics.all_tac])
-  let t26 = @simp.asm_rewrite_tac(@list.empty())
+  let t26 = @simp.asm_rewrite_tac(@list.List([]))
   let t25 = @class.asm_cases_tac(@parser.parse_term("EVEN i"))
   let t24 = @tactics.subgoal_then(@parser.parse_term("!i. cos (&i * pi / &2) * x pow i / &(FACT i) = if EVEN i then (-- &1 pow (i DIV 2) * x pow i) / &(FACT i) else &0"), fn(x22 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x22
@@ -302,7 +302,7 @@ fn step_11() -> Unit raise {
     let th_1 = x147
     @simp.rewrite_tac(@list.List([th_1]))
   })
-  let t146 = @simp.asm_rewrite_tac(@list.empty())
+  let t146 = @simp.asm_rewrite_tac(@list.List([]))
   let t145 = @simp.rewrite_tac(@list.List([@arith.odd_exists()]))
   let t157 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.pop_assum(fn(x142 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s143 = @tactics.mp_tac(x142)
@@ -310,7 +310,7 @@ fn step_11() -> Unit raise {
       s143(x144)
     }
   }), t145), @tactics.strip_tac), t146), t149), t152), t154), t155), t156), @calc_rat.real_arith_tac), @tactics.all_tac])
-  let t141 = @simp.asm_rewrite_tac(@list.empty())
+  let t141 = @simp.asm_rewrite_tac(@list.List([]))
   let t140 = @class.asm_cases_tac(@parser.parse_term("ODD i"))
   let t139 = @tactics.subgoal_then(@parser.parse_term("!i. sin (&i * pi / &2) * x pow i / &(FACT i) = if ODD i then (-- &1 pow (i DIV 2) * x pow i) / &(FACT i) else &0"), fn(x137 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x137

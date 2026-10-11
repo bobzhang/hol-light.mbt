@@ -162,7 +162,7 @@ pub fn orthogonal_sum_lemma() -> @kernel.Thm {
 /// GRAM_SCHMIDT_LEMMA
 fn step_9() -> Unit raise {
   let t84 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t83 = @simp.asm_simp_tac(@list.empty())
+  let t83 = @simp.asm_simp_tac(@list.List([]))
   let t82 = @simp.rewrite_tac(@list.List([@lists.not_cons_nil(), @nums.not_suc(), @lists.itlist2(), @lists.length(), @lists.all(), @nums.suc_inj(), @lists.map2()]))
   let t81 = @tactics.pop_assum_list(fn(x80 : @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
@@ -186,13 +186,13 @@ fn step_9() -> Unit raise {
     }
   })
   let t63 = @meson.asm_meson_tac(@list.List([@vectors.orthogonal_sym()]))
-  let t62 = @simp.asm_rewrite_tac(@list.empty())
+  let t62 = @simp.asm_rewrite_tac(@list.List([]))
   let t61 = @tactics.match_mp_tac(orthogonal_sum_lemma())
   let t69 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@analysis.expand_tac("v"), t61), t62), t63), t68, t67, @tactics.all_tac])
   let t60 = @tactics.repeat_tac(@tactics.conj_tac)
   let t58 = @simp.simp_tac(@list.List([@vectors.orthogonal_clauses()]))
   let t57 = @analysis.expand_tac("x")
-  let t56 = @simp.rewrite_tac(@list.empty())
+  let t56 = @simp.rewrite_tac(@list.List([]))
   let t55 = @tactics.match_mp_tac(@lists.mono_all())
   let t54 = @simp.rewrite_tac(@list.List([@theorems.imp_imp(), @lists.and_all()]))
   let t53 = @tactics.undisch_tac(@parser.parse_term("ALL (orthogonal(u:real^N)) vs"))
@@ -249,11 +249,11 @@ pub fn gram_schmidt_lemma() -> @kernel.Thm {
 ///|
 /// SOLOVAY_LEMMA
 fn step_10() -> Unit raise {
-  let t90 = @meson.asm_meson_tac(@list.empty())
+  let t90 = @meson.asm_meson_tac(@list.List([]))
   let t88 = @parser.parse_term("vs:(real^N)list")
   let t89 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("w:real^N"), t88]), gram_schmidt_lemma()))
   let t87 = @tactics.x_gen_tac(@parser.parse_term("w:real^N"))
-  let t86 = @list.List([@meson.meson_tac(@list.empty()), @tactics.all_tac])
+  let t86 = @list.List([@meson.meson_tac(@list.List([])), @tactics.all_tac])
   let t91 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t86), @tactics.disch_tac), t87), t89), t90)
   solovay_lemma_c.set(@tactics.prove(@parser.parse_term("!P vs. (!w:real^N. P w vs) =\n          (!as u. ALL (orthogonal u) vs /\\ (LENGTH as = LENGTH vs)\n                  ==> P (ITLIST2 (\\a v s. a % v + s) as vs u) vs)"), t91))
 }
@@ -335,7 +335,7 @@ pub fn itlist2_0_lemma() -> @kernel.Thm {
 /// SOLOVAY_PROFORMA_EQ
 fn step_14() -> Unit raise {
   let t170 = @simp.simp_tac(@list.List([@vectors.orthogonal()]))
-  let t169 = @simp.asm_rewrite_tac(@list.empty())
+  let t169 = @simp.asm_rewrite_tac(@list.List([]))
   let t168 = @rqe_tactics_ext.exists_tac(@parser.parse_term("orthogonal (u:real^N)"))
   let t167 = @tactics.match_mp_tac(@lists.all_imp())
   let t166 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(a + b = a) <=> (b = &0)"))]))
@@ -393,7 +393,7 @@ fn step_14() -> Unit raise {
     x126
   }, @list.List([@class.fun_eq_thm()]))
   let t125 = @simp.rewrite_tac(@list.List([@theorems.right_imp_forall_thm()]))
-  let t124 = @simp.rewrite_tac(@list.empty())
+  let t124 = @simp.rewrite_tac(@list.List([]))
   let t123 = @tactics.x_gen_tac(@parser.parse_term("u:real^N"))
   let t122 = @simp.gen_rewrite_tac(fn(x121 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x121
@@ -420,7 +420,7 @@ fn step_14() -> Unit raise {
       })(x115))
     }, @list.List([th]))
   })
-  let t106 = @simp.rewrite_tac(@list.empty())
+  let t106 = @simp.rewrite_tac(@list.List([]))
   let t173 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispec(@parser.parse_term("\\w:real^N vs.  P (MAP ((dot) w) (CONS w vs)) vs :bool"), solovay_lemma())), t106), t116), t120), @tactics.ap_term_tac), t122), t123), t124), t125), @tactics.ap_term_tac), t127), t128), t129), t130), @tactics.strip_tac), t131), @tactics.binop_tac), t132), t133), t134), t135), t136), t148), t149), @tactics.conj_tac), t172)
   solovay_proforma_eq_c.set(@tactics.prove(@parser.parse_term("(!w:real^N. P (MAP ((dot) w) (CONS w vs)) vs) =\n   (!u. ALL (orthogonal u) vs\n        ==> !as. (LENGTH as = LENGTH vs)\n                 ==> P (CONS\n                          ((ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) dot\n                           (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)) +\n                           u dot u)\n                          (MAP ((dot)\n                                (ITLIST2 (\\a v s. a % v + s) as vs (vec 0)))\n                               vs))\n                 vs)"), t173))
 }
@@ -491,7 +491,7 @@ fn step_16() -> Unit raise {
       })(x191))(x192)
     }, args, @kernel.bool_ty)
     let p_tm = @basics.list_mk_abs(@list.List([d_tm, v_tm]), @basics.list_mk_comb(@kernel.mk_var("P", pty), args))
-    let vs = @basics.make_args("v", @list.empty(), @lib.replicate(rn_ty, @lib.int63_to_int(n)))
+    let vs = @basics.make_args("v", @list.List([]), @lib.replicate(rn_ty, @lib.int63_to_int(n)))
     let th1 = @bool.ispecl(@list.List([p_tm, @lists.mk_list(vs, rn_ty)]), solovay_proforma())
     let th2 = rewr_rule(@equal.conv_rule(@equal.top_depth_conv(@calc_num.num_conv), th1))
     let th3 = sewr_rule(th2)

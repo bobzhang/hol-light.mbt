@@ -204,9 +204,9 @@ pub fn th_v11() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let t38 = @simp.rewrite_tac(@list.List([@theorems.eq_sym_eq()]))
   let t37 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_pow_2(), @complexnumbers.complex_mul_rzero(), @complexnumbers.complex_mul_lzero()]))
-  let t36 = @simp.asm_rewrite_tac(@list.empty())
+  let t36 = @simp.asm_rewrite_tac(@list.List([]))
   let t35 = @class.asm_cases_tac(@parser.parse_term("c = Cx(&0)"))
-  let t34 = @simp.asm_rewrite_tac(@list.empty())
+  let t34 = @simp.asm_rewrite_tac(@list.List([]))
   let t33 = @class.asm_cases_tac(@parser.parse_term("b = Cx(&0)"))
   let t32 = @tactics.conv_tac(@calc_rat.real_rat_reduce_conv)
   let t31 = @simp.rewrite_tac(@list.List([@complexnumbers.complex_entire(), @complexnumbers.complex_sub_0(), @complexnumbers.cx_inj()]))

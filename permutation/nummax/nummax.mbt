@@ -69,7 +69,7 @@ pub fn le_max() -> @kernel.Thm {
 /// MAX_SYM
 fn step_5() -> Unit raise {
   let t6 = @tactics.then_tac(@simp.simp_tac(@list.List([@arith.max()])), @int.arith_tac)
-  let t7 = @list.List([@tactics.then_tac(@tactics.eq_tac, @simp.simp_tac(@list.empty())), t6])
+  let t7 = @list.List([@tactics.then_tac(@tactics.eq_tac, @simp.simp_tac(@list.List([]))), t6])
   let t5 = @tactics.repeat_tac(@tactics.gen_tac)
   let t8 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@arith.wlog_le()), @tactics.conj_tac), t5), t7)
   max_sym_c.set(@tactics.prove(@parser.parse_term("!m n. MAX n m = MAX m n"), t8))
@@ -103,15 +103,15 @@ fn step_6() -> Unit raise {
     let th_1 = x18
     @simp.rewrite_tac(@list.List([th_1]))
   }), t23), t27), @int.arith_tac)
-  let t17 = @meson.asm_meson_tac(@list.empty())
+  let t17 = @meson.asm_meson_tac(@list.List([]))
   let t16 = @tactics.match_mp_tac(@arith.le_trans())
   let t29 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.subgoal_then(@parser.parse_term("m <= p"), fn(x14 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x14
     @simp.rewrite_tac(@list.List([th]))
   }), t16), t17), t28])
-  let t13 = @simp.asm_rewrite_tac(@list.empty())
+  let t13 = @simp.asm_rewrite_tac(@list.List([]))
   let t12 = @class.asm_cases_tac(@parser.parse_term("n <= p"))
-  let t11 = @simp.asm_rewrite_tac(@list.empty())
+  let t11 = @simp.asm_rewrite_tac(@list.List([]))
   let t10 = @class.asm_cases_tac(@parser.parse_term("m <= n"))
   let t9 = @simp.rewrite_tac(@list.List([@arith.max()]))
   let t30 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t9), t10), t11), t12), t13), t29)

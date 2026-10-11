@@ -669,7 +669,7 @@ pub fn clog() -> @kernel.Thm {
 /// CLOG_WORKS
 fn step_36() -> Unit raise {
   let t157 = @meson.asm_meson_tac(@list.List([@complexnumbers.cx_inj(), @complexnumbers.complex_div_lmul(), @complexnumbers.complex_norm_zero()]))
-  let t156 = @simp.asm_rewrite_tac(@list.empty())
+  let t156 = @simp.asm_rewrite_tac(@list.List([]))
   let t155 = @tactics.x_gen_tac(@parser.parse_term("y:real"))
   let t154 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t153 = @tactics.mp_tac(@bool.spec(@parser.parse_term("x:real"), sincos_principal_value()))

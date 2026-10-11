@@ -48,7 +48,7 @@ fn mk_prefinty(n : @num.Num) -> Pretype raise {
   }
   fn go(n : @num.Num) -> Pretype raise {
     if n == @num.num_1 {
-      @preterm.Ptycon("1", @list.empty())
+      @preterm.Ptycon("1", @list.List([]))
     } else {
       let c = if @num.mod_num(n, @num.num_2) == @num.num_0 {
         "tybit0"
@@ -89,7 +89,7 @@ fn type_atom(input : Toks) -> (Pretype, Toks) raise {
                 e => raise e
               }
               if nullary {
-                @preterm.Ptycon(s, @list.empty())
+                @preterm.Ptycon(s, @list.List([]))
               } else {
                 @preterm.Utv(s)
               }
@@ -185,7 +185,7 @@ fn typelist(i : Toks) -> (List[Pretype], Toks) raise {
 pub type UserParser = (String, (Toks) -> (Preterm, Toks) raise)
 
 ///|
-let parser_list : Ref[List[UserParser]] = Ref::{ val: @list.empty(), }
+let parser_list : Ref[List[UserParser]] = Ref::{ val: @list.List([]), }
 
 ///|
 pub fn install_parser(
@@ -256,15 +256,15 @@ fn pfrees(ptm : Preterm) -> List[Preterm] raise {
   match ptm {
     @preterm.Varp(v, pty) =>
       if v == "" && pty == dpty {
-        @list.empty()
+        @list.List([])
       } else if @lib.can(c => @kernel.get_const_type(c), v) ||
         @lib.can(@num.num_of_string, v) ||
         @printer.the_interface.val.any(e => e.0 == v) {
-        @list.empty()
+        @list.List([])
       } else {
         @list.singleton(ptm)
       }
-    @preterm.Constp(_) => @list.empty()
+    @preterm.Constp(_) => @list.List([])
     @preterm.Combp(p1, p2) => {
       // `union (pfrees p1) (pfrees p2)`: arguments right to left.
       let f2 = pfrees(p2)
@@ -642,7 +642,7 @@ fn atomic_preterm(i : Toks) -> (Preterm, Toks) raise {
         pv("UNIV"),
         @preterm.Ptycon(
           "fun",
-          @list.List([r.0.1, @preterm.Ptycon("bool", @list.empty())]),
+          @list.List([r.0.1, @preterm.Ptycon("bool", @list.List([]))]),
         ),
       )
     }),
@@ -797,7 +797,7 @@ fn clauses(i : Toks) -> (Preterm, Toks) raise {
 /// Parse a preterm from tokens.
 pub fn parse_preterm(inp : Toks) -> (Preterm, Toks) raise {
   match inp {
-    More(Ident(s), tail=Empty) if !is_quoted(s) => (pv(s), @list.empty())
+    More(Ident(s), tail=Empty) if !is_quoted(s) => (pv(s), @list.List([]))
     _ => preterm(inp)
   }
 }
@@ -892,7 +892,7 @@ pub fn parse_term(s : String) -> Term raise {
   trace(s)
   let (ptm, l) = parse_preterm(lex(s))
   if l.is_empty() {
-    @preterm.term_of_preterm(@preterm.retypecheck(@list.empty(), ptm))
+    @preterm.term_of_preterm(@preterm.retypecheck(@list.List([]), ptm))
   } else {
     raise Failure("Unparsed input following term")
   }

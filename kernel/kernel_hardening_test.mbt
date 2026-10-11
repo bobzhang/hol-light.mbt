@@ -253,7 +253,7 @@ fn debruijn(tm : @kernel.Term) -> String {
     }
   }
 
-  go(@list.empty(), tm)
+  go(@list.List([]), tm)
 }
 
 ///|

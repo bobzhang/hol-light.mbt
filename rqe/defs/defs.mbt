@@ -30,7 +30,7 @@ fn step_1() -> Unit raise {
 ///|
 /// SIGN_CASES
 fn step_2() -> Unit raise {
-  let t1 = @simp.rewrite_tac(@list.empty())
+  let t1 = @simp.rewrite_tac(@list.List([]))
   let t2 = @list.List([@tactics.match_mp_tac(sign_induct()), t1])
   sign_cases_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!s. (s = Pos) \\/ (s = Neg) \\/ (s = Zero) \\/ (s = Nonzero) \\/ (s = Unknown)"), t2))
 }

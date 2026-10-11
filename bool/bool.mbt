@@ -580,7 +580,7 @@ pub fn ispec(t : Term, th : Thm) -> Thm raise {
   let tyins = @basics.type_match(
     @kernel.dest_var(x).1,
     @kernel.type_of(t),
-    @list.empty(),
+    @list.List([]),
   ) catch {
     Failure(_) => raise Failure("ISPEC can't type-instantiate input theorem")
     e => raise e
@@ -610,7 +610,7 @@ pub fn ispecl(tms : List[Term], th : Thm) -> Thm raise {
         (a, b, acc) => @basics.type_match(a, b, acc),
         vtys,
         tys,
-        @list.empty(),
+        @list.List([]),
       )
       specl(tms, @kernel.inst_type(tyins, th))
     }

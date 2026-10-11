@@ -700,7 +700,7 @@ pub fn dlo_eq_conv(x79 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// eq_triv_conv
 fn step_30() -> Unit raise {
-  let t87 = @meson.meson_tac(@list.empty())
+  let t87 = @meson.meson_tac(@list.List([]))
   let pth_triv = @tactics.prove(@parser.parse_term("((?x. x = x) <=> T) /\\\n     ((?x. x = t) <=> T) /\\\n     ((?x. t = x) <=> T) /\\\n     ((?x. (x = t) /\\ P x) <=> P t) /\\\n     ((?x. (t = x) /\\ P x) <=> P t)"), t87)
   eq_triv_conv_c.set(@simp.gen_rewrite_conv(fn(x88 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x88
@@ -719,7 +719,7 @@ pub fn eq_triv_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// eq_refl_conv
 fn step_31() -> Unit raise {
-  let t89 = @meson.meson_tac(@list.empty())
+  let t89 = @meson.meson_tac(@list.List([]))
   let pth_refl = @tactics.prove(@parser.parse_term("(?x. (x = x) /\\ P x) <=> (?x. P x)"), t89)
   eq_refl_conv_c.set(@simp.gen_rewrite_conv(fn(x90 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x90
@@ -822,7 +822,7 @@ pub fn dest_binop_op(x100 : @kernel.Term) -> ((@kernel.Term, @kernel.Term, @kern
 ///|
 /// forall_thm
 fn step_33() -> Unit raise {
-  let t101 = @meson.meson_tac(@list.empty())
+  let t101 = @meson.meson_tac(@list.List([]))
   forall_thm_c.set(@tactics.prove(@parser.parse_term("!P. (!x. P x) <=> ~ (?x. ~ P x)"), t101))
 }
 
@@ -1038,7 +1038,7 @@ fn qelim_l(nfn_conv : (@kernel.Term) -> @kernel.Thm raise, afn_conv : (@list.Lis
 ///|
 /// QELIM_DLO_CONV
 fn step_41() -> Unit raise {
-  let t126 = @simp.rewrite_conv(@list.empty())
+  let t126 = @simp.rewrite_conv(@list.List([]))
   qelim_dlo_conv_c.set(@equal.thenc(lift_qelim_conv(afn_dlo_conv, @equal.thenc(cnnf_conv(lfn_dlo_conv), @canon.dnf_conv), fn(x124 : @list.List[@kernel.Term]) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let v = x124
     dlobasic_conv

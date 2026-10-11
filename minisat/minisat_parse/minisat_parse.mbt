@@ -270,7 +270,7 @@ pub fn getintroot(x32 : @lib.InChannel, x33 : Int64) -> @list.List[Int64] raise 
       loop_(@lib.add63(idx_p, v), t36)
     }
   }
-  let res = loop_(idx, @list.empty())
+  let res = loop_(idx, @list.List([]))
   res
 }
 
@@ -371,7 +371,7 @@ pub fn getintbranch(x65 : @lib.InChannel, x66 : Int64, x67 : Int64) -> ((@list.L
       loop_(acc.prepend((v, ci)), @lib.add63(len, 1L))
     }
   }
-  let res = loop_(@list.empty(), 0L)
+  let res = loop_(@list.List([]), 0L)
   res
 }
 
@@ -437,7 +437,7 @@ pub fn[TA] parsetrace(x85 : Int64, x86 : String, x87 : TA, x88 : FixedArray[@ker
   try {
     let fin = sat_fileopen(fname)
     let scl = @lib.array_make(nr, (-1L))
-    let (cc, sr) = readtrace_aux(scl, vc, 0L, 0L, rcv, fin, @list.empty(), 0L)
+    let (cc, sr) = readtrace_aux(scl, vc, 0L, 0L, rcv, fin, @list.List([]), 0L)
     let _ = sat_fileclose(fin)
     Some((cc, sr, scl))
   } catch {
@@ -469,7 +469,7 @@ pub fn mk_sk(x90 : FixedArray[Clause], x91 : FixedArray[Bool], x92 : Int64) -> @
     } else {
       ch.prepend(mk_sk(cl, ca, cci))
     }
-  }, @list.empty(), getchain(@lib.array_get(cl, @lib.int63_to_int(ci))))
+  }, @list.List([]), getchain(@lib.array_get(cl, @lib.int63_to_int(ci))))
   @lib.array_set(ca, @lib.int63_to_int(ci), true)
   @lib.flat(ch_1).prepend(ci)
 }

@@ -183,7 +183,7 @@ pub fn idivstep() -> @kernel.Thm {
 /// IDIVSTEP_STAYS_ODD
 fn step_12() -> Unit raise {
   let t29 = @tactics.conv_tac(@int.int_reduce_conv)
-  let t28 = @simp.asm_rewrite_tac(@list.empty())
+  let t28 = @simp.asm_rewrite_tac(@list.List([]))
   let t26 = @equal.gsym(@int.int_sub_rem())
   let t27 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@int.int_add_rem()), t26]))
   let t25 = @tactics.disch_then(fn(x23 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -310,7 +310,7 @@ pub fn divstep_dfg() -> @kernel.Thm {
 ///|
 /// DIVSTEP_D
 fn step_18() -> Unit raise {
-  let t47 = @simp.asm_rewrite_tac(@list.empty())
+  let t47 = @simp.asm_rewrite_tac(@list.List([]))
   let t46 = @tactics.repeat_tac(@tactics.gen_tac)
   let t45 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), idivstep()]))
   let t43 = @parser.parse_term("p:int#int#int")
@@ -331,7 +331,7 @@ pub fn divstep_d_v1() -> @kernel.Thm {
 ///|
 /// DIVSTEP_F
 fn step_19() -> Unit raise {
-  let t53 = @simp.asm_rewrite_tac(@list.empty())
+  let t53 = @simp.asm_rewrite_tac(@list.List([]))
   let t52 = @tactics.repeat_tac(@tactics.gen_tac)
   let t51 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), idivstep()]))
   let t49 = @parser.parse_term("p:int#int#int")
@@ -352,7 +352,7 @@ pub fn divstep_f_v1() -> @kernel.Thm {
 ///|
 /// DIVSTEP_G
 fn step_20() -> Unit raise {
-  let t59 = @simp.asm_rewrite_tac(@list.empty())
+  let t59 = @simp.asm_rewrite_tac(@list.List([]))
   let t58 = @tactics.repeat_tac(@tactics.gen_tac)
   let t57 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), idivstep()]))
   let t55 = @parser.parse_term("p:int#int#int")
@@ -390,7 +390,7 @@ pub fn divstep_dfg_add() -> @kernel.Thm {
 ///|
 /// DIVSTEP_D_PARITY
 fn step_22() -> Unit raise {
-  let t68 = @simp.asm_rewrite_tac(@list.empty())
+  let t68 = @simp.asm_rewrite_tac(@list.List([]))
   let t67 = @simp.rewrite_tac(@list.List([@int.integer_rule(@parser.parse_term("p divides (p - x:int) <=> p divides x"))]))
   let t66 = @simp.rewrite_tac(@list.List([@int.integer_rule(@parser.parse_term("p divides (p + x:int) <=> p divides x"))]))
   let t65 = @tactics.repeat_tac(@tactics.gen_tac)
@@ -431,7 +431,7 @@ pub fn divstep_d_bound() -> @kernel.Thm {
 ///|
 /// DIVSTEP_F_ODD
 fn step_24() -> Unit raise {
-  let t74 = @simp.asm_simp_tac(@list.empty())
+  let t74 = @simp.asm_simp_tac(@list.List([]))
   let t73 = @tactics.repeat_tac(@tactics.strip_tac)
   let t75 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([divstep_f_v1()]))), t73), @class.cond_cases_tac), t74)
   divstep_f_odd_c.set(@tactics.prove(@parser.parse_term("!n d f g. f rem &2 = &1 ==> divstep_f n (d,f,g) rem &2 = &1"), t75))
@@ -452,7 +452,7 @@ fn step_25() -> Unit raise {
   let t80 = @tactics.conv_tac(@int.int_reduce_conv)
   let t79 = @simp.asm_simp_tac(@list.List([@int.int_mul_lzero(), @int.int_add_rid()]))
   let t78 = @tactics.conv_tac(@int.int_reduce_conv)
-  let t77 = @simp.asm_simp_tac(@list.empty())
+  let t77 = @simp.asm_simp_tac(@list.List([]))
   let t76 = @tactics.repeat_tac(@tactics.strip_tac)
   let t81 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([divstep_g_v1()]))), t76), t77), t78), t79), t80)
   divstep_g_zero_c.set(@tactics.prove(@parser.parse_term("!n d f g. g = &0 ==> divstep_g n (d,f,g) = &0"), t81))
@@ -473,7 +473,7 @@ fn step_26() -> Unit raise {
   let t104 = @tactics.conv_tac(@int.integer_rule)
   let t102 = @parser.parse_term("p:int")
   let t103 = @tactics.spec_tac(@parser.parse_term("&2:int"), t102)
-  let t101 = @simp.asm_rewrite_tac(@list.empty())
+  let t101 = @simp.asm_rewrite_tac(@list.List([]))
   let t99 = @parser.parse_term("&2:int")
   let t100 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("m:int"), t99]), @int.int_division_simp()))
   let t98 = @tactics.match_mp_tac(@int.integer_rule(@parser.parse_term("coprime(k:int,m)\n      ==> (d divides m /\\ d divides p <=>\n           d divides m /\\ d divides (k * p))")))
@@ -525,9 +525,9 @@ fn step_26() -> Unit raise {
   let t117 = @drule.part_match(fn(x116 : @kernel.Term) -> @kernel.Term raise {
     @equal.lhand(@kernel.rand(x116))
   }, lemma)
-  let t112 = @tactics.try_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.empty())))
+  let t112 = @tactics.try_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))))
   let t111 = @tactics.conv_tac(@int.int_reduce_conv)
-  let t110 = @simp.asm_rewrite_tac(@list.empty())
+  let t110 = @simp.asm_rewrite_tac(@list.List([]))
   let t109 = @tactics.disj_cases_tac(@bool.spec(@parser.parse_term("divstep_g n (d,f,g)"), @int.int_rem_2_cases()))
   let t108 = @simp.asm_rewrite_tac(@list.List([divstep_f_v1(), divstep_g_v1()]))
   let t107 = @simp.rewrite_tac(@list.List([@theorems.right_forall_imp_thm()]))
@@ -650,12 +650,12 @@ fn step_28() -> Unit raise {
 ///|
 /// ITER_DIVSTEP_INTEGER
 fn step_29() -> Unit raise {
-  let t182 = @simp.asm_rewrite_tac(@list.empty())
+  let t182 = @simp.asm_rewrite_tac(@list.List([]))
   let t181 = @tactics.disch_then(fn(x180 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
   })
   let t179 = @tactics.conv_tac(@int.int_reduce_conv)
-  let t178 = @simp.asm_rewrite_tac(@list.empty())
+  let t178 = @simp.asm_rewrite_tac(@list.List([]))
   let t177 = @class.asm_cases_tac(@parser.parse_term("divstep_d n (&1,f,g) = &0"))
   let t173 = @parser.parse_term("g:int")
   let t174 = @parser.parse_term("f:int")
@@ -879,8 +879,8 @@ fn step_38() -> Unit raise {
   })
   let t280 = @tactics.try_tac(@tactics.match_mp_tac(@int.int_cong_div2()))
   let t279 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t278 = @simp.asm_rewrite_tac(@list.empty())
-  let t277 = @simp.asm_rewrite_tac(@list.empty())
+  let t278 = @simp.asm_rewrite_tac(@list.List([]))
+  let t277 = @simp.asm_rewrite_tac(@list.List([]))
   let t274 = @drule.match_mp(@int.integer_rule(@parser.parse_term("(a == b) (mod (c * d:int)) ==> (a == b) (mod c)")))
   let t272 = @simp.rewrite_rule(@list.List([@equal.gsym(@int.int_rem_eq())]))
   let t276 = @tactics.first_assum(@tactics.conjuncts_then(fn(x275 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -911,7 +911,7 @@ fn step_38() -> Unit raise {
       s258(x259)
     }
   })
-  let t256 = @simp.asm_rewrite_tac(@list.empty())
+  let t256 = @simp.asm_rewrite_tac(@list.List([]))
   let t253 = @drule.match_mp(@int.arith_rule(@parser.parse_term("SUC n <= m ==> n <= m")))
   let t255 = @tactics.first_assum(fn(x254 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x250 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1104,10 +1104,10 @@ fn step_45() -> Unit raise {
   let t317 = @simp.asm_rewrite_tac(@list.List([@int.int_div_lneg()]))
   let t316 = @simp.rewrite_tac(@list.List([@int.int_arith(@parser.parse_term("--x + y * --z:int = --(x + y * z)"))]))
   let t315 = @simp.rewrite_tac(@list.List([@int.int_arith(@parser.parse_term("--x - --y:int = --(x - y)"))]))
-  let t314 = @simp.asm_rewrite_tac(@list.empty())
+  let t314 = @simp.asm_rewrite_tac(@list.List([]))
   let t313 = @simp.rewrite_tac(@list.List([@int.int_rem_2_neg()]))
   let t312 = @simp.asm_rewrite_tac(@list.List([divstep_d_v1(), divstep_f_v1(), divstep_g_v1(), divstep_mat()]))
-  let t311 = @simp.asm_rewrite_tac(@list.empty())
+  let t311 = @simp.asm_rewrite_tac(@list.List([]))
   let t310 = @class.asm_cases_tac(@parser.parse_term("f rem &2 = &1"))
   let t309 = @tactics.replicate_tac(3, @tactics.then_tac(@simp.gen_rewrite_tac(fn(x308 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x308
@@ -1194,7 +1194,7 @@ pub fn hdivstep_divstep() -> @kernel.Thm {
 /// HDIVSTEP_IDIVSTEP
 fn step_49() -> Unit raise {
   let t346 = @tactics.conv_tac(@int.int_reduce_conv)
-  let t345 = @simp.asm_rewrite_tac(@list.empty())
+  let t345 = @simp.asm_rewrite_tac(@list.List([]))
   let t344 = @class.asm_cases_tac(@parser.parse_term("d:int = &0"))
   let t343 = @simp.rewrite_tac(@list.List([@int.int_arith(@parser.parse_term("d >= &0 <=> d:int = &0 \\/ d > &0"))]))
   let t342 = @simp.rewrite_tac(@list.List([idivstep(), hdivstep()]))

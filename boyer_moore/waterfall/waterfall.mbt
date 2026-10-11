@@ -275,7 +275,7 @@ pub fn[TA] nth_tail(x29 : Int64, x30 : @list.List[TA]) -> @list.List[TA] raise {
   let n = x29
   let l = x30
   if (n > Int::to_int64(@lib.length(l))) {
-    @list.empty()
+    @list.List([])
   } else {
     repeattl_l(l, n)
   }
@@ -316,8 +316,8 @@ pub fn waterfall(x33 : @list.List[((@kernel.Term, Bool)) -> (@list.List[(@kernel
           let (tms, f) = @lib.hd(rest_of_heuristics)(tmi_1)
           if @list.List::is_empty(tms) {
             proof_print_string("Proven:", ())
-            proof_print_thm(f(@list.empty()))
-            ClauseTree::Clause_proved(f(@list.empty()))
+            proof_print_thm(f(@list.List([])))
+            ClauseTree::Clause_proved(f(@list.List([])))
           } else {
             if @list.List::is_empty(@lib.tl(tms)) {
               ClauseTree::Clause_split(@list.List([waterfall(heuristics, @lib.hd(tms))]), f)
@@ -389,8 +389,8 @@ pub fn filtered_waterfall(x42 : @list.List[((@kernel.Term, Bool)) -> (@list.List
             let (tms, f) = @lib.hd(rest_of_heuristics_1)(tmi_1)
             if @list.List::is_empty(tms) {
               proof_print_string("Proven:", ())
-              proof_print_thm(f(@list.empty()))
-              ClauseTree::Clause_proved(f(@list.empty()))
+              proof_print_thm(f(@list.List([])))
+              ClauseTree::Clause_proved(f(@list.List([])))
             } else {
               if @list.List::is_empty(@lib.tl(tms)) {
                 ClauseTree::Clause_split(@list.List([filtered_waterfall(heuristics, warehouse_1.prepend((tmi_1.0, it)), @lib.hd(tms))]), f)
@@ -428,7 +428,7 @@ pub fn fringe_of_clause_tree(x54 : ClauseTree) -> @list.List[(@kernel.Term, Bool
   let tree = x54
   match tree {
     ClauseTree::Clause(tmi) => @list.List([tmi])
-    ClauseTree::Clause_proved(_) => @list.empty()
+    ClauseTree::Clause_proved(_) => @list.List([])
     ClauseTree::Clause_split(trees, _) => @lib.flat(@lib.map(fringe_of_clause_tree, trees))
   }
 }
@@ -458,7 +458,7 @@ fn prove_clause_trees_l(x57 : @list.List[ClauseTree], x58 : @list.List[@kernel.T
   let trees = x57
   let ths_1 = x58
   if @list.List::is_empty(trees) {
-    (@list.empty(), ths_1)
+    (@list.List([]), ths_1)
   } else {
     let (th, ths_p) = prove_clause_tree_p(@lib.hd(trees), ths_1)
     let (thl, ths_p_p) = prove_clause_trees(@lib.tl(trees), ths_p)
@@ -513,7 +513,7 @@ fn prove_clause_trees_l_1(x63 : @list.List[ClauseTree], x64 : @list.List[@kernel
   let trees = x63
   let ths_1 = x64
   if @list.List::is_empty(trees) {
-    (@list.empty(), ths_1)
+    (@list.List([]), ths_1)
   } else {
     let (th, ths_p) = prove_clause_tree_p(@lib.hd(trees), ths_1)
     let (thl, ths_p_p) = prove_clause_trees(@lib.tl(trees), ths_p)
@@ -549,7 +549,7 @@ pub fn inst_of(x67 : @kernel.Term, x68 : @kernel.Term) -> ((@kernel.Thm) -> @ker
   let tm = x67
   let patt = x68
   try {
-    let (_, tm_bind, ty_bind) = @drule.term_match(@list.empty(), patt, tm)
+    let (_, tm_bind, ty_bind) = @drule.term_match(@list.List([]), patt, tm)
     let (insts, vars) = @lib.list_split(tm_bind)
     let f : (@kernel.Thm) -> @kernel.Thm raise = fn(x75 : @kernel.Thm) -> @kernel.Thm raise {
       (fn(x72 : @kernel.Thm) -> @kernel.Thm raise {
@@ -651,7 +651,7 @@ fn[TA, TB] instances_l(x82 : (@kernel.Term, TB), x83 : @list.List[(InstTree, TA)
   let (tm_2, n_2) = x82
   let insts_2 = x83
   if @list.List::is_empty(insts_2) {
-    (@list.empty(), @list.empty())
+    (@list.List([]), @list.List([]))
   } else {
     let (not_instl, instl) = instances_l((tm_2, n_2), @lib.tl(insts_2))
     let (h, f_5) = @lib.hd(insts_2)
@@ -708,7 +708,7 @@ pub fn mk_inst_trees(x92 : @list.List[(@kernel.Term, Int64)]) -> @list.List[Inst
   }
   @lib.map(fn(x97 : (InstTree, (@kernel.Thm) -> @kernel.Thm raise)) -> InstTree raise {
     x97.0
-  }, mk_inst_trees_p(@list.empty(), tmnl))
+  }, mk_inst_trees_p(@list.List([]), tmnl))
 }
 
 ///|
@@ -716,7 +716,7 @@ pub fn mk_inst_trees(x92 : @list.List[(@kernel.Term, Int64)]) -> @list.List[Inst
 pub fn roots_of_inst_trees(x98 : @list.List[InstTree]) -> @list.List[@kernel.Term] raise {
   let trees = x98
   if @list.List::is_empty(trees) {
-    @list.empty()
+    @list.List([])
   } else {
     let tm_2 = match @lib.hd(trees) {
       InstTree::No_insts((tm, _)) => tm
@@ -858,7 +858,7 @@ pub fn filtered_waterfall_v1(x116 : @list.List[((@kernel.Term, Bool)) -> (@list.
     }
   }
   let void_2 = proof_print_newline(())
-  let tree = filtered_waterfall(heuristics, @list.empty(), (tm, ind))
+  let tree = filtered_waterfall(heuristics, @list.List([]), (tm, ind))
   let tmil_1 = fringe_of_clause_tree(tree)
   let thl = prove_pool(conv, @lib.map(fn(x126 : (@kernel.Term, Bool)) -> @kernel.Term raise {
     x126.0
@@ -888,10 +888,10 @@ pub fn refl_heuristic(x131 : @kernel.Term, x132 : Bool) -> ((@list.List[(@kernel
   try {
     let t133 = @equal.rhs(tm)
     if (@equal.lhs(tm) == t133) {
-      (@list.empty(), (x135 : @list.List[@kernel.Thm]) => apply_fproof("refl_heuristic", fn(x134 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
+      (@list.List([]), (x135 : @list.List[@kernel.Thm]) => apply_fproof("refl_heuristic", fn(x134 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         let ths = x134
         @kernel.refl(@equal.lhs(tm))
-      }, @list.empty(), x135))
+      }, @list.List([]), x135))
     } else {
       raise Failure("")
     }
@@ -939,9 +939,9 @@ pub fn clausal_form_heuristic(x136 : @kernel.Term, x137 : Bool) -> ((@list.List[
       let tm_p = @equal.rhs(@kernel.concl(th))
       if @support.is_t(tm_p) {
         proof_print_string_l("-> Clausal Form Heuristic", ())
-        (@list.empty(), (x146 : @list.List[@kernel.Thm]) => apply_fproof("clausal_form_heuristic", fn(x145 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
+        (@list.List([]), (x146 : @list.List[@kernel.Thm]) => apply_fproof("clausal_form_heuristic", fn(x145 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
           @bool.eqt_elim(th)
-        }, @list.empty(), x146))
+        }, @list.List([]), x146))
       } else {
         let tms_2 = @support.conj_list(tm_p)
         proof_print_string_l(result_string_l(tms_2), ())
@@ -980,10 +980,10 @@ pub fn meson_heuristic(x152 : @list.List[@kernel.Thm], x153 : (@kernel.Term, Boo
   let (tm, _ as i) = x153
   try {
     let meth = @meson.meson(l.concat(@environment.rewrite_rules(())), tm)
-    (@list.empty(), (x155 : @list.List[@kernel.Thm]) => apply_fproof("meson_heuristic", fn(x154 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
+    (@list.List([]), (x155 : @list.List[@kernel.Thm]) => apply_fproof("meson_heuristic", fn(x154 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
       let ths = x154
       meth
-    }, @list.empty(), x155))
+    }, @list.List([]), x155))
   } catch {
     Failure(_) => raise Failure("meson_heuristic")
     e => raise e
@@ -997,10 +997,10 @@ pub fn taut_heuristic(x156 : @kernel.Term, x157 : Bool) -> ((@list.List[(@kernel
   try {
     let tautthm = @class.taut(tm)
     proof_print_string_l("-> Tautology Heuristic", ())
-    (@list.empty(), (x159 : @list.List[@kernel.Thm]) => apply_fproof("taut_heuristic", fn(x158 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
+    (@list.List([]), (x159 : @list.List[@kernel.Thm]) => apply_fproof("taut_heuristic", fn(x158 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
       let ths = x158
       tautthm
-    }, @list.empty(), x159))
+    }, @list.List([]), x159))
   } catch {
     Failure(_) => raise Failure("taut_heuristic")
     e => raise e

@@ -232,7 +232,7 @@ pub fn mark_concl(x4 : String) -> @tactics.Tactic raise {
   ) raise) raise {
     let l = x11
     @tactics.assume_tac(
-      if l == @list.empty() {
+      if l == @list.List([]) {
         @bool.truth()
       } else {
         @lib.end_itlist(@bool.conj, l)
@@ -635,7 +635,7 @@ pub fn[TA] to_list(x51 : (Unit) -> TA raise) -> @list.List[TA] raise {
     let x = l(())
     to_list(l).prepend(x)
   } catch {
-    End_of_strom::End_of_strom => @list.empty()
+    End_of_strom::End_of_strom => @list.List([])
     e => raise e
   }
 }
@@ -1224,7 +1224,7 @@ pub fn pp_print_fterm(
     @meson.FolTerm::Fvar(i) => pp_print_var(f, i)
     @meson.FolTerm::Fnapp(i_1, l) => {
       @printer.pp_print_term(f, @meson.hol_of_const(i_1))
-      if l != @list.empty() {
+      if l != @list.List([]) {
         pp_enum(",", "(", ")", fn(
           x174 : @pp.Formatter,
         ) -> ((@meson.FolTerm) -> Unit raise) raise {
@@ -1251,7 +1251,7 @@ pub fn pp_print_lit(
     ()
   }
   @printer.pp_print_term(f, @meson.hol_of_const(@lib.abs63(i)))
-  if l != @list.empty() {
+  if l != @list.List([]) {
     pp_enum(",", "(", ")", fn(
       x178 : @pp.Formatter,
     ) -> ((@meson.FolTerm) -> Unit raise) raise {
@@ -1439,7 +1439,7 @@ pub fn axioms2db(x189 : @list.List[@kernel.Thm]) -> Unit raise {
 pub fn[TA] db_entries(x194 : (Int64, TA)) -> @list.List[Contrapositive] raise {
   let lit = x194
   @lib.hashtbl_find(db(), lit.0) catch {
-    @lib.NotFound => @list.empty()
+    @lib.NotFound => @list.List([])
     e => raise e
   }
 }
@@ -1825,7 +1825,7 @@ pub fn[TA] ground_lit(
 ///|
 /// `empty`
 pub fn[TA, TB] empty(x261 : TB) -> @list.List[TA] raise {
-  @list.empty()
+  @list.List([])
 }
 
 ///|
@@ -2165,8 +2165,8 @@ pub fn[TA, TB] empty_v1(
 ) -> ((FixedArray[Iterm?], Ref[@list.List[TA]]), @list.List[TB]) raise {
   let n = x311
   let suba = @lib.array_make(n, None)
-  let env = Ref::{ val: @list.empty(), }
-  let subl = @list.empty()
+  let env = Ref::{ val: @list.List([]), }
+  let subl = @list.List([])
   ((suba, env), subl)
 }
 
@@ -2485,11 +2485,11 @@ pub fn[TA] strategy(
 /// create_equality_axioms
 fn step_12() -> Unit raise {
   let t356 = @tactics.conv_tac(@class.taut)
-  let t355 = @simp.asm_rewrite_tac(@list.empty())
+  let t355 = @simp.asm_rewrite_tac(@list.List([]))
   let t354 = @class.asm_cases_tac(@parser.parse_term("x:A = y"))
   let t357 = @tactics.then_tac(
     @tactics.then_tac(
-      @tactics.then_tac(@simp.rewrite_tac(@list.empty()), t354),
+      @tactics.then_tac(@simp.rewrite_tac(@list.List([])), t354),
       t355,
     ),
     t356,
@@ -2542,7 +2542,7 @@ fn step_12() -> Unit raise {
     let tm = x364
     let acc = x365
     let (fn_, args) = @basics.strip_comb(tm)
-    if args == @list.empty() {
+    if args == @list.List([]) {
       acc
     } else {
       @lib.itlist(
@@ -2592,7 +2592,7 @@ fn step_12() -> Unit raise {
                             } catch {
                               Failure(_) => {
                                 let (pred, args_1) = @basics.strip_comb(tm_1)
-                                if args_1 == @list.empty() {
+                                if args_1 == @list.List([]) {
                                   acc_1
                                 } else {
                                   let t368 = @lib.itlist(
@@ -2704,7 +2704,7 @@ fn step_12() -> Unit raise {
     let (preds_1, funs_1) = @lib.itlist(
       fm_consts,
       tms,
-      (@list.empty(), @list.empty()),
+      (@list.List([]), @list.List([])),
     )
     let (eqs0, noneqs) = @lib.partition(
       fn(x388 : (@kernel.Term, Int64)) -> Bool raise {
@@ -2713,8 +2713,8 @@ fn step_12() -> Unit raise {
       },
       preds_1,
     )
-    if eqs0 == @list.empty() {
-      @list.empty()
+    if eqs0 == @list.List([]) {
+      @list.List([])
     } else {
       let pcongs = @lib.map(create_congruence_axiom(true), noneqs)
       let fcongs = @lib.map(create_congruence_axiom(false), funs_1)
@@ -2724,7 +2724,7 @@ fn step_12() -> Unit raise {
           fn(x389 : @kernel.Thm) -> @kernel.Term raise { @kernel.concl(x389) },
           pcongs.concat(fcongs),
         ),
-        (@list.empty(), @list.empty()),
+        (@list.List([]), @list.List([])),
       )
       let eqs1 = @lib.filter(
         fn(x390 : (@kernel.Term, Int64)) -> Bool raise {
@@ -2764,7 +2764,7 @@ fn step_12() -> Unit raise {
           )(x399)
         },
         eqs,
-        @list.empty(),
+        @list.List([]),
       )
       equivs.concat(pcongs.concat(fcongs))
     }
@@ -2793,7 +2793,7 @@ fn[TA] create_equivalence_axioms_l(
 ) -> @list.List[@kernel.Thm] raise {
   let (eq_1, _) = (x359, x360)
   let t361 = @kernel.type_of(eq_1)
-  let tyins = @basics.type_match(@kernel.type_of(veq_tm), t361, @list.empty())
+  let tyins = @basics.type_match(@kernel.type_of(veq_tm), t361, @list.List([]))
   @lib.map(
     fn(x363 : @kernel.Thm) -> @kernel.Thm raise {
       ((x362 : @kernel.Thm) => @kernel.inst_type(tyins, x362))(x363)
@@ -3800,7 +3800,7 @@ pub fn prove_clause(
           )
         })
       }
-    Empty => cons((sub_1, @list.empty()), nil)
+    Empty => cons((sub_1, @list.List([])), nil)
   }
 }
 
@@ -3865,7 +3865,7 @@ pub fn hashek_of_proof(
           prfs,
         )
         let cth = @meson.make_hol_contrapos(contra)
-        let hth = if ths == @list.empty() {
+        let hth = if ths == @list.List([]) {
           cth
         } else {
           let t502 = @lib.end_itlist(@bool.conj, ths)
@@ -3899,8 +3899,8 @@ pub fn start(
   }
   let sub0 = empty_v1(1000000L)
   let hashek = @firstorder.fol_of_literal(
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     hashek_tm(),
   )
   let hashek_neg = negate_lit(hashek.0, hashek.1)
@@ -3911,7 +3911,7 @@ pub fn start(
   ) raise = prove_lit(
     opt,
     (sub0, 0L),
-    (@list.empty(), @list.empty(), lim),
+    (@list.List([]), @list.List([]), lim),
     hashek_neg,
   )
   match next_opt(prfs) {
@@ -3950,12 +3950,12 @@ pub fn leancop_deepen(
     }
   })
   let hashek = @firstorder.fol_of_literal(
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     hashek_tm(),
   )
   let hashek_neg = negate_lit(hashek.0, hashek.1)
-  let th = hashek_of_proof(sub, @list.empty(), hashek_neg)(prf)
+  let th = hashek_of_proof(sub, @list.List([]), hashek_neg)(prf)
   @kernel.eq_mp(hashek_eq(), th)
 }
 
@@ -4475,7 +4475,7 @@ pub fn clause_of_form(x570 : @meson.FolForm) -> Clause[Unit] raise {
 /// `iclause_of_form`
 pub fn iclause_of_form(x571 : @meson.FolForm) -> Iclause[Unit] raise {
   let t_4 = x571
-  let (univ, t_p) = strip_forallq(@list.empty(), t_4)
+  let (univ, t_p) = strip_forallq(@list.List([]), t_4)
   (((), univ), clause_of_form(t_p))
 }
 
@@ -4781,7 +4781,7 @@ pub fn[TA, TB] break_map(
 ) -> @list.List[TA]? raise {
   let f = x629
   match x630 {
-    Empty => Some(@list.empty())
+    Empty => Some(@list.List([]))
     More(x, tail=xs) =>
       @firstorder.op_gt_gt_eq(f(x), fn(x631 : TA) -> @list.List[TA]? raise {
         let y = x631
@@ -6148,7 +6148,7 @@ pub fn[TA] db_entries_v1(
 ) -> @list.List[Contrapositive1[Int64]] raise {
   let lit_1 = x830
   @lib.hashtbl_find(db_v1(), lit_1.0) catch {
-    @lib.NotFound => @list.empty()
+    @lib.NotFound => @list.List([])
     e => raise e
   }
 }
@@ -6237,7 +6237,7 @@ pub fn[TA, TB] pick(
       Empty => raise Failure("pick: no element found")
     }
   }
-  go(@list.empty(), l)
+  go(@list.List([]), l)
 }
 
 ///|
@@ -6675,7 +6675,7 @@ fn[TA, TB] alt2_l(
   @list.List[Iclause[(Int64, Int64)]],
 ) raise) raise {
   let _ = x868
-  if @lib.mem((i_1, k1), pi) && v == @list.empty() {
+  if @lib.mem((i_1, k1), pi) && v == @list.List([]) {
     nil
   } else {
     let (clab, clac) = clabc_of_litmat_ext(lmext)
@@ -6683,7 +6683,7 @@ fn[TA, TB] alt2_l(
     cons(
       (
         sub,
-        (@list.empty(), clext),
+        (@list.List([]), clext),
         (x870 => index_l(i_1, k, v, x870))(clab),
         t871,
       ),
@@ -8329,7 +8329,7 @@ pub fn prove_clause_v1(
       } else {
         ()
       }
-      cons((sub_3, @list.empty()), nil)
+      cons((sub_3, @list.List([])), nil)
     }
   }
 }
@@ -8673,7 +8673,7 @@ pub fn[TA] clause_index_mapping(
         fn(x1005 : Int, x1006 : Litmat[TA]) -> @list.List[(TA, Int64)] raise {
           let idx = x1005
           match x1006 {
-            Litmat::Lit(_) => @list.empty()
+            Litmat::Lit(_) => @list.List([])
             Litmat::Mat((j, mat_1)) => {
               let t1007 = matrix_index_mapping(mat_1)
               t1007.prepend((j, Int::to_int64(idx)))
@@ -9427,7 +9427,7 @@ pub fn[
             (lem_1, prfs_3),
             prefix_th,
           )
-          if prfs_p == @list.empty() {
+          if prfs_p == @list.List([]) {
             ()
           } else {
             raise @lib.AssertFailure("tscript.ml:1388:10")
@@ -9486,8 +9486,8 @@ pub fn start_v1(
   let mati = copy_matrix(0L)(mat_1)
   let sub0 = empty_v1(1000000L)
   let hashek = @firstorder.fol_of_literal(
-    @list.empty(),
-    @list.empty(),
+    @list.List([]),
+    @list.List([]),
     hashek_tm(),
   )
   @firstorder.op_gt_gt_eq(
@@ -9599,9 +9599,9 @@ pub fn start_v1(
                           (sub0, 0L),
                           (
                             mati,
-                            @list.empty(),
+                            @list.List([]),
                             @list.List([(i, 0L)]),
-                            @list.empty(),
+                            @list.List([]),
                             lim,
                           ),
                           cla,
@@ -9762,7 +9762,7 @@ pub fn fol_of_thm(x1080 : @kernel.Thm) -> @meson.FolForm raise {
   } else {
     raise @lib.AssertFailure("tscript.ml:1424:2")
   }
-  @firstorder.fol_of_form(@list.empty(), lconsts, tm)
+  @firstorder.fol_of_form(@list.List([]), lconsts, tm)
 }
 
 ///|
@@ -9916,7 +9916,7 @@ pub fn nanocop_deepen(
     ()
   }
   let data = mk_recon_data(th_1, mat_1, sub)
-  let bot = bot_of_proof(data, @list.empty(), th_1, prfs)
+  let bot = bot_of_proof(data, @list.List([]), th_1, prfs)
   if @firstorder.copverb().val {
     {
       @pp.std_formatter.print_string("Reconstruction:\n")

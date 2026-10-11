@@ -168,7 +168,7 @@ pub fn net_of_thm(rep : Bool, th : Thm, net : Net[Gconv]) -> Net[Gconv] raise {
       let conv : Conv = tm => {
         match tm {
           Abs(y, Comb(t, y1)) if y == y1 && !@basics.free_in(y, t) =>
-            @drule.instantiate_rule(@drule.term_match(@list.empty(), v, t), th)
+            @drule.instantiate_rule(@drule.term_match(@list.List([]), v, t), th)
           _ => raise Failure("REWR_CONV (ETA_AX special case)")
         }
       }
@@ -208,7 +208,7 @@ pub fn[C] net_of_conv(
   conv : C,
   sofar : Net[GconvOf[C]],
 ) -> Net[GconvOf[C]] {
-  @nets.enter(@list.empty(), tm, { priority: 2, conv, }, sofar)
+  @nets.enter(@list.List([]), tm, { priority: 2, conv, }, sofar)
 }
 
 ///|
@@ -251,7 +251,7 @@ pub fn net_of_cong(th : Thm, sofar : Net[Gconv]) -> Net[Gconv] raise {
     t => @equal.lhand(@lib.funpow(n, @kernel.rand, t)),
     th,
   )
-  @nets.enter(@list.empty(), pat, { priority: 4, conv, }, sofar)
+  @nets.enter(@list.List([]), pat, { priority: 4, conv, }, sofar)
 }
 
 // ---------------------------------------------------------------------------
@@ -421,7 +421,7 @@ pub fn basic_prover(strat : Strategy) -> Strategy {
 
 ///|
 pub fn ss_of_thms(thms : List[Thm], ss : Simpset) -> Simpset raise {
-  let cthms = @lib.itlist(ss.rewmaker, thms, @list.empty())
+  let cthms = @lib.itlist(ss.rewmaker, thms, @list.List([]))
   let net1 = @lib.itlist((th, n) => net_of_thm(true, th, n), cthms, ss.net)
   { ..ss, net: net1, }
 }
@@ -461,7 +461,7 @@ pub fn ss_of_maker(
 /// `AUGMENT_SIMPSET cth ss`: add a contextual theorem.
 pub fn augment_simpset(cth : Thm, ss : Simpset) -> Simpset raise {
   let provers1 = @lib.map(pr => augment(pr, @list.singleton(cth)), ss.provers)
-  let cthms = (ss.rewmaker)(cth, @list.empty())
+  let cthms = (ss.rewmaker)(cth, @list.List([]))
   let net1 = @lib.itlist((th, n) => net_of_thm(true, th, n), cthms, ss.net)
   { net: net1, prover: ss.prover, provers: provers1, rewmaker: ss.rewmaker, }
 }
@@ -705,11 +705,11 @@ pub fn top_sweep_sqconv(ss : Simpset, lev : Int, tm : Term) -> Thm raise {
 // ---------------------------------------------------------------------------
 
 ///|
-let basic_rewrites_r : Ref[List[Thm]] = Ref::{ val: @list.empty(), }
+let basic_rewrites_r : Ref[List[Thm]] = Ref::{ val: @list.List([]), }
 
 ///|
 let basic_conversions_r : Ref[List[(String, (Term, Conv))]] = Ref::{
-  val: @list.empty(),
+  val: @list.List([]),
 }
 
 ///|
@@ -734,7 +734,7 @@ pub fn set_basic_rewrites(thl : List[Thm]) -> Unit raise {
   let canon_thl = @lib.itlist(
     (th, acc) => mk_rewrites(false, th, acc),
     thl,
-    @list.empty(),
+    @list.List([]),
   )
   basic_rewrites_r.val = canon_thl
   rehash_convnet()
@@ -745,7 +745,7 @@ pub fn extend_basic_rewrites(thl : List[Thm]) -> Unit raise {
   let canon_thl = @lib.itlist(
     (th, acc) => mk_rewrites(false, th, acc),
     thl,
-    @list.empty(),
+    @list.List([]),
   )
   basic_rewrites_r.val = canon_thl.concat(basic_rewrites_r.val)
   rehash_convnet()
@@ -780,7 +780,7 @@ pub fn basic_net() -> Net[Gconv] {
 }
 
 ///|
-let basic_congs_r : Ref[List[Thm]] = Ref::{ val: @list.empty(), }
+let basic_congs_r : Ref[List[Thm]] = Ref::{ val: @list.List([]), }
 
 ///|
 pub fn set_basic_congs(thl : List[Thm]) -> Unit {
@@ -812,7 +812,7 @@ pub fn general_rewrite_conv(
   let thl_canon = @lib.itlist(
     (th, acc) => mk_rewrites(false, th, acc),
     thl,
-    @list.empty(),
+    @list.List([]),
   )
   let final_net = @lib.itlist(
     (th, n) => net_of_thm(rep, th, n),
@@ -1013,7 +1013,7 @@ pub fn simplify_conv(ss : Simpset, thl : List[Thm]) -> Conv raise {
 pub let empty_ss : Simpset = {
   net: @nets.empty_net(),
   prover: strat => basic_prover(strat),
-  provers: @list.empty(),
+  provers: @list.List([]),
   rewmaker: (th, sofar) => mk_rewrites(true, th, sofar),
 }
 
@@ -1023,13 +1023,13 @@ pub fn basic_ss(thl : List[Thm]) -> Simpset raise {
   let rewmaker : (Thm, List[Thm]) -> List[Thm] raise = (th, sofar) => {
     mk_rewrites(true, th, sofar)
   }
-  let cthms = @lib.itlist(rewmaker, thl, @list.empty())
+  let cthms = @lib.itlist(rewmaker, thl, @list.List([]))
   let net1 = @lib.itlist((th, n) => net_of_thm(true, th, n), cthms, basic_net())
   let net2 = @lib.itlist(net_of_cong, basic_congs(), net1)
   {
     net: net2,
     prover: strat => basic_prover(strat),
-    provers: @list.empty(),
+    provers: @list.List([]),
     rewmaker,
   }
 }
@@ -1037,7 +1037,7 @@ pub fn basic_ss(thl : List[Thm]) -> Simpset raise {
 ///|
 /// `SIMP_CONV thl`
 pub fn simp_conv(thl : List[Thm]) -> Conv raise {
-  simplify_conv(basic_ss(@list.empty()), thl)
+  simplify_conv(basic_ss(@list.List([])), thl)
 }
 
 ///|
@@ -1049,7 +1049,7 @@ pub fn pure_simp_conv(thl : List[Thm]) -> Conv raise {
 ///|
 /// `ONCE_SIMP_CONV thl`
 pub fn once_simp_conv(thl : List[Thm]) -> Conv raise {
-  once_simplify_conv(basic_ss(@list.empty()), thl)
+  once_simplify_conv(basic_ss(@list.List([])), thl)
 }
 
 ///|

@@ -435,7 +435,7 @@ pub fn line_axiom_4() -> @kernel.Thm {
 ///|
 /// point_tybij
 fn step_24() -> Unit raise {
-  let t58 = @simp.rewrite_tac(@list.empty())
+  let t58 = @simp.rewrite_tac(@list.List([]))
   point_tybij_c.set(@class.new_type_definition("point", ("mk_point", "dest_point"), @tactics.prove(@parser.parse_term("?x:line. T"), t58)))
 }
 
@@ -698,7 +698,7 @@ pub fn parallel() -> @kernel.Thm {
 fn step_40() -> Unit raise {
   let t91 = @meson.meson_tac(@list.List([homol(), homop(), direction_tybij()]))
   let t90 = @simp.rewrite_tac(@list.List([@equal.gsym(perpl_th()), perpdir()]))
-  let t89 = @simp.rewrite_tac(@list.List([on(), projp(), projl(), @simp.rewrite_rule(@list.empty())(point_tybij())]))
+  let t89 = @simp.rewrite_tac(@list.List([on(), projp(), projl(), @simp.rewrite_rule(@list.List([]))(point_tybij())]))
   let t88 = @simp.gen_rewrite_tac(fn(x87 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     (fn(x81 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       let s82 = @equal.land_conv(x81)
@@ -835,7 +835,7 @@ pub fn parallel_projl_homol() -> @kernel.Thm {
 /// PARALLEL_PROJP_HOMOP
 fn step_44() -> Unit raise {
   let t138 = @simp.rewrite_tac(@list.List([parallel_projl_homol()]))
-  let t139 = @tactics.then_tac(@simp.rewrite_tac(@list.List([homop_def(), projp(), @simp.rewrite_rule(@list.empty())(point_tybij())])), t138)
+  let t139 = @tactics.then_tac(@simp.rewrite_tac(@list.List([homop_def(), projp(), @simp.rewrite_rule(@list.List([]))(point_tybij())])), t138)
   parallel_projp_homop_c.set(@tactics.prove(@parser.parse_term("!x. parallel x (homop(projp x))"), t139))
 }
 

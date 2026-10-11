@@ -257,7 +257,7 @@ pub fn[K, V] hashtbl_create(n : Int) -> OHashtbl[K, V] {
   while s < n && s * 2 <= 0x3FFFFFFF {
     s = s * 2
   }
-  { size: 0, data: FixedArray::make(s, @list.empty()), initial_size: s, }
+  { size: 0, data: FixedArray::make(s, @list.List([])), initial_size: s, }
 }
 
 ///|
@@ -270,7 +270,7 @@ fn[K : OHash, V] OHashtbl::resize(self : OHashtbl[K, V]) -> Unit {
   let odata = self.data
   let nsize = odata.length() * 2
   let buckets : FixedArray[Array[(K, V)]] = FixedArray::makei(nsize, _ => [])
-  self.data = FixedArray::make(nsize, @list.empty())
+  self.data = FixedArray::make(nsize, @list.List([]))
   // each old bucket in order, appended to the tails of the new ones
   for b in odata {
     for e in b {
@@ -287,7 +287,7 @@ fn[K : OHash, V] OHashtbl::resize(self : OHashtbl[K, V]) -> Unit {
 pub fn[K, V] hashtbl_clear(t : OHashtbl[K, V]) -> Unit {
   if t.size > 0 {
     t.size = 0
-    t.data.fill(@list.empty())
+    t.data.fill(@list.List([]))
   }
 }
 
@@ -298,7 +298,7 @@ pub fn[K, V] hashtbl_reset(t : OHashtbl[K, V]) -> Unit {
     hashtbl_clear(t)
   } else {
     t.size = 0
-    t.data = FixedArray::make(t.initial_size, @list.empty())
+    t.data = FixedArray::make(t.initial_size, @list.List([]))
   }
 }
 

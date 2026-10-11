@@ -131,8 +131,8 @@ pub fn satoracle(x13 : @sat_solvers.SatSolver, x14 : @kernel.Term) -> @kernel.Th
   let t = x14
   let res = invokesat(sat_solver, None, t, None)
   match res {
-    Some(l) => @drule.mk_thm(@list.empty(), @bool.mk_imp(@bool.list_mk_conj(l), t))
-    None => @drule.mk_thm(@list.empty(), @bool.mk_neg(t))
+    Some(l) => @drule.mk_thm(@list.List([]), @bool.mk_imp(@bool.list_mk_conj(l), t))
+    None => @drule.mk_thm(@list.List([]), @bool.mk_neg(t))
   }
 }
 
@@ -204,7 +204,7 @@ pub fn satcheck(x15 : @list.List[@kernel.Term], x16 : @kernel.Term) -> @kernel.T
       }
     }, @bool.conjuncts_rule(th1))
     let th3 = @equal.subs_conv(thl)(t)
-    let th4 = @equal.conv_rule(@equal.rand_conv(@simp.rewrite_conv(@list.empty())), th3)
+    let th4 = @equal.conv_rule(@equal.rand_conv(@simp.rewrite_conv(@list.List([]))), th3)
     let th5 = @bool.mp(@bool.spec(t, eqt_imp2()), th4)
     @bool.disch(mtm, th5)
   } catch {

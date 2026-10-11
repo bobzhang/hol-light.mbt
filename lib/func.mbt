@@ -38,7 +38,7 @@ pub fn[K, V, W] mapf(g : (V) -> W raise?, t : Func[K, V]) -> Func[K, W] raise? {
     Empty => Empty
     Leaf(h, l) => {
       let arr = l.to_array()
-      let mut acc = @list.empty()
+      let mut acc = @list.List([])
       for i = arr.length() - 1; i >= 0; i = i - 1 {
         acc = acc.prepend((arr[i].0, g(arr[i].1)))
       }
@@ -96,19 +96,19 @@ pub fn[K, V, A] foldr(
 ///|
 /// The graph as a sorted list of pairs.
 pub fn[K : OCompare, V : OCompare] graph(f : Func[K, V]) -> @list.List[(K, V)] {
-  setify(foldl((a, x, y) => a.prepend((x, y)), @list.empty(), f))
+  setify(foldl((a, x, y) => a.prepend((x, y)), @list.List([]), f))
 }
 
 ///|
 /// The domain as a sorted list.
 pub fn[K : OCompare, V] dom(f : Func[K, V]) -> @list.List[K] {
-  setify(foldl((a, x, _) => a.prepend(x), @list.empty(), f))
+  setify(foldl((a, x, _) => a.prepend(x), @list.List([]), f))
 }
 
 ///|
 /// The range as a sorted list.
 pub fn[K, V : OCompare] ran(f : Func[K, V]) -> @list.List[V] {
-  setify(foldl((a, _, y) => a.prepend(y), @list.empty(), f))
+  setify(foldl((a, _, y) => a.prepend(y), @list.List([]), f))
 }
 
 ///|

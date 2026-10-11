@@ -103,7 +103,7 @@ pub fn isosceles_triangle_1() -> @kernel.Thm {
 ///|
 /// ISOSCELES_TRIANGLE_2
 fn step_5() -> Unit raise {
-  let t60 = @simp.asm_rewrite_tac(@list.empty())
+  let t60 = @simp.asm_rewrite_tac(@list.List([]))
   let t56 = @parser.parse_term("C:real^N")
   let t57 = @parser.parse_term("D:real^N")
   let t58 = @parser.parse_term("B:real^N")
@@ -167,7 +167,7 @@ fn step_6() -> Unit raise {
   let t104 = @parser.parse_term("D:real^N")
   let t105 = @parser.parse_term("C:real^N")
   let t106 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("A:real^N"), t105, t104]), @geom.triangle_angle_sum()))
-  let t103 = @simp.asm_rewrite_tac(@list.empty())
+  let t103 = @simp.asm_rewrite_tac(@list.List([]))
   let t102 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([@vectors.dist_sym()]))])
   let t96 = @parser.parse_term("D:real^N")
   let t97 = @parser.parse_term("C:real^N")
@@ -203,7 +203,7 @@ fn step_6() -> Unit raise {
   let t74 = @parser.parse_term("C:real^N")
   let t75 = @parser.parse_term("B:real^N")
   let t76 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("A:real^N"), t75, t74]), @geom.pythagoras()))
-  let t81 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), @tactics.strip_tac), t76), @tactics.ants_tac), t77), t78), t79), t80), @tactics.all_tac])
+  let t81 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), @tactics.strip_tac), t76), @tactics.ants_tac), t77), t78), t79), t80), @tactics.all_tac])
   let t73 = @class.asm_cases_tac(@parser.parse_term("D:real^N = B"))
   let t71 = @simp.asm_rewrite_tac(@list.List([@calc_rat.real_ring(@parser.parse_term("a = x pow 2 + a <=> x = &0")), @vectors.dist_eq_0()]))
   let t70 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(@vectors.dist())]))
@@ -212,7 +212,7 @@ fn step_6() -> Unit raise {
   let t65 = @parser.parse_term("C:real^N")
   let t66 = @parser.parse_term("A:real^N")
   let t67 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("B:real^N"), t66, t65]), @geom.pythagoras()))
-  let t72 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), @tactics.strip_tac), t67), @tactics.ants_tac), t68), t69), t70), t71), @tactics.all_tac])
+  let t72 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), @tactics.strip_tac), t67), @tactics.ants_tac), t68), t69), t70), t71), @tactics.all_tac])
   let t64 = @class.asm_cases_tac(@parser.parse_term("D:real^N = A"))
   let t63 = @simp.asm_simp_tac(@list.List([@vectors.between_refl_eq(), @vectors.midpoint_refl()]))
   let t62 = @class.asm_cases_tac(@parser.parse_term("A:real^N = B"))
@@ -234,7 +234,7 @@ pub fn isosceles_triangle_3() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t141 = @simp.rewrite_tac(@list.List([@vectors.dist_midpoint()]))
   let t140 = @simp.expand_tac("D")
-  let t139 = @simp.asm_rewrite_tac(@list.empty())
+  let t139 = @simp.asm_rewrite_tac(@list.List([]))
   let t137 = @parser.parse_term("D:real^N")
   let t138 = @tactics.map_every(fn(x134 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s135 = @tactics.exists_tac(x134)
@@ -244,7 +244,7 @@ fn step_7() -> Unit raise {
   }, @list.List([@parser.parse_term("D:real^N"), t137]))
   let t133 = @tactics.match_mp_tac(@geom.congruent_triangles_sas())
   let t132 = @tactics.repeat_tac(@tactics.disch_tac)
-  let t131 = @simp.asm_rewrite_tac(@list.empty())
+  let t131 = @simp.asm_rewrite_tac(@list.List([]))
   let t130 = @tactics.disch_then(fn(x129 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x126 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s127 = @tactics.assume_tac(x126)
@@ -270,7 +270,7 @@ pub fn isosceles_triangle_4() -> @kernel.Thm {
 ///|
 /// ISOSCELES_TRIANGLE_5
 fn step_8() -> Unit raise {
-  let t223 = @simp.asm_rewrite_tac(@list.empty())
+  let t223 = @simp.asm_rewrite_tac(@list.List([]))
   let t222 = @simp.once_rewrite_tac(@list.List([@geom.angle_sym()]))
   let t221 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([@vectors.dist_sym()]))])
   let t215 = @parser.parse_term("B:real^N")
@@ -292,9 +292,9 @@ fn step_8() -> Unit raise {
     })(t208(x209))
   })
   let t204 = @simp.asm_simp_tac(@list.List([@geom.angle_refl_mid(), @calc_rat.real_arith(@parser.parse_term("&0 = x / &2 <=> x = &0")), @transcendentals.pi_nz()]))
-  let t203 = @simp.asm_rewrite_tac(@list.empty())
+  let t203 = @simp.asm_rewrite_tac(@list.List([]))
   let t202 = @class.asm_cases_tac(@parser.parse_term("D:real^N = A"))
-  let t201 = @simp.asm_rewrite_tac(@list.empty())
+  let t201 = @simp.asm_rewrite_tac(@list.List([]))
   let t200 = @class.asm_cases_tac(@parser.parse_term("D:real^N = B"))
   let t197 = @simp.gen_rewrite_rule(fn(x196 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x196
@@ -331,9 +331,9 @@ fn step_8() -> Unit raise {
     })(t180(x181))
   })
   let t176 = @simp.asm_simp_tac(@list.List([@geom.angle_refl_mid(), @calc_rat.real_arith(@parser.parse_term("x / &2 = &0 <=> x = &0")), @transcendentals.pi_nz()]))
-  let t175 = @simp.asm_rewrite_tac(@list.empty())
+  let t175 = @simp.asm_rewrite_tac(@list.List([]))
   let t174 = @class.asm_cases_tac(@parser.parse_term("D:real^N = B"))
-  let t173 = @simp.asm_rewrite_tac(@list.empty())
+  let t173 = @simp.asm_rewrite_tac(@list.List([]))
   let t172 = @class.asm_cases_tac(@parser.parse_term("D:real^N = A"))
   let t169 = @simp.gen_rewrite_rule(fn(x168 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x168
@@ -359,7 +359,7 @@ fn step_8() -> Unit raise {
     }
   })), t164), t171), t172), t173), t174), t175), t176), t182), t183), @calc_rat.real_arith_tac), @tactics.all_tac])
   let t157 = @class.asm_cases_tac(@parser.parse_term("C:real^N = A"))
-  let t156 = @simp.asm_rewrite_tac(@list.empty())
+  let t156 = @simp.asm_rewrite_tac(@list.List([]))
   let t155 = @class.asm_cases_tac(@parser.parse_term("A:real^N = B"))
   let t153 = @equal.gsym(@theorems.conj_assoc())
   let t154 = @simp.rewrite_tac(@list.List([@equal.gsym(@theorems.imp_conj_alt()), t153]))
@@ -403,7 +403,7 @@ fn step_9() -> Unit raise {
   let t283 = @simp.once_rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{bd,c,a} = {c,a,bd}"))]))
   let t282 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("(q ==> p) ==> ~p ==> q ==> r")))
   let t281 = @tactics.undisch_tac(@parser.parse_term("~collinear{D:real^N,C,A}"))
-  let t280 = @simp.asm_rewrite_tac(@list.empty())
+  let t280 = @simp.asm_rewrite_tac(@list.List([]))
   let t277 = @parser.parse_term("A:real^N")
   let t278 = @parser.parse_term("C:real^N")
   let t279 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("B:real^N"), t278, t277]), @geom.collinear_angle()))
@@ -413,7 +413,7 @@ fn step_9() -> Unit raise {
   let t274 = @tactics.map_every(@class.asm_cases_tac, @list.List([@parser.parse_term("B:real^N = C"), t273]))
   let t272 = @simp.asm_rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("a + pi - a + x = pi <=> x = &0"))]))
   let t270 = @meson.meson_tac(@list.List([@geom.angle_eq_pi_others()]))
-  let t269 = @simp.asm_rewrite_tac(@list.empty())
+  let t269 = @simp.asm_rewrite_tac(@list.List([]))
   let t268 = @simp.rewrite_tac(@list.List([@vectors.midpoint_eq_endpoint()]))
   let t267 = @simp.expand_tac("D")
   let t266 = @simp.asm_rewrite_tac(@list.List([@geom.between_angle()]))
@@ -433,13 +433,13 @@ fn step_9() -> Unit raise {
     }
   })
   let t259 = @tactics.subgoal_then(@parser.parse_term("angle(A:real^N,B,C) = angle(C,B,D) /\\\n                  angle(B,A,C) = angle(C,A,D)"), t258)
-  let t254 = @simp.asm_rewrite_tac(@list.empty())
+  let t254 = @simp.asm_rewrite_tac(@list.List([]))
   let t252 = @parser.parse_term("C:real^N")
   let t253 = @parser.parse_term("B:real^N")
   let t291 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("A:real^N"), t253, t252]), @geom.triangle_angle_sum())), t254), t259), t271), t272), t274), t275), t276), @tactics.disch_tac), t279), t280), t281), t282), t283), t284), t285), t286), t287), t288), t289), t290)
-  let t251 = @simp.asm_rewrite_tac(@list.empty())
+  let t251 = @simp.asm_rewrite_tac(@list.List([]))
   let t250 = @simp.once_rewrite_tac(@list.List([@geom.angle_sym()]))
-  let t249 = @simp.asm_rewrite_tac(@list.empty())
+  let t249 = @simp.asm_rewrite_tac(@list.List([]))
   let t248 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([@vectors.dist_sym()]))])
   let t243 = @parser.parse_term("B:real^N")
   let t244 = @parser.parse_term("C:real^N")
@@ -456,14 +456,14 @@ fn step_9() -> Unit raise {
       s237(x238)
     }
   })
-  let t235 = @simp.asm_rewrite_tac(@list.empty())
+  let t235 = @simp.asm_rewrite_tac(@list.List([]))
   let t232 = @parser.parse_term("D:real^N")
   let t233 = @parser.parse_term("C:real^N")
   let t234 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("B:real^N"), t233, t232]), @geom.law_of_sines()))
   let t229 = @parser.parse_term("D:real^N")
   let t230 = @parser.parse_term("C:real^N")
   let t231 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("A:real^N"), t230, t229]), @geom.law_of_sines()))
-  let t228 = @simp.asm_rewrite_tac(@list.empty())
+  let t228 = @simp.asm_rewrite_tac(@list.List([]))
   let t227 = @class.asm_cases_tac(@parser.parse_term("A:real^N = B"))
   let t226 = @tactics.disch_then(fn(x225 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.strip_assume_tac(@equal.gsym(x225))

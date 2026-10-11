@@ -367,14 +367,14 @@ pub fn fano_incidence() -> @list.List[(Int64, Int64)] {
 /// `fano_point`
 pub fn fano_point(x13 : Int64) -> @kernel.Term raise {
   let i = x13
-  @kernel.mk_const(("Point_" + Int64::to_string(i)), @list.empty())
+  @kernel.mk_const(("Point_" + Int64::to_string(i)), @list.List([]))
 }
 
 ///|
 /// `fano_line`
 pub fn fano_line(x14 : Int64) -> @kernel.Term raise {
   let i_1 = x14
-  @kernel.mk_const(("Line_" + Int64::to_string(i_1)), @list.empty())
+  @kernel.mk_const(("Line_" + Int64::to_string(i_1)), @list.List([]))
 }
 
 ///|

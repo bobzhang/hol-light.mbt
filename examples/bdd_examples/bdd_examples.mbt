@@ -45,7 +45,7 @@ fn step_5() -> Unit raise {
 ///|
 /// Examples/bdd_examples.ml:50
 fn step_6() -> Unit raise {
-  ignore(@bdd.bdd_deftaut(@list.empty())(rip02_be()))
+  ignore(@bdd.bdd_deftaut(@list.List([]))(rip02_be()))
 }
 
 ///|

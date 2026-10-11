@@ -48,7 +48,7 @@ fn step_2() -> Unit raise {
       }
       fn(x9 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
         let th_1 = x9
-        gconjuncts_1(th_1, @list.empty())
+        gconjuncts_1(th_1, @list.List([]))
       }
     }
     _ => raise @lib.MatchFailure("tscript.ml:30")
@@ -394,13 +394,13 @@ pub fn gen_sat_prove(x35 : @sat_solvers.SatSolver, x36 : String) -> ((@kernel.Te
       let (n, tops, defs, lfn_1) = @lib.itlist(fn(x57 : @kernel.Thm, x58 : (Int64, @list.List[(@kernel.Term, @kernel.Thm)], @lib.Func[@kernel.Term, @kernel.Term], @lib.Func[@kernel.Term, @kernel.Term])) -> (Int64, @list.List[(@kernel.Term, @kernel.Thm)], @lib.Func[@kernel.Term, @kernel.Term], @lib.Func[@kernel.Term, @kernel.Term]) raise {
         let s59 = definitionalize(x57)
         s59(x58)
-      }, ths, ((-1L), @list.empty(), @lib.undefined(), @lib.undefined()))
+      }, ths, ((-1L), @list.List([]), @lib.undefined(), @lib.undefined()))
       let defg = @lib.foldl(fn(x60 : @list.List[(@kernel.Term, @kernel.Term)], x61 : @kernel.Term, x62 : @kernel.Term) -> @list.List[(@kernel.Term, @kernel.Term)] raise {
         let a = x60
         let t_1 = x61
         let nv = x62
         a.prepend((t_1, nv))
-      }, @list.empty(), defs)
+      }, @list.List([]), defs)
       let mdefs = @lib.filter(fn(x63 : (@kernel.Term, @kernel.Term)) -> Bool raise {
         let (r, _) = x63
         !@kernel.is_var(r)

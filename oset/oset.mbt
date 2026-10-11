@@ -839,7 +839,7 @@ pub fn[TA] elements_aux(
 /// `elements`
 pub fn[TA] elements(x103 : T[TA]) -> @list.List[TA] raise {
   let s = x103
-  elements_aux(@list.empty(), s)
+  elements_aux(@list.List([]), s)
 }
 
 ///|

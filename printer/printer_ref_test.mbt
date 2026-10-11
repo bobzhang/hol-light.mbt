@@ -130,7 +130,7 @@ test "printer matches printer.ml" {
   let pv = mk_var("p", bool)
   let q = mk_var("q", bool)
   let r = mk_var("r", bool)
-  let c0 = (s : String) => @kernel.mk_const(s, @list.empty())
+  let c0 = (s : String) => @kernel.mk_const(s, @list.List([]))
   let bin = (s, l, r) => @kernel.mk_comb(@kernel.mk_comb(c0(s), l), r)
   let ibin = (s, l, r) => @basics.list_mk_icomb(s, @list.List([l, r]))
   let neg = t => @kernel.mk_comb(c0("~"), t)
@@ -282,7 +282,7 @@ test "printer matches printer.ml" {
   )
   @printer.parse_as_infix("++", (16, "right"))
   t("interface", bin("+", x, y))
-  @printer.the_interface.val = @list.empty()
+  @printer.the_interface.val = @list.List([])
   log.attempt("thm", () => {
     @printer.string_of_thm(@kernel.assume_rule(bin("/\\", pv, q)))
   })

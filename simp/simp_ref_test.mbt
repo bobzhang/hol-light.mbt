@@ -60,15 +60,15 @@ test "simp matches simp.ml" {
   let big = "!x:A. (P x /\\ (Q x = R x)) /\\ ~(a = b) /\\ ~c /\\ (p ==> (u:A) = v)"
   log.attempt("mk_rewrites_false", () => {
     let th = hyp(big)
-    slist(@simp.mk_rewrites(false, th, @list.empty()))
+    slist(@simp.mk_rewrites(false, th, @list.List([])))
   })
   log.attempt("mk_rewrites_true", () => {
     let th = hyp(big)
-    slist(@simp.mk_rewrites(true, th, @list.empty()))
+    slist(@simp.mk_rewrites(true, th, @list.List([])))
   })
   log.attempt("mk_rewrites_exists", () => {
     let th = hyp("!x y:A. P x y ==> Q x y ==> (f:A->A) x = g x")
-    slist(@simp.mk_rewrites(true, th, @list.empty()))
+    slist(@simp.mk_rewrites(true, th, @list.List([])))
   })
   cv("REWRITE_CONV", () => {
     let th = hyp("!x:A. (f:A->A) x = g x")
@@ -130,11 +130,11 @@ test "simp matches simp.ml" {
     // `DISCH (tm "c:bool") (ASSUME (tm "(a:bool) = b"))`: right to left.
     let h = hyp("(a:bool) = b")
     let th2 = @bool.disch(tm("c:bool"), h)
-    @simp.asm_rewrite_rule(@list.empty(), @bool.undisch(th2))
+    @simp.asm_rewrite_rule(@list.List([]), @bool.undisch(th2))
   })
   cv("ONCE_ASM_REWRITE_RULE", () => {
     let th = hyp("(a:bool) = b")
-    @simp.once_asm_rewrite_rule(@list.empty(), @bool.conj(th, th))
+    @simp.once_asm_rewrite_rule(@list.List([]), @bool.conj(th, th))
   })
   let accept : @tactics.Tactic = g => {
     @tactics.first_assum(th => @tactics.accept_tac(th))(g)
@@ -159,7 +159,7 @@ test "simp matches simp.ml" {
         @tactics.then_tac(
           @tactics.then_tac(
             @tactics.disch_tac,
-            @simp.asm_rewrite_tac(@list.empty()),
+            @simp.asm_rewrite_tac(@list.List([])),
           ),
           @tactics.disch_tac,
         ),
@@ -210,7 +210,7 @@ test "simp matches simp.ml" {
   cv("SIMP_cong", () => {
     let ss = @simp.ss_of_congs(ths([imp_cong]), @simp.empty_ss)
     let t = tm("(x:A) = a ==> (f:A->A) x = f a")
-    @simp.simplify_conv(ss, @list.empty())(t)
+    @simp.simplify_conv(ss, @list.List([]))(t)
   })
   cv("SIMP_cong_deep", () => {
     let ss = @simp.ss_of_congs(ths([imp_cong]), @simp.empty_ss)
@@ -235,7 +235,7 @@ test "simp matches simp.ml" {
       c
     },
     (state, new_ths) => new_ths.concat(state),
-  )(@list.empty()) catch {
+  )(@list.List([])) catch {
     e => fail("mk_prover: \{e}")
   }
   cv("prover", () => {
@@ -293,7 +293,7 @@ test "simp matches simp.ml" {
       @simp.empty_ss,
     )
     let t = tm("(\\x:A. (f:A->B) x) c = (\\y. f y) d")
-    @simp.simplify_conv(ss, @list.empty())(t)
+    @simp.simplify_conv(ss, @list.List([]))(t)
   })
   log.attempt("basic_rewrites", () => {
     let th = hyp("!x:A. (f:A->A) x = g x")
@@ -304,11 +304,11 @@ test "simp matches simp.ml" {
   })
   cv("REWRITE_CONV_basic", () => {
     let t = tm("(f:A->A) c = c /\\ a")
-    @simp.rewrite_conv(@list.empty())(t)
+    @simp.rewrite_conv(@list.List([]))(t)
   })
   cv("PURE_REWRITE_CONV_basic", () => {
     let t = tm("(f:A->A) c = c /\\ a")
-    @simp.pure_rewrite_conv(@list.empty())(t)
+    @simp.pure_rewrite_conv(@list.List([]))(t)
   })
   log.attempt("basic_convs", () => {
     let p = tm("(\\x:A. (b:B)) y")
@@ -319,11 +319,11 @@ test "simp matches simp.ml" {
   })
   cv("REWRITE_CONV_conv", () => {
     let t = tm("(\\x:A. (f:A->A) x) c")
-    @simp.rewrite_conv(@list.empty())(t)
+    @simp.rewrite_conv(@list.List([]))(t)
   })
   cv("SIMP_CONV_basic", () => {
     let t = tm("(\\x:A. (f:A->A) x) c")
-    @simp.simp_conv(@list.empty())(t)
+    @simp.simp_conv(@list.List([]))(t)
   })
   log.attempt("basic_congs", () => {
     @simp.extend_basic_congs(ths([imp_cong]))
@@ -332,12 +332,12 @@ test "simp matches simp.ml" {
   })
   cv("SIMP_CONV_congs", () => {
     let t = tm("(x:A) = c ==> (h:A->A) x = h c")
-    @simp.simp_conv(@list.empty())(t)
+    @simp.simp_conv(@list.List([]))(t)
   })
   log.attempt("reset", () => {
-    @simp.set_basic_rewrites(@list.empty())
-    @simp.set_basic_convs(@list.empty())
-    @simp.set_basic_congs(@list.empty())
+    @simp.set_basic_rewrites(@list.List([]))
+    @simp.set_basic_convs(@list.List([]))
+    @simp.set_basic_congs(@list.List([]))
     @simp.basic_rewrites().length().to_string()
   })
   let subgoal_thm = (gs : @tactics.Goalstate) => {
@@ -351,23 +351,23 @@ test "simp matches simp.ml" {
     let w = tm("(a /\\ b) \\/ ~(a /\\ b)")
     let ab = tm("c = (a /\\ b)")
     let _c = tm("c:bool")
-    let gs = @simp.abbrev_tac(ab)((@list.empty(), w))
+    let gs = @simp.abbrev_tac(ab)((@list.List([]), w))
     match gs.1 {
-      More((_, gw), tail=Empty) => @drule.mk_thm(@list.empty(), gw)
+      More((_, gw), tail=Empty) => @drule.mk_thm(@list.List([]), gw)
       _ => raise @lib.MatchFailure("simp_ref.ml")
     }
   })
   cv("ABBREV_TAC_fun", () => {
     let w = tm("(f:A->A) a = f b")
     let ab = tm("(g:A->A) x = (f:A->A) x")
-    subgoal_thm(@simp.abbrev_tac(ab)((@list.empty(), w)))
+    subgoal_thm(@simp.abbrev_tac(ab)((@list.List([]), w)))
   })
   cv("ABBREV_TAC_used", () => {
     let w = tm("(c:bool) /\\ a")
     let ab = tm("c = (a:bool)")
-    let gs = @simp.abbrev_tac(ab)((@list.empty(), w))
+    let gs = @simp.abbrev_tac(ab)((@list.List([]), w))
     match gs.1 {
-      More((_, gw), tail=Empty) => @drule.mk_thm(@list.empty(), gw)
+      More((_, gw), tail=Empty) => @drule.mk_thm(@list.List([]), gw)
       _ => raise @lib.MatchFailure("simp_ref.ml")
     }
   })
@@ -375,11 +375,11 @@ test "simp matches simp.ml" {
     let w = tm("(a /\\ b) \\/ ~(a /\\ b)")
     let ab = tm("c = (a /\\ b)")
     let tac = @tactics.then_tac(@simp.abbrev_tac(ab), @simp.expand_tac("c"))
-    subgoal_thm(tac((@list.empty(), w)))
+    subgoal_thm(tac((@list.List([]), w)))
   })
   cv("EXPAND_TAC_none", () => {
     let w = tm("(a:bool)")
-    subgoal_thm(@simp.expand_tac("c")((@list.empty(), w)))
+    subgoal_thm(@simp.expand_tac("c")((@list.List([]), w)))
   })
   log.attempt("axioms", () => @kernel.axioms().length().to_string())
   log.attempt("counter_tyvar", () => stm(tm("zz_counter")))

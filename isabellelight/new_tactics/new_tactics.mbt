@@ -211,7 +211,7 @@ pub fn[TA, TB, TC, TD] all_unify_accept_tac(x30 : @list.List[@kernel.Term], x31 
   let (asl, w) = x32
   let insts = @drule.term_unify(mvs, @kernel.concl(th), w)
   let th_p = @drule.instantiate_all(insts, th)
-  ((@list.empty(), insts), @list.empty(), fn(x33 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> ((@list.List[TC]) -> @kernel.Thm raise) raise {
+  ((@list.List([]), insts), @list.List([]), fn(x33 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> ((@list.List[TC]) -> @kernel.Thm raise) raise {
     let i = x33
     fn(x34 : @list.List[TC]) -> @kernel.Thm raise {
       match x34 {

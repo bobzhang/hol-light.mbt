@@ -75,10 +75,10 @@ test "firstorder matches firstorder.ml" {
     @firstorder.reset_vars(())
     @firstorder.reset_consts(())
     let t = tm("!x:A. P x (f x y) ==> ~Q (c:A)")
-    let fm = @firstorder.fol_of_form(@list.empty(), @list.empty(), t)
+    let fm = @firstorder.fol_of_form(@list.List([]), @list.List([]), t)
     let a = @firstorder.fol_of_atom(
-      @list.empty(),
-      @list.empty(),
+      @list.List([]),
+      @list.List([]),
       tm("(R:A->A->bool) (g a) b"),
     )
     stm(@firstorder.hol_of_literal(a.0, a.1)) +

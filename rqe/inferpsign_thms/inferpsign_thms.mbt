@@ -742,7 +742,7 @@ fn step_4() -> Unit raise {
   let t453 = @tactics.repeat_tac(@tactics.strip_tac)
   let t454 = @meson.asm_meson_tac(@list.List([@rqe_real.parity_pow_lt()]))
   let t455 = @rqe_tactics_ext.claim(@parser.parse_term("a pow n < &0"))
-  let t456 = @simp.asm_rewrite_tac(@list.empty())
+  let t456 = @simp.asm_rewrite_tac(@list.List([]))
   let t457 = @rqe_tactics_ext.rewrite_assums(@list.List([@basic.neq()]))
   let t458 = @rqe_tactics_ext.claim(@parser.parse_term("a < &0 \\/ a > &0 \\/ (a = &0)"))
   let t459 = @rqe_tactics_ext.repeat_n(10L, @tactics.strip_tac)

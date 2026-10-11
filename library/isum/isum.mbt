@@ -232,7 +232,7 @@ fn step_3() -> Unit raise {
   let int_ty = @parser.parse_type("int")
   let t22 = @tactics.then_tac(
     @class.cond_cases_tac,
-    @simp.rewrite_tac(@list.empty()),
+    @simp.rewrite_tac(@list.List([])),
   )
   let cond_th = @tactics.prove(
     @parser.parse_term(
@@ -1719,7 +1719,7 @@ pub fn isum_isum_product() -> @kernel.Thm {
 ///|
 /// ADMISSIBLE_ISUM
 fn step_87() -> Unit raise {
-  let t42 = @meson.asm_meson_tac(@list.empty())
+  let t42 = @meson.asm_meson_tac(@list.List([]))
   let t41 = @tactics.match_mp_tac(isum_eq_numseg())
   let t40 = @tactics.repeat_tac(@tactics.strip_tac)
   let t43 = @tactics.then_tac(
@@ -1940,7 +1940,7 @@ pub fn isum_closed() -> @kernel.Thm {
 ///|
 /// ISUM_RELATED
 fn step_92() -> Unit raise {
-  let t63 = @meson.asm_meson_tac(@list.empty())
+  let t63 = @meson.asm_meson_tac(@list.List([]))
   let t62 = @simp.asm_rewrite_tac(
     @list.List([@equal.gsym(@iterate.isum()), @iterate.neutral_int_add()]),
   )
@@ -2102,7 +2102,7 @@ pub fn isum_closed_nonempty() -> @kernel.Thm {
 ///|
 /// ISUM_RELATED_NONEMPTY
 fn step_94() -> Unit raise {
-  let t79 = @meson.asm_meson_tac(@list.empty())
+  let t79 = @meson.asm_meson_tac(@list.List([]))
   let t78 = @simp.asm_rewrite_tac(
     @list.List([@equal.gsym(@iterate.isum()), @iterate.neutral_int_add()]),
   )

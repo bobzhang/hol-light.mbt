@@ -61,7 +61,7 @@ pub fn log_fmt(x : String) -> @pp.Formatter? raise {
 ///|
 /// open_log, close_log, close_all_logs, append_to_log, log_fmt
 fn step_1() -> Unit raise {
-  let logs = Ref::{ val: @list.empty() }
+  let logs = Ref::{ val: @list.List([]) }
   let log_for_name : (String) -> (@lib.OutChannel, @pp.Formatter)? raise = fn(x2 : String) -> (@lib.OutChannel, @pp.Formatter)? raise {
     let name = x2
     try {

@@ -1168,7 +1168,7 @@ pub fn binom_bottom_step() -> @kernel.Thm {
 ///|
 /// HAS_SIZE_RESTRICTED_POWERSET
 fn step_12() -> Unit raise {
-  let t114 = @meson.asm_meson_tac(@list.empty())
+  let t114 = @meson.asm_meson_tac(@list.List([]))
   let t113 = @tactics.repeat_tac(@nums.induct_tac)
   let t115 = @tactics.then_tac(
     @tactics.then_tac(
@@ -1183,7 +1183,7 @@ fn step_12() -> Unit raise {
     ),
     t115,
   )
-  let t122 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t122 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t121 = @tactics.mp_tac(@nums.suc_inj())
   let t120 = @simp.simp_tac(@list.List([@sets.card_clauses()]))
   let t119 = @simp.once_rewrite_tac(
@@ -1245,7 +1245,7 @@ fn step_12() -> Unit raise {
     ),
     t123,
   )
-  let t157 = @sets.set_tac(@list.empty())
+  let t157 = @sets.set_tac(@list.List([]))
   let t156 = @tactics.undisch_tac(@parser.parse_term("~(a:A IN t)"))
   let t155 = @simp.rewrite_tac(
     @list.List([@sets.in_image(), @sets.in_elim_thm(), @sets.has_size_suc()]),
@@ -1258,9 +1258,9 @@ fn step_12() -> Unit raise {
       @sets.not_in_empty(),
     ]),
   )
-  let t152 = @sets.set_tac(@list.empty())
+  let t152 = @sets.set_tac(@list.List([]))
   let t151 = @tactics.undisch_tac(@parser.parse_term("~(a:A IN t)"))
-  let t150 = @simp.asm_simp_tac(@list.empty())
+  let t150 = @simp.asm_simp_tac(@list.List([]))
   let t153 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1274,7 +1274,7 @@ fn step_12() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t149 = @simp.asm_simp_tac(@list.empty())
+  let t149 = @simp.asm_simp_tac(@list.List([]))
   let t148 = @tactics.match_mp_tac(@sets.has_size_union())
   let t147 = @simp.asm_simp_tac(@list.List([setstep_lemma]))
   let t146 = @tactics.first_x_assum(fn(
@@ -1343,7 +1343,7 @@ fn step_12() -> Unit raise {
     @tactics.x_gen_tac,
     @list.List([@parser.parse_term("n:num"), t134]),
   )
-  let t131 = @sets.set_tac(@list.empty())
+  let t131 = @sets.set_tac(@list.List([]))
   let t132 = @tactics.then_tac(
     @simp.simp_tac(
       @list.List([
@@ -1354,7 +1354,7 @@ fn step_12() -> Unit raise {
     ),
     t131,
   )
-  let t130 = @sets.set_tac(@list.empty())
+  let t130 = @sets.set_tac(@list.List([]))
   let t129 = @simp.rewrite_tac(
     @list.List([@sets.not_in_empty(), @sets.has_size_0()]),
   )
@@ -2559,7 +2559,7 @@ fn step_23() -> Unit raise {
       s297(x298)
     }
   })
-  let t295 = @simp.asm_rewrite_tac(@list.empty())
+  let t295 = @simp.asm_rewrite_tac(@list.List([]))
   let t288 = @drule.part_match(
     fn(x287 : @kernel.Term) -> @kernel.Term raise {
       (fn(x286 : @kernel.Term) -> @kernel.Term raise {
@@ -2570,7 +2570,7 @@ fn step_23() -> Unit raise {
   )
   let t281 = @tactics.conv_tac(@int.number_rule)
   let t282 = @list.List([
-    @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t281),
+    @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t281),
     @tactics.all_tac,
   ])
   let t280 = @class.asm_cases_tac(@parser.parse_term("k = 0"))

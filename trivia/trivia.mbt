@@ -195,7 +195,7 @@ pub fn one_def() -> @kernel.Thm {
 ///|
 /// one
 fn step_11() -> Unit raise {
-  let t15 = @simp.asm_rewrite_tac(@list.empty())
+  let t15 = @simp.asm_rewrite_tac(@list.List([]))
   let t14 = @simp.once_rewrite_tac(
     @list.List([@equal.gsym(@bool.conjunct1(one_tydef()))]),
   )
@@ -258,7 +258,7 @@ pub fn one_axiom() -> @kernel.Thm {
 ///|
 /// one_INDUCT
 fn step_13() -> Unit raise {
-  let t20 = @simp.rewrite_tac(@list.empty())
+  let t20 = @simp.rewrite_tac(@list.List([]))
   let t21 = @tactics.then_tac(@simp.once_rewrite_tac(@list.List([one()])), t20)
   one_induct_c.set(
     @tactics.prove(@parser.parse_term("!P. P one ==> !x. P x"), t21),
@@ -304,7 +304,7 @@ pub fn one_recursion() -> @kernel.Thm {
 ///|
 /// one_Axiom
 fn step_15() -> Unit raise {
-  let t26 = @simp.asm_rewrite_tac(@list.empty())
+  let t26 = @simp.asm_rewrite_tac(@list.List([]))
   let t25 = @simp.once_rewrite_tac(@list.List([one()]))
   let t24 = @simp.once_rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t23 = @tactics.repeat_tac(@tactics.strip_tac)

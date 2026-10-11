@@ -1132,7 +1132,7 @@ pub fn[TA, TB] bindings_aux(
 /// `bindings`
 pub fn[TA, TB] bindings(x145 : T[TA, TB]) -> @list.List[(TA, TB)] raise {
   let s = x145
-  bindings_aux(@list.empty(), s)
+  bindings_aux(@list.List([]), s)
 }
 
 ///|

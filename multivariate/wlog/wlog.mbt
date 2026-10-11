@@ -19,7 +19,7 @@ pub fn plane() -> @kernel.Thm {
 ///|
 /// PLANE_TRANSLATION_EQ
 fn step_2() -> Unit raise {
-  let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([plane()])), (x1 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @determinants.geom_translate_tac(@list.empty(), x1))
+  let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([plane()])), (x1 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => @determinants.geom_translate_tac(@list.List([]), x1))
   plane_translation_eq_c.set(@tactics.prove(@parser.parse_term("!a:real^N s. plane(IMAGE (\\x. a + x) s) <=> plane s"), t2))
 }
 
@@ -57,13 +57,13 @@ fn step_4() -> Unit raise {
 ///|
 /// PLANE_LINEAR_IMAGE_EQ
 fn step_5() -> Unit raise {
-  let t18 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t18 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t19 = @list.List([@meson.asm_meson_tac(@list.List([@determinants.collinear_linear_image_eq()])), t18])
   let t17 = @tactics.repeat_tac(@tactics.then_tac(@tactics.ap_term_tac, @tactics.abs_tac))
   let t16 = @simp.asm_simp_tac(@list.List([@convex.affine_hull_linear_image()]))
   let t15 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{f a,f b,f c} = IMAGE f {a,b,c}"))]))
   let t20 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.exists_in_image(), @sets.in_univ()])), t15), t16), t17), @tactics.binop_tac), t19)
-  let t13 = @sets.set_tac(@list.empty())
+  let t13 = @sets.set_tac(@list.List([]))
   let t14 = @list.List([@simp.asm_rewrite_tac(@list.List([@misc.hull_subset()])), t13])
   let t12 = @tactics.subgoal_then(@parser.parse_term("{u,v,w} SUBSET IMAGE (f:real^M->real^N) p"), fn(x9 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s10 = @tactics.mp_tac(x9)
@@ -71,7 +71,7 @@ fn step_5() -> Unit raise {
       s10(x11)
     }
   })
-  let t8 = @simp.asm_rewrite_tac(@list.empty())
+  let t8 = @simp.asm_rewrite_tac(@list.List([]))
   let t7 = @tactics.repeat_tac(@tactics.then_tac(@tactics.ap_term_tac, @tactics.abs_tac))
   let t21 = @list.List([@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@theorems.right_and_exists_thm(), @sets.in_image(), @sets.in_univ()])), t7), @tactics.eq_tac), @tactics.disch_tac), t8), t12), t14), t20])
   let t6 = @tactics.exists_tac(@parser.parse_term("?u. u IN IMAGE f (:real^M) /\\\n        ?v. v IN IMAGE f (:real^M) /\\\n            ?w. w IN IMAGE (f:real^M->real^N) (:real^M) /\\\n                ~collinear {u, v, w} /\\ IMAGE f p = affine hull {u, v, w}"))
@@ -128,7 +128,7 @@ fn step_8() -> Unit raise {
   let t116 = @simp.rewrite_tac(@list.List([@sets.in_insert(), @sets.not_in_empty(), @theorems.right_or_distrib()]))
   let t115 = @simp.rewrite_tac(@list.List([@vectors.independent(), @class.contrapos_thm(), @vectors.dependent()]))
   let t114 = @simp.once_rewrite_tac(@list.List([@vectors.collinear_3()]))
-  let t113 = @simp.rewrite_tac(@list.empty())
+  let t113 = @simp.rewrite_tac(@list.List([]))
   let t110 = @simp.gen_rewrite_rule(fn(x109 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     (fn(x103 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       let s104 = @equal.rand_conv(x103)
@@ -193,7 +193,7 @@ fn step_8() -> Unit raise {
       }
     })(t67(x68))
   })
-  let t63 = @simp.asm_rewrite_tac(@list.empty())
+  let t63 = @simp.asm_rewrite_tac(@list.List([]))
   let t62 = @tactics.x_gen_tac(@parser.parse_term("f:real^3->real^3"))
   let t61 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t59 = @simp.simp_tac(@list.List([@sets.card_clauses(), @sets.finite_rules()]))
@@ -324,10 +324,10 @@ fn step_10() -> Unit raise {
   let t165 = @meson.asm_meson_tac(@list.List([@determinants.orthogonal_transformation_injective()]))
   let t166 = @list.List([@simp.asm_simp_tac(@list.List([@determinants.orthogonal_transformation_linear()])), t165, t164, t163])
   let t162 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t161 = @simp.asm_rewrite_tac(@list.empty())
+  let t161 = @simp.asm_rewrite_tac(@list.List([]))
   let t167 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t161), t162), t166)
   let oth = @tactics.prove(@parser.parse_term("!f:real^3->real^3.\n        orthogonal_transformation f /\\ det(matrix f) = &1\n        ==> linear f /\\\n            (!x y. f x = f y ==> x = y) /\\\n            (!y. ?x. f x = y) /\\\n            (!x. norm(f x) = norm x) /\\\n            (2 <= dimindex(:3) ==> det(matrix f) = &1)"), t167)
-  let fth = @meson.meson(@list.empty(), @parser.parse_term("(!a f. q a f ==> (p <=> p' a f))\n    ==> ((?a f. q a f) ==> (p <=> !a f. q a f ==> p' a f))"))
+  let fth = @meson.meson(@list.List([]), @parser.parse_term("(!a f. q a f ==> (p <=> p' a f))\n    ==> ((?a f. q a f) ==> (p <=> !a f. q a f ==> p' a f))"))
   geom_horizontal_plane_rule_c.set(fn(x168 : @kernel.Term) -> @kernel.Thm raise {
     let tm = x168
     let (x, bod) = @basics.dest_forall(tm)
@@ -372,7 +372,7 @@ fn step_10() -> Unit raise {
                 }
               })(x185))
             }, @list.List([th9]))(th7)
-            let th11 = if (@lib.intersect(@kernel.frees(@kernel.concl(th10)), @list.List([a, f])) == @list.empty()) {
+            let th11 = if (@lib.intersect(@kernel.frees(@kernel.concl(th10)), @list.List([a, f])) == @list.List([])) {
               @bool.prove_hyp(th1, @lib.itlist(@bool.simple_choose, @list.List([a, f]), th10))
             } else {
               let t186 = @bool.genl(@list.List([a, f]), @bool.disch_all(th10))
@@ -467,7 +467,7 @@ pub fn pad2d3d() -> @kernel.Thm {
 ///|
 /// FORALL_PAD2D3D_THM
 fn step_12() -> Unit raise {
-  let t225 = @meson.asm_meson_tac(@list.empty())
+  let t225 = @meson.asm_meson_tac(@list.List([]))
   let t224 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("i <= 3 <=> i <= 2 \\/ i = 3"))]))
   let t223 = @simp.simp_tac(@list.List([@cart.cart_eq(), pad2d3d(), @cart.dimindex_3(), @calc_num.arith(), @cart.lambda_beta(), @cart.dimindex_2(), @int.arith_rule(@parser.parse_term("i < 3 <=> i <= 2"))]))
   let t222 = @tactics.match_mp_tac(@theorems.eq_imp())
@@ -500,9 +500,9 @@ pub fn forall_pad2d3d_thm() -> @kernel.Thm {
 ///|
 /// QUANTIFY_PAD2D3D_THM
 fn step_13() -> Unit raise {
-  let t230 = @meson.meson_tac(@list.empty())
+  let t230 = @meson.meson_tac(@list.List([]))
   let t229 = @simp.rewrite_tac(@list.List([@equal.gsym(forall_pad2d3d_thm())]))
-  let t231 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@meson.meson(@list.empty(), @parser.parse_term("(?y. P y) <=> ~(!x. ~P x)"))])), t229), t230)
+  let t231 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@meson.meson(@list.List([]), @parser.parse_term("(?y. P y) <=> ~(!x. ~P x)"))])), t229), t230)
   quantify_pad2d3d_thm_c.set(@tactics.prove(@parser.parse_term("(!P. (!y:real^3. y$3 = &0 ==> P y) <=> (!x. P(pad2d3d x))) /\\\n   (!P. (?y:real^3. y$3 = &0 /\\ P y) <=> (?x. P(pad2d3d x)))"), t231))
 }
 
@@ -518,7 +518,7 @@ pub fn quantify_pad2d3d_thm() -> @kernel.Thm {
 ///|
 /// LINEAR_PAD2D3D
 fn step_14() -> Unit raise {
-  let t234 = @tactics.repeat_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.empty())))
+  let t234 = @tactics.repeat_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))))
   let t233 = @tactics.repeat_tac(@tactics.strip_tac)
   let t232 = @simp.simp_tac(@list.List([@cart.cart_eq(), @vectors.vector_add_component(), @vectors.vector_mul_component(), @cart.lambda_beta(), @cart.dimindex_2(), @cart.dimindex_3(), @calc_num.arith(), @int.arith_rule(@parser.parse_term("i < 3 ==> i <= 2"))]))
   let t235 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@vectors.linear(), pad2d3d()])), t232), t233), t234), @calc_rat.real_arith_tac)
@@ -693,7 +693,7 @@ fn step_20() -> Unit raise {
   let t283 = @meson.asm_meson_tac(@list.List([@determinants.orthogonal_transformation_injective()]))
   let t284 = @list.List([@simp.asm_simp_tac(@list.List([@determinants.orthogonal_transformation_linear()])), t283, t282, t281])
   let t280 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t279 = @simp.asm_rewrite_tac(@list.empty())
+  let t279 = @simp.asm_rewrite_tac(@list.List([]))
   let t285 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), t279), t280), t284)
   let oth = @tactics.prove(@parser.parse_term("!f:real^N->real^N.\n        orthogonal_transformation f /\\ det(matrix f) = &1\n        ==> linear f /\\\n            (!x y. f x = f y ==> x = y) /\\\n            (!y. ?x. f x = y) /\\\n            (!x. norm(f x) = norm x) /\\\n            (2 <= dimindex(:N) ==> det(matrix f) = &1)"), t285)
   let t287 = @meson.meson_tac(@list.List([@int.arith_rule(@parser.parse_term("1 < 2 /\\ 1 < 3"))]))
@@ -740,7 +740,7 @@ fn step_20() -> Unit raise {
         let ntm = @bool.mk_forall(a, @bool.mk_imp(@kernel.concl(th_zero), t303))
         let th7 = @bool.mp(@bool.spec(a, @kernel.assume_rule(ntm)), th_zero)
         let th8 = @bool.disch(ntm, @kernel.eq_mp(@equal.sym(th6), th7))
-        if (@lib.intersect(@kernel.frees(@kernel.concl(th8)), @list.List([a, f])) == @list.empty()) {
+        if (@lib.intersect(@kernel.frees(@kernel.concl(th8)), @list.List([a, f])) == @list.List([])) {
           let th9 = @bool.prove_hyp(th1, @lib.itlist(@bool.simple_choose, @list.List([a, f]), th8))
           let th10 = @bool.disch(ntm, @bool.gen(x, @bool.undisch(th9)))
           @equal.conv_rule(@equal.land_conv(@equal.gen_alpha_conv(x)), th10)

@@ -14,7 +14,7 @@ fn step_2() -> Unit raise {
   let t21 = @tactics.match_mp_tac(@kernel.assume_rule(@parser.parse_term("!m n:num. P m n ==> P n (m + n)")))
   let t20 = @list.List([@tactics.all_tac, @tactics.asm_tac((x19 : @list.List[@kernel.Thm]) => @simp.gen_rewrite_tac(fn(x18 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x18
-  }, x19))(@list.empty())])
+  }, x19))(@list.List([]))])
   let t17 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("p:num"))(fn(x14 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s15 = @tactics.subst_all_tac(x14)
     fn(x16 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -30,9 +30,9 @@ fn step_2() -> Unit raise {
       s8(x9)
     }
   })(t10)
-  let t6 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t6 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t5 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
-  let t4 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t4 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t3 = @class.asm_cases_tac(@parser.parse_term("m = 0"))
   let t2 = @wf.wf_induct_tac(@parser.parse_term("m + n:num"))
   let t1 = @tactics.repeat_tac(@tactics.gen_tac)
@@ -366,7 +366,7 @@ pub fn fib_eq_1() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let t158 = @simp.rewrite_tac(@list.List([fib_eq_1(), fib()]))
   let t157 = @tactics.conv_tac(@equal.land_conv(@equal.sym_conv))
-  let t156 = @list.List([@simp.asm_rewrite_tac(@list.empty()), @int.asm_arith_tac])
+  let t156 = @list.List([@simp.asm_rewrite_tac(@list.List([])), @int.asm_arith_tac])
   let t159 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@class.asm_cases_tac(@parser.parse_term("gcd(m,n) = 1")), t156), @tactics.disch_tac), t157), t158), @int.asm_arith_tac)
   let t155 = @parser.parse_term("m:num")
   let t160 = @list.List([@tactics.then_tac(@tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("gcd(m:num,n)"), t155]), fib_increases_lt())), @int.asm_arith_tac), t159])

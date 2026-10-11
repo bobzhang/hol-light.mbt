@@ -49,7 +49,7 @@ pub fn left_or_over_and() -> @kernel.Thm {
 ///|
 /// EQ_EXPAND
 fn step_4() -> Unit raise {
-  let t2 = @simp.rewrite_tac(@list.empty())
+  let t2 = @simp.rewrite_tac(@list.List([]))
   let t1 = @class.bool_cases_tac(@parser.parse_term("y:bool"))
   let t3 = @tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t1), t2)
   eq_expand_c.set(@tactics.prove(@parser.parse_term("(x = y) = ((~x \\/ y) /\\ (~y \\/ x))"), t3))
@@ -83,7 +83,7 @@ pub fn imp_expand() -> @kernel.Thm {
 ///|
 /// COND_EXPAND
 fn step_6() -> Unit raise {
-  let t7 = @simp.rewrite_tac(@list.empty())
+  let t7 = @simp.rewrite_tac(@list.List([]))
   let t6 = @class.bool_cases_tac(@parser.parse_term("z:bool"))
   let t5 = @class.bool_cases_tac(@parser.parse_term("y:bool"))
   let t8 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t5), t6), t7)

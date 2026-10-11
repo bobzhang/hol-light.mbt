@@ -411,7 +411,7 @@ pub fn m_verify_raw(x86 : (Int64, Int64), x87 : Int64, x88 : Int64, x89 : Int64,
         } else {
           ()
         }
-        let domains_1 = mk_domains(mono_2, domain_3, @list.empty())
+        let domains_1 = mk_domains(mono_2, domain_3, @list.List([]))
         let (tree1, inds_2) = rec_verify(@lib.last(domains_1), r1)
         try {
           let pp_3 = find_p((x145 : Int64) => ((x111, x112, x113, x114, x115) => mono_test_l(fs_list, x111, x112, x113, x114, x115))(mono_2, domain_3, domains_1, inds_2, x145), ps)
@@ -571,7 +571,7 @@ pub fn m_verify_raw0(x146 : Int64, x147 : Int64, x148 : Int64, x149 : @list.List
   let certificate = x150
   let xx = x151
   let zz = x152
-  m_verify_raw((0L, 0L), p_split, p_min, p_max, fs_list, certificate, @informal_taylor.mk_m_center_domain(p_split, xx, zz), @list.empty())
+  m_verify_raw((0L, 0L), p_split, p_min, p_max, fs_list, certificate, @informal_taylor.mk_m_center_domain(p_split, xx, zz), @list.List([]))
 }
 
 ///|
@@ -680,7 +680,7 @@ pub fn m_verify_list(x153 : Int64, x154 : Int64, x155 : Int64, x156 : @list.List
       }
     }
   }
-  rec_verify(certificate_list, @list.empty(), @list.empty())
+  rec_verify(certificate_list, @list.List([]), @list.List([]))
 }
 
 ///|

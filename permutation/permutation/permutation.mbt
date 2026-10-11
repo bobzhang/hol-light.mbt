@@ -163,7 +163,7 @@ pub fn permutation_mem() -> @kernel.Thm {
 ///|
 /// PERMUTATION_COUNT
 fn step_11() -> Unit raise {
-  let t10 = @meson.meson_tac(@list.empty())
+  let t10 = @meson.meson_tac(@list.List([]))
   let t11 = @tactics.then_tac(@simp.rewrite_tac(@list.List([permutation(), @permuted.permuted_count(), count_revperm()])), t10)
   permutation_count_c.set(@tactics.prove(@parser.parse_term("!l. PERMUTATION l <=> (!x. COUNT x l = if x < LENGTH l then 1 else 0)"), t11))
 }
@@ -180,8 +180,8 @@ pub fn permutation_count() -> @kernel.Thm {
 ///|
 /// LIST_UNIQ_PERMUTED_SET_OF_LIST
 fn step_12() -> Unit raise {
-  let t15 = @meson.meson_tac(@list.empty())
-  let t14 = @simp.asm_rewrite_tac(@list.empty())
+  let t15 = @meson.meson_tac(@list.List([]))
+  let t14 = @simp.asm_rewrite_tac(@list.List([]))
   let t13 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_set_of_list(), @permuted.permuted_count(), @morelist.mem_count()]))
   let t12 = @tactics.repeat_tac(@tactics.strip_tac)
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@morelist.list_uniq_count()])), t12), t13), t14), t15)

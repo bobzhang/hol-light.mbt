@@ -50,7 +50,7 @@ test "impconv matches impconv.ml" {
   } catch {
     e => fail("setup: \{e}")
   }
-  let none : @list.List[(String, @kernel.Thm)] = @list.empty()
+  let none : @list.List[(String, @kernel.Thm)] = @list.List([])
   let ths = (a : Array[@kernel.Thm]) => @list.List(a)
   let goal = (s : String) => (none, tm(s))
   try {

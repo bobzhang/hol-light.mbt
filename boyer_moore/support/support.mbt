@@ -291,7 +291,7 @@ fn[TB] number_list_p_l(x64 : Int64, x65 : @list.List[TB]) -> @list.List[(TB, Int
   let n = x64
   let l_1 = x65
   if @list.List::is_empty(l_1) {
-    @list.empty()
+    @list.List([])
   } else {
     let t66 = @lib.tl(l_1)
     let t67 = number_list_p_l(@lib.add63(n, 1L), t66)
@@ -321,7 +321,7 @@ pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] insert_on_snd(x68 : (TA, TB), x
 pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] sort_on_snd(x70 : @list.List[(TA, TB)]) -> @list.List[(TA, TB)] raise {
   let l = x70
   if @list.List::is_empty(l) {
-    @list.empty()
+    @list.List([])
   } else {
     let t71 = sort_on_snd(@lib.tl(l))
     insert_on_snd(@lib.hd(l), t71)
@@ -381,7 +381,7 @@ pub fn find_bm_terms(x74 : (@kernel.Term) -> Bool raise, x75 : @kernel.Term) -> 
         e => raise e
       }
     }
-    accum(@list.empty(), p, tm)
+    accum(@list.List([]), p, tm)
   } catch {
     Failure(_) => raise Failure("find_bm_terms")
     e => raise e

@@ -151,7 +151,7 @@ pub fn get_priority(x : Unit) -> String raise {
 ///|
 /// prioritize_int, prioritize_num, prioritize_real, pop_priority, get_priority
 fn step_1() -> Unit raise {
-  let v = Ref::{ val: @list.empty() }
+  let v = Ref::{ val: @list.List([]) }
   let prioritize_int : (Unit) -> Unit raise = fn(x3 : Unit) -> Unit raise {
     let _ = x3
     {

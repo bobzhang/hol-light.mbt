@@ -75,7 +75,7 @@ pub fn use_equality_subst(x8 : Bool, x9 : Bool, x10 : @kernel.Thm, x11 : @kernel
 ///|
 /// EQ_EQ_IMP_DISJ_EQ
 fn step_1() -> Unit raise {
-  let t14 = @simp.asm_rewrite_tac(@list.empty())
+  let t14 = @simp.asm_rewrite_tac(@list.List([]))
   let t15 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t14)
   eq_eq_imp_disj_eq_c.set(@tactics.prove(@parser.parse_term("!x x' y y'. (x = x') /\\ (y = y') ==> ((x \\/ y) = (x' \\/ y'))"), t15))
 }
@@ -138,11 +138,11 @@ pub fn use_equality_heuristic(x19 : @kernel.Term, x20 : Bool) -> ((@list.List[(@
     match (try {
       (true, @support.hashi(fn(x37 : @list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise {
         @lib.rev(x37)
-      }, split_disjuncts(@equal.rhs, @list.empty(), literals)))
+      }, split_disjuncts(@equal.rhs, @list.List([]), literals)))
     } catch {
       Failure(_) => (false, @support.hashi(fn(x38 : @list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise {
         @lib.rev(x38)
-      }, split_disjuncts(@equal.lhs, @list.empty(), literals)))
+      }, split_disjuncts(@equal.lhs, @list.List([]), literals)))
       e => raise e
     }) {
       (right, (overs, More(neq_p, tail=unders))) => {

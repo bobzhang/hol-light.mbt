@@ -28,7 +28,7 @@ pub fn is_eq(tm : Term) -> Bool {
 
 ///|
 pub fn mk_eq(l : Term, r : Term) -> Term raise {
-  let eq = @kernel.mk_const("=", @list.empty())
+  let eq = @kernel.mk_const("=", @list.List([]))
   let ty = @kernel.type_of(l)
   let eq_tm = @kernel.inst(@list.List([(ty, @kernel.aty)]), eq)
   @kernel.mk_comb(@kernel.mk_comb(eq_tm, l), r) catch {
@@ -167,7 +167,7 @@ pub fn dest_binary(s : String, tm : Term) -> (Term, Term) raise {
 
 ///|
 pub fn mk_binary(s : String, l : Term, r : Term) -> Term raise {
-  let c = @kernel.mk_const(s, @list.empty())
+  let c = @kernel.mk_const(s, @list.List([]))
   @kernel.mk_comb(@kernel.mk_comb(c, l), r) catch {
     _ => raise Failure("mk_binary")
   }
@@ -198,7 +198,7 @@ pub fn variables(tm : Term) -> List[Term] {
     }
   }
 
-  vars(@list.empty(), tm)
+  vars(@list.List([]), tm)
 }
 
 ///|
@@ -306,7 +306,7 @@ pub fn type_match(
 pub fn mk_mconst(c : String, ty : HolType) -> Term raise {
   let result = try {
     let uty = @kernel.get_const_type(c)
-    let mat = type_match(uty, ty, @list.empty())
+    let mat = type_match(uty, ty, @list.List([]))
     let con = @kernel.mk_const(c, mat)
     if @kernel.type_of(con) == ty {
       Some(con)
@@ -331,7 +331,7 @@ pub fn mk_icomb(tm1 : Term, tm2 : Term) -> Term raise {
     Tyapp(_) => raise @lib.MatchFailure("basics.ml: mk_icomb")
     Tyvar(_) => raise Failure("dest_type: type variable not a constructor")
   }
-  let tyins = type_match(ty, @kernel.type_of(tm2), @list.empty())
+  let tyins = type_match(ty, @kernel.type_of(tm2), @list.List([]))
   @kernel.mk_comb(@kernel.inst(tyins, tm1), tm2)
 }
 
@@ -343,7 +343,7 @@ pub fn list_mk_icomb(cname : String, args : List[Term]) -> Term raise {
     (g, a, acc) => type_match(g, @kernel.type_of(a), acc),
     atys,
     args,
-    @list.empty(),
+    @list.List([]),
   ) catch {
     Failure(msg) => raise Failure(msg)
     _ => abort("list_mk_icomb: unexpected error")
@@ -406,7 +406,7 @@ pub fn find_terms(p : (Term) -> Bool raise?, tm : Term) -> List[Term] raise? {
     }
   }
 
-  accum(@list.empty(), tm)
+  accum(@list.List([]), tm)
 }
 
 // ---------------------------------------------------------------------------
@@ -431,7 +431,7 @@ pub fn dest_binder(s : String, tm : Term) -> (Term, Term) raise {
 
 ///|
 pub fn mk_binder(op : String, v : Term, tm : Term) -> Term raise {
-  let c = @kernel.mk_const(op, @list.empty())
+  let c = @kernel.mk_const(op, @list.List([]))
   @kernel.mk_comb(
     @kernel.inst(@list.List([(@kernel.type_of(v), @kernel.aty)]), c),
     @kernel.mk_abs(v, tm),
@@ -786,7 +786,7 @@ pub fn mk_finty(n : @num.Num) -> HolType raise {
   }
   fn finty(n : @num.Num) -> HolType raise {
     if n == @num.num_1 {
-      @kernel.mk_type("1", @list.empty())
+      @kernel.mk_type("1", @list.List([]))
     } else {
       let name = if @num.mod_num(n, @num.num_2) == @num.num_0 {
         "tybit0"
@@ -846,7 +846,7 @@ pub fn make_args(
 pub fn find_path(p : (Term) -> Bool raise, tm : Term) -> String raise {
   fn go(tm : Term) -> List[String] raise {
     if p(tm) {
-      return @list.empty()
+      return @list.List([])
     }
     if @kernel.is_abs(tm) {
       return go(body(tm)).prepend("b")
@@ -893,7 +893,7 @@ pub fn atoms(tm : Term) -> List[Term] raise {
     }
   }
 
-  @lib.foldl((a, x, _) => a.prepend(x), @list.empty(), go(@lib.undefined(), tm))
+  @lib.foldl((a, x, _) => a.prepend(x), @list.List([]), go(@lib.undefined(), tm))
 }
 
 ///|

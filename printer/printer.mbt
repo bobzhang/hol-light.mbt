@@ -124,7 +124,7 @@ pub fn reserved_words() -> List[String] {
 // ---------------------------------------------------------------------------
 
 ///|
-let binder_list : Ref[List[String]] = Ref::{ val: @list.empty(), }
+let binder_list : Ref[List[String]] = Ref::{ val: @list.List([]), }
 
 ///|
 pub fn unparse_as_binder(n : String) -> Unit {
@@ -147,7 +147,7 @@ pub fn binders() -> List[String] {
 }
 
 ///|
-let prefix_list : Ref[List[String]] = Ref::{ val: @list.empty(), }
+let prefix_list : Ref[List[String]] = Ref::{ val: @list.List([]), }
 
 ///|
 pub fn unparse_as_prefix(n : String) -> Unit {
@@ -171,7 +171,7 @@ pub fn prefixes() -> List[String] {
 
 ///|
 let infix_list : Ref[List[(String, (Int64, String))]] = Ref::{
-  val: @list.empty(),
+  val: @list.List([]),
 }
 
 ///|
@@ -221,12 +221,12 @@ pub fn infixes() -> List[(String, (Int64, String))] {
 /// The interface: `(name, (constant, type))` entries mapping overloaded or
 /// interface names to the underlying constants.
 pub let the_interface : Ref[List[(String, (String, HolType))]] = Ref::{
-  val: @list.empty(),
+  val: @list.List([]),
 }
 
 ///|
 pub let the_overload_skeletons : Ref[List[(String, HolType)]] = Ref::{
-  val: @list.empty(),
+  val: @list.List([]),
 }
 
 ///|
@@ -477,12 +477,12 @@ pub type UserPrinter = (String, (Formatter, Term) -> Unit raise)
 
 ///|
 let user_printers : Ref[List[(String, (Formatter, Term) -> Unit raise)]] = Ref::{
-  val: @list.empty(),
+  val: @list.List([]),
 }
 
 ///|
 let user_color_printers : Ref[List[(String, (Formatter, Term) -> Unit raise)]] = Ref::{
-  val: @list.empty(),
+  val: @list.List([]),
 }
 
 ///|

@@ -3944,7 +3944,7 @@ fn step_22() -> Unit raise {
       )
       let t451 = @drule.match_mp(
         @meson.meson(
-          @list.empty(),
+          @list.List([]),
           @parser.parse_term(
             "b = b' /\\ c = c' /\\ d = d'\n        ==> b + d':num = b' + d /\\ 4 * b + d' = 4 * b' + d",
           ),
@@ -4086,7 +4086,7 @@ fn step_22() -> Unit raise {
       )
       let t435 = @drule.match_mp(
         @meson.meson(
-          @list.empty(),
+          @list.List([]),
           @parser.parse_term(
             "b = b' /\\ c = c' /\\ d = d'\n        ==> 5 * b + c' + d' = 5 * b' + c + d",
           ),
@@ -4199,9 +4199,9 @@ fn step_22() -> Unit raise {
       ) raise) raise {
         @tactics.all_tac
       })
-      let t423 = @simp.asm_rewrite_tac(@list.empty())
+      let t423 = @simp.asm_rewrite_tac(@list.List([]))
       let t422 = @class.asm_cases_tac(@parser.parse_term("e':num = e"))
-      let t421 = @simp.asm_rewrite_tac(@list.empty())
+      let t421 = @simp.asm_rewrite_tac(@list.List([]))
       let t420 = @class.asm_cases_tac(@parser.parse_term("a':num = a"))
       let t419 = @tactics.pop_assum_list(fn(
         x418 : @list.List[@kernel.Thm],
@@ -4227,7 +4227,7 @@ fn step_22() -> Unit raise {
         @tactics.all_tac
       })
       let t417 = @simp.expand_tac("two")
-      let t416 = @simp.asm_rewrite_tac(@list.empty())
+      let t416 = @simp.asm_rewrite_tac(@list.List([]))
       let t414 = @parser.parse_term("2 * h * m = 2 * m * h")
       let t415 = @tactics.subst1_tac(@theorems.ac(@arith.mult_ac())(t414))
       let t412 = @parser.parse_term("2 * h * l = 2 * l * h")
@@ -7001,7 +7001,7 @@ fn step_22() -> Unit raise {
           @tactics.prove(x686.0, x686.1)
         })(t695),
       )
-      let t697 = @simp.rewrite_tac(@list.empty())
+      let t697 = @simp.rewrite_tac(@list.List([]))
       let t698 = (@parser.parse_term("(NUMERAL n = NUMERAL n) <=> T"), t697)
       let rth_2 = standardize(
         (fn(
@@ -8521,7 +8521,7 @@ fn step_39() -> Unit raise {
     @parser.parse_term("(!n. n < 0 ==> P n) <=> T"),
     t790,
   )
-  let t791 = @meson.meson_tac(@list.empty())
+  let t791 = @meson.meson_tac(@list.List([]))
   let t792 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@arith.lt()])),
     t791,
@@ -8580,7 +8580,7 @@ pub fn expand_cases_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// EXP_MOD_CONV
 fn step_40() -> Unit raise {
-  let t801 = @simp.rewrite_tac(@list.empty())
+  let t801 = @simp.rewrite_tac(@list.List([]))
   let t800 = @tactics.conv_tac(@arith.mod_down_conv)
   let t799 = @simp.rewrite_tac(@list.List([@arith.exp(), @arith.exp_add()]))
   let t798 = @simp.rewrite_tac(

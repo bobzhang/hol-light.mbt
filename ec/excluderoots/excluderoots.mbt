@@ -58,7 +58,7 @@ fn step_2() -> Unit raise {
       }
     })(t69(x70))
   })
-  let t65 = @simp.asm_rewrite_tac(@list.empty())
+  let t65 = @simp.asm_rewrite_tac(@list.List([]))
   let t63 = @parser.parse_term("p:num")
   let t64 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("n:num"), t63]), @pocklington.fermat_little_prime()))
   let t62 = @simp.rewrite_tac(@list.List([@int.int_of_num_pow(), @int.int_of_num_rem(), @int.int_of_num_eq()]))
@@ -127,7 +127,7 @@ fn step_2() -> Unit raise {
     })(t14(x15))
   })
   let t10 = @tactics.match_mp_tac(@int.integer_rule(@parser.parse_term("(xp == x) (mod p)\n      ==> (xp:int == c2 * x pow 2 + c1 * x + c0) (mod p)\n           ==> (&0 == c2 * x pow 2 + (c1 - &1) * x + c0) (mod p)")))
-  let t9 = @simp.asm_rewrite_tac(@list.empty())
+  let t9 = @simp.asm_rewrite_tac(@list.List([]))
   let t74 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_then(fn(x6 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x6
     let t8 = @tactics.mp_tac(th)

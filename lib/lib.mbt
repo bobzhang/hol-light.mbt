@@ -136,7 +136,7 @@ pub fn[A, B] map(
   for x in l {
     out.push(f(x))
   }
-  prepend_array(out, @list.empty())
+  prepend_array(out, @list.List([]))
 }
 
 ///|
@@ -153,7 +153,7 @@ pub fn[A] butlast(l : @list.List[A]) -> @list.List[A] raise {
     failwith("butlast")
   }
   let arr = l.to_array()
-  prepend_array(arr[:arr.length() - 1], @list.empty())
+  prepend_array(arr[:arr.length() - 1], @list.List([]))
 }
 
 ///|
@@ -195,7 +195,7 @@ pub fn[A, B, C] map2(
       _ => raise Failure("map2: length mismatch")
     }
   }
-  prepend_array(out, @list.empty())
+  prepend_array(out, @list.List([]))
 }
 
 ///|
@@ -206,7 +206,7 @@ pub fn[A, B] mapi(
   l : @list.List[A],
 ) -> @list.List[B] raise? {
   let arr = l.to_array()
-  let mut acc = @list.empty()
+  let mut acc = @list.List([])
   for i = arr.length() - 1; i >= 0; i = i - 1 {
     acc = acc.prepend(f(i, arr[i]))
   }
@@ -374,7 +374,7 @@ pub fn[A, B] splitlist(
     ls.push(l)
     x = r
   }
-  (prepend_array(ls, @list.empty()), x)
+  (prepend_array(ls, @list.List([])), x)
 }
 
 ///|
@@ -383,7 +383,7 @@ pub fn[A, B] rev_splitlist(
   dest : (A) -> (A, B) raise,
   x : A,
 ) -> (A, @list.List[B]) raise {
-  let mut ls = @list.empty()
+  let mut ls = @list.List([])
   let mut x = x
   while true {
     let (l, r) = dest(x) catch {
@@ -400,7 +400,7 @@ pub fn[A, B] rev_splitlist(
 /// `striplist dest x`: the leaves of the binary tree that `dest` unfolds,
 /// left to right. As in OCaml, right subtrees are destructed first.
 pub fn[A] striplist(dest : (A) -> (A, A) raise, x : A) -> @list.List[A] raise {
-  let mut acc = @list.empty()
+  let mut acc = @list.List([])
   let stack = [x]
   while stack.pop() is Some(t) {
     let (l, r) = dest(t) catch {
@@ -430,7 +430,7 @@ pub fn[A, B, C] nsplit(
     out.push(l)
     x = r
   }
-  (prepend_array(out, @list.empty()), x)
+  (prepend_array(out, @list.List([])), x)
 }
 
 // ---------------------------------------------------------------------------
@@ -439,7 +439,7 @@ pub fn[A, B, C] nsplit(
 
 ///|
 pub fn[A] replicate(x : A, n : Int) -> @list.List[A] {
-  let mut acc = @list.empty()
+  let mut acc = @list.List([])
   for _ in 0..<n {
     acc = acc.prepend(x)
   }
@@ -449,7 +449,7 @@ pub fn[A] replicate(x : A, n : Int) -> @list.List[A] {
 ///|
 /// `m -- n`: the list `[m; m+1; ...; n]` (empty if `m > n`).
 pub fn range(m : Int64, n : Int64) -> @list.List[Int64] {
-  let mut acc = @list.empty()
+  let mut acc = @list.List([])
   let mut i = n
   while i >= m {
     acc = acc.prepend(i)
@@ -565,20 +565,20 @@ pub fn[A] partition(
 ) -> (@list.List[A], @list.List[A]) raise? {
   let suf = suffixes(l)
   let elems = l.to_array()
-  let mut yes = @list.empty()
-  let mut no = @list.empty()
+  let mut yes = @list.List([])
+  let mut no = @list.List([])
   for i = elems.length() - 1; i >= 0; i = i - 1 {
     let h = elems[i]
     let t = suf[i + 1]
     if p(h) {
       if physical_equal(yes, t) {
         yes = suf[i]
-        no = @list.empty()
+        no = @list.List([])
       } else {
         yes = yes.prepend(h)
       }
     } else if physical_equal(no, t) {
-      yes = @list.empty()
+      yes = @list.List([])
       no = suf[i]
     } else {
       no = no.prepend(h)
@@ -595,7 +595,7 @@ pub fn[A, B] mapfilter(
   l : @list.List[A],
 ) -> @list.List[B] raise {
   let elems = l.to_array()
-  let mut acc = @list.empty()
+  let mut acc = @list.List([])
   for i = elems.length() - 1; i >= 0; i = i - 1 {
     let y = f(elems[i]) catch {
       Failure(_) => continue
@@ -633,7 +633,7 @@ pub fn[A, B] tryfind(f : (A) -> B raise, l : @list.List[A]) -> B raise {
 ///|
 pub fn[A] flat(l : @list.List[@list.List[A]]) -> @list.List[A] {
   let arr = l.to_array()
-  let mut acc = @list.empty()
+  let mut acc = @list.List([])
   for i = arr.length() - 1; i >= 0; i = i - 1 {
     acc = arr[i].concat(acc)
   }
@@ -679,7 +679,7 @@ pub fn[A] chop_list(
       Empty => failwith("chop_list")
     }
   }
-  (prepend_array(prefix, @list.empty()), rest)
+  (prepend_array(prefix, @list.List([])), rest)
 }
 
 ///|
@@ -739,7 +739,7 @@ pub fn[A : OCompare] union(
 
 ///|
 pub fn[A : OCompare] unions(l : @list.List[@list.List[A]]) -> @list.List[A] {
-  itlist(union, l, @list.empty())
+  itlist(union, l, @list.List([]))
 }
 
 ///|
@@ -826,7 +826,7 @@ pub fn[A, B] zip(
   if a1.length() != a2.length() {
     failwith("zip")
   }
-  let mut acc = @list.empty()
+  let mut acc = @list.List([])
   for i = a1.length() - 1; i >= 0; i = i - 1 {
     acc = acc.prepend((a1[i], a2[i]))
   }
@@ -836,8 +836,8 @@ pub fn[A, B] zip(
 ///|
 pub fn[A, B] unzip(l : @list.List[(A, B)]) -> (@list.List[A], @list.List[B]) {
   let arr = l.to_array()
-  let mut xs = @list.empty()
-  let mut ys = @list.empty()
+  let mut xs = @list.List([])
+  let mut ys = @list.List([])
   for i = arr.length() - 1; i >= 0; i = i - 1 {
     xs = xs.prepend(arr[i].0)
     ys = ys.prepend(arr[i].1)
@@ -858,7 +858,7 @@ pub fn[A, B] shareout(
     out.push(l)
     rest = r
   }
-  prepend_array(out, @list.empty())
+  prepend_array(out, @list.List([]))
 }
 
 ///|
@@ -888,7 +888,7 @@ pub fn[A] sort(
   cmp : (A, A) -> Bool raise?,
   l : @list.List[A],
 ) -> @list.List[A] raise? {
-  let mut out = @list.empty()
+  let mut out = @list.List([])
   let tasks = [SortList(l)]
   while tasks.pop() is Some(task) {
     match task {
@@ -972,18 +972,18 @@ pub fn[A] mergesort(
     return l
   }
   // mergepairs l1 l2, with l1 and l2 lists of sorted runs.
-  let mut l1 : @list.List[@list.List[A]] = @list.empty()
+  let mut l1 : @list.List[@list.List[A]] = @list.List([])
   let mut l2 : @list.List[@list.List[A]] = map(x => @list.singleton(x), l)
   while true {
     match (l1, l2) {
       (More(s, tail=Empty), Empty) => return s
       (_, Empty) => {
         l2 = l1
-        l1 = @list.empty()
+        l1 = @list.List([])
       }
       (_, More(s1, tail=Empty)) => {
         l1 = l1.prepend(s1)
-        l2 = @list.empty()
+        l2 = @list.List([])
       }
       (_, More(s1, tail=More(s2, tail=ss))) => {
         l1 = l1.prepend(merge(ord, s1, s2))
@@ -1039,7 +1039,7 @@ pub fn explode(s : String) -> @list.List[String] {
   for c in s {
     out.push(c.to_string())
   }
-  prepend_array(out, @list.empty())
+  prepend_array(out, @list.List([]))
 }
 
 // ---------------------------------------------------------------------------
@@ -1078,7 +1078,7 @@ pub fn[A, B, C] allpairs(
 ) -> @list.List[C] raise? {
   let a1 = l1.to_array()
   let a2 = l2.to_array()
-  let mut acc = @list.empty()
+  let mut acc = @list.List([])
   for i = a1.length() - 1; i >= 0; i = i - 1 {
     for j = a2.length() - 1; j >= 0; j = j - 1 {
       acc = acc.prepend(f(a1[i], a2[j]))
@@ -1227,7 +1227,7 @@ pub fn[A] unions_eq(
   eq : (A, A) -> Bool raise?,
   l : @list.List[@list.List[A]],
 ) -> @list.List[A] raise? {
-  itlist((x, acc) => union_eq(eq, x, acc), l, @list.empty())
+  itlist((x, acc) => union_eq(eq, x, acc), l, @list.List([]))
 }
 
 ///|
@@ -1574,7 +1574,7 @@ fn[A] sort_run(
       let n2 = n - n1
       let (s1, l2) = sort_run_rev(cmp, n1, l)
       let (s2, tl) = sort_run_rev(cmp, n2, l2)
-      (sort_rev_merge_rev(cmp, s1, s2, @list.empty()), tl)
+      (sort_rev_merge_rev(cmp, s1, s2, @list.List([])), tl)
     }
   }
 }
@@ -1618,7 +1618,7 @@ fn[A] sort_run_rev(
       let n2 = n - n1
       let (s1, l2) = sort_run(cmp, n1, l)
       let (s2, tl) = sort_run(cmp, n2, l2)
-      (sort_rev_merge(cmp, s1, s2, @list.empty()), tl)
+      (sort_rev_merge(cmp, s1, s2, @list.List([])), tl)
     }
   }
 }
@@ -1629,7 +1629,7 @@ pub fn[A, B] list_rev_map(
   f : (A) -> B raise?,
   l : @list.List[A],
 ) -> @list.List[B] raise? {
-  let mut acc = @list.empty()
+  let mut acc = @list.List([])
   for x in l {
     acc = acc.prepend(f(x))
   }
@@ -1776,7 +1776,7 @@ pub fn[A : OCompare, B] list_remove_assoc(
   l : @list.List[(A, B)],
 ) -> @list.List[(A, B)] {
   match l {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(p, tail=t) =>
       if p.0.ocompare(a) == 0 {
         t

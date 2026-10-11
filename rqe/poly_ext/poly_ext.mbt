@@ -1260,7 +1260,7 @@ pub fn lem3() -> @kernel.Thm {
 /// `SIMP_POW_CONV`
 pub fn simp_pow_conv(x249 : @kernel.Term) -> @kernel.Thm raise {
   let tm = x249
-  let t250 = @num_calc_simp.arith_simp_conv(@list.empty())
+  let t250 = @num_calc_simp.arith_simp_conv(@list.List([]))
   let thm1 = @equal.thenc(@simp.rewrite_conv(@list.List([@equal.gsym(@realax.real_mul_assoc()), lem1(), lem2(), pow_prod_sum()])), t250)(tm)
   let (_, r) = @kernel.dest_eq(@kernel.concl(thm1))
   if @lib.can(@rqe_real.dest_pow, r) {

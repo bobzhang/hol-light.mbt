@@ -220,7 +220,7 @@ fn step_12() -> Unit raise {
   let t54 = @simp.asm_rewrite_tac(@list.List([@sets.in_()]))
   let t53 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.forall_in_image()]))
   let t52 = @simp.asm_rewrite_tac(@list.List([@grouptheory.group_isomorphisms_v1(), @grouptheory.group_homomorphism_v1()]))
-  let t51 = @simp.asm_rewrite_tac(@list.empty())
+  let t51 = @simp.asm_rewrite_tac(@list.List([]))
   let t48 = @parser.parse_term("b:A")
   let t49 = @parser.parse_term("a:A")
   let t50 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:A ring"), t49, t48]), @montgomery.montgomery_group_v1()))

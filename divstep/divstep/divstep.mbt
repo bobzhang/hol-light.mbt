@@ -86,7 +86,7 @@ pub fn divstep_stays_odd() -> @kernel.Thm {
 ///|
 /// DIVSTEP_STAYS_ZERO
 fn step_6() -> Unit raise {
-  let t9 = @meson.meson_tac(@list.empty())
+  let t9 = @meson.meson_tac(@list.List([]))
   let t8 = @simp.rewrite_tac(@list.List([@int.int_mul_lzero(), @int.int_add_lid(), @int.int_div_zero(), @pair.pair_eq()]))
   let t10 = @tactics.then_tac(@tactics.then_tac(@simp.simp_tac(@list.List([divstep(), @theorems.imp_conj(), @int.int_rem_zero(), @int.int_of_num_eq(), @calc_num.arith_eq()])), t8), t9)
   divstep_stays_zero_c.set(@tactics.prove(@parser.parse_term("!d f g d' f' g'.\n        g = &0 /\\\n        divstep(d,f,g) = d',f',g'\n        ==> g' = &0"), t10))
@@ -107,7 +107,7 @@ fn step_7() -> Unit raise {
   let t33 = @tactics.conv_tac(@int.integer_rule)
   let t31 = @parser.parse_term("p:int")
   let t32 = @tactics.spec_tac(@parser.parse_term("&2:int"), t31)
-  let t30 = @simp.asm_rewrite_tac(@list.empty())
+  let t30 = @simp.asm_rewrite_tac(@list.List([]))
   let t28 = @parser.parse_term("&2:int")
   let t29 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("m:int"), t28]), @int.int_division_simp()))
   let t27 = @tactics.match_mp_tac(@int.integer_rule(@parser.parse_term("coprime(k:int,m)\n      ==> (d divides m /\\ d divides p <=>\n           d divides m /\\ d divides (k * p))")))
@@ -152,7 +152,7 @@ fn step_7() -> Unit raise {
     }
   })))
   let t64 = @tactics.conv_tac(@int.int_reduce_conv)
-  let t63 = @simp.asm_rewrite_tac(@list.empty())
+  let t63 = @simp.asm_rewrite_tac(@list.List([]))
   let t62 = @tactics.mp_tac(@bool.spec(@parser.parse_term("g:int"), @int.int_rem_2_cases()))
   let t60 = @equal.gsym(@int.int_add_rem())
   let t61 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@int.int_sub_rem()), t60]))
@@ -310,7 +310,7 @@ fn step_10() -> Unit raise {
   let t125 = @metis.asm_metis_tac(@list.List([divstep_stays_odd(), @pair.pair()]))
   let t122 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t123 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t122)
-  let t124 = @list.List([@meson.meson_tac(@list.empty()), t123])
+  let t124 = @list.List([@meson.meson_tac(@list.List([])), t123])
   let t126 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@nums.induct_tac, @simp.asm_simp_tac(@list.List([@iter.iter_alt(), @pair.pair_eq()]))), t124), t125)
   iter_divstep_odd_c.set(@tactics.prove(@parser.parse_term("!n d f g d' f' g'.\n        f rem &2 = &1 /\\\n        ITER n divstep (d,f,g) = d',f',g'\n        ==> f' rem &2 = &1"), t126))
 }
@@ -330,7 +330,7 @@ fn step_11() -> Unit raise {
   let t130 = @metis.asm_metis_tac(@list.List([divstep_stays_zero(), @pair.pair()]))
   let t127 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t128 = @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t127)
-  let t129 = @list.List([@meson.meson_tac(@list.empty()), t128])
+  let t129 = @list.List([@meson.meson_tac(@list.List([])), t128])
   let t131 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@nums.induct_tac, @simp.rewrite_tac(@list.List([@iter.iter_alt(), @pair.pair_eq()]))), t129), t130)
   iter_divstep_zero_c.set(@tactics.prove(@parser.parse_term("!n d f g d' f' g'.\n        g = &0 /\\\n        ITER n divstep (d,f,g) = d',f',g'\n        ==> g' = &0"), t131))
 }

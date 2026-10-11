@@ -1309,9 +1309,9 @@ pub fn sub_ineq_lo() -> @kernel.Thm {
 ///|
 /// MUL_INEQ_HI
 fn step_42() -> Unit raise {
-  let t217 = @simp.asm_rewrite_tac(@list.empty())
+  let t217 = @simp.asm_rewrite_tac(@list.List([]))
   let t216 = @tactics.match_mp_tac(@real.real_le_mul2())
-  let t215 = @simp.asm_rewrite_tac(@list.empty())
+  let t215 = @simp.asm_rewrite_tac(@list.List([]))
   let t214 = @tactics.exists_tac(@parser.parse_term("y1 * y2"))
   let t218 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.disch_tac, @tactics.match_mp_tac(@realax.real_le_trans())), t214), t215), t216), t217)
   let t219 = (@parser.parse_term("&0 <= x1 /\\ &0 <= x2 /\\ x1 <= y1 /\\ x2 <= y2 /\\ y1 * y2 <= y ==> x1 * x2 <= y"), t218)
@@ -1335,9 +1335,9 @@ pub fn mul_ineq_hi() -> @kernel.Thm {
 ///|
 /// MUL_INEQ_POS_CONST_HI
 fn step_43() -> Unit raise {
-  let t225 = @simp.asm_rewrite_tac(@list.empty())
+  let t225 = @simp.asm_rewrite_tac(@list.List([]))
   let t224 = @tactics.match_mp_tac(@real.real_le_lmul())
-  let t223 = @simp.asm_rewrite_tac(@list.empty())
+  let t223 = @simp.asm_rewrite_tac(@list.List([]))
   let t222 = @tactics.exists_tac(@parser.parse_term("x * y2"))
   let t221 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t226 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t221), t222), t223), t224), t225)

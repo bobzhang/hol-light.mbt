@@ -411,7 +411,7 @@ pub fn folterm_of_sexp(x45 : Sexp) -> Folterm raise {
   let sexp = x45
   match sexp {
     Sexp::Atom(s) if (@lib.string_sub(s, 0, 1) == "v") => Folterm::Variable(s)
-    Sexp::Atom(s_1) => Folterm::Function(s_1, @list.empty())
+    Sexp::Atom(s_1) => Folterm::Function(s_1, @list.List([]))
     Sexp::List(More(Sexp::Atom(f), tail=args)) => Folterm::Function(f, @lib.map(folterm_of_sexp, args))
     _ => raise Failure("folterm_of_sexp: malformed sexpression term representation")
   }
@@ -422,7 +422,7 @@ pub fn folterm_of_sexp(x45 : Sexp) -> Folterm raise {
 pub fn folatom_of_sexp(x46 : Sexp) -> Literal raise {
   let sexp = x46
   match sexp {
-    Sexp::Atom(r) => Literal::Literal(true, r, @list.empty())
+    Sexp::Atom(r) => Literal::Literal(true, r, @list.List([]))
     Sexp::List(More(Sexp::Atom(r_1), tail=args)) => Literal::Literal(true, r_1, @lib.map(folterm_of_sexp, args))
     _ => raise Failure("folatom_of_sexp: malformed sexpression atom representation")
   }
@@ -482,9 +482,9 @@ pub fn hol_of_folliteral(x56 : (@lib.Func[String, @kernel.Term], @lib.Func[Strin
   match lit {
     Literal::Literal(s, "false", Empty) => {
       if s {
-        @kernel.mk_const("F", @list.empty())
+        @kernel.mk_const("F", @list.List([]))
       } else {
-        @bool.mk_neg(@kernel.mk_const("F", @list.empty()))
+        @bool.mk_neg(@kernel.mk_const("F", @list.List([])))
       }
     }
     Literal::Literal(s_1, "=", More(l, tail=More(r, tail=Empty))) => {
@@ -534,7 +534,7 @@ pub fn hol_of_folclause(x63 : (@lib.Func[String, @kernel.Term], @lib.Func[String
   let trp = x63
   let cls = x64
   match cls {
-    Empty => @kernel.mk_const("F", @list.empty())
+    Empty => @kernel.mk_const("F", @list.List([]))
     More(c, tail=Empty) => hol_of_folliteral(trp, c)
     More(c_1, tail=cs) => {
       let rawcls = @lib.map((x65 : Literal) => hol_of_folliteral(trp, x65), cls)
@@ -925,7 +925,7 @@ pub fn process_proofsteps(x142 : @list.List[@kernel.Thm], x143 : (@lib.Func[Stri
   let asms = x144
   let steps = x145
   match steps {
-    Empty => (asms, @list.empty())
+    Empty => (asms, @list.List([]))
     More((lab, _, _) as st, tail=sts) => {
       try {
         let th = process_proofstep(ths, trp, asms, st)
@@ -947,12 +947,12 @@ pub fn prover9_refute(x146 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
     (fn(x151 : @list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise {
       ((x150 : @list.List[@kernel.Term]) => @lib.union(t149, x150))(x151)
     })(x148)
-  }, ths, @list.empty())
+  }, ths, @list.List([]))
   let (fovars, functions_1, relations) = signature(fvs, @lib.end_itlist((x153 : @kernel.Term, x154 : @kernel.Term) => @lib.curry(fn(x152 : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
     @bool.mk_conj(x152.0, x152.1)
   }, x153, x154), @lib.map(fn(x155 : @kernel.Thm) -> @kernel.Term raise {
     @kernel.concl(x155)
-  }, ths)), (@list.empty(), @list.empty(), @list.empty()))
+  }, ths)), (@list.List([]), @list.List([]), @list.List([])))
   let trans_var = @lib.itlist2(fn(x156 : @kernel.Term, x157 : Int64, x158 : @lib.Func[@kernel.Term, String]) -> @lib.Func[@kernel.Term, String] raise {
     let f = x156
     let n = x157
@@ -1039,7 +1039,7 @@ pub fn prover9_refute(x146 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         let (asms, undone) = process_proofsteps(ths, (btrans_fun, btrans_rel), @lib.undefined(), proof)
         @lib.find(fn(x196 : @kernel.Thm) -> Bool raise {
           let th_1 = x196
-          let t197 = @kernel.mk_const("F", @list.empty())
+          let t197 = @kernel.mk_const("F", @list.List([]))
           (@kernel.concl(th_1) == t197)
         }, @lib.map(fn(x198 : (String, @kernel.Thm)) -> @kernel.Thm raise {
           x198.1

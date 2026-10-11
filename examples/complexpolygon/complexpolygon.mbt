@@ -90,7 +90,7 @@ fn step_5() -> Unit raise {
   let t41 = @simp.asm_simp_tac(@list.List([@grouptheory.carrier_subgroup_generated_subgroup()]))
   let t39 = @parser.parse_term("z:complex")
   let t40 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("subgroup_generated circle_group s"), t39]), @grouptheory.group_element_order_divides_group_order()))
-  let t38 = @simp.asm_rewrite_tac(@list.empty())
+  let t38 = @simp.asm_rewrite_tac(@list.List([]))
   let t37 = @parser.parse_term("n:num")
   let t43 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.trans_tac(@arith.le_trans())(t37), t38), t40), t41), t42)
   let t36 = @simp.asm_simp_tac(@list.List([@grouptheory.carrier_subgroup_generated_subgroup(), circle_group_v1(), @bool.conjunct2(@grouptheory.subgroup_generated_v1()), @grouptheory.group_pow_subgroup_generated(), group_pow_circle_group()]))
@@ -127,7 +127,7 @@ pub fn finite_subgroup_of_circle_group() -> @kernel.Thm {
 ///|
 /// DARIO_LEMMA1
 fn step_6() -> Unit raise {
-  let t59 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t59 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t58 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@sets.subset(), @theorems.right_imp_forall_thm()]))(@misc.hull_mono()))
   let t57 = @simp.asm_rewrite_tac(@list.List([@complexes.bilinear_complex_mul()]))
   let t53 = @parser.parse_term("z:complex")
@@ -167,7 +167,7 @@ fn step_7() -> Unit raise {
       s67(x68)
     }
   })
-  let t65 = @simp.asm_rewrite_tac(@list.empty())
+  let t65 = @simp.asm_rewrite_tac(@list.List([]))
   let t63 = @parser.parse_term("s:complex->bool")
   let t64 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("circle_group"), t63]), @grouptheory.finite_subgroup_of_setwise()))
   let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t64), t65), t69), t70), t71)

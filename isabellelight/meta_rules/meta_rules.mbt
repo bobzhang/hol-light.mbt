@@ -253,7 +253,7 @@ fn step_10() -> Unit raise {
         let lconsts = @lib.union(avoids, @lib.intersect(@kernel.frees(@kernel.concl(th)), t36))
         fn(x37 : @kernel.Term) -> (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise {
           let tm = x37
-          let bvms = match_bvs(pbod, tm, @list.empty())
+          let bvms = match_bvs(pbod, tm, @list.List([]))
           let atm = @drule.deep_alpha(bvms, tm)
           @drule.term_match(lconsts, atm, partfn(bod))
         }
@@ -376,7 +376,7 @@ pub fn gmm(x55 : @kernel.Term) -> @tactics.Goalstack raise {
       let (asms, concl) = split_mimp(b)
       (asms.prepend(a), concl)
     } else {
-      (@list.empty(), tm)
+      (@list.List([]), tm)
     }
   }
   let t66 = split_mimp(t)
@@ -576,7 +576,7 @@ pub fn iffe() -> @kernel.Thm {
 ///|
 /// allE
 fn step_23() -> Unit raise {
-  let t69 = @tactics.then_tac(mimp_tac, @meson.meson_tac(@list.empty()))
+  let t69 = @tactics.then_tac(mimp_tac, @meson.meson_tac(@list.List([])))
   alle_c.set(@tactics.prove(@parser.parse_term("(!x:A. P x) ===> (P (a:A) ===> (r:bool)) ===> r"), t69))
 }
 
@@ -731,7 +731,7 @@ pub fn meta_rule_mk_primed_vars_i(x106 : @list.List[@kernel.Term], x107 : (@kern
       More(v, tail=rest) => {
         let new_v = @equal.mk_primed_var(avoids_1, v)
         let t110 = mk_primed_l(avoids_1.prepend(new_v), rest)
-        @tactics.compose_insts(@drule.term_match(@list.empty(), v, new_v), t110)
+        @tactics.compose_insts(@drule.term_match(@list.List([]), v, new_v), t110)
       }
     }
   }
@@ -760,9 +760,9 @@ pub fn inst_meta_rule_vars(x113 : @list.List[(@kernel.Term, @kernel.Term)], x114
     fn(x117 : @kernel.Term) -> @kernel.Term raise {
       let tm2 = x117
       let inst = try {
-        @drule.term_match(@list.empty(), tm1, tm2)
+        @drule.term_match(@list.List([]), tm1, tm2)
       } catch {
-        Failure(_) => (@list.empty(), @list.List([(tm2, tm1)]), @list.empty())
+        Failure(_) => (@list.List([]), @list.List([(tm2, tm1)]), @list.List([]))
         e => raise e
       }
       match inst {
@@ -788,7 +788,7 @@ pub fn inst_meta_rule_vars(x113 : @list.List[(@kernel.Term, @kernel.Term)], x114
     let var_ = x119
     try {
       let mvar = @lib.tryfind(match_var(var_), gfrees)
-      @drule.term_match(@list.empty(), var_, mvar)
+      @drule.term_match(@list.List([]), var_, mvar)
     } catch {
       Failure(_) => {
         @lib.warn(true, ("inst_meta_rule_vars: `" + (@printer.string_of_term(var_) + "` could not be found in the goal")))
@@ -809,7 +809,7 @@ pub fn inst_meta_rule_vars(x113 : @list.List[(@kernel.Term, @kernel.Term)], x114
   let new_instlist = @lib.list_combine(new_vars, new_subs)
   let mk_inst : ((@kernel.Term, @kernel.Term)) -> (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise = fn(x124 : (@kernel.Term, @kernel.Term)) -> (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise {
     let (t1, t2) = x124
-    @drule.term_match(@list.empty(), t1, t2)
+    @drule.term_match(@list.List([]), t1, t2)
   }
   let inst_1 = @lib.itlist(@tactics.compose_insts, @lib.map(mk_inst, new_instlist), @tactics.null_inst)
   let result_r = inst_meta_rule(inst_1, new_r)
@@ -826,7 +826,7 @@ pub fn mk_meta_rule(x125 : @kernel.Thm) -> MetaRule raise {
       let (rest, res_th) = undisch_premises(mundisch(th))
       (rest.prepend(@kernel.rand(@kernel.rator(@kernel.concl(th)))), res_th)
     } else {
-      (@list.empty(), th)
+      (@list.List([]), th)
     }
   }
   let (prems, thm_1) = undisch_premises(thm)
@@ -837,7 +837,7 @@ pub fn mk_meta_rule(x125 : @kernel.Thm) -> MetaRule raise {
       let (prems_1, concl) = mk_meta_subgoal(c)
       (prems_1.prepend(("", @kernel.assume_rule(a))), concl)
     } else {
-      (@list.empty(), tm)
+      (@list.List([]), tm)
     }
   }
   let t128 = mimp_to_imp_rule(thm_1)
@@ -848,8 +848,8 @@ pub fn mk_meta_rule(x125 : @kernel.Thm) -> MetaRule raise {
 ///|
 /// conjIm
 fn step_27() -> Unit raise {
-  let t130 = (@list.empty(), @parser.parse_term("q:bool"))
-  let t131 = @list.List([(@list.empty(), @parser.parse_term("p:bool")), t130])
+  let t130 = (@list.List([]), @parser.parse_term("q:bool"))
+  let t131 = @list.List([(@list.List([]), @parser.parse_term("p:bool")), t130])
   conjim_c.set((@parser.parse_term("p/\\q"), t131, conji()))
 }
 
@@ -872,7 +872,7 @@ fn step_28() -> Unit raise {
   let t133 = @parser.parse_term("r:bool")
   let t132 = ("", @kernel.assume_rule(@parser.parse_term("q:bool")))
   let t134 = (@list.List([("", @kernel.assume_rule(@parser.parse_term("p:bool"))), t132]), t133)
-  let t138 = @list.List([(@list.empty(), @parser.parse_term("p/\\q")), t134])
+  let t138 = @list.List([(@list.List([]), @parser.parse_term("p/\\q")), t134])
   conjem_c.set((@parser.parse_term("r:bool"), t138, t137))
 }
 
@@ -892,8 +892,8 @@ fn step_29() -> Unit raise {
   let t142 = (fn(x140 : @kernel.Thm) -> @kernel.Thm raise {
     @bool.undisch(@bool.undisch(x140))
   })(@class.taut(t141))
-  let t139 = (@list.empty(), @parser.parse_term("a:bool"))
-  let t143 = @list.List([(@list.empty(), @parser.parse_term("~a")), t139])
+  let t139 = (@list.List([]), @parser.parse_term("a:bool"))
+  let t143 = @list.List([(@list.List([]), @parser.parse_term("~a")), t139])
   notem_v1_c.set((@parser.parse_term("r:bool"), t143, t142))
 }
 
@@ -910,7 +910,7 @@ pub fn notem_v1() -> MetaRule {
 /// disjI1m
 fn step_30() -> Unit raise {
   let t144 = @bool.undisch(@class.taut(@parser.parse_term("p==>p\\/q")))
-  let t145 = @list.List([(@list.empty(), @parser.parse_term("p:bool"))])
+  let t145 = @list.List([(@list.List([]), @parser.parse_term("p:bool"))])
   disji1m_c.set((@parser.parse_term("p\\/q"), t145, t144))
 }
 
@@ -927,7 +927,7 @@ pub fn disji1m() -> MetaRule {
 /// disjI2m
 fn step_31() -> Unit raise {
   let t146 = @bool.undisch(@class.taut(@parser.parse_term("q==>p\\/q")))
-  let t147 = @list.List([(@list.empty(), @parser.parse_term("q:bool"))])
+  let t147 = @list.List([(@list.List([]), @parser.parse_term("q:bool"))])
   disji2m_c.set((@parser.parse_term("p\\/q"), t147, t146))
 }
 
@@ -951,7 +951,7 @@ fn step_32() -> Unit raise {
   let t150 = (@list.List([("", @kernel.assume_rule(@parser.parse_term("q:bool")))]), t149)
   let t148 = @parser.parse_term("r:bool")
   let t151 = (@list.List([("", @kernel.assume_rule(@parser.parse_term("p:bool")))]), t148)
-  let t155 = @list.List([(@list.empty(), @parser.parse_term("p\\/q")), t151, t150])
+  let t155 = @list.List([(@list.List([]), @parser.parse_term("p\\/q")), t151, t150])
   disjem_c.set((@parser.parse_term("r:bool"), t155, t154))
 }
 
@@ -993,8 +993,8 @@ fn step_34() -> Unit raise {
   })(@class.taut(t164))
   let t159 = @parser.parse_term("r:bool")
   let t160 = (@list.List([("", @kernel.assume_rule(@parser.parse_term("q:bool")))]), t159)
-  let t161 = (@list.empty(), @parser.parse_term("p:bool"))
-  let t166 = @list.List([(@list.empty(), @parser.parse_term("p==>q")), t161, t160])
+  let t161 = (@list.List([]), @parser.parse_term("p:bool"))
+  let t166 = @list.List([(@list.List([]), @parser.parse_term("p==>q")), t161, t160])
   impem_c.set((@parser.parse_term("r:bool"), t166, t165))
 }
 
@@ -1014,8 +1014,8 @@ fn step_35() -> Unit raise {
   let t170 = (fn(x168 : @kernel.Thm) -> @kernel.Thm raise {
     @bool.undisch(@bool.undisch(x168))
   })(@class.taut(t169))
-  let t167 = (@list.empty(), @parser.parse_term("p:bool"))
-  let t171 = @list.List([(@list.empty(), @parser.parse_term("p==>q")), t167])
+  let t167 = (@list.List([]), @parser.parse_term("p:bool"))
+  let t171 = @list.List([(@list.List([]), @parser.parse_term("p==>q")), t167])
   mpm_c.set((@parser.parse_term("q:bool"), t171, t170))
 }
 
@@ -1035,8 +1035,8 @@ fn step_36() -> Unit raise {
   let t175 = (fn(x173 : @kernel.Thm) -> @kernel.Thm raise {
     @bool.undisch(@bool.undisch(x173))
   })(@class.taut(t174))
-  let t172 = (@list.empty(), @parser.parse_term("a:bool"))
-  let t176 = @list.List([(@list.empty(), @parser.parse_term("~a")), t172])
+  let t172 = (@list.List([]), @parser.parse_term("a:bool"))
+  let t176 = @list.List([(@list.List([]), @parser.parse_term("~a")), t172])
   notem_c.set((@parser.parse_term("r:bool"), t176, t175))
 }
 
@@ -1088,7 +1088,7 @@ pub fn rulem_tac(x177 : @list.List[(@kernel.Term, @kernel.Term)], x178 : (@kerne
     @lib.union(x196, x197)
   }, @lib.map(fn(x198 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @list.List[@kernel.Term] raise {
     @support.gl_frees(x198.0, x198.1)
-  }, new_goals), @list.empty()), normalfrees)
+  }, new_goals), @list.List([])), normalfrees)
   ((mvs, @tactics.null_inst), new_goals, fn(x199 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), x200 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
     let i_1 = x199
     let l = x200
@@ -1106,7 +1106,7 @@ pub fn rulem_tac(x177 : @list.List[(@kernel.Term, @kernel.Term)], x178 : (@kerne
 fn[TA, TB] create_dischl_l(x182 : @list.List[(TA, @kernel.Thm)], x183 : TB) -> @list.List[@kernel.Term] raise {
   let (asms, g_1) = (x182, x183)
   if @list.List::is_empty(asms) {
-    @list.empty()
+    @list.List([])
   } else {
     let t187 = create_dischl_l(@lib.tl(asms), g_1)
     t187.prepend((fn(x186 : (TA, @kernel.Thm)) -> @kernel.Term raise {
@@ -1174,7 +1174,7 @@ pub fn erulem_tac(x205 : @list.List[(@kernel.Term, @kernel.Term)], x206 : (@kern
         @lib.union(x227, x228)
       }, @lib.map(fn(x229 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @list.List[@kernel.Term] raise {
         @support.gl_frees(x229.0, x229.1)
-      }, new_goals), @list.empty()), normalfrees)
+      }, new_goals), @list.List([])), normalfrees)
       ((mvs, @tactics.null_inst), new_goals, fn(x230 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), x231 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         let i_1 = x230
         let l = x231
@@ -1203,7 +1203,7 @@ fn[TA, TB] create_goal_l(x210 : @list.List[TA], x211 : (@list.List[TA], TB)) -> 
 fn[TC, TD] create_dischl_l_1(x213 : @list.List[(TC, @kernel.Thm)], x214 : TD) -> @list.List[@kernel.Term] raise {
   let (asms_1, g_1) = (x213, x214)
   if @list.List::is_empty(asms_1) {
-    @list.empty()
+    @list.List([])
   } else {
     let t218 = create_dischl_l_1(@lib.tl(asms_1), g_1)
     t218.prepend((fn(x217 : (TC, @kernel.Thm)) -> @kernel.Term raise {
@@ -1246,7 +1246,7 @@ pub fn drulem_tac(x237 : @list.List[(@kernel.Term, @kernel.Term)], x238 : (@kern
       let new_goals = @lib.map((x243 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => create_goal_l_1(asl_1, x243), new_hyps).concat(t244)
       let dischls = @lib.map(fn(x251 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @list.List[@kernel.Term] raise {
         create_dischl_l_2(x251.0, x251.1)
-      }, new_hyps).concat(@list.List([@list.empty()]))
+      }, new_hyps).concat(@list.List([@list.List([])]))
       let disch_pair : ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> (((@list.List[@kernel.Term], @kernel.Thm)) -> @kernel.Thm raise) raise = fn(x252 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> (((@list.List[@kernel.Term], @kernel.Thm)) -> @kernel.Thm raise) raise {
         let i = x252
         fn(x253 : (@list.List[@kernel.Term], @kernel.Thm)) -> @kernel.Thm raise {
@@ -1265,7 +1265,7 @@ pub fn drulem_tac(x237 : @list.List[(@kernel.Term, @kernel.Term)], x238 : (@kern
         @lib.union(x259, x260)
       }, @lib.map(fn(x261 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @list.List[@kernel.Term] raise {
         @support.gl_frees(x261.0, x261.1)
-      }, new_goals), @list.empty()), normalfrees)
+      }, new_goals), @list.List([])), normalfrees)
       ((mvs, @tactics.null_inst), new_goals, fn(x262 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), x263 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         let i_1 = x262
         let l = x263
@@ -1296,7 +1296,7 @@ fn[TA, TB] create_goal_l_1(x241 : @list.List[TA], x242 : (@list.List[TA], TB)) -
 fn[TC, TD] create_dischl_l_2(x245 : @list.List[(TC, @kernel.Thm)], x246 : TD) -> @list.List[@kernel.Term] raise {
   let (asms_1, g_1) = (x245, x246)
   if @list.List::is_empty(asms_1) {
-    @list.empty()
+    @list.List([])
   } else {
     let t250 = create_dischl_l_2(@lib.tl(asms_1), g_1)
     t250.prepend((fn(x249 : (TC, @kernel.Thm)) -> @kernel.Term raise {
@@ -1339,7 +1339,7 @@ pub fn frulem_tac(x270 : @list.List[(@kernel.Term, @kernel.Term)], x271 : (@kern
       let new_goals = @lib.map((x276 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => create_goal_l_2(asl, x276), new_hyps).concat(t277)
       let dischls = @lib.map(fn(x284 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @list.List[@kernel.Term] raise {
         create_dischl_l_3(x284.0, x284.1)
-      }, new_hyps).concat(@list.List([@list.empty()]))
+      }, new_hyps).concat(@list.List([@list.List([])]))
       let disch_pair : ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> (((@list.List[@kernel.Term], @kernel.Thm)) -> @kernel.Thm raise) raise = fn(x285 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> (((@list.List[@kernel.Term], @kernel.Thm)) -> @kernel.Thm raise) raise {
         let i = x285
         fn(x286 : (@list.List[@kernel.Term], @kernel.Thm)) -> @kernel.Thm raise {
@@ -1358,7 +1358,7 @@ pub fn frulem_tac(x270 : @list.List[(@kernel.Term, @kernel.Term)], x271 : (@kern
         @lib.union(x292, x293)
       }, @lib.map(fn(x294 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @list.List[@kernel.Term] raise {
         @support.gl_frees(x294.0, x294.1)
-      }, new_goals), @list.empty()), normalfrees)
+      }, new_goals), @list.List([])), normalfrees)
       ((mvs, @tactics.null_inst), new_goals, fn(x295 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), x296 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         let i_1 = x295
         let l = x296
@@ -1389,7 +1389,7 @@ fn[TA, TB] create_goal_l_2(x274 : @list.List[TA], x275 : (@list.List[TA], TB)) -
 fn[TC, TD] create_dischl_l_3(x278 : @list.List[(TC, @kernel.Thm)], x279 : TD) -> @list.List[@kernel.Term] raise {
   let (asms_1, g_1) = (x278, x279)
   if @list.List::is_empty(asms_1) {
-    @list.empty()
+    @list.List([])
   } else {
     let t283 = create_dischl_l_3(@lib.tl(asms_1), g_1)
     t283.prepend((fn(x282 : (TC, @kernel.Thm)) -> @kernel.Term raise {
@@ -1421,7 +1421,7 @@ pub fn erulenm_tac(x307 : @list.List[(@kernel.Term, @kernel.Term)], x308 : Int64
   let (asl, w) as g = x310
   let (c, hyps, thm) = inst_meta_rule_vars(instlist, r, @support.gl_frees(g.0, g.1))
   let ins = try {
-    @drule.term_match(@list.empty(), c, w)
+    @drule.term_match(@list.List([]), c, w)
   } catch {
     Failure(_) => raise Failure("Rule doesn't match!")
     e => raise e
@@ -1468,7 +1468,7 @@ pub fn erulenm_tac(x307 : @list.List[(@kernel.Term, @kernel.Term)], x308 : Int64
         @lib.union(x330, x331)
       }, @lib.map(fn(x332 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @list.List[@kernel.Term] raise {
         @support.gl_frees(x332.0, x332.1)
-      }, new_goals), @list.empty()), normalfrees)
+      }, new_goals), @list.List([])), normalfrees)
       ((mvs, @tactics.null_inst), new_goals, fn(x333 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), x334 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         let i_1 = x333
         let l = x334
@@ -1497,7 +1497,7 @@ fn[TA, TB] create_goal_l_3(x313 : @list.List[TA], x314 : (@list.List[TA], TB)) -
 fn[TC, TD] create_dischl_l_4(x316 : @list.List[(TC, @kernel.Thm)], x317 : TD) -> @list.List[@kernel.Term] raise {
   let (asms_1, g_1) = (x316, x317)
   if @list.List::is_empty(asms_1) {
-    @list.empty()
+    @list.List([])
   } else {
     let t321 = create_dischl_l_4(@lib.tl(asms_1), g_1)
     t321.prepend((fn(x320 : (TC, @kernel.Thm)) -> @kernel.Term raise {
@@ -1541,7 +1541,7 @@ pub fn drulenm_tac(x340 : @list.List[(@kernel.Term, @kernel.Term)], x341 : Int64
       let new_goals = @lib.map((x347 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => create_goal_l_4(asl_1, x347), new_hyps).concat(t348)
       let dischls = @lib.map(fn(x355 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @list.List[@kernel.Term] raise {
         create_dischl_l_5(x355.0, x355.1)
-      }, new_hyps).concat(@list.List([@list.empty()]))
+      }, new_hyps).concat(@list.List([@list.List([])]))
       let disch_pair : ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> (((@list.List[@kernel.Term], @kernel.Thm)) -> @kernel.Thm raise) raise = fn(x356 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> (((@list.List[@kernel.Term], @kernel.Thm)) -> @kernel.Thm raise) raise {
         let i = x356
         fn(x357 : (@list.List[@kernel.Term], @kernel.Thm)) -> @kernel.Thm raise {
@@ -1560,7 +1560,7 @@ pub fn drulenm_tac(x340 : @list.List[(@kernel.Term, @kernel.Term)], x341 : Int64
         @lib.union(x363, x364)
       }, @lib.map(fn(x365 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @list.List[@kernel.Term] raise {
         @support.gl_frees(x365.0, x365.1)
-      }, new_goals), @list.empty()), normalfrees)
+      }, new_goals), @list.List([])), normalfrees)
       ((mvs, @tactics.null_inst), new_goals, fn(x366 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), x367 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         let i_1 = x366
         let l = x367
@@ -1591,7 +1591,7 @@ fn[TA, TB] create_goal_l_4(x345 : @list.List[TA], x346 : (@list.List[TA], TB)) -
 fn[TC, TD] create_dischl_l_5(x349 : @list.List[(TC, @kernel.Thm)], x350 : TD) -> @list.List[@kernel.Term] raise {
   let (asms_1, g_1) = (x349, x350)
   if @list.List::is_empty(asms_1) {
-    @list.empty()
+    @list.List([])
   } else {
     let t354 = create_dischl_l_5(@lib.tl(asms_1), g_1)
     t354.prepend((fn(x353 : (TC, @kernel.Thm)) -> @kernel.Term raise {
@@ -1635,7 +1635,7 @@ pub fn frulenm_tac(x374 : @list.List[(@kernel.Term, @kernel.Term)], x375 : Int64
       let new_goals = @lib.map((x381 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => create_goal_l_5(asl, x381), new_hyps).concat(t382)
       let dischls = @lib.map(fn(x389 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @list.List[@kernel.Term] raise {
         create_dischl_l_6(x389.0, x389.1)
-      }, new_hyps).concat(@list.List([@list.empty()]))
+      }, new_hyps).concat(@list.List([@list.List([])]))
       let disch_pair : ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> (((@list.List[@kernel.Term], @kernel.Thm)) -> @kernel.Thm raise) raise = fn(x390 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> (((@list.List[@kernel.Term], @kernel.Thm)) -> @kernel.Thm raise) raise {
         let i = x390
         fn(x391 : (@list.List[@kernel.Term], @kernel.Thm)) -> @kernel.Thm raise {
@@ -1654,7 +1654,7 @@ pub fn frulenm_tac(x374 : @list.List[(@kernel.Term, @kernel.Term)], x375 : Int64
         @lib.union(x397, x398)
       }, @lib.map(fn(x399 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @list.List[@kernel.Term] raise {
         @support.gl_frees(x399.0, x399.1)
-      }, new_goals), @list.empty()), normalfrees)
+      }, new_goals), @list.List([])), normalfrees)
       ((mvs, @tactics.null_inst), new_goals, fn(x400 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), x401 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         let i_1 = x400
         let l = x401
@@ -1685,7 +1685,7 @@ fn[TA, TB] create_goal_l_5(x379 : @list.List[TA], x380 : (@list.List[TA], TB)) -
 fn[TC, TD] create_dischl_l_6(x383 : @list.List[(TC, @kernel.Thm)], x384 : TD) -> @list.List[@kernel.Term] raise {
   let (asms_1, g_1) = (x383, x384)
   if @list.List::is_empty(asms_1) {
-    @list.empty()
+    @list.List([])
   } else {
     let t388 = create_dischl_l_6(@lib.tl(asms_1), g_1)
     t388.prepend((fn(x387 : (TC, @kernel.Thm)) -> @kernel.Term raise {
@@ -1703,7 +1703,7 @@ fn[TC, TD] create_dischl_l_6(x383 : @list.List[(TC, @kernel.Thm)], x384 : TD) ->
 fn step_37() -> Unit raise {
   rulem_c.set(fn(x411 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x412 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
-      ((x409 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm), x410 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => rulem_tac(@list.empty(), x409, x410))(x411, x412)
+      ((x409 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm), x410 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => rulem_tac(@list.List([]), x409, x410))(x411, x412)
     }
   })
 }
@@ -1722,7 +1722,7 @@ pub fn rulem(x : MetaRule) -> @tactics.Tactic raise {
 fn step_38() -> Unit raise {
   erulem_c.set(fn(x415 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x416 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
-      ((x413 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm), x414 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => erulem_tac(@list.empty(), x413, x414))(x415, x416)
+      ((x413 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm), x414 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => erulem_tac(@list.List([]), x413, x414))(x415, x416)
     }
   })
 }
@@ -1741,7 +1741,7 @@ pub fn erulem(x : MetaRule) -> @tactics.Tactic raise {
 fn step_39() -> Unit raise {
   drulem_c.set(fn(x419 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x420 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
-      ((x417 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm), x418 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => drulem_tac(@list.empty(), x417, x418))(x419, x420)
+      ((x417 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm), x418 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => drulem_tac(@list.List([]), x417, x418))(x419, x420)
     }
   })
 }
@@ -1760,7 +1760,7 @@ pub fn drulem(x : MetaRule) -> @tactics.Tactic raise {
 fn step_40() -> Unit raise {
   frulem_c.set(fn(x423 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     fn(x424 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
-      ((x421 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm), x422 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => frulem_tac(@list.empty(), x421, x422))(x423, x424)
+      ((x421 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm), x422 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => frulem_tac(@list.List([]), x421, x422))(x423, x424)
     }
   })
 }
@@ -1780,7 +1780,7 @@ fn step_41() -> Unit raise {
   erulenm_c.set(fn(x428 : Int64) -> (((@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
     fn(x429 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       fn(x430 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
-        ((x425 : Int64, x426 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm), x427 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => erulenm_tac(@list.empty(), x425, x426, x427))(x428, x429, x430)
+        ((x425 : Int64, x426 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm), x427 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => erulenm_tac(@list.List([]), x425, x426, x427))(x428, x429, x430)
       }
     }
   })
@@ -1801,7 +1801,7 @@ fn step_42() -> Unit raise {
   drulenm_c.set(fn(x434 : Int64) -> (((@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
     fn(x435 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       fn(x436 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
-        ((x431 : Int64, x432 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm), x433 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => drulenm_tac(@list.empty(), x431, x432, x433))(x434, x435, x436)
+        ((x431 : Int64, x432 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm), x433 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => drulenm_tac(@list.List([]), x431, x432, x433))(x434, x435, x436)
       }
     }
   })
@@ -1822,7 +1822,7 @@ fn step_43() -> Unit raise {
   frulenm_c.set(fn(x440 : Int64) -> (((@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
     fn(x441 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       fn(x442 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
-        ((x437 : Int64, x438 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm), x439 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => frulenm_tac(@list.empty(), x437, x438, x439))(x440, x441, x442)
+        ((x437 : Int64, x438 : (@kernel.Term, @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], @kernel.Thm), x439 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => frulenm_tac(@list.List([]), x437, x438, x439))(x440, x441, x442)
       }
     }
   })
@@ -2151,7 +2151,7 @@ fn step_47() -> Unit raise {
 ///|
 /// rule
 fn step_48() -> Unit raise {
-  rule_c.set((x521 : @kernel.Thm) => rule_tac(@list.empty(), x521))
+  rule_c.set((x521 : @kernel.Thm) => rule_tac(@list.List([]), x521))
 }
 
 ///|
@@ -2166,7 +2166,7 @@ pub fn rule(x : @kernel.Thm) -> @tactics.Tactic raise {
 ///|
 /// erule
 fn step_49() -> Unit raise {
-  erule_c.set((x522 : @kernel.Thm) => erule_tac(@list.empty(), x522))
+  erule_c.set((x522 : @kernel.Thm) => erule_tac(@list.List([]), x522))
 }
 
 ///|
@@ -2181,7 +2181,7 @@ pub fn erule(x : @kernel.Thm) -> @tactics.Tactic raise {
 ///|
 /// drule
 fn step_50() -> Unit raise {
-  drule_c.set((x523 : @kernel.Thm) => drule_tac(@list.empty(), x523))
+  drule_c.set((x523 : @kernel.Thm) => drule_tac(@list.List([]), x523))
 }
 
 ///|
@@ -2196,7 +2196,7 @@ pub fn drule(x : @kernel.Thm) -> @tactics.Tactic raise {
 ///|
 /// frule
 fn step_51() -> Unit raise {
-  frule_c.set((x524 : @kernel.Thm) => frule_tac(@list.empty(), x524))
+  frule_c.set((x524 : @kernel.Thm) => frule_tac(@list.List([]), x524))
 }
 
 ///|
@@ -2259,7 +2259,7 @@ fn step_52() -> Unit raise {
 fn step_53() -> Unit raise {
   erulen_c.set(fn(x527 : Int64) -> ((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
     fn(x528 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
-      let s529 = ((x525 : Int64, x526 : @kernel.Thm) => erulen_tac(@list.empty(), x525, x526))(x527, x528)
+      let s529 = ((x525 : Int64, x526 : @kernel.Thm) => erulen_tac(@list.List([]), x525, x526))(x527, x528)
       fn(x530 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
         s529(x530)
       }
@@ -2281,7 +2281,7 @@ pub fn erulen(x : Int64) -> ((@kernel.Thm) -> @tactics.Tactic raise) raise {
 fn step_54() -> Unit raise {
   drulen_c.set(fn(x533 : Int64) -> ((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
     fn(x534 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
-      let s535 = ((x531 : Int64, x532 : @kernel.Thm) => drulen_tac(@list.empty(), x531, x532))(x533, x534)
+      let s535 = ((x531 : Int64, x532 : @kernel.Thm) => drulen_tac(@list.List([]), x531, x532))(x533, x534)
       fn(x536 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
         s535(x536)
       }
@@ -2303,7 +2303,7 @@ pub fn drulen(x : Int64) -> ((@kernel.Thm) -> @tactics.Tactic raise) raise {
 fn step_55() -> Unit raise {
   frulen_c.set(fn(x539 : Int64) -> ((@kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise) raise {
     fn(x540 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
-      let s541 = ((x537 : Int64, x538 : @kernel.Thm) => frulen_tac(@list.empty(), x537, x538))(x539, x540)
+      let s541 = ((x537 : Int64, x538 : @kernel.Thm) => frulen_tac(@list.List([]), x537, x538))(x539, x540)
       fn(x542 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
         s541(x542)
       }

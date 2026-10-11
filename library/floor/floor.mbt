@@ -241,9 +241,9 @@ fn step_4() -> Unit raise {
       t37,
     ]),
   )
-  let t35 = @meson.meson_tac(@list.empty())
+  let t35 = @meson.meson_tac(@list.List([]))
   let t36 = @list.List([
-    @meson.meson_tac(@list.empty()),
+    @meson.meson_tac(@list.List([])),
     @tactics.all_tac,
     @tactics.all_tac,
     t35,
@@ -265,7 +265,7 @@ fn step_4() -> Unit raise {
       @realarith.real_pos(),
     ]),
   )
-  let t23 = @meson.meson_tac(@list.empty())
+  let t23 = @meson.meson_tac(@list.List([]))
   let t24 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@realax.real_sub()])),
     t23,
@@ -282,17 +282,17 @@ fn step_4() -> Unit raise {
     @simp.rewrite_tac(@list.List([@real.real_abs_mul()])),
     t21,
   )
-  let t20 = @meson.meson_tac(@list.empty())
+  let t20 = @meson.meson_tac(@list.List([]))
   let t29 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@calc_int.real_abs_num()])),
     t20,
   )
-  let t19 = @meson.meson_tac(@list.empty())
+  let t19 = @meson.meson_tac(@list.List([]))
   let t30 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@realax.real_min()])),
     t19,
   )
-  let t18 = @meson.meson_tac(@list.empty())
+  let t18 = @meson.meson_tac(@list.List([]))
   let t31 = @list.List([
     @tactics.then_tac(@simp.rewrite_tac(@list.List([@realax.real_max()])), t18),
     t30,
@@ -2681,7 +2681,7 @@ pub fn floor_frac() -> @kernel.Thm {
 ///|
 /// FLOOR_UNIQUE
 fn step_47() -> Unit raise {
-  let t250 = @simp.simp_tac(@list.empty())
+  let t250 = @simp.simp_tac(@list.List([]))
   let t249 = @tactics.mp_tac(
     @bool.spec(@parser.parse_term("x:real"), floor_frac()),
   )
@@ -2909,7 +2909,7 @@ pub fn floor_eq_0() -> @kernel.Thm {
 ///|
 /// FLOOR
 fn step_49() -> Unit raise {
-  let t263 = @simp.asm_rewrite_tac(@list.empty())
+  let t263 = @simp.asm_rewrite_tac(@list.List([]))
   let t262 = @tactics.disch_then(
     @tactics.conjuncts_then2(
       fn(
@@ -3818,7 +3818,7 @@ pub fn real_floor_add() -> @kernel.Thm {
 ///|
 /// REAL_FLOOR_TRIANGLE
 fn step_68() -> Unit raise {
-  let t336 = @simp.asm_rewrite_tac(@list.empty())
+  let t336 = @simp.asm_rewrite_tac(@list.List([]))
   let t335 = @simp.rewrite_tac(@list.List([real_floor_add()]))
   let t337 = @tactics.then_tac(
     @tactics.then_tac(
@@ -4024,7 +4024,7 @@ fn step_74() -> Unit raise {
             @tactics.gen_tac,
             @tactics.match_mp_tac(
               @meson.meson(
-                @list.empty(),
+                @list.List([]),
                 @parser.parse_term("!a. P a \\/ P(a + &1) ==> ?x. P x"),
               ),
             ),
@@ -4305,7 +4305,7 @@ pub fn real_floor_floor_div() -> @kernel.Thm {
 ///|
 /// INTEGER_EXISTS_BETWEEN_ALT
 fn step_78() -> Unit raise {
-  let t392 = @simp.simp_tac(@list.empty())
+  let t392 = @simp.simp_tac(@list.List([]))
   let t391 = @tactics.mp_tac(@bool.spec(@parser.parse_term("y:real"), floor()))
   let t390 = @tactics.exists_tac(@parser.parse_term("floor y"))
   let t393 = @tactics.then_tac(
@@ -4342,7 +4342,7 @@ pub fn integer_exists_between_alt() -> @kernel.Thm {
 ///|
 /// INTEGER_EXISTS_BETWEEN_LT
 fn step_79() -> Unit raise {
-  let t406 = @meson.asm_meson_tac(@list.empty())
+  let t406 = @meson.asm_meson_tac(@list.List([]))
   let t405 = @simp.asm_rewrite_tac(@list.List([@realarith.real_lt_le()]))
   let t404 = @tactics.repeat_tac(@tactics.strip_tac)
   let t403 = @tactics.match_mp_tac(@theorems.mono_exists())
@@ -4492,7 +4492,7 @@ pub fn integer_exists_between_lt() -> @kernel.Thm {
 fn step_80() -> Unit raise {
   let t420 = @list.List([
     @calc_rat.asm_real_arith_tac,
-    @meson.asm_meson_tac(@list.empty()),
+    @meson.asm_meson_tac(@list.List([])),
   ])
   let t419 = @simp.asm_rewrite_tac(@list.List([@realarith.real_lt_le()]))
   let t418 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -4618,7 +4618,7 @@ pub fn integer_exists_between() -> @kernel.Thm {
 ///|
 /// INTEGER_EXISTS_BETWEEN_ABS
 fn step_81() -> Unit raise {
-  let t432 = @simp.asm_rewrite_tac(@list.empty())
+  let t432 = @simp.asm_rewrite_tac(@list.List([]))
   let t431 = @tactics.repeat_tac(@tactics.strip_tac)
   let t430 = @tactics.thenl(
     @tactics.ants_tac,
@@ -4644,7 +4644,7 @@ fn step_81() -> Unit raise {
     ),
     t428,
   ])
-  let t425 = @simp.asm_rewrite_tac(@list.empty())
+  let t425 = @simp.asm_rewrite_tac(@list.List([]))
   let t424 = @simp.rewrite_tac(@list.List([@realax.real_abs()]))
   let t433 = @tactics.then_tac(
     @tactics.then_tac(
@@ -4692,7 +4692,7 @@ pub fn integer_exists_between_abs() -> @kernel.Thm {
 ///|
 /// INTEGER_EXISTS_BETWEEN_ABS_LT
 fn step_82() -> Unit raise {
-  let t442 = @simp.asm_rewrite_tac(@list.empty())
+  let t442 = @simp.asm_rewrite_tac(@list.List([]))
   let t441 = @tactics.repeat_tac(@tactics.strip_tac)
   let t440 = @tactics.thenl(
     @tactics.ants_tac,
@@ -4718,7 +4718,7 @@ fn step_82() -> Unit raise {
     ),
     t438,
   ])
-  let t435 = @simp.asm_rewrite_tac(@list.empty())
+  let t435 = @simp.asm_rewrite_tac(@list.List([]))
   let t434 = @simp.rewrite_tac(@list.List([@realax.real_abs()]))
   let t443 = @tactics.then_tac(
     @tactics.then_tac(
@@ -6401,7 +6401,7 @@ fn step_93() -> Unit raise {
   )
   let t589 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t588 = @tactics.match_mp_tac(@theorems.mono_exists())
-  let t587 = @simp.asm_rewrite_tac(@list.empty())
+  let t587 = @simp.asm_rewrite_tac(@list.List([]))
   let t584 = @parser.parse_term("e:real")
   let t585 = @parser.parse_term("x:real")
   let t586 = @tactics.mp_tac(
@@ -6628,7 +6628,7 @@ pub fn rational_approximation() -> @kernel.Thm {
 ///|
 /// RATIONAL_BETWEEN
 fn step_95() -> Unit raise {
-  let t645 = @simp.simp_tac(@list.empty())
+  let t645 = @simp.simp_tac(@list.List([]))
   let t646 = @list.List([
     @tactics.all_tac,
     @tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_exists()), t645),
@@ -6697,7 +6697,7 @@ pub fn rational_between_eq() -> @kernel.Thm {
 ///|
 /// RATIONAL_APPROXIMATION_STRADDLE
 fn step_97() -> Unit raise {
-  let t655 = @simp.asm_rewrite_tac(@list.empty())
+  let t655 = @simp.asm_rewrite_tac(@list.List([]))
   let t654 = @list.List([
     @calc_rat.asm_real_arith_tac,
     @tactics.then_tac(
@@ -6778,11 +6778,11 @@ pub fn rational_approximation_straddle() -> @kernel.Thm {
 ///|
 /// RATIONAL_APPROXIMATION_ABOVE
 fn step_98() -> Unit raise {
-  let t663 = @simp.asm_rewrite_tac(@list.empty())
+  let t663 = @simp.asm_rewrite_tac(@list.List([]))
   let t662 = @tactics.repeat_tac(@tactics.strip_tac)
   let t661 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t660 = @simp.once_rewrite_tac(@list.List([@theorems.swap_exists_thm()]))
-  let t659 = @simp.asm_rewrite_tac(@list.empty())
+  let t659 = @simp.asm_rewrite_tac(@list.List([]))
   let t657 = @parser.parse_term("e:real")
   let t658 = @tactics.mp_tac(
     @bool.specl(
@@ -6833,10 +6833,10 @@ pub fn rational_approximation_above() -> @kernel.Thm {
 ///|
 /// RATIONAL_APPROXIMATION_BELOW
 fn step_99() -> Unit raise {
-  let t670 = @simp.asm_rewrite_tac(@list.empty())
+  let t670 = @simp.asm_rewrite_tac(@list.List([]))
   let t669 = @tactics.repeat_tac(@tactics.strip_tac)
   let t668 = @tactics.match_mp_tac(@theorems.mono_exists())
-  let t667 = @simp.asm_rewrite_tac(@list.empty())
+  let t667 = @simp.asm_rewrite_tac(@list.List([]))
   let t665 = @parser.parse_term("e:real")
   let t666 = @tactics.mp_tac(
     @bool.specl(
@@ -6921,7 +6921,7 @@ fn step_100() -> Unit raise {
   let t680 = @tactics.match_mp_tac(@sets.infinite_image())
   let t679 = @list.List([
     @tactics.all_tac,
-    @tactics.asm_tac(@sets.set_tac)(@list.empty()),
+    @tactics.asm_tac(@sets.set_tac)(@list.List([])),
   ])
   let t678 = @tactics.exists_tac(
     @parser.parse_term("IMAGE (q:num->real) (:num)"),
@@ -7008,7 +7008,7 @@ pub fn infinite_rational_in_range() -> @kernel.Thm {
 ///|
 /// REAL_CONGRUENCE
 fn step_101() -> Unit raise {
-  let t704 = @meson.meson_tac(@list.empty())
+  let t704 = @meson.meson_tac(@list.List([]))
   let t703 = @simp.rewrite_tac(
     @list.List([@int.num_congruent(), @int.int_congruent()]),
   )

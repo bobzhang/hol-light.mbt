@@ -470,7 +470,7 @@ fn step_10() -> Unit raise {
       }
     })(t20(x21))
   })
-  let t15 = @meson.asm_meson_tac(@list.empty())
+  let t15 = @meson.asm_meson_tac(@list.List([]))
   let t14 = @simp.rewrite_tac(
     @list.List([@int.number_rule(@parser.parse_term("0 divides n <=> n = 0"))]),
   )
@@ -574,13 +574,13 @@ pub fn order_existence_gen() -> @kernel.Thm {
 ///|
 /// ORDER_EXISTENCE_ITER
 fn step_11() -> Unit raise {
-  let t65 = @meson.asm_meson_tac(@list.empty())
+  let t65 = @meson.asm_meson_tac(@list.List([]))
   let t64 = @simp.asm_rewrite_tac(@list.List([iter()]))
-  let t63 = @simp.asm_rewrite_tac(@list.empty())
+  let t63 = @simp.asm_rewrite_tac(@list.List([]))
   let t62 = @tactics.disch_then(@tactics.match_mp_tac)
   let t61 = @tactics.mp_tac(
     @meson.meson(
-      @list.empty(),
+      @list.List([]),
       @parser.parse_term(
         "!a b:num->A. (!x y. R x y ==> R y x) /\\\n          (!x y z. R x y /\\ R y z ==> R x z) /\\\n          (!n. R (a n) (b n))\n          ==> (!n. R (a n) z <=> R (b n) z)",
       ),
@@ -810,11 +810,11 @@ fn step_12() -> Unit raise {
       }
     })(((x128 : @kernel.Thm) => @bool.spec(t127, x128))(x129))
   })
-  let t123 = @simp.asm_simp_tac(@list.empty())
+  let t123 = @simp.asm_simp_tac(@list.List([]))
   let t122 = @class.asm_cases_tac(@parser.parse_term("d = 0"))
   let t121 = @tactics.x_gen_tac(@parser.parse_term("d:num"))
   let t120 = @tactics.match_mp_tac(@theorems.mono_exists())
-  let t119 = @simp.asm_rewrite_tac(@list.empty())
+  let t119 = @simp.asm_rewrite_tac(@list.List([]))
   let t117 = @parser.parse_term("z:A")
   let t118 = @parser.parse_term("f:A->A")
   let t138 = @tactics.then_tac(
@@ -854,7 +854,7 @@ fn step_12() -> Unit raise {
     ),
     @int.asm_arith_tac,
   )
-  let t112 = @meson.asm_meson_tac(@list.empty())
+  let t112 = @meson.asm_meson_tac(@list.List([]))
   let t111 = @simp.rewrite_tac(
     @list.List([@arith.le_refl(), @arith.sub_refl(), iter()]),
   )
@@ -1151,8 +1151,8 @@ fn step_12() -> Unit raise {
     @tactics.x_gen_tac,
     @list.List([@parser.parse_term("p:num"), t79]),
   )
-  let t78 = @list.List([@meson.meson_tac(@list.empty()), @tactics.all_tac])
-  let t77 = @simp.rewrite_tac(@list.empty())
+  let t78 = @list.List([@meson.meson_tac(@list.List([])), @tactics.all_tac])
+  let t77 = @simp.rewrite_tac(@list.List([]))
   let t76 = @tactics.match_mp_tac(@arith.wlog_lt())
   let t115 = @tactics.thenl(
     @tactics.then_tac(
@@ -1194,8 +1194,8 @@ fn step_12() -> Unit raise {
     ),
     t114,
   )
-  let t75 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
-  let t74 = @simp.asm_rewrite_tac(@list.empty())
+  let t75 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
+  let t74 = @simp.asm_rewrite_tac(@list.List([]))
   let t73 = @tactics.match_mp_tac(@sets.card_subset())
   let t71 = @drule.match_mp(
     @int.arith_rule(@parser.parse_term("c <= k ==> s <= c ==> ~(s = k + 1)")),
@@ -1302,7 +1302,7 @@ pub fn order_existence_card() -> @kernel.Thm {
 ///|
 /// ORDER_EXISTENCE_FINITE
 fn step_13() -> Unit raise {
-  let t146 = @meson.meson_tac(@list.empty())
+  let t146 = @meson.meson_tac(@list.List([]))
   let t145 = @simp.asm_rewrite_tac(@list.List([@arith.le_refl()]))
   let t141 = @parser.parse_term(
     "CARD {(R:A->A->bool)(ITER n f z) | n IN (:num)}",

@@ -346,7 +346,7 @@ fn step_19() -> Unit raise {
   let t41 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.exists_tac(@parser.parse_term("y:int")), t39), t40), @tactics.all_tac])
   let t33 = @class.asm_cases_tac(@parser.parse_term("y = &0"))
   let t32 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("y:int"))(@tactics.strip_assume_tac))
-  let t31 = @simp.asm_rewrite_tac(@list.empty())
+  let t31 = @simp.asm_rewrite_tac(@list.List([]))
   let t29 = @parser.parse_term("--x")
   let t30 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("n:int"), t29]), cong_rep_pos_pos()))
   let t28 = @simp.asm_simp_tac(@list.List([cong_rep_pos_pos()]))
@@ -389,10 +389,10 @@ fn step_20() -> Unit raise {
     })(t94(x95))
   })
   let t90 = @tactics.mp_tac(@bool.spec(@parser.parse_term("n:int"), cong_self_abs()))
-  let t89 = @simp.asm_rewrite_tac(@list.empty())
+  let t89 = @simp.asm_rewrite_tac(@list.List([]))
   let t88 = @tactics.exists_tac(@parser.parse_term("y - abs(n)"))
   let t87 = @list.List([@meson.asm_meson_tac(@list.List([cong_rep_pos(), @int.int_lt_imp_le()])), @tactics.all_tac])
-  let t86 = @simp.asm_rewrite_tac(@list.empty())
+  let t86 = @simp.asm_rewrite_tac(@list.List([]))
   let t85 = @tactics.mp_tac(@int.int_arith(@parser.parse_term("&0 <= y /\\ y < abs n\n    ==> --(abs n) <= &2 * y /\\ &2 * y < abs(n) \\/\n        --(abs n) <= &2 * (y - abs(n)) /\\ &2 * (y - abs(n)) < abs(n)")))
   let t80 = @parser.parse_term("x:int")
   let t82 = @tactics.x_choose_then(@parser.parse_term("y:int"))(@tactics.strip_assume_tac)
@@ -424,7 +424,7 @@ pub fn cong_rep_min() -> @kernel.Thm {
 ///|
 /// CONG_REP_MIN_ABS
 fn step_21() -> Unit raise {
-  let t121 = @simp.simp_tac(@list.empty())
+  let t121 = @simp.simp_tac(@list.List([]))
   let t120 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t116 = @parser.parse_term("x:int")
   let t119 = @tactics.disch_then(fn(x118 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {

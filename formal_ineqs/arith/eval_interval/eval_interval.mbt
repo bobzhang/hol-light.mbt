@@ -526,7 +526,7 @@ pub fn find_and_replace_all(x68 : @list.List[IntervalFun], x69 : @list.List[Inte
       }
     }
   }
-  iterate_all(f_list, acc, @list.empty())
+  iterate_all(f_list, acc, @list.List([]))
 }
 
 ///|
@@ -546,7 +546,7 @@ pub fn eval_interval_fun_list(x79 : Int64, x80 : (@list.List[IntervalFun], @list
       }
     }
   }
-  let rs_1 = eval_refs(refs, @list.empty())
+  let rs_1 = eval_refs(refs, @list.List([]))
   @lib.map(fn(x84 : IntervalFun) -> @kernel.Thm raise {
     let f = x84
     eval_interval_fun(pp, f, vars, rs_1)
@@ -569,8 +569,8 @@ fn step_5() -> Unit raise {
       let (lo, hi) = @pair.dest_pair(bounds)
       let f_lo = build_interval_fun(lo)
       let f_hi = build_interval_fun(hi)
-      let th_lo = eval_interval_fun(pp, f_lo, @list.empty(), @list.empty())
-      let th_hi = eval_interval_fun(pp, f_hi, @list.empty(), @list.empty())
+      let th_lo = eval_interval_fun(pp, f_lo, @list.List([]), @list.List([]))
+      let th_hi = eval_interval_fun(pp, f_hi, @list.List([]), @list.List([]))
       let (a_tm, y_tm) = (fn(x90 : @kernel.Term) -> (@kernel.Term, @kernel.Term) raise {
         @pair.dest_pair(@kernel.rand(x90))
       })((fn(x91 : @kernel.Thm) -> @kernel.Term raise {

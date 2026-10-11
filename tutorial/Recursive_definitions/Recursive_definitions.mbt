@@ -87,7 +87,7 @@ pub fn fusc_def() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t2 = @parser.parse_term("n:num")
   let t3 = @tactics.mp_tac(@kernel.inst_rule(@list.List([(@parser.parse_term("0"), t2)]), fusc_def()))
-  let t1 = @simp.asm_rewrite_tac(@list.empty())
+  let t1 = @simp.asm_rewrite_tac(@list.List([]))
   let t4 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([fusc_def()])), @class.cond_cases_tac), t1), t3), @int.arith_tac)
   fusc_c.set(@tactics.prove(@parser.parse_term("fusc 0 = 0 /\\\n   fusc 1 = 1 /\\\n   fusc (2 * n) = fusc(n) /\\\n   fusc (2 * n + 1) = fusc(n) + fusc(n + 1)"), t4))
 }

@@ -195,7 +195,7 @@ pub fn indinv() -> @kernel.Thm {
 ///|
 /// INDUCTIVE_INVARIANT
 fn step_12() -> Unit raise {
-  let t14 = @meson.meson_tac(@list.empty())
+  let t14 = @meson.meson_tac(@list.List([]))
   let t12 = @parser.parse_term("\\s s':A. invariant s ==> invariant s'")
   let t13 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("transition:A->A->bool"), t12]), @rstc.rtc_induct()))
   let t15 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t13), t14)

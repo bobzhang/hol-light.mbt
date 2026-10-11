@@ -210,7 +210,7 @@ pub fn pure_mp_rewr_tac(x : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)]
 pub fn gen_mp_rewr_tac(x38 : (@kernel.Term) -> @kernel.Term raise, x39 : @kernel.Thm) -> @tactics.Tactic raise {
   let s = x38
   let x = x39
-  let t42 = @simp.asm_rewrite_tac(@list.empty())
+  let t42 = @simp.asm_rewrite_tac(@list.List([]))
   let t41 = @tactics.try_tac(hint_exists_tac)
   @tactics.then_tac(@tactics.then_tac(gen_pure_mp_rewr_tac(s, x), t41), t42)
 }
@@ -349,7 +349,7 @@ fn[TB, TC] fact_l(x70 : @list.List[TC], x71 : TB) -> TB raise {
 ///|
 fn[TD] tl_l(x72 : @list.List[TD]) -> @list.List[TD] raise {
   match x72 {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(_, tail=xs) => xs
   }
 }
@@ -400,7 +400,7 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash] simp_horn_conv_rec_l(x73 : @list.List[(
     } else {
       (dones.prepend((hs_p, cs_p)), tl_l(todos))
     }
-  }, l, (@list.empty(), tl_l(l)))
+  }, l, (@list.List([]), tl_l(l)))
   if fixpoint.val {
     l
   } else {
@@ -424,7 +424,7 @@ fn step_9() -> Unit raise {
         let t93 = strip_conj(c)
         (strip_conj(h), t93)
       } catch {
-        _ => (@list.empty(), @list.List([t_1]))
+        _ => (@list.List([]), @list.List([t_1]))
       }
     }, strip_conj(t))
   })
@@ -539,7 +539,7 @@ fn step_12() -> Unit raise {
       }
     }
   }
-  gimp_imp_c.set((x111 : @kernel.Term) => self_(@list.empty(), @list.empty(), x111))
+  gimp_imp_c.set((x111 : @kernel.Term) => self_(@list.List([]), @list.List([]), x111))
 }
 
 ///|
@@ -555,7 +555,7 @@ pub fn gimp_imp(x : @kernel.Term) -> @kernel.Term raise {
 /// `GIMP_IMP_CONV`
 pub fn gimp_imp_conv(x112 : @kernel.Term) -> @kernel.Thm raise {
   let t = x112
-  @meson.meson(@list.empty(), @basics.mk_eq(t, gimp_imp(t)))
+  @meson.meson(@list.List([]), @basics.mk_eq(t, gimp_imp(t)))
 }
 
 ///|

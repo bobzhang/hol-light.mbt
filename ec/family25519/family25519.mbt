@@ -49,7 +49,7 @@ pub fn edwards25519_of_curve25519() -> @kernel.Thm {
 ///|
 /// MCURVE_OF_ECURVE_25519
 fn step_4() -> Unit raise {
-  let t3 = @simp.rewrite_tac(@list.empty())
+  let t3 = @simp.rewrite_tac(@list.List([]))
   let t2 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t1 = @simp.rewrite_tac(@list.List([@wei25519.p_25519(), @curve25519.a_25519(), @edwards25519.e_25519(), @edwards25519.d_25519(), c_25519()]))
   let t4 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@edmont.mcurve_of_ecurve(), @pair.pair_eq()])), t1), t2), t3)
@@ -234,7 +234,7 @@ pub fn curve25519_of_wei25519() -> @kernel.Thm {
 ///|
 /// WCURVE_OF_MCURVE_25519
 fn step_14() -> Unit raise {
-  let t37 = @simp.rewrite_tac(@list.empty())
+  let t37 = @simp.rewrite_tac(@list.List([]))
   let t36 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t38 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@montwe.wcurve_of_mcurve(), @wei25519.p_25519(), @pair.pair_eq(), @wei25519.a_25519(), @wei25519.b_25519(), @curve25519.a_25519()])), t36), t37)
   wcurve_of_mcurve_25519_c.set(@tactics.prove(@parser.parse_term("wcurve_of_mcurve(integer_mod_ring p_25519,&A_25519,&1) =\n   (integer_mod_ring p_25519,&a_25519,&b_25519)"), t38))

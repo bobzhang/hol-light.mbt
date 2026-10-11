@@ -714,7 +714,7 @@ pub fn word1() -> @kernel.Thm {
 ///|
 /// BIT0_WORD1
 fn step_16() -> Unit raise {
-  let t49 = @simp.rewrite_tac(@list.empty())
+  let t49 = @simp.rewrite_tac(@list.List([]))
   let t48 = @class.bool_cases_tac(@parser.parse_term("b:bool"))
   let t50 = @tactics.then_tac(
     @tactics.then_tac(
@@ -865,7 +865,7 @@ fn step_19() -> Unit raise {
     match ptm {
       @preterm.Preterm::Varp(v, pty) =>
         if v == "" && pty == @preterm.dpty {
-          @list.empty()
+          @list.List([])
         } else if @lib.can(@kernel.get_const_type, v) ||
           @lib.can(@num.num_of_string, v) ||
           @lib.exists(
@@ -875,11 +875,11 @@ fn step_19() -> Unit raise {
             },
             @printer.the_interface.val,
           ) {
-          @list.empty()
+          @list.List([])
         } else {
           @list.List([ptm])
         }
-      @preterm.Preterm::Constp(_, _) => @list.empty()
+      @preterm.Preterm::Constp(_, _) => @list.List([])
       @preterm.Preterm::Combp(p1, p2) => {
         let t62 = pfrees(p2)
         @lib.union(pfrees(p1), t62)
@@ -1289,7 +1289,7 @@ fn step_22() -> Unit raise {
           @kernel.Term::Comb(@kernel.Term::Const("CONSPAT", _), p),
           a
         ) => dest_pat_rev(p).prepend(a)
-        @kernel.Term::Const("NILPAT", _) => @list.empty()
+        @kernel.Term::Const("NILPAT", _) => @list.List([])
         _ => raise Failure("dest_pat")
       }
     }
@@ -1336,7 +1336,7 @@ fn step_22() -> Unit raise {
           (l.prepend(c_1), r)
         }
         @kernel.Term::Comb(@kernel.Term::Const("_ELSEPATTERN", _), res_1) =>
-          (@list.empty(), res_1)
+          (@list.List([]), res_1)
         _ => raise Failure("dest_clauses")
       }
     }
@@ -1740,7 +1740,7 @@ pub fn bitmatch_seqpattern() -> @kernel.Thm {
 ///|
 /// BITMATCH_SEQPATTERN2
 fn step_34() -> Unit raise {
-  let t152 = @simp.rewrite_tac(@list.empty())
+  let t152 = @simp.rewrite_tac(@list.List([]))
   let t153 = @tactics.then_tac(
     @tactics.then_tac(
       @simp.rewrite_tac(@list.List([bitmatch_seqpattern()])),
@@ -1772,7 +1772,7 @@ pub fn bitmatch_seqpattern2() -> @kernel.Thm {
 ///|
 /// MATCH_ELSEPATTERN
 fn step_35() -> Unit raise {
-  let t154 = @metis.metis_tac(@list.empty())
+  let t154 = @metis.metis_tac(@list.List([]))
   let t155 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@pair._match(), _elsepattern()])),
     t154,
@@ -2228,7 +2228,7 @@ fn step_38() -> Unit raise {
                             @tactics.then_tac(
                               @tactics.then_tac(
                                 @tactics.then_tac(
-                                  @simp.rewrite_tac(@list.empty()),
+                                  @simp.rewrite_tac(@list.List([])),
                                   t180,
                                 ),
                                 t181,
@@ -2918,14 +2918,14 @@ pub fn bm_analyze_clauses(
       let t268 = bm_analyze_clauses(sz, cs)
       t268.prepend(bm_analyze_pat(sz)(pat))
     }
-    _ => @list.empty()
+    _ => @list.List([])
   }
 }
 
 ///|
 /// bm_skip_clause
 fn step_40() -> Unit raise {
-  let t272 = @simp.asm_rewrite_tac(@list.empty())
+  let t272 = @simp.asm_rewrite_tac(@list.List([]))
   let t271 = @tactics.conv_tac(@equal.once_depth_conv(@class.eta_conv))
   let t270 = @simp.rewrite_tac(@list.List([bitmatch_seqpattern()]))
   let t273 = @tactics.then_tac(
@@ -2976,7 +2976,7 @@ fn step_40() -> Unit raise {
   let (n, b, e, r, rs) = (@parser.parse_type("N"), t278, t277, t276, t275)
   let t280 = @tactics.then_tac(
     @tactics.disch_tac,
-    @simp.asm_rewrite_tac(@list.empty()),
+    @simp.asm_rewrite_tac(@list.List([])),
   )
   let t281 = (@parser.parse_term("(P = \\x:A. F) ==> (?) P = F"), t280)
   let th1 = @bool.undisch(
@@ -3442,7 +3442,7 @@ fn step_41() -> Unit raise {
                     match x324 {
                       (Empty, cs_2) => {
                         let th_2 = @kernel.refl(@kernel.mk_comb(m, cs_2))
-                        (@list.empty(), @list.empty(), th_2, th_2)
+                        (@list.List([]), @list.List([]), th_2, th_2)
                       }
                       (
                         More(cl, tail=cls_2),
@@ -3579,7 +3579,7 @@ pub fn bm_if_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// MATCH_EQ
 fn step_43() -> Unit raise {
-  let t340 = @metis.metis_tac(@list.empty())
+  let t340 = @metis.metis_tac(@list.List([]))
   let t339 = @tactics.disch_then(fn(
     x336 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3948,7 +3948,7 @@ fn step_50() -> Unit raise {
     x367 : (@kernel.Term, (Unit) -> @kernel.Thm raise),
   ) -> @list.List[(@kernel.Term, @kernel.Thm)] raise {
     match x367 {
-      (@kernel.Term::Const("NILPAT", _), _) => @list.empty()
+      (@kernel.Term::Const("NILPAT", _), _) => @list.List([])
       (
         @kernel.Term::Comb(
           @kernel.Term::Comb(@kernel.Term::Const("CONSPAT", _), p_p),
@@ -4148,7 +4148,7 @@ fn step_51() -> Unit raise {
         @list.List([
           bitmatch_seqpattern(),
           _bitmatch(),
-          @meson.meson(@list.empty(), @parser.parse_term("?y:A. x=y")),
+          @meson.meson(@list.List([]), @parser.parse_term("?y:A. x=y")),
         ]),
       ),
     ),
@@ -4358,7 +4358,7 @@ fn step_51() -> Unit raise {
               x409 : @kernel.Thm,
             ) => @kernel.inst_rule(@list.List([(ps, ea), (restm, eb)]), x409)
             let ps_p = @kernel.mk_comb(mp, val_e)
-            let th_p = if zs == @list.empty() {
+            let th_p = if zs == @list.List([]) {
               instab(th2)
             } else {
               let inverts = build_inverts(p)
@@ -4537,7 +4537,7 @@ pub fn bm_add_pos(
               ),
             )
           }
-          _ => @list.empty()
+          _ => @list.List([])
         }
       }
       fn build(
@@ -4564,7 +4564,7 @@ pub fn bm_add_pos(
           }
         }
       }
-      build(@list.empty(), tr)
+      build(@list.List([]), tr)
     }
     _ => raise Failure("bm_build_pos_tree")
   }
@@ -4591,7 +4591,7 @@ pub fn[TA] get_dt(
 ) -> (@list.List[(Bool, @kernel.Term)], TA) raise {
   let a = x438
   match x439 {
-    DiscrimTree::Leaf_dt(a_1) => (@list.empty(), a_1)
+    DiscrimTree::Leaf_dt(a_1) => (@list.List([]), a_1)
     DiscrimTree::Split_dt(i, bit, tr1, tr2) =>
       match @lib.array_get(a, @lib.int63_to_int(i)) {
         None => raise Failure("get_dt splitting on " + Int64::to_string(i))
@@ -5287,7 +5287,7 @@ fn step_52() -> Unit raise {
           }
         }
       }
-      @kernel.Term::Const("NILPAT", _) => (@list.empty(), w0)
+      @kernel.Term::Const("NILPAT", _) => (@list.List([]), w0)
       _ => raise Failure("inst_bitpat_numeral")
     }
   }
@@ -5672,7 +5672,7 @@ pub fn bitmatch_simp_conv(x552 : @list.List[@kernel.Thm]) -> @equal.Conv raise {
     x554 : @list.List[@kernel.Thm],
   ) -> (@list.List[@kernel.Thm], @list.List[@kernel.Thm]) raise {
     match x554 {
-      Empty => (@list.empty(), @list.empty())
+      Empty => (@list.List([]), @list.List([]))
       More(th, tail=ths) => {
         let (pos, neg) = go(ths)
         match @kernel.concl(th) {
@@ -6319,7 +6319,7 @@ fn step_53() -> Unit raise {
   ) -> (@list.List[(@kernel.Term, @kernel.Term)], @kernel.Thm) raise {
     match x614 {
       (@kernel.Term::Const("NILPAT", _), e) =>
-        (@list.empty(), @kernel.inst_rule(@list.List([(e, ee)]), pth0))
+        (@list.List([]), @kernel.inst_rule(@list.List([(e, ee)]), pth0))
       (
         @kernel.Term::Comb(
           @kernel.Term::Comb(@kernel.Term::Const("CONSPAT", _), p),
@@ -6686,7 +6686,7 @@ pub fn only_bitmatch_cases_then(
             _ => thltac(thl)
           }
         }
-        tac(@list.empty(), cs)
+        tac(@list.List([]), cs)
       },
       x649,
     )
@@ -7126,11 +7126,11 @@ fn[TA] first_n_l(x681 : @list.List[TA], x682 : Int64) -> @list.List[TA] raise {
   let l = x681
   let n = x682
   if n == 0L {
-    @list.empty()
+    @list.List([])
   } else {
     match l {
       More(h, tail=t) => first_n_l(t, @lib.sub63(n, 1L)).prepend(h)
-      Empty => @list.empty()
+      Empty => @list.List([])
     }
   }
 }

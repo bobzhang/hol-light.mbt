@@ -194,7 +194,7 @@ pub fn gl() -> @kernel.Thm {
 ///|
 /// MODAL_TAC
 fn step_17() -> Unit raise {
-  let t1 = @meson.meson_tac(@list.empty())
+  let t1 = @meson.meson_tac(@list.List([]))
   modal_tac_c.set(@tactics.then_tac(@simp.rewrite_tac(@list.List([valid(), @pair.forall_pair_thm(), holds_in(), holds()])), t1))
 }
 
@@ -332,7 +332,7 @@ fn step_24() -> Unit raise {
       }
     })(((x10 : @kernel.Thm) => @bool.specl(t9, x10))(x11))
   })
-  let t3 = @simp.simp_tac(@list.empty())
+  let t3 = @simp.simp_tac(@list.List([]))
   let t4 = @list.List([@tactics.then_tac(@tactics.disch_tac, @tactics.gen_tac), t3])
   let t23 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t4), t12), t20), t21), t22)
   holds_forall_lemma_c.set(@tactics.prove(@parser.parse_term("!W R P. (!A V. P(holds (W,R) V A)) <=> (!p:W->bool. P p)"), t23))
@@ -371,7 +371,7 @@ pub fn modal_schema_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 ///|
 /// MODAL_REFL
 fn step_26() -> Unit raise {
-  let t29 = @tactics.then_tac(modal_schema_tac, @meson.meson_tac(@list.empty()))
+  let t29 = @tactics.then_tac(modal_schema_tac, @meson.meson_tac(@list.List([])))
   modal_refl_c.set(@tactics.prove(@parser.parse_term("!W R. (!w:W. w IN W ==> R w w) <=> !A. holds_in (W,R) (Box A --> A)"), t29))
 }
 
@@ -387,7 +387,7 @@ pub fn modal_refl() -> @kernel.Thm {
 ///|
 /// MODAL_TRANS
 fn step_27() -> Unit raise {
-  let t30 = @tactics.then_tac(modal_schema_tac, @meson.meson_tac(@list.empty()))
+  let t30 = @tactics.then_tac(modal_schema_tac, @meson.meson_tac(@list.List([])))
   modal_trans_c.set(@tactics.prove(@parser.parse_term("!W R. (!w w' w'':W. w IN W /\\ w' IN W /\\ w'' IN W /\\\n                       R w w' /\\ R w' w'' ==> R w w'') <=>\n         (!A. holds_in (W,R) (Box A --> Box(Box A)))"), t30))
 }
 
@@ -403,7 +403,7 @@ pub fn modal_trans() -> @kernel.Thm {
 ///|
 /// MODAL_SERIAL
 fn step_28() -> Unit raise {
-  let t31 = @tactics.then_tac(modal_schema_tac, @meson.meson_tac(@list.empty()))
+  let t31 = @tactics.then_tac(modal_schema_tac, @meson.meson_tac(@list.List([])))
   modal_serial_c.set(@tactics.prove(@parser.parse_term("!W R. (!w:W. w IN W ==> ?w'. w' IN W /\\ R w w') <=>\n         (!A. holds_in (W,R) (Box A --> Diamond A))"), t31))
 }
 
@@ -419,7 +419,7 @@ pub fn modal_serial() -> @kernel.Thm {
 ///|
 /// MODAL_SYM
 fn step_29() -> Unit raise {
-  let t42 = @meson.asm_meson_tac(@list.empty())
+  let t42 = @meson.asm_meson_tac(@list.List([]))
   let t37 = @parser.parse_term("w:W")
   let t38 = @list.List([@parser.parse_term("\\v:W. v = w"), t37])
   let t41 = @tactics.first_x_assum(fn(x40 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -431,7 +431,7 @@ fn step_29() -> Unit raise {
     })(((x39 : @kernel.Thm) => @bool.specl(t38, x39))(x40))
   })
   let t32 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t33 = @list.List([@meson.meson_tac(@list.empty()), t32])
+  let t33 = @list.List([@meson.meson_tac(@list.List([])), t32])
   let t43 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(modal_schema_tac, @tactics.eq_tac), t33), t41), t42)
   modal_sym_c.set(@tactics.prove(@parser.parse_term("!W R. (!w w':W. w IN W /\\ w' IN W /\\ R w w' ==> R w' w) <=>\n         (!A. holds_in (W,R) (A --> Box(Diamond A)))"), t43))
 }
@@ -448,7 +448,7 @@ pub fn modal_sym() -> @kernel.Thm {
 ///|
 /// MODAL_WFTRANS
 fn step_30() -> Unit raise {
-  let t66 = @meson.asm_meson_tac(@list.empty())
+  let t66 = @meson.asm_meson_tac(@list.List([]))
   let t62 = @tactics.match_mp_tac(@theorems.mono_forall())
   let t58 = @parser.parse_term("\\x:W. !w:W. x IN W /\\ R w x ==> P x")
   let t61 = @tactics.first_x_assum(fn(x60 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {

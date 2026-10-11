@@ -21,7 +21,7 @@ test "metis matches metis.ml" {
   let pv = (name : String, s : String, tac : @tactics.Tactic) => {
     log.attempt(name, () => sthm(@tactics.prove(tm(s), tac)))
   }
-  let none : @list.List[@kernel.Thm] = @list.empty()
+  let none : @list.List[@kernel.Thm] = @list.List([])
   pv("refl", "!x:A. P x ==> P x", @metis.metis_tac(none))
   pv("drinker", "?x:A. P x ==> !y. P y", @metis.metis_tac(none))
   pv(

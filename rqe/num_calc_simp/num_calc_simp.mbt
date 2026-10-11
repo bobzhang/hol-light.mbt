@@ -32,7 +32,7 @@ pub fn arith_ss(x1 : @list.List[@kernel.Thm]) -> @simp.Simpset raise {
 /// `ARITH_SIMP_CONV`
 pub fn arith_simp_conv(x20 : @list.List[@kernel.Thm]) -> @equal.Conv raise {
   let thl = x20
-  @simp.simplify_conv(arith_ss(@list.empty()), thl)
+  @simp.simplify_conv(arith_ss(@list.List([])), thl)
 }
 
 ///|

@@ -90,7 +90,7 @@ pub fn terms_to_be_generalized(x18 : @kernel.Term) -> @list.List[@kernel.Term] r
   fn terms_to_be_generalized_p(x19 : @list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise {
     let tml = x19
     if @list.List::is_empty(tml) {
-      @list.empty()
+      @list.List([])
     } else {
       match tml {
         More(h, tail=t) => {
@@ -133,7 +133,7 @@ pub fn distinct_vars(x27 : @list.List[@kernel.Term], x28 : @list.List[@kernel.Ho
   let vars = x27
   let tyl = x28
   if @list.List::is_empty(tyl) {
-    @list.empty()
+    @list.List([])
   } else {
     let var_ = distinct_var(vars, @lib.hd(tyl))
     distinct_vars(vars.prepend(var_), @lib.tl(tyl)).prepend(var_)
@@ -148,7 +148,7 @@ pub fn apply_gen_lemma(x29 : @kernel.Term, x30 : @kernel.Thm) -> @kernel.Thm rai
   try {
     let apply_gen_lemma_p : (@kernel.Term) -> @kernel.Thm raise = fn(x31 : @kernel.Term) -> @kernel.Thm raise {
       let subtm = x31
-      let (_, tm_bind, ty_bind) = @drule.term_match(@list.empty(), subtm, tm)
+      let (_, tm_bind, ty_bind) = @drule.term_match(@list.List([]), subtm, tm)
       let (insts, vars) = @lib.list_split(tm_bind)
       let th_p = (fn(x34 : @kernel.Thm) -> @kernel.Thm raise {
         ((x32 : @kernel.Thm) => @bool.specl(insts, x32))(((x33 : @kernel.Thm) => @bool.genl(vars, x33))(x34))
@@ -169,7 +169,7 @@ pub fn apply_gen_lemma(x29 : @kernel.Term, x30 : @kernel.Thm) -> @kernel.Thm rai
         let conc_vars = @kernel.frees(conc)
         let good_subterm : (@kernel.Term) -> Bool raise = fn(x38 : @kernel.Term) -> Bool raise {
           let subtm_1 = x38
-          (@lib.can((x39 : @kernel.Term) => @drule.term_match(@list.empty(), subtm_1, x39), tm) && @list.List::is_empty(@lib.subtract(conc_vars, @kernel.frees(subtm_1))))
+          (@lib.can((x39 : @kernel.Term) => @drule.term_match(@list.List([]), subtm_1, x39), tm) && @list.List::is_empty(@lib.subtract(conc_vars, @kernel.frees(subtm_1))))
         }
         let subtms = @lib.rev(@basics.find_terms(good_subterm, conc))
         @lib.tryfind(apply_gen_lemma_p, subtms)
@@ -571,7 +571,7 @@ fn step_1() -> Unit raise {
   }
   all_variables_c.set(fn(x123 : @kernel.Term) -> @list.List[@kernel.Term] raise {
     let tm_1 = x123
-    vars(@list.empty(), tm_1)
+    vars(@list.List([]), tm_1)
   })
 }
 
@@ -611,7 +611,7 @@ fn step_2() -> Unit raise {
   }
   all_equations_c.set(fn(x126 : @kernel.Term) -> @list.List[@kernel.Term] raise {
     let tm_1 = x126
-    eqs(@list.empty(), tm_1)
+    eqs(@list.List([]), tm_1)
   })
 }
 
@@ -768,7 +768,7 @@ fn[TA, TB] generateproposals_p_l(x147 : TA, x148 : @kernel.Term, x149 : TB, x150
   let tm_1 = x148
   let phi_1 = x149
   let gens = x150
-  let p = @list.empty()
+  let p = @list.List([])
   if @basics.is_eq(tm_1) {
     let (t1, t2) = @kernel.dest_eq(tm_1)
     let p1 = generateproposals_p_l(bad, t1, phi_1, gens)
@@ -798,7 +798,7 @@ fn[TA, TB] generateproposals_p_l(x147 : TA, x148 : @kernel.Term, x149 : TB, x150
       let s = if (recpos > 0L) {
         @list.List([@lib.el(@lib.int63_to_int(@lib.sub63(recpos, 1L)), args)])
       } else {
-        @list.empty()
+        @list.List([])
       }
       let p_2 = if is_suitable_proposal(s, phi_1, gens) {
         p.concat(@list.List([s]))
@@ -1175,21 +1175,21 @@ pub fn generalize_heuristic_aderhold(x239 : @kernel.Term, x240 : Bool) -> ((@lis
       let (tm_p, subs) = try {
         generalize_apart(tm)
       } catch {
-        Failure(_) => (tm, @list.empty())
+        Failure(_) => (tm, @list.List([]))
         e => raise e
       }
       let (new_ap_vars, gen_ap_terms) = @lib.list_split(subs)
       let (tm_p_p, subs_1) = try {
         generalizecommonsubterms(tm_p)
       } catch {
-        Failure(_) => (tm_p, @list.empty())
+        Failure(_) => (tm_p, @list.List([]))
         e => raise e
       }
       if (tm == tm_p_p) {
         raise Failure("")
       } else {
         let (new_vars, gen_terms) = @lib.list_split(subs_1)
-        let lemmas = @list.empty()
+        let lemmas = @list.List([])
         let countercheck = try {
           @counterexample.counter_check(5L, tm_p_p)
         } catch {
@@ -1248,11 +1248,11 @@ pub fn generalize_heuristic_ext(x256 : @kernel.Term, x257 : Bool) -> ((@list.Lis
           @kernel.eq_mp(@equal.conv_rule(@equal.rand_conv(@simp.rewr_conv(@rewrite_rules.f_or())), t260), th)
         }
       }
-      let lemmas = @list.empty()
+      let lemmas = @list.List([])
       let (tm_p, subs) = try {
         generalize_apart(tm)
       } catch {
-        Failure(_) => (tm, @list.empty())
+        Failure(_) => (tm, @list.List([]))
         e => raise e
       }
       let (new_ap_vars, gen_ap_terms) = @lib.list_split(subs)

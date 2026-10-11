@@ -78,7 +78,7 @@ pub fn log_reduce() -> @kernel.Thm {
 ///|
 /// log_reduce_exp_high
 fn step_5() -> Unit raise {
-  let t47 = @simp.asm_rewrite_tac(@list.empty())
+  let t47 = @simp.asm_rewrite_tac(@list.List([]))
   let t46 = @tactics.match_mp_tac(@real.real_le_inv2())
   let t45 = @simp.asm_simp_tac(@list.List([@realax.real_div(), @real.real_le_lmul_eq()]))
   let t44 = @tactics.exists_tac(@parser.parse_term("x / t"))
@@ -104,7 +104,7 @@ fn step_5() -> Unit raise {
       s27(x28)
     }
   })
-  let t25 = @simp.asm_rewrite_tac(@list.empty())
+  let t25 = @simp.asm_rewrite_tac(@list.List([]))
   let t24 = @tactics.exists_tac(@parser.parse_term("log (&1 + a)"))
   let t23 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t22 = @simp.asm_rewrite_tac(@list.List([@real.real_le_radd()]))
@@ -145,7 +145,7 @@ fn step_6() -> Unit raise {
       s57(x58)
     }
   })
-  let t55 = @simp.asm_rewrite_tac(@list.empty())
+  let t55 = @simp.asm_rewrite_tac(@list.List([]))
   let t54 = @tactics.exists_tac(@parser.parse_term("log (&1 + a)"))
   let t53 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t52 = @simp.asm_rewrite_tac(@list.List([@real.real_le_radd()]))
@@ -178,7 +178,7 @@ fn step_7() -> Unit raise {
     }
   })
   let t86 = @tactics.match_mp_tac(@transcendentals.log_le_strong())
-  let t85 = @simp.asm_rewrite_tac(@list.empty())
+  let t85 = @simp.asm_rewrite_tac(@list.List([]))
   let t80 = @parser.parse_term("b:real")
   let t81 = @parser.parse_term("a:real")
   let t82 = @parser.parse_term("a:real")
@@ -213,7 +213,7 @@ pub fn log_reduce_simple_high() -> @kernel.Thm {
 /// log_reduce_simple_low
 fn step_8() -> Unit raise {
   let t107 = @simp.asm_simp_tac(@list.List([@transcendentals.log_mono_le()]))
-  let t105 = @simp.asm_simp_tac(@list.empty())
+  let t105 = @simp.asm_simp_tac(@list.List([]))
   let t106 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.spec(@parser.parse_term("x:real"), @real.real_lt_inv())), t105), @int.asm_arith_tac), @tactics.all_tac])
   let t104 = @tactics.subgoal_then(@parser.parse_term("&0 < inv x /\\ &0 < t"), fn(x101 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s102 = @tactics.assume_tac(x101)

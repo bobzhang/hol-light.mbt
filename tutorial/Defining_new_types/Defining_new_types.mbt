@@ -409,7 +409,7 @@ pub fn line_axiom_4() -> @kernel.Thm {
 ///|
 /// point_tybij
 fn step_23() -> Unit raise {
-  let t47 = @simp.rewrite_tac(@list.empty())
+  let t47 = @simp.rewrite_tac(@list.List([]))
   point_tybij_c.set(@class.new_type_definition("point", ("mk_point", "dest_point"), @tactics.prove(@parser.parse_term("?x:line. T"), t47)))
 }
 

@@ -72,14 +72,14 @@ pub fn fano_incidence() -> @list.List[(Int64, Int64)] {
 /// `fano_point`
 pub fn fano_point(x1 : Int64) -> @kernel.Term raise {
   let i = x1
-  @kernel.mk_const(("Point_" + Int64::to_string(i)), @list.empty())
+  @kernel.mk_const(("Point_" + Int64::to_string(i)), @list.List([]))
 }
 
 ///|
 /// `fano_line`
 pub fn fano_line(x2 : Int64) -> @kernel.Term raise {
   let i = x2
-  @kernel.mk_const(("Line_" + Int64::to_string(i)), @list.empty())
+  @kernel.mk_const(("Line_" + Int64::to_string(i)), @list.List([]))
 }
 
 ///|
@@ -177,7 +177,7 @@ pub fn on_clauses() -> @kernel.Thm {
 /// FORALL_POINT
 fn step_9() -> Unit raise {
   let t16 = @simp.rewrite_tac(@list.List([point_induct()]))
-  let t17 = @tactics.thenl(@tactics.eq_tac, @list.List([@simp.simp_tac(@list.empty()), t16]))
+  let t17 = @tactics.thenl(@tactics.eq_tac, @list.List([@simp.simp_tac(@list.List([])), t16]))
   forall_point_c.set(@tactics.prove(@parser.parse_term("(!p. P p) <=> P Point_1 /\\ P Point_2 /\\ P Point_3 /\\ P Point_4 /\\\n                 P Point_5 /\\ P Point_6 /\\ P Point_7"), t17))
 }
 
@@ -194,7 +194,7 @@ pub fn forall_point() -> @kernel.Thm {
 /// FORALL_LINE
 fn step_10() -> Unit raise {
   let t18 = @simp.rewrite_tac(@list.List([line_induct()]))
-  let t19 = @tactics.thenl(@tactics.eq_tac, @list.List([@simp.simp_tac(@list.empty()), t18]))
+  let t19 = @tactics.thenl(@tactics.eq_tac, @list.List([@simp.simp_tac(@list.List([])), t18]))
   forall_line_c.set(@tactics.prove(@parser.parse_term("(!p. P p) <=> P Line_1 /\\ P Line_2 /\\ P Line_3 /\\ P Line_4 /\\\n                 P Line_5 /\\ P Line_6 /\\ P Line_7"), t19))
 }
 

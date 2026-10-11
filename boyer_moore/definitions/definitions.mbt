@@ -18,10 +18,10 @@ pub fn recursive_calls(x1 : String, x2 : @kernel.Term) -> @list.List[@kernel.Ter
     } else {
       @lib.itlist(fn(x3 : @list.List[@kernel.Term], x4 : @list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise {
         @lib.list_append(x3, x4)
-      }, @lib.map((x5 : @kernel.Term) => recursive_calls(name, x5), args), @list.empty())
+      }, @lib.map((x5 : @kernel.Term) => recursive_calls(name, x5), args), @list.List([]))
     }
   } catch {
-    Failure(_) => @list.empty()
+    Failure(_) => @list.List([])
     e => raise e
   }
 }

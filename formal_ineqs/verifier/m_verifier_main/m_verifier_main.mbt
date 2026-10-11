@@ -114,7 +114,7 @@ pub impl @lib.OHash for VerificationStats with fn ohash_visit(self, h) {
 /// `unzip3`
 pub fn[TA, TB, TC] unzip3(x1 : @list.List[(TA, TB, TC)]) -> ((@list.List[TA], @list.List[TB], @list.List[TC])) raise {
   match x1 {
-    Empty => (@list.empty(), @list.empty(), @list.empty())
+    Empty => (@list.List([]), @list.List([]), @list.List([]))
     More((a, b, c), tail=t) => {
       let (x, y, z) = unzip3(t)
       (x.prepend(a), y.prepend(b), z.prepend(c))
@@ -917,7 +917,7 @@ pub fn convert_to_float_list(x226 : Int64, x227 : Bool, x228 : @kernel.Term) -> 
   let i_funs = @lib.map(@eval_interval.build_interval_fun, tms)
   let ints = @lib.map(fn(x229 : @eval_interval.IntervalFun) -> @kernel.Thm raise {
     let f = x229
-    @eval_interval.eval_interval_fun(pp, f, @list.empty(), @list.empty())
+    @eval_interval.eval_interval_fun(pp, f, @list.List([]), @list.List([]))
   }, i_funs)
   let t232 = if lo_flag {
     fn(x230 : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
@@ -953,7 +953,7 @@ pub fn mk_float_domain(x237 : Int64, x238 : (@kernel.Term, @kernel.Term)) -> ((@
     let i_funs = @lib.map(@eval_interval.build_interval_fun, tms)
     @lib.map(fn(x240 : @eval_interval.IntervalFun) -> @kernel.Thm raise {
       let f = x240
-      @eval_interval.eval_interval_fun(pp, f, @list.empty(), @list.empty())
+      @eval_interval.eval_interval_fun(pp, f, @list.List([]), @list.List([]))
     }, i_funs)
   }
   let xx_ints = get_intervals(xx_list)
@@ -1184,7 +1184,7 @@ pub fn mk_ineq(x299 : @kernel.Term, x300 : @list.List[String], x301 : (@kernel.T
 pub fn dest_ineq(x312 : @kernel.Term) -> ((@kernel.Term, @list.List[String], (@kernel.Term, @kernel.Term))) raise {
   let ineq_tm = x312
   if @list.List::is_empty(@kernel.frees(ineq_tm)) {
-    (ineq_tm, @list.empty(), (@misc_vars.real_empty_list(), @misc_vars.real_empty_list()))
+    (ineq_tm, @list.List([]), (@misc_vars.real_empty_list(), @misc_vars.real_empty_list()))
   } else {
     let t315 = @simp.pure_rewrite_conv(@list.List([@theorems.imp_imp(), @equal.gsym(@theorems.conj_assoc())]))
     let tm0 = (fn(x314 : @kernel.Thm) -> @kernel.Term raise {
@@ -1194,7 +1194,7 @@ pub fn dest_ineq(x312 : @kernel.Term) -> ((@kernel.Term, @list.List[String], (@k
     })(t315(ineq_tm))
     let (cond, ineq) = @basics.dest_imp(tm0)
     let conds = @lib.striplist(@basics.dest_conj, cond)
-    let ineqs = Ref::{ val: @list.empty() }
+    let ineqs = Ref::{ val: @list.List([]) }
     let decode_ineq : (@kernel.Term) -> Unit raise = fn(x316 : @kernel.Term) -> Unit raise {
       let tm = x316
       let (lhs, rhs) = @basics.dest_binop(@misc_vars.le_op_real(), tm)
@@ -1323,7 +1323,7 @@ pub fn verify_ineq0(x340 : VerificationParameters, x341 : Bool, x342 : Int64, x3
   })(imp_th1))
   if @list.List::is_empty(@kernel.frees(ineq_tm1)) {
     let i_fun = @eval_interval.build_interval_fun(ineq_tm1)
-    let th0 = @eval_interval.eval_interval_fun(pp, i_fun, @list.empty(), @list.empty())
+    let th0 = @eval_interval.eval_interval_fun(pp, i_fun, @list.List([]), @list.List([]))
     let th1 = @more_float.float_interval_lt0(th0)
     let total = (({
       (@lib.cpu_time.val)()
@@ -1343,7 +1343,7 @@ pub fn verify_ineq0(x340 : VerificationParameters, x341 : Bool, x342 : Int64, x3
       let name = x351
       let list = x352
       list.prepend(@lib.assoc(name, bounds0))
-    }, vars, @list.empty())
+    }, vars, @list.List([]))
     let (xx, zz) = @lib.unzip(bounds)
     let t353 = @misc_vars.mk_real_list(zz)
     let (xx_1, zz_1) = (@misc_vars.mk_real_list(xx), t353)
@@ -1537,7 +1537,7 @@ pub fn verify_disj_ineq0(x378 : VerificationParameters, x379 : Bool, x380 : Int6
       let name = x388
       let list = x389
       list.prepend(@lib.assoc(name, bounds0))
-    }, vars, @list.empty())
+    }, vars, @list.List([]))
     let (xx, zz) = @lib.unzip(bounds)
     let t390 = @misc_vars.mk_real_list(zz)
     let (xx_1, zz_1) = (@misc_vars.mk_real_list(xx), t390)

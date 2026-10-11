@@ -29,7 +29,7 @@ test "Hashtbl.hash matches OCaml" {
   log.h("str_abcd", "abcd")
   log.h("str_hello", "hello world")
   log.h("str_utf8", "été")
-  log.h("nil", (@list.empty() : @list.List[Int]))
+  log.h("nil", (@list.List([]) : @list.List[Int]))
   log.h("list123", @list.List([1, 2, 3]))
   log.h("list_str", @list.List(["a", "b"]))
   log.h("list_long", @list.List([ for i in 1..<=30 => i ]))
@@ -46,7 +46,7 @@ test "Hashtbl.hash matches OCaml" {
   let x = @kernel.mk_var("x", a)
   let f = @kernel.mk_var("f", fa)
   log.h("var", x)
-  log.h("const", @kernel.mk_const("=", @list.empty()))
+  log.h("const", @kernel.mk_const("=", @list.List([])))
   log.h("comb", @kernel.mk_comb(f, x))
   log.h("abs", @kernel.mk_abs(x, @kernel.mk_comb(f, x)))
   let mut deep = x

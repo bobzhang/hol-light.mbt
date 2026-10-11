@@ -7,7 +7,7 @@ pub fn boyer_moore_final(x1 : @list.List[@kernel.Thm], x2 : @kernel.Term) -> @ke
   let l = x1
   let tm = x2
   {
-    @environment.my_gen_terms().val = @list.empty()
+    @environment.my_gen_terms().val = @list.List([])
     ()
   }
   {
@@ -39,7 +39,7 @@ pub fn boyer_moore_final(x1 : @list.List[@kernel.Thm], x2 : @kernel.Term) -> @ke
       @irrelevance.irrelevance_heuristic(x10.0, x10.1)
     }]), fn(x11 : (@kernel.Term, Bool)) -> (@list.List[(@kernel.Term, Bool)], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       @induction.induction_heuristic(x11.0, x11.1)
-    }, @list.empty(), (tm, false)))
+    }, @list.List([]), (tm, false)))
   } catch {
     Failure(_) => raise Failure("BOYER_MOORE")
     e => raise e
@@ -52,7 +52,7 @@ pub fn boyer_moore_meson(x12 : @list.List[@kernel.Thm], x13 : @kernel.Term) -> @
   let l = x12
   let tm = x13
   {
-    @environment.my_gen_terms().val = @list.empty()
+    @environment.my_gen_terms().val = @list.List([])
     ()
   }
   {
@@ -84,7 +84,7 @@ pub fn boyer_moore_meson(x12 : @list.List[@kernel.Thm], x13 : @kernel.Term) -> @
       @irrelevance.irrelevance_heuristic(x22.0, x22.1)
     }]), fn(x23 : (@kernel.Term, Bool)) -> (@list.List[(@kernel.Term, Bool)], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       @induction.induction_heuristic(x23.0, x23.1)
-    }, @list.empty(), (tm, false)))
+    }, @list.List([]), (tm, false)))
   } catch {
     Failure(_) => raise Failure("BOYER_MOORE")
     e => raise e
@@ -97,7 +97,7 @@ pub fn boyer_moore_gen(x24 : @list.List[@kernel.Thm], x25 : @kernel.Term) -> @ke
   let l = x24
   let tm = x25
   {
-    @environment.my_gen_terms().val = @list.empty()
+    @environment.my_gen_terms().val = @list.List([])
     ()
   }
   {
@@ -129,7 +129,7 @@ pub fn boyer_moore_gen(x24 : @list.List[@kernel.Thm], x25 : @kernel.Term) -> @ke
       @irrelevance.irrelevance_heuristic(x33.0, x33.1)
     }]), fn(x34 : (@kernel.Term, Bool)) -> (@list.List[(@kernel.Term, Bool)], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       @induction.induction_heuristic(x34.0, x34.1)
-    }, @list.empty(), (tm, false)))
+    }, @list.List([]), (tm, false)))
   } catch {
     Failure(_) => raise Failure("BOYER_MOORE")
     e => raise e
@@ -141,7 +141,7 @@ pub fn boyer_moore_gen(x24 : @list.List[@kernel.Thm], x25 : @kernel.Term) -> @ke
 pub fn boyer_moore_ext(x35 : @kernel.Term) -> @kernel.Thm raise {
   let tm = x35
   {
-    @environment.my_gen_terms().val = @list.empty()
+    @environment.my_gen_terms().val = @list.List([])
     ()
   }
   {
@@ -175,7 +175,7 @@ pub fn boyer_moore_ext(x35 : @kernel.Term) -> @kernel.Thm raise {
       @irrelevance.irrelevance_heuristic(x43.0, x43.1)
     }]), fn(x44 : (@kernel.Term, Bool)) -> (@list.List[(@kernel.Term, Bool)], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       @induction.induction_heuristic(x44.0, x44.1)
-    }, @list.empty(), (tm, false)))
+    }, @list.List([]), (tm, false)))
   } catch {
     Failure(_) => raise Failure("BOYER_MOORE")
     e => raise e
@@ -188,7 +188,7 @@ pub fn boyer_moore_re(x45 : @list.List[@kernel.Thm], x46 : @kernel.Term) -> @ker
   let l = x45
   let tm = x46
   {
-    @environment.my_gen_terms().val = @list.empty()
+    @environment.my_gen_terms().val = @list.List([])
     ()
   }
   {
@@ -220,7 +220,7 @@ pub fn boyer_moore_re(x45 : @list.List[@kernel.Thm], x46 : @kernel.Term) -> @ker
       @irrelevance.irrelevance_heuristic(x54.0, x54.1)
     }]), fn(x55 : (@kernel.Term, Bool)) -> (@list.List[(@kernel.Term, Bool)], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       @induction.induction_heuristic(x55.0, x55.1)
-    }, @list.empty(), (tm, false)))
+    }, @list.List([]), (tm, false)))
   } catch {
     Failure(_) => raise Failure("BOYER_MOORE")
     e => raise e
@@ -236,7 +236,7 @@ pub fn boyer_moore(x56 : @kernel.Term) -> @kernel.Thm raise {
     ()
   }
   {
-    @environment.my_gen_terms().val = @list.empty()
+    @environment.my_gen_terms().val = @list.List([])
     ()
   }
   {
@@ -321,7 +321,7 @@ pub fn[TA, TB] heuristic_tac(x65 : @list.List[((@kernel.Term, Bool)) -> (@list.L
     let tm_2 = @support.list_mk_imp(asl_1, w)
     let tree = @waterfall.proof_print_newline(@waterfall.filtered_waterfall(heuristics.prepend(fn(x74 : (@kernel.Term, Bool)) -> (@list.List[(@kernel.Term, Bool)], (@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       @waterfall.clausal_form_heuristic(x74.0, x74.1)
-    }), @list.empty(), (tm_2, false)))
+    }), @list.List([]), (tm_2, false)))
     let tml = @lib.map(fn(x75 : (@kernel.Term, Bool)) -> @kernel.Term raise {
       x75.0
     }, @waterfall.fringe_of_clause_tree(tree))

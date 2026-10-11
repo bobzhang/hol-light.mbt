@@ -394,7 +394,7 @@ fn step_1() -> Unit raise {
       let (ts, th_p_p) = undisch_terms(th_p)
       (ts.prepend(t), th_p_p)
     } catch {
-      Failure(_) => (@list.empty(), th_1)
+      Failure(_) => (@list.List([]), th_1)
       e => raise e
     }
   }
@@ -523,7 +523,7 @@ fn step_1() -> Unit raise {
       let (vs_1, th_p_p_1) = spec_vars(th_p_1)
       (vs_1.prepend(v), th_p_p_1)
     } catch {
-      Failure(_) => (@list.empty(), th_6)
+      Failure(_) => (@list.List([]), th_6)
       e => raise e
     }
   }
@@ -624,17 +624,17 @@ fn step_1() -> Unit raise {
       ) -> @list.List[@kernel.Thm] raise {
         let acc = x71
         match x72 {
-          Empty => @list.empty()
+          Empty => @list.List([])
           More(h_2, tail=hs_2) => {
             let t73 = loop_(acc.prepend(h_2), hs_2)
             (@list.List([f_7(h_2)(acc.concat(hs_2))]) catch {
-              Failure(_) => @list.empty()
+              Failure(_) => @list.List([])
               e => raise e
             }).concat(t73)
           }
         }
       }
-      loop_(@list.empty(), hs)
+      loop_(@list.List([]), hs)
     }
   }
   let gmatch_mps : (@list.List[@kernel.Thm]) -> ((@list.List[@kernel.Thm]) -> @list.List[
@@ -682,7 +682,7 @@ fn step_1() -> Unit raise {
         }
       }
       match ths1 {
-        Empty => @list.empty()
+        Empty => @list.List([])
         More(th1_2, tail=ths1_p) => {
           fn self__1(
             x84 : @list.List[@kernel.Thm],
@@ -709,7 +709,7 @@ fn step_1() -> Unit raise {
                 )
             }
           }
-          self__1(@list.empty(), th1_2, ths1_p, ths2)
+          self__1(@list.List([]), th1_2, ths1_p, ths2)
         }
       }
     }
@@ -742,7 +742,7 @@ fn step_1() -> Unit raise {
       ) -> @list.List[@kernel.Thm] raise {
         let ths2_2 = x94
         match x95 {
-          Empty => @list.empty()
+          Empty => @list.List([])
           More(_, tail=_) as ths1_4 => {
             let ths1_p_p = gmatch_mps(ths1_4)(ths2_2)
             self__2(ths2_2, ths1_p_p).concat(ths1_p_p)
@@ -810,7 +810,7 @@ fn step_1() -> Unit raise {
         x112 : @list.List[@kernel.Term],
       ) -> @list.List[@kernel.Term] raise {
         match x112 {
-          Empty => @list.empty()
+          Empty => @list.List([])
           More(x_12, tail=xs_6) if lt(x_12)(t_8) => self__4(xs_6).prepend(x_12)
           More(x_13, tail=xs_7) if x_13 == t_8 => xs_7
           More(_, tail=_) as xs_8 => xs_8
@@ -835,7 +835,7 @@ fn step_1() -> Unit raise {
   }
   let strip_conj_1 : (@kernel.Term) -> @list.List[@kernel.Term] raise = (
     x115 : @kernel.Term,
-  ) => self__5(@list.empty(), x115)
+  ) => self__5(@list.List([]), x115)
   fn union(
     x116 : @list.List[@kernel.Term],
     x117 : @list.List[@kernel.Term],
@@ -878,7 +878,7 @@ fn step_1() -> Unit raise {
       )
     }
   }
-  let empty = @list.empty()
+  let empty = @list.List([])
   fn frees(
     x133 : @list.List[@kernel.Term],
     x134 : @kernel.Term,
@@ -1104,8 +1104,8 @@ fn step_1() -> Unit raise {
           }
         }
         let (tenv_1, tyenv_1) = self__7(
-          @list.empty(),
-          (@list.empty(), @list.empty()),
+          @list.List([]),
+          (@list.List([]), @list.List([])),
           p_3,
           of_term(t_14),
         )
@@ -1175,13 +1175,13 @@ fn step_1() -> Unit raise {
       let fvs = @lib.subtract(@lib.subtract(@kernel.frees(bod), t171), lcs_1)
       fn(x172 : @kernel.Term) -> @kernel.Thm raise {
         let tm = x172
-        let bvms = match_bvs(tm, pbod, @list.empty())
+        let bvms = match_bvs(tm, pbod, @list.List([]))
         let abod = @drule.deep_alpha(bvms, bod)
         let ath = @kernel.eq_mp(@equal.alpha_rule(bod, abod), sth)
         let t173 = partfn(abod)
         let (insts, tyinsts) = fo_term_match(lcs_1)(t173)(tm)
         let eth = @drule.instantiate_all(
-          (@list.empty(), insts, tyinsts),
+          (@list.List([]), insts, tyinsts),
           @bool.genl(fvs, ath),
         )
         let fth = @lib.itlist(
@@ -1205,7 +1205,7 @@ fn step_1() -> Unit raise {
       }
     }
   }
-  let empty_net = FoNetsT::Netnode(@list.empty(), @list.empty())
+  let empty_net = FoNetsT::Netnode(@list.List([]), @list.List([]))
   let label_to_store : (@list.List[@kernel.Term]) -> ((@kernel.Term) -> (
     FoNetsTermLabel,
     @list.List[@kernel.Term],
@@ -1467,7 +1467,7 @@ fn step_1() -> Unit raise {
   ) -> ((@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise) raise {
     let lem_9 = x221
     let t223 = @kernel.inst_rule(@list.List([(c_, d_)]), lem_9)
-    let lem_p = @simp.rewrite_rule(@list.empty())(t223)
+    let lem_p = @simp.rewrite_rule(@list.List([]))(t223)
     fn(x224 : @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       let th_16 = x224
       fn(x225 : @kernel.Term) -> @kernel.Thm raise {
@@ -1490,7 +1490,7 @@ fn step_1() -> Unit raise {
     @theorems.mono_or(),
   )
   let t226 = @kernel.inst_rule(@list.List([(c_, d_)]), @theorems.mono_imp())
-  let mono_imp_p = @simp.rewrite_rule(@list.empty())(t226)
+  let mono_imp_p = @simp.rewrite_rule(@list.List([]))(t226)
   let mkimpl_imp : (@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise = fn(
     x227 : @kernel.Thm,
   ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -1512,7 +1512,7 @@ fn step_1() -> Unit raise {
   ) -> ((@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise) raise {
     let lem_10 = x229
     let t231 = @kernel.inst_rule(@list.List([(a_, b_)]), lem_10)
-    let lem_p_1 = @simp.rewrite_rule(@list.empty())(t231)
+    let lem_p_1 = @simp.rewrite_rule(@list.List([]))(t231)
     fn(x232 : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
       let t_28 = x232
       fn(x233 : @kernel.Thm) -> @kernel.Thm raise {
@@ -3474,7 +3474,7 @@ fn step_1() -> Unit raise {
       @simp.mk_rewrites(false, x543, x544)
     },
     @list.List([@class.not_forall_thm(), @class.not_imp()]),
-    @list.empty(),
+    @list.List([]),
   )
   let bigger_net : (Unit) -> @nets.Net[
     @simp.GconvOf[(@kernel.Term) -> @kernel.Thm raise],
@@ -3642,7 +3642,7 @@ fn step_1() -> Unit raise {
         ) raise) raise,
       ] raise {
         let v_37 = x616
-        let ths_1 = Ref::{ val: @list.empty(), }
+        let ths_1 = Ref::{ val: @list.List([]), }
         let net_p = filter_l(
           fn(
             x620 : (
@@ -4888,7 +4888,7 @@ fn step_1() -> Unit raise {
         ] raise) raise,
       ] raise {
         let v_53 = x810
-        let ths_8 = Ref::{ val: @list.empty(), }
+        let ths_8 = Ref::{ val: @list.List([]), }
         let net_p_1 = filter_l(
           fn(
             x814 : (
@@ -5309,7 +5309,7 @@ fn step_1() -> Unit raise {
       },
     )
   }
-  let exists_ctximpconv_1 = self__13(@list.empty())
+  let exists_ctximpconv_1 = self__13(@list.List([]))
   let bind_impmconv : (
     (VarianceT) -> ((@kernel.Term) -> @list.List[@kernel.Thm] raise) raise,
   ) -> ((VarianceT) -> ((@kernel.Thm) -> @list.List[@kernel.Thm] raise) raise) raise = fn(
@@ -5347,7 +5347,7 @@ fn step_1() -> Unit raise {
     }
   }
   let pre : (VarianceT) -> ((@kernel.Term) -> @kernel.Thm raise) raise = apply_l(
-    try_ctximpconv(rewrite_ctximpconv(@list.empty())),
+    try_ctximpconv(rewrite_ctximpconv(@list.List([]))),
   )
   let post = try_ctximpconv(top_depth_ctximpconv(exists_ctximpconv_1))
   let target_rewrite_impconv : (@list.List[@kernel.Thm]) -> ((
@@ -5421,7 +5421,7 @@ fn step_1() -> Unit raise {
             )
           },
           l_22,
-          @list.empty(),
+          @list.List([]),
         ),
       )
     }
@@ -5462,7 +5462,7 @@ fn step_1() -> Unit raise {
               x919 : @kernel.Term,
             ) -> ((@kernel.Thm) -> Bool raise) raise {
               let g_2 = x919
-              let t929 = fo_term_match(@list.empty())
+              let t929 = fo_term_match(@list.List([]))
               let t930 = (fn(
                 x928 : (@kernel.Term) -> (
                   @list.List[(@kernel.Term, @kernel.Term)],
@@ -5676,7 +5676,7 @@ fn[TD, TE] mapfilteri_l(
   fn self_(x16 : Int64, x17 : @list.List[TE]) -> @list.List[TD] raise {
     let i = x16
     match x17 {
-      Empty => @list.empty()
+      Empty => @list.List([])
       More(h, tail=t_1) => {
         let rest = self_(@lib.add63(i, 1L), t_1)
         rest.prepend(f_2(i)(h)) catch {
@@ -5692,7 +5692,7 @@ fn[TD, TE] mapfilteri_l(
 ///|
 fn[TF] list_of_option_l(x19 : TF?) -> @list.List[TF] raise {
   match x19 {
-    None => @list.empty()
+    None => @list.List([])
     Some(x_2) => @list.List([x_2])
   }
 }
@@ -5705,7 +5705,7 @@ fn[TG, TH] try_list_l(
   let f_3 = x20
   let x_3 = x21
   f_3(x_3) catch {
-    Failure(_) => @list.empty()
+    Failure(_) => @list.List([])
     e => raise e
   }
 }
@@ -5757,7 +5757,7 @@ fn[TM] flat_revmap_l(
       More(x_16, tail=xs_11) => self__6(union(f_9(x_16), acc_3), xs_11)
     }
   }
-  (x127 : @list.List[TM]) => self__6(@list.empty(), x127)
+  (x127 : @list.List[TM]) => self__6(@list.List([]), x127)
 }
 
 ///|
@@ -5857,7 +5857,7 @@ fn[TS] follow_l(
             let collection = follow(@lib.assoc(label_1, edges_1))(
               nts_1.concat(rts_1),
             ) catch {
-              Failure(_) => @list.empty()
+              Failure(_) => @list.List([])
               e => raise e
             }
             fn support(
@@ -5878,7 +5878,7 @@ fn[TS] follow_l(
             ) -> @list.List[TS] raise {
               let (k_1, nts_2) = x193
               follow(@lib.assoc(FoNetsTermLabel::Vnet(k_1), edges_1))(nts_2) catch {
-                Failure(_) => @list.empty()
+                Failure(_) => @list.List([])
                 e => raise e
               }
             }
@@ -5967,7 +5967,7 @@ fn[TBA, TBB, TBC] map_all_l(
   let xs_12 = x410
   let x_25 = x411
   match xs_12 {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(y_5, tail=ys_1) => {
       let t412 = map_all_l(f_12, ys_1, x_25)
       t412.prepend(f_12(y_5)(x_25))
@@ -6183,7 +6183,7 @@ fn[TBM] sub_qconv_l(
       )
     @kernel.Term::Abs(v_36, _) => {
       let ho_1 = Ref::{ val: None, }
-      let vs_7 = Ref::{ val: @list.empty(), }
+      let vs_7 = Ref::{ val: @list.List([]), }
       let c_p_2 : (@kernel.Term) -> @kernel.Thm raise = fn(
         x566 : @kernel.Term,
       ) -> @kernel.Thm raise {
@@ -6371,7 +6371,7 @@ fn[TBO, TBP] basic_cnv_l(
   x598 : @kernel.Term,
 ) -> (@kernel.Thm, TBO?, @list.List[TBP]) raise {
   let t_63 = x598
-  (@simp.rewrites_conv(bigger_net(()))(t_63), None, @list.empty())
+  (@simp.rewrites_conv(bigger_net(()))(t_63), None, @list.List([]))
 }
 
 ///|
@@ -6529,7 +6529,7 @@ fn[TCE, TCF] sub_mconv_l(
   match x789 {
     @kernel.Term::Comb(l_21, r_10) => comb_mconv_l(c_68, l_21, r_10)
     @kernel.Term::Abs(v_52, b_28) => abs_mconv_l(c_68, v_52, b_28)
-    @kernel.Term::Const(_, _) | @kernel.Term::Var(_, _) => @list.empty()
+    @kernel.Term::Const(_, _) | @kernel.Term::Var(_, _) => @list.List([])
   }
 }
 
@@ -6613,8 +6613,8 @@ fn[TCL] hmatch_l(
               },
               j,
             ) ==
-            @list.empty() =>
-            (if i_3 == @list.empty() { @lib.zip(lvs, lvs) } else { i_3 }, n_9)
+            @list.List([]) =>
+            (if i_3 == @list.List([]) { @lib.zip(lvs, lvs) } else { i_3 }, n_9)
           _ => raise Failure("EXISTS_CTXIMPCONV")
         }
       }

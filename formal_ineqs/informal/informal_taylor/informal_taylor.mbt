@@ -147,7 +147,7 @@ pub fn convert_to_float_list(x1 : Int64, x2 : Bool, x3 : @kernel.Term) -> @list.
   let i_funs = @lib.map(@informal_eval_interval.build_interval_fun, tms)
   let ints = @lib.map(fn(x4 : @informal_eval_interval.IntervalFun) -> @informal_interval.Interval raise {
     let f = x4
-    @informal_eval_interval.eval_interval_fun(pp)(f)(@list.empty())(@list.empty())
+    @informal_eval_interval.eval_interval_fun(pp)(f)(@list.List([]))(@list.List([]))
   }, i_funs)
   let t8 = if lo_flag {
     fn(x5 : (@informal_float.Ifloat, @informal_float.Ifloat)) -> @informal_float.Ifloat raise {
@@ -266,8 +266,8 @@ pub fn eval_m_taylor(x38 : Int64, x39 : @kernel.Term, x40 : @list.List[@kernel.T
       @kernel.concl(x54)
     })(x55))
   }, @lib.flat(partials2))
-  let f_dfs_list = @informal_eval_interval.find_and_replace_all(dfs.prepend(f), @list.empty())
-  let d2fs_list = @informal_eval_interval.find_and_replace_all(d2fs, @list.empty())
+  let f_dfs_list = @informal_eval_interval.find_and_replace_all(dfs.prepend(f), @list.List([]))
+  let d2fs_list = @informal_eval_interval.find_and_replace_all(d2fs, @list.List([]))
   fn(x58 : Int64) -> ((Int64) -> ((MCellDomain) -> MTaylorInterval raise) raise) raise {
     let p_lin = x58
     fn(x59 : Int64) -> ((MCellDomain) -> MTaylorInterval raise) raise {
@@ -321,7 +321,7 @@ pub fn mk_eval_function(x66 : Int64, x67 : @kernel.Term) -> ((Int64) -> ((@list.
     })(@kernel.dest_abs(x73))
   }
   let f = build(f_tm)
-  let f_list = @informal_eval_interval.find_and_replace_all(@list.List([f]), @list.empty())
+  let f_list = @informal_eval_interval.find_and_replace_all(@list.List([f]), @list.List([]))
   fn(x74 : Int64) -> ((@list.List[@informal_float.Ifloat]) -> ((@list.List[@informal_float.Ifloat]) -> @informal_interval.Interval raise) raise) raise {
     let pp = x74
     fn(x75 : @list.List[@informal_float.Ifloat]) -> ((@list.List[@informal_float.Ifloat]) -> @informal_interval.Interval raise) raise {

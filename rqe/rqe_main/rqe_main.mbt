@@ -32,7 +32,7 @@ pub fn[TA, TB] trapout(x1 : (TB) -> ((TA) -> @kernel.Thm raise) raise, x2 : TB, 
 /// `get_repeats`
 pub fn[TA : Eq + @lib.OCompare + @lib.OHash] get_repeats(x9 : @list.List[TA]) -> @list.List[Int64] raise {
   let l = x9
-  get_repeats_l(l, @list.empty(), 0L)
+  get_repeats_l(l, @list.List([]), 0L)
 }
 
 ///|
@@ -41,7 +41,7 @@ fn[TB : Eq + @lib.OCompare + @lib.OHash] get_repeats_l(x10 : @list.List[TB], x11
   let seen = x11
   let ind = x12
   match l_1 {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(h, tail=t) => {
       if @lib.mem(h, seen) {
         get_repeats_l(t, seen, @lib.add63(ind, 1L)).prepend(ind)
@@ -60,7 +60,7 @@ pub fn subtract_index(x13 : @list.List[Int64]) -> @list.List[Int64] raise {
     let l_1 = x14
     let ind = x15
     match l_1 {
-      Empty => @list.empty()
+      Empty => @list.List([])
       More(h, tail=t) => {
         let t16 = subtract_index_1(t, @lib.add63(ind, 1L))
         t16.prepend(@lib.sub63(h, ind))
@@ -801,7 +801,7 @@ pub fn[TA] matrix(x122 : @list.List[@kernel.Term], x123 : @list.List[@kernel.Ter
   let fm = x127
   @lib.incr(matrix_count())
   if @list.List::is_empty(pols) {
-    trapout(cont, @main_thms.empty_mat(), @list.empty(), fm)
+    trapout(cont, @main_thms.empty_mat(), @list.List([]), fm)
   } else {
     if @lib.exists((x128 : @kernel.Term) => @poly_ext.is_constant(vars, x128), pols) {
       let p = @lib.find((x129 : @kernel.Term) => @poly_ext.is_constant(vars, x129), pols)
@@ -902,7 +902,7 @@ pub fn[TA] splitzero(x152 : @list.List[@kernel.Term], x153 : @list.List[@kernel.
   let fm_1 = x158
   @lib.incr(splitzero_count())
   match pols_1 {
-    Empty => splitsigns(vars_1, @list.empty(), dun, cont_1, sgns_1, ex_thms_3, fm_1)
+    Empty => splitsigns(vars_1, @list.List([]), dun, cont_1, sgns_1, ex_thms_3, fm_1)
     More(p_3, tail=ops) => {
       if (p_3 == @rqe_real.rzero()) {
         let cont_p_3 : (@kernel.Thm) -> ((@list.List[(@kernel.Term, @kernel.Thm)]) -> @kernel.Thm raise) raise = fn(x159 : @kernel.Thm) -> ((@list.List[(@kernel.Term, @kernel.Thm)]) -> @kernel.Thm raise) raise {
@@ -1040,7 +1040,7 @@ pub fn polynomials(x205 : @kernel.Term) -> @list.List[@kernel.Term] raise {
   fn polynomials_1(x206 : @kernel.Term) -> @list.List[@kernel.Term] raise {
     let tm_1 = x206
     if ((tm_1 == @lift_qelim.t_tm()) || (tm_1 == @lift_qelim.f_tm())) {
-      @list.empty()
+      @list.List([])
     } else {
       if (@basics.is_conj(tm_1) || (@basics.is_disj(tm_1) || (@basics.is_imp(tm_1) || @bool.is_iff(tm_1)))) {
         let (_, l, r) = @rqe_lib.get_binop(tm_1)
@@ -1086,7 +1086,7 @@ pub fn basic_real_qelim_conv(x214 : @list.List[@kernel.Term], x215 : @kernel.Ter
       comb_thm_p
     }
   }
-  let ret_thm = splitzero(vars.prepend(x), @list.empty(), pols, cont, @main_thms.empty_sgns(), @list.empty(), fm)
+  let ret_thm = splitzero(vars.prepend(x), @list.List([]), pols, cont, @main_thms.empty_sgns(), @list.List([]), fm)
   @simp.pure_rewrite_rule(@list.List([@basic.neq()]))(ret_thm)
 }
 

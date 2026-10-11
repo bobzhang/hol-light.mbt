@@ -70,7 +70,7 @@ fn[TB] f_at_i_l(x6 : (TB) -> TB raise, x7 : Int64, x8 : @list.List[TB]) -> @list
   let f = x6
   let j = x7
   match x8 {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(a, tail=b) => {
       if (j == 0L) {
         b.prepend(f(a))
@@ -147,7 +147,7 @@ pub fn prove_by_refinement_v1(x18 : @kernel.Term, x19 : @list.List[((@list.List[
     if has_stv(t) {
       raise Failure("prove_by_refinement: has stv")
     } else {
-      let gstate = @tactics.mk_goalstate((@list.empty(), t))
+      let gstate = @tactics.mk_goalstate((@list.List([]), t))
       let (_, sgs, just) = @lib.rev_itlist(fn(x20 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise, x21 : ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
         let tac = x20
         let gs = x21
@@ -158,7 +158,7 @@ pub fn prove_by_refinement_v1(x18 : @kernel.Term, x19 : @list.List[((@list.List[
         })(gs)
       }, tacl, gstate)
       let th = if @list.List::is_empty(sgs) {
-        just(@tactics.null_inst, @list.empty())
+        just(@tactics.null_inst, @list.List([]))
       } else {
         raise Failure("BY_REFINEMENT_PROOF: Unsolved goals")
       }

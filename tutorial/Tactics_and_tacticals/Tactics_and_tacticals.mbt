@@ -28,7 +28,7 @@ fn step_4() -> Unit raise {
 ///|
 /// Tutorial/Tactics_and_tacticals.ml:5
 fn step_5() -> Unit raise {
-  ignore(@tactics.e(@simp.simp_tac(@list.empty())))
+  ignore(@tactics.e(@simp.simp_tac(@list.List([]))))
 }
 
 ///|
@@ -46,7 +46,7 @@ fn step_7() -> Unit raise {
 ///|
 /// Tutorial/Tactics_and_tacticals.ml:8
 fn step_8() -> Unit raise {
-  ignore(@tactics.e(@simp.asm_rewrite_tac(@list.empty())))
+  ignore(@tactics.e(@simp.asm_rewrite_tac(@list.List([]))))
 }
 
 ///|
@@ -85,7 +85,7 @@ fn step_12() -> Unit raise {
 ///|
 /// Tutorial/Tactics_and_tacticals.ml:14
 fn step_13() -> Unit raise {
-  ignore(@tactics.e(@simp.simp_tac(@list.empty())))
+  ignore(@tactics.e(@simp.simp_tac(@list.List([]))))
 }
 
 ///|
@@ -103,7 +103,7 @@ fn step_15() -> Unit raise {
 ///|
 /// Tutorial/Tactics_and_tacticals.ml:17
 fn step_16() -> Unit raise {
-  ignore(@tactics.e(@simp.asm_rewrite_tac(@list.empty())))
+  ignore(@tactics.e(@simp.asm_rewrite_tac(@list.List([]))))
 }
 
 ///|
@@ -137,9 +137,9 @@ fn step_19() -> Unit raise {
 /// Tutorial/Tactics_and_tacticals.ml:22
 fn step_20() -> Unit raise {
   let t4 = @tactics.conv_tac(@int.arith_rule)
-  let t3 = @simp.asm_rewrite_tac(@list.empty())
+  let t3 = @simp.asm_rewrite_tac(@list.List([]))
   let t2 = @simp.once_rewrite_tac(@list.List([@theorems.eq_sym_eq()]))
-  let t1 = @simp.simp_tac(@list.empty())
+  let t1 = @simp.simp_tac(@list.List([]))
   ignore(@tactics.e(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.conv_tac(@simp.rewrite_conv(@list.List([@arith.le_antisym()]))), t1), t2), @tactics.disch_tac), t3), t4)))
 }
 
@@ -162,9 +162,9 @@ pub fn trivial_v3() -> @kernel.Thm {
 /// trivial
 fn step_22() -> Unit raise {
   let t8 = @tactics.conv_tac(@int.arith_rule)
-  let t7 = @simp.asm_rewrite_tac(@list.empty())
+  let t7 = @simp.asm_rewrite_tac(@list.List([]))
   let t6 = @simp.once_rewrite_tac(@list.List([@theorems.eq_sym_eq()]))
-  let t5 = @simp.simp_tac(@list.empty())
+  let t5 = @simp.simp_tac(@list.List([]))
   let t9 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.conv_tac(@simp.rewrite_conv(@list.List([@arith.le_antisym()]))), t5), t6), @tactics.disch_tac), t7), t8)
   trivial_v4_c.set(@tactics.prove(@parser.parse_term("2 <= n /\\ n <= 2 ==> f(2,2) + n < f(n,n) + 7"), t9))
 }

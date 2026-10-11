@@ -4,7 +4,7 @@
 ///|
 /// my_gen_terms
 fn step_1() -> Unit raise {
-  my_gen_terms_c.set(Ref::{ val: @list.empty() })
+  my_gen_terms_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|
@@ -80,7 +80,7 @@ pub fn conj_list(x3 : Int64, x4 : @kernel.Thm) -> @list.List[@kernel.Thm] raise 
 ///|
 /// system_defs
 fn step_4() -> Unit raise {
-  system_defs_c.set(Ref::{ val: @list.empty() })
+  system_defs_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|
@@ -206,7 +206,7 @@ pub fn get_def(x24 : String) -> ((Int64, @list.List[(String, @kernel.Thm)])) rai
 ///|
 /// system_rewrites
 fn step_5() -> Unit raise {
-  system_rewrites_c.set(Ref::{ val: @list.empty() })
+  system_rewrites_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|
@@ -221,7 +221,7 @@ pub fn system_rewrites() -> Ref[@list.List[(@kernel.Thm, @kernel.Thm)]] {
 ///|
 /// CONJ_IMP_IMP_IMP
 fn step_6() -> Unit raise {
-  let t27 = @simp.rewrite_tac(@list.empty())
+  let t27 = @simp.rewrite_tac(@list.List([]))
   let t26 = @class.bool_cases_tac(@parser.parse_term("z:bool"))
   let t25 = @class.bool_cases_tac(@parser.parse_term("y:bool"))
   let t28 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t25), t26), t27)
@@ -316,7 +316,7 @@ pub fn rewrite_rules(x31 : Unit) -> @list.List[@kernel.Thm] raise {
 ///|
 /// system_gen_lemmas
 fn step_7() -> Unit raise {
-  system_gen_lemmas_c.set(Ref::{ val: @list.empty() })
+  system_gen_lemmas_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|

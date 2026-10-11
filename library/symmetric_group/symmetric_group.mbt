@@ -283,7 +283,7 @@ pub fn three_cycle_in_symmetric() -> @kernel.Thm {
 ///|
 /// CAYLEY_THEOREM_EXPLICIT
 fn step_10() -> Unit raise {
-  let t25 = @simp.asm_rewrite_tac(@list.empty())
+  let t25 = @simp.asm_rewrite_tac(@list.List([]))
   let t20 = @tactics.repeat_tac(@tactics.strip_tac)
   let t19 = @simp.asm_simp_tac(
     @list.List([@grouptheory.group_mul_v1(), @grouptheory.group_inv_v1()]),
@@ -547,7 +547,7 @@ fn step_12() -> Unit raise {
     t38,
   ])
   let t36 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t35 = @simp.simp_tac(@list.empty())
+  let t35 = @simp.simp_tac(@list.List([]))
   let t41 = @tactics.thenl(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -591,8 +591,8 @@ pub fn symmetric_group_action() -> @kernel.Thm {
 ///|
 /// CHAIN_STEP_THREE_CYCLES_GEN
 fn step_13() -> Unit raise {
-  let t78 = @simp.asm_rewrite_tac(@list.empty())
-  let t77 = @meson.asm_meson_tac(@list.empty())
+  let t78 = @simp.asm_rewrite_tac(@list.List([]))
+  let t77 = @meson.asm_meson_tac(@list.List([]))
   let t79 = @list.List([
     @tactics.then_tac(
       @tactics.match_mp_tac(@permutations.three_cycle_commutator()),
@@ -651,8 +651,8 @@ fn step_13() -> Unit raise {
       }
     },
   )
-  let t72 = @simp.asm_rewrite_tac(@list.empty())
-  let t71 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t72 = @simp.asm_rewrite_tac(@list.List([]))
+  let t71 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t67 = @parser.parse_term("three_cycle c e (b:A)")
   let t68 = @parser.parse_term("three_cycle d a (c:A)")
   let t69 = @parser.parse_term("n:(A->A)->bool")
@@ -1444,7 +1444,7 @@ fn step_14() -> Unit raise {
     ),
     t192,
   )
-  let t139 = @simp.asm_rewrite_tac(@list.empty())
+  let t139 = @simp.asm_rewrite_tac(@list.List([]))
   let t140 = @tactics.then_tac(
     @simp.asm_simp_tac(
       @list.List([@grouptheory.carrier_subgroup_generated_subgroup()]),
@@ -1462,16 +1462,16 @@ fn step_14() -> Unit raise {
     t140,
   ])
   let t138 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t137 = @simp.asm_rewrite_tac(@list.empty())
+  let t137 = @simp.asm_rewrite_tac(@list.List([]))
   let t136 = @tactics.exists_tac(
     @parser.parse_term(
       "subgroup_generated (symmetric_group (s:A->bool))\n                    ((c:num->(A->A)->bool) i)",
     ),
   )
   let t135 = @tactics.match_mp_tac(chain_step_three_cycles_gen())
-  let t134 = @list.List([@simp.asm_rewrite_tac(@list.empty()), @tactics.all_tac])
-  let t132 = @meson.asm_meson_tac(@list.empty())
-  let t131 = @simp.asm_rewrite_tac(@list.empty())
+  let t134 = @list.List([@simp.asm_rewrite_tac(@list.List([])), @tactics.all_tac])
+  let t132 = @meson.asm_meson_tac(@list.List([]))
+  let t131 = @simp.asm_rewrite_tac(@list.List([]))
   let t129 = @parser.parse_term("(c:num->(A->A)->bool) i")
   let t130 = @parser.parse_term("(c:num->(A->A)->bool) (SUC i)")
   let t133 = @list.List([
@@ -1556,7 +1556,7 @@ fn step_14() -> Unit raise {
       }
     },
   )
-  let t121 = @simp.asm_rewrite_tac(@list.empty())
+  let t121 = @simp.asm_rewrite_tac(@list.List([]))
   let t118 = @parser.parse_term("i:num")
   let t122 = @list.List([
     @tactics.then_tac(
@@ -1684,7 +1684,7 @@ fn step_14() -> Unit raise {
       s111(x112)
     }
   })
-  let t109 = @simp.asm_rewrite_tac(@list.empty())
+  let t109 = @simp.asm_rewrite_tac(@list.List([]))
   let t108 = @tactics.first_x_assum(fn(
     x107 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1955,7 +1955,7 @@ fn step_14() -> Unit raise {
           @tactics.then_tac(
             @tactics.then_tac(
               @tactics.disch_tac,
-              @simp.asm_rewrite_tac(@list.empty()),
+              @simp.asm_rewrite_tac(@list.List([])),
             ),
             t95,
           ),
@@ -2197,7 +2197,7 @@ fn step_15() -> Unit raise {
     @tactics.all_tac,
   ])
   let t199 = @class.asm_cases_tac(@parser.parse_term("y:A = a"))
-  let t198 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t198 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t197 = @class.asm_cases_tac(@parser.parse_term("x:A = a"))
   let t196 = @tactics.repeat_tac(@tactics.strip_tac)
   let t208 = @tactics.then_tac(
@@ -2257,7 +2257,7 @@ pub fn point_transpositions_generate_all() -> @kernel.Thm {
 ///|
 /// RESTRICT_SYMMETRIC_GROUP_HOMOMORPHISM
 fn step_16() -> Unit raise {
-  let t240 = @simp.asm_simp_tac(@list.empty())
+  let t240 = @simp.asm_simp_tac(@list.List([]))
   let t236 = @parser.parse_term("g:A->A")
   let t237 = @parser.parse_term("f:A->A")
   let t238 = @parser.parse_term("t:A->bool")
@@ -2281,7 +2281,7 @@ fn step_16() -> Unit raise {
     ),
     t240,
   )
-  let t234 = @simp.asm_simp_tac(@list.empty())
+  let t234 = @simp.asm_simp_tac(@list.List([]))
   let t231 = @parser.parse_term("f:A->A")
   let t232 = @parser.parse_term("t:A->bool")
   let t233 = @tactics.mp_tac(
@@ -2301,7 +2301,7 @@ fn step_16() -> Unit raise {
     t234,
   )
   let t243 = @simp.rewrite_tac(@list.List([@permutations.restrict_i()]))
-  let t230 = @simp.asm_simp_tac(@list.empty())
+  let t230 = @simp.asm_simp_tac(@list.List([]))
   let t227 = @parser.parse_term("f:A->A")
   let t228 = @parser.parse_term("t:A->bool")
   let t229 = @tactics.mp_tac(
@@ -2340,9 +2340,9 @@ fn step_16() -> Unit raise {
   let t223 = @simp.rewrite_tac(
     @list.List([@grouptheory.subgroup_generated_v1(), symmetric_group_v1()]),
   )
-  let t222 = @simp.asm_rewrite_tac(@list.empty())
+  let t222 = @simp.asm_rewrite_tac(@list.List([]))
   let t221 = @simp.rewrite_tac(@list.List([@grouptheory.group_homomorphism()]))
-  let t219 = @meson.asm_meson_tac(@list.empty())
+  let t219 = @meson.asm_meson_tac(@list.List([]))
   let t218 = @tactics.rule_assum_tac(
     @simp.rewrite_rule(
       @list.List([
@@ -2524,12 +2524,12 @@ pub fn restrict_symmetric_group_homomorphism() -> @kernel.Thm {
 ///|
 /// SUBGROUP_RESTRICT_PERMUTES
 fn step_17() -> Unit raise {
-  let t277 = @simp.asm_rewrite_tac(@list.empty())
+  let t277 = @simp.asm_rewrite_tac(@list.List([]))
   let t278 = @tactics.then_tac(
     @tactics.match_mp_tac(@permutations.permutes_compose()),
     t277,
   )
-  let t276 = @simp.asm_rewrite_tac(@list.empty())
+  let t276 = @simp.asm_rewrite_tac(@list.List([]))
   let t275 = @tactics.match_mp_tac(@grouptheory.in_subgroup_mul())
   let t274 = @list.List([
     @simp.rewrite_tac(@list.List([symmetric_group_v1()])),
@@ -2586,7 +2586,7 @@ fn step_17() -> Unit raise {
       }
     },
   )
-  let t268 = @simp.asm_rewrite_tac(@list.empty())
+  let t268 = @simp.asm_rewrite_tac(@list.List([]))
   let t267 = @tactics.exists_tac(@parser.parse_term("t:A->bool"))
   let t266 = @tactics.match_mp_tac(@permutations.permutes_subset())
   let t269 = @list.List([
@@ -2645,7 +2645,7 @@ fn step_17() -> Unit raise {
     ),
     t279,
   )
-  let t262 = @simp.asm_rewrite_tac(@list.empty())
+  let t262 = @simp.asm_rewrite_tac(@list.List([]))
   let t263 = @tactics.then_tac(
     @tactics.match_mp_tac(@permutations.permutes_inverse()),
     t262,
@@ -2706,7 +2706,7 @@ fn step_17() -> Unit raise {
       }
     },
   )
-  let t254 = @simp.asm_rewrite_tac(@list.empty())
+  let t254 = @simp.asm_rewrite_tac(@list.List([]))
   let t253 = @tactics.exists_tac(@parser.parse_term("t:A->bool"))
   let t252 = @tactics.match_mp_tac(@permutations.permutes_subset())
   let t255 = @list.List([
@@ -2854,7 +2854,7 @@ pub fn subgroup_restrict_permutes() -> @kernel.Thm {
 ///|
 /// ALL_TRANSPOSITIONS_GENERATE_SYMMETRIC
 fn step_18() -> Unit raise {
-  let t295 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t295 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t294 = @simp.rewrite_tac(@list.List([symmetric_group_v1()]))
   let t291 = @simp.gen_rewrite_rule(
     fn(
@@ -3013,7 +3013,7 @@ fn step_20() -> Unit raise {
   let t300 = @meson.asm_meson_tac(
     @list.List([@permutations.permutes_in_image()]),
   )
-  let t301 = @list.List([@meson.meson_tac(@list.empty()), t300])
+  let t301 = @list.List([@meson.meson_tac(@list.List([])), t300])
   let t299 = @simp.rewrite_tac(
     @list.List([
       @grouptheory.group_pow(),
@@ -3076,7 +3076,7 @@ fn step_21() -> Unit raise {
       @sets.card_delete(),
     ]),
   )
-  let t356 = @simp.asm_rewrite_tac(@list.empty())
+  let t356 = @simp.asm_rewrite_tac(@list.List([]))
   let t354 = @parser.parse_term("sigma:A->A")
   let t355 = @tactics.mp_tac(
     @bool.ispecl(
@@ -3544,9 +3544,9 @@ fn step_21() -> Unit raise {
       }
     },
   )
-  let t310 = @meson.asm_meson_tac(@list.empty())
+  let t310 = @meson.asm_meson_tac(@list.List([]))
   let t309 = @simp.rewrite_tac(@list.List([@sets.in_diff(), @sets.in_delete()]))
-  let t308 = @simp.asm_rewrite_tac(@list.empty())
+  let t308 = @simp.asm_rewrite_tac(@list.List([]))
   let t307 = @tactics.exists_tac(@parser.parse_term("s:A->bool"))
   let t311 = @list.List([
     @tactics.then_tac(
@@ -3681,7 +3681,7 @@ pub fn prime_order_perm_no_fixpoint() -> @kernel.Thm {
 /// PRIME_ORDER_POW_PERM
 fn step_22() -> Unit raise {
   let t377 = @simp.rewrite_tac(@list.List([@arith.div_1()]))
-  let t376 = @simp.asm_rewrite_tac(@list.empty())
+  let t376 = @simp.asm_rewrite_tac(@list.List([]))
   let t374 = @parser.parse_term("d:num")
   let t375 = @tactics.mp_tac(
     @bool.ispecl(
@@ -3810,7 +3810,7 @@ pub fn prime_order_pow_perm() -> @kernel.Thm {
 /// PRIME_ORDER_PERM_ORBIT
 fn step_23() -> Unit raise {
   let t483 = @simp.rewrite_tac(@list.List([@sets.card_numseg_lt()]))
-  let t482 = @simp.asm_rewrite_tac(@list.empty())
+  let t482 = @simp.asm_rewrite_tac(@list.List([]))
   let t479 = @parser.parse_term("a:A")
   let t480 = @parser.parse_term(
     "group_pow (symmetric_group (s:A->bool)) (sigma:A->A) d",
@@ -3821,7 +3821,7 @@ fn step_23() -> Unit raise {
       prime_order_perm_no_fixpoint(),
     ),
   )
-  let t477 = @simp.asm_rewrite_tac(@list.empty())
+  let t477 = @simp.asm_rewrite_tac(@list.List([]))
   let t478 = @list.List([
     @tactics.then_tac(@tactics.match_mp_tac(prime_order_pow_perm()), t477),
     @tactics.all_tac,
@@ -3949,7 +3949,7 @@ fn step_23() -> Unit raise {
       }
     },
   )
-  let t460 = @simp.rewrite_tac(@list.empty())
+  let t460 = @simp.rewrite_tac(@list.List([]))
   let t459 = @tactics.first_x_assum(fn(
     x457 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4162,8 +4162,8 @@ fn step_23() -> Unit raise {
     ),
     t461,
   )
-  let t434 = @simp.rewrite_tac(@list.empty())
-  let t433 = @simp.asm_rewrite_tac(@list.empty())
+  let t434 = @simp.rewrite_tac(@list.List([]))
+  let t433 = @simp.asm_rewrite_tac(@list.List([]))
   let t432 = @tactics.disch_then(fn(
     x429 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4410,7 +4410,7 @@ fn step_23() -> Unit raise {
       }
     },
   )
-  let t407 = @simp.asm_rewrite_tac(@list.empty())
+  let t407 = @simp.asm_rewrite_tac(@list.List([]))
   let t406 = @class.asm_cases_tac(@parser.parse_term("i:num = j"))
   let t404 = @parser.parse_term("j:num")
   let t405 = @tactics.map_every(
@@ -4470,9 +4470,9 @@ fn step_23() -> Unit raise {
     @parser.parse_term("CARD {k:num | k < CARD(s:A->bool)}"),
   )
   let t401 = @tactics.match_mp_tac(@theorems.eq_trans())
-  let t399 = @simp.asm_rewrite_tac(@list.empty())
+  let t399 = @simp.asm_rewrite_tac(@list.List([]))
   let t398 = @tactics.match_mp_tac(symmetric_group_pow_in())
-  let t397 = @simp.asm_rewrite_tac(@list.empty())
+  let t397 = @simp.asm_rewrite_tac(@list.List([]))
   let t396 = @tactics.repeat_tac(@tactics.strip_tac)
   let t400 = @list.List([
     @tactics.then_tac(
@@ -4492,10 +4492,10 @@ fn step_23() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t395 = @simp.asm_rewrite_tac(@list.empty())
+  let t395 = @simp.asm_rewrite_tac(@list.List([]))
   let t394 = @tactics.match_mp_tac(@sets.card_subset_eq())
-  let t392 = @meson.meson_tac(@list.empty())
-  let t391 = @simp.asm_rewrite_tac(@list.empty())
+  let t392 = @meson.meson_tac(@list.List([]))
+  let t391 = @simp.asm_rewrite_tac(@list.List([]))
   let t387 = @parser.parse_term("x:A")
   let t390 = @tactics.disch_then(fn(
     x389 : @kernel.Thm,
@@ -4690,9 +4690,9 @@ pub fn prime_order_perm_orbit() -> @kernel.Thm {
 ///|
 /// SWAP_CONJUGATE_IN_SUBGROUP
 fn step_24() -> Unit raise {
-  let t511 = @simp.asm_rewrite_tac(@list.empty())
+  let t511 = @simp.asm_rewrite_tac(@list.List([]))
   let t510 = @tactics.match_mp_tac(@grouptheory.in_subgroup_pow())
-  let t509 = @simp.asm_rewrite_tac(@list.empty())
+  let t509 = @simp.asm_rewrite_tac(@list.List([]))
   let t508 = @tactics.match_mp_tac(@grouptheory.in_subgroup_conjugation())
   let t506 = @simp.rewrite_tac(@list.List([@trivia.o_assoc()]))
   let t505 = @tactics.disch_then(fn(
@@ -4719,7 +4719,7 @@ fn step_24() -> Unit raise {
     let th = x503
     @simp.rewrite_tac(@list.List([@equal.sym(th)]))
   })
-  let t502 = @simp.asm_rewrite_tac(@list.empty())
+  let t502 = @simp.asm_rewrite_tac(@list.List([]))
   let t498 = @parser.parse_term("b:A")
   let t499 = @parser.parse_term("a:A")
   let t500 = @parser.parse_term("s:A->bool")
@@ -4927,11 +4927,11 @@ pub fn swap_conjugate_in_subgroup() -> @kernel.Thm {
 ///|
 /// TRANSPOSITION_PCYCLE_GENERATES
 fn step_25() -> Unit raise {
-  let t753 = @simp.asm_rewrite_tac(@list.empty())
+  let t753 = @simp.asm_rewrite_tac(@list.List([]))
   let t752 = @tactics.match_mp_tac(@grouptheory.in_subgroup_mul())
-  let t751 = @simp.asm_rewrite_tac(@list.empty())
+  let t751 = @simp.asm_rewrite_tac(@list.List([]))
   let t750 = @tactics.match_mp_tac(@grouptheory.in_subgroup_mul())
-  let t748 = @meson.asm_meson_tac(@list.empty())
+  let t748 = @meson.asm_meson_tac(@list.List([]))
   let t747 = @tactics.match_mp_tac(@permutations.swap_triple())
   let t746 = @tactics.conv_tac(@equal.sym_conv)
   let t749 = @list.List([
@@ -4998,12 +4998,12 @@ fn step_25() -> Unit raise {
       }
     },
   )
-  let t738 = @simp.asm_rewrite_tac(@list.empty())
+  let t738 = @simp.asm_rewrite_tac(@list.List([]))
   let t739 = @tactics.then_tac(
     @tactics.match_mp_tac(swap_conjugate_in_subgroup()),
     t738,
   )
-  let t737 = @simp.asm_rewrite_tac(@list.empty())
+  let t737 = @simp.asm_rewrite_tac(@list.List([]))
   let t735 = @tactics.disch_then(fn(
     x733 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -5369,7 +5369,7 @@ fn step_25() -> Unit raise {
       }
     },
   )
-  let t703 = @simp.asm_rewrite_tac(@list.empty())
+  let t703 = @simp.asm_rewrite_tac(@list.List([]))
   let t701 = @parser.parse_term("x0:A")
   let t702 = @parser.parse_term("tau:A->A")
   let t704 = @list.List([
@@ -5433,8 +5433,8 @@ fn step_25() -> Unit raise {
       }
     },
   )
-  let t694 = @simp.rewrite_tac(@list.empty())
-  let t692 = @simp.asm_rewrite_tac(@list.empty())
+  let t694 = @simp.rewrite_tac(@list.List([]))
+  let t692 = @simp.asm_rewrite_tac(@list.List([]))
   let t690 = @parser.parse_term("SUC k")
   let t691 = @parser.parse_term("tau:A->A")
   let t693 = @tactics.then_tac(
@@ -5476,7 +5476,7 @@ fn step_25() -> Unit raise {
     ),
     t694,
   ])
-  let t686 = @simp.asm_rewrite_tac(@list.empty())
+  let t686 = @simp.asm_rewrite_tac(@list.List([]))
   let t683 = @parser.parse_term("a:A")
   let t684 = @parser.parse_term(
     "group_pow (symmetric_group (s:A->bool)) (tau:A->A) (SUC k)",
@@ -5616,8 +5616,8 @@ fn step_25() -> Unit raise {
       }
     },
   )
-  let t671 = @simp.rewrite_tac(@list.empty())
-  let t669 = @simp.asm_rewrite_tac(@list.empty())
+  let t671 = @simp.rewrite_tac(@list.List([]))
+  let t669 = @simp.asm_rewrite_tac(@list.List([]))
   let t667 = @parser.parse_term("k:num")
   let t668 = @parser.parse_term("tau:A->A")
   let t670 = @tactics.then_tac(
@@ -5659,7 +5659,7 @@ fn step_25() -> Unit raise {
     ),
     t671,
   ])
-  let t663 = @simp.asm_rewrite_tac(@list.empty())
+  let t663 = @simp.asm_rewrite_tac(@list.List([]))
   let t660 = @parser.parse_term("a:A")
   let t661 = @parser.parse_term(
     "group_pow (symmetric_group (s:A->bool)) (tau:A->A) k",
@@ -5726,7 +5726,7 @@ fn step_25() -> Unit raise {
       s657(x658)
     }
   })
-  let t654 = @simp.asm_rewrite_tac(@list.empty())
+  let t654 = @simp.asm_rewrite_tac(@list.List([]))
   let t653 = @tactics.match_mp_tac(symmetric_group_pow_in())
   let t655 = @list.List([
     @tactics.then_tac(@tactics.then_tac(@simp.expand_tac("x0"), t653), t654),
@@ -5941,7 +5941,7 @@ fn step_25() -> Unit raise {
       ) -> @kernel.Thm raise,
     ) raise) raise {
       let th_1 = x632
-      let t634 = @simp.asm_rewrite_tac(@list.empty())
+      let t634 = @simp.asm_rewrite_tac(@list.List([]))
       @tactics.then_tac(@tactics.match_mp_tac(th_1), t634)
     },
   )
@@ -5974,7 +5974,7 @@ fn step_25() -> Unit raise {
       "group_pow (symmetric_group (s:A->bool)) (tau:A->A) n a = c",
     ),
   )
-  let t626 = @meson.asm_meson_tac(@list.empty())
+  let t626 = @meson.asm_meson_tac(@list.List([]))
   let t625 = @simp.asm_rewrite_tac(
     @list.List([@grouptheory.group_pow(), symmetric_group_v1(), @trivia.i_thm()]),
   )
@@ -6051,7 +6051,7 @@ fn step_25() -> Unit raise {
       @tactics.strip_assume_tac,
     ),
   )
-  let t617 = @simp.asm_rewrite_tac(@list.empty())
+  let t617 = @simp.asm_rewrite_tac(@list.List([]))
   let t613 = @parser.parse_term("c:A")
   let t614 = @parser.parse_term("a:A")
   let t615 = @parser.parse_term("tau:A->A")
@@ -6061,7 +6061,7 @@ fn step_25() -> Unit raise {
       prime_order_perm_orbit(),
     ),
   )
-  let t612 = @list.List([@simp.asm_rewrite_tac(@list.empty()), @tactics.all_tac])
+  let t612 = @list.List([@simp.asm_rewrite_tac(@list.List([])), @tactics.all_tac])
   let t611 = @tactics.subgoal_then(@parser.parse_term("swap(a:A,b) IN h"), fn(
     x608 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -6108,7 +6108,7 @@ fn step_25() -> Unit raise {
       s609(x610)
     }
   })
-  let t606 = @simp.asm_rewrite_tac(@list.empty())
+  let t606 = @simp.asm_rewrite_tac(@list.List([]))
   let t605 = @tactics.match_mp_tac(@grouptheory.in_subgroup_pow())
   let t607 = @list.List([
     @tactics.then_tac(@tactics.then_tac(@simp.expand_tac("tau"), t605), t606),
@@ -6160,7 +6160,7 @@ fn step_25() -> Unit raise {
       s602(x603)
     }
   })
-  let t599 = @simp.asm_rewrite_tac(@list.empty())
+  let t599 = @simp.asm_rewrite_tac(@list.List([]))
   let t600 = @list.List([
     @tactics.then_tac(@simp.expand_tac("tau"), t599),
     @tactics.all_tac,
@@ -6211,7 +6211,7 @@ fn step_25() -> Unit raise {
       s596(x597)
     }
   })
-  let t593 = @simp.asm_rewrite_tac(@list.empty())
+  let t593 = @simp.asm_rewrite_tac(@list.List([]))
   let t590 = @parser.parse_term("m:num")
   let t591 = @parser.parse_term("sigma:A->A")
   let t592 = @tactics.mp_tac(
@@ -6342,7 +6342,7 @@ fn step_25() -> Unit raise {
   let t576 = @simp.abbrev_tac(
     @parser.parse_term("tau:A->A = group_pow (symmetric_group s) sigma m"),
   )
-  let t574 = @meson.asm_meson_tac(@list.empty())
+  let t574 = @meson.asm_meson_tac(@list.List([]))
   let t573 = @simp.asm_rewrite_tac(
     @list.List([@grouptheory.group_pow(), symmetric_group_v1(), @trivia.i_thm()]),
   )
@@ -6419,7 +6419,7 @@ fn step_25() -> Unit raise {
       @tactics.strip_assume_tac,
     ),
   )
-  let t565 = @simp.asm_rewrite_tac(@list.empty())
+  let t565 = @simp.asm_rewrite_tac(@list.List([]))
   let t561 = @parser.parse_term("b:A")
   let t562 = @parser.parse_term("a:A")
   let t563 = @parser.parse_term("sigma:A->A")
@@ -6430,9 +6430,9 @@ fn step_25() -> Unit raise {
     ),
   )
   let t560 = @tactics.x_gen_tac(@parser.parse_term("c:A"))
-  let t556 = @meson.asm_meson_tac(@list.empty())
+  let t556 = @meson.asm_meson_tac(@list.List([]))
   let t555 = @tactics.first_x_assum(@tactics.match_mp_tac)
-  let t554 = @simp.asm_rewrite_tac(@list.empty())
+  let t554 = @simp.asm_rewrite_tac(@list.List([]))
   let t557 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -6446,14 +6446,14 @@ fn step_25() -> Unit raise {
     ),
     t556,
   )
-  let t553 = @meson.asm_meson_tac(@list.empty())
+  let t553 = @meson.asm_meson_tac(@list.List([]))
   let t558 = @list.List([
     @tactics.then_tac(@tactics.first_x_assum(@tactics.match_mp_tac), t553),
     t557,
   ])
-  let t552 = @simp.asm_rewrite_tac(@list.empty())
+  let t552 = @simp.asm_rewrite_tac(@list.List([]))
   let t551 = @tactics.match_mp_tac(@grouptheory.in_subgroup_mul())
-  let t549 = @meson.asm_meson_tac(@list.empty())
+  let t549 = @meson.asm_meson_tac(@list.List([]))
   let t548 = @tactics.match_mp_tac(@permutations.swap_triple_alt())
   let t547 = @tactics.conv_tac(@equal.sym_conv)
   let t550 = @list.List([
@@ -6520,7 +6520,7 @@ fn step_25() -> Unit raise {
       }
     },
   )
-  let t541 = @meson.asm_meson_tac(@list.empty())
+  let t541 = @meson.asm_meson_tac(@list.List([]))
   let t540 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t542 = @list.List([
     @tactics.then_tac(
@@ -6533,11 +6533,11 @@ fn step_25() -> Unit raise {
     @tactics.all_tac,
   ])
   let t539 = @class.asm_cases_tac(@parser.parse_term("(y':A) = a"))
-  let t537 = @meson.asm_meson_tac(@list.empty())
+  let t537 = @meson.asm_meson_tac(@list.List([]))
   let t536 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t538 = @list.List([
     @tactics.then_tac(
-      @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t536),
+      @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t536),
       t537,
     ),
     @tactics.all_tac,
@@ -6633,9 +6633,9 @@ fn step_25() -> Unit raise {
       }
     },
   )
-  let t529 = @simp.asm_rewrite_tac(@list.empty())
+  let t529 = @simp.asm_rewrite_tac(@list.List([]))
   let t528 = @tactics.match_mp_tac(all_transpositions_generate_symmetric())
-  let t526 = @simp.asm_rewrite_tac(@list.empty())
+  let t526 = @simp.asm_rewrite_tac(@list.List([]))
   let t525 = @tactics.disch_then(@tactics.match_mp_tac)
   let t524 = @simp.asm_rewrite_tac(
     @list.List([symmetric_group_v1(), @sets.in_elim_thm(), @sets.subset()]),
@@ -6982,7 +6982,7 @@ pub fn transposition_pcycle_generates() -> @kernel.Thm {
 ///|
 /// TRANSITIVE_TRANSPOSITION_GENERATES_SYMMETRIC
 fn step_26() -> Unit raise {
-  let t840 = @simp.asm_rewrite_tac(@list.empty())
+  let t840 = @simp.asm_rewrite_tac(@list.List([]))
   let t837 = @parser.parse_term("b:A")
   let t838 = @parser.parse_term("a:A")
   let t839 = @tactics.map_every(
@@ -7035,7 +7035,7 @@ fn step_26() -> Unit raise {
     @list.List([@parser.parse_term("sigma:A->A"), t838, t837]),
   )
   let t833 = @tactics.match_mp_tac(transposition_pcycle_generates())
-  let t832 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t832 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t831 = @tactics.subgoal_then(@parser.parse_term("(sigma:A->A) IN h"), fn(
     x828 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -7156,8 +7156,8 @@ fn step_26() -> Unit raise {
       @tactics.strip_assume_tac,
     ),
   )
-  let t819 = @simp.asm_rewrite_tac(@list.empty())
-  let t818 = @list.List([@simp.asm_rewrite_tac(@list.empty()), @tactics.all_tac])
+  let t819 = @simp.asm_rewrite_tac(@list.List([]))
+  let t818 = @list.List([@simp.asm_rewrite_tac(@list.List([])), @tactics.all_tac])
   let t816 = @parser.parse_term("CARD(s:A->bool)")
   let t817 = @tactics.mp_tac(
     @bool.ispecl(
@@ -7172,7 +7172,7 @@ fn step_26() -> Unit raise {
     ),
   )
   let t812 = @simp.rewrite_tac(@list.List([@int.divides()]))
-  let t811 = @simp.asm_rewrite_tac(@list.empty())
+  let t811 = @simp.asm_rewrite_tac(@list.List([]))
   let t808 = @parser.parse_term("a:A")
   let t809 = @parser.parse_term("\\(f:A->A) (x:A). f x")
   let t810 = @parser.parse_term("s:A->bool")
@@ -7254,14 +7254,14 @@ fn step_26() -> Unit raise {
       }
     },
   )
-  let t800 = @simp.asm_rewrite_tac(@list.empty())
+  let t800 = @simp.asm_rewrite_tac(@list.List([]))
   let t799 = @tactics.exists_tac(@parser.parse_term("sigma:A->A"))
   let t798 = @tactics.disch_then(
     @tactics.x_choose_then(@parser.parse_term("sigma:A->A"))(
       @tactics.strip_assume_tac,
     ),
   )
-  let t797 = @simp.asm_rewrite_tac(@list.empty())
+  let t797 = @simp.asm_rewrite_tac(@list.List([]))
   let t792 = @parser.parse_term("y:A")
   let t793 = @list.List([@parser.parse_term("a:A"), t792])
   let t796 = @tactics.first_x_assum(fn(
@@ -7332,7 +7332,7 @@ fn step_26() -> Unit raise {
       }
     })(((x794 : @kernel.Thm) => @bool.specl(t793, x794))(x795))
   })
-  let t788 = @simp.asm_rewrite_tac(@list.empty())
+  let t788 = @simp.asm_rewrite_tac(@list.List([]))
   let t787 = @tactics.x_gen_tac(@parser.parse_term("y:A"))
   let t801 = @tactics.then_tac(
     @tactics.then_tac(
@@ -7481,7 +7481,7 @@ fn step_26() -> Unit raise {
       }
     },
   )
-  let t775 = @list.List([@simp.asm_rewrite_tac(@list.empty()), @tactics.all_tac])
+  let t775 = @list.List([@simp.asm_rewrite_tac(@list.List([])), @tactics.all_tac])
   let t774 = @tactics.subgoal_then(
     @parser.parse_term("FINITE(group_carrier(H:(A->A)group))"),
     fn(
@@ -7531,7 +7531,7 @@ fn step_26() -> Unit raise {
       }
     },
   )
-  let t769 = @simp.asm_rewrite_tac(@list.empty())
+  let t769 = @simp.asm_rewrite_tac(@list.List([]))
   let t768 = @tactics.match_mp_tac(
     @grouptheory.carrier_subgroup_generated_subgroup(),
   )

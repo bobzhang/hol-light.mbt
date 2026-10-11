@@ -27,7 +27,7 @@ pub fn triangle() -> @kernel.Thm {
 fn step_3() -> Unit raise {
   let t9 = @simp.rewrite_tac(@list.List([@calc_num.arith()]))
   let t8 = @tactics.match_mp_tac(@arith.div_mult())
-  let t7 = @simp.asm_rewrite_tac(@list.empty())
+  let t7 = @simp.asm_rewrite_tac(@list.List([]))
   let t10 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.even_exists()])), @tactics.strip_tac), t7), @tactics.ap_term_tac), t8), t9)
   let t6 = @tactics.conv_tac(@class.taut)
   let t11 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.even_mult(), @arith.even_add(), @calc_num.arith()])), t6), t10])

@@ -21,7 +21,7 @@ test "thecops matches thecops.ml" {
   let pv = (name : String, s : String, tac : @tactics.Tactic) => {
     log.attempt(name, () => sthm(@tactics.prove(tm(s), tac)))
   }
-  let none : @list.List[@kernel.Thm] = @list.empty()
+  let none : @list.List[@kernel.Thm] = @list.List([])
   let trans = "(!x y:A. R x y ==> R y x) /\\ (!x y z. R x y /\\ R y z ==> R x z) /\\ (!x. ?y. R x y) ==> !x. R x x"
   let sym = @list.singleton(@theorems.conj_sym())
   pv("lean_refl", "!x:A. P x ==> P x", @thecops.leancop_tac(none))

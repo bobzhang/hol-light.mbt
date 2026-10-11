@@ -196,7 +196,7 @@ pub fn float_neg() -> @kernel.Thm {
 /// FLOAT_NEG_F
 fn step_12() -> Unit raise {
   let t26 = @parser.parse_term("T")
-  let t24 = @simp.rewrite_rule(@list.empty())
+  let t24 = @simp.rewrite_rule(@list.List([]))
   float_neg_f_c.set((fn(x25 : @kernel.Thm) -> @kernel.Thm raise {
     @equal.gsym(t24(x25))
   })(((x27 : @kernel.Thm) => @bool.spec(t26, x27))(float_neg())))
@@ -215,7 +215,7 @@ pub fn float_neg_f() -> @kernel.Thm {
 /// FLOAT_NEG_T
 fn step_13() -> Unit raise {
   let t30 = @parser.parse_term("F")
-  let t28 = @simp.rewrite_rule(@list.empty())
+  let t28 = @simp.rewrite_rule(@list.List([]))
   float_neg_t_c.set((fn(x29 : @kernel.Thm) -> @kernel.Thm raise {
     @equal.gsym(t28(x29))
   })(((x31 : @kernel.Thm) => @bool.spec(t30, x31))(float_neg())))

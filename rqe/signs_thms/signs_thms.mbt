@@ -313,7 +313,7 @@ pub fn sz_nz_thm() -> Ref[@kernel.Thm] {
 ///|
 /// PULL_CASES_THM
 fn step_16() -> Unit raise {
-  let t30 = @simp.asm_rewrite_tac(@list.empty())
+  let t30 = @simp.asm_rewrite_tac(@list.List([]))
   let t26 = @parser.parse_term("p2:bool")
   let t27 = @parser.parse_term("p1:bool")
   let t28 = @parser.parse_term("p0:bool")
@@ -372,7 +372,7 @@ fn step_19() -> Unit raise {
       s41(x42)
     }
   }), @calc_rat.real_arith_tac))
-  let t39 = @simp.asm_rewrite_tac(@list.empty())
+  let t39 = @simp.asm_rewrite_tac(@list.List([]))
   let t35 = @parser.parse_term("p2:bool")
   let t36 = @parser.parse_term("p1:bool")
   let t37 = @parser.parse_term("p0:bool")

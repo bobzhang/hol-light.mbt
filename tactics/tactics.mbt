@@ -43,14 +43,14 @@ fn[T] match_failure() -> T raise {
 ///|
 /// The trivial instantiation.
 pub let null_inst : Instantiation = (
-  @list.empty(),
-  @list.empty(),
-  @list.empty(),
+  @list.List([]),
+  @list.List([]),
+  @list.List([]),
 )
 
 ///|
 /// No metavariables and the trivial instantiation.
-pub let null_meta : (List[Term], Instantiation) = (@list.empty(), null_inst)
+pub let null_meta : (List[Term], Instantiation) = (@list.List([]), null_inst)
 
 ///|
 /// A goal: labelled assumptions (as theorems) and a conclusion.
@@ -208,7 +208,7 @@ pub fn valid(tac : Tactic) -> Tactic {
       let asms = @lib.itlist(
         (p : (String, Thm), acc) => @lib.union(@kernel.hyp(p.1), acc),
         gl.0,
-        @list.empty(),
+        @list.List([]),
       )
       mk_fthm(asms, gl.1)
     }
@@ -220,7 +220,7 @@ pub fn valid(tac : Tactic) -> Tactic {
         @lib.union(@lib.insert(@kernel.concl(p.1), @kernel.hyp(p.1)), acc)
       },
       asl2,
-      @list.empty(),
+      @list.List([]),
     )
     if @basics.aconv(w1, w2) &&
       @lib.forall(
@@ -260,10 +260,10 @@ fn seqapply(
     (Empty, Empty) =>
       (
         null_meta,
-        @list.empty(),
+        @list.List([]),
         (_, ths) => {
           no_ths(ths)
-          @list.empty()
+          @list.List([])
         },
       )
     (More(tac, tail=tacs), More(goal, tail=goals)) => {
@@ -295,7 +295,7 @@ fn tacsequence(gstate : Goalstate, tacl : List[Tactic]) -> Goalstate raise {
     just1(compose_insts(insts2, i), sub)
   }
   let just = if gls2.is_empty() {
-    propagate_thm(jst(null_inst, @list.empty()))
+    propagate_thm(jst(null_inst, @list.List([])))
   } else {
     jst
   }
@@ -317,7 +317,7 @@ pub fn thenl(tac1 : Tactic, tac2l : List[Tactic]) -> Tactic {
   g => {
     let gstate = tac1(g)
     if gstate.1.is_empty() {
-      tacsequence(gstate, @list.empty())
+      tacsequence(gstate, @list.List([]))
     } else {
       tacsequence(gstate, tac2l)
     }
@@ -545,7 +545,7 @@ pub fn assum_list(aslfun : (List[Thm]) -> Tactic raise) -> Tactic {
 ///|
 /// `POP_ASSUM_LIST asltac`
 pub fn pop_assum_list(asltac : (List[Thm]) -> Tactic raise) -> Tactic {
-  g => asltac(g.0.map(p => p.1))((@list.empty(), g.1))
+  g => asltac(g.0.map(p => p.1))((@list.List([]), g.1))
 }
 
 ///|
@@ -669,7 +669,7 @@ pub fn hyp_tac(
 pub fn accept_tac(th : Thm) -> Tactic {
   g => {
     if @basics.aconv(@kernel.concl(th), g.1) {
-      (null_meta, @list.empty(), propagate_thm(th))
+      (null_meta, @list.List([]), propagate_thm(th))
     } else {
       raise Failure("ACCEPT_TAC")
     }
@@ -1216,7 +1216,7 @@ pub fn contr_tac(cth : Thm) -> Tactic {
       Failure(_) => raise Failure("CONTR_TAC")
       e => raise e
     }
-    (null_meta, @list.empty(), propagate_thm(th))
+    (null_meta, @list.List([]), propagate_thm(th))
   }
 }
 
@@ -1228,7 +1228,7 @@ pub fn match_accept_tac(th : Thm) -> Tactic {
       Failure(_) => raise Failure("ACCEPT_TAC")
       e => raise e
     }
-    (null_meta, @list.empty(), propagate_thm(ith))
+    (null_meta, @list.List([]), propagate_thm(ith))
   }
   then_tac(repeat_tac(gen_tac), rawtac)
 }
@@ -1295,7 +1295,7 @@ pub fn trans_tac(th : Thm) -> ((Term) -> Tactic) raise {
         (a, b, acc) => @basics.type_match(a, b, acc),
         tys1,
         tys2,
-        @list.empty(),
+        @list.List([]),
       )
       let th1 = @kernel.inst_type(ilist, th)
       // `MATCH_MP_TAC th' THEN EXISTS_TAC tm`: right to left.
@@ -1595,7 +1595,7 @@ pub fn meta_spec_tac(t : Term, thm : Thm) -> Tactic {
 ///|
 /// `CHEAT_TAC`: solve any goal with `mk_thm` (recorded in `axioms()`).
 pub let cheat_tac : Tactic = g => {
-  accept_tac(@drule.mk_thm(@list.empty(), g.1))(g)
+  accept_tac(@drule.mk_thm(@list.List([]), g.1))(g)
 }
 
 ///|
@@ -1861,7 +1861,7 @@ pub fn tac_proof(g : Goal, tac : Tactic) -> Thm raise {
   let gstate = mk_goalstate(g)
   let (_, sgs, just) = by(tac)(gstate)
   if sgs.is_empty() {
-    just(null_inst, @list.empty())
+    just(null_inst, @list.List([]))
   } else {
     raise Failure("TAC_PROOF: Unsolved goals")
   }
@@ -1870,7 +1870,7 @@ pub fn tac_proof(g : Goal, tac : Tactic) -> Thm raise {
 ///|
 /// `prove (t, tac)`
 pub fn prove(t : Term, tac : Tactic) -> Thm raise {
-  let th = tac_proof((@list.empty(), t), tac)
+  let th = tac_proof((@list.List([]), t), tac)
   let (asl, t1) = @kernel.dest_thm(th)
   if !asl.is_empty() {
     raise Failure("prove: additional assumptions in result")
@@ -1890,7 +1890,7 @@ pub fn prove(t : Term, tac : Tactic) -> Thm raise {
 // ---------------------------------------------------------------------------
 
 ///|
-pub let current_goalstack : Ref[Goalstack] = Ref::{ val: @list.empty(), }
+pub let current_goalstack : Ref[Goalstack] = Ref::{ val: @list.List([]), }
 
 ///|
 pub fn refine(r : Refinement) -> Goalstack raise {
@@ -1977,7 +1977,7 @@ pub fn g(t : Term) -> Goalstack raise {
     let errmsg = @lib.end_itlist((s, t) => s + ", " + t, fvs)
     @lib.warn(true, "Free variables in goal: " + errmsg)
   }
-  set_goal(@list.empty(), t)
+  set_goal(@list.List([]), t)
 }
 
 ///|
@@ -2014,7 +2014,7 @@ pub fn top_goal() -> (List[Term], Term) raise {
 ///|
 pub fn top_thm() -> Thm raise {
   match current_goalstack.val {
-    More((_, Empty, f), tail=_) => f(null_inst, @list.empty())
+    More((_, Empty, f), tail=_) => f(null_inst, @list.List([]))
     _ => match_failure()
   }
 }

@@ -4,7 +4,7 @@
 ///|
 /// t_thm
 fn step_1() -> Unit raise {
-  let t1 = @meson.meson_tac(@list.empty())
+  let t1 = @meson.meson_tac(@list.List([]))
   t_thm_c.set(@tactics.prove(@parser.parse_term("!set:real->bool. (!x. set x ==> T)"), t1))
 }
 
@@ -20,7 +20,7 @@ pub fn t_thm() -> @kernel.Thm {
 ///|
 /// f_thm
 fn step_2() -> Unit raise {
-  let t2 = @meson.meson_tac(@list.empty())
+  let t2 = @meson.meson_tac(@list.List([]))
   f_thm_c.set(@tactics.prove(@parser.parse_term("!set:real->bool. ~(?x. set x /\\ F)"), t2))
 }
 
@@ -36,7 +36,7 @@ pub fn f_thm() -> @kernel.Thm {
 ///|
 /// neg_thm_p
 fn step_3() -> Unit raise {
-  let t3 = @meson.meson_tac(@list.empty())
+  let t3 = @meson.meson_tac(@list.List([]))
   neg_thm_p_c.set(@tactics.prove(@parser.parse_term("!P set. (!x. set x ==> P x) ==> (~ ?x. set x /\\ ~ P x)"), t3))
 }
 
@@ -52,7 +52,7 @@ pub fn neg_thm_p() -> @kernel.Thm {
 ///|
 /// neg_thm_n
 fn step_4() -> Unit raise {
-  let t4 = @meson.meson_tac(@list.empty())
+  let t4 = @meson.meson_tac(@list.List([]))
   neg_thm_n_c.set(@tactics.prove(@parser.parse_term("!P set. (~ ?x. set x /\\ P x) ==> (!x. set x ==> ~ P x)"), t4))
 }
 
@@ -68,7 +68,7 @@ pub fn neg_thm_n() -> @kernel.Thm {
 ///|
 /// and_thm_pp
 fn step_5() -> Unit raise {
-  let t5 = @meson.meson_tac(@list.empty())
+  let t5 = @meson.meson_tac(@list.List([]))
   and_thm_pp_c.set(@tactics.prove(@parser.parse_term("!P Q set. (?x. set x) ==> (!x. set x ==> P x) ==> (!x. set x ==> Q x) ==>\n        (!x. set x ==> (P x /\\ Q x))"), t5))
 }
 
@@ -84,7 +84,7 @@ pub fn and_thm_pp() -> @kernel.Thm {
 ///|
 /// and_thm_pn
 fn step_6() -> Unit raise {
-  let t6 = @meson.meson_tac(@list.empty())
+  let t6 = @meson.meson_tac(@list.List([]))
   and_thm_pn_c.set(@tactics.prove(@parser.parse_term("!P Q set. (?x. set x) ==> (!x. set x ==> P x) ==>\n     (~ ?x. set x /\\ Q x) ==> (~ ?x. set x /\\ P x /\\ Q x)"), t6))
 }
 
@@ -100,7 +100,7 @@ pub fn and_thm_pn() -> @kernel.Thm {
 ///|
 /// and_thm_np
 fn step_7() -> Unit raise {
-  let t7 = @meson.meson_tac(@list.empty())
+  let t7 = @meson.meson_tac(@list.List([]))
   and_thm_np_c.set(@tactics.prove(@parser.parse_term("!P Q set. (?x. set x) ==> (~ ?x. set x /\\ P x) ==>\n          (!x. set x ==> Q x) ==> (~ ?x. set x /\\ P x /\\ Q x)"), t7))
 }
 
@@ -116,7 +116,7 @@ pub fn and_thm_np() -> @kernel.Thm {
 ///|
 /// and_thm_nn
 fn step_8() -> Unit raise {
-  let t8 = @meson.meson_tac(@list.empty())
+  let t8 = @meson.meson_tac(@list.List([]))
   and_thm_nn_c.set(@tactics.prove(@parser.parse_term("!P Q set. (?x. set x) ==> (~ ?x. set x /\\ P x) ==>\n    (~ ?x. set x /\\ Q x) ==> (~ ?x. set x /\\ P x /\\ Q x)"), t8))
 }
 
@@ -132,7 +132,7 @@ pub fn and_thm_nn() -> @kernel.Thm {
 ///|
 /// or_thm_p
 fn step_9() -> Unit raise {
-  let t9 = @meson.meson_tac(@list.empty())
+  let t9 = @meson.meson_tac(@list.List([]))
   or_thm_p_c.set(@tactics.prove(@parser.parse_term("!P Q set. (?x. set x) ==> (!x. set x ==> P x) ==> (!x. set x ==> (P x \\/ Q x))"), t9))
 }
 
@@ -148,7 +148,7 @@ pub fn or_thm_p() -> @kernel.Thm {
 ///|
 /// or_thm_q
 fn step_10() -> Unit raise {
-  let t10 = @meson.meson_tac(@list.empty())
+  let t10 = @meson.meson_tac(@list.List([]))
   or_thm_q_c.set(@tactics.prove(@parser.parse_term("!P Q set. (?x. set x) ==> (!x. set x ==> Q x) ==> (!x. set x ==> (P x \\/ Q x))"), t10))
 }
 
@@ -164,7 +164,7 @@ pub fn or_thm_q() -> @kernel.Thm {
 ///|
 /// or_thm_nn
 fn step_11() -> Unit raise {
-  let t11 = @meson.meson_tac(@list.empty())
+  let t11 = @meson.meson_tac(@list.List([]))
   or_thm_nn_c.set(@tactics.prove(@parser.parse_term("!P Q set. (?x. set x) ==> (~ ?x. set x /\\ P x) ==>\n          (~ ?x. set x /\\ Q x) ==> (~ ?x. set x /\\ (P x \\/ Q x))"), t11))
 }
 
@@ -180,7 +180,7 @@ pub fn or_thm_nn() -> @kernel.Thm {
 ///|
 /// imp_thm_pp
 fn step_12() -> Unit raise {
-  let t12 = @meson.meson_tac(@list.empty())
+  let t12 = @meson.meson_tac(@list.List([]))
   imp_thm_pp_c.set(@tactics.prove(@parser.parse_term("!P Q set. (?x. set x) ==> (!x. set x ==> Q x) ==>\n        (!x. set x ==> (P x ==> Q x))"), t12))
 }
 
@@ -196,7 +196,7 @@ pub fn imp_thm_pp() -> @kernel.Thm {
 ///|
 /// imp_thm_pn
 fn step_13() -> Unit raise {
-  let t13 = @meson.meson_tac(@list.empty())
+  let t13 = @meson.meson_tac(@list.List([]))
   imp_thm_pn_c.set(@tactics.prove(@parser.parse_term("!P Q set. (?x. set x) ==> (!x. set x ==> P x) ==>\n        (~ ?x. set x /\\ Q x) ==> (~ ?x. set x /\\ (P x ==> Q x))"), t13))
 }
 
@@ -212,7 +212,7 @@ pub fn imp_thm_pn() -> @kernel.Thm {
 ///|
 /// imp_thm_n
 fn step_14() -> Unit raise {
-  let t14 = @meson.meson_tac(@list.empty())
+  let t14 = @meson.meson_tac(@list.List([]))
   imp_thm_n_c.set(@tactics.prove(@parser.parse_term("!P Q set. (?x. set x) ==> (~ ?x. set x /\\ P x) ==>\n     (!x. set x ==> (P x ==> Q x))"), t14))
 }
 
@@ -228,7 +228,7 @@ pub fn imp_thm_n() -> @kernel.Thm {
 ///|
 /// iff_thm_pp
 fn step_15() -> Unit raise {
-  let t15 = @meson.meson_tac(@list.empty())
+  let t15 = @meson.meson_tac(@list.List([]))
   iff_thm_pp_c.set(@tactics.prove(@parser.parse_term("!P Q set. (?x. set x) ==> (!x. set x ==> P x) ==> (!x. set x ==> Q x) ==>\n        (!x. set x ==> (P x <=> Q x))"), t15))
 }
 
@@ -244,7 +244,7 @@ pub fn iff_thm_pp() -> @kernel.Thm {
 ///|
 /// iff_thm_pn
 fn step_16() -> Unit raise {
-  let t16 = @meson.meson_tac(@list.empty())
+  let t16 = @meson.meson_tac(@list.List([]))
   iff_thm_pn_c.set(@tactics.prove(@parser.parse_term("!P Q set. (?x. set x) ==> (!x. set x ==> P x) ==>\n     (~ ?x. set x /\\ Q x) ==> (~ ?x. set x /\\ (P x <=> Q x))"), t16))
 }
 
@@ -260,7 +260,7 @@ pub fn iff_thm_pn() -> @kernel.Thm {
 ///|
 /// iff_thm_np
 fn step_17() -> Unit raise {
-  let t17 = @meson.meson_tac(@list.empty())
+  let t17 = @meson.meson_tac(@list.List([]))
   iff_thm_np_c.set(@tactics.prove(@parser.parse_term("!P Q set. (?x. set x) ==> (~ ?x. set x /\\ P x) ==>\n          (!x. set x ==> Q x) ==> (~ ?x. set x /\\ (P x <=> Q x))"), t17))
 }
 
@@ -276,7 +276,7 @@ pub fn iff_thm_np() -> @kernel.Thm {
 ///|
 /// iff_thm_nn
 fn step_18() -> Unit raise {
-  let t18 = @meson.meson_tac(@list.empty())
+  let t18 = @meson.meson_tac(@list.List([]))
   iff_thm_nn_c.set(@tactics.prove(@parser.parse_term("!P Q set. (?x. set x) ==> (~ ?x. set x /\\ P x) ==>\n    (~ ?x. set x /\\ Q x) ==> (!x. set x ==> (P x <=> Q x))"), t18))
 }
 
@@ -484,7 +484,7 @@ pub fn gt_ge_thm() -> @kernel.Thm {
 ///|
 /// NOT_EXISTS_CONJ_THM
 fn step_31() -> Unit raise {
-  let t31 = @list.List([@meson.meson_tac(@list.empty())])
+  let t31 = @list.List([@meson.meson_tac(@list.List([]))])
   not_exists_conj_thm_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("~(?x. P x /\\ Q x) ==> (!x. P x ==> ~Q x)"), t31))
 }
 
@@ -500,7 +500,7 @@ pub fn not_exists_conj_thm() -> @kernel.Thm {
 ///|
 /// testform_itlem
 fn step_32() -> Unit raise {
-  let t32 = @list.List([@meson.meson_tac(@list.empty())])
+  let t32 = @list.List([@meson.meson_tac(@list.List([]))])
   testform_itlem_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("(!x. P x ==> ~Q x) ==> (!x. P2 x ==> ~Q x) ==> (!x. P x \\/ P2 x ==> ~ Q x)"), t32))
 }
 

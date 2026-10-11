@@ -62,7 +62,7 @@ fn step_2() -> Unit raise {
   let t33 = @tactics.disch_then(fn(x32 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     t31(t30(x32))
   })
-  let t26 = @simp.rewrite_tac(@list.empty())
+  let t26 = @simp.rewrite_tac(@list.List([]))
   let t35 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.once_rewrite_tac(@list.List([@equal.gsym(@class.contrapos_thm())]))), t26), t33), t34)
   irrational_sqrt_prime_c.set(@tactics.prove(@parser.parse_term("!p. prime p ==> ~rational(sqrt(&p))"), t35))
 }

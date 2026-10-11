@@ -4,7 +4,7 @@
 ///|
 /// matinsert_lem0
 fn step_1() -> Unit raise {
-  let t1 = @list.List([@meson.meson_tac(@list.empty())])
+  let t1 = @list.List([@meson.meson_tac(@list.List([]))])
   matinsert_lem0_c.set(@rqe_tactics_ext.prove_by_refinement(@parser.parse_term("!S. (!x. P x) ==> (!x. S x ==> P x)"), t1))
 }
 

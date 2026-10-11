@@ -95,7 +95,7 @@ pub fn[I, A, S] listof(
 
 ///|
 pub fn[X, A] nothing(input : X) -> (List[A], X) {
-  (@list.empty(), input)
+  (@list.List([]), input)
 }
 
 ///|
@@ -147,7 +147,7 @@ pub fn[I, A, S] rightbin(
 pub fn[X, A] possibly(p : (X) -> (A, X) raise) -> (X) -> (List[A], X) raise {
   input => {
     let (x, rest) = p(input) catch {
-      Noparse => return (@list.empty(), input)
+      Noparse => return (@list.List([]), input)
       e => raise e
     }
     (@list.singleton(x), rest)

@@ -137,7 +137,7 @@ fn step_2() -> Unit raise {
         let m = x59
         let args_1 = x60
         if @list.List::is_empty(args_1) {
-          (@list.empty(), @list.empty())
+          (@list.List([]), @list.List([]))
         } else {
           let m_p = @lib.add63(m, 1L)
           let arg_1 = @lib.hd(args_1)
@@ -155,7 +155,7 @@ fn step_2() -> Unit raise {
         }
       }
       if @list.List::is_empty(occ) {
-        (st_2, @list.empty())
+        (st_2, @list.List([]))
       } else {
         let (f_1, args_2) = @basics.strip_comb(st_2)
         match occ {
@@ -172,7 +172,7 @@ fn step_2() -> Unit raise {
       let v_2 = x61
       let (st_3, occ_1) = x62
       if @list.List::is_empty(occ_1) {
-        @list.empty()
+        @list.List([])
       } else {
         let (f_2, args_4) = @basics.strip_comb(st_3)
         match occ_1 {
@@ -224,10 +224,10 @@ fn step_2() -> Unit raise {
       try {
         match @kernel.dest_type(ty) {
           ("fun", More(argty, tail=More(rest_1, tail=Empty))) => arg_types(rest_1).prepend(argty)
-          _ => @list.empty()
+          _ => @list.List([])
         }
       } catch {
-        Failure(_) => @list.empty()
+        Failure(_) => @list.List([])
         e => raise e
       }
     }
@@ -370,7 +370,7 @@ fn[TB] number_list_p_l(x28 : Int64, x29 : @list.List[TB]) -> @list.List[(TB, Int
   let n = x28
   let l_1 = x29
   if @list.List::is_empty(l_1) {
-    @list.empty()
+    @list.List([])
   } else {
     let t30 = @lib.tl(l_1)
     let t31 = number_list_p_l(@lib.add63(n, 1L), t30)
@@ -395,13 +395,13 @@ fn[TC] occurrences_l(name : (@kernel.Term) -> String raise, x34 : @list.List[(St
     let path = x39
     let t40 = @kernel.type_of(v_1)
     if !((@kernel.type_of(st_1) == t40)) {
-      @list.empty()
+      @list.List([])
     } else {
       if (st_1 == v_1) {
         @list.List([@lib.rev(path)])
       } else {
         if @kernel.is_var(st_1) {
-          @list.empty()
+          @list.List([])
         } else {
           let (f, args) = @lib.check(fn(x47 : (@kernel.Term, @list.List[@kernel.Term])) -> Bool raise {
             (fn(x45 : @kernel.Term) -> Bool raise {
@@ -424,7 +424,7 @@ fn[TC] occurrences_l(name : (@kernel.Term) -> String raise, x34 : @list.List[(St
       }
     }
   }
-  occurrences_p(v, st, @list.empty())
+  occurrences_p(v, st, @list.List([]))
 }
 
 ///|
@@ -462,7 +462,7 @@ fn[TF] replace_argn_l(x63 : (Int64, TF), x64 : Int64, x65 : @list.List[TF]) -> @
   let m_1 = x64
   let args_3 = x65
   if @list.List::is_empty(args_3) {
-    @list.empty()
+    @list.List([])
   } else {
     let m_p_1 = @lib.add63(m_1, 1L)
     if (m_p_1 == n_5) {
@@ -479,7 +479,7 @@ fn[TH] rotations_p_l(x69 : @list.List[TH], x70 : Int64) -> @list.List[@list.List
   let l_5 = x69
   let n_7 = x70
   if (n_7 < 1L) {
-    @list.empty()
+    @list.List([])
   } else {
     let t72 = @lib.sub63(n_7, 1L)
     let t71 = @list.List([@lib.hd(l_5)])
@@ -541,7 +541,7 @@ fn step_3() -> Unit raise {
     }
     let th1_2 = @kernel.assume_rule(@basics.mk_eq(v1, @parser.parse_term("T")))
     let th2_1 = subs_occs(@list.List([(@list.List([2L]), th1_2)]), @kernel.refl(@bool.mk_conj(v1, v2)))
-    let t150 = @simp.once_rewrite_rule(@list.empty())(th2_1)
+    let t150 = @simp.once_rewrite_rule(@list.List([]))(th2_1)
     let tthm1 = @bool.disch(@basics.mk_eq(v1, @parser.parse_term("T")), t150)
     let tthm2 = @equal.conv_rule(@equal.once_depth_conv(@simp.rewr_conv(@theorems.conj_sym())), tthm1)
     let tandr : (@kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise = fn(x151 : @kernel.Thm) -> ((@kernel.Term) -> @kernel.Thm raise) raise {

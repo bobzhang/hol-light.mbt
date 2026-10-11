@@ -9499,7 +9499,7 @@ pub fn closed_in_injective_linear_image() -> @kernel.Thm {
 pub fn exec_phrase_315(x324 : Unit) -> Unit raise {
   let _ = x324
   {
-    @readable.tactic_ref().val = @determinants.geom_transform_tac(@list.empty())
+    @readable.tactic_ref().val = @determinants.geom_transform_tac(@list.List([]))
     ()
   }
 }

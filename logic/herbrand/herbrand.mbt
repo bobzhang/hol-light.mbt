@@ -90,7 +90,7 @@ pub fn herbrand_interpretation() -> @kernel.Thm {
 ///|
 /// HERBASE_FUNCTIONS
 fn step_4() -> Unit raise {
-  let t20 = @meson.meson_tac(@list.empty())
+  let t20 = @meson.meson_tac(@list.List([]))
   let t18 = @equal.gsym(@lists.ex_mem())
   let t19 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_insert(), @fol.in_list_union(), @equal.gsym(@lists.all_mem()), t18, @lists.mem_map()]))
   let t17 = @simp.rewrite_tac(@list.List([@fol.functions_term(), @sets.empty_subset()]))
@@ -161,7 +161,7 @@ pub fn herbrand_of_prop() -> @kernel.Thm {
 ///|
 /// PROP_OF_HERBRAND_OF_PROP
 fn step_8() -> Unit raise {
-  let t39 = @simp.asm_rewrite_tac(@list.empty())
+  let t39 = @simp.asm_rewrite_tac(@list.List([]))
   let t38 = @tactics.match_mp_tac(@lists.map_eq_degen())
   let t37 = @tactics.repeat_tac(@tactics.strip_tac)
   let t36 = @simp.rewrite_tac(@list.List([@fol.termval(), @fol.fun_def()]))
@@ -312,7 +312,7 @@ fn step_13() -> Unit raise {
       s96(x97)
     }
   })
-  let t94 = @simp.asm_rewrite_tac(@list.empty())
+  let t94 = @simp.asm_rewrite_tac(@list.List([]))
   let t88 = @parser.parse_term("p:form")
   let t89 = @parser.parse_term("v:num->term")
   let t90 = @list.List([@parser.parse_term("formsubst v p"), t89, t88])
@@ -354,7 +354,7 @@ pub fn psatisfies_herbrand_instances() -> @kernel.Thm {
 ///|
 /// SATISFIES_SUBSET
 fn step_14() -> Unit raise {
-  let t113 = @meson.meson_tac(@list.empty())
+  let t113 = @meson.meson_tac(@list.List([]))
   let t114 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@fol.satisfies(), @sets.subset()])), t113)
   satisfies_subset_c.set(@tactics.prove(@parser.parse_term("!M s t. s SUBSET t /\\ M satisfies t ==> M satisfies s"), t114))
 }
@@ -400,7 +400,7 @@ fn step_16() -> Unit raise {
   let t141 = @meson.meson_tac(@list.List([herbase_subset_terms(), @sets.subset()]))
   let t140 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.in_elim_thm(), @fol.language()]))
   let t139 = @tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@theorems.imp_conj()]))(satisfies_subset()))
-  let t138 = @simp.asm_rewrite_tac(@list.empty())
+  let t138 = @simp.asm_rewrite_tac(@list.List([]))
   let t134 = @parser.parse_term("s:form->bool")
   let t137 = @tactics.disch_then(fn(x136 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x131 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -420,7 +420,7 @@ fn step_16() -> Unit raise {
     })(t129(x130))
   }), t137), t138), t139), t140), t141)
   let t143 = @list.List([@simp.asm_simp_tac(@list.List([@sets.in_elim_thm(), @theorems.left_imp_exists_thm(), @prenex.qfree_formsubst()])), t142])
-  let t125 = @simp.asm_rewrite_tac(@list.empty())
+  let t125 = @simp.asm_rewrite_tac(@list.List([]))
   let t124 = @tactics.match_mp_tac(@logic_canon.satisfies_psatisfies())
   let t123 = @tactics.exists_tac(@parser.parse_term("prop_of_model M (v:num->term)"))
   let t121 = @drule.match_mp(@logic_canon.valuation_exists())

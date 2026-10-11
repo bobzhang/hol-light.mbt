@@ -368,7 +368,7 @@ pub fn[TA] qpartition(
   fn(x7 : @list.List[TA]) -> (@list.List[TA], @list.List[TA]) raise {
     let l_1 = x7
     qpartition_1(l_1) catch {
-      @lib.Unchanged => (@list.empty(), l_1)
+      @lib.Unchanged => (@list.List([]), l_1)
       e => raise e
     }
   }
@@ -410,8 +410,8 @@ pub fn hol_of_var(x : Int64) -> @kernel.Term raise {
 ///|
 /// reset_vars, fol_of_var, hol_of_var
 fn step_10() -> Unit raise {
-  let vstore = Ref::{ val: @list.empty(), }
-  let gstore = Ref::{ val: @list.empty(), }
+  let vstore = Ref::{ val: @list.List([]), }
+  let gstore = Ref::{ val: @list.List([]), }
   let vcounter = Ref::{ val: 0L, }
   let inc_vcounter : (Unit) -> Int64 raise = fn(x8 : Unit) -> Int64 raise {
     let _ = x8
@@ -430,11 +430,11 @@ fn step_10() -> Unit raise {
   let reset_vars : (Unit) -> Unit raise = fn(x9 : Unit) -> Unit raise {
     let _ = x9
     {
-      vstore.val = @list.empty()
+      vstore.val = @list.List([])
       ()
     }
     {
-      gstore.val = @list.empty()
+      gstore.val = @list.List([])
       ()
     }
     vcounter.val = 0L
@@ -529,7 +529,7 @@ pub fn hol_of_const(x : Int64) -> @kernel.Term raise {
 /// reset_consts, fol_of_const, hol_of_const
 fn step_11() -> Unit raise {
   let false_tm = @parser.parse_term("F")
-  let cstore = Ref::{ val: @list.empty(), }
+  let cstore = Ref::{ val: @list.List([]), }
   let ccounter = Ref::{ val: 2L, }
   let reset_consts : (Unit) -> Unit raise = fn(x13 : Unit) -> Unit raise {
     let _ = x13
@@ -896,7 +896,7 @@ pub fn fol_unify(
         fol_unify(offset, tm1_p, tm2, sofar)
       } catch {
         Failure("find") => {
-          let tm2_p_1 = fol_subst_bump(offset, @list.empty(), tm2)
+          let tm2_p_1 = fol_subst_bump(offset, @list.List([]), tm2)
           if istriv(sofar, x_1, tm2_p_1) {
             sofar
           } else {
@@ -984,7 +984,7 @@ pub fn[
   x75 : ((TB, (TC, TD, TE))) -> TA raise,
 ) -> (((TB, (TC, TD, TE))) -> TA raise) raise {
   let f = x75
-  let memory = Ref::{ val: @list.empty(), }
+  let memory = Ref::{ val: @list.List([]), }
   fn(x77 : (TB, (TC, TD, TE))) -> TA raise {
     let (gg, (insts, offset, size)) as input = x77
     if @lib.exists(
@@ -1077,7 +1077,7 @@ pub fn[TA] insertan(
     },
     ancestors,
   ) catch {
-    Failure(_) => ((p_p, @list.empty()), ancestors)
+    Failure(_) => ((p_p, @list.List([])), ancestors)
     e => raise e
   }
   let ouranc = ourancp.1
@@ -1096,7 +1096,7 @@ pub fn[TA] insertan(
     raise Failure("insertan: loop")
   } else {
     otheranc.prepend(
-      (p_p, ouranc.prepend(((@list.empty(), t_p), (0L, @bool.truth())))),
+      (p_p, ouranc.prepend(((@list.List([]), t_p), (0L, @bool.truth())))),
     )
   }
 }
@@ -1455,7 +1455,7 @@ pub fn[TA, TB] expand_goal(
           let cont_2 = x142
           ((x119, x120, x121) => expand_goal_1_l(rules, x119, x120, x121))(
             maxdep,
-            (g_3, (@list.empty(), @lib.mul63(2L, offinc()), maxinf)),
+            (g_3, (@list.List([]), @lib.mul63(2L, offinc()), maxinf)),
             cont_2,
           )
         }
@@ -1593,7 +1593,7 @@ fn[TB, TC] expand_goal_1_l(
           let (gs, (newinsts, newoffset, newsize)) = x124
           let (locin, globin) = separate_insts(offset, pinsts, newinsts)
           let g_p = FolGoal::Subgoal(g, gs, apprule, offset, locin)
-          if globin == insts && gs == @list.empty() {
+          if globin == insts && gs == @list.List([]) {
             cont((g_p, (globin, newoffset, size))) catch {
               Failure(_) => raise Cut::Cut
               e => raise e
@@ -1704,7 +1704,7 @@ fn[TB, TC] expand_goals_l(
   let (gl, (insts_1, offset_1, size_1) as tup) = x127
   let cont_1 = x128
   match gl {
-    Empty => cont_1((@list.empty(), tup))
+    Empty => cont_1((@list.List([]), tup))
     More(g_1, tail=Empty) =>
       expand_goal_1(depth_1, (g_1, tup), fn(
         x129 : (FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64)),
@@ -1910,7 +1910,7 @@ pub fn[TA] solve_goal(
     x154 : (Int64, @list.List[FolTerm]),
   ) -> (FolGoal, (@list.List[(FolTerm, Int64)], Int64, Int64)) raise {
     let g_1 = x154
-    solve(min, (g_1, @list.empty()))
+    solve(min, (g_1, @list.List([])))
   }
 }
 
@@ -1935,10 +1935,10 @@ fn step_12() -> Unit raise {
     let tm = @kernel.concl(th_1)
     let hlits = @basics.disjuncts(tm)
     let flits = @lib.map(
-      (x164 : @kernel.Term) => fol_of_literal(@list.empty(), lconsts, x164),
+      (x164 : @kernel.Term) => fol_of_literal(@list.List([]), lconsts, x164),
       hlits,
     )
-    let basics = mk_contraposes_l(0L, th_1, @list.empty(), flits, @list.empty())
+    let basics = mk_contraposes_l(0L, th_1, @list.List([]), flits, @list.List([]))
     if @lib.forall(
         fn(x165 : (Int64, @list.List[FolTerm])) -> Bool raise {
           let (p, _) = x165
@@ -1957,7 +1957,7 @@ fn step_12() -> Unit raise {
               },
               flits,
             ),
-            (1L, @list.empty()),
+            (1L, @list.List([])),
           ),
           (-1L, th_1),
         ),
@@ -2076,7 +2076,7 @@ fn step_12() -> Unit raise {
         })(fol_of_hol_clause(x172))(x173)
       },
       thms,
-      @list.empty(),
+      @list.List([]),
     )
     let prs = @lib.setify(
       @lib.map(
@@ -2504,12 +2504,12 @@ fn step_14() -> Unit raise {
   let imf_conv : (@kernel.Term) -> @kernel.Thm raise = @simp.rewr_conv(
     @class.taut(@parser.parse_term("~p <=> p ==> F")),
   )
-  let memory = Ref::{ val: @list.empty(), }
+  let memory = Ref::{ val: @list.List([]), }
   let clear_contrapos_cache : (Unit) -> Unit raise = fn(
     x203 : Unit,
   ) -> Unit raise {
     let _ = x203
-    memory.val = @list.empty()
+    memory.val = @list.List([])
     ()
   }
   let make_hol_contrapos : ((Int64, @kernel.Thm)) -> @kernel.Thm raise = fn(
@@ -2633,7 +2633,7 @@ fn step_16() -> Unit raise {
           @kernel.assume_rule(hol_g)
         } else {
           let cth = make_hol_contrapos((n, th))
-          if ths == @list.empty() {
+          if ths == @list.List([]) {
             cth
           } else {
             let t217 = @lib.end_itlist(@bool.conj, ths)
@@ -2672,11 +2672,11 @@ pub fn meson_to_hol(
 /// create_equality_axioms
 fn step_17() -> Unit raise {
   let t224 = @tactics.conv_tac(@class.taut)
-  let t223 = @simp.asm_rewrite_tac(@list.empty())
+  let t223 = @simp.asm_rewrite_tac(@list.List([]))
   let t222 = @class.asm_cases_tac(@parser.parse_term("x:A = y"))
   let t225 = @tactics.then_tac(
     @tactics.then_tac(
-      @tactics.then_tac(@simp.rewrite_tac(@list.empty()), t222),
+      @tactics.then_tac(@simp.rewrite_tac(@list.List([])), t222),
       t223,
     ),
     t224,
@@ -2729,7 +2729,7 @@ fn step_17() -> Unit raise {
     let tm = x232
     let acc = x233
     let (fn_, args) = @basics.strip_comb(tm)
-    if args == @list.empty() {
+    if args == @list.List([]) {
       acc
     } else {
       @lib.itlist(
@@ -2779,7 +2779,7 @@ fn step_17() -> Unit raise {
                             } catch {
                               Failure(_) => {
                                 let (pred, args_1) = @basics.strip_comb(tm_1)
-                                if args_1 == @list.empty() {
+                                if args_1 == @list.List([]) {
                                   acc_1
                                 } else {
                                   let t236 = @lib.itlist(
@@ -2891,7 +2891,7 @@ fn step_17() -> Unit raise {
     let (preds_1, funs_1) = @lib.itlist(
       fm_consts,
       tms,
-      (@list.empty(), @list.empty()),
+      (@list.List([]), @list.List([])),
     )
     let (eqs0, noneqs) = @lib.partition(
       fn(x256 : (@kernel.Term, Int64)) -> Bool raise {
@@ -2900,8 +2900,8 @@ fn step_17() -> Unit raise {
       },
       preds_1,
     )
-    if eqs0 == @list.empty() {
-      @list.empty()
+    if eqs0 == @list.List([]) {
+      @list.List([])
     } else {
       let pcongs = @lib.map(create_congruence_axiom(true), noneqs)
       let fcongs = @lib.map(create_congruence_axiom(false), funs_1)
@@ -2911,7 +2911,7 @@ fn step_17() -> Unit raise {
           fn(x257 : @kernel.Thm) -> @kernel.Term raise { @kernel.concl(x257) },
           pcongs.concat(fcongs),
         ),
-        (@list.empty(), @list.empty()),
+        (@list.List([]), @list.List([])),
       )
       let eqs1 = @lib.filter(
         fn(x258 : (@kernel.Term, Int64)) -> Bool raise {
@@ -2951,7 +2951,7 @@ fn step_17() -> Unit raise {
           )(x267)
         },
         eqs,
-        @list.empty(),
+        @list.List([]),
       )
       equivs.concat(pcongs.concat(fcongs))
     }
@@ -2980,7 +2980,7 @@ fn[TA] create_equivalence_axioms_l(
 ) -> @list.List[@kernel.Thm] raise {
   let (eq, _) = (x227, x228)
   let t229 = @kernel.type_of(eq)
-  let tyins = @basics.type_match(@kernel.type_of(veq_tm), t229, @list.empty())
+  let tyins = @basics.type_match(@kernel.type_of(veq_tm), t229, @list.List([]))
   @lib.map(
     fn(x231 : @kernel.Thm) -> @kernel.Thm raise {
       ((x230 : @kernel.Thm) => @kernel.inst_type(tyins, x230))(x231)
@@ -3014,7 +3014,7 @@ fn step_18() -> Unit raise {
   ) -> @kernel.Thm raise {
     let tms = x280
     let th = x281
-    if tms == @list.empty() {
+    if tms == @list.List([]) {
       th
     } else {
       let tm_2 = @lib.hd(tms)
@@ -3064,7 +3064,7 @@ fn step_18() -> Unit raise {
         subterms_irrefl(lconsts_2, x286, x287)
       },
       noneqs,
-      @list.empty(),
+      @list.List([]),
     )
     let uts = @lib.itlist(
       fn(
@@ -3232,7 +3232,7 @@ fn step_18() -> Unit raise {
         )(x325)
       },
       ths,
-      @list.empty(),
+      @list.List([]),
     )
     let tys = @lib.map(
       fn(x331 : @kernel.Term) -> @kernel.HolType raise {
@@ -3324,7 +3324,7 @@ fn step_18() -> Unit raise {
           })(brand_trans(x347))(x348)
         },
         ths_p,
-        @list.empty(),
+        @list.List([]),
       )
       reflexate(ths_p_p)
     } else {
@@ -3446,7 +3446,7 @@ fn step_19() -> Unit raise {
     let (s1, ty1) = @kernel.dest_const(tm1)
     let (s2, ty2) = @kernel.dest_const(tm2)
     if s1 == s2 {
-      @basics.type_match(ty1, ty2, @list.empty())
+      @basics.type_match(ty1, ty2, @list.List([]))
     } else {
       raise Failure("match_consts")
     }
@@ -3471,10 +3471,10 @@ fn step_19() -> Unit raise {
         @kernel.type_vars_in_term(@kernel.concl(th)),
         t365,
       )
-      if tvs == @list.empty() {
+      if tvs == @list.List([]) {
         @list.List([th])
       } else {
-        let pconsts = grab_constants(@kernel.concl(th), @list.empty())
+        let pconsts = grab_constants(@kernel.concl(th), @list.List([]))
         let tyins = @lib.mapfilter(
           match_consts,
           @lib.allpairs(
@@ -3519,7 +3519,7 @@ fn step_19() -> Unit raise {
             tyins,
           ),
         )
-        if ths_p == @list.empty() {
+        if ths_p == @list.List([]) {
           @lib.warn(true, "No useful-looking instantiations of lemma")
           @list.List([th])
         } else {
@@ -3536,7 +3536,7 @@ fn step_19() -> Unit raise {
     let mconsts_1 = x376
     let ths = x377
     let acc_1 = x378
-    if ths == @list.empty() {
+    if ths == @list.List([]) {
       acc_1
     } else {
       let t379 = @lib.hd(ths)
@@ -3631,9 +3631,9 @@ fn step_19() -> Unit raise {
           )(x392)
         },
         asl,
-        @list.empty(),
+        @list.List([]),
       )
-      let ths_p_2 = polymorph_all(mconsts_2, ths_1, @list.empty())
+      let ths_p_2 = polymorph_all(mconsts_2, ths_1, @list.List([]))
       @tactics.map_every(
         fn(
           x393 : @kernel.Thm,
@@ -3788,7 +3788,7 @@ pub fn simple_meson_refute(
     min,
     max,
     inc,
-  )((1L, @list.empty()))
+  )((1L, @list.List([])))
   {
     meson_dcutin().val = old_dcutin
     ()
@@ -4959,9 +4959,9 @@ pub fn meson(
 ) -> @kernel.Thm raise {
   let ths = x491
   let tm = x492
-  let th = @tactics.tac_proof((@list.empty(), tm), meson_tac(ths))
+  let th = @tactics.tac_proof((@list.List([]), tm), meson_tac(ths))
   let (asl, tm_p) = @kernel.dest_thm(th)
-  if asl != @list.empty() &&
+  if asl != @list.List([]) &&
     !@lib.subset(
       asl,
       @lib.unions(

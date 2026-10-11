@@ -496,7 +496,7 @@ pub fn hv_him() -> @kernel.Thm {
 ///|
 /// HV_HIM_EQ
 fn step_31() -> Unit raise {
-  let t43 = @simp.asm_rewrite_tac(@list.empty())
+  let t43 = @simp.asm_rewrite_tac(@list.List([]))
   let t44 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([@quaternion.quat_eq(), hv_components(), him_component()]))), @tactics.eq_tac), @tactics.disch_tac), t43)
   hv_him_eq_c.set(@tactics.prove(@parser.parse_term("!q. Hv(HIm q) = q <=> Re q = &0"), t44))
 }
@@ -751,7 +751,7 @@ fn step_39() -> Unit raise {
   }, @list.List(["feq", "tnz", "hp"]))
   let t224 = @tactics.try_tac(@tactics.ap_term_tac)
   let t223 = @simp.rewrite_tac(@list.List([hv_neg(), @quaternion.quat_mul_lneg(), @quaternion.quat_mul_rneg(), him_neg(), @vectors.vector_neg_neg()]))
-  let t222 = @tactics.hyp_tac(@simp.rewrite_tac, "hp")(@list.empty())
+  let t222 = @tactics.hyp_tac(@simp.rewrite_tac, "hp")(@list.List([]))
   let t221 = @tactics.remove_then("hp", @theorems.destruct_tac("hp|hp"))
   let t220 = @tactics.hyp_tac(@simp.simp_tac, "hnz")(@list.List([reflect_along_eq_quat_conjugation()]))
   let t218 = @tactics.hyp_tac(@simp.simp_tac, "hnz")(@list.List([@realax.real_mul_linv(), @vectors.norm_eq_0()]))
@@ -790,7 +790,7 @@ fn step_39() -> Unit raise {
     })
   })
   let t190 = @simp.abbrev_tac(@parser.parse_term("g = ITLIST (\\v:real^3 h. reflect_along v o h) t I"))
-  let t189 = @simp.asm_rewrite_tac(@list.empty())
+  let t189 = @simp.asm_rewrite_tac(@list.List([]))
   let t188 = @theorems.intro_tac("hnz tnz")
   let t187 = @simp.rewrite_tac(@list.List([@lists.all()]))
   let t186 = @tactics.remove_then("all", fn(x183 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -853,7 +853,7 @@ fn step_39() -> Unit raise {
   let t144 = @tactics.pop_assum_list(fn(x143 : @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
   })
-  let t142 = @tactics.hyp_tac(@quaternions_misc.mp_list_tac, "hp feq")(@list.empty())
+  let t142 = @tactics.hyp_tac(@quaternions_misc.mp_list_tac, "hp feq")(@list.List([]))
   let t141 = @theorems.intro_tac("@l. len hp feq")
   let t140 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@cart.dimindex_3()])), @int.arith_tac), @tactics.all_tac])
   let t138 = @parser.parse_term("3")

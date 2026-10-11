@@ -121,13 +121,13 @@ fn step_3() -> Unit raise {
           let (n, tops, defs, lfn) = @lib.itlist(fn(x16 : @kernel.Thm, x17 : (Int64, @list.List[(@kernel.Term, @kernel.Thm)], @lib.Func[@kernel.Term, @kernel.Term], @lib.Func[@kernel.Term, @kernel.Term])) -> (Int64, @list.List[(@kernel.Term, @kernel.Thm)], @lib.Func[@kernel.Term, @kernel.Term], @lib.Func[@kernel.Term, @kernel.Term]) raise {
             let s18 = @cnf.definitionalize(x16)
             s18(x17)
-          }, ths, ((-1L), @list.empty(), @lib.undefined(), @lib.undefined()))
+          }, ths, ((-1L), @list.List([]), @lib.undefined(), @lib.undefined()))
           let defg = @lib.foldl(fn(x19 : @list.List[(@kernel.Term, @kernel.Term)], x20 : @kernel.Term, x21 : @kernel.Term) -> @list.List[(@kernel.Term, @kernel.Term)] raise {
             let a = x19
             let t = x20
             let nv = x21
             a.prepend((t, nv))
-          }, @list.empty(), defs)
+          }, @list.List([]), defs)
           let mdefs = @lib.filter(fn(x22 : (@kernel.Term, @kernel.Term)) -> Bool raise {
             let (r, _) = x22
             !@cnf.is_atom(r)

@@ -92,7 +92,7 @@ pub fn area_unit_cball() -> @kernel.Thm {
 ///|
 /// AREA_CBALL
 fn step_2() -> Unit raise {
-  let t110 = @simp.asm_rewrite_tac(@list.empty())
+  let t110 = @simp.asm_rewrite_tac(@list.List([]))
   let t109 = @simp.once_rewrite_tac(@list.List([@vectors.norm_sub()]))
   let t108 = @simp.asm_simp_tac(@list.List([@equal.gsym(@realax.real_div()), @real.real_le_ldiv_eq(), @realax.real_mul_lid()]))
   let t107 = @simp.once_rewrite_tac(@list.List([@realax.real_mul_sym()]))
@@ -195,7 +195,7 @@ fn step_4() -> Unit raise {
   let t144 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t143 = @tactics.repeat_tac(@tactics.strip_tac)
   let t148 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.conj_tac, @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), t143), @realanalysis.real_diff_tac), t144), t145), t147])
-  let t142 = @simp.rewrite_tac(@list.empty())
+  let t142 = @simp.rewrite_tac(@list.List([]))
   let t138 = @parser.parse_term("r:real")
   let t139 = @parser.parse_term("--r:real")
   let t140 = @parser.parse_term("\\t. pi * (r pow 2 - t pow 2)")

@@ -19,10 +19,10 @@ pub fn[TA] take(x3 : Int64, x4 : Int64, x5 : @list.List[TA]) -> @list.List[TA] r
   let i = x3
   let j = x4
   match x5 {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(a, tail=b) => {
       match (i, j) {
-        (0L, 0L) => @list.empty()
+        (0L, 0L) => @list.List([])
         (0L, j_1) => take(0L, @lib.sub63(j_1, 1L), b).prepend(a)
         _ => {
           let t6 = @lib.sub63(j, 1L)
@@ -51,7 +51,7 @@ pub fn[TA, TB] cannot(x7 : (TB) -> TA raise, x8 : TB) -> Bool raise {
 /// `new_test_suite`
 pub fn new_test_suite(x9 : Unit) -> ((((String, Bool)) -> Unit raise, (Unit) -> Unit raise)) raise {
   let _ = x9
-  let t = Ref::{ val: @list.empty() }
+  let t = Ref::{ val: @list.List([]) }
   let add_test : ((String, Bool)) -> Unit raise = fn(x10 : (String, Bool)) -> Unit raise {
     let (s, f) = x10
     {
@@ -104,7 +104,7 @@ fn step_1() -> Unit raise {
 ///|
 /// local_defs
 fn step_2() -> Unit raise {
-  local_defs_c.set(Ref::{ val: @list.empty() })
+  local_defs_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|

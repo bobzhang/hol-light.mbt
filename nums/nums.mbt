@@ -67,7 +67,7 @@ pub fn infinity_ax() -> @kernel.Thm {
 ///|
 /// IND_SUC_0_EXISTS
 fn step_5() -> Unit raise {
-  let t7 = @meson.meson_tac(@list.empty())
+  let t7 = @meson.meson_tac(@list.List([]))
   let t6 = @simp.rewrite_tac(@list.List([one_one(), onto()]))
   let t5 = @tactics.pop_assum(fn(
     x2 : @kernel.Thm,
@@ -524,7 +524,7 @@ fn step_13() -> Unit raise {
       }
     })(((x19 : @kernel.Thm) => @equal.ap_term(t18, x19))(x20))
   })
-  let t14 = @simp.asm_rewrite_tac(@list.empty())
+  let t14 = @simp.asm_rewrite_tac(@list.List([]))
   let t13 = @simp.rewrite_tac(@list.List([suc_def()]))
   let t37 = @tactics.then_tac(
     @tactics.then_tac(
@@ -814,7 +814,7 @@ fn step_14() -> Unit raise {
     ),
     t68,
   )
-  let t52 = @simp.asm_rewrite_tac(@list.empty())
+  let t52 = @simp.asm_rewrite_tac(@list.List([]))
   let t70 = @list.List([
     @tactics.then_tac(
       @tactics.match_mp_tac(@bool.conjunct2(num_rep_rules())),
@@ -1097,9 +1097,9 @@ pub fn num_induction_v1() -> @kernel.Thm {
 ///|
 /// num_Axiom
 fn step_15() -> Unit raise {
-  let t151 = @simp.asm_rewrite_tac(@list.empty())
+  let t151 = @simp.asm_rewrite_tac(@list.List([]))
   let t150 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t149 = @simp.asm_rewrite_tac(@list.empty())
+  let t149 = @simp.asm_rewrite_tac(@list.List([]))
   let t148 = @tactics.match_mp_tac(num_induction_v1())
   let t147 = @simp.once_rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t152 = @tactics.then_tac(
@@ -1169,7 +1169,7 @@ fn step_15() -> Unit raise {
   ) raise) raise {
     @tactics.match_mp_tac(@bool.conjunct2(x139))
   })
-  let t138 = @simp.asm_rewrite_tac(@list.empty())
+  let t138 = @simp.asm_rewrite_tac(@list.List([]))
   let t137 = @tactics.exists_tac(@parser.parse_term("fn:num->A"))
   let t136 = @tactics.disch_then(
     @tactics.x_choose_then(@parser.parse_term("fn:num->A"))(fn(
@@ -1263,7 +1263,7 @@ fn step_15() -> Unit raise {
     ),
     @tactics.refl_tac,
   )
-  let t131 = @simp.asm_rewrite_tac(@list.empty())
+  let t131 = @simp.asm_rewrite_tac(@list.List([]))
   let t128 = @tactics.first_assum(@tactics.match_mp_tac)
   let t129 = @tactics.then_tac(
     @tactics.then_tac(@tactics.ap_thm_tac, @tactics.ap_term_tac),
@@ -1322,7 +1322,7 @@ fn step_15() -> Unit raise {
     ),
     t129,
   ])
-  let t123 = @simp.asm_rewrite_tac(@list.empty())
+  let t123 = @simp.asm_rewrite_tac(@list.List([]))
   let t122 = @tactics.repeat_tac(@tactics.strip_tac)
   let t116 = @parser.parse_term("y:A")
   let t121 = @tactics.disch_then(
@@ -1937,7 +1937,7 @@ pub fn num_recursion() -> @kernel.Thm {
 ///|
 /// num_CASES
 fn step_20() -> Unit raise {
-  let t160 = @tactics.then_tac(induct_tac, @meson.meson_tac(@list.empty()))
+  let t160 = @tactics.then_tac(induct_tac, @meson.meson_tac(@list.List([])))
   num_cases_c.set(
     @tactics.prove(@parser.parse_term("!m. (m = 0) \\/ (?n. m = SUC n)"), t160),
   )
@@ -2020,10 +2020,10 @@ pub fn bit1_def() -> @kernel.Thm {
 fn step_24() -> Unit raise {
   let pow24 = @num.pow2(24)
   let num_0 = @num.num_of_int64(0L)
-  let zero_tm = @kernel.mk_const("_0", @list.empty())
-  let bit0_tm = @kernel.mk_const("BIT0", @list.empty())
-  let bit1_tm = @kernel.mk_const("BIT1", @list.empty())
-  let numeral_tm = @kernel.mk_const("NUMERAL", @list.empty())
+  let zero_tm = @kernel.mk_const("_0", @list.List([]))
+  let bit0_tm = @kernel.mk_const("BIT0", @list.List([]))
+  let bit1_tm = @kernel.mk_const("BIT1", @list.List([]))
+  let numeral_tm = @kernel.mk_const("NUMERAL", @list.List([]))
   fn stripzeros(x164 : @list.List[Bool]) -> @list.List[Bool] raise {
     let l = x164
     match l {
@@ -2087,7 +2087,7 @@ fn step_24() -> Unit raise {
     x193 : @num.Num,
   ) -> @kernel.Term raise {
     let n_1 = x193
-    numeral_of_list(zero_tm, raw_list_of_num(@list.empty(), n_1))
+    numeral_of_list(zero_tm, raw_list_of_num(@list.List([]), n_1))
   }
   mk_numeral_c.set(fn(x194 : @num.Num) -> @kernel.Term raise {
     let n_2 = x194
@@ -2144,7 +2144,7 @@ pub fn is_numeral(x : @kernel.Term) -> Bool raise {
 ///|
 /// the_specifications
 fn step_26() -> Unit raise {
-  the_specifications_c.set(Ref::{ val: @list.empty(), })
+  the_specifications_c.set(Ref::{ val: @list.List([]), })
 }
 
 ///|
@@ -2236,9 +2236,9 @@ fn step_27() -> Unit raise {
     fn(x215 : @kernel.Thm) -> @kernel.Thm raise {
       let th_2 = x215
       let (asl, c_1) = @kernel.dest_thm(th_2)
-      if !(asl == @list.empty()) {
+      if !(asl == @list.List([])) {
         raise Failure("new_specification: Assumptions not allowed in theorem")
-      } else if !(@kernel.frees(c_1) == @list.empty()) {
+      } else if !(@kernel.frees(c_1) == @list.List([])) {
         raise Failure(
           "new_specification: Free variables in predicate: " +
           @lib.string_concat(
@@ -2335,7 +2335,7 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash] check_distinct_l(
           }
         },
         l,
-        @list.empty(),
+        @list.List([]),
       ),
     )
     true

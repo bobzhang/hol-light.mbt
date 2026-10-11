@@ -33,7 +33,7 @@ pub fn gensort(x : @list.List[(String, @kernel.HolType)]) -> @list.List[(String,
 ///|
 /// suppress
 fn step_2() -> Unit raise {
-  suppress_c.set(Ref::{ val: @list.empty() })
+  suppress_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|
@@ -61,14 +61,14 @@ pub fn get_type_list(x8 : @kernel.Term) -> @list.List[(String, @kernel.HolType)]
   match tm {
     @kernel.Term::Var(s, t) => {
       if @lib.mem(s, suppress().val) {
-        @list.empty()
+        @list.List([])
       } else {
         @list.List([(s, t)])
       }
     }
     @kernel.Term::Const(s_1, t_1) => {
       if @lib.mem(s_1, suppress().val) {
-        @list.empty()
+        @list.List([])
       } else {
         @list.List([(s_1, t_1)])
       }
@@ -199,7 +199,7 @@ pub(all) suberror Empty_stack {
 ///|
 /// proof_stack
 fn step_5() -> Unit raise {
-  proof_stack_c.set(Ref::{ val: @list.empty() })
+  proof_stack_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|
