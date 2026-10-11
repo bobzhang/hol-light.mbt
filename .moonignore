@@ -1,0 +1,5 @@
+# Not in the published module: mooncakes caps a module at 100 MB unpacked
+# (see the note in moon.mod and TODO.md)
+/100/
+/multivariate/
+/tools/

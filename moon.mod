@@ -16,7 +16,3 @@ description = "A MoonBit port of the HOL Light theorem prover"
 
 // mooncakes caps a module at 100 MB unpacked (it answers "Invalid ZIP archive"):
 // Multivariate/, 100/ and the tooling are on GitHub only for now (TODO.md)
-
-options(
-  exclude: [ "100", "multivariate", "tools" ],
-)
