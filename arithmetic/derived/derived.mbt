@@ -315,7 +315,7 @@ let assume_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("assume")
 
 ///|
 /// `assume`
-pub fn assume() -> @kernel.Thm {
+pub fn assume_() -> @kernel.Thm {
   assume_c.get()
 }
 

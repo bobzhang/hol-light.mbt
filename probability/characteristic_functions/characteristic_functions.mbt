@@ -6145,7 +6145,7 @@ pub fn simple_doob_decomposition() -> @kernel.Thm {
 ///|
 /// doob_compensator
 fn step_99() -> Unit raise {
-  doob_compensator_c.set(@define.define(@parser.parse_term("(doob_compensator (p:A prob_space) (FF:num->(A->bool)->bool)\n     (X:num->A->real) 0 (x:A) = &0) /\\\n   (doob_compensator p FF X (SUC n) x =\n     doob_compensator p FF X n x +\n     simple_cond_exp p (FF n) (X (SUC n)) x - X n x)")))
+  doob_compensator_c.set(@define.define_(@parser.parse_term("(doob_compensator (p:A prob_space) (FF:num->(A->bool)->bool)\n     (X:num->A->real) 0 (x:A) = &0) /\\\n   (doob_compensator p FF X (SUC n) x =\n     doob_compensator p FF X n x +\n     simple_cond_exp p (FF n) (X (SUC n)) x - X n x)")))
 }
 
 ///|

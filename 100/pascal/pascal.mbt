@@ -875,7 +875,7 @@ pub fn parallel_projp_homop_explicit() -> @kernel.Thm {
 ///|
 /// bracket
 fn step_46() -> Unit raise {
-  bracket_c.set(@define.define(@parser.parse_term("bracket[a;b;c] = det(vector[homop a;homop b;homop c])")))
+  bracket_c.set(@define.define_(@parser.parse_term("bracket[a;b;c] = det(vector[homop a;homop b;homop c])")))
 }
 
 ///|

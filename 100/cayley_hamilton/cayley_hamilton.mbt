@@ -10,7 +10,7 @@ fn step_1() -> Unit raise {
 ///|
 /// mpow
 fn step_2() -> Unit raise {
-  mpow_c.set(@define.define(@parser.parse_term("(!A:real^N^N. A mpow 0 = (mat 1 :real^N^N)) /\\\n   (!A:real^N^N n. A mpow (SUC n) = A ** A mpow n)")))
+  mpow_c.set(@define.define_(@parser.parse_term("(!A:real^N^N. A mpow 0 = (mat 1 :real^N^N)) /\\\n   (!A:real^N^N n. A mpow (SUC n) = A ** A mpow n)")))
 }
 
 ///|

@@ -65,5 +65,5 @@ type_DISTINCT type_distinct
 type_INDUCT type_induct
 type_INJ type_inj
 type_RECURSION type_recursion
-typeof typeof
+typeof typeof_
 welltyped welltyped

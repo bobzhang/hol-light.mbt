@@ -34,7 +34,7 @@ WF_REC_CASES wf_rec_cases
 WF_REC_CASES' wf_rec_cases_p
 WF_REC_TAIL_GENERAL' wf_rec_tail_general_p
 admissible admissible
-define define
+define define_
 instantiate_casewise_recursion instantiate_casewise_recursion
 prove_general_recursive_function_exists prove_general_recursive_function_exists
 pure_prove_recursive_function_exists pure_prove_recursive_function_exists

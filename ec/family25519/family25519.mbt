@@ -4,7 +4,7 @@
 ///|
 /// c_25519
 fn step_1() -> Unit raise {
-  c_25519_c.set(@define.define(@parser.parse_term("c_25519 = 51042569399160536130206135233146329284152202253034631822681833788666877215207")))
+  c_25519_c.set(@define.define_(@parser.parse_term("c_25519 = 51042569399160536130206135233146329284152202253034631822681833788666877215207")))
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn c_25519() -> @kernel.Thm {
 ///|
 /// curve25519_of_edwards25519
 fn step_2() -> Unit raise {
-  curve25519_of_edwards25519_c.set(@define.define(@parser.parse_term("curve25519_of_edwards25519 =\n        montgomery_of_edwards (integer_mod_ring p_25519) (&c_25519)")))
+  curve25519_of_edwards25519_c.set(@define.define_(@parser.parse_term("curve25519_of_edwards25519 =\n        montgomery_of_edwards (integer_mod_ring p_25519) (&c_25519)")))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn curve25519_of_edwards25519() -> @kernel.Thm {
 ///|
 /// edwards25519_of_curve25519
 fn step_3() -> Unit raise {
-  edwards25519_of_curve25519_c.set(@define.define(@parser.parse_term("edwards25519_of_curve25519 =\n        edwards_of_montgomery (integer_mod_ring p_25519) (&c_25519)")))
+  edwards25519_of_curve25519_c.set(@define.define_(@parser.parse_term("edwards25519_of_curve25519 =\n        edwards_of_montgomery (integer_mod_ring p_25519) (&c_25519)")))
 }
 
 ///|
@@ -204,7 +204,7 @@ pub fn edwards25519_of_curve25519_cc25519() -> @kernel.Thm {
 ///|
 /// wei25519_of_curve25519
 fn step_12() -> Unit raise {
-  wei25519_of_curve25519_c.set(@define.define(@parser.parse_term("wei25519_of_curve25519 =\n        weierstrass_of_montgomery (integer_mod_ring p_25519,&A_25519,&1)")))
+  wei25519_of_curve25519_c.set(@define.define_(@parser.parse_term("wei25519_of_curve25519 =\n        weierstrass_of_montgomery (integer_mod_ring p_25519,&A_25519,&1)")))
 }
 
 ///|
@@ -219,7 +219,7 @@ pub fn wei25519_of_curve25519() -> @kernel.Thm {
 ///|
 /// curve25519_of_wei25519
 fn step_13() -> Unit raise {
-  curve25519_of_wei25519_c.set(@define.define(@parser.parse_term("curve25519_of_wei25519 =\n        montgomery_of_weierstrass (integer_mod_ring p_25519,&A_25519,&1)")))
+  curve25519_of_wei25519_c.set(@define.define_(@parser.parse_term("curve25519_of_wei25519 =\n        montgomery_of_weierstrass (integer_mod_ring p_25519,&A_25519,&1)")))
 }
 
 ///|

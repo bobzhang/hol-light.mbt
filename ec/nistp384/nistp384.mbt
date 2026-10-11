@@ -112,7 +112,7 @@ pub fn g_384() -> @kernel.Thm {
 ///|
 /// nistp384
 fn step_10() -> Unit raise {
-  nistp384_c.set(@define.define(@parser.parse_term("nistp384 =\n    (integer_mod_ring p_384,\n     ring_neg (integer_mod_ring p_384) (&3),\n     &b_384:int)")))
+  nistp384_c.set(@define.define_(@parser.parse_term("nistp384 =\n    (integer_mod_ring p_384,\n     ring_neg (integer_mod_ring p_384) (&3),\n     &b_384:int)")))
 }
 
 ///|
@@ -212,7 +212,7 @@ pub fn sanity_check_384() -> @kernel.Thm {
 ///|
 /// p384_group
 fn step_15() -> Unit raise {
-  p384_group_c.set(@define.define(@parser.parse_term("p384_group =\n   weierstrass_group\n    (integer_mod_ring p_384,\n     ring_neg (integer_mod_ring p_384) (&3),\n     &b_384)")))
+  p384_group_c.set(@define.define_(@parser.parse_term("p384_group =\n   weierstrass_group\n    (integer_mod_ring p_384,\n     ring_neg (integer_mod_ring p_384) (&3),\n     &b_384)")))
 }
 
 ///|

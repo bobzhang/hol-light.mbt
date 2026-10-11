@@ -2049,7 +2049,7 @@ pub fn simple_submartingale_localized_increasing() -> @kernel.Thm {
 ///|
 /// running_max
 fn step_56() -> Unit raise {
-  running_max_c.set(@define.define(@parser.parse_term("(running_max (X:num->A->real) 0 x = X 0 x) /\\\n   (running_max X (SUC n) x = real_max (running_max X n x) (X (SUC n) x))")))
+  running_max_c.set(@define.define_(@parser.parse_term("(running_max (X:num->A->real) 0 x = X 0 x) /\\\n   (running_max X (SUC n) x = real_max (running_max X n x) (X (SUC n) x))")))
 }
 
 ///|

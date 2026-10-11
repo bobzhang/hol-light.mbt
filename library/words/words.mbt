@@ -24169,7 +24169,7 @@ pub fn word_sx_zx() -> @kernel.Thm {
 /// word_sxfrom
 fn step_525() -> Unit raise {
   word_sxfrom_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "word_sxfrom n (x:N word) =\n  word_ishr (word_shl x (dimindex(:N) - 1 - n)) (dimindex(:N) - 1 - n)",
       ),
@@ -41041,7 +41041,7 @@ pub fn word_bytereverse_reversefields() -> @kernel.Thm {
 /// word_pmul
 fn step_793() -> Unit raise {
   word_pmul_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "(word_pmul:M word->N word->P word) x y =\n  word_of_bits {k | ODD(CARD {i | i <= k /\\ bit i x /\\ bit (k - i) y})}",
       ),

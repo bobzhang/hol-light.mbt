@@ -112,7 +112,7 @@ pub fn g_521() -> @kernel.Thm {
 ///|
 /// nistp521
 fn step_10() -> Unit raise {
-  nistp521_c.set(@define.define(@parser.parse_term("nistp521 =\n   (integer_mod_ring p_521,\n     ring_neg (integer_mod_ring p_521) (&3),\n     &b_521:int)")))
+  nistp521_c.set(@define.define_(@parser.parse_term("nistp521 =\n   (integer_mod_ring p_521,\n     ring_neg (integer_mod_ring p_521) (&3),\n     &b_521:int)")))
 }
 
 ///|
@@ -212,7 +212,7 @@ pub fn sanity_check_521() -> @kernel.Thm {
 ///|
 /// p521_group
 fn step_15() -> Unit raise {
-  p521_group_c.set(@define.define(@parser.parse_term("p521_group =\n   weierstrass_group\n    (integer_mod_ring p_521,\n     ring_neg (integer_mod_ring p_521) (&3),\n     &b_521)")))
+  p521_group_c.set(@define.define_(@parser.parse_term("p521_group =\n   weierstrass_group\n    (integer_mod_ring p_521,\n     ring_neg (integer_mod_ring p_521) (&3),\n     &b_521)")))
 }
 
 ///|

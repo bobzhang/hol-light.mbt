@@ -295,7 +295,7 @@ pub fn days_in_year_sum() -> @kernel.Thm {
 ///|
 /// cumulative_days
 fn step_19() -> Unit raise {
-  cumulative_days_c.set(@define.define(@parser.parse_term("cumulative_days 0 = 0 /\\\n  cumulative_days (SUC y) = cumulative_days y + days_in_year y")))
+  cumulative_days_c.set(@define.define_(@parser.parse_term("cumulative_days 0 = 0 /\\\n  cumulative_days (SUC y) = cumulative_days y + days_in_year y")))
 }
 
 ///|

@@ -4,7 +4,7 @@
 ///|
 /// fib
 fn step_1() -> Unit raise {
-  fib_c.set(@define.define(@parser.parse_term("fib n = if n = 0 \\/ n = 1 then 1 else fib(n - 1) + fib(n - 2)")))
+  fib_c.set(@define.define_(@parser.parse_term("fib n = if n = 0 \\/ n = 1 then 1 else fib(n - 1) + fib(n - 2)")))
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn fib() -> @kernel.Thm {
 ///|
 /// fib2
 fn step_2() -> Unit raise {
-  fib2_c.set(@define.define(@parser.parse_term("(fib2 0 = 1) /\\\n  (fib2 1 = 1) /\\\n  (fib2 (n + 2) = fib2(n) + fib2(n + 1))")))
+  fib2_c.set(@define.define_(@parser.parse_term("(fib2 0 = 1) /\\\n  (fib2 1 = 1) /\\\n  (fib2 (n + 2) = fib2(n) + fib2(n + 1))")))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn fib2() -> @kernel.Thm {
 ///|
 /// halve
 fn step_3() -> Unit raise {
-  halve_c.set(@define.define(@parser.parse_term("halve (2 * n) = n")))
+  halve_c.set(@define.define_(@parser.parse_term("halve (2 * n) = n")))
 }
 
 ///|
@@ -49,7 +49,7 @@ pub fn halve() -> @kernel.Thm {
 ///|
 /// unknown
 fn step_4() -> Unit raise {
-  unknown_c.set(@define.define(@parser.parse_term("unknown n = unknown(n + 1)")))
+  unknown_c.set(@define.define_(@parser.parse_term("unknown n = unknown(n + 1)")))
 }
 
 ///|
@@ -64,13 +64,13 @@ pub fn unknown() -> @kernel.Thm {
 ///|
 /// Tutorial/Recursive_definitions.ml:13
 fn step_5() -> Unit raise {
-  ignore(@define.define(@parser.parse_term("!n. collatz(n) = if n <= 1 then n\n                   else if EVEN(n) then collatz(n DIV 2)\n                   else collatz(3 * n + 1)")))
+  ignore(@define.define_(@parser.parse_term("!n. collatz(n) = if n <= 1 then n\n                   else if EVEN(n) then collatz(n DIV 2)\n                   else collatz(3 * n + 1)")))
 }
 
 ///|
 /// fusc_def
 fn step_6() -> Unit raise {
-  fusc_def_c.set(@define.define(@parser.parse_term("(fusc (2 * n) = if n = 0 then 0 else fusc(n)) /\\\n  (fusc (2 * n + 1) = if n = 0 then 1 else fusc(n) + fusc(n + 1))")))
+  fusc_def_c.set(@define.define_(@parser.parse_term("(fusc (2 * n) = if n = 0 then 0 else fusc(n)) /\\\n  (fusc (2 * n + 1) = if n = 0 then 1 else fusc(n) + fusc(n + 1))")))
 }
 
 ///|
@@ -104,7 +104,7 @@ pub fn fusc() -> @kernel.Thm {
 ///|
 /// binom
 fn step_8() -> Unit raise {
-  binom_c.set(@define.define(@parser.parse_term("(!n. binom(n,0) = 1) /\\\n  (!k. binom(0,SUC(k)) = 0) /\\\n  (!n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))")))
+  binom_c.set(@define.define_(@parser.parse_term("(!n. binom(n,0) = 1) /\\\n  (!k. binom(0,SUC(k)) = 0) /\\\n  (!n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))")))
 }
 
 ///|

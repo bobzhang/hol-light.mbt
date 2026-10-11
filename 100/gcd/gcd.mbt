@@ -4,7 +4,7 @@
 ///|
 /// egcd
 fn step_1() -> Unit raise {
-  egcd_c.set(@define.define(@parser.parse_term("egcd(m,n) = if m = 0 then n\n              else if n = 0 then m\n              else if m <= n then egcd(m,n - m)\n              else egcd(m - n,n)")))
+  egcd_c.set(@define.define_(@parser.parse_term("egcd(m,n) = if m = 0 then n\n              else if n = 0 then m\n              else if m <= n then egcd(m,n - m)\n              else egcd(m - n,n)")))
 }
 
 ///|

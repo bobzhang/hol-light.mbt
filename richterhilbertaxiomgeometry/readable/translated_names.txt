@@ -29,7 +29,7 @@ TACtoThmTactic tactothmtactic
 X_gen_TAC x_gen_tac
 X_genl_TAC x_genl_tac
 arithmetic arithmetic
-assume assume
+assume assume_
 binom binom
 case_split case_split
 conj_tac conj_tac

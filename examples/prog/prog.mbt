@@ -310,7 +310,7 @@ let assert_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("ASSERT")
 
 ///|
 /// `ASSERT`
-pub fn assert() -> @kernel.Thm {
+pub fn assert_() -> @kernel.Thm {
   assert_c.get()
 }
 
@@ -576,7 +576,7 @@ pub fn sem_do() -> @kernel.Thm {
 ///|
 /// SEM_ASSERT
 fn step_38() -> Unit raise {
-  let t37 = @simp.rewrite_tac(@list.List([assert(), sem_ite(), sem_skip(), sem_abort()]))
+  let t37 = @simp.rewrite_tac(@list.List([assert_(), sem_ite(), sem_skip(), sem_abort()]))
   sem_assert_c.set(@tactics.prove(@parser.parse_term("sem(ASSERT g) s s' <=> g s /\\ (s' = s)"), t37))
 }
 

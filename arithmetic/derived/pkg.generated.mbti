@@ -26,7 +26,7 @@ pub fn ante_conj() -> @kernel.Thm
 
 pub fn ante_disj() -> @kernel.Thm
 
-pub fn assume() -> @kernel.Thm
+pub fn assume_() -> @kernel.Thm
 
 pub fn axiom_addimp() -> @kernel.Thm
 

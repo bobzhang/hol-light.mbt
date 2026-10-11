@@ -14408,7 +14408,7 @@ pub fn ring_matroid_v1() -> @kernel.Thm {
 /// ring_dependent
 fn step_144() -> Unit raise {
   ring_dependent_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "ring_dependent (k,l) (h:A->B) s <=>\n        s SUBSET ring_carrier l /\\\n        ?a. a IN s /\\ a IN ring_span (k,l) h (s DELETE a)",
       ),
@@ -14429,7 +14429,7 @@ pub fn ring_dependent() -> @kernel.Thm {
 /// ring_independent
 fn step_145() -> Unit raise {
   ring_independent_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "ring_independent (k,l) (h:A->B) s <=>\n        s SUBSET ring_carrier l /\\ ~(ring_dependent (k,l) h s)",
       ),
@@ -14452,7 +14452,7 @@ pub fn ring_independent() -> @kernel.Thm {
 /// ring_spanning
 fn step_146() -> Unit raise {
   ring_spanning_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "ring_spanning (k,l) (h:A->B) s <=>\n        s SUBSET ring_carrier l /\\ ring_span (k,l) h s = ring_carrier l",
       ),
@@ -14473,7 +14473,7 @@ pub fn ring_spanning() -> @kernel.Thm {
 /// ring_basis
 fn step_147() -> Unit raise {
   ring_basis_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "ring_basis (k,l) (h:A->B) s <=>\n        ring_independent (k,l) h s /\\ ring_spanning (k,l) h s",
       ),
@@ -40524,7 +40524,7 @@ pub fn algebraically_dependent() -> @kernel.Thm {
 /// algebraically_independent
 fn step_263() -> Unit raise {
   algebraically_independent_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "algebraically_independent (k,l) (h:A->B) s <=>\n        s SUBSET ring_carrier l /\\ ~(algebraically_dependent (k,l) h s)",
       ),
@@ -40568,7 +40568,7 @@ pub fn algebraic_span() -> @kernel.Thm {
 /// algebraically_spanning
 fn step_265() -> Unit raise {
   algebraically_spanning_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "algebraically_spanning (k,l) (h:A->B) s <=>\n  s SUBSET ring_carrier l /\\\n  !y. y IN ring_carrier l\n      ==> algebraic_over\n           (subring_generated l (IMAGE h (ring_carrier k) UNION s),l) I y",
       ),
@@ -40591,7 +40591,7 @@ pub fn algebraically_spanning() -> @kernel.Thm {
 /// transcendence_basis
 fn step_266() -> Unit raise {
   transcendence_basis_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "transcendence_basis (k,l) (h:A->B) s <=>\n        algebraically_spanning (k,l) h s /\\\n        algebraically_independent (k,l) h s",
       ),

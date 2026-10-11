@@ -1858,7 +1858,7 @@ let member_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("MEMBER")
 
 ///|
 /// `MEMBER`
-pub fn member() -> @kernel.Thm {
+pub fn member_() -> @kernel.Thm {
   member_c.get()
 }
 

@@ -260,7 +260,7 @@ pub fn quat_inv() -> @kernel.Thm {
 ///|
 /// quat_pow
 fn step_23() -> Unit raise {
-  quat_pow_c.set(@define.define(@parser.parse_term("(q pow 0 = Hx(&1)) /\\\n   (!n. q pow (SUC n) = q * q pow n)")))
+  quat_pow_c.set(@define.define_(@parser.parse_term("(q pow 0 = Hx(&1)) /\\\n   (!n. q pow (SUC n) = q * q pow n)")))
 }
 
 ///|

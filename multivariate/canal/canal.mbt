@@ -2490,7 +2490,7 @@ pub fn complex_derivative() -> @kernel.Thm {
 ///|
 /// higher_complex_derivative
 fn step_119() -> Unit raise {
-  higher_complex_derivative_c.set(@define.define(@parser.parse_term("higher_complex_derivative 0 f = f /\\\n  (!n. higher_complex_derivative (SUC n) f =\n                complex_derivative (higher_complex_derivative n f))")))
+  higher_complex_derivative_c.set(@define.define_(@parser.parse_term("higher_complex_derivative 0 f = f /\\\n  (!n. higher_complex_derivative (SUC n) f =\n                complex_derivative (higher_complex_derivative n f))")))
 }
 
 ///|

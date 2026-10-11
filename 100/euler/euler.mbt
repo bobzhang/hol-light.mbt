@@ -43,7 +43,7 @@ pub fn card_eq_lemma() -> @kernel.Thm {
 ///|
 /// index
 fn step_3() -> Unit raise {
-  index_c.set(@define.define(@parser.parse_term("index n = if n = 0 then 0 else if ODD n then 0 else SUC(index(n DIV 2))")))
+  index_c.set(@define.define_(@parser.parse_term("index n = if n = 0 then 0 else if ODD n then 0 else SUC(index(n DIV 2))")))
 }
 
 ///|
@@ -58,7 +58,7 @@ pub fn index() -> @kernel.Thm {
 ///|
 /// oddpart
 fn step_4() -> Unit raise {
-  oddpart_c.set(@define.define(@parser.parse_term("oddpart n = if n = 0 then 0 else if ODD n then n else oddpart(n DIV 2)")))
+  oddpart_c.set(@define.define_(@parser.parse_term("oddpart n = if n = 0 then 0 else if ODD n then n else oddpart(n DIV 2)")))
 }
 
 ///|

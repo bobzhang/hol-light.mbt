@@ -83,7 +83,7 @@ pub fn pos_part_le_iff() -> @kernel.Thm {
 ///|
 /// upcrossing_phase
 fn step_6() -> Unit raise {
-  upcrossing_phase_c.set(@define.define(@parser.parse_term("(upcrossing_phase (f:num->real) a b 0 = (if f 0 <= a then 1 else 0)) /\\\n   (upcrossing_phase f a b (SUC k) =\n      if upcrossing_phase f a b k = 0 then\n        (if f (SUC k) <= a then 1 else 0)\n      else\n        (if f (SUC k) >= b then 0 else 1))")))
+  upcrossing_phase_c.set(@define.define_(@parser.parse_term("(upcrossing_phase (f:num->real) a b 0 = (if f 0 <= a then 1 else 0)) /\\\n   (upcrossing_phase f a b (SUC k) =\n      if upcrossing_phase f a b k = 0 then\n        (if f (SUC k) <= a then 1 else 0)\n      else\n        (if f (SUC k) >= b then 0 else 1))")))
 }
 
 ///|
@@ -98,7 +98,7 @@ pub fn upcrossing_phase() -> @kernel.Thm {
 ///|
 /// upcrossing_count
 fn step_7() -> Unit raise {
-  upcrossing_count_c.set(@define.define(@parser.parse_term("(upcrossing_count (f:num->real) a b 0 = 0) /\\\n   (upcrossing_count f a b (SUC k) =\n      upcrossing_count f a b k +\n      (if upcrossing_phase f a b k = 1 /\\ f (SUC k) >= b then 1 else 0))")))
+  upcrossing_count_c.set(@define.define_(@parser.parse_term("(upcrossing_count (f:num->real) a b 0 = 0) /\\\n   (upcrossing_count f a b (SUC k) =\n      upcrossing_count f a b k +\n      (if upcrossing_phase f a b k = 1 /\\ f (SUC k) >= b then 1 else 0))")))
 }
 
 ///|
@@ -113,7 +113,7 @@ pub fn upcrossing_count() -> @kernel.Thm {
 ///|
 /// downcrossing_phase
 fn step_8() -> Unit raise {
-  downcrossing_phase_c.set(@define.define(@parser.parse_term("(downcrossing_phase (f:num->real) a b 0 = (if f 0 >= b then 1 else 0)) /\\\n   (downcrossing_phase f a b (SUC k) =\n      if downcrossing_phase f a b k = 0 then\n        (if f (SUC k) >= b then 1 else 0)\n      else\n        (if f (SUC k) <= a then 0 else 1))")))
+  downcrossing_phase_c.set(@define.define_(@parser.parse_term("(downcrossing_phase (f:num->real) a b 0 = (if f 0 >= b then 1 else 0)) /\\\n   (downcrossing_phase f a b (SUC k) =\n      if downcrossing_phase f a b k = 0 then\n        (if f (SUC k) >= b then 1 else 0)\n      else\n        (if f (SUC k) <= a then 0 else 1))")))
 }
 
 ///|
@@ -128,7 +128,7 @@ pub fn downcrossing_phase() -> @kernel.Thm {
 ///|
 /// downcrossing_count
 fn step_9() -> Unit raise {
-  downcrossing_count_c.set(@define.define(@parser.parse_term("(downcrossing_count (f:num->real) a b 0 = 0) /\\\n   (downcrossing_count f a b (SUC k) =\n      downcrossing_count f a b k +\n      (if downcrossing_phase f a b k = 1 /\\ f (SUC k) <= a then 1 else 0))")))
+  downcrossing_count_c.set(@define.define_(@parser.parse_term("(downcrossing_count (f:num->real) a b 0 = 0) /\\\n   (downcrossing_count f a b (SUC k) =\n      downcrossing_count f a b k +\n      (if downcrossing_phase f a b k = 1 /\\ f (SUC k) <= a then 1 else 0))")))
 }
 
 ///|
@@ -299,7 +299,7 @@ pub fn upcrossing_bet() -> @kernel.Thm {
 ///|
 /// bet_gain
 fn step_17() -> Unit raise {
-  bet_gain_c.set(@define.define(@parser.parse_term("(bet_gain (f:num->real) a b 0 = &0) /\\\n   (bet_gain f a b (SUC n) = bet_gain f a b n +\n    (if upcrossing_phase f a b n = 1 then &1 else &0) * (f (SUC n) - f n))")))
+  bet_gain_c.set(@define.define_(@parser.parse_term("(bet_gain (f:num->real) a b 0 = &0) /\\\n   (bet_gain f a b (SUC n) = bet_gain f a b n +\n    (if upcrossing_phase f a b n = 1 then &1 else &0) * (f (SUC n) - f n))")))
 }
 
 ///|
@@ -475,7 +475,7 @@ pub fn upcrossing_bound() -> @kernel.Thm {
 ///|
 /// not_bet_gain
 fn step_20() -> Unit raise {
-  not_bet_gain_c.set(@define.define(@parser.parse_term("(not_bet_gain (f:num->real) a b 0 = &0) /\\\n   (not_bet_gain f a b (SUC n) = not_bet_gain f a b n +\n    (if upcrossing_phase f a b n = 0 then &1 else &0) * (f (SUC n) - f n))")))
+  not_bet_gain_c.set(@define.define_(@parser.parse_term("(not_bet_gain (f:num->real) a b 0 = &0) /\\\n   (not_bet_gain f a b (SUC n) = not_bet_gain f a b n +\n    (if upcrossing_phase f a b n = 0 then &1 else &0) * (f (SUC n) - f n))")))
 }
 
 ///|
@@ -19637,7 +19637,7 @@ pub fn gen_predictable() -> @kernel.Thm {
 ///|
 /// gen_doob_compensator
 fn step_262() -> Unit raise {
-  gen_doob_compensator_c.set(@define.define(@parser.parse_term("(gen_doob_compensator (p:A prob_space) (FF:num->(A->bool)->bool)\n     (X:num->A->real) 0 (x:A) = &0) /\\\n   (gen_doob_compensator p FF X (SUC n) x =\n     gen_doob_compensator p FF X n x +\n     gen_cond_exp p (FF n) (X (SUC n)) x - X n x)")))
+  gen_doob_compensator_c.set(@define.define_(@parser.parse_term("(gen_doob_compensator (p:A prob_space) (FF:num->(A->bool)->bool)\n     (X:num->A->real) 0 (x:A) = &0) /\\\n   (gen_doob_compensator p FF X (SUC n) x =\n     gen_doob_compensator p FF X n x +\n     gen_cond_exp p (FF n) (X (SUC n)) x - X n x)")))
 }
 
 ///|

@@ -170,7 +170,7 @@ pub fn max_0() -> @kernel.Thm {
 ///|
 /// MAXL
 fn step_9() -> Unit raise {
-  maxl_c.set(@define.define(@parser.parse_term("MAXL [] = 0 /\\\n   (!h t. MAXL (CONS h t) = MAX h (MAXL t))")))
+  maxl_c.set(@define.define_(@parser.parse_term("MAXL [] = 0 /\\\n   (!h t. MAXL (CONS h t) = MAX h (MAXL t))")))
 }
 
 ///|

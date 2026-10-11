@@ -4,7 +4,7 @@
 ///|
 /// REVPERM
 fn step_1() -> Unit raise {
-  revperm_c.set(@define.define(@parser.parse_term("REVPERM 0 = [] /\\\n   REVPERM (SUC n) = n :: REVPERM n")))
+  revperm_c.set(@define.define_(@parser.parse_term("REVPERM 0 = [] /\\\n   REVPERM (SUC n) = n :: REVPERM n")))
 }
 
 ///|

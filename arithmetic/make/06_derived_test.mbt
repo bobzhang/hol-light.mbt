@@ -41,7 +41,7 @@ test "Arithmetic/derived matches Arithmetic/derived.ml" {
   log.attempt("axiom_and", () => sthm(@derived.axiom_and()))
   log.attempt("axiom_or", () => sthm(@derived.axiom_or()))
   log.attempt("axiom_exists", () => sthm(@derived.axiom_exists()))
-  log.attempt("assume", () => sthm(@derived.assume()))
+  log.attempt("assume", () => sthm(@derived.assume_()))
   log.attempt("modusponens", () => sthm(@derived.modusponens()))
   log.attempt("gen", () => sthm(@derived.gen()))
   log.attempt("iff_imp1", () => sthm(@derived.iff_imp1()))

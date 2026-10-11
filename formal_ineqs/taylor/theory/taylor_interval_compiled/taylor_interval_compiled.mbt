@@ -40,7 +40,7 @@ pub fn nth_derivative() -> @kernel.Thm {
 ///|
 /// nth_differentiable
 fn step_4() -> Unit raise {
-  nth_differentiable_c.set(@define.define(@parser.parse_term("(nth_differentiable 0 f x <=> f real_continuous atreal x) /\\\n\t(nth_differentiable (SUC n) f x <=> nth_differentiable n f x /\\ \n\t\t\tnth_derivative n f real_differentiable atreal x)")))
+  nth_differentiable_c.set(@define.define_(@parser.parse_term("(nth_differentiable 0 f x <=> f real_continuous atreal x) /\\\n\t(nth_differentiable (SUC n) f x <=> nth_differentiable n f x /\\ \n\t\t\tnth_derivative n f real_differentiable atreal x)")))
 }
 
 ///|

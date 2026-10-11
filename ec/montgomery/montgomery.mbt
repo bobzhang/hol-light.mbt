@@ -4,7 +4,7 @@
 ///|
 /// montgomery_point
 fn step_1() -> Unit raise {
-  montgomery_point_c.set(@define.define(@parser.parse_term("(montgomery_point f NONE <=> T) /\\\n  (montgomery_point f (SOME(x:A,y)) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f)")))
+  montgomery_point_c.set(@define.define_(@parser.parse_term("(montgomery_point f NONE <=> T) /\\\n  (montgomery_point f (SOME(x:A,y)) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f)")))
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn montgomery_point() -> @kernel.Thm {
 ///|
 /// montgomery_curve
 fn step_2() -> Unit raise {
-  montgomery_curve_c.set(@define.define(@parser.parse_term("(montgomery_curve(f:A ring,a:A,b:A) NONE <=> T) /\\\n  (montgomery_curve(f:A ring,a:A,b:A) (SOME(x,y)) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        ring_mul f b (ring_pow f y 2) =\n        ring_add f (ring_pow f x 3)\n                   (ring_add f (ring_mul f a (ring_pow f x 2)) x))")))
+  montgomery_curve_c.set(@define.define_(@parser.parse_term("(montgomery_curve(f:A ring,a:A,b:A) NONE <=> T) /\\\n  (montgomery_curve(f:A ring,a:A,b:A) (SOME(x,y)) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        ring_mul f b (ring_pow f y 2) =\n        ring_add f (ring_pow f x 3)\n                   (ring_add f (ring_mul f a (ring_pow f x 2)) x))")))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn montgomery_curve() -> @kernel.Thm {
 ///|
 /// montgomery_nonsingular
 fn step_3() -> Unit raise {
-  montgomery_nonsingular_c.set(@define.define(@parser.parse_term("montgomery_nonsingular (f:A ring,a:A,b:A) <=>\n        ~(b = ring_0 f) /\\ ~(ring_pow f a 2 = ring_of_num f 4)")))
+  montgomery_nonsingular_c.set(@define.define_(@parser.parse_term("montgomery_nonsingular (f:A ring,a:A,b:A) <=>\n        ~(b = ring_0 f) /\\ ~(ring_pow f a 2 = ring_of_num f 4)")))
 }
 
 ///|
@@ -49,7 +49,7 @@ pub fn montgomery_nonsingular() -> @kernel.Thm {
 ///|
 /// montgomery_neg
 fn step_4() -> Unit raise {
-  montgomery_neg_c.set(@define.define(@parser.parse_term("(montgomery_neg (f:A ring,a:A,b:A) NONE = NONE) /\\\n  (montgomery_neg (f:A ring,a:A,b:A) (SOME(x:A,y)) = SOME(x,ring_neg f y))")))
+  montgomery_neg_c.set(@define.define_(@parser.parse_term("(montgomery_neg (f:A ring,a:A,b:A) NONE = NONE) /\\\n  (montgomery_neg (f:A ring,a:A,b:A) (SOME(x:A,y)) = SOME(x,ring_neg f y))")))
 }
 
 ///|
@@ -64,7 +64,7 @@ pub fn montgomery_neg() -> @kernel.Thm {
 ///|
 /// montgomery_add
 fn step_5() -> Unit raise {
-  montgomery_add_c.set(@define.define(@parser.parse_term("(!y. montgomery_add (f:A ring,a:A,b:A) NONE y = y) /\\\n  (!x. montgomery_add (f:A ring,a:A,b:A) x NONE = x) /\\\n  (!x1 y1 x2 y2.\n        montgomery_add (f:A ring,a:A,b:A) (SOME(x1,y1)) (SOME(x2,y2)) =\n        if x1 = x2 then\n          if y1 = y2 /\\ ~(y1 = ring_0 f) then\n            let l = ring_div f\n                (ring_add f (ring_mul f (ring_of_num f 3) (ring_pow f x1 2))\n                            (ring_add f (ring_mul f (ring_of_num f 2)\n                                                    (ring_mul f a x1))\n                                        (ring_of_num f 1)))\n                (ring_mul f (ring_of_num f 2) (ring_mul f b y1)) in\n            let x3 = ring_sub f (ring_sub f (ring_mul f b (ring_pow f l 2)) a)\n                                (ring_mul f (ring_of_num f 2) x1) in\n            let y3 = ring_sub f (ring_mul f l (ring_sub f x1 x3)) y1 in\n            SOME(x3,y3)\n          else NONE\n        else\n          let l = ring_div f (ring_sub f y2 y1) (ring_sub f x2 x1) in\n          let x3 = ring_sub f (ring_sub f (ring_mul f b (ring_pow f l 2)) a)\n                              (ring_add f x1 x2) in\n          let y3 = ring_sub f (ring_mul f l (ring_sub f x1 x3)) y1 in\n          SOME(x3,y3))")))
+  montgomery_add_c.set(@define.define_(@parser.parse_term("(!y. montgomery_add (f:A ring,a:A,b:A) NONE y = y) /\\\n  (!x. montgomery_add (f:A ring,a:A,b:A) x NONE = x) /\\\n  (!x1 y1 x2 y2.\n        montgomery_add (f:A ring,a:A,b:A) (SOME(x1,y1)) (SOME(x2,y2)) =\n        if x1 = x2 then\n          if y1 = y2 /\\ ~(y1 = ring_0 f) then\n            let l = ring_div f\n                (ring_add f (ring_mul f (ring_of_num f 3) (ring_pow f x1 2))\n                            (ring_add f (ring_mul f (ring_of_num f 2)\n                                                    (ring_mul f a x1))\n                                        (ring_of_num f 1)))\n                (ring_mul f (ring_of_num f 2) (ring_mul f b y1)) in\n            let x3 = ring_sub f (ring_sub f (ring_mul f b (ring_pow f l 2)) a)\n                                (ring_mul f (ring_of_num f 2) x1) in\n            let y3 = ring_sub f (ring_mul f l (ring_sub f x1 x3)) y1 in\n            SOME(x3,y3)\n          else NONE\n        else\n          let l = ring_div f (ring_sub f y2 y1) (ring_sub f x2 x1) in\n          let x3 = ring_sub f (ring_sub f (ring_mul f b (ring_pow f l 2)) a)\n                              (ring_add f x1 x2) in\n          let y3 = ring_sub f (ring_mul f l (ring_sub f x1 x3)) y1 in\n          SOME(x3,y3))")))
 }
 
 ///|
@@ -79,7 +79,7 @@ pub fn montgomery_add() -> @kernel.Thm {
 ///|
 /// montgomery_group
 fn step_6() -> Unit raise {
-  montgomery_group_c.set(@define.define(@parser.parse_term("montgomery_group (f:A ring,a:A,b:A) =\n        group(montgomery_curve(f,a,b),\n              NONE,\n              montgomery_neg(f,a,b),\n              montgomery_add(f,a,b))")))
+  montgomery_group_c.set(@define.define_(@parser.parse_term("montgomery_group (f:A ring,a:A,b:A) =\n        group(montgomery_curve(f,a,b),\n              NONE,\n              montgomery_neg(f,a,b),\n              montgomery_add(f,a,b))")))
 }
 
 ///|
@@ -149,7 +149,7 @@ pub fn card_bound_montgomery_curve() -> @kernel.Thm {
 ///|
 /// montgomery_strongly_nonsingular
 fn step_9() -> Unit raise {
-  montgomery_strongly_nonsingular_c.set(@define.define(@parser.parse_term("montgomery_strongly_nonsingular(f,a:A,b:A) <=>\n      ~(b = ring_0 f) /\\\n      ~(?z. z IN ring_carrier f /\\\n            ring_pow f z 2 = ring_sub f (ring_pow f a 2) (ring_of_num f 4))")))
+  montgomery_strongly_nonsingular_c.set(@define.define_(@parser.parse_term("montgomery_strongly_nonsingular(f,a:A,b:A) <=>\n      ~(b = ring_0 f) /\\\n      ~(?z. z IN ring_carrier f /\\\n            ring_pow f z 2 = ring_sub f (ring_pow f a 2) (ring_of_num f 4))")))
 }
 
 ///|

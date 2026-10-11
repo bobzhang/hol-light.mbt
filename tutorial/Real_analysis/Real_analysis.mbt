@@ -4,7 +4,7 @@
 ///|
 /// cheb
 fn step_1() -> Unit raise {
-  cheb_c.set(@define.define(@parser.parse_term("(!x. cheb 0 x = &1) /\\\n  (!x. cheb 1 x = x) /\\\n  (!n x. cheb (n + 2) x = &2 * x * cheb (n + 1) x - cheb n x)")))
+  cheb_c.set(@define.define_(@parser.parse_term("(!x. cheb 0 x = &1) /\\\n  (!x. cheb 1 x = x) /\\\n  (!n x. cheb (n + 2) x = &2 * x * cheb (n + 1) x - cheb n x)")))
 }
 
 ///|

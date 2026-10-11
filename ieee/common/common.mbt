@@ -28,7 +28,7 @@ fn step_1() -> Unit raise {
 ///|
 /// ipow
 fn step_2() -> Unit raise {
-  ipow_c.set(@define.define(@parser.parse_term("ipow (x:real) (e:int) =\n  (if (&0 <= e)\n   then (x pow (num_of_int e))\n   else (inv (x pow (num_of_int (--e)))))")))
+  ipow_c.set(@define.define_(@parser.parse_term("ipow (x:real) (e:int) =\n  (if (&0 <= e)\n   then (x pow (num_of_int e))\n   else (inv (x pow (num_of_int (--e)))))")))
 }
 
 ///|
@@ -1122,7 +1122,7 @@ pub fn ipow_mul_inv_eq_1() -> @kernel.Thm {
 ///|
 /// rerror
 fn step_20() -> Unit raise {
-  rerror_c.set(@define.define(@parser.parse_term("rerror (a:real) (b:real) = abs((b - a) / a)")))
+  rerror_c.set(@define.define_(@parser.parse_term("rerror (a:real) (b:real) = abs((b - a) / a)")))
 }
 
 ///|
@@ -1137,7 +1137,7 @@ pub fn rerror() -> @kernel.Thm {
 ///|
 /// closer
 fn step_21() -> Unit raise {
-  closer_c.set(@define.define(@parser.parse_term("closer (x:real) (y:real) (z:real) = (abs(x - z) < abs(y - z))")))
+  closer_c.set(@define.define_(@parser.parse_term("closer (x:real) (y:real) (z:real) = (abs(x - z) < abs(y - z))")))
 }
 
 ///|
@@ -1259,7 +1259,7 @@ pub fn num_le_mul_1() -> @kernel.Thm {
 ///|
 /// is_sup_num
 fn step_27() -> Unit raise {
-  is_sup_num_c.set(@define.define(@parser.parse_term("is_sup_num (s:num->bool) (n:num) = (n IN s /\\ !n'. n' IN s ==> n' <= n)")))
+  is_sup_num_c.set(@define.define_(@parser.parse_term("is_sup_num (s:num->bool) (n:num) = (n IN s /\\ !n'. n' IN s ==> n' <= n)")))
 }
 
 ///|
@@ -1274,7 +1274,7 @@ pub fn is_sup_num() -> @kernel.Thm {
 ///|
 /// is_sup_int
 fn step_28() -> Unit raise {
-  is_sup_int_c.set(@define.define(@parser.parse_term("is_sup_int (s:int->bool) (e:int) = (e IN s /\\ !e'. e' IN s ==> e' <= e)")))
+  is_sup_int_c.set(@define.define_(@parser.parse_term("is_sup_int (s:int->bool) (e:int) = (e IN s /\\ !e'. e' IN s ==> e' <= e)")))
 }
 
 ///|
@@ -1289,7 +1289,7 @@ pub fn is_sup_int() -> @kernel.Thm {
 ///|
 /// sup_num
 fn step_29() -> Unit raise {
-  sup_num_c.set(@define.define(@parser.parse_term("sup_num (s:num->bool) = (@(n:num). is_sup_num s n)")))
+  sup_num_c.set(@define.define_(@parser.parse_term("sup_num (s:num->bool) = (@(n:num). is_sup_num s n)")))
 }
 
 ///|
@@ -1304,7 +1304,7 @@ pub fn sup_num() -> @kernel.Thm {
 ///|
 /// sup_int
 fn step_30() -> Unit raise {
-  sup_int_c.set(@define.define(@parser.parse_term("sup_int (s:int->bool) = (@(e:int). is_sup_int s e)")))
+  sup_int_c.set(@define.define_(@parser.parse_term("sup_int (s:int->bool) = (@(e:int). is_sup_int s e)")))
 }
 
 ///|

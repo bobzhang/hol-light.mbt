@@ -35,7 +35,7 @@ test "Model/syntax matches Model/syntax.ml" {
   log.attempt("has_type_INDUCT", () => sthm(@syntax.has_type_induct()))
   log.attempt("has_type_CASES", () => sthm(@syntax.has_type_cases()))
   log.attempt("welltyped", () => sthm(@syntax.welltyped()))
-  log.attempt("typeof", () => sthm(@syntax.typeof()))
+  log.attempt("typeof", () => sthm(@syntax.typeof_()))
   log.attempt("WELLTYPED_LEMMA", () => sthm(@syntax.welltyped_lemma()))
   log.attempt("WELLTYPED", () => sthm(@syntax.welltyped_v1()))
   log.attempt("WELLTYPED_CLAUSES", () => sthm(@syntax.welltyped_clauses()))

@@ -60,7 +60,7 @@ pub fn type_inj() -> @kernel.Thm {
 ///|
 /// domain
 fn step_4() -> Unit raise {
-  domain_c.set(@define.define(@parser.parse_term("domain (Fun s t) = s")))
+  domain_c.set(@define.define_(@parser.parse_term("domain (Fun s t) = s")))
 }
 
 ///|
@@ -75,7 +75,7 @@ pub fn domain() -> @kernel.Thm {
 ///|
 /// codomain
 fn step_5() -> Unit raise {
-  codomain_c.set(@define.define(@parser.parse_term("codomain (Fun s t) = t")))
+  codomain_c.set(@define.define_(@parser.parse_term("codomain (Fun s t) = t")))
 }
 
 ///|
@@ -203,7 +203,7 @@ pub fn welltyped() -> @kernel.Thm {
 ///|
 /// typeof
 fn step_12() -> Unit raise {
-  typeof_c.set(@define.define(@parser.parse_term("(typeof (Var n ty) = ty) /\\\n  (typeof (Equal ty) = Fun ty (Fun ty Bool)) /\\\n  (typeof (Select ty) = Fun (Fun ty Bool) ty) /\\\n  (typeof (Comb s t) = codomain (typeof s)) /\\\n  (typeof (Abs n ty t) = Fun ty (typeof t))")))
+  typeof_c.set(@define.define_(@parser.parse_term("(typeof (Var n ty) = ty) /\\\n  (typeof (Equal ty) = Fun ty (Fun ty Bool)) /\\\n  (typeof (Select ty) = Fun (Fun ty Bool) ty) /\\\n  (typeof (Comb s t) = codomain (typeof s)) /\\\n  (typeof (Abs n ty t) = Fun ty (typeof t))")))
 }
 
 ///|
@@ -211,14 +211,14 @@ let typeof_c : @lib.Cell[@kernel.Thm] = @lib.Cell::new("typeof")
 
 ///|
 /// `typeof`
-pub fn typeof() -> @kernel.Thm {
+pub fn typeof_() -> @kernel.Thm {
   typeof_c.get()
 }
 
 ///|
 /// WELLTYPED_LEMMA
 fn step_13() -> Unit raise {
-  let t1 = @simp.simp_tac(@list.List([typeof(), has_type_rules(), codomain()]))
+  let t1 = @simp.simp_tac(@list.List([typeof_(), has_type_rules(), codomain()]))
   let t2 = @tactics.then_tac(@tactics.match_mp_tac(has_type_induct()), t1)
   welltyped_lemma_c.set(@tactics.prove(@parser.parse_term("!tm ty. tm has_type ty ==> (typeof tm = ty)"), t2))
 }
@@ -377,7 +377,7 @@ pub fn equation_has_type_bool() -> @kernel.Thm {
 ///|
 /// ALPHAVARS
 fn step_19() -> Unit raise {
-  alphavars_c.set(@define.define(@parser.parse_term("(ALPHAVARS [] tmp <=> (FST tmp = SND tmp)) /\\\n   (ALPHAVARS (CONS tp oenv) tmp <=>\n        (tmp = tp) \\/\n        ~(FST tp = FST tmp) /\\ ~(SND tp = SND tmp) /\\ ALPHAVARS oenv tmp)")))
+  alphavars_c.set(@define.define_(@parser.parse_term("(ALPHAVARS [] tmp <=> (FST tmp = SND tmp)) /\\\n   (ALPHAVARS (CONS tp oenv) tmp <=>\n        (tmp = tp) \\/\n        ~(FST tp = FST tmp) /\\ ~(SND tp = SND tmp) /\\ ALPHAVARS oenv tmp)")))
 }
 
 ///|
@@ -551,7 +551,7 @@ pub fn alphavars_type() -> @kernel.Thm {
 /// RACONV_TYPE
 fn step_27() -> Unit raise {
   let t95 = @meson.asm_meson_tac(@list.List([welltyped_clauses()]))
-  let t94 = @simp.rewrite_tac(@list.List([typeof()]))
+  let t94 = @simp.rewrite_tac(@list.List([typeof_()]))
   let t93 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
   let t92 = @simp.asm_rewrite_tac(@list.List([@lists.all()]))
   let t91 = @tactics.first_x_assum(@tactics.match_mp_tac)
@@ -559,9 +559,9 @@ fn step_27() -> Unit raise {
   let t90 = @meson.asm_meson_tac(@list.List([welltyped_clauses()]))
   let t89 = @simp.asm_rewrite_tac(@list.List([]))
   let t97 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.ap_term_tac, @tactics.first_x_assum(@tactics.match_mp_tac)), t89), t90)
-  let t98 = @list.List([@meson.asm_meson_tac(@list.List([typeof(), alphavars_type()])), t97, t96])
+  let t98 = @list.List([@meson.asm_meson_tac(@list.List([typeof_(), alphavars_type()])), t97, t96])
   let t88 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t87 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), typeof()]))
+  let t87 = @simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), typeof_()]))
   let t99 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(raconv_induct()), t87), t88), t98)
   raconv_type_c.set(@tactics.prove(@parser.parse_term("!env p. RACONV env p\n           ==> ALL (\\(x,y). welltyped x /\\ welltyped y /\\\n                        (typeof x = typeof y)) env /\\\n               welltyped (FST p) /\\ welltyped (SND p)\n               ==> (typeof (FST p) = typeof (SND p))"), t99))
 }
@@ -598,7 +598,7 @@ pub fn aconv_type() -> @kernel.Thm {
 ///|
 /// TERM_UNION
 fn step_29() -> Unit raise {
-  term_union_c.set(@define.define(@parser.parse_term("(TERM_UNION [] l2 = l2) /\\\n  (TERM_UNION (CONS h t) l2 =\n        let subun = TERM_UNION t l2 in\n        if EX (ACONV h) subun then subun else CONS h subun)")))
+  term_union_c.set(@define.define_(@parser.parse_term("(TERM_UNION [] l2 = l2) /\\\n  (TERM_UNION (CONS h t) l2 =\n        let subun = TERM_UNION t l2 in\n        if EX (ACONV h) subun then subun else CONS h subun)")))
 }
 
 ///|
@@ -669,7 +669,7 @@ pub fn all_bool_term_union() -> @kernel.Thm {
 ///|
 /// VFREE_IN
 fn step_33() -> Unit raise {
-  vfree_in_c.set(@define.define(@parser.parse_term("(VFREE_IN v (Var x ty) <=> (Var x ty = v)) /\\\n   (VFREE_IN v (Equal ty) <=> (Equal ty = v)) /\\\n   (VFREE_IN v (Select ty) <=> (Select ty = v)) /\\\n   (VFREE_IN v (Comb s t) <=> VFREE_IN v s \\/ VFREE_IN v t) /\\\n   (VFREE_IN v (Abs x ty t) <=> ~(Var x ty = v) /\\ VFREE_IN v t)")))
+  vfree_in_c.set(@define.define_(@parser.parse_term("(VFREE_IN v (Var x ty) <=> (Var x ty = v)) /\\\n   (VFREE_IN v (Equal ty) <=> (Equal ty = v)) /\\\n   (VFREE_IN v (Select ty) <=> (Select ty = v)) /\\\n   (VFREE_IN v (Comb s t) <=> VFREE_IN v s \\/ VFREE_IN v t) /\\\n   (VFREE_IN v (Abs x ty t) <=> ~(Var x ty = v) /\\ VFREE_IN v t)")))
 }
 
 ///|
@@ -737,7 +737,7 @@ pub fn vfree_in_aconv() -> @kernel.Thm {
 ///|
 /// REV_ASSOCD
 fn step_36() -> Unit raise {
-  rev_assocd_c.set(@define.define(@parser.parse_term("(REV_ASSOCD a [] d = d) /\\\n   (REV_ASSOCD a (CONS (x,y) t) d =\n        if y = a then x else REV_ASSOCD a t d)")))
+  rev_assocd_c.set(@define.define_(@parser.parse_term("(REV_ASSOCD a [] d = d) /\\\n   (REV_ASSOCD a (CONS (x,y) t) d =\n        if y = a then x else REV_ASSOCD a t d)")))
 }
 
 ///|
@@ -752,7 +752,7 @@ pub fn rev_assocd() -> @kernel.Thm {
 ///|
 /// TYPE_SUBST
 fn step_37() -> Unit raise {
-  type_subst_c.set(@define.define(@parser.parse_term("(TYPE_SUBST i (Tyvar v) = REV_ASSOCD (Tyvar v) i (Tyvar v)) /\\\n  (TYPE_SUBST i Bool = Bool) /\\\n  (TYPE_SUBST i Ind = Ind) /\\\n  (TYPE_SUBST i (Fun ty1 ty2) = Fun (TYPE_SUBST i ty1) (TYPE_SUBST i ty2))")))
+  type_subst_c.set(@define.define_(@parser.parse_term("(TYPE_SUBST i (Tyvar v) = REV_ASSOCD (Tyvar v) i (Tyvar v)) /\\\n  (TYPE_SUBST i Bool = Bool) /\\\n  (TYPE_SUBST i Ind = Ind) /\\\n  (TYPE_SUBST i (Fun ty1 ty2) = Fun (TYPE_SUBST i ty1) (TYPE_SUBST i ty2))")))
 }
 
 ///|
@@ -873,7 +873,7 @@ pub fn variant() -> @kernel.Thm {
 ///|
 /// VSUBST
 fn step_42() -> Unit raise {
-  vsubst_c.set(@define.define(@parser.parse_term("(VSUBST ilist (Var x ty) = REV_ASSOCD (Var x ty) ilist (Var x ty)) /\\\n   (VSUBST ilist (Equal ty) = Equal ty) /\\\n   (VSUBST ilist (Select ty) = Select ty) /\\\n   (VSUBST ilist (Comb s t) = Comb (VSUBST ilist s) (VSUBST ilist t)) /\\\n   (VSUBST ilist (Abs x ty t) =\n        let ilist' = FILTER (\\(s',s). ~(s = Var x ty)) ilist in\n        let t' = VSUBST ilist' t in\n        if EX (\\(s',s). VFREE_IN (Var x ty) s' /\\ VFREE_IN s t) ilist'\n        then let z = VARIANT t' x ty in\n             let ilist'' = CONS (Var z ty,Var x ty) ilist' in\n             Abs z ty (VSUBST ilist'' t)\n        else Abs x ty t')")))
+  vsubst_c.set(@define.define_(@parser.parse_term("(VSUBST ilist (Var x ty) = REV_ASSOCD (Var x ty) ilist (Var x ty)) /\\\n   (VSUBST ilist (Equal ty) = Equal ty) /\\\n   (VSUBST ilist (Select ty) = Select ty) /\\\n   (VSUBST ilist (Comb s t) = Comb (VSUBST ilist s) (VSUBST ilist t)) /\\\n   (VSUBST ilist (Abs x ty t) =\n        let ilist' = FILTER (\\(s',s). ~(s = Var x ty)) ilist in\n        let t' = VSUBST ilist' t in\n        if EX (\\(s',s). VFREE_IN (Var x ty) s' /\\ VFREE_IN s t) ilist'\n        then let z = VARIANT t' x ty in\n             let ilist'' = CONS (Var z ty,Var x ty) ilist' in\n             Abs z ty (VSUBST ilist'' t)\n        else Abs x ty t')")))
 }
 
 ///|
@@ -1231,7 +1231,7 @@ pub fn result_distinct() -> @kernel.Thm {
 ///|
 /// IS_RESULT
 fn step_50() -> Unit raise {
-  is_result_c.set(@define.define(@parser.parse_term("(IS_RESULT(Clash t) = F) /\\\n  (IS_RESULT(Result t) = T)")))
+  is_result_c.set(@define.define_(@parser.parse_term("(IS_RESULT(Clash t) = F) /\\\n  (IS_RESULT(Result t) = T)")))
 }
 
 ///|
@@ -1246,7 +1246,7 @@ pub fn is_result() -> @kernel.Thm {
 ///|
 /// IS_CLASH
 fn step_51() -> Unit raise {
-  is_clash_c.set(@define.define(@parser.parse_term("(IS_CLASH(Clash t) = T) /\\\n  (IS_CLASH(Result t) = F)")))
+  is_clash_c.set(@define.define_(@parser.parse_term("(IS_CLASH(Clash t) = T) /\\\n  (IS_CLASH(Result t) = F)")))
 }
 
 ///|
@@ -1261,7 +1261,7 @@ pub fn is_clash() -> @kernel.Thm {
 ///|
 /// RESULT
 fn step_52() -> Unit raise {
-  result_c.set(@define.define(@parser.parse_term("RESULT(Result t) = t")))
+  result_c.set(@define.define_(@parser.parse_term("RESULT(Result t) = t")))
 }
 
 ///|
@@ -1276,7 +1276,7 @@ pub fn result() -> @kernel.Thm {
 ///|
 /// CLASH
 fn step_53() -> Unit raise {
-  clash_c.set(@define.define(@parser.parse_term("CLASH(Clash t) = t")))
+  clash_c.set(@define.define_(@parser.parse_term("CLASH(Clash t) = t")))
 }
 
 ///|
@@ -1300,7 +1300,7 @@ pub fn sizeof_() -> @kernel.Thm {
 ///|
 /// sizeof
 fn step_54() -> Unit raise {
-  let sizeof_ = @define.define(@parser.parse_term("(sizeof (Var x ty) = 1) /\\\n  (sizeof (Equal ty) = 1) /\\\n  (sizeof (Select ty) = 1) /\\\n  (sizeof (Comb s t) = 1 + sizeof s + sizeof t) /\\\n  (sizeof (Abs x ty t) = 2 + sizeof t)"))
+  let sizeof_ = @define.define_(@parser.parse_term("(sizeof (Var x ty) = 1) /\\\n  (sizeof (Equal ty) = 1) /\\\n  (sizeof (Select ty) = 1) /\\\n  (sizeof (Comb s t) = 1 + sizeof s + sizeof t) /\\\n  (sizeof (Abs x ty t) = 2 + sizeof t)"))
   sizeof__c.set(sizeof_)
 }
 

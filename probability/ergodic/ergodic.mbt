@@ -1544,7 +1544,7 @@ pub fn invariant_events_sub_sigma_algebra() -> @kernel.Thm {
 ///|
 /// ergodic_maxsum
 fn step_27() -> Unit raise {
-  ergodic_maxsum_c.set(@define.define(@parser.parse_term("(ergodic_maxsum (f:A->real) (tt:A->A) 0 x = max (f x) (&0)) /\\\n   (ergodic_maxsum f tt (SUC n) x =\n      max (ergodic_maxsum f tt n x)\n          (sum(0..SUC n) (\\k. f(ITER k tt x))))")))
+  ergodic_maxsum_c.set(@define.define_(@parser.parse_term("(ergodic_maxsum (f:A->real) (tt:A->A) 0 x = max (f x) (&0)) /\\\n   (ergodic_maxsum f tt (SUC n) x =\n      max (ergodic_maxsum f tt n x)\n          (sum(0..SUC n) (\\k. f(ITER k tt x))))")))
 }
 
 ///|

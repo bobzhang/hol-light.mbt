@@ -788,7 +788,7 @@ fn step_33() -> Unit raise {
 ///|
 /// has_path_integral
 fn step_34() -> Unit raise {
-  has_path_integral_c.set(@define.define(@parser.parse_term("(f has_path_integral i) (g) <=>\n       ((\\x. f(g(x)) * vector_derivative g (at x within interval[vec 0,vec 1]))\n        has_integral i)\n       (interval[vec 0,vec 1])")))
+  has_path_integral_c.set(@define.define_(@parser.parse_term("(f has_path_integral i) (g) <=>\n       ((\\x. f(g(x)) * vector_derivative g (at x within interval[vec 0,vec 1]))\n        has_integral i)\n       (interval[vec 0,vec 1])")))
 }
 
 ///|

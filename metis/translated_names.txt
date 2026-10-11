@@ -1518,7 +1518,7 @@ Metis_prover.Pset.intersect intersect_v1
 Metis_prover.Pset.intersectList intersectlist
 Metis_prover.Pset.map map_v1
 Metis_prover.Pset.mapPartial mappartial_v1
-Metis_prover.Pset.member member
+Metis_prover.Pset.member member_
 Metis_prover.Pset.mkIterator mkiterator_v1
 Metis_prover.Pset.mkRevIterator mkreviterator_v1
 Metis_prover.Pset.nth nth_v1
@@ -1935,7 +1935,7 @@ Metis_prover.Term_net.equalFnQterm equalfnqterm
 Metis_prover.Term_net.equalQterm equalqterm
 Metis_prover.Term_net.fifoize fifoize
 Metis_prover.Term_net.filter filter_v27
-Metis_prover.Term_net.finally finally
+Metis_prover.Term_net.finally finally_
 Metis_prover.Term_net.fnCmp fncmp
 Metis_prover.Term_net.fold fold_v18
 Metis_prover.Term_net.foldEqualTerms foldequalterms
@@ -1976,7 +1976,7 @@ Metis_prover.Term_net.unify unify_v3
 Metis_prover.Term_net.unifyQtermQterm unifyqtermqterm
 Metis_prover.Term_net.unifyQtermTerm unifyqtermterm
 Metis_prover.Term_net.unseenInc unseeninc
-Metis_prover.Thm.assume assume
+Metis_prover.Thm.assume assume_
 Metis_prover.Thm.axiom axiom
 Metis_prover.Thm.clause clause
 Metis_prover.Thm.compare compare_v43

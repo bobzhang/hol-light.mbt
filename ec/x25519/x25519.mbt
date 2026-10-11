@@ -4,7 +4,7 @@
 ///|
 /// curve25519x
 fn step_1() -> Unit raise {
-  curve25519x_c.set(@define.define(@parser.parse_term("curve25519x (f:A ring) = (f,ring_of_num f A_25519,ring_of_num f 1)")))
+  curve25519x_c.set(@define.define_(@parser.parse_term("curve25519x (f:A ring) = (f,ring_of_num f A_25519,ring_of_num f 1)")))
 }
 
 ///|
@@ -161,7 +161,7 @@ pub fn specially_nonsingular_curve25519x() -> @kernel.Thm {
 ///|
 /// curve25519x_group
 fn step_6() -> Unit raise {
-  curve25519x_group_c.set(@define.define(@parser.parse_term("curve25519x_group (f:A ring) = montgomery_group(curve25519x f)")))
+  curve25519x_group_c.set(@define.define_(@parser.parse_term("curve25519x_group (f:A ring) = montgomery_group(curve25519x f)")))
 }
 
 ///|
@@ -618,7 +618,7 @@ pub fn square_roots_sqintmod_field() -> @kernel.Thm {
 ///|
 /// x25519_ladderstep
 fn step_23() -> Unit raise {
-  x25519_ladderstep_c.set(@define.define(@parser.parse_term("x25519_ladderstep b P (P0,P1) =\n        if b then (montgomery_xzdiffadd curve25519 P P1 P0,\n                   montgomery_xzdouble curve25519 P1)\n        else (montgomery_xzdouble curve25519 P0,\n              montgomery_xzdiffadd curve25519 P P1 P0)")))
+  x25519_ladderstep_c.set(@define.define_(@parser.parse_term("x25519_ladderstep b P (P0,P1) =\n        if b then (montgomery_xzdiffadd curve25519 P P1 P0,\n                   montgomery_xzdouble curve25519 P1)\n        else (montgomery_xzdouble curve25519 P0,\n              montgomery_xzdiffadd curve25519 P P1 P0)")))
 }
 
 ///|
@@ -633,7 +633,7 @@ pub fn x25519_ladderstep() -> @kernel.Thm {
 ///|
 /// x25519_ladder
 fn step_24() -> Unit raise {
-  x25519_ladder_c.set(@define.define(@parser.parse_term("x25519_ladder n P =\n    if n = 0 then ((&1,&0),P)\n    else x25519_ladderstep (n MOD 2 = 1) P (x25519_ladder (n DIV 2) P)")))
+  x25519_ladder_c.set(@define.define_(@parser.parse_term("x25519_ladder n P =\n    if n = 0 then ((&1,&0),P)\n    else x25519_ladderstep (n MOD 2 = 1) P (x25519_ladder (n DIV 2) P)")))
 }
 
 ///|
@@ -648,7 +648,7 @@ pub fn x25519_ladder() -> @kernel.Thm {
 ///|
 /// purex25519_def
 fn step_25() -> Unit raise {
-  purex25519_def_c.set(@define.define(@parser.parse_term("purex25519(n,q) =\n        if q MOD p_25519 = 0 then 0 else\n        let (X,Z) = FST(x25519_ladder n (&q,&1)) in\n        let x = num_of_int(X rem &p_25519)\n        and z = num_of_int(Z rem &p_25519) in\n        if z = 0 then 0 else\n        (x * inverse_mod p_25519 z) MOD p_25519")))
+  purex25519_def_c.set(@define.define_(@parser.parse_term("purex25519(n,q) =\n        if q MOD p_25519 = 0 then 0 else\n        let (X,Z) = FST(x25519_ladder n (&q,&1)) in\n        let x = num_of_int(X rem &p_25519)\n        and z = num_of_int(Z rem &p_25519) in\n        if z = 0 then 0 else\n        (x * inverse_mod p_25519 z) MOD p_25519")))
 }
 
 ///|
@@ -1143,7 +1143,7 @@ pub fn purex25519_unique_imp() -> @kernel.Thm {
 ///|
 /// rfcx25519
 fn step_33() -> Unit raise {
-  rfcx25519_c.set(@define.define(@parser.parse_term("rfcx25519(n,q) =\n    purex25519(2 EXP 254 + (n MOD 2 EXP 254 - n MOD 8),\n               q MOD 2 EXP 255)")))
+  rfcx25519_c.set(@define.define_(@parser.parse_term("rfcx25519(n,q) =\n    purex25519(2 EXP 254 + (n MOD 2 EXP 254 - n MOD 8),\n               q MOD 2 EXP 255)")))
 }
 
 ///|

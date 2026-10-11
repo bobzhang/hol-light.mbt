@@ -48,7 +48,7 @@ pub fn casewise_def() -> @kernel.Thm
 
 pub fn casewise_works() -> @kernel.Thm
 
-pub fn define(@kernel.Term) -> @kernel.Thm raise
+pub fn define_(@kernel.Term) -> @kernel.Thm raise
 
 pub fn instantiate_casewise_recursion(@kernel.Term) -> @kernel.Thm raise
 

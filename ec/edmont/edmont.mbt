@@ -4,7 +4,7 @@
 ///|
 /// mcurve_of_ecurve
 fn step_1() -> Unit raise {
-  mcurve_of_ecurve_c.set(@define.define(@parser.parse_term("mcurve_of_ecurve (f,(a:A),d) c =\n        (f,\n         ring_div f (ring_mul f (ring_of_num f 2) (ring_add f a d))\n                    (ring_sub f a d),\n         ring_div f\n          (ring_div f (ring_of_num f 4) (ring_sub f a d))\n          (ring_pow f c 2))")))
+  mcurve_of_ecurve_c.set(@define.define_(@parser.parse_term("mcurve_of_ecurve (f,(a:A),d) c =\n        (f,\n         ring_div f (ring_mul f (ring_of_num f 2) (ring_add f a d))\n                    (ring_sub f a d),\n         ring_div f\n          (ring_div f (ring_of_num f 4) (ring_sub f a d))\n          (ring_pow f c 2))")))
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn mcurve_of_ecurve() -> @kernel.Thm {
 ///|
 /// montgomery_of_edwards
 fn step_2() -> Unit raise {
-  montgomery_of_edwards_c.set(@define.define(@parser.parse_term("montgomery_of_edwards(f:A ring) c (x,y) =\n        if (x,y) = (ring_0 f,ring_1 f) then\n           NONE\n        else if (x,y) = (ring_0 f,ring_neg f (ring_1 f)) then\n           SOME(ring_0 f,ring_0 f)\n        else\n           SOME(ring_div f (ring_add f (ring_1 f) y) (ring_sub f (ring_1 f) y),\n                ring_mul f c\n                 (ring_div f (ring_add f (ring_1 f) y)\n                             (ring_mul f x (ring_sub f (ring_1 f) y))))")))
+  montgomery_of_edwards_c.set(@define.define_(@parser.parse_term("montgomery_of_edwards(f:A ring) c (x,y) =\n        if (x,y) = (ring_0 f,ring_1 f) then\n           NONE\n        else if (x,y) = (ring_0 f,ring_neg f (ring_1 f)) then\n           SOME(ring_0 f,ring_0 f)\n        else\n           SOME(ring_div f (ring_add f (ring_1 f) y) (ring_sub f (ring_1 f) y),\n                ring_mul f c\n                 (ring_div f (ring_add f (ring_1 f) y)\n                             (ring_mul f x (ring_sub f (ring_1 f) y))))")))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn montgomery_of_edwards() -> @kernel.Thm {
 ///|
 /// ecurve_of_mcurve
 fn step_3() -> Unit raise {
-  ecurve_of_mcurve_c.set(@define.define(@parser.parse_term("ecurve_of_mcurve (f,A:A,B) c =\n        (f,\n         ring_div f (ring_div f (ring_add f A (ring_of_num f 2)) B)\n                    (ring_pow f c 2),\n         ring_div f (ring_div f (ring_sub f A (ring_of_num f 2)) B)\n                    (ring_pow f c 2))")))
+  ecurve_of_mcurve_c.set(@define.define_(@parser.parse_term("ecurve_of_mcurve (f,A:A,B) c =\n        (f,\n         ring_div f (ring_div f (ring_add f A (ring_of_num f 2)) B)\n                    (ring_pow f c 2),\n         ring_div f (ring_div f (ring_sub f A (ring_of_num f 2)) B)\n                    (ring_pow f c 2))")))
 }
 
 ///|
@@ -49,7 +49,7 @@ pub fn ecurve_of_mcurve() -> @kernel.Thm {
 ///|
 /// edwards_of_montgomery
 fn step_4() -> Unit raise {
-  edwards_of_montgomery_c.set(@define.define(@parser.parse_term("edwards_of_montgomery(f:A ring) c NONE =\n    (ring_0 f,ring_1 f) /\\\n  edwards_of_montgomery(f:A ring) c (SOME(x,y)) =\n    if (x,y) = (ring_0 f,ring_0 f) then (ring_0 f,ring_neg f (ring_1 f))\n    else ring_mul f c (ring_div f x y),\n         ring_div f (ring_sub f x (ring_of_num f 1))\n                    (ring_add f x (ring_of_num f 1))")))
+  edwards_of_montgomery_c.set(@define.define_(@parser.parse_term("edwards_of_montgomery(f:A ring) c NONE =\n    (ring_0 f,ring_1 f) /\\\n  edwards_of_montgomery(f:A ring) c (SOME(x,y)) =\n    if (x,y) = (ring_0 f,ring_0 f) then (ring_0 f,ring_neg f (ring_1 f))\n    else ring_mul f c (ring_div f x y),\n         ring_div f (ring_sub f x (ring_of_num f 1))\n                    (ring_add f x (ring_of_num f 1))")))
 }
 
 ///|

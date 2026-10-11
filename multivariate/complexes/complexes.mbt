@@ -149,7 +149,7 @@ pub fn complex_div() -> @kernel.Thm {
 ///|
 /// complex_pow
 fn step_11() -> Unit raise {
-  complex_pow_c.set(@define.define(@parser.parse_term("(x pow 0 = Cx(&1)) /\\\n   (!n. x pow (SUC n) = x * x pow n)")))
+  complex_pow_c.set(@define.define_(@parser.parse_term("(x pow 0 = Cx(&1)) /\\\n   (!n. x pow (SUC n) = x * x pow n)")))
 }
 
 ///|

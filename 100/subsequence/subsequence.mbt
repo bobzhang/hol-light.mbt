@@ -124,7 +124,7 @@ pub fn pigeonhole_lemma() -> @kernel.Thm {
 ///|
 /// mono_on
 fn step_3() -> Unit raise {
-  mono_on_c.set(@define.define(@parser.parse_term("mono_on (f:num->real) r s <=>\n    !i j. i IN s /\\ j IN s /\\ i <= j ==> r (f i) (f j)")))
+  mono_on_c.set(@define.define_(@parser.parse_term("mono_on (f:num->real) r s <=>\n    !i j. i IN s /\\ j IN s /\\ i <= j ==> r (f i) (f j)")))
 }
 
 ///|

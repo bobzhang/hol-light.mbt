@@ -4,7 +4,7 @@
 ///|
 /// weierstrass_point
 fn step_1() -> Unit raise {
-  weierstrass_point_c.set(@define.define(@parser.parse_term("(weierstrass_point f NONE <=> T) /\\\n  (weierstrass_point f (SOME(x:A,y)) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f)")))
+  weierstrass_point_c.set(@define.define_(@parser.parse_term("(weierstrass_point f NONE <=> T) /\\\n  (weierstrass_point f (SOME(x:A,y)) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f)")))
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn weierstrass_point() -> @kernel.Thm {
 ///|
 /// weierstrass_curve
 fn step_2() -> Unit raise {
-  weierstrass_curve_c.set(@define.define(@parser.parse_term("(weierstrass_curve(f:A ring,a:A,b:A) NONE <=> T) /\\\n  (weierstrass_curve(f:A ring,a:A,b:A) (SOME(x,y)) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        ring_pow f y 2 =\n        ring_add f (ring_pow f x 3) (ring_add f (ring_mul f a x) b))")))
+  weierstrass_curve_c.set(@define.define_(@parser.parse_term("(weierstrass_curve(f:A ring,a:A,b:A) NONE <=> T) /\\\n  (weierstrass_curve(f:A ring,a:A,b:A) (SOME(x,y)) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        ring_pow f y 2 =\n        ring_add f (ring_pow f x 3) (ring_add f (ring_mul f a x) b))")))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn weierstrass_curve() -> @kernel.Thm {
 ///|
 /// weierstrass_neg
 fn step_3() -> Unit raise {
-  weierstrass_neg_c.set(@define.define(@parser.parse_term("(weierstrass_neg (f:A ring,a:A,b:A) NONE = NONE) /\\\n  (weierstrass_neg (f:A ring,a:A,b:A) (SOME(x:A,y)) = SOME(x,ring_neg f y))")))
+  weierstrass_neg_c.set(@define.define_(@parser.parse_term("(weierstrass_neg (f:A ring,a:A,b:A) NONE = NONE) /\\\n  (weierstrass_neg (f:A ring,a:A,b:A) (SOME(x:A,y)) = SOME(x,ring_neg f y))")))
 }
 
 ///|
@@ -49,7 +49,7 @@ pub fn weierstrass_neg() -> @kernel.Thm {
 ///|
 /// weierstrass_add
 fn step_4() -> Unit raise {
-  weierstrass_add_c.set(@define.define(@parser.parse_term("(!y. weierstrass_add (f:A ring,a:A,b:A) NONE y = y) /\\\n  (!x. weierstrass_add (f:A ring,a:A,b:A) x NONE = x) /\\\n  (!x1 y1 x2 y2.\n        weierstrass_add (f:A ring,a:A,b:A) (SOME(x1,y1)) (SOME(x2,y2)) =\n        if x1 = x2 then\n          if y1 = y2 /\\ ~(y1 = ring_0 f) then\n            let m = ring_div f\n              (ring_add f (ring_mul f (ring_of_num f 3) (ring_pow f x1 2)) a)\n              (ring_mul f (ring_of_num f 2) y1) in\n            let x3 = ring_sub f (ring_pow f m 2)\n                                (ring_mul f (ring_of_num f 2) x1) in\n            let y3 = ring_sub f (ring_mul f m (ring_sub f x1 x3)) y1 in\n            SOME(x3,y3)\n          else NONE\n        else\n          let m = ring_div f (ring_sub f y2 y1) (ring_sub f x2 x1) in\n          let x3 = ring_sub f (ring_pow f m 2)\n                              (ring_add f x1 x2) in\n          let y3 = ring_sub f (ring_mul f m (ring_sub f x1 x3)) y1 in\n          SOME(x3,y3))")))
+  weierstrass_add_c.set(@define.define_(@parser.parse_term("(!y. weierstrass_add (f:A ring,a:A,b:A) NONE y = y) /\\\n  (!x. weierstrass_add (f:A ring,a:A,b:A) x NONE = x) /\\\n  (!x1 y1 x2 y2.\n        weierstrass_add (f:A ring,a:A,b:A) (SOME(x1,y1)) (SOME(x2,y2)) =\n        if x1 = x2 then\n          if y1 = y2 /\\ ~(y1 = ring_0 f) then\n            let m = ring_div f\n              (ring_add f (ring_mul f (ring_of_num f 3) (ring_pow f x1 2)) a)\n              (ring_mul f (ring_of_num f 2) y1) in\n            let x3 = ring_sub f (ring_pow f m 2)\n                                (ring_mul f (ring_of_num f 2) x1) in\n            let y3 = ring_sub f (ring_mul f m (ring_sub f x1 x3)) y1 in\n            SOME(x3,y3)\n          else NONE\n        else\n          let m = ring_div f (ring_sub f y2 y1) (ring_sub f x2 x1) in\n          let x3 = ring_sub f (ring_pow f m 2)\n                              (ring_add f x1 x2) in\n          let y3 = ring_sub f (ring_mul f m (ring_sub f x1 x3)) y1 in\n          SOME(x3,y3))")))
 }
 
 ///|
@@ -64,7 +64,7 @@ pub fn weierstrass_add() -> @kernel.Thm {
 ///|
 /// weierstrass_nonsingular
 fn step_5() -> Unit raise {
-  weierstrass_nonsingular_c.set(@define.define(@parser.parse_term("weierstrass_nonsingular (f:A ring,a:A,b:A) <=>\n        ~(ring_add f (ring_mul f (ring_of_num f 4) (ring_pow f a 3))\n                     (ring_mul f (ring_of_num f 27) (ring_pow f b 2)) =\n          ring_0 f)")))
+  weierstrass_nonsingular_c.set(@define.define_(@parser.parse_term("weierstrass_nonsingular (f:A ring,a:A,b:A) <=>\n        ~(ring_add f (ring_mul f (ring_of_num f 4) (ring_pow f a 3))\n                     (ring_mul f (ring_of_num f 27) (ring_pow f b 2)) =\n          ring_0 f)")))
 }
 
 ///|
@@ -79,7 +79,7 @@ pub fn weierstrass_nonsingular() -> @kernel.Thm {
 ///|
 /// weierstrass_group
 fn step_6() -> Unit raise {
-  weierstrass_group_c.set(@define.define(@parser.parse_term("weierstrass_group (f:A ring,a:A,b:A) =\n        group(weierstrass_curve(f,a,b),\n              NONE,\n              weierstrass_neg(f,a,b),\n              weierstrass_add(f,a,b))")))
+  weierstrass_group_c.set(@define.define_(@parser.parse_term("weierstrass_group (f:A ring,a:A,b:A) =\n        group(weierstrass_curve(f,a,b),\n              NONE,\n              weierstrass_neg(f,a,b),\n              weierstrass_add(f,a,b))")))
 }
 
 ///|
@@ -490,7 +490,7 @@ pub fn weierstrass_group_v1() -> @kernel.Thm {
 ///|
 /// weierstrass_triplex
 fn step_18() -> Unit raise {
-  weierstrass_triplex_c.set(@define.define(@parser.parse_term("weierstrass_triplex f (c:A) NONE = NONE /\\\n  weierstrass_triplex f c (SOME(x:A,y:A)) = SOME(ring_mul f c x,y)")))
+  weierstrass_triplex_c.set(@define.define_(@parser.parse_term("weierstrass_triplex f (c:A) NONE = NONE /\\\n  weierstrass_triplex f c (SOME(x:A,y:A)) = SOME(ring_mul f c x,y)")))
 }
 
 ///|
@@ -537,7 +537,7 @@ pub fn group_endomorphism_triplex() -> @kernel.Thm {
 ///|
 /// weierstrass_quady
 fn step_20() -> Unit raise {
-  weierstrass_quady_c.set(@define.define(@parser.parse_term("weierstrass_quady f (c:A) NONE = NONE /\\\n  weierstrass_quady f c (SOME(x:A,y:A)) = SOME(ring_neg f x,ring_mul f c y)")))
+  weierstrass_quady_c.set(@define.define_(@parser.parse_term("weierstrass_quady f (c:A) NONE = NONE /\\\n  weierstrass_quady f c (SOME(x:A,y:A)) = SOME(ring_neg f x,ring_mul f c y)")))
 }
 
 ///|

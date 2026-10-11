@@ -220,7 +220,7 @@ pub fn arityprojectionfixed(Int64) -> Fixed raise
 
 pub fn asm_metis_tac(@list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise
 
-pub fn assume((Bool, (String, @list.List[Term]))) -> Thm raise
+pub fn assume_((Bool, (String, @list.List[Term]))) -> Thm raise
 
 pub fn atom(Bool, (String, @list.List[Term])) -> (String, @list.List[Term]) raise
 
@@ -1198,7 +1198,7 @@ pub fn[TA, TB] filter_v8(((TA, TB)) -> Bool raise) -> ((@omap.T[TA, TB]) -> @oma
 
 pub fn[TA] filter_v9((TA) -> Bool raise, @oset.T[TA]) -> @oset.T[TA] raise
 
-pub fn[TA] finally(Parameters1, @list.List[(Int64, TA)]) -> @list.List[TA] raise
+pub fn[TA] finally_(Parameters1, @list.List[(Int64, TA)]) -> @list.List[TA] raise
 
 pub fn[TA] find((TA) -> Bool raise, @list.List[TA]) -> TA? raise
 
@@ -2502,7 +2502,7 @@ pub fn mem_v8(Term, @oset.T[Term]) -> Bool raise
 
 pub fn[TA] mem_v9((String, @list.List[Term]), @omap.T[(String, @list.List[Term]), TA]) -> Bool raise
 
-pub fn[TA] member(TA, Set[TA]) -> Bool raise
+pub fn[TA] member_(TA, Set[TA]) -> Bool raise
 
 pub fn[TA : Eq + @lib.OCompare + @lib.OHash] member_v1(TA) -> ((@oset.T[TA]) -> Bool raise) raise
 

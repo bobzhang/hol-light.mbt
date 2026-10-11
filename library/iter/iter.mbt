@@ -5,7 +5,7 @@
 /// ITER
 fn step_1() -> Unit raise {
   iter_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "(!f. ITER 0 f x = x) /\\\n   (!f n. ITER (SUC n) f x = f (ITER n f x))",
       ),

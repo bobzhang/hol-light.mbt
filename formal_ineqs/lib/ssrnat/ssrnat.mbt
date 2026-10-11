@@ -4212,7 +4212,7 @@ fn step_150() -> Unit raise {
 ///|
 /// iter
 fn step_151() -> Unit raise {
-  iter_c.set(@define.define(@parser.parse_term("iter (SUC n) f (x:A) = f (iter n f x) /\\ iter 0 f x = x")))
+  iter_c.set(@define.define_(@parser.parse_term("iter (SUC n) f (x:A) = f (iter n f x) /\\ iter 0 f x = x")))
 }
 
 ///|
@@ -4227,7 +4227,7 @@ pub fn iter() -> @kernel.Thm {
 ///|
 /// iteri
 fn step_152() -> Unit raise {
-  iteri_c.set(@define.define(@parser.parse_term("iteri (SUC n) f (x:A) = f n (iteri n f x) /\\ iteri 0 f x = x")))
+  iteri_c.set(@define.define_(@parser.parse_term("iteri (SUC n) f (x:A) = f n (iteri n f x) /\\ iteri 0 f x = x")))
 }
 
 ///|
@@ -7561,7 +7561,7 @@ pub fn odd_exp() -> @kernel.Thm {
 ///|
 /// double
 fn step_239() -> Unit raise {
-  double_c.set(@define.define(@parser.parse_term("double 0 = 0 /\\ (!n. double (SUC n) = SUC (SUC (double n)))")))
+  double_c.set(@define.define_(@parser.parse_term("double 0 = 0 /\\ (!n. double (SUC n) = SUC (SUC (double n)))")))
 }
 
 ///|
@@ -8093,7 +8093,7 @@ pub fn double_mulr() -> @kernel.Thm {
 ///|
 /// half_def
 fn step_256() -> Unit raise {
-  half_def_c.set(@define.define(@parser.parse_term("HALF 0 = (0, 0) /\\\n        !n. HALF (SUC n) = (SND (HALF n), SUC (FST (HALF n)))")))
+  half_def_c.set(@define.define_(@parser.parse_term("HALF 0 = (0, 0) /\\\n        !n. HALF (SUC n) = (SND (HALF n), SUC (FST (HALF n)))")))
 }
 
 ///|

@@ -56,7 +56,7 @@ pub fn isum_2() -> @kernel.Thm {
 ///|
 /// imat_I
 fn step_4() -> Unit raise {
-  imat_i_c.set(@define.define(@parser.parse_term("imat_I:int^2^2 = lambda i j. if i = j then &1 else &0")))
+  imat_i_c.set(@define.define_(@parser.parse_term("imat_I:int^2^2 = lambda i j. if i = j then &1 else &0")))
 }
 
 ///|
@@ -71,7 +71,7 @@ pub fn imat_i() -> @kernel.Thm {
 ///|
 /// imat_mul
 fn step_5() -> Unit raise {
-  imat_mul_c.set(@define.define(@parser.parse_term("(imat_mul:int^2^2->int^2^2->int^2^2) m n =\n        lambda i j. isum(1..2) (\\k. m$i$k * n$k$j)")))
+  imat_mul_c.set(@define.define_(@parser.parse_term("(imat_mul:int^2^2->int^2^2->int^2^2) m n =\n        lambda i j. isum(1..2) (\\k. m$i$k * n$k$j)")))
 }
 
 ///|
@@ -86,7 +86,7 @@ pub fn imat_mul() -> @kernel.Thm {
 ///|
 /// imat_vmul
 fn step_6() -> Unit raise {
-  imat_vmul_c.set(@define.define(@parser.parse_term("(imat_vmul:int^2^2->int^2->int^2) m v =\n        lambda i. isum(1..2) (\\j. m$i$j * v$j)")))
+  imat_vmul_c.set(@define.define_(@parser.parse_term("(imat_vmul:int^2^2->int^2->int^2) m v =\n        lambda i. isum(1..2) (\\j. m$i$j * v$j)")))
 }
 
 ///|
@@ -249,7 +249,7 @@ pub fn idivstep_stays_zero() -> @kernel.Thm {
 ///|
 /// divstep_d
 fn step_14() -> Unit raise {
-  divstep_d_c.set(@define.define(@parser.parse_term("divstep_d n t = FST(ITER n idivstep t)")))
+  divstep_d_c.set(@define.define_(@parser.parse_term("divstep_d n t = FST(ITER n idivstep t)")))
 }
 
 ///|
@@ -264,7 +264,7 @@ pub fn divstep_d() -> @kernel.Thm {
 ///|
 /// divstep_f
 fn step_15() -> Unit raise {
-  divstep_f_c.set(@define.define(@parser.parse_term("divstep_f n t = FST(SND(ITER n idivstep t))")))
+  divstep_f_c.set(@define.define_(@parser.parse_term("divstep_f n t = FST(SND(ITER n idivstep t))")))
 }
 
 ///|
@@ -279,7 +279,7 @@ pub fn divstep_f() -> @kernel.Thm {
 ///|
 /// divstep_g
 fn step_16() -> Unit raise {
-  divstep_g_c.set(@define.define(@parser.parse_term("divstep_g n t = SND(SND(ITER n idivstep t))")))
+  divstep_g_c.set(@define.define_(@parser.parse_term("divstep_g n t = SND(SND(ITER n idivstep t))")))
 }
 
 ///|
@@ -684,7 +684,7 @@ pub fn iter_divstep_integer() -> @kernel.Thm {
 ///|
 /// divstep_mat
 fn step_30() -> Unit raise {
-  divstep_mat_c.set(@define.define(@parser.parse_term("divstep_mat 0 t = imat_I /\\\n  divstep_mat (SUC n) t =\n    imat_mul\n     (if divstep_d n t >= &0 /\\ divstep_g n t rem &2 = &1\n      then vector[vector[&0; &2]; vector[-- &1; &1]]\n      else vector[vector[&2; &0];vector[divstep_g n t rem &2; &1]])\n     (divstep_mat n t)")))
+  divstep_mat_c.set(@define.define_(@parser.parse_term("divstep_mat 0 t = imat_I /\\\n  divstep_mat (SUC n) t =\n    imat_mul\n     (if divstep_d n t >= &0 /\\ divstep_g n t rem &2 = &1\n      then vector[vector[&0; &2]; vector[-- &1; &1]]\n      else vector[vector[&2; &0];vector[divstep_g n t rem &2; &1]])\n     (divstep_mat n t)")))
 }
 
 ///|

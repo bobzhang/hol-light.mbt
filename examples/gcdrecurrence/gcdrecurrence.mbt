@@ -247,7 +247,7 @@ pub fn divides_mersenne() -> @kernel.Thm {
 ///|
 /// fib
 fn step_9() -> Unit raise {
-  fib_c.set(@define.define(@parser.parse_term("fib 0 = 0 /\\ fib 1 = 1 /\\ !n. fib(n + 2) = fib(n + 1) + fib(n)")))
+  fib_c.set(@define.define_(@parser.parse_term("fib 0 = 0 /\\ fib 1 = 1 /\\ !n. fib(n + 2) = fib(n + 1) + fib(n)")))
 }
 
 ///|
@@ -401,7 +401,7 @@ pub fn divides_fib() -> @kernel.Thm {
 ///|
 /// pellx
 fn step_16() -> Unit raise {
-  pellx_c.set(@define.define(@parser.parse_term("(!a. pellx a 0 = 1) /\\\n   (!a. pellx a 1 = a) /\\\n   (!a n. pellx a (n + 2) = 2 * a * pellx a (n + 1) - pellx a n)")))
+  pellx_c.set(@define.define_(@parser.parse_term("(!a. pellx a 0 = 1) /\\\n   (!a. pellx a 1 = a) /\\\n   (!a n. pellx a (n + 2) = 2 * a * pellx a (n + 1) - pellx a n)")))
 }
 
 ///|
@@ -416,7 +416,7 @@ pub fn pellx() -> @kernel.Thm {
 ///|
 /// pelly
 fn step_17() -> Unit raise {
-  pelly_c.set(@define.define(@parser.parse_term("(!a. pelly a 0 = 0) /\\\n   (!a. pelly a 1 = 1) /\\\n   (!a n. pelly a (n + 2) = 2 * a * pelly a (n + 1) - pelly a (n))")))
+  pelly_c.set(@define.define_(@parser.parse_term("(!a. pelly a 0 = 0) /\\\n   (!a. pelly a 1 = 1) /\\\n   (!a n. pelly a (n + 2) = 2 * a * pelly a (n + 1) - pelly a (n))")))
 }
 
 ///|

@@ -4,7 +4,7 @@
 ///|
 /// exprojective
 fn step_1() -> Unit raise {
-  exprojective_c.set(@define.define(@parser.parse_term("exprojective (f:A ring) (x,y) (X,Y,Z,W) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        X IN ring_carrier f /\\ Y IN ring_carrier f /\\\n        W IN ring_carrier f /\\ Z IN ring_carrier f /\\\n        ~(Z = ring_0 f) /\\\n        ring_div f X Z = x /\\\n        ring_div f Y Z = y /\\\n        ring_div f W Z = ring_mul f x y")))
+  exprojective_c.set(@define.define_(@parser.parse_term("exprojective (f:A ring) (x,y) (X,Y,Z,W) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        X IN ring_carrier f /\\ Y IN ring_carrier f /\\\n        W IN ring_carrier f /\\ Z IN ring_carrier f /\\\n        ~(Z = ring_0 f) /\\\n        ring_div f X Z = x /\\\n        ring_div f Y Z = y /\\\n        ring_div f W Z = ring_mul f x y")))
 }
 
 ///|
@@ -37,7 +37,7 @@ pub fn exprojective_alt() -> @kernel.Thm {
 ///|
 /// projective
 fn step_3() -> Unit raise {
-  projective_c.set(@define.define(@parser.parse_term("projective (f:A ring) (x,y) (X,Y,Z) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        X IN ring_carrier f /\\ Y IN ring_carrier f /\\ Z IN ring_carrier f /\\\n        ~(Z = ring_0 f) /\\\n        ring_div f X Z = x /\\\n        ring_div f Y Z = y")))
+  projective_c.set(@define.define_(@parser.parse_term("projective (f:A ring) (x,y) (X,Y,Z) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        X IN ring_carrier f /\\ Y IN ring_carrier f /\\ Z IN ring_carrier f /\\\n        ~(Z = ring_0 f) /\\\n        ring_div f X Z = x /\\\n        ring_div f Y Z = y")))
 }
 
 ///|
@@ -130,7 +130,7 @@ pub fn exprojective_projective_alt() -> @kernel.Thm {
 ///|
 /// edwards_excurve
 fn step_8() -> Unit raise {
-  edwards_excurve_c.set(@define.define(@parser.parse_term("edwards_excurve (f,a,d) (X,Y,Z,W) <=>\n     X IN ring_carrier f /\\\n     Y IN ring_carrier f /\\\n     Z IN ring_carrier f /\\\n     W IN ring_carrier f /\\\n     ~(Z = ring_0 f) /\\\n     ring_add f (ring_mul f a (ring_pow f X 2)) (ring_pow f Y 2) =\n     ring_add f (ring_pow f Z 2) (ring_mul f d (ring_pow f W 2))")))
+  edwards_excurve_c.set(@define.define_(@parser.parse_term("edwards_excurve (f,a,d) (X,Y,Z,W) <=>\n     X IN ring_carrier f /\\\n     Y IN ring_carrier f /\\\n     Z IN ring_carrier f /\\\n     W IN ring_carrier f /\\\n     ~(Z = ring_0 f) /\\\n     ring_add f (ring_mul f a (ring_pow f X 2)) (ring_pow f Y 2) =\n     ring_add f (ring_pow f Z 2) (ring_mul f d (ring_pow f W 2))")))
 }
 
 ///|
@@ -163,7 +163,7 @@ pub fn edwards_excurve_v1() -> @kernel.Thm {
 ///|
 /// edwards_pcurve
 fn step_10() -> Unit raise {
-  edwards_pcurve_c.set(@define.define(@parser.parse_term("edwards_pcurve (f,a,d) (X,Y,Z) <=>\n     X IN ring_carrier f /\\\n     Y IN ring_carrier f /\\\n     Z IN ring_carrier f /\\\n     ~(Z = ring_0 f) /\\\n     ring_mul f (ring_pow f Z 2)\n                (ring_add f (ring_mul f a (ring_pow f X 2)) (ring_pow f Y 2)) =\n     ring_add f (ring_pow f Z 4)\n     (ring_mul f d (ring_mul f (ring_pow f X 2) (ring_pow f Y 2)))")))
+  edwards_pcurve_c.set(@define.define_(@parser.parse_term("edwards_pcurve (f,a,d) (X,Y,Z) <=>\n     X IN ring_carrier f /\\\n     Y IN ring_carrier f /\\\n     Z IN ring_carrier f /\\\n     ~(Z = ring_0 f) /\\\n     ring_mul f (ring_pow f Z 2)\n                (ring_add f (ring_mul f a (ring_pow f X 2)) (ring_pow f Y 2)) =\n     ring_add f (ring_pow f Z 4)\n     (ring_mul f d (ring_mul f (ring_pow f X 2) (ring_pow f Y 2)))")))
 }
 
 ///|
@@ -196,7 +196,7 @@ pub fn edwards_pcurve_v1() -> @kernel.Thm {
 ///|
 /// edwards_exprojadd
 fn step_12() -> Unit raise {
-  edwards_exprojadd_c.set(@define.define(@parser.parse_term("edwards_exprojadd (f,a,d) (X1:A,Y1,Z1,T1) (X2,Y2,Z2,T2) =\n  ring_mul f (ring_add f (ring_mul f X1 Y2) (ring_mul f Y1 X2))\n   (ring_sub f (ring_mul f Z1 Z2) (ring_mul f d (ring_mul f T1 T2))),\n   ring_mul f\n   (ring_sub f (ring_mul f Y1 Y2) (ring_mul f a (ring_mul f X1 X2)))\n   (ring_add f (ring_mul f Z1 Z2) (ring_mul f d (ring_mul f T1 T2))),\n   ring_mul f\n   (ring_sub f (ring_mul f Z1 Z2) (ring_mul f d (ring_mul f T1 T2)))\n   (ring_add f (ring_mul f Z1 Z2) (ring_mul f d (ring_mul f T1 T2))),\n   ring_mul f\n   (ring_sub f (ring_mul f Y1 Y2) (ring_mul f a (ring_mul f X1 X2)))\n   (ring_add f (ring_mul f X1 Y2) (ring_mul f Y1 X2))")))
+  edwards_exprojadd_c.set(@define.define_(@parser.parse_term("edwards_exprojadd (f,a,d) (X1:A,Y1,Z1,T1) (X2,Y2,Z2,T2) =\n  ring_mul f (ring_add f (ring_mul f X1 Y2) (ring_mul f Y1 X2))\n   (ring_sub f (ring_mul f Z1 Z2) (ring_mul f d (ring_mul f T1 T2))),\n   ring_mul f\n   (ring_sub f (ring_mul f Y1 Y2) (ring_mul f a (ring_mul f X1 X2)))\n   (ring_add f (ring_mul f Z1 Z2) (ring_mul f d (ring_mul f T1 T2))),\n   ring_mul f\n   (ring_sub f (ring_mul f Z1 Z2) (ring_mul f d (ring_mul f T1 T2)))\n   (ring_add f (ring_mul f Z1 Z2) (ring_mul f d (ring_mul f T1 T2))),\n   ring_mul f\n   (ring_sub f (ring_mul f Y1 Y2) (ring_mul f a (ring_mul f X1 X2)))\n   (ring_add f (ring_mul f X1 Y2) (ring_mul f Y1 X2))")))
 }
 
 ///|
@@ -266,7 +266,7 @@ pub fn edwards_exprojadd_v1() -> @kernel.Thm {
 ///|
 /// edwards_exprojadd4
 fn step_14() -> Unit raise {
-  edwards_exprojadd4_c.set(@define.define(@parser.parse_term("edwards_exprojadd4 (f,a,d) (X1:A,Y1,Z1,T1) (X2,Y2,Z2,T2) =\n    let X3,Y3,Z3,T3 = edwards_exprojadd (f,a,d) (X1,Y1,Z1,T1) (X2,Y2,Z2,T2) in\n    (ring_mul f (ring_of_num f 4) X3,\n     ring_mul f (ring_of_num f 4) Y3,\n     ring_mul f (ring_of_num f 4) Z3,\n     ring_mul f (ring_of_num f 4) T3)")))
+  edwards_exprojadd4_c.set(@define.define_(@parser.parse_term("edwards_exprojadd4 (f,a,d) (X1:A,Y1,Z1,T1) (X2,Y2,Z2,T2) =\n    let X3,Y3,Z3,T3 = edwards_exprojadd (f,a,d) (X1,Y1,Z1,T1) (X2,Y2,Z2,T2) in\n    (ring_mul f (ring_of_num f 4) X3,\n     ring_mul f (ring_of_num f 4) Y3,\n     ring_mul f (ring_of_num f 4) Z3,\n     ring_mul f (ring_of_num f 4) T3)")))
 }
 
 ///|
@@ -337,7 +337,7 @@ pub fn edwards_exprojadd4_v1() -> @kernel.Thm {
 ///|
 /// edwards_exprojaddn
 fn step_16() -> Unit raise {
-  edwards_exprojaddn_c.set(@define.define(@parser.parse_term("edwards_exprojaddn (f,a,d) (X1:A,Y1,Z1,T1) (X2,Y2,Z2,T2) =\n    let X3,Y3,Z3,T3 = edwards_exprojadd (f,a,d) (X1,Y1,Z1,T1) (X2,Y2,Z2,T2) in\n    (ring_neg f X3,\n     ring_neg f Y3,\n     ring_neg f Z3,\n     ring_neg f T3)")))
+  edwards_exprojaddn_c.set(@define.define_(@parser.parse_term("edwards_exprojaddn (f,a,d) (X1:A,Y1,Z1,T1) (X2,Y2,Z2,T2) =\n    let X3,Y3,Z3,T3 = edwards_exprojadd (f,a,d) (X1,Y1,Z1,T1) (X2,Y2,Z2,T2) in\n    (ring_neg f X3,\n     ring_neg f Y3,\n     ring_neg f Z3,\n     ring_neg f T3)")))
 }
 
 ///|
@@ -407,7 +407,7 @@ pub fn edwards_exprojaddn_v1() -> @kernel.Thm {
 ///|
 /// edwards_prexprojdouble
 fn step_18() -> Unit raise {
-  edwards_prexprojdouble_c.set(@define.define(@parser.parse_term("edwards_prexprojdouble (f,a:A,d:A) (X1,Y1,Z1) =\n     (ring_mul f (ring_of_num f 2)\n         (ring_mul f X1\n         (ring_mul f Y1\n         (ring_sub f\n          (ring_sub f (ring_mul f (ring_of_num f 2) (ring_pow f Z1 2))\n          (ring_pow f Y1 2))\n         (ring_mul f a (ring_pow f X1 2))))),\n      ring_mul f\n         (ring_add f (ring_pow f Y1 2) (ring_mul f a (ring_pow f X1 2)))\n         (ring_sub f (ring_pow f Y1 2) (ring_mul f a (ring_pow f X1 2))),\n      ring_mul f\n         (ring_add f (ring_pow f Y1 2) (ring_mul f a (ring_pow f X1 2)))\n         (ring_sub f\n          (ring_sub f (ring_mul f (ring_of_num f 2) (ring_pow f Z1 2))\n          (ring_pow f Y1 2))\n         (ring_mul f a (ring_pow f X1 2))),\n      ring_mul f (ring_of_num f 2)\n         (ring_mul f X1\n         (ring_mul f Y1\n         (ring_sub f (ring_pow f Y1 2)\n                     (ring_mul f a (ring_pow f X1 2))))))")))
+  edwards_prexprojdouble_c.set(@define.define_(@parser.parse_term("edwards_prexprojdouble (f,a:A,d:A) (X1,Y1,Z1) =\n     (ring_mul f (ring_of_num f 2)\n         (ring_mul f X1\n         (ring_mul f Y1\n         (ring_sub f\n          (ring_sub f (ring_mul f (ring_of_num f 2) (ring_pow f Z1 2))\n          (ring_pow f Y1 2))\n         (ring_mul f a (ring_pow f X1 2))))),\n      ring_mul f\n         (ring_add f (ring_pow f Y1 2) (ring_mul f a (ring_pow f X1 2)))\n         (ring_sub f (ring_pow f Y1 2) (ring_mul f a (ring_pow f X1 2))),\n      ring_mul f\n         (ring_add f (ring_pow f Y1 2) (ring_mul f a (ring_pow f X1 2)))\n         (ring_sub f\n          (ring_sub f (ring_mul f (ring_of_num f 2) (ring_pow f Z1 2))\n          (ring_pow f Y1 2))\n         (ring_mul f a (ring_pow f X1 2))),\n      ring_mul f (ring_of_num f 2)\n         (ring_mul f X1\n         (ring_mul f Y1\n         (ring_sub f (ring_pow f Y1 2)\n                     (ring_mul f a (ring_pow f X1 2))))))")))
 }
 
 ///|
@@ -481,7 +481,7 @@ pub fn edwards_prexprojdouble_v1() -> @kernel.Thm {
 ///|
 /// edwards_exprojdouble
 fn step_21() -> Unit raise {
-  edwards_exprojdouble_c.set(@define.define(@parser.parse_term("edwards_exprojdouble (f,a:A,d) (X1,Y1,Z1,T1:A) =\n    edwards_prexprojdouble (f,a,d) (X1,Y1,Z1)")))
+  edwards_exprojdouble_c.set(@define.define_(@parser.parse_term("edwards_exprojdouble (f,a:A,d) (X1,Y1,Z1,T1:A) =\n    edwards_prexprojdouble (f,a,d) (X1,Y1,Z1)")))
 }
 
 ///|
@@ -529,7 +529,7 @@ pub fn edwards_exprojdouble_v1() -> @kernel.Thm {
 ///|
 /// edwards_projdouble
 fn step_24() -> Unit raise {
-  edwards_projdouble_c.set(@define.define(@parser.parse_term("edwards_projdouble (f,a:A,d) (X1,Y1,Z1) =\n    let X2,Y2,Z2,T2 = edwards_prexprojdouble (f,a,d) (X1,Y1,Z1) in\n    (X2,Y2,Z2)")))
+  edwards_projdouble_c.set(@define.define_(@parser.parse_term("edwards_projdouble (f,a:A,d) (X1,Y1,Z1) =\n    let X2,Y2,Z2,T2 = edwards_prexprojdouble (f,a,d) (X1,Y1,Z1) in\n    (X2,Y2,Z2)")))
 }
 
 ///|
@@ -571,7 +571,7 @@ pub fn edwards_projdouble_v1() -> @kernel.Thm {
 ///|
 /// edwards_prexprojdoublen
 fn step_26() -> Unit raise {
-  edwards_prexprojdoublen_c.set(@define.define(@parser.parse_term("edwards_prexprojdoublen (f,a:A,d:A) (X1,Y1,Z1) =\n    let X3,Y3,Z3,T3 = edwards_prexprojdouble (f,a,d) (X1,Y1,Z1) in\n    (ring_neg f X3,\n     ring_neg f Y3,\n     ring_neg f Z3,\n     ring_neg f T3)")))
+  edwards_prexprojdoublen_c.set(@define.define_(@parser.parse_term("edwards_prexprojdoublen (f,a:A,d:A) (X1,Y1,Z1) =\n    let X3,Y3,Z3,T3 = edwards_prexprojdouble (f,a,d) (X1,Y1,Z1) in\n    (ring_neg f X3,\n     ring_neg f Y3,\n     ring_neg f Z3,\n     ring_neg f T3)")))
 }
 
 ///|

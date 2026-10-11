@@ -243,7 +243,7 @@ fn step_7() -> Unit raise {
 ///|
 /// value
 fn step_8() -> Unit raise {
-  value_c.set(@define.define(@parser.parse_term("(value(Constant x) = x) /\\\n  (value(Negation e) = --(value e)) /\\\n  (value(Inverse e) = inv(value e)) /\\\n  (value(Addition e1 e2) = value e1 + value e2) /\\\n  (value(Multiplication e1 e2) = value e1 * value e2) /\\\n  (value(Sqrt e) = sqrt(value e))")))
+  value_c.set(@define.define_(@parser.parse_term("(value(Constant x) = x) /\\\n  (value(Negation e) = --(value e)) /\\\n  (value(Inverse e) = inv(value e)) /\\\n  (value(Addition e1 e2) = value e1 + value e2) /\\\n  (value(Multiplication e1 e2) = value e1 * value e2) /\\\n  (value(Sqrt e) = sqrt(value e))")))
 }
 
 ///|
@@ -258,7 +258,7 @@ pub fn value() -> @kernel.Thm {
 ///|
 /// wellformed
 fn step_9() -> Unit raise {
-  wellformed_c.set(@define.define(@parser.parse_term("(wellformed(Constant x) <=> rational x) /\\\n  (wellformed(Negation e) <=> wellformed e) /\\\n  (wellformed(Inverse e) <=> ~(value e = &0) /\\ wellformed e) /\\\n  (wellformed(Addition e1 e2) <=> wellformed e1 /\\ wellformed e2) /\\\n  (wellformed(Multiplication e1 e2) <=> wellformed e1 /\\ wellformed e2) /\\\n  (wellformed(Sqrt e) <=> &0 <= value e /\\ wellformed e)")))
+  wellformed_c.set(@define.define_(@parser.parse_term("(wellformed(Constant x) <=> rational x) /\\\n  (wellformed(Negation e) <=> wellformed e) /\\\n  (wellformed(Inverse e) <=> ~(value e = &0) /\\ wellformed e) /\\\n  (wellformed(Addition e1 e2) <=> wellformed e1 /\\ wellformed e2) /\\\n  (wellformed(Multiplication e1 e2) <=> wellformed e1 /\\ wellformed e2) /\\\n  (wellformed(Sqrt e) <=> &0 <= value e /\\ wellformed e)")))
 }
 
 ///|
@@ -273,7 +273,7 @@ pub fn wellformed() -> @kernel.Thm {
 ///|
 /// radicals
 fn step_10() -> Unit raise {
-  radicals_c.set(@define.define(@parser.parse_term("(radicals(Constant x) = {}) /\\\n  (radicals(Negation e) = radicals e) /\\\n  (radicals(Inverse e) = radicals e) /\\\n  (radicals(Addition e1 e2) = (radicals e1) UNION (radicals e2)) /\\\n  (radicals(Multiplication e1 e2) = (radicals e1) UNION (radicals e2)) /\\\n  (radicals(Sqrt e) = e INSERT (radicals e))")))
+  radicals_c.set(@define.define_(@parser.parse_term("(radicals(Constant x) = {}) /\\\n  (radicals(Negation e) = radicals e) /\\\n  (radicals(Inverse e) = radicals e) /\\\n  (radicals(Addition e1 e2) = (radicals e1) UNION (radicals e2)) /\\\n  (radicals(Multiplication e1 e2) = (radicals e1) UNION (radicals e2)) /\\\n  (radicals(Sqrt e) = e INSERT (radicals e))")))
 }
 
 ///|
@@ -408,7 +408,7 @@ pub fn lt_max() -> @kernel.Thm {
 ///|
 /// depth
 fn step_17() -> Unit raise {
-  depth_c.set(@define.define(@parser.parse_term("(depth(Constant x) = 0) /\\\n  (depth(Negation e) = depth e) /\\\n  (depth(Inverse e) = depth e) /\\\n  (depth(Addition e1 e2) = MAX (depth e1) (depth e2)) /\\\n  (depth(Multiplication e1 e2) = MAX (depth e1) (depth e2)) /\\\n  (depth(Sqrt e) = 1 + depth e)")))
+  depth_c.set(@define.define_(@parser.parse_term("(depth(Constant x) = 0) /\\\n  (depth(Negation e) = depth e) /\\\n  (depth(Inverse e) = depth e) /\\\n  (depth(Addition e1 e2) = MAX (depth e1) (depth e2)) /\\\n  (depth(Multiplication e1 e2) = MAX (depth e1) (depth e2)) /\\\n  (depth(Sqrt e) = 1 + depth e)")))
 }
 
 ///|

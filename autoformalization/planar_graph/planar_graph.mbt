@@ -84708,10 +84708,10 @@ fn step_960() -> Unit raise {
   let t57063 = @tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("d:A#A")), t56991), t56996), t56997), fn(x56998 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
     let (asl, _) as goal = x56998
     let t56999 = @lib.assoc("local_permutation", asl)
-    let local = @bool.spec(@parser.parse_term("FST(d:A#A)"), t56999)
+    let local_ = @bool.spec(@parser.parse_term("FST(d:A#A)"), t56999)
     let t57000 = @parser.parse_term("d:A#A")
     let t57001 = @parser.parse_term("outgoing_darts E (FST(d:A#A))")
-    let image_equivalence = @drule.match_mp(@bool.ispecl(@list.List([@parser.parse_term("restricted_permutation\n               (r:(A#A)->A#A) (outgoing_darts E (FST d))"), t57001, t57000]), @permutations.permutes_in_image()))(local)
+    let image_equivalence = @drule.match_mp(@bool.ispecl(@list.List([@parser.parse_term("restricted_permutation\n               (r:(A#A)->A#A) (outgoing_darts E (FST d))"), t57001, t57000]), @permutations.permutes_in_image()))(local_)
     let t57002 = @lib.assoc("outgoing", asl)
     let image = @kernel.eq_mp(@equal.sym(image_equivalence), t57002)
     let image_p = @simp.rewrite_rule(@list.List([restricted_permutation(), @lib.assoc("outgoing", asl)]))(image)

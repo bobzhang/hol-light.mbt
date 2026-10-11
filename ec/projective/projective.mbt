@@ -4,7 +4,7 @@
 ///|
 /// projective_point
 fn step_1() -> Unit raise {
-  projective_point_c.set(@define.define(@parser.parse_term("projective_point f (x,y,z) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\ z IN ring_carrier f")))
+  projective_point_c.set(@define.define_(@parser.parse_term("projective_point f (x,y,z) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\ z IN ring_carrier f")))
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn projective_point() -> @kernel.Thm {
 ///|
 /// projective_curve
 fn step_2() -> Unit raise {
-  projective_curve_c.set(@define.define(@parser.parse_term("projective_curve (f,a:A,b) (x,y,z) <=>\n        x IN ring_carrier f /\\\n        y IN ring_carrier f /\\\n        z IN ring_carrier f /\\\n        ring_mul f (ring_pow f y 2) z =\n        ring_add f (ring_pow f x 3)\n                   (ring_add f (ring_mul f a (ring_mul f x (ring_pow f z 2)))\n                               (ring_mul f b (ring_pow f z 3)))")))
+  projective_curve_c.set(@define.define_(@parser.parse_term("projective_curve (f,a:A,b) (x,y,z) <=>\n        x IN ring_carrier f /\\\n        y IN ring_carrier f /\\\n        z IN ring_carrier f /\\\n        ring_mul f (ring_pow f y 2) z =\n        ring_add f (ring_pow f x 3)\n                   (ring_add f (ring_mul f a (ring_mul f x (ring_pow f z 2)))\n                               (ring_mul f b (ring_pow f z 3)))")))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn projective_curve() -> @kernel.Thm {
 ///|
 /// weierstrass_of_projective
 fn step_3() -> Unit raise {
-  weierstrass_of_projective_c.set(@define.define(@parser.parse_term("weierstrass_of_projective (f:A ring) (x,y,z) =\n        if z = ring_0 f then NONE\n        else SOME(ring_div f x z,ring_div f y z)")))
+  weierstrass_of_projective_c.set(@define.define_(@parser.parse_term("weierstrass_of_projective (f:A ring) (x,y,z) =\n        if z = ring_0 f then NONE\n        else SOME(ring_div f x z,ring_div f y z)")))
 }
 
 ///|
@@ -49,7 +49,7 @@ pub fn weierstrass_of_projective() -> @kernel.Thm {
 ///|
 /// projective_of_weierstrass
 fn step_4() -> Unit raise {
-  projective_of_weierstrass_c.set(@define.define(@parser.parse_term("projective_of_weierstrass (f:A ring) NONE = (ring_0 f,ring_1 f,ring_0 f) /\\\n  projective_of_weierstrass f (SOME(x,y)) = (x,y,ring_1 f)")))
+  projective_of_weierstrass_c.set(@define.define_(@parser.parse_term("projective_of_weierstrass (f:A ring) NONE = (ring_0 f,ring_1 f,ring_0 f) /\\\n  projective_of_weierstrass f (SOME(x,y)) = (x,y,ring_1 f)")))
 }
 
 ///|
@@ -64,7 +64,7 @@ pub fn projective_of_weierstrass() -> @kernel.Thm {
 ///|
 /// projective_eq
 fn step_5() -> Unit raise {
-  projective_eq_c.set(@define.define(@parser.parse_term("projective_eq (f:A ring) (x,y,z) (x',y',z') <=>\n        (z = ring_0 f <=> z' = ring_0 f) /\\\n        ring_mul f x z' = ring_mul f x' z /\\\n        ring_mul f y z' = ring_mul f y' z")))
+  projective_eq_c.set(@define.define_(@parser.parse_term("projective_eq (f:A ring) (x,y,z) (x',y',z') <=>\n        (z = ring_0 f <=> z' = ring_0 f) /\\\n        ring_mul f x z' = ring_mul f x' z /\\\n        ring_mul f y z' = ring_mul f y' z")))
 }
 
 ///|

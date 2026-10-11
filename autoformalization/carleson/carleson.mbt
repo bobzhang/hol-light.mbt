@@ -4,7 +4,7 @@
 ///|
 /// cmaxseq
 fn step_1() -> Unit raise {
-  cmaxseq_c.set(@define.define(@parser.parse_term("(cmaxseq (u:num->real->real) 0 x = abs(u 0 x)) /\\\n  (cmaxseq u (SUC n) x = max (cmaxseq u n x) (abs(u (SUC n) x)))")))
+  cmaxseq_c.set(@define.define_(@parser.parse_term("(cmaxseq (u:num->real->real) 0 x = abs(u 0 x)) /\\\n  (cmaxseq u (SUC n) x = max (cmaxseq u n x) (abs(u (SUC n) x)))")))
 }
 
 ///|
@@ -63452,7 +63452,7 @@ pub fn carleson_v_eq_norm_w() -> @kernel.Thm {
 ///|
 /// cargmax
 fn step_1480() -> Unit raise {
-  cargmax_c.set(@define.define(@parser.parse_term("(cargmax (w:num->real->real) 0 x = 0) /\\\n  (cargmax w (SUC n) x =\n     if cmaxseq w n x < abs(w (SUC n) x) then SUC n else cargmax w n x)")))
+  cargmax_c.set(@define.define_(@parser.parse_term("(cargmax (w:num->real->real) 0 x = 0) /\\\n  (cargmax w (SUC n) x =\n     if cmaxseq w n x < abs(w (SUC n) x) then SUC n else cargmax w n x)")))
 }
 
 ///|

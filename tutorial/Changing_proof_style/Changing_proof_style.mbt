@@ -10,7 +10,7 @@ pub fn fix(x1 : @list.List[@kernel.Term]) -> @tactics.Tactic raise {
 
 ///|
 /// `assume`
-pub fn assume(x3 : String, x4 : @kernel.Term) -> @tactics.Tactic raise {
+pub fn assume_(x3 : String, x4 : @kernel.Term) -> @tactics.Tactic raise {
   let lab = x3
   let t = x4
   @tactics.disch_then(fn(x6 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -233,9 +233,9 @@ fn step_4() -> Unit raise {
   let t72 = using_(@list.List([@calc_num.arith(), @arith.even_mult()]), trivial)
   let t73 = so(have, @parser.parse_term("EVEN(p)"), t72)
   let t71 = so(have, @parser.parse_term("EVEN(p * p) <=> EVEN(2 * q * q)"), trivial)
-  let t70 = assume("B", @parser.parse_term("p * p = 2 * q * q"))
+  let t70 = assume_("B", @parser.parse_term("p * p = 2 * q * q"))
   let t69 = fix(@list.List([@parser.parse_term("q:num")]))
-  let t68 = assume("A", @parser.parse_term("!m. m < p ==> !q. m * m = 2 * q * q ==> q = 0"))
+  let t68 = assume_("A", @parser.parse_term("!m. m < p ==> !q. m * m = 2 * q * q ==> q = 0"))
   let t67 = fix(@list.List([@parser.parse_term("p:num")]))
   let t66 = @tactics.match_accept_tac(@arith.num_wf())
   let t102 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(suffices_to_prove(@parser.parse_term("!p. (!m. m < p ==> (!q. m * m = 2 * q * q ==> q = 0))\n        ==> (!q. p * p = 2 * q * q ==> q = 0)"), t66), t67), t68), t69), t70), t71), t73), t80), t81), t101)

@@ -3,7 +3,7 @@ ABORT abort_
 ADO ado
 AND and_
 ANDS ands
-ASSERT assert
+ASSERT assert_
 AWHILE awhile
 CORRECT_ABORT correct_abort
 CORRECT_ASSERT correct_assert

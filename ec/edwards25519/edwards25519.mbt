@@ -28,7 +28,7 @@ fn step_4() -> Unit raise {
 ///|
 /// p_25519
 fn step_5() -> Unit raise {
-  p_25519_c.set(@define.define(@parser.parse_term("p_25519 = 57896044618658097711785492504343953926634992332820282019728792003956564819949")))
+  p_25519_c.set(@define.define_(@parser.parse_term("p_25519 = 57896044618658097711785492504343953926634992332820282019728792003956564819949")))
 }
 
 ///|
@@ -43,7 +43,7 @@ pub fn p_25519() -> @kernel.Thm {
 ///|
 /// n_25519
 fn step_6() -> Unit raise {
-  n_25519_c.set(@define.define(@parser.parse_term("n_25519 = 7237005577332262213973186563042994240857116359379907606001950938285454250989")))
+  n_25519_c.set(@define.define_(@parser.parse_term("n_25519 = 7237005577332262213973186563042994240857116359379907606001950938285454250989")))
 }
 
 ///|
@@ -58,7 +58,7 @@ pub fn n_25519() -> @kernel.Thm {
 ///|
 /// e_25519
 fn step_7() -> Unit raise {
-  e_25519_c.set(@define.define(@parser.parse_term("e_25519 = 57896044618658097711785492504343953926634992332820282019728792003956564819948")))
+  e_25519_c.set(@define.define_(@parser.parse_term("e_25519 = 57896044618658097711785492504343953926634992332820282019728792003956564819948")))
 }
 
 ///|
@@ -73,7 +73,7 @@ pub fn e_25519() -> @kernel.Thm {
 ///|
 /// d_25519
 fn step_8() -> Unit raise {
-  d_25519_c.set(@define.define(@parser.parse_term("d_25519 = 37095705934669439343138083508754565189542113879843219016388785533085940283555")))
+  d_25519_c.set(@define.define_(@parser.parse_term("d_25519 = 37095705934669439343138083508754565189542113879843219016388785533085940283555")))
 }
 
 ///|
@@ -88,7 +88,7 @@ pub fn d_25519() -> @kernel.Thm {
 ///|
 /// E_25519
 fn step_9() -> Unit raise {
-  e_25519_v1_c.set(@define.define(@parser.parse_term("E_25519 = (&0x216936d3cd6e53fec0a4e231fdd6dc5c692cc7609525a7b2c9562d608f25d51a:int,&0x6666666666666666666666666666666666666666666666666666666666666658:int)")))
+  e_25519_v1_c.set(@define.define_(@parser.parse_term("E_25519 = (&0x216936d3cd6e53fec0a4e231fdd6dc5c692cc7609525a7b2c9562d608f25d51a:int,&0x6666666666666666666666666666666666666666666666666666666666666658:int)")))
 }
 
 ///|
@@ -103,7 +103,7 @@ pub fn e_25519_v1() -> @kernel.Thm {
 ///|
 /// EE_25519
 fn step_10() -> Unit raise {
-  ee_25519_c.set(@define.define(@parser.parse_term("EE_25519 = (&31673755162551823185009131889882229316567966938545344397180697279978689160235:int, &44332021396607921014542692927380285321101622747762054416338596910403709737434:int)")))
+  ee_25519_c.set(@define.define_(@parser.parse_term("EE_25519 = (&31673755162551823185009131889882229316567966938545344397180697279978689160235:int, &44332021396607921014542692927380285321101622747762054416338596910403709737434:int)")))
 }
 
 ///|
@@ -118,7 +118,7 @@ pub fn ee_25519() -> @kernel.Thm {
 ///|
 /// edwards25519
 fn step_11() -> Unit raise {
-  edwards25519_c.set(@define.define(@parser.parse_term("edwards25519 = (integer_mod_ring p_25519,&e_25519:int,&d_25519:int)")))
+  edwards25519_c.set(@define.define_(@parser.parse_term("edwards25519 = (integer_mod_ring p_25519,&e_25519:int,&d_25519:int)")))
 }
 
 ///|
@@ -209,7 +209,7 @@ pub fn prime_n25519() -> @kernel.Thm {
 ///|
 /// edwards25519_group
 fn step_16() -> Unit raise {
-  edwards25519_group_c.set(@define.define(@parser.parse_term("edwards25519_group =\n    edwards_group(integer_mod_ring p_25519,&e_25519,&d_25519)")))
+  edwards25519_group_c.set(@define.define_(@parser.parse_term("edwards25519_group =\n    edwards_group(integer_mod_ring p_25519,&e_25519,&d_25519)")))
 }
 
 ///|
