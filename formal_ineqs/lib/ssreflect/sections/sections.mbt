@@ -70,7 +70,7 @@ pub impl @lib.OHash for SectionInfo with fn ohash_visit(self, h) {
 ///|
 /// empty_section
 fn step_2() -> Unit raise {
-  empty_section_c.set(SectionInfo::{ vars: @list.empty(), hyps: @list.empty(), types: @list.empty(), lemmas: @list.empty() })
+  empty_section_c.set(SectionInfo::{ vars: @list.List([]), hyps: @list.List([]), types: @list.List([]), lemmas: @list.List([]) })
 }
 
 ///|
@@ -85,7 +85,7 @@ pub fn empty_section() -> SectionInfo {
 ///|
 /// section_stack
 fn step_3() -> Unit raise {
-  section_stack_c.set(Ref::{ val: @list.empty() })
+  section_stack_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|
@@ -144,7 +144,7 @@ pub fn end_section(x6 : String) -> Unit raise {
 pub fn end_all_sections(x7 : Unit) -> Unit raise {
   let _ = x7
   {
-    section_stack().val = @list.empty()
+    section_stack().val = @list.List([])
     ()
   }
 }
@@ -154,7 +154,7 @@ pub fn end_all_sections(x7 : Unit) -> Unit raise {
 pub fn current_section_vars(x8 : Unit) -> @list.List[@kernel.Term] raise {
   let _ = x8
   if @list.List::is_empty(section_stack().val) {
-    @list.empty()
+    @list.List([])
   } else {
     let t10 = section_stack().val
     ((fn(x9 : (String, Ref[SectionInfo])) -> Ref[SectionInfo] raise {
@@ -168,7 +168,7 @@ pub fn current_section_vars(x8 : Unit) -> @list.List[@kernel.Term] raise {
 pub fn current_section_hyps(x11 : Unit) -> @list.List[(String, @kernel.Term)] raise {
   let _ = x11
   if @list.List::is_empty(section_stack().val) {
-    @list.empty()
+    @list.List([])
   } else {
     let t13 = section_stack().val
     ((fn(x12 : (String, Ref[SectionInfo])) -> Ref[SectionInfo] raise {
@@ -254,7 +254,7 @@ pub fn inst_section_vars(x25 : @kernel.Term) -> @kernel.Term raise {
       let tm_1 = x28
       let (ty_dst, ty_src) = find_var((name_1, ty_1))
       try {
-        @kernel.inst(@basics.type_match(ty_src, ty_dst, @list.empty()), tm_1)
+        @kernel.inst(@basics.type_match(ty_src, ty_dst, @list.List([])), tm_1)
       } catch {
         Failure(_) => raise Failure(("Section variable " + (name_1 + (" has type " + @printer.string_of_type(ty_dst)))))
         e => raise e
@@ -286,7 +286,7 @@ pub fn inst_section_types(x32 : @kernel.Term) -> @kernel.Term raise {
   let f_vars = @kernel.frees(tm)
   let (g_vars, _) = @basics.strip_forall(tm)
   let (ty_dst, ty_src) = @lib.unzip(@lib.map(find_type, g_vars.concat(f_vars)))
-  let ty_inst = @lib.itlist2(@basics.type_match, ty_src, ty_dst, @list.empty())
+  let ty_inst = @lib.itlist2(@basics.type_match, ty_src, ty_dst, @list.List([]))
   @kernel.inst(ty_inst, tm)
 }
 
@@ -595,7 +595,7 @@ pub fn start_section_proof(x89 : @list.List[String], x90 : @kernel.Term) -> @tac
   let names = x89
   let tm = x90
   let (tm0, tac0) = prepare_section_proof(names, tm)
-  let _ = @tactics.set_goal(@list.empty(), tm0)
+  let _ = @tactics.set_goal(@list.List([]), tm0)
   @tactics.refine(@tactics.by(@tactics.valid(tac0)))
 }
 
@@ -618,11 +618,11 @@ pub fn section_proof(x94 : @list.List[String], x95 : @kernel.Term, x96 : @list.L
   let tm = x95
   let tac_list = x96
   let (tm0, tac0) = prepare_section_proof(names, tm)
-  let gstate = @tactics.mk_goalstate((@list.empty(), tm0))
+  let gstate = @tactics.mk_goalstate((@list.List([]), tm0))
   let tac_list1 = if fast_load_flag().val {
     @list.List([fn(x97 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       let g = x97
-      @tactics.accept_tac(@drule.mk_thm(@list.empty(), g.1))(g)
+      @tactics.accept_tac(@drule.mk_thm(@list.List([]), g.1))(g)
     }])
   } else {
     tac_list
@@ -632,7 +632,7 @@ pub fn section_proof(x94 : @list.List[String], x95 : @kernel.Term, x96 : @list.L
     s100(x99)
   }, tac_list1.prepend(tac0), gstate)
   let th0 = if @list.List::is_empty(sgs) {
-    just(@tactics.null_inst, @list.empty())
+    just(@tactics.null_inst, @list.List([]))
   } else {
     raise Failure("section_proof: unsolved goals")
   }

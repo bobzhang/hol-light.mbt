@@ -90,7 +90,7 @@ pub fn or_assoc() -> @kernel.Thm {
 ///|
 /// forall_thm
 fn step_4() -> Unit raise {
-  let t20 = @meson.meson_tac(@list.empty())
+  let t20 = @meson.meson_tac(@list.List([]))
   forall_thm_c.set(@tactics.prove(@parser.parse_term("!P. (!x. P x) <=> ~ (?x. ~ P x)"), t20))
 }
 

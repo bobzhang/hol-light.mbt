@@ -4,7 +4,7 @@
 ///|
 /// matroid_tybij
 fn step_1() -> Unit raise {
-  let t1 = @sets.set_tac(@list.empty())
+  let t1 = @sets.set_tac(@list.List([]))
   let t2 = @tactics.then_tac(
     @tactics.exists_tac(@parser.parse_term("({}:A->bool,(\\x:A->bool. x))")),
     t1,
@@ -141,7 +141,7 @@ fn step_4() -> Unit raise {
   let t11 = @bool.conjunct2(matroid_tybij())
   let t12 = @bool.spec(@parser.parse_term("dest_matroid(m:A matroid)"), t11)
   let t6 = @simp.once_rewrite_rule(@list.List([@class.fun_eq_thm()]))
-  let t7 = @simp.rewrite_rule(@list.empty())
+  let t7 = @simp.rewrite_rule(@list.List([]))
   let t10 = @lib.map(
     fn(x9 : @kernel.Thm) -> @kernel.Thm raise {
       (fn(x8 : @kernel.Thm) -> @kernel.Thm raise { t7(t6(x8)) })(@equal.sym(x9))
@@ -398,7 +398,7 @@ pub fn matroid_span_subset_eq() -> @kernel.Thm {
 ///|
 /// MATROID_SPAN_INTER_SUBSET
 fn step_12() -> Unit raise {
-  let t24 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t24 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t23 = @tactics.match_mp_tac(matroid_span_mono())
   let t22 = @tactics.repeat_tac(@tactics.strip_tac)
   let t25 = @tactics.then_tac(
@@ -555,7 +555,7 @@ pub fn matroid_span_union_right() -> @kernel.Thm {
 ///|
 /// MATROID_SPAN_UNION_SUBSET
 fn step_16() -> Unit raise {
-  let t36 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t36 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t35 = @tactics.match_mp_tac(matroid_span_mono())
   let t34 = @tactics.repeat_tac(@tactics.strip_tac)
   let t37 = @tactics.then_tac(
@@ -592,7 +592,7 @@ pub fn matroid_span_union_subset() -> @kernel.Thm {
 ///|
 /// MATROID_SPAN_EXCHANGE_DELETE
 fn step_17() -> Unit raise {
-  let t45 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t45 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t44 = @tactics.match_mp_tac(matroid_span_mono())
   let t41 = @drule.match_mp(
     @sets.set_rule(@parser.parse_term("x IN s ==> s SUBSET t ==> x IN t")),
@@ -621,10 +621,10 @@ fn step_17() -> Unit raise {
     @tactics.match_mp_tac(t41(x42))
   })
   let t40 = @list.List([
-    @tactics.asm_tac(@sets.set_tac)(@list.empty()),
+    @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.all_tac,
   ])
-  let t39 = @simp.asm_rewrite_tac(@list.empty())
+  let t39 = @simp.asm_rewrite_tac(@list.List([]))
   let t38 = @tactics.match_mp_tac(matroid_span_exchange())
   let t46 = @tactics.then_tac(
     @tactics.then_tac(
@@ -814,7 +814,7 @@ pub fn matroid_span_trans() -> @kernel.Thm {
 ///|
 /// MATROID_SPAN_FINITARY_GEN
 fn step_22() -> Unit raise {
-  let t84 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t84 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t83 = @tactics.match_mp_tac(matroid_span_mono())
   let t79 = @drule.match_mp(
     @simp.rewrite_rule(@list.List([@theorems.imp_conj()]))(@sets.subset_trans()),
@@ -1049,7 +1049,7 @@ pub fn matroid_span_finitary_gen() -> @kernel.Thm {
 ///|
 /// MATROID_SPAN_FINITARY_MINIMAL
 fn step_23() -> Unit raise {
-  let t108 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t108 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t109 = @list.List([
     @meson.asm_meson_tac(@list.List([@sets.finite_subset()])),
     t108,
@@ -1059,7 +1059,7 @@ fn step_23() -> Unit raise {
     @meson.asm_meson_tac(@list.List([@sets.subset_refl()])),
     t106,
   ])
-  let t105 = @simp.rewrite_tac(@list.empty())
+  let t105 = @simp.rewrite_tac(@list.List([]))
   let t101 = @parser.parse_term("\\s. s SUBSET u /\\ (x:A) IN matroid_span m s")
   let t104 = @tactics.disch_then(fn(
     x103 : @kernel.Thm,
@@ -1204,7 +1204,7 @@ fn step_23() -> Unit raise {
       @tactics.strip_assume_tac,
     ),
   )
-  let t89 = @simp.asm_rewrite_tac(@list.empty())
+  let t89 = @simp.asm_rewrite_tac(@list.List([]))
   let t86 = @parser.parse_term("x:A")
   let t87 = @parser.parse_term("s:A->bool")
   let t88 = @tactics.mp_tac(
@@ -1523,7 +1523,7 @@ pub fn matroid_spanning_set() -> @kernel.Thm {
 ///|
 /// MATROID_INDEPENDENT
 fn step_34() -> Unit raise {
-  let t118 = @sets.set_tac(@list.empty())
+  let t118 = @sets.set_tac(@list.List([]))
   let t119 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([matroid_dependent(), matroid_independent()])),
     t118,
@@ -1552,7 +1552,7 @@ pub fn matroid_independent_v1() -> @kernel.Thm {
 ///|
 /// MATROID_DEPENDENT
 fn step_35() -> Unit raise {
-  let t120 = @sets.set_tac(@list.empty())
+  let t120 = @sets.set_tac(@list.List([]))
   let t121 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([matroid_dependent(), matroid_independent()])),
     t120,
@@ -1610,7 +1610,7 @@ pub fn matroid_independent_empty() -> @kernel.Thm {
 ///|
 /// MATROID_INDEPENDENT_MONO
 fn step_37() -> Unit raise {
-  let t136 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t136 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t133 = @parser.parse_term("t DELETE (x:A)")
   let t134 = @parser.parse_term("s DELETE (x:A)")
   let t135 = @tactics.mp_tac(
@@ -1690,7 +1690,7 @@ fn step_37() -> Unit raise {
   })
   let t125 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
   let t124 = @list.List([
-    @tactics.asm_tac(@sets.set_tac)(@list.empty()),
+    @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.all_tac,
   ])
   let t123 = @simp.rewrite_tac(@list.List([matroid_independent()]))
@@ -1743,7 +1743,7 @@ pub fn matroid_independent_mono() -> @kernel.Thm {
 ///|
 /// MATROID_INDEPENDENT_FINITARY
 fn step_38() -> Unit raise {
-  let t175 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t175 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t174 = @tactics.match_mp_tac(@theorems.eq_imp())
   let t173 = @simp.asm_rewrite_tac(
     @list.List([@sets.in_insert(), @class.contrapos_thm()]),
@@ -1839,7 +1839,7 @@ fn step_38() -> Unit raise {
       })(((x168 : @kernel.Thm) => @bool.spec(t167, x168))(x169))
     })(@bool.conjunct2(x170))
   })
-  let t163 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t163 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t172 = @list.List([
     @tactics.then_tac(
       @simp.asm_rewrite_tac(@list.List([@sets.finite_insert()])),
@@ -2016,7 +2016,7 @@ fn step_38() -> Unit raise {
   )
   let t148 = @tactics.x_gen_tac(@parser.parse_term("t:A->bool"))
   let t146 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
-  let t147 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.empty()), t146])
+  let t147 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t146])
   let t143 = @parser.parse_term("x:A")
   let t144 = @parser.parse_term("s DELETE (x:A)")
   let t145 = @tactics.mp_tac(
@@ -2027,7 +2027,7 @@ fn step_38() -> Unit raise {
   )
   let t142 = @tactics.repeat_tac(@tactics.strip_tac)
   let t141 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
-  let t140 = @simp.asm_rewrite_tac(@list.empty())
+  let t140 = @simp.asm_rewrite_tac(@list.List([]))
   let t138 = @tactics.then_tac(
     @simp.asm_rewrite_tac(@list.List([matroid_independent()])),
     @tactics.strip_tac,
@@ -2117,7 +2117,7 @@ pub fn matroid_independent_finitary() -> @kernel.Thm {
 ///|
 /// MATROID_DEPENDENT_FINITARY
 fn step_39() -> Unit raise {
-  let t186 = @sets.set_tac(@list.empty())
+  let t186 = @sets.set_tac(@list.List([]))
   let t185 = @simp.gen_rewrite_tac(
     fn(
       x184 : (@kernel.Term) -> @kernel.Thm raise,
@@ -2170,7 +2170,7 @@ pub fn matroid_dependent_finitary() -> @kernel.Thm {
 ///|
 /// MATROID_INDEPENDENT_INSERT
 fn step_40() -> Unit raise {
-  let t209 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t209 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t208 = @simp.asm_simp_tac(
     @list.List([
       @sets.set_rule(@parser.parse_term("b IN s ==> b INSERT (s DELETE b) = s")),
@@ -2202,7 +2202,7 @@ fn step_40() -> Unit raise {
     ]),
   )
   let t201 = @class.asm_cases_tac(@parser.parse_term("b:A = a"))
-  let t199 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t199 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t198 = @tactics.match_mp_tac(matroid_span_mono())
   let t200 = @list.List([
     @tactics.all_tac,
@@ -2238,11 +2238,11 @@ fn step_40() -> Unit raise {
       ),
     ]),
   )
-  let t193 = @simp.asm_rewrite_tac(@list.empty())
+  let t193 = @simp.asm_rewrite_tac(@list.List([]))
   let t192 = @class.asm_cases_tac(
     @parser.parse_term("(s:A->bool) SUBSET matroid_set m"),
   )
-  let t191 = @simp.asm_rewrite_tac(@list.empty())
+  let t191 = @simp.asm_rewrite_tac(@list.List([]))
   let t190 = @class.asm_cases_tac(@parser.parse_term("(a:A) IN matroid_set m"))
   let t189 = @simp.rewrite_tac(
     @list.List([
@@ -2680,7 +2680,7 @@ pub fn matroid_span_psubset_independent() -> @kernel.Thm {
 ///|
 /// MATROID_SPAN_PSUBSET_EXPLICIT
 fn step_42() -> Unit raise {
-  let t255 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t255 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t252 = @drule.match_mp(matroid_independent_imp_subset())
   let t254 = @tactics.first_assum(fn(
     x253 : @kernel.Thm,
@@ -2800,7 +2800,7 @@ pub fn matroid_span_psubset_explicit() -> @kernel.Thm {
 ///|
 /// MATROID_SPANNING_SUBSET_INDEPENDENT
 fn step_43() -> Unit raise {
-  let t280 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t280 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t277 = @parser.parse_term("s DELETE (a:A)")
   let t278 = @parser.parse_term("t:A->bool")
   let t279 = @tactics.mp_tac(
@@ -3068,7 +3068,7 @@ fn step_44() -> Unit raise {
   let t286 = @tactics.match_mp_tac(
     @sets.set_rule(@parser.parse_term("s SUBSET t ==> ~(t PSUBSET s)")),
   )
-  let t285 = @simp.asm_rewrite_tac(@list.empty())
+  let t285 = @simp.asm_rewrite_tac(@list.List([]))
   let t282 = @parser.parse_term("t:A->bool")
   let t283 = @parser.parse_term("s:A->bool")
   let t284 = @tactics.mp_tac(
@@ -3462,7 +3462,7 @@ fn step_47() -> Unit raise {
     @tactics.thenl(
       @tactics.conj_tac,
       @list.List([
-        @tactics.asm_tac(@sets.set_tac)(@list.empty()),
+        @tactics.asm_tac(@sets.set_tac)(@list.List([])),
         @tactics.all_tac,
       ]),
     ),
@@ -3688,7 +3688,7 @@ fn step_48() -> Unit raise {
     @tactics.x_gen_tac(@parser.parse_term("s:A->bool")),
     @tactics.strip_tac,
   )
-  let t349 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t349 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t351 = @list.List([
     @tactics.then_tac(
       @tactics.rule_assum_tac(
@@ -3835,7 +3835,7 @@ fn step_49() -> Unit raise {
       }
     })(t366(x367))
   })
-  let t360 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t360 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t359 = @tactics.match_mp_tac(matroid_span_mono())
   let t358 = @tactics.repeat_tac(@tactics.strip_tac)
   let t361 = @tactics.then_tac(
@@ -3905,12 +3905,12 @@ pub fn matroid_span_chain() -> @kernel.Thm {
 ///|
 /// MATROID_INTERMEDIATE_SPAN
 fn step_50() -> Unit raise {
-  let t407 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t407 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t408 = @list.List([
     @meson.asm_meson_tac(@list.List([matroid_span_inc()])),
     t407,
   ])
-  let t406 = @simp.asm_rewrite_tac(@list.empty())
+  let t406 = @simp.asm_rewrite_tac(@list.List([]))
   let t405 = @simp.asm_rewrite_tac(@list.List([matroid_independent_insert()]))
   let t401 = @parser.parse_term("(x:A) INSERT b")
   let t404 = @tactics.first_x_assum(fn(
@@ -4017,7 +4017,7 @@ fn step_50() -> Unit raise {
   let t393 = @tactics.thenl(
     @tactics.conj_tac,
     @list.List([
-      @tactics.asm_tac(@sets.set_tac)(@list.empty()),
+      @tactics.asm_tac(@sets.set_tac)(@list.List([])),
       @tactics.all_tac,
     ]),
   )
@@ -4092,18 +4092,18 @@ fn step_50() -> Unit raise {
       }
     })(t388(x389))
   })
-  let t384 = @simp.asm_rewrite_tac(@list.empty())
+  let t384 = @simp.asm_rewrite_tac(@list.List([]))
   let t381 = @tactics.x_gen_tac(@parser.parse_term("b:A->bool"))
   let t382 = @tactics.then_tac(
     @tactics.match_mp_tac(@theorems.mono_exists()),
     t381,
   )
-  let t380 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t380 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t379 = @simp.asm_simp_tac(
     @list.List([matroid_independent_chain(), @sets.union_subset()]),
   )
   let t378 = @tactics.x_gen_tac(@parser.parse_term("c:(A->bool)->bool"))
-  let t377 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t377 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t383 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -4129,7 +4129,7 @@ fn step_50() -> Unit raise {
     ),
     t382,
   ])
-  let t376 = @simp.asm_rewrite_tac(@list.empty())
+  let t376 = @simp.asm_rewrite_tac(@list.List([]))
   let t375 = @tactics.mp_tac(
     @bool.ispec(
       @parser.parse_term(
@@ -4243,7 +4243,7 @@ pub fn matroid_intermediate_basis() -> @kernel.Thm {
 ///|
 /// MATROID_INDEPENDENT_EXTENDS_TO_BASIS
 fn step_52() -> Unit raise {
-  let t422 = @meson.meson_tac(@list.empty())
+  let t422 = @meson.meson_tac(@list.List([]))
   let t421 = @simp.asm_rewrite_tac(@list.List([matroid_spanning_set()]))
   let t418 = @parser.parse_term("matroid_set m:A->bool")
   let t419 = @parser.parse_term("s:A->bool")
@@ -4312,7 +4312,7 @@ pub fn matroid_basis_exists() -> @kernel.Thm {
 ///|
 /// MATROID_SPANNING_CONTAINS_BASIS
 fn step_54() -> Unit raise {
-  let t429 = @meson.meson_tac(@list.empty())
+  let t429 = @meson.meson_tac(@list.List([]))
   let t428 = @simp.asm_rewrite_tac(
     @list.List([matroid_independent_empty(), @sets.union_empty()]),
   )
@@ -4355,7 +4355,7 @@ pub fn matroid_spanning_contains_basis() -> @kernel.Thm {
 ///|
 /// MATROID_SPAN_DEPENDENCE
 fn step_55() -> Unit raise {
-  let t444 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t444 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t443 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t442 = @simp.asm_rewrite_tac(
     @list.List([
@@ -4372,7 +4372,7 @@ fn step_55() -> Unit raise {
       matroid_intermediate_span(),
     ),
   )
-  let t438 = @simp.asm_rewrite_tac(@list.empty())
+  let t438 = @simp.asm_rewrite_tac(@list.List([]))
   let t437 = @class.asm_cases_tac(@parser.parse_term("(x:A) IN s"))
   let t436 = @list.List([
     @tactics.disch_tac,
@@ -4386,7 +4386,7 @@ fn step_55() -> Unit raise {
   let t434 = @simp.simp_tac(
     @list.List([
       @meson.meson(
-        @list.empty(),
+        @list.List([]),
         @parser.parse_term("~(if p then T else ~x) <=> ~p /\\ x"),
       ),
     ]),
@@ -4464,7 +4464,7 @@ pub fn matroid_span_dependence() -> @kernel.Thm {
 ///|
 /// MATROID_STEINITZ_EXCHANGE
 fn step_56() -> Unit raise {
-  let t525 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t525 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t524 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t523 = @tactics.repeat_tac(
     @tactics.thenl(
@@ -4499,7 +4499,7 @@ fn step_56() -> Unit raise {
     @tactics.then_tac(@tactics.match_mp_tac(matroid_span_superset()), t514),
   ])
   let t512 = @simp.once_rewrite_tac(@list.List([@sets.union_subset()]))
-  let t513 = @list.List([@sets.set_tac(@list.empty()), t512])
+  let t513 = @list.List([@sets.set_tac(@list.List([])), t512])
   let t510 = @parser.parse_term(
     "{y:A} UNION (t DIFF (y INSERT u) UNION (x INSERT s))",
   )
@@ -4755,7 +4755,7 @@ fn step_56() -> Unit raise {
     @tactics.asm_tac(@sets.set_tac)(@list.List([matroid_span_subset()])),
     t472,
   ])
-  let t471 = @simp.asm_rewrite_tac(@list.empty())
+  let t471 = @simp.asm_rewrite_tac(@list.List([]))
   let t468 = @parser.parse_term("x:A")
   let t469 = @parser.parse_term("t DIFF u UNION s:A->bool")
   let t470 = @tactics.mp_tac(
@@ -4869,7 +4869,7 @@ fn step_56() -> Unit raise {
     ),
     t453,
   )
-  let t451 = @sets.set_tac(@list.empty())
+  let t451 = @sets.set_tac(@list.List([]))
   let t450 = @simp.rewrite_tac(
     @list.List([@sets.has_size(), @sets.finite_empty(), @sets.empty_subset()]),
   )
@@ -5090,7 +5090,7 @@ fn step_57() -> Unit raise {
       @int.arith_rule(@parser.parse_term("m <= n ==> ~(n + 1 = m)")),
     ]),
   )
-  let t541 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t541 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t542 = @list.List([
     @meson.asm_meson_tac(@list.List([matroid_independent_mono()])),
     t541,
@@ -5438,7 +5438,7 @@ fn step_62() -> Unit raise {
     ),
     t599,
   )
-  let t590 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t590 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t589 = @tactics.rule_assum_tac(
     @simp.rewrite_rule(@list.List([matroid_independent()])),
   )
@@ -5469,7 +5469,7 @@ fn step_62() -> Unit raise {
   ) raise) raise {
     @tactics.match_mp_tac(t585(x586))
   })
-  let t584 = @simp.asm_rewrite_tac(@list.empty())
+  let t584 = @simp.asm_rewrite_tac(@list.List([]))
   let t580 = @parser.parse_term("x:A")
   let t583 = @tactics.first_x_assum(fn(
     x582 : @kernel.Thm,
@@ -5715,7 +5715,7 @@ fn step_62() -> Unit raise {
       ),
     ),
   )
-  let t565 = @simp.asm_rewrite_tac(@list.empty())
+  let t565 = @simp.asm_rewrite_tac(@list.List([]))
   let t562 = @parser.parse_term("s:A->bool")
   let t563 = @parser.parse_term("UNIONS {(k:A->A->bool) x | x IN t}")
   let t564 = @tactics.mp_tac(
@@ -5830,7 +5830,7 @@ fn step_62() -> Unit raise {
     ),
     t602,
   )
-  let t615 = @meson.asm_meson_tac(@list.empty())
+  let t615 = @meson.asm_meson_tac(@list.List([]))
   let t614 = @tactics.match_mp_tac(lemma)
   let t613 = @simp.asm_simp_tac(@list.List([@card.card_le_subset()]))
   let t611 = @parser.parse_term("b:A->bool")
@@ -6046,7 +6046,7 @@ pub fn matroid_independent_spanning_finite() -> @kernel.Thm {
 ///|
 /// MATROID_DEPENDENT_FINITARY_MINIMAL
 fn step_67() -> Unit raise {
-  let t660 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t660 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t659 = @simp.rewrite_tac(@list.List([matroid_dependent()]))
   let t655 = @parser.parse_term("v:A->bool")
   let t658 = @tactics.first_x_assum(fn(
@@ -6134,7 +6134,7 @@ fn step_67() -> Unit raise {
     @meson.asm_meson_tac(@list.List([@sets.subset_refl()])),
     t648,
   ])
-  let t647 = @simp.rewrite_tac(@list.empty())
+  let t647 = @simp.rewrite_tac(@list.List([]))
   let t643 = @parser.parse_term(
     "\\s:A->bool. s SUBSET u /\\ matroid_dependent m s",
   )
@@ -6329,7 +6329,7 @@ fn step_67() -> Unit raise {
       ),
     ),
   )
-  let t628 = @simp.asm_rewrite_tac(@list.empty())
+  let t628 = @simp.asm_rewrite_tac(@list.List([]))
   let t626 = @parser.parse_term("s:A->bool")
   let t627 = @tactics.mp_tac(
     @bool.ispecl(
@@ -6413,7 +6413,7 @@ pub fn matroid_dependent_finitary_minimal() -> @kernel.Thm {
 ///|
 /// MATROID_MINIMALLY_DEPENDENT
 fn step_68() -> Unit raise {
-  let t694 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t694 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t693 = @simp.rewrite_tac(
     @list.List([
       @sets.set_rule(@parser.parse_term("s DELETE a DELETE b = s DIFF {a,b}")),
@@ -6604,7 +6604,7 @@ fn step_68() -> Unit raise {
       matroid_span_exchange(),
     ),
   )
-  let t671 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t671 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t670 = @class.asm_cases_tac(@parser.parse_term("a:A = b"))
   let t669 = @tactics.x_gen_tac(@parser.parse_term("a:A"))
   let t668 = @tactics.disch_then(
@@ -6612,11 +6612,11 @@ fn step_68() -> Unit raise {
   )
   let t667 = @list.List([
     @tactics.all_tac,
-    @tactics.asm_tac(@sets.set_tac)(@list.empty()),
+    @tactics.asm_tac(@sets.set_tac)(@list.List([])),
   ])
   let t666 = @simp.asm_rewrite_tac(@list.List([@sets.not_in_empty()]))
   let t665 = @class.asm_cases_tac(@parser.parse_term("s:A->bool = {}"))
-  let t664 = @simp.asm_rewrite_tac(@list.empty())
+  let t664 = @simp.asm_rewrite_tac(@list.List([]))
   let t663 = @class.asm_cases_tac(
     @parser.parse_term("(s:A->bool) SUBSET matroid_set m"),
   )
@@ -6932,7 +6932,7 @@ pub fn matroid_subspace_v1() -> @kernel.Thm {
 ///|
 /// MATROID_SUBSPACE_INTERS
 fn step_75() -> Unit raise {
-  let t730 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t730 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t729 = @tactics.match_mp_tac(matroid_span_mono())
   let t728 = @tactics.disch_then(
     @tactics.conjuncts_then2(
@@ -7052,7 +7052,7 @@ fn step_75() -> Unit raise {
       },
     ),
   )
-  let t720 = @simp.asm_rewrite_tac(@list.empty())
+  let t720 = @simp.asm_rewrite_tac(@list.List([]))
   let t716 = @parser.parse_term("s:A->bool")
   let t719 = @tactics.first_x_assum(fn(
     x718 : @kernel.Thm,
@@ -7126,7 +7126,7 @@ fn step_75() -> Unit raise {
     @tactics.x_gen_tac(@parser.parse_term("s:A->bool")),
     @tactics.strip_tac,
   )
-  let t712 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.empty()), t711])
+  let t712 = @list.List([@tactics.asm_tac(@sets.set_tac)(@list.List([])), t711])
   let t710 = @tactics.rule_assum_tac(
     @simp.rewrite_rule(@list.List([matroid_subspace()])),
   )
@@ -7185,7 +7185,7 @@ pub fn matroid_subspace_inters() -> @kernel.Thm {
 ///|
 /// MATROID_SUBSPACE_INTER
 fn step_76() -> Unit raise {
-  let t734 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t734 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t733 = @tactics.match_mp_tac(matroid_subspace_inters())
   let t732 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.inters_2())]))
   let t735 = @tactics.then_tac(
@@ -7251,7 +7251,7 @@ pub fn matroid_span_inter_spans() -> @kernel.Thm {
 ///|
 /// MATROID_SUBSPACE_CHAIN
 fn step_78() -> Unit raise {
-  let t738 = @sets.set_tac(@list.empty())
+  let t738 = @sets.set_tac(@list.List([]))
   let t737 = @simp.asm_simp_tac(@list.List([matroid_span_chain()]))
   let t739 = @tactics.then_tac(
     @tactics.then_tac(@simp.rewrite_tac(@list.List([matroid_subspace()])), t737),
@@ -7410,7 +7410,7 @@ pub fn submatroid() -> @kernel.Thm {
 ///|
 /// SUBMATROID_GEN
 fn step_84() -> Unit raise {
-  let t770 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t770 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t764 = @tactics.match_mp_tac(matroid_span_exchange())
   let t765 = @tactics.match_mp_tac(matroid_span_finitary())
   let t766 = @tactics.match_mp_tac(matroid_span_span())
@@ -7731,7 +7731,7 @@ pub fn matroid_spanning_submatroid_self() -> @kernel.Thm {
 ///|
 /// MATROID_BASIS_SUBMATROID
 fn step_92() -> Unit raise {
-  let t783 = @meson.meson_tac(@list.empty())
+  let t783 = @meson.meson_tac(@list.List([]))
   let t782 = @simp.simp_tac(
     @list.List([matroid_independent_submatroid(), matroid_spanning_submatroid()]),
   )
@@ -7763,7 +7763,7 @@ pub fn matroid_basis_submatroid() -> @kernel.Thm {
 ///|
 /// MATROID_SUBSET_CONTAINS_BASIS
 fn step_93() -> Unit raise {
-  let t798 = @meson.meson_tac(@list.empty())
+  let t798 = @meson.meson_tac(@list.List([]))
   let t797 = @simp.asm_simp_tac(@list.List([matroid_basis_submatroid()]))
   let t794 = @drule.match_mp(matroid_spanning_contains_basis())
   let t796 = @tactics.disch_then(fn(
@@ -8061,10 +8061,10 @@ fn step_94() -> Unit raise {
   ])
   let t814 = @tactics.match_mp_tac(@sets.subset_antisym())
   let t813 = @list.List([
-    @tactics.asm_tac(@sets.set_tac)(@list.empty()),
+    @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.all_tac,
   ])
-  let t812 = @simp.asm_rewrite_tac(@list.empty())
+  let t812 = @simp.asm_rewrite_tac(@list.List([]))
   let t809 = @tactics.x_gen_tac(@parser.parse_term("u:A->bool"))
   let t810 = @tactics.then_tac(
     @tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_exists()), t809),
@@ -8753,7 +8753,7 @@ fn step_110() -> Unit raise {
       matroid_independent_card_le_span_finite(),
     ),
   )
-  let t888 = @simp.asm_rewrite_tac(@list.empty())
+  let t888 = @simp.asm_rewrite_tac(@list.List([]))
   let t887 = @tactics.repeat_tac(@tactics.strip_tac)
   let t886 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t883 = @drule.match_mp(matroid_subset_contains_basis())
@@ -8994,7 +8994,7 @@ fn step_110() -> Unit raise {
 ///|
 /// MATROID_FINITE_DIMENSIONAL_DIM
 fn step_111() -> Unit raise {
-  let t895 = @sets.set_tac(@list.empty())
+  let t895 = @sets.set_tac(@list.List([]))
   let t896 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -9114,7 +9114,7 @@ pub fn matroid_finite_dim_empty() -> @kernel.Thm {
 ///|
 /// MATROID_FINITE_DIM_MONO
 fn step_115() -> Unit raise {
-  let t901 = @sets.set_tac(@list.empty())
+  let t901 = @sets.set_tac(@list.List([]))
   let t902 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([matroid_finite_dim_v1()])),
     t901,
@@ -9706,7 +9706,7 @@ fn step_124() -> Unit raise {
       }
     })(t954(x955))
   })
-  let t950 = @simp.asm_rewrite_tac(@list.empty())
+  let t950 = @simp.asm_rewrite_tac(@list.List([]))
   let t949 = @tactics.exists_tac(@parser.parse_term("b:A->bool"))
   let t948 = @tactics.match_mp_tac(matroid_dim_unique_alt())
   let t958 = @tactics.then_tac(
@@ -9835,7 +9835,7 @@ fn step_128() -> Unit raise {
   let t966 = @simp.asm_simp_tac(
     @list.List([matroid_basis_exists_dimension(), matroid_basis_submatroid()]),
   )
-  let t965 = @simp.asm_rewrite_tac(@list.empty())
+  let t965 = @simp.asm_rewrite_tac(@list.List([]))
   let t964 = @class.asm_cases_tac(
     @parser.parse_term("(s:A->bool) SUBSET matroid_set m"),
   )
@@ -9880,7 +9880,7 @@ fn step_129() -> Unit raise {
   let t972 = @meson.asm_meson_tac(
     @list.List([matroid_dim_unique_alt(), @sets.has_size(), @sets.subset()]),
   )
-  let t971 = @simp.asm_rewrite_tac(@list.empty())
+  let t971 = @simp.asm_rewrite_tac(@list.List([]))
   let t970 = @class.asm_cases_tac(
     @parser.parse_term("(s:A->bool) SUBSET matroid_set m"),
   )
@@ -10161,7 +10161,7 @@ fn step_134() -> Unit raise {
     ),
   )
   let t1009 = @list.List([
-    @tactics.asm_tac(@sets.set_tac)(@list.empty()),
+    @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.strip_tac,
   ])
   let t1006 = @parser.parse_term("b:A->bool")
@@ -10924,7 +10924,7 @@ pub fn matroid_dim_empty() -> @kernel.Thm {
 ///|
 /// MATROID_DIM_INSERT
 fn step_149() -> Unit raise {
-  let t1080 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t1080 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t1081 = @tactics.then_tac(
     @tactics.match_mp_tac(matroid_span_mono()),
     t1080,
@@ -10935,7 +10935,7 @@ fn step_149() -> Unit raise {
   ])
   let t1078 = @parser.parse_term("matroid_span m b:A->bool")
   let t1079 = @tactics.trans_tac(@sets.subset_trans())(t1078)
-  let t1076 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t1076 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t1077 = @list.List([
     @tactics.then_tac(@tactics.match_mp_tac(matroid_span_inc()), t1076),
     @tactics.all_tac,
@@ -10945,12 +10945,12 @@ fn step_149() -> Unit raise {
     @meson.asm_meson_tac(@list.List([matroid_span_superset(), @sets.subset()])),
     t1074,
   ])
-  let t1073 = @simp.asm_rewrite_tac(@list.empty())
+  let t1073 = @simp.asm_rewrite_tac(@list.List([]))
   let t1072 = @simp.asm_simp_tac(
     @list.List([@sets.card_clauses(), @sets.insert_subset()]),
   )
   let t1071 = @list.List([
-    @tactics.asm_tac(@sets.set_tac)(@list.empty()),
+    @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.all_tac,
   ])
   let t1070 = @simp.asm_rewrite_tac(
@@ -12039,7 +12039,7 @@ fn step_158() -> Unit raise {
     ]),
   )
   let t1169 = @list.List([
-    @tactics.asm_tac(@sets.set_tac)(@list.empty()),
+    @tactics.asm_tac(@sets.set_tac)(@list.List([])),
     @tactics.all_tac,
   ])
   let t1168 = @tactics.subgoal_then(
@@ -12196,7 +12196,7 @@ fn step_159() -> Unit raise {
     ),
     t1205,
   ])
-  let t1204 = @simp.asm_rewrite_tac(@list.empty())
+  let t1204 = @simp.asm_rewrite_tac(@list.List([]))
   let t1203 = @tactics.x_gen_tac(@parser.parse_term("c:A->bool"))
   let t1207 = @tactics.thenl(
     @tactics.then_tac(
@@ -12329,7 +12329,7 @@ fn step_159() -> Unit raise {
     ),
     t1207,
   ])
-  let t1191 = @simp.asm_rewrite_tac(@list.empty())
+  let t1191 = @simp.asm_rewrite_tac(@list.List([]))
   let t1188 = @parser.parse_term("d:A->bool")
   let t1189 = @parser.parse_term("b:A->bool")
   let t1190 = @tactics.mp_tac(

@@ -75,7 +75,7 @@ pub fn flatmap() -> @kernel.Thm {
 ///|
 /// MEM_FLATMAP
 fn step_2() -> Unit raise {
-  let t31 = @meson.meson_tac(@list.empty())
+  let t31 = @meson.meson_tac(@list.List([]))
   let t30 = @simp.asm_rewrite_tac(@list.List([flatmap(), @lists.mem(), @lists.mem_append()]))
   let t32 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), t30), t31)
   mem_flatmap_c.set(@tactics.prove(@parser.parse_term("!x f:A->B list l. MEM x (FLATMAP f l) <=> ?y. MEM y l /\\ MEM x (f y)"), t32))
@@ -108,7 +108,7 @@ pub fn listdiff() -> @kernel.Thm {
 ///|
 /// MEM_LISTDIFF
 fn step_4() -> Unit raise {
-  let t33 = @meson.meson_tac(@list.empty())
+  let t33 = @meson.meson_tac(@list.List([]))
   let t34 = @tactics.then_tac(@simp.rewrite_tac(@list.List([listdiff(), @lists.mem_filter()])), t33)
   mem_listdiff_c.set(@tactics.prove(@parser.parse_term("!x:A l m. MEM x (LISTDIFF l m) <=> MEM x l /\\ ~MEM x m"), t34))
 }
@@ -146,7 +146,7 @@ pub fn sublist() -> @kernel.Thm {
 ///|
 /// NIL_NOT_MEM
 fn step_7() -> Unit raise {
-  let t36 = @meson.meson_tac(@list.empty())
+  let t36 = @meson.meson_tac(@list.List([]))
   let t35 = @simp.rewrite_tac(@list.List([@lists.mem(), @lists.not_cons_nil()]))
   let t37 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.struct_cases_tac(@bool.spec(@parser.parse_term("l:A list"), @lists.list_cases()))), t35), t36)
   nil_not_mem_c.set(@tactics.prove(@parser.parse_term("!l:A list. l = [] <=> !x. ~(MEM x l)"), t37))
@@ -212,7 +212,7 @@ pub fn sublist_refl() -> @kernel.Thm {
 ///|
 /// CONS_SUBLIST
 fn step_11() -> Unit raise {
-  let t41 = @meson.meson_tac(@list.empty())
+  let t41 = @meson.meson_tac(@list.List([]))
   let t42 = @tactics.then_tac(@simp.rewrite_tac(@list.List([sublist(), @lists.mem()])), t41)
   cons_sublist_c.set(@tactics.prove(@parser.parse_term("!h:A t l. CONS h t SUBLIST l <=> MEM h l /\\ t SUBLIST l"), t42))
 }
@@ -229,7 +229,7 @@ pub fn cons_sublist() -> @kernel.Thm {
 ///|
 /// SUBLIST_TRANS
 fn step_12() -> Unit raise {
-  let t43 = @meson.meson_tac(@list.empty())
+  let t43 = @meson.meson_tac(@list.List([]))
   let t44 = @tactics.then_tac(@simp.rewrite_tac(@list.List([sublist()])), t43)
   sublist_trans_c.set(@tactics.prove(@parser.parse_term("!l m n. l SUBLIST m /\\ m SUBLIST n ==> l SUBLIST n"), t44))
 }
@@ -246,7 +246,7 @@ pub fn sublist_trans() -> @kernel.Thm {
 ///|
 /// LISTDIFF_SUBLIST
 fn step_13() -> Unit raise {
-  let t45 = @meson.meson_tac(@list.empty())
+  let t45 = @meson.meson_tac(@list.List([]))
   let t46 = @tactics.then_tac(@simp.rewrite_tac(@list.List([sublist(), mem_listdiff()])), t45)
   listdiff_sublist_c.set(@tactics.prove(@parser.parse_term("!l m:A list.  LISTDIFF m l SUBLIST m"), t46))
 }
@@ -278,7 +278,7 @@ pub fn norepetition() -> @kernel.Thm {
 ///|
 /// NOREPETITION_CLAUSES
 fn step_15() -> Unit raise {
-  let t47 = @meson.meson_tac(@list.empty())
+  let t47 = @meson.meson_tac(@list.List([]))
   let t48 = @tactics.then_tac(@simp.rewrite_tac(@list.List([norepetition(), @lists.pairwise(), @equal.gsym(@lists.all_mem())])), t47)
   norepetition_clauses_c.set(@tactics.prove(@parser.parse_term("NOREPETITION [] /\\\n   (!h:A t. NOREPETITION (CONS h t) <=> ~MEM h t /\\ NOREPETITION t)"), t48))
 }
@@ -356,7 +356,7 @@ fn step_19() -> Unit raise {
     let th = x63
     @tactics.then_tac(@tactics.mp_tac(th), @int.arith_tac)
   })
-  let t62 = @simp.asm_rewrite_tac(@list.empty())
+  let t62 = @simp.asm_rewrite_tac(@list.List([]))
   let t61 = @simp.asm_simp_tac(@list.List([@sets.card_delete()]))
   let t60 = @class.asm_cases_tac(@parser.parse_term("FINITE (s:A->bool)"))
   let t59 = @simp.rewrite_tac(@list.List([@sets.has_size(), @sets.finite_delete()]))
@@ -379,10 +379,10 @@ fn step_20() -> Unit raise {
   let t102 = @simp.asm_simp_tac(@list.List([@sets.has_size_cross()]))
   let t103 = @list.List([@simp.simp_tac(@list.List([@pair.forall_pair_thm(), @pair.uncurry_def(), @lists.cons_11(), @pair.pair_eq()])), t102])
   let t101 = @tactics.match_mp_tac(@sets.has_size_image_inj())
-  let t99 = @meson.meson_tac(@list.empty())
+  let t99 = @meson.meson_tac(@list.List([]))
   let t98 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm(), @pair.uncurry_def(), @lists.length(), @nums.suc_inj(), @lists.mem()]))
   let t97 = @simp.rewrite_tac(@list.List([@sets.forall_in_cross(), @theorems.imp_conj(), @theorems.right_forall_imp_thm(), @sets.forall_in_gspec()]))
-  let t95 = @meson.meson_tac(@list.empty())
+  let t95 = @meson.meson_tac(@list.List([]))
   let t94 = @simp.rewrite_tac(@list.List([@sets.in_image(), @pair.exists_pair_thm(), @pair.uncurry_def(), @ind_types.injectivity("list"), @sets.in_cross(), @sets.in_elim_thm()]))
   let t93 = @simp.rewrite_tac(@list.List([@lists.length(), @nums.not_suc(), @nums.suc_inj(), @lists.mem()]))
   let t92 = @ind_types.cases("list")
@@ -450,7 +450,7 @@ pub fn finite_length_eq() -> @kernel.Thm {
 ///|
 /// FINITE_LENGTH_LE
 fn step_22() -> Unit raise {
-  let t111 = @meson.asm_meson_tac(@list.empty())
+  let t111 = @meson.asm_meson_tac(@list.List([]))
   let t110 = @simp.rewrite_tac(@list.List([@iterate.in_numseg(), @sets.in_elim_thm(), @arith.le_0()]))
   let t109 = @tactics.repeat_tac(@tactics.strip_tac)
   let t112 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.subset(), @sets.forall_in_gspec(), @sets.in_unions(), @sets.exists_in_image()])), t109), t110), t111)
@@ -474,7 +474,7 @@ pub fn finite_length_le() -> @kernel.Thm {
 ///|
 /// LENGTH_NOREPETITION
 fn step_23() -> Unit raise {
-  let t123 = @meson.asm_meson_tac(@list.empty())
+  let t123 = @meson.asm_meson_tac(@list.List([]))
   let t122 = @simp.asm_simp_tac(@list.List([delete_has_size(), @sets.in_delete()]))
   let t121 = @tactics.exists_tac(@parser.parse_term("s DELETE h:A"))
   let t120 = @tactics.first_x_assum(@tactics.match_mp_tac)
@@ -523,7 +523,7 @@ pub fn finite_norepetition() -> @kernel.Thm {
 fn step_25() -> Unit raise {
   let t147 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.cross_univ()), @sets.finite_cross_eq(), @sets.finite_bool()]))
   let t146 = @tactics.match_mp_tac(@sets.finite_image())
-  let t144 = @simp.asm_rewrite_tac(@list.empty())
+  let t144 = @simp.asm_rewrite_tac(@list.List([]))
   let t143 = @tactics.exists_tac(@parser.parse_term("b0:bool,b1:bool,b2:bool,b3:bool,b4:bool,b5:bool,b6:bool,b7:bool"))
   let t140 = @ind_types.cases("char")
   let t141 = @bool.spec(@parser.parse_term("c:char"), t140)
@@ -564,7 +564,7 @@ fn step_26() -> Unit raise {
   let t167 = @simp.rewrite_tac(@list.List([@equal.gsym(@calc_num.num_reduce_conv(@parser.parse_term("2*2*2*2*2*2*2*2"))), t166]))
   let t165 = @list.List([@simp.rewrite_tac(@list.List([@sets.in_univ(), @pair.forall_pair_thm(), @ind_types.injectivity("char"), @pair.pair_eq()])), @tactics.all_tac])
   let t164 = @tactics.match_mp_tac(@sets.has_size_image_inj())
-  let t162 = @simp.asm_rewrite_tac(@list.empty())
+  let t162 = @simp.asm_rewrite_tac(@list.List([]))
   let t161 = @tactics.exists_tac(@parser.parse_term("b0:bool,b1:bool,b2:bool,b3:bool,b4:bool,b5:bool,b6:bool,b7:bool"))
   let t158 = @ind_types.cases("char")
   let t159 = @bool.spec(@parser.parse_term("c:char"), t158)

@@ -69,7 +69,7 @@ fn step_1() -> Unit raise {
         tail=More(@parser.Lexcode::Ident("="), tail=rst_2)
       ) => {
         let (rs, er) = recspec(rst_2)
-        if er != @list.empty() {
+        if er != @list.List([]) {
           raise Failure("Stuff after record spec")
         } else {
           (tyname, rs)
@@ -96,7 +96,7 @@ pub fn parse_record_specification(
 ///|
 /// the_record_types
 fn step_2() -> Unit raise {
-  the_record_types_c.set(Ref::{ val: @list.empty(), })
+  the_record_types_c.set(Ref::{ val: @list.List([]), })
 }
 
 ///|
@@ -133,7 +133,7 @@ pub fn the_record_types() -> Ref[
 ///|
 /// define_record_type
 fn step_3() -> Unit raise {
-  let t7 = @meson.meson_tac(@list.empty())
+  let t7 = @meson.meson_tac(@list.List([]))
   let t8 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -354,7 +354,7 @@ pub fn record_read_write_thms(
       @tactics.no_tac,
     )
     @tactics.prove(
-      @drule.instantiate(@drule.term_match(@list.empty(), ctm, tm), pat),
+      @drule.instantiate(@drule.term_match(@list.List([]), ctm, tm), pat),
       t31,
     )
   }

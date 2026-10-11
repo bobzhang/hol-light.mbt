@@ -664,7 +664,7 @@ pub fn cache_conv(conv : Conv) -> Conv {
       None => {
         let th = conv(tm)
         net.val = @nets.enter(
-          @list.empty(),
+          @list.List([]),
           tm,
           { f: alpha_hack(th), },
           net.val,

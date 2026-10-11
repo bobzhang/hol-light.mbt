@@ -12,7 +12,7 @@ fn step_1() -> Unit raise {
   })
   let t7 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("(-- x = -- y) <=> (x = y)"))]))
   let t8 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("-- x * y = -- (x * y)"))]))
-  let t9 = @simp.asm_rewrite_tac(@list.empty())
+  let t9 = @simp.asm_rewrite_tac(@list.List([]))
   let t10 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(@arith.not_odd())]))
   let t2 = @parser.parse_term("n:num")
   let t11 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("a:real"), t2]), @calc_int.real_pow_neg()))

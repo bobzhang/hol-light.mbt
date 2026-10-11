@@ -437,7 +437,7 @@ fn step_18() -> Unit raise {
       s187(x188)
     }
   })
-  let t185 = @simp.asm_rewrite_tac(@list.empty())
+  let t185 = @simp.asm_rewrite_tac(@list.List([]))
   let t184 = @tactics.rule_assum_tac(@simp.simp_rule(@list.List([@real.real_lt_rmul_eq(), @transcendentals.pi_pos(), @real.real_of_num_lt()])))
   let t183 = @tactics.match_mp_tac(@int.arith_rule(@parser.parse_term("n < 3 /\\ ~(n = 0) /\\ ~(n = 2) ==> n = 1")))
   let t182 = @simp.rewrite_tac(@list.List([@realax.real_of_num_eq()]))
@@ -463,7 +463,7 @@ fn step_18() -> Unit raise {
   })
   let t171 = @tactics.subgoal_then(@parser.parse_term("?n. nn = &n"), t170)
   let t165 = @tactics.conv_tac(@calc_rat.real_ring)
-  let t164 = @simp.asm_rewrite_tac(@list.empty())
+  let t164 = @simp.asm_rewrite_tac(@list.List([]))
   let t166 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.spec(@parser.parse_term("x:real"), @transcendentals.sin_circle())), t164), t165), @tactics.all_tac])
   let t163 = @simp.rewrite_tac(@list.List([@equal.gsym(@transcendentals.sin_eq_0())]))
   let t160 = @tactics.conjuncts_then2(fn(x154 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {

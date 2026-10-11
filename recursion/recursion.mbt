@@ -61,7 +61,7 @@ fn step_1() -> Unit raise {
           )(x12)
         },
         lpats,
-        @list.empty(),
+        @list.List([]),
       )
       let axth = @bool.spec_all(ax)
       let (exvs, axbody) = @basics.strip_exists(@kernel.concl(axth))
@@ -192,7 +192,7 @@ fn step_1() -> Unit raise {
       )
       let axtm = @bool.list_mk_exists(exvs, @bool.list_mk_conj(raxs))
       let urtm = @bool.list_mk_exists(urfns, tm)
-      let insts = @drule.term_match(@list.empty(), axtm, urtm)
+      let insts = @drule.term_match(@list.List([]), axtm, urtm)
       let ixth = @drule.instantiate_rule(insts, axth)
       let (ixvs, ixbody) = @basics.strip_exists(@kernel.concl(ixth))
       let ixtm = @basics.subst(@lib.zip(urfns, ixvs), ixbody)
@@ -463,7 +463,7 @@ fn step_1() -> Unit raise {
           )(x94)
         },
         lpats_1,
-        @list.empty(),
+        @list.List([]),
       )
       let uxargs = @lib.map(
         fn(x97 : @kernel.Term) -> @list.List[@kernel.Term] raise {
@@ -493,7 +493,7 @@ fn step_1() -> Unit raise {
         },
         ufns_1,
         uxargs,
-        @list.empty(),
+        @list.List([]),
       )
       let tth = @simp.gen_rewrite_conv(
         fn(
@@ -545,7 +545,7 @@ pub fn prove_recursive_functions_exist(
 ///|
 /// new_recursive_definition
 fn step_2() -> Unit raise {
-  let the_recursive_definitions = Ref::{ val: @list.empty(), }
+  let the_recursive_definitions = Ref::{ val: @list.List([]), }
   let find_redefinition : (@kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = fn(
     x112 : @kernel.Term,
   ) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
@@ -630,7 +630,7 @@ fn step_2() -> Unit raise {
               )(x129)
             },
             lpats,
-            @list.empty(),
+            @list.List([]),
           )
           let fvs = @lib.map(
             fn(x130 : @kernel.Term) -> @list.List[@kernel.Term] raise {

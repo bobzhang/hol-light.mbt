@@ -183,7 +183,7 @@ fn step_1() -> Unit raise {
     let l1_4 = x31
     let l2_4 = x32
     match l1_4 {
-      Empty => @list.empty()
+      Empty => @list.List([])
       More(h1, tail=t1) => {
         let t33 = grob_mul(t1, l2_4)
         grob_add(grob_cmul(h1, l2_4), t33)
@@ -364,8 +364,8 @@ fn step_1() -> Unit raise {
       ) -> (@list.List[(@num.Num, @list.List[Int64])], History) raise {
         let ph2 = x70
         match (ph1, ph2) {
-          ((Empty, h), p_1) => (@list.empty(), h)
-          (p_2, (Empty, h_1)) => (@list.empty(), h_1)
+          ((Empty, h), p_1) => (@list.List([]), h)
+          (p_2, (Empty, h_1)) => (@list.List([]), h_1)
           ((More(cm1_1, tail=ptl1), his1), (More(cm2, tail=ptl2), his2)) => {
             let t72 = History::Mmul(
               mdiv((@num.minus_num(cm_4.0), cm_4.1))(cm2),
@@ -404,7 +404,7 @@ fn step_1() -> Unit raise {
       More((l_4, (p1_4, p2_4)), tail=opairs_1) => {
         let t107 = reduce(basis_3, spoly(l_4)(p1_4)(p2_4))
         let (sp, hist_2) as sph = monic_l(t107.0, t107.1)
-        if sp == @list.empty() ||
+        if sp == @list.List([]) ||
           ((x93, x94, x95) => criterion2_l(mdiv, x93, x94, x95))(
             basis_3,
             (l_4, (p1_4, p2_4)),
@@ -412,7 +412,7 @@ fn step_1() -> Unit raise {
           ) {
           grobner_basis(basis_3, opairs_1)
         } else if constant_poly_l(sp) {
-          grobner_basis(basis_3.prepend(sph), @list.empty())
+          grobner_basis(basis_3.prepend(sph), @list.List([]))
         } else {
           let rawcps = @lib.map(
             fn(
@@ -483,7 +483,7 @@ fn step_1() -> Unit raise {
         )
       More(p_9, tail=ps) => {
         let p_p = reduce(rpols.concat(ps), p_9)
-        if p_p.0 == @list.empty() {
+        if p_p.0 == @list.List([]) {
           grobner_interreduce(rpols, ps)
         } else {
           grobner_interreduce(rpols.prepend(p_p), ps)
@@ -514,12 +514,12 @@ fn step_1() -> Unit raise {
         x118 : (@list.List[(@num.Num, @list.List[Int64])], History),
       ) -> Bool raise {
         let (p_11, _) = x118
-        p_11 != @list.empty()
+        p_11 != @list.List([])
       },
       npols,
     )
     let bas = grobner_interreduce(
-      @list.empty(),
+      @list.List([]),
       @lib.map(
         fn(
           x119 : (@list.List[(@num.Num, @list.List[Int64])], History),
@@ -650,8 +650,8 @@ fn step_1() -> Unit raise {
         @list.List[(Int64, @list.List[(@num.Num, @list.List[Int64])])],
       ) raise {
         let pol_6 = x162
-        if pol_6 == @list.empty() {
-          (1L, @num.num_1, @list.empty())
+        if pol_6 == @list.List([]) {
+          (1L, @num.num_1, @list.List([]))
         } else {
           let vars_p = vars_4.prepend(@kernel.concl(@bool.truth()))
           let grob_z = @list.List([
@@ -790,7 +790,7 @@ fn step_1() -> Unit raise {
                 })(transform_monomial(x185))(x186)
               },
               q_8,
-              @list.empty(),
+              @list.List([]),
             )
           }
           let cert_p = @lib.map(
@@ -816,7 +816,7 @@ fn step_1() -> Unit raise {
       }
     }
   }
-  let t203 = @simp.asm_simp_tac(@list.empty())
+  let t203 = @simp.asm_simp_tac(@list.List([]))
   let t202 = @simp.once_rewrite_tac(
     @list.List([@equal.gsym(@class.contrapos_thm())]),
   )
@@ -1118,16 +1118,16 @@ fn step_1() -> Unit raise {
         let t239 = grobvars(@kernel.rand(tm_1), acc)
         grobvars(@equal.lhand(tm_1), t239)
       } else if @lib.can(ring_dest_inv, tm_1) {
-        let gvs = grobvars(@kernel.rand(tm_1), @list.empty())
-        if gvs == @list.empty() {
+        let gvs = grobvars(@kernel.rand(tm_1), @list.List([]))
+        if gvs == @list.List([]) {
           acc
         } else {
           acc.prepend(tm_1)
         }
       } else if @lib.can(ring_dest_div, tm_1) {
         let lvs = grobvars(@equal.lhand(tm_1), acc)
-        let gvs_1 = grobvars(@kernel.rand(tm_1), @list.empty())
-        if gvs_1 == @list.empty() {
+        let gvs_1 = grobvars(@kernel.rand(tm_1), @list.List([]))
+        if gvs_1 == @list.List([]) {
           lvs
         } else {
           acc.prepend(tm_1)
@@ -1168,7 +1168,7 @@ fn step_1() -> Unit raise {
           try {
             let x_6 = ring_dest_const(tm_2)
             if @num.eq_num(x_6, @num.num_0) {
-              @list.empty()
+              @list.List([])
             } else {
               @list.List([
                 (
@@ -1284,7 +1284,7 @@ fn step_1() -> Unit raise {
           grobvars(@equal.lhand(eq), t255)
         },
         cjs,
-        @list.empty(),
+        @list.List([]),
       )
       let vars_7 = @lib.sort(
         fn(x256 : @kernel.Term, x257 : @kernel.Term) -> Bool raise {
@@ -1344,7 +1344,7 @@ fn step_1() -> Unit raise {
         x267 : @list.List[(@num.Num, @list.List[Int64])],
       ) -> @kernel.Term raise {
         let p_17 = x267
-        if p_17 == @list.empty() {
+        if p_17 == @list.List([]) {
           ring_mk_const(@num.num_0)
         } else {
           @lib.end_itlist(
@@ -1473,7 +1473,7 @@ fn step_1() -> Unit raise {
             ) {
             @pp.std_formatter.print_string("Generating HOL version of proof")
             @pp.std_formatter.print_newline()
-            let execache = Ref::{ val: @list.empty(), }
+            let execache = Ref::{ val: @list.List([]), }
             let memoize : (History) -> ((@kernel.Thm) -> @kernel.Thm raise) raise = fn(
               x296 : History,
             ) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
@@ -1520,7 +1520,7 @@ fn step_1() -> Unit raise {
                 let prf_4 = x305
                 let ans = run_proof(vars_13, prf_4)
                 {
-                  execache.val = @list.empty()
+                  execache.val = @list.List([])
                   ()
                 }
                 ans
@@ -1538,7 +1538,7 @@ fn step_1() -> Unit raise {
               },
               vars_10,
             )
-            let execache_1 = Ref::{ val: @list.empty(), }
+            let execache_1 = Ref::{ val: @list.List([]), }
             let memoize_1 : (History) -> (((@num.Num, @kernel.Thm)) -> (
               @num.Num,
               @kernel.Thm,
@@ -1601,7 +1601,7 @@ fn step_1() -> Unit raise {
                 let prf_7 = x319
                 let (_, ans_1) = run_scaled_proof(vars_15, prf_7)
                 {
-                  execache_1.val = @list.empty()
+                  execache_1.val = @list.List([])
                   ()
                 }
                 ans_1
@@ -1654,7 +1654,7 @@ fn step_1() -> Unit raise {
           },
           eths0,
         )
-        if eths_1 == @list.empty() {
+        if eths_1 == @list.List([]) {
           let th1_5 = @lib.end_itlist(
             fn(x331 : @kernel.Thm, x332 : @kernel.Thm) -> @kernel.Thm raise {
               let th1_4 = x331
@@ -1670,7 +1670,7 @@ fn step_1() -> Unit raise {
           let (l_19, r_9) = @kernel.dest_eq(@kernel.rand(@kernel.concl(th2_5)))
           let t333 = @kernel.refl(l_19)
           @kernel.eq_mp(@bool.eqf_intro(th2_5), t333)
-        } else if nths == @list.empty() && !@kernel.is_var(ring_neg_tm) {
+        } else if nths == @list.List([]) && !@kernel.is_var(ring_neg_tm) {
           let (vars_16, pols_5) = grobify_equations(
             @bool.list_mk_conj(
               @lib.map(
@@ -1684,7 +1684,7 @@ fn step_1() -> Unit raise {
           let t335 = grobner_refute(pols_5)
           execute_proof(vars_16)(eths_1)(t335)
         } else {
-          let (vars_19, l_22, cert_4, noteqth) = if nths == @list.empty() {
+          let (vars_19, l_22, cert_4, noteqth) = if nths == @list.List([]) {
             let (vars_17, pols_6) = grobify_equations(
               @bool.list_mk_conj(
                 @lib.map(
@@ -1810,7 +1810,7 @@ fn step_1() -> Unit raise {
             x350 : @list.List[(Int64, @kernel.Term)],
           ) -> @kernel.Thm raise {
             let pols_8 = x350
-            if pols_8 == @list.empty() {
+            if pols_8 == @list.List([]) {
               @kernel.refl(ring_mk_const(@num.num_0))
             } else {
               @lib.end_itlist(
@@ -1911,7 +1911,7 @@ fn step_1() -> Unit raise {
       let tms = x365
       fn(x366 : @kernel.Term) -> @list.List[@kernel.Term] raise {
         let tm_7 = x366
-        let rawvars_1 = @lib.itlist(grobvars, tms.prepend(tm_7), @list.empty())
+        let rawvars_1 = @lib.itlist(grobvars, tms.prepend(tm_7), @list.List([]))
         let vars_20 = @lib.sort(
           fn(x367 : @kernel.Term, x368 : @kernel.Term) -> Bool raise {
             let x_13 = x367
@@ -1933,7 +1933,7 @@ fn step_1() -> Unit raise {
         @lib.map(
           fn(x370 : Int64) -> @kernel.Term raise {
             let n_8 = x370
-            let p_23 = @lib.assocd(n_8, cert_5, @list.empty())
+            let p_23 = @lib.assocd(n_8, cert_5, @list.List([]))
             holify_polynomial_1(vars_20)(p_23)
           },
           @lib.range(0L, @lib.sub63(Int::to_int64(@lib.length(pols_9)), 1L)),
@@ -2096,7 +2096,7 @@ fn[TG : Eq + @lib.OCompare + @lib.OHash] monic_l(
   x75 : History,
 ) -> (@list.List[(@num.Num, @list.List[TG])], History) raise {
   let (pol_3, hist_1) = (x74, x75)
-  if pol_3 == @list.empty() {
+  if pol_3 == @list.List([]) {
     (pol_3, hist_1)
   } else {
     let (c_p, m_p) = @lib.hd(pol_3)
@@ -2320,7 +2320,7 @@ fn[TBA] resolve_proof_l(
   let vars_1 = x129
   let prf = x130
   match prf {
-    History::Start(-1L) => @list.empty()
+    History::Start(-1L) => @list.List([])
     History::Start(m_3) =>
       @list.List([
         (
@@ -2372,11 +2372,11 @@ fn[TBA] resolve_proof_l(
         ) -> (Int64, @list.List[(@num.Num, @list.List[Int64])]) raise {
           let n_3 = x136
           let a = @lib.assoc(n_3, lis1) catch {
-            Failure(_) => @list.empty()
+            Failure(_) => @list.List([])
             e => raise e
           }
           let b = @lib.assoc(n_3, lis2) catch {
-            Failure(_) => @list.empty()
+            Failure(_) => @list.List([])
             e => raise e
           }
           (n_3, grob_add(a, b))
@@ -2518,7 +2518,7 @@ fn[TBC] grobner_ideal_l(
   let t158 = History::Start(-1L)
   let t159 = (grob_neg(pol_5), t158)
   let (pol_p, h_3) = reduce(grobner(pols_3), t159)
-  if pol_p != @list.empty() {
+  if pol_p != @list.List([]) {
     raise Failure("grobner_ideal: not in the ideal")
   } else {
     ((x129, x130) => resolve_proof_l(grob_cmul, grob_add, x129, x130))(

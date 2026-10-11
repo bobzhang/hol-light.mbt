@@ -19,7 +19,7 @@ pub fn exprojective() -> @kernel.Thm {
 ///|
 /// EXPROJECTIVE_ALT
 fn step_2() -> Unit raise {
-  let t2 = @simp.asm_rewrite_tac(@list.empty())
+  let t2 = @simp.asm_rewrite_tac(@list.List([]))
   let t1 = @simp.rewrite_tac(@list.List([exprojective()]))
   let t3 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t1), @tactics.eq_tac), @tactics.strip_tac), t2), @ringtheory.field_tac)
   exprojective_alt_c.set(@tactics.prove(@parser.parse_term("!f x y X Y Z W:A.\n        field f\n        ==> (exprojective f (x,y) (X,Y,Z,W) <=>\n             x IN ring_carrier f /\\ y IN ring_carrier f /\\\n             X IN ring_carrier f /\\ Y IN ring_carrier f /\\\n             W IN ring_carrier f /\\ Z IN ring_carrier f /\\\n             ~(Z = ring_0 f) /\\\n             ring_mul f x Z = X /\\\n             ring_mul f y Z = Y /\\\n             ring_mul f W Z = ring_mul f X Y)"), t3))
@@ -52,7 +52,7 @@ pub fn projective() -> @kernel.Thm {
 ///|
 /// PROJECTIVE_ALT
 fn step_4() -> Unit raise {
-  let t5 = @simp.asm_rewrite_tac(@list.empty())
+  let t5 = @simp.asm_rewrite_tac(@list.List([]))
   let t4 = @simp.rewrite_tac(@list.List([projective()]))
   let t6 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t4), @tactics.eq_tac), @tactics.strip_tac), t5), @ringtheory.field_tac)
   projective_alt_c.set(@tactics.prove(@parser.parse_term("!f x y X Y Z:A.\n        field f\n        ==> (projective f (x,y) (X,Y,Z) <=>\n             x IN ring_carrier f /\\ y IN ring_carrier f /\\\n             X IN ring_carrier f /\\ Y IN ring_carrier f /\\\n             Z IN ring_carrier f /\\\n             ~(Z = ring_0 f) /\\\n             ring_mul f x Z = X /\\\n             ring_mul f y Z = Y)"), t6))
@@ -72,7 +72,7 @@ pub fn projective_alt() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let t10 = @tactics.try_tac(@ringtheory.ring_carrier_tac)
   let t9 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t8 = @simp.asm_rewrite_tac(@list.empty())
+  let t8 = @simp.asm_rewrite_tac(@list.List([]))
   let t7 = @simp.simp_tac(@list.List([projective(), exprojective()]))
   let t11 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t7), @tactics.eq_tac), @tactics.strip_tac), t8), t9), t10), @ringtheory.field_tac)
   projective_exprojective_c.set(@tactics.prove(@parser.parse_term("!f x y X Y Z:A.\n        field f\n        ==> (projective f (x,y) (X,Y,Z) <=>\n             exprojective f (x,y)\n              (X,Y,Z,ring_div f (ring_mul f X Y) Z))"), t11))
@@ -92,7 +92,7 @@ pub fn projective_exprojective() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t15 = @tactics.try_tac(@ringtheory.ring_carrier_tac)
   let t14 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t13 = @simp.asm_rewrite_tac(@list.empty())
+  let t13 = @simp.asm_rewrite_tac(@list.List([]))
   let t12 = @simp.simp_tac(@list.List([projective(), exprojective()]))
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t12), @tactics.eq_tac), @tactics.strip_tac), t13), t14), t15), @ringtheory.field_tac)
   exprojective_projective_c.set(@tactics.prove(@parser.parse_term("!f x y X Y Z W:A.\n        field f\n        ==> (exprojective f (x,y) (X,Y,Z,W) <=>\n             projective f (x,y) (X,Y,Z) /\\\n             ring_div f (ring_mul f X Y) Z = W)"), t16))
@@ -112,7 +112,7 @@ pub fn exprojective_projective() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t20 = @tactics.try_tac(@ringtheory.ring_carrier_tac)
   let t19 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t18 = @simp.asm_rewrite_tac(@list.empty())
+  let t18 = @simp.asm_rewrite_tac(@list.List([]))
   let t17 = @simp.simp_tac(@list.List([projective(), exprojective()]))
   let t21 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t17), @tactics.eq_tac), @tactics.strip_tac), t18), t19), t20), @ringtheory.field_tac)
   exprojective_projective_alt_c.set(@tactics.prove(@parser.parse_term("!f x y X Y Z W:A.\n        field f\n        ==> (exprojective f (x,y) (X,Y,Z,W) <=>\n             projective f (x,y) (X,Y,Z) /\\\n             W IN ring_carrier f /\\\n             ring_mul f X Y = ring_mul f W Z)"), t21))
@@ -145,7 +145,7 @@ pub fn edwards_excurve() -> @kernel.Thm {
 ///|
 /// EDWARDS_EXCURVE
 fn step_9() -> Unit raise {
-  let t23 = @simp.asm_rewrite_tac(@list.empty())
+  let t23 = @simp.asm_rewrite_tac(@list.List([]))
   let t22 = @tactics.repeat_tac(@tactics.strip_tac)
   let t24 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), exprojective(), @edwards.edwards_curve(), edwards_excurve()])), t22), t23), @ringtheory.field_tac)
   edwards_excurve_v1_c.set(@tactics.prove(@parser.parse_term("!f (a:A) d p Q.\n        field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        exprojective f p Q\n        ==> (edwards_curve (f,a,d) p <=> edwards_excurve (f,a,d) Q)"), t24))
@@ -178,7 +178,7 @@ pub fn edwards_pcurve() -> @kernel.Thm {
 ///|
 /// EDWARDS_PCURVE
 fn step_11() -> Unit raise {
-  let t26 = @simp.asm_rewrite_tac(@list.empty())
+  let t26 = @simp.asm_rewrite_tac(@list.List([]))
   let t25 = @tactics.repeat_tac(@tactics.strip_tac)
   let t27 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@pair.forall_pair_thm(), projective(), @edwards.edwards_curve(), edwards_pcurve()])), t25), t26), @ringtheory.field_tac)
   edwards_pcurve_v1_c.set(@tactics.prove(@parser.parse_term("!f (a:A) d p Q.\n        field f /\\ a IN ring_carrier f /\\ d IN ring_carrier f /\\\n        projective f p Q\n        ==> (edwards_curve (f,a,d) p <=> edwards_pcurve (f,a,d) Q)"), t27))

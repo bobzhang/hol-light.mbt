@@ -58,10 +58,10 @@ test "kernel matches upstream fusion.ml" {
   let b = @kernel.mk_vartype("B")
   let fn_ = (x, y) => @kernel.mk_type("fun", @list.List([x, y]))
   @kernel.new_type("ind", 0)
-  let ind = @kernel.mk_type("ind", @list.empty())
+  let ind = @kernel.mk_type("ind", @list.List([]))
   log.attempt("tyvars", () => slist(sty, @kernel.tyvars(fn_(a, fn_(b, a)))))
   log.attempt("mk_type_bad", () => sty(@kernel.mk_type("fun", @list.List([a]))))
-  log.attempt("mk_type_undef", () => sty(@kernel.mk_type("foo", @list.empty())))
+  log.attempt("mk_type_undef", () => sty(@kernel.mk_type("foo", @list.List([]))))
   log.attempt("new_type_dup", () => {
     @kernel.new_type("ind", 0)
     "ok"
@@ -81,7 +81,7 @@ test "kernel matches upstream fusion.ml" {
   }
   log.attempt("mk_comb_bad", () => stm(app(x, y)))
   log.attempt("mk_abs_bad", () => stm(@kernel.mk_abs(g, x)))
-  log.attempt("mk_const_bad", () => stm(@kernel.mk_const("nope", @list.empty())))
+  log.attempt("mk_const_bad", () => stm(@kernel.mk_const("nope", @list.List([]))))
   let t1 = app(app(f, x), app(g, y))
   log.attempt("frees", () => {
     slist(
@@ -143,7 +143,7 @@ test "kernel matches upstream fusion.ml" {
         ao(mk_abs(x, x), mk_abs(y, y)),
         ao(x, y),
         ao(y, x),
-        ao(@kernel.mk_const("=", @list.empty()), x),
+        ao(@kernel.mk_const("=", @list.List([])), x),
         ao(app(g, x), mk_abs(x, x)),
         ao(mk_abs(x, y), mk_abs(y, x)),
       ]),
@@ -157,7 +157,7 @@ test "kernel matches upstream fusion.ml" {
         cs("b", "aa"),
         cs("", "a"),
         cs("ab", "a"),
-        x.compare(@kernel.mk_const("=", @list.empty())),
+        x.compare(@kernel.mk_const("=", @list.List([]))),
         app(g, x).compare(@kernel.mk_abs(x, x)),
         @kernel.mk_vartype("Z").compare(ind),
         fn_(a, a).compare(fn_(a, b)),
@@ -284,7 +284,7 @@ test "kernel matches upstream fusion.ml" {
   log.attempt("def_again", () => {
     sthm(
       @kernel.new_basic_definition(
-        eq(@kernel.mk_const("ID", @list.empty()), @kernel.mk_abs(x, x)),
+        eq(@kernel.mk_const("ID", @list.List([])), @kernel.mk_abs(x, x)),
       ),
     )
   })

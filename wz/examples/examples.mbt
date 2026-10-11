@@ -6,7 +6,7 @@
 fn step_1() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n) (\\k. &(binom (n,k)) / &2 spow &n)")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_1_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -24,7 +24,7 @@ pub fn wz_example_1() -> @kernel.Thm {
 fn step_2() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (n,k)) pow 2 / &(binom (2 * n,n)))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_2_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -60,7 +60,7 @@ pub fn wz_example_3() -> @kernel.Thm {
 fn step_4() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n + 1)\n         (\\k. &(binom (n + 1,k + 1)) * (&k + &1) * (&k + &1) *\n              &(FACT k) / (&n + &1) spow (&k + &1))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_4_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -78,7 +78,7 @@ pub fn wz_example_4() -> @kernel.Thm {
 fn step_5() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. (-- &1 spow &k * &(binom (n,k)) *\n               &(binom (2 * k,k)) * &4 spow &n / &4 spow &k) /\n              &(binom (2 * n,n)))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_5_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -96,7 +96,7 @@ pub fn wz_example_5() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n + 1) (\\k. -- &1 spow &k * &(binom (n + 1,k)))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_6_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -114,7 +114,7 @@ pub fn wz_example_6() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (n + k,k)) pow 2 * &(binom (n,k)) pow 2)")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_7_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -132,7 +132,7 @@ pub fn wz_example_7() -> @kernel.Thm {
 fn step_8() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..2 * n)\n         (\\k. (-- &1 spow &k * &(binom (2 * n,k)) pow 3) /\n              (-- &1 spow &n * &(FACT (3 * n)) / &(FACT n) pow 3))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_8_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -150,7 +150,7 @@ pub fn wz_example_8() -> @kernel.Thm {
 fn step_9() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n) (\\k. &(binom (n,k)) pow 3)")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_9_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -168,7 +168,7 @@ pub fn wz_example_9() -> @kernel.Thm {
 fn step_10() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. (&1 - &2 * &n) *\n              (-- &1 spow &k * &(binom (n,k)) * &4 spow &k) /\n              &(binom (2 * k,k)))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_10_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -186,7 +186,7 @@ pub fn wz_example_10() -> @kernel.Thm {
 fn step_11() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. -- &1 spow &k * &(binom (n,k)) / &(FACT k))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_11_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -204,7 +204,7 @@ pub fn wz_example_11() -> @kernel.Thm {
 fn step_12() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum UNIV\n         (\\k. -- &1 spow &k *\n              (&(binom (a + n,a + k)) * &(binom (a + c,c + k)) *\n               &(binom (n + c,n + k))) /\n              (&(FACT (a + n + c)) /\n               (&(FACT a) * &(FACT n) * &(FACT c))))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_12_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -222,7 +222,7 @@ pub fn wz_example_12() -> @kernel.Thm {
 fn step_13() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum UNIV\n         (\\k. (-- &1 spow &k * &(binom (2 * n,k)) pow 2) /\n              (-- &1 spow &n * &(binom (2 * n,n))))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_13_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -240,7 +240,7 @@ pub fn wz_example_13() -> @kernel.Thm {
 fn step_14() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n + 1)\n         (\\k. &k * &(binom (n + 1,k)) /\n              ((&n + &1) * &2 spow &n))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_14_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -258,7 +258,7 @@ pub fn wz_example_14() -> @kernel.Thm {
 fn step_15() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n + 1)\n         (\\k. &(binom (n + 1 + k,2 * k)) * &(binom (2 * k,k)) *\n              -- &1 spow &k / (&k + &1))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_15_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -276,7 +276,7 @@ pub fn wz_example_15() -> @kernel.Thm {
 fn step_16() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum UNIV\n         (\\k. ((&n + &2) / (&2 * &k + &1)) *\n              &(binom (n,2 * k)) * &2 spow (&n - &2 * &k - &1) *\n              &(binom (2 * k + 1,k)) / &(binom (2 * n + 1,n)))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_16_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -294,7 +294,7 @@ pub fn wz_example_16() -> @kernel.Thm {
 fn step_17() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum UNIV\n         (\\k. &(binom (2 * n + 1,2 * k)) *\n              &3 spow &k / &2 spow &n)")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_17_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -312,7 +312,7 @@ pub fn wz_example_17() -> @kernel.Thm {
 fn step_18() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (n,k)) pow 2 * &(binom (2 * k,n)))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_18_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -348,7 +348,7 @@ pub fn wz_example_19() -> @kernel.Thm {
 fn step_20() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (n,k)) * &(FACT k) * &(FACT k))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_20_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -402,7 +402,7 @@ pub fn wz_example_22() -> @kernel.Thm {
 fn step_23() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (2 * n + 1,2 * k + 1)) /\n              &2 spow (&2 * &n + &1))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_23_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -420,7 +420,7 @@ pub fn wz_example_23() -> @kernel.Thm {
 fn step_24() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. (&(binom (n,2 * k)) * &(binom (2 * k,k)) *\n               &2 spow &n) /\n              (&4 spow &k * &(binom (2 * n,n))))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_24_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -456,7 +456,7 @@ pub fn wz_example_25() -> @kernel.Thm {
 fn step_26() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n) (\\k. &(binom (n,k)) pow 4)")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_26_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -474,7 +474,7 @@ pub fn wz_example_26() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. ((&2 * &n + &1) / &4 spow &n) *\n              &(binom (2 * n,n)) * -- &1 spow &k *\n              &(binom (n,k)) * &2 spow &k / (&2 * &k + &1))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_27_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -492,7 +492,7 @@ pub fn wz_example_27() -> @kernel.Thm {
 fn step_28() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. (&n + &m + &1) * &(binom (n + m,m)) *\n              -- &1 spow &k * &(binom (n,k)) / (&m + &k + &1))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_28_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -510,7 +510,7 @@ pub fn wz_example_28() -> @kernel.Thm {
 fn step_29() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. (&(binom (2 * n + 1,2 * k)) *\n               &(binom (2 * k,k)) / &4 spow &k) /\n              (&(binom (4 * n + 1,2 * n)) / &4 spow &n))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_29_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -546,7 +546,7 @@ pub fn wz_example_30() -> @kernel.Thm {
 fn step_31() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. (-- &1 spow (&n - &k) * &4 spow &k *\n               &(binom (n + k + 1,2 * k + 1))) / (&n + &1))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_31_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -637,7 +637,7 @@ pub fn wz_example_35() -> @kernel.Thm {
 fn step_36() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. -- &1 spow &k * &(binom (2 * n + 1,2 * k)))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_36_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -655,7 +655,7 @@ pub fn wz_example_36() -> @kernel.Thm {
 fn step_37() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. &(binom (2 * n + 1,2 * k + 1)) * &k /\n              ((&2 * &n - &1) * &4 spow (&n - &1)))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_37_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -709,7 +709,7 @@ pub fn wz_example_39() -> @kernel.Thm {
 fn step_40() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..2 * n)\n         (\\k. (-- &1 spow &k * &(binom (2 * n,k)) *\n               &(binom (2 * n + 2 * k,n + k)) *\n               &2 spow (&2 * &n - &k)) /\n              &(binom (2 * n,n)))")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_40_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 
@@ -745,7 +745,7 @@ pub fn wz_example_41() -> @kernel.Thm {
 fn step_42() -> Unit raise {
   let ntm = @parser.parse_term("n:num")
   let stm = @parser.parse_term("sum (0..n)\n         (\\k. (&(binom (n,k)) pow 2 *\n               &(binom (3 * n + k,2 * n))) /\n              &(binom (3 * n,n)) pow 2)")
-  let atm = @list.empty()
+  let atm = @list.List([])
   wz_example_42_c.set(@maxima.wz_maxima_prove(ntm, stm, atm))
 }
 

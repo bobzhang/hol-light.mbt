@@ -26,7 +26,7 @@ pub(all) enum Shell {
 ///|
 /// system_shells
 fn step_1() -> Unit raise {
-  system_shells_c.set(Ref::{ val: @list.empty() })
+  system_shells_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|
@@ -143,7 +143,7 @@ pub fn shells(x22 : Unit) -> @list.List[String] raise {
   fn shells_p(x23 : @list.List[Shell]) -> @list.List[String] raise {
     let shl = x23
     if @list.List::is_empty(shl) {
-      @list.empty()
+      @list.List([])
     } else {
       match @lib.hd(shl) {
         Shell::Shell(name, _) => shells_p(@lib.tl(shl)).prepend(name)
@@ -205,7 +205,7 @@ fn step_2() -> Unit raise {
   let one_one = @list.List([@nums.suc_inj()])
   let t42 = @struct_equal.one_step_recty_eq_conv(induct, distinct, one_one)
   let t41 = @list.List([("PRE", @bool.conjunct2(@arith.pre()))])
-  num_shell_c.set(Shell::Shell("num", ShellInfo::{ arg_types: @list.empty(), constructors: @list.List([("0", @list.empty(), @list.empty()), ("SUC", @list.List([@parser.parse_type("num")]), t41)]), induct: induct, cases: cases, distinct: distinct, one_one: one_one, struct_conv: t42 }))
+  num_shell_c.set(Shell::Shell("num", ShellInfo::{ arg_types: @list.List([]), constructors: @list.List([("0", @list.List([]), @list.List([])), ("SUC", @list.List([@parser.parse_type("num")]), t41)]), induct: induct, cases: cases, distinct: distinct, one_one: one_one, struct_conv: t42 }))
 }
 
 ///|
@@ -226,7 +226,7 @@ fn step_3() -> Unit raise {
   let one_one = @list.List([@lists.cons_11()])
   let t44 = @struct_equal.one_step_recty_eq_conv(induct, distinct, one_one)
   let t43 = @parser.parse_type("('a)list")
-  let t45 = @list.List([("NIL", @list.empty(), @list.empty()), ("CONS", @list.List([@parser.parse_type("'a"), t43]), @list.List([("HD", @lists.hd()), ("TL", @lists.tl())]))])
+  let t45 = @list.List([("NIL", @list.List([]), @list.List([])), ("CONS", @list.List([@parser.parse_type("'a"), t43]), @list.List([("HD", @lists.hd()), ("TL", @lists.tl())]))])
   list_shell_c.set(Shell::Shell("list", ShellInfo::{ arg_types: @list.List([@parser.parse_type("'a")]), constructors: t45, induct: induct, cases: cases, distinct: distinct, one_one: one_one, struct_conv: t44 }))
 }
 

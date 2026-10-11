@@ -187,7 +187,7 @@ fn step_4() -> Unit raise {
   let t14 = Ref::{ val: @bool.truth() }
   let t15 = Ref::{ val: @bool.truth() }
   let t16 = Ref::{ val: @bool.truth() }
-  let (aitvars, aitdiff, aitnorm, aitmat) = (Ref::{ val: @list.empty() }, t16, t15, t14)
+  let (aitvars, aitdiff, aitnorm, aitmat) = (Ref::{ val: @list.List([]) }, t16, t15, t14)
   aitvars_c.set(aitvars)
   aitdiff_c.set(aitdiff)
   aitnorm_c.set(aitnorm)
@@ -385,7 +385,7 @@ pub fn tex() -> Ref[@list.List[(@kernel.Term, @kernel.Thm)]] {
 ///|
 /// tvars, tsgns, tdivs, tdiff, tnorm, tcont, tmat, tex
 fn step_6() -> Unit raise {
-  let t32 = Ref::{ val: @list.empty() }
+  let t32 = Ref::{ val: @list.List([]) }
   let t33 = Ref::{ val: @bool.truth() }
   let t34 = Ref::{ val: fn(x30 : @kernel.Thm) -> ((@list.List[(@kernel.Term, @kernel.Thm)]) -> @kernel.Thm raise) raise {
     let x = x30
@@ -396,9 +396,9 @@ fn step_6() -> Unit raise {
   } }
   let t35 = Ref::{ val: @bool.truth() }
   let t36 = Ref::{ val: @bool.truth() }
-  let t37 = Ref::{ val: @list.empty() }
-  let t38 = Ref::{ val: @list.empty() }
-  let (tvars, tsgns, tdivs, tdiff, tnorm, tcont, tmat, tex) = (Ref::{ val: @list.empty() }, t38, t37, t36, t35, t34, t33, t32)
+  let t37 = Ref::{ val: @list.List([]) }
+  let t38 = Ref::{ val: @list.List([]) }
+  let (tvars, tsgns, tdivs, tdiff, tnorm, tcont, tmat, tex) = (Ref::{ val: @list.List([]) }, t38, t37, t36, t35, t34, t33, t32)
   tvars_c.set(tvars)
   tsgns_c.set(tsgns)
   tdivs_c.set(tdivs)

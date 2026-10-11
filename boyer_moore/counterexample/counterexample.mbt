@@ -76,10 +76,10 @@ pub fn shell_type_match(x5 : @kernel.HolType) -> @list.List[(@kernel.HolType, @k
     }
     @lib.itlist(fn(x6 : @list.List[(@kernel.HolType, @kernel.HolType)], x7 : @list.List[(@kernel.HolType, @kernel.HolType)]) -> @list.List[(@kernel.HolType, @kernel.HolType)] raise {
       @lib.union(x6, x7)
-    }, @lib.map(shell_type_match, tyargs), @list.empty())
+    }, @lib.map(shell_type_match, tyargs), @list.List([]))
   } else {
     try {
-      @basics.type_match(ty, @parser.parse_type("num"), @list.empty())
+      @basics.type_match(ty, @parser.parse_type("num"), @list.List([]))
     } catch {
       Failure(_) => raise Failure(("Unknown type '" + (@printer.string_of_type(ty) + "' that doesn't match 'num'!")))
       e => raise e
@@ -247,7 +247,7 @@ pub fn random_grounding(x39 : Int64, x40 : @kernel.Term) -> @kernel.Term raise {
   let pairs = @lib.zip(vars, examples)
   let insts = @lib.map(fn(x42 : (@kernel.Term, @kernel.Term)) -> (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise {
     let (v, e) = x42
-    @drule.term_match(@list.empty(), v, e)
+    @drule.term_match(@list.List([]), v, e)
   }, pairs)
   @lib.itlist(@drule.instantiate, insts, tm)
 }

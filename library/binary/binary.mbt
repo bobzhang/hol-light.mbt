@@ -490,7 +490,7 @@ pub fn bitset_eq_empty() -> @kernel.Thm {
 ///|
 /// BINARYSUM_BOUND_LEMMA
 fn step_13() -> Unit raise {
-  let t52 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t52 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t49 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t48 = @simp.rewrite_tac(
     @list.List([
@@ -782,7 +782,7 @@ fn step_15() -> Unit raise {
     @parser.parse_term("nsum {i | i < k /\\ i IN s} (\\j. 2 EXP j)"),
   )
   let t69 = @tactics.match_mp_tac(@arith.div_uniq())
-  let t67 = @simp.asm_rewrite_tac(@list.empty())
+  let t67 = @simp.asm_rewrite_tac(@list.List([]))
   let t66 = @class.asm_cases_tac(@parser.parse_term("(i:num) IN s"))
   let t65 = @tactics.x_gen_tac(@parser.parse_term("i:num"))
   let t64 = @simp.asm_simp_tac(
@@ -1021,7 +1021,7 @@ fn step_16() -> Unit raise {
     ),
     @tactics.all_tac,
   ])
-  let t96 = @simp.asm_rewrite_tac(@list.empty())
+  let t96 = @simp.asm_rewrite_tac(@list.List([]))
   let t95 = @class.asm_cases_tac(@parser.parse_term("(i:num) IN s"))
   let t94 = @simp.asm_simp_tac(@list.List([binarysum_div()]))
   let t93 = @tactics.x_gen_tac(@parser.parse_term("i:num"))

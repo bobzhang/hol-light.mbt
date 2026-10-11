@@ -14,7 +14,7 @@ fn step_1() -> Unit raise {
   }
   list_conjuncts_c.set(fn(x3 : @kernel.Term) -> @list.List[@kernel.Term] raise {
     let tm_1 = x3
-    @lib.rev(aux(@list.empty(), tm_1))
+    @lib.rev(aux(@list.List([]), tm_1))
   })
 }
 
@@ -65,7 +65,7 @@ pub fn[TA] process_lines(x7 : (String) -> @list.List[TA] raise, x8 : (@list.List
     let l = try {
       @list.List([@lib.input_line(fd)])
     } catch {
-      @lib.EndOfFile => @list.empty()
+      @lib.EndOfFile => @list.List([])
       e => raise e
     }
     if @list.List::is_empty(l) {
@@ -76,7 +76,7 @@ pub fn[TA] process_lines(x7 : (String) -> @list.List[TA] raise, x8 : (@list.List
           }
         })(x13)
         s15(x14)
-      }, acc, @list.empty())
+      }, acc, @list.List([]))
     } else {
       let y = f(@lib.hd(l))
       suck_lines(if p(y) {
@@ -86,7 +86,7 @@ pub fn[TA] process_lines(x7 : (String) -> @list.List[TA] raise, x8 : (@list.List
       })
     }
   }
-  let data = suck_lines(@list.empty())
+  let data = suck_lines(@list.List([]))
   @lib.close_in(fd)
   data
 }
@@ -99,7 +99,7 @@ pub fn parse_clauses(x16 : @list.List[@list.List[Int64]], x17 : @list.List[Int64
   let l = x18
   match l {
     More("", tail=t) => parse_clauses(acc, cur, t)
-    More("0", tail=t_1) => parse_clauses(acc.prepend(@lib.rev(cur)), @list.empty(), t_1)
+    More("0", tail=t_1) => parse_clauses(acc.prepend(@lib.rev(cur)), @list.List([]), t_1)
     More(n, tail=t_2) => parse_clauses(acc, cur.prepend(@lib.int63_of_string(n)), t_2)
     Empty => @lib.rev(acc)
   }
@@ -128,7 +128,7 @@ pub fn read_dimacs(x19 : String) -> @list.List[@list.List[Int64]] raise {
       _ => true
     }
   }, fname)
-  parse_clauses(@list.empty(), @list.empty(), l)
+  parse_clauses(@list.List([]), @list.List([]), l)
 }
 
 ///|

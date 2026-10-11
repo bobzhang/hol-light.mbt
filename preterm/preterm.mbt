@@ -30,7 +30,7 @@ pub let type_invention_error : Ref[Bool] = Ref::{ val: false, }
 ///|
 /// Implicit types or type schemes for non-constants.
 pub let the_implicit_types : Ref[List[(String, HolType)]] = Ref::{
-  val: @list.empty(),
+  val: @list.List([]),
 }
 
 // ---------------------------------------------------------------------------
@@ -92,7 +92,7 @@ pub fn overload_interface(sym : String, tm : Term) -> Unit raise {
     e => raise e
   }
   let namty = dest_const_or_var(tm)
-  if !@lib.can(t => @basics.type_match(gty, t, @list.empty()), namty.1) {
+  if !@lib.can(t => @basics.type_match(gty, t, @list.List([])), namty.1) {
     raise Failure("Not an instance of type skeleton")
   }
   let interface = @lib.filter(
@@ -115,7 +115,7 @@ pub fn prioritize_overload(ty : HolType) -> Unit raise {
             ty,
             @lib.map(
               (p : (HolType, HolType)) => p.0,
-              @basics.type_match(gty, t, @list.empty()),
+              @basics.type_match(gty, t, @list.List([])),
             ),
           )
         },
@@ -142,7 +142,7 @@ pub fn prioritize_overload(ty : HolType) -> Unit raise {
 
 ///|
 let the_type_abbreviations : Ref[List[(String, HolType)]] = Ref::{
-  val: @list.empty(),
+  val: @list.List([]),
 }
 
 ///|
@@ -173,7 +173,7 @@ pub fn type_abbrevs() -> List[(String, HolType)] {
 // ---------------------------------------------------------------------------
 
 ///|
-let hcs : Ref[List[String]] = Ref::{ val: @list.empty(), }
+let hcs : Ref[List[String]] = Ref::{ val: @list.List([]), }
 
 ///|
 pub fn hide_constant(c : String) -> Unit {
@@ -209,7 +209,7 @@ pub extend Pretype with @debug.Debug::{to_repr}
 
 ///|
 /// Dummy pretype for the parser to use before typing.
-pub let dpty : Pretype = Ptycon("", @list.empty())
+pub let dpty : Pretype = Ptycon("", @list.List([]))
 
 ///|
 pub fn pretype_of_type(ty : HolType) -> Pretype {
@@ -269,7 +269,7 @@ fn pmk_cv(s : String, pty : Pretype) -> Preterm {
 
 ///|
 fn pmk_numeral(n : @num.Num) -> Preterm raise {
-  let num_pty = Ptycon("num", @list.empty())
+  let num_pty = Ptycon("num", @list.List([]))
   let fun_pty = Ptycon("fun", @list.List([num_pty, num_pty]))
   let numeral = Constp("NUMERAL", fun_pty)
   let bit0 = Constp("BIT0", fun_pty)
@@ -357,7 +357,7 @@ fn free_stvs(ty : Pretype) -> List[Int64] {
   fn go(ty : Pretype) -> List[Int64] {
     match ty {
       Stv(n) => @list.singleton(n)
-      Utv(_) => @list.empty()
+      Utv(_) => @list.List([])
       Ptycon(_, args) => @lib.flat(args.map(go))
     }
   }
@@ -510,19 +510,19 @@ fn typify(
   match ptm {
     Varp(s, _) if @lib.can(n => @lib.assoc(n, venv), s) => {
       let ty1 = @lib.assoc(s, venv)
-      (Varp(s, ty1), @list.empty(), unify(Some(ptm), uenv, ty1, ty))
+      (Varp(s, ty1), @list.List([]), unify(Some(ptm), uenv, ty1, ty))
     }
     Varp(s, _) if @lib.can(@num.num_of_string, s) => {
       let t = pmk_numeral(@num.num_of_string(s))
-      let ty1 = Ptycon("num", @list.empty())
-      (t, @list.empty(), unify(Some(ptm), uenv, ty1, ty))
+      let ty1 = Ptycon("num", @list.List([]))
+      (t, @list.List([]), unify(Some(ptm), uenv, ty1, ty))
     }
     Varp(s, _) => {
       @lib.warn(s != "" && @printer.isnum(s), "Non-numeral begins with a digit")
       if !is_hidden(s) && @lib.can(get_generic_type, s) {
         let pty = pretype_instance(get_generic_type(s))
         let ptm = Constp(s, pty)
-        (ptm, @list.empty(), unify(Some(ptm), uenv, pty, ty))
+        (ptm, @list.List([]), unify(Some(ptm), uenv, pty, ty))
       } else {
         let ptm = Varp(s, ty)
         if !@lib.can(get_var_type, s) {
@@ -553,7 +553,7 @@ fn typify(
       let ty3 = Ptycon("fun", @list.List([ty1, ty2]))
       let uenv0 = unify(Some(ptm), uenv, ty3, ty)
       let (v1, venv1, uenv1) = {
-        let (v1, venv1, uenv1) = typify(ty1, v, @list.empty(), uenv0)
+        let (v1, venv1, uenv1) = typify(ty1, v, @list.List([]), uenv0)
         match v1 {
           Constp(s, _) if ignore_constant_varstruct.val =>
             (Varp(s, ty1), @list.singleton((s, ty1)), uenv0)
@@ -657,7 +657,7 @@ pub fn type_of_pretype(ty : Pretype) -> HolType raise {
 }
 
 ///|
-let stvs_translated_terms : Ref[List[String]] = Ref::{ val: @list.empty(), }
+let stvs_translated_terms : Ref[List[String]] = Ref::{ val: @list.List([]), }
 
 ///|
 fn note_translated(s : String, translated : Bool) -> Unit {
@@ -698,7 +698,7 @@ fn term_of_preterm_rec(ptm : Preterm) -> Term raise {
 /// Translate a (fully typed) preterm to a term, reporting invented type
 /// variables.
 pub fn term_of_preterm(ptm : Preterm) -> Term raise {
-  stvs_translated_terms.val = @list.empty()
+  stvs_translated_terms.val = @list.List([])
   let tm = term_of_preterm_rec(ptm)
   if !stvs_translated_terms.val.is_empty() {
     if type_invention_error.val {

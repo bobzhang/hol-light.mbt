@@ -23,7 +23,7 @@ fn step_1() -> Unit raise {
     let n_1 = x4
     fn(x5 : @kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
       let tm_1 = x5
-      strip(n_1, tm_1, @list.empty())
+      strip(n_1, tm_1, @list.List([]))
     }
   })
 }
@@ -608,7 +608,7 @@ fn step_4() -> Unit raise {
         )(x127)
       },
       uncs,
-      @list.empty(),
+      @list.List([]),
     )
     let xargs_1 = @lib.map(
       fn(x130 : @kernel.Term) -> @list.List[@kernel.Term] raise {
@@ -1047,8 +1047,8 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash, TB : Eq + @lib.OCompare + @lib.OHash] g
   x43 : @list.List[(TA, TB)],
 ) -> @list.List[(TA, TB)] raise {
   let (avs_1, plis) = (x42, x43)
-  if plis == @list.empty() {
-    @list.empty()
+  if plis == @list.List([]) {
+    @list.List([])
   } else {
     match plis {
       More(h, tail=t_1) => {
@@ -1503,7 +1503,7 @@ fn step_6() -> Unit raise {
         @list.List[@kernel.Thm],
       ) -> @kernel.Thm raise,
     ) raise = @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t232)
-    let t233 = @simp.asm_rewrite_tac(@list.empty())
+    let t233 = @simp.asm_rewrite_tac(@list.List([]))
     @tactics.then_tac(@tactics.repeat_tac(mono_step_tac), t233)(gl)
   })
 }
@@ -1698,7 +1698,7 @@ pub fn prove_monotonicity_hyps(x : @kernel.Thm) -> @kernel.Thm raise {
 ///|
 /// the_inductive_definitions
 fn step_8() -> Unit raise {
-  the_inductive_definitions_c.set(Ref::{ val: @list.empty(), })
+  the_inductive_definitions_c.set(Ref::{ val: @list.List([]), })
 }
 
 ///|
@@ -1747,7 +1747,7 @@ fn step_9() -> Unit raise {
   ) -> @kernel.Term raise {
     let qvs = x244
     let tm = x245
-    if @lib.intersect(@kernel.frees(tm), qvs) == @list.empty() &&
+    if @lib.intersect(@kernel.frees(tm), qvs) == @list.List([]) &&
       @lib.forall(
         fn(x246 : @kernel.Term) -> Bool raise { @kernel.is_var(x246) },
         @basics.strip_comb(tm).1,
@@ -1916,7 +1916,7 @@ fn step_9() -> Unit raise {
     )
     let schems = @lib.setify(schem)
     if @kernel.is_var(@lib.hd(schem)) {
-      (clauses, @list.empty())
+      (clauses, @list.List([]))
     } else if !(Int::to_int64(
         @lib.length(
           @lib.setify(

@@ -268,7 +268,7 @@ fn step_5() -> Unit raise {
       }
     })(((x16 : @kernel.Thm) => @equal.ap_term(t15, x16))(x17))
   })
-  let t11 = @simp.asm_rewrite_tac(@list.empty())
+  let t11 = @simp.asm_rewrite_tac(@list.List([]))
   let t20 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -2066,7 +2066,7 @@ fn step_27() -> Unit raise {
       @tactics.prove(x180.0, x180.1)
     })(t182),
   )
-  let t183 = @simp.rewrite_tac(@list.empty())
+  let t183 = @simp.rewrite_tac(@list.List([]))
   let tth = @tactics.prove(
     @parser.parse_term(
       "((if T then x:real else y) = x) /\\ ((if F then x:real else y) = y)",

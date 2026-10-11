@@ -145,8 +145,8 @@ test "equal matches equal.ml" {
     @equal.mk_primed_var(@list.List([tm("x:num"), tm("x':num")]), tm("x:bool"))
   })
   t("mk_primed_var_const", () => {
-    let _ = @equal.mk_primed_var(@list.empty(), tm("c':bool"))
-    @equal.mk_primed_var(@list.empty(), @kernel.mk_var("c", @kernel.bool_ty))
+    let _ = @equal.mk_primed_var(@list.List([]), tm("c':bool"))
+    @equal.mk_primed_var(@list.List([]), @kernel.mk_var("c", @kernel.bool_ty))
   })
   t("lhand", () => @equal.lhand(tm("(a:num) + b")))
   t("genvar_after", () => @basics.genvar(@kernel.bool_ty))

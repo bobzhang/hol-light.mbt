@@ -40,7 +40,7 @@ fn step_1() -> Unit raise {
 ///|
 /// ORDERED_CONS
 fn step_2() -> Unit raise {
-  let t11 = @meson.meson_tac(@list.empty())
+  let t11 = @meson.meson_tac(@list.List([]))
   let t10 = @simp.rewrite_tac(@list.List([@lists.not_cons_nil(), @lists.cons_11()]))
   let t7 = @simp.once_rewrite_rule(@list.List([ordered_cases()]))
   let t9 = @tactics.disch_then(fn(x8 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -93,7 +93,7 @@ pub fn ordered_append() -> @kernel.Thm {
 ///|
 /// ORDERED_PAIRWISE
 fn step_4() -> Unit raise {
-  let t22 = @meson.meson_tac(@list.empty())
+  let t22 = @meson.meson_tac(@list.List([]))
   let t21 = @simp.simp_tac(@list.List([ordered_cons()]))
   let t20 = @simp.rewrite_tac(@list.List([@lists.pairwise(), ordered_rules()]))
   let t19 = @tactics.match_mp_tac(@ind_types.list_induct())
@@ -224,7 +224,7 @@ pub fn mem_qsort() -> @kernel.Thm {
 ///|
 /// ORDERED_QSORT
 fn step_11() -> Unit raise {
-  let t46 = @meson.asm_meson_tac(@list.empty())
+  let t46 = @meson.asm_meson_tac(@list.List([]))
   let t45 = @simp.rewrite_tac(@list.List([@equal.gsym(@lists.all_mem())]))
   let t44 = @simp.asm_simp_tac(@list.List([@morelist.length_filter_le()]))
   let t43 = @simp.rewrite_tac(@list.List([ordered_append(), ordered_cons(), @lists.all(), all_qsort(), @lists.all_t()]))

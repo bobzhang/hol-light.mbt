@@ -387,7 +387,7 @@ pub fn wz_maxima_parse_atom(x34 : @list.List[String]) -> ((@kernel.Term, @list.L
 pub fn wz_maxima_parse_object(x38 : @list.List[String]) -> ((WzMaximaObject, @list.List[String])) raise {
   let inp = x38
   match inp {
-    More("[", tail=More("]", tail=rst)) => (WzMaximaObject::Wzlist(@list.empty()), rst)
+    More("[", tail=More("]", tail=rst)) => (WzMaximaObject::Wzlist(@list.List([])), rst)
     More("[", tail=rst_1) => {
       let (x, rst_p) = wz_maxima_parse_object(rst_1)
       wz_maxima_parse_list(@list.List([x]), rst_p)

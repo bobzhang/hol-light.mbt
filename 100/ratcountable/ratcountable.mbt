@@ -41,7 +41,7 @@ pub fn countable() -> @kernel.Thm {
 /// COUNTABLE_RATIONALS
 fn step_4() -> Unit raise {
   let t16 = @meson.meson_tac(@list.List([@card.card_mul_absorb_le(), @card.card_le_refl(), @sets.num_infinite()]))
-  let t15 = @meson.meson_tac(@list.empty())
+  let t15 = @meson.meson_tac(@list.List([]))
   let t14 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm(), rational()]))
   let t13 = @tactics.conv_tac(@equal.once_depth_conv(@pair.gen_beta_conv))
   let t12 = @tactics.exists_tac(@parser.parse_term("\\(p,q). &p / &q"))
@@ -117,7 +117,7 @@ pub fn denumerable_rationals() -> @kernel.Thm {
 ///|
 /// DENUMERABLE_RATIONALS_EXPAND
 fn step_7() -> Unit raise {
-  let t36 = @meson.meson_tac(@list.empty())
+  let t36 = @meson.meson_tac(@list.List([]))
   let t35 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t34 = @simp.rewrite_tac(@list.List([@sets.in_univ(), @sets.in_elim_thm()]))
   let t33 = @simp.rewrite_tac(@list.List([@sets.eq_c()]))

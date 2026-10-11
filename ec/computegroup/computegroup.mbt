@@ -4,7 +4,7 @@
 ///|
 /// curve_clauses
 fn step_1() -> Unit raise {
-  curve_clauses_c.set(Ref::{ val: @list.empty() })
+  curve_clauses_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn curve_clauses() -> Ref[@list.List[@kernel.Thm]] {
 ///|
 /// curvezero_clauses
 fn step_2() -> Unit raise {
-  curvezero_clauses_c.set(Ref::{ val: @list.empty() })
+  curvezero_clauses_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn curvezero_clauses() -> Ref[@list.List[@kernel.Thm]] {
 ///|
 /// curveneg_clauses
 fn step_3() -> Unit raise {
-  curveneg_clauses_c.set(Ref::{ val: @list.empty() })
+  curveneg_clauses_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|
@@ -49,7 +49,7 @@ pub fn curveneg_clauses() -> Ref[@list.List[@kernel.Thm]] {
 ///|
 /// curveadd_clauses
 fn step_4() -> Unit raise {
-  curveadd_clauses_c.set(Ref::{ val: @list.empty() })
+  curveadd_clauses_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|
@@ -64,7 +64,7 @@ pub fn curveadd_clauses() -> Ref[@list.List[@kernel.Thm]] {
 ///|
 /// ecgroup_carriers
 fn step_5() -> Unit raise {
-  ecgroup_carriers_c.set(Ref::{ val: @list.empty() })
+  ecgroup_carriers_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|
@@ -79,7 +79,7 @@ pub fn ecgroup_carriers() -> Ref[@list.List[@kernel.Thm]] {
 ///|
 /// ecgroup_ids
 fn step_6() -> Unit raise {
-  ecgroup_ids_c.set(Ref::{ val: @list.empty() })
+  ecgroup_ids_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|
@@ -94,7 +94,7 @@ pub fn ecgroup_ids() -> Ref[@list.List[@kernel.Thm]] {
 ///|
 /// ecgroup_invs
 fn step_7() -> Unit raise {
-  ecgroup_invs_c.set(Ref::{ val: @list.empty() })
+  ecgroup_invs_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|
@@ -109,7 +109,7 @@ pub fn ecgroup_invs() -> Ref[@list.List[@kernel.Thm]] {
 ///|
 /// ecgroup_muls
 fn step_8() -> Unit raise {
-  ecgroup_muls_c.set(Ref::{ val: @list.empty() })
+  ecgroup_muls_c.set(Ref::{ val: @list.List([]) })
 }
 
 ///|

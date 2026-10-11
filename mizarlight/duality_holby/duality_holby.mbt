@@ -123,14 +123,14 @@ pub fn fano_incidence() -> @list.List[(Int64, Int64)] {
 /// `fano_point`
 pub fn fano_point(x5 : Int64) -> @kernel.Term raise {
   let i = x5
-  @kernel.mk_const(("Point_" + Int64::to_string(i)), @list.empty())
+  @kernel.mk_const(("Point_" + Int64::to_string(i)), @list.List([]))
 }
 
 ///|
 /// `fano_line`
 pub fn fano_line(x6 : Int64) -> @kernel.Term raise {
   let i_1 = x6
-  @kernel.mk_const(("Line_" + Int64::to_string(i_1)), @list.empty())
+  @kernel.mk_const(("Line_" + Int64::to_string(i_1)), @list.List([]))
 }
 
 ///|
@@ -211,7 +211,7 @@ pub fn on_clauses() -> @kernel.Thm {
 ///|
 /// FORALL_POINT
 fn step_12() -> Unit raise {
-  let t11 = @simp.simp_tac(@list.empty())
+  let t11 = @simp.simp_tac(@list.List([]))
   let t12 = @tactics.then_tac(@tactics.then_tac(@tactics.eq_tac, @simp.rewrite_tac(@list.List([point_induct()]))), t11)
   forall_point_c.set(@tactics.prove(@parser.parse_term("(!p. P p) <=> P Point_1 /\\ P Point_2 /\\ P Point_3 /\\ P Point_4 /\\\n                 P Point_5 /\\ P Point_6 /\\ P Point_7"), t12))
 }
@@ -245,7 +245,7 @@ pub fn exists_point() -> @kernel.Thm {
 ///|
 /// FORALL_LINE
 fn step_14() -> Unit raise {
-  let t15 = @simp.simp_tac(@list.empty())
+  let t15 = @simp.simp_tac(@list.List([]))
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.eq_tac, @simp.rewrite_tac(@list.List([line_induct()]))), t15)
   forall_line_c.set(@tactics.prove(@parser.parse_term("(!p. P p) <=> P Line_1 /\\ P Line_2 /\\ P Line_3 /\\ P Line_4 /\\\n                 P Line_5 /\\ P Line_6 /\\ P Line_7"), t16))
 }

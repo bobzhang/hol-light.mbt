@@ -74,7 +74,7 @@ module Ir = struct
               | _ -> p "("; p (String.concat ", " ps); p ")");
              p " => "; pbody b)
     | Tuple es -> p "("; plist es; p ")"
-    | ListLit [] -> p "@list.empty()"
+    | ListLit [] -> p "@list.List([])"
     | ListLit es -> p "@list.List(["; plist es; p "])"
     | Prepend (tl, hd) -> pfun tl; p ".prepend("; pexp hd; p ")"
     | Concat (a, b) -> pfun a; p ".concat("; pexp b; p ")"

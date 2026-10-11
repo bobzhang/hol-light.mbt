@@ -173,7 +173,7 @@ pub fn valid() -> @kernel.Thm {
 ///|
 /// MODAL_TAC
 fn step_15() -> Unit raise {
-  let t10 = @meson.meson_tac(@list.empty())
+  let t10 = @meson.meson_tac(@list.List([]))
   modal_tac_c.set(@tactics.then_tac(@simp.rewrite_tac(@list.List([valid(), @pair.forall_pair_thm(), holds_in(), holds()])), t10))
 }
 
@@ -206,7 +206,7 @@ fn step_16() -> Unit raise {
       }
     })(t16(x17))
   })
-  let t12 = @list.List([@tactics.all_tac, @simp.simp_tac(@list.empty())])
+  let t12 = @list.List([@tactics.all_tac, @simp.simp_tac(@list.List([]))])
   let t20 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac), t12), @tactics.disch_tac), @tactics.gen_tac), t18), t19)
   holds_forall_lemma_c.set(@tactics.prove(@parser.parse_term("!W R P. (!p V. P (holds (W,R) V p)) <=> (!p:W->bool. P p)"), t20))
 }
@@ -244,7 +244,7 @@ pub fn modal_schema_tac(x : @tactics.Goal) -> @tactics.Goalstate raise {
 ///|
 /// MODAL_TRANS
 fn step_18() -> Unit raise {
-  let t26 = @tactics.then_tac(modal_schema_tac, @meson.meson_tac(@list.empty()))
+  let t26 = @tactics.then_tac(modal_schema_tac, @meson.meson_tac(@list.List([])))
   modal_trans_c.set(@tactics.prove(@parser.parse_term("!W R.\n     (!w w' w'':W. w IN W /\\ w' IN W /\\ w'' IN W /\\\n                   R w w' /\\ R w' w''\n                   ==> R w w'') <=>\n     (!p. holds_in (W,R) (Box p --> Box Box p))"), t26))
 }
 
@@ -311,7 +311,7 @@ fn step_20() -> Unit raise {
 ///|
 /// MINOR_CLAUSES
 fn step_21() -> Unit raise {
-  let t28 = @meson.meson_tac(@list.empty())
+  let t28 = @meson.meson_tac(@list.List([]))
   let t27 = @ind_types.injectivity("form")
   let t29 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @sets.in_insert(), @sets.not_in_empty(), in_minor_cases(), @ind_types.distinctness("form"), t27])), t28)
   minor_clauses_c.set(@tactics.prove(@parser.parse_term("MINOR False = {} /\\\n   MINOR True = {} /\\\n   MINOR (Atom s) = {} /\\\n   (!p. MINOR (Not p) = {p}) /\\\n   (!p q. MINOR (p && q) = {p,q}) /\\\n   (!p q. MINOR (p || q) = {p,q}) /\\\n   (!p q. MINOR (p --> q) = {p,q}) /\\\n   (!p q. MINOR (p <-> q) = {p,q}) /\\\n   (!p. MINOR (Box p) = {p})"), t29))
@@ -489,11 +489,11 @@ fn step_31() -> Unit raise {
 ///|
 /// COUNTABLE_FORM
 fn step_32() -> Unit raise {
-  let t124 = @meson.meson_tac(@list.empty())
+  let t124 = @meson.meson_tac(@list.List([]))
   let t122 = @ind_types.injectivity("form")
   let t123 = @simp.rewrite_tac(@list.List([@sets.in_image(), @pair.exists_pair_thm(), @sets.in_cross(), @sets.in_insert(), @sets.not_in_empty(), @ind_types.distinctness("form"), t122]))
   let t121 = @simp.asm_simp_tac(@list.List([@sets.fun_in_image(), @sets.in_univ()]))
-  let t120 = @tactics.hyp_tac(@simp.rewrite_tac, "u_alt max")(@list.empty())
+  let t120 = @tactics.hyp_tac(@simp.rewrite_tac, "u_alt max")(@list.List([]))
   let t117 = @equal.gsym(@arith.add1())
   let t118 = @list.List([@arith.lt_0(), @sets.in_union(), @sets.in_insert(), @sets.not_in_empty(), @ind_types.distinctness("form"), t117, @arith.lt_suc()])
   let t119 = @tactics.hyp_tac(@simp.rewrite_tac, "size")(t118)
@@ -505,7 +505,7 @@ fn step_32() -> Unit raise {
     @simp.rewrite_tac(@list.List([@equal.gsym(th_3)]))
   }), t113), @tactics.all_tac])
   let t110 = @theorems.claim_tac("max", @parser.parse_term("!p q:form n:num. MAX (size p) (size q) < n <=> p IN u n /\\ q IN u n"))
-  let t108 = @sets.set_tac(@list.empty())
+  let t108 = @sets.set_tac(@list.List([]))
   let t109 = @list.List([@tactics.then_tac(@tactics.use_then("u", fn(x106 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th_2 = x106
     @simp.rewrite_tac(@list.List([@equal.gsym(th_2)]))
@@ -539,13 +539,13 @@ fn step_32() -> Unit raise {
     @simp.rewrite_tac(@list.List([@equal.gsym(th_1)]))
   }), t85), t90])
   let t82 = @simp.rewrite_tac(@list.List([@sets.forall_in_gspec(), @sets.in_univ()]))
-  let t80 = @meson.meson_tac(@list.empty())
+  let t80 = @meson.meson_tac(@list.List([]))
   let t79 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.forall_in_gspec(), @sets.in_image(), @sets.in_univ()]))
   let t78 = @simp.simp_tac(@list.List([@card.num_countable(), @card.countable_image()]))
   let t77 = @tactics.exists_tac(@parser.parse_term("IMAGE u (:num):(form->bool)->bool"))
   let t81 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@card.countable_subset()), t77), t78), t79), t80), @tactics.all_tac])
   let t76 = @tactics.match_mp_tac(@card.countable_unions())
-  let t74 = @meson.meson_tac(@list.empty())
+  let t74 = @meson.meson_tac(@list.List([]))
   let t73 = @simp.rewrite_tac(@list.List([@sets.in_elim_thm(), @int.arith_rule(@parser.parse_term("m < m + 1"))]))
   let t72 = @tactics.remove_then("u", fn(x70 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x70
@@ -600,7 +600,7 @@ pub fn bisimimulation() -> @kernel.Thm {
 ///|
 /// BISIMIMULATION_HOLDS
 fn step_34() -> Unit raise {
-  let t132 = @meson.asm_meson_tac(@list.empty())
+  let t132 = @meson.asm_meson_tac(@list.List([]))
   let t131 = @simp.rewrite_tac(@list.List([holds()]))
   let t130 = @tactics.match_mp_tac(form_induct())
   let t129 = @simp.rewrite_tac(@list.List([bisimimulation()]))
@@ -639,7 +639,7 @@ pub fn bisimilar() -> @kernel.Thm {
 ///|
 /// BISIMILAR_IN
 fn step_36() -> Unit raise {
-  let t134 = @meson.meson_tac(@list.empty())
+  let t134 = @meson.meson_tac(@list.List([]))
   let t135 = @tactics.then_tac(@simp.rewrite_tac(@list.List([bisimilar(), bisimimulation()])), t134)
   bisimilar_in_c.set(@tactics.prove(@parser.parse_term("!W1 R1 V1 W2 R2 V2 w1:A w2:B.\n     BISIMILAR (W1,R1,V1) (W2,R2,V2) w1 w2 ==> w1 IN W1 /\\ w2 IN W2"), t135))
 }

@@ -88,7 +88,7 @@ fn step_1() -> Unit raise {
       let t_2 = x8
       let ts = x9
       ts.prepend(t_2)
-    }, cache, @list.empty())
+    }, cache, @list.List([]))
   }
   let reset : (Unit) -> Unit raise = fn(x10 : Unit) -> Unit raise {
     let _ = x10

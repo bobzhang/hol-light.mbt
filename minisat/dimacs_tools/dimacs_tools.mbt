@@ -159,7 +159,7 @@ pub fn termtodimacs(x12 : @kernel.Term) -> @list.List[@list.List[(Bool, Int64)]]
     let c = x13
     let d = x14
     d.prepend(@lib.map(literaltoint, @basics.disjuncts(c)))
-  }, @basics.conjuncts(t), @list.empty())
+  }, @basics.conjuncts(t), @list.List([]))
 }
 
 ///|
@@ -207,7 +207,7 @@ pub fn buildclause(x18 : @list.List[Int64]) -> @kernel.Term raise {
 pub fn dimacstoterm_aux(x22 : @list.List[Int64], x23 : @list.List[Int64]) -> ((@kernel.Term, @list.List[Int64])) raise {
   let acc = x22
   match x23 {
-    Empty => (buildclause(acc), @list.empty())
+    Empty => (buildclause(acc), @list.List([]))
     More(0L, tail=l) => (buildclause(acc), l)
     More(x, tail=l_1) => dimacstoterm_aux(acc.prepend(x), l_1)
   }
@@ -217,7 +217,7 @@ pub fn dimacstoterm_aux(x22 : @list.List[Int64], x23 : @list.List[Int64]) -> ((@
 /// `dimacsToTerm`
 pub fn dimacstoterm(x24 : @list.List[Int64]) -> @kernel.Term raise {
   let l = x24
-  let (t, l1) = dimacstoterm_aux(@list.empty(), l)
+  let (t, l1) = dimacstoterm_aux(@list.List([]), l)
   if (Int::to_int64(@lib.length(l1)) == 0L) {
     t
   } else {

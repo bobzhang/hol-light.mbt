@@ -109,7 +109,7 @@ test "theorems matches theorems.ml" {
   let st = (name : String, f : () -> (@kernel.Term, @tactics.Tactic) raise) => {
     log.attempt(name, () => {
       let (w, tac) = f()
-      let (_, gls, _) = tac((@list.empty(), w))
+      let (_, gls, _) = tac((@list.List([]), w))
       "[" + gls.map(sgoal).to_array().join("; ") + "]"
     })
   }

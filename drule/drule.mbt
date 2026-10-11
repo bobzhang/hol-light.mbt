@@ -149,7 +149,7 @@ fn betas(n : Int, tm : Term) -> Term raise {
       let r = @kernel.rator(t)
       (l.prepend(@kernel.rand(t)), r)
     },
-    (@list.empty(), tm),
+    (@list.List([]), tm),
   )
   @lib.rev_itlist(
     (a, l) => {
@@ -328,12 +328,12 @@ pub fn instantiate_all(i : Instantiation, th : Thm) -> Thm raise {
     return instantiate_rule(i, th)
   }
   let (tyrel, tyiirel) = if tyin.is_empty() {
-    (@list.empty(), hyps)
+    (@list.List([]), hyps)
   } else {
     let tvs = @lib.itlist(
       (p : (HolType, HolType), acc) => @lib.union(@kernel.tyvars(p.1), acc),
       tyin,
-      @list.empty(),
+      @list.List([]),
     )
     @lib.partition(
       tm => !@lib.intersect(tvs, @kernel.type_vars_in_term(tm)).is_empty(),
@@ -341,12 +341,12 @@ pub fn instantiate_all(i : Instantiation, th : Thm) -> Thm raise {
     )
   }
   let (tmrel, _) = if tmin.is_empty() {
-    (@list.empty(), tyiirel)
+    (@list.List([]), tyiirel)
   } else {
     let vs = @lib.itlist(
       (p : (Term, Term), acc) => @lib.union(@kernel.frees(p.1), acc),
       tmin,
-      @list.empty(),
+      @list.List([]),
     )
     @lib.partition(
       tm => !@lib.intersect(vs, @kernel.frees(tm)).is_empty(),
@@ -512,7 +512,7 @@ fn separate_insts(insts : List[(Term, Term)]) -> Instantiation raise {
     insts,
   )
   let betacounts = if patterns.is_empty() {
-    @list.empty()
+    @list.List([])
   } else {
     @lib.itlist(
       (p : (Term, Term), sof : List[(Int64, Term)]) => {
@@ -526,10 +526,10 @@ fn separate_insts(insts : List[(Term, Term)]) -> Instantiation raise {
         }
       },
       patterns,
-      @list.empty(),
+      @list.List([]),
     )
   }
-  let tyins = get_type_insts(realinsts, @list.empty())
+  let tyins = get_type_insts(realinsts, @list.List([]))
   let tmins = @lib.mapfilter(
     (p : (Term, Term)) => {
       let (t, x) = p
@@ -634,7 +634,7 @@ fn term_homatch(
         rc,
         (insts, @lib.tl(homs).prepend((env, lc, lv))),
       )
-      let tyins1 = get_type_insts(pinsts_homs1.0, @list.empty())
+      let tyins1 = get_type_insts(pinsts_homs1.0, @list.List([]))
       term_homatch(lconsts, tyins1, pinsts_homs1)
     }
     e => raise e
@@ -651,12 +651,12 @@ pub fn term_match(
 ) -> Instantiation raise {
   let pinsts_homs = term_pmatch(
     lconsts,
-    @list.empty(),
+    @list.List([]),
     vtm,
     ctm,
-    (@list.empty(), @list.empty()),
+    (@list.List([]), @list.List([])),
   )
-  let tyins = get_type_insts(pinsts_homs.0, @list.empty())
+  let tyins = get_type_insts(pinsts_homs.0, @list.List([]))
   let insts = term_homatch(lconsts, tyins, pinsts_homs)
   separate_insts(insts)
 }
@@ -737,7 +737,7 @@ pub fn term_unify(
   tm1 : Term,
   tm2 : Term,
 ) -> Instantiation raise {
-  (@list.empty(), tu_unify(vars, tm1, tm2, @list.empty()), @list.empty())
+  (@list.List([]), tu_unify(vars, tm1, tm2, @list.List([])), @list.List([]))
 }
 
 // ---------------------------------------------------------------------------
@@ -811,7 +811,7 @@ fn augment_tyinsts(
   let (s, t) = st
   let sty = @kernel.type_of(@kernel.inst(tyinsts, s))
   let tty = @kernel.type_of(@kernel.inst(tyinsts, t))
-  let tyinsts1 = type_unify(sty, tty, @list.empty())
+  let tyinsts1 = type_unify(sty, tty, @list.List([]))
   tyinsts1.concat(
     @lib.map(
       (p : (HolType, HolType)) => (@kernel.type_subst(tyinsts1, p.0), p.1),
@@ -1010,7 +1010,7 @@ pub fn part_match(
     @kernel.freesl(@kernel.hyp(th)),
   )
   tm => {
-    let bvms = match_bvs(tm, pbod, @list.empty())
+    let bvms = match_bvs(tm, pbod, @list.List([]))
     let abod = deep_alpha(bvms, bod)
     let ath = @kernel.eq_mp(@equal.alpha_rule(bod, abod), sth)
     let insts = term_match(lconsts, partfn(abod), tm)
@@ -1049,7 +1049,7 @@ pub fn gen_part_match(
     lconsts,
   )
   tm => {
-    let bvms = match_bvs(tm, pbod, @list.empty())
+    let bvms = match_bvs(tm, pbod, @list.List([]))
     let abod = deep_alpha(bvms, bod)
     let ath = @kernel.eq_mp(@equal.alpha_rule(bod, abod), sth)
     let insts = term_match(lconsts, partfn(abod), tm)
@@ -1167,14 +1167,14 @@ pub fn higher_rewrite_conv(ths : List[Thm]) -> ((Bool) -> Conv) raise {
   let beta_fns = @lib.map2(free_beta, preds, concs)
   let ass_list = @lib.zip(pats, @lib.zip(preds, @lib.zip(thl, beta_fns)))
   let mnet = @lib.itlist(
-    (p, n) => @nets.enter(@list.empty(), p, p, n),
+    (p, n) => @nets.enter(@list.List([]), p, p, n),
     pats,
     @nets.empty_net(),
   )
   let look_fn = (t : Term) => {
     @lib.mapfilter(
       (p : Term) => {
-        if @lib.can(x => term_match(@list.empty(), p, x), t) {
+        if @lib.can(x => term_match(@list.List([]), p, x), t) {
           p
         } else {
           fail_()
@@ -1192,14 +1192,14 @@ pub fn higher_rewrite_conv(ths : List[Thm]) -> ((Bool) -> Conv) raise {
         @lib.hd(@lib.sort(@basics.free_in, @basics.find_terms(pred, tm)))
       }
       let pat = @lib.hd(look_fn(stm))
-      let (_, tmin, _tyin) = term_match(@list.empty(), pat, stm)
+      let (_, tmin, _tyin) = term_match(@list.List([]), pat, stm)
       let (pred1, (th, beta_fn)) = @lib.assoc(pat, ass_list)
       let gv = @basics.genvar(@kernel.type_of(stm))
       let abs = @kernel.mk_abs(
         gv,
         @basics.subst(@list.singleton((gv, stm)), tm),
       )
-      let (_, tmin0, tyin0) = term_match(@list.empty(), pred1, abs)
+      let (_, tmin0, tyin0) = term_match(@list.List([]), pred1, abs)
       @equal.conv_rule(
         beta_fn,
         @kernel.inst_rule(
@@ -1246,8 +1246,8 @@ pub fn new_definition(tm : Term) -> Thm raise {
 fn load_steps() -> Unit raise {
   mk_conj_andtm.set(q("(/\\)"))
   mk_disj_ortm.set(q("(\\/)"))
-  mk_forall_atm.set(@kernel.mk_const("!", @list.empty()))
-  mk_exists_atm.set(@kernel.mk_const("?", @list.empty()))
+  mk_forall_atm.set(@kernel.mk_const("!", @list.List([])))
+  mk_exists_atm.set(@kernel.mk_const("?", @list.List([])))
   // `term_match`'s dummy variable name.
   dummy_name.set(@kernel.dest_var(@basics.genvar(@kernel.aty)).0)
 }

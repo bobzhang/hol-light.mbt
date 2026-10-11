@@ -149,12 +149,12 @@ fn step_1() -> Unit raise {
   let t10 = @simp.asm_simp_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("r1 <= r2 ==> abs(r1 - r2) = r2 - r1"))]))
   let t9 = @class.asm_cases_tac(@parser.parse_term("r2 = &0"))
   let t7 = @simp.rewrite_tac(@list.List([@vectors.dist_sym()]))
-  let t8 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@vectors.dist_eq_0(), @meson.meson(@list.empty(), @parser.parse_term("(?!x. a = x /\\ P x) <=> P a"))])), t7), @calc_rat.real_arith_tac), @tactics.all_tac])
+  let t8 = @list.List([@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@vectors.dist_eq_0(), @meson.meson(@list.List([]), @parser.parse_term("(?!x. a = x /\\ P x) <=> P a"))])), t7), @calc_rat.real_arith_tac), @tactics.all_tac])
   let t6 = @class.asm_cases_tac(@parser.parse_term("r1 = &0"))
   let t5 = @tactics.repeat_tac(@tactics.gen_tac)
   let t4 = @tactics.repeat_tac(@tactics.gen_tac)
   let t2 = @meson.meson_tac(@list.List([@vectors.dist_sym(), @realax.real_add_sym(), @real.real_abs_sub()]))
-  let t1 = @tactics.match_mp_tac(@meson.meson(@list.empty(), @parser.parse_term("(!x y. P x y <=> Q y x) ==> ((!x y. P x y) <=> (!x y. Q x y))")))
+  let t1 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(!x y. P x y <=> Q y x) ==> ((!x y. P x y) <=> (!x y. Q x y))")))
   let t3 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t1), t2), @tactics.all_tac])
   let t120 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(@real.real_wlog_le()), @tactics.conj_tac), t3), t4), @tactics.disch_tac), t5), t6), t8), t9), @list.List([@calc_rat.asm_real_arith_tac, @tactics.all_tac])), t10), t11), @tactics.strip_tac), t119)
   circles_tangent_c.set(@tactics.prove(@parser.parse_term("!r1 r2 c1 c2.\n        &0 <= r1 /\\ &0 <= r2 /\\\n        (dist(c1,c2) = r1 + r2 \\/ dist(c1,c2) = abs(r1 - r2))\n        ==> c1 = c2 /\\ r1 = r2 \\/\n            ?!x:real^2. dist(c1,x) = r1 /\\ dist(c2,x) = r2"), t120))
@@ -246,7 +246,7 @@ pub fn feuerbach() -> @kernel.Thm {
 /// NINE_POINT_CIRCLE_1
 fn step_3() -> Unit raise {
   let t184 = @tactics.conv_tac(@calc_rat.real_ring)
-  let t183 = @simp.simp_tac(@list.empty())
+  let t183 = @simp.simp_tac(@list.List([]))
   let t182 = @simp.rewrite_tac(@list.List([@vectors.vector_add_component(), @vectors.vector_sub_component(), @vectors.vector_mul_component(), @vectors.vec_component()]))
   let t181 = @simp.rewrite_tac(@list.List([@vectors.dot_2(), @vectors.dot_lsub(), @vectors.dot_rsub()]))
   let t180 = @simp.asm_rewrite_tac(@list.List([@vectors.midpoint()]))
@@ -284,7 +284,7 @@ pub fn nine_point_circle_1() -> @kernel.Thm {
 /// NINE_POINT_CIRCLE_2
 fn step_4() -> Unit raise {
   let t202 = @tactics.conv_tac(@calc_rat.real_ring)
-  let t201 = @simp.simp_tac(@list.empty())
+  let t201 = @simp.simp_tac(@list.List([]))
   let t200 = @simp.rewrite_tac(@list.List([@vectors.vector_add_component(), @vectors.vector_sub_component(), @vectors.vector_mul_component(), @vectors.vec_component()]))
   let t199 = @simp.rewrite_tac(@list.List([@vectors.dot_2(), @vectors.dot_lsub(), @vectors.dot_rsub()]))
   let t198 = @simp.asm_rewrite_tac(@list.List([@vectors.midpoint()]))

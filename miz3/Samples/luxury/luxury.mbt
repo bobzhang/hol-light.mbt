@@ -195,7 +195,7 @@ fn step_11() -> Unit raise {
 pub fn exec_phrase_10(x25 : Unit) -> Unit raise {
   let _ = x25
   {
-    @miz3.exec_tactic_out().val = @simp.asm_rewrite_tac(@list.empty())
+    @miz3.exec_tactic_out().val = @simp.asm_rewrite_tac(@list.List([]))
     ()
   }
 }
@@ -555,7 +555,7 @@ pub fn num_recursion_std() -> @kernel.Thm {
 pub fn exec_phrase_27(x69 : Unit) -> Unit raise {
   let _ = x69
   {
-    @miz3.exec_tactic_out().val = @simp.rewrite_tac(@list.empty())
+    @miz3.exec_tactic_out().val = @simp.rewrite_tac(@list.List([]))
     ()
   }
 }

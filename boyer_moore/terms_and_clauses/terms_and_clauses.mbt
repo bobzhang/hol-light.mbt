@@ -170,7 +170,7 @@ fn step_2() -> Unit raise {
 ///|
 /// COND_LEFT
 fn step_3() -> Unit raise {
-  let t32 = @simp.rewrite_tac(@list.empty())
+  let t32 = @simp.rewrite_tac(@list.List([]))
   let t31 = @class.bool_cases_tac(@parser.parse_term("b:bool"))
   let t33 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t31), t32)
   cond_left_c.set(@tactics.prove(@parser.parse_term("!b x x' (y:'a). (b ==> (x = x')) ==> ((if b then x else y) = (if b then x' else y))"), t33))
@@ -188,7 +188,7 @@ pub fn cond_left() -> @kernel.Thm {
 ///|
 /// COND_RIGHT
 fn step_4() -> Unit raise {
-  let t35 = @simp.rewrite_tac(@list.empty())
+  let t35 = @simp.rewrite_tac(@list.List([]))
   let t34 = @class.bool_cases_tac(@parser.parse_term("b:bool"))
   let t36 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t34), t35)
   cond_right_c.set(@tactics.prove(@parser.parse_term("!b y y' (x:'a). (~b ==> (y = y')) ==> ((if b then x else y) = (if b then x else y'))"), t36))
@@ -206,7 +206,7 @@ pub fn cond_right() -> @kernel.Thm {
 ///|
 /// COND_RIGHT_F
 fn step_5() -> Unit raise {
-  let t37 = @simp.rewrite_tac(@list.empty())
+  let t37 = @simp.rewrite_tac(@list.List([]))
   let t38 = @tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("b:bool")), t37)
   cond_right_f_c.set(@tactics.prove(@parser.parse_term("(if b then b else F) = b"), t38))
 }
@@ -223,7 +223,7 @@ pub fn cond_right_f() -> @kernel.Thm {
 ///|
 /// COND_T_F
 fn step_6() -> Unit raise {
-  let t39 = @simp.rewrite_tac(@list.empty())
+  let t39 = @simp.rewrite_tac(@list.List([]))
   let t40 = @tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("b:bool")), t39)
   cond_t_f_c.set(@tactics.prove(@parser.parse_term("(if b then  T else F) = b"), t40))
 }
@@ -279,7 +279,7 @@ pub fn rewrite_conditional(x41 : (@list.List[@kernel.Term]) -> ((@kernel.Term) -
 ///|
 /// EQ_T
 fn step_7() -> Unit raise {
-  let t49 = @simp.rewrite_tac(@list.empty())
+  let t49 = @simp.rewrite_tac(@list.List([]))
   let t50 = @tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t49)
   eq_t_c.set(@tactics.prove(@parser.parse_term("(x = T) = x"), t50))
 }
@@ -296,7 +296,7 @@ pub fn eq_t() -> @kernel.Thm {
 ///|
 /// EQ_EQ
 fn step_8() -> Unit raise {
-  let t52 = @simp.rewrite_tac(@list.empty())
+  let t52 = @simp.rewrite_tac(@list.List([]))
   let t51 = @class.bool_cases_tac(@parser.parse_term("(y:'a) = z"))
   let t53 = @tactics.then_tac(@tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t51), t52)
   eq_eq_c.set(@tactics.prove(@parser.parse_term("(x = ((y:'a) = z)) = (if (y = z) then (x = T) else (x = F))"), t53))
@@ -314,7 +314,7 @@ pub fn eq_eq() -> @kernel.Thm {
 ///|
 /// EQ_F
 fn step_9() -> Unit raise {
-  let t54 = @simp.rewrite_tac(@list.empty())
+  let t54 = @simp.rewrite_tac(@list.List([]))
   let t55 = @tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("x:bool")), t54)
   eq_f_c.set(@tactics.prove(@parser.parse_term("(x = F) = (if x then F else T)"), t55))
 }
@@ -582,7 +582,7 @@ pub fn move_cond_up_conv(x94 : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// COND_OR
 fn step_10() -> Unit raise {
-  let t99 = @simp.rewrite_tac(@list.empty())
+  let t99 = @simp.rewrite_tac(@list.List([]))
   let t100 = @tactics.then_tac(@class.bool_cases_tac(@parser.parse_term("b:bool")), t99)
   cond_or_c.set(@tactics.prove(@parser.parse_term("(if b then x else y) \\/ z <=> ((~b \\/ x \\/ z) /\\ (b \\/ y \\/ z))"), t100))
 }
@@ -715,9 +715,9 @@ pub fn simplify_one_literal(x122 : Int64, x123 : @kernel.Term) -> ((@kernel.Thm,
     let overs_p = @lib.map(negate, overs_1)
     let unders_p = @lib.map(negate, unders_1)
     let th1 = if @basics.is_neg(y_1) {
-      negate_1(rewrite_term(y_1, @list.empty(), @list.empty(), overs_p.concat(unders_p), @kernel.rand(y_1)))
+      negate_1(rewrite_term(y_1, @list.List([]), @list.List([]), overs_p.concat(unders_p), @kernel.rand(y_1)))
     } else {
-      rewrite_term(y_1, @list.empty(), @list.empty(), overs_p.concat(unders_p), y_1)
+      rewrite_term(y_1, @list.List([]), @list.List([]), overs_p.concat(unders_p), y_1)
     }
     let tm1 = @equal.rhs(@kernel.concl(th1))
     if (@support.is_t(tm1) || @support.is_f(tm1)) {
@@ -752,10 +752,10 @@ pub fn simplify_clause(x129 : Int64, x130 : @kernel.Term) -> ((@list.List[@kerne
     let (th, change_flag) = simplify_one_literal(n, tm)
     let tm_p = @equal.rhs(@kernel.concl(th))
     if @support.is_t(tm_p) {
-      (@list.empty(), (x132 : @list.List[@kernel.Thm]) => @waterfall.apply_fproof("simplify_clause", fn(x131 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
+      (@list.List([]), (x132 : @list.List[@kernel.Thm]) => @waterfall.apply_fproof("simplify_clause", fn(x131 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         let ths = x131
         @bool.eqt_elim(th)
-      }, @list.empty(), x132))
+      }, @list.List([]), x132))
     } else {
       let (tms, proof) = if (change_flag < 0L) {
         simplify_clause(n, tm_p)
@@ -809,7 +809,7 @@ pub fn hl_simplify_clause(x140 : @list.List[@kernel.Thm], x141 : @kernel.Term) -
     let t145 = @lib.flat(@environment.defs(()))
     let rules = @lib.itlist(fn(x142 : @list.List[@kernel.Thm], x143 : @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise {
       @lib.union(x142, x143)
-    }, @list.List([l, @environment.rewrite_rules(()), t145, t144]), @list.empty())
+    }, @list.List([l, @environment.rewrite_rules(()), t145, t144]), @list.List([]))
     let th = @simp.simp_conv(rules)(tm)
     let tm_p = @equal.rhs(@kernel.concl(th))
     let tmc = try {
@@ -823,10 +823,10 @@ pub fn hl_simplify_clause(x140 : @list.List[@kernel.Thm], x141 : @kernel.Term) -
       e => raise e
     }
     if @support.is_t(tm_p) {
-      (@list.empty(), (x149 : @list.List[@kernel.Thm]) => @waterfall.apply_fproof("HL_simplify_clause", fn(x148 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
+      (@list.List([]), (x149 : @list.List[@kernel.Thm]) => @waterfall.apply_fproof("HL_simplify_clause", fn(x148 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         let ths = x148
         @bool.eqt_elim(th)
-      }, @list.empty(), x149))
+      }, @list.List([]), x149))
     } else {
       let t150 = @equal.sym(th)
       (@list.List([tm_p]), (x153 : @list.List[@kernel.Thm]) => @waterfall.apply_fproof("HL_simplify_clause", fn(x152 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
@@ -915,7 +915,7 @@ pub fn subst_heuristic(x163 : @kernel.Term, x164 : Bool) -> ((@list.List[(@kerne
           checkx(@kernel.dest_eq(x167))
         })(@basics.dest_neg(x168))
       }, x169), @lib.hd(tml)) {
-        (@list.empty(), tml)
+        (@list.List([]), tml)
       } else {
         (fn(x170 : (@list.List[@kernel.Term], @list.List[@kernel.Term])) -> (@list.List[@kernel.Term], @list.List[@kernel.Term]) raise {
           let (l1, l2) = x170

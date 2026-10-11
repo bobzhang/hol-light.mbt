@@ -4,7 +4,7 @@
 ///|
 /// SURJECTIVE_IFF_RIGHT_INVERSE
 fn step_1() -> Unit raise {
-  let t1 = @meson.meson_tac(@list.empty())
+  let t1 = @meson.meson_tac(@list.List([]))
   let t2 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@class.fun_eq_thm(), @trivia.o_def(), @trivia.i_def()])), t1)
   surjective_iff_right_inverse_c.set(@tactics.prove(@parser.parse_term("(!y. ?x. g x = y) <=> (?f. g o f = I)"), t2))
 }
@@ -21,8 +21,8 @@ pub fn surjective_iff_right_inverse() -> @kernel.Thm {
 ///|
 /// INJECTIVE_IFF_LEFT_INVERSE
 fn step_2() -> Unit raise {
-  let lemma = @meson.meson(@list.empty(), @parser.parse_term("(!x x'. f x = f x' ==> x = x') <=> (!y:B. ?u:A. !x. f x = y ==> u = x)"))
-  let t3 = @meson.meson_tac(@list.empty())
+  let lemma = @meson.meson(@list.List([]), @parser.parse_term("(!x x'. f x = f x' ==> x = x') <=> (!y:B. ?u:A. !x. f x = y ==> u = x)"))
+  let t3 = @meson.meson_tac(@list.List([]))
   let t4 = @tactics.then_tac(@simp.rewrite_tac(@list.List([lemma, @class.fun_eq_thm(), @trivia.o_def(), @trivia.i_def()])), t3)
   injective_iff_left_inverse_c.set(@tactics.prove(@parser.parse_term("(!x y. f x = f y ==> x = y) <=> (?g. g o f = I)"), t4))
 }
@@ -122,7 +122,7 @@ pub fn cantor_inj() -> @kernel.Thm {
 ///|
 /// CANTOR_THM
 fn step_7() -> Unit raise {
-  let t32 = @meson.meson_tac(@list.empty())
+  let t32 = @meson.meson_tac(@list.List([]))
   let t28 = @parser.parse_term("\\x:A. ~(g x x)")
   let t31 = @tactics.first_assum(fn(x30 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x25 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {

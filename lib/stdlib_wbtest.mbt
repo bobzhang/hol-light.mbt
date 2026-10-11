@@ -95,7 +95,7 @@ test "hashtbl folds like OCaml" {
   let l = hashtbl_fold(
     (k, v, acc : @list.List[String]) => acc.prepend("\{k}:\{v}"),
     t,
-    @list.empty(),
+    @list.List([]),
   )
   inspect(
     l.to_array().join(" "),
@@ -109,7 +109,7 @@ test "hashtbl folds like OCaml" {
   let l2 = hashtbl_fold(
     (k, v, acc : @list.List[String]) => acc.prepend("\{k}=\{v}"),
     s,
-    @list.empty(),
+    @list.List([]),
   )
   inspect(
     l2.to_array().join(" "),

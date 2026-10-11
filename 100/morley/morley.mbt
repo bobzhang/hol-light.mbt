@@ -152,7 +152,7 @@ fn step_8() -> Unit raise {
   let t26 = @simp.rewrite_tac(@list.List([@complexes.cx_neg(), @complexes.complex_ring(@parser.parse_term("--ii * --z = ii * z"))]))
   let t25 = @simp.rewrite_tac(@list.List([@transcendentals.rotate2d_complex(), @transcendentals.cnj_cexp(), @complexes.cnj_mul(), @complexes.cnj_cx(), @complexes.cnj_ii()]))
   let t24 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), reflect_across(), reflect2d(), @trivia.o_thm()]))
-  let t23 = @simp.asm_rewrite_tac(@list.empty())
+  let t23 = @simp.asm_rewrite_tac(@list.List([]))
   let t22 = @class.asm_cases_tac(@parser.parse_term("a:complex = b"))
   let t44 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t22), t23), t24), t25), t26), t31), t43)
   reflect_across_sym_c.set(@tactics.prove(@parser.parse_term("!a b. reflect_across(a,b) = reflect_across(b,a)"), t44))
@@ -213,7 +213,7 @@ fn step_11() -> Unit raise {
   let t57 = @simp.rewrite_tac(@list.List([@transcendentals.rotate2d_zero()]))
   let t56 = @simp.rewrite_tac(@list.List([@realax.real_add_linv(), @calc_int.real_add_rinv()]))
   let t55 = @simp.rewrite_tac(@list.List([rotate_about(), @vectors.vector_add_sub(), @equal.gsym(@transcendentals.rotate2d_add())]))
-  let t58 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@meson.meson(@list.empty(), @parser.parse_term("(!x. f(g x) = x) /\\ (!y. g(f y) = y)\n    ==> (f x = y <=> x = g y)"))), t55), t56), t57), @vectors.vector_arith_tac)
+  let t58 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(!x. f(g x) = x) /\\ (!y. g(f y) = y)\n    ==> (f x = y <=> x = g y)"))), t55), t56), t57), @vectors.vector_arith_tac)
   rotate_about_invert_c.set(@tactics.prove(@parser.parse_term("rotate_about a t w = z <=> w = rotate_about a (--t) z"), t58))
 }
 
@@ -300,11 +300,11 @@ fn step_13() -> Unit raise {
   let t107 = @simp.rewrite_tac(@list.List([@transcendentals.euler(), @complexes.re_mul_ii(), @complexes.im_mul_ii(), @complexes.re_cx(), @complexes.im_cx(), @transcendentals.cos_neg(), @transcendentals.sin_neg()]))
   let t106 = @simp.rewrite_tac(@list.List([@transcendentals.rotate2d_complex()]))
   let t105 = @simp.rewrite_tac(@list.List([rotate_about(), @transcendentals.rotate2d_add()]))
-  let t103 = @simp.asm_rewrite_tac(@list.empty())
+  let t103 = @simp.asm_rewrite_tac(@list.List([]))
   let t104 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.match_mp_tac(rotate_eq_reflect_lemma()), t103)])
   let t102 = @tactics.exists_tac(@parser.parse_term("rotate_about a (&2 * Arg((b - a) / (z - a))) z"))
   let t101 = @tactics.match_mp_tac(@theorems.eq_trans())
-  let t100 = @simp.asm_rewrite_tac(@list.empty())
+  let t100 = @simp.asm_rewrite_tac(@list.List([]))
   let t99 = @tactics.repeat_tac(@tactics.strip_tac)
   let t112 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("a = &4 * pi + t <=> t = a + --(&4 * pi)"))])), t99), t100), t101), t102), @tactics.conj_tac), t104), t105), @tactics.ap_term_tac), @tactics.ap_term_tac), t106), t107), t108), t109), t110), t111)
   rotate_eq_reflect_pi_lemma_c.set(@tactics.prove(@parser.parse_term("!a b z t.\n        ~(b = a) /\\ &2 * Arg((b - a) / (z - a)) = &4 * pi + t\n        ==> rotate_about a t z = reflect_across (a,b) z"), t112))
@@ -518,7 +518,7 @@ fn step_20() -> Unit raise {
       s168(x169)
     }
   })), t170), @tactics.all_tac])
-  let t166 = @simp.asm_rewrite_tac(@list.empty())
+  let t166 = @simp.asm_rewrite_tac(@list.List([]))
   let t165 = @tactics.repeat_tac(@tactics.gen_tac)
   let t196 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([affine_group_iter_3(), affine_group_compose(), affine_group_i(), affine_group_eq()])), t165), @tactics.strip_tac), t166), @tactics.conj_tac), t171), t175), t190), t194), t195)
   algebraic_lemma_c.set(@tactics.prove(@parser.parse_term("!a1 a2 a3 b1 b2 b3 A B C.\n        (\\z. a3 * z + b3) ((\\z. a1 * z + b1) B) = B /\\\n        (\\z. a1 * z + b1) ((\\z. a2 * z + b2) C) = C /\\\n        (\\z. a2 * z + b2) ((\\z. a3 * z + b3) A) = A /\\\n        ITER 3 (\\z. a1 * z + b1) o ITER 3 (\\z. a2 * z + b2) o\n        ITER 3 (\\z. a3 * z + b3) = I /\\\n        ~(a1 * a2 * a3 = Cx(&1)) /\\\n        ~(a1 * a2 = Cx(&1)) /\\\n        ~(a2 * a3 = Cx(&1)) /\\\n        ~(a3 * a1 = Cx(&1))\n        ==> (a1 * a2 * a3) pow 3 = Cx (&1) /\\\n            ~(a1 * a2 * a3 = Cx (&1)) /\\\n            C + (a1 * a2 * a3) * A + (a1 * a2 * a3) pow 2 * B = Cx(&0)"), t196))
@@ -536,7 +536,7 @@ pub fn algebraic_lemma() -> @kernel.Thm {
 ///|
 /// CYCLIC_PERM_SUBGOAL_THEN
 fn step_21() -> Unit raise {
-  let lemma = @meson.meson(@list.empty(), @parser.parse_term("(!A B C P Q R a b c g1 g2 g3.\n       Ant A B C P Q R a b c g1 g2 g3 ==> Cns A B C P Q R a b c g1 g2 g3)\n    ==> (!A B C P Q R a b c g1 g2 g3.\n           Ant A B C P Q R a b c g1 g2 g3\n           ==> Ant B C A Q R P b c a g2 g3 g1)\n        ==> (!A B C P Q R a b c g1 g2 g3.\n                   Ant A B C P Q R a b c g1 g2 g3\n                   ==> Cns A B C P Q R a b c g1 g2 g3 /\\\n                       Cns B C A Q R P b c a g2 g3 g1 /\\\n                       Cns C A B R P Q c a b g3 g1 g2)"))
+  let lemma = @meson.meson(@list.List([]), @parser.parse_term("(!A B C P Q R a b c g1 g2 g3.\n       Ant A B C P Q R a b c g1 g2 g3 ==> Cns A B C P Q R a b c g1 g2 g3)\n    ==> (!A B C P Q R a b c g1 g2 g3.\n           Ant A B C P Q R a b c g1 g2 g3\n           ==> Ant B C A Q R P b c a g2 g3 g1)\n        ==> (!A B C P Q R a b c g1 g2 g3.\n                   Ant A B C P Q R a b c g1 g2 g3\n                   ==> Cns A B C P Q R a b c g1 g2 g3 /\\\n                       Cns B C A Q R P b c a g2 g3 g1 /\\\n                       Cns C A B R P Q c a b g3 g1 g2)"))
   let t197 = @parser.parse_term("g3:complex->complex")
   let t198 = @parser.parse_term("g2:complex->complex")
   let t199 = @parser.parse_term("g1:complex->complex")
@@ -612,8 +612,8 @@ pub fn cyclic_perm_subgoal_then(x : @kernel.Term) -> ((@tactics.ThmTactic) -> ((
 ///|
 /// MORLEY
 fn step_22() -> Unit raise {
-  let t450 = @simp.rewrite_tac(@list.empty())
-  let t449 = @simp.pure_asm_rewrite_tac(@list.empty())
+  let t450 = @simp.rewrite_tac(@list.List([]))
+  let t449 = @simp.pure_asm_rewrite_tac(@list.List([]))
   let t446 = @parser.parse_term("b3:complex")
   let t447 = @parser.parse_term("b2:complex")
   let t448 = @tactics.map_every(fn(x443 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -734,7 +734,7 @@ fn step_22() -> Unit raise {
       s357(x358)
     }
   }, @list.List([@equal.sym(@kernel.assume_rule(@parser.parse_term("angle(C:real^2,A,Q) = a")))]))
-  let t355 = @simp.asm_rewrite_tac(@list.empty())
+  let t355 = @simp.asm_rewrite_tac(@list.List([]))
   let t363 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(rotate_eq_reflect_lemma()), t355), @tactics.ap_term_tac), t359), t360), t361), t362), @tactics.all_tac])
   let t354 = @tactics.exists_tac(@parser.parse_term("reflect_across(A,C) Q"))
   let t353 = @tactics.match_mp_tac(@theorems.eq_trans())
@@ -761,7 +761,7 @@ fn step_22() -> Unit raise {
   let t338 = cyclic_perm_subgoal_then(@parser.parse_term("~(P:real^2 = B) /\\ ~(P = C)"))(@tactics.strip_assume_tac)
   let t336 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(@complexes.im_complex_inv_ge_0()), @complexes.complex_inv_div()]))
   let t335 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("&0 <= --x <=> x <= &0"))]))
-  let t334 = @simp.asm_rewrite_tac(@list.empty())
+  let t334 = @simp.asm_rewrite_tac(@list.List([]))
   let t333 = @tactics.match_mp_tac(@realax.real_le_mul())
   let t332 = @tactics.match_mp_tac(@calc_rat.real_arith(@parser.parse_term("&0 <= u * --a ==> u * a <= &0")))
   let t331 = @simp.simp_tac(@list.List([@calc_int.real_mul_rzero(), @realax.real_add_lid()]))
@@ -771,7 +771,7 @@ fn step_22() -> Unit raise {
   let t327 = @simp.rewrite_tac(@list.List([@complexes.complex_div(), @complexes.complex_add_rdistrib(), @complexes.im_add(), @complexes.complex_cmul()]))
   let t326 = @simp.asm_rewrite_tac(@list.List([@real.real_sub_refl(), @vectors.vector_mul_lzero(), @vectors.vector_add_rid()]))
   let t325 = @simp.simp_tac(@list.List([@vectors.vector_arith(@parser.parse_term("(u % A + v % B + w % C) - C:real^N =\n                   v % (B - C) + u % (A - C) + ((u + v + w) - &1) % C"))]))
-  let t324 = @simp.asm_rewrite_tac(@list.empty())
+  let t324 = @simp.asm_rewrite_tac(@list.List([]))
   let t323 = @simp.rewrite_tac(@list.List([@convex.convex_hull_3(), @sets.in_elim_thm()]))
   let t322 = @tactics.repeat_tac(@tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_and()), @tactics.conj_tac))
   let t321 = @simp.rewrite_tac(@list.List([@sets.insert_subset(), @sets.empty_subset()]))
@@ -796,7 +796,7 @@ fn step_22() -> Unit raise {
   let t306 = @simp.rewrite_tac(@list.List([@complexes.complex_div(), @complexes.complex_add_rdistrib(), @complexes.im_add(), @complexes.complex_cmul()]))
   let t305 = @simp.asm_rewrite_tac(@list.List([@real.real_sub_refl(), @vectors.vector_mul_lzero(), @vectors.vector_add_rid()]))
   let t304 = @simp.simp_tac(@list.List([@vectors.vector_arith(@parser.parse_term("(u % A + v % B + w % C) - B:real^N =\n                 u % (A - B) + w % (C - B) + ((u + v + w) - &1) % B"))]))
-  let t303 = @simp.asm_rewrite_tac(@list.empty())
+  let t303 = @simp.asm_rewrite_tac(@list.List([]))
   let t302 = @simp.rewrite_tac(@list.List([@convex.convex_hull_3(), @sets.in_elim_thm()]))
   let t301 = @tactics.repeat_tac(@tactics.then_tac(@tactics.match_mp_tac(@theorems.mono_and()), @tactics.conj_tac))
   let t300 = @simp.rewrite_tac(@list.List([@sets.insert_subset(), @sets.empty_subset()]))
@@ -861,7 +861,7 @@ fn step_22() -> Unit raise {
   }, @list.List([@parser.parse_term("A:real^2 = B"), t262, t261]))
   let t257 = @tactics.repeat_tac(@tactics.gen_tac)
   let t256 = @tactics.repeat_tac(@tactics.gen_tac)
-  let t253 = @meson.meson_tac(@list.empty())
+  let t253 = @meson.meson_tac(@list.List([]))
   let t252 = @simp.rewrite_tac(@list.List([@geom.angle_sym(), @vectors.dist_sym(), @sets.insert_ac()]))
   let t246 = @parser.parse_term("Q:real^2")
   let t247 = @parser.parse_term("R:real^2")
@@ -888,7 +888,7 @@ fn step_22() -> Unit raise {
   }, @list.List([@equal.gsym(@complexes.im_complex_inv_le_0())]))
   let t255 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t237), t238), @calc_rat.real_arith_tac), t254, @tactics.all_tac])
   let t233 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t451 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(@meson.meson(@list.empty(), @parser.parse_term("(!A B C. &0 <= Im((C - A) / (B - A)) \\/\n              &0 <= Im((B - A) / (C - A))) /\\\n     (!A B C. Property A B C ==> Property A C B) /\\\n     (!A B C. &0 <= Im((C - A) / (B - A)) ==> Property A B C)\n     ==> !A B C. Property A B C"))), t233), t255), t256), @tactics.disch_tac), t257), t263), @tactics.strip_tac), t269), t270), t271), t272), t273), t274), t275), t279), t292), t293), t312), t313), t337), t338), t344), t348), t408), t417), t418), t432), t438), t439), t440), t441), t442), t448), t449), t450)
+  let t451 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("(!A B C. &0 <= Im((C - A) / (B - A)) \\/\n              &0 <= Im((B - A) / (C - A))) /\\\n     (!A B C. Property A B C ==> Property A C B) /\\\n     (!A B C. &0 <= Im((C - A) / (B - A)) ==> Property A B C)\n     ==> !A B C. Property A B C"))), t233), t255), t256), @tactics.disch_tac), t257), t263), @tactics.strip_tac), t269), t270), t271), t272), t273), t274), t275), t279), t292), t293), t312), t313), t337), t338), t344), t348), t408), t417), t418), t432), t438), t439), t440), t441), t442), t448), t449), t450)
   morley_c.set(@tactics.prove(@parser.parse_term("!A B C:real^2 P Q R.\n     ~collinear{A,B,C} /\\ {P,Q,R} SUBSET convex hull {A,B,C} /\\\n     angle(A,B,R) = angle(A,B,C) / &3 /\\\n     angle(B,A,R) = angle(B,A,C) / &3 /\\\n     angle(B,C,P) = angle(B,C,A) / &3 /\\\n     angle(C,B,P) = angle(C,B,A) / &3 /\\\n     angle(C,A,Q) = angle(C,A,B) / &3 /\\\n     angle(A,C,Q) = angle(A,C,B) / &3\n     ==> dist(R,P) = dist(P,Q) /\\ dist(Q,R) = dist(P,Q)"), t451))
 }
 

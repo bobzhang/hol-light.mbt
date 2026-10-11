@@ -476,7 +476,7 @@ pub fn msum_superset() -> @kernel.Thm {
 ///|
 /// MSUM_SUPPORT_EXPLICIT
 fn step_29() -> Unit raise {
-  let t71 = @sets.set_tac(@list.empty())
+  let t71 = @sets.set_tac(@list.List([]))
   let t70 = @tactics.match_mp_tac(msum_superset())
   let t69 = @tactics.conv_tac(@equal.sym_conv)
   let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t69), t70), t71)
@@ -511,7 +511,7 @@ pub fn msum_support() -> @kernel.Thm {
 ///|
 /// MSUM_UNIV
 fn step_31() -> Unit raise {
-  let t76 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t76 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t75 = @simp.once_rewrite_tac(@list.List([@equal.gsym(msum_support_explicit())]))
   let t74 = @tactics.repeat_tac(@tactics.strip_tac)
   let t77 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@iterate.support(), neutral_matrix_add()])), t74), t75), @tactics.ap_thm_tac), @tactics.ap_term_tac), t76)
@@ -546,7 +546,7 @@ pub fn msum_eq_superset() -> @kernel.Thm {
 ///|
 /// MSUM_UNION_RZERO
 fn step_33() -> Unit raise {
-  let t80 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t80 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t79 = @tactics.match_mp_tac(msum_superset())
   let t81 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t79), t80)
   msum_union_rzero_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N u v.\n        (!x. x IN v /\\ ~(x IN u) ==> (f(x) = mat 0))\n        ==> (msum (u UNION v) f = msum u f)"), t81))
@@ -564,7 +564,7 @@ pub fn msum_union_rzero() -> @kernel.Thm {
 ///|
 /// MSUM_UNION_LZERO
 fn step_34() -> Unit raise {
-  let t83 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t83 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t82 = @tactics.match_mp_tac(msum_superset())
   let t84 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t82), t83)
   msum_union_lzero_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N u v.\n        (!x. x IN u /\\ ~(x IN v) ==> (f(x) = mat 0))\n        ==> (msum (u UNION v) f = msum v f)"), t84))
@@ -582,7 +582,7 @@ pub fn msum_union_lzero() -> @kernel.Thm {
 ///|
 /// MSUM_RESTRICT
 fn step_35() -> Unit raise {
-  let t86 = @simp.simp_tac(@list.empty())
+  let t86 = @simp.simp_tac(@list.List([]))
   let t85 = @tactics.match_mp_tac(msum_eq())
   let t87 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t85), t86)
   msum_restrict_c.set(@tactics.prove(@parser.parse_term("!f:A->real^M^N s. msum s (\\x. if x IN s then f(x) else mat 0) = msum s f"), t87))
@@ -959,7 +959,7 @@ fn step_57() -> Unit raise {
   let t143 = @meson.asm_meson_tac(@list.List([@sets.in_image()]))
   let t142 = @simp.rewrite_tac(@list.List([@vectors.matrix_arith(@parser.parse_term("a = x + a <=> x = mat 0:real^M^N"))]))
   let t141 = @simp.asm_rewrite_tac(@list.List([@trivia.o_thm()]))
-  let t140 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t140 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t139 = @tactics.subgoal_then(@parser.parse_term("msum s ((d:B->real^M^N) o (i:A->B)) = msum (IMAGE i s) d"), fn(x136 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s137 = @tactics.subst1_tac(x136)
     fn(x138 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -1006,7 +1006,7 @@ pub fn msum_union_nonzero() -> @kernel.Thm {
 ///|
 /// MSUM_UNIONS_NONZERO
 fn step_59() -> Unit raise {
-  let t164 = @meson.asm_meson_tac(@list.empty())
+  let t164 = @meson.asm_meson_tac(@list.List([]))
   let t163 = @simp.asm_simp_tac(@list.List([@sets.finite_unions(), @sets.in_inter(), @sets.in_unions()]))
   let t162 = @tactics.match_mp_tac(msum_union_nonzero())
   let t160 = @tactics.disch_then(fn(x159 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1017,7 +1017,7 @@ fn step_59() -> Unit raise {
       }
     })(@equal.sym(x159))
   })
-  let t161 = @list.List([@meson.asm_meson_tac(@list.empty()), t160])
+  let t161 = @list.List([@meson.asm_meson_tac(@list.List([])), t160])
   let t155 = @simp.asm_simp_tac(@list.List([msum_clauses()]))
   let t154 = @simp.once_rewrite_tac(@list.List([@theorems.imp_conj()]))
   let t153 = @tactics.disch_then(fn(x151 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1062,7 +1062,7 @@ pub fn msum_clauses_left() -> @kernel.Thm {
 /// MSUM_DIFFS
 fn step_61() -> Unit raise {
   let t172 = @simp.rewrite_tac(@list.List([@equal.gsym(@arith.add1())]))
-  let t171 = @simp.asm_rewrite_tac(@list.empty())
+  let t171 = @simp.asm_rewrite_tac(@list.List([]))
   let t170 = @simp.asm_rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("~(SUC n <= n)")), @vectors.matrix_add_lid()]))
   let t169 = @class.asm_cases_tac(@parser.parse_term("m = SUC n"))
   let t168 = @simp.asm_simp_tac(@list.List([msum_clauses_numseg(), @arith.le()]))
@@ -1135,7 +1135,7 @@ pub fn msum_delete_cases() -> @kernel.Thm {
 ///|
 /// MSUM_EQ_GENERAL
 fn step_64() -> Unit raise {
-  let t194 = @meson.asm_meson_tac(@list.empty())
+  let t194 = @meson.asm_meson_tac(@list.List([]))
   let t193 = @tactics.exists_tac(@parser.parse_term("h:A->B"))
   let t192 = @tactics.match_mp_tac(@iterate.sum_eq_general())
   let t191 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -1155,7 +1155,7 @@ pub fn msum_eq_general() -> @kernel.Thm {
 ///|
 /// MSUM_EQ_GENERAL_INVERSES
 fn step_65() -> Unit raise {
-  let t203 = @meson.asm_meson_tac(@list.empty())
+  let t203 = @meson.asm_meson_tac(@list.List([]))
   let t201 = @parser.parse_term("k:B->A")
   let t202 = @tactics.map_every(fn(x198 : @kernel.Term) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s199 = @tactics.exists_tac(x198)
@@ -1336,7 +1336,7 @@ pub fn msum_partial_suc() -> @kernel.Thm {
 ///|
 /// MSUM_PARTIAL_PRE
 fn step_73() -> Unit raise {
-  let t254 = @simp.rewrite_tac(@list.empty())
+  let t254 = @simp.rewrite_tac(@list.List([]))
   let t253 = @tactics.disch_then(fn(x250 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s251 = @tactics.subst1_tac(x250)
     fn(x252 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -1398,7 +1398,7 @@ pub fn msum_combine_r() -> @kernel.Thm {
 ///|
 /// MSUM_INJECTION
 fn step_76() -> Unit raise {
-  let t267 = @simp.simp_tac(@list.empty())
+  let t267 = @simp.simp_tac(@list.List([]))
   let t266 = @simp.rewrite_tac(@list.List([@cart.cart_eq_full(), msum_component(), @trivia.o_def()]))
   let t263 = @drule.match_mp(@iterate.sum_injection())
   let t265 = @tactics.disch_then(fn(x264 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1425,7 +1425,7 @@ pub fn msum_injection() -> @kernel.Thm {
 ///|
 /// MSUM_SWAP
 fn step_77() -> Unit raise {
-  let t280 = @simp.asm_rewrite_tac(@list.empty())
+  let t280 = @simp.asm_rewrite_tac(@list.List([]))
   let t274 = @drule.part_match(fn(x273 : @kernel.Term) -> @kernel.Term raise {
     @equal.lhs(@kernel.rand(x273))
   }, @iterate.sum_swap())

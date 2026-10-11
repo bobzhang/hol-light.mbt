@@ -233,7 +233,7 @@ pub fn sym_alt() -> @kernel.Thm {
 ///|
 /// TRANS_ALT
 fn step_4() -> Unit raise {
-  let t18 = @simp.asm_rewrite_tac(@list.empty())
+  let t18 = @simp.asm_rewrite_tac(@list.List([]))
   let t17 = @simp.once_rewrite_tac(
     @list.List([@theorems.left_imp_exists_thm()]),
   )
@@ -390,7 +390,7 @@ pub fn rc_mono() -> @kernel.Thm {
 ///|
 /// RC_CLOSED
 fn step_10() -> Unit raise {
-  let t24 = @meson.meson_tac(@list.empty())
+  let t24 = @meson.meson_tac(@list.List([]))
   let t25 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), rc_explicit()])),
     t24,
@@ -456,7 +456,7 @@ pub fn rc_sym() -> @kernel.Thm {
 ///|
 /// RC_TRANS
 fn step_13() -> Unit raise {
-  let t28 = @meson.meson_tac(@list.empty())
+  let t28 = @meson.meson_tac(@list.List([]))
   let t29 = @tactics.then_tac(@simp.rewrite_tac(@list.List([rc_cases()])), t28)
   rc_trans_c.set(
     @tactics.prove(
@@ -563,7 +563,7 @@ pub fn sc_sym() -> @kernel.Thm {
 /// SC_EXPLICIT
 fn step_17() -> Unit raise {
   let t33 = @meson.meson_tac(@list.List([sc_cases()]))
-  let t32 = @meson.meson_tac(@list.empty())
+  let t32 = @meson.meson_tac(@list.List([]))
   let t34 = @list.List([
     @tactics.then_tac(rule_induct_tac(sc_induct()), t32),
     t33,
@@ -615,7 +615,7 @@ pub fn sc_mono() -> @kernel.Thm {
 ///|
 /// SC_CLOSED
 fn step_19() -> Unit raise {
-  let t37 = @meson.meson_tac(@list.empty())
+  let t37 = @meson.meson_tac(@list.List([]))
   let t38 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), sc_explicit()])),
     t37,
@@ -798,7 +798,7 @@ pub fn tc_mono() -> @kernel.Thm {
 /// TC_CLOSED
 fn step_26() -> Unit raise {
   let t49 = @meson.meson_tac(@list.List([tc_rules()]))
-  let t48 = @meson.asm_meson_tac(@list.empty())
+  let t48 = @meson.asm_meson_tac(@list.List([]))
   let t50 = @list.List([
     @tactics.then_tac(rule_induct_tac(tc_induct()), t48),
     t49,
@@ -913,7 +913,7 @@ pub fn tc_sym() -> @kernel.Thm {
 ///|
 /// RC_SC
 fn step_30() -> Unit raise {
-  let t57 = @meson.meson_tac(@list.empty())
+  let t57 = @meson.meson_tac(@list.List([]))
   let t58 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([@class.fun_eq_thm(), rc_explicit(), sc_explicit()]),
@@ -1177,7 +1177,7 @@ pub fn tc_cases_r() -> @kernel.Thm {
 /// TC_INDUCT_L
 fn step_40() -> Unit raise {
   let t85 = @meson.asm_meson_tac(@list.List([tc_cases_r()]))
-  let t84 = @meson.asm_meson_tac(@list.empty())
+  let t84 = @meson.asm_meson_tac(@list.List([]))
   let t86 = @list.List([
     @tactics.then_tac(@tactics.match_mp_tac(tc_induct()), t84),
     t85,
@@ -1264,7 +1264,7 @@ pub fn tc_induct_l() -> @kernel.Thm {
 /// TC_INDUCT_R
 fn step_41() -> Unit raise {
   let t93 = @meson.asm_meson_tac(@list.List([tc_cases_l()]))
-  let t92 = @meson.asm_meson_tac(@list.empty())
+  let t92 = @meson.asm_meson_tac(@list.List([]))
   let t94 = @list.List([
     @tactics.then_tac(@tactics.match_mp_tac(tc_induct()), t92),
     t93,
@@ -1351,7 +1351,7 @@ pub fn tc_induct_r() -> @kernel.Thm {
 /// WF_TC
 fn step_42() -> Unit raise {
   let t105 = @meson.meson_tac(@list.List([tc_cases_l()]))
-  let t104 = @simp.rewrite_tac(@list.empty())
+  let t104 = @simp.rewrite_tac(@list.List([]))
   let t100 = @parser.parse_term("\\y:A. ?z. P z /\\ TC(R) z y")
   let t103 = @tactics.first_x_assum(fn(
     x102 : @kernel.Thm,
@@ -1569,7 +1569,7 @@ pub fn rsc_cases() -> @kernel.Thm {
 ///|
 /// RSC_INDUCT
 fn step_48() -> Unit raise {
-  let t114 = @meson.meson_tac(@list.empty())
+  let t114 = @meson.meson_tac(@list.List([]))
   let t115 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([rsc(), rc_explicit(), sc_explicit()])),
     t114,
@@ -1620,7 +1620,7 @@ pub fn rsc_mono() -> @kernel.Thm {
 ///|
 /// RSC_CLOSED
 fn step_50() -> Unit raise {
-  let t118 = @meson.meson_tac(@list.empty())
+  let t118 = @meson.meson_tac(@list.List([]))
   let t119 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([@class.fun_eq_thm(), rsc(), rc_explicit(), sc_explicit()]),
@@ -1910,7 +1910,7 @@ pub fn rtc_cases_r() -> @kernel.Thm {
 ///|
 /// RTC_INDUCT
 fn step_62() -> Unit raise {
-  let t139 = @meson.asm_meson_tac(@list.empty())
+  let t139 = @meson.asm_meson_tac(@list.List([]))
   let t138 = @simp.rewrite_tac(@list.List([rc_explicit()]))
   let t137 = @tactics.match_mp_tac(tc_induct())
   let t136 = @simp.rewrite_tac(@list.List([rtc(), rc_tc()]))
@@ -1952,7 +1952,7 @@ pub fn rtc_induct() -> @kernel.Thm {
 ///|
 /// RTC_INDUCT_L
 fn step_63() -> Unit raise {
-  let t144 = @meson.asm_meson_tac(@list.empty())
+  let t144 = @meson.asm_meson_tac(@list.List([]))
   let t143 = @simp.rewrite_tac(@list.List([rc_explicit()]))
   let t142 = @tactics.match_mp_tac(tc_induct_l())
   let t141 = @simp.rewrite_tac(@list.List([rtc(), rc_tc()]))
@@ -1994,7 +1994,7 @@ pub fn rtc_induct_l() -> @kernel.Thm {
 ///|
 /// RTC_INDUCT_R
 fn step_64() -> Unit raise {
-  let t149 = @meson.asm_meson_tac(@list.empty())
+  let t149 = @meson.asm_meson_tac(@list.List([]))
   let t148 = @simp.rewrite_tac(@list.List([rc_explicit()]))
   let t147 = @tactics.match_mp_tac(tc_induct_r())
   let t146 = @simp.rewrite_tac(@list.List([rtc(), rc_tc()]))
@@ -2134,7 +2134,7 @@ pub fn rtc_sym() -> @kernel.Thm {
 ///|
 /// RTC_STUTTER
 fn step_69() -> Unit raise {
-  let t160 = @meson.meson_tac(@list.empty())
+  let t160 = @meson.meson_tac(@list.List([]))
   let t159 = @simp.rewrite_tac(@list.List([rc_cases()]))
   let t158 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t161 = @tactics.then_tac(
@@ -2275,7 +2275,7 @@ pub fn tc_rtc_tc_cases() -> @kernel.Thm {
 /// RTC_NE_IMP_TC
 fn step_74() -> Unit raise {
   let t172 = @meson.meson_tac(@list.List([tc_inc(), tc_cases()]))
-  let t171 = @simp.rewrite_tac(@list.empty())
+  let t171 = @simp.rewrite_tac(@list.List([]))
   let t170 = @tactics.match_mp_tac(rtc_induct())
   let t173 = @tactics.then_tac(
     @tactics.then_tac(
@@ -2582,7 +2582,7 @@ pub fn stc_mono() -> @kernel.Thm {
 ///|
 /// STC_CLOSED
 fn step_86() -> Unit raise {
-  let t201 = @meson.meson_tac(@list.empty())
+  let t201 = @meson.meson_tac(@list.List([]))
   let t200 = @equal.gsym(tc_closed())
   let t202 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@equal.gsym(sc_closed()), t200])),
@@ -3015,7 +3015,7 @@ pub fn rstc_cases_r() -> @kernel.Thm {
 ///|
 /// RSTC_INDUCT
 fn step_100() -> Unit raise {
-  let t231 = @meson.asm_meson_tac(@list.empty())
+  let t231 = @meson.asm_meson_tac(@list.List([]))
   let t230 = @simp.rewrite_tac(@list.List([rc_explicit()]))
   let t229 = @tactics.match_mp_tac(stc_induct())
   let t228 = @simp.rewrite_tac(@list.List([@equal.gsym(stc())]))
@@ -3683,7 +3683,7 @@ pub fn relpow_r() -> @kernel.Thm {
 ///|
 /// RELPOW_M
 fn step_127() -> Unit raise {
-  let t275 = @meson.meson_tac(@list.empty())
+  let t275 = @meson.meson_tac(@list.List([]))
   let t276 = @tactics.then_tac(
     @tactics.then_tac(
       @nums.induct_tac,
@@ -3765,7 +3765,7 @@ pub fn rtc_relpow() -> @kernel.Thm {
 ///|
 /// TC_RELPOW
 fn step_129() -> Unit raise {
-  let t290 = @meson.meson_tac(@list.empty())
+  let t290 = @meson.meson_tac(@list.List([]))
   let t289 = @simp.rewrite_tac(@list.List([rtc(), rc_explicit()]))
   let t288 = @simp.once_rewrite_tac(@list.List([tc_cases_l()]))
   let t287 = @simp.rewrite_tac(
@@ -3805,11 +3805,11 @@ pub fn tc_relpow() -> @kernel.Thm {
 ///|
 /// RELPOW_SEQUENCE
 fn step_130() -> Unit raise {
-  let t318 = @meson.asm_meson_tac(@list.empty())
-  let t317 = @simp.asm_rewrite_tac(@list.empty())
+  let t318 = @meson.asm_meson_tac(@list.List([]))
+  let t317 = @simp.asm_rewrite_tac(@list.List([]))
   let t316 = @tactics.first_assum(@tactics.match_mp_tac)
   let t315 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t314 = @simp.asm_rewrite_tac(@list.empty())
+  let t314 = @simp.asm_rewrite_tac(@list.List([]))
   let t319 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -3833,7 +3833,7 @@ fn step_130() -> Unit raise {
     ),
     t319,
   )
-  let t311 = @simp.asm_rewrite_tac(@list.empty())
+  let t311 = @simp.asm_rewrite_tac(@list.List([]))
   let t310 = @tactics.first_assum(@tactics.match_mp_tac)
   let t309 = @simp.asm_rewrite_tac(@list.List([@arith.le_lt()]))
   let t308 = @simp.asm_rewrite_tac(@list.List([@arith.le_suc_lt()]))
@@ -3874,7 +3874,7 @@ fn step_130() -> Unit raise {
     ),
     t311,
   )
-  let t304 = @meson.asm_meson_tac(@list.empty())
+  let t304 = @meson.asm_meson_tac(@list.List([]))
   let t303 = @simp.asm_rewrite_tac(@list.List([@nums.not_suc()]))
   let t302 = @tactics.repeat_tac(@tactics.strip_tac)
   let t301 = @simp.asm_rewrite_tac(@list.List([@calc_num.arith(), @arith.lt()]))
@@ -3913,8 +3913,8 @@ fn step_130() -> Unit raise {
     ),
     t321,
   )
-  let t298 = @meson.meson_tac(@list.empty())
-  let t297 = @simp.rewrite_tac(@list.empty())
+  let t298 = @meson.meson_tac(@list.List([]))
+  let t297 = @simp.rewrite_tac(@list.List([]))
   let t296 = @tactics.exists_tac(@parser.parse_term("\\n:num. y:A"))
   let t299 = @list.List([
     @tactics.then_tac(

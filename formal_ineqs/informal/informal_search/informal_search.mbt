@@ -371,7 +371,7 @@ pub fn try_mono(x46 : SearchOptions, x47 : @informal_taylor.MCellDomain, x48 : F
     }
   }
   let t55 = dom_1.w
-  let st = mono(@list.empty(), @lib.zip(@lib.range(1L, ti_1.n), t55))
+  let st = mono(@list.List([]), @lib.zip(@lib.range(1L, ti_1.n), t55))
   if (Int::to_int64(@lib.length(st)) == 0L) {
     raise Failure("Not monotonic")
   } else {

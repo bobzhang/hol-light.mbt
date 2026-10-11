@@ -547,10 +547,10 @@ pub fn check_arg_form(
     let free = x46
     if @kernel.is_comb(t) {
       let (rator, rand) = @kernel.dest_comb(t)
-      let (free_p, pat1) = chk(rand, @list.empty(), free)
+      let (free_p, pat1) = chk(rand, @list.List([]), free)
       chk(rator, stk.prepend(pat1), free_p)
     } else if @kernel.is_var(t) {
-      if stk == @list.empty() {
+      if stk == @list.List([]) {
         let newi = Int::to_int64(@lib.length(free))
         (
           free,
@@ -575,7 +575,7 @@ pub fn check_arg_form(
       )
     }
   }
-  match chk(trm, @list.empty(), @list.empty()) {
+  match chk(trm, @list.List([]), @list.List([])) {
     (fv, Pattern::Papp(head, args)) => (@lib.rev(fv), head, args)
     _ => raise Failure("check_arg_form: ill-formed lhs")
   }
@@ -918,10 +918,10 @@ pub fn[TA] partition_skip(
       if n <= len {
         @lib.chop_list(@lib.int63_to_int(@lib.sub63(len, n)), args)
       } else {
-        (@list.empty(), args)
+        (@list.List([]), args)
       }
     }
-    None => (@list.empty(), args)
+    None => (@list.List([]), args)
   }
 }
 
@@ -1125,7 +1125,7 @@ pub fn mk_rewrite(x76 : Compset, x77 : @kernel.Thm) -> Rewrite raise {
 pub fn unsuitable(x78 : @kernel.Thm) -> Bool raise {
   let th = x78
   let (l, r) = @kernel.dest_eq(@kernel.concl(th))
-  @lib.can((x79 : @kernel.Term) => @drule.term_match(@list.empty(), l, x79), r)
+  @lib.can((x79 : @kernel.Term) => @drule.term_match(@list.List([]), l, x79), r)
 }
 
 ///|
@@ -1263,12 +1263,12 @@ pub fn rws_of(
           }
         },
         htbl,
-        @list.empty(),
+        @list.List([]),
       )
       fn get_actions(x109 : Db) -> @list.List[(@kernel.Term, Action)] raise {
         let db_1 = x109
         match db_1 {
-          Db::End_db => @list.empty()
+          Db::End_db => @list.List([])
           Db::Need_arg(db_p) => get_actions(db_p)
           Db::Try({ hcst, rws, tail }) =>
             get_actions(tail).prepend((hcst, rws))
@@ -1295,7 +1295,7 @@ fn[TA] dest_action_l(
 ) -> (TA, @list.List[@kernel.Thm]) raise {
   match x111 {
     (hcst_1, Action::Rewrite(rws_1)) => (hcst_1, @lib.map(dest, rws_1))
-    (hcst_2, Action::Conv(_)) => (hcst_2, @list.empty())
+    (hcst_2, Action::Conv(_)) => (hcst_2, @list.List([]))
   }
 }
 
@@ -1328,12 +1328,12 @@ pub fn deplist(
           }
         },
         htbl,
-        @list.empty(),
+        @list.List([]),
       )
       fn get_actions(x116 : Db) -> @list.List[Action] raise {
         let db_1 = x116
         match db_1 {
-          Db::End_db => @list.empty()
+          Db::End_db => @list.List([])
           Db::Need_arg(db_p) => get_actions(db_p)
           Db::Try({ hcst, rws, tail }) => get_actions(tail).prepend(rws)
         }
@@ -1542,7 +1542,7 @@ pub fn[TA] mk_clos(
   let (env, t) = (x140, x141)
   match t {
     Dterm::Cst(hc, { val: (db, b) }) =>
-      Fterm::Const(CstRec::{ head: hc, args: @list.empty(), rws: db, skip: b, })
+      Fterm::Const(CstRec::{ head: hc, args: @list.List([]), rws: db, skip: b, })
     Dterm::Bv(i) => @lib.list_nth(env, @lib.int63_to_int(i))
     Dterm::Fv => Fterm::Neutr
     _ => Fterm::Clos(ClosRec::{ env, term: t, })
@@ -1579,7 +1579,7 @@ pub fn inst_rw(
       let tithm = @kernel.inst_type(tysub, thm)
       let (spec_thm, venv) = @lib.array_fold_left(
         inst_one_var,
-        (tithm, @list.empty()),
+        (tithm, @list.List([])),
         bds,
       )
       match
@@ -1653,7 +1653,7 @@ pub fn reduce_cst(
             Some(p) => if p(head) { raise No_match::No_match } else { () }
           }) {
           _ => {
-            let (_, _, tytheta) = @drule.term_match(@list.empty(), hcst, head) catch {
+            let (_, _, tytheta) = @drule.term_match(@list.List([]), hcst, head) catch {
               _ => raise No_match::No_match
             }
             let rule_inst = try_rwn(tytheta, args)(rls)
@@ -1795,7 +1795,7 @@ pub fn initial_state(
 ) -> ((@kernel.Thm, Fterm[Db]), CbvStack) raise {
   let rws = x150
   let t = x151
-  let t152 = mk_clos(@list.empty(), from_term(rws, @list.empty(), t))
+  let t152 = mk_clos(@list.List([]), from_term(rws, @list.List([]), t))
   ((refl_thm(t), t152), Stack::Ztop)
 }
 
@@ -2203,8 +2203,8 @@ pub fn[TA] extern_of_conv(
   (
     thm,
     mk_clos(
-      @list.empty(),
-      from_term(rws, @list.empty(), @equal.rhs(@kernel.concl(thm))),
+      @list.List([]),
+      from_term(rws, @list.List([]), @equal.rhs(@kernel.concl(thm))),
     ),
   )
 }

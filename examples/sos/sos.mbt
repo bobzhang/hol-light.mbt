@@ -926,7 +926,7 @@ pub fn poly_variables(x226 : @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num]
     (fn(x232 : @list.List[@kernel.Term]) -> @list.List[@kernel.Term] raise {
       ((x231 : @list.List[@kernel.Term]) => @lib.union(t230, x231))(x232)
     })(x229)
-  }, p, @list.empty())
+  }, p, @list.List([]))
 }
 
 ///|
@@ -1089,7 +1089,7 @@ pub fn string_of_monomial(x262 : @lib.Func[@kernel.Term, Int64]) -> String raise
       let (x, k) = x263
       let a = x264
       a.prepend(string_of_varpow(x, k))
-    }, @lib.sort(humanorder_varpow, @lib.graph(m)), @list.empty())
+    }, @lib.sort(humanorder_varpow, @lib.graph(m)), @list.List([]))
     @lib.end_itlist(fn(x265 : String, x266 : String) -> String raise {
       let s = x265
       let t = x266
@@ -1303,7 +1303,7 @@ pub fn sdpa_of_blockdiagonal_v1(x294 : Int64, x295 : @lib.Func[(Int64, Int64, In
     } else {
       a.prepend(((b, i, j), c))
     }
-  }, @list.empty(), m)
+  }, @list.List([]), m)
   let entss = @lib.sort((x300 : ((Int64, Int64, Int64), @num.Num), x301 : ((Int64, Int64, Int64), @num.Num)) => @lib.increasing(fn(x299 : ((Int64, Int64, Int64), @num.Num)) -> (Int64, Int64, Int64) raise {
     x299.0
   }, x300, x301), ents)
@@ -1333,7 +1333,7 @@ pub fn sdpa_of_matrix_v1(x308 : Int64, x309 : ((Int64, Int64), @lib.Func[(Int64,
     } else {
       a.prepend(((i, j), c))
     }
-  }, m.1, @list.empty())
+  }, m.1, @list.List([]))
   let mss = @lib.sort((x314 : ((Int64, Int64), @num.Num), x315 : ((Int64, Int64), @num.Num)) => @lib.increasing(fn(x313 : ((Int64, Int64), @num.Num)) -> (Int64, Int64) raise {
     x313.0
   }, x314, x315), ms)
@@ -1563,7 +1563,7 @@ fn[TA, TB, TC, TD, TE] skipupto_l(x372 : (@list.List[TE]) -> (TC, TD) raise, x37
 ///|
 fn[TF, TG] ignore__l(x380 : TG) -> ((Unit, @list.List[TF])) raise {
   let inp_1 = x380
-  ((), @list.empty())
+  ((), @list.List([]))
 }
 
 ///|
@@ -2052,7 +2052,7 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] eliminate_equations(x : TA) -> ((@l
         let x = x511
         let f = x512
         @lib.subtract(@lib.dom(f), @list.List([one])).concat(a_1)
-      }, @list.empty(), assig)
+      }, @list.List([]), assig)
       (@lib.setify(vs_1), assig)
     }
   }
@@ -2160,7 +2160,7 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] eliminate_all_equations(x513 : TA) 
       let x = x523
       let f = x524
       @lib.subtract(@lib.dom(f), @list.List([one])).concat(a_1)
-    }, @list.empty(), assig)
+    }, @list.List([]), assig)
     (@lib.setify(vs), assig)
   }
 }
@@ -2237,7 +2237,7 @@ pub fn newton_polytope(x538 : @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num
       let t = x545
       t.prepend(h)
     }, t546, x547))(x543)
-  }, ds, @list.List([@list.empty()]))
+  }, ds, @list.List([@list.List([])]))
   let mons_p = minimal_convex_hull(mons)
   let all_p = @lib.filter(fn(x548 : @list.List[Int64]) -> Bool raise {
     let m_1 = x548
@@ -2274,7 +2274,7 @@ pub fn diag(x554 : ((Int64, Int64), @lib.Func[(Int64, Int64), @num.Num])) -> @li
       let i = x555
       let m_1 = x556
       if is_zero(m_1.0, m_1.1) {
-        @list.empty()
+        @list.List([])
       } else {
         let a11 = element(m_1, (i, i))
         if @num.lt_num(a11, @num.num_of_int64(0L)) {
@@ -2385,7 +2385,7 @@ pub fn enumerate_monomials(x599 : Int64, x600 : @list.List[@kernel.Term]) -> @li
   let d = x599
   let vars = x600
   if (d < 0L) {
-    @list.empty()
+    @list.List([])
   } else {
     if (d == 0L) {
       @list.List([@lib.undefined()])
@@ -2429,7 +2429,7 @@ pub fn enumerate_products(x609 : Int64, x610 : @list.List[(@lib.Func[@lib.Func[@
     @list.List([(poly_const(@num.num_1), t611)])
   } else {
     if (d < 0L) {
-      @list.empty()
+      @list.List([])
     } else {
       match pols {
         Empty => {
@@ -2514,7 +2514,7 @@ pub fn sdpa_of_blockdiagonal_v2(x632 : Int64, x633 : @lib.Func[(Int64, Int64, In
     } else {
       a.prepend(((b, i, j), c))
     }
-  }, @list.empty(), m)
+  }, @list.List([]), m)
   let entss = @lib.sort((x638 : ((Int64, Int64, Int64), @num.Num), x639 : ((Int64, Int64, Int64), @num.Num)) => @lib.increasing(fn(x637 : ((Int64, Int64, Int64), @num.Num)) -> (Int64, Int64, Int64) raise {
     x637.0
   }, x638, x639), ents)
@@ -2733,7 +2733,7 @@ pub fn real_positivnullstellensatz_general(x696 : Bool, x697 : Int64, x698 : @li
     })(poly_variables(x703))(x704)
   }, (eqs.prepend(pol)).concat(@lib.map(fn(x705 : (@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num], @realarith.Positivstellensatz)) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num] raise {
     x705.0
-  }, leqs)), @list.empty())
+  }, leqs)), @list.List([]))
   let monoid = if linf {
     let t708 = @lib.filter(fn(x707 : (@lib.Func[@lib.Func[@kernel.Term, Int64], @num.Num], @realarith.Positivstellensatz)) -> Bool raise {
       let (p, c) = x707
@@ -2787,7 +2787,7 @@ pub fn real_positivnullstellensatz_general(x696 : Bool, x697 : Int64, x698 : @li
     let m_2 = x736
     let e_3 = x737
     a_3.prepend(e_3)
-  }, @list.empty(), bigsum)
+  }, @list.List([]), bigsum)
   let (pvs, assig) = eliminate_all_equations((0L, 0L, 0L))(eqns)
   let qvars = pvs.prepend((0L, 0L, 0L))
   let allassig = @lib.itlist(fn(x738 : (Int64, Int64, Int64), x739 : @lib.Func[(Int64, Int64, Int64), @lib.Func[(Int64, Int64, Int64), @num.Num]]) -> @lib.Func[(Int64, Int64, Int64), @lib.Func[(Int64, Int64, Int64), @num.Num]] raise {
@@ -3199,7 +3199,7 @@ fn step_24() -> Unit raise {
         let (x, k) = x854
         let a = x855
         a.prepend(term_of_varpow(x)(k))
-      }, m_p, @list.empty())
+      }, m_p, @list.List([]))
       @lib.end_itlist(fn(x856 : @kernel.Term, x857 : @kernel.Term) -> @kernel.Term raise {
         let s = x856
         let t = x857
@@ -3442,7 +3442,7 @@ fn step_27() -> Unit raise {
   let isolate_variable = (x912 : @kernel.Term, x913 : @kernel.Thm) => isolate_variable_l(shuffle2, shuffle1, x912, x913)
   let make_substitution : (@kernel.Thm) -> @kernel.Thm raise = fn(x914 : @kernel.Thm) -> @kernel.Thm raise {
     let th_1 = x914
-    let (c_1, v_1) = substitutable_monomial(@list.empty(), @equal.lhs(@kernel.concl(th_1)))
+    let (c_1, v_1) = substitutable_monomial(@list.List([]), @equal.lhs(@kernel.concl(th_1)))
     let th1 = @equal.ap_term(@kernel.mk_comb(mul_tm, @calc_int.term_of_rat(@num.div_num(@num.num_of_int64(1L), c_1))), th_1)
     let th2 = @equal.conv_rule(@equal.binop_conv(@calc_rat.real_poly_mul_conv), th1)
     let t915 = isolate_variable(v_1, th2)
@@ -3711,7 +3711,7 @@ fn step_31() -> Unit raise {
 pub fn[TA : Eq + @lib.OCompare + @lib.OHash] allpermutations(x973 : @list.List[TA]) -> @list.List[@list.List[TA]] raise {
   let l = x973
   if @list.List::is_empty(l) {
-    @list.List([@list.empty()])
+    @list.List([@list.List([])])
   } else {
     @lib.itlist(fn(x974 : TA, x975 : @list.List[@list.List[TA]]) -> @list.List[@list.List[TA]] raise {
       let h = x974
@@ -3720,7 +3720,7 @@ pub fn[TA : Eq + @lib.OCompare + @lib.OHash] allpermutations(x973 : @list.List[T
         let t = x976
         t.prepend(h)
       }, allpermutations(@lib.subtract(l, @list.List([h])))).concat(acc)
-    }, l, @list.empty())
+    }, l, @list.List([]))
   }
 }
 
@@ -3795,7 +3795,7 @@ pub fn sdpa_of_blockdiagonal(x997 : Int64, x998 : @lib.Func[(Int64, Int64, Int64
     } else {
       a.prepend(((b, i, j), c))
     }
-  }, @list.empty(), m)
+  }, @list.List([]), m)
   let entss = @lib.sort((x1003 : ((Int64, Int64, Int64), @num.Num), x1004 : ((Int64, Int64, Int64), @num.Num)) => @lib.increasing(fn(x1002 : ((Int64, Int64, Int64), @num.Num)) -> (Int64, Int64, Int64) raise {
     x1002.0
   }, x1003, x1004), ents)
@@ -3825,7 +3825,7 @@ pub fn sdpa_of_matrix(x1011 : Int64, x1012 : ((Int64, Int64), @lib.Func[(Int64, 
     } else {
       a.prepend(((i, j), c))
     }
-  }, m.1, @list.empty())
+  }, m.1, @list.List([]))
   let mss = @lib.sort((x1017 : ((Int64, Int64), @num.Num), x1018 : ((Int64, Int64), @num.Num)) => @lib.increasing(fn(x1016 : ((Int64, Int64), @num.Num)) -> (Int64, Int64) raise {
     x1016.0
   }, x1017, x1018), ms)
@@ -4015,13 +4015,13 @@ pub fn sumofsquares_general_symmetry(x1045 : ((Int64, @lib.Func[Int64, @num.Num]
       x1068.1
     }, x1069))(x1070))
   }, clppcs_cls)
-  let sym_eqs = @lib.itlist(mk_eq_l, eqvcls, @list.empty())
+  let sym_eqs = @lib.itlist(mk_eq_l, eqvcls, @list.List([]))
   let eqs = @lib.foldl(fn(x1075 : @list.List[@lib.Func[(Int64, Int64), @num.Num]], x1076 : @lib.Func[@kernel.Term, Int64], x1077 : @lib.Func[(Int64, Int64), @num.Num]) -> @list.List[@lib.Func[(Int64, Int64), @num.Num]] raise {
     let a = x1075
     let x = x1076
     let y = x1077
     a.prepend(y)
-  }, @list.empty(), itern(1L, lpps, fn(x1078 : @lib.Func[@kernel.Term, Int64]) -> ((Int64) -> ((@lib.Func[@lib.Func[@kernel.Term, Int64], @lib.Func[(Int64, Int64), @num.Num]]) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @lib.Func[(Int64, Int64), @num.Num]] raise) raise) raise {
+  }, @list.List([]), itern(1L, lpps, fn(x1078 : @lib.Func[@kernel.Term, Int64]) -> ((Int64) -> ((@lib.Func[@lib.Func[@kernel.Term, Int64], @lib.Func[(Int64, Int64), @num.Num]]) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @lib.Func[(Int64, Int64), @num.Num]] raise) raise) raise {
     let m1_2 = x1078
     fn(x1079 : Int64) -> ((@lib.Func[@lib.Func[@kernel.Term, Int64], @lib.Func[(Int64, Int64), @num.Num]]) -> @lib.Func[@lib.Func[@kernel.Term, Int64], @lib.Func[(Int64, Int64), @num.Num]] raise) raise {
       let n1_3 = x1079

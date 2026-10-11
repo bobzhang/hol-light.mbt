@@ -243,7 +243,7 @@ pub fn ppoint(x : ((Int64, Int64), (Int64, Int64), (Int64, Int64))) -> @kernel.T
 /// `DEDUCE_POINT_TAC`
 pub fn deduce_point_tac(x38 : @list.List[((Int64, Int64), (Int64, Int64), (Int64, Int64))]) -> @tactics.Tactic raise {
   let pts = x38
-  let t41 = @simp.asm_rewrite_tac(@list.empty())
+  let t41 = @simp.asm_rewrite_tac(@list.List([]))
   let t40 = @tactics.map_every(@rqe_tactics_ext.exists_tac, @lib.map(hol_of_point, pts))
   @tactics.then_tac(@tactics.then_tac(@tactics.first_x_assum(@tactics.match_mp_tac), t40), t41)
 }
@@ -319,7 +319,7 @@ pub fn kochen_specker_tac(x42 : @list.List[((Int64, Int64), (Int64, Int64), (Int
 ///|
 /// KOCHEN_SPECKER_LEMMA
 fn step_11() -> Unit raise {
-  let t73 = kochen_specker_tac(@list.empty(), @list.empty())
+  let t73 = kochen_specker_tac(@list.List([]), @list.List([]))
   let t72 = @tactics.map_every(fn(x71 : (((Int64, Int64), (Int64, Int64), (Int64, Int64)), ((Int64, Int64), (Int64, Int64), (Int64, Int64)))) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x68 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s69 = @tactics.assume_tac(x68)
@@ -380,7 +380,7 @@ fn step_13() -> Unit raise {
       s79(x80)
     }
   })
-  let t77 = @simp.asm_rewrite_tac(@list.empty())
+  let t77 = @simp.asm_rewrite_tac(@list.List([]))
   let t76 = @tactics.mp_tac(@bool.spec(@parser.parse_term("\\x:real^3. spin(x) = 1"), kochen_specker_lemma()))
   let t87 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t76), t77), @tactics.conj_tac), t81), t82), t85), t86)
   kochen_specker_paradox_c.set(@tactics.prove(@parser.parse_term("~(?spin:real^3->num.\n        !x y z. ~(x = vec 0) /\\ ~(y = vec 0) /\\ ~(z = vec 0) /\\\n                orthogonal x y /\\ orthogonal x z /\\ orthogonal y z\n                ==> (spin x = 0) /\\ (spin y = 1) /\\ (spin z = 1) \\/\n                    (spin x = 1) /\\ (spin y = 0) /\\ (spin z = 1) \\/\n                    (spin x = 1) /\\ (spin y = 1) /\\ (spin z = 0))"), t87))

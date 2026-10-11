@@ -15,7 +15,7 @@ pub fn real_strip(x3 : @list.List[@kernel.Term], x4 : @kernel.Term) -> ((@kernel
   let w = x3
   let tm = x4
   if @lib.mem(tm, w) {
-    (tm, @list.empty())
+    (tm, @list.List([]))
   } else {
     let (l, r) = @kernel.dest_comb(tm)
     let (f, args) = real_strip(w, l)
@@ -219,7 +219,7 @@ pub fn[TA] overlaps(x54 : @list.List[@kernel.Term], x55 : @kernel.Thm, x56 : @ke
   let rfn = x57
   let (l, r) = @kernel.dest_eq(@kernel.concl(th))
   if !@kernel.is_comb(tm) {
-    @list.empty()
+    @list.List([])
   } else {
     let (f, args) = @basics.strip_comb(tm)
     listcases(fn(x60 : @kernel.Term) -> (((@list.List[(@kernel.Term, @kernel.Term)]) -> ((@kernel.Thm) -> TA raise) raise) -> @list.List[TA] raise) raise {
@@ -236,7 +236,7 @@ pub fn[TA] overlaps(x54 : @list.List[@kernel.Term], x55 : @kernel.Thm, x56 : @ke
     }, args, try {
       @list.List([rfn(fullunify(w, (l, tm)))(th)])
     } catch {
-      Failure(_) => @list.empty()
+      Failure(_) => @list.List([])
       e => raise e
     })
   }
@@ -316,7 +316,7 @@ pub fn critical_pairs(x85 : @list.List[@kernel.Term], x86 : @kernel.Thm, x87 : @
   if (@kernel.concl(th1) == t88) {
     crit1(w, th1, th2)
   } else {
-    let t90 = thm_union(crit1(w, th2, th1), @list.empty())
+    let t90 = thm_union(crit1(w, th2, th1), @list.List([]))
     @lib.filter(fn(x89 : @kernel.Thm) -> Bool raise {
       let th = x89
       let (l, r) = @kernel.dest_eq(@kernel.concl(th))
@@ -407,7 +407,7 @@ pub fn complete(x110 : @list.List[@kernel.Term], x111 : (@list.List[@kernel.Thm]
                 x113.concat(x114)
               }
             })(((x115 : @kernel.Thm) => critical_pairs(w, eq_p, x115))(x116))(x117)
-          }, eqs_p_p, @list.empty()))))
+          }, eqs_p_p, @list.List([])))))
         }
       } catch {
         Failure(_) => {
@@ -431,8 +431,8 @@ pub fn complete(x110 : @list.List[@kernel.Term], x111 : (@list.List[@kernel.Thm]
 pub fn complete_equations(x120 : @list.List[@kernel.Term], x121 : @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise {
   let wts = x120
   let eqs = x121
-  let eqs_p = @lib.map((x122 : @kernel.Thm) => normalize_and_orient(wts, @list.empty(), x122), eqs)
-  complete(wts, (@list.empty(), eqs_p))
+  let eqs_p = @lib.map((x122 : @kernel.Thm) => normalize_and_orient(wts, @list.List([]), x122), eqs)
+  complete(wts, (@list.List([]), eqs_p))
 }
 
 ///|
@@ -560,7 +560,7 @@ fn step_10() -> Unit raise {
 ///|
 /// Examples/kb.ml:283
 fn step_11() -> Unit raise {
-  ignore(@tactics.e(@simp.asm_rewrite_tac(@list.empty())))
+  ignore(@tactics.e(@simp.asm_rewrite_tac(@list.List([]))))
 }
 
 ///|
@@ -582,7 +582,7 @@ fn step_13() -> Unit raise {
 ///|
 /// Examples/kb.ml:295
 fn step_14() -> Unit raise {
-  ignore(@tactics.e(@simp.asm_rewrite_tac(@list.empty())))
+  ignore(@tactics.e(@simp.asm_rewrite_tac(@list.List([]))))
 }
 
 ///|

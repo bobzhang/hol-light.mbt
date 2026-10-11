@@ -190,7 +190,7 @@ pub fn mcurve_of_ecurve_strongly_nonsingular() -> @kernel.Thm {
 ///|
 /// MCURVE_OF_ECURVE_NONSINGULAR
 fn step_10() -> Unit raise {
-  let t51 = @simp.asm_rewrite_tac(@list.empty())
+  let t51 = @simp.asm_rewrite_tac(@list.List([]))
   let t50 = @tactics.match_mp_tac(mcurve_of_ecurve_strongly_nonsingular())
   let t49 = @simp.rewrite_tac(@list.List([@equal.gsym(mcurve_of_ecurve())]))
   let t48 = @tactics.try_tac(@ringtheory.ring_carrier_tac)
@@ -330,7 +330,7 @@ fn step_13() -> Unit raise {
       @tactics.all_tac
     })(t134(x135))
   })
-  let t131 = @meson.asm_meson_tac(@list.empty())
+  let t131 = @meson.asm_meson_tac(@list.List([]))
   let t130 = @simp.asm_rewrite_tac(@list.List([@montgomery.montgomery_curve()]))
   let t125 = @parser.parse_term("y:A")
   let t126 = @list.List([@parser.parse_term("x:A"), t125])
@@ -343,7 +343,7 @@ fn step_13() -> Unit raise {
     })(((x127 : @kernel.Thm) => @bool.specl(t126, x127))(x128))
   })
   let t121 = @list.List([@meson.asm_meson_tac(@list.List([@prime.divides_refl()])), @tactics.all_tac])
-  let t120 = @simp.asm_rewrite_tac(@list.empty())
+  let t120 = @simp.asm_rewrite_tac(@list.List([]))
   let t118 = @parser.parse_term("B:A")
   let t119 = @parser.parse_term("A:A")
   let t137 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:A ring"), t119, t118]), @montgomery.montgomery_strongly_nonsingular_v1())), t120), @tactics.ants_tac), t121), t129), t130), t131), t136])
@@ -423,7 +423,7 @@ fn step_14() -> Unit raise {
     })(((x176 : @kernel.Thm) => @bool.specl(t175, x176))(x177))
   })
   let t170 = @list.List([@meson.asm_meson_tac(@list.List([@prime.divides_refl()])), @tactics.all_tac])
-  let t169 = @simp.asm_rewrite_tac(@list.empty())
+  let t169 = @simp.asm_rewrite_tac(@list.List([]))
   let t167 = @parser.parse_term("B:A")
   let t168 = @parser.parse_term("A:A")
   let t185 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:A ring"), t168, t167]), @montgomery.montgomery_strongly_nonsingular_v1())), t169), @tactics.ants_tac), t170), t178), t179), @ringtheory.field_tac), t184])
@@ -505,7 +505,7 @@ fn step_16() -> Unit raise {
       s276(x277)
     }
   })
-  let t274 = @simp.asm_simp_tac(@list.empty())
+  let t274 = @simp.asm_simp_tac(@list.List([]))
   let t273 = @class.asm_cases_tac(@parser.parse_term("x:A = z"))
   let t272 = @tactics.undisch_then(@parser.parse_term("x:A = y"), fn(x271 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x268 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -515,7 +515,7 @@ fn step_16() -> Unit raise {
       }
     })(@equal.sym(x271))
   })
-  let t267 = @simp.asm_simp_tac(@list.empty())
+  let t267 = @simp.asm_simp_tac(@list.List([]))
   let t266 = @class.asm_cases_tac(@parser.parse_term("x:A = y"))
   let t264 = @parser.parse_term("y:A")
   let t265 = @tactics.map_every(@tactics.x_gen_tac, @list.List([@parser.parse_term("x:A"), t264]))
@@ -533,19 +533,19 @@ fn step_16() -> Unit raise {
     }
   })
   let t250 = @tactics.conv_tac(@equal.sym_conv)
-  let t256 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t250), t254), t255), @tactics.all_tac])
+  let t256 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t250), t254), t255), @tactics.all_tac])
   let t249 = @class.asm_cases_tac(@parser.parse_term("group_mul G x y:A = z"))
   let t247 = @meson.asm_meson_tac(@list.List([@grouptheory.group_rule(@parser.parse_term("group_id G = group_mul G a b <=> group_inv G b = a"))]))
-  let t248 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t247), @tactics.all_tac])
+  let t248 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t247), @tactics.all_tac])
   let t246 = @class.asm_cases_tac(@parser.parse_term("group_mul G x y:A = group_id G"))
-  let t244 = @meson.asm_meson_tac(@list.empty())
-  let t243 = @simp.asm_rewrite_tac(@list.empty())
+  let t244 = @meson.asm_meson_tac(@list.List([]))
+  let t243 = @simp.asm_rewrite_tac(@list.List([]))
   let t245 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@grouptheory.abelian_group()]))), t243), t244), @tactics.all_tac])
   let t242 = @class.asm_cases_tac(@parser.parse_term("y:A = z"))
   let t241 = @list.List([@simp.asm_simp_tac(@list.List([@grouptheory.group_mul_rid()])), @tactics.all_tac])
   let t240 = @class.asm_cases_tac(@parser.parse_term("y:A = group_id G"))
-  let t238 = @meson.asm_meson_tac(@list.empty())
-  let t239 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t238), @tactics.all_tac])
+  let t238 = @meson.asm_meson_tac(@list.List([]))
+  let t239 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t238), @tactics.all_tac])
   let t237 = @class.asm_cases_tac(@parser.parse_term("x:A = z"))
   let t236 = @list.List([@simp.asm_simp_tac(@list.List([@grouptheory.group_mul_lid()])), @tactics.all_tac])
   let t235 = @class.asm_cases_tac(@parser.parse_term("x:A = group_id G"))
@@ -624,7 +624,7 @@ fn step_16() -> Unit raise {
   })
   let t533 = @simp.asm_rewrite_tac(@list.List([@montgomery.montgomery_add()]))
   let t531 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_sub_eq_0(), @ringtheory.ring_of_num_eq_0()]))
-  let t527 = @simp.basic_ss(@list.empty())
+  let t527 = @simp.basic_ss(@list.List([]))
   let t530 = @tactics.asm_tac(fn(x529 : @list.List[@kernel.Thm]) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x524 : (@kernel.Term) -> @kernel.Thm raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s525 = @tactics.conv_tac(x524)
@@ -655,7 +655,7 @@ fn step_16() -> Unit raise {
       s508(x509)
     }
   }), t510), t511), t513), t518), t519), t520), t521), t522), t523), t530), t531), @misc.not_ring_char_divides_tac), @tactics.all_tac])
-  let t506 = @simp.asm_rewrite_tac(@list.empty())
+  let t506 = @simp.asm_rewrite_tac(@list.List([]))
   let t505 = @class.asm_cases_tac(@parser.parse_term("u1:A = u2"))
   let t504 = @simp.rewrite_tac(@list.List([@montgomery.montgomery_neg(), @ind_types.option_inj(), @pair.pair_eq()]))
   let t503 = @simp.asm_rewrite_tac(@list.List([@edwards.edwards_curve(), @pair.pair_eq()]))
@@ -764,7 +764,7 @@ fn step_16() -> Unit raise {
       @bool.spec(t, th_1)
     }, @list.List([@parser.parse_term("x1:A,y1:A"), t427, t426]))))
   })
-  let t422 = @simp.asm_rewrite_tac(@list.empty())
+  let t422 = @simp.asm_rewrite_tac(@list.List([]))
   let t421 = @simp.rewrite_tac(@list.List([@misc.field_char_not2()]))
   let t417 = @parser.parse_term("c:A")
   let t418 = @parser.parse_term("d:A")
@@ -773,7 +773,7 @@ fn step_16() -> Unit raise {
   let t416 = @simp.abbrev_tac(@parser.parse_term("p1 = montgomery_of_edwards f (c:A) (x1,y1)"))
   let t415 = @simp.abbrev_tac(@parser.parse_term("p2 = montgomery_of_edwards f (c:A) (x2,y2)"))
   let t414 = @simp.abbrev_tac(@parser.parse_term("p3 = montgomery_of_edwards f (c:A) (x3,y3)"))
-  let t411 = @simp.asm_rewrite_tac(@list.empty())
+  let t411 = @simp.asm_rewrite_tac(@list.List([]))
   let t408 = @simp.rewrite_rule(@list.List([@class.de_morgan_thm()]))
   let t409 = @tactics.conjuncts_then(@tactics.strip_assume_tac)
   let t412 = @tactics.then_tac(@tactics.first_x_assum(fn(x410 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -787,7 +787,7 @@ fn step_16() -> Unit raise {
       s404(x405)
     }
   }))
-  let t400 = @simp.asm_rewrite_tac(@list.empty())
+  let t400 = @simp.asm_rewrite_tac(@list.List([]))
   let t397 = @simp.rewrite_rule(@list.List([@class.de_morgan_thm()]))
   let t398 = @tactics.conjuncts_then(@tactics.strip_assume_tac)
   let t401 = @tactics.then_tac(@tactics.first_x_assum(fn(x399 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -801,7 +801,7 @@ fn step_16() -> Unit raise {
       s393(x394)
     }
   }))
-  let t389 = @simp.asm_rewrite_tac(@list.empty())
+  let t389 = @simp.asm_rewrite_tac(@list.List([]))
   let t386 = @simp.rewrite_rule(@list.List([@class.de_morgan_thm()]))
   let t387 = @tactics.conjuncts_then(@tactics.strip_assume_tac)
   let t390 = @tactics.then_tac(@tactics.first_x_assum(fn(x388 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -843,7 +843,7 @@ fn step_16() -> Unit raise {
   let t351 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_neg_eq(), @ringtheory.ring_1_v1(), @ringtheory.ring_rule(@parser.parse_term("ring_neg f y = ring_1 f <=> y = ring_neg f (ring_1 f)"))]))
   let t350 = @simp.asm_simp_tac(@list.List([@ringtheory.ring_mul_lzero(), @ringtheory.ring_0_v1(), @ringtheory.ring_1_v1(), @ringtheory.ring_neg_v1(), @ringtheory.ring_mul_rzero(), @ringtheory.ring_add_lzero(), @ringtheory.ring_add_rzero(), @ringtheory.ring_mul_lid(), @ringtheory.ring_mul_rid(), @ringtheory.ring_mul_v1(), @ringtheory.ring_div_1(), @ringtheory.ring_sub_rzero(), @pair.pair_eq(), @ringtheory.field_mul_eq_0(), @ringtheory.ring_neg_eq_0(), @ringtheory.ring_mul_lneg(), @ringtheory.ring_mul_rneg(), @ringtheory.ring_neg_neg()]))
   let t349 = @simp.rewrite_tac(@list.List([@edwards.edwards_add(), @montgomery.montgomery_add(), montgomery_of_edwards(), mcurve_of_ecurve()]))
-  let t347 = @simp.asm_rewrite_tac(@list.empty())
+  let t347 = @simp.asm_rewrite_tac(@list.List([]))
   let t348 = @list.List([@tactics.then_tac(@tactics.match_mp_tac(@class.taut(@parser.parse_term("F ==> p"))), @ringtheory.field_tac), t347])
   let t346 = @class.asm_cases_tac(@parser.parse_term("ring_neg f (ring_1 f):A = ring_1 f"))
   let t345 = @simp.asm_rewrite_tac(@list.List([montgomery_of_edwards(), @pair.pair_eq()]))
@@ -918,7 +918,7 @@ fn step_16() -> Unit raise {
     let th = x294
     @simp.rewrite_tac(@list.List([th]))
   })
-  let t293 = @simp.asm_rewrite_tac(@list.empty())
+  let t293 = @simp.asm_rewrite_tac(@list.List([]))
   let t292 = @tactics.match_mp_tac(mcurve_of_ecurve_nonsingular())
   let t291 = @tactics.try_tac(@ringtheory.ring_carrier_tac)
   let t297 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.conj_tac), t291), t292), t293), t296])
@@ -962,8 +962,8 @@ pub fn group_isomorphisms_edwards_montgomery_group() -> @kernel.Thm {
 /// MONTGOMERY_OF_EDWARDS_ADD
 fn step_17() -> Unit raise {
   let t612 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t611 = @simp.asm_rewrite_tac(@list.empty())
-  let t610 = @list.List([@tactics.all_tac, @simp.simp_tac(@list.empty())])
+  let t611 = @simp.asm_rewrite_tac(@list.List([]))
+  let t610 = @list.List([@tactics.all_tac, @simp.simp_tac(@list.List([]))])
   let t606 = @simp.rewrite_rule(@list.List([@theorems.conj_assoc()]))(@montgomery.montgomery_group_v1())
   let t607 = @drule.match_mp(@simp.once_rewrite_rule(@list.List([@theorems.imp_conj_alt()]))(t606))
   let t609 = @tactics.disch_then(fn(x608 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -975,7 +975,7 @@ fn step_17() -> Unit raise {
     })(t607(x608))
   })
   let t602 = @simp.rewrite_tac(@list.List([mcurve_of_ecurve()]))
-  let t601 = @simp.asm_rewrite_tac(@list.empty())
+  let t601 = @simp.asm_rewrite_tac(@list.List([]))
   let t597 = @parser.parse_term("c:A")
   let t598 = @parser.parse_term("d:A")
   let t599 = @parser.parse_term("a:A")

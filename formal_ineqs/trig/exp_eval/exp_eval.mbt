@@ -89,16 +89,16 @@ pub fn bound_pos_low_trans() -> @kernel.Thm {
 fn step_6() -> Unit raise {
   let t29 = @simp.asm_rewrite_tac(@list.List([@realax.real_le_refl()]))
   let t28 = @tactics.match_mp_tac(@real.real_le_mul2())
-  let t27 = @simp.asm_rewrite_tac(@list.empty())
+  let t27 = @simp.asm_rewrite_tac(@list.List([]))
   let t26 = @tactics.exists_tac(@parser.parse_term("x * b:real"))
   let t25 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t24 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_le_neg2()]))
   let t23 = @tactics.match_mp_tac(@real.real_le_add2())
   let t22 = @simp.rewrite_tac(@list.List([@realax.real_sub()]))
-  let t21 = @simp.asm_rewrite_tac(@list.empty())
+  let t21 = @simp.asm_rewrite_tac(@list.List([]))
   let t20 = @tactics.exists_tac(@parser.parse_term("p1 - x * p2:real"))
   let t19 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t18 = @simp.asm_rewrite_tac(@list.empty())
+  let t18 = @simp.asm_rewrite_tac(@list.List([]))
   let t17 = @tactics.exists_tac(@parser.parse_term("a - n:real"))
   let t16 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t15 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -120,16 +120,16 @@ pub fn bound_neg_low_trans() -> @kernel.Thm {
 fn step_7() -> Unit raise {
   let t45 = @simp.asm_rewrite_tac(@list.List([@realax.real_le_refl()]))
   let t44 = @tactics.match_mp_tac(@real.real_le_mul2())
-  let t43 = @simp.asm_rewrite_tac(@list.empty())
+  let t43 = @simp.asm_rewrite_tac(@list.List([]))
   let t42 = @tactics.exists_tac(@parser.parse_term("x * b:real"))
   let t41 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t40 = @simp.asm_rewrite_tac(@list.List([@calc_int.real_le_neg2()]))
   let t39 = @tactics.match_mp_tac(@real.real_le_add2())
   let t38 = @simp.rewrite_tac(@list.List([@realax.real_sub()]))
-  let t37 = @simp.asm_rewrite_tac(@list.empty())
+  let t37 = @simp.asm_rewrite_tac(@list.List([]))
   let t36 = @tactics.exists_tac(@parser.parse_term("p1 - x * p2:real"))
   let t35 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t34 = @simp.asm_rewrite_tac(@list.empty())
+  let t34 = @simp.asm_rewrite_tac(@list.List([]))
   let t33 = @tactics.exists_tac(@parser.parse_term("a - n:real"))
   let t32 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t31 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -187,7 +187,7 @@ pub fn exp_neg_high() -> @kernel.Thm {
 ///|
 /// exp_pos_high
 fn step_10() -> Unit raise {
-  let t67 = @simp.asm_rewrite_tac(@list.empty())
+  let t67 = @simp.asm_rewrite_tac(@list.List([]))
   let t66 = @tactics.match_mp_tac(@real.real_le_inv2())
   let t65 = @simp.once_rewrite_tac(@list.List([@transcendentals.real_exp_neg()]))
   let t64 = @simp.gen_rewrite_tac(fn(x63 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
@@ -203,7 +203,7 @@ fn step_10() -> Unit raise {
       }
     })(x63))
   }, @list.List([@equal.gsym(@calc_int.real_neg_neg())]))
-  let t56 = @simp.asm_rewrite_tac(@list.empty())
+  let t56 = @simp.asm_rewrite_tac(@list.List([]))
   let t55 = @tactics.exists_tac(@parser.parse_term("inv t"))
   let t54 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t68 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t54), t55), t56), t64), t65), t66), t67)
@@ -237,11 +237,11 @@ fn step_11() -> Unit raise {
   let t85 = @simp.asm_rewrite_tac(@list.List([@transcendentals.real_exp_mono_le()]))
   let t84 = @tactics.exists_tac(@parser.parse_term("exp y"))
   let t83 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t82 = @simp.asm_rewrite_tac(@list.empty())
+  let t82 = @simp.asm_rewrite_tac(@list.List([]))
   let t93 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@real.real_pow_le2()), t82), t83), t84), t85), t92])
   let t81 = @tactics.exists_tac(@parser.parse_term("exp (x / t) pow k"))
   let t80 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t79 = @simp.asm_rewrite_tac(@list.empty())
+  let t79 = @simp.asm_rewrite_tac(@list.List([]))
   let t78 = @tactics.exists_tac(@parser.parse_term("lo pow k"))
   let t77 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t76 = @tactics.disch_then(fn(x75 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -288,7 +288,7 @@ fn step_12() -> Unit raise {
   let t119 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([@equal.gsym(@transcendentals.real_exp_n()), t108])), t112), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t113), t118])
   let t107 = @tactics.exists_tac(@parser.parse_term("exp (x / t) pow k"))
   let t106 = @tactics.match_mp_tac(@realax.real_le_trans())
-  let t105 = @simp.asm_rewrite_tac(@list.empty())
+  let t105 = @simp.asm_rewrite_tac(@list.List([]))
   let t104 = @tactics.exists_tac(@parser.parse_term("hi pow k"))
   let t103 = @tactics.match_mp_tac(@realax.real_le_trans())
   let t102 = @tactics.disch_then(fn(x101 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -677,7 +677,7 @@ pub fn float_exp_low_raw(x209 : Int64, x210 : @kernel.Term) -> @kernel.Thm raise
       @misc_functions.my_prove_hyp(low_th, th0)
     }
   } catch {
-    Failure(msg) => @misc_functions.error(("float_exp_low_raw: " + msg), @list.List([x_tm]), @list.empty())
+    Failure(msg) => @misc_functions.error(("float_exp_low_raw: " + msg), @list.List([x_tm]), @list.List([]))
     e => raise e
   }
 }
@@ -705,7 +705,7 @@ pub fn float_exp_high_raw(x211 : Int64, x212 : @kernel.Term) -> @kernel.Thm rais
       @misc_functions.my_prove_hyp(high_th, th0_1)
     }
   } catch {
-    Failure(msg) => @misc_functions.error(("float_exp_high_raw: " + msg), @list.List([x_tm]), @list.empty())
+    Failure(msg) => @misc_functions.error(("float_exp_high_raw: " + msg), @list.List([x_tm]), @list.List([]))
     e => raise e
   }
 }

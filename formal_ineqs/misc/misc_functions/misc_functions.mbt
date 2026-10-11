@@ -20,7 +20,7 @@ pub fn[TA] error(x1 : String, x2 : @list.List[@kernel.Term], x3 : @list.List[@ke
 /// `error_msg`
 pub fn[TA] error_msg(x4 : String) -> TA raise {
   let msg = x4
-  raise Error1::Error(msg, @list.empty(), @list.empty())
+  raise Error1::Error(msg, @list.List([]), @list.List([]))
 }
 
 ///|
@@ -152,10 +152,10 @@ pub fn[TA, TB, TC] my_map2(x27 : (TC) -> ((TB) -> TA raise) raise, x28 : @list.L
   let l1 = x28
   let l2 = x29
   match l1 {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(h1, tail=t1) => {
       match l2 {
-        Empty => @list.empty()
+        Empty => @list.List([])
         More(h2, tail=t2) => {
           let t30 = my_map2(f, t1, t2)
           t30.prepend(f(h1)(h2))

@@ -18,7 +18,7 @@ test "meson matches meson.ml" {
   let ms = (name : String, s : String) => {
     log.attempt(name, () => {
       let t = tm(s)
-      sthm(@tactics.prove(t, @meson.meson_tac(@list.empty())))
+      sthm(@tactics.prove(t, @meson.meson_tac(@list.List([]))))
     })
   }
   ms("mp", "(!x:A. P x ==> Q x) /\\ P a ==> Q a")
@@ -39,13 +39,13 @@ test "meson matches meson.ml" {
     let t = tm("(!x:A. P x ==> Q x) ==> P a ==> Q a")
     let tac = @tactics.then_tac(
       @tactics.repeat_tac(@tactics.disch_tac),
-      @meson.asm_meson_tac(@list.empty()),
+      @meson.asm_meson_tac(@list.List([])),
     )
     sthm(@tactics.prove(t, tac))
   })
   log.attempt("depth_limit", () => {
     let t = tm("(p:bool) ==> q")
-    sthm(@tactics.prove(t, @meson.gen_meson_tac(0, 2, 1, @list.empty())))
+    sthm(@tactics.prove(t, @meson.gen_meson_tac(0, 2, 1, @list.List([]))))
   })
   log.attempt("inferences", () => @meson.inferences().val.to_string())
   log.attempt("counter_tyvar", () => stm(tm("zz_counter")))

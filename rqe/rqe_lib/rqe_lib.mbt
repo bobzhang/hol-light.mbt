@@ -84,7 +84,7 @@ pub fn[TA, TB] allcombs(x13 : (TB) -> ((TB) -> TA raise) raise, x14 : @list.List
   let f = x13
   let l = x14
   match l {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(h, tail=t) => {
       let t15 = allcombs(f, t)
       @lib.map(f(h), t).concat(t15)
@@ -98,7 +98,7 @@ pub fn[TA, TB : Eq + @lib.OCompare + @lib.OHash] assoc_list(x16 : @list.List[TB]
   let keys = x16
   let assl = x17
   match keys {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(h, tail=t) => {
       let t18 = assoc_list(t, assl)
       t18.prepend(@lib.assoc(h, assl))
@@ -222,7 +222,7 @@ pub fn[TA] swap_lists_v1(x39 : @list.List[@list.List[TA]], x40 : @list.List[@lis
 pub fn[TA] swap_lists(x41 : @list.List[@list.List[TA]]) -> @list.List[@list.List[TA]] raise {
   let l = x41
   let n = Int::to_int64(@lib.length(@lib.hd(l)))
-  let l_p = swap_lists_v1(l, @lib.replicate(@list.empty(), @lib.int63_to_int(n)))
+  let l_p = swap_lists_v1(l, @lib.replicate(@list.List([]), @lib.int63_to_int(n)))
   @lib.map(fn(x42 : @list.List[TA]) -> @list.List[TA] raise {
     @lib.rev(x42)
   }, l_p)
@@ -282,7 +282,7 @@ pub fn can_match(x55 : @kernel.Term, x56 : @kernel.Term) -> Bool raise {
   try {
     let (n1, _) = dest_var_or_const(t1)
     let (n2, _) = dest_var_or_const(t2)
-    ((n1 == n2) && @lib.can((x57 : @kernel.Term) => @drule.term_match(@list.empty(), t1, x57), t2))
+    ((n1 == n2) && @lib.can((x57 : @kernel.Term) => @drule.term_match(@list.List([]), t1, x57), t2))
   } catch {
     Failure(_) => false
     e => raise e

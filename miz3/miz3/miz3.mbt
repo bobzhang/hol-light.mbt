@@ -595,7 +595,7 @@ fn step_28() -> Unit raise {
         w.prepend((@lib.implode(x), t61, z))
       })(i)
     } catch {
-      @parser.Noparse => (@list.empty(), i)
+      @parser.Noparse => (@list.List([]), i)
       e => raise e
     }
   }
@@ -714,7 +714,7 @@ pub fn[TA, TB] cut_to(x77 : Bool, x78 : Int64, x79 : @list.List[String], x80 : @
   match toks {
     Empty => {
       if b {
-        (@list.empty(), @list.empty())
+        (@list.List([]), @list.List([]))
       } else {
         raise @parser.Noparse
       }
@@ -727,7 +727,7 @@ pub fn[TA, TB] cut_to(x77 : Bool, x78 : Int64, x79 : @list.List[String], x80 : @
             (@list.List([tok]), rst)
           } else {
             if (b && (@lib.mem(s, l) && x)) {
-              (@list.empty(), toks)
+              (@list.List([]), toks)
             } else {
               let (stp1, rst1) = match s {
                 "(" | "[" => cut_to(true, @lib.add63(n, 1L), c, l, rst)
@@ -765,7 +765,7 @@ pub fn[TA, TB] cut_step(x82 : @list.List[(TA, @parser.Lexcode, TB)]) -> ((@list.
           }
         })(x90)
         s92(x91)
-      }, y_1, @list.empty()).prepend(x_1)
+      }, y_1, @list.List([])).prepend(x_1)
     })(toks)
     _ => cut_to(false, 0L, @list.List([";"]), mizar_step_words(), toks)
   }
@@ -1130,7 +1130,7 @@ fn step_39() -> Unit raise {
   let t140 = @parser.map(fn(x138 : @list.List[(String, @parser.Lexcode, String)]) -> (@list.List[Unit], @list.List[(String, @parser.Lexcode, String)]) raise {
     @parser.nothing(x138)
   }, fn(x139 : @list.List[Unit]) -> @list.List[@list.List[(String, @parser.Lexcode, String)]] raise {
-    @list.empty()
+    @list.List([])
   })
   let parse_by_part : (@list.List[(String, @parser.Lexcode, String)]) -> (@list.List[@list.List[(String, @parser.Lexcode, String)]], @list.List[(String, @parser.Lexcode, String)]) raise = @parser.alt(@parser.map(@parser.seq(@parser.map(@parser.seq((x133 : @list.List[(String, @parser.Lexcode, String)]) => a_p("by", x133), @parser.many(@parser.map(@parser.seq(parse_by_item_l, (x134 : @list.List[(String, @parser.Lexcode, String)]) => a_p(",", x134)), fn(x135 : (@list.List[(String, @parser.Lexcode, String)], (String, @parser.Lexcode, String))) -> @list.List[(String, @parser.Lexcode, String)] raise {
     x135.0
@@ -1143,7 +1143,7 @@ fn step_39() -> Unit raise {
   let t148 = @parser.map(fn(x146 : @list.List[(String, @parser.Lexcode, String)]) -> (@list.List[Unit], @list.List[(String, @parser.Lexcode, String)]) raise {
     @parser.nothing(x146)
   }, fn(x147 : @list.List[Unit]) -> (@list.List[@list.List[(String, @parser.Lexcode, String)]], Bool) raise {
-    (@list.empty(), false)
+    (@list.List([]), false)
   })
   let parse_from_part : (@list.List[(String, @parser.Lexcode, String)]) -> ((@list.List[@list.List[(String, @parser.Lexcode, String)]], Bool), @list.List[(String, @parser.Lexcode, String)]) raise = @parser.alt(@parser.map(@parser.seq(@parser.map(@parser.seq((x141 : @list.List[(String, @parser.Lexcode, String)]) => a_p("from", x141), @parser.many(@parser.map(@parser.seq(parse_by_item_l, (x142 : @list.List[(String, @parser.Lexcode, String)]) => a_p(",", x142)), fn(x143 : (@list.List[(String, @parser.Lexcode, String)], (String, @parser.Lexcode, String))) -> @list.List[(String, @parser.Lexcode, String)] raise {
     x143.0
@@ -1204,7 +1204,7 @@ fn[TA, TB] parse_by_item_l(x132 : @list.List[(TA, @parser.Lexcode, TB)]) -> ((@l
 pub fn[TA, TB] parse_labels(x158 : @list.List[(TA, @parser.Lexcode, TB)]) -> @list.List[String] raise {
   let toks = x158
   match toks {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More((_, @parser.Lexcode::Resword("["), _), tail=More((_, @parser.Lexcode::Ident(s), _), tail=More((_, @parser.Lexcode::Resword("]"), _), tail=rst))) => parse_labels(rst).prepend(s)
     _ => raise @parser.Noparse
   }
@@ -1285,7 +1285,7 @@ fn[TA, TB] term_of_hol1_l(error : @kernel.Term, b : Bool, x166 : @list.List[@ker
       (s, @preterm.pretype_of_type(ty))
     })(@kernel.dest_var(x169))
   }, env)
-  let env_p = t170.prepend(("thesis", @preterm.Pretype::Ptycon("bool", @list.empty())))
+  let env_p = t170.prepend(("thesis", @preterm.Pretype::Ptycon("bool", @list.List([]))))
   try {
     let (ptm, l) = @parser.parse_preterm(((x172 : @list.List[(TA, @parser.Lexcode, TB)]) => @lib.map(fn(x171 : (TA, @parser.Lexcode, TB)) -> @parser.Lexcode raise {
       middle(x171.0, x171.1, x171.2)
@@ -1376,23 +1376,23 @@ pub fn split_step(x182 : @list.List[(String, @parser.Lexcode, String)]) -> @list
   fn group_by_items(x186 : @list.List[(String, @parser.Lexcode, String)]) -> @list.List[(String, @parser.Lexcode, String)] raise {
     let toks_3 = x186
     match toks_3 {
-      Empty => @list.empty()
+      Empty => @list.List([])
       (((More((_, @parser.Lexcode::Resword("by"), _) as tok_2, tail=rst_2)) | (More((_, @parser.Lexcode::Resword("from"), _) as tok_2, tail=rst_2))) | (More((_, @parser.Lexcode::Ident(","), _) as tok_2, tail=rst_2))) | (More((_, @parser.Lexcode::Resword(";"), _) as tok_2, tail=rst_2)) => group_by_items(rst_2).prepend(tok_2)
       More((_, @parser.Lexcode::Ident("#"), _) as tok_3, tail=toks_p) => {
         let (toks1, toks2) = if @list.List::is_empty(toks_p) {
-          (@list.empty(), @list.empty())
+          (@list.List([]), @list.List([]))
         } else {
-          cut_to(false, 0L, @list.empty(), (@list.List([",", ";"])).concat(mizar_words()), toks_p)
+          cut_to(false, 0L, @list.List([]), (@list.List([",", ";"])).concat(mizar_words()), toks_p)
         }
         let t187 = group_by_items(toks2)
         ((if @list.List::is_empty(toks1) {
-          @list.empty()
+          @list.List([])
         } else {
           @list.List([tok_of_toks(toks1)])
         }).prepend(tok_3)).concat(t187)
       }
       More(tok_4, tail=rst_3) => {
-        let (toks1_1, toks2_1) = cut_to(false, 0L, @list.empty(), (@list.List([",", ";"])).concat(mizar_words()), toks_3)
+        let (toks1_1, toks2_1) = cut_to(false, 0L, @list.List([]), (@list.List([",", ";"])).concat(mizar_words()), toks_3)
         if @list.List::is_empty(toks1_1) {
           group_by_items(rst_3).prepend(tok_4)
         } else {
@@ -1403,9 +1403,9 @@ pub fn split_step(x182 : @list.List[(String, @parser.Lexcode, String)]) -> @list
     }
   }
   let (toks1_2, semi_part) = cut_semi_l(@lib.rev(toks))
-  let (toks2_2, by_part) = cut_by_part_l(@list.empty(), toks1_2)
-  let (toks3, labs_part) = cut_labs_l(toks2_2, @list.empty())
-  let (front_part, hol_part) = cut_front_l(toks3, @list.empty())
+  let (toks2_2, by_part) = cut_by_part_l(@list.List([]), toks1_2)
+  let (toks3, labs_part) = cut_labs_l(toks2_2, @list.List([]))
+  let (front_part, hol_part) = cut_front_l(toks3, @list.List([]))
   if (if !@list.List::is_empty(front_part) {
     let t194 = @parser.Lexcode::Resword("exec")
     let t193 = @lib.hd(front_part)
@@ -1414,7 +1414,7 @@ pub fn split_step(x182 : @list.List[(String, @parser.Lexcode, String)]) -> @list
     false
   }) {
     let ml_tok = tok_of_toks(@lib.tl(front_part).concat(hol_part.concat(labs_part.concat(by_part))))
-    @list.List([@list.List([@lib.hd(front_part)]), @list.List([ml_tok]), @list.empty(), @list.empty(), semi_part])
+    @list.List([@list.List([@lib.hd(front_part)]), @list.List([ml_tok]), @list.List([]), @list.List([]), semi_part])
   } else {
     @list.List([front_part, hol_part, labs_part, group_by_items(by_part), semi_part])
   }
@@ -1425,7 +1425,7 @@ fn[TA, TB] cut_semi_l(x183 : @list.List[(TA, @parser.Lexcode, TB)]) -> ((@list.L
   let toks_1 = x183
   match toks_1 {
     More((_, @parser.Lexcode::Resword(";"), _) as tok, tail=rst) => (@lib.rev(rst), @list.List([tok]))
-    _ => (@lib.rev(toks_1), @list.empty())
+    _ => (@lib.rev(toks_1), @list.List([]))
   }
 }
 
@@ -1454,7 +1454,7 @@ fn[TJ, TK] cut_front_l(x191 : @list.List[(TJ, @parser.Lexcode, TK)], x192 : @lis
   let toks_5 = x191
   let tail = x192
   match toks_5 {
-    Empty => (@list.empty(), tail)
+    Empty => (@list.List([]), tail)
     More((_, @parser.Lexcode::Resword(s), _), tail=rst_5) if @lib.mem(s, mizar_words()) => (@lib.rev(toks_5), tail)
     More(tok_5, tail=rst_6) => cut_front_l(rst_6, tail.prepend(tok_5))
   }
@@ -1580,7 +1580,7 @@ pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @p
               }
               ("consider", rst_1, _) => {
                 try {
-                  let (rst1, rst2) = cut_being_l(cut_suchthat_l(@lib.rev(rst_1)), @list.empty())
+                  let (rst1, rst2) = cut_being_l(cut_suchthat_l(@lib.rev(rst_1)), @list.List([]))
                   let (n_5, t_5) = type_of_hol(rst2)
                   if (n_5 != 0L) {
                     (n_5, src, Substep::Error(string_of_toks(toks), just))
@@ -1659,7 +1659,7 @@ pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @p
                 if (!@list.List::is_empty(hol_part) || !@list.List::is_empty(labs_part)) {
                   raise @parser.Noparse
                 } else {
-                  ((-1L), src, Substep::Cases(just, @list.empty()))
+                  ((-1L), src, Substep::Cases(just, @list.List([])))
                 }
               }
               ("case", Empty, ";") => {
@@ -1732,9 +1732,9 @@ pub fn steps_of_toks1(x235 : Bool, x236 : Bool, x237 : @list.List[@kernel.Term],
   let toks = x238
   if @list.List::is_empty(toks) {
     if e {
-      (@list.List([(9L, @list.empty(), Substep::Error_point)]), None, @list.empty())
+      (@list.List([(9L, @list.List([]), Substep::Error_point)]), None, @list.List([]))
     } else {
-      (@list.empty(), None, @list.empty())
+      (@list.List([]), None, @list.List([]))
     }
   } else {
     let (stoks, rst) = cut_step(toks)
@@ -1778,7 +1778,7 @@ pub fn steps_of_toks1(x235 : Bool, x236 : Bool, x237 : @list.List[@kernel.Term],
           let (final_, step1, rst2_3) = steps_of_toks1(false, e, env, rst1_4)
           let cases = (status, src, Substep::Cases(just_4, justs))
           if !@list.List::is_empty(final_) {
-            prefix_l(@list.List([cases, (9L, @list.empty(), Substep::Error_point)]), steps_of_toks1(q, e, env, rst1_4))
+            prefix_l(@list.List([cases, (9L, @list.List([]), Substep::Error_point)]), steps_of_toks1(q, e, env, rst1_4))
           } else {
             (@list.List([cases]), step1, rst2_3)
           }
@@ -1805,7 +1805,7 @@ pub fn steps_of_toks1(x235 : Bool, x236 : Bool, x237 : @list.List[@kernel.Term],
       }
       Substep::Bracket_end => {
         if e {
-          (@list.empty(), Some(step), rst)
+          (@list.List([]), Some(step), rst)
         } else {
           let t246 = steps_of_toks1(q, e, env, rst)
           prefix_l(@list.List([(9L, src, Substep::Error(string_of_toks(stoks), Just::No_steps))]), t246)
@@ -1903,7 +1903,7 @@ fn[TA, TB, TC] prefix_l(x239 : @list.List[TA], x240 : (@list.List[TA], TB, TC)) 
 /// `steps_of_toks`
 pub fn steps_of_toks(x259 : @list.List[(String, @parser.Lexcode, String)]) -> @list.List[Step] raise {
   let toks = x259
-  let (proof, _, rst) = steps_of_toks1(false, false, @list.empty(), toks)
+  let (proof, _, rst) = steps_of_toks1(false, false, @list.List([]), toks)
   if @list.List::is_empty(rst) {
     proof
   } else {
@@ -1975,7 +1975,7 @@ pub fn fake_tac(x263 : Bool, x264 : @list.List[@kernel.Thm], x265 : (@list.List[
         }
       })(x276)(x275)
     }, @lib.rev(thl), t278)
-    (@tactics.null_meta, @list.empty(), fn(x279 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), x280 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
+    (@tactics.null_meta, @list.List([]), fn(x279 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), x280 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
       let i = x279
       @drule.instantiate_all(i, th)
     })
@@ -1995,7 +1995,7 @@ fn step_43() -> Unit raise {
       let (e, ((mvs, insts), gls, just) as gs) = tac(g)
       match gls {
         Empty => (e, ((mvs, insts), @list.List([(asl, t)]), fn(x283 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), x284 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
-          just(@tactics.null_inst, @list.empty())
+          just(@tactics.null_inst, @list.List([]))
         }))
         More(gl, tail=Empty) => (e, gs)
         _ => raise Failure("MIZAR_NEXT")
@@ -2024,7 +2024,7 @@ fn step_44() -> Unit raise {
       let ((mvs, insts), gls, just) as gs = tac(g)
       match gls {
         Empty => ((mvs, insts), @list.List([(asl, t)]), fn(x287 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), x288 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
-          just(@tactics.null_inst, @list.empty())
+          just(@tactics.null_inst, @list.List([]))
         })
         More(gl, tail=Empty) => gs
         _ => raise Failure("MIZAR_NEXT'")
@@ -2114,7 +2114,7 @@ pub fn terms_of_step(x295 : @list.List[@kernel.Term], x296 : (Int64, @list.List[
     Substep::Consider(_, tm_3, _, _) => @list.List([fix_dots(prevs, tm_3)])
     Substep::Set(tm_4, _) => @list.List([fix_dots(prevs, tm_4)])
     Substep::Suppose(tm_5, _) => @list.List([fix_dots(prevs, tm_5)])
-    _ => @list.empty()
+    _ => @list.List([])
   }
 }
 
@@ -2124,7 +2124,7 @@ pub fn term_of_now(x297 : Just) -> @kernel.Term raise {
   let just_1 = x297
   match just_1 {
     Just::Proof(_, steps, _) => {
-      let t300 = term_of_steps(@list.empty(), steps)
+      let t300 = term_of_steps(@list.List([]), steps)
       let t301 = @simp.pure_rewrite_conv(@list.List([@theorems.and_clauses()]))
       (fn(x299 : @kernel.Thm) -> @kernel.Term raise {
         @kernel.rand((fn(x298 : @kernel.Thm) -> @kernel.Term raise {
@@ -2196,7 +2196,7 @@ fn[TA, TB] terms_of_cases_1_l(f : @kernel.Term, x304 : @list.List[@list.List[(TA
   let terms_of_cases_1 = (x304 : @list.List[@list.List[(TA, TB, Substep)]]) => terms_of_cases_1_l(f, x304)
   let cases = x304
   match cases {
-    Empty => (@list.empty(), f)
+    Empty => (@list.List([]), f)
     More(case, tail=rst) => {
       let (l_p, tm_p) = terms_of_cases_1(rst)
       match case {
@@ -2379,12 +2379,12 @@ pub fn step_of_obligation(x343 : String, x344 : String, x345 : @list.List[@kerne
   let tl = x345
   let ass = x346
   let tm = x347
-  let hole = Just::By(@list.List([ByItem::Hole]), @list.empty(), false)
+  let hole = Just::By(@list.List([ByItem::Hole]), @list.List([]), false)
   let prefix_p = (prefix + proof_indent().val)
   fn lets(x348 : @list.List[@kernel.Term]) -> @list.List[Step] raise {
     let l = x348
     match l {
-      Empty => @list.empty()
+      Empty => @list.List([])
       More(t, tail=_) => {
         let t349 = @kernel.type_of(t)
         let (l_p, l_p_p) = @lib.partition(fn(x352 : @kernel.Term) -> Bool raise {
@@ -2405,7 +2405,7 @@ pub fn step_of_obligation(x343 : String, x344 : String, x345 : @list.List[@kerne
     let ll = lets(tl)
     let intros = ll.concat(@lib.map(fn(x354 : @kernel.Term) -> (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep) raise {
       let a = x354
-      step_of_substep(prefix_p, Substep::Assume(a, @list.empty()))
+      step_of_substep(prefix_p, Substep::Assume(a, @list.List([])))
     }, ass))
     if grow_haves().val {
       let t360 = intros.concat(@list.List([step_of_substep(prefix, Substep::Qed(hole))]))
@@ -2416,12 +2416,12 @@ pub fn step_of_obligation(x343 : String, x344 : String, x345 : @list.List[@kerne
       Substep::Have(@bool.list_mk_forall(@lib.flat(@lib.map(fn(x355 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> @list.List[@kernel.Term] raise {
         match x355 {
           (_, _, Substep::Let(l_1)) => l_1
-          _ => @list.empty()
+          _ => @list.List([])
         }
       }, ll)), t359), @list.List([lab]), t361)
     } else {
       let t362 = Some(step_of_substep(prefix, Substep::Bracket_end))
-      Substep::Now(@list.List([lab]), Just::Proof(None, intros.concat(@list.List([step_of_substep(prefix_p, Substep::Thus(tm, @list.empty(), hole))])), t362))
+      Substep::Now(@list.List([lab]), Just::Proof(None, intros.concat(@list.List([step_of_substep(prefix_p, Substep::Thus(tm, @list.List([]), hole))])), t362))
     }
   })
 }
@@ -2463,7 +2463,7 @@ fn[TH] steps_of_goals1_l(prefix : String, fv : @list.List[@kernel.Term], extra_a
   let n_1 = x375
   let gl_1 = x376
   match gl_1 {
-    Empty => (@list.empty(), @list.empty(), n_1)
+    Empty => (@list.List([]), @list.List([]), n_1)
     More((asl_p, w_p), tail=gl_p) => {
       let ass_p = @lib.map(fn(x379 : (TH, @kernel.Thm)) -> @kernel.Term raise {
         (fn(x377 : @kernel.Thm) -> @kernel.Term raise {
@@ -2474,7 +2474,7 @@ fn[TH] steps_of_goals1_l(prefix : String, fv : @list.List[@kernel.Term], extra_a
       }, asl_p)
       let (steps_p, labs_p, n_p) = steps_of_goals1(@lib.add63(n_1, 1L), gl_p)
       let lab = Int64::to_string(n_1)
-      let t382 = extra_ass(ass_p, @list.empty())
+      let t382 = extra_ass(ass_p, @list.List([]))
       let t381 = @kernel.frees(w_p)
       (steps_p.prepend(step_of_obligation(prefix, lab, @lib.subtract(@lib.union(@lib.flat(@lib.map(fn(x380 : @kernel.Term) -> @list.List[@kernel.Term] raise {
         @kernel.frees(x380)
@@ -2509,7 +2509,7 @@ pub fn connect_step(x383 : (Int64, @list.List[@list.List[(String, @parser.Lexcod
     let sep = x387
     let labs_1 = x388
     match labs_1 {
-      Empty => @list.empty()
+      Empty => @list.List([])
       More(lab, tail=labs_p) => {
         let t389 = extra_from(comma, labs_p)
         (t389.prepend(("", @parser.Lexcode::Ident(lab), ""))).prepend(sep)
@@ -2529,7 +2529,7 @@ pub fn connect_step(x383 : (Int64, @list.List[@list.List[(String, @parser.Lexcod
             ByItem::Label(s)
           }, labs)), b)
           (src4_p_p.concat(if @list.List::is_empty(labs) {
-            @list.empty()
+            @list.List([])
           } else {
             extra_from(if @list.List::is_empty(l_p_2) {
               from_key
@@ -2577,7 +2577,7 @@ fn[TA, TB] ungrow_by_l(x385 : @list.List[(TA, @parser.Lexcode, TB)], x386 : @lis
   let src = x385
   let l = x386
   match l {
-    Empty => (src, @list.empty())
+    Empty => (src, @list.List([]))
     More(ByItem::Grow(name, tac), tail=l_p) => {
       match src {
         More(tok1, tail=More((_, @parser.Lexcode::Ident("#"), _), tail=More(tok2, tail=src_p))) => {
@@ -2636,7 +2636,7 @@ pub fn rewrap_step(x398 : (Int64, @list.List[@list.List[(String, @parser.Lexcode
           let src4_p = @lib.tl(src4).prepend((x1_1, b_p, c_p))
           let t403 = proof_width().val
           let src4_p_p = if (add_width(0L, (x1_1 + y_p_1)) > t403) {
-            rewrap_from_l(x1_1, @list.empty(), src4_p)
+            rewrap_from_l(x1_1, @list.List([]), src4_p)
           } else {
             src4_p
           }
@@ -2771,7 +2771,7 @@ pub fn replacement_steps(x416 : (@list.List[(String, @kernel.Thm)], @kernel.Term
             let (x_3, y_3) = x427
             (@kernel.concl(y_3), x_3)
           }, asl)
-          let (steps_p_1, labs_p_1) = ((x428, x429, x430, x431) => filter_growth_l(al, x428, x429, x430, x431))(steps, labs, @list.empty(), @list.empty())
+          let (steps_p_1, labs_p_1) = ((x428, x429, x430, x431) => filter_growth_l(al, x428, x429, x430, x431))(steps, labs, @list.List([]), @list.List([]))
           steps_p_1.concat(@list.List([rewrap_step(connect_step(step, labs_p_1))]))
         }
       }
@@ -2884,7 +2884,7 @@ fn[TA] filter_p_l(x436 : ((Int64, TA)) -> Bool raise, x437 : Int64, x438 : @list
   let n = x437
   let l = x438
   match l {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(h, tail=t) => {
       let t_p = filter_p_l(f, @lib.add63(n, 1L), t)
       if f((n, h)) {
@@ -2950,7 +2950,7 @@ pub fn[TA] thenl_p(x : @tactics.Tactic) -> ((@list.List[(@tactics.Goal) -> (TA, 
       let g = x500
       let (_, gls, _) as gstate = tac1(g)
       if @list.List::is_empty(gls) {
-        let t503 = tacsequence_l((gstate.0, gstate.1, (x501 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) => x502 => (gstate.2)(x501, x502)), @list.empty())
+        let t503 = tacsequence_l((gstate.0, gstate.1, (x501 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) => x502 => (gstate.2)(x501, x502)), @list.List([]))
         (t503.0, ((t503.1).0, (t503.1).1, fn(x504 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), x505 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
           let s506 = ((t503.1).2)(x504)
           s506(x505)
@@ -2974,7 +2974,7 @@ pub fn[TA] thenl_p(x : @tactics.Tactic) -> ((@list.List[(@tactics.Goal) -> (TA, 
 ///|
 fn[TB, TC, TD] propagate_empty_l(x458 : TD, x459 : TC) -> @list.List[TB] raise {
   let i = x458
-  @list.empty()
+  @list.List([])
 }
 
 ///|
@@ -3001,7 +3001,7 @@ fn[TJ, TK, TL, TM, TN] seqapply_l(x469 : @list.List[((@list.List[(String, @kerne
   let l1 = x469
   let l2 = x470
   match (l1, l2) {
-    (Empty, Empty) => (@list.empty(), (@tactics.null_meta, @list.empty(), fn(x471 : TN) -> ((@list.List[TM]) -> @list.List[TL] raise) raise {
+    (Empty, Empty) => (@list.List([]), (@tactics.null_meta, @list.List([]), fn(x471 : TN) -> ((@list.List[TM]) -> @list.List[TL] raise) raise {
       fn(x472 : @list.List[TM]) -> @list.List[TL] raise {
         propagate_empty_l(x471, x472)
       }
@@ -3044,7 +3044,7 @@ fn[TV, TW, TX, TY] tacsequence_l(x486 : ((@list.List[@kernel.Term], (@list.List[
     }
   }
   let just : ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> ((@list.List[TX]) -> @kernel.Thm raise) raise = if @list.List::is_empty(gls2_1) {
-    let t492 = jst(@tactics.null_inst)(@list.empty())
+    let t492 = jst(@tactics.null_inst)(@list.List([]))
     fn(x495 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> ((@list.List[TX]) -> @kernel.Thm raise) raise {
       fn(x496 : @list.List[TX]) -> @kernel.Thm raise {
         ((x493 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), x494 : @list.List[TX]) => propagate_thm_l(t492, x493, x494))(x495, x496)
@@ -3110,7 +3110,7 @@ pub fn tactic_of_by(x518 : Bool, x519 : @list.List[ByItem], x520 : @list.List[By
     match l_2 {
       Empty => {
         if b_1 {
-          @list.empty()
+          @list.List([])
         } else {
           let t532 = try {
             @lib.chop_list(@lib.int63_to_int(hor), asl_p).0
@@ -3150,7 +3150,7 @@ pub fn tactic_of_by(x518 : Bool, x519 : @list.List[ByItem], x520 : @list.List[By
   fn find_labs(x539 : @list.List[ByItem]) -> @list.List[String] raise {
     let l_3 = x539
     match l_3 {
-      Empty => @list.empty()
+      Empty => @list.List([])
       More(ByItem::Label(s_1), tail=l_p_8) => find_labs(l_p_8).prepend(s_1)
       More(_, tail=l_p_9) => find_labs(l_p_9)
     }
@@ -3242,7 +3242,7 @@ pub fn tactic_of_by(x518 : Bool, x519 : @list.List[ByItem], x520 : @list.List[By
                     })(g_p_p_1)
                   }
                 })), t565), t566), @tactics.no_tac)(g_p)
-                let th_3 = just(@tactics.null_inst, @list.empty())
+                let th_3 = just(@tactics.null_inst, @list.List([]))
                 {
                   just_cache().val = @lib.update(key, (0L, th_3), just_cache().val)
                   ()
@@ -3284,7 +3284,7 @@ pub fn tactic_of_by(x518 : Bool, x519 : @list.List[ByItem], x520 : @list.List[By
       }
     }
   } catch {
-    Failure("find") | Failure("hd") => (4L, fake_tac(fake, @list.empty(), g))
+    Failure("find") | Failure("hd") => (4L, fake_tac(fake, @list.List([]), g))
     e => raise e
   }
 }
@@ -3597,7 +3597,7 @@ pub fn tactic_of_step(x591 : Bool, x592 : (Int64, @list.List[@list.List[(String,
         } else {
           l_5
         }
-        let t667 = @list.List([@tactics.orelse_tac(@simp.rewrite_tac(@list.List([@theorems.exists_refl()])), (x666 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => fake_tac(fake, @list.empty(), x666)), @tactics.all_tac])
+        let t667 = @list.List([@tactics.orelse_tac(@simp.rewrite_tac(@list.List([@theorems.exists_refl()])), (x666 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => fake_tac(fake, @list.List([]), x666)), @tactics.all_tac])
         ((0L, src, substep), @tactics.thenl(@tactics.subgoal_then(tm_p_1, @tactics.x_choose_then(v)((x665 : @kernel.Thm) => labels_tac(l_p, x665))), t667)(g))
       } catch {
         x_8 => raise x_8
@@ -3693,9 +3693,9 @@ pub fn tactic_of_just(x692 : Bool, x693 : Just, x694 : (@list.List[(String, @ker
     match l_7 {
       Empty => {
         if (@kernel.is_const(w_1) && (@kernel.dest_const(w_1).0 == "T")) {
-          (@list.empty(), 0L, @tactics.accept_tac(@bool.truth())(g_3))
+          (@list.List([]), 0L, @tactics.accept_tac(@bool.truth())(g_3))
         } else {
-          (@list.empty(), 3L, fake_tac(fake_1, @lib.map(fn(x699 : (String, @kernel.Thm)) -> @kernel.Thm raise {
+          (@list.List([]), 3L, fake_tac(fake_1, @lib.map(fn(x699 : (String, @kernel.Thm)) -> @kernel.Thm raise {
             x699.1
           }, g_3.0), g_3))
         }
@@ -3782,7 +3782,7 @@ fn[TA, TB] bracket_step_l(x695 : (TB, @list.List[TA], Substep)?, x696 : Int64) -
       if (e_8 == 0L) {
         None
       } else {
-        Some((e_8, @list.empty(), Substep::Error_point))
+        Some((e_8, @list.List([]), Substep::Error_point))
       }
     }
     Some((_, src_1, substep_1)) => Some((e_8, src_1, substep_1))
@@ -3814,11 +3814,11 @@ pub fn src_of_step(x709 : Int64, x710 : @list.List[@list.List[(String, @parser.L
           }
         })(x714)
         s716(x715)
-      }, @lib.map(src_of_just, cases), @list.empty())
+      }, @lib.map(src_of_just, cases), @list.List([]))
       src_of_just(just_5).concat(t717)
     }
     Substep::Error(_, just_6) => src_of_just(just_6)
-    _ => @list.empty()
+    _ => @list.List([])
   }
   (@list.List([(e, strings_of_toks(@lib.flat(src)))])).concat(t718)
 }
@@ -3831,7 +3831,7 @@ pub fn src_of_just(x719 : Just) -> @list.List[(Int64, (String, String, String))]
     let step1 = x720
     match step1 {
       Some(step) => src_of_step(step.0, step.1, step.2)
-      _ => @list.empty()
+      _ => @list.List([])
     }
   }
   match just_7 {
@@ -3846,10 +3846,10 @@ pub fn src_of_just(x719 : Just) -> @list.List[(Int64, (String, String, String))]
         s725(x724)
       }, @lib.map(fn(x726 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> @list.List[(Int64, (String, String, String))] raise {
         src_of_step(x726.0, x726.1, x726.2)
-      }, steps), @list.empty()).concat(t727)
+      }, steps), @list.List([])).concat(t727)
       unpack(step1_1).concat(t728)
     }
-    _ => @list.empty()
+    _ => @list.List([])
   }
 }
 
@@ -3866,7 +3866,7 @@ pub fn src_of_steps(x729 : @list.List[(Int64, @list.List[@list.List[(String, @pa
     s734(x733)
   }, @lib.map(fn(x735 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> @list.List[(Int64, (String, String, String))] raise {
     src_of_step(x735.0, x735.1, x735.2)
-  }, steps), @list.empty())
+  }, steps), @list.List([]))
 }
 
 ///|
@@ -3935,7 +3935,7 @@ pub fn error_line(x739 : @list.List[(Int64, Int64)], x740 : @list.List[Int64]) -
     }
   }
   let (s1_1, s2_1, ee_p) = error_line1("::", "", 2L, l, if (explain_errors().val > 1L) {
-    @list.empty()
+    @list.List([])
   } else {
     ee
   })
@@ -3955,14 +3955,14 @@ pub fn insert_errors(x749 : Int64, x750 : String, x751 : @list.List[(Int64, Int6
     let l_1 = x755
     let ee_1 = x756
     match s_1 {
-      Empty => (@list.empty(), n_1, l_1, ee_1)
+      Empty => (@list.List([]), n_1, l_1, ee_1)
       More("\n" as c, tail=s_p) => {
         let (s1, ee_p) = if @list.List::is_empty(l_1) {
           ("", ee_1)
         } else {
           error_line(l_1, ee_1)
         }
-        let (s2, n1, l1, ee_p_1) = insert_errors1(0L, s_p, @list.empty(), ee_p)
+        let (s2, n1, l1, ee_p_1) = insert_errors1(0L, s_p, @list.List([]), ee_p)
         ((s2.prepend(s1)).prepend(c), n1, l1, ee_p_1)
       }
       More(c_1, tail=s_p_1) => {
@@ -4009,7 +4009,7 @@ pub fn string_of_src(x757 : Int64, x758 : @list.List[(Int64, (String, String, St
       }
     }
   }
-  string_of_src1("", m, @list.empty(), "", steps, @list.empty())
+  string_of_src1("", m, @list.List([]), "", steps, @list.List([]))
 }
 
 ///|
@@ -4127,9 +4127,9 @@ pub fn check_proof(x797 : @list.List[(Int64, @list.List[@list.List[(String, @par
   let step_58 = match steps {
     More((_, _, Substep::Have(_, _, _)) as step, tail=Empty) => step
     More((_, _, Substep::Now(_, _)) as step_57, tail=Empty) => step_57
-    _ => ((-1L), @list.empty(), Substep::Now(@list.empty(), Just::Proof(None, steps, Some(((-1L), @list.empty(), Substep::Bracket_end)))))
+    _ => ((-1L), @list.List([]), Substep::Now(@list.List([]), Just::Proof(None, steps, Some(((-1L), @list.List([]), Substep::Bracket_end)))))
   }
-  let (step_p, gs) = tactic_of_step(true, step_58, (@list.empty(), thesis_var()))
+  let (step_p, gs) = tactic_of_step(true, step_58, (@list.List([]), thesis_var()))
   let steps_p_1 = match step_p {
     (_, Empty, Substep::Now(_, Just::Proof(_, steps_p, _))) => steps_p
     step_p_1 => @list.List([step_p_1])
@@ -4150,7 +4150,7 @@ pub fn check_proof(x797 : @list.List[(Int64, @list.List[@list.List[(String, @par
         })(x800))
       })(@lib.hd(asl))
       let src_p = src_of_steps(steps_p_1)
-      let t801 = j((@list.empty(), @list.List([(a, thesis_var())]), @list.empty()), @list.List([@kernel.assume_rule(a)]))
+      let t801 = j((@list.List([]), @list.List([(a, thesis_var())]), @list.List([])), @list.List([@kernel.assume_rule(a)]))
       (steps_p_1, count_errors(src_p), t801)
     }
   }
@@ -4238,7 +4238,7 @@ pub fn labels_of_just(x810 : @list.List[(@list.List[String], Ref[Int64])], x811 
   fn collect_strings(x813 : @list.List[ByItem]) -> @list.List[String] raise {
     let l = x813
     match l {
-      Empty => @list.empty()
+      Empty => @list.List([])
       More(ByItem::Label(s), tail=l_p) => collect_strings(l_p).prepend(s)
       More(_, tail=l_p_1) => collect_strings(l_p_1)
     }
@@ -4317,13 +4317,13 @@ pub fn number_labels(x832 : Int64, x833 : @list.List[(@list.List[String], Ref[In
   let n = x832
   let labels = x833
   match labels {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More((oldlabs, count), tail=rst) => {
       let (newlabs, n_p) = if ((extra_labels().val > 1L) || ((count.val > 0L) || ((extra_labels().val > 0L) && @lib.exists(isnumber, oldlabs)))) {
         let t834 = @lib.add63(n, 1L)
         (@list.List([Int64::to_string(n)]), t834)
       } else {
-        (@list.empty(), n)
+        (@list.List([]), n)
       }
       number_labels(n_p, rst).prepend((oldlabs, newlabs))
     }
@@ -4337,7 +4337,7 @@ pub fn renumber_steps(x835 : @list.List[(@list.List[String], @list.List[String])
   let context = x836
   let steps = x837
   match steps {
-    Empty => (labels, @list.empty())
+    Empty => (labels, @list.List([]))
     More((e, src_2, substep), tail=rst_2) => {
       match src_2 {
         More(src1_1, tail=More(src2, tail=More(src3, tail=More(src4, tail=More(src5, tail=Empty))))) => {
@@ -4398,9 +4398,9 @@ pub fn renumber_steps(x835 : @list.List[(@list.List[String], @list.List[String])
               let (labels_p_p_6, justl_p_p) = @lib.itlist(fn(x857 : Just, x858 : (@list.List[(@list.List[String], @list.List[String])], @list.List[Just])) -> (@list.List[(@list.List[String], @list.List[String])], @list.List[Just]) raise {
                 let just_p_6 = x857
                 let (labels_p_9, justl_p) = x858
-                let (labels_p_p_5, _, just_p_p) = renumber_just(labels_p_9, context, @list.empty(), just_p_6)
+                let (labels_p_p_5, _, just_p_p) = renumber_just(labels_p_9, context, @list.List([]), just_p_6)
                 (labels_p_p_5, justl_p.prepend(just_p_p))
-              }, @lib.rev(justl), (labels_p_8, @list.empty()))
+              }, @lib.rev(justl), (labels_p_8, @list.List([])))
               let (labels_p_p_p, rst_p_8) = renumber_steps(labels_p_p_6, context, rst_2)
               (labels_p_p_p, rst_p_8.prepend((e, @list.List([src1_1, src2, src3, src4_p_5, src5]), Substep::Cases(just_p_5, @lib.rev(justl_p_p)))))
             }
@@ -4428,7 +4428,7 @@ pub fn renumber_just(x859 : @list.List[(@list.List[String], @list.List[String])]
     let src_4 = x863
     let l = x864
     match l {
-      Empty => (@list.empty(), src_4, @list.empty())
+      Empty => (@list.List([]), src_4, @list.List([]))
       More(ByItem::Label(s_1) as x_7, tail=l_p) if isnumber(s_1) => {
         match src_4 {
           More(tok, tail=More((x1_2, @parser.Lexcode::Ident(_), x2_2) as tok_p, tail=src23)) => {
@@ -4517,7 +4517,7 @@ fn[TC] renumber_labs_l(x847 : Bool, x848 : String, x849 : @list.List[(String, @p
       if b {
         (make_lab_l("", "", "", "", "", w, @lib.hd(label.1)), " ")
       } else {
-        ((@list.empty(), @list.empty()), w)
+        ((@list.List([]), @list.List([])), w)
       }
     }
     More(lab, tail=rst) if isnumber(lab) => {
@@ -4527,7 +4527,7 @@ fn[TC] renumber_labs_l(x847 : Bool, x848 : String, x849 : @list.List[(String, @p
           let (newsrc, newlabs) = if b {
             make_lab_l(x1_1, y1_1, x2_1, y2_1, x3_1, w_p, @lib.hd(label.1))
           } else {
-            (@list.empty(), @list.empty())
+            (@list.List([]), @list.List([]))
           }
           ((newsrc.concat(src_p), newlabs.concat(labs_p)), if b {
             w
@@ -4571,9 +4571,9 @@ fn[TE, TF, TG] renumber_labs1_l(x852 : Bool, x853 : @list.List[(TE, TF, String)]
 /// `renumber_steps1`
 pub fn renumber_steps1(x874 : @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> @list.List[Step] raise {
   let steps = x874
-  let labels = @lib.rev(labels_of_steps(@list.empty(), @list.empty(), steps))
+  let labels = @lib.rev(labels_of_steps(@list.List([]), @list.List([]), steps))
   let labels_p = number_labels(start_label().val, labels)
-  renumber_steps(labels_p, @list.empty(), steps).1
+  renumber_steps(labels_p, @list.List([]), steps).1
 }
 
 ///|
@@ -4747,7 +4747,7 @@ pub fn reset_miz3(x891 : Int64) -> Unit raise {
     ()
   }
   {
-    @tactics.current_goalstack.val = @list.empty()
+    @tactics.current_goalstack.val = @list.List([])
     ()
   }
   server_up(())

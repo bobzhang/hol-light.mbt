@@ -97,7 +97,7 @@ fn step_1() -> Unit raise {
         }
       }
       let fm_p_p = @basics.mk_eq(fm, fm_p)
-      @tactics.prove(fm_p_p, @simp.rewrite_tac(@list.empty()))
+      @tactics.prove(fm_p_p, @simp.rewrite_tac(@list.List([])))
     } catch {
       _ => @kernel.refl(fm)
     }
@@ -122,7 +122,7 @@ pub fn simplify1_conv(x2 : @kernel.Term) -> @kernel.Thm raise {
     if @lib.mem(x, @kernel.frees(p)) {
       @kernel.refl(fm)
     } else {
-      let t3 = @simp.rewrite_tac(@list.empty())
+      let t3 = @simp.rewrite_tac(@list.List([]))
       @tactics.prove(@basics.mk_eq(fm, p), t3)
     }
   } else {

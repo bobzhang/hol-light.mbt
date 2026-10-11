@@ -18,7 +18,7 @@ fn step_1() -> Unit raise {
   let t177 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("a / &2 = n <=> a = &2 * n"))]))
   let t176 = @simp.rewrite_tac(@list.List([@calc_int.real_abs_neg(), @real.real_abs_div(), @calc_int.real_abs_num()]))
   let t175 = @simp.rewrite_tac(@list.List([@int.integer()]))
-  let t174 = @simp.simp_tac(@list.empty())
+  let t174 = @simp.simp_tac(@list.List([]))
   let t173 = @simp.gen_rewrite_tac(fn(x172 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x172
   }, @list.List([@equal.gsym(@class.contrapos_thm())]))
@@ -50,7 +50,7 @@ fn step_1() -> Unit raise {
       s152(x153)
     }
   }))
-  let t149 = @meson.asm_meson_tac(@list.empty())
+  let t149 = @meson.asm_meson_tac(@list.List([]))
   let t148 = @simp.asm_simp_tac(@list.List([@complexes.complex_norm_cx(), @calc_int.real_abs_num()]))
   let t145 = @parser.parse_term("Cx(&1)")
   let t150 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.remove_then("*", fn(x147 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -70,7 +70,7 @@ fn step_1() -> Unit raise {
   let t133 = @parser.parse_term("v:complex")
   let t135 = @tactics.disch_then((x134 : @kernel.Thm) => @tactics.x_choose_tac(t133, x134))
   let t136 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.in_elim_thm()])), t135)
-  let t132 = @meson.asm_meson_tac(@list.empty())
+  let t132 = @meson.asm_meson_tac(@list.List([]))
   let t131 = @simp.asm_simp_tac(@list.List([@equal.gsym(@floor.real_eq_integers())]))
   let t130 = @tactics.match_mp_tac(@calc_rat.real_arith(@parser.parse_term("~(abs(x - y) < &1) ==> &1 <= abs((&2 * x + &1) - (&2 * y + &1))")))
   let t129 = @simp.rewrite_tac(@list.List([@equal.gsym(@complexes.cx_sub()), @complexes.complex_norm_cx()]))
@@ -85,7 +85,7 @@ fn step_1() -> Unit raise {
       s126(x127)
     }
   }))))
-  let t121 = @simp.asm_rewrite_tac(@list.empty())
+  let t121 = @simp.asm_rewrite_tac(@list.List([]))
   let t120 = @tactics.remove_then("*", fn(x117 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x117
     let t119 = @tactics.mp_tac(@bool.spec(@parser.parse_term("z:complex"), th))
@@ -130,7 +130,7 @@ fn step_1() -> Unit raise {
   let t85 = @simp.rewrite_tac(@list.List([@transcendentals.cexp_eq(), @complexes.cx_mul()]))
   let t81 = @simp.rewrite_tac(@list.List([@real.sqrt_0(), @calc_int.real_neg_0()]))
   let t80 = @tactics.conv_tac(@calc_rat.real_rat_reduce_conv)
-  let t79 = @simp.asm_rewrite_tac(@list.empty())
+  let t79 = @simp.asm_rewrite_tac(@list.List([]))
   let t78 = @simp.simp_tac(@list.List([@cart.cart_eq(), @vectors.forall_3(), @vectors.vector_3(), @vectors.vector_neg_component(), @cart.dimindex_3(), @calc_num.arith(), @complexes.re_neg(), @complexes.im_neg(), @vectors.norm_neg(), @calc_int.real_neg_neg()]))
   let t77 = @simp.rewrite_tac(@list.List([@complexes.complex_neg_sub()]))
   let t82 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.map_every(fn(x74 : String) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -191,7 +191,7 @@ fn step_1() -> Unit raise {
   let t33 = @simp.rewrite_tac(@list.List([@real.real_neg_mul2()]))
   let t32 = @simp.simp_tac(@list.List([@vectors.norm_eq_1(), @vectors.dot_3(), @vectors.vector_3(), @vectors.vector_neg_component(), @vectors.dist(), @cart.dimindex_3(), @calc_num.arith(), @topology.in_cball(), @complexes.complex_sub_lzero(), @vectors.norm_neg()]))
   let t31 = @simp.rewrite_tac(@list.List([@sets.subset(), @sets.forall_in_image(), @trivia.o_thm(), @sets.in_elim_thm()]))
-  let t30 = @simp.asm_rewrite_tac(@list.empty())
+  let t30 = @simp.asm_rewrite_tac(@list.List([]))
   let t29 = @tactics.exists_tac(@parser.parse_term("{x:real^3 | norm x = &1}"))
   let t28 = @tactics.match_mp_tac(@topology.continuous_on_subset())
   let t25 = @simp.rewrite_tac(@list.List([@equal.gsym(@sets.image_o())]))
@@ -250,7 +250,7 @@ fn step_2() -> Unit raise {
   })
   let t190 = @simp.simp_tac(@list.List([@topology.continuous_on_add(), @topology.continuous_on_const(), @topology.continuous_on_cmul(), @topology.continuous_on_id()]))
   let t198 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@simp.rewrite_rule(@list.List([@trivia.o_def()]))(@topology.continuous_on_compose())), t190), t193), t194), t197])
-  let t189 = @simp.rewrite_tac(@list.empty())
+  let t189 = @simp.rewrite_tac(@list.List([]))
   let t188 = @tactics.mp_tac(@bool.spec(@parser.parse_term("\\x. (f:real^3->real^2) (a + r % x)"), theorem_1()))
   let t200 = @tactics.then_tac(@tactics.then_tac(@tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t188), t189), @tactics.ants_tac), t198), t199), @calc_rat.asm_real_arith_tac)
   borsuk_ulam_c.set(@tactics.prove(@parser.parse_term("!f:real^3->real^2 a r.\n        &0 <= r /\\ f continuous_on {z | norm(z - a) = r}\n        ==> ?x. norm(x) = r /\\ f(a + x) = f(a - x)"), t200))

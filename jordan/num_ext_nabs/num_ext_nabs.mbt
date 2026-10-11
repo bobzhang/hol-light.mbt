@@ -10,7 +10,7 @@ fn step_1() -> Unit raise {
 ///|
 /// INT_NUM
 fn step_2() -> Unit raise {
-  let t2 = @meson.meson_tac(@list.empty())
+  let t2 = @meson.meson_tac(@list.List([]))
   let t1 = @tactics.exists_tac(@parser.parse_term("u:num"))
   let t3 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.is_int()])), @tactics.gen_tac), t1), t2)
   int_num_c.set(@tactics_refine.prove(@parser.parse_term("!u. (integer (real_of_num u))"), t3))
@@ -159,7 +159,7 @@ fn step_9() -> Unit raise {
   let t45 = @simp.rewrite_tac(@list.List([@tactics_refine.prove(@parser.parse_term("! u y.(((real_of_num u) = --(real_of_num y))=\n                ((real_of_num u) +(real_of_num y) = (&0)))"), @calc_rat.real_arith_tac)]))
   let branch2 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.int_eq(), @int.int_neg_th(), int_num_real()])), t45), t46), t47)
   let t48 = @list.List([@simp.rewrite_tac(@list.List([@int.int_eq(), int_num_real()])), branch2])
-  let t43 = @meson.meson_tac(@list.empty())
+  let t43 = @meson.meson_tac(@list.List([]))
   let t44 = @list.List([@tactics_ext.taut_tac(@parser.parse_term(" ((A==>C)/\\ (B==>C)) ==> (A\\/B ==>C) ")), t43])
   let t42 = @tactics.then_tac(@tactics.gen_tac, @tactics.beta_tac)
   let t41 = @tactics.match_mp_tac(@class.select_unique())
@@ -186,7 +186,7 @@ fn step_10() -> Unit raise {
   let t56 = @simp.rewrite_tac(@list.List([@tactics_refine.prove(@parser.parse_term("! u y.((--(real_of_num u) = (real_of_num y))=\n                ((real_of_num u) +(real_of_num y) = (&0)))"), @calc_rat.real_arith_tac)]))
   let branch1 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.int_eq(), @int.int_neg_th(), int_num_real()])), t56), t57), t58)
   let t59 = @list.List([branch1, @simp.rewrite_tac(@list.List([@int.int_eq(), int_num_real()]))])
-  let t54 = @meson.meson_tac(@list.empty())
+  let t54 = @meson.meson_tac(@list.List([]))
   let t55 = @list.List([@tactics_ext.taut_tac(@parser.parse_term(" ((A==>C)/\\ (B==>C)) ==> (A\\/B ==>C) ")), t54])
   let t53 = @tactics.then_tac(@tactics.gen_tac, @tactics.beta_tac)
   let t52 = @tactics.match_mp_tac(@class.select_unique())

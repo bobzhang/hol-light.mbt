@@ -219,7 +219,7 @@ fn step_3() -> Unit raise {
     ),
     t17,
   ])
-  let t15 = @simp.asm_rewrite_tac(@list.empty())
+  let t15 = @simp.asm_rewrite_tac(@list.List([]))
   let t14 = @class.asm_cases_tac(@parser.parse_term("n <= 1"))
   let t13 = @simp.rewrite_tac(@list.List([modmul_group()]))
   let t12 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
@@ -423,7 +423,7 @@ pub fn has_size_modmul_group() -> @kernel.Thm {
 /// ABELIAN_MODMUL_GROUP
 fn step_7() -> Unit raise {
   let t59 = @simp.rewrite_tac(@list.List([@arith.mult_sym()]))
-  let t58 = @simp.asm_rewrite_tac(@list.empty())
+  let t58 = @simp.asm_rewrite_tac(@list.List([]))
   let t57 = @tactics.repeat_tac(@tactics.gen_tac)
   let t60 = @tactics.then_tac(
     @tactics.then_tac(
@@ -640,7 +640,7 @@ fn step_10() -> Unit raise {
       ),
     ]),
   )
-  let t102 = @simp.asm_rewrite_tac(@list.empty())
+  let t102 = @simp.asm_rewrite_tac(@list.List([]))
   let t101 = @tactics.exists_tac(@parser.parse_term("m * n:num"))
   let t100 = @tactics.match_mp_tac(@pocklington.cong_imp_eq())
   let t99 = @tactics.repeat_tac(@tactics.strip_tac)
@@ -968,7 +968,7 @@ pub fn group_isomorphism_prod_modmul_group() -> @kernel.Thm {
 ///|
 /// ISOMORPHIC_GROUP_MODMUL_GROUP
 fn step_11() -> Unit raise {
-  let t128 = @simp.asm_rewrite_tac(@list.empty())
+  let t128 = @simp.asm_rewrite_tac(@list.List([]))
   let t127 = @tactics.match_mp_tac(group_isomorphism_prod_modmul_group())
   let t126 = @tactics.exists_tac(@parser.parse_term("\\a. (a MOD m),(a MOD n)"))
   let t125 = @simp.rewrite_tac(@list.List([@grouptheory.isomorphic_group()]))
@@ -1507,7 +1507,7 @@ fn step_14() -> Unit raise {
       @tactics.strip_assume_tac,
     ),
   )
-  let t164 = @list.List([@meson.meson_tac(@list.empty()), @tactics.all_tac])
+  let t164 = @list.List([@meson.meson_tac(@list.List([])), @tactics.all_tac])
   let t163 = @tactics.disch_then(fn(
     x162 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (

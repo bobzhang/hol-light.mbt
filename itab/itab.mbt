@@ -23,8 +23,8 @@ pub fn unify_accept_tac(mvs : List[Term], th : Thm) -> Tactic {
     // first.
     let th1 = @drule.instantiate_rule(insts, th)
     (
-      (@list.empty(), insts),
-      @list.empty(),
+      (@list.List([]), insts),
+      @list.List([]),
       (i, ths) => {
         match ths {
           Empty => @drule.instantiate_rule(i, th1)
@@ -199,7 +199,7 @@ fn itaut_iterdeep_tac(n : Int) -> Tactic {
   gl => {
     @lib.remark("Searching with limit " + n.to_string())
     @tactics.orelse_tac(
-      @tactics.then_tac(itaut_tac_n(@list.empty(), n), @tactics.no_tac),
+      @tactics.then_tac(itaut_tac_n(@list.List([]), n), @tactics.no_tac),
       itaut_iterdeep_tac(n + 1),
     )(gl)
   }

@@ -56,8 +56,8 @@ test "nets match nets.ml" {
   let fn_ = @basics.mk_fun_ty
   @kernel.new_constant("c", a)
   @kernel.new_constant("h", fn_(a, fn_(a, a)))
-  let c = @kernel.mk_const("c", @list.empty())
-  let h = @kernel.mk_const("h", @list.empty())
+  let c = @kernel.mk_const("c", @list.List([]))
+  let h = @kernel.mk_const("h", @list.List([]))
   let x = @kernel.mk_var("x", a)
   let y = @kernel.mk_var("y", a)
   let f = @kernel.mk_var("f", fn_(a, fn_(a, a)))
@@ -86,7 +86,7 @@ test "nets match nets.ml" {
       @nets.empty_net(),
     )
   }
-  let net = build(@list.empty(), @list.List(pats))
+  let net = build(@list.List([]), @list.List(pats))
   let net_l = build(@list.singleton(g), @list.List(pats))
   let queries : Array[(String, Term)] = [
     ("h_c_c", app2(h, c, c)),
@@ -105,9 +105,9 @@ test "nets match nets.ml" {
   for q in queries {
     out("lookup_l " + q.0 + " = " + show(@nets.lookup(q.1, net_l)))
   }
-  let n1 = build(@list.empty(), @list.List(pats).drop(3).rev())
+  let n1 = build(@list.List([]), @list.List(pats).drop(3).rev())
   let n2 = build(
-    @list.empty(),
+    @list.List([]),
     @list.List([
       (app2(h, x, y), elem(7, "m")),
       (c, elem(0, "m0")),

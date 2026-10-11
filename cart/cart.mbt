@@ -25,7 +25,7 @@ pub fn dimindex() -> @kernel.Thm {
 ///|
 /// DIMINDEX_NONZERO
 fn step_2() -> Unit raise {
-  let t2 = @sets.set_tac(@list.empty())
+  let t2 = @sets.set_tac(@list.List([]))
   let t1 = @simp.asm_simp_tac(
     @list.List([@sets.card_eq_0(), @calc_num.arith()]),
   )
@@ -555,7 +555,7 @@ pub fn forall_finite_index() -> @kernel.Thm {
 ///|
 /// cart_tybij
 fn step_19() -> Unit raise {
-  let t38 = @simp.rewrite_tac(@list.empty())
+  let t38 = @simp.rewrite_tac(@list.List([]))
   cart_tybij_c.set(
     @class.new_type_definition(
       "cart",
@@ -668,11 +668,11 @@ fn step_25() -> Unit raise {
   let t49 = @meson.asm_meson_tac(
     @list.List([finite_index_inj(), dimindex_finite_image()]),
   )
-  let t48 = @simp.rewrite_tac(@list.empty())
+  let t48 = @simp.rewrite_tac(@list.List([]))
   let t47 = @tactics.match_mp_tac(@class.select_unique())
   let t46 = @tactics.repeat_tac(@tactics.strip_tac)
   let t45 = @simp.rewrite_tac(
-    @list.List([finite_index(), @simp.rewrite_rule(@list.empty())(cart_tybij())]),
+    @list.List([finite_index(), @simp.rewrite_rule(@list.List([]))(cart_tybij())]),
   )
   let t44 = @tactics.exists_tac(
     @parser.parse_term(
@@ -730,7 +730,7 @@ pub fn lambda_beta() -> @kernel.Thm {
 ///|
 /// LAMBDA_UNIQUE
 fn step_26() -> Unit raise {
-  let t51 = @meson.meson_tac(@list.empty())
+  let t51 = @meson.meson_tac(@list.List([]))
   let t52 = @tactics.then_tac(
     @simp.simp_tac(@list.List([cart_eq(), lambda_beta()])),
     t51,
@@ -834,7 +834,7 @@ pub fn finite_index_inrange_2() -> @kernel.Thm {
 /// CART_EQ_FULL
 fn step_30() -> Unit raise {
   let t59 = @simp.simp_tac(@list.List([cart_eq()]))
-  let t58 = @simp.simp_tac(@list.empty())
+  let t58 = @simp.simp_tac(@list.List([]))
   let t60 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), @tactics.eq_tac),
@@ -1106,7 +1106,7 @@ fn step_39() -> Unit raise {
       @int.arith_rule(@parser.parse_term("1 <= i ==> ~(i + a <= a)")),
     ]),
   )
-  let t87 = @simp.rewrite_tac(@list.empty())
+  let t87 = @simp.rewrite_tac(@list.List([]))
   let t89 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.disch_then(fn(
@@ -1159,7 +1159,7 @@ fn step_39() -> Unit raise {
     ),
     t88,
   )
-  let t83 = @simp.asm_rewrite_tac(@list.empty())
+  let t83 = @simp.asm_rewrite_tac(@list.List([]))
   let t82 = @tactics.match_mp_tac(
     @int.arith_rule(
       @parser.parse_term("1 <= i /\\ i <= b ==> 1 <= i + a /\\ i + a <= a + b"),
@@ -1279,7 +1279,7 @@ fn step_40() -> Unit raise {
       t94,
     ]),
   )
-  let t93 = @simp.asm_rewrite_tac(@list.empty())
+  let t93 = @simp.asm_rewrite_tac(@list.List([]))
   let t92 = @tactics.repeat_tac(@tactics.gen_tac)
   let t97 = @tactics.then_tac(
     @tactics.then_tac(
@@ -1478,7 +1478,7 @@ pub fn sndcart_component() -> @kernel.Thm {
 ///|
 /// PASTECART_COMPONENT
 fn step_47() -> Unit raise {
-  let t108 = @simp.rewrite_tac(@list.empty())
+  let t108 = @simp.rewrite_tac(@list.List([]))
   let t109 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -3439,7 +3439,7 @@ pub fn vector() -> @kernel.Thm {
 ///|
 /// IN_ELIM_PASTECART_THM
 fn step_81() -> Unit raise {
-  let t262 = @meson.meson_tac(@list.empty())
+  let t262 = @meson.meson_tac(@list.List([]))
   let t263 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -3579,7 +3579,7 @@ pub fn pastecart_in_pcross() -> @kernel.Thm {
 ///|
 /// PCROSS_EQ_EMPTY
 fn step_87() -> Unit raise {
-  let t267 = @sets.set_tac(@list.empty())
+  let t267 = @sets.set_tac(@list.List([]))
   let t268 = @tactics.then_tac(@simp.rewrite_tac(@list.List([pcross()])), t267)
   pcross_eq_empty_c.set(
     @tactics.prove(
@@ -3657,7 +3657,7 @@ pub fn pcross_sing() -> @kernel.Thm {
 ///|
 /// SUBSET_PCROSS
 fn step_90() -> Unit raise {
-  let t271 = @meson.meson_tac(@list.empty())
+  let t271 = @meson.meson_tac(@list.List([]))
   let t272 = @tactics.then_tac(
     @simp.simp_tac(
       @list.List([
@@ -3717,7 +3717,7 @@ pub fn pcross_mono() -> @kernel.Thm {
 ///|
 /// PCROSS_EQ
 fn step_92() -> Unit raise {
-  let t274 = @sets.set_tac(@list.empty())
+  let t274 = @sets.set_tac(@list.List([]))
   let t275 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([@equal.gsym(@sets.subset_antisym_eq()), subset_pcross()]),
@@ -3946,7 +3946,7 @@ pub fn finite_pcross() -> @kernel.Thm {
 ///|
 /// FINITE_PCROSS_EQ
 fn step_96() -> Unit raise {
-  let t304 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t304 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t303 = @simp.rewrite_tac(
     @list.List([pastecart_in_pcross(), fstcart_pastecart(), sndcart_pastecart()]),
   )
@@ -4033,7 +4033,7 @@ pub fn finite_pcross_eq() -> @kernel.Thm {
 ///|
 /// IMAGE_FSTCART_PCROSS
 fn step_97() -> Unit raise {
-  let t310 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t310 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t309 = @simp.rewrite_tac(
     @list.List([exists_in_pcross(), fstcart_pastecart()]),
   )
@@ -4087,7 +4087,7 @@ pub fn image_fstcart_pcross() -> @kernel.Thm {
 ///|
 /// IMAGE_SNDCART_PCROSS
 fn step_98() -> Unit raise {
-  let t316 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t316 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t315 = @simp.rewrite_tac(
     @list.List([exists_in_pcross(), sndcart_pastecart()]),
   )
@@ -4309,7 +4309,7 @@ pub fn pcross_unions() -> @kernel.Thm {
 ///|
 /// PCROSS_UNIONS_UNIONS, PCROSS_UNIONS
 fn step_103() -> Unit raise {
-  let t330 = @sets.set_tac(@list.empty())
+  let t330 = @sets.set_tac(@list.List([]))
   let t331 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -4383,7 +4383,7 @@ pub fn pcross_inters() -> @kernel.Thm {
 ///|
 /// PCROSS_INTERS_INTERS, PCROSS_INTERS
 fn step_104() -> Unit raise {
-  let t336 = @tactics.asm_tac(@sets.set_tac)(@list.empty())
+  let t336 = @tactics.asm_tac(@sets.set_tac)(@list.List([]))
   let t335 = @simp.asm_rewrite_tac(
     @list.List([
       @sets.inters_gspec(),
@@ -4395,7 +4395,7 @@ fn step_104() -> Unit raise {
     ]),
   )
   let t334 = @tactics.repeat_tac(
-    @tactics.then_tac(@class.cond_cases_tac, @simp.rewrite_tac(@list.empty())),
+    @tactics.then_tac(@class.cond_cases_tac, @simp.rewrite_tac(@list.List([]))),
   )
   let t337 = @tactics.then_tac(
     @tactics.then_tac(

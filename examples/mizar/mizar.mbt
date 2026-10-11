@@ -104,7 +104,7 @@ pub fn typecheck_in_env(x22 : @list.List[@kernel.Term], x23 : @preterm.Preterm) 
     let acc = x25
     let (n, ty) = @kernel.dest_var(v)
     acc.prepend((n, @preterm.pretype_of_type(ty)))
-  }, env, @list.empty())
+  }, env, @list.List([]))
   @preterm.term_of_preterm(((x26 : @preterm.Preterm) => @preterm.retypecheck(penv, x26))(ptm))
 }
 
@@ -265,7 +265,7 @@ fn step_8() -> Unit raise {
       fn(x59 : @kernel.Term) -> @kernel.Thm raise {
         s58(x59)
       }
-    }, @simp.basic_net(), @list.empty())
+    }, @simp.basic_net(), @list.List([]))
     @equal.thenc(@simp.gen_rewrite_conv(fn(x54 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
       let s55 = @equal.once_depth_conv(x54)
       fn(x56 : @kernel.Term) -> @kernel.Thm raise {
@@ -323,9 +323,9 @@ fn step_9() -> Unit raise {
             @lib.union(x77, x78)
           }
         })(@bool.conjuncts_rule(x79))(x80)
-      }, ths_2, @list.empty())
+      }, ths_2, @list.List([]))
       try {
-        @tactics.tac_proof((@list.empty(), tm_1), @tactics.map_first(fn(x81 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+        @tactics.tac_proof((@list.List([]), tm_1), @tactics.map_first(fn(x81 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
           let s82 = @tactics.match_accept_tac(x81)
           fn(x83 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
             s82(x83)
@@ -336,7 +336,7 @@ fn step_9() -> Unit raise {
           try {
             freeze_thenl_l(rewrite_prover, ths_2, tm_1)
           } catch {
-            Failure(_) => @tactics.tac_proof((@list.empty(), tm_1), @meson.gen_meson_tac(0L, 30L, 1L, ths_2))
+            Failure(_) => @tactics.tac_proof((@list.List([]), tm_1), @meson.gen_meson_tac(0L, 30L, 1L, ths_2))
             e => raise e
           }
         }
@@ -599,7 +599,7 @@ pub fn add_mizar_transitivity_theorem(x120 : @kernel.Thm) -> Unit raise {
   let pat = @basics.dest_imp(@basics.strip_forall(@kernel.concl(th)).1).0
   let t121 = mizar_transitivity_net().val
   {
-    mizar_transitivity_net().val = @nets.enter_fn(@list.empty(), pat, @drule.match_mp(th), t121)
+    mizar_transitivity_net().val = @nets.enter_fn(@list.List([]), pat, @drule.match_mp(th), t121)
     ()
   }
 }
@@ -798,7 +798,7 @@ pub fn mizar_let_tac(x177 : (@list.List[@preterm.Preterm], @list.List[@kernel.Ho
   let mk_varb : (@preterm.Preterm) -> @kernel.Term raise = fn(x179 : @preterm.Preterm) -> @kernel.Term raise {
     let v = x179
     let t181 = @preterm.Preterm::Typing(v, pty)
-    @preterm.term_of_preterm(((x180 : @preterm.Preterm) => @preterm.retypecheck(@list.empty(), x180))(t181))
+    @preterm.term_of_preterm(((x180 : @preterm.Preterm) => @preterm.retypecheck(@list.List([]), x180))(t181))
   }
   let vs = @lib.map(mk_varb, vlist)
   @tactics.map_every(@tactics.x_gen_tac, vs)(gl)
@@ -958,7 +958,7 @@ pub fn[TA, TB] mizar_per_cases_tac(x236 : (String, @list.List[(@list.List[(Strin
             })((fn(x243 : (String, @kernel.Thm)) -> @kernel.Thm raise {
               x243.1
             })(x244))(x245)
-          }, asl, @list.empty())
+          }, asl, @list.List([]))
           let rogues = @lib.subtract(@kernel.hyp(th), ghyps)
           if @list.List::is_empty(rogues) {
             th
@@ -996,7 +996,7 @@ pub fn[TA] mizar_suppose_tac(x247 : @list.List[(String, @preterm.Preterm)], x248
     })((fn(x254 : (String, @kernel.Thm)) -> @kernel.Thm raise {
       x254.1
     })(x255))(x256)
-  }, asl, @list.empty())
+  }, asl, @list.List([]))
   let t258 = @kernel.assume_rule(asm_)
   (@tactics.null_meta, @list.List([(augments(@lib.map(fn(x257 : (String, @preterm.Preterm)) -> String raise {
     x257.0
@@ -1054,7 +1054,7 @@ fn step_18() -> Unit raise {
   mizar_raw_endcase_tac_c.set(fn(x273 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[@tactics.Goal], (@drule.Instantiation) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let (asl, w) = x273
     let th = @bool.undisch(@kernel.inst_rule(@list.List([(w, p)]), pth))
-    (@tactics.null_meta, @list.empty(), fn(x274 : @drule.Instantiation) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
+    (@tactics.null_meta, @list.List([]), fn(x274 : @drule.Instantiation) -> ((@list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
       fn(x275 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         th
       }
@@ -1134,7 +1134,7 @@ fn step_20() -> Unit raise {
 pub fn parse_preform(x286 : @list.List[@parser.Lexcode]) -> ((@preterm.Preterm, @list.List[@parser.Lexcode])) raise {
   let l_1 = x286
   let (ptm, rst) = @parser.parse_preterm(l_1)
-  let ptm_p = @preterm.Preterm::Typing(ptm, @preterm.Pretype::Ptycon("bool", @list.empty()))
+  let ptm_p = @preterm.Preterm::Typing(ptm, @preterm.Pretype::Ptycon("bool", @list.List([])))
   (ptm_p, rst)
 }
 
@@ -1202,7 +1202,7 @@ pub fn parse_just(x295 : Bool, x296 : @list.List[@parser.Lexcode]) -> (((String,
     if tlink {
       (("", @list.List([(x297 : @list.List[(String, @kernel.Thm)]) => l("", x297)])), l_1)
     } else {
-      (("", @list.empty()), l_1)
+      (("", @list.List([])), l_1)
     }
   } else {
     match @lib.hd(l_1) {
@@ -1223,7 +1223,7 @@ pub fn parse_just(x295 : Bool, x296 : @list.List[@parser.Lexcode]) -> (((String,
             ((pot, if tlink {
               @list.List([(x301 : @list.List[(String, @kernel.Thm)]) => l("", x301)])
             } else {
-              @list.empty()
+              @list.List([])
             }), rem)
           } else {
             (("", if tlink {
@@ -1263,12 +1263,12 @@ pub fn parse_just(x295 : Bool, x296 : @list.List[@parser.Lexcode]) -> (((String,
           }
         }
       }
-      @parser.Lexcode::Resword("proof") => (("proof", @list.empty()), @lib.tl(l_1))
+      @parser.Lexcode::Resword("proof") => (("proof", @list.List([])), @lib.tl(l_1))
       _ => {
         if tlink {
           (("", @list.List([(x312 : @list.List[(String, @kernel.Thm)]) => l("", x312)])), l_1)
         } else {
-          (("", @list.empty()), l_1)
+          (("", @list.List([])), l_1)
         }
       }
     }

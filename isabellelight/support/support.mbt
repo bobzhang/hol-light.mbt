@@ -42,7 +42,7 @@ pub fn try_type(x14 : @kernel.HolType, x15 : @kernel.Term) -> @kernel.Term raise
   let tp = x14
   let tm = x15
   try {
-    @kernel.inst(@basics.type_match(@kernel.type_of(tm), tp, @list.empty()), tm)
+    @kernel.inst(@basics.type_match(@kernel.type_of(tm), tp, @list.List([])), tm)
   } catch {
     Failure(_) => tm
     e => raise e

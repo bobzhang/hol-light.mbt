@@ -321,7 +321,7 @@ fn step_19() -> Unit raise {
     })(@equal.sym(x71))
   }))
   let t67 = @tactics.conv_tac(@int.int_reduce_conv)
-  let t98 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t67), t72), t73), t74), t75), t76), t97])
+  let t98 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t67), t72), t73), t74), t75), t76), t97])
   let t66 = @class.asm_cases_tac(@parser.parse_term("y:int = &0"))
   let t63 = @tactics.conv_tac(@int.int_reduce_conv)
   let t62 = @simp.rewrite_tac(@list.List([p_sm2(), @pair.pair_eq()]))

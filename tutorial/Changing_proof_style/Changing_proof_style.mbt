@@ -102,7 +102,7 @@ pub fn consider(x38 : (@kernel.Term, String, @kernel.Term), x39 : ((@list.List[(
 ///|
 /// trivial
 fn step_1() -> Unit raise {
-  trivial_c.set(@meson.meson_tac(@list.empty()))
+  trivial_c.set(@meson.meson_tac(@list.List([])))
 }
 
 ///|

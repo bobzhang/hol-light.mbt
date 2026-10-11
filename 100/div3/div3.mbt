@@ -33,7 +33,7 @@ fn step_2() -> Unit raise {
       s13(x14)
     }
   }, @list.List([@int.arith_rule(@parser.parse_term("d = 1 * d"))]))
-  let t11 = @simp.asm_rewrite_tac(@list.empty())
+  let t11 = @simp.asm_rewrite_tac(@list.List([]))
   let t10 = @tactics.match_mp_tac(@pocklington.cong_add())
   let t9 = @simp.rewrite_tac(@list.List([@arith.le_0()]))
   let t8 = @list.List([@simp.rewrite_tac(@list.List([@arith.exp(), @arith.mult_clauses(), @pocklington.cong_refl()])), @tactics.all_tac])

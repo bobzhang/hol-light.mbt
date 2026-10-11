@@ -83,7 +83,7 @@ pub fn[TA] list_rest(
   x16 : @list.List[TA],
 ) -> @list.List[(TA, (@list.List[TA], @list.List[TA]))] raise {
   let l = x16
-  go_l(@list.empty(), l)
+  go_l(@list.List([]), l)
 }
 
 ///|
@@ -94,7 +94,7 @@ fn[TB] go_l(
   let acc = x17
   match x18 {
     More(x, tail=xs) => go_l(acc.prepend(x), xs).prepend((x, (acc, xs)))
-    Empty => @list.empty()
+    Empty => @list.List([])
   }
 }
 
@@ -104,7 +104,7 @@ pub fn[TA] nth_rest(
   x19 : Int64,
 ) -> ((@list.List[TA]) -> (TA, (@list.List[TA], @list.List[TA])) raise) raise {
   let n = x19
-  (x24 : @list.List[TA]) => go_l_1(@list.empty(), n, x24)
+  (x24 : @list.List[TA]) => go_l_1(@list.List([]), n, x24)
 }
 
 ///|
@@ -144,7 +144,7 @@ pub fn[TA] insert_at(
         go(acc.prepend(x), (@lib.sub63(n_1, 1L), xs_1))
     }
   }
-  go(@list.empty(), (i, l))
+  go(@list.List([]), (i, l))
 }
 
 ///|
@@ -153,7 +153,7 @@ pub fn[TA] take_drop(
   x30 : Int64,
 ) -> ((@list.List[TA]) -> (@list.List[TA], @list.List[TA]) raise) raise {
   let n = x30
-  (x35 : @list.List[TA]) => go_l_2(@list.empty(), n, x35)
+  (x35 : @list.List[TA]) => go_l_2(@list.List([]), n, x35)
 }
 
 ///|
@@ -322,7 +322,7 @@ pub fn[TA, TB, TC] fold_left_map(
         let (acc_p, y) = f(acc_1)(x)
         (acc_p, ys.prepend(y))
       },
-      (acc, @list.empty()),
+      (acc, @list.List([])),
       x63,
     )
   }
@@ -346,7 +346,7 @@ pub fn[TA, TB, TC] fold_right_map(
       (acc_p, ys.prepend(y))
     },
     xs,
-    (acc, @list.empty()),
+    (acc, @list.List([])),
   )
 }
 
@@ -372,7 +372,7 @@ pub fn[TA, TB] filter_map(
 ) -> @list.List[TA] raise {
   let f = x72
   match x73 {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(x, tail=xs) =>
       match f(x) {
         None => filter_map(f, xs)
@@ -444,8 +444,8 @@ pub fn hol_of_var(x : Int64) -> ((@kernel.HolType) -> @kernel.Term raise) raise 
 ///|
 /// reset_vars, fol_of_var, hol_of_var
 fn step_3() -> Unit raise {
-  let vstore = Ref::{ val: @list.empty(), }
-  let gstore = Ref::{ val: @list.empty(), }
+  let vstore = Ref::{ val: @list.List([]), }
+  let gstore = Ref::{ val: @list.List([]), }
   let vcounter = Ref::{ val: 0L, }
   let inc_vcounter : (Unit) -> Int64 raise = fn(x78 : Unit) -> Int64 raise {
     let _ = x78
@@ -460,11 +460,11 @@ fn step_3() -> Unit raise {
   let reset_vars : (Unit) -> Unit raise = fn(x79 : Unit) -> Unit raise {
     let _ = x79
     {
-      vstore.val = @list.empty()
+      vstore.val = @list.List([])
       ()
     }
     {
-      gstore.val = @list.empty()
+      gstore.val = @list.List([])
       ()
     }
     vcounter.val = 0L
@@ -756,10 +756,10 @@ fn step_5() -> Unit raise {
     let tm = @kernel.concl(th_1)
     let hlits = @basics.disjuncts(tm)
     let flits = @lib.map(
-      (x115 : @kernel.Term) => fol_of_literal(@list.empty(), lconsts, x115),
+      (x115 : @kernel.Term) => fol_of_literal(@list.List([]), lconsts, x115),
       hlits,
     )
-    let basics = mk_contraposes_l(0L, th_1, @list.empty(), flits, @list.empty())
+    let basics = mk_contraposes_l(0L, th_1, @list.List([]), flits, @list.List([]))
     if @lib.forall(
         fn(x116 : (Int64, @list.List[@meson.FolTerm])) -> Bool raise {
           let (p, _) = x116
@@ -778,7 +778,7 @@ fn step_5() -> Unit raise {
               },
               flits,
             ),
-            (1L, @list.empty()),
+            (1L, @list.List([])),
           ),
           (-1L, th_1),
         ),
@@ -897,7 +897,7 @@ fn step_5() -> Unit raise {
         })(fol_of_hol_clause(x123))(x124)
       },
       thms,
-      @list.empty(),
+      @list.List([]),
     )
     let prs = @lib.setify(
       @lib.map(

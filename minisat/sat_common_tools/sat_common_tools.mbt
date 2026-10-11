@@ -614,7 +614,7 @@ pub fn[TA, TB] tm_listitems(x135 : @omap.T[TA, TB]) -> @list.List[(TA, TB)] rais
         l.prepend((k, v))
       }
     }
-  }, m, @list.empty()))
+  }, m, @list.List([])))
 }
 
 ///|
@@ -810,7 +810,7 @@ pub fn erc(x163 : @kernel.Term, x164 : @kernel.Term) -> @list.List[(@kernel.Term
     if @kernel.is_var(lt) {
       @list.List([(tm, lt)])
     } else {
-      @list.empty()
+      @list.List([])
     }
   }
 }

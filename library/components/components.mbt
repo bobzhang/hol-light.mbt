@@ -4,7 +4,7 @@
 ///|
 /// component_read_write_thms
 fn step_1() -> Unit raise {
-  component_read_write_thms_c.set(Ref::{ val: @list.empty(), })
+  component_read_write_thms_c.set(Ref::{ val: @list.List([]), })
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn add_component_read_write_thms(
 ///|
 /// component_alias_thms
 fn step_2() -> Unit raise {
-  component_alias_thms_c.set(Ref::{ val: @list.empty(), })
+  component_alias_thms_c.set(Ref::{ val: @list.List([]), })
 }
 
 ///|
@@ -51,7 +51,7 @@ pub fn component_alias_thms() -> Ref[@list.List[@kernel.Thm]] {
 ///|
 /// valid_component_thms
 fn step_3() -> Unit raise {
-  valid_component_thms_c.set(Ref::{ val: @list.empty(), })
+  valid_component_thms_c.set(Ref::{ val: @list.List([]), })
 }
 
 ///|
@@ -76,7 +76,7 @@ pub fn add_valid_component_thms(x2 : @list.List[@kernel.Thm]) -> Unit raise {
 ///|
 /// strongly_valid_component_thms
 fn step_4() -> Unit raise {
-  strongly_valid_component_thms_c.set(Ref::{ val: @list.empty(), })
+  strongly_valid_component_thms_c.set(Ref::{ val: @list.List([]), })
 }
 
 ///|
@@ -106,7 +106,7 @@ pub fn add_strongly_valid_component_thms(
 ///|
 /// weakly_valid_component_thms
 fn step_5() -> Unit raise {
-  weakly_valid_component_thms_c.set(Ref::{ val: @list.empty(), })
+  weakly_valid_component_thms_c.set(Ref::{ val: @list.List([]), })
 }
 
 ///|
@@ -136,7 +136,7 @@ pub fn add_weakly_valid_component_thms(
 ///|
 /// extensionally_valid_component_thms
 fn step_6() -> Unit raise {
-  extensionally_valid_component_thms_c.set(Ref::{ val: @list.empty(), })
+  extensionally_valid_component_thms_c.set(Ref::{ val: @list.List([]), })
 }
 
 ///|
@@ -166,7 +166,7 @@ pub fn add_extensionally_valid_component_thms(
 ///|
 /// component_orthogonality_thms
 fn step_7() -> Unit raise {
-  component_orthogonality_thms_c.set(Ref::{ val: @list.empty(), })
+  component_orthogonality_thms_c.set(Ref::{ val: @list.List([]), })
 }
 
 ///|
@@ -196,14 +196,14 @@ pub fn add_component_orthogonality_thms(
 ///|
 /// component_tybij
 fn step_8() -> Unit raise {
-  let t7 = @simp.rewrite_tac(@list.empty())
+  let t7 = @simp.rewrite_tac(@list.List([]))
   let th = @tactics.prove(@parser.parse_term("?rw:(S->V)#(V->S->S). T"), t7)
   let t8 = @class.new_type_definition(
     "component",
     ("component", "dest_component"),
     th,
   )
-  component_tybij_c.set(@simp.rewrite_rule(@list.empty())(t8))
+  component_tybij_c.set(@simp.rewrite_rule(@list.List([]))(t8))
 }
 
 ///|
@@ -886,9 +886,9 @@ pub fn weakly_valid_component() -> @kernel.Thm {
 ///|
 /// VALID_IMP_WEAKLY_VALID_COMPONENT
 fn step_38() -> Unit raise {
-  let t30 = @simp.asm_rewrite_tac(@list.empty())
+  let t30 = @simp.asm_rewrite_tac(@list.List([]))
   let t29 = @tactics.exists_tac(@parser.parse_term("\\x:V. x"))
-  let t28 = @simp.asm_rewrite_tac(@list.empty())
+  let t28 = @simp.asm_rewrite_tac(@list.List([]))
   let t27 = @tactics.repeat_tac(@tactics.strip_tac)
   let t31 = @tactics.then_tac(
     @tactics.then_tac(
@@ -1097,9 +1097,9 @@ pub fn extensionally_valid_component() -> @kernel.Thm {
 ///|
 /// STRONGLY_VALID_IMP_EXTENSIONALLY_VALID_COMPONENT
 fn step_47() -> Unit raise {
-  let t41 = @simp.asm_rewrite_tac(@list.empty())
+  let t41 = @simp.asm_rewrite_tac(@list.List([]))
   let t40 = @tactics.exists_tac(@parser.parse_term("\\x:V. x"))
-  let t39 = @simp.asm_rewrite_tac(@list.empty())
+  let t39 = @simp.asm_rewrite_tac(@list.List([]))
   let t38 = @tactics.repeat_tac(@tactics.strip_tac)
   let t42 = @tactics.then_tac(
     @tactics.then_tac(
@@ -1202,7 +1202,7 @@ pub fn orthogonal_components() -> @kernel.Thm {
 ///|
 /// ORTHOGONAL_COMPONENTS_SYM
 fn step_51() -> Unit raise {
-  let t44 = @meson.meson_tac(@list.empty())
+  let t44 = @meson.meson_tac(@list.List([]))
   let t45 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([orthogonal_components()])),
     t44,

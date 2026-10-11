@@ -4,9 +4,9 @@
 ///|
 /// OVERAPPROXIMATE_REACHABLE
 fn step_1() -> Unit raise {
-  let t8 = @meson.asm_meson_tac(@list.empty())
+  let t8 = @meson.asm_meson_tac(@list.List([]))
   let t7 = @tactics.match_mp_tac(@rstc.rtc_induct_l())
-  let t5 = @meson.asm_meson_tac(@list.empty())
+  let t5 = @meson.asm_meson_tac(@list.List([]))
   let t6 = @list.List([
     @simp.rewrite_tac(
       @list.List([@theorems.imp_conj_alt(), @theorems.right_forall_imp_thm()]),
@@ -148,7 +148,7 @@ pub fn reachable_state_tac(
           c.prepend(b).prepend(a)
         },
         @lib.zip(vars, vars_p),
-        @list.empty(),
+        @list.List([]),
       )
       let t16 = @bdd.bdd_var(bddstate)
       let _ = @lib.do_list(
@@ -1236,7 +1236,7 @@ fn step_15() -> Unit raise {
       @int.arith_rule(@parser.parse_term("i + 1 < n ==> i < n")),
     ]),
   )
-  let t132 = @meson.asm_meson_tac(@list.empty())
+  let t132 = @meson.asm_meson_tac(@list.List([]))
   let t133 = @list.List([@tactics.match_mp_tac(@nums.num_induction()), t132])
   let t131 = @tactics.subgoal_then(
     @parser.parse_term("!i. i < n ==> RTC step ((b:num->S) 0) (b i)"),
@@ -1466,7 +1466,7 @@ fn step_16() -> Unit raise {
       bit_word_shladd(),
     ]),
   )
-  let t160 = @simp.rewrite_tac(@list.empty())
+  let t160 = @simp.rewrite_tac(@list.List([]))
   let t159 = @tactics.disch_then(fn(
     x158 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -1594,7 +1594,7 @@ fn step_17() -> Unit raise {
       bit_word_shladd(),
     ]),
   )
-  let t170 = @simp.rewrite_tac(@list.empty())
+  let t170 = @simp.rewrite_tac(@list.List([]))
   let t169 = @tactics.disch_then(fn(
     x166 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -2091,7 +2091,7 @@ fn step_23() -> Unit raise {
       ((x205 : @list.List[@kernel.Thm]) => @lib.map(xsb_carry_rule, x205))(x206),
     )
   })
-  let t196 = @simp.simp_tac(@list.empty())
+  let t196 = @simp.simp_tac(@list.List([]))
   let t195 = @tactics.conv_tac(bit_push_conv)
   let t197 = @tactics.try_tac(
     @tactics.then_tac(
@@ -2243,13 +2243,13 @@ fn step_24() -> Unit raise {
       fn(x230 : @kernel.Term) -> Bool raise { @basics.is_neg(x230) },
       @basics.disjuncts(w),
     )
-    let t231 = if pdj == @list.empty() {
+    let t231 = if pdj == @list.List([]) {
       false_tm
     } else {
       @bool.list_mk_disj(pdj)
     }
     let t = @bool.mk_imp(
-      if ndj == @list.empty() {
+      if ndj == @list.List([]) {
         true_tm
       } else {
         @bool.list_mk_conj(@lib.map(@kernel.rand, ndj))

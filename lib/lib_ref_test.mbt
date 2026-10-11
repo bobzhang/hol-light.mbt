@@ -44,7 +44,7 @@ fn[T : Show] si(x : T) -> String {
 fn showf(f : @lib.Func[String, Int]) -> String {
   let items = @lib.foldl(
     (a : @list.List[String], x, y) => a.prepend(x + "=" + si(y)),
-    @list.empty(),
+    @list.List([]),
     f,
   )
   "[" + items.rev().to_array().join(";") + "]"
@@ -156,7 +156,7 @@ test "lib matches lib.ml" {
   r.tr("rev_itlist", () => si(@lib.rev_itlist(minus, l5, 0)))
   r.tr("end_itlist", () => si(@lib.end_itlist(minus, l5)))
   r.tr("end_itlist_empty", () => {
-    si(@lib.end_itlist((x : Int, a : Int) => x - a, @list.empty()))
+    si(@lib.end_itlist((x : Int, a : Int) => x - a, @list.List([])))
   })
   let f3 = (x : Int, y : Int, a : Int) => {
     r.note(si(x))
@@ -346,7 +346,7 @@ test "lib matches lib.ml" {
     @lib.foldr(
       (x, y, a : @list.List[String]) => a.prepend(x + si(y)),
       f1,
-      @list.empty(),
+      @list.List([]),
     )
     .to_array()
     .join(";")
@@ -402,7 +402,7 @@ test "lib matches lib.ml" {
     il(
       @lib.foldl(
         (a : @list.List[Int64], x, _) => a.prepend(x),
-        @list.empty(),
+        @list.List([]),
         f3,
       ),
     )
@@ -418,7 +418,7 @@ test "lib matches lib.ml" {
       (acc : @list.List[String], k, v) => {
         acc.prepend(@kernel.dest_var(k).0 + si(v))
       },
-      @list.empty(),
+      @list.List([]),
       f4,
     )
     .to_array()

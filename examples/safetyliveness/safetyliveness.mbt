@@ -68,12 +68,12 @@ pub fn liveness_v1() -> @kernel.Thm {
 ///|
 /// SAFETY_LIVENESS_DECOMPOSITION
 fn step_5() -> Unit raise {
-  let t18 = @meson.meson_tac(@list.empty())
-  let t17 = @meson.asm_meson_tac(@list.empty())
+  let t18 = @meson.meson_tac(@list.List([]))
+  let t17 = @meson.asm_meson_tac(@list.List([]))
   let t16 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t19 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), t16), t17), t18])
   let t15 = @simp.rewrite_tac(@list.List([@class.de_morgan_thm(), @theorems.imp_conj(), @class.not_forall_thm()]))
-  let t13 = @meson.meson_tac(@list.empty())
+  let t13 = @meson.meson_tac(@list.List([]))
   let t12 = @simp.rewrite_tac(@list.List([safety(), liveness()]))
   let t14 = @list.List([@tactics.then_tac(@simp.expand_tac("Q"), t12), t13])
   let t11 = @simp.rewrite_tac(@list.List([@theorems.conj_assoc()]))

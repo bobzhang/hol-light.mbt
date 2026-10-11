@@ -214,7 +214,7 @@ pub fn days_in_month_pos() -> @kernel.Thm {
 ///|
 /// DAYS_IN_MONTH_UPPER
 fn step_14() -> Unit raise {
-  let t17 = @tactics.repeat_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.empty())))
+  let t17 = @tactics.repeat_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))))
   let t16 = @simp.rewrite_tac(@list.List([days_in_month()]))
   let t18 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t16), t17), @int.arith_tac)
   days_in_month_upper_c.set(@tactics.prove(@parser.parse_term("!y m. days_in_month y m <= 31"), t18))
@@ -401,7 +401,7 @@ pub fn valid_doomsday() -> @kernel.Thm {
 ///|
 /// MOD_ADD_EQ_COMPAT
 fn step_26() -> Unit raise {
-  let t24 = @simp.asm_rewrite_tac(@list.empty())
+  let t24 = @simp.asm_rewrite_tac(@list.List([]))
   let t23 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@arith.mod_add_mod())]))
   let t25 = @tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t23), t24)
   mod_add_eq_compat_c.set(@tactics.prove(@parser.parse_term("!a b c n. a MOD n = b MOD n ==> (c + a) MOD n = (c + b) MOD n"), t25))
@@ -438,7 +438,7 @@ fn step_28() -> Unit raise {
   let t31 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t30 = @simp.rewrite_tac(@list.List([@equal.gsym(@arith.add_assoc())]))
   let t29 = @tactics.conv_tac(@calc_num.num_reduce_conv)
-  let t28 = @simp.asm_rewrite_tac(@list.empty())
+  let t28 = @simp.asm_rewrite_tac(@list.List([]))
   let t27 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t26 = @simp.rewrite_tac(@list.List([cumdays_before(), doomsday_date()]))
   let t33 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(month_cases_tac, @simp.rewrite_tac(@list.List([day_of_week(), day_number(), year_doomsday(), day_of_year()]))), t26), t27), @class.cond_cases_tac), t28), t29), t30), t31), t32), @int.arith_tac)
@@ -515,7 +515,7 @@ fn step_32() -> Unit raise {
   let t48 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t47 = @tactics.repeat_tac(@tactics.match_mp_tac(mod_add_eq_compat()))
   let t46 = @simp.once_rewrite_tac(@list.List([@arith.add_sym()]))
-  let t45 = @simp.rewrite_tac(@list.empty())
+  let t45 = @simp.rewrite_tac(@list.List([]))
   let t44 = @tactics.conv_tac(@arith.mod_down_conv)
   let t49 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([year_doomsday(), cumulative_days_suc(), days_in_year()]))), t44), @class.cond_cases_tac), t45), t46), t47), t48)
   year_doomsday_step_c.set(@tactics.prove(@parser.parse_term("!y. year_doomsday(SUC y) =\n       (year_doomsday y + (if leap_year(SUC y) then 2 else 1)) MOD 7"), t49))
@@ -553,7 +553,7 @@ pub fn doomsday_step() -> @kernel.Thm {
 ///|
 /// WITHIN_CENTURY
 fn step_34() -> Unit raise {
-  let t76 = @list.List([@int.asm_arith_tac, @tactics.then_tac(@tactics.disch_tac, @simp.asm_rewrite_tac(@list.empty()))])
+  let t76 = @list.List([@int.asm_arith_tac, @tactics.then_tac(@tactics.disch_tac, @simp.asm_rewrite_tac(@list.List([])))])
   let t74 = @parser.parse_term("SUC t")
   let t75 = @tactics.mp_tac(@bool.specl(@list.List([@parser.parse_term("c:num"), t74]), leap_year_in_century()))
   let t73 = @simp.asm_simp_tac(@list.List([doomsday_step()]))
@@ -583,7 +583,7 @@ fn step_34() -> Unit raise {
       s57(x58)
     }
   })), t59), t63), @list.List([@int.arith_tac, @tactics.all_tac])), t64), t68), @list.List([@int.arith_tac, @tactics.all_tac])), t72), @list.List([@int.asm_arith_tac, @tactics.all_tac])), t73), @tactics.ap_thm_tac), @tactics.ap_term_tac), @tactics.ap_term_tac), t75), @tactics.ants_tac), t76)
-  let t55 = @simp.asm_rewrite_tac(@list.empty())
+  let t55 = @simp.asm_rewrite_tac(@list.List([]))
   let t78 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@arith.add_clauses()])), t55), t77])
   let t79 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.disch_tac), @nums.induct_tac), t78)
   within_century_c.set(@tactics.prove(@parser.parse_term("!c. year_doomsday(100 * c) = doomsday(100 * c) ==>\n       !t. t < 100 ==> year_doomsday(100 * c + t) = doomsday(100 * c + t)"), t79))
@@ -804,7 +804,7 @@ pub fn doomsday_400_period() -> @kernel.Thm {
 ///|
 /// YEAR_DOOMSDAY_400_PERIOD
 fn step_46() -> Unit raise {
-  let t108 = @simp.asm_rewrite_tac(@list.empty())
+  let t108 = @simp.asm_rewrite_tac(@list.List([]))
   let t107 = @simp.rewrite_tac(@list.List([leap_year_400_period()]))
   let t109 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("SUC(y + 400) = SUC y + 400"))])), t107), t108])
   let t106 = @tactics.subgoal_then(@parser.parse_term("leap_year(SUC(y + 400)) <=> leap_year(SUC y)"), fn(x103 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -831,7 +831,7 @@ pub fn year_doomsday_400_period() -> @kernel.Thm {
 ///|
 /// CENTURY_BASE_ALL
 fn step_47() -> Unit raise {
-  let t134 = @simp.asm_rewrite_tac(@list.empty())
+  let t134 = @simp.asm_rewrite_tac(@list.List([]))
   let t133 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t132 = @simp.rewrite_tac(@list.List([year_doomsday_400_period(), doomsday_400_period()]))
   let t131 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("400 * SUC q + x = (400 * q + x) + 400"))]))
@@ -850,7 +850,7 @@ fn step_47() -> Unit raise {
       s121(x122)
     }
   })
-  let t119 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), @int.arith_tac), @tactics.all_tac])
+  let t119 = @list.List([@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), @int.arith_tac), @tactics.all_tac])
   let t118 = @tactics.subgoal_then(@parser.parse_term("100 * c = 400 * q + 100 * r"), fn(x115 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s116 = @tactics.subst1_tac(x115)
     fn(x117 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
@@ -876,7 +876,7 @@ pub fn century_base_all() -> @kernel.Thm {
 ///|
 /// YEAR_DOOMSDAY_EQ_DOOMSDAY
 fn step_48() -> Unit raise {
-  let t156 = @simp.asm_rewrite_tac(@list.empty())
+  let t156 = @simp.asm_rewrite_tac(@list.List([]))
   let t152 = @parser.parse_term("t:num")
   let t155 = @tactics.disch_then(fn(x154 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x149 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1014,11 +1014,11 @@ pub fn cumdays_400() -> @kernel.Thm {
 ///|
 /// CUMULATIVE_DAYS_400_MOD7
 fn step_53() -> Unit raise {
-  let t188 = @simp.asm_rewrite_tac(@list.empty())
+  let t188 = @simp.asm_rewrite_tac(@list.List([]))
   let t187 = @tactics.match_mp_tac(mod_add_eq_compat())
   let t186 = @simp.once_rewrite_tac(@list.List([@arith.add_sym()]))
   let t185 = @tactics.conv_tac(@arith.mod_down_conv)
-  let t184 = @simp.rewrite_tac(@list.empty())
+  let t184 = @simp.rewrite_tac(@list.List([]))
   let t183 = @list.List([@simp.rewrite_tac(@list.List([leap_year_400_period()])), @tactics.all_tac])
   let t182 = @tactics.subgoal_then(@parser.parse_term("leap_year(y + 400) <=> leap_year y"), fn(x180 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x180

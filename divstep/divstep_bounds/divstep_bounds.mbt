@@ -7,7 +7,7 @@ fn step_1() -> Unit raise {
   let t13 = @meson.meson_tac(@list.List([@floor.integer_closed()]))
   let t12 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("(&1 + x) - &1 / &2 = &1 + (x - &1 / &2)"))]))
   let t11 = @simp.rewrite_tac(@list.List([@calc_rat.real_arith(@parser.parse_term("&1 - x - &1 / &2 = --(x - &1 / &2)"))]))
-  let t10 = @simp.asm_rewrite_tac(@list.empty())
+  let t10 = @simp.asm_rewrite_tac(@list.List([]))
   let t9 = @tactics.repeat_tac(@tactics.gen_tac)
   let t8 = @simp.rewrite_tac(@list.List([@divstep.divstep(), @pair.forall_pair_thm()]))
   let t6 = @parser.parse_term("t:real#int#int")
@@ -53,7 +53,7 @@ pub fn iter_divstep_odd_alt() -> @kernel.Thm {
 ///|
 /// DIVSTEP_ENDTOEND_BITS_SIMPLE
 fn step_3() -> Unit raise {
-  let t67 = @simp.asm_rewrite_tac(@list.empty())
+  let t67 = @simp.asm_rewrite_tac(@list.List([]))
   let t66 = @tactics.rule_assum_tac(@simp.rewrite_rule(@list.List([@int.int_rem_2_divides()])))
   let t65 = @simp.rewrite_tac(@list.List([@int.int_mul_div_eq(), @int.int_2_divides_add(), @int.int_2_divides_sub()]))
   let t64 = @simp.rewrite_tac(@list.List([@int.real_of_int_clauses()]))
@@ -62,7 +62,7 @@ fn step_3() -> Unit raise {
   let t61 = @simp.asm_rewrite_tac(@list.List([@int.int_mul_lid(), @int.int_mul_lzero(), @int.int_add_rid()]))
   let t60 = @simp.rewrite_tac(@list.List([@class.cond_swap()]))
   let t59 = @tactics.conv_tac(@int.int_reduce_conv)
-  let t58 = @simp.asm_rewrite_tac(@list.empty())
+  let t58 = @simp.asm_rewrite_tac(@list.List([]))
   let t57 = @tactics.disj_cases_tac(@bool.spec(@parser.parse_term("g:int"), @int.int_rem_2_cases()))
   let t56 = @list.List([@tactics.then_tac(@tactics.thenl(@tactics.eq_tac, @list.List([@simp.asm_simp_tac(@list.List([@floor.real_lt_integers(), @floor.integer_closed()])), @tactics.all_tac])), @calc_rat.real_arith_tac), @tactics.all_tac])
   let t55 = @tactics.subgoal_then(@parser.parse_term("delta - &1 / &2 < &0 <=> ~(delta > &0)"), fn(x52 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {

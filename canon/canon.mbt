@@ -2197,7 +2197,7 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash] conv_l(
   }
   let vs = x165
   let tm = x166
-  if vs == @list.empty() {
+  if vs == @list.List([]) {
     @kernel.refl(tm)
   } else {
     let t168 = @lib.tl(vs)
@@ -2241,7 +2241,7 @@ pub fn conds_celim_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// CONDS_ELIM_CONV, CONDS_CELIM_CONV
 fn step_13() -> Unit raise {
-  let t184 = @simp.asm_rewrite_tac(@list.empty())
+  let t184 = @simp.asm_rewrite_tac(@list.List([]))
   let t185 = @tactics.then_tac(
     @class.bool_cases_tac(@parser.parse_term("b:bool")),
     t184,
@@ -2252,7 +2252,7 @@ fn step_13() -> Unit raise {
     ),
     t185,
   )
-  let t186 = @simp.asm_rewrite_tac(@list.empty())
+  let t186 = @simp.asm_rewrite_tac(@list.List([]))
   let t187 = @tactics.then_tac(
     @class.bool_cases_tac(@parser.parse_term("b:bool")),
     t186,
@@ -2289,7 +2289,7 @@ fn step_13() -> Unit raise {
     match tm {
       @kernel.Term::Comb(s, t) =>
         if @class.is_cond(tm) &&
-          @lib.intersect(@kernel.frees(@equal.lhand(s)), fvs) == @list.empty() {
+          @lib.intersect(@kernel.frees(@equal.lhand(s)), fvs) == @list.List([]) {
           tm
         } else {
           find_conditional(fvs, s) catch {
@@ -2305,7 +2305,7 @@ fn step_13() -> Unit raise {
     let dfl = x190
     let tm_1 = x191
     try {
-      let t_2 = find_conditional(@list.empty(), tm_1)
+      let t_2 = find_conditional(@list.List([]), tm_1)
       let p = @equal.lhand(@kernel.rator(t_2))
       let th_new = if p == false_tm || p == true_tm {
         propsimp_conv(tm_1)
@@ -2535,7 +2535,7 @@ fn step_14() -> Unit raise {
     ),
   ) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let (cheads_1, vheads_1) = x228
-    let hddata_1 = if vheads_1 == @list.empty() {
+    let hddata_1 = if vheads_1 == @list.List([]) {
       let hops = @lib.setify(
         @lib.map(
           fn(x230 : (@kernel.Term, Int64)) -> @kernel.Term raise { x230.0 },
@@ -2641,7 +2641,7 @@ fn step_14() -> Unit raise {
         )(x244)
       },
       asl,
-      (@list.empty(), @list.empty()),
+      (@list.List([]), @list.List([])),
     )
     let t245 = gen_fol_conv(headsp)
     @tactics.rule_assum_tac((x246 : @kernel.Thm) => @equal.conv_rule(t245, x246))(

@@ -332,7 +332,7 @@ pub fn h_rule(x70 : (@kernel.Thm) -> @kernel.Thm raise, x71 : ((@list.List[(Stri
       let th = x74
       rule(th)
     }
-  }, @list.empty(), gthm, x75)
+  }, @list.List([]), gthm, x75)
 }
 
 ///|
@@ -485,7 +485,7 @@ pub fn h_val(x123 : (@kernel.Thm) -> @kernel.Thm raise, x124 : ((@list.List[(Str
       let th = x127
       rule(th)
     }
-  }, @list.empty(), gthm, x128)
+  }, @list.List([]), gthm, x128)
 }
 
 ///|

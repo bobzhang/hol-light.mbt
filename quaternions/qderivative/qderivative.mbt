@@ -72,7 +72,7 @@ pub fn quat_has_derivative_mul_within() -> @kernel.Thm {
 ///|
 /// QUAT_HAS_DERIVATIVE_SQUARE
 fn step_5() -> Unit raise {
-  let t12 = @simp.rewrite_tac(@list.empty())
+  let t12 = @simp.rewrite_tac(@list.List([]))
   let t13 = @list.List([@simp.simp_tac(@list.List([@derivatives.has_derivative_bilinear_at(), @derivatives.has_derivative_id(), @quaternion.bilinear_quat_mul()])), t12])
   let t14 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @tactics.subgoal_then(@parser.parse_term("((\\x. (\\q. q) x * (\\q. q) x) has_derivative\n      (\\d. (\\q. q) q0 * (\\q. q) d + (\\q. q) d * (\\q. q) q0)) (at q0)"), fn(x9 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s10 = @tactics.mp_tac(x9)
@@ -95,7 +95,7 @@ pub fn quat_has_derivative_square() -> @kernel.Thm {
 ///|
 /// QUAT_HAS_DERIVATIVE_POW
 fn step_6() -> Unit raise {
-  let t34 = @simp.rewrite_tac(@list.empty())
+  let t34 = @simp.rewrite_tac(@list.List([]))
   let t31 = @drule.match_mp(@derivatives.has_derivative_bilinear_at())
   let t33 = @tactics.disch_then(fn(x32 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x28 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {

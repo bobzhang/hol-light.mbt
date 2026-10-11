@@ -196,7 +196,7 @@ pub fn mk_pair_def() -> @kernel.Thm {
 ///|
 /// PAIR_EXISTS_THM
 fn step_11() -> Unit raise {
-  let t1 = @meson.meson_tac(@list.empty())
+  let t1 = @meson.meson_tac(@list.List([]))
   pair_exists_thm_c.set(
     @tactics.prove(@parser.parse_term("?x. ?(a:A) (b:B). x = mk_pair a b"), t1),
   )
@@ -319,7 +319,7 @@ pub fn snd_def() -> @kernel.Thm {
 ///|
 /// PAIR_EQ
 fn step_18() -> Unit raise {
-  let t13 = @meson.meson_tac(@list.empty())
+  let t13 = @meson.meson_tac(@list.List([]))
   let t11 = @simp.rewrite_tac(@list.List([mk_pair_def(), @class.fun_eq_thm()]))
   let t10 = @simp.rewrite_tac(@list.List([rep_abs_pair()]))
   let t6 = @parser.parse_term("REP_prod:A#B->A->B->bool")
@@ -697,9 +697,9 @@ pub fn pair_surjective() -> @kernel.Thm {
 ///|
 /// FST
 fn step_20() -> Unit raise {
-  let t46 = @simp.asm_rewrite_tac(@list.empty())
+  let t46 = @simp.asm_rewrite_tac(@list.List([]))
   let t45 = @tactics.exists_tac(@parser.parse_term("y:B"))
-  let t44 = @simp.asm_rewrite_tac(@list.empty())
+  let t44 = @simp.asm_rewrite_tac(@list.List([]))
   let t43 = @simp.rewrite_tac(@list.List([pair_eq()]))
   let t42 = @tactics.match_mp_tac(@class.select_unique())
   let t41 = @simp.rewrite_tac(@list.List([fst_def()]))
@@ -751,9 +751,9 @@ pub fn fst() -> @kernel.Thm {
 ///|
 /// SND
 fn step_21() -> Unit raise {
-  let t53 = @simp.asm_rewrite_tac(@list.empty())
+  let t53 = @simp.asm_rewrite_tac(@list.List([]))
   let t52 = @tactics.exists_tac(@parser.parse_term("x:A"))
-  let t51 = @simp.asm_rewrite_tac(@list.empty())
+  let t51 = @simp.asm_rewrite_tac(@list.List([]))
   let t50 = @simp.rewrite_tac(@list.List([pair_eq()]))
   let t49 = @tactics.match_mp_tac(@class.select_unique())
   let t48 = @simp.rewrite_tac(@list.List([snd_def()]))
@@ -1020,7 +1020,7 @@ pub fn dest_pair(x : @kernel.Term) -> (@kernel.Term, @kernel.Term) raise {
 ///|
 /// mk_pair
 fn step_27() -> Unit raise {
-  let ptm = @kernel.mk_const(",", @list.empty())
+  let ptm = @kernel.mk_const(",", @list.List([]))
   mk_pair_c.set(fn(x76 : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
     let (l, r) = x76
     let t77 = (@kernel.type_of(r), @basics.bty)
@@ -1293,7 +1293,7 @@ pub fn gabs_conv(
 ///|
 /// GEN_BETA_CONV
 fn step_34() -> Unit raise {
-  let projection_cache = Ref::{ val: @list.empty(), }
+  let projection_cache = Ref::{ val: @list.List([]), }
   let create_projections : (String) -> @list.List[@kernel.Thm] raise = fn(
     x98 : String,
   ) -> @list.List[@kernel.Thm] raise {
@@ -1490,15 +1490,15 @@ fn step_34() -> Unit raise {
     x132 : @kernel.Term,
   ) -> @list.List[@kernel.Thm] raise {
     let tm = x132
-    if @kernel.frees(tm) == @list.empty() {
-      @list.empty()
+    if @kernel.frees(tm) == @list.List([]) {
+      @list.List([])
     } else if @kernel.is_var(tm) {
       @list.List([@kernel.refl(tm)])
     } else {
       let (con, args_1) = @basics.strip_comb(tm)
       let prjths = create_projections(@kernel.dest_const(con).0)
       let atm = @kernel.rand(@kernel.rand(@kernel.concl(@lib.hd(prjths))))
-      let instn = @drule.term_match(@list.empty(), atm, tm)
+      let instn = @drule.term_match(@list.List([]), atm, tm)
       let arths = @lib.map(
         (x133 : @kernel.Thm) => @drule.instantiate_rule(instn, x133),
         prjths,
@@ -1530,7 +1530,7 @@ fn step_34() -> Unit raise {
       Failure(_) => {
         let (l, r) = @kernel.dest_comb(tm_1)
         let (vstr, bod_1) = @basics.dest_gabs(l)
-        let instn_1 = @drule.term_match(@list.empty(), vstr, r)
+        let instn_1 = @drule.term_match(@list.List([]), vstr, r)
         let prjs = create_iterated_projections(vstr)
         let th1 = @equal.subs_conv(prjs)(bod_1)
         let bod_p = @kernel.rand(@kernel.concl(th1))
@@ -1851,7 +1851,7 @@ fn step_44() -> Unit raise {
     })(((x158 : @kernel.Thm) => @bool.spec(t157, x158))(x159))
   })
   let t153 = @tactics.x_gen_tac(@parser.parse_term("f:A->B->C"))
-  let t152 = @simp.simp_tac(@list.empty())
+  let t152 = @simp.simp_tac(@list.List([]))
   let t162 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -1893,7 +1893,7 @@ fn step_45() -> Unit raise {
     @simp.once_rewrite_tac(
       @list.List([
         @meson.meson(
-          @list.empty(),
+          @list.List([]),
           @parser.parse_term("(?x. P x) <=> ~(!x. ~P x)"),
         ),
       ]),
@@ -1966,7 +1966,7 @@ pub fn forall_curry() -> @kernel.Thm {
 ///|
 /// FORALL_UNPAIR_THM
 fn step_48() -> Unit raise {
-  let t167 = @meson.meson_tac(@list.empty())
+  let t167 = @meson.meson_tac(@list.List([]))
   let t168 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([forall_pair_thm(), fst(), snd()])),
     t167,
@@ -1995,7 +1995,7 @@ pub fn forall_unpair_thm() -> @kernel.Thm {
 ///|
 /// EXISTS_UNPAIR_THM
 fn step_49() -> Unit raise {
-  let t169 = @meson.meson_tac(@list.empty())
+  let t169 = @meson.meson_tac(@list.List([]))
   let t170 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([exists_pair_thm(), fst(), snd()])),
     t169,
@@ -2024,7 +2024,7 @@ pub fn exists_unpair_thm() -> @kernel.Thm {
 ///|
 /// FORALL_PAIR_FUN_THM
 fn step_50() -> Unit raise {
-  let t180 = @simp.pure_asm_rewrite_tac(@list.empty())
+  let t180 = @simp.pure_asm_rewrite_tac(@list.List([]))
   let t179 = @simp.gen_rewrite_tac(
     fn(
       x176 : (@kernel.Term) -> @kernel.Thm raise,
@@ -2043,7 +2043,7 @@ fn step_50() -> Unit raise {
     },
     @list.List([@equal.gsym(@class.eta_ax())]),
   )
-  let t171 = @simp.asm_rewrite_tac(@list.empty())
+  let t171 = @simp.asm_rewrite_tac(@list.List([]))
   let t181 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -2090,7 +2090,7 @@ fn step_51() -> Unit raise {
     @simp.rewrite_tac(
       @list.List([
         @meson.meson(
-          @list.empty(),
+          @list.List([]),
           @parser.parse_term("(?x. P x) <=> ~(!x. ~P x)"),
         ),
       ]),
@@ -2427,7 +2427,7 @@ pub fn choice_unpair_thm() -> @kernel.Thm {
 ///|
 /// CHOICE_PAIRED_THM
 fn step_60() -> Unit raise {
-  let t229 = @meson.asm_meson_tac(@list.empty())
+  let t229 = @meson.asm_meson_tac(@list.List([]))
   let t228 = @simp.rewrite_tac(@list.List([exists_pair_thm()]))
   let t227 = @tactics.remove_then("c", @tactics.match_mp_tac)
   let t226 = @tactics.remove_then("PQ", @tactics.match_mp_tac)
@@ -2558,7 +2558,7 @@ fn step_61() -> Unit raise {
   let_conv_c.set(fn(x233 : @kernel.Term) -> @kernel.Thm raise {
     let tm_1 = x233
     let (ltm, pargs) = @basics.strip_comb(tm_1)
-    if @kernel.dest_const(ltm).0 != "LET" || pargs == @list.empty() {
+    if @kernel.dest_const(ltm).0 != "LET" || pargs == @list.List([]) {
       raise Failure("let_CONV")
     } else {
       let abstm = @lib.hd(pargs)
@@ -2741,7 +2741,7 @@ fn step_62() -> Unit raise {
         })(@equal.lhs(x264))(x265)
       },
       abbrevs,
-      @list.empty(),
+      @list.List([]),
     )
     let avoids = @lib.itlist(
       fn(

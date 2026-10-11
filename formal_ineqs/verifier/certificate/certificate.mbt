@@ -495,7 +495,7 @@ pub fn get_results0(x32 : @list.List[(String, Int64)], x33 : ResultTree, x34 : @
   let path = x32
   let r = x33
   let acc = x34
-  let dummy_tree = ResultTree::Result_false((@list.empty(), @list.empty()))
+  let dummy_tree = ResultTree::Result_false((@list.List([]), @list.List([])))
   let is_ref : (ResultTree) -> Bool raise = fn(x35 : ResultTree) -> Bool raise {
     let r_1 = x35
     match r_1 {
@@ -735,7 +735,7 @@ pub fn transform_result(x46 : @list.List[Double], x47 : @list.List[Double], x48 
               _ => r_2
             }
           }
-          rec_transform(@list.empty(), r_1)
+          rec_transform(@list.List([]), r_1)
         }
       }
     }
@@ -743,9 +743,9 @@ pub fn transform_result(x46 : @list.List[Double], x47 : @list.List[Double], x48 
   fn transform(x91 : @list.List[(@list.List[(String, Int64)], ResultTree)], x92 : ResultTree) -> @list.List[(@list.List[(String, Int64)], ResultTree)] raise {
     let acc = x91
     let r_3 = x92
-    let (flag, rs, r_p) = get_results0(@list.empty(), r_3, acc)
+    let (flag, rs, r_p) = get_results0(@list.List([]), r_3, acc)
     if flag {
-      rs.concat(@list.List([(@list.empty(), r_3)]))
+      rs.concat(@list.List([(@list.List([]), r_3)]))
     } else {
       let domains_1 = @lib.map(fn(x93 : (@list.List[(String, Int64)], ResultTree)) -> (@list.List[Double], @list.List[Double]) raise {
         let (p, _) = x93
@@ -756,7 +756,7 @@ pub fn transform_result(x46 : @list.List[Double], x47 : @list.List[Double], x48 
       transform(rs, r_next)
     }
   }
-  transform(@list.empty(), r)
+  transform(@list.List([]), r)
 }
 
 ///|

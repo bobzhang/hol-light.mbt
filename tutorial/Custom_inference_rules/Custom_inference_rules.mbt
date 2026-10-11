@@ -30,7 +30,7 @@ pub fn real_strip(x3 : @list.List[@kernel.Term], x4 : @kernel.Term) -> ((@kernel
   let w = x3
   let tm = x4
   if @lib.mem(tm, w) {
-    (tm, @list.empty())
+    (tm, @list.List([]))
   } else {
     let (l, r) = @kernel.dest_comb(tm)
     let (f, args) = real_strip(w, l)
@@ -234,7 +234,7 @@ pub fn[TA] overlaps(x54 : @list.List[@kernel.Term], x55 : @kernel.Thm, x56 : @ke
   let rfn = x57
   let (l, r) = @kernel.dest_eq(@kernel.concl(th))
   if !@kernel.is_comb(tm) {
-    @list.empty()
+    @list.List([])
   } else {
     let (f, args) = @basics.strip_comb(tm)
     listcases(fn(x60 : @kernel.Term) -> (((@list.List[(@kernel.Term, @kernel.Term)]) -> ((@kernel.Thm) -> TA raise) raise) -> @list.List[TA] raise) raise {
@@ -251,7 +251,7 @@ pub fn[TA] overlaps(x54 : @list.List[@kernel.Term], x55 : @kernel.Thm, x56 : @ke
     }, args, try {
       @list.List([rfn(fullunify(w, (l, tm)))(th)])
     } catch {
-      Failure(_) => @list.empty()
+      Failure(_) => @list.List([])
       e => raise e
     })
   }
@@ -392,7 +392,7 @@ pub fn complete(x103 : @list.List[@kernel.Term], x104 : (@list.List[@kernel.Thm]
                 x106.concat(x107)
               }
             })(((x108 : @kernel.Thm) => critical_pairs(w, eq_p, x108))(x109))(x110)
-          }, eqs_p_p, @list.empty()))))
+          }, eqs_p_p, @list.List([])))))
         }
       } catch {
         Failure(_) => {
@@ -416,8 +416,8 @@ pub fn complete(x103 : @list.List[@kernel.Term], x104 : (@list.List[@kernel.Thm]
 pub fn complete_equations(x113 : @list.List[@kernel.Term], x114 : @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise {
   let wts = x113
   let eqs = x114
-  let eqs_p = @lib.map((x115 : @kernel.Thm) => normalize_and_orient(wts, @list.empty(), x115), eqs)
-  complete(wts, (@list.empty(), eqs_p))
+  let eqs_p = @lib.map((x115 : @kernel.Thm) => normalize_and_orient(wts, @list.List([]), x115), eqs)
+  complete(wts, (@list.List([]), eqs_p))
 }
 
 ///|
@@ -483,7 +483,7 @@ fn step_6() -> Unit raise {
 ///|
 /// Tutorial/Custom_inference_rules.ml:159
 fn step_7() -> Unit raise {
-  ignore(@tactics.e(@simp.asm_rewrite_tac(@list.empty())))
+  ignore(@tactics.e(@simp.asm_rewrite_tac(@list.List([]))))
 }
 
 ///|
@@ -505,7 +505,7 @@ fn step_9() -> Unit raise {
 ///|
 /// Tutorial/Custom_inference_rules.ml:171
 fn step_10() -> Unit raise {
-  ignore(@tactics.e(@simp.asm_rewrite_tac(@list.empty())))
+  ignore(@tactics.e(@simp.asm_rewrite_tac(@list.List([]))))
 }
 
 ///|

@@ -152,7 +152,7 @@ pub fn[TA] tabulate(
   fn go(x31 : Int64) -> @list.List[TA] raise {
     let i = x31
     if physical_equal(i, n) {
-      @list.empty()
+      @list.List([])
     } else {
       let t32 = go(@lib.add63(i, 1L))
       t32.prepend(f(i))
@@ -211,7 +211,7 @@ pub fn[TA] revdivide(
   let l = x40
   fn(x44 : Int64) -> (@list.List[TA], @list.List[TA]) raise {
     let n_1 = x44
-    revdiv_l(@list.empty(), (l, n_1))
+    revdiv_l(@list.List([]), (l, n_1))
   }
 }
 
@@ -253,7 +253,7 @@ pub fn[TA, TB] sortmap(
   let f = x47
   let cmp = x48
   match x49 {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(_, tail=Empty) as l => l
     xs => {
       let nxs = @lib.map(
@@ -485,7 +485,7 @@ pub fn stripsuffix(x94 : (Char) -> Bool raise, x95 : String) -> String raise {
 pub fn interval(x97 : Int64, x98 : Int64) -> @list.List[Int64] raise {
   let m = x97
   match x98 {
-    0L => @list.empty()
+    0L => @list.List([])
     len => {
       let t99 = @lib.sub63(len, 1L)
       interval(@lib.add63(m, 1L), t99).prepend(m)
@@ -578,7 +578,7 @@ pub fn newint(x108 : Unit) -> Int64 raise {
 pub fn newints(x109 : Int64) -> @list.List[Int64] raise {
   let k = x109
   if k <= 0L {
-    @list.empty()
+    @list.List([])
   } else {
     newintsthunk(k, ())
   }
@@ -1169,7 +1169,7 @@ pub fn[TA, TB, TC] nodepartition(
   let comparekey = x183
   let pkey = x184
   let node = x185
-  let (path, pnode) = nodepeekpath(comparekey, pkey, @list.empty(), node)
+  let (path, pnode) = nodepeekpath(comparekey, pkey, @list.List([]), node)
   match pnode {
     None => {
       let (left, right) = mksidespath(path)
@@ -1238,7 +1238,7 @@ pub fn[TA, TB] treeinsert(
   let key_value = x193
   let tree = x194
   let (key, value_1) = key_value
-  let (path, inode) = treepeekpath(comparekey, key, @list.empty(), tree)
+  let (path, inode) = treepeekpath(comparekey, key, @list.List([]), tree)
   match inode {
     None => {
       let node = nodesingleton(key, value_1)
@@ -2020,7 +2020,7 @@ pub fn[TA, TB] addrighttoleftiterator(
 /// `treeMkIterator`
 pub fn[TA, TB] treemkiterator(x281 : Tree[TA, TB]) -> Iterator[TA, TB]? raise {
   let tree = x281
-  addlefttorightiterator(@list.empty(), tree)
+  addlefttorightiterator(@list.List([]), tree)
 }
 
 ///|
@@ -2029,7 +2029,7 @@ pub fn[TA, TB] treemkreviterator(
   x282 : Tree[TA, TB],
 ) -> Iterator[TA, TB]? raise {
   let tree = x282
-  addrighttoleftiterator(@list.empty(), tree)
+  addrighttoleftiterator(@list.List([]), tree)
 }
 
 ///|
@@ -2951,7 +2951,7 @@ pub fn[TA, TB] keys(x429 : Map[TA, TB]) -> @list.List[TA] raise {
       let (key, _, l) = x430
       l.prepend(key)
     },
-    @list.empty(),
+    @list.List([]),
     m,
   )
 }
@@ -2965,7 +2965,7 @@ pub fn[TA, TB] values(x431 : Map[TB, TA]) -> @list.List[TA] raise {
       let (_, value_1, l) = x432
       l.prepend(value_1)
     },
-    @list.empty(),
+    @list.List([]),
     m,
   )
 }
@@ -2979,7 +2979,7 @@ pub fn[TA, TB] tolist(x433 : Map[TA, TB]) -> @list.List[(TA, TB)] raise {
       let (key, value_1, l) = x434
       l.prepend((key, value_1))
     },
-    @list.empty(),
+    @list.List([]),
     m,
   )
 }
@@ -3638,7 +3638,7 @@ pub fn[TA, TB] transform_v1(
     let (x, l) = x557
     l.prepend(f(x))
   }
-  foldr_v2(inc)(@list.empty())
+  foldr_v2(inc)(@list.List([]))
 }
 
 ///|
@@ -5640,7 +5640,7 @@ pub fn[TA, TB] transform_v4(
       }
     },
     s,
-    @list.empty(),
+    @list.List([]),
   )
 }
 
@@ -5879,7 +5879,7 @@ pub fn[TA, TB] app_v2(
 pub fn[TA] tolist_v5(x935 : Heap[TA]) -> @list.List[TA] raise {
   let h = x935
   if null_v6(h) {
-    @list.empty()
+    @list.List([])
   } else {
     let (x, h_1) = remove_v5(h)
     tolist_v5(h_1).prepend(x)
@@ -7357,7 +7357,7 @@ pub fn[TA, TB] transform_v6(
       }
     },
     s,
-    @list.empty(),
+    @list.List([]),
   )
 }
 
@@ -8939,7 +8939,7 @@ pub fn[TA, TB] transform_v8(
       }
     },
     s,
-    @list.empty(),
+    @list.List([]),
   )
 }
 
@@ -9178,7 +9178,7 @@ pub fn functionnames(x1438 : Term) -> @oset.T[Name] raise {
 /// `mkConst`
 pub fn mkconst(x1441 : String) -> Term raise {
   let c = x1441
-  Term::Fn((c, @list.empty()))
+  Term::Fn((c, @list.List([])))
 }
 
 ///|
@@ -9396,7 +9396,7 @@ pub fn subterms(x1464 : Term) -> @list.List[(@list.List[Int64], Term)] raise {
       }
     }
   }
-  subtms((@list.List([(@list.empty(), tm)]), @list.empty()))
+  subtms((@list.List([(@list.List([]), tm)]), @list.List([])))
 }
 
 ///|
@@ -9467,7 +9467,7 @@ pub fn find_v8(
   }
   fn(x1475 : Term) -> @list.List[Int64]? raise {
     let tm_1 = x1475
-    search(@list.List([(@list.empty(), tm_1)]))
+    search(@list.List([(@list.List([]), tm_1)]))
   }
 }
 
@@ -9742,7 +9742,7 @@ pub fn nonvartypedsubterms(
         }
     }
   }
-  subtms((@list.List([(@list.empty(), tm)]), @list.empty()))
+  subtms((@list.List([(@list.List([]), tm)]), @list.List([])))
 }
 
 ///|
@@ -9880,7 +9880,7 @@ pub fn stripapp(x1525 : Term) -> (Term, @list.List[Term]) raise {
       None => (tm_1, tms)
     }
   }
-  strip(@list.empty(), tm)
+  strip(@list.List([]), tm)
 }
 
 ///|
@@ -11462,7 +11462,7 @@ pub fn subterms_v1(
       subterms(tm),
     ).concat(l)
   }
-  foldl(f, @list.empty(), enumerate(tms))
+  foldl(f, @list.List([]), enumerate(tms))
 }
 
 ///|
@@ -11777,7 +11777,7 @@ pub fn[TA] nonvartypedsubterms_v1(
       nonvartypedsubterms(arg),
     )
   }
-  foldl(addarg, @list.empty(), enumerate(tms))
+  foldl(addarg, @list.List([]), enumerate(tms))
 }
 
 ///|
@@ -13223,7 +13223,7 @@ pub fn[TA, TB] transform_v10(
       }
     },
     s,
-    @list.empty(),
+    @list.List([]),
   )
 }
 
@@ -13676,8 +13676,8 @@ fn step_67() -> Unit raise {
   }
   stripconj_c.set(fn(x2073 : Formula) -> @list.List[Formula] raise {
     match x2073 {
-      Formula::True => @list.empty()
-      fm_1 => strip(@list.empty(), fm_1)
+      Formula::True => @list.List([])
+      fm_1 => strip(@list.List([]), fm_1)
     }
   })
 }
@@ -13710,7 +13710,7 @@ fn step_68() -> Unit raise {
   }
   flattenconj_c.set(fn(x2076 : Formula) -> @list.List[Formula] raise {
     let fm_1 = x2076
-    flat(@list.empty(), @list.List([fm_1]))
+    flat(@list.List([]), @list.List([fm_1]))
   })
 }
 
@@ -13758,8 +13758,8 @@ fn step_69() -> Unit raise {
   }
   stripdisj_c.set(fn(x2081 : Formula) -> @list.List[Formula] raise {
     match x2081 {
-      Formula::False => @list.empty()
-      fm_1 => strip(@list.empty(), fm_1)
+      Formula::False => @list.List([])
+      fm_1 => strip(@list.List([]), fm_1)
     }
   })
 }
@@ -13792,7 +13792,7 @@ fn step_70() -> Unit raise {
   }
   flattendisj_c.set(fn(x2084 : Formula) -> @list.List[Formula] raise {
     let fm_1 = x2084
-    flat(@list.empty(), @list.List([fm_1]))
+    flat(@list.List([]), @list.List([fm_1]))
   })
 }
 
@@ -13840,8 +13840,8 @@ fn step_71() -> Unit raise {
   }
   stripequiv_c.set(fn(x2089 : Formula) -> @list.List[Formula] raise {
     match x2089 {
-      Formula::True => @list.empty()
-      fm_1 => strip(@list.empty(), fm_1)
+      Formula::True => @list.List([])
+      fm_1 => strip(@list.List([]), fm_1)
     }
   })
 }
@@ -13874,7 +13874,7 @@ fn step_72() -> Unit raise {
   }
   flattenequiv_c.set(fn(x2092 : Formula) -> @list.List[Formula] raise {
     let fm_1 = x2092
-    flat(@list.empty(), @list.List([fm_1]))
+    flat(@list.List([]), @list.List([fm_1]))
   })
 }
 
@@ -13949,7 +13949,7 @@ fn step_74() -> Unit raise {
       tm => (@lib.rev(vs), tm)
     }
   }
-  stripforall_c.set((x2101 : Formula) => strip(@list.empty(), x2101))
+  stripforall_c.set((x2101 : Formula) => strip(@list.List([]), x2101))
 }
 
 ///|
@@ -14023,7 +14023,7 @@ fn step_76() -> Unit raise {
       tm => (@lib.rev(vs), tm)
     }
   }
-  stripexists_c.set((x2110 : Formula) => strip(@list.empty(), x2110))
+  stripexists_c.set((x2110 : Formula) => strip(@list.List([]), x2110))
 }
 
 ///|
@@ -14686,8 +14686,8 @@ pub fn existentialname() -> Name {
 /// `demote`
 pub fn demote(x2171 : Formula) -> Term raise {
   match x2171 {
-    Formula::True => Term::Fn((truthname(), @list.empty()))
-    Formula::False => Term::Fn((falsityname(), @list.empty()))
+    Formula::True => Term::Fn((truthname(), @list.List([])))
+    Formula::False => Term::Fn((falsityname(), @list.List([])))
     Formula::Atom((p, tms)) => Term::Fn((p, tms))
     Formula::Not(p_1) => {
       let s = "~"
@@ -14764,7 +14764,7 @@ pub fn split_v11(
   let pol = x2186
   let fm = x2187
   match (pol, fm) {
-    (true, Formula::True) => @list.empty()
+    (true, Formula::True) => @list.List([])
     (true, Formula::Not(f)) => split_v11(asms, false, f)
     (true, Formula::And(f1, f2)) => {
       let t2188 = split_v11(asms.prepend(f1), true, f2)
@@ -14781,9 +14781,9 @@ pub fn split_v11(
     (true, Formula::Forall(v, f_1)) =>
       @lib.map(
         (x2190 : Formula) => add_var_asms(asms, v, x2190),
-        split_v11(@list.empty(), true, f_1),
+        split_v11(@list.List([]), true, f_1),
       )
-    (false, Formula::False) => @list.empty()
+    (false, Formula::False) => @list.List([])
     (false, Formula::Not(f_2)) => split_v11(asms, true, f_2)
     (false, Formula::And(f1_4, f2_4)) =>
       split_v11(asms.prepend(f1_4), false, f2_4)
@@ -14802,7 +14802,7 @@ pub fn split_v11(
     (false, Formula::Exists(v_1, f_3)) =>
       @lib.map(
         (x2194 : Formula) => add_var_asms(asms, v_1, x2194),
-        split_v11(@list.empty(), false, f_3),
+        split_v11(@list.List([]), false, f_3),
       )
     _ => @list.List([add_asms(asms, if pol { fm } else { Formula::Not(fm) })])
   }
@@ -14812,7 +14812,7 @@ pub fn split_v11(
 /// `splitGoal`
 pub fn splitgoal(x2195 : Formula) -> @list.List[Formula] raise {
   let fm = x2195
-  split_v11(@list.empty(), true, fm)
+  split_v11(@list.List([]), true, fm)
 }
 
 ///|
@@ -16174,7 +16174,7 @@ pub fn[TA, TB] transform_v12(
       }
     },
     s,
-    @list.empty(),
+    @list.List([]),
   )
 }
 
@@ -18179,7 +18179,7 @@ pub fn[TA, TB] transform_v14(
       }
     },
     s,
-    @list.empty(),
+    @list.List([]),
   )
 }
 
@@ -19940,7 +19940,7 @@ pub fn[TA, TB] transform_v16(
       }
     },
     s,
-    @list.empty(),
+    @list.List([]),
   )
 }
 
@@ -20270,7 +20270,7 @@ pub fn print_proof(x3000 : Thm) -> Unit raise {
       @pp.std_formatter.print_string("Clauses: " + tostring_v7(cl))
       @pp.std_formatter.print_break(0, 0)
       @pp.std_formatter.print_string("Theorems: ")
-      if ths == @list.empty() {
+      if ths == @list.List([]) {
         @pp.std_formatter.print_string("<none>")
       } else {
         @pp.std_formatter.print_break(0, 0)
@@ -20288,7 +20288,7 @@ pub fn print_proof(x3000 : Thm) -> Unit raise {
 /// `axiom`
 pub fn axiom(x3001 : @oset.T[(Bool, (String, @list.List[Term]))]) -> Thm raise {
   let cl = x3001
-  Thm::Thm(cl, (InferenceType::Axiom, @list.empty()))
+  Thm::Thm(cl, (InferenceType::Axiom, @list.List([])))
 }
 
 ///|
@@ -20297,7 +20297,7 @@ pub fn assume(x3002 : (Bool, (String, @list.List[Term]))) -> Thm raise {
   let lit = x3002
   Thm::Thm(
     fromlist_v15(@list.List([lit, negate(lit.0, lit.1)])),
-    (InferenceType::Assume, @list.empty()),
+    (InferenceType::Assume, @list.List([])),
   )
 }
 
@@ -20350,7 +20350,7 @@ pub fn refl(x3008 : Term) -> Thm raise {
   let tm = x3008
   Thm::Thm(
     singleton_v30((true, mkrefl(tm))),
-    (InferenceType::Refl, @list.empty()),
+    (InferenceType::Refl, @list.List([])),
   )
 }
 
@@ -20368,7 +20368,7 @@ pub fn equality(
   let lit_p = replace_v2(lit, (path, t))
   let eqlit = mkneq_v1((s, t))
   let cl = fromlist_v15(@list.List([eqlit, negate(lit.0, lit.1), lit_p]))
-  Thm::Thm(cl, (InferenceType::Equality, @list.empty()))
+  Thm::Thm(cl, (InferenceType::Equality, @list.List([])))
 }
 
 ///|
@@ -20476,12 +20476,12 @@ pub type Proof = @list.List[(Thm, Inference1)]
 /// `parents`
 pub fn parents(x3012 : Inference1) -> @list.List[Thm] raise {
   match x3012 {
-    Inference1::Axiom(_) => @list.empty()
-    Inference1::Assume(_) => @list.empty()
+    Inference1::Axiom(_) => @list.List([])
+    Inference1::Assume(_) => @list.List([])
     Inference1::Subst(_, th) => @list.List([th])
     Inference1::Resolve(_, th_1, th_p) => @list.List([th_1, th_p])
-    Inference1::Refl(_) => @list.empty()
-    Inference1::Equality(_, _, _) => @list.empty()
+    Inference1::Refl(_) => @list.List([])
+    Inference1::Equality(_, _, _) => @list.List([])
   }
 }
 
@@ -20680,7 +20680,7 @@ fn[TA : Eq + @lib.OCompare + @lib.OHash] recon_l(
   } else {
     let (s_1, t_1) = destneq_v1(neq)
     let path_2 = if !equal_v14(s_1, t_1) {
-      sync(s_1, t_1, @list.empty(), atm, atm_p)
+      sync(s_1, t_1, @list.List([]), atm, atm_p)
     } else if !equal_v17(atm, atm_p) {
       None
     } else {
@@ -20837,7 +20837,7 @@ pub fn proof(x3040 : Thm) -> @list.List[(Thm, Inference1)] raise {
     let ths_5 = x3048
     fn(x3049 : Thm) -> @list.List[(Thm, Inference1)] raise {
       let th_5 = x3049
-      let (ths_6, acc_3) = addproof(th_5, (ths_5, @list.empty()))
+      let (ths_6, acc_3) = addproof(th_5, (ths_5, @list.List([])))
       @lib.rev(acc_3)
     }
   }
@@ -22468,7 +22468,7 @@ pub fn updateapart(
         }
     }
   }
-  (x3277 : @list.List[Edge]) => update_1(@list.empty(), x3277)
+  (x3277 : @list.List[Edge]) => update_1(@list.List([]), x3277)
 }
 
 ///|
@@ -22612,7 +22612,7 @@ pub fn init_edges(
         ) raise {
           init__l(x3295.0, x3295.1)
         },
-        (@list.empty(), @list.empty()),
+        (@list.List([]), @list.List([])),
         acc,
       ).1
     More((sub_1, edge_1), tail=sub_edges) => {
@@ -22645,7 +22645,7 @@ pub fn mk_edges(
   let apart = x3296
   let sub_edges = x3297
   match x3298 {
-    Empty => init_edges(@list.empty(), apart, sub_edges)
+    Empty => init_edges(@list.List([]), apart, sub_edges)
     More(lit, tail=lits) => {
       let sub_edges_1 = foldl(
         (
@@ -22720,8 +22720,8 @@ pub fn factor_p(
   x3304 : @oset.T[(Bool, (String, @list.List[Term]))],
 ) -> @list.List[Subst] raise {
   let cl = x3304
-  let edges = mk_edges(@list.empty(), @list.empty(), tolist_v16(cl))
-  let result = fact(@list.empty(), edges)
+  let edges = mk_edges(@list.List([]), @list.List([]), tolist_v16(cl))
+  let result = fact(@list.List([]), edges)
   result
 }
 
@@ -26964,7 +26964,7 @@ pub fn pertterms(
         }
       }
     }
-    filt(vn, @list.empty())
+    filt(vn, @list.List([]))
   }
   fn pert(
     x3969 : (
@@ -27000,7 +27000,7 @@ pub fn pertterms(
       let y_2 = x3972
       fn(x3973 : @list.List[Perturbation]) -> @list.List[Perturbation] raise {
         let z = x3973
-        pert((@list.empty(), x_1, y_2, z))
+        pert((@list.List([]), x_1, y_2, z))
       }
     }
   }
@@ -27097,7 +27097,7 @@ pub fn perturbterm(
   let vm = x3990
   let vv = x3991
   let (tm, target) = x3992
-  pickperturb(vm, pertterm(vm, target, modelterm(vm, vv)(tm).0, @list.empty()))
+  pickperturb(vm, pertterm(vm, target, modelterm(vm, vv)(tm).0, @list.List([])))
 }
 
 ///|
@@ -27110,7 +27110,7 @@ pub fn perturbatom(
   let vm = x3993
   let vv = x3994
   let (atm, target) = x3995
-  pickperturb(vm, pertatom(vm, vv, target, atm, @list.empty()))
+  pickperturb(vm, pertatom(vm, vv, target, atm, @list.List([])))
 }
 
 ///|
@@ -27123,7 +27123,7 @@ pub fn perturbliteral(
   let vm = x3996
   let vv = x3997
   let lit = x3998
-  pickperturb(vm, pertliteral(vm, vv, (lit, @list.empty())))
+  pickperturb(vm, pertliteral(vm, vv, (lit, @list.List([]))))
 }
 
 ///|
@@ -27136,7 +27136,7 @@ pub fn perturbclause(
   let vm = x3999
   let vv = x4000
   let cl = x4001
-  pickperturb(vm, pertclause(vm, vv, cl, @list.empty()))
+  pickperturb(vm, pertclause(vm, vv, cl, @list.List([])))
 }
 
 ///|
@@ -27264,7 +27264,7 @@ pub fn comparefnqterm(
 ) -> Int64 raise {
   let f1 = x4008
   let f2 = x4009
-  fncmp(f1, f2, @list.empty())
+  fncmp(f1, f2, @list.List([]))
 }
 
 ///|
@@ -27854,7 +27854,7 @@ pub fn addqterm(
   let qtm = x4074
   let (ks_1, fs_1, qtms_2) = x4075
   let ks_3 = match ks_1 {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(k, tail=ks_2) => ks_2.prepend(@lib.sub63(k, 1L))
   }
   norm((ks_3, fs_1, qtms_2.prepend(qtm)))
@@ -27878,7 +27878,7 @@ pub fn[TA, TB, TC] stackempty() -> (
   @list.List[TB],
   @list.List[TC],
 ) {
-  (@list.empty(), @list.empty(), @list.empty())
+  (@list.List([]), @list.List([]), @list.List([]))
 }
 
 ///|
@@ -28335,9 +28335,9 @@ pub fn[TA] matchnet(x4123 : TermNet[TA], x4124 : Term) -> @list.List[TA] raise {
   let x = x4123
   let y = x4124
   match (x, y) {
-    (TermNet::Net(_, _, None), _) => @list.empty()
+    (TermNet::Net(_, _, None), _) => @list.List([])
     (TermNet::Net(p, _, Some((_, n))), tm) =>
-      finally(p, mat(@list.empty(), @list.List([(n, @list.List([tm]))]))) catch {
+      finally(p, mat(@list.List([]), @list.List([(n, @list.List([tm]))]))) catch {
         Failure(_) => raise Bug::Bug("Term_net.match: should never fail")
         e => raise e
       }
@@ -28447,12 +28447,12 @@ pub fn[TA] matched(x4136 : TermNet[TA], x4137 : Term) -> @list.List[TA] raise {
   let x = x4136
   let tm = x4137
   match x {
-    TermNet::Net(_, _, None) => @list.empty()
+    TermNet::Net(_, _, None) => @list.List([])
     TermNet::Net(parm, _, Some((_, net))) =>
       finally(
         parm,
         mat_v1(
-          @list.empty(),
+          @list.List([]),
           @list.List([(newmap_v3(()), net, @list.List([tm]))]),
         ),
       ) catch {
@@ -28557,12 +28557,12 @@ pub fn[TA] unify_v3(x4146 : TermNet[TA], x4147 : Term) -> @list.List[TA] raise {
   let x = x4146
   let tm = x4147
   match x {
-    TermNet::Net(_, _, None) => @list.empty()
+    TermNet::Net(_, _, None) => @list.List([])
     TermNet::Net(parm, _, Some((_, net))) =>
       finally(
         parm,
         mat_v2(
-          @list.empty(),
+          @list.List([]),
           @list.List([(newmap_v3(()), net, @list.List([tm]))]),
         ),
       ) catch {
@@ -28893,7 +28893,7 @@ pub fn[TA] findrest(
         }
     }
   }
-  (x4188 : @list.List[TA]) => f(@list.empty(), x4188)
+  (x4188 : @list.List[TA]) => f(@list.List([]), x4188)
 }
 
 ///|
@@ -29159,7 +29159,7 @@ pub fn[TA] newsubsume(x4217 : Unit) -> Subsume[TA] raise {
     sndlits: t4218,
   }
   Subsume::{
-    empty: @list.empty(),
+    empty: @list.List([]),
     unitn: newnet_v2(Parameters1::{ fifo: false, }),
     nonunit: t4220,
   }
@@ -29417,7 +29417,7 @@ pub fn[TA, TB] genclausesubsumes(
             (x4254 : ((Bool, (String, @list.List[Term])), @list.List[Subst])) => {
               matchlit(lit_p, x4254)
             },
-            @list.empty(),
+            @list.List([]),
             cl,
           ) {
           Empty => None
@@ -29453,7 +29453,7 @@ pub fn[TA, TB] genclausesubsumes(
       }
     }
   }
-  match mksubsl(@list.empty(), empty_v13(), lits_p) {
+  match mksubsl(@list.List([]), empty_v13(), lits_p) {
     None => None
     Some(sub_subsl) => search(@list.List([sub_subsl]))
   }
@@ -30398,7 +30398,7 @@ pub fn equations(x4369 : Rewrite) -> @list.List[Equation1] raise {
       ) -> @list.List[((Term, Term), Thm)] raise {
         let (_, (eqn, _), eqns) = x4370
         eqns.prepend(eqn)
-      })(@list.empty())(known)
+      })(@list.List([]))(known)
   }
 }
 
@@ -30912,7 +30912,7 @@ pub fn neqconvstoconv(x4455 : NeqConvs) -> ((Term) -> (Term, Thm) raise) raise {
       ) -> @list.List[(Term) -> (Term, Thm) raise] raise {
         let (_, c, l) = x4457
         l.prepend(c)
-      })(@list.empty())(m)
+      })(@list.List([]))(m)
       (x4459 : Term) => firstconv_v1(t4458, x4459)
     }
   }
@@ -31717,7 +31717,7 @@ pub fn isreduced(x4601 : Rewrite) -> Bool raise {
 pub fn reduce_p(x4602 : Rewrite) -> (Rewrite, @list.List[Key]) raise {
   let rw = x4602
   if isreduced(rw) {
-    (rw, @list.empty())
+    (rw, @list.List([]))
   } else {
     reduceacc(empty_v4(), empty_v4(), empty_v4(), rw, empty_v4())
   }
@@ -32295,7 +32295,7 @@ pub fn islargerliteral(
               x4673 : ((Bool, (String, @list.List[Term])), @list.List[Term]),
             ) -> @list.List[Term] raise {
               addlit_l(x4673.0, x4673.1)
-            })(@list.empty())(lits)
+            })(@list.List([]))(lits)
             fn(x4674 : (Bool, (String, @list.List[Term]))) -> Bool raise {
               let (_, atm_p) = x4674
               notstrictlyless(ordering, (atomtoterms(atm_p), tms))
@@ -32326,7 +32326,7 @@ pub fn islargerliteral(
                     acc_1
                   }
                 }
-                let tms_1 = foldl_v16(addlit)(@list.empty())(lits)
+                let tms_1 = foldl_v16(addlit)(@list.List([]))(lits)
                 fn(x4678 : (Bool, (String, @list.List[Term]))) -> Bool raise {
                   let (pol_p, atm_p_1) = x4678
                   if pol != pol_p {
@@ -32415,7 +32415,7 @@ pub fn largestequations(
           }
         }
       }
-      foldr_v16(addlit, @list.empty(), largestliterals(cl))
+      foldr_v16(addlit, @list.List([]), largestliterals(cl))
     }
   }
 }
@@ -32490,7 +32490,7 @@ pub fn largestsubterms(
     ),
   ) -> @list.List[((Bool, (String, @list.List[Term])), @list.List[Int64], Term)] raise {
     addlit(x4693.0, x4693.1)
-  })(@list.empty())(t4694)
+  })(@list.List([]))(t4694)
 }
 
 ///|
@@ -32507,7 +32507,7 @@ pub fn allsubterms(
     ),
   ) -> @list.List[((Bool, (String, @list.List[Term])), @list.List[Int64], Term)] raise {
     addlit(x4696.0, x4696.1)
-  })(@list.empty())(t4697)
+  })(@list.List([]))(t4697)
 }
 
 ///|
@@ -32907,7 +32907,7 @@ pub fn clauses(x4728 : Active) -> @list.List[Clause1] raise {
         x4732 : (Int64, Clause1, @list.List[Clause1]),
       ) -> @list.List[Clause1] raise {
         add_l_3(x4732.0, x4732.1, x4732.2)
-      })(@list.empty())(cls)
+      })(@list.List([]))(cls)
   }
 }
 
@@ -32940,8 +32940,8 @@ pub fn saturation(x4733 : Active) -> @list.List[Clause1] raise {
     }
   }
   let cls_1 = clauses(active)
-  let (cls_2, _) = foldl(remove_1, (@list.empty(), newsubsume(())), cls_1)
-  let (cls_3, subs_1) = foldl(remove_1, (@list.empty(), newsubsume(())), cls_2)
+  let (cls_2, _) = foldl(remove_1, (@list.List([]), newsubsume(())), cls_1)
+  let (cls_3, subs_1) = foldl(remove_1, (@list.List([]), newsubsume(())), cls_2)
   cls_3
 }
 
@@ -33410,11 +33410,11 @@ pub fn deduce(x4793 : Active, x4794 : Clause1) -> @list.List[Clause1] raise {
       let lits = largestliterals(cl)
       let eqns = largestequations(cl)
       let subtms = if null_v20(equations_1) {
-        @list.empty()
+        @list.List([])
       } else {
         largestsubterms(cl)
       }
-      let acc = @list.empty()
+      let acc = @list.List([])
       let acc_1 = foldl_v16((
         x4795 : ((Bool, (String, @list.List[Term])), @list.List[Clause1]),
       ) => deduceresolution(literals_1, cl, x4795))(acc)(lits)
@@ -33486,7 +33486,7 @@ pub fn[TA, TB] orderedredexresidues(
 ) -> @list.List[(TA, TA, Bool)] raise {
   let (((l, r), _), ort) = (x4803, x4804)
   match ort {
-    None => @list.empty()
+    None => @list.List([])
     Some(Orient::Left_to_right) => @list.List([(l, r, true)])
     Some(Orient::Right_to_left) => @list.List([(r, l, true)])
   }
@@ -33501,7 +33501,7 @@ pub fn[TA, TB, TC] unorderedredexresidues(
   let (((l, r), _), ort) = (x4805, x4806)
   match ort {
     None => @list.List([(l, r, false), (r, l, false)])
-    Some(_) => @list.empty()
+    Some(_) => @list.List([])
   }
 }
 
@@ -33761,7 +33761,7 @@ pub fn extract_rewritables(
   match x4839 {
     Active::Active({ clauses: clauses_1, rewrite: rewrite_1, .. }) as active =>
       if isreduced(rewrite_1) {
-        (active, @list.empty())
+        (active, @list.List([]))
       } else {
         let (rewrite_2, ids) = reduce_p(rewrite_1)
         let active_1 = setrewrite(active, rewrite_2)
@@ -33932,7 +33932,7 @@ pub fn factor_v2(
 ) -> (Active, @list.List[Clause1]) raise {
   let active = x4862
   let cls = x4863
-  factor_p_v1(active, @list.empty(), cls)
+  factor_p_v1(active, @list.List([]), cls)
 }
 
 ///|
@@ -33982,7 +33982,7 @@ pub fn add_v31(
   let active = x4869
   let cl = x4870
   match simplifyactive(maxsimplify(), active)(cl) {
-    None => (active, @list.empty())
+    None => (active, @list.List([]))
     Some(cl_p) =>
       if iscontradiction_v1(cl_p) {
         (active, @list.List([cl_p]))
@@ -34656,7 +34656,7 @@ pub fn loop__v1(x4930 : Resolution) -> Decision? raise {
 /// `run`
 pub fn run(x4931 : @list.List[Thm]) -> Thm raise {
   let rules = x4931
-  let ths = AxCjThm::{ axioms_thm: rules, conjecture_thm: @list.empty(), }
+  let ths = AxCjThm::{ axioms_thm: rules, conjecture_thm: @list.List([]), }
   let res = newresolution(default_v5(), ths)
   match loop__v1(res) {
     None => raise Failure("metis: timeout")
@@ -34677,7 +34677,7 @@ pub fn print_varandtype(
   let (hop, args) = @basics.strip_comb(tm)
   let s = @printer.name_of(hop)
   let ty = @kernel.type_of(hop)
-  if @kernel.is_var(hop) && args == @list.empty() {
+  if @kernel.is_var(hop) && args == @list.List([]) {
     @pp.Formatter::print_string(fmt, "(")
     @pp.Formatter::print_string(fmt, s)
     @pp.Formatter::print_string(fmt, ":")
@@ -34809,15 +34809,15 @@ pub fn list_mk_combp(
 fn step_225() -> Unit raise {
   let t4950 = @preterm.Preterm::Varp(
     "3",
-    @preterm.Pretype::Ptycon("", @list.empty()),
+    @preterm.Pretype::Ptycon("", @list.List([])),
   )
   let t4949 = @preterm.Preterm::Varp(
     "2",
-    @preterm.Pretype::Ptycon("", @list.empty()),
+    @preterm.Pretype::Ptycon("", @list.List([])),
   )
   let t4951 = @preterm.Preterm::Combp(
     @preterm.Preterm::Combp(
-      @preterm.Preterm::Varp("1", @preterm.Pretype::Ptycon("", @list.empty())),
+      @preterm.Preterm::Varp("1", @preterm.Pretype::Ptycon("", @list.List([]))),
       t4949,
     ),
     t4950,
@@ -34880,7 +34880,7 @@ pub fn env_of_preterm(
 ) -> @list.List[(String, @preterm.Pretype)] raise {
   match x4958 {
     @preterm.Preterm::Varp(s, pty) => @list.List([(s, pty)])
-    @preterm.Preterm::Constp(s_1, pty_1) => @list.empty()
+    @preterm.Preterm::Constp(s_1, pty_1) => @list.List([])
     @preterm.Preterm::Combp(l, r) => {
       let t4959 = env_of_preterm(r)
       env_of_preterm(l).concat(t4959)
@@ -35107,7 +35107,7 @@ pub fn typecheckl(
 ) -> @list.List[@kernel.Term] raise {
   let env = x4987
   match x4988 {
-    Empty => @list.empty()
+    Empty => @list.List([])
     xs => {
       let t4989 = typecheck(env)
       @lib.op_bar_gt(@lib.op_bar_gt(list_mk_disjp(xs), t4989), fn(
@@ -35627,7 +35627,7 @@ pub fn term_eq_mod_type(
     let (_, tminsts, tyinsts_1) = @drule.term_type_unify(
       t1,
       t2,
-      (@list.empty(), @list.empty(), tyinsts),
+      (@list.List([]), @list.List([]), tyinsts),
     )
     if metisverb().val {
       let t5071 = Int::to_int64(@lib.length(tminsts))
@@ -35652,7 +35652,7 @@ pub fn term_eq_mod_type(
     } else {
       ()
     }
-    if tminsts == @list.empty() {
+    if tminsts == @list.List([]) {
       Some(tyinsts_1)
     } else {
       None
@@ -35674,7 +35674,7 @@ pub fn[TA, TB, TC] match_elems(
   let m = x5076
   match x5077 {
     (Empty, Empty) => @list.List([m])
-    (Empty, _) => @list.empty()
+    (Empty, _) => @list.List([])
     (More(x, tail=xs), ys) =>
       @lib.op_bar_gt(
         @lib.map(
@@ -35693,7 +35693,7 @@ pub fn[TA, TB, TC] match_elems(
                     ),
                   ),
                 )
-              None => @list.empty()
+              None => @list.List([])
             }
           },
           ys,
@@ -35743,7 +35743,7 @@ pub fn match_fo_ho_clause(
           }
         }
       },
-      @list.empty(),
+      @list.List([]),
       x5086,
     )
   }
@@ -36014,7 +36014,7 @@ pub fn hol_of_thm(
           @drule.type_unify(@kernel.type_of(v_2), t5126, m_3)
         },
         hsub,
-        @list.empty(),
+        @list.List([]),
       )
       let tminst_1 = @lib.map(
         fn(
@@ -36027,7 +36027,7 @@ pub fn hol_of_thm(
         hsub,
       )
       if metisverb().val {
-        let t5129 = string_of_instantiation(@list.empty(), tminst_1, tyinst)
+        let t5129 = string_of_instantiation(@list.List([]), tminst_1, tyinst)
         let t5130 = @printer.string_of_thm(th1)
         @pp.std_formatter.print_string(
           "before instantiate of th1 = " + t5130 + " with " + t5129 + "\n",
@@ -36037,7 +36037,7 @@ pub fn hol_of_thm(
       } else {
         ()
       }
-      @drule.instantiate_rule((@list.empty(), tminst_1, tyinst), th1)
+      @drule.instantiate_rule((@list.List([]), tminst_1, tyinst), th1)
     }
     Inference1::Resolve(atom_1, fth1_1, fth2) => {
       let th1_1 = hol_of_thm(axioms, fth1_1)
@@ -36146,8 +36146,8 @@ pub fn hol_of_thm(
           x5147 : @kernel.Term,
         ) -> @list.List[@list.List[(@kernel.HolType, @kernel.HolType)]] raise {
           let x = x5147
-          match term_eq_mod_type(hatom, x, @list.empty()) {
-            None => @list.empty()
+          match term_eq_mod_type(hatom, x, @list.List([])) {
+            None => @list.List([])
             Some(m_4) =>
               @firstorder.filter_map(
                 fn(
@@ -36249,7 +36249,7 @@ pub fn hol_of_thm(
       let hs = @basics.follow_path(hpath, hlit)
       let ht = hol_of_term(env)(ft)
       let t5158 = @kernel.type_of(hs)
-      let m_5 = @drule.type_unify(@kernel.type_of(ht), t5158, @list.empty())
+      let m_5 = @drule.type_unify(@kernel.type_of(ht), t5158, @list.List([]))
       let t5159 = @kernel.inst(m_5, ht)
       let t5160 = @kernel.inst(m_5, hs)
       let (hlit_1, hs_1, ht_1) = (@kernel.inst(m_5, hlit), t5160, t5159)
@@ -36436,7 +36436,7 @@ pub fn metis_of_clause(x5185 : @kernel.Thm) -> Thm raise {
   let tm = @kernel.concl(th)
   let hlits = @basics.disjuncts(tm)
   let flits = @lib.map(
-    (x5186 : @kernel.Term) => metis_of_literal(@list.empty(), lconsts, x5186),
+    (x5186 : @kernel.Term) => metis_of_literal(@list.List([]), lconsts, x5186),
     hlits,
   )
   let set = fromlist_v15(flits)

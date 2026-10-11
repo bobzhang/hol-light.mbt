@@ -37,7 +37,7 @@ fn reverse_interface(s0 : String, ty0 : HolType) -> String raise {
   let found = @lib.find(
     (e : (String, (String, HolType))) => {
       let (_, (s1, ty)) = e
-      s1 == s0 && @lib.can(t => @basics.type_match(ty, t, @list.empty()), ty0)
+      s1 == s0 && @lib.can(t => @basics.type_match(ty, t, @list.List([])), ty0)
     },
     the_interface.val,
   ) catch {

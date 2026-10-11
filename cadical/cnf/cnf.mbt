@@ -48,7 +48,7 @@ fn step_2() -> Unit raise {
       }
       fn(x9 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
         let th_1 = x9
-        gconjuncts_1(th_1, @list.empty())
+        gconjuncts_1(th_1, @list.List([]))
       }
     }
     _ => raise @lib.MatchFailure("tscript.ml:14")

@@ -177,7 +177,7 @@ fn step_12() -> Unit raise {
       s12(x13)
     }
   })
-  let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.empty())), t14), t15)
+  let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))), t14), t15)
   quartic_cases_v1_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   s pow 2 = y pow 2 - &4 * d /\\\n   (D pow 2 = if R = &0 then &3 * a pow 2 / &4 - &2 * b + &2 * s\n              else &3 * a pow 2 / &4 - R pow 2 - &2 * b +\n                   (&4 * a * b - &8 * c - a pow 3) / (&4 * R)) /\\\n   (E pow 2 = if R = &0 then &3 * a pow 2 / &4 - &2 * b - &2 * s\n              else &3 * a pow 2 / &4 - R pow 2 - &2 * b -\n             (&4 * a * b - &8 * c - a pow 3) / (&4 * R)) /\\\n   (x = --a / &4 + R / &2 + D / &2 \\/\n    x = --a / &4 + R / &2 - D / &2 \\/\n    x = --a / &4 - R / &2 + E / &2 \\/\n    x = --a / &4 - R / &2 - E / &2)\n   ==> x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0"), t16))
 }
 
@@ -200,7 +200,7 @@ fn step_13() -> Unit raise {
       s18(x19)
     }
   })
-  let t22 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.empty())), t20), t21)
+  let t22 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))), t20), t21)
   quartic_cases_v2_c.set(@tactics.prove(@parser.parse_term("y pow 3 - b * y pow 2 + (a * c - &4 * d) * y -\n   a pow 2 * d + &4 * b * d - c pow 2 = &0 /\\\n   R pow 2 = a pow 2 / &4 - b + y /\\\n   s pow 2 = y pow 2 - &4 * d /\\\n   (D pow 2 = if R = &0 then &3 * a pow 2 / &4 - &2 * b + &2 * s\n              else &3 * a pow 2 / &4 - R pow 2 - &2 * b +\n                   (&4 * a * b - &8 * c - a pow 3) / (&4 * R)) /\\\n   (E pow 2 = if R = &0 then &3 * a pow 2 / &4 - &2 * b - &2 * s\n              else &3 * a pow 2 / &4 - R pow 2 - &2 * b -\n             (&4 * a * b - &8 * c - a pow 3) / (&4 * R))\n   ==> (x pow 4 + a * x pow 3 + b * x pow 2 + c * x + d = &0 <=>\n        x = --a / &4 + R / &2 + D / &2 \\/\n        x = --a / &4 + R / &2 - D / &2 \\/\n        x = --a / &4 - R / &2 + E / &2 \\/\n        x = --a / &4 - R / &2 - E / &2)"), t22))
 }
 

@@ -35,7 +35,7 @@ pub fn read_dimacs(filename : String) -> @kernel.Term raise {
   }
   // the numbers, clause by clause (each clause's numbers last first)
   let mut term : @kernel.Term? = None
-  let mut clause : @list.List[Int64] = @list.empty()
+  let mut clause : @list.List[Int64] = @list.List([])
   fn add(ns : @list.List[Int64]) -> Unit raise {
     let c = buildclause(ns)
     term = match term {
@@ -68,7 +68,7 @@ pub fn read_dimacs(filename : String) -> @kernel.Term raise {
     }
     if v == 0L {
       add(clause)
-      clause = @list.empty()
+      clause = @list.List([])
     } else {
       clause = clause.prepend(v)
     }

@@ -63,13 +63,13 @@ test "canon matches canon.ml" {
   })
   log.attempt("SELECT_ELIM_TAC", () => {
     let w = tm("(P:A->bool) (@x. P x) ==> Q")
-    let (_, gls, _) = @canon.select_elim_tac((@list.empty(), w))
+    let (_, gls, _) = @canon.select_elim_tac((@list.List([]), w))
     "[" + gls.map(g => stm(g.1)).to_array().join("; ") + "]"
   })
   log.attempt("ASM_FOL_TAC", () => {
     let w = tm("(!x:A. P x) ==> P a")
     let tac = @tactics.then_tac(@tactics.disch_tac, g => @canon.asm_fol_tac(g))
-    let (_, gls, _) = tac((@list.empty(), w))
+    let (_, gls, _) = tac((@list.List([]), w))
     "[" +
     gls
     .map(g => {

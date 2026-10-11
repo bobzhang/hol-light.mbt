@@ -7,9 +7,9 @@ pub fn[TA] matching_enter(x1 : @kernel.Term, x2 : TA, x3 : @nets.Net[((@kernel.T
   let tm = x1
   let y = x2
   let net = x3
-  @nets.enter_fn(@list.empty(), tm, (fn(x4 : @kernel.Term) -> Bool raise {
+  @nets.enter_fn(@list.List([]), tm, (fn(x4 : @kernel.Term) -> Bool raise {
     let tm_p = x4
-    @lib.can((x5 : @kernel.Term) => @drule.term_match(@list.empty(), tm, x5), tm_p)
+    @lib.can((x5 : @kernel.Term) => @drule.term_match(@list.List([]), tm, x5), tm_p)
   }, y), net)
 }
 
@@ -18,7 +18,7 @@ pub fn[TA] matching_enter(x1 : @kernel.Term, x2 : TA, x3 : @nets.Net[((@kernel.T
 pub fn[TA, TB] unconditional_enter(x6 : (@kernel.Term, TB), x7 : @nets.Net[((TA) -> Bool raise, TB)]) -> @nets.Net[((TA) -> Bool raise, TB)] raise {
   let (tm, y) = x6
   let net = x7
-  @nets.enter_fn(@list.empty(), tm, (fn(x8 : TA) -> Bool raise {
+  @nets.enter_fn(@list.List([]), tm, (fn(x8 : TA) -> Bool raise {
     let t = x8
     true
   }, y), net)
@@ -29,7 +29,7 @@ pub fn[TA, TB] unconditional_enter(x6 : (@kernel.Term, TB), x7 : @nets.Net[((TA)
 pub fn[TA] conditional_enter(x9 : (@kernel.Term, TA), x10 : @nets.Net[TA]) -> @nets.Net[TA] raise {
   let (tm, condy) = x9
   let net = x10
-  @nets.enter_fn(@list.empty(), tm, condy, net)
+  @nets.enter_fn(@list.List([]), tm, condy, net)
 }
 
 ///|
@@ -125,7 +125,7 @@ fn step_1() -> Unit raise {
         }
       }
     }
-    (x68 : @list.List[@kernel.Thm]) => splitthen(@list.empty(), x68)
+    (x68 : @list.List[@kernel.Thm]) => splitthen(@list.List([]), x68)
   })
 }
 
@@ -270,7 +270,7 @@ fn step_2() -> Unit raise {
         }
       }
     }
-    (x137 : @list.List[@kernel.Thm]) => splitthen(@list.empty(), x137)
+    (x137 : @list.List[@kernel.Thm]) => splitthen(@list.List([]), x137)
   })
 }
 
@@ -348,7 +348,7 @@ fn[TL, TM] action_taut_l_1(x95 : @kernel.Term) -> ((@kernel.Term, (@kernel.Thm) 
 ///|
 fn[TN, TO] action_fol_l(x101 : @kernel.Term) -> ((@kernel.Term, (@kernel.Thm) -> (((@list.List[@kernel.Thm]) -> TN raise) -> ((TO) -> ((@list.List[@kernel.Thm]) -> TN raise) raise) raise) raise)) raise {
   let tm_1 = x101
-  let pfun_1 : (@kernel.Term) -> @kernel.Thm raise = @drule.part_match(@equal.lhs, @tactics.prove(tm_1, @meson.meson_tac(@list.empty())))
+  let pfun_1 : (@kernel.Term) -> @kernel.Thm raise = @drule.part_match(@equal.lhs, @tactics.prove(tm_1, @meson.meson_tac(@list.List([]))))
   let prule_1 : (@kernel.Thm) -> @kernel.Thm raise = fn(x102 : @kernel.Thm) -> @kernel.Thm raise {
     let th_7 = x102
     @kernel.eq_mp(pfun_1(@kernel.concl(th_7)), th_7)
@@ -371,7 +371,7 @@ fn[TN, TO] action_fol_l(x101 : @kernel.Term) -> ((@kernel.Term, (@kernel.Thm) ->
 ///|
 /// CORRELATE_RULE
 fn step_3() -> Unit raise {
-  let t138 = @meson.meson_tac(@list.empty())
+  let t138 = @meson.meson_tac(@list.List([]))
   let t139 = @tactics.prove(@parser.parse_term("(?x. P x) <=> ~(!x. ~(P x))"), t138)
   let t140 = @equal.gsym(@theorems.disj_assoc())
   let t141 = @equal.gsym(@theorems.conj_assoc())
@@ -583,7 +583,7 @@ pub fn successors(x192 : @kernel.Term) -> @list.List[@kernel.Term] raise {
     let (f, x) = @kernel.dest_comb(tm)
     @list.List([f, x])
   } catch {
-    Failure(_) => @list.empty()
+    Failure(_) => @list.List([])
     e => raise e
   }
 }
@@ -598,7 +598,7 @@ pub fn predecessor_function(x193 : @list.List[@kernel.Term]) -> @lib.Func[@kerne
     ((x199 : @lib.Func[@kernel.Term, @list.List[@kernel.Term]]) => @lib.itlist(fn(x196 : @kernel.Term, x197 : @lib.Func[@kernel.Term, @list.List[@kernel.Term]]) -> @lib.Func[@kernel.Term, @list.List[@kernel.Term]] raise {
       let y = x196
       let f = x197
-      @lib.update(y, @lib.insert(x, @lib.tryapplyd(f, y, @list.empty())), f)
+      @lib.update(y, @lib.insert(x, @lib.tryapplyd(f, y, @list.List([]))), f)
     }, t198, x199))(x195)
   }, tms, @lib.undefined())
 }
@@ -750,8 +750,8 @@ pub fn emerge(x220 : Lazyeq, x221 : (Termequivalence, @lib.Func[@kernel.Term, @l
   if (s_p == t_p) {
     (eqv, pfn)
   } else {
-    let sp = @lib.tryapplyd(pfn, s_p, @list.empty())
-    let tp = @lib.tryapplyd(pfn, t_p, @list.empty())
+    let sp = @lib.tryapplyd(pfn, s_p, @list.List([]))
+    let tp = @lib.tryapplyd(pfn, t_p, @list.List([]))
     let eqv_p = equate(th, eqv)
     let stth = canonize(eqv_p, s_p)
     let sttm = concl_p(stth).1
@@ -785,7 +785,7 @@ pub fn supersubterms(x226 : @list.List[@kernel.Term], x227 : @kernel.Term) -> @l
       (t != tm)
     }, tms))
   } else {
-    (@list.empty(), tms)
+    (@list.List([]), tms)
   }
   if @list.List::is_empty(tms_p) {
     ltms
@@ -795,7 +795,7 @@ pub fn supersubterms(x226 : @list.List[@kernel.Term], x227 : @kernel.Term) -> @l
       let t229 = supersubterms(tms_p, r)
       @lib.union(supersubterms(tms_p, l), t229)
     } catch {
-      Failure(_) => @list.empty()
+      Failure(_) => @list.List([])
       e => raise e
     }
     if @list.List::is_empty(stms) {
@@ -816,7 +816,7 @@ pub fn term_universe(x230 : @list.List[@kernel.Term]) -> @list.List[@kernel.Term
         x231.concat(x232)
       }
     })(((x233 : @kernel.Term) => supersubterms(tms, x233))(x234))(x235)
-  }, tms, @list.empty()))
+  }, tms, @list.List([])))
 }
 
 ///|
@@ -840,7 +840,7 @@ pub fn ccprove(x238 : @list.List[Lazyeq], x239 : @kernel.Term) -> Lazyeq raise {
     let (x, y) = x241
     let l = x242
     (l.prepend(y)).prepend(x)
-  }, tps, @list.empty())
+  }, tps, @list.List([]))
   let tms = term_universe(@lib.setify(otms))
   let eqv = congruence_closure(tms, eqs)
   prove_equal(eqv, @kernel.dest_eq(eq))
@@ -854,7 +854,7 @@ pub fn congruence_closure_v1(x243 : @kernel.Term) -> @kernel.Thm raise {
     let (eqs, eq) = @basics.dest_imp(tm)
     @bool.disch(eqs, lazy_eval(ccprove(@lib.map(lazy_eq, @bool.conjuncts_rule(@kernel.assume_rule(eqs))), eq)))
   } else {
-    lazy_eval(ccprove(@list.empty(), tm))
+    lazy_eval(ccprove(@list.List([]), tm))
   }
 }
 
@@ -901,7 +901,7 @@ pub fn congruence_closure_contr(x244 : @list.List[@kernel.Thm]) -> @kernel.Thm r
     let (x, y) = x261
     let l = x262
     (l.prepend(y)).prepend(x)
-  }, tps, @list.empty())
+  }, tps, @list.List([]))
   let tms = term_universe(@lib.setify(otms))
   let eqv = congruence_closure(tms, @lib.map(lazy_eq, peqs))
   let prover : (@kernel.Thm) -> @kernel.Thm raise = fn(x263 : @kernel.Thm) -> @kernel.Thm raise {
@@ -1036,7 +1036,7 @@ pub fn test_eq(x288 : Termequivalence, x289 : (@kernel.Term, @kernel.Term), x290
       test_eq(eqv, (@kernel.vsubst(@list.List([(gv, x1_1)]), bod1), t291), env)
     } else {
       if (@kernel.is_var(tm1) && @lib.can((x292 : @list.List[(@kernel.Term, @kernel.Term)]) => @lib.rev_assoc(tm1, x292), env)) {
-        test_eq(eqv, (@lib.rev_assoc(tm1, env), tm2), @list.empty())
+        test_eq(eqv, (@lib.rev_assoc(tm1, env), tm2), @list.List([]))
       } else {
         @lib.can((x293 : (@kernel.Term, @kernel.Term)) => prove_equal(eqv, x293), (tm1, tm2))
       }
@@ -1166,7 +1166,7 @@ pub fn separate_insts(x310 : @list.List[(@kernel.Term, @kernel.Term)]) -> ((@lis
     let t313 = @kernel.type_of(c)
     let t314 = @kernel.type_of(v)
     ((x315 : @list.List[(@kernel.HolType, @kernel.HolType)]) => @basics.type_match(t314, t313, x315))(x312)
-  }, env, @list.empty())
+  }, env, @list.List([]))
   let ifn : ((@kernel.Term, @kernel.Term)) -> (@kernel.Term, @kernel.Term) raise = fn(x316 : (@kernel.Term, @kernel.Term)) -> (@kernel.Term, @kernel.Term) raise {
     let (c_1, v_1) = x316
     let t317 = @kernel.inst(tyin, v_1)
@@ -1311,8 +1311,8 @@ pub fn mizar_unifier(x339 : Termequivalence, x340 : @list.List[@kernel.Thm], x34
         @lib.union(x345, x346)
       }
     })(((x347 : @kernel.Term) => term_equivs(eqv, x347))(x348))(x349)
-  }, ctms, @list.empty())
-  let env = matchleaves(vars)(vtm)(allctms)(@list.empty())
+  }, ctms, @list.List([]))
+  let env = matchleaves(vars)(vtm)(allctms)(@list.List([]))
   let (tmin, tyin) = separate_insts(env)
   refute_leaves(eqv, ths, @bool.pinst(tyin, tmin, gth))
 }
@@ -1322,7 +1322,7 @@ pub fn mizar_unifier(x339 : Termequivalence, x340 : @list.List[@kernel.Thm], x34
 pub fn disequalities(x350 : @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise {
   let ths = x350
   match ths {
-    Empty => @list.empty()
+    Empty => @list.List([])
     More(th, tail=oths) => {
       let (t1, t2) = @kernel.dest_eq(@kernel.rand(@kernel.concl(th)))
       let (f1, args1) = @basics.strip_comb(t1)
@@ -1386,7 +1386,7 @@ pub fn atominequalities(x361 : @kernel.Thm, x362 : @kernel.Thm) -> @list.List[@k
     let t363 = Int::to_int64(@lib.length(args2))
     (Int::to_int64(@lib.length(args1)) != t363)
   }) {
-    @list.empty()
+    @list.List([])
   } else {
     let zargs = @lib.zip(args1, args2)
     let diffs = @lib.filter(fn(x364 : (@kernel.Term, @kernel.Term)) -> Bool raise {
@@ -1394,7 +1394,7 @@ pub fn atominequalities(x361 : @kernel.Thm, x362 : @kernel.Thm) -> @list.List[@k
       (a1 != a2)
     }, zargs)
     if (Int::to_int64(@lib.length(diffs)) != 1L) {
-      @list.empty()
+      @list.List([])
     } else {
       let eths = @lib.map(fn(x365 : (@kernel.Term, @kernel.Term)) -> @kernel.Thm raise {
         let (a1_1, a2_1) = x365
@@ -1468,7 +1468,7 @@ pub fn basic_mizarby(x373 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
       let (x, y) = x390
       let l = x391
       (l.prepend(y)).prepend(x)
-    }, tps, @list.empty())
+    }, tps, @list.List([]))
     let tms = term_universe(@lib.setify(otms))
     let eqv = congruence_closure(tms, @lib.map(lazy_eq, peqs))
     let eqprover : (@kernel.Thm) -> @kernel.Thm raise = fn(x392 : @kernel.Thm) -> @kernel.Thm raise {
@@ -1556,7 +1556,7 @@ pub fn mizar_by(x : @list.List[@kernel.Thm]) -> ((@kernel.Term) -> @kernel.Thm r
 /// `MIZAR_RULE`
 pub fn mizar_rule(x405 : @kernel.Term) -> @kernel.Thm raise {
   let tm = x405
-  mizar_by(@list.empty())(tm)
+  mizar_by(@list.List([]))(tm)
 }
 
 ///|
@@ -1694,7 +1694,7 @@ pub fn hol_rule(x423 : @kernel.Term) -> @kernel.Thm raise {
     let (l, r) = @basics.dest_imp(tm)
     @bool.disch(l, hol_by(@bool.conjuncts_rule(@kernel.assume_rule(l)))(r))
   } catch {
-    Failure(_) => hol_by(@list.empty())(tm)
+    Failure(_) => hol_by(@list.List([]))(tm)
     e => raise e
   }
 }
@@ -2066,7 +2066,7 @@ fn step_43() -> Unit raise {
 /// Examples/holby.ml:841
 fn step_44() -> Unit raise {
   let t424 = @parser.parse_term("?x. P x ==> !y. P y")
-  ignore(@lib.time(hol_by(@list.empty()), t424))
+  ignore(@lib.time(hol_by(@list.List([])), t424))
 }
 
 ///|
@@ -2137,7 +2137,7 @@ fn step_54() -> Unit raise {
 /// Examples/holby.ml:876
 fn step_55() -> Unit raise {
   let t426 = @parser.parse_term("?x. !y. P x ==> P y")
-  ignore(hol_by(@list.empty())(t426))
+  ignore(hol_by(@list.List([]))(t426))
 }
 
 ///|

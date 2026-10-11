@@ -424,7 +424,7 @@ pub fn nproduct_eq_numseg() -> @kernel.Thm {
 ///|
 /// NPRODUCT_EQ_0
 fn step_15() -> Unit raise {
-  let t27 = @meson.meson_tac(@list.empty())
+  let t27 = @meson.meson_tac(@list.List([]))
   let t26 = @simp.simp_tac(
     @list.List([
       @iterate.nproduct_clauses(),
@@ -498,7 +498,7 @@ pub fn nproduct_eq_0_numseg() -> @kernel.Thm {
 ///|
 /// NPRODUCT_RESTRICT
 fn step_17() -> Unit raise {
-  let t31 = @simp.asm_simp_tac(@list.empty())
+  let t31 = @simp.asm_simp_tac(@list.List([]))
   let t30 = @tactics.match_mp_tac(nproduct_eq())
   let t32 = @tactics.then_tac(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t30),
@@ -1011,7 +1011,7 @@ pub fn nproduct_closed() -> @kernel.Thm {
 ///|
 /// NPRODUCT_RELATED
 fn step_31() -> Unit raise {
-  let t71 = @meson.asm_meson_tac(@list.empty())
+  let t71 = @meson.asm_meson_tac(@list.List([]))
   let t70 = @simp.asm_rewrite_tac(
     @list.List([@equal.gsym(@iterate.nproduct()), @iterate.neutral_mul()]),
   )
@@ -1171,7 +1171,7 @@ pub fn nproduct_closed_nonempty() -> @kernel.Thm {
 ///|
 /// NPRODUCT_RELATED_NONEMPTY
 fn step_33() -> Unit raise {
-  let t87 = @meson.asm_meson_tac(@list.empty())
+  let t87 = @meson.asm_meson_tac(@list.List([]))
   let t86 = @simp.asm_rewrite_tac(
     @list.List([@equal.gsym(@iterate.nproduct()), @iterate.neutral_mul()]),
   )
@@ -1229,7 +1229,7 @@ pub fn nproduct_related_nonempty() -> @kernel.Thm {
 fn step_34() -> Unit raise {
   let t95 = @tactics.conv_tac(@int.number_rule)
   let t94 = @tactics.disch_then(@tactics.match_mp_tac)
-  let t93 = @simp.asm_rewrite_tac(@list.empty())
+  let t93 = @simp.asm_rewrite_tac(@list.List([]))
   let t89 = @parser.parse_term("s:A->bool")
   let t90 = @parser.parse_term("g:A->num")
   let t91 = @parser.parse_term("f:A->num")
@@ -1647,11 +1647,11 @@ fn step_45() -> Unit raise {
     ),
     @int.asm_arith_tac,
   )
-  let t177 = @meson.asm_meson_tac(@list.empty())
+  let t177 = @meson.asm_meson_tac(@list.List([]))
   let t176 = @tactics.try_tac(@int.asm_arith_tac)
   let t175 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(@arith.not_lt())]))
   let t174 = @class.asm_cases_tac(@parser.parse_term("(n:num) < i"))
-  let t173 = @simp.asm_rewrite_tac(@list.empty())
+  let t173 = @simp.asm_rewrite_tac(@list.List([]))
   let t169 = @parser.parse_term("i:num")
   let t172 = @tactics.repeat_tac(
     @tactics.first_x_assum(fn(
@@ -2003,7 +2003,7 @@ fn step_45() -> Unit raise {
   )
   let t136 = @tactics.match_mp_tac(
     @meson.meson(
-      @list.empty(),
+      @list.List([]),
       @parser.parse_term("!t. t = s /\\ t HAS_SIZE n ==> s HAS_SIZE n"),
     ),
   )
@@ -2767,7 +2767,7 @@ pub fn iproduct_eq_numseg() -> @kernel.Thm {
 ///|
 /// IPRODUCT_EQ_0
 fn step_63() -> Unit raise {
-  let t228 = @meson.meson_tac(@list.empty())
+  let t228 = @meson.meson_tac(@list.List([]))
   let t227 = @simp.simp_tac(
     @list.List([
       @iterate.iproduct_clauses(),
@@ -2842,7 +2842,7 @@ pub fn iproduct_eq_0_numseg() -> @kernel.Thm {
 ///|
 /// IPRODUCT_RESTRICT
 fn step_65() -> Unit raise {
-  let t232 = @simp.asm_simp_tac(@list.empty())
+  let t232 = @simp.asm_simp_tac(@list.List([]))
   let t231 = @tactics.match_mp_tac(iproduct_eq())
   let t233 = @tactics.then_tac(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t231),
@@ -3552,7 +3552,7 @@ pub fn iproduct_closed() -> @kernel.Thm {
 ///|
 /// IPRODUCT_RELATED
 fn step_84() -> Unit raise {
-  let t289 = @meson.asm_meson_tac(@list.empty())
+  let t289 = @meson.asm_meson_tac(@list.List([]))
   let t288 = @simp.asm_rewrite_tac(
     @list.List([@equal.gsym(@iterate.iproduct()), @iterate.neutral_int_mul()]),
   )
@@ -3716,7 +3716,7 @@ pub fn iproduct_closed_nonempty() -> @kernel.Thm {
 ///|
 /// IPRODUCT_RELATED_NONEMPTY
 fn step_86() -> Unit raise {
-  let t305 = @meson.asm_meson_tac(@list.empty())
+  let t305 = @meson.asm_meson_tac(@list.List([]))
   let t304 = @simp.asm_rewrite_tac(
     @list.List([@equal.gsym(@iterate.iproduct()), @iterate.neutral_int_mul()]),
   )
@@ -4628,7 +4628,7 @@ pub fn product_eq_numseg() -> @kernel.Thm {
 ///|
 /// PRODUCT_EQ_0
 fn step_114() -> Unit raise {
-  let t364 = @meson.meson_tac(@list.empty())
+  let t364 = @meson.meson_tac(@list.List([]))
   let t363 = @simp.simp_tac(
     @list.List([
       @iterate.product_clauses(),
@@ -4703,7 +4703,7 @@ pub fn product_eq_0_numseg() -> @kernel.Thm {
 ///|
 /// PRODUCT_RESTRICT
 fn step_116() -> Unit raise {
-  let t368 = @simp.asm_simp_tac(@list.empty())
+  let t368 = @simp.asm_simp_tac(@list.List([]))
   let t367 = @tactics.match_mp_tac(product_eq())
   let t369 = @tactics.then_tac(
     @tactics.then_tac(@tactics.repeat_tac(@tactics.strip_tac), t367),
@@ -5495,7 +5495,7 @@ pub fn product_closed() -> @kernel.Thm {
 ///|
 /// PRODUCT_RELATED
 fn step_138() -> Unit raise {
-  let t429 = @meson.asm_meson_tac(@list.empty())
+  let t429 = @meson.asm_meson_tac(@list.List([]))
   let t428 = @simp.asm_rewrite_tac(
     @list.List([@equal.gsym(@iterate.product()), @iterate.neutral_real_mul()]),
   )
@@ -5659,7 +5659,7 @@ pub fn product_closed_nonempty() -> @kernel.Thm {
 ///|
 /// PRODUCT_RELATED_NONEMPTY
 fn step_140() -> Unit raise {
-  let t445 = @meson.asm_meson_tac(@list.empty())
+  let t445 = @meson.asm_meson_tac(@list.List([]))
   let t444 = @simp.asm_rewrite_tac(
     @list.List([@equal.gsym(@iterate.product()), @iterate.neutral_real_mul()]),
   )

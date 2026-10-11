@@ -603,7 +603,7 @@ fn step_8() -> Unit raise {
       }
     })(((x124 : @kernel.Thm) => @bool.spec(t123, x124))(x125))
   })
-  let t119 = @simp.asm_simp_tac(@list.empty())
+  let t119 = @simp.asm_simp_tac(@list.List([]))
   let t116 = @parser.parse_term("n:num")
   let t117 = @parser.parse_term("1")
   let t118 = @tactics.mp_tac(
@@ -766,7 +766,7 @@ fn step_8() -> Unit raise {
   )
   let t86 = @simp.rewrite_tac(@list.List([@realarith.real_pos()]))
   let t85 = @tactics.match_mp_tac(@real.real_le_div())
-  let t84 = @simp.asm_simp_tac(@list.empty())
+  let t84 = @simp.asm_simp_tac(@list.List([]))
   let t88 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(

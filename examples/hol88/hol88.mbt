@@ -36,7 +36,7 @@ pub fn dest_neg_imp(x4 : @kernel.Term) -> ((@kernel.Term, @kernel.Term)) raise {
   } catch {
     Failure(_) => {
       try {
-        let t5 = @kernel.mk_const("F", @list.empty())
+        let t5 = @kernel.mk_const("F", @list.List([]))
         (@basics.dest_neg(tm), t5)
       } catch {
         Failure(_) => raise Failure("dest_neg_imp")
@@ -985,7 +985,7 @@ pub fn find_match(x71 : @kernel.Term) -> ((@kernel.Term) -> (@list.List[(@kernel
   fn find_mt(x73 : @kernel.Term) -> @drule.Instantiation raise {
     let t = x73
     try {
-      @drule.term_match(@list.empty(), u, t)
+      @drule.term_match(@list.List([]), u, t)
     } catch {
       Failure(_) => {
         try {
@@ -2294,7 +2294,7 @@ fn step_59() -> Unit raise {
           (if fl {
             @list.List([@bool.gen_all(th_1)])
           } else {
-            @list.empty()
+            @list.List([])
           }).concat(t381)
         } else {
           if @basics.is_forall(w) {
@@ -2309,13 +2309,13 @@ fn step_59() -> Unit raise {
               let nv = x386
               let v_p = vfn(nv)(v_1)
               nv.prepend(v_p)
-            }, vs, @list.empty())
+            }, vs, @list.List([]))
             canon(fl, @bool.specl(nvs, th_1))
           } else {
             if fl {
               @list.List([@bool.gen_all(th_1)])
             } else {
-              @list.empty()
+              @list.List([])
             }
           }
         }
@@ -2335,7 +2335,7 @@ fn step_59() -> Unit raise {
         (fn(x392 : Bool) -> Bool raise {
           !x392
         })((fn(x393 : @list.List[@kernel.Thm]) -> Bool raise {
-          (@list.empty() == x393)
+          (@list.List([]) == x393)
         })(x394))
       }, imps)
     } catch {
@@ -2383,7 +2383,7 @@ fn step_60() -> Unit raise {
       (fn(x397 : (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])) -> (@list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]) raise {
         let (a, b, c) = x397
         (b, c)
-      })(((x399 : @kernel.Term) => @drule.term_match(@list.empty(), t398, x399))(x400))
+      })(((x399 : @kernel.Term) => @drule.term_match(@list.List([]), t398, x399))(x400))
     }
     fn(x401 : @kernel.Thm) -> @kernel.Thm raise {
       let th = x401
@@ -2408,7 +2408,7 @@ fn step_60() -> Unit raise {
           (fn(x412 : @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise {
             t411.concat(x412)
           })(x410)
-        }, ths, @list.empty())
+        }, ths, @list.List([]))
         let res = check_l("IMP_RES_THEN: no resolvents ", l_1)
         let tacs = check_l("IMP_RES_THEN: no tactics", @lib.mapfilter(ttac, res))
         @tactics.every(tacs)
@@ -2429,7 +2429,7 @@ fn step_60() -> Unit raise {
           }
         })(x418)
         s420(x419)
-      }, @lib.mapfilter(res_canon, asm_), @list.empty())
+      }, @lib.mapfilter(res_canon, asm_), @list.List([]))
       let imps = check_l("RES_THEN: no implication", ths_1)
       let l_2 = @lib.itlist(fn(x421 : @kernel.Thm, x422 : @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise {
         let th_2 = x421
@@ -2437,7 +2437,7 @@ fn step_60() -> Unit raise {
         (fn(x424 : @list.List[@kernel.Thm]) -> @list.List[@kernel.Thm] raise {
           t423.concat(x424)
         })(x422)
-      }, imps, @list.empty())
+      }, imps, @list.List([]))
       let res_1 = check_l("RES_THEN: no resolvents ", l_2)
       let tacs_1 = check_l("RES_THEN: no tactics", @lib.mapfilter(ttac_1, res_1))
       @tactics.every(tacs_1)((asl_1, g))

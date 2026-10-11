@@ -146,10 +146,10 @@ pub fn tex() -> Ref[@list.List[(@kernel.Term, @kernel.Thm)]] {
 ///|
 /// tvars, tdiff, tmat, tex
 fn step_2() -> Unit raise {
-  let t4 = Ref::{ val: @list.empty() }
+  let t4 = Ref::{ val: @list.List([]) }
   let t5 = Ref::{ val: @bool.truth() }
   let t6 = Ref::{ val: @bool.truth() }
-  let (tvars, tdiff, tmat, tex) = (Ref::{ val: @list.empty() }, t6, t5, t4)
+  let (tvars, tdiff, tmat, tex) = (Ref::{ val: @list.List([]) }, t6, t5, t4)
   tvars_c.set(tvars)
   tdiff_c.set(tdiff)
   tmat_c.set(tmat)

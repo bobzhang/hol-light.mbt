@@ -177,7 +177,7 @@ pub fn gform_inj() -> @kernel.Thm {
 ///|
 /// GTERM_CASES
 fn step_11() -> Unit raise {
-  let t34 = @meson.meson_tac(@list.empty())
+  let t34 = @meson.meson_tac(@list.List([]))
   let t33 = @simp.asm_rewrite_tac(@list.List([gterm(), @definability.npair_inj(), @calc_num.arith_eq(), number_inj(), @fol.term_distinct(), @fol.term_inj()]))
   let t35 = @tactics.then_tac(@tactics.then_tac(@tactics.struct_cases_tac(@bool.spec(@parser.parse_term("u:term"), @fol.term_cases())), t33), t34)
   gterm_cases_c.set(@tactics.prove(@parser.parse_term("((gterm u = NPAIR 0 (number x)) <=> (u = V x)) /\\\n   ((gterm u = NPAIR 1 0) <=> (u = Z)) /\\\n   ((gterm u = NPAIR 2 n) <=> (?t. (u = Suc t) /\\ (gterm t = n))) /\\\n   ((gterm u = NPAIR 3 (NPAIR m n)) <=>\n          (?s t. (u = s ++ t) /\\ (gterm s = m) /\\ (gterm t = n))) /\\\n   ((gterm u = NPAIR 4 (NPAIR m n)) <=>\n          (?s t. (u = s ** t) /\\ (gterm s = m) /\\ (gterm t = n)))"), t35))
@@ -195,7 +195,7 @@ pub fn gterm_cases() -> @kernel.Thm {
 ///|
 /// GFORM_CASES
 fn step_12() -> Unit raise {
-  let t37 = @meson.meson_tac(@list.empty())
+  let t37 = @meson.meson_tac(@list.List([]))
   let t36 = @simp.asm_rewrite_tac(@list.List([gform(), @definability.npair_inj(), @calc_num.arith_eq(), number_inj(), @fol.form_distinct(), @fol.form_inj()]))
   let t38 = @tactics.then_tac(@tactics.then_tac(@tactics.struct_cases_tac(@bool.spec(@parser.parse_term("r:form"), @fol.form_cases())), t36), t37)
   gform_cases_c.set(@tactics.prove(@parser.parse_term("((gform r = NPAIR 0 0) <=> (r = False)) /\\\n   ((gform r = NPAIR 0 1) <=> (r = True)) /\\\n   ((gform r = NPAIR 1 (NPAIR m n)) <=>\n        (?s t. (r = s === t) /\\ (gterm s = m) /\\ (gterm t = n))) /\\\n   ((gform r = NPAIR 2 (NPAIR m n)) <=>\n        (?s t. (r = s << t) /\\ (gterm s = m) /\\ (gterm t = n))) /\\\n   ((gform r = NPAIR 3 (NPAIR m n)) <=>\n        (?s t. (r = s <<= t) /\\ (gterm s = m) /\\ (gterm t = n))) /\\\n   ((gform r = NPAIR 4 n) = (?p. (r = Not p) /\\ (gform p = n))) /\\\n   ((gform r = NPAIR 5 (NPAIR m n)) <=>\n        (?p q. (r = p && q) /\\ (gform p = m) /\\ (gform q = n))) /\\\n   ((gform r = NPAIR 6 (NPAIR m n)) <=>\n        (?p q. (r = p || q) /\\ (gform p = m) /\\ (gform q = n))) /\\\n   ((gform r = NPAIR 7 (NPAIR m n)) <=>\n        (?p q. (r = p --> q) /\\ (gform p = m) /\\ (gform q = n))) /\\\n   ((gform r = NPAIR 8 (NPAIR m n)) <=>\n        (?p q. (r = p <-> q) /\\ (gform p = m) /\\ (gform q = n))) /\\\n   ((gform r = NPAIR 9 (NPAIR (number x) n)) <=>\n        (?p. (r = !!x p) /\\ (gform p = n))) /\\\n   ((gform r = NPAIR 10 (NPAIR (number x) n)) <=>\n        (?p. (r = ??x p) /\\ (gform p = n)))"), t38))
@@ -446,7 +446,7 @@ pub fn holds_qdiag() -> @kernel.Thm {
 ///|
 /// ARITH_QDIAG
 fn step_27() -> Unit raise {
-  let t65 = @meson.meson_tac(@list.empty())
+  let t65 = @meson.meson_tac(@list.List([]))
   let t64 = @simp.asm_rewrite_tac(@list.List([@trivia.o_def(), @fol.valmod(), @calc_num.arith_eq(), @fol.termval()]))
   let t63 = @simp.asm_rewrite_tac(@list.List([@fol.holds_formsubst(), @fol.holds(), @fol.termval(), @fol.termval_numeral(), gnumeral(), arith_gnumeral_v1(), @definability.arith_pair_v1()]))
   let t62 = @simp.rewrite_tac(@list.List([qdiag(), @fol.qsubst(), arith_qdiag(), gform(), gterm()]))
@@ -502,11 +502,11 @@ pub fn diagonalize() -> @kernel.Thm {
 ///|
 /// FV_DIAGONALIZE
 fn step_30() -> Unit raise {
-  let t83 = @meson.asm_meson_tac(@list.empty())
+  let t83 = @meson.asm_meson_tac(@list.List([]))
   let t82 = @simp.rewrite_tac(@list.List([@fol.valmod(), @class.cond_rand(), @fol.fvt(), @sets.in_sing(), @class.cond_expand()]))
-  let t81 = @simp.asm_rewrite_tac(@list.empty())
+  let t81 = @simp.asm_rewrite_tac(@list.List([]))
   let t80 = @class.asm_cases_tac(@parser.parse_term("u:num = y"))
-  let t79 = @simp.asm_rewrite_tac(@list.empty())
+  let t79 = @simp.asm_rewrite_tac(@list.List([]))
   let t78 = @class.asm_cases_tac(@parser.parse_term("u:num = x"))
   let t77 = @list.List([@meson.asm_meson_tac(@list.List([@fol.variant_finite(), @sets.finite_insert(), @fol.fv_finite(), @sets.in_insert()])), @tactics.all_tac])
   let t76 = @tactics.subgoal_then(@parser.parse_term("~(y = x) /\\ !z. z IN FV(q) ==> ~(y = z)"), @tactics.strip_assume_tac)
@@ -530,7 +530,7 @@ pub fn fv_diagonalize() -> @kernel.Thm {
 /// ARITH_DIAGONALIZE
 fn step_31() -> Unit raise {
   let t102 = @meson.asm_meson_tac(@list.List([@fol.variant_finite(), @sets.finite_insert(), @fol.fv_finite(), @sets.in_insert()]))
-  let t101 = @simp.asm_rewrite_tac(@list.empty())
+  let t101 = @simp.asm_rewrite_tac(@list.List([]))
   let t100 = @simp.rewrite_tac(@list.List([@fol.termval()]))
   let t99 = @simp.rewrite_tac(@list.List([@trivia.o_thm(), @fol.termval(), @fol.valmod()]))
   let t98 = @tactics.x_gen_tac(@parser.parse_term("u:num"))
@@ -580,7 +580,7 @@ pub fn fixpoint() -> @kernel.Thm {
 ///|
 /// FV_FIXPOINT
 fn step_33() -> Unit raise {
-  let t104 = @sets.set_tac(@list.empty())
+  let t104 = @sets.set_tac(@list.List([]))
   let t105 = @tactics.then_tac(@simp.rewrite_tac(@list.List([fixpoint(), fv_qdiag(), qdiag_fv(), fv_diagonalize(), @fol.fvt_numeral()])), t104)
   fv_fixpoint_c.set(@tactics.prove(@parser.parse_term("!x p. FV(fixpoint x p) = FV(p) DELETE x"), t105))
 }
@@ -690,10 +690,10 @@ pub fn definable() -> @kernel.Thm {
 ///|
 /// TARSKI_THEOREM
 fn step_39() -> Unit raise {
-  let t134 = @meson.meson_tac(@list.empty())
+  let t134 = @meson.meson_tac(@list.List([]))
   let t133 = @simp.rewrite_tac(@list.List([@fol.arithtrue(), gform_inj()]))
   let t132 = @simp.rewrite_tac(@list.List([@fol.valmod_basic(), @fol.termval_numeral()]))
-  let t131 = @simp.once_asm_rewrite_tac(@list.empty())
+  let t131 = @simp.once_asm_rewrite_tac(@list.List([]))
   let t130 = @simp.simp_tac(@list.List([@fol.arithtrue(), @fol.holds(), @fol.holds_qsubst(), @fol.fvt_numeral(), @sets.not_in_empty()]))
   let t129 = @tactics.disch_then(@tactics.x_choose_then(@parser.parse_term("q:form"))(fn(x128 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x125 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {

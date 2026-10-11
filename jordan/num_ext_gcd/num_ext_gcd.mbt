@@ -74,7 +74,7 @@ fn step_6() -> Unit raise {
   })
   let t20 = @simp.asm_rewrite_tac(@list.List([@arith.mult_assoc(), @arith.eq_mult_rcancel()]))
   let t21 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("(b = m*m'*b) = (1*b = m*m'*b)"))]))
-  let t22 = @simp.asm_rewrite_tac(@list.empty())
+  let t22 = @simp.asm_rewrite_tac(@list.List([]))
   let t23 = @class.asm_cases_tac(@parser.parse_term("b=0"))
   let t24 = @tactics.first_x_assum(fn(x7 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let th = x7
@@ -197,7 +197,7 @@ fn step_12() -> Unit raise {
   let t40 = @tactics.asm_tac(@meson.meson_tac)(@list.List([divide_summand()]))
   let t41 = @list.List([@tactics.asm_tac(@meson.meson_tac)(@list.List([divide_sum(), divide_prod()])), t40])
   let ydivg_branch : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise = @tactics.thenl(@tactics_ext.subgoal_tac(@parser.parse_term(" (y || (r*a + s*b))/\\ (y || (r'*a +s'*b))")), t41)
-  let t45 = @tactics.asm_tac(@meson.meson_tac)(@list.empty())
+  let t45 = @tactics.asm_tac(@meson.meson_tac)(@list.List([]))
   let t44 = @simp.rewrite_tac(@list.List([divide()]))
   let t43 = @tactics.pop_assum(@tactics.match_mp_tac)
   let t42 = @tactics_ext.taut_tac(@parser.parse_term(" (A ==> B) ==> ((C /\\ D/\\ A)==> B)"))

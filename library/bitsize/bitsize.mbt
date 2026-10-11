@@ -690,7 +690,7 @@ fn step_20() -> Unit raise {
   let t68 = @tactics.match_mp_tac(
     @int.arith_rule(@parser.parse_term("2 * a = b ==> (a <= n <=> b <= 2 * n)")),
   )
-  let t67 = @simp.asm_rewrite_tac(@list.empty())
+  let t67 = @simp.asm_rewrite_tac(@list.List([]))
   let t66 = @class.asm_cases_tac(@parser.parse_term("k = 0"))
   let t65 = @simp.rewrite_tac(@list.List([le_bitsize()]))
   let t70 = @tactics.then_tac(

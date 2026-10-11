@@ -691,8 +691,8 @@ fn bdd_and_1_l(
             ]),
             pth1,
           ),
-          @list.empty(),
-          @list.empty(),
+          @list.List([]),
+          @list.List([]),
         )
       } else if r_1 == bdd_1() {
         (
@@ -703,8 +703,8 @@ fn bdd_and_1_l(
             ]),
             pth2,
           ),
-          @list.empty(),
-          @list.empty(),
+          @list.List([]),
+          @list.List([]),
         )
       } else if l_1 == r_1 {
         (
@@ -715,8 +715,8 @@ fn bdd_and_1_l(
             ]),
             pth3,
           ),
-          @list.empty(),
-          @list.empty(),
+          @list.List([]),
+          @list.List([]),
         )
       } else if l_1 == @lib.neg63(r_1) {
         (
@@ -727,8 +727,8 @@ fn bdd_and_1_l(
             ]),
             pth4,
           ),
-          @list.empty(),
-          @list.empty(),
+          @list.List([]),
+          @list.List([]),
         )
       } else {
         let (lv, ly, ln) = bdd_expand(tfst(utable.0, utable.1, utable.2), l_1)
@@ -1629,7 +1629,7 @@ fn step_15() -> Unit raise {
               let s146 = @equal.rand_conv(x145)
               fn(x147 : @kernel.Term) -> @kernel.Thm raise { s146(x147) }
             },
-            @list.List([@meson.meson(@list.empty(), t)]),
+            @list.List([@meson.meson(@list.List([]), t)]),
           )
         },
         @list.List([
@@ -1936,7 +1936,7 @@ fn step_16() -> Unit raise {
       },
       @basics.conjuncts(tm_5),
     )
-    @lib.forall(valid_definition, tms_1) && acyclic(@list.empty(), tms_1)
+    @lib.forall(valid_definition, tms_1) && acyclic(@list.List([]), tms_1)
   }
   bdd_deftaut_c.set(fn(
     x186 : @list.List[@kernel.Term],

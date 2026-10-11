@@ -48,7 +48,7 @@ pub fn funspace_empty() -> @kernel.Thm {
 ///|
 /// HAS_SIZE_FUNSPACE
 fn step_5() -> Unit raise {
-  let t57 = @meson.asm_meson_tac(@list.empty())
+  let t57 = @meson.asm_meson_tac(@list.List([]))
   let t56 = @tactics.match_mp_tac(@sets.has_size_product())
   let t55 = @simp.asm_simp_tac(@list.List([@sets.card_clauses(), @arith.exp()]))
   let t54 = @tactics.first_x_assum(fn(x53 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -59,7 +59,7 @@ fn step_5() -> Unit raise {
       }
     })(@equal.sym(x53))
   })
-  let t48 = @meson.asm_meson_tac(@list.empty())
+  let t48 = @meson.asm_meson_tac(@list.List([]))
   let t47 = @class.asm_cases_tac(@parser.parse_term("u:A = x"))
   let t46 = @tactics.x_gen_tac(@parser.parse_term("u:A"))
   let t45 = @list.List([@meson.asm_meson_tac(@list.List([@sets.in_insert()])), @tactics.all_tac])
@@ -369,7 +369,7 @@ pub fn in_numseg_restrict_false() -> @kernel.Thm {
 ///|
 /// CARD_NUMSEG_RESTRICT_EXTREMA
 fn step_20() -> Unit raise {
-  let t84 = @meson.meson_tac(@list.empty())
+  let t84 = @meson.meson_tac(@list.List([]))
   let t83 = @simp.rewrite_tac(@list.List([@sets.extension(), @sets.not_in_empty(), @iterate.in_numseg(), @sets.in_elim_thm()]))
   let t82 = @tactics.disch_then(fn(x81 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
@@ -409,7 +409,7 @@ pub fn vote_not_eq() -> @kernel.Thm {
 ///|
 /// FUNSPACE_FIXED
 fn step_22() -> Unit raise {
-  let t89 = @meson.asm_meson_tac(@list.empty())
+  let t89 = @meson.asm_meson_tac(@list.List([]))
   let t88 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t87 = @simp.asm_rewrite_tac(@list.List([@sets.in_elim_thm(), funspace(), @sets.not_in_empty(), @sets.in_sing()]))
   let t90 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@sets.extension(), @sets.not_in_empty()])), @tactics.gen_tac), @class.cond_cases_tac), t87), t88), t89)
@@ -432,7 +432,7 @@ fn step_23() -> Unit raise {
   let t109 = @tactics.try_tac(@simp.gen_rewrite_tac(fn(x108 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     x108
   }, @list.List([@class.fun_eq_thm()])))
-  let t105 = @drule.match_mp(@meson.meson(@list.empty(), @parser.parse_term("P x ==> x = y ==> P y")))
+  let t105 = @drule.match_mp(@meson.meson(@list.List([]), @parser.parse_term("P x ==> x = y ==> P y")))
   let t107 = @tactics.try_tac(@tactics.first_x_assum(fn(x106 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.match_mp_tac(t105(x106))
   }))
@@ -484,7 +484,7 @@ pub fn all_countings_0() -> @kernel.Thm {
 ///|
 /// VALID_COUNTINGS_0
 fn step_25() -> Unit raise {
-  let t115 = @tactics.then_tac(@class.cond_cases_tac, @tactics.asm_tac(@sets.set_tac)(@list.empty()))
+  let t115 = @tactics.then_tac(@class.cond_cases_tac, @tactics.asm_tac(@sets.set_tac)(@list.List([])))
   let lemma = @tactics.prove(@parser.parse_term("{x} INTER s = if x IN s then {x} else {}"), t115)
   let t162 = @simp.simp_tac(@list.List([vote_distinct(), @sets.set_rule(@parser.parse_term("{x | F} = {} /\\ {x | x = a} = {a}")), @sets.card_clauses(), @sets.finite_rules(), @sets.not_in_empty(), @calc_num.arith()]))
   let t161 = @simp.rewrite_tac(@list.List([@iterate.in_numseg(), @arith.le_refl(), @int.arith_rule(@parser.parse_term("1 <= SUC n"))]))
@@ -569,7 +569,7 @@ fn step_26() -> Unit raise {
   let t178 = @simp.rewrite_tac(@list.List([vote_distinct()]))
   let t177 = @simp.once_rewrite_tac(@list.List([@class.cond_rator()]))
   let t176 = @simp.once_rewrite_tac(@list.List([@class.cond_rand()]))
-  let t175 = @simp.rewrite_tac(@list.empty())
+  let t175 = @simp.rewrite_tac(@list.List([]))
   let t174 = @simp.gen_rewrite_tac(fn(x171 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s172 = @equal.land_conv(x171)
     fn(x173 : @kernel.Term) -> @kernel.Thm raise {
@@ -599,14 +599,14 @@ pub fn all_countings_suc() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let t202 = @simp.rewrite_tac(@list.List([@sets.set_rule(@parser.parse_term("{x | F} = EMPTY")), @sets.card_clauses(), @arith.add_clauses()]))
   let t201 = @simp.asm_rewrite_tac(@list.List([@arith.gt(), @arith.lt_add_rcancel()]))
-  let t200 = @simp.simp_tac(@list.List([@meson.meson(@list.empty(), @parser.parse_term("x = a /\\ y = b /\\ P x y <=> x = a /\\ y = b /\\ P a b"))]))
+  let t200 = @simp.simp_tac(@list.List([@meson.meson(@list.List([]), @parser.parse_term("x = a /\\ y = b /\\ P x y <=> x = a /\\ y = b /\\ P a b"))]))
   let t199 = @simp.simp_tac(@list.List([in_numseg_restrict_false(), @arith.le_refl(), @arith.eq_add_rcancel()]))
   let t198 = @simp.rewrite_tac(@list.List([card_numseg_restrict_suc()]))
   let t197 = @simp.rewrite_tac(@list.List([forall_range_suc()]))
   let t196 = @simp.rewrite_tac(@list.List([vote_distinct()]))
   let t195 = @simp.once_rewrite_tac(@list.List([@class.cond_rator()]))
   let t194 = @simp.once_rewrite_tac(@list.List([@class.cond_rand()]))
-  let t193 = @simp.rewrite_tac(@list.empty())
+  let t193 = @simp.rewrite_tac(@list.List([]))
   let t192 = @simp.gen_rewrite_tac(fn(x189 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s190 = @equal.land_conv(x189)
     fn(x191 : @kernel.Term) -> @kernel.Thm raise {

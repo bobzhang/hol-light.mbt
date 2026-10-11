@@ -140,12 +140,12 @@ pub fn[TA] take(x16 : Int64, x17 : @list.List[TA]) -> @list.List[TA] raise {
   match l {
     More(x, tail=xs) => {
       if (n == 0L) {
-        @list.empty()
+        @list.List([])
       } else {
         take(@lib.sub63(n, 1L), xs).prepend(x)
       }
     }
-    Empty => @list.empty()
+    Empty => @list.List([])
   }
 }
 
@@ -162,7 +162,7 @@ pub fn[TA] drop_(x18 : Int64, x19 : @list.List[TA]) -> @list.List[TA] raise {
         drop_(@lib.sub63(n, 1L), xs)
       }
     }
-    Empty => @list.empty()
+    Empty => @list.List([])
   }
 }
 
@@ -179,7 +179,7 @@ pub fn lp_prover(x20 : @list.List[@lib.Func[@kernel.Term, @num.Num]], x21 : @lis
     })((fn(x25 : @lib.Func[@kernel.Term, @num.Num]) -> @list.List[@kernel.Term] raise {
       @lib.dom(x25)
     })(x26))(x27)
-  }, eq.concat(le.concat(lt)), @list.empty()), @list.List([one_tm]))
+  }, eq.concat(le.concat(lt)), @list.List([])), @list.List([one_tm]))
   let neq = Int::to_int64(@lib.length(eq))
   let nle = Int::to_int64(@lib.length(le))
   let nlt = Int::to_int64(@lib.length(lt))
@@ -245,7 +245,7 @@ pub fn lp_prover(x20 : @list.List[@lib.Func[@kernel.Term, @num.Num]], x21 : @lis
     let r = x54
     let e_1 = x55
     if @num.eq_num(r, @num.num_0) {
-      @list.empty()
+      @list.List([])
     } else {
       let t56 = @realarith.Positivstellensatz::Axiom_eq(e_1)
       @list.List([@realarith.Positivstellensatz::Eqmul(@calc_int.term_of_rat(r), t56)])
@@ -255,7 +255,7 @@ pub fn lp_prover(x20 : @list.List[@lib.Func[@kernel.Term, @num.Num]], x21 : @lis
     let r_1 = x57
     let e_2 = x58
     if @num.eq_num(r_1, @num.num_0) {
-      @list.empty()
+      @list.List([])
     } else {
       let t59 = @realarith.Positivstellensatz::Axiom_le(e_2)
       @list.List([@realarith.Positivstellensatz::Product(@realarith.Positivstellensatz::Rational_lt(r_1), t59)])
@@ -265,7 +265,7 @@ pub fn lp_prover(x20 : @list.List[@lib.Func[@kernel.Term, @num.Num]], x21 : @lis
     let r_2 = x60
     let e_3 = x61
     if @num.eq_num(r_2, @num.num_0) {
-      @list.empty()
+      @list.List([])
     } else {
       let t62 = @realarith.Positivstellensatz::Axiom_lt(e_3)
       @list.List([@realarith.Positivstellensatz::Product(@realarith.Positivstellensatz::Rational_lt(r_2), t62)])
@@ -286,7 +286,7 @@ fn[TA] rep_l(x31 : Int64, x32 : TA) -> @list.List[TA] raise {
   let n = x31
   let e = x32
   if (n == 0L) {
-    @list.empty()
+    @list.List([])
   } else {
     rep_l(@lib.sub63(n, 1L), e).prepend(e)
   }
@@ -338,7 +338,7 @@ fn step_3() -> Unit raise {
         })((fn(x81 : @lib.Func[@kernel.Term, @num.Num]) -> @list.List[@kernel.Term] raise {
           @lib.dom(x81)
         })(x82))(x83)
-      }, eq_pols.concat(le_pols.concat(lt_pols)), @list.empty()))
+      }, eq_pols.concat(le_pols.concat(lt_pols)), @list.List([])))
       let le_pols_p = le_pols.concat(@lib.map(fn(x84 : @kernel.Term) -> @lib.Func[@kernel.Term, @num.Num] raise {
         let v = x84
         @lib.single(v, @num.num_of_int64(1L))

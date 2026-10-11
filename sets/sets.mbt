@@ -160,7 +160,7 @@ pub fn setspec() -> @kernel.Thm {
 ///|
 /// IN_ELIM_THM
 fn step_19() -> Unit raise {
-  let t5 = @meson.meson_tac(@list.empty())
+  let t5 = @meson.meson_tac(@list.List([]))
   let t4 = @simp.rewrite_tac(@list.List([setspec()]))
   let t3 = @tactics.try_tac(
     @tactics.then_tac(
@@ -891,7 +891,7 @@ pub fn in_rest() -> @kernel.Thm {
 ///|
 /// FORALL_IN_INSERT
 fn step_54() -> Unit raise {
-  let t22 = @meson.meson_tac(@list.empty())
+  let t22 = @meson.meson_tac(@list.List([]))
   let t23 = @tactics.then_tac(@simp.rewrite_tac(@list.List([in_insert()])), t22)
   forall_in_insert_c.set(
     @tactics.prove(
@@ -917,7 +917,7 @@ pub fn forall_in_insert() -> @kernel.Thm {
 ///|
 /// EXISTS_IN_INSERT
 fn step_55() -> Unit raise {
-  let t24 = @meson.meson_tac(@list.empty())
+  let t24 = @meson.meson_tac(@list.List([]))
   let t25 = @tactics.then_tac(@simp.rewrite_tac(@list.List([in_insert()])), t24)
   exists_in_insert_c.set(
     @tactics.prove(
@@ -943,7 +943,7 @@ pub fn exists_in_insert() -> @kernel.Thm {
 ///|
 /// FORALL_IN_UNION
 fn step_56() -> Unit raise {
-  let t26 = @meson.meson_tac(@list.empty())
+  let t26 = @meson.meson_tac(@list.List([]))
   let t27 = @tactics.then_tac(@simp.rewrite_tac(@list.List([in_union()])), t26)
   forall_in_union_c.set(
     @tactics.prove(
@@ -969,7 +969,7 @@ pub fn forall_in_union() -> @kernel.Thm {
 ///|
 /// EXISTS_IN_UNION
 fn step_57() -> Unit raise {
-  let t28 = @meson.meson_tac(@list.empty())
+  let t28 = @meson.meson_tac(@list.List([]))
   let t29 = @tactics.then_tac(@simp.rewrite_tac(@list.List([in_union()])), t28)
   exists_in_union_c.set(
     @tactics.prove(
@@ -995,7 +995,7 @@ pub fn exists_in_union() -> @kernel.Thm {
 ///|
 /// FORALL_IN_IMAGE
 fn step_58() -> Unit raise {
-  let t30 = @meson.meson_tac(@list.empty())
+  let t30 = @meson.meson_tac(@list.List([]))
   let t31 = @tactics.then_tac(@simp.rewrite_tac(@list.List([in_image()])), t30)
   forall_in_image_c.set(
     @tactics.prove(
@@ -1021,7 +1021,7 @@ pub fn forall_in_image() -> @kernel.Thm {
 ///|
 /// EXISTS_IN_IMAGE
 fn step_59() -> Unit raise {
-  let t32 = @meson.meson_tac(@list.empty())
+  let t32 = @meson.meson_tac(@list.List([]))
   let t33 = @tactics.then_tac(@simp.rewrite_tac(@list.List([in_image()])), t32)
   exists_in_image_c.set(
     @tactics.prove(
@@ -1047,7 +1047,7 @@ pub fn exists_in_image() -> @kernel.Thm {
 ///|
 /// FORALL_IN_GSPEC
 fn step_60() -> Unit raise {
-  let t34 = @meson.meson_tac(@list.empty())
+  let t34 = @meson.meson_tac(@list.List([]))
   let t35 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([gspec(), in_elim_thm()])),
     t34,
@@ -1076,7 +1076,7 @@ pub fn forall_in_gspec() -> @kernel.Thm {
 ///|
 /// EXISTS_IN_GSPEC
 fn step_61() -> Unit raise {
-  let t36 = @meson.meson_tac(@list.empty())
+  let t36 = @meson.meson_tac(@list.List([]))
   let t37 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([gspec(), in_elim_thm()])),
     t36,
@@ -1105,7 +1105,7 @@ pub fn exists_in_gspec() -> @kernel.Thm {
 ///|
 /// UNIONS_IMAGE
 fn step_62() -> Unit raise {
-  let t41 = @meson.meson_tac(@list.empty())
+  let t41 = @meson.meson_tac(@list.List([]))
   let t40 = @simp.rewrite_tac(
     @list.List([in_unions(), in_image(), in_elim_thm()]),
   )
@@ -1146,7 +1146,7 @@ pub fn unions_image() -> @kernel.Thm {
 ///|
 /// INTERS_IMAGE
 fn step_63() -> Unit raise {
-  let t46 = @meson.meson_tac(@list.empty())
+  let t46 = @meson.meson_tac(@list.List([]))
   let t45 = @simp.rewrite_tac(
     @list.List([in_inters(), in_image(), in_elim_thm()]),
   )
@@ -1187,7 +1187,7 @@ pub fn inters_image() -> @kernel.Thm {
 ///|
 /// UNIONS_GSPEC
 fn step_64() -> Unit raise {
-  let t51 = @meson.meson_tac(@list.empty())
+  let t51 = @meson.meson_tac(@list.List([]))
   let t50 = @simp.rewrite_tac(@list.List([in_unions(), in_elim_thm()]))
   let t49 = @simp.gen_rewrite_tac(
     fn(
@@ -1226,7 +1226,7 @@ pub fn unions_gspec() -> @kernel.Thm {
 ///|
 /// INTERS_GSPEC
 fn step_65() -> Unit raise {
-  let t56 = @meson.meson_tac(@list.empty())
+  let t56 = @meson.meson_tac(@list.List([]))
   let t55 = @simp.rewrite_tac(@list.List([in_inters(), in_elim_thm()]))
   let t54 = @simp.gen_rewrite_tac(
     fn(
@@ -1359,7 +1359,7 @@ fn step_67() -> Unit raise {
     ) -> @kernel.Thm raise,
   ) raise) raise {
     let ths = x61
-    let t79 = @meson.meson_tac(@list.empty())
+    let t79 = @meson.meson_tac(@list.List([]))
     let t78 = @simp.rewrite_tac(@list.List([in_()]))
     let t77 = @tactics.map_every(
       fn(
@@ -1580,13 +1580,13 @@ pub fn set_tac(x : @list.List[@kernel.Thm]) -> @tactics.Tactic raise {
 /// `SET_RULE`
 pub fn set_rule(x80 : @kernel.Term) -> @kernel.Thm raise {
   let tm = x80
-  @tactics.prove(tm, set_tac(@list.empty()))
+  @tactics.prove(tm, set_tac(@list.List([])))
 }
 
 ///|
 /// NOT_EQUAL_SETS
 fn step_68() -> Unit raise {
-  let t81 = set_tac(@list.empty())
+  let t81 = set_tac(@list.List([]))
   not_equal_sets_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -1609,7 +1609,7 @@ pub fn not_equal_sets() -> @kernel.Thm {
 ///|
 /// INSERT_RESTRICT
 fn step_69() -> Unit raise {
-  let t82 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t82 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t83 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.repeat_tac(@tactics.gen_tac),
@@ -1657,7 +1657,7 @@ pub fn univ_1() -> @kernel.Thm {
 ///|
 /// MEMBER_NOT_EMPTY
 fn step_71() -> Unit raise {
-  let t85 = set_tac(@list.empty())
+  let t85 = set_tac(@list.List([]))
   member_not_empty_c.set(
     @tactics.prove(
       @parser.parse_term("!s:A->bool. (?x. x IN s) <=> ~(s = EMPTY)"),
@@ -1680,7 +1680,7 @@ pub fn member_not_empty() -> @kernel.Thm {
 ///|
 /// UNIV_NOT_EMPTY
 fn step_72() -> Unit raise {
-  let t86 = set_tac(@list.empty())
+  let t86 = set_tac(@list.List([]))
   univ_not_empty_c.set(
     @tactics.prove(@parser.parse_term("~(UNIV:A->bool = EMPTY)"), t86),
   )
@@ -1698,7 +1698,7 @@ pub fn univ_not_empty() -> @kernel.Thm {
 ///|
 /// EMPTY_NOT_UNIV
 fn step_73() -> Unit raise {
-  let t87 = set_tac(@list.empty())
+  let t87 = set_tac(@list.List([]))
   empty_not_univ_c.set(
     @tactics.prove(@parser.parse_term("~(EMPTY:A->bool = UNIV)"), t87),
   )
@@ -1716,7 +1716,7 @@ pub fn empty_not_univ() -> @kernel.Thm {
 ///|
 /// EQ_UNIV
 fn step_74() -> Unit raise {
-  let t88 = set_tac(@list.empty())
+  let t88 = set_tac(@list.List([]))
   eq_univ_c.set(
     @tactics.prove(@parser.parse_term("(!x:A. x IN s) <=> (s = UNIV)"), t88),
   )
@@ -1734,7 +1734,7 @@ pub fn eq_univ() -> @kernel.Thm {
 ///|
 /// SUBSET_TRANS
 fn step_75() -> Unit raise {
-  let t89 = set_tac(@list.empty())
+  let t89 = set_tac(@list.List([]))
   subset_trans_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -1757,7 +1757,7 @@ pub fn subset_trans() -> @kernel.Thm {
 ///|
 /// SUBSET_REFL
 fn step_76() -> Unit raise {
-  let t90 = set_tac(@list.empty())
+  let t90 = set_tac(@list.List([]))
   subset_refl_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. s SUBSET s"), t90),
   )
@@ -1775,7 +1775,7 @@ pub fn subset_refl() -> @kernel.Thm {
 ///|
 /// SUBSET_ANTISYM
 fn step_77() -> Unit raise {
-  let t91 = set_tac(@list.empty())
+  let t91 = set_tac(@list.List([]))
   subset_antisym_c.set(
     @tactics.prove(
       @parser.parse_term("!(s:A->bool) t. s SUBSET t /\\ t SUBSET s ==> s = t"),
@@ -1796,7 +1796,7 @@ pub fn subset_antisym() -> @kernel.Thm {
 ///|
 /// SUBSET_ANTISYM_EQ
 fn step_78() -> Unit raise {
-  let t92 = set_tac(@list.empty())
+  let t92 = set_tac(@list.List([]))
   subset_antisym_eq_c.set(
     @tactics.prove(
       @parser.parse_term("!(s:A->bool) t. s SUBSET t /\\ t SUBSET s <=> s = t"),
@@ -1819,7 +1819,7 @@ pub fn subset_antisym_eq() -> @kernel.Thm {
 ///|
 /// EMPTY_SUBSET
 fn step_79() -> Unit raise {
-  let t93 = set_tac(@list.empty())
+  let t93 = set_tac(@list.List([]))
   empty_subset_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. EMPTY SUBSET s"), t93),
   )
@@ -1837,7 +1837,7 @@ pub fn empty_subset() -> @kernel.Thm {
 ///|
 /// SUBSET_EMPTY
 fn step_80() -> Unit raise {
-  let t94 = set_tac(@list.empty())
+  let t94 = set_tac(@list.List([]))
   subset_empty_c.set(
     @tactics.prove(
       @parser.parse_term("!s:A->bool. s SUBSET EMPTY <=> (s = EMPTY)"),
@@ -1858,7 +1858,7 @@ pub fn subset_empty() -> @kernel.Thm {
 ///|
 /// SUBSET_UNIV
 fn step_81() -> Unit raise {
-  let t95 = set_tac(@list.empty())
+  let t95 = set_tac(@list.List([]))
   subset_univ_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. s SUBSET UNIV"), t95),
   )
@@ -1876,7 +1876,7 @@ pub fn subset_univ() -> @kernel.Thm {
 ///|
 /// UNIV_SUBSET
 fn step_82() -> Unit raise {
-  let t96 = set_tac(@list.empty())
+  let t96 = set_tac(@list.List([]))
   univ_subset_c.set(
     @tactics.prove(
       @parser.parse_term("!s:A->bool. UNIV SUBSET s <=> (s = UNIV)"),
@@ -1897,7 +1897,7 @@ pub fn univ_subset() -> @kernel.Thm {
 ///|
 /// SING_SUBSET
 fn step_83() -> Unit raise {
-  let t97 = set_tac(@list.empty())
+  let t97 = set_tac(@list.List([]))
   sing_subset_c.set(
     @tactics.prove(@parser.parse_term("!s x:A. {x} SUBSET s <=> x IN s"), t97),
   )
@@ -1938,7 +1938,7 @@ pub fn subset_restrict() -> @kernel.Thm {
 ///|
 /// PSUBSET_TRANS
 fn step_85() -> Unit raise {
-  let t99 = set_tac(@list.empty())
+  let t99 = set_tac(@list.List([]))
   psubset_trans_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -1961,7 +1961,7 @@ pub fn psubset_trans() -> @kernel.Thm {
 ///|
 /// PSUBSET_SUBSET_TRANS
 fn step_86() -> Unit raise {
-  let t100 = set_tac(@list.empty())
+  let t100 = set_tac(@list.List([]))
   psubset_subset_trans_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -1986,7 +1986,7 @@ pub fn psubset_subset_trans() -> @kernel.Thm {
 ///|
 /// SUBSET_PSUBSET_TRANS
 fn step_87() -> Unit raise {
-  let t101 = set_tac(@list.empty())
+  let t101 = set_tac(@list.List([]))
   subset_psubset_trans_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2011,7 +2011,7 @@ pub fn subset_psubset_trans() -> @kernel.Thm {
 ///|
 /// PSUBSET_IRREFL
 fn step_88() -> Unit raise {
-  let t102 = set_tac(@list.empty())
+  let t102 = set_tac(@list.List([]))
   psubset_irrefl_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. ~(s PSUBSET s)"), t102),
   )
@@ -2029,7 +2029,7 @@ pub fn psubset_irrefl() -> @kernel.Thm {
 ///|
 /// NOT_PSUBSET_EMPTY
 fn step_89() -> Unit raise {
-  let t103 = set_tac(@list.empty())
+  let t103 = set_tac(@list.List([]))
   not_psubset_empty_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. ~(s PSUBSET EMPTY)"), t103),
   )
@@ -2049,7 +2049,7 @@ pub fn not_psubset_empty() -> @kernel.Thm {
 ///|
 /// NOT_UNIV_PSUBSET
 fn step_90() -> Unit raise {
-  let t104 = set_tac(@list.empty())
+  let t104 = set_tac(@list.List([]))
   not_univ_psubset_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. ~(UNIV PSUBSET s)"), t104),
   )
@@ -2069,7 +2069,7 @@ pub fn not_univ_psubset() -> @kernel.Thm {
 ///|
 /// PSUBSET_UNIV
 fn step_91() -> Unit raise {
-  let t105 = set_tac(@list.empty())
+  let t105 = set_tac(@list.List([]))
   psubset_univ_c.set(
     @tactics.prove(
       @parser.parse_term("!s:A->bool. s PSUBSET UNIV <=> ?x. ~(x IN s)"),
@@ -2090,7 +2090,7 @@ pub fn psubset_univ() -> @kernel.Thm {
 ///|
 /// PSUBSET_ALT
 fn step_92() -> Unit raise {
-  let t106 = set_tac(@list.empty())
+  let t106 = set_tac(@list.List([]))
   let t107 = @tactics.then_tac(@simp.rewrite_tac(@list.List([psubset()])), t106)
   psubset_alt_c.set(
     @tactics.prove(
@@ -2114,7 +2114,7 @@ pub fn psubset_alt() -> @kernel.Thm {
 ///|
 /// UNION_ASSOC
 fn step_93() -> Unit raise {
-  let t108 = set_tac(@list.empty())
+  let t108 = set_tac(@list.List([]))
   union_assoc_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2137,7 +2137,7 @@ pub fn union_assoc() -> @kernel.Thm {
 ///|
 /// UNION_IDEMPOT
 fn step_94() -> Unit raise {
-  let t109 = set_tac(@list.empty())
+  let t109 = set_tac(@list.List([]))
   union_idempot_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. s UNION s = s"), t109),
   )
@@ -2155,7 +2155,7 @@ pub fn union_idempot() -> @kernel.Thm {
 ///|
 /// UNION_COMM
 fn step_95() -> Unit raise {
-  let t110 = set_tac(@list.empty())
+  let t110 = set_tac(@list.List([]))
   union_comm_c.set(
     @tactics.prove(
       @parser.parse_term("!(s:A->bool) t. s UNION t = t UNION s"),
@@ -2176,7 +2176,7 @@ pub fn union_comm() -> @kernel.Thm {
 ///|
 /// SUBSET_UNION
 fn step_96() -> Unit raise {
-  let t111 = set_tac(@list.empty())
+  let t111 = set_tac(@list.List([]))
   subset_union_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2199,7 +2199,7 @@ pub fn subset_union() -> @kernel.Thm {
 ///|
 /// SUBSET_UNION_ABSORPTION
 fn step_97() -> Unit raise {
-  let t112 = set_tac(@list.empty())
+  let t112 = set_tac(@list.List([]))
   subset_union_absorption_c.set(
     @tactics.prove(
       @parser.parse_term("!s:A->bool. !t. s SUBSET t <=> (s UNION t = t)"),
@@ -2222,7 +2222,7 @@ pub fn subset_union_absorption() -> @kernel.Thm {
 ///|
 /// UNION_EMPTY
 fn step_98() -> Unit raise {
-  let t113 = set_tac(@list.empty())
+  let t113 = set_tac(@list.List([]))
   union_empty_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2245,7 +2245,7 @@ pub fn union_empty() -> @kernel.Thm {
 ///|
 /// UNION_UNIV
 fn step_99() -> Unit raise {
-  let t114 = set_tac(@list.empty())
+  let t114 = set_tac(@list.List([]))
   union_univ_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2268,7 +2268,7 @@ pub fn union_univ() -> @kernel.Thm {
 ///|
 /// EMPTY_UNION
 fn step_100() -> Unit raise {
-  let t115 = set_tac(@list.empty())
+  let t115 = set_tac(@list.List([]))
   empty_union_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2291,7 +2291,7 @@ pub fn empty_union() -> @kernel.Thm {
 ///|
 /// UNION_SUBSET
 fn step_101() -> Unit raise {
-  let t116 = set_tac(@list.empty())
+  let t116 = set_tac(@list.List([]))
   union_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2314,7 +2314,7 @@ pub fn union_subset() -> @kernel.Thm {
 ///|
 /// UNION_RESTRICT
 fn step_102() -> Unit raise {
-  let t117 = set_tac(@list.empty())
+  let t117 = set_tac(@list.List([]))
   union_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2337,7 +2337,7 @@ pub fn union_restrict() -> @kernel.Thm {
 ///|
 /// FORALL_SUBSET_UNION
 fn step_103() -> Unit raise {
-  let t129 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t129 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t128 = @list.List([
     @tactics.all_tac,
     @tactics.then_tac(
@@ -2434,7 +2434,7 @@ fn step_103() -> Unit raise {
     ),
     t129,
   )
-  let t119 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t119 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t118 = @tactics.first_x_assum(@tactics.match_mp_tac)
   let t131 = @list.List([
     @tactics.then_tac(
@@ -2471,14 +2471,14 @@ pub fn forall_subset_union() -> @kernel.Thm {
 ///|
 /// EXISTS_SUBSET_UNION
 fn step_104() -> Unit raise {
-  let t134 = @meson.meson_tac(@list.empty())
+  let t134 = @meson.meson_tac(@list.List([]))
   let t133 = @simp.rewrite_tac(@list.List([forall_subset_union()]))
   let t135 = @tactics.then_tac(
     @tactics.then_tac(
       @simp.rewrite_tac(
         @list.List([
           @meson.meson(
-            @list.empty(),
+            @list.List([]),
             @parser.parse_term("(?x. P x /\\ Q x) <=> ~(!x. P x ==> ~Q x)"),
           ),
         ]),
@@ -2552,14 +2552,14 @@ pub fn forall_subset_insert() -> @kernel.Thm {
 ///|
 /// EXISTS_SUBSET_INSERT
 fn step_106() -> Unit raise {
-  let t141 = @meson.meson_tac(@list.empty())
+  let t141 = @meson.meson_tac(@list.List([]))
   let t140 = @simp.rewrite_tac(@list.List([forall_subset_insert()]))
   let t142 = @tactics.then_tac(
     @tactics.then_tac(
       @simp.rewrite_tac(
         @list.List([
           @meson.meson(
-            @list.empty(),
+            @list.List([]),
             @parser.parse_term("(?x. P x /\\ Q x) <=> ~(!x. P x ==> ~Q x)"),
           ),
         ]),
@@ -2592,7 +2592,7 @@ pub fn exists_subset_insert() -> @kernel.Thm {
 ///|
 /// INTER_ASSOC
 fn step_107() -> Unit raise {
-  let t143 = set_tac(@list.empty())
+  let t143 = set_tac(@list.List([]))
   inter_assoc_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2615,7 +2615,7 @@ pub fn inter_assoc() -> @kernel.Thm {
 ///|
 /// INTER_IDEMPOT
 fn step_108() -> Unit raise {
-  let t144 = set_tac(@list.empty())
+  let t144 = set_tac(@list.List([]))
   inter_idempot_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. s INTER s = s"), t144),
   )
@@ -2633,7 +2633,7 @@ pub fn inter_idempot() -> @kernel.Thm {
 ///|
 /// INTER_COMM
 fn step_109() -> Unit raise {
-  let t145 = set_tac(@list.empty())
+  let t145 = set_tac(@list.List([]))
   inter_comm_c.set(
     @tactics.prove(
       @parser.parse_term("!(s:A->bool) t. s INTER t = t INTER s"),
@@ -2654,7 +2654,7 @@ pub fn inter_comm() -> @kernel.Thm {
 ///|
 /// INTER_SUBSET
 fn step_110() -> Unit raise {
-  let t146 = set_tac(@list.empty())
+  let t146 = set_tac(@list.List([]))
   inter_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2677,7 +2677,7 @@ pub fn inter_subset() -> @kernel.Thm {
 ///|
 /// SUBSET_INTER_ABSORPTION
 fn step_111() -> Unit raise {
-  let t147 = set_tac(@list.empty())
+  let t147 = set_tac(@list.List([]))
   subset_inter_absorption_c.set(
     @tactics.prove(
       @parser.parse_term("!s:A->bool. !t. s SUBSET t <=> (s INTER t = s)"),
@@ -2700,7 +2700,7 @@ pub fn subset_inter_absorption() -> @kernel.Thm {
 ///|
 /// INTER_EMPTY
 fn step_112() -> Unit raise {
-  let t148 = set_tac(@list.empty())
+  let t148 = set_tac(@list.List([]))
   inter_empty_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2723,7 +2723,7 @@ pub fn inter_empty() -> @kernel.Thm {
 ///|
 /// INTER_UNIV
 fn step_113() -> Unit raise {
-  let t149 = set_tac(@list.empty())
+  let t149 = set_tac(@list.List([]))
   inter_univ_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2746,7 +2746,7 @@ pub fn inter_univ() -> @kernel.Thm {
 ///|
 /// SUBSET_INTER
 fn step_114() -> Unit raise {
-  let t150 = set_tac(@list.empty())
+  let t150 = set_tac(@list.List([]))
   subset_inter_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2769,7 +2769,7 @@ pub fn subset_inter() -> @kernel.Thm {
 ///|
 /// INTER_RESTRICT
 fn step_115() -> Unit raise {
-  let t151 = set_tac(@list.empty())
+  let t151 = set_tac(@list.List([]))
   inter_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2792,7 +2792,7 @@ pub fn inter_restrict() -> @kernel.Thm {
 ///|
 /// UNION_OVER_INTER
 fn step_116() -> Unit raise {
-  let t152 = set_tac(@list.empty())
+  let t152 = set_tac(@list.List([]))
   union_over_inter_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2817,7 +2817,7 @@ pub fn union_over_inter() -> @kernel.Thm {
 ///|
 /// INTER_OVER_UNION
 fn step_117() -> Unit raise {
-  let t153 = set_tac(@list.empty())
+  let t153 = set_tac(@list.List([]))
   inter_over_union_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2842,7 +2842,7 @@ pub fn inter_over_union() -> @kernel.Thm {
 ///|
 /// IN_DISJOINT
 fn step_118() -> Unit raise {
-  let t154 = set_tac(@list.empty())
+  let t154 = set_tac(@list.List([]))
   in_disjoint_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2865,7 +2865,7 @@ pub fn in_disjoint() -> @kernel.Thm {
 ///|
 /// DISJOINT_SYM
 fn step_119() -> Unit raise {
-  let t155 = set_tac(@list.empty())
+  let t155 = set_tac(@list.List([]))
   disjoint_sym_c.set(
     @tactics.prove(
       @parser.parse_term("!s:A->bool. !t. DISJOINT s t <=> DISJOINT t s"),
@@ -2886,7 +2886,7 @@ pub fn disjoint_sym() -> @kernel.Thm {
 ///|
 /// DISJOINT_EMPTY
 fn step_120() -> Unit raise {
-  let t156 = set_tac(@list.empty())
+  let t156 = set_tac(@list.List([]))
   disjoint_empty_c.set(
     @tactics.prove(
       @parser.parse_term("!s:A->bool. DISJOINT EMPTY s /\\ DISJOINT s EMPTY"),
@@ -2907,7 +2907,7 @@ pub fn disjoint_empty() -> @kernel.Thm {
 ///|
 /// DISJOINT_EMPTY_REFL
 fn step_121() -> Unit raise {
-  let t157 = set_tac(@list.empty())
+  let t157 = set_tac(@list.List([]))
   disjoint_empty_refl_c.set(
     @tactics.prove(
       @parser.parse_term("!s:A->bool. (s = EMPTY) <=> (DISJOINT s s)"),
@@ -2930,7 +2930,7 @@ pub fn disjoint_empty_refl() -> @kernel.Thm {
 ///|
 /// DISJOINT_UNION
 fn step_122() -> Unit raise {
-  let t158 = set_tac(@list.empty())
+  let t158 = set_tac(@list.List([]))
   disjoint_union_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2953,7 +2953,7 @@ pub fn disjoint_union() -> @kernel.Thm {
 ///|
 /// DISJOINT_SING
 fn step_123() -> Unit raise {
-  let t159 = set_tac(@list.empty())
+  let t159 = set_tac(@list.List([]))
   disjoint_sing_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -2976,7 +2976,7 @@ pub fn disjoint_sing() -> @kernel.Thm {
 ///|
 /// DIFF_EMPTY
 fn step_124() -> Unit raise {
-  let t160 = set_tac(@list.empty())
+  let t160 = set_tac(@list.List([]))
   diff_empty_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. s DIFF EMPTY = s"), t160),
   )
@@ -2994,7 +2994,7 @@ pub fn diff_empty() -> @kernel.Thm {
 ///|
 /// EMPTY_DIFF
 fn step_125() -> Unit raise {
-  let t161 = set_tac(@list.empty())
+  let t161 = set_tac(@list.List([]))
   empty_diff_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. EMPTY DIFF s = EMPTY"), t161),
   )
@@ -3012,7 +3012,7 @@ pub fn empty_diff() -> @kernel.Thm {
 ///|
 /// DIFF_UNIV
 fn step_126() -> Unit raise {
-  let t162 = set_tac(@list.empty())
+  let t162 = set_tac(@list.List([]))
   diff_univ_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. s DIFF UNIV = EMPTY"), t162),
   )
@@ -3030,7 +3030,7 @@ pub fn diff_univ() -> @kernel.Thm {
 ///|
 /// DIFF_DIFF
 fn step_127() -> Unit raise {
-  let t163 = set_tac(@list.empty())
+  let t163 = set_tac(@list.List([]))
   diff_diff_c.set(
     @tactics.prove(
       @parser.parse_term("!s:A->bool. !t. (s DIFF t) DIFF t = s DIFF t"),
@@ -3051,7 +3051,7 @@ pub fn diff_diff() -> @kernel.Thm {
 ///|
 /// DIFF_EQ_EMPTY
 fn step_128() -> Unit raise {
-  let t164 = set_tac(@list.empty())
+  let t164 = set_tac(@list.List([]))
   diff_eq_empty_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. s DIFF s = EMPTY"), t164),
   )
@@ -3069,7 +3069,7 @@ pub fn diff_eq_empty() -> @kernel.Thm {
 ///|
 /// SUBSET_DIFF
 fn step_129() -> Unit raise {
-  let t165 = set_tac(@list.empty())
+  let t165 = set_tac(@list.List([]))
   subset_diff_c.set(
     @tactics.prove(
       @parser.parse_term("!s t:A->bool. (s DIFF t) SUBSET s"),
@@ -3090,7 +3090,7 @@ pub fn subset_diff() -> @kernel.Thm {
 ///|
 /// COMPL_COMPL
 fn step_130() -> Unit raise {
-  let t166 = set_tac(@list.empty())
+  let t166 = set_tac(@list.List([]))
   compl_compl_c.set(
     @tactics.prove(@parser.parse_term("!s. (:A) DIFF ((:A) DIFF s) = s"), t166),
   )
@@ -3108,7 +3108,7 @@ pub fn compl_compl() -> @kernel.Thm {
 ///|
 /// DIFF_RESTRICT
 fn step_131() -> Unit raise {
-  let t167 = set_tac(@list.empty())
+  let t167 = set_tac(@list.List([]))
   diff_restrict_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -3131,7 +3131,7 @@ pub fn diff_restrict() -> @kernel.Thm {
 ///|
 /// COMPONENT
 fn step_132() -> Unit raise {
-  let t168 = set_tac(@list.empty())
+  let t168 = set_tac(@list.List([]))
   component_c.set(
     @tactics.prove(@parser.parse_term("!x:A. !s. x IN (x INSERT s)"), t168),
   )
@@ -3149,7 +3149,7 @@ pub fn component() -> @kernel.Thm {
 ///|
 /// DECOMPOSITION
 fn step_133() -> Unit raise {
-  let t175 = set_tac(@list.empty())
+  let t175 = set_tac(@list.List([]))
   let t174 = @tactics.pop_assum(fn(
     x171 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3262,7 +3262,7 @@ pub fn set_cases() -> @kernel.Thm {
 ///|
 /// ABSORPTION
 fn step_135() -> Unit raise {
-  let t178 = set_tac(@list.empty())
+  let t178 = set_tac(@list.List([]))
   absorption_c.set(
     @tactics.prove(
       @parser.parse_term("!x:A. !s. x IN s <=> (x INSERT s = s)"),
@@ -3283,7 +3283,7 @@ pub fn absorption() -> @kernel.Thm {
 ///|
 /// INSERT_INSERT
 fn step_136() -> Unit raise {
-  let t179 = set_tac(@list.empty())
+  let t179 = set_tac(@list.List([]))
   insert_insert_c.set(
     @tactics.prove(
       @parser.parse_term("!x:A. !s. x INSERT (x INSERT s) = x INSERT s"),
@@ -3304,7 +3304,7 @@ pub fn insert_insert() -> @kernel.Thm {
 ///|
 /// INSERT_COMM
 fn step_137() -> Unit raise {
-  let t180 = set_tac(@list.empty())
+  let t180 = set_tac(@list.List([]))
   insert_comm_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -3327,7 +3327,7 @@ pub fn insert_comm() -> @kernel.Thm {
 ///|
 /// INSERT_UNIV
 fn step_138() -> Unit raise {
-  let t181 = set_tac(@list.empty())
+  let t181 = set_tac(@list.List([]))
   insert_univ_c.set(
     @tactics.prove(@parser.parse_term("!x:A. x INSERT UNIV = UNIV"), t181),
   )
@@ -3345,7 +3345,7 @@ pub fn insert_univ() -> @kernel.Thm {
 ///|
 /// NOT_INSERT_EMPTY
 fn step_139() -> Unit raise {
-  let t182 = set_tac(@list.empty())
+  let t182 = set_tac(@list.List([]))
   not_insert_empty_c.set(
     @tactics.prove(@parser.parse_term("!x:A. !s. ~(x INSERT s = EMPTY)"), t182),
   )
@@ -3365,7 +3365,7 @@ pub fn not_insert_empty() -> @kernel.Thm {
 ///|
 /// NOT_EMPTY_INSERT
 fn step_140() -> Unit raise {
-  let t183 = set_tac(@list.empty())
+  let t183 = set_tac(@list.List([]))
   not_empty_insert_c.set(
     @tactics.prove(@parser.parse_term("!x:A. !s. ~(EMPTY = x INSERT s)"), t183),
   )
@@ -3385,7 +3385,7 @@ pub fn not_empty_insert() -> @kernel.Thm {
 ///|
 /// INSERT_UNION
 fn step_141() -> Unit raise {
-  let t188 = set_tac(@list.empty())
+  let t188 = set_tac(@list.List([]))
   let t187 = @tactics.pop_assum(fn(
     x184 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3464,7 +3464,7 @@ pub fn insert_union() -> @kernel.Thm {
 ///|
 /// INSERT_UNION_EQ
 fn step_142() -> Unit raise {
-  let t190 = set_tac(@list.empty())
+  let t190 = set_tac(@list.List([]))
   insert_union_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -3489,7 +3489,7 @@ pub fn insert_union_eq() -> @kernel.Thm {
 ///|
 /// INSERT_INTER
 fn step_143() -> Unit raise {
-  let t195 = set_tac(@list.empty())
+  let t195 = set_tac(@list.List([]))
   let t194 = @tactics.pop_assum(fn(
     x191 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3568,7 +3568,7 @@ pub fn insert_inter() -> @kernel.Thm {
 ///|
 /// DISJOINT_INSERT
 fn step_144() -> Unit raise {
-  let t197 = set_tac(@list.empty())
+  let t197 = set_tac(@list.List([]))
   disjoint_insert_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -3593,7 +3593,7 @@ pub fn disjoint_insert() -> @kernel.Thm {
 ///|
 /// INSERT_SUBSET
 fn step_145() -> Unit raise {
-  let t198 = set_tac(@list.empty())
+  let t198 = set_tac(@list.List([]))
   insert_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -3616,7 +3616,7 @@ pub fn insert_subset() -> @kernel.Thm {
 ///|
 /// SUBSET_INSERT
 fn step_146() -> Unit raise {
-  let t199 = set_tac(@list.empty())
+  let t199 = set_tac(@list.List([]))
   subset_insert_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -3639,7 +3639,7 @@ pub fn subset_insert() -> @kernel.Thm {
 ///|
 /// INSERT_DIFF
 fn step_147() -> Unit raise {
-  let t204 = set_tac(@list.empty())
+  let t204 = set_tac(@list.List([]))
   let t203 = @tactics.pop_assum(fn(
     x200 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -3741,7 +3741,7 @@ pub fn insert_ac() -> @kernel.Thm {
 ///|
 /// INTER_ACI
 fn step_149() -> Unit raise {
-  let t207 = set_tac(@list.empty())
+  let t207 = set_tac(@list.List([]))
   inter_aci_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -3764,7 +3764,7 @@ pub fn inter_aci() -> @kernel.Thm {
 ///|
 /// UNION_ACI
 fn step_150() -> Unit raise {
-  let t208 = set_tac(@list.empty())
+  let t208 = set_tac(@list.List([]))
   union_aci_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -3787,7 +3787,7 @@ pub fn union_aci() -> @kernel.Thm {
 ///|
 /// DELETE_NON_ELEMENT
 fn step_151() -> Unit raise {
-  let t209 = set_tac(@list.empty())
+  let t209 = set_tac(@list.List([]))
   delete_non_element_c.set(
     @tactics.prove(
       @parser.parse_term("!x:A. !s. ~(x IN s) <=> (s DELETE x = s)"),
@@ -3810,7 +3810,7 @@ pub fn delete_non_element() -> @kernel.Thm {
 ///|
 /// IN_DELETE_EQ
 fn step_152() -> Unit raise {
-  let t210 = set_tac(@list.empty())
+  let t210 = set_tac(@list.List([]))
   in_delete_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -3833,7 +3833,7 @@ pub fn in_delete_eq() -> @kernel.Thm {
 ///|
 /// EMPTY_DELETE
 fn step_153() -> Unit raise {
-  let t211 = set_tac(@list.empty())
+  let t211 = set_tac(@list.List([]))
   empty_delete_c.set(
     @tactics.prove(@parser.parse_term("!x:A. EMPTY DELETE x = EMPTY"), t211),
   )
@@ -3851,7 +3851,7 @@ pub fn empty_delete() -> @kernel.Thm {
 ///|
 /// DELETE_DELETE
 fn step_154() -> Unit raise {
-  let t212 = set_tac(@list.empty())
+  let t212 = set_tac(@list.List([]))
   delete_delete_c.set(
     @tactics.prove(
       @parser.parse_term("!x:A. !s. (s DELETE x) DELETE x = s DELETE x"),
@@ -3872,7 +3872,7 @@ pub fn delete_delete() -> @kernel.Thm {
 ///|
 /// DELETE_COMM
 fn step_155() -> Unit raise {
-  let t213 = set_tac(@list.empty())
+  let t213 = set_tac(@list.List([]))
   delete_comm_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -3895,7 +3895,7 @@ pub fn delete_comm() -> @kernel.Thm {
 ///|
 /// DELETE_SUBSET
 fn step_156() -> Unit raise {
-  let t214 = set_tac(@list.empty())
+  let t214 = set_tac(@list.List([]))
   delete_subset_c.set(
     @tactics.prove(@parser.parse_term("!x:A. !s. (s DELETE x) SUBSET s"), t214),
   )
@@ -3913,7 +3913,7 @@ pub fn delete_subset() -> @kernel.Thm {
 ///|
 /// SUBSET_DELETE
 fn step_157() -> Unit raise {
-  let t215 = set_tac(@list.empty())
+  let t215 = set_tac(@list.List([]))
   subset_delete_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -3936,7 +3936,7 @@ pub fn subset_delete() -> @kernel.Thm {
 ///|
 /// SUBSET_INSERT_DELETE
 fn step_158() -> Unit raise {
-  let t216 = set_tac(@list.empty())
+  let t216 = set_tac(@list.List([]))
   subset_insert_delete_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -3961,7 +3961,7 @@ pub fn subset_insert_delete() -> @kernel.Thm {
 ///|
 /// DIFF_INSERT
 fn step_159() -> Unit raise {
-  let t217 = set_tac(@list.empty())
+  let t217 = set_tac(@list.List([]))
   diff_insert_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -3984,7 +3984,7 @@ pub fn diff_insert() -> @kernel.Thm {
 ///|
 /// PSUBSET_INSERT_SUBSET
 fn step_160() -> Unit raise {
-  let t218 = set_tac(@list.empty())
+  let t218 = set_tac(@list.List([]))
   psubset_insert_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4009,7 +4009,7 @@ pub fn psubset_insert_subset() -> @kernel.Thm {
 ///|
 /// DELETE_INSERT
 fn step_161() -> Unit raise {
-  let t223 = set_tac(@list.empty())
+  let t223 = set_tac(@list.List([]))
   let t222 = @tactics.pop_assum(fn(
     x219 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -4088,7 +4088,7 @@ pub fn delete_insert() -> @kernel.Thm {
 ///|
 /// INSERT_DELETE
 fn step_162() -> Unit raise {
-  let t225 = set_tac(@list.empty())
+  let t225 = set_tac(@list.List([]))
   insert_delete_c.set(
     @tactics.prove(
       @parser.parse_term("!x:A. !s. x IN s ==> (x INSERT (s DELETE x) = s)"),
@@ -4109,7 +4109,7 @@ pub fn insert_delete() -> @kernel.Thm {
 ///|
 /// DELETE_INTER
 fn step_163() -> Unit raise {
-  let t226 = set_tac(@list.empty())
+  let t226 = set_tac(@list.List([]))
   delete_inter_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4132,7 +4132,7 @@ pub fn delete_inter() -> @kernel.Thm {
 ///|
 /// DISJOINT_DELETE_SYM
 fn step_164() -> Unit raise {
-  let t227 = set_tac(@list.empty())
+  let t227 = set_tac(@list.List([]))
   disjoint_delete_sym_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4157,7 +4157,7 @@ pub fn disjoint_delete_sym() -> @kernel.Thm {
 ///|
 /// UNIONS_0
 fn step_165() -> Unit raise {
-  let t228 = set_tac(@list.empty())
+  let t228 = set_tac(@list.List([]))
   unions_0_c.set(
     @tactics.prove(@parser.parse_term("UNIONS {}:A->bool = {}"), t228),
   )
@@ -4175,7 +4175,7 @@ pub fn unions_0() -> @kernel.Thm {
 ///|
 /// UNIONS_1
 fn step_166() -> Unit raise {
-  let t229 = set_tac(@list.empty())
+  let t229 = set_tac(@list.List([]))
   unions_1_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. UNIONS {s} = s"), t229),
   )
@@ -4193,7 +4193,7 @@ pub fn unions_1() -> @kernel.Thm {
 ///|
 /// UNIONS_2
 fn step_167() -> Unit raise {
-  let t230 = set_tac(@list.empty())
+  let t230 = set_tac(@list.List([]))
   unions_2_c.set(
     @tactics.prove(
       @parser.parse_term("!s (t:A->bool). UNIONS {s,t} = s UNION t"),
@@ -4214,7 +4214,7 @@ pub fn unions_2() -> @kernel.Thm {
 ///|
 /// UNIONS_INSERT
 fn step_168() -> Unit raise {
-  let t231 = set_tac(@list.empty())
+  let t231 = set_tac(@list.List([]))
   unions_insert_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4237,7 +4237,7 @@ pub fn unions_insert() -> @kernel.Thm {
 ///|
 /// FORALL_IN_UNIONS
 fn step_169() -> Unit raise {
-  let t232 = set_tac(@list.empty())
+  let t232 = set_tac(@list.List([]))
   forall_in_unions_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4262,7 +4262,7 @@ pub fn forall_in_unions() -> @kernel.Thm {
 ///|
 /// EXISTS_IN_UNIONS
 fn step_170() -> Unit raise {
-  let t233 = set_tac(@list.empty())
+  let t233 = set_tac(@list.List([]))
   exists_in_unions_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4287,7 +4287,7 @@ pub fn exists_in_unions() -> @kernel.Thm {
 ///|
 /// EMPTY_UNIONS
 fn step_171() -> Unit raise {
-  let t234 = set_tac(@list.empty())
+  let t234 = set_tac(@list.List([]))
   empty_unions_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4340,7 +4340,7 @@ pub fn inter_unions() -> @kernel.Thm {
 ///|
 /// UNIONS_SUBSET
 fn step_173() -> Unit raise {
-  let t238 = set_tac(@list.empty())
+  let t238 = set_tac(@list.List([]))
   unions_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4363,7 +4363,7 @@ pub fn unions_subset() -> @kernel.Thm {
 ///|
 /// SUBSET_UNIONS
 fn step_174() -> Unit raise {
-  let t239 = set_tac(@list.empty())
+  let t239 = set_tac(@list.List([]))
   subset_unions_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4386,7 +4386,7 @@ pub fn subset_unions() -> @kernel.Thm {
 ///|
 /// UNIONS_UNION
 fn step_175() -> Unit raise {
-  let t240 = set_tac(@list.empty())
+  let t240 = set_tac(@list.List([]))
   unions_union_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4409,7 +4409,7 @@ pub fn unions_union() -> @kernel.Thm {
 ///|
 /// INTERS_UNION
 fn step_176() -> Unit raise {
-  let t241 = set_tac(@list.empty())
+  let t241 = set_tac(@list.List([]))
   inters_union_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4432,7 +4432,7 @@ pub fn inters_union() -> @kernel.Thm {
 ///|
 /// UNIONS_MONO
 fn step_177() -> Unit raise {
-  let t242 = set_tac(@list.empty())
+  let t242 = set_tac(@list.List([]))
   unions_mono_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4455,7 +4455,7 @@ pub fn unions_mono() -> @kernel.Thm {
 ///|
 /// UNIONS_MONO_IMAGE
 fn step_178() -> Unit raise {
-  let t243 = set_tac(@list.empty())
+  let t243 = set_tac(@list.List([]))
   unions_mono_image_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4558,7 +4558,7 @@ pub fn unions_delete_empty() -> @kernel.Thm {
 ///|
 /// INTERS_0
 fn step_182() -> Unit raise {
-  let t252 = set_tac(@list.empty())
+  let t252 = set_tac(@list.List([]))
   inters_0_c.set(@tactics.prove(@parser.parse_term("INTERS {} = (:A)"), t252))
 }
 
@@ -4574,7 +4574,7 @@ pub fn inters_0() -> @kernel.Thm {
 ///|
 /// INTERS_1
 fn step_183() -> Unit raise {
-  let t253 = set_tac(@list.empty())
+  let t253 = set_tac(@list.List([]))
   inters_1_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. INTERS {s} = s"), t253),
   )
@@ -4592,7 +4592,7 @@ pub fn inters_1() -> @kernel.Thm {
 ///|
 /// INTERS_2
 fn step_184() -> Unit raise {
-  let t254 = set_tac(@list.empty())
+  let t254 = set_tac(@list.List([]))
   inters_2_c.set(
     @tactics.prove(
       @parser.parse_term("!s (t:A->bool). INTERS {s,t} = s INTER t"),
@@ -4613,7 +4613,7 @@ pub fn inters_2() -> @kernel.Thm {
 ///|
 /// INTERS_INSERT
 fn step_185() -> Unit raise {
-  let t255 = set_tac(@list.empty())
+  let t255 = set_tac(@list.List([]))
   inters_insert_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4636,7 +4636,7 @@ pub fn inters_insert() -> @kernel.Thm {
 ///|
 /// SUBSET_INTERS
 fn step_186() -> Unit raise {
-  let t256 = set_tac(@list.empty())
+  let t256 = set_tac(@list.List([]))
   subset_inters_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4659,7 +4659,7 @@ pub fn subset_inters() -> @kernel.Thm {
 ///|
 /// INTERS_SUBSET
 fn step_187() -> Unit raise {
-  let t257 = set_tac(@list.empty())
+  let t257 = set_tac(@list.List([]))
   inters_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4682,7 +4682,7 @@ pub fn inters_subset() -> @kernel.Thm {
 ///|
 /// INTERS_SUBSET_STRONG
 fn step_188() -> Unit raise {
-  let t258 = set_tac(@list.empty())
+  let t258 = set_tac(@list.List([]))
   inters_subset_strong_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4707,7 +4707,7 @@ pub fn inters_subset_strong() -> @kernel.Thm {
 ///|
 /// INTERS_ANTIMONO
 fn step_189() -> Unit raise {
-  let t259 = set_tac(@list.empty())
+  let t259 = set_tac(@list.List([]))
   inters_antimono_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4732,7 +4732,7 @@ pub fn inters_antimono() -> @kernel.Thm {
 ///|
 /// INTERS_EQ_UNIV
 fn step_190() -> Unit raise {
-  let t260 = set_tac(@list.empty())
+  let t260 = set_tac(@list.List([]))
   inters_eq_univ_c.set(
     @tactics.prove(
       @parser.parse_term("!f. INTERS f = (:A) <=> !s. s IN f ==> s = (:A)"),
@@ -4753,7 +4753,7 @@ pub fn inters_eq_univ() -> @kernel.Thm {
 ///|
 /// INTERS_ANTIMONO_GEN
 fn step_191() -> Unit raise {
-  let t261 = set_tac(@list.empty())
+  let t261 = set_tac(@list.List([]))
   inters_antimono_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4778,7 +4778,7 @@ pub fn inters_antimono_gen() -> @kernel.Thm {
 ///|
 /// IMAGE_CLAUSES
 fn step_192() -> Unit raise {
-  let t262 = @meson.meson_tac(@list.empty())
+  let t262 = @meson.meson_tac(@list.List([]))
   let t263 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -4813,7 +4813,7 @@ pub fn image_clauses() -> @kernel.Thm {
 ///|
 /// IMAGE_UNION
 fn step_193() -> Unit raise {
-  let t264 = @meson.meson_tac(@list.empty())
+  let t264 = @meson.meson_tac(@list.List([]))
   let t265 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([extension(), in_image(), in_union()])),
     t264,
@@ -4878,7 +4878,7 @@ pub fn image_i() -> @kernel.Thm {
 ///|
 /// IMAGE_o
 fn step_196() -> Unit raise {
-  let t268 = @meson.meson_tac(@list.empty())
+  let t268 = @meson.meson_tac(@list.List([]))
   let t269 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([extension(), in_image(), @trivia.o_thm()])),
     t268,
@@ -4905,7 +4905,7 @@ pub fn image_o() -> @kernel.Thm {
 ///|
 /// IMAGE_SUBSET
 fn step_197() -> Unit raise {
-  let t270 = @meson.meson_tac(@list.empty())
+  let t270 = @meson.meson_tac(@list.List([]))
   let t271 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([subset(), in_image()])),
     t270,
@@ -4932,7 +4932,7 @@ pub fn image_subset() -> @kernel.Thm {
 ///|
 /// IMAGE_INTER_INJ
 fn step_198() -> Unit raise {
-  let t272 = @meson.meson_tac(@list.empty())
+  let t272 = @meson.meson_tac(@list.List([]))
   let t273 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([extension(), in_image(), in_inter()])),
     t272,
@@ -4961,7 +4961,7 @@ pub fn image_inter_inj() -> @kernel.Thm {
 ///|
 /// IMAGE_DIFF_INJ
 fn step_199() -> Unit raise {
-  let t274 = set_tac(@list.empty())
+  let t274 = set_tac(@list.List([]))
   image_diff_inj_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -4984,7 +4984,7 @@ pub fn image_diff_inj() -> @kernel.Thm {
 ///|
 /// IMAGE_DIFF_INJ_ALT
 fn step_200() -> Unit raise {
-  let t275 = set_tac(@list.empty())
+  let t275 = set_tac(@list.List([]))
   image_diff_inj_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -5009,7 +5009,7 @@ pub fn image_diff_inj_alt() -> @kernel.Thm {
 ///|
 /// IMAGE_DELETE_INJ
 fn step_201() -> Unit raise {
-  let t276 = set_tac(@list.empty())
+  let t276 = set_tac(@list.List([]))
   image_delete_inj_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -5034,7 +5034,7 @@ pub fn image_delete_inj() -> @kernel.Thm {
 ///|
 /// IMAGE_DELETE_INJ_ALT
 fn step_202() -> Unit raise {
-  let t277 = set_tac(@list.empty())
+  let t277 = set_tac(@list.List([]))
   image_delete_inj_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -5059,7 +5059,7 @@ pub fn image_delete_inj_alt() -> @kernel.Thm {
 ///|
 /// IMAGE_EQ_EMPTY
 fn step_203() -> Unit raise {
-  let t278 = @meson.meson_tac(@list.empty())
+  let t278 = @meson.meson_tac(@list.List([]))
   let t279 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([extension(), not_in_empty(), in_image()])),
     t278,
@@ -5084,7 +5084,7 @@ pub fn image_eq_empty() -> @kernel.Thm {
 ///|
 /// FORALL_IN_IMAGE_2
 fn step_204() -> Unit raise {
-  let t280 = set_tac(@list.empty())
+  let t280 = set_tac(@list.List([]))
   forall_in_image_2_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -5147,7 +5147,7 @@ pub fn image_const() -> @kernel.Thm {
 ///|
 /// SIMPLE_IMAGE
 fn step_206() -> Unit raise {
-  let t285 = @meson.meson_tac(@list.empty())
+  let t285 = @meson.meson_tac(@list.List([]))
   let t286 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([extension(), in_elim_thm(), in_image()])),
     t285,
@@ -5172,7 +5172,7 @@ pub fn simple_image() -> @kernel.Thm {
 ///|
 /// SIMPLE_IMAGE_GEN
 fn step_207() -> Unit raise {
-  let t287 = set_tac(@list.empty())
+  let t287 = set_tac(@list.List([]))
   simple_image_gen_c.set(
     @tactics.prove(
       @parser.parse_term("!(f:A->B) P. {f x | P x} = IMAGE f {x | P x}"),
@@ -5195,7 +5195,7 @@ pub fn simple_image_gen() -> @kernel.Thm {
 ///|
 /// IMAGE_UNIONS
 fn step_208() -> Unit raise {
-  let t292 = @meson.meson_tac(@list.empty())
+  let t292 = @meson.meson_tac(@list.List([]))
   let t291 = @simp.rewrite_tac(
     @list.List([
       @equal.gsym(@theorems.conj_assoc()),
@@ -5244,7 +5244,7 @@ pub fn image_unions() -> @kernel.Thm {
 ///|
 /// FUN_IN_IMAGE
 fn step_209() -> Unit raise {
-  let t294 = set_tac(@list.empty())
+  let t294 = set_tac(@list.List([]))
   fun_in_image_c.set(
     @tactics.prove(
       @parser.parse_term("!(f:A->B) s x. x IN s ==> f(x) IN IMAGE f s"),
@@ -5265,7 +5265,7 @@ pub fn fun_in_image() -> @kernel.Thm {
 ///|
 /// SURJECTIVE_IMAGE_EQ
 fn step_210() -> Unit raise {
-  let t295 = set_tac(@list.empty())
+  let t295 = set_tac(@list.List([]))
   surjective_image_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -5290,7 +5290,7 @@ pub fn surjective_image_eq() -> @kernel.Thm {
 ///|
 /// IMAGE_EQ
 fn step_211() -> Unit raise {
-  let t296 = set_tac(@list.empty())
+  let t296 = set_tac(@list.List([]))
   image_eq_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -5313,7 +5313,7 @@ pub fn image_eq() -> @kernel.Thm {
 ///|
 /// EMPTY_GSPEC
 fn step_212() -> Unit raise {
-  let t297 = set_tac(@list.empty())
+  let t297 = set_tac(@list.List([]))
   empty_gspec_c.set(@tactics.prove(@parser.parse_term("{x:A | F} = {}"), t297))
 }
 
@@ -5329,7 +5329,7 @@ pub fn empty_gspec() -> @kernel.Thm {
 ///|
 /// UNIV_GSPEC
 fn step_213() -> Unit raise {
-  let t298 = set_tac(@list.empty())
+  let t298 = set_tac(@list.List([]))
   univ_gspec_c.set(@tactics.prove(@parser.parse_term("{x | T} = (:A)"), t298))
 }
 
@@ -5345,7 +5345,7 @@ pub fn univ_gspec() -> @kernel.Thm {
 ///|
 /// SING_GSPEC
 fn step_214() -> Unit raise {
-  let t299 = set_tac(@list.empty())
+  let t299 = set_tac(@list.List([]))
   sing_gspec_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -5368,7 +5368,7 @@ pub fn sing_gspec() -> @kernel.Thm {
 ///|
 /// SING_ALT
 fn step_215() -> Unit raise {
-  let t300 = set_tac(@list.empty())
+  let t300 = set_tac(@list.List([]))
   sing_alt_c.set(
     @tactics.prove(
       @parser.parse_term("!s:A->bool. (?x. s = {x}) <=> ?!x. x IN s"),
@@ -5389,7 +5389,7 @@ pub fn sing_alt() -> @kernel.Thm {
 ///|
 /// IN_GSPEC
 fn step_216() -> Unit raise {
-  let t301 = set_tac(@list.empty())
+  let t301 = set_tac(@list.List([]))
   in_gspec_c.set(
     @tactics.prove(@parser.parse_term("!s:A->bool. {x | x IN s} = s"), t301),
   )
@@ -5436,7 +5436,7 @@ pub fn in_elim_pair_thm() -> @kernel.Thm {
 ///|
 /// IN_ELIM_TRIPLE_THM
 fn step_218() -> Unit raise {
-  let t304 = @meson.meson_tac(@list.empty())
+  let t304 = @meson.meson_tac(@list.List([]))
   let t305 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([in_elim_thm(), @pair.pair_eq()])),
     t304,
@@ -5465,7 +5465,7 @@ pub fn in_elim_triple_thm() -> @kernel.Thm {
 ///|
 /// IN_ELIM_QUAD_THM
 fn step_219() -> Unit raise {
-  let t306 = @meson.meson_tac(@list.empty())
+  let t306 = @meson.meson_tac(@list.List([]))
   let t307 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([in_elim_thm(), @pair.pair_eq()])),
     t306,
@@ -5547,7 +5547,7 @@ pub fn set_prove_cases() -> @kernel.Thm {
 ///|
 /// UNIONS_SINGS_GEN
 fn step_222() -> Unit raise {
-  let t310 = set_tac(@list.empty())
+  let t310 = set_tac(@list.List([]))
   let t311 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([unions_gspec()])),
     t310,
@@ -5574,7 +5574,7 @@ pub fn unions_sings_gen() -> @kernel.Thm {
 ///|
 /// UNIONS_SINGS
 fn step_223() -> Unit raise {
-  let t312 = set_tac(@list.empty())
+  let t312 = set_tac(@list.List([]))
   let t313 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([unions_gspec()])),
     t312,
@@ -5599,7 +5599,7 @@ pub fn unions_sings() -> @kernel.Thm {
 ///|
 /// IMAGE_INTERS
 fn step_224() -> Unit raise {
-  let t314 = set_tac(@list.empty())
+  let t314 = set_tac(@list.List([]))
   let t315 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([inters_image()])),
     t314,
@@ -5626,7 +5626,7 @@ pub fn image_inters() -> @kernel.Thm {
 ///|
 /// DIFF_INTERS
 fn step_225() -> Unit raise {
-  let t316 = set_tac(@list.empty())
+  let t316 = set_tac(@list.List([]))
   let t317 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([unions_gspec()])),
     t316,
@@ -5653,7 +5653,7 @@ pub fn diff_inters() -> @kernel.Thm {
 ///|
 /// INTERS_UNIONS
 fn step_226() -> Unit raise {
-  let t318 = set_tac(@list.empty())
+  let t318 = set_tac(@list.List([]))
   let t319 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@equal.gsym(diff_inters())])),
     t318,
@@ -5680,7 +5680,7 @@ pub fn inters_unions() -> @kernel.Thm {
 ///|
 /// UNIONS_INTERS
 fn step_227() -> Unit raise {
-  let t322 = @meson.meson_tac(@list.empty())
+  let t322 = @meson.meson_tac(@list.List([]))
   let t321 = @simp.rewrite_tac(
     @list.List([
       in_unions(),
@@ -5729,7 +5729,7 @@ pub fn unions_inters() -> @kernel.Thm {
 ///|
 /// UNIONS_DIFF
 fn step_228() -> Unit raise {
-  let t324 = set_tac(@list.empty())
+  let t324 = set_tac(@list.List([]))
   let t325 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([unions_gspec()])),
     t324,
@@ -5756,7 +5756,7 @@ pub fn unions_diff() -> @kernel.Thm {
 ///|
 /// DIFF_UNIONS
 fn step_229() -> Unit raise {
-  let t326 = set_tac(@list.empty())
+  let t326 = set_tac(@list.List([]))
   let t327 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([inters_gspec()])),
     t326,
@@ -5783,7 +5783,7 @@ pub fn diff_unions() -> @kernel.Thm {
 ///|
 /// DIFF_UNIONS_NONEMPTY
 fn step_230() -> Unit raise {
-  let t328 = set_tac(@list.empty())
+  let t328 = set_tac(@list.List([]))
   let t329 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([inters_gspec()])),
     t328,
@@ -5812,7 +5812,7 @@ pub fn diff_unions_nonempty() -> @kernel.Thm {
 ///|
 /// INTERS_OVER_UNIONS
 fn step_231() -> Unit raise {
-  let t336 = @meson.meson_tac(@list.empty())
+  let t336 = @meson.meson_tac(@list.List([]))
   let t335 = @simp.rewrite_tac(
     @list.List([@class.right_imp_exists_thm(), @class.skolem_thm()]),
   )
@@ -5869,7 +5869,7 @@ pub fn inters_over_unions() -> @kernel.Thm {
 ///|
 /// INTER_INTERS
 fn step_232() -> Unit raise {
-  let t339 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t339 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t338 = @simp.asm_rewrite_tac(
     @list.List([inters_0(), inter_univ(), inters_gspec()]),
   )
@@ -5905,7 +5905,7 @@ pub fn inter_inters() -> @kernel.Thm {
 ///|
 /// UNIONS_OVER_INTERS
 fn step_233() -> Unit raise {
-  let t348 = @meson.meson_tac(@list.empty())
+  let t348 = @meson.meson_tac(@list.List([]))
   let t347 = @simp.rewrite_tac(
     @list.List([@theorems.and_forall_thm(), @equal.gsym(@class.skolem_thm())]),
   )
@@ -5977,7 +5977,7 @@ pub fn unions_over_inters() -> @kernel.Thm {
 ///|
 /// UNIONS_EQ_INTERS
 fn step_234() -> Unit raise {
-  let t350 = set_tac(@list.empty())
+  let t350 = set_tac(@list.List([]))
   let t351 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -6014,7 +6014,7 @@ pub fn unions_eq_inters() -> @kernel.Thm {
 ///|
 /// EXISTS_UNIQUE_UNIONS_INTERS
 fn step_235() -> Unit raise {
-  let t352 = set_tac(@list.empty())
+  let t352 = set_tac(@list.List([]))
   let t353 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([unions_eq_inters()])),
     t352,
@@ -6043,7 +6043,7 @@ pub fn exists_unique_unions_inters() -> @kernel.Thm {
 ///|
 /// IMAGE_INTERS_SUBSET
 fn step_236() -> Unit raise {
-  let t354 = set_tac(@list.empty())
+  let t354 = set_tac(@list.List([]))
   let t355 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([inters_image()])),
     t354,
@@ -6072,7 +6072,7 @@ pub fn image_inters_subset() -> @kernel.Thm {
 ///|
 /// IMAGE_INTER_SUBSET
 fn step_237() -> Unit raise {
-  let t356 = set_tac(@list.empty())
+  let t356 = set_tac(@list.List([]))
   image_inter_subset_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -6097,7 +6097,7 @@ pub fn image_inter_subset() -> @kernel.Thm {
 ///|
 /// IMAGE_INTER_SATURATED_GEN
 fn step_238() -> Unit raise {
-  let t357 = set_tac(@list.empty())
+  let t357 = set_tac(@list.List([]))
   image_inter_saturated_gen_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -6122,7 +6122,7 @@ pub fn image_inter_saturated_gen() -> @kernel.Thm {
 ///|
 /// IMAGE_INTERS_SATURATED_GEN
 fn step_239() -> Unit raise {
-  let t362 = set_tac(@list.empty())
+  let t362 = set_tac(@list.List([]))
   let t361 = @simp.rewrite_tac(
     @list.List([@theorems.imp_conj(), @theorems.forall_unwind_thm2()]),
   )
@@ -6155,9 +6155,9 @@ fn step_239() -> Unit raise {
     ),
     t363,
   )
-  let t388 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t388 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t389 = @tactics.then_tac(@tactics.match_mp_tac(lemma), t388)
-  let t387 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t387 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t386 = @tactics.exists_tac(@parser.parse_term("u:A->bool"))
   let t390 = @list.List([
     @tactics.then_tac(
@@ -6429,7 +6429,7 @@ pub fn image_inters_saturated_gen() -> @kernel.Thm {
 ///|
 /// IMAGE_INTER_SATURATED
 fn step_240() -> Unit raise {
-  let t392 = set_tac(@list.empty())
+  let t392 = set_tac(@list.List([]))
   image_inter_saturated_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -6537,12 +6537,12 @@ pub fn image_inters_saturated() -> @kernel.Thm {
 ///|
 /// FINITE_INDUCT_STRONG
 fn step_242() -> Unit raise {
-  let t415 = @simp.asm_rewrite_tac(@list.empty())
+  let t415 = @simp.asm_rewrite_tac(@list.List([]))
   let t416 = @tactics.then_tac(
     @tactics.first_assum(@tactics.match_mp_tac),
     t415,
   )
-  let t414 = set_tac(@list.empty())
+  let t414 = set_tac(@list.List([]))
   let t413 = @tactics.undisch_tac(@parser.parse_term("x:A IN s"))
   let t417 = @list.List([
     @tactics.then_tac(
@@ -6578,11 +6578,11 @@ fn step_242() -> Unit raise {
     t416,
   ])
   let t410 = @class.asm_cases_tac(@parser.parse_term("x:A IN s"))
-  let t409 = @simp.asm_rewrite_tac(@list.empty())
+  let t409 = @simp.asm_rewrite_tac(@list.List([]))
   let t408 = @tactics.repeat_tac(@tactics.strip_tac)
   let t407 = @simp.asm_simp_tac(@list.List([finite_rules()]))
   let t406 = @tactics.match_mp_tac(finite_induct())
-  let t405 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.empty())])
+  let t405 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([]))])
   let t404 = @tactics.subgoal_then(
     @parser.parse_term("!s:A->bool. FINITE s ==> FINITE s /\\ P s"),
     fn(
@@ -6681,7 +6681,7 @@ pub fn finite_induct_strong() -> @kernel.Thm {
 ///|
 /// INJECTIVE_ON_ALT
 fn step_243() -> Unit raise {
-  let t419 = @meson.meson_tac(@list.empty())
+  let t419 = @meson.meson_tac(@list.List([]))
   injective_on_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -6706,7 +6706,7 @@ pub fn injective_on_alt() -> @kernel.Thm {
 ///|
 /// INJECTIVE_ALT
 fn step_244() -> Unit raise {
-  let t420 = @meson.meson_tac(@list.empty())
+  let t420 = @meson.meson_tac(@list.List([]))
   injective_alt_c.set(
     @tactics.prove(
       @parser.parse_term(
@@ -6757,12 +6757,12 @@ pub fn surjective_on_right_inverse() -> @kernel.Thm {
 /// INJECTIVE_ON_LEFT_INVERSE
 fn step_246() -> Unit raise {
   let lemma = @meson.meson(
-    @list.empty(),
+    @list.List([]),
     @parser.parse_term(
       "(!x. x IN s ==> (g(f(x)) = x)) <=>\n    (!y x. x IN s /\\ (y = (f:A->B) x) ==> (g y = x))",
     ),
   )
-  let t422 = @meson.meson_tac(@list.empty())
+  let t422 = @meson.meson_tac(@list.List([]))
   let t423 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([lemma, @equal.gsym(@class.skolem_thm())])),
     t422,
@@ -6791,7 +6791,7 @@ pub fn injective_on_left_inverse() -> @kernel.Thm {
 ///|
 /// BIJECTIVE_ON_LEFT_RIGHT_INVERSE
 fn step_247() -> Unit raise {
-  let t426 = @meson.asm_meson_tac(@list.empty())
+  let t426 = @meson.asm_meson_tac(@list.List([]))
   let t425 = @simp.rewrite_tac(@list.List([@theorems.right_and_exists_thm()]))
   let t424 = @simp.rewrite_tac(
     @list.List([injective_on_left_inverse(), surjective_on_right_inverse()]),
@@ -6939,14 +6939,14 @@ pub fn bijective_left_right_inverse() -> @kernel.Thm {
 ///|
 /// FUNCTION_FACTORS_LEFT_GEN
 fn step_251() -> Unit raise {
-  let t437 = @meson.meson_tac(@list.empty())
+  let t437 = @meson.meson_tac(@list.List([]))
   let t436 = @simp.rewrite_tac(@list.List([@equal.gsym(@class.skolem_thm())]))
   let t438 = @tactics.then_tac(
     @tactics.then_tac(
       @simp.once_rewrite_tac(
         @list.List([
           @meson.meson(
-            @list.empty(),
+            @list.List([]),
             @parser.parse_term(
               "(!x. P x ==> f(x) = g(k x)) <=> (!y x. P x /\\ y = k x ==> f x = g y)",
             ),
@@ -6989,7 +6989,7 @@ fn step_252() -> Unit raise {
     @list.List([
       @class.fun_eq_thm(),
       @trivia.o_thm(),
-      @equal.gsym(@simp.rewrite_rule(@list.empty())(t439)),
+      @equal.gsym(@simp.rewrite_rule(@list.List([]))(t439)),
     ]),
   )
   function_factors_left_c.set(
@@ -7016,7 +7016,7 @@ pub fn function_factors_left() -> @kernel.Thm {
 ///|
 /// FUNCTION_FACTORS_RIGHT_GEN
 fn step_253() -> Unit raise {
-  let t441 = @meson.meson_tac(@list.empty())
+  let t441 = @meson.meson_tac(@list.List([]))
   let t442 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@equal.gsym(@class.skolem_thm())])),
     t441,
@@ -7045,7 +7045,7 @@ pub fn function_factors_right_gen() -> @kernel.Thm {
 ///|
 /// FUNCTION_FACTORS_RIGHT
 fn step_254() -> Unit raise {
-  let t443 = @meson.meson_tac(@list.empty())
+  let t443 = @meson.meson_tac(@list.List([]))
   let t444 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -7080,7 +7080,7 @@ pub fn function_factors_right() -> @kernel.Thm {
 ///|
 /// SURJECTIVE_FORALL_THM
 fn step_255() -> Unit raise {
-  let t449 = @meson.meson_tac(@list.empty())
+  let t449 = @meson.meson_tac(@list.List([]))
   let t448 = @tactics.disch_then(fn(
     x446 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -7105,7 +7105,7 @@ fn step_255() -> Unit raise {
     let th = x446
     @simp.once_rewrite_tac(@list.List([@equal.gsym(th)]))
   })
-  let t445 = @list.List([@meson.meson_tac(@list.empty()), @tactics.all_tac])
+  let t445 = @list.List([@meson.meson_tac(@list.List([])), @tactics.all_tac])
   let t450 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t445),
@@ -7137,7 +7137,7 @@ pub fn surjective_forall_thm() -> @kernel.Thm {
 ///|
 /// SURJECTIVE_EXISTS_THM
 fn step_256() -> Unit raise {
-  let t459 = @meson.meson_tac(@list.empty())
+  let t459 = @meson.meson_tac(@list.List([]))
   let t455 = @parser.parse_term("\\y:B. !x:A. ~(f x = y)")
   let t458 = @tactics.disch_then(fn(
     x457 : @kernel.Thm,
@@ -7207,7 +7207,7 @@ fn step_256() -> Unit raise {
       }
     })(((x456 : @kernel.Thm) => @bool.spec(t455, x456))(x457))
   })
-  let t451 = @list.List([@meson.meson_tac(@list.empty()), @tactics.all_tac])
+  let t451 = @list.List([@meson.meson_tac(@list.List([])), @tactics.all_tac])
   let t460 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @tactics.eq_tac), t451),
@@ -7239,7 +7239,7 @@ pub fn surjective_exists_thm() -> @kernel.Thm {
 ///|
 /// SURJECTIVE_IMAGE_THM
 fn step_257() -> Unit raise {
-  let t468 = @meson.meson_tac(@list.empty())
+  let t468 = @meson.meson_tac(@list.List([]))
   let t464 = @parser.parse_term("\\y:B. T")
   let t467 = @list.List([
     @tactics.all_tac,
@@ -7351,12 +7351,12 @@ pub fn surjective_image_thm() -> @kernel.Thm {
 ///|
 /// IMAGE_INJECTIVE_IMAGE_OF_SUBSET
 fn step_258() -> Unit raise {
-  let t472 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t472 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t473 = @tactics.then_tac(
     @tactics.exists_tac(@parser.parse_term("IMAGE (g:B->A) (IMAGE (f:A->B) s)")),
     t472,
   )
-  let t471 = set_tac(@list.empty())
+  let t471 = set_tac(@list.List([]))
   let t474 = @list.List([
     @tactics.then_tac(
       @simp.rewrite_tac(
@@ -7418,7 +7418,7 @@ pub fn finite_empty() -> @kernel.Thm {
 ///|
 /// FINITE_SUBSET
 fn step_260() -> Unit raise {
-  let t499 = set_tac(@list.empty())
+  let t499 = set_tac(@list.List([]))
   let t498 = @tactics.undisch_tac(@parser.parse_term("~(x:A IN t)"))
   let t497 = @tactics.undisch_tac(@parser.parse_term("t SUBSET x:A INSERT u"))
   let t500 = @tactics.then_tac(
@@ -7428,8 +7428,8 @@ fn step_260() -> Unit raise {
     ),
     t499,
   )
-  let t495 = @simp.asm_rewrite_tac(@list.empty())
-  let t494 = set_tac(@list.empty())
+  let t495 = @simp.asm_rewrite_tac(@list.List([]))
+  let t494 = set_tac(@list.List([]))
   let t496 = @list.List([
     @tactics.then_tac(
       @tactics.undisch_tac(@parser.parse_term("x:A IN t")),
@@ -7493,7 +7493,7 @@ fn step_260() -> Unit raise {
     @class.asm_cases_tac(@parser.parse_term("x:A IN t")),
     t501,
   )
-  let t490 = set_tac(@list.empty())
+  let t490 = set_tac(@list.List([]))
   let t489 = @tactics.undisch_tac(@parser.parse_term("t SUBSET (x:A INSERT u)"))
   let t488 = @tactics.first_assum(@tactics.match_mp_tac)
   let t503 = @list.List([
@@ -7653,7 +7653,7 @@ pub fn finite_restrict() -> @kernel.Thm {
 /// FINITE_UNION_IMP
 fn step_262() -> Unit raise {
   let t512 = @meson.meson_tac(@list.List([finite_rules()]))
-  let t513 = @list.List([set_tac(@list.empty()), t512])
+  let t513 = @list.List([set_tac(@list.List([])), t512])
   let t511 = @tactics.subgoal_then(
     @parser.parse_term("!x s t. (x:A INSERT s) UNION t = x INSERT (s UNION t)"),
     fn(
@@ -7725,8 +7725,8 @@ pub fn finite_union_imp() -> @kernel.Thm {
 /// FINITE_UNION
 fn step_263() -> Unit raise {
   let t519 = @tactics.match_accept_tac(finite_union_imp())
-  let t518 = set_tac(@list.empty())
-  let t517 = @simp.asm_rewrite_tac(@list.empty())
+  let t518 = set_tac(@list.List([]))
+  let t517 = @simp.asm_rewrite_tac(@list.List([]))
   let t516 = @tactics.exists_tac(@parser.parse_term("(s:A->bool) UNION t"))
   let t515 = @tactics.match_mp_tac(finite_subset())
   let t520 = @list.List([
@@ -7791,13 +7791,13 @@ pub fn finite_inter() -> @kernel.Thm {
 ///|
 /// FINITE_INSERT
 fn step_265() -> Unit raise {
-  let t526 = @simp.asm_rewrite_tac(@list.empty())
+  let t526 = @simp.asm_rewrite_tac(@list.List([]))
   let t527 = @tactics.then_tac(
     @tactics.match_mp_tac(@bool.conjunct2(finite_rules())),
     t526,
   )
-  let t525 = set_tac(@list.empty())
-  let t524 = @simp.asm_rewrite_tac(@list.empty())
+  let t525 = set_tac(@list.List([]))
+  let t524 = @simp.asm_rewrite_tac(@list.List([]))
   let t523 = @tactics.exists_tac(@parser.parse_term("x:A INSERT s"))
   let t528 = @list.List([
     @tactics.then_tac(
@@ -7854,8 +7854,8 @@ pub fn finite_sing() -> @kernel.Thm {
 ///|
 /// FINITE_DELETE_IMP
 fn step_267() -> Unit raise {
-  let t533 = @tactics.asm_tac(set_tac)(@list.empty())
-  let t532 = @simp.asm_rewrite_tac(@list.empty())
+  let t533 = @tactics.asm_tac(set_tac)(@list.List([]))
+  let t532 = @simp.asm_rewrite_tac(@list.List([]))
   let t531 = @tactics.match_mp_tac(finite_subset())
   let t534 = @tactics.then_tac(
     @tactics.then_tac(
@@ -7886,7 +7886,7 @@ pub fn finite_delete_imp() -> @kernel.Thm {
 ///|
 /// FINITE_DELETE
 fn step_268() -> Unit raise {
-  let t558 = set_tac(@list.empty())
+  let t558 = set_tac(@list.List([]))
   let t557 = @tactics.pop_assum(fn(
     x554 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -7963,7 +7963,7 @@ fn step_268() -> Unit raise {
     ),
     t558,
   )
-  let t551 = set_tac(@list.empty())
+  let t551 = set_tac(@list.List([]))
   let t550 = @tactics.pop_assum(fn(
     x547 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -8106,7 +8106,7 @@ pub fn finite_delete() -> @kernel.Thm {
 ///|
 /// FINITE_FINITE_UNIONS
 fn step_269() -> Unit raise {
-  let t564 = @meson.meson_tac(@list.empty())
+  let t564 = @meson.meson_tac(@list.List([]))
   let t563 = @simp.rewrite_tac(@list.List([finite_union(), finite_rules()]))
   let t562 = @simp.rewrite_tac(
     @list.List([in_insert(), not_in_empty(), unions_0(), unions_insert()]),
@@ -8145,7 +8145,7 @@ fn step_270() -> Unit raise {
   let t572 = @simp.rewrite_tac(
     @list.List([finite_union(), finite_insert(), finite_rules()]),
   )
-  let t571 = @meson.meson_tac(@list.empty())
+  let t571 = @meson.meson_tac(@list.List([]))
   let t573 = @list.List([
     @tactics.then_tac(
       @simp.rewrite_tac(
@@ -8194,7 +8194,7 @@ fn step_270() -> Unit raise {
   let t566 = @simp.rewrite_tac(
     @list.List([
       not_in_empty(),
-      @simp.rewrite_rule(@list.empty())(empty_gspec()),
+      @simp.rewrite_rule(@list.List([]))(empty_gspec()),
       finite_rules(),
     ]),
   )
@@ -8259,7 +8259,7 @@ pub fn finite_image() -> @kernel.Thm {
 ///|
 /// FINITE_IMAGE_INJ_GENERAL
 fn step_272() -> Unit raise {
-  let t589 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t589 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t588 = @simp.asm_simp_tac(@list.List([finite_image()]))
   let t587 = @tactics.exists_tac(@parser.parse_term("IMAGE (g:B->A) A"))
   let t586 = @tactics.match_mp_tac(finite_subset())
@@ -8386,7 +8386,7 @@ fn step_273() -> Unit raise {
   let t599 = @simp.asm_simp_tac(
     @list.List([finite_finite_unions(), finite_image(), forall_in_image()]),
   )
-  let t598 = set_tac(@list.empty())
+  let t598 = set_tac(@list.List([]))
   let t597 = @simp.rewrite_tac(@list.List([exists_in_image()]))
   let t596 = @simp.rewrite_tac(@list.List([in_elim_thm(), in_unions()]))
   let t600 = @list.List([
@@ -8525,7 +8525,7 @@ pub fn finite_finite_preimage() -> @kernel.Thm {
 ///|
 /// FINITE_IMAGE_INJ_EQ
 fn step_275() -> Unit raise {
-  let t620 = set_tac(@list.empty())
+  let t620 = set_tac(@list.List([]))
   let t619 = @tactics.match_mp_tac(@theorems.eq_imp())
   let t616 = @drule.match_mp(finite_image_inj_general())
   let t618 = @tactics.disch_then(fn(
@@ -8731,7 +8731,7 @@ pub fn finite_image_inj() -> @kernel.Thm {
 /// FINITE_IMAGE_GEN
 fn step_277() -> Unit raise {
   let t641 = @meson.asm_meson_tac(@list.List([finite_image(), finite_subset()]))
-  let t642 = @list.List([@tactics.asm_tac(set_tac)(@list.empty()), t641])
+  let t642 = @list.List([@tactics.asm_tac(set_tac)(@list.List([])), t641])
   let t640 = @tactics.subgoal_then(
     @parser.parse_term("IMAGE g s = IMAGE (h:B->C) (IMAGE (f:A->B) s)"),
     fn(
@@ -8895,9 +8895,9 @@ pub fn finite_image_gen() -> @kernel.Thm {
 ///|
 /// INFINITE_IMAGE
 fn step_278() -> Unit raise {
-  let t653 = @simp.asm_rewrite_tac(@list.empty())
+  let t653 = @simp.asm_rewrite_tac(@list.List([]))
   let t654 = @tactics.then_tac(@tactics.match_mp_tac(finite_image()), t653)
-  let t655 = @list.List([@tactics.asm_tac(set_tac)(@list.empty()), t654])
+  let t655 = @list.List([@tactics.asm_tac(set_tac)(@list.List([])), t654])
   let t652 = @tactics.subgoal_then(
     @parser.parse_term("s = IMAGE (g:B->A) (IMAGE f s)"),
     fn(
@@ -9041,7 +9041,7 @@ pub fn infinite_nonempty() -> @kernel.Thm {
 ///|
 /// INFINITE_DIFF_FINITE
 fn step_281() -> Unit raise {
-  let t664 = set_tac(@list.empty())
+  let t664 = set_tac(@list.List([]))
   let t663 = @simp.asm_rewrite_tac(@list.List([finite_union()]))
   let t662 = @tactics.exists_tac(
     @parser.parse_term("(t:A->bool) UNION (s DIFF t)"),
@@ -9094,7 +9094,7 @@ pub fn infinite_diff_finite() -> @kernel.Thm {
 ///|
 /// SUBSET_IMAGE_INJ
 fn step_282() -> Unit raise {
-  let t678 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t678 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t677 = @tactics.exists_tac(@parser.parse_term("IMAGE (g:B->A) s"))
   let t674 = @parser.parse_term("g:B->A")
   let t676 = @tactics.disch_then((x675 : @kernel.Thm) => {
@@ -9229,7 +9229,7 @@ pub fn subset_image_inj() -> @kernel.Thm {
 ///|
 /// SUBSET_IMAGE
 fn step_283() -> Unit raise {
-  let t683 = set_tac(@list.empty())
+  let t683 = set_tac(@list.List([]))
   let t682 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t681 = @simp.rewrite_tac(@list.List([subset_image_inj()]))
   let t680 = @list.List([
@@ -9274,7 +9274,7 @@ pub fn subset_image() -> @kernel.Thm {
 ///|
 /// EXISTS_SUBSET_IMAGE
 fn step_284() -> Unit raise {
-  let t685 = @meson.meson_tac(@list.empty())
+  let t685 = @meson.meson_tac(@list.List([]))
   let t686 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([subset_image()])),
     t685,
@@ -9303,7 +9303,7 @@ pub fn exists_subset_image() -> @kernel.Thm {
 ///|
 /// FORALL_SUBSET_IMAGE
 fn step_285() -> Unit raise {
-  let t687 = @meson.meson_tac(@list.empty())
+  let t687 = @meson.meson_tac(@list.List([]))
   let t688 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([subset_image()])),
     t687,
@@ -9332,7 +9332,7 @@ pub fn forall_subset_image() -> @kernel.Thm {
 ///|
 /// EXISTS_SUBSET_IMAGE_INJ
 fn step_286() -> Unit raise {
-  let t689 = @meson.meson_tac(@list.empty())
+  let t689 = @meson.meson_tac(@list.List([]))
   let t690 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([subset_image_inj()])),
     t689,
@@ -9371,7 +9371,7 @@ fn step_287() -> Unit raise {
   let t691 = @simp.once_rewrite_tac(
     @list.List([
       @meson.meson(
-        @list.empty(),
+        @list.List([]),
         @parser.parse_term("(!t. p t) <=> ~(?t. ~p t)"),
       ),
     ]),
@@ -9463,7 +9463,7 @@ fn step_289() -> Unit raise {
   let t698 = @simp.once_rewrite_tac(
     @list.List([
       @meson.meson(
-        @list.empty(),
+        @list.List([]),
         @parser.parse_term("(!t. p t) <=> ~(?t. ~p t)"),
       ),
     ]),
@@ -9497,7 +9497,7 @@ pub fn forall_finite_subset_image_inj() -> @kernel.Thm {
 /// EXISTS_FINITE_SUBSET_IMAGE
 fn step_290() -> Unit raise {
   let t702 = @meson.meson_tac(@list.List([finite_image(), image_subset()]))
-  let t701 = @meson.meson_tac(@list.empty())
+  let t701 = @meson.meson_tac(@list.List([]))
   let t703 = @list.List([
     @tactics.then_tac(
       @simp.rewrite_tac(@list.List([exists_finite_subset_image_inj()])),
@@ -9543,7 +9543,7 @@ fn step_291() -> Unit raise {
   let t705 = @simp.once_rewrite_tac(
     @list.List([
       @meson.meson(
-        @list.empty(),
+        @list.List([]),
         @parser.parse_term("(!x. P x) <=> ~(?x. ~P x)"),
       ),
     ]),
@@ -9576,7 +9576,7 @@ pub fn forall_finite_subset_image() -> @kernel.Thm {
 ///|
 /// FINITE_SUBSET_IMAGE
 fn step_292() -> Unit raise {
-  let t712 = @meson.meson_tac(@list.empty())
+  let t712 = @meson.meson_tac(@list.List([]))
   let t711 = @simp.rewrite_tac(@list.List([forall_finite_subset_image()]))
   let t709 = @parser.parse_term("t:B->bool")
   let t710 = @tactics.spec_tac(@parser.parse_term("t:B->bool"), t709)
@@ -9789,7 +9789,7 @@ pub fn infinite_superset() -> @kernel.Thm {
 ///|
 /// FINITE_TRANSITIVITY_CHAIN
 fn step_298() -> Unit raise {
-  let t729 = set_tac(@list.empty())
+  let t729 = set_tac(@list.List([]))
   let t728 = @simp.rewrite_tac(@list.List([not_in_empty()]))
   let t727 = @tactics.match_mp_tac(finite_induct_strong())
   let t730 = @tactics.then_tac(
@@ -9832,9 +9832,9 @@ fn step_299() -> Unit raise {
   let t744 = @meson.asm_meson_tac(
     @list.List([psubset_trans(), subset_psubset_trans(), psubset()]),
   )
-  let t741 = @tactics.asm_tac(set_tac)(@list.empty())
-  let t742 = set_tac(@list.empty())
-  let t743 = @list.List([set_tac(@list.empty()), t742, @tactics.all_tac, t741])
+  let t741 = @tactics.asm_tac(set_tac)(@list.List([]))
+  let t742 = set_tac(@list.List([]))
+  let t743 = @list.List([set_tac(@list.List([])), t742, @tactics.all_tac, t741])
   let t740 = @tactics.repeat_tac(@tactics.conj_tac)
   let t739 = @simp.asm_simp_tac(
     @list.List([
@@ -9933,7 +9933,7 @@ pub fn unions_maximal_sets() -> @kernel.Thm {
 ///|
 /// FINITE_SUBSET_UNIONS
 fn step_300() -> Unit raise {
-  let t765 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t765 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t764 = @simp.asm_simp_tac(@list.List([finite_image(), unions_image()]))
   let t763 = @tactics.exists_tac(@parser.parse_term("IMAGE (u:A->A->bool) s"))
   let t762 = @tactics.x_gen_tac(@parser.parse_term("u:A->A->bool"))
@@ -10082,16 +10082,16 @@ pub fn finite_subset_unions() -> @kernel.Thm {
 ///|
 /// UNIONS_IN_CHAIN
 fn step_301() -> Unit raise {
-  let t779 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t779 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t778 = @tactics.match_mp_tac(
     @meson.meson(
-      @list.empty(),
+      @list.List([]),
       @parser.parse_term(
         "s UNION t = s \\/ s UNION t = t\n    ==> t IN f ==> s UNION t = s \\/ s UNION t IN f",
       ),
     ),
   )
-  let t777 = @simp.asm_rewrite_tac(@list.empty())
+  let t777 = @simp.asm_rewrite_tac(@list.List([]))
   let t776 = @tactics.disch_then(fn(
     x774 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -10197,16 +10197,16 @@ pub fn unions_in_chain() -> @kernel.Thm {
 ///|
 /// INTERS_IN_CHAIN
 fn step_302() -> Unit raise {
-  let t793 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t793 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t792 = @tactics.match_mp_tac(
     @meson.meson(
-      @list.empty(),
+      @list.List([]),
       @parser.parse_term(
         "s INTER t = s \\/ s INTER t = t\n    ==> t IN f ==> s INTER t = s \\/ s INTER t IN f",
       ),
     ),
   )
-  let t791 = @simp.asm_rewrite_tac(@list.empty())
+  let t791 = @simp.asm_rewrite_tac(@list.List([]))
   let t790 = @tactics.disch_then(fn(
     x788 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -10312,7 +10312,7 @@ pub fn inters_in_chain() -> @kernel.Thm {
 ///|
 /// FINITE_SUBSET_UNIONS_DIRECTED_EQ
 fn step_303() -> Unit raise {
-  let t798 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t798 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t797 = @simp.simp_tac(@list.List([insert_subset()]))
   let t796 = @tactics.match_mp_tac(finite_induct_strong())
   let t795 = @tactics.repeat_tac(@tactics.disch_tac)
@@ -10462,7 +10462,7 @@ pub fn finrec() -> @kernel.Thm {
 ///|
 /// FINREC_1_LEMMA
 fn step_307() -> Unit raise {
-  let t807 = set_tac(@list.empty())
+  let t807 = set_tac(@list.List([]))
   let t806 = @tactics.repeat_tac(@tactics.gen_tac)
   let t808 = @tactics.then_tac(
     @tactics.then_tac(
@@ -10496,12 +10496,12 @@ pub fn finrec_1_lemma() -> @kernel.Thm {
 ///|
 /// FINREC_SUC_LEMMA
 fn step_308() -> Unit raise {
-  let t809 = set_tac(@list.empty())
+  let t809 = set_tac(@list.List([]))
   let lem = @tactics.prove(
     @parser.parse_term("s DELETE (x:A) DELETE y = s DELETE y DELETE x"),
     t809,
   )
-  let t850 = @simp.asm_rewrite_tac(@list.empty())
+  let t850 = @simp.asm_rewrite_tac(@list.List([]))
   let t851 = @tactics.then_tac(
     @tactics.first_assum(@tactics.match_mp_tac),
     t850,
@@ -10670,12 +10670,12 @@ fn step_308() -> Unit raise {
     ),
     t852,
   )
-  let t832 = @simp.asm_rewrite_tac(@list.empty())
+  let t832 = @simp.asm_rewrite_tac(@list.List([]))
   let t854 = @list.List([
     @tactics.then_tac(@tactics.exists_tac(@parser.parse_term("c:B")), t832),
     t853,
   ])
-  let t831 = @simp.asm_rewrite_tac(@list.empty())
+  let t831 = @simp.asm_rewrite_tac(@list.List([]))
   let t830 = @class.asm_cases_tac(@parser.parse_term("x:A = y"))
   let t829 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
   let t828 = @tactics.disch_then(
@@ -10760,8 +10760,8 @@ fn step_308() -> Unit raise {
     ),
     t854,
   )
-  let t819 = set_tac(@list.empty())
-  let t818 = @simp.asm_rewrite_tac(@list.empty())
+  let t819 = set_tac(@list.List([]))
+  let t818 = @simp.asm_rewrite_tac(@list.List([]))
   let t817 = @tactics.exists_tac(@parser.parse_term("b:B"))
   let t816 = @tactics.disch_then(fn(
     x813 : @kernel.Thm,
@@ -10877,7 +10877,7 @@ pub fn finrec_suc_lemma() -> @kernel.Thm {
 ///|
 /// FINREC_UNIQUE_LEMMA
 fn step_309() -> Unit raise {
-  let t874 = @meson.asm_meson_tac(@list.empty())
+  let t874 = @meson.asm_meson_tac(@list.List([]))
   let t873 = @simp.rewrite_tac(@list.List([finrec()]))
   let t872 = @tactics.disch_then(
     @tactics.conjuncts_then(
@@ -11067,7 +11067,7 @@ pub fn finrec_unique_lemma() -> @kernel.Thm {
 ///|
 /// FINREC_EXISTS_LEMMA
 fn step_310() -> Unit raise {
-  let t880 = set_tac(@list.empty())
+  let t880 = set_tac(@list.List([]))
   let lem = @tactics.prove(
     @parser.parse_term("~(x IN s ) ==> ((x:A INSERT s) DELETE x = s)"),
     t880,
@@ -11299,7 +11299,7 @@ pub fn finrec_exists_lemma() -> @kernel.Thm {
 ///|
 /// FINREC_FUN_LEMMA
 fn step_311() -> Unit raise {
-  let t912 = @meson.asm_meson_tac(@list.empty())
+  let t912 = @meson.asm_meson_tac(@list.List([]))
   let t911 = @tactics.conv_tac(@class.select_conv)
   let t913 = @tactics.then_tac(
     @tactics.then_tac(
@@ -11375,7 +11375,7 @@ fn step_311() -> Unit raise {
     ),
     t912,
   )
-  let t906 = @meson.asm_meson_tac(@list.empty())
+  let t906 = @meson.asm_meson_tac(@list.List([]))
   let t914 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -11427,8 +11427,8 @@ pub fn finrec_fun_lemma() -> @kernel.Thm {
 ///|
 /// FINREC_FUN
 fn step_312() -> Unit raise {
-  let t1011 = @simp.asm_rewrite_tac(@list.empty())
-  let t1008 = @simp.asm_rewrite_tac(@list.empty())
+  let t1011 = @simp.asm_rewrite_tac(@list.List([]))
+  let t1008 = @simp.asm_rewrite_tac(@list.List([]))
   let t1007 = @tactics.exists_tac(@parser.parse_term("n:num"))
   let t1006 = @tactics.disch_then(fn(
     x1004 : @kernel.Thm,
@@ -11533,8 +11533,8 @@ fn step_312() -> Unit raise {
     ),
     t1008,
   )
-  let t999 = set_tac(@list.empty())
-  let t998 = @simp.asm_rewrite_tac(@list.empty())
+  let t999 = set_tac(@list.List([]))
+  let t998 = @simp.asm_rewrite_tac(@list.List([]))
   let t997 = @tactics.exists_tac(@parser.parse_term("s:A->bool"))
   let t1010 = @list.List([
     @tactics.then_tac(
@@ -11696,7 +11696,7 @@ fn step_312() -> Unit raise {
   let t989 = @tactics.disch_then(
     @tactics.x_choose_then(@parser.parse_term("w:B"))(t988),
   )
-  let t984 = @simp.asm_rewrite_tac(@list.empty())
+  let t984 = @simp.asm_rewrite_tac(@list.List([]))
   let t980 = @parser.parse_term("x:A")
   let t983 = @tactics.disch_then(
     @tactics.ante_res_then(fn(
@@ -11845,7 +11845,7 @@ fn step_312() -> Unit raise {
     t1013,
   ])
   let t971 = @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()]))
-  let t970 = @simp.rewrite_tac(@list.empty())
+  let t970 = @simp.rewrite_tac(@list.List([]))
   let t966 = @parser.parse_term("(g:(A->bool)->B) s")
   let t969 = @tactics.first_assum(fn(
     x968 : @kernel.Thm,
@@ -11915,7 +11915,7 @@ fn step_312() -> Unit raise {
       }
     })(((x967 : @kernel.Thm) => @bool.spec(t966, x967))(x968))
   })
-  let t962 = @simp.asm_rewrite_tac(@list.empty())
+  let t962 = @simp.asm_rewrite_tac(@list.List([]))
   let t961 = @tactics.disch_then(fn(
     x960 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -12403,7 +12403,7 @@ pub fn finrec_fun() -> @kernel.Thm {
 ///|
 /// SET_RECURSION_LEMMA
 fn step_313() -> Unit raise {
-  let t1042 = set_tac(@list.empty())
+  let t1042 = set_tac(@list.List([]))
   let t1041 = @tactics.undisch_tac(@parser.parse_term("~(x:A IN s)"))
   let t1040 = @tactics.repeat_tac(@tactics.ap_term_tac)
   let t1043 = @tactics.then_tac(
@@ -12520,7 +12520,7 @@ fn step_313() -> Unit raise {
     ),
     t1044,
   )
-  let t1032 = @simp.asm_rewrite_tac(@list.empty())
+  let t1032 = @simp.asm_rewrite_tac(@list.List([]))
   let t1046 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -12531,9 +12531,9 @@ fn step_313() -> Unit raise {
     ),
     t1045,
   ])
-  let t1031 = @simp.asm_rewrite_tac(@list.empty())
+  let t1031 = @simp.asm_rewrite_tac(@list.List([]))
   let t1030 = @tactics.repeat_tac(@tactics.gen_tac)
-  let t1029 = @simp.asm_rewrite_tac(@list.empty())
+  let t1029 = @simp.asm_rewrite_tac(@list.List([]))
   let t1028 = @tactics.exists_tac(@parser.parse_term("g:(A->bool)->B"))
   let t1027 = @tactics.disch_then(
     @tactics.x_choose_then(@parser.parse_term("g:(A->bool)->B"))(
@@ -12705,7 +12705,7 @@ pub fn itset() -> @kernel.Thm {
 ///|
 /// FINITE_RECURSION
 fn step_315() -> Unit raise {
-  let t1051 = @simp.asm_rewrite_tac(@list.empty())
+  let t1051 = @simp.asm_rewrite_tac(@list.List([]))
   let t1050 = @tactics.match_mp_tac(set_recursion_lemma())
   let t1049 = @tactics.conv_tac(@class.select_conv)
   let t1048 = @simp.rewrite_tac(@list.List([itset()]))
@@ -12749,7 +12749,7 @@ pub fn finite_recursion() -> @kernel.Thm {
 ///|
 /// FINITE_RECURSION_DELETE
 fn step_316() -> Unit raise {
-  let t1096 = set_tac(@list.empty())
+  let t1096 = set_tac(@list.List([]))
   let t1095 = @tactics.undisch_tac(@parser.parse_term("~(x:A IN s)"))
   let t1097 = @tactics.then_tac(
     @tactics.then_tac(
@@ -12761,7 +12761,7 @@ fn step_316() -> Unit raise {
     ),
     t1096,
   )
-  let t1094 = set_tac(@list.empty())
+  let t1094 = set_tac(@list.List([]))
   let t1093 = @tactics.undisch_tac(@parser.parse_term("x:A IN s"))
   let t1092 = @tactics.disch_then(fn(
     x1091 : @kernel.Thm,
@@ -13076,10 +13076,10 @@ fn step_316() -> Unit raise {
     ),
     t1097,
   ])
-  let t1066 = @simp.asm_rewrite_tac(@list.empty())
+  let t1066 = @simp.asm_rewrite_tac(@list.List([]))
   let t1065 = @class.asm_cases_tac(@parser.parse_term("x:A IN s"))
   let t1064 = @tactics.repeat_tac(@tactics.gen_tac)
-  let t1063 = @simp.asm_rewrite_tac(@list.empty())
+  let t1063 = @simp.asm_rewrite_tac(@list.List([]))
   let t1059 = @parser.parse_term("b:B")
   let t1062 = @tactics.disch_then(fn(
     x1061 : @kernel.Thm,
@@ -13218,7 +13218,7 @@ pub fn finite_recursion_delete() -> @kernel.Thm {
 ///|
 /// ITSET_EQ
 fn step_317() -> Unit raise {
-  let t1107 = @meson.asm_meson_tac(@list.empty())
+  let t1107 = @meson.asm_meson_tac(@list.List([]))
   let t1104 = @simp.rewrite_rule(@list.List([@theorems.right_imp_forall_thm()]))
   let t1106 = @tactics.first_assum(fn(
     x1105 : @kernel.Thm,
@@ -13345,11 +13345,11 @@ pub fn card_clauses() -> @kernel.Thm {
 ///|
 /// CARD_UNION
 fn step_320() -> Unit raise {
-  let t1145 = set_tac(@list.empty())
+  let t1145 = set_tac(@list.List([]))
   let t1144 = @tactics.undisch_tac(
     @parser.parse_term("x:A INSERT s INTER t = EMPTY"),
   )
-  let t1143 = @simp.asm_rewrite_tac(@list.empty())
+  let t1143 = @simp.asm_rewrite_tac(@list.List([]))
   let t1142 = @tactics.first_assum(@tactics.match_mp_tac)
   let t1146 = @tactics.then_tac(
     @tactics.then_tac(
@@ -13366,7 +13366,7 @@ fn step_320() -> Unit raise {
     ),
     t1145,
   )
-  let t1141 = @meson.meson_tac(@list.empty())
+  let t1141 = @meson.meson_tac(@list.List([]))
   let t1140 = @simp.rewrite_tac(
     @list.List([extension(), in_insert(), in_inter(), not_in_empty()]),
   )
@@ -13435,8 +13435,8 @@ fn step_320() -> Unit raise {
       }
     },
   )
-  let t1134 = @simp.asm_rewrite_tac(@list.empty())
-  let t1133 = @simp.asm_rewrite_tac(@list.empty())
+  let t1134 = @simp.asm_rewrite_tac(@list.List([]))
+  let t1133 = @simp.asm_rewrite_tac(@list.List([]))
   let t1131 = @bool.conjunct2(card_clauses())
   let t1130 = @parser.parse_term("s:A->bool UNION t")
   let t1132 = @tactics.mp_tac(
@@ -13447,11 +13447,11 @@ fn step_320() -> Unit raise {
   let t1129 = @tactics.mp_tac(
     @bool.ispecl(@list.List([@parser.parse_term("x:A"), t1127]), t1128),
   )
-  let t1125 = @simp.asm_rewrite_tac(@list.empty())
+  let t1125 = @simp.asm_rewrite_tac(@list.List([]))
   let t1124 = @tactics.match_mp_tac(finite_union_imp())
   let t1126 = @list.List([
     @tactics.then_tac(
-      @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t1124),
+      @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t1124),
       t1125,
     ),
     @tactics.all_tac,
@@ -13460,7 +13460,7 @@ fn step_320() -> Unit raise {
     @parser.parse_term("FINITE ((s:A->bool) UNION t) /\\ FINITE s"),
     @tactics.strip_assume_tac,
   )
-  let t1122 = @list.List([set_tac(@list.empty()), @tactics.all_tac])
+  let t1122 = @list.List([set_tac(@list.List([])), @tactics.all_tac])
   let t1121 = @tactics.subgoal_then(
     @parser.parse_term("(x:A INSERT s) UNION t = x INSERT (s UNION t)"),
     fn(
@@ -13608,7 +13608,7 @@ pub fn card_union() -> @kernel.Thm {
 ///|
 /// CARD_DELETE
 fn step_321() -> Unit raise {
-  let t1161 = set_tac(@list.empty())
+  let t1161 = set_tac(@list.List([]))
   let t1162 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.ap_term_tac,
@@ -13619,7 +13619,7 @@ fn step_321() -> Unit raise {
   let t1160 = @simp.asm_simp_tac(
     @list.List([card_clauses(), finite_delete(), in_delete(), @arith.suc_sub1()]),
   )
-  let t1158 = set_tac(@list.empty())
+  let t1158 = set_tac(@list.List([]))
   let t1159 = @list.List([
     @tactics.then_tac(
       @tactics.undisch_tac(@parser.parse_term("x:A IN s")),
@@ -13738,8 +13738,8 @@ pub fn card_union_eq() -> @kernel.Thm {
 ///|
 /// CARD_DIFF
 fn step_323() -> Unit raise {
-  let t1169 = @tactics.asm_tac(set_tac)(@list.empty())
-  let t1168 = @simp.asm_simp_tac(@list.empty())
+  let t1169 = @tactics.asm_tac(set_tac)(@list.List([]))
+  let t1168 = @simp.asm_simp_tac(@list.List([]))
   let t1167 = @tactics.match_mp_tac(card_union_eq())
   let t1166 = @tactics.match_mp_tac(
     @int.arith_rule(@parser.parse_term("a + b:num = c ==> a = c - b")),
@@ -14066,7 +14066,7 @@ fn step_329() -> Unit raise {
   let t1196 = @tactics.disch_then(
     @tactics.x_choose_then(@parser.parse_term("x:A"))(t1195),
   )
-  let t1191 = @simp.asm_rewrite_tac(@list.empty())
+  let t1191 = @simp.asm_rewrite_tac(@list.List([]))
   let t1187 = @parser.parse_term("s:A->bool")
   let t1190 = @tactics.disch_then(fn(
     x1189 : @kernel.Thm,
@@ -14141,7 +14141,7 @@ fn step_329() -> Unit raise {
       "!s. FINITE s /\\ ~(s = {}) ==> ?x:A. x IN s /\\ (P(s DELETE x) ==> P s)",
     ),
   )
-  let t1182 = @simp.asm_rewrite_tac(@list.empty())
+  let t1182 = @simp.asm_rewrite_tac(@list.List([]))
   let t1181 = @class.asm_cases_tac(@parser.parse_term("s:A->bool = {}"))
   let t1180 = @wf.wf_induct_tac(@parser.parse_term("CARD(s:A->bool)"))
   let t1205 = @tactics.then_tac(
@@ -14474,8 +14474,8 @@ pub fn has_size_0() -> @kernel.Thm {
 ///|
 /// HAS_SIZE_SUC
 fn step_333() -> Unit raise {
-  let t1265 = @meson.asm_meson_tac(@list.empty())
-  let t1264 = set_tac(@list.empty())
+  let t1265 = @meson.asm_meson_tac(@list.List([]))
+  let t1264 = set_tac(@list.List([]))
   let t1266 = @list.List([
     @tactics.then_tac(
       @tactics.undisch_tac(@parser.parse_term("a:A IN s")),
@@ -14633,12 +14633,12 @@ fn step_333() -> Unit raise {
     ),
     t1266,
   )
-  let t1244 = @meson.meson_tac(@list.empty())
+  let t1244 = @meson.meson_tac(@list.List([]))
   let t1245 = @tactics.then_tac(
     @simp.asm_rewrite_tac(@list.List([@nums.suc_inj()])),
     t1244,
   )
-  let t1243 = set_tac(@list.empty())
+  let t1243 = set_tac(@list.List([]))
   let t1246 = @list.List([
     @tactics.then_tac(
       @tactics.undisch_tac(@parser.parse_term("a:A IN s")),
@@ -15257,14 +15257,14 @@ pub fn has_size_clauses() -> @kernel.Thm {
 ///|
 /// HAS_SIZE_CONV
 fn step_339() -> Unit raise {
-  let t1320 = set_tac(@list.empty())
+  let t1320 = set_tac(@list.List([]))
   let pth = @tactics.prove(
     @parser.parse_term(
       "(~((a:A) IN {}) /\\ P <=> P) /\\\n     (~(a IN {b}) /\\ P <=> ~(a = b) /\\ P) /\\\n     (~(a IN (b INSERT cs)) /\\ P <=> ~(a = b) /\\ ~(a IN cs) /\\ P)",
     ),
     t1320,
   )
-  let t1321 = @meson.meson_tac(@list.empty())
+  let t1321 = @meson.meson_tac(@list.List([]))
   let t1322 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([has_size_clauses()])),
     t1321,
@@ -15360,7 +15360,7 @@ fn step_339() -> Unit raise {
     let th = has_size_conv_1(tm_2)
     let tm_p = @kernel.rand(@kernel.concl(th))
     let (evs, bod) = @basics.strip_exists(tm_p)
-    if evs == @list.empty() {
+    if evs == @list.List([]) {
       th
     } else {
       let th_p = @lib.funpow(
@@ -15392,7 +15392,7 @@ pub fn has_size_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// CARD_SUBSET_EQ
 fn step_340() -> Unit raise {
-  let t1374 = set_tac(@list.empty())
+  let t1374 = set_tac(@list.List([]))
   let t1375 = @tactics.then_tac(
     @tactics.undisch_tac(@parser.parse_term("a:A->bool SUBSET b")),
     t1374,
@@ -15457,8 +15457,8 @@ fn step_340() -> Unit raise {
   let t1368 = @simp.rewrite_tac(
     @list.List([@int.arith_rule(@parser.parse_term("(a = a + b) <=> (b = 0)"))]),
   )
-  let t1367 = @simp.asm_rewrite_tac(@list.empty())
-  let t1365 = set_tac(@list.empty())
+  let t1367 = @simp.asm_rewrite_tac(@list.List([]))
+  let t1365 = set_tac(@list.List([]))
   let t1366 = @list.List([
     @tactics.then_tac(
       @tactics.undisch_tac(@parser.parse_term("a:A->bool SUBSET b")),
@@ -15515,8 +15515,8 @@ fn step_340() -> Unit raise {
       }
     },
   )
-  let t1360 = @simp.asm_rewrite_tac(@list.empty())
-  let t1359 = @list.List([set_tac(@list.empty()), @tactics.all_tac])
+  let t1360 = @simp.asm_rewrite_tac(@list.List([]))
+  let t1359 = @list.List([set_tac(@list.List([])), @tactics.all_tac])
   let t1358 = @tactics.subgoal_then(
     @parser.parse_term("a:A->bool INTER (b DIFF a) = EMPTY"),
     fn(
@@ -15566,8 +15566,8 @@ fn step_340() -> Unit raise {
       }
     },
   )
-  let t1353 = set_tac(@list.empty())
-  let t1352 = @simp.asm_rewrite_tac(@list.empty())
+  let t1353 = set_tac(@list.List([]))
+  let t1352 = @simp.asm_rewrite_tac(@list.List([]))
   let t1351 = @tactics.exists_tac(@parser.parse_term("b:A->bool"))
   let t1354 = @list.List([
     @tactics.then_tac(
@@ -15753,9 +15753,9 @@ pub fn card_subset_eq() -> @kernel.Thm {
 ///|
 /// CARD_SUBSET
 fn step_341() -> Unit raise {
-  let t1394 = set_tac(@list.empty())
-  let t1393 = set_tac(@list.empty())
-  let t1392 = @simp.asm_rewrite_tac(@list.empty())
+  let t1394 = set_tac(@list.List([]))
+  let t1393 = set_tac(@list.List([]))
+  let t1392 = @simp.asm_rewrite_tac(@list.List([]))
   let t1391 = @tactics.exists_tac(@parser.parse_term("b:A->bool"))
   let t1395 = @tactics.then_tac(
     @tactics.then_tac(
@@ -15764,7 +15764,7 @@ fn step_341() -> Unit raise {
     ),
     t1393,
   )
-  let t1390 = @simp.asm_rewrite_tac(@list.empty())
+  let t1390 = @simp.asm_rewrite_tac(@list.List([]))
   let t1389 = @tactics.exists_tac(@parser.parse_term("b:A->bool"))
   let t1396 = @list.List([
     @tactics.then_tac(
@@ -15833,7 +15833,7 @@ fn step_341() -> Unit raise {
       }
     },
   )
-  let t1382 = set_tac(@list.empty())
+  let t1382 = set_tac(@list.List([]))
   let t1383 = @list.List([
     @tactics.then_tac(
       @tactics.undisch_tac(@parser.parse_term("a:A->bool SUBSET b")),
@@ -16163,7 +16163,7 @@ pub fn card_psubset() -> @kernel.Thm {
 ///|
 /// CARD_PSUBSET_IMP
 fn step_346() -> Unit raise {
-  let t1417 = @meson.meson_tac(@list.empty())
+  let t1417 = @meson.meson_tac(@list.List([]))
   let t1418 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([psubset()])),
     t1417,
@@ -16219,7 +16219,7 @@ pub fn card_psubset_eq() -> @kernel.Thm {
 ///|
 /// CARD_UNION_LE
 fn step_348() -> Unit raise {
-  let t1427 = set_tac(@list.empty())
+  let t1427 = set_tac(@list.List([]))
   let t1426 = @simp.asm_simp_tac(@list.List([finite_diff()]))
   let t1425 = @tactics.match_mp_tac(card_union())
   let t1424 = @simp.once_rewrite_tac(
@@ -16615,7 +16615,7 @@ pub fn card_unions_le() -> @kernel.Thm {
 ///|
 /// CARD_UNION_GEN
 fn step_351() -> Unit raise {
-  let t1471 = set_tac(@list.empty())
+  let t1471 = set_tac(@list.List([]))
   let t1470 = @simp.asm_simp_tac(@list.List([finite_diff()]))
   let t1469 = @tactics.match_mp_tac(card_union())
   let t1468 = @simp.rewrite_tac(
@@ -16673,7 +16673,7 @@ pub fn card_union_gen() -> @kernel.Thm {
 ///|
 /// CARD_UNION_OVERLAP_EQ
 fn step_352() -> Unit raise {
-  let t1476 = set_tac(@list.empty())
+  let t1476 = set_tac(@list.List([]))
   let t1475 = @simp.asm_simp_tac(
     @list.List([@arith.add_eq_0(), card_eq_0(), finite_inter()]),
   )
@@ -16980,9 +16980,9 @@ pub fn finite_card_le_image() -> @kernel.Thm {
 ///|
 /// CARD_IMAGE_INJ_EQ
 fn step_358() -> Unit raise {
-  let t1501 = @meson.asm_meson_tac(@list.empty())
+  let t1501 = @meson.asm_meson_tac(@list.List([]))
   let t1502 = @tactics.then_tac(@tactics.match_mp_tac(card_image_inj()), t1501)
-  let t1500 = @meson.asm_meson_tac(@list.empty())
+  let t1500 = @meson.asm_meson_tac(@list.List([]))
   let t1503 = @list.List([
     @tactics.then_tac(
       @simp.rewrite_tac(@list.List([extension(), in_image()])),
@@ -17099,7 +17099,7 @@ pub fn card_subset_image() -> @kernel.Thm {
 ///|
 /// HAS_SIZE_IMAGE_INJ_EQ
 fn step_360() -> Unit raise {
-  let t1511 = @simp.asm_rewrite_tac(@list.empty())
+  let t1511 = @simp.asm_rewrite_tac(@list.List([]))
   let t1508 = @tactics.match_mp_tac(card_image_inj())
   let t1509 = @tactics.then_tac(
     @tactics.then_tac(
@@ -17154,7 +17154,7 @@ pub fn has_size_image_inj_eq() -> @kernel.Thm {
 ///|
 /// CARD_IMAGE_EQ_INJ
 fn step_361() -> Unit raise {
-  let t1529 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t1529 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t1528 = @simp.asm_simp_tac(
     @list.List([
       card_delete(),
@@ -17167,8 +17167,8 @@ fn step_361() -> Unit raise {
   let t1525 = @tactics.match_mp_tac(
     @int.arith_rule(@parser.parse_term("!n. m <= n /\\ n < p ==> ~(m:num = p)")),
   )
-  let t1523 = @simp.rewrite_tac(@list.empty())
-  let t1524 = @list.List([@tactics.asm_tac(set_tac)(@list.empty()), t1523])
+  let t1523 = @simp.rewrite_tac(@list.List([]))
+  let t1524 = @list.List([@tactics.asm_tac(set_tac)(@list.List([])), t1523])
   let t1522 = @tactics.subgoal_then(
     @parser.parse_term("IMAGE  (f:A->B) s = IMAGE f (s DELETE y)"),
     fn(
@@ -17221,7 +17221,7 @@ fn step_361() -> Unit raise {
   let t1518 = @tactics.undisch_tac(
     @parser.parse_term("CARD(IMAGE (f:A->B) s) = CARD s"),
   )
-  let t1517 = @simp.asm_rewrite_tac(@list.empty())
+  let t1517 = @simp.asm_rewrite_tac(@list.List([]))
   let t1516 = @class.asm_cases_tac(@parser.parse_term("x:A = y"))
   let t1514 = @parser.parse_term("y:A")
   let t1515 = @tactics.map_every(
@@ -17376,7 +17376,7 @@ fn step_363() -> Unit raise {
   let t1537 = @simp.once_rewrite_tac(
     @list.List([
       @meson.meson(
-        @list.empty(),
+        @list.List([]),
         @parser.parse_term("(!t. p t) <=> ~(?t. ~p t)"),
       ),
     ]),
@@ -17417,7 +17417,7 @@ fn step_364() -> Unit raise {
       image_subset(),
     ]),
   )
-  let t1540 = @meson.meson_tac(@list.empty())
+  let t1540 = @meson.meson_tac(@list.List([]))
   let t1542 = @list.List([
     @tactics.then_tac(
       @simp.rewrite_tac(@list.List([exists_small_subset_image_inj()])),
@@ -17463,7 +17463,7 @@ fn step_365() -> Unit raise {
   let t1544 = @simp.once_rewrite_tac(
     @list.List([
       @meson.meson(
-        @list.empty(),
+        @list.List([]),
         @parser.parse_term("(!t. p t) <=> ~(?t. ~p t)"),
       ),
     ]),
@@ -17496,7 +17496,7 @@ pub fn forall_small_subset_image() -> @kernel.Thm {
 ///|
 /// CARD_IMAGE_LE2
 fn step_366() -> Unit raise {
-  let t1557 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t1557 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t1556 = @tactics.match_mp_tac(@arith.eq_imp_le())
   let t1555 = @simp.asm_simp_tac(
     @list.List([image_o(), card_image_le(), finite_image()]),
@@ -17573,7 +17573,7 @@ pub fn card_image_le2() -> @kernel.Thm {
 ///|
 /// CARD_IMAGE_LT2
 fn step_367() -> Unit raise {
-  let t1571 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t1571 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t1570 = @simp.asm_simp_tac(
     @list.List([
       @arith.lt_le(),
@@ -17583,7 +17583,7 @@ fn step_367() -> Unit raise {
     ]),
   )
   let t1569 = @list.List([
-    @tactics.asm_tac(set_tac)(@list.empty()),
+    @tactics.asm_tac(set_tac)(@list.List([])),
     @tactics.all_tac,
   ])
   let t1568 = @tactics.subgoal_then(
@@ -17702,7 +17702,7 @@ pub fn card_image_lt2() -> @kernel.Thm {
 ///|
 /// CHOOSE_SUBSET_STRONG
 fn step_368() -> Unit raise {
-  let t1593 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t1593 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t1592 = @simp.rewrite_tac(@list.List([@arith.suc_sub1()]))
   let t1591 = @simp.asm_simp_tac(
     @list.List([
@@ -17719,7 +17719,7 @@ fn step_368() -> Unit raise {
   let t1589 = @tactics.repeat_tac(
     @tactics.thenl(
       @tactics.conj_tac,
-      @list.List([@tactics.asm_tac(set_tac)(@list.empty()), @tactics.all_tac]),
+      @list.List([@tactics.asm_tac(set_tac)(@list.List([])), @tactics.all_tac]),
     ),
   )
   let t1588 = @tactics.exists_tac(@parser.parse_term("(a:A) INSERT t"))
@@ -17728,7 +17728,7 @@ fn step_368() -> Unit raise {
       @tactics.strip_assume_tac,
     ),
   )
-  let t1586 = @simp.asm_rewrite_tac(@list.empty())
+  let t1586 = @simp.asm_rewrite_tac(@list.List([]))
   let t1582 = @parser.parse_term("s:A->bool")
   let t1585 = @tactics.first_x_assum(fn(
     x1584 : @kernel.Thm,
@@ -17982,9 +17982,9 @@ pub fn choose_subset() -> @kernel.Thm {
 ///|
 /// CHOOSE_SUBSET_BETWEEN
 fn step_371() -> Unit raise {
-  let t1616 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t1616 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t1615 = @simp.asm_rewrite_tac(@list.List([has_size()]))
-  let t1614 = @simp.asm_rewrite_tac(@list.empty())
+  let t1614 = @simp.asm_rewrite_tac(@list.List([]))
   let t1613 = @list.List([
     @int.asm_arith_tac,
     @tactics.match_mp_tac(has_size_union()),
@@ -18041,7 +18041,7 @@ fn step_371() -> Unit raise {
   let t1608 = @tactics.repeat_tac(
     @tactics.thenl(
       @tactics.conj_tac,
-      @list.List([@tactics.asm_tac(set_tac)(@list.empty()), @tactics.all_tac]),
+      @list.List([@tactics.asm_tac(set_tac)(@list.List([])), @tactics.all_tac]),
     ),
   )
   let t1607 = @tactics.exists_tac(@parser.parse_term("s UNION t:A->bool"))
@@ -18138,9 +18138,9 @@ pub fn choose_subset_between() -> @kernel.Thm {
 ///|
 /// CARD_LE_UNIONS_CHAIN
 fn step_372() -> Unit raise {
-  let t1641 = @simp.asm_rewrite_tac(@list.empty())
+  let t1641 = @simp.asm_rewrite_tac(@list.List([]))
   let t1640 = @tactics.match_mp_tac(finite_subset_unions_chain())
-  let t1639 = @simp.asm_rewrite_tac(@list.empty())
+  let t1639 = @simp.asm_rewrite_tac(@list.List([]))
   let t1638 = @simp.rewrite_tac(@list.List([has_size()]))
   let t1637 = @tactics.x_gen_tac(@parser.parse_term("s:A->bool"))
   let t1636 = @tactics.match_mp_tac(@theorems.mono_exists())
@@ -18338,7 +18338,7 @@ pub fn card_le_unions_chain() -> @kernel.Thm {
 ///|
 /// CARD_LE_1
 fn step_373() -> Unit raise {
-  let t1645 = set_tac(@list.empty())
+  let t1645 = set_tac(@list.List([]))
   let t1644 = @tactics.conv_tac(@equal.once_depth_conv(has_size_conv))
   let t1643 = @simp.rewrite_tac(
     @list.List([@theorems.left_or_distrib(), @equal.gsym(has_size())]),
@@ -18384,7 +18384,7 @@ pub fn card_le_1() -> @kernel.Thm {
 fn step_374() -> Unit raise {
   let t1691 = @list.List([
     @int.asm_arith_tac,
-    @tactics.asm_tac(set_tac)(@list.empty()),
+    @tactics.asm_tac(set_tac)(@list.List([])),
   ])
   let t1690 = @tactics.disch_then(@tactics.match_mp_tac)
   let t1689 = @simp.asm_rewrite_tac(@list.List([@calc_num.arith()]))
@@ -18551,7 +18551,7 @@ fn step_374() -> Unit raise {
     ]),
   )
   let t1669 = @class.asm_cases_tac(@parser.parse_term("n = 1"))
-  let t1668 = @simp.asm_rewrite_tac(@list.empty())
+  let t1668 = @simp.asm_rewrite_tac(@list.List([]))
   let t1667 = @class.asm_cases_tac(@parser.parse_term("f(a:A) = a"))
   let t1666 = @simp.rewrite_tac(@list.List([in_insert()]))
   let t1665 = @simp.simp_tac(
@@ -18772,7 +18772,7 @@ pub fn involution_even_nofixpoints() -> @kernel.Thm {
 ///|
 /// INVOLUTION_EVEN_FIXPOINTS
 fn step_375() -> Unit raise {
-  let t1702 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t1702 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t1701 = @simp.asm_simp_tac(@list.List([finite_restrict()]))
   let t1700 = @tactics.exists_tac(@parser.parse_term("f:A->A"))
   let t1699 = @tactics.match_mp_tac(involution_even_nofixpoints())
@@ -18791,7 +18791,7 @@ fn step_375() -> Unit raise {
       ),
     ]),
   )
-  let t1695 = set_tac(@list.empty())
+  let t1695 = set_tac(@list.List([]))
   let t1696 = @list.List([
     @tactics.all_tac,
     @tactics.then_tac(
@@ -19045,7 +19045,7 @@ fn step_376() -> Unit raise {
     @tactics.x_gen_tac,
     @list.List([@parser.parse_term("x:A"), t1723]),
   )
-  let t1721 = set_tac(@list.empty())
+  let t1721 = set_tac(@list.List([]))
   let t1720 = @simp.rewrite_tac(
     @list.List([@arith.mult_clauses(), has_size_0()]),
   )
@@ -19274,7 +19274,7 @@ pub fn has_size_product_dependent() -> @kernel.Thm {
 ///|
 /// FINITE_PRODUCT_DEPENDENT
 fn step_377() -> Unit raise {
-  let t1778 = @meson.meson_tac(@list.empty())
+  let t1778 = @meson.meson_tac(@list.List([]))
   let t1777 = @simp.rewrite_tac(
     @list.List([extension(), in_image(), in_elim_thm(), in_insert(), in_union()]),
   )
@@ -19437,7 +19437,7 @@ fn step_377() -> Unit raise {
       t1759,
     ]),
   )
-  let t1754 = @meson.meson_tac(@list.empty())
+  let t1754 = @meson.meson_tac(@list.List([]))
   let t1755 = @list.List([@tactics.match_mp_tac(finite_image()), t1754])
   let t1753 = @simp.rewrite_tac(@list.List([forall_in_gspec()]))
   let t1752 = @simp.rewrite_tac(
@@ -19738,7 +19738,7 @@ pub fn card_cross() -> @kernel.Thm {
 ///|
 /// CROSS_EQ_EMPTY
 fn step_387() -> Unit raise {
-  let t1792 = @meson.meson_tac(@list.empty())
+  let t1792 = @meson.meson_tac(@list.List([]))
   let t1793 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -19850,7 +19850,7 @@ pub fn cross_univ() -> @kernel.Thm {
 ///|
 /// FINITE_CROSS_EQ
 fn step_391() -> Unit raise {
-  let t1817 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t1817 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t1816 = @simp.rewrite_tac(
     @list.List([subset(), in_image(), @pair.exists_pair_thm(), in_cross()]),
   )
@@ -20120,7 +20120,7 @@ pub fn finite_cross_univ() -> @kernel.Thm {
 ///|
 /// INFINITE_CROSS_UNIV
 fn step_394() -> Unit raise {
-  let t1822 = @meson.meson_tac(@list.empty())
+  let t1822 = @meson.meson_tac(@list.List([]))
   let t1823 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -20251,7 +20251,7 @@ pub fn exists_in_cross() -> @kernel.Thm {
 ///|
 /// SUBSET_CROSS
 fn step_399() -> Unit raise {
-  let t1828 = @meson.meson_tac(@list.empty())
+  let t1828 = @meson.meson_tac(@list.List([]))
   let t1829 = @tactics.then_tac(
     @simp.simp_tac(
       @list.List([
@@ -20311,7 +20311,7 @@ pub fn cross_mono() -> @kernel.Thm {
 ///|
 /// CROSS_EQ
 fn step_401() -> Unit raise {
-  let t1831 = set_tac(@list.empty())
+  let t1831 = set_tac(@list.List([]))
   let t1832 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([@equal.gsym(subset_antisym_eq()), subset_cross()]),
@@ -20340,7 +20340,7 @@ pub fn cross_eq() -> @kernel.Thm {
 ///|
 /// IMAGE_FST_CROSS
 fn step_402() -> Unit raise {
-  let t1837 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t1837 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t1836 = @simp.rewrite_tac(@list.List([exists_in_cross(), @pair.fst()]))
   let t1835 = @simp.once_rewrite_tac(@list.List([@theorems.conj_sym()]))
   let t1834 = @simp.rewrite_tac(@list.List([extension(), in_image()]))
@@ -20390,7 +20390,7 @@ pub fn image_fst_cross() -> @kernel.Thm {
 ///|
 /// IMAGE_SND_CROSS
 fn step_403() -> Unit raise {
-  let t1843 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t1843 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t1842 = @simp.rewrite_tac(@list.List([exists_in_cross(), @pair.snd()]))
   let t1841 = @simp.once_rewrite_tac(@list.List([@theorems.conj_sym()]))
   let t1840 = @simp.rewrite_tac(@list.List([extension(), in_image()]))
@@ -20440,7 +20440,7 @@ pub fn image_snd_cross() -> @kernel.Thm {
 ///|
 /// IMAGE_PAIRED_CROSS
 fn step_404() -> Unit raise {
-  let t1845 = @meson.meson_tac(@list.empty())
+  let t1845 = @meson.meson_tac(@list.List([]))
   let t1846 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -20636,7 +20636,7 @@ pub fn cross_unions() -> @kernel.Thm {
 ///|
 /// CROSS_UNIONS_UNIONS, CROSS_UNIONS
 fn step_409() -> Unit raise {
-  let t1859 = set_tac(@list.empty())
+  let t1859 = set_tac(@list.List([]))
   let t1860 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -20710,7 +20710,7 @@ pub fn cross_inters() -> @kernel.Thm {
 ///|
 /// CROSS_INTERS_INTERS, CROSS_INTERS
 fn step_410() -> Unit raise {
-  let t1865 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t1865 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t1864 = @simp.asm_rewrite_tac(
     @list.List([
       inters_gspec(),
@@ -20722,7 +20722,7 @@ fn step_410() -> Unit raise {
     ]),
   )
   let t1863 = @tactics.repeat_tac(
-    @tactics.then_tac(@class.cond_cases_tac, @simp.rewrite_tac(@list.empty())),
+    @tactics.then_tac(@class.cond_cases_tac, @simp.rewrite_tac(@list.List([]))),
   )
   let t1866 = @tactics.then_tac(
     @tactics.then_tac(
@@ -20930,7 +20930,7 @@ pub fn extensional_univ() -> @kernel.Thm {
 /// EXTENSIONAL_EQ
 fn step_418() -> Unit raise {
   let t1876 = @meson.asm_meson_tac(@list.List([in_extensional_undefined()]))
-  let t1877 = @list.List([@simp.asm_simp_tac(@list.empty()), t1876])
+  let t1877 = @list.List([@simp.asm_simp_tac(@list.List([])), t1876])
   let t1875 = @class.asm_cases_tac(@parser.parse_term("x:A IN s"))
   let t1874 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t1878 = @tactics.thenl(
@@ -21105,7 +21105,7 @@ pub fn restriction_in_extensional() -> @kernel.Thm {
 ///|
 /// RESTRICTION_EXTENSION
 fn step_425() -> Unit raise {
-  let t1885 = @meson.meson_tac(@list.empty())
+  let t1885 = @meson.meson_tac(@list.List([]))
   let t1884 = @simp.rewrite_tac(
     @list.List([restriction(), @class.fun_eq_thm()]),
   )
@@ -21137,7 +21137,7 @@ pub fn restriction_extension() -> @kernel.Thm {
 ///|
 /// RESTRICTION_FIXPOINT
 fn step_426() -> Unit raise {
-  let t1887 = @meson.meson_tac(@list.empty())
+  let t1887 = @meson.meson_tac(@list.List([]))
   let t1888 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([in_extensional(), @class.fun_eq_thm(), restriction()]),
@@ -21190,7 +21190,7 @@ pub fn restriction_univ() -> @kernel.Thm {
 ///|
 /// RESTRICTION_RESTRICTION
 fn step_428() -> Unit raise {
-  let t1890 = set_tac(@list.empty())
+  let t1890 = set_tac(@list.List([]))
   let t1891 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@class.fun_eq_thm(), restriction()])),
     t1890,
@@ -21246,7 +21246,7 @@ pub fn restriction_idemp() -> @kernel.Thm {
 ///|
 /// IMAGE_RESTRICTION
 fn step_430() -> Unit raise {
-  let t1893 = set_tac(@list.empty())
+  let t1893 = set_tac(@list.List([]))
   let t1894 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([extension(), in_image(), restriction()])),
     t1893,
@@ -21275,7 +21275,7 @@ pub fn image_restriction() -> @kernel.Thm {
 ///|
 /// RESTRICTION_COMPOSE_RIGHT
 fn step_431() -> Unit raise {
-  let t1896 = set_tac(@list.empty())
+  let t1896 = set_tac(@list.List([]))
   let t1895 = @simp.simp_tac(@list.List([subset(), forall_in_image()]))
   let t1897 = @tactics.then_tac(
     @tactics.then_tac(
@@ -21310,7 +21310,7 @@ pub fn restriction_compose_right() -> @kernel.Thm {
 ///|
 /// RESTRICTION_COMPOSE_LEFT
 fn step_432() -> Unit raise {
-  let t1899 = set_tac(@list.empty())
+  let t1899 = set_tac(@list.List([]))
   let t1898 = @simp.simp_tac(@list.List([subset(), forall_in_image()]))
   let t1900 = @tactics.then_tac(
     @tactics.then_tac(
@@ -21372,7 +21372,7 @@ pub fn restriction_compose() -> @kernel.Thm {
 ///|
 /// RESTRICTION_UNIQUE
 fn step_434() -> Unit raise {
-  let t1902 = @meson.meson_tac(@list.empty())
+  let t1902 = @meson.meson_tac(@list.List([]))
   let t1903 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -21408,7 +21408,7 @@ pub fn restriction_unique() -> @kernel.Thm {
 ///|
 /// RESTRICTION_UNIQUE_ALT
 fn step_435() -> Unit raise {
-  let t1904 = @meson.meson_tac(@list.empty())
+  let t1904 = @meson.meson_tac(@list.List([]))
   let t1905 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -21537,7 +21537,7 @@ pub fn cartesian_product_v1() -> @kernel.Thm {
 ///|
 /// RESTRICTION_IN_CARTESIAN_PRODUCT
 fn step_439() -> Unit raise {
-  let t1912 = set_tac(@list.empty())
+  let t1912 = set_tac(@list.List([]))
   let t1913 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -21573,7 +21573,7 @@ pub fn restriction_in_cartesian_product() -> @kernel.Thm {
 ///|
 /// CARTESIAN_PRODUCT_AS_RESTRICTIONS
 fn step_440() -> Unit raise {
-  let t1920 = @meson.asm_meson_tac(@list.empty())
+  let t1920 = @meson.asm_meson_tac(@list.List([]))
   let t1919 = @simp.asm_rewrite_tac(
     @list.List([@class.fun_eq_thm(), restriction()]),
   )
@@ -21634,7 +21634,7 @@ pub fn cartesian_product_as_restrictions() -> @kernel.Thm {
 ///|
 /// CARTESIAN_PRODUCT_EQ_EMPTY
 fn step_441() -> Unit raise {
-  let t1938 = @simp.simp_tac(@list.empty())
+  let t1938 = @simp.simp_tac(@list.List([]))
   let t1937 = @simp.rewrite_tac(@list.List([extensional(), in_elim_thm()]))
   let t1933 = @parser.parse_term("\\i. if i IN k then (f:K->A) i else ARB")
   let t1936 = @tactics.first_x_assum(fn(
@@ -21888,8 +21888,8 @@ pub fn cartesian_product_eq_members_eq() -> @kernel.Thm {
 ///|
 /// SUBSET_CARTESIAN_PRODUCT
 fn step_445() -> Unit raise {
-  let t1976 = @meson.asm_meson_tac(@list.empty())
-  let t1975 = @simp.simp_tac(@list.empty())
+  let t1976 = @meson.asm_meson_tac(@list.List([]))
+  let t1975 = @simp.simp_tac(@list.List([]))
   let t1974 = @simp.rewrite_tac(@list.List([extensional(), in_elim_thm()]))
   let t1970 = @parser.parse_term(
     "(\\j. if j IN k then if j = i then x else z j else ARB):K->A",
@@ -22054,7 +22054,7 @@ fn step_445() -> Unit raise {
       }
     })(t1959(x1960))
   })
-  let t1952 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.empty())])
+  let t1952 = @list.List([@tactics.all_tac, @meson.meson_tac(@list.List([]))])
   let t1951 = @simp.rewrite_tac(
     @list.List([subset(), cartesian_product(), in_elim_thm()]),
   )
@@ -22144,15 +22144,15 @@ pub fn subset_cartesian_product() -> @kernel.Thm {
 ///|
 /// CARTESIAN_PRODUCT_EQ
 fn step_446() -> Unit raise {
-  let t1984 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t1984 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t1983 = @simp.asm_rewrite_tac(
     @list.List([@equal.gsym(subset_antisym_eq()), subset_cartesian_product()]),
   )
-  let t1982 = @simp.asm_rewrite_tac(@list.empty())
+  let t1982 = @simp.asm_rewrite_tac(@list.List([]))
   let t1981 = @class.asm_cases_tac(
     @parser.parse_term("cartesian_product k (s:K->A->bool) = {}"),
   )
-  let t1980 = @simp.asm_rewrite_tac(@list.empty())
+  let t1980 = @simp.asm_rewrite_tac(@list.List([]))
   let t1985 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -22177,7 +22177,7 @@ fn step_446() -> Unit raise {
     ),
     t1985,
   ])
-  let t1979 = @simp.asm_rewrite_tac(@list.empty())
+  let t1979 = @simp.asm_rewrite_tac(@list.List([]))
   let t1978 = @class.asm_cases_tac(
     @parser.parse_term("!i. i IN k ==> (s:K->A->bool) i = t i"),
   )
@@ -22212,7 +22212,7 @@ pub fn cartesian_product_eq() -> @kernel.Thm {
 ///|
 /// INTER_CARTESIAN_PRODUCT
 fn step_447() -> Unit raise {
-  let t1988 = set_tac(@list.empty())
+  let t1988 = set_tac(@list.List([]))
   let t1989 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([extension(), cartesian_product(), in_inter(), in_elim_thm()]),
@@ -22272,7 +22272,7 @@ pub fn cartesian_product_univ() -> @kernel.Thm {
 ///|
 /// CARTESIAN_PRODUCT_SINGS
 fn step_449() -> Unit raise {
-  let t1994 = @meson.meson_tac(@list.empty())
+  let t1994 = @meson.meson_tac(@list.List([]))
   let t1993 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t1992 = @simp.rewrite_tac(
     @list.List([extension(), extensional(), in_elim_thm(), in_sing()]),
@@ -22311,7 +22311,7 @@ pub fn cartesian_product_sings() -> @kernel.Thm {
 ///|
 /// CARTESIAN_PRODUCT_SINGS_GEN
 fn step_450() -> Unit raise {
-  let t1998 = @meson.meson_tac(@list.empty())
+  let t1998 = @meson.meson_tac(@list.List([]))
   let t1997 = @simp.rewrite_tac(
     @list.List([@class.fun_eq_thm(), restriction()]),
   )
@@ -22353,7 +22353,7 @@ pub fn cartesian_product_sings_gen() -> @kernel.Thm {
 /// IMAGE_PROJECTION_CARTESIAN_PRODUCT
 fn step_451() -> Unit raise {
   let t2020 = @meson.asm_meson_tac(@list.List([in_sing()]))
-  let t2019 = @simp.asm_rewrite_tac(@list.empty())
+  let t2019 = @simp.asm_rewrite_tac(@list.List([]))
   let t2018 = @tactics.exists_tac(
     @parser.parse_term(
       "\\j. if j = i then x else if j IN k then (z:K->A) j else ARB",
@@ -22531,7 +22531,7 @@ pub fn image_projection_cartesian_product() -> @kernel.Thm {
 ///|
 /// FORALL_CARTESIAN_PRODUCT_ELEMENTS
 fn step_452() -> Unit raise {
-  let t2048 = @meson.asm_meson_tac(@list.empty())
+  let t2048 = @meson.asm_meson_tac(@list.List([]))
   let t2047 = @simp.asm_rewrite_tac(@list.List([extensional(), in_elim_thm()]))
   let t2042 = @parser.parse_term("i:K")
   let t2043 = @list.List([
@@ -22702,7 +22702,7 @@ fn step_452() -> Unit raise {
       }
     })(t2032(x2033))
   })
-  let t2025 = @list.List([@tactics.disch_tac, @meson.meson_tac(@list.empty())])
+  let t2025 = @list.List([@tactics.disch_tac, @meson.meson_tac(@list.List([]))])
   let t2024 = @simp.rewrite_tac(
     @list.List([cartesian_product(), in_elim_thm()]),
   )
@@ -22802,7 +22802,7 @@ pub fn forall_cartesian_product_elements_eq() -> @kernel.Thm {
 ///|
 /// EXISTS_CARTESIAN_PRODUCT_ELEMENT
 fn step_454() -> Unit raise {
-  let t2053 = @meson.meson_tac(@list.empty())
+  let t2053 = @meson.meson_tac(@list.List([]))
   let t2052 = @simp.simp_tac(@list.List([restriction()]))
   let t2051 = @simp.rewrite_tac(
     @list.List([cartesian_product_as_restrictions(), exists_in_gspec()]),
@@ -22891,7 +22891,7 @@ pub fn product_map_restriction() -> @kernel.Thm {
 ///|
 /// IMAGE_PRODUCT_MAP
 fn step_457() -> Unit raise {
-  let t2064 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t2064 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t2063 = @simp.asm_rewrite_tac(@list.List([restriction_extension()]))
   let t2062 = @simp.rewrite_tac(
     @list.List([in_image(), restriction(), in_elim_thm()]),
@@ -22990,7 +22990,7 @@ pub fn disjoint_union_v1() -> @kernel.Thm {
 ///|
 /// SUBSET_DISJOINT_UNION
 fn step_459() -> Unit raise {
-  let t2067 = set_tac(@list.empty())
+  let t2067 = set_tac(@list.List([]))
   let t2066 = @simp.rewrite_tac(@list.List([in_elim_pair_thm()]))
   let t2068 = @tactics.then_tac(
     @tactics.then_tac(
@@ -23025,7 +23025,7 @@ pub fn subset_disjoint_union() -> @kernel.Thm {
 ///|
 /// DISJOINT_UNION_EQ
 fn step_460() -> Unit raise {
-  let t2069 = set_tac(@list.empty())
+  let t2069 = set_tac(@list.List([]))
   let t2070 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([@equal.gsym(subset_antisym_eq()), subset_disjoint_union()]),
@@ -23056,7 +23056,7 @@ pub fn disjoint_union_eq() -> @kernel.Thm {
 ///|
 /// SUBSET_DISJOINT_UNION_EXISTS
 fn step_461() -> Unit raise {
-  let t2079 = set_tac(@list.empty())
+  let t2079 = set_tac(@list.List([]))
   let t2078 = @simp.rewrite_tac(
     @list.List([
       disjoint_union_v1(),
@@ -23228,7 +23228,7 @@ pub fn union_disjoint_union() -> @kernel.Thm {
 ///|
 /// DISJOINT_UNION_EQ_EMPTY
 fn step_464() -> Unit raise {
-  let t2087 = set_tac(@list.empty())
+  let t2087 = set_tac(@list.List([]))
   let t2088 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -23293,7 +23293,7 @@ pub fn disjoint_disjoint_union() -> @kernel.Thm {
 ///|
 /// HAS_SIZE_FUNSPACE
 fn step_466() -> Unit raise {
-  let t2150 = @meson.asm_meson_tac(@list.empty())
+  let t2150 = @meson.asm_meson_tac(@list.List([]))
   let t2146 = @parser.parse_term("x:A")
   let t2149 = @tactics.first_x_assum(fn(
     x2148 : @kernel.Thm,
@@ -23367,7 +23367,7 @@ fn step_466() -> Unit raise {
     @tactics.then_tac(@tactics.x_gen_tac(@parser.parse_term("x:A")), t2149),
     t2150,
   )
-  let t2142 = @simp.rewrite_tac(@list.empty())
+  let t2142 = @simp.rewrite_tac(@list.List([]))
   let t2139 = @parser.parse_term("a:A")
   let t2152 = @list.List([
     @tactics.then_tac(
@@ -23463,8 +23463,8 @@ fn step_466() -> Unit raise {
   )
   let t2130 = @simp.asm_simp_tac(@list.List([@arith.exp(), has_size_product()]))
   let t2129 = @tactics.match_mp_tac(has_size_image_inj())
-  let t2125 = @meson.asm_meson_tac(@list.empty())
-  let t2124 = @simp.asm_rewrite_tac(@list.empty())
+  let t2125 = @meson.asm_meson_tac(@list.List([]))
+  let t2124 = @simp.asm_rewrite_tac(@list.List([]))
   let t2123 = @tactics.x_choose_then(@parser.parse_term("g:A->B"))(
     @tactics.strip_assume_tac,
   )
@@ -23477,7 +23477,7 @@ fn step_466() -> Unit raise {
     ),
     t2125,
   )
-  let t2122 = @meson.asm_meson_tac(@list.empty())
+  let t2122 = @meson.asm_meson_tac(@list.List([]))
   let t2121 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t2120 = @parser.parse_term("\\x. if x IN s then (f:A->B) x else d")
   let t2127 = @list.List([
@@ -23630,7 +23630,7 @@ fn step_466() -> Unit raise {
       }
     },
   )
-  let t2109 = @simp.asm_rewrite_tac(@list.empty())
+  let t2109 = @simp.asm_rewrite_tac(@list.List([]))
   let t2105 = @parser.parse_term("s:A->bool")
   let t2108 = @tactics.first_x_assum(fn(
     x2107 : @kernel.Thm,
@@ -24196,7 +24196,7 @@ fn step_475() -> Unit raise {
     @list.List([@parser.parse_term("T"), t2184]),
   )
   let t2180 = @tactics.conv_tac(has_size_conv)
-  let t2179 = @simp.asm_rewrite_tac(@list.empty())
+  let t2179 = @simp.asm_rewrite_tac(@list.List([]))
   let t2188 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -24348,7 +24348,7 @@ pub fn finite_powerset() -> @kernel.Thm {
 ///|
 /// FINITE_POWERSET_EQ
 fn step_478() -> Unit raise {
-  let t2202 = set_tac(@list.empty())
+  let t2202 = set_tac(@list.List([]))
   let t2201 = @tactics.match_mp_tac(finite_image_inj_eq())
   let t2203 = @tactics.then_tac(
     @tactics.then_tac(@tactics.match_mp_tac(@theorems.eq_imp()), t2201),
@@ -24474,7 +24474,7 @@ pub fn finite_powerset_eq() -> @kernel.Thm {
 ///|
 /// FINITE_RESTRICTED_SUBSETS
 fn step_479() -> Unit raise {
-  let t2209 = set_tac(@list.empty())
+  let t2209 = set_tac(@list.List([]))
   let t2208 = @simp.asm_simp_tac(@list.List([finite_powerset()]))
   let t2207 = @tactics.exists_tac(
     @parser.parse_term("{t:A->bool | t SUBSET s}"),
@@ -24514,7 +24514,7 @@ pub fn finite_restricted_subsets() -> @kernel.Thm {
 ///|
 /// FINITE_UNIONS
 fn step_480() -> Unit raise {
-  let t2224 = set_tac(@list.empty())
+  let t2224 = set_tac(@list.List([]))
   let t2223 = @tactics.match_mp_tac(
     @simp.rewrite_rule(@list.List([@theorems.imp_conj_alt()]))(finite_subset()),
   )
@@ -24733,15 +24733,15 @@ pub fn finite_card_le_unions() -> @kernel.Thm {
 ///|
 /// POWERSET_CLAUSES
 fn step_482() -> Unit raise {
-  let t2245 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t2245 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t2244 = @tactics.exists_tac(@parser.parse_term("s DELETE (a:A)"))
   let t2243 = @list.List([
     @tactics.all_tac,
-    @tactics.asm_tac(set_tac)(@list.empty()),
+    @tactics.asm_tac(set_tac)(@list.List([])),
   ])
   let t2242 = @class.asm_cases_tac(@parser.parse_term("(a:A) IN s"))
   let t2241 = @tactics.x_gen_tac(@parser.parse_term("s:A->bool"))
-  let t2240 = @list.List([@tactics.all_tac, set_tac(@list.empty())])
+  let t2240 = @list.List([@tactics.all_tac, set_tac(@list.List([]))])
   let t2239 = @simp.rewrite_tac(
     @list.List([in_elim_thm(), in_union(), in_image()]),
   )
@@ -24840,7 +24840,7 @@ fn step_483() -> Unit raise {
       forall_in_image(),
     ]),
   )
-  let t2255 = set_tac(@list.empty())
+  let t2255 = set_tac(@list.List([]))
   let t2256 = @list.List([
     @tactics.then_tac(@simp.rewrite_tac(@list.List([unions_gspec()])), t2255),
     @tactics.all_tac,
@@ -25013,7 +25013,7 @@ fn step_484() -> Unit raise {
   let t2268 = @tactics.match_mp_tac(finite_subset())
   let t2267 = @list.List([
     @tactics.all_tac,
-    @simp.asm_rewrite_tac(@list.empty()),
+    @simp.asm_rewrite_tac(@list.List([])),
   ])
   let t2280 = @tactics.thenl(
     @tactics.then_tac(
@@ -25097,7 +25097,7 @@ fn step_484() -> Unit raise {
     ),
     t2280,
   ])
-  let t2262 = @simp.asm_rewrite_tac(@list.empty())
+  let t2262 = @simp.asm_rewrite_tac(@list.List([]))
   let t2282 = @tactics.thenl(
     @tactics.then_tac(
       @class.asm_cases_tac(@parser.parse_term("FINITE(s:A->bool)")),
@@ -25118,7 +25118,7 @@ fn step_484() -> Unit raise {
     ),
     t2282,
   ])
-  let t2260 = @simp.asm_rewrite_tac(@list.empty())
+  let t2260 = @simp.asm_rewrite_tac(@list.List([]))
   let t2259 = @class.asm_cases_tac(@parser.parse_term("n = 0"))
   let t2284 = @tactics.thenl(
     @tactics.then_tac(
@@ -25151,7 +25151,7 @@ pub fn finite_restricted_powerset() -> @kernel.Thm {
 ///|
 /// FINITE_RESTRICTED_FUNSPACE
 fn step_485() -> Unit raise {
-  let t2302 = @simp.asm_rewrite_tac(@list.empty())
+  let t2302 = @simp.asm_rewrite_tac(@list.List([]))
   let t2301 = @class.asm_cases_tac(@parser.parse_term("(f:A->B) x = k x"))
   let t2300 = @simp.rewrite_tac(
     @list.List([
@@ -25165,7 +25165,7 @@ fn step_485() -> Unit raise {
   )
   let t2298 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
   let t2297 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
-  let t2295 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t2295 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t2296 = @list.List([
     @tactics.all_tac,
     @tactics.then_tac(
@@ -25278,7 +25278,7 @@ pub fn finite_restricted_funspace() -> @kernel.Thm {
 ///|
 /// NUMSEG_CLAUSES_LT
 fn step_486() -> Unit raise {
-  let t2304 = set_tac(@list.empty())
+  let t2304 = set_tac(@list.List([]))
   let t2305 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@arith.lt()])),
     t2304,
@@ -25389,7 +25389,7 @@ pub fn finite_numseg_lt() -> @kernel.Thm {
 ///|
 /// NUMSEG_CLAUSES_LE
 fn step_490() -> Unit raise {
-  let t2310 = set_tac(@list.empty())
+  let t2310 = set_tac(@list.List([]))
   let t2311 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([@arith.le()])),
     t2310,
@@ -26238,7 +26238,7 @@ fn step_499() -> Unit raise {
   ])
   let t2381 = @tactics.repeat_tac(@tactics.gen_tac)
   let t2380 = @tactics.repeat_tac(@tactics.conj_tac)
-  let t2379 = @simp.asm_rewrite_tac(@list.empty())
+  let t2379 = @simp.asm_rewrite_tac(@list.List([]))
   let t2377 = @simp.asm_simp_tac(
     @list.List([
       @realax.real_of_num_eq(),
@@ -26723,7 +26723,7 @@ pub fn real_infinite() -> @kernel.Thm {
 /// HAS_SIZE_INDEX
 fn step_501() -> Unit raise {
   let t2481 = @meson.asm_meson_tac(@list.List([@arith.lt_refl(), in_delete()]))
-  let t2480 = @simp.asm_simp_tac(@list.empty())
+  let t2480 = @simp.asm_simp_tac(@list.List([]))
   let t2479 = @class.asm_cases_tac(@parser.parse_term("a:A = x"))
   let t2478 = @tactics.conv_tac(@equal.once_depth_conv(@class.cond_elim_conv))
   let t2477 = @simp.asm_rewrite_tac(@list.List([in_delete()]))
@@ -26796,13 +26796,13 @@ fn step_501() -> Unit raise {
       }
     })(((x2474 : @kernel.Thm) => @bool.spec(t2473, x2474))(x2475))
   })
-  let t2469 = @simp.asm_rewrite_tac(@list.empty())
+  let t2469 = @simp.asm_rewrite_tac(@list.List([]))
   let t2468 = @tactics.x_gen_tac(@parser.parse_term("x:A"))
   let t2466 = @meson.asm_meson_tac(@list.List([in_delete()]))
   let t2467 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
-        @tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.empty())),
+        @tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([]))),
         @class.cond_cases_tac,
       ),
       t2466,
@@ -26817,7 +26817,7 @@ fn step_501() -> Unit raise {
       @tactics.strip_assume_tac,
     ),
   )
-  let t2463 = @simp.asm_rewrite_tac(@list.empty())
+  let t2463 = @simp.asm_rewrite_tac(@list.List([]))
   let t2459 = @parser.parse_term("s DELETE (a:A)")
   let t2462 = @tactics.first_x_assum(fn(
     x2461 : @kernel.Thm,
@@ -26887,7 +26887,7 @@ fn step_501() -> Unit raise {
       }
     })(((x2460 : @kernel.Thm) => @bool.spec(t2459, x2460))(x2461))
   })
-  let t2455 = @simp.asm_rewrite_tac(@list.empty())
+  let t2455 = @simp.asm_rewrite_tac(@list.List([]))
   let t2451 = @parser.parse_term("a:A")
   let t2446 = @parser.parse_term("a:A")
   let t2454 = @tactics.disch_then(
@@ -27085,7 +27085,7 @@ fn step_502() -> Unit raise {
     @list.List([@equal.gsym(@arith.le_antisym()), t2529]),
   )
   let t2527 = @tactics.exists_tac(@parser.parse_term("SUC q"))
-  let t2528 = @list.List([@meson.asm_meson_tac(@list.empty()), t2527])
+  let t2528 = @list.List([@meson.asm_meson_tac(@list.List([])), t2527])
   let t2525 = @tactics.choose_then(fn(
     x2522 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -27148,7 +27148,7 @@ fn step_502() -> Unit raise {
   let t2519 = @tactics.match_mp_tac(
     @class.taut(@parser.parse_term("p /\\ (q ==> r) ==> (p <=> q) ==> r")),
   )
-  let t2518 = @simp.asm_rewrite_tac(@list.empty())
+  let t2518 = @simp.asm_rewrite_tac(@list.List([]))
   let t2536 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -27192,7 +27192,7 @@ fn step_502() -> Unit raise {
   let t2515 = @tactics.x_gen_tac(@parser.parse_term("n:num"))
   let t2514 = @tactics.match_mp_tac(@arith.num_wf())
   let t2513 = @list.List([
-    @tactics.then_tac(@nums.induct_tac, @meson.asm_meson_tac(@list.empty())),
+    @tactics.then_tac(@nums.induct_tac, @meson.asm_meson_tac(@list.List([]))),
     @tactics.all_tac,
   ])
   let t2512 = @simp.rewrite_tac(@list.List([in_image(), in_univ()]))
@@ -27456,7 +27456,7 @@ fn step_503() -> Unit raise {
   let t2544 = @tactics.match_mp_tac(@arith.wlog_lt())
   let t2543 = @simp.rewrite_tac(@list.List([num_infinite(), in_univ()]))
   let t2542 = @tactics.match_mp_tac(infinite_image())
-  let t2541 = @simp.asm_rewrite_tac(@list.empty())
+  let t2541 = @simp.asm_rewrite_tac(@list.List([]))
   let t2540 = @tactics.disch_then(
     @tactics.x_choose_then(@parser.parse_term("r:num->num"))(fn(
       x2539 : @kernel.Thm,
@@ -27541,9 +27541,9 @@ fn step_504() -> Unit raise {
     ),
     t2577,
   )
-  let t2572 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t2572 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t2571 = @tactics.match_mp_tac(@arith.wlog_lt())
-  let t2570 = @simp.asm_rewrite_tac(@list.empty())
+  let t2570 = @simp.asm_rewrite_tac(@list.List([]))
   let t2573 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -27560,7 +27560,7 @@ fn step_504() -> Unit raise {
     ),
     t2572,
   )
-  let t2569 = set_tac(@list.empty())
+  let t2569 = set_tac(@list.List([]))
   let t2566 = @drule.match_mp(infinite_nonempty())
   let t2568 = @tactics.disch_then(fn(
     x2567 : @kernel.Thm,
@@ -27732,7 +27732,7 @@ fn step_504() -> Unit raise {
     @tactics.x_gen_tac,
     @list.List([@parser.parse_term("f:num->A"), t2551]),
   )
-  let t2550 = @simp.simp_tac(@list.empty())
+  let t2550 = @simp.simp_tac(@list.List([]))
   let t2574 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -27889,7 +27889,7 @@ pub fn list_of_set() -> @kernel.Thm {
 ///|
 /// LIST_OF_SET_PROPERTIES
 fn step_507() -> Unit raise {
-  let t2591 = @simp.asm_rewrite_tac(@list.empty())
+  let t2591 = @simp.asm_rewrite_tac(@list.List([]))
   let t2590 = @tactics.first_assum(fn(
     x2588 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -28227,7 +28227,7 @@ pub fn finite_set_of_list() -> @kernel.Thm {
 ///|
 /// IN_SET_OF_LIST
 fn step_512() -> Unit raise {
-  let t2620 = @meson.asm_meson_tac(@list.empty())
+  let t2620 = @meson.asm_meson_tac(@list.List([]))
   let t2619 = @simp.rewrite_tac(
     @list.List([in_insert(), not_in_empty(), @lists.mem(), set_of_list()]),
   )
@@ -28370,7 +28370,7 @@ pub fn list_of_set_empty() -> @kernel.Thm {
 ///|
 /// LIST_OF_SET_SING
 fn step_517() -> Unit raise {
-  let t2635 = set_tac(@list.empty())
+  let t2635 = set_tac(@list.List([]))
   let t2634 = @simp.simp_tac(
     @list.List([
       @lists.length(),
@@ -28580,7 +28580,7 @@ pub fn pairwise() -> @kernel.Thm {
 ///|
 /// PAIRWISE_EMPTY
 fn step_522() -> Unit raise {
-  let t2645 = @meson.meson_tac(@list.empty())
+  let t2645 = @meson.meson_tac(@list.List([]))
   let t2646 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([pairwise(), not_in_empty()])),
     t2645,
@@ -28605,7 +28605,7 @@ pub fn pairwise_empty() -> @kernel.Thm {
 ///|
 /// PAIRWISE_SING
 fn step_523() -> Unit raise {
-  let t2647 = @meson.meson_tac(@list.empty())
+  let t2647 = @meson.meson_tac(@list.List([]))
   let t2648 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([pairwise(), in_sing()])),
     t2647,
@@ -28627,7 +28627,7 @@ pub fn pairwise_sing() -> @kernel.Thm {
 ///|
 /// PAIRWISE_IMP
 fn step_524() -> Unit raise {
-  let t2649 = set_tac(@list.empty())
+  let t2649 = set_tac(@list.List([]))
   let t2650 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([pairwise()])),
     t2649,
@@ -28654,7 +28654,7 @@ pub fn pairwise_imp() -> @kernel.Thm {
 ///|
 /// PAIRWISE_MONO
 fn step_525() -> Unit raise {
-  let t2651 = set_tac(@list.empty())
+  let t2651 = set_tac(@list.List([]))
   let t2652 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([pairwise()])),
     t2651,
@@ -28681,7 +28681,7 @@ pub fn pairwise_mono() -> @kernel.Thm {
 ///|
 /// PAIRWISE_AND
 fn step_526() -> Unit raise {
-  let t2653 = set_tac(@list.empty())
+  let t2653 = set_tac(@list.List([]))
   let t2654 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([pairwise()])),
     t2653,
@@ -28708,7 +28708,7 @@ pub fn pairwise_and() -> @kernel.Thm {
 ///|
 /// PAIRWISE_INSERT
 fn step_527() -> Unit raise {
-  let t2655 = @meson.meson_tac(@list.empty())
+  let t2655 = @meson.meson_tac(@list.List([]))
   let t2656 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([pairwise(), in_insert()])),
     t2655,
@@ -28737,7 +28737,7 @@ pub fn pairwise_insert() -> @kernel.Thm {
 ///|
 /// PAIRWISE_INSERT_SYMMETRIC
 fn step_528() -> Unit raise {
-  let t2657 = @meson.meson_tac(@list.empty())
+  let t2657 = @meson.meson_tac(@list.List([]))
   let t2658 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([pairwise_insert()])),
     t2657,
@@ -28766,7 +28766,7 @@ pub fn pairwise_insert_symmetric() -> @kernel.Thm {
 ///|
 /// PAIRWISE_IMAGE
 fn step_529() -> Unit raise {
-  let t2659 = @meson.meson_tac(@list.empty())
+  let t2659 = @meson.meson_tac(@list.List([]))
   let t2660 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([pairwise(), in_image()])),
     t2659,
@@ -28793,7 +28793,7 @@ pub fn pairwise_image() -> @kernel.Thm {
 ///|
 /// PAIRWISE_UNION
 fn step_530() -> Unit raise {
-  let t2661 = set_tac(@list.empty())
+  let t2661 = set_tac(@list.List([]))
   let t2662 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([pairwise()])),
     t2661,
@@ -28820,7 +28820,7 @@ pub fn pairwise_union() -> @kernel.Thm {
 ///|
 /// PAIRWISE_CHAIN_UNIONS
 fn step_531() -> Unit raise {
-  let t2663 = set_tac(@list.empty())
+  let t2663 = set_tac(@list.List([]))
   let t2664 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([pairwise()])),
     t2663,
@@ -28849,11 +28849,11 @@ pub fn pairwise_chain_unions() -> @kernel.Thm {
 ///|
 /// DIFF_UNIONS_PAIRWISE_DISJOINT
 fn step_532() -> Unit raise {
-  let t2678 = @meson.asm_meson_tac(@list.empty())
+  let t2678 = @meson.asm_meson_tac(@list.List([]))
   let t2677 = @tactics.repeat_tac(
     @tactics.thenl(
       @tactics.conj_tac,
-      @list.List([@tactics.asm_tac(set_tac)(@list.empty()), @tactics.all_tac]),
+      @list.List([@tactics.asm_tac(set_tac)(@list.List([])), @tactics.all_tac]),
     ),
   )
   let t2676 = @tactics.first_x_assum(@tactics.match_mp_tac)
@@ -28961,7 +28961,7 @@ fn step_532() -> Unit raise {
     ),
     t2678,
   )
-  let t2666 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t2666 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t2680 = @list.List([
     @tactics.then_tac(
       @tactics.then_tac(
@@ -29008,9 +29008,9 @@ pub fn diff_unions_pairwise_disjoint() -> @kernel.Thm {
 ///|
 /// INTER_UNIONS_PAIRWISE_DISJOINT
 fn step_533() -> Unit raise {
-  let t2704 = @tactics.asm_tac(set_tac)(@list.empty())
-  let t2705 = @list.List([@meson.asm_meson_tac(@list.empty()), t2704])
-  let t2703 = @simp.asm_rewrite_tac(@list.empty())
+  let t2704 = @tactics.asm_tac(set_tac)(@list.List([]))
+  let t2705 = @list.List([@meson.asm_meson_tac(@list.List([])), t2704])
+  let t2703 = @simp.asm_rewrite_tac(@list.List([]))
   let t2702 = @class.asm_cases_tac(@parser.parse_term("u:A->bool = v"))
   let t2697 = @parser.parse_term("v:A->bool")
   let t2698 = @list.List([@parser.parse_term("u:A->bool"), t2697])
@@ -29087,7 +29087,7 @@ fn step_533() -> Unit raise {
     @tactics.x_gen_tac,
     @list.List([@parser.parse_term("u:A->bool"), t2692]),
   )
-  let t2690 = @meson.meson_tac(@list.empty())
+  let t2690 = @meson.meson_tac(@list.List([]))
   let t2691 = @list.List([
     @simp.rewrite_tac(@list.List([@theorems.left_imp_exists_thm()])),
     t2690,
@@ -29176,7 +29176,7 @@ pub fn inter_unions_pairwise_disjoint() -> @kernel.Thm {
 ///|
 /// PSUBSET_UNIONS_PAIRWISE_DISJOINT
 fn step_534() -> Unit raise {
-  let t2735 = @meson.meson_tac(@list.empty())
+  let t2735 = @meson.meson_tac(@list.List([]))
   let t2734 = @simp.rewrite_tac(@list.List([in_delete(), in_diff()]))
   let t2731 = @simp.gen_rewrite_rule(
     fn(
@@ -29323,7 +29323,7 @@ fn step_534() -> Unit raise {
       s2721(x2722)
     }
   })
-  let t2724 = @list.List([@tactics.asm_tac(set_tac)(@list.empty()), t2723])
+  let t2724 = @list.List([@tactics.asm_tac(set_tac)(@list.List([])), t2723])
   let t2713 = @drule.part_match(
     fn(x2712 : @kernel.Term) -> @kernel.Term raise {
       @equal.lhand(@kernel.rand(x2712))
@@ -29331,7 +29331,7 @@ fn step_534() -> Unit raise {
     diff_unions_pairwise_disjoint(),
   )
   let t2708 = @list.List([
-    @tactics.asm_tac(set_tac)(@list.empty()),
+    @tactics.asm_tac(set_tac)(@list.List([])),
     @tactics.all_tac,
   ])
   let t2707 = @tactics.match_mp_tac(
@@ -29700,7 +29700,7 @@ pub fn intersection_of_inc() -> @kernel.Thm {
 ///|
 /// UNION_OF_MONO
 fn step_541() -> Unit raise {
-  let t2745 = @meson.meson_tac(@list.empty())
+  let t2745 = @meson.meson_tac(@list.List([]))
   let t2746 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([union_of()])),
     t2745,
@@ -29727,7 +29727,7 @@ pub fn union_of_mono() -> @kernel.Thm {
 ///|
 /// INTERSECTION_OF_MONO
 fn step_542() -> Unit raise {
-  let t2747 = @meson.meson_tac(@list.empty())
+  let t2747 = @meson.meson_tac(@list.List([]))
   let t2748 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([intersection_of()])),
     t2747,
@@ -29756,7 +29756,7 @@ pub fn intersection_of_mono() -> @kernel.Thm {
 ///|
 /// FORALL_UNION_OF
 fn step_543() -> Unit raise {
-  let t2749 = @meson.meson_tac(@list.empty())
+  let t2749 = @meson.meson_tac(@list.List([]))
   let t2750 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([union_of()])),
     t2749,
@@ -29785,7 +29785,7 @@ pub fn forall_union_of() -> @kernel.Thm {
 ///|
 /// FORALL_INTERSECTION_OF
 fn step_544() -> Unit raise {
-  let t2751 = @meson.meson_tac(@list.empty())
+  let t2751 = @meson.meson_tac(@list.List([]))
   let t2752 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([intersection_of()])),
     t2751,
@@ -29897,13 +29897,13 @@ pub fn arbitrary() -> @kernel.Thm {
 ///|
 /// ARBITRARY_UNION_OF_ALT
 fn step_548() -> Unit raise {
-  let t2766 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t2766 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t2765 = @tactics.exists_tac(
     @parser.parse_term("{u:A->bool | u IN B /\\ u SUBSET s}"),
   )
   let t2764 = @simp.rewrite_tac(@list.List([arbitrary(), union_of()]))
   let t2763 = @tactics.x_gen_tac(@parser.parse_term("s:A->bool"))
-  let t2762 = @list.List([set_tac(@list.empty()), @tactics.all_tac])
+  let t2762 = @list.List([set_tac(@list.List([])), @tactics.all_tac])
   let t2761 = @simp.rewrite_tac(@list.List([forall_union_of(), arbitrary()]))
   let t2767 = @tactics.then_tac(
     @tactics.then_tac(
@@ -30160,10 +30160,10 @@ pub fn arbitrary_intersection_of_complement() -> @kernel.Thm {
 ///|
 /// ARBITRARY_UNION_OF_IDEMPOT
 fn step_555() -> Unit raise {
-  let t2817 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t2817 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t2816 = @simp.rewrite_tac(@list.List([exists_in_gspec()]))
   let t2814 = @simp.rewrite_tac(@list.List([unions_image()]))
-  let t2815 = @list.List([@tactics.asm_tac(set_tac)(@list.empty()), t2814])
+  let t2815 = @list.List([@tactics.asm_tac(set_tac)(@list.List([])), t2814])
   let t2813 = @simp.rewrite_tac(
     @list.List([forall_in_image(), forall_in_gspec()]),
   )
@@ -30542,7 +30542,7 @@ pub fn arbitrary_intersection_of_idempot() -> @kernel.Thm {
 fn step_557() -> Unit raise {
   let t2825 = @simp.asm_rewrite_tac(@list.List([arbitrary()]))
   let t2824 = @tactics.exists_tac(@parser.parse_term("u:(A->bool)->bool"))
-  let t2823 = @simp.rewrite_tac(@list.empty())
+  let t2823 = @simp.rewrite_tac(@list.List([]))
   let t2822 = @simp.once_rewrite_tac(@list.List([union_of()]))
   let t2821 = @simp.once_rewrite_tac(
     @list.List([@equal.gsym(arbitrary_union_of_idempot())]),
@@ -30626,7 +30626,7 @@ pub fn arbitrary_union_of_union() -> @kernel.Thm {
 fn step_559() -> Unit raise {
   let t2836 = @simp.asm_rewrite_tac(@list.List([arbitrary()]))
   let t2835 = @tactics.exists_tac(@parser.parse_term("u:(A->bool)->bool"))
-  let t2834 = @simp.rewrite_tac(@list.empty())
+  let t2834 = @simp.rewrite_tac(@list.List([]))
   let t2833 = @simp.once_rewrite_tac(@list.List([intersection_of()]))
   let t2832 = @simp.once_rewrite_tac(
     @list.List([@equal.gsym(arbitrary_intersection_of_idempot())]),
@@ -30746,7 +30746,7 @@ fn step_561() -> Unit raise {
   ) raise) raise {
     @tactics.strip_assume_tac(@equal.gsym(x2854))
   })
-  let t2853 = @simp.rewrite_tac(@list.empty())
+  let t2853 = @simp.rewrite_tac(@list.List([]))
   let t2852 = @simp.gen_rewrite_tac(
     fn(
       x2851 : (@kernel.Term) -> @kernel.Thm raise,
@@ -31149,10 +31149,10 @@ pub fn finite_intersection_of_complement() -> @kernel.Thm {
 ///|
 /// FINITE_UNION_OF_IDEMPOT
 fn step_571() -> Unit raise {
-  let t2921 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t2921 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t2920 = @simp.rewrite_tac(@list.List([exists_in_gspec()]))
   let t2918 = @simp.rewrite_tac(@list.List([unions_image()]))
-  let t2919 = @list.List([@tactics.asm_tac(set_tac)(@list.empty()), t2918])
+  let t2919 = @list.List([@tactics.asm_tac(set_tac)(@list.List([])), t2918])
   let t2917 = @simp.rewrite_tac(
     @list.List([forall_in_image(), forall_in_gspec()]),
   )
@@ -31531,9 +31531,9 @@ pub fn finite_intersection_of_idempot() -> @kernel.Thm {
 ///|
 /// FINITE_UNION_OF_UNIONS
 fn step_573() -> Unit raise {
-  let t2929 = @simp.asm_rewrite_tac(@list.empty())
+  let t2929 = @simp.asm_rewrite_tac(@list.List([]))
   let t2928 = @tactics.exists_tac(@parser.parse_term("u:(A->bool)->bool"))
-  let t2927 = @simp.rewrite_tac(@list.empty())
+  let t2927 = @simp.rewrite_tac(@list.List([]))
   let t2926 = @simp.once_rewrite_tac(@list.List([union_of()]))
   let t2925 = @simp.once_rewrite_tac(
     @list.List([@equal.gsym(finite_union_of_idempot())]),
@@ -31615,9 +31615,9 @@ pub fn finite_union_of_union() -> @kernel.Thm {
 ///|
 /// FINITE_INTERSECTION_OF_INTERS
 fn step_575() -> Unit raise {
-  let t2940 = @simp.asm_rewrite_tac(@list.empty())
+  let t2940 = @simp.asm_rewrite_tac(@list.List([]))
   let t2939 = @tactics.exists_tac(@parser.parse_term("u:(A->bool)->bool"))
-  let t2938 = @simp.rewrite_tac(@list.empty())
+  let t2938 = @simp.rewrite_tac(@list.List([]))
   let t2937 = @simp.once_rewrite_tac(@list.List([intersection_of()]))
   let t2936 = @simp.once_rewrite_tac(
     @list.List([@equal.gsym(finite_intersection_of_idempot())]),
@@ -31734,7 +31734,7 @@ fn step_577() -> Unit raise {
   ) raise) raise {
     @tactics.strip_assume_tac(@equal.gsym(x2958))
   })
-  let t2957 = @simp.rewrite_tac(@list.empty())
+  let t2957 = @simp.rewrite_tac(@list.List([]))
   let t2956 = @simp.gen_rewrite_tac(
     fn(
       x2955 : (@kernel.Term) -> @kernel.Thm raise,
@@ -32127,7 +32127,7 @@ fn step_583() -> Unit raise {
     ),
     t2995,
   )
-  let t2990 = @meson.asm_meson_tac(@list.empty())
+  let t2990 = @meson.asm_meson_tac(@list.List([]))
   let t2989 = @simp.rewrite_tac(@list.List([subset(), in_image(), in_delete()]))
   let t2988 = @simp.asm_simp_tac(@list.List([finite_image(), finite_delete()]))
   let t2987 = @tactics.match_mp_tac(card_subset())
@@ -32135,7 +32135,7 @@ fn step_583() -> Unit raise {
     @tactics.then_tac(
       @tactics.then_tac(
         @tactics.then_tac(
-          @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t2987),
+          @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t2987),
           t2988,
         ),
         t2989,
@@ -32193,7 +32193,7 @@ fn step_583() -> Unit raise {
       }
     },
   )
-  let t2982 = @simp.asm_rewrite_tac(@list.empty())
+  let t2982 = @simp.asm_rewrite_tac(@list.List([]))
   let t3004 = @list.List([
     @tactics.thenl(
       @tactics.then_tac(
@@ -32404,14 +32404,14 @@ pub fn image_imp_injective() -> @kernel.Thm {
 ///|
 /// HAS_SIZE_IMAGE_INJ_RESTRICT
 fn step_587() -> Unit raise {
-  let t3028 = @tactics.asm_tac(set_tac)(@list.empty())
-  let t3027 = @simp.asm_rewrite_tac(@list.empty())
+  let t3028 = @tactics.asm_tac(set_tac)(@list.List([]))
+  let t3027 = @simp.asm_rewrite_tac(@list.List([]))
   let t3029 = @tactics.then_tac(
     @tactics.then_tac(@tactics.match_mp_tac(has_size_image_inj()), t3027),
     t3028,
   )
-  let t3026 = @tactics.asm_tac(set_tac)(@list.empty())
-  let t3025 = @simp.asm_rewrite_tac(@list.empty())
+  let t3026 = @tactics.asm_tac(set_tac)(@list.List([]))
+  let t3025 = @simp.asm_rewrite_tac(@list.List([]))
   let t3023 = @parser.parse_term("f:A->B")
   let t3024 = @parser.parse_term("t:B->bool")
   let t3030 = @list.List([
@@ -32518,7 +32518,7 @@ fn step_588() -> Unit raise {
       @tactics.strip_assume_tac,
     ),
   )
-  let t3053 = @simp.asm_rewrite_tac(@list.empty())
+  let t3053 = @simp.asm_rewrite_tac(@list.List([]))
   let t3049 = @parser.parse_term("t:B->bool")
   let t3052 = @tactics.first_x_assum(fn(
     x3051 : @kernel.Thm,
@@ -32720,7 +32720,7 @@ pub fn card_le_inj() -> @kernel.Thm {
 ///|
 /// FORALL_IN_CLAUSES
 fn step_589() -> Unit raise {
-  let t3059 = @meson.meson_tac(@list.empty())
+  let t3059 = @meson.meson_tac(@list.List([]))
   let t3060 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([in_insert(), not_in_empty()])),
     t3059,
@@ -32749,7 +32749,7 @@ pub fn forall_in_clauses() -> @kernel.Thm {
 ///|
 /// EXISTS_IN_CLAUSES
 fn step_590() -> Unit raise {
-  let t3061 = @meson.meson_tac(@list.empty())
+  let t3061 = @meson.meson_tac(@list.List([]))
   let t3062 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([in_insert(), not_in_empty()])),
     t3061,
@@ -32778,7 +32778,7 @@ pub fn exists_in_clauses() -> @kernel.Thm {
 ///|
 /// INJECTIVE_ON_IMAGE
 fn step_591() -> Unit raise {
-  let t3075 = set_tac(@list.empty())
+  let t3075 = set_tac(@list.List([]))
   let t3074 = @simp.asm_rewrite_tac(
     @list.List([sing_subset(), image_clauses()]),
   )
@@ -32857,7 +32857,7 @@ fn step_591() -> Unit raise {
     @tactics.x_gen_tac,
     @list.List([@parser.parse_term("x:A"), t3064]),
   )
-  let t3063 = @list.List([@tactics.disch_tac, set_tac(@list.empty())])
+  let t3063 = @list.List([@tactics.disch_tac, set_tac(@list.List([]))])
   let t3076 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(
@@ -32942,7 +32942,7 @@ pub fn injective_image() -> @kernel.Thm {
 ///|
 /// SURJECTIVE_ON_IMAGE
 fn step_593() -> Unit raise {
-  let t3089 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t3089 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t3088 = @tactics.exists_tac(
     @parser.parse_term("{x | x IN u /\\ (f:A->B) x IN t}"),
   )
@@ -32959,7 +32959,7 @@ fn step_593() -> Unit raise {
     ),
     t3089,
   )
-  let t3087 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t3087 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t3083 = @parser.parse_term("{y:B}")
   let t3086 = @tactics.first_x_assum(fn(
     x3085 : @kernel.Thm,
@@ -33112,7 +33112,7 @@ pub fn surjective_image() -> @kernel.Thm {
 ///|
 /// INJECTIVE_ON_PREIMAGE
 fn step_595() -> Unit raise {
-  let t3108 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t3108 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t3103 = @parser.parse_term("{}:B->bool")
   let t3104 = @list.List([@parser.parse_term("{y:B}"), t3103])
   let t3107 = @tactics.first_x_assum(fn(
@@ -33187,7 +33187,7 @@ fn step_595() -> Unit raise {
   let t3098 = @simp.rewrite_tac(@list.List([subset()]))
   let t3097 = @list.List([
     @tactics.all_tac,
-    @tactics.asm_tac(set_tac)(@list.empty()),
+    @tactics.asm_tac(set_tac)(@list.List([])),
   ])
   let t3109 = @tactics.then_tac(
     @tactics.then_tac(
@@ -33235,7 +33235,7 @@ pub fn injective_on_preimage() -> @kernel.Thm {
 ///|
 /// SURJECTIVE_ON_PREIMAGE
 fn step_596() -> Unit raise {
-  let t3130 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t3130 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t3129 = @tactics.exists_tac(@parser.parse_term("IMAGE (f:A->B) k"))
   let t3131 = @tactics.then_tac(
     @tactics.then_tac(
@@ -33247,7 +33247,7 @@ fn step_596() -> Unit raise {
     ),
     t3130,
   )
-  let t3127 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t3127 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t3123 = @parser.parse_term("{x:A}")
   let t3126 = @tactics.first_x_assum(fn(
     x3125 : @kernel.Thm,
@@ -33331,7 +33331,7 @@ fn step_596() -> Unit raise {
     ),
     t3127,
   )
-  let t3118 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t3118 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t3114 = @parser.parse_term("{x:A}")
   let t3117 = @tactics.first_x_assum(fn(
     x3116 : @kernel.Thm,
@@ -33458,7 +33458,7 @@ pub fn surjective_on_preimage() -> @kernel.Thm {
 ///|
 /// INJECTIVE_PREIMAGE
 fn step_597() -> Unit raise {
-  let t3138 = set_tac(@list.empty())
+  let t3138 = set_tac(@list.List([]))
   let t3137 = @simp.rewrite_tac(@list.List([in_univ(), subset_univ()]))
   let t3134 = @parser.parse_term("(:B)")
   let t3135 = @parser.parse_term("(:A)")
@@ -33499,7 +33499,7 @@ pub fn injective_preimage() -> @kernel.Thm {
 ///|
 /// SURJECTIVE_PREIMAGE
 fn step_598() -> Unit raise {
-  let t3144 = set_tac(@list.empty())
+  let t3144 = set_tac(@list.List([]))
   let t3143 = @simp.rewrite_tac(@list.List([in_univ(), subset_univ()]))
   let t3140 = @parser.parse_term("(:B)")
   let t3141 = @parser.parse_term("(:A)")
@@ -33614,7 +33614,7 @@ pub fn card_eq_bijection() -> @kernel.Thm {
 ///|
 /// CARD_EQ_BIJECTIONS
 fn step_600() -> Unit raise {
-  let t3165 = @meson.meson_tac(@list.empty())
+  let t3165 = @meson.meson_tac(@list.List([]))
   let t3164 = @tactics.match_mp_tac(@theorems.mono_exists())
   let t3163 = @simp.rewrite_tac(
     @list.List([
@@ -33736,7 +33736,7 @@ pub fn card_eq_bijections() -> @kernel.Thm {
 ///|
 /// CARD_EQ_BIJECTIONS_SPECIAL
 fn step_601() -> Unit raise {
-  let t3174 = @meson.asm_meson_tac(@list.empty())
+  let t3174 = @meson.asm_meson_tac(@list.List([]))
   let t3173 = @tactics.exists_tac(
     @parser.parse_term("\\y. if y = b then a else (g:B->A) y"),
   )
@@ -33806,12 +33806,12 @@ pub fn card_eq_bijections_special() -> @kernel.Thm {
 ///|
 /// BIJECTIONS_HAS_SIZE
 fn step_602() -> Unit raise {
-  let t3180 = @meson.asm_meson_tac(@list.empty())
+  let t3180 = @meson.asm_meson_tac(@list.List([]))
   let t3181 = @tactics.then_tac(
     @tactics.match_mp_tac(has_size_image_inj()),
     t3180,
   )
-  let t3182 = @list.List([@tactics.asm_tac(set_tac)(@list.empty()), t3181])
+  let t3182 = @list.List([@tactics.asm_tac(set_tac)(@list.List([])), t3181])
   let t3179 = @tactics.subgoal_then(
     @parser.parse_term("t = IMAGE (f:A->B) s"),
     fn(
@@ -33889,7 +33889,7 @@ pub fn bijections_has_size() -> @kernel.Thm {
 ///|
 /// BIJECTIONS_HAS_SIZE_EQ
 fn step_603() -> Unit raise {
-  let t3195 = @meson.asm_meson_tac(@list.empty())
+  let t3195 = @meson.asm_meson_tac(@list.List([]))
   let t3192 = @parser.parse_term("f:A->B")
   let t3193 = @tactics.map_every(
     fn(
@@ -34275,7 +34275,7 @@ fn step_605() -> Unit raise {
   let t3216 = @tactics.mp_tac(
     @bool.ispec(@parser.parse_term("s:num->A"), infinite_image_inj()),
   )
-  let t3214 = @meson.asm_meson_tac(@list.empty())
+  let t3214 = @meson.asm_meson_tac(@list.List([]))
   let t3215 = @list.List([
     @tactics.then_tac(
       @tactics.match_mp_tac(@arith.transitive_stepwise_lt()),
@@ -34412,14 +34412,14 @@ pub fn wf_finite() -> @kernel.Thm {
 ///|
 /// WF_PSUBSET
 fn step_606() -> Unit raise {
-  let t3241 = set_tac(@list.empty())
+  let t3241 = set_tac(@list.List([]))
   let t3240 = @simp.asm_simp_tac(@list.List([finite_powerset()]))
   let t3239 = @tactics.exists_tac(
     @parser.parse_term("{t:A->bool | t SUBSET s}"),
   )
   let t3238 = @tactics.match_mp_tac(finite_subset())
   let t3236 = @tactics.x_gen_tac(@parser.parse_term("t:A->bool"))
-  let t3237 = @list.List([set_tac(@list.empty()), t3236])
+  let t3237 = @list.List([set_tac(@list.List([])), t3236])
   let t3235 = @simp.simp_tac(@list.List([@theorems.conj_assoc()]))
   let t3234 = @tactics.match_mp_tac(wf_finite())
   let t3242 = @tactics.then_tac(
@@ -34570,7 +34570,7 @@ pub fn gt_c() -> @kernel.Thm {
 ///|
 /// LE_C
 fn step_612() -> Unit raise {
-  let t3243 = @meson.meson_tac(@list.empty())
+  let t3243 = @meson.meson_tac(@list.List([]))
   let t3244 = @tactics.then_tac(
     @simp.rewrite_tac(
       @list.List([
@@ -34606,7 +34606,7 @@ pub fn le_c_v1() -> @kernel.Thm {
 ///|
 /// GE_C
 fn step_613() -> Unit raise {
-  let t3245 = @meson.meson_tac(@list.empty())
+  let t3245 = @meson.meson_tac(@list.List([]))
   let t3246 = @tactics.then_tac(
     @simp.rewrite_tac(@list.List([ge_c(), le_c_v1()])),
     t3245,
@@ -35043,7 +35043,7 @@ pub fn real_sup_le() -> @kernel.Thm {
 ///|
 /// REAL_SUP_LE_SUBSET
 fn step_626() -> Unit raise {
-  let t3277 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t3277 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t3276 = @tactics.mp_tac(
     @bool.spec(@parser.parse_term("t:real->bool"), sup_v1()),
   )
@@ -35156,7 +35156,7 @@ fn step_627() -> Unit raise {
       }
     })(t3285(x3286))
   })
-  let t3280 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t3280 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t3279 = @tactics.mp_tac(
     @bool.spec(@parser.parse_term("s:real->bool"), sup_v1()),
   )
@@ -35391,7 +35391,7 @@ pub fn sup_sing() -> @kernel.Thm {
 ///|
 /// SUP_INSERT_INSERT
 fn step_633() -> Unit raise {
-  let t3306 = @simp.asm_rewrite_tac(@list.empty())
+  let t3306 = @simp.asm_rewrite_tac(@list.List([]))
   let t3305 = @class.asm_cases_tac(
     @parser.parse_term("!x:real. x IN s ==> x <= c"),
   )
@@ -35486,7 +35486,7 @@ pub fn real_sup_le_eq() -> @kernel.Thm {
 ///|
 /// SUP_UNIQUE
 fn step_636() -> Unit raise {
-  let t3315 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t3315 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t3314 = @tactics.match_mp_tac(sup_eq())
   let t3313 = @simp.gen_rewrite_tac(
     fn(
@@ -35587,7 +35587,7 @@ pub fn element_le_sup() -> @kernel.Thm {
 ///|
 /// SUP_APPROACH
 fn step_639() -> Unit raise {
-  let t3344 = @meson.asm_meson_tac(@list.empty())
+  let t3344 = @meson.asm_meson_tac(@list.List([]))
   let t3343 = @tactics.remove_then("sup", @tactics.match_mp_tac)
   let t3342 = @theorems.intro_tac("_ sup")
   let t3337 = @drule.match_mp(sup_v1())
@@ -35687,7 +35687,7 @@ fn step_639() -> Unit raise {
       )
     },
     "npty bound",
-  )(@list.empty())
+  )(@list.List([]))
   let t3333 = @simp.rewrite_tac(@list.List([@realarith.real_not_lt()]))
   let t3332 = @tactics.remove_then("lt", fn(
     x3329 : @kernel.Thm,
@@ -36318,7 +36318,7 @@ pub fn real_le_inf() -> @kernel.Thm {
 ///|
 /// REAL_LE_INF_SUBSET
 fn step_652() -> Unit raise {
-  let t3384 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t3384 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t3383 = @tactics.mp_tac(
     @bool.spec(@parser.parse_term("s:real->bool"), inf_v1()),
   )
@@ -36431,7 +36431,7 @@ fn step_653() -> Unit raise {
       }
     })(t3392(x3393))
   })
-  let t3387 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t3387 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t3386 = @tactics.mp_tac(
     @bool.spec(@parser.parse_term("s:real->bool"), inf_v1()),
   )
@@ -36666,7 +36666,7 @@ pub fn inf_sing() -> @kernel.Thm {
 ///|
 /// INF_INSERT_INSERT
 fn step_659() -> Unit raise {
-  let t3413 = @simp.asm_rewrite_tac(@list.empty())
+  let t3413 = @simp.asm_rewrite_tac(@list.List([]))
   let t3412 = @class.asm_cases_tac(
     @parser.parse_term("!x:real. x IN s ==> c <= x"),
   )
@@ -36822,7 +36822,7 @@ pub fn real_le_inf_eq() -> @kernel.Thm {
 ///|
 /// INF_UNIQUE
 fn step_663() -> Unit raise {
-  let t3428 = @tactics.asm_tac(set_tac)(@list.empty())
+  let t3428 = @tactics.asm_tac(set_tac)(@list.List([]))
   let t3427 = @tactics.match_mp_tac(inf_eq())
   let t3426 = @simp.gen_rewrite_tac(
     fn(
@@ -36923,7 +36923,7 @@ pub fn inf_le_element() -> @kernel.Thm {
 ///|
 /// INF_APPROACH
 fn step_666() -> Unit raise {
-  let t3457 = @meson.asm_meson_tac(@list.empty())
+  let t3457 = @meson.asm_meson_tac(@list.List([]))
   let t3456 = @tactics.remove_then("inf", @tactics.match_mp_tac)
   let t3455 = @theorems.intro_tac("_ inf")
   let t3450 = @drule.match_mp(inf_v1())
@@ -37023,7 +37023,7 @@ fn step_666() -> Unit raise {
       )
     },
     "npty bound",
-  )(@list.empty())
+  )(@list.List([]))
   let t3446 = @simp.rewrite_tac(@list.List([@realarith.real_not_lt()]))
   let t3445 = @tactics.remove_then("lt", fn(
     x3442 : @kernel.Thm,
@@ -37334,11 +37334,11 @@ pub fn has_sup_ubound() -> @kernel.Thm {
 ///|
 /// HAS_INF_INF
 fn step_674() -> Unit raise {
-  let t3492 = @simp.asm_simp_tac(@list.empty())
+  let t3492 = @simp.asm_simp_tac(@list.List([]))
   let t3490 = @parser.parse_term("l:real")
   let t3491 = @tactics.trans_tac(@realax.real_le_trans())(t3490)
   let t3489 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t3488 = @simp.asm_rewrite_tac(@list.empty())
+  let t3488 = @simp.asm_rewrite_tac(@list.List([]))
   let t3487 = @tactics.pop_assum(fn(
     x3484 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -37385,9 +37385,9 @@ fn step_674() -> Unit raise {
       s3485(x3486)
     }
   })
-  let t3482 = @meson.asm_meson_tac(@list.empty())
+  let t3482 = @meson.asm_meson_tac(@list.List([]))
   let t3483 = @list.List([
-    @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t3482),
+    @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t3482),
     @tactics.all_tac,
   ])
   let t3493 = @tactics.then_tac(
@@ -37423,11 +37423,11 @@ fn step_674() -> Unit raise {
     ),
     t3492,
   )
-  let t3481 = @simp.asm_rewrite_tac(@list.empty())
+  let t3481 = @simp.asm_rewrite_tac(@list.List([]))
   let t3480 = @tactics.match_mp_tac(inf_unique())
   let t3478 = @meson.meson_tac(@list.List([@realax.real_le_refl()]))
   let t3479 = @list.List([
-    @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t3478),
+    @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t3478),
     @tactics.all_tac,
   ])
   let t3477 = @tactics.exists_tac(@parser.parse_term("l + &1:real"))
@@ -37604,11 +37604,11 @@ pub fn has_inf_inf() -> @kernel.Thm {
 ///|
 /// HAS_SUP_SUP
 fn step_675() -> Unit raise {
-  let t3520 = @simp.asm_simp_tac(@list.empty())
+  let t3520 = @simp.asm_simp_tac(@list.List([]))
   let t3518 = @parser.parse_term("l:real")
   let t3519 = @tactics.trans_tac(@realax.real_le_trans())(t3518)
   let t3517 = @tactics.repeat_tac(@tactics.strip_tac)
-  let t3516 = @simp.asm_rewrite_tac(@list.empty())
+  let t3516 = @simp.asm_rewrite_tac(@list.List([]))
   let t3515 = @tactics.pop_assum(fn(
     x3512 : @kernel.Thm,
   ) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> (
@@ -37655,9 +37655,9 @@ fn step_675() -> Unit raise {
       s3513(x3514)
     }
   })
-  let t3510 = @meson.asm_meson_tac(@list.empty())
+  let t3510 = @meson.asm_meson_tac(@list.List([]))
   let t3511 = @list.List([
-    @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t3510),
+    @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t3510),
     @tactics.all_tac,
   ])
   let t3521 = @tactics.then_tac(
@@ -37693,11 +37693,11 @@ fn step_675() -> Unit raise {
     ),
     t3520,
   )
-  let t3509 = @simp.asm_rewrite_tac(@list.empty())
+  let t3509 = @simp.asm_rewrite_tac(@list.List([]))
   let t3508 = @tactics.match_mp_tac(sup_unique())
   let t3506 = @meson.meson_tac(@list.List([@realax.real_le_refl()]))
   let t3507 = @list.List([
-    @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t3506),
+    @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t3506),
     @tactics.all_tac,
   ])
   let t3505 = @tactics.exists_tac(@parser.parse_term("l - &1:real"))
@@ -37978,7 +37978,7 @@ pub fn has_sup_approach() -> @kernel.Thm {
 ///|
 /// HAS_INF
 fn step_680() -> Unit raise {
-  let t3554 = @simp.asm_simp_tac(@list.empty())
+  let t3554 = @simp.asm_simp_tac(@list.List([]))
   let t3552 = @parser.parse_term("l:real")
   let t3553 = @tactics.trans_tac(@realax.real_le_trans())(t3552)
   let t3555 = @tactics.then_tac(
@@ -38122,7 +38122,7 @@ fn step_680() -> Unit raise {
     @meson.asm_meson_tac(@list.List([has_inf_lbound()])),
     t3532,
   ])
-  let t3530 = @simp.asm_rewrite_tac(@list.empty())
+  let t3530 = @simp.asm_rewrite_tac(@list.List([]))
   let t3531 = @list.List([
     @tactics.then_tac(
       @theorems.hyp_tac("hp", @simp.rewrite_rule(@list.List([has_inf_inf()]))),
@@ -38187,7 +38187,7 @@ pub fn has_inf_v1() -> @kernel.Thm {
 ///|
 /// HAS_SUP
 fn step_681() -> Unit raise {
-  let t3582 = @simp.asm_simp_tac(@list.empty())
+  let t3582 = @simp.asm_simp_tac(@list.List([]))
   let t3580 = @parser.parse_term("l:real")
   let t3581 = @tactics.trans_tac(@realax.real_le_trans())(t3580)
   let t3583 = @tactics.then_tac(
@@ -38331,7 +38331,7 @@ fn step_681() -> Unit raise {
     @meson.asm_meson_tac(@list.List([has_sup_ubound()])),
     t3560,
   ])
-  let t3558 = @simp.asm_rewrite_tac(@list.empty())
+  let t3558 = @simp.asm_rewrite_tac(@list.List([]))
   let t3559 = @list.List([
     @tactics.then_tac(
       @theorems.hyp_tac("hp", @simp.rewrite_rule(@list.List([has_sup_sup()]))),
@@ -38396,13 +38396,13 @@ pub fn has_sup_v1() -> @kernel.Thm {
 ///|
 /// HAS_INF_LE
 fn step_682() -> Unit raise {
-  let t3607 = @simp.asm_rewrite_tac(@list.empty())
+  let t3607 = @simp.asm_rewrite_tac(@list.List([]))
   let t3604 = @parser.parse_term("y:real")
   let t3606 = @theorems.hyp_tac("l1: +", (x3605 : @kernel.Thm) => {
     @bool.spec(t3604, x3605)
   })
   let t3603 = @list.List([
-    @tactics.hyp_tac(@meson.meson_tac, "le x")(@list.empty()),
+    @tactics.hyp_tac(@meson.meson_tac, "le x")(@list.List([])),
     @tactics.all_tac,
   ])
   let t3602 = @theorems.claim_tac(
@@ -38567,13 +38567,13 @@ pub fn has_inf_le() -> @kernel.Thm {
 ///|
 /// HAS_SUP_LE
 fn step_683() -> Unit raise {
-  let t3630 = @simp.asm_rewrite_tac(@list.empty())
+  let t3630 = @simp.asm_rewrite_tac(@list.List([]))
   let t3627 = @parser.parse_term("y:real")
   let t3629 = @theorems.hyp_tac("l1: +", (x3628 : @kernel.Thm) => {
     @bool.spec(t3627, x3628)
   })
   let t3626 = @list.List([
-    @tactics.hyp_tac(@meson.meson_tac, "le x")(@list.empty()),
+    @tactics.hyp_tac(@meson.meson_tac, "le x")(@list.List([])),
     @tactics.all_tac,
   ])
   let t3625 = @theorems.claim_tac(

@@ -180,7 +180,7 @@ pub fn force_type(
   let _opt_ = x38
   let env = match _opt_ {
     Some(_sth_) => _sth_
-    None => @list.empty()
+    None => @list.List([])
   }
   fn(x40 : String) -> ((@kernel.HolType) -> @kernel.Term raise) raise {
     let s = x40

@@ -193,7 +193,7 @@ fn step_2() -> Unit raise {
               let t53 = rule_1(cs_2, th2_1)
               t53.prepend((@lib.neg63(c_9), th1_1))
             }
-            (Empty, _) => @list.empty()
+            (Empty, _) => @list.List([])
             _ => raise Failure("NEGATE_CLAUSE: sanity check")
           }
         }

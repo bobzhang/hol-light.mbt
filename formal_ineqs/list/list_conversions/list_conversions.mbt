@@ -1031,7 +1031,7 @@ pub fn get_all(x202 : @kernel.Thm) -> @list.List[@kernel.Thm] raise {
       let th_hd = @misc_functions.my_prove_hyp(all_th, inst_t_1(all_hd))
       get_all_raw(th_tl, t_tm).prepend(th_hd)
     } else {
-      @list.empty()
+      @list.List([])
     }
   }
   get_all_raw(th, list_tm)
@@ -1067,7 +1067,7 @@ pub fn select_all(x213 : @kernel.Thm, x214 : @list.List[Int64]) -> @list.List[@k
     let indices_1 = x224
     let n = x225
     match indices_1 {
-      Empty => @list.empty()
+      Empty => @list.List([])
       More(i, tail=is_) => {
         let (h_tm_p, t_tm) = @kernel.dest_comb(list_tm_1)
         let h_tm = @kernel.rand(h_tm_p)

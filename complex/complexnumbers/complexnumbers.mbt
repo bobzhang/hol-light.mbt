@@ -10,7 +10,7 @@ fn step_1() -> Unit raise {
 ///|
 /// complex_tybij_raw
 fn step_2() -> Unit raise {
-  let t1 = @simp.rewrite_tac(@list.empty())
+  let t1 = @simp.rewrite_tac(@list.List([]))
   complex_tybij_raw_c.set(@class.new_type_definition("complex", ("complex", "coords"), @tactics.prove(@parser.parse_term("?x:real#real. T"), t1)))
 }
 
@@ -26,7 +26,7 @@ pub fn complex_tybij_raw() -> @kernel.Thm {
 ///|
 /// complex_tybij
 fn step_3() -> Unit raise {
-  complex_tybij_c.set(@simp.rewrite_rule(@list.empty())(complex_tybij_raw()))
+  complex_tybij_c.set(@simp.rewrite_rule(@list.List([]))(complex_tybij_raw()))
 }
 
 ///|
@@ -86,7 +86,7 @@ fn step_6() -> Unit raise {
 /// `prioritize_complex`
 pub fn prioritize_complex(x9 : Unit) -> Unit raise {
   let _ = x9
-  @preterm.prioritize_overload(@kernel.mk_type("complex", @list.empty()))
+  @preterm.prioritize_overload(@kernel.mk_type("complex", @list.List([])))
 }
 
 ///|

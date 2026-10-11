@@ -39,7 +39,7 @@ pub fn suffice_tac(x6 : @list.List[@kernel.Thm], x7 : @kernel.Term) -> @tactics.
 ///|
 /// LIST_CASES_TAC
 fn step_3() -> Unit raise {
-  let t11 = @simp.asm_rewrite_tac(@list.empty())
+  let t11 = @simp.asm_rewrite_tac(@list.List([]))
   let t12 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.strip_tac), @lists.list_induct_tac), t11)
   let th = @tactics.prove(@parser.parse_term("!P. P [] /\\ (!h t. P (h :: t)) ==> !l. P l"), t12)
   let t13 = @list.List([@tactics.all_tac, @tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac)])
@@ -158,7 +158,7 @@ pub fn delete1_id() -> @kernel.Thm {
 ///|
 /// DELETE1_APPEND
 fn step_10() -> Unit raise {
-  let t26 = @simp.asm_rewrite_tac(@list.empty())
+  let t26 = @simp.asm_rewrite_tac(@list.List([]))
   let t25 = @simp.asm_rewrite_tac(@list.List([@lists.mem(), @lists.append()]))
   let t24 = @simp.rewrite_tac(@list.List([@lists.append(), delete1(), @lists.mem()]))
   let t27 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), t24), @tactics.gen_tac), @class.cond_cases_tac), t25), @class.cond_cases_tac), t26)
@@ -177,7 +177,7 @@ pub fn delete1_append() -> @kernel.Thm {
 ///|
 /// FILTER_DELETE1
 fn step_11() -> Unit raise {
-  let t29 = @meson.asm_meson_tac(@list.empty())
+  let t29 = @meson.asm_meson_tac(@list.List([]))
   let t28 = @tactics.repeat_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([delete1(), @lists.filter()])), @class.cond_cases_tac))
   let t30 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), t28), t29)
   filter_delete1_c.set(@tactics.prove(@parser.parse_term("!P x l. FILTER P (DELETE1 x l) =\n            if P x then DELETE1 x (FILTER P l) else FILTER P l"), t30))
@@ -214,7 +214,7 @@ pub fn length_delete1() -> @kernel.Thm {
 ///|
 /// MEM_DELETE1_MEM_IMP
 fn step_13() -> Unit raise {
-  let t37 = @simp.asm_simp_tac(@list.empty())
+  let t37 = @simp.asm_simp_tac(@list.List([]))
   let t36 = @simp.rewrite_tac(@list.List([@lists.mem()]))
   let t35 = @simp.rewrite_tac(@list.List([@lists.mem(), delete1()]))
   let t38 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @lists.list_induct_tac), @tactics.gen_tac), t35), @class.cond_cases_tac), t36), @tactics.strip_tac), t37)
@@ -233,7 +233,7 @@ pub fn mem_delete1_mem_imp() -> @kernel.Thm {
 ///|
 /// NOT_MEM_DELETE1
 fn step_14() -> Unit raise {
-  let t41 = @simp.asm_simp_tac(@list.empty())
+  let t41 = @simp.asm_simp_tac(@list.List([]))
   let t40 = @simp.rewrite_tac(@list.List([@lists.mem(), @class.de_morgan_thm()]))
   let t39 = @simp.rewrite_tac(@list.List([@lists.mem(), delete1()]))
   let t42 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @tactics.gen_tac), @tactics.gen_tac), t39), @class.cond_cases_tac), t40), @tactics.strip_tac), t41)
@@ -252,9 +252,9 @@ pub fn not_mem_delete1() -> @kernel.Thm {
 ///|
 /// MEM_DELETE1
 fn step_15() -> Unit raise {
-  let t44 = @meson.asm_meson_tac(@list.empty())
+  let t44 = @meson.asm_meson_tac(@list.List([]))
   let t45 = @tactics.then_tac(@simp.rewrite_tac(@list.List([@lists.mem()])), t44)
-  let t43 = @meson.meson_tac(@list.empty())
+  let t43 = @meson.meson_tac(@list.List([]))
   let t46 = @list.List([@tactics.then_tac(@simp.expand_tac("h"), t43), t45])
   let t47 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.rewrite_tac(@list.List([@lists.mem(), delete1()]))), @tactics.gen_tac), @tactics.gen_tac), @class.cond_cases_tac), t46)
   mem_delete1_c.set(@tactics.prove(@parser.parse_term("!l x y:A. MEM x l /\\ ~(x = y) ==> MEM x (DELETE1 y l)"), t47))
@@ -323,7 +323,7 @@ pub fn count_length_filter() -> @kernel.Thm {
 ///|
 /// COUNT_FILTER
 fn step_19() -> Unit raise {
-  let t55 = @meson.asm_meson_tac(@list.empty())
+  let t55 = @meson.asm_meson_tac(@list.List([]))
   let t54 = @tactics.repeat_tac(@tactics.then_tac(@simp.asm_rewrite_tac(@list.List([count(), @lists.filter()])), @class.cond_cases_tac))
   let t56 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @tactics.gen_tac), @lists.list_induct_tac), t54), t55)
   count_filter_c.set(@tactics.prove(@parser.parse_term("!P x l. COUNT x (FILTER P l) =\n            if P x then COUNT x l else 0"), t56))
@@ -464,7 +464,7 @@ fn step_25() -> Unit raise {
 /// LIST_UNIQ
 fn step_26() -> Unit raise {
   let t72 = @simp.simp_tac(@list.List([list_uniq_rules()]))
-  let t71 = @simp.asm_rewrite_tac(@list.empty())
+  let t71 = @simp.asm_rewrite_tac(@list.List([]))
   let t70 = @tactics.disch_then(@tactics.choose_then(@tactics.choose_tac))
   let t69 = @simp.rewrite_tac(@list.List([@lists.cons_11(), @lists.not_cons_nil()]))
   let t73 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([@bool.ispec(@parser.parse_term("h :: t"), list_uniq_cases())])), t69), t70), t71), t72])
@@ -485,7 +485,7 @@ pub fn list_uniq() -> @kernel.Thm {
 ///|
 /// LIST_UNIQ_EQ_PAIRWISE_DISTINCT
 fn step_27() -> Unit raise {
-  let t78 = @meson.meson_tac(@list.empty())
+  let t78 = @meson.meson_tac(@list.List([]))
   let t77 = @simp.simp_tac(@list.List([@equal.gsym(@lists.all_mem())]))
   let t76 = @simp.asm_rewrite_tac(@list.List([list_uniq(), @lists.pairwise()]))
   let t75 = @tactics.match_mp_tac(@ind_types.list_induct())
@@ -505,7 +505,7 @@ pub fn list_uniq_eq_pairwise_distinct() -> @kernel.Thm {
 ///|
 /// LIST_UNIQ_COUNT
 fn step_28() -> Unit raise {
-  let iff_expand = @meson.meson(@list.empty(), @parser.parse_term("(p <=> q) <=> (p ==> q) /\\ (q ==> p)"))
+  let iff_expand = @meson.meson(@list.List([]), @parser.parse_term("(p <=> q) <=> (p ==> q) /\\ (q ==> p)"))
   let t99 = @simp.rewrite_tac(@list.List([mem_count()]))
   let t95 = @parser.parse_term("x:A")
   let t98 = @tactics.first_assum(fn(x97 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -566,7 +566,7 @@ pub fn list_uniq_delete1() -> @kernel.Thm {
 ///|
 /// DELETE1_LIST_UNIQ
 fn step_30() -> Unit raise {
-  let t108 = @simp.asm_rewrite_tac(@list.empty())
+  let t108 = @simp.asm_rewrite_tac(@list.List([]))
   let t107 = @tactics.exists_tac(@parser.parse_term("x:A"))
   let t109 = @tactics.then_tac(@tactics.then_tac(@tactics.first_x_assum(@tactics.match_mp_tac), t107), t108)
   let t110 = @list.List([@meson.asm_meson_tac(@list.List([mem_delete1()])), t109])
@@ -587,7 +587,7 @@ pub fn delete1_list_uniq() -> @kernel.Thm {
 ///|
 /// LIST_UNIQ_APPEND
 fn step_31() -> Unit raise {
-  let t112 = @meson.meson_tac(@list.empty())
+  let t112 = @meson.meson_tac(@list.List([]))
   let t113 = @tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.asm_rewrite_tac(@list.List([@lists.append(), list_uniq(), @lists.mem(), @lists.mem_append()]))), t112)
   list_uniq_append_c.set(@tactics.prove(@parser.parse_term("!l m. LIST_UNIQ (APPEND l m) <=>\n         LIST_UNIQ l /\\ LIST_UNIQ m /\\\n         !x. ~(MEM x l /\\ MEM x m)"), t113))
 }
@@ -605,7 +605,7 @@ pub fn list_uniq_append() -> @kernel.Thm {
 /// CARD_LENGTH
 fn step_32() -> Unit raise {
   let t116 = @simp.asm_rewrite_tac(@list.List([@arith.le_suc()]))
-  let t115 = @simp.asm_rewrite_tac(@list.empty())
+  let t115 = @simp.asm_rewrite_tac(@list.List([]))
   let t114 = @tactics.exists_tac(@parser.parse_term("LENGTH (t:A list)"))
   let t117 = @list.List([@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.match_mp_tac(@arith.le_trans()), t114), t115), @int.arith_tac), t116])
   let t118 = @tactics.thenl(@tactics.then_tac(@tactics.then_tac(@lists.list_induct_tac, @simp.simp_tac(@list.List([@sets.set_of_list(), @sets.card_clauses(), @lists.length(), @sets.finite_set_of_list(), @calc_num.arith()]))), @class.cond_cases_tac), t117)

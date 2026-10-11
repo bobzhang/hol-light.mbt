@@ -106,7 +106,7 @@ fn step_1() -> Unit raise {
               t24,
             )
           } catch {
-            Failure(_) => (@list.empty(), wtm)
+            Failure(_) => (@list.List([]), wtm)
             e => raise e
           }
           let (eqs, rels) = @lib.partition(
@@ -202,7 +202,7 @@ fn step_1() -> Unit raise {
           let extm = @basics.body(uxtm)
           let (evs_1, bod) = @basics.strip_exists(extm)
           let th1 = @kernel.assume_rule(bod)
-          let th2 = if evs_1 == @list.empty() {
+          let th2 = if evs_1 == @list.List([]) {
             th1
           } else {
             let (th2a, th2b) = @bool.conj_pair(th1)
@@ -310,7 +310,7 @@ pub fn lift_function(
 ///|
 /// lift_theorem
 fn step_2() -> Unit raise {
-  let t80 = @meson.asm_meson_tac(@list.empty())
+  let t80 = @meson.asm_meson_tac(@list.List([]))
   let t79 = @tactics.conv_tac(@class.select_conv)
   let t78 = @tactics.first_assum(fn(
     x75 : @kernel.Thm,
@@ -363,7 +363,7 @@ fn step_2() -> Unit raise {
     },
     @list.List([@equal.gsym(@class.eta_ax())]),
   )
-  let t66 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t66 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t65 = @tactics.subgoal_then(
     @parser.parse_term("dest(mk((R:Repty->Repty->bool) x):Absty) = R x"),
     fn(
@@ -440,11 +440,11 @@ fn step_2() -> Unit raise {
       @simp.rewrite_tac(@list.List([@equal.gsym(th)]))
     }),
   )
-  let t56 = @meson.asm_meson_tac(@list.empty())
+  let t56 = @meson.asm_meson_tac(@list.List([]))
   let t55 = @simp.rewrite_tac(@list.List([@class.fun_eq_thm()]))
   let t57 = @list.List([
     @tactics.then_tac(
-      @tactics.then_tac(@simp.asm_rewrite_tac(@list.empty()), t55),
+      @tactics.then_tac(@simp.asm_rewrite_tac(@list.List([])), t55),
       t56,
     ),
     @tactics.all_tac,
@@ -456,7 +456,7 @@ fn step_2() -> Unit raise {
       ),
     ),
   )
-  let t53 = @list.List([@meson.asm_meson_tac(@list.empty()), @tactics.all_tac])
+  let t53 = @list.List([@meson.asm_meson_tac(@list.List([])), @tactics.all_tac])
   let t81 = @tactics.then_tac(
     @tactics.then_tac(
       @tactics.then_tac(

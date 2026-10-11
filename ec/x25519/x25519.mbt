@@ -19,7 +19,7 @@ pub fn curve25519x() -> @kernel.Thm {
 ///|
 /// curve25519x_curve25519
 fn step_2() -> Unit raise {
-  let t2 = @simp.rewrite_tac(@list.empty())
+  let t2 = @simp.rewrite_tac(@list.List([]))
   let t1 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t3 = @tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@curve25519.curve25519(), curve25519x(), @pair.pair_eq(), @curve25519.p_25519(), @curve25519.a_25519()])), t1), t2)
   curve25519x_curve25519_c.set(@tactics.prove(@parser.parse_term("curve25519x (integer_mod_ring p_25519) = curve25519"), t3))
@@ -44,7 +44,7 @@ fn step_3() -> Unit raise {
   let t32 = @int.arith_rule(@parser.parse_term("486660 = 2 EXP 2 * 3 * 5 * 8111"))
   let t33 = @simp.rewrite_tac(@list.List([@int.arith_rule(@parser.parse_term("14802493890 = 2 * 3 * 5 * 127 * 479 * 8111")), t32, t31]))
   let t30 = @simp.asm_simp_tac(@list.List([@meson.meson(@list.List([@prime.prime_1()]), @parser.parse_term("prime p ==> ~(p = 1)"))]))
-  let t29 = @simp.rewrite_tac(@list.empty())
+  let t29 = @simp.rewrite_tac(@list.List([]))
   let t28 = @tactics.conv_tac(@equal.depth_conv(@prime.divides_conv))
   let t27 = @simp.asm_rewrite_tac(@list.List([@calc_num.arith_eq()]))
   let t25 = @parser.parse_term("p:num")
@@ -92,7 +92,7 @@ pub fn montgomery_nonsingular_curve25519x_gen() -> @kernel.Thm {
 ///|
 /// MONTGOMERY_NONSINGULAR_CURVE25519X
 fn step_4() -> Unit raise {
-  let t41 = @simp.rewrite_tac(@list.empty())
+  let t41 = @simp.rewrite_tac(@list.List([]))
   let t40 = @tactics.conv_tac(@equal.depth_conv(@prime.divides_conv))
   let t39 = @simp.asm_rewrite_tac(@list.List([@curve25519.p_25519()]))
   let t38 = @tactics.match_mp_tac(montgomery_nonsingular_curve25519x_gen())
@@ -118,7 +118,7 @@ fn step_5() -> Unit raise {
   let t65 = @simp.rewrite_tac(@list.List([@int.cong_v1()]))
   let t64 = @tactics.conv_tac(@equal.depth_conv(@equal.orelsec(@equal.orelsec(@calc_num.num_sub_conv, @calc_num.num_div_conv), @prime.divides_conv)))
   let t63 = @simp.simp_tac(@list.List([@primitive.euler_criterion(), @simp.rewrite_rule(@list.List([@curve25519.p_25519()]))(@curve25519.prime_p25519())]))
-  let t60 = @drule.match_mp(@meson.meson(@list.empty(), @parser.parse_term("(z EXP 2 == a) (mod p) ==> ?x:num. (x EXP 2 == a) (mod p)")))
+  let t60 = @drule.match_mp(@meson.meson(@list.List([]), @parser.parse_term("(z EXP 2 == a) (mod p) ==> ?x:num. (x EXP 2 == a) (mod p)")))
   let t62 = @tactics.disch_then(fn(x61 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x57 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let s58 = @tactics.mp_tac(x57)
@@ -176,7 +176,7 @@ pub fn curve25519x_group() -> @kernel.Thm {
 ///|
 /// CURVE25519X_CURVE25519_GROUP
 fn step_7() -> Unit raise {
-  let t71 = @simp.rewrite_tac(@list.empty())
+  let t71 = @simp.rewrite_tac(@list.List([]))
   let t70 = @tactics.conv_tac(@equal.depth_conv(@ringtheory.integer_mod_ring_red_conv))
   let t69 = @simp.rewrite_tac(@list.List([@curve25519.p_25519(), @curve25519.a_25519()]))
   let t72 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([@curve25519.curve25519_group(), curve25519x_group(), curve25519x()])), t69), t70), t71)
@@ -195,7 +195,7 @@ pub fn curve25519x_curve25519_group() -> @kernel.Thm {
 ///|
 /// CURVE25519X_GROUP_GEN
 fn step_8() -> Unit raise {
-  let t84 = @simp.rewrite_tac(@list.empty())
+  let t84 = @simp.rewrite_tac(@list.List([]))
   let t83 = @tactics.conv_tac(@equal.depth_conv(@prime.divides_conv))
   let t82 = @simp.simp_tac(@list.List([@class.contrapos_thm()]))
   let t81 = @tactics.pop_assum(fn(x78 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -225,7 +225,7 @@ pub fn curve25519x_group_gen() -> @kernel.Thm {
 ///|
 /// CURVE25519X_GROUP
 fn step_9() -> Unit raise {
-  let t89 = @simp.rewrite_tac(@list.empty())
+  let t89 = @simp.rewrite_tac(@list.List([]))
   let t88 = @tactics.conv_tac(@equal.depth_conv(@prime.divides_conv))
   let t87 = @simp.asm_rewrite_tac(@list.List([@curve25519.p_25519()]))
   let t86 = @tactics.match_mp_tac(curve25519x_group_gen())
@@ -544,7 +544,7 @@ fn step_22() -> Unit raise {
   let t202 = @simp.once_rewrite_tac(@list.List([@equal.gsym(@arith.mod_mult_mod2())]))
   let t201 = @simp.rewrite_tac(@list.List([@arith.mult_exp(), @int.cong_v1()]))
   let t200 = @tactics.match_mp_tac(@class.taut(@parser.parse_term("(q ==> q') ==> p \\/ q ==> p \\/ r \\/ q'")))
-  let t198 = @simp.asm_rewrite_tac(@list.empty())
+  let t198 = @simp.asm_rewrite_tac(@list.List([]))
   let t199 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([@curve25519.p_25519()])), @int.arith_tac), t198])
   let t197 = @tactics.subgoal_then(@parser.parse_term("(p_25519 - 1) DIV 2 * 2 = p_25519 - 1"), fn(x194 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     let s195 = @tactics.subst1_tac(x194)
@@ -554,7 +554,7 @@ fn step_22() -> Unit raise {
   })
   let t193 = @list.List([@simp.rewrite_tac(@list.List([@curve25519.p_25519(), @calc_num.arith_eq()])), @tactics.all_tac])
   let t192 = @simp.asm_rewrite_tac(@list.List([@arith.exp_1(), @arith.exp_exp()]))
-  let t191 = @simp.asm_rewrite_tac(@list.empty())
+  let t191 = @simp.asm_rewrite_tac(@list.List([]))
   let t190 = @class.asm_cases_tac(@parser.parse_term("p_25519 divides a"))
   let t189 = @simp.rewrite_tac(@list.List([@curve25519.prime_p25519()]))
   let t187 = @parser.parse_term("a:num")
@@ -596,7 +596,7 @@ fn step_22() -> Unit raise {
   let t220 = @simp.simp_tac(@list.List([@int.int_arith(@parser.parse_term("~(&p:int < &0)")), @int.int_pos(), @int.int_rem_pos_eq()]))
   let t219 = @simp.rewrite_tac(@list.List([@int.int_lt_rem_eq(), @pair.pair_eq()]))
   let t218 = @tactics.exists_tac(@parser.parse_term("&p_25519:int"))
-  let t217 = @tactics.match_mp_tac(@meson.meson(@list.empty(), @parser.parse_term("!p. (?x y. P (&x rem p) (&y rem p)) ==> (?x y. P x y)")))
+  let t217 = @tactics.match_mp_tac(@meson.meson(@list.List([]), @parser.parse_term("!p. (?x y. P (&x rem p) (&y rem p)) ==> (?x y. P x y)")))
   let t216 = @simp.rewrite_tac(@list.List([@ringtheory.in_integer_mod_ring_carrier(), @ringtheory.integer_mod_ring_clauses()]))
   let t215 = @simp.rewrite_tac(@list.List([ring_of_num_quadratic_extension(), @pair.exists_pair_thm(), @sets.in_cross()]))
   let t214 = @simp.rewrite_tac(@list.List([sqintmod_field(), quadratic_extension_v1()]))
@@ -663,7 +663,7 @@ pub fn purex25519_def() -> @kernel.Thm {
 ///|
 /// PUREX25519_LADDER
 fn step_26() -> Unit raise {
-  let t361 = @simp.asm_rewrite_tac(@list.empty())
+  let t361 = @simp.asm_rewrite_tac(@list.List([]))
   let t360 = @tactics.conv_tac(@int.int_rem_down_conv)
   let t359 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(@int.int_rem_eq())]))
   let t358 = @simp.rewrite_tac(@list.List([@ringtheory.integer_mod_ring_clauses(), @ringtheory.ring_of_int_eq()]))
@@ -821,7 +821,7 @@ pub fn purex25519_ladder() -> @kernel.Thm {
 fn step_27() -> Unit raise {
   let t367 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t366 = @simp.asm_rewrite_tac(@list.List([@arith.mod_lt_eq_lt(), @curve25519.p_25519()]))
-  let t365 = @tactics.repeat_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.empty())))
+  let t365 = @tactics.repeat_tac(@tactics.then_tac(@class.cond_cases_tac, @simp.asm_rewrite_tac(@list.List([]))))
   let t364 = @tactics.conv_tac(@equal.top_depth_conv(@pair.let_conv))
   let t363 = @simp.rewrite_tac(@list.List([purex25519_def()]))
   let t368 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.repeat_tac(@tactics.gen_tac), t363), @pair.let_tac), t364), t365), t366), t367)
@@ -854,14 +854,14 @@ fn step_28() -> Unit raise {
   let t487 = @tactics.disch_then(fn(x486 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
   })
-  let t485 = @simp.asm_simp_tac(@list.empty())
+  let t485 = @simp.asm_simp_tac(@list.List([]))
   let t484 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("f:A ring"), @ringtheory.ring_of_int_rem()))
   let t483 = @simp.asm_rewrite_tac(@list.List([@equal.gsym(@ringtheory.ring_of_int_of_num())]))
   let t482 = @simp.rewrite_tac(@list.List([@ringtheory.ring_div(), @ringtheory.ring_of_num_mul()]))
   let t481 = @tactics.disch_then(fn(x480 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     @tactics.all_tac
   })
-  let t479 = @simp.asm_simp_tac(@list.empty())
+  let t479 = @simp.asm_simp_tac(@list.List([]))
   let t478 = @tactics.mp_tac(@bool.ispec(@parser.parse_term("f:A ring"), @ringtheory.ring_of_num_mod()))
   let t477 = @tactics.first_x_assum(fn(x476 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
     (fn(x473 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -968,7 +968,7 @@ fn step_28() -> Unit raise {
       s401(x402)
     }
   })
-  let t399 = @simp.asm_rewrite_tac(@list.empty())
+  let t399 = @simp.asm_rewrite_tac(@list.List([]))
   let t397 = @parser.parse_term("n:num")
   let t398 = @tactics.mp_tac(@bool.ispecl(@list.List([@parser.parse_term("f:A ring"), t397]), group_pow_curve25519x_torsion()))
   let t396 = @tactics.disch_then(fn(x393 : @kernel.Thm) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
@@ -1087,7 +1087,7 @@ pub fn purex25519_unique() -> @kernel.Thm {
 ///|
 /// purex25519
 fn step_30() -> Unit raise {
-  let t545 = @meson.meson_tac(@list.empty())
+  let t545 = @meson.meson_tac(@list.List([]))
   let t544 = @simp.rewrite_tac(@list.List([@equal.gsym(purex25519_unique())]))
   let t543 = @tactics.match_mp_tac(@class.select_unique())
   let t542 = @tactics.conv_tac(@equal.sym_conv)
@@ -1182,7 +1182,7 @@ pub fn rfcx25519_purex25519() -> @kernel.Thm {
 ///|
 /// RFCX25519_BASE_NONZERO
 fn step_35() -> Unit raise {
-  let t623 = @simp.rewrite_tac(@list.empty())
+  let t623 = @simp.rewrite_tac(@list.List([]))
   let t622 = @tactics.conv_tac(@equal.land_conv(@computegroup.ecgroup_pow_conv))
   let t621 = @simp.asm_rewrite_tac(@list.List([@curve25519.curve25519_group_v1()]))
   let t620 = @tactics.conv_tac(@int.int_reduce_conv)
@@ -1220,7 +1220,7 @@ fn step_35() -> Unit raise {
       }
     })(t592(x593))
   })
-  let t588 = @simp.rewrite_tac(@list.empty())
+  let t588 = @simp.rewrite_tac(@list.List([]))
   let t587 = @tactics.conv_tac(@equal.once_depth_conv(@prime.coprime_conv))
   let t586 = @tactics.conv_tac(@calc_num.num_reduce_conv)
   let t585 = @simp.rewrite_tac(@list.List([@curve25519.n_25519()]))

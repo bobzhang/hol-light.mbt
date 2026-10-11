@@ -168,7 +168,7 @@ fn step_4() -> Unit raise {
       }
     }
   }
-  paform_c.set((x21 : @kernel.Term) => raform(0L, @list.empty(), x21))
+  paform_c.set((x21 : @kernel.Term) => raform(0L, @list.List([]), x21))
 }
 
 ///|

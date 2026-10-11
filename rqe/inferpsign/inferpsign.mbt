@@ -447,10 +447,10 @@ pub fn itdivs() -> Ref[@list.List[@kernel.Thm]] {
 ///|
 /// itvars, itsgns, itmat, itdivs
 fn step_3() -> Unit raise {
-  let t51 = Ref::{ val: @list.empty() }
+  let t51 = Ref::{ val: @list.List([]) }
   let t52 = Ref::{ val: @bool.truth() }
-  let t53 = Ref::{ val: @list.empty() }
-  let (itvars, itsgns, itmat, itdivs) = (Ref::{ val: @list.empty() }, t53, t52, t51)
+  let t53 = Ref::{ val: @list.List([]) }
+  let (itvars, itsgns, itmat, itdivs) = (Ref::{ val: @list.List([]) }, t53, t52, t51)
   itvars_c.set(itvars)
   itsgns_c.set(itsgns)
   itmat_c.set(itmat)

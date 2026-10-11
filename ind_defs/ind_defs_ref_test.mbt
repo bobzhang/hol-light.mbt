@@ -82,7 +82,7 @@ test "ind_defs matches ind_defs.ml" {
   log.attempt("MONO_TAC", () => {
     let w = tm("(!x:A. P x ==> Q x) ==> (!x. P x /\\ c) ==> (!x. Q x /\\ c)")
     let tac = @tactics.then_tac(@tactics.disch_tac, g => @ind_defs.mono_tac(g))
-    let (_, gls, _) = tac((@list.empty(), w))
+    let (_, gls, _) = tac((@list.List([]), w))
     gls.length().to_string()
   })
   log.attempt("the_inductive_definitions", () => {

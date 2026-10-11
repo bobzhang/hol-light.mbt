@@ -68,7 +68,7 @@ test "drule matches drule.ml" {
   tmatch("match_repeat", [], "(x:A) = x", "T = T")
   tmatch("match_repeat_bad", [], "(x:A) = x", "T = F")
   let i1 = @drule.term_match(
-    @list.empty(),
+    @list.List([]),
     tm("!x:A. (P:A->bool) x"),
     tm("!n:num. n = n"),
   )
@@ -80,21 +80,21 @@ test "drule matches drule.ml" {
   })
   th("INSTANTIATE_bad", () => {
     @drule.instantiate_rule(
-      (@list.empty(), @list.singleton((tm("T"), tm("q:bool"))), @list.empty()),
+      (@list.List([]), @list.singleton((tm("T"), tm("q:bool"))), @list.List([])),
       hyp_of("q:bool"),
     )
   })
   th("INSTANTIATE_ALL", () => {
     @drule.instantiate_all(
-      (@list.empty(), @list.singleton((tm("T"), tm("q:bool"))), @list.empty()),
+      (@list.List([]), @list.singleton((tm("T"), tm("q:bool"))), @list.List([])),
       hyp_of("q:bool"),
     )
   })
   th("INSTANTIATE_ALL_ty", () => {
     @drule.instantiate_all(
       (
-        @list.empty(),
-        @list.empty(),
+        @list.List([]),
+        @list.List([]),
         @list.singleton((@kernel.bool_ty, @kernel.aty)),
       ),
       hyp_of("(x:A) = x"),
@@ -129,7 +129,7 @@ test "drule matches drule.ml" {
       @drule.type_unify(
         @parser.parse_type("A->B"),
         @parser.parse_type("bool->C"),
-        @list.empty(),
+        @list.List([]),
       ),
     )
   })
@@ -138,7 +138,7 @@ test "drule matches drule.ml" {
       @drule.type_unify(
         @parser.parse_type("A->A"),
         @parser.parse_type("bool->(A->bool)"),
-        @list.empty(),
+        @list.List([]),
       ),
     )
   })
@@ -147,7 +147,7 @@ test "drule matches drule.ml" {
       @drule.term_type_unify(
         tm("(f:A->B) x"),
         tm("(g:bool->C) T"),
-        (@list.empty(), @list.empty(), @list.empty()),
+        (@list.List([]), @list.List([]), @list.List([])),
       ),
     )
   })
@@ -217,7 +217,7 @@ test "drule matches drule.ml" {
   log.attempt("term_unify_abs_bad", () => {
     let t1 = tm("\\x:bool. x")
     let t2 = tm("(~)")
-    sinst(@drule.term_unify(@list.empty(), t1, t2))
+    sinst(@drule.term_unify(@list.List([]), t1, t2))
   })
   log.attempt("term_type_unify_abs_bad", () => {
     let t1 = tm("\\x:bool. x")
@@ -226,7 +226,7 @@ test "drule matches drule.ml" {
       @drule.term_type_unify(
         t1,
         t2,
-        (@list.empty(), @list.empty(), @list.empty()),
+        (@list.List([]), @list.List([]), @list.List([])),
       ),
     )
   })

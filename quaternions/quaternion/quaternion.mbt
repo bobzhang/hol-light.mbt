@@ -366,7 +366,7 @@ fn step_29() -> Unit raise {
     })(t12(x13))
   })
   let t8 = @tactics.conv_tac(@calc_rat.real_rat_reduce_conv)
-  let t7 = @simp.simp_tac(@list.empty())
+  let t7 = @simp.simp_tac(@list.List([]))
   let t16 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([quat_eq(), hx_def(), quat_components()])), @tactics.eq_tac), t7), t8), t14), t15)
   quat_eq_0_c.set(@tactics.prove(@parser.parse_term("q = Hx(&0) <=> Re q pow 2 + Im1 q pow 2 + Im2 q pow 2 + Im3 q pow 2 = &0"), t16))
 }
@@ -1535,7 +1535,7 @@ fn step_104() -> Unit raise {
     }
   })
   let t47 = @tactics.conv_tac(@calc_rat.real_rat_reduce_conv)
-  let t46 = @simp.asm_rewrite_tac(@list.empty())
+  let t46 = @simp.asm_rewrite_tac(@list.List([]))
   let t45 = @class.asm_cases_tac(@parser.parse_term("x = &0"))
   let t53 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.gen_tac, @simp.rewrite_tac(@list.List([hx_def(), quat_inv(), quat_components(), quat_eq()]))), t45), t46), t47), t51), t52)
   hx_inv_c.set(@tactics.prove(@parser.parse_term("!x. Hx(inv x) = inv(Hx x)"), t53))
@@ -1887,7 +1887,7 @@ pub fn quat_rat_pow_conv(x : @kernel.Term) -> @kernel.Thm raise {
 ///|
 /// QUAT_POW_SUC_ALT
 fn step_123() -> Unit raise {
-  let t80 = @simp.asm_rewrite_tac(@list.empty())
+  let t80 = @simp.asm_rewrite_tac(@list.List([]))
   let t81 = @tactics.then_tac(@tactics.then_tac(@simp.once_rewrite_tac(@list.List([quat_pow()])), t80), simple_quat_arith_tac)
   let t82 = @list.List([@tactics.then_tac(@simp.rewrite_tac(@list.List([quat_pow()])), simple_quat_arith_tac), t81])
   let t83 = @tactics.thenl(@tactics.then_tac(@tactics.gen_tac, @quaternions_misc.induct_tac), t82)
@@ -3332,7 +3332,7 @@ pub fn real_hx() -> @kernel.Thm {
 ///|
 /// REAL_MUL_HX
 fn step_204() -> Unit raise {
-  let t295 = @simp.asm_simp_tac(@list.empty())
+  let t295 = @simp.asm_simp_tac(@list.List([]))
   let t294 = @tactics.repeat_tac(@tactics.gen_tac)
   let t296 = @tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@tactics.then_tac(@simp.rewrite_tac(@list.List([quat_real(), mul_hx_components(), @realarith.real_entire()])), t294), @tactics.eq_tac), @tactics.strip_tac), t295)
   real_mul_hx_c.set(@tactics.prove(@parser.parse_term("!x q. real(Hx x * q) <=> x = &0 \\/ real q"), t296))
@@ -3742,7 +3742,7 @@ pub fn quat_norm_vsum_bound_subset() -> @kernel.Thm {
 fn step_224() -> Unit raise {
   let t390 = @tactics.then_tac(@simp.rewrite_tac(@list.List([quat_sqnorm(), quat_cnj()])), simple_quat_arith_tac)
   let lemma = @tactics.prove(@parser.parse_term("!x y. Re x = Re y /\\ norm x pow 2 = norm y pow 2\n           ==> y * (y - x) = (y - x) * cnj x"), t390)
-  let t404 = @simp.asm_rewrite_tac(@list.empty())
+  let t404 = @simp.asm_rewrite_tac(@list.List([]))
   let t403 = @tactics.match_mp_tac(lemma)
   let t402 = @simp.asm_simp_tac(@list.List([quat_mul_assoc(), quat_mul_rinv(), quat_mul_lid()]))
   let t401 = @tactics.exists_tac(@parser.parse_term("y - x"))
