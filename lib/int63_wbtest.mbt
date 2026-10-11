@@ -16,7 +16,7 @@ test "int63 matches OCaml" {
     0x2AAAAAAAAAAAAAAAL,
     123456789012345L,
   ]
-  let out = StringBuilder::new()
+  let out = StringBuilder()
   for a in vals {
     for b in vals {
       out.write_string("\{a} \{b} \{add63(a, b)} \{sub63(a, b)} \{mul63(a, b)}")

@@ -53,7 +53,7 @@ fn RandomState::full_init(self : RandomState, seed : Array[Int64]) -> Unit {
     let j = i % 55
     let k = i % l
     // Digest.string (accu ^ Int.to_string seed.(k))
-    let buf = @buffer.new()
+    let buf = Buffer()
     buf.write_bytes(accu)
     buf.write_bytes(@utf8.encode(seed[k].to_string()))
     accu = md5(buf.contents())

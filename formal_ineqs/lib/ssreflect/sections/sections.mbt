@@ -42,6 +42,18 @@ pub(all) struct SectionInfo {
 } derive(Eq, Debug)
 
 ///|
+pub extend SectionInfo with Eq::{not_equal, equal}
+
+///|
+pub extend SectionInfo with Debug::{to_repr}
+
+///|
+pub extend SectionInfo with @lib.OCompare::{ocompare}
+
+///|
+pub extend SectionInfo with @lib.OHash::{ohash_visit}
+
+///|
 pub impl @lib.OCompare for SectionInfo with fn ocompare(self, other) {
   let c = @lib.compare(self.vars, other.vars)
   if c != 0 {

@@ -43,6 +43,11 @@ pub(all) struct CertificateStats {
   glue : Int64
   glue_convex : Int64
 } derive(Eq, @debug.Debug)
+pub fn CertificateStats::equal(Self, Self) -> Bool
+pub fn CertificateStats::not_equal(Self, Self) -> Bool
+pub fn CertificateStats::ocompare(Self, Self) -> Int
+pub fn CertificateStats::ohash_visit(Self, @lib.OHasher) -> Unit
+pub fn CertificateStats::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for CertificateStats
 pub impl @lib.OHash for CertificateStats
 
@@ -52,6 +57,11 @@ pub(all) struct MonoStatus {
   df0_flag : Bool
   ti_flag : Bool
 } derive(Eq, @debug.Debug)
+pub fn MonoStatus::equal(Self, Self) -> Bool
+pub fn MonoStatus::not_equal(Self, Self) -> Bool
+pub fn MonoStatus::ocompare(Self, Self) -> Int
+pub fn MonoStatus::ohash_visit(Self, @lib.OHasher) -> Unit
+pub fn MonoStatus::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for MonoStatus
 pub impl @lib.OHash for MonoStatus
 
@@ -61,12 +71,22 @@ pub(all) enum PResultTree {
   P_result_glue(PStatus, Int64, Bool, PResultTree, PResultTree)
   P_result_ref(Int64)
 } derive(Eq, @debug.Debug)
+pub fn PResultTree::equal(Self, Self) -> Bool
+pub fn PResultTree::not_equal(Self, Self) -> Bool
+pub fn PResultTree::ocompare(Self, Self) -> Int
+pub fn PResultTree::ohash_visit(Self, @lib.OHasher) -> Unit
+pub fn PResultTree::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for PResultTree
 pub impl @lib.OHash for PResultTree
 
 pub(all) struct PStatus {
   pp : Int64
 } derive(Eq, @debug.Debug)
+pub fn PStatus::equal(Self, Self) -> Bool
+pub fn PStatus::not_equal(Self, Self) -> Bool
+pub fn PStatus::ocompare(Self, Self) -> Int
+pub fn PStatus::ohash_visit(Self, @lib.OHasher) -> Unit
+pub fn PStatus::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for PStatus
 pub impl @lib.OHash for PStatus
 
@@ -78,6 +98,11 @@ pub(all) enum ResultTree {
   Result_mono(@list.List[MonoStatus], ResultTree)
   Result_glue((Int64, Bool, ResultTree, ResultTree))
 } derive(Eq, @debug.Debug)
+pub fn ResultTree::equal(Self, Self) -> Bool
+pub fn ResultTree::not_equal(Self, Self) -> Bool
+pub fn ResultTree::ocompare(Self, Self) -> Int
+pub fn ResultTree::ohash_visit(Self, @lib.OHasher) -> Unit
+pub fn ResultTree::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for ResultTree
 pub impl @lib.OHash for ResultTree
 

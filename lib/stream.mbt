@@ -7,6 +7,9 @@
 pub(all) suberror StreamFailure derive(Debug)
 
 ///|
+pub extend StreamFailure with @debug.Debug::{to_repr}
+
+///|
 /// `'a Stream.t`
 pub struct Stream[A] {
   items : Array[A]

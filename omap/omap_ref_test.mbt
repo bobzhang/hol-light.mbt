@@ -2,7 +2,7 @@
 // tools/ocaml_ref/omap_ref.ml (keep in sync) with the same random numbers.
 
 ///|
-fn dm(m : T[Int64, Int64]) -> String {
+fn dm(m : @omap.T[Int64, Int64]) -> String {
   match m {
     Empty => "."
     Node(l, k, v, r, h) => "(\{dm(l)} \{k}:\{v}/\{h} \{dm(r)})"
@@ -26,7 +26,7 @@ test "omap and oset match OCaml 4.14 Map and Set" {
   let log = StringBuilder()
   let note = (k : Int64) => log.write_string("\{k} ")
   @lib.random_init(7L)
-  let mut m : T[Int64, Int64] = empty()
+  let mut m : @omap.T[Int64, Int64] = @omap.empty()
   let mut s : @oset.T[Int64] = @oset.empty()
   for i in 1..<=600 {
     // OCaml evaluates `let k = ... in let v = ... in` in order
@@ -34,15 +34,15 @@ test "omap and oset match OCaml 4.14 Map and Set" {
     let v = @lib.random_int(5L)
     match @lib.random_int(9L) {
       0 | 1 | 2 => {
-        m = add(ord, k, v, m)
+        m = @omap.add(ord, k, v, m)
         s = @oset.add(ord, k, s)
       }
       3 => {
-        m = remove(ord, k, m)
+        m = @omap.remove(ord, k, m)
         s = @oset.remove(ord, k, s)
       }
       4 => {
-        m = filter(
+        m = @omap.filter(
           k1 => {
             _ => {
               note(k1)
@@ -54,7 +54,7 @@ test "omap and oset match OCaml 4.14 Map and Set" {
         s = @oset.filter(x => x % 5 != 0, s)
       }
       5 =>
-        m = merge(
+        m = @omap.merge(
           ord,
           k1 => {
             a => {
@@ -68,16 +68,16 @@ test "omap and oset match OCaml 4.14 Map and Set" {
             }
           },
           m,
-          singleton(k, v),
+          @omap.singleton(k, v),
         )
       6 => {
-        m = union(ord, _ => a => b => Some(a + b), m, singleton(k, v))
+        m = @omap.union(ord, _ => a => b => Some(a + b), m, @omap.singleton(k, v))
         s = @oset.union(ord, s, @oset.singleton(k))
       }
       7 => {
         s = @oset.diff(ord, s, @oset.add(ord, k + 1, @oset.singleton(k)))
         ignore(
-          exists(
+          @omap.exists(
             k1 => {
               _ => {
                 note(k1)
@@ -95,7 +95,7 @@ test "omap and oset match OCaml 4.14 Map and Set" {
         }
         s = @oset.inter(ord, s, t)
         ignore(
-          fold(
+          @omap.fold(
             k1 => {
               d => {
                 acc => {
@@ -116,13 +116,13 @@ test "omap and oset match OCaml 4.14 Map and Set" {
   }
   out.write_string(log.to_string() + "\n")
   out.write_string(
-    bindings(m).map(p => "\{p.0}:\{p.1}").to_array().join(" ") + "\n",
+    @omap.bindings(m).map(p => "\{p.0}:\{p.1}").to_array().join(" ") + "\n",
   )
   out.write_string(
     @oset.elements(s).map(x => x.to_string()).to_array().join(" ") + "\n",
   )
   out.write_string(
-    "\{@oset.mem(ord, 3, s)} \{mem(ord, 3, m)} \{@oset.compare(ord, s, @oset.singleton(1))}\n",
+    "\{@oset.mem(ord, 3, s)} \{@omap.mem(ord, 3, m)} \{@oset.compare(ord, s, @oset.singleton(1))}\n",
   )
   inspect(
     out.to_string(),

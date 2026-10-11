@@ -93,6 +93,11 @@ pub(all) enum Positivstellensatz {
   Sum(Positivstellensatz, Positivstellensatz)
   Product(Positivstellensatz, Positivstellensatz)
 } derive(Eq, @debug.Debug)
+pub fn Positivstellensatz::equal(Self, Self) -> Bool
+pub fn Positivstellensatz::not_equal(Self, Self) -> Bool
+pub fn Positivstellensatz::ocompare(Self, Self) -> Int
+pub fn Positivstellensatz::ohash_visit(Self, @lib.OHasher) -> Unit
+pub fn Positivstellensatz::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for Positivstellensatz
 pub impl @lib.OHash for Positivstellensatz
 

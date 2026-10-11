@@ -15,6 +15,18 @@ pub(all) enum TypeAnnotedTermT {
 } derive(Eq, Debug)
 
 ///|
+pub extend TypeAnnotedTermT with Eq::{not_equal, equal}
+
+///|
+pub extend TypeAnnotedTermT with Debug::{to_repr}
+
+///|
+pub extend TypeAnnotedTermT with @lib.OCompare::{ocompare}
+
+///|
+pub extend TypeAnnotedTermT with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_TypeAnnotedTermT(x : TypeAnnotedTermT) -> Int {
   match x {
     Var_(_, _) => 1000000
@@ -113,6 +125,18 @@ pub(all) enum FoNetsTermLabel {
 } derive(Eq, Debug)
 
 ///|
+pub extend FoNetsTermLabel with Eq::{not_equal, equal}
+
+///|
+pub extend FoNetsTermLabel with Debug::{to_repr}
+
+///|
+pub extend FoNetsTermLabel with @lib.OCompare::{ocompare}
+
+///|
+pub extend FoNetsTermLabel with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_FoNetsTermLabel(x : FoNetsTermLabel) -> Int {
   match x {
     Vnet(_) => 1000000
@@ -179,6 +203,18 @@ pub(all) enum FoNetsT[TA] {
 } derive(Eq, Debug)
 
 ///|
+pub extend FoNetsT with Eq::{not_equal, equal}
+
+///|
+pub extend FoNetsT with Debug::{to_repr}
+
+///|
+pub extend FoNetsT with @lib.OCompare::{ocompare}
+
+///|
+pub extend FoNetsT with @lib.OHash::{ohash_visit}
+
+///|
 fn[TA] ocaml_rank_FoNetsT(x : FoNetsT[TA]) -> Int {
   match x {
     Netnode(_, _) => 1000000
@@ -224,6 +260,18 @@ pub(all) enum VarianceT {
 } derive(Eq, Debug)
 
 ///|
+pub extend VarianceT with Eq::{not_equal, equal}
+
+///|
+pub extend VarianceT with Debug::{to_repr}
+
+///|
+pub extend VarianceT with @lib.OCompare::{ocompare}
+
+///|
+pub extend VarianceT with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_VarianceT(x : VarianceT) -> Int {
   match x {
     Co => 0
@@ -266,6 +314,18 @@ pub(all) enum ImpconvAtomic {
   Atomic
   Non_atomic
 } derive(Eq, Debug)
+
+///|
+pub extend ImpconvAtomic with Eq::{not_equal, equal}
+
+///|
+pub extend ImpconvAtomic with Debug::{to_repr}
+
+///|
+pub extend ImpconvAtomic with @lib.OCompare::{ocompare}
+
+///|
+pub extend ImpconvAtomic with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_ImpconvAtomic(x : ImpconvAtomic) -> Int {

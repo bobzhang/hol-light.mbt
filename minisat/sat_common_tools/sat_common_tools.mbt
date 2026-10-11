@@ -651,7 +651,7 @@ pub fn input_all(x141 : @lib.InChannel) -> String raise {
     }
   }
   let b_1 = {
-    StringBuilder::new()
+    StringBuilder()
   }
   let _ = loop_(b_1)
   StringBuilder::to_string(b_1)

@@ -12,6 +12,18 @@ pub(all) struct SearchOptions {
 } derive(Eq, Debug)
 
 ///|
+pub extend SearchOptions with Eq::{not_equal, equal}
+
+///|
+pub extend SearchOptions with Debug::{to_repr}
+
+///|
+pub extend SearchOptions with @lib.OCompare::{ocompare}
+
+///|
+pub extend SearchOptions with @lib.OHash::{ohash_visit}
+
+///|
 pub impl @lib.OCompare for SearchOptions with fn ocompare(self, other) {
   let c = @lib.compare(self.raw_intervals0, other.raw_intervals0)
   if c != 0 {

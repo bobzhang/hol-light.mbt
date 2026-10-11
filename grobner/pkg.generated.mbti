@@ -28,6 +28,11 @@ pub(all) enum History {
   Mmul((@num.Num, @list.List[Int64]), History)
   Add(History, History)
 } derive(Eq, @debug.Debug)
+pub fn History::equal(Self, Self) -> Bool
+pub fn History::not_equal(Self, Self) -> Bool
+pub fn History::ocompare(Self, Self) -> Int
+pub fn History::ohash_visit(Self, @lib.OHasher) -> Unit
+pub fn History::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for History
 pub impl @lib.OHash for History
 

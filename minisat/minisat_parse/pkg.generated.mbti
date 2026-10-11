@@ -61,6 +61,11 @@ pub(all) enum Clause {
   Root(Rootc)
   Learnt(@kernel.Thm, @oset.T[(Bool, Int64)])
 } derive(Eq, @debug.Debug)
+pub fn Clause::equal(Self, Self) -> Bool
+pub fn Clause::not_equal(Self, Self) -> Bool
+pub fn Clause::ocompare(Self, Self) -> Int
+pub fn Clause::ohash_visit(Self, @lib.OHasher) -> Unit
+pub fn Clause::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for Clause
 pub impl @lib.OHash for Clause
 
@@ -68,6 +73,11 @@ pub(all) enum Rootc {
   Rthm(@kernel.Thm, @oset.T[(Bool, Int64)], @kernel.Term, @kernel.Thm)
   Ll(@kernel.Term, @oset.T[(Bool, Int64)])
 } derive(Eq, @debug.Debug)
+pub fn Rootc::equal(Self, Self) -> Bool
+pub fn Rootc::not_equal(Self, Self) -> Bool
+pub fn Rootc::ocompare(Self, Self) -> Int
+pub fn Rootc::ohash_visit(Self, @lib.OHasher) -> Unit
+pub fn Rootc::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for Rootc
 pub impl @lib.OHash for Rootc
 

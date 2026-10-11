@@ -89,6 +89,18 @@ pub(all) enum History {
 } derive(Eq, Debug)
 
 ///|
+pub extend History with Eq::{not_equal, equal}
+
+///|
+pub extend History with Debug::{to_repr}
+
+///|
+pub extend History with @lib.OCompare::{ocompare}
+
+///|
+pub extend History with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_History(x : History) -> Int {
   match x {
     Start(_) => 1000000

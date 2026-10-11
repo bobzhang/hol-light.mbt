@@ -11,6 +11,18 @@ pub(all) struct MCellDomain {
 } derive(Eq, Debug)
 
 ///|
+pub extend MCellDomain with Eq::{not_equal, equal}
+
+///|
+pub extend MCellDomain with Debug::{to_repr}
+
+///|
+pub extend MCellDomain with @lib.OCompare::{ocompare}
+
+///|
+pub extend MCellDomain with @lib.OHash::{ohash_visit}
+
+///|
 pub impl @lib.OCompare for MCellDomain with fn ocompare(self, other) {
   let c = @lib.compare(self.lo, other.lo)
   if c != 0 {
@@ -45,6 +57,18 @@ pub(all) struct MTaylorInterval {
   df : @list.List[@informal_interval.Interval]
   ddf : @list.List[@list.List[@informal_interval.Interval]]
 } derive(Eq, Debug)
+
+///|
+pub extend MTaylorInterval with Eq::{not_equal, equal}
+
+///|
+pub extend MTaylorInterval with Debug::{to_repr}
+
+///|
+pub extend MTaylorInterval with @lib.OCompare::{ocompare}
+
+///|
+pub extend MTaylorInterval with @lib.OHash::{ohash_visit}
 
 ///|
 pub impl @lib.OCompare for MTaylorInterval with fn ocompare(self, other) {

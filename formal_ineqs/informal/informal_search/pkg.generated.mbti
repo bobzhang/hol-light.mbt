@@ -61,6 +61,11 @@ pub(all) struct SearchOptions {
   mono_depth : Int64
   pp : Int64
 } derive(Eq, @debug.Debug)
+pub fn SearchOptions::equal(Self, Self) -> Bool
+pub fn SearchOptions::not_equal(Self, Self) -> Bool
+pub fn SearchOptions::ocompare(Self, Self) -> Int
+pub fn SearchOptions::ohash_visit(Self, @lib.OHasher) -> Unit
+pub fn SearchOptions::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for SearchOptions
 pub impl @lib.OHash for SearchOptions
 

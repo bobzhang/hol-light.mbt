@@ -626,7 +626,7 @@ pub impl OCompare for @bigint.BigInt with fn ocompare(self, other) {
 /// `Hashtbl.hash` on a `Big_int.big_int` (checked against OCaml).
 pub impl OHash for @bigint.BigInt with fn ohash_visit(self, h) {
   let abs = if big_int_sign(self) < 0 { -self } else { self }
-  BigIntRecord((big_int_sign(self), abs)).ohash_visit(h)
+  OHash::ohash_visit(BigIntRecord((big_int_sign(self), abs)), h)
 }
 
 ///|

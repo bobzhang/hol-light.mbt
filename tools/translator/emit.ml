@@ -319,6 +319,17 @@ module Emit = struct
       Printf.sprintf "pub impl[%s] %s for %s[%s]" (String.concat ", " (List.map (fun p -> p ^ " : " ^ trait) params)) trait name
         (String.concat ", " params)
 
+  (* the method promotions `derive(Eq, Debug)` and the OCompare/OHash impls
+     bring implicitly (implicit_impl_as_method): the `pub extend`s that name
+     them, emitted right after the declaration, make the promotion explicit *)
+  let type_extends name has_derive has_impl =
+    (if has_derive then
+       Printf.sprintf "\n///|\npub extend %s with Eq::{not_equal, equal}\n\n///|\npub extend %s with Debug::{to_repr}\n" name name
+     else "")
+    ^ (if has_impl then
+         Printf.sprintf "\n///|\npub extend %s with @lib.OCompare::{ocompare}\n\n///|\npub extend %s with @lib.OHash::{ohash_visit}\n" name name
+       else "")
+
   let emit_types ?(prefix = "") (decls : type_declaration list) =
     let chosen = Hashtbl.create 4 in
     List.iter
@@ -404,6 +415,8 @@ module Emit = struct
                 Printf.sprintf "\n///|\n/// `%s`\npub(all) enum %s%s {\n  %s\n}%s\n"
                   (Ident.name d.typ_id) name gens (String.concat "\n  " ctors)
                   (if has_fun || noeq then "" else " derive(Eq, Debug)"));
+            (if not has_fun then
+               add_decl (fun () -> type_extends name (not noeq) true));
             (* OCaml's structural compare and Hashtbl.hash: constant
                constructors are immediates (their index), the others blocks
                (tag = index among the non-constant ones) *)
@@ -480,6 +493,8 @@ module Emit = struct
                 (if has_fun || noeq then "" else " derive(Eq, Debug)")
             in
             add_decl (fun () -> text);
+            (if not has_fun then
+               add_decl (fun () -> type_extends name (not noeq) true));
             if not has_fun then
               (* a record is a block with tag 0 and its fields in order *)
               add_decl (fun () ->

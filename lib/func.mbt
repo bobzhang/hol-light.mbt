@@ -20,6 +20,15 @@ pub enum Func[K, V] {
 } derive(Eq)
 
 ///|
+pub extend Func with Eq::{not_equal, equal}
+
+///|
+pub extend Func with OCompare::{ocompare}
+
+///|
+pub extend Func with OHash::{ohash_visit}
+
+///|
 /// The everywhere-undefined function.
 pub fn[K, V] undefined() -> Func[K, V] {
   Empty

@@ -36,8 +36,8 @@ test "channels on in-memory files" {
   }
   inspect(end, content="End_of_file")
   close_in(ic)
-  inspect(string_index_opt("a.b", '.'), content="Some(1)")
-  inspect(string_index_opt("ab", '.'), content="None")
+  @debug.debug_inspect(string_index_opt("a.b", '.'), content="Some(1)")
+  @debug.debug_inspect(string_index_opt("ab", '.'), content="None")
   inspect(
     string_split_on_char(' ', "1 -2  0").to_array().join("|"),
     content="1|-2||0",
@@ -88,11 +88,11 @@ test "Filename.quote" {
 ///|
 test "Stream and Char.escaped" {
   let st = stream_of_string("a b")
-  inspect(stream_peek(st).is_empty(), content="false")
+  inspect(stream_peek(st) is None, content="false")
   inspect(stream_next(st), content="a")
   stream_junk(st)
   inspect(stream_next(st), content="b")
-  inspect(stream_peek(st).is_empty(), content="true")
+  inspect(stream_peek(st) is None, content="true")
   let r = try {
     ignore(stream_next(st))
     "more"

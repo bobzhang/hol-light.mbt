@@ -142,14 +142,14 @@ pub fn strings_of_file(name : String) -> @list.List[String] raise {
       let mut start = 0
       for i in 0..<s.length() {
         if s[i].to_int() == 10 {
-          lines.push(s.view(start_offset=start, end_offset=i).to_string())
+          lines.push(s.view(start_offset=start, end_offset=i).to_owned())
           start = i + 1
         }
       }
       if start < s.length() {
-        lines.push(s.view(start_offset=start).to_string())
+        lines.push(s.view(start_offset=start).to_owned())
       }
-      @list.from_array(lines)
+      @list.List(lines)
     }
     None => raise Failure("strings_of_file: can't open " + name)
   }
@@ -184,7 +184,7 @@ pub fn string_of_file(name : String) -> String raise {
   match virtual_files.get(name) {
     Some(s) =>
       if s.has_suffix("\n") {
-        s.view(end_offset=s.length() - 1).to_string()
+        s.view(end_offset=s.length() - 1).to_owned()
       } else {
         s
       }
@@ -197,7 +197,7 @@ pub fn string_of_file(name : String) -> String raise {
 fn gp_factorint_command(cmd : String) -> (@bigint.BigInt, String)? {
   let prefix = "echo 'print(factorint("
   guard cmd.has_prefix(prefix) else { return None }
-  let rest = cmd.view(start_offset=prefix.length()).to_string()
+  let rest = cmd.view(start_offset=prefix.length()).to_owned()
   let digits = StringBuilder()
   let mut i = 0
   while i < rest.length() && rest[i] >= '0' && rest[i] <= '9' {
@@ -207,9 +207,9 @@ fn gp_factorint_command(cmd : String) -> (@bigint.BigInt, String)? {
   guard i > 0 && rest.view(start_offset=i).has_prefix("))") else { return None }
   guard rest.contains("| gp >") else { return None }
   let after = rest.split("| gp >").to_array()
-  let file = after[after.length() - 1].to_string()
+  let file = after[after.length() - 1].to_owned()
   let file = match file.find(" ") {
-    Some(j) => file.view(end_offset=j).to_string()
+    Some(j) => file.view(end_offset=j).to_owned()
     None => file
   }
   Some((@bigint.BigInt::from_string(digits.to_string()), file))

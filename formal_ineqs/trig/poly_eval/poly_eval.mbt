@@ -111,6 +111,18 @@ pub(all) struct PolyCoeff {
 } derive(Eq, Debug)
 
 ///|
+pub extend PolyCoeff with Eq::{not_equal, equal}
+
+///|
+pub extend PolyCoeff with Debug::{to_repr}
+
+///|
+pub extend PolyCoeff with @lib.OCompare::{ocompare}
+
+///|
+pub extend PolyCoeff with @lib.OHash::{ohash_visit}
+
+///|
 pub impl @lib.OCompare for PolyCoeff with fn ocompare(self, other) {
   let c = @lib.compare(self.c_tm, other.c_tm)
   if c != 0 {

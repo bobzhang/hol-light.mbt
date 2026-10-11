@@ -9,6 +9,18 @@ pub(all) enum Rootc {
 } derive(Eq, Debug)
 
 ///|
+pub extend Rootc with Eq::{not_equal, equal}
+
+///|
+pub extend Rootc with Debug::{to_repr}
+
+///|
+pub extend Rootc with @lib.OCompare::{ocompare}
+
+///|
+pub extend Rootc with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_Rootc(x : Rootc) -> Int {
   match x {
     Rthm(_, _, _, _) => 1000000
@@ -71,6 +83,18 @@ pub(all) enum Clause {
   Root(Rootc)
   Learnt(@kernel.Thm, @sat_common_tools.T3)
 } derive(Eq, Debug)
+
+///|
+pub extend Clause with Eq::{not_equal, equal}
+
+///|
+pub extend Clause with Debug::{to_repr}
+
+///|
+pub extend Clause with @lib.OCompare::{ocompare}
+
+///|
+pub extend Clause with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_Clause(x : Clause) -> Int {

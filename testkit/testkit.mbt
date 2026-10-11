@@ -240,7 +240,7 @@ pub fn Log::show_theory_trace(self : Log, name : String) -> Unit {
 /// Timings vary between runs: `CPU time (user): 0.19` becomes
 /// `CPU time (user): <t>` (the reference outputs are normalized alike).
 pub fn normalize_times(s : String) -> String {
-  let lines = s.split("\n").map(l => l.to_string()).to_array()
+  let lines = s.split("\n").map(l => l.to_owned()).to_array()
   lines
   .map(l => {
     if l.has_prefix("CPU time (user): ") {

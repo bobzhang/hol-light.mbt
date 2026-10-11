@@ -62,6 +62,18 @@ pub(all) enum ArgType {
 } derive(Eq, Debug)
 
 ///|
+pub extend ArgType with Eq::{not_equal, equal}
+
+///|
+pub extend ArgType with Debug::{to_repr}
+
+///|
+pub extend ArgType with @lib.OCompare::{ocompare}
+
+///|
+pub extend ArgType with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_ArgType(x : ArgType) -> Int {
   match x {
     Arg_theorem(_) => 1000000

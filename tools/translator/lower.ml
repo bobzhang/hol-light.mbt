@@ -2081,7 +2081,7 @@ module Lower = struct
       | "Str.quote" -> (1, fun [ a ] _ -> Call (Atom "@lib.str_quote", [ a ]))
       | "Printexc.to_string" -> (1, fun [ a ] _ -> Call (Atom "@lib.printexc_to_string", [ a ]))
       (* Buffer: a StringBuilder *)
-      | "Buffer.create" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "StringBuilder::new", [])))
+      | "Buffer.create" -> (1, fun [ a ] _ -> Blk ((if ordered a then [ Do a ] else []), Call (Atom "StringBuilder", [])))
       | "Buffer.add_char" -> (2, fun [ a; b ] _ -> Call (Atom "StringBuilder::write_char", [ a; b ]))
       | "Buffer.add_string" -> (2, fun [ a; b ] _ -> Call (Atom "StringBuilder::write_string", [ a; b ]))
       | "Buffer.contents" -> (1, fun [ a ] _ -> Call (Atom "StringBuilder::to_string", [ a ]))

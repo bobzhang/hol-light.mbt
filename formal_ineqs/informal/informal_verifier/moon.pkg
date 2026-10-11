@@ -133,6 +133,7 @@ import {
   "bobzhang/hol_light/formal_ineqs/informal/informal_matan",
   "bobzhang/hol_light/formal_ineqs/informal/informal_eval_interval",
   "bobzhang/hol_light/formal_ineqs/informal/informal_taylor",
+  "moonbitlang/core/bigint",
   "moonbitlang/core/list",
 }
 

@@ -3,7 +3,7 @@
 
 ///|
 test "Hashtbl.hash on big_int" {
-  let out = StringBuilder::new()
+  let out = StringBuilder()
   for s in [
     "0", "1", "-1", "12345", "4294967296", "-4294967297", "123456789012345678901234567890",
     "-340282366920938463463374607431768211456",

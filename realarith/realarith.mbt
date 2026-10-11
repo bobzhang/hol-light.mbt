@@ -930,6 +930,18 @@ pub(all) enum Positivstellensatz {
 } derive(Eq, Debug)
 
 ///|
+pub extend Positivstellensatz with Eq::{not_equal, equal}
+
+///|
+pub extend Positivstellensatz with Debug::{to_repr}
+
+///|
+pub extend Positivstellensatz with @lib.OCompare::{ocompare}
+
+///|
+pub extend Positivstellensatz with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_Positivstellensatz(x : Positivstellensatz) -> Int {
   match x {
     Axiom_eq(_) => 1000000

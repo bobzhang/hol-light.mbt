@@ -406,6 +406,32 @@ def moon_info(**kw):
     return run(["moon", "info"], **kw)
 
 
+# Core packages a translated file's body may reach for: `@bigint.BigInt`
+# (`Num.num`/`big_int`, lower.ml) and `@double.infinity` (the float bodies
+# of Formal_ineqs). MoonBit still resolves them without an import, but
+# warns (core_package_not_imported); a file that uses one imports it.
+CORE_USED = [("@bigint", "moonbitlang/core/bigint"),
+             ("@double", "moonbitlang/core/double")]
+
+
+def add_core_imports(pkg, gen):
+    """Import the core packages the translated `gen` uses. setup() writes
+    moon.pkg before the translation, which is what knows them; the import
+    goes just before the core/list one, as setup writes it."""
+    src = os.path.join(ROOT, pkg, gen)
+    if not os.path.exists(src):
+        return
+    text = open(src).read()
+    need = [m for u, m in CORE_USED if re.search(re.escape(u) + r"\b", text)]
+    if not need:
+        return
+    path = os.path.join(ROOT, pkg, "moon.pkg")
+    pkgtext = open(path).read()
+    mark = '  "moonbitlang/core/list",\n'
+    assert mark in pkgtext, path
+    open(path, "w").write(pkgtext.replace(mark, "".join(f'  "{m}",\n' for m in need) + mark, 1))
+
+
 def setup(f):
     pkg = pkg_of(f)
     alias = os.path.basename(pkg)
@@ -611,6 +637,7 @@ def main():
     if not any(" 0 unsupported" in l for l in lines):
         print(f"UNSUPPORTED ITEMS in {f}", file=sys.stderr)
         sys.exit(1)
+    add_core_imports(pkg, alias + ("_ml" if alias.endswith("test") else "") + ".mbt")
     # `moon info` type-checks and writes the interface the next translations
     # read
     chk = moon_info(capture_output=True, text=True)

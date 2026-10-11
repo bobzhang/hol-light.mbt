@@ -2364,6 +2364,18 @@ pub(all) struct SearchOpts {
 } derive(Eq, Debug)
 
 ///|
+pub extend SearchOpts with Eq::{not_equal, equal}
+
+///|
+pub extend SearchOpts with Debug::{to_repr}
+
+///|
+pub extend SearchOpts with @lib.OCompare::{ocompare}
+
+///|
+pub extend SearchOpts with @lib.OHash::{ohash_visit}
+
+///|
 pub impl @lib.OCompare for SearchOpts with fn ocompare(self, other) {
   let c = @lib.compare(self.cut1, other.cut1)
   if c != 0 {
@@ -3273,6 +3285,18 @@ pub(all) enum Proof[TA, TB] {
   Reduction
   Extension(TB, @list.List[(TA, Proof[TA, TB])])
 } derive(Eq, Debug)
+
+///|
+pub extend Proof with Eq::{not_equal, equal}
+
+///|
+pub extend Proof with Debug::{to_repr}
+
+///|
+pub extend Proof with @lib.OCompare::{ocompare}
+
+///|
+pub extend Proof with @lib.OHash::{ohash_visit}
 
 ///|
 fn[TA, TB] ocaml_rank_Proof(x : Proof[TA, TB]) -> Int {
@@ -4299,6 +4323,18 @@ pub(all) enum Litmat[TA] {
   Lit(Lit)
   Mat(Imatrix[TA])
 } derive(Eq, Debug)
+
+///|
+pub extend Litmat with Eq::{not_equal, equal}
+
+///|
+pub extend Litmat with Debug::{to_repr}
+
+///|
+pub extend Litmat with @lib.OCompare::{ocompare}
+
+///|
+pub extend Litmat with @lib.OHash::{ohash_visit}
 
 ///|
 fn[TA] ocaml_rank_Litmat(x : Litmat[TA]) -> Int {
@@ -5389,6 +5425,18 @@ pub(all) enum Proof1[TA, TB, TC, TD] {
 } derive(Eq, Debug)
 
 ///|
+pub extend Proof1 with Eq::{not_equal, equal}
+
+///|
+pub extend Proof1 with Debug::{to_repr}
+
+///|
+pub extend Proof1 with @lib.OCompare::{ocompare}
+
+///|
+pub extend Proof1 with @lib.OHash::{ohash_visit}
+
+///|
 fn[TA, TB, TC, TD] ocaml_rank_Proof1(x : Proof1[TA, TB, TC, TD]) -> Int {
   match x {
     Lemma => 0
@@ -5587,6 +5635,18 @@ pub(all) enum LitmatExt[TA] {
   Litext((Clause[TA], Clause[TA]), Clause[TA])
   Matext(Int64, (Clause[TA], Clause[TA]), ClauseExt[TA])
 } derive(Eq, Debug)
+
+///|
+pub extend LitmatExt with Eq::{not_equal, equal}
+
+///|
+pub extend LitmatExt with Debug::{to_repr}
+
+///|
+pub extend LitmatExt with @lib.OCompare::{ocompare}
+
+///|
+pub extend LitmatExt with @lib.OHash::{ohash_visit}
 
 ///|
 fn[TA] ocaml_rank_LitmatExt(x : LitmatExt[TA]) -> Int {
@@ -8639,6 +8699,12 @@ pub(all) struct ReconData {
   mapping : @list.List[(Int64, Int64)]
   sub : T1
 }
+
+///|
+pub extend ReconData with @lib.OCompare::{ocompare}
+
+///|
+pub extend ReconData with @lib.OHash::{ohash_visit}
 
 ///|
 pub impl @lib.OCompare for ReconData with fn ocompare(self, other) {

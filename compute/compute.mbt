@@ -119,6 +119,18 @@ pub(all) enum Stack[TA, TB, TC] {
 } derive(Eq, Debug)
 
 ///|
+pub extend Stack with Eq::{not_equal, equal}
+
+///|
+pub extend Stack with Debug::{to_repr}
+
+///|
+pub extend Stack with @lib.OCompare::{ocompare}
+
+///|
+pub extend Stack with @lib.OHash::{ohash_visit}
+
+///|
 fn[TA, TB, TC] ocaml_rank_Stack(x : Stack[TA, TB, TC]) -> Int {
   match x {
     Ztop => 0
@@ -494,6 +506,18 @@ pub(all) enum Pattern {
 } derive(Eq, Debug)
 
 ///|
+pub extend Pattern with Eq::{not_equal, equal}
+
+///|
+pub extend Pattern with Debug::{to_repr}
+
+///|
+pub extend Pattern with @lib.OCompare::{ocompare}
+
+///|
+pub extend Pattern with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_Pattern(x : Pattern) -> Int {
   match x {
     Pvar(_) => 1000000
@@ -591,6 +615,12 @@ pub(all) struct CstRec[TA] {
 }
 
 ///|
+pub extend CstRec with @lib.OCompare::{ocompare}
+
+///|
+pub extend CstRec with @lib.OHash::{ohash_visit}
+
+///|
 pub impl[TA : @lib.OCompare] @lib.OCompare for CstRec[TA] with fn ocompare(
   self,
   other,
@@ -627,6 +657,12 @@ pub(all) struct ClosRec[TA] {
 }
 
 ///|
+pub extend ClosRec with @lib.OCompare::{ocompare}
+
+///|
+pub extend ClosRec with @lib.OHash::{ohash_visit}
+
+///|
 pub impl[TA : @lib.OCompare] @lib.OCompare for ClosRec[TA] with fn ocompare(
   self,
   other,
@@ -655,6 +691,12 @@ pub(all) enum Fterm[TA] {
   Neutr
   Clos(ClosRec[TA])
 }
+
+///|
+pub extend Fterm with @lib.OCompare::{ocompare}
+
+///|
+pub extend Fterm with @lib.OHash::{ohash_visit}
 
 ///|
 fn[TA] ocaml_rank_Fterm(x : Fterm[TA]) -> Int {
@@ -701,6 +743,12 @@ pub(all) enum Dterm[TA] {
   App(Dterm[TA], @list.List[Dterm[TA]])
   Abs(Dterm[TA])
 }
+
+///|
+pub extend Dterm with @lib.OCompare::{ocompare}
+
+///|
+pub extend Dterm with @lib.OHash::{ohash_visit}
 
 ///|
 fn[TA] ocaml_rank_Dterm(x : Dterm[TA]) -> Int {

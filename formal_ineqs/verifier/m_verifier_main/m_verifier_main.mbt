@@ -16,6 +16,18 @@ pub(all) struct VerificationParameters {
 } derive(Eq, Debug)
 
 ///|
+pub extend VerificationParameters with Eq::{not_equal, equal}
+
+///|
+pub extend VerificationParameters with Debug::{to_repr}
+
+///|
+pub extend VerificationParameters with @lib.OCompare::{ocompare}
+
+///|
+pub extend VerificationParameters with @lib.OHash::{ohash_visit}
+
+///|
 pub impl @lib.OCompare for VerificationParameters with fn ocompare(self, other) {
   let c = @lib.compare(self.allow_derivatives, other.allow_derivatives)
   if c != 0 {
@@ -88,6 +100,18 @@ pub(all) struct VerificationStats {
   formal_verification_time : Double
   certificate : @certificate.CertificateStats
 } derive(Eq, Debug)
+
+///|
+pub extend VerificationStats with Eq::{not_equal, equal}
+
+///|
+pub extend VerificationStats with Debug::{to_repr}
+
+///|
+pub extend VerificationStats with @lib.OCompare::{ocompare}
+
+///|
+pub extend VerificationStats with @lib.OHash::{ohash_visit}
 
 ///|
 pub impl @lib.OCompare for VerificationStats with fn ocompare(self, other) {

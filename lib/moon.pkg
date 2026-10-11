@@ -5,6 +5,10 @@ import {
   "moonbitlang/core/debug",
   "moonbitlang/core/encoding/utf8",
   "moonbitlang/core/bigint",
-  "moonbitlang/core/buffer",
   "moonbitlang/core/math",
+  "moonbitlang/core/cmp",
 }
+
+import {
+  "moonbitlang/core/double",
+} for "wbtest"

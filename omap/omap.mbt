@@ -9,6 +9,18 @@ pub(all) enum T[TA, TB] {
 } derive(Eq, Debug)
 
 ///|
+pub extend T with Eq::{not_equal, equal}
+
+///|
+pub extend T with Debug::{to_repr}
+
+///|
+pub extend T with @lib.OCompare::{ocompare}
+
+///|
+pub extend T with @lib.OHash::{ohash_visit}
+
+///|
 fn[TA, TB] ocaml_rank_T(x : T[TA, TB]) -> Int {
   match x {
     Empty => 0
@@ -959,6 +971,18 @@ pub(all) enum Enumeration[TA, TB] {
   End
   More(TA, TB, T[TA, TB], Enumeration[TA, TB])
 } derive(Eq, Debug)
+
+///|
+pub extend Enumeration with Eq::{not_equal, equal}
+
+///|
+pub extend Enumeration with Debug::{to_repr}
+
+///|
+pub extend Enumeration with @lib.OCompare::{ocompare}
+
+///|
+pub extend Enumeration with @lib.OHash::{ohash_visit}
 
 ///|
 fn[TA, TB] ocaml_rank_Enumeration(x : Enumeration[TA, TB]) -> Int {
