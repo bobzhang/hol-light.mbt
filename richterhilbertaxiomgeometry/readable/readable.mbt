@@ -397,7 +397,7 @@ pub fn intro_tac(x62 : String) -> @tactics.Tactic raise {
 
 ///|
 /// `assume`
-pub fn assume(x64 : String, x65 : String, x66 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise, x67 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @tactics.Goalstate raise {
+pub fn assume_(x64 : String, x65 : String, x66 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise, x67 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> @tactics.Goalstate raise {
   let statement = x64
   let lab = x65
   let tac = x66
@@ -1202,7 +1202,7 @@ pub fn bigsteptotactic(x194 : String, x195 : String) -> ((@tactics.Tactic, Strin
         } else {
           if @lib.str_string_match(@lib.str_regexp((ws() + ("\\(assume\\)" + ws()))), statement, 0L) {
             let statement_1 = @lib.str_string_after(statement, @lib.str_match_end(()))
-            ((x198 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => assume(statement_1, lab_1, proof_3, x198), rest_5)
+            ((x198 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => assume_(statement_1, lab_1, proof_3, x198), rest_5)
           } else {
             ((x199 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => subgoal_tac(statement, lab_1, proof_3, x199), rest_5)
           }
@@ -1750,7 +1750,7 @@ fn step_56() -> Unit raise {
 ///|
 /// binom
 fn step_57() -> Unit raise {
-  binom_c.set(@define.define(@parser.parse_term("(!n. binom(n,0) = 1) /\\\n  (!k. binom(0,SUC(k)) = 0) /\\\n  (!n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))")))
+  binom_c.set(@define.define_(@parser.parse_term("(!n. binom(n,0) = 1) /\\\n  (!k. binom(0,SUC(k)) = 0) /\\\n  (!n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))")))
 }
 
 ///|

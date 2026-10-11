@@ -65187,7 +65187,7 @@ pub fn compact_imp_perfect_map() -> @kernel.Thm {
 ///|
 /// kification
 fn step_2035() -> Unit raise {
-  kification_c.set(@define.define(@parser.parse_term("kification (top:A topology) =\n        topology {s | s SUBSET topspace top /\\\n                      !k. compact_in top k\n                           ==> open_in (subtopology top k) (k INTER s)}")))
+  kification_c.set(@define.define_(@parser.parse_term("kification (top:A topology) =\n        topology {s | s SUBSET topspace top /\\\n                      !k. compact_in top k\n                           ==> open_in (subtopology top k) (k INTER s)}")))
 }
 
 ///|

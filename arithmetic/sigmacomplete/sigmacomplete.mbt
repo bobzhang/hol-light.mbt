@@ -92,7 +92,7 @@ pub fn lt_def() -> @kernel.Thm {
 /// suc_inj, num_cases, add_0, add_suc, mul_0, mul_suc, le_def, lt_def
 fn step_2() -> Unit raise {
   let t4 = @sets.set_rule(@parser.parse_term("robinson IN {robinson}"))
-  let t5 = @drule.match_mp(@derived.assume())(t4)
+  let t5 = @drule.match_mp(@derived.assume_())(t4)
   let t6 = @simp.gen_rewrite_rule(fn(x1 : (@kernel.Term) -> @kernel.Thm raise) -> ((@kernel.Term) -> @kernel.Thm raise) raise {
     let s2 = @equal.rand_conv(x1)
     fn(x3 : @kernel.Term) -> @kernel.Thm raise {

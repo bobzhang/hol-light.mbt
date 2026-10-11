@@ -39,7 +39,7 @@ test "Examples/prog matches Examples/prog.ml" {
   log.attempt("ABORT", () => sthm(@prog.abort_()))
   log.attempt("IF", () => sthm(@prog.if_()))
   log.attempt("DO", () => sthm(@prog.do_()))
-  log.attempt("ASSERT", () => sthm(@prog.assert()))
+  log.attempt("ASSERT", () => sthm(@prog.assert_()))
   log.attempt("AWHILE", () => sthm(@prog.awhile()))
   log.attempt("ADO", () => sthm(@prog.ado()))
   log.attempt("command_DISTINCT", () => sthm(@prog.command_distinct()))

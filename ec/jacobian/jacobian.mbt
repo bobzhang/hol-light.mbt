@@ -4,7 +4,7 @@
 ///|
 /// jacobian_point
 fn step_1() -> Unit raise {
-  jacobian_point_c.set(@define.define(@parser.parse_term("jacobian_point f (x,y,z) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\ z IN ring_carrier f")))
+  jacobian_point_c.set(@define.define_(@parser.parse_term("jacobian_point f (x,y,z) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\ z IN ring_carrier f")))
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn jacobian_point() -> @kernel.Thm {
 ///|
 /// jacobian_curve
 fn step_2() -> Unit raise {
-  jacobian_curve_c.set(@define.define(@parser.parse_term("jacobian_curve (f,a:A,b) (x,y,z) <=>\n        x IN ring_carrier f /\\\n        y IN ring_carrier f /\\\n        z IN ring_carrier f /\\\n        ring_pow f y 2 =\n        ring_add f (ring_pow f x 3)\n                   (ring_add f (ring_mul f a (ring_mul f x (ring_pow f z 4)))\n                               (ring_mul f b (ring_pow f z 6)))")))
+  jacobian_curve_c.set(@define.define_(@parser.parse_term("jacobian_curve (f,a:A,b) (x,y,z) <=>\n        x IN ring_carrier f /\\\n        y IN ring_carrier f /\\\n        z IN ring_carrier f /\\\n        ring_pow f y 2 =\n        ring_add f (ring_pow f x 3)\n                   (ring_add f (ring_mul f a (ring_mul f x (ring_pow f z 4)))\n                               (ring_mul f b (ring_pow f z 6)))")))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn jacobian_curve() -> @kernel.Thm {
 ///|
 /// weierstrass_of_jacobian
 fn step_3() -> Unit raise {
-  weierstrass_of_jacobian_c.set(@define.define(@parser.parse_term("weierstrass_of_jacobian (f:A ring) (x,y,z) =\n        if z = ring_0 f then NONE\n        else SOME(ring_div f x (ring_pow f z 2),\n                  ring_div f y (ring_pow f z 3))")))
+  weierstrass_of_jacobian_c.set(@define.define_(@parser.parse_term("weierstrass_of_jacobian (f:A ring) (x,y,z) =\n        if z = ring_0 f then NONE\n        else SOME(ring_div f x (ring_pow f z 2),\n                  ring_div f y (ring_pow f z 3))")))
 }
 
 ///|
@@ -49,7 +49,7 @@ pub fn weierstrass_of_jacobian() -> @kernel.Thm {
 ///|
 /// jacobian_of_weierstrass
 fn step_4() -> Unit raise {
-  jacobian_of_weierstrass_c.set(@define.define(@parser.parse_term("jacobian_of_weierstrass (f:A ring) NONE = (ring_1 f,ring_1 f,ring_0 f) /\\\n  jacobian_of_weierstrass f (SOME(x,y)) = (x,y,ring_1 f)")))
+  jacobian_of_weierstrass_c.set(@define.define_(@parser.parse_term("jacobian_of_weierstrass (f:A ring) NONE = (ring_1 f,ring_1 f,ring_0 f) /\\\n  jacobian_of_weierstrass f (SOME(x,y)) = (x,y,ring_1 f)")))
 }
 
 ///|
@@ -64,7 +64,7 @@ pub fn jacobian_of_weierstrass() -> @kernel.Thm {
 ///|
 /// jacobian_eq
 fn step_5() -> Unit raise {
-  jacobian_eq_c.set(@define.define(@parser.parse_term("jacobian_eq (f:A ring) (x,y,z) (x',y',z') <=>\n        (z = ring_0 f <=> z' = ring_0 f) /\\\n        ring_mul f x (ring_pow f z' 2) = ring_mul f x' (ring_pow f z 2) /\\\n        ring_mul f y (ring_pow f z' 3) = ring_mul f y' (ring_pow f z 3)")))
+  jacobian_eq_c.set(@define.define_(@parser.parse_term("jacobian_eq (f:A ring) (x,y,z) (x',y',z') <=>\n        (z = ring_0 f <=> z' = ring_0 f) /\\\n        ring_mul f x (ring_pow f z' 2) = ring_mul f x' (ring_pow f z 2) /\\\n        ring_mul f y (ring_pow f z' 3) = ring_mul f y' (ring_pow f z 3)")))
 }
 
 ///|

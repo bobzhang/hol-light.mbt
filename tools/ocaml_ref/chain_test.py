@@ -80,7 +80,7 @@ def main():
     lines += [f'  "bobzhang/hol_light/{p}",' for p in members] + ['  "bobzhang/hol_light/testkit",']
     open(os.path.join(out, "moon.pkg"), "w").write(
         "import {\n" + "\n".join(dict.fromkeys(lines)) + "\n}\n\n"
-        'warnings = "-unused_value-unused_trait_bound-unused_package-unused_error_type"\n')
+        'warnings = "-unused_value-unused_trait_bound-unused_package-unused_error_type-unreachable_code-unused_try-fragile_catch_all-text_segment_excceed-unresolved_type_variable-missing_pattern_field-unused_rest_mark"\n')
     open(os.path.join(out, "00_using_test.mbt"), "w").write("///|\nusing @testkit {stm, sthm}\n")
     # a package needs a source file
     open(os.path.join(out, "make.mbt"), "w").write(

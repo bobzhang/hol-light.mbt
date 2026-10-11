@@ -577,7 +577,11 @@ module Lower = struct
       "ignore"; "not";
       (* init.mbt calls abort; `and` joins recursive local functions
          (Examples/prog.ml defines ABORT and AND) *)
-      "abort"; "and" ]
+      "abort"; "and";
+      (* words moonc reserves for future use: it warns when an identifier
+         is one, so it gets `_` like any other keyword *)
+      "assume"; "assert"; "constructor"; "define"; "finally"; "local";
+      "member"; "typeof"; "void" ]
 
   let rec sanitize name =
     match Names.op_name name with

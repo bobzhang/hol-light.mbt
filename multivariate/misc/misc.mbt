@@ -2845,7 +2845,7 @@ pub fn open_real_interval() -> @kernel.Thm {
 /// closed_real_interval
 fn step_37() -> Unit raise {
   closed_real_interval_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "closed_real_interval[a:real,b:real] = {x:real | a <= x /\\ x <= b}",
       ),
@@ -10568,7 +10568,7 @@ fn step_154() -> Unit raise {
 /// relative_to
 fn step_155() -> Unit raise {
   relative_to_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term("(P relative_to s) t <=> ?u. P u /\\ s INTER u = t"),
     ),
   )

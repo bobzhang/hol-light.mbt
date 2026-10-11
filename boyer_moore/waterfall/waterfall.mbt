@@ -260,7 +260,7 @@ pub fn proof_print_clausetree(x28 : ClauseTree) -> Unit raise {
         {
           @pp.std_formatter.print_newline()
         }
-        let void = @lib.map(proof_print_clausetree, tlist)
+        let void_ = @lib.map(proof_print_clausetree, tlist)
         ()
       }
     }
@@ -797,11 +797,11 @@ pub fn waterfall_v1(x108 : @list.List[((@kernel.Term, Bool)) -> (@list.List[(@ke
       ()
     }
     ignore(proof_print_term(tm_1))
-    let void = proof_print_newline(())
+    let void_ = proof_print_newline(())
     let (tmil, proof) = induction((tm_1, false))
     dec_print_depth(proof(@lib.map((x114 : (@kernel.Term, Bool)) => waterfall_v1(heuristics, induction, x114), inc_print_depth(tmil))))
   }
-  let void_1 = proof_print_newline(())
+  let void__1 = proof_print_newline(())
   let tree = waterfall(heuristics, (tm, ind))
   let tmil_1 = fringe_of_clause_tree(tree)
   let thl = prove_pool(conv, @lib.map(fn(x115 : (@kernel.Term, Bool)) -> @kernel.Term raise {
@@ -821,7 +821,7 @@ pub fn filtered_waterfall_v1(x116 : @list.List[((@kernel.Term, Bool)) -> (@list.
     let tm_1 = x120
     let constr_check = (@environment.max_var_depth(tm_1) > 12L)
     if constr_check {
-      let void = @lib.warn(true, "Reached maximum depth!")
+      let void_ = @lib.warn(true, "Reached maximum depth!")
       raise Failure("cannot prove")
     } else {
       let heurn = try {
@@ -850,14 +850,14 @@ pub fn filtered_waterfall_v1(x116 : @list.List[((@kernel.Term, Bool)) -> (@list.
         ()
       }
       ignore(proof_print_term(tm_1))
-      let void_1 = proof_print_newline(())
+      let void__1 = proof_print_newline(())
       let (tmil, proof) = induction((tm_1, false))
       let t125 = inc_print_depth(tmil)
       let t123 = warehouse_1.prepend((tm_1, @lib.add63(Int::to_int64(@lib.length(heuristics)), 1L)))
       dec_print_depth(proof(@lib.map((x124 : (@kernel.Term, Bool)) => filtered_waterfall_v1(heuristics, induction, t123, x124), t125)))
     }
   }
-  let void_2 = proof_print_newline(())
+  let void__2 = proof_print_newline(())
   let tree = filtered_waterfall(heuristics, @list.List([]), (tm, ind))
   let tmil_1 = fringe_of_clause_tree(tree)
   let thl = prove_pool(conv, @lib.map(fn(x126 : (@kernel.Term, Bool)) -> @kernel.Term raise {

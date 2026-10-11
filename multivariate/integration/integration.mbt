@@ -6992,7 +6992,7 @@ pub fn exists_option() -> @kernel.Thm {
 ///|
 /// lifted
 fn step_194() -> Unit raise {
-  lifted_c.set(@define.define(@parser.parse_term("(lifted op NONE _ = NONE) /\\\n  (lifted op _ NONE = NONE) /\\\n  (lifted op (SOME x) (SOME y) = SOME(op x y))")))
+  lifted_c.set(@define.define_(@parser.parse_term("(lifted op NONE _ = NONE) /\\\n  (lifted op _ NONE = NONE) /\\\n  (lifted op (SOME x) (SOME y) = SOME(op x y))")))
 }
 
 ///|

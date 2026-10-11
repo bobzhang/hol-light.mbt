@@ -2808,7 +2808,7 @@ pub fn manhattan_v1() -> @kernel.Thm {
 ///|
 /// closed_segment
 fn step_154() -> Unit raise {
-  closed_segment_c.set(@define.define(@parser.parse_term("closed_segment[a,b] = {(&1 - u) % a + u % b | &0 <= u /\\ u <= &1}")))
+  closed_segment_c.set(@define.define_(@parser.parse_term("closed_segment[a,b] = {(&1 - u) % a + u % b | &0 <= u /\\ u <= &1}")))
 }
 
 ///|
@@ -72117,7 +72117,7 @@ pub fn lavrentiev_borel() -> @kernel.Thm {
 ///|
 /// baire
 fn step_2360() -> Unit raise {
-  baire_c.set(@define.define(@parser.parse_term("(baire 0 s (f:real^M->real^N) <=> f continuous_on s) /\\\n  (baire (SUC n) s f <=>\n        ?g. (!k. baire n s (g k)) /\\\n            (!x. x IN s ==> ((\\k. g k x) --> f x) sequentially))")))
+  baire_c.set(@define.define_(@parser.parse_term("(baire 0 s (f:real^M->real^N) <=> f continuous_on s) /\\\n  (baire (SUC n) s f <=>\n        ?g. (!k. baire n s (g k)) /\\\n            (!x. x IN s ==> ((\\k. g k x) --> f x) sequentially))")))
 }
 
 ///|

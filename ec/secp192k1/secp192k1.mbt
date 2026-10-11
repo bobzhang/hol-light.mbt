@@ -22,7 +22,7 @@ fn step_3() -> Unit raise {
 ///|
 /// p_192k1
 fn step_4() -> Unit raise {
-  p_192k1_c.set(@define.define(@parser.parse_term("p_192k1 = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFEE37")))
+  p_192k1_c.set(@define.define_(@parser.parse_term("p_192k1 = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFEE37")))
 }
 
 ///|
@@ -37,7 +37,7 @@ pub fn p_192k1() -> @kernel.Thm {
 ///|
 /// n_192k1
 fn step_5() -> Unit raise {
-  n_192k1_c.set(@define.define(@parser.parse_term("n_192k1 = 0xFFFFFFFFFFFFFFFFFFFFFFFE26F2FC170F69466A74DEFD8D")))
+  n_192k1_c.set(@define.define_(@parser.parse_term("n_192k1 = 0xFFFFFFFFFFFFFFFFFFFFFFFE26F2FC170F69466A74DEFD8D")))
 }
 
 ///|
@@ -52,7 +52,7 @@ pub fn n_192k1() -> @kernel.Thm {
 ///|
 /// G_192K1
 fn step_6() -> Unit raise {
-  g_192k1_c.set(@define.define(@parser.parse_term("G_192K1 = SOME(&0xDB4FF10EC057E9AE26B07D0280B7F4341DA5D1B1EAE06C7D:int,&0x9B2F2F6D9C5628A7844163D015BE86344082AA88D95E2F9D:int)")))
+  g_192k1_c.set(@define.define_(@parser.parse_term("G_192K1 = SOME(&0xDB4FF10EC057E9AE26B07D0280B7F4341DA5D1B1EAE06C7D:int,&0x9B2F2F6D9C5628A7844163D015BE86344082AA88D95E2F9D:int)")))
 }
 
 ///|
@@ -151,7 +151,7 @@ pub fn prime_n192k1() -> @kernel.Thm {
 ///|
 /// p192k1_group
 fn step_11() -> Unit raise {
-  p192k1_group_c.set(@define.define(@parser.parse_term("p192k1_group = weierstrass_group(integer_mod_ring p_192k1,&0,&3)")))
+  p192k1_group_c.set(@define.define_(@parser.parse_term("p192k1_group = weierstrass_group(integer_mod_ring p_192k1,&0,&3)")))
 }
 
 ///|

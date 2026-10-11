@@ -2705,7 +2705,7 @@ pub fn cop_zero() -> @kernel.Thm {
 ///|
 /// cop_pow
 fn step_169() -> Unit raise {
-  cop_pow_c.set(@define.define(@parser.parse_term("cop_pow (op:cfun->cfun) 0 = I /\\\n  cop_pow op (SUC n) = cop_mul op (cop_pow op n)")))
+  cop_pow_c.set(@define.define_(@parser.parse_term("cop_pow (op:cfun->cfun) 0 = I /\\\n  cop_pow op (SUC n) = cop_mul op (cop_pow op n)")))
 }
 
 ///|

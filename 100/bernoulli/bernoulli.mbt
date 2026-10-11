@@ -53,7 +53,7 @@ pub fn diff_sum() -> @kernel.Thm {
 ///|
 /// bernoulli
 fn step_4() -> Unit raise {
-  bernoulli_c.set(@define.define(@parser.parse_term("(bernoulli 0 = &1) /\\\n  (!n. bernoulli(SUC n) =\n       --sum(0..n) (\\j. &(binom(n + 2,j)) * bernoulli j) / (&n + &2))")))
+  bernoulli_c.set(@define.define_(@parser.parse_term("(bernoulli 0 = &1) /\\\n  (!n. bernoulli(SUC n) =\n       --sum(0..n) (\\j. &(binom(n + 2,j)) * bernoulli j) / (&n + &2))")))
 }
 
 ///|

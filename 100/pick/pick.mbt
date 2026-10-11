@@ -186,7 +186,7 @@ pub fn triangle_additive_decomposition() -> @kernel.Thm {
 ///|
 /// integral_vector
 fn step_9() -> Unit raise {
-  integral_vector_c.set(@define.define(@parser.parse_term("integral_vector(x:real^N) <=>\n        !i. 1 <= i /\\ i <= dimindex(:N) ==> integer(x$i)")))
+  integral_vector_c.set(@define.define_(@parser.parse_term("integral_vector(x:real^N) <=>\n        !i. 1 <= i /\\ i <= dimindex(:N) ==> integer(x$i)")))
 }
 
 ///|
@@ -1608,7 +1608,7 @@ pub fn parity_lemma() -> @kernel.Thm {
 ///|
 /// polygonal_path
 fn step_25() -> Unit raise {
-  polygonal_path_c.set(@define.define(@parser.parse_term("polygonal_path[] = linepath(vec 0,vec 0) /\\\n  polygonal_path[a] = linepath(a,a) /\\\n  polygonal_path [a;b] = linepath(a,b) /\\\n  polygonal_path (CONS a (CONS b (CONS c l))) =\n       linepath(a,b) ++ polygonal_path(CONS b (CONS c l))")))
+  polygonal_path_c.set(@define.define_(@parser.parse_term("polygonal_path[] = linepath(vec 0,vec 0) /\\\n  polygonal_path[a] = linepath(a,a) /\\\n  polygonal_path [a;b] = linepath(a,b) /\\\n  polygonal_path (CONS a (CONS b (CONS c l))) =\n       linepath(a,b) ++ polygonal_path(CONS b (CONS c l))")))
 }
 
 ///|

@@ -1345,7 +1345,7 @@ pub fn matroid_basis() -> @kernel.Thm {
 /// matroid_dependent
 fn step_27() -> Unit raise {
   matroid_dependent_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "matroid_dependent (m:A matroid) s <=>\n        s SUBSET matroid_set m /\\ ~matroid_independent m s",
       ),
@@ -8261,7 +8261,7 @@ pub fn matroid_steinitz_exchange_alt() -> @kernel.Thm {
 /// matroid_finite_dimensional
 fn step_96() -> Unit raise {
   matroid_finite_dimensional_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "matroid_finite_dimensional (m:A matroid) <=>\n        ?b. FINITE b /\\ matroid_spanning m b",
       ),
@@ -8284,7 +8284,7 @@ pub fn matroid_finite_dimensional() -> @kernel.Thm {
 /// matroid_dimension
 fn step_97() -> Unit raise {
   matroid_dimension_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "matroid_dimension (m:A matroid) =\n        @n. !b. matroid_basis m b ==> b HAS_SIZE n",
       ),
@@ -8307,7 +8307,7 @@ pub fn matroid_dimension() -> @kernel.Thm {
 /// matroid_finite_dim
 fn step_98() -> Unit raise {
   matroid_finite_dim_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "matroid_finite_dim (m:A matroid) s <=>\n        s SUBSET matroid_set m /\\\n        matroid_finite_dimensional(submatroid m s)",
       ),
@@ -8330,7 +8330,7 @@ pub fn matroid_finite_dim() -> @kernel.Thm {
 /// matroid_dim
 fn step_99() -> Unit raise {
   matroid_dim_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "matroid_dim (m:A matroid) s = matroid_dimension(submatroid m s)",
       ),

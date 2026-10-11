@@ -62,7 +62,7 @@ LOC_ASG loc_asg
 LOC_EXP loc_exp
 LOC_VAR loc_var
 LST lst
-MEMBER member
+MEMBER member_
 MEMBER_term member_term
 MULTA multa
 MULTA0 multa0

@@ -22,7 +22,7 @@ fn step_3() -> Unit raise {
 ///|
 /// p_25519
 fn step_4() -> Unit raise {
-  p_25519_c.set(@define.define(@parser.parse_term("p_25519 = 57896044618658097711785492504343953926634992332820282019728792003956564819949")))
+  p_25519_c.set(@define.define_(@parser.parse_term("p_25519 = 57896044618658097711785492504343953926634992332820282019728792003956564819949")))
 }
 
 ///|
@@ -37,7 +37,7 @@ pub fn p_25519() -> @kernel.Thm {
 ///|
 /// n_25519
 fn step_5() -> Unit raise {
-  n_25519_c.set(@define.define(@parser.parse_term("n_25519 = 7237005577332262213973186563042994240857116359379907606001950938285454250989")))
+  n_25519_c.set(@define.define_(@parser.parse_term("n_25519 = 7237005577332262213973186563042994240857116359379907606001950938285454250989")))
 }
 
 ///|
@@ -52,7 +52,7 @@ pub fn n_25519() -> @kernel.Thm {
 ///|
 /// A_25519
 fn step_6() -> Unit raise {
-  a_25519_c.set(@define.define(@parser.parse_term("A_25519 = 486662")))
+  a_25519_c.set(@define.define_(@parser.parse_term("A_25519 = 486662")))
 }
 
 ///|
@@ -67,7 +67,7 @@ pub fn a_25519() -> @kernel.Thm {
 ///|
 /// B_25519
 fn step_7() -> Unit raise {
-  b_25519_c.set(@define.define(@parser.parse_term("B_25519 = 1")))
+  b_25519_c.set(@define.define_(@parser.parse_term("B_25519 = 1")))
 }
 
 ///|
@@ -82,7 +82,7 @@ pub fn b_25519() -> @kernel.Thm {
 ///|
 /// C_25519
 fn step_8() -> Unit raise {
-  c_25519_c.set(@define.define(@parser.parse_term("C_25519 = SOME(&0x09:int,&0x20ae19a1b8a086b4e01edd2c7748d14c923d4d7e6d7c61b229e9c5a27eced3d9:int)")))
+  c_25519_c.set(@define.define_(@parser.parse_term("C_25519 = SOME(&0x09:int,&0x20ae19a1b8a086b4e01edd2c7748d14c923d4d7e6d7c61b229e9c5a27eced3d9:int)")))
 }
 
 ///|
@@ -97,7 +97,7 @@ pub fn c_25519() -> @kernel.Thm {
 ///|
 /// CC_25519
 fn step_9() -> Unit raise {
-  cc_25519_c.set(@define.define(@parser.parse_term("CC_25519 = SOME(&6911272784993971428141625084124731891523734454433518466500745240824540625972:int,&35197529511187359173101698576797651179158701633820552795916138355302448607023:int)")))
+  cc_25519_c.set(@define.define_(@parser.parse_term("CC_25519 = SOME(&6911272784993971428141625084124731891523734454433518466500745240824540625972:int,&35197529511187359173101698576797651179158701633820552795916138355302448607023:int)")))
 }
 
 ///|
@@ -112,7 +112,7 @@ pub fn cc_25519() -> @kernel.Thm {
 ///|
 /// curve25519
 fn step_10() -> Unit raise {
-  curve25519_c.set(@define.define(@parser.parse_term("curve25519 = (integer_mod_ring p_25519,&A_25519:int,&1:int)")))
+  curve25519_c.set(@define.define_(@parser.parse_term("curve25519 = (integer_mod_ring p_25519,&A_25519:int,&1:int)")))
 }
 
 ///|
@@ -247,7 +247,7 @@ pub fn montgomery_nonsingular_curve25519() -> @kernel.Thm {
 ///|
 /// curve25519_group
 fn step_17() -> Unit raise {
-  curve25519_group_c.set(@define.define(@parser.parse_term("curve25519_group =\n    montgomery_group(integer_mod_ring p_25519,&A_25519,&1)")))
+  curve25519_group_c.set(@define.define_(@parser.parse_term("curve25519_group =\n    montgomery_group(integer_mod_ring p_25519,&A_25519,&1)")))
 }
 
 ///|

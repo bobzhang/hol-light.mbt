@@ -22,7 +22,7 @@ fn step_3() -> Unit raise {
 ///|
 /// p_25519
 fn step_4() -> Unit raise {
-  p_25519_c.set(@define.define(@parser.parse_term("p_25519 = 57896044618658097711785492504343953926634992332820282019728792003956564819949")))
+  p_25519_c.set(@define.define_(@parser.parse_term("p_25519 = 57896044618658097711785492504343953926634992332820282019728792003956564819949")))
 }
 
 ///|
@@ -37,7 +37,7 @@ pub fn p_25519() -> @kernel.Thm {
 ///|
 /// n_25519
 fn step_5() -> Unit raise {
-  n_25519_c.set(@define.define(@parser.parse_term("n_25519 = 7237005577332262213973186563042994240857116359379907606001950938285454250989")))
+  n_25519_c.set(@define.define_(@parser.parse_term("n_25519 = 7237005577332262213973186563042994240857116359379907606001950938285454250989")))
 }
 
 ///|
@@ -52,7 +52,7 @@ pub fn n_25519() -> @kernel.Thm {
 ///|
 /// a_25519
 fn step_6() -> Unit raise {
-  a_25519_c.set(@define.define(@parser.parse_term("a_25519 = 19298681539552699237261830834781317975544997444273427339909597334573241639236")))
+  a_25519_c.set(@define.define_(@parser.parse_term("a_25519 = 19298681539552699237261830834781317975544997444273427339909597334573241639236")))
 }
 
 ///|
@@ -67,7 +67,7 @@ pub fn a_25519() -> @kernel.Thm {
 ///|
 /// b_25519
 fn step_7() -> Unit raise {
-  b_25519_c.set(@define.define(@parser.parse_term("b_25519 = 55751746669818908907645289078257140818241103727901012315294400837956729358436")))
+  b_25519_c.set(@define.define_(@parser.parse_term("b_25519 = 55751746669818908907645289078257140818241103727901012315294400837956729358436")))
 }
 
 ///|
@@ -82,7 +82,7 @@ pub fn b_25519() -> @kernel.Thm {
 ///|
 /// G_25519
 fn step_8() -> Unit raise {
-  g_25519_c.set(@define.define(@parser.parse_term("G_25519 = SOME(&0x2aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaad245a:int,&0x20ae19a1b8a086b4e01edd2c7748d14c923d4d7e6d7c61b229e9c5a27eced3d9:int)")))
+  g_25519_c.set(@define.define_(@parser.parse_term("G_25519 = SOME(&0x2aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaad245a:int,&0x20ae19a1b8a086b4e01edd2c7748d14c923d4d7e6d7c61b229e9c5a27eced3d9:int)")))
 }
 
 ///|
@@ -97,7 +97,7 @@ pub fn g_25519() -> @kernel.Thm {
 ///|
 /// GG_25519
 fn step_9() -> Unit raise {
-  gg_25519_c.set(@define.define(@parser.parse_term("GG_25519 = SOME(&26209954324546670665403455918906049867068731898706945806410342575476729061509:int,&35197529511187359173101698576797651179158701633820552795916138355302448607023:int)")))
+  gg_25519_c.set(@define.define_(@parser.parse_term("GG_25519 = SOME(&26209954324546670665403455918906049867068731898706945806410342575476729061509:int,&35197529511187359173101698576797651179158701633820552795916138355302448607023:int)")))
 }
 
 ///|
@@ -188,7 +188,7 @@ pub fn prime_n25519() -> @kernel.Thm {
 ///|
 /// wei25519_group
 fn step_14() -> Unit raise {
-  wei25519_group_c.set(@define.define(@parser.parse_term("wei25519_group =\n    weierstrass_group(integer_mod_ring p_25519,&a_25519,&b_25519)")))
+  wei25519_group_c.set(@define.define_(@parser.parse_term("wei25519_group =\n    weierstrass_group(integer_mod_ring p_25519,&a_25519,&b_25519)")))
 }
 
 ///|

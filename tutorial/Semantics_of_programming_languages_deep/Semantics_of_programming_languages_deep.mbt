@@ -118,7 +118,7 @@ fn step_9() -> Unit raise {
 ///|
 /// value
 fn step_10() -> Unit raise {
-  value_c.set(@define.define(@parser.parse_term("(value (Literal n) s = n) /\\\n  (value (Variable x) s = s(x)) /\\\n  (value (e1 + e2) s = value e1 s + value e2 s) /\\\n  (value (e1 * e2) s = value e1 s * value e2 s)")))
+  value_c.set(@define.define_(@parser.parse_term("(value (Literal n) s = n) /\\\n  (value (Variable x) s = s(x)) /\\\n  (value (e1 + e2) s = value e1 s + value e2 s) /\\\n  (value (e1 * e2) s = value e1 s * value e2 s)")))
 }
 
 ///|

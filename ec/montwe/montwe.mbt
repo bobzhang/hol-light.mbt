@@ -4,7 +4,7 @@
 ///|
 /// wcurve_of_mcurve
 fn step_1() -> Unit raise {
-  wcurve_of_mcurve_c.set(@define.define(@parser.parse_term("wcurve_of_mcurve(f,(a:A),b) =\n   (f,\n    ring_div f (ring_sub f (ring_of_num f 1)\n                           (ring_div f (ring_pow f a 2) (ring_of_num f 3)))\n               (ring_pow f b 2),\n    ring_div f (ring_mul f a (ring_sub f (ring_mul f (ring_of_num f 2)\n                                                     (ring_pow f a 2))\n                                         (ring_of_num f 9)))\n               (ring_mul f (ring_of_num f 27) (ring_pow f b 3)))")))
+  wcurve_of_mcurve_c.set(@define.define_(@parser.parse_term("wcurve_of_mcurve(f,(a:A),b) =\n   (f,\n    ring_div f (ring_sub f (ring_of_num f 1)\n                           (ring_div f (ring_pow f a 2) (ring_of_num f 3)))\n               (ring_pow f b 2),\n    ring_div f (ring_mul f a (ring_sub f (ring_mul f (ring_of_num f 2)\n                                                     (ring_pow f a 2))\n                                         (ring_of_num f 9)))\n               (ring_mul f (ring_of_num f 27) (ring_pow f b 3)))")))
 }
 
 ///|
@@ -52,7 +52,7 @@ pub fn wcurve_of_mcurve_nonsingular() -> @kernel.Thm {
 ///|
 /// weierstrass_of_montgomery
 fn step_4() -> Unit raise {
-  weierstrass_of_montgomery_c.set(@define.define(@parser.parse_term("weierstrass_of_montgomery(f,a:A,b) NONE = NONE /\\\n  weierstrass_of_montgomery(f,a:A,b) (SOME(x,y)) =\n  SOME(ring_div f (ring_add f x (ring_div f a (ring_of_num f 3))) b,\n       ring_div f y b)")))
+  weierstrass_of_montgomery_c.set(@define.define_(@parser.parse_term("weierstrass_of_montgomery(f,a:A,b) NONE = NONE /\\\n  weierstrass_of_montgomery(f,a:A,b) (SOME(x,y)) =\n  SOME(ring_div f (ring_add f x (ring_div f a (ring_of_num f 3))) b,\n       ring_div f y b)")))
 }
 
 ///|
@@ -67,7 +67,7 @@ pub fn weierstrass_of_montgomery() -> @kernel.Thm {
 ///|
 /// montgomery_of_weierstrass
 fn step_5() -> Unit raise {
-  montgomery_of_weierstrass_c.set(@define.define(@parser.parse_term("montgomery_of_weierstrass(f,a:A,b) NONE = NONE /\\\n  montgomery_of_weierstrass(f,a:A,b) (SOME(x,y)) =\n  SOME(ring_sub f (ring_mul f b x) (ring_div f a (ring_of_num f 3)),\n       ring_mul f b y)")))
+  montgomery_of_weierstrass_c.set(@define.define_(@parser.parse_term("montgomery_of_weierstrass(f,a:A,b) NONE = NONE /\\\n  montgomery_of_weierstrass(f,a:A,b) (SOME(x,y)) =\n  SOME(ring_sub f (ring_mul f b x) (ring_div f a (ring_of_num f 3)),\n       ring_mul f b y)")))
 }
 
 ///|

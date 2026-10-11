@@ -619,7 +619,7 @@ pub fn contraff() -> @kernel.Thm {
 ///|
 /// isSome
 fn step_38() -> Unit raise {
-  issome_c.set(@define.define(@parser.parse_term("isSome NONE = F /\\ (!x. isSome (SOME x) = T)")))
+  issome_c.set(@define.define_(@parser.parse_term("isSome NONE = F /\\ (!x. isSome (SOME x) = T)")))
 }
 
 ///|

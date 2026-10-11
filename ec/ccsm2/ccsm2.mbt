@@ -82,7 +82,7 @@ pub fn g_sm2() -> @kernel.Thm {
 ///|
 /// ccsm2
 fn step_8() -> Unit raise {
-  ccsm2_c.set(@define.define(@parser.parse_term("ccsm2 =\n    (integer_mod_ring p_sm2,\n     ring_neg (integer_mod_ring p_sm2) (&3),\n     &b_sm2:int)")))
+  ccsm2_c.set(@define.define_(@parser.parse_term("ccsm2 =\n    (integer_mod_ring p_sm2,\n     ring_neg (integer_mod_ring p_sm2) (&3),\n     &b_sm2:int)")))
 }
 
 ///|
@@ -164,7 +164,7 @@ pub fn prime_nsm2() -> @kernel.Thm {
 ///|
 /// sm2_group
 fn step_12() -> Unit raise {
-  sm2_group_c.set(@define.define(@parser.parse_term("sm2_group =\n   weierstrass_group\n    (integer_mod_ring p_sm2,\n     ring_neg (integer_mod_ring p_sm2) (&3),\n     &b_sm2)")))
+  sm2_group_c.set(@define.define_(@parser.parse_term("sm2_group =\n   weierstrass_group\n    (integer_mod_ring p_sm2,\n     ring_neg (integer_mod_ring p_sm2) (&3),\n     &b_sm2)")))
 }
 
 ///|

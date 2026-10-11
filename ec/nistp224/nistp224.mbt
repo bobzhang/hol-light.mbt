@@ -197,7 +197,7 @@ pub fn sanity_check_224() -> @kernel.Thm {
 ///|
 /// p224_group
 fn step_14() -> Unit raise {
-  p224_group_c.set(@define.define(@parser.parse_term("p224_group =\n   weierstrass_group\n    (integer_mod_ring p_224,\n     ring_neg (integer_mod_ring p_224) (&3),\n     &b_224)")))
+  p224_group_c.set(@define.define_(@parser.parse_term("p224_group =\n   weierstrass_group\n    (integer_mod_ring p_224,\n     ring_neg (integer_mod_ring p_224) (&3),\n     &b_224)")))
 }
 
 ///|

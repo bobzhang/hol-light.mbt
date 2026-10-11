@@ -2,7 +2,7 @@
 NSQRT_2 nsqrt_2
 algebra algebra
 arithmetic arithmetic
-assume assume
+assume assume_
 by by
 cases cases
 consider consider

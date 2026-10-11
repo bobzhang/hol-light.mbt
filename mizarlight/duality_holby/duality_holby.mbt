@@ -376,7 +376,7 @@ fn step_21() -> Unit raise {
   let t30 = @miz2a.from(@miz2a.so(@miz2a.have, "... = l'"), @list.List([1L, 2L]))
   let t31 = @miz2a.from(@miz2a.have("l = l1"), @list.List([1L, 2L]))
   let t32 = @miz2a.at(@miz2a.by(@miz2a.from(@miz2a.st(@miz2a.consider(@list.List(["l1:Line"])))("p ON l1 /\\ p' ON l1 /\\\n    !l'. p ON l' /\\ p' ON l' ==> (l' = l1)"), @list.List([1L])), @list.List([axiom_1()])), 2L)
-  let t33 = @miz2a.at(@miz2a.assume("~(p = p') /\\ p ON l /\\ p' ON l /\\ p ON l' /\\ p' ON l'"), 1L)
+  let t33 = @miz2a.at(@miz2a.assume_("~(p = p') /\\ p ON l /\\ p' ON l /\\ p ON l' /\\ p' ON l'"), 1L)
   let t34 = @list.List([@miz2a.fix(@list.List(["p:Point", "p':Point", "l:Line", "l':Line"])), t33, t32, t31, t30, @miz2a.qed()])
   axiom_1_p_c.set(@miz2a.theorem("!p p' l l'. ~(p = p') /\\ p ON l /\\ p' ON l /\\ p ON l' /\\ p' ON l'\n    ==> (l' = l)")(t34))
 }

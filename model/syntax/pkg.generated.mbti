@@ -114,7 +114,7 @@ pub fn type_recursion() -> @kernel.Thm
 
 pub fn type_subst() -> @kernel.Thm
 
-pub fn typeof() -> @kernel.Thm
+pub fn typeof_() -> @kernel.Thm
 
 pub fn variant() -> @kernel.Thm
 

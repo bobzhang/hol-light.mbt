@@ -17553,7 +17553,7 @@ pub fn reallim_imp_real_liminf() -> @kernel.Thm {
 ///|
 /// iter_min
 fn step_317() -> Unit raise {
-  iter_min_c.set(@define.define(@parser.parse_term("(iter_min (X:num->real) (N:num) 0 = X N) /\\\n   (iter_min X N (SUC j) = min (X (N + SUC j)) (iter_min X N j))")))
+  iter_min_c.set(@define.define_(@parser.parse_term("(iter_min (X:num->real) (N:num) 0 = X N) /\\\n   (iter_min X N (SUC j) = min (X (N + SUC j)) (iter_min X N j))")))
 }
 
 ///|
@@ -31572,7 +31572,7 @@ pub fn truncated_variance_summable() -> @kernel.Thm {
 ///|
 /// gseq
 fn step_461() -> Unit raise {
-  gseq_c.set(@define.define(@parser.parse_term("gseq b 0 = 1 /\\\n  gseq b (SUC k) = gseq b k + gseq b k DIV (b + 1) + 1")))
+  gseq_c.set(@define.define_(@parser.parse_term("gseq b 0 = 1 /\\\n  gseq b (SUC k) = gseq b k + gseq b k DIV (b + 1) + 1")))
 }
 
 ///|

@@ -274,7 +274,7 @@ pub fn generalize_heuristic(x43 : @kernel.Term, x44 : Bool) -> ((@list.List[(@ke
 ///|
 /// `is_constructor_eq`
 pub fn is_constructor_eq(x63 : String, x64 : @kernel.Term, x65 : @kernel.Term) -> Bool raise {
-  let constructor = x63
+  let constructor_ = x63
   let v = x64
   let tm = x65
   try {
@@ -299,7 +299,7 @@ pub fn is_constructor_eq(x63 : String, x64 : @kernel.Term, x65 : @kernel.Term) -
     })((fn(x70 : @kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
       @basics.strip_comb(x70)
     })(cand_c))
-    (constructor == cand_name)
+    (constructor_ == cand_name)
   } catch {
     Failure(_) => false
     e => raise e
@@ -309,7 +309,7 @@ pub fn is_constructor_eq(x63 : String, x64 : @kernel.Term, x65 : @kernel.Term) -
 ///|
 /// `is_constructor_neq`
 pub fn is_constructor_neq(x71 : String, x72 : @kernel.Term, x73 : @kernel.Term) -> Bool raise {
-  let constructor = x71
+  let constructor_ = x71
   let v = x72
   let tm = x73
   try {
@@ -335,7 +335,7 @@ pub fn is_constructor_neq(x71 : String, x72 : @kernel.Term, x73 : @kernel.Term) 
     })((fn(x78 : @kernel.Term) -> (@kernel.Term, @list.List[@kernel.Term]) raise {
       @basics.strip_comb(x78)
     })(cand_c))
-    (constructor == cand_name)
+    (constructor_ == cand_name)
   } catch {
     Failure(_) => false
     e => raise e

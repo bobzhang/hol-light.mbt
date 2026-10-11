@@ -3149,7 +3149,7 @@ pub fn[TA] peek_v1(x454 : Set[TA]) -> ((TA) -> TA? raise) raise {
 
 ///|
 /// `member`
-pub fn[TA] member(x456 : TA, x457 : Set[TA]) -> Bool raise {
+pub fn[TA] member_(x456 : TA, x457 : Set[TA]) -> Bool raise {
   let elt = x456
   match x457 {
     Set::Set(m) => indomain(elt, m)
@@ -20401,7 +20401,7 @@ pub fn axiom(x3001 : @oset.T[(Bool, (String, @list.List[Term]))]) -> Thm raise {
 
 ///|
 /// `assume`
-pub fn assume(x3002 : (Bool, (String, @list.List[Term]))) -> Thm raise {
+pub fn assume_(x3002 : (Bool, (String, @list.List[Term]))) -> Thm raise {
   let lit = x3002
   Thm::Thm(
     fromlist_v15(@list.List([lit, negate(lit.0, lit.1)])),
@@ -20610,7 +20610,7 @@ pub fn parents(x3012 : Inference1) -> @list.List[Thm] raise {
 pub fn inferencetothm(x3013 : Inference1) -> Thm raise {
   match x3013 {
     Inference1::Axiom(cl) => axiom(cl)
-    Inference1::Assume(atm) => assume((true, atm))
+    Inference1::Assume(atm) => assume_((true, atm))
     Inference1::Subst(sub, th) => subst_v5(sub, th)
     Inference1::Resolve(atm_1, th_1, th_p) => resolve((true, atm_1), th_1)(th_p)
     Inference1::Refl(tm) => refl(tm)
@@ -21658,7 +21658,7 @@ pub fn allliterule(
   x3142 : (Bool, (String, @list.List[Term])),
 ) -> (Literal, Thm) raise {
   let lit = x3142
-  (lit, assume(lit))
+  (lit, assume_(lit))
 }
 
 ///|
@@ -22312,7 +22312,7 @@ pub fn relationcongruence(x3249 : String, x3250 : Int64) -> Thm raise {
     (th_1, lit_1)
   }
   let assumelit = (false, (r, xs))
-  let assumeth = assume(assumelit)
+  let assumeth = assume_(assumelit)
   foldl(cong, (assumeth, assumelit), enumerate(ys)).0
 }
 
@@ -28552,7 +28552,7 @@ pub fn[TA] fifoize(
 
 ///|
 /// `finally`
-pub fn[TA] finally(
+pub fn[TA] finally_(
   x4118 : Parameters1,
   x4119 : @list.List[(Int64, TA)],
 ) -> @list.List[TA] raise {
@@ -28607,7 +28607,7 @@ pub fn[TA] matchnet(x4123 : TermNet[TA], x4124 : Term) -> @list.List[TA] raise {
   match (x, y) {
     (TermNet::Net(_, _, None), _) => @list.List([])
     (TermNet::Net(p, _, Some((_, n))), tm) =>
-      finally(p, mat(@list.List([]), @list.List([(n, @list.List([tm]))]))) catch {
+      finally_(p, mat(@list.List([]), @list.List([(n, @list.List([tm]))]))) catch {
         Failure(_) => raise Bug::Bug("Term_net.match: should never fail")
         e => raise e
       }
@@ -28719,7 +28719,7 @@ pub fn[TA] matched(x4136 : TermNet[TA], x4137 : Term) -> @list.List[TA] raise {
   match x {
     TermNet::Net(_, _, None) => @list.List([])
     TermNet::Net(parm, _, Some((_, net))) =>
-      finally(
+      finally_(
         parm,
         mat_v1(
           @list.List([]),
@@ -28829,7 +28829,7 @@ pub fn[TA] unify_v3(x4146 : TermNet[TA], x4147 : Term) -> @list.List[TA] raise {
   match x {
     TermNet::Net(_, _, None) => @list.List([])
     TermNet::Net(parm, _, Some((_, net))) =>
-      finally(
+      finally_(
         parm,
         mat_v2(
           @list.List([]),
@@ -31121,7 +31121,7 @@ pub fn mkneqconv(
     }
     Some(0L) => raise Failure("irreflexive")
     Some(_) => {
-      let th_1 = assume(lit)
+      let th_1 = assume_(lit)
       fn(x4444 : Term) -> (Term, Thm) raise {
         let tm_1 = x4444
         if equal_v14(tm_1, l) {

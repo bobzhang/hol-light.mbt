@@ -4,7 +4,7 @@
 ///|
 /// REVERSE_TABLE
 fn step_1() -> Unit raise {
-  reverse_table_c.set(@define.define(@parser.parse_term("(REVERSE_TABLE (f:num->A) 0 = []) /\\\n   (REVERSE_TABLE f (SUC i) = CONS (f i)  ( REVERSE_TABLE f i))")))
+  reverse_table_c.set(@define.define_(@parser.parse_term("(REVERSE_TABLE (f:num->A) 0 = []) /\\\n   (REVERSE_TABLE f (SUC i) = CONS (f i)  ( REVERSE_TABLE f i))")))
 }
 
 ///|

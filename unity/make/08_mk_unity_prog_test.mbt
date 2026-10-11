@@ -125,7 +125,7 @@ test "Unity/mk_unity_prog matches Unity/mk_unity_prog.ml" {
   log.attempt("DISJA0", () => sthm(@mk_unity_prog.disja0()))
   log.attempt("DISJA", () => sthm(@mk_unity_prog.disja()))
   log.attempt("DISJA_S", () => sthm(@mk_unity_prog.disja_s()))
-  log.attempt("MEMBER", () => sthm(@mk_unity_prog.member()))
+  log.attempt("MEMBER", () => sthm(@mk_unity_prog.member_()))
   log.attempt("UNIQUE", () => sthm(@mk_unity_prog.unique()))
   // END generated theorem list
   let tm = @parser.parse_term

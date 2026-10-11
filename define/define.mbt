@@ -5654,7 +5654,7 @@ let define_c : @lib.Cell[(@kernel.Term) -> @kernel.Thm raise] = @lib.Cell::new(
 
 ///|
 /// `define`
-pub fn define(x : @kernel.Term) -> @kernel.Thm raise {
+pub fn define_(x : @kernel.Term) -> @kernel.Thm raise {
   define_c.get()(x)
 }
 

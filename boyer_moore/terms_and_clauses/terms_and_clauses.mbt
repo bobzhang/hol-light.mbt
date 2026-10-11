@@ -427,13 +427,13 @@ pub fn[TA] rewrite_application(x69 : (TA) -> ((@list.List[String]) -> ((@list.Li
             if (tm2 == tm1) {
               try {
                 let argi = @lib.el(@lib.int63_to_int(@lib.sub63(i, 1L)), args)
-                let constructor = try {
+                let constructor_ = try {
                   @kernel.dest_const(@basics.strip_comb(argi).0).0
                 } catch {
                   Failure(_) => ""
                   e => raise e
                 }
-                let th = @lib.assoc(constructor, constructors)
+                let th = @lib.assoc(constructor_, constructors)
                 let th3_1 = @simp.rewr_conv(th)(tm1)
                 let tm3 = @equal.rhs(@kernel.concl(th3_1))
                 let funcs_p = if @definitions.is_explicit_value(argi) {

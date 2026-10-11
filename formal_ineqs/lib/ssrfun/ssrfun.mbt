@@ -4,7 +4,7 @@
 ///|
 /// oapp
 fn step_1() -> Unit raise {
-  oapp_c.set(@define.define(@parser.parse_term("!f x y. oapp f x (SOME y) = f y /\\ oapp f x NONE = x")))
+  oapp_c.set(@define.define_(@parser.parse_term("!f x y. oapp f x (SOME y) = f y /\\ oapp f x NONE = x")))
 }
 
 ///|

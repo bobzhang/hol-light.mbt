@@ -449,7 +449,7 @@ def setup(f):
         sys.exit(f"package aliases collide for {f}: {dup}")
     text = "import {\n" + "".join(f'  "bobzhang/hol_light/{p}",\n' for p in imports)
     text += '  "moonbitlang/core/list",\n}\n\nimport {\n  "bobzhang/hol_light/testkit",\n} for "test"\n\n'
-    text += 'warnings = "-unused_value-unused_trait_bound-unused_package-unused_error_type"\n'
+    text += 'warnings = "-unused_value-unused_trait_bound-unused_package-unused_error_type-unreachable_code-unused_try-fragile_catch_all-text_segment_excceed-unresolved_type_variable-missing_pattern_field-unused_rest_mark"\n'
     # the translation stays as the translator emits it
     gen = alias + ("_ml" if alias.endswith("test") else "") + ".mbt"
     text += f'\nformatter(ignore: [ "{gen}" ])\n'

@@ -4,7 +4,7 @@
 ///|
 /// montgomery_xz
 fn step_1() -> Unit raise {
-  montgomery_xz_c.set(@define.define(@parser.parse_term("(montgomery_xz (f:A ring) NONE (X,Z) <=>\n        X IN ring_carrier f /\\ Z IN ring_carrier f /\\\n        ~(X = ring_0 f) /\\ Z = ring_0 f) /\\\n  (montgomery_xz f (SOME(x,y:A)) (X,Z) <=>\n        X IN ring_carrier f /\\ Z IN ring_carrier f /\\\n        ~(Z = ring_0 f) /\\ ring_div f X Z = x)")))
+  montgomery_xz_c.set(@define.define_(@parser.parse_term("(montgomery_xz (f:A ring) NONE (X,Z) <=>\n        X IN ring_carrier f /\\ Z IN ring_carrier f /\\\n        ~(X = ring_0 f) /\\ Z = ring_0 f) /\\\n  (montgomery_xz f (SOME(x,y:A)) (X,Z) <=>\n        X IN ring_carrier f /\\ Z IN ring_carrier f /\\\n        ~(Z = ring_0 f) /\\ ring_div f X Z = x)")))
 }
 
 ///|
@@ -35,7 +35,7 @@ pub fn montgomery_xz_in_carrier() -> @kernel.Thm {
 ///|
 /// montgomery_xzdouble
 fn step_3() -> Unit raise {
-  montgomery_xzdouble_c.set(@define.define(@parser.parse_term("montgomery_xzdouble (f,a:A,b:A) (X,Z) =\n        ring_pow f (ring_sub f (ring_pow f X 2) (ring_pow f Z 2)) 2,\n        ring_mul f (ring_mul f (ring_of_num f 4) (ring_mul f X Z))\n                   (ring_add f (ring_pow f X 2)\n                   (ring_add f (ring_mul f a\n                         (ring_mul f X Z)) (ring_pow f Z 2)))")))
+  montgomery_xzdouble_c.set(@define.define_(@parser.parse_term("montgomery_xzdouble (f,a:A,b:A) (X,Z) =\n        ring_pow f (ring_sub f (ring_pow f X 2) (ring_pow f Z 2)) 2,\n        ring_mul f (ring_mul f (ring_of_num f 4) (ring_mul f X Z))\n                   (ring_add f (ring_pow f X 2)\n                   (ring_add f (ring_mul f a\n                         (ring_mul f X Z)) (ring_pow f Z 2)))")))
 }
 
 ///|
@@ -50,7 +50,7 @@ pub fn montgomery_xzdouble() -> @kernel.Thm {
 ///|
 /// montgomery_xzdiffadd
 fn step_4() -> Unit raise {
-  montgomery_xzdiffadd_c.set(@define.define(@parser.parse_term("montgomery_xzdiffadd (f:A ring,a:A,b:A) (X,Z) (Xm,Zm) (Xn,Zn) =\n        ring_mul f (ring_mul f (ring_of_num f 4) Z)\n                   (ring_pow f (ring_sub f (ring_mul f Xm Xn)\n                                           (ring_mul f Zm Zn)) 2),\n        ring_mul f (ring_mul f (ring_of_num f 4) X)\n                   (ring_pow f (ring_sub f (ring_mul f Xm Zn)\n                                           (ring_mul f Xn Zm)) 2)")))
+  montgomery_xzdiffadd_c.set(@define.define_(@parser.parse_term("montgomery_xzdiffadd (f:A ring,a:A,b:A) (X,Z) (Xm,Zm) (Xn,Zn) =\n        ring_mul f (ring_mul f (ring_of_num f 4) Z)\n                   (ring_pow f (ring_sub f (ring_mul f Xm Xn)\n                                           (ring_mul f Zm Zn)) 2),\n        ring_mul f (ring_mul f (ring_of_num f 4) X)\n                   (ring_pow f (ring_sub f (ring_mul f Xm Zn)\n                                           (ring_mul f Xn Zm)) 2)")))
 }
 
 ///|
@@ -208,7 +208,7 @@ pub fn montgomery_xzdiffadd_group() -> @kernel.Thm {
 ///|
 /// montgomery_xmap
 fn step_9() -> Unit raise {
-  montgomery_xmap_c.set(@define.define(@parser.parse_term("montgomery_xmap (f:A ring) NONE = ring_0 f /\\\n  montgomery_xmap f (SOME(x:A,y:A)) = x")))
+  montgomery_xmap_c.set(@define.define_(@parser.parse_term("montgomery_xmap (f:A ring) NONE = ring_0 f /\\\n  montgomery_xmap f (SOME(x:A,y:A)) = x")))
 }
 
 ///|

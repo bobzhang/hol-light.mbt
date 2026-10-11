@@ -98,7 +98,7 @@ fn step_9() -> Unit raise {
 ///|
 /// holds
 fn step_10() -> Unit raise {
-  holds_c.set(@define.define(@parser.parse_term("(holds (W,R) V False w <=> F) /\\\n  (holds (W,R) V True w <=> T) /\\\n  (holds (W,R) V (Atom a) w <=> V a w) /\\\n  (holds (W,R) V (Not p) w <=> ~(holds (W,R) V p w)) /\\\n  (holds (W,R) V (p && q) w <=> holds (W,R) V p w /\\ holds (W,R) V q w) /\\\n  (holds (W,R) V (p || q) w <=> holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n  (holds (W,R) V (p --> q) w <=> holds (W,R) V p w ==> holds (W,R) V q w) /\\\n  (holds (W,R) V (p <-> q) w <=> holds (W,R) V p w <=> holds (W,R) V q w) /\\\n  (holds (W,R) V (Box p) w <=>\n        !w'. w' IN W /\\ R w w' ==> holds (W,R) V p w') /\\\n  (holds (W,R) V (Diamond p) w <=>\n        ?w'. w' IN W /\\ R w w' /\\ holds (W,R) V p w')")))
+  holds_c.set(@define.define_(@parser.parse_term("(holds (W,R) V False w <=> F) /\\\n  (holds (W,R) V True w <=> T) /\\\n  (holds (W,R) V (Atom a) w <=> V a w) /\\\n  (holds (W,R) V (Not p) w <=> ~(holds (W,R) V p w)) /\\\n  (holds (W,R) V (p && q) w <=> holds (W,R) V p w /\\ holds (W,R) V q w) /\\\n  (holds (W,R) V (p || q) w <=> holds (W,R) V p w \\/ holds (W,R) V q w) /\\\n  (holds (W,R) V (p --> q) w <=> holds (W,R) V p w ==> holds (W,R) V q w) /\\\n  (holds (W,R) V (p <-> q) w <=> holds (W,R) V p w <=> holds (W,R) V q w) /\\\n  (holds (W,R) V (Box p) w <=>\n        !w'. w' IN W /\\ R w w' ==> holds (W,R) V p w') /\\\n  (holds (W,R) V (Diamond p) w <=>\n        ?w'. w' IN W /\\ R w w' /\\ holds (W,R) V p w')")))
 }
 
 ///|

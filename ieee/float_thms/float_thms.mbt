@@ -523,7 +523,7 @@ pub fn float_not_zero() -> @kernel.Thm {
 ///|
 /// is_greatest_e
 fn step_26() -> Unit raise {
-  is_greatest_e_c.set(@define.define(@parser.parse_term("is_greatest_e (fmt:flformat) (x:real) (e:int) =\n  (&(flr fmt) ipow e <= abs(x) /\\ !(e':int). &(flr fmt) ipow e' <= abs(x)\n     ==> e' <= e)")))
+  is_greatest_e_c.set(@define.define_(@parser.parse_term("is_greatest_e (fmt:flformat) (x:real) (e:int) =\n  (&(flr fmt) ipow e <= abs(x) /\\ !(e':int). &(flr fmt) ipow e' <= abs(x)\n     ==> e' <= e)")))
 }
 
 ///|
@@ -731,7 +731,7 @@ pub fn float_greatest_e_neg() -> @kernel.Thm {
 ///|
 /// is_greatest_m
 fn step_30() -> Unit raise {
-  is_greatest_m_c.set(@define.define(@parser.parse_term("is_greatest_m (fmt:flformat) (x:real) (m:num) =\n  (&m * &(flr fmt) ipow (greatest_e(fmt) x) <= abs(x) /\\\n  !(m':num). &m' * &(flr fmt) ipow (greatest_e(fmt) x) <= abs(x) ==>\n   m' <= m)")))
+  is_greatest_m_c.set(@define.define_(@parser.parse_term("is_greatest_m (fmt:flformat) (x:real) (m:num) =\n  (&m * &(flr fmt) ipow (greatest_e(fmt) x) <= abs(x) /\\\n  !(m':num). &m' * &(flr fmt) ipow (greatest_e(fmt) x) <= abs(x) ==>\n   m' <= m)")))
 }
 
 ///|
@@ -3059,7 +3059,7 @@ pub fn closer_between_5() -> @kernel.Thm {
 ///|
 /// fl_is_closest
 fn step_50() -> Unit raise {
-  fl_is_closest_c.set(@define.define(@parser.parse_term("fl_is_closest (fmt:flformat) (x:real) (y:real) =\n  (!(s:real). is_float(fmt) s /\\ ~(s = y) ==>\n     ((closer y s x) \\/ ~(closer s y x)))")))
+  fl_is_closest_c.set(@define.define_(@parser.parse_term("fl_is_closest (fmt:flformat) (x:real) (y:real) =\n  (!(s:real). is_float(fmt) s /\\ ~(s = y) ==>\n     ((closer y s x) \\/ ~(closer s y x)))")))
 }
 
 ///|
@@ -5905,7 +5905,7 @@ pub fn float_is_closest_fixed() -> @kernel.Thm {
 ///|
 /// fl_norm_frac
 fn step_62() -> Unit raise {
-  fl_norm_frac_c.set(@define.define(@parser.parse_term("fl_norm_frac (fmt:flformat) (y:real) =\n  ( (greatest_m(fmt) y) * (flr fmt) EXP ((flp fmt) - 1) +\n    (ff (to_fformat fmt (greatest_e(fmt) y)) (greatest_r(fmt) y)) )")))
+  fl_norm_frac_c.set(@define.define_(@parser.parse_term("fl_norm_frac (fmt:flformat) (y:real) =\n  ( (greatest_m(fmt) y) * (flr fmt) EXP ((flp fmt) - 1) +\n    (ff (to_fformat fmt (greatest_e(fmt) y)) (greatest_r(fmt) y)) )")))
 }
 
 ///|
@@ -5920,7 +5920,7 @@ pub fn fl_norm_frac() -> @kernel.Thm {
 ///|
 /// fl_to_even
 fn step_63() -> Unit raise {
-  fl_to_even_c.set(@define.define(@parser.parse_term("fl_to_even (fmt:flformat) (x:real) (y:real) = (!(y2:real).\n   is_float(fmt) y2 /\\\n   (fl_is_closest(fmt) x y) /\\\n   (fl_is_closest(fmt) x y2) /\\\n   ~(y2 = y) ==>\n   (EVEN (fl_norm_frac(fmt) y)))")))
+  fl_to_even_c.set(@define.define_(@parser.parse_term("fl_to_even (fmt:flformat) (x:real) (y:real) = (!(y2:real).\n   is_float(fmt) y2 /\\\n   (fl_is_closest(fmt) x y) /\\\n   (fl_is_closest(fmt) x y2) /\\\n   ~(y2 = y) ==>\n   (EVEN (fl_norm_frac(fmt) y)))")))
 }
 
 ///|
@@ -6152,7 +6152,7 @@ pub fn float_rd_nearest_even() -> @kernel.Thm {
 ///|
 /// fl_to_zero
 fn step_65() -> Unit raise {
-  fl_to_zero_c.set(@define.define(@parser.parse_term("fl_to_zero (fmt:flformat) (x:real) (y:real) =\n  (if (&0 <= x)\n   then\n     (&0 <= y) /\\ (y <= x) /\\\n       !(y':real). is_float(fmt) y' /\\ y' <= x ==> y' <= y\n   else\n     (y <= &0) /\\ (x <= y) /\\\n       !(y':real). is_float(fmt) y' /\\ x <= y' ==> y <= y')")))
+  fl_to_zero_c.set(@define.define_(@parser.parse_term("fl_to_zero (fmt:flformat) (x:real) (y:real) =\n  (if (&0 <= x)\n   then\n     (&0 <= y) /\\ (y <= x) /\\\n       !(y':real). is_float(fmt) y' /\\ y' <= x ==> y' <= y\n   else\n     (y <= &0) /\\ (x <= y) /\\\n       !(y':real). is_float(fmt) y' /\\ x <= y' ==> y <= y')")))
 }
 
 ///|
@@ -6872,7 +6872,7 @@ pub fn float_rd_zero_exists() -> @kernel.Thm {
 ///|
 /// fl_to_pinf
 fn step_67() -> Unit raise {
-  fl_to_pinf_c.set(@define.define(@parser.parse_term("fl_to_pinf (fmt:flformat) (x:real) (y:real) =\n  (x <= y /\\ !(y':real). is_float(fmt) y' /\\ x <= y' ==> y <= y')")))
+  fl_to_pinf_c.set(@define.define_(@parser.parse_term("fl_to_pinf (fmt:flformat) (x:real) (y:real) =\n  (x <= y /\\ !(y':real). is_float(fmt) y' /\\ x <= y' ==> y <= y')")))
 }
 
 ///|
@@ -7378,7 +7378,7 @@ pub fn float_rd_pinf_exists() -> @kernel.Thm {
 ///|
 /// fl_to_ninf
 fn step_69() -> Unit raise {
-  fl_to_ninf_c.set(@define.define(@parser.parse_term("fl_to_ninf (fmt:flformat) (x:real) (y:real) =\n  (y <= x /\\ !(y':real). is_float(fmt) y' /\\ y' <= x ==> y' <= y)")))
+  fl_to_ninf_c.set(@define.define_(@parser.parse_term("fl_to_ninf (fmt:flformat) (x:real) (y:real) =\n  (y <= x /\\ !(y':real). is_float(fmt) y' /\\ y' <= x ==> y' <= y)")))
 }
 
 ///|

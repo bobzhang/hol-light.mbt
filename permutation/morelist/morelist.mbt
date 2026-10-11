@@ -125,7 +125,7 @@ pub fn list_wf() -> @kernel.Thm {
 ///|
 /// DELETE1
 fn step_8() -> Unit raise {
-  delete1_c.set(@define.define(@parser.parse_term("(!x. DELETE1 x [] = []) /\\\n   (!x h t. DELETE1 x (h :: t) = if x = h then t\n                                          else h :: DELETE1 x t)")))
+  delete1_c.set(@define.define_(@parser.parse_term("(!x. DELETE1 x [] = []) /\\\n   (!x h t. DELETE1 x (h :: t) = if x = h then t\n                                          else h :: DELETE1 x t)")))
 }
 
 ///|
@@ -290,7 +290,7 @@ pub fn all_delete1_all_imp() -> @kernel.Thm {
 ///|
 /// COUNT
 fn step_17() -> Unit raise {
-  count_c.set(@define.define(@parser.parse_term("(!x. COUNT x [] = 0) /\\\n   (!x h t. COUNT x (CONS h t) = if x=h then SUC (COUNT x t) else COUNT x t)")))
+  count_c.set(@define.define_(@parser.parse_term("(!x. COUNT x [] = 0) /\\\n   (!x h t. COUNT x (CONS h t) = if x=h then SUC (COUNT x t) else COUNT x t)")))
 }
 
 ///|

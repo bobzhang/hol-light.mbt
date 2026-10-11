@@ -7516,7 +7516,7 @@ pub fn real_derivative() -> @kernel.Thm {
 ///|
 /// higher_real_derivative
 fn step_368() -> Unit raise {
-  higher_real_derivative_c.set(@define.define(@parser.parse_term("higher_real_derivative 0 f = f /\\\n  (!n. higher_real_derivative (SUC n) f =\n                real_derivative (higher_real_derivative n f))")))
+  higher_real_derivative_c.set(@define.define_(@parser.parse_term("higher_real_derivative 0 f = f /\\\n  (!n. higher_real_derivative (SUC n) f =\n                real_derivative (higher_real_derivative n f))")))
 }
 
 ///|
@@ -16366,7 +16366,7 @@ pub fn reallim_zero_neginfinity() -> @kernel.Thm {
 ///|
 /// closed_real_segment
 fn step_695() -> Unit raise {
-  closed_real_segment_c.set(@define.define(@parser.parse_term("closed_real_segment[a,b] = {(&1 - u) * a + u * b | &0 <= u /\\ u <= &1}")))
+  closed_real_segment_c.set(@define.define_(@parser.parse_term("closed_real_segment[a,b] = {(&1 - u) * a + u * b | &0 <= u /\\ u <= &1}")))
 }
 
 ///|
@@ -32929,7 +32929,7 @@ pub fn nowhere_dense_algebraic_variety() -> @kernel.Thm {
 ///|
 /// bernoulli
 fn step_1228() -> Unit raise {
-  bernoulli_c.set(@define.define(@parser.parse_term("(!x. bernoulli 0 x = &1) /\\\n  (!n x. bernoulli (n + 1) x =\n          x pow (n + 1) -\n          sum(0..n) (\\k. &(binom(n+2,k)) * bernoulli k x) / (&n + &2))")))
+  bernoulli_c.set(@define.define_(@parser.parse_term("(!x. bernoulli 0 x = &1) /\\\n  (!n x. bernoulli (n + 1) x =\n          x pow (n + 1) -\n          sum(0..n) (\\k. &(binom(n+2,k)) * bernoulli k x) / (&n + &2))")))
 }
 
 ///|

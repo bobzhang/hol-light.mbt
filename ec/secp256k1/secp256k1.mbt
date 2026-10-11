@@ -22,7 +22,7 @@ fn step_3() -> Unit raise {
 ///|
 /// p_256k1
 fn step_4() -> Unit raise {
-  p_256k1_c.set(@define.define(@parser.parse_term("p_256k1 = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F")))
+  p_256k1_c.set(@define.define_(@parser.parse_term("p_256k1 = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFFFFFC2F")))
 }
 
 ///|
@@ -37,7 +37,7 @@ pub fn p_256k1() -> @kernel.Thm {
 ///|
 /// n_256k1
 fn step_5() -> Unit raise {
-  n_256k1_c.set(@define.define(@parser.parse_term("n_256k1 = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141")))
+  n_256k1_c.set(@define.define_(@parser.parse_term("n_256k1 = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141")))
 }
 
 ///|
@@ -52,7 +52,7 @@ pub fn n_256k1() -> @kernel.Thm {
 ///|
 /// G_256K1
 fn step_6() -> Unit raise {
-  g_256k1_c.set(@define.define(@parser.parse_term("G_256K1 = SOME(&0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798:int,&0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8:int)")))
+  g_256k1_c.set(@define.define_(@parser.parse_term("G_256K1 = SOME(&0x79BE667EF9DCBBAC55A06295CE870B07029BFCDB2DCE28D959F2815B16F81798:int,&0x483ADA7726A3C4655DA4FBFC0E1108A8FD17B448A68554199C47D08FFB10D4B8:int)")))
 }
 
 ///|
@@ -67,7 +67,7 @@ pub fn g_256k1() -> @kernel.Thm {
 ///|
 /// secp256k1
 fn step_7() -> Unit raise {
-  secp256k1_c.set(@define.define(@parser.parse_term("secp256k1 = (integer_mod_ring p_256k1,&0:int,&7:int)")))
+  secp256k1_c.set(@define.define_(@parser.parse_term("secp256k1 = (integer_mod_ring p_256k1,&0:int,&7:int)")))
 }
 
 ///|
@@ -82,7 +82,7 @@ pub fn secp256k1() -> @kernel.Thm {
 ///|
 /// p256k1_beta
 fn step_8() -> Unit raise {
-  p256k1_beta_c.set(@define.define(@parser.parse_term("p256k1_beta = 0x7ae96a2b657c07106e64479eac3434e99cf0497512f58995c1396c28719501ee")))
+  p256k1_beta_c.set(@define.define_(@parser.parse_term("p256k1_beta = 0x7ae96a2b657c07106e64479eac3434e99cf0497512f58995c1396c28719501ee")))
 }
 
 ///|
@@ -97,7 +97,7 @@ pub fn p256k1_beta() -> @kernel.Thm {
 ///|
 /// p256k1_lambda
 fn step_9() -> Unit raise {
-  p256k1_lambda_c.set(@define.define(@parser.parse_term("p256k1_lambda = 0x5363ad4cc05c30e0a5261c028812645a122e22ea20816678df02967c1b23bd72")))
+  p256k1_lambda_c.set(@define.define_(@parser.parse_term("p256k1_lambda = 0x5363ad4cc05c30e0a5261c028812645a122e22ea20816678df02967c1b23bd72")))
 }
 
 ///|
@@ -196,7 +196,7 @@ pub fn prime_n256k1() -> @kernel.Thm {
 ///|
 /// p256k1_group
 fn step_14() -> Unit raise {
-  p256k1_group_c.set(@define.define(@parser.parse_term("p256k1_group = weierstrass_group(integer_mod_ring p_256k1,&0,&7)")))
+  p256k1_group_c.set(@define.define_(@parser.parse_term("p256k1_group = weierstrass_group(integer_mod_ring p_256k1,&0,&7)")))
 }
 
 ///|

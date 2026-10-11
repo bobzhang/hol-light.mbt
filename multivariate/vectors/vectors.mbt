@@ -25868,7 +25868,7 @@ pub fn matrix_inv_mul_rinv() -> @kernel.Thm {
 ///|
 /// infnorm
 fn step_1107() -> Unit raise {
-  infnorm_c.set(@define.define(@parser.parse_term("infnorm (x:real^N) = sup { abs(x$i) | 1 <= i /\\ i <= dimindex(:N) }")))
+  infnorm_c.set(@define.define_(@parser.parse_term("infnorm (x:real^N) = sup { abs(x$i) | 1 <= i /\\ i <= dimindex(:N) }")))
 }
 
 ///|

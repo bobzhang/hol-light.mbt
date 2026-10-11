@@ -112,7 +112,7 @@ pub fn g_256() -> @kernel.Thm {
 ///|
 /// nistp256
 fn step_10() -> Unit raise {
-  nistp256_c.set(@define.define(@parser.parse_term("nistp256 =\n    (integer_mod_ring p_256,\n     ring_neg (integer_mod_ring p_256) (&3),\n     &b_256:int)")))
+  nistp256_c.set(@define.define_(@parser.parse_term("nistp256 =\n    (integer_mod_ring p_256,\n     ring_neg (integer_mod_ring p_256) (&3),\n     &b_256:int)")))
 }
 
 ///|
@@ -212,7 +212,7 @@ pub fn sanity_check_256() -> @kernel.Thm {
 ///|
 /// p256_group
 fn step_15() -> Unit raise {
-  p256_group_c.set(@define.define(@parser.parse_term("p256_group =\n   weierstrass_group\n    (integer_mod_ring p_256,\n     ring_neg (integer_mod_ring p_256) (&3),\n     &b_256)")))
+  p256_group_c.set(@define.define_(@parser.parse_term("p256_group =\n   weierstrass_group\n    (integer_mod_ring p_256,\n     ring_neg (integer_mod_ring p_256) (&3),\n     &b_256)")))
 }
 
 ///|

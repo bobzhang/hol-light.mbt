@@ -962,7 +962,7 @@ pub fn fixed_ff_zero() -> @kernel.Thm {
 ///|
 /// FIXED_CORR
 fn step_34() -> Unit raise {
-  fixed_corr_c.set(@define.define(@parser.parse_term("fixed_corr (fmt:fformat) (n:num) =\n  (if (n = 0)\n   then\n     &0\n   else if (ODD n)\n   then\n     -- &((n + 1) DIV 2) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)\n   else\n     &(n DIV 2) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1))")))
+  fixed_corr_c.set(@define.define_(@parser.parse_term("fixed_corr (fmt:fformat) (n:num) =\n  (if (n = 0)\n   then\n     &0\n   else if (ODD n)\n   then\n     -- &((n + 1) DIV 2) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1)\n   else\n     &(n DIV 2) * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1))")))
 }
 
 ///|
@@ -977,7 +977,7 @@ pub fn fixed_corr() -> @kernel.Thm {
 ///|
 /// FIXED_PREIMAGE
 fn step_35() -> Unit raise {
-  fixed_preimage_c.set(@define.define(@parser.parse_term("fixed_preimage (fmt:fformat) =\n  { n:num | 0 <= n /\\ n <= 2 * (fr fmt) EXP ((fp fmt) - 1) }")))
+  fixed_preimage_c.set(@define.define_(@parser.parse_term("fixed_preimage (fmt:fformat) =\n  { n:num | 0 <= n /\\ n <= 2 * (fr fmt) EXP ((fp fmt) - 1) }")))
 }
 
 ///|
@@ -2754,7 +2754,7 @@ pub fn closer_between_2() -> @kernel.Thm {
 ///|
 /// is_closest
 fn step_65() -> Unit raise {
-  is_closest_c.set(@define.define(@parser.parse_term("is_closest (fmt:fformat) (x:real) (y:real) =\n         (!(s:real). (s IN (fixed fmt)) /\\ ~(s = y) ==>\n                                     ((closer y s x) \\/ ~(closer s y x)))")))
+  is_closest_c.set(@define.define_(@parser.parse_term("is_closest (fmt:fformat) (x:real) (y:real) =\n         (!(s:real). (s IN (fixed fmt)) /\\ ~(s = y) ==>\n                                     ((closer y s x) \\/ ~(closer s y x)))")))
 }
 
 ///|
@@ -2769,7 +2769,7 @@ pub fn is_closest() -> @kernel.Thm {
 ///|
 /// to_even
 fn step_66() -> Unit raise {
-  to_even_c.set(@define.define(@parser.parse_term("to_even (fmt:fformat) (x:real) (y:real) = (!(y2:real) (f:num).\n  (y2 IN (fixed fmt)) /\\ (is_closest(fmt) x y) /\\ (is_closest(fmt) x y2) /\\\n   ~(y2 = y) /\\\n    (is_frac(fmt) y f) ==> (EVEN f))")))
+  to_even_c.set(@define.define_(@parser.parse_term("to_even (fmt:fformat) (x:real) (y:real) = (!(y2:real) (f:num).\n  (y2 IN (fixed fmt)) /\\ (is_closest(fmt) x y) /\\ (is_closest(fmt) x y2) /\\\n   ~(y2 = y) /\\\n    (is_frac(fmt) y f) ==> (EVEN f))")))
 }
 
 ///|
@@ -3429,7 +3429,7 @@ pub fn fixed_rd_nearest_exists() -> @kernel.Thm {
 ///|
 /// to_zero
 fn step_72() -> Unit raise {
-  to_zero_c.set(@define.define(@parser.parse_term("to_zero (fmt:fformat) (x:real) (y:real) =\n  (if (&0 <= x)\n   then\n     (&0 <= y) /\\ (y <= x) /\\\n       !(y':real). y' IN (fixed fmt) /\\ y' <= x ==> y' <= y\n   else\n     (y <= &0) /\\ (x <= y) /\\\n       !(y':real). y' IN (fixed fmt) /\\ x <= y' ==> y <= y')")))
+  to_zero_c.set(@define.define_(@parser.parse_term("to_zero (fmt:fformat) (x:real) (y:real) =\n  (if (&0 <= x)\n   then\n     (&0 <= y) /\\ (y <= x) /\\\n       !(y':real). y' IN (fixed fmt) /\\ y' <= x ==> y' <= y\n   else\n     (y <= &0) /\\ (x <= y) /\\\n       !(y':real). y' IN (fixed fmt) /\\ x <= y' ==> y <= y')")))
 }
 
 ///|
@@ -3516,7 +3516,7 @@ pub fn fixed_rd_zero_exists() -> @kernel.Thm {
 ///|
 /// to_pinf
 fn step_74() -> Unit raise {
-  to_pinf_c.set(@define.define(@parser.parse_term("to_pinf (fmt:fformat) (x:real) (y:real) =\n  (x <= y /\\ !(y':real). y' IN (fixed fmt) /\\ x <= y' ==> y <= y')")))
+  to_pinf_c.set(@define.define_(@parser.parse_term("to_pinf (fmt:fformat) (x:real) (y:real) =\n  (x <= y /\\ !(y':real). y' IN (fixed fmt) /\\ x <= y' ==> y <= y')")))
 }
 
 ///|
@@ -3564,7 +3564,7 @@ pub fn fixed_rd_pinf_exists() -> @kernel.Thm {
 ///|
 /// to_ninf
 fn step_76() -> Unit raise {
-  to_ninf_c.set(@define.define(@parser.parse_term("to_ninf (fmt:fformat) (x:real) (y:real) =\n  (y <= x /\\ !(y':real). y' IN (fixed fmt) /\\ y' <= x ==> y' <= y)")))
+  to_ninf_c.set(@define.define_(@parser.parse_term("to_ninf (fmt:fformat) (x:real) (y:real) =\n  (y <= x /\\ !(y':real). y' IN (fixed fmt) /\\ y' <= x ==> y' <= y)")))
 }
 
 ///|

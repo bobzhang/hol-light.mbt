@@ -724,7 +724,7 @@ let assume_c : @lib.Cell[(Mterm) -> Step raise] = @lib.Cell::new("assume")
 
 ///|
 /// `assume`
-pub fn assume(x : Mterm) -> Step raise {
+pub fn assume_(x : Mterm) -> Step raise {
   (assume_c.get())(x)
 }
 

@@ -434,7 +434,7 @@ pub fn expand_shift_conv(x : @kernel.Term) -> @kernel.Thm raise {
 /// word_shladd
 fn step_3() -> Unit raise {
   word_shladd_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "word_shladd (x:N word) b = word_or (word_shl x 1) (word(bitval b))",
       ),

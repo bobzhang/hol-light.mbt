@@ -4,7 +4,7 @@
 ///|
 /// edwards_point
 fn step_1() -> Unit raise {
-  edwards_point_c.set(@define.define(@parser.parse_term("edwards_point f (x:A,y) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f")))
+  edwards_point_c.set(@define.define_(@parser.parse_term("edwards_point f (x:A,y) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f")))
 }
 
 ///|
@@ -19,7 +19,7 @@ pub fn edwards_point() -> @kernel.Thm {
 ///|
 /// edwards_curve
 fn step_2() -> Unit raise {
-  edwards_curve_c.set(@define.define(@parser.parse_term("edwards_curve(f:A ring,a:A,d:A) (x,y) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        ring_add f (ring_mul f a (ring_pow f x 2)) (ring_pow f y 2) =\n        ring_add f (ring_1 f)\n          (ring_mul f d (ring_mul f (ring_pow f x 2) (ring_pow f y 2)))")))
+  edwards_curve_c.set(@define.define_(@parser.parse_term("edwards_curve(f:A ring,a:A,d:A) (x,y) <=>\n        x IN ring_carrier f /\\ y IN ring_carrier f /\\\n        ring_add f (ring_mul f a (ring_pow f x 2)) (ring_pow f y 2) =\n        ring_add f (ring_1 f)\n          (ring_mul f d (ring_mul f (ring_pow f x 2) (ring_pow f y 2)))")))
 }
 
 ///|
@@ -34,7 +34,7 @@ pub fn edwards_curve() -> @kernel.Thm {
 ///|
 /// edwards_nonsingular
 fn step_3() -> Unit raise {
-  edwards_nonsingular_c.set(@define.define(@parser.parse_term("edwards_nonsingular (f:A ring,a:A,d:A) <=>\n        (?b. b IN ring_carrier f /\\ ring_pow f b 2 = a) /\\\n        (d = ring_0 f \\/ ~(?c. c IN ring_carrier f /\\ ring_pow f c 2 = d))")))
+  edwards_nonsingular_c.set(@define.define_(@parser.parse_term("edwards_nonsingular (f:A ring,a:A,d:A) <=>\n        (?b. b IN ring_carrier f /\\ ring_pow f b 2 = a) /\\\n        (d = ring_0 f \\/ ~(?c. c IN ring_carrier f /\\ ring_pow f c 2 = d))")))
 }
 
 ///|
@@ -49,7 +49,7 @@ pub fn edwards_nonsingular() -> @kernel.Thm {
 ///|
 /// edwards_0
 fn step_4() -> Unit raise {
-  edwards_0_c.set(@define.define(@parser.parse_term("edwards_0 (f:A ring,a:A,d:A) = (ring_0 f,ring_1 f)")))
+  edwards_0_c.set(@define.define_(@parser.parse_term("edwards_0 (f:A ring,a:A,d:A) = (ring_0 f,ring_1 f)")))
 }
 
 ///|
@@ -64,7 +64,7 @@ pub fn edwards_0() -> @kernel.Thm {
 ///|
 /// edwards_neg
 fn step_5() -> Unit raise {
-  edwards_neg_c.set(@define.define(@parser.parse_term("edwards_neg (f:A ring,a:A,d:A) (x,y:A) = (ring_neg f x,y)")))
+  edwards_neg_c.set(@define.define_(@parser.parse_term("edwards_neg (f:A ring,a:A,d:A) (x,y:A) = (ring_neg f x,y)")))
 }
 
 ///|
@@ -79,7 +79,7 @@ pub fn edwards_neg() -> @kernel.Thm {
 ///|
 /// edwards_add
 fn step_6() -> Unit raise {
-  edwards_add_c.set(@define.define(@parser.parse_term("edwards_add (f:A ring,a:A,d:A) (x1,y1) (x2,y2) =\n   ring_div f (ring_add f (ring_mul f x1 y2) (ring_mul f y1 x2))\n   (ring_add f (ring_1 f)\n   (ring_mul f d (ring_mul f x1 (ring_mul f y1 (ring_mul f x2 y2))))),\n   ring_div f\n   (ring_sub f (ring_mul f y1 y2) (ring_mul f a (ring_mul f x1 x2)))\n   (ring_sub f (ring_1 f)\n   (ring_mul f d (ring_mul f x1 (ring_mul f y1 (ring_mul f x2 y2)))))")))
+  edwards_add_c.set(@define.define_(@parser.parse_term("edwards_add (f:A ring,a:A,d:A) (x1,y1) (x2,y2) =\n   ring_div f (ring_add f (ring_mul f x1 y2) (ring_mul f y1 x2))\n   (ring_add f (ring_1 f)\n   (ring_mul f d (ring_mul f x1 (ring_mul f y1 (ring_mul f x2 y2))))),\n   ring_div f\n   (ring_sub f (ring_mul f y1 y2) (ring_mul f a (ring_mul f x1 x2)))\n   (ring_sub f (ring_1 f)\n   (ring_mul f d (ring_mul f x1 (ring_mul f y1 (ring_mul f x2 y2)))))")))
 }
 
 ///|
@@ -94,7 +94,7 @@ pub fn edwards_add() -> @kernel.Thm {
 ///|
 /// edwards_group
 fn step_7() -> Unit raise {
-  edwards_group_c.set(@define.define(@parser.parse_term("edwards_group (f:A ring,a:A,d:A) =\n        group(edwards_curve(f,a,d),\n              edwards_0(f,a,d),\n              edwards_neg(f,a,d),\n              edwards_add(f,a,d))")))
+  edwards_group_c.set(@define.define_(@parser.parse_term("edwards_group (f:A ring,a:A,d:A) =\n        group(edwards_curve(f,a,d),\n              edwards_0(f,a,d),\n              edwards_neg(f,a,d),\n              edwards_add(f,a,d))")))
 }
 
 ///|

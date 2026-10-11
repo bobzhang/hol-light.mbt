@@ -4,7 +4,7 @@
 ///|
 /// is_valid_fformat
 fn step_1() -> Unit raise {
-  is_valid_fformat_c.set(@define.define(@parser.parse_term("is_valid_fformat (r:num, p:num, e:int) = (1 < r /\\ (EVEN r) /\\ (0 < p))")))
+  is_valid_fformat_c.set(@define.define_(@parser.parse_term("is_valid_fformat (r:num, p:num, e:int) = (1 < r /\\ (EVEN r) /\\ (0 < p))")))
 }
 
 ///|
@@ -36,7 +36,7 @@ pub fn fformat_typbij() -> @kernel.Thm {
 ///|
 /// fr
 fn step_3() -> Unit raise {
-  fr_c.set(@define.define(@parser.parse_term("fr (fmt:fformat) = (FST (dest_fformat fmt))")))
+  fr_c.set(@define.define_(@parser.parse_term("fr (fmt:fformat) = (FST (dest_fformat fmt))")))
 }
 
 ///|
@@ -51,7 +51,7 @@ pub fn fr() -> @kernel.Thm {
 ///|
 /// fp
 fn step_4() -> Unit raise {
-  fp_c.set(@define.define(@parser.parse_term("fp (fmt:fformat) = (FST (SND (dest_fformat fmt)))")))
+  fp_c.set(@define.define_(@parser.parse_term("fp (fmt:fformat) = (FST (SND (dest_fformat fmt)))")))
 }
 
 ///|
@@ -66,7 +66,7 @@ pub fn fp() -> @kernel.Thm {
 ///|
 /// fe
 fn step_5() -> Unit raise {
-  fe_c.set(@define.define(@parser.parse_term("fe (fmt:fformat) = (SND (SND (dest_fformat fmt)))")))
+  fe_c.set(@define.define_(@parser.parse_term("fe (fmt:fformat) = (SND (SND (dest_fformat fmt)))")))
 }
 
 ///|
@@ -81,7 +81,7 @@ pub fn fe() -> @kernel.Thm {
 ///|
 /// is_frac
 fn step_6() -> Unit raise {
-  is_frac_c.set(@define.define(@parser.parse_term("is_frac (fmt:fformat) (x:real) (f:num) =\n  (f <= (fr fmt) EXP ((fp fmt) - 1) /\\\n      abs(x) = &f * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1))")))
+  is_frac_c.set(@define.define_(@parser.parse_term("is_frac (fmt:fformat) (x:real) (f:num) =\n  (f <= (fr fmt) EXP ((fp fmt) - 1) /\\\n      abs(x) = &f * &(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1))")))
 }
 
 ///|
@@ -96,7 +96,7 @@ pub fn is_frac() -> @kernel.Thm {
 ///|
 /// ff
 fn step_7() -> Unit raise {
-  ff_c.set(@define.define(@parser.parse_term("ff (fmt:fformat) (x:real) = (@(f:num) . is_frac(fmt) x f)")))
+  ff_c.set(@define.define_(@parser.parse_term("ff (fmt:fformat) (x:real) = (@(f:num) . is_frac(fmt) x f)")))
 }
 
 ///|
@@ -111,7 +111,7 @@ pub fn ff() -> @kernel.Thm {
 ///|
 /// is_fixed
 fn step_8() -> Unit raise {
-  is_fixed_c.set(@define.define(@parser.parse_term("is_fixed (fmt:fformat) (x:real) = (?(f:num) . is_frac(fmt) x f)")))
+  is_fixed_c.set(@define.define_(@parser.parse_term("is_fixed (fmt:fformat) (x:real) = (?(f:num) . is_frac(fmt) x f)")))
 }
 
 ///|
@@ -141,7 +141,7 @@ pub fn is_finite_fixed() -> @kernel.Term {
 ///|
 /// fulp
 fn step_10() -> Unit raise {
-  fulp_c.set(@define.define(@parser.parse_term("fulp (fmt:fformat) = (&(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1))")))
+  fulp_c.set(@define.define_(@parser.parse_term("fulp (fmt:fformat) = (&(fr fmt) ipow ((fe fmt) - &(fp fmt) + &1))")))
 }
 
 ///|
@@ -156,7 +156,7 @@ pub fn fulp() -> @kernel.Thm {
 ///|
 /// finf
 fn step_11() -> Unit raise {
-  finf_c.set(@define.define(@parser.parse_term("finf (fmt:fformat) = (&(fr fmt) ipow (fe fmt))")))
+  finf_c.set(@define.define_(@parser.parse_term("finf (fmt:fformat) = (&(fr fmt) ipow (fe fmt))")))
 }
 
 ///|
@@ -171,7 +171,7 @@ pub fn finf() -> @kernel.Thm {
 ///|
 /// fixed
 fn step_12() -> Unit raise {
-  fixed_c.set(@define.define(@parser.parse_term("fixed (fmt:fformat) = { x | is_fixed(fmt) x }")))
+  fixed_c.set(@define.define_(@parser.parse_term("fixed (fmt:fformat) = { x | is_fixed(fmt) x }")))
 }
 
 ///|
@@ -186,7 +186,7 @@ pub fn fixed() -> @kernel.Thm {
 ///|
 /// is_lb
 fn step_13() -> Unit raise {
-  is_lb_c.set(@define.define(@parser.parse_term("is_lb (fmt:fformat) (x:real) (y:real) = (y IN (fixed fmt) /\\ y <= x)")))
+  is_lb_c.set(@define.define_(@parser.parse_term("is_lb (fmt:fformat) (x:real) (y:real) = (y IN (fixed fmt) /\\ y <= x)")))
 }
 
 ///|
@@ -201,7 +201,7 @@ pub fn is_lb() -> @kernel.Thm {
 ///|
 /// is_glb
 fn step_14() -> Unit raise {
-  is_glb_c.set(@define.define(@parser.parse_term("is_glb (fmt:fformat) (x:real) (y:real) =\n  (is_lb(fmt) x y /\\ (!y'. is_lb(fmt) x y' ==> y' <= y))")))
+  is_glb_c.set(@define.define_(@parser.parse_term("is_glb (fmt:fformat) (x:real) (y:real) =\n  (is_lb(fmt) x y /\\ (!y'. is_lb(fmt) x y' ==> y' <= y))")))
 }
 
 ///|
@@ -216,7 +216,7 @@ pub fn is_glb() -> @kernel.Thm {
 ///|
 /// is_ub
 fn step_15() -> Unit raise {
-  is_ub_c.set(@define.define(@parser.parse_term("is_ub (fmt:fformat) (x:real) (y:real) = (y IN (fixed fmt) /\\ x <= y)")))
+  is_ub_c.set(@define.define_(@parser.parse_term("is_ub (fmt:fformat) (x:real) (y:real) = (y IN (fixed fmt) /\\ x <= y)")))
 }
 
 ///|
@@ -231,7 +231,7 @@ pub fn is_ub() -> @kernel.Thm {
 ///|
 /// is_lub
 fn step_16() -> Unit raise {
-  is_lub_c.set(@define.define(@parser.parse_term("is_lub (fmt:fformat) (x:real) (y:real) =\n  (is_ub(fmt) x y /\\ (!y'. is_ub(fmt) x y' ==> y <= y'))")))
+  is_lub_c.set(@define.define_(@parser.parse_term("is_lub (fmt:fformat) (x:real) (y:real) =\n  (is_ub(fmt) x y /\\ (!y'. is_ub(fmt) x y' ==> y <= y'))")))
 }
 
 ///|
@@ -246,7 +246,7 @@ pub fn is_lub() -> @kernel.Thm {
 ///|
 /// glb
 fn step_17() -> Unit raise {
-  glb_c.set(@define.define(@parser.parse_term("glb (fmt:fformat) (x:real) = sup({y:real | y IN (fixed fmt) /\\ y <= x})")))
+  glb_c.set(@define.define_(@parser.parse_term("glb (fmt:fformat) (x:real) = sup({y:real | y IN (fixed fmt) /\\ y <= x})")))
 }
 
 ///|
@@ -261,7 +261,7 @@ pub fn glb() -> @kernel.Thm {
 ///|
 /// lub
 fn step_18() -> Unit raise {
-  lub_c.set(@define.define(@parser.parse_term("lub (fmt:fformat) (x:real) = inf({y:real | y IN (fixed fmt) /\\ x <= y})")))
+  lub_c.set(@define.define_(@parser.parse_term("lub (fmt:fformat) (x:real) = inf({y:real | y IN (fixed fmt) /\\ x <= y})")))
 }
 
 ///|
@@ -302,7 +302,7 @@ fn step_19() -> Unit raise {
 ///|
 /// fround
 fn step_20() -> Unit raise {
-  fround_c.set(@define.define(@parser.parse_term("((fround (fmt:fformat) (To_near) (x:real) =\n        (let lo = (glb(fmt) x)\n         and hi = (lub(fmt) x)\n         in\n           (if (closer lo hi x)\n            then\n              lo\n            else if (closer hi lo x)\n            then\n              hi\n            else if (EVEN (ff(fmt) lo))\n            then\n              lo\n            else\n              hi))) /\\\n\n      (fround (fmt:fformat) (To_zero) (x:real) =\n          (if (&0 <= x)\n           then (glb(fmt) x)\n           else (lub(fmt) x))) /\\\n\n      (fround (fmt:fformat) (To_pinf) (x:real) =\n          (lub(fmt) x)) /\\\n\n      (fround (fmt:fformat) (To_ninf) (x:real) =\n          (glb(fmt) x)))")))
+  fround_c.set(@define.define_(@parser.parse_term("((fround (fmt:fformat) (To_near) (x:real) =\n        (let lo = (glb(fmt) x)\n         and hi = (lub(fmt) x)\n         in\n           (if (closer lo hi x)\n            then\n              lo\n            else if (closer hi lo x)\n            then\n              hi\n            else if (EVEN (ff(fmt) lo))\n            then\n              lo\n            else\n              hi))) /\\\n\n      (fround (fmt:fformat) (To_zero) (x:real) =\n          (if (&0 <= x)\n           then (glb(fmt) x)\n           else (lub(fmt) x))) /\\\n\n      (fround (fmt:fformat) (To_pinf) (x:real) =\n          (lub(fmt) x)) /\\\n\n      (fround (fmt:fformat) (To_ninf) (x:real) =\n          (glb(fmt) x)))")))
 }
 
 ///|

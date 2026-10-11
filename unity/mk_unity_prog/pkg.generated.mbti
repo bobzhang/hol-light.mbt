@@ -143,7 +143,7 @@ pub fn loc_var() -> @kernel.Thm
 
 pub fn lst(@kernel.HolType) -> @kernel.HolType raise
 
-pub fn member() -> @kernel.Thm
+pub fn member_() -> @kernel.Thm
 
 pub fn member_term() -> @kernel.Term
 

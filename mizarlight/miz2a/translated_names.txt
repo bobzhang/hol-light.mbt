@@ -3,7 +3,7 @@ GOAL_HERE goal_here
 N_ASSUME_TAC n_assume_tac
 TRY' try_p
 antecedent antecedent
-assume assume
+assume assume_
 assume' assume_p
 at at
 by by

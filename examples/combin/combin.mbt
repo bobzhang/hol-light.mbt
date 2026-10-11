@@ -4,7 +4,7 @@
 ///|
 /// confluent
 fn step_1() -> Unit raise {
-  confluent_c.set(@define.define(@parser.parse_term("confluent R <=>\n        !x y z. RTC R x y /\\ RTC R x z ==> ?u. RTC R y u /\\ RTC R z u")))
+  confluent_c.set(@define.define_(@parser.parse_term("confluent R <=>\n        !x y z. RTC R x y /\\ RTC R x z ==> ?u. RTC R y u /\\ RTC R z u")))
 }
 
 ///|
@@ -163,7 +163,7 @@ fn step_10() -> Unit raise {
 ///|
 /// RTCredn
 fn step_11() -> Unit raise {
-  rtcredn_c.set(@define.define(@parser.parse_term("(-->*) = RTC(-->)")))
+  rtcredn_c.set(@define.define_(@parser.parse_term("(-->*) = RTC(-->)")))
 }
 
 ///|
@@ -178,7 +178,7 @@ pub fn rtcredn() -> @kernel.Thm {
 ///|
 /// RTCpredn
 fn step_12() -> Unit raise {
-  rtcpredn_c.set(@define.define(@parser.parse_term("(-||->*) = RTC(-||->)")))
+  rtcpredn_c.set(@define.define_(@parser.parse_term("(-||->*) = RTC(-||->)")))
 }
 
 ///|

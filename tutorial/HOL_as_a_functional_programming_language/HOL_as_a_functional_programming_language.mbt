@@ -136,7 +136,7 @@ pub fn eth() -> @kernel.Thm {
 ///|
 /// sizeof
 fn step_3() -> Unit raise {
-  sizeof__c.set(@define.define(@parser.parse_term("(sizeof False = 1) /\\\n  (sizeof True = 1) /\\\n  (sizeof(Atomic i) = 1) /\\\n  (sizeof(Ite x y z) = sizeof x * (1 + sizeof y + sizeof z))")))
+  sizeof__c.set(@define.define_(@parser.parse_term("(sizeof False = 1) /\\\n  (sizeof True = 1) /\\\n  (sizeof(Atomic i) = 1) /\\\n  (sizeof(Ite x y z) = sizeof x * (1 + sizeof y + sizeof z))")))
 }
 
 ///|
@@ -254,7 +254,7 @@ pub fn ite_induct_v1() -> @kernel.Thm {
 ///|
 /// normalized
 fn step_9() -> Unit raise {
-  normalized_c.set(@define.define(@parser.parse_term("(normalized False <=> T) /\\\n  (normalized True <=> T) /\\\n  (normalized(Atomic a) <=> T) /\\\n  (normalized(Ite False x y) <=> F) /\\\n  (normalized(Ite True x y) <=> F) /\\\n  (normalized(Ite (Atomic a) x y) <=> normalized x /\\ normalized y) /\\\n  (normalized(Ite (Ite u v w) x y) <=> F)")))
+  normalized_c.set(@define.define_(@parser.parse_term("(normalized False <=> T) /\\\n  (normalized True <=> T) /\\\n  (normalized(Atomic a) <=> T) /\\\n  (normalized(Ite False x y) <=> F) /\\\n  (normalized(Ite True x y) <=> F) /\\\n  (normalized(Ite (Atomic a) x y) <=> normalized x /\\ normalized y) /\\\n  (normalized(Ite (Ite u v w) x y) <=> F)")))
 }
 
 ///|
@@ -305,7 +305,7 @@ pub fn normalized_induct() -> @kernel.Thm {
 ///|
 /// holds
 fn step_12() -> Unit raise {
-  holds_c.set(@define.define(@parser.parse_term("(holds v False <=> F) /\\\n  (holds v True <=> T) /\\\n  (holds v (Atomic i) <=> v(i)) /\\\n  (holds v (Ite b x y) <=> if holds v b then holds v x else holds v y)")))
+  holds_c.set(@define.define_(@parser.parse_term("(holds v False <=> F) /\\\n  (holds v True <=> T) /\\\n  (holds v (Atomic i) <=> v(i)) /\\\n  (holds v (Ite b x y) <=> if holds v b then holds v x else holds v y)")))
 }
 
 ///|
@@ -339,7 +339,7 @@ pub fn holds_norm() -> @kernel.Thm {
 ///|
 /// taut
 fn step_14() -> Unit raise {
-  taut_c.set(@define.define(@parser.parse_term("(taut (t,f) False <=> F) /\\\n  (taut (t,f) True <=> T) /\\\n  (taut (t,f) (Atomic i) <=> MEM i t) /\\\n  (taut (t,f) (Ite (Atomic i) x y) <=>\n      if MEM i t then taut (t,f) x\n      else if MEM i f then taut (t,f) y\n      else taut (CONS i t,f) x /\\ taut (t,CONS i f) y)")))
+  taut_c.set(@define.define_(@parser.parse_term("(taut (t,f) False <=> F) /\\\n  (taut (t,f) True <=> T) /\\\n  (taut (t,f) (Atomic i) <=> MEM i t) /\\\n  (taut (t,f) (Ite (Atomic i) x y) <=>\n      if MEM i t then taut (t,f) x\n      else if MEM i f then taut (t,f) y\n      else taut (CONS i t,f) x /\\ taut (t,CONS i f) y)")))
 }
 
 ///|
@@ -354,7 +354,7 @@ pub fn taut() -> @kernel.Thm {
 ///|
 /// tautology
 fn step_15() -> Unit raise {
-  tautology_c.set(@define.define(@parser.parse_term("tautology e = taut([],[]) (norm e)")))
+  tautology_c.set(@define.define_(@parser.parse_term("tautology e = taut([],[]) (norm e)")))
 }
 
 ///|

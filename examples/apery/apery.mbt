@@ -4,7 +4,7 @@
 ///|
 /// LCM_DEF
 fn step_1() -> Unit raise {
-  lcm_def_c.set(@define.define(@parser.parse_term("LCM (s:num->bool) = iterate(\\m n. lcm(m,n)) s I")))
+  lcm_def_c.set(@define.define_(@parser.parse_term("LCM (s:num->bool) = iterate(\\m n. lcm(m,n)) s I")))
 }
 
 ///|

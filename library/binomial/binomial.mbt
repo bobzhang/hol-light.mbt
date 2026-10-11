@@ -5,7 +5,7 @@
 /// binom
 fn step_1() -> Unit raise {
   binom_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "(!n. binom(n,0) = 1) /\\\n   (!k. binom(0,SUC(k)) = 0) /\\\n   (!n k. binom(SUC(n),SUC(k)) = binom(n,SUC(k)) + binom(n,k))",
       ),

@@ -773,7 +773,7 @@ pub fn weak_read_over_write() -> @kernel.Thm {
 /// valid_component
 fn step_33() -> Unit raise {
   valid_component_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "valid_component c <=>\n        (!y s. read c (write c y s) = y) /\\\n        (!y z s. write c z (write c y s) = write c z s)",
       ),
@@ -864,7 +864,7 @@ fn step_36() -> Unit raise {
 /// weakly_valid_component
 fn step_37() -> Unit raise {
   weakly_valid_component_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "weakly_valid_component c <=>\n        (?f. !y s. read c (write c y s) = f y) /\\\n        (!y z s. write c z (write c y s) = write c z s)",
       ),
@@ -960,7 +960,7 @@ fn step_40() -> Unit raise {
 /// strongly_valid_component
 fn step_41() -> Unit raise {
   strongly_valid_component_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "strongly_valid_component c <=>\n        (!y s. read c (write c y s) = y) /\\\n        (!s. write c (read c s) s = s) /\\\n        (!y z s. write c z (write c y s) = write c z s)",
       ),
@@ -1075,7 +1075,7 @@ fn step_45() -> Unit raise {
 /// extensionally_valid_component
 fn step_46() -> Unit raise {
   extensionally_valid_component_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "extensionally_valid_component (c:(S,A)component) <=>\n        (?f. !y s. read c (write c y s) = f y) /\\\n        (!s. write c (read c s) s = s) /\\\n        (!y z s. write c z (write c y s) = write c z s)",
       ),
@@ -1180,7 +1180,7 @@ fn step_49() -> Unit raise {
 /// orthogonal_components
 fn step_50() -> Unit raise {
   orthogonal_components_c.set(
-    @define.define(
+    @define.define_(
       @parser.parse_term(
         "orthogonal_components sc1 sc2 <=>\n        (!y z s. write sc1 y (write sc2 z s) =\n                 write sc2 z (write sc1 y s)) /\\\n        (!y s. read sc2 (write sc1 y s) = read sc2 s) /\\\n        (!z s. read sc1 (write sc2 z s) = read sc1 s)",
       ),

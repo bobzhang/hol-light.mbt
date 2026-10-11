@@ -26,7 +26,7 @@ and_pair and_pair
 and_right and_right
 ante_conj ante_conj
 ante_disj ante_disj
-assume assume
+assume assume_
 axiom_addimp axiom_addimp
 axiom_allimp axiom_allimp
 axiom_and axiom_and

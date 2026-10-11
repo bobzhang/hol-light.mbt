@@ -21,7 +21,7 @@ pub fn real_pow_iter() -> @kernel.Thm {
 ///|
 /// llseq
 fn step_2() -> Unit raise {
-  llseq_c.set(@define.define(@parser.parse_term("llseq p 0 = 4 MOD p /\\\n  llseq p (SUC n) = ((llseq p n) EXP 2 + (p - 2)) MOD p")))
+  llseq_c.set(@define.define_(@parser.parse_term("llseq p 0 = 4 MOD p /\\\n  llseq p (SUC n) = ((llseq p n) EXP 2 + (p - 2)) MOD p")))
 }
 
 ///|

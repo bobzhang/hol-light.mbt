@@ -47,7 +47,7 @@ pub fn partial() -> @kernel.Thm {
 ///|
 /// all_n
 fn step_5() -> Unit raise {
-  all_n_c.set(@define.define(@parser.parse_term("(all_n n [] s <=> T) /\\ (all_n n (CONS h t) s <=> s n h /\\ all_n (SUC n) t s)")))
+  all_n_c.set(@define.define_(@parser.parse_term("(all_n n [] s <=> T) /\\ (all_n n (CONS h t) s <=> s n h /\\ all_n (SUC n) t s)")))
 }
 
 ///|

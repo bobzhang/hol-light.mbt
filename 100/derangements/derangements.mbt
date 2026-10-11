@@ -651,7 +651,7 @@ pub fn number_of_permutations() -> @kernel.Thm {
 ///|
 /// derangements
 fn step_37() -> Unit raise {
-  derangements_c.set(@define.define(@parser.parse_term("(derangements 0 = 1) /\\\n  (derangements 1 = 0) /\\\n  (derangements(n + 2) = (n + 1) * (derangements n + derangements(n + 1)))")))
+  derangements_c.set(@define.define_(@parser.parse_term("(derangements 0 = 1) /\\\n  (derangements 1 = 0) /\\\n  (derangements(n + 2) = (n + 1) * (derangements n + derangements(n + 1)))")))
 }
 
 ///|
