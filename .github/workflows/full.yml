@@ -90,9 +90,11 @@ jobs:
         env:
           TIERS: ${{ needs.plan.outputs.tiers }}
           SHARD: ${{ matrix.shard }}/${{ needs.plan.outputs.count }}
-        # two compiler processes and three tests at once (a test takes up
-        # to 4 GB); the seconds each package took are recorded
-        run: python3 tools/test.py $TIERS --shard "$SHARD" --build-jobs 2 -j 3 --max-rss-gb 12 --times
+        # one compiler process at a time: with two, the machine ran out of
+        # memory while linking and was shut down (17 of 20 shards of the
+        # first run). Three tests at once (a test takes up to 4 GB); the
+        # seconds each package took are recorded
+        run: python3 tools/test.py $TIERS --shard "$SHARD" --build-jobs 1 -j 3 --max-rss-gb 12 --times
 
       - name: Keep the times and the log
         if: always()
