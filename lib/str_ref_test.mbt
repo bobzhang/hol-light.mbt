@@ -85,7 +85,7 @@ fn case(out : StringBuilder, pat : String, s : String) -> Unit {
 
 ///|
 test "Str matches OCaml's" {
-  let out = StringBuilder::new()
+  let out = StringBuilder()
   case(out, "a*", "aaab")
   case(out, "a*", "b")
   case(out, "a+b", "xaab")

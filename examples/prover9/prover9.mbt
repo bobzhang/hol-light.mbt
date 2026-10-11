@@ -108,6 +108,18 @@ pub(all) enum Folterm {
 } derive(Eq, Debug)
 
 ///|
+pub extend Folterm with Eq::{not_equal, equal}
+
+///|
+pub extend Folterm with Debug::{to_repr}
+
+///|
+pub extend Folterm with @lib.OCompare::{ocompare}
+
+///|
+pub extend Folterm with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_Folterm(x : Folterm) -> Int {
   match x {
     Variable(_) => 1000000
@@ -153,6 +165,18 @@ pub impl @lib.OHash for Folterm with fn ohash_visit(self, h) {
 pub(all) enum Literal {
   Literal(Bool, String, @list.List[Folterm])
 } derive(Eq, Debug)
+
+///|
+pub extend Literal with Eq::{not_equal, equal}
+
+///|
+pub extend Literal with Debug::{to_repr}
+
+///|
+pub extend Literal with @lib.OCompare::{ocompare}
+
+///|
+pub extend Literal with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_Literal(x : Literal) -> Int {
@@ -319,6 +343,18 @@ pub(all) enum Sexp {
   Atom(String)
   List(@list.List[Sexp])
 } derive(Eq, Debug)
+
+///|
+pub extend Sexp with Eq::{not_equal, equal}
+
+///|
+pub extend Sexp with Debug::{to_repr}
+
+///|
+pub extend Sexp with @lib.OCompare::{ocompare}
+
+///|
+pub extend Sexp with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_Sexp(x : Sexp) -> Int {

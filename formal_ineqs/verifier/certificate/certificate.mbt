@@ -11,6 +11,18 @@ pub(all) struct MonoStatus {
 } derive(Eq, Debug)
 
 ///|
+pub extend MonoStatus with Eq::{not_equal, equal}
+
+///|
+pub extend MonoStatus with Debug::{to_repr}
+
+///|
+pub extend MonoStatus with @lib.OCompare::{ocompare}
+
+///|
+pub extend MonoStatus with @lib.OHash::{ohash_visit}
+
+///|
 pub impl @lib.OCompare for MonoStatus with fn ocompare(self, other) {
   let c = @lib.compare(self.variable, other.variable)
   if c != 0 {
@@ -46,6 +58,18 @@ pub(all) enum ResultTree {
   Result_mono(@list.List[MonoStatus], ResultTree)
   Result_glue((Int64, Bool, ResultTree, ResultTree))
 } derive(Eq, Debug)
+
+///|
+pub extend ResultTree with Eq::{not_equal, equal}
+
+///|
+pub extend ResultTree with Debug::{to_repr}
+
+///|
+pub extend ResultTree with @lib.OCompare::{ocompare}
+
+///|
+pub extend ResultTree with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_ResultTree(x : ResultTree) -> Int {
@@ -131,6 +155,18 @@ pub(all) struct PStatus {
 } derive(Eq, Debug)
 
 ///|
+pub extend PStatus with Eq::{not_equal, equal}
+
+///|
+pub extend PStatus with Debug::{to_repr}
+
+///|
+pub extend PStatus with @lib.OCompare::{ocompare}
+
+///|
+pub extend PStatus with @lib.OHash::{ohash_visit}
+
+///|
 pub impl @lib.OCompare for PStatus with fn ocompare(self, other) {
   
   @lib.compare(self.pp, other.pp)
@@ -150,6 +186,18 @@ pub(all) enum PResultTree {
   P_result_glue(PStatus, Int64, Bool, PResultTree, PResultTree)
   P_result_ref(Int64)
 } derive(Eq, Debug)
+
+///|
+pub extend PResultTree with Eq::{not_equal, equal}
+
+///|
+pub extend PResultTree with Debug::{to_repr}
+
+///|
+pub extend PResultTree with @lib.OCompare::{ocompare}
+
+///|
+pub extend PResultTree with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_PResultTree(x : PResultTree) -> Int {
@@ -285,6 +333,18 @@ pub(all) struct CertificateStats {
   glue : Int64
   glue_convex : Int64
 } derive(Eq, Debug)
+
+///|
+pub extend CertificateStats with Eq::{not_equal, equal}
+
+///|
+pub extend CertificateStats with Debug::{to_repr}
+
+///|
+pub extend CertificateStats with @lib.OCompare::{ocompare}
+
+///|
+pub extend CertificateStats with @lib.OHash::{ohash_visit}
 
 ///|
 pub impl @lib.OCompare for CertificateStats with fn ocompare(self, other) {

@@ -122,6 +122,18 @@ pub(all) enum FolTerm {
 } derive(Eq, Debug)
 
 ///|
+pub extend FolTerm with Eq::{not_equal, equal}
+
+///|
+pub extend FolTerm with Debug::{to_repr}
+
+///|
+pub extend FolTerm with @lib.OCompare::{ocompare}
+
+///|
+pub extend FolTerm with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_FolTerm(x : FolTerm) -> Int {
   match x {
     Fvar(_) => 1000000
@@ -171,6 +183,18 @@ pub(all) enum FolForm {
   Disj(FolForm, FolForm)
   Forallq(Int64, FolForm)
 } derive(Eq, Debug)
+
+///|
+pub extend FolForm with Eq::{not_equal, equal}
+
+///|
+pub extend FolForm with Debug::{to_repr}
+
+///|
+pub extend FolForm with @lib.OCompare::{ocompare}
+
+///|
+pub extend FolForm with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_FolForm(x : FolForm) -> Int {
@@ -247,6 +271,18 @@ pub(all) enum FolGoal {
     @list.List[(FolTerm, Int64)]
   )
 } derive(Eq, Debug)
+
+///|
+pub extend FolGoal with Eq::{not_equal, equal}
+
+///|
+pub extend FolGoal with Debug::{to_repr}
+
+///|
+pub extend FolGoal with @lib.OCompare::{ocompare}
+
+///|
+pub extend FolGoal with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_FolGoal(x : FolGoal) -> Int {

@@ -3151,6 +3151,18 @@ pub(all) enum DiscrimTree[TA] {
 } derive(Eq, Debug)
 
 ///|
+pub extend DiscrimTree with Eq::{not_equal, equal}
+
+///|
+pub extend DiscrimTree with Debug::{to_repr}
+
+///|
+pub extend DiscrimTree with @lib.OCompare::{ocompare}
+
+///|
+pub extend DiscrimTree with @lib.OHash::{ohash_visit}
+
+///|
 fn[TA] ocaml_rank_DiscrimTree(x : DiscrimTree[TA]) -> Int {
   match x {
     Leaf_dt(_) => 1000000

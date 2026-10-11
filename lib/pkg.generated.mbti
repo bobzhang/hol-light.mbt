@@ -171,7 +171,7 @@ pub fn[K : OCompare, V : OCompare] graph(Func[K, V]) -> @list.List[(K, V)]
 
 pub fn[T : OHash] hash(T) -> Int
 
-pub fn[K : OCompare + OHash, V] hashtbl_add(OHashtbl[K, V], K, V) -> Unit
+pub fn[K : OHash, V] hashtbl_add(OHashtbl[K, V], K, V) -> Unit
 
 pub fn[K, V] hashtbl_clear(OHashtbl[K, V]) -> Unit
 
@@ -551,12 +551,16 @@ pub fn[A, B] zip(@list.List[A], @list.List[B]) -> @list.List[(A, B)] raise
 pub(all) suberror AssertFailure {
   AssertFailure(String)
 } derive(@debug.Debug)
+pub fn AssertFailure::to_repr(Self) -> @debug.Repr
 
 pub(all) suberror Break derive(@debug.Debug)
+pub fn Break::to_repr(Self) -> @debug.Repr
 
 pub(all) suberror EndOfFile derive(@debug.Debug)
+pub fn EndOfFile::to_repr(Self) -> @debug.Repr
 
 pub(all) suberror LazyUndefined derive(@debug.Debug)
+pub fn LazyUndefined::to_repr(Self) -> @debug.Repr
 
 pub(all) suberror MatchFailure {
   MatchFailure(String)
@@ -564,12 +568,15 @@ pub(all) suberror MatchFailure {
 pub fn MatchFailure::to_repr(Self) -> @debug.Repr
 
 pub(all) suberror NotFound derive(@debug.Debug)
+pub fn NotFound::to_repr(Self) -> @debug.Repr
 
 pub(all) suberror StreamFailure derive(@debug.Debug)
+pub fn StreamFailure::to_repr(Self) -> @debug.Repr
 
 pub(all) suberror SysError {
   SysError(String)
 } derive(@debug.Debug)
+pub fn SysError::to_repr(Self) -> @debug.Repr
 
 pub(all) suberror Unchanged derive(@debug.Debug)
 pub fn Unchanged::to_repr(Self) -> @debug.Repr
@@ -588,6 +595,10 @@ pub enum Func[K, V] {
   Leaf(Int, @list.List[(K, V)])
   Branch(Int, Int, Func[K, V], Func[K, V])
 } derive(Eq)
+pub fn[K : Eq, V : Eq] Func::equal(Self[K, V], Self[K, V]) -> Bool
+pub fn[K : Eq, V : Eq] Func::not_equal(Self[K, V], Self[K, V]) -> Bool
+pub fn[K : OCompare, V : OCompare] Func::ocompare(Self[K, V], Self[K, V]) -> Int
+pub fn[K : OHash, V : OHash] Func::ohash_visit(Self[K, V], OHasher) -> Unit
 pub impl[K : OCompare, V : OCompare] OCompare for Func[K, V]
 pub impl[K : OHash, V : OHash] OHash for Func[K, V]
 

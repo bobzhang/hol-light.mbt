@@ -32,7 +32,7 @@ pub fn[TA, TB] timed_tac(
 pub fn[TA, TB] print_to_string1(
   printer : (@pp.Formatter) -> ((TA) -> TB raise) raise,
 ) -> ((String) -> ((Int64) -> ((TA) -> String raise) raise) raise) raise {
-  let buf = StringBuilder::new()
+  let buf = StringBuilder()
   let fmt = @pp.formatter_of_buffer(buf)
   fmt.set_max_boxes(100)
   fn(prefix1 : String) -> ((Int64) -> ((TA) -> String raise) raise) raise {

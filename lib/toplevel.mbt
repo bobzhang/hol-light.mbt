@@ -7,7 +7,7 @@
 // (tools/translator/emit.ml: exec_phrases); running a string looks it up.
 
 ///|
-let phrases : Map[String, (Unit) -> Unit raise] = {}
+let phrases : Map[String, (Unit) -> Unit raise] = Map([])
 
 ///|
 /// The translation of the phrase `text` is `run`.
@@ -42,7 +42,7 @@ pub fn printexc_to_string(e : Error) -> String {
 }
 
 ///|
-let phrase_rests : Map[String, String] = {}
+let phrase_rests : Map[String, String] = Map([])
 
 ///|
 /// The parser leaves `rest` of the string `text` after its first phrase.

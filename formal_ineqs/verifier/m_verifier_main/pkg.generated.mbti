@@ -72,6 +72,11 @@ pub(all) struct VerificationParameters {
   eps_width : Double
   test_certificate : Bool
 } derive(Eq, @debug.Debug)
+pub fn VerificationParameters::equal(Self, Self) -> Bool
+pub fn VerificationParameters::not_equal(Self, Self) -> Bool
+pub fn VerificationParameters::ocompare(Self, Self) -> Int
+pub fn VerificationParameters::ohash_visit(Self, @lib.OHasher) -> Unit
+pub fn VerificationParameters::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for VerificationParameters
 pub impl @lib.OHash for VerificationParameters
 
@@ -80,6 +85,11 @@ pub(all) struct VerificationStats {
   formal_verification_time : Double
   certificate : @certificate.CertificateStats
 } derive(Eq, @debug.Debug)
+pub fn VerificationStats::equal(Self, Self) -> Bool
+pub fn VerificationStats::not_equal(Self, Self) -> Bool
+pub fn VerificationStats::ocompare(Self, Self) -> Int
+pub fn VerificationStats::ohash_visit(Self, @lib.OHasher) -> Unit
+pub fn VerificationStats::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for VerificationStats
 pub impl @lib.OHash for VerificationStats
 

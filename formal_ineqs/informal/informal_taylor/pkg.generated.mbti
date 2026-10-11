@@ -89,6 +89,11 @@ pub(all) struct MCellDomain {
   y : @list.List[(Bool, @bigint.BigInt, Int64)]
   w : @list.List[(Bool, @bigint.BigInt, Int64)]
 } derive(Eq, @debug.Debug)
+pub fn MCellDomain::equal(Self, Self) -> Bool
+pub fn MCellDomain::not_equal(Self, Self) -> Bool
+pub fn MCellDomain::ocompare(Self, Self) -> Int
+pub fn MCellDomain::ohash_visit(Self, @lib.OHasher) -> Unit
+pub fn MCellDomain::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for MCellDomain
 pub impl @lib.OHash for MCellDomain
 
@@ -99,6 +104,11 @@ pub(all) struct MTaylorInterval {
   df : @list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]
   ddf : @list.List[@list.List[((Bool, @bigint.BigInt, Int64), (Bool, @bigint.BigInt, Int64))]]
 } derive(Eq, @debug.Debug)
+pub fn MTaylorInterval::equal(Self, Self) -> Bool
+pub fn MTaylorInterval::not_equal(Self, Self) -> Bool
+pub fn MTaylorInterval::ocompare(Self, Self) -> Int
+pub fn MTaylorInterval::ohash_visit(Self, @lib.OHasher) -> Unit
+pub fn MTaylorInterval::to_repr(Self) -> @debug.Repr
 pub impl @lib.OCompare for MTaylorInterval
 pub impl @lib.OHash for MTaylorInterval
 

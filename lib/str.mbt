@@ -197,7 +197,7 @@ pub fn str_regexp_string(s : String) -> StrRegexp {
 ///|
 /// `Str.quote s`: a regular expression source that matches `s`.
 pub fn str_quote(s : String) -> String {
-  let out = StringBuilder::new()
+  let out = StringBuilder()
   for c in s {
     if "$^.*+?[]\\".contains_char(c) {
       out.write_char('\\')
@@ -600,7 +600,7 @@ pub fn str_matched_string(s : String) -> String raise {
 /// are its groups, `\\` a backslash.
 fn replacement_text(templ : String, s : Bytes) -> String raise {
   let groups = last_search_result.val
-  let out = StringBuilder::new()
+  let out = StringBuilder()
   let t = templ.to_array()
   let n = t.length()
   let mut i = 0
@@ -641,7 +641,7 @@ pub fn str_global_replace(
   s : String,
 ) -> String raise {
   let b = @utf8.encode(s)
-  let out = StringBuilder::new()
+  let out = StringBuilder()
   let n = b.length()
   let mut start = 0
   let mut last_was_empty = false
@@ -744,5 +744,5 @@ pub fn str_split(re : StrRegexp, s : String) -> @list.List[String] {
       }
     }
   }
-  @list.from_array(parts)
+  @list.List(parts)
 }

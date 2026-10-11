@@ -10590,6 +10590,18 @@ pub(all) enum Certificate {
 } derive(Eq, Debug)
 
 ///|
+pub extend Certificate with Eq::{not_equal, equal}
+
+///|
+pub extend Certificate with Debug::{to_repr}
+
+///|
+pub extend Certificate with @lib.OCompare::{ocompare}
+
+///|
+pub extend Certificate with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_Certificate(x : Certificate) -> Int {
   match x {
     Prime_2 => 0

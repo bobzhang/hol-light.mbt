@@ -1391,6 +1391,9 @@ pub(all) suberror AssertFailure {
   AssertFailure(String)
 } derive(Debug)
 
+///|
+pub extend AssertFailure with @debug.Debug::{to_repr}
+
 // ---------------------------------------------------------------------------
 // Stdlib List functions with OCaml's semantics (for translated code).
 // ---------------------------------------------------------------------------
@@ -1398,6 +1401,9 @@ pub(all) suberror AssertFailure {
 ///|
 /// OCaml's `Not_found`.
 pub(all) suberror NotFound derive(Debug)
+
+///|
+pub extend NotFound with @debug.Debug::{to_repr}
 
 ///|
 /// `List.assoc`: raises `Not_found` (HOL's `assoc` fails instead).
@@ -1545,9 +1551,9 @@ fn[A] sort_run(
   match (n, l) {
     (2, More(x1, tail=More(x2, tail=tl))) => {
       let s = if cmp(x1, x2) <= 0 {
-        @list.from_array([x1, x2])
+        @list.List([x1, x2])
       } else {
-        @list.from_array([x2, x1])
+        @list.List([x2, x1])
       }
       (s, tl)
     }
@@ -1567,7 +1573,7 @@ fn[A] sort_run(
       } else {
         [x3, x2, x1]
       }
-      (@list.from_array(s), tl)
+      (@list.List(s), tl)
     }
     (n, l) => {
       let n1 = n >> 1
@@ -1589,9 +1595,9 @@ fn[A] sort_run_rev(
   match (n, l) {
     (2, More(x1, tail=More(x2, tail=tl))) => {
       let s = if cmp(x1, x2) > 0 {
-        @list.from_array([x1, x2])
+        @list.List([x1, x2])
       } else {
-        @list.from_array([x2, x1])
+        @list.List([x2, x1])
       }
       (s, tl)
     }
@@ -1611,7 +1617,7 @@ fn[A] sort_run_rev(
       } else {
         [x3, x2, x1]
       }
-      (@list.from_array(s), tl)
+      (@list.List(s), tl)
     }
     (n, l) => {
       let n1 = n >> 1
@@ -1875,7 +1881,7 @@ pub fn[A] list_filter(
       acc.push(x)
     }
   }
-  @list.from_array(acc)
+  @list.List(acc)
 }
 
 ///|
@@ -1893,7 +1899,7 @@ pub fn[A] list_partition(
       no.push(x)
     }
   }
-  (@list.from_array(yes), @list.from_array(no))
+  (@list.List(yes), @list.List(no))
 }
 
 ///|
@@ -1918,7 +1924,7 @@ pub fn[A, B, C] list_map2(
       _ => raise @num.InvalidArgument("List.map2")
     }
   }
-  @list.from_array(acc)
+  @list.List(acc)
 }
 
 ///|

@@ -8,9 +8,15 @@
 pub(all) suberror EndOfFile derive(Debug)
 
 ///|
+pub extend EndOfFile with @debug.Debug::{to_repr}
+
+///|
 /// OCaml's `Sys.Break` (an interrupt from the keyboard): matched by code
 /// that cleans up after one (Minisat/sat_tools.ml), never raised here.
 pub(all) suberror Break derive(Debug)
+
+///|
+pub extend Break with @debug.Debug::{to_repr}
 
 ///|
 /// `out_channel`: the file is written when the channel is flushed or closed.
@@ -80,7 +86,7 @@ pub fn input_line(ic : InChannel) -> String raise {
     i += 1
   }
   ic.pos = if i < n { i + 1 } else { i }
-  ic.text.view(start_offset=start, end_offset=i).to_string()
+  ic.text.view(start_offset=start, end_offset=i).to_owned()
 }
 
 ///|
@@ -133,12 +139,12 @@ pub fn string_split_on_char(c : Char, s : String) -> @list.List[String] {
   let mut start = 0
   for i in 0..<s.length() {
     if s[i].to_int() == c.to_int() {
-      parts.push(s.view(start_offset=start, end_offset=i).to_string())
+      parts.push(s.view(start_offset=start, end_offset=i).to_owned())
       start = i + 1
     }
   }
-  parts.push(s.view(start_offset=start).to_string())
-  @list.from_array(parts)
+  parts.push(s.view(start_offset=start).to_owned())
+  @list.List(parts)
 }
 
 ///|
@@ -185,6 +191,6 @@ pub fn filename_basename(name : String) -> String {
   if n == 0 {
     "."
   } else {
-    name.view(start_offset=i, end_offset=n).to_string()
+    name.view(start_offset=i, end_offset=n).to_owned()
   }
 }

@@ -88,6 +88,7 @@ import {
   "bobzhang/hol_light/formal_ineqs/arith/interval_arith",
   "bobzhang/hol_light/formal_ineqs/arith/float_theory",
   "bobzhang/hol_light/formal_ineqs/tests/log",
+  "moonbitlang/core/bigint",
   "moonbitlang/core/list",
 }
 

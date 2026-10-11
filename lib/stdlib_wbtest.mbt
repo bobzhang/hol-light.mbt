@@ -44,9 +44,9 @@ test "list_sort compares like OCaml" {
       calls.push("\{x},\{y}")
       x.compare(y)
     },
-    @list.from_array([5, 3, 8, 1, 9, 2, 7]),
+    @list.List([5, 3, 8, 1, 9, 2, 7]),
   )
-  inspect(r.to_array(), content="[1, 2, 3, 5, 7, 8, 9]")
+  @debug.debug_inspect(r.to_array(), content="[1, 2, 3, 5, 7, 8, 9]")
   inspect(
     calls.join(" "),
     content="5,3 3,8 5,8 1,9 2,7 1,2 9,2 9,7 8,9 8,7 5,7 5,2 3,2",

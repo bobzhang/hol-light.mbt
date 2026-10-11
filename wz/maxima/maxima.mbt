@@ -170,6 +170,18 @@ pub(all) enum WzMaximaObject {
 } derive(Eq, Debug)
 
 ///|
+pub extend WzMaximaObject with Eq::{not_equal, equal}
+
+///|
+pub extend WzMaximaObject with Debug::{to_repr}
+
+///|
+pub extend WzMaximaObject with @lib.OCompare::{ocompare}
+
+///|
+pub extend WzMaximaObject with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_WzMaximaObject(x : WzMaximaObject) -> Int {
   match x {
     Wzterm(_) => 1000000

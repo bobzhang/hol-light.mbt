@@ -11,6 +11,18 @@ pub(all) enum Ite {
 } derive(Eq, Debug)
 
 ///|
+pub extend Ite with Eq::{not_equal, equal}
+
+///|
+pub extend Ite with Debug::{to_repr}
+
+///|
+pub extend Ite with @lib.OCompare::{ocompare}
+
+///|
+pub extend Ite with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_Ite(x : Ite) -> Int {
   match x {
     False => 0

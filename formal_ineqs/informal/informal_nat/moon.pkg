@@ -121,6 +121,7 @@ import {
   "bobzhang/hol_light/formal_ineqs/misc/report",
   "bobzhang/hol_light/formal_ineqs/verifier/certificate",
   "bobzhang/hol_light/formal_ineqs/verifier_options",
+  "moonbitlang/core/bigint",
   "moonbitlang/core/list",
 }
 

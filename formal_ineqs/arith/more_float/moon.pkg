@@ -89,6 +89,7 @@ import {
   "bobzhang/hol_light/formal_ineqs/arith/float_theory",
   "bobzhang/hol_light/formal_ineqs/tests/log",
   "bobzhang/hol_light/formal_ineqs/arith/arith_float",
+  "moonbitlang/core/double",
   "moonbitlang/core/list",
 }
 

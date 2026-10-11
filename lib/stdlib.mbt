@@ -124,7 +124,7 @@ pub fn string_sub(s : String, start : Int, len : Int) -> String raise {
     if start < 0 || len < 0 || start > s.length() - len {
       raise @num.InvalidArgument("String.sub / Bytes.sub")
     }
-    return s.view(start_offset=start, end_offset=start + len).to_string()
+    return s.view(start_offset=start, end_offset=start + len).to_owned()
   }
   // the bytes of its UTF-8 encoding, which must be whole characters (the
   // proofs of RichterHilbertAxiomGeometry/ are strings with mathematical
@@ -278,7 +278,7 @@ fn[K : OHash, V] OHashtbl::resize(self : OHashtbl[K, V]) -> Unit {
     }
   }
   for i in 0..<nsize {
-    self.data[i] = @list.from_array(buckets[i])
+    self.data[i] = @list.List(buckets[i])
   }
 }
 
@@ -304,7 +304,7 @@ pub fn[K, V] hashtbl_reset(t : OHashtbl[K, V]) -> Unit {
 
 ///|
 /// `Hashtbl.add t k v`: shadows the previous binding of `k`.
-pub fn[K : OCompare + OHash, V] hashtbl_add(
+pub fn[K : OHash, V] hashtbl_add(
   t : OHashtbl[K, V],
   k : K,
   v : V,
@@ -420,7 +420,7 @@ pub fn[K : OCompare + OHash, V] hashtbl_find_all(
       acc.push(e.1)
     }
   }
-  @list.from_array(acc)
+  @list.List(acc)
 }
 
 ///|
@@ -501,6 +501,9 @@ priv enum LazyState[T] {
 pub(all) suberror LazyUndefined derive(Debug)
 
 ///|
+pub extend LazyUndefined with @debug.Debug::{to_repr}
+
+///|
 /// `lazy e`
 pub fn[T] lazy_new(f : () -> T raise) -> OLazy[T] {
   { state: Pending(f), }
@@ -515,8 +518,14 @@ pub fn[T] lazy_force(l : OLazy[T]) -> T raise {
     Forcing => raise LazyUndefined
     Pending(f) => {
       l.state = Forcing
-      let v = f() catch {
-        e => {
+      let r : Result[T, Error] = try {
+        Ok(f())
+      } catch {
+        e => Err(e)
+      }
+      let v = match r {
+        Ok(v) => v
+        Err(e) => {
           l.state = Failed(e)
           raise e
         }
@@ -608,6 +617,9 @@ pub fn[A, B] array_map(
 pub(all) suberror SysError {
   SysError(String)
 } derive(Debug)
+
+///|
+pub extend SysError with @debug.Debug::{to_repr}
 
 ///|
 let temp_file_count : Ref[Int] = Ref::{ val: 0, }

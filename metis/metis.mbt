@@ -645,6 +645,18 @@ pub(all) enum Tree[TA, TB] {
 } derive(Eq, Debug)
 
 ///|
+pub extend Tree with Eq::{not_equal, equal}
+
+///|
+pub extend Tree with Debug::{to_repr}
+
+///|
+pub extend Tree with @lib.OCompare::{ocompare}
+
+///|
+pub extend Tree with @lib.OHash::{ohash_visit}
+
+///|
 fn[TA, TB] ocaml_rank_Tree(x : Tree[TA, TB]) -> Int {
   match x {
     Empty => 0
@@ -687,6 +699,18 @@ pub(all) struct Node[TA, TB] {
   value : TB
   right : Tree[TA, TB]
 } derive(Eq, Debug)
+
+///|
+pub extend Node with Eq::{not_equal, equal}
+
+///|
+pub extend Node with Debug::{to_repr}
+
+///|
+pub extend Node with @lib.OCompare::{ocompare}
+
+///|
+pub extend Node with @lib.OHash::{ohash_visit}
 
 ///|
 pub impl[TA : @lib.OCompare, TB : @lib.OCompare] @lib.OCompare for Node[TA, TB] with fn ocompare(
@@ -1906,6 +1930,18 @@ pub(all) enum Iterator[TA, TB] {
   Left_to_right_iterator((TA, TB), Tree[TA, TB], @list.List[Node[TA, TB]])
   Right_to_left_iterator((TA, TB), Tree[TA, TB], @list.List[Node[TA, TB]])
 } derive(Eq, Debug)
+
+///|
+pub extend Iterator with Eq::{not_equal, equal}
+
+///|
+pub extend Iterator with Debug::{to_repr}
+
+///|
+pub extend Iterator with @lib.OCompare::{ocompare}
+
+///|
+pub extend Iterator with @lib.OHash::{ohash_visit}
 
 ///|
 fn[TA, TB] ocaml_rank_Iterator(x : Iterator[TA, TB]) -> Int {
@@ -5694,6 +5730,18 @@ pub(all) enum Node1[TA] {
 } derive(Eq, Debug)
 
 ///|
+pub extend Node1 with Eq::{not_equal, equal}
+
+///|
+pub extend Node1 with Debug::{to_repr}
+
+///|
+pub extend Node1 with @lib.OCompare::{ocompare}
+
+///|
+pub extend Node1 with @lib.OHash::{ohash_visit}
+
+///|
 fn[TA] ocaml_rank_Node1(x : Node1[TA]) -> Int {
   match x {
     Em => 0
@@ -9020,6 +9068,18 @@ pub(all) enum Term {
 } derive(Eq, Debug)
 
 ///|
+pub extend Term with Eq::{not_equal, equal}
+
+///|
+pub extend Term with Debug::{to_repr}
+
+///|
+pub extend Term with @lib.OCompare::{ocompare}
+
+///|
+pub extend Term with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_Term(x : Term) -> Int {
   match x {
     Var(_) => 1000000
@@ -10612,6 +10672,18 @@ pub fn[TA] find_last_opt_v8(
 pub(all) enum Subst {
   Subst(Map4[Term])
 } derive(Eq, Debug)
+
+///|
+pub extend Subst with Eq::{not_equal, equal}
+
+///|
+pub extend Subst with Debug::{to_repr}
+
+///|
+pub extend Subst with @lib.OCompare::{ocompare}
+
+///|
+pub extend Subst with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_Subst(x : Subst) -> Int {
@@ -13277,6 +13349,18 @@ pub(all) enum Formula {
   Forall(Var, Formula)
   Exists(Var, Formula)
 } derive(Eq, Debug)
+
+///|
+pub extend Formula with Eq::{not_equal, equal}
+
+///|
+pub extend Formula with Debug::{to_repr}
+
+///|
+pub extend Formula with @lib.OCompare::{ocompare}
+
+///|
+pub extend Formula with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_Formula(x : Formula) -> Int {
@@ -19997,6 +20081,18 @@ pub(all) enum InferenceType {
 } derive(Eq, Debug)
 
 ///|
+pub extend InferenceType with Eq::{not_equal, equal}
+
+///|
+pub extend InferenceType with Debug::{to_repr}
+
+///|
+pub extend InferenceType with @lib.OCompare::{ocompare}
+
+///|
+pub extend InferenceType with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_InferenceType(x : InferenceType) -> Int {
   match x {
     Axiom => 0
@@ -20034,6 +20130,18 @@ pub impl @lib.OHash for InferenceType with fn ohash_visit(self, h) {
 pub(all) enum Thm {
   Thm(Clause, (InferenceType, @list.List[Thm]))
 } derive(Eq, Debug)
+
+///|
+pub extend Thm with Eq::{not_equal, equal}
+
+///|
+pub extend Thm with Debug::{to_repr}
+
+///|
+pub extend Thm with @lib.OCompare::{ocompare}
+
+///|
+pub extend Thm with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_Thm(x : Thm) -> Int {
@@ -20381,6 +20489,18 @@ pub(all) enum Inference1 {
   Refl(Term)
   Equality(Literal, Path, Term)
 } derive(Eq, Debug)
+
+///|
+pub extend Inference1 with Eq::{not_equal, equal}
+
+///|
+pub extend Inference1 with Debug::{to_repr}
+
+///|
+pub extend Inference1 with @lib.OCompare::{ocompare}
+
+///|
+pub extend Inference1 with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_Inference1(x : Inference1) -> Int {
@@ -22341,6 +22461,18 @@ pub(all) enum Edge {
 } derive(Eq, Debug)
 
 ///|
+pub extend Edge with Eq::{not_equal, equal}
+
+///|
+pub extend Edge with Debug::{to_repr}
+
+///|
+pub extend Edge with @lib.OCompare::{ocompare}
+
+///|
+pub extend Edge with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_Edge(x : Edge) -> Int {
   match x {
     Factor_edge(_, _) => 1000000
@@ -22392,6 +22524,18 @@ pub(all) enum JoinStatus {
   Joinable(Subst)
   Apart
 } derive(Eq, Debug)
+
+///|
+pub extend JoinStatus with Eq::{not_equal, equal}
+
+///|
+pub extend JoinStatus with Debug::{to_repr}
+
+///|
+pub extend JoinStatus with @lib.OCompare::{ocompare}
+
+///|
+pub extend JoinStatus with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_JoinStatus(x : JoinStatus) -> Int {
@@ -22859,6 +23003,18 @@ pub(all) struct Size {
 } derive(Eq, Debug)
 
 ///|
+pub extend Size with Eq::{not_equal, equal}
+
+///|
+pub extend Size with Debug::{to_repr}
+
+///|
+pub extend Size with @lib.OCompare::{ocompare}
+
+///|
+pub extend Size with @lib.OHash::{ohash_visit}
+
+///|
 pub impl @lib.OCompare for Size with fn ocompare(self, other) {
   @lib.compare(self.size, other.size)
 }
@@ -23301,6 +23457,18 @@ pub(all) struct FixedMap {
   functionmap : Map5[Name]
   relationmap : Map5[Name]
 } derive(Eq, Debug)
+
+///|
+pub extend FixedMap with Eq::{not_equal, equal}
+
+///|
+pub extend FixedMap with Debug::{to_repr}
+
+///|
+pub extend FixedMap with @lib.OCompare::{ocompare}
+
+///|
+pub extend FixedMap with @lib.OHash::{ohash_visit}
 
 ///|
 pub impl @lib.OCompare for FixedMap with fn ocompare(self, other) {
@@ -25787,6 +25955,18 @@ pub(all) enum Valuation {
 } derive(Eq, Debug)
 
 ///|
+pub extend Valuation with Eq::{not_equal, equal}
+
+///|
+pub extend Valuation with Debug::{to_repr}
+
+///|
+pub extend Valuation with @lib.OCompare::{ocompare}
+
+///|
+pub extend Valuation with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_Valuation(x : Valuation) -> Int {
   match x {
     Valuation(_) => 1000000
@@ -25995,6 +26175,18 @@ pub(all) enum Table {
 } derive(Eq, Debug)
 
 ///|
+pub extend Table with Eq::{not_equal, equal}
+
+///|
+pub extend Table with Debug::{to_repr}
+
+///|
+pub extend Table with @lib.OCompare::{ocompare}
+
+///|
+pub extend Table with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_Table(x : Table) -> Int {
   match x {
     Forgetful_table => 0
@@ -26096,6 +26288,12 @@ pub(all) struct Tables {
   rangesize : Int64
   tablemap : Ref[Map5[Table]]
 }
+
+///|
+pub extend Tables with @lib.OCompare::{ocompare}
+
+///|
+pub extend Tables with @lib.OHash::{ohash_visit}
 
 ///|
 pub impl @lib.OCompare for Tables with fn ocompare(self, other) {
@@ -26765,6 +26963,18 @@ pub(all) enum ModelTerm {
 } derive(Eq, Debug)
 
 ///|
+pub extend ModelTerm with Eq::{not_equal, equal}
+
+///|
+pub extend ModelTerm with Debug::{to_repr}
+
+///|
+pub extend ModelTerm with @lib.OCompare::{ocompare}
+
+///|
+pub extend ModelTerm with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_ModelTerm(x : ModelTerm) -> Int {
   match x {
     Model_var => 0
@@ -26831,6 +27041,18 @@ pub(all) enum Perturbation {
   Function_perturbation((FunctionName, @list.List[Element]), Element)
   Relation_perturbation((RelationName, @list.List[Element]), Bool)
 } derive(Eq, Debug)
+
+///|
+pub extend Perturbation with Eq::{not_equal, equal}
+
+///|
+pub extend Perturbation with Debug::{to_repr}
+
+///|
+pub extend Perturbation with @lib.OCompare::{ocompare}
+
+///|
+pub extend Perturbation with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_Perturbation(x : Perturbation) -> Int {
@@ -27177,6 +27399,18 @@ pub(all) enum Qterm {
 } derive(Eq, Debug)
 
 ///|
+pub extend Qterm with Eq::{not_equal, equal}
+
+///|
+pub extend Qterm with Debug::{to_repr}
+
+///|
+pub extend Qterm with @lib.OCompare::{ocompare}
+
+///|
+pub extend Qterm with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_Qterm(x : Qterm) -> Int {
   match x {
     Var => 0
@@ -27463,6 +27697,18 @@ pub(all) struct Parameters1 {
 } derive(Eq, Debug)
 
 ///|
+pub extend Parameters1 with Eq::{not_equal, equal}
+
+///|
+pub extend Parameters1 with Debug::{to_repr}
+
+///|
+pub extend Parameters1 with @lib.OCompare::{ocompare}
+
+///|
+pub extend Parameters1 with @lib.OHash::{ohash_visit}
+
+///|
 pub impl @lib.OCompare for Parameters1 with fn ocompare(self, other) {
   @lib.compare(self.fifo, other.fifo)
 }
@@ -27480,6 +27726,18 @@ pub(all) enum Net[TA] {
   Single(Qterm, Net[TA])
   Multiple(Net[TA]?, Map5[Net[TA]])
 } derive(Eq, Debug)
+
+///|
+pub extend Net with Eq::{not_equal, equal}
+
+///|
+pub extend Net with Debug::{to_repr}
+
+///|
+pub extend Net with @lib.OCompare::{ocompare}
+
+///|
+pub extend Net with @lib.OHash::{ohash_visit}
 
 ///|
 fn[TA] ocaml_rank_Net(x : Net[TA]) -> Int {
@@ -27540,6 +27798,18 @@ pub impl[TA : @lib.OHash] @lib.OHash for Net[TA] with fn ohash_visit(self, h) {
 pub(all) enum TermNet[TA] {
   Net(Parameters1, Int64, (Int64, Net[(Int64, TA)])?)
 } derive(Eq, Debug)
+
+///|
+pub extend TermNet with Eq::{not_equal, equal}
+
+///|
+pub extend TermNet with Debug::{to_repr}
+
+///|
+pub extend TermNet with @lib.OCompare::{ocompare}
+
+///|
+pub extend TermNet with @lib.OHash::{ohash_visit}
 
 ///|
 fn[TA] ocaml_rank_TermNet(x : TermNet[TA]) -> Int {
@@ -28703,6 +28973,18 @@ pub(all) struct LiteralNet[TA] {
 } derive(Eq, Debug)
 
 ///|
+pub extend LiteralNet with Eq::{not_equal, equal}
+
+///|
+pub extend LiteralNet with Debug::{to_repr}
+
+///|
+pub extend LiteralNet with @lib.OCompare::{ocompare}
+
+///|
+pub extend LiteralNet with @lib.OHash::{ohash_visit}
+
+///|
 pub impl[TA : @lib.OCompare] @lib.OCompare for LiteralNet[TA] with fn ocompare(
   self,
   other,
@@ -29080,6 +29362,18 @@ pub(all) struct NonunitT[TA] {
 } derive(Eq, Debug)
 
 ///|
+pub extend NonunitT with Eq::{not_equal, equal}
+
+///|
+pub extend NonunitT with Debug::{to_repr}
+
+///|
+pub extend NonunitT with @lib.OCompare::{ocompare}
+
+///|
+pub extend NonunitT with @lib.OHash::{ohash_visit}
+
+///|
 pub impl[TA : @lib.OCompare] @lib.OCompare for NonunitT[TA] with fn ocompare(
   self,
   other,
@@ -29118,6 +29412,18 @@ pub(all) struct Subsume[TA] {
   unitn : LiteralNet[(Literal, Clause, TA)]
   nonunit : NonunitT[TA]
 } derive(Eq, Debug)
+
+///|
+pub extend Subsume with Eq::{not_equal, equal}
+
+///|
+pub extend Subsume with Debug::{to_repr}
+
+///|
+pub extend Subsume with @lib.OCompare::{ocompare}
+
+///|
+pub extend Subsume with @lib.OHash::{ohash_visit}
 
 ///|
 pub impl[TA : @lib.OCompare] @lib.OCompare for Subsume[TA] with fn ocompare(
@@ -29843,6 +30149,18 @@ pub(all) enum Weight {
 } derive(Eq, Debug)
 
 ///|
+pub extend Weight with Eq::{not_equal, equal}
+
+///|
+pub extend Weight with Debug::{to_repr}
+
+///|
+pub extend Weight with @lib.OCompare::{ocompare}
+
+///|
+pub extend Weight with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_Weight(x : Weight) -> Int {
   match x {
     Weight(_, _) => 1000000
@@ -30242,6 +30560,18 @@ pub(all) enum Orient {
   Left_to_right
   Right_to_left
 } derive(Eq, Debug)
+
+///|
+pub extend Orient with Eq::{not_equal, equal}
+
+///|
+pub extend Orient with Debug::{to_repr}
+
+///|
+pub extend Orient with @lib.OCompare::{ocompare}
+
+///|
+pub extend Orient with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_Orient(x : Orient) -> Int {
@@ -31800,6 +32130,18 @@ pub(all) enum Units {
 } derive(Eq, Debug)
 
 ///|
+pub extend Units with Eq::{not_equal, equal}
+
+///|
+pub extend Units with Debug::{to_repr}
+
+///|
+pub extend Units with @lib.OCompare::{ocompare}
+
+///|
+pub extend Units with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_Units(x : Units) -> Int {
   match x {
     Units(_) => 1000000
@@ -32063,6 +32405,18 @@ pub(all) enum LiteralOrder {
   Unsigned_literal_order
   Positive_literal_order
 } derive(Eq, Debug)
+
+///|
+pub extend LiteralOrder with Eq::{not_equal, equal}
+
+///|
+pub extend LiteralOrder with Debug::{to_repr}
+
+///|
+pub extend LiteralOrder with @lib.OCompare::{ocompare}
+
+///|
+pub extend LiteralOrder with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_LiteralOrder(x : LiteralOrder) -> Int {
@@ -32704,6 +33058,18 @@ pub(all) struct AxCjThm {
 } derive(Eq, Debug)
 
 ///|
+pub extend AxCjThm with Eq::{not_equal, equal}
+
+///|
+pub extend AxCjThm with Debug::{to_repr}
+
+///|
+pub extend AxCjThm with @lib.OCompare::{ocompare}
+
+///|
+pub extend AxCjThm with @lib.OHash::{ohash_visit}
+
+///|
 pub impl @lib.OCompare for AxCjThm with fn ocompare(self, other) {
   let c = @lib.compare(self.axioms_thm, other.axioms_thm)
   if c != 0 {
@@ -32733,6 +33099,18 @@ pub(all) struct Simplify {
   reduce : Bool
   rewrites : Bool
 } derive(Eq, Debug)
+
+///|
+pub extend Simplify with Eq::{not_equal, equal}
+
+///|
+pub extend Simplify with Debug::{to_repr}
+
+///|
+pub extend Simplify with @lib.OCompare::{ocompare}
+
+///|
+pub extend Simplify with @lib.OHash::{ohash_visit}
 
 ///|
 pub impl @lib.OCompare for Simplify with fn ocompare(self, other) {
@@ -34563,6 +34941,18 @@ pub(all) enum Decision {
   Contradiction(Thm)
   Satisfiable(@list.List[Thm])
 } derive(Eq, Debug)
+
+///|
+pub extend Decision with Eq::{not_equal, equal}
+
+///|
+pub extend Decision with Debug::{to_repr}
+
+///|
+pub extend Decision with @lib.OCompare::{ocompare}
+
+///|
+pub extend Decision with @lib.OHash::{ohash_visit}
 
 ///|
 fn ocaml_rank_Decision(x : Decision) -> Int {

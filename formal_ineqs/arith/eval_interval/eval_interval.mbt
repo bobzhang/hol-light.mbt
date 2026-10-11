@@ -174,6 +174,18 @@ pub(all) enum IntervalFun {
 } derive(Eq, Debug)
 
 ///|
+pub extend IntervalFun with Eq::{not_equal, equal}
+
+///|
+pub extend IntervalFun with Debug::{to_repr}
+
+///|
+pub extend IntervalFun with @lib.OCompare::{ocompare}
+
+///|
+pub extend IntervalFun with @lib.OHash::{ohash_visit}
+
+///|
 fn ocaml_rank_IntervalFun(x : IntervalFun) -> Int {
   match x {
     Int_ref(_) => 1000000
