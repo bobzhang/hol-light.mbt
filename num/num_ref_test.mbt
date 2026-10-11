@@ -476,7 +476,7 @@ test "sign_num and compare_num return -1, 0 or 1 on every target" {
   let big = @num.power_num(@num.num_of_int(2), @num.num_of_int(100))
   let small = @num.num_of_int(3)
   let half = @num.div_num(@num.num_of_int(1), @num.num_of_int(2))
-  inspect(
+  debug_inspect(
     [
       @num.sign_num(big),
       @num.sign_num(@num.minus_num(big)),
