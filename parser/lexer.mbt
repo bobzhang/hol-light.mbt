@@ -3,21 +3,9 @@
 // symbols, each identifier is the longest string of alphanumerics or the
 // longest string of symbolics.
 //
-// Implemented as a loop over the input bytes (upstream's combinators
-// recurse once per token), with the same tokens and errors.
+// Implemented as a loop over the input characters (upstream's combinators
+// recurse once per token), with the same token boundaries and errors.
 // ===========================================================================
-
-///|
-pub(all) enum Lexcode {
-  Ident(String)
-  Resword(String)
-} derive(Eq, Debug)
-
-///|
-pub extend Lexcode with Eq::{equal, not_equal}
-
-///|
-pub extend Lexcode with @debug.Debug::{to_repr}
 
 ///|
 /// The token that starts a comment running to the end of the line.
@@ -144,7 +132,15 @@ fn string_literal(chars : Array[Char], i : Int) -> (String, Int)? raise {
       buf.write_string(s)
       j += 1 + used
     } else {
-      buf.write_char(c)
+      // HOL strings contain bytes. Encode source characters here, but leave
+      // numeric escapes above as individual bytes (including 128..255).
+      if c.to_int() < 128 {
+        buf.write_char(c)
+      } else {
+        for b in @utf8.encode(char_str(c)) {
+          buf.write_string(byte_char(b.to_int()))
+        }
+      }
       j += 1
     }
   }
@@ -174,20 +170,20 @@ fn raw_token(chars : Array[Char], i : Int) -> (Lexcode, Int)? raise {
     return Some((Ident(char_str(chars[i])), i + 1))
   }
   match run_of(chars, i, c => is_class(@printer.issep, c)) {
-    Some(j) => return Some((Ident(String::from_array(chars[i:j])), j))
+    Some(j) => return Some((Lexcode::ident(String::from_array(chars[i:j])), j))
     None => ()
   }
   match ident(chars, i) {
-    Some(j) => Some((Ident(String::from_array(chars[i:j])), j))
+    Some(j) => Some((Lexcode::ident(String::from_array(chars[i:j])), j))
     None => None
   }
 }
 
 ///|
 fn reserve(tok : Lexcode) -> Lexcode {
-  match tok {
-    Ident(n) if @printer.is_reserved_word(n) => Resword(n)
-    t => t
+  match tok.identifier() {
+    Some(n) if @printer.is_reserved_word(n) => Resword(n)
+    _ => tok
   }
 }
 
@@ -201,13 +197,11 @@ fn skip_spaces(chars : Array[Char], i : Int) -> Int {
 }
 
 ///|
-/// Split a string into HOL tokens. As upstream, the input is processed as
-/// bytes (its UTF-8 encoding), one character per byte, so string literals
-/// carry exactly OCaml's bytes; non-ASCII bytes never form identifiers.
+/// Split a string into HOL tokens. Scan source characters directly, retaining
+/// upstream's longest-match rules and ASCII-only identifiers. String literals
+/// carry exactly OCaml's bytes; only their contents are encoded as UTF-8.
 pub fn lex(s : String) -> List[Lexcode] raise {
-  let chars : Array[Char] = [
-    for b in @utf8.encode(s) => b.to_int().unsafe_to_char()
-  ]
+  let chars : Array[Char] = [ for c in s => c ]
   let toks = []
   let mut i = 0
   while true {

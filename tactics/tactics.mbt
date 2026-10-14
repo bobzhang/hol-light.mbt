@@ -642,7 +642,7 @@ pub fn hyp_tac(
 ) -> ((List[Thm]) -> Tactic raise) raise {
   let ident : (List[@parser.Lexcode]) -> (String, List[@parser.Lexcode]) raise = inp => {
     match inp {
-      More(Ident(s), tail=rest) if @printer.isalnum(s) => (s, rest)
+      More(tok_s, tail=rest) if tok_s.identifier() is Some(s) && @printer.isalnum(s) => (s, rest)
       _ => raise @parser.Noparse
     }
   }
