@@ -6128,42 +6128,42 @@ fn[TD] derive_induction_theorem_l(
 ///|
 /// parse_inductive_type_specification
 fn step_34() -> Unit raise {
-  let parse_type_loc : (@list.List[@lexer.Lexcode]) -> (
+  let parse_type_loc : (ArrayView[@lexer.Lexcode]) -> (
     @kernel.HolType,
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise = fn(
-    x728 : @list.List[@lexer.Lexcode],
-  ) -> (@kernel.HolType, @list.List[@lexer.Lexcode]) raise {
+    x728 : ArrayView[@lexer.Lexcode],
+  ) -> (@kernel.HolType, ArrayView[@lexer.Lexcode]) raise {
     let src = x728
     let (pty, rst) = @parser.parse_pretype(src)
     (@preterm.type_of_pretype(pty), rst)
   }
-  let parse_type_conapp : (@list.List[@lexer.Lexcode]) -> (
+  let parse_type_conapp : (ArrayView[@lexer.Lexcode]) -> (
     (String, @list.List[@kernel.HolType]),
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise = fn(
-    x729 : @list.List[@lexer.Lexcode],
-  ) -> ((String, @list.List[@kernel.HolType]), @list.List[@lexer.Lexcode]) raise {
+    x729 : ArrayView[@lexer.Lexcode],
+  ) -> ((String, @list.List[@kernel.HolType]), ArrayView[@lexer.Lexcode]) raise {
     let src_1 = x729
     let (cn_1, sps_1) = match src_1 {
-      More(@lexer.Lexcode::Ident(cn), tail=sps) => (cn, sps)
+      [@lexer.Lexcode::Ident(cn), ..sps] => (cn, sps)
       _ => @lib.failure()
     }
     let (tys, rst_1) = @parser.many(parse_type_loc)(sps_1)
     ((cn_1, tys), rst_1)
   }
-  let parse_type_clause : (@list.List[@lexer.Lexcode]) -> (
+  let parse_type_clause : (ArrayView[@lexer.Lexcode]) -> (
     (@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])]),
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise = fn(
-    x730 : @list.List[@lexer.Lexcode],
+    x730 : ArrayView[@lexer.Lexcode],
   ) -> (
     (@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])]),
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise {
     let src_2 = x730
     let (tn_1, sps_3) = match src_2 {
-      More(@lexer.Lexcode::Ident(tn), tail=sps_2) => (tn, sps_2)
+      [@lexer.Lexcode::Ident(tn), ..sps_2] => (tn, sps_2)
       _ => @lib.failure()
     }
     let t731 = @parser.listof(
@@ -6184,11 +6184,11 @@ fn step_34() -> Unit raise {
     )(sps_3)
     ((@kernel.mk_vartype(tn_1), tys_1), rst_2)
   }
-  let parse_type_definition : (@list.List[@lexer.Lexcode]) -> (
+  let parse_type_definition : (ArrayView[@lexer.Lexcode]) -> (
     @list.List[
       (@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])]),
     ],
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise = @parser.listof(
     parse_type_clause,
     @parser.a(@lexer.Lexcode::Resword(";")),
@@ -6206,11 +6206,11 @@ fn step_34() -> Unit raise {
       @list.List[
         (@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])]),
       ],
-      @list.List[@lexer.Lexcode],
+      ArrayView[@lexer.Lexcode],
     ) raise {
       parse_type_definition(@lexer.lex(x734))
     })(s)
-    if rst_3 == @list.List([]) {
+    if rst_3.is_empty() {
       spec
     } else {
       raise Failure("parse_inductive_type_specification: junk after def")

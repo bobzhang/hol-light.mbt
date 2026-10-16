@@ -818,33 +818,33 @@ pub fn word1_odd() -> @kernel.Thm {
 
 ///|
 let preparse_bitpat_c : @lib.Cell[
-  (@list.List[@lexer.Lexcode]) -> (
+  (ArrayView[@lexer.Lexcode]) -> (
     @preterm.Preterm,
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise,
 ] = @lib.Cell::new("preparse_bitpat")
 
 ///|
 /// `preparse_bitpat`
 pub fn preparse_bitpat(
-  x : @list.List[@lexer.Lexcode],
-) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise {
+  x : ArrayView[@lexer.Lexcode],
+) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise {
   preparse_bitpat_c.get()(x)
 }
 
 ///|
 let preparse_bitmatch_c : @lib.Cell[
-  (@list.List[@lexer.Lexcode]) -> (
+  (ArrayView[@lexer.Lexcode]) -> (
     @preterm.Preterm,
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise,
 ] = @lib.Cell::new("preparse_bitmatch")
 
 ///|
 /// `preparse_bitmatch`
 pub fn preparse_bitmatch(
-  x : @list.List[@lexer.Lexcode],
-) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise {
+  x : ArrayView[@lexer.Lexcode],
+) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise {
   preparse_bitmatch_c.get()(x)
 }
 
@@ -947,9 +947,9 @@ fn step_19() -> Unit raise {
       _ => raise @parser.Noparse
     }
   }
-  let bitpat_1 : (@list.List[@lexer.Lexcode]) -> (
+  let bitpat_1 : (ArrayView[@lexer.Lexcode]) -> (
     @preterm.Preterm,
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise = @parser.map(@parser.parse_preterm, (x80 : @preterm.Preterm) => {
     to_bitpat(nilpat_ptm, x80)
   })
@@ -959,9 +959,9 @@ fn step_19() -> Unit raise {
     let x_1 = x82
     Some(x_1)
   })
-  let pattern : (@list.List[@lexer.Lexcode]) -> (
+  let pattern : (ArrayView[@lexer.Lexcode]) -> (
     @preterm.Preterm?,
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise = @parser.alt(
     @parser.map(@parser.a(@lexer.Lexcode::Ident("_")), fn(
       x81 : @lexer.Lexcode,
@@ -970,9 +970,9 @@ fn step_19() -> Unit raise {
     }),
     t83,
   )
-  let clause : (@list.List[@lexer.Lexcode]) -> (
+  let clause : (ArrayView[@lexer.Lexcode]) -> (
     (@preterm.Preterm?, @preterm.Preterm),
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise = @parser.seq(
     pattern,
     @parser.map(
@@ -990,9 +990,9 @@ fn step_19() -> Unit raise {
     @parser.a(@lexer.Lexcode::Resword("|")),
     "pattern-match clause",
   )
-  let clauses : (@list.List[@lexer.Lexcode]) -> (
+  let clauses : (ArrayView[@lexer.Lexcode]) -> (
     @list.List[(@preterm.Preterm?, @preterm.Preterm)],
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise = @parser.map(
     @parser.seq(@parser.possibly(@parser.a(@lexer.Lexcode::Resword("|"))), t85),
     fn(

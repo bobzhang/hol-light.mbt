@@ -199,7 +199,7 @@ fn step_4() -> Unit raise {
       }
     }
   }, fn(x97 : @list.List[Unit]) -> (Int64, @list.List[Unit]) raise {
-    let t98 = @parser.finished(x97)
+    let t98 = @parser.finished_list(x97)
     (Int::to_int64(t98.0), t98.1)
   }, algebra)
   let t91 = by(@list.List(["B"]), arithmetic)
@@ -214,7 +214,7 @@ fn step_4() -> Unit raise {
       }
     }
   }, fn(x87 : @list.List[Unit]) -> (Int64, @list.List[Unit]) raise {
-    let t88 = @parser.finished(x87)
+    let t88 = @parser.finished_list(x87)
     (Int::to_int64(t88.0), t88.1)
   }, by(@list.List(["B", "C"]), algebra))
   let t82 = by(@list.List(["A"]), trivial)

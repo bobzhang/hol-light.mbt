@@ -4,46 +4,43 @@
 ///|
 /// parse_record_specification
 fn step_1() -> Unit raise {
-  let ptype : (@list.List[@lexer.Lexcode]) -> (
+  let ptype : (ArrayView[@lexer.Lexcode]) -> (
     @kernel.HolType,
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise = fn(
-    x1 : @list.List[@lexer.Lexcode],
-  ) -> (@kernel.HolType, @list.List[@lexer.Lexcode]) raise {
+    x1 : ArrayView[@lexer.Lexcode],
+  ) -> (@kernel.HolType, ArrayView[@lexer.Lexcode]) raise {
     let src = x1
     let (pty, rst) = @parser.parse_pretype(src)
     (@preterm.type_of_pretype(pty), rst)
   }
-  let recordelement : (@list.List[@lexer.Lexcode]) -> (
+  let recordelement : (ArrayView[@lexer.Lexcode]) -> (
     (String, @kernel.HolType),
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise = fn(
-    x2 : @list.List[@lexer.Lexcode],
-  ) -> ((String, @kernel.HolType), @list.List[@lexer.Lexcode]) raise {
+    x2 : ArrayView[@lexer.Lexcode],
+  ) -> ((String, @kernel.HolType), ArrayView[@lexer.Lexcode]) raise {
     let src_1 = x2
     match src_1 {
-      More(
-        @lexer.Lexcode::Ident(t),
-        tail=More(@lexer.Lexcode::Resword(":"), tail=rst_1)
-      ) => {
+      [@lexer.Lexcode::Ident(t), @lexer.Lexcode::Resword(":"), ..rst_1] => {
         let (ty, ors) = ptype(rst_1)
         ((t, ty), ors)
       }
       _ => raise @parser.Noparse
     }
   }
-  let recordelements : (@list.List[@lexer.Lexcode]) -> (
+  let recordelements : (ArrayView[@lexer.Lexcode]) -> (
     @list.List[(String, @kernel.HolType)],
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise = @parser.listof(
     recordelement,
     @parser.a(@lexer.Lexcode::Resword(";")),
     "';' or '}'",
   )
   let t3 = @parser.a(@lexer.Lexcode::Resword("}"))
-  let recspec : (@list.List[@lexer.Lexcode]) -> (
+  let recspec : (ArrayView[@lexer.Lexcode]) -> (
     @list.List[(String, @kernel.HolType)],
-    @list.List[@lexer.Lexcode],
+    ArrayView[@lexer.Lexcode],
   ) raise = @parser.map(
     @parser.seq(
       @parser.seq(@parser.a(@lexer.Lexcode::Resword("{")), recordelements),
@@ -64,12 +61,9 @@ fn step_1() -> Unit raise {
   ) -> (String, @list.List[(String, @kernel.HolType)]) raise {
     let s_1 = x5
     match @lexer.lex(s_1) {
-      More(
-        @lexer.Lexcode::Ident(tyname),
-        tail=More(@lexer.Lexcode::Ident("="), tail=rst_2)
-      ) => {
+      [@lexer.Lexcode::Ident(tyname), @lexer.Lexcode::Ident("="), ..rst_2] => {
         let (rs, er) = recspec(rst_2)
-        if er != @list.List([]) {
+        if !er.is_empty() {
           raise Failure("Stuff after record spec")
         } else {
           (tyname, rs)

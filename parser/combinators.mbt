@@ -1,5 +1,5 @@
 // ===========================================================================
-// Parser combinators (parser.ml). A parser takes an input list and returns
+// Parser combinators (parser.ml). A parser takes an input sequence and returns
 // a result and the rest of the input, raising `Noparse` when it does not
 // apply. `Failure` is a hard error that alternatives do not catch.
 // ===========================================================================
@@ -83,11 +83,11 @@ pub fn[X, R] fix(err : String, p : (X) -> R raise) -> (X) -> R raise {
 
 ///|
 /// One or more `p` separated by `sep`.
-pub fn[I, A, S] listof(
-  p : (List[I]) -> (A, List[I]) raise,
-  sep : (List[I]) -> (S, List[I]) raise,
+pub fn[X, A, S] listof(
+  p : (X) -> (A, X) raise,
+  sep : (X) -> (S, X) raise,
   err : String,
-) -> (List[I]) -> (List[A], List[I]) raise {
+) -> (X) -> (List[A], X) raise {
   map(seq(p, many(map(seq(sep, fix(err, p)), pr => pr.1))), ht => {
     ht.1.prepend(ht.0)
   })
@@ -100,22 +100,22 @@ pub fn[X, A] nothing(input : X) -> (List[A], X) {
 
 ///|
 /// Zero or more `p` separated by `sep`.
-pub fn[I, A, S] elistof(
-  p : (List[I]) -> (A, List[I]) raise,
-  sep : (List[I]) -> (S, List[I]) raise,
+pub fn[X, A, S] elistof(
+  p : (X) -> (A, X) raise,
+  sep : (X) -> (S, X) raise,
   err : String,
-) -> (List[I]) -> (List[A], List[I]) raise {
+) -> (X) -> (List[A], X) raise {
   alt(listof(p, sep, err), i => nothing(i))
 }
 
 ///|
 /// Left-associated binary operators.
-pub fn[I, A, S] leftbin(
-  p : (List[I]) -> (A, List[I]) raise,
-  sep : (List[I]) -> (S, List[I]) raise,
+pub fn[X, A, S] leftbin(
+  p : (X) -> (A, X) raise,
+  sep : (X) -> (S, X) raise,
   cons : (S, A, A) -> A raise?,
   err : String,
-) -> (List[I]) -> (A, List[I]) raise {
+) -> (X) -> (A, X) raise {
   map(seq(p, many(seq(sep, fix(err, p)))), xo => {
     let (x, opxs) = xo
     let (ops, xs) = @lib.unzip(opxs)
@@ -125,12 +125,12 @@ pub fn[I, A, S] leftbin(
 
 ///|
 /// Right-associated binary operators.
-pub fn[I, A, S] rightbin(
-  p : (List[I]) -> (A, List[I]) raise,
-  sep : (List[I]) -> (S, List[I]) raise,
+pub fn[X, A, S] rightbin(
+  p : (X) -> (A, X) raise,
+  sep : (X) -> (S, X) raise,
   cons : (S, A, A) -> A raise?,
   err : String,
-) -> (List[I]) -> (A, List[I]) raise {
+) -> (X) -> (A, X) raise {
   map(seq(p, many(seq(sep, fix(err, p)))), xo => {
     let (x, opxs) = xo
     if opxs.is_empty() {
@@ -156,7 +156,28 @@ pub fn[X, A] possibly(p : (X) -> (A, X) raise) -> (X) -> (List[A], X) raise {
 
 ///|
 /// An item satisfying `pred`.
-pub fn[I] some(pred : (I) -> Bool raise?) -> (List[I]) -> (I, List[I]) raise {
+pub fn[I] some(
+  pred : (I) -> Bool raise?,
+) -> (ArrayView[I]) -> (I, ArrayView[I]) raise {
+  input => {
+    match input {
+      [] => raise Noparse
+      [h, .. t] => if pred(h) { (h, t) } else { raise Noparse }
+    }
+  }
+}
+
+///|
+/// The item `tok`.
+pub fn[I : Eq] a(tok : I) -> (ArrayView[I]) -> (I, ArrayView[I]) raise {
+  some(item => item == tok)
+}
+
+///|
+/// An item satisfying `pred` in a linked-list input (used by character parsers).
+pub fn[I] some_list(
+  pred : (I) -> Bool raise?,
+) -> (List[I]) -> (I, List[I]) raise {
   input => {
     match input {
       Empty => raise Noparse
@@ -166,9 +187,9 @@ pub fn[I] some(pred : (I) -> Bool raise?) -> (List[I]) -> (I, List[I]) raise {
 }
 
 ///|
-/// The item `tok`.
-pub fn[I : Eq] a(tok : I) -> (List[I]) -> (I, List[I]) raise {
-  some(item => item == tok)
+/// The item `tok` in a linked-list input.
+pub fn[I : Eq] a_list(tok : I) -> (List[I]) -> (I, List[I]) raise {
+  some_list(item => item == tok)
 }
 
 ///|
@@ -192,7 +213,17 @@ pub fn[X, A] atleast(
 
 ///|
 /// Succeeds only at the end of the input.
-pub fn[I] finished(input : List[I]) -> (Int, List[I]) raise {
+pub fn[I] finished(input : ArrayView[I]) -> (Int, ArrayView[I]) raise {
+  if input.is_empty() {
+    (0, input)
+  } else {
+    raise Failure("Unparsed input")
+  }
+}
+
+///|
+/// Succeeds only at the end of a linked-list input.
+pub fn[I] finished_list(input : List[I]) -> (Int, List[I]) raise {
   if input.is_empty() {
     (0, input)
   } else {

@@ -395,20 +395,20 @@ pub impl @lib.OHash for Sexp with fn ohash_visit(self, h) {
 
 ///|
 /// `atom`
-pub fn atom(x36 : @list.List[@lexer.Lexcode]) -> ((Sexp, @list.List[@lexer.Lexcode])) raise {
+pub fn atom(x36 : ArrayView[@lexer.Lexcode]) -> ((Sexp, ArrayView[@lexer.Lexcode])) raise {
   let inp = x36
   match inp {
-    More(@lexer.Lexcode::Resword("("), tail=rst) => raise @parser.Noparse
-    More(@lexer.Lexcode::Resword(")"), tail=rst_1) => raise @parser.Noparse
-    More(@lexer.Lexcode::Resword(s), tail=rst_2) => (Sexp::Atom(s), rst_2)
-    More(@lexer.Lexcode::Ident(s_1), tail=rst_3) => (Sexp::Atom(s_1), rst_3)
-    Empty => raise @parser.Noparse
+    [@lexer.Lexcode::Resword("("), ..rst] => raise @parser.Noparse
+    [@lexer.Lexcode::Resword(")"), ..rst_1] => raise @parser.Noparse
+    [@lexer.Lexcode::Resword(s), ..rst_2] => (Sexp::Atom(s), rst_2)
+    [@lexer.Lexcode::Ident(s_1), ..rst_3] => (Sexp::Atom(s_1), rst_3)
+    [] => raise @parser.Noparse
   }
 }
 
 ///|
 /// `sexpression`
-pub fn sexpression(x37 : @list.List[@lexer.Lexcode]) -> ((Sexp, @list.List[@lexer.Lexcode])) raise {
+pub fn sexpression(x37 : ArrayView[@lexer.Lexcode]) -> ((Sexp, ArrayView[@lexer.Lexcode])) raise {
   let inp = x37
   let t39 = @parser.a(@lexer.Lexcode::Resword(")"))
   let t38 = @parser.many(sexpression)
@@ -1051,7 +1051,7 @@ pub fn prover9_refute(x146 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
         let t185 = @lexer.Lexcode::Ident("PROOF")
         let t186 = @lexer.Lexcode::Ident("OF")
         let t187 = @lexer.Lexcode::Ident("END")
-        if (unp != @list.List([@lexer.Lexcode::Ident(";;"), t187, t186, t185, t184])) {
+        if (unp != [@lexer.Lexcode::Ident(";;"), t187, t186, t185, t184]) {
           @pp.std_formatter.print_string("Unexpected proof object tail")
           {
             @pp.std_formatter.print_newline()

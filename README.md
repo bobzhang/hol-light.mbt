@@ -62,7 +62,10 @@ let th = @prime.prime_2()
 
 The `lexer` package owns `Lexcode`, `lex`, and `comment_token`.
 The `parser` package consumes lexer tokens and owns parser combinators and
-type/term parsing. Both packages use the syntax tables in `printer`.
+type/term parsing. `lex` returns an owned `Array[Lexcode]`; token parsers take
+`ArrayView[Lexcode]` and return the unconsumed suffix as a view into the same array.
+Keep the token array unchanged while parsing. Both packages use the syntax tables
+in `printer`.
 
 ## Develop
 

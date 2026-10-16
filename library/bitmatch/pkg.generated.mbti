@@ -133,9 +133,9 @@ pub fn pp_print_colored_bitmatch(@pp.Formatter) -> ((@kernel.Term) -> Unit raise
 
 pub fn pp_print_colored_bitpat(@pp.Formatter) -> ((@kernel.Term) -> Unit raise) raise
 
-pub fn preparse_bitmatch(@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise
+pub fn preparse_bitmatch(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise
 
-pub fn preparse_bitpat(@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise
+pub fn preparse_bitpat(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise
 
 pub fn print_bitmatch(@kernel.Term) -> Unit raise
 

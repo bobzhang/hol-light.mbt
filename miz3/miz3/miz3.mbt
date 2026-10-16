@@ -434,43 +434,43 @@ fn step_27() -> Unit raise {
       s11(x10)
     }, t.prepend(h))
   }
-  let t22 = stringof_l(@parser.some(fn(x21 : String) -> Bool raise {
+  let t22 = stringof_l(@parser.some_list(fn(x21 : String) -> Bool raise {
     @printer.issymb(x21)
   }))
-  let simple_ident : (@list.List[String]) -> (String, @list.List[String]) raise = @parser.alt(stringof_l(@parser.some(fn(x20 : String) -> Bool raise {
+  let simple_ident : (@list.List[String]) -> (String, @list.List[String]) raise = @parser.alt(stringof_l(@parser.some_list(fn(x20 : String) -> Bool raise {
     @printer.isalnum(x20)
   })), t22)
   let t23 = @parser.possibly(simple_ident)
-  let undertail : (@list.List[String]) -> (String, @list.List[String]) raise = @parser.map(@parser.seq(stringof_l(@parser.a("_")), t23), collect)
+  let undertail : (@list.List[String]) -> (String, @list.List[String]) raise = @parser.map(@parser.seq(stringof_l(@parser.a_list("_")), t23), collect)
   let t24 = @parser.many(undertail)
   let ident : (@list.List[String]) -> (String, @list.List[String]) raise = @parser.map(@parser.seq(@parser.alt(undertail, simple_ident), t24), collect)
-  let septok : (@list.List[String]) -> (String, @list.List[String]) raise = stringof_l(@parser.some(fn(x25 : String) -> Bool raise {
+  let septok : (@list.List[String]) -> (String, @list.List[String]) raise = stringof_l(@parser.some_list(fn(x25 : String) -> Bool raise {
     @printer.issep(x25)
   }))
-  let t28 = @parser.some(fn(x27 : String) -> Bool raise {
+  let t28 = @parser.some_list(fn(x27 : String) -> Bool raise {
     true
   })
-  let t30 = @parser.map(@parser.seq(@parser.a("\\"), t28), fn(x29 : (String, String)) -> String raise {
+  let t30 = @parser.map(@parser.seq(@parser.a_list("\\"), t28), fn(x29 : (String, String)) -> String raise {
     let (_, x) = x29
     ("\\" + x)
   })
-  let stringchar : (@list.List[String]) -> (String, @list.List[String]) raise = @parser.alt(@parser.some(fn(x26 : String) -> Bool raise {
+  let stringchar : (@list.List[String]) -> (String, @list.List[String]) raise = @parser.alt(@parser.some_list(fn(x26 : String) -> Bool raise {
     let i = x26
     ((i != "\\") && (i != "\""))
   }), t30)
-  let t35 = @parser.alt(@parser.map(@parser.a("\""), fn(x32 : String) -> Int64 raise {
+  let t35 = @parser.alt(@parser.map(@parser.a_list("\""), fn(x32 : String) -> Int64 raise {
     0L
   }), fn(x33 : @list.List[String]) -> (Int64, @list.List[String]) raise {
-    let t34 = @parser.finished(x33)
+    let t34 = @parser.finished_list(x33)
     (Int::to_int64(t34.0), t34.1)
   })
   let t31 = @parser.many(stringchar)
-  let string : (@list.List[String]) -> (String, @list.List[String]) raise = @parser.map(@parser.seq(@parser.seq(@parser.a("\""), t31), t35), fn(x36 : ((String, @list.List[String]), Int64)) -> String raise {
+  let string : (@list.List[String]) -> (String, @list.List[String]) raise = @parser.map(@parser.seq(@parser.seq(@parser.a_list("\""), t31), t35), fn(x36 : ((String, @list.List[String]), Int64)) -> String raise {
     let ((_, s), _) = x36
     ("\"" + (@lib.implode(s) + "\""))
   })
-  let t38 = @parser.a("`")
-  rawtoken_c.set(@parser.alt(@parser.alt(@parser.alt(@parser.alt(string, @parser.some(fn(x37 : String) -> Bool raise {
+  let t38 = @parser.a_list("`")
+  rawtoken_c.set(@parser.alt(@parser.alt(@parser.alt(@parser.alt(string, @parser.some_list(fn(x37 : String) -> Bool raise {
     @printer.isbra(x37)
   })), septok), ident), t38))
 }
@@ -512,12 +512,12 @@ pub fn whitespace(x39 : Bool, x40 : @list.List[String]) -> ((String, @list.List[
     }
   }
   let t46 = @parser.map(fn(x43 : @list.List[String]) -> (Int64, @list.List[String]) raise {
-    let t44 = @parser.finished(x43)
+    let t44 = @parser.finished_list(x43)
     (Int::to_int64(t44.0), t44.1)
   }, fn(x45 : Int64) -> String raise {
     ""
   })
-  let t47 = @parser.alt(@parser.a("\n"), t46)
+  let t47 = @parser.alt(@parser.a_list("\n"), t46)
   let rest_of_line : (@list.List[String]) -> (String, @list.List[String]) raise = @parser.map(@parser.seq(@parser.many(non_newline), t47), fn(x48 : (@list.List[String], String)) -> String raise {
     let (x, y) = x48
     @lib.itlist(fn(x51 : String, x52 : String) -> String raise {
@@ -1164,13 +1164,13 @@ fn step_39() -> Unit raise {
   }
   let t155 = Just::Proof_expected(true)
   let t157 = @parser.map(fn(x153 : @list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @list.List[(String, @lexer.Lexcode, String)]) raise {
-    let t154 = @parser.finished(x153)
+    let t154 = @parser.finished_list(x153)
     (Int::to_int64(t154.0), t154.1)
   }, fn(x156 : Int64) -> Just raise {
     t155
   })
   parse_by_c.set(@parser.alt(@parser.map(@parser.seq(@parser.seq(@parser.seq(parse_by_part, parse_from_part), a_semi), fn(x150 : @list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @list.List[(String, @lexer.Lexcode, String)]) raise {
-    let t151 = @parser.finished(x150)
+    let t151 = @parser.finished_list(x150)
     (Int::to_int64(t151.0), t151.1)
   }), fn(x152 : (((@list.List[@list.List[(String, @lexer.Lexcode, String)]], (@list.List[@list.List[(String, @lexer.Lexcode, String)]], Bool)), (String, @lexer.Lexcode, String)), Int64)) -> Just raise {
     let (((x_2, (y_2, z)), _), _) = x152
@@ -1289,8 +1289,8 @@ fn[TA, TB] term_of_hol1_l(error : @kernel.Term, b : Bool, x166 : @list.List[@ker
   try {
     let (ptm, l) = @parser.parse_preterm(((x172 : @list.List[(TA, @lexer.Lexcode, TB)]) => @lib.map(fn(x171 : (TA, @lexer.Lexcode, TB)) -> @lexer.Lexcode raise {
       middle(x171.0, x171.1, x171.2)
-    }, x172))(toks))
-    if !@list.List::is_empty(l) {
+    }, x172))(toks).to_array())
+    if !l.is_empty() {
       (8L, error)
     } else {
       try {
@@ -1500,7 +1500,7 @@ pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @l
                   raise @parser.Noparse
                 } else {
                   let t206 = @parser.seq(@parser.seq(@parser.many(ident_p), (x203 : @list.List[(String, @lexer.Lexcode, String)]) => a_p("be", x203)), fn(x204 : @list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @list.List[(String, @lexer.Lexcode, String)]) raise {
-                    let t205 = @parser.finished(x204)
+                    let t205 = @parser.finished_list(x204)
                     (Int::to_int64(t205.0), t205.1)
                   })
                   let x = (fn(x202 : (((@list.List[String], (String, @lexer.Lexcode, String)), Int64), @list.List[(String, @lexer.Lexcode, String)])) -> @list.List[String] raise {
@@ -1586,7 +1586,7 @@ pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @l
                     (n_5, src, Substep::Error(string_of_toks(toks), just))
                   } else {
                     let t217 = @parser.seq(@parser.many(ident_p), fn(x215 : @list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @list.List[(String, @lexer.Lexcode, String)]) raise {
-                      let t216 = @parser.finished(x215)
+                      let t216 = @parser.finished_list(x215)
                       (Int::to_int64(t216.0), t216.1)
                     })
                     let x_1 = (fn(x214 : ((@list.List[String], Int64), @list.List[(String, @lexer.Lexcode, String)])) -> @list.List[String] raise {
@@ -1610,7 +1610,7 @@ pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @l
                 } catch {
                   @lib.NotFound => {
                     let t230 = @parser.seq(@parser.seq(@parser.seq(@parser.many(ident_p), (x226 : @list.List[(String, @lexer.Lexcode, String)]) => a_p("such", x226)), (x227 : @list.List[(String, @lexer.Lexcode, String)]) => a_p("that", x227)), fn(x228 : @list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @list.List[(String, @lexer.Lexcode, String)]) raise {
-                      let t229 = @parser.finished(x228)
+                      let t229 = @parser.finished_list(x228)
                       (Int::to_int64(t229.0), t229.1)
                     })
                     let x_2 = (fn(x225 : ((((@list.List[String], (String, @lexer.Lexcode, String)), (String, @lexer.Lexcode, String)), Int64), @list.List[(String, @lexer.Lexcode, String)])) -> @list.List[String] raise {

@@ -183,7 +183,7 @@ pub fn parse_ntrie(String) -> @kernel.Term raise
 
 pub fn pp_print_ntrie(@pp.Formatter) -> ((@kernel.Term) -> Unit raise) raise
 
-pub fn preparse_ntrie(@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise
+pub fn preparse_ntrie(ArrayView[@lexer.Lexcode]) -> (@preterm.Preterm, ArrayView[@lexer.Lexcode]) raise
 
 pub fn print_ntrie(@kernel.Term) -> Unit raise
 

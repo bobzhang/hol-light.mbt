@@ -640,9 +640,9 @@ pub fn hyp_tac(
   tac : (List[Thm]) -> Tactic raise,
   s : String,
 ) -> ((List[Thm]) -> Tactic raise) raise {
-  let ident : (List[@lexer.Lexcode]) -> (String, List[@lexer.Lexcode]) raise = inp => {
+  let ident : (ArrayView[@lexer.Lexcode]) -> (String, ArrayView[@lexer.Lexcode]) raise = inp => {
     match inp {
-      More(Ident(s), tail=rest) if @printer.isalnum(s) => (s, rest)
+      [Ident(s), ..rest] if @printer.isalnum(s) => (s, rest)
       _ => raise @parser.Noparse
     }
   }
