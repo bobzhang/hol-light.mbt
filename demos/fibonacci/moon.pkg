@@ -1,0 +1,16 @@
+import {
+  "bobzhang/hol_light/arith",
+  "bobzhang/hol_light/bool",
+  "bobzhang/hol_light/define",
+  "bobzhang/hol_light/drule",
+  "bobzhang/hol_light/equal",
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/nums",
+  "bobzhang/hol_light/parser",
+  "bobzhang/hol_light/printer",
+  "bobzhang/hol_light/recursion",
+  "bobzhang/hol_light/simp",
+  "bobzhang/hol_light/tactics",
+  "bobzhang/hol_light/testkit",
+  "moonbitlang/core/list",
+} for "test"
