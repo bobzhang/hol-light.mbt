@@ -70,8 +70,8 @@ in `printer`.
 Universal quantification uses `forall x. P x`, including `(forall)` when the
 quantifier is passed as a function. The old `!x. P x` and `(!)` spellings are
 rejected. Existential `?` and unique-existence `?!` notation are unchanged.
-This is a surface-syntax change: the internal logical constant is still `!`,
-so theorem terms and the kernel's definitions keep their identities.
+The internal logical constant is also named `forall`; parser, printer, and
+term constructors use the same name without an alias.
 `tools/hol_notation.py` migrates HOL-input literals emitted by the OCaml
 translator; it is not a runtime compatibility parser.
 

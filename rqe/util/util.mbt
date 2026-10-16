@@ -49,7 +49,7 @@ pub fn suppress() -> Ref[@list.List[String]] {
 /// Rqe/util.ml:17
 fn step_3() -> Unit raise {
   {
-    suppress().val = @list.List(["==>", "?", "!", "/\\", "\\/", ",", "~", "APPEND", "CONS", "HD", "LAST", "NIL", "=", "real_lt", "real_gt", "real_le", "real_ge", "BIT0", "BIT1", "NUMERAL", "real_of_num", "_0", "_1", "real_div", "real_mul", "real_pow", "COND"])
+    suppress().val = @list.List(["==>", "?", "forall", "/\\", "\\/", ",", "~", "APPEND", "CONS", "HD", "LAST", "NIL", "=", "real_lt", "real_gt", "real_le", "real_ge", "BIT0", "BIT1", "NUMERAL", "real_of_num", "_0", "_1", "real_div", "real_mul", "real_pow", "COND"])
     ()
   }
 }

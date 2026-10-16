@@ -18,9 +18,9 @@ alpha_bad ! alpha: Invalid new variable
 type_match = [bool/'B; num/'A]
 type_match_bad ! type_match
 type_match_bad2 ! type_match
-mk_mconst = #!:fun(fun(num,bool),bool)
+mk_mconst = #forall:fun(fun(num,bool),bool)
 mk_mconst_bad ! mk_const: generic type cannot be instantiated
-mk_icomb = (#!:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) p:bool)))
+mk_icomb = (#forall:fun(fun(num,bool),bool) (\n:num. (#~:fun(bool,bool) p:bool)))
 mk_icomb_nonfun !! Match_failure
 list_mk_icomb = ((#CONS:fun(num,fun(fun(num,num),fun(num,num))) n:num) #NIL:fun(num,num))
 thm_frees = [g:fun('A,'A); x:'A; y:'A]
@@ -44,7 +44,7 @@ dest_list = [n:num; m:num]
 dest_list_bad ! dest_list
 is_list = truefalse
 mk_gabs_var = (\x:'A. ((f:fun('A,fun('A,'A)) x:'A) y:'A))
-mk_gabs = (#GABS:fun(fun(fun('A,'A),bool),fun('A,'A)) (\f:fun('A,'A). (#!:fun(fun(fun('A,'A),bool),bool) (\g:fun('A,'A). (#!:fun(fun('A,bool),bool) (\x:'A. ((#GEQ:fun('A,fun('A,bool)) (f:fun('A,'A) (g:fun('A,'A) x:'A))) ((f:fun('A,fun('A,'A)) x:'A) y:'A))))))))
+mk_gabs = (#GABS:fun(fun(fun('A,'A),bool),fun('A,'A)) (\f:fun('A,'A). (#forall:fun(fun(fun('A,'A),bool),bool) (\g:fun('A,'A). (#forall:fun(fun('A,bool),bool) (\x:'A. ((#GEQ:fun('A,fun('A,bool)) (f:fun('A,'A) (g:fun('A,'A) x:'A))) ((f:fun('A,fun('A,'A)) x:'A) y:'A))))))))
 dest_gabs = (g:fun('A,'A) x:'A) | ((f:fun('A,fun('A,'A)) x:'A) y:'A)
 dest_gabs_bad ! dest_gabs: Not a generalized abstraction
 strip_gabs = [(g:fun('A,'A) x:'A); y:'A] | ((f:fun('A,fun('A,'A)) x:'A) y:'A)

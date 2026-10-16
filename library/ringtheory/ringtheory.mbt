@@ -275853,7 +275853,7 @@ fn step_2153() -> Unit raise {
   fn ringtypes(x27014 : @kernel.Term) -> @list.List[@kernel.HolType] raise {
     let tm = x27014
     match tm {
-      @kernel.Term::Comb(@kernel.Term::Const("!", _), @kernel.Term::Abs(_, t))
+      @kernel.Term::Comb(@kernel.Term::Const("forall", _), @kernel.Term::Abs(_, t))
       | @kernel.Term::Comb(@kernel.Term::Const("?", _), @kernel.Term::Abs(_, t)) =>
         ringtypes(t)
       @kernel.Term::Comb(@kernel.Term::Const("~", _), t_1) => ringtypes(t_1)

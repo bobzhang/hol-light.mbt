@@ -14739,7 +14739,7 @@ pub fn equivalencename() -> Name {
 ///|
 /// universalName
 fn step_87() -> Unit raise {
-  universalname_c.set(fromstring("!"))
+  universalname_c.set(fromstring("forall"))
 }
 
 ///|

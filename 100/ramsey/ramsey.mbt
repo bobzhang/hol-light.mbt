@@ -947,7 +947,7 @@ pub fn not_mp(x72 : @kernel.Thm, x73 : @kernel.Thm) -> @kernel.Thm raise {
 pub fn forall_eq(x74 : @kernel.Term) -> ((@kernel.Thm) -> @kernel.Thm raise) raise {
   let x = x74
   let t76 = @kernel.mk_vartype("A")
-  let t77 = @kernel.mk_const("!", @list.List([(@kernel.type_of(x), t76)]))
+  let t77 = @kernel.mk_const("forall", @list.List([(@kernel.type_of(x), t76)]))
   let mkall : (@kernel.Thm) -> @kernel.Thm raise = (x78 : @kernel.Thm) => @equal.ap_term(t77, x78)
   fn(x79 : @kernel.Thm) -> @kernel.Thm raise {
     let th = x79

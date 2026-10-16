@@ -233,8 +233,7 @@ let dpty : Pretype = @preterm.dpty
 
 ///|
 fn pv(s : String) -> Preterm {
-  // Surface notation changes; the logical constant and theorem terms do not.
-  @preterm.Varp(if s == "forall" { "!" } else { s }, dpty)
+  @preterm.Varp(s, dpty)
 }
 
 ///|

@@ -498,7 +498,7 @@ pub fn forall_def() -> Thm {
 
 ///|
 pub fn mk_forall(v : Term, tm : Term) -> Term raise {
-  @basics.mk_binder("!", v, tm)
+  @basics.mk_binder("forall", v, tm)
 }
 
 ///|
@@ -1080,15 +1080,14 @@ pub fn existence(th : Thm) -> Thm raise {
 // ---------------------------------------------------------------------------
 
 ///|
-/// Enable verbose aliases for existence and truth values, and register the
-/// printer's `forall` interface. `forall` remains canonical when disabled.
+/// Enable verbose aliases for existence and truth values.
+/// `forall` is the canonical constant name and needs no alias.
 pub fn set_verbose_symbols() -> Unit raise {
-  for b in ["forall", "exists", "existsunique"] {
+  for b in ["exists", "existsunique"] {
     @printer.parse_as_binder(b)
   }
   @preterm.override_interface("true", q("T"))
   @preterm.override_interface("false", q("F"))
-  @preterm.override_interface("forall", q("(forall):(A->bool)->bool"))
   @preterm.override_interface("exists", q("(?):(A->bool)->bool"))
   @preterm.override_interface("existsunique", q("(?!):(A->bool)->bool"))
 }
@@ -1098,7 +1097,7 @@ pub fn unset_verbose_symbols() -> Unit {
   for b in ["exists", "existsunique"] {
     @printer.unparse_as_binder(b)
   }
-  for s in ["true", "false", "forall", "exists", "existsunique"] {
+  for s in ["true", "false", "exists", "existsunique"] {
     @preterm.remove_interface(s)
   }
 }
@@ -1284,7 +1283,7 @@ fn load_steps() -> Unit raise {
     imp_trans_r.set(r)
     imp_trans_pth.set(pth)
   }
-  // !
+  // forall
   forall_def_c.set(nbd("(forall) = \\P:A->bool. P = \\x. T"))
   {
     let p = q("P:A->bool")

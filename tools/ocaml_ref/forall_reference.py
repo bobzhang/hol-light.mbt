@@ -1,8 +1,9 @@
-"""Adapt the upstream oracle's surface notation, never its theorem terms.
+"""Adapt upstream notation and the universal constant's name for comparison.
 
 The upstream kernel and parser still run on their original sources. A temporary
-copy of the printer changes only the displayed universal-quantifier spelling;
-this lets OCaml's formatter independently check wrapping/parenthesization too.
+copy of the printer checks wrapping/parenthesization with the new spelling.
+The Boolean theory copy omits the now-redundant forall alias. Serialized terms
+are compared modulo the explicit constant rename; all other structure is kept.
 """
 import re
 import sys
@@ -45,10 +46,13 @@ def adapt_output(lines):
             trace = False
         if line.startswith('binders = '):
             words = line[10:].split()
-            # Verbose mode already has forall; preserve its registration order.
-            words = [w for w in words if w != '!'] if 'forall' in words else [
-                'forall' if w == '!' else w for w in words]
+            # forall now occupies the original canonical binder's position.
+            if '!' in words:
+                words = ['forall' if w == '!' else w for w in words if w != 'forall']
             line = 'binders = ' + ' '.join(words) + '\n'
+        elif line.startswith('constants = '):
+            line = 'constants = ' + ' '.join(
+                'forall' if w == '!' else w for w in line[12:].split()) + '\n'
         elif line.startswith(('T: ', 'Y: ')):
             # Only the input label changes. Never rewrite serialized terms or
             # exception separators in the oracle result after the label.
@@ -57,6 +61,12 @@ def adapt_output(lines):
                     line = new + line[len(old):]
                     break
         yield line
+
+
+def reference_source(source):
+    """Route core loads to the temporary copies without editing upstream."""
+    return source.replace('#use "printer.ml"', '#use "_build/printer_forall.ml"').replace(
+        '#use "bool.ml"', '#use "_build/bool_forall.ml"')
 
 
 def prepare():
@@ -77,6 +87,10 @@ def prepare():
         assert printer.count(old) == 1, 'upstream printer changed: ' + old
         printer = printer.replace(old, new)
     (ref / '_build/printer_forall.ml').write_text(printer)
+    boolean = (root / '.repos/hol-light/bool.ml').read_text()
+    alias = '  override_interface("forall",`(!):(A->bool)->bool`);\n'
+    assert boolean.count(alias) == 1, 'upstream forall alias changed'
+    (ref / '_build/bool_forall.ml').write_text(boolean.replace(alias, ''))
     (ref / '_build/parse_cases_legacy.txt').write_text(
         ''.join(upstream_notation(line) for line in
                 (ref / 'parse_cases.txt').read_text().splitlines(keepends=True)))
@@ -85,5 +99,7 @@ def prepare():
 if __name__ == '__main__':
     if sys.argv[1:] == ['--prepare']:
         prepare()
+    elif sys.argv[1:2] == ['--source']:
+        sys.stdout.write(reference_source(''.join(Path(p).read_text() for p in sys.argv[2:])))
     else:
         sys.stdout.writelines(adapt_output(sys.stdin))

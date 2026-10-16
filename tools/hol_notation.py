@@ -64,14 +64,20 @@ def upstream_notation(text):
 
 
 # The translator emits ordinary calls, including quotations expanded by pa_j.
-# Only string arguments in these HOL-input contexts are migrated. Constants,
-# diagnostic strings, serialized terms, and external-program data are not.
+# HOL-input strings and references to the renamed constant are migrated.
+# Diagnostic strings and external-program data are not.
 HOL_INPUTS = {
     '@parser.parse_term', '@parser.parse_type', '@lexer.lex',
     '@theorems.intro_tac', '@readable.parse_qproof', '@miz3.parse_qproof',
     'parse_qproof', 'parse_term_v1', 'inner_space_prove', 'full_inner_space_prove',
     '@miz2a.have', '@miz2a.theorem', '@miz2a.otherwise', '@miz2a.from',
     '@q.subgoal_then',
+}
+CONSTANT_NAMES = {
+    '@kernel.mk_const', '@kernel.mk_mconst', '@kernel.new_constant',
+    '@kernel.Const', '@kernel.Term::Const', '@basics.mk_mconst',
+    '@basics.mk_binder', '@basics.is_binder', '@basics.dest_binder',
+    'universalname_c.set', 'exclude_list_c.set',
 }
 SOURCE_TOKEN = re.compile(r'//[^\n]*|^[ \t]*[#\$]\|[^\n]*|"(?:\\.|[^"\\])*"|(?:@?[A-Za-z_][\w.:]*|[()\[\]{}])', re.M)
 
@@ -87,7 +93,7 @@ def rewrite_embedded_terms(text):
 
 
 def rewrite_moonbit(source):
-    """Migrate generated HOL-input literals without touching other strings."""
+    """Migrate generated HOL inputs and universal-constant references."""
     import json
     stack = []
     previous = ''
@@ -123,6 +129,9 @@ def rewrite_moonbit(source):
                         migrated = rewrite_embedded_terms(migrated)
                 elif stack and stack[-1] == '@lib.register_phrase':
                     migrated = rewrite_embedded_terms(text)
+                elif text == '!' and (any(name in CONSTANT_NAMES for name in stack) or
+                        re.match(r'\s*=>\s*forall_ctximpm?conv\b', source[match.end():])):
+                    migrated = 'forall'
                 elif text == '!' and stack and stack[-1] in {
                     '@printer.parse_as_binder', '@printer.unparse_as_binder',
                     '@lexer.Ident', '@lexer.Lexcode::Ident',
@@ -136,7 +145,10 @@ def rewrite_moonbit(source):
         end = match.end()
         previous = token
     result.append(source[end:])
-    return ''.join(result)
+    migrated = ''.join(result)
+    # Rqe/util's suppressed constants are names, not proof labels or messages.
+    return re.sub(r'(suppress\(\)\.val = @list.List\(\[)([^\]]*)(\]\))',
+                  lambda m: m[1] + m[2].replace('"!"', '"forall"') + m[3], migrated)
 
 
 if __name__ == '__main__':

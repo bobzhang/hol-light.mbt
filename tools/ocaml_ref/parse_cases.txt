@@ -21,7 +21,7 @@ const ~ : bool->bool
 const /\ : bool->bool->bool
 const \/ : bool->bool->bool
 const ==> : bool->bool->bool
-const ! : (A->bool)->bool
+const forall : (A->bool)->bool
 const ? : (A->bool)->bool
 const ?! : (A->bool)->bool
 const @ : (A->bool)->A

@@ -23,7 +23,7 @@ test "equal matches equal.ml" {
   @kernel.new_type("num", 0)
   @kernel.new_constant("+", @parser.parse_type("num->num->num"))
   @printer.parse_as_infix("+", (16, "right"))
-  @kernel.new_constant("!", @parser.parse_type("(A->bool)->bool"))
+  @kernel.new_constant("forall", @parser.parse_type("(A->bool)->bool"))
   @printer.parse_as_binder("forall")
   @printer.parse_as_binder("\\")
   @printer.parse_as_infix("=", (12, "right"))

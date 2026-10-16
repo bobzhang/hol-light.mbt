@@ -31,7 +31,8 @@ let bytes = "!x. unclassified string data"
 // @parser.parse_term("!x. comment")
 '''
         expected = source.replace('"!x. P x"', '"forall x. P x"').replace(
-            '"!x. "', '"forall x. "').replace('"![x]; !y"', '"forall[x]; forall y"')
+            '"!x. "', '"forall x. "').replace('"![x]; !y"', '"forall[x]; forall y"').replace(
+            '@kernel.mk_const("!",', '@kernel.mk_const("forall",')
         self.assertEqual(rewrite_moonbit(source), expected)
         self.assertEqual(rewrite_moonbit(expected), expected)
 
@@ -40,7 +41,17 @@ let bytes = "!x. unclassified string data"
         self.assertEqual(rewrite_moonbit(source), source)
         self.assertEqual(rewrite_moonbit('@lexer.Ident("!")'), '@lexer.Ident("forall")')
         self.assertEqual(rewrite_moonbit('@kernel.Term::Const("!", ty)'),
-                         '@kernel.Term::Const("!", ty)')
+                         '@kernel.Term::Const("forall", ty)')
+        self.assertEqual(rewrite_moonbit('@tactics.label_tac("!", th)'),
+                         '@tactics.label_tac("!", th)')
+
+    def test_generated_constant_name_tables(self):
+        for source in [
+                '"!" => forall_ctximpconv', '"!" => forall_ctximpmconv',
+                'universalname_c.set(fromstring("!"))',
+                'exclude_list_c.set(Ref::{ val: @list.List(["!", "?!"]) })',
+                'suppress().val = @list.List(["!", "?!"])']:
+            self.assertEqual(rewrite_moonbit(source), source.replace('"!"', '"forall"'))
 
     def test_embedded_exec_key(self):
         source = r'''@lib.register_phrase("parse_term \"!x. P x\"", fn() { () })'''
@@ -52,7 +63,7 @@ let bytes = "!x. unclassified string data"
                  'binders = \\ ! ? ?! forall exists\n']
         self.assertEqual(list(adapt_output(lines)),
                          [lines[0], '  forall x. P x\n', lines[2], lines[3],
-                          'binders = \\ ? ?! forall exists\n'])
+                          'binders = \\ forall ? ?! exists\n'])
 
     def test_reference_escaped_utf8(self):
         self.assertEqual(escaped_notation(r'!x. \226\136\131!y. P x y'),

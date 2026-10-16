@@ -76,7 +76,7 @@ test "printer matches printer.ml" {
     ("~", fn_(bool, bool)),
     ("T", bool),
     ("F", bool),
-    ("!", fn_(fn_(a, bool), bool)),
+    ("forall", fn_(fn_(a, bool), bool)),
     ("?", fn_(fn_(a, bool), bool)),
     ("NUMERAL", fn_(num_ty, num_ty)),
     ("BIT0", fn_(num_ty, num_ty)),
@@ -164,7 +164,7 @@ test "printer matches printer.ml" {
   t("eq", @basics.mk_eq(bin("+", x, y), numeral(42)))
   t(
     "forall",
-    @basics.mk_binder("!", x, @basics.mk_binder("!", y, @basics.mk_eq(x, y))),
+    @basics.mk_binder("forall", x, @basics.mk_binder("forall", y, @basics.mk_eq(x, y))),
   )
   t("exists", @basics.mk_binder("?", pv, bin("\\/", pv, neg(pv))))
   t("lambda", @kernel.mk_abs(x, @kernel.mk_abs(y, bin("+", x, y))))
@@ -273,7 +273,7 @@ test "printer matches printer.ml" {
   t(
     "binder_atom",
     @kernel.mk_comb(
-      @kernel.inst(@list.List([(num_ty, a)]), c0("!")),
+      @kernel.inst(@list.List([(num_ty, a)]), c0("forall")),
       mk_var("P", fn_(num_ty, bool)),
     ),
   )

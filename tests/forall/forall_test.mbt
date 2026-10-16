@@ -7,6 +7,10 @@ test "forall is the universal quantifier and round trips through the printer" {
   assert_true(printed.has_prefix("forall "))
   assert_eq(@parser.parse_term(printed), term)
   assert_true(@basics.is_forall(term))
+  let (quantifier, _) = @kernel.dest_comb(term)
+  assert_eq(@kernel.dest_const(quantifier).0, "forall")
+  assert_true(@kernel.constants().any(entry => entry.0 == "forall"))
+  assert_true(!@kernel.constants().any(entry => entry.0 == "!"))
   assert_true(@basics.is_uexists(@parser.parse_term("?!x:bool. x")))
   assert_true(!@printer.parses_as_binder("!"))
 }

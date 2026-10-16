@@ -594,7 +594,7 @@ fn step_4() -> Unit raise {
             }
             @kernel.Term::Comb(
               @kernel.Term::Const(
-                "!",
+                "forall",
                 @kernel.HolType::Tyapp(
                   "fun",
                   More(@kernel.HolType::Tyapp("fun", More(ty, tail=_)), tail=_)
@@ -993,7 +993,7 @@ fn nnf_conv_l(
     }
     @kernel.Term::Comb(
       @kernel.Term::Const(
-        "!",
+        "forall",
         @kernel.HolType::Tyapp(
           "fun",
           More(@kernel.HolType::Tyapp("fun", More(ty_3, tail=_)), tail=_)
@@ -1234,7 +1234,7 @@ fn nnf_conv_p_l(
     }
     @kernel.Term::Comb(
       @kernel.Term::Const(
-        "!",
+        "forall",
         @kernel.HolType::Tyapp(
           "fun",
           More(@kernel.HolType::Tyapp("fun", More(ty_6, tail=_)), tail=_)
@@ -1589,7 +1589,7 @@ fn weakdnf_l(
   let weakdnf = (x127 : @kernel.Term) => weakdnf_l(distribute, strengthen, x127)
   let tm_1 = x127
   match tm_1 {
-    @kernel.Term::Comb(@kernel.Term::Const("!", _), @kernel.Term::Abs(_, _))
+    @kernel.Term::Comb(@kernel.Term::Const("forall", _), @kernel.Term::Abs(_, _))
     | @kernel.Term::Comb(@kernel.Term::Const("?", _), @kernel.Term::Abs(_, _)) =>
       @equal.binder_conv(weakdnf)(tm_1)
     @kernel.Term::Comb(@kernel.Term::Comb(@kernel.Term::Const("\\/", _), _), _) =>
@@ -1620,7 +1620,7 @@ fn substrongdnf_l(
   }
   let tm_2 = x129
   match tm_2 {
-    @kernel.Term::Comb(@kernel.Term::Const("!", _), @kernel.Term::Abs(_, _))
+    @kernel.Term::Comb(@kernel.Term::Const("forall", _), @kernel.Term::Abs(_, _))
     | @kernel.Term::Comb(@kernel.Term::Const("?", _), @kernel.Term::Abs(_, _)) =>
       @equal.binder_conv(strongdnf)(tm_2)
     @kernel.Term::Comb(@kernel.Term::Comb(@kernel.Term::Const("\\/", _), _), _) =>
@@ -1746,7 +1746,7 @@ fn weakcnf_l(
   let weakcnf = (x135 : @kernel.Term) => weakcnf_l(distribute, strengthen, x135)
   let tm_1 = x135
   match tm_1 {
-    @kernel.Term::Comb(@kernel.Term::Const("!", _), @kernel.Term::Abs(_, _))
+    @kernel.Term::Comb(@kernel.Term::Const("forall", _), @kernel.Term::Abs(_, _))
     | @kernel.Term::Comb(@kernel.Term::Const("?", _), @kernel.Term::Abs(_, _)) =>
       @equal.binder_conv(weakcnf)(tm_1)
     @kernel.Term::Comb(@kernel.Term::Comb(@kernel.Term::Const("/\\", _), _), _) =>
@@ -1777,7 +1777,7 @@ fn substrongcnf_l(
   }
   let tm_2 = x137
   match tm_2 {
-    @kernel.Term::Comb(@kernel.Term::Const("!", _), @kernel.Term::Abs(_, _))
+    @kernel.Term::Comb(@kernel.Term::Const("forall", _), @kernel.Term::Abs(_, _))
     | @kernel.Term::Comb(@kernel.Term::Const("?", _), @kernel.Term::Abs(_, _)) =>
       @equal.binder_conv(strongcnf)(tm_2)
     @kernel.Term::Comb(@kernel.Term::Comb(@kernel.Term::Const("/\\", _), _), _) =>
@@ -2673,7 +2673,7 @@ pub fn prop_atom_conv(
   let tm = x248
   match tm {
     @kernel.Term::Comb(
-      @kernel.Term::Const("!", _)
+      @kernel.Term::Const("forall", _)
       | @kernel.Term::Const("?", _)
       | @kernel.Term::Const("?!", _),
       @kernel.Term::Abs(_, _)
