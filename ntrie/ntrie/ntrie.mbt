@@ -813,7 +813,7 @@ fn step_29() -> Unit raise {
   }
   let parse_int : (@list.List[@parser.Lexcode]) -> (@num.Num, @list.List[@parser.Lexcode]) raise = fn(x104 : @list.List[@parser.Lexcode]) -> (@num.Num, @list.List[@parser.Lexcode]) raise {
     match x104 {
-      More(@parser.Lexcode::Ident(s_1), tail=rest) => {
+      More(tok_s_1, tail=rest) if tok_s_1.identifier() is Some(s_1) => {
         let n_3 = try {
           @num.num_of_string(s_1)
         } catch {

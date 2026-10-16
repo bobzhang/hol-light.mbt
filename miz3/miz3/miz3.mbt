@@ -529,10 +529,7 @@ pub fn whitespace(x39 : Bool, x40 : @list.List[String]) -> ((String, @list.List[
       s53(x52)
     }, x, y)
   })
-  let comment_string = match @parser.comment_token.val {
-    @parser.Lexcode::Resword(t) => t
-    @parser.Lexcode::Ident(t_1) => t_1
-  }
+  let comment_string = @parser.comment_token.val.text()
   match i {
     Empty => {
       if e {
@@ -583,7 +580,7 @@ fn step_28() -> Unit raise {
     if @printer.is_reserved_word(n) {
       @parser.Lexcode::Resword(n)
     } else {
-      @parser.Lexcode::Ident(n)
+      @parser.Lexcode::ident(n)
     }
   }
   fn tokens(x57 : @list.List[String]) -> ((@list.List[(String, @parser.Lexcode, String)], @list.List[String])) raise {
@@ -658,8 +655,7 @@ pub fn[TA, TB] a_p(x70 : String, x71 : @list.List[(TA, @parser.Lexcode, TB)]) ->
   let t = x70
   let toks = x71
   match toks {
-    More((_, @parser.Lexcode::Resword(t_p), _) as tok, tail=rst) if (t == t_p) => (tok, rst)
-    More((_, @parser.Lexcode::Ident(t_p_1), _) as tok_1, tail=rst_1) if (t == t_p_1) => (tok_1, rst_1)
+    More((_, token, _) as tok, tail=rst) if t == token.text() => (tok, rst)
     _ => raise @parser.Noparse
   }
 }
@@ -684,8 +680,8 @@ pub fn a_semi(x : @list.List[(String, @parser.Lexcode, String)]) -> (((String, @
 pub fn[TA, TB] ident_p(x73 : @list.List[(TA, @parser.Lexcode, TB)]) -> ((String, @list.List[(TA, @parser.Lexcode, TB)])) raise {
   let toks = x73
   match toks {
-    More((_, @parser.Lexcode::Ident(s), _), tail=rst) => (s, rst)
-    More((_, @parser.Lexcode::Resword("("), _), tail=More((_, @parser.Lexcode::Ident(s_1), _), tail=More((_, @parser.Lexcode::Resword(")"), _), tail=rst_1))) => (s_1, rst_1)
+    More((_, tok_s, _), tail=rst) if tok_s.identifier() is Some(s) => (s, rst)
+    More((_, @parser.Lexcode::Resword("("), _), tail=More((_, tok_s_1, _), tail=More((_, @parser.Lexcode::Resword(")"), _), tail=rst_1))) if tok_s_1.identifier() is Some(s_1) => (s_1, rst_1)
     _ => raise @parser.Noparse
   }
 }
@@ -696,10 +692,10 @@ pub fn unident_p(x74 : String) -> @list.List[(String, @parser.Lexcode, String)] 
   let s = x74
   if (@printer.parses_as_binder(s) || (@lib.can(@printer.get_infix_status, s) || @printer.is_prefix(s))) {
     let t75 = ("", @parser.Lexcode::Resword(")"), "")
-    let t76 = ("", @parser.Lexcode::Ident(s), "")
+    let t76 = ("", @parser.Lexcode::ident(s), "")
     @list.List([("", @parser.Lexcode::Resword("("), ""), t76, t75])
   } else {
-    @list.List([("", @parser.Lexcode::Ident(s), "")])
+    @list.List([("", @parser.Lexcode::ident(s), "")])
   }
 }
 
@@ -721,7 +717,8 @@ pub fn[TA, TB] cut_to(x77 : Bool, x78 : Int64, x79 : @list.List[String], x80 : @
     }
     More(tok, tail=rst) => {
       match tok {
-        (_, @parser.Lexcode::Resword(s), _) | (_, @parser.Lexcode::Ident(s), _) => {
+        (_, token, _) => {
+          let s = token.text()
           let x = !(((n > 0L) && @lib.mem(s, mizar_skip_bracketed())))
           if (@lib.mem(s, c) && x) {
             (@list.List([tok]), rst)
@@ -791,19 +788,19 @@ pub fn strings_of_toks(x94 : @list.List[(String, @parser.Lexcode, String)]) -> (
     let toks_1 = x95
     match toks_1 {
       Empty => ("", "")
-      More((x, @parser.Lexcode::Ident(y), z), tail=Empty) | More((x, @parser.Lexcode::Resword(y), z), tail=Empty) => ((x + y), z)
-      More((x_1, @parser.Lexcode::Ident(y_1), z_1), tail=rst) | More((x_1, @parser.Lexcode::Resword(y_1), z_1), tail=rst) => {
+      More((x, y, z), tail=Empty) => ((x + y.text()), z)
+      More((x_1, y_1, z_1), tail=rst) => {
         let (u, v) = string_of_toks1(rst)
-        ((x_1 + (y_1 + (z_1 + u))), v)
+        ((x_1 + (y_1.text() + (z_1 + u))), v)
       }
     }
   }
   match toks {
     Empty => ("", "", "")
-    More((x_2, @parser.Lexcode::Ident(y_2), z_2), tail=Empty) | More((x_2, @parser.Lexcode::Resword(y_2), z_2), tail=Empty) => (x_2, y_2, z_2)
-    More((x_3, @parser.Lexcode::Ident(y_3), z_3), tail=rst_1) | More((x_3, @parser.Lexcode::Resword(y_3), z_3), tail=rst_1) => {
+    More((x_2, y_2, z_2), tail=Empty) => (x_2, y_2.text(), z_2)
+    More((x_3, y_3, z_3), tail=rst_1) => {
       let (u_1, v_1) = string_of_toks1(rst_1)
-      (x_3, (y_3 + (z_3 + u_1)), v_1)
+      (x_3, (y_3.text() + (z_3 + u_1)), v_1)
     }
   }
 }
@@ -851,7 +848,7 @@ pub fn split_string(x : String) -> @list.List[String] raise {
 pub fn tok_of_toks(x101 : @list.List[(String, @parser.Lexcode, String)]) -> ((String, @parser.Lexcode, String)) raise {
   let toks = x101
   let (x, y, z) = strings_of_toks(toks)
-  (x, @parser.Lexcode::Ident(y), z)
+  (x, @parser.Lexcode::ident(y), z)
 }
 
 ///|
@@ -1100,7 +1097,7 @@ pub fn by_item_of_toks(x125 : @list.List[(String, @parser.Lexcode, String)]) -> 
                           } catch {
                             _ => {
                               match toks {
-                                More((_, @parser.Lexcode::Ident(s_2), _), tail=Empty) => ByItem::Label(s_2)
+                                More((_, tok_s_2, _), tail=Empty) if tok_s_2.identifier() is Some(s_2) => ByItem::Label(s_2)
                                 _ => raise Failure("by_item_of_toks")
                               }
                             }
@@ -1193,8 +1190,8 @@ pub fn parse_by(x : @list.List[(String, @parser.Lexcode, String)]) -> ((Just, @l
 fn[TA, TB] parse_by_item_l(x132 : @list.List[(TA, @parser.Lexcode, TB)]) -> ((@list.List[(TA, @parser.Lexcode, TB)], @list.List[(TA, @parser.Lexcode, TB)])) raise {
   let toks = x132
   match toks {
-    More((_, @parser.Lexcode::Ident("#"), _) as tok1, tail=More((_, @parser.Lexcode::Ident(s), _) as tok2, tail=toks_1)) if (s != ",") => (@list.List([tok1, tok2]), toks_1)
-    More((_, @parser.Lexcode::Ident(_), _) as tok, tail=toks_2) => (@list.List([tok]), toks_2)
+    More((_, @parser.Lexcode::Ident("#"), _) as tok1, tail=More((_, tok_s, _) as tok2, tail=toks_1)) if tok_s.identifier() is Some(s) && (s != ",") => (@list.List([tok1, tok2]), toks_1)
+    More((_, tok_ident, _) as tok, tail=toks_2) if tok_ident.identifier() is Some(_) => (@list.List([tok]), toks_2)
     _ => raise @parser.Noparse
   }
 }
@@ -1205,7 +1202,7 @@ pub fn[TA, TB] parse_labels(x158 : @list.List[(TA, @parser.Lexcode, TB)]) -> @li
   let toks = x158
   match toks {
     Empty => @list.List([])
-    More((_, @parser.Lexcode::Resword("["), _), tail=More((_, @parser.Lexcode::Ident(s), _), tail=More((_, @parser.Lexcode::Resword("]"), _), tail=rst))) => parse_labels(rst).prepend(s)
+    More((_, @parser.Lexcode::Resword("["), _), tail=More((_, tok_s, _), tail=More((_, @parser.Lexcode::Resword("]"), _), tail=rst))) if tok_s.identifier() is Some(s) => parse_labels(rst).prepend(s)
     _ => raise @parser.Noparse
   }
 }
@@ -1266,7 +1263,7 @@ pub fn term_of_hol(x164 : Bool) -> ((@list.List[@kernel.Term]) -> ((@list.List[(
       let toks_1 = x177
       match toks_1 {
         More((x, @parser.Lexcode::Ident(".="), y), tail=rest) => {
-          let t178 = rest.prepend(("", @parser.Lexcode::Ident("="), y))
+          let t178 = rest.prepend(("", @parser.Lexcode::Symbol(Equal), y))
           ((x166, x167) => term_of_hol1_l(error, b, x166, x167))(env_1, t178.prepend((x, @parser.Lexcode::Ident("..."), " ")))
         }
         _ => ((x166, x167) => term_of_hol1_l(error, b, x166, x167))(env_1, toks_1)
@@ -1444,7 +1441,7 @@ fn[TH, TI] cut_labs_l(x189 : @list.List[(TH, @parser.Lexcode, TI)], x190 : @list
   let toks_4 = x189
   let labs = x190
   match toks_4 {
-    More((_, @parser.Lexcode::Resword("]"), _) as tok1, tail=More((_, @parser.Lexcode::Ident(_), _) as tok2, tail=More((_, @parser.Lexcode::Resword("["), _) as tok3, tail=rst_4))) => cut_labs_l(rst_4, ((labs.prepend(tok1)).prepend(tok2)).prepend(tok3))
+    More((_, @parser.Lexcode::Resword("]"), _) as tok1, tail=More((_, tok_ident, _) as tok2, tail=More((_, @parser.Lexcode::Resword("["), _) as tok3, tail=rst_4))) if tok_ident.identifier() is Some(_) => cut_labs_l(rst_4, ((labs.prepend(tok1)).prepend(tok2)).prepend(tok3))
     _ => (toks_4, labs)
   }
 }
@@ -1630,7 +1627,7 @@ pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @p
                     })(t230(rst_1))
                     let t231 = hol_part.prepend(("", @parser.Lexcode::Resword("."), ""))
                     let t232 = @lib.flat(@lib.map(unident_p, x_2)).concat(t231)
-                    let xy = t232.prepend(("", @parser.Lexcode::Ident("?"), ""))
+                    let xy = t232.prepend(("", @parser.Lexcode::Symbol(Exists), ""))
                     let (n_7, tm) = term_of_hol(true)(env)(xy)
                     if (n_7 != 0L) {
                       (n_7, src, Substep::Error(string_of_toks(toks), just))
@@ -2512,7 +2509,7 @@ pub fn connect_step(x383 : (Int64, @list.List[@list.List[(String, @parser.Lexcod
       Empty => @list.List([])
       More(lab, tail=labs_p) => {
         let t389 = extra_from(comma, labs_p)
-        (t389.prepend(("", @parser.Lexcode::Ident(lab), ""))).prepend(sep)
+        (t389.prepend(("", @parser.Lexcode::ident(lab), ""))).prepend(sep)
       }
     }
   }
@@ -4431,7 +4428,7 @@ pub fn renumber_just(x859 : @list.List[(@list.List[String], @list.List[String])]
       Empty => (@list.List([]), src_4, @list.List([]))
       More(ByItem::Label(s_1) as x_7, tail=l_p) if isnumber(s_1) => {
         match src_4 {
-          More(tok, tail=More((x1_2, @parser.Lexcode::Ident(_), x2_2) as tok_p, tail=src23)) => {
+          More(tok, tail=More((x1_2, tok_ident, x2_2) as tok_p, tail=src23)) if tok_ident.identifier() is Some(_) => {
             let labs_9 = @lib.flat(@lib.map(fn(x865 : (@list.List[String], @list.List[String])) -> @list.List[String] raise {
               x865.1
             }, @lib.filter(fn(x869 : (@list.List[String], @list.List[String])) -> Bool raise {
@@ -4452,7 +4449,7 @@ pub fn renumber_just(x859 : @list.List[(@list.List[String], @list.List[String])]
               let labs_p_10 = @lib.tl(labs_9)
               let src1_2 = @lib.flat(@lib.map(fn(x871 : String) -> @list.List[(String, @parser.Lexcode, String)] raise {
                 let s_3 = x871
-                let t872 = ("", @parser.Lexcode::Ident(s_3), x2_2)
+                let t872 = ("", @parser.Lexcode::ident(s_3), x2_2)
                 @list.List([("", @parser.Lexcode::Ident(","), ""), t872])
               }, labs_p_10))
               let t873 = if @list.List::is_empty(labs_p_10) {
@@ -4460,7 +4457,7 @@ pub fn renumber_just(x859 : @list.List[(@list.List[String], @list.List[String])]
               } else {
                 ""
               }
-              (((src1_2.prepend((x1_2, @parser.Lexcode::Ident(@lib.hd(labs_9)), t873))).prepend(tok)).concat(src2_1), src3_1, items.concat(l_p_p))
+              (((src1_2.prepend((x1_2, @parser.Lexcode::ident(@lib.hd(labs_9)), t873))).prepend(tok)).concat(src2_1), src3_1, items.concat(l_p_p))
             }
           }
           _ => raise Failure("renumber_by")
@@ -4468,8 +4465,8 @@ pub fn renumber_just(x859 : @list.List[(@list.List[String], @list.List[String])]
       }
       More(x_8, tail=l_p_1) => {
         let (src1_3, src23_3) = match src_4 {
-          More(tok_1, tail=More((_, @parser.Lexcode::Ident("#"), _) as tok1_1, tail=More((_, @parser.Lexcode::Ident(s_4), _) as tok2_1, tail=src23_1))) if (s_4 != ",") => (@list.List([tok_1, tok1_1, tok2_1]), src23_1)
-          More(tok_2, tail=More((_, @parser.Lexcode::Ident(_), _) as tok_p_1, tail=src23_2)) => (@list.List([tok_2, tok_p_1]), src23_2)
+          More(tok_1, tail=More((_, @parser.Lexcode::Ident("#"), _) as tok1_1, tail=More((_, tok_s_4, _) as tok2_1, tail=src23_1))) if tok_s_4.identifier() is Some(s_4) && (s_4 != ",") => (@list.List([tok_1, tok1_1, tok2_1]), src23_1)
+          More(tok_2, tail=More((_, tok_ident, _) as tok_p_1, tail=src23_2)) if tok_ident.identifier() is Some(_) => (@list.List([tok_2, tok_p_1]), src23_2)
           _ => raise Failure("renumber_by")
         }
         let (src2_2, src3_2, l_p_p_1) = renumber_by(src23_3, l_p_1)
@@ -4501,7 +4498,7 @@ fn[TA, TB] make_lab_l(x838 : TA, x839 : TB, x840 : TA, x841 : TB, x842 : TA, x84
   let y3 = x843
   let s = x844
   let t845 = (x3, @parser.Lexcode::Resword("]"), y3)
-  let t846 = (x2, @parser.Lexcode::Ident(s), y2)
+  let t846 = (x2, @parser.Lexcode::ident(s), y2)
   (@list.List([(x1, @parser.Lexcode::Resword("["), y1), t846, t845]), @list.List([s]))
 }
 
@@ -4522,7 +4519,7 @@ fn[TC] renumber_labs_l(x847 : Bool, x848 : String, x849 : @list.List[(String, @p
     }
     More(lab, tail=rst) if isnumber(lab) => {
       match src {
-        More((x1_1, @parser.Lexcode::Resword("["), y1_1), tail=More((x2_1, @parser.Lexcode::Ident(s_p), y2_1), tail=More((x3_1, @parser.Lexcode::Resword("]"), y3_1), tail=rstsrc))) => {
+        More((x1_1, @parser.Lexcode::Resword("["), y1_1), tail=More((x2_1, tok_s_p, y2_1), tail=More((x3_1, @parser.Lexcode::Resword("]"), y3_1), tail=rstsrc))) if tok_s_p.identifier() is Some(s_p) => {
           let ((src_p, labs_p), w_p) = renumber_labs_l(false, y3_1, rstsrc, rst, label)
           let (newsrc, newlabs) = if b {
             make_lab_l(x1_1, y1_1, x2_1, y2_1, x3_1, w_p, @lib.hd(label.1))

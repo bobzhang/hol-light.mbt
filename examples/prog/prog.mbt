@@ -1662,7 +1662,7 @@ fn step_86() -> Unit raise {
   }
   let identifier : (@list.List[@parser.Lexcode]) -> (String, @list.List[@parser.Lexcode]) raise = fn(x229 : @list.List[@parser.Lexcode]) -> (String, @list.List[@parser.Lexcode]) raise {
     match x229 {
-      More(@parser.Lexcode::Ident(n_1), tail=rest) => (n_1, rest)
+      More(tok_n_1, tail=rest) if tok_n_1.identifier() is Some(n_1) => (n_1, rest)
       _ => raise @parser.Noparse
     }
   }

@@ -6146,7 +6146,7 @@ fn step_34() -> Unit raise {
   ) -> ((String, @list.List[@kernel.HolType]), @list.List[@parser.Lexcode]) raise {
     let src_1 = x729
     let (cn_1, sps_1) = match src_1 {
-      More(@parser.Lexcode::Ident(cn), tail=sps) => (cn, sps)
+      More(tok_cn, tail=sps) if tok_cn.identifier() is Some(cn) => (cn, sps)
       _ => @lib.failure()
     }
     let (tys, rst_1) = @parser.many(parse_type_loc)(sps_1)
@@ -6163,7 +6163,7 @@ fn step_34() -> Unit raise {
   ) raise {
     let src_2 = x730
     let (tn_1, sps_3) = match src_2 {
-      More(@parser.Lexcode::Ident(tn), tail=sps_2) => (tn, sps_2)
+      More(tok_tn, tail=sps_2) if tok_tn.identifier() is Some(tn) => (tn, sps_2)
       _ => @lib.failure()
     }
     let t731 = @parser.listof(
@@ -6172,7 +6172,7 @@ fn step_34() -> Unit raise {
       "type definition clauses",
     )
     let (tys_1, rst_2) = @parser.map(
-      @parser.seq(@parser.a(@parser.Lexcode::Ident("=")), t731),
+      @parser.seq(@parser.a(@parser.Lexcode::Symbol(Equal)), t731),
       fn(
         x732 : (
           @parser.Lexcode,

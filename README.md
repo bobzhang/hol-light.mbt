@@ -110,3 +110,18 @@ brew install maxima  # WZ/, Tutorial/Linking_external_tools.ml
 
 [PLAN.md](PLAN.md) has the design, decisions and known limitations;
 [TODO.md](TODO.md) the plan for what is left.
+
+### Parser extension tokens
+
+The lexer represents built-in logical and relational symbols as typed tokens:
+`!` is `Lexcode::Symbol(Forall)`, `?!` is `Symbol(ExistsUnique)`, and `<=` is
+`Symbol(LessEqual)`. Other names and custom operators remain `Ident(String)`;
+reserved words remain `Resword(String)`. Symbol identity does not fix a syntax
+role: binder, prefix, infix and reservation tables still control parsing.
+
+Extension parsers should construct unreserved tokens with
+`Lexcode::ident(name)`, use `token.identifier()` to accept any unreserved name
+(including a symbol), and use `token.text()` to reconstruct token text.
+Exhaustive matches on `Lexcode` must account for `Symbol`. This changes the
+public token representation, while preserving parsed terms, types, errors,
+and printed output. Unicode operator spellings are not enabled yet.
