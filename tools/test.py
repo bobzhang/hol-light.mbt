@@ -209,7 +209,8 @@ def run_wasm(target, ps, a):
               "build_seconds": build_seconds, "execution_seconds": None}
     record_phases(target, phases)
     print(f"   build: {build_seconds:.1f}s (lock wait: {phases['build_wait_seconds']:.1f}s)", flush=True)
-    open(logf, "w").write(b.stdout + b.stderr)
+    with open(logf, "w") as log:
+        log.write(b.stdout + b.stderr)
     log_lock = threading.Lock()
     if b.returncode != 0:
         errs = [l for l in (b.stdout + b.stderr).splitlines() if l.startswith(("Error", "error"))]
@@ -221,7 +222,8 @@ def run_wasm(target, ps, a):
     for p in ps:
         for info in sorted(glob.glob(os.path.join(out, p, "__*_test_info.json"))):
             kind = os.path.basename(info)[2:].split("_test_info")[0]
-            tests = json.load(open(info))["tests"]
+            with open(info) as manifest:
+                tests = json.load(manifest)["tests"]
             # a chain's test files are numbered (NN_name_test.mbt) and run
             # in that order (tools/ocaml_ref/chain_test.py); the files of
             # any other package in the order moon lists them (the kernel's
