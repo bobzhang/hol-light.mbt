@@ -8,6 +8,14 @@
 // ===========================================================================
 
 ///|
+using @list {type List}
+
+///|
+fn init {
+  @printer.reserve_words(@list.singleton("//"))
+}
+
+///|
 pub(all) enum Lexcode {
   Ident(String)
   Resword(String)

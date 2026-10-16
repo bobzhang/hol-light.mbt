@@ -640,14 +640,14 @@ pub fn hyp_tac(
   tac : (List[Thm]) -> Tactic raise,
   s : String,
 ) -> ((List[Thm]) -> Tactic raise) raise {
-  let ident : (List[@parser.Lexcode]) -> (String, List[@parser.Lexcode]) raise = inp => {
+  let ident : (List[@lexer.Lexcode]) -> (String, List[@lexer.Lexcode]) raise = inp => {
     match inp {
       More(Ident(s), tail=rest) if @printer.isalnum(s) => (s, rest)
       _ => raise @parser.Noparse
     }
   }
   let parse_using = @parser.many(ident)
-  let (l, rest) = @parser.fix("Using pattern", parse_using)(@parser.lex(s))
+  let (l, rest) = @parser.fix("Using pattern", parse_using)(@lexer.lex(s))
   if !rest.is_empty() {
     raise Failure("Invalid using pattern")
   }

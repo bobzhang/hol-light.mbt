@@ -6128,54 +6128,54 @@ fn[TD] derive_induction_theorem_l(
 ///|
 /// parse_inductive_type_specification
 fn step_34() -> Unit raise {
-  let parse_type_loc : (@list.List[@parser.Lexcode]) -> (
+  let parse_type_loc : (@list.List[@lexer.Lexcode]) -> (
     @kernel.HolType,
-    @list.List[@parser.Lexcode],
+    @list.List[@lexer.Lexcode],
   ) raise = fn(
-    x728 : @list.List[@parser.Lexcode],
-  ) -> (@kernel.HolType, @list.List[@parser.Lexcode]) raise {
+    x728 : @list.List[@lexer.Lexcode],
+  ) -> (@kernel.HolType, @list.List[@lexer.Lexcode]) raise {
     let src = x728
     let (pty, rst) = @parser.parse_pretype(src)
     (@preterm.type_of_pretype(pty), rst)
   }
-  let parse_type_conapp : (@list.List[@parser.Lexcode]) -> (
+  let parse_type_conapp : (@list.List[@lexer.Lexcode]) -> (
     (String, @list.List[@kernel.HolType]),
-    @list.List[@parser.Lexcode],
+    @list.List[@lexer.Lexcode],
   ) raise = fn(
-    x729 : @list.List[@parser.Lexcode],
-  ) -> ((String, @list.List[@kernel.HolType]), @list.List[@parser.Lexcode]) raise {
+    x729 : @list.List[@lexer.Lexcode],
+  ) -> ((String, @list.List[@kernel.HolType]), @list.List[@lexer.Lexcode]) raise {
     let src_1 = x729
     let (cn_1, sps_1) = match src_1 {
-      More(@parser.Lexcode::Ident(cn), tail=sps) => (cn, sps)
+      More(@lexer.Lexcode::Ident(cn), tail=sps) => (cn, sps)
       _ => @lib.failure()
     }
     let (tys, rst_1) = @parser.many(parse_type_loc)(sps_1)
     ((cn_1, tys), rst_1)
   }
-  let parse_type_clause : (@list.List[@parser.Lexcode]) -> (
+  let parse_type_clause : (@list.List[@lexer.Lexcode]) -> (
     (@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])]),
-    @list.List[@parser.Lexcode],
+    @list.List[@lexer.Lexcode],
   ) raise = fn(
-    x730 : @list.List[@parser.Lexcode],
+    x730 : @list.List[@lexer.Lexcode],
   ) -> (
     (@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])]),
-    @list.List[@parser.Lexcode],
+    @list.List[@lexer.Lexcode],
   ) raise {
     let src_2 = x730
     let (tn_1, sps_3) = match src_2 {
-      More(@parser.Lexcode::Ident(tn), tail=sps_2) => (tn, sps_2)
+      More(@lexer.Lexcode::Ident(tn), tail=sps_2) => (tn, sps_2)
       _ => @lib.failure()
     }
     let t731 = @parser.listof(
       parse_type_conapp,
-      @parser.a(@parser.Lexcode::Resword("|")),
+      @parser.a(@lexer.Lexcode::Resword("|")),
       "type definition clauses",
     )
     let (tys_1, rst_2) = @parser.map(
-      @parser.seq(@parser.a(@parser.Lexcode::Ident("=")), t731),
+      @parser.seq(@parser.a(@lexer.Lexcode::Ident("=")), t731),
       fn(
         x732 : (
-          @parser.Lexcode,
+          @lexer.Lexcode,
           @list.List[(String, @list.List[@kernel.HolType])],
         ),
       ) -> @list.List[(String, @list.List[@kernel.HolType])] raise {
@@ -6184,14 +6184,14 @@ fn step_34() -> Unit raise {
     )(sps_3)
     ((@kernel.mk_vartype(tn_1), tys_1), rst_2)
   }
-  let parse_type_definition : (@list.List[@parser.Lexcode]) -> (
+  let parse_type_definition : (@list.List[@lexer.Lexcode]) -> (
     @list.List[
       (@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])]),
     ],
-    @list.List[@parser.Lexcode],
+    @list.List[@lexer.Lexcode],
   ) raise = @parser.listof(
     parse_type_clause,
-    @parser.a(@parser.Lexcode::Resword(";")),
+    @parser.a(@lexer.Lexcode::Resword(";")),
     "type definition",
   )
   parse_inductive_type_specification_c.set(fn(
@@ -6206,9 +6206,9 @@ fn step_34() -> Unit raise {
       @list.List[
         (@kernel.HolType, @list.List[(String, @list.List[@kernel.HolType])]),
       ],
-      @list.List[@parser.Lexcode],
+      @list.List[@lexer.Lexcode],
     ) raise {
-      parse_type_definition(@parser.lex_list(x734))
+      parse_type_definition(@lexer.lex_list(x734))
     })(
       (fn(x735 : String) -> @list.List[String] raise { @lib.explode(x735) })(s),
     )

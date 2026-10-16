@@ -356,7 +356,7 @@ pub(all) enum ByItem {
 
 ///|
 /// `step`
-pub type Step = (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)
+pub type Step = (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)
 
 ///|
 /// `substep`
@@ -529,9 +529,9 @@ pub fn whitespace(x39 : Bool, x40 : @list.List[String]) -> ((String, @list.List[
       s53(x52)
     }, x, y)
   })
-  let comment_string = match @parser.comment_token.val {
-    @parser.Lexcode::Resword(t) => t
-    @parser.Lexcode::Ident(t_1) => t_1
+  let comment_string = match @lexer.comment_token.val {
+    @lexer.Lexcode::Resword(t) => t
+    @lexer.Lexcode::Ident(t_1) => t_1
   }
   match i {
     Empty => {
@@ -578,18 +578,18 @@ pub fn whitespace(x39 : Bool, x40 : @list.List[String]) -> ((String, @list.List[
 ///|
 /// lex1
 fn step_28() -> Unit raise {
-  let reserve1 : (String) -> @parser.Lexcode raise = fn(x56 : String) -> @parser.Lexcode raise {
+  let reserve1 : (String) -> @lexer.Lexcode raise = fn(x56 : String) -> @lexer.Lexcode raise {
     let n = x56
     if @printer.is_reserved_word(n) {
-      @parser.Lexcode::Resword(n)
+      @lexer.Lexcode::Resword(n)
     } else {
-      @parser.Lexcode::Ident(n)
+      @lexer.Lexcode::Ident(n)
     }
   }
-  fn tokens(x57 : @list.List[String]) -> ((@list.List[(String, @parser.Lexcode, String)], @list.List[String])) raise {
+  fn tokens(x57 : @list.List[String]) -> ((@list.List[(String, @lexer.Lexcode, String)], @list.List[String])) raise {
     let i = x57
     try {
-      @parser.map(@parser.seq(@parser.seq(@parser.seq(@parser.many((x58 : @list.List[String]) => whitespace(false, x58)), rawtoken), (x59 : @list.List[String]) => whitespace(true, x59)), tokens), fn(x60 : (((@list.List[String], String), String), @list.List[(String, @parser.Lexcode, String)])) -> @list.List[(String, @parser.Lexcode, String)] raise {
+      @parser.map(@parser.seq(@parser.seq(@parser.seq(@parser.many((x58 : @list.List[String]) => whitespace(false, x58)), rawtoken), (x59 : @list.List[String]) => whitespace(true, x59)), tokens), fn(x60 : (((@list.List[String], String), String), @list.List[(String, @lexer.Lexcode, String)])) -> @list.List[(String, @lexer.Lexcode, String)] raise {
         let (((x, y), z), w) = x60
         let t61 = reserve1(y)
         w.prepend((@lib.implode(x), t61, z))
@@ -599,7 +599,7 @@ fn step_28() -> Unit raise {
       e => raise e
     }
   }
-  lex1_c.set(fn(x62 : @list.List[String]) -> @list.List[(String, @parser.Lexcode, String)] raise {
+  lex1_c.set(fn(x62 : @list.List[String]) -> @list.List[(String, @lexer.Lexcode, String)] raise {
     let l = x62
     let (toks, rst) = tokens(l)
     let (rst_p, rst_p_p) = @parser.many((x63 : @list.List[String]) => whitespace(false, x63))(rst)
@@ -618,18 +618,18 @@ fn step_28() -> Unit raise {
 }
 
 ///|
-let lex1_c : @lib.Cell[(@list.List[String]) -> @list.List[(String, @parser.Lexcode, String)] raise] = @lib.Cell::new("lex1")
+let lex1_c : @lib.Cell[(@list.List[String]) -> @list.List[(String, @lexer.Lexcode, String)] raise] = @lib.Cell::new("lex1")
 
 ///|
 /// `lex1`
-pub fn lex1(x : @list.List[String]) -> @list.List[(String, @parser.Lexcode, String)] raise {
+pub fn lex1(x : @list.List[String]) -> @list.List[(String, @lexer.Lexcode, String)] raise {
   (lex1_c.get())(x)
 }
 
 ///|
 /// lex2
 fn step_29() -> Unit raise {
-  lex2_c.set(fn(x66 : String) -> @list.List[(String, @parser.Lexcode, String)] raise {
+  lex2_c.set(fn(x66 : String) -> @list.List[(String, @lexer.Lexcode, String)] raise {
     lex1((fn(x65 : String) -> @list.List[String] raise {
       @lib.explode(x65)
     })(x66))
@@ -637,11 +637,11 @@ fn step_29() -> Unit raise {
 }
 
 ///|
-let lex2_c : @lib.Cell[(String) -> @list.List[(String, @parser.Lexcode, String)] raise] = @lib.Cell::new("lex2")
+let lex2_c : @lib.Cell[(String) -> @list.List[(String, @lexer.Lexcode, String)] raise] = @lib.Cell::new("lex2")
 
 ///|
 /// `lex2`
-pub fn lex2(x : String) -> @list.List[(String, @parser.Lexcode, String)] raise {
+pub fn lex2(x : String) -> @list.List[(String, @lexer.Lexcode, String)] raise {
   (lex2_c.get())(x)
 }
 
@@ -654,12 +654,12 @@ pub fn[TA, TB, TC] middle(x67 : TB, x68 : TA, x69 : TC) -> TA raise {
 
 ///|
 /// `a'`
-pub fn[TA, TB] a_p(x70 : String, x71 : @list.List[(TA, @parser.Lexcode, TB)]) -> (((TA, @parser.Lexcode, TB), @list.List[(TA, @parser.Lexcode, TB)])) raise {
+pub fn[TA, TB] a_p(x70 : String, x71 : @list.List[(TA, @lexer.Lexcode, TB)]) -> (((TA, @lexer.Lexcode, TB), @list.List[(TA, @lexer.Lexcode, TB)])) raise {
   let t = x70
   let toks = x71
   match toks {
-    More((_, @parser.Lexcode::Resword(t_p), _) as tok, tail=rst) if (t == t_p) => (tok, rst)
-    More((_, @parser.Lexcode::Ident(t_p_1), _) as tok_1, tail=rst_1) if (t == t_p_1) => (tok_1, rst_1)
+    More((_, @lexer.Lexcode::Resword(t_p), _) as tok, tail=rst) if (t == t_p) => (tok, rst)
+    More((_, @lexer.Lexcode::Ident(t_p_1), _) as tok_1, tail=rst_1) if (t == t_p_1) => (tok_1, rst_1)
     _ => raise @parser.Noparse
   }
 }
@@ -667,45 +667,45 @@ pub fn[TA, TB] a_p(x70 : String, x71 : @list.List[(TA, @parser.Lexcode, TB)]) ->
 ///|
 /// a_semi
 fn step_30() -> Unit raise {
-  a_semi_c.set((x72 : @list.List[(String, @parser.Lexcode, String)]) => a_p(";", x72))
+  a_semi_c.set((x72 : @list.List[(String, @lexer.Lexcode, String)]) => a_p(";", x72))
 }
 
 ///|
-let a_semi_c : @lib.Cell[(@list.List[(String, @parser.Lexcode, String)]) -> ((String, @parser.Lexcode, String), @list.List[(String, @parser.Lexcode, String)]) raise] = @lib.Cell::new("a_semi")
+let a_semi_c : @lib.Cell[(@list.List[(String, @lexer.Lexcode, String)]) -> ((String, @lexer.Lexcode, String), @list.List[(String, @lexer.Lexcode, String)]) raise] = @lib.Cell::new("a_semi")
 
 ///|
 /// `a_semi`
-pub fn a_semi(x : @list.List[(String, @parser.Lexcode, String)]) -> (((String, @parser.Lexcode, String), @list.List[(String, @parser.Lexcode, String)])) raise {
+pub fn a_semi(x : @list.List[(String, @lexer.Lexcode, String)]) -> (((String, @lexer.Lexcode, String), @list.List[(String, @lexer.Lexcode, String)])) raise {
   (a_semi_c.get())(x)
 }
 
 ///|
 /// `ident'`
-pub fn[TA, TB] ident_p(x73 : @list.List[(TA, @parser.Lexcode, TB)]) -> ((String, @list.List[(TA, @parser.Lexcode, TB)])) raise {
+pub fn[TA, TB] ident_p(x73 : @list.List[(TA, @lexer.Lexcode, TB)]) -> ((String, @list.List[(TA, @lexer.Lexcode, TB)])) raise {
   let toks = x73
   match toks {
-    More((_, @parser.Lexcode::Ident(s), _), tail=rst) => (s, rst)
-    More((_, @parser.Lexcode::Resword("("), _), tail=More((_, @parser.Lexcode::Ident(s_1), _), tail=More((_, @parser.Lexcode::Resword(")"), _), tail=rst_1))) => (s_1, rst_1)
+    More((_, @lexer.Lexcode::Ident(s), _), tail=rst) => (s, rst)
+    More((_, @lexer.Lexcode::Resword("("), _), tail=More((_, @lexer.Lexcode::Ident(s_1), _), tail=More((_, @lexer.Lexcode::Resword(")"), _), tail=rst_1))) => (s_1, rst_1)
     _ => raise @parser.Noparse
   }
 }
 
 ///|
 /// `unident'`
-pub fn unident_p(x74 : String) -> @list.List[(String, @parser.Lexcode, String)] raise {
+pub fn unident_p(x74 : String) -> @list.List[(String, @lexer.Lexcode, String)] raise {
   let s = x74
   if (@printer.parses_as_binder(s) || (@lib.can(@printer.get_infix_status, s) || @printer.is_prefix(s))) {
-    let t75 = ("", @parser.Lexcode::Resword(")"), "")
-    let t76 = ("", @parser.Lexcode::Ident(s), "")
-    @list.List([("", @parser.Lexcode::Resword("("), ""), t76, t75])
+    let t75 = ("", @lexer.Lexcode::Resword(")"), "")
+    let t76 = ("", @lexer.Lexcode::Ident(s), "")
+    @list.List([("", @lexer.Lexcode::Resword("("), ""), t76, t75])
   } else {
-    @list.List([("", @parser.Lexcode::Ident(s), "")])
+    @list.List([("", @lexer.Lexcode::Ident(s), "")])
   }
 }
 
 ///|
 /// `cut_to`
-pub fn[TA, TB] cut_to(x77 : Bool, x78 : Int64, x79 : @list.List[String], x80 : @list.List[String], x81 : @list.List[(TA, @parser.Lexcode, TB)]) -> ((@list.List[(TA, @parser.Lexcode, TB)], @list.List[(TA, @parser.Lexcode, TB)])) raise {
+pub fn[TA, TB] cut_to(x77 : Bool, x78 : Int64, x79 : @list.List[String], x80 : @list.List[String], x81 : @list.List[(TA, @lexer.Lexcode, TB)]) -> ((@list.List[(TA, @lexer.Lexcode, TB)], @list.List[(TA, @lexer.Lexcode, TB)])) raise {
   let b = x77
   let n = x78
   let c = x79
@@ -721,7 +721,7 @@ pub fn[TA, TB] cut_to(x77 : Bool, x78 : Int64, x79 : @list.List[String], x80 : @
     }
     More(tok, tail=rst) => {
       match tok {
-        (_, @parser.Lexcode::Resword(s), _) | (_, @parser.Lexcode::Ident(s), _) => {
+        (_, @lexer.Lexcode::Resword(s), _) | (_, @lexer.Lexcode::Ident(s), _) => {
           let x = !(((n > 0L) && @lib.mem(s, mizar_skip_bracketed())))
           if (@lib.mem(s, c) && x) {
             (@list.List([tok]), rst)
@@ -749,18 +749,18 @@ pub fn[TA, TB] cut_to(x77 : Bool, x78 : Int64, x79 : @list.List[String], x80 : @
 
 ///|
 /// `cut_step`
-pub fn[TA, TB] cut_step(x82 : @list.List[(TA, @parser.Lexcode, TB)]) -> ((@list.List[(TA, @parser.Lexcode, TB)], @list.List[(TA, @parser.Lexcode, TB)])) raise {
+pub fn[TA, TB] cut_step(x82 : @list.List[(TA, @lexer.Lexcode, TB)]) -> ((@list.List[(TA, @lexer.Lexcode, TB)], @list.List[(TA, @lexer.Lexcode, TB)])) raise {
   let toks = x82
   match toks {
-    More((_, @parser.Lexcode::Resword("proof"), _) as tok, tail=rst) => (@list.List([tok]), rst)
-    More((_, @parser.Lexcode::Resword("now"), _), tail=rst_1) => @parser.map(@parser.seq((x83 : @list.List[(TA, @parser.Lexcode, TB)]) => a_p("now", x83), @parser.many(@parser.map(@parser.seq((x84 : @list.List[(TA, @parser.Lexcode, TB)]) => a_p("[", x84), (x85 : @list.List[(TA, @parser.Lexcode, TB)]) => cut_to(false, 0L, @list.List(["]"]), mizar_step_words(), x85)), fn(x86 : ((TA, @parser.Lexcode, TB), @list.List[(TA, @parser.Lexcode, TB)])) -> @list.List[(TA, @parser.Lexcode, TB)] raise {
+    More((_, @lexer.Lexcode::Resword("proof"), _) as tok, tail=rst) => (@list.List([tok]), rst)
+    More((_, @lexer.Lexcode::Resword("now"), _), tail=rst_1) => @parser.map(@parser.seq((x83 : @list.List[(TA, @lexer.Lexcode, TB)]) => a_p("now", x83), @parser.many(@parser.map(@parser.seq((x84 : @list.List[(TA, @lexer.Lexcode, TB)]) => a_p("[", x84), (x85 : @list.List[(TA, @lexer.Lexcode, TB)]) => cut_to(false, 0L, @list.List(["]"]), mizar_step_words(), x85)), fn(x86 : ((TA, @lexer.Lexcode, TB), @list.List[(TA, @lexer.Lexcode, TB)])) -> @list.List[(TA, @lexer.Lexcode, TB)] raise {
       let (x, y) = x86
       y.prepend(x)
-    }))), fn(x87 : ((TA, @parser.Lexcode, TB), @list.List[@list.List[(TA, @parser.Lexcode, TB)]])) -> @list.List[(TA, @parser.Lexcode, TB)] raise {
+    }))), fn(x87 : ((TA, @lexer.Lexcode, TB), @list.List[@list.List[(TA, @lexer.Lexcode, TB)]])) -> @list.List[(TA, @lexer.Lexcode, TB)] raise {
       let (x_1, y_1) = x87
-      @lib.itlist(fn(x90 : @list.List[(TA, @parser.Lexcode, TB)], x91 : @list.List[(TA, @parser.Lexcode, TB)]) -> @list.List[(TA, @parser.Lexcode, TB)] raise {
-        let s92 = (fn(x88 : @list.List[(TA, @parser.Lexcode, TB)]) -> ((@list.List[(TA, @parser.Lexcode, TB)]) -> @list.List[(TA, @parser.Lexcode, TB)] raise) raise {
-          fn(x89 : @list.List[(TA, @parser.Lexcode, TB)]) -> @list.List[(TA, @parser.Lexcode, TB)] raise {
+      @lib.itlist(fn(x90 : @list.List[(TA, @lexer.Lexcode, TB)], x91 : @list.List[(TA, @lexer.Lexcode, TB)]) -> @list.List[(TA, @lexer.Lexcode, TB)] raise {
+        let s92 = (fn(x88 : @list.List[(TA, @lexer.Lexcode, TB)]) -> ((@list.List[(TA, @lexer.Lexcode, TB)]) -> @list.List[(TA, @lexer.Lexcode, TB)] raise) raise {
+          fn(x89 : @list.List[(TA, @lexer.Lexcode, TB)]) -> @list.List[(TA, @lexer.Lexcode, TB)] raise {
             x88.concat(x89)
           }
         })(x90)
@@ -773,7 +773,7 @@ pub fn[TA, TB] cut_step(x82 : @list.List[(TA, @parser.Lexcode, TB)]) -> ((@list.
 
 ///|
 /// `cut_steps`
-pub fn[TA, TB] cut_steps(x93 : @list.List[(TA, @parser.Lexcode, TB)]) -> @list.List[@list.List[(TA, @parser.Lexcode, TB)]] raise {
+pub fn[TA, TB] cut_steps(x93 : @list.List[(TA, @lexer.Lexcode, TB)]) -> @list.List[@list.List[(TA, @lexer.Lexcode, TB)]] raise {
   let toks = x93
   let (steps, rst) = @parser.many(cut_step)(toks)
   if @list.List::is_empty(rst) {
@@ -785,14 +785,14 @@ pub fn[TA, TB] cut_steps(x93 : @list.List[(TA, @parser.Lexcode, TB)]) -> @list.L
 
 ///|
 /// `strings_of_toks`
-pub fn strings_of_toks(x94 : @list.List[(String, @parser.Lexcode, String)]) -> ((String, String, String)) raise {
+pub fn strings_of_toks(x94 : @list.List[(String, @lexer.Lexcode, String)]) -> ((String, String, String)) raise {
   let toks = x94
-  fn string_of_toks1(x95 : @list.List[(String, @parser.Lexcode, String)]) -> ((String, String)) raise {
+  fn string_of_toks1(x95 : @list.List[(String, @lexer.Lexcode, String)]) -> ((String, String)) raise {
     let toks_1 = x95
     match toks_1 {
       Empty => ("", "")
-      More((x, @parser.Lexcode::Ident(y), z), tail=Empty) | More((x, @parser.Lexcode::Resword(y), z), tail=Empty) => ((x + y), z)
-      More((x_1, @parser.Lexcode::Ident(y_1), z_1), tail=rst) | More((x_1, @parser.Lexcode::Resword(y_1), z_1), tail=rst) => {
+      More((x, @lexer.Lexcode::Ident(y), z), tail=Empty) | More((x, @lexer.Lexcode::Resword(y), z), tail=Empty) => ((x + y), z)
+      More((x_1, @lexer.Lexcode::Ident(y_1), z_1), tail=rst) | More((x_1, @lexer.Lexcode::Resword(y_1), z_1), tail=rst) => {
         let (u, v) = string_of_toks1(rst)
         ((x_1 + (y_1 + (z_1 + u))), v)
       }
@@ -800,8 +800,8 @@ pub fn strings_of_toks(x94 : @list.List[(String, @parser.Lexcode, String)]) -> (
   }
   match toks {
     Empty => ("", "", "")
-    More((x_2, @parser.Lexcode::Ident(y_2), z_2), tail=Empty) | More((x_2, @parser.Lexcode::Resword(y_2), z_2), tail=Empty) => (x_2, y_2, z_2)
-    More((x_3, @parser.Lexcode::Ident(y_3), z_3), tail=rst_1) | More((x_3, @parser.Lexcode::Resword(y_3), z_3), tail=rst_1) => {
+    More((x_2, @lexer.Lexcode::Ident(y_2), z_2), tail=Empty) | More((x_2, @lexer.Lexcode::Resword(y_2), z_2), tail=Empty) => (x_2, y_2, z_2)
+    More((x_3, @lexer.Lexcode::Ident(y_3), z_3), tail=rst_1) | More((x_3, @lexer.Lexcode::Resword(y_3), z_3), tail=rst_1) => {
       let (u_1, v_1) = string_of_toks1(rst_1)
       (x_3, (y_3 + (z_3 + u_1)), v_1)
     }
@@ -811,7 +811,7 @@ pub fn strings_of_toks(x94 : @list.List[(String, @parser.Lexcode, String)]) -> (
 ///|
 /// string_of_toks
 fn step_31() -> Unit raise {
-  string_of_toks_c.set(fn(x97 : @list.List[(String, @parser.Lexcode, String)]) -> String raise {
+  string_of_toks_c.set(fn(x97 : @list.List[(String, @lexer.Lexcode, String)]) -> String raise {
     (fn(x96 : (String, String, String)) -> String raise {
       middle(x96.0, x96.1, x96.2)
     })(strings_of_toks(x97))
@@ -819,11 +819,11 @@ fn step_31() -> Unit raise {
 }
 
 ///|
-let string_of_toks_c : @lib.Cell[(@list.List[(String, @parser.Lexcode, String)]) -> String raise] = @lib.Cell::new("string_of_toks")
+let string_of_toks_c : @lib.Cell[(@list.List[(String, @lexer.Lexcode, String)]) -> String raise] = @lib.Cell::new("string_of_toks")
 
 ///|
 /// `string_of_toks`
-pub fn string_of_toks(x : @list.List[(String, @parser.Lexcode, String)]) -> String raise {
+pub fn string_of_toks(x : @list.List[(String, @lexer.Lexcode, String)]) -> String raise {
   (string_of_toks_c.get())(x)
 }
 
@@ -831,8 +831,8 @@ pub fn string_of_toks(x : @list.List[(String, @parser.Lexcode, String)]) -> Stri
 /// split_string
 fn step_32() -> Unit raise {
   split_string_c.set(fn(x100 : String) -> @list.List[String] raise {
-    (fn(x99 : @list.List[(String, @parser.Lexcode, String)]) -> @list.List[String] raise {
-      ((x98 : @list.List[@list.List[(String, @parser.Lexcode, String)]]) => @lib.map(string_of_toks, x98))(cut_steps(x99))
+    (fn(x99 : @list.List[(String, @lexer.Lexcode, String)]) -> @list.List[String] raise {
+      ((x98 : @list.List[@list.List[(String, @lexer.Lexcode, String)]]) => @lib.map(string_of_toks, x98))(cut_steps(x99))
     })(lex2(x100))
   })
 }
@@ -848,10 +848,10 @@ pub fn split_string(x : String) -> @list.List[String] raise {
 
 ///|
 /// `tok_of_toks`
-pub fn tok_of_toks(x101 : @list.List[(String, @parser.Lexcode, String)]) -> ((String, @parser.Lexcode, String)) raise {
+pub fn tok_of_toks(x101 : @list.List[(String, @lexer.Lexcode, String)]) -> ((String, @lexer.Lexcode, String)) raise {
   let toks = x101
   let (x, y, z) = strings_of_toks(toks)
-  (x, @parser.Lexcode::Ident(y), z)
+  (x, @lexer.Lexcode::Ident(y), z)
 }
 
 ///|
@@ -1057,17 +1057,17 @@ pub fn by_item_cache() -> Ref[@lib.Func[String, ByItem]] {
 
 ///|
 /// `by_item_of_toks`
-pub fn by_item_of_toks(x125 : @list.List[(String, @parser.Lexcode, String)]) -> ByItem raise {
+pub fn by_item_of_toks(x125 : @list.List[(String, @lexer.Lexcode, String)]) -> ByItem raise {
   let toks = x125
   match toks {
-    More((_, @parser.Lexcode::Ident("#"), _), tail=Empty) => ByItem::Hole
-    More((_, @parser.Lexcode::Ident("#"), _), tail=toks_p) => {
+    More((_, @lexer.Lexcode::Ident("#"), _), tail=Empty) => ByItem::Hole
+    More((_, @lexer.Lexcode::Ident("#"), _), tail=toks_p) => {
       match by_item_of_toks(toks_p) {
         ByItem::Tactic(s, tac) => ByItem::Grow(s, tac)
         _ => raise Failure("by_item_of_toks")
       }
     }
-    More((_, @parser.Lexcode::Ident("*"), _), tail=Empty) => ByItem::Label("*")
+    More((_, @lexer.Lexcode::Ident("*"), _), tail=Empty) => ByItem::Label("*")
     _ => {
       let s_1 = string_of_toks(toks)
       try {
@@ -1100,7 +1100,7 @@ pub fn by_item_of_toks(x125 : @list.List[(String, @parser.Lexcode, String)]) -> 
                           } catch {
                             _ => {
                               match toks {
-                                More((_, @parser.Lexcode::Ident(s_2), _), tail=Empty) => ByItem::Label(s_2)
+                                More((_, @lexer.Lexcode::Ident(s_2), _), tail=Empty) => ByItem::Label(s_2)
                                 _ => raise Failure("by_item_of_toks")
                               }
                             }
@@ -1127,29 +1127,29 @@ pub fn by_item_of_toks(x125 : @list.List[(String, @parser.Lexcode, String)]) -> 
 ///|
 /// parse_by
 fn step_39() -> Unit raise {
-  let t140 = @parser.map(fn(x138 : @list.List[(String, @parser.Lexcode, String)]) -> (@list.List[Unit], @list.List[(String, @parser.Lexcode, String)]) raise {
+  let t140 = @parser.map(fn(x138 : @list.List[(String, @lexer.Lexcode, String)]) -> (@list.List[Unit], @list.List[(String, @lexer.Lexcode, String)]) raise {
     @parser.nothing(x138)
-  }, fn(x139 : @list.List[Unit]) -> @list.List[@list.List[(String, @parser.Lexcode, String)]] raise {
+  }, fn(x139 : @list.List[Unit]) -> @list.List[@list.List[(String, @lexer.Lexcode, String)]] raise {
     @list.List([])
   })
-  let parse_by_part : (@list.List[(String, @parser.Lexcode, String)]) -> (@list.List[@list.List[(String, @parser.Lexcode, String)]], @list.List[(String, @parser.Lexcode, String)]) raise = @parser.alt(@parser.map(@parser.seq(@parser.map(@parser.seq((x133 : @list.List[(String, @parser.Lexcode, String)]) => a_p("by", x133), @parser.many(@parser.map(@parser.seq(parse_by_item_l, (x134 : @list.List[(String, @parser.Lexcode, String)]) => a_p(",", x134)), fn(x135 : (@list.List[(String, @parser.Lexcode, String)], (String, @parser.Lexcode, String))) -> @list.List[(String, @parser.Lexcode, String)] raise {
+  let parse_by_part : (@list.List[(String, @lexer.Lexcode, String)]) -> (@list.List[@list.List[(String, @lexer.Lexcode, String)]], @list.List[(String, @lexer.Lexcode, String)]) raise = @parser.alt(@parser.map(@parser.seq(@parser.map(@parser.seq((x133 : @list.List[(String, @lexer.Lexcode, String)]) => a_p("by", x133), @parser.many(@parser.map(@parser.seq(parse_by_item_l, (x134 : @list.List[(String, @lexer.Lexcode, String)]) => a_p(",", x134)), fn(x135 : (@list.List[(String, @lexer.Lexcode, String)], (String, @lexer.Lexcode, String))) -> @list.List[(String, @lexer.Lexcode, String)] raise {
     x135.0
-  }))), fn(x136 : ((String, @parser.Lexcode, String), @list.List[@list.List[(String, @parser.Lexcode, String)]])) -> @list.List[@list.List[(String, @parser.Lexcode, String)]] raise {
+  }))), fn(x136 : ((String, @lexer.Lexcode, String), @list.List[@list.List[(String, @lexer.Lexcode, String)]])) -> @list.List[@list.List[(String, @lexer.Lexcode, String)]] raise {
     x136.1
-  }), parse_by_item_l), fn(x137 : (@list.List[@list.List[(String, @parser.Lexcode, String)]], @list.List[(String, @parser.Lexcode, String)])) -> @list.List[@list.List[(String, @parser.Lexcode, String)]] raise {
+  }), parse_by_item_l), fn(x137 : (@list.List[@list.List[(String, @lexer.Lexcode, String)]], @list.List[(String, @lexer.Lexcode, String)])) -> @list.List[@list.List[(String, @lexer.Lexcode, String)]] raise {
     let (x, y) = x137
     x.concat(@list.List([y]))
   }), t140)
-  let t148 = @parser.map(fn(x146 : @list.List[(String, @parser.Lexcode, String)]) -> (@list.List[Unit], @list.List[(String, @parser.Lexcode, String)]) raise {
+  let t148 = @parser.map(fn(x146 : @list.List[(String, @lexer.Lexcode, String)]) -> (@list.List[Unit], @list.List[(String, @lexer.Lexcode, String)]) raise {
     @parser.nothing(x146)
-  }, fn(x147 : @list.List[Unit]) -> (@list.List[@list.List[(String, @parser.Lexcode, String)]], Bool) raise {
+  }, fn(x147 : @list.List[Unit]) -> (@list.List[@list.List[(String, @lexer.Lexcode, String)]], Bool) raise {
     (@list.List([]), false)
   })
-  let parse_from_part : (@list.List[(String, @parser.Lexcode, String)]) -> ((@list.List[@list.List[(String, @parser.Lexcode, String)]], Bool), @list.List[(String, @parser.Lexcode, String)]) raise = @parser.alt(@parser.map(@parser.seq(@parser.map(@parser.seq((x141 : @list.List[(String, @parser.Lexcode, String)]) => a_p("from", x141), @parser.many(@parser.map(@parser.seq(parse_by_item_l, (x142 : @list.List[(String, @parser.Lexcode, String)]) => a_p(",", x142)), fn(x143 : (@list.List[(String, @parser.Lexcode, String)], (String, @parser.Lexcode, String))) -> @list.List[(String, @parser.Lexcode, String)] raise {
+  let parse_from_part : (@list.List[(String, @lexer.Lexcode, String)]) -> ((@list.List[@list.List[(String, @lexer.Lexcode, String)]], Bool), @list.List[(String, @lexer.Lexcode, String)]) raise = @parser.alt(@parser.map(@parser.seq(@parser.map(@parser.seq((x141 : @list.List[(String, @lexer.Lexcode, String)]) => a_p("from", x141), @parser.many(@parser.map(@parser.seq(parse_by_item_l, (x142 : @list.List[(String, @lexer.Lexcode, String)]) => a_p(",", x142)), fn(x143 : (@list.List[(String, @lexer.Lexcode, String)], (String, @lexer.Lexcode, String))) -> @list.List[(String, @lexer.Lexcode, String)] raise {
     x143.0
-  }))), fn(x144 : ((String, @parser.Lexcode, String), @list.List[@list.List[(String, @parser.Lexcode, String)]])) -> @list.List[@list.List[(String, @parser.Lexcode, String)]] raise {
+  }))), fn(x144 : ((String, @lexer.Lexcode, String), @list.List[@list.List[(String, @lexer.Lexcode, String)]])) -> @list.List[@list.List[(String, @lexer.Lexcode, String)]] raise {
     x144.1
-  }), parse_by_item_l), fn(x145 : (@list.List[@list.List[(String, @parser.Lexcode, String)]], @list.List[(String, @parser.Lexcode, String)])) -> (@list.List[@list.List[(String, @parser.Lexcode, String)]], Bool) raise {
+  }), parse_by_item_l), fn(x145 : (@list.List[@list.List[(String, @lexer.Lexcode, String)]], @list.List[(String, @lexer.Lexcode, String)])) -> (@list.List[@list.List[(String, @lexer.Lexcode, String)]], Bool) raise {
     let (x_1, y_1) = x145
     (x_1.concat(@list.List([y_1])), true)
   }), t148)
@@ -1163,16 +1163,16 @@ fn step_39() -> Unit raise {
     }
   }
   let t155 = Just::Proof_expected(true)
-  let t157 = @parser.map(fn(x153 : @list.List[(String, @parser.Lexcode, String)]) -> (Int64, @list.List[(String, @parser.Lexcode, String)]) raise {
+  let t157 = @parser.map(fn(x153 : @list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @list.List[(String, @lexer.Lexcode, String)]) raise {
     let t154 = @parser.finished(x153)
     (Int::to_int64(t154.0), t154.1)
   }, fn(x156 : Int64) -> Just raise {
     t155
   })
-  parse_by_c.set(@parser.alt(@parser.map(@parser.seq(@parser.seq(@parser.seq(parse_by_part, parse_from_part), a_semi), fn(x150 : @list.List[(String, @parser.Lexcode, String)]) -> (Int64, @list.List[(String, @parser.Lexcode, String)]) raise {
+  parse_by_c.set(@parser.alt(@parser.map(@parser.seq(@parser.seq(@parser.seq(parse_by_part, parse_from_part), a_semi), fn(x150 : @list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @list.List[(String, @lexer.Lexcode, String)]) raise {
     let t151 = @parser.finished(x150)
     (Int::to_int64(t151.0), t151.1)
-  }), fn(x152 : (((@list.List[@list.List[(String, @parser.Lexcode, String)]], (@list.List[@list.List[(String, @parser.Lexcode, String)]], Bool)), (String, @parser.Lexcode, String)), Int64)) -> Just raise {
+  }), fn(x152 : (((@list.List[@list.List[(String, @lexer.Lexcode, String)]], (@list.List[@list.List[(String, @lexer.Lexcode, String)]], Bool)), (String, @lexer.Lexcode, String)), Int64)) -> Just raise {
     let (((x_2, (y_2, z)), _), _) = x152
     let x_p = @lib.map(by_item_of_toks, x_2)
     let y_p = @lib.map(by_item_of_toks, y_2)
@@ -1181,31 +1181,31 @@ fn step_39() -> Unit raise {
 }
 
 ///|
-let parse_by_c : @lib.Cell[(@list.List[(String, @parser.Lexcode, String)]) -> (Just, @list.List[(String, @parser.Lexcode, String)]) raise] = @lib.Cell::new("parse_by")
+let parse_by_c : @lib.Cell[(@list.List[(String, @lexer.Lexcode, String)]) -> (Just, @list.List[(String, @lexer.Lexcode, String)]) raise] = @lib.Cell::new("parse_by")
 
 ///|
 /// `parse_by`
-pub fn parse_by(x : @list.List[(String, @parser.Lexcode, String)]) -> ((Just, @list.List[(String, @parser.Lexcode, String)])) raise {
+pub fn parse_by(x : @list.List[(String, @lexer.Lexcode, String)]) -> ((Just, @list.List[(String, @lexer.Lexcode, String)])) raise {
   (parse_by_c.get())(x)
 }
 
 ///|
-fn[TA, TB] parse_by_item_l(x132 : @list.List[(TA, @parser.Lexcode, TB)]) -> ((@list.List[(TA, @parser.Lexcode, TB)], @list.List[(TA, @parser.Lexcode, TB)])) raise {
+fn[TA, TB] parse_by_item_l(x132 : @list.List[(TA, @lexer.Lexcode, TB)]) -> ((@list.List[(TA, @lexer.Lexcode, TB)], @list.List[(TA, @lexer.Lexcode, TB)])) raise {
   let toks = x132
   match toks {
-    More((_, @parser.Lexcode::Ident("#"), _) as tok1, tail=More((_, @parser.Lexcode::Ident(s), _) as tok2, tail=toks_1)) if (s != ",") => (@list.List([tok1, tok2]), toks_1)
-    More((_, @parser.Lexcode::Ident(_), _) as tok, tail=toks_2) => (@list.List([tok]), toks_2)
+    More((_, @lexer.Lexcode::Ident("#"), _) as tok1, tail=More((_, @lexer.Lexcode::Ident(s), _) as tok2, tail=toks_1)) if (s != ",") => (@list.List([tok1, tok2]), toks_1)
+    More((_, @lexer.Lexcode::Ident(_), _) as tok, tail=toks_2) => (@list.List([tok]), toks_2)
     _ => raise @parser.Noparse
   }
 }
 
 ///|
 /// `parse_labels`
-pub fn[TA, TB] parse_labels(x158 : @list.List[(TA, @parser.Lexcode, TB)]) -> @list.List[String] raise {
+pub fn[TA, TB] parse_labels(x158 : @list.List[(TA, @lexer.Lexcode, TB)]) -> @list.List[String] raise {
   let toks = x158
   match toks {
     Empty => @list.List([])
-    More((_, @parser.Lexcode::Resword("["), _), tail=More((_, @parser.Lexcode::Ident(s), _), tail=More((_, @parser.Lexcode::Resword("]"), _), tail=rst))) => parse_labels(rst).prepend(s)
+    More((_, @lexer.Lexcode::Resword("["), _), tail=More((_, @lexer.Lexcode::Ident(s), _), tail=More((_, @lexer.Lexcode::Resword("]"), _), tail=rst))) => parse_labels(rst).prepend(s)
     _ => raise @parser.Noparse
   }
 }
@@ -1257,17 +1257,17 @@ pub fn term_of_preterm1(x : @preterm.Preterm) -> @kernel.Term raise {
 
 ///|
 /// `term_of_hol`
-pub fn term_of_hol(x164 : Bool) -> ((@list.List[@kernel.Term]) -> ((@list.List[(String, @parser.Lexcode, String)]) -> (Int64, @kernel.Term) raise) raise) raise {
+pub fn term_of_hol(x164 : Bool) -> ((@list.List[@kernel.Term]) -> ((@list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @kernel.Term) raise) raise) raise {
   let b = x164
   let error = @kernel.mk_var("error", @parser.parse_type("error"))
-  fn(x176 : @list.List[@kernel.Term]) -> ((@list.List[(String, @parser.Lexcode, String)]) -> (Int64, @kernel.Term) raise) raise {
+  fn(x176 : @list.List[@kernel.Term]) -> ((@list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @kernel.Term) raise) raise {
     let env_1 = x176
-    fn(x177 : @list.List[(String, @parser.Lexcode, String)]) -> (Int64, @kernel.Term) raise {
+    fn(x177 : @list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @kernel.Term) raise {
       let toks_1 = x177
       match toks_1 {
-        More((x, @parser.Lexcode::Ident(".="), y), tail=rest) => {
-          let t178 = rest.prepend(("", @parser.Lexcode::Ident("="), y))
-          ((x166, x167) => term_of_hol1_l(error, b, x166, x167))(env_1, t178.prepend((x, @parser.Lexcode::Ident("..."), " ")))
+        More((x, @lexer.Lexcode::Ident(".="), y), tail=rest) => {
+          let t178 = rest.prepend(("", @lexer.Lexcode::Ident("="), y))
+          ((x166, x167) => term_of_hol1_l(error, b, x166, x167))(env_1, t178.prepend((x, @lexer.Lexcode::Ident("..."), " ")))
         }
         _ => ((x166, x167) => term_of_hol1_l(error, b, x166, x167))(env_1, toks_1)
       }
@@ -1276,7 +1276,7 @@ pub fn term_of_hol(x164 : Bool) -> ((@list.List[@kernel.Term]) -> ((@list.List[(
 }
 
 ///|
-fn[TA, TB] term_of_hol1_l(error : @kernel.Term, b : Bool, x166 : @list.List[@kernel.Term], x167 : @list.List[(TA, @parser.Lexcode, TB)]) -> ((Int64, @kernel.Term)) raise {
+fn[TA, TB] term_of_hol1_l(error : @kernel.Term, b : Bool, x166 : @list.List[@kernel.Term], x167 : @list.List[(TA, @lexer.Lexcode, TB)]) -> ((Int64, @kernel.Term)) raise {
   let env = x166
   let toks = x167
   let t170 = @lib.map(fn(x169 : @kernel.Term) -> (String, @preterm.Pretype) raise {
@@ -1287,7 +1287,7 @@ fn[TA, TB] term_of_hol1_l(error : @kernel.Term, b : Bool, x166 : @list.List[@ker
   }, env)
   let env_p = t170.prepend(("thesis", @preterm.Pretype::Ptycon("bool", @list.List([]))))
   try {
-    let (ptm, l) = @parser.parse_preterm(((x172 : @list.List[(TA, @parser.Lexcode, TB)]) => @lib.map(fn(x171 : (TA, @parser.Lexcode, TB)) -> @parser.Lexcode raise {
+    let (ptm, l) = @parser.parse_preterm(((x172 : @list.List[(TA, @lexer.Lexcode, TB)]) => @lib.map(fn(x171 : (TA, @lexer.Lexcode, TB)) -> @lexer.Lexcode raise {
       middle(x171.0, x171.1, x171.2)
     }, x172))(toks))
     if !@list.List::is_empty(l) {
@@ -1346,7 +1346,7 @@ fn[TA, TB] term_of_hol1_l(error : @kernel.Term, b : Bool, x166 : @list.List[@ker
 /// type_of_hol
 fn step_41() -> Unit raise {
   let error = @parser.parse_type("error")
-  type_of_hol_c.set(fn(x179 : @list.List[(String, @parser.Lexcode, String)]) -> (Int64, @kernel.HolType) raise {
+  type_of_hol_c.set(fn(x179 : @list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @kernel.HolType) raise {
     let toks = x179
     try {
       (0L, (fn(x181 : (String, String, String)) -> @kernel.HolType raise {
@@ -1361,24 +1361,24 @@ fn step_41() -> Unit raise {
 }
 
 ///|
-let type_of_hol_c : @lib.Cell[(@list.List[(String, @parser.Lexcode, String)]) -> (Int64, @kernel.HolType) raise] = @lib.Cell::new("type_of_hol")
+let type_of_hol_c : @lib.Cell[(@list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @kernel.HolType) raise] = @lib.Cell::new("type_of_hol")
 
 ///|
 /// `type_of_hol`
-pub fn type_of_hol(x : @list.List[(String, @parser.Lexcode, String)]) -> ((Int64, @kernel.HolType)) raise {
+pub fn type_of_hol(x : @list.List[(String, @lexer.Lexcode, String)]) -> ((Int64, @kernel.HolType)) raise {
   (type_of_hol_c.get())(x)
 }
 
 ///|
 /// `split_step`
-pub fn split_step(x182 : @list.List[(String, @parser.Lexcode, String)]) -> @list.List[@list.List[(String, @parser.Lexcode, String)]] raise {
+pub fn split_step(x182 : @list.List[(String, @lexer.Lexcode, String)]) -> @list.List[@list.List[(String, @lexer.Lexcode, String)]] raise {
   let toks = x182
-  fn group_by_items(x186 : @list.List[(String, @parser.Lexcode, String)]) -> @list.List[(String, @parser.Lexcode, String)] raise {
+  fn group_by_items(x186 : @list.List[(String, @lexer.Lexcode, String)]) -> @list.List[(String, @lexer.Lexcode, String)] raise {
     let toks_3 = x186
     match toks_3 {
       Empty => @list.List([])
-      (((More((_, @parser.Lexcode::Resword("by"), _) as tok_2, tail=rst_2)) | (More((_, @parser.Lexcode::Resword("from"), _) as tok_2, tail=rst_2))) | (More((_, @parser.Lexcode::Ident(","), _) as tok_2, tail=rst_2))) | (More((_, @parser.Lexcode::Resword(";"), _) as tok_2, tail=rst_2)) => group_by_items(rst_2).prepend(tok_2)
-      More((_, @parser.Lexcode::Ident("#"), _) as tok_3, tail=toks_p) => {
+      (((More((_, @lexer.Lexcode::Resword("by"), _) as tok_2, tail=rst_2)) | (More((_, @lexer.Lexcode::Resword("from"), _) as tok_2, tail=rst_2))) | (More((_, @lexer.Lexcode::Ident(","), _) as tok_2, tail=rst_2))) | (More((_, @lexer.Lexcode::Resword(";"), _) as tok_2, tail=rst_2)) => group_by_items(rst_2).prepend(tok_2)
+      More((_, @lexer.Lexcode::Ident("#"), _) as tok_3, tail=toks_p) => {
         let (toks1, toks2) = if @list.List::is_empty(toks_p) {
           (@list.List([]), @list.List([]))
         } else {
@@ -1407,7 +1407,7 @@ pub fn split_step(x182 : @list.List[(String, @parser.Lexcode, String)]) -> @list
   let (toks3, labs_part) = cut_labs_l(toks2_2, @list.List([]))
   let (front_part, hol_part) = cut_front_l(toks3, @list.List([]))
   if (if !@list.List::is_empty(front_part) {
-    let t194 = @parser.Lexcode::Resword("exec")
+    let t194 = @lexer.Lexcode::Resword("exec")
     let t193 = @lib.hd(front_part)
     (middle(t193.0, t193.1, t193.2) == t194)
   } else {
@@ -1421,48 +1421,48 @@ pub fn split_step(x182 : @list.List[(String, @parser.Lexcode, String)]) -> @list
 }
 
 ///|
-fn[TA, TB] cut_semi_l(x183 : @list.List[(TA, @parser.Lexcode, TB)]) -> ((@list.List[(TA, @parser.Lexcode, TB)], @list.List[(TA, @parser.Lexcode, TB)])) raise {
+fn[TA, TB] cut_semi_l(x183 : @list.List[(TA, @lexer.Lexcode, TB)]) -> ((@list.List[(TA, @lexer.Lexcode, TB)], @list.List[(TA, @lexer.Lexcode, TB)])) raise {
   let toks_1 = x183
   match toks_1 {
-    More((_, @parser.Lexcode::Resword(";"), _) as tok, tail=rst) => (@lib.rev(rst), @list.List([tok]))
+    More((_, @lexer.Lexcode::Resword(";"), _) as tok, tail=rst) => (@lib.rev(rst), @list.List([tok]))
     _ => (@lib.rev(toks_1), @list.List([]))
   }
 }
 
 ///|
-fn[TD, TE] cut_by_part_l(x184 : @list.List[(TD, @parser.Lexcode, TE)], x185 : @list.List[(TD, @parser.Lexcode, TE)]) -> ((@list.List[(TD, @parser.Lexcode, TE)], @list.List[(TD, @parser.Lexcode, TE)])) raise {
+fn[TD, TE] cut_by_part_l(x184 : @list.List[(TD, @lexer.Lexcode, TE)], x185 : @list.List[(TD, @lexer.Lexcode, TE)]) -> ((@list.List[(TD, @lexer.Lexcode, TE)], @list.List[(TD, @lexer.Lexcode, TE)])) raise {
   let rev_front = x184
   let toks_2 = x185
   match toks_2 {
-    Empty | More((_, @parser.Lexcode::Resword("by"), _), tail=_) | More((_, @parser.Lexcode::Resword("from"), _), tail=_) => (rev_front, toks_2)
+    Empty | More((_, @lexer.Lexcode::Resword("by"), _), tail=_) | More((_, @lexer.Lexcode::Resword("from"), _), tail=_) => (rev_front, toks_2)
     More(tok_1, tail=rst_1) => cut_by_part_l(rev_front.prepend(tok_1), rst_1)
   }
 }
 
 ///|
-fn[TH, TI] cut_labs_l(x189 : @list.List[(TH, @parser.Lexcode, TI)], x190 : @list.List[(TH, @parser.Lexcode, TI)]) -> ((@list.List[(TH, @parser.Lexcode, TI)], @list.List[(TH, @parser.Lexcode, TI)])) raise {
+fn[TH, TI] cut_labs_l(x189 : @list.List[(TH, @lexer.Lexcode, TI)], x190 : @list.List[(TH, @lexer.Lexcode, TI)]) -> ((@list.List[(TH, @lexer.Lexcode, TI)], @list.List[(TH, @lexer.Lexcode, TI)])) raise {
   let toks_4 = x189
   let labs = x190
   match toks_4 {
-    More((_, @parser.Lexcode::Resword("]"), _) as tok1, tail=More((_, @parser.Lexcode::Ident(_), _) as tok2, tail=More((_, @parser.Lexcode::Resword("["), _) as tok3, tail=rst_4))) => cut_labs_l(rst_4, ((labs.prepend(tok1)).prepend(tok2)).prepend(tok3))
+    More((_, @lexer.Lexcode::Resword("]"), _) as tok1, tail=More((_, @lexer.Lexcode::Ident(_), _) as tok2, tail=More((_, @lexer.Lexcode::Resword("["), _) as tok3, tail=rst_4))) => cut_labs_l(rst_4, ((labs.prepend(tok1)).prepend(tok2)).prepend(tok3))
     _ => (toks_4, labs)
   }
 }
 
 ///|
-fn[TJ, TK] cut_front_l(x191 : @list.List[(TJ, @parser.Lexcode, TK)], x192 : @list.List[(TJ, @parser.Lexcode, TK)]) -> ((@list.List[(TJ, @parser.Lexcode, TK)], @list.List[(TJ, @parser.Lexcode, TK)])) raise {
+fn[TJ, TK] cut_front_l(x191 : @list.List[(TJ, @lexer.Lexcode, TK)], x192 : @list.List[(TJ, @lexer.Lexcode, TK)]) -> ((@list.List[(TJ, @lexer.Lexcode, TK)], @list.List[(TJ, @lexer.Lexcode, TK)])) raise {
   let toks_5 = x191
   let tail = x192
   match toks_5 {
     Empty => (@list.List([]), tail)
-    More((_, @parser.Lexcode::Resword(s), _), tail=rst_5) if @lib.mem(s, mizar_words()) => (@lib.rev(toks_5), tail)
+    More((_, @lexer.Lexcode::Resword(s), _), tail=rst_5) if @lib.mem(s, mizar_words()) => (@lib.rev(toks_5), tail)
     More(tok_5, tail=rst_6) => cut_front_l(rst_6, tail.prepend(tok_5))
   }
 }
 
 ///|
 /// `parse_step`
-pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @parser.Lexcode, String)]) -> ((Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) raise {
+pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @lexer.Lexcode, String)]) -> ((Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)) raise {
   let env = x195
   let toks = x196
   let src = split_step(toks)
@@ -1474,7 +1474,7 @@ pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @p
         match front_part {
           Empty => {
             match toks {
-              More((_, @parser.Lexcode::Resword(";"), _), tail=Empty) => ((-1L), src, Substep::Empty_step)
+              More((_, @lexer.Lexcode::Resword(";"), _), tail=Empty) => ((-1L), src, Substep::Empty_step)
               _ => {
                 let (n, t) = term_of_hol(true)(env)(hol_part)
                 if (n != 0L) {
@@ -1485,7 +1485,7 @@ pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @p
               }
             }
           }
-          More((_, @parser.Lexcode::Resword(key), _), tail=_) => {
+          More((_, @lexer.Lexcode::Resword(key), _), tail=_) => {
             let t197 = @lib.tl(front_part)
             match (key, t197, string_of_toks(semi_part)) {
               ("now", Empty, "") => {
@@ -1499,18 +1499,18 @@ pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @p
                 if (!@list.List::is_empty(labs_part) || !@list.List::is_empty(by_part)) {
                   raise @parser.Noparse
                 } else {
-                  let t206 = @parser.seq(@parser.seq(@parser.many(ident_p), (x203 : @list.List[(String, @parser.Lexcode, String)]) => a_p("be", x203)), fn(x204 : @list.List[(String, @parser.Lexcode, String)]) -> (Int64, @list.List[(String, @parser.Lexcode, String)]) raise {
+                  let t206 = @parser.seq(@parser.seq(@parser.many(ident_p), (x203 : @list.List[(String, @lexer.Lexcode, String)]) => a_p("be", x203)), fn(x204 : @list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @list.List[(String, @lexer.Lexcode, String)]) raise {
                     let t205 = @parser.finished(x204)
                     (Int::to_int64(t205.0), t205.1)
                   })
-                  let x = (fn(x202 : (((@list.List[String], (String, @parser.Lexcode, String)), Int64), @list.List[(String, @parser.Lexcode, String)])) -> @list.List[String] raise {
-                    (fn(x200 : ((@list.List[String], (String, @parser.Lexcode, String)), Int64)) -> @list.List[String] raise {
-                      (fn(x198 : (@list.List[String], (String, @parser.Lexcode, String))) -> @list.List[String] raise {
+                  let x = (fn(x202 : (((@list.List[String], (String, @lexer.Lexcode, String)), Int64), @list.List[(String, @lexer.Lexcode, String)])) -> @list.List[String] raise {
+                    (fn(x200 : ((@list.List[String], (String, @lexer.Lexcode, String)), Int64)) -> @list.List[String] raise {
+                      (fn(x198 : (@list.List[String], (String, @lexer.Lexcode, String))) -> @list.List[String] raise {
                         x198.0
-                      })((fn(x199 : ((@list.List[String], (String, @parser.Lexcode, String)), Int64)) -> (@list.List[String], (String, @parser.Lexcode, String)) raise {
+                      })((fn(x199 : ((@list.List[String], (String, @lexer.Lexcode, String)), Int64)) -> (@list.List[String], (String, @lexer.Lexcode, String)) raise {
                         x199.0
                       })(x200))
-                    })((fn(x201 : (((@list.List[String], (String, @parser.Lexcode, String)), Int64), @list.List[(String, @parser.Lexcode, String)])) -> ((@list.List[String], (String, @parser.Lexcode, String)), Int64) raise {
+                    })((fn(x201 : (((@list.List[String], (String, @lexer.Lexcode, String)), Int64), @list.List[(String, @lexer.Lexcode, String)])) -> ((@list.List[String], (String, @lexer.Lexcode, String)), Int64) raise {
                       x201.0
                     })(x202))
                   })(t206(rst))
@@ -1585,14 +1585,14 @@ pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @p
                   if (n_5 != 0L) {
                     (n_5, src, Substep::Error(string_of_toks(toks), just))
                   } else {
-                    let t217 = @parser.seq(@parser.many(ident_p), fn(x215 : @list.List[(String, @parser.Lexcode, String)]) -> (Int64, @list.List[(String, @parser.Lexcode, String)]) raise {
+                    let t217 = @parser.seq(@parser.many(ident_p), fn(x215 : @list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @list.List[(String, @lexer.Lexcode, String)]) raise {
                       let t216 = @parser.finished(x215)
                       (Int::to_int64(t216.0), t216.1)
                     })
-                    let x_1 = (fn(x214 : ((@list.List[String], Int64), @list.List[(String, @parser.Lexcode, String)])) -> @list.List[String] raise {
+                    let x_1 = (fn(x214 : ((@list.List[String], Int64), @list.List[(String, @lexer.Lexcode, String)])) -> @list.List[String] raise {
                       (fn(x212 : (@list.List[String], Int64)) -> @list.List[String] raise {
                         x212.0
-                      })((fn(x213 : ((@list.List[String], Int64), @list.List[(String, @parser.Lexcode, String)])) -> (@list.List[String], Int64) raise {
+                      })((fn(x213 : ((@list.List[String], Int64), @list.List[(String, @lexer.Lexcode, String)])) -> (@list.List[String], Int64) raise {
                         x213.0
                       })(x214))
                     })(t217(rst1))
@@ -1609,28 +1609,28 @@ pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @p
                   }
                 } catch {
                   @lib.NotFound => {
-                    let t230 = @parser.seq(@parser.seq(@parser.seq(@parser.many(ident_p), (x226 : @list.List[(String, @parser.Lexcode, String)]) => a_p("such", x226)), (x227 : @list.List[(String, @parser.Lexcode, String)]) => a_p("that", x227)), fn(x228 : @list.List[(String, @parser.Lexcode, String)]) -> (Int64, @list.List[(String, @parser.Lexcode, String)]) raise {
+                    let t230 = @parser.seq(@parser.seq(@parser.seq(@parser.many(ident_p), (x226 : @list.List[(String, @lexer.Lexcode, String)]) => a_p("such", x226)), (x227 : @list.List[(String, @lexer.Lexcode, String)]) => a_p("that", x227)), fn(x228 : @list.List[(String, @lexer.Lexcode, String)]) -> (Int64, @list.List[(String, @lexer.Lexcode, String)]) raise {
                       let t229 = @parser.finished(x228)
                       (Int::to_int64(t229.0), t229.1)
                     })
-                    let x_2 = (fn(x225 : ((((@list.List[String], (String, @parser.Lexcode, String)), (String, @parser.Lexcode, String)), Int64), @list.List[(String, @parser.Lexcode, String)])) -> @list.List[String] raise {
-                      (fn(x223 : (((@list.List[String], (String, @parser.Lexcode, String)), (String, @parser.Lexcode, String)), Int64)) -> @list.List[String] raise {
-                        (fn(x221 : ((@list.List[String], (String, @parser.Lexcode, String)), (String, @parser.Lexcode, String))) -> @list.List[String] raise {
-                          (fn(x219 : (@list.List[String], (String, @parser.Lexcode, String))) -> @list.List[String] raise {
+                    let x_2 = (fn(x225 : ((((@list.List[String], (String, @lexer.Lexcode, String)), (String, @lexer.Lexcode, String)), Int64), @list.List[(String, @lexer.Lexcode, String)])) -> @list.List[String] raise {
+                      (fn(x223 : (((@list.List[String], (String, @lexer.Lexcode, String)), (String, @lexer.Lexcode, String)), Int64)) -> @list.List[String] raise {
+                        (fn(x221 : ((@list.List[String], (String, @lexer.Lexcode, String)), (String, @lexer.Lexcode, String))) -> @list.List[String] raise {
+                          (fn(x219 : (@list.List[String], (String, @lexer.Lexcode, String))) -> @list.List[String] raise {
                             x219.0
-                          })((fn(x220 : ((@list.List[String], (String, @parser.Lexcode, String)), (String, @parser.Lexcode, String))) -> (@list.List[String], (String, @parser.Lexcode, String)) raise {
+                          })((fn(x220 : ((@list.List[String], (String, @lexer.Lexcode, String)), (String, @lexer.Lexcode, String))) -> (@list.List[String], (String, @lexer.Lexcode, String)) raise {
                             x220.0
                           })(x221))
-                        })((fn(x222 : (((@list.List[String], (String, @parser.Lexcode, String)), (String, @parser.Lexcode, String)), Int64)) -> ((@list.List[String], (String, @parser.Lexcode, String)), (String, @parser.Lexcode, String)) raise {
+                        })((fn(x222 : (((@list.List[String], (String, @lexer.Lexcode, String)), (String, @lexer.Lexcode, String)), Int64)) -> ((@list.List[String], (String, @lexer.Lexcode, String)), (String, @lexer.Lexcode, String)) raise {
                           x222.0
                         })(x223))
-                      })((fn(x224 : ((((@list.List[String], (String, @parser.Lexcode, String)), (String, @parser.Lexcode, String)), Int64), @list.List[(String, @parser.Lexcode, String)])) -> (((@list.List[String], (String, @parser.Lexcode, String)), (String, @parser.Lexcode, String)), Int64) raise {
+                      })((fn(x224 : ((((@list.List[String], (String, @lexer.Lexcode, String)), (String, @lexer.Lexcode, String)), Int64), @list.List[(String, @lexer.Lexcode, String)])) -> (((@list.List[String], (String, @lexer.Lexcode, String)), (String, @lexer.Lexcode, String)), Int64) raise {
                         x224.0
                       })(x225))
                     })(t230(rst_1))
-                    let t231 = hol_part.prepend(("", @parser.Lexcode::Resword("."), ""))
+                    let t231 = hol_part.prepend(("", @lexer.Lexcode::Resword("."), ""))
                     let t232 = @lib.flat(@lib.map(unident_p, x_2)).concat(t231)
-                    let xy = t232.prepend(("", @parser.Lexcode::Ident("?"), ""))
+                    let xy = t232.prepend(("", @lexer.Lexcode::Ident("?"), ""))
                     let (n_7, tm) = term_of_hol(true)(env)(xy)
                     if (n_7 != 0L) {
                       (n_7, src, Substep::Error(string_of_toks(toks), just))
@@ -1646,7 +1646,7 @@ pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @p
                 if !@list.List::is_empty(by_part) {
                   raise @parser.Noparse
                 } else {
-                  let ((w, _), rst_5) = @parser.seq(ident_p, (x233 : @list.List[(String, @parser.Lexcode, String)]) => a_p("=", x233))(hol_part)
+                  let ((w, _), rst_5) = @parser.seq(ident_p, (x233 : @list.List[(String, @lexer.Lexcode, String)]) => a_p("=", x233))(hol_part)
                   let (n_8, t_6) = term_of_hol(false)(env)(rst_5)
                   if (n_8 != 0L) {
                     (n_8, src, Substep::Error(string_of_toks(toks), Just::No_steps))
@@ -1701,21 +1701,21 @@ pub fn parse_step(x195 : @list.List[@kernel.Term], x196 : @list.List[(String, @p
 }
 
 ///|
-fn[TO, TP] cut_suchthat_l(x208 : @list.List[(TO, @parser.Lexcode, TP)]) -> @list.List[(TO, @parser.Lexcode, TP)] raise {
+fn[TO, TP] cut_suchthat_l(x208 : @list.List[(TO, @lexer.Lexcode, TP)]) -> @list.List[(TO, @lexer.Lexcode, TP)] raise {
   let toks_1 = x208
   match toks_1 {
-    More((_, @parser.Lexcode::Resword("that"), _), tail=More((_, @parser.Lexcode::Resword("such"), _), tail=rst_2)) => rst_2
+    More((_, @lexer.Lexcode::Resword("that"), _), tail=More((_, @lexer.Lexcode::Resword("such"), _), tail=rst_2)) => rst_2
     _ => raise @lib.NotFound
   }
 }
 
 ///|
-fn[TQ, TR] cut_being_l(x209 : @list.List[(TQ, @parser.Lexcode, TR)], x210 : @list.List[(TQ, @parser.Lexcode, TR)]) -> ((@list.List[(TQ, @parser.Lexcode, TR)], @list.List[(TQ, @parser.Lexcode, TR)])) raise {
+fn[TQ, TR] cut_being_l(x209 : @list.List[(TQ, @lexer.Lexcode, TR)], x210 : @list.List[(TQ, @lexer.Lexcode, TR)]) -> ((@list.List[(TQ, @lexer.Lexcode, TR)], @list.List[(TQ, @lexer.Lexcode, TR)])) raise {
   let toks_2 = x209
   let tail = x210
   match toks_2 {
     Empty => raise @lib.NotFound
-    More((_, @parser.Lexcode::Resword("being"), _), tail=rst_3) => {
+    More((_, @lexer.Lexcode::Resword("being"), _), tail=rst_3) => {
       let t211 = @lib.rev(tail)
       (@lib.rev(rst_3), t211)
     }
@@ -1725,7 +1725,7 @@ fn[TQ, TR] cut_being_l(x209 : @list.List[(TQ, @parser.Lexcode, TR)], x210 : @lis
 
 ///|
 /// `steps_of_toks1`
-pub fn steps_of_toks1(x235 : Bool, x236 : Bool, x237 : @list.List[@kernel.Term], x238 : @list.List[(String, @parser.Lexcode, String)]) -> ((@list.List[Step], Step?, @list.List[(String, @parser.Lexcode, String)])) raise {
+pub fn steps_of_toks1(x235 : Bool, x236 : Bool, x237 : @list.List[@kernel.Term], x238 : @list.List[(String, @lexer.Lexcode, String)]) -> ((@list.List[Step], Step?, @list.List[(String, @lexer.Lexcode, String)])) raise {
   let q = x235
   let e = x236
   let env = x237
@@ -1774,7 +1774,7 @@ pub fn steps_of_toks1(x235 : Bool, x236 : Bool, x237 : @list.List[@kernel.Term],
       Substep::Set(tm_3, _) => prefix_l(@list.List([step]), steps_of_toks1(q, e, env.prepend(@kernel.dest_eq(tm_3).0), rst))
       Substep::Cases(Just::By(_, _, _) as just_4, Empty) => {
         try {
-          let (justs, rst1_4) = @parser.many((x242 : @list.List[(String, @parser.Lexcode, String)]) => case_of_toks(env, q, x242))(rst)
+          let (justs, rst1_4) = @parser.many((x242 : @list.List[(String, @lexer.Lexcode, String)]) => case_of_toks(env, q, x242))(rst)
           let (final_, step1, rst2_3) = steps_of_toks1(false, e, env, rst1_4)
           let cases = (status, src, Substep::Cases(just_4, justs))
           if !@list.List::is_empty(final_) {
@@ -1844,7 +1844,7 @@ pub fn steps_of_toks1(x235 : Bool, x236 : Bool, x237 : @list.List[@kernel.Term],
 
 ///|
 /// `just_of_toks`
-pub fn just_of_toks(x252 : @list.List[@kernel.Term], x253 : @list.List[(String, @parser.Lexcode, String)]) -> ((Just, @list.List[(String, @parser.Lexcode, String)])) raise {
+pub fn just_of_toks(x252 : @list.List[@kernel.Term], x253 : @list.List[(String, @lexer.Lexcode, String)]) -> ((Just, @list.List[(String, @lexer.Lexcode, String)])) raise {
   let env_1 = x252
   let toks_1 = x253
   try {
@@ -1864,7 +1864,7 @@ pub fn just_of_toks(x252 : @list.List[@kernel.Term], x253 : @list.List[(String, 
 
 ///|
 /// `now_of_toks`
-pub fn now_of_toks(x254 : @list.List[@kernel.Term], x255 : @list.List[(String, @parser.Lexcode, String)]) -> ((Just, @list.List[(String, @parser.Lexcode, String)])) raise {
+pub fn now_of_toks(x254 : @list.List[@kernel.Term], x255 : @list.List[(String, @lexer.Lexcode, String)]) -> ((Just, @list.List[(String, @lexer.Lexcode, String)])) raise {
   let env_2 = x254
   let toks_2 = x255
   let (steps_2, step1_3, rst_2) = steps_of_toks1(false, true, env_2, toks_2)
@@ -1873,7 +1873,7 @@ pub fn now_of_toks(x254 : @list.List[@kernel.Term], x255 : @list.List[(String, @
 
 ///|
 /// `case_of_toks`
-pub fn case_of_toks(x256 : @list.List[@kernel.Term], x257 : Bool, x258 : @list.List[(String, @parser.Lexcode, String)]) -> ((Just, @list.List[(String, @parser.Lexcode, String)])) raise {
+pub fn case_of_toks(x256 : @list.List[@kernel.Term], x257 : Bool, x258 : @list.List[(String, @lexer.Lexcode, String)]) -> ((Just, @list.List[(String, @lexer.Lexcode, String)])) raise {
   let env_3 = x256
   let q_1 = x257
   let toks_3 = x258
@@ -1901,7 +1901,7 @@ fn[TA, TB, TC] prefix_l(x239 : @list.List[TA], x240 : (@list.List[TA], TB, TC)) 
 
 ///|
 /// `steps_of_toks`
-pub fn steps_of_toks(x259 : @list.List[(String, @parser.Lexcode, String)]) -> @list.List[Step] raise {
+pub fn steps_of_toks(x259 : @list.List[(String, @lexer.Lexcode, String)]) -> @list.List[Step] raise {
   let toks = x259
   let (proof, _, rst) = steps_of_toks1(false, false, @list.List([]), toks)
   if @list.List::is_empty(rst) {
@@ -1913,14 +1913,14 @@ pub fn steps_of_toks(x259 : @list.List[(String, @parser.Lexcode, String)]) -> @l
 
 ///|
 /// `fix_semi`
-pub fn fix_semi(x260 : @list.List[(String, @parser.Lexcode, String)]) -> @list.List[(String, @parser.Lexcode, String)] raise {
+pub fn fix_semi(x260 : @list.List[(String, @lexer.Lexcode, String)]) -> @list.List[(String, @lexer.Lexcode, String)] raise {
   let toks = x260
   if @list.List::is_empty(toks) {
     toks
   } else {
     match @lib.last(toks) {
-      (_, @parser.Lexcode::Resword(";"), _) => toks
-      _ => toks.concat(@list.List([("\n", @parser.Lexcode::Resword(";"), "")]))
+      (_, @lexer.Lexcode::Resword(";"), _) => toks
+      _ => toks.concat(@list.List([("\n", @lexer.Lexcode::Resword(";"), "")]))
     }
   }
 }
@@ -1928,8 +1928,8 @@ pub fn fix_semi(x260 : @list.List[(String, @parser.Lexcode, String)]) -> @list.L
 ///|
 /// parse_proof
 fn step_42() -> Unit raise {
-  parse_proof_c.set(fn(x262 : String) -> @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)] raise {
-    (fn(x261 : @list.List[(String, @parser.Lexcode, String)]) -> @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)] raise {
+  parse_proof_c.set(fn(x262 : String) -> @list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)] raise {
+    (fn(x261 : @list.List[(String, @lexer.Lexcode, String)]) -> @list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)] raise {
       steps_of_toks(fix_semi(x261))
     })(lex2(x262))
   })
@@ -1988,9 +1988,9 @@ pub fn fake_tac(x263 : Bool, x264 : @list.List[@kernel.Thm], x265 : (@list.List[
 /// MIZAR_NEXT
 fn step_43() -> Unit raise {
   let t = @parser.parse_term("T")
-  mizar_next_c.set(fn(x281 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep), ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep), ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) raise) raise {
+  mizar_next_c.set(fn(x281 : ((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep), ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) raise) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep), ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) raise) raise {
     let tac = x281
-    fn(x282 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep), ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) raise {
+    fn(x282 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep), ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise)) raise {
       let (asl, _) as g = x282
       let (e, ((mvs, insts), gls, just) as gs) = tac(g)
       match gls {
@@ -2103,7 +2103,7 @@ pub fn t_pterm_of_now() -> @kernel.Term {
 
 ///|
 /// `terms_of_step`
-pub fn terms_of_step(x295 : @list.List[@kernel.Term], x296 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> @list.List[@kernel.Term] raise {
+pub fn terms_of_step(x295 : @list.List[@kernel.Term], x296 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)) -> @list.List[@kernel.Term] raise {
   let prevs = x295
   let (_, _, substep) = x296
   match substep {
@@ -2138,7 +2138,7 @@ pub fn term_of_now(x297 : Just) -> @kernel.Term raise {
 
 ///|
 /// `term_of_steps`
-pub fn term_of_steps(x302 : @list.List[@kernel.Term], x303 : @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> @kernel.Term raise {
+pub fn term_of_steps(x302 : @list.List[@kernel.Term], x303 : @list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)]) -> @kernel.Term raise {
   let prevs_1 = x302
   let steps_1 = x303
   match steps_1 {
@@ -2172,7 +2172,7 @@ pub fn term_of_steps(x302 : @list.List[@kernel.Term], x303 : @list.List[(Int64, 
 fn step_46() -> Unit raise {
   let f = @parser.parse_term("F")
   terms_of_cases_c.set(fn(x307 : @list.List[Just]) -> (@list.List[Unit], @kernel.Term) raise {
-    ((x304) => terms_of_cases_1_l(f, x304))(((x306 : @list.List[Just]) => @lib.map(fn(x305 : Just) -> @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)] raise {
+    ((x304) => terms_of_cases_1_l(f, x304))(((x306 : @list.List[Just]) => @lib.map(fn(x305 : Just) -> @list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)] raise {
       let just = x305
       match just {
         Just::Proof(_, case_1, _) => case_1
@@ -2403,7 +2403,7 @@ pub fn step_of_obligation(x343 : String, x344 : String, x345 : @list.List[@kerne
     Substep::Have(tm, @list.List([lab]), hole)
   } else {
     let ll = lets(tl)
-    let intros = ll.concat(@lib.map(fn(x354 : @kernel.Term) -> (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep) raise {
+    let intros = ll.concat(@lib.map(fn(x354 : @kernel.Term) -> (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep) raise {
       let a = x354
       step_of_substep(prefix_p, Substep::Assume(a, @list.List([])))
     }, ass))
@@ -2413,7 +2413,7 @@ pub fn step_of_obligation(x343 : String, x344 : String, x345 : @list.List[@kerne
       let t359 = @lib.itlist((x357 : @kernel.Term, x358 : @kernel.Term) => @lib.curry(fn(x356 : (@kernel.Term, @kernel.Term)) -> @kernel.Term raise {
         @bool.mk_imp(x356.0, x356.1)
       }, x357, x358), ass, tm)
-      Substep::Have(@bool.list_mk_forall(@lib.flat(@lib.map(fn(x355 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> @list.List[@kernel.Term] raise {
+      Substep::Have(@bool.list_mk_forall(@lib.flat(@lib.map(fn(x355 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)) -> @list.List[@kernel.Term] raise {
         match x355 {
           (_, _, Substep::Let(l_1)) => l_1
           _ => @list.List([])
@@ -2500,25 +2500,25 @@ pub fn next_growth_label() -> Ref[Int64] {
 
 ///|
 /// `connect_step`
-pub fn connect_step(x383 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep), x384 : @list.List[String]) -> Step raise {
+pub fn connect_step(x383 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep), x384 : @list.List[String]) -> Step raise {
   let _ as step = x383
   let labs = x384
-  let comma = ("", @parser.Lexcode::Ident(","), "")
-  let from_key = (" ", @parser.Lexcode::Resword("from"), " ")
-  fn extra_from(x387 : (String, @parser.Lexcode, String), x388 : @list.List[String]) -> @list.List[(String, @parser.Lexcode, String)] raise {
+  let comma = ("", @lexer.Lexcode::Ident(","), "")
+  let from_key = (" ", @lexer.Lexcode::Resword("from"), " ")
+  fn extra_from(x387 : (String, @lexer.Lexcode, String), x388 : @list.List[String]) -> @list.List[(String, @lexer.Lexcode, String)] raise {
     let sep = x387
     let labs_1 = x388
     match labs_1 {
       Empty => @list.List([])
       More(lab, tail=labs_p) => {
         let t389 = extra_from(comma, labs_p)
-        (t389.prepend(("", @parser.Lexcode::Ident(lab), ""))).prepend(sep)
+        (t389.prepend(("", @lexer.Lexcode::Ident(lab), ""))).prepend(sep)
       }
     }
   }
-  let connect_just : (@list.List[(String, @parser.Lexcode, String)]) -> ((Just) -> (@list.List[(String, @parser.Lexcode, String)], Just) raise) raise = fn(x390 : @list.List[(String, @parser.Lexcode, String)]) -> ((Just) -> (@list.List[(String, @parser.Lexcode, String)], Just) raise) raise {
+  let connect_just : (@list.List[(String, @lexer.Lexcode, String)]) -> ((Just) -> (@list.List[(String, @lexer.Lexcode, String)], Just) raise) raise = fn(x390 : @list.List[(String, @lexer.Lexcode, String)]) -> ((Just) -> (@list.List[(String, @lexer.Lexcode, String)], Just) raise) raise {
     let src4 = x390
-    fn(x391 : Just) -> (@list.List[(String, @parser.Lexcode, String)], Just) raise {
+    fn(x391 : Just) -> (@list.List[(String, @lexer.Lexcode, String)], Just) raise {
       let just = x391
       match just {
         Just::By(l_1, l_p_2, b) => {
@@ -2573,14 +2573,14 @@ pub fn connect_step(x383 : (Int64, @list.List[@list.List[(String, @parser.Lexcod
 }
 
 ///|
-fn[TA, TB] ungrow_by_l(x385 : @list.List[(TA, @parser.Lexcode, TB)], x386 : @list.List[ByItem]) -> ((@list.List[(TA, @parser.Lexcode, TB)], @list.List[ByItem])) raise {
+fn[TA, TB] ungrow_by_l(x385 : @list.List[(TA, @lexer.Lexcode, TB)], x386 : @list.List[ByItem]) -> ((@list.List[(TA, @lexer.Lexcode, TB)], @list.List[ByItem])) raise {
   let src = x385
   let l = x386
   match l {
     Empty => (src, @list.List([]))
     More(ByItem::Grow(name, tac), tail=l_p) => {
       match src {
-        More(tok1, tail=More((_, @parser.Lexcode::Ident("#"), _), tail=More(tok2, tail=src_p))) => {
+        More(tok1, tail=More((_, @lexer.Lexcode::Ident("#"), _), tail=More(tok2, tail=src_p))) => {
           let (src_p_p, l_p_p) = ungrow_by_l(src_p, l_p)
           ((src_p_p.prepend(tok2)).prepend(tok1), l_p.prepend(ByItem::Tactic(name, tac)))
         }
@@ -2615,7 +2615,7 @@ pub fn add_width(x394 : Int64, x395 : String) -> Int64 raise {
 
 ///|
 /// `rewrap_step`
-pub fn rewrap_step(x398 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> Step raise {
+pub fn rewrap_step(x398 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)) -> Step raise {
   let (e, src, substep) as step = x398
   match src {
     More(src1, tail=More(src2, tail=More(src3, tail=More(src4, tail=More(src5, tail=Empty))))) => {
@@ -2651,20 +2651,20 @@ pub fn rewrap_step(x398 : (Int64, @list.List[@list.List[(String, @parser.Lexcode
 }
 
 ///|
-fn[TA] rewrap_from_l(x399 : TA, x400 : @list.List[(TA, @parser.Lexcode, String)], x401 : @list.List[(TA, @parser.Lexcode, String)]) -> @list.List[(TA, @parser.Lexcode, String)] raise {
+fn[TA] rewrap_from_l(x399 : TA, x400 : @list.List[(TA, @lexer.Lexcode, String)], x401 : @list.List[(TA, @lexer.Lexcode, String)]) -> @list.List[(TA, @lexer.Lexcode, String)] raise {
   let x1 = x399
   let src4a = x400
   let src4b = x401
   match src4b {
     Empty => @lib.rev(src4a)
-    More((x, y, z), tail=More((x_p, @parser.Lexcode::Resword("from") as y_p, z_p), tail=rst)) => @lib.rev(src4a).concat((rst.prepend((x1, y_p, z_p))).prepend((x, y, "\n")))
+    More((x, y, z), tail=More((x_p, @lexer.Lexcode::Resword("from") as y_p, z_p), tail=rst)) => @lib.rev(src4a).concat((rst.prepend((x1, y_p, z_p))).prepend((x, y, "\n")))
     More(tok, tail=rst_1) => rewrap_from_l(x1, src4a.prepend(tok), rst_1)
   }
 }
 
 ///|
 /// `pp_step`
-pub fn pp_step(x404 : String, x405 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> Step raise {
+pub fn pp_step(x404 : String, x405 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)) -> Step raise {
   let prefix = x404
   let step = x405
   let (e, _, substep) = step
@@ -2690,7 +2690,7 @@ pub fn pp_step(x404 : String, x405 : (Int64, @list.List[@list.List[(String, @par
 pub fn pp_just(x408 : String, x409 : Just) -> Just raise {
   let prefix_1 = x408
   let just_7 = x409
-  let pp_step_p : ((Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)?) -> (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)? raise = fn(x410 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)?) -> (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)? raise {
+  let pp_step_p : ((Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)?) -> (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)? raise = fn(x410 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)?) -> (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)? raise {
     let step_p = x410
     match step_p {
       Some(step_50) => Some(pp_step(prefix_1, step_50))
@@ -2698,7 +2698,7 @@ pub fn pp_just(x408 : String, x409 : Just) -> Just raise {
     }
   }
   let prefix_p = (proof_indent().val + prefix_1)
-  let pp_step_p_p : ((Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep) raise = fn(x411 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep) raise {
+  let pp_step_p_p : ((Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)) -> (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep) raise = fn(x411 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)) -> (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep) raise {
     let step_51 = x411
     match step_51 {
       (_, _, Substep::Qed(_)) => pp_step(prefix_1, step_51)
@@ -2718,7 +2718,7 @@ pub fn pp_just(x408 : String, x409 : Just) -> Just raise {
 
 ///|
 /// `outdent`
-pub fn outdent(x414 : Int64, x415 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> Step raise {
+pub fn outdent(x414 : Int64, x415 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)) -> Step raise {
   let n = x414
   let step = x415
   let (_, src, _) = step
@@ -2738,7 +2738,7 @@ pub fn outdent(x414 : Int64, x415 : (Int64, @list.List[@list.List[(String, @pars
 
 ///|
 /// `replacement_steps`
-pub fn replacement_steps(x416 : (@list.List[(String, @kernel.Thm)], @kernel.Term), x417 : (String) -> ((Int64) -> (@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)], @list.List[String], Int64) raise) raise, x418 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> @list.List[Step] raise {
+pub fn replacement_steps(x416 : (@list.List[(String, @kernel.Thm)], @kernel.Term), x417 : (String) -> ((Int64) -> (@list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)], @list.List[String], Int64) raise) raise, x418 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)) -> @list.List[Step] raise {
   let (asl, w) = x416
   let f = x417
   let step = x418
@@ -2761,7 +2761,7 @@ pub fn replacement_steps(x416 : (@list.List[(String, @kernel.Thm)], @kernel.Term
         let (src2_p_p_1, src3_p_p_1) = shift_l(src2_2, src3_2, just_p_1)
         @list.List([(e_1, @list.List([src1_1, src2_p_p_1, src3_p_p_1, src4_p_1, src5_p_1]), Substep::Thus(tm_1, labs_2, just_p_1))])
       }
-      (More((e_2, _, Substep::Have(tm_p_2, _, Just::Proof(_, y_2, _))), tail=Empty), (_, _, Substep::Qed(_))) if (tm_p_2 == w) => @lib.map((x426 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) => outdent(n_1, x426), y_2)
+      (More((e_2, _, Substep::Have(tm_p_2, _, Just::Proof(_, y_2, _))), tail=Empty), (_, _, Substep::Qed(_))) if (tm_p_2 == w) => @lib.map((x426 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)) => outdent(n_1, x426), y_2)
       (More((e_3, More(src1_p_2, tail=More(src2_p_2, tail=More(src3_p_2, tail=More(src4_p_2, tail=More(src5_p_2, tail=Empty))))), Substep::Have(tm_p_3, _, Just::By(_, _, _) as just_p_2)), tail=Empty), (_, More(src1_2, tail=More(src2_3, tail=More(src3_3, tail=More(src4_2, tail=More(src5_2, tail=Empty))))), Substep::Qed(_))) if (tm_p_3 == w) => @list.List([(e_3, @list.List([src1_2, src2_3, src3_3, src4_p_2, src5_p_2]), Substep::Qed(just_p_2))])
       _ => {
         if (grow_duplicates().val > 0L) {
@@ -3217,8 +3217,8 @@ pub fn tactic_of_by(x518 : Bool, x519 : @list.List[ByItem], x520 : @list.List[By
                   let t551 = tac_2(thms)
                   let gs_p = timed_tac(timeout().val)(t551)(g_p_p)
                   if grow {
-                    raise Grown::Grown(fn(x554 : String) -> ((Int64) -> (@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)], @list.List[String], Int64) raise) raise {
-                      fn(x555 : Int64) -> (@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)], @list.List[String], Int64) raise {
+                    raise Grown::Grown(fn(x554 : String) -> ((Int64) -> (@list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)], @list.List[String], Int64) raise) raise {
+                      fn(x555 : Int64) -> (@list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)], @list.List[String], Int64) raise {
                         ((x552 : String, x553 : Int64) => steps_of_goals(g, gs_p, x552, x553))(x554, x555)
                       }
                     })
@@ -3416,7 +3416,7 @@ pub fn thesis_var() -> @kernel.Term {
 
 ///|
 /// `tactic_of_step`
-pub fn tactic_of_step(x591 : Bool, x592 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep), x593 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((Step, @tactics.Goalstate)) raise {
+pub fn tactic_of_step(x591 : Bool, x592 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep), x593 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((Step, @tactics.Goalstate)) raise {
   let fake = x591
   let step = x592
   let (asl, w) as g = x593
@@ -3687,7 +3687,7 @@ pub fn tactic_of_just(x692 : Bool, x693 : Just, x694 : (@list.List[(String, @ker
   let fake_1 = x692
   let just_8 = x693
   let g_2 = x694
-  fn tactic_of_just1(x697 : @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)], x698 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[Step], Int64, @tactics.Goalstate)) raise {
+  fn tactic_of_just1(x697 : @list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)], x698 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[Step], Int64, @tactics.Goalstate)) raise {
     let l_7 = x697
     let (_, w_1) as g_3 = x698
     match l_7 {
@@ -3798,7 +3798,7 @@ pub fn parse_qproof(x708 : String) -> @list.List[Step] raise {
 
 ///|
 /// `src_of_step`
-pub fn src_of_step(x709 : Int64, x710 : @list.List[@list.List[(String, @parser.Lexcode, String)]], x711 : Substep) -> @list.List[(Int64, (String, String, String))] raise {
+pub fn src_of_step(x709 : Int64, x710 : @list.List[@list.List[(String, @lexer.Lexcode, String)]], x711 : Substep) -> @list.List[(Int64, (String, String, String))] raise {
   let (e, src, substep) = (x709, x710, x711)
   let t718 = match substep {
     Substep::Have(_, _, just) => src_of_just(just)
@@ -3827,7 +3827,7 @@ pub fn src_of_step(x709 : Int64, x710 : @list.List[@list.List[(String, @parser.L
 /// `src_of_just`
 pub fn src_of_just(x719 : Just) -> @list.List[(Int64, (String, String, String))] raise {
   let just_7 = x719
-  let unpack : ((Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)?) -> @list.List[(Int64, (String, String, String))] raise = fn(x720 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)?) -> @list.List[(Int64, (String, String, String))] raise {
+  let unpack : ((Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)?) -> @list.List[(Int64, (String, String, String))] raise = fn(x720 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)?) -> @list.List[(Int64, (String, String, String))] raise {
     let step1 = x720
     match step1 {
       Some(step) => src_of_step(step.0, step.1, step.2)
@@ -3844,7 +3844,7 @@ pub fn src_of_just(x719 : Just) -> @list.List[(Int64, (String, String, String))]
           }
         })(x723)
         s725(x724)
-      }, @lib.map(fn(x726 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> @list.List[(Int64, (String, String, String))] raise {
+      }, @lib.map(fn(x726 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)) -> @list.List[(Int64, (String, String, String))] raise {
         src_of_step(x726.0, x726.1, x726.2)
       }, steps), @list.List([])).concat(t727)
       unpack(step1_1).concat(t728)
@@ -3855,7 +3855,7 @@ pub fn src_of_just(x719 : Just) -> @list.List[(Int64, (String, String, String))]
 
 ///|
 /// `src_of_steps`
-pub fn src_of_steps(x729 : @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> @list.List[(Int64, (String, String, String))] raise {
+pub fn src_of_steps(x729 : @list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)]) -> @list.List[(Int64, (String, String, String))] raise {
   let steps = x729
   @lib.itlist(fn(x732 : @list.List[(Int64, (String, String, String))], x733 : @list.List[(Int64, (String, String, String))]) -> @list.List[(Int64, (String, String, String))] raise {
     let s734 = (fn(x730 : @list.List[(Int64, (String, String, String))]) -> ((@list.List[(Int64, (String, String, String))]) -> @list.List[(Int64, (String, String, String))] raise) raise {
@@ -3864,7 +3864,7 @@ pub fn src_of_steps(x729 : @list.List[(Int64, @list.List[@list.List[(String, @pa
       }
     })(x732)
     s734(x733)
-  }, @lib.map(fn(x735 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> @list.List[(Int64, (String, String, String))] raise {
+  }, @lib.map(fn(x735 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)) -> @list.List[(Int64, (String, String, String))] raise {
     src_of_step(x735.0, x735.1, x735.2)
   }, steps), @list.List([]))
 }
@@ -4052,7 +4052,7 @@ pub fn print_boxed(x770 : @pp.Formatter, x771 : String) -> Unit raise {
 
 ///|
 /// `print_step`
-pub fn print_step(x773 : @pp.Formatter, x774 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> Unit raise {
+pub fn print_step(x773 : @pp.Formatter, x774 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)) -> Unit raise {
   let f = x773
   let x = x774
   print_boxed(f, string_of_src(0L, src_of_step(x.0, x.1, x.2)))
@@ -4060,7 +4060,7 @@ pub fn print_step(x773 : @pp.Formatter, x774 : (Int64, @list.List[@list.List[(St
 
 ///|
 /// `print_qsteps`
-pub fn print_qsteps(x775 : @pp.Formatter, x776 : @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> Unit raise {
+pub fn print_qsteps(x775 : @pp.Formatter, x776 : @list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)]) -> Unit raise {
   let f = x775
   let x = x776
   print_boxed(f, ("`;\n" + (string_of_src(0L, src_of_steps(x)) + "`")))
@@ -4109,10 +4109,10 @@ pub fn ee(x782 : String) -> @tactics.Goalstack raise {
           s788(x789)
         }
       })(x790))
-    })(((x796 : @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) => @lib.map(fn(x791 : (Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
+    })(((x796 : @list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)]) => @lib.map(fn(x791 : (Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)) -> (((@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise) raise {
       let step = x791
       fn(x795 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
-        (fn(x793 : ((Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep), ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise))) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
+        (fn(x793 : ((Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep), ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise))) -> ((@list.List[@kernel.Term], (@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)])), @list.List[(@list.List[(String, @kernel.Thm)], @kernel.Term)], ((@list.List[(Int64, @kernel.Term)], @list.List[(@kernel.Term, @kernel.Term)], @list.List[(@kernel.HolType, @kernel.HolType)]), @list.List[@kernel.Thm]) -> @kernel.Thm raise) raise {
           x793.1
         })(((x794 : (@list.List[(String, @kernel.Thm)], @kernel.Term)) => tactic_of_step(false, step, x794))(x795))
       }
@@ -4122,7 +4122,7 @@ pub fn ee(x782 : String) -> @tactics.Goalstack raise {
 
 ///|
 /// `check_proof`
-pub fn check_proof(x797 : @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> ((@list.List[Step], (Int64, Int64, Int64), @kernel.Thm)) raise {
+pub fn check_proof(x797 : @list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)]) -> ((@list.List[Step], (Int64, Int64, Int64), @kernel.Thm)) raise {
   let steps = x797
   let step_58 = match steps {
     More((_, _, Substep::Have(_, _, _)) as step, tail=Empty) => step
@@ -4164,7 +4164,7 @@ pub(all) suberror Mizar_error {
 
 ///|
 /// `thm`
-pub fn thm(x802 : @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> @kernel.Thm raise {
+pub fn thm(x802 : @list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)]) -> @kernel.Thm raise {
   let steps = x802
   let (steps_p, (n1, n2, n3) as n, th) = check_proof(steps)
   if (@lib.add63(@lib.add63(n1, n2), n3) == 0L) {
@@ -4193,7 +4193,7 @@ pub fn thm_of_string(x : String) -> @kernel.Thm raise {
 
 ///|
 /// `labels_of_steps`
-pub fn labels_of_steps(x804 : @list.List[(@list.List[String], Ref[Int64])], x805 : @list.List[(@list.List[String], Ref[Int64])], x806 : @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> @list.List[(@list.List[String], Ref[Int64])] raise {
+pub fn labels_of_steps(x804 : @list.List[(@list.List[String], Ref[Int64])], x805 : @list.List[(@list.List[String], Ref[Int64])], x806 : @list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)]) -> @list.List[(@list.List[String], Ref[Int64])] raise {
   let labels = x804
   let context = x805
   let steps = x806
@@ -4332,7 +4332,7 @@ pub fn number_labels(x832 : Int64, x833 : @list.List[(@list.List[String], Ref[In
 
 ///|
 /// `renumber_steps`
-pub fn renumber_steps(x835 : @list.List[(@list.List[String], @list.List[String])], x836 : @list.List[(@list.List[String], @list.List[String])], x837 : @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> ((@list.List[(@list.List[String], @list.List[String])], @list.List[Step])) raise {
+pub fn renumber_steps(x835 : @list.List[(@list.List[String], @list.List[String])], x836 : @list.List[(@list.List[String], @list.List[String])], x837 : @list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)]) -> ((@list.List[(@list.List[String], @list.List[String])], @list.List[Step])) raise {
   let labels = x835
   let context = x836
   let steps = x837
@@ -4419,19 +4419,19 @@ pub fn renumber_steps(x835 : @list.List[(@list.List[String], @list.List[String])
 
 ///|
 /// `renumber_just`
-pub fn renumber_just(x859 : @list.List[(@list.List[String], @list.List[String])], x860 : @list.List[(@list.List[String], @list.List[String])], x861 : @list.List[(String, @parser.Lexcode, String)], x862 : Just) -> ((@list.List[(@list.List[String], @list.List[String])], @list.List[(String, @parser.Lexcode, String)], Just)) raise {
+pub fn renumber_just(x859 : @list.List[(@list.List[String], @list.List[String])], x860 : @list.List[(@list.List[String], @list.List[String])], x861 : @list.List[(String, @lexer.Lexcode, String)], x862 : Just) -> ((@list.List[(@list.List[String], @list.List[String])], @list.List[(String, @lexer.Lexcode, String)], Just)) raise {
   let labels_1 = x859
   let context_1 = x860
   let src_3 = x861
   let just_6 = x862
-  fn renumber_by(x863 : @list.List[(String, @parser.Lexcode, String)], x864 : @list.List[ByItem]) -> ((@list.List[(String, @parser.Lexcode, String)], @list.List[(String, @parser.Lexcode, String)], @list.List[ByItem])) raise {
+  fn renumber_by(x863 : @list.List[(String, @lexer.Lexcode, String)], x864 : @list.List[ByItem]) -> ((@list.List[(String, @lexer.Lexcode, String)], @list.List[(String, @lexer.Lexcode, String)], @list.List[ByItem])) raise {
     let src_4 = x863
     let l = x864
     match l {
       Empty => (@list.List([]), src_4, @list.List([]))
       More(ByItem::Label(s_1) as x_7, tail=l_p) if isnumber(s_1) => {
         match src_4 {
-          More(tok, tail=More((x1_2, @parser.Lexcode::Ident(_), x2_2) as tok_p, tail=src23)) => {
+          More(tok, tail=More((x1_2, @lexer.Lexcode::Ident(_), x2_2) as tok_p, tail=src23)) => {
             let labs_9 = @lib.flat(@lib.map(fn(x865 : (@list.List[String], @list.List[String])) -> @list.List[String] raise {
               x865.1
             }, @lib.filter(fn(x869 : (@list.List[String], @list.List[String])) -> Bool raise {
@@ -4450,17 +4450,17 @@ pub fn renumber_just(x859 : @list.List[(@list.List[String], @list.List[String])]
                 ByItem::Label(s_2)
               }, labs_9)
               let labs_p_10 = @lib.tl(labs_9)
-              let src1_2 = @lib.flat(@lib.map(fn(x871 : String) -> @list.List[(String, @parser.Lexcode, String)] raise {
+              let src1_2 = @lib.flat(@lib.map(fn(x871 : String) -> @list.List[(String, @lexer.Lexcode, String)] raise {
                 let s_3 = x871
-                let t872 = ("", @parser.Lexcode::Ident(s_3), x2_2)
-                @list.List([("", @parser.Lexcode::Ident(","), ""), t872])
+                let t872 = ("", @lexer.Lexcode::Ident(s_3), x2_2)
+                @list.List([("", @lexer.Lexcode::Ident(","), ""), t872])
               }, labs_p_10))
               let t873 = if @list.List::is_empty(labs_p_10) {
                 x2_2
               } else {
                 ""
               }
-              (((src1_2.prepend((x1_2, @parser.Lexcode::Ident(@lib.hd(labs_9)), t873))).prepend(tok)).concat(src2_1), src3_1, items.concat(l_p_p))
+              (((src1_2.prepend((x1_2, @lexer.Lexcode::Ident(@lib.hd(labs_9)), t873))).prepend(tok)).concat(src2_1), src3_1, items.concat(l_p_p))
             }
           }
           _ => raise Failure("renumber_by")
@@ -4468,8 +4468,8 @@ pub fn renumber_just(x859 : @list.List[(@list.List[String], @list.List[String])]
       }
       More(x_8, tail=l_p_1) => {
         let (src1_3, src23_3) = match src_4 {
-          More(tok_1, tail=More((_, @parser.Lexcode::Ident("#"), _) as tok1_1, tail=More((_, @parser.Lexcode::Ident(s_4), _) as tok2_1, tail=src23_1))) if (s_4 != ",") => (@list.List([tok_1, tok1_1, tok2_1]), src23_1)
-          More(tok_2, tail=More((_, @parser.Lexcode::Ident(_), _) as tok_p_1, tail=src23_2)) => (@list.List([tok_2, tok_p_1]), src23_2)
+          More(tok_1, tail=More((_, @lexer.Lexcode::Ident("#"), _) as tok1_1, tail=More((_, @lexer.Lexcode::Ident(s_4), _) as tok2_1, tail=src23_1))) if (s_4 != ",") => (@list.List([tok_1, tok1_1, tok2_1]), src23_1)
+          More(tok_2, tail=More((_, @lexer.Lexcode::Ident(_), _) as tok_p_1, tail=src23_2)) => (@list.List([tok_2, tok_p_1]), src23_2)
           _ => raise Failure("renumber_by")
         }
         let (src2_2, src3_2, l_p_p_1) = renumber_by(src23_3, l_p_1)
@@ -4492,7 +4492,7 @@ pub fn renumber_just(x859 : @list.List[(@list.List[String], @list.List[String])]
 }
 
 ///|
-fn[TA, TB] make_lab_l(x838 : TA, x839 : TB, x840 : TA, x841 : TB, x842 : TA, x843 : TB, x844 : String) -> ((@list.List[(TA, @parser.Lexcode, TB)], @list.List[String])) raise {
+fn[TA, TB] make_lab_l(x838 : TA, x839 : TB, x840 : TA, x841 : TB, x842 : TA, x843 : TB, x844 : String) -> ((@list.List[(TA, @lexer.Lexcode, TB)], @list.List[String])) raise {
   let x1 = x838
   let y1 = x839
   let x2 = x840
@@ -4500,13 +4500,13 @@ fn[TA, TB] make_lab_l(x838 : TA, x839 : TB, x840 : TA, x841 : TB, x842 : TA, x84
   let x3 = x842
   let y3 = x843
   let s = x844
-  let t845 = (x3, @parser.Lexcode::Resword("]"), y3)
-  let t846 = (x2, @parser.Lexcode::Ident(s), y2)
-  (@list.List([(x1, @parser.Lexcode::Resword("["), y1), t846, t845]), @list.List([s]))
+  let t845 = (x3, @lexer.Lexcode::Resword("]"), y3)
+  let t846 = (x2, @lexer.Lexcode::Ident(s), y2)
+  (@list.List([(x1, @lexer.Lexcode::Resword("["), y1), t846, t845]), @list.List([s]))
 }
 
 ///|
-fn[TC] renumber_labs_l(x847 : Bool, x848 : String, x849 : @list.List[(String, @parser.Lexcode, String)], x850 : @list.List[String], x851 : (TC, @list.List[String])) -> (((@list.List[(String, @parser.Lexcode, String)], @list.List[String]), String)) raise {
+fn[TC] renumber_labs_l(x847 : Bool, x848 : String, x849 : @list.List[(String, @lexer.Lexcode, String)], x850 : @list.List[String], x851 : (TC, @list.List[String])) -> (((@list.List[(String, @lexer.Lexcode, String)], @list.List[String]), String)) raise {
   let b = x847
   let w = x848
   let src = x849
@@ -4522,7 +4522,7 @@ fn[TC] renumber_labs_l(x847 : Bool, x848 : String, x849 : @list.List[(String, @p
     }
     More(lab, tail=rst) if isnumber(lab) => {
       match src {
-        More((x1_1, @parser.Lexcode::Resword("["), y1_1), tail=More((x2_1, @parser.Lexcode::Ident(s_p), y2_1), tail=More((x3_1, @parser.Lexcode::Resword("]"), y3_1), tail=rstsrc))) => {
+        More((x1_1, @lexer.Lexcode::Resword("["), y1_1), tail=More((x2_1, @lexer.Lexcode::Ident(s_p), y2_1), tail=More((x3_1, @lexer.Lexcode::Resword("]"), y3_1), tail=rstsrc))) => {
           let ((src_p, labs_p), w_p) = renumber_labs_l(false, y3_1, rstsrc, rst, label)
           let (newsrc, newlabs) = if b {
             make_lab_l(x1_1, y1_1, x2_1, y2_1, x3_1, w_p, @lib.hd(label.1))
@@ -4551,7 +4551,7 @@ fn[TC] renumber_labs_l(x847 : Bool, x848 : String, x849 : @list.List[(String, @p
 }
 
 ///|
-fn[TE, TF, TG] renumber_labs1_l(x852 : Bool, x853 : @list.List[(TE, TF, String)], x854 : @list.List[(String, @parser.Lexcode, String)], x855 : @list.List[String], x856 : (TG, @list.List[String])) -> ((@list.List[(TE, TF, String)], @list.List[(String, @parser.Lexcode, String)], @list.List[String])) raise {
+fn[TE, TF, TG] renumber_labs1_l(x852 : Bool, x853 : @list.List[(TE, TF, String)], x854 : @list.List[(String, @lexer.Lexcode, String)], x855 : @list.List[String], x856 : (TG, @list.List[String])) -> ((@list.List[(TE, TF, String)], @list.List[(String, @lexer.Lexcode, String)], @list.List[String])) raise {
   let b_1 = x852
   let src1 = x853
   let src_1 = x854
@@ -4569,7 +4569,7 @@ fn[TE, TF, TG] renumber_labs1_l(x852 : Bool, x853 : @list.List[(TE, TF, String)]
 
 ///|
 /// `renumber_steps1`
-pub fn renumber_steps1(x874 : @list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], Substep)]) -> @list.List[Step] raise {
+pub fn renumber_steps1(x874 : @list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], Substep)]) -> @list.List[Step] raise {
   let steps = x874
   let labels = @lib.rev(labels_of_steps(@list.List([]), @list.List([]), steps))
   let labels_p = number_labels(start_label().val, labels)

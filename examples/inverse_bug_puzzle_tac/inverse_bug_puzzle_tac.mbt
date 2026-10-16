@@ -74,13 +74,13 @@ pub fn consider(x14 : String, x15 : @kernel.Term, x16 : @list.List[((@list.List[
   let t = x15
   let prfs = x16
   let lab = x17
-  let ident : (@list.List[@parser.Lexcode]) -> (String, @list.List[@parser.Lexcode]) raise = fn(x19 : @list.List[@parser.Lexcode]) -> (String, @list.List[@parser.Lexcode]) raise {
+  let ident : (@list.List[@lexer.Lexcode]) -> (String, @list.List[@lexer.Lexcode]) raise = fn(x19 : @list.List[@lexer.Lexcode]) -> (String, @list.List[@lexer.Lexcode]) raise {
     match x19 {
-      More(@parser.Lexcode::Ident(s), tail=rest) if @printer.isalnum(s) => (s, rest)
+      More(@lexer.Lexcode::Ident(s), tail=rest) if @printer.isalnum(s) => (s, rest)
       _ => raise @parser.Noparse
     }
   }
-  let parse_using : (@list.List[@parser.Lexcode]) -> (@list.List[String], @list.List[@parser.Lexcode]) raise = @parser.many(ident)
+  let parse_using : (@list.List[@lexer.Lexcode]) -> (@list.List[String], @list.List[@lexer.Lexcode]) raise = @parser.many(ident)
   fn findsuchthat(x20 : Int64) -> Int64 raise {
     let n = x20
     if (@lib.string_sub(vars_suchthat, @lib.int63_to_int(n), 9) == "such that") {
@@ -92,11 +92,11 @@ pub fn consider(x14 : String, x15 : @kernel.Term, x16 : @list.List[((@list.List[
   let n_1 = findsuchthat(1L)
   let vars = @lib.string_sub(vars_suchthat, 0, @lib.int63_to_int(@lib.sub63(n_1, 1L)))
   let xl = @lib.map(@parser.parse_term, (fn(x23 : @list.List[String]) -> @list.List[String] raise {
-    (fn(x22 : @list.List[@parser.Lexcode]) -> @list.List[String] raise {
-      (fn(x21 : (@list.List[String], @list.List[@parser.Lexcode])) -> @list.List[String] raise {
+    (fn(x22 : @list.List[@lexer.Lexcode]) -> @list.List[String] raise {
+      (fn(x21 : (@list.List[String], @list.List[@lexer.Lexcode])) -> @list.List[String] raise {
         x21.0
       })(parse_using(x22))
-    })(@parser.lex_list(x23))
+    })(@lexer.lex_list(x23))
   })((fn(x24 : String) -> @list.List[String] raise {
     @lib.explode(x24)
   })(vars)))

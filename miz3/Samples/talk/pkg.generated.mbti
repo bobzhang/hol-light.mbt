@@ -3,8 +3,8 @@ package "bobzhang/hol_light/miz3/Samples/talk"
 
 import {
   "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lexer",
   "bobzhang/hol_light/miz3/miz3",
-  "bobzhang/hol_light/parser",
   "moonbitlang/core/list",
   "moonbitlang/core/ref",
 }
@@ -12,7 +12,7 @@ import {
 // Values
 pub fn arithmetic_progression_simple() -> @kernel.Thm
 
-pub fn example() -> @ref.Ref[@list.List[(Int64, @list.List[@list.List[(String, @parser.Lexcode, String)]], @miz3.Substep)]?]
+pub fn example() -> @ref.Ref[@list.List[(Int64, @list.List[@list.List[(String, @lexer.Lexcode, String)]], @miz3.Substep)]?]
 
 pub fn exec_phrase_1(Unit) -> Unit raise
 

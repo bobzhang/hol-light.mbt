@@ -395,24 +395,24 @@ pub impl @lib.OHash for Sexp with fn ohash_visit(self, h) {
 
 ///|
 /// `atom`
-pub fn atom(x36 : @list.List[@parser.Lexcode]) -> ((Sexp, @list.List[@parser.Lexcode])) raise {
+pub fn atom(x36 : @list.List[@lexer.Lexcode]) -> ((Sexp, @list.List[@lexer.Lexcode])) raise {
   let inp = x36
   match inp {
-    More(@parser.Lexcode::Resword("("), tail=rst) => raise @parser.Noparse
-    More(@parser.Lexcode::Resword(")"), tail=rst_1) => raise @parser.Noparse
-    More(@parser.Lexcode::Resword(s), tail=rst_2) => (Sexp::Atom(s), rst_2)
-    More(@parser.Lexcode::Ident(s_1), tail=rst_3) => (Sexp::Atom(s_1), rst_3)
+    More(@lexer.Lexcode::Resword("("), tail=rst) => raise @parser.Noparse
+    More(@lexer.Lexcode::Resword(")"), tail=rst_1) => raise @parser.Noparse
+    More(@lexer.Lexcode::Resword(s), tail=rst_2) => (Sexp::Atom(s), rst_2)
+    More(@lexer.Lexcode::Ident(s_1), tail=rst_3) => (Sexp::Atom(s_1), rst_3)
     Empty => raise @parser.Noparse
   }
 }
 
 ///|
 /// `sexpression`
-pub fn sexpression(x37 : @list.List[@parser.Lexcode]) -> ((Sexp, @list.List[@parser.Lexcode])) raise {
+pub fn sexpression(x37 : @list.List[@lexer.Lexcode]) -> ((Sexp, @list.List[@lexer.Lexcode])) raise {
   let inp = x37
-  let t39 = @parser.a(@parser.Lexcode::Resword(")"))
+  let t39 = @parser.a(@lexer.Lexcode::Resword(")"))
   let t38 = @parser.many(sexpression)
-  @parser.alt(atom, @parser.map(@parser.seq(@parser.seq(@parser.a(@parser.Lexcode::Resword("(")), t38), t39), fn(x40 : ((@parser.Lexcode, @list.List[Sexp]), @parser.Lexcode)) -> Sexp raise {
+  @parser.alt(atom, @parser.map(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("(")), t38), t39), fn(x40 : ((@lexer.Lexcode, @list.List[Sexp]), @lexer.Lexcode)) -> Sexp raise {
     let ((_, l), _) = x40
     Sexp::List(l)
   }))(inp)
@@ -1045,13 +1045,13 @@ pub fn prover9_refute(x146 : @list.List[@kernel.Thm]) -> @kernel.Thm raise {
       ignore(@lib.sys_remove(filename_in))
       ignore(@lib.sys_remove(filename_out))
     }
-    match sexpression(@parser.lex_list(@lib.explode(skipheader(0L, p9proof)))) {
+    match sexpression(@lexer.lex_list(@lib.explode(skipheader(0L, p9proof)))) {
       (Sexp::List(sexps), unp) => {
-        let t184 = @parser.Lexcode::Ident("OBJECT")
-        let t185 = @parser.Lexcode::Ident("PROOF")
-        let t186 = @parser.Lexcode::Ident("OF")
-        let t187 = @parser.Lexcode::Ident("END")
-        if (unp != @list.List([@parser.Lexcode::Ident(";;"), t187, t186, t185, t184])) {
+        let t184 = @lexer.Lexcode::Ident("OBJECT")
+        let t185 = @lexer.Lexcode::Ident("PROOF")
+        let t186 = @lexer.Lexcode::Ident("OF")
+        let t187 = @lexer.Lexcode::Ident("END")
+        if (unp != @list.List([@lexer.Lexcode::Ident(";;"), t187, t186, t185, t184])) {
           @pp.std_formatter.print_string("Unexpected proof object tail")
           {
             @pp.std_formatter.print_newline()

@@ -733,11 +733,11 @@ fn step_28() -> Unit raise {
 }
 
 ///|
-let preparse_ntrie_c : @lib.Cell[(@list.List[@parser.Lexcode]) -> (@preterm.Preterm, @list.List[@parser.Lexcode]) raise] = @lib.Cell::new("preparse_ntrie")
+let preparse_ntrie_c : @lib.Cell[(@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise] = @lib.Cell::new("preparse_ntrie")
 
 ///|
 /// `preparse_ntrie`
-pub fn preparse_ntrie(x : @list.List[@parser.Lexcode]) -> ((@preterm.Preterm, @list.List[@parser.Lexcode])) raise {
+pub fn preparse_ntrie(x : @list.List[@lexer.Lexcode]) -> ((@preterm.Preterm, @list.List[@lexer.Lexcode])) raise {
   (preparse_ntrie_c.get())(x)
 }
 
@@ -811,9 +811,9 @@ fn step_29() -> Unit raise {
     let tm_1 = x103
     @preterm.Preterm::Combp(ntrie_ptm, recur_(tm_1))
   }
-  let parse_int : (@list.List[@parser.Lexcode]) -> (@num.Num, @list.List[@parser.Lexcode]) raise = fn(x104 : @list.List[@parser.Lexcode]) -> (@num.Num, @list.List[@parser.Lexcode]) raise {
+  let parse_int : (@list.List[@lexer.Lexcode]) -> (@num.Num, @list.List[@lexer.Lexcode]) raise = fn(x104 : @list.List[@lexer.Lexcode]) -> (@num.Num, @list.List[@lexer.Lexcode]) raise {
     match x104 {
-      More(@parser.Lexcode::Ident(s_1), tail=rest) => {
+      More(@lexer.Lexcode::Ident(s_1), tail=rest) => {
         let n_3 = try {
           @num.num_of_string(s_1)
         } catch {
@@ -825,18 +825,18 @@ fn step_29() -> Unit raise {
       _ => raise @parser.Noparse
     }
   }
-  let parse_ints : (@list.List[@parser.Lexcode]) -> (@preterm.Preterm, @list.List[@parser.Lexcode]) raise = @parser.map(@parser.many(parse_int), pmk_ntrie)
-  let t107 = @parser.a(@parser.Lexcode::Resword(")"))
-  let t105 = @parser.a(@parser.Lexcode::Resword("("))
-  let preparse_ntrie : (@list.List[@parser.Lexcode]) -> (@preterm.Preterm, @list.List[@parser.Lexcode]) raise = @parser.map(@parser.seq(@parser.map(@parser.seq(@parser.seq(@parser.a(@parser.Lexcode::Resword("%%")), t105), parse_ints), fn(x106 : ((@parser.Lexcode, @parser.Lexcode), @preterm.Preterm)) -> @preterm.Preterm raise {
+  let parse_ints : (@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise = @parser.map(@parser.many(parse_int), pmk_ntrie)
+  let t107 = @parser.a(@lexer.Lexcode::Resword(")"))
+  let t105 = @parser.a(@lexer.Lexcode::Resword("("))
+  let preparse_ntrie : (@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise = @parser.map(@parser.seq(@parser.map(@parser.seq(@parser.seq(@parser.a(@lexer.Lexcode::Resword("%%")), t105), parse_ints), fn(x106 : ((@lexer.Lexcode, @lexer.Lexcode), @preterm.Preterm)) -> @preterm.Preterm raise {
     x106.1
-  }), t107), fn(x108 : (@preterm.Preterm, @parser.Lexcode)) -> @preterm.Preterm raise {
+  }), t107), fn(x108 : (@preterm.Preterm, @lexer.Lexcode)) -> @preterm.Preterm raise {
     x108.0
   })
   let parse_ntrie : (String) -> @kernel.Term raise = fn(x109 : String) -> @kernel.Term raise {
     let s_2 = x109
-    let (ptm, l) = (fn(x110 : @list.List[String]) -> (@preterm.Preterm, @list.List[@parser.Lexcode]) raise {
-      preparse_ntrie(@parser.lex_list(x110))
+    let (ptm, l) = (fn(x110 : @list.List[String]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise {
+      preparse_ntrie(@lexer.lex_list(x110))
     })((fn(x111 : String) -> @list.List[String] raise {
       @lib.explode(x111)
     })(s_2))

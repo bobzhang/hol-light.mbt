@@ -31,7 +31,7 @@ USE_BEFORE = ["bool", "drule", "tactics", "itab", "simp"]
 # hol.ml's hand-ported files (loaded by the prelude or the scripts)
 LOADED = ["lib", "fusion", "basics", "nets", "printer", "preterm", "parser", "equal",
           "bool", "drule", "tactics", "itab", "simp"]
-HAND = ["kernel", "lib", "num", "basics", "nets", "printer", "preterm", "parser", "pp",
+HAND = ["kernel", "lib", "num", "basics", "nets", "printer", "preterm", "lexer", "parser", "pp",
         "equal", "bool", "drule", "tactics", "itab", "simp"]
 
 

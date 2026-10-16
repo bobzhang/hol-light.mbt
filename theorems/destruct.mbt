@@ -10,7 +10,7 @@ using @kernel {type Term, type Thm}
 using @list {type List}
 
 ///|
-using @parser {type Lexcode}
+using @lexer {type Lexcode}
 
 ///|
 using @tactics {
@@ -394,7 +394,7 @@ fn hyp_parser(rule : (Thm) -> Thm raise) -> P[Tactic] {
 /// `DESTRUCT_TAC s`: destruct a theorem by a pattern such as
 /// `@x. a b | c` (obtain, conjunction, disjunction, labels).
 pub fn destruct_tac(s : String) -> ThmTactic raise {
-  let (tac, rest) = @parser.fix("Destruct pattern", destruct)(@parser.lex(s))
+  let (tac, rest) = @parser.fix("Destruct pattern", destruct)(@lexer.lex(s))
   if rest.is_empty() {
     tac
   } else {
@@ -406,7 +406,7 @@ pub fn destruct_tac(s : String) -> ThmTactic raise {
 /// `INTRO_TAC s`: introduce universals and antecedents by a pattern.
 pub fn intro_tac(s : String) -> Tactic raise {
   let (tac, rest) = @parser.fix("Introduction pattern", pa_intro)(
-    @parser.lex(s),
+    @lexer.lex(s),
   )
   if rest.is_empty() {
     tac
@@ -418,7 +418,7 @@ pub fn intro_tac(s : String) -> Tactic raise {
 ///|
 /// `FIX_TAC s`: introduce universals by name (`[a/b]` renames, `*` all).
 pub fn fix_tac(s : String) -> Tactic raise {
-  let (tac, rest) = fix_parser(@parser.lex(s))
+  let (tac, rest) = fix_parser(@lexer.lex(s))
   if rest.is_empty() {
     tac
   } else {
@@ -429,7 +429,7 @@ pub fn fix_tac(s : String) -> Tactic raise {
 ///|
 /// `HYP_TAC s rule`: apply `rule` to labelled assumptions by a pattern.
 pub fn hyp_tac(s : String, rule : (Thm) -> Thm raise) -> Tactic raise {
-  let (tac, rest) = hyp_parser(rule)(@parser.lex(s))
+  let (tac, rest) = hyp_parser(rule)(@lexer.lex(s))
   if rest.is_empty() {
     tac
   } else {

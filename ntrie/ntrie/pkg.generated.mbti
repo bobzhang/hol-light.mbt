@@ -3,8 +3,8 @@ package "bobzhang/hol_light/ntrie/ntrie"
 
 import {
   "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/lexer",
   "bobzhang/hol_light/num",
-  "bobzhang/hol_light/parser",
   "bobzhang/hol_light/pp",
   "bobzhang/hol_light/preterm",
   "moonbitlang/core/list",
@@ -183,7 +183,7 @@ pub fn parse_ntrie(String) -> @kernel.Term raise
 
 pub fn pp_print_ntrie(@pp.Formatter) -> ((@kernel.Term) -> Unit raise) raise
 
-pub fn preparse_ntrie(@list.List[@parser.Lexcode]) -> (@preterm.Preterm, @list.List[@parser.Lexcode]) raise
+pub fn preparse_ntrie(@list.List[@lexer.Lexcode]) -> (@preterm.Preterm, @list.List[@lexer.Lexcode]) raise
 
 pub fn print_ntrie(@kernel.Term) -> Unit raise
 
