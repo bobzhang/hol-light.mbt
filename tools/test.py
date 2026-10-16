@@ -57,7 +57,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TIMES = os.path.join(ROOT, "tools", "test_times.tsv")
 # hol.ml's hand-ported files and the support packages
 QUICK = ["kernel", "lib", "num", "pp", "basics", "nets", "printer", "preterm", "lexer", "parser",
-         "equal", "bool", "drule", "tactics", "itab", "simp", "omap", "oset", "testkit"]
+         "equal", "bool", "drule", "tactics", "itab", "simp", "omap", "oset", "testkit", "tests/forall"]
 SKIP_DIRS = {"tools", "_build", "target"}
 
 
@@ -74,9 +74,11 @@ def packages():
 
 
 def tier_of(pkg):
+    if pkg in QUICK:
+        return "quick"
     if "/" in pkg:
         return pkg.split("/")[0]
-    return "quick" if pkg in QUICK else "core"
+    return "core"
 
 
 # package -> the test files selected in it (all of them when absent)
@@ -93,7 +95,7 @@ def select(names, pkgs):
         elif n == "all":
             sel = pkgs
         elif n == "core":
-            sel = [p for p in pkgs if "/" not in p]
+            sel = [p for p in pkgs if "/" not in p or p in QUICK]
         elif n in pkgs:
             sel = [n]
         else:

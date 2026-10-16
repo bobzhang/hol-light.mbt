@@ -28,6 +28,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import theory  # noqa: E402
+import forall_reference
 
 ROOT, REF, HOL = theory.ROOT, theory.REF, theory.HOL
 # (another directory for a second batch in the same checkout)
@@ -259,9 +260,11 @@ def references(targets, refs):
         "      | _, Unix.WEXITED 0 -> ()\n"
         "      | _ -> prerr_endline (\"batch: branch \" ^ file ^ \" failed\"); exit 1);;\n",
     ]
+    forall_reference.prepare()
     lines = [
         f"let () = batch_redirect {ml_str(os.path.join(OUT, 'prelude.txt'))};;\n",
-        open(os.path.join(REF, "prelude.ml")).read(), "\n",
+        open(os.path.join(REF, "prelude.ml")).read().replace(
+            '#use "printer.ml"', '#use "_build/printer_forall.ml"'), "\n",
         # by its full name: where Mizarlight/make.ml looks for pa_f.cmo
         f"hol_dir := {ml_str(os.path.join(REF, '_build', 'hol_dir'))};;\n",
     ]
@@ -329,7 +332,7 @@ def references(targets, refs):
         # run.sh's filters, then theory.py's normalization
         s = "\n".join(l for l in s.splitlines() if "HOL-Light syntax in effect" not in l and l != "") + "\n"
         s = re.sub(r"(?m)^CPU time \(user\): .*$", "CPU time (user): <t>", s)
-        expected[t] = s
+        expected[t] = "".join(forall_reference.adapt_output(s.splitlines(keepends=True)))
     return expected
 
 

@@ -1,0 +1,7 @@
+import {
+  "bobzhang/hol_light/bool",
+  "bobzhang/hol_light/basics",
+  "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/parser",
+  "bobzhang/hol_light/printer",
+} for "test"

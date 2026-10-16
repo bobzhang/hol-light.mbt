@@ -1080,7 +1080,8 @@ pub fn existence(th : Thm) -> Thm raise {
 // ---------------------------------------------------------------------------
 
 ///|
-/// Enable `forall`, `exists`, `existsunique`, `true` and `false`.
+/// Enable verbose aliases for existence and truth values, and register the
+/// printer's `forall` interface. `forall` remains canonical when disabled.
 pub fn set_verbose_symbols() -> Unit raise {
   for b in ["forall", "exists", "existsunique"] {
     @printer.parse_as_binder(b)

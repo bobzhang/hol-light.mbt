@@ -99,7 +99,7 @@ types = bool fun
 definitions =  |- ((#=:fun(fun(fun('A,bool),bool),fun(fun(fun('A,bool),bool),bool)) #?!:fun(fun('A,bool),bool)) (\P:fun('A,bool). ((#/\:fun(bool,fun(bool,bool)) (#?:fun(fun('A,bool),bool) P:fun('A,bool))) (#!:fun(fun('A,bool),bool) (\x:'A. (#!:fun(fun('A,bool),bool) (\y:'A. ((#==>:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) (P:fun('A,bool) y:'A))) ((#=:fun('A,fun('A,bool)) x:'A) y:'A))))))))) ;;  |- ((#=:fun(fun(bool,bool),fun(fun(bool,bool),bool)) #~:fun(bool,bool)) (\p:bool. ((#==>:fun(bool,fun(bool,bool)) p:bool) #F:bool))) ;;  |- ((#=:fun(bool,fun(bool,bool)) #F:bool) (#!:fun(fun(bool,bool),bool) (\p:bool. p:bool))) ;;  |- ((#=:fun(fun(bool,fun(bool,bool)),fun(fun(bool,fun(bool,bool)),bool)) #\/:fun(bool,fun(bool,bool))) (\p:bool. (\q:bool. (#!:fun(fun(bool,bool),bool) (\r:bool. ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) p:bool) r:bool)) ((#==>:fun(bool,fun(bool,bool)) ((#==>:fun(bool,fun(bool,bool)) q:bool) r:bool)) r:bool))))))) ;;  |- ((#=:fun(fun(fun('A,bool),bool),fun(fun(fun('A,bool),bool),bool)) #?:fun(fun('A,bool),bool)) (\P:fun('A,bool). (#!:fun(fun(bool,bool),bool) (\q:bool. ((#==>:fun(bool,fun(bool,bool)) (#!:fun(fun('A,bool),bool) (\x:'A. ((#==>:fun(bool,fun(bool,bool)) (P:fun('A,bool) x:'A)) q:bool)))) q:bool))))) ;;  |- ((#=:fun(fun(fun('A,bool),bool),fun(fun(fun('A,bool),bool),bool)) #!:fun(fun('A,bool),bool)) (\P:fun('A,bool). ((#=:fun(fun('A,bool),fun(fun('A,bool),bool)) P:fun('A,bool)) (\x:'A. #T:bool)))) ;;  |- ((#=:fun(fun(bool,fun(bool,bool)),fun(fun(bool,fun(bool,bool)),bool)) #==>:fun(bool,fun(bool,bool))) (\p:bool. (\q:bool. ((#=:fun(bool,fun(bool,bool)) ((#/\:fun(bool,fun(bool,bool)) p:bool) q:bool)) p:bool)))) ;;  |- ((#=:fun(fun(bool,fun(bool,bool)),fun(fun(bool,fun(bool,bool)),bool)) #/\:fun(bool,fun(bool,bool))) (\p:bool. (\q:bool. ((#=:fun(fun(fun(bool,fun(bool,bool)),bool),fun(fun(fun(bool,fun(bool,bool)),bool),bool)) (\f:fun(bool,fun(bool,bool)). ((f:fun(bool,fun(bool,bool)) p:bool) q:bool))) (\f:fun(bool,fun(bool,bool)). ((f:fun(bool,fun(bool,bool)) #T:bool) #T:bool)))))) ;;  |- ((#=:fun(bool,fun(bool,bool)) #T:bool) ((#=:fun(fun(bool,bool),fun(fun(bool,bool),bool)) (\p:bool. p:bool)) (\p:bool. p:bool)))
 axioms = 0
 infixes = <=>/2right ==>/4right \//6right /\/8right =/12right ,/14right
-binders = \ ! ? ?! forall exists existsunique
+binders = \ ? ?! forall exists existsunique
 prefixes = ~
 interface = existsunique=?!:fun(fun('A,bool),bool) exists=?:fun(fun('A,bool),bool) forall=!:fun(fun('A,bool),bool) false=F:bool true=T:bool <=>==:fun(bool,fun(bool,bool))
 T_DEF =  |- ((#=:fun(bool,fun(bool,bool)) #T:bool) ((#=:fun(fun(bool,bool),fun(fun(bool,bool),bool)) (\p:bool. p:bool)) (\p:bool. p:bool)))
@@ -166,10 +166,10 @@ mk_neg_bad ! mk_neg
 Warning: inventing type variables
 verbose = (#!:fun(fun('?482,bool),bool) (\x:'?482. (#?:fun(fun('?482,bool),bool) (\y:'?482. ((#/\:fun(bool,fun(bool,bool)) ((#=:fun('?482,fun('?482,bool)) x:'?482) y:'?482)) #T:bool)))))
 Warning: inventing type variables
-print = forall (x:?502).
-    exists (y:?502). (x:?502) = (y:?502) /\ (p <=> q) ==> ~r \/ false
+print = forall (x:?500).
+    exists (y:?500). (x:?500) = (y:?500) /\ (p <=> q) ==> ~r \/ false
 Warning: inventing type variables
-counter_tyvar = zz_counter:'?510
+counter_tyvar = zz_counter:'?508
 Warning: inventing type variables
-counter_pgenvar = (GSPEC:fun(fun('?521,bool),'?511) (\GEN%PVAR%0:'?521. (#?:fun(fun('?519,bool),bool) (\x:'?519. (((SETSPEC:fun('?521,fun(bool,fun('?519,bool))) GEN%PVAR%0:'?521) #T:bool) x:'?519)))))
+counter_pgenvar = (GSPEC:fun(fun('?519,bool),'?509) (\GEN%PVAR%0:'?519. (#?:fun(fun('?517,bool),bool) (\x:'?517. (((SETSPEC:fun('?519,fun(bool,fun('?517,bool))) GEN%PVAR%0:'?519) #T:bool) x:'?517)))))
 counter_genvar = _0:bool

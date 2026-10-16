@@ -71,7 +71,8 @@ attempt "mk_iff" (fun () -> stm (mk_iff (a, b)));;
 attempt "dest_iff_bad" (fun () -> let l,r = dest_iff (tm "(x:num) = y") in stm l);;
 attempt "mk_neg" (fun () -> stm (mk_neg a));;
 attempt "mk_neg_bad" (fun () -> stm (mk_neg (tm "x:num")));;
-attempt "verbose" (fun () -> stm (tm "forall x. exists y. x = y /\\ true"));;
+(* forall is now canonical notation for !, not an overloaded interface name. *)
+attempt "verbose" (fun () -> stm (tm "!x. exists y. x = y /\\ true"));;
 attempt "print" (fun () -> string_of_term (tm "!x. ?y. x = y /\\ (p <=> q) ==> ~r \\/ F"));;
 attempt "counter_tyvar" (fun () -> stm (tm "zz_counter"));;
 attempt "counter_pgenvar" (fun () -> stm (tm "{x | T}"));;
