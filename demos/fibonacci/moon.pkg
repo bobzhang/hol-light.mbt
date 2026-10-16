@@ -1,10 +1,12 @@
 import {
   "bobzhang/hol_light/arith",
   "bobzhang/hol_light/bool",
+  "bobzhang/hol_light/calc_num",
   "bobzhang/hol_light/define",
   "bobzhang/hol_light/drule",
   "bobzhang/hol_light/equal",
   "bobzhang/hol_light/kernel",
+  "bobzhang/hol_light/library/words",
   "bobzhang/hol_light/nums",
   "bobzhang/hol_light/parser",
   "bobzhang/hol_light/printer",
