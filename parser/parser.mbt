@@ -27,7 +27,7 @@ fn res(s : String) -> (Toks) -> (Lexcode, Toks) raise {
 
 ///|
 fn idt(s : String) -> (Toks) -> (Lexcode, Toks) raise {
-  a(Lexcode::ident(s))
+  a(Ident(s))
 }
 
 // ---------------------------------------------------------------------------
@@ -79,7 +79,7 @@ fn mk_apptype(p : (List[Pretype], List[String])) -> Pretype raise {
 ///|
 fn type_atom(input : Toks) -> (Pretype, Toks) raise {
   match input {
-    More(tok_s, tail=rest) if tok_s.identifier() is Some(s) => {
+    More(Ident(s), tail=rest) => {
       let pty = @preterm.pretype_of_type(@lib.assoc(s, @preterm.type_abbrevs())) catch {
         Failure(_) =>
           mk_prefinty(@num.num_of_string(s)) catch {
@@ -107,7 +107,7 @@ fn type_atom(input : Toks) -> (Pretype, Toks) raise {
 ///|
 fn type_constructor(input : Toks) -> (String, Toks) raise {
   match input {
-    More(tok_s, tail=rest) if tok_s.identifier() is Some(s) => {
+    More(Ident(s), tail=rest) => {
       let ok = try @kernel.get_type_arity(s) > 0 catch {
         Failure(_) => false
         e => raise e
@@ -357,8 +357,8 @@ fn pmk_char(c : Int) -> Preterm {
 }
 
 ///|
-/// The bytes of a string literal token (the lexer stores literal contents
-/// as one character per byte).
+/// The bytes of a string literal token (the lexer works on bytes, one
+/// character per byte).
 fn literal_bytes(s : String) -> Array[Int] {
   [
     for ch in s => ch.to_int()
@@ -414,9 +414,9 @@ fn mk_precedence(
         i => mk_precedence(rest, prs, i),
         ops,
         (op : Lexcode, x : Preterm, y : Preterm) => {
-          match op.identifier() {
-            Some(o) => @preterm.Combp(@preterm.Combp(pv(o), x), y)
-            None => raise @lib.MatchFailure("parser.ml: mk_precedence")
+          match op {
+            Ident(o) => @preterm.Combp(@preterm.Combp(pv(o), x), y)
+            Resword(_) => raise @lib.MatchFailure("parser.ml: mk_precedence")
           }
         },
         "term after binary operator",
@@ -462,7 +462,7 @@ fn is_quoted(s : String) -> Bool {
 ///|
 fn string_tok(inp : Toks) -> (String, Toks) raise {
   match inp {
-    More(tok_s, tail=rst) if tok_s.identifier() is Some(s) && is_quoted(s) =>
+    More(Ident(s), tail=rst) if is_quoted(s) =>
       (s[1:s.length() - 1].to_owned(), rst)
     _ => raise Noparse
   }
@@ -499,7 +499,7 @@ fn lmk_decimal(p : ((Lexcode, String), List[String])) -> Preterm raise {
 ///|
 fn any_identifier(inp : Toks) -> (String, Toks) raise {
   match inp {
-    More(tok_s, tail=rest) if tok_s.identifier() is Some(s) => (s, rest)
+    More(Ident(s), tail=rest) => (s, rest)
     _ => raise Noparse
   }
 }
@@ -507,7 +507,7 @@ fn any_identifier(inp : Toks) -> (String, Toks) raise {
 ///|
 fn identifier(inp : Toks) -> (String, Toks) raise {
   match inp {
-    More(tok_s, tail=rest) if tok_s.identifier() is Some(s) =>
+    More(Ident(s), tail=rest) =>
       if @lib.can(@printer.get_infix_status, s) ||
         @printer.is_prefix(s) ||
         @printer.parses_as_binder(s) {
@@ -522,8 +522,7 @@ fn identifier(inp : Toks) -> (String, Toks) raise {
 ///|
 fn binder(inp : Toks) -> (String, Toks) raise {
   match inp {
-    More(tok_s, tail=rest) if tok_s.identifier() is Some(s) &&
-      @printer.parses_as_binder(s) => (s, rest)
+    More(Ident(s), tail=rest) if @printer.parses_as_binder(s) => (s, rest)
     _ => raise Noparse
   }
 }
@@ -531,8 +530,7 @@ fn binder(inp : Toks) -> (String, Toks) raise {
 ///|
 fn pre_fix(inp : Toks) -> (String, Toks) raise {
   match inp {
-    More(tok_s, tail=rest) if tok_s.identifier() is Some(s) &&
-      @printer.is_prefix(s) => (s, rest)
+    More(Ident(s), tail=rest) if @printer.is_prefix(s) => (s, rest)
     _ => raise Noparse
   }
 }
@@ -799,8 +797,7 @@ fn clauses(i : Toks) -> (Preterm, Toks) raise {
 /// Parse a preterm from tokens.
 pub fn parse_preterm(inp : Toks) -> (Preterm, Toks) raise {
   match inp {
-    More(tok_s, tail=Empty) if tok_s.identifier() is Some(s) && !is_quoted(s) =>
-      (pv(s), @list.List([]))
+    More(Ident(s), tail=Empty) if !is_quoted(s) => (pv(s), @list.List([]))
     _ => preterm(inp)
   }
 }

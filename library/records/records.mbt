@@ -23,9 +23,9 @@ fn step_1() -> Unit raise {
     let src_1 = x2
     match src_1 {
       More(
-        tok,
+        @parser.Lexcode::Ident(t),
         tail=More(@parser.Lexcode::Resword(":"), tail=rst_1)
-      ) if tok.identifier() is Some(t) => {
+      ) => {
         let (ty, ors) = ptype(rst_1)
         ((t, ty), ors)
       }
@@ -65,9 +65,9 @@ fn step_1() -> Unit raise {
     let s_1 = x5
     match @parser.lex_list(@lib.explode(s_1)) {
       More(
-        tok,
-        tail=More(@parser.Lexcode::Symbol(Equal), tail=rst_2)
-      ) if tok.identifier() is Some(tyname) => {
+        @parser.Lexcode::Ident(tyname),
+        tail=More(@parser.Lexcode::Ident("="), tail=rst_2)
+      ) => {
         let (rs, er) = recspec(rst_2)
         if er != @list.List([]) {
           raise Failure("Stuff after record spec")

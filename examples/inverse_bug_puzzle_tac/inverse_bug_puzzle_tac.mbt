@@ -76,7 +76,7 @@ pub fn consider(x14 : String, x15 : @kernel.Term, x16 : @list.List[((@list.List[
   let lab = x17
   let ident : (@list.List[@parser.Lexcode]) -> (String, @list.List[@parser.Lexcode]) raise = fn(x19 : @list.List[@parser.Lexcode]) -> (String, @list.List[@parser.Lexcode]) raise {
     match x19 {
-      More(tok_s, tail=rest) if tok_s.identifier() is Some(s) && @printer.isalnum(s) => (s, rest)
+      More(@parser.Lexcode::Ident(s), tail=rest) if @printer.isalnum(s) => (s, rest)
       _ => raise @parser.Noparse
     }
   }

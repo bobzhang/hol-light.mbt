@@ -400,7 +400,8 @@ pub fn atom(x36 : @list.List[@parser.Lexcode]) -> ((Sexp, @list.List[@parser.Lex
   match inp {
     More(@parser.Lexcode::Resword("("), tail=rst) => raise @parser.Noparse
     More(@parser.Lexcode::Resword(")"), tail=rst_1) => raise @parser.Noparse
-    More(tok, tail=rest) => (Sexp::Atom(tok.text()), rest)
+    More(@parser.Lexcode::Resword(s), tail=rst_2) => (Sexp::Atom(s), rst_2)
+    More(@parser.Lexcode::Ident(s_1), tail=rst_3) => (Sexp::Atom(s_1), rst_3)
     Empty => raise @parser.Noparse
   }
 }

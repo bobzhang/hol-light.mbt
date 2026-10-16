@@ -1150,9 +1150,9 @@ pub fn parse_fulltype(x287 : @list.List[@parser.Lexcode]) -> ((@kernel.HolType, 
 /// `parse_ident`
 pub fn parse_ident(x288 : @list.List[@parser.Lexcode]) -> ((String, @list.List[@parser.Lexcode])) raise {
   let l_1 = x288
-  match @lib.hd(l_1).identifier() {
-    Some(n) => (n, @lib.tl(l_1))
-    None => raise @parser.Noparse
+  match @lib.hd(l_1) {
+    @parser.Lexcode::Ident(n) => (n, @lib.tl(l_1))
+    _ => raise @parser.Noparse
   }
 }
 
@@ -1160,7 +1160,10 @@ pub fn parse_ident(x288 : @list.List[@parser.Lexcode]) -> ((String, @list.List[@
 /// `parse_string`
 pub fn parse_string(x289 : @list.List[@parser.Lexcode]) -> ((String, @list.List[@parser.Lexcode])) raise {
   let l_1 = x289
-  (@lib.hd(l_1).text(), @lib.tl(l_1))
+  match @lib.hd(l_1) {
+    @parser.Lexcode::Ident(n) => (n, @lib.tl(l_1))
+    @parser.Lexcode::Resword(n_1) => (n_1, @lib.tl(l_1))
+  }
 }
 
 ///|
@@ -1169,7 +1172,7 @@ pub fn parse_lform(x290 : String, x291 : @list.List[@parser.Lexcode]) -> (((Stri
   let oldlab = x290
   let l_1 = x291
   match l_1 {
-    More(tok_n, tail=More(@parser.Lexcode::Resword(":"), tail=rst)) if tok_n.identifier() is Some(n) => {
+    More(@parser.Lexcode::Ident(n), tail=More(@parser.Lexcode::Resword(":"), tail=rst)) => {
       if (oldlab == "") {
         parse_lform(n, rst)
       } else {
