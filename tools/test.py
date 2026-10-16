@@ -200,6 +200,7 @@ def run_wasm(target, ps, a):
         b = subprocess.run(["moon", "test", "--target", target, "--build-only", "-j", a.build_jobs] + ps,
                            cwd=ROOT, capture_output=True, text=True)
     open(logf, "w").write(b.stdout + b.stderr)
+    log_lock = threading.Lock()
     if b.returncode != 0:
         errs = [l for l in (b.stdout + b.stderr).splitlines() if l.startswith(("Error", "error"))]
         print("\n".join(errs[:20]) or (b.stdout + b.stderr)[-2000:])
@@ -263,6 +264,12 @@ def run_wasm(target, ps, a):
             tail = [l for l in err.strip().splitlines() if l.strip()][:6]
             lines.append(f"   FAILED {p} ({kind}): exit {proc.returncode}, {len(res)} of {n} tests ran\n     " +
                          "\n     ".join(l[:300] for l in tail))
+        if lines:
+            # Keep complete snapshots and stacks in the CI artifact; the console
+            # summary deliberately shows only the first difference.
+            with log_lock, open(logf, "a") as lf:
+                lf.write(json.dumps({"package": p, "kind": kind,
+                                     "failures": bad, "stderr": err}) + "\n")
         for l in lines:
             print(l, flush=True)
         return p, time.time() - t, n, len(res) - len(bad), not lines, peak[0]

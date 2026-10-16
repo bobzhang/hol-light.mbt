@@ -1,8 +1,8 @@
 """Adapt upstream notation and the universal constant's name for comparison.
 
-The upstream kernel and parser still run on their original sources. A temporary
-copy of the printer checks wrapping/parenthesization with the new spelling.
-The Boolean theory copy omits the now-redundant forall alias. Serialized terms
+The upstream kernel still runs on its original source. Temporary parser and
+printer copies normalize the spelling at their boundaries. The Boolean theory
+copy omits the now-redundant forall alias. Serialized terms
 are compared modulo the explicit constant rename; all other structure is kept.
 """
 import re
@@ -66,7 +66,8 @@ def adapt_output(lines):
 def reference_source(source):
     """Route core loads to the temporary copies without editing upstream."""
     return source.replace('#use "printer.ml"', '#use "_build/printer_forall.ml"').replace(
-        '#use "bool.ml"', '#use "_build/bool_forall.ml"')
+        '#use "bool.ml"', '#use "_build/bool_forall.ml"').replace(
+        '#use "parser.ml"', '#use "_build/parser_forall.ml"')
 
 
 def prepare():
@@ -87,6 +88,16 @@ def prepare():
         assert printer.count(old) == 1, 'upstream printer changed: ' + old
         printer = printer.replace(old, new)
     (ref / '_build/printer_forall.ml').write_text(printer)
+    # Upstream theories sometimes already spell the binder `forall`. Resolve it
+    # directly to the upstream canonical constant, just as the port now does,
+    # rather than retaining the alias and its extra type-inference allocations.
+    parser = (root / '.repos/hol-light/parser.ml').read_text()
+    entry = '  (fun inp ->\n    match inp with\n'
+    assert parser.count(entry) == 1, 'upstream term parser changed'
+    parser = parser.replace(entry, '  (fun inp ->\n'
+        '    let inp = map (function Ident "forall" -> Ident "!" | tok -> tok) inp in\n'
+        '    match inp with\n')
+    (ref / '_build/parser_forall.ml').write_text(parser)
     boolean = (root / '.repos/hol-light/bool.ml').read_text()
     alias = '  override_interface("forall",`(!):(A->bool)->bool`);\n'
     assert boolean.count(alias) == 1, 'upstream forall alias changed'

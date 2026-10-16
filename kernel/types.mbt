@@ -116,14 +116,31 @@ fn term_tag(tm : Term) -> Int {
 }
 
 ///|
-/// OCaml `compare` on HOL terms (purely structural, not modulo alpha;
-/// see `alphaorder` for that).
+/// Structural order on HOL terms (not modulo alpha; see `alphaorder`).
+/// Keep universal quantification first among constants: simplification and
+/// bounded proof search depend on this established precedence.
 pub impl Compare for Term with fn compare(self, other) {
   if physical_equal(self, other) {
     return 0
   }
   match (self, other) {
-    (Var(s, ty), Var(t, uy)) | (Const(s, ty), Const(t, uy)) => {
+    (Const(s, ty), Const(t, uy)) => {
+      let c = if s == t {
+        0
+      } else if s == "forall" {
+        -1
+      } else if t == "forall" {
+        1
+      } else {
+        compare_string(s, t)
+      }
+      if c != 0 {
+        c
+      } else {
+        ty.compare(uy)
+      }
+    }
+    (Var(s, ty), Var(t, uy)) => {
       let c = compare_string(s, t)
       if c != 0 {
         c

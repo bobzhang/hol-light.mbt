@@ -4,4 +4,5 @@ import {
   "bobzhang/hol_light/kernel",
   "bobzhang/hol_light/parser",
   "bobzhang/hol_light/printer",
+  "moonbitlang/core/list",
 } for "test"

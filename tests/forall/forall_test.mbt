@@ -44,3 +44,26 @@ test "forall remains available when verbose aliases are disabled" {
   assert_eq(@parser.parse_term(printed), term)
   @bool.set_verbose_symbols()
 }
+
+///|
+test "canonical forall preserves the quantifier's precedence in term ordering" {
+  let quantifier = @kernel.mk_const("forall", @list.List([]))
+  for (name, _) in @kernel.constants() {
+    let constant = @kernel.mk_const(name, @list.List([]))
+    if name == "forall" {
+      assert_eq(quantifier.compare(constant), 0)
+    } else {
+      assert_true(quantifier.compare(constant) < 0)
+      assert_true(constant.compare(quantifier) > 0)
+      assert_true(@kernel.alphaorder(quantifier, constant) < 0)
+    }
+  }
+  // Ordinary strings and variable names still use lexical ordering.
+  assert_true(@kernel.compare_string("forall", "T") > 0)
+  assert_true(
+    @kernel.mk_var("forall", @kernel.bool_ty).compare(
+      @kernel.mk_var("T", @kernel.bool_ty),
+    ) >
+    0,
+  )
+}

@@ -14200,7 +14200,7 @@ test "Arithmetic/sigmacomplete matches Arithmetic/sigmacomplete.ml" {
       #|0..0..1..solved at 4
       #|0..0..1..4..10..17..solved at 23
       #|Arithmetic/sigmacomplete quotations (301):
-      #|  robinson =\n        (!!0 (!!1 (Suc(V 0) === Suc(V 1) --> V 0 === V 1))) &&\n        (!!1 (Not(V 1 === Z) <-> ??-2 (V 1 === Suc(V 0)))) &&\n        (!!1 (Z ++ V 1 === V 1)) &&\n        (!!0 (!!1 (Suc(V 0) ++ V 1 === Suc(V 0 ++ V 1)))) &&\n        (!!1 (Z ** V 1 === Z)) &&\n        (!!0 (!!1 (Suc(V 0) ** V 1 === V 1 ++ V 0 ** V 1))) &&\n        (!!0 (!!1 (V 0 <<= V 1 <-> ??0 (V 0 ++ V 2 === V 1)))) &&\n        (!!0 (!!1 (V 0 << V 1 <-> Suc(V 0) <<= V 1)))
+      #|  robinson =\n        (!!0 (!!1 (Suc(V 0) === Suc(V 1) --> V 0 === V 1))) &&\n        (!!1 (Not(V 1 === Z) <-> ??0 (V 1 === Suc(V 0)))) &&\n        (!!1 (Z ++ V 1 === V 1)) &&\n        (!!0 (!!1 (Suc(V 0) ++ V 1 === Suc(V 0 ++ V 1)))) &&\n        (!!1 (Z ** V 1 === Z)) &&\n        (!!0 (!!1 (Suc(V 0) ** V 1 === V 1 ++ V 0 ** V 1))) &&\n        (!!0 (!!1 (V 0 <<= V 1 <-> ??2 (V 0 ++ V 2 === V 1)))) &&\n        (!!0 (!!1 (V 0 << V 1 <-> Suc(V 0) <<= V 1)))
       #|  robinson IN {robinson}
       #|  t:term
       #|  s:term
@@ -14264,7 +14264,7 @@ test "Arithmetic/sigmacomplete matches Arithmetic/sigmacomplete.ml" {
       #|  !!
       #|  (|->):num->term->(num->term)->(num->term)
       #|  V
-      #|  ??0 (V 0 ++ V 2 === V 1)
+      #|  ??2 (V 0 ++ V 2 === V 1)
       #|  Suc(V 0)
       #|  Suc(V 1)
       #|  !!
@@ -14273,7 +14273,7 @@ test "Arithmetic/sigmacomplete matches Arithmetic/sigmacomplete.ml" {
       #|  !!
       #|  (|->):num->term->(num->term)->(num->term)
       #|  V
-      #|  ??0 (Suc(V 0) ++ V 2 === Suc(V 1))
+      #|  ??2 (Suc(V 0) ++ V 2 === Suc(V 1))
       #|  forall s t. {robinson} |-- Suc s <<= Suc t <-> s <<= t
       #|  V
       #|  (|->):num->term->(num->term)->(num->term)
