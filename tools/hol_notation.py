@@ -147,8 +147,21 @@ def rewrite_moonbit(source):
     result.append(source[end:])
     migrated = ''.join(result)
     # Rqe/util's suppressed constants are names, not proof labels or messages.
-    return re.sub(r'(suppress\(\)\.val = @list.List\(\[)([^\]]*)(\]\))',
+    migrated = re.sub(r'(suppress\(\)\.val = @list.List\(\[)([^\]]*)(\]\))',
                   lambda m: m[1] + m[2].replace('"!"', '"forall"') + m[3], migrated)
+
+    # Jordan proof scripts select assumptions by precomputed term hashes. Keep
+    # the universal constant's symbol code stable across its spelling change.
+    # Match only the constant arm of Jordan's custom hash, not string/var hashes.
+    return re.sub(
+        r'(@kernel.Term::Const\((\w+), (\w+)\) => \{\n)'
+        r'(        let \w+ = hash_of_type\(\3\)\n)'
+        r'(        @lib.mod63\(@lib.add63\(@lib.mul63\(\w+, )memhash_of_string\(\2\)',
+        lambda m: m[1] + m[4] +
+            '        // Stable symbol code used by existing Jordan proof labels.\n' +
+            '        let symbol_hash = if ' + m[2] +
+            ' == "forall" { 33L } else { memhash_of_string(' + m[2] + ') }\n' +
+            m[5] + 'symbol_hash', migrated)
 
 
 if __name__ == '__main__':

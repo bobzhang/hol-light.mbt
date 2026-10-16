@@ -53,6 +53,18 @@ let bytes = "!x. unclassified string data"
                 'suppress().val = @list.List(["!", "?!"])']:
             self.assertEqual(rewrite_moonbit(source), source.replace('"!"', '"forall"'))
 
+    def test_jordan_persistent_hash_labels(self):
+        source = """      @kernel.Term::Const(name, ty) => {
+        let type_hash = hash_of_type(ty)
+        @lib.mod63(@lib.add63(@lib.mul63(prime220, memhash_of_string(name)), type_hash), prime1220)
+      }"""
+        migrated = rewrite_moonbit(source)
+        self.assertIn('if name == "forall" { 33L }', migrated)
+        self.assertIn('else { memhash_of_string(name) }', migrated)
+        self.assertEqual(rewrite_moonbit(migrated), migrated)
+        variable = source.replace('Term::Const', 'Term::Var')
+        self.assertEqual(rewrite_moonbit(variable), variable)
+
     def test_embedded_exec_key(self):
         source = r'''@lib.register_phrase("parse_term \"!x. P x\"", fn() { () })'''
         self.assertEqual(rewrite_moonbit(source), source.replace('!x.', 'forall x.'))
